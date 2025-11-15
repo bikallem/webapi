@@ -27,6 +27,7 @@ fn Parser::current_token(self : Parser) -> LocatedToken {
 /// Check if current token matches
 fn Parser::check(self : Parser, expected : Token) -> Bool {
   match (self.current_token().token, expected) {
+    (Token::Dictionary, Token::Dictionary) => true
     (Token::Interface, Token::Interface) => true
     (Token::LeftBrace, Token::LeftBrace) => true
     (Token::RightBrace, Token::RightBrace) => true
@@ -59,13 +60,126 @@ fn Parser::current_identifier(self : Parser) -> String {
 }
 
 ///|
+/// Parse a type expression (identifier, nullable, sequence, etc)
+fn Parser::parse_type(self : Parser) -> IdlType {
+  let _is_readonly = if self.check(Token::Readonly) {
+    self.advance()
+    true
+  } else {
+    false
+  }
+  
+  let base_type = if self.position < self.tokens.length() {
+    match self.current_token().token {
+      Token::Identifier(name) => {
+        self.advance()
+        IdlType::Identifier(name)
+      }
+      _ => IdlType::Identifier("unknown")
+    }
+  } else {
+    IdlType::Identifier("unknown")
+  }
+  
+  if self.check(Token::Question) {
+    self.advance()
+    IdlType::Nullable(base_type)
+  } else {
+    base_type
+  }
+}
+
+///|
+/// Parse operation (method) in interface
+fn Parser::parse_operation(self : Parser) -> Operation {
+  // Assume we're at the return type
+  let return_type = self.parse_type()
+  
+  // Get method name
+  let method_name = self.current_identifier()
+  self.advance()
+  
+  // Parse parameters
+  let parameters : Array[Parameter] = []
+  if self.check(Token::LeftParen) {
+    self.advance()
+    while !self.check(Token::RightParen) &&
+          self.current_token().token != Token::Eof {
+      // Skip parameter details for now
+      self.advance()
+    }
+    if self.check(Token::RightParen) {
+      self.advance()
+    }
+  }
+  
+  // Skip to semicolon
+  while !self.check(Token::Semicolon) &&
+        self.current_token().token != Token::Eof {
+    self.advance()
+  }
+  if self.check(Token::Semicolon) {
+    self.advance()
+  }
+  
+  { name: method_name, return_type, parameters }
+}
+
+///| 
+/// Check if current token is an identifier
+fn Parser::is_identifier(self : Parser) -> Bool {
+  match self.current_token().token {
+    Token::Identifier(_) => true
+    _ => false
+  }
+}
+
+///|
+/// Parse dictionary definition
+fn Parser::parse_dictionary(self : Parser) -> Dictionary {
+  // Current token should be "Dictionary", advance past it
+  self.advance()
+  
+  // Get dictionary name
+  let dict_name = self.current_identifier()
+  self.advance()
+  
+  // Skip extends if present
+  if self.check(Token::Colon) {
+    self.advance()
+    self.advance() // skip parent name
+  }
+  
+  // Parse fields - consume until closing brace
+  if self.check(Token::LeftBrace) {
+    self.advance()
+    while !self.check(Token::RightBrace) &&
+          self.current_token().token != Token::Eof {
+      self.advance()
+    }
+    if self.check(Token::RightBrace) {
+      self.advance()
+    }
+  }
+  
+  let fields : Array[(String, IdlType, Bool)] = []
+  { name: dict_name, fields }
+}
+
+///|
 /// Parse WebIDL source
 pub fn parse(source : String) -> Array[Definition] {
   let tokens = tokenize(source)
   let parser : Parser = { tokens, position: 0 }
   let definitions : Array[Definition] = []
   while parser.current_token().token != Token::Eof {
-    if parser.check(Token::Interface) {
+    if parser.check(Token::Dictionary) {
+      let dictionary = parser.parse_dictionary()
+      definitions.push(Definition::DictionaryDef(dictionary))
+      if parser.check(Token::Semicolon) {
+        parser.advance()
+      }
+    } else if parser.check(Token::Interface) {
       parser.advance()
       let interface_name = parser.current_identifier()
       parser.advance()
@@ -87,25 +201,55 @@ pub fn parse(source : String) -> Array[Definition] {
           if parser.check(Token::Readonly) {
             // Parse readonly attribute
             parser.advance()
-            parser.advance() // skip "attribute" keyword if present
-            // Skip for now
+            // Skip attribute declaration
             while !parser.check(Token::Semicolon) &&
                   parser.current_token().token != Token::Eof {
               parser.advance()
             }
             if parser.check(Token::Semicolon) {
               parser.advance()
+            }
+          } else if parser.is_identifier() {
+            // Could be a return type for operation or attribute type
+            // Look ahead to see if there's a method name and (
+            let next_pos = parser.position + 1
+            let is_operation = if next_pos < tokens.length() {
+              match tokens[next_pos].token {
+                Token::Identifier(_) => {
+                  let paren_pos = next_pos + 1
+                  if paren_pos < tokens.length() {
+                    match tokens[paren_pos].token {
+                      Token::LeftParen => true
+                      _ => false
+                    }
+                  } else {
+                    false
+                  }
+                }
+                Token::LeftParen => true  // Method with implicit return type
+                _ => false
+              }
+            } else {
+              false
+            }
+            
+            if is_operation {
+              let operation = parser.parse_operation()
+              operations.push(operation)
+            } else {
+              // Skip other declarations
+              while !parser.check(Token::Semicolon) &&
+                    !parser.check(Token::RightBrace) &&
+                    parser.current_token().token != Token::Eof {
+                parser.advance()
+              }
+              if parser.check(Token::Semicolon) {
+                parser.advance()
+              }
             }
           } else {
-            // Skip other declarations
-            while !parser.check(Token::Semicolon) &&
-                  !parser.check(Token::RightBrace) &&
-                  parser.current_token().token != Token::Eof {
-              parser.advance()
-            }
-            if parser.check(Token::Semicolon) {
-              parser.advance()
-            }
+            // Skip unknown tokens
+            parser.advance()
           }
         }
         if parser.check(Token::RightBrace) {
