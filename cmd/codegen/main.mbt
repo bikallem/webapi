@@ -41,22 +41,32 @@ fn process_webidl_file(file_path : String, output_dir : String?) -> Unit {
       println("Parsed \{definitions.length()} definitions")
       
       let generated_code = @generator.generate_package_code(definitions)
+      let glue_code = @generator.generate_glue_code(definitions)
       
       // If output directory specified, write to file
       match output_dir {
         Some(dir) => {
           let module_name = get_module_name(file_path)
-          let output_file = dir + "/" + module_name + ".mbt"
+          let mbt_file = dir + "/" + module_name + ".mbt"
+          let js_file = dir + "/" + module_name + ".js"
           
-          let write_result : Result[Unit, _] = try? @fs.write_string_to_file(output_file, generated_code)
-          match write_result {
-            Ok(_) => println("✓ Written to: \{output_file}")
-            Err(e) => println("Error writing \{output_file}: \{e}")
+          let write_mbt : Result[Unit, _] = try? @fs.write_string_to_file(mbt_file, generated_code)
+          match write_mbt {
+            Ok(_) => println("✓ Written to: \{mbt_file}")
+            Err(e) => println("Error writing \{mbt_file}: \{e}")
+          }
+          
+          let write_js : Result[Unit, _] = try? @fs.write_string_to_file(js_file, glue_code)
+          match write_js {
+            Ok(_) => println("✓ Written to: \{js_file}")
+            Err(e) => println("Error writing \{js_file}: \{e}")
           }
         }
         None => {
           // Print to stdout if no output directory
           println(generated_code)
+          println("\n// === JavaScript Glue Code ===\n")
+          println(glue_code)
         }
       }
       println("")
