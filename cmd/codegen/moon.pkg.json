@@ -1,0 +1,8 @@
+{
+  "is_main": true,
+  "import": [
+    "username/webapi/generator",
+    "username/webapi/lib",
+    "username/webapi/idl_parser"
+  ]
+}

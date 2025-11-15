@@ -1,0 +1,5 @@
+{
+  "import": [
+    "username/webapi/idl_parser"
+  ]
+}

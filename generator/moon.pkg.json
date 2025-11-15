@@ -1,0 +1,6 @@
+{
+  "import": [
+    "username/webapi/lib",
+    "username/webapi/idl_parser"
+  ]
+}
