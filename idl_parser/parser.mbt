@@ -206,6 +206,37 @@ fn Parser::parse_operation(self : Parser) -> Operation {
 
 ///|
 /// Parse attribute definition
+///|
+/// Parse a simple type (just identifier, no modifiers)
+fn Parser::parse_simple_type(self : Parser) -> IdlType {
+  // Handle 'unrestricted' prefix
+  if self.is_identifier() && self.current_identifier() == "unrestricted" {
+    self.advance()
+  }
+  
+  let base_type = if self.position < self.tokens.length() {
+    match self.current_token().token {
+      Token::Identifier(name) => {
+        self.advance()
+        IdlType::Identifier(name)
+      }
+      _ => IdlType::Identifier("unknown")
+    }
+  } else {
+    IdlType::Identifier("unknown")
+  }
+  
+  // Handle nullable
+  if self.check(Token::Question) {
+    self.advance()
+    IdlType::Nullable(base_type)
+  } else {
+    base_type
+  }
+}
+
+///|
+/// Parse attribute definition
 fn Parser::parse_attribute(self : Parser) -> Attribute? {
   // Skip extended attributes [...]
   while self.check(Token::LeftBracket) {
@@ -231,27 +262,16 @@ fn Parser::parse_attribute(self : Parser) -> Attribute? {
     self.advance()
   }
   
-  // Parse attribute type - this consumes type tokens
-  let attr_type = self.parse_type()
+  // Parse attribute type using simpler parser
+  let attr_type = self.parse_simple_type()
   
-  // Get attribute name - after type, we should have the name
+  // Get attribute name - should be next identifier
   let attr_name = if self.is_identifier() {
     let name = self.current_identifier()
     self.advance()
     name
-  } else if self.current_token().token == Token::Identifier("name") {
-    // Special case: "name" might be parsed differently
-    self.advance()
-    "name"
   } else {
-    // Fallback - try to extract from current position
-    match self.current_token().token {
-      Token::Identifier(id_name) => {
-        self.advance()
-        id_name
-      }
-      _ => "attr"
-    }
+    "attr"
   }
   
   // Skip to semicolon
