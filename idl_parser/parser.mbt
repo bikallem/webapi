@@ -69,6 +69,11 @@ fn Parser::parse_type(self : Parser) -> IdlType {
     false
   }
   
+  // Handle 'unrestricted' prefix
+  if self.is_identifier() && self.current_identifier() == "unrestricted" {
+    self.advance()
+  }
+  
   let base_type = if self.position < self.tokens.length() {
     match self.current_token().token {
       Token::Identifier(name) => {
@@ -81,15 +86,73 @@ fn Parser::parse_type(self : Parser) -> IdlType {
     IdlType::Identifier("unknown")
   }
   
+  // Handle union types (A or B)
+  let mut result = base_type
+  while self.check(Token::Pipe) {
+    self.advance()
+    // Skip 'or' keyword if present
+    if self.is_identifier() && self.current_identifier() == "or" {
+      self.advance()
+    }
+    // Handle 'unrestricted' in union members
+    if self.is_identifier() && self.current_identifier() == "unrestricted" {
+      self.advance()
+    }
+    if self.is_identifier() {
+      let union_member = IdlType::Identifier(self.current_identifier())
+      self.advance()
+      match result {
+        IdlType::Union(members) => {
+          members.push(union_member)
+          result = IdlType::Union(members)
+        }
+        _ => {
+          let members = [result]
+          members.push(union_member)
+          result = IdlType::Union(members)
+        }
+      }
+    }
+  }
+  
   if self.check(Token::Question) {
     self.advance()
-    IdlType::Nullable(base_type)
+    IdlType::Nullable(result)
   } else {
-    base_type
+    result
   }
 }
 
 ///|
+/// Parse a single parameter
+fn Parser::parse_parameter(self : Parser) -> Parameter? {
+  // Check for 'optional' keyword
+  let optional = self.check(Token::Optional)
+  if optional {
+    self.advance()
+  }
+  
+  // Parse parameter type
+  let param_type = self.parse_type()
+  
+  // Check for '...' (variadic)
+  let variadic = self.check(Token::DotDotDot)
+  if variadic {
+    self.advance()
+  }
+  
+  // Get parameter name
+  let param_name = if self.is_identifier() {
+    let name = self.current_identifier()
+    self.advance()
+    name
+  } else {
+    "param"
+  }
+  
+  Some({ name: param_name, param_type, optional, variadic })
+}
+
 /// Parse operation (method) in interface
 fn Parser::parse_operation(self : Parser) -> Operation {
   // Assume we're at the return type
@@ -105,8 +168,24 @@ fn Parser::parse_operation(self : Parser) -> Operation {
     self.advance()
     while !self.check(Token::RightParen) &&
           self.current_token().token != Token::Eof {
-      // Skip parameter details for now
-      self.advance()
+      if self.is_identifier() || self.check(Token::Optional) {
+        match self.parse_parameter() {
+          Some(param) => {
+            parameters.push(param)
+            // Check for comma between parameters
+            if self.check(Token::Comma) {
+              self.advance()
+            }
+          }
+          None => {
+            self.advance()
+          }
+        }
+      } else if self.check(Token::Comma) {
+        self.advance()
+      } else {
+        self.advance()
+      }
     }
     if self.check(Token::RightParen) {
       self.advance()

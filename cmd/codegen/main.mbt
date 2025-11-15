@@ -1,33 +1,34 @@
 ///|
+fn process_webidl_file(file_path : String) -> Unit {
+  let result : Result[String, _] = try? @fs.read_file_to_string(file_path)
+  match result {
+    Ok(content) => {
+      println("═══════════════════════════════════════════════════════════════════════")
+      println("Processing: \{file_path}")
+      println("═══════════════════════════════════════════════════════════════════════")
+      
+      let definitions = @idl_parser.parse(content)
+      println("Parsed \{definitions.length()} definitions")
+      
+      let generated_code = @generator.generate_package_code(definitions)
+      println(generated_code)
+      println("")
+    }
+    Err(e) => println("Error reading \{file_path}: \{e}")
+  }
+}
+
+///|
 fn main {
   println("WebIDL to MoonBit Code Generator v0.1.0")
   println("Processing WebIDL definitions and generating MoonBit code\n")
   
-  // Test case 1: EventTarget
-  let event_target_idl = "dictionary EventListenerOptions { boolean capture = false; }; dictionary AddEventListenerOptions : EventListenerOptions { boolean passive; }; interface EventTarget { undefined addEventListener(DOMString type); undefined removeEventListener(DOMString type); boolean dispatchEvent(Event event); };"
-  
-  println("═══════════════════════════════════════════════════════════════════════")
-  println("EventTarget.webidl")
-  println("═══════════════════════════════════════════════════════════════════════")
-  
-  let definitions = @idl_parser.parse(event_target_idl)
-  println("Parsed \{definitions.length()} definitions")
-  
-  let generated_code = @generator.generate_package_code(definitions)
-  println(generated_code)
-  
-  // Test case 2: Simple Window interface
-  let window_idl = "interface Window { void alert(DOMString message); void close(); };"
-  
-  println("═══════════════════════════════════════════════════════════════════════")
-  println("Window.webidl (simplified)")
-  println("═══════════════════════════════════════════════════════════════════════")
-  
-  let window_defs = @idl_parser.parse(window_idl)
-  println("Parsed \{window_defs.length()} definitions")
-  
-  let window_code = @generator.generate_package_code(window_defs)
-  println(window_code)
+  // Process real WebIDL files from webidls directory
+  process_webidl_file("webidls/EventTarget.webidl")
+  process_webidl_file("webidls/Window.webidl")
+  process_webidl_file("webidls/Document.webidl")
+  process_webidl_file("webidls/Element.webidl")
+  process_webidl_file("webidls/Node.webidl")
   
   println("✓ Code generation complete")
 }

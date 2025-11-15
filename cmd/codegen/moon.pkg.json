@@ -3,6 +3,10 @@
   "import": [
     "username/webapi/generator",
     "username/webapi/lib",
-    "username/webapi/idl_parser"
+    "username/webapi/idl_parser",
+    {
+      "path": "moonbitlang/x/fs",
+      "alias": "fs"
+    }
   ]
 }

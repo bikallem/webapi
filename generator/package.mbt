@@ -39,19 +39,38 @@ fn to_snake_case(s : String) -> String {
 }
 
 ///|
-/// Generate FFI binding for a method
+/// Generate FFI binding for a method with parameters
 pub fn generate_ffi_binding(
   interface_name : String,
   method_name : String,
   return_type : String,
+  parameters? : Array[@idl_parser.Parameter] = [],
 ) -> String {
   let snake_case = to_snake_case(method_name)
+  
+  // Build parameter list
+  let mut params_str = "self : \{interface_name}"
+  
+  for param in parameters {
+    let param_type_mb = @lib.map_idl_type(param.param_type)
+    let param_type_str = @lib.moonbit_type_string(param_type_mb)
+    
+    // Handle optional parameters with Option type
+    let param_type_final = if param.optional {
+      "Option[\{param_type_str}]"
+    } else {
+      param_type_str
+    }
+    
+    params_str = params_str + ", \{param.name} : \{param_type_final}"
+  }
+  
   "pub fn " +
   interface_name +
   "::" +
   snake_case +
-  "(self : " +
-  interface_name +
+  "(" +
+  params_str +
   ") -> " +
   return_type +
   " = \"" +

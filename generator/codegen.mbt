@@ -30,11 +30,12 @@ pub fn generate_package_code(
           let mb_type = @lib.map_idl_type(op.return_type)
           let type_str = @lib.moonbit_type_string(mb_type)
           
-          // Use existing generate_ffi_binding
+          // Use existing generate_ffi_binding with parameters
           let binding = generate_ffi_binding(
             iface.name, 
             op.name,
-            type_str
+            type_str,
+            parameters=op.parameters
           )
           code = code + binding + "\n"
         }
