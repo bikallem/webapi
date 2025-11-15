@@ -23,13 +23,17 @@ pub fn generate_dictionary_struct(
 
 ///|
 /// Generate a complete MoonBit package from WebIDL definitions
+/// Processes definitions in inheritance order (base types first)
 pub fn generate_package_code(
   definitions : Array[@idl_parser.Definition]
 ) -> String {
   let mut code = "///| Generated from WebIDL - DO NOT EDIT MANUALLY\n\n"
   
-  // Process each definition
-  for def in definitions {
+  // Resolve inheritance order to ensure base types come before derived types
+  let sorted_defs = resolve_inheritance_order(definitions)
+  
+  // Process each definition in sorted order
+  for def in sorted_defs {
     match def {
       @idl_parser.Definition::InterfaceDef(iface) => {
         code = code + "/// \{iface.name} interface\n"
