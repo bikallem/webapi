@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "username/webapi/idl_parser"
+package "bikallem/webapi/idl_parser"
 
 // Values
 fn parse(String) -> Array[Definition]

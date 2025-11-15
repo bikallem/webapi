@@ -7,8 +7,8 @@ fn generate_attribute_methods(
   interface_name : String,
   attr : @idl_parser.Attribute,
 ) -> String {
-  let mb_type = @lib.map_idl_type(attr.attr_type)
-  let type_str = @lib.moonbit_type_string(mb_type)
+  let mb_type = map_idl_type(attr.attr_type)
+  let type_str = moonbit_type_string(mb_type)
   let snake_name = generate_ffi_binding_snake_helper(attr.name)
   let mut methods = ""
 
@@ -50,11 +50,11 @@ pub fn generate_dictionary_struct(dict : @idl_parser.Dictionary) -> String {
     let field_name = field.0
     let field_type = field.1
     let is_optional = field.2
-    let mb_type = @lib.map_idl_type(field_type)
+    let mb_type = map_idl_type(field_type)
     let type_str = if is_optional {
-      "Option[\{@lib.moonbit_type_string(mb_type)}]"
+      "Option[\{moonbit_type_string(mb_type)}]"
     } else {
-      @lib.moonbit_type_string(mb_type)
+      moonbit_type_string(mb_type)
     }
     struct_str = struct_str + "  \{field_name} : \{type_str}\n"
   }
@@ -90,8 +90,8 @@ pub fn generate_package_code(
         // Generate FFI bindings for operations
         for op in iface.operations {
           // Map IDL return type to MoonBit type
-          let mb_type = @lib.map_idl_type(op.return_type)
-          let type_str = @lib.moonbit_type_string(mb_type)
+          let mb_type = map_idl_type(op.return_type)
+          let type_str = moonbit_type_string(mb_type)
 
           // Use existing generate_ffi_binding with parameters
           let binding = generate_ffi_binding(

@@ -5,15 +5,15 @@ pub fn generate_moon_pkg_json_content(dependencies : Array[String]) -> String {
   let mut import_lines = ""
   for dep in import_strs {
     if import_lines == "" {
-      import_lines = "    \"username/webapi/generated/" + dep + "\""
+      import_lines = "    \"bikallem/webapi/generated/" + dep + "\""
     } else {
       import_lines = import_lines +
-        ",\n    \"username/webapi/generated/" +
+        ",\n    \"bikallem/webapi/generated/" +
         dep +
         "\""
     }
   }
-  "{\n  \"import\": [\n    \"username/webapi\"\n" +
+  "{\n  \"import\": [\n    \"bikallem/webapi\"\n" +
   (if import_lines == "" {
     "  ]\n}"
   } else {
@@ -51,8 +51,8 @@ pub fn generate_ffi_binding(
   // Build parameter list
   let mut params_str = "self : \{interface_name}"
   for param in parameters {
-    let param_type_mb = @lib.map_idl_type(param.param_type)
-    let param_type_str = @lib.moonbit_type_string(param_type_mb)
+    let param_type_mb = map_idl_type(param.param_type)
+    let param_type_str = moonbit_type_string(param_type_mb)
 
     // Handle optional parameters with Option type
     let param_type_final = if param.optional {

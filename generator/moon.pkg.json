@@ -1,6 +1,5 @@
 {
-  "import": [
-    "username/webapi/lib",
-    "username/webapi/idl_parser"
+  "import": [    
+    "bikallem/webapi/idl_parser"
   ]
 }

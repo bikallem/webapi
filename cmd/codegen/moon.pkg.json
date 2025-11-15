@@ -1,9 +1,8 @@
 {
   "is_main": true,
   "import": [
-    "username/webapi/generator",
-    "username/webapi/lib",
-    "username/webapi/idl_parser",
+    "bikallem/webapi/generator",    
+    "bikallem/webapi/idl_parser",
     {
       "path": "moonbitlang/x/fs",
       "alias": "fs"

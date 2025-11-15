@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "username/webapi/cmd/codegen"
+package "bikallem/webapi/cmd/codegen"
 
 // Values
 
