@@ -26,10 +26,15 @@ pub fn generate_package_code(
         
         // Generate FFI bindings for operations
         for op in iface.operations {
+          // Map IDL return type to MoonBit type
+          let mb_type = @lib.map_idl_type(op.return_type)
+          let type_str = @lib.moonbit_type_string(mb_type)
+          
+          // Use existing generate_ffi_binding
           let binding = generate_ffi_binding(
             iface.name, 
             op.name,
-            "Unit"  // TODO: map return type properly
+            type_str
           )
           code = code + binding + "\n"
         }
