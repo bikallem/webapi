@@ -229,19 +229,63 @@ fn Parser::parse_dictionary(self : Parser) -> Dictionary {
     self.advance() // skip parent name
   }
   
-  // Parse fields - consume until closing brace
+  let fields : Array[(String, IdlType, Bool)] = []
+  
+  // Parse fields - extract field type, name, and optional marker
   if self.check(Token::LeftBrace) {
     self.advance()
     while !self.check(Token::RightBrace) &&
           self.current_token().token != Token::Eof {
-      self.advance()
+      // Check for optional keyword
+      let optional = self.check(Token::Optional)
+      if optional {
+        self.advance()
+      }
+      
+      // Parse field type
+      let field_type = self.parse_type()
+      
+      // Get field name - must be an identifier
+      let field_name = if self.is_identifier() {
+        let name = self.current_identifier()
+        self.advance()
+        name
+      } else {
+        // Skip this field if no valid identifier found
+        self.advance()
+        ""
+      }
+      
+      // Only add field if we have a valid name
+      if field_name != "" {
+        fields.push((field_name, field_type, optional))
+      }
+      
+      // Skip default value if present (= value)
+      if self.check(Token::Equals) {
+        self.advance()
+        // Skip the default value - typically a literal
+        while !self.check(Token::Semicolon) &&
+              !self.check(Token::Comma) &&
+              !self.check(Token::RightBrace) &&
+              self.current_token().token != Token::Eof {
+          self.advance()
+        }
+      }
+      
+      // Skip semicolon or comma between fields
+      if self.check(Token::Semicolon) {
+        self.advance()
+      } else if self.check(Token::Comma) {
+        self.advance()
+      }
     }
+    
     if self.check(Token::RightBrace) {
       self.advance()
     }
   }
   
-  let fields : Array[(String, IdlType, Bool)] = []
   { name: dict_name, fields }
 }
 

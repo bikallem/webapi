@@ -6,7 +6,19 @@
 pub fn generate_dictionary_struct(
   dict : @idl_parser.Dictionary
 ) -> String {
-  "pub struct \{dict.name} {\n  // TODO: add fields\n}"
+  let mut struct_str = "pub struct \{dict.name} {\n"
+  
+  for i = 0; i < dict.fields.length(); i = i + 1 {
+    let field = dict.fields[i]
+    let field_name = field.0
+    let field_type = field.1
+    let mb_type = @lib.map_idl_type(field_type)
+    let type_str = @lib.moonbit_type_string(mb_type)
+    struct_str = struct_str + "  \{field_name} : \{type_str}\n"
+  }
+  
+  struct_str = struct_str + "}"
+  struct_str
 }
 
 ///|
