@@ -55,17 +55,25 @@ fn glue_helper_name(name : String) -> String {
 ///|
 fn gen_instanceof_helpers(defs : Array[@idl_parser.Definition]) -> String {
   let mut code = "// Type checking helpers\n"
+  let seen : Map[String, Bool] = {}
   
   for def in defs {
     match def {
       @idl_parser.Definition::InterfaceDef(iface) => {
-        let helper_name = glue_helper_name(iface.name)
-        code = code + "/**\n"
-        code = code + " * Check if value is an instance of \{iface.name}\n"
-        code = code + " */\n"
-        code = code + "export function is_\{helper_name}(value) {\n"
-        code = code + "  return value instanceof window.\{iface.name};\n"
-        code = code + "}\n\n"
+        // Only generate once per interface name
+        match seen.get(iface.name) {
+          Some(_) => ()
+          None => {
+            seen[iface.name] = true
+            let helper_name = glue_helper_name(iface.name)
+            code = code + "/**\n"
+            code = code + " * Check if value is an instance of \{iface.name}\n"
+            code = code + " */\n"
+            code = code + "export function is_\{helper_name}(value) {\n"
+            code = code + "  return value instanceof window.\{iface.name};\n"
+            code = code + "}\n\n"
+          }
+        }
       }
       _ => ()
     }
@@ -76,7 +84,7 @@ fn gen_instanceof_helpers(defs : Array[@idl_parser.Definition]) -> String {
 
 ///|
 fn gen_type_converters() -> String {
-  let mut code = "// Type conversion helpers\n\n"
+  let mut code = "// Basic type conversion helpers\n\n"
   
   code = code + "/**\n"
   code = code + " * Convert MoonBit nullable value to JavaScript (null or value)\n"
@@ -148,6 +156,42 @@ pub fn generate_glue_code(definitions : Array[@idl_parser.Definition]) -> String
   code = code + gen_type_converters()
   code = code + "\n"
   code = code + gen_null_checks()
+  code = code + "\n"
+  code = code + gen_attribute_helpers(definitions)
+  
+  code
+}
+
+///|
+fn gen_attribute_helpers(_defs : Array[@idl_parser.Definition]) -> String {
+  let mut code = "// Attribute access helpers\n\n"
+  
+  code = code + "/**\n"
+  code = code + " * Get attribute value with type checking\n"
+  code = code + " */\n"
+  code = code + "export function get_attr(obj, attr) {\n"
+  code = code + "  if (!obj) throw new Error('Cannot get attribute from null');\n"
+  code = code + "  return obj[attr];\n"
+  code = code + "}\n\n"
+  
+  code = code + "/**\n"
+  code = code + " * Set attribute value with type checking\n"
+  code = code + " */\n"
+  code = code + "export function set_attr(obj, attr, value) {\n"
+  code = code + "  if (!obj) throw new Error('Cannot set attribute on null');\n"
+  code = code + "  obj[attr] = value;\n"
+  code = code + "}\n\n"
+  
+  code = code + "/**\n"
+  code = code + " * Call method on object with error handling\n"
+  code = code + " */\n"
+  code = code + "export function call_method(obj, method, args) {\n"
+  code = code + "  if (!obj) throw new Error('Cannot call method on null');\n"
+  code = code + "  if (typeof obj[method] !== 'function') {\n"
+  code = code + "    throw new Error('Method ' + method + ' is not a function');\n"
+  code = code + "  }\n"
+  code = code + "  return obj[method](...args);\n"
+  code = code + "}\n"
   
   code
 }
