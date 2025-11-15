@@ -2,6 +2,46 @@
 /// Generate MoonBit code from WebIDL definitions
 
 ///|
+/// Generate getter and setter methods for an attribute
+fn generate_attribute_methods(
+  interface_name : String,
+  attr : @idl_parser.Attribute
+) -> String {
+  let mb_type = @lib.map_idl_type(attr.attr_type)
+  let type_str = @lib.moonbit_type_string(mb_type)
+  let snake_name = generate_ffi_binding_snake_helper(attr.name)
+  
+  let mut methods = ""
+  
+  // Generate getter
+  methods = methods + "pub fn \{interface_name}::\{snake_name}(self : \{interface_name}) -> \{type_str} = \"\{interface_name}\" \"\{attr.name}\"\n"
+  
+  // Generate setter only if not readonly
+  if !attr.is_readonly {
+    methods = methods + "pub fn \{interface_name}::set_\{snake_name}(self : \{interface_name}, value : \{type_str}) -> Unit = \"\{interface_name}\" \"set_\{attr.name}\"\n"
+  }
+  
+  methods
+}
+
+///|
+/// Helper to convert to snake_case - wraps the snake case converter
+fn generate_ffi_binding_snake_helper(name : String) -> String {
+  let mut result = ""
+  let mut index = 0
+  for c in name {
+    if index > 0 && c.is_ascii_uppercase() {
+      result = result + "_"
+      result = result + c.to_ascii_lowercase().to_string()
+    } else {
+      result = result + c.to_string()
+    }
+    index = index + 1
+  }
+  result
+}
+
+///|
 /// Generate MoonBit struct for a dictionary
 pub fn generate_dictionary_struct(
   dict : @idl_parser.Dictionary
@@ -39,6 +79,12 @@ pub fn generate_package_code(
         code = code + "/// \{iface.name} interface\n"
         code = code + "#external type \{iface.name}\n"
         code = code + "\n"
+        
+        // Generate FFI bindings for attributes (getters/setters)
+        for attr in iface.attributes {
+          let attr_methods = generate_attribute_methods(iface.name, attr)
+          code = code + attr_methods + "\n"
+        }
         
         // Generate FFI bindings for operations
         for op in iface.operations {

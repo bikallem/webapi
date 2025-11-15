@@ -23,7 +23,7 @@ pub fn generate_moon_pkg_json_content(dependencies : Array[String]) -> String {
 
 ///|
 /// Convert camelCase to snake_case
-fn to_snake_case(s : String) -> String {
+pub fn to_snake_case(s : String) -> String {
   let mut result = ""
   let mut index = 0
   for c in s {

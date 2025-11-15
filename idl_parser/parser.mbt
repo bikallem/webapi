@@ -204,6 +204,68 @@ fn Parser::parse_operation(self : Parser) -> Operation {
   { name: method_name, return_type, parameters }
 }
 
+///|
+/// Parse attribute definition
+fn Parser::parse_attribute(self : Parser) -> Attribute? {
+  // Skip extended attributes [...]
+  while self.check(Token::LeftBracket) {
+    self.advance()
+    // Skip everything until ]
+    while !self.check(Token::RightBracket) &&
+          self.current_token().token != Token::Eof {
+      self.advance()
+    }
+    if self.check(Token::RightBracket) {
+      self.advance()
+    }
+  }
+  
+  // Check for 'readonly' keyword
+  let is_readonly = self.check(Token::Readonly)
+  if is_readonly {
+    self.advance()
+  }
+  
+  // Check for 'attribute' keyword (sometimes present)
+  if self.is_identifier() && self.current_identifier() == "attribute" {
+    self.advance()
+  }
+  
+  // Parse attribute type - this consumes type tokens
+  let attr_type = self.parse_type()
+  
+  // Get attribute name - after type, we should have the name
+  let attr_name = if self.is_identifier() {
+    let name = self.current_identifier()
+    self.advance()
+    name
+  } else if self.current_token().token == Token::Identifier("name") {
+    // Special case: "name" might be parsed differently
+    self.advance()
+    "name"
+  } else {
+    // Fallback - try to extract from current position
+    match self.current_token().token {
+      Token::Identifier(id_name) => {
+        self.advance()
+        id_name
+      }
+      _ => "attr"
+    }
+  }
+  
+  // Skip to semicolon
+  while !self.check(Token::Semicolon) &&
+        self.current_token().token != Token::Eof {
+    self.advance()
+  }
+  if self.check(Token::Semicolon) {
+    self.advance()
+  }
+  
+  Some({ name: attr_name, attr_type, is_readonly })
+}
+
 ///| 
 /// Check if current token is an identifier
 fn Parser::is_identifier(self : Parser) -> Bool {
@@ -321,16 +383,23 @@ pub fn parse(source : String) -> Array[Definition] {
         let constants : Array[(String, String)] = []
         while !parser.check(Token::RightBrace) &&
               parser.current_token().token != Token::Eof {
-          if parser.check(Token::Readonly) {
-            // Parse readonly attribute
+          // Skip extended attributes at the beginning of member declarations
+          while parser.check(Token::LeftBracket) {
             parser.advance()
-            // Skip attribute declaration
-            while !parser.check(Token::Semicolon) &&
+            while !parser.check(Token::RightBracket) &&
                   parser.current_token().token != Token::Eof {
               parser.advance()
             }
-            if parser.check(Token::Semicolon) {
+            if parser.check(Token::RightBracket) {
               parser.advance()
+            }
+          }
+          
+          if parser.check(Token::Readonly) {
+            // Parse readonly attribute
+            match parser.parse_attribute() {
+              Some(attr) => attributes.push(attr)
+              None => ()
             }
           } else if parser.is_identifier() {
             // Could be a return type for operation or attribute type
@@ -360,14 +429,10 @@ pub fn parse(source : String) -> Array[Definition] {
               let operation = parser.parse_operation()
               operations.push(operation)
             } else {
-              // Skip other declarations
-              while !parser.check(Token::Semicolon) &&
-                    !parser.check(Token::RightBrace) &&
-                    parser.current_token().token != Token::Eof {
-                parser.advance()
-              }
-              if parser.check(Token::Semicolon) {
-                parser.advance()
+              // It's likely an attribute without readonly
+              match parser.parse_attribute() {
+                Some(attr) => attributes.push(attr)
+                None => ()
               }
             }
           } else {
