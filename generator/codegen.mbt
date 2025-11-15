@@ -52,8 +52,13 @@ pub fn generate_dictionary_struct(
     let field = dict.fields[i]
     let field_name = field.0
     let field_type = field.1
+    let is_optional = field.2
     let mb_type = @lib.map_idl_type(field_type)
-    let type_str = @lib.moonbit_type_string(mb_type)
+    let type_str = if is_optional {
+      "Option[\{@lib.moonbit_type_string(mb_type)}]"
+    } else {
+      @lib.moonbit_type_string(mb_type)
+    }
     struct_str = struct_str + "  \{field_name} : \{type_str}\n"
   }
   
