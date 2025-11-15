@@ -40,6 +40,7 @@ pub fn map_idl_type(idl_type : @idl_parser.IdlType) -> MoonBitType {
       // Map common WebIDL primitive types that come as identifiers
       match name {
         "undefined" => MoonBitType::Primitive("Unit")
+        "void" => MoonBitType::Primitive("Unit")
         "boolean" => MoonBitType::Primitive("Bool")
         "byte" => MoonBitType::Primitive("Byte")
         "short" => MoonBitType::Primitive("Int16")
