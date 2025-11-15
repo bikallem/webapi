@@ -1,0 +1,130 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "username/webapi/idl_parser"
+
+// Values
+fn parse(String) -> Array[Definition]
+
+fn tokenize(String) -> Array[Token]
+
+// Errors
+
+// Types and methods
+pub struct Attribute {
+  name : String
+  attr_type : IdlType
+  is_readonly : Bool
+}
+impl Eq for Attribute
+impl Show for Attribute
+
+pub struct Callback {
+  name : String
+  return_type : IdlType
+  parameters : Array[Parameter]
+}
+impl Eq for Callback
+impl Show for Callback
+
+pub enum Definition {
+  InterfaceDef(Interface)
+  DictionaryDef(Dictionary)
+  EnumDef(EnumType)
+  CallbackDef(Callback)
+}
+impl Eq for Definition
+impl Show for Definition
+
+pub struct Dictionary {
+  name : String
+  fields : Array[(String, IdlType, Bool)]
+}
+impl Eq for Dictionary
+impl Show for Dictionary
+
+pub struct EnumType {
+  name : String
+  values : Array[String]
+}
+impl Eq for EnumType
+impl Show for EnumType
+
+pub enum IdlType {
+  Primitive(String)
+  Nullable(IdlType)
+  Sequence(IdlType)
+  FrozenArray(IdlType)
+  Union(Array[IdlType])
+  Identifier(String)
+}
+impl Eq for IdlType
+impl Show for IdlType
+
+pub struct Interface {
+  name : String
+  extends : String?
+  attributes : Array[Attribute]
+  operations : Array[Operation]
+  constants : Array[(String, String)]
+}
+impl Eq for Interface
+impl Show for Interface
+
+pub struct Operation {
+  name : String
+  return_type : IdlType
+  parameters : Array[Parameter]
+}
+impl Eq for Operation
+impl Show for Operation
+
+pub struct Parameter {
+  name : String
+  param_type : IdlType
+  optional : Bool
+  variadic : Bool
+}
+impl Eq for Parameter
+impl Show for Parameter
+
+pub enum Token {
+  Interface
+  Dictionary
+  Readonly
+  Optional
+  Callback
+  Enum
+  Attribute
+  LeftBrace
+  RightBrace
+  LeftParen
+  RightParen
+  LeftBracket
+  RightBracket
+  Semicolon
+  Colon
+  Comma
+  Question
+  Pipe
+  Equals
+  Arrow
+  DotDotDot
+  Identifier(String)
+  String(String)
+  Number(String)
+  Unknown(String)
+  Eof
+}
+impl Eq for Token
+impl Show for Token
+
+type Tokenizer
+fn Tokenizer::advance(Self) -> Unit
+fn Tokenizer::new(String) -> Self
+fn Tokenizer::next_token(Self) -> Token
+fn Tokenizer::peek(Self) -> Char?
+fn Tokenizer::view(Self) -> StringView
+
+// Type aliases
+
+// Traits
+

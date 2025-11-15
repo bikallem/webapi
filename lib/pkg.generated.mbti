@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "username/webapi/lib"
+
+import(
+  "username/webapi/idl_parser"
+)
+
+// Values
+fn map_idl_type(@idl_parser.IdlType) -> MoonBitType
+
+fn moonbit_type_string(MoonBitType) -> String
+
+// Errors
+
+// Types and methods
+pub enum MoonBitType {
+  Primitive(String)
+  Option(MoonBitType)
+  Array(MoonBitType)
+  Enum(String)
+  Struct(String)
+  External(String)
+}
+impl Eq for MoonBitType
+impl Show for MoonBitType
+
+// Type aliases
+
+// Traits
+

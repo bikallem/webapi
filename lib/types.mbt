@@ -35,7 +35,7 @@ pub fn map_idl_type(idl_type : @idl_parser.IdlType) -> MoonBitType {
       MoonBitType::Array(map_idl_type(inner))
     @idl_parser.IdlType::FrozenArray(inner) =>
       MoonBitType::Array(map_idl_type(inner))
-    @idl_parser.IdlType::Union(members) => {
+    @idl_parser.IdlType::Union(members) =>
       // For union types, pick the first member
       // A more sophisticated approach would generate a union enum
       if members.length() > 0 {
@@ -43,8 +43,7 @@ pub fn map_idl_type(idl_type : @idl_parser.IdlType) -> MoonBitType {
       } else {
         MoonBitType::External("UnionType")
       }
-    }
-    @idl_parser.IdlType::Identifier(name) => {
+    @idl_parser.IdlType::Identifier(name) =>
       // Map common WebIDL primitive types that come as identifiers
       match name {
         "undefined" => MoonBitType::Primitive("Unit")
@@ -62,7 +61,6 @@ pub fn map_idl_type(idl_type : @idl_parser.IdlType) -> MoonBitType {
         "DOMString" => MoonBitType::Primitive("String")
         _ => MoonBitType::External(name)
       }
-    }
   }
 }
 

@@ -1,0 +1,16 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "username/webapi"
+
+// Values
+fn fib(Int) -> Int64
+
+fn sum(data~ : Array[Int], start? : Int, length? : Int) -> Int
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

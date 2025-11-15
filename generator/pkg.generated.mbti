@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "username/webapi/generator"
+
+import(
+  "username/webapi/idl_parser"
+)
+
+// Values
+fn generate_dictionary_struct(@idl_parser.Dictionary) -> String
+
+fn generate_ffi_binding(String, String, String, parameters? : Array[@idl_parser.Parameter]) -> String
+
+fn generate_glue_code(Array[@idl_parser.Definition]) -> String
+
+fn generate_moon_pkg_json_content(Array[String]) -> String
+
+fn generate_package_code(Array[@idl_parser.Definition]) -> String
+
+fn resolve_inheritance_order(Array[@idl_parser.Definition]) -> Array[@idl_parser.Definition]
+
+fn to_snake_case(String) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

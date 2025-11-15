@@ -1,24 +1,20 @@
 ///|
-/// Token types for WebIDL lexer
+/// WebIDL token definitions
 pub enum Token {
   // Keywords
   Interface
-  Extends
+  Dictionary
   Readonly
   Optional
   Callback
-  Dictionary
   Enum
   Attribute
-  // Literals and identifiers
-  Identifier(String)
-  Number(String)
-  String(String)
-  // Operators and punctuation
-  LeftParen
-  RightParen
+
+  // Punctuation / special
   LeftBrace
   RightBrace
+  LeftParen
+  RightParen
   LeftBracket
   RightBracket
   Semicolon
@@ -29,66 +25,222 @@ pub enum Token {
   Equals
   Arrow
   DotDotDot
-  // Special
-  Eof
+
+  // Literals / identifiers
+  Identifier(String)
+  String(String)
+  Number(String)
   Unknown(String)
+  Eof
 } derive(Show, Eq)
 
 ///|
-/// Token with source location
-pub struct LocatedToken {
-  token : Token
-  line : Int
-  column : Int
+/// Tokenizer state with zero-copy
+struct Tokenizer {
+  input : String
+  mut position : Int
+  mut line : Int
+  mut column : Int
 }
 
 ///|
-/// Check if code is identifier start
-fn is_id_start(code : Int) -> Bool {
-  (code >= 'a' && code <= 'z') || (code >= 'A' && code <= 'Z') || code == '_'
+/// Get current view from position to end
+pub fn Tokenizer::view(self : Tokenizer) -> StringView {
+  self.input.view(start_offset=self.position)
 }
 
 ///|
-/// Check if code is identifier continue
-fn is_id_continue(code : Int) -> Bool {
-  (code >= 'a' && code <= 'z') ||
-  (code >= 'A' && code <= 'Z') ||
-  (code >= '0' && code <= '9') ||
-  code == '_'
+/// Update position and column based on consumed view
+fn Tokenizer::update_view(self : Tokenizer, rest : StringView) -> Unit {
+  let new_offset = rest.start_offset()
+  self.column = new_offset - self.position + self.column
+  self.position = new_offset
 }
 
 ///|
-/// Check if code is digit
-fn is_digit(code : Int) -> Bool {
-  code >= '0' && code <= '9'
+/// Create a new tokenizer
+pub fn Tokenizer::new(input : String) -> Tokenizer {
+  { input, position: 0, line: 1, column: 1 }
+}
+
+///|
+/// Advance one character, updating line/column tracking
+pub fn Tokenizer::advance(self : Tokenizer) -> Unit {
+  if self.position < self.input.length() {
+    let ch_code = self.input.unsafe_charcode_at(self.position)
+    if ch_code == '\n' {
+      self.line = self.line + 1
+      self.column = 1
+    } else {
+      self.column = self.column + 1
+    }
+    let delta = if ch_code >= 0xD800 && ch_code <= 0xDFFF { 2 } else { 1 }
+    self.position = self.position + delta
+  }
+}
+
+///|
+/// Peek current character without advancing
+pub fn Tokenizer::peek(self : Tokenizer) -> Char? {
+  self.input.get_char(self.position)
+}
+
+///|
+/// Skip whitespace and comments
+fn Tokenizer::skip_ws_comments(self : Tokenizer) -> Unit {
+  loop self.view() {
+    // CRLF and LF
+    ['\r', '\n', .. rest] => {
+      self.update_view(rest)
+      self.line = self.line + 1
+      self.column = 1
+      continue rest
+    }
+    ['\n', .. rest] => {
+      self.update_view(rest)
+      self.line = self.line + 1
+      self.column = 1
+      continue rest
+    }
+    // Whitespace (space, tab, CR)
+    [' ' | '\t' | '\r', .. rest] => {
+      self.update_view(rest)
+      continue rest
+    }
+    // Line comment
+    ['/', '/', .. rest] => {
+      // Skip until newline or EOF
+      let after_comment = loop rest {
+        ['\r', '\n', .. r] | ['\n', .. r] => r
+        [_, .. r] => continue r
+        r => r
+      }
+      self.update_view(after_comment)
+      continue after_comment
+    }
+    // Block comment
+    ['/', '*', .. rest] => {
+      // Skip until */ or EOF
+      let after_comment = loop rest {
+        ['*', '/', .. r] => r
+        [c, .. r] => {
+          if c == '\n' {
+            self.line = self.line + 1
+            self.column = 1
+          } else {
+            self.column = self.column + 1
+          }
+          continue r
+        }
+        r => r
+      }
+      self.update_view(after_comment)
+      continue after_comment
+    }
+    _ => break
+  }
+}
+
+///|
+/// Check if character is identifier start
+fn is_id_start(ch : Char) -> Bool {
+  (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch == '_'
+}
+
+///|
+/// Check if character is identifier continue
+fn is_id_continue(ch : Char) -> Bool {
+  is_id_start(ch) || (ch >= '0' && ch <= '9')
+}
+
+///|
+/// Check if character is digit
+fn is_digit(ch : Char) -> Bool {
+  ch >= '0' && ch <= '9'
+}
+
+///|
+/// Read an identifier from current position
+fn Tokenizer::read_identifier(self : Tokenizer) -> String {
+  let start_pos = self.position
+  loop self.view() {
+    [c, .. rest] if is_id_continue(c) => {
+      self.advance()
+      continue rest
+    }
+    _ => ()
+  }
+  self.input[start_pos:self.position].to_string() catch {
+    _ => ""
+  }
+}
+
+///|
+/// Read a number (integer or float)
+fn Tokenizer::read_number(self : Tokenizer) -> String {
+  let start_pos = self.position
+  let mut seen_dot = false
+  loop self.view() {
+    [c, .. rest] if is_digit(c) => {
+      self.advance()
+      continue rest
+    }
+    ['.', .. rest] if !seen_dot => {
+      seen_dot = true
+      self.advance()
+      continue rest
+    }
+    _ => ()
+  }
+  self.input[start_pos:self.position].to_string() catch {
+    _ => ""
+  }
+}
+
+///|
+/// Read a string literal (double-quoted, no escape processing)
+fn Tokenizer::read_string(self : Tokenizer) -> String {
+  self.advance() // skip opening quote
+  let start_pos = self.position
+  loop self.view() {
+    ['"', ..] => break
+    ['\n', ..] => break // unterminated
+    [_, .. rest] => {
+      self.advance()
+      continue rest
+    }
+    _ => break
+  }
+  let content = self.input[start_pos:self.position].to_string() catch {
+    _ => ""
+  }
+  if self.peek() is Some('"') {
+    self.advance() // skip closing quote
+  }
+  content
 }
 
 ///|
 /// Check if string is a keyword
 fn is_keyword(s : String) -> Bool {
-  match s {
-    "interface"
-    | "extends"
-    | "readonly"
-    | "optional"
-    | "callback"
-    | "dictionary"
-    | "enum"
-    | "attribute" => true
-    _ => false
-  }
+  s == "interface" ||
+  s == "dictionary" ||
+  s == "readonly" ||
+  s == "optional" ||
+  s == "callback" ||
+  s == "enum" ||
+  s == "attribute"
 }
 
 ///|
-/// Convert keyword string to token
+/// Map keyword string to Token variant
 fn keyword_to_token(s : String) -> Token {
   match s {
     "interface" => Token::Interface
-    "extends" => Token::Extends
+    "dictionary" => Token::Dictionary
     "readonly" => Token::Readonly
     "optional" => Token::Optional
     "callback" => Token::Callback
-    "dictionary" => Token::Dictionary
     "enum" => Token::Enum
     "attribute" => Token::Attribute
     _ => Token::Identifier(s)
@@ -96,222 +248,115 @@ fn keyword_to_token(s : String) -> Token {
 }
 
 ///|
-/// Tokenizer state
-struct Tokenizer {
-  source : String
-  mut position : Int
-  mut line : Int
-  mut column : Int
-}
+/// Produce next token from current position
+pub fn Tokenizer::next_token(self : Tokenizer) -> Token {
+  self.skip_ws_comments()
+  match self.view() {
+    // EOF
+    [] => Token::Eof
 
-///|
-/// Get character code at current position
-fn Tokenizer::peek_code(self : Tokenizer) -> Int {
-  if self.position >= self.source.length() {
-    0
-  } else {
-    self.source[self.position]
-  }
-}
-
-///|
-/// Get character code at current + offset
-fn Tokenizer::peek_code_at(self : Tokenizer, offset : Int) -> Int {
-  let idx = self.position + offset
-  if idx >= self.source.length() {
-    0
-  } else {
-    self.source[idx]
-  }
-}
-
-///|
-/// Advance position
-fn Tokenizer::advance(self : Tokenizer) -> Unit {
-  if self.position < self.source.length() {
-    let code = self.source[self.position]
-    if code == '\n' {
-      self.line = self.line + 1
-      self.column = 1
-    } else {
-      self.column = self.column + 1
+    // Multi-char operators
+    ['.', '.', '.', .. rest] => {
+      self.update_view(rest)
+      Token::DotDotDot
     }
-    self.position = self.position + 1
-  }
-}
+    ['=', '>', .. rest] => {
+      self.update_view(rest)
+      Token::Arrow
+    }
 
-///|
-/// Skip whitespace and comments
-fn Tokenizer::skip_whitespace_and_comments(self : Tokenizer) -> Unit {
-  let mut done = false
-  while !done {
-    let code = self.peek_code()
-    if code == ' ' || code == '\t' || code == '\n' || code == '\r' {
-      self.advance()
-    } else if code == '/' {
-      let next = self.peek_code_at(1)
-      if next == '/' {
-        // Line comment
-        while self.peek_code() != 0 && self.peek_code() != '\n' {
-          self.advance()
-        }
-      } else if next == '*' {
-        // Block comment
-        self.advance()
-        self.advance()
-        while self.peek_code() != 0 {
-          if self.peek_code() == '*' && self.peek_code_at(1) == '/' {
-            self.advance()
-            self.advance()
-            break
-          }
-          self.advance()
-        }
+    // Single-char punctuation
+    ['{', .. rest] => {
+      self.update_view(rest)
+      Token::LeftBrace
+    }
+    ['}', .. rest] => {
+      self.update_view(rest)
+      Token::RightBrace
+    }
+    ['(', .. rest] => {
+      self.update_view(rest)
+      Token::LeftParen
+    }
+    [')', .. rest] => {
+      self.update_view(rest)
+      Token::RightParen
+    }
+    ['[', .. rest] => {
+      self.update_view(rest)
+      Token::LeftBracket
+    }
+    [']', .. rest] => {
+      self.update_view(rest)
+      Token::RightBracket
+    }
+    [';', .. rest] => {
+      self.update_view(rest)
+      Token::Semicolon
+    }
+    [':', .. rest] => {
+      self.update_view(rest)
+      Token::Colon
+    }
+    [',', .. rest] => {
+      self.update_view(rest)
+      Token::Comma
+    }
+    ['?', .. rest] => {
+      self.update_view(rest)
+      Token::Question
+    }
+    ['|', .. rest] => {
+      self.update_view(rest)
+      Token::Pipe
+    }
+    ['=', .. rest] => {
+      self.update_view(rest)
+      Token::Equals
+    }
+
+    // String literal
+    ['"', ..] => {
+      let s = self.read_string()
+      Token::String(s)
+    }
+
+    // Identifier or keyword
+    [c, ..] if is_id_start(c) => {
+      let ident = self.read_identifier()
+      if is_keyword(ident) {
+        keyword_to_token(ident)
       } else {
-        done = true
+        Token::Identifier(ident)
       }
-    } else {
-      done = true
+    }
+
+    // Number
+    [c, ..] if is_digit(c) => {
+      let num = self.read_number()
+      Token::Number(num)
+    }
+
+    // Unknown character
+    [c, .. rest] => {
+      self.update_view(rest)
+      Token::Unknown(c.to_string())
     }
   }
 }
 
 ///|
-/// Read identifier
-fn Tokenizer::read_identifier(self : Tokenizer) -> String {
-  let start = self.position
-  while self.position < self.source.length() &&
-        is_id_continue(self.source[self.position]) {
-    self.position = self.position + 1
-  }
-  self.source[start:self.position].to_string() catch {
-    _ => ""
-  }
-}
-
-///|
-/// Read number
-fn Tokenizer::read_number(self : Tokenizer) -> String {
-  let start = self.position
-  while self.position < self.source.length() {
-    let code = self.source[self.position]
-    if is_digit(code) || code == '.' {
-      self.position = self.position + 1
-    } else {
-      break
+/// Tokenize entire source to array of tokens
+pub fn tokenize(source : String) -> Array[Token] {
+  let tz = Tokenizer::new(source)
+  let out : Array[Token] = []
+  while true {
+    let t = tz.next_token()
+    out.push(t)
+    match t {
+      Token::Eof => break
+      _ => ()
     }
   }
-  self.source[start:self.position].to_string() catch {
-    _ => ""
-  }
-}
-
-///|
-/// Read string literal
-fn Tokenizer::read_string(self : Tokenizer) -> String {
-  self.advance() // skip opening quote
-  let start = self.position
-  while self.position < self.source.length() &&
-        self.source[self.position] != '"' {
-    self.advance()
-  }
-  let result = self.source[start:self.position].to_string() catch { _ => "" }
-  if self.peek_code() == '"' {
-    self.advance()
-  }
-  result
-}
-
-///|
-/// Get next token
-pub fn Tokenizer::next_token(self : Tokenizer) -> LocatedToken {
-  self.skip_whitespace_and_comments()
-  let line = self.line
-  let column = self.column
-  let code = self.peek_code()
-  if code == 0 {
-    return { token: Token::Eof, line, column }
-  }
-  if code == '(' {
-    self.advance()
-    { token: Token::LeftParen, line, column }
-  } else if code == ')' {
-    self.advance()
-    { token: Token::RightParen, line, column }
-  } else if code == '{' {
-    self.advance()
-    { token: Token::LeftBrace, line, column }
-  } else if code == '}' {
-    self.advance()
-    { token: Token::RightBrace, line, column }
-  } else if code == '[' {
-    self.advance()
-    { token: Token::LeftBracket, line, column }
-  } else if code == ']' {
-    self.advance()
-    { token: Token::RightBracket, line, column }
-  } else if code == ';' {
-    self.advance()
-    { token: Token::Semicolon, line, column }
-  } else if code == ':' {
-    self.advance()
-    { token: Token::Colon, line, column }
-  } else if code == ',' {
-    self.advance()
-    { token: Token::Comma, line, column }
-  } else if code == '?' {
-    self.advance()
-    { token: Token::Question, line, column }
-  } else if code == '|' {
-    self.advance()
-    { token: Token::Pipe, line, column }
-  } else if code == '=' {
-    self.advance()
-    if self.peek_code() == '>' {
-      self.advance()
-      { token: Token::Arrow, line, column }
-    } else {
-      { token: Token::Equals, line, column }
-    }
-  } else if code == '.' &&
-    self.peek_code_at(1) == '.' &&
-    self.peek_code_at(2) == '.' {
-    self.advance()
-    self.advance()
-    self.advance()
-    { token: Token::DotDotDot, line, column }
-  } else if code == '"' {
-    let str_val = self.read_string()
-    { token: Token::String(str_val), line, column }
-  } else if is_id_start(code) {
-    let ident = self.read_identifier()
-    let token = if is_keyword(ident) {
-      keyword_to_token(ident)
-    } else {
-      Token::Identifier(ident)
-    }
-    { token, line, column }
-  } else if is_digit(code) {
-    let num = self.read_number()
-    { token: Token::Number(num), line, column }
-  } else {
-    self.advance()
-    { token: Token::Unknown(code.to_string()), line, column }
-  }
-}
-
-///|
-/// Tokenize source string
-pub fn tokenize(source : String) -> Array[LocatedToken] {
-  let tokenizer : Tokenizer = { source, position: 0, line: 1, column: 1 }
-  let tokens : Array[LocatedToken] = []
-  let mut done = false
-  while !done {
-    let tok = tokenizer.next_token()
-    tokens.push(tok)
-    if tok.token == Token::Eof {
-      done = true
-    }
-  }
-  tokens
+  out
 }
