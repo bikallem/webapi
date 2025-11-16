@@ -1,75 +1,76 @@
 ///|
-/// Extract filename from path (e.g., "webidls/Window.webidl" -> "window")
-fn get_module_name(file_path : String) -> String {
-  // Simple approach: find last / and .webidl
-  let filename_start = {
-    let mut idx = 0
-    for i = 0; i < file_path.length(); i = i + 1 {
-      if file_path[i] == '/' {
-        idx = i + 1
-      }
+/// Derive base name without extension from a file path
+fn basename_without_ext(path : String) -> String {
+  let mut start = 0
+  for i = 0; i < path.length(); i = i + 1 {
+    if path[i] == '/' {
+      start = i + 1
     }
-    idx
   }
-  let filename_end = if file_path.has_suffix(".webidl") {
-    file_path.length() - 7
-  } else {
-    file_path.length()
+  let mut end = path.length()
+  // find last '.' after start
+  let mut i = path.length()
+  while i > start {
+    i = i - 1
+    if path[i] == '.' {
+      end = i
+      break
+    }
   }
-  if filename_start < filename_end {
-    "generated"
-  } else {
-    "generated"
-  }
+  // Safe for ASCII file paths
+  let view = try path[start: end] catch { _ => path[:] }
+  view.to_string()
 }
 
 ///|
-/// Process a WebIDL file from disk and optionally write to file
-fn process_webidl_file(file_path : String, output_dir : String?) -> Unit {
+/// Process an IDL file from disk using @webidl.parse_string and dump AST JSON
+fn process_idl_file(file_path : String, output_dir : String?) -> Unit {
   let result : Result[String, _] = try? @fs.read_file_to_string(file_path)
   match result {
     Ok(content) => {
-      println(
-        "═══════════════════════════════════════════════════════════════════════",
-      )
+      println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ")
       println("Processing: \{file_path}")
-      println(
-        "═══════════════════════════════════════════════════════════════════════",
-      )
-      let definitions = @idl_parser.parse(content)
-      println("Parsed \{definitions.length()} definitions")
-      let generated_code = @generator.generate_package_code(definitions)
-      let glue_code = @generator.generate_glue_code(definitions)
+      println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
-      // If output directory specified, write to file
-      match output_dir {
-        Some(dir) => {
-          let module_name = get_module_name(file_path)
-          let mbt_file = dir + "/" + module_name + ".mbt"
-          let js_file = dir + "/" + module_name + ".js"
-          let write_mbt : Result[Unit, _] = try? @fs.write_string_to_file(
-            mbt_file, generated_code,
-          )
-          match write_mbt {
-            Ok(_) => println("✓ Written to: \{mbt_file}")
-            Err(e) => println("Error writing \{mbt_file}: \{e}")
-          }
-          let write_js : Result[Unit, _] = try? @fs.write_string_to_file(
-            js_file, glue_code,
-          )
-          match write_js {
-            Ok(_) => println("✓ Written to: \{js_file}")
-            Err(e) => println("Error writing \{js_file}: \{e}")
-          }
+      // Parse IDL to get list of definitions
+      let parsed : Result[_, _] = try? @webidl.parse_string(content)
+      match parsed {
+        Err(_) => {
+          println("Parse error: failed to parse IDL")
+          return
         }
-        None => {
-          // Print to stdout if no output directory
-          println(generated_code)
-          println("\n// === JavaScript Glue Code ===\n")
-          println(glue_code)
+        Ok(defs) => {
+          // Serialize AST definitions as JSON
+          let mut json_str = "["
+          let mut first = true
+          for def in defs {
+            if not(first) {
+              json_str = json_str + ","
+            }
+            first = false
+            let def_json = def.to_json()
+            json_str = json_str + def_json.to_string()
+          }
+          json_str = json_str + "]"
+          let json_text = json_str
+
+          // Determine output path
+          let base = basename_without_ext(file_path)
+          let out_dir : String = match output_dir {
+            Some(d) => d
+            None => "generated"
+          }
+          let out_path = out_dir + "/" + base + ".json"
+
+          // Ensure write
+          let write_res : Result[Unit, _] = try? @fs.write_string_to_file(out_path, json_text)
+          match write_res {
+            Ok(_) => println("✓ Written JSON: \{out_path}")
+            Err(_) => println("Error writing \{out_path}")
+          }
+          println("")
         }
       }
-      println("")
     }
     Err(e) => println("Error reading \{file_path}: \{e}")
   }
@@ -78,22 +79,20 @@ fn process_webidl_file(file_path : String, output_dir : String?) -> Unit {
 ///|
 /// Print help message
 fn print_help() -> Unit {
-  println("WebIDL to MoonBit Code Generator v0.1.0")
+  println("IDL → AST JSON Dumper v0.1.0")
   println("")
   println("Usage: moon run cmd/codegen [OPTIONS] [FILES]")
   println("")
   println("Options:")
   println("  --help, -h           Show this help message")
-  println(
-    "  --output, -o DIR     Output directory for generated files (default: stdout)",
-  )
+  println("  --output, -o DIR     Output directory for generated JSON files (default: generated/)")
   println("")
   println("Arguments:")
-  println("  FILES                WebIDL files to process")
+  println("  FILES                Web IDL (.idl) files to process")
   println("")
   println("Examples:")
-  println("  moon run cmd/codegen webidls/Window.webidl")
-  println("  moon run cmd/codegen --output generated/ webidls/*.webidl")
+  println("  moon run cmd/codegen webidls/Event.idl")
+  println("  moon run cmd/codegen --output generated/ webidls/*.idl")
 }
 
 ///|
@@ -140,19 +139,17 @@ fn main {
 
   // If no files specified, use default files from webidls/
   if files.length() == 0 {
-    println("WebIDL to MoonBit Code Generator v0.1.0")
-    println("Processing WebIDL definitions and generating MoonBit code\n")
+    println("IDL → AST JSON Dumper v0.1.0")
+    println("Parsing Web IDL and generating JSON\n")
     println("Note: No files specified. Using default webidls/ directory.")
-    println("Usage: moon run cmd/codegen [FILES] to process specific files")
+    println("Default: Event.idl, EventListener.idl, EventTarget.idl")
     println("")
-    process_webidl_file("webidls/EventTarget.webidl", output_dir)
-    process_webidl_file("webidls/Window.webidl", output_dir)
-    process_webidl_file("webidls/Document.webidl", output_dir)
-    process_webidl_file("webidls/Element.webidl", output_dir)
-    process_webidl_file("webidls/Node.webidl", output_dir)
+    process_idl_file("webidls/Event.idl", output_dir)
+    process_idl_file("webidls/EventListener.idl", output_dir)
+    process_idl_file("webidls/EventTarget.idl", output_dir)
   } else {
-    println("WebIDL to MoonBit Code Generator v0.1.0")
-    println("Processing WebIDL definitions and generating MoonBit code\n")
+    println("IDL → AST JSON Dumper v0.1.0")
+    println("Parsing Web IDL and generating JSON\n")
     match output_dir {
       Some(dir) => println("Output directory: \{dir}\n")
       None => ()
@@ -160,8 +157,8 @@ fn main {
 
     // Process each specified file
     for file_path in files {
-      process_webidl_file(file_path, output_dir)
+      process_idl_file(file_path, output_dir)
     }
   }
-  println("✓ Code generation complete")
+  println("✓ JSON generation complete")
 }
