@@ -18,7 +18,7 @@ fn basename_without_ext(path : String) -> String {
     }
   }
   // Safe for ASCII file paths
-  let view = try path[start: end] catch { _ => path[:] }
+  let view = path[start:end] catch { _ => path[:] }
   view.to_string()
 }
 
@@ -28,9 +28,13 @@ fn process_idl_file(file_path : String, output_dir : String?) -> Unit {
   let result : Result[String, _] = try? @fs.read_file_to_string(file_path)
   match result {
     Ok(content) => {
-      println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ")
+      println(
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ",
+      )
       println("Processing: \{file_path}")
-      println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+      println(
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      )
 
       // Parse IDL to get list of definitions
       let parsed : Result[_, _] = try? @webidl.parse_string(content)
@@ -49,7 +53,7 @@ fn process_idl_file(file_path : String, output_dir : String?) -> Unit {
             }
             first = false
             let def_json = def.to_json()
-            json_str = json_str + def_json.to_string()
+            json_str = json_str + def_json.stringify(indent=2)
           }
           json_str = json_str + "]"
           let json_text = json_str
@@ -63,7 +67,9 @@ fn process_idl_file(file_path : String, output_dir : String?) -> Unit {
           let out_path = out_dir + "/" + base + ".json"
 
           // Ensure write
-          let write_res : Result[Unit, _] = try? @fs.write_string_to_file(out_path, json_text)
+          let write_res : Result[Unit, _] = try? @fs.write_string_to_file(
+            out_path, json_text,
+          )
           match write_res {
             Ok(_) => println("✓ Written JSON: \{out_path}")
             Err(_) => println("Error writing \{out_path}")
@@ -85,7 +91,9 @@ fn print_help() -> Unit {
   println("")
   println("Options:")
   println("  --help, -h           Show this help message")
-  println("  --output, -o DIR     Output directory for generated JSON files (default: generated/)")
+  println(
+    "  --output, -o DIR     Output directory for generated JSON files (default: generated/)",
+  )
   println("")
   println("Arguments:")
   println("  FILES                Web IDL (.idl) files to process")

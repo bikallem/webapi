@@ -1,20 +1,9 @@
 {
   "is_main": true,
   "import": [
-    // "bikallem/webapi/generator",    
-    // "bikallem/webapi/idl_parser",
     "Yoorkin/webidl",
-    {
-      "path": "Yoorkin/webidl/syntax",
-      "alias": "webidl_syntax"
-    },
-    {
-      "path": "moonbitlang/x/fs",
-      "alias": "fs"
-    },
-    {
-      "path": "moonbitlang/x/sys",
-      "alias": "sys"
-    }
+    "Yoorkin/webidl/syntax",
+    "moonbitlang/x/fs",
+    "moonbitlang/x/sys"
   ]
 }
