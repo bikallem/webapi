@@ -350,13 +350,11 @@ pub fn Tokenizer::next_token(self : Tokenizer) -> Token {
 pub fn tokenize(source : String) -> Array[Token] {
   let tz = Tokenizer::new(source)
   let out : Array[Token] = []
-  while true {
-    let t = tz.next_token()
-    out.push(t)
-    match t {
-      Token::Eof => break
-      _ => ()
+  loop tz.next_token() {
+    Token::Eof => out
+    t => {
+      out.push(t)
+      continue tz.next_token()
     }
   }
-  out
 }
