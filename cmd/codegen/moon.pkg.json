@@ -1,9 +1,7 @@
 {
-  "is_main": true,
+  "is-main": true,
   "import": [
-    "Yoorkin/webidl",
-    "Yoorkin/webidl/syntax",
-    "moonbitlang/x/fs",
+    "bikallem/webapi/parser",
     "moonbitlang/x/sys"
   ]
 }

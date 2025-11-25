@@ -2,10 +2,7 @@
   "name": "bikallem/webapi",
   "version": "0.1.0",
   "deps": {
-    "moonbitlang/x": "0.4.36",
-    "Yoorkin/webidl": {
-      "path": "../webidl.mbt"
-    }
+    "moonbitlang/x": "0.4.36"
   },
   "readme": "README.mbt.md",
   "repository": "",

@@ -1,4 +1,0 @@
-// Extracted from DOM Standard (webref curated)
-callback interface EventListener {
-  undefined handleEvent(Event event);
-};

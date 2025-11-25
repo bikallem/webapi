@@ -1,0 +1,2851 @@
+[
+  {
+    "type": "interface",
+    "name": "UIEvent",
+    "inheritance": "Event",
+    "members": [
+      {
+        "type": "constructor",
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "eventInitDict",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "UIEventInit"
+            },
+            "default": {
+              "type": "dictionary"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": []
+      },
+      {
+        "type": "attribute",
+        "name": "view",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "Window"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "detail",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "UIEventInit",
+    "inheritance": "EventInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "view",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "Window"
+        },
+        "default": {
+          "type": "null"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "detail",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "interface",
+    "name": "FocusEvent",
+    "inheritance": "UIEvent",
+    "members": [
+      {
+        "type": "constructor",
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "eventInitDict",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "FocusEventInit"
+            },
+            "default": {
+              "type": "dictionary"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": []
+      },
+      {
+        "type": "attribute",
+        "name": "relatedTarget",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "EventTarget"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "FocusEventInit",
+    "inheritance": "UIEventInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "relatedTarget",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "EventTarget"
+        },
+        "default": {
+          "type": "null"
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "interface",
+    "name": "MouseEvent",
+    "inheritance": "UIEvent",
+    "members": [
+      {
+        "type": "constructor",
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "eventInitDict",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "MouseEventInit"
+            },
+            "default": {
+              "type": "dictionary"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": []
+      },
+      {
+        "type": "attribute",
+        "name": "screenX",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "screenY",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "clientX",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "clientY",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "layerX",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "layerY",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "ctrlKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "shiftKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "altKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "metaKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "button",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "short"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "buttons",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned short"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "relatedTarget",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "EventTarget"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "operation",
+        "name": "getModifierState",
+        "idlType": {
+          "type": "return-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "keyArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          }
+        ],
+        "extAttrs": [],
+        "special": ""
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "MouseEventInit",
+    "inheritance": "EventModifierInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "screenX",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "screenY",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "clientX",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "clientY",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "button",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "short"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "buttons",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned short"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "relatedTarget",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "EventTarget"
+        },
+        "default": {
+          "type": "null"
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "EventModifierInit",
+    "inheritance": "UIEventInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "ctrlKey",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "shiftKey",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "altKey",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "metaKey",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierAltGraph",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierCapsLock",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierFn",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierFnLock",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierHyper",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierNumLock",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierScrollLock",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierSuper",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierSymbol",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "modifierSymbolLock",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "interface",
+    "name": "WheelEvent",
+    "inheritance": "MouseEvent",
+    "members": [
+      {
+        "type": "constructor",
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "eventInitDict",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "WheelEventInit"
+            },
+            "default": {
+              "type": "dictionary"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": []
+      },
+      {
+        "type": "const",
+        "name": "DOM_DELTA_PIXEL",
+        "idlType": {
+          "type": "const-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "value": {
+          "type": "number",
+          "value": "0x00"
+        }
+      },
+      {
+        "type": "const",
+        "name": "DOM_DELTA_LINE",
+        "idlType": {
+          "type": "const-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "value": {
+          "type": "number",
+          "value": "0x01"
+        }
+      },
+      {
+        "type": "const",
+        "name": "DOM_DELTA_PAGE",
+        "idlType": {
+          "type": "const-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "value": {
+          "type": "number",
+          "value": "0x02"
+        }
+      },
+      {
+        "type": "attribute",
+        "name": "deltaX",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "double"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "deltaY",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "double"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "deltaZ",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "double"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "deltaMode",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "WheelEventInit",
+    "inheritance": "MouseEventInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "deltaX",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "double"
+        },
+        "default": {
+          "type": "number",
+          "value": "0.0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "deltaY",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "double"
+        },
+        "default": {
+          "type": "number",
+          "value": "0.0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "deltaZ",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "double"
+        },
+        "default": {
+          "type": "number",
+          "value": "0.0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "deltaMode",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "interface",
+    "name": "InputEvent",
+    "inheritance": "UIEvent",
+    "members": [
+      {
+        "type": "constructor",
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "eventInitDict",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "InputEventInit"
+            },
+            "default": {
+              "type": "dictionary"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": []
+      },
+      {
+        "type": "attribute",
+        "name": "data",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "USVString"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "isComposing",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "inputType",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "InputEventInit",
+    "inheritance": "UIEventInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "data",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": true,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "default": {
+          "type": "null"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "isComposing",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "inputType",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "default": {
+          "type": "string",
+          "value": ""
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "interface",
+    "name": "KeyboardEvent",
+    "inheritance": "UIEvent",
+    "members": [
+      {
+        "type": "constructor",
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "eventInitDict",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "KeyboardEventInit"
+            },
+            "default": {
+              "type": "dictionary"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": []
+      },
+      {
+        "type": "const",
+        "name": "DOM_KEY_LOCATION_STANDARD",
+        "idlType": {
+          "type": "const-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "value": {
+          "type": "number",
+          "value": "0x00"
+        }
+      },
+      {
+        "type": "const",
+        "name": "DOM_KEY_LOCATION_LEFT",
+        "idlType": {
+          "type": "const-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "value": {
+          "type": "number",
+          "value": "0x01"
+        }
+      },
+      {
+        "type": "const",
+        "name": "DOM_KEY_LOCATION_RIGHT",
+        "idlType": {
+          "type": "const-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "value": {
+          "type": "number",
+          "value": "0x02"
+        }
+      },
+      {
+        "type": "const",
+        "name": "DOM_KEY_LOCATION_NUMPAD",
+        "idlType": {
+          "type": "const-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "value": {
+          "type": "number",
+          "value": "0x03"
+        }
+      },
+      {
+        "type": "attribute",
+        "name": "key",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "code",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "location",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "ctrlKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "shiftKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "altKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "metaKey",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "repeat",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "isComposing",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "operation",
+        "name": "getModifierState",
+        "idlType": {
+          "type": "return-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "keyArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          }
+        ],
+        "extAttrs": [],
+        "special": ""
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "KeyboardEventInit",
+    "inheritance": "EventModifierInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "key",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "default": {
+          "type": "string",
+          "value": ""
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "code",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "default": {
+          "type": "string",
+          "value": ""
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "location",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "repeat",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "isComposing",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "boolean"
+        },
+        "default": {
+          "type": "boolean",
+          "value": false
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "interface",
+    "name": "CompositionEvent",
+    "inheritance": "UIEvent",
+    "members": [
+      {
+        "type": "constructor",
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "eventInitDict",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "CompositionEventInit"
+            },
+            "default": {
+              "type": "dictionary"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": []
+      },
+      {
+        "type": "attribute",
+        "name": "data",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "USVString"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  },
+  {
+    "type": "dictionary",
+    "name": "CompositionEventInit",
+    "inheritance": "UIEventInit",
+    "members": [
+      {
+        "type": "field",
+        "name": "data",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "default": {
+          "type": "string",
+          "value": ""
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": false
+  },
+  {
+    "type": "interface",
+    "name": "UIEvent",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "operation",
+        "name": "initUIEvent",
+        "idlType": {
+          "type": "return-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "undefined"
+        },
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "typeArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "bubblesArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "cancelableArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "viewArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": true,
+              "union": false,
+              "idlType": "Window"
+            },
+            "default": {
+              "type": "null"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "detailArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "long"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": [],
+        "special": ""
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "interface",
+    "name": "MouseEvent",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "operation",
+        "name": "initMouseEvent",
+        "idlType": {
+          "type": "return-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "undefined"
+        },
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "typeArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "bubblesArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "cancelableArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "viewArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": true,
+              "union": false,
+              "idlType": "Window"
+            },
+            "default": {
+              "type": "null"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "detailArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "long"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "screenXArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "long"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "screenYArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "long"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "clientXArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "long"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "clientYArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "long"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "ctrlKeyArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "altKeyArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "shiftKeyArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "metaKeyArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "buttonArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "short"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "relatedTargetArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": true,
+              "union": false,
+              "idlType": "EventTarget"
+            },
+            "default": {
+              "type": "null"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": [],
+        "special": ""
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "interface",
+    "name": "KeyboardEvent",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "operation",
+        "name": "initKeyboardEvent",
+        "idlType": {
+          "type": "return-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "undefined"
+        },
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "typeArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "bubblesArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "cancelableArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "viewArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": true,
+              "union": false,
+              "idlType": "Window"
+            },
+            "default": {
+              "type": "null"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "keyArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": {
+              "type": "string",
+              "value": ""
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "locationArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "unsigned long"
+            },
+            "default": {
+              "type": "number",
+              "value": "0"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "ctrlKey",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "altKey",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "shiftKey",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "metaKey",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": [],
+        "special": ""
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "interface",
+    "name": "CompositionEvent",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "operation",
+        "name": "initCompositionEvent",
+        "idlType": {
+          "type": "return-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "undefined"
+        },
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "typeArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "bubblesArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "cancelableArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "viewArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": true,
+              "union": false,
+              "idlType": "WindowProxy"
+            },
+            "default": {
+              "type": "null"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "dataArg",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": {
+              "type": "string",
+              "value": ""
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": [],
+        "special": ""
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "interface",
+    "name": "UIEvent",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "attribute",
+        "name": "which",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "dictionary",
+    "name": "UIEventInit",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "field",
+        "name": "which",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "interface",
+    "name": "KeyboardEvent",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "attribute",
+        "name": "charCode",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "attribute",
+        "name": "keyCode",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "dictionary",
+    "name": "KeyboardEventInit",
+    "inheritance": null,
+    "members": [
+      {
+        "type": "field",
+        "name": "charCode",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      },
+      {
+        "type": "field",
+        "name": "keyCode",
+        "extAttrs": [],
+        "idlType": {
+          "type": "dictionary-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "unsigned long"
+        },
+        "default": {
+          "type": "number",
+          "value": "0"
+        },
+        "required": false
+      }
+    ],
+    "extAttrs": [],
+    "partial": true
+  },
+  {
+    "type": "interface",
+    "name": "TextEvent",
+    "inheritance": "UIEvent",
+    "members": [
+      {
+        "type": "attribute",
+        "name": "data",
+        "idlType": {
+          "type": "attribute-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "DOMString"
+        },
+        "extAttrs": [],
+        "special": "",
+        "readonly": true
+      },
+      {
+        "type": "operation",
+        "name": "initTextEvent",
+        "idlType": {
+          "type": "return-type",
+          "extAttrs": [],
+          "generic": "",
+          "nullable": false,
+          "union": false,
+          "idlType": "undefined"
+        },
+        "arguments": [
+          {
+            "type": "argument",
+            "name": "type",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": null,
+            "optional": false,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "bubbles",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "cancelable",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "boolean"
+            },
+            "default": {
+              "type": "boolean",
+              "value": false
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "view",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": true,
+              "union": false,
+              "idlType": "Window"
+            },
+            "default": {
+              "type": "null"
+            },
+            "optional": true,
+            "variadic": false
+          },
+          {
+            "type": "argument",
+            "name": "data",
+            "extAttrs": [],
+            "idlType": {
+              "type": "argument-type",
+              "extAttrs": [],
+              "generic": "",
+              "nullable": false,
+              "union": false,
+              "idlType": "DOMString"
+            },
+            "default": {
+              "type": "string",
+              "value": "undefined"
+            },
+            "optional": true,
+            "variadic": false
+          }
+        ],
+        "extAttrs": [],
+        "special": ""
+      }
+    ],
+    "extAttrs": [
+      {
+        "type": "extended-attribute",
+        "name": "Exposed",
+        "rhs": {
+          "type": "identifier",
+          "value": "Window"
+        },
+        "arguments": []
+      }
+    ],
+    "partial": false
+  }
+]

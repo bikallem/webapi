@@ -3,4 +3,4 @@ target/
 .mooncakes/
 .moonagent/
 generated/
-node_modules/
+node_modules/idl_json/
