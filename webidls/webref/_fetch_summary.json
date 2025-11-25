@@ -1,0 +1,25 @@
+{
+  "total": 3,
+  "success": 3,
+  "failed": 0,
+  "files": [
+    {
+      "filename": "dom.idl",
+      "lines": 664,
+      "size": 22.6,
+      "status": "success"
+    },
+    {
+      "filename": "html.idl",
+      "lines": 3067,
+      "size": 101.1,
+      "status": "success"
+    },
+    {
+      "filename": "uievents.idl",
+      "lines": 238,
+      "size": 6.7,
+      "status": "success"
+    }
+  ]
+}

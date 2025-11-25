@@ -1,0 +1,13 @@
+{
+    "name": "moonbit-webapi-generator",
+    "version": "0.1.0",
+    "description": "DOM bindings generator for MoonBit using webref",
+    "type": "module",
+    "scripts": {
+        "fetch-webref": "node scripts/fetch_webref.mjs"
+    },
+    "dependencies": {
+        "@webref/idl": "^3.48.1"
+    },
+    "devDependencies": {}
+}
