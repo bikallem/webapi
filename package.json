@@ -4,7 +4,8 @@
     "type": "module",
     "scripts": {
         "fetch-webref": "node scripts/fetch_webref.mjs",
-        "parse-idl": "node scripts/parse_idl.mjs"
+        "parse-idl": "node scripts/parse_idl.mjs",
+        "generate-moonbit": "node scripts/generate_moonbit.mjs"
     },
     "dependencies": {
         "@webref/idl": "^3.48.1",
