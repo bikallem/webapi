@@ -101,6 +101,51 @@ function mapIdlType(idlType) {
 }
 
 /**
+ * Merge partial definitions into their base definitions
+ */
+function mergePartialDefinitions(definitions) {
+    // Create a map of base definitions by name
+    const baseDefinitions = new Map();
+    const partialDefinitions = [];
+    const otherDefinitions = [];
+
+    // Separate base, partial, and other definitions
+    for (const def of definitions) {
+        if (def.type === 'interface' || def.type === 'dictionary' || def.type === 'namespace') {
+            if (def.partial) {
+                partialDefinitions.push(def);
+            } else {
+                baseDefinitions.set(def.name, def);
+            }
+        } else {
+            otherDefinitions.push(def);
+        }
+    }
+
+    // Merge partials into their base definitions
+    for (const partial of partialDefinitions) {
+        const base = baseDefinitions.get(partial.name);
+        if (base) {
+            // Merge members
+            if (base.members && partial.members) {
+                base.members.push(...partial.members);
+            }
+
+            // Merge extended attributes
+            if (base.extAttrs && partial.extAttrs) {
+                base.extAttrs.push(...partial.extAttrs);
+            }
+        } else {
+            console.warn(`Warning: Partial ${partial.type} ${partial.name} has no base definition`);
+        }
+    }
+
+    // Return merged base definitions plus other definitions
+    return [...baseDefinitions.values(), ...otherDefinitions];
+}
+
+
+/**
  * Generate MoonBit code for an interface
  */
 function generateInterface(def) {
@@ -310,11 +355,15 @@ async function main() {
 
     console.log(`Loaded ${definitions.length} definitions`);
 
+    // Merge partial definitions
+    const mergedDefinitions = mergePartialDefinitions(definitions);
+    console.log(`Merged into ${mergedDefinitions.length} definitions (${definitions.length - mergedDefinitions.length} partials merged)`);
+
     // Create output directory
     await fs.mkdir(outputDir, { recursive: true });
 
     // For now, generate one file with Event and EventTarget
-    const eventDefs = definitions.filter(d =>
+    const eventDefs = mergedDefinitions.filter(d =>
         d.name === 'Event' ||
         d.name === 'EventInit' ||
         d.name === 'EventTarget'
