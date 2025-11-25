@@ -40,6 +40,33 @@ function escapeMoonbitKeyword(name) {
 }
 
 /**
+ * Get default value for optional parameter
+ */
+function getDefaultValue(idlType, defaultValue) {
+    // If explicit default is provided, use it
+    if (defaultValue !== undefined && defaultValue !== null) {
+        if (defaultValue.type === 'boolean') return defaultValue.value ? 'true' : 'false';
+        if (defaultValue.type === 'number') return String(defaultValue.value);
+        if (defaultValue.type === 'string') return `"${defaultValue.value}"`;
+        if (defaultValue.type === 'null') return 'None';
+    }
+
+    // Otherwise use type-based defaults
+    const typeName = Array.isArray(idlType.idlType)
+        ? idlType.idlType[0]?.idlType
+        : idlType.idlType;
+
+    if (typeName === 'boolean') return 'false';
+    if (typeName === 'DOMString' || typeName === 'USVString' || typeName === 'ByteString') return '""';
+    if (['long', 'short', 'byte', 'octet', 'unsigned short', 'unsigned long'].includes(typeName)) return '0';
+    if (['double', 'float'].includes(typeName)) return '0.0';
+
+    // For complex types, use None or a sensible default
+    return 'None';
+}
+
+
+/**
  * Map WebIDL type to MoonBit type
  */
 function mapIdlType(idlType) {
@@ -101,6 +128,59 @@ function mapIdlType(idlType) {
 }
 
 /**
+ * Map WebIDL type to MoonBit FFI type (simpler, uses JsValue for complex types)
+ */
+function mapIdlTypeForFFI(idlType) {
+    // For FFI, complex types must be JsValue
+    if (idlType.union || idlType.generic === 'sequence') {
+        return 'JsValue';
+    }
+
+    // For FFI, nullable is just the base type (handled at runtime)
+    if (idlType.nullable) {
+        return mapIdlTypeForFFI({ ...idlType, nullable: false });
+    }
+
+    const typeName = Array.isArray(idlType.idlType)
+        ? idlType.idlType[0]?.idlType || 'JsValue'
+        : idlType.idlType;
+
+    // Primitives and simple types stay the same
+    const primitives = {
+        'DOMString': 'String',
+        'USVString': 'String',
+        'ByteString': 'String',
+        'boolean': 'Bool',
+        'undefined': 'Unit',
+        'void': 'Unit',
+        'byte': 'Int',
+        'octet': 'Int',
+        'short': 'Int',
+        'unsigned short': 'Int',
+        'long': 'Int',
+        'unsigned long': 'Int',
+        'long long': 'Int64',
+        'unsigned long long': 'Int64',
+        'float': 'Double',
+        'double': 'Double',
+        'unrestricted float': 'Double',
+        'unrestricted double': 'Double',
+        'any': 'JsValue',
+        'object': 'JsValue',
+    };
+
+    // If it's a primitive, return it; otherwise it's a complex type -> JsValue
+    if (primitives[typeName]) {
+        return primitives[typeName];
+    }
+
+    // Custom types (like Event, EventTarget) can stay as-is in FFI
+    // but DOM collections/arrays must be JsValue
+    return typeName;
+}
+
+
+/**
  * Merge partial definitions into their base definitions
  */
 function mergePartialDefinitions(definitions) {
@@ -156,7 +236,16 @@ function generateInterface(def) {
     lines.push(`///| ${interfaceName} interface`);
     lines.push('');
 
-    // Generate trait with method signatures
+    // Generate external type first
+    lines.push('#external');
+    lines.push(`pub type ${interfaceName}`);
+    lines.push('');
+
+    // Generate TJsValue impl
+    lines.push(`pub impl TJsValue for ${interfaceName} with to_js(self : ${interfaceName}) -> JsValue = "%identity"`);
+    lines.push('');
+
+    // Generate trait with abstract method signatures
     lines.push(`pub trait ${traitName}: TJsValue {`);
 
     // Filter out constructors (they're not trait methods)
@@ -167,10 +256,10 @@ function generateInterface(def) {
             const attrName = escapeMoonbitKeyword(toSnakeCase(member.name));
             const returnType = member.idlType ? mapIdlType(member.idlType) : 'JsValue';
 
-            // Generate getter
+            // Generate getter (abstract)
             lines.push(`  ${attrName}(self : Self) -> ${returnType} = _`);
 
-            // Generate setter if not readonly
+            // Generate setter if not readonly (abstract)
             if (!member.readonly) {
                 lines.push(`  set_${attrName}(self : Self, value : ${returnType}) -> Unit = _`);
             }
@@ -187,27 +276,103 @@ function generateInterface(def) {
                 params.push(`${paramName}${optMarker} : ${paramType}`);
             }
 
+            // Generate abstract method
             lines.push(`  ${methodName}(${params.join(', ')}) -> ${returnType} = _`);
         } else if (member.type === 'const') {
-            // Constants - skip for now, we'll add these as static values later
+            // Constants - skip for now
         }
     }
 
     lines.push('}');
     lines.push('');
 
-    // Generate external type
-    lines.push('#external');
-    lines.push(`pub type ${interfaceName}`);
-    lines.push('');
-
-    // Generate TJsValue impl
-    lines.push(`pub impl TJsValue for ${interfaceName} with to_js(self : ${interfaceName}) -> JsValue = "%identity"`);
-    lines.push('');
-
-    // Generate trait impl
+    // Generate trait impl declaration
     lines.push(`pub impl ${traitName} for ${interfaceName}`);
     lines.push('');
+
+    // Generate FFI helper functions and trait implementations
+    for (const member of methods) {
+        if (member.type === 'attribute') {
+            const attrName = escapeMoonbitKeyword(toSnakeCase(member.name));
+            const returnType = member.idlType ? mapIdlType(member.idlType) : 'JsValue';
+            const ffiReturnType = member.idlType ? mapIdlTypeForFFI(member.idlType) : 'JsValue';
+            const ffiName = `${attrName}_ffi`;
+            const ffiModule = `webapi_${interfaceName}`;
+
+            // Generate FFI helper for getter (bare function taking JsValue)
+            lines.push(`fn ${ffiName}(obj : JsValue) -> ${ffiReturnType} = "${ffiModule}" "${member.name}"`);
+            lines.push('');
+
+            // Generate trait impl for getter - cast if needed
+            lines.push(`impl ${traitName} with ${attrName}(self : Self) -> ${returnType} {`);
+            if (ffiReturnType !== returnType) {
+                lines.push(`  ${ffiName}(self.to_js()) |> ${returnType}::from_js`);
+            } else {
+                lines.push(`  ${ffiName}(self.to_js())`);
+            }
+            lines.push('}');
+            lines.push('');
+
+            // Generate setter FFI and impl if not readonly
+            if (!member.readonly) {
+                const setterFfiName = `set_${attrName}_ffi`;
+                const ffiParamType = member.idlType ? mapIdlTypeForFFI(member.idlType) : 'JsValue';
+                lines.push(`fn ${setterFfiName}(obj : JsValue, value : ${ffiParamType}) -> Unit = "${ffiModule}" "set_${member.name}"`);
+                lines.push('');
+
+                lines.push(`impl ${traitName} with set_${attrName}(self : Self, value : ${returnType}) -> Unit {`);
+                if (ffiParamType !== returnType) {
+                    lines.push(`  ${setterFfiName}(self.to_js(), value.to_js())`);
+                } else {
+                    lines.push(`  ${setterFfiName}(self.to_js(), value)`);
+                }
+                lines.push('}');
+                lines.push('');
+            }
+        } else if (member.type === 'operation' && member.name) {
+            const methodName = escapeMoonbitKeyword(toSnakeCase(member.name));
+            const returnType = member.idlType ? mapIdlType(member.idlType) : 'Unit';
+            const ffiName = `${methodName}_ffi`;
+            const ffiModule = `webapi_${interfaceName}`;
+
+            // Generate FFI parameter list - NO optional markers (FFI can't have optional params)
+            const ffiParams = ['obj : JsValue'];
+            const callArgs = ['self.to_js()'];
+
+            for (const arg of member.arguments || []) {
+                const paramName = escapeMoonbitKeyword(toSnakeCase(arg.name));
+                const paramType = mapIdlType(arg.idlType);
+                // FFI params are always required
+                ffiParams.push(`${paramName} : ${paramType}`);
+
+                // When calling FFI, provide default for optional params
+                if (arg.optional) {
+                    const defaultValue = getDefaultValue(arg.idlType, arg.default);
+                    callArgs.push(`${paramName}.or(${defaultValue})`);
+                } else {
+                    callArgs.push(paramName);
+                }
+            }
+
+            // Generate FFI helper (bare function with all required params)
+            lines.push(`fn ${ffiName}(${ffiParams.join(', ')}) -> ${returnType} = "${ffiModule}" "${member.name}"`);
+            lines.push('');
+
+            // Generate trait impl with optional params
+            const implParams = ['self : Self'];
+            for (const arg of member.arguments || []) {
+                const paramName = escapeMoonbitKeyword(toSnakeCase(arg.name));
+                const paramType = mapIdlType(arg.idlType);
+                const optMarker = arg.optional ? '?' : '';
+                implParams.push(`${paramName}${optMarker} : ${paramType}`);
+            }
+
+            lines.push(`impl ${traitName} with ${methodName}(${implParams.join(', ')}) -> ${returnType} {`);
+            lines.push(`  ${ffiName}(${callArgs.join(', ')})`);
+            lines.push('}');
+            lines.push('');
+        }
+    }
 
     return lines.join('\n');
 }
