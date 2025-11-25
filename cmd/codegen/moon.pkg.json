@@ -1,7 +1,6 @@
 {
   "is-main": true,
   "import": [
-    "bikallem/webapi/parser",
     "moonbitlang/x/sys"
   ]
 }
