@@ -68,7 +68,7 @@ function getFilteredUnionMembers(unionType: ParsedType): ParsedType[] {
   if (unionType.type !== "union" || !unionType.memberTypes) {
     return [];
   }
-  
+
   return unionType.memberTypes.filter(memberType => {
     const moonbitType = getUnionMemberMoonbitType(memberType);
     return !SKIP_UNION_TYPES.has(moonbitType);
@@ -97,7 +97,7 @@ function emitUnionArgTrait(methodName: string, paramName: string, unionType: Par
   }
 
   const filteredMembers = getFilteredUnionMembers(unionType);
-  
+
   // If only one type remains after filtering, don't generate trait
   if (filteredMembers.length <= 1) {
     return "";
@@ -340,7 +340,7 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
       typeToCheck = typeToCheck.elementType;
     }
     const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
-    
+
     // Check if union collapses to single type
     const collapsedType = isUnionArg ? getCollapsedUnionType(typeToCheck) : undefined;
     const isCollapsedUnion = collapsedType !== undefined;
