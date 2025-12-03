@@ -1,0 +1,32 @@
+{
+    "name": "mbt-dom-gen",
+    "version": "0.1.0",
+    "description": "Generate MoonBit DOM bindings from Web IDL",
+    "type": "module",
+    "main": "dist/build.js",
+    "scripts": {
+        "build": "tsc",
+        "generate": "tsc && node dist/build.js",
+        "clean": "rm -rf dist output/*.mbt output/*.mjs"
+    },
+    "keywords": [
+        "moonbit",
+        "dom",
+        "webidl",
+        "codegen",
+        "ffi"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@webref/events": "^1.19.1",
+        "@webref/idl": "^3.49.0",
+        "webidl2": "^24.4.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "@types/webidl2": "^24.4.3",
+        "prettier": "^3.1.0",
+        "typescript": "^5.3.0"
+    }
+}
