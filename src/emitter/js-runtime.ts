@@ -13,7 +13,7 @@ import { toSnakeCase, toFfiModuleName } from "../utils.js";
  */
 function emitJsMethod(method: ParsedMethod): string {
   const paramNames = method.params.map((p, i) => p.name || `arg${i}`);
-  
+
   if (method.static) {
     const argsStr = paramNames.join(", ");
     return `    ${method.name}: (${argsStr}) => ${method.name}(${argsStr})`;
@@ -50,7 +50,7 @@ function emitJsPropertySetter(prop: ParsedProperty): string {
 function emitJsInterface(iface: ParsedInterface): string {
   const moduleName = toFfiModuleName(iface.name);
   const entries: string[] = [];
-  
+
   // Constructor
   if (iface.constructors.length > 0) {
     const firstCtor = iface.constructors[0];
@@ -58,13 +58,13 @@ function emitJsInterface(iface: ParsedInterface): string {
     const argsStr = paramNames.join(", ");
     entries.push(`    new: (${argsStr}) => new ${iface.name}(${argsStr})`);
   }
-  
+
   // Methods
   for (const method of iface.methods) {
     if (!method.name) continue;
     entries.push(emitJsMethod(method));
   }
-  
+
   // Properties
   for (const prop of iface.properties) {
     entries.push(emitJsPropertyGetter(prop));
@@ -72,11 +72,11 @@ function emitJsInterface(iface: ParsedInterface): string {
       entries.push(emitJsPropertySetter(prop));
     }
   }
-  
+
   if (entries.length === 0) {
     return "";
   }
-  
+
   return `  ${moduleName}: {
 ${entries.join(",\n")}
   }`;
@@ -87,17 +87,17 @@ ${entries.join(",\n")}
  */
 function emitJsDictionary(dict: ParsedDictionary): string {
   const moduleName = toFfiModuleName(dict.name);
-  
+
   if (dict.members.length === 0) {
     return `  ${moduleName}: {
     new: () => ({})
   }`;
   }
-  
+
   const paramNames = dict.members.map(m => m.name);
   const paramsStr = paramNames.join(", ");
   const objEntries = paramNames.map(n => `${n}: ${n} !== undefined ? ${n} : undefined`).join(", ");
-  
+
   return `  ${moduleName}: {
     new: (${paramsStr}) => {
       const obj = {};
@@ -112,7 +112,7 @@ function emitJsDictionary(dict: ParsedDictionary): string {
  */
 function emitJsCallback(callback: ParsedCallback): string {
   const moduleName = toFfiModuleName(callback.name);
-  
+
   return `  ${moduleName}: {
     new: (f) => f
   }`;
@@ -123,37 +123,37 @@ function emitJsCallback(callback: ParsedCallback): string {
  */
 export function emitJsRuntime(idl: ParsedIdl): string {
   const modules: string[] = [];
-  
+
   // Base modules
   modules.push(`  "moonbit:ffi": {
     make_closure: (funcref, closure) => funcref.bind(null, closure)
   }`);
-  
+
   modules.push(`  JsValue: {
     undefined: () => undefined,
     null: () => null,
     isNull: (value) => value === null || value === undefined
   }`);
-  
+
   modules.push(`  JsNull: {
     null: () => null
   }`);
-  
+
   modules.push(`  JsArray: {
     empty: () => [],
     push: (arr, value) => arr.push(value)
   }`);
-  
+
   modules.push(`  JsPromise: {
     await: (promise) => promise,
     resolve: (value) => Promise.resolve(value),
     reject: (error) => Promise.reject(error)
   }`);
-  
+
   modules.push(`  webapi_Dictionary: {
     empty: () => ({})
   }`);
-  
+
   // Globals
   modules.push(`  webapi_Globals: {
     document: () => document,
@@ -161,7 +161,7 @@ export function emitJsRuntime(idl: ParsedIdl): string {
     console: () => console,
     navigator: () => navigator
   }`);
-  
+
   // Console (commonly used)
   modules.push(`  webapi_Console: {
     log: (console, ...args) => console.log(...args),
@@ -170,7 +170,7 @@ export function emitJsRuntime(idl: ParsedIdl): string {
     info: (console, ...args) => console.info(...args),
     debug: (console, ...args) => console.debug(...args)
   }`);
-  
+
   // Interfaces
   for (const [name, iface] of idl.interfaces) {
     const moduleCode = emitJsInterface(iface);
@@ -178,17 +178,17 @@ export function emitJsRuntime(idl: ParsedIdl): string {
       modules.push(moduleCode);
     }
   }
-  
+
   // Dictionaries
   for (const [name, dict] of idl.dictionaries) {
     modules.push(emitJsDictionary(dict));
   }
-  
+
   // Callbacks
   for (const [name, callback] of idl.callbacks) {
     modules.push(emitJsCallback(callback));
   }
-  
+
   return `/**
  * Auto-generated JavaScript runtime for MoonBit DOM bindings
  * Do not edit manually
