@@ -1,7 +1,7 @@
-all: clean fmt build info
-
 build:
 	NEW_MOON=1 moon build --target js
+
+all: clean fmt build info
 
 fmt:
 	NEW_MOON=1 moon fmt
