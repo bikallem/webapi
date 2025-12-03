@@ -5,8 +5,8 @@
  */
 
 import type { ParsedDictionary, ParsedDictionaryMember } from "../types.js";
-import { 
-  toSnakeCase, 
+import {
+  toSnakeCase,
   escapeKeyword,
   toFfiModuleName,
   formatIdlSourceAsComment,
@@ -36,21 +36,21 @@ pub impl TJsValue for ${dict.name} with to_js(self : ${dict.name}) -> JsValue = 
 function emitDictionaryFfi(dict: ParsedDictionary): string {
   const moduleName = toFfiModuleName(dict.name);
   const ffiName = `${toSnakeCase(dict.name)}_ffi`;
-  
+
   // All dictionary fields go as JsValue params
   const params: string[] = [];
   for (const member of dict.members) {
     const paramName = escapeKeyword(toSnakeCase(member.name));
     params.push(`${paramName} : JsValue`);
   }
-  
+
   const paramsStr = params.join(", ");
-  
+
   if (params.length === 0) {
     return `///|
 fn ${ffiName}() -> ${dict.name} = "${moduleName}" "new"`;
   }
-  
+
   return `///|
 fn ${ffiName}(${paramsStr}) -> ${dict.name} = "${moduleName}" "new"`;
 }
@@ -70,23 +70,23 @@ function toJsConversion(paramName: string, isRequired: boolean, mapped: { needsC
  */
 function emitDictionaryBuilder(dict: ParsedDictionary): string {
   const ffiName = `${toSnakeCase(dict.name)}_ffi`;
-  
+
   if (dict.members.length === 0) {
     return `///|
 pub fn ${dict.name}::new() -> ${dict.name} {
   ${ffiName}()
-}`;  
+}`;
   }
-  
+
   // Build parameter list with optional params and defaults
   const params: string[] = [];
   // Track which params are truly optional (Option type) vs have defaults
   const memberInfo: { name: string; isOption: boolean; needsConversion: boolean }[] = [];
-  
+
   for (const member of dict.members) {
     const paramName = escapeKeyword(toSnakeCase(member.name));
     const mapped = mapIdlType(member.type);
-    
+
     if (member.required) {
       params.push(`${paramName} : ${mapped.moonbitType}`);
       memberInfo.push({ name: paramName, isOption: false, needsConversion: mapped.needsConversion });
@@ -104,16 +104,16 @@ pub fn ${dict.name}::new() -> ${dict.name} {
       }
     }
   }
-  
+
   const paramsStr = params.join(",\n  ");
-  
+
   // Build FFI call arguments with conversions
   const letBindings: string[] = [];
   const args: string[] = [];
-  
+
   for (const info of memberInfo) {
     const paramName = info.name;
-    
+
     if (info.isOption) {
       // Truly optional - use opt_to_js
       const jsVarName = `${paramName}_js`;
@@ -128,10 +128,10 @@ pub fn ${dict.name}::new() -> ${dict.name} {
       }
     }
   }
-  
+
   const argsStr = args.join(", ");
   const bindingsStr = letBindings.length > 0 ? letBindings.join("\n") + "\n" : "";
-  
+
   return `///|
 pub fn ${dict.name}::new(
   ${paramsStr}
@@ -153,30 +153,30 @@ pub fn ${dict.name}::empty() -> ${dict.name} = "webapi_Dictionary" "empty"`;
  */
 export function emitDictionary(dict: ParsedDictionary): string {
   const parts: string[] = [];
-  
+
   // Header
   parts.push(`// Auto-generated MoonBit bindings for ${dict.name} dictionary`);
   parts.push(`// Do not edit manually`);
-  
+
   // Include WebIDL source as comment
   const idlComment = formatIdlSourceAsComment(dict.idlSource);
   if (idlComment) {
     parts.push(`//\n// WebIDL Dictionary:\n${idlComment}`);
   }
-  
+
   // Type and impl
   parts.push(emitDictionaryType(dict));
   parts.push(emitTJsValueImpl(dict));
-  
+
   // FFI and builder
   if (dict.members.length > 0) {
     parts.push(emitDictionaryFfi(dict));
     parts.push(emitDictionaryBuilder(dict));
   }
-  
+
   // Default constructor
   parts.push(emitEmptyDictionary(dict));
-  
+
   return parts.join("\n\n");
 }
 
