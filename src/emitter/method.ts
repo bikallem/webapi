@@ -34,9 +34,9 @@ export function emitTraitMethodSignature(method: ParsedMethod): string {
     const mapped = mapIdlType(param.type);
     const paramName = escapeKeyword(toSnakeCase(param.name));
     
-    // Optional params use T? type, required use T
+    // Optional params use paramName? : Type syntax
     if (param.optional) {
-      params.push(`${paramName} : ${mapped.moonbitType}?`);
+      params.push(`${paramName}? : ${mapped.moonbitType}`);
     } else {
       params.push(`${paramName} : ${mapped.moonbitType}`);
     }
@@ -104,8 +104,9 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod): stri
     const mapped = mapIdlType(param.type);
     const paramName = escapeKeyword(toSnakeCase(param.name));
     
+    // Optional params use paramName? : Type syntax
     if (param.optional) {
-      params.push(`${paramName} : ${mapped.moonbitType}?`);
+      params.push(`${paramName}? : ${mapped.moonbitType}`);
     } else {
       params.push(`${paramName} : ${mapped.moonbitType}`);
     }
