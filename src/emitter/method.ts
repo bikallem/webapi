@@ -4,7 +4,7 @@
  * Generates MoonBit FFI functions and trait method signatures for Web IDL methods.
  */
 
-import type { ParsedInterface, ParsedMethod } from "../types.js";
+import type { ParsedInterface, ParsedMethod, ParsedType } from "../types.js";
 import {
   toSnakeCase,
   escapeKeyword,
@@ -18,6 +18,86 @@ import { mapIdlType, formatReturnType, getDefaultValueExpr } from "../mapping.js
  */
 function getFfiName(interfaceName: string, methodName: string): string {
   return `${toSnakeCase(interfaceName)}_${toSnakeCase(methodName)}_ffi`;
+}
+
+/**
+ * Generate union argument trait name
+ * e.g., addEventListener + options -> TAddEventListenerOptionsArg
+ */
+function getUnionArgTraitName(methodName: string, paramName: string): string {
+  // Capitalize first letter of method name (already in camelCase/PascalCase)
+  const methodCapitalized = methodName.charAt(0).toUpperCase() + methodName.slice(1);
+  // Capitalize first letter of param name
+  const paramCapitalized = paramName.charAt(0).toUpperCase() + paramName.slice(1);
+  return `T${methodCapitalized}${paramCapitalized}Arg`;
+}
+
+/**
+ * Map a union member type to its MoonBit type name
+ */
+function getUnionMemberMoonbitType(memberType: ParsedType): string {
+  switch (memberType.type) {
+    case "primitive":
+      if (memberType.name === "boolean") return "Bool";
+      if (memberType.name === "DOMString" || memberType.name === "USVString" || memberType.name === "ByteString") return "String";
+      if (memberType.name === "long" || memberType.name === "short" || memberType.name === "unsigned long" || memberType.name === "unsigned short") return "Int";
+      if (memberType.name === "double" || memberType.name === "float") return "Double";
+      return "JsValue";
+    case "reference":
+      return memberType.name || "JsValue";
+    default:
+      return "JsValue";
+  }
+}
+
+/**
+ * Emit union argument trait definition and implementations
+ */
+function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType): string {
+  if (unionType.type !== "union" || !unionType.memberTypes) {
+    return "";
+  }
+
+  const traitName = getUnionArgTraitName(methodName, paramName);
+  const parts: string[] = [];
+
+  // Emit trait definition
+  parts.push(`/// Arg : ${paramName}
+pub(open) trait ${traitName} {
+  to_js(self : Self) -> JsValue
+}`);
+
+  // Emit impl for each member type
+  for (const memberType of unionType.memberTypes) {
+    const moonbitType = getUnionMemberMoonbitType(memberType);
+
+    parts.push(`///|
+pub impl ${traitName} for ${moonbitType} with to_js(self : ${moonbitType}) -> JsValue = "%identity"`);
+  }
+
+  return parts.join("\n\n");
+}
+
+/**
+ * Collect all union argument types from a method
+ */
+function collectUnionArgs(method: ParsedMethod): Array<{ paramName: string; unionType: ParsedType }> {
+  const unionArgs: Array<{ paramName: string; unionType: ParsedType }> = [];
+
+  for (const param of method.params) {
+    let typeToCheck = param.type;
+
+    // Unwrap nullable to check for union inside
+    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
+      typeToCheck = typeToCheck.elementType;
+    }
+
+    if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
+      unionArgs.push({ paramName: param.name, unionType: typeToCheck });
+    }
+  }
+
+  return unionArgs;
 }
 
 /**
@@ -256,6 +336,15 @@ export function emitMethods(iface: ParsedInterface): string {
 
   for (const method of iface.methods) {
     if (!method.name) continue;
+
+    // Emit union argument traits first
+    const unionArgs = collectUnionArgs(method);
+    for (const { paramName, unionType } of unionArgs) {
+      const unionTrait = emitUnionArgTrait(method.name, paramName, unionType);
+      if (unionTrait) {
+        parts.push(unionTrait);
+      }
+    }
 
     if (method.static) {
       parts.push(emitStaticMethod(iface, method));
