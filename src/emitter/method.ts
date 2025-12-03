@@ -114,11 +114,26 @@ export function emitTraitMethodSignature(method: ParsedMethod): string {
     const mapped = mapIdlType(param.type);
     const paramName = escapeKeyword(toSnakeCase(param.name));
 
+    // Check if this is a union type (possibly wrapped in nullable)
+    let typeToCheck = param.type;
+    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
+      typeToCheck = typeToCheck.elementType;
+    }
+
+    let paramType: string;
+    if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
+      // Use trait object type for union arguments
+      const traitName = getUnionArgTraitName(method.name, param.name);
+      paramType = `&${traitName}`;
+    } else {
+      paramType = mapped.moonbitType;
+    }
+
     // Optional params use paramName? : Type syntax
     if (param.optional) {
-      params.push(`${paramName}? : ${mapped.moonbitType}`);
+      params.push(`${paramName}? : ${paramType}`);
     } else {
-      params.push(`${paramName} : ${mapped.moonbitType}`);
+      params.push(`${paramName} : ${paramType}`);
     }
   }
 
@@ -184,11 +199,26 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod): stri
     const mapped = mapIdlType(param.type);
     const paramName = escapeKeyword(toSnakeCase(param.name));
 
+    // Check if this is a union type (possibly wrapped in nullable)
+    let typeToCheck = param.type;
+    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
+      typeToCheck = typeToCheck.elementType;
+    }
+
+    let paramType: string;
+    if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
+      // Use trait object type for union arguments
+      const unionTraitName = getUnionArgTraitName(method.name, param.name);
+      paramType = `&${unionTraitName}`;
+    } else {
+      paramType = mapped.moonbitType;
+    }
+
     // Optional params use paramName? : Type syntax
     if (param.optional) {
-      params.push(`${paramName}? : ${mapped.moonbitType}`);
+      params.push(`${paramName}? : ${paramType}`);
     } else {
-      params.push(`${paramName} : ${mapped.moonbitType}`);
+      params.push(`${paramName} : ${paramType}`);
     }
   }
 
@@ -202,18 +232,36 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod): stri
 
   for (const param of method.params) {
     const paramName = escapeKeyword(toSnakeCase(param.name));
+
+    // Check if this is a union type
+    let typeToCheck = param.type;
+    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
+      typeToCheck = typeToCheck.elementType;
+    }
+    const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
+
     if (param.optional) {
       // Convert Option[T] to JsValue using opt_to_js
       const jsVarName = `${paramName}_js`;
-      letBindings.push(`  let ${jsVarName} = opt_to_js(${paramName})`);
+      if (isUnionArg) {
+        // For union trait objects, use match to call to_js on the trait object
+        letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`);
+      } else {
+        letBindings.push(`  let ${jsVarName} = opt_to_js(${paramName})`);
+      }
       args.push(jsVarName);
     } else {
-      // Convert required params using TJsValue::to_js()
-      const mapped = mapIdlType(param.type);
-      if (mapped.needsConversion) {
-        args.push(`TJsValue::to_js(${paramName})`);
+      if (isUnionArg) {
+        // Union trait objects have their own to_js method
+        args.push(`${paramName}.to_js()`);
       } else {
-        args.push(paramName);
+        // Convert required params using TJsValue::to_js()
+        const mapped = mapIdlType(param.type);
+        if (mapped.needsConversion) {
+          args.push(`TJsValue::to_js(${paramName})`);
+        } else {
+          args.push(paramName);
+        }
       }
     }
   }
