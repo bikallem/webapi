@@ -317,13 +317,14 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
   const bindingsStr = letBindings.length > 0 ? "\n" + letBindings.join("\n") : "";
 
   // For reference types, we need type conversion
+  // FFI functions always return JsValue, so any non-Unit return needs casting
   let returnExpr = `${ffiName}(${argsStr})`;
   if (returnType !== "Unit") {
     if (returnMapped.isOptional) {
       // Use as_option for nullable returns
       returnExpr = `${returnExpr}.as_option()`;
-    } else if (returnMapped.needsConversion) {
-      // Use unsafe_cast for type conversion
+    } else {
+      // Use unsafe_cast for type conversion (all non-Unit FFI returns are JsValue)
       returnExpr = `${returnExpr}.unsafe_cast()`;
     }
   }
