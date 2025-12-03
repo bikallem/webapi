@@ -12,11 +12,6 @@
 pub type JsValue
 
 ///|
-/// Opaque type representing JavaScript null
-#external
-pub type JsNull
-
-///|
 /// Opaque type representing a JavaScript Promise
 #external
 pub type JsPromise[T]
@@ -40,17 +35,13 @@ pub trait TJsValue {
 pub fn JsValue::undefined() -> JsValue = "JsValue" "undefined"
 
 ///|
-/// Get JavaScript null value  
-pub fn JsValue::null() -> JsValue = "JsValue" "null"
-
-// ============================================================================
-// JsNull FFI Functions
-// ============================================================================
+fn js_null_ffi() -> JsValue = "JsValue" "null"
 
 ///|
-/// Get JavaScript null as JsNull type
-#as_free_fn
-pub fn JsNull::null() -> JsNull = "JsNull" "null"
+/// Get JavaScript null value  
+pub fn[T] JsValue::null() -> T {
+  js_null_ffi().unsafe_cast()
+}
 
 // ============================================================================
 // Primitive Type Implementations

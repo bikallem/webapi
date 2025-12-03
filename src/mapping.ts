@@ -13,7 +13,7 @@ import { escapeKeyword, toSnakeCase } from "./utils.js";
 const PRIMITIVE_TYPE_MAP: Record<string, string> = {
   // Boolean
   boolean: "Bool",
-  
+
   // Integer types
   byte: "Int",
   octet: "Int",
@@ -24,18 +24,18 @@ const PRIMITIVE_TYPE_MAP: Record<string, string> = {
   "long long": "Int64",
   "unsigned long long": "Int64",
   bigint: "Int64",
-  
+
   // Floating point types
   float: "Double",
   "unrestricted float": "Double",
   double: "Double",
   "unrestricted double": "Double",
-  
+
   // String types
   DOMString: "String",
   USVString: "String",
   ByteString: "String",
-  
+
   // Special types
   object: "JsValue",
   any: "JsValue",
@@ -108,8 +108,8 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
         return { moonbitType: "Unit", needsConversion: false, isOptional: false };
       }
       const primitiveType = PRIMITIVE_TYPE_MAP[name] || "JsValue";
-      return { 
-        moonbitType: primitiveType, 
+      return {
+        moonbitType: primitiveType,
         needsConversion: primitiveType !== "JsValue",
         isOptional: false,
       };
@@ -117,7 +117,7 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
 
     case "reference": {
       const name = idlType.name!;
-      
+
       // Handle EventListener specially - it's a callback
       if (name === "EventListener") {
         return {
@@ -126,18 +126,18 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           isOptional: false,
         };
       }
-      
+
       // Handle EventHandler and similar typedefs (callbacks that are nullable)
-      if (name === "EventHandler" || name === "OnErrorEventHandler" || 
-          name === "OnBeforeUnloadEventHandler" ||
-          name.endsWith("Callback") || name.endsWith("Handler")) {
+      if (name === "EventHandler" || name === "OnErrorEventHandler" ||
+        name === "OnBeforeUnloadEventHandler" ||
+        name.endsWith("Callback") || name.endsWith("Handler")) {
         return {
           moonbitType: "JsValue",
           needsConversion: false,
           isOptional: false,
         };
       }
-      
+
       // Handle DOMHighResTimeStamp (typedef for double)
       if (name === "DOMHighResTimeStamp" || name === "EpochTimeStamp") {
         return {
@@ -146,7 +146,7 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           isOptional: false,
         };
       }
-      
+
       // Handle WindowProxy which is basically Window
       if (name === "WindowProxy") {
         return {
@@ -155,7 +155,7 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           isOptional: false,
         };
       }
-      
+
       // For unknown types, use JsValue as fallback
       if (!isKnownInterface(name)) {
         return {
@@ -164,7 +164,7 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           isOptional: false,
         };
       }
-      
+
       // Reference to a known interface
       return {
         moonbitType: name,
@@ -241,7 +241,7 @@ export function getDefaultValueExpr(
   if (!defaultValue) return undefined;
 
   const mapped = mapIdlType(idlType);
-  
+
   // If the MoonBit type is JsValue, we can't use typed defaults
   // since we can't assign String/Bool/etc to JsValue directly
   if (mapped.moonbitType === "JsValue") {
@@ -250,7 +250,7 @@ export function getDefaultValueExpr(
 
   switch (defaultValue) {
     case "null":
-      return "None";
+      return "JsValue::null()";
     case "true":
       return "true";
     case "false":
@@ -332,9 +332,9 @@ export function formatParam(
 ): string {
   const mapped = mapIdlType(type);
   const safeName = escapeKeyword(toSnakeCase(name));
-  
+
   let typeStr = mapped.moonbitType;
-  
+
   if (optional || mapped.isOptional) {
     if (defaultValue) {
       const defaultExpr = getDefaultValueExpr(defaultValue, type);
@@ -344,7 +344,7 @@ export function formatParam(
     }
     return `${safeName}? : ${typeStr}`;
   }
-  
+
   return `${safeName} : ${typeStr}`;
 }
 
@@ -353,15 +353,15 @@ export function formatParam(
  */
 export function formatReturnType(type: ParsedType): string {
   const mapped = mapIdlType(type);
-  
+
   if (mapped.moonbitType === "Unit") {
     return "Unit";
   }
-  
+
   if (mapped.isOptional) {
     return `${mapped.moonbitType}?`;
   }
-  
+
   return mapped.moonbitType;
 }
 

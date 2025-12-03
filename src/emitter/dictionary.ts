@@ -122,7 +122,7 @@ pub fn ${dict.name}::new() -> ${dict.name} {
     } else {
       // Required or has default - convert directly
       if (info.needsConversion) {
-        args.push(`${paramName}.to_js()`);
+        args.push(`TJsValue::to_js(${paramName})`);
       } else {
         args.push(paramName);
       }
