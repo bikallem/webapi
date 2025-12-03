@@ -65,9 +65,6 @@ pub impl TJsValue for String with to_js(self : String) -> JsValue = "%identity"
 ///|
 pub impl TJsValue for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
 
-///|
-pub impl TJsValue for JsNull with to_js(self : JsNull) -> JsValue = "%identity"
-
 // ============================================================================
 // Array Support
 // ============================================================================
