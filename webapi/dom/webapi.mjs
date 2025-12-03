@@ -480,10 +480,6 @@ export const wasmImportObject = {
     dispatchEvent: (obj, event) => obj.dispatchEvent(event)
   },
 
-  webapi_EventListener: {
-    handleEvent: (obj, event) => obj.handleEvent(event)
-  },
-
   webapi_AbortController: {
     new: () => new AbortController(),
     abort: (obj, reason) => obj.abort(reason),

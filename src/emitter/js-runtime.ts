@@ -119,6 +119,17 @@ function emitJsCallback(callback: ParsedCallback): string {
 }
 
 /**
+ * Emit callback interface module for JS runtime
+ */
+function emitJsCallbackInterface(iface: ParsedInterface): string {
+  const moduleName = toFfiModuleName(iface.name);
+
+  return `  ${moduleName}: {
+    new: (f) => f
+  }`;
+}
+
+/**
  * Emit the complete JS runtime file
  */
 export function emitJsRuntime(idl: ParsedIdl): string {
@@ -173,6 +184,11 @@ export function emitJsRuntime(idl: ParsedIdl): string {
 
   // Interfaces
   for (const [name, iface] of idl.interfaces) {
+    // Callback interfaces get a simple constructor like callbacks
+    if (iface.isCallbackInterface) {
+      modules.push(emitJsCallbackInterface(iface));
+      continue;
+    }
     const moduleCode = emitJsInterface(iface);
     if (moduleCode) {
       modules.push(moduleCode);

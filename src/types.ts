@@ -53,6 +53,7 @@ export interface ParsedInterface {
   constants: ParsedConstant[];
   constructors: ParsedConstructor[];
   partial: boolean;
+  isCallbackInterface?: boolean; // True if this is a callback interface
   idlSource?: string; // Original WebIDL source text
 }
 

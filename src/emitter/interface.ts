@@ -14,6 +14,7 @@ import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
 import { getAllTraitAncestors } from "../widlprocess.js";
+import { mapIdlType, formatReturnType } from "../mapping.js";
 
 /**
  * Emit the external type declaration
@@ -127,6 +128,44 @@ function emitTraitImpl(
 }
 
 /**
+ * Emit constructor for callback interface
+ * Callback interfaces have a single method that defines their signature
+ */
+function emitCallbackInterfaceConstructor(iface: ParsedInterface): string | undefined {
+  if (!iface.isCallbackInterface) return undefined;
+
+  // Find the callback method (usually there's just one)
+  const method = iface.methods[0];
+  if (!method) return undefined;
+
+  const ffiName = `${toSnakeCase(iface.name)}_new_ffi`;
+  const moduleName = `webapi_${iface.name}`;
+
+  // Build the function signature for the callback
+  const paramTypes: string[] = [];
+  for (const param of method.params) {
+    const mapped = mapIdlType(param.type);
+    paramTypes.push(mapped.moonbitType);
+  }
+
+  const returnType = formatReturnType(method.returnType);
+  const closureParamStr = paramTypes.join(", ");
+  const closureType = `(${closureParamStr}) -> ${returnType}`;
+
+  // FFI function
+  const ffiFn = `///|
+fn ${ffiName}(f : JsValue) -> ${iface.name} = "${moduleName}" "new"`;
+
+  // Wrapper
+  const wrapperFn = `///|
+pub fn ${iface.name}::new(f : ${closureType}) -> ${iface.name} {
+  ${ffiName}(fn_to_js(f))
+}`;
+
+  return `${ffiFn}\n\n${wrapperFn}`;
+}
+
+/**
  * Emit complete MoonBit file for an interface
  */
 export function emitInterface(
@@ -161,6 +200,12 @@ export function emitInterface(
   const constructorCode = emitConstructors(iface);
   if (constructorCode) {
     parts.push(constructorCode);
+  }
+
+  // Callback interface constructor
+  const callbackConstructor = emitCallbackInterfaceConstructor(iface);
+  if (callbackConstructor) {
+    parts.push(callbackConstructor);
   }
 
   // FFI functions for methods

@@ -356,8 +356,9 @@ export function parseIdl(idlText: string): ParsedIdl {
         break;
 
       case "callback interface":
-        // Treat callback interface similar to regular interface
+        // Treat callback interface similar to regular interface but mark it
         const cbIface = parseInterface(def as unknown as webidl2.InterfaceType);
+        cbIface.isCallbackInterface = true;
         result.interfaces.set(cbIface.name, cbIface);
         break;
 

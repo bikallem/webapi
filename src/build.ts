@@ -63,7 +63,7 @@ const CORE_INTERFACES = new Set([
   "EventTarget",
   "Event",
   "CustomEvent",
-  "EventListener",
+  // EventListener is manually defined in base.mbt
 
   // Node hierarchy
   "Node",
