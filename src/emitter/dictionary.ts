@@ -66,17 +66,16 @@ function toJsConversion(paramName: string, isRequired: boolean, mapped: { needsC
 }
 
 /**
- * Emit the public builder function with optional parameters
+ * Emit the public constructor method with optional parameters
  */
 function emitDictionaryBuilder(dict: ParsedDictionary): string {
-  const funcName = toSnakeCase(dict.name);
-  const ffiName = `${funcName}_ffi`;
+  const ffiName = `${toSnakeCase(dict.name)}_ffi`;
   
   if (dict.members.length === 0) {
     return `///|
-pub fn ${funcName}() -> ${dict.name} {
+pub fn ${dict.name}::new() -> ${dict.name} {
   ${ffiName}()
-}`;
+}`;  
   }
   
   // Build parameter list with optional params and defaults
@@ -134,7 +133,7 @@ pub fn ${funcName}() -> ${dict.name} {
   const bindingsStr = letBindings.length > 0 ? letBindings.join("\n") + "\n" : "";
   
   return `///|
-pub fn ${funcName}(
+pub fn ${dict.name}::new(
   ${paramsStr}
 ) -> ${dict.name} {
 ${bindingsStr}  ${ffiName}(${argsStr})
@@ -142,13 +141,11 @@ ${bindingsStr}  ${ffiName}(${argsStr})
 }
 
 /**
- * Emit default dictionary function
+ * Emit empty dictionary constructor
  */
-function emitDefaultDictionary(dict: ParsedDictionary): string {
-  const funcName = `default_${toSnakeCase(dict.name)}`;
-  
+function emitEmptyDictionary(dict: ParsedDictionary): string {
   return `///|
-pub fn ${funcName}() -> ${dict.name} = "webapi_Dictionary" "empty"`;
+pub fn ${dict.name}::empty() -> ${dict.name} = "webapi_Dictionary" "empty"`;
 }
 
 /**
@@ -178,7 +175,7 @@ export function emitDictionary(dict: ParsedDictionary): string {
   }
   
   // Default constructor
-  parts.push(emitDefaultDictionary(dict));
+  parts.push(emitEmptyDictionary(dict));
   
   return parts.join("\n\n");
 }
