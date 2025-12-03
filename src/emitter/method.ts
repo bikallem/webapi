@@ -104,8 +104,8 @@ function collectUnionArgs(method: ParsedMethod): Array<{ paramName: string; unio
  * Emit trait method signature with = _
  * All parameters are required (no defaults) because it's a trait signature
  */
-export function emitTraitMethodSignature(method: ParsedMethod): string {
-  const methodName = toSnakeCase(method.name);
+export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = ""): string {
+  const methodName = toSnakeCase(method.name) + suffix;
 
   // Build parameter list - self first, then all params with optional wrapped in ?
   const params: string[] = ["self : Self"];
@@ -148,10 +148,14 @@ export function emitTraitMethodSignature(method: ParsedMethod): string {
  */
 export function emitTraitMethods(iface: ParsedInterface): string[] {
   const signatures: string[] = [];
+  const methodNameCounts: Map<string, number> = new Map();
 
   for (const method of iface.methods) {
     if (!method.static && method.name) {
-      signatures.push(emitTraitMethodSignature(method));
+      const count = methodNameCounts.get(method.name) || 0;
+      methodNameCounts.set(method.name, count + 1);
+      const suffix = count === 0 ? "" : String(count + 1);
+      signatures.push(emitTraitMethodSignature(method, suffix));
     }
   }
 
@@ -161,8 +165,8 @@ export function emitTraitMethods(iface: ParsedInterface): string[] {
 /**
  * Emit FFI function declaration for a method
  */
-function emitMethodFfi(iface: ParsedInterface, method: ParsedMethod): string {
-  const ffiName = getFfiName(iface.name, method.name);
+function emitMethodFfi(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
+  const ffiName = getFfiName(iface.name, method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
   const jsFuncName = method.name;
 
@@ -207,9 +211,9 @@ function getUnionDefaultDictType(unionType: ParsedType): string | undefined {
  * Emit trait method implementation
  * No defaults in impl - all params are required, optional ones are T?
  */
-function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod): string {
-  const methodName = toSnakeCase(method.name);
-  const ffiName = getFfiName(iface.name, method.name);
+function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
+  const methodName = toSnakeCase(method.name) + suffix;
+  const ffiName = getFfiName(iface.name, method.name) + suffix;
   const traitName = toTraitName(iface.name);
 
   // Build parameter list - same as trait signature
@@ -334,8 +338,8 @@ impl ${traitName} with ${methodName}(${paramsStr}) -> ${returnType} {${bindingsS
  * Emit static method as a type method (X::method_name)
  * Static methods can have default values in their wrapper functions
  */
-function emitStaticMethod(iface: ParsedInterface, method: ParsedMethod): string {
-  const methodName = toSnakeCase(method.name);
+function emitStaticMethod(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
+  const methodName = toSnakeCase(method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
   const jsFuncName = method.name;
 
@@ -367,7 +371,7 @@ pub fn ${iface.name}::${methodName}(${paramsStr}) -> ${returnType} = "${moduleNa
     ffiParams.push(`${safeName} : JsValue`);
   }
   const ffiParamsStr = ffiParams.join(", ");
-  const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(method.name)}_ffi`;
+  const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(method.name)}_ffi${suffix}`;
 
   const returnMapped = mapIdlType(method.returnType);
   const returnType = returnMapped.moonbitType === "Unit" ? "Unit" : "JsValue";
@@ -425,24 +429,34 @@ pub fn ${iface.name}::${methodName}(${wrapperParamsStr}) -> ${returnType} {${bin
 export function emitMethods(iface: ParsedInterface): string {
   const parts: string[] = [];
 
+  // Track method name occurrences to handle overloads
+  const methodNameCounts: Map<string, number> = new Map();
+
   for (const method of iface.methods) {
     if (!method.name) continue;
 
-    // Emit union argument traits first
-    const unionArgs = collectUnionArgs(method);
-    for (const { paramName, unionType } of unionArgs) {
-      const unionTrait = emitUnionArgTrait(method.name, paramName, unionType);
-      if (unionTrait) {
-        parts.push(unionTrait);
+    // Calculate suffix for overloaded methods
+    const count = methodNameCounts.get(method.name) || 0;
+    methodNameCounts.set(method.name, count + 1);
+    const suffix = count === 0 ? "" : String(count + 1);
+
+    // Emit union argument traits first (only for first occurrence)
+    if (count === 0) {
+      const unionArgs = collectUnionArgs(method);
+      for (const { paramName, unionType } of unionArgs) {
+        const unionTrait = emitUnionArgTrait(method.name, paramName, unionType);
+        if (unionTrait) {
+          parts.push(unionTrait);
+        }
       }
     }
 
     if (method.static) {
-      parts.push(emitStaticMethod(iface, method));
+      parts.push(emitStaticMethod(iface, method, suffix));
     } else {
       // Instance methods: FFI + impl
-      parts.push(emitMethodFfi(iface, method));
-      parts.push(emitTraitMethodImpl(iface, method));
+      parts.push(emitMethodFfi(iface, method, suffix));
+      parts.push(emitTraitMethodImpl(iface, method, suffix));
     }
   }
 
