@@ -185,6 +185,25 @@ fn ${ffiName}(${paramsStr}) -> ${returnTypeStr} = "${moduleName}" "${jsFuncName}
 }
 
 /**
+ * Get the first dictionary/options type from a union for default value
+ * e.g., (AddEventListenerOptions or boolean) -> "AddEventListenerOptions"
+ */
+function getUnionDefaultDictType(unionType: ParsedType): string | undefined {
+  if (unionType.type !== "union" || !unionType.memberTypes) {
+    return undefined;
+  }
+
+  // Find the first reference type (dictionary) in the union
+  for (const memberType of unionType.memberTypes) {
+    if (memberType.type === "reference" && memberType.name) {
+      return memberType.name;
+    }
+  }
+
+  return undefined;
+}
+
+/**
  * Emit trait method implementation
  * No defaults in impl - all params are required, optional ones are T?
  */
@@ -206,17 +225,31 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod): stri
     }
 
     let paramType: string;
+    let defaultExpr: string | undefined;
+
     if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
       // Use trait object type for union arguments
       const unionTraitName = getUnionArgTraitName(method.name, param.name);
       paramType = `&${unionTraitName}`;
+
+      // Handle default value for union types
+      if (param.optional && param.default === "{}") {
+        const dictType = getUnionDefaultDictType(typeToCheck);
+        if (dictType) {
+          defaultExpr = `${dictType}::empty()`;
+        }
+      }
     } else {
       paramType = mapped.moonbitType;
     }
 
     // Optional params use paramName? : Type syntax
     if (param.optional) {
-      params.push(`${paramName}? : ${paramType}`);
+      if (defaultExpr) {
+        params.push(`${paramName}? : ${paramType} = ${defaultExpr}`);
+      } else {
+        params.push(`${paramName}? : ${paramType}`);
+      }
     } else {
       params.push(`${paramName} : ${paramType}`);
     }
@@ -240,16 +273,26 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod): stri
     }
     const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
 
+    // Check if this union param has a default value
+    const hasUnionDefault = isUnionArg && param.optional && param.default === "{}";
+
     if (param.optional) {
-      // Convert Option[T] to JsValue using opt_to_js
-      const jsVarName = `${paramName}_js`;
       if (isUnionArg) {
-        // For union trait objects, use match to call to_js on the trait object
-        letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`);
+        if (hasUnionDefault) {
+          // Has default value - param is not Option, just call to_js directly
+          args.push(`${paramName}.to_js()`);
+        } else {
+          // No default - use match to handle Option
+          const jsVarName = `${paramName}_js`;
+          letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`);
+          args.push(jsVarName);
+        }
       } else {
+        // Non-union optional - use opt_to_js
+        const jsVarName = `${paramName}_js`;
         letBindings.push(`  let ${jsVarName} = opt_to_js(${paramName})`);
+        args.push(jsVarName);
       }
-      args.push(jsVarName);
     } else {
       if (isUnionArg) {
         // Union trait objects have their own to_js method
