@@ -51,10 +51,55 @@ function getUnionMemberMoonbitType(memberType: ParsedType): string {
 }
 
 /**
+ * Types that should be skipped in union trait implementations
+ * These are types that are not commonly used or not defined in our bindings
+ */
+const SKIP_UNION_TYPES = new Set([
+  "TrustedType",
+  "TrustedHTML",
+  "TrustedScript",
+  "TrustedScriptURL",
+]);
+
+/**
+ * Get filtered union member types (excluding skipped types)
+ */
+function getFilteredUnionMembers(unionType: ParsedType): ParsedType[] {
+  if (unionType.type !== "union" || !unionType.memberTypes) {
+    return [];
+  }
+  
+  return unionType.memberTypes.filter(memberType => {
+    const moonbitType = getUnionMemberMoonbitType(memberType);
+    return !SKIP_UNION_TYPES.has(moonbitType);
+  });
+}
+
+/**
+ * Check if union collapses to a single type after filtering
+ * Returns the single type's MoonBit name if it does, undefined otherwise
+ */
+function getCollapsedUnionType(unionType: ParsedType): string | undefined {
+  const filtered = getFilteredUnionMembers(unionType);
+  if (filtered.length === 1) {
+    return getUnionMemberMoonbitType(filtered[0]);
+  }
+  return undefined;
+}
+
+/**
  * Emit union argument trait definition and implementations
+ * Returns empty string if union collapses to single type
  */
 function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType): string {
   if (unionType.type !== "union" || !unionType.memberTypes) {
+    return "";
+  }
+
+  const filteredMembers = getFilteredUnionMembers(unionType);
+  
+  // If only one type remains after filtering, don't generate trait
+  if (filteredMembers.length <= 1) {
     return "";
   }
 
@@ -67,8 +112,8 @@ pub(open) trait ${traitName} {
   to_js(self : Self) -> JsValue
 }`);
 
-  // Emit impl for each member type
-  for (const memberType of unionType.memberTypes) {
+  // Emit impl for each filtered member type
+  for (const memberType of filteredMembers) {
     const moonbitType = getUnionMemberMoonbitType(memberType);
 
     parts.push(`///|
@@ -122,9 +167,16 @@ export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = 
 
     let paramType: string;
     if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
-      // Use trait object type for union arguments
-      const traitName = getUnionArgTraitName(method.name, param.name);
-      paramType = `&${traitName}`;
+      // Check if union collapses to single type after filtering
+      const collapsedType = getCollapsedUnionType(typeToCheck);
+      if (collapsedType) {
+        // Use the single remaining type directly
+        paramType = collapsedType;
+      } else {
+        // Use trait object type for union arguments
+        const traitName = getUnionArgTraitName(method.name, param.name);
+        paramType = `&${traitName}`;
+      }
     } else {
       paramType = mapped.moonbitType;
     }
@@ -232,15 +284,22 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     let defaultExpr: string | undefined;
 
     if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
-      // Use trait object type for union arguments
-      const unionTraitName = getUnionArgTraitName(method.name, param.name);
-      paramType = `&${unionTraitName}`;
+      // Check if union collapses to single type after filtering
+      const collapsedType = getCollapsedUnionType(typeToCheck);
+      if (collapsedType) {
+        // Use the single remaining type directly
+        paramType = collapsedType;
+      } else {
+        // Use trait object type for union arguments
+        const unionTraitName = getUnionArgTraitName(method.name, param.name);
+        paramType = `&${unionTraitName}`;
 
-      // Handle default value for union types
-      if (param.optional && param.default === "{}") {
-        const dictType = getUnionDefaultDictType(typeToCheck);
-        if (dictType) {
-          defaultExpr = `${dictType}::empty()`;
+        // Handle default value for union types
+        if (param.optional && param.default === "{}") {
+          const dictType = getUnionDefaultDictType(typeToCheck);
+          if (dictType) {
+            defaultExpr = `${dictType}::empty()`;
+          }
         }
       }
     } else if (mapped.isDictionary && param.optional && param.default === "{}") {
@@ -281,12 +340,16 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
       typeToCheck = typeToCheck.elementType;
     }
     const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
+    
+    // Check if union collapses to single type
+    const collapsedType = isUnionArg ? getCollapsedUnionType(typeToCheck) : undefined;
+    const isCollapsedUnion = collapsedType !== undefined;
 
     // Check if this param has a default value of {}
     const hasDefaultEmpty = param.optional && param.default === "{}";
 
     if (param.optional) {
-      if (isUnionArg) {
+      if (isUnionArg && !isCollapsedUnion) {
         if (hasDefaultEmpty) {
           // Has default value - param is not Option, just call to_js directly
           args.push(`${paramName}.to_js()`);
@@ -299,6 +362,11 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
       } else if (mapped.isDictionary && hasDefaultEmpty) {
         // Dictionary with {} default - has actual value, convert directly
         args.push(`TJsValue::to_js(${paramName})`);
+      } else if (isCollapsedUnion) {
+        // Collapsed union - treat like a regular type
+        const jsVarName = `${paramName}_js`;
+        letBindings.push(`  let ${jsVarName} = opt_to_js(${paramName})`);
+        args.push(jsVarName);
       } else {
         // Non-union optional - use opt_to_js
         const jsVarName = `${paramName}_js`;
@@ -306,12 +374,12 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
         args.push(jsVarName);
       }
     } else {
-      if (isUnionArg) {
+      if (isUnionArg && !isCollapsedUnion) {
         // Union trait objects have their own to_js method
         args.push(`${paramName}.to_js()`);
       } else {
         // Convert required params using TJsValue::to_js()
-        if (mapped.needsConversion) {
+        if (mapped.needsConversion || isCollapsedUnion) {
           args.push(`TJsValue::to_js(${paramName})`);
         } else {
           args.push(paramName);
