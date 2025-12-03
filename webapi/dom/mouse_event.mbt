@@ -116,7 +116,7 @@ fn mouse_event_new_ffi(
 ///|
 pub fn MouseEvent::new(
   type_ : String,
-  event_init_dict? : MouseEventInit = default_mouse_event_init(),
+  event_init_dict? : MouseEventInit = MouseEventInit::empty(),
 ) -> MouseEvent {
   mouse_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }

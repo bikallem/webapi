@@ -48,7 +48,7 @@ fn wheel_event_new_ffi(
 ///|
 pub fn WheelEvent::new(
   type_ : String,
-  event_init_dict? : WheelEventInit = default_wheel_event_init(),
+  event_init_dict? : WheelEventInit = WheelEventInit::empty(),
 ) -> WheelEvent {
   wheel_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }

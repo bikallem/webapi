@@ -16,4 +16,9 @@ pub impl TJsValue for FrameRequestCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn cb_frame_request_callback(f : (Double) -> Unit) -> FrameRequestCallback = "webapi_FrameRequestCallback" "new"
+fn frame_request_callback_new_ffi(f : (Double) -> Unit) -> FrameRequestCallback = "webapi_FrameRequestCallback" "new"
+
+///|
+pub fn FrameRequestCallback::new(f : (Double) -> Unit) -> FrameRequestCallback {
+  frame_request_callback_new_ffi(f)
+}

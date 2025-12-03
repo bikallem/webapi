@@ -102,7 +102,7 @@ fn keyboard_event_new_ffi(
 ///|
 pub fn KeyboardEvent::new(
   type_ : String,
-  event_init_dict? : KeyboardEventInit = default_keyboard_event_init(),
+  event_init_dict? : KeyboardEventInit = KeyboardEventInit::empty(),
 ) -> KeyboardEvent {
   keyboard_event_new_ffi(
     TJsValue::to_js(type_),

@@ -47,7 +47,7 @@ fn custom_event_new_ffi(
 ///|
 pub fn CustomEvent::new(
   type_ : String,
-  event_init_dict? : CustomEventInit = default_custom_event_init(),
+  event_init_dict? : CustomEventInit = CustomEventInit::empty(),
 ) -> CustomEvent {
   custom_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }

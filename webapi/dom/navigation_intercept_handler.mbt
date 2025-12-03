@@ -16,6 +16,13 @@ pub impl TJsValue for NavigationInterceptHandler with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn cb_navigation_intercept_handler(
+fn navigation_intercept_handler_new_ffi(
   f : () -> JsPromise[Unit],
 ) -> NavigationInterceptHandler = "webapi_NavigationInterceptHandler" "new"
+
+///|
+pub fn NavigationInterceptHandler::new(
+  f : () -> JsPromise[Unit],
+) -> NavigationInterceptHandler {
+  navigation_intercept_handler_new_ffi(f)
+}

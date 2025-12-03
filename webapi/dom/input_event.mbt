@@ -44,7 +44,7 @@ fn input_event_new_ffi(
 ///|
 pub fn InputEvent::new(
   type_ : String,
-  event_init_dict? : InputEventInit = default_input_event_init(),
+  event_init_dict? : InputEventInit = InputEventInit::empty(),
 ) -> InputEvent {
   input_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }

@@ -290,7 +290,8 @@ export function getDefaultValueExpr(
     case "[]":
       return "[]";
     case "{}":
-      return `default_${toSnakeCase(mapped.moonbitType)}()`;
+      // For dictionary types, use ::empty() constructor
+      return `${mapped.moonbitType}::empty()`;
     default:
       if (defaultValue.startsWith('"')) {
         // String default - only use if type is String

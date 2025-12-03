@@ -40,7 +40,7 @@ fn focus_event_new_ffi(
 ///|
 pub fn FocusEvent::new(
   type_ : String,
-  event_init_dict? : FocusEventInit = default_focus_event_init(),
+  event_init_dict? : FocusEventInit = FocusEventInit::empty(),
 ) -> FocusEvent {
   focus_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }

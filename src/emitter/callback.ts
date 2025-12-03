@@ -31,14 +31,14 @@ pub impl TJsValue for ${callback.name} with to_js(self : ${callback.name}) -> Js
 }
 
 /**
- * Emit callback factory function
+ * Emit callback constructor as TypeName::new
  * 
  * Creates a function like:
- * pub fn cb_event_handler(f: (Event) -> Unit) -> EventHandler
+ * pub fn EventHandler::new(f: (Event) -> Unit) -> EventHandler
  */
-function emitCallbackFactory(callback: ParsedCallback): string {
-  const funcName = `cb_${toSnakeCase(callback.name)}`;
+function emitCallbackConstructor(callback: ParsedCallback): string {
   const moduleName = toFfiModuleName(callback.name);
+  const ffiName = `${toSnakeCase(callback.name)}_new_ffi`;
   
   // Build the function signature for the callback
   const paramTypes: string[] = [];
@@ -54,7 +54,12 @@ function emitCallbackFactory(callback: ParsedCallback): string {
   const closureType = `(${closureParamStr}) -> ${returnType}`;
   
   return `///|
-pub fn ${funcName}(f : ${closureType}) -> ${callback.name} = "${moduleName}" "new"`;
+fn ${ffiName}(f : ${closureType}) -> ${callback.name} = "${moduleName}" "new"
+
+///|
+pub fn ${callback.name}::new(f : ${closureType}) -> ${callback.name} {
+  ${ffiName}(f)
+}`;
 }
 
 /**
@@ -77,8 +82,8 @@ export function emitCallback(callback: ParsedCallback): string {
   parts.push(emitCallbackType(callback));
   parts.push(emitTJsValueImpl(callback));
   
-  // Factory function
-  parts.push(emitCallbackFactory(callback));
+  // Constructor
+  parts.push(emitCallbackConstructor(callback));
   
   return parts.join("\n\n");
 }

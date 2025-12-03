@@ -82,7 +82,7 @@ fn event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> Event = "webapi_
 ///|
 pub fn Event::new(
   type_ : String,
-  event_init_dict? : EventInit = default_event_init(),
+  event_init_dict? : EventInit = EventInit::empty(),
 ) -> Event {
   event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }

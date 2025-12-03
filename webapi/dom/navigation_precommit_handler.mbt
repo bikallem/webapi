@@ -16,6 +16,13 @@ pub impl TJsValue for NavigationPrecommitHandler with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn cb_navigation_precommit_handler(
+fn navigation_precommit_handler_new_ffi(
   f : (JsValue) -> JsPromise[Unit],
 ) -> NavigationPrecommitHandler = "webapi_NavigationPrecommitHandler" "new"
+
+///|
+pub fn NavigationPrecommitHandler::new(
+  f : (JsValue) -> JsPromise[Unit],
+) -> NavigationPrecommitHandler {
+  navigation_precommit_handler_new_ffi(f)
+}

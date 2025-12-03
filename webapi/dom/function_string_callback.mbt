@@ -16,6 +16,13 @@ pub impl TJsValue for FunctionStringCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn cb_function_string_callback(
+fn function_string_callback_new_ffi(
   f : (String) -> Unit,
 ) -> FunctionStringCallback = "webapi_FunctionStringCallback" "new"
+
+///|
+pub fn FunctionStringCallback::new(
+  f : (String) -> Unit,
+) -> FunctionStringCallback {
+  function_string_callback_new_ffi(f)
+}

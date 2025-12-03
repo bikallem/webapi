@@ -64,7 +64,7 @@ fn ui_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> UIEvent = "we
 ///|
 pub fn UIEvent::new(
   type_ : String,
-  event_init_dict? : UIEventInit = default_ui_event_init(),
+  event_init_dict? : UIEventInit = UIEventInit::empty(),
 ) -> UIEvent {
   ui_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
