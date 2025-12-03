@@ -17,13 +17,6 @@ pub impl TJsValue for OnErrorEventHandlerNonNull with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-fn on_error_event_handler_non_null_new_ffi(
-  f : (JsValue, String, Int, Int, JsValue) -> JsValue,
-) -> OnErrorEventHandlerNonNull = "webapi_OnErrorEventHandlerNonNull" "new"
-
-///|
 pub fn OnErrorEventHandlerNonNull::new(
   f : (JsValue, String, Int, Int, JsValue) -> JsValue,
-) -> OnErrorEventHandlerNonNull {
-  on_error_event_handler_non_null_new_ffi(f)
-}
+) -> OnErrorEventHandlerNonNull = "webapi_OnErrorEventHandlerNonNull" "new"

@@ -50,8 +50,8 @@ pub trait THTMLFormElement: TJsValue + THTMLElement {
   set_enctype(self : Self, value : String) -> Unit = _
   encoding(self : Self) -> String = _
   set_encoding(self : Self, value : String) -> Unit = _
-  method(self : Self) -> String = _
-  set_method(self : Self, value : String) -> Unit = _
+  method_(self : Self) -> String = _
+  set_method_(self : Self, value : String) -> Unit = _
   name(self : Self) -> String = _
   set_name(self : Self, value : String) -> Unit = _
   no_validate(self : Self) -> Bool = _
@@ -216,7 +216,7 @@ impl THTMLFormElement with set_encoding(self : Self, value : String) -> Unit {
 fn html_form_element_method_ffi(obj : JsValue) -> String = "webapi_HTMLFormElement" "method"
 
 ///|
-impl THTMLFormElement with method(self : Self) -> String {
+impl THTMLFormElement with method_(self : Self) -> String {
   html_form_element_method_ffi(self.to_js())
 }
 
@@ -224,7 +224,7 @@ impl THTMLFormElement with method(self : Self) -> String {
 fn html_form_element_set_method_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLFormElement" "set_method"
 
 ///|
-impl THTMLFormElement with set_method(self : Self, value : String) -> Unit {
+impl THTMLFormElement with set_method_(self : Self, value : String) -> Unit {
   html_form_element_set_method_ffi(self.to_js(), value)
 }
 

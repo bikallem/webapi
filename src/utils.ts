@@ -85,6 +85,9 @@ const MOONBIT_KEYWORDS = new Set([
   "throw",
   "namespace",
   "where",
+  "method",
+  "async",
+  "defer",
 ]);
 
 /**

@@ -44,10 +44,10 @@ pub trait THTMLScriptElement: TJsValue + THTMLElement {
   set_src(self : Self, value : String) -> Unit = _
   no_module(self : Self) -> Bool = _
   set_no_module(self : Self, value : Bool) -> Unit = _
-  async(self : Self) -> Bool = _
-  set_async(self : Self, value : Bool) -> Unit = _
-  defer(self : Self) -> Bool = _
-  set_defer(self : Self, value : Bool) -> Unit = _
+  async_(self : Self) -> Bool = _
+  set_async_(self : Self, value : Bool) -> Unit = _
+  defer_(self : Self) -> Bool = _
+  set_defer_(self : Self, value : Bool) -> Unit = _
   blocking(self : Self) -> DOMTokenList = _
   cross_origin(self : Self) -> String? = _
   set_cross_origin(self : Self, value : String) -> Unit = _
@@ -134,7 +134,7 @@ impl THTMLScriptElement with set_no_module(self : Self, value : Bool) -> Unit {
 fn html_script_element_async_ffi(obj : JsValue) -> Bool = "webapi_HTMLScriptElement" "async"
 
 ///|
-impl THTMLScriptElement with async(self : Self) -> Bool {
+impl THTMLScriptElement with async_(self : Self) -> Bool {
   html_script_element_async_ffi(self.to_js())
 }
 
@@ -142,7 +142,7 @@ impl THTMLScriptElement with async(self : Self) -> Bool {
 fn html_script_element_set_async_ffi(obj : JsValue, value : Bool) -> Unit = "webapi_HTMLScriptElement" "set_async"
 
 ///|
-impl THTMLScriptElement with set_async(self : Self, value : Bool) -> Unit {
+impl THTMLScriptElement with set_async_(self : Self, value : Bool) -> Unit {
   html_script_element_set_async_ffi(self.to_js(), value)
 }
 
@@ -150,7 +150,7 @@ impl THTMLScriptElement with set_async(self : Self, value : Bool) -> Unit {
 fn html_script_element_defer_ffi(obj : JsValue) -> Bool = "webapi_HTMLScriptElement" "defer"
 
 ///|
-impl THTMLScriptElement with defer(self : Self) -> Bool {
+impl THTMLScriptElement with defer_(self : Self) -> Bool {
   html_script_element_defer_ffi(self.to_js())
 }
 
@@ -158,7 +158,7 @@ impl THTMLScriptElement with defer(self : Self) -> Bool {
 fn html_script_element_set_defer_ffi(obj : JsValue, value : Bool) -> Unit = "webapi_HTMLScriptElement" "set_defer"
 
 ///|
-impl THTMLScriptElement with set_defer(self : Self, value : Bool) -> Unit {
+impl THTMLScriptElement with set_defer_(self : Self, value : Bool) -> Unit {
   html_script_element_set_defer_ffi(self.to_js(), value)
 }
 

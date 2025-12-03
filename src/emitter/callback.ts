@@ -38,7 +38,6 @@ pub impl TJsValue for ${callback.name} with to_js(self : ${callback.name}) -> Js
  */
 function emitCallbackConstructor(callback: ParsedCallback): string {
   const moduleName = toFfiModuleName(callback.name);
-  const ffiName = `${toSnakeCase(callback.name)}_new_ffi`;
 
   // Build the function signature for the callback
   const paramTypes: string[] = [];
@@ -54,12 +53,7 @@ function emitCallbackConstructor(callback: ParsedCallback): string {
   const closureType = `(${closureParamStr}) -> ${returnType}`;
 
   return `///|
-fn ${ffiName}(f : ${closureType}) -> ${callback.name} = "${moduleName}" "new"
-
-///|
-pub fn ${callback.name}::new(f : ${closureType}) -> ${callback.name} {
-  ${ffiName}(f)
-}`;
+pub fn ${callback.name}::new(f : ${closureType}) -> ${callback.name} = "${moduleName}" "new"`;
 }
 
 /**
