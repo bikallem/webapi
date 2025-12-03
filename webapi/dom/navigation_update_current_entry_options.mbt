@@ -13,14 +13,18 @@
 pub type NavigationUpdateCurrentEntryOptions
 
 ///|
-pub impl TJsValue for NavigationUpdateCurrentEntryOptions with to_js(self : NavigationUpdateCurrentEntryOptions) -> JsValue = "%identity"
+pub impl TJsValue for NavigationUpdateCurrentEntryOptions with to_js(
+  self : NavigationUpdateCurrentEntryOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn navigation_update_current_entry_options_ffi(state : JsValue) -> NavigationUpdateCurrentEntryOptions = "webapi_NavigationUpdateCurrentEntryOptions" "new"
+fn navigation_update_current_entry_options_ffi(
+  state : JsValue,
+) -> NavigationUpdateCurrentEntryOptions = "webapi_NavigationUpdateCurrentEntryOptions" "new"
 
 ///|
 pub fn NavigationUpdateCurrentEntryOptions::new(
-  state : JsValue
+  state : JsValue,
 ) -> NavigationUpdateCurrentEntryOptions {
   navigation_update_current_entry_options_ffi(state)
 }

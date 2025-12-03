@@ -14,15 +14,20 @@
 pub type NavigationCurrentEntryChangeEventInit
 
 ///|
-pub impl TJsValue for NavigationCurrentEntryChangeEventInit with to_js(self : NavigationCurrentEntryChangeEventInit) -> JsValue = "%identity"
+pub impl TJsValue for NavigationCurrentEntryChangeEventInit with to_js(
+  self : NavigationCurrentEntryChangeEventInit,
+) -> JsValue = "%identity"
 
 ///|
-fn navigation_current_entry_change_event_init_ffi(navigation_type : JsValue, from : JsValue) -> NavigationCurrentEntryChangeEventInit = "webapi_NavigationCurrentEntryChangeEventInit" "new"
+fn navigation_current_entry_change_event_init_ffi(
+  navigation_type : JsValue,
+  from : JsValue,
+) -> NavigationCurrentEntryChangeEventInit = "webapi_NavigationCurrentEntryChangeEventInit" "new"
 
 ///|
 pub fn NavigationCurrentEntryChangeEventInit::new(
   navigation_type? : JsValue,
-  from : JsValue
+  from : JsValue,
 ) -> NavigationCurrentEntryChangeEventInit {
   let navigation_type_js = opt_to_js(navigation_type)
   navigation_current_entry_change_event_init_ffi(navigation_type_js, from)

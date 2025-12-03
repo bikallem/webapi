@@ -18,13 +18,17 @@ pub type WorkerOptions
 pub impl TJsValue for WorkerOptions with to_js(self : WorkerOptions) -> JsValue = "%identity"
 
 ///|
-fn worker_options_ffi(name : JsValue, type_ : JsValue, credentials : JsValue) -> WorkerOptions = "webapi_WorkerOptions" "new"
+fn worker_options_ffi(
+  name : JsValue,
+  type_ : JsValue,
+  credentials : JsValue,
+) -> WorkerOptions = "webapi_WorkerOptions" "new"
 
 ///|
 pub fn WorkerOptions::new(
   name? : String = "",
   type_? : JsValue,
-  credentials? : JsValue
+  credentials? : JsValue,
 ) -> WorkerOptions {
   let type__js = opt_to_js(type_)
   let credentials_js = opt_to_js(credentials)

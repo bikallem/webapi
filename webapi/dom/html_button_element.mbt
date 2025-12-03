@@ -98,11 +98,17 @@ impl THTMLButtonElement with report_validity(self : Self) -> Bool {
 }
 
 ///|
-fn html_button_element_set_custom_validity_ffi(obj : JsValue, error : JsValue) -> Unit = "webapi_HTMLButtonElement" "setCustomValidity"
+fn html_button_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "setCustomValidity"
 
 ///|
 impl THTMLButtonElement with set_custom_validity(self : Self, error : String) -> Unit {
-  html_button_element_set_custom_validity_ffi(TJsValue::to_js(self), TJsValue::to_js(error))
+  html_button_element_set_custom_validity_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(error),
+  )
 }
 
 ///|
@@ -130,10 +136,16 @@ impl THTMLButtonElement with command_for_element(self : Self) -> Element? {
 }
 
 ///|
-fn html_button_element_set_command_for_element_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLButtonElement" "set_commandForElement"
+fn html_button_element_set_command_for_element_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_commandForElement"
 
 ///|
-impl THTMLButtonElement with set_command_for_element(self : Self, value : Element) -> Unit {
+impl THTMLButtonElement with set_command_for_element(
+  self : Self,
+  value : Element,
+) -> Unit {
   html_button_element_set_command_for_element_ffi(self.to_js(), value.to_js())
 }
 
@@ -170,7 +182,10 @@ impl THTMLButtonElement with form_action(self : Self) -> String {
 }
 
 ///|
-fn html_button_element_set_form_action_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLButtonElement" "set_formAction"
+fn html_button_element_set_form_action_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLButtonElement" "set_formAction"
 
 ///|
 impl THTMLButtonElement with set_form_action(self : Self, value : String) -> Unit {
@@ -186,7 +201,10 @@ impl THTMLButtonElement with form_enctype(self : Self) -> String {
 }
 
 ///|
-fn html_button_element_set_form_enctype_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLButtonElement" "set_formEnctype"
+fn html_button_element_set_form_enctype_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLButtonElement" "set_formEnctype"
 
 ///|
 impl THTMLButtonElement with set_form_enctype(self : Self, value : String) -> Unit {
@@ -202,7 +220,10 @@ impl THTMLButtonElement with form_method(self : Self) -> String {
 }
 
 ///|
-fn html_button_element_set_form_method_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLButtonElement" "set_formMethod"
+fn html_button_element_set_form_method_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLButtonElement" "set_formMethod"
 
 ///|
 impl THTMLButtonElement with set_form_method(self : Self, value : String) -> Unit {
@@ -218,7 +239,10 @@ impl THTMLButtonElement with form_no_validate(self : Self) -> Bool {
 }
 
 ///|
-fn html_button_element_set_form_no_validate_ffi(obj : JsValue, value : Bool) -> Unit = "webapi_HTMLButtonElement" "set_formNoValidate"
+fn html_button_element_set_form_no_validate_ffi(
+  obj : JsValue,
+  value : Bool,
+) -> Unit = "webapi_HTMLButtonElement" "set_formNoValidate"
 
 ///|
 impl THTMLButtonElement with set_form_no_validate(self : Self, value : Bool) -> Unit {
@@ -234,7 +258,10 @@ impl THTMLButtonElement with form_target(self : Self) -> String {
 }
 
 ///|
-fn html_button_element_set_form_target_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLButtonElement" "set_formTarget"
+fn html_button_element_set_form_target_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLButtonElement" "set_formTarget"
 
 ///|
 impl THTMLButtonElement with set_form_target(self : Self, value : String) -> Unit {

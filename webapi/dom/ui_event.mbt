@@ -39,7 +39,14 @@ pub trait TUIEvent: TJsValue + TEvent {
   view(self : Self) -> Window? = _
   detail(self : Self) -> Int = _
   which(self : Self) -> Int = _
-  init_ui_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int) -> Unit = _
+  init_ui_event(
+    self : Self,
+    type_arg : String,
+    bubbles_arg? : Bool,
+    cancelable_arg? : Bool,
+    view_arg? : Window,
+    detail_arg? : Int,
+  ) -> Unit = _
 }
 
 ///|
@@ -55,20 +62,44 @@ pub impl TJsValue for UIEvent with to_js(self : UIEvent) -> JsValue = "%identity
 fn ui_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> UIEvent = "webapi_UIEvent" "new"
 
 ///|
-pub fn UIEvent::new(type_ : String, event_init_dict? : UIEventInit = default_ui_event_init()) -> UIEvent {
+pub fn UIEvent::new(
+  type_ : String,
+  event_init_dict? : UIEventInit = default_ui_event_init(),
+) -> UIEvent {
   ui_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|
-fn ui_event_init_ui_event_ffi(obj : JsValue, type_arg : JsValue, bubbles_arg : JsValue, cancelable_arg : JsValue, view_arg : JsValue, detail_arg : JsValue) -> Unit = "webapi_UIEvent" "initUIEvent"
+fn ui_event_init_ui_event_ffi(
+  obj : JsValue,
+  type_arg : JsValue,
+  bubbles_arg : JsValue,
+  cancelable_arg : JsValue,
+  view_arg : JsValue,
+  detail_arg : JsValue,
+) -> Unit = "webapi_UIEvent" "initUIEvent"
 
 ///|
-impl TUIEvent with init_ui_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int) -> Unit {
+impl TUIEvent with init_ui_event(
+  self : Self,
+  type_arg : String,
+  bubbles_arg? : Bool,
+  cancelable_arg? : Bool,
+  view_arg? : Window,
+  detail_arg? : Int,
+) -> Unit {
   let bubbles_arg_js = opt_to_js(bubbles_arg)
   let cancelable_arg_js = opt_to_js(cancelable_arg)
   let view_arg_js = opt_to_js(view_arg)
   let detail_arg_js = opt_to_js(detail_arg)
-  ui_event_init_ui_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_arg), bubbles_arg_js, cancelable_arg_js, view_arg_js, detail_arg_js)
+  ui_event_init_ui_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_arg),
+    bubbles_arg_js,
+    cancelable_arg_js,
+    view_arg_js,
+    detail_arg_js,
+  )
 }
 
 ///|

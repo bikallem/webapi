@@ -31,7 +31,9 @@ pub impl TCharacterData for ProcessingInstruction
 pub impl TProcessingInstruction for ProcessingInstruction
 
 ///|
-pub impl TJsValue for ProcessingInstruction with to_js(self : ProcessingInstruction) -> JsValue = "%identity"
+pub impl TJsValue for ProcessingInstruction with to_js(
+  self : ProcessingInstruction,
+) -> JsValue = "%identity"
 
 ///|
 fn processing_instruction_target_ffi(obj : JsValue) -> String = "webapi_ProcessingInstruction" "target"

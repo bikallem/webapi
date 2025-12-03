@@ -65,21 +65,51 @@ impl THistory with forward(self : Self) -> Unit {
 }
 
 ///|
-fn history_push_state_ffi(obj : JsValue, data : JsValue, unused : JsValue, url : JsValue) -> Unit = "webapi_History" "pushState"
+fn history_push_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_History" "pushState"
 
 ///|
-impl THistory with push_state(self : Self, data : JsValue, unused : String, url? : String) -> Unit {
+impl THistory with push_state(
+  self : Self,
+  data : JsValue,
+  unused : String,
+  url? : String,
+) -> Unit {
   let url_js = opt_to_js(url)
-  history_push_state_ffi(TJsValue::to_js(self), data, TJsValue::to_js(unused), url_js)
+  history_push_state_ffi(
+    TJsValue::to_js(self),
+    data,
+    TJsValue::to_js(unused),
+    url_js,
+  )
 }
 
 ///|
-fn history_replace_state_ffi(obj : JsValue, data : JsValue, unused : JsValue, url : JsValue) -> Unit = "webapi_History" "replaceState"
+fn history_replace_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_History" "replaceState"
 
 ///|
-impl THistory with replace_state(self : Self, data : JsValue, unused : String, url? : String) -> Unit {
+impl THistory with replace_state(
+  self : Self,
+  data : JsValue,
+  unused : String,
+  url? : String,
+) -> Unit {
   let url_js = opt_to_js(url)
-  history_replace_state_ffi(TJsValue::to_js(self), data, TJsValue::to_js(unused), url_js)
+  history_replace_state_ffi(
+    TJsValue::to_js(self),
+    data,
+    TJsValue::to_js(unused),
+    url_js,
+  )
 }
 
 ///|

@@ -14,15 +14,20 @@
 pub type ElementCreationOptions
 
 ///|
-pub impl TJsValue for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
+pub impl TJsValue for ElementCreationOptions with to_js(
+  self : ElementCreationOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn element_creation_options_ffi(custom_element_registry : JsValue, is_ : JsValue) -> ElementCreationOptions = "webapi_ElementCreationOptions" "new"
+fn element_creation_options_ffi(
+  custom_element_registry : JsValue,
+  is_ : JsValue,
+) -> ElementCreationOptions = "webapi_ElementCreationOptions" "new"
 
 ///|
 pub fn ElementCreationOptions::new(
   custom_element_registry? : JsValue,
-  is_? : String
+  is_? : String,
 ) -> ElementCreationOptions {
   let custom_element_registry_js = opt_to_js(custom_element_registry)
   let is__js = opt_to_js(is_)

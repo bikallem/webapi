@@ -34,11 +34,23 @@ pub impl TJsValue for MutationObserver with to_js(self : MutationObserver) -> Js
 pub fn MutationObserver::new(callback : JsValue) -> MutationObserver = "webapi_MutationObserver" "new"
 
 ///|
-fn mutation_observer_observe_ffi(obj : JsValue, target : JsValue, options : JsValue) -> Unit = "webapi_MutationObserver" "observe"
+fn mutation_observer_observe_ffi(
+  obj : JsValue,
+  target : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_MutationObserver" "observe"
 
 ///|
-impl TMutationObserver with observe(self : Self, target : Node, options? : MutationObserverInit = MutationObserverInit::empty()) -> Unit {
-  mutation_observer_observe_ffi(TJsValue::to_js(self), TJsValue::to_js(target), TJsValue::to_js(options))
+impl TMutationObserver with observe(
+  self : Self,
+  target : Node,
+  options? : MutationObserverInit = MutationObserverInit::empty(),
+) -> Unit {
+  mutation_observer_observe_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(target),
+    TJsValue::to_js(options),
+  )
 }
 
 ///|

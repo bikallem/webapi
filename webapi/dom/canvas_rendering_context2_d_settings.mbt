@@ -17,10 +17,18 @@
 pub type CanvasRenderingContext2DSettings
 
 ///|
-pub impl TJsValue for CanvasRenderingContext2DSettings with to_js(self : CanvasRenderingContext2DSettings) -> JsValue = "%identity"
+pub impl TJsValue for CanvasRenderingContext2DSettings with to_js(
+  self : CanvasRenderingContext2DSettings,
+) -> JsValue = "%identity"
 
 ///|
-fn canvas_rendering_context2_d_settings_ffi(alpha : JsValue, desynchronized : JsValue, color_space : JsValue, color_type : JsValue, will_read_frequently : JsValue) -> CanvasRenderingContext2DSettings = "webapi_CanvasRenderingContext2DSettings" "new"
+fn canvas_rendering_context2_d_settings_ffi(
+  alpha : JsValue,
+  desynchronized : JsValue,
+  color_space : JsValue,
+  color_type : JsValue,
+  will_read_frequently : JsValue,
+) -> CanvasRenderingContext2DSettings = "webapi_CanvasRenderingContext2DSettings" "new"
 
 ///|
 pub fn CanvasRenderingContext2DSettings::new(
@@ -28,11 +36,17 @@ pub fn CanvasRenderingContext2DSettings::new(
   desynchronized? : Bool = false,
   color_space? : JsValue,
   color_type? : JsValue,
-  will_read_frequently? : Bool = false
+  will_read_frequently? : Bool = false,
 ) -> CanvasRenderingContext2DSettings {
   let color_space_js = opt_to_js(color_space)
   let color_type_js = opt_to_js(color_type)
-  canvas_rendering_context2_d_settings_ffi(TJsValue::to_js(alpha), TJsValue::to_js(desynchronized), color_space_js, color_type_js, TJsValue::to_js(will_read_frequently))
+  canvas_rendering_context2_d_settings_ffi(
+    TJsValue::to_js(alpha),
+    TJsValue::to_js(desynchronized),
+    color_space_js,
+    color_type_js,
+    TJsValue::to_js(will_read_frequently),
+  )
 }
 
 ///|

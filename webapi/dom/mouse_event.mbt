@@ -81,7 +81,24 @@ pub trait TMouseEvent: TJsValue {
   buttons(self : Self) -> Int = _
   related_target(self : Self) -> EventTarget? = _
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
-  init_mouse_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : EventTarget) -> Unit = _
+  init_mouse_event(
+    self : Self,
+    type_arg : String,
+    bubbles_arg? : Bool,
+    cancelable_arg? : Bool,
+    view_arg? : Window,
+    detail_arg? : Int,
+    screen_x_arg? : Int,
+    screen_y_arg? : Int,
+    client_x_arg? : Int,
+    client_y_arg? : Int,
+    ctrl_key_arg? : Bool,
+    alt_key_arg? : Bool,
+    shift_key_arg? : Bool,
+    meta_key_arg? : Bool,
+    button_arg? : Int,
+    related_target_arg? : EventTarget,
+  ) -> Unit = _
 }
 
 ///|
@@ -91,26 +108,72 @@ pub impl TMouseEvent for MouseEvent
 pub impl TJsValue for MouseEvent with to_js(self : MouseEvent) -> JsValue = "%identity"
 
 ///|
-fn mouse_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> MouseEvent = "webapi_MouseEvent" "new"
+fn mouse_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> MouseEvent = "webapi_MouseEvent" "new"
 
 ///|
-pub fn MouseEvent::new(type_ : String, event_init_dict? : MouseEventInit = default_mouse_event_init()) -> MouseEvent {
+pub fn MouseEvent::new(
+  type_ : String,
+  event_init_dict? : MouseEventInit = default_mouse_event_init(),
+) -> MouseEvent {
   mouse_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|
-fn mouse_event_get_modifier_state_ffi(obj : JsValue, key_arg : JsValue) -> JsValue = "webapi_MouseEvent" "getModifierState"
+fn mouse_event_get_modifier_state_ffi(
+  obj : JsValue,
+  key_arg : JsValue,
+) -> JsValue = "webapi_MouseEvent" "getModifierState"
 
 ///|
 impl TMouseEvent with get_modifier_state(self : Self, key_arg : String) -> Bool {
-  mouse_event_get_modifier_state_ffi(TJsValue::to_js(self), TJsValue::to_js(key_arg)).unsafe_cast()
+  mouse_event_get_modifier_state_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(key_arg),
+  ).unsafe_cast()
 }
 
 ///|
-fn mouse_event_init_mouse_event_ffi(obj : JsValue, type_arg : JsValue, bubbles_arg : JsValue, cancelable_arg : JsValue, view_arg : JsValue, detail_arg : JsValue, screen_x_arg : JsValue, screen_y_arg : JsValue, client_x_arg : JsValue, client_y_arg : JsValue, ctrl_key_arg : JsValue, alt_key_arg : JsValue, shift_key_arg : JsValue, meta_key_arg : JsValue, button_arg : JsValue, related_target_arg : JsValue) -> Unit = "webapi_MouseEvent" "initMouseEvent"
+fn mouse_event_init_mouse_event_ffi(
+  obj : JsValue,
+  type_arg : JsValue,
+  bubbles_arg : JsValue,
+  cancelable_arg : JsValue,
+  view_arg : JsValue,
+  detail_arg : JsValue,
+  screen_x_arg : JsValue,
+  screen_y_arg : JsValue,
+  client_x_arg : JsValue,
+  client_y_arg : JsValue,
+  ctrl_key_arg : JsValue,
+  alt_key_arg : JsValue,
+  shift_key_arg : JsValue,
+  meta_key_arg : JsValue,
+  button_arg : JsValue,
+  related_target_arg : JsValue,
+) -> Unit = "webapi_MouseEvent" "initMouseEvent"
 
 ///|
-impl TMouseEvent with init_mouse_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : EventTarget) -> Unit {
+impl TMouseEvent with init_mouse_event(
+  self : Self,
+  type_arg : String,
+  bubbles_arg? : Bool,
+  cancelable_arg? : Bool,
+  view_arg? : Window,
+  detail_arg? : Int,
+  screen_x_arg? : Int,
+  screen_y_arg? : Int,
+  client_x_arg? : Int,
+  client_y_arg? : Int,
+  ctrl_key_arg? : Bool,
+  alt_key_arg? : Bool,
+  shift_key_arg? : Bool,
+  meta_key_arg? : Bool,
+  button_arg? : Int,
+  related_target_arg? : EventTarget,
+) -> Unit {
   let bubbles_arg_js = opt_to_js(bubbles_arg)
   let cancelable_arg_js = opt_to_js(cancelable_arg)
   let view_arg_js = opt_to_js(view_arg)
@@ -125,7 +188,24 @@ impl TMouseEvent with init_mouse_event(self : Self, type_arg : String, bubbles_a
   let meta_key_arg_js = opt_to_js(meta_key_arg)
   let button_arg_js = opt_to_js(button_arg)
   let related_target_arg_js = opt_to_js(related_target_arg)
-  mouse_event_init_mouse_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_arg), bubbles_arg_js, cancelable_arg_js, view_arg_js, detail_arg_js, screen_x_arg_js, screen_y_arg_js, client_x_arg_js, client_y_arg_js, ctrl_key_arg_js, alt_key_arg_js, shift_key_arg_js, meta_key_arg_js, button_arg_js, related_target_arg_js)
+  mouse_event_init_mouse_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_arg),
+    bubbles_arg_js,
+    cancelable_arg_js,
+    view_arg_js,
+    detail_arg_js,
+    screen_x_arg_js,
+    screen_y_arg_js,
+    client_x_arg_js,
+    client_y_arg_js,
+    ctrl_key_arg_js,
+    alt_key_arg_js,
+    shift_key_arg_js,
+    meta_key_arg_js,
+    button_arg_js,
+    related_target_arg_js,
+  )
 }
 
 ///|

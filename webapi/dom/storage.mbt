@@ -55,7 +55,11 @@ fn storage_set_item_ffi(obj : JsValue, key : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl TStorage with set_item(self : Self, key : String, value : String) -> Unit {
-  storage_set_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key), TJsValue::to_js(value))
+  storage_set_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(key),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|

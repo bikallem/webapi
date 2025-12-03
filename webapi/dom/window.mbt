@@ -187,8 +187,17 @@ pub trait TWindow: TJsValue {
   confirm(self : Self, message? : String) -> Bool = _
   prompt(self : Self, message? : String, default? : String) -> String? = _
   print(self : Self) -> Unit = _
-  post_message(self : Self, message : JsValue, target_origin : String, transfer? : Array[JsValue]) -> Unit = _
-  post_message2(self : Self, message : JsValue, options? : WindowPostMessageOptions) -> Unit = _
+  post_message(
+    self : Self,
+    message : JsValue,
+    target_origin : String,
+    transfer? : Array[JsValue],
+  ) -> Unit = _
+  post_message2(
+    self : Self,
+    message : JsValue,
+    options? : WindowPostMessageOptions,
+  ) -> Unit = _
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
 }
@@ -212,7 +221,11 @@ fn window_move_to_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with move_to(self : Self, x : Int, y : Int) -> Unit {
-  window_move_to_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y))
+  window_move_to_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  )
 }
 
 ///|
@@ -220,15 +233,27 @@ fn window_move_by_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with move_by(self : Self, x : Int, y : Int) -> Unit {
-  window_move_by_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y))
+  window_move_by_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  )
 }
 
 ///|
-fn window_resize_to_ffi(obj : JsValue, width : JsValue, height : JsValue) -> Unit = "webapi_Window" "resizeTo"
+fn window_resize_to_ffi(
+  obj : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> Unit = "webapi_Window" "resizeTo"
 
 ///|
 impl TWindow with resize_to(self : Self, width : Int, height : Int) -> Unit {
-  window_resize_to_ffi(TJsValue::to_js(self), TJsValue::to_js(width), TJsValue::to_js(height))
+  window_resize_to_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(width),
+    TJsValue::to_js(height),
+  )
 }
 
 ///|
@@ -236,14 +261,21 @@ fn window_resize_by_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "weba
 
 ///|
 impl TWindow with resize_by(self : Self, x : Int, y : Int) -> Unit {
-  window_resize_by_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y))
+  window_resize_by_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  )
 }
 
 ///|
 fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scroll"
 
 ///|
-impl TWindow with scroll(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TWindow with scroll(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -251,15 +283,24 @@ impl TWindow with scroll(self : Self, options? : ScrollToOptions = ScrollToOptio
 fn window_scroll_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scroll"
 
 ///|
-impl TWindow with scroll2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  window_scroll_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TWindow with scroll2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  window_scroll_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
 fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollTo"
 
 ///|
-impl TWindow with scroll_to(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TWindow with scroll_to(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -267,15 +308,24 @@ impl TWindow with scroll_to(self : Self, options? : ScrollToOptions = ScrollToOp
 fn window_scroll_to_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollTo"
 
 ///|
-impl TWindow with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  window_scroll_to_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TWindow with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  window_scroll_to_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
 fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollBy"
 
 ///|
-impl TWindow with scroll_by(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TWindow with scroll_by(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -283,17 +333,35 @@ impl TWindow with scroll_by(self : Self, options? : ScrollToOptions = ScrollToOp
 fn window_scroll_by_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollBy"
 
 ///|
-impl TWindow with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  window_scroll_by_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TWindow with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  window_scroll_by_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
-fn window_get_computed_style_ffi(obj : JsValue, elt : JsValue, pseudo_elt : JsValue) -> JsValue = "webapi_Window" "getComputedStyle"
+fn window_get_computed_style_ffi(
+  obj : JsValue,
+  elt : JsValue,
+  pseudo_elt : JsValue,
+) -> JsValue = "webapi_Window" "getComputedStyle"
 
 ///|
-impl TWindow with get_computed_style(self : Self, elt : Element, pseudo_elt? : JsValue) -> JsValue {
+impl TWindow with get_computed_style(
+  self : Self,
+  elt : Element,
+  pseudo_elt? : JsValue,
+) -> JsValue {
   let pseudo_elt_js = opt_to_js(pseudo_elt)
-  window_get_computed_style_ffi(TJsValue::to_js(self), TJsValue::to_js(elt), pseudo_elt_js).unsafe_cast()
+  window_get_computed_style_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(elt),
+    pseudo_elt_js,
+  ).unsafe_cast()
 }
 
 ///|
@@ -329,10 +397,20 @@ impl TWindow with blur(self : Self) -> Unit {
 }
 
 ///|
-fn window_open_ffi(obj : JsValue, url : JsValue, target : JsValue, features : JsValue) -> JsValue = "webapi_Window" "open"
+fn window_open_ffi(
+  obj : JsValue,
+  url : JsValue,
+  target : JsValue,
+  features : JsValue,
+) -> JsValue = "webapi_Window" "open"
 
 ///|
-impl TWindow with open(self : Self, url? : String, target? : String, features? : String) -> Window? {
+impl TWindow with open(
+  self : Self,
+  url? : String,
+  target? : String,
+  features? : String,
+) -> Window? {
   let url_js = opt_to_js(url)
   let target_js = opt_to_js(target)
   let features_js = opt_to_js(features)
@@ -365,7 +443,11 @@ impl TWindow with confirm(self : Self, message? : String) -> Bool {
 }
 
 ///|
-fn window_prompt_ffi(obj : JsValue, message : JsValue, default : JsValue) -> JsValue = "webapi_Window" "prompt"
+fn window_prompt_ffi(
+  obj : JsValue,
+  message : JsValue,
+  default : JsValue,
+) -> JsValue = "webapi_Window" "prompt"
 
 ///|
 impl TWindow with prompt(self : Self, message? : String, default? : String) -> String? {
@@ -383,20 +465,47 @@ impl TWindow with print(self : Self) -> Unit {
 }
 
 ///|
-fn window_post_message_ffi(obj : JsValue, message : JsValue, target_origin : JsValue, transfer : JsValue) -> Unit = "webapi_Window" "postMessage"
+fn window_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  target_origin : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_Window" "postMessage"
 
 ///|
-impl TWindow with post_message(self : Self, message : JsValue, target_origin : String, transfer? : Array[JsValue]) -> Unit {
+impl TWindow with post_message(
+  self : Self,
+  message : JsValue,
+  target_origin : String,
+  transfer? : Array[JsValue],
+) -> Unit {
   let transfer_js = opt_to_js(transfer)
-  window_post_message_ffi(TJsValue::to_js(self), message, TJsValue::to_js(target_origin), transfer_js)
+  window_post_message_ffi(
+    TJsValue::to_js(self),
+    message,
+    TJsValue::to_js(target_origin),
+    transfer_js,
+  )
 }
 
 ///|
-fn window_post_message_ffi2(obj : JsValue, message : JsValue, options : JsValue) -> Unit = "webapi_Window" "postMessage"
+fn window_post_message_ffi2(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_Window" "postMessage"
 
 ///|
-impl TWindow with post_message2(self : Self, message : JsValue, options? : WindowPostMessageOptions = WindowPostMessageOptions::empty()) -> Unit {
-  window_post_message_ffi2(TJsValue::to_js(self), message, TJsValue::to_js(options))
+impl TWindow with post_message2(
+  self : Self,
+  message : JsValue,
+  options? : WindowPostMessageOptions = WindowPostMessageOptions::empty(),
+) -> Unit {
+  window_post_message_ffi2(
+    TJsValue::to_js(self),
+    message,
+    TJsValue::to_js(options),
+  )
 }
 
 ///|

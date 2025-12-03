@@ -178,7 +178,13 @@ pub trait THTMLInputElement: TJsValue + THTMLElement {
   set_custom_validity(self : Self, error : String) -> Unit = _
   select(self : Self) -> Unit = _
   set_range_text(self : Self, replacement : String) -> Unit = _
-  set_range_text2(self : Self, replacement : String, start : Int, end : Int, selection_mode? : JsValue) -> Unit = _
+  set_range_text2(
+    self : Self,
+    replacement : String,
+    start : Int,
+    end : Int,
+    selection_mode? : JsValue,
+  ) -> Unit = _
   set_selection_range(self : Self, start : Int, end : Int, direction? : String) -> Unit = _
   show_picker(self : Self) -> Unit = _
 }
@@ -230,11 +236,17 @@ impl THTMLInputElement with report_validity(self : Self) -> Bool {
 }
 
 ///|
-fn html_input_element_set_custom_validity_ffi(obj : JsValue, error : JsValue) -> Unit = "webapi_HTMLInputElement" "setCustomValidity"
+fn html_input_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "setCustomValidity"
 
 ///|
 impl THTMLInputElement with set_custom_validity(self : Self, error : String) -> Unit {
-  html_input_element_set_custom_validity_ffi(TJsValue::to_js(self), TJsValue::to_js(error))
+  html_input_element_set_custom_validity_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(error),
+  )
 }
 
 ///|
@@ -246,29 +258,68 @@ impl THTMLInputElement with select(self : Self) -> Unit {
 }
 
 ///|
-fn html_input_element_set_range_text_ffi(obj : JsValue, replacement : JsValue) -> Unit = "webapi_HTMLInputElement" "setRangeText"
+fn html_input_element_set_range_text_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "setRangeText"
 
 ///|
 impl THTMLInputElement with set_range_text(self : Self, replacement : String) -> Unit {
-  html_input_element_set_range_text_ffi(TJsValue::to_js(self), TJsValue::to_js(replacement))
+  html_input_element_set_range_text_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(replacement),
+  )
 }
 
 ///|
-fn html_input_element_set_range_text_ffi2(obj : JsValue, replacement : JsValue, start : JsValue, end : JsValue, selection_mode : JsValue) -> Unit = "webapi_HTMLInputElement" "setRangeText"
+fn html_input_element_set_range_text_ffi2(
+  obj : JsValue,
+  replacement : JsValue,
+  start : JsValue,
+  end : JsValue,
+  selection_mode : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "setRangeText"
 
 ///|
-impl THTMLInputElement with set_range_text2(self : Self, replacement : String, start : Int, end : Int, selection_mode? : JsValue) -> Unit {
+impl THTMLInputElement with set_range_text2(
+  self : Self,
+  replacement : String,
+  start : Int,
+  end : Int,
+  selection_mode? : JsValue,
+) -> Unit {
   let selection_mode_js = opt_to_js(selection_mode)
-  html_input_element_set_range_text_ffi2(TJsValue::to_js(self), TJsValue::to_js(replacement), TJsValue::to_js(start), TJsValue::to_js(end), selection_mode_js)
+  html_input_element_set_range_text_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(replacement),
+    TJsValue::to_js(start),
+    TJsValue::to_js(end),
+    selection_mode_js,
+  )
 }
 
 ///|
-fn html_input_element_set_selection_range_ffi(obj : JsValue, start : JsValue, end : JsValue, direction : JsValue) -> Unit = "webapi_HTMLInputElement" "setSelectionRange"
+fn html_input_element_set_selection_range_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  direction : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "setSelectionRange"
 
 ///|
-impl THTMLInputElement with set_selection_range(self : Self, start : Int, end : Int, direction? : String) -> Unit {
+impl THTMLInputElement with set_selection_range(
+  self : Self,
+  start : Int,
+  end : Int,
+  direction? : String,
+) -> Unit {
   let direction_js = opt_to_js(direction)
-  html_input_element_set_selection_range_ffi(TJsValue::to_js(self), TJsValue::to_js(start), TJsValue::to_js(end), direction_js)
+  html_input_element_set_selection_range_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(start),
+    TJsValue::to_js(end),
+    direction_js,
+  )
 }
 
 ///|
@@ -336,7 +387,10 @@ impl THTMLInputElement with autocomplete(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_autocomplete_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_autocomplete"
+fn html_input_element_set_autocomplete_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_autocomplete"
 
 ///|
 impl THTMLInputElement with set_autocomplete(self : Self, value : String) -> Unit {
@@ -352,7 +406,10 @@ impl THTMLInputElement with default_checked(self : Self) -> Bool {
 }
 
 ///|
-fn html_input_element_set_default_checked_ffi(obj : JsValue, value : Bool) -> Unit = "webapi_HTMLInputElement" "set_defaultChecked"
+fn html_input_element_set_default_checked_ffi(
+  obj : JsValue,
+  value : Bool,
+) -> Unit = "webapi_HTMLInputElement" "set_defaultChecked"
 
 ///|
 impl THTMLInputElement with set_default_checked(self : Self, value : Bool) -> Unit {
@@ -384,7 +441,10 @@ impl THTMLInputElement with color_space(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_color_space_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_colorSpace"
+fn html_input_element_set_color_space_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_colorSpace"
 
 ///|
 impl THTMLInputElement with set_color_space(self : Self, value : String) -> Unit {
@@ -456,7 +516,10 @@ impl THTMLInputElement with form_action(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_form_action_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_formAction"
+fn html_input_element_set_form_action_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_formAction"
 
 ///|
 impl THTMLInputElement with set_form_action(self : Self, value : String) -> Unit {
@@ -472,7 +535,10 @@ impl THTMLInputElement with form_enctype(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_form_enctype_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_formEnctype"
+fn html_input_element_set_form_enctype_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_formEnctype"
 
 ///|
 impl THTMLInputElement with set_form_enctype(self : Self, value : String) -> Unit {
@@ -488,7 +554,10 @@ impl THTMLInputElement with form_method(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_form_method_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_formMethod"
+fn html_input_element_set_form_method_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_formMethod"
 
 ///|
 impl THTMLInputElement with set_form_method(self : Self, value : String) -> Unit {
@@ -504,7 +573,10 @@ impl THTMLInputElement with form_no_validate(self : Self) -> Bool {
 }
 
 ///|
-fn html_input_element_set_form_no_validate_ffi(obj : JsValue, value : Bool) -> Unit = "webapi_HTMLInputElement" "set_formNoValidate"
+fn html_input_element_set_form_no_validate_ffi(
+  obj : JsValue,
+  value : Bool,
+) -> Unit = "webapi_HTMLInputElement" "set_formNoValidate"
 
 ///|
 impl THTMLInputElement with set_form_no_validate(self : Self, value : Bool) -> Unit {
@@ -520,7 +592,10 @@ impl THTMLInputElement with form_target(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_form_target_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_formTarget"
+fn html_input_element_set_form_target_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_formTarget"
 
 ///|
 impl THTMLInputElement with set_form_target(self : Self, value : String) -> Unit {
@@ -552,7 +627,10 @@ impl THTMLInputElement with indeterminate(self : Self) -> Bool {
 }
 
 ///|
-fn html_input_element_set_indeterminate_ffi(obj : JsValue, value : Bool) -> Unit = "webapi_HTMLInputElement" "set_indeterminate"
+fn html_input_element_set_indeterminate_ffi(
+  obj : JsValue,
+  value : Bool,
+) -> Unit = "webapi_HTMLInputElement" "set_indeterminate"
 
 ///|
 impl THTMLInputElement with set_indeterminate(self : Self, value : Bool) -> Unit {
@@ -688,7 +766,10 @@ impl THTMLInputElement with placeholder(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_placeholder_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_placeholder"
+fn html_input_element_set_placeholder_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_placeholder"
 
 ///|
 impl THTMLInputElement with set_placeholder(self : Self, value : String) -> Unit {
@@ -800,7 +881,10 @@ impl THTMLInputElement with default_value(self : Self) -> String {
 }
 
 ///|
-fn html_input_element_set_default_value_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_defaultValue"
+fn html_input_element_set_default_value_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_defaultValue"
 
 ///|
 impl THTMLInputElement with set_default_value(self : Self, value : String) -> Unit {
@@ -832,7 +916,10 @@ impl THTMLInputElement with value_as_date(self : Self) -> JsValue? {
 }
 
 ///|
-fn html_input_element_set_value_as_date_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLInputElement" "set_valueAsDate"
+fn html_input_element_set_value_as_date_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_valueAsDate"
 
 ///|
 impl THTMLInputElement with set_value_as_date(self : Self, value : JsValue) -> Unit {
@@ -848,7 +935,10 @@ impl THTMLInputElement with value_as_number(self : Self) -> Double {
 }
 
 ///|
-fn html_input_element_set_value_as_number_ffi(obj : JsValue, value : Double) -> Unit = "webapi_HTMLInputElement" "set_valueAsNumber"
+fn html_input_element_set_value_as_number_ffi(
+  obj : JsValue,
+  value : Double,
+) -> Unit = "webapi_HTMLInputElement" "set_valueAsNumber"
 
 ///|
 impl THTMLInputElement with set_value_as_number(self : Self, value : Double) -> Unit {
@@ -912,7 +1002,10 @@ impl THTMLInputElement with selection_start(self : Self) -> Int? {
 }
 
 ///|
-fn html_input_element_set_selection_start_ffi(obj : JsValue, value : Int) -> Unit = "webapi_HTMLInputElement" "set_selectionStart"
+fn html_input_element_set_selection_start_ffi(
+  obj : JsValue,
+  value : Int,
+) -> Unit = "webapi_HTMLInputElement" "set_selectionStart"
 
 ///|
 impl THTMLInputElement with set_selection_start(self : Self, value : Int) -> Unit {
@@ -944,7 +1037,10 @@ impl THTMLInputElement with selection_direction(self : Self) -> String? {
 }
 
 ///|
-fn html_input_element_set_selection_direction_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLInputElement" "set_selectionDirection"
+fn html_input_element_set_selection_direction_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLInputElement" "set_selectionDirection"
 
 ///|
 impl THTMLInputElement with set_selection_direction(self : Self, value : String) -> Unit {

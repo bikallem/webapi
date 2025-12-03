@@ -47,36 +47,77 @@ pub impl TJsValue for HTMLCanvasElement with to_js(self : HTMLCanvasElement) -> 
 pub fn HTMLCanvasElement::new() -> HTMLCanvasElement = "webapi_HTMLCanvasElement" "new"
 
 ///|
-fn html_canvas_element_get_context_ffi(obj : JsValue, context_id : JsValue, options : JsValue) -> JsValue = "webapi_HTMLCanvasElement" "getContext"
+fn html_canvas_element_get_context_ffi(
+  obj : JsValue,
+  context_id : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_HTMLCanvasElement" "getContext"
 
 ///|
-impl THTMLCanvasElement with get_context(self : Self, context_id : String, options? : JsValue) -> JsValue? {
+impl THTMLCanvasElement with get_context(
+  self : Self,
+  context_id : String,
+  options? : JsValue,
+) -> JsValue? {
   let options_js = opt_to_js(options)
-  html_canvas_element_get_context_ffi(TJsValue::to_js(self), TJsValue::to_js(context_id), options_js).as_option()
+  html_canvas_element_get_context_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(context_id),
+    options_js,
+  ).as_option()
 }
 
 ///|
-fn html_canvas_element_to_data_url_ffi(obj : JsValue, type_ : JsValue, quality : JsValue) -> JsValue = "webapi_HTMLCanvasElement" "toDataURL"
+fn html_canvas_element_to_data_url_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> JsValue = "webapi_HTMLCanvasElement" "toDataURL"
 
 ///|
-impl THTMLCanvasElement with to_data_url(self : Self, type_? : String, quality? : JsValue) -> String {
+impl THTMLCanvasElement with to_data_url(
+  self : Self,
+  type_? : String,
+  quality? : JsValue,
+) -> String {
   let type__js = opt_to_js(type_)
   let quality_js = opt_to_js(quality)
-  html_canvas_element_to_data_url_ffi(TJsValue::to_js(self), type__js, quality_js).unsafe_cast()
+  html_canvas_element_to_data_url_ffi(
+    TJsValue::to_js(self),
+    type__js,
+    quality_js,
+  ).unsafe_cast()
 }
 
 ///|
-fn html_canvas_element_to_blob_ffi(obj : JsValue, callback : JsValue, type_ : JsValue, quality : JsValue) -> Unit = "webapi_HTMLCanvasElement" "toBlob"
+fn html_canvas_element_to_blob_ffi(
+  obj : JsValue,
+  callback : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> Unit = "webapi_HTMLCanvasElement" "toBlob"
 
 ///|
-impl THTMLCanvasElement with to_blob(self : Self, callback : JsValue, type_? : String, quality? : JsValue) -> Unit {
+impl THTMLCanvasElement with to_blob(
+  self : Self,
+  callback : JsValue,
+  type_? : String,
+  quality? : JsValue,
+) -> Unit {
   let type__js = opt_to_js(type_)
   let quality_js = opt_to_js(quality)
-  html_canvas_element_to_blob_ffi(TJsValue::to_js(self), callback, type__js, quality_js)
+  html_canvas_element_to_blob_ffi(
+    TJsValue::to_js(self),
+    callback,
+    type__js,
+    quality_js,
+  )
 }
 
 ///|
-fn html_canvas_element_transfer_control_to_offscreen_ffi(obj : JsValue) -> JsValue = "webapi_HTMLCanvasElement" "transferControlToOffscreen"
+fn html_canvas_element_transfer_control_to_offscreen_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_HTMLCanvasElement" "transferControlToOffscreen"
 
 ///|
 impl THTMLCanvasElement with transfer_control_to_offscreen(self : Self) -> JsValue {

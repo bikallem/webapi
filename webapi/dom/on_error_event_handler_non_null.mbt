@@ -12,7 +12,11 @@
 pub type OnErrorEventHandlerNonNull
 
 ///|
-pub impl TJsValue for OnErrorEventHandlerNonNull with to_js(self : OnErrorEventHandlerNonNull) -> JsValue = "%identity"
+pub impl TJsValue for OnErrorEventHandlerNonNull with to_js(
+  self : OnErrorEventHandlerNonNull,
+) -> JsValue = "%identity"
 
 ///|
-pub fn cb_on_error_event_handler_non_null(f : (JsValue, String, Int, Int, JsValue) -> JsValue) -> OnErrorEventHandlerNonNull = "webapi_OnErrorEventHandlerNonNull" "new"
+pub fn cb_on_error_event_handler_non_null(
+  f : (JsValue, String, Int, Int, JsValue) -> JsValue,
+) -> OnErrorEventHandlerNonNull = "webapi_OnErrorEventHandlerNonNull" "new"

@@ -80,7 +80,10 @@ pub impl TJsValue for Event with to_js(self : Event) -> JsValue = "%identity"
 fn event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> Event = "webapi_Event" "new"
 
 ///|
-pub fn Event::new(type_ : String, event_init_dict? : EventInit = default_event_init()) -> Event {
+pub fn Event::new(
+  type_ : String,
+  event_init_dict? : EventInit = default_event_init(),
+) -> Event {
   event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
@@ -117,13 +120,28 @@ impl TEvent with prevent_default(self : Self) -> Unit {
 }
 
 ///|
-fn event_init_event_ffi(obj : JsValue, type_ : JsValue, bubbles : JsValue, cancelable : JsValue) -> Unit = "webapi_Event" "initEvent"
+fn event_init_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+) -> Unit = "webapi_Event" "initEvent"
 
 ///|
-impl TEvent with init_event(self : Self, type_ : String, bubbles? : Bool, cancelable? : Bool) -> Unit {
+impl TEvent with init_event(
+  self : Self,
+  type_ : String,
+  bubbles? : Bool,
+  cancelable? : Bool,
+) -> Unit {
   let bubbles_js = opt_to_js(bubbles)
   let cancelable_js = opt_to_js(cancelable)
-  event_init_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), bubbles_js, cancelable_js)
+  event_init_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_),
+    bubbles_js,
+    cancelable_js,
+  )
 }
 
 ///|

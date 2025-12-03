@@ -13,14 +13,18 @@
 pub type StructuredSerializeOptions
 
 ///|
-pub impl TJsValue for StructuredSerializeOptions with to_js(self : StructuredSerializeOptions) -> JsValue = "%identity"
+pub impl TJsValue for StructuredSerializeOptions with to_js(
+  self : StructuredSerializeOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn structured_serialize_options_ffi(transfer : JsValue) -> StructuredSerializeOptions = "webapi_StructuredSerializeOptions" "new"
+fn structured_serialize_options_ffi(
+  transfer : JsValue,
+) -> StructuredSerializeOptions = "webapi_StructuredSerializeOptions" "new"
 
 ///|
 pub fn StructuredSerializeOptions::new(
-  transfer? : Array[JsValue] = []
+  transfer? : Array[JsValue] = [],
 ) -> StructuredSerializeOptions {
   structured_serialize_options_ffi(TJsValue::to_js(transfer))
 }

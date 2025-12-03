@@ -15,16 +15,22 @@
 pub type AddEventListenerOptions
 
 ///|
-pub impl TJsValue for AddEventListenerOptions with to_js(self : AddEventListenerOptions) -> JsValue = "%identity"
+pub impl TJsValue for AddEventListenerOptions with to_js(
+  self : AddEventListenerOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn add_event_listener_options_ffi(passive : JsValue, once : JsValue, signal : JsValue) -> AddEventListenerOptions = "webapi_AddEventListenerOptions" "new"
+fn add_event_listener_options_ffi(
+  passive : JsValue,
+  once : JsValue,
+  signal : JsValue,
+) -> AddEventListenerOptions = "webapi_AddEventListenerOptions" "new"
 
 ///|
 pub fn AddEventListenerOptions::new(
   passive? : Bool,
   once? : Bool = false,
-  signal? : AbortSignal
+  signal? : AbortSignal,
 ) -> AddEventListenerOptions {
   let passive_js = opt_to_js(passive)
   let signal_js = opt_to_js(signal)

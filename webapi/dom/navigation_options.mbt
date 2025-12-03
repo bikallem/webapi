@@ -19,9 +19,7 @@ pub impl TJsValue for NavigationOptions with to_js(self : NavigationOptions) -> 
 fn navigation_options_ffi(info : JsValue) -> NavigationOptions = "webapi_NavigationOptions" "new"
 
 ///|
-pub fn NavigationOptions::new(
-  info? : JsValue
-) -> NavigationOptions {
+pub fn NavigationOptions::new(info? : JsValue) -> NavigationOptions {
   let info_js = opt_to_js(info)
   navigation_options_ffi(info_js)
 }

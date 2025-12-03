@@ -20,7 +20,13 @@ pub type CustomEvent
 ///|
 pub trait TCustomEvent: TJsValue + TEvent {
   detail(self : Self) -> JsValue = _
-  init_custom_event(self : Self, type_ : String, bubbles? : Bool, cancelable? : Bool, detail? : JsValue) -> Unit = _
+  init_custom_event(
+    self : Self,
+    type_ : String,
+    bubbles? : Bool,
+    cancelable? : Bool,
+    detail? : JsValue,
+  ) -> Unit = _
 }
 
 ///|
@@ -33,22 +39,46 @@ pub impl TCustomEvent for CustomEvent
 pub impl TJsValue for CustomEvent with to_js(self : CustomEvent) -> JsValue = "%identity"
 
 ///|
-fn custom_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> CustomEvent = "webapi_CustomEvent" "new"
+fn custom_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> CustomEvent = "webapi_CustomEvent" "new"
 
 ///|
-pub fn CustomEvent::new(type_ : String, event_init_dict? : CustomEventInit = default_custom_event_init()) -> CustomEvent {
+pub fn CustomEvent::new(
+  type_ : String,
+  event_init_dict? : CustomEventInit = default_custom_event_init(),
+) -> CustomEvent {
   custom_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|
-fn custom_event_init_custom_event_ffi(obj : JsValue, type_ : JsValue, bubbles : JsValue, cancelable : JsValue, detail : JsValue) -> Unit = "webapi_CustomEvent" "initCustomEvent"
+fn custom_event_init_custom_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+  detail : JsValue,
+) -> Unit = "webapi_CustomEvent" "initCustomEvent"
 
 ///|
-impl TCustomEvent with init_custom_event(self : Self, type_ : String, bubbles? : Bool, cancelable? : Bool, detail? : JsValue) -> Unit {
+impl TCustomEvent with init_custom_event(
+  self : Self,
+  type_ : String,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  detail? : JsValue,
+) -> Unit {
   let bubbles_js = opt_to_js(bubbles)
   let cancelable_js = opt_to_js(cancelable)
   let detail_js = opt_to_js(detail)
-  custom_event_init_custom_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), bubbles_js, cancelable_js, detail_js)
+  custom_event_init_custom_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_),
+    bubbles_js,
+    cancelable_js,
+    detail_js,
+  )
 }
 
 ///|

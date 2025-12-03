@@ -11,7 +11,11 @@
 pub type NavigationPrecommitHandler
 
 ///|
-pub impl TJsValue for NavigationPrecommitHandler with to_js(self : NavigationPrecommitHandler) -> JsValue = "%identity"
+pub impl TJsValue for NavigationPrecommitHandler with to_js(
+  self : NavigationPrecommitHandler,
+) -> JsValue = "%identity"
 
 ///|
-pub fn cb_navigation_precommit_handler(f : (JsValue) -> JsPromise[Unit]) -> NavigationPrecommitHandler = "webapi_NavigationPrecommitHandler" "new"
+pub fn cb_navigation_precommit_handler(
+  f : (JsValue) -> JsPromise[Unit],
+) -> NavigationPrecommitHandler = "webapi_NavigationPrecommitHandler" "new"

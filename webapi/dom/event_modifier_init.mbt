@@ -30,7 +30,22 @@ pub type EventModifierInit
 pub impl TJsValue for EventModifierInit with to_js(self : EventModifierInit) -> JsValue = "%identity"
 
 ///|
-fn event_modifier_init_ffi(ctrl_key : JsValue, shift_key : JsValue, alt_key : JsValue, meta_key : JsValue, modifier_alt_graph : JsValue, modifier_caps_lock : JsValue, modifier_fn : JsValue, modifier_fn_lock : JsValue, modifier_hyper : JsValue, modifier_num_lock : JsValue, modifier_scroll_lock : JsValue, modifier_super : JsValue, modifier_symbol : JsValue, modifier_symbol_lock : JsValue) -> EventModifierInit = "webapi_EventModifierInit" "new"
+fn event_modifier_init_ffi(
+  ctrl_key : JsValue,
+  shift_key : JsValue,
+  alt_key : JsValue,
+  meta_key : JsValue,
+  modifier_alt_graph : JsValue,
+  modifier_caps_lock : JsValue,
+  modifier_fn : JsValue,
+  modifier_fn_lock : JsValue,
+  modifier_hyper : JsValue,
+  modifier_num_lock : JsValue,
+  modifier_scroll_lock : JsValue,
+  modifier_super : JsValue,
+  modifier_symbol : JsValue,
+  modifier_symbol_lock : JsValue,
+) -> EventModifierInit = "webapi_EventModifierInit" "new"
 
 ///|
 pub fn EventModifierInit::new(
@@ -47,9 +62,24 @@ pub fn EventModifierInit::new(
   modifier_scroll_lock? : Bool = false,
   modifier_super? : Bool = false,
   modifier_symbol? : Bool = false,
-  modifier_symbol_lock? : Bool = false
+  modifier_symbol_lock? : Bool = false,
 ) -> EventModifierInit {
-  event_modifier_init_ffi(TJsValue::to_js(ctrl_key), TJsValue::to_js(shift_key), TJsValue::to_js(alt_key), TJsValue::to_js(meta_key), TJsValue::to_js(modifier_alt_graph), TJsValue::to_js(modifier_caps_lock), TJsValue::to_js(modifier_fn), TJsValue::to_js(modifier_fn_lock), TJsValue::to_js(modifier_hyper), TJsValue::to_js(modifier_num_lock), TJsValue::to_js(modifier_scroll_lock), TJsValue::to_js(modifier_super), TJsValue::to_js(modifier_symbol), TJsValue::to_js(modifier_symbol_lock))
+  event_modifier_init_ffi(
+    TJsValue::to_js(ctrl_key),
+    TJsValue::to_js(shift_key),
+    TJsValue::to_js(alt_key),
+    TJsValue::to_js(meta_key),
+    TJsValue::to_js(modifier_alt_graph),
+    TJsValue::to_js(modifier_caps_lock),
+    TJsValue::to_js(modifier_fn),
+    TJsValue::to_js(modifier_fn_lock),
+    TJsValue::to_js(modifier_hyper),
+    TJsValue::to_js(modifier_num_lock),
+    TJsValue::to_js(modifier_scroll_lock),
+    TJsValue::to_js(modifier_super),
+    TJsValue::to_js(modifier_symbol),
+    TJsValue::to_js(modifier_symbol_lock),
+  )
 }
 
 ///|

@@ -20,7 +20,7 @@ fn page_reveal_event_init_ffi(view_transition : JsValue) -> PageRevealEventInit 
 
 ///|
 pub fn PageRevealEventInit::new(
-  view_transition? : JsValue
+  view_transition? : JsValue,
 ) -> PageRevealEventInit {
   let view_transition_js = opt_to_js(view_transition)
   page_reveal_event_init_ffi(view_transition_js)

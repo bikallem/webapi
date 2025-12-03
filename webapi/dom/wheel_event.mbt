@@ -40,10 +40,16 @@ pub impl TWheelEvent for WheelEvent
 pub impl TJsValue for WheelEvent with to_js(self : WheelEvent) -> JsValue = "%identity"
 
 ///|
-fn wheel_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> WheelEvent = "webapi_WheelEvent" "new"
+fn wheel_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> WheelEvent = "webapi_WheelEvent" "new"
 
 ///|
-pub fn WheelEvent::new(type_ : String, event_init_dict? : WheelEventInit = default_wheel_event_init()) -> WheelEvent {
+pub fn WheelEvent::new(
+  type_ : String,
+  event_init_dict? : WheelEventInit = default_wheel_event_init(),
+) -> WheelEvent {
   wheel_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 

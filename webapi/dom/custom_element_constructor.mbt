@@ -11,7 +11,11 @@
 pub type CustomElementConstructor
 
 ///|
-pub impl TJsValue for CustomElementConstructor with to_js(self : CustomElementConstructor) -> JsValue = "%identity"
+pub impl TJsValue for CustomElementConstructor with to_js(
+  self : CustomElementConstructor,
+) -> JsValue = "%identity"
 
 ///|
-pub fn cb_custom_element_constructor(f : () -> HTMLElement) -> CustomElementConstructor = "webapi_CustomElementConstructor" "new"
+pub fn cb_custom_element_constructor(
+  f : () -> HTMLElement,
+) -> CustomElementConstructor = "webapi_CustomElementConstructor" "new"

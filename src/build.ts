@@ -332,6 +332,12 @@ async function build(): Promise<void> {
     // Generate JS runtime
     await generateJsRuntime(mergedIdl);
 
+    // Format generated files with moon fmt
+    console.log("Formatting generated files...");
+    const { execSync } = await import("node:child_process");
+    const webapiDir = path.resolve(OUTPUT_DIR, "..");
+    execSync("moon fmt", { cwd: webapiDir, stdio: "inherit" });
+
     console.log("\n=== Build complete! ===");
     console.log(`Output directory: ${OUTPUT_DIR}`);
 

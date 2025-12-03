@@ -11,7 +11,11 @@
 pub type FunctionStringCallback
 
 ///|
-pub impl TJsValue for FunctionStringCallback with to_js(self : FunctionStringCallback) -> JsValue = "%identity"
+pub impl TJsValue for FunctionStringCallback with to_js(
+  self : FunctionStringCallback,
+) -> JsValue = "%identity"
 
 ///|
-pub fn cb_function_string_callback(f : (String) -> Unit) -> FunctionStringCallback = "webapi_FunctionStringCallback" "new"
+pub fn cb_function_string_callback(
+  f : (String) -> Unit,
+) -> FunctionStringCallback = "webapi_FunctionStringCallback" "new"

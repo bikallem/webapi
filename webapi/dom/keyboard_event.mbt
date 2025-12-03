@@ -66,7 +66,19 @@ pub trait TKeyboardEvent: TJsValue + TUIEvent {
   char_code(self : Self) -> Int = _
   key_code(self : Self) -> Int = _
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
-  init_keyboard_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, key_arg? : String, location_arg? : Int, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit = _
+  init_keyboard_event(
+    self : Self,
+    type_arg : String,
+    bubbles_arg? : Bool,
+    cancelable_arg? : Bool,
+    view_arg? : Window,
+    key_arg? : String,
+    location_arg? : Int,
+    ctrl_key? : Bool,
+    alt_key? : Bool,
+    shift_key? : Bool,
+    meta_key? : Bool,
+  ) -> Unit = _
 }
 
 ///|
@@ -82,26 +94,65 @@ pub impl TKeyboardEvent for KeyboardEvent
 pub impl TJsValue for KeyboardEvent with to_js(self : KeyboardEvent) -> JsValue = "%identity"
 
 ///|
-fn keyboard_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> KeyboardEvent = "webapi_KeyboardEvent" "new"
+fn keyboard_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> KeyboardEvent = "webapi_KeyboardEvent" "new"
 
 ///|
-pub fn KeyboardEvent::new(type_ : String, event_init_dict? : KeyboardEventInit = default_keyboard_event_init()) -> KeyboardEvent {
-  keyboard_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+pub fn KeyboardEvent::new(
+  type_ : String,
+  event_init_dict? : KeyboardEventInit = default_keyboard_event_init(),
+) -> KeyboardEvent {
+  keyboard_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
 }
 
 ///|
-fn keyboard_event_get_modifier_state_ffi(obj : JsValue, key_arg : JsValue) -> JsValue = "webapi_KeyboardEvent" "getModifierState"
+fn keyboard_event_get_modifier_state_ffi(
+  obj : JsValue,
+  key_arg : JsValue,
+) -> JsValue = "webapi_KeyboardEvent" "getModifierState"
 
 ///|
 impl TKeyboardEvent with get_modifier_state(self : Self, key_arg : String) -> Bool {
-  keyboard_event_get_modifier_state_ffi(TJsValue::to_js(self), TJsValue::to_js(key_arg)).unsafe_cast()
+  keyboard_event_get_modifier_state_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(key_arg),
+  ).unsafe_cast()
 }
 
 ///|
-fn keyboard_event_init_keyboard_event_ffi(obj : JsValue, type_arg : JsValue, bubbles_arg : JsValue, cancelable_arg : JsValue, view_arg : JsValue, key_arg : JsValue, location_arg : JsValue, ctrl_key : JsValue, alt_key : JsValue, shift_key : JsValue, meta_key : JsValue) -> Unit = "webapi_KeyboardEvent" "initKeyboardEvent"
+fn keyboard_event_init_keyboard_event_ffi(
+  obj : JsValue,
+  type_arg : JsValue,
+  bubbles_arg : JsValue,
+  cancelable_arg : JsValue,
+  view_arg : JsValue,
+  key_arg : JsValue,
+  location_arg : JsValue,
+  ctrl_key : JsValue,
+  alt_key : JsValue,
+  shift_key : JsValue,
+  meta_key : JsValue,
+) -> Unit = "webapi_KeyboardEvent" "initKeyboardEvent"
 
 ///|
-impl TKeyboardEvent with init_keyboard_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, key_arg? : String, location_arg? : Int, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit {
+impl TKeyboardEvent with init_keyboard_event(
+  self : Self,
+  type_arg : String,
+  bubbles_arg? : Bool,
+  cancelable_arg? : Bool,
+  view_arg? : Window,
+  key_arg? : String,
+  location_arg? : Int,
+  ctrl_key? : Bool,
+  alt_key? : Bool,
+  shift_key? : Bool,
+  meta_key? : Bool,
+) -> Unit {
   let bubbles_arg_js = opt_to_js(bubbles_arg)
   let cancelable_arg_js = opt_to_js(cancelable_arg)
   let view_arg_js = opt_to_js(view_arg)
@@ -111,7 +162,19 @@ impl TKeyboardEvent with init_keyboard_event(self : Self, type_arg : String, bub
   let alt_key_js = opt_to_js(alt_key)
   let shift_key_js = opt_to_js(shift_key)
   let meta_key_js = opt_to_js(meta_key)
-  keyboard_event_init_keyboard_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_arg), bubbles_arg_js, cancelable_arg_js, view_arg_js, key_arg_js, location_arg_js, ctrl_key_js, alt_key_js, shift_key_js, meta_key_js)
+  keyboard_event_init_keyboard_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_arg),
+    bubbles_arg_js,
+    cancelable_arg_js,
+    view_arg_js,
+    key_arg_js,
+    location_arg_js,
+    ctrl_key_js,
+    alt_key_js,
+    shift_key_js,
+    meta_key_js,
+  )
 }
 
 ///|

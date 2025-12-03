@@ -75,20 +75,36 @@ impl TDOMTokenList with remove(self : Self, tokens : String) -> Unit {
 }
 
 ///|
-fn dom_token_list_toggle_ffi(obj : JsValue, token : JsValue, force : JsValue) -> JsValue = "webapi_DOMTokenList" "toggle"
+fn dom_token_list_toggle_ffi(
+  obj : JsValue,
+  token : JsValue,
+  force : JsValue,
+) -> JsValue = "webapi_DOMTokenList" "toggle"
 
 ///|
 impl TDOMTokenList with toggle(self : Self, token : String, force? : Bool) -> Bool {
   let force_js = opt_to_js(force)
-  dom_token_list_toggle_ffi(TJsValue::to_js(self), TJsValue::to_js(token), force_js).unsafe_cast()
+  dom_token_list_toggle_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(token),
+    force_js,
+  ).unsafe_cast()
 }
 
 ///|
-fn dom_token_list_replace_ffi(obj : JsValue, token : JsValue, new_token : JsValue) -> JsValue = "webapi_DOMTokenList" "replace"
+fn dom_token_list_replace_ffi(
+  obj : JsValue,
+  token : JsValue,
+  new_token : JsValue,
+) -> JsValue = "webapi_DOMTokenList" "replace"
 
 ///|
 impl TDOMTokenList with replace(self : Self, token : String, new_token : String) -> Bool {
-  dom_token_list_replace_ffi(TJsValue::to_js(self), TJsValue::to_js(token), TJsValue::to_js(new_token)).unsafe_cast()
+  dom_token_list_replace_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(token),
+    TJsValue::to_js(new_token),
+  ).unsafe_cast()
 }
 
 ///|

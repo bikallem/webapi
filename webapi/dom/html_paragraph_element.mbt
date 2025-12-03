@@ -32,7 +32,9 @@ pub impl THTMLElement for HTMLParagraphElement
 pub impl THTMLParagraphElement for HTMLParagraphElement
 
 ///|
-pub impl TJsValue for HTMLParagraphElement with to_js(self : HTMLParagraphElement) -> JsValue = "%identity"
+pub impl TJsValue for HTMLParagraphElement with to_js(
+  self : HTMLParagraphElement,
+) -> JsValue = "%identity"
 
 ///|
 pub fn HTMLParagraphElement::new() -> HTMLParagraphElement = "webapi_HTMLParagraphElement" "new"

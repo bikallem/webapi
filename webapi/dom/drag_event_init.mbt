@@ -19,9 +19,7 @@ pub impl TJsValue for DragEventInit with to_js(self : DragEventInit) -> JsValue 
 fn drag_event_init_ffi(data_transfer : JsValue) -> DragEventInit = "webapi_DragEventInit" "new"
 
 ///|
-pub fn DragEventInit::new(
-  data_transfer? : JsValue
-) -> DragEventInit {
+pub fn DragEventInit::new(data_transfer? : JsValue) -> DragEventInit {
   let data_transfer_js = opt_to_js(data_transfer)
   drag_event_init_ffi(data_transfer_js)
 }

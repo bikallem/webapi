@@ -36,10 +36,16 @@ pub impl TInputEvent for InputEvent
 pub impl TJsValue for InputEvent with to_js(self : InputEvent) -> JsValue = "%identity"
 
 ///|
-fn input_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> InputEvent = "webapi_InputEvent" "new"
+fn input_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> InputEvent = "webapi_InputEvent" "new"
 
 ///|
-pub fn InputEvent::new(type_ : String, event_init_dict? : InputEventInit = default_input_event_init()) -> InputEvent {
+pub fn InputEvent::new(
+  type_ : String,
+  event_init_dict? : InputEventInit = default_input_event_init(),
+) -> InputEvent {
   input_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 

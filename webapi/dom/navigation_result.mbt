@@ -17,12 +17,15 @@ pub type NavigationResult
 pub impl TJsValue for NavigationResult with to_js(self : NavigationResult) -> JsValue = "%identity"
 
 ///|
-fn navigation_result_ffi(committed : JsValue, finished : JsValue) -> NavigationResult = "webapi_NavigationResult" "new"
+fn navigation_result_ffi(
+  committed : JsValue,
+  finished : JsValue,
+) -> NavigationResult = "webapi_NavigationResult" "new"
 
 ///|
 pub fn NavigationResult::new(
   committed? : JsPromise[JsValue],
-  finished? : JsPromise[JsValue]
+  finished? : JsPromise[JsValue],
 ) -> NavigationResult {
   let committed_js = opt_to_js(committed)
   let finished_js = opt_to_js(finished)

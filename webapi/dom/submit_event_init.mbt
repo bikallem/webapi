@@ -20,7 +20,7 @@ fn submit_event_init_ffi(submitter : JsValue) -> SubmitEventInit = "webapi_Submi
 
 ///|
 pub fn SubmitEventInit::new(
-  submitter? : HTMLElement = JsValue::null()
+  submitter? : HTMLElement = JsValue::null(),
 ) -> SubmitEventInit {
   submit_event_init_ffi(TJsValue::to_js(submitter))
 }
