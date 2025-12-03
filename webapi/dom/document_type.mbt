@@ -35,6 +35,12 @@ pub impl TDocumentType for DocumentType
 pub impl TJsValue for DocumentType with to_js(self : DocumentType) -> JsValue = "%identity"
 
 ///|
+pub fn DocumentType::null() -> DocumentType = "JsValue" "null"
+
+///|
+pub fn DocumentType::is_null(self : DocumentType) -> Bool = "JsValue" "isNull"
+
+///|
 fn document_type_name_ffi(obj : JsValue) -> String = "webapi_DocumentType" "name"
 
 ///|

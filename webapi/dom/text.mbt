@@ -38,6 +38,12 @@ pub impl TText for Text
 pub impl TJsValue for Text with to_js(self : Text) -> JsValue = "%identity"
 
 ///|
+pub fn Text::null() -> Text = "JsValue" "null"
+
+///|
+pub fn Text::is_null(self : Text) -> Bool = "JsValue" "isNull"
+
+///|
 fn text_new_ffi(data : JsValue) -> Text = "webapi_Text" "new"
 
 ///|

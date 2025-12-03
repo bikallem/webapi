@@ -178,6 +178,12 @@ pub impl TElement for Element
 pub impl TJsValue for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
+pub fn Element::null() -> Element = "JsValue" "null"
+
+///|
+pub fn Element::is_null(self : Element) -> Bool = "JsValue" "isNull"
+
+///|
 fn element_get_client_rects_ffi(obj : JsValue) -> JsValue = "webapi_Element" "getClientRects"
 
 ///|

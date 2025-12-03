@@ -91,6 +91,12 @@ pub impl TRange for Range
 pub impl TJsValue for Range with to_js(self : Range) -> JsValue = "%identity"
 
 ///|
+pub fn Range::null() -> Range = "JsValue" "null"
+
+///|
+pub fn Range::is_null(self : Range) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn Range::new() -> Range = "webapi_Range" "new"
 
 ///|

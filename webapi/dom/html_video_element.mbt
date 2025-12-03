@@ -41,6 +41,12 @@ pub impl THTMLVideoElement for HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement with to_js(self : HTMLVideoElement) -> JsValue = "%identity"
 
 ///|
+pub fn HTMLVideoElement::null() -> HTMLVideoElement = "JsValue" "null"
+
+///|
+pub fn HTMLVideoElement::is_null(self : HTMLVideoElement) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn HTMLVideoElement::new() -> HTMLVideoElement = "webapi_HTMLVideoElement" "new"
 
 ///|

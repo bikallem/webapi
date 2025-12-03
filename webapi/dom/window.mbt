@@ -209,6 +209,12 @@ pub impl TWindow for Window
 pub impl TJsValue for Window with to_js(self : Window) -> JsValue = "%identity"
 
 ///|
+pub fn Window::null() -> Window = "JsValue" "null"
+
+///|
+pub fn Window::is_null(self : Window) -> Bool = "JsValue" "isNull"
+
+///|
 fn window_match_media_ffi(obj : JsValue, query : JsValue) -> JsValue = "webapi_Window" "matchMedia"
 
 ///|

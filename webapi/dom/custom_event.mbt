@@ -39,6 +39,12 @@ pub impl TCustomEvent for CustomEvent
 pub impl TJsValue for CustomEvent with to_js(self : CustomEvent) -> JsValue = "%identity"
 
 ///|
+pub fn CustomEvent::null() -> CustomEvent = "JsValue" "null"
+
+///|
+pub fn CustomEvent::is_null(self : CustomEvent) -> Bool = "JsValue" "isNull"
+
+///|
 fn custom_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,

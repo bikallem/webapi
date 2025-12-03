@@ -80,6 +80,12 @@ pub impl THTMLFormElement for HTMLFormElement
 pub impl TJsValue for HTMLFormElement with to_js(self : HTMLFormElement) -> JsValue = "%identity"
 
 ///|
+pub fn HTMLFormElement::null() -> HTMLFormElement = "JsValue" "null"
+
+///|
+pub fn HTMLFormElement::is_null(self : HTMLFormElement) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn HTMLFormElement::new() -> HTMLFormElement = "webapi_HTMLFormElement" "new"
 
 ///|

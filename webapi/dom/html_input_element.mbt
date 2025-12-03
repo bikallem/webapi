@@ -199,6 +199,12 @@ pub impl THTMLInputElement for HTMLInputElement
 pub impl TJsValue for HTMLInputElement with to_js(self : HTMLInputElement) -> JsValue = "%identity"
 
 ///|
+pub fn HTMLInputElement::null() -> HTMLInputElement = "JsValue" "null"
+
+///|
+pub fn HTMLInputElement::is_null(self : HTMLInputElement) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn HTMLInputElement::new() -> HTMLInputElement = "webapi_HTMLInputElement" "new"
 
 ///|

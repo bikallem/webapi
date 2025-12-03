@@ -40,6 +40,12 @@ pub impl TAbortSignal for AbortSignal
 pub impl TJsValue for AbortSignal with to_js(self : AbortSignal) -> JsValue = "%identity"
 
 ///|
+pub fn AbortSignal::null() -> AbortSignal = "JsValue" "null"
+
+///|
+pub fn AbortSignal::is_null(self : AbortSignal) -> Bool = "JsValue" "isNull"
+
+///|
 fn abort_signal_abort_ffi(reason : JsValue) -> JsValue = "webapi_AbortSignal" "abort"
 
 ///|

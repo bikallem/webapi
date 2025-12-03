@@ -41,6 +41,12 @@ pub impl TMutationRecord for MutationRecord
 pub impl TJsValue for MutationRecord with to_js(self : MutationRecord) -> JsValue = "%identity"
 
 ///|
+pub fn MutationRecord::null() -> MutationRecord = "JsValue" "null"
+
+///|
+pub fn MutationRecord::is_null(self : MutationRecord) -> Bool = "JsValue" "isNull"
+
+///|
 fn mutation_record_type_ffi(obj : JsValue) -> String = "webapi_MutationRecord" "type"
 
 ///|

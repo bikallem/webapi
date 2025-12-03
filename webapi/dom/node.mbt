@@ -111,6 +111,12 @@ pub impl TNode for Node
 pub impl TJsValue for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
+pub fn Node::null() -> Node = "JsValue" "null"
+
+///|
+pub fn Node::is_null(self : Node) -> Bool = "JsValue" "isNull"
+
+///|
 fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Node" "getRootNode"
 
 ///|

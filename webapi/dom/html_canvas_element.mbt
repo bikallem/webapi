@@ -44,6 +44,12 @@ pub impl THTMLCanvasElement for HTMLCanvasElement
 pub impl TJsValue for HTMLCanvasElement with to_js(self : HTMLCanvasElement) -> JsValue = "%identity"
 
 ///|
+pub fn HTMLCanvasElement::null() -> HTMLCanvasElement = "JsValue" "null"
+
+///|
+pub fn HTMLCanvasElement::is_null(self : HTMLCanvasElement) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn HTMLCanvasElement::new() -> HTMLCanvasElement = "webapi_HTMLCanvasElement" "new"
 
 ///|

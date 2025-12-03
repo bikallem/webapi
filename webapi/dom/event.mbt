@@ -77,6 +77,12 @@ pub impl TEvent for Event
 pub impl TJsValue for Event with to_js(self : Event) -> JsValue = "%identity"
 
 ///|
+pub fn Event::null() -> Event = "JsValue" "null"
+
+///|
+pub fn Event::is_null(self : Event) -> Bool = "JsValue" "isNull"
+
+///|
 fn event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> Event = "webapi_Event" "new"
 
 ///|

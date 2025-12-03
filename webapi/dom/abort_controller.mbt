@@ -30,6 +30,12 @@ pub impl TAbortController for AbortController
 pub impl TJsValue for AbortController with to_js(self : AbortController) -> JsValue = "%identity"
 
 ///|
+pub fn AbortController::null() -> AbortController = "JsValue" "null"
+
+///|
+pub fn AbortController::is_null(self : AbortController) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn AbortController::new() -> AbortController = "webapi_AbortController" "new"
 
 ///|

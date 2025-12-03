@@ -264,6 +264,12 @@ pub impl TDocument for Document
 pub impl TJsValue for Document with to_js(self : Document) -> JsValue = "%identity"
 
 ///|
+pub fn Document::null() -> Document = "JsValue" "null"
+
+///|
+pub fn Document::is_null(self : Document) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn Document::new() -> Document = "webapi_Document" "new"
 
 ///|

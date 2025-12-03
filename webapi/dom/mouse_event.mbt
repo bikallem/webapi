@@ -108,6 +108,12 @@ pub impl TMouseEvent for MouseEvent
 pub impl TJsValue for MouseEvent with to_js(self : MouseEvent) -> JsValue = "%identity"
 
 ///|
+pub fn MouseEvent::null() -> MouseEvent = "JsValue" "null"
+
+///|
+pub fn MouseEvent::is_null(self : MouseEvent) -> Bool = "JsValue" "isNull"
+
+///|
 fn mouse_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,

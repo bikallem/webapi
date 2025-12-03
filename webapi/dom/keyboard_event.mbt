@@ -94,6 +94,12 @@ pub impl TKeyboardEvent for KeyboardEvent
 pub impl TJsValue for KeyboardEvent with to_js(self : KeyboardEvent) -> JsValue = "%identity"
 
 ///|
+pub fn KeyboardEvent::null() -> KeyboardEvent = "JsValue" "null"
+
+///|
+pub fn KeyboardEvent::is_null(self : KeyboardEvent) -> Bool = "JsValue" "isNull"
+
+///|
 fn keyboard_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,

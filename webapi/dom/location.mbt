@@ -59,6 +59,12 @@ pub impl TLocation for Location
 pub impl TJsValue for Location with to_js(self : Location) -> JsValue = "%identity"
 
 ///|
+pub fn Location::null() -> Location = "JsValue" "null"
+
+///|
+pub fn Location::is_null(self : Location) -> Bool = "JsValue" "isNull"
+
+///|
 fn location_assign_ffi(obj : JsValue, url : JsValue) -> Unit = "webapi_Location" "assign"
 
 ///|

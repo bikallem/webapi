@@ -29,6 +29,12 @@ pub impl THTMLCollection for HTMLCollection
 pub impl TJsValue for HTMLCollection with to_js(self : HTMLCollection) -> JsValue = "%identity"
 
 ///|
+pub fn HTMLCollection::null() -> HTMLCollection = "JsValue" "null"
+
+///|
+pub fn HTMLCollection::is_null(self : HTMLCollection) -> Bool = "JsValue" "isNull"
+
+///|
 fn html_collection_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_HTMLCollection" "item"
 
 ///|

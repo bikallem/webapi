@@ -32,6 +32,12 @@ pub impl TFocusEvent for FocusEvent
 pub impl TJsValue for FocusEvent with to_js(self : FocusEvent) -> JsValue = "%identity"
 
 ///|
+pub fn FocusEvent::null() -> FocusEvent = "JsValue" "null"
+
+///|
+pub fn FocusEvent::is_null(self : FocusEvent) -> Bool = "JsValue" "isNull"
+
+///|
 fn focus_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,

@@ -26,4 +26,10 @@ pub impl THTMLSpanElement for HTMLSpanElement
 pub impl TJsValue for HTMLSpanElement with to_js(self : HTMLSpanElement) -> JsValue = "%identity"
 
 ///|
+pub fn HTMLSpanElement::null() -> HTMLSpanElement = "JsValue" "null"
+
+///|
+pub fn HTMLSpanElement::is_null(self : HTMLSpanElement) -> Bool = "JsValue" "isNull"
+
+///|
 pub fn HTMLSpanElement::new() -> HTMLSpanElement = "webapi_HTMLSpanElement" "new"

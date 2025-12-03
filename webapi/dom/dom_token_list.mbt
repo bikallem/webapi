@@ -43,6 +43,12 @@ pub impl TDOMTokenList for DOMTokenList
 pub impl TJsValue for DOMTokenList with to_js(self : DOMTokenList) -> JsValue = "%identity"
 
 ///|
+pub fn DOMTokenList::null() -> DOMTokenList = "JsValue" "null"
+
+///|
+pub fn DOMTokenList::is_null(self : DOMTokenList) -> Bool = "JsValue" "isNull"
+
+///|
 fn dom_token_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DOMTokenList" "item"
 
 ///|

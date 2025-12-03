@@ -34,6 +34,17 @@ pub impl TJsValue for ${iface.name} with to_js(self : ${iface.name}) -> JsValue 
 }
 
 /**
+ * Emit null() and is_null() methods for nullable interface types
+ */
+function emitNullableMethods(iface: ParsedInterface): string {
+  return `///|
+pub fn ${iface.name}::null() -> ${iface.name} = "JsValue" "null"
+
+///|
+pub fn ${iface.name}::is_null(self : ${iface.name}) -> Bool = "JsValue" "isNull"`;
+}
+
+/**
  * Get trait bounds (parent traits) for an interface
  */
 function getTraitBounds(
@@ -195,6 +206,9 @@ export function emitInterface(
 
   // TJsValue implementation (after trait definitions)
   parts.push(emitTJsValueImpl(iface));
+
+  // Nullable methods (null() and is_null())
+  parts.push(emitNullableMethods(iface));
 
   // Constructors
   const constructorCode = emitConstructors(iface);
