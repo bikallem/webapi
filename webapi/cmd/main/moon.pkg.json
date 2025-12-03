@@ -1,9 +1,8 @@
 {
-  "is-main": true,
-  "import": [
-    {
-      "path": "bikallem/webapi/dom",
-      "alias": "lib"
-    }
-  ]
+  "is-main": true
+  // "import": [
+  //   {
+  //     "path": "bikallem/webapi/dom"
+  //   }
+  // ]
 }

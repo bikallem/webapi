@@ -131,7 +131,8 @@ export function emitJsRuntime(idl: ParsedIdl): string {
   
   modules.push(`  JsValue: {
     undefined: () => undefined,
-    null: () => null
+    null: () => null,
+    isNull: (value) => value === null || value === undefined
   }`);
   
   modules.push(`  JsNull: {

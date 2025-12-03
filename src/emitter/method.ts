@@ -412,50 +412,29 @@ impl ${traitName} with ${methodName}(${paramsStr}) -> ${returnType} {${bindingsS
 
 /**
  * Emit static method as a type method (X::method_name)
- * Static methods can have default values in their wrapper functions
+ * Static methods always use a wrapper to handle type conversions
  */
 function emitStaticMethod(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
   const methodName = toSnakeCase(method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
   const jsFuncName = method.name;
+  const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(method.name)}_ffi${suffix}`;
 
-  // Check if we need a wrapper (for optional params)
-  const hasOptionalParams = method.params.some(p => p.optional);
+  const returnMapped = mapIdlType(method.returnType);
+  const returnType = returnMapped.moonbitType === "Unit" ? "Unit" : "JsValue";
 
-  if (!hasOptionalParams) {
-    // Direct FFI binding - all params required
-    const params: string[] = [];
-    for (const param of method.params) {
-      const mapped = mapIdlType(param.type);
-      const safeName = escapeKeyword(toSnakeCase(param.name));
-      params.push(`${safeName} : ${mapped.moonbitType}`);
-    }
-
-    const returnMapped = mapIdlType(method.returnType);
-    const returnType = returnMapped.moonbitType === "Unit" ? "Unit" : "JsValue";
-    const paramsStr = params.join(", ");
-
-    return `///|
-pub fn ${iface.name}::${methodName}(${paramsStr}) -> ${returnType} = "${moduleName}" "${jsFuncName}"`;
-  }
-
-  // Need wrapper for optional params
-  // First emit FFI
+  // Always emit FFI with JsValue params
   const ffiParams: string[] = [];
   for (const param of method.params) {
     const safeName = escapeKeyword(toSnakeCase(param.name));
     ffiParams.push(`${safeName} : JsValue`);
   }
   const ffiParamsStr = ffiParams.join(", ");
-  const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(method.name)}_ffi${suffix}`;
-
-  const returnMapped = mapIdlType(method.returnType);
-  const returnType = returnMapped.moonbitType === "Unit" ? "Unit" : "JsValue";
 
   const ffiFn = `///|
 fn ${ffiName}(${ffiParamsStr}) -> ${returnType} = "${moduleName}" "${jsFuncName}"`;
 
-  // Then emit wrapper with defaults
+  // Emit wrapper with proper types and defaults
   const wrapperParams: string[] = [];
   const letBindings: string[] = [];
   const callArgs: string[] = [];
@@ -479,6 +458,7 @@ fn ${ffiName}(${ffiParamsStr}) -> ${returnType} = "${moduleName}" "${jsFuncName}
       callArgs.push(jsVarName);
     } else {
       wrapperParams.push(`${safeName} : ${mapped.moonbitType}`);
+      // Always convert to JsValue for FFI
       if (mapped.needsConversion) {
         callArgs.push(`TJsValue::to_js(${safeName})`);
       } else {

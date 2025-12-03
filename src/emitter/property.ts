@@ -9,7 +9,7 @@ import { mapIdlType, formatReturnType } from '../mapping.js';
 export function emitTraitPropertyGetter(prop: ParsedProperty): string {
   const methodName = escapeKeyword(toSnakeCase(prop.name));
   const returnType = formatReturnType(prop.type);
-  
+
   return `  ${methodName}(self : Self) -> ${returnType} = _`;
 }
 
@@ -21,7 +21,7 @@ export function emitTraitPropertySetter(prop: ParsedProperty): string {
   const methodName = `set_${escapeKeyword(toSnakeCase(prop.name))}`;
   const mapped = mapIdlType(prop.type);
   const paramType = mapped.moonbitType;
-  
+
   return `  ${methodName}(self : Self, value : ${paramType}) -> Unit = _`;
 }
 
@@ -31,19 +31,19 @@ export function emitTraitPropertySetter(prop: ParsedProperty): string {
  */
 export function emitTraitProperties(iface: ParsedInterface): string[] {
   const lines: string[] = [];
-  
+
   for (const prop of iface.properties) {
     if (prop.static) continue; // Skip static, handle separately
-    
+
     // Getter
     lines.push(emitTraitPropertyGetter(prop));
-    
+
     // Setter (if not readonly)
     if (!prop.readonly) {
       lines.push(emitTraitPropertySetter(prop));
     }
   }
-  
+
   return lines;
 }
 
@@ -65,12 +65,12 @@ function emitPropertyGetterFfi(iface: ParsedInterface, prop: ParsedProperty): st
   const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(prop.name)}_ffi`;
   const moduleName = toFfiModuleName(iface.name);
   const mapped = mapIdlType(prop.type);
-  
+
   // FFI can only return primitive types or JsValue
-  const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional 
-    ? mapped.moonbitType 
+  const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
+    ? mapped.moonbitType
     : "JsValue";
-  
+
   return `///|
 fn ${ffiName}(obj : JsValue) -> ${ffiReturnType} = "${moduleName}" "${prop.name}"`;
 }
@@ -82,10 +82,10 @@ function emitPropertySetterFfi(iface: ParsedInterface, prop: ParsedProperty): st
   const ffiName = `${toSnakeCase(iface.name)}_set_${toSnakeCase(prop.name)}_ffi`;
   const moduleName = toFfiModuleName(iface.name);
   const mapped = mapIdlType(prop.type);
-  
+
   // For setter, use JsValue if not FFI-safe
   const paramType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
-  
+
   return `///|
 fn ${ffiName}(obj : JsValue, value : ${paramType}) -> Unit = "${moduleName}" "set_${prop.name}"`;
 }
@@ -99,12 +99,12 @@ function emitPropertyGetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   const traitName = toTraitName(iface.name);
   const returnType = formatReturnType(prop.type);
   const mapped = mapIdlType(prop.type);
-  
+
   // Determine if we need type conversion
-  const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional 
-    ? mapped.moonbitType 
+  const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
+    ? mapped.moonbitType
     : "JsValue";
-  
+
   let bodyExpr: string;
   if (ffiReturnType === returnType) {
     // No conversion needed
@@ -116,7 +116,7 @@ function emitPropertyGetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
     // Use unsafe_cast for type conversion
     bodyExpr = `${ffiName}(self.to_js()).unsafe_cast()`;
   }
-  
+
   return `///|
 impl ${traitName} with ${methodName}(self : Self) -> ${returnType} {
   ${bodyExpr}
@@ -131,13 +131,24 @@ function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   const ffiName = `${toSnakeCase(iface.name)}_set_${toSnakeCase(prop.name)}_ffi`;
   const traitName = toTraitName(iface.name);
   const mapped = mapIdlType(prop.type);
-  
+
   // For setter, use JsValue if not FFI-safe
   const paramType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
   const needsConversion = paramType === "JsValue" && mapped.moonbitType !== "JsValue";
-  
-  const valueExpr = needsConversion ? "value.to_js()" : "value";
-  
+
+  // Check if the type is optional (ends with ?)
+  const isOptionalType = mapped.moonbitType.endsWith("?");
+
+  let valueExpr: string;
+  if (isOptionalType) {
+    // Use opt_to_js for optional types
+    valueExpr = "opt_to_js(value)";
+  } else if (needsConversion) {
+    valueExpr = "value.to_js()";
+  } else {
+    valueExpr = "value";
+  }
+
   return `///|
 impl ${traitName} with ${methodName}(self : Self, value : ${mapped.moonbitType}) -> Unit {
   ${ffiName}(self.to_js(), ${valueExpr})
@@ -149,22 +160,22 @@ impl ${traitName} with ${methodName}(self : Self, value : ${mapped.moonbitType})
  */
 export function emitProperties(iface: ParsedInterface): string {
   const parts: string[] = [];
-  
+
   for (const prop of iface.properties) {
     if (prop.static) {
       // Static properties as type methods with direct FFI
       const methodName = escapeKeyword(toSnakeCase(prop.name));
       const mapped = mapIdlType(prop.type);
       const moduleName = toFfiModuleName(iface.name);
-      
+
       // Use FFI-safe return type
-      const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional 
-        ? mapped.moonbitType 
+      const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
+        ? mapped.moonbitType
         : "JsValue";
-      
+
       parts.push(`///|
 pub fn ${iface.name}::${methodName}() -> ${ffiReturnType} = "${moduleName}" "static_${prop.name}"`);
-      
+
       if (!prop.readonly) {
         const setterParamType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
         parts.push(`///|
@@ -174,13 +185,13 @@ pub fn ${iface.name}::set_${methodName}(value : ${setterParamType}) -> Unit = "$
       // Instance properties: FFI + impl
       parts.push(emitPropertyGetterFfi(iface, prop));
       parts.push(emitPropertyGetterImpl(iface, prop));
-      
+
       if (!prop.readonly) {
         parts.push(emitPropertySetterFfi(iface, prop));
         parts.push(emitPropertySetterImpl(iface, prop));
       }
     }
   }
-  
+
   return parts.join('\n\n');
 }

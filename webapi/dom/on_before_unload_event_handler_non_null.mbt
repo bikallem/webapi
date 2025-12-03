@@ -17,6 +17,13 @@ pub impl TJsValue for OnBeforeUnloadEventHandlerNonNull with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+fn on_before_unload_event_handler_non_null_new_ffi(
+  f : JsValue,
+) -> OnBeforeUnloadEventHandlerNonNull = "webapi_OnBeforeUnloadEventHandlerNonNull" "new"
+
+///|
 pub fn OnBeforeUnloadEventHandlerNonNull::new(
   f : (Event) -> String?,
-) -> OnBeforeUnloadEventHandlerNonNull = "webapi_OnBeforeUnloadEventHandlerNonNull" "new"
+) -> OnBeforeUnloadEventHandlerNonNull {
+  on_before_unload_event_handler_non_null_new_ffi(fn_to_js(f))
+}

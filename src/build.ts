@@ -23,6 +23,8 @@ import {
   getDictionaryFilename,
   emitCallback,
   getCallbackFilename,
+  emitTypedef,
+  getTypedefFilename,
   emitGlobals,
   emitJsRuntime,
 } from "./emitter/index.js";
@@ -210,8 +212,17 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
     }
   }
 
-  // Keep typedefs
-  filtered.typedefs = idl.typedefs;
+  // Keep typedefs that we want to generate (event handlers, etc.)
+  const GENERATED_TYPEDEFS = new Set([
+    "EventHandler",
+    "OnErrorEventHandler",
+    "OnBeforeUnloadEventHandler",
+  ]);
+  for (const [name, typedef] of idl.typedefs) {
+    if (GENERATED_TYPEDEFS.has(name)) {
+      filtered.typedefs.set(name, typedef);
+    }
+  }
 
   // Filter includes to only those involving core interfaces
   for (const include of idl.includes) {
@@ -289,6 +300,16 @@ async function generateMoonBitFiles(idl: ParsedIdl): Promise<void> {
     await fs.writeFile(filepath, content, "utf-8");
   }
 
+  // Generate typedef files
+  for (const [name, typedef] of idl.typedefs) {
+    const filename = getTypedefFilename(name);
+    const content = emitTypedef(typedef, idl);
+    const filepath = path.join(OUTPUT_DIR, filename);
+
+    console.log(`  Writing ${filename}...`);
+    await fs.writeFile(filepath, content, "utf-8");
+  }
+
   // Generate globals file
   const globalsContent = emitGlobals(idl);
   const globalsPath = path.join(OUTPUT_DIR, "globals.mbt");
@@ -338,6 +359,7 @@ async function build(): Promise<void> {
     console.log(`  - ${mergedIdl.interfaces.size} interfaces`);
     console.log(`  - ${mergedIdl.dictionaries.size} dictionaries`);
     console.log(`  - ${mergedIdl.callbacks.size} callbacks`);
+    console.log(`  - ${mergedIdl.typedefs.size} typedefs`);
     console.log(`  - ${mergedIdl.enums.size} enums\n`);
 
     // Register dictionary names for proper type mapping

@@ -168,10 +168,10 @@ pub trait TDocument: TJsValue {
   set_design_mode(self : Self, value : String) -> Unit = _
   hidden(self : Self) -> Bool = _
   visibility_state(self : Self) -> JsValue = _
-  onreadystatechange(self : Self) -> JsValue = _
-  set_onreadystatechange(self : Self, value : JsValue) -> Unit = _
-  onvisibilitychange(self : Self) -> JsValue = _
-  set_onvisibilitychange(self : Self, value : JsValue) -> Unit = _
+  onreadystatechange(self : Self) -> EventHandler = _
+  set_onreadystatechange(self : Self, value : EventHandler) -> Unit = _
+  onvisibilitychange(self : Self) -> EventHandler = _
+  set_onvisibilitychange(self : Self, value : EventHandler) -> Unit = _
   fg_color(self : Self) -> String = _
   set_fg_color(self : Self, value : String) -> Unit = _
   link_color(self : Self) -> String = _
@@ -650,7 +650,12 @@ impl TDocument with create_tree_walker(
 }
 
 ///|
-pub fn Document::parse_html_unsafe(html : JsValue) -> JsValue = "webapi_Document" "parseHTMLUnsafe"
+fn document_parse_html_unsafe_ffi(html : JsValue) -> JsValue = "webapi_Document" "parseHTMLUnsafe"
+
+///|
+pub fn Document::parse_html_unsafe(html : JsValue) -> JsValue {
+  document_parse_html_unsafe_ffi(html)
+}
 
 ///|
 fn document_get_elements_by_name_ffi(
@@ -1162,32 +1167,32 @@ impl TDocument with visibility_state(self : Self) -> JsValue {
 fn document_onreadystatechange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onreadystatechange"
 
 ///|
-impl TDocument with onreadystatechange(self : Self) -> JsValue {
-  document_onreadystatechange_ffi(self.to_js())
+impl TDocument with onreadystatechange(self : Self) -> EventHandler {
+  document_onreadystatechange_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
 fn document_set_onreadystatechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onreadystatechange"
 
 ///|
-impl TDocument with set_onreadystatechange(self : Self, value : JsValue) -> Unit {
-  document_set_onreadystatechange_ffi(self.to_js(), value)
+impl TDocument with set_onreadystatechange(self : Self, value : EventHandler) -> Unit {
+  document_set_onreadystatechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
 fn document_onvisibilitychange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onvisibilitychange"
 
 ///|
-impl TDocument with onvisibilitychange(self : Self) -> JsValue {
-  document_onvisibilitychange_ffi(self.to_js())
+impl TDocument with onvisibilitychange(self : Self) -> EventHandler {
+  document_onvisibilitychange_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
 fn document_set_onvisibilitychange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onvisibilitychange"
 
 ///|
-impl TDocument with set_onvisibilitychange(self : Self, value : JsValue) -> Unit {
-  document_set_onvisibilitychange_ffi(self.to_js(), value)
+impl TDocument with set_onvisibilitychange(self : Self, value : EventHandler) -> Unit {
+  document_set_onvisibilitychange_ffi(self.to_js(), value.to_js())
 }
 
 ///|

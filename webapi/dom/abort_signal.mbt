@@ -25,8 +25,8 @@ pub type AbortSignal
 pub trait TAbortSignal: TJsValue + TEventTarget {
   aborted(self : Self) -> Bool = _
   reason(self : Self) -> JsValue = _
-  onabort(self : Self) -> JsValue = _
-  set_onabort(self : Self, value : JsValue) -> Unit = _
+  onabort(self : Self) -> EventHandler = _
+  set_onabort(self : Self, value : EventHandler) -> Unit = _
   throw_if_aborted(self : Self) -> Unit = _
 }
 
@@ -49,10 +49,20 @@ pub fn AbortSignal::abort(reason? : JsValue) -> JsValue {
 }
 
 ///|
-pub fn AbortSignal::timeout(milliseconds : Int64) -> JsValue = "webapi_AbortSignal" "timeout"
+fn abort_signal_timeout_ffi(milliseconds : JsValue) -> JsValue = "webapi_AbortSignal" "timeout"
 
 ///|
-pub fn AbortSignal::any(signals : Array[AbortSignal]) -> JsValue = "webapi_AbortSignal" "any"
+pub fn AbortSignal::timeout(milliseconds : Int64) -> JsValue {
+  abort_signal_timeout_ffi(TJsValue::to_js(milliseconds))
+}
+
+///|
+fn abort_signal_any_ffi(signals : JsValue) -> JsValue = "webapi_AbortSignal" "any"
+
+///|
+pub fn AbortSignal::any(signals : Array[AbortSignal]) -> JsValue {
+  abort_signal_any_ffi(TJsValue::to_js(signals))
+}
 
 ///|
 fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "webapi_AbortSignal" "throwIfAborted"
@@ -82,14 +92,14 @@ impl TAbortSignal with reason(self : Self) -> JsValue {
 fn abort_signal_onabort_ffi(obj : JsValue) -> JsValue = "webapi_AbortSignal" "onabort"
 
 ///|
-impl TAbortSignal with onabort(self : Self) -> JsValue {
-  abort_signal_onabort_ffi(self.to_js())
+impl TAbortSignal with onabort(self : Self) -> EventHandler {
+  abort_signal_onabort_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
 fn abort_signal_set_onabort_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_AbortSignal" "set_onabort"
 
 ///|
-impl TAbortSignal with set_onabort(self : Self, value : JsValue) -> Unit {
-  abort_signal_set_onabort_ffi(self.to_js(), value)
+impl TAbortSignal with set_onabort(self : Self, value : EventHandler) -> Unit {
+  abort_signal_set_onabort_ffi(self.to_js(), value.to_js())
 }

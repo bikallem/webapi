@@ -42,7 +42,7 @@ function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
     // Generic types like sequence<T>, Promise<T>, FrozenArray<T>
     const generic = idlType.generic.toLowerCase();
     const innerTypes = idlType.idlType as webidl2.IDLTypeDescription[];
-    
+
     if (generic === "sequence") {
       return {
         type: "sequence",
@@ -81,7 +81,7 @@ function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
     // We need to get the non-nullable version by parsing without the nullable flag
     // Since webidl2 uses getters, we can't just spread the object
     const innerTypeName = idlType.idlType as string;
-    
+
     // Check what the inner type is
     if (typeof innerTypeName === "string") {
       // Simple nullable type like EventListener?
@@ -92,7 +92,7 @@ function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
         "DOMString", "USVString", "ByteString", "bigint",
         "undefined", "void", "any", "object"
       ];
-      
+
       let elementType: ParsedType;
       if (innerTypeName === "any") {
         elementType = { type: "any" };
@@ -103,7 +103,7 @@ function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
       } else {
         elementType = { type: "reference", name: innerTypeName };
       }
-      
+
       return {
         type: "nullable",
         elementType,
@@ -121,7 +121,7 @@ function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
 
   // Simple type reference
   const typeName = idlType.idlType as string;
-  
+
   // Check for primitive types
   const primitives = [
     "boolean", "byte", "octet", "short", "unsigned short",
@@ -209,9 +209,9 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
             params: parseParams(member.arguments),
             returnType: parseIdlType(member.idlType),
             static: member.special === "static",
-            special: member.special === "getter" || member.special === "setter" || 
-                     member.special === "deleter" || member.special === "stringifier"
-                     ? member.special : undefined,
+            special: member.special === "getter" || member.special === "setter" ||
+              member.special === "deleter" || member.special === "stringifier"
+              ? member.special : undefined,
           });
         }
         break;
@@ -255,7 +255,7 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
  */
 function parseInterface(def: webidl2.InterfaceType | webidl2.InterfaceMixinType): ParsedInterface {
   const { methods, properties, constants, constructors } = parseInterfaceMembers(def.members);
-  
+
   return {
     name: def.name,
     inheritance: def.type === "interface" ? ((def as webidl2.InterfaceType).inheritance ?? undefined) : undefined,
@@ -286,7 +286,7 @@ function parseDictionaryMembers(members: webidl2.DictionaryMemberType[]): Parsed
  */
 export function parseIdl(idlText: string): ParsedIdl {
   const ast = webidl2.parse(idlText);
-  
+
   const result: ParsedIdl = {
     interfaces: new Map(),
     dictionaries: new Map(),
@@ -344,6 +344,7 @@ export function parseIdl(idlText: string): ParsedIdl {
         result.typedefs.set(def.name, {
           name: def.name,
           type: parseIdlType(def.idlType),
+          idlSource: getIdlSource(def),
         });
         break;
 
@@ -411,8 +412,8 @@ function mergeInterface(base: ParsedInterface, partial: ParsedInterface): void {
   base.constructors.push(...partial.constructors);
   // Combine IDL sources
   if (partial.idlSource) {
-    base.idlSource = base.idlSource 
-      ? `${base.idlSource}\n\n${partial.idlSource}` 
+    base.idlSource = base.idlSource
+      ? `${base.idlSource}\n\n${partial.idlSource}`
       : partial.idlSource;
   }
 }
@@ -424,8 +425,8 @@ function mergeDictionary(base: ParsedDictionary, partial: ParsedDictionary): voi
   base.members.push(...partial.members);
   // Combine IDL sources
   if (partial.idlSource) {
-    base.idlSource = base.idlSource 
-      ? `${base.idlSource}\n\n${partial.idlSource}` 
+    base.idlSource = base.idlSource
+      ? `${base.idlSource}\n\n${partial.idlSource}`
       : partial.idlSource;
   }
 }
@@ -491,7 +492,7 @@ export function applyMixins(idl: ParsedIdl): void {
   for (const include of idl.includes) {
     const target = idl.interfaces.get(include.target);
     const mixin = idl.interfaces.get(include.mixin);
-    
+
     if (target && mixin) {
       // Add mixin to target's mixin list for trait inheritance
       if (!target.mixins.includes(include.mixin)) {
@@ -513,12 +514,12 @@ export function getInheritanceChain(
 ): string[] {
   const chain: string[] = [];
   let current = interfaces.get(interfaceName);
-  
+
   while (current?.inheritance) {
     chain.push(current.inheritance);
     current = interfaces.get(current.inheritance);
   }
-  
+
   return chain;
 }
 
@@ -531,27 +532,27 @@ export function getAllTraitAncestors(
 ): string[] {
   const ancestors = new Set<string>();
   const visited = new Set<string>();
-  
+
   function visit(name: string) {
     if (visited.has(name)) return;
     visited.add(name);
-    
+
     const iface = interfaces.get(name);
     if (!iface) return;
-    
+
     // Add parent
     if (iface.inheritance) {
       ancestors.add(iface.inheritance);
       visit(iface.inheritance);
     }
-    
+
     // Add mixins
     for (const mixin of iface.mixins) {
       ancestors.add(mixin);
       visit(mixin);
     }
   }
-  
+
   visit(interfaceName);
   return Array.from(ancestors);
 }

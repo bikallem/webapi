@@ -14,6 +14,11 @@ pub type MutationCallback
 pub impl TJsValue for MutationCallback with to_js(self : MutationCallback) -> JsValue = "%identity"
 
 ///|
+fn mutation_callback_new_ffi(f : JsValue) -> MutationCallback = "webapi_MutationCallback" "new"
+
+///|
 pub fn MutationCallback::new(
   f : (Array[MutationRecord], MutationObserver) -> Unit,
-) -> MutationCallback = "webapi_MutationCallback" "new"
+) -> MutationCallback {
+  mutation_callback_new_ffi(fn_to_js(f))
+}

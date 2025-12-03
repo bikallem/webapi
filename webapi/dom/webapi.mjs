@@ -10,7 +10,8 @@ export const wasmImportObject = {
 
   JsValue: {
     undefined: () => undefined,
-    null: () => null
+    null: () => null,
+    isNull: (value) => value === null || value === undefined
   },
 
   JsNull: {

@@ -80,7 +80,12 @@ pub impl TJsValue for HTMLScriptElement with to_js(self : HTMLScriptElement) -> 
 pub fn HTMLScriptElement::new() -> HTMLScriptElement = "webapi_HTMLScriptElement" "new"
 
 ///|
-pub fn HTMLScriptElement::supports(type_ : String) -> JsValue = "webapi_HTMLScriptElement" "supports"
+fn html_script_element_supports_ffi(type_ : JsValue) -> JsValue = "webapi_HTMLScriptElement" "supports"
+
+///|
+pub fn HTMLScriptElement::supports(type_ : String) -> JsValue {
+  html_script_element_supports_ffi(TJsValue::to_js(type_))
+}
 
 ///|
 fn html_script_element_type_ffi(obj : JsValue) -> String = "webapi_HTMLScriptElement" "type"

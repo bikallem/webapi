@@ -148,3 +148,11 @@ pub fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
 ///|
 /// Cast JsValue to an optional type (nullable return from JS)
 pub fn[T] JsValue::as_option(self : JsValue) -> T? = "%identity"
+
+// ============================================================================
+// Function Conversion Helpers
+// ============================================================================
+
+///|
+/// Convert a MoonBit function to JsValue for use in callbacks
+pub fn[T] fn_to_js(f : T) -> JsValue = "%identity"

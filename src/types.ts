@@ -86,6 +86,7 @@ export interface ParsedCallback {
 export interface ParsedTypedef {
   name: string;
   type: ParsedType;
+  idlSource?: string; // Original WebIDL source text
 }
 
 export interface ParsedIdl {

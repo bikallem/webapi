@@ -149,10 +149,30 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
         };
       }
 
-      // Handle EventHandler and similar typedefs (callbacks that are nullable)
-      if (name === "EventHandler" || name === "OnErrorEventHandler" ||
-        name === "OnBeforeUnloadEventHandler" ||
-        name.endsWith("Callback") || name.endsWith("Handler")) {
+      // Handle EventHandler and similar typedefs
+      // Map to the typedef type directly (not the underlying callback)
+      if (name === "EventHandler") {
+        return {
+          moonbitType: "EventHandler",
+          needsConversion: true,
+          isOptional: false,
+        };
+      }
+      if (name === "OnErrorEventHandler") {
+        return {
+          moonbitType: "OnErrorEventHandler",
+          needsConversion: true,
+          isOptional: false,
+        };
+      }
+      if (name === "OnBeforeUnloadEventHandler") {
+        return {
+          moonbitType: "OnBeforeUnloadEventHandler",
+          needsConversion: true,
+          isOptional: false,
+        };
+      }
+      if (name.endsWith("Callback") || name.endsWith("Handler")) {
         return {
           moonbitType: "JsValue",
           needsConversion: false,
