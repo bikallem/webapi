@@ -1,6 +1,9 @@
 build:
 	NEW_MOON=1 moon build --target js
 
+gen:
+	npm run build && node dist/build.js
+
 all: clean fmt build info
 
 fmt:
@@ -12,4 +15,4 @@ clean:
 info:
 	NEW_MOON=1 moon info --target js
 
-.PHONY: build fmt clean
+.PHONY: build gen fmt clean info
