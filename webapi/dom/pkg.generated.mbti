@@ -1,0 +1,1953 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi/dom"
+
+// Values
+pub fn[T : TJsValue] array_to_js(Array[T]) -> JsValue
+
+pub fn default_js_value() -> JsValue
+
+pub let document : Document
+
+pub fn[T] fn_to_js(T) -> JsValue
+
+pub let navigator : Navigator
+
+pub fn[T : TJsValue] opt_to_js(T?) -> JsValue
+
+pub let window : Window
+
+// Errors
+
+// Types and methods
+#external
+pub type AbortController
+pub fn AbortController::is_null(Self) -> Bool
+pub fn AbortController::new() -> Self
+pub fn AbortController::null() -> Self
+pub impl TAbortController for AbortController
+pub impl TJsValue for AbortController
+
+#external
+pub type AbortSignal
+pub fn AbortSignal::abort(reason? : JsValue) -> JsValue
+pub fn AbortSignal::any(Array[Self]) -> JsValue
+pub fn AbortSignal::is_null(Self) -> Bool
+pub fn AbortSignal::null() -> Self
+pub fn AbortSignal::timeout(Int64) -> JsValue
+pub impl TAbortSignal for AbortSignal
+pub impl TEventTarget for AbortSignal
+pub impl TJsValue for AbortSignal
+
+#external
+pub type AddEventListenerOptions
+pub fn AddEventListenerOptions::empty() -> Self
+pub fn AddEventListenerOptions::new(passive? : Bool, once? : Bool, signal? : AbortSignal) -> Self
+pub impl TAddEventListenerOptionsArg for AddEventListenerOptions
+pub impl TJsValue for AddEventListenerOptions
+
+#external
+pub type AssignedNodesOptions
+pub fn AssignedNodesOptions::empty() -> Self
+pub fn AssignedNodesOptions::new(flatten? : Bool) -> Self
+pub impl TJsValue for AssignedNodesOptions
+
+#external
+pub type Attr
+pub fn Attr::is_null(Self) -> Bool
+pub fn Attr::null() -> Self
+pub impl TAttr for Attr
+pub impl TEventTarget for Attr
+pub impl TJsValue for Attr
+pub impl TNode for Attr
+
+#external
+pub type BlobCallback
+pub fn BlobCallback::new((JsValue) -> Unit) -> Self
+pub impl TJsValue for BlobCallback
+
+#external
+pub type BoxQuadOptions
+pub fn BoxQuadOptions::empty() -> Self
+pub fn BoxQuadOptions::new(box? : JsValue, relative_to? : JsValue) -> Self
+pub impl TJsValue for BoxQuadOptions
+
+#external
+pub type CDATASection
+pub fn CDATASection::is_null(Self) -> Bool
+pub fn CDATASection::null() -> Self
+pub impl TCDATASection for CDATASection
+pub impl TCharacterData for CDATASection
+pub impl TEventTarget for CDATASection
+pub impl TJsValue for CDATASection
+pub impl TNode for CDATASection
+pub impl TText for CDATASection
+
+#external
+pub type CSSStyleSheetInit
+pub fn CSSStyleSheetInit::empty() -> Self
+pub fn CSSStyleSheetInit::new(base_url? : String, media? : JsValue, disabled? : Bool) -> Self
+pub impl TJsValue for CSSStyleSheetInit
+
+#external
+pub type CanvasRenderingContext2DSettings
+pub fn CanvasRenderingContext2DSettings::empty() -> Self
+pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : JsValue, color_type? : JsValue, will_read_frequently? : Bool) -> Self
+pub impl TJsValue for CanvasRenderingContext2DSettings
+
+#external
+pub type CaretPositionFromPointOptions
+pub fn CaretPositionFromPointOptions::empty() -> Self
+pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[JsValue]) -> Self
+pub impl TJsValue for CaretPositionFromPointOptions
+
+#external
+pub type CharacterData
+pub fn CharacterData::is_null(Self) -> Bool
+pub fn CharacterData::null() -> Self
+pub impl TCharacterData for CharacterData
+pub impl TEventTarget for CharacterData
+pub impl TJsValue for CharacterData
+pub impl TNode for CharacterData
+
+#external
+pub type CheckVisibilityOptions
+pub fn CheckVisibilityOptions::empty() -> Self
+pub fn CheckVisibilityOptions::new(check_opacity? : Bool, check_visibility_css? : Bool, content_visibility_auto? : Bool, opacity_property? : Bool, visibility_property? : Bool) -> Self
+pub impl TJsValue for CheckVisibilityOptions
+
+#external
+pub type CloseWatcherOptions
+pub fn CloseWatcherOptions::empty() -> Self
+pub fn CloseWatcherOptions::new(signal? : AbortSignal) -> Self
+pub impl TJsValue for CloseWatcherOptions
+
+#external
+pub type CommandEventInit
+pub fn CommandEventInit::empty() -> Self
+pub fn CommandEventInit::new(source? : Element, command? : String) -> Self
+pub impl TJsValue for CommandEventInit
+
+#external
+pub type Comment
+pub fn Comment::is_null(Self) -> Bool
+pub fn Comment::new(data? : String) -> Self
+pub fn Comment::null() -> Self
+pub impl TCharacterData for Comment
+pub impl TComment for Comment
+pub impl TEventTarget for Comment
+pub impl TJsValue for Comment
+pub impl TNode for Comment
+
+#external
+pub type CompositionEventInit
+pub fn CompositionEventInit::empty() -> Self
+pub fn CompositionEventInit::new(data? : String) -> Self
+pub impl TJsValue for CompositionEventInit
+
+#external
+pub type ConvertCoordinateOptions
+pub fn ConvertCoordinateOptions::empty() -> Self
+pub fn ConvertCoordinateOptions::new(from_box? : JsValue, to_box? : JsValue) -> Self
+pub impl TJsValue for ConvertCoordinateOptions
+
+#external
+pub type CustomElementConstructor
+pub fn CustomElementConstructor::new(() -> HTMLElement) -> Self
+pub impl TJsValue for CustomElementConstructor
+
+#external
+pub type CustomEvent
+pub fn CustomEvent::is_null(Self) -> Bool
+pub fn CustomEvent::new(String, event_init_dict? : CustomEventInit) -> Self
+pub fn CustomEvent::null() -> Self
+pub impl TCustomEvent for CustomEvent
+pub impl TEvent for CustomEvent
+pub impl TJsValue for CustomEvent
+
+#external
+pub type CustomEventInit
+pub fn CustomEventInit::empty() -> Self
+pub fn CustomEventInit::new(detail? : JsValue) -> Self
+pub impl TJsValue for CustomEventInit
+
+#external
+pub type DOMTokenList
+pub fn DOMTokenList::is_null(Self) -> Bool
+pub fn DOMTokenList::null() -> Self
+pub impl TDOMTokenList for DOMTokenList
+pub impl TJsValue for DOMTokenList
+
+#external
+pub type Document
+pub fn Document::is_null(Self) -> Bool
+pub fn Document::new() -> Self
+pub fn Document::null() -> Self
+pub fn Document::parse_html_unsafe(JsValue) -> JsValue
+pub impl TDocument for Document
+pub impl TJsValue for Document
+
+#external
+pub type DocumentFragment
+pub fn DocumentFragment::is_null(Self) -> Bool
+pub fn DocumentFragment::new() -> Self
+pub fn DocumentFragment::null() -> Self
+pub impl TDocumentFragment for DocumentFragment
+pub impl TEventTarget for DocumentFragment
+pub impl TJsValue for DocumentFragment
+pub impl TNode for DocumentFragment
+
+#external
+pub type DocumentType
+pub fn DocumentType::is_null(Self) -> Bool
+pub fn DocumentType::null() -> Self
+pub impl TDocumentType for DocumentType
+pub impl TEventTarget for DocumentType
+pub impl TJsValue for DocumentType
+pub impl TNode for DocumentType
+
+#external
+pub type DragEventInit
+pub fn DragEventInit::empty() -> Self
+pub fn DragEventInit::new(data_transfer? : JsValue) -> Self
+pub impl TJsValue for DragEventInit
+
+#external
+pub type Element
+pub fn Element::is_null(Self) -> Bool
+pub fn Element::null() -> Self
+pub impl TElement for Element
+pub impl TJsValue for Element
+
+#external
+pub type ElementCreationOptions
+pub fn ElementCreationOptions::empty() -> Self
+pub fn ElementCreationOptions::new(custom_element_registry? : JsValue, is_? : String) -> Self
+pub impl TCreateElementNSOptionsArg for ElementCreationOptions
+pub impl TCreateElementOptionsArg for ElementCreationOptions
+pub impl TJsValue for ElementCreationOptions
+
+#external
+pub type ElementDefinitionOptions
+pub fn ElementDefinitionOptions::empty() -> Self
+pub fn ElementDefinitionOptions::new(extends? : String) -> Self
+pub impl TJsValue for ElementDefinitionOptions
+
+#external
+pub type ErrorEventInit
+pub fn ErrorEventInit::empty() -> Self
+pub fn ErrorEventInit::new(message? : String, filename? : String, lineno? : Int, colno? : Int, error? : JsValue) -> Self
+pub impl TJsValue for ErrorEventInit
+
+#external
+pub type Event
+pub fn Event::is_null(Self) -> Bool
+pub fn Event::new(String, event_init_dict? : EventInit) -> Self
+pub fn Event::null() -> Self
+pub impl TEvent for Event
+pub impl TJsValue for Event
+
+#external
+pub type EventHandler
+pub fn EventHandler::is_null(Self) -> Bool
+pub fn EventHandler::new((Event) -> JsValue) -> Self
+pub fn EventHandler::null() -> Self
+pub impl TJsValue for EventHandler
+
+#external
+pub type EventHandlerNonNull
+pub fn EventHandlerNonNull::new((Event) -> JsValue) -> Self
+pub impl TJsValue for EventHandlerNonNull
+
+#external
+pub type EventInit
+pub fn EventInit::empty() -> Self
+pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool) -> Self
+pub impl TJsValue for EventInit
+
+#external
+pub type EventListener
+pub fn EventListener::is_null(Self) -> Bool
+pub fn EventListener::new((Event) -> Unit) -> Self
+pub fn EventListener::null() -> Self
+pub impl TJsValue for EventListener
+
+#external
+pub type EventListenerOptions
+pub fn EventListenerOptions::empty() -> Self
+pub fn EventListenerOptions::new(capture? : Bool) -> Self
+pub impl TJsValue for EventListenerOptions
+pub impl TRemoveEventListenerOptionsArg for EventListenerOptions
+
+#external
+pub type EventModifierInit
+pub fn EventModifierInit::empty() -> Self
+pub fn EventModifierInit::new(ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool) -> Self
+pub impl TJsValue for EventModifierInit
+
+#external
+pub type EventSourceInit
+pub fn EventSourceInit::empty() -> Self
+pub fn EventSourceInit::new(with_credentials? : Bool) -> Self
+pub impl TJsValue for EventSourceInit
+
+#external
+pub type EventTarget
+pub fn EventTarget::is_null(Self) -> Bool
+pub fn EventTarget::new() -> Self
+pub fn EventTarget::null() -> Self
+pub impl TEventTarget for EventTarget
+pub impl TJsValue for EventTarget
+
+#external
+pub type FocusEvent
+pub fn FocusEvent::is_null(Self) -> Bool
+pub fn FocusEvent::new(String, event_init_dict? : FocusEventInit) -> Self
+pub fn FocusEvent::null() -> Self
+pub impl TEvent for FocusEvent
+pub impl TFocusEvent for FocusEvent
+pub impl TJsValue for FocusEvent
+pub impl TUIEvent for FocusEvent
+
+#external
+pub type FocusEventInit
+pub fn FocusEventInit::empty() -> Self
+pub fn FocusEventInit::new(related_target? : EventTarget) -> Self
+pub impl TJsValue for FocusEventInit
+
+#external
+pub type FocusOptions
+pub fn FocusOptions::empty() -> Self
+pub fn FocusOptions::new(prevent_scroll? : Bool, focus_visible? : Bool) -> Self
+pub impl TJsValue for FocusOptions
+
+#external
+pub type FormDataEventInit
+pub fn FormDataEventInit::empty() -> Self
+pub fn FormDataEventInit::new(JsValue) -> Self
+pub impl TJsValue for FormDataEventInit
+
+#external
+pub type FrameRequestCallback
+pub fn FrameRequestCallback::new((Double) -> Unit) -> Self
+pub impl TJsValue for FrameRequestCallback
+
+#external
+pub type FunctionStringCallback
+pub fn FunctionStringCallback::new((String) -> Unit) -> Self
+pub impl TJsValue for FunctionStringCallback
+
+#external
+pub type GetHTMLOptions
+pub fn GetHTMLOptions::empty() -> Self
+pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[JsValue]) -> Self
+pub impl TJsValue for GetHTMLOptions
+
+#external
+pub type GetRootNodeOptions
+pub fn GetRootNodeOptions::empty() -> Self
+pub fn GetRootNodeOptions::new(composed? : Bool) -> Self
+pub impl TJsValue for GetRootNodeOptions
+
+#external
+pub type HTMLAnchorElement
+pub fn HTMLAnchorElement::is_null(Self) -> Bool
+pub fn HTMLAnchorElement::new() -> Self
+pub fn HTMLAnchorElement::null() -> Self
+pub impl THTMLAnchorElement for HTMLAnchorElement
+pub impl THTMLElement for HTMLAnchorElement
+pub impl TJsValue for HTMLAnchorElement
+
+#external
+pub type HTMLAudioElement
+pub fn HTMLAudioElement::is_null(Self) -> Bool
+pub fn HTMLAudioElement::new() -> Self
+pub fn HTMLAudioElement::null() -> Self
+pub impl THTMLAudioElement for HTMLAudioElement
+pub impl TJsValue for HTMLAudioElement
+
+#external
+pub type HTMLBodyElement
+pub fn HTMLBodyElement::is_null(Self) -> Bool
+pub fn HTMLBodyElement::new() -> Self
+pub fn HTMLBodyElement::null() -> Self
+pub impl THTMLBodyElement for HTMLBodyElement
+pub impl THTMLElement for HTMLBodyElement
+pub impl TJsValue for HTMLBodyElement
+
+#external
+pub type HTMLButtonElement
+pub fn HTMLButtonElement::is_null(Self) -> Bool
+pub fn HTMLButtonElement::new() -> Self
+pub fn HTMLButtonElement::null() -> Self
+pub impl THTMLButtonElement for HTMLButtonElement
+pub impl THTMLElement for HTMLButtonElement
+pub impl TJsValue for HTMLButtonElement
+
+#external
+pub type HTMLCanvasElement
+pub fn HTMLCanvasElement::is_null(Self) -> Bool
+pub fn HTMLCanvasElement::new() -> Self
+pub fn HTMLCanvasElement::null() -> Self
+pub impl THTMLCanvasElement for HTMLCanvasElement
+pub impl THTMLElement for HTMLCanvasElement
+pub impl TJsValue for HTMLCanvasElement
+
+#external
+pub type HTMLCollection
+pub fn HTMLCollection::is_null(Self) -> Bool
+pub fn HTMLCollection::null() -> Self
+pub impl THTMLCollection for HTMLCollection
+pub impl TJsValue for HTMLCollection
+
+#external
+pub type HTMLDivElement
+pub fn HTMLDivElement::is_null(Self) -> Bool
+pub fn HTMLDivElement::new() -> Self
+pub fn HTMLDivElement::null() -> Self
+pub impl THTMLDivElement for HTMLDivElement
+pub impl THTMLElement for HTMLDivElement
+pub impl TJsValue for HTMLDivElement
+
+#external
+pub type HTMLElement
+pub fn HTMLElement::is_null(Self) -> Bool
+pub fn HTMLElement::new() -> Self
+pub fn HTMLElement::null() -> Self
+pub impl THTMLElement for HTMLElement
+pub impl TJsValue for HTMLElement
+
+#external
+pub type HTMLFormElement
+pub fn HTMLFormElement::is_null(Self) -> Bool
+pub fn HTMLFormElement::new() -> Self
+pub fn HTMLFormElement::null() -> Self
+pub impl THTMLElement for HTMLFormElement
+pub impl THTMLFormElement for HTMLFormElement
+pub impl TJsValue for HTMLFormElement
+
+#external
+pub type HTMLHeadElement
+pub fn HTMLHeadElement::is_null(Self) -> Bool
+pub fn HTMLHeadElement::new() -> Self
+pub fn HTMLHeadElement::null() -> Self
+pub impl THTMLElement for HTMLHeadElement
+pub impl THTMLHeadElement for HTMLHeadElement
+pub impl TJsValue for HTMLHeadElement
+
+#external
+pub type HTMLHtmlElement
+pub fn HTMLHtmlElement::is_null(Self) -> Bool
+pub fn HTMLHtmlElement::new() -> Self
+pub fn HTMLHtmlElement::null() -> Self
+pub impl THTMLElement for HTMLHtmlElement
+pub impl THTMLHtmlElement for HTMLHtmlElement
+pub impl TJsValue for HTMLHtmlElement
+
+#external
+pub type HTMLImageElement
+pub fn HTMLImageElement::is_null(Self) -> Bool
+pub fn HTMLImageElement::new() -> Self
+pub fn HTMLImageElement::null() -> Self
+pub impl THTMLImageElement for HTMLImageElement
+pub impl TJsValue for HTMLImageElement
+
+#external
+pub type HTMLInputElement
+pub fn HTMLInputElement::is_null(Self) -> Bool
+pub fn HTMLInputElement::new() -> Self
+pub fn HTMLInputElement::null() -> Self
+pub impl THTMLElement for HTMLInputElement
+pub impl THTMLInputElement for HTMLInputElement
+pub impl TJsValue for HTMLInputElement
+
+#external
+pub type HTMLLinkElement
+pub fn HTMLLinkElement::is_null(Self) -> Bool
+pub fn HTMLLinkElement::new() -> Self
+pub fn HTMLLinkElement::null() -> Self
+pub impl THTMLElement for HTMLLinkElement
+pub impl THTMLLinkElement for HTMLLinkElement
+pub impl TJsValue for HTMLLinkElement
+
+#external
+pub type HTMLParagraphElement
+pub fn HTMLParagraphElement::is_null(Self) -> Bool
+pub fn HTMLParagraphElement::new() -> Self
+pub fn HTMLParagraphElement::null() -> Self
+pub impl THTMLElement for HTMLParagraphElement
+pub impl THTMLParagraphElement for HTMLParagraphElement
+pub impl TJsValue for HTMLParagraphElement
+
+#external
+pub type HTMLScriptElement
+pub fn HTMLScriptElement::is_null(Self) -> Bool
+pub fn HTMLScriptElement::new() -> Self
+pub fn HTMLScriptElement::null() -> Self
+pub fn HTMLScriptElement::supports(String) -> JsValue
+pub impl THTMLElement for HTMLScriptElement
+pub impl THTMLScriptElement for HTMLScriptElement
+pub impl TJsValue for HTMLScriptElement
+
+#external
+pub type HTMLSpanElement
+pub fn HTMLSpanElement::is_null(Self) -> Bool
+pub fn HTMLSpanElement::new() -> Self
+pub fn HTMLSpanElement::null() -> Self
+pub impl THTMLElement for HTMLSpanElement
+pub impl THTMLSpanElement for HTMLSpanElement
+pub impl TJsValue for HTMLSpanElement
+
+#external
+pub type HTMLStyleElement
+pub fn HTMLStyleElement::is_null(Self) -> Bool
+pub fn HTMLStyleElement::new() -> Self
+pub fn HTMLStyleElement::null() -> Self
+pub impl THTMLElement for HTMLStyleElement
+pub impl THTMLStyleElement for HTMLStyleElement
+pub impl TJsValue for HTMLStyleElement
+
+#external
+pub type HTMLVideoElement
+pub fn HTMLVideoElement::is_null(Self) -> Bool
+pub fn HTMLVideoElement::new() -> Self
+pub fn HTMLVideoElement::null() -> Self
+pub impl THTMLVideoElement for HTMLVideoElement
+pub impl TJsValue for HTMLVideoElement
+
+#external
+pub type HashChangeEventInit
+pub fn HashChangeEventInit::empty() -> Self
+pub fn HashChangeEventInit::new(old_url? : String, new_url? : String) -> Self
+pub impl TJsValue for HashChangeEventInit
+
+#external
+pub type History
+pub fn History::is_null(Self) -> Bool
+pub fn History::null() -> Self
+pub impl THistory for History
+pub impl TJsValue for History
+
+#external
+pub type ImageBitmapOptions
+pub fn ImageBitmapOptions::empty() -> Self
+pub fn ImageBitmapOptions::new(image_orientation? : JsValue, premultiply_alpha? : JsValue, color_space_conversion? : JsValue, resize_width? : Int, resize_height? : Int, resize_quality? : JsValue) -> Self
+pub impl TJsValue for ImageBitmapOptions
+
+#external
+pub type ImageBitmapRenderingContextSettings
+pub fn ImageBitmapRenderingContextSettings::empty() -> Self
+pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
+pub impl TJsValue for ImageBitmapRenderingContextSettings
+
+#external
+pub type ImageDataSettings
+pub fn ImageDataSettings::empty() -> Self
+pub fn ImageDataSettings::new(color_space? : JsValue, pixel_format? : JsValue) -> Self
+pub impl TJsValue for ImageDataSettings
+
+#external
+pub type ImageEncodeOptions
+pub fn ImageEncodeOptions::empty() -> Self
+pub fn ImageEncodeOptions::new(type_? : String, quality? : Double) -> Self
+pub impl TJsValue for ImageEncodeOptions
+
+#external
+pub type ImportNodeOptions
+pub fn ImportNodeOptions::empty() -> Self
+pub fn ImportNodeOptions::new(custom_element_registry? : JsValue, self_only? : Bool) -> Self
+pub impl TImportNodeOptionsArg for ImportNodeOptions
+pub impl TJsValue for ImportNodeOptions
+
+#external
+pub type InputEvent
+pub fn InputEvent::is_null(Self) -> Bool
+pub fn InputEvent::new(String, event_init_dict? : InputEventInit) -> Self
+pub fn InputEvent::null() -> Self
+pub impl TEvent for InputEvent
+pub impl TInputEvent for InputEvent
+pub impl TJsValue for InputEvent
+pub impl TUIEvent for InputEvent
+
+#external
+pub type InputEventInit
+pub fn InputEventInit::empty() -> Self
+pub fn InputEventInit::new(data? : String, is_composing? : Bool, input_type? : String) -> Self
+pub impl TJsValue for InputEventInit
+
+#external
+pub type JsArray
+pub fn JsArray::empty() -> Self
+pub fn JsArray::push(Self, JsValue) -> Unit
+pub impl TJsValue for JsArray
+
+#external
+pub type JsPromise[T]
+pub fn JsPromise::wait(Self[JsValue]) -> JsValue
+
+#external
+pub type JsValue
+pub fn[T] JsValue::as_option(Self) -> T?
+pub fn[T] JsValue::null() -> T
+pub fn JsValue::undefined() -> Self
+pub fn[T] JsValue::unsafe_cast(Self) -> T
+pub impl TJsValue for JsValue
+
+#external
+pub type KeyboardEvent
+pub fn KeyboardEvent::is_null(Self) -> Bool
+pub fn KeyboardEvent::new(String, event_init_dict? : KeyboardEventInit) -> Self
+pub fn KeyboardEvent::null() -> Self
+pub impl TEvent for KeyboardEvent
+pub impl TJsValue for KeyboardEvent
+pub impl TKeyboardEvent for KeyboardEvent
+pub impl TUIEvent for KeyboardEvent
+
+#external
+pub type KeyboardEventInit
+pub fn KeyboardEventInit::empty() -> Self
+pub fn KeyboardEventInit::new(key? : String, code? : String, location? : Int, repeat? : Bool, is_composing? : Bool, char_code? : Int, key_code? : Int) -> Self
+pub impl TJsValue for KeyboardEventInit
+
+#external
+pub type Location
+pub fn Location::is_null(Self) -> Bool
+pub fn Location::null() -> Self
+pub impl TJsValue for Location
+pub impl TLocation for Location
+
+#external
+pub type MediaQueryListEventInit
+pub fn MediaQueryListEventInit::empty() -> Self
+pub fn MediaQueryListEventInit::new(media? : JsValue, matches? : Bool) -> Self
+pub impl TJsValue for MediaQueryListEventInit
+
+#external
+pub type MessageEventInit
+pub fn MessageEventInit::empty() -> Self
+pub fn MessageEventInit::new(data? : JsValue, origin? : String, last_event_id? : String, source? : JsValue, ports? : Array[JsValue]) -> Self
+pub impl TJsValue for MessageEventInit
+
+#external
+pub type MouseEvent
+pub fn MouseEvent::is_null(Self) -> Bool
+pub fn MouseEvent::new(String, event_init_dict? : MouseEventInit) -> Self
+pub fn MouseEvent::null() -> Self
+pub impl TJsValue for MouseEvent
+pub impl TMouseEvent for MouseEvent
+
+#external
+pub type MouseEventInit
+pub fn MouseEventInit::empty() -> Self
+pub fn MouseEventInit::new(screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : Int, related_target? : EventTarget) -> Self
+pub impl TJsValue for MouseEventInit
+
+#external
+pub type MutationCallback
+pub fn MutationCallback::new((Array[MutationRecord], MutationObserver) -> Unit) -> Self
+pub impl TJsValue for MutationCallback
+
+#external
+pub type MutationObserver
+pub fn MutationObserver::is_null(Self) -> Bool
+pub fn MutationObserver::new(JsValue) -> Self
+pub fn MutationObserver::null() -> Self
+pub impl TJsValue for MutationObserver
+pub impl TMutationObserver for MutationObserver
+
+#external
+pub type MutationObserverInit
+pub fn MutationObserverInit::empty() -> Self
+pub fn MutationObserverInit::new(child_list? : Bool, attributes? : Bool, character_data? : Bool, subtree? : Bool, attribute_old_value? : Bool, character_data_old_value? : Bool, attribute_filter? : Array[String]) -> Self
+pub impl TJsValue for MutationObserverInit
+
+#external
+pub type MutationRecord
+pub fn MutationRecord::is_null(Self) -> Bool
+pub fn MutationRecord::null() -> Self
+pub impl TJsValue for MutationRecord
+pub impl TMutationRecord for MutationRecord
+
+#external
+pub type NamedNodeMap
+pub fn NamedNodeMap::is_null(Self) -> Bool
+pub fn NamedNodeMap::null() -> Self
+pub impl TJsValue for NamedNodeMap
+pub impl TNamedNodeMap for NamedNodeMap
+
+#external
+pub type Navigator
+pub fn Navigator::is_null(Self) -> Bool
+pub fn Navigator::null() -> Self
+pub impl TJsValue for Navigator
+pub impl TNavigator for Navigator
+
+#external
+pub type Node
+pub fn Node::is_null(Self) -> Bool
+pub fn Node::null() -> Self
+pub impl TEventTarget for Node
+pub impl TJsValue for Node
+pub impl TNode for Node
+
+#external
+pub type NodeList
+pub fn NodeList::is_null(Self) -> Bool
+pub fn NodeList::null() -> Self
+pub impl TJsValue for NodeList
+pub impl TNodeList for NodeList
+
+#external
+pub type OnBeforeUnloadEventHandler
+pub fn OnBeforeUnloadEventHandler::is_null(Self) -> Bool
+pub fn OnBeforeUnloadEventHandler::new((Event) -> String?) -> Self
+pub fn OnBeforeUnloadEventHandler::null() -> Self
+pub impl TJsValue for OnBeforeUnloadEventHandler
+
+#external
+pub type OnBeforeUnloadEventHandlerNonNull
+pub fn OnBeforeUnloadEventHandlerNonNull::new((Event) -> String?) -> Self
+pub impl TJsValue for OnBeforeUnloadEventHandlerNonNull
+
+#external
+pub type OnErrorEventHandler
+pub fn OnErrorEventHandler::is_null(Self) -> Bool
+pub fn OnErrorEventHandler::new((JsValue, String, Int, Int, JsValue) -> JsValue) -> Self
+pub fn OnErrorEventHandler::null() -> Self
+pub impl TJsValue for OnErrorEventHandler
+
+#external
+pub type OnErrorEventHandlerNonNull
+pub fn OnErrorEventHandlerNonNull::new((JsValue, String, Int, Int, JsValue) -> JsValue) -> Self
+pub impl TJsValue for OnErrorEventHandlerNonNull
+
+#external
+pub type PageTransitionEventInit
+pub fn PageTransitionEventInit::empty() -> Self
+pub fn PageTransitionEventInit::new(persisted? : Bool) -> Self
+pub impl TJsValue for PageTransitionEventInit
+
+#external
+pub type PopStateEventInit
+pub fn PopStateEventInit::empty() -> Self
+pub fn PopStateEventInit::new(state? : JsValue, has_ua_visual_transition? : Bool) -> Self
+pub impl TJsValue for PopStateEventInit
+
+#external
+pub type ProcessingInstruction
+pub fn ProcessingInstruction::is_null(Self) -> Bool
+pub fn ProcessingInstruction::null() -> Self
+pub impl TCharacterData for ProcessingInstruction
+pub impl TEventTarget for ProcessingInstruction
+pub impl TJsValue for ProcessingInstruction
+pub impl TNode for ProcessingInstruction
+pub impl TProcessingInstruction for ProcessingInstruction
+
+#external
+pub type PromiseRejectionEventInit
+pub fn PromiseRejectionEventInit::empty() -> Self
+pub fn PromiseRejectionEventInit::new(JsValue, reason? : JsValue) -> Self
+pub impl TJsValue for PromiseRejectionEventInit
+
+#external
+pub type Range
+pub fn Range::is_null(Self) -> Bool
+pub fn Range::new() -> Self
+pub fn Range::null() -> Self
+pub impl TJsValue for Range
+pub impl TRange for Range
+
+#external
+pub type ScrollIntoViewOptions
+pub fn ScrollIntoViewOptions::empty() -> Self
+pub fn ScrollIntoViewOptions::new(block? : JsValue, inline? : JsValue, container? : JsValue) -> Self
+pub impl TJsValue for ScrollIntoViewOptions
+pub impl TScrollIntoViewArgArg for ScrollIntoViewOptions
+
+#external
+pub type ScrollOptions
+pub fn ScrollOptions::empty() -> Self
+pub fn ScrollOptions::new(behavior? : JsValue) -> Self
+pub impl TJsValue for ScrollOptions
+
+#external
+pub type ScrollToOptions
+pub fn ScrollToOptions::empty() -> Self
+pub fn ScrollToOptions::new(left? : Double, top? : Double) -> Self
+pub impl TJsValue for ScrollToOptions
+
+#external
+pub type ShadowRootInit
+pub fn ShadowRootInit::empty() -> Self
+pub fn ShadowRootInit::new(JsValue, delegates_focus? : Bool, slot_assignment? : JsValue, clonable? : Bool, serializable? : Bool, custom_element_registry? : JsValue) -> Self
+pub impl TJsValue for ShadowRootInit
+
+#external
+pub type ShowPopoverOptions
+pub fn ShowPopoverOptions::empty() -> Self
+pub fn ShowPopoverOptions::new(source? : HTMLElement) -> Self
+pub impl TJsValue for ShowPopoverOptions
+
+#external
+pub type StaticRangeInit
+pub fn StaticRangeInit::empty() -> Self
+pub fn StaticRangeInit::new(Node, Int, Node, Int) -> Self
+pub impl TJsValue for StaticRangeInit
+
+#external
+pub type Storage
+pub fn Storage::is_null(Self) -> Bool
+pub fn Storage::null() -> Self
+pub impl TJsValue for Storage
+pub impl TStorage for Storage
+
+#external
+pub type StorageEventInit
+pub fn StorageEventInit::empty() -> Self
+pub fn StorageEventInit::new(key? : String, old_value? : String, new_value? : String, url? : String, storage_area? : Storage) -> Self
+pub impl TJsValue for StorageEventInit
+
+#external
+pub type StructuredSerializeOptions
+pub fn StructuredSerializeOptions::empty() -> Self
+pub fn StructuredSerializeOptions::new(transfer? : Array[JsValue]) -> Self
+pub impl TJsValue for StructuredSerializeOptions
+
+#external
+pub type SubmitEventInit
+pub fn SubmitEventInit::empty() -> Self
+pub fn SubmitEventInit::new(submitter? : HTMLElement) -> Self
+pub impl TJsValue for SubmitEventInit
+
+#external
+pub type Text
+pub fn Text::is_null(Self) -> Bool
+pub fn Text::new(data? : String) -> Self
+pub fn Text::null() -> Self
+pub impl TCharacterData for Text
+pub impl TEventTarget for Text
+pub impl TJsValue for Text
+pub impl TNode for Text
+pub impl TText for Text
+
+#external
+pub type ToggleEventInit
+pub fn ToggleEventInit::empty() -> Self
+pub fn ToggleEventInit::new(old_state? : String, new_state? : String, source? : Element) -> Self
+pub impl TJsValue for ToggleEventInit
+
+#external
+pub type TogglePopoverOptions
+pub fn TogglePopoverOptions::empty() -> Self
+pub fn TogglePopoverOptions::new(force? : Bool) -> Self
+pub impl TJsValue for TogglePopoverOptions
+pub impl TTogglePopoverOptionsArg for TogglePopoverOptions
+
+#external
+pub type TrackEventInit
+pub fn TrackEventInit::empty() -> Self
+pub fn TrackEventInit::new(track? : JsValue) -> Self
+pub impl TJsValue for TrackEventInit
+
+#external
+pub type UIEvent
+pub fn UIEvent::is_null(Self) -> Bool
+pub fn UIEvent::new(String, event_init_dict? : UIEventInit) -> Self
+pub fn UIEvent::null() -> Self
+pub impl TEvent for UIEvent
+pub impl TJsValue for UIEvent
+pub impl TUIEvent for UIEvent
+
+#external
+pub type UIEventInit
+pub fn UIEventInit::empty() -> Self
+pub fn UIEventInit::new(view? : Window, detail? : Int, which? : Int) -> Self
+pub impl TJsValue for UIEventInit
+
+#external
+pub type ValidityStateFlags
+pub fn ValidityStateFlags::empty() -> Self
+pub fn ValidityStateFlags::new(value_missing? : Bool, type_mismatch? : Bool, pattern_mismatch? : Bool, too_long? : Bool, too_short? : Bool, range_underflow? : Bool, range_overflow? : Bool, step_mismatch? : Bool, bad_input? : Bool, custom_error? : Bool) -> Self
+pub impl TJsValue for ValidityStateFlags
+
+#external
+pub type WheelEvent
+pub fn WheelEvent::is_null(Self) -> Bool
+pub fn WheelEvent::new(String, event_init_dict? : WheelEventInit) -> Self
+pub fn WheelEvent::null() -> Self
+pub impl TJsValue for WheelEvent
+pub impl TMouseEvent for WheelEvent
+pub impl TWheelEvent for WheelEvent
+
+#external
+pub type WheelEventInit
+pub fn WheelEventInit::empty() -> Self
+pub fn WheelEventInit::new(delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : Int) -> Self
+pub impl TJsValue for WheelEventInit
+
+#external
+pub type Window
+pub fn Window::is_null(Self) -> Bool
+pub fn Window::null() -> Self
+pub impl TJsValue for Window
+pub impl TWindow for Window
+
+#external
+pub type WindowPostMessageOptions
+pub fn WindowPostMessageOptions::empty() -> Self
+pub fn WindowPostMessageOptions::new(target_origin? : String) -> Self
+pub impl TJsValue for WindowPostMessageOptions
+
+#external
+pub type WorkerOptions
+pub fn WorkerOptions::empty() -> Self
+pub fn WorkerOptions::new(name? : String, type_? : JsValue, credentials? : JsValue) -> Self
+pub impl TJsValue for WorkerOptions
+
+#external
+pub type WorkletOptions
+pub fn WorkletOptions::empty() -> Self
+pub fn WorkletOptions::new(credentials? : JsValue) -> Self
+pub impl TJsValue for WorkletOptions
+
+// Type aliases
+
+// Traits
+pub trait TAbortController : TJsValue {
+  signal(Self) -> AbortSignal
+  abort(Self, reason? : JsValue) -> Unit
+}
+
+pub trait TAbortSignal : TJsValue + TEventTarget {
+  aborted(Self) -> Bool
+  reason(Self) -> JsValue
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  throw_if_aborted(Self) -> Unit
+}
+
+pub(open) trait TAddEventListenerOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TAddEventListenerOptionsArg for Bool
+
+pub trait TAttr : TJsValue + TNode {
+  namespace_uri(Self) -> String?
+  prefix(Self) -> String?
+  local_name(Self) -> String
+  name(Self) -> String
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  owner_element(Self) -> Element?
+  specified(Self) -> Bool
+}
+
+pub trait TCDATASection : TJsValue + TText {
+}
+
+pub trait TCharacterData : TJsValue + TNode {
+  data(Self) -> String
+  set_data(Self, String) -> Unit
+  length(Self) -> Int
+  substring_data(Self, Int, Int) -> String
+  append_data(Self, String) -> Unit
+  insert_data(Self, Int, String) -> Unit
+  delete_data(Self, Int, Int) -> Unit
+  replace_data(Self, Int, Int, String) -> Unit
+}
+
+pub trait TComment : TJsValue + TCharacterData {
+}
+
+pub(open) trait TCreateElementNSOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TCreateElementNSOptionsArg for String
+
+pub(open) trait TCreateElementOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TCreateElementOptionsArg for String
+
+pub trait TCustomEvent : TJsValue + TEvent {
+  detail(Self) -> JsValue
+  init_custom_event(Self, String, bubbles? : Bool, cancelable? : Bool, detail? : JsValue) -> Unit
+}
+
+pub trait TDOMTokenList : TJsValue {
+  length(Self) -> Int
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  item(Self, Int) -> String?
+  contains(Self, String) -> Bool
+  add(Self, String) -> Unit
+  remove(Self, String) -> Unit
+  toggle(Self, String, force? : Bool) -> Bool
+  replace(Self, String, String) -> Bool
+  supports(Self, String) -> Bool
+}
+
+pub trait TDocument : TJsValue {
+  scrolling_element(Self) -> Element?
+  implementation(Self) -> JsValue
+  url(Self) -> String
+  document_uri(Self) -> String
+  compat_mode(Self) -> String
+  character_set(Self) -> String
+  charset(Self) -> String
+  input_encoding(Self) -> String
+  content_type(Self) -> String
+  doctype(Self) -> DocumentType?
+  document_element(Self) -> Element?
+  location(Self) -> Location?
+  domain(Self) -> String
+  set_domain(Self, String) -> Unit
+  referrer(Self) -> String
+  cookie(Self) -> String
+  set_cookie(Self, String) -> Unit
+  last_modified(Self) -> String
+  ready_state(Self) -> JsValue
+  title(Self) -> String
+  set_title(Self, String) -> Unit
+  dir(Self) -> String
+  set_dir(Self, String) -> Unit
+  body(Self) -> HTMLElement?
+  set_body(Self, HTMLElement) -> Unit
+  head(Self) -> HTMLHeadElement?
+  images(Self) -> HTMLCollection
+  embeds(Self) -> HTMLCollection
+  plugins(Self) -> HTMLCollection
+  links(Self) -> HTMLCollection
+  forms(Self) -> HTMLCollection
+  scripts(Self) -> HTMLCollection
+  current_script(Self) -> JsValue?
+  default_view(Self) -> Window?
+  design_mode(Self) -> String
+  set_design_mode(Self, String) -> Unit
+  hidden(Self) -> Bool
+  visibility_state(Self) -> JsValue
+  onreadystatechange(Self) -> EventHandler
+  set_onreadystatechange(Self, EventHandler) -> Unit
+  onvisibilitychange(Self) -> EventHandler
+  set_onvisibilitychange(Self, EventHandler) -> Unit
+  fg_color(Self) -> String
+  set_fg_color(Self, String) -> Unit
+  link_color(Self) -> String
+  set_link_color(Self, String) -> Unit
+  vlink_color(Self) -> String
+  set_vlink_color(Self, String) -> Unit
+  alink_color(Self) -> String
+  set_alink_color(Self, String) -> Unit
+  bg_color(Self) -> String
+  set_bg_color(Self, String) -> Unit
+  anchors(Self) -> HTMLCollection
+  applets(Self) -> HTMLCollection
+  all(Self) -> JsValue
+  element_from_point(Self, Double, Double) -> Element?
+  elements_from_point(Self, Double, Double) -> Array[Element]
+  caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> JsValue?
+  get_elements_by_tag_name(Self, String) -> HTMLCollection
+  get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
+  get_elements_by_class_name(Self, String) -> HTMLCollection
+  create_element(Self, String, options? : &TCreateElementOptionsArg) -> Element
+  create_element_ns(Self, String, String, options? : &TCreateElementNSOptionsArg) -> Element
+  create_document_fragment(Self) -> DocumentFragment
+  create_text_node(Self, String) -> Text
+  create_cdata_section(Self, String) -> CDATASection
+  create_comment(Self, String) -> Comment
+  create_processing_instruction(Self, String, String) -> ProcessingInstruction
+  import_node(Self, Node, options? : &TImportNodeOptionsArg) -> Node
+  adopt_node(Self, Node) -> Node
+  create_attribute(Self, String) -> Attr
+  create_attribute_ns(Self, String, String) -> Attr
+  create_event(Self, String) -> Event
+  create_range(Self) -> Range
+  create_node_iterator(Self, Node, what_to_show? : Int, filter? : JsValue) -> JsValue
+  create_tree_walker(Self, Node, what_to_show? : Int, filter? : JsValue) -> JsValue
+  get_elements_by_name(Self, String) -> NodeList
+  open(Self, unused1? : String, unused2? : String) -> Document
+  open2(Self, String, String, String) -> Window?
+  close(Self) -> Unit
+  write(Self, String) -> Unit
+  writeln(Self, String) -> Unit
+  has_focus(Self) -> Bool
+  exec_command(Self, String, show_ui? : Bool, value? : String) -> Bool
+  query_command_enabled(Self, String) -> Bool
+  query_command_indeterm(Self, String) -> Bool
+  query_command_state(Self, String) -> Bool
+  query_command_supported(Self, String) -> Bool
+  query_command_value(Self, String) -> String
+  clear(Self) -> Unit
+  capture_events(Self) -> Unit
+  release_events(Self) -> Unit
+}
+
+pub trait TDocumentFragment : TJsValue + TNode {
+}
+
+pub trait TDocumentType : TJsValue + TNode {
+  name(Self) -> String
+  public_id(Self) -> String
+  system_id(Self) -> String
+}
+
+pub trait TElement : TJsValue {
+  scroll_top(Self) -> Double
+  set_scroll_top(Self, Double) -> Unit
+  scroll_left(Self) -> Double
+  set_scroll_left(Self, Double) -> Unit
+  scroll_width(Self) -> Int
+  scroll_height(Self) -> Int
+  client_top(Self) -> Int
+  client_left(Self) -> Int
+  client_width(Self) -> Int
+  client_height(Self) -> Int
+  current_css_zoom(Self) -> Double
+  namespace_uri(Self) -> String?
+  prefix(Self) -> String?
+  local_name(Self) -> String
+  tag_name(Self) -> String
+  id(Self) -> String
+  set_id(Self, String) -> Unit
+  class_name(Self) -> String
+  set_class_name(Self, String) -> Unit
+  class_list(Self) -> DOMTokenList
+  slot(Self) -> String
+  set_slot(Self, String) -> Unit
+  attributes(Self) -> NamedNodeMap
+  shadow_root(Self) -> JsValue?
+  custom_element_registry(Self) -> JsValue?
+  inner_html(Self) -> JsValue
+  set_inner_html(Self, JsValue) -> Unit
+  outer_html(Self) -> JsValue
+  set_outer_html(Self, JsValue) -> Unit
+  get_client_rects(Self) -> JsValue
+  get_bounding_client_rect(Self) -> JsValue
+  check_visibility(Self, options? : CheckVisibilityOptions) -> Bool
+  scroll_into_view(Self, arg? : &TScrollIntoViewArgArg) -> JsPromise[Unit]
+  scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_to2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_by2(Self, Double, Double) -> JsPromise[Unit]
+  has_attributes(Self) -> Bool
+  get_attribute_names(Self) -> Array[String]
+  get_attribute(Self, String) -> String?
+  get_attribute_ns(Self, String, String) -> String?
+  set_attribute(Self, String, String) -> Unit
+  set_attribute_ns(Self, String, String, String) -> Unit
+  remove_attribute(Self, String) -> Unit
+  remove_attribute_ns(Self, String, String) -> Unit
+  toggle_attribute(Self, String, force? : Bool) -> Bool
+  has_attribute(Self, String) -> Bool
+  has_attribute_ns(Self, String, String) -> Bool
+  get_attribute_node(Self, String) -> Attr?
+  get_attribute_node_ns(Self, String, String) -> Attr?
+  set_attribute_node(Self, Attr) -> Attr?
+  set_attribute_node_ns(Self, Attr) -> Attr?
+  remove_attribute_node(Self, Attr) -> Attr
+  attach_shadow(Self, ShadowRootInit) -> JsValue
+  closest(Self, String) -> Element?
+  matches(Self, String) -> Bool
+  webkit_matches_selector(Self, String) -> Bool
+  get_elements_by_tag_name(Self, String) -> HTMLCollection
+  get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
+  get_elements_by_class_name(Self, String) -> HTMLCollection
+  insert_adjacent_element(Self, String, Element) -> Element?
+  insert_adjacent_text(Self, String, String) -> Unit
+  set_html_unsafe(Self, String) -> Unit
+  get_html(Self, options? : GetHTMLOptions) -> String
+  insert_adjacent_html(Self, String, String) -> Unit
+}
+
+pub trait TEvent : TJsValue {
+  type_(Self) -> String
+  target(Self) -> EventTarget?
+  src_element(Self) -> EventTarget?
+  current_target(Self) -> EventTarget?
+  event_phase(Self) -> Int
+  cancel_bubble(Self) -> Bool
+  set_cancel_bubble(Self, Bool) -> Unit
+  bubbles(Self) -> Bool
+  cancelable(Self) -> Bool
+  return_value(Self) -> Bool
+  set_return_value(Self, Bool) -> Unit
+  default_prevented(Self) -> Bool
+  composed(Self) -> Bool
+  is_trusted(Self) -> Bool
+  time_stamp(Self) -> Double
+  composed_path(Self) -> Array[EventTarget]
+  stop_propagation(Self) -> Unit
+  stop_immediate_propagation(Self) -> Unit
+  prevent_default(Self) -> Unit
+  init_event(Self, String, bubbles? : Bool, cancelable? : Bool) -> Unit
+}
+
+pub trait TEventTarget : TJsValue {
+  add_event_listener(Self, String, EventListener, options? : &TAddEventListenerOptionsArg) -> Unit
+  remove_event_listener(Self, String, EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit
+  dispatch_event(Self, Event) -> Bool
+}
+
+pub trait TFocusEvent : TJsValue + TUIEvent {
+  related_target(Self) -> EventTarget?
+}
+
+pub trait THTMLAnchorElement : TJsValue + THTMLElement {
+  target(Self) -> String
+  set_target(Self, String) -> Unit
+  download(Self) -> String
+  set_download(Self, String) -> Unit
+  ping(Self) -> String
+  set_ping(Self, String) -> Unit
+  rel(Self) -> String
+  set_rel(Self, String) -> Unit
+  rel_list(Self) -> DOMTokenList
+  hreflang(Self) -> String
+  set_hreflang(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  text(Self) -> String
+  set_text(Self, String) -> Unit
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  coords(Self) -> String
+  set_coords(Self, String) -> Unit
+  charset(Self) -> String
+  set_charset(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  rev(Self) -> String
+  set_rev(Self, String) -> Unit
+  shape(Self) -> String
+  set_shape(Self, String) -> Unit
+}
+
+pub trait THTMLAudioElement : TJsValue {
+}
+
+pub trait THTMLBodyElement : TJsValue + THTMLElement {
+  text(Self) -> String
+  set_text(Self, String) -> Unit
+  link(Self) -> String
+  set_link(Self, String) -> Unit
+  v_link(Self) -> String
+  set_v_link(Self, String) -> Unit
+  a_link(Self) -> String
+  set_a_link(Self, String) -> Unit
+  bg_color(Self) -> String
+  set_bg_color(Self, String) -> Unit
+  background(Self) -> String
+  set_background(Self, String) -> Unit
+}
+
+pub trait THTMLButtonElement : TJsValue + THTMLElement {
+  command(Self) -> String
+  set_command(Self, String) -> Unit
+  command_for_element(Self) -> Element?
+  set_command_for_element(Self, Element) -> Unit
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  form(Self) -> HTMLFormElement?
+  form_action(Self) -> String
+  set_form_action(Self, String) -> Unit
+  form_enctype(Self) -> String
+  set_form_enctype(Self, String) -> Unit
+  form_method(Self) -> String
+  set_form_method(Self, String) -> Unit
+  form_no_validate(Self) -> Bool
+  set_form_no_validate(Self, Bool) -> Unit
+  form_target(Self) -> String
+  set_form_target(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  will_validate(Self) -> Bool
+  validity(Self) -> JsValue
+  validation_message(Self) -> String
+  labels(Self) -> NodeList
+  check_validity(Self) -> Bool
+  report_validity(Self) -> Bool
+  set_custom_validity(Self, String) -> Unit
+}
+
+pub trait THTMLCanvasElement : TJsValue + THTMLElement {
+  width(Self) -> Int
+  set_width(Self, Int) -> Unit
+  height(Self) -> Int
+  set_height(Self, Int) -> Unit
+  get_context(Self, String, options? : JsValue) -> JsValue?
+  to_data_url(Self, type_? : String, quality? : JsValue) -> String
+  to_blob(Self, JsValue, type_? : String, quality? : JsValue) -> Unit
+  transfer_control_to_offscreen(Self) -> JsValue
+}
+
+pub trait THTMLCollection : TJsValue {
+  length(Self) -> Int
+  item(Self, Int) -> Element?
+  named_item(Self, String) -> Element?
+}
+
+pub trait THTMLDivElement : TJsValue + THTMLElement {
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+}
+
+pub trait THTMLElement : TJsValue {
+  scroll_parent(Self) -> Element?
+  offset_parent(Self) -> Element?
+  offset_top(Self) -> Int
+  offset_left(Self) -> Int
+  offset_width(Self) -> Int
+  offset_height(Self) -> Int
+  title(Self) -> String
+  set_title(Self, String) -> Unit
+  lang(Self) -> String
+  set_lang(Self, String) -> Unit
+  translate(Self) -> Bool
+  set_translate(Self, Bool) -> Unit
+  dir(Self) -> String
+  set_dir(Self, String) -> Unit
+  hidden(Self) -> JsValue
+  set_hidden(Self, JsValue) -> Unit
+  inert(Self) -> Bool
+  set_inert(Self, Bool) -> Unit
+  access_key(Self) -> String
+  set_access_key(Self, String) -> Unit
+  access_key_label(Self) -> String
+  draggable(Self) -> Bool
+  set_draggable(Self, Bool) -> Unit
+  spellcheck(Self) -> Bool
+  set_spellcheck(Self, Bool) -> Unit
+  writing_suggestions(Self) -> String
+  set_writing_suggestions(Self, String) -> Unit
+  autocapitalize(Self) -> String
+  set_autocapitalize(Self, String) -> Unit
+  autocorrect(Self) -> Bool
+  set_autocorrect(Self, Bool) -> Unit
+  inner_text(Self) -> String
+  set_inner_text(Self, String) -> Unit
+  outer_text(Self) -> String
+  set_outer_text(Self, String) -> Unit
+  popover(Self) -> String?
+  set_popover(Self, String) -> Unit
+  heading_offset(Self) -> Int
+  set_heading_offset(Self, Int) -> Unit
+  heading_reset(Self) -> Bool
+  set_heading_reset(Self, Bool) -> Unit
+  click(Self) -> Unit
+  attach_internals(Self) -> JsValue
+  show_popover(Self, options? : ShowPopoverOptions) -> Unit
+  hide_popover(Self) -> Unit
+  toggle_popover(Self, options? : &TTogglePopoverOptionsArg) -> Bool
+}
+
+pub trait THTMLFormElement : TJsValue + THTMLElement {
+  accept_charset(Self) -> String
+  set_accept_charset(Self, String) -> Unit
+  action(Self) -> String
+  set_action(Self, String) -> Unit
+  autocomplete(Self) -> String
+  set_autocomplete(Self, String) -> Unit
+  enctype(Self) -> String
+  set_enctype(Self, String) -> Unit
+  encoding(Self) -> String
+  set_encoding(Self, String) -> Unit
+  method_(Self) -> String
+  set_method_(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  no_validate(Self) -> Bool
+  set_no_validate(Self, Bool) -> Unit
+  target(Self) -> String
+  set_target(Self, String) -> Unit
+  rel(Self) -> String
+  set_rel(Self, String) -> Unit
+  rel_list(Self) -> DOMTokenList
+  elements(Self) -> JsValue
+  length(Self) -> Int
+  submit(Self) -> Unit
+  request_submit(Self, submitter? : HTMLElement) -> Unit
+  reset(Self) -> Unit
+  check_validity(Self) -> Bool
+  report_validity(Self) -> Bool
+}
+
+pub trait THTMLHeadElement : TJsValue + THTMLElement {
+}
+
+pub trait THTMLHtmlElement : TJsValue + THTMLElement {
+  version(Self) -> String
+  set_version(Self, String) -> Unit
+}
+
+pub trait THTMLImageElement : TJsValue {
+  x(Self) -> Int
+  y(Self) -> Int
+  alt(Self) -> String
+  set_alt(Self, String) -> Unit
+  src(Self) -> String
+  set_src(Self, String) -> Unit
+  srcset(Self) -> String
+  set_srcset(Self, String) -> Unit
+  sizes(Self) -> String
+  set_sizes(Self, String) -> Unit
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  use_map(Self) -> String
+  set_use_map(Self, String) -> Unit
+  is_map(Self) -> Bool
+  set_is_map(Self, Bool) -> Unit
+  width(Self) -> Int
+  set_width(Self, Int) -> Unit
+  height(Self) -> Int
+  set_height(Self, Int) -> Unit
+  natural_width(Self) -> Int
+  natural_height(Self) -> Int
+  complete(Self) -> Bool
+  current_src(Self) -> String
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  decoding(Self) -> String
+  set_decoding(Self, String) -> Unit
+  loading(Self) -> String
+  set_loading(Self, String) -> Unit
+  fetch_priority(Self) -> String
+  set_fetch_priority(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  lowsrc(Self) -> String
+  set_lowsrc(Self, String) -> Unit
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+  hspace(Self) -> Int
+  set_hspace(Self, Int) -> Unit
+  vspace(Self) -> Int
+  set_vspace(Self, Int) -> Unit
+  long_desc(Self) -> String
+  set_long_desc(Self, String) -> Unit
+  border(Self) -> String
+  set_border(Self, String) -> Unit
+  decode(Self) -> JsPromise[Unit]
+}
+
+pub trait THTMLInputElement : TJsValue + THTMLElement {
+  accept(Self) -> String
+  set_accept(Self, String) -> Unit
+  alpha(Self) -> Bool
+  set_alpha(Self, Bool) -> Unit
+  alt(Self) -> String
+  set_alt(Self, String) -> Unit
+  autocomplete(Self) -> String
+  set_autocomplete(Self, String) -> Unit
+  default_checked(Self) -> Bool
+  set_default_checked(Self, Bool) -> Unit
+  checked(Self) -> Bool
+  set_checked(Self, Bool) -> Unit
+  color_space(Self) -> String
+  set_color_space(Self, String) -> Unit
+  dir_name(Self) -> String
+  set_dir_name(Self, String) -> Unit
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  form(Self) -> HTMLFormElement?
+  files(Self) -> JsValue?
+  set_files(Self, JsValue) -> Unit
+  form_action(Self) -> String
+  set_form_action(Self, String) -> Unit
+  form_enctype(Self) -> String
+  set_form_enctype(Self, String) -> Unit
+  form_method(Self) -> String
+  set_form_method(Self, String) -> Unit
+  form_no_validate(Self) -> Bool
+  set_form_no_validate(Self, Bool) -> Unit
+  form_target(Self) -> String
+  set_form_target(Self, String) -> Unit
+  height(Self) -> Int
+  set_height(Self, Int) -> Unit
+  indeterminate(Self) -> Bool
+  set_indeterminate(Self, Bool) -> Unit
+  list(Self) -> JsValue?
+  max(Self) -> String
+  set_max(Self, String) -> Unit
+  max_length(Self) -> Int
+  set_max_length(Self, Int) -> Unit
+  min(Self) -> String
+  set_min(Self, String) -> Unit
+  min_length(Self) -> Int
+  set_min_length(Self, Int) -> Unit
+  multiple(Self) -> Bool
+  set_multiple(Self, Bool) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  pattern(Self) -> String
+  set_pattern(Self, String) -> Unit
+  placeholder(Self) -> String
+  set_placeholder(Self, String) -> Unit
+  read_only(Self) -> Bool
+  set_read_only(Self, Bool) -> Unit
+  required(Self) -> Bool
+  set_required(Self, Bool) -> Unit
+  size(Self) -> Int
+  set_size(Self, Int) -> Unit
+  src(Self) -> String
+  set_src(Self, String) -> Unit
+  step(Self) -> String
+  set_step(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  default_value(Self) -> String
+  set_default_value(Self, String) -> Unit
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  value_as_date(Self) -> JsValue?
+  set_value_as_date(Self, JsValue) -> Unit
+  value_as_number(Self) -> Double
+  set_value_as_number(Self, Double) -> Unit
+  width(Self) -> Int
+  set_width(Self, Int) -> Unit
+  will_validate(Self) -> Bool
+  validity(Self) -> JsValue
+  validation_message(Self) -> String
+  labels(Self) -> NodeList?
+  selection_start(Self) -> Int?
+  set_selection_start(Self, Int) -> Unit
+  selection_end(Self) -> Int?
+  set_selection_end(Self, Int) -> Unit
+  selection_direction(Self) -> String?
+  set_selection_direction(Self, String) -> Unit
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+  use_map(Self) -> String
+  set_use_map(Self, String) -> Unit
+  step_up(Self, n? : Int) -> Unit
+  step_down(Self, n? : Int) -> Unit
+  check_validity(Self) -> Bool
+  report_validity(Self) -> Bool
+  set_custom_validity(Self, String) -> Unit
+  select(Self) -> Unit
+  set_range_text(Self, String) -> Unit
+  set_range_text2(Self, String, Int, Int, selection_mode? : JsValue) -> Unit
+  set_selection_range(Self, Int, Int, direction? : String) -> Unit
+  show_picker(Self) -> Unit
+}
+
+pub trait THTMLLinkElement : TJsValue + THTMLElement {
+  href(Self) -> String
+  set_href(Self, String) -> Unit
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  rel(Self) -> String
+  set_rel(Self, String) -> Unit
+  as_(Self) -> String
+  set_as_(Self, String) -> Unit
+  rel_list(Self) -> DOMTokenList
+  media(Self) -> String
+  set_media(Self, String) -> Unit
+  integrity(Self) -> String
+  set_integrity(Self, String) -> Unit
+  hreflang(Self) -> String
+  set_hreflang(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  sizes(Self) -> DOMTokenList
+  image_srcset(Self) -> String
+  set_image_srcset(Self, String) -> Unit
+  image_sizes(Self) -> String
+  set_image_sizes(Self, String) -> Unit
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  blocking(Self) -> DOMTokenList
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  fetch_priority(Self) -> String
+  set_fetch_priority(Self, String) -> Unit
+  charset(Self) -> String
+  set_charset(Self, String) -> Unit
+  rev(Self) -> String
+  set_rev(Self, String) -> Unit
+  target(Self) -> String
+  set_target(Self, String) -> Unit
+}
+
+pub trait THTMLParagraphElement : TJsValue + THTMLElement {
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+}
+
+pub trait THTMLScriptElement : TJsValue + THTMLElement {
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  src(Self) -> String
+  set_src(Self, String) -> Unit
+  no_module(Self) -> Bool
+  set_no_module(Self, Bool) -> Unit
+  async_(Self) -> Bool
+  set_async_(Self, Bool) -> Unit
+  defer_(Self) -> Bool
+  set_defer_(Self, Bool) -> Unit
+  blocking(Self) -> DOMTokenList
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  integrity(Self) -> String
+  set_integrity(Self, String) -> Unit
+  fetch_priority(Self) -> String
+  set_fetch_priority(Self, String) -> Unit
+  text(Self) -> String
+  set_text(Self, String) -> Unit
+  charset(Self) -> String
+  set_charset(Self, String) -> Unit
+  event(Self) -> String
+  set_event(Self, String) -> Unit
+  html_for(Self) -> String
+  set_html_for(Self, String) -> Unit
+}
+
+pub trait THTMLSpanElement : TJsValue + THTMLElement {
+}
+
+pub trait THTMLStyleElement : TJsValue + THTMLElement {
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  media(Self) -> String
+  set_media(Self, String) -> Unit
+  blocking(Self) -> DOMTokenList
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+}
+
+pub trait THTMLVideoElement : TJsValue {
+  width(Self) -> Int
+  set_width(Self, Int) -> Unit
+  height(Self) -> Int
+  set_height(Self, Int) -> Unit
+  video_width(Self) -> Int
+  video_height(Self) -> Int
+  poster(Self) -> String
+  set_poster(Self, String) -> Unit
+  plays_inline(Self) -> Bool
+  set_plays_inline(Self, Bool) -> Unit
+}
+
+pub trait THistory : TJsValue {
+  length(Self) -> Int
+  scroll_restoration(Self) -> JsValue
+  set_scroll_restoration(Self, JsValue) -> Unit
+  state(Self) -> JsValue
+  go(Self, delta? : Int) -> Unit
+  back(Self) -> Unit
+  forward(Self) -> Unit
+  push_state(Self, JsValue, String, url? : String) -> Unit
+  replace_state(Self, JsValue, String, url? : String) -> Unit
+}
+
+pub(open) trait TImportNodeOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TImportNodeOptionsArg for Bool
+
+pub trait TInputEvent : TJsValue + TUIEvent {
+  data(Self) -> String?
+  is_composing(Self) -> Bool
+  input_type(Self) -> String
+}
+
+pub trait TJsValue {
+  to_js(Self) -> JsValue
+}
+pub impl TJsValue for Bool
+pub impl TJsValue for Int
+pub impl TJsValue for Int64
+pub impl TJsValue for Double
+pub impl TJsValue for String
+pub impl[T : TJsValue] TJsValue for Array[T]
+
+pub trait TKeyboardEvent : TJsValue + TUIEvent {
+  key(Self) -> String
+  code(Self) -> String
+  location(Self) -> Int
+  ctrl_key(Self) -> Bool
+  shift_key(Self) -> Bool
+  alt_key(Self) -> Bool
+  meta_key(Self) -> Bool
+  repeat(Self) -> Bool
+  is_composing(Self) -> Bool
+  char_code(Self) -> Int
+  key_code(Self) -> Int
+  get_modifier_state(Self, String) -> Bool
+  init_keyboard_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, key_arg? : String, location_arg? : Int, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit
+}
+
+pub trait TLocation : TJsValue {
+  href(Self) -> String
+  set_href(Self, String) -> Unit
+  origin(Self) -> String
+  protocol(Self) -> String
+  set_protocol(Self, String) -> Unit
+  host(Self) -> String
+  set_host(Self, String) -> Unit
+  hostname(Self) -> String
+  set_hostname(Self, String) -> Unit
+  port(Self) -> String
+  set_port(Self, String) -> Unit
+  pathname(Self) -> String
+  set_pathname(Self, String) -> Unit
+  search(Self) -> String
+  set_search(Self, String) -> Unit
+  hash(Self) -> String
+  set_hash(Self, String) -> Unit
+  ancestor_origins(Self) -> JsValue
+  assign(Self, String) -> Unit
+  replace(Self, String) -> Unit
+  reload(Self) -> Unit
+}
+
+pub trait TMouseEvent : TJsValue {
+  page_x(Self) -> Double
+  page_y(Self) -> Double
+  x(Self) -> Double
+  y(Self) -> Double
+  offset_x(Self) -> Double
+  offset_y(Self) -> Double
+  screen_x(Self) -> Int
+  screen_y(Self) -> Int
+  client_x(Self) -> Int
+  client_y(Self) -> Int
+  layer_x(Self) -> Int
+  layer_y(Self) -> Int
+  ctrl_key(Self) -> Bool
+  shift_key(Self) -> Bool
+  alt_key(Self) -> Bool
+  meta_key(Self) -> Bool
+  button(Self) -> Int
+  buttons(Self) -> Int
+  related_target(Self) -> EventTarget?
+  get_modifier_state(Self, String) -> Bool
+  init_mouse_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : EventTarget) -> Unit
+}
+
+pub trait TMutationObserver : TJsValue {
+  observe(Self, Node, options? : MutationObserverInit) -> Unit
+  disconnect(Self) -> Unit
+  take_records(Self) -> Array[MutationRecord]
+}
+
+pub trait TMutationRecord : TJsValue {
+  type_(Self) -> String
+  target(Self) -> Node
+  added_nodes(Self) -> NodeList
+  removed_nodes(Self) -> NodeList
+  previous_sibling(Self) -> Node?
+  next_sibling(Self) -> Node?
+  attribute_name(Self) -> String?
+  attribute_namespace(Self) -> String?
+  old_value(Self) -> String?
+}
+
+pub trait TNamedNodeMap : TJsValue {
+  length(Self) -> Int
+  item(Self, Int) -> Attr?
+  get_named_item(Self, String) -> Attr?
+  get_named_item_ns(Self, String, String) -> Attr?
+  set_named_item(Self, Attr) -> Attr?
+  set_named_item_ns(Self, Attr) -> Attr?
+  remove_named_item(Self, String) -> Attr
+  remove_named_item_ns(Self, String, String) -> Attr
+}
+
+pub trait TNavigator : TJsValue {
+  user_activation(Self) -> JsValue
+}
+
+pub trait TNode : TJsValue + TEventTarget {
+  node_type(Self) -> Int
+  node_name(Self) -> String
+  base_uri(Self) -> String
+  is_connected(Self) -> Bool
+  owner_document(Self) -> Document?
+  parent_node(Self) -> Node?
+  parent_element(Self) -> Element?
+  child_nodes(Self) -> NodeList
+  first_child(Self) -> Node?
+  last_child(Self) -> Node?
+  previous_sibling(Self) -> Node?
+  next_sibling(Self) -> Node?
+  node_value(Self) -> String?
+  set_node_value(Self, String) -> Unit
+  text_content(Self) -> String?
+  set_text_content(Self, String) -> Unit
+  get_root_node(Self, options? : GetRootNodeOptions) -> Node
+  has_child_nodes(Self) -> Bool
+  normalize(Self) -> Unit
+  clone_node(Self, subtree? : Bool) -> Node
+  is_equal_node(Self, Node) -> Bool
+  is_same_node(Self, Node) -> Bool
+  compare_document_position(Self, Node) -> Int
+  contains(Self, Node) -> Bool
+  lookup_prefix(Self, String) -> String?
+  lookup_namespace_uri(Self, String) -> String?
+  is_default_namespace(Self, String) -> Bool
+  insert_before(Self, Node, Node) -> Node
+  append_child(Self, Node) -> Node
+  replace_child(Self, Node, Node) -> Node
+  remove_child(Self, Node) -> Node
+}
+
+pub trait TNodeList : TJsValue {
+  length(Self) -> Int
+  item(Self, Int) -> Node?
+}
+
+pub trait TProcessingInstruction : TJsValue + TCharacterData {
+  target(Self) -> String
+}
+
+pub trait TRange : TJsValue {
+  common_ancestor_container(Self) -> Node
+  get_client_rects(Self) -> JsValue
+  get_bounding_client_rect(Self) -> JsValue
+  set_start(Self, Node, Int) -> Unit
+  set_end(Self, Node, Int) -> Unit
+  set_start_before(Self, Node) -> Unit
+  set_start_after(Self, Node) -> Unit
+  set_end_before(Self, Node) -> Unit
+  set_end_after(Self, Node) -> Unit
+  collapse(Self, to_start? : Bool) -> Unit
+  select_node(Self, Node) -> Unit
+  select_node_contents(Self, Node) -> Unit
+  compare_boundary_points(Self, Int, Range) -> Int
+  delete_contents(Self) -> Unit
+  extract_contents(Self) -> DocumentFragment
+  clone_contents(Self) -> DocumentFragment
+  insert_node(Self, Node) -> Unit
+  surround_contents(Self, Node) -> Unit
+  clone_range(Self) -> Range
+  detach(Self) -> Unit
+  is_point_in_range(Self, Node, Int) -> Bool
+  compare_point(Self, Node, Int) -> Int
+  intersects_node(Self, Node) -> Bool
+  create_contextual_fragment(Self, String) -> DocumentFragment
+}
+
+pub(open) trait TRemoveEventListenerOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TRemoveEventListenerOptionsArg for Bool
+
+pub(open) trait TScrollIntoViewArgArg {
+  to_js(Self) -> JsValue
+}
+pub impl TScrollIntoViewArgArg for Bool
+
+pub trait TStorage : TJsValue {
+  length(Self) -> Int
+  key(Self, Int) -> String?
+  get_item(Self, String) -> String?
+  set_item(Self, String, String) -> Unit
+  remove_item(Self, String) -> Unit
+  clear(Self) -> Unit
+}
+
+pub trait TText : TJsValue + TCharacterData {
+  whole_text(Self) -> String
+  split_text(Self, Int) -> Text
+}
+
+pub(open) trait TTogglePopoverOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TTogglePopoverOptionsArg for Bool
+
+pub trait TUIEvent : TJsValue + TEvent {
+  view(Self) -> Window?
+  detail(Self) -> Int
+  which(Self) -> Int
+  init_ui_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int) -> Unit
+}
+
+pub trait TWheelEvent : TJsValue + TMouseEvent {
+  delta_x(Self) -> Double
+  delta_y(Self) -> Double
+  delta_z(Self) -> Double
+  delta_mode(Self) -> Int
+}
+
+pub trait TWindow : TJsValue {
+  screen(Self) -> JsValue
+  visual_viewport(Self) -> JsValue?
+  inner_width(Self) -> Int
+  inner_height(Self) -> Int
+  scroll_x(Self) -> Double
+  page_x_offset(Self) -> Double
+  scroll_y(Self) -> Double
+  page_y_offset(Self) -> Double
+  screen_x(Self) -> Int
+  screen_left(Self) -> Int
+  screen_y(Self) -> Int
+  screen_top(Self) -> Int
+  outer_width(Self) -> Int
+  outer_height(Self) -> Int
+  device_pixel_ratio(Self) -> Double
+  event(Self) -> JsValue
+  window(Self) -> Window
+  self_(Self) -> Window
+  document(Self) -> Document
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  location(Self) -> Location
+  history(Self) -> History
+  navigation(Self) -> JsValue
+  custom_elements(Self) -> JsValue
+  locationbar(Self) -> JsValue
+  menubar(Self) -> JsValue
+  personalbar(Self) -> JsValue
+  scrollbars(Self) -> JsValue
+  statusbar(Self) -> JsValue
+  toolbar(Self) -> JsValue
+  status(Self) -> String
+  set_status(Self, String) -> Unit
+  closed(Self) -> Bool
+  frames(Self) -> Window
+  length(Self) -> Int
+  top(Self) -> Window?
+  opener(Self) -> JsValue
+  set_opener(Self, JsValue) -> Unit
+  parent(Self) -> Window?
+  frame_element(Self) -> Element?
+  navigator(Self) -> Navigator
+  client_information(Self) -> Navigator
+  origin_agent_cluster(Self) -> Bool
+  external(Self) -> JsValue
+  match_media(Self, JsValue) -> JsValue
+  move_to(Self, Int, Int) -> Unit
+  move_by(Self, Int, Int) -> Unit
+  resize_to(Self, Int, Int) -> Unit
+  resize_by(Self, Int, Int) -> Unit
+  scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_to2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_by2(Self, Double, Double) -> JsPromise[Unit]
+  get_computed_style(Self, Element, pseudo_elt? : JsValue) -> JsValue
+  close(Self) -> Unit
+  stop(Self) -> Unit
+  focus(Self) -> Unit
+  blur(Self) -> Unit
+  open(Self, url? : String, target? : String, features? : String) -> Window?
+  alert(Self) -> Unit
+  alert2(Self, String) -> Unit
+  confirm(Self, message? : String) -> Bool
+  prompt(Self, message? : String, default? : String) -> String?
+  print(Self) -> Unit
+  post_message(Self, JsValue, String, transfer? : Array[JsValue]) -> Unit
+  post_message2(Self, JsValue, options? : WindowPostMessageOptions) -> Unit
+  capture_events(Self) -> Unit
+  release_events(Self) -> Unit
+}
+

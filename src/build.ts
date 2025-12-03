@@ -253,15 +253,25 @@ async function prepareOutputDir(): Promise<void> {
 }
 
 /**
- * Copy base template
+ * Copy template files
  */
-async function copyBaseTemplate(): Promise<void> {
-  console.log("Copying base template...");
+async function copyTemplates(): Promise<void> {
+  console.log("Copying template files...");
 
-  const src = path.join(TEMPLATES_DIR, "base.mbt");
-  const dst = path.join(OUTPUT_DIR, "base.mbt");
+  const templateFiles = [
+    "js_value.mbt",
+    "js_promise.mbt",
+    "js_array.mbt",
+    "primitives.mbt",
+    "event_listener.mbt",
+  ];
 
-  await fs.copyFile(src, dst);
+  for (const file of templateFiles) {
+    const src = path.join(TEMPLATES_DIR, file);
+    const dst = path.join(OUTPUT_DIR, file);
+    console.log(`  Copying ${file}...`);
+    await fs.copyFile(src, dst);
+  }
 }
 
 /**
@@ -365,8 +375,8 @@ async function build(): Promise<void> {
     // Register dictionary names for proper type mapping
     registerDictionaries(mergedIdl.dictionaries.keys());
 
-    // Copy base template
-    await copyBaseTemplate();
+    // Copy template files
+    await copyTemplates();
 
     // Generate MoonBit files
     await generateMoonBitFiles(mergedIdl);
