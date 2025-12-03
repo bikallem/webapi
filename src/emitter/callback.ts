@@ -5,8 +5,8 @@
  */
 
 import type { ParsedCallback, ParsedParam } from "../types.js";
-import { 
-  toSnakeCase, 
+import {
+  toSnakeCase,
   escapeKeyword,
   toFfiModuleName,
   formatIdlSourceAsComment,
@@ -39,20 +39,20 @@ pub impl TJsValue for ${callback.name} with to_js(self : ${callback.name}) -> Js
 function emitCallbackConstructor(callback: ParsedCallback): string {
   const moduleName = toFfiModuleName(callback.name);
   const ffiName = `${toSnakeCase(callback.name)}_new_ffi`;
-  
+
   // Build the function signature for the callback
   const paramTypes: string[] = [];
   for (const param of callback.params) {
     const mapped = mapIdlType(param.type);
     paramTypes.push(mapped.moonbitType);
   }
-  
+
   const returnType = formatReturnType(callback.returnType);
-  
+
   // Build closure type: (ParamTypes) -> ReturnType
   const closureParamStr = paramTypes.join(", ");
   const closureType = `(${closureParamStr}) -> ${returnType}`;
-  
+
   return `///|
 fn ${ffiName}(f : ${closureType}) -> ${callback.name} = "${moduleName}" "new"
 
@@ -67,24 +67,24 @@ pub fn ${callback.name}::new(f : ${closureType}) -> ${callback.name} {
  */
 export function emitCallback(callback: ParsedCallback): string {
   const parts: string[] = [];
-  
+
   // Header
   parts.push(`// Auto-generated MoonBit bindings for ${callback.name} callback`);
   parts.push(`// Do not edit manually`);
-  
+
   // Include WebIDL source as comment
   const idlComment = formatIdlSourceAsComment(callback.idlSource);
   if (idlComment) {
     parts.push(`//\n// WebIDL Callback:\n${idlComment}`);
   }
-  
+
   // Type and impl
   parts.push(emitCallbackType(callback));
   parts.push(emitTJsValueImpl(callback));
-  
+
   // Constructor
   parts.push(emitCallbackConstructor(callback));
-  
+
   return parts.join("\n\n");
 }
 
