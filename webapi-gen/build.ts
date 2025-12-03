@@ -32,7 +32,7 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, "webapi", "dom");
-const TEMPLATES_DIR = path.join(PROJECT_ROOT, "templates");
+const TEMPLATES_DIR = path.join(PROJECT_ROOT, "base.mbt");
 
 /**
  * Core DOM specs to include

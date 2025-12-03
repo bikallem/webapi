@@ -1,7 +1,8 @@
-node_modules/
-dist/
-output/
 .DS_Store
+
 target/
 .mooncakes/
 .moonagent/
+
+node_modules/
+dist/

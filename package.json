@@ -7,7 +7,7 @@
     "scripts": {
         "build": "tsc",
         "generate": "tsc && node dist/build.js",
-        "clean": "rm -rf dist output/*.mbt output/*.mjs"
+        "clean": "rm -rf dist webapi/dom/*.mbt webapi/dom/*.mjs"
     },
     "keywords": [
         "moonbit",
