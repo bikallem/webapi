@@ -1419,86 +1419,6 @@ export const wasmImportObject = {
     }
   },
 
-  webapi_NavigationUpdateCurrentEntryOptions: {
-    new: (state) => {
-      const obj = {};
-      if (state !== undefined) obj.state = state;
-      return obj;
-    }
-  },
-
-  webapi_NavigationOptions: {
-    new: (info) => {
-      const obj = {};
-      if (info !== undefined) obj.info = info;
-      return obj;
-    }
-  },
-
-  webapi_NavigationNavigateOptions: {
-    new: (state, history) => {
-      const obj = {};
-      if (state !== undefined) obj.state = state;
-      if (history !== undefined) obj.history = history;
-      return obj;
-    }
-  },
-
-  webapi_NavigationReloadOptions: {
-    new: (state) => {
-      const obj = {};
-      if (state !== undefined) obj.state = state;
-      return obj;
-    }
-  },
-
-  webapi_NavigationResult: {
-    new: (committed, finished) => {
-      const obj = {};
-      if (committed !== undefined) obj.committed = committed;
-      if (finished !== undefined) obj.finished = finished;
-      return obj;
-    }
-  },
-
-  webapi_NavigateEventInit: {
-    new: (navigationType, destination, canIntercept, userInitiated, hashChange, signal, formData, downloadRequest, info, hasUAVisualTransition, sourceElement) => {
-      const obj = {};
-      if (navigationType !== undefined) obj.navigationType = navigationType;
-      if (destination !== undefined) obj.destination = destination;
-      if (canIntercept !== undefined) obj.canIntercept = canIntercept;
-      if (userInitiated !== undefined) obj.userInitiated = userInitiated;
-      if (hashChange !== undefined) obj.hashChange = hashChange;
-      if (signal !== undefined) obj.signal = signal;
-      if (formData !== undefined) obj.formData = formData;
-      if (downloadRequest !== undefined) obj.downloadRequest = downloadRequest;
-      if (info !== undefined) obj.info = info;
-      if (hasUAVisualTransition !== undefined) obj.hasUAVisualTransition = hasUAVisualTransition;
-      if (sourceElement !== undefined) obj.sourceElement = sourceElement;
-      return obj;
-    }
-  },
-
-  webapi_NavigationInterceptOptions: {
-    new: (precommitHandler, handler, focusReset, scroll) => {
-      const obj = {};
-      if (precommitHandler !== undefined) obj.precommitHandler = precommitHandler;
-      if (handler !== undefined) obj.handler = handler;
-      if (focusReset !== undefined) obj.focusReset = focusReset;
-      if (scroll !== undefined) obj.scroll = scroll;
-      return obj;
-    }
-  },
-
-  webapi_NavigationCurrentEntryChangeEventInit: {
-    new: (navigationType, from) => {
-      const obj = {};
-      if (navigationType !== undefined) obj.navigationType = navigationType;
-      if (from !== undefined) obj.from = from;
-      return obj;
-    }
-  },
-
   webapi_PopStateEventInit: {
     new: (state, hasUAVisualTransition) => {
       const obj = {};
@@ -1513,23 +1433,6 @@ export const wasmImportObject = {
       const obj = {};
       if (oldURL !== undefined) obj.oldURL = oldURL;
       if (newURL !== undefined) obj.newURL = newURL;
-      return obj;
-    }
-  },
-
-  webapi_PageSwapEventInit: {
-    new: (activation, viewTransition) => {
-      const obj = {};
-      if (activation !== undefined) obj.activation = activation;
-      if (viewTransition !== undefined) obj.viewTransition = viewTransition;
-      return obj;
-    }
-  },
-
-  webapi_PageRevealEventInit: {
-    new: (viewTransition) => {
-      const obj = {};
-      if (viewTransition !== undefined) obj.viewTransition = viewTransition;
       return obj;
     }
   },
@@ -1761,14 +1664,6 @@ export const wasmImportObject = {
   },
 
   webapi_FunctionStringCallback: {
-    new: (f) => f
-  },
-
-  webapi_NavigationInterceptHandler: {
-    new: (f) => f
-  },
-
-  webapi_NavigationPrecommitHandler: {
     new: (f) => f
   },
 

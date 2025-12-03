@@ -1,1 +1,12 @@
-{}
+{
+    "supported-targets": [
+        "js",
+        "wasm-gc"
+    ],
+    "link": {
+        "wasm-gc": {
+            "use-js-builtin-string": true,
+            "imported-string-constants": "_"
+        }
+    }
+}

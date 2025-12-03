@@ -44,6 +44,16 @@ const CORE_SPECS = [
 ];
 
 /**
+ * Dictionary prefixes to exclude (from specs not fully included)
+ */
+const EXCLUDED_DICTIONARY_PREFIXES = [
+  "Navigate",
+  "Navigation",
+  "PageReveal",
+  "PageSwap",
+];
+
+/**
  * Filter interfaces to core DOM APIs
  */
 const CORE_INTERFACES = new Set([
@@ -181,14 +191,24 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
     }
   }
 
-  // Keep all dictionaries that might be used
-  filtered.dictionaries = idl.dictionaries;
+  // Keep dictionaries that aren't from excluded specs
+  for (const [name, dict] of idl.dictionaries) {
+    const isExcluded = EXCLUDED_DICTIONARY_PREFIXES.some(prefix => name.startsWith(prefix));
+    if (!isExcluded) {
+      filtered.dictionaries.set(name, dict);
+    }
+  }
 
   // Keep all enums
   filtered.enums = idl.enums;
 
-  // Keep all callbacks
-  filtered.callbacks = idl.callbacks;
+  // Keep callbacks that aren't from excluded specs
+  for (const [name, callback] of idl.callbacks) {
+    const isExcluded = EXCLUDED_DICTIONARY_PREFIXES.some(prefix => name.startsWith(prefix));
+    if (!isExcluded) {
+      filtered.callbacks.set(name, callback);
+    }
+  }
 
   // Keep typedefs
   filtered.typedefs = idl.typedefs;

@@ -106,6 +106,12 @@ pub impl[T : TJsValue] TJsValue for Array[T] with to_js(self : Array[T]) -> JsVa
 // ============================================================================
 
 ///|
+// fn[T] js_promise_ffi(obj : JsValue) -> JsPromise[T] = "%identity"
+
+///|
+// impl TJsValue for JsPromise[T] with to_js(self : JsPromise[T]) -> JsValue = "%identity"
+
+///|
 /// Await a JavaScript Promise (returns the resolved value as JsValue)
 /// Note: This should only be called in an async context
 pub fn JsPromise::wait(self : JsPromise[JsValue]) -> JsValue = "JsPromise" "await"
