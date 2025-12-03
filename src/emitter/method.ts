@@ -243,6 +243,10 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
           defaultExpr = `${dictType}::empty()`;
         }
       }
+    } else if (mapped.isDictionary && param.optional && param.default === "{}") {
+      // Dictionary param with {} default - use proper type with ::empty() default
+      paramType = mapped.moonbitType;
+      defaultExpr = `${mapped.moonbitType}::empty()`;
     } else {
       paramType = mapped.moonbitType;
     }
@@ -269,6 +273,7 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
 
   for (const param of method.params) {
     const paramName = escapeKeyword(toSnakeCase(param.name));
+    const mapped = mapIdlType(param.type);
 
     // Check if this is a union type
     let typeToCheck = param.type;
@@ -277,12 +282,12 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     }
     const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
 
-    // Check if this union param has a default value
-    const hasUnionDefault = isUnionArg && param.optional && param.default === "{}";
+    // Check if this param has a default value of {}
+    const hasDefaultEmpty = param.optional && param.default === "{}";
 
     if (param.optional) {
       if (isUnionArg) {
-        if (hasUnionDefault) {
+        if (hasDefaultEmpty) {
           // Has default value - param is not Option, just call to_js directly
           args.push(`${paramName}.to_js()`);
         } else {
@@ -291,6 +296,9 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
           letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`);
           args.push(jsVarName);
         }
+      } else if (mapped.isDictionary && hasDefaultEmpty) {
+        // Dictionary with {} default - has actual value, convert directly
+        args.push(`TJsValue::to_js(${paramName})`);
       } else {
         // Non-union optional - use opt_to_js
         const jsVarName = `${paramName}_js`;
@@ -303,7 +311,6 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
         args.push(`${paramName}.to_js()`);
       } else {
         // Convert required params using TJsValue::to_js()
-        const mapped = mapIdlType(param.type);
         if (mapped.needsConversion) {
           args.push(`TJsValue::to_js(${paramName})`);
         } else {

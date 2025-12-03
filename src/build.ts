@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 
 import { parseIdl, mergeIdl, applyMixins } from "./widlprocess.js";
 import type { ParsedIdl } from "./types.js";
+import { registerDictionaries } from "./mapping.js";
 import {
   emitInterface,
   getInterfaceFilename,
@@ -28,7 +29,7 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
-const OUTPUT_DIR = path.join(PROJECT_ROOT, "output");
+const OUTPUT_DIR = path.join(PROJECT_ROOT, "webapi", "dom");
 const TEMPLATES_DIR = path.join(PROJECT_ROOT, "templates");
 
 /**
@@ -51,7 +52,7 @@ const CORE_INTERFACES = new Set([
   "Event",
   "CustomEvent",
   "EventListener",
-  
+
   // Node hierarchy
   "Node",
   "Document",
@@ -64,7 +65,7 @@ const CORE_INTERFACES = new Set([
   "Comment",
   "CDATASection",
   "ProcessingInstruction",
-  
+
   // HTML Elements (core)
   "HTMLElement",
   "HTMLHtmlElement",
@@ -84,17 +85,17 @@ const CORE_INTERFACES = new Set([
   "HTMLCanvasElement",
   "HTMLVideoElement",
   "HTMLAudioElement",
-  
+
   // Collections
   "NodeList",
   "HTMLCollection",
   "NamedNodeMap",
   "DOMTokenList",
-  
+
   // Ranges and selections
   "Range",
   "Selection",
-  
+
   // Events
   "UIEvent",
   "MouseEvent",
@@ -106,7 +107,7 @@ const CORE_INTERFACES = new Set([
   "TouchEvent",
   "Touch",
   "TouchList",
-  
+
   // Other important types
   "Window",
   "Console",
@@ -116,7 +117,7 @@ const CORE_INTERFACES = new Set([
   "Storage",
   "AbortController",
   "AbortSignal",
-  
+
   // DOM manipulation
   "MutationObserver",
   "MutationRecord",
@@ -133,21 +134,21 @@ const CORE_INTERFACES = new Set([
  */
 async function fetchIdl(): Promise<ParsedIdl[]> {
   console.log("Fetching Web IDL from @webref/idl...");
-  
+
   // Dynamic import of @webref/idl
   const webrefIdl = await import("@webref/idl");
   const allIdl = await webrefIdl.listAll();
-  
+
   const parsedIdls: ParsedIdl[] = [];
-  
+
   for (const [specName, idlFile] of Object.entries(allIdl)) {
     // Only process core specs
     if (!CORE_SPECS.includes(specName)) {
       continue;
     }
-    
+
     console.log(`  Parsing ${specName}...`);
-    
+
     try {
       const idlText = await (idlFile as any).text();
       const parsed = parseIdl(idlText);
@@ -156,7 +157,7 @@ async function fetchIdl(): Promise<ParsedIdl[]> {
       console.warn(`  Warning: Failed to parse ${specName}:`, err);
     }
   }
-  
+
   return parsedIdls;
 }
 
@@ -172,33 +173,33 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
     typedefs: new Map(),
     includes: [],
   };
-  
+
   // Filter interfaces
   for (const [name, iface] of idl.interfaces) {
     if (CORE_INTERFACES.has(name)) {
       filtered.interfaces.set(name, iface);
     }
   }
-  
+
   // Keep all dictionaries that might be used
   filtered.dictionaries = idl.dictionaries;
-  
+
   // Keep all enums
   filtered.enums = idl.enums;
-  
+
   // Keep all callbacks
   filtered.callbacks = idl.callbacks;
-  
+
   // Keep typedefs
   filtered.typedefs = idl.typedefs;
-  
+
   // Filter includes to only those involving core interfaces
   for (const include of idl.includes) {
     if (CORE_INTERFACES.has(include.target)) {
       filtered.includes.push(include);
     }
   }
-  
+
   return filtered;
 }
 
@@ -207,10 +208,10 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
  */
 async function prepareOutputDir(): Promise<void> {
   console.log("Preparing output directory...");
-  
+
   // Create output directory if it doesn't exist
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
-  
+
   // Clean existing .mbt and .mjs files
   const files = await fs.readdir(OUTPUT_DIR);
   for (const file of files) {
@@ -225,10 +226,10 @@ async function prepareOutputDir(): Promise<void> {
  */
 async function copyBaseTemplate(): Promise<void> {
   console.log("Copying base template...");
-  
+
   const src = path.join(TEMPLATES_DIR, "base.mbt");
   const dst = path.join(OUTPUT_DIR, "base.mbt");
-  
+
   await fs.copyFile(src, dst);
 }
 
@@ -237,37 +238,37 @@ async function copyBaseTemplate(): Promise<void> {
  */
 async function generateMoonBitFiles(idl: ParsedIdl): Promise<void> {
   console.log("Generating MoonBit files...");
-  
+
   // Generate interface files
   for (const [name, iface] of idl.interfaces) {
     const filename = getInterfaceFilename(name);
     const content = emitInterface(iface, idl);
     const filepath = path.join(OUTPUT_DIR, filename);
-    
+
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
   }
-  
+
   // Generate dictionary files
   for (const [name, dict] of idl.dictionaries) {
     const filename = getDictionaryFilename(name);
     const content = emitDictionary(dict);
     const filepath = path.join(OUTPUT_DIR, filename);
-    
+
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
   }
-  
+
   // Generate callback files
   for (const [name, callback] of idl.callbacks) {
     const filename = getCallbackFilename(name);
     const content = emitCallback(callback);
     const filepath = path.join(OUTPUT_DIR, filename);
-    
+
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
   }
-  
+
   // Generate globals file
   const globalsContent = emitGlobals(idl);
   const globalsPath = path.join(OUTPUT_DIR, "globals.mbt");
@@ -280,10 +281,10 @@ async function generateMoonBitFiles(idl: ParsedIdl): Promise<void> {
  */
 async function generateJsRuntime(idl: ParsedIdl): Promise<void> {
   console.log("Generating JavaScript runtime...");
-  
+
   const content = emitJsRuntime(idl);
   const filepath = path.join(OUTPUT_DIR, "webapi.mjs");
-  
+
   await fs.writeFile(filepath, content, "utf-8");
 }
 
@@ -292,45 +293,48 @@ async function generateJsRuntime(idl: ParsedIdl): Promise<void> {
  */
 async function build(): Promise<void> {
   console.log("=== MoonBit DOM Bindings Generator ===\n");
-  
+
   try {
     // Prepare output directory
     await prepareOutputDir();
-    
+
     // Fetch and parse IDL
     const parsedIdls = await fetchIdl();
-    
+
     // Merge all IDL
     console.log("\nMerging IDL definitions...");
     let mergedIdl = mergeIdl(parsedIdls);
-    
+
     // Filter to core interfaces
     console.log("Filtering to core interfaces...");
     mergedIdl = filterToCoreInterfaces(mergedIdl);
-    
+
     // Apply mixins
     console.log("Applying mixins...");
     applyMixins(mergedIdl);
-    
+
     // Report what we're generating
     console.log(`\nGenerating bindings for:`);
     console.log(`  - ${mergedIdl.interfaces.size} interfaces`);
     console.log(`  - ${mergedIdl.dictionaries.size} dictionaries`);
     console.log(`  - ${mergedIdl.callbacks.size} callbacks`);
     console.log(`  - ${mergedIdl.enums.size} enums\n`);
-    
+
+    // Register dictionary names for proper type mapping
+    registerDictionaries(mergedIdl.dictionaries.keys());
+
     // Copy base template
     await copyBaseTemplate();
-    
+
     // Generate MoonBit files
     await generateMoonBitFiles(mergedIdl);
-    
+
     // Generate JS runtime
     await generateJsRuntime(mergedIdl);
-    
+
     console.log("\n=== Build complete! ===");
     console.log(`Output directory: ${OUTPUT_DIR}`);
-    
+
   } catch (err) {
     console.error("\nBuild failed:", err);
     process.exit(1);

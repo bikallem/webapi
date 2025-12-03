@@ -67,6 +67,27 @@ const KNOWN_INTERFACES = new Set([
 ]);
 
 /**
+ * Known dictionaries that have been generated
+ */
+const KNOWN_DICTIONARIES = new Set<string>();
+
+/**
+ * Register dictionary names so they can be properly typed
+ */
+export function registerDictionaries(names: Iterable<string>): void {
+  for (const name of names) {
+    KNOWN_DICTIONARIES.add(name);
+  }
+}
+
+/**
+ * Check if a type name is a known dictionary
+ */
+export function isKnownDictionary(name: string): boolean {
+  return KNOWN_DICTIONARIES.has(name);
+}
+
+/**
  * Check if a type name is a known generated interface
  */
 function isKnownInterface(name: string): boolean {
@@ -89,6 +110,7 @@ export interface MappedType {
   needsConversion: boolean;
   isOptional: boolean;
   unionContext?: UnionTypeContext;
+  isDictionary?: boolean;
 }
 
 /**
@@ -153,6 +175,16 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           moonbitType: "Window",
           needsConversion: true,
           isOptional: false,
+        };
+      }
+
+      // Check if it's a known dictionary
+      if (isKnownDictionary(name)) {
+        return {
+          moonbitType: name,
+          needsConversion: true,
+          isOptional: false,
+          isDictionary: true,
         };
       }
 

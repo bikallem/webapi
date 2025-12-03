@@ -1,0 +1,29 @@
+// Auto-generated MoonBit bindings for HTMLHeadElement
+
+// Do not edit manually
+
+//
+// WebIDL Interface:
+// [Exposed=Window]
+// interface HTMLHeadElement : HTMLElement {
+//   [HTMLConstructor] constructor();
+// };
+
+///|
+#external
+pub type HTMLHeadElement
+
+///|
+pub trait THTMLHeadElement: TJsValue + THTMLElement {}
+
+///|
+pub impl THTMLElement for HTMLHeadElement
+
+///|
+pub impl THTMLHeadElement for HTMLHeadElement
+
+///|
+pub impl TJsValue for HTMLHeadElement with to_js(self : HTMLHeadElement) -> JsValue = "%identity"
+
+///|
+pub fn HTMLHeadElement::new() -> HTMLHeadElement = "webapi_HTMLHeadElement" "new"
