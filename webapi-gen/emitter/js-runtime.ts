@@ -204,6 +204,11 @@ export function emitJsRuntime(idl: ParsedIdl): string {
     debug: (console, ...args) => console.debug(...args)
   }`);
 
+  // EventListener (from template file)
+  modules.push(`  webapi_EventListener: {
+    new: (f) => f
+  }`);
+
   // Interfaces
   for (const [name, iface] of idl.interfaces) {
     // Callback interfaces get a simple constructor like callbacks

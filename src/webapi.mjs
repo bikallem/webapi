@@ -48,6 +48,10 @@ export const wasmImportObject = {
     debug: (console, ...args) => console.debug(...args)
   },
 
+  webapi_EventListener: {
+    new: (f) => f
+  },
+
   webapi_Blob: {
     new: (blobParts, options) => new Blob(blobParts, options),
     slice: (obj, start, end, contentType) => obj.slice(start, end, contentType),
