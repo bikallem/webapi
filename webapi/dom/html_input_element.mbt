@@ -192,7 +192,7 @@ pub trait THTMLInputElement: TJsValue + THTMLElement {
     replacement : String,
     start : Int,
     end : Int,
-    selection_mode? : JsValue,
+    selection_mode? : SelectionMode,
   ) -> Unit = _
   set_selection_range(self : Self, start : Int, end : Int, direction? : String) -> Unit = _
   show_picker(self : Self) -> Unit = _
@@ -301,7 +301,7 @@ impl THTMLInputElement with set_range_text2(
   replacement : String,
   start : Int,
   end : Int,
-  selection_mode? : JsValue,
+  selection_mode? : SelectionMode,
 ) -> Unit {
   let selection_mode_js = opt_to_js(selection_mode)
   html_input_element_set_range_text_ffi2(

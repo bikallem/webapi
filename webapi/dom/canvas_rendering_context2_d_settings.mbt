@@ -34,8 +34,8 @@ fn canvas_rendering_context2_d_settings_ffi(
 pub fn CanvasRenderingContext2DSettings::new(
   alpha? : Bool = true,
   desynchronized? : Bool = false,
-  color_space? : JsValue,
-  color_type? : JsValue,
+  color_space? : PredefinedColorSpace,
+  color_type? : CanvasColorType,
   will_read_frequently? : Bool = false,
 ) -> CanvasRenderingContext2DSettings {
   let color_space_js = opt_to_js(color_space)

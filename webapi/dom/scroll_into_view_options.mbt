@@ -28,9 +28,9 @@ fn scroll_into_view_options_ffi(
 
 ///|
 pub fn ScrollIntoViewOptions::new(
-  block? : JsValue,
-  inline? : JsValue,
-  container? : JsValue,
+  block? : ScrollLogicalPosition,
+  inline? : ScrollLogicalPosition,
+  container? : ScrollIntoViewContainer,
 ) -> ScrollIntoViewOptions {
   let block_js = opt_to_js(block)
   let inline_js = opt_to_js(inline)

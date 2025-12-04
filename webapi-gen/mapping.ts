@@ -72,6 +72,11 @@ const KNOWN_INTERFACES = new Set([
 const KNOWN_DICTIONARIES = new Set<string>();
 
 /**
+ * Known enums that have been generated
+ */
+const KNOWN_ENUMS = new Set<string>();
+
+/**
  * Known typedefs (union types, etc.) that have been generated
  */
 const KNOWN_TYPEDEFS = new Set([
@@ -88,10 +93,26 @@ export function registerDictionaries(names: Iterable<string>): void {
 }
 
 /**
+ * Register enum names so they can be properly typed
+ */
+export function registerEnums(names: Iterable<string>): void {
+  for (const name of names) {
+    KNOWN_ENUMS.add(name);
+  }
+}
+
+/**
  * Check if a type name is a known dictionary
  */
 export function isKnownDictionary(name: string): boolean {
   return KNOWN_DICTIONARIES.has(name);
+}
+
+/**
+ * Check if a type name is a known enum
+ */
+export function isKnownEnum(name: string): boolean {
+  return KNOWN_ENUMS.has(name);
 }
 
 /**
@@ -233,6 +254,15 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           needsConversion: true,
           isOptional: false,
           isDictionary: true,
+        };
+      }
+
+      // Check if it's a known enum
+      if (isKnownEnum(name)) {
+        return {
+          moonbitType: name,
+          needsConversion: true,
+          isOptional: false,
         };
       }
 

@@ -11,7 +11,7 @@ import {
   toFfiModuleName,
   toTraitName,
 } from "../utils.js";
-import { mapIdlType, formatReturnType, getDefaultValueExpr } from "../mapping.js";
+import { mapIdlType, formatReturnType, getDefaultValueExpr, isKnownEnum } from "../mapping.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates
@@ -427,6 +427,9 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     if (returnMapped.isOptional) {
       // Use as_option for nullable returns
       returnExpr = `${returnExpr}.as_option()`;
+    } else if (isKnownEnum(returnMapped.moonbitType)) {
+      // Use from_js for enum types
+      returnExpr = `${returnMapped.moonbitType}::from_js(${returnExpr}).unwrap()`;
     } else {
       // Use unsafe_cast for type conversion (all non-Unit FFI returns are JsValue)
       returnExpr = `${returnExpr}.unsafe_cast()`;

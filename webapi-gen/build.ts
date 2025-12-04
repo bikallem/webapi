@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 
 import { parseIdl, mergeIdl, applyMixins } from "./widlprocess.js";
 import type { ParsedIdl } from "./types.js";
-import { registerDictionaries } from "./mapping.js";
+import { registerDictionaries, registerEnums } from "./mapping.js";
 import {
   emitInterface,
   getInterfaceFilename,
@@ -25,6 +25,8 @@ import {
   getCallbackFilename,
   emitTypedef,
   getTypedefFilename,
+  emitEnum,
+  getEnumFilename,
   emitGlobals,
   emitJsRuntime,
   resetEmittedUnionTraits,
@@ -332,6 +334,16 @@ async function generateMoonBitFiles(idl: ParsedIdl): Promise<void> {
     await fs.writeFile(filepath, content, "utf-8");
   }
 
+  // Generate enum files
+  for (const [name, enumDef] of idl.enums) {
+    const filename = getEnumFilename(name);
+    const content = emitEnum(enumDef);
+    const filepath = path.join(OUTPUT_DIR, filename);
+
+    console.log(`  Writing ${filename}...`);
+    await fs.writeFile(filepath, content, "utf-8");
+  }
+
   // Generate globals file
   const globalsContent = emitGlobals(idl);
   const globalsPath = path.join(OUTPUT_DIR, "globals.mbt");
@@ -384,8 +396,9 @@ async function build(): Promise<void> {
     console.log(`  - ${mergedIdl.typedefs.size} typedefs`);
     console.log(`  - ${mergedIdl.enums.size} enums\n`);
 
-    // Register dictionary names for proper type mapping
+    // Register dictionary and enum names for proper type mapping
     registerDictionaries(mergedIdl.dictionaries.keys());
+    registerEnums(mergedIdl.enums.keys());
 
     // Copy template files
     await copyTemplates();

@@ -27,7 +27,7 @@ fn worker_options_ffi(
 ///|
 pub fn WorkerOptions::new(
   name? : String = "",
-  type_? : JsValue,
+  type_? : WorkerType,
   credentials? : JsValue,
 ) -> WorkerOptions {
   let type__js = opt_to_js(type_)

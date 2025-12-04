@@ -274,7 +274,7 @@ pub trait TDocument: TJsValue {
   cookie(self : Self) -> String = _
   set_cookie(self : Self, value : String) -> Unit = _
   last_modified(self : Self) -> String = _
-  ready_state(self : Self) -> JsValue = _
+  ready_state(self : Self) -> DocumentReadyState = _
   title(self : Self) -> String = _
   set_title(self : Self, value : String) -> Unit = _
   dir(self : Self) -> String = _
@@ -293,7 +293,7 @@ pub trait TDocument: TJsValue {
   design_mode(self : Self) -> String = _
   set_design_mode(self : Self, value : String) -> Unit = _
   hidden(self : Self) -> Bool = _
-  visibility_state(self : Self) -> JsValue = _
+  visibility_state(self : Self) -> DocumentVisibilityState = _
   onreadystatechange(self : Self) -> EventHandler = _
   set_onreadystatechange(self : Self, value : EventHandler) -> Unit = _
   onvisibilitychange(self : Self) -> EventHandler = _
@@ -1598,8 +1598,8 @@ impl TDocument with last_modified(self : Self) -> String {
 fn document_ready_state_ffi(obj : JsValue) -> JsValue = "webapi_Document" "readyState"
 
 ///|
-impl TDocument with ready_state(self : Self) -> JsValue {
-  document_ready_state_ffi(self.to_js())
+impl TDocument with ready_state(self : Self) -> DocumentReadyState {
+  DocumentReadyState::from_js(document_ready_state_ffi(self.to_js())).unwrap()
 }
 
 ///|
@@ -1750,8 +1750,8 @@ impl TDocument with hidden(self : Self) -> Bool {
 fn document_visibility_state_ffi(obj : JsValue) -> JsValue = "webapi_Document" "visibilityState"
 
 ///|
-impl TDocument with visibility_state(self : Self) -> JsValue {
-  document_visibility_state_ffi(self.to_js())
+impl TDocument with visibility_state(self : Self) -> DocumentVisibilityState {
+  DocumentVisibilityState::from_js(document_visibility_state_ffi(self.to_js())).unwrap()
 }
 
 ///|

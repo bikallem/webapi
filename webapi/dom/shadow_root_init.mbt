@@ -32,9 +32,9 @@ fn shadow_root_init_ffi(
 
 ///|
 pub fn ShadowRootInit::new(
-  mode : JsValue,
+  mode : ShadowRootMode,
   delegates_focus? : Bool = false,
-  slot_assignment? : JsValue,
+  slot_assignment? : SlotAssignmentMode,
   clonable? : Bool = false,
   serializable? : Bool = false,
   custom_element_registry? : JsValue,
@@ -42,7 +42,7 @@ pub fn ShadowRootInit::new(
   let slot_assignment_js = opt_to_js(slot_assignment)
   let custom_element_registry_js = opt_to_js(custom_element_registry)
   shadow_root_init_ffi(
-    mode,
+    TJsValue::to_js(mode),
     TJsValue::to_js(delegates_focus),
     slot_assignment_js,
     TJsValue::to_js(clonable),

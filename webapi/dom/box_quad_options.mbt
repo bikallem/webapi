@@ -21,7 +21,7 @@ fn box_quad_options_ffi(box : JsValue, relative_to : JsValue) -> BoxQuadOptions 
 
 ///|
 pub fn BoxQuadOptions::new(
-  box? : JsValue,
+  box? : CSSBoxType,
   relative_to? : JsValue,
 ) -> BoxQuadOptions {
   let box_js = opt_to_js(box)

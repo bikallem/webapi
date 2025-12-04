@@ -26,8 +26,8 @@ fn convert_coordinate_options_ffi(
 
 ///|
 pub fn ConvertCoordinateOptions::new(
-  from_box? : JsValue,
-  to_box? : JsValue,
+  from_box? : CSSBoxType,
+  to_box? : CSSBoxType,
 ) -> ConvertCoordinateOptions {
   let from_box_js = opt_to_js(from_box)
   let to_box_js = opt_to_js(to_box)

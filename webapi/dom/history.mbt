@@ -23,8 +23,8 @@ pub type History
 ///|
 pub trait THistory: TJsValue {
   length(self : Self) -> Int = _
-  scroll_restoration(self : Self) -> JsValue = _
-  set_scroll_restoration(self : Self, value : JsValue) -> Unit = _
+  scroll_restoration(self : Self) -> ScrollRestoration = _
+  set_scroll_restoration(self : Self, value : ScrollRestoration) -> Unit = _
   state(self : Self) -> JsValue = _
   go(self : Self, delta? : Int) -> Unit = _
   back(self : Self) -> Unit = _
@@ -130,16 +130,19 @@ impl THistory with length(self : Self) -> Int {
 fn history_scroll_restoration_ffi(obj : JsValue) -> JsValue = "webapi_History" "scrollRestoration"
 
 ///|
-impl THistory with scroll_restoration(self : Self) -> JsValue {
-  history_scroll_restoration_ffi(self.to_js())
+impl THistory with scroll_restoration(self : Self) -> ScrollRestoration {
+  ScrollRestoration::from_js(history_scroll_restoration_ffi(self.to_js())).unwrap()
 }
 
 ///|
 fn history_set_scroll_restoration_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_History" "set_scrollRestoration"
 
 ///|
-impl THistory with set_scroll_restoration(self : Self, value : JsValue) -> Unit {
-  history_set_scroll_restoration_ffi(self.to_js(), value)
+impl THistory with set_scroll_restoration(
+  self : Self,
+  value : ScrollRestoration,
+) -> Unit {
+  history_set_scroll_restoration_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|
