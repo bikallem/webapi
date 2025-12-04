@@ -38,8 +38,8 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
-const OUTPUT_DIR = path.join(PROJECT_ROOT, "webapi", "dom");
-const TEMPLATES_DIR = path.join(PROJECT_ROOT, "base.mbt");
+const OUTPUT_DIR = path.join(PROJECT_ROOT, "src");
+const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
 
 /**
  * Core DOM specs to include
@@ -271,7 +271,7 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
  * Ensure output directory exists and is clean
  */
 async function prepareOutputDir(): Promise<void> {
-  console.log("Preparing output directory...");
+  console.log(`Preparing output directory at ${OUTPUT_DIR}...`);
 
   // Create output directory if it doesn't exist
   await fs.mkdir(OUTPUT_DIR, { recursive: true });

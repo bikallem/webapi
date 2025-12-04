@@ -1,6 +1,3 @@
 {
-  "is-main": true,
-  "import": [
-    "bikallem/webapi/webapi/dom"
-  ]
+  "is-main": true
 }
