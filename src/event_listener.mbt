@@ -18,6 +18,3 @@ pub fn EventListener::new(f : (Event) -> Unit) -> EventListener {
 
 ///|
 pub fn EventListener::null() -> EventListener = "JsValue" "null"
-
-///|
-pub fn EventListener::is_null(self : EventListener) -> Bool = "JsValue" "isNull"
