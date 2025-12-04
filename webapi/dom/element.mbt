@@ -162,7 +162,7 @@ pub trait TElement: TJsValue {
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element? = _
   last_element_child(self : Self) -> Element? = _
-  child_element_count(self : Self) -> Int = _
+  child_element_count(self : Self) -> UInt = _
   previous_element_sibling(self : Self) -> Element? = _
   next_element_sibling(self : Self) -> Element? = _
   assigned_slot(self : Self) -> JsValue? = _
@@ -1263,11 +1263,11 @@ impl TElement with last_element_child(self : Self) -> Element? {
 }
 
 ///|
-fn element_child_element_count_ffi(obj : JsValue) -> Int = "webapi_Element" "childElementCount"
+fn element_child_element_count_ffi(obj : JsValue) -> JsValue = "webapi_Element" "childElementCount"
 
 ///|
-impl TElement with child_element_count(self : Self) -> Int {
-  element_child_element_count_ffi(self.to_js())
+impl TElement with child_element_count(self : Self) -> UInt {
+  element_child_element_count_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

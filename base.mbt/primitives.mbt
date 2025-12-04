@@ -5,10 +5,22 @@
 pub impl TJsValue for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
+pub impl TJsValue for Byte with to_js(self : Byte) -> JsValue = "%identity"
+
+///|
 pub impl TJsValue for Int with to_js(self : Int) -> JsValue = "%identity"
 
 ///|
+pub impl TJsValue for UInt with to_js(self : UInt) -> JsValue = "%identity"
+
+///|
 pub impl TJsValue for Int64 with to_js(self : Int64) -> JsValue = "%identity"
+
+///|
+pub impl TJsValue for UInt64 with to_js(self : UInt64) -> JsValue = "%identity"
+
+///|
+pub impl TJsValue for Float with to_js(self : Float) -> JsValue = "%identity"
 
 ///|
 pub impl TJsValue for Double with to_js(self : Double) -> JsValue = "%identity"

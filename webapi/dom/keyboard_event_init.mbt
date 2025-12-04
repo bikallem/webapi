@@ -40,11 +40,11 @@ fn keyboard_event_init_ffi(
 pub fn KeyboardEventInit::new(
   key? : String = "",
   code? : String = "",
-  location? : Int = 0,
+  location? : UInt = 0,
   repeat? : Bool = false,
   is_composing? : Bool = false,
-  char_code? : Int = 0,
-  key_code? : Int = 0,
+  char_code? : UInt = 0,
+  key_code? : UInt = 0,
 ) -> KeyboardEventInit {
   keyboard_event_init_ffi(
     TJsValue::to_js(key),

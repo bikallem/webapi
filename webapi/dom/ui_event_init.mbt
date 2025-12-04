@@ -31,7 +31,7 @@ fn ui_event_init_ffi(
 pub fn UIEventInit::new(
   view? : Window = JsValue::null(),
   detail? : Int = 0,
-  which? : Int = 0,
+  which? : UInt = 0,
 ) -> UIEventInit {
   ui_event_init_ffi(
     TJsValue::to_js(view),

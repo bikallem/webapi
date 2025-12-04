@@ -23,8 +23,8 @@ pub type NamedNodeMap
 
 ///|
 pub trait TNamedNodeMap: TJsValue {
-  length(self : Self) -> Int = _
-  item(self : Self, index : Int) -> Attr? = _
+  length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> Attr? = _
   get_named_item(self : Self, qualified_name : String) -> Attr? = _
   get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr? = _
   set_named_item(self : Self, attr : Attr) -> Attr? = _
@@ -43,7 +43,7 @@ pub impl TJsValue for NamedNodeMap with to_js(self : NamedNodeMap) -> JsValue = 
 fn named_node_map_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_NamedNodeMap" "item"
 
 ///|
-impl TNamedNodeMap with item(self : Self, index : Int) -> Attr? {
+impl TNamedNodeMap with item(self : Self, index : UInt) -> Attr? {
   named_node_map_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).as_option()
 }
 
@@ -141,9 +141,9 @@ impl TNamedNodeMap with remove_named_item_ns(
 }
 
 ///|
-fn named_node_map_length_ffi(obj : JsValue) -> Int = "webapi_NamedNodeMap" "length"
+fn named_node_map_length_ffi(obj : JsValue) -> JsValue = "webapi_NamedNodeMap" "length"
 
 ///|
-impl TNamedNodeMap with length(self : Self) -> Int {
-  named_node_map_length_ffi(self.to_js())
+impl TNamedNodeMap with length(self : Self) -> UInt {
+  named_node_map_length_ffi(self.to_js()).unsafe_cast()
 }

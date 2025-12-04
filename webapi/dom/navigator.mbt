@@ -83,7 +83,7 @@ pub trait TNavigator: TJsValue {
   plugins(self : Self) -> JsValue = _
   mime_types(self : Self) -> JsValue = _
   pdf_viewer_enabled(self : Self) -> Bool = _
-  hardware_concurrency(self : Self) -> Int64 = _
+  hardware_concurrency(self : Self) -> UInt64 = _
   taint_enabled(self : Self) -> Bool = _
   register_protocol_handler(self : Self, scheme : String, url : String) -> Unit = _
   unregister_protocol_handler(self : Self, scheme : String, url : String) -> Unit = _
@@ -297,9 +297,9 @@ impl TNavigator with pdf_viewer_enabled(self : Self) -> Bool {
 }
 
 ///|
-fn navigator_hardware_concurrency_ffi(obj : JsValue) -> Int64 = "webapi_Navigator" "hardwareConcurrency"
+fn navigator_hardware_concurrency_ffi(obj : JsValue) -> JsValue = "webapi_Navigator" "hardwareConcurrency"
 
 ///|
-impl TNavigator with hardware_concurrency(self : Self) -> Int64 {
-  navigator_hardware_concurrency_ffi(self.to_js())
+impl TNavigator with hardware_concurrency(self : Self) -> UInt64 {
+  navigator_hardware_concurrency_ffi(self.to_js()).unsafe_cast()
 }

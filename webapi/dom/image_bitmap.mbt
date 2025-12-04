@@ -17,8 +17,8 @@ pub type ImageBitmap
 
 ///|
 pub trait TImageBitmap: TJsValue {
-  width(self : Self) -> Int = _
-  height(self : Self) -> Int = _
+  width(self : Self) -> UInt = _
+  height(self : Self) -> UInt = _
   close(self : Self) -> Unit = _
 }
 
@@ -37,17 +37,17 @@ impl TImageBitmap with close(self : Self) -> Unit {
 }
 
 ///|
-fn image_bitmap_width_ffi(obj : JsValue) -> Int = "webapi_ImageBitmap" "width"
+fn image_bitmap_width_ffi(obj : JsValue) -> JsValue = "webapi_ImageBitmap" "width"
 
 ///|
-impl TImageBitmap with width(self : Self) -> Int {
-  image_bitmap_width_ffi(self.to_js())
+impl TImageBitmap with width(self : Self) -> UInt {
+  image_bitmap_width_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn image_bitmap_height_ffi(obj : JsValue) -> Int = "webapi_ImageBitmap" "height"
+fn image_bitmap_height_ffi(obj : JsValue) -> JsValue = "webapi_ImageBitmap" "height"
 
 ///|
-impl TImageBitmap with height(self : Self) -> Int {
-  image_bitmap_height_ffi(self.to_js())
+impl TImageBitmap with height(self : Self) -> UInt {
+  image_bitmap_height_ffi(self.to_js()).unsafe_cast()
 }

@@ -27,7 +27,7 @@ pub trait TWheelEvent: TJsValue + TMouseEvent {
   delta_x(self : Self) -> Double = _
   delta_y(self : Self) -> Double = _
   delta_z(self : Self) -> Double = _
-  delta_mode(self : Self) -> Int = _
+  delta_mode(self : Self) -> UInt = _
 }
 
 ///|
@@ -78,9 +78,9 @@ impl TWheelEvent with delta_z(self : Self) -> Double {
 }
 
 ///|
-fn wheel_event_delta_mode_ffi(obj : JsValue) -> Int = "webapi_WheelEvent" "deltaMode"
+fn wheel_event_delta_mode_ffi(obj : JsValue) -> JsValue = "webapi_WheelEvent" "deltaMode"
 
 ///|
-impl TWheelEvent with delta_mode(self : Self) -> Int {
-  wheel_event_delta_mode_ffi(self.to_js())
+impl TWheelEvent with delta_mode(self : Self) -> UInt {
+  wheel_event_delta_mode_ffi(self.to_js()).unsafe_cast()
 }

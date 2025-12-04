@@ -38,7 +38,7 @@ pub trait TDocumentFragment: TJsValue + TNode {
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element? = _
   last_element_child(self : Self) -> Element? = _
-  child_element_count(self : Self) -> Int = _
+  child_element_count(self : Self) -> UInt = _
   get_element_by_id(self : Self, element_id : String) -> Element? = _
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
@@ -176,9 +176,9 @@ impl TDocumentFragment with last_element_child(self : Self) -> Element? {
 }
 
 ///|
-fn document_fragment_child_element_count_ffi(obj : JsValue) -> Int = "webapi_DocumentFragment" "childElementCount"
+fn document_fragment_child_element_count_ffi(obj : JsValue) -> JsValue = "webapi_DocumentFragment" "childElementCount"
 
 ///|
-impl TDocumentFragment with child_element_count(self : Self) -> Int {
-  document_fragment_child_element_count_ffi(self.to_js())
+impl TDocumentFragment with child_element_count(self : Self) -> UInt {
+  document_fragment_child_element_count_ffi(self.to_js()).unsafe_cast()
 }

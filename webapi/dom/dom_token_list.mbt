@@ -24,10 +24,10 @@ pub type DOMTokenList
 
 ///|
 pub trait TDOMTokenList: TJsValue {
-  length(self : Self) -> Int = _
+  length(self : Self) -> UInt = _
   value(self : Self) -> String = _
   set_value(self : Self, value : String) -> Unit = _
-  item(self : Self, index : Int) -> String? = _
+  item(self : Self, index : UInt) -> String? = _
   contains(self : Self, token : String) -> Bool = _
   add(self : Self, tokens : String) -> Unit = _
   remove(self : Self, tokens : String) -> Unit = _
@@ -46,7 +46,7 @@ pub impl TJsValue for DOMTokenList with to_js(self : DOMTokenList) -> JsValue = 
 fn dom_token_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DOMTokenList" "item"
 
 ///|
-impl TDOMTokenList with item(self : Self, index : Int) -> String? {
+impl TDOMTokenList with item(self : Self, index : UInt) -> String? {
   dom_token_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).as_option()
 }
 
@@ -116,11 +116,11 @@ impl TDOMTokenList with supports(self : Self, token : String) -> Bool {
 }
 
 ///|
-fn dom_token_list_length_ffi(obj : JsValue) -> Int = "webapi_DOMTokenList" "length"
+fn dom_token_list_length_ffi(obj : JsValue) -> JsValue = "webapi_DOMTokenList" "length"
 
 ///|
-impl TDOMTokenList with length(self : Self) -> Int {
-  dom_token_list_length_ffi(self.to_js())
+impl TDOMTokenList with length(self : Self) -> UInt {
+  dom_token_list_length_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

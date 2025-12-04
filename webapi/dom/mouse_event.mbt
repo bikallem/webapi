@@ -78,7 +78,7 @@ pub trait TMouseEvent: TJsValue {
   alt_key(self : Self) -> Bool = _
   meta_key(self : Self) -> Bool = _
   button(self : Self) -> Int = _
-  buttons(self : Self) -> Int = _
+  buttons(self : Self) -> UInt = _
   related_target(self : Self) -> EventTarget? = _
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
   init_mouse_event(
@@ -345,11 +345,11 @@ impl TMouseEvent with button(self : Self) -> Int {
 }
 
 ///|
-fn mouse_event_buttons_ffi(obj : JsValue) -> Int = "webapi_MouseEvent" "buttons"
+fn mouse_event_buttons_ffi(obj : JsValue) -> JsValue = "webapi_MouseEvent" "buttons"
 
 ///|
-impl TMouseEvent with buttons(self : Self) -> Int {
-  mouse_event_buttons_ffi(self.to_js())
+impl TMouseEvent with buttons(self : Self) -> UInt {
+  mouse_event_buttons_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

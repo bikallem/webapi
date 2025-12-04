@@ -35,14 +35,14 @@ pub type CharacterData
 pub trait TCharacterData: TJsValue + TNode {
   data(self : Self) -> String = _
   set_data(self : Self, value : String) -> Unit = _
-  length(self : Self) -> Int = _
+  length(self : Self) -> UInt = _
   previous_element_sibling(self : Self) -> Element? = _
   next_element_sibling(self : Self) -> Element? = _
-  substring_data(self : Self, offset : Int, count : Int) -> String = _
+  substring_data(self : Self, offset : UInt, count : UInt) -> String = _
   append_data(self : Self, data : String) -> Unit = _
-  insert_data(self : Self, offset : Int, data : String) -> Unit = _
-  delete_data(self : Self, offset : Int, count : Int) -> Unit = _
-  replace_data(self : Self, offset : Int, count : Int, data : String) -> Unit = _
+  insert_data(self : Self, offset : UInt, data : String) -> Unit = _
+  delete_data(self : Self, offset : UInt, count : UInt) -> Unit = _
+  replace_data(self : Self, offset : UInt, count : UInt, data : String) -> Unit = _
   before(self : Self, nodes : &TBeforeNodesArg) -> Unit = _
   after(self : Self, nodes : &TAfterNodesArg) -> Unit = _
   replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit = _
@@ -69,7 +69,11 @@ fn character_data_substring_data_ffi(
 ) -> JsValue = "webapi_CharacterData" "substringData"
 
 ///|
-impl TCharacterData with substring_data(self : Self, offset : Int, count : Int) -> String {
+impl TCharacterData with substring_data(
+  self : Self,
+  offset : UInt,
+  count : UInt,
+) -> String {
   character_data_substring_data_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(offset),
@@ -93,7 +97,7 @@ fn character_data_insert_data_ffi(
 ) -> Unit = "webapi_CharacterData" "insertData"
 
 ///|
-impl TCharacterData with insert_data(self : Self, offset : Int, data : String) -> Unit {
+impl TCharacterData with insert_data(self : Self, offset : UInt, data : String) -> Unit {
   character_data_insert_data_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(offset),
@@ -109,7 +113,7 @@ fn character_data_delete_data_ffi(
 ) -> Unit = "webapi_CharacterData" "deleteData"
 
 ///|
-impl TCharacterData with delete_data(self : Self, offset : Int, count : Int) -> Unit {
+impl TCharacterData with delete_data(self : Self, offset : UInt, count : UInt) -> Unit {
   character_data_delete_data_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(offset),
@@ -128,8 +132,8 @@ fn character_data_replace_data_ffi(
 ///|
 impl TCharacterData with replace_data(
   self : Self,
-  offset : Int,
-  count : Int,
+  offset : UInt,
+  count : UInt,
   data : String,
 ) -> Unit {
   character_data_replace_data_ffi(
@@ -192,11 +196,11 @@ impl TCharacterData with set_data(self : Self, value : String) -> Unit {
 }
 
 ///|
-fn character_data_length_ffi(obj : JsValue) -> Int = "webapi_CharacterData" "length"
+fn character_data_length_ffi(obj : JsValue) -> JsValue = "webapi_CharacterData" "length"
 
 ///|
-impl TCharacterData with length(self : Self) -> Int {
-  character_data_length_ffi(self.to_js())
+impl TCharacterData with length(self : Self) -> UInt {
+  character_data_length_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

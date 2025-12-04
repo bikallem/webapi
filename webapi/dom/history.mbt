@@ -22,7 +22,7 @@ pub type History
 
 ///|
 pub trait THistory: TJsValue {
-  length(self : Self) -> Int = _
+  length(self : Self) -> UInt = _
   scroll_restoration(self : Self) -> ScrollRestoration = _
   set_scroll_restoration(self : Self, value : ScrollRestoration) -> Unit = _
   state(self : Self) -> JsValue = _
@@ -113,11 +113,11 @@ impl THistory with replace_state(
 }
 
 ///|
-fn history_length_ffi(obj : JsValue) -> Int = "webapi_History" "length"
+fn history_length_ffi(obj : JsValue) -> JsValue = "webapi_History" "length"
 
 ///|
-impl THistory with length(self : Self) -> Int {
-  history_length_ffi(self.to_js())
+impl THistory with length(self : Self) -> UInt {
+  history_length_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

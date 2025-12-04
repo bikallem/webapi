@@ -35,7 +35,7 @@ pub type Blob
 
 ///|
 pub trait TBlob: TJsValue {
-  size(self : Self) -> Int64 = _
+  size(self : Self) -> UInt64 = _
   type_(self : Self) -> String = _
   slice(self : Self, start? : Int64, end? : Int64, content_type? : String) -> Blob = _
   stream(self : Self) -> JsValue = _
@@ -121,11 +121,11 @@ impl TBlob with bytes(self : Self) -> JsPromise[JsValue] {
 }
 
 ///|
-fn blob_size_ffi(obj : JsValue) -> Int64 = "webapi_Blob" "size"
+fn blob_size_ffi(obj : JsValue) -> JsValue = "webapi_Blob" "size"
 
 ///|
-impl TBlob with size(self : Self) -> Int64 {
-  blob_size_ffi(self.to_js())
+impl TBlob with size(self : Self) -> UInt64 {
+  blob_size_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

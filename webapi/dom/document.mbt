@@ -319,7 +319,7 @@ pub trait TDocument: TJsValue {
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element? = _
   last_element_child(self : Self) -> Element? = _
-  child_element_count(self : Self) -> Int = _
+  child_element_count(self : Self) -> UInt = _
   onabort(self : Self) -> EventHandler = _
   set_onabort(self : Self, value : EventHandler) -> Unit = _
   onauxclick(self : Self) -> EventHandler = _
@@ -512,13 +512,13 @@ pub trait TDocument: TJsValue {
   create_node_iterator(
     self : Self,
     root : Node,
-    what_to_show? : Int,
+    what_to_show? : UInt,
     filter? : JsValue,
   ) -> JsValue = _
   create_tree_walker(
     self : Self,
     root : Node,
-    what_to_show? : Int,
+    what_to_show? : UInt,
     filter? : JsValue,
   ) -> JsValue = _
   get_elements_by_name(self : Self, element_name : String) -> NodeList = _
@@ -575,7 +575,7 @@ pub trait TDocument: TJsValue {
     expression : String,
     context_node : Node,
     resolver? : JsValue,
-    type_? : Int,
+    type_? : UInt,
     result? : JsValue,
   ) -> JsValue = _
 }
@@ -934,7 +934,7 @@ fn document_create_node_iterator_ffi(
 impl TDocument with create_node_iterator(
   self : Self,
   root : Node,
-  what_to_show? : Int,
+  what_to_show? : UInt,
   filter? : JsValue,
 ) -> JsValue {
   let what_to_show_js = opt_to_js(what_to_show)
@@ -959,7 +959,7 @@ fn document_create_tree_walker_ffi(
 impl TDocument with create_tree_walker(
   self : Self,
   root : Node,
-  what_to_show? : Int,
+  what_to_show? : UInt,
   filter? : JsValue,
 ) -> JsValue {
   let what_to_show_js = opt_to_js(what_to_show)
@@ -1428,7 +1428,7 @@ impl TDocument with evaluate(
   expression : String,
   context_node : Node,
   resolver? : JsValue,
-  type_? : Int,
+  type_? : UInt,
   result? : JsValue,
 ) -> JsValue {
   let resolver_js = opt_to_js(resolver)
@@ -1955,11 +1955,11 @@ impl TDocument with last_element_child(self : Self) -> Element? {
 }
 
 ///|
-fn document_child_element_count_ffi(obj : JsValue) -> Int = "webapi_Document" "childElementCount"
+fn document_child_element_count_ffi(obj : JsValue) -> JsValue = "webapi_Document" "childElementCount"
 
 ///|
-impl TDocument with child_element_count(self : Self) -> Int {
-  document_child_element_count_ffi(self.to_js())
+impl TDocument with child_element_count(self : Self) -> UInt {
+  document_child_element_count_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

@@ -23,7 +23,7 @@ fn on_error_event_handler_non_null_new_ffi(
 
 ///|
 pub fn OnErrorEventHandlerNonNull::new(
-  f : (JsValue, String, Int, Int, JsValue) -> JsValue,
+  f : (JsValue, String, UInt, UInt, JsValue) -> JsValue,
 ) -> OnErrorEventHandlerNonNull {
   on_error_event_handler_non_null_new_ffi(fn_to_js(f))
 }

@@ -35,8 +35,8 @@ pub fn ImageBitmapOptions::new(
   image_orientation? : ImageOrientation,
   premultiply_alpha? : PremultiplyAlpha,
   color_space_conversion? : ColorSpaceConversion,
-  resize_width? : Int,
-  resize_height? : Int,
+  resize_width? : UInt,
+  resize_height? : UInt,
   resize_quality? : ResizeQuality,
 ) -> ImageBitmapOptions {
   let image_orientation_js = opt_to_js(image_orientation)

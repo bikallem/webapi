@@ -29,9 +29,9 @@ fn static_range_init_ffi(
 ///|
 pub fn StaticRangeInit::new(
   start_container : Node,
-  start_offset : Int,
+  start_offset : UInt,
   end_container : Node,
-  end_offset : Int,
+  end_offset : UInt,
 ) -> StaticRangeInit {
   static_range_init_ffi(
     TJsValue::to_js(start_container),

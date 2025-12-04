@@ -25,10 +25,10 @@ pub type OffscreenCanvas
 
 ///|
 pub trait TOffscreenCanvas: TJsValue + TEventTarget {
-  width(self : Self) -> Int64 = _
-  set_width(self : Self, value : Int64) -> Unit = _
-  height(self : Self) -> Int64 = _
-  set_height(self : Self, value : Int64) -> Unit = _
+  width(self : Self) -> UInt64 = _
+  set_width(self : Self, value : UInt64) -> Unit = _
+  height(self : Self) -> UInt64 = _
+  set_height(self : Self, value : UInt64) -> Unit = _
   oncontextlost(self : Self) -> EventHandler = _
   set_oncontextlost(self : Self, value : EventHandler) -> Unit = _
   oncontextrestored(self : Self) -> EventHandler = _
@@ -58,7 +58,7 @@ fn offscreen_canvas_new_ffi(
 ) -> OffscreenCanvas = "webapi_OffscreenCanvas" "new"
 
 ///|
-pub fn OffscreenCanvas::new(width : Int64, height : Int64) -> OffscreenCanvas {
+pub fn OffscreenCanvas::new(width : UInt64, height : UInt64) -> OffscreenCanvas {
   offscreen_canvas_new_ffi(TJsValue::to_js(width), TJsValue::to_js(height))
 }
 
@@ -109,35 +109,35 @@ impl TOffscreenCanvas with convert_to_blob(
 }
 
 ///|
-fn offscreen_canvas_width_ffi(obj : JsValue) -> Int64 = "webapi_OffscreenCanvas" "width"
+fn offscreen_canvas_width_ffi(obj : JsValue) -> JsValue = "webapi_OffscreenCanvas" "width"
 
 ///|
-impl TOffscreenCanvas with width(self : Self) -> Int64 {
-  offscreen_canvas_width_ffi(self.to_js())
+impl TOffscreenCanvas with width(self : Self) -> UInt64 {
+  offscreen_canvas_width_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn offscreen_canvas_set_width_ffi(obj : JsValue, value : Int64) -> Unit = "webapi_OffscreenCanvas" "set_width"
+fn offscreen_canvas_set_width_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_OffscreenCanvas" "set_width"
 
 ///|
-impl TOffscreenCanvas with set_width(self : Self, value : Int64) -> Unit {
-  offscreen_canvas_set_width_ffi(self.to_js(), value)
+impl TOffscreenCanvas with set_width(self : Self, value : UInt64) -> Unit {
+  offscreen_canvas_set_width_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|
-fn offscreen_canvas_height_ffi(obj : JsValue) -> Int64 = "webapi_OffscreenCanvas" "height"
+fn offscreen_canvas_height_ffi(obj : JsValue) -> JsValue = "webapi_OffscreenCanvas" "height"
 
 ///|
-impl TOffscreenCanvas with height(self : Self) -> Int64 {
-  offscreen_canvas_height_ffi(self.to_js())
+impl TOffscreenCanvas with height(self : Self) -> UInt64 {
+  offscreen_canvas_height_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn offscreen_canvas_set_height_ffi(obj : JsValue, value : Int64) -> Unit = "webapi_OffscreenCanvas" "set_height"
+fn offscreen_canvas_set_height_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_OffscreenCanvas" "set_height"
 
 ///|
-impl TOffscreenCanvas with set_height(self : Self, value : Int64) -> Unit {
-  offscreen_canvas_set_height_ffi(self.to_js(), value)
+impl TOffscreenCanvas with set_height(self : Self, value : UInt64) -> Unit {
+  offscreen_canvas_set_height_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|

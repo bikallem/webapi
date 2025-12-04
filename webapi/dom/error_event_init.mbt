@@ -32,8 +32,8 @@ fn error_event_init_ffi(
 pub fn ErrorEventInit::new(
   message? : String = "",
   filename? : String = "",
-  lineno? : Int = 0,
-  colno? : Int = 0,
+  lineno? : UInt = 0,
+  colno? : UInt = 0,
   error? : JsValue,
 ) -> ErrorEventInit {
   let error_js = opt_to_js(error)

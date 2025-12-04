@@ -38,7 +38,7 @@ pub type UIEvent
 pub trait TUIEvent: TJsValue + TEvent {
   view(self : Self) -> Window? = _
   detail(self : Self) -> Int = _
-  which(self : Self) -> Int = _
+  which(self : Self) -> UInt = _
   init_ui_event(
     self : Self,
     type_arg : String,
@@ -119,9 +119,9 @@ impl TUIEvent with detail(self : Self) -> Int {
 }
 
 ///|
-fn ui_event_which_ffi(obj : JsValue) -> Int = "webapi_UIEvent" "which"
+fn ui_event_which_ffi(obj : JsValue) -> JsValue = "webapi_UIEvent" "which"
 
 ///|
-impl TUIEvent with which(self : Self) -> Int {
-  ui_event_which_ffi(self.to_js())
+impl TUIEvent with which(self : Self) -> UInt {
+  ui_event_which_ffi(self.to_js()).unsafe_cast()
 }

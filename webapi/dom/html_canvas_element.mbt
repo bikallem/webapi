@@ -24,10 +24,10 @@ pub type HTMLCanvasElement
 
 ///|
 pub trait THTMLCanvasElement: TJsValue + THTMLElement {
-  width(self : Self) -> Int = _
-  set_width(self : Self, value : Int) -> Unit = _
-  height(self : Self) -> Int = _
-  set_height(self : Self, value : Int) -> Unit = _
+  width(self : Self) -> UInt = _
+  set_width(self : Self, value : UInt) -> Unit = _
+  height(self : Self) -> UInt = _
+  set_height(self : Self, value : UInt) -> Unit = _
   get_context(self : Self, context_id : String, options? : JsValue) -> RenderingContext? = _
   to_data_url(self : Self, type_? : String, quality? : JsValue) -> String = _
   to_blob(self : Self, callback : JsValue, type_? : String, quality? : JsValue) -> Unit = _
@@ -125,33 +125,33 @@ impl THTMLCanvasElement with transfer_control_to_offscreen(self : Self) -> Offsc
 }
 
 ///|
-fn html_canvas_element_width_ffi(obj : JsValue) -> Int = "webapi_HTMLCanvasElement" "width"
+fn html_canvas_element_width_ffi(obj : JsValue) -> JsValue = "webapi_HTMLCanvasElement" "width"
 
 ///|
-impl THTMLCanvasElement with width(self : Self) -> Int {
-  html_canvas_element_width_ffi(self.to_js())
+impl THTMLCanvasElement with width(self : Self) -> UInt {
+  html_canvas_element_width_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn html_canvas_element_set_width_ffi(obj : JsValue, value : Int) -> Unit = "webapi_HTMLCanvasElement" "set_width"
+fn html_canvas_element_set_width_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLCanvasElement" "set_width"
 
 ///|
-impl THTMLCanvasElement with set_width(self : Self, value : Int) -> Unit {
-  html_canvas_element_set_width_ffi(self.to_js(), value)
+impl THTMLCanvasElement with set_width(self : Self, value : UInt) -> Unit {
+  html_canvas_element_set_width_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|
-fn html_canvas_element_height_ffi(obj : JsValue) -> Int = "webapi_HTMLCanvasElement" "height"
+fn html_canvas_element_height_ffi(obj : JsValue) -> JsValue = "webapi_HTMLCanvasElement" "height"
 
 ///|
-impl THTMLCanvasElement with height(self : Self) -> Int {
-  html_canvas_element_height_ffi(self.to_js())
+impl THTMLCanvasElement with height(self : Self) -> UInt {
+  html_canvas_element_height_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn html_canvas_element_set_height_ffi(obj : JsValue, value : Int) -> Unit = "webapi_HTMLCanvasElement" "set_height"
+fn html_canvas_element_set_height_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLCanvasElement" "set_height"
 
 ///|
-impl THTMLCanvasElement with set_height(self : Self, value : Int) -> Unit {
-  html_canvas_element_set_height_ffi(self.to_js(), value)
+impl THTMLCanvasElement with set_height(self : Self, value : UInt) -> Unit {
+  html_canvas_element_set_height_ffi(self.to_js(), TJsValue::to_js(value))
 }

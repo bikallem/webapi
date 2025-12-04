@@ -20,8 +20,8 @@ pub type Storage
 
 ///|
 pub trait TStorage: TJsValue {
-  length(self : Self) -> Int = _
-  key(self : Self, index : Int) -> String? = _
+  length(self : Self) -> UInt = _
+  key(self : Self, index : UInt) -> String? = _
   get_item(self : Self, key : String) -> String? = _
   set_item(self : Self, key : String, value : String) -> Unit = _
   remove_item(self : Self, key : String) -> Unit = _
@@ -38,7 +38,7 @@ pub impl TJsValue for Storage with to_js(self : Storage) -> JsValue = "%identity
 fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_Storage" "key"
 
 ///|
-impl TStorage with key(self : Self, index : Int) -> String? {
+impl TStorage with key(self : Self, index : UInt) -> String? {
   storage_key_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).as_option()
 }
 
@@ -79,9 +79,9 @@ impl TStorage with clear(self : Self) -> Unit {
 }
 
 ///|
-fn storage_length_ffi(obj : JsValue) -> Int = "webapi_Storage" "length"
+fn storage_length_ffi(obj : JsValue) -> JsValue = "webapi_Storage" "length"
 
 ///|
-impl TStorage with length(self : Self) -> Int {
-  storage_length_ffi(self.to_js())
+impl TStorage with length(self : Self) -> UInt {
+  storage_length_ffi(self.to_js()).unsafe_cast()
 }

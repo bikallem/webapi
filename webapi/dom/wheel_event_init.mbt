@@ -31,7 +31,7 @@ pub fn WheelEventInit::new(
   delta_x? : Double = 0.0,
   delta_y? : Double = 0.0,
   delta_z? : Double = 0.0,
-  delta_mode? : Int = 0,
+  delta_mode? : UInt = 0,
 ) -> WheelEventInit {
   wheel_event_init_ffi(
     TJsValue::to_js(delta_x),

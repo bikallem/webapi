@@ -23,8 +23,8 @@ pub type ImageData
 
 ///|
 pub trait TImageData: TJsValue {
-  width(self : Self) -> Int = _
-  height(self : Self) -> Int = _
+  width(self : Self) -> UInt = _
+  height(self : Self) -> UInt = _
   data(self : Self) -> JsValue = _
   pixel_format(self : Self) -> ImageDataPixelFormat = _
   color_space(self : Self) -> PredefinedColorSpace = _
@@ -45,8 +45,8 @@ fn image_data_new_ffi(
 
 ///|
 pub fn ImageData::new(
-  sw : Int,
-  sh : Int,
+  sw : UInt,
+  sh : UInt,
   settings? : ImageDataSettings = ImageDataSettings::empty(),
 ) -> ImageData {
   image_data_new_ffi(
@@ -67,8 +67,8 @@ fn image_data_new2_ffi(
 ///|
 pub fn ImageData::new2(
   data : JsValue,
-  sw : Int,
-  sh? : Int,
+  sw : UInt,
+  sh? : UInt,
   settings? : ImageDataSettings = ImageDataSettings::empty(),
 ) -> ImageData {
   image_data_new2_ffi(
@@ -83,19 +83,19 @@ pub fn ImageData::new2(
 }
 
 ///|
-fn image_data_width_ffi(obj : JsValue) -> Int = "webapi_ImageData" "width"
+fn image_data_width_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "width"
 
 ///|
-impl TImageData with width(self : Self) -> Int {
-  image_data_width_ffi(self.to_js())
+impl TImageData with width(self : Self) -> UInt {
+  image_data_width_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn image_data_height_ffi(obj : JsValue) -> Int = "webapi_ImageData" "height"
+fn image_data_height_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "height"
 
 ///|
-impl TImageData with height(self : Self) -> Int {
-  image_data_height_ffi(self.to_js())
+impl TImageData with height(self : Self) -> UInt {
+  image_data_height_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

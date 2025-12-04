@@ -40,7 +40,7 @@ pub fn MouseEventInit::new(
   client_x? : Int = 0,
   client_y? : Int = 0,
   button? : Int = 0,
-  buttons? : Int = 0,
+  buttons? : UInt = 0,
   related_target? : EventTarget = JsValue::null(),
 ) -> MouseEventInit {
   mouse_event_init_ffi(

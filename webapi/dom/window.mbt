@@ -296,7 +296,7 @@ pub trait TWindow: TJsValue {
   set_status(self : Self, value : String) -> Unit = _
   closed(self : Self) -> Bool = _
   frames(self : Self) -> Window = _
-  length(self : Self) -> Int = _
+  length(self : Self) -> UInt = _
   top(self : Self) -> Window? = _
   opener(self : Self) -> JsValue = _
   set_opener(self : Self, value : JsValue) -> Unit = _
@@ -571,8 +571,8 @@ pub trait TWindow: TJsValue {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
-  request_animation_frame(self : Self, callback : JsValue) -> Int = _
-  cancel_animation_frame(self : Self, handle : Int) -> Unit = _
+  request_animation_frame(self : Self, callback : JsValue) -> UInt = _
+  cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
 }
 
 ///|
@@ -1064,7 +1064,7 @@ fn window_request_animation_frame_ffi(
 ) -> JsValue = "webapi_Window" "requestAnimationFrame"
 
 ///|
-impl TWindow with request_animation_frame(self : Self, callback : JsValue) -> Int {
+impl TWindow with request_animation_frame(self : Self, callback : JsValue) -> UInt {
   window_request_animation_frame_ffi(TJsValue::to_js(self), callback).unsafe_cast()
 }
 
@@ -1072,7 +1072,7 @@ impl TWindow with request_animation_frame(self : Self, callback : JsValue) -> In
 fn window_cancel_animation_frame_ffi(obj : JsValue, handle : JsValue) -> Unit = "webapi_Window" "cancelAnimationFrame"
 
 ///|
-impl TWindow with cancel_animation_frame(self : Self, handle : Int) -> Unit {
+impl TWindow with cancel_animation_frame(self : Self, handle : UInt) -> Unit {
   window_cancel_animation_frame_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(handle),
@@ -1360,11 +1360,11 @@ impl TWindow with frames(self : Self) -> Window {
 }
 
 ///|
-fn window_length_ffi(obj : JsValue) -> Int = "webapi_Window" "length"
+fn window_length_ffi(obj : JsValue) -> JsValue = "webapi_Window" "length"
 
 ///|
-impl TWindow with length(self : Self) -> Int {
-  window_length_ffi(self.to_js())
+impl TWindow with length(self : Self) -> UInt {
+  window_length_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

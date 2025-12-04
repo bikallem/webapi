@@ -14,22 +14,22 @@ const PRIMITIVE_TYPE_MAP: Record<string, string> = {
   // Boolean
   boolean: "Bool",
 
-  // Integer types
-  byte: "Int",
-  octet: "Int",
-  short: "Int",
-  "unsigned short": "Int",
-  long: "Int",
-  "unsigned long": "Int",
-  "long long": "Int64",
-  "unsigned long long": "Int64",
-  bigint: "Int64",
+  // Integer types (WebIDL -> MoonBit)
+  byte: "Int",              // 8-bit signed → Int (no signed 8-bit in MoonBit)
+  octet: "Byte",            // 8-bit unsigned → Byte
+  short: "Int",             // 16-bit signed → Int (Int16 exists but Int is more common)
+  "unsigned short": "UInt", // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
+  long: "Int",              // 32-bit signed → Int
+  "unsigned long": "UInt",  // 32-bit unsigned → UInt
+  "long long": "Int64",     // 64-bit signed → Int64
+  "unsigned long long": "UInt64", // 64-bit unsigned → UInt64
+  bigint: "Int64",          // BigInt → Int64
 
-  // Floating point types
-  float: "Double",
-  "unrestricted float": "Double",
-  double: "Double",
-  "unrestricted double": "Double",
+  // Floating point types (WebIDL -> MoonBit)
+  float: "Float",           // 32-bit float → Float
+  "unrestricted float": "Float", // 32-bit unrestricted float → Float
+  double: "Double",         // 64-bit float → Double
+  "unrestricted double": "Double", // 64-bit unrestricted float → Double
 
   // String types
   DOMString: "String",

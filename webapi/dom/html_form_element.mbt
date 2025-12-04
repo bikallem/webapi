@@ -62,7 +62,7 @@ pub trait THTMLFormElement: TJsValue + THTMLElement {
   set_rel(self : Self, value : String) -> Unit = _
   rel_list(self : Self) -> DOMTokenList = _
   elements(self : Self) -> JsValue = _
-  length(self : Self) -> Int = _
+  length(self : Self) -> UInt = _
   submit(self : Self) -> Unit = _
   request_submit(self : Self, submitter? : HTMLElement) -> Unit = _
   reset(self : Self) -> Unit = _
@@ -309,9 +309,9 @@ impl THTMLFormElement with elements(self : Self) -> JsValue {
 }
 
 ///|
-fn html_form_element_length_ffi(obj : JsValue) -> Int = "webapi_HTMLFormElement" "length"
+fn html_form_element_length_ffi(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "length"
 
 ///|
-impl THTMLFormElement with length(self : Self) -> Int {
-  html_form_element_length_ffi(self.to_js())
+impl THTMLFormElement with length(self : Self) -> UInt {
+  html_form_element_length_ffi(self.to_js()).unsafe_cast()
 }

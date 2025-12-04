@@ -52,7 +52,7 @@ pub trait TEvent: TJsValue {
   target(self : Self) -> EventTarget? = _
   src_element(self : Self) -> EventTarget? = _
   current_target(self : Self) -> EventTarget? = _
-  event_phase(self : Self) -> Int = _
+  event_phase(self : Self) -> UInt = _
   cancel_bubble(self : Self) -> Bool = _
   set_cancel_bubble(self : Self, value : Bool) -> Unit = _
   bubbles(self : Self) -> Bool = _
@@ -177,11 +177,11 @@ impl TEvent with current_target(self : Self) -> EventTarget? {
 }
 
 ///|
-fn event_event_phase_ffi(obj : JsValue) -> Int = "webapi_Event" "eventPhase"
+fn event_event_phase_ffi(obj : JsValue) -> JsValue = "webapi_Event" "eventPhase"
 
 ///|
-impl TEvent with event_phase(self : Self) -> Int {
-  event_event_phase_ffi(self.to_js())
+impl TEvent with event_phase(self : Self) -> UInt {
+  event_event_phase_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

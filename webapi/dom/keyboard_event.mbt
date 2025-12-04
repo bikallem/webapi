@@ -56,15 +56,15 @@ pub type KeyboardEvent
 pub trait TKeyboardEvent: TJsValue + TUIEvent {
   key(self : Self) -> String = _
   code(self : Self) -> String = _
-  location(self : Self) -> Int = _
+  location(self : Self) -> UInt = _
   ctrl_key(self : Self) -> Bool = _
   shift_key(self : Self) -> Bool = _
   alt_key(self : Self) -> Bool = _
   meta_key(self : Self) -> Bool = _
   repeat(self : Self) -> Bool = _
   is_composing(self : Self) -> Bool = _
-  char_code(self : Self) -> Int = _
-  key_code(self : Self) -> Int = _
+  char_code(self : Self) -> UInt = _
+  key_code(self : Self) -> UInt = _
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
   init_keyboard_event(
     self : Self,
@@ -73,7 +73,7 @@ pub trait TKeyboardEvent: TJsValue + TUIEvent {
     cancelable_arg? : Bool,
     view_arg? : Window,
     key_arg? : String,
-    location_arg? : Int,
+    location_arg? : UInt,
     ctrl_key? : Bool,
     alt_key? : Bool,
     shift_key? : Bool,
@@ -147,7 +147,7 @@ impl TKeyboardEvent with init_keyboard_event(
   cancelable_arg? : Bool,
   view_arg? : Window,
   key_arg? : String,
-  location_arg? : Int,
+  location_arg? : UInt,
   ctrl_key? : Bool,
   alt_key? : Bool,
   shift_key? : Bool,
@@ -194,11 +194,11 @@ impl TKeyboardEvent with code(self : Self) -> String {
 }
 
 ///|
-fn keyboard_event_location_ffi(obj : JsValue) -> Int = "webapi_KeyboardEvent" "location"
+fn keyboard_event_location_ffi(obj : JsValue) -> JsValue = "webapi_KeyboardEvent" "location"
 
 ///|
-impl TKeyboardEvent with location(self : Self) -> Int {
-  keyboard_event_location_ffi(self.to_js())
+impl TKeyboardEvent with location(self : Self) -> UInt {
+  keyboard_event_location_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
@@ -250,17 +250,17 @@ impl TKeyboardEvent with is_composing(self : Self) -> Bool {
 }
 
 ///|
-fn keyboard_event_char_code_ffi(obj : JsValue) -> Int = "webapi_KeyboardEvent" "charCode"
+fn keyboard_event_char_code_ffi(obj : JsValue) -> JsValue = "webapi_KeyboardEvent" "charCode"
 
 ///|
-impl TKeyboardEvent with char_code(self : Self) -> Int {
-  keyboard_event_char_code_ffi(self.to_js())
+impl TKeyboardEvent with char_code(self : Self) -> UInt {
+  keyboard_event_char_code_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn keyboard_event_key_code_ffi(obj : JsValue) -> Int = "webapi_KeyboardEvent" "keyCode"
+fn keyboard_event_key_code_ffi(obj : JsValue) -> JsValue = "webapi_KeyboardEvent" "keyCode"
 
 ///|
-impl TKeyboardEvent with key_code(self : Self) -> Int {
-  keyboard_event_key_code_ffi(self.to_js())
+impl TKeyboardEvent with key_code(self : Self) -> UInt {
+  keyboard_event_key_code_ffi(self.to_js()).unsafe_cast()
 }

@@ -52,7 +52,7 @@ pub fn AbortSignal::abort(reason? : JsValue) -> JsValue {
 fn abort_signal_timeout_ffi(milliseconds : JsValue) -> JsValue = "webapi_AbortSignal" "timeout"
 
 ///|
-pub fn AbortSignal::timeout(milliseconds : Int64) -> JsValue {
+pub fn AbortSignal::timeout(milliseconds : UInt64) -> JsValue {
   abort_signal_timeout_ffi(TJsValue::to_js(milliseconds))
 }
 

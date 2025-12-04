@@ -31,7 +31,7 @@ pub type Text
 pub trait TText: TJsValue + TCharacterData {
   whole_text(self : Self) -> String = _
   assigned_slot(self : Self) -> JsValue? = _
-  split_text(self : Self, offset : Int) -> Text = _
+  split_text(self : Self, offset : UInt) -> Text = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
   convert_quad_from_node(
     self : Self,
@@ -80,7 +80,7 @@ pub fn Text::new(data? : String = "") -> Text {
 fn text_split_text_ffi(obj : JsValue, offset : JsValue) -> JsValue = "webapi_Text" "splitText"
 
 ///|
-impl TText with split_text(self : Self, offset : Int) -> Text {
+impl TText with split_text(self : Self, offset : UInt) -> Text {
   text_split_text_ffi(TJsValue::to_js(self), TJsValue::to_js(offset)).unsafe_cast()
 }
 

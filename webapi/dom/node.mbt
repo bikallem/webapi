@@ -68,7 +68,7 @@ pub type Node
 
 ///|
 pub trait TNode: TJsValue + TEventTarget {
-  node_type(self : Self) -> Int = _
+  node_type(self : Self) -> UInt = _
   node_name(self : Self) -> String = _
   base_uri(self : Self) -> String = _
   is_connected(self : Self) -> Bool = _
@@ -90,7 +90,7 @@ pub trait TNode: TJsValue + TEventTarget {
   clone_node(self : Self, subtree? : Bool) -> Node = _
   is_equal_node(self : Self, other_node : Node) -> Bool = _
   is_same_node(self : Self, other_node : Node) -> Bool = _
-  compare_document_position(self : Self, other : Node) -> Int = _
+  compare_document_position(self : Self, other : Node) -> UInt = _
   contains(self : Self, other : Node) -> Bool = _
   lookup_prefix(self : Self, namespace_ : String) -> String? = _
   lookup_namespace_uri(self : Self, prefix : String) -> String? = _
@@ -169,7 +169,7 @@ fn node_compare_document_position_ffi(
 ) -> JsValue = "webapi_Node" "compareDocumentPosition"
 
 ///|
-impl TNode with compare_document_position(self : Self, other : Node) -> Int {
+impl TNode with compare_document_position(self : Self, other : Node) -> UInt {
   node_compare_document_position_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(other),
@@ -263,11 +263,11 @@ impl TNode with remove_child(self : Self, child : Node) -> Node {
 }
 
 ///|
-fn node_node_type_ffi(obj : JsValue) -> Int = "webapi_Node" "nodeType"
+fn node_node_type_ffi(obj : JsValue) -> JsValue = "webapi_Node" "nodeType"
 
 ///|
-impl TNode with node_type(self : Self) -> Int {
-  node_node_type_ffi(self.to_js())
+impl TNode with node_type(self : Self) -> UInt {
+  node_node_type_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|

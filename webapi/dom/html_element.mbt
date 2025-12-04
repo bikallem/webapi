@@ -193,8 +193,8 @@ pub trait THTMLElement: TJsValue {
   set_outer_text(self : Self, value : String) -> Unit = _
   popover(self : Self) -> String? = _
   set_popover(self : Self, value : String) -> Unit = _
-  heading_offset(self : Self) -> Int = _
-  set_heading_offset(self : Self, value : Int) -> Unit = _
+  heading_offset(self : Self) -> UInt = _
+  set_heading_offset(self : Self, value : UInt) -> Unit = _
   heading_reset(self : Self) -> Bool = _
   set_heading_reset(self : Self, value : Bool) -> Unit = _
   style(self : Self) -> JsValue = _
@@ -761,19 +761,19 @@ impl THTMLElement with set_popover(self : Self, value : String) -> Unit {
 }
 
 ///|
-fn html_element_heading_offset_ffi(obj : JsValue) -> Int = "webapi_HTMLElement" "headingOffset"
+fn html_element_heading_offset_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "headingOffset"
 
 ///|
-impl THTMLElement with heading_offset(self : Self) -> Int {
-  html_element_heading_offset_ffi(self.to_js())
+impl THTMLElement with heading_offset(self : Self) -> UInt {
+  html_element_heading_offset_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
-fn html_element_set_heading_offset_ffi(obj : JsValue, value : Int) -> Unit = "webapi_HTMLElement" "set_headingOffset"
+fn html_element_set_heading_offset_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_headingOffset"
 
 ///|
-impl THTMLElement with set_heading_offset(self : Self, value : Int) -> Unit {
-  html_element_set_heading_offset_ffi(self.to_js(), value)
+impl THTMLElement with set_heading_offset(self : Self, value : UInt) -> Unit {
+  html_element_set_heading_offset_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|

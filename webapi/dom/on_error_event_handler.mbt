@@ -18,7 +18,7 @@ fn on_error_event_handler_new_ffi(f : JsValue) -> OnErrorEventHandler = "webapi_
 
 ///|
 pub fn OnErrorEventHandler::new(
-  f : (JsValue, String, Int, Int, JsValue) -> JsValue,
+  f : (JsValue, String, UInt, UInt, JsValue) -> JsValue,
 ) -> OnErrorEventHandler {
   on_error_event_handler_new_ffi(fn_to_js(f))
 }
