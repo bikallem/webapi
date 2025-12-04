@@ -1925,9 +1925,32 @@ export const wasmImportObject = {
     set_wordSpacing: (obj, value) => { obj.wordSpacing = value; }
   },
 
+  webapi_CanvasGradient: {
+    addColorStop: (obj, offset, color) => obj.addColorStop(offset, color)
+  },
+
+  webapi_CanvasPattern: {
+    setTransform: (obj, transform) => obj.setTransform(transform)
+  },
+
   webapi_ImageBitmapRenderingContext: {
     transferFromImageBitmap: (obj, bitmap) => obj.transferFromImageBitmap(bitmap),
     get_canvas: (obj) => obj.canvas
+  },
+
+  webapi_OffscreenCanvas: {
+    new: (width, height) => new OffscreenCanvas(width, height),
+    getContext: (obj, contextId, options) => obj.getContext(contextId, options),
+    transferToImageBitmap: (obj) => obj.transferToImageBitmap(),
+    convertToBlob: (obj, options) => obj.convertToBlob(options),
+    get_width: (obj) => obj.width,
+    set_width: (obj, value) => { obj.width = value; },
+    get_height: (obj) => obj.height,
+    set_height: (obj, value) => { obj.height = value; },
+    get_oncontextlost: (obj) => obj.oncontextlost,
+    set_oncontextlost: (obj, value) => { obj.oncontextlost = value; },
+    get_oncontextrestored: (obj) => obj.oncontextrestored,
+    set_oncontextrestored: (obj, value) => { obj.oncontextrestored = value; }
   },
 
   webapi_OffscreenCanvasRenderingContext2D: {

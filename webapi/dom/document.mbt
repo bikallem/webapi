@@ -1647,7 +1647,7 @@ fn document_set_body_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Docum
 
 ///|
 impl TDocument with set_body(self : Self, value : HTMLElement) -> Unit {
-  document_set_body_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_body_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1767,7 +1767,7 @@ fn document_set_onreadystatechange_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl TDocument with set_onreadystatechange(self : Self, value : EventHandler) -> Unit {
-  document_set_onreadystatechange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onreadystatechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1783,7 +1783,7 @@ fn document_set_onvisibilitychange_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl TDocument with set_onvisibilitychange(self : Self, value : EventHandler) -> Unit {
-  document_set_onvisibilitychange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onvisibilitychange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1917,7 +1917,7 @@ impl TDocument with set_adopted_style_sheets(
   self : Self,
   value : Array[JsValue],
 ) -> Unit {
-  document_set_adopted_style_sheets_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_adopted_style_sheets_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1981,7 +1981,7 @@ fn document_set_onabort_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onabort(self : Self, value : EventHandler) -> Unit {
-  document_set_onabort_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onabort_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1997,7 +1997,7 @@ fn document_set_onauxclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TDocument with set_onauxclick(self : Self, value : EventHandler) -> Unit {
-  document_set_onauxclick_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onauxclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2013,7 +2013,7 @@ fn document_set_onbeforeinput_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl TDocument with set_onbeforeinput(self : Self, value : EventHandler) -> Unit {
-  document_set_onbeforeinput_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onbeforeinput_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2029,7 +2029,7 @@ fn document_set_onbeforematch_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl TDocument with set_onbeforematch(self : Self, value : EventHandler) -> Unit {
-  document_set_onbeforematch_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onbeforematch_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2045,7 +2045,7 @@ fn document_set_onbeforetoggle_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl TDocument with set_onbeforetoggle(self : Self, value : EventHandler) -> Unit {
-  document_set_onbeforetoggle_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onbeforetoggle_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2061,7 +2061,7 @@ fn document_set_onblur_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Doc
 
 ///|
 impl TDocument with set_onblur(self : Self, value : EventHandler) -> Unit {
-  document_set_onblur_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onblur_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2077,7 +2077,7 @@ fn document_set_oncancel_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_oncancel(self : Self, value : EventHandler) -> Unit {
-  document_set_oncancel_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncancel_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2093,7 +2093,7 @@ fn document_set_oncanplay_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_oncanplay(self : Self, value : EventHandler) -> Unit {
-  document_set_oncanplay_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncanplay_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2109,7 +2109,7 @@ fn document_set_oncanplaythrough_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl TDocument with set_oncanplaythrough(self : Self, value : EventHandler) -> Unit {
-  document_set_oncanplaythrough_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncanplaythrough_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2125,7 +2125,7 @@ fn document_set_onchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_onchange(self : Self, value : EventHandler) -> Unit {
-  document_set_onchange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2141,7 +2141,7 @@ fn document_set_onclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onclick(self : Self, value : EventHandler) -> Unit {
-  document_set_onclick_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2157,7 +2157,7 @@ fn document_set_onclose_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onclose(self : Self, value : EventHandler) -> Unit {
-  document_set_onclose_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onclose_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2173,7 +2173,7 @@ fn document_set_oncommand_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_oncommand(self : Self, value : EventHandler) -> Unit {
-  document_set_oncommand_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncommand_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2189,7 +2189,7 @@ fn document_set_oncontextlost_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl TDocument with set_oncontextlost(self : Self, value : EventHandler) -> Unit {
-  document_set_oncontextlost_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncontextlost_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2205,7 +2205,7 @@ fn document_set_oncontextmenu_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl TDocument with set_oncontextmenu(self : Self, value : EventHandler) -> Unit {
-  document_set_oncontextmenu_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncontextmenu_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2221,7 +2221,7 @@ fn document_set_oncontextrestored_ffi(obj : JsValue, value : JsValue) -> Unit = 
 
 ///|
 impl TDocument with set_oncontextrestored(self : Self, value : EventHandler) -> Unit {
-  document_set_oncontextrestored_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncontextrestored_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2237,7 +2237,7 @@ fn document_set_oncopy_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Doc
 
 ///|
 impl TDocument with set_oncopy(self : Self, value : EventHandler) -> Unit {
-  document_set_oncopy_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncopy_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2253,7 +2253,7 @@ fn document_set_oncuechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_oncuechange(self : Self, value : EventHandler) -> Unit {
-  document_set_oncuechange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncuechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2269,7 +2269,7 @@ fn document_set_oncut_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Docu
 
 ///|
 impl TDocument with set_oncut(self : Self, value : EventHandler) -> Unit {
-  document_set_oncut_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oncut_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2285,7 +2285,7 @@ fn document_set_ondblclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TDocument with set_ondblclick(self : Self, value : EventHandler) -> Unit {
-  document_set_ondblclick_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondblclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2301,7 +2301,7 @@ fn document_set_ondrag_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Doc
 
 ///|
 impl TDocument with set_ondrag(self : Self, value : EventHandler) -> Unit {
-  document_set_ondrag_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondrag_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2317,7 +2317,7 @@ fn document_set_ondragend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_ondragend(self : Self, value : EventHandler) -> Unit {
-  document_set_ondragend_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondragend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2333,7 +2333,7 @@ fn document_set_ondragenter_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_ondragenter(self : Self, value : EventHandler) -> Unit {
-  document_set_ondragenter_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondragenter_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2349,7 +2349,7 @@ fn document_set_ondragleave_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_ondragleave(self : Self, value : EventHandler) -> Unit {
-  document_set_ondragleave_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondragleave_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2365,7 +2365,7 @@ fn document_set_ondragover_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TDocument with set_ondragover(self : Self, value : EventHandler) -> Unit {
-  document_set_ondragover_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondragover_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2381,7 +2381,7 @@ fn document_set_ondragstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_ondragstart(self : Self, value : EventHandler) -> Unit {
-  document_set_ondragstart_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondragstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2397,7 +2397,7 @@ fn document_set_ondrop_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Doc
 
 ///|
 impl TDocument with set_ondrop(self : Self, value : EventHandler) -> Unit {
-  document_set_ondrop_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondrop_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2413,7 +2413,7 @@ fn document_set_ondurationchange_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl TDocument with set_ondurationchange(self : Self, value : EventHandler) -> Unit {
-  document_set_ondurationchange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ondurationchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2429,7 +2429,7 @@ fn document_set_onemptied_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onemptied(self : Self, value : EventHandler) -> Unit {
-  document_set_onemptied_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onemptied_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2445,7 +2445,7 @@ fn document_set_onended_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onended(self : Self, value : EventHandler) -> Unit {
-  document_set_onended_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onended_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2461,7 +2461,7 @@ fn document_set_onerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onerror(self : Self, value : OnErrorEventHandler) -> Unit {
-  document_set_onerror_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onerror_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2477,7 +2477,7 @@ fn document_set_onfocus_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onfocus(self : Self, value : EventHandler) -> Unit {
-  document_set_onfocus_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onfocus_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2493,7 +2493,7 @@ fn document_set_onformdata_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TDocument with set_onformdata(self : Self, value : EventHandler) -> Unit {
-  document_set_onformdata_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onformdata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2509,7 +2509,7 @@ fn document_set_oninput_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_oninput(self : Self, value : EventHandler) -> Unit {
-  document_set_oninput_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oninput_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2525,7 +2525,7 @@ fn document_set_oninvalid_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_oninvalid(self : Self, value : EventHandler) -> Unit {
-  document_set_oninvalid_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_oninvalid_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2541,7 +2541,7 @@ fn document_set_onkeydown_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onkeydown(self : Self, value : EventHandler) -> Unit {
-  document_set_onkeydown_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onkeydown_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2557,7 +2557,7 @@ fn document_set_onkeypress_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TDocument with set_onkeypress(self : Self, value : EventHandler) -> Unit {
-  document_set_onkeypress_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onkeypress_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2573,7 +2573,7 @@ fn document_set_onkeyup_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onkeyup(self : Self, value : EventHandler) -> Unit {
-  document_set_onkeyup_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onkeyup_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2589,7 +2589,7 @@ fn document_set_onload_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Doc
 
 ///|
 impl TDocument with set_onload(self : Self, value : EventHandler) -> Unit {
-  document_set_onload_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onload_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2605,7 +2605,7 @@ fn document_set_onloadeddata_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TDocument with set_onloadeddata(self : Self, value : EventHandler) -> Unit {
-  document_set_onloadeddata_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onloadeddata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2621,7 +2621,7 @@ fn document_set_onloadedmetadata_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl TDocument with set_onloadedmetadata(self : Self, value : EventHandler) -> Unit {
-  document_set_onloadedmetadata_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onloadedmetadata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2637,7 +2637,7 @@ fn document_set_onloadstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_onloadstart(self : Self, value : EventHandler) -> Unit {
-  document_set_onloadstart_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onloadstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2653,7 +2653,7 @@ fn document_set_onmousedown_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_onmousedown(self : Self, value : EventHandler) -> Unit {
-  document_set_onmousedown_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onmousedown_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2669,7 +2669,7 @@ fn document_set_onmouseenter_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TDocument with set_onmouseenter(self : Self, value : EventHandler) -> Unit {
-  document_set_onmouseenter_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onmouseenter_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2685,7 +2685,7 @@ fn document_set_onmouseleave_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TDocument with set_onmouseleave(self : Self, value : EventHandler) -> Unit {
-  document_set_onmouseleave_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onmouseleave_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2701,7 +2701,7 @@ fn document_set_onmousemove_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_onmousemove(self : Self, value : EventHandler) -> Unit {
-  document_set_onmousemove_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onmousemove_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2717,7 +2717,7 @@ fn document_set_onmouseout_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TDocument with set_onmouseout(self : Self, value : EventHandler) -> Unit {
-  document_set_onmouseout_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onmouseout_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2733,7 +2733,7 @@ fn document_set_onmouseover_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_onmouseover(self : Self, value : EventHandler) -> Unit {
-  document_set_onmouseover_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onmouseover_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2749,7 +2749,7 @@ fn document_set_onmouseup_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onmouseup(self : Self, value : EventHandler) -> Unit {
-  document_set_onmouseup_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onmouseup_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2765,7 +2765,7 @@ fn document_set_onpaste_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onpaste(self : Self, value : EventHandler) -> Unit {
-  document_set_onpaste_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onpaste_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2781,7 +2781,7 @@ fn document_set_onpause_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onpause(self : Self, value : EventHandler) -> Unit {
-  document_set_onpause_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onpause_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2797,7 +2797,7 @@ fn document_set_onplay_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Doc
 
 ///|
 impl TDocument with set_onplay(self : Self, value : EventHandler) -> Unit {
-  document_set_onplay_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onplay_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2813,7 +2813,7 @@ fn document_set_onplaying_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onplaying(self : Self, value : EventHandler) -> Unit {
-  document_set_onplaying_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onplaying_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2829,7 +2829,7 @@ fn document_set_onprogress_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TDocument with set_onprogress(self : Self, value : EventHandler) -> Unit {
-  document_set_onprogress_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onprogress_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2845,7 +2845,7 @@ fn document_set_onratechange_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TDocument with set_onratechange(self : Self, value : EventHandler) -> Unit {
-  document_set_onratechange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onratechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2861,7 +2861,7 @@ fn document_set_onreset_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onreset(self : Self, value : EventHandler) -> Unit {
-  document_set_onreset_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onreset_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2877,7 +2877,7 @@ fn document_set_onresize_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_onresize(self : Self, value : EventHandler) -> Unit {
-  document_set_onresize_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onresize_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2893,7 +2893,7 @@ fn document_set_onscroll_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_onscroll(self : Self, value : EventHandler) -> Unit {
-  document_set_onscroll_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onscroll_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2909,7 +2909,7 @@ fn document_set_onscrollend_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TDocument with set_onscrollend(self : Self, value : EventHandler) -> Unit {
-  document_set_onscrollend_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onscrollend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2931,10 +2931,7 @@ impl TDocument with set_onsecuritypolicyviolation(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  document_set_onsecuritypolicyviolation_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  document_set_onsecuritypolicyviolation_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2950,7 +2947,7 @@ fn document_set_onseeked_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_onseeked(self : Self, value : EventHandler) -> Unit {
-  document_set_onseeked_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onseeked_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2966,7 +2963,7 @@ fn document_set_onseeking_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onseeking(self : Self, value : EventHandler) -> Unit {
-  document_set_onseeking_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onseeking_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2982,7 +2979,7 @@ fn document_set_onselect_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_onselect(self : Self, value : EventHandler) -> Unit {
-  document_set_onselect_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onselect_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2998,7 +2995,7 @@ fn document_set_onslotchange_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TDocument with set_onslotchange(self : Self, value : EventHandler) -> Unit {
-  document_set_onslotchange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onslotchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3014,7 +3011,7 @@ fn document_set_onstalled_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onstalled(self : Self, value : EventHandler) -> Unit {
-  document_set_onstalled_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onstalled_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3030,7 +3027,7 @@ fn document_set_onsubmit_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_onsubmit(self : Self, value : EventHandler) -> Unit {
-  document_set_onsubmit_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onsubmit_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3046,7 +3043,7 @@ fn document_set_onsuspend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onsuspend(self : Self, value : EventHandler) -> Unit {
-  document_set_onsuspend_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onsuspend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3062,7 +3059,7 @@ fn document_set_ontimeupdate_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TDocument with set_ontimeupdate(self : Self, value : EventHandler) -> Unit {
-  document_set_ontimeupdate_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ontimeupdate_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3078,7 +3075,7 @@ fn document_set_ontoggle_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_D
 
 ///|
 impl TDocument with set_ontoggle(self : Self, value : EventHandler) -> Unit {
-  document_set_ontoggle_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_ontoggle_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3094,7 +3091,7 @@ fn document_set_onvolumechange_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl TDocument with set_onvolumechange(self : Self, value : EventHandler) -> Unit {
-  document_set_onvolumechange_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onvolumechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3110,7 +3107,7 @@ fn document_set_onwaiting_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TDocument with set_onwaiting(self : Self, value : EventHandler) -> Unit {
-  document_set_onwaiting_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onwaiting_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3129,7 +3126,7 @@ fn document_set_onwebkitanimationend_ffi(
 
 ///|
 impl TDocument with set_onwebkitanimationend(self : Self, value : EventHandler) -> Unit {
-  document_set_onwebkitanimationend_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onwebkitanimationend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3151,10 +3148,7 @@ impl TDocument with set_onwebkitanimationiteration(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  document_set_onwebkitanimationiteration_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  document_set_onwebkitanimationiteration_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3176,7 +3170,7 @@ impl TDocument with set_onwebkitanimationstart(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  document_set_onwebkitanimationstart_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onwebkitanimationstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3195,7 +3189,7 @@ fn document_set_onwebkittransitionend_ffi(
 
 ///|
 impl TDocument with set_onwebkittransitionend(self : Self, value : EventHandler) -> Unit {
-  document_set_onwebkittransitionend_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onwebkittransitionend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -3211,5 +3205,5 @@ fn document_set_onwheel_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Do
 
 ///|
 impl TDocument with set_onwheel(self : Self, value : EventHandler) -> Unit {
-  document_set_onwheel_ffi(self.to_js(), TJsValue::to_js(value))
+  document_set_onwheel_ffi(self.to_js(), value.to_js())
 }

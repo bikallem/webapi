@@ -31,7 +31,7 @@ pub trait THTMLCanvasElement: TJsValue + THTMLElement {
   get_context(self : Self, context_id : String, options? : JsValue) -> RenderingContext? = _
   to_data_url(self : Self, type_? : String, quality? : JsValue) -> String = _
   to_blob(self : Self, callback : JsValue, type_? : String, quality? : JsValue) -> Unit = _
-  transfer_control_to_offscreen(self : Self) -> JsValue = _
+  transfer_control_to_offscreen(self : Self) -> OffscreenCanvas = _
 }
 
 ///|
@@ -126,7 +126,7 @@ fn html_canvas_element_transfer_control_to_offscreen_ffi(
 ) -> JsValue = "webapi_HTMLCanvasElement" "transferControlToOffscreen"
 
 ///|
-impl THTMLCanvasElement with transfer_control_to_offscreen(self : Self) -> JsValue {
+impl THTMLCanvasElement with transfer_control_to_offscreen(self : Self) -> OffscreenCanvas {
   html_canvas_element_transfer_control_to_offscreen_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 

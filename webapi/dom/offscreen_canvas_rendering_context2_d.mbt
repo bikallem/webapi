@@ -166,7 +166,7 @@ pub type OffscreenCanvasRenderingContext2D
 
 ///|
 pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
-  canvas(self : Self) -> JsValue = _
+  canvas(self : Self) -> OffscreenCanvas = _
   global_alpha(self : Self) -> Double = _
   set_global_alpha(self : Self, value : Double) -> Unit = _
   global_composite_operation(self : Self) -> String = _
@@ -175,10 +175,10 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
   set_image_smoothing_enabled(self : Self, value : Bool) -> Unit = _
   image_smoothing_quality(self : Self) -> ImageSmoothingQuality = _
   set_image_smoothing_quality(self : Self, value : ImageSmoothingQuality) -> Unit = _
-  stroke_style(self : Self) -> JsValue = _
-  set_stroke_style(self : Self, value : JsValue) -> Unit = _
-  fill_style(self : Self) -> JsValue = _
-  set_fill_style(self : Self, value : JsValue) -> Unit = _
+  stroke_style(self : Self) -> StrokeStyle = _
+  set_stroke_style(self : Self, value : &TStrokeStyle) -> Unit = _
+  fill_style(self : Self) -> FillStyle = _
+  set_fill_style(self : Self, value : &TFillStyle) -> Unit = _
   shadow_offset_x(self : Self) -> Double = _
   set_shadow_offset_x(self : Self, value : Double) -> Unit = _
   shadow_offset_y(self : Self) -> Double = _
@@ -256,7 +256,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     y0 : Double,
     x1 : Double,
     y1 : Double,
-  ) -> JsValue = _
+  ) -> CanvasGradient = _
   create_radial_gradient(
     self : Self,
     x0 : Double,
@@ -265,14 +265,14 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     x1 : Double,
     y1 : Double,
     r1 : Double,
-  ) -> JsValue = _
+  ) -> CanvasGradient = _
   create_conic_gradient(
     self : Self,
     start_angle : Double,
     x : Double,
     y : Double,
-  ) -> JsValue = _
-  create_pattern(self : Self, image : JsValue, repetition : String) -> JsValue? = _
+  ) -> CanvasGradient = _
+  create_pattern(self : Self, image : JsValue, repetition : String) -> CanvasPattern? = _
   clear_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   fill_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   stroke_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
@@ -657,7 +657,7 @@ impl TOffscreenCanvasRenderingContext2D with create_linear_gradient(
   y0 : Double,
   x1 : Double,
   y1 : Double,
-) -> JsValue {
+) -> CanvasGradient {
   offscreen_canvas_rendering_context2_d_create_linear_gradient_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x0),
@@ -687,7 +687,7 @@ impl TOffscreenCanvasRenderingContext2D with create_radial_gradient(
   x1 : Double,
   y1 : Double,
   r1 : Double,
-) -> JsValue {
+) -> CanvasGradient {
   offscreen_canvas_rendering_context2_d_create_radial_gradient_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x0),
@@ -713,7 +713,7 @@ impl TOffscreenCanvasRenderingContext2D with create_conic_gradient(
   start_angle : Double,
   x : Double,
   y : Double,
-) -> JsValue {
+) -> CanvasGradient {
   offscreen_canvas_rendering_context2_d_create_conic_gradient_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(start_angle),
@@ -734,7 +734,7 @@ impl TOffscreenCanvasRenderingContext2D with create_pattern(
   self : Self,
   image : JsValue,
   repetition : String,
-) -> JsValue? {
+) -> CanvasPattern? {
   offscreen_canvas_rendering_context2_d_create_pattern_ffi(
     TJsValue::to_js(self),
     image,
@@ -1612,8 +1612,8 @@ impl TOffscreenCanvasRenderingContext2D with ellipse(
 fn offscreen_canvas_rendering_context2_d_canvas_ffi(obj : JsValue) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "canvas"
 
 ///|
-impl TOffscreenCanvasRenderingContext2D with canvas(self : Self) -> JsValue {
-  offscreen_canvas_rendering_context2_d_canvas_ffi(self.to_js())
+impl TOffscreenCanvasRenderingContext2D with canvas(self : Self) -> OffscreenCanvas {
+  offscreen_canvas_rendering_context2_d_canvas_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
@@ -1734,7 +1734,7 @@ impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_quality(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_image_smoothing_quality_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -1744,8 +1744,8 @@ fn offscreen_canvas_rendering_context2_d_stroke_style_ffi(
 ) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "strokeStyle"
 
 ///|
-impl TOffscreenCanvasRenderingContext2D with stroke_style(self : Self) -> JsValue {
-  offscreen_canvas_rendering_context2_d_stroke_style_ffi(self.to_js())
+impl TOffscreenCanvasRenderingContext2D with stroke_style(self : Self) -> StrokeStyle {
+  offscreen_canvas_rendering_context2_d_stroke_style_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
@@ -1757,11 +1757,11 @@ fn offscreen_canvas_rendering_context2_d_set_stroke_style_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_stroke_style(
   self : Self,
-  value : JsValue,
+  value : &TStrokeStyle,
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_stroke_style_ffi(
     self.to_js(),
-    value,
+    value.to_js(),
   )
 }
 
@@ -1771,8 +1771,8 @@ fn offscreen_canvas_rendering_context2_d_fill_style_ffi(
 ) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "fillStyle"
 
 ///|
-impl TOffscreenCanvasRenderingContext2D with fill_style(self : Self) -> JsValue {
-  offscreen_canvas_rendering_context2_d_fill_style_ffi(self.to_js())
+impl TOffscreenCanvasRenderingContext2D with fill_style(self : Self) -> FillStyle {
+  offscreen_canvas_rendering_context2_d_fill_style_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
@@ -1784,9 +1784,12 @@ fn offscreen_canvas_rendering_context2_d_set_fill_style_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_fill_style(
   self : Self,
-  value : JsValue,
+  value : &TFillStyle,
 ) -> Unit {
-  offscreen_canvas_rendering_context2_d_set_fill_style_ffi(self.to_js(), value)
+  offscreen_canvas_rendering_context2_d_set_fill_style_ffi(
+    self.to_js(),
+    value.to_js(),
+  )
 }
 
 ///|
@@ -1963,7 +1966,7 @@ impl TOffscreenCanvasRenderingContext2D with set_line_cap(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_line_cap_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -1992,7 +1995,7 @@ impl TOffscreenCanvasRenderingContext2D with set_line_join(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_line_join_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2116,7 +2119,7 @@ impl TOffscreenCanvasRenderingContext2D with set_text_align(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_text_align_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2145,7 +2148,7 @@ impl TOffscreenCanvasRenderingContext2D with set_text_baseline(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_text_baseline_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2174,7 +2177,7 @@ impl TOffscreenCanvasRenderingContext2D with set_direction(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_direction_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2230,7 +2233,7 @@ impl TOffscreenCanvasRenderingContext2D with set_font_kerning(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_font_kerning_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2259,7 +2262,7 @@ impl TOffscreenCanvasRenderingContext2D with set_font_stretch(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_font_stretch_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2288,7 +2291,7 @@ impl TOffscreenCanvasRenderingContext2D with set_font_variant_caps(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_font_variant_caps_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2317,7 +2320,7 @@ impl TOffscreenCanvasRenderingContext2D with set_text_rendering(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_text_rendering_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 

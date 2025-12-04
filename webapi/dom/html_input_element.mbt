@@ -1113,10 +1113,7 @@ impl THTMLInputElement with set_popover_target_element(
   self : Self,
   value : Element,
 ) -> Unit {
-  html_input_element_set_popover_target_element_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_input_element_set_popover_target_element_ffi(self.to_js(), value.to_js())
 }
 
 ///|

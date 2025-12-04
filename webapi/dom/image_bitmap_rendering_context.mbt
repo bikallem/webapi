@@ -16,7 +16,7 @@ pub type ImageBitmapRenderingContext
 
 ///|
 pub trait TImageBitmapRenderingContext: TJsValue {
-  canvas(self : Self) -> JsValue = _
+  canvas(self : Self) -> Canvas = _
   transfer_from_image_bitmap(self : Self, bitmap : JsValue) -> Unit = _
 }
 
@@ -57,6 +57,6 @@ impl TImageBitmapRenderingContext with transfer_from_image_bitmap(
 fn image_bitmap_rendering_context_canvas_ffi(obj : JsValue) -> JsValue = "webapi_ImageBitmapRenderingContext" "canvas"
 
 ///|
-impl TImageBitmapRenderingContext with canvas(self : Self) -> JsValue {
-  image_bitmap_rendering_context_canvas_ffi(self.to_js())
+impl TImageBitmapRenderingContext with canvas(self : Self) -> Canvas {
+  image_bitmap_rendering_context_canvas_ffi(self.to_js()).unsafe_cast()
 }

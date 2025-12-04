@@ -60,6 +60,9 @@ const KNOWN_INTERFACES = new Set([
   "NodeList", "HTMLCollection", "NamedNodeMap", "DOMTokenList",
   // Events
   "UIEvent", "MouseEvent", "KeyboardEvent", "FocusEvent", "InputEvent", "WheelEvent",
+  // Canvas related
+  "CanvasRenderingContext2D", "ImageBitmapRenderingContext", "OffscreenCanvasRenderingContext2D",
+  "CanvasGradient", "CanvasPattern", "OffscreenCanvas",
   // Other
   "Window", "Navigator", "Location", "History", "Storage",
   "AbortController", "AbortSignal", "Range",
@@ -82,6 +85,12 @@ const KNOWN_ENUMS = new Set<string>();
 const KNOWN_TYPEDEFS = new Set([
   "RenderingContext",
 ]);
+
+/**
+ * Known union types generated from property types
+ * Maps the union type name to its member types
+ */
+const KNOWN_UNION_TYPES = new Map<string, string[]>();
 
 /**
  * Register dictionary names so they can be properly typed
@@ -113,6 +122,27 @@ export function isKnownDictionary(name: string): boolean {
  */
 export function isKnownEnum(name: string): boolean {
   return KNOWN_ENUMS.has(name);
+}
+
+/**
+ * Register a union type name so it can be properly typed
+ */
+export function registerUnionType(name: string, memberTypes: string[]): void {
+  KNOWN_UNION_TYPES.set(name, memberTypes);
+}
+
+/**
+ * Check if a type name is a known union type
+ */
+export function isKnownUnionType(name: string): boolean {
+  return KNOWN_UNION_TYPES.has(name);
+}
+
+/**
+ * Get union type member names
+ */
+export function getUnionTypeMembers(name: string): string[] | undefined {
+  return KNOWN_UNION_TYPES.get(name);
 }
 
 /**
@@ -312,7 +342,15 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
     }
 
     case "union": {
-      // For unions, use JsValue as fallback for simplicity
+      // If contextName is provided and is a known union type, use it
+      if (contextName && isKnownUnionType(contextName)) {
+        return {
+          moonbitType: contextName,
+          needsConversion: true,
+          isOptional: false,
+        };
+      }
+      // For unknown unions, use JsValue as fallback
       return {
         moonbitType: "JsValue",
         needsConversion: false,

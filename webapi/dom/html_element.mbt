@@ -170,8 +170,8 @@ pub trait THTMLElement: TJsValue {
   set_translate(self : Self, value : Bool) -> Unit = _
   dir(self : Self) -> String = _
   set_dir(self : Self, value : String) -> Unit = _
-  hidden(self : Self) -> JsValue = _
-  set_hidden(self : Self, value : JsValue) -> Unit = _
+  hidden(self : Self) -> Hidden = _
+  set_hidden(self : Self, value : &THidden) -> Unit = _
   inert(self : Self) -> Bool = _
   set_inert(self : Self, value : Bool) -> Unit = _
   access_key(self : Self) -> String = _
@@ -583,16 +583,16 @@ impl THTMLElement with set_dir(self : Self, value : String) -> Unit {
 fn html_element_hidden_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "hidden"
 
 ///|
-impl THTMLElement with hidden(self : Self) -> JsValue {
-  html_element_hidden_ffi(self.to_js())
+impl THTMLElement with hidden(self : Self) -> Hidden {
+  html_element_hidden_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
 fn html_element_set_hidden_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_hidden"
 
 ///|
-impl THTMLElement with set_hidden(self : Self, value : JsValue) -> Unit {
-  html_element_set_hidden_ffi(self.to_js(), value)
+impl THTMLElement with set_hidden(self : Self, value : &THidden) -> Unit {
+  html_element_set_hidden_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -819,7 +819,7 @@ fn html_element_set_onabort_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onabort(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onabort_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onabort_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -835,7 +835,7 @@ fn html_element_set_onauxclick_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl THTMLElement with set_onauxclick(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onauxclick_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onauxclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -851,7 +851,7 @@ fn html_element_set_onbeforeinput_ffi(obj : JsValue, value : JsValue) -> Unit = 
 
 ///|
 impl THTMLElement with set_onbeforeinput(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onbeforeinput_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onbeforeinput_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -867,7 +867,7 @@ fn html_element_set_onbeforematch_ffi(obj : JsValue, value : JsValue) -> Unit = 
 
 ///|
 impl THTMLElement with set_onbeforematch(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onbeforematch_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onbeforematch_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -883,7 +883,7 @@ fn html_element_set_onbeforetoggle_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl THTMLElement with set_onbeforetoggle(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onbeforetoggle_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onbeforetoggle_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -899,7 +899,7 @@ fn html_element_set_onblur_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl THTMLElement with set_onblur(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onblur_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onblur_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -915,7 +915,7 @@ fn html_element_set_oncancel_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_oncancel(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncancel_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncancel_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -931,7 +931,7 @@ fn html_element_set_oncanplay_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_oncanplay(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncanplay_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncanplay_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -950,7 +950,7 @@ fn html_element_set_oncanplaythrough_ffi(
 
 ///|
 impl THTMLElement with set_oncanplaythrough(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncanplaythrough_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncanplaythrough_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -966,7 +966,7 @@ fn html_element_set_onchange_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_onchange(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onchange_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -982,7 +982,7 @@ fn html_element_set_onclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onclick(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onclick_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -998,7 +998,7 @@ fn html_element_set_onclose_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onclose(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onclose_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onclose_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1014,7 +1014,7 @@ fn html_element_set_oncommand_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_oncommand(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncommand_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncommand_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1030,7 +1030,7 @@ fn html_element_set_oncontextlost_ffi(obj : JsValue, value : JsValue) -> Unit = 
 
 ///|
 impl THTMLElement with set_oncontextlost(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncontextlost_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncontextlost_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1046,7 +1046,7 @@ fn html_element_set_oncontextmenu_ffi(obj : JsValue, value : JsValue) -> Unit = 
 
 ///|
 impl THTMLElement with set_oncontextmenu(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncontextmenu_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncontextmenu_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1065,7 +1065,7 @@ fn html_element_set_oncontextrestored_ffi(
 
 ///|
 impl THTMLElement with set_oncontextrestored(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncontextrestored_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncontextrestored_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1081,7 +1081,7 @@ fn html_element_set_oncopy_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl THTMLElement with set_oncopy(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncopy_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncopy_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1097,7 +1097,7 @@ fn html_element_set_oncuechange_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_oncuechange(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncuechange_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncuechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1113,7 +1113,7 @@ fn html_element_set_oncut_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl THTMLElement with set_oncut(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oncut_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oncut_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1129,7 +1129,7 @@ fn html_element_set_ondblclick_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl THTMLElement with set_ondblclick(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondblclick_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondblclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1145,7 +1145,7 @@ fn html_element_set_ondrag_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl THTMLElement with set_ondrag(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondrag_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondrag_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1161,7 +1161,7 @@ fn html_element_set_ondragend_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_ondragend(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondragend_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondragend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1177,7 +1177,7 @@ fn html_element_set_ondragenter_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_ondragenter(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondragenter_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondragenter_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1193,7 +1193,7 @@ fn html_element_set_ondragleave_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_ondragleave(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondragleave_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondragleave_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1209,7 +1209,7 @@ fn html_element_set_ondragover_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl THTMLElement with set_ondragover(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondragover_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondragover_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1225,7 +1225,7 @@ fn html_element_set_ondragstart_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_ondragstart(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondragstart_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondragstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1241,7 +1241,7 @@ fn html_element_set_ondrop_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl THTMLElement with set_ondrop(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondrop_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondrop_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1260,7 +1260,7 @@ fn html_element_set_ondurationchange_ffi(
 
 ///|
 impl THTMLElement with set_ondurationchange(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ondurationchange_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ondurationchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1276,7 +1276,7 @@ fn html_element_set_onemptied_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onemptied(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onemptied_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onemptied_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1292,7 +1292,7 @@ fn html_element_set_onended_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onended(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onended_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onended_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1308,7 +1308,7 @@ fn html_element_set_onerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onerror(self : Self, value : OnErrorEventHandler) -> Unit {
-  html_element_set_onerror_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onerror_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1324,7 +1324,7 @@ fn html_element_set_onfocus_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onfocus(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onfocus_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onfocus_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1340,7 +1340,7 @@ fn html_element_set_onformdata_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl THTMLElement with set_onformdata(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onformdata_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onformdata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1356,7 +1356,7 @@ fn html_element_set_oninput_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_oninput(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oninput_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oninput_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1372,7 +1372,7 @@ fn html_element_set_oninvalid_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_oninvalid(self : Self, value : EventHandler) -> Unit {
-  html_element_set_oninvalid_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_oninvalid_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1388,7 +1388,7 @@ fn html_element_set_onkeydown_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onkeydown(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onkeydown_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onkeydown_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1404,7 +1404,7 @@ fn html_element_set_onkeypress_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl THTMLElement with set_onkeypress(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onkeypress_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onkeypress_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1420,7 +1420,7 @@ fn html_element_set_onkeyup_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onkeyup(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onkeyup_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onkeyup_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1436,7 +1436,7 @@ fn html_element_set_onload_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl THTMLElement with set_onload(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onload_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onload_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1452,7 +1452,7 @@ fn html_element_set_onloadeddata_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl THTMLElement with set_onloadeddata(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onloadeddata_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onloadeddata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1471,7 +1471,7 @@ fn html_element_set_onloadedmetadata_ffi(
 
 ///|
 impl THTMLElement with set_onloadedmetadata(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onloadedmetadata_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onloadedmetadata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1487,7 +1487,7 @@ fn html_element_set_onloadstart_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_onloadstart(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onloadstart_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onloadstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1503,7 +1503,7 @@ fn html_element_set_onmousedown_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_onmousedown(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onmousedown_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onmousedown_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1519,7 +1519,7 @@ fn html_element_set_onmouseenter_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl THTMLElement with set_onmouseenter(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onmouseenter_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onmouseenter_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1535,7 +1535,7 @@ fn html_element_set_onmouseleave_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl THTMLElement with set_onmouseleave(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onmouseleave_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onmouseleave_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1551,7 +1551,7 @@ fn html_element_set_onmousemove_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_onmousemove(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onmousemove_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onmousemove_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1567,7 +1567,7 @@ fn html_element_set_onmouseout_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl THTMLElement with set_onmouseout(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onmouseout_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onmouseout_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1583,7 +1583,7 @@ fn html_element_set_onmouseover_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_onmouseover(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onmouseover_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onmouseover_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1599,7 +1599,7 @@ fn html_element_set_onmouseup_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onmouseup(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onmouseup_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onmouseup_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1615,7 +1615,7 @@ fn html_element_set_onpaste_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onpaste(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onpaste_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onpaste_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1631,7 +1631,7 @@ fn html_element_set_onpause_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onpause(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onpause_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onpause_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1647,7 +1647,7 @@ fn html_element_set_onplay_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl THTMLElement with set_onplay(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onplay_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onplay_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1663,7 +1663,7 @@ fn html_element_set_onplaying_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onplaying(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onplaying_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onplaying_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1679,7 +1679,7 @@ fn html_element_set_onprogress_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl THTMLElement with set_onprogress(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onprogress_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onprogress_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1695,7 +1695,7 @@ fn html_element_set_onratechange_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl THTMLElement with set_onratechange(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onratechange_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onratechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1711,7 +1711,7 @@ fn html_element_set_onreset_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onreset(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onreset_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onreset_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1727,7 +1727,7 @@ fn html_element_set_onresize_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_onresize(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onresize_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onresize_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1743,7 +1743,7 @@ fn html_element_set_onscroll_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_onscroll(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onscroll_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onscroll_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1759,7 +1759,7 @@ fn html_element_set_onscrollend_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl THTMLElement with set_onscrollend(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onscrollend_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onscrollend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1781,10 +1781,7 @@ impl THTMLElement with set_onsecuritypolicyviolation(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_element_set_onsecuritypolicyviolation_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_element_set_onsecuritypolicyviolation_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1800,7 +1797,7 @@ fn html_element_set_onseeked_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_onseeked(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onseeked_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onseeked_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1816,7 +1813,7 @@ fn html_element_set_onseeking_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onseeking(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onseeking_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onseeking_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1832,7 +1829,7 @@ fn html_element_set_onselect_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_onselect(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onselect_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onselect_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1848,7 +1845,7 @@ fn html_element_set_onslotchange_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl THTMLElement with set_onslotchange(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onslotchange_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onslotchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1864,7 +1861,7 @@ fn html_element_set_onstalled_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onstalled(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onstalled_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onstalled_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1880,7 +1877,7 @@ fn html_element_set_onsubmit_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_onsubmit(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onsubmit_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onsubmit_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1896,7 +1893,7 @@ fn html_element_set_onsuspend_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onsuspend(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onsuspend_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onsuspend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1912,7 +1909,7 @@ fn html_element_set_ontimeupdate_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl THTMLElement with set_ontimeupdate(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ontimeupdate_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ontimeupdate_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1928,7 +1925,7 @@ fn html_element_set_ontoggle_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl THTMLElement with set_ontoggle(self : Self, value : EventHandler) -> Unit {
-  html_element_set_ontoggle_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_ontoggle_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1944,7 +1941,7 @@ fn html_element_set_onvolumechange_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl THTMLElement with set_onvolumechange(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onvolumechange_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onvolumechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1960,7 +1957,7 @@ fn html_element_set_onwaiting_ffi(obj : JsValue, value : JsValue) -> Unit = "web
 
 ///|
 impl THTMLElement with set_onwaiting(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onwaiting_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onwaiting_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1982,10 +1979,7 @@ impl THTMLElement with set_onwebkitanimationend(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_element_set_onwebkitanimationend_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_element_set_onwebkitanimationend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2007,10 +2001,7 @@ impl THTMLElement with set_onwebkitanimationiteration(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_element_set_onwebkitanimationiteration_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_element_set_onwebkitanimationiteration_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2032,10 +2023,7 @@ impl THTMLElement with set_onwebkitanimationstart(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_element_set_onwebkitanimationstart_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_element_set_onwebkitanimationstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2057,10 +2045,7 @@ impl THTMLElement with set_onwebkittransitionend(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_element_set_onwebkittransitionend_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_element_set_onwebkittransitionend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2076,7 +2061,7 @@ fn html_element_set_onwheel_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl THTMLElement with set_onwheel(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onwheel_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_onwheel_ffi(self.to_js(), value.to_js())
 }
 
 ///|

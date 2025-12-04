@@ -227,7 +227,7 @@ fn html_body_element_set_onafterprint_ffi(
 
 ///|
 impl THTMLBodyElement with set_onafterprint(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onafterprint_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onafterprint_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -246,7 +246,7 @@ fn html_body_element_set_onbeforeprint_ffi(
 
 ///|
 impl THTMLBodyElement with set_onbeforeprint(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onbeforeprint_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onbeforeprint_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -268,7 +268,7 @@ impl THTMLBodyElement with set_onbeforeunload(
   self : Self,
   value : OnBeforeUnloadEventHandler,
 ) -> Unit {
-  html_body_element_set_onbeforeunload_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onbeforeunload_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -287,7 +287,7 @@ fn html_body_element_set_onhashchange_ffi(
 
 ///|
 impl THTMLBodyElement with set_onhashchange(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onhashchange_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onhashchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -309,10 +309,7 @@ impl THTMLBodyElement with set_onlanguagechange(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_body_element_set_onlanguagechange_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_body_element_set_onlanguagechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -328,7 +325,7 @@ fn html_body_element_set_onmessage_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl THTMLBodyElement with set_onmessage(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onmessage_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onmessage_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -347,7 +344,7 @@ fn html_body_element_set_onmessageerror_ffi(
 
 ///|
 impl THTMLBodyElement with set_onmessageerror(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onmessageerror_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onmessageerror_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -363,7 +360,7 @@ fn html_body_element_set_onoffline_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl THTMLBodyElement with set_onoffline(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onoffline_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onoffline_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -379,7 +376,7 @@ fn html_body_element_set_ononline_ffi(obj : JsValue, value : JsValue) -> Unit = 
 
 ///|
 impl THTMLBodyElement with set_ononline(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_ononline_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_ononline_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -395,7 +392,7 @@ fn html_body_element_set_onpagehide_ffi(obj : JsValue, value : JsValue) -> Unit 
 
 ///|
 impl THTMLBodyElement with set_onpagehide(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onpagehide_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onpagehide_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -414,7 +411,7 @@ fn html_body_element_set_onpagereveal_ffi(
 
 ///|
 impl THTMLBodyElement with set_onpagereveal(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onpagereveal_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onpagereveal_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -430,7 +427,7 @@ fn html_body_element_set_onpageshow_ffi(obj : JsValue, value : JsValue) -> Unit 
 
 ///|
 impl THTMLBodyElement with set_onpageshow(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onpageshow_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onpageshow_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -446,7 +443,7 @@ fn html_body_element_set_onpageswap_ffi(obj : JsValue, value : JsValue) -> Unit 
 
 ///|
 impl THTMLBodyElement with set_onpageswap(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onpageswap_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onpageswap_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -462,7 +459,7 @@ fn html_body_element_set_onpopstate_ffi(obj : JsValue, value : JsValue) -> Unit 
 
 ///|
 impl THTMLBodyElement with set_onpopstate(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onpopstate_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onpopstate_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -484,10 +481,7 @@ impl THTMLBodyElement with set_onrejectionhandled(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_body_element_set_onrejectionhandled_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_body_element_set_onrejectionhandled_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -503,7 +497,7 @@ fn html_body_element_set_onstorage_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl THTMLBodyElement with set_onstorage(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onstorage_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onstorage_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -525,10 +519,7 @@ impl THTMLBodyElement with set_onunhandledrejection(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  html_body_element_set_onunhandledrejection_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_body_element_set_onunhandledrejection_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -544,5 +535,5 @@ fn html_body_element_set_onunload_ffi(obj : JsValue, value : JsValue) -> Unit = 
 
 ///|
 impl THTMLBodyElement with set_onunload(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onunload_ffi(self.to_js(), TJsValue::to_js(value))
+  html_body_element_set_onunload_ffi(self.to_js(), value.to_js())
 }

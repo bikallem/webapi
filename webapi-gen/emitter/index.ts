@@ -11,7 +11,15 @@ export { emitConstructors } from "./constructor.js";
 export { emitDictionary, getDictionaryFilename } from "./dictionary.js";
 export { emitCallback, getCallbackFilename } from "./callback.js";
 export { emitTypedef, getTypedefFilename } from "./typedef.js";
-export { emitUnionType, collectAndEmitUnions } from "./union.js";
+export {
+  emitUnionType,
+  collectAndEmitUnions,
+  collectPropertyUnionTypes,
+  registerCollectedUnionTypes,
+  emitPropertyUnionType,
+  getPropertyUnionTypeFilename,
+} from "./union.js";
+export type { CollectedUnionType } from "./union.js";
 export { emitEnum, getEnumFilename } from "./enum.js";
 export { emitGlobals } from "./globals.js";
 export { emitJsRuntime } from "./js-runtime.js";

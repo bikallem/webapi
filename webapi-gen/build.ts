@@ -30,6 +30,10 @@ import {
   emitGlobals,
   emitJsRuntime,
   resetEmittedUnionTraits,
+  collectPropertyUnionTypes,
+  registerCollectedUnionTypes,
+  emitPropertyUnionType,
+  getPropertyUnionTypeFilename,
 } from "./emitter/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -144,10 +148,13 @@ const CORE_INTERFACES = new Set([
   "DOMMatrix",
   "DOMMatrixReadOnly",
 
-  // Canvas rendering contexts
+  // Canvas rendering contexts and related types
   "CanvasRenderingContext2D",
   "ImageBitmapRenderingContext",
   "OffscreenCanvasRenderingContext2D",
+  "CanvasGradient",
+  "CanvasPattern",
+  "OffscreenCanvas",
 ]);
 
 /**
@@ -287,12 +294,25 @@ async function copyTemplates(): Promise<void> {
 /**
  * Generate all MoonBit files
  */
-async function generateMoonBitFiles(idl: ParsedIdl): Promise<void> {
+async function generateMoonBitFiles(
+  idl: ParsedIdl,
+  propertyUnionTypes: Map<string, import("./emitter/index.js").CollectedUnionType>
+): Promise<void> {
   console.log("Generating MoonBit files...");
 
   // Reset the union traits tracker before generating interfaces
   // This prevents duplicates from shared mixins (e.g., CanvasPath)
   resetEmittedUnionTraits();
+
+  // Generate property union type files FIRST so they're available for interfaces
+  for (const [name, unionType] of propertyUnionTypes) {
+    const filename = getPropertyUnionTypeFilename(name);
+    const content = emitPropertyUnionType(unionType, idl);
+    const filepath = path.join(OUTPUT_DIR, filename);
+
+    console.log(`  Writing ${filename}...`);
+    await fs.writeFile(filepath, content, "utf-8");
+  }
 
   // Generate interface files
   for (const [name, iface] of idl.interfaces) {
@@ -394,7 +414,14 @@ async function build(): Promise<void> {
     console.log(`  - ${mergedIdl.dictionaries.size} dictionaries`);
     console.log(`  - ${mergedIdl.callbacks.size} callbacks`);
     console.log(`  - ${mergedIdl.typedefs.size} typedefs`);
-    console.log(`  - ${mergedIdl.enums.size} enums\n`);
+    console.log(`  - ${mergedIdl.enums.size} enums`);
+
+    // Collect and register property union types BEFORE registering other types
+    // This allows mapIdlType to recognize them during interface generation
+    console.log("Collecting property union types...");
+    const propertyUnionTypes = collectPropertyUnionTypes(mergedIdl);
+    registerCollectedUnionTypes(propertyUnionTypes);
+    console.log(`  - ${propertyUnionTypes.size} property union types\n`);
 
     // Register dictionary and enum names for proper type mapping
     registerDictionaries(mergedIdl.dictionaries.keys());
@@ -404,7 +431,7 @@ async function build(): Promise<void> {
     await copyTemplates();
 
     // Generate MoonBit files
-    await generateMoonBitFiles(mergedIdl);
+    await generateMoonBitFiles(mergedIdl, propertyUnionTypes);
 
     // Generate JS runtime
     await generateJsRuntime(mergedIdl);

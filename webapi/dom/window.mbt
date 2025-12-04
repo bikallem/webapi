@@ -276,7 +276,7 @@ pub trait TWindow: TJsValue {
   outer_width(self : Self) -> Int = _
   outer_height(self : Self) -> Int = _
   device_pixel_ratio(self : Self) -> Double = _
-  event(self : Self) -> JsValue = _
+  event(self : Self) -> Event = _
   window(self : Self) -> Window = _
   self_(self : Self) -> Window = _
   document(self : Self) -> Document = _
@@ -1209,8 +1209,8 @@ impl TWindow with device_pixel_ratio(self : Self) -> Double {
 fn window_event_ffi(obj : JsValue) -> JsValue = "webapi_Window" "event"
 
 ///|
-impl TWindow with event(self : Self) -> JsValue {
-  window_event_ffi(self.to_js())
+impl TWindow with event(self : Self) -> Event {
+  window_event_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
@@ -1458,7 +1458,7 @@ fn window_set_onabort_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onabort(self : Self, value : EventHandler) -> Unit {
-  window_set_onabort_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onabort_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1474,7 +1474,7 @@ fn window_set_onauxclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onauxclick(self : Self, value : EventHandler) -> Unit {
-  window_set_onauxclick_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onauxclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1490,7 +1490,7 @@ fn window_set_onbeforeinput_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TWindow with set_onbeforeinput(self : Self, value : EventHandler) -> Unit {
-  window_set_onbeforeinput_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onbeforeinput_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1506,7 +1506,7 @@ fn window_set_onbeforematch_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TWindow with set_onbeforematch(self : Self, value : EventHandler) -> Unit {
-  window_set_onbeforematch_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onbeforematch_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1522,7 +1522,7 @@ fn window_set_onbeforetoggle_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TWindow with set_onbeforetoggle(self : Self, value : EventHandler) -> Unit {
-  window_set_onbeforetoggle_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onbeforetoggle_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1538,7 +1538,7 @@ fn window_set_onblur_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Windo
 
 ///|
 impl TWindow with set_onblur(self : Self, value : EventHandler) -> Unit {
-  window_set_onblur_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onblur_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1554,7 +1554,7 @@ fn window_set_oncancel_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_oncancel(self : Self, value : EventHandler) -> Unit {
-  window_set_oncancel_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncancel_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1570,7 +1570,7 @@ fn window_set_oncanplay_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_oncanplay(self : Self, value : EventHandler) -> Unit {
-  window_set_oncanplay_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncanplay_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1586,7 +1586,7 @@ fn window_set_oncanplaythrough_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl TWindow with set_oncanplaythrough(self : Self, value : EventHandler) -> Unit {
-  window_set_oncanplaythrough_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncanplaythrough_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1602,7 +1602,7 @@ fn window_set_onchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_onchange(self : Self, value : EventHandler) -> Unit {
-  window_set_onchange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1618,7 +1618,7 @@ fn window_set_onclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onclick(self : Self, value : EventHandler) -> Unit {
-  window_set_onclick_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1634,7 +1634,7 @@ fn window_set_onclose_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onclose(self : Self, value : EventHandler) -> Unit {
-  window_set_onclose_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onclose_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1650,7 +1650,7 @@ fn window_set_oncommand_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_oncommand(self : Self, value : EventHandler) -> Unit {
-  window_set_oncommand_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncommand_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1666,7 +1666,7 @@ fn window_set_oncontextlost_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TWindow with set_oncontextlost(self : Self, value : EventHandler) -> Unit {
-  window_set_oncontextlost_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncontextlost_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1682,7 +1682,7 @@ fn window_set_oncontextmenu_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TWindow with set_oncontextmenu(self : Self, value : EventHandler) -> Unit {
-  window_set_oncontextmenu_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncontextmenu_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1698,7 +1698,7 @@ fn window_set_oncontextrestored_ffi(obj : JsValue, value : JsValue) -> Unit = "w
 
 ///|
 impl TWindow with set_oncontextrestored(self : Self, value : EventHandler) -> Unit {
-  window_set_oncontextrestored_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncontextrestored_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1714,7 +1714,7 @@ fn window_set_oncopy_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Windo
 
 ///|
 impl TWindow with set_oncopy(self : Self, value : EventHandler) -> Unit {
-  window_set_oncopy_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncopy_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1730,7 +1730,7 @@ fn window_set_oncuechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_oncuechange(self : Self, value : EventHandler) -> Unit {
-  window_set_oncuechange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncuechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1746,7 +1746,7 @@ fn window_set_oncut_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Window
 
 ///|
 impl TWindow with set_oncut(self : Self, value : EventHandler) -> Unit {
-  window_set_oncut_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oncut_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1762,7 +1762,7 @@ fn window_set_ondblclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_ondblclick(self : Self, value : EventHandler) -> Unit {
-  window_set_ondblclick_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondblclick_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1778,7 +1778,7 @@ fn window_set_ondrag_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Windo
 
 ///|
 impl TWindow with set_ondrag(self : Self, value : EventHandler) -> Unit {
-  window_set_ondrag_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondrag_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1794,7 +1794,7 @@ fn window_set_ondragend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_ondragend(self : Self, value : EventHandler) -> Unit {
-  window_set_ondragend_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondragend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1810,7 +1810,7 @@ fn window_set_ondragenter_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_ondragenter(self : Self, value : EventHandler) -> Unit {
-  window_set_ondragenter_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondragenter_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1826,7 +1826,7 @@ fn window_set_ondragleave_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_ondragleave(self : Self, value : EventHandler) -> Unit {
-  window_set_ondragleave_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondragleave_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1842,7 +1842,7 @@ fn window_set_ondragover_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_ondragover(self : Self, value : EventHandler) -> Unit {
-  window_set_ondragover_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondragover_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1858,7 +1858,7 @@ fn window_set_ondragstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_ondragstart(self : Self, value : EventHandler) -> Unit {
-  window_set_ondragstart_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondragstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1874,7 +1874,7 @@ fn window_set_ondrop_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Windo
 
 ///|
 impl TWindow with set_ondrop(self : Self, value : EventHandler) -> Unit {
-  window_set_ondrop_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondrop_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1890,7 +1890,7 @@ fn window_set_ondurationchange_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl TWindow with set_ondurationchange(self : Self, value : EventHandler) -> Unit {
-  window_set_ondurationchange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ondurationchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1906,7 +1906,7 @@ fn window_set_onemptied_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onemptied(self : Self, value : EventHandler) -> Unit {
-  window_set_onemptied_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onemptied_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1922,7 +1922,7 @@ fn window_set_onended_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onended(self : Self, value : EventHandler) -> Unit {
-  window_set_onended_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onended_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1938,7 +1938,7 @@ fn window_set_onerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onerror(self : Self, value : OnErrorEventHandler) -> Unit {
-  window_set_onerror_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onerror_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1954,7 +1954,7 @@ fn window_set_onfocus_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onfocus(self : Self, value : EventHandler) -> Unit {
-  window_set_onfocus_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onfocus_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1970,7 +1970,7 @@ fn window_set_onformdata_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onformdata(self : Self, value : EventHandler) -> Unit {
-  window_set_onformdata_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onformdata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1986,7 +1986,7 @@ fn window_set_oninput_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_oninput(self : Self, value : EventHandler) -> Unit {
-  window_set_oninput_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oninput_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2002,7 +2002,7 @@ fn window_set_oninvalid_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_oninvalid(self : Self, value : EventHandler) -> Unit {
-  window_set_oninvalid_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_oninvalid_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2018,7 +2018,7 @@ fn window_set_onkeydown_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onkeydown(self : Self, value : EventHandler) -> Unit {
-  window_set_onkeydown_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onkeydown_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2034,7 +2034,7 @@ fn window_set_onkeypress_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onkeypress(self : Self, value : EventHandler) -> Unit {
-  window_set_onkeypress_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onkeypress_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2050,7 +2050,7 @@ fn window_set_onkeyup_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onkeyup(self : Self, value : EventHandler) -> Unit {
-  window_set_onkeyup_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onkeyup_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2066,7 +2066,7 @@ fn window_set_onload_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Windo
 
 ///|
 impl TWindow with set_onload(self : Self, value : EventHandler) -> Unit {
-  window_set_onload_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onload_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2082,7 +2082,7 @@ fn window_set_onloadeddata_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onloadeddata(self : Self, value : EventHandler) -> Unit {
-  window_set_onloadeddata_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onloadeddata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2098,7 +2098,7 @@ fn window_set_onloadedmetadata_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl TWindow with set_onloadedmetadata(self : Self, value : EventHandler) -> Unit {
-  window_set_onloadedmetadata_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onloadedmetadata_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2114,7 +2114,7 @@ fn window_set_onloadstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_onloadstart(self : Self, value : EventHandler) -> Unit {
-  window_set_onloadstart_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onloadstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2130,7 +2130,7 @@ fn window_set_onmousedown_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_onmousedown(self : Self, value : EventHandler) -> Unit {
-  window_set_onmousedown_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmousedown_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2146,7 +2146,7 @@ fn window_set_onmouseenter_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onmouseenter(self : Self, value : EventHandler) -> Unit {
-  window_set_onmouseenter_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmouseenter_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2162,7 +2162,7 @@ fn window_set_onmouseleave_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onmouseleave(self : Self, value : EventHandler) -> Unit {
-  window_set_onmouseleave_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmouseleave_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2178,7 +2178,7 @@ fn window_set_onmousemove_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_onmousemove(self : Self, value : EventHandler) -> Unit {
-  window_set_onmousemove_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmousemove_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2194,7 +2194,7 @@ fn window_set_onmouseout_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onmouseout(self : Self, value : EventHandler) -> Unit {
-  window_set_onmouseout_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmouseout_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2210,7 +2210,7 @@ fn window_set_onmouseover_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_onmouseover(self : Self, value : EventHandler) -> Unit {
-  window_set_onmouseover_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmouseover_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2226,7 +2226,7 @@ fn window_set_onmouseup_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onmouseup(self : Self, value : EventHandler) -> Unit {
-  window_set_onmouseup_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmouseup_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2242,7 +2242,7 @@ fn window_set_onpaste_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onpaste(self : Self, value : EventHandler) -> Unit {
-  window_set_onpaste_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onpaste_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2258,7 +2258,7 @@ fn window_set_onpause_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onpause(self : Self, value : EventHandler) -> Unit {
-  window_set_onpause_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onpause_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2274,7 +2274,7 @@ fn window_set_onplay_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Windo
 
 ///|
 impl TWindow with set_onplay(self : Self, value : EventHandler) -> Unit {
-  window_set_onplay_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onplay_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2290,7 +2290,7 @@ fn window_set_onplaying_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onplaying(self : Self, value : EventHandler) -> Unit {
-  window_set_onplaying_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onplaying_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2306,7 +2306,7 @@ fn window_set_onprogress_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onprogress(self : Self, value : EventHandler) -> Unit {
-  window_set_onprogress_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onprogress_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2322,7 +2322,7 @@ fn window_set_onratechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onratechange(self : Self, value : EventHandler) -> Unit {
-  window_set_onratechange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onratechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2338,7 +2338,7 @@ fn window_set_onreset_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onreset(self : Self, value : EventHandler) -> Unit {
-  window_set_onreset_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onreset_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2354,7 +2354,7 @@ fn window_set_onresize_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_onresize(self : Self, value : EventHandler) -> Unit {
-  window_set_onresize_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onresize_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2370,7 +2370,7 @@ fn window_set_onscroll_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_onscroll(self : Self, value : EventHandler) -> Unit {
-  window_set_onscroll_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onscroll_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2386,7 +2386,7 @@ fn window_set_onscrollend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TWindow with set_onscrollend(self : Self, value : EventHandler) -> Unit {
-  window_set_onscrollend_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onscrollend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2408,7 +2408,7 @@ impl TWindow with set_onsecuritypolicyviolation(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  window_set_onsecuritypolicyviolation_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onsecuritypolicyviolation_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2424,7 +2424,7 @@ fn window_set_onseeked_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_onseeked(self : Self, value : EventHandler) -> Unit {
-  window_set_onseeked_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onseeked_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2440,7 +2440,7 @@ fn window_set_onseeking_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onseeking(self : Self, value : EventHandler) -> Unit {
-  window_set_onseeking_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onseeking_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2456,7 +2456,7 @@ fn window_set_onselect_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_onselect(self : Self, value : EventHandler) -> Unit {
-  window_set_onselect_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onselect_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2472,7 +2472,7 @@ fn window_set_onslotchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onslotchange(self : Self, value : EventHandler) -> Unit {
-  window_set_onslotchange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onslotchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2488,7 +2488,7 @@ fn window_set_onstalled_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onstalled(self : Self, value : EventHandler) -> Unit {
-  window_set_onstalled_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onstalled_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2504,7 +2504,7 @@ fn window_set_onsubmit_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_onsubmit(self : Self, value : EventHandler) -> Unit {
-  window_set_onsubmit_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onsubmit_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2520,7 +2520,7 @@ fn window_set_onsuspend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onsuspend(self : Self, value : EventHandler) -> Unit {
-  window_set_onsuspend_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onsuspend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2536,7 +2536,7 @@ fn window_set_ontimeupdate_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_ontimeupdate(self : Self, value : EventHandler) -> Unit {
-  window_set_ontimeupdate_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ontimeupdate_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2552,7 +2552,7 @@ fn window_set_ontoggle_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_ontoggle(self : Self, value : EventHandler) -> Unit {
-  window_set_ontoggle_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ontoggle_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2568,7 +2568,7 @@ fn window_set_onvolumechange_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TWindow with set_onvolumechange(self : Self, value : EventHandler) -> Unit {
-  window_set_onvolumechange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onvolumechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2584,7 +2584,7 @@ fn window_set_onwaiting_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onwaiting(self : Self, value : EventHandler) -> Unit {
-  window_set_onwaiting_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onwaiting_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2600,7 +2600,7 @@ fn window_set_onwebkitanimationend_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl TWindow with set_onwebkitanimationend(self : Self, value : EventHandler) -> Unit {
-  window_set_onwebkitanimationend_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onwebkitanimationend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2622,10 +2622,7 @@ impl TWindow with set_onwebkitanimationiteration(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  window_set_onwebkitanimationiteration_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  window_set_onwebkitanimationiteration_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2644,7 +2641,7 @@ fn window_set_onwebkitanimationstart_ffi(
 
 ///|
 impl TWindow with set_onwebkitanimationstart(self : Self, value : EventHandler) -> Unit {
-  window_set_onwebkitanimationstart_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onwebkitanimationstart_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2660,7 +2657,7 @@ fn window_set_onwebkittransitionend_ffi(obj : JsValue, value : JsValue) -> Unit 
 
 ///|
 impl TWindow with set_onwebkittransitionend(self : Self, value : EventHandler) -> Unit {
-  window_set_onwebkittransitionend_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onwebkittransitionend_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2676,7 +2673,7 @@ fn window_set_onwheel_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wind
 
 ///|
 impl TWindow with set_onwheel(self : Self, value : EventHandler) -> Unit {
-  window_set_onwheel_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onwheel_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2692,7 +2689,7 @@ fn window_set_onafterprint_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onafterprint(self : Self, value : EventHandler) -> Unit {
-  window_set_onafterprint_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onafterprint_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2708,7 +2705,7 @@ fn window_set_onbeforeprint_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TWindow with set_onbeforeprint(self : Self, value : EventHandler) -> Unit {
-  window_set_onbeforeprint_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onbeforeprint_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2727,7 +2724,7 @@ impl TWindow with set_onbeforeunload(
   self : Self,
   value : OnBeforeUnloadEventHandler,
 ) -> Unit {
-  window_set_onbeforeunload_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onbeforeunload_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2743,7 +2740,7 @@ fn window_set_onhashchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onhashchange(self : Self, value : EventHandler) -> Unit {
-  window_set_onhashchange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onhashchange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2759,7 +2756,7 @@ fn window_set_onlanguagechange_ffi(obj : JsValue, value : JsValue) -> Unit = "we
 
 ///|
 impl TWindow with set_onlanguagechange(self : Self, value : EventHandler) -> Unit {
-  window_set_onlanguagechange_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onlanguagechange_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2775,7 +2772,7 @@ fn window_set_onmessage_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onmessage(self : Self, value : EventHandler) -> Unit {
-  window_set_onmessage_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmessage_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2791,7 +2788,7 @@ fn window_set_onmessageerror_ffi(obj : JsValue, value : JsValue) -> Unit = "weba
 
 ///|
 impl TWindow with set_onmessageerror(self : Self, value : EventHandler) -> Unit {
-  window_set_onmessageerror_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onmessageerror_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2807,7 +2804,7 @@ fn window_set_onoffline_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onoffline(self : Self, value : EventHandler) -> Unit {
-  window_set_onoffline_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onoffline_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2823,7 +2820,7 @@ fn window_set_ononline_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_ononline(self : Self, value : EventHandler) -> Unit {
-  window_set_ononline_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_ononline_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2839,7 +2836,7 @@ fn window_set_onpagehide_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onpagehide(self : Self, value : EventHandler) -> Unit {
-  window_set_onpagehide_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onpagehide_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2855,7 +2852,7 @@ fn window_set_onpagereveal_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with set_onpagereveal(self : Self, value : EventHandler) -> Unit {
-  window_set_onpagereveal_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onpagereveal_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2871,7 +2868,7 @@ fn window_set_onpageshow_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onpageshow(self : Self, value : EventHandler) -> Unit {
-  window_set_onpageshow_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onpageshow_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2887,7 +2884,7 @@ fn window_set_onpageswap_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onpageswap(self : Self, value : EventHandler) -> Unit {
-  window_set_onpageswap_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onpageswap_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2903,7 +2900,7 @@ fn window_set_onpopstate_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_W
 
 ///|
 impl TWindow with set_onpopstate(self : Self, value : EventHandler) -> Unit {
-  window_set_onpopstate_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onpopstate_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2919,7 +2916,7 @@ fn window_set_onrejectionhandled_ffi(obj : JsValue, value : JsValue) -> Unit = "
 
 ///|
 impl TWindow with set_onrejectionhandled(self : Self, value : EventHandler) -> Unit {
-  window_set_onrejectionhandled_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onrejectionhandled_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2935,7 +2932,7 @@ fn window_set_onstorage_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Wi
 
 ///|
 impl TWindow with set_onstorage(self : Self, value : EventHandler) -> Unit {
-  window_set_onstorage_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onstorage_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2951,7 +2948,7 @@ fn window_set_onunhandledrejection_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl TWindow with set_onunhandledrejection(self : Self, value : EventHandler) -> Unit {
-  window_set_onunhandledrejection_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onunhandledrejection_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2967,7 +2964,7 @@ fn window_set_onunload_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Win
 
 ///|
 impl TWindow with set_onunload(self : Self, value : EventHandler) -> Unit {
-  window_set_onunload_ffi(self.to_js(), TJsValue::to_js(value))
+  window_set_onunload_ffi(self.to_js(), value.to_js())
 }
 
 ///|

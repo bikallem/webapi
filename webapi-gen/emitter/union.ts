@@ -1,21 +1,29 @@
 /**
  * Union Type Emitter
  * 
- * Generates MoonBit argument traits for Web IDL union types.
+ * Generates MoonBit code for Web IDL union types.
  * 
- * For a union like (DOMString or long), generates:
+ * For argument unions like (DOMString or long), generates traits:
  * 
  * trait SomeContextArg {
  *   to_js(Self) -> JsValue
  * }
  * 
- * impl SomeContextArg for String with to_js(self) -> JsValue = "%identity"
- * impl SomeContextArg for Int with to_js(self) -> JsValue = "%identity"
+ * For property unions like strokeStyle: (DOMString or CanvasGradient or CanvasPattern),
+ * generates external types with traits (like RenderingContext pattern):
+ * 
+ * #external
+ * pub type StrokeStyle
+ * 
+ * pub(open) trait TStrokeStyle {
+ *   to_js(self : Self) -> JsValue
+ * }
  */
 
-import type { ParsedType } from "../types.js";
+import type { ParsedType, ParsedIdl } from "../types.js";
 import type { UnionTypeContext } from "../mapping.js";
-import { mapIdlType } from "../mapping.js";
+import { mapIdlType, registerUnionType, isKnownUnionType } from "../mapping.js";
+import { toSnakeCase } from "../utils.js";
 
 /**
  * Get the MoonBit type name for a union member
@@ -26,7 +34,7 @@ function getMemberTypeName(memberType: ParsedType): string {
 }
 
 /**
- * Emit a union type trait and its implementations
+ * Emit a union type trait and its implementations (for arguments)
  */
 export function emitUnionType(union: UnionTypeContext): string {
   const parts: string[] = [];
@@ -75,3 +83,212 @@ export function collectAndEmitUnions(
   
   return parts.join("\n\n");
 }
+
+// ============================================================================
+// Property Union Types (external type + trait pattern like RenderingContext)
+// ============================================================================
+
+/**
+ * Represents a collected union type from a property
+ */
+export interface CollectedUnionType {
+  name: string; // PascalCase name derived from property name (e.g., FillStyle)
+  memberTypes: ParsedType[]; // The union member types
+  memberNames: string[]; // Resolved member names (e.g., ["String", "CanvasGradient", "CanvasPattern"])
+}
+
+/**
+ * Map of primitive IDL type names to MoonBit types
+ */
+const PRIMITIVE_MAP: Record<string, string> = {
+  DOMString: "String",
+  USVString: "String",
+  ByteString: "String",
+  boolean: "Bool",
+  double: "Double",
+  float: "Double",
+  "unrestricted double": "Double",
+  "unrestricted float": "Double",
+  long: "Int",
+  "unsigned long": "Int",
+  short: "Int",
+  "unsigned short": "Int",
+};
+
+/**
+ * Get the MoonBit type name from a ParsedType for union member
+ */
+function getPropertyUnionMemberName(memberType: ParsedType): string | undefined {
+  if (memberType.type === "reference" && memberType.name) {
+    return memberType.name;
+  }
+  if (memberType.type === "primitive" && memberType.name) {
+    return PRIMITIVE_MAP[memberType.name] || memberType.name;
+  }
+  return undefined;
+}
+
+/**
+ * Extract union member names from a union type
+ */
+function getUnionMemberNames(unionType: ParsedType): string[] {
+  if (unionType.type !== "union" || !unionType.memberTypes) {
+    return [];
+  }
+
+  const names: string[] = [];
+  for (const member of unionType.memberTypes) {
+    const name = getPropertyUnionMemberName(member);
+    if (name) {
+      names.push(name);
+    }
+  }
+  return names;
+}
+
+/**
+ * Convert property name to union type name
+ * e.g., strokeStyle -> StrokeStyle, fillStyle -> FillStyle
+ */
+function propertyNameToTypeName(propName: string): string {
+  // Handle camelCase by capitalizing first letter
+  return propName.charAt(0).toUpperCase() + propName.slice(1);
+}
+
+/**
+ * Collect union types from all properties in parsed IDL
+ * Returns a map of union type name -> CollectedUnionType
+ */
+export function collectPropertyUnionTypes(idl: ParsedIdl): Map<string, CollectedUnionType> {
+  const unionTypes = new Map<string, CollectedUnionType>();
+
+  for (const [_, iface] of idl.interfaces) {
+    for (const prop of iface.properties) {
+      if (prop.type.type === "union" && prop.type.memberTypes) {
+        const typeName = propertyNameToTypeName(prop.name);
+
+        // Skip if we already have this union type
+        if (unionTypes.has(typeName)) {
+          continue;
+        }
+
+        const memberNames = getUnionMemberNames(prop.type);
+        if (memberNames.length > 0) {
+          unionTypes.set(typeName, {
+            name: typeName,
+            memberTypes: prop.type.memberTypes,
+            memberNames,
+          });
+        }
+      }
+    }
+  }
+
+  return unionTypes;
+}
+
+/**
+ * Register all collected union types so they can be recognized in type mapping
+ */
+export function registerCollectedUnionTypes(unionTypes: Map<string, CollectedUnionType>): void {
+  for (const [name, unionType] of unionTypes) {
+    registerUnionType(name, unionType.memberNames);
+  }
+}
+
+/**
+ * Emit a property union type file using the external type + open trait pattern
+ */
+export function emitPropertyUnionType(unionType: CollectedUnionType, idl: ParsedIdl): string {
+  const lines: string[] = [];
+  const typeName = unionType.name;
+  const traitName = `T${typeName}`;
+
+  // Header
+  lines.push(`// Auto-generated MoonBit bindings for ${typeName} union type`);
+  lines.push("");
+  lines.push("// Do not edit manually");
+  lines.push("");
+
+  // External type
+  lines.push("///|");
+  lines.push("#external");
+  lines.push(`pub type ${typeName}`);
+  lines.push("");
+
+  // Open trait
+  lines.push("///|");
+  lines.push(`pub(open) trait ${traitName} {`);
+  lines.push("  to_js(self : Self) -> JsValue");
+  lines.push("}");
+  lines.push("");
+
+  // into method for downcasting
+  lines.push("///|");
+  lines.push(`pub fn[T : ${traitName}] ${typeName}::into(self : ${typeName}) -> T = "%identity"`);
+  lines.push("");
+
+  // null() and is_null() methods
+  lines.push("///|");
+  lines.push(`pub fn ${typeName}::null() -> ${typeName} = "JsValue" "null"`);
+  lines.push("");
+  lines.push("///|");
+  lines.push(`pub fn ${typeName}::is_null(self : ${typeName}) -> Bool = "JsValue" "isNull"`);
+  lines.push("");
+
+  // Trait implementations for each member type
+  // Only emit impl for types that exist in our IDL (known interfaces)
+  for (const memberName of unionType.memberNames) {
+    // Skip reference types that aren't in our known interfaces
+    const isKnownType = memberName === "String" || memberName === "Double" ||
+                        memberName === "Int" || memberName === "Bool" ||
+                        idl.interfaces.has(memberName);
+    if (!isKnownType) {
+      continue; // Skip unknown types
+    }
+
+    // For String, use String type directly
+    if (memberName === "String") {
+      lines.push("///|");
+      lines.push(`pub impl ${traitName} for String with to_js(`);
+      lines.push("  self : String,");
+      lines.push(`) -> JsValue = "%identity"`);
+      lines.push("");
+    } else if (memberName === "Double") {
+      lines.push("///|");
+      lines.push(`pub impl ${traitName} for Double with to_js(`);
+      lines.push("  self : Double,");
+      lines.push(`) -> JsValue = "%identity"`);
+      lines.push("");
+    } else if (memberName === "Int") {
+      lines.push("///|");
+      lines.push(`pub impl ${traitName} for Int with to_js(`);
+      lines.push("  self : Int,");
+      lines.push(`) -> JsValue = "%identity"`);
+      lines.push("");
+    } else if (memberName === "Bool") {
+      lines.push("///|");
+      lines.push(`pub impl ${traitName} for Bool with to_js(`);
+      lines.push("  self : Bool,");
+      lines.push(`) -> JsValue = "%identity"`);
+      lines.push("");
+    } else {
+      // Reference to an interface
+      lines.push("///|");
+      lines.push(`pub impl ${traitName} for ${memberName} with to_js(`);
+      lines.push(`  self : ${memberName},`);
+      lines.push(`) -> JsValue = "%identity"`);
+      lines.push("");
+    }
+  }
+
+  return lines.join("\n");
+}
+
+/**
+ * Get the filename for a property union type
+ */
+export function getPropertyUnionTypeFilename(name: string): string {
+  return `${toSnakeCase(name)}.mbt`;
+}
+

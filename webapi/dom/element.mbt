@@ -155,10 +155,10 @@ pub trait TElement: TJsValue {
   attributes(self : Self) -> NamedNodeMap = _
   shadow_root(self : Self) -> JsValue? = _
   custom_element_registry(self : Self) -> JsValue? = _
-  inner_html(self : Self) -> JsValue = _
-  set_inner_html(self : Self, value : JsValue) -> Unit = _
-  outer_html(self : Self) -> JsValue = _
-  set_outer_html(self : Self, value : JsValue) -> Unit = _
+  inner_html(self : Self) -> InnerHTML = _
+  set_inner_html(self : Self, value : &TInnerHTML) -> Unit = _
+  outer_html(self : Self) -> OuterHTML = _
+  set_outer_html(self : Self, value : &TOuterHTML) -> Unit = _
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element? = _
   last_element_child(self : Self) -> Element? = _
@@ -1216,32 +1216,32 @@ impl TElement with custom_element_registry(self : Self) -> JsValue? {
 fn element_inner_html_ffi(obj : JsValue) -> JsValue = "webapi_Element" "innerHTML"
 
 ///|
-impl TElement with inner_html(self : Self) -> JsValue {
-  element_inner_html_ffi(self.to_js())
+impl TElement with inner_html(self : Self) -> InnerHTML {
+  element_inner_html_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
 fn element_set_inner_html_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Element" "set_innerHTML"
 
 ///|
-impl TElement with set_inner_html(self : Self, value : JsValue) -> Unit {
-  element_set_inner_html_ffi(self.to_js(), value)
+impl TElement with set_inner_html(self : Self, value : &TInnerHTML) -> Unit {
+  element_set_inner_html_ffi(self.to_js(), value.to_js())
 }
 
 ///|
 fn element_outer_html_ffi(obj : JsValue) -> JsValue = "webapi_Element" "outerHTML"
 
 ///|
-impl TElement with outer_html(self : Self) -> JsValue {
-  element_outer_html_ffi(self.to_js())
+impl TElement with outer_html(self : Self) -> OuterHTML {
+  element_outer_html_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
 fn element_set_outer_html_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Element" "set_outerHTML"
 
 ///|
-impl TElement with set_outer_html(self : Self, value : JsValue) -> Unit {
-  element_set_outer_html_ffi(self.to_js(), value)
+impl TElement with set_outer_html(self : Self, value : &TOuterHTML) -> Unit {
+  element_set_outer_html_ffi(self.to_js(), value.to_js())
 }
 
 ///|

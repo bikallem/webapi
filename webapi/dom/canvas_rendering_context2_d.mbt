@@ -181,10 +181,10 @@ pub trait TCanvasRenderingContext2D: TJsValue {
   set_image_smoothing_enabled(self : Self, value : Bool) -> Unit = _
   image_smoothing_quality(self : Self) -> ImageSmoothingQuality = _
   set_image_smoothing_quality(self : Self, value : ImageSmoothingQuality) -> Unit = _
-  stroke_style(self : Self) -> JsValue = _
-  set_stroke_style(self : Self, value : JsValue) -> Unit = _
-  fill_style(self : Self) -> JsValue = _
-  set_fill_style(self : Self, value : JsValue) -> Unit = _
+  stroke_style(self : Self) -> StrokeStyle = _
+  set_stroke_style(self : Self, value : &TStrokeStyle) -> Unit = _
+  fill_style(self : Self) -> FillStyle = _
+  set_fill_style(self : Self, value : &TFillStyle) -> Unit = _
   shadow_offset_x(self : Self) -> Double = _
   set_shadow_offset_x(self : Self, value : Double) -> Unit = _
   shadow_offset_y(self : Self) -> Double = _
@@ -262,7 +262,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     y0 : Double,
     x1 : Double,
     y1 : Double,
-  ) -> JsValue = _
+  ) -> CanvasGradient = _
   create_radial_gradient(
     self : Self,
     x0 : Double,
@@ -271,14 +271,14 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     x1 : Double,
     y1 : Double,
     r1 : Double,
-  ) -> JsValue = _
+  ) -> CanvasGradient = _
   create_conic_gradient(
     self : Self,
     start_angle : Double,
     x : Double,
     y : Double,
-  ) -> JsValue = _
-  create_pattern(self : Self, image : JsValue, repetition : String) -> JsValue? = _
+  ) -> CanvasGradient = _
+  create_pattern(self : Self, image : JsValue, repetition : String) -> CanvasPattern? = _
   clear_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   fill_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   stroke_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
@@ -649,7 +649,7 @@ impl TCanvasRenderingContext2D with create_linear_gradient(
   y0 : Double,
   x1 : Double,
   y1 : Double,
-) -> JsValue {
+) -> CanvasGradient {
   canvas_rendering_context2_d_create_linear_gradient_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x0),
@@ -679,7 +679,7 @@ impl TCanvasRenderingContext2D with create_radial_gradient(
   x1 : Double,
   y1 : Double,
   r1 : Double,
-) -> JsValue {
+) -> CanvasGradient {
   canvas_rendering_context2_d_create_radial_gradient_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x0),
@@ -705,7 +705,7 @@ impl TCanvasRenderingContext2D with create_conic_gradient(
   start_angle : Double,
   x : Double,
   y : Double,
-) -> JsValue {
+) -> CanvasGradient {
   canvas_rendering_context2_d_create_conic_gradient_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(start_angle),
@@ -726,7 +726,7 @@ impl TCanvasRenderingContext2D with create_pattern(
   self : Self,
   image : JsValue,
   repetition : String,
-) -> JsValue? {
+) -> CanvasPattern? {
   canvas_rendering_context2_d_create_pattern_ffi(
     TJsValue::to_js(self),
     image,
@@ -1734,7 +1734,7 @@ impl TCanvasRenderingContext2D with set_image_smoothing_quality(
 ) -> Unit {
   canvas_rendering_context2_d_set_image_smoothing_quality_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -1742,8 +1742,8 @@ impl TCanvasRenderingContext2D with set_image_smoothing_quality(
 fn canvas_rendering_context2_d_stroke_style_ffi(obj : JsValue) -> JsValue = "webapi_CanvasRenderingContext2D" "strokeStyle"
 
 ///|
-impl TCanvasRenderingContext2D with stroke_style(self : Self) -> JsValue {
-  canvas_rendering_context2_d_stroke_style_ffi(self.to_js())
+impl TCanvasRenderingContext2D with stroke_style(self : Self) -> StrokeStyle {
+  canvas_rendering_context2_d_stroke_style_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
@@ -1755,17 +1755,17 @@ fn canvas_rendering_context2_d_set_stroke_style_ffi(
 ///|
 impl TCanvasRenderingContext2D with set_stroke_style(
   self : Self,
-  value : JsValue,
+  value : &TStrokeStyle,
 ) -> Unit {
-  canvas_rendering_context2_d_set_stroke_style_ffi(self.to_js(), value)
+  canvas_rendering_context2_d_set_stroke_style_ffi(self.to_js(), value.to_js())
 }
 
 ///|
 fn canvas_rendering_context2_d_fill_style_ffi(obj : JsValue) -> JsValue = "webapi_CanvasRenderingContext2D" "fillStyle"
 
 ///|
-impl TCanvasRenderingContext2D with fill_style(self : Self) -> JsValue {
-  canvas_rendering_context2_d_fill_style_ffi(self.to_js())
+impl TCanvasRenderingContext2D with fill_style(self : Self) -> FillStyle {
+  canvas_rendering_context2_d_fill_style_ffi(self.to_js()).unsafe_cast()
 }
 
 ///|
@@ -1775,8 +1775,11 @@ fn canvas_rendering_context2_d_set_fill_style_ffi(
 ) -> Unit = "webapi_CanvasRenderingContext2D" "set_fillStyle"
 
 ///|
-impl TCanvasRenderingContext2D with set_fill_style(self : Self, value : JsValue) -> Unit {
-  canvas_rendering_context2_d_set_fill_style_ffi(self.to_js(), value)
+impl TCanvasRenderingContext2D with set_fill_style(
+  self : Self,
+  value : &TFillStyle,
+) -> Unit {
+  canvas_rendering_context2_d_set_fill_style_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1921,10 +1924,7 @@ impl TCanvasRenderingContext2D with set_line_cap(
   self : Self,
   value : CanvasLineCap,
 ) -> Unit {
-  canvas_rendering_context2_d_set_line_cap_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  canvas_rendering_context2_d_set_line_cap_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -1948,10 +1948,7 @@ impl TCanvasRenderingContext2D with set_line_join(
   self : Self,
   value : CanvasLineJoin,
 ) -> Unit {
-  canvas_rendering_context2_d_set_line_join_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  canvas_rendering_context2_d_set_line_join_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2054,10 +2051,7 @@ impl TCanvasRenderingContext2D with set_text_align(
   self : Self,
   value : CanvasTextAlign,
 ) -> Unit {
-  canvas_rendering_context2_d_set_text_align_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  canvas_rendering_context2_d_set_text_align_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2081,10 +2075,7 @@ impl TCanvasRenderingContext2D with set_text_baseline(
   self : Self,
   value : CanvasTextBaseline,
 ) -> Unit {
-  canvas_rendering_context2_d_set_text_baseline_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  canvas_rendering_context2_d_set_text_baseline_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2108,10 +2099,7 @@ impl TCanvasRenderingContext2D with set_direction(
   self : Self,
   value : CanvasDirection,
 ) -> Unit {
-  canvas_rendering_context2_d_set_direction_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  canvas_rendering_context2_d_set_direction_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2157,10 +2145,7 @@ impl TCanvasRenderingContext2D with set_font_kerning(
   self : Self,
   value : CanvasFontKerning,
 ) -> Unit {
-  canvas_rendering_context2_d_set_font_kerning_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  canvas_rendering_context2_d_set_font_kerning_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2184,10 +2169,7 @@ impl TCanvasRenderingContext2D with set_font_stretch(
   self : Self,
   value : CanvasFontStretch,
 ) -> Unit {
-  canvas_rendering_context2_d_set_font_stretch_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  canvas_rendering_context2_d_set_font_stretch_ffi(self.to_js(), value.to_js())
 }
 
 ///|
@@ -2213,7 +2195,7 @@ impl TCanvasRenderingContext2D with set_font_variant_caps(
 ) -> Unit {
   canvas_rendering_context2_d_set_font_variant_caps_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -2240,7 +2222,7 @@ impl TCanvasRenderingContext2D with set_text_rendering(
 ) -> Unit {
   canvas_rendering_context2_d_set_text_rendering_ffi(
     self.to_js(),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 

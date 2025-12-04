@@ -1,6 +1,44 @@
-import { ParsedInterface, ParsedProperty } from '../types.js';
+import { ParsedInterface, ParsedProperty, ParsedType } from '../types.js';
 import { toSnakeCase, escapeKeyword, toFfiModuleName, toTraitName } from '../utils.js';
-import { mapIdlType, formatReturnType, isKnownEnum } from '../mapping.js';
+import { mapIdlType, formatReturnType, isKnownEnum, isKnownUnionType } from '../mapping.js';
+
+/**
+ * Get the context name for a property type if it's a union
+ * Converts property name to PascalCase union type name
+ */
+function getPropertyUnionContextName(prop: ParsedProperty): string | undefined {
+  if (prop.type.type === "union") {
+    // Convert property name to union type name (e.g., strokeStyle -> StrokeStyle)
+    return prop.name.charAt(0).toUpperCase() + prop.name.slice(1);
+  }
+  return undefined;
+}
+
+/**
+ * Map a property's type, using the property name as context for union types
+ */
+function mapPropertyType(prop: ParsedProperty) {
+  const contextName = getPropertyUnionContextName(prop);
+  return mapIdlType(prop.type, contextName);
+}
+
+/**
+ * Format return type for a property, using the property name as context for union types
+ */
+function formatPropertyReturnType(prop: ParsedProperty): string {
+  const contextName = getPropertyUnionContextName(prop);
+  const mapped = mapIdlType(prop.type, contextName);
+
+  if (mapped.moonbitType === "Unit") {
+    return "Unit";
+  }
+
+  if (mapped.isOptional) {
+    return `${mapped.moonbitType}?`;
+  }
+
+  return mapped.moonbitType;
+}
 
 /**
  * Emit a trait property getter signature (goes in trait definition).
@@ -8,7 +46,7 @@ import { mapIdlType, formatReturnType, isKnownEnum } from '../mapping.js';
  */
 export function emitTraitPropertyGetter(prop: ParsedProperty): string {
   const methodName = escapeKeyword(toSnakeCase(prop.name));
-  const returnType = formatReturnType(prop.type);
+  const returnType = formatPropertyReturnType(prop);
 
   return `  ${methodName}(self : Self) -> ${returnType} = _`;
 }
@@ -16,11 +54,20 @@ export function emitTraitPropertyGetter(prop: ParsedProperty): string {
 /**
  * Emit a trait property setter signature (goes in trait definition).
  * Format: set_methodName(self : Self, value : Type) -> Unit = _
+ * For union types, use &TUnionType to accept any implementing type
  */
 export function emitTraitPropertySetter(prop: ParsedProperty): string {
   const methodName = `set_${escapeKeyword(toSnakeCase(prop.name))}`;
-  const mapped = mapIdlType(prop.type);
-  const paramType = mapped.moonbitType;
+  const mapped = mapPropertyType(prop);
+  const contextName = getPropertyUnionContextName(prop);
+
+  // For union types, use trait reference
+  let paramType: string;
+  if (contextName && isKnownUnionType(contextName)) {
+    paramType = `&T${contextName}`;
+  } else {
+    paramType = mapped.moonbitType;
+  }
 
   return `  ${methodName}(self : Self, value : ${paramType}) -> Unit = _`;
 }
@@ -64,7 +111,7 @@ function isFfiSafeType(moonbitType: string): boolean {
 function emitPropertyGetterFfi(iface: ParsedInterface, prop: ParsedProperty): string {
   const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(prop.name)}_ffi`;
   const moduleName = toFfiModuleName(iface.name);
-  const mapped = mapIdlType(prop.type);
+  const mapped = mapPropertyType(prop);
 
   // FFI can only return primitive types or JsValue
   const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
@@ -81,7 +128,7 @@ fn ${ffiName}(obj : JsValue) -> ${ffiReturnType} = "${moduleName}" "${prop.name}
 function emitPropertySetterFfi(iface: ParsedInterface, prop: ParsedProperty): string {
   const ffiName = `${toSnakeCase(iface.name)}_set_${toSnakeCase(prop.name)}_ffi`;
   const moduleName = toFfiModuleName(iface.name);
-  const mapped = mapIdlType(prop.type);
+  const mapped = mapPropertyType(prop);
 
   // For setter, use JsValue if not FFI-safe
   const paramType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
@@ -97,8 +144,8 @@ function emitPropertyGetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   const methodName = escapeKeyword(toSnakeCase(prop.name));
   const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(prop.name)}_ffi`;
   const traitName = toTraitName(iface.name);
-  const returnType = formatReturnType(prop.type);
-  const mapped = mapIdlType(prop.type);
+  const returnType = formatPropertyReturnType(prop);
+  const mapped = mapPropertyType(prop);
 
   // Determine if we need type conversion
   const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
@@ -133,7 +180,8 @@ function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   const methodName = `set_${escapeKeyword(toSnakeCase(prop.name))}`;
   const ffiName = `${toSnakeCase(iface.name)}_set_${toSnakeCase(prop.name)}_ffi`;
   const traitName = toTraitName(iface.name);
-  const mapped = mapIdlType(prop.type);
+  const mapped = mapPropertyType(prop);
+  const contextName = getPropertyUnionContextName(prop);
 
   // For setter, use JsValue if not FFI-safe
   const paramType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
@@ -142,18 +190,26 @@ function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   // Check if the type is optional (ends with ?)
   const isOptionalType = mapped.moonbitType.endsWith("?");
 
+  // Determine the signature parameter type
+  let sigParamType: string;
+  if (contextName && isKnownUnionType(contextName)) {
+    sigParamType = `&T${contextName}`;
+  } else {
+    sigParamType = mapped.moonbitType;
+  }
+
   let valueExpr: string;
   if (isOptionalType) {
     // Use opt_to_js for optional types
     valueExpr = "opt_to_js(value)";
   } else if (needsConversion) {
-    valueExpr = "TJsValue::to_js(value)";
+    valueExpr = "value.to_js()";
   } else {
     valueExpr = "value";
   }
 
   return `///|
-impl ${traitName} with ${methodName}(self : Self, value : ${mapped.moonbitType}) -> Unit {
+impl ${traitName} with ${methodName}(self : Self, value : ${sigParamType}) -> Unit {
   ${ffiName}(self.to_js(), ${valueExpr})
 }`;
 }
@@ -168,7 +224,7 @@ export function emitProperties(iface: ParsedInterface): string {
     if (prop.static) {
       // Static properties as type methods with direct FFI
       const methodName = escapeKeyword(toSnakeCase(prop.name));
-      const mapped = mapIdlType(prop.type);
+      const mapped = mapPropertyType(prop);
       const moduleName = toFfiModuleName(iface.name);
 
       // Use FFI-safe return type
