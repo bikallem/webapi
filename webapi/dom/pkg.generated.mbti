@@ -21,9 +21,7 @@ pub let window : Window
 // Types and methods
 #external
 pub type AbortController
-pub fn AbortController::is_null(Self) -> Bool
 pub fn AbortController::new() -> Self
-pub fn AbortController::null() -> Self
 pub impl TAbortController for AbortController
 pub impl TJsValue for AbortController
 
@@ -31,8 +29,6 @@ pub impl TJsValue for AbortController
 pub type AbortSignal
 pub fn AbortSignal::abort(reason? : JsValue) -> JsValue
 pub fn AbortSignal::any(Array[Self]) -> JsValue
-pub fn AbortSignal::is_null(Self) -> Bool
-pub fn AbortSignal::null() -> Self
 pub fn AbortSignal::timeout(Int64) -> JsValue
 pub impl TAbortSignal for AbortSignal
 pub impl TEventTarget for AbortSignal
@@ -53,8 +49,6 @@ pub impl TJsValue for AssignedNodesOptions
 
 #external
 pub type Attr
-pub fn Attr::is_null(Self) -> Bool
-pub fn Attr::null() -> Self
 pub impl TAttr for Attr
 pub impl TEventTarget for Attr
 pub impl TJsValue for Attr
@@ -73,8 +67,6 @@ pub impl TJsValue for BoxQuadOptions
 
 #external
 pub type CDATASection
-pub fn CDATASection::is_null(Self) -> Bool
-pub fn CDATASection::null() -> Self
 pub impl TCDATASection for CDATASection
 pub impl TCharacterData for CDATASection
 pub impl TEventTarget for CDATASection
@@ -112,8 +104,6 @@ pub impl Show for CanPlayTypeResult
 #external
 pub type Canvas
 pub fn[T : TCanvas] Canvas::into(Self) -> T
-pub fn Canvas::is_null(Self) -> Bool
-pub fn Canvas::null() -> Self
 
 pub enum CanvasColorType {
   Unorm8
@@ -185,8 +175,6 @@ pub impl Show for CanvasFontVariantCaps
 
 #external
 pub type CanvasGradient
-pub fn CanvasGradient::is_null(Self) -> Bool
-pub fn CanvasGradient::null() -> Self
 pub impl TCanvasGradient for CanvasGradient
 pub impl TFillStyle for CanvasGradient
 pub impl TJsValue for CanvasGradient
@@ -214,8 +202,6 @@ pub impl Show for CanvasLineJoin
 
 #external
 pub type CanvasPattern
-pub fn CanvasPattern::is_null(Self) -> Bool
-pub fn CanvasPattern::null() -> Self
 pub impl TCanvasPattern for CanvasPattern
 pub impl TFillStyle for CanvasPattern
 pub impl TJsValue for CanvasPattern
@@ -223,8 +209,6 @@ pub impl TStrokeStyle for CanvasPattern
 
 #external
 pub type CanvasRenderingContext2D
-pub fn CanvasRenderingContext2D::is_null(Self) -> Bool
-pub fn CanvasRenderingContext2D::null() -> Self
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 pub impl TJsValue for CanvasRenderingContext2D
 pub impl TRenderingContext for CanvasRenderingContext2D
@@ -279,8 +263,6 @@ pub impl TJsValue for CaretPositionFromPointOptions
 
 #external
 pub type CharacterData
-pub fn CharacterData::is_null(Self) -> Bool
-pub fn CharacterData::null() -> Self
 pub impl TCharacterData for CharacterData
 pub impl TEventTarget for CharacterData
 pub impl TJsValue for CharacterData
@@ -315,9 +297,7 @@ pub impl TJsValue for CommandEventInit
 
 #external
 pub type Comment
-pub fn Comment::is_null(Self) -> Bool
 pub fn Comment::new(data? : String) -> Self
-pub fn Comment::null() -> Self
 pub impl TCharacterData for Comment
 pub impl TComment for Comment
 pub impl TEventTarget for Comment
@@ -343,9 +323,7 @@ pub impl TJsValue for CustomElementConstructor
 
 #external
 pub type CustomEvent
-pub fn CustomEvent::is_null(Self) -> Bool
 pub fn CustomEvent::new(String, event_init_dict? : CustomEventInit) -> Self
-pub fn CustomEvent::null() -> Self
 pub impl TCustomEvent for CustomEvent
 pub impl TEvent for CustomEvent
 pub impl TJsValue for CustomEvent
@@ -361,9 +339,7 @@ pub type DOMMatrix
 pub fn DOMMatrix::from_float32_array(JsValue) -> JsValue
 pub fn DOMMatrix::from_float64_array(JsValue) -> JsValue
 pub fn DOMMatrix::from_matrix(other? : DOMMatrixInit) -> JsValue
-pub fn DOMMatrix::is_null(Self) -> Bool
 pub fn DOMMatrix::new(init_? : JsValue) -> Self
-pub fn DOMMatrix::null() -> Self
 pub impl TDOMMatrix for DOMMatrix
 pub impl TDOMMatrixReadOnly for DOMMatrix
 pub impl TJsValue for DOMMatrix
@@ -385,9 +361,7 @@ pub type DOMMatrixReadOnly
 pub fn DOMMatrixReadOnly::from_float32_array(JsValue) -> JsValue
 pub fn DOMMatrixReadOnly::from_float64_array(JsValue) -> JsValue
 pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit) -> JsValue
-pub fn DOMMatrixReadOnly::is_null(Self) -> Bool
 pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> Self
-pub fn DOMMatrixReadOnly::null() -> Self
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
 pub impl TJsValue for DOMMatrixReadOnly
 
@@ -406,9 +380,7 @@ pub impl Show for DOMParserSupportedType
 #external
 pub type DOMPoint
 pub fn DOMPoint::from_point(other? : DOMPointInit) -> JsValue
-pub fn DOMPoint::is_null(Self) -> Bool
 pub fn DOMPoint::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
-pub fn DOMPoint::null() -> Self
 pub impl TDOMPoint for DOMPoint
 pub impl TDOMPointReadOnly for DOMPoint
 pub impl TJsValue for DOMPoint
@@ -423,9 +395,7 @@ pub impl TRoundRectRadiiArg for DOMPointInit
 #external
 pub type DOMPointReadOnly
 pub fn DOMPointReadOnly::from_point(other? : DOMPointInit) -> JsValue
-pub fn DOMPointReadOnly::is_null(Self) -> Bool
 pub fn DOMPointReadOnly::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
-pub fn DOMPointReadOnly::null() -> Self
 pub impl TDOMPointReadOnly for DOMPointReadOnly
 pub impl TJsValue for DOMPointReadOnly
 
@@ -438,9 +408,7 @@ pub impl TJsValue for DOMQuadInit
 #external
 pub type DOMRect
 pub fn DOMRect::from_rect(other? : DOMRectInit) -> JsValue
-pub fn DOMRect::is_null(Self) -> Bool
 pub fn DOMRect::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
-pub fn DOMRect::null() -> Self
 pub impl TDOMRect for DOMRect
 pub impl TDOMRectReadOnly for DOMRect
 pub impl TJsValue for DOMRect
@@ -454,33 +422,25 @@ pub impl TJsValue for DOMRectInit
 #external
 pub type DOMRectReadOnly
 pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit) -> JsValue
-pub fn DOMRectReadOnly::is_null(Self) -> Bool
 pub fn DOMRectReadOnly::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
-pub fn DOMRectReadOnly::null() -> Self
 pub impl TDOMRectReadOnly for DOMRectReadOnly
 pub impl TJsValue for DOMRectReadOnly
 
 #external
 pub type DOMTokenList
-pub fn DOMTokenList::is_null(Self) -> Bool
-pub fn DOMTokenList::null() -> Self
 pub impl TDOMTokenList for DOMTokenList
 pub impl TJsValue for DOMTokenList
 
 #external
 pub type Document
-pub fn Document::is_null(Self) -> Bool
 pub fn Document::new() -> Self
-pub fn Document::null() -> Self
 pub fn Document::parse_html_unsafe(JsValue) -> JsValue
 pub impl TDocument for Document
 pub impl TJsValue for Document
 
 #external
 pub type DocumentFragment
-pub fn DocumentFragment::is_null(Self) -> Bool
 pub fn DocumentFragment::new() -> Self
-pub fn DocumentFragment::null() -> Self
 pub impl TDocumentFragment for DocumentFragment
 pub impl TEventTarget for DocumentFragment
 pub impl TJsValue for DocumentFragment
@@ -498,8 +458,6 @@ pub impl Show for DocumentReadyState
 
 #external
 pub type DocumentType
-pub fn DocumentType::is_null(Self) -> Bool
-pub fn DocumentType::null() -> Self
 pub impl TDocumentType for DocumentType
 pub impl TEventTarget for DocumentType
 pub impl TJsValue for DocumentType
@@ -522,8 +480,6 @@ pub impl TJsValue for DragEventInit
 
 #external
 pub type Element
-pub fn Element::is_null(Self) -> Bool
-pub fn Element::null() -> Self
 pub impl TElement for Element
 pub impl TJsValue for Element
 
@@ -549,17 +505,13 @@ pub impl TJsValue for ErrorEventInit
 
 #external
 pub type Event
-pub fn Event::is_null(Self) -> Bool
 pub fn Event::new(String, event_init_dict? : EventInit) -> Self
-pub fn Event::null() -> Self
 pub impl TEvent for Event
 pub impl TJsValue for Event
 
 #external
 pub type EventHandler
-pub fn EventHandler::is_null(Self) -> Bool
 pub fn EventHandler::new((Event) -> JsValue) -> Self
-pub fn EventHandler::null() -> Self
 pub impl TJsValue for EventHandler
 
 #external
@@ -601,23 +553,17 @@ pub impl TJsValue for EventSourceInit
 
 #external
 pub type EventTarget
-pub fn EventTarget::is_null(Self) -> Bool
 pub fn EventTarget::new() -> Self
-pub fn EventTarget::null() -> Self
 pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget
 
 #external
 pub type FillStyle
 pub fn[T : TFillStyle] FillStyle::into(Self) -> T
-pub fn FillStyle::is_null(Self) -> Bool
-pub fn FillStyle::null() -> Self
 
 #external
 pub type FocusEvent
-pub fn FocusEvent::is_null(Self) -> Bool
 pub fn FocusEvent::new(String, event_init_dict? : FocusEventInit) -> Self
-pub fn FocusEvent::null() -> Self
 pub impl TEvent for FocusEvent
 pub impl TFocusEvent for FocusEvent
 pub impl TJsValue for FocusEvent
@@ -665,44 +611,34 @@ pub impl TJsValue for GetRootNodeOptions
 
 #external
 pub type HTMLAnchorElement
-pub fn HTMLAnchorElement::is_null(Self) -> Bool
 pub fn HTMLAnchorElement::new() -> Self
-pub fn HTMLAnchorElement::null() -> Self
 pub impl THTMLAnchorElement for HTMLAnchorElement
 pub impl THTMLElement for HTMLAnchorElement
 pub impl TJsValue for HTMLAnchorElement
 
 #external
 pub type HTMLAudioElement
-pub fn HTMLAudioElement::is_null(Self) -> Bool
 pub fn HTMLAudioElement::new() -> Self
-pub fn HTMLAudioElement::null() -> Self
 pub impl THTMLAudioElement for HTMLAudioElement
 pub impl TJsValue for HTMLAudioElement
 
 #external
 pub type HTMLBodyElement
-pub fn HTMLBodyElement::is_null(Self) -> Bool
 pub fn HTMLBodyElement::new() -> Self
-pub fn HTMLBodyElement::null() -> Self
 pub impl THTMLBodyElement for HTMLBodyElement
 pub impl THTMLElement for HTMLBodyElement
 pub impl TJsValue for HTMLBodyElement
 
 #external
 pub type HTMLButtonElement
-pub fn HTMLButtonElement::is_null(Self) -> Bool
 pub fn HTMLButtonElement::new() -> Self
-pub fn HTMLButtonElement::null() -> Self
 pub impl THTMLButtonElement for HTMLButtonElement
 pub impl THTMLElement for HTMLButtonElement
 pub impl TJsValue for HTMLButtonElement
 
 #external
 pub type HTMLCanvasElement
-pub fn HTMLCanvasElement::is_null(Self) -> Bool
 pub fn HTMLCanvasElement::new() -> Self
-pub fn HTMLCanvasElement::null() -> Self
 pub impl TCanvas for HTMLCanvasElement
 pub impl THTMLCanvasElement for HTMLCanvasElement
 pub impl THTMLElement for HTMLCanvasElement
@@ -710,95 +646,73 @@ pub impl TJsValue for HTMLCanvasElement
 
 #external
 pub type HTMLCollection
-pub fn HTMLCollection::is_null(Self) -> Bool
-pub fn HTMLCollection::null() -> Self
 pub impl THTMLCollection for HTMLCollection
 pub impl TJsValue for HTMLCollection
 
 #external
 pub type HTMLDivElement
-pub fn HTMLDivElement::is_null(Self) -> Bool
 pub fn HTMLDivElement::new() -> Self
-pub fn HTMLDivElement::null() -> Self
 pub impl THTMLDivElement for HTMLDivElement
 pub impl THTMLElement for HTMLDivElement
 pub impl TJsValue for HTMLDivElement
 
 #external
 pub type HTMLElement
-pub fn HTMLElement::is_null(Self) -> Bool
 pub fn HTMLElement::new() -> Self
-pub fn HTMLElement::null() -> Self
 pub impl THTMLElement for HTMLElement
 pub impl TJsValue for HTMLElement
 
 #external
 pub type HTMLFormElement
-pub fn HTMLFormElement::is_null(Self) -> Bool
 pub fn HTMLFormElement::new() -> Self
-pub fn HTMLFormElement::null() -> Self
 pub impl THTMLElement for HTMLFormElement
 pub impl THTMLFormElement for HTMLFormElement
 pub impl TJsValue for HTMLFormElement
 
 #external
 pub type HTMLHeadElement
-pub fn HTMLHeadElement::is_null(Self) -> Bool
 pub fn HTMLHeadElement::new() -> Self
-pub fn HTMLHeadElement::null() -> Self
 pub impl THTMLElement for HTMLHeadElement
 pub impl THTMLHeadElement for HTMLHeadElement
 pub impl TJsValue for HTMLHeadElement
 
 #external
 pub type HTMLHtmlElement
-pub fn HTMLHtmlElement::is_null(Self) -> Bool
 pub fn HTMLHtmlElement::new() -> Self
-pub fn HTMLHtmlElement::null() -> Self
 pub impl THTMLElement for HTMLHtmlElement
 pub impl THTMLHtmlElement for HTMLHtmlElement
 pub impl TJsValue for HTMLHtmlElement
 
 #external
 pub type HTMLImageElement
-pub fn HTMLImageElement::is_null(Self) -> Bool
 pub fn HTMLImageElement::new() -> Self
-pub fn HTMLImageElement::null() -> Self
 pub impl THTMLImageElement for HTMLImageElement
 pub impl TJsValue for HTMLImageElement
 
 #external
 pub type HTMLInputElement
-pub fn HTMLInputElement::is_null(Self) -> Bool
 pub fn HTMLInputElement::new() -> Self
-pub fn HTMLInputElement::null() -> Self
 pub impl THTMLElement for HTMLInputElement
 pub impl THTMLInputElement for HTMLInputElement
 pub impl TJsValue for HTMLInputElement
 
 #external
 pub type HTMLLinkElement
-pub fn HTMLLinkElement::is_null(Self) -> Bool
 pub fn HTMLLinkElement::new() -> Self
-pub fn HTMLLinkElement::null() -> Self
 pub impl THTMLElement for HTMLLinkElement
 pub impl THTMLLinkElement for HTMLLinkElement
 pub impl TJsValue for HTMLLinkElement
 
 #external
 pub type HTMLParagraphElement
-pub fn HTMLParagraphElement::is_null(Self) -> Bool
 pub fn HTMLParagraphElement::new() -> Self
-pub fn HTMLParagraphElement::null() -> Self
 pub impl THTMLElement for HTMLParagraphElement
 pub impl THTMLParagraphElement for HTMLParagraphElement
 pub impl TJsValue for HTMLParagraphElement
 
 #external
 pub type HTMLScriptElement
-pub fn HTMLScriptElement::is_null(Self) -> Bool
 pub fn HTMLScriptElement::new() -> Self
-pub fn HTMLScriptElement::null() -> Self
 pub fn HTMLScriptElement::supports(String) -> JsValue
 pub impl THTMLElement for HTMLScriptElement
 pub impl THTMLScriptElement for HTMLScriptElement
@@ -806,27 +720,21 @@ pub impl TJsValue for HTMLScriptElement
 
 #external
 pub type HTMLSpanElement
-pub fn HTMLSpanElement::is_null(Self) -> Bool
 pub fn HTMLSpanElement::new() -> Self
-pub fn HTMLSpanElement::null() -> Self
 pub impl THTMLElement for HTMLSpanElement
 pub impl THTMLSpanElement for HTMLSpanElement
 pub impl TJsValue for HTMLSpanElement
 
 #external
 pub type HTMLStyleElement
-pub fn HTMLStyleElement::is_null(Self) -> Bool
 pub fn HTMLStyleElement::new() -> Self
-pub fn HTMLStyleElement::null() -> Self
 pub impl THTMLElement for HTMLStyleElement
 pub impl THTMLStyleElement for HTMLStyleElement
 pub impl TJsValue for HTMLStyleElement
 
 #external
 pub type HTMLVideoElement
-pub fn HTMLVideoElement::is_null(Self) -> Bool
 pub fn HTMLVideoElement::new() -> Self
-pub fn HTMLVideoElement::null() -> Self
 pub impl THTMLVideoElement for HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement
 
@@ -839,13 +747,9 @@ pub impl TJsValue for HashChangeEventInit
 #external
 pub type Hidden
 pub fn[T : THidden] Hidden::into(Self) -> T
-pub fn Hidden::is_null(Self) -> Bool
-pub fn Hidden::null() -> Self
 
 #external
 pub type History
-pub fn History::is_null(Self) -> Bool
-pub fn History::null() -> Self
 pub impl THistory for History
 pub impl TJsValue for History
 
@@ -857,8 +761,6 @@ pub impl TJsValue for ImageBitmapOptions
 
 #external
 pub type ImageBitmapRenderingContext
-pub fn ImageBitmapRenderingContext::is_null(Self) -> Bool
-pub fn ImageBitmapRenderingContext::null() -> Self
 pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 pub impl TJsValue for ImageBitmapRenderingContext
 pub impl TRenderingContext for ImageBitmapRenderingContext
@@ -919,14 +821,10 @@ pub impl TJsValue for ImportNodeOptions
 #external
 pub type InnerHTML
 pub fn[T : TInnerHTML] InnerHTML::into(Self) -> T
-pub fn InnerHTML::is_null(Self) -> Bool
-pub fn InnerHTML::null() -> Self
 
 #external
 pub type InputEvent
-pub fn InputEvent::is_null(Self) -> Bool
 pub fn InputEvent::new(String, event_init_dict? : InputEventInit) -> Self
-pub fn InputEvent::null() -> Self
 pub impl TEvent for InputEvent
 pub impl TInputEvent for InputEvent
 pub impl TJsValue for InputEvent
@@ -960,9 +858,7 @@ pub impl TRoundRectRadiiArg for JsValue
 
 #external
 pub type KeyboardEvent
-pub fn KeyboardEvent::is_null(Self) -> Bool
 pub fn KeyboardEvent::new(String, event_init_dict? : KeyboardEventInit) -> Self
-pub fn KeyboardEvent::null() -> Self
 pub impl TEvent for KeyboardEvent
 pub impl TJsValue for KeyboardEvent
 pub impl TKeyboardEvent for KeyboardEvent
@@ -976,8 +872,6 @@ pub impl TJsValue for KeyboardEventInit
 
 #external
 pub type Location
-pub fn Location::is_null(Self) -> Bool
-pub fn Location::null() -> Self
 pub impl TJsValue for Location
 pub impl TLocation for Location
 
@@ -995,9 +889,7 @@ pub impl TJsValue for MessageEventInit
 
 #external
 pub type MouseEvent
-pub fn MouseEvent::is_null(Self) -> Bool
 pub fn MouseEvent::new(String, event_init_dict? : MouseEventInit) -> Self
-pub fn MouseEvent::null() -> Self
 pub impl TJsValue for MouseEvent
 pub impl TMouseEvent for MouseEvent
 
@@ -1014,9 +906,7 @@ pub impl TJsValue for MutationCallback
 
 #external
 pub type MutationObserver
-pub fn MutationObserver::is_null(Self) -> Bool
 pub fn MutationObserver::new(JsValue) -> Self
-pub fn MutationObserver::null() -> Self
 pub impl TJsValue for MutationObserver
 pub impl TMutationObserver for MutationObserver
 
@@ -1028,15 +918,11 @@ pub impl TJsValue for MutationObserverInit
 
 #external
 pub type MutationRecord
-pub fn MutationRecord::is_null(Self) -> Bool
-pub fn MutationRecord::null() -> Self
 pub impl TJsValue for MutationRecord
 pub impl TMutationRecord for MutationRecord
 
 #external
 pub type NamedNodeMap
-pub fn NamedNodeMap::is_null(Self) -> Bool
-pub fn NamedNodeMap::null() -> Self
 pub impl TJsValue for NamedNodeMap
 pub impl TNamedNodeMap for NamedNodeMap
 
@@ -1081,15 +967,11 @@ pub impl Show for NavigationType
 
 #external
 pub type Navigator
-pub fn Navigator::is_null(Self) -> Bool
-pub fn Navigator::null() -> Self
 pub impl TJsValue for Navigator
 pub impl TNavigator for Navigator
 
 #external
 pub type Node
-pub fn Node::is_null(Self) -> Bool
-pub fn Node::null() -> Self
 pub impl TAfterNodesArg for Node
 pub impl TAppendNodesArg for Node
 pub impl TBeforeNodesArg for Node
@@ -1102,16 +984,12 @@ pub impl TReplaceWithNodesArg for Node
 
 #external
 pub type NodeList
-pub fn NodeList::is_null(Self) -> Bool
-pub fn NodeList::null() -> Self
 pub impl TJsValue for NodeList
 pub impl TNodeList for NodeList
 
 #external
 pub type OffscreenCanvas
-pub fn OffscreenCanvas::is_null(Self) -> Bool
 pub fn OffscreenCanvas::new(Int64, Int64) -> Self
-pub fn OffscreenCanvas::null() -> Self
 pub impl TCanvas for OffscreenCanvas
 pub impl TEventTarget for OffscreenCanvas
 pub impl TJsValue for OffscreenCanvas
@@ -1119,8 +997,6 @@ pub impl TOffscreenCanvas for OffscreenCanvas
 
 #external
 pub type OffscreenCanvasRenderingContext2D
-pub fn OffscreenCanvasRenderingContext2D::is_null(Self) -> Bool
-pub fn OffscreenCanvasRenderingContext2D::null() -> Self
 pub impl TJsValue for OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
@@ -1138,9 +1014,7 @@ pub impl Show for OffscreenRenderingContextId
 
 #external
 pub type OnBeforeUnloadEventHandler
-pub fn OnBeforeUnloadEventHandler::is_null(Self) -> Bool
 pub fn OnBeforeUnloadEventHandler::new((Event) -> String?) -> Self
-pub fn OnBeforeUnloadEventHandler::null() -> Self
 pub impl TJsValue for OnBeforeUnloadEventHandler
 
 #external
@@ -1150,9 +1024,7 @@ pub impl TJsValue for OnBeforeUnloadEventHandlerNonNull
 
 #external
 pub type OnErrorEventHandler
-pub fn OnErrorEventHandler::is_null(Self) -> Bool
 pub fn OnErrorEventHandler::new((JsValue, String, Int, Int, JsValue) -> JsValue) -> Self
-pub fn OnErrorEventHandler::null() -> Self
 pub impl TJsValue for OnErrorEventHandler
 
 #external
@@ -1163,8 +1035,6 @@ pub impl TJsValue for OnErrorEventHandlerNonNull
 #external
 pub type OuterHTML
 pub fn[T : TOuterHTML] OuterHTML::into(Self) -> T
-pub fn OuterHTML::is_null(Self) -> Bool
-pub fn OuterHTML::null() -> Self
 
 #external
 pub type PageTransitionEventInit
@@ -1199,8 +1069,6 @@ pub impl Show for PremultiplyAlpha
 
 #external
 pub type ProcessingInstruction
-pub fn ProcessingInstruction::is_null(Self) -> Bool
-pub fn ProcessingInstruction::null() -> Self
 pub impl TCharacterData for ProcessingInstruction
 pub impl TEventTarget for ProcessingInstruction
 pub impl TJsValue for ProcessingInstruction
@@ -1215,9 +1083,7 @@ pub impl TJsValue for PromiseRejectionEventInit
 
 #external
 pub type Range
-pub fn Range::is_null(Self) -> Bool
 pub fn Range::new() -> Self
-pub fn Range::null() -> Self
 pub impl TJsValue for Range
 pub impl TRange for Range
 
@@ -1345,8 +1211,6 @@ pub impl TJsValue for StaticRangeInit
 
 #external
 pub type Storage
-pub fn Storage::is_null(Self) -> Bool
-pub fn Storage::null() -> Self
 pub impl TJsValue for Storage
 pub impl TStorage for Storage
 
@@ -1359,8 +1223,6 @@ pub impl TJsValue for StorageEventInit
 #external
 pub type StrokeStyle
 pub fn[T : TStrokeStyle] StrokeStyle::into(Self) -> T
-pub fn StrokeStyle::is_null(Self) -> Bool
-pub fn StrokeStyle::null() -> Self
 
 #external
 pub type StructuredSerializeOptions
@@ -1376,9 +1238,7 @@ pub impl TJsValue for SubmitEventInit
 
 #external
 pub type Text
-pub fn Text::is_null(Self) -> Bool
 pub fn Text::new(data? : String) -> Self
-pub fn Text::null() -> Self
 pub impl TCharacterData for Text
 pub impl TEventTarget for Text
 pub impl TJsValue for Text
@@ -1428,9 +1288,7 @@ pub impl TJsValue for TrackEventInit
 
 #external
 pub type UIEvent
-pub fn UIEvent::is_null(Self) -> Bool
 pub fn UIEvent::new(String, event_init_dict? : UIEventInit) -> Self
-pub fn UIEvent::null() -> Self
 pub impl TEvent for UIEvent
 pub impl TJsValue for UIEvent
 pub impl TUIEvent for UIEvent
@@ -1449,9 +1307,7 @@ pub impl TJsValue for ValidityStateFlags
 
 #external
 pub type WheelEvent
-pub fn WheelEvent::is_null(Self) -> Bool
 pub fn WheelEvent::new(String, event_init_dict? : WheelEventInit) -> Self
-pub fn WheelEvent::null() -> Self
 pub impl TJsValue for WheelEvent
 pub impl TMouseEvent for WheelEvent
 pub impl TWheelEvent for WheelEvent
@@ -1464,8 +1320,6 @@ pub impl TJsValue for WheelEventInit
 
 #external
 pub type Window
-pub fn Window::is_null(Self) -> Bool
-pub fn Window::null() -> Self
 pub impl TJsValue for Window
 pub impl TWindow for Window
 
