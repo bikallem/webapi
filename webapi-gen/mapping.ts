@@ -72,6 +72,13 @@ const KNOWN_INTERFACES = new Set([
 const KNOWN_DICTIONARIES = new Set<string>();
 
 /**
+ * Known typedefs (union types, etc.) that have been generated
+ */
+const KNOWN_TYPEDEFS = new Set([
+  "RenderingContext",
+]);
+
+/**
  * Register dictionary names so they can be properly typed
  */
 export function registerDictionaries(names: Iterable<string>): void {
@@ -193,6 +200,15 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
       if (name === "WindowProxy") {
         return {
           moonbitType: "Window",
+          needsConversion: true,
+          isOptional: false,
+        };
+      }
+
+      // Check if it's a known typedef (union types, etc.)
+      if (KNOWN_TYPEDEFS.has(name)) {
+        return {
+          moonbitType: name,
           needsConversion: true,
           isOptional: false,
         };

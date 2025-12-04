@@ -36,8 +36,16 @@ pub fn[T] JsValue::null() -> T {
 pub fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
 
 ///|
+pub fn JsValue::is_null(self : JsValue) -> Bool = "JsValue" "isNull"
+
+///|
 /// Cast JsValue to an optional type (nullable return from JS)
-pub fn[T] JsValue::as_option(self : JsValue) -> T? = "%identity"
+pub fn[T] JsValue::as_option(self : JsValue) -> T? {
+  match self {
+    v if JsValue::is_null(v) => None
+    _ => Some(self.unsafe_cast())
+  }
+}
 
 ///|
 /// Get undefined as a default value for optional JsValue parameters

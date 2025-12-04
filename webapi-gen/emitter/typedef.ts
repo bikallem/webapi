@@ -3,9 +3,10 @@
  * 
  * Generates MoonBit code for Web IDL typedef types.
  * For example: typedef EventHandlerNonNull? EventHandler;
+ * For unions: typedef (Type1 or Type2 or Type3) UnionName;
  */
 
-import type { ParsedTypedef, ParsedIdl } from "../types.js";
+import type { ParsedTypedef, ParsedIdl, ParsedType } from "../types.js";
 import { toSnakeCase, formatIdlSourceAsComment } from "../utils.js";
 import { mapIdlType, formatReturnType } from "../mapping.js";
 
@@ -87,6 +88,83 @@ function isNullableTypedef(typedef: ParsedTypedef): boolean {
 }
 
 /**
+ * Check if the typedef is a union type
+ */
+function isUnionTypedef(typedef: ParsedTypedef): boolean {
+    return typedef.type.type === "union";
+}
+
+/**
+ * Get member type names from a union typedef
+ */
+function getUnionMemberNames(typedef: ParsedTypedef): string[] {
+    if (typedef.type.type !== "union" || !typedef.type.memberTypes) {
+        return [];
+    }
+    
+    const names: string[] = [];
+    for (const member of typedef.type.memberTypes) {
+        if (member.type === "reference" && member.name) {
+            names.push(member.name);
+        }
+    }
+    return names;
+}
+
+/**
+ * Emit union type definition with trait and into method
+ */
+function emitUnionType(typedef: ParsedTypedef): string {
+    const parts: string[] = [];
+    
+    // External type
+    parts.push(`///|
+#external
+pub type ${typedef.name}`);
+    
+    // Open trait for the union
+    parts.push(`///|
+pub(open) trait T${typedef.name} {
+  to_js(self : Self) -> JsValue
+}`);
+    
+    // Into method for downcasting
+    parts.push(`///|
+pub fn[T : T${typedef.name}] ${typedef.name}::into(self : ${typedef.name}) -> T = "%identity"`);
+    
+    // null() and is_null() for nullable union returns
+    parts.push(`///|
+pub fn ${typedef.name}::null() -> ${typedef.name} = "JsValue" "null"
+
+///|
+pub fn ${typedef.name}::is_null(self : ${typedef.name}) -> Bool = "JsValue" "isNull"`);
+    
+    return parts.join("\n\n");
+}
+
+/**
+ * Emit trait implementations for each member of a union type
+ */
+function emitUnionMemberImpls(typedef: ParsedTypedef, idl: ParsedIdl): string | undefined {
+    const memberNames = getUnionMemberNames(typedef);
+    if (memberNames.length === 0) return undefined;
+    
+    const impls: string[] = [];
+    
+    for (const memberName of memberNames) {
+        // Only generate impl if the interface exists in our generated set
+        if (idl.interfaces.has(memberName)) {
+            impls.push(`///|
+pub impl T${typedef.name} for ${memberName} with to_js(
+  self : ${memberName},
+) -> JsValue = "%identity"`);
+        }
+    }
+    
+    return impls.length > 0 ? impls.join("\n\n") : undefined;
+}
+
+/**
  * Emit null() and is_null() methods for nullable typedefs
  */
 function emitNullableMethods(typedef: ParsedTypedef): string | undefined {
@@ -115,7 +193,20 @@ export function emitTypedef(typedef: ParsedTypedef, idl: ParsedIdl): string {
         parts.push(`//\n// WebIDL Typedef:\n${idlComment}`);
     }
 
-    // Type and impl
+    // Handle union types specially
+    if (isUnionTypedef(typedef)) {
+        parts.push(emitUnionType(typedef));
+        
+        // Emit trait impls for union members
+        const memberImpls = emitUnionMemberImpls(typedef, idl);
+        if (memberImpls) {
+            parts.push(memberImpls);
+        }
+        
+        return parts.join("\n\n");
+    }
+
+    // Type and impl (for non-union types)
     parts.push(emitTypedefType(typedef));
     parts.push(emitTJsValueImpl(typedef));
 

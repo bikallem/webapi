@@ -139,6 +139,11 @@ const CORE_INTERFACES = new Set([
   "DOMPointReadOnly",
   "DOMMatrix",
   "DOMMatrixReadOnly",
+
+  // Canvas rendering contexts
+  "CanvasRenderingContext2D",
+  "ImageBitmapRenderingContext",
+  "OffscreenCanvasRenderingContext2D",
 ]);
 
 /**
@@ -212,11 +217,12 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
     }
   }
 
-  // Keep typedefs that we want to generate (event handlers, etc.)
+  // Keep typedefs that we want to generate (event handlers, union types, etc.)
   const GENERATED_TYPEDEFS = new Set([
     "EventHandler",
     "OnErrorEventHandler",
     "OnBeforeUnloadEventHandler",
+    "RenderingContext",
   ]);
   for (const [name, typedef] of idl.typedefs) {
     if (GENERATED_TYPEDEFS.has(name)) {

@@ -984,6 +984,19 @@ export const wasmImportObject = {
     set_height: (obj, value) => { obj.height = value; }
   },
 
+  webapi_CanvasRenderingContext2D: {
+    get_canvas: (obj) => obj.canvas
+  },
+
+  webapi_ImageBitmapRenderingContext: {
+    transferFromImageBitmap: (obj, bitmap) => obj.transferFromImageBitmap(bitmap),
+    get_canvas: (obj) => obj.canvas
+  },
+
+  webapi_OffscreenCanvasRenderingContext2D: {
+    get_canvas: (obj) => obj.canvas
+  },
+
   webapi_Navigator: {
     get_userActivation: (obj) => obj.userActivation
   },
