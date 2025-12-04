@@ -132,21 +132,53 @@ pub fn[T : T${typedef.name}] &T${typedef.name}::into(self : &T${typedef.name}) -
 }
 
 /**
+ * Recursively expand union member names, replacing nested typedef unions with their members
+ */
+function expandUnionMembers(memberNames: string[], idl: ParsedIdl): string[] {
+    const expanded: string[] = [];
+    const seen = new Set<string>();
+
+    function expand(name: string) {
+        if (seen.has(name)) return;
+        seen.add(name);
+
+        // If this is a typedef union, expand its members recursively
+        if (isKnownTypedef(name)) {
+            const nestedTypedef = idl.typedefs.get(name);
+            if (nestedTypedef && nestedTypedef.type.type === "union" && nestedTypedef.type.memberTypes) {
+                for (const member of nestedTypedef.type.memberTypes) {
+                    if (member.type === "reference" && member.name) {
+                        expand(member.name);
+                    }
+                }
+            }
+        } else {
+            // Not a typedef union, add it directly
+            expanded.push(name);
+        }
+    }
+
+    for (const name of memberNames) {
+        expand(name);
+    }
+
+    return expanded;
+}
+
+/**
  * Emit trait implementations for each member of a union type
- * Skips fully abstract types and typedef unions (they have no external type, only trait)
+ * Expands nested typedef unions and skips fully abstract types
  */
 function emitUnionMemberImpls(typedef: ParsedTypedef, idl: ParsedIdl): string | undefined {
     const memberNames = getUnionMemberNames(typedef);
     if (memberNames.length === 0) return undefined;
 
+    // Expand nested typedef unions
+    const expandedMembers = expandUnionMembers(memberNames, idl);
+
     const impls: string[] = [];
 
-    for (const memberName of memberNames) {
-        // Skip typedef unions - they have no external type
-        if (isKnownTypedef(memberName)) {
-            continue;
-        }
-
+    for (const memberName of expandedMembers) {
         // Generate impl if the member is a known interface
         if (idl.interfaces.has(memberName)) {
             // Skip fully abstract types - they have no external type

@@ -712,6 +712,7 @@ pub impl TElement for HTMLCanvasElement
 pub impl TEventTarget for HTMLCanvasElement
 pub impl THTMLCanvasElement for HTMLCanvasElement
 pub impl THTMLElement for HTMLCanvasElement
+pub impl TImageBitmapSource for HTMLCanvasElement
 pub impl TJsValue for HTMLCanvasElement
 pub impl TNode for HTMLCanvasElement
 
@@ -767,11 +768,13 @@ pub impl TNode for HTMLHtmlElement
 
 #external
 pub type HTMLImageElement
+pub impl TCanvasImageSource for HTMLImageElement
 pub impl TElement for HTMLImageElement
 pub impl TEventTarget for HTMLImageElement
 pub impl THTMLElement for HTMLImageElement
 pub impl THTMLImageElement for HTMLImageElement
 pub impl THTMLOrSVGImageElement for HTMLImageElement
+pub impl TImageBitmapSource for HTMLImageElement
 pub impl TJsValue for HTMLImageElement
 pub impl TNode for HTMLImageElement
 
@@ -843,6 +846,7 @@ pub impl TNode for HTMLStyleElement
 pub type HTMLVideoElement
 pub impl TCanvasImageSource for HTMLVideoElement
 pub impl THTMLVideoElement for HTMLVideoElement
+pub impl TImageBitmapSource for HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement
 
 #external
@@ -864,6 +868,7 @@ pub impl TJsValue for History
 pub type ImageBitmap
 pub impl TCanvasImageSource for ImageBitmap
 pub impl TImageBitmap for ImageBitmap
+pub impl TImageBitmapSource for ImageBitmap
 pub impl TJsValue for ImageBitmap
 
 #external
@@ -1123,6 +1128,7 @@ pub fn OffscreenCanvas::null() -> Self
 pub impl TCanvas for OffscreenCanvas
 pub impl TCanvasImageSource for OffscreenCanvas
 pub impl TEventTarget for OffscreenCanvas
+pub impl TImageBitmapSource for OffscreenCanvas
 pub impl TJsValue for OffscreenCanvas
 pub impl TOffscreenCanvas for OffscreenCanvas
 
@@ -1229,6 +1235,20 @@ pub fn ResizeQuality::from_js(JsValue) -> Self?
 pub impl TJsValue for ResizeQuality
 pub impl Eq for ResizeQuality
 pub impl Show for ResizeQuality
+
+#external
+pub type SVGBoundingBoxOptions
+pub fn SVGBoundingBoxOptions::empty() -> Self
+pub fn SVGBoundingBoxOptions::new(fill? : Bool, stroke? : Bool, markers? : Bool, clipped? : Bool) -> Self
+pub impl TJsValue for SVGBoundingBoxOptions
+
+#external
+pub type SVGImageElement
+pub impl TCanvasImageSource for SVGImageElement
+pub impl THTMLOrSVGImageElement for SVGImageElement
+pub impl TImageBitmapSource for SVGImageElement
+pub impl TJsValue for SVGImageElement
+pub impl TSVGImageElement for SVGImageElement
 
 pub enum ScrollBehavior {
   Auto
@@ -1900,6 +1920,7 @@ pub trait TDOMTokenList : TJsValue {
 }
 
 pub trait TDocument : TJsValue + TNode {
+  root_element(Self) -> JsValue?
   scrolling_element(Self) -> &TElement?
   implementation(Self) -> JsValue
   url(Self) -> String
@@ -3436,6 +3457,17 @@ pub impl TReplaceWithNodesArg for String
 
 pub(open) trait TRoundRectRadiiArg {
   to_js(Self) -> JsValue
+}
+
+pub trait TSVGImageElement : TJsValue {
+  x(Self) -> JsValue
+  y(Self) -> JsValue
+  width(Self) -> JsValue
+  height(Self) -> JsValue
+  preserve_aspect_ratio(Self) -> JsValue
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  href(Self) -> JsValue
 }
 
 pub(open) trait TScrollIntoViewArgArg {

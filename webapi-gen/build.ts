@@ -75,6 +75,7 @@ const CORE_SPECS = [
   "geometry",      // DOMPoint, DOMRect, DOMMatrix, etc.
   "FileAPI",       // Blob, File, FileReader, etc.
   "dom-shadow",    // Shadow DOM (ShadowRoot, slots, etc.)
+  "SVG",           // SVG elements (for SVGImageElement, etc.)
 ];
 
 /**
@@ -89,8 +90,9 @@ const EXCLUDED_DICTIONARY_PREFIXES = [
 
 /**
  * Filter interfaces to core DOM APIs
+ * This set is extended dynamically with interfaces referenced in typedef unions
  */
-const CORE_INTERFACES = new Set([
+let CORE_INTERFACES = new Set([
   // EventTarget hierarchy
   "EventTarget",
   "Event",
@@ -224,6 +226,48 @@ async function fetchIdl(): Promise<ParsedIdl[]> {
 }
 
 /**
+ * Recursively collect interface names from typedef unions
+ * This ensures that interfaces referenced in union types are included
+ */
+function collectInterfacesFromTypedefs(idl: ParsedIdl, typedefNames: Set<string>): Set<string> {
+  const interfaces = new Set<string>();
+  const visited = new Set<string>();
+
+  function collectFromTypedef(name: string) {
+    if (visited.has(name)) return;
+    visited.add(name);
+
+    const typedef = idl.typedefs.get(name);
+    if (!typedef || typedef.type.type !== "union" || !typedef.type.memberTypes) {
+      return;
+    }
+
+    for (const member of typedef.type.memberTypes) {
+      if (member.type === "reference" && member.name) {
+        const memberName = member.name;
+        // If it's another typedef union, recurse
+        if (idl.typedefs.has(memberName)) {
+          const nestedTypedef = idl.typedefs.get(memberName)!;
+          if (nestedTypedef.type.type === "union") {
+            collectFromTypedef(memberName);
+          }
+        }
+        // If it's an interface, add it
+        else if (idl.interfaces.has(memberName)) {
+          interfaces.add(memberName);
+        }
+      }
+    }
+  }
+
+  for (const name of typedefNames) {
+    collectFromTypedef(name);
+  }
+
+  return interfaces;
+}
+
+/**
  * Filter IDL to only include core interfaces
  */
 function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
@@ -235,6 +279,24 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
     typedefs: new Map(),
     includes: [],
   };
+
+  // Typedefs we want to generate (event handlers, union types, etc.)
+  const GENERATED_TYPEDEFS = new Set([
+    "EventHandler",
+    "OnErrorEventHandler",
+    "OnBeforeUnloadEventHandler",
+    "RenderingContext",
+    // Union type typedefs
+    "CanvasImageSource",
+    "ImageBitmapSource",
+    "HTMLOrSVGImageElement",
+  ]);
+
+  // Collect interfaces referenced in typedef unions and add them to CORE_INTERFACES
+  const typedefInterfaces = collectInterfacesFromTypedefs(idl, GENERATED_TYPEDEFS);
+  for (const name of typedefInterfaces) {
+    CORE_INTERFACES.add(name);
+  }
 
   // Filter interfaces
   for (const [name, iface] of idl.interfaces) {
@@ -262,17 +324,7 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
     }
   }
 
-  // Keep typedefs that we want to generate (event handlers, union types, etc.)
-  const GENERATED_TYPEDEFS = new Set([
-    "EventHandler",
-    "OnErrorEventHandler",
-    "OnBeforeUnloadEventHandler",
-    "RenderingContext",
-    // Union type typedefs
-    "CanvasImageSource",
-    "ImageBitmapSource",
-    "HTMLOrSVGImageElement",
-  ]);
+  // Keep typedefs that we want to generate
   for (const [name, typedef] of idl.typedefs) {
     if (GENERATED_TYPEDEFS.has(name)) {
       filtered.typedefs.set(name, typedef);

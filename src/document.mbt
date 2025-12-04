@@ -5,6 +5,10 @@
 //
 // WebIDL Interface:
 // partial interface Document {
+//   readonly attribute SVGSVGElement? rootElement;
+// };
+// 
+// partial interface Document {
 //   Element? elementFromPoint(double x, double y);
 //   sequence<Element> elementsFromPoint(double x, double y);
 //   CaretPosition? caretPositionFromPoint(double x, double y, optional CaretPositionFromPointOptions options = {});
@@ -256,6 +260,7 @@ pub type Document
 
 ///|
 pub trait TDocument: TJsValue + TNode {
+  root_element(self : Self) -> JsValue? = _
   scrolling_element(self : Self) -> &TElement? = _
   implementation(self : Self) -> JsValue = _
   url(self : Self) -> String = _
@@ -1444,6 +1449,14 @@ impl TDocument with evaluate(
     type__js,
     result_js,
   ).unsafe_cast()
+}
+
+///|
+fn document_root_element_ffi(obj : JsValue) -> JsValue = "webapi_Document" "rootElement"
+
+///|
+impl TDocument with root_element(self : Self) -> JsValue? {
+  document_root_element_ffi(self.to_js()).as_option()
 }
 
 ///|

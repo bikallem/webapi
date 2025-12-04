@@ -21,3 +21,8 @@ pub fn[T : THTMLOrSVGImageElement] &THTMLOrSVGImageElement::into(
 pub impl THTMLOrSVGImageElement for HTMLImageElement with to_js(
   self : HTMLImageElement,
 ) -> JsValue = "%identity"
+
+///|
+pub impl THTMLOrSVGImageElement for SVGImageElement with to_js(
+  self : SVGImageElement,
+) -> JsValue = "%identity"
