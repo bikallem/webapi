@@ -31,7 +31,7 @@ fn main {
       #|
     ),
   )
-  let _node : &TNode = body.append_child(container)
+  let _node : HTMLDivElement = body.append_child(container).into()
 
   // Create mutable counter state using Ref
   let mut count = 0
