@@ -191,16 +191,16 @@ pub fn DOMMatrix::from_matrix(
 fn dom_matrix_from_float32_array_ffi(array32 : JsValue) -> JsValue = "webapi_DOMMatrix" "fromFloat32Array"
 
 ///|
-pub fn DOMMatrix::from_float32_array(array32 : JsValue) -> JsValue {
-  dom_matrix_from_float32_array_ffi(array32)
+pub fn DOMMatrix::from_float32_array(array32 : Float32Array) -> JsValue {
+  dom_matrix_from_float32_array_ffi(TJsValue::to_js(array32))
 }
 
 ///|
 fn dom_matrix_from_float64_array_ffi(array64 : JsValue) -> JsValue = "webapi_DOMMatrix" "fromFloat64Array"
 
 ///|
-pub fn DOMMatrix::from_float64_array(array64 : JsValue) -> JsValue {
-  dom_matrix_from_float64_array_ffi(array64)
+pub fn DOMMatrix::from_float64_array(array64 : Float64Array) -> JsValue {
+  dom_matrix_from_float64_array_ffi(TJsValue::to_js(array64))
 }
 
 ///|

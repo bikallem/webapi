@@ -297,6 +297,7 @@ async function copyTemplates(): Promise<void> {
     "js_array.mbt",
     "primitives.mbt",
     "event_listener.mbt",
+    "typed_arrays.mbt",
   ];
 
   for (const file of templateFiles) {

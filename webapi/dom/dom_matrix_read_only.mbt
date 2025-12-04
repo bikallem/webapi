@@ -145,8 +145,8 @@ pub trait TDOMMatrixReadOnly: TJsValue {
   flip_y(self : Self) -> JsValue = _
   inverse(self : Self) -> JsValue = _
   transform_point(self : Self, point? : DOMPointInit) -> JsValue = _
-  to_float32_array(self : Self) -> JsValue = _
-  to_float64_array(self : Self) -> JsValue = _
+  to_float32_array(self : Self) -> Float32Array = _
+  to_float64_array(self : Self) -> Float64Array = _
   to_json(self : Self) -> JsValue = _
 }
 
@@ -183,16 +183,16 @@ pub fn DOMMatrixReadOnly::from_matrix(
 fn dom_matrix_read_only_from_float32_array_ffi(array32 : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "fromFloat32Array"
 
 ///|
-pub fn DOMMatrixReadOnly::from_float32_array(array32 : JsValue) -> JsValue {
-  dom_matrix_read_only_from_float32_array_ffi(array32)
+pub fn DOMMatrixReadOnly::from_float32_array(array32 : Float32Array) -> JsValue {
+  dom_matrix_read_only_from_float32_array_ffi(TJsValue::to_js(array32))
 }
 
 ///|
 fn dom_matrix_read_only_from_float64_array_ffi(array64 : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "fromFloat64Array"
 
 ///|
-pub fn DOMMatrixReadOnly::from_float64_array(array64 : JsValue) -> JsValue {
-  dom_matrix_read_only_from_float64_array_ffi(array64)
+pub fn DOMMatrixReadOnly::from_float64_array(array64 : Float64Array) -> JsValue {
+  dom_matrix_read_only_from_float64_array_ffi(TJsValue::to_js(array64))
 }
 
 ///|
@@ -457,7 +457,7 @@ impl TDOMMatrixReadOnly with transform_point(
 fn dom_matrix_read_only_to_float32_array_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "toFloat32Array"
 
 ///|
-impl TDOMMatrixReadOnly with to_float32_array(self : Self) -> JsValue {
+impl TDOMMatrixReadOnly with to_float32_array(self : Self) -> Float32Array {
   dom_matrix_read_only_to_float32_array_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
@@ -465,7 +465,7 @@ impl TDOMMatrixReadOnly with to_float32_array(self : Self) -> JsValue {
 fn dom_matrix_read_only_to_float64_array_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "toFloat64Array"
 
 ///|
-impl TDOMMatrixReadOnly with to_float64_array(self : Self) -> JsValue {
+impl TDOMMatrixReadOnly with to_float64_array(self : Self) -> Float64Array {
   dom_matrix_read_only_to_float64_array_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 

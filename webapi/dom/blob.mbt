@@ -40,8 +40,8 @@ pub trait TBlob: TJsValue {
   slice(self : Self, start? : Int64, end? : Int64, content_type? : String) -> Blob = _
   stream(self : Self) -> JsValue = _
   text(self : Self) -> JsPromise[String] = _
-  array_buffer(self : Self) -> JsPromise[JsValue] = _
-  bytes(self : Self) -> JsPromise[JsValue] = _
+  array_buffer(self : Self) -> JsPromise[ArrayBuffer] = _
+  bytes(self : Self) -> JsPromise[Uint8Array] = _
 }
 
 ///|
@@ -108,7 +108,7 @@ impl TBlob with text(self : Self) -> JsPromise[String] {
 fn blob_array_buffer_ffi(obj : JsValue) -> JsValue = "webapi_Blob" "arrayBuffer"
 
 ///|
-impl TBlob with array_buffer(self : Self) -> JsPromise[JsValue] {
+impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
   blob_array_buffer_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
@@ -116,7 +116,7 @@ impl TBlob with array_buffer(self : Self) -> JsPromise[JsValue] {
 fn blob_bytes_ffi(obj : JsValue) -> JsValue = "webapi_Blob" "bytes"
 
 ///|
-impl TBlob with bytes(self : Self) -> JsPromise[JsValue] {
+impl TBlob with bytes(self : Self) -> JsPromise[Uint8Array] {
   blob_bytes_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 

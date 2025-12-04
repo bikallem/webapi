@@ -42,6 +42,10 @@ pub impl TAddEventListenerOptionsArg for AddEventListenerOptions
 pub impl TJsValue for AddEventListenerOptions
 
 #external
+pub type ArrayBuffer
+pub impl TJsValue for ArrayBuffer
+
+#external
 pub type AssignedNodesOptions
 pub fn AssignedNodesOptions::empty() -> Self
 pub fn AssignedNodesOptions::new(flatten? : Bool) -> Self
@@ -53,6 +57,14 @@ pub impl TAttr for Attr
 pub impl TEventTarget for Attr
 pub impl TJsValue for Attr
 pub impl TNode for Attr
+
+#external
+pub type BigInt64Array
+pub impl TJsValue for BigInt64Array
+
+#external
+pub type BigUint64Array
+pub impl TJsValue for BigUint64Array
 
 #external
 pub type Blob
@@ -354,8 +366,8 @@ pub impl TJsValue for CustomEventInit
 
 #external
 pub type DOMMatrix
-pub fn DOMMatrix::from_float32_array(JsValue) -> JsValue
-pub fn DOMMatrix::from_float64_array(JsValue) -> JsValue
+pub fn DOMMatrix::from_float32_array(Float32Array) -> JsValue
+pub fn DOMMatrix::from_float64_array(Float64Array) -> JsValue
 pub fn DOMMatrix::from_matrix(other? : DOMMatrixInit) -> JsValue
 pub fn DOMMatrix::new(init_? : JsValue) -> Self
 pub impl TDOMMatrix for DOMMatrix
@@ -376,8 +388,8 @@ pub impl TJsValue for DOMMatrixInit
 
 #external
 pub type DOMMatrixReadOnly
-pub fn DOMMatrixReadOnly::from_float32_array(JsValue) -> JsValue
-pub fn DOMMatrixReadOnly::from_float64_array(JsValue) -> JsValue
+pub fn DOMMatrixReadOnly::from_float32_array(Float32Array) -> JsValue
+pub fn DOMMatrixReadOnly::from_float64_array(Float64Array) -> JsValue
 pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit) -> JsValue
 pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> Self
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
@@ -448,6 +460,10 @@ pub impl TJsValue for DOMRectReadOnly
 pub type DOMTokenList
 pub impl TDOMTokenList for DOMTokenList
 pub impl TJsValue for DOMTokenList
+
+#external
+pub type DataView
+pub impl TJsValue for DataView
 
 #external
 pub type Document
@@ -594,6 +610,14 @@ pub impl TJsValue for FilePropertyBag
 #external
 pub type FillStyle
 pub fn[T : TFillStyle] FillStyle::into(Self) -> T
+
+#external
+pub type Float32Array
+pub impl TJsValue for Float32Array
+
+#external
+pub type Float64Array
+pub impl TJsValue for Float64Array
 
 #external
 pub type FocusEvent
@@ -902,6 +926,18 @@ pub type InputEventInit
 pub fn InputEventInit::empty() -> Self
 pub fn InputEventInit::new(data? : String, is_composing? : Bool, input_type? : String) -> Self
 pub impl TJsValue for InputEventInit
+
+#external
+pub type Int16Array
+pub impl TJsValue for Int16Array
+
+#external
+pub type Int32Array
+pub impl TJsValue for Int32Array
+
+#external
+pub type Int8Array
+pub impl TJsValue for Int8Array
 
 #external
 pub type JsArray
@@ -1375,6 +1411,22 @@ pub fn UIEventInit::new(view? : Window, detail? : Int, which? : UInt) -> Self
 pub impl TJsValue for UIEventInit
 
 #external
+pub type Uint16Array
+pub impl TJsValue for Uint16Array
+
+#external
+pub type Uint32Array
+pub impl TJsValue for Uint32Array
+
+#external
+pub type Uint8Array
+pub impl TJsValue for Uint8Array
+
+#external
+pub type Uint8ClampedArray
+pub impl TJsValue for Uint8ClampedArray
+
+#external
 pub type ValidityStateFlags
 pub fn ValidityStateFlags::empty() -> Self
 pub fn ValidityStateFlags::new(value_missing? : Bool, type_mismatch? : Bool, pattern_mismatch? : Bool, too_long? : Bool, too_short? : Bool, range_underflow? : Bool, range_overflow? : Bool, step_mismatch? : Bool, bad_input? : Bool, custom_error? : Bool) -> Self
@@ -1482,8 +1534,8 @@ pub trait TBlob : TJsValue {
   slice(Self, start? : Int64, end? : Int64, content_type? : String) -> Blob
   stream(Self) -> JsValue
   text(Self) -> JsPromise[String]
-  array_buffer(Self) -> JsPromise[JsValue]
-  bytes(Self) -> JsPromise[JsValue]
+  array_buffer(Self) -> JsPromise[ArrayBuffer]
+  bytes(Self) -> JsPromise[Uint8Array]
 }
 
 pub trait TCDATASection : TJsValue + TText {
@@ -1752,8 +1804,8 @@ pub trait TDOMMatrixReadOnly : TJsValue {
   flip_y(Self) -> JsValue
   inverse(Self) -> JsValue
   transform_point(Self, point? : DOMPointInit) -> JsValue
-  to_float32_array(Self) -> JsValue
-  to_float64_array(Self) -> JsValue
+  to_float32_array(Self) -> Float32Array
+  to_float64_array(Self) -> Float64Array
   to_json(Self) -> JsValue
 }
 

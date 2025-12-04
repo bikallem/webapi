@@ -67,6 +67,12 @@ const KNOWN_INTERFACES = new Set([
   "ImageBitmap", "ImageData", "Blob",
   // Shadow DOM
   "ShadowRoot", "HTMLSlotElement",
+  // Typed Arrays (JavaScript built-in types)
+  "Float32Array", "Float64Array",
+  "Int8Array", "Int16Array", "Int32Array",
+  "Uint8Array", "Uint8ClampedArray", "Uint16Array", "Uint32Array",
+  "BigInt64Array", "BigUint64Array",
+  "ArrayBuffer", "DataView",
   // Other
   "Window", "Navigator", "Location", "History", "Storage",
   "AbortController", "AbortSignal", "Range",
