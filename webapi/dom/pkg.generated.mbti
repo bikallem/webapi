@@ -68,7 +68,7 @@ pub impl TJsValue for BlobCallback
 #external
 pub type BoxQuadOptions
 pub fn BoxQuadOptions::empty() -> Self
-pub fn BoxQuadOptions::new(box? : JsValue, relative_to? : JsValue) -> Self
+pub fn BoxQuadOptions::new(box? : CSSBoxType, relative_to? : JsValue) -> Self
 pub impl TJsValue for BoxQuadOptions
 
 #external
@@ -82,11 +82,144 @@ pub impl TJsValue for CDATASection
 pub impl TNode for CDATASection
 pub impl TText for CDATASection
 
+pub enum CSSBoxType {
+  Margin
+  Border
+  Padding
+  Content
+}
+pub fn CSSBoxType::from_js(JsValue) -> Self?
+pub impl TJsValue for CSSBoxType
+pub impl Eq for CSSBoxType
+pub impl Show for CSSBoxType
+
 #external
 pub type CSSStyleSheetInit
 pub fn CSSStyleSheetInit::empty() -> Self
 pub fn CSSStyleSheetInit::new(base_url? : String, media? : JsValue, disabled? : Bool) -> Self
 pub impl TJsValue for CSSStyleSheetInit
+
+pub enum CanPlayTypeResult {
+  Empty
+  Maybe
+  Probably
+}
+pub fn CanPlayTypeResult::from_js(JsValue) -> Self?
+pub impl TJsValue for CanPlayTypeResult
+pub impl Eq for CanPlayTypeResult
+pub impl Show for CanPlayTypeResult
+
+#external
+pub type Canvas
+pub fn[T : TCanvas] Canvas::into(Self) -> T
+pub fn Canvas::is_null(Self) -> Bool
+pub fn Canvas::null() -> Self
+
+pub enum CanvasColorType {
+  Unorm8
+  Float16
+}
+pub fn CanvasColorType::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasColorType
+pub impl Eq for CanvasColorType
+pub impl Show for CanvasColorType
+
+pub enum CanvasDirection {
+  Ltr
+  Rtl
+  Inherit
+}
+pub fn CanvasDirection::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasDirection
+pub impl Eq for CanvasDirection
+pub impl Show for CanvasDirection
+
+pub enum CanvasFillRule {
+  Nonzero
+  Evenodd
+}
+pub fn CanvasFillRule::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasFillRule
+pub impl Eq for CanvasFillRule
+pub impl Show for CanvasFillRule
+
+pub enum CanvasFontKerning {
+  Auto
+  Normal
+  None
+}
+pub fn CanvasFontKerning::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasFontKerning
+pub impl Eq for CanvasFontKerning
+pub impl Show for CanvasFontKerning
+
+pub enum CanvasFontStretch {
+  UltraCondensed
+  ExtraCondensed
+  Condensed
+  SemiCondensed
+  Normal
+  SemiExpanded
+  Expanded
+  ExtraExpanded
+  UltraExpanded
+}
+pub fn CanvasFontStretch::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasFontStretch
+pub impl Eq for CanvasFontStretch
+pub impl Show for CanvasFontStretch
+
+pub enum CanvasFontVariantCaps {
+  Normal
+  SmallCaps
+  AllSmallCaps
+  PetiteCaps
+  AllPetiteCaps
+  Unicase
+  TitlingCaps
+}
+pub fn CanvasFontVariantCaps::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasFontVariantCaps
+pub impl Eq for CanvasFontVariantCaps
+pub impl Show for CanvasFontVariantCaps
+
+#external
+pub type CanvasGradient
+pub fn CanvasGradient::is_null(Self) -> Bool
+pub fn CanvasGradient::null() -> Self
+pub impl TCanvasGradient for CanvasGradient
+pub impl TFillStyle for CanvasGradient
+pub impl TJsValue for CanvasGradient
+pub impl TStrokeStyle for CanvasGradient
+
+pub enum CanvasLineCap {
+  Butt
+  Round
+  Square
+}
+pub fn CanvasLineCap::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasLineCap
+pub impl Eq for CanvasLineCap
+pub impl Show for CanvasLineCap
+
+pub enum CanvasLineJoin {
+  Round
+  Bevel
+  Miter
+}
+pub fn CanvasLineJoin::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasLineJoin
+pub impl Eq for CanvasLineJoin
+pub impl Show for CanvasLineJoin
+
+#external
+pub type CanvasPattern
+pub fn CanvasPattern::is_null(Self) -> Bool
+pub fn CanvasPattern::null() -> Self
+pub impl TCanvasPattern for CanvasPattern
+pub impl TFillStyle for CanvasPattern
+pub impl TJsValue for CanvasPattern
+pub impl TStrokeStyle for CanvasPattern
 
 #external
 pub type CanvasRenderingContext2D
@@ -99,8 +232,44 @@ pub impl TRenderingContext for CanvasRenderingContext2D
 #external
 pub type CanvasRenderingContext2DSettings
 pub fn CanvasRenderingContext2DSettings::empty() -> Self
-pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : JsValue, color_type? : JsValue, will_read_frequently? : Bool) -> Self
+pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : PredefinedColorSpace, color_type? : CanvasColorType, will_read_frequently? : Bool) -> Self
 pub impl TJsValue for CanvasRenderingContext2DSettings
+
+pub enum CanvasTextAlign {
+  Start
+  End
+  Left
+  Right
+  Center
+}
+pub fn CanvasTextAlign::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasTextAlign
+pub impl Eq for CanvasTextAlign
+pub impl Show for CanvasTextAlign
+
+pub enum CanvasTextBaseline {
+  Top
+  Hanging
+  Middle
+  Alphabetic
+  Ideographic
+  Bottom
+}
+pub fn CanvasTextBaseline::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasTextBaseline
+pub impl Eq for CanvasTextBaseline
+pub impl Show for CanvasTextBaseline
+
+pub enum CanvasTextRendering {
+  Auto
+  Optimizespeed
+  Optimizelegibility
+  Geometricprecision
+}
+pub fn CanvasTextRendering::from_js(JsValue) -> Self?
+pub impl TJsValue for CanvasTextRendering
+pub impl Eq for CanvasTextRendering
+pub impl Show for CanvasTextRendering
 
 #external
 pub type CaretPositionFromPointOptions
@@ -129,6 +298,15 @@ pub fn CloseWatcherOptions::empty() -> Self
 pub fn CloseWatcherOptions::new(signal? : AbortSignal) -> Self
 pub impl TJsValue for CloseWatcherOptions
 
+pub enum ColorSpaceConversion {
+  None
+  Default
+}
+pub fn ColorSpaceConversion::from_js(JsValue) -> Self?
+pub impl TJsValue for ColorSpaceConversion
+pub impl Eq for ColorSpaceConversion
+pub impl Show for ColorSpaceConversion
+
 #external
 pub type CommandEventInit
 pub fn CommandEventInit::empty() -> Self
@@ -155,7 +333,7 @@ pub impl TJsValue for CompositionEventInit
 #external
 pub type ConvertCoordinateOptions
 pub fn ConvertCoordinateOptions::empty() -> Self
-pub fn ConvertCoordinateOptions::new(from_box? : JsValue, to_box? : JsValue) -> Self
+pub fn ConvertCoordinateOptions::new(from_box? : CSSBoxType, to_box? : CSSBoxType) -> Self
 pub impl TJsValue for ConvertCoordinateOptions
 
 #external
@@ -212,6 +390,18 @@ pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> Self
 pub fn DOMMatrixReadOnly::null() -> Self
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
 pub impl TJsValue for DOMMatrixReadOnly
+
+pub enum DOMParserSupportedType {
+  TextHtml
+  TextXml
+  ApplicationXml
+  ApplicationXhtmlXml
+  ImageSvgXml
+}
+pub fn DOMParserSupportedType::from_js(JsValue) -> Self?
+pub impl TJsValue for DOMParserSupportedType
+pub impl Eq for DOMParserSupportedType
+pub impl Show for DOMParserSupportedType
 
 #external
 pub type DOMPoint
@@ -296,6 +486,16 @@ pub impl TEventTarget for DocumentFragment
 pub impl TJsValue for DocumentFragment
 pub impl TNode for DocumentFragment
 
+pub enum DocumentReadyState {
+  Loading
+  Interactive
+  Complete
+}
+pub fn DocumentReadyState::from_js(JsValue) -> Self?
+pub impl TJsValue for DocumentReadyState
+pub impl Eq for DocumentReadyState
+pub impl Show for DocumentReadyState
+
 #external
 pub type DocumentType
 pub fn DocumentType::is_null(Self) -> Bool
@@ -304,6 +504,15 @@ pub impl TDocumentType for DocumentType
 pub impl TEventTarget for DocumentType
 pub impl TJsValue for DocumentType
 pub impl TNode for DocumentType
+
+pub enum DocumentVisibilityState {
+  Visible
+  Hidden
+}
+pub fn DocumentVisibilityState::from_js(JsValue) -> Self?
+pub impl TJsValue for DocumentVisibilityState
+pub impl Eq for DocumentVisibilityState
+pub impl Show for DocumentVisibilityState
 
 #external
 pub type DragEventInit
@@ -399,6 +608,12 @@ pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget
 
 #external
+pub type FillStyle
+pub fn[T : TFillStyle] FillStyle::into(Self) -> T
+pub fn FillStyle::is_null(Self) -> Bool
+pub fn FillStyle::null() -> Self
+
+#external
 pub type FocusEvent
 pub fn FocusEvent::is_null(Self) -> Bool
 pub fn FocusEvent::new(String, event_init_dict? : FocusEventInit) -> Self
@@ -488,6 +703,7 @@ pub type HTMLCanvasElement
 pub fn HTMLCanvasElement::is_null(Self) -> Bool
 pub fn HTMLCanvasElement::new() -> Self
 pub fn HTMLCanvasElement::null() -> Self
+pub impl TCanvas for HTMLCanvasElement
 pub impl THTMLCanvasElement for HTMLCanvasElement
 pub impl THTMLElement for HTMLCanvasElement
 pub impl TJsValue for HTMLCanvasElement
@@ -621,6 +837,12 @@ pub fn HashChangeEventInit::new(old_url? : String, new_url? : String) -> Self
 pub impl TJsValue for HashChangeEventInit
 
 #external
+pub type Hidden
+pub fn[T : THidden] Hidden::into(Self) -> T
+pub fn Hidden::is_null(Self) -> Bool
+pub fn Hidden::null() -> Self
+
+#external
 pub type History
 pub fn History::is_null(Self) -> Bool
 pub fn History::null() -> Self
@@ -630,7 +852,7 @@ pub impl TJsValue for History
 #external
 pub type ImageBitmapOptions
 pub fn ImageBitmapOptions::empty() -> Self
-pub fn ImageBitmapOptions::new(image_orientation? : JsValue, premultiply_alpha? : JsValue, color_space_conversion? : JsValue, resize_width? : Int, resize_height? : Int, resize_quality? : JsValue) -> Self
+pub fn ImageBitmapOptions::new(image_orientation? : ImageOrientation, premultiply_alpha? : PremultiplyAlpha, color_space_conversion? : ColorSpaceConversion, resize_width? : Int, resize_height? : Int, resize_quality? : ResizeQuality) -> Self
 pub impl TJsValue for ImageBitmapOptions
 
 #external
@@ -647,10 +869,19 @@ pub fn ImageBitmapRenderingContextSettings::empty() -> Self
 pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
 pub impl TJsValue for ImageBitmapRenderingContextSettings
 
+pub enum ImageDataPixelFormat {
+  RgbaUnorm8
+  RgbaFloat16
+}
+pub fn ImageDataPixelFormat::from_js(JsValue) -> Self?
+pub impl TJsValue for ImageDataPixelFormat
+pub impl Eq for ImageDataPixelFormat
+pub impl Show for ImageDataPixelFormat
+
 #external
 pub type ImageDataSettings
 pub fn ImageDataSettings::empty() -> Self
-pub fn ImageDataSettings::new(color_space? : JsValue, pixel_format? : JsValue) -> Self
+pub fn ImageDataSettings::new(color_space? : PredefinedColorSpace, pixel_format? : ImageDataPixelFormat) -> Self
 pub impl TJsValue for ImageDataSettings
 
 #external
@@ -659,12 +890,37 @@ pub fn ImageEncodeOptions::empty() -> Self
 pub fn ImageEncodeOptions::new(type_? : String, quality? : Double) -> Self
 pub impl TJsValue for ImageEncodeOptions
 
+pub enum ImageOrientation {
+  FromImage
+  Flipy
+}
+pub fn ImageOrientation::from_js(JsValue) -> Self?
+pub impl TJsValue for ImageOrientation
+pub impl Eq for ImageOrientation
+pub impl Show for ImageOrientation
+
+pub enum ImageSmoothingQuality {
+  Low
+  Medium
+  High
+}
+pub fn ImageSmoothingQuality::from_js(JsValue) -> Self?
+pub impl TJsValue for ImageSmoothingQuality
+pub impl Eq for ImageSmoothingQuality
+pub impl Show for ImageSmoothingQuality
+
 #external
 pub type ImportNodeOptions
 pub fn ImportNodeOptions::empty() -> Self
 pub fn ImportNodeOptions::new(custom_element_registry? : JsValue, self_only? : Bool) -> Self
 pub impl TImportNodeOptionsArg for ImportNodeOptions
 pub impl TJsValue for ImportNodeOptions
+
+#external
+pub type InnerHTML
+pub fn[T : TInnerHTML] InnerHTML::into(Self) -> T
+pub fn InnerHTML::is_null(Self) -> Bool
+pub fn InnerHTML::null() -> Self
 
 #external
 pub type InputEvent
@@ -784,6 +1040,45 @@ pub fn NamedNodeMap::null() -> Self
 pub impl TJsValue for NamedNodeMap
 pub impl TNamedNodeMap for NamedNodeMap
 
+pub enum NavigationFocusReset {
+  AfterTransition
+  Manual
+}
+pub fn NavigationFocusReset::from_js(JsValue) -> Self?
+pub impl TJsValue for NavigationFocusReset
+pub impl Eq for NavigationFocusReset
+pub impl Show for NavigationFocusReset
+
+pub enum NavigationHistoryBehavior {
+  Auto
+  Push
+  Replace
+}
+pub fn NavigationHistoryBehavior::from_js(JsValue) -> Self?
+pub impl TJsValue for NavigationHistoryBehavior
+pub impl Eq for NavigationHistoryBehavior
+pub impl Show for NavigationHistoryBehavior
+
+pub enum NavigationScrollBehavior {
+  AfterTransition
+  Manual
+}
+pub fn NavigationScrollBehavior::from_js(JsValue) -> Self?
+pub impl TJsValue for NavigationScrollBehavior
+pub impl Eq for NavigationScrollBehavior
+pub impl Show for NavigationScrollBehavior
+
+pub enum NavigationType {
+  Push
+  Replace
+  Reload
+  Traverse
+}
+pub fn NavigationType::from_js(JsValue) -> Self?
+pub impl TJsValue for NavigationType
+pub impl Eq for NavigationType
+pub impl Show for NavigationType
+
 #external
 pub type Navigator
 pub fn Navigator::is_null(Self) -> Bool
@@ -813,11 +1108,33 @@ pub impl TJsValue for NodeList
 pub impl TNodeList for NodeList
 
 #external
+pub type OffscreenCanvas
+pub fn OffscreenCanvas::is_null(Self) -> Bool
+pub fn OffscreenCanvas::new(Int64, Int64) -> Self
+pub fn OffscreenCanvas::null() -> Self
+pub impl TCanvas for OffscreenCanvas
+pub impl TEventTarget for OffscreenCanvas
+pub impl TJsValue for OffscreenCanvas
+pub impl TOffscreenCanvas for OffscreenCanvas
+
+#external
 pub type OffscreenCanvasRenderingContext2D
 pub fn OffscreenCanvasRenderingContext2D::is_null(Self) -> Bool
 pub fn OffscreenCanvasRenderingContext2D::null() -> Self
 pub impl TJsValue for OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
+
+pub enum OffscreenRenderingContextId {
+  V2d
+  Bitmaprenderer
+  Webgl
+  Webgl2
+  Webgpu
+}
+pub fn OffscreenRenderingContextId::from_js(JsValue) -> Self?
+pub impl TJsValue for OffscreenRenderingContextId
+pub impl Eq for OffscreenRenderingContextId
+pub impl Show for OffscreenRenderingContextId
 
 #external
 pub type OnBeforeUnloadEventHandler
@@ -844,6 +1161,12 @@ pub fn OnErrorEventHandlerNonNull::new((JsValue, String, Int, Int, JsValue) -> J
 pub impl TJsValue for OnErrorEventHandlerNonNull
 
 #external
+pub type OuterHTML
+pub fn[T : TOuterHTML] OuterHTML::into(Self) -> T
+pub fn OuterHTML::is_null(Self) -> Bool
+pub fn OuterHTML::null() -> Self
+
+#external
 pub type PageTransitionEventInit
 pub fn PageTransitionEventInit::empty() -> Self
 pub fn PageTransitionEventInit::new(persisted? : Bool) -> Self
@@ -854,6 +1177,25 @@ pub type PopStateEventInit
 pub fn PopStateEventInit::empty() -> Self
 pub fn PopStateEventInit::new(state? : JsValue, has_ua_visual_transition? : Bool) -> Self
 pub impl TJsValue for PopStateEventInit
+
+pub enum PredefinedColorSpace {
+  Srgb
+  DisplayP3
+}
+pub fn PredefinedColorSpace::from_js(JsValue) -> Self?
+pub impl TJsValue for PredefinedColorSpace
+pub impl Eq for PredefinedColorSpace
+pub impl Show for PredefinedColorSpace
+
+pub enum PremultiplyAlpha {
+  None
+  Premultiply
+  Default
+}
+pub fn PremultiplyAlpha::from_js(JsValue) -> Self?
+pub impl TJsValue for PremultiplyAlpha
+pub impl Eq for PremultiplyAlpha
+pub impl Show for PremultiplyAlpha
 
 #external
 pub type ProcessingInstruction
@@ -885,18 +1227,68 @@ pub fn[T : TRenderingContext] RenderingContext::into(Self) -> T
 pub fn RenderingContext::is_null(Self) -> Bool
 pub fn RenderingContext::null() -> Self
 
+pub enum ResizeQuality {
+  Pixelated
+  Low
+  Medium
+  High
+}
+pub fn ResizeQuality::from_js(JsValue) -> Self?
+pub impl TJsValue for ResizeQuality
+pub impl Eq for ResizeQuality
+pub impl Show for ResizeQuality
+
+pub enum ScrollBehavior {
+  Auto
+  Instant
+  Smooth
+}
+pub fn ScrollBehavior::from_js(JsValue) -> Self?
+pub impl TJsValue for ScrollBehavior
+pub impl Eq for ScrollBehavior
+pub impl Show for ScrollBehavior
+
+pub enum ScrollIntoViewContainer {
+  All
+  Nearest
+}
+pub fn ScrollIntoViewContainer::from_js(JsValue) -> Self?
+pub impl TJsValue for ScrollIntoViewContainer
+pub impl Eq for ScrollIntoViewContainer
+pub impl Show for ScrollIntoViewContainer
+
 #external
 pub type ScrollIntoViewOptions
 pub fn ScrollIntoViewOptions::empty() -> Self
-pub fn ScrollIntoViewOptions::new(block? : JsValue, inline? : JsValue, container? : JsValue) -> Self
+pub fn ScrollIntoViewOptions::new(block? : ScrollLogicalPosition, inline? : ScrollLogicalPosition, container? : ScrollIntoViewContainer) -> Self
 pub impl TJsValue for ScrollIntoViewOptions
 pub impl TScrollIntoViewArgArg for ScrollIntoViewOptions
+
+pub enum ScrollLogicalPosition {
+  Start
+  Center
+  End
+  Nearest
+}
+pub fn ScrollLogicalPosition::from_js(JsValue) -> Self?
+pub impl TJsValue for ScrollLogicalPosition
+pub impl Eq for ScrollLogicalPosition
+pub impl Show for ScrollLogicalPosition
 
 #external
 pub type ScrollOptions
 pub fn ScrollOptions::empty() -> Self
-pub fn ScrollOptions::new(behavior? : JsValue) -> Self
+pub fn ScrollOptions::new(behavior? : ScrollBehavior) -> Self
 pub impl TJsValue for ScrollOptions
+
+pub enum ScrollRestoration {
+  Auto
+  Manual
+}
+pub fn ScrollRestoration::from_js(JsValue) -> Self?
+pub impl TJsValue for ScrollRestoration
+pub impl Eq for ScrollRestoration
+pub impl Show for ScrollRestoration
 
 #external
 pub type ScrollToOptions
@@ -904,17 +1296,46 @@ pub fn ScrollToOptions::empty() -> Self
 pub fn ScrollToOptions::new(left? : Double, top? : Double) -> Self
 pub impl TJsValue for ScrollToOptions
 
+pub enum SelectionMode {
+  Select
+  Start
+  End
+  Preserve
+}
+pub fn SelectionMode::from_js(JsValue) -> Self?
+pub impl TJsValue for SelectionMode
+pub impl Eq for SelectionMode
+pub impl Show for SelectionMode
+
 #external
 pub type ShadowRootInit
 pub fn ShadowRootInit::empty() -> Self
-pub fn ShadowRootInit::new(JsValue, delegates_focus? : Bool, slot_assignment? : JsValue, clonable? : Bool, serializable? : Bool, custom_element_registry? : JsValue) -> Self
+pub fn ShadowRootInit::new(ShadowRootMode, delegates_focus? : Bool, slot_assignment? : SlotAssignmentMode, clonable? : Bool, serializable? : Bool, custom_element_registry? : JsValue) -> Self
 pub impl TJsValue for ShadowRootInit
+
+pub enum ShadowRootMode {
+  Open
+  Closed
+}
+pub fn ShadowRootMode::from_js(JsValue) -> Self?
+pub impl TJsValue for ShadowRootMode
+pub impl Eq for ShadowRootMode
+pub impl Show for ShadowRootMode
 
 #external
 pub type ShowPopoverOptions
 pub fn ShowPopoverOptions::empty() -> Self
 pub fn ShowPopoverOptions::new(source? : HTMLElement) -> Self
 pub impl TJsValue for ShowPopoverOptions
+
+pub enum SlotAssignmentMode {
+  Manual
+  Named
+}
+pub fn SlotAssignmentMode::from_js(JsValue) -> Self?
+pub impl TJsValue for SlotAssignmentMode
+pub impl Eq for SlotAssignmentMode
+pub impl Show for SlotAssignmentMode
 
 #external
 pub type StaticRangeInit
@@ -934,6 +1355,12 @@ pub type StorageEventInit
 pub fn StorageEventInit::empty() -> Self
 pub fn StorageEventInit::new(key? : String, old_value? : String, new_value? : String, url? : String, storage_area? : Storage) -> Self
 pub impl TJsValue for StorageEventInit
+
+#external
+pub type StrokeStyle
+pub fn[T : TStrokeStyle] StrokeStyle::into(Self) -> T
+pub fn StrokeStyle::is_null(Self) -> Bool
+pub fn StrokeStyle::null() -> Self
 
 #external
 pub type StructuredSerializeOptions
@@ -957,6 +1384,28 @@ pub impl TEventTarget for Text
 pub impl TJsValue for Text
 pub impl TNode for Text
 pub impl TText for Text
+
+pub enum TextTrackKind {
+  Subtitles
+  Captions
+  Descriptions
+  Chapters
+  Metadata
+}
+pub fn TextTrackKind::from_js(JsValue) -> Self?
+pub impl TJsValue for TextTrackKind
+pub impl Eq for TextTrackKind
+pub impl Show for TextTrackKind
+
+pub enum TextTrackMode {
+  Disabled
+  Hidden
+  Showing
+}
+pub fn TextTrackMode::from_js(JsValue) -> Self?
+pub impl TJsValue for TextTrackMode
+pub impl Eq for TextTrackMode
+pub impl Show for TextTrackMode
 
 #external
 pub type ToggleEventInit
@@ -1029,8 +1478,17 @@ pub impl TJsValue for WindowPostMessageOptions
 #external
 pub type WorkerOptions
 pub fn WorkerOptions::empty() -> Self
-pub fn WorkerOptions::new(name? : String, type_? : JsValue, credentials? : JsValue) -> Self
+pub fn WorkerOptions::new(name? : String, type_? : WorkerType, credentials? : JsValue) -> Self
 pub impl TJsValue for WorkerOptions
+
+pub enum WorkerType {
+  Classic
+  Module
+}
+pub fn WorkerType::from_js(JsValue) -> Self?
+pub impl TJsValue for WorkerType
+pub impl Eq for WorkerType
+pub impl Show for WorkerType
 
 #external
 pub type WorkletOptions
@@ -1088,6 +1546,18 @@ pub impl TBeforeNodesArg for String
 pub trait TCDATASection : TJsValue + TText {
 }
 
+pub(open) trait TCanvas {
+  to_js(Self) -> JsValue
+}
+
+pub trait TCanvasGradient : TJsValue {
+  add_color_stop(Self, Double, String) -> Unit
+}
+
+pub trait TCanvasPattern : TJsValue {
+  set_transform(Self, transform? : DOMMatrix2DInit) -> Unit
+}
+
 pub trait TCanvasRenderingContext2D : TJsValue {
   canvas(Self) -> HTMLCanvasElement
   global_alpha(Self) -> Double
@@ -1096,12 +1566,12 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   set_global_composite_operation(Self, String) -> Unit
   image_smoothing_enabled(Self) -> Bool
   set_image_smoothing_enabled(Self, Bool) -> Unit
-  image_smoothing_quality(Self) -> JsValue
-  set_image_smoothing_quality(Self, JsValue) -> Unit
-  stroke_style(Self) -> JsValue
-  set_stroke_style(Self, JsValue) -> Unit
-  fill_style(Self) -> JsValue
-  set_fill_style(Self, JsValue) -> Unit
+  image_smoothing_quality(Self) -> ImageSmoothingQuality
+  set_image_smoothing_quality(Self, ImageSmoothingQuality) -> Unit
+  stroke_style(Self) -> StrokeStyle
+  set_stroke_style(Self, &TStrokeStyle) -> Unit
+  fill_style(Self) -> FillStyle
+  set_fill_style(Self, &TFillStyle) -> Unit
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -1114,10 +1584,10 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   set_filter(Self, String) -> Unit
   line_width(Self) -> Double
   set_line_width(Self, Double) -> Unit
-  line_cap(Self) -> JsValue
-  set_line_cap(Self, JsValue) -> Unit
-  line_join(Self) -> JsValue
-  set_line_join(Self, JsValue) -> Unit
+  line_cap(Self) -> CanvasLineCap
+  set_line_cap(Self, CanvasLineCap) -> Unit
+  line_join(Self) -> CanvasLineJoin
+  set_line_join(Self, CanvasLineJoin) -> Unit
   miter_limit(Self) -> Double
   set_miter_limit(Self, Double) -> Unit
   line_dash_offset(Self) -> Double
@@ -1126,22 +1596,22 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   set_lang(Self, String) -> Unit
   font(Self) -> String
   set_font(Self, String) -> Unit
-  text_align(Self) -> JsValue
-  set_text_align(Self, JsValue) -> Unit
-  text_baseline(Self) -> JsValue
-  set_text_baseline(Self, JsValue) -> Unit
-  direction(Self) -> JsValue
-  set_direction(Self, JsValue) -> Unit
+  text_align(Self) -> CanvasTextAlign
+  set_text_align(Self, CanvasTextAlign) -> Unit
+  text_baseline(Self) -> CanvasTextBaseline
+  set_text_baseline(Self, CanvasTextBaseline) -> Unit
+  direction(Self) -> CanvasDirection
+  set_direction(Self, CanvasDirection) -> Unit
   letter_spacing(Self) -> String
   set_letter_spacing(Self, String) -> Unit
-  font_kerning(Self) -> JsValue
-  set_font_kerning(Self, JsValue) -> Unit
-  font_stretch(Self) -> JsValue
-  set_font_stretch(Self, JsValue) -> Unit
-  font_variant_caps(Self) -> JsValue
-  set_font_variant_caps(Self, JsValue) -> Unit
-  text_rendering(Self) -> JsValue
-  set_text_rendering(Self, JsValue) -> Unit
+  font_kerning(Self) -> CanvasFontKerning
+  set_font_kerning(Self, CanvasFontKerning) -> Unit
+  font_stretch(Self) -> CanvasFontStretch
+  set_font_stretch(Self, CanvasFontStretch) -> Unit
+  font_variant_caps(Self) -> CanvasFontVariantCaps
+  set_font_variant_caps(Self, CanvasFontVariantCaps) -> Unit
+  text_rendering(Self) -> CanvasTextRendering
+  set_text_rendering(Self, CanvasTextRendering) -> Unit
   word_spacing(Self) -> String
   set_word_spacing(Self, String) -> Unit
   get_context_attributes(Self) -> CanvasRenderingContext2DSettings
@@ -1157,22 +1627,22 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
   set_transform2(Self, transform? : DOMMatrix2DInit) -> Unit
   reset_transform(Self) -> Unit
-  create_linear_gradient(Self, Double, Double, Double, Double) -> JsValue
-  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> JsValue
-  create_conic_gradient(Self, Double, Double, Double) -> JsValue
-  create_pattern(Self, JsValue, String) -> JsValue?
+  create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
+  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
+  create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
+  create_pattern(Self, JsValue, String) -> CanvasPattern?
   clear_rect(Self, Double, Double, Double, Double) -> Unit
   fill_rect(Self, Double, Double, Double, Double) -> Unit
   stroke_rect(Self, Double, Double, Double, Double) -> Unit
   begin_path(Self) -> Unit
-  fill(Self, fill_rule? : JsValue) -> Unit
-  fill2(Self, JsValue, fill_rule? : JsValue) -> Unit
+  fill(Self, fill_rule? : CanvasFillRule) -> Unit
+  fill2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
   stroke(Self) -> Unit
   stroke2(Self, JsValue) -> Unit
-  clip(Self, fill_rule? : JsValue) -> Unit
-  clip2(Self, JsValue, fill_rule? : JsValue) -> Unit
-  is_point_in_path(Self, Double, Double, fill_rule? : JsValue) -> Bool
-  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : JsValue) -> Bool
+  clip(Self, fill_rule? : CanvasFillRule) -> Unit
+  clip2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
+  is_point_in_path(Self, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : CanvasFillRule) -> Bool
   is_point_in_stroke(Self, Double, Double) -> Bool
   is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
   draw_focus_if_needed(Self, Element) -> Unit
@@ -1415,7 +1885,7 @@ pub trait TDocument : TJsValue {
   cookie(Self) -> String
   set_cookie(Self, String) -> Unit
   last_modified(Self) -> String
-  ready_state(Self) -> JsValue
+  ready_state(Self) -> DocumentReadyState
   title(Self) -> String
   set_title(Self, String) -> Unit
   dir(Self) -> String
@@ -1434,7 +1904,7 @@ pub trait TDocument : TJsValue {
   design_mode(Self) -> String
   set_design_mode(Self, String) -> Unit
   hidden(Self) -> Bool
-  visibility_state(Self) -> JsValue
+  visibility_state(Self) -> DocumentVisibilityState
   onreadystatechange(Self) -> EventHandler
   set_onreadystatechange(Self, EventHandler) -> Unit
   onvisibilitychange(Self) -> EventHandler
@@ -1716,10 +2186,10 @@ pub trait TElement : TJsValue {
   attributes(Self) -> NamedNodeMap
   shadow_root(Self) -> JsValue?
   custom_element_registry(Self) -> JsValue?
-  inner_html(Self) -> JsValue
-  set_inner_html(Self, JsValue) -> Unit
-  outer_html(Self) -> JsValue
-  set_outer_html(Self, JsValue) -> Unit
+  inner_html(Self) -> InnerHTML
+  set_inner_html(Self, &TInnerHTML) -> Unit
+  outer_html(Self) -> OuterHTML
+  set_outer_html(Self, &TOuterHTML) -> Unit
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element?
   last_element_child(Self) -> Element?
@@ -1809,6 +2279,11 @@ pub trait TEventTarget : TJsValue {
   remove_event_listener(Self, String, EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit
   dispatch_event(Self, Event) -> Bool
 }
+
+pub(open) trait TFillStyle {
+  to_js(Self) -> JsValue
+}
+pub impl TFillStyle for String
 
 pub trait TFocusEvent : TJsValue + TUIEvent {
   related_target(Self) -> EventTarget?
@@ -1964,7 +2439,7 @@ pub trait THTMLCanvasElement : TJsValue + THTMLElement {
   get_context(Self, String, options? : JsValue) -> RenderingContext?
   to_data_url(Self, type_? : String, quality? : JsValue) -> String
   to_blob(Self, JsValue, type_? : String, quality? : JsValue) -> Unit
-  transfer_control_to_offscreen(Self) -> JsValue
+  transfer_control_to_offscreen(Self) -> OffscreenCanvas
 }
 
 pub trait THTMLCollection : TJsValue {
@@ -1993,8 +2468,8 @@ pub trait THTMLElement : TJsValue {
   set_translate(Self, Bool) -> Unit
   dir(Self) -> String
   set_dir(Self, String) -> Unit
-  hidden(Self) -> JsValue
-  set_hidden(Self, JsValue) -> Unit
+  hidden(Self) -> Hidden
+  set_hidden(Self, &THidden) -> Unit
   inert(Self) -> Bool
   set_inert(Self, Bool) -> Unit
   access_key(Self) -> String
@@ -2385,7 +2860,7 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_custom_validity(Self, String) -> Unit
   select(Self) -> Unit
   set_range_text(Self, String) -> Unit
-  set_range_text2(Self, String, Int, Int, selection_mode? : JsValue) -> Unit
+  set_range_text2(Self, String, Int, Int, selection_mode? : SelectionMode) -> Unit
   set_selection_range(Self, Int, Int, direction? : String) -> Unit
   show_picker(Self) -> Unit
 }
@@ -2491,10 +2966,17 @@ pub trait THTMLVideoElement : TJsValue {
   set_plays_inline(Self, Bool) -> Unit
 }
 
+pub(open) trait THidden {
+  to_js(Self) -> JsValue
+}
+pub impl THidden for Bool
+pub impl THidden for Double
+pub impl THidden for String
+
 pub trait THistory : TJsValue {
   length(Self) -> Int
-  scroll_restoration(Self) -> JsValue
-  set_scroll_restoration(Self, JsValue) -> Unit
+  scroll_restoration(Self) -> ScrollRestoration
+  set_scroll_restoration(Self, ScrollRestoration) -> Unit
   state(Self) -> JsValue
   go(Self, delta? : Int) -> Unit
   back(Self) -> Unit
@@ -2504,7 +2986,7 @@ pub trait THistory : TJsValue {
 }
 
 pub trait TImageBitmapRenderingContext : TJsValue {
-  canvas(Self) -> JsValue
+  canvas(Self) -> Canvas
   transfer_from_image_bitmap(Self, JsValue) -> Unit
 }
 
@@ -2512,6 +2994,11 @@ pub(open) trait TImportNodeOptionsArg {
   to_js(Self) -> JsValue
 }
 pub impl TImportNodeOptionsArg for Bool
+
+pub(open) trait TInnerHTML {
+  to_js(Self) -> JsValue
+}
+pub impl TInnerHTML for String
 
 pub trait TInputEvent : TJsValue + TUIEvent {
   data(Self) -> String?
@@ -2521,6 +3008,8 @@ pub trait TInputEvent : TJsValue + TUIEvent {
 
 pub trait TJsValue {
   to_js(Self) -> JsValue
+  null() -> Self
+  is_null(Self) -> Bool
 }
 pub impl TJsValue for Bool
 pub impl TJsValue for Int
@@ -2687,20 +3176,34 @@ pub trait TNodeList : TJsValue {
   item(Self, Int) -> Node?
 }
 
+pub trait TOffscreenCanvas : TJsValue + TEventTarget {
+  width(Self) -> Int64
+  set_width(Self, Int64) -> Unit
+  height(Self) -> Int64
+  set_height(Self, Int64) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  get_context(Self, OffscreenRenderingContextId, options? : JsValue) -> JsValue?
+  transfer_to_image_bitmap(Self) -> JsValue
+  convert_to_blob(Self, options? : ImageEncodeOptions) -> JsPromise[JsValue]
+}
+
 pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
-  canvas(Self) -> JsValue
+  canvas(Self) -> OffscreenCanvas
   global_alpha(Self) -> Double
   set_global_alpha(Self, Double) -> Unit
   global_composite_operation(Self) -> String
   set_global_composite_operation(Self, String) -> Unit
   image_smoothing_enabled(Self) -> Bool
   set_image_smoothing_enabled(Self, Bool) -> Unit
-  image_smoothing_quality(Self) -> JsValue
-  set_image_smoothing_quality(Self, JsValue) -> Unit
-  stroke_style(Self) -> JsValue
-  set_stroke_style(Self, JsValue) -> Unit
-  fill_style(Self) -> JsValue
-  set_fill_style(Self, JsValue) -> Unit
+  image_smoothing_quality(Self) -> ImageSmoothingQuality
+  set_image_smoothing_quality(Self, ImageSmoothingQuality) -> Unit
+  stroke_style(Self) -> StrokeStyle
+  set_stroke_style(Self, &TStrokeStyle) -> Unit
+  fill_style(Self) -> FillStyle
+  set_fill_style(Self, &TFillStyle) -> Unit
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -2713,10 +3216,10 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   set_filter(Self, String) -> Unit
   line_width(Self) -> Double
   set_line_width(Self, Double) -> Unit
-  line_cap(Self) -> JsValue
-  set_line_cap(Self, JsValue) -> Unit
-  line_join(Self) -> JsValue
-  set_line_join(Self, JsValue) -> Unit
+  line_cap(Self) -> CanvasLineCap
+  set_line_cap(Self, CanvasLineCap) -> Unit
+  line_join(Self) -> CanvasLineJoin
+  set_line_join(Self, CanvasLineJoin) -> Unit
   miter_limit(Self) -> Double
   set_miter_limit(Self, Double) -> Unit
   line_dash_offset(Self) -> Double
@@ -2725,22 +3228,22 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   set_lang(Self, String) -> Unit
   font(Self) -> String
   set_font(Self, String) -> Unit
-  text_align(Self) -> JsValue
-  set_text_align(Self, JsValue) -> Unit
-  text_baseline(Self) -> JsValue
-  set_text_baseline(Self, JsValue) -> Unit
-  direction(Self) -> JsValue
-  set_direction(Self, JsValue) -> Unit
+  text_align(Self) -> CanvasTextAlign
+  set_text_align(Self, CanvasTextAlign) -> Unit
+  text_baseline(Self) -> CanvasTextBaseline
+  set_text_baseline(Self, CanvasTextBaseline) -> Unit
+  direction(Self) -> CanvasDirection
+  set_direction(Self, CanvasDirection) -> Unit
   letter_spacing(Self) -> String
   set_letter_spacing(Self, String) -> Unit
-  font_kerning(Self) -> JsValue
-  set_font_kerning(Self, JsValue) -> Unit
-  font_stretch(Self) -> JsValue
-  set_font_stretch(Self, JsValue) -> Unit
-  font_variant_caps(Self) -> JsValue
-  set_font_variant_caps(Self, JsValue) -> Unit
-  text_rendering(Self) -> JsValue
-  set_text_rendering(Self, JsValue) -> Unit
+  font_kerning(Self) -> CanvasFontKerning
+  set_font_kerning(Self, CanvasFontKerning) -> Unit
+  font_stretch(Self) -> CanvasFontStretch
+  set_font_stretch(Self, CanvasFontStretch) -> Unit
+  font_variant_caps(Self) -> CanvasFontVariantCaps
+  set_font_variant_caps(Self, CanvasFontVariantCaps) -> Unit
+  text_rendering(Self) -> CanvasTextRendering
+  set_text_rendering(Self, CanvasTextRendering) -> Unit
   word_spacing(Self) -> String
   set_word_spacing(Self, String) -> Unit
   get_context_attributes(Self) -> CanvasRenderingContext2DSettings
@@ -2756,22 +3259,22 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
   set_transform2(Self, transform? : DOMMatrix2DInit) -> Unit
   reset_transform(Self) -> Unit
-  create_linear_gradient(Self, Double, Double, Double, Double) -> JsValue
-  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> JsValue
-  create_conic_gradient(Self, Double, Double, Double) -> JsValue
-  create_pattern(Self, JsValue, String) -> JsValue?
+  create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
+  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
+  create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
+  create_pattern(Self, JsValue, String) -> CanvasPattern?
   clear_rect(Self, Double, Double, Double, Double) -> Unit
   fill_rect(Self, Double, Double, Double, Double) -> Unit
   stroke_rect(Self, Double, Double, Double, Double) -> Unit
   begin_path(Self) -> Unit
-  fill(Self, fill_rule? : JsValue) -> Unit
-  fill2(Self, JsValue, fill_rule? : JsValue) -> Unit
+  fill(Self, fill_rule? : CanvasFillRule) -> Unit
+  fill2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
   stroke(Self) -> Unit
   stroke2(Self, JsValue) -> Unit
-  clip(Self, fill_rule? : JsValue) -> Unit
-  clip2(Self, JsValue, fill_rule? : JsValue) -> Unit
-  is_point_in_path(Self, Double, Double, fill_rule? : JsValue) -> Bool
-  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : JsValue) -> Bool
+  clip(Self, fill_rule? : CanvasFillRule) -> Unit
+  clip2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
+  is_point_in_path(Self, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : CanvasFillRule) -> Bool
   is_point_in_stroke(Self, Double, Double) -> Bool
   is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
@@ -2798,6 +3301,11 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   arc(Self, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
   ellipse(Self, Double, Double, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
 }
+
+pub(open) trait TOuterHTML {
+  to_js(Self) -> JsValue
+}
+pub impl TOuterHTML for String
 
 pub(open) trait TPrependNodesArg {
   to_js(Self) -> JsValue
@@ -2873,6 +3381,11 @@ pub trait TStorage : TJsValue {
   clear(Self) -> Unit
 }
 
+pub(open) trait TStrokeStyle {
+  to_js(Self) -> JsValue
+}
+pub impl TStrokeStyle for String
+
 pub trait TText : TJsValue + TCharacterData {
   whole_text(Self) -> String
   assigned_slot(Self) -> JsValue?
@@ -2918,7 +3431,7 @@ pub trait TWindow : TJsValue {
   outer_width(Self) -> Int
   outer_height(Self) -> Int
   device_pixel_ratio(Self) -> Double
-  event(Self) -> JsValue
+  event(Self) -> Event
   window(Self) -> Window
   self_(Self) -> Window
   document(Self) -> Document
