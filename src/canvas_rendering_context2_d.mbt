@@ -304,8 +304,8 @@ pub trait TCanvasRenderingContext2D: TJsValue {
   ) -> Bool = _
   is_point_in_stroke(self : Self, x : Double, y : Double) -> Bool = _
   is_point_in_stroke2(self : Self, path : JsValue, x : Double, y : Double) -> Bool = _
-  draw_focus_if_needed(self : Self, element : &TElement) -> Unit = _
-  draw_focus_if_needed2(self : Self, path : JsValue, element : &TElement) -> Unit = _
+  draw_focus_if_needed(self : Self, element : Element) -> Unit = _
+  draw_focus_if_needed2(self : Self, path : JsValue, element : Element) -> Unit = _
   fill_text(
     self : Self,
     text : String,
@@ -1006,7 +1006,7 @@ fn canvas_rendering_context2_d_draw_focus_if_needed_ffi(
 ///|
 impl TCanvasRenderingContext2D with draw_focus_if_needed(
   self : Self,
-  element : &TElement,
+  element : Element,
 ) -> Unit {
   canvas_rendering_context2_d_draw_focus_if_needed_ffi(
     TJsValue::to_js(self),
@@ -1025,7 +1025,7 @@ fn canvas_rendering_context2_d_draw_focus_if_needed_ffi2(
 impl TCanvasRenderingContext2D with draw_focus_if_needed2(
   self : Self,
   path : JsValue,
-  element : &TElement,
+  element : Element,
 ) -> Unit {
   canvas_rendering_context2_d_draw_focus_if_needed_ffi2(
     TJsValue::to_js(self),

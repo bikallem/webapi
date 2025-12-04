@@ -36,15 +36,15 @@ pub type DocumentFragment
 ///|
 pub trait TDocumentFragment: TJsValue + TNode {
   children(self : Self) -> HTMLCollection = _
-  first_element_child(self : Self) -> &TElement? = _
-  last_element_child(self : Self) -> &TElement? = _
+  first_element_child(self : Self) -> Element? = _
+  last_element_child(self : Self) -> Element? = _
   child_element_count(self : Self) -> UInt = _
-  get_element_by_id(self : Self, element_id : String) -> &TElement? = _
+  get_element_by_id(self : Self, element_id : String) -> Element? = _
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
   replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
-  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
-  query_selector(self : Self, selectors : String) -> &TElement? = _
+  move_before(self : Self, node : Node, child : Node) -> Unit = _
+  query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
 }
 
@@ -80,7 +80,7 @@ fn document_fragment_get_element_by_id_ffi(
 ) -> JsValue = "webapi_DocumentFragment" "getElementById"
 
 ///|
-impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> &TElement? {
+impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element? {
   document_fragment_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
@@ -125,11 +125,7 @@ fn document_fragment_move_before_ffi(
 ) -> Unit = "webapi_DocumentFragment" "moveBefore"
 
 ///|
-impl TDocumentFragment with move_before(
-  self : Self,
-  node : &TNode,
-  child : &TNode,
-) -> Unit {
+impl TDocumentFragment with move_before(self : Self, node : Node, child : Node) -> Unit {
   document_fragment_move_before_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -144,7 +140,7 @@ fn document_fragment_query_selector_ffi(
 ) -> JsValue = "webapi_DocumentFragment" "querySelector"
 
 ///|
-impl TDocumentFragment with query_selector(self : Self, selectors : String) -> &TElement? {
+impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element? {
   document_fragment_query_selector_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(selectors),
@@ -177,7 +173,7 @@ impl TDocumentFragment with children(self : Self) -> HTMLCollection {
 fn document_fragment_first_element_child_ffi(obj : JsValue) -> JsValue = "webapi_DocumentFragment" "firstElementChild"
 
 ///|
-impl TDocumentFragment with first_element_child(self : Self) -> &TElement? {
+impl TDocumentFragment with first_element_child(self : Self) -> Element? {
   document_fragment_first_element_child_ffi(self.to_js()).as_option()
 }
 
@@ -185,7 +181,7 @@ impl TDocumentFragment with first_element_child(self : Self) -> &TElement? {
 fn document_fragment_last_element_child_ffi(obj : JsValue) -> JsValue = "webapi_DocumentFragment" "lastElementChild"
 
 ///|
-impl TDocumentFragment with last_element_child(self : Self) -> &TElement? {
+impl TDocumentFragment with last_element_child(self : Self) -> Element? {
   document_fragment_last_element_child_ffi(self.to_js()).as_option()
 }
 

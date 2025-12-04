@@ -125,6 +125,10 @@
 // };
 
 ///|
+#external
+pub type Element
+
+///|
 pub trait TElement: TJsValue + TNode {
   scroll_top(self : Self) -> Double = _
   set_scroll_top(self : Self, value : Double) -> Unit = _
@@ -156,11 +160,11 @@ pub trait TElement: TJsValue + TNode {
   outer_html(self : Self) -> OuterHTML = _
   set_outer_html(self : Self, value : &TOuterHTML) -> Unit = _
   children(self : Self) -> HTMLCollection = _
-  first_element_child(self : Self) -> &TElement? = _
-  last_element_child(self : Self) -> &TElement? = _
+  first_element_child(self : Self) -> Element? = _
+  last_element_child(self : Self) -> Element? = _
   child_element_count(self : Self) -> UInt = _
-  previous_element_sibling(self : Self) -> &TElement? = _
-  next_element_sibling(self : Self) -> &TElement? = _
+  previous_element_sibling(self : Self) -> Element? = _
+  next_element_sibling(self : Self) -> Element? = _
   assigned_slot(self : Self) -> HTMLSlotElement? = _
   get_client_rects(self : Self) -> JsValue = _
   get_bounding_client_rect(self : Self) -> JsValue = _
@@ -196,7 +200,7 @@ pub trait TElement: TJsValue + TNode {
   set_attribute_node_ns(self : Self, attr : Attr) -> Attr? = _
   remove_attribute_node(self : Self, attr : Attr) -> Attr = _
   attach_shadow(self : Self, init_ : ShadowRootInit) -> ShadowRoot = _
-  closest(self : Self, selectors : String) -> &TElement? = _
+  closest(self : Self, selectors : String) -> Element? = _
   matches(self : Self, selectors : String) -> Bool = _
   webkit_matches_selector(self : Self, selectors : String) -> Bool = _
   get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection = _
@@ -206,7 +210,7 @@ pub trait TElement: TJsValue + TNode {
     local_name : String,
   ) -> HTMLCollection = _
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
-  insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> &TElement? = _
+  insert_adjacent_element(self : Self, where_ : String, element : Element) -> Element? = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
   set_html_unsafe(self : Self, html : String) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
@@ -233,8 +237,8 @@ pub trait TElement: TJsValue + TNode {
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
   replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
-  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
-  query_selector(self : Self, selectors : String) -> &TElement? = _
+  move_before(self : Self, node : Node, child : Node) -> Unit = _
+  query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   before(self : Self, nodes : &TBeforeNodesArg) -> Unit = _
   after(self : Self, nodes : &TAfterNodesArg) -> Unit = _
@@ -243,7 +247,19 @@ pub trait TElement: TJsValue + TNode {
 }
 
 ///|
-pub fn[T : TElement] &TElement::into(self : &TElement) -> T = "%identity"
+pub fn[T : TElement] Element::into(self : Element) -> T = "%identity"
+
+///|
+pub impl TEventTarget for Element
+
+///|
+pub impl TNode for Element
+
+///|
+pub impl TElement for Element
+
+///|
+pub impl TJsValue for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
 fn element_get_client_rects_ffi(obj : JsValue) -> JsValue = "webapi_Element" "getClientRects"
@@ -630,7 +646,7 @@ impl TElement with attach_shadow(self : Self, init_ : ShadowRootInit) -> ShadowR
 fn element_closest_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Element" "closest"
 
 ///|
-impl TElement with closest(self : Self, selectors : String) -> &TElement? {
+impl TElement with closest(self : Self, selectors : String) -> Element? {
   element_closest_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).as_option()
 }
 
@@ -718,8 +734,8 @@ fn element_insert_adjacent_element_ffi(
 impl TElement with insert_adjacent_element(
   self : Self,
   where_ : String,
-  element : &TElement,
-) -> &TElement? {
+  element : Element,
+) -> Element? {
   element_insert_adjacent_element_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(where_),
@@ -901,7 +917,7 @@ fn element_move_before_ffi(
 ) -> Unit = "webapi_Element" "moveBefore"
 
 ///|
-impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
+impl TElement with move_before(self : Self, node : Node, child : Node) -> Unit {
   element_move_before_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -913,7 +929,7 @@ impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Un
 fn element_query_selector_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Element" "querySelector"
 
 ///|
-impl TElement with query_selector(self : Self, selectors : String) -> &TElement? {
+impl TElement with query_selector(self : Self, selectors : String) -> Element? {
   element_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).as_option()
 }
 
@@ -938,6 +954,9 @@ pub(open) trait TBeforeNodesArg {
 }
 
 ///|
+pub impl TBeforeNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
 pub impl TBeforeNodesArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
@@ -955,6 +974,9 @@ pub(open) trait TAfterNodesArg {
 }
 
 ///|
+pub impl TAfterNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
 pub impl TAfterNodesArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
@@ -970,6 +992,9 @@ impl TElement with after(self : Self, nodes : &TAfterNodesArg) -> Unit {
 pub(open) trait TReplaceWithNodesArg {
   to_js(self : Self) -> JsValue
 }
+
+///|
+pub impl TReplaceWithNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
 pub impl TReplaceWithNodesArg for String with to_js(self : String) -> JsValue = "%identity"
@@ -1234,7 +1259,7 @@ impl TElement with children(self : Self) -> HTMLCollection {
 fn element_first_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Element" "firstElementChild"
 
 ///|
-impl TElement with first_element_child(self : Self) -> &TElement? {
+impl TElement with first_element_child(self : Self) -> Element? {
   element_first_element_child_ffi(self.to_js()).as_option()
 }
 
@@ -1242,7 +1267,7 @@ impl TElement with first_element_child(self : Self) -> &TElement? {
 fn element_last_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Element" "lastElementChild"
 
 ///|
-impl TElement with last_element_child(self : Self) -> &TElement? {
+impl TElement with last_element_child(self : Self) -> Element? {
   element_last_element_child_ffi(self.to_js()).as_option()
 }
 
@@ -1258,7 +1283,7 @@ impl TElement with child_element_count(self : Self) -> UInt {
 fn element_previous_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_Element" "previousElementSibling"
 
 ///|
-impl TElement with previous_element_sibling(self : Self) -> &TElement? {
+impl TElement with previous_element_sibling(self : Self) -> Element? {
   element_previous_element_sibling_ffi(self.to_js()).as_option()
 }
 
@@ -1266,7 +1291,7 @@ impl TElement with previous_element_sibling(self : Self) -> &TElement? {
 fn element_next_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_Element" "nextElementSibling"
 
 ///|
-impl TElement with next_element_sibling(self : Self) -> &TElement? {
+impl TElement with next_element_sibling(self : Self) -> Element? {
   element_next_element_sibling_ffi(self.to_js()).as_option()
 }
 

@@ -28,9 +28,9 @@ fn static_range_init_ffi(
 
 ///|
 pub fn StaticRangeInit::new(
-  start_container : &TNode,
+  start_container : Node,
   start_offset : UInt,
-  end_container : &TNode,
+  end_container : Node,
   end_offset : UInt,
 ) -> StaticRangeInit {
   static_range_init_ffi(

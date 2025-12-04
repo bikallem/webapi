@@ -156,8 +156,8 @@ pub type HTMLElement
 
 ///|
 pub trait THTMLElement: TJsValue + TElement {
-  scroll_parent(self : Self) -> &TElement? = _
-  offset_parent(self : Self) -> &TElement? = _
+  scroll_parent(self : Self) -> Element? = _
+  offset_parent(self : Self) -> Element? = _
   offset_top(self : Self) -> Int = _
   offset_left(self : Self) -> Int = _
   offset_width(self : Self) -> Int = _
@@ -474,7 +474,7 @@ impl THTMLElement with blur(self : Self) -> Unit {
 fn html_element_scroll_parent_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "scrollParent"
 
 ///|
-impl THTMLElement with scroll_parent(self : Self) -> &TElement? {
+impl THTMLElement with scroll_parent(self : Self) -> Element? {
   html_element_scroll_parent_ffi(self.to_js()).as_option()
 }
 
@@ -482,7 +482,7 @@ impl THTMLElement with scroll_parent(self : Self) -> &TElement? {
 fn html_element_offset_parent_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "offsetParent"
 
 ///|
-impl THTMLElement with offset_parent(self : Self) -> &TElement? {
+impl THTMLElement with offset_parent(self : Self) -> Element? {
   html_element_offset_parent_ffi(self.to_js()).as_option()
 }
 

@@ -3,10 +3,7 @@
 fn main {
   // Create mutable counter state using Ref
   let mut count = 0
-  let count_display : HTMLDivElement = document
-    .get_element_by_id("count-display")
-    .unwrap()
-    .into()
+  let count_display = document.get_element_by_id("count-display").unwrap()
 
   // Helper to update display
   let update_display = fn() {
@@ -14,10 +11,7 @@ fn main {
   }
 
   // Increment button
-  let increment_btn : HTMLButtonElement = document
-    .get_element_by_id("increment")
-    .unwrap()
-    .into()
+  let increment_btn = document.get_element_by_id("increment").unwrap()
   increment_btn.add_event_listener(
     "click",
     EventListener::new(fn(_event) {
@@ -27,10 +21,7 @@ fn main {
   )
 
   // Decrement button
-  let decrement_btn : HTMLButtonElement = document
-    .get_element_by_id("decrement")
-    .unwrap()
-    .into()
+  let decrement_btn = document.get_element_by_id("decrement").unwrap()
   decrement_btn.add_event_listener(
     "click",
     event_listener(fn(_event) {

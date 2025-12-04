@@ -347,16 +347,8 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
         };
       }
 
-      // Fully abstract interfaces (no constructor at all) use trait objects
-      if (isAbstractInterface(name)) {
-        return {
-          moonbitType: `&T${name}`,
-          needsConversion: true,
-          isOptional: false,
-        };
-      }
-
-      // Reference to a known interface (concrete or [HTMLConstructor] only)
+      // Reference to a known interface (abstract, concrete or [HTMLConstructor] only)
+      // Abstract interfaces now use external types just like concrete ones
       return {
         moonbitType: name,
         needsConversion: true,

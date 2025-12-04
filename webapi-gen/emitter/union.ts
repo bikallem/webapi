@@ -22,7 +22,7 @@
 
 import type { ParsedType, ParsedIdl } from "../types.js";
 import type { UnionTypeContext } from "../mapping.js";
-import { mapIdlType, registerUnionType, isKnownUnionType, isAbstractInterface } from "../mapping.js";
+import { mapIdlType, registerUnionType, isKnownUnionType } from "../mapping.js";
 import { toSnakeCase } from "../utils.js";
 
 /**
@@ -230,17 +230,16 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
   lines.push("");
 
   // Trait implementations for each member type
-  // Only emit impl for types that exist as concrete types (not fully abstract)
   for (const memberName of unionType.memberNames) {
     // Check if it's a primitive type
     const isPrimitive = memberName === "String" || memberName === "Double" ||
       memberName === "Int" || memberName === "Bool";
 
-    // Check if it's a known interface that's not fully abstract
-    const isConcreteInterface = idl.interfaces.has(memberName) && !isAbstractInterface(memberName);
+    // Check if it's a known interface
+    const isKnownInterface = idl.interfaces.has(memberName);
 
-    // Skip if not primitive and not a concrete interface
-    if (!isPrimitive && !isConcreteInterface) {
+    // Skip if not primitive and not a known interface
+    if (!isPrimitive && !isKnownInterface) {
       continue;
     }
 

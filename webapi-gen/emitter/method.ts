@@ -11,7 +11,7 @@ import {
   toFfiModuleName,
   toTraitName,
 } from "../utils.js";
-import { mapIdlType, formatReturnType, getDefaultValueExpr, isKnownEnum, isAbstractInterface } from "../mapping.js";
+import { mapIdlType, formatReturnType, getDefaultValueExpr, isKnownEnum } from "../mapping.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates
@@ -143,17 +143,8 @@ pub(open) trait ${traitName} {
 }`);
 
   // Emit impl for each filtered member type
-  // Skip fully abstract types (they have no external type)
   for (const memberType of filteredMembers) {
     const moonbitType = getUnionMemberMoonbitType(memberType);
-
-    // Check if this is a fully abstract interface (no external type)
-    if (memberType.type === "reference" && memberType.name) {
-      if (isAbstractInterface(memberType.name)) {
-        // Skip fully abstract types - they have no external type
-        continue;
-      }
-    }
 
     parts.push(`///|
 pub impl ${traitName} for ${moonbitType} with to_js(self : ${moonbitType}) -> JsValue = "%identity"`);

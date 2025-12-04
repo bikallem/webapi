@@ -289,6 +289,14 @@ pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[ShadowRoot]) -> 
 pub impl TJsValue for CaretPositionFromPointOptions
 
 #external
+pub type CharacterData
+pub fn[T : TCharacterData] CharacterData::into(Self) -> T
+pub impl TCharacterData for CharacterData
+pub impl TEventTarget for CharacterData
+pub impl TJsValue for CharacterData
+pub impl TNode for CharacterData
+
+#external
 pub type CheckVisibilityOptions
 pub fn CheckVisibilityOptions::empty() -> Self
 pub fn CheckVisibilityOptions::new(check_opacity? : Bool, check_visibility_css? : Bool, content_visibility_auto? : Bool, opacity_property? : Bool, visibility_property? : Bool) -> Self
@@ -312,7 +320,7 @@ pub impl Show for ColorSpaceConversion
 #external
 pub type CommandEventInit
 pub fn CommandEventInit::empty() -> Self
-pub fn CommandEventInit::new(source? : &TElement, command? : String) -> Self
+pub fn CommandEventInit::new(source? : Element, command? : String) -> Self
 pub impl TJsValue for CommandEventInit
 
 #external
@@ -517,6 +525,15 @@ pub type DragEventInit
 pub fn DragEventInit::empty() -> Self
 pub fn DragEventInit::new(data_transfer? : JsValue) -> Self
 pub impl TJsValue for DragEventInit
+
+#external
+pub type Element
+pub fn[T : TElement] Element::into(Self) -> T
+pub impl TAssignNodesArg for Element
+pub impl TElement for Element
+pub impl TEventTarget for Element
+pub impl TJsValue for Element
+pub impl TNode for Element
 
 #external
 pub type ElementCreationOptions
@@ -1117,6 +1134,19 @@ pub impl TJsValue for Navigator
 pub impl TNavigator for Navigator
 
 #external
+pub type Node
+pub fn[T : TNode] Node::into(Self) -> T
+pub impl TAfterNodesArg for Node
+pub impl TAppendNodesArg for Node
+pub impl TBeforeNodesArg for Node
+pub impl TEventTarget for Node
+pub impl TJsValue for Node
+pub impl TNode for Node
+pub impl TPrependNodesArg for Node
+pub impl TReplaceChildrenNodesArg for Node
+pub impl TReplaceWithNodesArg for Node
+
+#external
 pub type NodeList
 pub impl TJsValue for NodeList
 pub impl TNodeList for NodeList
@@ -1360,7 +1390,7 @@ pub impl Show for SlotAssignmentMode
 #external
 pub type StaticRangeInit
 pub fn StaticRangeInit::empty() -> Self
-pub fn StaticRangeInit::new(&TNode, UInt, &TNode, UInt) -> Self
+pub fn StaticRangeInit::new(Node, UInt, Node, UInt) -> Self
 pub impl TJsValue for StaticRangeInit
 
 #external
@@ -1427,7 +1457,7 @@ pub impl Show for TextTrackMode
 #external
 pub type ToggleEventInit
 pub fn ToggleEventInit::empty() -> Self
-pub fn ToggleEventInit::new(old_state? : String, new_state? : String, source? : &TElement) -> Self
+pub fn ToggleEventInit::new(old_state? : String, new_state? : String, source? : Element) -> Self
 pub impl TJsValue for ToggleEventInit
 
 #external
@@ -1571,7 +1601,7 @@ pub trait TAttr : TJsValue + TNode {
   name(Self) -> String
   value(Self) -> String
   set_value(Self, String) -> Unit
-  owner_element(Self) -> &TElement?
+  owner_element(Self) -> Element?
   specified(Self) -> Bool
 }
 
@@ -1697,8 +1727,8 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : CanvasFillRule) -> Bool
   is_point_in_stroke(Self, Double, Double) -> Bool
   is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
-  draw_focus_if_needed(Self, &TElement) -> Unit
-  draw_focus_if_needed2(Self, JsValue, &TElement) -> Unit
+  draw_focus_if_needed(Self, Element) -> Unit
+  draw_focus_if_needed2(Self, JsValue, Element) -> Unit
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> JsValue
@@ -1728,8 +1758,8 @@ pub trait TCharacterData : TJsValue + TNode {
   data(Self) -> String
   set_data(Self, String) -> Unit
   length(Self) -> UInt
-  previous_element_sibling(Self) -> &TElement?
-  next_element_sibling(Self) -> &TElement?
+  previous_element_sibling(Self) -> Element?
+  next_element_sibling(Self) -> Element?
   substring_data(Self, UInt, UInt) -> String
   append_data(Self, String) -> Unit
   insert_data(Self, UInt, String) -> Unit
@@ -1740,7 +1770,6 @@ pub trait TCharacterData : TJsValue + TNode {
   replace_with(Self, &TReplaceWithNodesArg) -> Unit
   remove(Self) -> Unit
 }
-pub fn[T : TCharacterData] &TCharacterData::into(Self) -> T
 
 pub trait TComment : TJsValue + TCharacterData {
 }
@@ -1921,7 +1950,7 @@ pub trait TDOMTokenList : TJsValue {
 
 pub trait TDocument : TJsValue + TNode {
   root_element(Self) -> JsValue?
-  scrolling_element(Self) -> &TElement?
+  scrolling_element(Self) -> Element?
   implementation(Self) -> JsValue
   url(Self) -> String
   document_uri(Self) -> String
@@ -1931,7 +1960,7 @@ pub trait TDocument : TJsValue + TNode {
   input_encoding(Self) -> String
   content_type(Self) -> String
   doctype(Self) -> DocumentType?
-  document_element(Self) -> &TElement?
+  document_element(Self) -> Element?
   location(Self) -> Location?
   domain(Self) -> String
   set_domain(Self, String) -> Unit
@@ -1980,10 +2009,10 @@ pub trait TDocument : TJsValue + TNode {
   adopted_style_sheets(Self) -> Array[JsValue]
   set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
   custom_element_registry(Self) -> JsValue?
-  active_element(Self) -> &TElement?
+  active_element(Self) -> Element?
   children(Self) -> HTMLCollection
-  first_element_child(Self) -> &TElement?
-  last_element_child(Self) -> &TElement?
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
   child_element_count(Self) -> UInt
   onabort(Self) -> EventHandler
   set_onabort(Self, EventHandler) -> Unit
@@ -2137,27 +2166,27 @@ pub trait TDocument : TJsValue + TNode {
   set_onwebkittransitionend(Self, EventHandler) -> Unit
   onwheel(Self) -> EventHandler
   set_onwheel(Self, EventHandler) -> Unit
-  element_from_point(Self, Double, Double) -> &TElement?
-  elements_from_point(Self, Double, Double) -> Array[&TElement]
+  element_from_point(Self, Double, Double) -> Element?
+  elements_from_point(Self, Double, Double) -> Array[Element]
   caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> JsValue?
   get_elements_by_tag_name(Self, String) -> HTMLCollection
   get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
   get_elements_by_class_name(Self, String) -> HTMLCollection
-  create_element(Self, String, options? : &TCreateElementOptionsArg) -> &TElement
-  create_element_ns(Self, String, String, options? : &TCreateElementNSOptionsArg) -> &TElement
+  create_element(Self, String, options? : &TCreateElementOptionsArg) -> Element
+  create_element_ns(Self, String, String, options? : &TCreateElementNSOptionsArg) -> Element
   create_document_fragment(Self) -> DocumentFragment
   create_text_node(Self, String) -> Text
   create_cdata_section(Self, String) -> CDATASection
   create_comment(Self, String) -> Comment
   create_processing_instruction(Self, String, String) -> ProcessingInstruction
-  import_node(Self, &TNode, options? : &TImportNodeOptionsArg) -> &TNode
-  adopt_node(Self, &TNode) -> &TNode
+  import_node(Self, Node, options? : &TImportNodeOptionsArg) -> Node
+  adopt_node(Self, Node) -> Node
   create_attribute(Self, String) -> Attr
   create_attribute_ns(Self, String, String) -> Attr
   create_event(Self, String) -> Event
   create_range(Self) -> Range
-  create_node_iterator(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
-  create_tree_walker(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_node_iterator(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_tree_walker(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
   get_elements_by_name(Self, String) -> NodeList
   open(Self, unused1? : String, unused2? : String) -> Document
   open2(Self, String, String, String) -> Window?
@@ -2178,29 +2207,29 @@ pub trait TDocument : TJsValue + TNode {
   convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
   convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
   convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
-  get_element_by_id(Self, String) -> &TElement?
+  get_element_by_id(Self, String) -> Element?
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> &TElement?
+  move_before(Self, Node, Node) -> Unit
+  query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   create_expression(Self, String, resolver? : JsValue) -> JsValue
-  create_ns_resolver(Self, &TNode) -> &TNode
-  evaluate(Self, String, &TNode, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
+  create_ns_resolver(Self, Node) -> Node
+  evaluate(Self, String, Node, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
 }
 
 pub trait TDocumentFragment : TJsValue + TNode {
   children(Self) -> HTMLCollection
-  first_element_child(Self) -> &TElement?
-  last_element_child(Self) -> &TElement?
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
   child_element_count(Self) -> UInt
-  get_element_by_id(Self, String) -> &TElement?
+  get_element_by_id(Self, String) -> Element?
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> &TElement?
+  move_before(Self, Node, Node) -> Unit
+  query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
 }
 
@@ -2245,11 +2274,11 @@ pub trait TElement : TJsValue + TNode {
   outer_html(Self) -> OuterHTML
   set_outer_html(Self, &TOuterHTML) -> Unit
   children(Self) -> HTMLCollection
-  first_element_child(Self) -> &TElement?
-  last_element_child(Self) -> &TElement?
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
   child_element_count(Self) -> UInt
-  previous_element_sibling(Self) -> &TElement?
-  next_element_sibling(Self) -> &TElement?
+  previous_element_sibling(Self) -> Element?
+  next_element_sibling(Self) -> Element?
   assigned_slot(Self) -> HTMLSlotElement?
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
@@ -2278,13 +2307,13 @@ pub trait TElement : TJsValue + TNode {
   set_attribute_node_ns(Self, Attr) -> Attr?
   remove_attribute_node(Self, Attr) -> Attr
   attach_shadow(Self, ShadowRootInit) -> ShadowRoot
-  closest(Self, String) -> &TElement?
+  closest(Self, String) -> Element?
   matches(Self, String) -> Bool
   webkit_matches_selector(Self, String) -> Bool
   get_elements_by_tag_name(Self, String) -> HTMLCollection
   get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
   get_elements_by_class_name(Self, String) -> HTMLCollection
-  insert_adjacent_element(Self, String, &TElement) -> &TElement?
+  insert_adjacent_element(Self, String, Element) -> Element?
   insert_adjacent_text(Self, String, String) -> Unit
   set_html_unsafe(Self, String) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
@@ -2296,15 +2325,14 @@ pub trait TElement : TJsValue + TNode {
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> &TElement?
+  move_before(Self, Node, Node) -> Unit
+  query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   before(Self, &TBeforeNodesArg) -> Unit
   after(Self, &TAfterNodesArg) -> Unit
   replace_with(Self, &TReplaceWithNodesArg) -> Unit
   remove(Self) -> Unit
 }
-pub fn[T : TElement] &TElement::into(Self) -> T
 
 pub trait TEvent : TJsValue {
   type_(Self) -> String
@@ -2452,8 +2480,8 @@ pub trait THTMLBodyElement : TJsValue + THTMLElement {
 pub trait THTMLButtonElement : TJsValue + THTMLElement {
   command(Self) -> String
   set_command(Self, String) -> Unit
-  command_for_element(Self) -> &TElement?
-  set_command_for_element(Self, &TElement) -> Unit
+  command_for_element(Self) -> Element?
+  set_command_for_element(Self, Element) -> Unit
   disabled(Self) -> Bool
   set_disabled(Self, Bool) -> Unit
   form(Self) -> HTMLFormElement?
@@ -2477,8 +2505,8 @@ pub trait THTMLButtonElement : TJsValue + THTMLElement {
   validity(Self) -> JsValue
   validation_message(Self) -> String
   labels(Self) -> NodeList
-  popover_target_element(Self) -> &TElement?
-  set_popover_target_element(Self, &TElement) -> Unit
+  popover_target_element(Self) -> Element?
+  set_popover_target_element(Self, Element) -> Unit
   popover_target_action(Self) -> String
   set_popover_target_action(Self, String) -> Unit
   check_validity(Self) -> Bool
@@ -2499,8 +2527,8 @@ pub trait THTMLCanvasElement : TJsValue + THTMLElement {
 
 pub trait THTMLCollection : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> &TElement?
-  named_item(Self, String) -> &TElement?
+  item(Self, UInt) -> Element?
+  named_item(Self, String) -> Element?
 }
 
 pub trait THTMLDivElement : TJsValue + THTMLElement {
@@ -2509,8 +2537,8 @@ pub trait THTMLDivElement : TJsValue + THTMLElement {
 }
 
 pub trait THTMLElement : TJsValue + TElement {
-  scroll_parent(Self) -> &TElement?
-  offset_parent(Self) -> &TElement?
+  scroll_parent(Self) -> Element?
+  offset_parent(Self) -> Element?
   offset_top(Self) -> Int
   offset_left(Self) -> Int
   offset_width(Self) -> Int
@@ -2904,8 +2932,8 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_align(Self, String) -> Unit
   use_map(Self) -> String
   set_use_map(Self, String) -> Unit
-  popover_target_element(Self) -> &TElement?
-  set_popover_target_element(Self, &TElement) -> Unit
+  popover_target_element(Self) -> Element?
+  set_popover_target_element(Self, Element) -> Unit
   popover_target_action(Self) -> String
   set_popover_target_action(Self, String) -> Unit
   step_up(Self, n? : Int) -> Unit
@@ -3002,8 +3030,8 @@ pub trait THTMLScriptElement : TJsValue + THTMLElement {
 pub trait THTMLSlotElement : TJsValue + THTMLElement {
   name(Self) -> String
   set_name(Self, String) -> Unit
-  assigned_nodes(Self, options? : AssignedNodesOptions) -> Array[&TNode]
-  assigned_elements(Self, options? : AssignedNodesOptions) -> Array[&TElement]
+  assigned_nodes(Self, options? : AssignedNodesOptions) -> Array[Node]
+  assigned_elements(Self, options? : AssignedNodesOptions) -> Array[Element]
   assign(Self, &TAssignNodesArg) -> Unit
 }
 
@@ -3173,18 +3201,18 @@ pub trait TMouseEvent : TJsValue + TUIEvent {
 }
 
 pub trait TMutationObserver : TJsValue {
-  observe(Self, &TNode, options? : MutationObserverInit) -> Unit
+  observe(Self, Node, options? : MutationObserverInit) -> Unit
   disconnect(Self) -> Unit
   take_records(Self) -> Array[MutationRecord]
 }
 
 pub trait TMutationRecord : TJsValue {
   type_(Self) -> String
-  target(Self) -> &TNode
+  target(Self) -> Node
   added_nodes(Self) -> NodeList
   removed_nodes(Self) -> NodeList
-  previous_sibling(Self) -> &TNode?
-  next_sibling(Self) -> &TNode?
+  previous_sibling(Self) -> Node?
+  next_sibling(Self) -> Node?
   attribute_name(Self) -> String?
   attribute_namespace(Self) -> String?
   old_value(Self) -> String?
@@ -3233,38 +3261,37 @@ pub trait TNode : TJsValue + TEventTarget {
   base_uri(Self) -> String
   is_connected(Self) -> Bool
   owner_document(Self) -> Document?
-  parent_node(Self) -> &TNode?
-  parent_element(Self) -> &TElement?
+  parent_node(Self) -> Node?
+  parent_element(Self) -> Element?
   child_nodes(Self) -> NodeList
-  first_child(Self) -> &TNode?
-  last_child(Self) -> &TNode?
-  previous_sibling(Self) -> &TNode?
-  next_sibling(Self) -> &TNode?
+  first_child(Self) -> Node?
+  last_child(Self) -> Node?
+  previous_sibling(Self) -> Node?
+  next_sibling(Self) -> Node?
   node_value(Self) -> String?
   set_node_value(Self, String) -> Unit
   text_content(Self) -> String?
   set_text_content(Self, String) -> Unit
-  get_root_node(Self, options? : GetRootNodeOptions) -> &TNode
+  get_root_node(Self, options? : GetRootNodeOptions) -> Node
   has_child_nodes(Self) -> Bool
   normalize(Self) -> Unit
-  clone_node(Self, subtree? : Bool) -> &TNode
-  is_equal_node(Self, &TNode) -> Bool
-  is_same_node(Self, &TNode) -> Bool
-  compare_document_position(Self, &TNode) -> UInt
-  contains(Self, &TNode) -> Bool
+  clone_node(Self, subtree? : Bool) -> Node
+  is_equal_node(Self, Node) -> Bool
+  is_same_node(Self, Node) -> Bool
+  compare_document_position(Self, Node) -> UInt
+  contains(Self, Node) -> Bool
   lookup_prefix(Self, String) -> String?
   lookup_namespace_uri(Self, String) -> String?
   is_default_namespace(Self, String) -> Bool
-  insert_before(Self, &TNode, &TNode) -> &TNode
-  append_child(Self, &TNode) -> &TNode
-  replace_child(Self, &TNode, &TNode) -> &TNode
-  remove_child(Self, &TNode) -> &TNode
+  insert_before(Self, Node, Node) -> Node
+  append_child(Self, Node) -> Node
+  replace_child(Self, Node, Node) -> Node
+  remove_child(Self, Node) -> Node
 }
-pub fn[T : TNode] &TNode::into(Self) -> T
 
 pub trait TNodeList : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> &TNode?
+  item(Self, UInt) -> Node?
 }
 
 pub trait TOffscreenCanvas : TJsValue + TEventTarget {
@@ -3409,29 +3436,29 @@ pub trait TProcessingInstruction : TJsValue + TCharacterData {
 }
 
 pub trait TRange : TJsValue {
-  common_ancestor_container(Self) -> &TNode
+  common_ancestor_container(Self) -> Node
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
-  set_start(Self, &TNode, UInt) -> Unit
-  set_end(Self, &TNode, UInt) -> Unit
-  set_start_before(Self, &TNode) -> Unit
-  set_start_after(Self, &TNode) -> Unit
-  set_end_before(Self, &TNode) -> Unit
-  set_end_after(Self, &TNode) -> Unit
+  set_start(Self, Node, UInt) -> Unit
+  set_end(Self, Node, UInt) -> Unit
+  set_start_before(Self, Node) -> Unit
+  set_start_after(Self, Node) -> Unit
+  set_end_before(Self, Node) -> Unit
+  set_end_after(Self, Node) -> Unit
   collapse(Self, to_start? : Bool) -> Unit
-  select_node(Self, &TNode) -> Unit
-  select_node_contents(Self, &TNode) -> Unit
+  select_node(Self, Node) -> Unit
+  select_node_contents(Self, Node) -> Unit
   compare_boundary_points(Self, UInt, Range) -> Int
   delete_contents(Self) -> Unit
   extract_contents(Self) -> DocumentFragment
   clone_contents(Self) -> DocumentFragment
-  insert_node(Self, &TNode) -> Unit
-  surround_contents(Self, &TNode) -> Unit
+  insert_node(Self, Node) -> Unit
+  surround_contents(Self, Node) -> Unit
   clone_range(Self) -> Range
   detach(Self) -> Unit
-  is_point_in_range(Self, &TNode, UInt) -> Bool
-  compare_point(Self, &TNode, UInt) -> Int
-  intersects_node(Self, &TNode) -> Bool
+  is_point_in_range(Self, Node, UInt) -> Bool
+  compare_point(Self, Node, UInt) -> Int
+  intersects_node(Self, Node) -> Bool
   create_contextual_fragment(Self, String) -> DocumentFragment
 }
 
@@ -3481,7 +3508,7 @@ pub trait TShadowRoot : TJsValue + TDocumentFragment {
   slot_assignment(Self) -> SlotAssignmentMode
   clonable(Self) -> Bool
   serializable(Self) -> Bool
-  host(Self) -> &TElement
+  host(Self) -> Element
   onslotchange(Self) -> EventHandler
   set_onslotchange(Self, EventHandler) -> Unit
   inner_html(Self) -> InnerHTML
@@ -3490,7 +3517,7 @@ pub trait TShadowRoot : TJsValue + TDocumentFragment {
   adopted_style_sheets(Self) -> Array[JsValue]
   set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
   custom_element_registry(Self) -> JsValue?
-  active_element(Self) -> &TElement?
+  active_element(Self) -> Element?
   set_html_unsafe(Self, String) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
 }
@@ -3579,7 +3606,7 @@ pub trait TWindow : TJsValue + TEventTarget {
   opener(Self) -> JsValue
   set_opener(Self, JsValue) -> Unit
   parent(Self) -> Window?
-  frame_element(Self) -> &TElement?
+  frame_element(Self) -> Element?
   navigator(Self) -> Navigator
   client_information(Self) -> Navigator
   origin_agent_cluster(Self) -> Bool
@@ -3788,7 +3815,7 @@ pub trait TWindow : TJsValue + TEventTarget {
   scroll_to2(Self, Double, Double) -> JsPromise[Unit]
   scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
   scroll_by2(Self, Double, Double) -> JsPromise[Unit]
-  get_computed_style(Self, &TElement, pseudo_elt? : JsValue) -> JsValue
+  get_computed_style(Self, Element, pseudo_elt? : JsValue) -> JsValue
   close(Self) -> Unit
   stop(Self) -> Unit
   focus(Self) -> Unit

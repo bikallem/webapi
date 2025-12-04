@@ -47,7 +47,7 @@ pub trait TShadowRoot: TJsValue + TDocumentFragment {
   slot_assignment(self : Self) -> SlotAssignmentMode = _
   clonable(self : Self) -> Bool = _
   serializable(self : Self) -> Bool = _
-  host(self : Self) -> &TElement = _
+  host(self : Self) -> Element = _
   onslotchange(self : Self) -> EventHandler = _
   set_onslotchange(self : Self, value : EventHandler) -> Unit = _
   inner_html(self : Self) -> InnerHTML = _
@@ -56,7 +56,7 @@ pub trait TShadowRoot: TJsValue + TDocumentFragment {
   adopted_style_sheets(self : Self) -> Array[JsValue] = _
   set_adopted_style_sheets(self : Self, value : Array[JsValue]) -> Unit = _
   custom_element_registry(self : Self) -> JsValue? = _
-  active_element(self : Self) -> &TElement? = _
+  active_element(self : Self) -> Element? = _
   set_html_unsafe(self : Self, html : String) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
 }
@@ -139,7 +139,7 @@ impl TShadowRoot with serializable(self : Self) -> Bool {
 fn shadow_root_host_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "host"
 
 ///|
-impl TShadowRoot with host(self : Self) -> &TElement {
+impl TShadowRoot with host(self : Self) -> Element {
   shadow_root_host_ffi(self.to_js()).unsafe_cast()
 }
 
@@ -217,6 +217,6 @@ impl TShadowRoot with custom_element_registry(self : Self) -> JsValue? {
 fn shadow_root_active_element_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "activeElement"
 
 ///|
-impl TShadowRoot with active_element(self : Self) -> &TElement? {
+impl TShadowRoot with active_element(self : Self) -> Element? {
   shadow_root_active_element_ffi(self.to_js()).as_option()
 }

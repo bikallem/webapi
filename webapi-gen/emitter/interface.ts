@@ -253,29 +253,22 @@ export function emitInterface(
     parts.push(`//\n// WebIDL Interface:\n${idlComment}`);
   }
 
-  // External type declaration - NOT for fully abstract types (they use trait objects)
-  if (!fullyAbstract) {
-    parts.push(emitExternalType(iface));
-  }
+  // External type declaration - now generated for all interfaces including abstract ones
+  parts.push(emitExternalType(iface));
 
   // Trait definition - all traits have default implementations (= _)
   parts.push(emitTraitDefinition(iface, idl.interfaces));
 
   // into() method for types with subtypes (enables downcasting)
   const hasSubtypesFlag = hasSubtypes(iface, idl.interfaces);
-  if (fullyAbstract) {
-    // For fully abstract types, generate into() on trait object: &TElement::into
-    parts.push(emitTraitObjectInto(iface));
-  } else if (hasSubtypesFlag) {
-    // For concrete types with subtypes, generate into() on external type: HTMLElement::into
+  if (fullyAbstract || hasSubtypesFlag) {
+    // For types with subtypes (including abstract types), generate into() on external type
     parts.push(emitConcreteTypeInto(iface));
   }
 
-  // Trait implementation and TJsValue - NOT for fully abstract (no external type)
-  if (!fullyAbstract) {
-    parts.push(emitTraitImpl(iface, idl.interfaces));
-    parts.push(emitTJsValueImpl(iface));
-  }
+  // Trait implementation and TJsValue - all interfaces get these now
+  parts.push(emitTraitImpl(iface, idl.interfaces));
+  parts.push(emitTJsValueImpl(iface));
 
   // null() method - only for types with real constructors
   if (isConcrete) {
