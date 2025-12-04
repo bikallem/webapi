@@ -165,6 +165,11 @@ pub impl TDOMMatrix for DOMMatrix
 pub impl TJsValue for DOMMatrix with to_js(self : DOMMatrix) -> JsValue = "%identity"
 
 ///|
+pub fn DOMMatrix::null() -> DOMMatrix {
+  JsValue::null()
+}
+
+///|
 fn dom_matrix_new_ffi(init_ : JsValue) -> DOMMatrix = "webapi_DOMMatrix" "new"
 
 ///|

@@ -80,6 +80,25 @@ const KNOWN_INTERFACES = new Set([
 ]);
 
 /**
+ * Abstract interfaces (no constructor) - these use trait objects &TFoo
+ */
+const ABSTRACT_INTERFACES = new Set<string>();
+
+/**
+ * Register an abstract interface (no real constructor)
+ */
+export function registerAbstractInterface(name: string): void {
+  ABSTRACT_INTERFACES.add(name);
+}
+
+/**
+ * Check if an interface is abstract (uses trait objects)
+ */
+export function isAbstractInterface(name: string): boolean {
+  return ABSTRACT_INTERFACES.has(name);
+}
+
+/**
  * Known dictionaries that have been generated
  */
 const KNOWN_DICTIONARIES = new Set<string>();
@@ -327,7 +346,16 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
         };
       }
 
-      // Reference to a known interface
+      // Fully abstract interfaces (no constructor at all) use trait objects
+      if (isAbstractInterface(name)) {
+        return {
+          moonbitType: `&T${name}`,
+          needsConversion: true,
+          isOptional: false,
+        };
+      }
+
+      // Reference to a known interface (concrete or [HTMLConstructor] only)
       return {
         moonbitType: name,
         needsConversion: true,

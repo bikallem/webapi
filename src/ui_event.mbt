@@ -59,6 +59,11 @@ pub impl TUIEvent for UIEvent
 pub impl TJsValue for UIEvent with to_js(self : UIEvent) -> JsValue = "%identity"
 
 ///|
+pub fn UIEvent::null() -> UIEvent {
+  JsValue::null()
+}
+
+///|
 fn ui_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> UIEvent = "webapi_UIEvent" "new"
 
 ///|

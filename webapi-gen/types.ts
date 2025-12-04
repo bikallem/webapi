@@ -42,6 +42,7 @@ export interface ParsedConstant {
 
 export interface ParsedConstructor {
   params: ParsedParam[];
+  isHTMLConstructor: boolean; // True if marked with [HTMLConstructor]
 }
 
 export interface ParsedInterface {

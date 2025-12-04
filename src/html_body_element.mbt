@@ -116,9 +116,6 @@ pub impl THTMLBodyElement for HTMLBodyElement
 pub impl TJsValue for HTMLBodyElement with to_js(self : HTMLBodyElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLBodyElement::new() -> HTMLBodyElement = "webapi_HTMLBodyElement" "new"
-
-///|
 fn html_body_element_text_ffi(obj : JsValue) -> String = "webapi_HTMLBodyElement" "text"
 
 ///|

@@ -46,9 +46,6 @@ pub impl TJsValue for HTMLParagraphElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLParagraphElement::new() -> HTMLParagraphElement = "webapi_HTMLParagraphElement" "new"
-
-///|
 fn html_paragraph_element_align_ffi(obj : JsValue) -> String = "webapi_HTMLParagraphElement" "align"
 
 ///|

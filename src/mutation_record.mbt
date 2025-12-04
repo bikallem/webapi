@@ -24,11 +24,11 @@ pub type MutationRecord
 ///|
 pub trait TMutationRecord: TJsValue {
   type_(self : Self) -> String = _
-  target(self : Self) -> Node = _
+  target(self : Self) -> &TNode = _
   added_nodes(self : Self) -> NodeList = _
   removed_nodes(self : Self) -> NodeList = _
-  previous_sibling(self : Self) -> Node? = _
-  next_sibling(self : Self) -> Node? = _
+  previous_sibling(self : Self) -> &TNode? = _
+  next_sibling(self : Self) -> &TNode? = _
   attribute_name(self : Self) -> String? = _
   attribute_namespace(self : Self) -> String? = _
   old_value(self : Self) -> String? = _
@@ -52,7 +52,7 @@ impl TMutationRecord with type_(self : Self) -> String {
 fn mutation_record_target_ffi(obj : JsValue) -> JsValue = "webapi_MutationRecord" "target"
 
 ///|
-impl TMutationRecord with target(self : Self) -> Node {
+impl TMutationRecord with target(self : Self) -> &TNode {
   mutation_record_target_ffi(self.to_js()).unsafe_cast()
 }
 
@@ -76,7 +76,7 @@ impl TMutationRecord with removed_nodes(self : Self) -> NodeList {
 fn mutation_record_previous_sibling_ffi(obj : JsValue) -> JsValue = "webapi_MutationRecord" "previousSibling"
 
 ///|
-impl TMutationRecord with previous_sibling(self : Self) -> Node? {
+impl TMutationRecord with previous_sibling(self : Self) -> &TNode? {
   mutation_record_previous_sibling_ffi(self.to_js()).as_option()
 }
 
@@ -84,7 +84,7 @@ impl TMutationRecord with previous_sibling(self : Self) -> Node? {
 fn mutation_record_next_sibling_ffi(obj : JsValue) -> JsValue = "webapi_MutationRecord" "nextSibling"
 
 ///|
-impl TMutationRecord with next_sibling(self : Self) -> Node? {
+impl TMutationRecord with next_sibling(self : Self) -> &TNode? {
   mutation_record_next_sibling_ffi(self.to_js()).as_option()
 }
 

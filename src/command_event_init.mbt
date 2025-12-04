@@ -24,7 +24,7 @@ fn command_event_init_ffi(
 
 ///|
 pub fn CommandEventInit::new(
-  source? : Element = JsValue::null(),
+  source? : &TElement = JsValue::null(),
   command? : String = "",
 ) -> CommandEventInit {
   command_event_init_ffi(TJsValue::to_js(source), TJsValue::to_js(command))

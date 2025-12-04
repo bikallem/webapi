@@ -22,6 +22,3 @@ pub impl THTMLAudioElement for HTMLAudioElement
 
 ///|
 pub impl TJsValue for HTMLAudioElement with to_js(self : HTMLAudioElement) -> JsValue = "%identity"
-
-///|
-pub fn HTMLAudioElement::new() -> HTMLAudioElement = "webapi_HTMLAudioElement" "new"

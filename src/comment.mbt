@@ -32,6 +32,11 @@ pub impl TComment for Comment
 pub impl TJsValue for Comment with to_js(self : Comment) -> JsValue = "%identity"
 
 ///|
+pub fn Comment::null() -> Comment {
+  JsValue::null()
+}
+
+///|
 fn comment_new_ffi(data : JsValue) -> Comment = "webapi_Comment" "new"
 
 ///|

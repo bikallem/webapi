@@ -101,9 +101,6 @@ pub impl THTMLLinkElement for HTMLLinkElement
 pub impl TJsValue for HTMLLinkElement with to_js(self : HTMLLinkElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLLinkElement::new() -> HTMLLinkElement = "webapi_HTMLLinkElement" "new"
-
-///|
 fn html_link_element_href_ffi(obj : JsValue) -> String = "webapi_HTMLLinkElement" "href"
 
 ///|

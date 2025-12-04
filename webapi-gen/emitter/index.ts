@@ -4,7 +4,7 @@
  * Re-exports all emitter functions.
  */
 
-export { emitInterface, getInterfaceFilename } from "./interface.js";
+export { emitInterface, getInterfaceFilename, hasRealConstructor, isFullyAbstract } from "./interface.js";
 export { emitMethods, emitTraitMethods, resetEmittedUnionTraits } from "./method.js";
 export { emitProperties, emitTraitProperties } from "./property.js";
 export { emitConstructors } from "./constructor.js";

@@ -18,7 +18,7 @@ pub type NodeList
 ///|
 pub trait TNodeList: TJsValue {
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> Node? = _
+  item(self : Self, index : UInt) -> &TNode? = _
 }
 
 ///|
@@ -31,7 +31,7 @@ pub impl TJsValue for NodeList with to_js(self : NodeList) -> JsValue = "%identi
 fn node_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_NodeList" "item"
 
 ///|
-impl TNodeList with item(self : Self, index : UInt) -> Node? {
+impl TNodeList with item(self : Self, index : UInt) -> &TNode? {
   node_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).as_option()
 }
 

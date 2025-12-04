@@ -28,7 +28,7 @@ fn toggle_event_init_ffi(
 pub fn ToggleEventInit::new(
   old_state? : String = "",
   new_state? : String = "",
-  source? : Element = JsValue::null(),
+  source? : &TElement = JsValue::null(),
 ) -> ToggleEventInit {
   toggle_event_init_ffi(
     TJsValue::to_js(old_state),

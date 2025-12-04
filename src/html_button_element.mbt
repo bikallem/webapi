@@ -44,8 +44,8 @@ pub type HTMLButtonElement
 pub trait THTMLButtonElement: TJsValue + THTMLElement {
   command(self : Self) -> String = _
   set_command(self : Self, value : String) -> Unit = _
-  command_for_element(self : Self) -> Element? = _
-  set_command_for_element(self : Self, value : Element) -> Unit = _
+  command_for_element(self : Self) -> &TElement? = _
+  set_command_for_element(self : Self, value : &TElement) -> Unit = _
   disabled(self : Self) -> Bool = _
   set_disabled(self : Self, value : Bool) -> Unit = _
   form(self : Self) -> HTMLFormElement? = _
@@ -69,8 +69,8 @@ pub trait THTMLButtonElement: TJsValue + THTMLElement {
   validity(self : Self) -> JsValue = _
   validation_message(self : Self) -> String = _
   labels(self : Self) -> NodeList = _
-  popover_target_element(self : Self) -> Element? = _
-  set_popover_target_element(self : Self, value : Element) -> Unit = _
+  popover_target_element(self : Self) -> &TElement? = _
+  set_popover_target_element(self : Self, value : &TElement) -> Unit = _
   popover_target_action(self : Self) -> String = _
   set_popover_target_action(self : Self, value : String) -> Unit = _
   check_validity(self : Self) -> Bool = _
@@ -95,9 +95,6 @@ pub impl THTMLButtonElement for HTMLButtonElement
 
 ///|
 pub impl TJsValue for HTMLButtonElement with to_js(self : HTMLButtonElement) -> JsValue = "%identity"
-
-///|
-pub fn HTMLButtonElement::new() -> HTMLButtonElement = "webapi_HTMLButtonElement" "new"
 
 ///|
 fn html_button_element_check_validity_ffi(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "checkValidity"
@@ -149,7 +146,7 @@ impl THTMLButtonElement with set_command(self : Self, value : String) -> Unit {
 fn html_button_element_command_for_element_ffi(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "commandForElement"
 
 ///|
-impl THTMLButtonElement with command_for_element(self : Self) -> Element? {
+impl THTMLButtonElement with command_for_element(self : Self) -> &TElement? {
   html_button_element_command_for_element_ffi(self.to_js()).as_option()
 }
 
@@ -162,7 +159,7 @@ fn html_button_element_set_command_for_element_ffi(
 ///|
 impl THTMLButtonElement with set_command_for_element(
   self : Self,
-  value : Element,
+  value : &TElement,
 ) -> Unit {
   html_button_element_set_command_for_element_ffi(
     self.to_js(),
@@ -373,7 +370,7 @@ impl THTMLButtonElement with labels(self : Self) -> NodeList {
 fn html_button_element_popover_target_element_ffi(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "popoverTargetElement"
 
 ///|
-impl THTMLButtonElement with popover_target_element(self : Self) -> Element? {
+impl THTMLButtonElement with popover_target_element(self : Self) -> &TElement? {
   html_button_element_popover_target_element_ffi(self.to_js()).as_option()
 }
 
@@ -386,7 +383,7 @@ fn html_button_element_set_popover_target_element_ffi(
 ///|
 impl THTMLButtonElement with set_popover_target_element(
   self : Self,
-  value : Element,
+  value : &TElement,
 ) -> Unit {
   html_button_element_set_popover_target_element_ffi(
     self.to_js(),

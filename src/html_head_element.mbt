@@ -33,6 +33,3 @@ pub impl THTMLHeadElement for HTMLHeadElement
 
 ///|
 pub impl TJsValue for HTMLHeadElement with to_js(self : HTMLHeadElement) -> JsValue = "%identity"
-
-///|
-pub fn HTMLHeadElement::new() -> HTMLHeadElement = "webapi_HTMLHeadElement" "new"

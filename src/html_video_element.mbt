@@ -41,9 +41,6 @@ pub impl THTMLVideoElement for HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement with to_js(self : HTMLVideoElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLVideoElement::new() -> HTMLVideoElement = "webapi_HTMLVideoElement" "new"
-
-///|
 fn html_video_element_width_ffi(obj : JsValue) -> JsValue = "webapi_HTMLVideoElement" "width"
 
 ///|

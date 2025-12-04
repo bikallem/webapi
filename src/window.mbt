@@ -301,7 +301,7 @@ pub trait TWindow: TJsValue + TEventTarget {
   opener(self : Self) -> JsValue = _
   set_opener(self : Self, value : JsValue) -> Unit = _
   parent(self : Self) -> Window? = _
-  frame_element(self : Self) -> Element? = _
+  frame_element(self : Self) -> &TElement? = _
   navigator(self : Self) -> Navigator = _
   client_information(self : Self) -> Navigator = _
   origin_agent_cluster(self : Self) -> Bool = _
@@ -510,7 +510,7 @@ pub trait TWindow: TJsValue + TEventTarget {
   scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
   scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
-  get_computed_style(self : Self, elt : Element, pseudo_elt? : JsValue) -> JsValue = _
+  get_computed_style(self : Self, elt : &TElement, pseudo_elt? : JsValue) -> JsValue = _
   close(self : Self) -> Unit = _
   stop(self : Self) -> Unit = _
   focus(self : Self) -> Unit = _
@@ -729,7 +729,7 @@ fn window_get_computed_style_ffi(
 ///|
 impl TWindow with get_computed_style(
   self : Self,
-  elt : Element,
+  elt : &TElement,
   pseudo_elt? : JsValue,
 ) -> JsValue {
   let pseudo_elt_js = opt_to_js(pseudo_elt)
@@ -1406,7 +1406,7 @@ impl TWindow with parent(self : Self) -> Window? {
 fn window_frame_element_ffi(obj : JsValue) -> JsValue = "webapi_Window" "frameElement"
 
 ///|
-impl TWindow with frame_element(self : Self) -> Element? {
+impl TWindow with frame_element(self : Self) -> &TElement? {
   window_frame_element_ffi(self.to_js()).as_option()
 }
 

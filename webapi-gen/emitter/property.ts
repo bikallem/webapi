@@ -43,20 +43,25 @@ function formatPropertyReturnType(prop: ParsedProperty): string {
 /**
  * Emit a trait property getter signature (goes in trait definition).
  * Format: methodName(self : Self) -> ReturnType = _
+ * @param prop The property to emit
+ * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitPropertyGetter(prop: ParsedProperty): string {
+export function emitTraitPropertyGetter(prop: ParsedProperty, hasDefaultImpl: boolean = true): string {
   const methodName = escapeKeyword(toSnakeCase(prop.name));
   const returnType = formatPropertyReturnType(prop);
+  const defaultImpl = hasDefaultImpl ? " = _" : "";
 
-  return `  ${methodName}(self : Self) -> ${returnType} = _`;
+  return `  ${methodName}(self : Self) -> ${returnType}${defaultImpl}`;
 }
 
 /**
  * Emit a trait property setter signature (goes in trait definition).
  * Format: set_methodName(self : Self, value : Type) -> Unit = _
  * For union types, use &TUnionType to accept any implementing type
+ * @param prop The property to emit
+ * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitPropertySetter(prop: ParsedProperty): string {
+export function emitTraitPropertySetter(prop: ParsedProperty, hasDefaultImpl: boolean = true): string {
   const methodName = `set_${escapeKeyword(toSnakeCase(prop.name))}`;
   const mapped = mapPropertyType(prop);
   const contextName = getPropertyUnionContextName(prop);
@@ -69,25 +74,28 @@ export function emitTraitPropertySetter(prop: ParsedProperty): string {
     paramType = mapped.moonbitType;
   }
 
-  return `  ${methodName}(self : Self, value : ${paramType}) -> Unit = _`;
+  const defaultImpl = hasDefaultImpl ? " = _" : "";
+  return `  ${methodName}(self : Self, value : ${paramType}) -> Unit${defaultImpl}`;
 }
 
 /**
  * Emit all trait property signatures for an interface.
- * These go directly in the trait definition with = _.
+ * These go directly in the trait definition.
+ * @param iface The interface to emit properties for
+ * @param hasDefaultImpl If true, add `= _` to indicate default implementations exist
  */
-export function emitTraitProperties(iface: ParsedInterface): string[] {
+export function emitTraitProperties(iface: ParsedInterface, hasDefaultImpl: boolean = true): string[] {
   const lines: string[] = [];
 
   for (const prop of iface.properties) {
     if (prop.static) continue; // Skip static, handle separately
 
     // Getter
-    lines.push(emitTraitPropertyGetter(prop));
+    lines.push(emitTraitPropertyGetter(prop, hasDefaultImpl));
 
     // Setter (if not readonly)
     if (!prop.readonly) {
-      lines.push(emitTraitPropertySetter(prop));
+      lines.push(emitTraitPropertySetter(prop, hasDefaultImpl));
     }
   }
 
@@ -223,12 +231,17 @@ impl ${traitName} with ${methodName}(self : Self, value : ${sigParamType}) -> Un
 
 /**
  * Emit all property FFI functions and implementations for an interface.
+ * @param iface The interface to emit properties for
+ * @param isFullyAbstract If true, skip static properties (no external type exists)
  */
-export function emitProperties(iface: ParsedInterface): string {
+export function emitProperties(iface: ParsedInterface, isFullyAbstract: boolean = false): string {
   const parts: string[] = [];
 
   for (const prop of iface.properties) {
     if (prop.static) {
+      // Skip static properties for fully abstract types (no external type to attach to)
+      if (isFullyAbstract) continue;
+
       // Static properties as type methods with direct FFI
       const methodName = escapeKeyword(toSnakeCase(prop.name));
       const mapped = mapPropertyType(prop);
@@ -248,7 +261,7 @@ pub fn ${iface.name}::${methodName}() -> ${ffiReturnType} = "${moduleName}" "sta
 pub fn ${iface.name}::set_${methodName}(value : ${setterParamType}) -> Unit = "${moduleName}" "static_set_${prop.name}"`);
       }
     } else {
-      // Instance properties: FFI + impl
+      // Instance properties: FFI + impl (default implementations for trait)
       parts.push(emitPropertyGetterFfi(iface, prop));
       parts.push(emitPropertyGetterImpl(iface, prop));
 

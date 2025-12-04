@@ -151,13 +151,9 @@
 // };
 
 ///|
-#external
-pub type HTMLElement
-
-///|
 pub trait THTMLElement: TJsValue + TElement {
-  scroll_parent(self : Self) -> Element? = _
-  offset_parent(self : Self) -> Element? = _
+  scroll_parent(self : Self) -> &TElement? = _
+  offset_parent(self : Self) -> &TElement? = _
   offset_top(self : Self) -> Int = _
   offset_left(self : Self) -> Int = _
   offset_width(self : Self) -> Int = _
@@ -374,24 +370,6 @@ pub trait THTMLElement: TJsValue + TElement {
 }
 
 ///|
-pub impl TEventTarget for HTMLElement
-
-///|
-pub impl TNode for HTMLElement
-
-///|
-pub impl TElement for HTMLElement
-
-///|
-pub impl THTMLElement for HTMLElement
-
-///|
-pub impl TJsValue for HTMLElement with to_js(self : HTMLElement) -> JsValue = "%identity"
-
-///|
-pub fn HTMLElement::new() -> HTMLElement = "webapi_HTMLElement" "new"
-
-///|
 fn html_element_click_ffi(obj : JsValue) -> Unit = "webapi_HTMLElement" "click"
 
 ///|
@@ -474,7 +452,7 @@ impl THTMLElement with blur(self : Self) -> Unit {
 fn html_element_scroll_parent_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "scrollParent"
 
 ///|
-impl THTMLElement with scroll_parent(self : Self) -> Element? {
+impl THTMLElement with scroll_parent(self : Self) -> &TElement? {
   html_element_scroll_parent_ffi(self.to_js()).as_option()
 }
 
@@ -482,7 +460,7 @@ impl THTMLElement with scroll_parent(self : Self) -> Element? {
 fn html_element_offset_parent_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "offsetParent"
 
 ///|
-impl THTMLElement with offset_parent(self : Self) -> Element? {
+impl THTMLElement with offset_parent(self : Self) -> &TElement? {
   html_element_offset_parent_ffi(self.to_js()).as_option()
 }
 

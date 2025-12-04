@@ -157,6 +157,11 @@ pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
 pub impl TJsValue for DOMMatrixReadOnly with to_js(self : DOMMatrixReadOnly) -> JsValue = "%identity"
 
 ///|
+pub fn DOMMatrixReadOnly::null() -> DOMMatrixReadOnly {
+  JsValue::null()
+}
+
+///|
 fn dom_matrix_read_only_new_ffi(init_ : JsValue) -> DOMMatrixReadOnly = "webapi_DOMMatrixReadOnly" "new"
 
 ///|

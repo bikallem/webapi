@@ -4,14 +4,14 @@
  * Generates MoonBit FFI functions and trait method signatures for Web IDL methods.
  */
 
-import type { ParsedInterface, ParsedMethod, ParsedType } from "../types.js";
+import type { ParsedInterface, ParsedMethod, ParsedType, ParsedIdl } from "../types.js";
 import {
   toSnakeCase,
   escapeKeyword,
   toFfiModuleName,
   toTraitName,
 } from "../utils.js";
-import { mapIdlType, formatReturnType, getDefaultValueExpr, isKnownEnum } from "../mapping.js";
+import { mapIdlType, formatReturnType, getDefaultValueExpr, isKnownEnum, isAbstractInterface } from "../mapping.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates
@@ -112,8 +112,9 @@ function getCollapsedUnionType(unionType: ParsedType): string | undefined {
 /**
  * Emit union argument trait definition and implementations
  * Returns empty string if union collapses to single type or if already emitted
+ * Skips fully abstract interface types (they have no external type)
  */
-function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType): string {
+function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType, idl: ParsedIdl): string {
   if (unionType.type !== "union" || !unionType.memberTypes) {
     return "";
   }
@@ -142,8 +143,17 @@ pub(open) trait ${traitName} {
 }`);
 
   // Emit impl for each filtered member type
+  // Skip fully abstract types (they have no external type)
   for (const memberType of filteredMembers) {
     const moonbitType = getUnionMemberMoonbitType(memberType);
+    
+    // Check if this is a fully abstract interface (no external type)
+    if (memberType.type === "reference" && memberType.name) {
+      if (isAbstractInterface(memberType.name)) {
+        // Skip fully abstract types - they have no external type
+        continue;
+      }
+    }
 
     parts.push(`///|
 pub impl ${traitName} for ${moonbitType} with to_js(self : ${moonbitType}) -> JsValue = "%identity"`);
@@ -175,10 +185,13 @@ function collectUnionArgs(method: ParsedMethod): Array<{ paramName: string; unio
 }
 
 /**
- * Emit trait method signature with = _
+ * Emit trait method signature
  * All parameters are required (no defaults) because it's a trait signature
+ * @param method The method to emit
+ * @param suffix Optional suffix for overloaded methods
+ * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = ""): string {
+export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = "", hasDefaultImpl: boolean = true): string {
   const methodName = toSnakeCase(method.name) + suffix;
 
   // Build parameter list - self first, then all params with optional wrapped in ?
@@ -224,13 +237,17 @@ export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = 
   const returnType = formatReturnType(method.returnType);
   const paramsStr = params.join(", ");
 
-  return `  ${methodName}(${paramsStr}) -> ${returnType} = _`;
+  // Add = _ when default implementation exists
+  const defaultImpl = hasDefaultImpl ? " = _" : "";
+  return `  ${methodName}(${paramsStr}) -> ${returnType}${defaultImpl}`;
 }
 
 /**
  * Emit all trait method signatures for an interface
+ * @param iface The interface to emit methods for
+ * @param hasDefaultImpl If true, add `= _` to indicate default implementations exist
  */
-export function emitTraitMethods(iface: ParsedInterface): string[] {
+export function emitTraitMethods(iface: ParsedInterface, hasDefaultImpl: boolean = true): string[] {
   const signatures: string[] = [];
   const methodNameCounts: Map<string, number> = new Map();
 
@@ -239,7 +256,7 @@ export function emitTraitMethods(iface: ParsedInterface): string[] {
       const count = methodNameCounts.get(method.name) || 0;
       methodNameCounts.set(method.name, count + 1);
       const suffix = count === 0 ? "" : String(count + 1);
-      signatures.push(emitTraitMethodSignature(method, suffix));
+      signatures.push(emitTraitMethodSignature(method, suffix, hasDefaultImpl));
     }
   }
 
@@ -534,8 +551,11 @@ pub fn ${iface.name}::${methodName}(${wrapperParamsStr}) -> ${returnType} {${bin
 
 /**
  * Emit all FFI functions and method implementations for an interface
+ * @param iface The interface to emit methods for
+ * @param idl The parsed IDL (needed to check for fully abstract types in unions)
+ * @param isFullyAbstract If true, skip static methods (no external type exists)
  */
-export function emitMethods(iface: ParsedInterface): string {
+export function emitMethods(iface: ParsedInterface, idl: ParsedIdl, isFullyAbstract: boolean = false): string {
   const parts: string[] = [];
 
   // Track method name occurrences to handle overloads
@@ -553,7 +573,7 @@ export function emitMethods(iface: ParsedInterface): string {
     if (count === 0) {
       const unionArgs = collectUnionArgs(method);
       for (const { paramName, unionType } of unionArgs) {
-        const unionTrait = emitUnionArgTrait(method.name, paramName, unionType);
+        const unionTrait = emitUnionArgTrait(method.name, paramName, unionType, idl);
         if (unionTrait) {
           parts.push(unionTrait);
         }
@@ -561,9 +581,12 @@ export function emitMethods(iface: ParsedInterface): string {
     }
 
     if (method.static) {
-      parts.push(emitStaticMethod(iface, method, suffix));
+      // Skip static methods for fully abstract types (no external type to attach to)
+      if (!isFullyAbstract) {
+        parts.push(emitStaticMethod(iface, method, suffix));
+      }
     } else {
-      // Instance methods: FFI + impl
+      // Instance methods: FFI + impl (default implementations for trait)
       parts.push(emitMethodFfi(iface, method, suffix));
       parts.push(emitTraitMethodImpl(iface, method, suffix));
     }

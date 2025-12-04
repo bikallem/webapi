@@ -51,6 +51,11 @@ pub impl TBlob for Blob
 pub impl TJsValue for Blob with to_js(self : Blob) -> JsValue = "%identity"
 
 ///|
+pub fn Blob::null() -> Blob {
+  JsValue::null()
+}
+
+///|
 fn blob_new_ffi(blob_parts : JsValue, options : JsValue) -> Blob = "webapi_Blob" "new"
 
 ///|

@@ -29,7 +29,7 @@ pub trait TAttr: TJsValue + TNode {
   name(self : Self) -> String = _
   value(self : Self) -> String = _
   set_value(self : Self, value : String) -> Unit = _
-  owner_element(self : Self) -> Element? = _
+  owner_element(self : Self) -> &TElement? = _
   specified(self : Self) -> Bool = _
 }
 
@@ -97,7 +97,7 @@ impl TAttr with set_value(self : Self, value : String) -> Unit {
 fn attr_owner_element_ffi(obj : JsValue) -> JsValue = "webapi_Attr" "ownerElement"
 
 ///|
-impl TAttr with owner_element(self : Self) -> Element? {
+impl TAttr with owner_element(self : Self) -> &TElement? {
   attr_owner_element_ffi(self.to_js()).as_option()
 }
 

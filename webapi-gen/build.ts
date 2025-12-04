@@ -15,10 +15,12 @@ import { fileURLToPath } from "node:url";
 
 import { parseIdl, mergeIdl, applyMixins } from "./widlprocess.js";
 import type { ParsedIdl } from "./types.js";
-import { registerDictionaries, registerEnums } from "./mapping.js";
+import { registerDictionaries, registerEnums, registerAbstractInterface } from "./mapping.js";
 import {
   emitInterface,
   getInterfaceFilename,
+  hasRealConstructor,
+  isFullyAbstract,
   emitDictionary,
   getDictionaryFilename,
   emitCallback,
@@ -40,6 +42,26 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, "src");
 const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
+
+/**
+ * Abstract base interfaces that are never instantiated directly.
+ * These types use trait objects instead of external types.
+ * Only base classes in an inheritance hierarchy go here.
+ * 
+ * Types like Window/Navigator are NOT abstract - they have instances
+ * (created by the browser), just no user-accessible constructor.
+ * 
+ * Types like Event/EventTarget DO have constructors and are NOT abstract.
+ */
+const ABSTRACT_BASE_INTERFACES = new Set([
+  // Core DOM hierarchy (never used directly, always via subtypes)
+  "Node",
+  "Element", 
+  "CharacterData",
+  
+  // HTML base class (always use specific element types like HTMLDivElement)
+  "HTMLElement",
+]);
 
 /**
  * Core DOM specs to include
@@ -424,6 +446,19 @@ async function build(): Promise<void> {
     // Filter to core interfaces (after mixins are applied)
     console.log("Filtering to core interfaces...");
     mergedIdl = filterToCoreInterfaces(mergedIdl);
+
+    // Register abstract base interfaces from our explicit list
+    // These use trait objects (&TNode, &TElement) instead of external types
+    // This must happen BEFORE type mapping so abstract types use trait objects
+    console.log("Registering abstract base interfaces...");
+    let abstractCount = 0;
+    for (const name of ABSTRACT_BASE_INTERFACES) {
+      if (mergedIdl.interfaces.has(name)) {
+        registerAbstractInterface(name);
+        abstractCount++;
+      }
+    }
+    console.log(`  - ${abstractCount} abstract base interfaces (use trait objects)`);
 
     // Report what we're generating
     console.log(`\nGenerating bindings for:`);

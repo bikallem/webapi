@@ -41,6 +41,11 @@ pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
 
 ///|
+pub fn EventTarget::null() -> EventTarget {
+  JsValue::null()
+}
+
+///|
 pub fn EventTarget::new() -> EventTarget = "webapi_EventTarget" "new"
 
 ///|

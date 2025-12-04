@@ -22,6 +22,7 @@ pub let window : Window
 #external
 pub type AbortController
 pub fn AbortController::new() -> Self
+pub fn AbortController::null() -> Self
 pub impl TAbortController for AbortController
 pub impl TJsValue for AbortController
 
@@ -69,6 +70,7 @@ pub impl TJsValue for BigUint64Array
 #external
 pub type Blob
 pub fn Blob::new(blob_parts? : Array[JsValue], options? : BlobPropertyBag) -> Self
+pub fn Blob::null() -> Self
 pub impl TBlob for Blob
 pub impl TImageBitmapSource for Blob
 pub impl TJsValue for Blob
@@ -292,13 +294,6 @@ pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[ShadowRoot]) -> 
 pub impl TJsValue for CaretPositionFromPointOptions
 
 #external
-pub type CharacterData
-pub impl TCharacterData for CharacterData
-pub impl TEventTarget for CharacterData
-pub impl TJsValue for CharacterData
-pub impl TNode for CharacterData
-
-#external
 pub type CheckVisibilityOptions
 pub fn CheckVisibilityOptions::empty() -> Self
 pub fn CheckVisibilityOptions::new(check_opacity? : Bool, check_visibility_css? : Bool, content_visibility_auto? : Bool, opacity_property? : Bool, visibility_property? : Bool) -> Self
@@ -322,12 +317,13 @@ pub impl Show for ColorSpaceConversion
 #external
 pub type CommandEventInit
 pub fn CommandEventInit::empty() -> Self
-pub fn CommandEventInit::new(source? : Element, command? : String) -> Self
+pub fn CommandEventInit::new(source? : &TElement, command? : String) -> Self
 pub impl TJsValue for CommandEventInit
 
 #external
 pub type Comment
 pub fn Comment::new(data? : String) -> Self
+pub fn Comment::null() -> Self
 pub impl TCharacterData for Comment
 pub impl TComment for Comment
 pub impl TEventTarget for Comment
@@ -348,12 +344,13 @@ pub impl TJsValue for ConvertCoordinateOptions
 
 #external
 pub type CustomElementConstructor
-pub fn CustomElementConstructor::new(() -> HTMLElement) -> Self
+pub fn CustomElementConstructor::new(() -> &THTMLElement) -> Self
 pub impl TJsValue for CustomElementConstructor
 
 #external
 pub type CustomEvent
 pub fn CustomEvent::new(String, event_init_dict? : CustomEventInit) -> Self
+pub fn CustomEvent::null() -> Self
 pub impl TCustomEvent for CustomEvent
 pub impl TEvent for CustomEvent
 pub impl TJsValue for CustomEvent
@@ -370,6 +367,7 @@ pub fn DOMMatrix::from_float32_array(Float32Array) -> JsValue
 pub fn DOMMatrix::from_float64_array(Float64Array) -> JsValue
 pub fn DOMMatrix::from_matrix(other? : DOMMatrixInit) -> JsValue
 pub fn DOMMatrix::new(init_? : JsValue) -> Self
+pub fn DOMMatrix::null() -> Self
 pub impl TDOMMatrix for DOMMatrix
 pub impl TDOMMatrixReadOnly for DOMMatrix
 pub impl TJsValue for DOMMatrix
@@ -392,6 +390,7 @@ pub fn DOMMatrixReadOnly::from_float32_array(Float32Array) -> JsValue
 pub fn DOMMatrixReadOnly::from_float64_array(Float64Array) -> JsValue
 pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit) -> JsValue
 pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> Self
+pub fn DOMMatrixReadOnly::null() -> Self
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
 pub impl TJsValue for DOMMatrixReadOnly
 
@@ -411,6 +410,7 @@ pub impl Show for DOMParserSupportedType
 pub type DOMPoint
 pub fn DOMPoint::from_point(other? : DOMPointInit) -> JsValue
 pub fn DOMPoint::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub fn DOMPoint::null() -> Self
 pub impl TDOMPoint for DOMPoint
 pub impl TDOMPointReadOnly for DOMPoint
 pub impl TJsValue for DOMPoint
@@ -426,6 +426,7 @@ pub impl TRoundRectRadiiArg for DOMPointInit
 pub type DOMPointReadOnly
 pub fn DOMPointReadOnly::from_point(other? : DOMPointInit) -> JsValue
 pub fn DOMPointReadOnly::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub fn DOMPointReadOnly::null() -> Self
 pub impl TDOMPointReadOnly for DOMPointReadOnly
 pub impl TJsValue for DOMPointReadOnly
 
@@ -439,6 +440,7 @@ pub impl TJsValue for DOMQuadInit
 pub type DOMRect
 pub fn DOMRect::from_rect(other? : DOMRectInit) -> JsValue
 pub fn DOMRect::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub fn DOMRect::null() -> Self
 pub impl TDOMRect for DOMRect
 pub impl TDOMRectReadOnly for DOMRect
 pub impl TJsValue for DOMRect
@@ -453,6 +455,7 @@ pub impl TJsValue for DOMRectInit
 pub type DOMRectReadOnly
 pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit) -> JsValue
 pub fn DOMRectReadOnly::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub fn DOMRectReadOnly::null() -> Self
 pub impl TDOMRectReadOnly for DOMRectReadOnly
 pub impl TJsValue for DOMRectReadOnly
 
@@ -468,6 +471,7 @@ pub impl TJsValue for DataView
 #external
 pub type Document
 pub fn Document::new() -> Self
+pub fn Document::null() -> Self
 pub fn Document::parse_html_unsafe(JsValue) -> JsValue
 pub impl TDocument for Document
 pub impl TEventTarget for Document
@@ -477,6 +481,7 @@ pub impl TNode for Document
 #external
 pub type DocumentFragment
 pub fn DocumentFragment::new() -> Self
+pub fn DocumentFragment::null() -> Self
 pub impl TDocumentFragment for DocumentFragment
 pub impl TEventTarget for DocumentFragment
 pub impl TJsValue for DocumentFragment
@@ -515,14 +520,6 @@ pub fn DragEventInit::new(data_transfer? : JsValue) -> Self
 pub impl TJsValue for DragEventInit
 
 #external
-pub type Element
-pub impl TAssignNodesArg for Element
-pub impl TElement for Element
-pub impl TEventTarget for Element
-pub impl TJsValue for Element
-pub impl TNode for Element
-
-#external
 pub type ElementCreationOptions
 pub fn ElementCreationOptions::empty() -> Self
 pub fn ElementCreationOptions::new(custom_element_registry? : JsValue, is_? : String) -> Self
@@ -554,6 +551,7 @@ pub impl TJsValue for ErrorEventInit
 #external
 pub type Event
 pub fn Event::new(String, event_init_dict? : EventInit) -> Self
+pub fn Event::null() -> Self
 pub impl TEvent for Event
 pub impl TJsValue for Event
 
@@ -602,6 +600,7 @@ pub impl TJsValue for EventSourceInit
 #external
 pub type EventTarget
 pub fn EventTarget::new() -> Self
+pub fn EventTarget::null() -> Self
 pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget
 
@@ -626,6 +625,7 @@ pub impl TJsValue for Float64Array
 #external
 pub type FocusEvent
 pub fn FocusEvent::new(String, event_init_dict? : FocusEventInit) -> Self
+pub fn FocusEvent::null() -> Self
 pub impl TEvent for FocusEvent
 pub impl TFocusEvent for FocusEvent
 pub impl TJsValue for FocusEvent
@@ -673,7 +673,6 @@ pub impl TJsValue for GetRootNodeOptions
 
 #external
 pub type HTMLAnchorElement
-pub fn HTMLAnchorElement::new() -> Self
 pub impl TElement for HTMLAnchorElement
 pub impl TEventTarget for HTMLAnchorElement
 pub impl THTMLAnchorElement for HTMLAnchorElement
@@ -683,13 +682,11 @@ pub impl TNode for HTMLAnchorElement
 
 #external
 pub type HTMLAudioElement
-pub fn HTMLAudioElement::new() -> Self
 pub impl THTMLAudioElement for HTMLAudioElement
 pub impl TJsValue for HTMLAudioElement
 
 #external
 pub type HTMLBodyElement
-pub fn HTMLBodyElement::new() -> Self
 pub impl TElement for HTMLBodyElement
 pub impl TEventTarget for HTMLBodyElement
 pub impl THTMLBodyElement for HTMLBodyElement
@@ -699,7 +696,6 @@ pub impl TNode for HTMLBodyElement
 
 #external
 pub type HTMLButtonElement
-pub fn HTMLButtonElement::new() -> Self
 pub impl TElement for HTMLButtonElement
 pub impl TEventTarget for HTMLButtonElement
 pub impl THTMLButtonElement for HTMLButtonElement
@@ -709,7 +705,6 @@ pub impl TNode for HTMLButtonElement
 
 #external
 pub type HTMLCanvasElement
-pub fn HTMLCanvasElement::new() -> Self
 pub impl TCanvas for HTMLCanvasElement
 pub impl TCanvasImageSource for HTMLCanvasElement
 pub impl TElement for HTMLCanvasElement
@@ -726,7 +721,6 @@ pub impl TJsValue for HTMLCollection
 
 #external
 pub type HTMLDivElement
-pub fn HTMLDivElement::new() -> Self
 pub impl TElement for HTMLDivElement
 pub impl TEventTarget for HTMLDivElement
 pub impl THTMLDivElement for HTMLDivElement
@@ -735,17 +729,7 @@ pub impl TJsValue for HTMLDivElement
 pub impl TNode for HTMLDivElement
 
 #external
-pub type HTMLElement
-pub fn HTMLElement::new() -> Self
-pub impl TElement for HTMLElement
-pub impl TEventTarget for HTMLElement
-pub impl THTMLElement for HTMLElement
-pub impl TJsValue for HTMLElement
-pub impl TNode for HTMLElement
-
-#external
 pub type HTMLFormElement
-pub fn HTMLFormElement::new() -> Self
 pub impl TElement for HTMLFormElement
 pub impl TEventTarget for HTMLFormElement
 pub impl THTMLElement for HTMLFormElement
@@ -755,7 +739,6 @@ pub impl TNode for HTMLFormElement
 
 #external
 pub type HTMLHeadElement
-pub fn HTMLHeadElement::new() -> Self
 pub impl TElement for HTMLHeadElement
 pub impl TEventTarget for HTMLHeadElement
 pub impl THTMLElement for HTMLHeadElement
@@ -765,7 +748,6 @@ pub impl TNode for HTMLHeadElement
 
 #external
 pub type HTMLHtmlElement
-pub fn HTMLHtmlElement::new() -> Self
 pub impl TElement for HTMLHtmlElement
 pub impl TEventTarget for HTMLHtmlElement
 pub impl THTMLElement for HTMLHtmlElement
@@ -775,7 +757,6 @@ pub impl TNode for HTMLHtmlElement
 
 #external
 pub type HTMLImageElement
-pub fn HTMLImageElement::new() -> Self
 pub impl TElement for HTMLImageElement
 pub impl TEventTarget for HTMLImageElement
 pub impl THTMLElement for HTMLImageElement
@@ -786,7 +767,6 @@ pub impl TNode for HTMLImageElement
 
 #external
 pub type HTMLInputElement
-pub fn HTMLInputElement::new() -> Self
 pub impl TElement for HTMLInputElement
 pub impl TEventTarget for HTMLInputElement
 pub impl THTMLElement for HTMLInputElement
@@ -796,7 +776,6 @@ pub impl TNode for HTMLInputElement
 
 #external
 pub type HTMLLinkElement
-pub fn HTMLLinkElement::new() -> Self
 pub impl TElement for HTMLLinkElement
 pub impl TEventTarget for HTMLLinkElement
 pub impl THTMLElement for HTMLLinkElement
@@ -811,7 +790,6 @@ pub impl TCanvasImageSource for HTMLOrSVGImageElement
 
 #external
 pub type HTMLParagraphElement
-pub fn HTMLParagraphElement::new() -> Self
 pub impl TElement for HTMLParagraphElement
 pub impl TEventTarget for HTMLParagraphElement
 pub impl THTMLElement for HTMLParagraphElement
@@ -821,7 +799,6 @@ pub impl TNode for HTMLParagraphElement
 
 #external
 pub type HTMLScriptElement
-pub fn HTMLScriptElement::new() -> Self
 pub fn HTMLScriptElement::supports(String) -> JsValue
 pub impl TElement for HTMLScriptElement
 pub impl TEventTarget for HTMLScriptElement
@@ -832,7 +809,6 @@ pub impl TNode for HTMLScriptElement
 
 #external
 pub type HTMLSlotElement
-pub fn HTMLSlotElement::new() -> Self
 pub impl TElement for HTMLSlotElement
 pub impl TEventTarget for HTMLSlotElement
 pub impl THTMLElement for HTMLSlotElement
@@ -842,7 +818,6 @@ pub impl TNode for HTMLSlotElement
 
 #external
 pub type HTMLSpanElement
-pub fn HTMLSpanElement::new() -> Self
 pub impl TElement for HTMLSpanElement
 pub impl TEventTarget for HTMLSpanElement
 pub impl THTMLElement for HTMLSpanElement
@@ -852,7 +827,6 @@ pub impl TNode for HTMLSpanElement
 
 #external
 pub type HTMLStyleElement
-pub fn HTMLStyleElement::new() -> Self
 pub impl TElement for HTMLStyleElement
 pub impl TEventTarget for HTMLStyleElement
 pub impl THTMLElement for HTMLStyleElement
@@ -862,7 +836,6 @@ pub impl TNode for HTMLStyleElement
 
 #external
 pub type HTMLVideoElement
-pub fn HTMLVideoElement::new() -> Self
 pub impl TCanvasImageSource for HTMLVideoElement
 pub impl THTMLVideoElement for HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement
@@ -914,6 +887,7 @@ pub fn[T : TImageBitmapSource] ImageBitmapSource::into(Self) -> T
 pub type ImageData
 pub fn ImageData::new(UInt, UInt, settings? : ImageDataSettings) -> Self
 pub fn ImageData::new2(JsValue, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
+pub fn ImageData::null() -> Self
 pub impl TImageBitmapSource for ImageData
 pub impl TImageData for ImageData
 pub impl TJsValue for ImageData
@@ -972,6 +946,7 @@ pub fn[T : TInnerHTML] InnerHTML::into(Self) -> T
 #external
 pub type InputEvent
 pub fn InputEvent::new(String, event_init_dict? : InputEventInit) -> Self
+pub fn InputEvent::null() -> Self
 pub impl TEvent for InputEvent
 pub impl TInputEvent for InputEvent
 pub impl TJsValue for InputEvent
@@ -1018,6 +993,7 @@ pub impl TRoundRectRadiiArg for JsValue
 #external
 pub type KeyboardEvent
 pub fn KeyboardEvent::new(String, event_init_dict? : KeyboardEventInit) -> Self
+pub fn KeyboardEvent::null() -> Self
 pub impl TEvent for KeyboardEvent
 pub impl TJsValue for KeyboardEvent
 pub impl TKeyboardEvent for KeyboardEvent
@@ -1049,6 +1025,7 @@ pub impl TJsValue for MessageEventInit
 #external
 pub type MouseEvent
 pub fn MouseEvent::new(String, event_init_dict? : MouseEventInit) -> Self
+pub fn MouseEvent::null() -> Self
 pub impl TEvent for MouseEvent
 pub impl TJsValue for MouseEvent
 pub impl TMouseEvent for MouseEvent
@@ -1068,6 +1045,7 @@ pub impl TJsValue for MutationCallback
 #external
 pub type MutationObserver
 pub fn MutationObserver::new(JsValue) -> Self
+pub fn MutationObserver::null() -> Self
 pub impl TJsValue for MutationObserver
 pub impl TMutationObserver for MutationObserver
 
@@ -1132,18 +1110,6 @@ pub impl TJsValue for Navigator
 pub impl TNavigator for Navigator
 
 #external
-pub type Node
-pub impl TAfterNodesArg for Node
-pub impl TAppendNodesArg for Node
-pub impl TBeforeNodesArg for Node
-pub impl TEventTarget for Node
-pub impl TJsValue for Node
-pub impl TNode for Node
-pub impl TPrependNodesArg for Node
-pub impl TReplaceChildrenNodesArg for Node
-pub impl TReplaceWithNodesArg for Node
-
-#external
 pub type NodeList
 pub impl TJsValue for NodeList
 pub impl TNodeList for NodeList
@@ -1151,6 +1117,7 @@ pub impl TNodeList for NodeList
 #external
 pub type OffscreenCanvas
 pub fn OffscreenCanvas::new(UInt64, UInt64) -> Self
+pub fn OffscreenCanvas::null() -> Self
 pub impl TCanvas for OffscreenCanvas
 pub impl TCanvasImageSource for OffscreenCanvas
 pub impl TEventTarget for OffscreenCanvas
@@ -1246,6 +1213,7 @@ pub impl TJsValue for PromiseRejectionEventInit
 #external
 pub type Range
 pub fn Range::new() -> Self
+pub fn Range::null() -> Self
 pub impl TJsValue for Range
 pub impl TRange for Range
 
@@ -1359,7 +1327,7 @@ pub impl Show for ShadowRootMode
 #external
 pub type ShowPopoverOptions
 pub fn ShowPopoverOptions::empty() -> Self
-pub fn ShowPopoverOptions::new(source? : HTMLElement) -> Self
+pub fn ShowPopoverOptions::new(source? : &THTMLElement) -> Self
 pub impl TJsValue for ShowPopoverOptions
 
 pub enum SlotAssignmentMode {
@@ -1374,7 +1342,7 @@ pub impl Show for SlotAssignmentMode
 #external
 pub type StaticRangeInit
 pub fn StaticRangeInit::empty() -> Self
-pub fn StaticRangeInit::new(Node, UInt, Node, UInt) -> Self
+pub fn StaticRangeInit::new(&TNode, UInt, &TNode, UInt) -> Self
 pub impl TJsValue for StaticRangeInit
 
 #external
@@ -1401,12 +1369,13 @@ pub impl TJsValue for StructuredSerializeOptions
 #external
 pub type SubmitEventInit
 pub fn SubmitEventInit::empty() -> Self
-pub fn SubmitEventInit::new(submitter? : HTMLElement) -> Self
+pub fn SubmitEventInit::new(submitter? : &THTMLElement) -> Self
 pub impl TJsValue for SubmitEventInit
 
 #external
 pub type Text
 pub fn Text::new(data? : String) -> Self
+pub fn Text::null() -> Self
 pub impl TAssignNodesArg for Text
 pub impl TCharacterData for Text
 pub impl TEventTarget for Text
@@ -1439,7 +1408,7 @@ pub impl Show for TextTrackMode
 #external
 pub type ToggleEventInit
 pub fn ToggleEventInit::empty() -> Self
-pub fn ToggleEventInit::new(old_state? : String, new_state? : String, source? : Element) -> Self
+pub fn ToggleEventInit::new(old_state? : String, new_state? : String, source? : &TElement) -> Self
 pub impl TJsValue for ToggleEventInit
 
 #external
@@ -1458,6 +1427,7 @@ pub impl TJsValue for TrackEventInit
 #external
 pub type UIEvent
 pub fn UIEvent::new(String, event_init_dict? : UIEventInit) -> Self
+pub fn UIEvent::null() -> Self
 pub impl TEvent for UIEvent
 pub impl TJsValue for UIEvent
 pub impl TUIEvent for UIEvent
@@ -1493,6 +1463,7 @@ pub impl TJsValue for ValidityStateFlags
 #external
 pub type WheelEvent
 pub fn WheelEvent::new(String, event_init_dict? : WheelEventInit) -> Self
+pub fn WheelEvent::null() -> Self
 pub impl TEvent for WheelEvent
 pub impl TJsValue for WheelEvent
 pub impl TMouseEvent for WheelEvent
@@ -1580,7 +1551,7 @@ pub trait TAttr : TJsValue + TNode {
   name(Self) -> String
   value(Self) -> String
   set_value(Self, String) -> Unit
-  owner_element(Self) -> Element?
+  owner_element(Self) -> &TElement?
   specified(Self) -> Bool
 }
 
@@ -1705,8 +1676,8 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : CanvasFillRule) -> Bool
   is_point_in_stroke(Self, Double, Double) -> Bool
   is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
-  draw_focus_if_needed(Self, Element) -> Unit
-  draw_focus_if_needed2(Self, JsValue, Element) -> Unit
+  draw_focus_if_needed(Self, &TElement) -> Unit
+  draw_focus_if_needed2(Self, JsValue, &TElement) -> Unit
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> JsValue
@@ -1736,8 +1707,8 @@ pub trait TCharacterData : TJsValue + TNode {
   data(Self) -> String
   set_data(Self, String) -> Unit
   length(Self) -> UInt
-  previous_element_sibling(Self) -> Element?
-  next_element_sibling(Self) -> Element?
+  previous_element_sibling(Self) -> &TElement?
+  next_element_sibling(Self) -> &TElement?
   substring_data(Self, UInt, UInt) -> String
   append_data(Self, String) -> Unit
   insert_data(Self, UInt, String) -> Unit
@@ -1927,7 +1898,7 @@ pub trait TDOMTokenList : TJsValue {
 }
 
 pub trait TDocument : TJsValue + TNode {
-  scrolling_element(Self) -> Element?
+  scrolling_element(Self) -> &TElement?
   implementation(Self) -> JsValue
   url(Self) -> String
   document_uri(Self) -> String
@@ -1937,7 +1908,7 @@ pub trait TDocument : TJsValue + TNode {
   input_encoding(Self) -> String
   content_type(Self) -> String
   doctype(Self) -> DocumentType?
-  document_element(Self) -> Element?
+  document_element(Self) -> &TElement?
   location(Self) -> Location?
   domain(Self) -> String
   set_domain(Self, String) -> Unit
@@ -1950,8 +1921,8 @@ pub trait TDocument : TJsValue + TNode {
   set_title(Self, String) -> Unit
   dir(Self) -> String
   set_dir(Self, String) -> Unit
-  body(Self) -> HTMLElement?
-  set_body(Self, HTMLElement) -> Unit
+  body(Self) -> &THTMLElement?
+  set_body(Self, &THTMLElement) -> Unit
   head(Self) -> HTMLHeadElement?
   images(Self) -> HTMLCollection
   embeds(Self) -> HTMLCollection
@@ -1986,10 +1957,10 @@ pub trait TDocument : TJsValue + TNode {
   adopted_style_sheets(Self) -> Array[JsValue]
   set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
   custom_element_registry(Self) -> JsValue?
-  active_element(Self) -> Element?
+  active_element(Self) -> &TElement?
   children(Self) -> HTMLCollection
-  first_element_child(Self) -> Element?
-  last_element_child(Self) -> Element?
+  first_element_child(Self) -> &TElement?
+  last_element_child(Self) -> &TElement?
   child_element_count(Self) -> UInt
   onabort(Self) -> EventHandler
   set_onabort(Self, EventHandler) -> Unit
@@ -2143,27 +2114,27 @@ pub trait TDocument : TJsValue + TNode {
   set_onwebkittransitionend(Self, EventHandler) -> Unit
   onwheel(Self) -> EventHandler
   set_onwheel(Self, EventHandler) -> Unit
-  element_from_point(Self, Double, Double) -> Element?
-  elements_from_point(Self, Double, Double) -> Array[Element]
+  element_from_point(Self, Double, Double) -> &TElement?
+  elements_from_point(Self, Double, Double) -> Array[&TElement]
   caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> JsValue?
   get_elements_by_tag_name(Self, String) -> HTMLCollection
   get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
   get_elements_by_class_name(Self, String) -> HTMLCollection
-  create_element(Self, String, options? : &TCreateElementOptionsArg) -> Element
-  create_element_ns(Self, String, String, options? : &TCreateElementNSOptionsArg) -> Element
+  create_element(Self, String, options? : &TCreateElementOptionsArg) -> &TElement
+  create_element_ns(Self, String, String, options? : &TCreateElementNSOptionsArg) -> &TElement
   create_document_fragment(Self) -> DocumentFragment
   create_text_node(Self, String) -> Text
   create_cdata_section(Self, String) -> CDATASection
   create_comment(Self, String) -> Comment
   create_processing_instruction(Self, String, String) -> ProcessingInstruction
-  import_node(Self, Node, options? : &TImportNodeOptionsArg) -> Node
-  adopt_node(Self, Node) -> Node
+  import_node(Self, &TNode, options? : &TImportNodeOptionsArg) -> &TNode
+  adopt_node(Self, &TNode) -> &TNode
   create_attribute(Self, String) -> Attr
   create_attribute_ns(Self, String, String) -> Attr
   create_event(Self, String) -> Event
   create_range(Self) -> Range
-  create_node_iterator(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
-  create_tree_walker(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_node_iterator(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_tree_walker(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
   get_elements_by_name(Self, String) -> NodeList
   open(Self, unused1? : String, unused2? : String) -> Document
   open2(Self, String, String, String) -> Window?
@@ -2184,29 +2155,29 @@ pub trait TDocument : TJsValue + TNode {
   convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
   convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
   convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
-  get_element_by_id(Self, String) -> Element?
+  get_element_by_id(Self, String) -> &TElement?
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, Node, Node) -> Unit
-  query_selector(Self, String) -> Element?
+  move_before(Self, &TNode, &TNode) -> Unit
+  query_selector(Self, String) -> &TElement?
   query_selector_all(Self, String) -> NodeList
   create_expression(Self, String, resolver? : JsValue) -> JsValue
-  create_ns_resolver(Self, Node) -> Node
-  evaluate(Self, String, Node, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
+  create_ns_resolver(Self, &TNode) -> &TNode
+  evaluate(Self, String, &TNode, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
 }
 
 pub trait TDocumentFragment : TJsValue + TNode {
   children(Self) -> HTMLCollection
-  first_element_child(Self) -> Element?
-  last_element_child(Self) -> Element?
+  first_element_child(Self) -> &TElement?
+  last_element_child(Self) -> &TElement?
   child_element_count(Self) -> UInt
-  get_element_by_id(Self, String) -> Element?
+  get_element_by_id(Self, String) -> &TElement?
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, Node, Node) -> Unit
-  query_selector(Self, String) -> Element?
+  move_before(Self, &TNode, &TNode) -> Unit
+  query_selector(Self, String) -> &TElement?
   query_selector_all(Self, String) -> NodeList
 }
 
@@ -2251,11 +2222,11 @@ pub trait TElement : TJsValue + TNode {
   outer_html(Self) -> OuterHTML
   set_outer_html(Self, &TOuterHTML) -> Unit
   children(Self) -> HTMLCollection
-  first_element_child(Self) -> Element?
-  last_element_child(Self) -> Element?
+  first_element_child(Self) -> &TElement?
+  last_element_child(Self) -> &TElement?
   child_element_count(Self) -> UInt
-  previous_element_sibling(Self) -> Element?
-  next_element_sibling(Self) -> Element?
+  previous_element_sibling(Self) -> &TElement?
+  next_element_sibling(Self) -> &TElement?
   assigned_slot(Self) -> HTMLSlotElement?
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
@@ -2284,13 +2255,13 @@ pub trait TElement : TJsValue + TNode {
   set_attribute_node_ns(Self, Attr) -> Attr?
   remove_attribute_node(Self, Attr) -> Attr
   attach_shadow(Self, ShadowRootInit) -> ShadowRoot
-  closest(Self, String) -> Element?
+  closest(Self, String) -> &TElement?
   matches(Self, String) -> Bool
   webkit_matches_selector(Self, String) -> Bool
   get_elements_by_tag_name(Self, String) -> HTMLCollection
   get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
   get_elements_by_class_name(Self, String) -> HTMLCollection
-  insert_adjacent_element(Self, String, Element) -> Element?
+  insert_adjacent_element(Self, String, &TElement) -> &TElement?
   insert_adjacent_text(Self, String, String) -> Unit
   set_html_unsafe(Self, String) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
@@ -2302,8 +2273,8 @@ pub trait TElement : TJsValue + TNode {
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, Node, Node) -> Unit
-  query_selector(Self, String) -> Element?
+  move_before(Self, &TNode, &TNode) -> Unit
+  query_selector(Self, String) -> &TElement?
   query_selector_all(Self, String) -> NodeList
   before(Self, &TBeforeNodesArg) -> Unit
   after(Self, &TAfterNodesArg) -> Unit
@@ -2457,8 +2428,8 @@ pub trait THTMLBodyElement : TJsValue + THTMLElement {
 pub trait THTMLButtonElement : TJsValue + THTMLElement {
   command(Self) -> String
   set_command(Self, String) -> Unit
-  command_for_element(Self) -> Element?
-  set_command_for_element(Self, Element) -> Unit
+  command_for_element(Self) -> &TElement?
+  set_command_for_element(Self, &TElement) -> Unit
   disabled(Self) -> Bool
   set_disabled(Self, Bool) -> Unit
   form(Self) -> HTMLFormElement?
@@ -2482,8 +2453,8 @@ pub trait THTMLButtonElement : TJsValue + THTMLElement {
   validity(Self) -> JsValue
   validation_message(Self) -> String
   labels(Self) -> NodeList
-  popover_target_element(Self) -> Element?
-  set_popover_target_element(Self, Element) -> Unit
+  popover_target_element(Self) -> &TElement?
+  set_popover_target_element(Self, &TElement) -> Unit
   popover_target_action(Self) -> String
   set_popover_target_action(Self, String) -> Unit
   check_validity(Self) -> Bool
@@ -2504,8 +2475,8 @@ pub trait THTMLCanvasElement : TJsValue + THTMLElement {
 
 pub trait THTMLCollection : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> Element?
-  named_item(Self, String) -> Element?
+  item(Self, UInt) -> &TElement?
+  named_item(Self, String) -> &TElement?
 }
 
 pub trait THTMLDivElement : TJsValue + THTMLElement {
@@ -2514,8 +2485,8 @@ pub trait THTMLDivElement : TJsValue + THTMLElement {
 }
 
 pub trait THTMLElement : TJsValue + TElement {
-  scroll_parent(Self) -> Element?
-  offset_parent(Self) -> Element?
+  scroll_parent(Self) -> &TElement?
+  offset_parent(Self) -> &TElement?
   offset_top(Self) -> Int
   offset_left(Self) -> Int
   offset_width(Self) -> Int
@@ -2756,7 +2727,7 @@ pub trait THTMLFormElement : TJsValue + THTMLElement {
   elements(Self) -> JsValue
   length(Self) -> UInt
   submit(Self) -> Unit
-  request_submit(Self, submitter? : HTMLElement) -> Unit
+  request_submit(Self, submitter? : &THTMLElement) -> Unit
   reset(Self) -> Unit
   check_validity(Self) -> Bool
   report_validity(Self) -> Bool
@@ -2909,8 +2880,8 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_align(Self, String) -> Unit
   use_map(Self) -> String
   set_use_map(Self, String) -> Unit
-  popover_target_element(Self) -> Element?
-  set_popover_target_element(Self, Element) -> Unit
+  popover_target_element(Self) -> &TElement?
+  set_popover_target_element(Self, &TElement) -> Unit
   popover_target_action(Self) -> String
   set_popover_target_action(Self, String) -> Unit
   step_up(Self, n? : Int) -> Unit
@@ -3006,8 +2977,8 @@ pub trait THTMLScriptElement : TJsValue + THTMLElement {
 pub trait THTMLSlotElement : TJsValue + THTMLElement {
   name(Self) -> String
   set_name(Self, String) -> Unit
-  assigned_nodes(Self, options? : AssignedNodesOptions) -> Array[Node]
-  assigned_elements(Self, options? : AssignedNodesOptions) -> Array[Element]
+  assigned_nodes(Self, options? : AssignedNodesOptions) -> Array[&TNode]
+  assigned_elements(Self, options? : AssignedNodesOptions) -> Array[&TElement]
   assign(Self, &TAssignNodesArg) -> Unit
 }
 
@@ -3098,7 +3069,6 @@ pub trait TInputEvent : TJsValue + TUIEvent {
 
 pub trait TJsValue {
   to_js(Self) -> JsValue
-  null() -> Self
   is_null(Self) -> Bool
 }
 pub impl TJsValue for Bool
@@ -3177,18 +3147,18 @@ pub trait TMouseEvent : TJsValue + TUIEvent {
 }
 
 pub trait TMutationObserver : TJsValue {
-  observe(Self, Node, options? : MutationObserverInit) -> Unit
+  observe(Self, &TNode, options? : MutationObserverInit) -> Unit
   disconnect(Self) -> Unit
   take_records(Self) -> Array[MutationRecord]
 }
 
 pub trait TMutationRecord : TJsValue {
   type_(Self) -> String
-  target(Self) -> Node
+  target(Self) -> &TNode
   added_nodes(Self) -> NodeList
   removed_nodes(Self) -> NodeList
-  previous_sibling(Self) -> Node?
-  next_sibling(Self) -> Node?
+  previous_sibling(Self) -> &TNode?
+  next_sibling(Self) -> &TNode?
   attribute_name(Self) -> String?
   attribute_namespace(Self) -> String?
   old_value(Self) -> String?
@@ -3237,37 +3207,37 @@ pub trait TNode : TJsValue + TEventTarget {
   base_uri(Self) -> String
   is_connected(Self) -> Bool
   owner_document(Self) -> Document?
-  parent_node(Self) -> Node?
-  parent_element(Self) -> Element?
+  parent_node(Self) -> &TNode?
+  parent_element(Self) -> &TElement?
   child_nodes(Self) -> NodeList
-  first_child(Self) -> Node?
-  last_child(Self) -> Node?
-  previous_sibling(Self) -> Node?
-  next_sibling(Self) -> Node?
+  first_child(Self) -> &TNode?
+  last_child(Self) -> &TNode?
+  previous_sibling(Self) -> &TNode?
+  next_sibling(Self) -> &TNode?
   node_value(Self) -> String?
   set_node_value(Self, String) -> Unit
   text_content(Self) -> String?
   set_text_content(Self, String) -> Unit
-  get_root_node(Self, options? : GetRootNodeOptions) -> Node
+  get_root_node(Self, options? : GetRootNodeOptions) -> &TNode
   has_child_nodes(Self) -> Bool
   normalize(Self) -> Unit
-  clone_node(Self, subtree? : Bool) -> Node
-  is_equal_node(Self, Node) -> Bool
-  is_same_node(Self, Node) -> Bool
-  compare_document_position(Self, Node) -> UInt
-  contains(Self, Node) -> Bool
+  clone_node(Self, subtree? : Bool) -> &TNode
+  is_equal_node(Self, &TNode) -> Bool
+  is_same_node(Self, &TNode) -> Bool
+  compare_document_position(Self, &TNode) -> UInt
+  contains(Self, &TNode) -> Bool
   lookup_prefix(Self, String) -> String?
   lookup_namespace_uri(Self, String) -> String?
   is_default_namespace(Self, String) -> Bool
-  insert_before(Self, Node, Node) -> Node
-  append_child(Self, Node) -> Node
-  replace_child(Self, Node, Node) -> Node
-  remove_child(Self, Node) -> Node
+  insert_before(Self, &TNode, &TNode) -> &TNode
+  append_child(Self, &TNode) -> &TNode
+  replace_child(Self, &TNode, &TNode) -> &TNode
+  remove_child(Self, &TNode) -> &TNode
 }
 
 pub trait TNodeList : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> Node?
+  item(Self, UInt) -> &TNode?
 }
 
 pub trait TOffscreenCanvas : TJsValue + TEventTarget {
@@ -3412,29 +3382,29 @@ pub trait TProcessingInstruction : TJsValue + TCharacterData {
 }
 
 pub trait TRange : TJsValue {
-  common_ancestor_container(Self) -> Node
+  common_ancestor_container(Self) -> &TNode
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
-  set_start(Self, Node, UInt) -> Unit
-  set_end(Self, Node, UInt) -> Unit
-  set_start_before(Self, Node) -> Unit
-  set_start_after(Self, Node) -> Unit
-  set_end_before(Self, Node) -> Unit
-  set_end_after(Self, Node) -> Unit
+  set_start(Self, &TNode, UInt) -> Unit
+  set_end(Self, &TNode, UInt) -> Unit
+  set_start_before(Self, &TNode) -> Unit
+  set_start_after(Self, &TNode) -> Unit
+  set_end_before(Self, &TNode) -> Unit
+  set_end_after(Self, &TNode) -> Unit
   collapse(Self, to_start? : Bool) -> Unit
-  select_node(Self, Node) -> Unit
-  select_node_contents(Self, Node) -> Unit
+  select_node(Self, &TNode) -> Unit
+  select_node_contents(Self, &TNode) -> Unit
   compare_boundary_points(Self, UInt, Range) -> Int
   delete_contents(Self) -> Unit
   extract_contents(Self) -> DocumentFragment
   clone_contents(Self) -> DocumentFragment
-  insert_node(Self, Node) -> Unit
-  surround_contents(Self, Node) -> Unit
+  insert_node(Self, &TNode) -> Unit
+  surround_contents(Self, &TNode) -> Unit
   clone_range(Self) -> Range
   detach(Self) -> Unit
-  is_point_in_range(Self, Node, UInt) -> Bool
-  compare_point(Self, Node, UInt) -> Int
-  intersects_node(Self, Node) -> Bool
+  is_point_in_range(Self, &TNode, UInt) -> Bool
+  compare_point(Self, &TNode, UInt) -> Int
+  intersects_node(Self, &TNode) -> Bool
   create_contextual_fragment(Self, String) -> DocumentFragment
 }
 
@@ -3472,7 +3442,7 @@ pub trait TShadowRoot : TJsValue + TDocumentFragment {
   slot_assignment(Self) -> SlotAssignmentMode
   clonable(Self) -> Bool
   serializable(Self) -> Bool
-  host(Self) -> Element
+  host(Self) -> &TElement
   onslotchange(Self) -> EventHandler
   set_onslotchange(Self, EventHandler) -> Unit
   inner_html(Self) -> InnerHTML
@@ -3481,7 +3451,7 @@ pub trait TShadowRoot : TJsValue + TDocumentFragment {
   adopted_style_sheets(Self) -> Array[JsValue]
   set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
   custom_element_registry(Self) -> JsValue?
-  active_element(Self) -> Element?
+  active_element(Self) -> &TElement?
   set_html_unsafe(Self, String) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
 }
@@ -3570,7 +3540,7 @@ pub trait TWindow : TJsValue + TEventTarget {
   opener(Self) -> JsValue
   set_opener(Self, JsValue) -> Unit
   parent(Self) -> Window?
-  frame_element(Self) -> Element?
+  frame_element(Self) -> &TElement?
   navigator(Self) -> Navigator
   client_information(Self) -> Navigator
   origin_agent_cluster(Self) -> Bool
@@ -3779,7 +3749,7 @@ pub trait TWindow : TJsValue + TEventTarget {
   scroll_to2(Self, Double, Double) -> JsPromise[Unit]
   scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
   scroll_by2(Self, Double, Double) -> JsPromise[Unit]
-  get_computed_style(Self, Element, pseudo_elt? : JsValue) -> JsValue
+  get_computed_style(Self, &TElement, pseudo_elt? : JsValue) -> JsValue
   close(Self) -> Unit
   stop(Self) -> Unit
   focus(Self) -> Unit

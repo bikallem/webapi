@@ -22,7 +22,7 @@
 
 import type { ParsedType, ParsedIdl } from "../types.js";
 import type { UnionTypeContext } from "../mapping.js";
-import { mapIdlType, registerUnionType, isKnownUnionType } from "../mapping.js";
+import { mapIdlType, registerUnionType, isKnownUnionType, isAbstractInterface } from "../mapping.js";
 import { toSnakeCase } from "../utils.js";
 
 /**
@@ -198,6 +198,7 @@ export function registerCollectedUnionTypes(unionTypes: Map<string, CollectedUni
 
 /**
  * Emit a property union type file using the external type + open trait pattern
+ * Skips fully abstract interface types (they have no external type)
  */
 export function emitPropertyUnionType(unionType: CollectedUnionType, idl: ParsedIdl): string {
   const lines: string[] = [];
@@ -229,14 +230,18 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
   lines.push("");
 
   // Trait implementations for each member type
-  // Only emit impl for types that exist in our IDL (known interfaces)
+  // Only emit impl for types that exist as concrete types (not fully abstract)
   for (const memberName of unionType.memberNames) {
-    // Skip reference types that aren't in our known interfaces
-    const isKnownType = memberName === "String" || memberName === "Double" ||
-      memberName === "Int" || memberName === "Bool" ||
-      idl.interfaces.has(memberName);
-    if (!isKnownType) {
-      continue; // Skip unknown types
+    // Check if it's a primitive type
+    const isPrimitive = memberName === "String" || memberName === "Double" ||
+      memberName === "Int" || memberName === "Bool";
+    
+    // Check if it's a known interface that's not fully abstract
+    const isConcreteInterface = idl.interfaces.has(memberName) && !isAbstractInterface(memberName);
+    
+    // Skip if not primitive and not a concrete interface
+    if (!isPrimitive && !isConcreteInterface) {
+      continue;
     }
 
     // For String, use String type directly
@@ -265,7 +270,7 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
       lines.push(`) -> JsValue = "%identity"`);
       lines.push("");
     } else {
-      // Reference to an interface
+      // Reference to a concrete interface
       lines.push("///|");
       lines.push(`pub impl ${traitName} for ${memberName} with to_js(`);
       lines.push(`  self : ${memberName},`);

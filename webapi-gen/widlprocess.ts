@@ -240,8 +240,12 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
         break;
 
       case "constructor":
+        const isHTMLConstructor = member.extAttrs?.some(
+          (attr: { name: string }) => attr.name === "HTMLConstructor"
+        ) ?? false;
         constructors.push({
           params: parseParams(member.arguments),
+          isHTMLConstructor,
         });
         break;
 

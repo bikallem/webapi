@@ -8,7 +8,7 @@
 
 import type { ParsedTypedef, ParsedIdl, ParsedType } from "../types.js";
 import { toSnakeCase, formatIdlSourceAsComment } from "../utils.js";
-import { mapIdlType, formatReturnType } from "../mapping.js";
+import { mapIdlType, formatReturnType, isAbstractInterface } from "../mapping.js";
 
 /**
  * Emit external type declaration for typedef
@@ -137,6 +137,7 @@ pub fn[T : T${typedef.name}] ${typedef.name}::into(self : ${typedef.name}) -> T 
 
 /**
  * Emit trait implementations for each member of a union type
+ * Skips fully abstract types (they have no external type, only trait)
  */
 function emitUnionMemberImpls(typedef: ParsedTypedef, idl: ParsedIdl): string | undefined {
     const memberNames = getUnionMemberNames(typedef);
@@ -147,6 +148,10 @@ function emitUnionMemberImpls(typedef: ParsedTypedef, idl: ParsedIdl): string | 
     for (const memberName of memberNames) {
         // Generate impl if the member is a known interface
         if (idl.interfaces.has(memberName)) {
+            // Skip fully abstract types - they have no external type
+            if (isAbstractInterface(memberName)) {
+                continue;
+            }
             impls.push(`///|
 pub impl T${typedef.name} for ${memberName} with to_js(
   self : ${memberName},

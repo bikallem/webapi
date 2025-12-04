@@ -36,6 +36,11 @@ pub impl TInputEvent for InputEvent
 pub impl TJsValue for InputEvent with to_js(self : InputEvent) -> JsValue = "%identity"
 
 ///|
+pub fn InputEvent::null() -> InputEvent {
+  JsValue::null()
+}
+
+///|
 fn input_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,

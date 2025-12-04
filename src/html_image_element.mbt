@@ -122,9 +122,6 @@ pub impl THTMLImageElement for HTMLImageElement
 pub impl TJsValue for HTMLImageElement with to_js(self : HTMLImageElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLImageElement::new() -> HTMLImageElement = "webapi_HTMLImageElement" "new"
-
-///|
 fn html_image_element_decode_ffi(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "decode"
 
 ///|

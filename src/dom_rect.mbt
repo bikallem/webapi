@@ -45,6 +45,11 @@ pub impl TDOMRect for DOMRect
 pub impl TJsValue for DOMRect with to_js(self : DOMRect) -> JsValue = "%identity"
 
 ///|
+pub fn DOMRect::null() -> DOMRect {
+  JsValue::null()
+}
+
+///|
 fn dom_rect_new_ffi(
   x : JsValue,
   y : JsValue,

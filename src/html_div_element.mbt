@@ -44,9 +44,6 @@ pub impl THTMLDivElement for HTMLDivElement
 pub impl TJsValue for HTMLDivElement with to_js(self : HTMLDivElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLDivElement::new() -> HTMLDivElement = "webapi_HTMLDivElement" "new"
-
-///|
 fn html_div_element_align_ffi(obj : JsValue) -> String = "webapi_HTMLDivElement" "align"
 
 ///|

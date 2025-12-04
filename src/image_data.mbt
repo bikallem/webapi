@@ -37,6 +37,11 @@ pub impl TImageData for ImageData
 pub impl TJsValue for ImageData with to_js(self : ImageData) -> JsValue = "%identity"
 
 ///|
+pub fn ImageData::null() -> ImageData {
+  JsValue::null()
+}
+
+///|
 fn image_data_new_ffi(
   sw : JsValue,
   sh : JsValue,

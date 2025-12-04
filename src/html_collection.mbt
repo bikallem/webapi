@@ -18,8 +18,8 @@ pub type HTMLCollection
 ///|
 pub trait THTMLCollection: TJsValue {
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> Element? = _
-  named_item(self : Self, name : String) -> Element? = _
+  item(self : Self, index : UInt) -> &TElement? = _
+  named_item(self : Self, name : String) -> &TElement? = _
 }
 
 ///|
@@ -32,7 +32,7 @@ pub impl TJsValue for HTMLCollection with to_js(self : HTMLCollection) -> JsValu
 fn html_collection_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_HTMLCollection" "item"
 
 ///|
-impl THTMLCollection with item(self : Self, index : UInt) -> Element? {
+impl THTMLCollection with item(self : Self, index : UInt) -> &TElement? {
   html_collection_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).as_option()
 }
 
@@ -40,7 +40,7 @@ impl THTMLCollection with item(self : Self, index : UInt) -> Element? {
 fn html_collection_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_HTMLCollection" "namedItem"
 
 ///|
-impl THTMLCollection with named_item(self : Self, name : String) -> Element? {
+impl THTMLCollection with named_item(self : Self, name : String) -> &TElement? {
   html_collection_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).as_option()
 }
 

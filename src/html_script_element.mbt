@@ -86,9 +86,6 @@ pub impl THTMLScriptElement for HTMLScriptElement
 pub impl TJsValue for HTMLScriptElement with to_js(self : HTMLScriptElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLScriptElement::new() -> HTMLScriptElement = "webapi_HTMLScriptElement" "new"
-
-///|
 fn html_script_element_supports_ffi(type_ : JsValue) -> JsValue = "webapi_HTMLScriptElement" "supports"
 
 ///|

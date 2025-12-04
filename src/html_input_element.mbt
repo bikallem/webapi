@@ -176,8 +176,8 @@ pub trait THTMLInputElement: TJsValue + THTMLElement {
   set_align(self : Self, value : String) -> Unit = _
   use_map(self : Self) -> String = _
   set_use_map(self : Self, value : String) -> Unit = _
-  popover_target_element(self : Self) -> Element? = _
-  set_popover_target_element(self : Self, value : Element) -> Unit = _
+  popover_target_element(self : Self) -> &TElement? = _
+  set_popover_target_element(self : Self, value : &TElement) -> Unit = _
   popover_target_action(self : Self) -> String = _
   set_popover_target_action(self : Self, value : String) -> Unit = _
   step_up(self : Self, n? : Int) -> Unit = _
@@ -220,9 +220,6 @@ pub impl THTMLInputElement for HTMLInputElement
 
 ///|
 pub impl TJsValue for HTMLInputElement with to_js(self : HTMLInputElement) -> JsValue = "%identity"
-
-///|
-pub fn HTMLInputElement::new() -> HTMLInputElement = "webapi_HTMLInputElement" "new"
 
 ///|
 fn html_input_element_step_up_ffi(obj : JsValue, n : JsValue) -> Unit = "webapi_HTMLInputElement" "stepUp"
@@ -1112,7 +1109,7 @@ impl THTMLInputElement with set_use_map(self : Self, value : String) -> Unit {
 fn html_input_element_popover_target_element_ffi(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "popoverTargetElement"
 
 ///|
-impl THTMLInputElement with popover_target_element(self : Self) -> Element? {
+impl THTMLInputElement with popover_target_element(self : Self) -> &TElement? {
   html_input_element_popover_target_element_ffi(self.to_js()).as_option()
 }
 
@@ -1125,7 +1122,7 @@ fn html_input_element_set_popover_target_element_ffi(
 ///|
 impl THTMLInputElement with set_popover_target_element(
   self : Self,
-  value : Element,
+  value : &TElement,
 ) -> Unit {
   html_input_element_set_popover_target_element_ffi(
     self.to_js(),

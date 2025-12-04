@@ -28,16 +28,12 @@
 // };
 
 ///|
-#external
-pub type CharacterData
-
-///|
 pub trait TCharacterData: TJsValue + TNode {
   data(self : Self) -> String = _
   set_data(self : Self, value : String) -> Unit = _
   length(self : Self) -> UInt = _
-  previous_element_sibling(self : Self) -> Element? = _
-  next_element_sibling(self : Self) -> Element? = _
+  previous_element_sibling(self : Self) -> &TElement? = _
+  next_element_sibling(self : Self) -> &TElement? = _
   substring_data(self : Self, offset : UInt, count : UInt) -> String = _
   append_data(self : Self, data : String) -> Unit = _
   insert_data(self : Self, offset : UInt, data : String) -> Unit = _
@@ -48,18 +44,6 @@ pub trait TCharacterData: TJsValue + TNode {
   replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit = _
   remove(self : Self) -> Unit = _
 }
-
-///|
-pub impl TEventTarget for CharacterData
-
-///|
-pub impl TNode for CharacterData
-
-///|
-pub impl TCharacterData for CharacterData
-
-///|
-pub impl TJsValue for CharacterData with to_js(self : CharacterData) -> JsValue = "%identity"
 
 ///|
 fn character_data_substring_data_ffi(
@@ -207,7 +191,7 @@ impl TCharacterData with length(self : Self) -> UInt {
 fn character_data_previous_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_CharacterData" "previousElementSibling"
 
 ///|
-impl TCharacterData with previous_element_sibling(self : Self) -> Element? {
+impl TCharacterData with previous_element_sibling(self : Self) -> &TElement? {
   character_data_previous_element_sibling_ffi(self.to_js()).as_option()
 }
 
@@ -215,6 +199,6 @@ impl TCharacterData with previous_element_sibling(self : Self) -> Element? {
 fn character_data_next_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_CharacterData" "nextElementSibling"
 
 ///|
-impl TCharacterData with next_element_sibling(self : Self) -> Element? {
+impl TCharacterData with next_element_sibling(self : Self) -> &TElement? {
   character_data_next_element_sibling_ffi(self.to_js()).as_option()
 }

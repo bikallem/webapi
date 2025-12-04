@@ -2,7 +2,7 @@
  * Interface Emitter
  * 
  * Generates MoonBit code for Web IDL interfaces including:
- * - External type declaration
+ * - External type declaration (only for concrete types with constructors)
  * - TJsValue implementation
  * - Trait definition with methods
  * - Trait implementation
@@ -14,7 +14,31 @@ import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
 import { getAllTraitAncestors } from "../widlprocess.js";
-import { mapIdlType, formatReturnType } from "../mapping.js";
+import { mapIdlType, formatReturnType, isAbstractInterface } from "../mapping.js";
+
+/**
+ * Check if an interface has a real constructor (not [HTMLConstructor])
+ * Interfaces with real constructors can be instantiated with new()
+ */
+export function hasRealConstructor(iface: ParsedInterface): boolean {
+  return iface.constructors.some(c => !c.isHTMLConstructor);
+}
+
+/**
+ * Check if an interface has any constructor (real or [HTMLConstructor])
+ * Interfaces with no constructors at all are fully abstract (use trait objects)
+ */
+export function hasAnyConstructor(iface: ParsedInterface): boolean {
+  return iface.constructors.length > 0;
+}
+
+/**
+ * Check if an interface is fully abstract (registered as abstract base class)
+ * These use trait objects (&TNode, &TElement) instead of external types
+ */
+export function isFullyAbstract(iface: ParsedInterface): boolean {
+  return isAbstractInterface(iface.name);
+}
 
 /**
  * Emit the external type declaration
@@ -31,6 +55,17 @@ pub type ${iface.name}`;
 function emitTJsValueImpl(iface: ParsedInterface): string {
   return `///|
 pub impl TJsValue for ${iface.name} with to_js(self : ${iface.name}) -> JsValue = "%identity"`;
+}
+
+/**
+ * Emit null() method for a concrete type
+ * This is separate from the trait to allow trait objects
+ */
+function emitNullMethod(iface: ParsedInterface): string {
+  return `///|
+pub fn ${iface.name}::null() -> ${iface.name} {
+  JsValue::null()
+}`;
 }
 
 /**
@@ -62,6 +97,7 @@ function getTraitBounds(
 
 /**
  * Emit the trait definition for an interface
+ * All traits have default implementations (= _) for their methods
  */
 function emitTraitDefinition(
   iface: ParsedInterface,
@@ -70,10 +106,10 @@ function emitTraitDefinition(
   const traitName = toTraitName(iface.name);
   const bounds = getTraitBounds(iface, allInterfaces);
 
-  // Generate trait method signatures (return array of lines, already indented)
-  const methodSignatures = emitTraitMethods(iface);
-  // Property methods are already indented from emitTraitProperties
-  const propertySignatures = emitTraitProperties(iface);
+  // Generate trait method signatures with = _ (we always provide default impls)
+  const methodSignatures = emitTraitMethods(iface, true);
+  // Property methods with = _
+  const propertySignatures = emitTraitProperties(iface, true);
 
   const allSignatures = [...propertySignatures, ...methodSignatures];
 
@@ -173,6 +209,8 @@ export function emitInterface(
   idl: ParsedIdl
 ): string {
   const parts: string[] = [];
+  const isConcrete = hasRealConstructor(iface);
+  const fullyAbstract = isFullyAbstract(iface);
 
   // Header comment
   parts.push(`// Auto-generated MoonBit bindings for ${iface.name}`);
@@ -184,22 +222,31 @@ export function emitInterface(
     parts.push(`//\n// WebIDL Interface:\n${idlComment}`);
   }
 
-  // External type declaration
-  parts.push(emitExternalType(iface));
+  // External type declaration - NOT for fully abstract types (they use trait objects)
+  if (!fullyAbstract) {
+    parts.push(emitExternalType(iface));
+  }
 
-  // Trait definition
+  // Trait definition - all traits have default implementations (= _)
   parts.push(emitTraitDefinition(iface, idl.interfaces));
 
-  // Trait implementation
-  parts.push(emitTraitImpl(iface, idl.interfaces));
+  // Trait implementation and TJsValue - NOT for fully abstract (no external type)
+  if (!fullyAbstract) {
+    parts.push(emitTraitImpl(iface, idl.interfaces));
+    parts.push(emitTJsValueImpl(iface));
+  }
 
-  // TJsValue implementation (after trait definitions)
-  parts.push(emitTJsValueImpl(iface));
+  // null() method - only for types with real constructors
+  if (isConcrete) {
+    parts.push(emitNullMethod(iface));
+  }
 
-  // Constructors
-  const constructorCode = emitConstructors(iface);
-  if (constructorCode) {
-    parts.push(constructorCode);
+  // Constructors - only for concrete types with real constructors
+  if (isConcrete) {
+    const constructorCode = emitConstructors(iface);
+    if (constructorCode) {
+      parts.push(constructorCode);
+    }
   }
 
   // Callback interface constructor
@@ -209,13 +256,16 @@ export function emitInterface(
   }
 
   // FFI functions for methods
-  const methodsFfi = emitMethods(iface);
+  // For fully abstract types: generates default implementations (impl TNode with method(...))
+  // For concrete types: generates impl Type with method(...) for the specific type
+  // Static methods skipped for fully abstract (no external type)
+  const methodsFfi = emitMethods(iface, idl, fullyAbstract);
   if (methodsFfi) {
     parts.push(methodsFfi);
   }
 
   // FFI functions for properties
-  const propertiesFfi = emitProperties(iface);
+  const propertiesFfi = emitProperties(iface, fullyAbstract);
   if (propertiesFfi) {
     parts.push(propertiesFfi);
   }

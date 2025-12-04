@@ -22,9 +22,9 @@ pub type HTMLSlotElement
 pub trait THTMLSlotElement: TJsValue + THTMLElement {
   name(self : Self) -> String = _
   set_name(self : Self, value : String) -> Unit = _
-  assigned_nodes(self : Self, options? : AssignedNodesOptions) -> Array[Node] = _
+  assigned_nodes(self : Self, options? : AssignedNodesOptions) -> Array[&TNode] = _
   assigned_elements(self : Self, options? : AssignedNodesOptions) -> Array[
-    Element,
+    &TElement,
   ] = _
   assign(self : Self, nodes : &TAssignNodesArg) -> Unit = _
 }
@@ -48,9 +48,6 @@ pub impl THTMLSlotElement for HTMLSlotElement
 pub impl TJsValue for HTMLSlotElement with to_js(self : HTMLSlotElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLSlotElement::new() -> HTMLSlotElement = "webapi_HTMLSlotElement" "new"
-
-///|
 fn html_slot_element_assigned_nodes_ffi(
   obj : JsValue,
   options : JsValue,
@@ -60,7 +57,7 @@ fn html_slot_element_assigned_nodes_ffi(
 impl THTMLSlotElement with assigned_nodes(
   self : Self,
   options? : AssignedNodesOptions = AssignedNodesOptions::empty(),
-) -> Array[Node] {
+) -> Array[&TNode] {
   html_slot_element_assigned_nodes_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(options),
@@ -77,7 +74,7 @@ fn html_slot_element_assigned_elements_ffi(
 impl THTMLSlotElement with assigned_elements(
   self : Self,
   options? : AssignedNodesOptions = AssignedNodesOptions::empty(),
-) -> Array[Element] {
+) -> Array[&TElement] {
   html_slot_element_assigned_elements_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(options),
@@ -89,9 +86,6 @@ impl THTMLSlotElement with assigned_elements(
 pub(open) trait TAssignNodesArg {
   to_js(self : Self) -> JsValue
 }
-
-///|
-pub impl TAssignNodesArg for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
 pub impl TAssignNodesArg for Text with to_js(self : Text) -> JsValue = "%identity"

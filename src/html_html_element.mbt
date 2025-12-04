@@ -44,9 +44,6 @@ pub impl THTMLHtmlElement for HTMLHtmlElement
 pub impl TJsValue for HTMLHtmlElement with to_js(self : HTMLHtmlElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLHtmlElement::new() -> HTMLHtmlElement = "webapi_HTMLHtmlElement" "new"
-
-///|
 fn html_html_element_version_ffi(obj : JsValue) -> String = "webapi_HTMLHtmlElement" "version"
 
 ///|

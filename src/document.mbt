@@ -256,7 +256,7 @@ pub type Document
 
 ///|
 pub trait TDocument: TJsValue + TNode {
-  scrolling_element(self : Self) -> Element? = _
+  scrolling_element(self : Self) -> &TElement? = _
   implementation(self : Self) -> JsValue = _
   url(self : Self) -> String = _
   document_uri(self : Self) -> String = _
@@ -266,7 +266,7 @@ pub trait TDocument: TJsValue + TNode {
   input_encoding(self : Self) -> String = _
   content_type(self : Self) -> String = _
   doctype(self : Self) -> DocumentType? = _
-  document_element(self : Self) -> Element? = _
+  document_element(self : Self) -> &TElement? = _
   location(self : Self) -> Location? = _
   domain(self : Self) -> String = _
   set_domain(self : Self, value : String) -> Unit = _
@@ -279,8 +279,8 @@ pub trait TDocument: TJsValue + TNode {
   set_title(self : Self, value : String) -> Unit = _
   dir(self : Self) -> String = _
   set_dir(self : Self, value : String) -> Unit = _
-  body(self : Self) -> HTMLElement? = _
-  set_body(self : Self, value : HTMLElement) -> Unit = _
+  body(self : Self) -> &THTMLElement? = _
+  set_body(self : Self, value : &THTMLElement) -> Unit = _
   head(self : Self) -> HTMLHeadElement? = _
   images(self : Self) -> HTMLCollection = _
   embeds(self : Self) -> HTMLCollection = _
@@ -315,10 +315,10 @@ pub trait TDocument: TJsValue + TNode {
   adopted_style_sheets(self : Self) -> Array[JsValue] = _
   set_adopted_style_sheets(self : Self, value : Array[JsValue]) -> Unit = _
   custom_element_registry(self : Self) -> JsValue? = _
-  active_element(self : Self) -> Element? = _
+  active_element(self : Self) -> &TElement? = _
   children(self : Self) -> HTMLCollection = _
-  first_element_child(self : Self) -> Element? = _
-  last_element_child(self : Self) -> Element? = _
+  first_element_child(self : Self) -> &TElement? = _
+  last_element_child(self : Self) -> &TElement? = _
   child_element_count(self : Self) -> UInt = _
   onabort(self : Self) -> EventHandler = _
   set_onabort(self : Self, value : EventHandler) -> Unit = _
@@ -472,8 +472,8 @@ pub trait TDocument: TJsValue + TNode {
   set_onwebkittransitionend(self : Self, value : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, value : EventHandler) -> Unit = _
-  element_from_point(self : Self, x : Double, y : Double) -> Element? = _
-  elements_from_point(self : Self, x : Double, y : Double) -> Array[Element] = _
+  element_from_point(self : Self, x : Double, y : Double) -> &TElement? = _
+  elements_from_point(self : Self, x : Double, y : Double) -> Array[&TElement] = _
   caret_position_from_point(
     self : Self,
     x : Double,
@@ -491,33 +491,33 @@ pub trait TDocument: TJsValue + TNode {
     self : Self,
     local_name : String,
     options? : &TCreateElementOptionsArg,
-  ) -> Element = _
+  ) -> &TElement = _
   create_element_ns(
     self : Self,
     namespace_ : String,
     qualified_name : String,
     options? : &TCreateElementNSOptionsArg,
-  ) -> Element = _
+  ) -> &TElement = _
   create_document_fragment(self : Self) -> DocumentFragment = _
   create_text_node(self : Self, data : String) -> Text = _
   create_cdata_section(self : Self, data : String) -> CDATASection = _
   create_comment(self : Self, data : String) -> Comment = _
   create_processing_instruction(self : Self, target : String, data : String) -> ProcessingInstruction = _
-  import_node(self : Self, node : Node, options? : &TImportNodeOptionsArg) -> Node = _
-  adopt_node(self : Self, node : Node) -> Node = _
+  import_node(self : Self, node : &TNode, options? : &TImportNodeOptionsArg) -> &TNode = _
+  adopt_node(self : Self, node : &TNode) -> &TNode = _
   create_attribute(self : Self, local_name : String) -> Attr = _
   create_attribute_ns(self : Self, namespace_ : String, qualified_name : String) -> Attr = _
   create_event(self : Self, interface : String) -> Event = _
   create_range(self : Self) -> Range = _
   create_node_iterator(
     self : Self,
-    root : Node,
+    root : &TNode,
     what_to_show? : UInt,
     filter? : JsValue,
   ) -> JsValue = _
   create_tree_walker(
     self : Self,
-    root : Node,
+    root : &TNode,
     what_to_show? : UInt,
     filter? : JsValue,
   ) -> JsValue = _
@@ -561,19 +561,19 @@ pub trait TDocument: TJsValue + TNode {
     from : JsValue,
     options? : ConvertCoordinateOptions,
   ) -> JsValue = _
-  get_element_by_id(self : Self, element_id : String) -> Element? = _
+  get_element_by_id(self : Self, element_id : String) -> &TElement? = _
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
   replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
-  move_before(self : Self, node : Node, child : Node) -> Unit = _
-  query_selector(self : Self, selectors : String) -> Element? = _
+  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
+  query_selector(self : Self, selectors : String) -> &TElement? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   create_expression(self : Self, expression : String, resolver? : JsValue) -> JsValue = _
-  create_ns_resolver(self : Self, node_resolver : Node) -> Node = _
+  create_ns_resolver(self : Self, node_resolver : &TNode) -> &TNode = _
   evaluate(
     self : Self,
     expression : String,
-    context_node : Node,
+    context_node : &TNode,
     resolver? : JsValue,
     type_? : UInt,
     result? : JsValue,
@@ -593,6 +593,11 @@ pub impl TDocument for Document
 pub impl TJsValue for Document with to_js(self : Document) -> JsValue = "%identity"
 
 ///|
+pub fn Document::null() -> Document {
+  JsValue::null()
+}
+
+///|
 pub fn Document::new() -> Document = "webapi_Document" "new"
 
 ///|
@@ -603,7 +608,7 @@ fn document_element_from_point_ffi(
 ) -> JsValue = "webapi_Document" "elementFromPoint"
 
 ///|
-impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element? {
+impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> &TElement? {
   document_element_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -620,7 +625,7 @@ fn document_elements_from_point_ffi(
 
 ///|
 impl TDocument with elements_from_point(self : Self, x : Double, y : Double) -> Array[
-  Element,
+  &TElement,
 ] {
   document_elements_from_point_ffi(
     TJsValue::to_js(self),
@@ -732,7 +737,7 @@ impl TDocument with create_element(
   self : Self,
   local_name : String,
   options? : &TCreateElementOptionsArg = ElementCreationOptions::empty(),
-) -> Element {
+) -> &TElement {
   document_create_element_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(local_name),
@@ -768,7 +773,7 @@ impl TDocument with create_element_ns(
   namespace_ : String,
   qualified_name : String,
   options? : &TCreateElementNSOptionsArg = ElementCreationOptions::empty(),
-) -> Element {
+) -> &TElement {
   document_create_element_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
@@ -856,9 +861,9 @@ fn document_import_node_ffi(
 ///|
 impl TDocument with import_node(
   self : Self,
-  node : Node,
+  node : &TNode,
   options? : &TImportNodeOptionsArg,
-) -> Node {
+) -> &TNode {
   let options_js = match options {
     Some(v) => v.to_js()
     None => JsValue::undefined()
@@ -874,7 +879,7 @@ impl TDocument with import_node(
 fn document_adopt_node_ffi(obj : JsValue, node : JsValue) -> JsValue = "webapi_Document" "adoptNode"
 
 ///|
-impl TDocument with adopt_node(self : Self, node : Node) -> Node {
+impl TDocument with adopt_node(self : Self, node : &TNode) -> &TNode {
   document_adopt_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node)).unsafe_cast()
 }
 
@@ -939,7 +944,7 @@ fn document_create_node_iterator_ffi(
 ///|
 impl TDocument with create_node_iterator(
   self : Self,
-  root : Node,
+  root : &TNode,
   what_to_show? : UInt,
   filter? : JsValue,
 ) -> JsValue {
@@ -964,7 +969,7 @@ fn document_create_tree_walker_ffi(
 ///|
 impl TDocument with create_tree_walker(
   self : Self,
-  root : Node,
+  root : &TNode,
   what_to_show? : UInt,
   filter? : JsValue,
 ) -> JsValue {
@@ -1275,7 +1280,7 @@ fn document_get_element_by_id_ffi(
 ) -> JsValue = "webapi_Document" "getElementById"
 
 ///|
-impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
+impl TDocument with get_element_by_id(self : Self, element_id : String) -> &TElement? {
   document_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
@@ -1287,9 +1292,6 @@ impl TDocument with get_element_by_id(self : Self, element_id : String) -> Eleme
 pub(open) trait TPrependNodesArg {
   to_js(self : Self) -> JsValue
 }
-
-///|
-pub impl TPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
 pub impl TPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
@@ -1309,9 +1311,6 @@ pub(open) trait TAppendNodesArg {
 }
 
 ///|
-pub impl TAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
-
-///|
 pub impl TAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
@@ -1327,9 +1326,6 @@ impl TDocument with append(self : Self, nodes : &TAppendNodesArg) -> Unit {
 pub(open) trait TReplaceChildrenNodesArg {
   to_js(self : Self) -> JsValue
 }
-
-///|
-pub impl TReplaceChildrenNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
 pub impl TReplaceChildrenNodesArg for String with to_js(self : String) -> JsValue = "%identity"
@@ -1353,7 +1349,7 @@ fn document_move_before_ffi(
 ) -> Unit = "webapi_Document" "moveBefore"
 
 ///|
-impl TDocument with move_before(self : Self, node : Node, child : Node) -> Unit {
+impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
   document_move_before_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -1365,7 +1361,7 @@ impl TDocument with move_before(self : Self, node : Node, child : Node) -> Unit 
 fn document_query_selector_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Document" "querySelector"
 
 ///|
-impl TDocument with query_selector(self : Self, selectors : String) -> Element? {
+impl TDocument with query_selector(self : Self, selectors : String) -> &TElement? {
   document_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).as_option()
 }
 
@@ -1411,7 +1407,7 @@ fn document_create_ns_resolver_ffi(
 ) -> JsValue = "webapi_Document" "createNSResolver"
 
 ///|
-impl TDocument with create_ns_resolver(self : Self, node_resolver : Node) -> Node {
+impl TDocument with create_ns_resolver(self : Self, node_resolver : &TNode) -> &TNode {
   document_create_ns_resolver_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node_resolver),
@@ -1432,7 +1428,7 @@ fn document_evaluate_ffi(
 impl TDocument with evaluate(
   self : Self,
   expression : String,
-  context_node : Node,
+  context_node : &TNode,
   resolver? : JsValue,
   type_? : UInt,
   result? : JsValue,
@@ -1454,7 +1450,7 @@ impl TDocument with evaluate(
 fn document_scrolling_element_ffi(obj : JsValue) -> JsValue = "webapi_Document" "scrollingElement"
 
 ///|
-impl TDocument with scrolling_element(self : Self) -> Element? {
+impl TDocument with scrolling_element(self : Self) -> &TElement? {
   document_scrolling_element_ffi(self.to_js()).as_option()
 }
 
@@ -1534,7 +1530,7 @@ impl TDocument with doctype(self : Self) -> DocumentType? {
 fn document_document_element_ffi(obj : JsValue) -> JsValue = "webapi_Document" "documentElement"
 
 ///|
-impl TDocument with document_element(self : Self) -> Element? {
+impl TDocument with document_element(self : Self) -> &TElement? {
   document_document_element_ffi(self.to_js()).as_option()
 }
 
@@ -1638,7 +1634,7 @@ impl TDocument with set_dir(self : Self, value : String) -> Unit {
 fn document_body_ffi(obj : JsValue) -> JsValue = "webapi_Document" "body"
 
 ///|
-impl TDocument with body(self : Self) -> HTMLElement? {
+impl TDocument with body(self : Self) -> &THTMLElement? {
   document_body_ffi(self.to_js()).as_option()
 }
 
@@ -1646,7 +1642,7 @@ impl TDocument with body(self : Self) -> HTMLElement? {
 fn document_set_body_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_body"
 
 ///|
-impl TDocument with set_body(self : Self, value : HTMLElement) -> Unit {
+impl TDocument with set_body(self : Self, value : &THTMLElement) -> Unit {
   document_set_body_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
@@ -1932,7 +1928,7 @@ impl TDocument with custom_element_registry(self : Self) -> JsValue? {
 fn document_active_element_ffi(obj : JsValue) -> JsValue = "webapi_Document" "activeElement"
 
 ///|
-impl TDocument with active_element(self : Self) -> Element? {
+impl TDocument with active_element(self : Self) -> &TElement? {
   document_active_element_ffi(self.to_js()).as_option()
 }
 
@@ -1948,7 +1944,7 @@ impl TDocument with children(self : Self) -> HTMLCollection {
 fn document_first_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Document" "firstElementChild"
 
 ///|
-impl TDocument with first_element_child(self : Self) -> Element? {
+impl TDocument with first_element_child(self : Self) -> &TElement? {
   document_first_element_child_ffi(self.to_js()).as_option()
 }
 
@@ -1956,7 +1952,7 @@ impl TDocument with first_element_child(self : Self) -> Element? {
 fn document_last_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Document" "lastElementChild"
 
 ///|
-impl TDocument with last_element_child(self : Self) -> Element? {
+impl TDocument with last_element_child(self : Self) -> &TElement? {
   document_last_element_child_ffi(self.to_js()).as_option()
 }
 
