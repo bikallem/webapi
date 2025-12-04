@@ -8,8 +8,10 @@ MoonBit bindings for Web APIs (DOM, HTML, Canvas, Events, etc.)
 - **Auto-generated from WebIDL** - Uses official W3C/WHATWG specifications
 - **Trait-based inheritance** - Mirrors the DOM class hierarchy
 - **Enum types** - Proper MoonBit enums for Canvas properties, scroll behaviors, etc.
-- **Union types** - Type-safe unions (e.g., `StrokeStyle` accepts String, CanvasGradient, or CanvasPattern)
-- **FFI-optimized** - Efficient JavaScript interop
+- **Typedef union types** - Type-safe unions with trait-based conversions (e.g., `CanvasImageSource` accepts HTMLCanvasElement, HTMLImageElement, or HTMLVideoElement)
+- **Typed arrays** - Full support for JavaScript typed arrays (Float32Array, Uint8Array, etc.)
+- **Shadow DOM** - Complete Shadow DOM API support
+- **FFI-optimized** - Efficient JavaScript interop with precise type mappings
 
 ## Installation
 
@@ -45,9 +47,40 @@ fn main {
 }
 ```
 
+## Shadow DOM Example
+
+```mbt check
+
+///|
+fn create_web_component {
+  let doc = document()
+  let host = doc.create_element("div")
+  
+  // Attach shadow root
+  let shadow = host.attach_shadow({ mode: ShadowRootMode::Open, delegates_focus: false })
+  
+  // Add content to shadow DOM
+  let style = doc.create_element("style")
+  style.set_text_content(
+    #|:host { display: block; padding: 10px; }
+    #|slot { color: blue; }
+    #|
+  )
+  shadow.append_child(style)
+  
+  // Add slot for content projection
+  let slot = doc.create_element("slot")
+  shadow.append_child(slot)
+  
+  doc.body().append_child(host)
+}
+```
+
 ## Canvas Example
 
-```moonbit
+```mbt check
+
+///|
 fn draw_canvas {
   let canvas : HTMLCanvasElement = document().get_element_by_id("canvas").unwrap()
   let ctx = canvas.get_context_2d().unwrap()
@@ -67,6 +100,11 @@ fn draw_canvas {
   gradient.add_color_stop(1.0, "blue")
   ctx.set_fill_style(gradient)
   
+  // Typedef union - accepts HTMLCanvasElement, HTMLImageElement, or HTMLVideoElement
+  let img : HTMLImageElement = document().create_element("img")
+  ctx.draw_image(img, 0.0, 0.0)  // Type-safe, no JsValue!
+  ctx.draw_image(canvas, 50.0, 50.0)  // Can also pass canvas
+  
   // Drawing operations
   ctx.begin_path()
   ctx.arc(100.0, 100.0, 50.0, 0.0, 6.28318)
@@ -80,12 +118,12 @@ The bindings include:
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| Interfaces | 64 | `Document`, `Element`, `HTMLCanvasElement`, `CanvasRenderingContext2D`, `CanvasGradient` |
-| Dictionaries | 63 | `EventInit`, `ScrollOptions`, `DOMPointInit` |
-| Enums | 38 | `CanvasLineJoin`, `ScrollBehavior`, `DocumentReadyState` |
-| Union Types | 7 | `StrokeStyle`, `FillStyle`, `Canvas`, `RenderingContext` |
-| Callbacks | 8 | `EventListener`, `MutationCallback` |
-| Typedefs | 4 | `EventHandler` |
+| Interfaces | 69 | `Document`, `Element`, `HTMLCanvasElement`, `CanvasRenderingContext2D`, `ShadowRoot` |
+| Dictionaries | 65 | `EventInit`, `ScrollOptions`, `DOMPointInit`, `ShadowRootInit` |
+| Enums | 38 | `CanvasLineJoin`, `ScrollBehavior`, `DocumentReadyState`, `ShadowRootMode` |
+| Typedef Unions | 6 | `CanvasImageSource`, `ImageBitmapSource`, `HTMLOrSVGImageElement` |
+| Typed Arrays | 13 | `Float32Array`, `Uint8Array`, `Int32Array`, `ArrayBuffer` |
+| Callbacks | 8 | `EventListener`, `EventHandlerNonNull`, `MutationCallback` |
 
 ## Architecture
 
@@ -110,34 +148,65 @@ TEventTarget
 ### Type Mapping
 
 | WebIDL | MoonBit |
-|--------|---------|
+|--------|---------|----------|
 | `DOMString` | `String` |
 | `boolean` | `Bool` |
-| `long`, `short` | `Int` |
+| `byte`, `octet` | `Byte` |
+| `short` | `Int` |
+| `unsigned short` | `UInt` |
+| `long` | `Int` |
+| `unsigned long` | `UInt` |
+| `long long` | `Int64` |
+| `unsigned long long` | `UInt64` |
+| `float` | `Float` |
 | `double` | `Double` |
 | `any` | `JsValue` |
 | `sequence<T>` | `Array[T]` |
 | `Promise<T>` | `JsPromise[T]` |
 | enum types | MoonBit `enum` |
-| union types | External type + open trait |
+| typedef unions | External type + trait |
 
-### Union Types
+### Typedef Union Types
 
-WebIDL union types like `(DOMString or CanvasGradient or CanvasPattern)` are represented using:
-- An **external type** (e.g., `StrokeStyle`) for the return type
-- An **open trait** (e.g., `TStrokeStyle`) for setter parameters
+WebIDL typedef unions like `typedef (HTMLCanvasElement or HTMLImageElement or HTMLVideoElement) CanvasImageSource` are represented using:
+- An **external type** (e.g., `CanvasImageSource`) for the union
+- A **trait** (e.g., `TCanvasImageSource`) for type conversion
+- Trait implementations for each member type
 
-```moonbit
-// Getter returns the union type
-let style : StrokeStyle = ctx.stroke_style()
+```mbt check
 
-// Setter accepts any type implementing the trait
-ctx.set_stroke_style("red")           // String
-ctx.set_stroke_style(gradient)        // CanvasGradient
-ctx.set_stroke_style(pattern)         // CanvasPattern
+///|
+// typedef union generated as:
+#external
+pub type CanvasImageSource
 
-// Downcast if needed
-let color : String = style.into()
+///|
+pub trait TCanvasImageSource {
+  to_js(Self) -> JsValue
+}
+
+///|
+pub impl TCanvasImageSource for HTMLCanvasElement with to_js(self) {
+  ...
+}
+
+///|
+pub impl TCanvasImageSource for HTMLImageElement with to_js(self) {
+  ...
+}
+
+///|
+pub impl TCanvasImageSource for HTMLVideoElement with to_js(self) {
+  ...
+}
+
+///|
+// Usage - function accepts &TCanvasImageSource parameter
+fn use_canvas_image(ctx : CanvasRenderingContext2D, img : HTMLImageElement) {
+  ctx.draw_image(img, 0.0, 0.0)        // HTMLImageElement
+  ctx.draw_image(ctx.canvas(), 0.0, 0.0)  // HTMLCanvasElement
+  // Both work - type-safe with no JsValue!
+}
 ```
 
 ## Development
@@ -156,11 +225,8 @@ npm install
 # Generate bindings from WebIDL
 make gen
 
-# Build the MoonBit project
-make build
-
-# Format code
-make fmt
+# Build, format, and update package info
+make all
 ```
 
 ### Project Structure
@@ -179,11 +245,14 @@ make fmt
 ## Supported Specifications
 
 - **DOM** - Core DOM interfaces (Node, Element, Document, etc.)
+- **DOM Shadow** - Shadow DOM (ShadowRoot, slots, content distribution)
 - **HTML** - HTML elements (HTMLDivElement, HTMLCanvasElement, etc.)
 - **UI Events** - Mouse, keyboard, focus events
 - **CSSOM** - CSS Object Model
 - **CSSOM View** - Scrolling, viewport
 - **Geometry** - DOMPoint, DOMRect, DOMMatrix
+- **File API** - Blob, File interfaces
+- **Typed Arrays** - JavaScript typed arrays (Float32Array, Uint8Array, etc.)
 
 ## License
 
