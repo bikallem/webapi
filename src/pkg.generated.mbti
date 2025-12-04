@@ -573,7 +573,6 @@ pub impl TJsValue for EventInit
 
 #external
 pub type EventListener
-pub fn EventListener::is_null(Self) -> Bool
 pub fn EventListener::new((Event) -> Unit) -> Self
 pub fn EventListener::null() -> Self
 pub impl TJsValue for EventListener
