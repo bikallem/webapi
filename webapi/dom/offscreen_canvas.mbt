@@ -38,10 +38,8 @@ pub trait TOffscreenCanvas: TJsValue + TEventTarget {
     context_id : OffscreenRenderingContextId,
     options? : JsValue,
   ) -> JsValue? = _
-  transfer_to_image_bitmap(self : Self) -> JsValue = _
-  convert_to_blob(self : Self, options? : ImageEncodeOptions) -> JsPromise[
-    JsValue,
-  ] = _
+  transfer_to_image_bitmap(self : Self) -> ImageBitmap = _
+  convert_to_blob(self : Self, options? : ImageEncodeOptions) -> JsPromise[Blob] = _
 }
 
 ///|
@@ -89,7 +87,7 @@ impl TOffscreenCanvas with get_context(
 fn offscreen_canvas_transfer_to_image_bitmap_ffi(obj : JsValue) -> JsValue = "webapi_OffscreenCanvas" "transferToImageBitmap"
 
 ///|
-impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> JsValue {
+impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> ImageBitmap {
   offscreen_canvas_transfer_to_image_bitmap_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
@@ -103,7 +101,7 @@ fn offscreen_canvas_convert_to_blob_ffi(
 impl TOffscreenCanvas with convert_to_blob(
   self : Self,
   options? : ImageEncodeOptions = ImageEncodeOptions::empty(),
-) -> JsPromise[JsValue] {
+) -> JsPromise[Blob] {
   offscreen_canvas_convert_to_blob_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(options),

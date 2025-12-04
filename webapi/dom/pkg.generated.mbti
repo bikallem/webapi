@@ -55,9 +55,22 @@ pub impl TJsValue for Attr
 pub impl TNode for Attr
 
 #external
+pub type Blob
+pub fn Blob::new(blob_parts? : Array[JsValue], options? : BlobPropertyBag) -> Self
+pub impl TBlob for Blob
+pub impl TImageBitmapSource for Blob
+pub impl TJsValue for Blob
+
+#external
 pub type BlobCallback
-pub fn BlobCallback::new((JsValue) -> Unit) -> Self
+pub fn BlobCallback::new((Blob) -> Unit) -> Self
 pub impl TJsValue for BlobCallback
+
+#external
+pub type BlobPropertyBag
+pub fn BlobPropertyBag::empty() -> Self
+pub fn BlobPropertyBag::new(type_? : String, endings? : EndingType) -> Self
+pub impl TJsValue for BlobPropertyBag
 
 #external
 pub type BoxQuadOptions
@@ -179,6 +192,11 @@ pub impl TCanvasGradient for CanvasGradient
 pub impl TFillStyle for CanvasGradient
 pub impl TJsValue for CanvasGradient
 pub impl TStrokeStyle for CanvasGradient
+
+#external
+pub type CanvasImageSource
+pub fn[T : TCanvasImageSource] CanvasImageSource::into(Self) -> T
+pub impl TImageBitmapSource for CanvasImageSource
 
 pub enum CanvasLineCap {
   Butt
@@ -497,6 +515,15 @@ pub fn ElementDefinitionOptions::empty() -> Self
 pub fn ElementDefinitionOptions::new(extends? : String) -> Self
 pub impl TJsValue for ElementDefinitionOptions
 
+pub enum EndingType {
+  Transparent
+  Native
+}
+pub fn EndingType::from_js(JsValue) -> Self?
+pub impl TJsValue for EndingType
+pub impl Eq for EndingType
+pub impl Show for EndingType
+
 #external
 pub type ErrorEventInit
 pub fn ErrorEventInit::empty() -> Self
@@ -556,6 +583,12 @@ pub type EventTarget
 pub fn EventTarget::new() -> Self
 pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget
+
+#external
+pub type FilePropertyBag
+pub fn FilePropertyBag::empty() -> Self
+pub fn FilePropertyBag::new(last_modified? : Int64) -> Self
+pub impl TJsValue for FilePropertyBag
 
 #external
 pub type FillStyle
@@ -640,6 +673,7 @@ pub impl TJsValue for HTMLButtonElement
 pub type HTMLCanvasElement
 pub fn HTMLCanvasElement::new() -> Self
 pub impl TCanvas for HTMLCanvasElement
+pub impl TCanvasImageSource for HTMLCanvasElement
 pub impl THTMLCanvasElement for HTMLCanvasElement
 pub impl THTMLElement for HTMLCanvasElement
 pub impl TJsValue for HTMLCanvasElement
@@ -687,6 +721,7 @@ pub impl TJsValue for HTMLHtmlElement
 pub type HTMLImageElement
 pub fn HTMLImageElement::new() -> Self
 pub impl THTMLImageElement for HTMLImageElement
+pub impl THTMLOrSVGImageElement for HTMLImageElement
 pub impl TJsValue for HTMLImageElement
 
 #external
@@ -702,6 +737,11 @@ pub fn HTMLLinkElement::new() -> Self
 pub impl THTMLElement for HTMLLinkElement
 pub impl THTMLLinkElement for HTMLLinkElement
 pub impl TJsValue for HTMLLinkElement
+
+#external
+pub type HTMLOrSVGImageElement
+pub fn[T : THTMLOrSVGImageElement] HTMLOrSVGImageElement::into(Self) -> T
+pub impl TCanvasImageSource for HTMLOrSVGImageElement
 
 #external
 pub type HTMLParagraphElement
@@ -735,6 +775,7 @@ pub impl TJsValue for HTMLStyleElement
 #external
 pub type HTMLVideoElement
 pub fn HTMLVideoElement::new() -> Self
+pub impl TCanvasImageSource for HTMLVideoElement
 pub impl THTMLVideoElement for HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement
 
@@ -754,6 +795,12 @@ pub impl THistory for History
 pub impl TJsValue for History
 
 #external
+pub type ImageBitmap
+pub impl TCanvasImageSource for ImageBitmap
+pub impl TImageBitmap for ImageBitmap
+pub impl TJsValue for ImageBitmap
+
+#external
 pub type ImageBitmapOptions
 pub fn ImageBitmapOptions::empty() -> Self
 pub fn ImageBitmapOptions::new(image_orientation? : ImageOrientation, premultiply_alpha? : PremultiplyAlpha, color_space_conversion? : ColorSpaceConversion, resize_width? : Int, resize_height? : Int, resize_quality? : ResizeQuality) -> Self
@@ -770,6 +817,18 @@ pub type ImageBitmapRenderingContextSettings
 pub fn ImageBitmapRenderingContextSettings::empty() -> Self
 pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
 pub impl TJsValue for ImageBitmapRenderingContextSettings
+
+#external
+pub type ImageBitmapSource
+pub fn[T : TImageBitmapSource] ImageBitmapSource::into(Self) -> T
+
+#external
+pub type ImageData
+pub fn ImageData::new(Int, Int, settings? : ImageDataSettings) -> Self
+pub fn ImageData::new2(JsValue, Int, sh? : Int, settings? : ImageDataSettings) -> Self
+pub impl TImageBitmapSource for ImageData
+pub impl TImageData for ImageData
+pub impl TJsValue for ImageData
 
 pub enum ImageDataPixelFormat {
   RgbaUnorm8
@@ -991,6 +1050,7 @@ pub impl TNodeList for NodeList
 pub type OffscreenCanvas
 pub fn OffscreenCanvas::new(Int64, Int64) -> Self
 pub impl TCanvas for OffscreenCanvas
+pub impl TCanvasImageSource for OffscreenCanvas
 pub impl TEventTarget for OffscreenCanvas
 pub impl TJsValue for OffscreenCanvas
 pub impl TOffscreenCanvas for OffscreenCanvas
@@ -1090,8 +1150,6 @@ pub impl TRange for Range
 #external
 pub type RenderingContext
 pub fn[T : TRenderingContext] RenderingContext::into(Self) -> T
-pub fn RenderingContext::is_null(Self) -> Bool
-pub fn RenderingContext::null() -> Self
 
 pub enum ResizeQuality {
   Pixelated
@@ -1397,6 +1455,16 @@ pub(open) trait TBeforeNodesArg {
 }
 pub impl TBeforeNodesArg for String
 
+pub trait TBlob : TJsValue {
+  size(Self) -> Int64
+  type_(Self) -> String
+  slice(Self, start? : Int64, end? : Int64, content_type? : String) -> Blob
+  stream(Self) -> JsValue
+  text(Self) -> JsPromise[String]
+  array_buffer(Self) -> JsPromise[JsValue]
+  bytes(Self) -> JsPromise[JsValue]
+}
+
 pub trait TCDATASection : TJsValue + TText {
 }
 
@@ -1406,6 +1474,10 @@ pub(open) trait TCanvas {
 
 pub trait TCanvasGradient : TJsValue {
   add_color_stop(Self, Double, String) -> Unit
+}
+
+pub(open) trait TCanvasImageSource {
+  to_js(Self) -> JsValue
 }
 
 pub trait TCanvasPattern : TJsValue {
@@ -1484,7 +1556,7 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, JsValue, String) -> CanvasPattern?
+  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
   clear_rect(Self, Double, Double, Double, Double) -> Unit
   fill_rect(Self, Double, Double, Double, Double) -> Unit
   stroke_rect(Self, Double, Double, Double, Double) -> Unit
@@ -1504,14 +1576,14 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> JsValue
-  draw_image(Self, JsValue, Double, Double) -> Unit
-  draw_image2(Self, JsValue, Double, Double, Double, Double) -> Unit
-  draw_image3(Self, JsValue, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
-  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> JsValue
-  create_image_data2(Self, JsValue) -> JsValue
-  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> JsValue
-  put_image_data(Self, JsValue, Int, Int) -> Unit
-  put_image_data2(Self, JsValue, Int, Int, Int, Int, Int, Int) -> Unit
+  draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
+  draw_image2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
+  create_image_data2(Self, ImageData) -> ImageData
+  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
+  put_image_data(Self, ImageData, Int, Int) -> Unit
+  put_image_data2(Self, ImageData, Int, Int, Int, Int, Int, Int) -> Unit
   set_line_dash(Self, Array[Double]) -> Unit
   get_line_dash(Self) -> Array[Double]
   close_path(Self) -> Unit
@@ -2758,6 +2830,10 @@ pub trait THTMLLinkElement : TJsValue + THTMLElement {
   sheet(Self) -> JsValue?
 }
 
+pub(open) trait THTMLOrSVGImageElement {
+  to_js(Self) -> JsValue
+}
+
 pub trait THTMLParagraphElement : TJsValue + THTMLElement {
   align(Self) -> String
   set_align(Self, String) -> Unit
@@ -2839,9 +2915,27 @@ pub trait THistory : TJsValue {
   replace_state(Self, JsValue, String, url? : String) -> Unit
 }
 
+pub trait TImageBitmap : TJsValue {
+  width(Self) -> Int
+  height(Self) -> Int
+  close(Self) -> Unit
+}
+
 pub trait TImageBitmapRenderingContext : TJsValue {
   canvas(Self) -> Canvas
-  transfer_from_image_bitmap(Self, JsValue) -> Unit
+  transfer_from_image_bitmap(Self, ImageBitmap) -> Unit
+}
+
+pub(open) trait TImageBitmapSource {
+  to_js(Self) -> JsValue
+}
+
+pub trait TImageData : TJsValue {
+  width(Self) -> Int
+  height(Self) -> Int
+  data(Self) -> JsValue
+  pixel_format(Self) -> ImageDataPixelFormat
+  color_space(Self) -> PredefinedColorSpace
 }
 
 pub(open) trait TImportNodeOptionsArg {
@@ -3040,8 +3134,8 @@ pub trait TOffscreenCanvas : TJsValue + TEventTarget {
   oncontextrestored(Self) -> EventHandler
   set_oncontextrestored(Self, EventHandler) -> Unit
   get_context(Self, OffscreenRenderingContextId, options? : JsValue) -> JsValue?
-  transfer_to_image_bitmap(Self) -> JsValue
-  convert_to_blob(Self, options? : ImageEncodeOptions) -> JsPromise[JsValue]
+  transfer_to_image_bitmap(Self) -> ImageBitmap
+  convert_to_blob(Self, options? : ImageEncodeOptions) -> JsPromise[Blob]
 }
 
 pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
@@ -3116,7 +3210,7 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, JsValue, String) -> CanvasPattern?
+  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
   clear_rect(Self, Double, Double, Double, Double) -> Unit
   fill_rect(Self, Double, Double, Double, Double) -> Unit
   stroke_rect(Self, Double, Double, Double, Double) -> Unit
@@ -3134,14 +3228,14 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> JsValue
-  draw_image(Self, JsValue, Double, Double) -> Unit
-  draw_image2(Self, JsValue, Double, Double, Double, Double) -> Unit
-  draw_image3(Self, JsValue, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
-  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> JsValue
-  create_image_data2(Self, JsValue) -> JsValue
-  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> JsValue
-  put_image_data(Self, JsValue, Int, Int) -> Unit
-  put_image_data2(Self, JsValue, Int, Int, Int, Int, Int, Int) -> Unit
+  draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
+  draw_image2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
+  create_image_data2(Self, ImageData) -> ImageData
+  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
+  put_image_data(Self, ImageData, Int, Int) -> Unit
+  put_image_data2(Self, ImageData, Int, Int, Int, Int, Int, Int) -> Unit
   set_line_dash(Self, Array[Double]) -> Unit
   get_line_dash(Self) -> Array[Double]
   close_path(Self) -> Unit
@@ -3542,8 +3636,8 @@ pub trait TWindow : TJsValue {
   set_interval(Self, JsValue, timeout? : Int, JsValue) -> Int
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, JsValue) -> Unit
-  create_image_bitmap(Self, JsValue, options? : ImageBitmapOptions) -> JsPromise[JsValue]
-  create_image_bitmap2(Self, JsValue, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[JsValue]
+  create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap2(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
   request_animation_frame(Self, JsValue) -> Int
   cancel_animation_frame(Self, Int) -> Unit

@@ -51,6 +51,7 @@ const CORE_SPECS = [
   "cssom",         // CSS Object Model
   "cssom-view",    // CSSOM View (scrolling, etc.)
   "geometry",      // DOMPoint, DOMRect, DOMMatrix, etc.
+  "FileAPI",       // Blob, File, FileReader, etc.
 ];
 
 /**
@@ -155,6 +156,12 @@ const CORE_INTERFACES = new Set([
   "CanvasGradient",
   "CanvasPattern",
   "OffscreenCanvas",
+
+  // Types needed for union types (CanvasImageSource, ImageBitmapSource, etc.)
+  "ImageBitmap",
+  "ImageData",
+  "Blob",
+  // Note: VideoFrame is in webcodecs spec and is excluded for now
 ]);
 
 /**
@@ -234,6 +241,10 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
     "OnErrorEventHandler",
     "OnBeforeUnloadEventHandler",
     "RenderingContext",
+    // Union type typedefs
+    "CanvasImageSource",
+    "ImageBitmapSource",
+    "HTMLOrSVGImageElement",
   ]);
   for (const [name, typedef] of idl.typedefs) {
     if (GENERATED_TYPEDEFS.has(name)) {

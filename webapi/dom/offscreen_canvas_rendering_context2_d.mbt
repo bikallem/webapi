@@ -272,7 +272,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     x : Double,
     y : Double,
   ) -> CanvasGradient = _
-  create_pattern(self : Self, image : JsValue, repetition : String) -> CanvasPattern? = _
+  create_pattern(self : Self, image : &TCanvasImageSource, repetition : String) -> CanvasPattern? = _
   clear_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   fill_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   stroke_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
@@ -313,10 +313,10 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     max_width? : Double,
   ) -> Unit = _
   measure_text(self : Self, text : String) -> JsValue = _
-  draw_image(self : Self, image : JsValue, dx : Double, dy : Double) -> Unit = _
+  draw_image(self : Self, image : &TCanvasImageSource, dx : Double, dy : Double) -> Unit = _
   draw_image2(
     self : Self,
-    image : JsValue,
+    image : &TCanvasImageSource,
     dx : Double,
     dy : Double,
     dw : Double,
@@ -324,7 +324,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
   ) -> Unit = _
   draw_image3(
     self : Self,
-    image : JsValue,
+    image : &TCanvasImageSource,
     sx : Double,
     sy : Double,
     sw : Double,
@@ -339,8 +339,8 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     sw : Int,
     sh : Int,
     settings? : ImageDataSettings,
-  ) -> JsValue = _
-  create_image_data2(self : Self, image_data : JsValue) -> JsValue = _
+  ) -> ImageData = _
+  create_image_data2(self : Self, image_data : ImageData) -> ImageData = _
   get_image_data(
     self : Self,
     sx : Int,
@@ -348,11 +348,11 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     sw : Int,
     sh : Int,
     settings? : ImageDataSettings,
-  ) -> JsValue = _
-  put_image_data(self : Self, image_data : JsValue, dx : Int, dy : Int) -> Unit = _
+  ) -> ImageData = _
+  put_image_data(self : Self, image_data : ImageData, dx : Int, dy : Int) -> Unit = _
   put_image_data2(
     self : Self,
-    image_data : JsValue,
+    image_data : ImageData,
     dx : Int,
     dy : Int,
     dirty_x : Int,
@@ -724,12 +724,12 @@ fn offscreen_canvas_rendering_context2_d_create_pattern_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with create_pattern(
   self : Self,
-  image : JsValue,
+  image : &TCanvasImageSource,
   repetition : String,
 ) -> CanvasPattern? {
   offscreen_canvas_rendering_context2_d_create_pattern_ffi(
     TJsValue::to_js(self),
-    image,
+    TCanvasImageSource::to_js(image),
     TJsValue::to_js(repetition),
   ).as_option()
 }
@@ -1096,13 +1096,13 @@ fn offscreen_canvas_rendering_context2_d_draw_image_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with draw_image(
   self : Self,
-  image : JsValue,
+  image : &TCanvasImageSource,
   dx : Double,
   dy : Double,
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_draw_image_ffi(
     TJsValue::to_js(self),
-    image,
+    TCanvasImageSource::to_js(image),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
   )
@@ -1121,7 +1121,7 @@ fn offscreen_canvas_rendering_context2_d_draw_image_ffi2(
 ///|
 impl TOffscreenCanvasRenderingContext2D with draw_image2(
   self : Self,
-  image : JsValue,
+  image : &TCanvasImageSource,
   dx : Double,
   dy : Double,
   dw : Double,
@@ -1129,7 +1129,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image2(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_draw_image_ffi2(
     TJsValue::to_js(self),
-    image,
+    TCanvasImageSource::to_js(image),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
     TJsValue::to_js(dw),
@@ -1154,7 +1154,7 @@ fn offscreen_canvas_rendering_context2_d_draw_image_ffi3(
 ///|
 impl TOffscreenCanvasRenderingContext2D with draw_image3(
   self : Self,
-  image : JsValue,
+  image : &TCanvasImageSource,
   sx : Double,
   sy : Double,
   sw : Double,
@@ -1166,7 +1166,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image3(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_draw_image_ffi3(
     TJsValue::to_js(self),
-    image,
+    TCanvasImageSource::to_js(image),
     TJsValue::to_js(sx),
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),
@@ -1192,7 +1192,7 @@ impl TOffscreenCanvasRenderingContext2D with create_image_data(
   sw : Int,
   sh : Int,
   settings? : ImageDataSettings = ImageDataSettings::empty(),
-) -> JsValue {
+) -> ImageData {
   offscreen_canvas_rendering_context2_d_create_image_data_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(sw),
@@ -1210,11 +1210,11 @@ fn offscreen_canvas_rendering_context2_d_create_image_data_ffi2(
 ///|
 impl TOffscreenCanvasRenderingContext2D with create_image_data2(
   self : Self,
-  image_data : JsValue,
-) -> JsValue {
+  image_data : ImageData,
+) -> ImageData {
   offscreen_canvas_rendering_context2_d_create_image_data_ffi2(
     TJsValue::to_js(self),
-    image_data,
+    TJsValue::to_js(image_data),
   ).unsafe_cast()
 }
 
@@ -1236,7 +1236,7 @@ impl TOffscreenCanvasRenderingContext2D with get_image_data(
   sw : Int,
   sh : Int,
   settings? : ImageDataSettings = ImageDataSettings::empty(),
-) -> JsValue {
+) -> ImageData {
   offscreen_canvas_rendering_context2_d_get_image_data_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(sx),
@@ -1258,13 +1258,13 @@ fn offscreen_canvas_rendering_context2_d_put_image_data_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with put_image_data(
   self : Self,
-  image_data : JsValue,
+  image_data : ImageData,
   dx : Int,
   dy : Int,
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_put_image_data_ffi(
     TJsValue::to_js(self),
-    image_data,
+    TJsValue::to_js(image_data),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
   )
@@ -1285,7 +1285,7 @@ fn offscreen_canvas_rendering_context2_d_put_image_data_ffi2(
 ///|
 impl TOffscreenCanvasRenderingContext2D with put_image_data2(
   self : Self,
-  image_data : JsValue,
+  image_data : ImageData,
   dx : Int,
   dy : Int,
   dirty_x : Int,
@@ -1295,7 +1295,7 @@ impl TOffscreenCanvasRenderingContext2D with put_image_data2(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_put_image_data_ffi2(
     TJsValue::to_js(self),
-    image_data,
+    TJsValue::to_js(image_data),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
     TJsValue::to_js(dirty_x),

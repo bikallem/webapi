@@ -17,6 +17,6 @@ pub impl TJsValue for BlobCallback with to_js(self : BlobCallback) -> JsValue = 
 fn blob_callback_new_ffi(f : JsValue) -> BlobCallback = "webapi_BlobCallback" "new"
 
 ///|
-pub fn BlobCallback::new(f : (JsValue) -> Unit) -> BlobCallback {
+pub fn BlobCallback::new(f : (Blob) -> Unit) -> BlobCallback {
   blob_callback_new_ffi(fn_to_js(f))
 }

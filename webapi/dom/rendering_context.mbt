@@ -21,12 +21,6 @@ pub fn[T : TRenderingContext] RenderingContext::into(
 ) -> T = "%identity"
 
 ///|
-pub fn RenderingContext::null() -> RenderingContext = "JsValue" "null"
-
-///|
-pub fn RenderingContext::is_null(self : RenderingContext) -> Bool = "JsValue" "isNull"
-
-///|
 pub impl TRenderingContext for CanvasRenderingContext2D with to_js(
   self : CanvasRenderingContext2D,
 ) -> JsValue = "%identity"

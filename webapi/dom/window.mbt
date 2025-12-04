@@ -554,18 +554,18 @@ pub trait TWindow: TJsValue {
   queue_microtask(self : Self, callback : JsValue) -> Unit = _
   create_image_bitmap(
     self : Self,
-    image : JsValue,
+    image : &TImageBitmapSource,
     options? : ImageBitmapOptions,
-  ) -> JsPromise[JsValue] = _
+  ) -> JsPromise[ImageBitmap] = _
   create_image_bitmap2(
     self : Self,
-    image : JsValue,
+    image : &TImageBitmapSource,
     sx : Int,
     sy : Int,
     sw : Int,
     sh : Int,
     options? : ImageBitmapOptions,
-  ) -> JsPromise[JsValue] = _
+  ) -> JsPromise[ImageBitmap] = _
   structured_clone(
     self : Self,
     value : JsValue,
@@ -995,12 +995,12 @@ fn window_create_image_bitmap_ffi(
 ///|
 impl TWindow with create_image_bitmap(
   self : Self,
-  image : JsValue,
+  image : &TImageBitmapSource,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsPromise[JsValue] {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_ffi(
     TJsValue::to_js(self),
-    image,
+    TImageBitmapSource::to_js(image),
     TJsValue::to_js(options),
   ).unsafe_cast()
 }
@@ -1019,16 +1019,16 @@ fn window_create_image_bitmap_ffi2(
 ///|
 impl TWindow with create_image_bitmap2(
   self : Self,
-  image : JsValue,
+  image : &TImageBitmapSource,
   sx : Int,
   sy : Int,
   sw : Int,
   sh : Int,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsPromise[JsValue] {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_ffi2(
     TJsValue::to_js(self),
-    image,
+    TImageBitmapSource::to_js(image),
     TJsValue::to_js(sx),
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),

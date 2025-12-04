@@ -63,6 +63,8 @@ const KNOWN_INTERFACES = new Set([
   // Canvas related
   "CanvasRenderingContext2D", "ImageBitmapRenderingContext", "OffscreenCanvasRenderingContext2D",
   "CanvasGradient", "CanvasPattern", "OffscreenCanvas",
+  // Types needed for union types
+  "ImageBitmap", "ImageData", "Blob",
   // Other
   "Window", "Navigator", "Location", "History", "Storage",
   "AbortController", "AbortSignal", "Range",
@@ -84,6 +86,9 @@ const KNOWN_ENUMS = new Set<string>();
  */
 const KNOWN_TYPEDEFS = new Set([
   "RenderingContext",
+  "CanvasImageSource",
+  "ImageBitmapSource",
+  "HTMLOrSVGImageElement",
 ]);
 
 /**
@@ -122,6 +127,13 @@ export function isKnownDictionary(name: string): boolean {
  */
 export function isKnownEnum(name: string): boolean {
   return KNOWN_ENUMS.has(name);
+}
+
+/**
+ * Check if a type name is a known typedef (union type)
+ */
+export function isKnownTypedef(name: string): boolean {
+  return KNOWN_TYPEDEFS.has(name);
 }
 
 /**
@@ -169,6 +181,7 @@ export interface MappedType {
   isOptional: boolean;
   unionContext?: UnionTypeContext;
   isDictionary?: boolean;
+  isTypedefUnion?: boolean;  // True if this is a typedef union (like CanvasImageSource)
 }
 
 /**
@@ -274,6 +287,7 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           moonbitType: name,
           needsConversion: true,
           isOptional: false,
+          isTypedefUnion: true,
         };
       }
 

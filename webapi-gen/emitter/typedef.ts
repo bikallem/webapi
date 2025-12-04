@@ -132,13 +132,6 @@ pub(open) trait T${typedef.name} {
     parts.push(`///|
 pub fn[T : T${typedef.name}] ${typedef.name}::into(self : ${typedef.name}) -> T = "%identity"`);
 
-    // null() and is_null() for nullable union returns
-    parts.push(`///|
-pub fn ${typedef.name}::null() -> ${typedef.name} = "JsValue" "null"
-
-///|
-pub fn ${typedef.name}::is_null(self : ${typedef.name}) -> Bool = "JsValue" "isNull"`);
-
     return parts.join("\n\n");
 }
 
@@ -152,8 +145,15 @@ function emitUnionMemberImpls(typedef: ParsedTypedef, idl: ParsedIdl): string | 
     const impls: string[] = [];
 
     for (const memberName of memberNames) {
-        // Only generate impl if the interface exists in our generated set
+        // Generate impl if the member is a known interface
         if (idl.interfaces.has(memberName)) {
+            impls.push(`///|
+pub impl T${typedef.name} for ${memberName} with to_js(
+  self : ${memberName},
+) -> JsValue = "%identity"`);
+        }
+        // Also generate impl if the member is a typedef (another union type)
+        else if (idl.typedefs.has(memberName)) {
             impls.push(`///|
 pub impl T${typedef.name} for ${memberName} with to_js(
   self : ${memberName},

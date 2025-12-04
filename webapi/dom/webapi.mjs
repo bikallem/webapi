@@ -48,6 +48,17 @@ export const wasmImportObject = {
     debug: (console, ...args) => console.debug(...args)
   },
 
+  webapi_Blob: {
+    new: (blobParts, options) => new Blob(blobParts, options),
+    slice: (obj, start, end, contentType) => obj.slice(start, end, contentType),
+    stream: (obj) => obj.stream(),
+    text: (obj) => obj.text(),
+    arrayBuffer: (obj) => obj.arrayBuffer(),
+    bytes: (obj) => obj.bytes(),
+    get_size: (obj) => obj.size,
+    get_type: (obj) => obj.type
+  },
+
   webapi_Window: {
     matchMedia: (obj, query) => obj.matchMedia(query),
     moveTo: (obj, x, y) => obj.moveTo(x, y),
@@ -2127,6 +2138,21 @@ export const wasmImportObject = {
     get_state: (obj) => obj.state
   },
 
+  webapi_ImageData: {
+    new: (sw, sh, settings) => new ImageData(sw, sh, settings),
+    get_width: (obj) => obj.width,
+    get_height: (obj) => obj.height,
+    get_data: (obj) => obj.data,
+    get_pixelFormat: (obj) => obj.pixelFormat,
+    get_colorSpace: (obj) => obj.colorSpace
+  },
+
+  webapi_ImageBitmap: {
+    close: (obj) => obj.close(),
+    get_width: (obj) => obj.width,
+    get_height: (obj) => obj.height
+  },
+
   webapi_Storage: {
     key: (obj, index) => obj.key(index),
     getItem: (obj, key) => obj.getItem(key),
@@ -2179,6 +2205,23 @@ export const wasmImportObject = {
     get_isComposing: (obj) => obj.isComposing,
     get_charCode: (obj) => obj.charCode,
     get_keyCode: (obj) => obj.keyCode
+  },
+
+  webapi_BlobPropertyBag: {
+    new: (type, endings) => {
+      const obj = {};
+      if (type !== undefined) obj.type = type;
+      if (endings !== undefined) obj.endings = endings;
+      return obj;
+    }
+  },
+
+  webapi_FilePropertyBag: {
+    new: (lastModified) => {
+      const obj = {};
+      if (lastModified !== undefined) obj.lastModified = lastModified;
+      return obj;
+    }
   },
 
   webapi_ScrollOptions: {
