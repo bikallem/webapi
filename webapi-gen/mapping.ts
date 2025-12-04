@@ -309,9 +309,10 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
       }
 
       // Check if it's a known typedef (union types, etc.)
+      // Return trait object since union typedefs don't have external types
       if (KNOWN_TYPEDEFS.has(name)) {
         return {
-          moonbitType: name,
+          moonbitType: `&T${name}`,
           needsConversion: true,
           isOptional: false,
           isTypedefUnion: true,

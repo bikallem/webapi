@@ -7,17 +7,13 @@
 // typedef (CanvasRenderingContext2D or ImageBitmapRenderingContext or WebGLRenderingContext or WebGL2RenderingContext or GPUCanvasContext) RenderingContext;
 
 ///|
-#external
-pub type RenderingContext
-
-///|
 pub(open) trait TRenderingContext {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub fn[T : TRenderingContext] RenderingContext::into(
-  self : RenderingContext,
+pub fn[T : TRenderingContext] &TRenderingContext::into(
+  self : &TRenderingContext,
 ) -> T = "%identity"
 
 ///|

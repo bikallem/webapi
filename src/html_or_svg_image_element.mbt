@@ -8,17 +8,13 @@
 //          SVGImageElement) HTMLOrSVGImageElement;
 
 ///|
-#external
-pub type HTMLOrSVGImageElement
-
-///|
 pub(open) trait THTMLOrSVGImageElement {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub fn[T : THTMLOrSVGImageElement] HTMLOrSVGImageElement::into(
-  self : HTMLOrSVGImageElement,
+pub fn[T : THTMLOrSVGImageElement] &THTMLOrSVGImageElement::into(
+  self : &THTMLOrSVGImageElement,
 ) -> T = "%identity"
 
 ///|

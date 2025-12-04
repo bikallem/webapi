@@ -209,8 +209,8 @@ export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = 
 
     let paramType: string;
     if (mapped.isTypedefUnion) {
-      // Use trait object type for typedef union arguments (e.g., CanvasImageSource -> &TCanvasImageSource)
-      paramType = `&T${mapped.moonbitType}`;
+      // mapIdlType already returns trait object type for typedef unions (e.g., &TCanvasImageSource)
+      paramType = mapped.moonbitType;
     } else if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
       // Check if union collapses to single type after filtering
       const collapsedType = getCollapsedUnionType(typeToCheck);
@@ -333,8 +333,8 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     let defaultExpr: string | undefined;
 
     if (mapped.isTypedefUnion) {
-      // Typedef union - use trait object type (e.g., CanvasImageSource -> &TCanvasImageSource)
-      paramType = `&T${mapped.moonbitType}`;
+      // mapIdlType already returns trait object type for typedef unions (e.g., &TCanvasImageSource)
+      paramType = mapped.moonbitType;
     } else if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
       // Check if union collapses to single type after filtering
       const collapsedType = getCollapsedUnionType(typeToCheck);
@@ -403,8 +403,10 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     if (param.optional) {
       if (mapped.isTypedefUnion) {
         // Typedef union optional - use explicit trait syntax
+        // mapped.moonbitType is &TTypeName, extract TTypeName for the to_js call
+        const traitName = mapped.moonbitType.replace(/^&/, '');
         const jsVarName = `${paramName}_js`;
-        letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => T${mapped.moonbitType}::to_js(v), None => JsValue::undefined() }`);
+        letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => ${traitName}::to_js(v), None => JsValue::undefined() }`);
         args.push(jsVarName);
       } else if (isUnionArg && !isCollapsedUnion) {
         if (hasDefaultEmpty) {
@@ -433,7 +435,9 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     } else {
       if (mapped.isTypedefUnion) {
         // Typedef union - use explicit trait syntax
-        args.push(`T${mapped.moonbitType}::to_js(${paramName})`);
+        // mapped.moonbitType is &TTypeName, extract TTypeName for the to_js call
+        const traitName = mapped.moonbitType.replace(/^&/, '');
+        args.push(`${traitName}::to_js(${paramName})`);
       } else if (isUnionArg && !isCollapsedUnion) {
         // Union trait objects have their own to_js method
         args.push(`${paramName}.to_js()`);

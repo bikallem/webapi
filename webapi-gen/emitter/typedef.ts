@@ -8,7 +8,7 @@
 
 import type { ParsedTypedef, ParsedIdl, ParsedType } from "../types.js";
 import { toSnakeCase, formatIdlSourceAsComment } from "../utils.js";
-import { mapIdlType, formatReturnType, isAbstractInterface } from "../mapping.js";
+import { mapIdlType, formatReturnType, isAbstractInterface, isKnownTypedef } from "../mapping.js";
 
 /**
  * Emit external type declaration for typedef
@@ -112,32 +112,28 @@ function getUnionMemberNames(typedef: ParsedTypedef): string[] {
 }
 
 /**
- * Emit union type definition with trait and into method
+ * Emit union type definition with trait and into method for trait objects
+ * No external type - uses trait objects for these union types
  */
 function emitUnionType(typedef: ParsedTypedef): string {
     const parts: string[] = [];
 
-    // External type
-    parts.push(`///|
-#external
-pub type ${typedef.name}`);
-
-    // Open trait for the union
+    // Open trait for the union (no external type)
     parts.push(`///|
 pub(open) trait T${typedef.name} {
   to_js(self : Self) -> JsValue
 }`);
 
-    // Into method for downcasting
+    // Into method for trait objects
     parts.push(`///|
-pub fn[T : T${typedef.name}] ${typedef.name}::into(self : ${typedef.name}) -> T = "%identity"`);
+pub fn[T : T${typedef.name}] &T${typedef.name}::into(self : &T${typedef.name}) -> T = "%identity"`);
 
     return parts.join("\n\n");
 }
 
 /**
  * Emit trait implementations for each member of a union type
- * Skips fully abstract types (they have no external type, only trait)
+ * Skips fully abstract types and typedef unions (they have no external type, only trait)
  */
 function emitUnionMemberImpls(typedef: ParsedTypedef, idl: ParsedIdl): string | undefined {
     const memberNames = getUnionMemberNames(typedef);
@@ -146,19 +142,17 @@ function emitUnionMemberImpls(typedef: ParsedTypedef, idl: ParsedIdl): string | 
     const impls: string[] = [];
 
     for (const memberName of memberNames) {
+        // Skip typedef unions - they have no external type
+        if (isKnownTypedef(memberName)) {
+            continue;
+        }
+
         // Generate impl if the member is a known interface
         if (idl.interfaces.has(memberName)) {
             // Skip fully abstract types - they have no external type
             if (isAbstractInterface(memberName)) {
                 continue;
             }
-            impls.push(`///|
-pub impl T${typedef.name} for ${memberName} with to_js(
-  self : ${memberName},
-) -> JsValue = "%identity"`);
-        }
-        // Also generate impl if the member is a typedef (another union type)
-        else if (idl.typedefs.has(memberName)) {
             impls.push(`///|
 pub impl T${typedef.name} for ${memberName} with to_js(
   self : ${memberName},

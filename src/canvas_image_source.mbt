@@ -12,23 +12,14 @@
 //          VideoFrame) CanvasImageSource;
 
 ///|
-#external
-pub type CanvasImageSource
-
-///|
 pub(open) trait TCanvasImageSource {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub fn[T : TCanvasImageSource] CanvasImageSource::into(
-  self : CanvasImageSource,
+pub fn[T : TCanvasImageSource] &TCanvasImageSource::into(
+  self : &TCanvasImageSource,
 ) -> T = "%identity"
-
-///|
-pub impl TCanvasImageSource for HTMLOrSVGImageElement with to_js(
-  self : HTMLOrSVGImageElement,
-) -> JsValue = "%identity"
 
 ///|
 pub impl TCanvasImageSource for HTMLVideoElement with to_js(

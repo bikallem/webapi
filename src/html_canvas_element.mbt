@@ -28,7 +28,7 @@ pub trait THTMLCanvasElement: TJsValue + THTMLElement {
   set_width(self : Self, value : UInt) -> Unit = _
   height(self : Self) -> UInt = _
   set_height(self : Self, value : UInt) -> Unit = _
-  get_context(self : Self, context_id : String, options? : JsValue) -> RenderingContext? = _
+  get_context(self : Self, context_id : String, options? : JsValue) -> &TRenderingContext? = _
   to_data_url(self : Self, type_? : String, quality? : JsValue) -> String = _
   to_blob(self : Self, callback : JsValue, type_? : String, quality? : JsValue) -> Unit = _
   transfer_control_to_offscreen(self : Self) -> OffscreenCanvas = _
@@ -64,7 +64,7 @@ impl THTMLCanvasElement with get_context(
   self : Self,
   context_id : String,
   options? : JsValue,
-) -> RenderingContext? {
+) -> &TRenderingContext? {
   let options_js = opt_to_js(options)
   html_canvas_element_get_context_ffi(
     TJsValue::to_js(self),

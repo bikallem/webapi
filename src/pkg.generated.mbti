@@ -207,11 +207,6 @@ pub impl TFillStyle for CanvasGradient
 pub impl TJsValue for CanvasGradient
 pub impl TStrokeStyle for CanvasGradient
 
-#external
-pub type CanvasImageSource
-pub fn[T : TCanvasImageSource] CanvasImageSource::into(Self) -> T
-pub impl TImageBitmapSource for CanvasImageSource
-
 pub enum CanvasLineCap {
   Butt
   Round
@@ -389,6 +384,7 @@ pub type DOMMatrixReadOnly
 pub fn DOMMatrixReadOnly::from_float32_array(Float32Array) -> JsValue
 pub fn DOMMatrixReadOnly::from_float64_array(Float64Array) -> JsValue
 pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit) -> JsValue
+pub fn[T : TDOMMatrixReadOnly] DOMMatrixReadOnly::into(Self) -> T
 pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> Self
 pub fn DOMMatrixReadOnly::null() -> Self
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
@@ -425,6 +421,7 @@ pub impl TRoundRectRadiiArg for DOMPointInit
 #external
 pub type DOMPointReadOnly
 pub fn DOMPointReadOnly::from_point(other? : DOMPointInit) -> JsValue
+pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(Self) -> T
 pub fn DOMPointReadOnly::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
 pub fn DOMPointReadOnly::null() -> Self
 pub impl TDOMPointReadOnly for DOMPointReadOnly
@@ -454,6 +451,7 @@ pub impl TJsValue for DOMRectInit
 #external
 pub type DOMRectReadOnly
 pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit) -> JsValue
+pub fn[T : TDOMRectReadOnly] DOMRectReadOnly::into(Self) -> T
 pub fn DOMRectReadOnly::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
 pub fn DOMRectReadOnly::null() -> Self
 pub impl TDOMRectReadOnly for DOMRectReadOnly
@@ -480,6 +478,7 @@ pub impl TNode for Document
 
 #external
 pub type DocumentFragment
+pub fn[T : TDocumentFragment] DocumentFragment::into(Self) -> T
 pub fn DocumentFragment::new() -> Self
 pub fn DocumentFragment::null() -> Self
 pub impl TDocumentFragment for DocumentFragment
@@ -550,6 +549,7 @@ pub impl TJsValue for ErrorEventInit
 
 #external
 pub type Event
+pub fn[T : TEvent] Event::into(Self) -> T
 pub fn Event::new(String, event_init_dict? : EventInit) -> Self
 pub fn Event::null() -> Self
 pub impl TEvent for Event
@@ -599,6 +599,7 @@ pub impl TJsValue for EventSourceInit
 
 #external
 pub type EventTarget
+pub fn[T : TEventTarget] EventTarget::into(Self) -> T
 pub fn EventTarget::new() -> Self
 pub fn EventTarget::null() -> Self
 pub impl TEventTarget for EventTarget
@@ -730,6 +731,7 @@ pub impl TNode for HTMLDivElement
 
 #external
 pub type HTMLElement
+pub fn[T : THTMLElement] HTMLElement::into(Self) -> T
 pub impl TElement for HTMLElement
 pub impl TEventTarget for HTMLElement
 pub impl THTMLElement for HTMLElement
@@ -790,11 +792,6 @@ pub impl THTMLElement for HTMLLinkElement
 pub impl THTMLLinkElement for HTMLLinkElement
 pub impl TJsValue for HTMLLinkElement
 pub impl TNode for HTMLLinkElement
-
-#external
-pub type HTMLOrSVGImageElement
-pub fn[T : THTMLOrSVGImageElement] HTMLOrSVGImageElement::into(Self) -> T
-pub impl TCanvasImageSource for HTMLOrSVGImageElement
 
 #external
 pub type HTMLParagraphElement
@@ -886,10 +883,6 @@ pub type ImageBitmapRenderingContextSettings
 pub fn ImageBitmapRenderingContextSettings::empty() -> Self
 pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
 pub impl TJsValue for ImageBitmapRenderingContextSettings
-
-#external
-pub type ImageBitmapSource
-pub fn[T : TImageBitmapSource] ImageBitmapSource::into(Self) -> T
 
 #external
 pub type ImageData
@@ -1032,6 +1025,7 @@ pub impl TJsValue for MessageEventInit
 
 #external
 pub type MouseEvent
+pub fn[T : TMouseEvent] MouseEvent::into(Self) -> T
 pub fn MouseEvent::new(String, event_init_dict? : MouseEventInit) -> Self
 pub fn MouseEvent::null() -> Self
 pub impl TEvent for MouseEvent
@@ -1225,10 +1219,6 @@ pub fn Range::null() -> Self
 pub impl TJsValue for Range
 pub impl TRange for Range
 
-#external
-pub type RenderingContext
-pub fn[T : TRenderingContext] RenderingContext::into(Self) -> T
-
 pub enum ResizeQuality {
   Pixelated
   Low
@@ -1382,6 +1372,7 @@ pub impl TJsValue for SubmitEventInit
 
 #external
 pub type Text
+pub fn[T : TText] Text::into(Self) -> T
 pub fn Text::new(data? : String) -> Self
 pub fn Text::null() -> Self
 pub impl TAssignNodesArg for Text
@@ -1434,6 +1425,7 @@ pub impl TJsValue for TrackEventInit
 
 #external
 pub type UIEvent
+pub fn[T : TUIEvent] UIEvent::into(Self) -> T
 pub fn UIEvent::new(String, event_init_dict? : UIEventInit) -> Self
 pub fn UIEvent::null() -> Self
 pub impl TEvent for UIEvent
@@ -1592,6 +1584,7 @@ pub trait TCanvasGradient : TJsValue {
 pub(open) trait TCanvasImageSource {
   to_js(Self) -> JsValue
 }
+pub fn[T : TCanvasImageSource] &TCanvasImageSource::into(Self) -> T
 
 pub trait TCanvasPattern : TJsValue {
   set_transform(Self, transform? : DOMMatrix2DInit) -> Unit
@@ -1727,6 +1720,7 @@ pub trait TCharacterData : TJsValue + TNode {
   replace_with(Self, &TReplaceWithNodesArg) -> Unit
   remove(Self) -> Unit
 }
+pub fn[T : TCharacterData] &TCharacterData::into(Self) -> T
 
 pub trait TComment : TJsValue + TCharacterData {
 }
@@ -2289,6 +2283,7 @@ pub trait TElement : TJsValue + TNode {
   replace_with(Self, &TReplaceWithNodesArg) -> Unit
   remove(Self) -> Unit
 }
+pub fn[T : TElement] &TElement::into(Self) -> T
 
 pub trait TEvent : TJsValue {
   type_(Self) -> String
@@ -2475,7 +2470,7 @@ pub trait THTMLCanvasElement : TJsValue + THTMLElement {
   set_width(Self, UInt) -> Unit
   height(Self) -> UInt
   set_height(Self, UInt) -> Unit
-  get_context(Self, String, options? : JsValue) -> RenderingContext?
+  get_context(Self, String, options? : JsValue) -> &TRenderingContext?
   to_data_url(Self, type_? : String, quality? : JsValue) -> String
   to_blob(Self, JsValue, type_? : String, quality? : JsValue) -> Unit
   transfer_control_to_offscreen(Self) -> OffscreenCanvas
@@ -2946,6 +2941,7 @@ pub trait THTMLLinkElement : TJsValue + THTMLElement {
 pub(open) trait THTMLOrSVGImageElement {
   to_js(Self) -> JsValue
 }
+pub fn[T : THTMLOrSVGImageElement] &THTMLOrSVGImageElement::into(Self) -> T
 
 pub trait THTMLParagraphElement : TJsValue + THTMLElement {
   align(Self) -> String
@@ -3050,6 +3046,7 @@ pub trait TImageBitmapRenderingContext : TJsValue {
 pub(open) trait TImageBitmapSource {
   to_js(Self) -> JsValue
 }
+pub fn[T : TImageBitmapSource] &TImageBitmapSource::into(Self) -> T
 
 pub trait TImageData : TJsValue {
   width(Self) -> UInt
@@ -3242,6 +3239,7 @@ pub trait TNode : TJsValue + TEventTarget {
   replace_child(Self, &TNode, &TNode) -> &TNode
   remove_child(Self, &TNode) -> &TNode
 }
+pub fn[T : TNode] &TNode::into(Self) -> T
 
 pub trait TNodeList : TJsValue {
   length(Self) -> UInt
@@ -3424,6 +3422,7 @@ pub impl TRemoveEventListenerOptionsArg for Bool
 pub(open) trait TRenderingContext {
   to_js(Self) -> JsValue
 }
+pub fn[T : TRenderingContext] &TRenderingContext::into(Self) -> T
 
 pub(open) trait TReplaceChildrenNodesArg {
   to_js(Self) -> JsValue
