@@ -38,33 +38,33 @@ function getMemberTypeName(memberType: ParsedType): string {
  */
 export function emitUnionType(union: UnionTypeContext): string {
   const parts: string[] = [];
-  
+
   // Trait definition
   parts.push(`///|
 trait ${union.contextName} {
   to_js(Self) -> JsValue
 }`);
-  
+
   // Implementation for each member type
   const seenTypes = new Set<string>();
-  
+
   for (const memberType of union.memberTypes) {
     const typeName = getMemberTypeName(memberType);
-    
+
     // Skip duplicates
     if (seenTypes.has(typeName)) continue;
     seenTypes.add(typeName);
-    
+
     parts.push(`///|
 impl ${union.contextName} for ${typeName} with to_js(self : ${typeName}) -> JsValue = "%identity"`);
   }
-  
+
   // Also add JsNull implementation for nullable unions
   if (!seenTypes.has("JsNull")) {
     parts.push(`///|
 pub impl ${union.contextName} for JsNull with to_js(self : JsNull) -> JsValue = "%identity"`);
   }
-  
+
   return parts.join("\n\n");
 }
 
@@ -76,11 +76,11 @@ export function collectAndEmitUnions(
   unions: Map<string, UnionTypeContext>
 ): string {
   const parts: string[] = [];
-  
+
   for (const [name, union] of unions) {
     parts.push(emitUnionType(union));
   }
-  
+
   return parts.join("\n\n");
 }
 
@@ -241,8 +241,8 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
   for (const memberName of unionType.memberNames) {
     // Skip reference types that aren't in our known interfaces
     const isKnownType = memberName === "String" || memberName === "Double" ||
-                        memberName === "Int" || memberName === "Bool" ||
-                        idl.interfaces.has(memberName);
+      memberName === "Int" || memberName === "Bool" ||
+      idl.interfaces.has(memberName);
     if (!isKnownType) {
       continue; // Skip unknown types
     }

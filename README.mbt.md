@@ -8,6 +8,7 @@ MoonBit bindings for Web APIs (DOM, HTML, Canvas, Events, etc.)
 - **Auto-generated from WebIDL** - Uses official W3C/WHATWG specifications
 - **Trait-based inheritance** - Mirrors the DOM class hierarchy
 - **Enum types** - Proper MoonBit enums for Canvas properties, scroll behaviors, etc.
+- **Union types** - Type-safe unions (e.g., `StrokeStyle` accepts String, CanvasGradient, or CanvasPattern)
 - **FFI-optimized** - Efficient JavaScript interop
 
 ## Installation
@@ -56,6 +57,16 @@ fn draw_canvas {
   ctx.set_line_cap(CanvasLineCap::Butt)
   ctx.set_text_align(CanvasTextAlign::Center)
   
+  // Type-safe union properties - accepts String, CanvasGradient, or CanvasPattern
+  ctx.set_stroke_style("red")
+  ctx.set_fill_style("blue")
+  
+  // Or use a gradient
+  let gradient = ctx.create_linear_gradient(0.0, 0.0, 200.0, 0.0)
+  gradient.add_color_stop(0.0, "red")
+  gradient.add_color_stop(1.0, "blue")
+  ctx.set_fill_style(gradient)
+  
   // Drawing operations
   ctx.begin_path()
   ctx.arc(100.0, 100.0, 50.0, 0.0, 6.28318)
@@ -69,11 +80,12 @@ The bindings include:
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| Interfaces | 61 | `Document`, `Element`, `HTMLCanvasElement`, `CanvasRenderingContext2D` |
+| Interfaces | 64 | `Document`, `Element`, `HTMLCanvasElement`, `CanvasRenderingContext2D`, `CanvasGradient` |
 | Dictionaries | 63 | `EventInit`, `ScrollOptions`, `DOMPointInit` |
 | Enums | 38 | `CanvasLineJoin`, `ScrollBehavior`, `DocumentReadyState` |
+| Union Types | 7 | `StrokeStyle`, `FillStyle`, `Canvas`, `RenderingContext` |
 | Callbacks | 8 | `EventListener`, `MutationCallback` |
-| Typedefs | 4 | `RenderingContext`, `EventHandler` |
+| Typedefs | 4 | `EventHandler` |
 
 ## Architecture
 
@@ -107,6 +119,26 @@ TEventTarget
 | `sequence<T>` | `Array[T]` |
 | `Promise<T>` | `JsPromise[T]` |
 | enum types | MoonBit `enum` |
+| union types | External type + open trait |
+
+### Union Types
+
+WebIDL union types like `(DOMString or CanvasGradient or CanvasPattern)` are represented using:
+- An **external type** (e.g., `StrokeStyle`) for the return type
+- An **open trait** (e.g., `TStrokeStyle`) for setter parameters
+
+```moonbit
+// Getter returns the union type
+let style : StrokeStyle = ctx.stroke_style()
+
+// Setter accepts any type implementing the trait
+ctx.set_stroke_style("red")           // String
+ctx.set_stroke_style(gradient)        // CanvasGradient
+ctx.set_stroke_style(pattern)         // CanvasPattern
+
+// Downcast if needed
+let color : String = style.into()
+```
 
 ## Development
 

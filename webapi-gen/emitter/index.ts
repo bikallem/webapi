@@ -12,12 +12,12 @@ export { emitDictionary, getDictionaryFilename } from "./dictionary.js";
 export { emitCallback, getCallbackFilename } from "./callback.js";
 export { emitTypedef, getTypedefFilename } from "./typedef.js";
 export {
-  emitUnionType,
-  collectAndEmitUnions,
-  collectPropertyUnionTypes,
-  registerCollectedUnionTypes,
-  emitPropertyUnionType,
-  getPropertyUnionTypeFilename,
+    emitUnionType,
+    collectAndEmitUnions,
+    collectPropertyUnionTypes,
+    registerCollectedUnionTypes,
+    emitPropertyUnionType,
+    getPropertyUnionTypeFilename,
 } from "./union.js";
 export type { CollectedUnionType } from "./union.js";
 export { emitEnum, getEnumFilename } from "./enum.js";
