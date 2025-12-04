@@ -30,7 +30,7 @@ pub type Text
 ///|
 pub trait TText: TJsValue + TCharacterData {
   whole_text(self : Self) -> String = _
-  assigned_slot(self : Self) -> JsValue? = _
+  assigned_slot(self : Self) -> HTMLSlotElement? = _
   split_text(self : Self, offset : UInt) -> Text = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
   convert_quad_from_node(
@@ -176,6 +176,6 @@ impl TText with whole_text(self : Self) -> String {
 fn text_assigned_slot_ffi(obj : JsValue) -> JsValue = "webapi_Text" "assignedSlot"
 
 ///|
-impl TText with assigned_slot(self : Self) -> JsValue? {
+impl TText with assigned_slot(self : Self) -> HTMLSlotElement? {
   text_assigned_slot_ffi(self.to_js()).as_option()
 }

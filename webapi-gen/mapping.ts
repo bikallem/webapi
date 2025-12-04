@@ -65,6 +65,8 @@ const KNOWN_INTERFACES = new Set([
   "CanvasGradient", "CanvasPattern", "OffscreenCanvas",
   // Types needed for union types
   "ImageBitmap", "ImageData", "Blob",
+  // Shadow DOM
+  "ShadowRoot", "HTMLSlotElement",
   // Other
   "Window", "Navigator", "Location", "History", "Storage",
   "AbortController", "AbortSignal", "Range",

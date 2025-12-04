@@ -52,6 +52,7 @@ const CORE_SPECS = [
   "cssom-view",    // CSSOM View (scrolling, etc.)
   "geometry",      // DOMPoint, DOMRect, DOMMatrix, etc.
   "FileAPI",       // Blob, File, FileReader, etc.
+  "dom-shadow",    // Shadow DOM (ShadowRoot, slots, etc.)
 ];
 
 /**
@@ -162,6 +163,10 @@ const CORE_INTERFACES = new Set([
   "ImageData",
   "Blob",
   // Note: VideoFrame is in webcodecs spec and is excluded for now
+
+  // Shadow DOM
+  "ShadowRoot",
+  "HTMLSlotElement",
 ]);
 
 /**

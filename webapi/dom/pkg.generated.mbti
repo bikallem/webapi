@@ -29,7 +29,7 @@ pub impl TJsValue for AbortController
 pub type AbortSignal
 pub fn AbortSignal::abort(reason? : JsValue) -> JsValue
 pub fn AbortSignal::any(Array[Self]) -> JsValue
-pub fn AbortSignal::timeout(Int64) -> JsValue
+pub fn AbortSignal::timeout(UInt64) -> JsValue
 pub impl TAbortSignal for AbortSignal
 pub impl TEventTarget for AbortSignal
 pub impl TJsValue for AbortSignal
@@ -276,7 +276,7 @@ pub impl Show for CanvasTextRendering
 #external
 pub type CaretPositionFromPointOptions
 pub fn CaretPositionFromPointOptions::empty() -> Self
-pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[JsValue]) -> Self
+pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[ShadowRoot]) -> Self
 pub impl TJsValue for CaretPositionFromPointOptions
 
 #external
@@ -498,6 +498,7 @@ pub impl TJsValue for DragEventInit
 
 #external
 pub type Element
+pub impl TAssignNodesArg for Element
 pub impl TElement for Element
 pub impl TJsValue for Element
 
@@ -527,7 +528,7 @@ pub impl Show for EndingType
 #external
 pub type ErrorEventInit
 pub fn ErrorEventInit::empty() -> Self
-pub fn ErrorEventInit::new(message? : String, filename? : String, lineno? : Int, colno? : Int, error? : JsValue) -> Self
+pub fn ErrorEventInit::new(message? : String, filename? : String, lineno? : UInt, colno? : UInt, error? : JsValue) -> Self
 pub impl TJsValue for ErrorEventInit
 
 #external
@@ -633,7 +634,7 @@ pub impl TJsValue for FunctionStringCallback
 #external
 pub type GetHTMLOptions
 pub fn GetHTMLOptions::empty() -> Self
-pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[JsValue]) -> Self
+pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[ShadowRoot]) -> Self
 pub impl TJsValue for GetHTMLOptions
 
 #external
@@ -759,6 +760,13 @@ pub impl THTMLScriptElement for HTMLScriptElement
 pub impl TJsValue for HTMLScriptElement
 
 #external
+pub type HTMLSlotElement
+pub fn HTMLSlotElement::new() -> Self
+pub impl THTMLElement for HTMLSlotElement
+pub impl THTMLSlotElement for HTMLSlotElement
+pub impl TJsValue for HTMLSlotElement
+
+#external
 pub type HTMLSpanElement
 pub fn HTMLSpanElement::new() -> Self
 pub impl THTMLElement for HTMLSpanElement
@@ -803,7 +811,7 @@ pub impl TJsValue for ImageBitmap
 #external
 pub type ImageBitmapOptions
 pub fn ImageBitmapOptions::empty() -> Self
-pub fn ImageBitmapOptions::new(image_orientation? : ImageOrientation, premultiply_alpha? : PremultiplyAlpha, color_space_conversion? : ColorSpaceConversion, resize_width? : Int, resize_height? : Int, resize_quality? : ResizeQuality) -> Self
+pub fn ImageBitmapOptions::new(image_orientation? : ImageOrientation, premultiply_alpha? : PremultiplyAlpha, color_space_conversion? : ColorSpaceConversion, resize_width? : UInt, resize_height? : UInt, resize_quality? : ResizeQuality) -> Self
 pub impl TJsValue for ImageBitmapOptions
 
 #external
@@ -824,8 +832,8 @@ pub fn[T : TImageBitmapSource] ImageBitmapSource::into(Self) -> T
 
 #external
 pub type ImageData
-pub fn ImageData::new(Int, Int, settings? : ImageDataSettings) -> Self
-pub fn ImageData::new2(JsValue, Int, sh? : Int, settings? : ImageDataSettings) -> Self
+pub fn ImageData::new(UInt, UInt, settings? : ImageDataSettings) -> Self
+pub fn ImageData::new2(JsValue, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
 pub impl TImageBitmapSource for ImageData
 pub impl TImageData for ImageData
 pub impl TJsValue for ImageData
@@ -926,7 +934,7 @@ pub impl TUIEvent for KeyboardEvent
 #external
 pub type KeyboardEventInit
 pub fn KeyboardEventInit::empty() -> Self
-pub fn KeyboardEventInit::new(key? : String, code? : String, location? : Int, repeat? : Bool, is_composing? : Bool, char_code? : Int, key_code? : Int) -> Self
+pub fn KeyboardEventInit::new(key? : String, code? : String, location? : UInt, repeat? : Bool, is_composing? : Bool, char_code? : UInt, key_code? : UInt) -> Self
 pub impl TJsValue for KeyboardEventInit
 
 #external
@@ -955,7 +963,7 @@ pub impl TMouseEvent for MouseEvent
 #external
 pub type MouseEventInit
 pub fn MouseEventInit::empty() -> Self
-pub fn MouseEventInit::new(screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : Int, related_target? : EventTarget) -> Self
+pub fn MouseEventInit::new(screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : EventTarget) -> Self
 pub impl TJsValue for MouseEventInit
 
 #external
@@ -1048,7 +1056,7 @@ pub impl TNodeList for NodeList
 
 #external
 pub type OffscreenCanvas
-pub fn OffscreenCanvas::new(Int64, Int64) -> Self
+pub fn OffscreenCanvas::new(UInt64, UInt64) -> Self
 pub impl TCanvas for OffscreenCanvas
 pub impl TCanvasImageSource for OffscreenCanvas
 pub impl TEventTarget for OffscreenCanvas
@@ -1084,12 +1092,12 @@ pub impl TJsValue for OnBeforeUnloadEventHandlerNonNull
 
 #external
 pub type OnErrorEventHandler
-pub fn OnErrorEventHandler::new((JsValue, String, Int, Int, JsValue) -> JsValue) -> Self
+pub fn OnErrorEventHandler::new((JsValue, String, UInt, UInt, JsValue) -> JsValue) -> Self
 pub impl TJsValue for OnErrorEventHandler
 
 #external
 pub type OnErrorEventHandlerNonNull
-pub fn OnErrorEventHandlerNonNull::new((JsValue, String, Int, Int, JsValue) -> JsValue) -> Self
+pub fn OnErrorEventHandlerNonNull::new((JsValue, String, UInt, UInt, JsValue) -> JsValue) -> Self
 pub impl TJsValue for OnErrorEventHandlerNonNull
 
 #external
@@ -1232,6 +1240,14 @@ pub impl Eq for SelectionMode
 pub impl Show for SelectionMode
 
 #external
+pub type ShadowRoot
+pub impl TDocumentFragment for ShadowRoot
+pub impl TEventTarget for ShadowRoot
+pub impl TJsValue for ShadowRoot
+pub impl TNode for ShadowRoot
+pub impl TShadowRoot for ShadowRoot
+
+#external
 pub type ShadowRootInit
 pub fn ShadowRootInit::empty() -> Self
 pub fn ShadowRootInit::new(ShadowRootMode, delegates_focus? : Bool, slot_assignment? : SlotAssignmentMode, clonable? : Bool, serializable? : Bool, custom_element_registry? : JsValue) -> Self
@@ -1264,7 +1280,7 @@ pub impl Show for SlotAssignmentMode
 #external
 pub type StaticRangeInit
 pub fn StaticRangeInit::empty() -> Self
-pub fn StaticRangeInit::new(Node, Int, Node, Int) -> Self
+pub fn StaticRangeInit::new(Node, UInt, Node, UInt) -> Self
 pub impl TJsValue for StaticRangeInit
 
 #external
@@ -1297,6 +1313,7 @@ pub impl TJsValue for SubmitEventInit
 #external
 pub type Text
 pub fn Text::new(data? : String) -> Self
+pub impl TAssignNodesArg for Text
 pub impl TCharacterData for Text
 pub impl TEventTarget for Text
 pub impl TJsValue for Text
@@ -1354,7 +1371,7 @@ pub impl TUIEvent for UIEvent
 #external
 pub type UIEventInit
 pub fn UIEventInit::empty() -> Self
-pub fn UIEventInit::new(view? : Window, detail? : Int, which? : Int) -> Self
+pub fn UIEventInit::new(view? : Window, detail? : Int, which? : UInt) -> Self
 pub impl TJsValue for UIEventInit
 
 #external
@@ -1373,7 +1390,7 @@ pub impl TWheelEvent for WheelEvent
 #external
 pub type WheelEventInit
 pub fn WheelEventInit::empty() -> Self
-pub fn WheelEventInit::new(delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : Int) -> Self
+pub fn WheelEventInit::new(delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : UInt) -> Self
 pub impl TJsValue for WheelEventInit
 
 #external
@@ -1439,6 +1456,10 @@ pub(open) trait TAppendNodesArg {
 }
 pub impl TAppendNodesArg for String
 
+pub(open) trait TAssignNodesArg {
+  to_js(Self) -> JsValue
+}
+
 pub trait TAttr : TJsValue + TNode {
   namespace_uri(Self) -> String?
   prefix(Self) -> String?
@@ -1456,7 +1477,7 @@ pub(open) trait TBeforeNodesArg {
 pub impl TBeforeNodesArg for String
 
 pub trait TBlob : TJsValue {
-  size(Self) -> Int64
+  size(Self) -> UInt64
   type_(Self) -> String
   slice(Self, start? : Int64, end? : Int64, content_type? : String) -> Blob
   stream(Self) -> JsValue
@@ -1601,14 +1622,14 @@ pub trait TCanvasRenderingContext2D : TJsValue {
 pub trait TCharacterData : TJsValue + TNode {
   data(Self) -> String
   set_data(Self, String) -> Unit
-  length(Self) -> Int
+  length(Self) -> UInt
   previous_element_sibling(Self) -> Element?
   next_element_sibling(Self) -> Element?
-  substring_data(Self, Int, Int) -> String
+  substring_data(Self, UInt, UInt) -> String
   append_data(Self, String) -> Unit
-  insert_data(Self, Int, String) -> Unit
-  delete_data(Self, Int, Int) -> Unit
-  replace_data(Self, Int, Int, String) -> Unit
+  insert_data(Self, UInt, String) -> Unit
+  delete_data(Self, UInt, UInt) -> Unit
+  replace_data(Self, UInt, UInt, String) -> Unit
   before(Self, &TBeforeNodesArg) -> Unit
   after(Self, &TAfterNodesArg) -> Unit
   replace_with(Self, &TReplaceWithNodesArg) -> Unit
@@ -1780,10 +1801,10 @@ pub trait TDOMRectReadOnly : TJsValue {
 }
 
 pub trait TDOMTokenList : TJsValue {
-  length(Self) -> Int
+  length(Self) -> UInt
   value(Self) -> String
   set_value(Self, String) -> Unit
-  item(Self, Int) -> String?
+  item(Self, UInt) -> String?
   contains(Self, String) -> Bool
   add(Self, String) -> Unit
   remove(Self, String) -> Unit
@@ -1856,7 +1877,7 @@ pub trait TDocument : TJsValue {
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element?
   last_element_child(Self) -> Element?
-  child_element_count(Self) -> Int
+  child_element_count(Self) -> UInt
   onabort(Self) -> EventHandler
   set_onabort(Self, EventHandler) -> Unit
   onauxclick(Self) -> EventHandler
@@ -2028,8 +2049,8 @@ pub trait TDocument : TJsValue {
   create_attribute_ns(Self, String, String) -> Attr
   create_event(Self, String) -> Event
   create_range(Self) -> Range
-  create_node_iterator(Self, Node, what_to_show? : Int, filter? : JsValue) -> JsValue
-  create_tree_walker(Self, Node, what_to_show? : Int, filter? : JsValue) -> JsValue
+  create_node_iterator(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_tree_walker(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
   get_elements_by_name(Self, String) -> NodeList
   open(Self, unused1? : String, unused2? : String) -> Document
   open2(Self, String, String, String) -> Window?
@@ -2059,14 +2080,14 @@ pub trait TDocument : TJsValue {
   query_selector_all(Self, String) -> NodeList
   create_expression(Self, String, resolver? : JsValue) -> JsValue
   create_ns_resolver(Self, Node) -> Node
-  evaluate(Self, String, Node, resolver? : JsValue, type_? : Int, result? : JsValue) -> JsValue
+  evaluate(Self, String, Node, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
 }
 
 pub trait TDocumentFragment : TJsValue + TNode {
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element?
   last_element_child(Self) -> Element?
-  child_element_count(Self) -> Int
+  child_element_count(Self) -> UInt
   get_element_by_id(Self, String) -> Element?
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
@@ -2110,7 +2131,7 @@ pub trait TElement : TJsValue {
   slot(Self) -> String
   set_slot(Self, String) -> Unit
   attributes(Self) -> NamedNodeMap
-  shadow_root(Self) -> JsValue?
+  shadow_root(Self) -> ShadowRoot?
   custom_element_registry(Self) -> JsValue?
   inner_html(Self) -> InnerHTML
   set_inner_html(Self, &TInnerHTML) -> Unit
@@ -2119,10 +2140,10 @@ pub trait TElement : TJsValue {
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element?
   last_element_child(Self) -> Element?
-  child_element_count(Self) -> Int
+  child_element_count(Self) -> UInt
   previous_element_sibling(Self) -> Element?
   next_element_sibling(Self) -> Element?
-  assigned_slot(Self) -> JsValue?
+  assigned_slot(Self) -> HTMLSlotElement?
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
   check_visibility(Self, options? : CheckVisibilityOptions) -> Bool
@@ -2149,7 +2170,7 @@ pub trait TElement : TJsValue {
   set_attribute_node(Self, Attr) -> Attr?
   set_attribute_node_ns(Self, Attr) -> Attr?
   remove_attribute_node(Self, Attr) -> Attr
-  attach_shadow(Self, ShadowRootInit) -> JsValue
+  attach_shadow(Self, ShadowRootInit) -> ShadowRoot
   closest(Self, String) -> Element?
   matches(Self, String) -> Bool
   webkit_matches_selector(Self, String) -> Bool
@@ -2182,7 +2203,7 @@ pub trait TEvent : TJsValue {
   target(Self) -> EventTarget?
   src_element(Self) -> EventTarget?
   current_target(Self) -> EventTarget?
-  event_phase(Self) -> Int
+  event_phase(Self) -> UInt
   cancel_bubble(Self) -> Bool
   set_cancel_bubble(Self, Bool) -> Unit
   bubbles(Self) -> Bool
@@ -2358,10 +2379,10 @@ pub trait THTMLButtonElement : TJsValue + THTMLElement {
 }
 
 pub trait THTMLCanvasElement : TJsValue + THTMLElement {
-  width(Self) -> Int
-  set_width(Self, Int) -> Unit
-  height(Self) -> Int
-  set_height(Self, Int) -> Unit
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
   get_context(Self, String, options? : JsValue) -> RenderingContext?
   to_data_url(Self, type_? : String, quality? : JsValue) -> String
   to_blob(Self, JsValue, type_? : String, quality? : JsValue) -> Unit
@@ -2369,8 +2390,8 @@ pub trait THTMLCanvasElement : TJsValue + THTMLElement {
 }
 
 pub trait THTMLCollection : TJsValue {
-  length(Self) -> Int
-  item(Self, Int) -> Element?
+  length(Self) -> UInt
+  item(Self, UInt) -> Element?
   named_item(Self, String) -> Element?
 }
 
@@ -2417,8 +2438,8 @@ pub trait THTMLElement : TJsValue {
   set_outer_text(Self, String) -> Unit
   popover(Self) -> String?
   set_popover(Self, String) -> Unit
-  heading_offset(Self) -> Int
-  set_heading_offset(Self, Int) -> Unit
+  heading_offset(Self) -> UInt
+  set_heading_offset(Self, UInt) -> Unit
   heading_reset(Self) -> Bool
   set_heading_reset(Self, Bool) -> Unit
   style(Self) -> JsValue
@@ -2620,7 +2641,7 @@ pub trait THTMLFormElement : TJsValue + THTMLElement {
   set_rel(Self, String) -> Unit
   rel_list(Self) -> DOMTokenList
   elements(Self) -> JsValue
-  length(Self) -> Int
+  length(Self) -> UInt
   submit(Self) -> Unit
   request_submit(Self, submitter? : HTMLElement) -> Unit
   reset(Self) -> Unit
@@ -2653,12 +2674,12 @@ pub trait THTMLImageElement : TJsValue {
   set_use_map(Self, String) -> Unit
   is_map(Self) -> Bool
   set_is_map(Self, Bool) -> Unit
-  width(Self) -> Int
-  set_width(Self, Int) -> Unit
-  height(Self) -> Int
-  set_height(Self, Int) -> Unit
-  natural_width(Self) -> Int
-  natural_height(Self) -> Int
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
+  natural_width(Self) -> UInt
+  natural_height(Self) -> UInt
   complete(Self) -> Bool
   current_src(Self) -> String
   referrer_policy(Self) -> String
@@ -2675,10 +2696,10 @@ pub trait THTMLImageElement : TJsValue {
   set_lowsrc(Self, String) -> Unit
   align(Self) -> String
   set_align(Self, String) -> Unit
-  hspace(Self) -> Int
-  set_hspace(Self, Int) -> Unit
-  vspace(Self) -> Int
-  set_vspace(Self, Int) -> Unit
+  hspace(Self) -> UInt
+  set_hspace(Self, UInt) -> Unit
+  vspace(Self) -> UInt
+  set_vspace(Self, UInt) -> Unit
   long_desc(Self) -> String
   set_long_desc(Self, String) -> Unit
   border(Self) -> String
@@ -2718,8 +2739,8 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_form_no_validate(Self, Bool) -> Unit
   form_target(Self) -> String
   set_form_target(Self, String) -> Unit
-  height(Self) -> Int
-  set_height(Self, Int) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
   indeterminate(Self) -> Bool
   set_indeterminate(Self, Bool) -> Unit
   list(Self) -> JsValue?
@@ -2743,8 +2764,8 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_read_only(Self, Bool) -> Unit
   required(Self) -> Bool
   set_required(Self, Bool) -> Unit
-  size(Self) -> Int
-  set_size(Self, Int) -> Unit
+  size(Self) -> UInt
+  set_size(Self, UInt) -> Unit
   src(Self) -> String
   set_src(Self, String) -> Unit
   step(Self) -> String
@@ -2759,16 +2780,16 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_value_as_date(Self, JsValue) -> Unit
   value_as_number(Self) -> Double
   set_value_as_number(Self, Double) -> Unit
-  width(Self) -> Int
-  set_width(Self, Int) -> Unit
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
   will_validate(Self) -> Bool
   validity(Self) -> JsValue
   validation_message(Self) -> String
   labels(Self) -> NodeList?
-  selection_start(Self) -> Int?
-  set_selection_start(Self, Int) -> Unit
-  selection_end(Self) -> Int?
-  set_selection_end(Self, Int) -> Unit
+  selection_start(Self) -> UInt?
+  set_selection_start(Self, UInt) -> Unit
+  selection_end(Self) -> UInt?
+  set_selection_end(Self, UInt) -> Unit
   selection_direction(Self) -> String?
   set_selection_direction(Self, String) -> Unit
   align(Self) -> String
@@ -2786,8 +2807,8 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_custom_validity(Self, String) -> Unit
   select(Self) -> Unit
   set_range_text(Self, String) -> Unit
-  set_range_text2(Self, String, Int, Int, selection_mode? : SelectionMode) -> Unit
-  set_selection_range(Self, Int, Int, direction? : String) -> Unit
+  set_range_text2(Self, String, UInt, UInt, selection_mode? : SelectionMode) -> Unit
+  set_selection_range(Self, UInt, UInt, direction? : String) -> Unit
   show_picker(Self) -> Unit
 }
 
@@ -2869,6 +2890,14 @@ pub trait THTMLScriptElement : TJsValue + THTMLElement {
   set_html_for(Self, String) -> Unit
 }
 
+pub trait THTMLSlotElement : TJsValue + THTMLElement {
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  assigned_nodes(Self, options? : AssignedNodesOptions) -> Array[Node]
+  assigned_elements(Self, options? : AssignedNodesOptions) -> Array[Element]
+  assign(Self, &TAssignNodesArg) -> Unit
+}
+
 pub trait THTMLSpanElement : TJsValue + THTMLElement {
 }
 
@@ -2884,12 +2913,12 @@ pub trait THTMLStyleElement : TJsValue + THTMLElement {
 }
 
 pub trait THTMLVideoElement : TJsValue {
-  width(Self) -> Int
-  set_width(Self, Int) -> Unit
-  height(Self) -> Int
-  set_height(Self, Int) -> Unit
-  video_width(Self) -> Int
-  video_height(Self) -> Int
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
+  video_width(Self) -> UInt
+  video_height(Self) -> UInt
   poster(Self) -> String
   set_poster(Self, String) -> Unit
   plays_inline(Self) -> Bool
@@ -2904,7 +2933,7 @@ pub impl THidden for Double
 pub impl THidden for String
 
 pub trait THistory : TJsValue {
-  length(Self) -> Int
+  length(Self) -> UInt
   scroll_restoration(Self) -> ScrollRestoration
   set_scroll_restoration(Self, ScrollRestoration) -> Unit
   state(Self) -> JsValue
@@ -2916,8 +2945,8 @@ pub trait THistory : TJsValue {
 }
 
 pub trait TImageBitmap : TJsValue {
-  width(Self) -> Int
-  height(Self) -> Int
+  width(Self) -> UInt
+  height(Self) -> UInt
   close(Self) -> Unit
 }
 
@@ -2931,8 +2960,8 @@ pub(open) trait TImageBitmapSource {
 }
 
 pub trait TImageData : TJsValue {
-  width(Self) -> Int
-  height(Self) -> Int
+  width(Self) -> UInt
+  height(Self) -> UInt
   data(Self) -> JsValue
   pixel_format(Self) -> ImageDataPixelFormat
   color_space(Self) -> PredefinedColorSpace
@@ -2960,8 +2989,12 @@ pub trait TJsValue {
   is_null(Self) -> Bool
 }
 pub impl TJsValue for Bool
+pub impl TJsValue for Byte
 pub impl TJsValue for Int
 pub impl TJsValue for Int64
+pub impl TJsValue for UInt
+pub impl TJsValue for UInt64
+pub impl TJsValue for Float
 pub impl TJsValue for Double
 pub impl TJsValue for String
 pub impl[T : TJsValue] TJsValue for Array[T]
@@ -2969,17 +3002,17 @@ pub impl[T : TJsValue] TJsValue for Array[T]
 pub trait TKeyboardEvent : TJsValue + TUIEvent {
   key(Self) -> String
   code(Self) -> String
-  location(Self) -> Int
+  location(Self) -> UInt
   ctrl_key(Self) -> Bool
   shift_key(Self) -> Bool
   alt_key(Self) -> Bool
   meta_key(Self) -> Bool
   repeat(Self) -> Bool
   is_composing(Self) -> Bool
-  char_code(Self) -> Int
-  key_code(Self) -> Int
+  char_code(Self) -> UInt
+  key_code(Self) -> UInt
   get_modifier_state(Self, String) -> Bool
-  init_keyboard_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, key_arg? : String, location_arg? : Int, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit
+  init_keyboard_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, key_arg? : String, location_arg? : UInt, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit
 }
 
 pub trait TLocation : TJsValue {
@@ -3024,7 +3057,7 @@ pub trait TMouseEvent : TJsValue {
   alt_key(Self) -> Bool
   meta_key(Self) -> Bool
   button(Self) -> Int
-  buttons(Self) -> Int
+  buttons(Self) -> UInt
   related_target(Self) -> EventTarget?
   get_modifier_state(Self, String) -> Bool
   init_mouse_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : EventTarget) -> Unit
@@ -3049,8 +3082,8 @@ pub trait TMutationRecord : TJsValue {
 }
 
 pub trait TNamedNodeMap : TJsValue {
-  length(Self) -> Int
-  item(Self, Int) -> Attr?
+  length(Self) -> UInt
+  item(Self, UInt) -> Attr?
   get_named_item(Self, String) -> Attr?
   get_named_item_ns(Self, String, String) -> Attr?
   set_named_item(Self, Attr) -> Attr?
@@ -3078,7 +3111,7 @@ pub trait TNavigator : TJsValue {
   plugins(Self) -> JsValue
   mime_types(Self) -> JsValue
   pdf_viewer_enabled(Self) -> Bool
-  hardware_concurrency(Self) -> Int64
+  hardware_concurrency(Self) -> UInt64
   taint_enabled(Self) -> Bool
   register_protocol_handler(Self, String, String) -> Unit
   unregister_protocol_handler(Self, String, String) -> Unit
@@ -3086,7 +3119,7 @@ pub trait TNavigator : TJsValue {
 }
 
 pub trait TNode : TJsValue + TEventTarget {
-  node_type(Self) -> Int
+  node_type(Self) -> UInt
   node_name(Self) -> String
   base_uri(Self) -> String
   is_connected(Self) -> Bool
@@ -3108,7 +3141,7 @@ pub trait TNode : TJsValue + TEventTarget {
   clone_node(Self, subtree? : Bool) -> Node
   is_equal_node(Self, Node) -> Bool
   is_same_node(Self, Node) -> Bool
-  compare_document_position(Self, Node) -> Int
+  compare_document_position(Self, Node) -> UInt
   contains(Self, Node) -> Bool
   lookup_prefix(Self, String) -> String?
   lookup_namespace_uri(Self, String) -> String?
@@ -3120,15 +3153,15 @@ pub trait TNode : TJsValue + TEventTarget {
 }
 
 pub trait TNodeList : TJsValue {
-  length(Self) -> Int
-  item(Self, Int) -> Node?
+  length(Self) -> UInt
+  item(Self, UInt) -> Node?
 }
 
 pub trait TOffscreenCanvas : TJsValue + TEventTarget {
-  width(Self) -> Int64
-  set_width(Self, Int64) -> Unit
-  height(Self) -> Int64
-  set_height(Self, Int64) -> Unit
+  width(Self) -> UInt64
+  set_width(Self, UInt64) -> Unit
+  height(Self) -> UInt64
+  set_height(Self, UInt64) -> Unit
   oncontextlost(Self) -> EventHandler
   set_oncontextlost(Self, EventHandler) -> Unit
   oncontextrestored(Self) -> EventHandler
@@ -3269,8 +3302,8 @@ pub trait TRange : TJsValue {
   common_ancestor_container(Self) -> Node
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
-  set_start(Self, Node, Int) -> Unit
-  set_end(Self, Node, Int) -> Unit
+  set_start(Self, Node, UInt) -> Unit
+  set_end(Self, Node, UInt) -> Unit
   set_start_before(Self, Node) -> Unit
   set_start_after(Self, Node) -> Unit
   set_end_before(Self, Node) -> Unit
@@ -3278,7 +3311,7 @@ pub trait TRange : TJsValue {
   collapse(Self, to_start? : Bool) -> Unit
   select_node(Self, Node) -> Unit
   select_node_contents(Self, Node) -> Unit
-  compare_boundary_points(Self, Int, Range) -> Int
+  compare_boundary_points(Self, UInt, Range) -> Int
   delete_contents(Self) -> Unit
   extract_contents(Self) -> DocumentFragment
   clone_contents(Self) -> DocumentFragment
@@ -3286,8 +3319,8 @@ pub trait TRange : TJsValue {
   surround_contents(Self, Node) -> Unit
   clone_range(Self) -> Range
   detach(Self) -> Unit
-  is_point_in_range(Self, Node, Int) -> Bool
-  compare_point(Self, Node, Int) -> Int
+  is_point_in_range(Self, Node, UInt) -> Bool
+  compare_point(Self, Node, UInt) -> Int
   intersects_node(Self, Node) -> Bool
   create_contextual_fragment(Self, String) -> DocumentFragment
 }
@@ -3320,9 +3353,29 @@ pub(open) trait TScrollIntoViewArgArg {
 }
 pub impl TScrollIntoViewArgArg for Bool
 
+pub trait TShadowRoot : TJsValue + TDocumentFragment {
+  mode(Self) -> ShadowRootMode
+  delegates_focus(Self) -> Bool
+  slot_assignment(Self) -> SlotAssignmentMode
+  clonable(Self) -> Bool
+  serializable(Self) -> Bool
+  host(Self) -> Element
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  inner_html(Self) -> InnerHTML
+  set_inner_html(Self, &TInnerHTML) -> Unit
+  style_sheets(Self) -> JsValue
+  adopted_style_sheets(Self) -> Array[JsValue]
+  set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
+  custom_element_registry(Self) -> JsValue?
+  active_element(Self) -> Element?
+  set_html_unsafe(Self, String) -> Unit
+  get_html(Self, options? : GetHTMLOptions) -> String
+}
+
 pub trait TStorage : TJsValue {
-  length(Self) -> Int
-  key(Self, Int) -> String?
+  length(Self) -> UInt
+  key(Self, UInt) -> String?
   get_item(Self, String) -> String?
   set_item(Self, String, String) -> Unit
   remove_item(Self, String) -> Unit
@@ -3336,8 +3389,8 @@ pub impl TStrokeStyle for String
 
 pub trait TText : TJsValue + TCharacterData {
   whole_text(Self) -> String
-  assigned_slot(Self) -> JsValue?
-  split_text(Self, Int) -> Text
+  assigned_slot(Self) -> HTMLSlotElement?
+  split_text(Self, UInt) -> Text
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
   convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
   convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
@@ -3352,7 +3405,7 @@ pub impl TTogglePopoverOptionsArg for Bool
 pub trait TUIEvent : TJsValue + TEvent {
   view(Self) -> Window?
   detail(Self) -> Int
-  which(Self) -> Int
+  which(Self) -> UInt
   init_ui_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int) -> Unit
 }
 
@@ -3360,7 +3413,7 @@ pub trait TWheelEvent : TJsValue + TMouseEvent {
   delta_x(Self) -> Double
   delta_y(Self) -> Double
   delta_z(Self) -> Double
-  delta_mode(Self) -> Int
+  delta_mode(Self) -> UInt
 }
 
 pub trait TWindow : TJsValue {
@@ -3399,7 +3452,7 @@ pub trait TWindow : TJsValue {
   set_status(Self, String) -> Unit
   closed(Self) -> Bool
   frames(Self) -> Window
-  length(Self) -> Int
+  length(Self) -> UInt
   top(Self) -> Window?
   opener(Self) -> JsValue
   set_opener(Self, JsValue) -> Unit
@@ -3639,7 +3692,7 @@ pub trait TWindow : TJsValue {
   create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   create_image_bitmap2(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
-  request_animation_frame(Self, JsValue) -> Int
-  cancel_animation_frame(Self, Int) -> Unit
+  request_animation_frame(Self, JsValue) -> UInt
+  cancel_animation_frame(Self, UInt) -> Unit
 }
 

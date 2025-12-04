@@ -1168,6 +1168,26 @@ export const wasmImportObject = {
     get_childElementCount: (obj) => obj.childElementCount
   },
 
+  webapi_ShadowRoot: {
+    setHTMLUnsafe: (obj, html) => obj.setHTMLUnsafe(html),
+    getHTML: (obj, options) => obj.getHTML(options),
+    get_mode: (obj) => obj.mode,
+    get_delegatesFocus: (obj) => obj.delegatesFocus,
+    get_slotAssignment: (obj) => obj.slotAssignment,
+    get_clonable: (obj) => obj.clonable,
+    get_serializable: (obj) => obj.serializable,
+    get_host: (obj) => obj.host,
+    get_onslotchange: (obj) => obj.onslotchange,
+    set_onslotchange: (obj, value) => { obj.onslotchange = value; },
+    get_innerHTML: (obj) => obj.innerHTML,
+    set_innerHTML: (obj, value) => { obj.innerHTML = value; },
+    get_styleSheets: (obj) => obj.styleSheets,
+    get_adoptedStyleSheets: (obj) => obj.adoptedStyleSheets,
+    set_adoptedStyleSheets: (obj, value) => { obj.adoptedStyleSheets = value; },
+    get_customElementRegistry: (obj) => obj.customElementRegistry,
+    get_activeElement: (obj) => obj.activeElement
+  },
+
   webapi_NamedNodeMap: {
     item: (obj, index) => obj.item(index),
     getNamedItem: (obj, qualifiedName) => obj.getNamedItem(qualifiedName),
@@ -1808,6 +1828,15 @@ export const wasmImportObject = {
     set_event: (obj, value) => { obj.event = value; },
     get_htmlFor: (obj) => obj.htmlFor,
     set_htmlFor: (obj, value) => { obj.htmlFor = value; }
+  },
+
+  webapi_HTMLSlotElement: {
+    new: () => new HTMLSlotElement(),
+    assignedNodes: (obj, options) => obj.assignedNodes(options),
+    assignedElements: (obj, options) => obj.assignedElements(options),
+    assign: (obj, nodes) => obj.assign(nodes),
+    get_name: (obj) => obj.name,
+    set_name: (obj, value) => { obj.name = value; }
   },
 
   webapi_HTMLCanvasElement: {

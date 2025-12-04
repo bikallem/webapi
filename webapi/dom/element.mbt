@@ -153,7 +153,7 @@ pub trait TElement: TJsValue {
   slot(self : Self) -> String = _
   set_slot(self : Self, value : String) -> Unit = _
   attributes(self : Self) -> NamedNodeMap = _
-  shadow_root(self : Self) -> JsValue? = _
+  shadow_root(self : Self) -> ShadowRoot? = _
   custom_element_registry(self : Self) -> JsValue? = _
   inner_html(self : Self) -> InnerHTML = _
   set_inner_html(self : Self, value : &TInnerHTML) -> Unit = _
@@ -165,7 +165,7 @@ pub trait TElement: TJsValue {
   child_element_count(self : Self) -> UInt = _
   previous_element_sibling(self : Self) -> Element? = _
   next_element_sibling(self : Self) -> Element? = _
-  assigned_slot(self : Self) -> JsValue? = _
+  assigned_slot(self : Self) -> HTMLSlotElement? = _
   get_client_rects(self : Self) -> JsValue = _
   get_bounding_client_rect(self : Self) -> JsValue = _
   check_visibility(self : Self, options? : CheckVisibilityOptions) -> Bool = _
@@ -199,7 +199,7 @@ pub trait TElement: TJsValue {
   set_attribute_node(self : Self, attr : Attr) -> Attr? = _
   set_attribute_node_ns(self : Self, attr : Attr) -> Attr? = _
   remove_attribute_node(self : Self, attr : Attr) -> Attr = _
-  attach_shadow(self : Self, init_ : ShadowRootInit) -> JsValue = _
+  attach_shadow(self : Self, init_ : ShadowRootInit) -> ShadowRoot = _
   closest(self : Self, selectors : String) -> Element? = _
   matches(self : Self, selectors : String) -> Bool = _
   webkit_matches_selector(self : Self, selectors : String) -> Bool = _
@@ -629,7 +629,7 @@ impl TElement with remove_attribute_node(self : Self, attr : Attr) -> Attr {
 fn element_attach_shadow_ffi(obj : JsValue, init_ : JsValue) -> JsValue = "webapi_Element" "attachShadow"
 
 ///|
-impl TElement with attach_shadow(self : Self, init_ : ShadowRootInit) -> JsValue {
+impl TElement with attach_shadow(self : Self, init_ : ShadowRootInit) -> ShadowRoot {
   element_attach_shadow_ffi(TJsValue::to_js(self), TJsValue::to_js(init_)).unsafe_cast()
 }
 
@@ -1194,7 +1194,7 @@ impl TElement with attributes(self : Self) -> NamedNodeMap {
 fn element_shadow_root_ffi(obj : JsValue) -> JsValue = "webapi_Element" "shadowRoot"
 
 ///|
-impl TElement with shadow_root(self : Self) -> JsValue? {
+impl TElement with shadow_root(self : Self) -> ShadowRoot? {
   element_shadow_root_ffi(self.to_js()).as_option()
 }
 
@@ -1290,6 +1290,6 @@ impl TElement with next_element_sibling(self : Self) -> Element? {
 fn element_assigned_slot_ffi(obj : JsValue) -> JsValue = "webapi_Element" "assignedSlot"
 
 ///|
-impl TElement with assigned_slot(self : Self) -> JsValue? {
+impl TElement with assigned_slot(self : Self) -> HTMLSlotElement? {
   element_assigned_slot_ffi(self.to_js()).as_option()
 }

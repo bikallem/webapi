@@ -25,7 +25,7 @@ fn get_html_options_ffi(
 ///|
 pub fn GetHTMLOptions::new(
   serializable_shadow_roots? : Bool = false,
-  shadow_roots? : Array[JsValue] = [],
+  shadow_roots? : Array[ShadowRoot] = [],
 ) -> GetHTMLOptions {
   get_html_options_ffi(
     TJsValue::to_js(serializable_shadow_roots),
