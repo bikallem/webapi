@@ -50,6 +50,9 @@ pub trait TUIEvent: TJsValue + TEvent {
 }
 
 ///|
+pub fn[T : TUIEvent] UIEvent::into(self : UIEvent) -> T = "%identity"
+
+///|
 pub impl TEvent for UIEvent
 
 ///|

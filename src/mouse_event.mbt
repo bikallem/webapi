@@ -102,6 +102,9 @@ pub trait TMouseEvent: TJsValue + TUIEvent {
 }
 
 ///|
+pub fn[T : TMouseEvent] MouseEvent::into(self : MouseEvent) -> T = "%identity"
+
+///|
 pub impl TEvent for MouseEvent
 
 ///|

@@ -243,6 +243,9 @@ pub trait TElement: TJsValue + TNode {
 }
 
 ///|
+pub fn[T : TElement] &TElement::into(self : &TElement) -> T = "%identity"
+
+///|
 fn element_get_client_rects_ffi(obj : JsValue) -> JsValue = "webapi_Element" "getClientRects"
 
 ///|

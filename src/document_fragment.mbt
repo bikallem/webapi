@@ -49,6 +49,11 @@ pub trait TDocumentFragment: TJsValue + TNode {
 }
 
 ///|
+pub fn[T : TDocumentFragment] DocumentFragment::into(
+  self : DocumentFragment,
+) -> T = "%identity"
+
+///|
 pub impl TEventTarget for DocumentFragment
 
 ///|

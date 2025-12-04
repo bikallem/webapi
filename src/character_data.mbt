@@ -46,6 +46,9 @@ pub trait TCharacterData: TJsValue + TNode {
 }
 
 ///|
+pub fn[T : TCharacterData] &TCharacterData::into(self : &TCharacterData) -> T = "%identity"
+
+///|
 fn character_data_substring_data_ffi(
   obj : JsValue,
   offset : JsValue,

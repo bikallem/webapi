@@ -54,6 +54,9 @@ pub trait TText: TJsValue + TCharacterData {
 }
 
 ///|
+pub fn[T : TText] Text::into(self : Text) -> T = "%identity"
+
+///|
 pub impl TEventTarget for Text
 
 ///|

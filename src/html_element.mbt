@@ -374,6 +374,9 @@ pub trait THTMLElement: TJsValue + TElement {
 }
 
 ///|
+pub fn[T : THTMLElement] HTMLElement::into(self : HTMLElement) -> T = "%identity"
+
+///|
 pub impl TEventTarget for HTMLElement
 
 ///|

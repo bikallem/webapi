@@ -41,6 +41,17 @@ export function isFullyAbstract(iface: ParsedInterface): boolean {
 }
 
 /**
+ * Check if an interface has subtypes (other interfaces inherit from it)
+ */
+function hasSubtypes(iface: ParsedInterface, interfaces: Map<string, ParsedInterface>): boolean {
+  for (const [, other] of interfaces) {
+    if (other.inheritance === iface.name) {
+      return true;
+    }
+  }
+  return false;
+}
+/**
  * Emit the external type declaration
  */
 function emitExternalType(iface: ParsedInterface): string {
@@ -66,6 +77,26 @@ function emitNullMethod(iface: ParsedInterface): string {
 pub fn ${iface.name}::null() -> ${iface.name} {
   JsValue::null()
 }`;
+}
+
+/**
+ * Emit into() method for trait objects of abstract types
+ * Allows downcasting from &TElement to HTMLDivElement etc.
+ */
+function emitTraitObjectInto(iface: ParsedInterface): string {
+  const traitName = toTraitName(iface.name);
+  return `///|
+pub fn[T : ${traitName}] &${traitName}::into(self : &${traitName}) -> T = "%identity"`;
+}
+
+/**
+ * Emit into() method for concrete types with subtypes
+ * Allows downcasting from HTMLElement to HTMLDivElement etc.
+ */
+function emitConcreteTypeInto(iface: ParsedInterface): string {
+  const traitName = toTraitName(iface.name);
+  return `///|
+pub fn[T : ${traitName}] ${iface.name}::into(self : ${iface.name}) -> T = "%identity"`;
 }
 
 /**
@@ -229,6 +260,16 @@ export function emitInterface(
 
   // Trait definition - all traits have default implementations (= _)
   parts.push(emitTraitDefinition(iface, idl.interfaces));
+
+  // into() method for types with subtypes (enables downcasting)
+  const hasSubtypesFlag = hasSubtypes(iface, idl.interfaces);
+  if (fullyAbstract) {
+    // For fully abstract types, generate into() on trait object: &TElement::into
+    parts.push(emitTraitObjectInto(iface));
+  } else if (hasSubtypesFlag) {
+    // For concrete types with subtypes, generate into() on external type: HTMLElement::into
+    parts.push(emitConcreteTypeInto(iface));
+  }
 
   // Trait implementation and TJsValue - NOT for fully abstract (no external type)
   if (!fullyAbstract) {

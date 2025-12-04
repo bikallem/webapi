@@ -35,6 +35,9 @@ pub trait TEventTarget: TJsValue {
 }
 
 ///|
+pub fn[T : TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+
+///|
 pub impl TEventTarget for EventTarget
 
 ///|

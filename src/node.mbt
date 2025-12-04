@@ -98,6 +98,9 @@ pub trait TNode: TJsValue + TEventTarget {
 }
 
 ///|
+pub fn[T : TNode] &TNode::into(self : &TNode) -> T = "%identity"
+
+///|
 fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Node" "getRootNode"
 
 ///|

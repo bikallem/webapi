@@ -42,6 +42,11 @@ pub trait TDOMPointReadOnly: TJsValue {
 }
 
 ///|
+pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(
+  self : DOMPointReadOnly,
+) -> T = "%identity"
+
+///|
 pub impl TDOMPointReadOnly for DOMPointReadOnly
 
 ///|

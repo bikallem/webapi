@@ -151,6 +151,11 @@ pub trait TDOMMatrixReadOnly: TJsValue {
 }
 
 ///|
+pub fn[T : TDOMMatrixReadOnly] DOMMatrixReadOnly::into(
+  self : DOMMatrixReadOnly,
+) -> T = "%identity"
+
+///|
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
 
 ///|
