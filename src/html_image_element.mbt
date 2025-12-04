@@ -53,7 +53,7 @@
 pub type HTMLImageElement
 
 ///|
-pub trait THTMLImageElement: TJsValue {
+pub trait THTMLImageElement: TJsValue + THTMLElement {
   x(self : Self) -> Int = _
   y(self : Self) -> Int = _
   alt(self : Self) -> String = _
@@ -102,6 +102,18 @@ pub trait THTMLImageElement: TJsValue {
   set_border(self : Self, value : String) -> Unit = _
   decode(self : Self) -> JsPromise[Unit] = _
 }
+
+///|
+pub impl TEventTarget for HTMLImageElement
+
+///|
+pub impl TNode for HTMLImageElement
+
+///|
+pub impl TElement for HTMLImageElement
+
+///|
+pub impl THTMLElement for HTMLImageElement
 
 ///|
 pub impl THTMLImageElement for HTMLImageElement

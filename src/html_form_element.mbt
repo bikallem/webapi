@@ -71,6 +71,15 @@ pub trait THTMLFormElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLFormElement
+
+///|
+pub impl TNode for HTMLFormElement
+
+///|
+pub impl TElement for HTMLFormElement
+
+///|
 pub impl THTMLElement for HTMLFormElement
 
 ///|

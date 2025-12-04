@@ -60,7 +60,7 @@
 pub type MouseEvent
 
 ///|
-pub trait TMouseEvent: TJsValue {
+pub trait TMouseEvent: TJsValue + TUIEvent {
   page_x(self : Self) -> Double = _
   page_y(self : Self) -> Double = _
   x(self : Self) -> Double = _
@@ -100,6 +100,12 @@ pub trait TMouseEvent: TJsValue {
     related_target_arg? : EventTarget,
   ) -> Unit = _
 }
+
+///|
+pub impl TEvent for MouseEvent
+
+///|
+pub impl TUIEvent for MouseEvent
 
 ///|
 pub impl TMouseEvent for MouseEvent

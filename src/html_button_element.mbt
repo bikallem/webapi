@@ -79,6 +79,15 @@ pub trait THTMLButtonElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLButtonElement
+
+///|
+pub impl TNode for HTMLButtonElement
+
+///|
+pub impl TElement for HTMLButtonElement
+
+///|
 pub impl THTMLElement for HTMLButtonElement
 
 ///|

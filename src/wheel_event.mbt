@@ -31,6 +31,12 @@ pub trait TWheelEvent: TJsValue + TMouseEvent {
 }
 
 ///|
+pub impl TEvent for WheelEvent
+
+///|
+pub impl TUIEvent for WheelEvent
+
+///|
 pub impl TMouseEvent for WheelEvent
 
 ///|

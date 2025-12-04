@@ -260,7 +260,7 @@
 pub type Window
 
 ///|
-pub trait TWindow: TJsValue {
+pub trait TWindow: TJsValue + TEventTarget {
   screen(self : Self) -> JsValue = _
   visual_viewport(self : Self) -> JsValue? = _
   inner_width(self : Self) -> Int = _
@@ -574,6 +574,9 @@ pub trait TWindow: TJsValue {
   request_animation_frame(self : Self, callback : JsValue) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
 }
+
+///|
+pub impl TEventTarget for Window
 
 ///|
 pub impl TWindow for Window

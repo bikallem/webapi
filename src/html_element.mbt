@@ -155,7 +155,7 @@
 pub type HTMLElement
 
 ///|
-pub trait THTMLElement: TJsValue {
+pub trait THTMLElement: TJsValue + TElement {
   scroll_parent(self : Self) -> Element? = _
   offset_parent(self : Self) -> Element? = _
   offset_top(self : Self) -> Int = _
@@ -372,6 +372,15 @@ pub trait THTMLElement: TJsValue {
   focus(self : Self, options? : FocusOptions) -> Unit = _
   blur(self : Self) -> Unit = _
 }
+
+///|
+pub impl TEventTarget for HTMLElement
+
+///|
+pub impl TNode for HTMLElement
+
+///|
+pub impl TElement for HTMLElement
 
 ///|
 pub impl THTMLElement for HTMLElement

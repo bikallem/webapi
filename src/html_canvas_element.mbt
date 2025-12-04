@@ -35,6 +35,15 @@ pub trait THTMLCanvasElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLCanvasElement
+
+///|
+pub impl TNode for HTMLCanvasElement
+
+///|
+pub impl TElement for HTMLCanvasElement
+
+///|
 pub impl THTMLElement for HTMLCanvasElement
 
 ///|

@@ -102,6 +102,15 @@ pub trait THTMLAnchorElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLAnchorElement
+
+///|
+pub impl TNode for HTMLAnchorElement
+
+///|
+pub impl TElement for HTMLAnchorElement
+
+///|
 pub impl THTMLElement for HTMLAnchorElement
 
 ///|

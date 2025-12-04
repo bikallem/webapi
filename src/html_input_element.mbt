@@ -204,6 +204,15 @@ pub trait THTMLInputElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLInputElement
+
+///|
+pub impl TNode for HTMLInputElement
+
+///|
+pub impl TElement for HTMLInputElement
+
+///|
 pub impl THTMLElement for HTMLInputElement
 
 ///|

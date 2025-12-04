@@ -17,6 +17,15 @@ pub type HTMLSpanElement
 pub trait THTMLSpanElement: TJsValue + THTMLElement {}
 
 ///|
+pub impl TEventTarget for HTMLSpanElement
+
+///|
+pub impl TNode for HTMLSpanElement
+
+///|
+pub impl TElement for HTMLSpanElement
+
+///|
 pub impl THTMLElement for HTMLSpanElement
 
 ///|

@@ -40,6 +40,15 @@ pub trait THTMLStyleElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLStyleElement
+
+///|
+pub impl TNode for HTMLStyleElement
+
+///|
+pub impl TElement for HTMLStyleElement
+
+///|
 pub impl THTMLElement for HTMLStyleElement
 
 ///|

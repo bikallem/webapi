@@ -255,7 +255,7 @@
 pub type Document
 
 ///|
-pub trait TDocument: TJsValue {
+pub trait TDocument: TJsValue + TNode {
   scrolling_element(self : Self) -> Element? = _
   implementation(self : Self) -> JsValue = _
   url(self : Self) -> String = _
@@ -579,6 +579,12 @@ pub trait TDocument: TJsValue {
     result? : JsValue,
   ) -> JsValue = _
 }
+
+///|
+pub impl TEventTarget for Document
+
+///|
+pub impl TNode for Document
 
 ///|
 pub impl TDocument for Document

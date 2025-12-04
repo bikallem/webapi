@@ -30,6 +30,15 @@ pub trait THTMLSlotElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLSlotElement
+
+///|
+pub impl TNode for HTMLSlotElement
+
+///|
+pub impl TElement for HTMLSlotElement
+
+///|
 pub impl THTMLElement for HTMLSlotElement
 
 ///|

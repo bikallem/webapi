@@ -26,6 +26,15 @@ pub trait THTMLParagraphElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLParagraphElement
+
+///|
+pub impl TNode for HTMLParagraphElement
+
+///|
+pub impl TElement for HTMLParagraphElement
+
+///|
 pub impl THTMLElement for HTMLParagraphElement
 
 ///|

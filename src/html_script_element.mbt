@@ -68,6 +68,15 @@ pub trait THTMLScriptElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLScriptElement
+
+///|
+pub impl TNode for HTMLScriptElement
+
+///|
+pub impl TElement for HTMLScriptElement
+
+///|
 pub impl THTMLElement for HTMLScriptElement
 
 ///|

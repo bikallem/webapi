@@ -129,7 +129,7 @@
 pub type Element
 
 ///|
-pub trait TElement: TJsValue {
+pub trait TElement: TJsValue + TNode {
   scroll_top(self : Self) -> Double = _
   set_scroll_top(self : Self, value : Double) -> Unit = _
   scroll_left(self : Self) -> Double = _
@@ -245,6 +245,12 @@ pub trait TElement: TJsValue {
   replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit = _
   remove(self : Self) -> Unit = _
 }
+
+///|
+pub impl TEventTarget for Element
+
+///|
+pub impl TNode for Element
 
 ///|
 pub impl TElement for Element

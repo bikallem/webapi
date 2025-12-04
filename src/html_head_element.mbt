@@ -17,6 +17,15 @@ pub type HTMLHeadElement
 pub trait THTMLHeadElement: TJsValue + THTMLElement {}
 
 ///|
+pub impl TEventTarget for HTMLHeadElement
+
+///|
+pub impl TNode for HTMLHeadElement
+
+///|
+pub impl TElement for HTMLHeadElement
+
+///|
 pub impl THTMLElement for HTMLHeadElement
 
 ///|

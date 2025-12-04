@@ -26,6 +26,15 @@ pub trait THTMLDivElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLDivElement
+
+///|
+pub impl TNode for HTMLDivElement
+
+///|
+pub impl TElement for HTMLDivElement
+
+///|
 pub impl THTMLElement for HTMLDivElement
 
 ///|

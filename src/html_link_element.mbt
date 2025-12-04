@@ -83,6 +83,15 @@ pub trait THTMLLinkElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLLinkElement
+
+///|
+pub impl TNode for HTMLLinkElement
+
+///|
+pub impl TElement for HTMLLinkElement
+
+///|
 pub impl THTMLElement for HTMLLinkElement
 
 ///|

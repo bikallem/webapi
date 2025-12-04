@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "bikallem/webapi/webapi/dom"
+package "bikallem/webapi"
 
 // Values
 pub fn[T : TJsValue] array_to_js(Array[T]) -> JsValue
@@ -470,7 +470,9 @@ pub type Document
 pub fn Document::new() -> Self
 pub fn Document::parse_html_unsafe(JsValue) -> JsValue
 pub impl TDocument for Document
+pub impl TEventTarget for Document
 pub impl TJsValue for Document
+pub impl TNode for Document
 
 #external
 pub type DocumentFragment
@@ -516,7 +518,9 @@ pub impl TJsValue for DragEventInit
 pub type Element
 pub impl TAssignNodesArg for Element
 pub impl TElement for Element
+pub impl TEventTarget for Element
 pub impl TJsValue for Element
+pub impl TNode for Element
 
 #external
 pub type ElementCreationOptions
@@ -670,9 +674,12 @@ pub impl TJsValue for GetRootNodeOptions
 #external
 pub type HTMLAnchorElement
 pub fn HTMLAnchorElement::new() -> Self
+pub impl TElement for HTMLAnchorElement
+pub impl TEventTarget for HTMLAnchorElement
 pub impl THTMLAnchorElement for HTMLAnchorElement
 pub impl THTMLElement for HTMLAnchorElement
 pub impl TJsValue for HTMLAnchorElement
+pub impl TNode for HTMLAnchorElement
 
 #external
 pub type HTMLAudioElement
@@ -683,25 +690,34 @@ pub impl TJsValue for HTMLAudioElement
 #external
 pub type HTMLBodyElement
 pub fn HTMLBodyElement::new() -> Self
+pub impl TElement for HTMLBodyElement
+pub impl TEventTarget for HTMLBodyElement
 pub impl THTMLBodyElement for HTMLBodyElement
 pub impl THTMLElement for HTMLBodyElement
 pub impl TJsValue for HTMLBodyElement
+pub impl TNode for HTMLBodyElement
 
 #external
 pub type HTMLButtonElement
 pub fn HTMLButtonElement::new() -> Self
+pub impl TElement for HTMLButtonElement
+pub impl TEventTarget for HTMLButtonElement
 pub impl THTMLButtonElement for HTMLButtonElement
 pub impl THTMLElement for HTMLButtonElement
 pub impl TJsValue for HTMLButtonElement
+pub impl TNode for HTMLButtonElement
 
 #external
 pub type HTMLCanvasElement
 pub fn HTMLCanvasElement::new() -> Self
 pub impl TCanvas for HTMLCanvasElement
 pub impl TCanvasImageSource for HTMLCanvasElement
+pub impl TElement for HTMLCanvasElement
+pub impl TEventTarget for HTMLCanvasElement
 pub impl THTMLCanvasElement for HTMLCanvasElement
 pub impl THTMLElement for HTMLCanvasElement
 pub impl TJsValue for HTMLCanvasElement
+pub impl TNode for HTMLCanvasElement
 
 #external
 pub type HTMLCollection
@@ -711,57 +727,82 @@ pub impl TJsValue for HTMLCollection
 #external
 pub type HTMLDivElement
 pub fn HTMLDivElement::new() -> Self
+pub impl TElement for HTMLDivElement
+pub impl TEventTarget for HTMLDivElement
 pub impl THTMLDivElement for HTMLDivElement
 pub impl THTMLElement for HTMLDivElement
 pub impl TJsValue for HTMLDivElement
+pub impl TNode for HTMLDivElement
 
 #external
 pub type HTMLElement
 pub fn HTMLElement::new() -> Self
+pub impl TElement for HTMLElement
+pub impl TEventTarget for HTMLElement
 pub impl THTMLElement for HTMLElement
 pub impl TJsValue for HTMLElement
+pub impl TNode for HTMLElement
 
 #external
 pub type HTMLFormElement
 pub fn HTMLFormElement::new() -> Self
+pub impl TElement for HTMLFormElement
+pub impl TEventTarget for HTMLFormElement
 pub impl THTMLElement for HTMLFormElement
 pub impl THTMLFormElement for HTMLFormElement
 pub impl TJsValue for HTMLFormElement
+pub impl TNode for HTMLFormElement
 
 #external
 pub type HTMLHeadElement
 pub fn HTMLHeadElement::new() -> Self
+pub impl TElement for HTMLHeadElement
+pub impl TEventTarget for HTMLHeadElement
 pub impl THTMLElement for HTMLHeadElement
 pub impl THTMLHeadElement for HTMLHeadElement
 pub impl TJsValue for HTMLHeadElement
+pub impl TNode for HTMLHeadElement
 
 #external
 pub type HTMLHtmlElement
 pub fn HTMLHtmlElement::new() -> Self
+pub impl TElement for HTMLHtmlElement
+pub impl TEventTarget for HTMLHtmlElement
 pub impl THTMLElement for HTMLHtmlElement
 pub impl THTMLHtmlElement for HTMLHtmlElement
 pub impl TJsValue for HTMLHtmlElement
+pub impl TNode for HTMLHtmlElement
 
 #external
 pub type HTMLImageElement
 pub fn HTMLImageElement::new() -> Self
+pub impl TElement for HTMLImageElement
+pub impl TEventTarget for HTMLImageElement
+pub impl THTMLElement for HTMLImageElement
 pub impl THTMLImageElement for HTMLImageElement
 pub impl THTMLOrSVGImageElement for HTMLImageElement
 pub impl TJsValue for HTMLImageElement
+pub impl TNode for HTMLImageElement
 
 #external
 pub type HTMLInputElement
 pub fn HTMLInputElement::new() -> Self
+pub impl TElement for HTMLInputElement
+pub impl TEventTarget for HTMLInputElement
 pub impl THTMLElement for HTMLInputElement
 pub impl THTMLInputElement for HTMLInputElement
 pub impl TJsValue for HTMLInputElement
+pub impl TNode for HTMLInputElement
 
 #external
 pub type HTMLLinkElement
 pub fn HTMLLinkElement::new() -> Self
+pub impl TElement for HTMLLinkElement
+pub impl TEventTarget for HTMLLinkElement
 pub impl THTMLElement for HTMLLinkElement
 pub impl THTMLLinkElement for HTMLLinkElement
 pub impl TJsValue for HTMLLinkElement
+pub impl TNode for HTMLLinkElement
 
 #external
 pub type HTMLOrSVGImageElement
@@ -771,38 +812,53 @@ pub impl TCanvasImageSource for HTMLOrSVGImageElement
 #external
 pub type HTMLParagraphElement
 pub fn HTMLParagraphElement::new() -> Self
+pub impl TElement for HTMLParagraphElement
+pub impl TEventTarget for HTMLParagraphElement
 pub impl THTMLElement for HTMLParagraphElement
 pub impl THTMLParagraphElement for HTMLParagraphElement
 pub impl TJsValue for HTMLParagraphElement
+pub impl TNode for HTMLParagraphElement
 
 #external
 pub type HTMLScriptElement
 pub fn HTMLScriptElement::new() -> Self
 pub fn HTMLScriptElement::supports(String) -> JsValue
+pub impl TElement for HTMLScriptElement
+pub impl TEventTarget for HTMLScriptElement
 pub impl THTMLElement for HTMLScriptElement
 pub impl THTMLScriptElement for HTMLScriptElement
 pub impl TJsValue for HTMLScriptElement
+pub impl TNode for HTMLScriptElement
 
 #external
 pub type HTMLSlotElement
 pub fn HTMLSlotElement::new() -> Self
+pub impl TElement for HTMLSlotElement
+pub impl TEventTarget for HTMLSlotElement
 pub impl THTMLElement for HTMLSlotElement
 pub impl THTMLSlotElement for HTMLSlotElement
 pub impl TJsValue for HTMLSlotElement
+pub impl TNode for HTMLSlotElement
 
 #external
 pub type HTMLSpanElement
 pub fn HTMLSpanElement::new() -> Self
+pub impl TElement for HTMLSpanElement
+pub impl TEventTarget for HTMLSpanElement
 pub impl THTMLElement for HTMLSpanElement
 pub impl THTMLSpanElement for HTMLSpanElement
 pub impl TJsValue for HTMLSpanElement
+pub impl TNode for HTMLSpanElement
 
 #external
 pub type HTMLStyleElement
 pub fn HTMLStyleElement::new() -> Self
+pub impl TElement for HTMLStyleElement
+pub impl TEventTarget for HTMLStyleElement
 pub impl THTMLElement for HTMLStyleElement
 pub impl THTMLStyleElement for HTMLStyleElement
 pub impl TJsValue for HTMLStyleElement
+pub impl TNode for HTMLStyleElement
 
 #external
 pub type HTMLVideoElement
@@ -993,8 +1049,10 @@ pub impl TJsValue for MessageEventInit
 #external
 pub type MouseEvent
 pub fn MouseEvent::new(String, event_init_dict? : MouseEventInit) -> Self
+pub impl TEvent for MouseEvent
 pub impl TJsValue for MouseEvent
 pub impl TMouseEvent for MouseEvent
+pub impl TUIEvent for MouseEvent
 
 #external
 pub type MouseEventInit
@@ -1435,8 +1493,10 @@ pub impl TJsValue for ValidityStateFlags
 #external
 pub type WheelEvent
 pub fn WheelEvent::new(String, event_init_dict? : WheelEventInit) -> Self
+pub impl TEvent for WheelEvent
 pub impl TJsValue for WheelEvent
 pub impl TMouseEvent for WheelEvent
+pub impl TUIEvent for WheelEvent
 pub impl TWheelEvent for WheelEvent
 
 #external
@@ -1447,6 +1507,7 @@ pub impl TJsValue for WheelEventInit
 
 #external
 pub type Window
+pub impl TEventTarget for Window
 pub impl TJsValue for Window
 pub impl TWindow for Window
 
@@ -1865,7 +1926,7 @@ pub trait TDOMTokenList : TJsValue {
   supports(Self, String) -> Bool
 }
 
-pub trait TDocument : TJsValue {
+pub trait TDocument : TJsValue + TNode {
   scrolling_element(Self) -> Element?
   implementation(Self) -> JsValue
   url(Self) -> String
@@ -2159,7 +2220,7 @@ pub trait TDocumentType : TJsValue + TNode {
   remove(Self) -> Unit
 }
 
-pub trait TElement : TJsValue {
+pub trait TElement : TJsValue + TNode {
   scroll_top(Self) -> Double
   set_scroll_top(Self, Double) -> Unit
   scroll_left(Self) -> Double
@@ -2452,7 +2513,7 @@ pub trait THTMLDivElement : TJsValue + THTMLElement {
   set_align(Self, String) -> Unit
 }
 
-pub trait THTMLElement : TJsValue {
+pub trait THTMLElement : TJsValue + TElement {
   scroll_parent(Self) -> Element?
   offset_parent(Self) -> Element?
   offset_top(Self) -> Int
@@ -2709,7 +2770,7 @@ pub trait THTMLHtmlElement : TJsValue + THTMLElement {
   set_version(Self, String) -> Unit
 }
 
-pub trait THTMLImageElement : TJsValue {
+pub trait THTMLImageElement : TJsValue + THTMLElement {
   x(Self) -> Int
   y(Self) -> Int
   alt(Self) -> String
@@ -3091,7 +3152,7 @@ pub trait TLocation : TJsValue {
   reload(Self) -> Unit
 }
 
-pub trait TMouseEvent : TJsValue {
+pub trait TMouseEvent : TJsValue + TUIEvent {
   page_x(Self) -> Double
   page_y(Self) -> Double
   x(Self) -> Double
@@ -3468,7 +3529,7 @@ pub trait TWheelEvent : TJsValue + TMouseEvent {
   delta_mode(Self) -> UInt
 }
 
-pub trait TWindow : TJsValue {
+pub trait TWindow : TJsValue + TEventTarget {
   screen(Self) -> JsValue
   visual_viewport(Self) -> JsValue?
   inner_width(Self) -> Int

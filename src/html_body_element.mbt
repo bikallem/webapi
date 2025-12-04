@@ -98,6 +98,15 @@ pub trait THTMLBodyElement: TJsValue + THTMLElement {
 }
 
 ///|
+pub impl TEventTarget for HTMLBodyElement
+
+///|
+pub impl TNode for HTMLBodyElement
+
+///|
+pub impl TElement for HTMLBodyElement
+
+///|
 pub impl THTMLElement for HTMLBodyElement
 
 ///|
