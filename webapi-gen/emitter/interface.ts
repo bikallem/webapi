@@ -30,7 +30,7 @@ pub type ${iface.name}`;
  */
 function emitTJsValueImpl(iface: ParsedInterface): string {
   return `///|
-pub impl TJsValue for ${iface.name} with to_js(self : ${iface.name}) -> JsValue = "%identity"`;  
+pub impl TJsValue for ${iface.name} with to_js(self : ${iface.name}) -> JsValue = "%identity"`;
 }
 
 /**
