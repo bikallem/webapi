@@ -417,6 +417,12 @@ function mergeInterface(base: ParsedInterface, partial: ParsedInterface): void {
   base.properties.push(...partial.properties);
   base.constants.push(...partial.constants);
   base.constructors.push(...partial.constructors);
+
+  // Preserve inheritance from non-partial interface
+  if (partial.inheritance && !base.inheritance) {
+    base.inheritance = partial.inheritance;
+  }
+
   // Combine IDL sources
   if (partial.idlSource) {
     base.idlSource = base.idlSource
