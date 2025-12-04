@@ -15,12 +15,6 @@ pub(open) trait THidden {
 pub fn[T : THidden] Hidden::into(self : Hidden) -> T = "%identity"
 
 ///|
-pub fn Hidden::null() -> Hidden = "JsValue" "null"
-
-///|
-pub fn Hidden::is_null(self : Hidden) -> Bool = "JsValue" "isNull"
-
-///|
 pub impl THidden for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|

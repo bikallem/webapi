@@ -228,14 +228,6 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
   lines.push(`pub fn[T : ${traitName}] ${typeName}::into(self : ${typeName}) -> T = "%identity"`);
   lines.push("");
 
-  // null() and is_null() methods
-  lines.push("///|");
-  lines.push(`pub fn ${typeName}::null() -> ${typeName} = "JsValue" "null"`);
-  lines.push("");
-  lines.push("///|");
-  lines.push(`pub fn ${typeName}::is_null(self : ${typeName}) -> Bool = "JsValue" "isNull"`);
-  lines.push("");
-
   // Trait implementations for each member type
   // Only emit impl for types that exist in our IDL (known interfaces)
   for (const memberName of unionType.memberNames) {

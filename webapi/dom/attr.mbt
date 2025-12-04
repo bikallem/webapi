@@ -46,12 +46,6 @@ pub impl TAttr for Attr
 pub impl TJsValue for Attr with to_js(self : Attr) -> JsValue = "%identity"
 
 ///|
-pub fn Attr::null() -> Attr = "JsValue" "null"
-
-///|
-pub fn Attr::is_null(self : Attr) -> Bool = "JsValue" "isNull"
-
-///|
 fn attr_namespace_uri_ffi(obj : JsValue) -> JsValue = "webapi_Attr" "namespaceURI"
 
 ///|

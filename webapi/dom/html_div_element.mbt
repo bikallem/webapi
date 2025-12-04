@@ -35,12 +35,6 @@ pub impl THTMLDivElement for HTMLDivElement
 pub impl TJsValue for HTMLDivElement with to_js(self : HTMLDivElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLDivElement::null() -> HTMLDivElement = "JsValue" "null"
-
-///|
-pub fn HTMLDivElement::is_null(self : HTMLDivElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLDivElement::new() -> HTMLDivElement = "webapi_HTMLDivElement" "new"
 
 ///|

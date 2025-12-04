@@ -28,12 +28,6 @@ pub impl TNodeList for NodeList
 pub impl TJsValue for NodeList with to_js(self : NodeList) -> JsValue = "%identity"
 
 ///|
-pub fn NodeList::null() -> NodeList = "JsValue" "null"
-
-///|
-pub fn NodeList::is_null(self : NodeList) -> Bool = "JsValue" "isNull"
-
-///|
 fn node_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_NodeList" "item"
 
 ///|

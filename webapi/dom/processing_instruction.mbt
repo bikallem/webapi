@@ -41,12 +41,6 @@ pub impl TJsValue for ProcessingInstruction with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn ProcessingInstruction::null() -> ProcessingInstruction = "JsValue" "null"
-
-///|
-pub fn ProcessingInstruction::is_null(self : ProcessingInstruction) -> Bool = "JsValue" "isNull"
-
-///|
 fn processing_instruction_target_ffi(obj : JsValue) -> String = "webapi_ProcessingInstruction" "target"
 
 ///|

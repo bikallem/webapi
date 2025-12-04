@@ -26,11 +26,3 @@ pub fn OnBeforeUnloadEventHandler::new(
 ) -> OnBeforeUnloadEventHandler {
   on_before_unload_event_handler_new_ffi(fn_to_js(f))
 }
-
-///|
-pub fn OnBeforeUnloadEventHandler::null() -> OnBeforeUnloadEventHandler = "JsValue" "null"
-
-///|
-pub fn OnBeforeUnloadEventHandler::is_null(
-  self : OnBeforeUnloadEventHandler,
-) -> Bool = "JsValue" "isNull"

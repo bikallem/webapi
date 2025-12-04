@@ -15,12 +15,6 @@ pub(open) trait TStrokeStyle {
 pub fn[T : TStrokeStyle] StrokeStyle::into(self : StrokeStyle) -> T = "%identity"
 
 ///|
-pub fn StrokeStyle::null() -> StrokeStyle = "JsValue" "null"
-
-///|
-pub fn StrokeStyle::is_null(self : StrokeStyle) -> Bool = "JsValue" "isNull"
-
-///|
 pub impl TStrokeStyle for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|

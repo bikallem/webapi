@@ -35,12 +35,6 @@ pub impl TStorage for Storage
 pub impl TJsValue for Storage with to_js(self : Storage) -> JsValue = "%identity"
 
 ///|
-pub fn Storage::null() -> Storage = "JsValue" "null"
-
-///|
-pub fn Storage::is_null(self : Storage) -> Bool = "JsValue" "isNull"
-
-///|
 fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_Storage" "key"
 
 ///|

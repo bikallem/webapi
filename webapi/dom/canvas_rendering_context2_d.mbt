@@ -437,14 +437,6 @@ pub impl TJsValue for CanvasRenderingContext2D with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn CanvasRenderingContext2D::null() -> CanvasRenderingContext2D = "JsValue" "null"
-
-///|
-pub fn CanvasRenderingContext2D::is_null(
-  self : CanvasRenderingContext2D,
-) -> Bool = "JsValue" "isNull"
-
-///|
 fn canvas_rendering_context2_d_get_context_attributes_ffi(
   obj : JsValue,
 ) -> JsValue = "webapi_CanvasRenderingContext2D" "getContextAttributes"

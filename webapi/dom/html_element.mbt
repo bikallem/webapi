@@ -380,12 +380,6 @@ pub impl THTMLElement for HTMLElement
 pub impl TJsValue for HTMLElement with to_js(self : HTMLElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLElement::null() -> HTMLElement = "JsValue" "null"
-
-///|
-pub fn HTMLElement::is_null(self : HTMLElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLElement::new() -> HTMLElement = "webapi_HTMLElement" "new"
 
 ///|

@@ -29,14 +29,6 @@ pub impl TJsValue for ImageBitmapRenderingContext with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn ImageBitmapRenderingContext::null() -> ImageBitmapRenderingContext = "JsValue" "null"
-
-///|
-pub fn ImageBitmapRenderingContext::is_null(
-  self : ImageBitmapRenderingContext,
-) -> Bool = "JsValue" "isNull"
-
-///|
 fn image_bitmap_rendering_context_transfer_from_image_bitmap_ffi(
   obj : JsValue,
   bitmap : JsValue,

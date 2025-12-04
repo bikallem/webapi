@@ -49,12 +49,6 @@ pub impl THTMLStyleElement for HTMLStyleElement
 pub impl TJsValue for HTMLStyleElement with to_js(self : HTMLStyleElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLStyleElement::null() -> HTMLStyleElement = "JsValue" "null"
-
-///|
-pub fn HTMLStyleElement::is_null(self : HTMLStyleElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLStyleElement::new() -> HTMLStyleElement = "webapi_HTMLStyleElement" "new"
 
 ///|

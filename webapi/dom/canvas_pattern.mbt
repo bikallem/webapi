@@ -26,12 +26,6 @@ pub impl TCanvasPattern for CanvasPattern
 pub impl TJsValue for CanvasPattern with to_js(self : CanvasPattern) -> JsValue = "%identity"
 
 ///|
-pub fn CanvasPattern::null() -> CanvasPattern = "JsValue" "null"
-
-///|
-pub fn CanvasPattern::is_null(self : CanvasPattern) -> Bool = "JsValue" "isNull"
-
-///|
 fn canvas_pattern_set_transform_ffi(obj : JsValue, transform : JsValue) -> Unit = "webapi_CanvasPattern" "setTransform"
 
 ///|

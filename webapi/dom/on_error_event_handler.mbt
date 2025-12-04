@@ -22,9 +22,3 @@ pub fn OnErrorEventHandler::new(
 ) -> OnErrorEventHandler {
   on_error_event_handler_new_ffi(fn_to_js(f))
 }
-
-///|
-pub fn OnErrorEventHandler::null() -> OnErrorEventHandler = "JsValue" "null"
-
-///|
-pub fn OnErrorEventHandler::is_null(self : OnErrorEventHandler) -> Bool = "JsValue" "isNull"

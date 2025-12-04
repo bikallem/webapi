@@ -429,14 +429,6 @@ pub impl TJsValue for OffscreenCanvasRenderingContext2D with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn OffscreenCanvasRenderingContext2D::null() -> OffscreenCanvasRenderingContext2D = "JsValue" "null"
-
-///|
-pub fn OffscreenCanvasRenderingContext2D::is_null(
-  self : OffscreenCanvasRenderingContext2D,
-) -> Bool = "JsValue" "isNull"
-
-///|
 fn offscreen_canvas_rendering_context2_d_get_context_attributes_ffi(
   obj : JsValue,
 ) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "getContextAttributes"

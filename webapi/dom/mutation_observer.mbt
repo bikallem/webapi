@@ -31,12 +31,6 @@ pub impl TMutationObserver for MutationObserver
 pub impl TJsValue for MutationObserver with to_js(self : MutationObserver) -> JsValue = "%identity"
 
 ///|
-pub fn MutationObserver::null() -> MutationObserver = "JsValue" "null"
-
-///|
-pub fn MutationObserver::is_null(self : MutationObserver) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn MutationObserver::new(callback : JsValue) -> MutationObserver = "webapi_MutationObserver" "new"
 
 ///|

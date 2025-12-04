@@ -77,12 +77,6 @@ pub impl THTMLScriptElement for HTMLScriptElement
 pub impl TJsValue for HTMLScriptElement with to_js(self : HTMLScriptElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLScriptElement::null() -> HTMLScriptElement = "JsValue" "null"
-
-///|
-pub fn HTMLScriptElement::is_null(self : HTMLScriptElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLScriptElement::new() -> HTMLScriptElement = "webapi_HTMLScriptElement" "new"
 
 ///|

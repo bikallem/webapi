@@ -40,12 +40,6 @@ pub impl TNamedNodeMap for NamedNodeMap
 pub impl TJsValue for NamedNodeMap with to_js(self : NamedNodeMap) -> JsValue = "%identity"
 
 ///|
-pub fn NamedNodeMap::null() -> NamedNodeMap = "JsValue" "null"
-
-///|
-pub fn NamedNodeMap::is_null(self : NamedNodeMap) -> Bool = "JsValue" "isNull"
-
-///|
 fn named_node_map_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_NamedNodeMap" "item"
 
 ///|

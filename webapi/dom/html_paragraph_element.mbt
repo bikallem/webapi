@@ -37,12 +37,6 @@ pub impl TJsValue for HTMLParagraphElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLParagraphElement::null() -> HTMLParagraphElement = "JsValue" "null"
-
-///|
-pub fn HTMLParagraphElement::is_null(self : HTMLParagraphElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLParagraphElement::new() -> HTMLParagraphElement = "webapi_HTMLParagraphElement" "new"
 
 ///|

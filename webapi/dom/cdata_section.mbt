@@ -32,9 +32,3 @@ pub impl TCDATASection for CDATASection
 
 ///|
 pub impl TJsValue for CDATASection with to_js(self : CDATASection) -> JsValue = "%identity"
-
-///|
-pub fn CDATASection::null() -> CDATASection = "JsValue" "null"
-
-///|
-pub fn CDATASection::is_null(self : CDATASection) -> Bool = "JsValue" "isNull"

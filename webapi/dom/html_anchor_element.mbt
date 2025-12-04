@@ -111,12 +111,6 @@ pub impl THTMLAnchorElement for HTMLAnchorElement
 pub impl TJsValue for HTMLAnchorElement with to_js(self : HTMLAnchorElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLAnchorElement::null() -> HTMLAnchorElement = "JsValue" "null"
-
-///|
-pub fn HTMLAnchorElement::is_null(self : HTMLAnchorElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLAnchorElement::new() -> HTMLAnchorElement = "webapi_HTMLAnchorElement" "new"
 
 ///|

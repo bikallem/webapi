@@ -54,12 +54,6 @@ pub impl TOffscreenCanvas for OffscreenCanvas
 pub impl TJsValue for OffscreenCanvas with to_js(self : OffscreenCanvas) -> JsValue = "%identity"
 
 ///|
-pub fn OffscreenCanvas::null() -> OffscreenCanvas = "JsValue" "null"
-
-///|
-pub fn OffscreenCanvas::is_null(self : OffscreenCanvas) -> Bool = "JsValue" "isNull"
-
-///|
 fn offscreen_canvas_new_ffi(
   width : JsValue,
   height : JsValue,

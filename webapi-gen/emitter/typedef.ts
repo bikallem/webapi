@@ -165,19 +165,6 @@ pub impl T${typedef.name} for ${memberName} with to_js(
 }
 
 /**
- * Emit null() and is_null() methods for nullable typedefs
- */
-function emitNullableMethods(typedef: ParsedTypedef): string | undefined {
-    if (!isNullableTypedef(typedef)) return undefined;
-
-    return `///|
-pub fn ${typedef.name}::null() -> ${typedef.name} = "JsValue" "null"
-
-///|
-pub fn ${typedef.name}::is_null(self : ${typedef.name}) -> Bool = "JsValue" "isNull"`;
-}
-
-/**
  * Emit complete code for a typedef
  */
 export function emitTypedef(typedef: ParsedTypedef, idl: ParsedIdl): string {
@@ -214,12 +201,6 @@ export function emitTypedef(typedef: ParsedTypedef, idl: ParsedIdl): string {
     const constructor = emitTypedefConstructor(typedef, idl);
     if (constructor) {
         parts.push(constructor);
-    }
-
-    // Nullable methods (if applicable)
-    const nullableMethods = emitNullableMethods(typedef);
-    if (nullableMethods) {
-        parts.push(nullableMethods);
     }
 
     return parts.join("\n\n");

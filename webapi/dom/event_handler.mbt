@@ -20,9 +20,3 @@ fn event_handler_new_ffi(f : JsValue) -> EventHandler = "webapi_EventHandlerNonN
 pub fn EventHandler::new(f : (Event) -> JsValue) -> EventHandler {
   event_handler_new_ffi(fn_to_js(f))
 }
-
-///|
-pub fn EventHandler::null() -> EventHandler = "JsValue" "null"
-
-///|
-pub fn EventHandler::is_null(self : EventHandler) -> Bool = "JsValue" "isNull"

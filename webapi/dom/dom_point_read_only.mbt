@@ -48,12 +48,6 @@ pub impl TDOMPointReadOnly for DOMPointReadOnly
 pub impl TJsValue for DOMPointReadOnly with to_js(self : DOMPointReadOnly) -> JsValue = "%identity"
 
 ///|
-pub fn DOMPointReadOnly::null() -> DOMPointReadOnly = "JsValue" "null"
-
-///|
-pub fn DOMPointReadOnly::is_null(self : DOMPointReadOnly) -> Bool = "JsValue" "isNull"
-
-///|
 fn dom_point_read_only_new_ffi(
   x : JsValue,
   y : JsValue,

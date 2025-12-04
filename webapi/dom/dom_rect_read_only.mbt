@@ -48,12 +48,6 @@ pub impl TDOMRectReadOnly for DOMRectReadOnly
 pub impl TJsValue for DOMRectReadOnly with to_js(self : DOMRectReadOnly) -> JsValue = "%identity"
 
 ///|
-pub fn DOMRectReadOnly::null() -> DOMRectReadOnly = "JsValue" "null"
-
-///|
-pub fn DOMRectReadOnly::is_null(self : DOMRectReadOnly) -> Bool = "JsValue" "isNull"
-
-///|
 fn dom_rect_read_only_new_ffi(
   x : JsValue,
   y : JsValue,

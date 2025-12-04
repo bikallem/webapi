@@ -88,12 +88,6 @@ pub impl THTMLButtonElement for HTMLButtonElement
 pub impl TJsValue for HTMLButtonElement with to_js(self : HTMLButtonElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLButtonElement::null() -> HTMLButtonElement = "JsValue" "null"
-
-///|
-pub fn HTMLButtonElement::is_null(self : HTMLButtonElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLButtonElement::new() -> HTMLButtonElement = "webapi_HTMLButtonElement" "new"
 
 ///|

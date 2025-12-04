@@ -45,12 +45,6 @@ pub impl TDOMPoint for DOMPoint
 pub impl TJsValue for DOMPoint with to_js(self : DOMPoint) -> JsValue = "%identity"
 
 ///|
-pub fn DOMPoint::null() -> DOMPoint = "JsValue" "null"
-
-///|
-pub fn DOMPoint::is_null(self : DOMPoint) -> Bool = "JsValue" "isNull"
-
-///|
 fn dom_point_new_ffi(
   x : JsValue,
   y : JsValue,

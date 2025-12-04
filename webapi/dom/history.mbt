@@ -40,12 +40,6 @@ pub impl THistory for History
 pub impl TJsValue for History with to_js(self : History) -> JsValue = "%identity"
 
 ///|
-pub fn History::null() -> History = "JsValue" "null"
-
-///|
-pub fn History::is_null(self : History) -> Bool = "JsValue" "isNull"
-
-///|
 fn history_go_ffi(obj : JsValue, delta : JsValue) -> Unit = "webapi_History" "go"
 
 ///|

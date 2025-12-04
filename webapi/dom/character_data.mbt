@@ -62,12 +62,6 @@ pub impl TCharacterData for CharacterData
 pub impl TJsValue for CharacterData with to_js(self : CharacterData) -> JsValue = "%identity"
 
 ///|
-pub fn CharacterData::null() -> CharacterData = "JsValue" "null"
-
-///|
-pub fn CharacterData::is_null(self : CharacterData) -> Bool = "JsValue" "isNull"
-
-///|
 fn character_data_substring_data_ffi(
   obj : JsValue,
   offset : JsValue,

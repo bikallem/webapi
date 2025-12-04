@@ -26,10 +26,4 @@ pub impl THTMLHeadElement for HTMLHeadElement
 pub impl TJsValue for HTMLHeadElement with to_js(self : HTMLHeadElement) -> JsValue = "%identity"
 
 ///|
-pub fn HTMLHeadElement::null() -> HTMLHeadElement = "JsValue" "null"
-
-///|
-pub fn HTMLHeadElement::is_null(self : HTMLHeadElement) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn HTMLHeadElement::new() -> HTMLHeadElement = "webapi_HTMLHeadElement" "new"

@@ -97,12 +97,6 @@ pub impl TNavigator for Navigator
 pub impl TJsValue for Navigator with to_js(self : Navigator) -> JsValue = "%identity"
 
 ///|
-pub fn Navigator::null() -> Navigator = "JsValue" "null"
-
-///|
-pub fn Navigator::is_null(self : Navigator) -> Bool = "JsValue" "isNull"
-
-///|
 fn navigator_taint_enabled_ffi(obj : JsValue) -> JsValue = "webapi_Navigator" "taintEnabled"
 
 ///|

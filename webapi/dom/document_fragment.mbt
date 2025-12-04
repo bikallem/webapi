@@ -61,12 +61,6 @@ pub impl TDocumentFragment for DocumentFragment
 pub impl TJsValue for DocumentFragment with to_js(self : DocumentFragment) -> JsValue = "%identity"
 
 ///|
-pub fn DocumentFragment::null() -> DocumentFragment = "JsValue" "null"
-
-///|
-pub fn DocumentFragment::is_null(self : DocumentFragment) -> Bool = "JsValue" "isNull"
-
-///|
 pub fn DocumentFragment::new() -> DocumentFragment = "webapi_DocumentFragment" "new"
 
 ///|

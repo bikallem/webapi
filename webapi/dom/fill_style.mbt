@@ -15,12 +15,6 @@ pub(open) trait TFillStyle {
 pub fn[T : TFillStyle] FillStyle::into(self : FillStyle) -> T = "%identity"
 
 ///|
-pub fn FillStyle::null() -> FillStyle = "JsValue" "null"
-
-///|
-pub fn FillStyle::is_null(self : FillStyle) -> Bool = "JsValue" "isNull"
-
-///|
 pub impl TFillStyle for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|

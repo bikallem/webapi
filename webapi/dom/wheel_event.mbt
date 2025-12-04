@@ -40,12 +40,6 @@ pub impl TWheelEvent for WheelEvent
 pub impl TJsValue for WheelEvent with to_js(self : WheelEvent) -> JsValue = "%identity"
 
 ///|
-pub fn WheelEvent::null() -> WheelEvent = "JsValue" "null"
-
-///|
-pub fn WheelEvent::is_null(self : WheelEvent) -> Bool = "JsValue" "isNull"
-
-///|
 fn wheel_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
