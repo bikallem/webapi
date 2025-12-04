@@ -1,2 +1,2 @@
 ///|
-using @webapi {document, trait TNode}
+using @webapi {document, trait TNode, type EventListener}
