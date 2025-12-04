@@ -52,15 +52,15 @@ const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
  * (created by the browser), just no user-accessible constructor.
  * 
  * Types like Event/EventTarget DO have constructors and are NOT abstract.
+ * 
+ * Types with [HTMLConstructor] (like HTMLElement) get external type but no new().
  */
 const ABSTRACT_BASE_INTERFACES = new Set([
   // Core DOM hierarchy (never used directly, always via subtypes)
   "Node",
   "Element",
   "CharacterData",
-
-  // HTML base class (always use specific element types like HTMLDivElement)
-  "HTMLElement",
+  // Note: HTMLElement has [HTMLConstructor] so it gets external type but no new()
 ]);
 
 /**

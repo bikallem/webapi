@@ -20,7 +20,7 @@ fn custom_element_constructor_new_ffi(f : JsValue) -> CustomElementConstructor =
 
 ///|
 pub fn CustomElementConstructor::new(
-  f : () -> &THTMLElement,
+  f : () -> HTMLElement,
 ) -> CustomElementConstructor {
   custom_element_constructor_new_ffi(fn_to_js(f))
 }

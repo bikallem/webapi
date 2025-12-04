@@ -4,7 +4,7 @@ fn main {
   let body = document.body().unwrap()
 
   // Create container div
-  let container = document.create_element("div")
+  let container : HTMLDivElement = document.create_element("div").into()
   container.set_id("counter-app")
   container.set_inner_html(
     (
@@ -56,7 +56,7 @@ fn main {
   let decrement_btn = document.get_element_by_id("decrement").unwrap()
   decrement_btn.add_event_listener(
     "click",
-    EventListener::new(fn(_event) {
+    event_listener(fn(_event) {
       count = count - 1
       update_display()
     }),
@@ -66,7 +66,7 @@ fn main {
   let reset_btn = document.get_element_by_id("reset").unwrap()
   reset_btn.add_event_listener(
     "click",
-    EventListener::new(fn(_event) {
+    event_listener(fn(_event) {
       count = 0
       update_display()
     }),

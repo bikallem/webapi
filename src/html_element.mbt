@@ -151,6 +151,10 @@
 // };
 
 ///|
+#external
+pub type HTMLElement
+
+///|
 pub trait THTMLElement: TJsValue + TElement {
   scroll_parent(self : Self) -> &TElement? = _
   offset_parent(self : Self) -> &TElement? = _
@@ -368,6 +372,21 @@ pub trait THTMLElement: TJsValue + TElement {
   focus(self : Self, options? : FocusOptions) -> Unit = _
   blur(self : Self) -> Unit = _
 }
+
+///|
+pub impl TEventTarget for HTMLElement
+
+///|
+pub impl TNode for HTMLElement
+
+///|
+pub impl TElement for HTMLElement
+
+///|
+pub impl THTMLElement for HTMLElement
+
+///|
+pub impl TJsValue for HTMLElement with to_js(self : HTMLElement) -> JsValue = "%identity"
 
 ///|
 fn html_element_click_ffi(obj : JsValue) -> Unit = "webapi_HTMLElement" "click"

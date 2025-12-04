@@ -344,7 +344,7 @@ pub impl TJsValue for ConvertCoordinateOptions
 
 #external
 pub type CustomElementConstructor
-pub fn CustomElementConstructor::new(() -> &THTMLElement) -> Self
+pub fn CustomElementConstructor::new(() -> HTMLElement) -> Self
 pub impl TJsValue for CustomElementConstructor
 
 #external
@@ -573,6 +573,7 @@ pub impl TJsValue for EventInit
 
 #external
 pub type EventListener
+#as_free_fn(event_listener)
 pub fn EventListener::new((Event) -> Unit) -> Self
 pub fn EventListener::null() -> Self
 pub impl TJsValue for EventListener
@@ -726,6 +727,14 @@ pub impl THTMLDivElement for HTMLDivElement
 pub impl THTMLElement for HTMLDivElement
 pub impl TJsValue for HTMLDivElement
 pub impl TNode for HTMLDivElement
+
+#external
+pub type HTMLElement
+pub impl TElement for HTMLElement
+pub impl TEventTarget for HTMLElement
+pub impl THTMLElement for HTMLElement
+pub impl TJsValue for HTMLElement
+pub impl TNode for HTMLElement
 
 #external
 pub type HTMLFormElement
@@ -1326,7 +1335,7 @@ pub impl Show for ShadowRootMode
 #external
 pub type ShowPopoverOptions
 pub fn ShowPopoverOptions::empty() -> Self
-pub fn ShowPopoverOptions::new(source? : &THTMLElement) -> Self
+pub fn ShowPopoverOptions::new(source? : HTMLElement) -> Self
 pub impl TJsValue for ShowPopoverOptions
 
 pub enum SlotAssignmentMode {
@@ -1368,7 +1377,7 @@ pub impl TJsValue for StructuredSerializeOptions
 #external
 pub type SubmitEventInit
 pub fn SubmitEventInit::empty() -> Self
-pub fn SubmitEventInit::new(submitter? : &THTMLElement) -> Self
+pub fn SubmitEventInit::new(submitter? : HTMLElement) -> Self
 pub impl TJsValue for SubmitEventInit
 
 #external
@@ -1920,8 +1929,8 @@ pub trait TDocument : TJsValue + TNode {
   set_title(Self, String) -> Unit
   dir(Self) -> String
   set_dir(Self, String) -> Unit
-  body(Self) -> &THTMLElement?
-  set_body(Self, &THTMLElement) -> Unit
+  body(Self) -> HTMLElement?
+  set_body(Self, HTMLElement) -> Unit
   head(Self) -> HTMLHeadElement?
   images(Self) -> HTMLCollection
   embeds(Self) -> HTMLCollection
@@ -2726,7 +2735,7 @@ pub trait THTMLFormElement : TJsValue + THTMLElement {
   elements(Self) -> JsValue
   length(Self) -> UInt
   submit(Self) -> Unit
-  request_submit(Self, submitter? : &THTMLElement) -> Unit
+  request_submit(Self, submitter? : HTMLElement) -> Unit
   reset(Self) -> Unit
   check_validity(Self) -> Bool
   report_validity(Self) -> Bool

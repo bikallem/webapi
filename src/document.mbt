@@ -279,8 +279,8 @@ pub trait TDocument: TJsValue + TNode {
   set_title(self : Self, value : String) -> Unit = _
   dir(self : Self) -> String = _
   set_dir(self : Self, value : String) -> Unit = _
-  body(self : Self) -> &THTMLElement? = _
-  set_body(self : Self, value : &THTMLElement) -> Unit = _
+  body(self : Self) -> HTMLElement? = _
+  set_body(self : Self, value : HTMLElement) -> Unit = _
   head(self : Self) -> HTMLHeadElement? = _
   images(self : Self) -> HTMLCollection = _
   embeds(self : Self) -> HTMLCollection = _
@@ -1634,7 +1634,7 @@ impl TDocument with set_dir(self : Self, value : String) -> Unit {
 fn document_body_ffi(obj : JsValue) -> JsValue = "webapi_Document" "body"
 
 ///|
-impl TDocument with body(self : Self) -> &THTMLElement? {
+impl TDocument with body(self : Self) -> HTMLElement? {
   document_body_ffi(self.to_js()).as_option()
 }
 
@@ -1642,7 +1642,7 @@ impl TDocument with body(self : Self) -> &THTMLElement? {
 fn document_set_body_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_body"
 
 ///|
-impl TDocument with set_body(self : Self, value : &THTMLElement) -> Unit {
+impl TDocument with set_body(self : Self, value : HTMLElement) -> Unit {
   document_set_body_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
