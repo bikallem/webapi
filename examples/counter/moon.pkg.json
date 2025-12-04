@@ -1,8 +1,6 @@
 {
-  "is-main": true
-  // "import": [
-  //   {
-  //     "path": "bikallem/webapi/dom"
-  //   }
-  // ]
+  "is-main": true,
+  "import": [
+    "bikallem/webapi/webapi/dom"
+  ]
 }
