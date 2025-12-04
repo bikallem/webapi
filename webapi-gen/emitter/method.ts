@@ -146,7 +146,7 @@ pub(open) trait ${traitName} {
   // Skip fully abstract types (they have no external type)
   for (const memberType of filteredMembers) {
     const moonbitType = getUnionMemberMoonbitType(memberType);
-    
+
     // Check if this is a fully abstract interface (no external type)
     if (memberType.type === "reference" && memberType.name) {
       if (isAbstractInterface(memberType.name)) {

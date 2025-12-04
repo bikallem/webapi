@@ -1,2 +1,2 @@
 ///|
-using @webapi {document, type Node}
+using @webapi {document, trait TNode}

@@ -235,10 +235,10 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
     // Check if it's a primitive type
     const isPrimitive = memberName === "String" || memberName === "Double" ||
       memberName === "Int" || memberName === "Bool";
-    
+
     // Check if it's a known interface that's not fully abstract
     const isConcreteInterface = idl.interfaces.has(memberName) && !isAbstractInterface(memberName);
-    
+
     // Skip if not primitive and not a concrete interface
     if (!isPrimitive && !isConcreteInterface) {
       continue;

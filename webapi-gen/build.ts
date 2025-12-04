@@ -56,9 +56,9 @@ const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
 const ABSTRACT_BASE_INTERFACES = new Set([
   // Core DOM hierarchy (never used directly, always via subtypes)
   "Node",
-  "Element", 
+  "Element",
   "CharacterData",
-  
+
   // HTML base class (always use specific element types like HTMLDivElement)
   "HTMLElement",
 ]);

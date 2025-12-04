@@ -31,11 +31,11 @@ fn main {
       #|
     ),
   )
-  let _node : Node = body.append_child(container)
+  let _node : &TNode = body.append_child(container)
 
   // Create mutable counter state using Ref
   let count : Ref[Int] = Ref::new(0)
-  let count_display = doc.get_element_by_id("count-display").unwrap()
+  let count_display = document.get_element_by_id("count-display").unwrap()
 
   // Helper to update display
   let update_display = fn() {
@@ -43,21 +43,21 @@ fn main {
   }
 
   // Increment button
-  let increment_btn = doc.get_element_by_id("increment").unwrap()
+  let increment_btn = document.get_element_by_id("increment").unwrap()
   increment_btn.add_event_listener("click", fn(_event) {
     count.val = count.val + 1
     update_display()
   })
 
   // Decrement button
-  let decrement_btn = doc.get_element_by_id("decrement").unwrap()
+  let decrement_btn = document.get_element_by_id("decrement").unwrap()
   decrement_btn.add_event_listener("click", fn(_event) {
     count.val = count.val - 1
     update_display()
   })
 
   // Reset button
-  let reset_btn = doc.get_element_by_id("reset").unwrap()
+  let reset_btn = document.get_element_by_id("reset").unwrap()
   reset_btn.add_event_listener("click", fn(_event) {
     count.val = 0
     update_display()
