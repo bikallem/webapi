@@ -1,130 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Counter App</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    #counter-app {
-      background: white;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-    
-    h1 {
-      color: #333;
-      margin: 0 0 20px 0;
-      font-size: 28px;
-    }
-    
-    #count-display {
-      font-size: 48px;
-      font-weight: bold;
-      color: #667eea;
-      margin: 20px 0;
-    }
-    
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      margin: 0 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    #decrement {
-      background: #ff6b6b;
-      color: white;
-    }
-    
-    #decrement:hover {
-      background: #ff5252;
-      transform: scale(1.05);
-    }
-    
-    #increment {
-      background: #51cf66;
-      color: white;
-    }
-    
-    #increment:hover {
-      background: #40c057;
-      transform: scale(1.05);
-    }
-    
-    #reset {
-      background: #94a3b8;
-      color: white;
-      margin-left: 10px;
-    }
-    
-    #reset:hover {
-      background: #64748b;
-      transform: scale(1.05);
-    }
-  </style>
-</head>
-<body>
-  <div id="counter-app">
-    <h1>Counter App</h1>
-    <div id="count-display">0</div>
-    <div>
-      <button id="decrement">−</button>
-      <button id="increment">+</button>
-      <button id="reset">Reset</button>
-    </div>
-  </div>
 
-  <script>
-    // Created with MoonBit DOM bindings
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        #counter-app {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin: 0 0 20px 0;
+            font-size: 28px;
+        }
+
+        #count-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #decrement {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        #decrement:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        #increment {
+            background: #51cf66;
+            color: white;
+        }
+
+        #increment:hover {
+            background: #40c057;
+            transform: scale(1.05);
+        }
+
+        #reset {
+            background: #94a3b8;
+            color: white;
+            margin-left: 10px;
+        }
+
+        #reset:hover {
+            background: #64748b;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="counter-app">
+        <h1>Counter App</h1>
+        <div id="count-display">0</div>
+        <div>
+            <button id="decrement">−</button>
+            <button id="increment">+</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <script type="module">
+        import { wasmImportObject } from "../webapi.min.mjs";
+        Object.assign(globalThis, wasmImportObject);
+    </script>
+    <script type="module" src="../target/js/release/build/counter/counter.js"></script>
+    <!-- // Created with MoonBit DOM bindings
+
     // Get document and body
     const doc = document;
     const body = doc.body;
-    
+
     // Mutable counter state
     let count = 0;
     const countDisplay = doc.getElementById('count-display');
-    
+
     // Helper to update display
     const updateDisplay = () => {
-      countDisplay.textContent = count.toString();
+    countDisplay.textContent = count.toString();
     };
-    
+
     // Increment button
     const incrementBtn = doc.getElementById('increment');
     incrementBtn.addEventListener('click', () => {
-      count = count + 1;
-      updateDisplay();
+    count = count + 1;
+    updateDisplay();
     });
-    
+
     // Decrement button
     const decrementBtn = doc.getElementById('decrement');
     decrementBtn.addEventListener('click', () => {
-      count = count - 1;
-      updateDisplay();
+    count = count - 1;
+    updateDisplay();
     });
-    
+
     // Reset button
     const resetBtn = doc.getElementById('reset');
     resetBtn.addEventListener('click', () => {
-      count = 0;
-      updateDisplay();
-    });
-  </script>
+    count = 0;
+    updateDisplay();
+    }); 
+    </script> -->
 </body>
+
 </html>
