@@ -58,6 +58,12 @@ function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
         type: "frozen-array",
         elementType: parseIdlType(innerTypes[0]),
       };
+    } else if (generic === "observablearray") {
+      // ObservableArray<T> is similar to Array<T> for our purposes
+      return {
+        type: "sequence",
+        elementType: parseIdlType(innerTypes[0]),
+      };
     } else if (generic === "record") {
       return {
         type: "record",

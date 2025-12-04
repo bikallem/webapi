@@ -132,7 +132,10 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
       return { moonbitType: "JsValue", needsConversion: false, isOptional: false };
 
     case "primitive": {
-      const name = idlType.name!;
+      const name = idlType.name;
+      if (!name) {
+        return { moonbitType: "JsValue", needsConversion: false, isOptional: false };
+      }
       if (name === "undefined") {
         return { moonbitType: "Unit", needsConversion: false, isOptional: false };
       }
@@ -145,7 +148,16 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
     }
 
     case "reference": {
-      const name = idlType.name!;
+      const name = idlType.name;
+
+      // Guard against undefined name
+      if (!name) {
+        return {
+          moonbitType: "JsValue",
+          needsConversion: false,
+          isOptional: false,
+        };
+      }
 
       // Handle EventListener specially - it's a callback
       if (name === "EventListener") {

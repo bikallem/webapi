@@ -18,6 +18,10 @@
 // partial interface HTMLStyleElement {
 //   [CEReactions, Reflect] attribute DOMString type;
 // };
+// 
+// interface mixin LinkStyle {
+//   readonly attribute CSSStyleSheet? sheet;
+// };
 
 ///|
 #external
@@ -32,6 +36,7 @@ pub trait THTMLStyleElement: TJsValue + THTMLElement {
   blocking(self : Self) -> DOMTokenList = _
   type_(self : Self) -> String = _
   set_type_(self : Self, value : String) -> Unit = _
+  sheet(self : Self) -> JsValue? = _
 }
 
 ///|
@@ -106,4 +111,12 @@ fn html_style_element_set_type_ffi(obj : JsValue, value : String) -> Unit = "web
 ///|
 impl THTMLStyleElement with set_type_(self : Self, value : String) -> Unit {
   html_style_element_set_type_ffi(self.to_js(), value)
+}
+
+///|
+fn html_style_element_sheet_ffi(obj : JsValue) -> JsValue = "webapi_HTMLStyleElement" "sheet"
+
+///|
+impl THTMLStyleElement with sheet(self : Self) -> JsValue? {
+  html_style_element_sheet_ffi(self.to_js()).as_option()
 }

@@ -30,6 +30,11 @@
 // 
 //   readonly attribute NodeList labels;
 // };
+// 
+// interface mixin PopoverTargetAttributes {
+//   [CEReactions, Reflect] attribute Element? popoverTargetElement;
+//   [CEReactions] attribute DOMString popoverTargetAction;
+// };
 
 ///|
 #external
@@ -64,6 +69,10 @@ pub trait THTMLButtonElement: TJsValue + THTMLElement {
   validity(self : Self) -> JsValue = _
   validation_message(self : Self) -> String = _
   labels(self : Self) -> NodeList = _
+  popover_target_element(self : Self) -> Element? = _
+  set_popover_target_element(self : Self, value : Element) -> Unit = _
+  popover_target_action(self : Self) -> String = _
+  set_popover_target_action(self : Self, value : String) -> Unit = _
   check_validity(self : Self) -> Bool = _
   report_validity(self : Self) -> Bool = _
   set_custom_validity(self : Self, error : String) -> Unit = _
@@ -152,7 +161,10 @@ impl THTMLButtonElement with set_command_for_element(
   self : Self,
   value : Element,
 ) -> Unit {
-  html_button_element_set_command_for_element_ffi(self.to_js(), value.to_js())
+  html_button_element_set_command_for_element_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -352,4 +364,51 @@ fn html_button_element_labels_ffi(obj : JsValue) -> JsValue = "webapi_HTMLButton
 ///|
 impl THTMLButtonElement with labels(self : Self) -> NodeList {
   html_button_element_labels_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn html_button_element_popover_target_element_ffi(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "popoverTargetElement"
+
+///|
+impl THTMLButtonElement with popover_target_element(self : Self) -> Element? {
+  html_button_element_popover_target_element_ffi(self.to_js()).as_option()
+}
+
+///|
+fn html_button_element_set_popover_target_element_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_popoverTargetElement"
+
+///|
+impl THTMLButtonElement with set_popover_target_element(
+  self : Self,
+  value : Element,
+) -> Unit {
+  html_button_element_set_popover_target_element_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
+}
+
+///|
+fn html_button_element_popover_target_action_ffi(obj : JsValue) -> String = "webapi_HTMLButtonElement" "popoverTargetAction"
+
+///|
+impl THTMLButtonElement with popover_target_action(self : Self) -> String {
+  html_button_element_popover_target_action_ffi(self.to_js())
+}
+
+///|
+fn html_button_element_set_popover_target_action_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLButtonElement" "set_popoverTargetAction"
+
+///|
+impl THTMLButtonElement with set_popover_target_action(
+  self : Self,
+  value : String,
+) -> Unit {
+  html_button_element_set_popover_target_action_ffi(self.to_js(), value)
 }

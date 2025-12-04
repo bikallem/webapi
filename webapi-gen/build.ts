@@ -27,6 +27,7 @@ import {
   getTypedefFilename,
   emitGlobals,
   emitJsRuntime,
+  resetEmittedUnionTraits,
 } from "./emitter/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -43,6 +44,7 @@ const CORE_SPECS = [
   "uievents",      // UI events
   "cssom",         // CSS Object Model
   "cssom-view",    // CSSOM View (scrolling, etc.)
+  "geometry",      // DOMPoint, DOMRect, DOMMatrix, etc.
 ];
 
 /**
@@ -286,6 +288,10 @@ async function copyTemplates(): Promise<void> {
 async function generateMoonBitFiles(idl: ParsedIdl): Promise<void> {
   console.log("Generating MoonBit files...");
 
+  // Reset the union traits tracker before generating interfaces
+  // This prevents duplicates from shared mixins (e.g., CanvasPath)
+  resetEmittedUnionTraits();
+
   // Generate interface files
   for (const [name, iface] of idl.interfaces) {
     const filename = getInterfaceFilename(name);
@@ -362,13 +368,13 @@ async function build(): Promise<void> {
     console.log("\nMerging IDL definitions...");
     let mergedIdl = mergeIdl(parsedIdls);
 
-    // Filter to core interfaces
-    console.log("Filtering to core interfaces...");
-    mergedIdl = filterToCoreInterfaces(mergedIdl);
-
-    // Apply mixins
+    // Apply mixins BEFORE filtering so mixins are merged into core interfaces
     console.log("Applying mixins...");
     applyMixins(mergedIdl);
+
+    // Filter to core interfaces (after mixins are applied)
+    console.log("Filtering to core interfaces...");
+    mergedIdl = filterToCoreInterfaces(mergedIdl);
 
     // Report what we're generating
     console.log(`\nGenerating bindings for:`);

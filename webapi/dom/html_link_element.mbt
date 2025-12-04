@@ -33,6 +33,10 @@
 //   [CEReactions, Reflect] attribute DOMString rev;
 //   [CEReactions, Reflect] attribute DOMString target;
 // };
+// 
+// interface mixin LinkStyle {
+//   readonly attribute CSSStyleSheet? sheet;
+// };
 
 ///|
 #external
@@ -75,6 +79,7 @@ pub trait THTMLLinkElement: TJsValue + THTMLElement {
   set_rev(self : Self, value : String) -> Unit = _
   target(self : Self) -> String = _
   set_target(self : Self, value : String) -> Unit = _
+  sheet(self : Self) -> JsValue? = _
 }
 
 ///|
@@ -385,4 +390,12 @@ fn html_link_element_set_target_ffi(obj : JsValue, value : String) -> Unit = "we
 ///|
 impl THTMLLinkElement with set_target(self : Self, value : String) -> Unit {
   html_link_element_set_target_ffi(self.to_js(), value)
+}
+
+///|
+fn html_link_element_sheet_ffi(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "sheet"
+
+///|
+impl THTMLLinkElement with sheet(self : Self) -> JsValue? {
+  html_link_element_sheet_ffi(self.to_js()).as_option()
 }

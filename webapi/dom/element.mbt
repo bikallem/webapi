@@ -84,6 +84,45 @@
 //   [CEReactions] attribute (TrustedHTML or [LegacyNullToEmptyString] DOMString) outerHTML;
 //   [CEReactions] undefined insertAdjacentHTML(DOMString position, (TrustedHTML or DOMString) string);
 // };
+// 
+// interface mixin GeometryUtils {
+//   sequence<DOMQuad> getBoxQuads(optional BoxQuadOptions options = {});
+//   DOMQuad convertQuadFromNode(DOMQuadInit quad, GeometryNode from, optional ConvertCoordinateOptions options = {});
+//   DOMQuad convertRectFromNode(DOMRectReadOnly rect, GeometryNode from, optional ConvertCoordinateOptions options = {});
+//   DOMPoint convertPointFromNode(DOMPointInit point, GeometryNode from, optional ConvertCoordinateOptions options = {}); // XXX z,w turns into 0
+// };
+// 
+// interface mixin ParentNode {
+//   [SameObject] readonly attribute HTMLCollection children;
+//   readonly attribute Element? firstElementChild;
+//   readonly attribute Element? lastElementChild;
+//   readonly attribute unsigned long childElementCount;
+// 
+//   [CEReactions, Unscopable] undefined prepend((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined append((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined replaceChildren((Node or DOMString)... nodes);
+// 
+//   [CEReactions] undefined moveBefore(Node node, Node? child);
+// 
+//   Element? querySelector(DOMString selectors);
+//   [NewObject] NodeList querySelectorAll(DOMString selectors);
+// };
+// 
+// interface mixin NonDocumentTypeChildNode {
+//   readonly attribute Element? previousElementSibling;
+//   readonly attribute Element? nextElementSibling;
+// };
+// 
+// interface mixin ChildNode {
+//   [CEReactions, Unscopable] undefined before((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined after((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined replaceWith((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined remove();
+// };
+// 
+// interface mixin Slottable {
+//   readonly attribute HTMLSlotElement? assignedSlot;
+// };
 
 ///|
 #external
@@ -120,6 +159,13 @@ pub trait TElement: TJsValue {
   set_inner_html(self : Self, value : JsValue) -> Unit = _
   outer_html(self : Self) -> JsValue = _
   set_outer_html(self : Self, value : JsValue) -> Unit = _
+  children(self : Self) -> HTMLCollection = _
+  first_element_child(self : Self) -> Element? = _
+  last_element_child(self : Self) -> Element? = _
+  child_element_count(self : Self) -> Int = _
+  previous_element_sibling(self : Self) -> Element? = _
+  next_element_sibling(self : Self) -> Element? = _
+  assigned_slot(self : Self) -> JsValue? = _
   get_client_rects(self : Self) -> JsValue = _
   get_bounding_client_rect(self : Self) -> JsValue = _
   check_visibility(self : Self, options? : CheckVisibilityOptions) -> Bool = _
@@ -169,6 +215,35 @@ pub trait TElement: TJsValue {
   set_html_unsafe(self : Self, html : String) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
   insert_adjacent_html(self : Self, position : String, string : String) -> Unit = _
+  get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
+  convert_quad_from_node(
+    self : Self,
+    quad : DOMQuadInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_rect_from_node(
+    self : Self,
+    rect : JsValue,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_point_from_node(
+    self : Self,
+    point : DOMPointInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
+  append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
+  replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
+  move_before(self : Self, node : Node, child : Node) -> Unit = _
+  query_selector(self : Self, selectors : String) -> Element? = _
+  query_selector_all(self : Self, selectors : String) -> NodeList = _
+  before(self : Self, nodes : &TBeforeNodesArg) -> Unit = _
+  after(self : Self, nodes : &TAfterNodesArg) -> Unit = _
+  replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit = _
+  remove(self : Self) -> Unit = _
 }
 
 ///|
@@ -725,6 +800,219 @@ impl TElement with insert_adjacent_html(
 }
 
 ///|
+fn element_get_box_quads_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "getBoxQuads"
+
+///|
+impl TElement with get_box_quads(
+  self : Self,
+  options? : BoxQuadOptions = BoxQuadOptions::empty(),
+) -> Array[JsValue] {
+  element_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
+}
+
+///|
+fn element_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "convertQuadFromNode"
+
+///|
+impl TElement with convert_quad_from_node(
+  self : Self,
+  quad : DOMQuadInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  element_convert_quad_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(quad),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
+}
+
+///|
+fn element_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "convertRectFromNode"
+
+///|
+impl TElement with convert_rect_from_node(
+  self : Self,
+  rect : JsValue,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  element_convert_rect_from_node_ffi(
+    TJsValue::to_js(self),
+    rect,
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
+}
+
+///|
+fn element_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "convertPointFromNode"
+
+///|
+impl TElement with convert_point_from_node(
+  self : Self,
+  point : DOMPointInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  element_convert_point_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
+}
+
+///|
+fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "prepend"
+
+///|
+impl TElement with prepend(self : Self, nodes : &TPrependNodesArg) -> Unit {
+  element_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "append"
+
+///|
+impl TElement with append(self : Self, nodes : &TAppendNodesArg) -> Unit {
+  element_append_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn element_replace_children_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "replaceChildren"
+
+///|
+impl TElement with replace_children(
+  self : Self,
+  nodes : &TReplaceChildrenNodesArg,
+) -> Unit {
+  element_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn element_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "webapi_Element" "moveBefore"
+
+///|
+impl TElement with move_before(self : Self, node : Node, child : Node) -> Unit {
+  element_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
+}
+
+///|
+fn element_query_selector_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Element" "querySelector"
+
+///|
+impl TElement with query_selector(self : Self, selectors : String) -> Element? {
+  element_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).as_option()
+}
+
+///|
+fn element_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_Element" "querySelectorAll"
+
+///|
+impl TElement with query_selector_all(self : Self, selectors : String) -> NodeList {
+  element_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).unsafe_cast()
+}
+
+///|
+/// Arg : nodes
+pub(open) trait TBeforeNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TBeforeNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TBeforeNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "before"
+
+///|
+impl TElement with before(self : Self, nodes : &TBeforeNodesArg) -> Unit {
+  element_before_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+/// Arg : nodes
+pub(open) trait TAfterNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TAfterNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TAfterNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "after"
+
+///|
+impl TElement with after(self : Self, nodes : &TAfterNodesArg) -> Unit {
+  element_after_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+/// Arg : nodes
+pub(open) trait TReplaceWithNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TReplaceWithNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TReplaceWithNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "replaceWith"
+
+///|
+impl TElement with replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit {
+  element_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn element_remove_ffi(obj : JsValue) -> Unit = "webapi_Element" "remove"
+
+///|
+impl TElement with remove(self : Self) -> Unit {
+  element_remove_ffi(TJsValue::to_js(self))
+}
+
+///|
 fn element_scroll_top_ffi(obj : JsValue) -> Double = "webapi_Element" "scrollTop"
 
 ///|
@@ -954,4 +1242,60 @@ fn element_set_outer_html_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 ///|
 impl TElement with set_outer_html(self : Self, value : JsValue) -> Unit {
   element_set_outer_html_ffi(self.to_js(), value)
+}
+
+///|
+fn element_children_ffi(obj : JsValue) -> JsValue = "webapi_Element" "children"
+
+///|
+impl TElement with children(self : Self) -> HTMLCollection {
+  element_children_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn element_first_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Element" "firstElementChild"
+
+///|
+impl TElement with first_element_child(self : Self) -> Element? {
+  element_first_element_child_ffi(self.to_js()).as_option()
+}
+
+///|
+fn element_last_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Element" "lastElementChild"
+
+///|
+impl TElement with last_element_child(self : Self) -> Element? {
+  element_last_element_child_ffi(self.to_js()).as_option()
+}
+
+///|
+fn element_child_element_count_ffi(obj : JsValue) -> Int = "webapi_Element" "childElementCount"
+
+///|
+impl TElement with child_element_count(self : Self) -> Int {
+  element_child_element_count_ffi(self.to_js())
+}
+
+///|
+fn element_previous_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_Element" "previousElementSibling"
+
+///|
+impl TElement with previous_element_sibling(self : Self) -> Element? {
+  element_previous_element_sibling_ffi(self.to_js()).as_option()
+}
+
+///|
+fn element_next_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_Element" "nextElementSibling"
+
+///|
+impl TElement with next_element_sibling(self : Self) -> Element? {
+  element_next_element_sibling_ffi(self.to_js()).as_option()
+}
+
+///|
+fn element_assigned_slot_ffi(obj : JsValue) -> JsValue = "webapi_Element" "assignedSlot"
+
+///|
+impl TElement with assigned_slot(self : Self) -> JsValue? {
+  element_assigned_slot_ffi(self.to_js()).as_option()
 }

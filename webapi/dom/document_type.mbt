@@ -10,6 +10,13 @@
 //   readonly attribute DOMString publicId;
 //   readonly attribute DOMString systemId;
 // };
+// 
+// interface mixin ChildNode {
+//   [CEReactions, Unscopable] undefined before((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined after((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined replaceWith((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined remove();
+// };
 
 ///|
 #external
@@ -20,6 +27,10 @@ pub trait TDocumentType: TJsValue + TNode {
   name(self : Self) -> String = _
   public_id(self : Self) -> String = _
   system_id(self : Self) -> String = _
+  before(self : Self, nodes : &TBeforeNodesArg) -> Unit = _
+  after(self : Self, nodes : &TAfterNodesArg) -> Unit = _
+  replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit = _
+  remove(self : Self) -> Unit = _
 }
 
 ///|
@@ -39,6 +50,38 @@ pub fn DocumentType::null() -> DocumentType = "JsValue" "null"
 
 ///|
 pub fn DocumentType::is_null(self : DocumentType) -> Bool = "JsValue" "isNull"
+
+///|
+fn document_type_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentType" "before"
+
+///|
+impl TDocumentType with before(self : Self, nodes : &TBeforeNodesArg) -> Unit {
+  document_type_before_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn document_type_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentType" "after"
+
+///|
+impl TDocumentType with after(self : Self, nodes : &TAfterNodesArg) -> Unit {
+  document_type_after_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn document_type_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentType" "replaceWith"
+
+///|
+impl TDocumentType with replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit {
+  document_type_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn document_type_remove_ffi(obj : JsValue) -> Unit = "webapi_DocumentType" "remove"
+
+///|
+impl TDocumentType with remove(self : Self) -> Unit {
+  document_type_remove_ffi(TJsValue::to_js(self))
+}
 
 ///|
 fn document_type_name_ffi(obj : JsValue) -> String = "webapi_DocumentType" "name"

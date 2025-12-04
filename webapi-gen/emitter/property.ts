@@ -144,7 +144,7 @@ function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
     // Use opt_to_js for optional types
     valueExpr = "opt_to_js(value)";
   } else if (needsConversion) {
-    valueExpr = "value.to_js()";
+    valueExpr = "TJsValue::to_js(value)";
   } else {
     valueExpr = "value";
   }

@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "bikallem/webapi/cmd/main"
+package "bikallem/webapi/examples/counter"
 
 // Values
 

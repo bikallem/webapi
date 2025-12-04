@@ -14,6 +14,19 @@ import {
 import { mapIdlType, formatReturnType, getDefaultValueExpr } from "../mapping.js";
 
 /**
+ * Global tracker for emitted union arg traits to prevent duplicates
+ * across interfaces that share mixins (e.g., CanvasPath).
+ */
+const emittedUnionTraits = new Set<string>();
+
+/**
+ * Reset the emitted traits tracker. Call this before generating a new batch.
+ */
+export function resetEmittedUnionTraits(): void {
+  emittedUnionTraits.clear();
+}
+
+/**
  * Generate FFI function name for a method
  */
 function getFfiName(interfaceName: string, methodName: string): string {
@@ -63,16 +76,25 @@ const SKIP_UNION_TYPES = new Set([
 
 /**
  * Get filtered union member types (excluding skipped types)
+ * Deduplicates by MoonBit type name to avoid duplicate implementations
  */
 function getFilteredUnionMembers(unionType: ParsedType): ParsedType[] {
   if (unionType.type !== "union" || !unionType.memberTypes) {
     return [];
   }
 
-  return unionType.memberTypes.filter(memberType => {
+  const seen = new Set<string>();
+  const result: ParsedType[] = [];
+
+  for (const memberType of unionType.memberTypes) {
     const moonbitType = getUnionMemberMoonbitType(memberType);
-    return !SKIP_UNION_TYPES.has(moonbitType);
-  });
+    if (!SKIP_UNION_TYPES.has(moonbitType) && !seen.has(moonbitType)) {
+      seen.add(moonbitType);
+      result.push(memberType);
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -89,7 +111,7 @@ function getCollapsedUnionType(unionType: ParsedType): string | undefined {
 
 /**
  * Emit union argument trait definition and implementations
- * Returns empty string if union collapses to single type
+ * Returns empty string if union collapses to single type or if already emitted
  */
 function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType): string {
   if (unionType.type !== "union" || !unionType.memberTypes) {
@@ -104,6 +126,13 @@ function emitUnionArgTrait(methodName: string, paramName: string, unionType: Par
   }
 
   const traitName = getUnionArgTraitName(methodName, paramName);
+
+  // Skip if already emitted (prevents duplicates from shared mixins)
+  if (emittedUnionTraits.has(traitName)) {
+    return "";
+  }
+  emittedUnionTraits.add(traitName);
+
   const parts: string[] = [];
 
   // Emit trait definition
@@ -447,15 +476,22 @@ fn ${ffiName}(${ffiParamsStr}) -> ${returnType} = "${moduleName}" "${jsFuncName}
       // Add optional param with default
       const defaultVal = param.default ? getDefaultValueExpr(param.default, param.type) : undefined;
       if (defaultVal) {
+        // With default value: `name? : Type = default` - param is of type Type
         wrapperParams.push(`${safeName}? : ${mapped.moonbitType} = ${defaultVal}`);
+        // Convert directly to JsValue
+        if (mapped.needsConversion) {
+          callArgs.push(`TJsValue::to_js(${safeName})`);
+        } else {
+          callArgs.push(safeName);
+        }
       } else {
+        // Without default value: `name? : Type` - param is of type Option[Type]
         wrapperParams.push(`${safeName}? : ${mapped.moonbitType}`);
+        // Use opt_to_js to handle Option type
+        const jsVarName = `${safeName}_js`;
+        letBindings.push(`  let ${jsVarName} = opt_to_js(${safeName})`);
+        callArgs.push(jsVarName);
       }
-
-      // Convert to JsValue
-      const jsVarName = `${safeName}_js`;
-      letBindings.push(`  let ${jsVarName} = opt_to_js(${safeName})`);
-      callArgs.push(jsVarName);
     } else {
       wrapperParams.push(`${safeName} : ${mapped.moonbitType}`);
       // Always convert to JsValue for FFI

@@ -5,7 +5,7 @@
  */
 
 export { emitInterface, getInterfaceFilename } from "./interface.js";
-export { emitMethods, emitTraitMethods } from "./method.js";
+export { emitMethods, emitTraitMethods, resetEmittedUnionTraits } from "./method.js";
 export { emitProperties, emitTraitProperties } from "./property.js";
 export { emitConstructors } from "./constructor.js";
 export { emitDictionary, getDictionaryFilename } from "./dictionary.js";

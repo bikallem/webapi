@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "bikallem/webapi/dom"
+package "bikallem/webapi/webapi/dom"
 
 // Values
 pub fn[T : TJsValue] array_to_js(Array[T]) -> JsValue
@@ -89,6 +89,14 @@ pub fn CSSStyleSheetInit::new(base_url? : String, media? : JsValue, disabled? : 
 pub impl TJsValue for CSSStyleSheetInit
 
 #external
+pub type CanvasRenderingContext2D
+pub fn CanvasRenderingContext2D::is_null(Self) -> Bool
+pub fn CanvasRenderingContext2D::null() -> Self
+pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
+pub impl TJsValue for CanvasRenderingContext2D
+pub impl TRenderingContext for CanvasRenderingContext2D
+
+#external
 pub type CanvasRenderingContext2DSettings
 pub fn CanvasRenderingContext2DSettings::empty() -> Self
 pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : JsValue, color_type? : JsValue, will_read_frequently? : Bool) -> Self
@@ -169,6 +177,98 @@ pub type CustomEventInit
 pub fn CustomEventInit::empty() -> Self
 pub fn CustomEventInit::new(detail? : JsValue) -> Self
 pub impl TJsValue for CustomEventInit
+
+#external
+pub type DOMMatrix
+pub fn DOMMatrix::from_float32_array(JsValue) -> JsValue
+pub fn DOMMatrix::from_float64_array(JsValue) -> JsValue
+pub fn DOMMatrix::from_matrix(other? : DOMMatrixInit) -> JsValue
+pub fn DOMMatrix::is_null(Self) -> Bool
+pub fn DOMMatrix::new(init_? : JsValue) -> Self
+pub fn DOMMatrix::null() -> Self
+pub impl TDOMMatrix for DOMMatrix
+pub impl TDOMMatrixReadOnly for DOMMatrix
+pub impl TJsValue for DOMMatrix
+
+#external
+pub type DOMMatrix2DInit
+pub fn DOMMatrix2DInit::empty() -> Self
+pub fn DOMMatrix2DInit::new(a? : Double, b? : Double, c? : Double, d? : Double, e? : Double, f? : Double, m11? : Double, m12? : Double, m21? : Double, m22? : Double, m41? : Double, m42? : Double) -> Self
+pub impl TJsValue for DOMMatrix2DInit
+
+#external
+pub type DOMMatrixInit
+pub fn DOMMatrixInit::empty() -> Self
+pub fn DOMMatrixInit::new(m13? : Double, m14? : Double, m23? : Double, m24? : Double, m31? : Double, m32? : Double, m33? : Double, m34? : Double, m43? : Double, m44? : Double, is2_d? : Bool) -> Self
+pub impl TJsValue for DOMMatrixInit
+
+#external
+pub type DOMMatrixReadOnly
+pub fn DOMMatrixReadOnly::from_float32_array(JsValue) -> JsValue
+pub fn DOMMatrixReadOnly::from_float64_array(JsValue) -> JsValue
+pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit) -> JsValue
+pub fn DOMMatrixReadOnly::is_null(Self) -> Bool
+pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> Self
+pub fn DOMMatrixReadOnly::null() -> Self
+pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
+pub impl TJsValue for DOMMatrixReadOnly
+
+#external
+pub type DOMPoint
+pub fn DOMPoint::from_point(other? : DOMPointInit) -> JsValue
+pub fn DOMPoint::is_null(Self) -> Bool
+pub fn DOMPoint::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub fn DOMPoint::null() -> Self
+pub impl TDOMPoint for DOMPoint
+pub impl TDOMPointReadOnly for DOMPoint
+pub impl TJsValue for DOMPoint
+
+#external
+pub type DOMPointInit
+pub fn DOMPointInit::empty() -> Self
+pub fn DOMPointInit::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub impl TJsValue for DOMPointInit
+pub impl TRoundRectRadiiArg for DOMPointInit
+
+#external
+pub type DOMPointReadOnly
+pub fn DOMPointReadOnly::from_point(other? : DOMPointInit) -> JsValue
+pub fn DOMPointReadOnly::is_null(Self) -> Bool
+pub fn DOMPointReadOnly::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub fn DOMPointReadOnly::null() -> Self
+pub impl TDOMPointReadOnly for DOMPointReadOnly
+pub impl TJsValue for DOMPointReadOnly
+
+#external
+pub type DOMQuadInit
+pub fn DOMQuadInit::empty() -> Self
+pub fn DOMQuadInit::new(p1? : DOMPointInit, p2? : DOMPointInit, p3? : DOMPointInit, p4? : DOMPointInit) -> Self
+pub impl TJsValue for DOMQuadInit
+
+#external
+pub type DOMRect
+pub fn DOMRect::from_rect(other? : DOMRectInit) -> JsValue
+pub fn DOMRect::is_null(Self) -> Bool
+pub fn DOMRect::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub fn DOMRect::null() -> Self
+pub impl TDOMRect for DOMRect
+pub impl TDOMRectReadOnly for DOMRect
+pub impl TJsValue for DOMRect
+
+#external
+pub type DOMRectInit
+pub fn DOMRectInit::empty() -> Self
+pub fn DOMRectInit::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub impl TJsValue for DOMRectInit
+
+#external
+pub type DOMRectReadOnly
+pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit) -> JsValue
+pub fn DOMRectReadOnly::is_null(Self) -> Bool
+pub fn DOMRectReadOnly::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub fn DOMRectReadOnly::null() -> Self
+pub impl TDOMRectReadOnly for DOMRectReadOnly
+pub impl TJsValue for DOMRectReadOnly
 
 #external
 pub type DOMTokenList
@@ -534,6 +634,14 @@ pub fn ImageBitmapOptions::new(image_orientation? : JsValue, premultiply_alpha? 
 pub impl TJsValue for ImageBitmapOptions
 
 #external
+pub type ImageBitmapRenderingContext
+pub fn ImageBitmapRenderingContext::is_null(Self) -> Bool
+pub fn ImageBitmapRenderingContext::null() -> Self
+pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
+pub impl TJsValue for ImageBitmapRenderingContext
+pub impl TRenderingContext for ImageBitmapRenderingContext
+
+#external
 pub type ImageBitmapRenderingContextSettings
 pub fn ImageBitmapRenderingContextSettings::empty() -> Self
 pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
@@ -587,10 +695,12 @@ pub fn JsPromise::wait(Self[JsValue]) -> JsValue
 #external
 pub type JsValue
 pub fn[T] JsValue::as_option(Self) -> T?
+pub fn JsValue::is_null(Self) -> Bool
 pub fn[T] JsValue::null() -> T
 pub fn JsValue::undefined() -> Self
 pub fn[T] JsValue::unsafe_cast(Self) -> T
 pub impl TJsValue for JsValue
+pub impl TRoundRectRadiiArg for JsValue
 
 #external
 pub type KeyboardEvent
@@ -685,9 +795,15 @@ pub impl TNavigator for Navigator
 pub type Node
 pub fn Node::is_null(Self) -> Bool
 pub fn Node::null() -> Self
+pub impl TAfterNodesArg for Node
+pub impl TAppendNodesArg for Node
+pub impl TBeforeNodesArg for Node
 pub impl TEventTarget for Node
 pub impl TJsValue for Node
 pub impl TNode for Node
+pub impl TPrependNodesArg for Node
+pub impl TReplaceChildrenNodesArg for Node
+pub impl TReplaceWithNodesArg for Node
 
 #external
 pub type NodeList
@@ -695,6 +811,13 @@ pub fn NodeList::is_null(Self) -> Bool
 pub fn NodeList::null() -> Self
 pub impl TJsValue for NodeList
 pub impl TNodeList for NodeList
+
+#external
+pub type OffscreenCanvasRenderingContext2D
+pub fn OffscreenCanvasRenderingContext2D::is_null(Self) -> Bool
+pub fn OffscreenCanvasRenderingContext2D::null() -> Self
+pub impl TJsValue for OffscreenCanvasRenderingContext2D
+pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
 #external
 pub type OnBeforeUnloadEventHandler
@@ -755,6 +878,12 @@ pub fn Range::new() -> Self
 pub fn Range::null() -> Self
 pub impl TJsValue for Range
 pub impl TRange for Range
+
+#external
+pub type RenderingContext
+pub fn[T : TRenderingContext] RenderingContext::into(Self) -> T
+pub fn RenderingContext::is_null(Self) -> Bool
+pub fn RenderingContext::null() -> Self
 
 #external
 pub type ScrollIntoViewOptions
@@ -930,6 +1059,16 @@ pub(open) trait TAddEventListenerOptionsArg {
 }
 pub impl TAddEventListenerOptionsArg for Bool
 
+pub(open) trait TAfterNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TAfterNodesArg for String
+
+pub(open) trait TAppendNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TAppendNodesArg for String
+
 pub trait TAttr : TJsValue + TNode {
   namespace_uri(Self) -> String?
   prefix(Self) -> String?
@@ -941,18 +1080,143 @@ pub trait TAttr : TJsValue + TNode {
   specified(Self) -> Bool
 }
 
+pub(open) trait TBeforeNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TBeforeNodesArg for String
+
 pub trait TCDATASection : TJsValue + TText {
+}
+
+pub trait TCanvasRenderingContext2D : TJsValue {
+  canvas(Self) -> HTMLCanvasElement
+  global_alpha(Self) -> Double
+  set_global_alpha(Self, Double) -> Unit
+  global_composite_operation(Self) -> String
+  set_global_composite_operation(Self, String) -> Unit
+  image_smoothing_enabled(Self) -> Bool
+  set_image_smoothing_enabled(Self, Bool) -> Unit
+  image_smoothing_quality(Self) -> JsValue
+  set_image_smoothing_quality(Self, JsValue) -> Unit
+  stroke_style(Self) -> JsValue
+  set_stroke_style(Self, JsValue) -> Unit
+  fill_style(Self) -> JsValue
+  set_fill_style(Self, JsValue) -> Unit
+  shadow_offset_x(Self) -> Double
+  set_shadow_offset_x(Self, Double) -> Unit
+  shadow_offset_y(Self) -> Double
+  set_shadow_offset_y(Self, Double) -> Unit
+  shadow_blur(Self) -> Double
+  set_shadow_blur(Self, Double) -> Unit
+  shadow_color(Self) -> String
+  set_shadow_color(Self, String) -> Unit
+  filter(Self) -> String
+  set_filter(Self, String) -> Unit
+  line_width(Self) -> Double
+  set_line_width(Self, Double) -> Unit
+  line_cap(Self) -> JsValue
+  set_line_cap(Self, JsValue) -> Unit
+  line_join(Self) -> JsValue
+  set_line_join(Self, JsValue) -> Unit
+  miter_limit(Self) -> Double
+  set_miter_limit(Self, Double) -> Unit
+  line_dash_offset(Self) -> Double
+  set_line_dash_offset(Self, Double) -> Unit
+  lang(Self) -> String
+  set_lang(Self, String) -> Unit
+  font(Self) -> String
+  set_font(Self, String) -> Unit
+  text_align(Self) -> JsValue
+  set_text_align(Self, JsValue) -> Unit
+  text_baseline(Self) -> JsValue
+  set_text_baseline(Self, JsValue) -> Unit
+  direction(Self) -> JsValue
+  set_direction(Self, JsValue) -> Unit
+  letter_spacing(Self) -> String
+  set_letter_spacing(Self, String) -> Unit
+  font_kerning(Self) -> JsValue
+  set_font_kerning(Self, JsValue) -> Unit
+  font_stretch(Self) -> JsValue
+  set_font_stretch(Self, JsValue) -> Unit
+  font_variant_caps(Self) -> JsValue
+  set_font_variant_caps(Self, JsValue) -> Unit
+  text_rendering(Self) -> JsValue
+  set_text_rendering(Self, JsValue) -> Unit
+  word_spacing(Self) -> String
+  set_word_spacing(Self, String) -> Unit
+  get_context_attributes(Self) -> CanvasRenderingContext2DSettings
+  save(Self) -> Unit
+  restore(Self) -> Unit
+  reset(Self) -> Unit
+  is_context_lost(Self) -> Bool
+  scale(Self, Double, Double) -> Unit
+  rotate(Self, Double) -> Unit
+  translate(Self, Double, Double) -> Unit
+  transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  get_transform(Self) -> JsValue
+  set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  set_transform2(Self, transform? : DOMMatrix2DInit) -> Unit
+  reset_transform(Self) -> Unit
+  create_linear_gradient(Self, Double, Double, Double, Double) -> JsValue
+  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> JsValue
+  create_conic_gradient(Self, Double, Double, Double) -> JsValue
+  create_pattern(Self, JsValue, String) -> JsValue?
+  clear_rect(Self, Double, Double, Double, Double) -> Unit
+  fill_rect(Self, Double, Double, Double, Double) -> Unit
+  stroke_rect(Self, Double, Double, Double, Double) -> Unit
+  begin_path(Self) -> Unit
+  fill(Self, fill_rule? : JsValue) -> Unit
+  fill2(Self, JsValue, fill_rule? : JsValue) -> Unit
+  stroke(Self) -> Unit
+  stroke2(Self, JsValue) -> Unit
+  clip(Self, fill_rule? : JsValue) -> Unit
+  clip2(Self, JsValue, fill_rule? : JsValue) -> Unit
+  is_point_in_path(Self, Double, Double, fill_rule? : JsValue) -> Bool
+  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : JsValue) -> Bool
+  is_point_in_stroke(Self, Double, Double) -> Bool
+  is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
+  draw_focus_if_needed(Self, Element) -> Unit
+  draw_focus_if_needed2(Self, JsValue, Element) -> Unit
+  fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  measure_text(Self, String) -> JsValue
+  draw_image(Self, JsValue, Double, Double) -> Unit
+  draw_image2(Self, JsValue, Double, Double, Double, Double) -> Unit
+  draw_image3(Self, JsValue, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> JsValue
+  create_image_data2(Self, JsValue) -> JsValue
+  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> JsValue
+  put_image_data(Self, JsValue, Int, Int) -> Unit
+  put_image_data2(Self, JsValue, Int, Int, Int, Int, Int, Int) -> Unit
+  set_line_dash(Self, Array[Double]) -> Unit
+  get_line_dash(Self) -> Array[Double]
+  close_path(Self) -> Unit
+  move_to(Self, Double, Double) -> Unit
+  line_to(Self, Double, Double) -> Unit
+  quadratic_curve_to(Self, Double, Double, Double, Double) -> Unit
+  bezier_curve_to(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  arc_to(Self, Double, Double, Double, Double, Double) -> Unit
+  rect(Self, Double, Double, Double, Double) -> Unit
+  round_rect(Self, Double, Double, Double, Double, radii? : &TRoundRectRadiiArg) -> Unit
+  arc(Self, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
+  ellipse(Self, Double, Double, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
 }
 
 pub trait TCharacterData : TJsValue + TNode {
   data(Self) -> String
   set_data(Self, String) -> Unit
   length(Self) -> Int
+  previous_element_sibling(Self) -> Element?
+  next_element_sibling(Self) -> Element?
   substring_data(Self, Int, Int) -> String
   append_data(Self, String) -> Unit
   insert_data(Self, Int, String) -> Unit
   delete_data(Self, Int, Int) -> Unit
   replace_data(Self, Int, Int, String) -> Unit
+  before(Self, &TBeforeNodesArg) -> Unit
+  after(Self, &TAfterNodesArg) -> Unit
+  replace_with(Self, &TReplaceWithNodesArg) -> Unit
+  remove(Self) -> Unit
 }
 
 pub trait TComment : TJsValue + TCharacterData {
@@ -971,6 +1235,152 @@ pub impl TCreateElementOptionsArg for String
 pub trait TCustomEvent : TJsValue + TEvent {
   detail(Self) -> JsValue
   init_custom_event(Self, String, bubbles? : Bool, cancelable? : Bool, detail? : JsValue) -> Unit
+}
+
+pub trait TDOMMatrix : TJsValue + TDOMMatrixReadOnly {
+  a(Self) -> Double
+  set_a(Self, Double) -> Unit
+  b(Self) -> Double
+  set_b(Self, Double) -> Unit
+  c(Self) -> Double
+  set_c(Self, Double) -> Unit
+  d(Self) -> Double
+  set_d(Self, Double) -> Unit
+  e(Self) -> Double
+  set_e(Self, Double) -> Unit
+  f(Self) -> Double
+  set_f(Self, Double) -> Unit
+  m11(Self) -> Double
+  set_m11(Self, Double) -> Unit
+  m12(Self) -> Double
+  set_m12(Self, Double) -> Unit
+  m13(Self) -> Double
+  set_m13(Self, Double) -> Unit
+  m14(Self) -> Double
+  set_m14(Self, Double) -> Unit
+  m21(Self) -> Double
+  set_m21(Self, Double) -> Unit
+  m22(Self) -> Double
+  set_m22(Self, Double) -> Unit
+  m23(Self) -> Double
+  set_m23(Self, Double) -> Unit
+  m24(Self) -> Double
+  set_m24(Self, Double) -> Unit
+  m31(Self) -> Double
+  set_m31(Self, Double) -> Unit
+  m32(Self) -> Double
+  set_m32(Self, Double) -> Unit
+  m33(Self) -> Double
+  set_m33(Self, Double) -> Unit
+  m34(Self) -> Double
+  set_m34(Self, Double) -> Unit
+  m41(Self) -> Double
+  set_m41(Self, Double) -> Unit
+  m42(Self) -> Double
+  set_m42(Self, Double) -> Unit
+  m43(Self) -> Double
+  set_m43(Self, Double) -> Unit
+  m44(Self) -> Double
+  set_m44(Self, Double) -> Unit
+  multiply_self(Self, other? : DOMMatrixInit) -> JsValue
+  pre_multiply_self(Self, other? : DOMMatrixInit) -> JsValue
+  translate_self(Self, tx? : Double, ty? : Double, tz? : Double) -> JsValue
+  scale_self(Self, scale_x? : Double, scale_y? : Double, scale_z? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  scale3d_self(Self, scale? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  rotate_self(Self, rot_x? : Double, rot_y? : Double, rot_z? : Double) -> JsValue
+  rotate_from_vector_self(Self, x? : Double, y? : Double) -> JsValue
+  rotate_axis_angle_self(Self, x? : Double, y? : Double, z? : Double, angle? : Double) -> JsValue
+  skew_x_self(Self, sx? : Double) -> JsValue
+  skew_y_self(Self, sy? : Double) -> JsValue
+  invert_self(Self) -> JsValue
+  set_matrix_value(Self, String) -> JsValue
+}
+
+pub trait TDOMMatrixReadOnly : TJsValue {
+  a(Self) -> Double
+  b(Self) -> Double
+  c(Self) -> Double
+  d(Self) -> Double
+  e(Self) -> Double
+  f(Self) -> Double
+  m11(Self) -> Double
+  m12(Self) -> Double
+  m13(Self) -> Double
+  m14(Self) -> Double
+  m21(Self) -> Double
+  m22(Self) -> Double
+  m23(Self) -> Double
+  m24(Self) -> Double
+  m31(Self) -> Double
+  m32(Self) -> Double
+  m33(Self) -> Double
+  m34(Self) -> Double
+  m41(Self) -> Double
+  m42(Self) -> Double
+  m43(Self) -> Double
+  m44(Self) -> Double
+  is2_d(Self) -> Bool
+  is_identity(Self) -> Bool
+  translate(Self, tx? : Double, ty? : Double, tz? : Double) -> JsValue
+  scale(Self, scale_x? : Double, scale_y? : Double, scale_z? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  scale_non_uniform(Self, scale_x? : Double, scale_y? : Double) -> JsValue
+  scale3d(Self, scale? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  rotate(Self, rot_x? : Double, rot_y? : Double, rot_z? : Double) -> JsValue
+  rotate_from_vector(Self, x? : Double, y? : Double) -> JsValue
+  rotate_axis_angle(Self, x? : Double, y? : Double, z? : Double, angle? : Double) -> JsValue
+  skew_x(Self, sx? : Double) -> JsValue
+  skew_y(Self, sy? : Double) -> JsValue
+  multiply(Self, other? : DOMMatrixInit) -> JsValue
+  flip_x(Self) -> JsValue
+  flip_y(Self) -> JsValue
+  inverse(Self) -> JsValue
+  transform_point(Self, point? : DOMPointInit) -> JsValue
+  to_float32_array(Self) -> JsValue
+  to_float64_array(Self) -> JsValue
+  to_json(Self) -> JsValue
+}
+
+pub trait TDOMPoint : TJsValue + TDOMPointReadOnly {
+  x(Self) -> Double
+  set_x(Self, Double) -> Unit
+  y(Self) -> Double
+  set_y(Self, Double) -> Unit
+  z(Self) -> Double
+  set_z(Self, Double) -> Unit
+  w(Self) -> Double
+  set_w(Self, Double) -> Unit
+}
+
+pub trait TDOMPointReadOnly : TJsValue {
+  x(Self) -> Double
+  y(Self) -> Double
+  z(Self) -> Double
+  w(Self) -> Double
+  matrix_transform(Self, matrix? : DOMMatrixInit) -> JsValue
+  to_json(Self) -> JsValue
+}
+
+pub trait TDOMRect : TJsValue + TDOMRectReadOnly {
+  x(Self) -> Double
+  set_x(Self, Double) -> Unit
+  y(Self) -> Double
+  set_y(Self, Double) -> Unit
+  width(Self) -> Double
+  set_width(Self, Double) -> Unit
+  height(Self) -> Double
+  set_height(Self, Double) -> Unit
+}
+
+pub trait TDOMRectReadOnly : TJsValue {
+  x(Self) -> Double
+  y(Self) -> Double
+  width(Self) -> Double
+  height(Self) -> Double
+  top(Self) -> Double
+  right(Self) -> Double
+  bottom(Self) -> Double
+  left(Self) -> Double
+  to_json(Self) -> JsValue
 }
 
 pub trait TDOMTokenList : TJsValue {
@@ -1042,6 +1452,167 @@ pub trait TDocument : TJsValue {
   anchors(Self) -> HTMLCollection
   applets(Self) -> HTMLCollection
   all(Self) -> JsValue
+  style_sheets(Self) -> JsValue
+  adopted_style_sheets(Self) -> Array[JsValue]
+  set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
+  custom_element_registry(Self) -> JsValue?
+  active_element(Self) -> Element?
+  children(Self) -> HTMLCollection
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
+  child_element_count(Self) -> Int
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onauxclick(Self) -> EventHandler
+  set_onauxclick(Self, EventHandler) -> Unit
+  onbeforeinput(Self) -> EventHandler
+  set_onbeforeinput(Self, EventHandler) -> Unit
+  onbeforematch(Self) -> EventHandler
+  set_onbeforematch(Self, EventHandler) -> Unit
+  onbeforetoggle(Self) -> EventHandler
+  set_onbeforetoggle(Self, EventHandler) -> Unit
+  onblur(Self) -> EventHandler
+  set_onblur(Self, EventHandler) -> Unit
+  oncancel(Self) -> EventHandler
+  set_oncancel(Self, EventHandler) -> Unit
+  oncanplay(Self) -> EventHandler
+  set_oncanplay(Self, EventHandler) -> Unit
+  oncanplaythrough(Self) -> EventHandler
+  set_oncanplaythrough(Self, EventHandler) -> Unit
+  onchange(Self) -> EventHandler
+  set_onchange(Self, EventHandler) -> Unit
+  onclick(Self) -> EventHandler
+  set_onclick(Self, EventHandler) -> Unit
+  onclose(Self) -> EventHandler
+  set_onclose(Self, EventHandler) -> Unit
+  oncommand(Self) -> EventHandler
+  set_oncommand(Self, EventHandler) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextmenu(Self) -> EventHandler
+  set_oncontextmenu(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  oncopy(Self) -> EventHandler
+  set_oncopy(Self, EventHandler) -> Unit
+  oncuechange(Self) -> EventHandler
+  set_oncuechange(Self, EventHandler) -> Unit
+  oncut(Self) -> EventHandler
+  set_oncut(Self, EventHandler) -> Unit
+  ondblclick(Self) -> EventHandler
+  set_ondblclick(Self, EventHandler) -> Unit
+  ondrag(Self) -> EventHandler
+  set_ondrag(Self, EventHandler) -> Unit
+  ondragend(Self) -> EventHandler
+  set_ondragend(Self, EventHandler) -> Unit
+  ondragenter(Self) -> EventHandler
+  set_ondragenter(Self, EventHandler) -> Unit
+  ondragleave(Self) -> EventHandler
+  set_ondragleave(Self, EventHandler) -> Unit
+  ondragover(Self) -> EventHandler
+  set_ondragover(Self, EventHandler) -> Unit
+  ondragstart(Self) -> EventHandler
+  set_ondragstart(Self, EventHandler) -> Unit
+  ondrop(Self) -> EventHandler
+  set_ondrop(Self, EventHandler) -> Unit
+  ondurationchange(Self) -> EventHandler
+  set_ondurationchange(Self, EventHandler) -> Unit
+  onemptied(Self) -> EventHandler
+  set_onemptied(Self, EventHandler) -> Unit
+  onended(Self) -> EventHandler
+  set_onended(Self, EventHandler) -> Unit
+  onerror(Self) -> OnErrorEventHandler
+  set_onerror(Self, OnErrorEventHandler) -> Unit
+  onfocus(Self) -> EventHandler
+  set_onfocus(Self, EventHandler) -> Unit
+  onformdata(Self) -> EventHandler
+  set_onformdata(Self, EventHandler) -> Unit
+  oninput(Self) -> EventHandler
+  set_oninput(Self, EventHandler) -> Unit
+  oninvalid(Self) -> EventHandler
+  set_oninvalid(Self, EventHandler) -> Unit
+  onkeydown(Self) -> EventHandler
+  set_onkeydown(Self, EventHandler) -> Unit
+  onkeypress(Self) -> EventHandler
+  set_onkeypress(Self, EventHandler) -> Unit
+  onkeyup(Self) -> EventHandler
+  set_onkeyup(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onloadeddata(Self) -> EventHandler
+  set_onloadeddata(Self, EventHandler) -> Unit
+  onloadedmetadata(Self) -> EventHandler
+  set_onloadedmetadata(Self, EventHandler) -> Unit
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onmousedown(Self) -> EventHandler
+  set_onmousedown(Self, EventHandler) -> Unit
+  onmouseenter(Self) -> EventHandler
+  set_onmouseenter(Self, EventHandler) -> Unit
+  onmouseleave(Self) -> EventHandler
+  set_onmouseleave(Self, EventHandler) -> Unit
+  onmousemove(Self) -> EventHandler
+  set_onmousemove(Self, EventHandler) -> Unit
+  onmouseout(Self) -> EventHandler
+  set_onmouseout(Self, EventHandler) -> Unit
+  onmouseover(Self) -> EventHandler
+  set_onmouseover(Self, EventHandler) -> Unit
+  onmouseup(Self) -> EventHandler
+  set_onmouseup(Self, EventHandler) -> Unit
+  onpaste(Self) -> EventHandler
+  set_onpaste(Self, EventHandler) -> Unit
+  onpause(Self) -> EventHandler
+  set_onpause(Self, EventHandler) -> Unit
+  onplay(Self) -> EventHandler
+  set_onplay(Self, EventHandler) -> Unit
+  onplaying(Self) -> EventHandler
+  set_onplaying(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onratechange(Self) -> EventHandler
+  set_onratechange(Self, EventHandler) -> Unit
+  onreset(Self) -> EventHandler
+  set_onreset(Self, EventHandler) -> Unit
+  onresize(Self) -> EventHandler
+  set_onresize(Self, EventHandler) -> Unit
+  onscroll(Self) -> EventHandler
+  set_onscroll(Self, EventHandler) -> Unit
+  onscrollend(Self) -> EventHandler
+  set_onscrollend(Self, EventHandler) -> Unit
+  onsecuritypolicyviolation(Self) -> EventHandler
+  set_onsecuritypolicyviolation(Self, EventHandler) -> Unit
+  onseeked(Self) -> EventHandler
+  set_onseeked(Self, EventHandler) -> Unit
+  onseeking(Self) -> EventHandler
+  set_onseeking(Self, EventHandler) -> Unit
+  onselect(Self) -> EventHandler
+  set_onselect(Self, EventHandler) -> Unit
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  onstalled(Self) -> EventHandler
+  set_onstalled(Self, EventHandler) -> Unit
+  onsubmit(Self) -> EventHandler
+  set_onsubmit(Self, EventHandler) -> Unit
+  onsuspend(Self) -> EventHandler
+  set_onsuspend(Self, EventHandler) -> Unit
+  ontimeupdate(Self) -> EventHandler
+  set_ontimeupdate(Self, EventHandler) -> Unit
+  ontoggle(Self) -> EventHandler
+  set_ontoggle(Self, EventHandler) -> Unit
+  onvolumechange(Self) -> EventHandler
+  set_onvolumechange(Self, EventHandler) -> Unit
+  onwaiting(Self) -> EventHandler
+  set_onwaiting(Self, EventHandler) -> Unit
+  onwebkitanimationend(Self) -> EventHandler
+  set_onwebkitanimationend(Self, EventHandler) -> Unit
+  onwebkitanimationiteration(Self) -> EventHandler
+  set_onwebkitanimationiteration(Self, EventHandler) -> Unit
+  onwebkitanimationstart(Self) -> EventHandler
+  set_onwebkitanimationstart(Self, EventHandler) -> Unit
+  onwebkittransitionend(Self) -> EventHandler
+  set_onwebkittransitionend(Self, EventHandler) -> Unit
+  onwheel(Self) -> EventHandler
+  set_onwheel(Self, EventHandler) -> Unit
   element_from_point(Self, Double, Double) -> Element?
   elements_from_point(Self, Double, Double) -> Array[Element]
   caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> JsValue?
@@ -1079,15 +1650,44 @@ pub trait TDocument : TJsValue {
   clear(Self) -> Unit
   capture_events(Self) -> Unit
   release_events(Self) -> Unit
+  get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
+  convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  get_element_by_id(Self, String) -> Element?
+  prepend(Self, &TPrependNodesArg) -> Unit
+  append(Self, &TAppendNodesArg) -> Unit
+  replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
+  move_before(Self, Node, Node) -> Unit
+  query_selector(Self, String) -> Element?
+  query_selector_all(Self, String) -> NodeList
+  create_expression(Self, String, resolver? : JsValue) -> JsValue
+  create_ns_resolver(Self, Node) -> Node
+  evaluate(Self, String, Node, resolver? : JsValue, type_? : Int, result? : JsValue) -> JsValue
 }
 
 pub trait TDocumentFragment : TJsValue + TNode {
+  children(Self) -> HTMLCollection
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
+  child_element_count(Self) -> Int
+  get_element_by_id(Self, String) -> Element?
+  prepend(Self, &TPrependNodesArg) -> Unit
+  append(Self, &TAppendNodesArg) -> Unit
+  replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
+  move_before(Self, Node, Node) -> Unit
+  query_selector(Self, String) -> Element?
+  query_selector_all(Self, String) -> NodeList
 }
 
 pub trait TDocumentType : TJsValue + TNode {
   name(Self) -> String
   public_id(Self) -> String
   system_id(Self) -> String
+  before(Self, &TBeforeNodesArg) -> Unit
+  after(Self, &TAfterNodesArg) -> Unit
+  replace_with(Self, &TReplaceWithNodesArg) -> Unit
+  remove(Self) -> Unit
 }
 
 pub trait TElement : TJsValue {
@@ -1120,6 +1720,13 @@ pub trait TElement : TJsValue {
   set_inner_html(Self, JsValue) -> Unit
   outer_html(Self) -> JsValue
   set_outer_html(Self, JsValue) -> Unit
+  children(Self) -> HTMLCollection
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
+  child_element_count(Self) -> Int
+  previous_element_sibling(Self) -> Element?
+  next_element_sibling(Self) -> Element?
+  assigned_slot(Self) -> JsValue?
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
   check_visibility(Self, options? : CheckVisibilityOptions) -> Bool
@@ -1158,6 +1765,20 @@ pub trait TElement : TJsValue {
   set_html_unsafe(Self, String) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
   insert_adjacent_html(Self, String, String) -> Unit
+  get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
+  convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  prepend(Self, &TPrependNodesArg) -> Unit
+  append(Self, &TAppendNodesArg) -> Unit
+  replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
+  move_before(Self, Node, Node) -> Unit
+  query_selector(Self, String) -> Element?
+  query_selector_all(Self, String) -> NodeList
+  before(Self, &TBeforeNodesArg) -> Unit
+  after(Self, &TAfterNodesArg) -> Unit
+  replace_with(Self, &TReplaceWithNodesArg) -> Unit
+  remove(Self) -> Unit
 }
 
 pub trait TEvent : TJsValue {
@@ -1221,6 +1842,27 @@ pub trait THTMLAnchorElement : TJsValue + THTMLElement {
   set_rev(Self, String) -> Unit
   shape(Self) -> String
   set_shape(Self, String) -> Unit
+  href(Self) -> String
+  set_href(Self, String) -> Unit
+  origin(Self) -> String
+  protocol(Self) -> String
+  set_protocol(Self, String) -> Unit
+  username(Self) -> String
+  set_username(Self, String) -> Unit
+  password(Self) -> String
+  set_password(Self, String) -> Unit
+  host(Self) -> String
+  set_host(Self, String) -> Unit
+  hostname(Self) -> String
+  set_hostname(Self, String) -> Unit
+  port(Self) -> String
+  set_port(Self, String) -> Unit
+  pathname(Self) -> String
+  set_pathname(Self, String) -> Unit
+  search(Self) -> String
+  set_search(Self, String) -> Unit
+  hash(Self) -> String
+  set_hash(Self, String) -> Unit
 }
 
 pub trait THTMLAudioElement : TJsValue {
@@ -1239,6 +1881,42 @@ pub trait THTMLBodyElement : TJsValue + THTMLElement {
   set_bg_color(Self, String) -> Unit
   background(Self) -> String
   set_background(Self, String) -> Unit
+  onafterprint(Self) -> EventHandler
+  set_onafterprint(Self, EventHandler) -> Unit
+  onbeforeprint(Self) -> EventHandler
+  set_onbeforeprint(Self, EventHandler) -> Unit
+  onbeforeunload(Self) -> OnBeforeUnloadEventHandler
+  set_onbeforeunload(Self, OnBeforeUnloadEventHandler) -> Unit
+  onhashchange(Self) -> EventHandler
+  set_onhashchange(Self, EventHandler) -> Unit
+  onlanguagechange(Self) -> EventHandler
+  set_onlanguagechange(Self, EventHandler) -> Unit
+  onmessage(Self) -> EventHandler
+  set_onmessage(Self, EventHandler) -> Unit
+  onmessageerror(Self) -> EventHandler
+  set_onmessageerror(Self, EventHandler) -> Unit
+  onoffline(Self) -> EventHandler
+  set_onoffline(Self, EventHandler) -> Unit
+  ononline(Self) -> EventHandler
+  set_ononline(Self, EventHandler) -> Unit
+  onpagehide(Self) -> EventHandler
+  set_onpagehide(Self, EventHandler) -> Unit
+  onpagereveal(Self) -> EventHandler
+  set_onpagereveal(Self, EventHandler) -> Unit
+  onpageshow(Self) -> EventHandler
+  set_onpageshow(Self, EventHandler) -> Unit
+  onpageswap(Self) -> EventHandler
+  set_onpageswap(Self, EventHandler) -> Unit
+  onpopstate(Self) -> EventHandler
+  set_onpopstate(Self, EventHandler) -> Unit
+  onrejectionhandled(Self) -> EventHandler
+  set_onrejectionhandled(Self, EventHandler) -> Unit
+  onstorage(Self) -> EventHandler
+  set_onstorage(Self, EventHandler) -> Unit
+  onunhandledrejection(Self) -> EventHandler
+  set_onunhandledrejection(Self, EventHandler) -> Unit
+  onunload(Self) -> EventHandler
+  set_onunload(Self, EventHandler) -> Unit
 }
 
 pub trait THTMLButtonElement : TJsValue + THTMLElement {
@@ -1269,6 +1947,10 @@ pub trait THTMLButtonElement : TJsValue + THTMLElement {
   validity(Self) -> JsValue
   validation_message(Self) -> String
   labels(Self) -> NodeList
+  popover_target_element(Self) -> Element?
+  set_popover_target_element(Self, Element) -> Unit
+  popover_target_action(Self) -> String
+  set_popover_target_action(Self, String) -> Unit
   check_validity(Self) -> Bool
   report_validity(Self) -> Bool
   set_custom_validity(Self, String) -> Unit
@@ -1279,7 +1961,7 @@ pub trait THTMLCanvasElement : TJsValue + THTMLElement {
   set_width(Self, Int) -> Unit
   height(Self) -> Int
   set_height(Self, Int) -> Unit
-  get_context(Self, String, options? : JsValue) -> JsValue?
+  get_context(Self, String, options? : JsValue) -> RenderingContext?
   to_data_url(Self, type_? : String, quality? : JsValue) -> String
   to_blob(Self, JsValue, type_? : String, quality? : JsValue) -> Unit
   transfer_control_to_offscreen(Self) -> JsValue
@@ -1338,11 +2020,180 @@ pub trait THTMLElement : TJsValue {
   set_heading_offset(Self, Int) -> Unit
   heading_reset(Self) -> Bool
   set_heading_reset(Self, Bool) -> Unit
+  style(Self) -> JsValue
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onauxclick(Self) -> EventHandler
+  set_onauxclick(Self, EventHandler) -> Unit
+  onbeforeinput(Self) -> EventHandler
+  set_onbeforeinput(Self, EventHandler) -> Unit
+  onbeforematch(Self) -> EventHandler
+  set_onbeforematch(Self, EventHandler) -> Unit
+  onbeforetoggle(Self) -> EventHandler
+  set_onbeforetoggle(Self, EventHandler) -> Unit
+  onblur(Self) -> EventHandler
+  set_onblur(Self, EventHandler) -> Unit
+  oncancel(Self) -> EventHandler
+  set_oncancel(Self, EventHandler) -> Unit
+  oncanplay(Self) -> EventHandler
+  set_oncanplay(Self, EventHandler) -> Unit
+  oncanplaythrough(Self) -> EventHandler
+  set_oncanplaythrough(Self, EventHandler) -> Unit
+  onchange(Self) -> EventHandler
+  set_onchange(Self, EventHandler) -> Unit
+  onclick(Self) -> EventHandler
+  set_onclick(Self, EventHandler) -> Unit
+  onclose(Self) -> EventHandler
+  set_onclose(Self, EventHandler) -> Unit
+  oncommand(Self) -> EventHandler
+  set_oncommand(Self, EventHandler) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextmenu(Self) -> EventHandler
+  set_oncontextmenu(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  oncopy(Self) -> EventHandler
+  set_oncopy(Self, EventHandler) -> Unit
+  oncuechange(Self) -> EventHandler
+  set_oncuechange(Self, EventHandler) -> Unit
+  oncut(Self) -> EventHandler
+  set_oncut(Self, EventHandler) -> Unit
+  ondblclick(Self) -> EventHandler
+  set_ondblclick(Self, EventHandler) -> Unit
+  ondrag(Self) -> EventHandler
+  set_ondrag(Self, EventHandler) -> Unit
+  ondragend(Self) -> EventHandler
+  set_ondragend(Self, EventHandler) -> Unit
+  ondragenter(Self) -> EventHandler
+  set_ondragenter(Self, EventHandler) -> Unit
+  ondragleave(Self) -> EventHandler
+  set_ondragleave(Self, EventHandler) -> Unit
+  ondragover(Self) -> EventHandler
+  set_ondragover(Self, EventHandler) -> Unit
+  ondragstart(Self) -> EventHandler
+  set_ondragstart(Self, EventHandler) -> Unit
+  ondrop(Self) -> EventHandler
+  set_ondrop(Self, EventHandler) -> Unit
+  ondurationchange(Self) -> EventHandler
+  set_ondurationchange(Self, EventHandler) -> Unit
+  onemptied(Self) -> EventHandler
+  set_onemptied(Self, EventHandler) -> Unit
+  onended(Self) -> EventHandler
+  set_onended(Self, EventHandler) -> Unit
+  onerror(Self) -> OnErrorEventHandler
+  set_onerror(Self, OnErrorEventHandler) -> Unit
+  onfocus(Self) -> EventHandler
+  set_onfocus(Self, EventHandler) -> Unit
+  onformdata(Self) -> EventHandler
+  set_onformdata(Self, EventHandler) -> Unit
+  oninput(Self) -> EventHandler
+  set_oninput(Self, EventHandler) -> Unit
+  oninvalid(Self) -> EventHandler
+  set_oninvalid(Self, EventHandler) -> Unit
+  onkeydown(Self) -> EventHandler
+  set_onkeydown(Self, EventHandler) -> Unit
+  onkeypress(Self) -> EventHandler
+  set_onkeypress(Self, EventHandler) -> Unit
+  onkeyup(Self) -> EventHandler
+  set_onkeyup(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onloadeddata(Self) -> EventHandler
+  set_onloadeddata(Self, EventHandler) -> Unit
+  onloadedmetadata(Self) -> EventHandler
+  set_onloadedmetadata(Self, EventHandler) -> Unit
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onmousedown(Self) -> EventHandler
+  set_onmousedown(Self, EventHandler) -> Unit
+  onmouseenter(Self) -> EventHandler
+  set_onmouseenter(Self, EventHandler) -> Unit
+  onmouseleave(Self) -> EventHandler
+  set_onmouseleave(Self, EventHandler) -> Unit
+  onmousemove(Self) -> EventHandler
+  set_onmousemove(Self, EventHandler) -> Unit
+  onmouseout(Self) -> EventHandler
+  set_onmouseout(Self, EventHandler) -> Unit
+  onmouseover(Self) -> EventHandler
+  set_onmouseover(Self, EventHandler) -> Unit
+  onmouseup(Self) -> EventHandler
+  set_onmouseup(Self, EventHandler) -> Unit
+  onpaste(Self) -> EventHandler
+  set_onpaste(Self, EventHandler) -> Unit
+  onpause(Self) -> EventHandler
+  set_onpause(Self, EventHandler) -> Unit
+  onplay(Self) -> EventHandler
+  set_onplay(Self, EventHandler) -> Unit
+  onplaying(Self) -> EventHandler
+  set_onplaying(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onratechange(Self) -> EventHandler
+  set_onratechange(Self, EventHandler) -> Unit
+  onreset(Self) -> EventHandler
+  set_onreset(Self, EventHandler) -> Unit
+  onresize(Self) -> EventHandler
+  set_onresize(Self, EventHandler) -> Unit
+  onscroll(Self) -> EventHandler
+  set_onscroll(Self, EventHandler) -> Unit
+  onscrollend(Self) -> EventHandler
+  set_onscrollend(Self, EventHandler) -> Unit
+  onsecuritypolicyviolation(Self) -> EventHandler
+  set_onsecuritypolicyviolation(Self, EventHandler) -> Unit
+  onseeked(Self) -> EventHandler
+  set_onseeked(Self, EventHandler) -> Unit
+  onseeking(Self) -> EventHandler
+  set_onseeking(Self, EventHandler) -> Unit
+  onselect(Self) -> EventHandler
+  set_onselect(Self, EventHandler) -> Unit
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  onstalled(Self) -> EventHandler
+  set_onstalled(Self, EventHandler) -> Unit
+  onsubmit(Self) -> EventHandler
+  set_onsubmit(Self, EventHandler) -> Unit
+  onsuspend(Self) -> EventHandler
+  set_onsuspend(Self, EventHandler) -> Unit
+  ontimeupdate(Self) -> EventHandler
+  set_ontimeupdate(Self, EventHandler) -> Unit
+  ontoggle(Self) -> EventHandler
+  set_ontoggle(Self, EventHandler) -> Unit
+  onvolumechange(Self) -> EventHandler
+  set_onvolumechange(Self, EventHandler) -> Unit
+  onwaiting(Self) -> EventHandler
+  set_onwaiting(Self, EventHandler) -> Unit
+  onwebkitanimationend(Self) -> EventHandler
+  set_onwebkitanimationend(Self, EventHandler) -> Unit
+  onwebkitanimationiteration(Self) -> EventHandler
+  set_onwebkitanimationiteration(Self, EventHandler) -> Unit
+  onwebkitanimationstart(Self) -> EventHandler
+  set_onwebkitanimationstart(Self, EventHandler) -> Unit
+  onwebkittransitionend(Self) -> EventHandler
+  set_onwebkittransitionend(Self, EventHandler) -> Unit
+  onwheel(Self) -> EventHandler
+  set_onwheel(Self, EventHandler) -> Unit
+  content_editable(Self) -> String
+  set_content_editable(Self, String) -> Unit
+  enter_key_hint(Self) -> String
+  set_enter_key_hint(Self, String) -> Unit
+  is_content_editable(Self) -> Bool
+  input_mode(Self) -> String
+  set_input_mode(Self, String) -> Unit
+  dataset(Self) -> JsValue
+  nonce(Self) -> String
+  set_nonce(Self, String) -> Unit
+  autofocus(Self) -> Bool
+  set_autofocus(Self, Bool) -> Unit
+  tab_index(Self) -> Int
+  set_tab_index(Self, Int) -> Unit
   click(Self) -> Unit
   attach_internals(Self) -> JsValue
   show_popover(Self, options? : ShowPopoverOptions) -> Unit
   hide_popover(Self) -> Unit
   toggle_popover(Self, options? : &TTogglePopoverOptionsArg) -> Bool
+  focus(Self, options? : FocusOptions) -> Unit
+  blur(Self) -> Unit
 }
 
 pub trait THTMLFormElement : TJsValue + THTMLElement {
@@ -1523,6 +2374,10 @@ pub trait THTMLInputElement : TJsValue + THTMLElement {
   set_align(Self, String) -> Unit
   use_map(Self) -> String
   set_use_map(Self, String) -> Unit
+  popover_target_element(Self) -> Element?
+  set_popover_target_element(Self, Element) -> Unit
+  popover_target_action(Self) -> String
+  set_popover_target_action(Self, String) -> Unit
   step_up(Self, n? : Int) -> Unit
   step_down(Self, n? : Int) -> Unit
   check_validity(Self) -> Bool
@@ -1571,6 +2426,7 @@ pub trait THTMLLinkElement : TJsValue + THTMLElement {
   set_rev(Self, String) -> Unit
   target(Self) -> String
   set_target(Self, String) -> Unit
+  sheet(Self) -> JsValue?
 }
 
 pub trait THTMLParagraphElement : TJsValue + THTMLElement {
@@ -1619,6 +2475,7 @@ pub trait THTMLStyleElement : TJsValue + THTMLElement {
   blocking(Self) -> DOMTokenList
   type_(Self) -> String
   set_type_(Self, String) -> Unit
+  sheet(Self) -> JsValue?
 }
 
 pub trait THTMLVideoElement : TJsValue {
@@ -1644,6 +2501,11 @@ pub trait THistory : TJsValue {
   forward(Self) -> Unit
   push_state(Self, JsValue, String, url? : String) -> Unit
   replace_state(Self, JsValue, String, url? : String) -> Unit
+}
+
+pub trait TImageBitmapRenderingContext : TJsValue {
+  canvas(Self) -> JsValue
+  transfer_from_image_bitmap(Self, JsValue) -> Unit
 }
 
 pub(open) trait TImportNodeOptionsArg {
@@ -1762,6 +2624,28 @@ pub trait TNamedNodeMap : TJsValue {
 
 pub trait TNavigator : TJsValue {
   user_activation(Self) -> JsValue
+  app_code_name(Self) -> String
+  app_name(Self) -> String
+  app_version(Self) -> String
+  platform(Self) -> String
+  product(Self) -> String
+  product_sub(Self) -> String
+  user_agent(Self) -> String
+  vendor(Self) -> String
+  vendor_sub(Self) -> String
+  oscpu(Self) -> String
+  language(Self) -> String
+  languages(Self) -> Array[String]
+  on_line(Self) -> Bool
+  cookie_enabled(Self) -> Bool
+  plugins(Self) -> JsValue
+  mime_types(Self) -> JsValue
+  pdf_viewer_enabled(Self) -> Bool
+  hardware_concurrency(Self) -> Int64
+  taint_enabled(Self) -> Bool
+  register_protocol_handler(Self, String, String) -> Unit
+  unregister_protocol_handler(Self, String, String) -> Unit
+  java_enabled(Self) -> Bool
 }
 
 pub trait TNode : TJsValue + TEventTarget {
@@ -1803,8 +2687,126 @@ pub trait TNodeList : TJsValue {
   item(Self, Int) -> Node?
 }
 
+pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
+  canvas(Self) -> JsValue
+  global_alpha(Self) -> Double
+  set_global_alpha(Self, Double) -> Unit
+  global_composite_operation(Self) -> String
+  set_global_composite_operation(Self, String) -> Unit
+  image_smoothing_enabled(Self) -> Bool
+  set_image_smoothing_enabled(Self, Bool) -> Unit
+  image_smoothing_quality(Self) -> JsValue
+  set_image_smoothing_quality(Self, JsValue) -> Unit
+  stroke_style(Self) -> JsValue
+  set_stroke_style(Self, JsValue) -> Unit
+  fill_style(Self) -> JsValue
+  set_fill_style(Self, JsValue) -> Unit
+  shadow_offset_x(Self) -> Double
+  set_shadow_offset_x(Self, Double) -> Unit
+  shadow_offset_y(Self) -> Double
+  set_shadow_offset_y(Self, Double) -> Unit
+  shadow_blur(Self) -> Double
+  set_shadow_blur(Self, Double) -> Unit
+  shadow_color(Self) -> String
+  set_shadow_color(Self, String) -> Unit
+  filter(Self) -> String
+  set_filter(Self, String) -> Unit
+  line_width(Self) -> Double
+  set_line_width(Self, Double) -> Unit
+  line_cap(Self) -> JsValue
+  set_line_cap(Self, JsValue) -> Unit
+  line_join(Self) -> JsValue
+  set_line_join(Self, JsValue) -> Unit
+  miter_limit(Self) -> Double
+  set_miter_limit(Self, Double) -> Unit
+  line_dash_offset(Self) -> Double
+  set_line_dash_offset(Self, Double) -> Unit
+  lang(Self) -> String
+  set_lang(Self, String) -> Unit
+  font(Self) -> String
+  set_font(Self, String) -> Unit
+  text_align(Self) -> JsValue
+  set_text_align(Self, JsValue) -> Unit
+  text_baseline(Self) -> JsValue
+  set_text_baseline(Self, JsValue) -> Unit
+  direction(Self) -> JsValue
+  set_direction(Self, JsValue) -> Unit
+  letter_spacing(Self) -> String
+  set_letter_spacing(Self, String) -> Unit
+  font_kerning(Self) -> JsValue
+  set_font_kerning(Self, JsValue) -> Unit
+  font_stretch(Self) -> JsValue
+  set_font_stretch(Self, JsValue) -> Unit
+  font_variant_caps(Self) -> JsValue
+  set_font_variant_caps(Self, JsValue) -> Unit
+  text_rendering(Self) -> JsValue
+  set_text_rendering(Self, JsValue) -> Unit
+  word_spacing(Self) -> String
+  set_word_spacing(Self, String) -> Unit
+  get_context_attributes(Self) -> CanvasRenderingContext2DSettings
+  save(Self) -> Unit
+  restore(Self) -> Unit
+  reset(Self) -> Unit
+  is_context_lost(Self) -> Bool
+  scale(Self, Double, Double) -> Unit
+  rotate(Self, Double) -> Unit
+  translate(Self, Double, Double) -> Unit
+  transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  get_transform(Self) -> JsValue
+  set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  set_transform2(Self, transform? : DOMMatrix2DInit) -> Unit
+  reset_transform(Self) -> Unit
+  create_linear_gradient(Self, Double, Double, Double, Double) -> JsValue
+  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> JsValue
+  create_conic_gradient(Self, Double, Double, Double) -> JsValue
+  create_pattern(Self, JsValue, String) -> JsValue?
+  clear_rect(Self, Double, Double, Double, Double) -> Unit
+  fill_rect(Self, Double, Double, Double, Double) -> Unit
+  stroke_rect(Self, Double, Double, Double, Double) -> Unit
+  begin_path(Self) -> Unit
+  fill(Self, fill_rule? : JsValue) -> Unit
+  fill2(Self, JsValue, fill_rule? : JsValue) -> Unit
+  stroke(Self) -> Unit
+  stroke2(Self, JsValue) -> Unit
+  clip(Self, fill_rule? : JsValue) -> Unit
+  clip2(Self, JsValue, fill_rule? : JsValue) -> Unit
+  is_point_in_path(Self, Double, Double, fill_rule? : JsValue) -> Bool
+  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : JsValue) -> Bool
+  is_point_in_stroke(Self, Double, Double) -> Bool
+  is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
+  fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  measure_text(Self, String) -> JsValue
+  draw_image(Self, JsValue, Double, Double) -> Unit
+  draw_image2(Self, JsValue, Double, Double, Double, Double) -> Unit
+  draw_image3(Self, JsValue, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> JsValue
+  create_image_data2(Self, JsValue) -> JsValue
+  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> JsValue
+  put_image_data(Self, JsValue, Int, Int) -> Unit
+  put_image_data2(Self, JsValue, Int, Int, Int, Int, Int, Int) -> Unit
+  set_line_dash(Self, Array[Double]) -> Unit
+  get_line_dash(Self) -> Array[Double]
+  close_path(Self) -> Unit
+  move_to(Self, Double, Double) -> Unit
+  line_to(Self, Double, Double) -> Unit
+  quadratic_curve_to(Self, Double, Double, Double, Double) -> Unit
+  bezier_curve_to(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  arc_to(Self, Double, Double, Double, Double, Double) -> Unit
+  rect(Self, Double, Double, Double, Double) -> Unit
+  round_rect(Self, Double, Double, Double, Double, radii? : &TRoundRectRadiiArg) -> Unit
+  arc(Self, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
+  ellipse(Self, Double, Double, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
+}
+
+pub(open) trait TPrependNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TPrependNodesArg for String
+
 pub trait TProcessingInstruction : TJsValue + TCharacterData {
   target(Self) -> String
+  sheet(Self) -> JsValue?
 }
 
 pub trait TRange : TJsValue {
@@ -1839,6 +2841,24 @@ pub(open) trait TRemoveEventListenerOptionsArg {
 }
 pub impl TRemoveEventListenerOptionsArg for Bool
 
+pub(open) trait TRenderingContext {
+  to_js(Self) -> JsValue
+}
+
+pub(open) trait TReplaceChildrenNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TReplaceChildrenNodesArg for String
+
+pub(open) trait TReplaceWithNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TReplaceWithNodesArg for String
+
+pub(open) trait TRoundRectRadiiArg {
+  to_js(Self) -> JsValue
+}
+
 pub(open) trait TScrollIntoViewArgArg {
   to_js(Self) -> JsValue
 }
@@ -1855,7 +2875,12 @@ pub trait TStorage : TJsValue {
 
 pub trait TText : TJsValue + TCharacterData {
   whole_text(Self) -> String
+  assigned_slot(Self) -> JsValue?
   split_text(Self, Int) -> Text
+  get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
+  convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
 }
 
 pub(open) trait TTogglePopoverOptionsArg {
@@ -1923,6 +2948,199 @@ pub trait TWindow : TJsValue {
   client_information(Self) -> Navigator
   origin_agent_cluster(Self) -> Bool
   external(Self) -> JsValue
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onauxclick(Self) -> EventHandler
+  set_onauxclick(Self, EventHandler) -> Unit
+  onbeforeinput(Self) -> EventHandler
+  set_onbeforeinput(Self, EventHandler) -> Unit
+  onbeforematch(Self) -> EventHandler
+  set_onbeforematch(Self, EventHandler) -> Unit
+  onbeforetoggle(Self) -> EventHandler
+  set_onbeforetoggle(Self, EventHandler) -> Unit
+  onblur(Self) -> EventHandler
+  set_onblur(Self, EventHandler) -> Unit
+  oncancel(Self) -> EventHandler
+  set_oncancel(Self, EventHandler) -> Unit
+  oncanplay(Self) -> EventHandler
+  set_oncanplay(Self, EventHandler) -> Unit
+  oncanplaythrough(Self) -> EventHandler
+  set_oncanplaythrough(Self, EventHandler) -> Unit
+  onchange(Self) -> EventHandler
+  set_onchange(Self, EventHandler) -> Unit
+  onclick(Self) -> EventHandler
+  set_onclick(Self, EventHandler) -> Unit
+  onclose(Self) -> EventHandler
+  set_onclose(Self, EventHandler) -> Unit
+  oncommand(Self) -> EventHandler
+  set_oncommand(Self, EventHandler) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextmenu(Self) -> EventHandler
+  set_oncontextmenu(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  oncopy(Self) -> EventHandler
+  set_oncopy(Self, EventHandler) -> Unit
+  oncuechange(Self) -> EventHandler
+  set_oncuechange(Self, EventHandler) -> Unit
+  oncut(Self) -> EventHandler
+  set_oncut(Self, EventHandler) -> Unit
+  ondblclick(Self) -> EventHandler
+  set_ondblclick(Self, EventHandler) -> Unit
+  ondrag(Self) -> EventHandler
+  set_ondrag(Self, EventHandler) -> Unit
+  ondragend(Self) -> EventHandler
+  set_ondragend(Self, EventHandler) -> Unit
+  ondragenter(Self) -> EventHandler
+  set_ondragenter(Self, EventHandler) -> Unit
+  ondragleave(Self) -> EventHandler
+  set_ondragleave(Self, EventHandler) -> Unit
+  ondragover(Self) -> EventHandler
+  set_ondragover(Self, EventHandler) -> Unit
+  ondragstart(Self) -> EventHandler
+  set_ondragstart(Self, EventHandler) -> Unit
+  ondrop(Self) -> EventHandler
+  set_ondrop(Self, EventHandler) -> Unit
+  ondurationchange(Self) -> EventHandler
+  set_ondurationchange(Self, EventHandler) -> Unit
+  onemptied(Self) -> EventHandler
+  set_onemptied(Self, EventHandler) -> Unit
+  onended(Self) -> EventHandler
+  set_onended(Self, EventHandler) -> Unit
+  onerror(Self) -> OnErrorEventHandler
+  set_onerror(Self, OnErrorEventHandler) -> Unit
+  onfocus(Self) -> EventHandler
+  set_onfocus(Self, EventHandler) -> Unit
+  onformdata(Self) -> EventHandler
+  set_onformdata(Self, EventHandler) -> Unit
+  oninput(Self) -> EventHandler
+  set_oninput(Self, EventHandler) -> Unit
+  oninvalid(Self) -> EventHandler
+  set_oninvalid(Self, EventHandler) -> Unit
+  onkeydown(Self) -> EventHandler
+  set_onkeydown(Self, EventHandler) -> Unit
+  onkeypress(Self) -> EventHandler
+  set_onkeypress(Self, EventHandler) -> Unit
+  onkeyup(Self) -> EventHandler
+  set_onkeyup(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onloadeddata(Self) -> EventHandler
+  set_onloadeddata(Self, EventHandler) -> Unit
+  onloadedmetadata(Self) -> EventHandler
+  set_onloadedmetadata(Self, EventHandler) -> Unit
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onmousedown(Self) -> EventHandler
+  set_onmousedown(Self, EventHandler) -> Unit
+  onmouseenter(Self) -> EventHandler
+  set_onmouseenter(Self, EventHandler) -> Unit
+  onmouseleave(Self) -> EventHandler
+  set_onmouseleave(Self, EventHandler) -> Unit
+  onmousemove(Self) -> EventHandler
+  set_onmousemove(Self, EventHandler) -> Unit
+  onmouseout(Self) -> EventHandler
+  set_onmouseout(Self, EventHandler) -> Unit
+  onmouseover(Self) -> EventHandler
+  set_onmouseover(Self, EventHandler) -> Unit
+  onmouseup(Self) -> EventHandler
+  set_onmouseup(Self, EventHandler) -> Unit
+  onpaste(Self) -> EventHandler
+  set_onpaste(Self, EventHandler) -> Unit
+  onpause(Self) -> EventHandler
+  set_onpause(Self, EventHandler) -> Unit
+  onplay(Self) -> EventHandler
+  set_onplay(Self, EventHandler) -> Unit
+  onplaying(Self) -> EventHandler
+  set_onplaying(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onratechange(Self) -> EventHandler
+  set_onratechange(Self, EventHandler) -> Unit
+  onreset(Self) -> EventHandler
+  set_onreset(Self, EventHandler) -> Unit
+  onresize(Self) -> EventHandler
+  set_onresize(Self, EventHandler) -> Unit
+  onscroll(Self) -> EventHandler
+  set_onscroll(Self, EventHandler) -> Unit
+  onscrollend(Self) -> EventHandler
+  set_onscrollend(Self, EventHandler) -> Unit
+  onsecuritypolicyviolation(Self) -> EventHandler
+  set_onsecuritypolicyviolation(Self, EventHandler) -> Unit
+  onseeked(Self) -> EventHandler
+  set_onseeked(Self, EventHandler) -> Unit
+  onseeking(Self) -> EventHandler
+  set_onseeking(Self, EventHandler) -> Unit
+  onselect(Self) -> EventHandler
+  set_onselect(Self, EventHandler) -> Unit
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  onstalled(Self) -> EventHandler
+  set_onstalled(Self, EventHandler) -> Unit
+  onsubmit(Self) -> EventHandler
+  set_onsubmit(Self, EventHandler) -> Unit
+  onsuspend(Self) -> EventHandler
+  set_onsuspend(Self, EventHandler) -> Unit
+  ontimeupdate(Self) -> EventHandler
+  set_ontimeupdate(Self, EventHandler) -> Unit
+  ontoggle(Self) -> EventHandler
+  set_ontoggle(Self, EventHandler) -> Unit
+  onvolumechange(Self) -> EventHandler
+  set_onvolumechange(Self, EventHandler) -> Unit
+  onwaiting(Self) -> EventHandler
+  set_onwaiting(Self, EventHandler) -> Unit
+  onwebkitanimationend(Self) -> EventHandler
+  set_onwebkitanimationend(Self, EventHandler) -> Unit
+  onwebkitanimationiteration(Self) -> EventHandler
+  set_onwebkitanimationiteration(Self, EventHandler) -> Unit
+  onwebkitanimationstart(Self) -> EventHandler
+  set_onwebkitanimationstart(Self, EventHandler) -> Unit
+  onwebkittransitionend(Self) -> EventHandler
+  set_onwebkittransitionend(Self, EventHandler) -> Unit
+  onwheel(Self) -> EventHandler
+  set_onwheel(Self, EventHandler) -> Unit
+  onafterprint(Self) -> EventHandler
+  set_onafterprint(Self, EventHandler) -> Unit
+  onbeforeprint(Self) -> EventHandler
+  set_onbeforeprint(Self, EventHandler) -> Unit
+  onbeforeunload(Self) -> OnBeforeUnloadEventHandler
+  set_onbeforeunload(Self, OnBeforeUnloadEventHandler) -> Unit
+  onhashchange(Self) -> EventHandler
+  set_onhashchange(Self, EventHandler) -> Unit
+  onlanguagechange(Self) -> EventHandler
+  set_onlanguagechange(Self, EventHandler) -> Unit
+  onmessage(Self) -> EventHandler
+  set_onmessage(Self, EventHandler) -> Unit
+  onmessageerror(Self) -> EventHandler
+  set_onmessageerror(Self, EventHandler) -> Unit
+  onoffline(Self) -> EventHandler
+  set_onoffline(Self, EventHandler) -> Unit
+  ononline(Self) -> EventHandler
+  set_ononline(Self, EventHandler) -> Unit
+  onpagehide(Self) -> EventHandler
+  set_onpagehide(Self, EventHandler) -> Unit
+  onpagereveal(Self) -> EventHandler
+  set_onpagereveal(Self, EventHandler) -> Unit
+  onpageshow(Self) -> EventHandler
+  set_onpageshow(Self, EventHandler) -> Unit
+  onpageswap(Self) -> EventHandler
+  set_onpageswap(Self, EventHandler) -> Unit
+  onpopstate(Self) -> EventHandler
+  set_onpopstate(Self, EventHandler) -> Unit
+  onrejectionhandled(Self) -> EventHandler
+  set_onrejectionhandled(Self, EventHandler) -> Unit
+  onstorage(Self) -> EventHandler
+  set_onstorage(Self, EventHandler) -> Unit
+  onunhandledrejection(Self) -> EventHandler
+  set_onunhandledrejection(Self, EventHandler) -> Unit
+  onunload(Self) -> EventHandler
+  set_onunload(Self, EventHandler) -> Unit
+  origin(Self) -> String
+  is_secure_context(Self) -> Bool
+  cross_origin_isolated(Self) -> Bool
+  session_storage(Self) -> Storage
+  local_storage(Self) -> Storage
   match_media(Self, JsValue) -> JsValue
   move_to(Self, Int, Int) -> Unit
   move_by(Self, Int, Int) -> Unit
@@ -1949,5 +3167,18 @@ pub trait TWindow : TJsValue {
   post_message2(Self, JsValue, options? : WindowPostMessageOptions) -> Unit
   capture_events(Self) -> Unit
   release_events(Self) -> Unit
+  report_error(Self, JsValue) -> Unit
+  btoa(Self, String) -> String
+  atob(Self, String) -> String
+  set_timeout(Self, JsValue, timeout? : Int, JsValue) -> Int
+  clear_timeout(Self, id? : Int) -> Unit
+  set_interval(Self, JsValue, timeout? : Int, JsValue) -> Int
+  clear_interval(Self, id? : Int) -> Unit
+  queue_microtask(Self, JsValue) -> Unit
+  create_image_bitmap(Self, JsValue, options? : ImageBitmapOptions) -> JsPromise[JsValue]
+  create_image_bitmap2(Self, JsValue, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[JsValue]
+  structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
+  request_animation_frame(Self, JsValue) -> Int
+  cancel_animation_frame(Self, Int) -> Unit
 }
 

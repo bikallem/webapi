@@ -123,6 +123,132 @@
 // 
 //   [SameObject] readonly attribute HTMLAllCollection all;
 // };
+// 
+// interface mixin GeometryUtils {
+//   sequence<DOMQuad> getBoxQuads(optional BoxQuadOptions options = {});
+//   DOMQuad convertQuadFromNode(DOMQuadInit quad, GeometryNode from, optional ConvertCoordinateOptions options = {});
+//   DOMQuad convertRectFromNode(DOMRectReadOnly rect, GeometryNode from, optional ConvertCoordinateOptions options = {});
+//   DOMPoint convertPointFromNode(DOMPointInit point, GeometryNode from, optional ConvertCoordinateOptions options = {}); // XXX z,w turns into 0
+// };
+// 
+// interface mixin NonElementParentNode {
+//   Element? getElementById(DOMString elementId);
+// };
+// 
+// partial interface mixin DocumentOrShadowRoot {
+//   [SameObject] readonly attribute StyleSheetList styleSheets;
+//   attribute ObservableArray<CSSStyleSheet> adoptedStyleSheets;
+// };
+// 
+// interface mixin DocumentOrShadowRoot {
+//   readonly attribute CustomElementRegistry? customElementRegistry;
+// };
+// 
+// partial interface mixin DocumentOrShadowRoot {
+//   readonly attribute Element? activeElement;
+// };
+// 
+// interface mixin ParentNode {
+//   [SameObject] readonly attribute HTMLCollection children;
+//   readonly attribute Element? firstElementChild;
+//   readonly attribute Element? lastElementChild;
+//   readonly attribute unsigned long childElementCount;
+// 
+//   [CEReactions, Unscopable] undefined prepend((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined append((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined replaceChildren((Node or DOMString)... nodes);
+// 
+//   [CEReactions] undefined moveBefore(Node node, Node? child);
+// 
+//   Element? querySelector(DOMString selectors);
+//   [NewObject] NodeList querySelectorAll(DOMString selectors);
+// };
+// 
+// interface mixin XPathEvaluatorBase {
+//   [NewObject] XPathExpression createExpression(DOMString expression, optional XPathNSResolver? resolver = null);
+//   Node createNSResolver(Node nodeResolver); // legacy
+//   // XPathResult.ANY_TYPE = 0
+//   XPathResult evaluate(DOMString expression, Node contextNode, optional XPathNSResolver? resolver = null, optional unsigned short type = 0, optional XPathResult? result = null);
+// };
+// 
+// interface mixin GlobalEventHandlers {
+//   attribute EventHandler onabort;
+//   attribute EventHandler onauxclick;
+//   attribute EventHandler onbeforeinput;
+//   attribute EventHandler onbeforematch;
+//   attribute EventHandler onbeforetoggle;
+//   attribute EventHandler onblur;
+//   attribute EventHandler oncancel;
+//   attribute EventHandler oncanplay;
+//   attribute EventHandler oncanplaythrough;
+//   attribute EventHandler onchange;
+//   attribute EventHandler onclick;
+//   attribute EventHandler onclose;
+//   attribute EventHandler oncommand;
+//   attribute EventHandler oncontextlost;
+//   attribute EventHandler oncontextmenu;
+//   attribute EventHandler oncontextrestored;
+//   attribute EventHandler oncopy;
+//   attribute EventHandler oncuechange;
+//   attribute EventHandler oncut;
+//   attribute EventHandler ondblclick;
+//   attribute EventHandler ondrag;
+//   attribute EventHandler ondragend;
+//   attribute EventHandler ondragenter;
+//   attribute EventHandler ondragleave;
+//   attribute EventHandler ondragover;
+//   attribute EventHandler ondragstart;
+//   attribute EventHandler ondrop;
+//   attribute EventHandler ondurationchange;
+//   attribute EventHandler onemptied;
+//   attribute EventHandler onended;
+//   attribute OnErrorEventHandler onerror;
+//   attribute EventHandler onfocus;
+//   attribute EventHandler onformdata;
+//   attribute EventHandler oninput;
+//   attribute EventHandler oninvalid;
+//   attribute EventHandler onkeydown;
+//   attribute EventHandler onkeypress;
+//   attribute EventHandler onkeyup;
+//   attribute EventHandler onload;
+//   attribute EventHandler onloadeddata;
+//   attribute EventHandler onloadedmetadata;
+//   attribute EventHandler onloadstart;
+//   attribute EventHandler onmousedown;
+//   [LegacyLenientThis] attribute EventHandler onmouseenter;
+//   [LegacyLenientThis] attribute EventHandler onmouseleave;
+//   attribute EventHandler onmousemove;
+//   attribute EventHandler onmouseout;
+//   attribute EventHandler onmouseover;
+//   attribute EventHandler onmouseup;
+//   attribute EventHandler onpaste;
+//   attribute EventHandler onpause;
+//   attribute EventHandler onplay;
+//   attribute EventHandler onplaying;
+//   attribute EventHandler onprogress;
+//   attribute EventHandler onratechange;
+//   attribute EventHandler onreset;
+//   attribute EventHandler onresize;
+//   attribute EventHandler onscroll;
+//   attribute EventHandler onscrollend;
+//   attribute EventHandler onsecuritypolicyviolation;
+//   attribute EventHandler onseeked;
+//   attribute EventHandler onseeking;
+//   attribute EventHandler onselect;
+//   attribute EventHandler onslotchange;
+//   attribute EventHandler onstalled;
+//   attribute EventHandler onsubmit;
+//   attribute EventHandler onsuspend;
+//   attribute EventHandler ontimeupdate;
+//   attribute EventHandler ontoggle;
+//   attribute EventHandler onvolumechange;
+//   attribute EventHandler onwaiting;
+//   attribute EventHandler onwebkitanimationend;
+//   attribute EventHandler onwebkitanimationiteration;
+//   attribute EventHandler onwebkitanimationstart;
+//   attribute EventHandler onwebkittransitionend;
+//   attribute EventHandler onwheel;
+// };
 
 ///|
 #external
@@ -185,6 +311,167 @@ pub trait TDocument: TJsValue {
   anchors(self : Self) -> HTMLCollection = _
   applets(self : Self) -> HTMLCollection = _
   all(self : Self) -> JsValue = _
+  style_sheets(self : Self) -> JsValue = _
+  adopted_style_sheets(self : Self) -> Array[JsValue] = _
+  set_adopted_style_sheets(self : Self, value : Array[JsValue]) -> Unit = _
+  custom_element_registry(self : Self) -> JsValue? = _
+  active_element(self : Self) -> Element? = _
+  children(self : Self) -> HTMLCollection = _
+  first_element_child(self : Self) -> Element? = _
+  last_element_child(self : Self) -> Element? = _
+  child_element_count(self : Self) -> Int = _
+  onabort(self : Self) -> EventHandler = _
+  set_onabort(self : Self, value : EventHandler) -> Unit = _
+  onauxclick(self : Self) -> EventHandler = _
+  set_onauxclick(self : Self, value : EventHandler) -> Unit = _
+  onbeforeinput(self : Self) -> EventHandler = _
+  set_onbeforeinput(self : Self, value : EventHandler) -> Unit = _
+  onbeforematch(self : Self) -> EventHandler = _
+  set_onbeforematch(self : Self, value : EventHandler) -> Unit = _
+  onbeforetoggle(self : Self) -> EventHandler = _
+  set_onbeforetoggle(self : Self, value : EventHandler) -> Unit = _
+  onblur(self : Self) -> EventHandler = _
+  set_onblur(self : Self, value : EventHandler) -> Unit = _
+  oncancel(self : Self) -> EventHandler = _
+  set_oncancel(self : Self, value : EventHandler) -> Unit = _
+  oncanplay(self : Self) -> EventHandler = _
+  set_oncanplay(self : Self, value : EventHandler) -> Unit = _
+  oncanplaythrough(self : Self) -> EventHandler = _
+  set_oncanplaythrough(self : Self, value : EventHandler) -> Unit = _
+  onchange(self : Self) -> EventHandler = _
+  set_onchange(self : Self, value : EventHandler) -> Unit = _
+  onclick(self : Self) -> EventHandler = _
+  set_onclick(self : Self, value : EventHandler) -> Unit = _
+  onclose(self : Self) -> EventHandler = _
+  set_onclose(self : Self, value : EventHandler) -> Unit = _
+  oncommand(self : Self) -> EventHandler = _
+  set_oncommand(self : Self, value : EventHandler) -> Unit = _
+  oncontextlost(self : Self) -> EventHandler = _
+  set_oncontextlost(self : Self, value : EventHandler) -> Unit = _
+  oncontextmenu(self : Self) -> EventHandler = _
+  set_oncontextmenu(self : Self, value : EventHandler) -> Unit = _
+  oncontextrestored(self : Self) -> EventHandler = _
+  set_oncontextrestored(self : Self, value : EventHandler) -> Unit = _
+  oncopy(self : Self) -> EventHandler = _
+  set_oncopy(self : Self, value : EventHandler) -> Unit = _
+  oncuechange(self : Self) -> EventHandler = _
+  set_oncuechange(self : Self, value : EventHandler) -> Unit = _
+  oncut(self : Self) -> EventHandler = _
+  set_oncut(self : Self, value : EventHandler) -> Unit = _
+  ondblclick(self : Self) -> EventHandler = _
+  set_ondblclick(self : Self, value : EventHandler) -> Unit = _
+  ondrag(self : Self) -> EventHandler = _
+  set_ondrag(self : Self, value : EventHandler) -> Unit = _
+  ondragend(self : Self) -> EventHandler = _
+  set_ondragend(self : Self, value : EventHandler) -> Unit = _
+  ondragenter(self : Self) -> EventHandler = _
+  set_ondragenter(self : Self, value : EventHandler) -> Unit = _
+  ondragleave(self : Self) -> EventHandler = _
+  set_ondragleave(self : Self, value : EventHandler) -> Unit = _
+  ondragover(self : Self) -> EventHandler = _
+  set_ondragover(self : Self, value : EventHandler) -> Unit = _
+  ondragstart(self : Self) -> EventHandler = _
+  set_ondragstart(self : Self, value : EventHandler) -> Unit = _
+  ondrop(self : Self) -> EventHandler = _
+  set_ondrop(self : Self, value : EventHandler) -> Unit = _
+  ondurationchange(self : Self) -> EventHandler = _
+  set_ondurationchange(self : Self, value : EventHandler) -> Unit = _
+  onemptied(self : Self) -> EventHandler = _
+  set_onemptied(self : Self, value : EventHandler) -> Unit = _
+  onended(self : Self) -> EventHandler = _
+  set_onended(self : Self, value : EventHandler) -> Unit = _
+  onerror(self : Self) -> OnErrorEventHandler = _
+  set_onerror(self : Self, value : OnErrorEventHandler) -> Unit = _
+  onfocus(self : Self) -> EventHandler = _
+  set_onfocus(self : Self, value : EventHandler) -> Unit = _
+  onformdata(self : Self) -> EventHandler = _
+  set_onformdata(self : Self, value : EventHandler) -> Unit = _
+  oninput(self : Self) -> EventHandler = _
+  set_oninput(self : Self, value : EventHandler) -> Unit = _
+  oninvalid(self : Self) -> EventHandler = _
+  set_oninvalid(self : Self, value : EventHandler) -> Unit = _
+  onkeydown(self : Self) -> EventHandler = _
+  set_onkeydown(self : Self, value : EventHandler) -> Unit = _
+  onkeypress(self : Self) -> EventHandler = _
+  set_onkeypress(self : Self, value : EventHandler) -> Unit = _
+  onkeyup(self : Self) -> EventHandler = _
+  set_onkeyup(self : Self, value : EventHandler) -> Unit = _
+  onload(self : Self) -> EventHandler = _
+  set_onload(self : Self, value : EventHandler) -> Unit = _
+  onloadeddata(self : Self) -> EventHandler = _
+  set_onloadeddata(self : Self, value : EventHandler) -> Unit = _
+  onloadedmetadata(self : Self) -> EventHandler = _
+  set_onloadedmetadata(self : Self, value : EventHandler) -> Unit = _
+  onloadstart(self : Self) -> EventHandler = _
+  set_onloadstart(self : Self, value : EventHandler) -> Unit = _
+  onmousedown(self : Self) -> EventHandler = _
+  set_onmousedown(self : Self, value : EventHandler) -> Unit = _
+  onmouseenter(self : Self) -> EventHandler = _
+  set_onmouseenter(self : Self, value : EventHandler) -> Unit = _
+  onmouseleave(self : Self) -> EventHandler = _
+  set_onmouseleave(self : Self, value : EventHandler) -> Unit = _
+  onmousemove(self : Self) -> EventHandler = _
+  set_onmousemove(self : Self, value : EventHandler) -> Unit = _
+  onmouseout(self : Self) -> EventHandler = _
+  set_onmouseout(self : Self, value : EventHandler) -> Unit = _
+  onmouseover(self : Self) -> EventHandler = _
+  set_onmouseover(self : Self, value : EventHandler) -> Unit = _
+  onmouseup(self : Self) -> EventHandler = _
+  set_onmouseup(self : Self, value : EventHandler) -> Unit = _
+  onpaste(self : Self) -> EventHandler = _
+  set_onpaste(self : Self, value : EventHandler) -> Unit = _
+  onpause(self : Self) -> EventHandler = _
+  set_onpause(self : Self, value : EventHandler) -> Unit = _
+  onplay(self : Self) -> EventHandler = _
+  set_onplay(self : Self, value : EventHandler) -> Unit = _
+  onplaying(self : Self) -> EventHandler = _
+  set_onplaying(self : Self, value : EventHandler) -> Unit = _
+  onprogress(self : Self) -> EventHandler = _
+  set_onprogress(self : Self, value : EventHandler) -> Unit = _
+  onratechange(self : Self) -> EventHandler = _
+  set_onratechange(self : Self, value : EventHandler) -> Unit = _
+  onreset(self : Self) -> EventHandler = _
+  set_onreset(self : Self, value : EventHandler) -> Unit = _
+  onresize(self : Self) -> EventHandler = _
+  set_onresize(self : Self, value : EventHandler) -> Unit = _
+  onscroll(self : Self) -> EventHandler = _
+  set_onscroll(self : Self, value : EventHandler) -> Unit = _
+  onscrollend(self : Self) -> EventHandler = _
+  set_onscrollend(self : Self, value : EventHandler) -> Unit = _
+  onsecuritypolicyviolation(self : Self) -> EventHandler = _
+  set_onsecuritypolicyviolation(self : Self, value : EventHandler) -> Unit = _
+  onseeked(self : Self) -> EventHandler = _
+  set_onseeked(self : Self, value : EventHandler) -> Unit = _
+  onseeking(self : Self) -> EventHandler = _
+  set_onseeking(self : Self, value : EventHandler) -> Unit = _
+  onselect(self : Self) -> EventHandler = _
+  set_onselect(self : Self, value : EventHandler) -> Unit = _
+  onslotchange(self : Self) -> EventHandler = _
+  set_onslotchange(self : Self, value : EventHandler) -> Unit = _
+  onstalled(self : Self) -> EventHandler = _
+  set_onstalled(self : Self, value : EventHandler) -> Unit = _
+  onsubmit(self : Self) -> EventHandler = _
+  set_onsubmit(self : Self, value : EventHandler) -> Unit = _
+  onsuspend(self : Self) -> EventHandler = _
+  set_onsuspend(self : Self, value : EventHandler) -> Unit = _
+  ontimeupdate(self : Self) -> EventHandler = _
+  set_ontimeupdate(self : Self, value : EventHandler) -> Unit = _
+  ontoggle(self : Self) -> EventHandler = _
+  set_ontoggle(self : Self, value : EventHandler) -> Unit = _
+  onvolumechange(self : Self) -> EventHandler = _
+  set_onvolumechange(self : Self, value : EventHandler) -> Unit = _
+  onwaiting(self : Self) -> EventHandler = _
+  set_onwaiting(self : Self, value : EventHandler) -> Unit = _
+  onwebkitanimationend(self : Self) -> EventHandler = _
+  set_onwebkitanimationend(self : Self, value : EventHandler) -> Unit = _
+  onwebkitanimationiteration(self : Self) -> EventHandler = _
+  set_onwebkitanimationiteration(self : Self, value : EventHandler) -> Unit = _
+  onwebkitanimationstart(self : Self) -> EventHandler = _
+  set_onwebkitanimationstart(self : Self, value : EventHandler) -> Unit = _
+  onwebkittransitionend(self : Self) -> EventHandler = _
+  set_onwebkittransitionend(self : Self, value : EventHandler) -> Unit = _
+  onwheel(self : Self) -> EventHandler = _
+  set_onwheel(self : Self, value : EventHandler) -> Unit = _
   element_from_point(self : Self, x : Double, y : Double) -> Element? = _
   elements_from_point(self : Self, x : Double, y : Double) -> Array[Element] = _
   caret_position_from_point(
@@ -255,6 +542,42 @@ pub trait TDocument: TJsValue {
   clear(self : Self) -> Unit = _
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
+  get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
+  convert_quad_from_node(
+    self : Self,
+    quad : DOMQuadInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_rect_from_node(
+    self : Self,
+    rect : JsValue,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_point_from_node(
+    self : Self,
+    point : DOMPointInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  get_element_by_id(self : Self, element_id : String) -> Element? = _
+  prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
+  append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
+  replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
+  move_before(self : Self, node : Node, child : Node) -> Unit = _
+  query_selector(self : Self, selectors : String) -> Element? = _
+  query_selector_all(self : Self, selectors : String) -> NodeList = _
+  create_expression(self : Self, expression : String, resolver? : JsValue) -> JsValue = _
+  create_ns_resolver(self : Self, node_resolver : Node) -> Node = _
+  evaluate(
+    self : Self,
+    expression : String,
+    context_node : Node,
+    resolver? : JsValue,
+    type_? : Int,
+    result? : JsValue,
+  ) -> JsValue = _
 }
 
 ///|
@@ -866,6 +1189,268 @@ impl TDocument with release_events(self : Self) -> Unit {
 }
 
 ///|
+fn document_get_box_quads_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Document" "getBoxQuads"
+
+///|
+impl TDocument with get_box_quads(
+  self : Self,
+  options? : BoxQuadOptions = BoxQuadOptions::empty(),
+) -> Array[JsValue] {
+  document_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
+}
+
+///|
+fn document_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "convertQuadFromNode"
+
+///|
+impl TDocument with convert_quad_from_node(
+  self : Self,
+  quad : DOMQuadInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  document_convert_quad_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(quad),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
+}
+
+///|
+fn document_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "convertRectFromNode"
+
+///|
+impl TDocument with convert_rect_from_node(
+  self : Self,
+  rect : JsValue,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  document_convert_rect_from_node_ffi(
+    TJsValue::to_js(self),
+    rect,
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
+}
+
+///|
+fn document_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "convertPointFromNode"
+
+///|
+impl TDocument with convert_point_from_node(
+  self : Self,
+  point : DOMPointInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  document_convert_point_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
+}
+
+///|
+fn document_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> JsValue = "webapi_Document" "getElementById"
+
+///|
+impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
+  document_get_element_by_id_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(element_id),
+  ).as_option()
+}
+
+///|
+/// Arg : nodes
+pub(open) trait TPrependNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+fn document_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Document" "prepend"
+
+///|
+impl TDocument with prepend(self : Self, nodes : &TPrependNodesArg) -> Unit {
+  document_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+/// Arg : nodes
+pub(open) trait TAppendNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+fn document_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Document" "append"
+
+///|
+impl TDocument with append(self : Self, nodes : &TAppendNodesArg) -> Unit {
+  document_append_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+/// Arg : nodes
+pub(open) trait TReplaceChildrenNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TReplaceChildrenNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TReplaceChildrenNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+fn document_replace_children_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Document" "replaceChildren"
+
+///|
+impl TDocument with replace_children(
+  self : Self,
+  nodes : &TReplaceChildrenNodesArg,
+) -> Unit {
+  document_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn document_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "webapi_Document" "moveBefore"
+
+///|
+impl TDocument with move_before(self : Self, node : Node, child : Node) -> Unit {
+  document_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
+}
+
+///|
+fn document_query_selector_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Document" "querySelector"
+
+///|
+impl TDocument with query_selector(self : Self, selectors : String) -> Element? {
+  document_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).as_option()
+}
+
+///|
+fn document_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_Document" "querySelectorAll"
+
+///|
+impl TDocument with query_selector_all(self : Self, selectors : String) -> NodeList {
+  document_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).unsafe_cast()
+}
+
+///|
+fn document_create_expression_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  resolver : JsValue,
+) -> JsValue = "webapi_Document" "createExpression"
+
+///|
+impl TDocument with create_expression(
+  self : Self,
+  expression : String,
+  resolver? : JsValue,
+) -> JsValue {
+  let resolver_js = opt_to_js(resolver)
+  document_create_expression_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(expression),
+    resolver_js,
+  ).unsafe_cast()
+}
+
+///|
+fn document_create_ns_resolver_ffi(
+  obj : JsValue,
+  node_resolver : JsValue,
+) -> JsValue = "webapi_Document" "createNSResolver"
+
+///|
+impl TDocument with create_ns_resolver(self : Self, node_resolver : Node) -> Node {
+  document_create_ns_resolver_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node_resolver),
+  ).unsafe_cast()
+}
+
+///|
+fn document_evaluate_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  context_node : JsValue,
+  resolver : JsValue,
+  type_ : JsValue,
+  result : JsValue,
+) -> JsValue = "webapi_Document" "evaluate"
+
+///|
+impl TDocument with evaluate(
+  self : Self,
+  expression : String,
+  context_node : Node,
+  resolver? : JsValue,
+  type_? : Int,
+  result? : JsValue,
+) -> JsValue {
+  let resolver_js = opt_to_js(resolver)
+  let type__js = opt_to_js(type_)
+  let result_js = opt_to_js(result)
+  document_evaluate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(expression),
+    TJsValue::to_js(context_node),
+    resolver_js,
+    type__js,
+    result_js,
+  ).unsafe_cast()
+}
+
+///|
 fn document_scrolling_element_ffi(obj : JsValue) -> JsValue = "webapi_Document" "scrollingElement"
 
 ///|
@@ -1062,7 +1647,7 @@ fn document_set_body_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Docum
 
 ///|
 impl TDocument with set_body(self : Self, value : HTMLElement) -> Unit {
-  document_set_body_ffi(self.to_js(), value.to_js())
+  document_set_body_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|
@@ -1182,7 +1767,7 @@ fn document_set_onreadystatechange_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl TDocument with set_onreadystatechange(self : Self, value : EventHandler) -> Unit {
-  document_set_onreadystatechange_ffi(self.to_js(), value.to_js())
+  document_set_onreadystatechange_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|
@@ -1198,7 +1783,7 @@ fn document_set_onvisibilitychange_ffi(obj : JsValue, value : JsValue) -> Unit =
 
 ///|
 impl TDocument with set_onvisibilitychange(self : Self, value : EventHandler) -> Unit {
-  document_set_onvisibilitychange_ffi(self.to_js(), value.to_js())
+  document_set_onvisibilitychange_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|
@@ -1303,4 +1888,1328 @@ fn document_all_ffi(obj : JsValue) -> JsValue = "webapi_Document" "all"
 ///|
 impl TDocument with all(self : Self) -> JsValue {
   document_all_ffi(self.to_js())
+}
+
+///|
+fn document_style_sheets_ffi(obj : JsValue) -> JsValue = "webapi_Document" "styleSheets"
+
+///|
+impl TDocument with style_sheets(self : Self) -> JsValue {
+  document_style_sheets_ffi(self.to_js())
+}
+
+///|
+fn document_adopted_style_sheets_ffi(obj : JsValue) -> JsValue = "webapi_Document" "adoptedStyleSheets"
+
+///|
+impl TDocument with adopted_style_sheets(self : Self) -> Array[JsValue] {
+  document_adopted_style_sheets_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_adopted_style_sheets_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_adoptedStyleSheets"
+
+///|
+impl TDocument with set_adopted_style_sheets(
+  self : Self,
+  value : Array[JsValue],
+) -> Unit {
+  document_set_adopted_style_sheets_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_custom_element_registry_ffi(obj : JsValue) -> JsValue = "webapi_Document" "customElementRegistry"
+
+///|
+impl TDocument with custom_element_registry(self : Self) -> JsValue? {
+  document_custom_element_registry_ffi(self.to_js()).as_option()
+}
+
+///|
+fn document_active_element_ffi(obj : JsValue) -> JsValue = "webapi_Document" "activeElement"
+
+///|
+impl TDocument with active_element(self : Self) -> Element? {
+  document_active_element_ffi(self.to_js()).as_option()
+}
+
+///|
+fn document_children_ffi(obj : JsValue) -> JsValue = "webapi_Document" "children"
+
+///|
+impl TDocument with children(self : Self) -> HTMLCollection {
+  document_children_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_first_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Document" "firstElementChild"
+
+///|
+impl TDocument with first_element_child(self : Self) -> Element? {
+  document_first_element_child_ffi(self.to_js()).as_option()
+}
+
+///|
+fn document_last_element_child_ffi(obj : JsValue) -> JsValue = "webapi_Document" "lastElementChild"
+
+///|
+impl TDocument with last_element_child(self : Self) -> Element? {
+  document_last_element_child_ffi(self.to_js()).as_option()
+}
+
+///|
+fn document_child_element_count_ffi(obj : JsValue) -> Int = "webapi_Document" "childElementCount"
+
+///|
+impl TDocument with child_element_count(self : Self) -> Int {
+  document_child_element_count_ffi(self.to_js())
+}
+
+///|
+fn document_onabort_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onabort"
+
+///|
+impl TDocument with onabort(self : Self) -> EventHandler {
+  document_onabort_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onabort_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onabort"
+
+///|
+impl TDocument with set_onabort(self : Self, value : EventHandler) -> Unit {
+  document_set_onabort_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onauxclick_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onauxclick"
+
+///|
+impl TDocument with onauxclick(self : Self) -> EventHandler {
+  document_onauxclick_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onauxclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onauxclick"
+
+///|
+impl TDocument with set_onauxclick(self : Self, value : EventHandler) -> Unit {
+  document_set_onauxclick_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onbeforeinput_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onbeforeinput"
+
+///|
+impl TDocument with onbeforeinput(self : Self) -> EventHandler {
+  document_onbeforeinput_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onbeforeinput_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onbeforeinput"
+
+///|
+impl TDocument with set_onbeforeinput(self : Self, value : EventHandler) -> Unit {
+  document_set_onbeforeinput_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onbeforematch_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onbeforematch"
+
+///|
+impl TDocument with onbeforematch(self : Self) -> EventHandler {
+  document_onbeforematch_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onbeforematch_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onbeforematch"
+
+///|
+impl TDocument with set_onbeforematch(self : Self, value : EventHandler) -> Unit {
+  document_set_onbeforematch_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onbeforetoggle_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onbeforetoggle"
+
+///|
+impl TDocument with onbeforetoggle(self : Self) -> EventHandler {
+  document_onbeforetoggle_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onbeforetoggle_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onbeforetoggle"
+
+///|
+impl TDocument with set_onbeforetoggle(self : Self, value : EventHandler) -> Unit {
+  document_set_onbeforetoggle_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onblur_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onblur"
+
+///|
+impl TDocument with onblur(self : Self) -> EventHandler {
+  document_onblur_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onblur_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onblur"
+
+///|
+impl TDocument with set_onblur(self : Self, value : EventHandler) -> Unit {
+  document_set_onblur_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncancel_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncancel"
+
+///|
+impl TDocument with oncancel(self : Self) -> EventHandler {
+  document_oncancel_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncancel_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncancel"
+
+///|
+impl TDocument with set_oncancel(self : Self, value : EventHandler) -> Unit {
+  document_set_oncancel_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncanplay_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncanplay"
+
+///|
+impl TDocument with oncanplay(self : Self) -> EventHandler {
+  document_oncanplay_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncanplay_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncanplay"
+
+///|
+impl TDocument with set_oncanplay(self : Self, value : EventHandler) -> Unit {
+  document_set_oncanplay_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncanplaythrough_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncanplaythrough"
+
+///|
+impl TDocument with oncanplaythrough(self : Self) -> EventHandler {
+  document_oncanplaythrough_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncanplaythrough_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncanplaythrough"
+
+///|
+impl TDocument with set_oncanplaythrough(self : Self, value : EventHandler) -> Unit {
+  document_set_oncanplaythrough_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onchange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onchange"
+
+///|
+impl TDocument with onchange(self : Self) -> EventHandler {
+  document_onchange_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onchange"
+
+///|
+impl TDocument with set_onchange(self : Self, value : EventHandler) -> Unit {
+  document_set_onchange_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onclick_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onclick"
+
+///|
+impl TDocument with onclick(self : Self) -> EventHandler {
+  document_onclick_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onclick"
+
+///|
+impl TDocument with set_onclick(self : Self, value : EventHandler) -> Unit {
+  document_set_onclick_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onclose_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onclose"
+
+///|
+impl TDocument with onclose(self : Self) -> EventHandler {
+  document_onclose_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onclose_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onclose"
+
+///|
+impl TDocument with set_onclose(self : Self, value : EventHandler) -> Unit {
+  document_set_onclose_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncommand_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncommand"
+
+///|
+impl TDocument with oncommand(self : Self) -> EventHandler {
+  document_oncommand_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncommand_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncommand"
+
+///|
+impl TDocument with set_oncommand(self : Self, value : EventHandler) -> Unit {
+  document_set_oncommand_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncontextlost_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncontextlost"
+
+///|
+impl TDocument with oncontextlost(self : Self) -> EventHandler {
+  document_oncontextlost_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncontextlost_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncontextlost"
+
+///|
+impl TDocument with set_oncontextlost(self : Self, value : EventHandler) -> Unit {
+  document_set_oncontextlost_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncontextmenu_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncontextmenu"
+
+///|
+impl TDocument with oncontextmenu(self : Self) -> EventHandler {
+  document_oncontextmenu_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncontextmenu_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncontextmenu"
+
+///|
+impl TDocument with set_oncontextmenu(self : Self, value : EventHandler) -> Unit {
+  document_set_oncontextmenu_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncontextrestored_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncontextrestored"
+
+///|
+impl TDocument with oncontextrestored(self : Self) -> EventHandler {
+  document_oncontextrestored_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncontextrestored_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncontextrestored"
+
+///|
+impl TDocument with set_oncontextrestored(self : Self, value : EventHandler) -> Unit {
+  document_set_oncontextrestored_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncopy_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncopy"
+
+///|
+impl TDocument with oncopy(self : Self) -> EventHandler {
+  document_oncopy_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncopy_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncopy"
+
+///|
+impl TDocument with set_oncopy(self : Self, value : EventHandler) -> Unit {
+  document_set_oncopy_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncuechange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncuechange"
+
+///|
+impl TDocument with oncuechange(self : Self) -> EventHandler {
+  document_oncuechange_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncuechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncuechange"
+
+///|
+impl TDocument with set_oncuechange(self : Self, value : EventHandler) -> Unit {
+  document_set_oncuechange_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oncut_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oncut"
+
+///|
+impl TDocument with oncut(self : Self) -> EventHandler {
+  document_oncut_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oncut_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oncut"
+
+///|
+impl TDocument with set_oncut(self : Self, value : EventHandler) -> Unit {
+  document_set_oncut_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondblclick_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondblclick"
+
+///|
+impl TDocument with ondblclick(self : Self) -> EventHandler {
+  document_ondblclick_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondblclick_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondblclick"
+
+///|
+impl TDocument with set_ondblclick(self : Self, value : EventHandler) -> Unit {
+  document_set_ondblclick_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondrag_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondrag"
+
+///|
+impl TDocument with ondrag(self : Self) -> EventHandler {
+  document_ondrag_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondrag_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondrag"
+
+///|
+impl TDocument with set_ondrag(self : Self, value : EventHandler) -> Unit {
+  document_set_ondrag_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondragend_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondragend"
+
+///|
+impl TDocument with ondragend(self : Self) -> EventHandler {
+  document_ondragend_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondragend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondragend"
+
+///|
+impl TDocument with set_ondragend(self : Self, value : EventHandler) -> Unit {
+  document_set_ondragend_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondragenter_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondragenter"
+
+///|
+impl TDocument with ondragenter(self : Self) -> EventHandler {
+  document_ondragenter_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondragenter_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondragenter"
+
+///|
+impl TDocument with set_ondragenter(self : Self, value : EventHandler) -> Unit {
+  document_set_ondragenter_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondragleave_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondragleave"
+
+///|
+impl TDocument with ondragleave(self : Self) -> EventHandler {
+  document_ondragleave_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondragleave_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondragleave"
+
+///|
+impl TDocument with set_ondragleave(self : Self, value : EventHandler) -> Unit {
+  document_set_ondragleave_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondragover_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondragover"
+
+///|
+impl TDocument with ondragover(self : Self) -> EventHandler {
+  document_ondragover_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondragover_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondragover"
+
+///|
+impl TDocument with set_ondragover(self : Self, value : EventHandler) -> Unit {
+  document_set_ondragover_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondragstart_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondragstart"
+
+///|
+impl TDocument with ondragstart(self : Self) -> EventHandler {
+  document_ondragstart_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondragstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondragstart"
+
+///|
+impl TDocument with set_ondragstart(self : Self, value : EventHandler) -> Unit {
+  document_set_ondragstart_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondrop_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondrop"
+
+///|
+impl TDocument with ondrop(self : Self) -> EventHandler {
+  document_ondrop_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondrop_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondrop"
+
+///|
+impl TDocument with set_ondrop(self : Self, value : EventHandler) -> Unit {
+  document_set_ondrop_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ondurationchange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ondurationchange"
+
+///|
+impl TDocument with ondurationchange(self : Self) -> EventHandler {
+  document_ondurationchange_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ondurationchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ondurationchange"
+
+///|
+impl TDocument with set_ondurationchange(self : Self, value : EventHandler) -> Unit {
+  document_set_ondurationchange_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onemptied_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onemptied"
+
+///|
+impl TDocument with onemptied(self : Self) -> EventHandler {
+  document_onemptied_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onemptied_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onemptied"
+
+///|
+impl TDocument with set_onemptied(self : Self, value : EventHandler) -> Unit {
+  document_set_onemptied_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onended_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onended"
+
+///|
+impl TDocument with onended(self : Self) -> EventHandler {
+  document_onended_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onended_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onended"
+
+///|
+impl TDocument with set_onended(self : Self, value : EventHandler) -> Unit {
+  document_set_onended_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onerror_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onerror"
+
+///|
+impl TDocument with onerror(self : Self) -> OnErrorEventHandler {
+  document_onerror_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onerror"
+
+///|
+impl TDocument with set_onerror(self : Self, value : OnErrorEventHandler) -> Unit {
+  document_set_onerror_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onfocus_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onfocus"
+
+///|
+impl TDocument with onfocus(self : Self) -> EventHandler {
+  document_onfocus_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onfocus_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onfocus"
+
+///|
+impl TDocument with set_onfocus(self : Self, value : EventHandler) -> Unit {
+  document_set_onfocus_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onformdata_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onformdata"
+
+///|
+impl TDocument with onformdata(self : Self) -> EventHandler {
+  document_onformdata_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onformdata_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onformdata"
+
+///|
+impl TDocument with set_onformdata(self : Self, value : EventHandler) -> Unit {
+  document_set_onformdata_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oninput_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oninput"
+
+///|
+impl TDocument with oninput(self : Self) -> EventHandler {
+  document_oninput_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oninput_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oninput"
+
+///|
+impl TDocument with set_oninput(self : Self, value : EventHandler) -> Unit {
+  document_set_oninput_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_oninvalid_ffi(obj : JsValue) -> JsValue = "webapi_Document" "oninvalid"
+
+///|
+impl TDocument with oninvalid(self : Self) -> EventHandler {
+  document_oninvalid_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_oninvalid_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_oninvalid"
+
+///|
+impl TDocument with set_oninvalid(self : Self, value : EventHandler) -> Unit {
+  document_set_oninvalid_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onkeydown_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onkeydown"
+
+///|
+impl TDocument with onkeydown(self : Self) -> EventHandler {
+  document_onkeydown_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onkeydown_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onkeydown"
+
+///|
+impl TDocument with set_onkeydown(self : Self, value : EventHandler) -> Unit {
+  document_set_onkeydown_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onkeypress_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onkeypress"
+
+///|
+impl TDocument with onkeypress(self : Self) -> EventHandler {
+  document_onkeypress_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onkeypress_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onkeypress"
+
+///|
+impl TDocument with set_onkeypress(self : Self, value : EventHandler) -> Unit {
+  document_set_onkeypress_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onkeyup_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onkeyup"
+
+///|
+impl TDocument with onkeyup(self : Self) -> EventHandler {
+  document_onkeyup_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onkeyup_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onkeyup"
+
+///|
+impl TDocument with set_onkeyup(self : Self, value : EventHandler) -> Unit {
+  document_set_onkeyup_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onload_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onload"
+
+///|
+impl TDocument with onload(self : Self) -> EventHandler {
+  document_onload_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onload_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onload"
+
+///|
+impl TDocument with set_onload(self : Self, value : EventHandler) -> Unit {
+  document_set_onload_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onloadeddata_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onloadeddata"
+
+///|
+impl TDocument with onloadeddata(self : Self) -> EventHandler {
+  document_onloadeddata_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onloadeddata_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onloadeddata"
+
+///|
+impl TDocument with set_onloadeddata(self : Self, value : EventHandler) -> Unit {
+  document_set_onloadeddata_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onloadedmetadata_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onloadedmetadata"
+
+///|
+impl TDocument with onloadedmetadata(self : Self) -> EventHandler {
+  document_onloadedmetadata_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onloadedmetadata_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onloadedmetadata"
+
+///|
+impl TDocument with set_onloadedmetadata(self : Self, value : EventHandler) -> Unit {
+  document_set_onloadedmetadata_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onloadstart_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onloadstart"
+
+///|
+impl TDocument with onloadstart(self : Self) -> EventHandler {
+  document_onloadstart_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onloadstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onloadstart"
+
+///|
+impl TDocument with set_onloadstart(self : Self, value : EventHandler) -> Unit {
+  document_set_onloadstart_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onmousedown_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onmousedown"
+
+///|
+impl TDocument with onmousedown(self : Self) -> EventHandler {
+  document_onmousedown_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onmousedown_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onmousedown"
+
+///|
+impl TDocument with set_onmousedown(self : Self, value : EventHandler) -> Unit {
+  document_set_onmousedown_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onmouseenter_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onmouseenter"
+
+///|
+impl TDocument with onmouseenter(self : Self) -> EventHandler {
+  document_onmouseenter_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onmouseenter_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onmouseenter"
+
+///|
+impl TDocument with set_onmouseenter(self : Self, value : EventHandler) -> Unit {
+  document_set_onmouseenter_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onmouseleave_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onmouseleave"
+
+///|
+impl TDocument with onmouseleave(self : Self) -> EventHandler {
+  document_onmouseleave_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onmouseleave_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onmouseleave"
+
+///|
+impl TDocument with set_onmouseleave(self : Self, value : EventHandler) -> Unit {
+  document_set_onmouseleave_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onmousemove_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onmousemove"
+
+///|
+impl TDocument with onmousemove(self : Self) -> EventHandler {
+  document_onmousemove_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onmousemove_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onmousemove"
+
+///|
+impl TDocument with set_onmousemove(self : Self, value : EventHandler) -> Unit {
+  document_set_onmousemove_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onmouseout_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onmouseout"
+
+///|
+impl TDocument with onmouseout(self : Self) -> EventHandler {
+  document_onmouseout_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onmouseout_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onmouseout"
+
+///|
+impl TDocument with set_onmouseout(self : Self, value : EventHandler) -> Unit {
+  document_set_onmouseout_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onmouseover_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onmouseover"
+
+///|
+impl TDocument with onmouseover(self : Self) -> EventHandler {
+  document_onmouseover_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onmouseover_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onmouseover"
+
+///|
+impl TDocument with set_onmouseover(self : Self, value : EventHandler) -> Unit {
+  document_set_onmouseover_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onmouseup_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onmouseup"
+
+///|
+impl TDocument with onmouseup(self : Self) -> EventHandler {
+  document_onmouseup_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onmouseup_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onmouseup"
+
+///|
+impl TDocument with set_onmouseup(self : Self, value : EventHandler) -> Unit {
+  document_set_onmouseup_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onpaste_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onpaste"
+
+///|
+impl TDocument with onpaste(self : Self) -> EventHandler {
+  document_onpaste_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onpaste_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onpaste"
+
+///|
+impl TDocument with set_onpaste(self : Self, value : EventHandler) -> Unit {
+  document_set_onpaste_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onpause_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onpause"
+
+///|
+impl TDocument with onpause(self : Self) -> EventHandler {
+  document_onpause_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onpause_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onpause"
+
+///|
+impl TDocument with set_onpause(self : Self, value : EventHandler) -> Unit {
+  document_set_onpause_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onplay_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onplay"
+
+///|
+impl TDocument with onplay(self : Self) -> EventHandler {
+  document_onplay_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onplay_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onplay"
+
+///|
+impl TDocument with set_onplay(self : Self, value : EventHandler) -> Unit {
+  document_set_onplay_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onplaying_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onplaying"
+
+///|
+impl TDocument with onplaying(self : Self) -> EventHandler {
+  document_onplaying_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onplaying_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onplaying"
+
+///|
+impl TDocument with set_onplaying(self : Self, value : EventHandler) -> Unit {
+  document_set_onplaying_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onprogress_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onprogress"
+
+///|
+impl TDocument with onprogress(self : Self) -> EventHandler {
+  document_onprogress_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onprogress_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onprogress"
+
+///|
+impl TDocument with set_onprogress(self : Self, value : EventHandler) -> Unit {
+  document_set_onprogress_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onratechange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onratechange"
+
+///|
+impl TDocument with onratechange(self : Self) -> EventHandler {
+  document_onratechange_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onratechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onratechange"
+
+///|
+impl TDocument with set_onratechange(self : Self, value : EventHandler) -> Unit {
+  document_set_onratechange_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onreset_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onreset"
+
+///|
+impl TDocument with onreset(self : Self) -> EventHandler {
+  document_onreset_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onreset_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onreset"
+
+///|
+impl TDocument with set_onreset(self : Self, value : EventHandler) -> Unit {
+  document_set_onreset_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onresize_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onresize"
+
+///|
+impl TDocument with onresize(self : Self) -> EventHandler {
+  document_onresize_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onresize_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onresize"
+
+///|
+impl TDocument with set_onresize(self : Self, value : EventHandler) -> Unit {
+  document_set_onresize_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onscroll_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onscroll"
+
+///|
+impl TDocument with onscroll(self : Self) -> EventHandler {
+  document_onscroll_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onscroll_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onscroll"
+
+///|
+impl TDocument with set_onscroll(self : Self, value : EventHandler) -> Unit {
+  document_set_onscroll_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onscrollend_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onscrollend"
+
+///|
+impl TDocument with onscrollend(self : Self) -> EventHandler {
+  document_onscrollend_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onscrollend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onscrollend"
+
+///|
+impl TDocument with set_onscrollend(self : Self, value : EventHandler) -> Unit {
+  document_set_onscrollend_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onsecuritypolicyviolation_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onsecuritypolicyviolation"
+
+///|
+impl TDocument with onsecuritypolicyviolation(self : Self) -> EventHandler {
+  document_onsecuritypolicyviolation_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onsecuritypolicyviolation"
+
+///|
+impl TDocument with set_onsecuritypolicyviolation(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  document_set_onsecuritypolicyviolation_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
+}
+
+///|
+fn document_onseeked_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onseeked"
+
+///|
+impl TDocument with onseeked(self : Self) -> EventHandler {
+  document_onseeked_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onseeked_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onseeked"
+
+///|
+impl TDocument with set_onseeked(self : Self, value : EventHandler) -> Unit {
+  document_set_onseeked_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onseeking_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onseeking"
+
+///|
+impl TDocument with onseeking(self : Self) -> EventHandler {
+  document_onseeking_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onseeking_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onseeking"
+
+///|
+impl TDocument with set_onseeking(self : Self, value : EventHandler) -> Unit {
+  document_set_onseeking_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onselect_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onselect"
+
+///|
+impl TDocument with onselect(self : Self) -> EventHandler {
+  document_onselect_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onselect_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onselect"
+
+///|
+impl TDocument with set_onselect(self : Self, value : EventHandler) -> Unit {
+  document_set_onselect_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onslotchange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onslotchange"
+
+///|
+impl TDocument with onslotchange(self : Self) -> EventHandler {
+  document_onslotchange_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onslotchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onslotchange"
+
+///|
+impl TDocument with set_onslotchange(self : Self, value : EventHandler) -> Unit {
+  document_set_onslotchange_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onstalled_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onstalled"
+
+///|
+impl TDocument with onstalled(self : Self) -> EventHandler {
+  document_onstalled_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onstalled_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onstalled"
+
+///|
+impl TDocument with set_onstalled(self : Self, value : EventHandler) -> Unit {
+  document_set_onstalled_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onsubmit_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onsubmit"
+
+///|
+impl TDocument with onsubmit(self : Self) -> EventHandler {
+  document_onsubmit_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onsubmit_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onsubmit"
+
+///|
+impl TDocument with set_onsubmit(self : Self, value : EventHandler) -> Unit {
+  document_set_onsubmit_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onsuspend_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onsuspend"
+
+///|
+impl TDocument with onsuspend(self : Self) -> EventHandler {
+  document_onsuspend_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onsuspend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onsuspend"
+
+///|
+impl TDocument with set_onsuspend(self : Self, value : EventHandler) -> Unit {
+  document_set_onsuspend_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ontimeupdate_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ontimeupdate"
+
+///|
+impl TDocument with ontimeupdate(self : Self) -> EventHandler {
+  document_ontimeupdate_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ontimeupdate_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ontimeupdate"
+
+///|
+impl TDocument with set_ontimeupdate(self : Self, value : EventHandler) -> Unit {
+  document_set_ontimeupdate_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_ontoggle_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ontoggle"
+
+///|
+impl TDocument with ontoggle(self : Self) -> EventHandler {
+  document_ontoggle_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_ontoggle_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_ontoggle"
+
+///|
+impl TDocument with set_ontoggle(self : Self, value : EventHandler) -> Unit {
+  document_set_ontoggle_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onvolumechange_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onvolumechange"
+
+///|
+impl TDocument with onvolumechange(self : Self) -> EventHandler {
+  document_onvolumechange_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onvolumechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onvolumechange"
+
+///|
+impl TDocument with set_onvolumechange(self : Self, value : EventHandler) -> Unit {
+  document_set_onvolumechange_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onwaiting_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onwaiting"
+
+///|
+impl TDocument with onwaiting(self : Self) -> EventHandler {
+  document_onwaiting_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onwaiting_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onwaiting"
+
+///|
+impl TDocument with set_onwaiting(self : Self, value : EventHandler) -> Unit {
+  document_set_onwaiting_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onwebkitanimationend_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onwebkitanimationend"
+
+///|
+impl TDocument with onwebkitanimationend(self : Self) -> EventHandler {
+  document_onwebkitanimationend_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onwebkitanimationend_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkitanimationend"
+
+///|
+impl TDocument with set_onwebkitanimationend(self : Self, value : EventHandler) -> Unit {
+  document_set_onwebkitanimationend_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onwebkitanimationiteration_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onwebkitanimationiteration"
+
+///|
+impl TDocument with onwebkitanimationiteration(self : Self) -> EventHandler {
+  document_onwebkitanimationiteration_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkitanimationiteration"
+
+///|
+impl TDocument with set_onwebkitanimationiteration(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  document_set_onwebkitanimationiteration_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
+}
+
+///|
+fn document_onwebkitanimationstart_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onwebkitanimationstart"
+
+///|
+impl TDocument with onwebkitanimationstart(self : Self) -> EventHandler {
+  document_onwebkitanimationstart_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onwebkitanimationstart_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkitanimationstart"
+
+///|
+impl TDocument with set_onwebkitanimationstart(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  document_set_onwebkitanimationstart_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onwebkittransitionend_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onwebkittransitionend"
+
+///|
+impl TDocument with onwebkittransitionend(self : Self) -> EventHandler {
+  document_onwebkittransitionend_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onwebkittransitionend_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkittransitionend"
+
+///|
+impl TDocument with set_onwebkittransitionend(self : Self, value : EventHandler) -> Unit {
+  document_set_onwebkittransitionend_ffi(self.to_js(), TJsValue::to_js(value))
+}
+
+///|
+fn document_onwheel_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onwheel"
+
+///|
+impl TDocument with onwheel(self : Self) -> EventHandler {
+  document_onwheel_ffi(self.to_js()).unsafe_cast()
+}
+
+///|
+fn document_set_onwheel_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onwheel"
+
+///|
+impl TDocument with set_onwheel(self : Self, value : EventHandler) -> Unit {
+  document_set_onwheel_ffi(self.to_js(), TJsValue::to_js(value))
 }

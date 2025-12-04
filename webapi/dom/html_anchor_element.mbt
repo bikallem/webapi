@@ -30,6 +30,20 @@
 //   [CEReactions, Reflect] attribute DOMString rev;
 //   [CEReactions, Reflect] attribute DOMString shape;
 // };
+// 
+// interface mixin HTMLHyperlinkElementUtils {
+//   [CEReactions, ReflectSetter] stringifier attribute USVString href;
+//   readonly attribute USVString origin;
+//   [CEReactions] attribute USVString protocol;
+//   [CEReactions] attribute USVString username;
+//   [CEReactions] attribute USVString password;
+//   [CEReactions] attribute USVString host;
+//   [CEReactions] attribute USVString hostname;
+//   [CEReactions] attribute USVString port;
+//   [CEReactions] attribute USVString pathname;
+//   [CEReactions] attribute USVString search;
+//   [CEReactions] attribute USVString hash;
+// };
 
 ///|
 #external
@@ -64,6 +78,27 @@ pub trait THTMLAnchorElement: TJsValue + THTMLElement {
   set_rev(self : Self, value : String) -> Unit = _
   shape(self : Self) -> String = _
   set_shape(self : Self, value : String) -> Unit = _
+  href(self : Self) -> String = _
+  set_href(self : Self, value : String) -> Unit = _
+  origin(self : Self) -> String = _
+  protocol(self : Self) -> String = _
+  set_protocol(self : Self, value : String) -> Unit = _
+  username(self : Self) -> String = _
+  set_username(self : Self, value : String) -> Unit = _
+  password(self : Self) -> String = _
+  set_password(self : Self, value : String) -> Unit = _
+  host(self : Self) -> String = _
+  set_host(self : Self, value : String) -> Unit = _
+  hostname(self : Self) -> String = _
+  set_hostname(self : Self, value : String) -> Unit = _
+  port(self : Self) -> String = _
+  set_port(self : Self, value : String) -> Unit = _
+  pathname(self : Self) -> String = _
+  set_pathname(self : Self, value : String) -> Unit = _
+  search(self : Self) -> String = _
+  set_search(self : Self, value : String) -> Unit = _
+  hash(self : Self) -> String = _
+  set_hash(self : Self, value : String) -> Unit = _
 }
 
 ///|
@@ -301,4 +336,172 @@ fn html_anchor_element_set_shape_ffi(obj : JsValue, value : String) -> Unit = "w
 ///|
 impl THTMLAnchorElement with set_shape(self : Self, value : String) -> Unit {
   html_anchor_element_set_shape_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_href_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "href"
+
+///|
+impl THTMLAnchorElement with href(self : Self) -> String {
+  html_anchor_element_href_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_href_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_href"
+
+///|
+impl THTMLAnchorElement with set_href(self : Self, value : String) -> Unit {
+  html_anchor_element_set_href_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_origin_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "origin"
+
+///|
+impl THTMLAnchorElement with origin(self : Self) -> String {
+  html_anchor_element_origin_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_protocol_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "protocol"
+
+///|
+impl THTMLAnchorElement with protocol(self : Self) -> String {
+  html_anchor_element_protocol_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_protocol_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_protocol"
+
+///|
+impl THTMLAnchorElement with set_protocol(self : Self, value : String) -> Unit {
+  html_anchor_element_set_protocol_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_username_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "username"
+
+///|
+impl THTMLAnchorElement with username(self : Self) -> String {
+  html_anchor_element_username_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_username_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_username"
+
+///|
+impl THTMLAnchorElement with set_username(self : Self, value : String) -> Unit {
+  html_anchor_element_set_username_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_password_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "password"
+
+///|
+impl THTMLAnchorElement with password(self : Self) -> String {
+  html_anchor_element_password_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_password_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_password"
+
+///|
+impl THTMLAnchorElement with set_password(self : Self, value : String) -> Unit {
+  html_anchor_element_set_password_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_host_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "host"
+
+///|
+impl THTMLAnchorElement with host(self : Self) -> String {
+  html_anchor_element_host_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_host_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_host"
+
+///|
+impl THTMLAnchorElement with set_host(self : Self, value : String) -> Unit {
+  html_anchor_element_set_host_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_hostname_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "hostname"
+
+///|
+impl THTMLAnchorElement with hostname(self : Self) -> String {
+  html_anchor_element_hostname_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_hostname_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_hostname"
+
+///|
+impl THTMLAnchorElement with set_hostname(self : Self, value : String) -> Unit {
+  html_anchor_element_set_hostname_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_port_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "port"
+
+///|
+impl THTMLAnchorElement with port(self : Self) -> String {
+  html_anchor_element_port_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_port_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_port"
+
+///|
+impl THTMLAnchorElement with set_port(self : Self, value : String) -> Unit {
+  html_anchor_element_set_port_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_pathname_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "pathname"
+
+///|
+impl THTMLAnchorElement with pathname(self : Self) -> String {
+  html_anchor_element_pathname_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_pathname_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_pathname"
+
+///|
+impl THTMLAnchorElement with set_pathname(self : Self, value : String) -> Unit {
+  html_anchor_element_set_pathname_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_search_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "search"
+
+///|
+impl THTMLAnchorElement with search(self : Self) -> String {
+  html_anchor_element_search_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_search_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_search"
+
+///|
+impl THTMLAnchorElement with set_search(self : Self, value : String) -> Unit {
+  html_anchor_element_set_search_ffi(self.to_js(), value)
+}
+
+///|
+fn html_anchor_element_hash_ffi(obj : JsValue) -> String = "webapi_HTMLAnchorElement" "hash"
+
+///|
+impl THTMLAnchorElement with hash(self : Self) -> String {
+  html_anchor_element_hash_ffi(self.to_js())
+}
+
+///|
+fn html_anchor_element_set_hash_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_hash"
+
+///|
+impl THTMLAnchorElement with set_hash(self : Self, value : String) -> Unit {
+  html_anchor_element_set_hash_ffi(self.to_js(), value)
 }

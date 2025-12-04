@@ -14,6 +14,18 @@
 //   undefined deleteData(unsigned long offset, unsigned long count);
 //   undefined replaceData(unsigned long offset, unsigned long count, DOMString data);
 // };
+// 
+// interface mixin NonDocumentTypeChildNode {
+//   readonly attribute Element? previousElementSibling;
+//   readonly attribute Element? nextElementSibling;
+// };
+// 
+// interface mixin ChildNode {
+//   [CEReactions, Unscopable] undefined before((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined after((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined replaceWith((Node or DOMString)... nodes);
+//   [CEReactions, Unscopable] undefined remove();
+// };
 
 ///|
 #external
@@ -24,11 +36,17 @@ pub trait TCharacterData: TJsValue + TNode {
   data(self : Self) -> String = _
   set_data(self : Self, value : String) -> Unit = _
   length(self : Self) -> Int = _
+  previous_element_sibling(self : Self) -> Element? = _
+  next_element_sibling(self : Self) -> Element? = _
   substring_data(self : Self, offset : Int, count : Int) -> String = _
   append_data(self : Self, data : String) -> Unit = _
   insert_data(self : Self, offset : Int, data : String) -> Unit = _
   delete_data(self : Self, offset : Int, count : Int) -> Unit = _
   replace_data(self : Self, offset : Int, count : Int, data : String) -> Unit = _
+  before(self : Self, nodes : &TBeforeNodesArg) -> Unit = _
+  after(self : Self, nodes : &TAfterNodesArg) -> Unit = _
+  replace_with(self : Self, nodes : &TReplaceWithNodesArg) -> Unit = _
+  remove(self : Self) -> Unit = _
 }
 
 ///|
@@ -129,6 +147,41 @@ impl TCharacterData with replace_data(
 }
 
 ///|
+fn character_data_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_CharacterData" "before"
+
+///|
+impl TCharacterData with before(self : Self, nodes : &TBeforeNodesArg) -> Unit {
+  character_data_before_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_CharacterData" "after"
+
+///|
+impl TCharacterData with after(self : Self, nodes : &TAfterNodesArg) -> Unit {
+  character_data_after_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn character_data_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_CharacterData" "replaceWith"
+
+///|
+impl TCharacterData with replace_with(
+  self : Self,
+  nodes : &TReplaceWithNodesArg,
+) -> Unit {
+  character_data_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+fn character_data_remove_ffi(obj : JsValue) -> Unit = "webapi_CharacterData" "remove"
+
+///|
+impl TCharacterData with remove(self : Self) -> Unit {
+  character_data_remove_ffi(TJsValue::to_js(self))
+}
+
+///|
 fn character_data_data_ffi(obj : JsValue) -> String = "webapi_CharacterData" "data"
 
 ///|
@@ -150,4 +203,20 @@ fn character_data_length_ffi(obj : JsValue) -> Int = "webapi_CharacterData" "len
 ///|
 impl TCharacterData with length(self : Self) -> Int {
   character_data_length_ffi(self.to_js())
+}
+
+///|
+fn character_data_previous_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_CharacterData" "previousElementSibling"
+
+///|
+impl TCharacterData with previous_element_sibling(self : Self) -> Element? {
+  character_data_previous_element_sibling_ffi(self.to_js()).as_option()
+}
+
+///|
+fn character_data_next_element_sibling_ffi(obj : JsValue) -> JsValue = "webapi_CharacterData" "nextElementSibling"
+
+///|
+impl TCharacterData with next_element_sibling(self : Self) -> Element? {
+  character_data_next_element_sibling_ffi(self.to_js()).as_option()
 }
