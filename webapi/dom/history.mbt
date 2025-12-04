@@ -142,7 +142,7 @@ impl THistory with set_scroll_restoration(
   self : Self,
   value : ScrollRestoration,
 ) -> Unit {
-  history_set_scroll_restoration_ffi(self.to_js(), value.to_js())
+  history_set_scroll_restoration_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|

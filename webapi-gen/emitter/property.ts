@@ -190,20 +190,27 @@ function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   // Check if the type is optional (ends with ?)
   const isOptionalType = mapped.moonbitType.endsWith("?");
 
+  // Check if this is a union type property
+  const isUnionType = contextName && isKnownUnionType(contextName);
+
   // Determine the signature parameter type
   let sigParamType: string;
-  if (contextName && isKnownUnionType(contextName)) {
+  if (isUnionType) {
     sigParamType = `&T${contextName}`;
   } else {
     sigParamType = mapped.moonbitType;
   }
 
   let valueExpr: string;
-  if (isOptionalType) {
+  if (isUnionType) {
+    // Use the union trait's to_js method
+    valueExpr = `T${contextName}::to_js(value)`;
+  } else if (isOptionalType) {
     // Use opt_to_js for optional types
     valueExpr = "opt_to_js(value)";
   } else if (needsConversion) {
-    valueExpr = "value.to_js()";
+    // Use explicit trait syntax to avoid deprecation warning
+    valueExpr = "TJsValue::to_js(value)";
   } else {
     valueExpr = "value";
   }

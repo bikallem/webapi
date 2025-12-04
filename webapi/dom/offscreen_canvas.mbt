@@ -164,7 +164,7 @@ fn offscreen_canvas_set_oncontextlost_ffi(
 
 ///|
 impl TOffscreenCanvas with set_oncontextlost(self : Self, value : EventHandler) -> Unit {
-  offscreen_canvas_set_oncontextlost_ffi(self.to_js(), value.to_js())
+  offscreen_canvas_set_oncontextlost_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
 ///|
@@ -186,5 +186,8 @@ impl TOffscreenCanvas with set_oncontextrestored(
   self : Self,
   value : EventHandler,
 ) -> Unit {
-  offscreen_canvas_set_oncontextrestored_ffi(self.to_js(), value.to_js())
+  offscreen_canvas_set_oncontextrestored_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }

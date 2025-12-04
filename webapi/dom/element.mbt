@@ -1225,7 +1225,7 @@ fn element_set_inner_html_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TElement with set_inner_html(self : Self, value : &TInnerHTML) -> Unit {
-  element_set_inner_html_ffi(self.to_js(), value.to_js())
+  element_set_inner_html_ffi(self.to_js(), TInnerHTML::to_js(value))
 }
 
 ///|
@@ -1241,7 +1241,7 @@ fn element_set_outer_html_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_
 
 ///|
 impl TElement with set_outer_html(self : Self, value : &TOuterHTML) -> Unit {
-  element_set_outer_html_ffi(self.to_js(), value.to_js())
+  element_set_outer_html_ffi(self.to_js(), TOuterHTML::to_js(value))
 }
 
 ///|

@@ -107,5 +107,5 @@ fn abort_signal_set_onabort_ffi(obj : JsValue, value : JsValue) -> Unit = "webap
 
 ///|
 impl TAbortSignal with set_onabort(self : Self, value : EventHandler) -> Unit {
-  abort_signal_set_onabort_ffi(self.to_js(), value.to_js())
+  abort_signal_set_onabort_ffi(self.to_js(), TJsValue::to_js(value))
 }

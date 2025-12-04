@@ -1734,7 +1734,7 @@ impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_quality(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_image_smoothing_quality_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -1761,7 +1761,7 @@ impl TOffscreenCanvasRenderingContext2D with set_stroke_style(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_stroke_style_ffi(
     self.to_js(),
-    value.to_js(),
+    TStrokeStyle::to_js(value),
   )
 }
 
@@ -1788,7 +1788,7 @@ impl TOffscreenCanvasRenderingContext2D with set_fill_style(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_fill_style_ffi(
     self.to_js(),
-    value.to_js(),
+    TFillStyle::to_js(value),
   )
 }
 
@@ -1966,7 +1966,7 @@ impl TOffscreenCanvasRenderingContext2D with set_line_cap(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_line_cap_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -1995,7 +1995,7 @@ impl TOffscreenCanvasRenderingContext2D with set_line_join(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_line_join_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -2119,7 +2119,7 @@ impl TOffscreenCanvasRenderingContext2D with set_text_align(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_text_align_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -2148,7 +2148,7 @@ impl TOffscreenCanvasRenderingContext2D with set_text_baseline(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_text_baseline_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -2177,7 +2177,7 @@ impl TOffscreenCanvasRenderingContext2D with set_direction(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_direction_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -2233,7 +2233,7 @@ impl TOffscreenCanvasRenderingContext2D with set_font_kerning(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_font_kerning_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -2262,7 +2262,7 @@ impl TOffscreenCanvasRenderingContext2D with set_font_stretch(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_font_stretch_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -2291,7 +2291,7 @@ impl TOffscreenCanvasRenderingContext2D with set_font_variant_caps(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_font_variant_caps_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
@@ -2320,7 +2320,7 @@ impl TOffscreenCanvasRenderingContext2D with set_text_rendering(
 ) -> Unit {
   offscreen_canvas_rendering_context2_d_set_text_rendering_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 

@@ -161,7 +161,10 @@ impl THTMLButtonElement with set_command_for_element(
   self : Self,
   value : Element,
 ) -> Unit {
-  html_button_element_set_command_for_element_ffi(self.to_js(), value.to_js())
+  html_button_element_set_command_for_element_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -384,7 +387,7 @@ impl THTMLButtonElement with set_popover_target_element(
 ) -> Unit {
   html_button_element_set_popover_target_element_ffi(
     self.to_js(),
-    value.to_js(),
+    TJsValue::to_js(value),
   )
 }
 
