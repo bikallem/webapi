@@ -1,3 +1,10 @@
 {
-  "is-main": true
+  "is-main": true,
+  "import": [
+    "bikallem/webapi"
+  ],
+  "supported-targets": [
+    "js",
+    "wasm-gc"
+  ]
 }

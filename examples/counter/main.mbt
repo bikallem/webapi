@@ -1,12 +1,10 @@
 ///|
 /// Simple counter web app with increment and decrement buttons
 fn main {
-  // Get document and body
-  let doc = document()
-  let body = doc.body()
+  let body = document.body().unwrap()
 
   // Create container div
-  let container = doc.create_element("div")
+  let container = document.create_element("div")
   container.set_id("counter-app")
   container.set_inner_html(
     (
@@ -33,7 +31,7 @@ fn main {
       #|
     ),
   )
-  body.append_child(container)
+  let _node : Node = body.append_child(container)
 
   // Create mutable counter state using Ref
   let count : Ref[Int] = Ref::new(0)
