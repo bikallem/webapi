@@ -10,8 +10,10 @@ fn main {
     count_display.set_text_content(count.to_string())
   }
 
-  // Increment button
-  let increment_btn = document.get_element_by_id("increment").unwrap()
+  // Increment button  
+  guard document.get_element_by_id("increment") is Some(increment_btn) else {
+    abort("Increment button not found")
+  }
   increment_btn.add_event_listener(
     "click",
     EventListener::new(fn(_event) {
