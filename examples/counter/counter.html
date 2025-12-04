@@ -95,42 +95,6 @@
         Object.assign(globalThis, wasmImportObject);
     </script>
     <script type="module" src="../target/js/release/build/counter/counter.js"></script>
-    <!-- // Created with MoonBit DOM bindings
-
-    // Get document and body
-    const doc = document;
-    const body = doc.body;
-
-    // Mutable counter state
-    let count = 0;
-    const countDisplay = doc.getElementById('count-display');
-
-    // Helper to update display
-    const updateDisplay = () => {
-    countDisplay.textContent = count.toString();
-    };
-
-    // Increment button
-    const incrementBtn = doc.getElementById('increment');
-    incrementBtn.addEventListener('click', () => {
-    count = count + 1;
-    updateDisplay();
-    });
-
-    // Decrement button
-    const decrementBtn = doc.getElementById('decrement');
-    decrementBtn.addEventListener('click', () => {
-    count = count - 1;
-    updateDisplay();
-    });
-
-    // Reset button
-    const resetBtn = doc.getElementById('reset');
-    resetBtn.addEventListener('click', () => {
-    count = 0;
-    updateDisplay();
-    }); 
-    </script> -->
 </body>
 
 </html>
