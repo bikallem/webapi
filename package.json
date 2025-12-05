@@ -7,7 +7,6 @@
     "scripts": {
         "build": "tsc",
         "generate": "tsc && node dist/build.js",
-        "minify": "terser src/webapi.mjs -o src/webapi.min.mjs -c -m",
         "clean": "rm -rf dist webapi/dom/*.mbt webapi/dom/*.mjs"
     },
     "keywords": [
