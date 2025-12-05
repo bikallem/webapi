@@ -24,6 +24,7 @@ import type { ParsedType, ParsedIdl } from "../types.js";
 import type { UnionTypeContext } from "../mapping.js";
 import { mapIdlType, registerUnionType, isKnownUnionType } from "../mapping.js";
 import { toSnakeCase } from "../utils.js";
+import { getUnionMemberMoonbitType } from "./unionUtils.js";
 
 /**
  * Built-in types from typed_arrays.mbt that can be used in unions
@@ -117,38 +118,8 @@ export interface CollectedUnionType {
 }
 
 /**
- * Map of primitive IDL type names to MoonBit types
- */
-const PRIMITIVE_MAP: Record<string, string> = {
-  DOMString: "String",
-  USVString: "String",
-  ByteString: "String",
-  boolean: "Bool",
-  double: "Double",
-  float: "Double",
-  "unrestricted double": "Double",
-  "unrestricted float": "Double",
-  long: "Int",
-  "unsigned long": "Int",
-  short: "Int",
-  "unsigned short": "Int",
-};
-
-/**
- * Get the MoonBit type name from a ParsedType for union member
- */
-function getPropertyUnionMemberName(memberType: ParsedType): string | undefined {
-  if (memberType.type === "reference" && memberType.name) {
-    return memberType.name;
-  }
-  if (memberType.type === "primitive" && memberType.name) {
-    return PRIMITIVE_MAP[memberType.name] || memberType.name;
-  }
-  return undefined;
-}
-
-/**
  * Extract union member names from a union type
+ * Uses the shared getUnionMemberMoonbitType from unionUtils
  */
 function getUnionMemberNames(unionType: ParsedType): string[] {
   if (unionType.type !== "union" || !unionType.memberTypes) {
@@ -157,8 +128,8 @@ function getUnionMemberNames(unionType: ParsedType): string[] {
 
   const names: string[] = [];
   for (const member of unionType.memberTypes) {
-    const name = getPropertyUnionMemberName(member);
-    if (name) {
+    const name = getUnionMemberMoonbitType(member);
+    if (name && name !== "Unit" && name !== "JsValue") {
       names.push(name);
     }
   }
