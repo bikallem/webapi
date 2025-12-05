@@ -46,7 +46,11 @@ pub const DOM_KEY_LOCATION_RIGHT : UInt = 0x02
 
 pub const DOM_KEY_LOCATION_STANDARD : UInt = 0x00
 
+pub const DONE : UInt = 2
+
 pub const ELEMENT_NODE : UInt = 1
+
+pub const EMPTY : UInt = 0
 
 pub const END_TO_END : UInt = 2
 
@@ -55,6 +59,8 @@ pub const END_TO_START : UInt = 3
 pub const ENTITY_NODE : UInt = 6
 
 pub const ENTITY_REFERENCE_NODE : UInt = 5
+
+pub const LOADING : UInt = 1
 
 pub const NONE : UInt = 0
 
@@ -111,6 +117,7 @@ pub impl TJsValue for AddEventListenerOptions
 #external
 pub type ArrayBuffer
 pub impl TJsValue for ArrayBuffer
+pub impl TResult for ArrayBuffer
 
 #external
 pub type AssignedNodesOptions
@@ -135,6 +142,7 @@ pub impl TJsValue for BigUint64Array
 
 #external
 pub type Blob
+pub fn[T : TBlob] Blob::into(Self) -> T
 pub fn Blob::new(blob_parts? : Array[JsValue], options? : BlobPropertyBag) -> Self
 pub fn Blob::null() -> Self
 pub impl TBlob for Blob
@@ -689,10 +697,38 @@ pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget
 
 #external
+pub type File
+pub fn File::new(Array[JsValue], String, options? : FilePropertyBag) -> Self
+pub fn File::null() -> Self
+pub impl TBlob for File
+pub impl TFile for File
+pub impl TJsValue for File
+
+#external
+pub type FileList
+pub impl TFileList for FileList
+pub impl TJsValue for FileList
+
+#external
 pub type FilePropertyBag
 pub fn FilePropertyBag::empty() -> Self
 pub fn FilePropertyBag::new(last_modified? : Int64) -> Self
 pub impl TJsValue for FilePropertyBag
+
+#external
+pub type FileReader
+pub fn FileReader::new() -> Self
+pub fn FileReader::null() -> Self
+pub impl TEventTarget for FileReader
+pub impl TFileReader for FileReader
+pub impl TJsValue for FileReader
+
+#external
+pub type FileReaderSync
+pub fn FileReaderSync::new() -> Self
+pub fn FileReaderSync::null() -> Self
+pub impl TFileReaderSync for FileReaderSync
+pub impl TJsValue for FileReaderSync
 
 #external
 pub type FillStyle
@@ -1331,6 +1367,10 @@ pub fn ResizeQuality::from(String) -> Self?
 pub impl TJsValue for ResizeQuality
 pub impl Eq for ResizeQuality
 pub impl Show for ResizeQuality
+
+#external
+pub type Result
+pub fn[T : TResult] Result::into(Self) -> T
 
 #external
 pub type SVGBoundingBoxOptions
@@ -2427,6 +2467,46 @@ pub trait TEventTarget : TJsValue {
   add_event_listener(Self, String, EventListener, options? : &TAddEventListenerOptionsArg) -> Unit
   remove_event_listener(Self, String, EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit
   dispatch_event(Self, Event) -> Bool
+}
+
+pub trait TFile : TJsValue + TBlob {
+  name(Self) -> String
+  last_modified(Self) -> Int64
+}
+
+pub trait TFileList : TJsValue {
+  length(Self) -> UInt
+  item(Self, UInt) -> JsValue?
+}
+
+pub trait TFileReader : TJsValue + TEventTarget {
+  ready_state(Self) -> UInt
+  result(Self) -> Result
+  error(Self) -> JsValue?
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
+  onloadend(Self) -> EventHandler
+  set_onloadend(Self, EventHandler) -> Unit
+  read_as_array_buffer(Self, Blob) -> Unit
+  read_as_binary_string(Self, Blob) -> Unit
+  read_as_text(Self, Blob, encoding? : String) -> Unit
+  read_as_data_url(Self, Blob) -> Unit
+  abort(Self) -> Unit
+}
+
+pub trait TFileReaderSync : TJsValue {
+  read_as_array_buffer(Self, Blob) -> ArrayBuffer
+  read_as_binary_string(Self, Blob) -> String
+  read_as_text(Self, Blob, encoding? : String) -> String
+  read_as_data_url(Self, Blob) -> String
 }
 
 pub(open) trait TFillStyle {
@@ -3547,6 +3627,11 @@ pub(open) trait TReplaceWithNodesArg {
   to_js(Self) -> JsValue
 }
 pub impl TReplaceWithNodesArg for String
+
+pub(open) trait TResult {
+  to_js(Self) -> JsValue
+}
+pub impl TResult for String
 
 pub(open) trait TRoundRectRadiiArg {
   to_js(Self) -> JsValue

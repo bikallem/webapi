@@ -18,6 +18,9 @@ pub trait TBlob: TJsValue {
 }
 
 ///|
+pub fn[T : TBlob] Blob::into(self : Blob) -> T = "%identity"
+
+///|
 pub impl TBlob for Blob
 
 ///|

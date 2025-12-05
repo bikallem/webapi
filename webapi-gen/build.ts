@@ -190,6 +190,12 @@ let CORE_INTERFACES = new Set([
   "Blob",
   // Note: VideoFrame is in webcodecs spec and is excluded for now
 
+  // File API
+  "File",
+  "FileList",
+  "FileReader",
+  "FileReaderSync",
+
   // Shadow DOM
   "ShadowRoot",
   "HTMLSlotElement",

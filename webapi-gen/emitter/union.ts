@@ -26,6 +26,25 @@ import { mapIdlType, registerUnionType, isKnownUnionType } from "../mapping.js";
 import { toSnakeCase } from "../utils.js";
 
 /**
+ * Built-in types from typed_arrays.mbt that can be used in unions
+ */
+const TYPED_ARRAY_TYPES = new Set([
+  "ArrayBuffer",
+  "DataView",
+  "Float32Array",
+  "Float64Array",
+  "Int8Array",
+  "Int16Array",
+  "Int32Array",
+  "Uint8Array",
+  "Uint8ClampedArray",
+  "Uint16Array",
+  "Uint32Array",
+  "BigInt64Array",
+  "BigUint64Array",
+]);
+
+/**
  * Get the MoonBit type name for a union member
  */
 function getMemberTypeName(memberType: ParsedType): string {
@@ -238,8 +257,11 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
     // Check if it's a known interface
     const isKnownInterface = idl.interfaces.has(memberName);
 
-    // Skip if not primitive and not a known interface
-    if (!isPrimitive && !isKnownInterface) {
+    // Check if it's a typed array type
+    const isTypedArray = TYPED_ARRAY_TYPES.has(memberName);
+
+    // Skip if not primitive, not a known interface, and not a typed array
+    if (!isPrimitive && !isKnownInterface && !isTypedArray) {
       continue;
     }
 

@@ -63,6 +63,49 @@ export const wasmImportObject = {
     get_type: (obj) => obj.type
   },
 
+  webapi_File: {
+    new: (fileBits, fileName, options) => new File(fileBits, fileName, options),
+    get_name: (obj) => obj.name,
+    get_lastModified: (obj) => obj.lastModified
+  },
+
+  webapi_FileList: {
+    item: (obj, index) => obj.item(index),
+    get_length: (obj) => obj.length
+  },
+
+  webapi_FileReader: {
+    new: () => new FileReader(),
+    readAsArrayBuffer: (obj, blob) => obj.readAsArrayBuffer(blob),
+    readAsBinaryString: (obj, blob) => obj.readAsBinaryString(blob),
+    readAsText: (obj, blob, encoding) => obj.readAsText(blob, encoding),
+    readAsDataURL: (obj, blob) => obj.readAsDataURL(blob),
+    abort: (obj) => obj.abort(),
+    get_readyState: (obj) => obj.readyState,
+    get_result: (obj) => obj.result,
+    get_error: (obj) => obj.error,
+    get_onloadstart: (obj) => obj.onloadstart,
+    set_onloadstart: (obj, value) => { obj.onloadstart = value; },
+    get_onprogress: (obj) => obj.onprogress,
+    set_onprogress: (obj, value) => { obj.onprogress = value; },
+    get_onload: (obj) => obj.onload,
+    set_onload: (obj, value) => { obj.onload = value; },
+    get_onabort: (obj) => obj.onabort,
+    set_onabort: (obj, value) => { obj.onabort = value; },
+    get_onerror: (obj) => obj.onerror,
+    set_onerror: (obj, value) => { obj.onerror = value; },
+    get_onloadend: (obj) => obj.onloadend,
+    set_onloadend: (obj, value) => { obj.onloadend = value; }
+  },
+
+  webapi_FileReaderSync: {
+    new: () => new FileReaderSync(),
+    readAsArrayBuffer: (obj, blob) => obj.readAsArrayBuffer(blob),
+    readAsBinaryString: (obj, blob) => obj.readAsBinaryString(blob),
+    readAsText: (obj, blob, encoding) => obj.readAsText(blob, encoding),
+    readAsDataURL: (obj, blob) => obj.readAsDataURL(blob)
+  },
+
   webapi_Document: {
     new: () => new Document(),
     elementFromPoint: (obj, x, y) => obj.elementFromPoint(x, y),
