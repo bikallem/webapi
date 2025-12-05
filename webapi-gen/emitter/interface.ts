@@ -9,12 +9,11 @@
  */
 
 import type { ParsedInterface, ParsedIdl } from "../types.js";
-import { toSnakeCase, toTraitName, joinBlocks } from "../utils.js";
+import { toSnakeCase, toTraitName } from "../utils.js";
 import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
-import { getAllTraitAncestors } from "../widlprocess.js";
-import { mapIdlType, formatReturnType, isAbstractInterface } from "../mapping.js";
+import { mapIdlType, isAbstractInterface } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 
@@ -92,16 +91,6 @@ function emitNullMethod(iface: ParsedInterface): string {
 pub fn ${iface.name}::null() -> ${iface.name} {
   JsValue::null()
 }`;
-}
-
-/**
- * Emit into() method for trait objects of abstract types
- * Allows downcasting from &TElement to HTMLDivElement etc.
- */
-function emitTraitObjectInto(iface: ParsedInterface): string {
-  const traitName = toTraitName(iface.name);
-  return `///|
-pub fn[T : ${traitName}] &${traitName}::into(self : &${traitName}) -> T = "%identity"`;
 }
 
 /**

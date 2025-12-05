@@ -22,7 +22,7 @@
 
 import type { ParsedType, ParsedIdl } from "../types.js";
 import type { UnionTypeContext } from "../mapping.js";
-import { mapIdlType, registerUnionType, isKnownUnionType } from "../mapping.js";
+import { mapIdlType, registerUnionType } from "../mapping.js";
 import { toSnakeCase } from "../utils.js";
 import { getUnionMemberMoonbitType } from "./unionUtils.js";
 
@@ -97,7 +97,7 @@ export function collectAndEmitUnions(
 ): string {
   const parts: string[] = [];
 
-  for (const [name, union] of unions) {
+  for (const [_name, union] of unions) {
     parts.push(emitUnionType(union));
   }
 

@@ -6,9 +6,9 @@
  * For unions: typedef (Type1 or Type2 or Type3) UnionName;
  */
 
-import type { ParsedTypedef, ParsedIdl, ParsedType } from "../types.js";
+import type { ParsedTypedef, ParsedIdl } from "../types.js";
 import { toSnakeCase } from "../utils.js";
-import { mapIdlType, formatReturnType, isKnownTypedef } from "../mapping.js";
+import { isKnownTypedef } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 import { unwrapNullableType, getReferenceTypeName } from "./typeUtils.js";
@@ -49,13 +49,6 @@ function emitTypedefConstructor(typedef: ParsedTypedef, idl: ParsedIdl): string 
 
     const closureType = buildClosureType(callback.params, callback.returnType);
     return emitCallbackConstructor(typedef.name, `webapi_${underlyingName}`, closureType);
-}
-
-/**
- * Check if the typedef is nullable (e.g., EventHandlerNonNull?)
- */
-function isNullableTypedef(typedef: ParsedTypedef): boolean {
-    return typedef.type.type === "nullable";
 }
 
 /**

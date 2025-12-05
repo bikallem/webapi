@@ -9,7 +9,7 @@
  * - MoonBit match syntax uses newlines between cases, not commas
  */
 
-import type { ParsedInterface, ParsedConstructor, ParsedParam } from "../types.js";
+import type { ParsedInterface, ParsedConstructor } from "../types.js";
 import { 
   toSnakeCase, 
   escapeKeyword, 

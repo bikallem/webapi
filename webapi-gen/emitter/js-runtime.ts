@@ -6,7 +6,7 @@
  */
 
 import type { ParsedIdl, ParsedInterface, ParsedDictionary, ParsedCallback, ParsedMethod, ParsedProperty } from "../types.js";
-import { toSnakeCase, toFfiModuleName } from "../utils.js";
+import { toFfiModuleName } from "../utils.js";
 
 /**
  * JavaScript reserved keywords that need escaping when used as parameter names
@@ -210,7 +210,7 @@ export function emitJsRuntime(idl: ParsedIdl): string {
   }`);
 
   // Interfaces
-  for (const [name, iface] of idl.interfaces) {
+  for (const [_name, iface] of idl.interfaces) {
     // Callback interfaces get a simple constructor like callbacks
     if (iface.isCallbackInterface) {
       modules.push(emitJsCallbackInterface(iface));
@@ -223,12 +223,12 @@ export function emitJsRuntime(idl: ParsedIdl): string {
   }
 
   // Dictionaries
-  for (const [name, dict] of idl.dictionaries) {
+  for (const [_name, dict] of idl.dictionaries) {
     modules.push(emitJsDictionary(dict));
   }
 
   // Callbacks
-  for (const [name, callback] of idl.callbacks) {
+  for (const [_name, callback] of idl.callbacks) {
     modules.push(emitJsCallback(callback));
   }
 

@@ -5,7 +5,7 @@
  */
 
 import type { ParsedCallback, ParsedParam } from "../types.js";
-import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
+import { toSnakeCase, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatReturnType } from "../mapping.js";
 import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 

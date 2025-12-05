@@ -1,5 +1,5 @@
 import { ParsedEnum } from '../types.js';
-import { toSnakeCase, toPascalCase } from '../utils.js';
+import { toSnakeCase } from '../utils.js';
 
 /**
  * Convert enum value string to MoonBit variant name

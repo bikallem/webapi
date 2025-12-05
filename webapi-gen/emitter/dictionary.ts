@@ -4,9 +4,9 @@
  * Generates MoonBit code for Web IDL dictionaries (options objects).
  */
 
-import type { ParsedDictionary, ParsedDictionaryMember } from "../types.js";
+import type { ParsedDictionary } from "../types.js";
 import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
-import { mapIdlType, formatParam, getDefaultValueExpr } from "../mapping.js";
+import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
 import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 
 /**
@@ -46,16 +46,6 @@ fn ${ffiName}() -> ${dict.name} = "${moduleName}" "new"`;
 
   return `///|
 fn ${ffiName}(${paramsStr}) -> ${dict.name} = "${moduleName}" "new"`;
-}
-
-/**
- * Helper to generate conversion expression for a parameter
- */
-function toJsConversion(paramName: string, isRequired: boolean, mapped: { needsConversion: boolean }): string {
-  if (isRequired) {
-    return mapped.needsConversion ? `${paramName}.to_js()` : paramName;
-  }
-  return `TJsValue::opt_to_js(${paramName})`;
 }
 
 /**

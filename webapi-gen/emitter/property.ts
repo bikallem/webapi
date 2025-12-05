@@ -1,6 +1,6 @@
-import { ParsedInterface, ParsedProperty, ParsedType } from '../types.js';
+import { ParsedInterface, ParsedProperty } from '../types.js';
 import { toSnakeCase, escapeKeyword, toFfiModuleName, toTraitName } from '../utils.js';
-import { mapIdlType, formatReturnType, isKnownEnum, isKnownUnionType } from '../mapping.js';
+import { mapIdlType, isKnownEnum, isKnownUnionType } from '../mapping.js';
 import { generatePropertyGetterFfiName, generatePropertySetterFfiName } from './namingUtils.js';
 import { isFfiSafeType } from './ffiUtils.js';
 

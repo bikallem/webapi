@@ -16,7 +16,6 @@ import {
   getUnionMemberMoonbitType,
   getFilteredUnionMembers,
   getCollapsedUnionType,
-  SKIP_UNION_TYPES,
 } from "./unionUtils.js";
 import { unwrapNullableType } from "./typeUtils.js";
 import { generateMethodFfiName } from "./namingUtils.js";
