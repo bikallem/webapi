@@ -283,9 +283,9 @@ impl THTMLFormElement with elements(self : Self) -> JsValue {
 }
 
 ///|
-fn html_form_element_length_ffi(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "length"
+fn html_form_element_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLFormElement" "length"
 
 ///|
 impl THTMLFormElement with length(self : Self) -> UInt {
-  html_form_element_length_ffi(self.to_js()).unsafe_cast()
+  html_form_element_length_ffi(self.to_js())
 }

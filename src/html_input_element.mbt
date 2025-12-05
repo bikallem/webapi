@@ -543,19 +543,19 @@ impl THTMLInputElement with set_form_target(self : Self, value : String) -> Unit
 }
 
 ///|
-fn html_input_element_height_ffi(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "height"
+fn html_input_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "height"
 
 ///|
 impl THTMLInputElement with height(self : Self) -> UInt {
-  html_input_element_height_ffi(self.to_js()).unsafe_cast()
+  html_input_element_height_ffi(self.to_js())
 }
 
 ///|
-fn html_input_element_set_height_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLInputElement" "set_height"
+fn html_input_element_set_height_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLInputElement" "set_height"
 
 ///|
 impl THTMLInputElement with set_height(self : Self, value : UInt) -> Unit {
-  html_input_element_set_height_ffi(self.to_js(), TJsValue::to_js(value))
+  html_input_element_set_height_ffi(self.to_js(), value)
 }
 
 ///|
@@ -749,19 +749,19 @@ impl THTMLInputElement with set_required(self : Self, value : Bool) -> Unit {
 }
 
 ///|
-fn html_input_element_size_ffi(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "size"
+fn html_input_element_size_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "size"
 
 ///|
 impl THTMLInputElement with size(self : Self) -> UInt {
-  html_input_element_size_ffi(self.to_js()).unsafe_cast()
+  html_input_element_size_ffi(self.to_js())
 }
 
 ///|
-fn html_input_element_set_size_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLInputElement" "set_size"
+fn html_input_element_set_size_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLInputElement" "set_size"
 
 ///|
 impl THTMLInputElement with set_size(self : Self, value : UInt) -> Unit {
-  html_input_element_set_size_ffi(self.to_js(), TJsValue::to_js(value))
+  html_input_element_set_size_ffi(self.to_js(), value)
 }
 
 ///|
@@ -886,19 +886,19 @@ impl THTMLInputElement with set_value_as_number(self : Self, value : Double) -> 
 }
 
 ///|
-fn html_input_element_width_ffi(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "width"
+fn html_input_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "width"
 
 ///|
 impl THTMLInputElement with width(self : Self) -> UInt {
-  html_input_element_width_ffi(self.to_js()).unsafe_cast()
+  html_input_element_width_ffi(self.to_js())
 }
 
 ///|
-fn html_input_element_set_width_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLInputElement" "set_width"
+fn html_input_element_set_width_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLInputElement" "set_width"
 
 ///|
 impl THTMLInputElement with set_width(self : Self, value : UInt) -> Unit {
-  html_input_element_set_width_ffi(self.to_js(), TJsValue::to_js(value))
+  html_input_element_set_width_ffi(self.to_js(), value)
 }
 
 ///|
@@ -944,15 +944,12 @@ impl THTMLInputElement with selection_start(self : Self) -> UInt? {
 ///|
 fn html_input_element_set_selection_start_ffi(
   obj : JsValue,
-  value : JsValue,
+  value : UInt,
 ) -> Unit = "webapi_HTMLInputElement" "set_selectionStart"
 
 ///|
 impl THTMLInputElement with set_selection_start(self : Self, value : UInt) -> Unit {
-  html_input_element_set_selection_start_ffi(
-    self.to_js(),
-    TJsValue::to_js(value),
-  )
+  html_input_element_set_selection_start_ffi(self.to_js(), value)
 }
 
 ///|
@@ -966,12 +963,12 @@ impl THTMLInputElement with selection_end(self : Self) -> UInt? {
 ///|
 fn html_input_element_set_selection_end_ffi(
   obj : JsValue,
-  value : JsValue,
+  value : UInt,
 ) -> Unit = "webapi_HTMLInputElement" "set_selectionEnd"
 
 ///|
 impl THTMLInputElement with set_selection_end(self : Self, value : UInt) -> Unit {
-  html_input_element_set_selection_end_ffi(self.to_js(), TJsValue::to_js(value))
+  html_input_element_set_selection_end_ffi(self.to_js(), value)
 }
 
 ///|

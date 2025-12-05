@@ -28,17 +28,17 @@ impl TImageBitmap with close(self : Self) -> Unit {
 }
 
 ///|
-fn image_bitmap_width_ffi(obj : JsValue) -> JsValue = "webapi_ImageBitmap" "width"
+fn image_bitmap_width_ffi(obj : JsValue) -> UInt = "webapi_ImageBitmap" "width"
 
 ///|
 impl TImageBitmap with width(self : Self) -> UInt {
-  image_bitmap_width_ffi(self.to_js()).unsafe_cast()
+  image_bitmap_width_ffi(self.to_js())
 }
 
 ///|
-fn image_bitmap_height_ffi(obj : JsValue) -> JsValue = "webapi_ImageBitmap" "height"
+fn image_bitmap_height_ffi(obj : JsValue) -> UInt = "webapi_ImageBitmap" "height"
 
 ///|
 impl TImageBitmap with height(self : Self) -> UInt {
-  image_bitmap_height_ffi(self.to_js()).unsafe_cast()
+  image_bitmap_height_ffi(self.to_js())
 }

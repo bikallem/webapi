@@ -99,9 +99,9 @@ impl TUIEvent with detail(self : Self) -> Int {
 }
 
 ///|
-fn ui_event_which_ffi(obj : JsValue) -> JsValue = "webapi_UIEvent" "which"
+fn ui_event_which_ffi(obj : JsValue) -> UInt = "webapi_UIEvent" "which"
 
 ///|
 impl TUIEvent with which(self : Self) -> UInt {
-  ui_event_which_ffi(self.to_js()).unsafe_cast()
+  ui_event_which_ffi(self.to_js())
 }

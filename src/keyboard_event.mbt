@@ -165,11 +165,11 @@ impl TKeyboardEvent with code(self : Self) -> String {
 }
 
 ///|
-fn keyboard_event_location_ffi(obj : JsValue) -> JsValue = "webapi_KeyboardEvent" "location"
+fn keyboard_event_location_ffi(obj : JsValue) -> UInt = "webapi_KeyboardEvent" "location"
 
 ///|
 impl TKeyboardEvent with location(self : Self) -> UInt {
-  keyboard_event_location_ffi(self.to_js()).unsafe_cast()
+  keyboard_event_location_ffi(self.to_js())
 }
 
 ///|
@@ -221,17 +221,17 @@ impl TKeyboardEvent with is_composing(self : Self) -> Bool {
 }
 
 ///|
-fn keyboard_event_char_code_ffi(obj : JsValue) -> JsValue = "webapi_KeyboardEvent" "charCode"
+fn keyboard_event_char_code_ffi(obj : JsValue) -> UInt = "webapi_KeyboardEvent" "charCode"
 
 ///|
 impl TKeyboardEvent with char_code(self : Self) -> UInt {
-  keyboard_event_char_code_ffi(self.to_js()).unsafe_cast()
+  keyboard_event_char_code_ffi(self.to_js())
 }
 
 ///|
-fn keyboard_event_key_code_ffi(obj : JsValue) -> JsValue = "webapi_KeyboardEvent" "keyCode"
+fn keyboard_event_key_code_ffi(obj : JsValue) -> UInt = "webapi_KeyboardEvent" "keyCode"
 
 ///|
 impl TKeyboardEvent with key_code(self : Self) -> UInt {
-  keyboard_event_key_code_ffi(self.to_js()).unsafe_cast()
+  keyboard_event_key_code_ffi(self.to_js())
 }

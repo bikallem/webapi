@@ -36,9 +36,9 @@ impl THTMLCollection with named_item(self : Self, name : String) -> Element? {
 }
 
 ///|
-fn html_collection_length_ffi(obj : JsValue) -> JsValue = "webapi_HTMLCollection" "length"
+fn html_collection_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLCollection" "length"
 
 ///|
 impl THTMLCollection with length(self : Self) -> UInt {
-  html_collection_length_ffi(self.to_js()).unsafe_cast()
+  html_collection_length_ffi(self.to_js())
 }

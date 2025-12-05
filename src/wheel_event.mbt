@@ -82,9 +82,9 @@ impl TWheelEvent with delta_z(self : Self) -> Double {
 }
 
 ///|
-fn wheel_event_delta_mode_ffi(obj : JsValue) -> JsValue = "webapi_WheelEvent" "deltaMode"
+fn wheel_event_delta_mode_ffi(obj : JsValue) -> UInt = "webapi_WheelEvent" "deltaMode"
 
 ///|
 impl TWheelEvent with delta_mode(self : Self) -> UInt {
-  wheel_event_delta_mode_ffi(self.to_js()).unsafe_cast()
+  wheel_event_delta_mode_ffi(self.to_js())
 }

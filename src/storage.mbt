@@ -67,9 +67,9 @@ impl TStorage with clear(self : Self) -> Unit {
 }
 
 ///|
-fn storage_length_ffi(obj : JsValue) -> JsValue = "webapi_Storage" "length"
+fn storage_length_ffi(obj : JsValue) -> UInt = "webapi_Storage" "length"
 
 ///|
 impl TStorage with length(self : Self) -> UInt {
-  storage_length_ffi(self.to_js()).unsafe_cast()
+  storage_length_ffi(self.to_js())
 }

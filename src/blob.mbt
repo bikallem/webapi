@@ -102,11 +102,11 @@ impl TBlob with bytes(self : Self) -> JsPromise[Uint8Array] {
 }
 
 ///|
-fn blob_size_ffi(obj : JsValue) -> JsValue = "webapi_Blob" "size"
+fn blob_size_ffi(obj : JsValue) -> UInt64 = "webapi_Blob" "size"
 
 ///|
 impl TBlob with size(self : Self) -> UInt64 {
-  blob_size_ffi(self.to_js()).unsafe_cast()
+  blob_size_ffi(self.to_js())
 }
 
 ///|

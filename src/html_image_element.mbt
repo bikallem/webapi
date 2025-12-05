@@ -215,51 +215,51 @@ impl THTMLImageElement with set_is_map(self : Self, value : Bool) -> Unit {
 }
 
 ///|
-fn html_image_element_width_ffi(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "width"
+fn html_image_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "width"
 
 ///|
 impl THTMLImageElement with width(self : Self) -> UInt {
-  html_image_element_width_ffi(self.to_js()).unsafe_cast()
+  html_image_element_width_ffi(self.to_js())
 }
 
 ///|
-fn html_image_element_set_width_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLImageElement" "set_width"
+fn html_image_element_set_width_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLImageElement" "set_width"
 
 ///|
 impl THTMLImageElement with set_width(self : Self, value : UInt) -> Unit {
-  html_image_element_set_width_ffi(self.to_js(), TJsValue::to_js(value))
+  html_image_element_set_width_ffi(self.to_js(), value)
 }
 
 ///|
-fn html_image_element_height_ffi(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "height"
+fn html_image_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "height"
 
 ///|
 impl THTMLImageElement with height(self : Self) -> UInt {
-  html_image_element_height_ffi(self.to_js()).unsafe_cast()
+  html_image_element_height_ffi(self.to_js())
 }
 
 ///|
-fn html_image_element_set_height_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLImageElement" "set_height"
+fn html_image_element_set_height_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLImageElement" "set_height"
 
 ///|
 impl THTMLImageElement with set_height(self : Self, value : UInt) -> Unit {
-  html_image_element_set_height_ffi(self.to_js(), TJsValue::to_js(value))
+  html_image_element_set_height_ffi(self.to_js(), value)
 }
 
 ///|
-fn html_image_element_natural_width_ffi(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "naturalWidth"
+fn html_image_element_natural_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "naturalWidth"
 
 ///|
 impl THTMLImageElement with natural_width(self : Self) -> UInt {
-  html_image_element_natural_width_ffi(self.to_js()).unsafe_cast()
+  html_image_element_natural_width_ffi(self.to_js())
 }
 
 ///|
-fn html_image_element_natural_height_ffi(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "naturalHeight"
+fn html_image_element_natural_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "naturalHeight"
 
 ///|
 impl THTMLImageElement with natural_height(self : Self) -> UInt {
-  html_image_element_natural_height_ffi(self.to_js()).unsafe_cast()
+  html_image_element_natural_height_ffi(self.to_js())
 }
 
 ///|
@@ -397,35 +397,35 @@ impl THTMLImageElement with set_align(self : Self, value : String) -> Unit {
 }
 
 ///|
-fn html_image_element_hspace_ffi(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "hspace"
+fn html_image_element_hspace_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "hspace"
 
 ///|
 impl THTMLImageElement with hspace(self : Self) -> UInt {
-  html_image_element_hspace_ffi(self.to_js()).unsafe_cast()
+  html_image_element_hspace_ffi(self.to_js())
 }
 
 ///|
-fn html_image_element_set_hspace_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLImageElement" "set_hspace"
+fn html_image_element_set_hspace_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLImageElement" "set_hspace"
 
 ///|
 impl THTMLImageElement with set_hspace(self : Self, value : UInt) -> Unit {
-  html_image_element_set_hspace_ffi(self.to_js(), TJsValue::to_js(value))
+  html_image_element_set_hspace_ffi(self.to_js(), value)
 }
 
 ///|
-fn html_image_element_vspace_ffi(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "vspace"
+fn html_image_element_vspace_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "vspace"
 
 ///|
 impl THTMLImageElement with vspace(self : Self) -> UInt {
-  html_image_element_vspace_ffi(self.to_js()).unsafe_cast()
+  html_image_element_vspace_ffi(self.to_js())
 }
 
 ///|
-fn html_image_element_set_vspace_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLImageElement" "set_vspace"
+fn html_image_element_set_vspace_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLImageElement" "set_vspace"
 
 ///|
 impl THTMLImageElement with set_vspace(self : Self, value : UInt) -> Unit {
-  html_image_element_set_vspace_ffi(self.to_js(), TJsValue::to_js(value))
+  html_image_element_set_vspace_ffi(self.to_js(), value)
 }
 
 ///|

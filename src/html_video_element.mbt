@@ -27,51 +27,51 @@ pub impl THTMLVideoElement for HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement with to_js(self : HTMLVideoElement) -> JsValue = "%identity"
 
 ///|
-fn html_video_element_width_ffi(obj : JsValue) -> JsValue = "webapi_HTMLVideoElement" "width"
+fn html_video_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "width"
 
 ///|
 impl THTMLVideoElement with width(self : Self) -> UInt {
-  html_video_element_width_ffi(self.to_js()).unsafe_cast()
+  html_video_element_width_ffi(self.to_js())
 }
 
 ///|
-fn html_video_element_set_width_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLVideoElement" "set_width"
+fn html_video_element_set_width_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLVideoElement" "set_width"
 
 ///|
 impl THTMLVideoElement with set_width(self : Self, value : UInt) -> Unit {
-  html_video_element_set_width_ffi(self.to_js(), TJsValue::to_js(value))
+  html_video_element_set_width_ffi(self.to_js(), value)
 }
 
 ///|
-fn html_video_element_height_ffi(obj : JsValue) -> JsValue = "webapi_HTMLVideoElement" "height"
+fn html_video_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "height"
 
 ///|
 impl THTMLVideoElement with height(self : Self) -> UInt {
-  html_video_element_height_ffi(self.to_js()).unsafe_cast()
+  html_video_element_height_ffi(self.to_js())
 }
 
 ///|
-fn html_video_element_set_height_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLVideoElement" "set_height"
+fn html_video_element_set_height_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLVideoElement" "set_height"
 
 ///|
 impl THTMLVideoElement with set_height(self : Self, value : UInt) -> Unit {
-  html_video_element_set_height_ffi(self.to_js(), TJsValue::to_js(value))
+  html_video_element_set_height_ffi(self.to_js(), value)
 }
 
 ///|
-fn html_video_element_video_width_ffi(obj : JsValue) -> JsValue = "webapi_HTMLVideoElement" "videoWidth"
+fn html_video_element_video_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "videoWidth"
 
 ///|
 impl THTMLVideoElement with video_width(self : Self) -> UInt {
-  html_video_element_video_width_ffi(self.to_js()).unsafe_cast()
+  html_video_element_video_width_ffi(self.to_js())
 }
 
 ///|
-fn html_video_element_video_height_ffi(obj : JsValue) -> JsValue = "webapi_HTMLVideoElement" "videoHeight"
+fn html_video_element_video_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "videoHeight"
 
 ///|
 impl THTMLVideoElement with video_height(self : Self) -> UInt {
-  html_video_element_video_height_ffi(self.to_js()).unsafe_cast()
+  html_video_element_video_height_ffi(self.to_js())
 }
 
 ///|

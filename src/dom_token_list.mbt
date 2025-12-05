@@ -100,11 +100,11 @@ impl TDOMTokenList with supports(self : Self, token : String) -> Bool {
 }
 
 ///|
-fn dom_token_list_length_ffi(obj : JsValue) -> JsValue = "webapi_DOMTokenList" "length"
+fn dom_token_list_length_ffi(obj : JsValue) -> UInt = "webapi_DOMTokenList" "length"
 
 ///|
 impl TDOMTokenList with length(self : Self) -> UInt {
-  dom_token_list_length_ffi(self.to_js()).unsafe_cast()
+  dom_token_list_length_ffi(self.to_js())
 }
 
 ///|

@@ -73,19 +73,19 @@ pub fn ImageData::new2(
 }
 
 ///|
-fn image_data_width_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "width"
+fn image_data_width_ffi(obj : JsValue) -> UInt = "webapi_ImageData" "width"
 
 ///|
 impl TImageData with width(self : Self) -> UInt {
-  image_data_width_ffi(self.to_js()).unsafe_cast()
+  image_data_width_ffi(self.to_js())
 }
 
 ///|
-fn image_data_height_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "height"
+fn image_data_height_ffi(obj : JsValue) -> UInt = "webapi_ImageData" "height"
 
 ///|
 impl TImageData with height(self : Self) -> UInt {
-  image_data_height_ffi(self.to_js()).unsafe_cast()
+  image_data_height_ffi(self.to_js())
 }
 
 ///|

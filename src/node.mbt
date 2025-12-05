@@ -260,11 +260,11 @@ impl TNode with remove_child(self : Self, child : Node) -> Node {
 }
 
 ///|
-fn node_node_type_ffi(obj : JsValue) -> JsValue = "webapi_Node" "nodeType"
+fn node_node_type_ffi(obj : JsValue) -> UInt = "webapi_Node" "nodeType"
 
 ///|
 impl TNode with node_type(self : Self) -> UInt {
-  node_node_type_ffi(self.to_js()).unsafe_cast()
+  node_node_type_ffi(self.to_js())
 }
 
 ///|

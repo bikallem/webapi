@@ -1110,11 +1110,11 @@ impl TWindow with frames(self : Self) -> Window {
 }
 
 ///|
-fn window_length_ffi(obj : JsValue) -> JsValue = "webapi_Window" "length"
+fn window_length_ffi(obj : JsValue) -> UInt = "webapi_Window" "length"
 
 ///|
 impl TWindow with length(self : Self) -> UInt {
-  window_length_ffi(self.to_js()).unsafe_cast()
+  window_length_ffi(self.to_js())
 }
 
 ///|

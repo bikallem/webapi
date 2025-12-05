@@ -240,9 +240,9 @@ impl TNavigator with pdf_viewer_enabled(self : Self) -> Bool {
 }
 
 ///|
-fn navigator_hardware_concurrency_ffi(obj : JsValue) -> JsValue = "webapi_Navigator" "hardwareConcurrency"
+fn navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 = "webapi_Navigator" "hardwareConcurrency"
 
 ///|
 impl TNavigator with hardware_concurrency(self : Self) -> UInt64 {
-  navigator_hardware_concurrency_ffi(self.to_js()).unsafe_cast()
+  navigator_hardware_concurrency_ffi(self.to_js())
 }

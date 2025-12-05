@@ -112,11 +112,11 @@ impl TFileReader with abort(self : Self) -> Unit {
 }
 
 ///|
-fn file_reader_ready_state_ffi(obj : JsValue) -> JsValue = "webapi_FileReader" "readyState"
+fn file_reader_ready_state_ffi(obj : JsValue) -> UInt = "webapi_FileReader" "readyState"
 
 ///|
 impl TFileReader with ready_state(self : Self) -> UInt {
-  file_reader_ready_state_ffi(self.to_js()).unsafe_cast()
+  file_reader_ready_state_ffi(self.to_js())
 }
 
 ///|

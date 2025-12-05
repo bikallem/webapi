@@ -174,11 +174,11 @@ impl TCharacterData with set_data(self : Self, value : String) -> Unit {
 }
 
 ///|
-fn character_data_length_ffi(obj : JsValue) -> JsValue = "webapi_CharacterData" "length"
+fn character_data_length_ffi(obj : JsValue) -> UInt = "webapi_CharacterData" "length"
 
 ///|
 impl TCharacterData with length(self : Self) -> UInt {
-  character_data_length_ffi(self.to_js()).unsafe_cast()
+  character_data_length_ffi(self.to_js())
 }
 
 ///|

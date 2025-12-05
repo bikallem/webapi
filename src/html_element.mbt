@@ -622,19 +622,19 @@ impl THTMLElement with set_popover(self : Self, value : String) -> Unit {
 }
 
 ///|
-fn html_element_heading_offset_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "headingOffset"
+fn html_element_heading_offset_ffi(obj : JsValue) -> UInt = "webapi_HTMLElement" "headingOffset"
 
 ///|
 impl THTMLElement with heading_offset(self : Self) -> UInt {
-  html_element_heading_offset_ffi(self.to_js()).unsafe_cast()
+  html_element_heading_offset_ffi(self.to_js())
 }
 
 ///|
-fn html_element_set_heading_offset_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_headingOffset"
+fn html_element_set_heading_offset_ffi(obj : JsValue, value : UInt) -> Unit = "webapi_HTMLElement" "set_headingOffset"
 
 ///|
 impl THTMLElement with set_heading_offset(self : Self, value : UInt) -> Unit {
-  html_element_set_heading_offset_ffi(self.to_js(), TJsValue::to_js(value))
+  html_element_set_heading_offset_ffi(self.to_js(), value)
 }
 
 ///|

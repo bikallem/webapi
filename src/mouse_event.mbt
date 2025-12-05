@@ -306,11 +306,11 @@ impl TMouseEvent with button(self : Self) -> Int {
 }
 
 ///|
-fn mouse_event_buttons_ffi(obj : JsValue) -> JsValue = "webapi_MouseEvent" "buttons"
+fn mouse_event_buttons_ffi(obj : JsValue) -> UInt = "webapi_MouseEvent" "buttons"
 
 ///|
 impl TMouseEvent with buttons(self : Self) -> UInt {
-  mouse_event_buttons_ffi(self.to_js()).unsafe_cast()
+  mouse_event_buttons_ffi(self.to_js())
 }
 
 ///|

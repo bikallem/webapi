@@ -157,11 +157,11 @@ impl TEvent with current_target(self : Self) -> EventTarget? {
 }
 
 ///|
-fn event_event_phase_ffi(obj : JsValue) -> JsValue = "webapi_Event" "eventPhase"
+fn event_event_phase_ffi(obj : JsValue) -> UInt = "webapi_Event" "eventPhase"
 
 ///|
 impl TEvent with event_phase(self : Self) -> UInt {
-  event_event_phase_ffi(self.to_js()).unsafe_cast()
+  event_event_phase_ffi(self.to_js())
 }
 
 ///|

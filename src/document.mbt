@@ -1765,11 +1765,11 @@ impl TDocument with last_element_child(self : Self) -> Element? {
 }
 
 ///|
-fn document_child_element_count_ffi(obj : JsValue) -> JsValue = "webapi_Document" "childElementCount"
+fn document_child_element_count_ffi(obj : JsValue) -> UInt = "webapi_Document" "childElementCount"
 
 ///|
 impl TDocument with child_element_count(self : Self) -> UInt {
-  document_child_element_count_ffi(self.to_js()).unsafe_cast()
+  document_child_element_count_ffi(self.to_js())
 }
 
 ///|

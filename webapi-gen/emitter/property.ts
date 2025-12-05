@@ -2,6 +2,7 @@ import { ParsedInterface, ParsedProperty, ParsedType } from '../types.js';
 import { toSnakeCase, escapeKeyword, toFfiModuleName, toTraitName } from '../utils.js';
 import { mapIdlType, formatReturnType, isKnownEnum, isKnownUnionType } from '../mapping.js';
 import { generatePropertyGetterFfiName, generatePropertySetterFfiName } from './namingUtils.js';
+import { isFfiSafeType } from './ffiUtils.js';
 
 /**
  * Get the context name for a property type if it's a union
@@ -101,17 +102,6 @@ export function emitTraitProperties(iface: ParsedInterface, hasDefaultImpl: bool
   }
 
   return lines;
-}
-
-/**
- * Check if a type is valid for FFI stubs
- */
-function isFfiSafeType(moonbitType: string): boolean {
-  // Arrays, optionals and generics are not FFI-safe
-  if (moonbitType.includes("[") || moonbitType.includes("?")) return false;
-  // Only primitives and JsValue are safe
-  const safePrimitives = ["Bool", "Int", "Int64", "Double", "String", "Unit", "JsValue"];
-  return safePrimitives.includes(moonbitType);
 }
 
 /**

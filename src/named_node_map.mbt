@@ -126,9 +126,9 @@ impl TNamedNodeMap with remove_named_item_ns(
 }
 
 ///|
-fn named_node_map_length_ffi(obj : JsValue) -> JsValue = "webapi_NamedNodeMap" "length"
+fn named_node_map_length_ffi(obj : JsValue) -> UInt = "webapi_NamedNodeMap" "length"
 
 ///|
 impl TNamedNodeMap with length(self : Self) -> UInt {
-  named_node_map_length_ffi(self.to_js()).unsafe_cast()
+  named_node_map_length_ffi(self.to_js())
 }

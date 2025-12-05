@@ -99,11 +99,11 @@ impl THistory with replace_state(
 }
 
 ///|
-fn history_length_ffi(obj : JsValue) -> JsValue = "webapi_History" "length"
+fn history_length_ffi(obj : JsValue) -> UInt = "webapi_History" "length"
 
 ///|
 impl THistory with length(self : Self) -> UInt {
-  history_length_ffi(self.to_js()).unsafe_cast()
+  history_length_ffi(self.to_js())
 }
 
 ///|

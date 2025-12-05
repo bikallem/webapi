@@ -27,9 +27,9 @@ impl TFileList with item(self : Self, index : UInt) -> JsValue? {
 }
 
 ///|
-fn file_list_length_ffi(obj : JsValue) -> JsValue = "webapi_FileList" "length"
+fn file_list_length_ffi(obj : JsValue) -> UInt = "webapi_FileList" "length"
 
 ///|
 impl TFileList with length(self : Self) -> UInt {
-  file_list_length_ffi(self.to_js()).unsafe_cast()
+  file_list_length_ffi(self.to_js())
 }

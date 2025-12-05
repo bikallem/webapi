@@ -159,9 +159,9 @@ impl TDocumentFragment with last_element_child(self : Self) -> Element? {
 }
 
 ///|
-fn document_fragment_child_element_count_ffi(obj : JsValue) -> JsValue = "webapi_DocumentFragment" "childElementCount"
+fn document_fragment_child_element_count_ffi(obj : JsValue) -> UInt = "webapi_DocumentFragment" "childElementCount"
 
 ///|
 impl TDocumentFragment with child_element_count(self : Self) -> UInt {
-  document_fragment_child_element_count_ffi(self.to_js()).unsafe_cast()
+  document_fragment_child_element_count_ffi(self.to_js())
 }
