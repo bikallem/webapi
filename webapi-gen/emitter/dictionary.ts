@@ -4,14 +4,14 @@
  * Generates MoonBit code for Web IDL dictionaries (options objects).
  */
 
-import type { ParsedDictionary } from "../types.js";
+import type { ParsedDictionary } from "../idl-model.js";
 import {
   toSnakeCase,
   escapeKeyword,
   toFfiModuleName,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "../utils.js";
+} from "../gen-utils.js";
 import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
 
 /**

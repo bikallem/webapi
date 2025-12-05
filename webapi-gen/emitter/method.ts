@@ -10,14 +10,14 @@ import {
   type ParsedType,
   type ParsedIdl,
   unwrapNullableType,
-} from "../types.js";
+} from "../idl-model.js";
 import {
   toSnakeCase,
   escapeKeyword,
   toFfiModuleName,
   toTraitName,
   generateMethodFfiName,
-} from "../utils.js";
+} from "../gen-utils.js";
 import {
   mapIdlType,
   formatReturnType,

@@ -1,4 +1,4 @@
-import { ParsedInterface, ParsedProperty } from "../types.js";
+import { ParsedInterface, ParsedProperty } from "../idl-model.js";
 import {
   toSnakeCase,
   escapeKeyword,
@@ -7,7 +7,7 @@ import {
   generatePropertyGetterFfiName,
   generatePropertySetterFfiName,
   isFfiSafeType,
-} from "../utils.js";
+} from "../gen-utils.js";
 import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapping.js";
 
 /**

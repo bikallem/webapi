@@ -4,8 +4,8 @@
  * Maps Web IDL types to MoonBit types and provides conversion expressions.
  */
 
-import type { ParsedType } from "./types.js";
-import { escapeKeyword, toSnakeCase } from "./utils.js";
+import type { ParsedType } from "./idl-model.js";
+import { escapeKeyword, toSnakeCase } from "./gen-utils.js";
 
 /**
  * Map of Web IDL primitive types to MoonBit types

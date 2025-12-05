@@ -12,8 +12,8 @@ import type {
   ParsedCallback,
   ParsedMethod,
   ParsedProperty,
-} from "../types.js";
-import { toFfiModuleName } from "../utils.js";
+} from "../idl-model.js";
+import { toFfiModuleName } from "../gen-utils.js";
 
 /**
  * JavaScript reserved keywords that need escaping when used as parameter names

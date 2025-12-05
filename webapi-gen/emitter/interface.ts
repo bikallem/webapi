@@ -8,13 +8,13 @@
  * - Trait implementation
  */
 
-import type { ParsedInterface, ParsedIdl } from "../types.js";
+import type { ParsedInterface, ParsedIdl } from "../idl-model.js";
 import {
   toSnakeCase,
   toTraitName,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "../utils.js";
+} from "../gen-utils.js";
 import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";

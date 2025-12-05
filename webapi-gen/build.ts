@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 import { minify } from "terser";
 
 import { parseIdl, mergeIdl, applyMixins } from "./widlprocess.js";
-import type { ParsedIdl } from "./types.js";
+import type { ParsedIdl } from "./idl-model.js";
 import {
   registerDictionaries,
   registerEnums,

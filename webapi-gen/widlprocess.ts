@@ -18,7 +18,7 @@ import type {
   ParsedParam,
   ParsedType,
   ParsedDictionaryMember,
-} from "./types.js";
+} from "./idl-model.js";
 
 /**
  * Convert a single AST definition back to IDL source text

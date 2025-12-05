@@ -11,12 +11,12 @@ import {
   type ParsedIdl,
   unwrapNullableType,
   getReferenceTypeName,
-} from "../types.js";
+} from "../idl-model.js";
 import {
   toSnakeCase,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "../utils.js";
+} from "../gen-utils.js";
 import { isKnownTypedef } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 
