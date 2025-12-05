@@ -7,6 +7,18 @@
 pub type Event
 
 ///|
+pub const NONE : UInt = 0
+
+///|
+pub const CAPTURING_PHASE : UInt = 1
+
+///|
+pub const AT_TARGET : UInt = 2
+
+///|
+pub const BUBBLING_PHASE : UInt = 3
+
+///|
 pub trait TEvent: TJsValue {
   type_(self : Self) -> String = _
   target(self : Self) -> EventTarget? = _

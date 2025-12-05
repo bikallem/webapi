@@ -51,6 +51,22 @@ function hasSubtypes(iface: ParsedInterface, interfaces: Map<string, ParsedInter
   }
   return false;
 }
+
+/**
+ * Emit interface constants as MoonBit pub const values
+ */
+function emitConstants(iface: ParsedInterface): string | undefined {
+  if (iface.constants.length === 0) return undefined;
+
+  const lines: string[] = ["///|"];
+
+  for (const constant of iface.constants) {
+    const mapped = mapIdlType(constant.type, `${iface.name}::${constant.name}`);
+    lines.push(`pub const ${constant.name} : ${mapped.moonbitType} = ${constant.value}`);
+  }
+
+  return lines.join("\n");
+}
 /**
  * Emit the external type declaration
  */
@@ -250,6 +266,11 @@ export function emitInterface(
 
   // External type declaration - now generated for all interfaces including abstract ones
   parts.push(emitExternalType(iface));
+
+  const constantsBlock = emitConstants(iface);
+  if (constantsBlock) {
+    parts.push(constantsBlock);
+  }
 
   // Trait definition - all traits have default implementations (= _)
   parts.push(emitTraitDefinition(iface, idl.interfaces));

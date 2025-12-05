@@ -7,6 +7,15 @@
 pub type WheelEvent
 
 ///|
+pub const DOM_DELTA_PIXEL : UInt = 0x00
+
+///|
+pub const DOM_DELTA_LINE : UInt = 0x01
+
+///|
+pub const DOM_DELTA_PAGE : UInt = 0x02
+
+///|
 pub trait TWheelEvent: TJsValue + TMouseEvent {
   delta_x(self : Self) -> Double = _
   delta_y(self : Self) -> Double = _

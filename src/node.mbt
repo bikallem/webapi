@@ -7,6 +7,60 @@
 pub type Node
 
 ///|
+pub const ELEMENT_NODE : UInt = 1
+
+///|
+pub const ATTRIBUTE_NODE : UInt = 2
+
+///|
+pub const TEXT_NODE : UInt = 3
+
+///|
+pub const CDATA_SECTION_NODE : UInt = 4
+
+///|
+pub const ENTITY_REFERENCE_NODE : UInt = 5
+
+///|
+pub const ENTITY_NODE : UInt = 6
+
+///|
+pub const PROCESSING_INSTRUCTION_NODE : UInt = 7
+
+///|
+pub const COMMENT_NODE : UInt = 8
+
+///|
+pub const DOCUMENT_NODE : UInt = 9
+
+///|
+pub const DOCUMENT_TYPE_NODE : UInt = 10
+
+///|
+pub const DOCUMENT_FRAGMENT_NODE : UInt = 11
+
+///|
+pub const NOTATION_NODE : UInt = 12
+
+///|
+pub const DOCUMENT_POSITION_DISCONNECTED : UInt = 0x01
+
+///|
+pub const DOCUMENT_POSITION_PRECEDING : UInt = 0x02
+
+///|
+pub const DOCUMENT_POSITION_FOLLOWING : UInt = 0x04
+
+///|
+pub const DOCUMENT_POSITION_CONTAINS : UInt = 0x08
+
+///|
+pub const DOCUMENT_POSITION_CONTAINED_BY : UInt = 0x10
+
+///|
+pub const DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : UInt = 0x20
+
+///|
 pub trait TNode: TJsValue + TEventTarget {
   node_type(self : Self) -> UInt = _
   node_name(self : Self) -> String = _

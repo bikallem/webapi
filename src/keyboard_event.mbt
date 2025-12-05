@@ -7,6 +7,18 @@
 pub type KeyboardEvent
 
 ///|
+pub const DOM_KEY_LOCATION_STANDARD : UInt = 0x00
+
+///|
+pub const DOM_KEY_LOCATION_LEFT : UInt = 0x01
+
+///|
+pub const DOM_KEY_LOCATION_RIGHT : UInt = 0x02
+
+///|
+pub const DOM_KEY_LOCATION_NUMPAD : UInt = 0x03
+
+///|
 pub trait TKeyboardEvent: TJsValue + TUIEvent {
   key(self : Self) -> String = _
   code(self : Self) -> String = _

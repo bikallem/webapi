@@ -2,6 +2,72 @@
 package "bikallem/webapi"
 
 // Values
+pub const ATTRIBUTE_NODE : UInt = 2
+
+pub const AT_TARGET : UInt = 2
+
+pub const BUBBLING_PHASE : UInt = 3
+
+pub const CAPTURING_PHASE : UInt = 1
+
+pub const CDATA_SECTION_NODE : UInt = 4
+
+pub const COMMENT_NODE : UInt = 8
+
+pub const DOCUMENT_FRAGMENT_NODE : UInt = 11
+
+pub const DOCUMENT_NODE : UInt = 9
+
+pub const DOCUMENT_POSITION_CONTAINED_BY : UInt = 0x10
+
+pub const DOCUMENT_POSITION_CONTAINS : UInt = 0x08
+
+pub const DOCUMENT_POSITION_DISCONNECTED : UInt = 0x01
+
+pub const DOCUMENT_POSITION_FOLLOWING : UInt = 0x04
+
+pub const DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : UInt = 0x20
+
+pub const DOCUMENT_POSITION_PRECEDING : UInt = 0x02
+
+pub const DOCUMENT_TYPE_NODE : UInt = 10
+
+pub const DOM_DELTA_LINE : UInt = 0x01
+
+pub const DOM_DELTA_PAGE : UInt = 0x02
+
+pub const DOM_DELTA_PIXEL : UInt = 0x00
+
+pub const DOM_KEY_LOCATION_LEFT : UInt = 0x01
+
+pub const DOM_KEY_LOCATION_NUMPAD : UInt = 0x03
+
+pub const DOM_KEY_LOCATION_RIGHT : UInt = 0x02
+
+pub const DOM_KEY_LOCATION_STANDARD : UInt = 0x00
+
+pub const ELEMENT_NODE : UInt = 1
+
+pub const END_TO_END : UInt = 2
+
+pub const END_TO_START : UInt = 3
+
+pub const ENTITY_NODE : UInt = 6
+
+pub const ENTITY_REFERENCE_NODE : UInt = 5
+
+pub const NONE : UInt = 0
+
+pub const NOTATION_NODE : UInt = 12
+
+pub const PROCESSING_INSTRUCTION_NODE : UInt = 7
+
+pub const START_TO_END : UInt = 1
+
+pub const START_TO_START : UInt = 0
+
+pub const TEXT_NODE : UInt = 3
+
 pub fn[T : TJsValue] array_to_js(Array[T]) -> JsValue
 
 pub fn default_js_value() -> JsValue

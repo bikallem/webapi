@@ -7,6 +7,18 @@
 pub type Range
 
 ///|
+pub const START_TO_START : UInt = 0
+
+///|
+pub const START_TO_END : UInt = 1
+
+///|
+pub const END_TO_END : UInt = 2
+
+///|
+pub const END_TO_START : UInt = 3
+
+///|
 pub trait TRange: TJsValue {
   common_ancestor_container(self : Self) -> Node = _
   get_client_rects(self : Self) -> JsValue = _
