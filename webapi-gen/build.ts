@@ -108,7 +108,7 @@ const EXCLUDED_TYPEDEFS = new Set([
  * Filter interfaces to core DOM APIs
  * This set is extended dynamically with interfaces referenced in typedef unions
  */
-let CORE_INTERFACES = new Set([
+const CORE_INTERFACES = new Set([
   // EventTarget hierarchy
   "EventTarget",
   "Event",
@@ -236,6 +236,7 @@ async function fetchIdl(): Promise<ParsedIdl[]> {
     console.log(`  Parsing ${specName}...`);
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const idlText = await (idlFile as any).text();
       const parsed = parseIdl(idlText);
       parsedIdls.push(parsed);

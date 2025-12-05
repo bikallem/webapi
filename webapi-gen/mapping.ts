@@ -520,7 +520,7 @@ export function formatParam(
   const mapped = mapIdlType(type);
   const safeName = escapeKeyword(toSnakeCase(name));
 
-  let typeStr = mapped.moonbitType;
+  const typeStr = mapped.moonbitType;
 
   if (optional || mapped.isOptional) {
     if (defaultValue) {

@@ -32,100 +32,60 @@ function getIdlSource(def: webidl2.IDLRootType): string {
 }
 
 /**
- * Parse a Web IDL type to our internal representation
+ * Parse a generic type (sequence, Promise, etc.)
  */
-function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
-  if (idlType.generic) {
-    // Generic types like sequence<T>, Promise<T>, FrozenArray<T>
-    const generic = idlType.generic.toLowerCase();
-    const innerTypes = idlType.idlType as webidl2.IDLTypeDescription[];
+function parseGenericType(idlType: webidl2.IDLTypeDescription): ParsedType {
+  const generic = idlType.generic.toLowerCase();
+  const innerTypes = idlType.idlType as webidl2.IDLTypeDescription[];
 
-    if (generic === "sequence") {
-      return {
-        type: "sequence",
-        elementType: parseIdlType(innerTypes[0]),
-      };
-    } else if (generic === "promise") {
-      return {
-        type: "promise",
-        elementType: parseIdlType(innerTypes[0]),
-      };
-    } else if (generic === "frozenarray") {
-      return {
-        type: "frozen-array",
-        elementType: parseIdlType(innerTypes[0]),
-      };
-    } else if (generic === "observablearray") {
-      // ObservableArray<T> is similar to Array<T> for our purposes
-      return {
-        type: "sequence",
-        elementType: parseIdlType(innerTypes[0]),
-      };
-    } else if (generic === "record") {
-      return {
-        type: "record",
-        keyType: parseIdlType(innerTypes[0]),
-        valueType: parseIdlType(innerTypes[1]),
-      };
-    }
-  }
-
-  if (idlType.union) {
-    // Union types like (DOMString or long)
-    const memberTypes = (idlType.idlType as webidl2.IDLTypeDescription[]).map(parseIdlType);
+  if (generic === "sequence") {
     return {
-      type: "union",
-      memberTypes,
+      type: "sequence",
+      elementType: parseIdlType(innerTypes[0]),
+    };
+  } else if (generic === "promise") {
+    return {
+      type: "promise",
+      elementType: parseIdlType(innerTypes[0]),
+    };
+  } else if (generic === "frozenarray") {
+    return {
+      type: "frozen-array",
+      elementType: parseIdlType(innerTypes[0]),
+    };
+  } else if (generic === "observablearray") {
+    // ObservableArray<T> is similar to Array<T> for our purposes
+    return {
+      type: "sequence",
+      elementType: parseIdlType(innerTypes[0]),
+    };
+  } else if (generic === "record") {
+    return {
+      type: "record",
+      keyType: parseIdlType(innerTypes[0]),
+      valueType: parseIdlType(innerTypes[1]),
     };
   }
+  
+  // Fallback for unknown generics
+  return { type: "any" };
+}
 
-  if (idlType.nullable) {
-    // Nullable types like DOMString?
-    // We need to get the non-nullable version by parsing without the nullable flag
-    // Since webidl2 uses getters, we can't just spread the object
-    const innerTypeName = idlType.idlType as string;
+/**
+ * Parse a union type
+ */
+function parseUnionType(idlType: webidl2.IDLTypeDescription): ParsedType {
+  const memberTypes = (idlType.idlType as webidl2.IDLTypeDescription[]).map(parseIdlType);
+  return {
+    type: "union",
+    memberTypes,
+  };
+}
 
-    // Check what the inner type is
-    if (typeof innerTypeName === "string") {
-      // Simple nullable type like EventListener?
-      const primitives = [
-        "boolean", "byte", "octet", "short", "unsigned short",
-        "long", "unsigned long", "long long", "unsigned long long",
-        "float", "unrestricted float", "double", "unrestricted double",
-        "DOMString", "USVString", "ByteString", "bigint",
-        "undefined", "void", "any", "object"
-      ];
-
-      let elementType: ParsedType;
-      if (innerTypeName === "any") {
-        elementType = { type: "any" };
-      } else if (innerTypeName === "undefined" || innerTypeName === "void") {
-        elementType = { type: "void" };
-      } else if (primitives.includes(innerTypeName)) {
-        elementType = { type: "primitive", name: innerTypeName };
-      } else {
-        elementType = { type: "reference", name: innerTypeName };
-      }
-
-      return {
-        type: "nullable",
-        elementType,
-      };
-    } else {
-      // Complex nullable type - recurse on inner types
-      const innerTypes = idlType.idlType as webidl2.IDLTypeDescription[];
-      // This shouldn't really happen for nullable, but handle it
-      return {
-        type: "nullable",
-        elementType: parseIdlType(innerTypes[0]),
-      };
-    }
-  }
-
-  // Simple type reference
-  const typeName = idlType.idlType as string;
-
-  // Check for primitive types
+/**
+ * Parse a simple type name (primitive or reference)
+ */
+function parseSimpleType(typeName: string): ParsedType {
   const primitives = [
     "boolean", "byte", "octet", "short", "unsigned short",
     "long", "unsigned long", "long long", "unsigned long long",
@@ -148,6 +108,47 @@ function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
 
   // Reference to another type
   return { type: "reference", name: typeName };
+}
+
+/**
+ * Parse a nullable type
+ */
+function parseNullableType(idlType: webidl2.IDLTypeDescription): ParsedType {
+  const innerTypeName = idlType.idlType;
+  let elementType: ParsedType;
+
+  if (typeof innerTypeName === "string") {
+    elementType = parseSimpleType(innerTypeName);
+  } else {
+    // Complex nullable type - recurse on inner types
+    const innerTypes = idlType.idlType as webidl2.IDLTypeDescription[];
+    elementType = parseIdlType(innerTypes[0]);
+  }
+
+  return {
+    type: "nullable",
+    elementType,
+  };
+}
+
+/**
+ * Parse a Web IDL type to our internal representation
+ */
+function parseIdlType(idlType: webidl2.IDLTypeDescription): ParsedType {
+  if (idlType.generic) {
+    return parseGenericType(idlType);
+  }
+
+  if (idlType.union) {
+    return parseUnionType(idlType);
+  }
+
+  if (idlType.nullable) {
+    return parseNullableType(idlType);
+  }
+
+  // Simple type reference
+  return parseSimpleType(idlType.idlType as string);
 }
 
 /**
@@ -228,15 +229,16 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
         });
         break;
 
-      case "const":
+      case "const": {
         constants.push({
           name: member.name,
           type: parseIdlType(member.idlType),
           value: stringifyDefault(member.value),
         });
         break;
+      }
 
-      case "constructor":
+      case "constructor": {
         const isHTMLConstructor = member.extAttrs?.some(
           (attr: { name: string }) => attr.name === "HTMLConstructor"
         ) ?? false;
@@ -245,6 +247,7 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
           isHTMLConstructor,
         });
         break;
+      }
 
       case "iterable":
       case "maplike":
@@ -306,7 +309,7 @@ export function parseIdl(idlText: string): ParsedIdl {
   for (const def of ast) {
     switch (def.type) {
       case "interface":
-      case "interface mixin":
+      case "interface mixin": {
         const iface = parseInterface(def);
         if (result.interfaces.has(iface.name)) {
           // Merge partial interface
@@ -315,8 +318,9 @@ export function parseIdl(idlText: string): ParsedIdl {
           result.interfaces.set(iface.name, iface);
         }
         break;
+      }
 
-      case "dictionary":
+      case "dictionary": {
         const dict: ParsedDictionary = {
           name: def.name,
           inheritance: def.inheritance ?? undefined,
@@ -330,16 +334,18 @@ export function parseIdl(idlText: string): ParsedIdl {
           result.dictionaries.set(dict.name, dict);
         }
         break;
+      }
 
-      case "enum":
+      case "enum": {
         result.enums.set(def.name, {
           name: def.name,
           values: def.values.map((v) => v.value),
           idlSource: getIdlSource(def),
         });
         break;
+      }
 
-      case "callback":
+      case "callback": {
         result.callbacks.set(def.name, {
           name: def.name,
           params: parseParams(def.arguments),
@@ -347,30 +353,34 @@ export function parseIdl(idlText: string): ParsedIdl {
           idlSource: getIdlSource(def),
         });
         break;
+      }
 
-      case "typedef":
+      case "typedef": {
         result.typedefs.set(def.name, {
           name: def.name,
           type: parseIdlType(def.idlType),
           idlSource: getIdlSource(def),
         });
         break;
+      }
 
-      case "includes":
+      case "includes": {
         result.includes.push({
           target: def.target,
           mixin: def.includes,
         });
         break;
+      }
 
-      case "callback interface":
+      case "callback interface": {
         // Treat callback interface similar to regular interface but mark it
         const cbIface = parseInterface(def as unknown as webidl2.InterfaceType);
         cbIface.isCallbackInterface = true;
         result.interfaces.set(cbIface.name, cbIface);
         break;
+      }
 
-      case "namespace":
+      case "namespace": {
         // Treat namespace as static-only interface
         const ns: ParsedInterface = {
           name: def.name,
@@ -405,6 +415,7 @@ export function parseIdl(idlText: string): ParsedIdl {
           result.interfaces.set(ns.name, ns);
         }
         break;
+      }
     }
   }
 

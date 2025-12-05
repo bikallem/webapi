@@ -16,7 +16,7 @@ function toVariantName(value: string): string {
     }
     // Split by `-`, `/`, and `+` and join as PascalCase
     let name = value
-        .split(/[-\/\+]/)
+        .split(/[-/+]/)
         .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
         .join('');
 

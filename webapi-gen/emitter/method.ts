@@ -50,7 +50,7 @@ function getUnionArgTraitName(methodName: string, paramName: string): string {
  * Returns empty string if union collapses to single type or if already emitted
  * Skips fully abstract interface types (they have no external type)
  */
-function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType, idl: ParsedIdl): string {
+function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType, _idl: ParsedIdl): string {
   if (unionType.type !== "union" || !unionType.memberTypes) {
     return "";
   }
