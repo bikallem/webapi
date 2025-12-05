@@ -148,19 +148,21 @@ TEventTarget
 ### Type Mapping
 
 | WebIDL | MoonBit |
-|--------|---------|----------|
-| `DOMString` | `String` |
+|--------|---------|
+| `DOMString`, `USVString`, `ByteString` | `String` |
 | `boolean` | `Bool` |
-| `byte`, `octet` | `Byte` |
+| `byte` | `Int` |
+| `octet` | `Byte` |
 | `short` | `Int` |
 | `unsigned short` | `UInt` |
 | `long` | `Int` |
 | `unsigned long` | `UInt` |
-| `long long` | `Int64` |
+| `long long`, `bigint` | `Int64` |
 | `unsigned long long` | `UInt64` |
-| `float` | `Float` |
-| `double` | `Double` |
-| `any` | `JsValue` |
+| `float`, `unrestricted float` | `Float` |
+| `double`, `unrestricted double` | `Double` |
+| `any`, `object` | `JsValue` |
+| `undefined` | `Unit` |
 | `sequence<T>` | `Array[T]` |
 | `Promise<T>` | `JsPromise[T]` |
 | enum types | MoonBit `enum` |
