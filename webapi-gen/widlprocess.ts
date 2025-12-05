@@ -66,7 +66,7 @@ function parseGenericType(idlType: webidl2.IDLTypeDescription): ParsedType {
       valueType: parseIdlType(innerTypes[1]),
     };
   }
-  
+
   // Fallback for unknown generics
   return { type: "any" };
 }
