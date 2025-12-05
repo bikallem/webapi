@@ -5,12 +5,14 @@
  */
 
 import type { ParsedDictionary } from "../types.js";
-import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
-import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
 import {
+  toSnakeCase,
+  escapeKeyword,
+  toFfiModuleName,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "./common.js";
+} from "../utils.js";
+import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
 
 /**
  * Emit external type declaration for dictionary

@@ -6,9 +6,9 @@ import {
   toTraitName,
   generatePropertyGetterFfiName,
   generatePropertySetterFfiName,
+  isFfiSafeType,
 } from "../utils.js";
 import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapping.js";
-import { isFfiSafeType } from "./ffiUtils.js";
 
 /**
  * Get the context name for a property type if it's a union

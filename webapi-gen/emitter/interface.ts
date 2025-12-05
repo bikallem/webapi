@@ -9,16 +9,17 @@
  */
 
 import type { ParsedInterface, ParsedIdl } from "../types.js";
-import { toSnakeCase, toTraitName } from "../utils.js";
+import {
+  toSnakeCase,
+  toTraitName,
+  emitExternalType as emitExternalTypeCommon,
+  emitTJsValueImpl as emitTJsValueImplCommon,
+} from "../utils.js";
 import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
 import { mapIdlType, isAbstractInterface } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
-import {
-  emitExternalType as emitExternalTypeCommon,
-  emitTJsValueImpl as emitTJsValueImplCommon,
-} from "./common.js";
 
 /**
  * Check if an interface has a real constructor (not [HTMLConstructor])

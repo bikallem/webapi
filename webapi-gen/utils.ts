@@ -199,10 +199,89 @@ export function joinBlocks(...blocks: (string | undefined)[]): string {
  */
 export function formatIdlSourceAsComment(
   idlSource: string | undefined,
-): string | undefined {
-  if (!idlSource) return undefined;
+): string {
+  if (!idlSource) return "";
+  return idlSource
+    .split("\n")
+    .map((line) => `// ${line}`)
+    .join("\n");
+}
 
-  const lines = idlSource.split("\n");
-  const commentLines = lines.map((line) => `// ${line}`);
-  return commentLines.join("\n");
+/**
+ * FFI Safety Utilities
+ *
+ * Utilities for checking FFI safety and parameter validation
+ */
+
+/**
+ * Safe primitive types that can be used in FFI declarations
+ */
+const FFI_SAFE_PRIMITIVES = new Set([
+  "Bool",
+  "Int",
+  "Int64",
+  "UInt",
+  "UInt64",
+  "Double",
+  "Float",
+  "String",
+  "Unit",
+  "JsValue",
+]);
+
+/**
+ * Check if a MoonBit type is safe to use in FFI declarations
+ *
+ * FFI declarations cannot use:
+ * - Closure types (contain "->")
+ * - Generic/array types (contain "[")
+ * - Optional types (contain "?")
+ * - Trait object types (start with "&")
+ *
+ * Safe types: primitives and JsValue
+ */
+export function isFfiSafeType(moonbitType: string): boolean {
+  // Closure types are not FFI safe
+  if (moonbitType.includes("->")) {
+    return false;
+  }
+
+  // Arrays, generics, and optionals are not FFI-safe
+  if (moonbitType.includes("[") || moonbitType.includes("?")) {
+    return false;
+  }
+
+  // Trait object types are not FFI-safe
+  if (moonbitType.startsWith("&")) {
+    return false;
+  }
+
+  // Only allow known safe primitives
+  return FFI_SAFE_PRIMITIVES.has(moonbitType);
+}
+
+/**
+ * Common Emitter Utilities
+ *
+ * Shared code generation functions used across multiple emitters
+ * to reduce duplication and ensure consistency.
+ */
+
+/**
+ * Emit external type declaration
+ * Example: #external pub type EventHandler
+ */
+export function emitExternalType(typeName: string): string {
+  return `///|
+#external
+pub type ${typeName}`;
+}
+
+/**
+ * Emit TJsValue implementation for a type
+ * Example: pub impl TJsValue for EventHandler with to_js(self : EventHandler) -> JsValue = "%identity"
+ */
+export function emitTJsValueImpl(typeName: string): string {
+  return `///|
+pub impl TJsValue for ${typeName} with to_js(self : ${typeName}) -> JsValue = "%identity"`;
 }

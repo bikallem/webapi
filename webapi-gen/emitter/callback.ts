@@ -5,12 +5,13 @@
  */
 
 import type { ParsedCallback, ParsedParam, ParsedType } from "../types.js";
-import { toSnakeCase, toFfiModuleName } from "../utils.js";
-import { mapIdlType, formatReturnType } from "../mapping.js";
 import {
+  toSnakeCase,
+  toFfiModuleName,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "./common.js";
+} from "../utils.js";
+import { mapIdlType, formatReturnType } from "../mapping.js";
 
 /**
  * Generate a closure type string from parameters and return type

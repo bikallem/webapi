@@ -12,13 +12,13 @@ import {
   unwrapNullableType,
   getReferenceTypeName,
 } from "../types.js";
-import { toSnakeCase } from "../utils.js";
-import { isKnownTypedef } from "../mapping.js";
-import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 import {
+  toSnakeCase,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "./common.js";
+} from "../utils.js";
+import { isKnownTypedef } from "../mapping.js";
+import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 
 /**
  * Emit external type declaration for typedef
