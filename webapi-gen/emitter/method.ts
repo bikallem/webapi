@@ -4,11 +4,12 @@
  * Generates MoonBit FFI functions and trait method signatures for Web IDL methods.
  */
 
-import type {
-  ParsedInterface,
-  ParsedMethod,
-  ParsedType,
-  ParsedIdl,
+import {
+  type ParsedInterface,
+  type ParsedMethod,
+  type ParsedType,
+  type ParsedIdl,
+  unwrapNullableType,
 } from "../types.js";
 import {
   toSnakeCase,
@@ -27,7 +28,6 @@ import {
   getFilteredUnionMembers,
   getCollapsedUnionType,
 } from "./unionUtils.js";
-import { unwrapNullableType } from "./typeUtils.js";
 import { generateMethodFfiName } from "./namingUtils.js";
 
 /**

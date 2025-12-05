@@ -6,7 +6,12 @@
  * For unions: typedef (Type1 or Type2 or Type3) UnionName;
  */
 
-import type { ParsedTypedef, ParsedIdl } from "../types.js";
+import {
+  type ParsedTypedef,
+  type ParsedIdl,
+  unwrapNullableType,
+  getReferenceTypeName,
+} from "../types.js";
 import { toSnakeCase } from "../utils.js";
 import { isKnownTypedef } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
@@ -14,7 +19,6 @@ import {
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
 } from "./common.js";
-import { unwrapNullableType, getReferenceTypeName } from "./typeUtils.js";
 
 /**
  * Emit external type declaration for typedef
