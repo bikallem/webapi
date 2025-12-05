@@ -1,0 +1,1 @@
+enum TextTrackKind { "subtitles",  "captions",  "descriptions",  "chapters",  "metadata" };

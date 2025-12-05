@@ -1,0 +1,1 @@
+enum CanvasLineJoin { "round", "bevel", "miter" };

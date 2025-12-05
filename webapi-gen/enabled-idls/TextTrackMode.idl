@@ -1,0 +1,1 @@
+enum TextTrackMode { "disabled",  "hidden",  "showing" };

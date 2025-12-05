@@ -1,0 +1,4 @@
+enum NavigationScrollBehavior {
+  "after-transition",
+  "manual"
+};

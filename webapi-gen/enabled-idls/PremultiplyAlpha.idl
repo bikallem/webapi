@@ -1,0 +1,1 @@
+enum PremultiplyAlpha { "none", "premultiply", "default" };

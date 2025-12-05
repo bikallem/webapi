@@ -474,6 +474,8 @@ async function generateMoonBitFiles(
 
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+
+    await writeIdlSource(name, enumDef.idlSource);
   }
 
   // Generate globals file

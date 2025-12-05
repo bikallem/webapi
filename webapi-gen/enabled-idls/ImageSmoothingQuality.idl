@@ -1,0 +1,1 @@
+enum ImageSmoothingQuality { "low", "medium", "high" };

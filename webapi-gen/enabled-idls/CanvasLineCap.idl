@@ -1,0 +1,1 @@
+enum CanvasLineCap { "butt", "round", "square" };

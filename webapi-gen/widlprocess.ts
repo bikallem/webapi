@@ -338,6 +338,7 @@ export function parseIdl(idlText: string): ParsedIdl {
         result.enums.set(def.name, {
           name: def.name,
           values: def.values.map((v) => v.value),
+          idlSource: getIdlSource(def),
         });
         break;
 

@@ -76,6 +76,7 @@ export interface ParsedDictionaryMember {
 export interface ParsedEnum {
   name: string;
   values: string[];
+  idlSource?: string; // Original WebIDL source text
 }
 
 export interface ParsedCallback {

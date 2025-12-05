@@ -1,0 +1,1 @@
+enum ImageDataPixelFormat { "rgba-unorm8", "rgba-float16" };

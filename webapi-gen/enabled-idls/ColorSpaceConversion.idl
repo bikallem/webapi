@@ -1,0 +1,1 @@
+enum ColorSpaceConversion { "none", "default" };
