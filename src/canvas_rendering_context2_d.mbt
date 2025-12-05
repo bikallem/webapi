@@ -1343,10 +1343,13 @@ pub(open) trait TRoundRectRadiiArg {
 }
 
 ///|
-pub impl TRoundRectRadiiArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+pub impl TRoundRectRadiiArg for Double with to_js(self : Double) -> JsValue = "%identity"
 
 ///|
 pub impl TRoundRectRadiiArg for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
+
+///|
+pub impl TRoundRectRadiiArg for Array[JsValue] with to_js(self : Array[JsValue]) -> JsValue = "%identity"
 
 ///|
 fn canvas_rendering_context2_d_round_rect_ffi(

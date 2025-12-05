@@ -23,7 +23,7 @@ pub trait TShadowRoot: TJsValue + TDocumentFragment {
   set_adopted_style_sheets(self : Self, value : Array[JsValue]) -> Unit = _
   custom_element_registry(self : Self) -> JsValue? = _
   active_element(self : Self) -> Element? = _
-  set_html_unsafe(self : Self, html : String) -> Unit = _
+  set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
 }
 
@@ -46,8 +46,11 @@ pub impl TJsValue for ShadowRoot with to_js(self : ShadowRoot) -> JsValue = "%id
 fn shadow_root_set_html_unsafe_ffi(obj : JsValue, html : JsValue) -> Unit = "webapi_ShadowRoot" "setHTMLUnsafe"
 
 ///|
-impl TShadowRoot with set_html_unsafe(self : Self, html : String) -> Unit {
-  shadow_root_set_html_unsafe_ffi(TJsValue::to_js(self), TJsValue::to_js(html))
+impl TShadowRoot with set_html_unsafe(
+  self : Self,
+  html : &TSetHTMLUnsafeHtmlArg,
+) -> Unit {
+  shadow_root_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }
 
 ///|

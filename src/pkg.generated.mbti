@@ -1105,8 +1105,15 @@ pub fn JsValue::is_null(Self) -> Bool
 pub fn[T] JsValue::null() -> T
 pub fn JsValue::undefined() -> Self
 pub fn[T] JsValue::unsafe_cast(Self) -> T
+pub impl TCreateContextualFragmentStringArg for JsValue
+pub impl TInsertAdjacentHTMLStringArg for JsValue
 pub impl TJsValue for JsValue
-pub impl TRoundRectRadiiArg for JsValue
+pub impl TParseHTMLUnsafeHtmlArg for JsValue
+pub impl TSetAttributeNSValueArg for JsValue
+pub impl TSetAttributeValueArg for JsValue
+pub impl TSetHTMLUnsafeHtmlArg for JsValue
+pub impl TWriteTextArg for JsValue
+pub impl TWritelnTextArg for JsValue
 
 #external
 pub type KeyboardEvent
@@ -1848,6 +1855,11 @@ pub trait TCharacterData : TJsValue + TNode {
 pub trait TComment : TJsValue + TCharacterData {
 }
 
+pub(open) trait TCreateContextualFragmentStringArg {
+  to_js(Self) -> JsValue
+}
+pub impl TCreateContextualFragmentStringArg for String
+
 pub(open) trait TCreateElementNSOptionsArg {
   to_js(Self) -> JsValue
 }
@@ -2265,8 +2277,8 @@ pub trait TDocument : TJsValue + TNode {
   open(Self, unused1? : String, unused2? : String) -> Document
   open2(Self, String, String, String) -> Window?
   close(Self) -> Unit
-  write(Self, String) -> Unit
-  writeln(Self, String) -> Unit
+  write(Self, &TWriteTextArg) -> Unit
+  writeln(Self, &TWritelnTextArg) -> Unit
   has_focus(Self) -> Bool
   exec_command(Self, String, show_ui? : Bool, value? : String) -> Bool
   query_command_enabled(Self, String) -> Bool
@@ -2368,8 +2380,8 @@ pub trait TElement : TJsValue + TNode {
   get_attribute_names(Self) -> Array[String]
   get_attribute(Self, String) -> String?
   get_attribute_ns(Self, String, String) -> String?
-  set_attribute(Self, String, String) -> Unit
-  set_attribute_ns(Self, String, String, String) -> Unit
+  set_attribute(Self, String, &TSetAttributeValueArg) -> Unit
+  set_attribute_ns(Self, String, String, &TSetAttributeNSValueArg) -> Unit
   remove_attribute(Self, String) -> Unit
   remove_attribute_ns(Self, String, String) -> Unit
   toggle_attribute(Self, String, force? : Bool) -> Bool
@@ -2389,9 +2401,9 @@ pub trait TElement : TJsValue + TNode {
   get_elements_by_class_name(Self, String) -> HTMLCollection
   insert_adjacent_element(Self, String, Element) -> Element?
   insert_adjacent_text(Self, String, String) -> Unit
-  set_html_unsafe(Self, String) -> Unit
+  set_html_unsafe(Self, &TSetHTMLUnsafeHtmlArg) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
-  insert_adjacent_html(Self, String, String) -> Unit
+  insert_adjacent_html(Self, String, &TInsertAdjacentHTMLStringArg) -> Unit
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
   convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
   convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
@@ -3235,6 +3247,11 @@ pub trait TInputEvent : TJsValue + TUIEvent {
   input_type(Self) -> String
 }
 
+pub(open) trait TInsertAdjacentHTMLStringArg {
+  to_js(Self) -> JsValue
+}
+pub impl TInsertAdjacentHTMLStringArg for String
+
 pub trait TJsValue {
   to_js(Self) -> JsValue
   is_null(Self) -> Bool
@@ -3539,6 +3556,11 @@ pub(open) trait TOuterHTML {
 }
 pub impl TOuterHTML for String
 
+pub(open) trait TParseHTMLUnsafeHtmlArg {
+  to_js(Self) -> JsValue
+}
+pub impl TParseHTMLUnsafeHtmlArg for String
+
 pub(open) trait TPrependNodesArg {
   to_js(Self) -> JsValue
 }
@@ -3573,7 +3595,7 @@ pub trait TRange : TJsValue {
   is_point_in_range(Self, Node, UInt) -> Bool
   compare_point(Self, Node, UInt) -> Int
   intersects_node(Self, Node) -> Bool
-  create_contextual_fragment(Self, String) -> DocumentFragment
+  create_contextual_fragment(Self, &TCreateContextualFragmentStringArg) -> DocumentFragment
 }
 
 pub(open) trait TRemoveEventListenerOptionsArg {
@@ -3604,6 +3626,8 @@ pub impl TResult for String
 pub(open) trait TRoundRectRadiiArg {
   to_js(Self) -> JsValue
 }
+pub impl TRoundRectRadiiArg for Double
+pub impl TRoundRectRadiiArg for Array[JsValue]
 
 pub trait TSVGImageElement : TJsValue {
   x(Self) -> JsValue
@@ -3621,6 +3645,21 @@ pub(open) trait TScrollIntoViewArgArg {
 }
 pub impl TScrollIntoViewArgArg for Bool
 
+pub(open) trait TSetAttributeNSValueArg {
+  to_js(Self) -> JsValue
+}
+pub impl TSetAttributeNSValueArg for String
+
+pub(open) trait TSetAttributeValueArg {
+  to_js(Self) -> JsValue
+}
+pub impl TSetAttributeValueArg for String
+
+pub(open) trait TSetHTMLUnsafeHtmlArg {
+  to_js(Self) -> JsValue
+}
+pub impl TSetHTMLUnsafeHtmlArg for String
+
 pub trait TShadowRoot : TJsValue + TDocumentFragment {
   mode(Self) -> ShadowRootMode
   delegates_focus(Self) -> Bool
@@ -3637,7 +3676,7 @@ pub trait TShadowRoot : TJsValue + TDocumentFragment {
   set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
   custom_element_registry(Self) -> JsValue?
   active_element(Self) -> Element?
-  set_html_unsafe(Self, String) -> Unit
+  set_html_unsafe(Self, &TSetHTMLUnsafeHtmlArg) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
 }
 
@@ -3963,4 +4002,14 @@ pub trait TWindow : TJsValue + TEventTarget {
   request_animation_frame(Self, JsValue) -> UInt
   cancel_animation_frame(Self, UInt) -> Unit
 }
+
+pub(open) trait TWriteTextArg {
+  to_js(Self) -> JsValue
+}
+pub impl TWriteTextArg for String
+
+pub(open) trait TWritelnTextArg {
+  to_js(Self) -> JsValue
+}
+pub impl TWritelnTextArg for String
 

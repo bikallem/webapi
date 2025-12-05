@@ -278,8 +278,8 @@ pub trait TDocument: TJsValue + TNode {
   open(self : Self, unused1? : String, unused2? : String) -> Document = _
   open2(self : Self, url : String, name : String, features : String) -> Window? = _
   close(self : Self) -> Unit = _
-  write(self : Self, text : String) -> Unit = _
-  writeln(self : Self, text : String) -> Unit = _
+  write(self : Self, text : &TWriteTextArg) -> Unit = _
+  writeln(self : Self, text : &TWritelnTextArg) -> Unit = _
   has_focus(self : Self) -> Bool = _
   exec_command(
     self : Self,
@@ -737,6 +737,18 @@ impl TDocument with create_tree_walker(
 }
 
 ///|
+/// Arg : html
+pub(open) trait TParseHTMLUnsafeHtmlArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TParseHTMLUnsafeHtmlArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+
+///|
+pub impl TParseHTMLUnsafeHtmlArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 fn document_parse_html_unsafe_ffi(html : JsValue) -> JsValue = "webapi_Document" "parseHTMLUnsafe"
 
 ///|
@@ -804,19 +816,43 @@ impl TDocument with close(self : Self) -> Unit {
 }
 
 ///|
+/// Arg : text
+pub(open) trait TWriteTextArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TWriteTextArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+
+///|
+pub impl TWriteTextArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 fn document_write_ffi(obj : JsValue, text : JsValue) -> Unit = "webapi_Document" "write"
 
 ///|
-impl TDocument with write(self : Self, text : String) -> Unit {
-  document_write_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
+impl TDocument with write(self : Self, text : &TWriteTextArg) -> Unit {
+  document_write_ffi(TJsValue::to_js(self), text.to_js())
 }
+
+///|
+/// Arg : text
+pub(open) trait TWritelnTextArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TWritelnTextArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+
+///|
+pub impl TWritelnTextArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 fn document_writeln_ffi(obj : JsValue, text : JsValue) -> Unit = "webapi_Document" "writeln"
 
 ///|
-impl TDocument with writeln(self : Self, text : String) -> Unit {
-  document_writeln_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
+impl TDocument with writeln(self : Self, text : &TWritelnTextArg) -> Unit {
+  document_writeln_ffi(TJsValue::to_js(self), text.to_js())
 }
 
 ///|

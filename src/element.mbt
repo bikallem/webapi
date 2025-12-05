@@ -60,12 +60,16 @@ pub trait TElement: TJsValue + TNode {
   get_attribute_names(self : Self) -> Array[String] = _
   get_attribute(self : Self, qualified_name : String) -> String? = _
   get_attribute_ns(self : Self, namespace_ : String, local_name : String) -> String? = _
-  set_attribute(self : Self, qualified_name : String, value : String) -> Unit = _
+  set_attribute(
+    self : Self,
+    qualified_name : String,
+    value : &TSetAttributeValueArg,
+  ) -> Unit = _
   set_attribute_ns(
     self : Self,
     namespace_ : String,
     qualified_name : String,
-    value : String,
+    value : &TSetAttributeNSValueArg,
   ) -> Unit = _
   remove_attribute(self : Self, qualified_name : String) -> Unit = _
   remove_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Unit = _
@@ -90,9 +94,13 @@ pub trait TElement: TJsValue + TNode {
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
   insert_adjacent_element(self : Self, where_ : String, element : Element) -> Element? = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
-  set_html_unsafe(self : Self, html : String) -> Unit = _
+  set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
-  insert_adjacent_html(self : Self, position : String, string : String) -> Unit = _
+  insert_adjacent_html(
+    self : Self,
+    position : String,
+    string : &TInsertAdjacentHTMLStringArg,
+  ) -> Unit = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
   convert_quad_from_node(
     self : Self,
@@ -317,6 +325,18 @@ impl TElement with get_attribute_ns(
 }
 
 ///|
+/// Arg : value
+pub(open) trait TSetAttributeValueArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TSetAttributeValueArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+
+///|
+pub impl TSetAttributeValueArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 fn element_set_attribute_ffi(
   obj : JsValue,
   qualified_name : JsValue,
@@ -327,14 +347,26 @@ fn element_set_attribute_ffi(
 impl TElement with set_attribute(
   self : Self,
   qualified_name : String,
-  value : String,
+  value : &TSetAttributeValueArg,
 ) -> Unit {
   element_set_attribute_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
+
+///|
+/// Arg : value
+pub(open) trait TSetAttributeNSValueArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TSetAttributeNSValueArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+
+///|
+pub impl TSetAttributeNSValueArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 fn element_set_attribute_ns_ffi(
@@ -349,13 +381,13 @@ impl TElement with set_attribute_ns(
   self : Self,
   namespace_ : String,
   qualified_name : String,
-  value : String,
+  value : &TSetAttributeNSValueArg,
 ) -> Unit {
   element_set_attribute_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
     TJsValue::to_js(qualified_name),
-    TJsValue::to_js(value),
+    value.to_js(),
   )
 }
 
@@ -642,11 +674,23 @@ impl TElement with insert_adjacent_text(
 }
 
 ///|
+/// Arg : html
+pub(open) trait TSetHTMLUnsafeHtmlArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TSetHTMLUnsafeHtmlArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+
+///|
+pub impl TSetHTMLUnsafeHtmlArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 fn element_set_html_unsafe_ffi(obj : JsValue, html : JsValue) -> Unit = "webapi_Element" "setHTMLUnsafe"
 
 ///|
-impl TElement with set_html_unsafe(self : Self, html : String) -> Unit {
-  element_set_html_unsafe_ffi(TJsValue::to_js(self), TJsValue::to_js(html))
+impl TElement with set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg) -> Unit {
+  element_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }
 
 ///|
@@ -661,6 +705,18 @@ impl TElement with get_html(
 }
 
 ///|
+/// Arg : string
+pub(open) trait TInsertAdjacentHTMLStringArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TInsertAdjacentHTMLStringArg for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+
+///|
+pub impl TInsertAdjacentHTMLStringArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 fn element_insert_adjacent_html_ffi(
   obj : JsValue,
   position : JsValue,
@@ -671,12 +727,12 @@ fn element_insert_adjacent_html_ffi(
 impl TElement with insert_adjacent_html(
   self : Self,
   position : String,
-  string : String,
+  string : &TInsertAdjacentHTMLStringArg,
 ) -> Unit {
   element_insert_adjacent_html_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(position),
-    TJsValue::to_js(string),
+    string.to_js(),
   )
 }
 

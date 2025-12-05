@@ -8,6 +8,17 @@ import { ParsedType } from '../types.js'
 import { mapIdlType } from '../mapping.js'
 
 /**
+ * Types that should be skipped in union trait implementations
+ * These are types that are not commonly used or not defined in our bindings
+ */
+export const SKIP_UNION_TYPES = new Set([
+    "TrustedType",
+    "TrustedHTML",
+    "TrustedScript",
+    "TrustedScriptURL",
+])
+
+/**
  * Get the MoonBit type representation of a union member
  */
 export function getUnionMemberMoonbitType(memberType: ParsedType): string {
@@ -20,10 +31,13 @@ export function getUnionMemberMoonbitType(memberType: ParsedType): string {
 }
 
 /**
- * Filter union members, removing duplicates and None
+ * Filter union members, removing duplicates, Unit, and skipped types
+ * @param unionType The union type to filter
+ * @param skipTypes Optional set of type names to skip (defaults to SKIP_UNION_TYPES)
  */
 export function getFilteredUnionMembers(
-    unionType: ParsedType
+    unionType: ParsedType,
+    skipTypes: Set<string> = SKIP_UNION_TYPES
 ): ParsedType[] {
     if (unionType.type !== 'union' || !unionType.memberTypes) {
         return [unionType]
@@ -34,7 +48,7 @@ export function getFilteredUnionMembers(
 
     for (const member of unionType.memberTypes) {
         const moonbitType = getUnionMemberMoonbitType(member)
-        if (moonbitType !== 'Unit' && !seen.has(moonbitType)) {
+        if (moonbitType !== 'Unit' && !skipTypes.has(moonbitType) && !seen.has(moonbitType)) {
             seen.add(moonbitType)
             members.push(member)
         }

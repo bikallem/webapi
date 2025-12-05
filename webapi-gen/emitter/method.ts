@@ -12,6 +12,12 @@ import {
   toTraitName,
 } from "../utils.js";
 import { mapIdlType, formatReturnType, getDefaultValueExpr, isKnownEnum } from "../mapping.js";
+import {
+  getUnionMemberMoonbitType,
+  getFilteredUnionMembers,
+  getCollapsedUnionType,
+  SKIP_UNION_TYPES,
+} from "./unionUtils.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates
@@ -43,70 +49,6 @@ function getUnionArgTraitName(methodName: string, paramName: string): string {
   // Capitalize first letter of param name
   const paramCapitalized = paramName.charAt(0).toUpperCase() + paramName.slice(1);
   return `T${methodCapitalized}${paramCapitalized}Arg`;
-}
-
-/**
- * Map a union member type to its MoonBit type name
- */
-function getUnionMemberMoonbitType(memberType: ParsedType): string {
-  switch (memberType.type) {
-    case "primitive":
-      if (memberType.name === "boolean") return "Bool";
-      if (memberType.name === "DOMString" || memberType.name === "USVString" || memberType.name === "ByteString") return "String";
-      if (memberType.name === "long" || memberType.name === "short" || memberType.name === "unsigned long" || memberType.name === "unsigned short") return "Int";
-      if (memberType.name === "double" || memberType.name === "float") return "Double";
-      return "JsValue";
-    case "reference":
-      return memberType.name || "JsValue";
-    default:
-      return "JsValue";
-  }
-}
-
-/**
- * Types that should be skipped in union trait implementations
- * These are types that are not commonly used or not defined in our bindings
- */
-const SKIP_UNION_TYPES = new Set([
-  "TrustedType",
-  "TrustedHTML",
-  "TrustedScript",
-  "TrustedScriptURL",
-]);
-
-/**
- * Get filtered union member types (excluding skipped types)
- * Deduplicates by MoonBit type name to avoid duplicate implementations
- */
-function getFilteredUnionMembers(unionType: ParsedType): ParsedType[] {
-  if (unionType.type !== "union" || !unionType.memberTypes) {
-    return [];
-  }
-
-  const seen = new Set<string>();
-  const result: ParsedType[] = [];
-
-  for (const memberType of unionType.memberTypes) {
-    const moonbitType = getUnionMemberMoonbitType(memberType);
-    if (!SKIP_UNION_TYPES.has(moonbitType) && !seen.has(moonbitType)) {
-      seen.add(moonbitType);
-      result.push(memberType);
-    }
-  }
-
-  return result;
-}
-
-/**
- * Check if union collapses to a single type after filtering
- * Returns the single type's MoonBit name if it does, undefined otherwise
- */
-function getCollapsedUnionType(unionType: ParsedType): string | undefined {
-  const filtered = getFilteredUnionMembers(unionType);
-  if (filtered.length === 1) {
-    return getUnionMemberMoonbitType(filtered[0]);
-  }
-  return undefined;
 }
 
 /**

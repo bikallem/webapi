@@ -43,7 +43,10 @@ pub trait TRange: TJsValue {
   is_point_in_range(self : Self, node : Node, offset : UInt) -> Bool = _
   compare_point(self : Self, node : Node, offset : UInt) -> Int = _
   intersects_node(self : Self, node : Node) -> Bool = _
-  create_contextual_fragment(self : Self, string : String) -> DocumentFragment = _
+  create_contextual_fragment(
+    self : Self,
+    string : &TCreateContextualFragmentStringArg,
+  ) -> DocumentFragment = _
 }
 
 ///|
@@ -277,17 +280,31 @@ impl TRange with intersects_node(self : Self, node : Node) -> Bool {
 }
 
 ///|
+/// Arg : string
+pub(open) trait TCreateContextualFragmentStringArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TCreateContextualFragmentStringArg for JsValue with to_js(
+  self : JsValue,
+) -> JsValue = "%identity"
+
+///|
+pub impl TCreateContextualFragmentStringArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 fn range_create_contextual_fragment_ffi(
   obj : JsValue,
   string : JsValue,
 ) -> JsValue = "webapi_Range" "createContextualFragment"
 
 ///|
-impl TRange with create_contextual_fragment(self : Self, string : String) -> DocumentFragment {
-  range_create_contextual_fragment_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(string),
-  ).unsafe_cast()
+impl TRange with create_contextual_fragment(
+  self : Self,
+  string : &TCreateContextualFragmentStringArg,
+) -> DocumentFragment {
+  range_create_contextual_fragment_ffi(TJsValue::to_js(self), string.to_js()).unsafe_cast()
 }
 
 ///|
