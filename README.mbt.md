@@ -4,17 +4,10 @@ MoonBit bindings for Web APIs (DOM, HTML, Canvas, Events, etc.)
 
 ## Features
 
-### Type Safety & Code Generation
 - **Type-safe DOM manipulation** - Full type safety for DOM operations
 - **Auto-generated from WebIDL** - Uses official W3C/WHATWG specifications
 - **Trait-based inheritance** - Mirrors the DOM class hierarchy
 - **FFI-optimized** - Efficient JavaScript interop with precise type mappings
-
-### Advanced Type Support
-- **Enum types** - Proper MoonBit enums for Canvas properties, scroll behaviors, etc. with `from(String)` conversion
-- **Interface constants** - WebIDL constants exposed as `pub const` (e.g., `ELEMENT_NODE`)
-- **Typedef union types** - Type-safe unions with trait-based conversions (e.g., `CanvasImageSource` accepts HTMLCanvasElement, HTMLImageElement, or HTMLVideoElement)
-- **Typed arrays** - Full support for JavaScript typed arrays (Float32Array, Uint8Array, etc.)
 
 ### Web Platform APIs
 - **DOM Core** - Node, Element, Document, DocumentFragment, Attr, CharacterData, Text, Comment, CDATASection, DocumentType
