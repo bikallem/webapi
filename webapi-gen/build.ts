@@ -20,8 +20,6 @@ import { registerDictionaries, registerEnums, registerAbstractInterface } from "
 import {
   emitInterface,
   getInterfaceFilename,
-  hasRealConstructor,
-  isFullyAbstract,
   emitDictionary,
   getDictionaryFilename,
   emitCallback,
