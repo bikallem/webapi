@@ -43,7 +43,6 @@ import {
   getPackageInfo,
   getPackageDependencies,
   getPackagesInDependencyOrder,
-  getMdnUrl,
   type PackageName,
 } from "./packages.js";
 
@@ -360,13 +359,7 @@ async function createPackageJson(pkg: PackageName, pkgDir: string): Promise<void
   
   const config = {
     import: imports.length > 0 ? imports : undefined,
-    "supported-targets": ["js", "wasm-gc"],
-    link: {
-      "wasm-gc": {
-        "use-js-builtin-string": true,
-        "imported-string-constants": "_"
-      }
-    }
+    "supported-targets": ["js", "wasm-gc"]
   };
   
   // Remove undefined fields
@@ -374,35 +367,6 @@ async function createPackageJson(pkg: PackageName, pkgDir: string): Promise<void
   
   const filepath = path.join(pkgDir, "moon.pkg.json");
   await fs.writeFile(filepath, JSON.stringify(cleanConfig, null, 2) + "\n", "utf-8");
-}
-
-/**
- * Create package README.md with MDN links
- */
-async function createPackageReadme(
-  pkg: PackageName,
-  pkgDir: string,
-  types: Set<string>
-): Promise<void> {
-  const info = getPackageInfo(pkg);
-  const sortedTypes = Array.from(types).sort();
-  
-  let content = `# ${pkg} package\n\n`;
-  content += `${info.description}\n\n`;
-  content += `## Types\n\n`;
-  
-  for (const typeName of sortedTypes) {
-    const url = getMdnUrl(typeName, pkg);
-    content += `- [\`${typeName}\`](${url})\n`;
-  }
-  
-  content += `\n## See Also\n\n`;
-  if (info.mdnCategory) {
-    content += `- [MDN Web Docs - ${info.mdnCategory.replace(/_/g, ' ')}](https://developer.mozilla.org/en-US/docs/Web/${info.mdnCategory})\n`;
-  }
-  
-  const filepath = path.join(pkgDir, "README.md");
-  await fs.writeFile(filepath, content, "utf-8");
 }
 
 /**
@@ -608,16 +572,6 @@ async function generateMoonBitFiles(
   const globalsPath = path.join(packageDirs.get('dom')!, "globals.mbt");
   console.log("  Writing dom/globals.mbt...");
   await fs.writeFile(globalsPath, globalsContent, "utf-8");
-  
-  // Generate README for each package
-  console.log("\nGenerating package READMEs...");
-  for (const [pkg, types] of packageTypes) {
-    if (types.size > 0) {
-      const pkgDir = packageDirs.get(pkg)!;
-      await createPackageReadme(pkg, pkgDir, types);
-      console.log(`  Created ${pkg}/README.md (${types.size} types)`);
-    }
-  }
 }
 
 /**

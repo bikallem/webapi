@@ -8,6 +8,16 @@
  * - canvas: Canvas 2D API
  * - svg: SVG elements
  * - geometry: Geometry types (DOMRect, DOMMatrix, DOMPoint)
+ * 
+ * Package classification follows Web API specification categories:
+ * - Each package corresponds to a major Web API category
+ * - New WebIDL interfaces should be classified based on their spec category
+ * - For interfaces from the DOM spec → dom package
+ * - For interfaces from HTML spec that are HTML elements → html package
+ * - For interfaces from Canvas spec → canvas package
+ * - For interfaces from SVG spec → svg package
+ * - For interfaces from Geometry spec → geometry package
+ * - Base types and primitives → core package
  */
 
 export type PackageName = 'core' | 'dom' | 'html' | 'canvas' | 'svg' | 'geometry';
@@ -15,7 +25,6 @@ export type PackageName = 'core' | 'dom' | 'html' | 'canvas' | 'svg' | 'geometry
 export interface PackageInfo {
   name: PackageName;
   description: string;
-  mdnCategory?: string;
 }
 
 /**
@@ -209,33 +218,27 @@ export function getPackageInfo(pkg: PackageName): PackageInfo {
   const packageInfoMap: Record<PackageName, PackageInfo> = {
     core: {
       name: 'core',
-      description: 'Core types and primitives (JsValue, Blob, typed arrays, AbortController)',
-      mdnCategory: 'Web_APIs',
+      description: 'Core types and primitives (JsValue, Blob, typed arrays)',
     },
     dom: {
       name: 'dom',
       description: 'DOM Core and Events (Node, Element, Document, Event, EventTarget)',
-      mdnCategory: 'DOM',
     },
     html: {
       name: 'html',
       description: 'HTML elements (HTMLElement and subclasses)',
-      mdnCategory: 'HTML',
     },
     canvas: {
       name: 'canvas',
       description: 'Canvas 2D API (CanvasRenderingContext2D, OffscreenCanvas, ImageBitmap)',
-      mdnCategory: 'Canvas_API',
     },
     svg: {
       name: 'svg',
       description: 'SVG elements',
-      mdnCategory: 'SVG',
     },
     geometry: {
       name: 'geometry',
       description: 'Geometry types (DOMRect, DOMMatrix, DOMPoint)',
-      mdnCategory: 'Geometry_Interfaces',
     },
   };
   
@@ -263,27 +266,4 @@ export function getPackageDependencies(pkg: PackageName): PackageName[] {
  */
 export function getPackagesInDependencyOrder(): PackageName[] {
   return ['core', 'geometry', 'dom', 'html', 'canvas', 'svg'];
-}
-
-/**
- * Generate MDN URL for a type
- */
-export function getMdnUrl(typeName: string, pkg: PackageName): string {
-  const baseUrl = 'https://developer.mozilla.org/en-US/docs/Web/API';
-  
-  // Special cases
-  if (typeName.startsWith('HTML') && typeName !== 'HTMLElement') {
-    return `${baseUrl}/${typeName}`;
-  }
-  
-  if (typeName.startsWith('SVG')) {
-    return `${baseUrl}/${typeName}`;
-  }
-  
-  if (typeName.startsWith('Canvas')) {
-    return `${baseUrl}/${typeName}`;
-  }
-  
-  // Default
-  return `${baseUrl}/${typeName}`;
 }
