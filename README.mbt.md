@@ -4,15 +4,31 @@ MoonBit bindings for Web APIs (DOM, HTML, Canvas, Events, etc.)
 
 ## Features
 
+### Type Safety & Code Generation
 - **Type-safe DOM manipulation** - Full type safety for DOM operations
 - **Auto-generated from WebIDL** - Uses official W3C/WHATWG specifications
 - **Trait-based inheritance** - Mirrors the DOM class hierarchy
+- **FFI-optimized** - Efficient JavaScript interop with precise type mappings
+
+### Advanced Type Support
 - **Enum types** - Proper MoonBit enums for Canvas properties, scroll behaviors, etc. with `from(String)` conversion
 - **Interface constants** - WebIDL constants exposed as `pub const` (e.g., `ELEMENT_NODE`)
 - **Typedef union types** - Type-safe unions with trait-based conversions (e.g., `CanvasImageSource` accepts HTMLCanvasElement, HTMLImageElement, or HTMLVideoElement)
 - **Typed arrays** - Full support for JavaScript typed arrays (Float32Array, Uint8Array, etc.)
-- **Shadow DOM** - Complete Shadow DOM API support
-- **FFI-optimized** - Efficient JavaScript interop with precise type mappings
+
+### Web Platform APIs
+- **DOM Core** - Node, Element, Document, DocumentFragment, Attr, CharacterData, Text, Comment, CDATASection, DocumentType
+- **Shadow DOM** - ShadowRoot, HTMLSlotElement, slots, content distribution
+- **HTML Elements** - HTMLElement and 20+ specific elements (HTMLDivElement, HTMLCanvasElement, HTMLImageElement, HTMLVideoElement, HTMLAudioElement, HTMLFormElement, HTMLInputElement, HTMLButtonElement, etc.)
+- **Canvas 2D** - CanvasRenderingContext2D, OffscreenCanvas, OffscreenCanvasRenderingContext2D, CanvasGradient, CanvasPattern, image drawing, paths, text rendering
+- **Events** - Event, CustomEvent, UIEvent, MouseEvent, KeyboardEvent, FocusEvent, InputEvent, WheelEvent, DragEvent, event listeners
+- **CSSOM** - CSS Object Model interfaces
+- **CSSOM View** - Scrolling, viewport, coordinate systems (ScrollOptions, ScrollBehavior, ScrollIntoViewOptions)
+- **Geometry** - DOMPoint, DOMPointReadOnly, DOMRect, DOMRectReadOnly, DOMMatrix, DOMMatrixReadOnly, DOMQuad
+- **File API** - Blob, File
+- **Typed Arrays** - Float32Array, Float64Array, Int8Array, Int16Array, Int32Array, Uint8Array, Uint8ClampedArray, Uint16Array, Uint32Array, BigInt64Array, BigUint64Array, ArrayBuffer, DataView
+- **Abort/Control** - AbortController, AbortSignal
+- **Collections** - NodeList, HTMLCollection, DOMTokenList, NamedNodeMap
 
 ## Installation
 
@@ -297,18 +313,6 @@ make all
 ├── examples/            # Usage examples
 └── Makefile
 ```
-
-## Supported Specifications
-
-- **DOM** - Core DOM interfaces (Node, Element, Document, etc.)
-- **DOM Shadow** - Shadow DOM (ShadowRoot, slots, content distribution)
-- **HTML** - HTML elements (HTMLDivElement, HTMLCanvasElement, etc.)
-- **UI Events** - Mouse, keyboard, focus events
-- **CSSOM** - CSS Object Model
-- **CSSOM View** - Scrolling, viewport
-- **Geometry** - DOMPoint, DOMRect, DOMMatrix
-- **File API** - Blob, File interfaces
-- **Typed Arrays** - JavaScript typed arrays (Float32Array, Uint8Array, etc.)
 
 ## License
 
