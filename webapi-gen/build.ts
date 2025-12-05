@@ -12,6 +12,7 @@
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
+import { minify } from "terser";
 
 import { parseIdl, mergeIdl, applyMixins } from "./widlprocess.js";
 import type { ParsedIdl } from "./types.js";
@@ -41,6 +42,7 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, "src");
+const IDL_OUTPUT_DIR = path.join(PROJECT_ROOT, "webapi-gen", "enabled-idls");
 const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
 
 /**
@@ -391,9 +393,20 @@ async function generateMoonBitFiles(
 ): Promise<void> {
   console.log("Generating MoonBit files...");
 
+  // Reset IDL output directory
+  await fs.rm(IDL_OUTPUT_DIR, { recursive: true, force: true });
+  await fs.mkdir(IDL_OUTPUT_DIR, { recursive: true });
+
   // Reset the union traits tracker before generating interfaces
   // This prevents duplicates from shared mixins (e.g., CanvasPath)
   resetEmittedUnionTraits();
+
+  // Helper to write IDL source to separate files
+  const writeIdlSource = async (name: string, idlSource?: string) => {
+    if (!idlSource || idlSource.trim() === "") return;
+    const idlPath = path.join(IDL_OUTPUT_DIR, `${name}.idl`);
+    await fs.writeFile(idlPath, idlSource.trim() + "\n", "utf-8");
+  };
 
   // Generate property union type files FIRST so they're available for interfaces
   for (const [name, unionType] of propertyUnionTypes) {
@@ -413,6 +426,8 @@ async function generateMoonBitFiles(
 
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+
+    await writeIdlSource(name, iface.idlSource);
   }
 
   // Generate dictionary files
@@ -423,6 +438,8 @@ async function generateMoonBitFiles(
 
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+
+    await writeIdlSource(name, dict.idlSource);
   }
 
   // Generate callback files
@@ -433,6 +450,8 @@ async function generateMoonBitFiles(
 
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+
+    await writeIdlSource(name, callback.idlSource);
   }
 
   // Generate typedef files
@@ -443,6 +462,8 @@ async function generateMoonBitFiles(
 
     console.log(`  Writing ${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+
+    await writeIdlSource(name, typedef.idlSource);
   }
 
   // Generate enum files
@@ -472,6 +493,17 @@ async function generateJsRuntime(idl: ParsedIdl): Promise<void> {
   const filepath = path.join(OUTPUT_DIR, "webapi.mjs");
 
   await fs.writeFile(filepath, content, "utf-8");
+
+  // Also emit a minified runtime for distribution
+  try {
+    const result = await minify(content, { module: true });
+    if (result.code) {
+      const minPath = path.join(OUTPUT_DIR, "webapi.min.mjs");
+      await fs.writeFile(minPath, result.code, "utf-8");
+    }
+  } catch (err) {
+    console.warn("Warning: Failed to minify webapi.mjs", err);
+  }
 }
 
 /**

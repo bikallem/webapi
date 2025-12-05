@@ -1,0 +1,3 @@
+dictionary ScrollOptions {
+    ScrollBehavior behavior = "auto";
+};

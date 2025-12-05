@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary AssignedNodesOptions {
-//   boolean flatten = false;
-// };
-
 ///|
 #external
 pub type AssignedNodesOptions

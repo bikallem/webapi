@@ -2,19 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLParagraphElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// 
-//   // also has obsolete members
-// };
-// 
-// partial interface HTMLParagraphElement {
-//   [CEReactions, Reflect] attribute DOMString align;
-// };
-
 ///|
 #external
 pub type HTMLParagraphElement

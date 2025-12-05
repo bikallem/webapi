@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLHeadElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// };
-
 ///|
 #external
 pub type HTMLHeadElement

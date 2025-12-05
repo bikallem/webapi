@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary InputEventInit : UIEventInit {
-//   DOMString? data = null;
-//   boolean isComposing = false;
-//   DOMString inputType = "";
-// };
-
 ///|
 #external
 pub type InputEventInit

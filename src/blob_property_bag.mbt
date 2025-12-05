@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary BlobPropertyBag {
-//   DOMString type = "";
-//   EndingType endings = "transparent";
-// };
-
 ///|
 #external
 pub type BlobPropertyBag

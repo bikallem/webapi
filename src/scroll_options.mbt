@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ScrollOptions {
-//     ScrollBehavior behavior = "auto";
-// };
-
 ///|
 #external
 pub type ScrollOptions

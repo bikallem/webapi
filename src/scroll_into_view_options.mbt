@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ScrollIntoViewOptions : ScrollOptions {
-//   ScrollLogicalPosition block = "start";
-//   ScrollLogicalPosition inline = "nearest";
-//   ScrollIntoViewContainer container = "all";
-// };
-
 ///|
 #external
 pub type ScrollIntoViewOptions

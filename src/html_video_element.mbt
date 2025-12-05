@@ -2,20 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLVideoElement : HTMLMediaElement {
-//   [HTMLConstructor] constructor();
-// 
-//   [CEReactions, Reflect] attribute unsigned long width;
-//   [CEReactions, Reflect] attribute unsigned long height;
-//   readonly attribute unsigned long videoWidth;
-//   readonly attribute unsigned long videoHeight;
-//   [CEReactions, ReflectURL] attribute USVString poster;
-//   [CEReactions, Reflect] attribute boolean playsInline;
-// };
-
 ///|
 #external
 pub type HTMLVideoElement

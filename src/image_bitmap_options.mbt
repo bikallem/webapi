@@ -2,17 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ImageBitmapOptions {
-//   ImageOrientation imageOrientation = "from-image";
-//   PremultiplyAlpha premultiplyAlpha = "default";
-//   ColorSpaceConversion colorSpaceConversion = "default";
-//   [EnforceRange] unsigned long resizeWidth;
-//   [EnforceRange] unsigned long resizeHeight;
-//   ResizeQuality resizeQuality = "low";
-// };
-
 ///|
 #external
 pub type ImageBitmapOptions

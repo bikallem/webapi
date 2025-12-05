@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Callback:
-// callback MutationCallback = undefined (sequence<MutationRecord> mutations, MutationObserver observer);
-
 ///|
 #external
 pub type MutationCallback

@@ -2,23 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=(Window,Worker), Transferable]
-// interface OffscreenCanvas : EventTarget {
-//   constructor([EnforceRange] unsigned long long width, [EnforceRange] unsigned long long height);
-// 
-//   attribute [EnforceRange] unsigned long long width;
-//   attribute [EnforceRange] unsigned long long height;
-// 
-//   OffscreenRenderingContext? getContext(OffscreenRenderingContextId contextId, optional any options = null);
-//   ImageBitmap transferToImageBitmap();
-//   Promise<Blob> convertToBlob(optional ImageEncodeOptions options = {});
-// 
-//   attribute EventHandler oncontextlost;
-//   attribute EventHandler oncontextrestored;
-// };
-
 ///|
 #external
 pub type OffscreenCanvas

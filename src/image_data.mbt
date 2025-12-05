@@ -2,21 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=(Window,Worker),
-//  Serializable]
-// interface ImageData {
-//   constructor(unsigned long sw, unsigned long sh, optional ImageDataSettings settings = {});
-//   constructor(ImageDataArray data, unsigned long sw, optional unsigned long sh, optional ImageDataSettings settings = {});
-// 
-//   readonly attribute unsigned long width;
-//   readonly attribute unsigned long height;
-//   readonly attribute ImageDataArray data;
-//   readonly attribute ImageDataPixelFormat pixelFormat;
-//   readonly attribute PredefinedColorSpace colorSpace;
-// };
-
 ///|
 #external
 pub type ImageData

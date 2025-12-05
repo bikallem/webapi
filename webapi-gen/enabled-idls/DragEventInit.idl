@@ -1,0 +1,3 @@
+dictionary DragEventInit : MouseEventInit {
+  DataTransfer? dataTransfer = null;
+};

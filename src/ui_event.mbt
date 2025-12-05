@@ -2,34 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// // GENERATED CONTENT - DO NOT EDIT
-// // Content was automatically extracted by Reffy into webref
-// // (https://github.com/w3c/webref)
-// // Source: UI Events (https://w3c.github.io/uievents/)
-// 
-// [Exposed=Window]
-// interface UIEvent : Event {
-//   constructor(DOMString type, optional UIEventInit eventInitDict = {});
-//   readonly attribute Window? view;
-//   readonly attribute long detail;
-// };
-// 
-// partial interface UIEvent {
-//   // Deprecated in this specification
-//   undefined initUIEvent(DOMString typeArg,
-//     optional boolean bubblesArg = false,
-//     optional boolean cancelableArg = false,
-//     optional Window? viewArg = null,
-//     optional long detailArg = 0);
-// };
-// 
-// partial interface UIEvent {
-//   // The following support legacy user agents
-//   readonly attribute unsigned long which;
-// };
-
 ///|
 #external
 pub type UIEvent

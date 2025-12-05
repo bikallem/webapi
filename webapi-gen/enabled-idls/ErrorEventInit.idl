@@ -1,0 +1,7 @@
+dictionary ErrorEventInit : EventInit {
+  DOMString message = "";
+  USVString filename = "";
+  unsigned long lineno = 0;
+  unsigned long colno = 0;
+  any error;
+};

@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ElementDefinitionOptions {
-//   DOMString extends;
-// };
-
 ///|
 #external
 pub type ElementDefinitionOptions

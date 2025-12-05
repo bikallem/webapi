@@ -7,7 +7,7 @@
  */
 
 import type { ParsedTypedef, ParsedIdl, ParsedType } from "../types.js";
-import { toSnakeCase, formatIdlSourceAsComment } from "../utils.js";
+import { toSnakeCase } from "../utils.js";
 import { mapIdlType, formatReturnType, isKnownTypedef } from "../mapping.js";
 
 /**
@@ -200,12 +200,6 @@ export function emitTypedef(typedef: ParsedTypedef, idl: ParsedIdl): string {
     // Header
     parts.push(`// Auto-generated MoonBit bindings for ${typedef.name} typedef`);
     parts.push(`// Do not edit manually`);
-
-    // Include WebIDL source as comment
-    const idlComment = formatIdlSourceAsComment(typedef.idlSource);
-    if (idlComment) {
-        parts.push(`//\n// WebIDL Typedef:\n${idlComment}`);
-    }
 
     // Handle union types specially
     if (isUnionTypedef(typedef)) {

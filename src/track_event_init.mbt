@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary TrackEventInit : EventInit {
-//   (VideoTrack or AudioTrack or TextTrack)? track = null;
-// };
-
 ///|
 #external
 pub type TrackEventInit

@@ -1,0 +1,3 @@
+dictionary EventListenerOptions {
+  boolean capture = false;
+};

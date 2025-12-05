@@ -1,0 +1,4 @@
+dictionary ImageDataSettings {
+  PredefinedColorSpace colorSpace;
+  ImageDataPixelFormat pixelFormat = "rgba-unorm8";
+};

@@ -2,11 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Callback:
-// [LegacyTreatNonObjectAsNull]
-// callback OnBeforeUnloadEventHandlerNonNull = DOMString? (Event event);
-
 ///|
 #external
 pub type OnBeforeUnloadEventHandlerNonNull

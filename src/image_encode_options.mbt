@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ImageEncodeOptions {
-//   DOMString type = "image/png";
-//   unrestricted double quality;
-// };
-
 ///|
 #external
 pub type ImageEncodeOptions

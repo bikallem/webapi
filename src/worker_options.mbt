@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary WorkerOptions {
-//   DOMString name = "";
-//   WorkerType type = "classic";
-//   RequestCredentials credentials = "same-origin"; // credentials is only used if type is "module"
-// };
-
 ///|
 #external
 pub type WorkerOptions

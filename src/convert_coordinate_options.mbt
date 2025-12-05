@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ConvertCoordinateOptions {
-//   CSSBoxType fromBox = "border";
-//   CSSBoxType toBox = "border";
-// };
-
 ///|
 #external
 pub type ConvertCoordinateOptions

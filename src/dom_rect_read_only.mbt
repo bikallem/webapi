@@ -2,28 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=(Window,Worker),
-//  Serializable]
-// interface DOMRectReadOnly {
-//     constructor(optional unrestricted double x = 0, optional unrestricted double y = 0,
-//             optional unrestricted double width = 0, optional unrestricted double height = 0);
-// 
-//     [NewObject] static DOMRectReadOnly fromRect(optional DOMRectInit other = {});
-// 
-//     readonly attribute unrestricted double x;
-//     readonly attribute unrestricted double y;
-//     readonly attribute unrestricted double width;
-//     readonly attribute unrestricted double height;
-//     readonly attribute unrestricted double top;
-//     readonly attribute unrestricted double right;
-//     readonly attribute unrestricted double bottom;
-//     readonly attribute unrestricted double left;
-// 
-//     [Default] object toJSON();
-// };
-
 ///|
 #external
 pub type DOMRectReadOnly

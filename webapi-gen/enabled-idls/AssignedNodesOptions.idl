@@ -1,0 +1,3 @@
+dictionary AssignedNodesOptions {
+  boolean flatten = false;
+};

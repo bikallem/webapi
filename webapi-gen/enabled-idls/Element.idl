@@ -1,0 +1,119 @@
+partial interface Element {
+  DOMRectList getClientRects();
+  [NewObject] DOMRect getBoundingClientRect();
+
+  boolean checkVisibility(optional CheckVisibilityOptions options = {});
+
+  Promise<undefined> scrollIntoView(optional (boolean or ScrollIntoViewOptions) arg = {});
+  Promise<undefined> scroll(optional ScrollToOptions options = {});
+  Promise<undefined> scroll(unrestricted double x, unrestricted double y);
+  Promise<undefined> scrollTo(optional ScrollToOptions options = {});
+  Promise<undefined> scrollTo(unrestricted double x, unrestricted double y);
+  Promise<undefined> scrollBy(optional ScrollToOptions options = {});
+  Promise<undefined> scrollBy(unrestricted double x, unrestricted double y);
+  attribute unrestricted double scrollTop;
+  attribute unrestricted double scrollLeft;
+  readonly attribute long scrollWidth;
+  readonly attribute long scrollHeight;
+  readonly attribute long clientTop;
+  readonly attribute long clientLeft;
+  readonly attribute long clientWidth;
+  readonly attribute long clientHeight;
+  readonly attribute double currentCSSZoom;
+};
+
+[Exposed=Window]
+interface Element : Node {
+  readonly attribute DOMString? namespaceURI;
+  readonly attribute DOMString? prefix;
+  readonly attribute DOMString localName;
+  readonly attribute DOMString tagName;
+
+  [CEReactions] attribute DOMString id;
+  [CEReactions] attribute DOMString className;
+  [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
+  [CEReactions, Unscopable] attribute DOMString slot;
+
+  boolean hasAttributes();
+  [SameObject] readonly attribute NamedNodeMap attributes;
+  sequence<DOMString> getAttributeNames();
+  DOMString? getAttribute(DOMString qualifiedName);
+  DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
+  [CEReactions] undefined setAttribute(DOMString qualifiedName, (TrustedType or DOMString) value);
+  [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, (TrustedType or DOMString) value);
+  [CEReactions] undefined removeAttribute(DOMString qualifiedName);
+  [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
+  [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
+  boolean hasAttribute(DOMString qualifiedName);
+  boolean hasAttributeNS(DOMString? namespace, DOMString localName);
+
+  Attr? getAttributeNode(DOMString qualifiedName);
+  Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
+  [CEReactions] Attr? setAttributeNode(Attr attr);
+  [CEReactions] Attr? setAttributeNodeNS(Attr attr);
+  [CEReactions] Attr removeAttributeNode(Attr attr);
+
+  ShadowRoot attachShadow(ShadowRootInit init);
+  readonly attribute ShadowRoot? shadowRoot;
+
+  readonly attribute CustomElementRegistry? customElementRegistry;
+
+  Element? closest(DOMString selectors);
+  boolean matches(DOMString selectors);
+  boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
+
+  HTMLCollection getElementsByTagName(DOMString qualifiedName);
+  HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
+  HTMLCollection getElementsByClassName(DOMString classNames);
+
+  [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
+  undefined insertAdjacentText(DOMString where, DOMString data); // legacy
+};
+
+partial interface Element {
+  [CEReactions] undefined setHTMLUnsafe((TrustedHTML or DOMString) html);
+  DOMString getHTML(optional GetHTMLOptions options = {});
+
+  [CEReactions] attribute (TrustedHTML or [LegacyNullToEmptyString] DOMString) innerHTML;
+  [CEReactions] attribute (TrustedHTML or [LegacyNullToEmptyString] DOMString) outerHTML;
+  [CEReactions] undefined insertAdjacentHTML(DOMString position, (TrustedHTML or DOMString) string);
+};
+
+interface mixin GeometryUtils {
+  sequence<DOMQuad> getBoxQuads(optional BoxQuadOptions options = {});
+  DOMQuad convertQuadFromNode(DOMQuadInit quad, GeometryNode from, optional ConvertCoordinateOptions options = {});
+  DOMQuad convertRectFromNode(DOMRectReadOnly rect, GeometryNode from, optional ConvertCoordinateOptions options = {});
+  DOMPoint convertPointFromNode(DOMPointInit point, GeometryNode from, optional ConvertCoordinateOptions options = {}); // XXX z,w turns into 0
+};
+
+interface mixin ParentNode {
+  [SameObject] readonly attribute HTMLCollection children;
+  readonly attribute Element? firstElementChild;
+  readonly attribute Element? lastElementChild;
+  readonly attribute unsigned long childElementCount;
+
+  [CEReactions, Unscopable] undefined prepend((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined append((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined replaceChildren((Node or DOMString)... nodes);
+
+  [CEReactions] undefined moveBefore(Node node, Node? child);
+
+  Element? querySelector(DOMString selectors);
+  [NewObject] NodeList querySelectorAll(DOMString selectors);
+};
+
+interface mixin NonDocumentTypeChildNode {
+  readonly attribute Element? previousElementSibling;
+  readonly attribute Element? nextElementSibling;
+};
+
+interface mixin ChildNode {
+  [CEReactions, Unscopable] undefined before((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined after((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined replaceWith((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined remove();
+};
+
+interface mixin Slottable {
+  readonly attribute HTMLSlotElement? assignedSlot;
+};

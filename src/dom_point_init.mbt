@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary DOMPointInit {
-//     unrestricted double x = 0;
-//     unrestricted double y = 0;
-//     unrestricted double z = 0;
-//     unrestricted double w = 1;
-// };
-
 ///|
 #external
 pub type DOMPointInit

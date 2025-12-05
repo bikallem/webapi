@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Typedef:
-// typedef OnErrorEventHandlerNonNull? OnErrorEventHandler;
-
 ///|
 #external
 pub type OnErrorEventHandler

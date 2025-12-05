@@ -1,0 +1,4 @@
+dictionary BlobPropertyBag {
+  DOMString type = "";
+  EndingType endings = "transparent";
+};

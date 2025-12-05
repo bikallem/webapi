@@ -2,17 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface MutationObserver {
-//   constructor(MutationCallback callback);
-// 
-//   undefined observe(Node target, optional MutationObserverInit options = {});
-//   undefined disconnect();
-//   sequence<MutationRecord> takeRecords();
-// };
-
 ///|
 #external
 pub type MutationObserver

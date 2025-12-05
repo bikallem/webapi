@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary GetHTMLOptions {
-//   boolean serializableShadowRoots = false;
-//   sequence<ShadowRoot> shadowRoots = [];
-// };
-
 ///|
 #external
 pub type GetHTMLOptions

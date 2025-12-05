@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ShowPopoverOptions {
-//   HTMLElement source;
-// };
-
 ///|
 #external
 pub type ShowPopoverOptions

@@ -1,0 +1,6 @@
+typedef (HTMLOrSVGImageElement or
+         HTMLVideoElement or
+         HTMLCanvasElement or
+         ImageBitmap or
+         OffscreenCanvas or
+         VideoFrame) CanvasImageSource;

@@ -1,0 +1,3 @@
+dictionary CaretPositionFromPointOptions {
+  sequence<ShadowRoot> shadowRoots = [];
+};

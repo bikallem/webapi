@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary DOMQuadInit {
-//   DOMPointInit p1;
-//   DOMPointInit p2;
-//   DOMPointInit p3;
-//   DOMPointInit p4;
-// };
-
 ///|
 #external
 pub type DOMQuadInit

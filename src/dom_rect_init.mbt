@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary DOMRectInit {
-//     unrestricted double x = 0;
-//     unrestricted double y = 0;
-//     unrestricted double width = 0;
-//     unrestricted double height = 0;
-// };
-
 ///|
 #external
 pub type DOMRectInit

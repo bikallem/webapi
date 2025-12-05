@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Callback:
-// callback FunctionStringCallback = undefined (DOMString data);
-
 ///|
 #external
 pub type FunctionStringCallback

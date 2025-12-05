@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Typedef:
-// typedef (HTMLOrSVGImageElement or
-//          HTMLVideoElement or
-//          HTMLCanvasElement or
-//          ImageBitmap or
-//          OffscreenCanvas or
-//          VideoFrame) CanvasImageSource;
-
 ///|
 pub(open) trait TCanvasImageSource {
   to_js(self : Self) -> JsValue

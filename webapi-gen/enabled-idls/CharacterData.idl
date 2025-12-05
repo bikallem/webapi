@@ -1,0 +1,22 @@
+[Exposed=Window]
+interface CharacterData : Node {
+  attribute [LegacyNullToEmptyString] DOMString data;
+  readonly attribute unsigned long length;
+  DOMString substringData(unsigned long offset, unsigned long count);
+  undefined appendData(DOMString data);
+  undefined insertData(unsigned long offset, DOMString data);
+  undefined deleteData(unsigned long offset, unsigned long count);
+  undefined replaceData(unsigned long offset, unsigned long count, DOMString data);
+};
+
+interface mixin NonDocumentTypeChildNode {
+  readonly attribute Element? previousElementSibling;
+  readonly attribute Element? nextElementSibling;
+};
+
+interface mixin ChildNode {
+  [CEReactions, Unscopable] undefined before((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined after((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined replaceWith((Node or DOMString)... nodes);
+  [CEReactions, Unscopable] undefined remove();
+};

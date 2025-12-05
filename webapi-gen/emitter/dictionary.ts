@@ -5,12 +5,7 @@
  */
 
 import type { ParsedDictionary, ParsedDictionaryMember } from "../types.js";
-import {
-  toSnakeCase,
-  escapeKeyword,
-  toFfiModuleName,
-  formatIdlSourceAsComment,
-} from "../utils.js";
+import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatParam, getDefaultValueExpr } from "../mapping.js";
 
 /**
@@ -158,11 +153,6 @@ export function emitDictionary(dict: ParsedDictionary): string {
   parts.push(`// Auto-generated MoonBit bindings for ${dict.name} dictionary`);
   parts.push(`// Do not edit manually`);
 
-  // Include WebIDL source as comment
-  const idlComment = formatIdlSourceAsComment(dict.idlSource);
-  if (idlComment) {
-    parts.push(`//\n// WebIDL Dictionary:\n${idlComment}`);
-  }
 
   // Type and impl
   parts.push(emitDictionaryType(dict));

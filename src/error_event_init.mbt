@@ -2,16 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ErrorEventInit : EventInit {
-//   DOMString message = "";
-//   USVString filename = "";
-//   unsigned long lineno = 0;
-//   unsigned long colno = 0;
-//   any error;
-// };
-
 ///|
 #external
 pub type ErrorEventInit

@@ -1,0 +1,5 @@
+dictionary CSSStyleSheetInit {
+  DOMString baseURL = null;
+  (MediaList or DOMString) media = "";
+  boolean disabled = false;
+};

@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary WindowPostMessageOptions : StructuredSerializeOptions {
-//   USVString targetOrigin = "/";
-// };
-
 ///|
 #external
 pub type WindowPostMessageOptions

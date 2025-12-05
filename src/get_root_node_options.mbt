@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary GetRootNodeOptions {
-//   boolean composed = false;
-// };
-
 ///|
 #external
 pub type GetRootNodeOptions

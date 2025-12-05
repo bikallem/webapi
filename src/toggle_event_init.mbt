@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ToggleEventInit : EventInit {
-//   DOMString oldState = "";
-//   DOMString newState = "";
-//   Element? source = null;
-// };
-
 ///|
 #external
 pub type ToggleEventInit

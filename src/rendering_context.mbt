@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Typedef:
-// typedef (CanvasRenderingContext2D or ImageBitmapRenderingContext or WebGLRenderingContext or WebGL2RenderingContext or GPUCanvasContext) RenderingContext;
-
 ///|
 pub(open) trait TRenderingContext {
   to_js(self : Self) -> JsValue

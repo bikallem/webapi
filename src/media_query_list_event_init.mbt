@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary MediaQueryListEventInit : EventInit {
-//   CSSOMString media = "";
-//   boolean matches = false;
-// };
-
 ///|
 #external
 pub type MediaQueryListEventInit

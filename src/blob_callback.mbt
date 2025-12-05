@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Callback:
-// callback BlobCallback = undefined (Blob? blob);
-
 ///|
 #external
 pub type BlobCallback

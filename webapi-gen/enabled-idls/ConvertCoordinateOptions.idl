@@ -1,0 +1,4 @@
+dictionary ConvertCoordinateOptions {
+  CSSBoxType fromBox = "border";
+  CSSBoxType toBox = "border";
+};

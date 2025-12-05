@@ -2,33 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// // GENERATED CONTENT - DO NOT EDIT
-// // Content was automatically extracted by Reffy into webref
-// // (https://github.com/w3c/webref)
-// // Source: File API (https://w3c.github.io/FileAPI/)
-// 
-// [Exposed=(Window,Worker), Serializable]
-// interface Blob {
-//   constructor(optional sequence<BlobPart> blobParts,
-//               optional BlobPropertyBag options = {});
-// 
-//   readonly attribute unsigned long long size;
-//   readonly attribute DOMString type;
-// 
-//   // slice Blob into byte-ranged chunks
-//   Blob slice(optional [Clamp] long long start,
-//             optional [Clamp] long long end,
-//             optional DOMString contentType);
-// 
-//   // read from the Blob.
-//   [NewObject] ReadableStream stream();
-//   [NewObject] Promise<USVString> text();
-//   [NewObject] Promise<ArrayBuffer> arrayBuffer();
-//   [NewObject] Promise<Uint8Array> bytes();
-// };
-
 ///|
 #external
 pub type Blob

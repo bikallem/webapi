@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ImportNodeOptions {
-//   CustomElementRegistry customElementRegistry;
-//   boolean selfOnly = false;
-// };
-
 ///|
 #external
 pub type ImportNodeOptions

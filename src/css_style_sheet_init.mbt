@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CSSStyleSheetInit {
-//   DOMString baseURL = null;
-//   (MediaList or DOMString) media = "";
-//   boolean disabled = false;
-// };
-
 ///|
 #external
 pub type CSSStyleSheetInit

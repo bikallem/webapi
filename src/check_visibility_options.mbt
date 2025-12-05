@@ -2,16 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CheckVisibilityOptions {
-//     boolean checkOpacity = false;
-//     boolean checkVisibilityCSS = false;
-//     boolean contentVisibilityAuto = false;
-//     boolean opacityProperty = false;
-//     boolean visibilityProperty = false;
-// };
-
 ///|
 #external
 pub type CheckVisibilityOptions

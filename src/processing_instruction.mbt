@@ -2,17 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface ProcessingInstruction : CharacterData {
-//   readonly attribute DOMString target;
-// };
-// 
-// interface mixin LinkStyle {
-//   readonly attribute CSSStyleSheet? sheet;
-// };
-
 ///|
 #external
 pub type ProcessingInstruction

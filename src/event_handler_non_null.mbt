@@ -2,11 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Callback:
-// [LegacyTreatNonObjectAsNull]
-// callback EventHandlerNonNull = any (Event event);
-
 ///|
 #external
 pub type EventHandlerNonNull

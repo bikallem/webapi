@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CloseWatcherOptions {
-//   AbortSignal signal;
-// };
-
 ///|
 #external
 pub type CloseWatcherOptions

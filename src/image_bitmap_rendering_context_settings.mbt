@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ImageBitmapRenderingContextSettings {
-//   boolean alpha = true;
-// };
-
 ///|
 #external
 pub type ImageBitmapRenderingContextSettings

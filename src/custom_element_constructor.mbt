@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Callback:
-// callback CustomElementConstructor = HTMLElement ();
-
 ///|
 #external
 pub type CustomElementConstructor

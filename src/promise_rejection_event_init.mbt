@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary PromiseRejectionEventInit : EventInit {
-//   required object promise;
-//   any reason;
-// };
-
 ///|
 #external
 pub type PromiseRejectionEventInit

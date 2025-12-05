@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary BoxQuadOptions {
-//   CSSBoxType box = "border";
-//   GeometryNode relativeTo; // XXX default document (i.e. viewport)
-// };
-
 ///|
 #external
 pub type BoxQuadOptions

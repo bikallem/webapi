@@ -9,7 +9,7 @@
  */
 
 import type { ParsedInterface, ParsedIdl } from "../types.js";
-import { toSnakeCase, toTraitName, joinBlocks, formatIdlSourceAsComment } from "../utils.js";
+import { toSnakeCase, toTraitName, joinBlocks } from "../utils.js";
 import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
@@ -247,11 +247,6 @@ export function emitInterface(
   parts.push(`// Auto-generated MoonBit bindings for ${iface.name}`);
   parts.push(`// Do not edit manually`);
 
-  // Include WebIDL source as comment
-  const idlComment = formatIdlSourceAsComment(iface.idlSource);
-  if (idlComment) {
-    parts.push(`//\n// WebIDL Interface:\n${idlComment}`);
-  }
 
   // External type declaration - now generated for all interfaces including abstract ones
   parts.push(emitExternalType(iface));

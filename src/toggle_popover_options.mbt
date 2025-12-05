@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary TogglePopoverOptions : ShowPopoverOptions {
-//   boolean force;
-// };
-
 ///|
 #external
 pub type TogglePopoverOptions

@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=(Window,Worker)]
-// interface CanvasGradient {
-//   // opaque object
-//   undefined addColorStop(double offset, DOMString color);
-// };
-
 ///|
 #external
 pub type CanvasGradient

@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary StructuredSerializeOptions {
-//   sequence<object> transfer = [];
-// };
-
 ///|
 #external
 pub type StructuredSerializeOptions

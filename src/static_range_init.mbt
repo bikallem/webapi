@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary StaticRangeInit {
-//   required Node startContainer;
-//   required unsigned long startOffset;
-//   required Node endContainer;
-//   required unsigned long endOffset;
-// };
-
 ///|
 #external
 pub type StaticRangeInit

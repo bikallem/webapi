@@ -1,0 +1,7 @@
+dictionary MessageEventInit : EventInit {
+  any data = null;
+  USVString origin = "";
+  DOMString lastEventId = "";
+  MessageEventSource? source = null;
+  sequence<MessagePort> ports = [];
+};

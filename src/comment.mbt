@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface Comment : CharacterData {
-//   constructor(optional DOMString data = "");
-// };
-
 ///|
 #external
 pub type Comment

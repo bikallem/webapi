@@ -2,19 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLDivElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// 
-//   // also has obsolete members
-// };
-// 
-// partial interface HTMLDivElement {
-//   [CEReactions, Reflect] attribute DOMString align;
-// };
-
 ///|
 #external
 pub type HTMLDivElement

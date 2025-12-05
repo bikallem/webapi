@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CompositionEventInit : UIEventInit {
-//   DOMString data = "";
-// };
-
 ///|
 #external
 pub type CompositionEventInit

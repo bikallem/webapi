@@ -2,17 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=*]
-// interface AbortController {
-//   constructor();
-// 
-//   [SameObject] readonly attribute AbortSignal signal;
-// 
-//   undefined abort(optional any reason);
-// };
-
 ///|
 #external
 pub type AbortController

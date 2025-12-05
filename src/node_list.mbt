@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface NodeList {
-//   getter Node? item(unsigned long index);
-//   readonly attribute unsigned long length;
-//   iterable<Node>;
-// };
-
 ///|
 #external
 pub type NodeList

@@ -1,0 +1,4 @@
+dictionary ImportNodeOptions {
+  CustomElementRegistry customElementRegistry;
+  boolean selfOnly = false;
+};

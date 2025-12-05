@@ -2,18 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary MutationObserverInit {
-//   boolean childList = false;
-//   boolean attributes;
-//   boolean characterData;
-//   boolean subtree = false;
-//   boolean attributeOldValue;
-//   boolean characterDataOldValue;
-//   sequence<DOMString> attributeFilter;
-// };
-
 ///|
 #external
 pub type MutationObserverInit

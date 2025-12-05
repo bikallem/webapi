@@ -2,40 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface ShadowRoot : DocumentFragment {
-//   readonly attribute ShadowRootMode mode;
-//   readonly attribute boolean delegatesFocus;
-//   readonly attribute SlotAssignmentMode slotAssignment;
-//   readonly attribute boolean clonable;
-//   readonly attribute boolean serializable;
-//   readonly attribute Element host;
-// 
-//   attribute EventHandler onslotchange;
-// };
-// 
-// partial interface ShadowRoot {
-//   [CEReactions] undefined setHTMLUnsafe((TrustedHTML or DOMString) html);
-//   DOMString getHTML(optional GetHTMLOptions options = {});
-// 
-//   [CEReactions] attribute (TrustedHTML or [LegacyNullToEmptyString] DOMString) innerHTML;
-// };
-// 
-// partial interface mixin DocumentOrShadowRoot {
-//   [SameObject] readonly attribute StyleSheetList styleSheets;
-//   attribute ObservableArray<CSSStyleSheet> adoptedStyleSheets;
-// };
-// 
-// interface mixin DocumentOrShadowRoot {
-//   readonly attribute CustomElementRegistry? customElementRegistry;
-// };
-// 
-// partial interface mixin DocumentOrShadowRoot {
-//   readonly attribute Element? activeElement;
-// };
-
 ///|
 #external
 pub type ShadowRoot

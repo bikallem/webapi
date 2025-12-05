@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ElementCreationOptions {
-//   CustomElementRegistry customElementRegistry;
-//   DOMString is;
-// };
-
 ///|
 #external
 pub type ElementCreationOptions

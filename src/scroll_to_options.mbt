@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ScrollToOptions : ScrollOptions {
-//     unrestricted double left;
-//     unrestricted double top;
-// };
-
 ///|
 #external
 pub type ScrollToOptions

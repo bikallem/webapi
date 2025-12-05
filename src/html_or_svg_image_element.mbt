@@ -2,11 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Typedef:
-// typedef (HTMLImageElement or
-//          SVGImageElement) HTMLOrSVGImageElement;
-
 ///|
 pub(open) trait THTMLOrSVGImageElement {
   to_js(self : Self) -> JsValue

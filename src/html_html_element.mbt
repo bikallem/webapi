@@ -2,19 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLHtmlElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// 
-//   // also has obsolete members
-// };
-// 
-// partial interface HTMLHtmlElement {
-//   [CEReactions, Reflect] attribute DOMString version;
-// };
-
 ///|
 #external
 pub type HTMLHtmlElement

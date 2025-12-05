@@ -1,0 +1,3 @@
+dictionary FilePropertyBag : BlobPropertyBag {
+  long long lastModified;
+};

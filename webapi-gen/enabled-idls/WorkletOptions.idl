@@ -1,0 +1,3 @@
+dictionary WorkletOptions {
+  RequestCredentials credentials = "same-origin";
+};

@@ -1,0 +1,4 @@
+dictionary GetHTMLOptions {
+  boolean serializableShadowRoots = false;
+  sequence<ShadowRoot> shadowRoots = [];
+};

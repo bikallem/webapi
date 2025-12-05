@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window,
-//  LegacyFactoryFunction=Audio(optional DOMString src)]
-// interface HTMLAudioElement : HTMLMediaElement {
-//   [HTMLConstructor] constructor();
-// };
-
 ///|
 #external
 pub type HTMLAudioElement

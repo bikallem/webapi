@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=(Window,Worker)]
-// interface ImageBitmapRenderingContext {
-//   readonly attribute (HTMLCanvasElement or OffscreenCanvas) canvas;
-//   undefined transferFromImageBitmap(ImageBitmap? bitmap);
-// };
-
 ///|
 #external
 pub type ImageBitmapRenderingContext

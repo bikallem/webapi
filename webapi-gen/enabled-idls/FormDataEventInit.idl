@@ -1,0 +1,3 @@
+dictionary FormDataEventInit : EventInit {
+  required FormData formData;
+};

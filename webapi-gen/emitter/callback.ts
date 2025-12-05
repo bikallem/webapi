@@ -5,12 +5,7 @@
  */
 
 import type { ParsedCallback, ParsedParam } from "../types.js";
-import {
-  toSnakeCase,
-  escapeKeyword,
-  toFfiModuleName,
-  formatIdlSourceAsComment,
-} from "../utils.js";
+import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatReturnType } from "../mapping.js";
 
 /**
@@ -77,11 +72,6 @@ export function emitCallback(callback: ParsedCallback): string {
   parts.push(`// Auto-generated MoonBit bindings for ${callback.name} callback`);
   parts.push(`// Do not edit manually`);
 
-  // Include WebIDL source as comment
-  const idlComment = formatIdlSourceAsComment(callback.idlSource);
-  if (idlComment) {
-    parts.push(`//\n// WebIDL Callback:\n${idlComment}`);
-  }
 
   // Type and impl
   parts.push(emitCallbackType(callback));

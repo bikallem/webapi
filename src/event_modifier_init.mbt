@@ -2,26 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary EventModifierInit : UIEventInit {
-//   boolean ctrlKey = false;
-//   boolean shiftKey = false;
-//   boolean altKey = false;
-//   boolean metaKey = false;
-// 
-//   boolean modifierAltGraph = false;
-//   boolean modifierCapsLock = false;
-//   boolean modifierFn = false;
-//   boolean modifierFnLock = false;
-//   boolean modifierHyper = false;
-//   boolean modifierNumLock = false;
-//   boolean modifierScrollLock = false;
-//   boolean modifierSuper = false;
-//   boolean modifierSymbol = false;
-//   boolean modifierSymbolLock = false;
-// };
-
 ///|
 #external
 pub type EventModifierInit

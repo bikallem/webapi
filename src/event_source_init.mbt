@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary EventSourceInit {
-//   boolean withCredentials = false;
-// };
-
 ///|
 #external
 pub type EventSourceInit

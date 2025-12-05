@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface CDATASection : Text {
-// };
-
 ///|
 #external
 pub type CDATASection

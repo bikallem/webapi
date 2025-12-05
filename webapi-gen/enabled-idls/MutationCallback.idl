@@ -1,0 +1,1 @@
+callback MutationCallback = undefined (sequence<MutationRecord> mutations, MutationObserver observer);

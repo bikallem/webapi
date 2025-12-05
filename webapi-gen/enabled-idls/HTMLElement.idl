@@ -1,0 +1,145 @@
+partial interface HTMLElement {
+  readonly attribute Element? scrollParent;
+  readonly attribute Element? offsetParent;
+  readonly attribute long offsetTop;
+  readonly attribute long offsetLeft;
+  readonly attribute long offsetWidth;
+  readonly attribute long offsetHeight;
+};
+
+[Exposed=Window]
+interface HTMLElement : Element {
+  [HTMLConstructor] constructor();
+
+  // metadata attributes
+  [CEReactions, Reflect] attribute DOMString title;
+  [CEReactions, Reflect] attribute DOMString lang;
+  [CEReactions] attribute boolean translate;
+  [CEReactions] attribute DOMString dir;
+
+  // user interaction
+  [CEReactions] attribute (boolean or unrestricted double or DOMString)? hidden;
+  [CEReactions, Reflect] attribute boolean inert;
+  undefined click();
+  [CEReactions, Reflect] attribute DOMString accessKey;
+  readonly attribute DOMString accessKeyLabel;
+  [CEReactions] attribute boolean draggable;
+  [CEReactions] attribute boolean spellcheck;
+  [CEReactions, ReflectSetter] attribute DOMString writingSuggestions;
+  [CEReactions, ReflectSetter] attribute DOMString autocapitalize;
+  [CEReactions] attribute boolean autocorrect;
+
+  [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerText;
+  [CEReactions] attribute [LegacyNullToEmptyString] DOMString outerText;
+
+  ElementInternals attachInternals();
+
+  // The popover API
+  undefined showPopover(optional ShowPopoverOptions options = {});
+  undefined hidePopover();
+  boolean togglePopover(optional (TogglePopoverOptions or boolean) options = {});
+  [CEReactions] attribute DOMString? popover;
+
+  [CEReactions, Reflect, ReflectRange=(0, 8)] attribute unsigned long headingOffset;
+  [CEReactions, Reflect] attribute boolean headingReset;
+};
+
+interface mixin ElementCSSInlineStyle {
+  [SameObject, PutForwards=cssText] readonly attribute CSSStyleProperties style;
+};
+
+interface mixin GlobalEventHandlers {
+  attribute EventHandler onabort;
+  attribute EventHandler onauxclick;
+  attribute EventHandler onbeforeinput;
+  attribute EventHandler onbeforematch;
+  attribute EventHandler onbeforetoggle;
+  attribute EventHandler onblur;
+  attribute EventHandler oncancel;
+  attribute EventHandler oncanplay;
+  attribute EventHandler oncanplaythrough;
+  attribute EventHandler onchange;
+  attribute EventHandler onclick;
+  attribute EventHandler onclose;
+  attribute EventHandler oncommand;
+  attribute EventHandler oncontextlost;
+  attribute EventHandler oncontextmenu;
+  attribute EventHandler oncontextrestored;
+  attribute EventHandler oncopy;
+  attribute EventHandler oncuechange;
+  attribute EventHandler oncut;
+  attribute EventHandler ondblclick;
+  attribute EventHandler ondrag;
+  attribute EventHandler ondragend;
+  attribute EventHandler ondragenter;
+  attribute EventHandler ondragleave;
+  attribute EventHandler ondragover;
+  attribute EventHandler ondragstart;
+  attribute EventHandler ondrop;
+  attribute EventHandler ondurationchange;
+  attribute EventHandler onemptied;
+  attribute EventHandler onended;
+  attribute OnErrorEventHandler onerror;
+  attribute EventHandler onfocus;
+  attribute EventHandler onformdata;
+  attribute EventHandler oninput;
+  attribute EventHandler oninvalid;
+  attribute EventHandler onkeydown;
+  attribute EventHandler onkeypress;
+  attribute EventHandler onkeyup;
+  attribute EventHandler onload;
+  attribute EventHandler onloadeddata;
+  attribute EventHandler onloadedmetadata;
+  attribute EventHandler onloadstart;
+  attribute EventHandler onmousedown;
+  [LegacyLenientThis] attribute EventHandler onmouseenter;
+  [LegacyLenientThis] attribute EventHandler onmouseleave;
+  attribute EventHandler onmousemove;
+  attribute EventHandler onmouseout;
+  attribute EventHandler onmouseover;
+  attribute EventHandler onmouseup;
+  attribute EventHandler onpaste;
+  attribute EventHandler onpause;
+  attribute EventHandler onplay;
+  attribute EventHandler onplaying;
+  attribute EventHandler onprogress;
+  attribute EventHandler onratechange;
+  attribute EventHandler onreset;
+  attribute EventHandler onresize;
+  attribute EventHandler onscroll;
+  attribute EventHandler onscrollend;
+  attribute EventHandler onsecuritypolicyviolation;
+  attribute EventHandler onseeked;
+  attribute EventHandler onseeking;
+  attribute EventHandler onselect;
+  attribute EventHandler onslotchange;
+  attribute EventHandler onstalled;
+  attribute EventHandler onsubmit;
+  attribute EventHandler onsuspend;
+  attribute EventHandler ontimeupdate;
+  attribute EventHandler ontoggle;
+  attribute EventHandler onvolumechange;
+  attribute EventHandler onwaiting;
+  attribute EventHandler onwebkitanimationend;
+  attribute EventHandler onwebkitanimationiteration;
+  attribute EventHandler onwebkitanimationstart;
+  attribute EventHandler onwebkittransitionend;
+  attribute EventHandler onwheel;
+};
+
+interface mixin ElementContentEditable {
+  [CEReactions] attribute DOMString contentEditable;
+  [CEReactions] attribute DOMString enterKeyHint;
+  readonly attribute boolean isContentEditable;
+  [CEReactions] attribute DOMString inputMode;
+};
+
+interface mixin HTMLOrSVGElement {
+  [SameObject] readonly attribute DOMStringMap dataset;
+  attribute DOMString nonce; // intentionally no [CEReactions]
+
+  [CEReactions, Reflect] attribute boolean autofocus;
+  [CEReactions, ReflectSetter] attribute long tabIndex;
+  undefined focus(optional FocusOptions options = {});
+  undefined blur();
+};

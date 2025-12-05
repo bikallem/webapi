@@ -1,0 +1,3 @@
+dictionary ImageBitmapRenderingContextSettings {
+  boolean alpha = true;
+};

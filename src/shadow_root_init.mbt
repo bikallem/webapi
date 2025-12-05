@@ -2,17 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ShadowRootInit {
-//   required ShadowRootMode mode;
-//   boolean delegatesFocus = false;
-//   SlotAssignmentMode slotAssignment = "named";
-//   boolean clonable = false;
-//   boolean serializable = false;
-//   CustomElementRegistry? customElementRegistry = null;
-// };
-
 ///|
 #external
 pub type ShadowRootInit

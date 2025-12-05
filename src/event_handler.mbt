@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Typedef:
-// typedef EventHandlerNonNull? EventHandler;
-
 ///|
 #external
 pub type EventHandler

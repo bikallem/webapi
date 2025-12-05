@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ImageDataSettings {
-//   PredefinedColorSpace colorSpace;
-//   ImageDataPixelFormat pixelFormat = "rgba-unorm8";
-// };
-
 ///|
 #external
 pub type ImageDataSettings

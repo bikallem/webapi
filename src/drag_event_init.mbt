@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary DragEventInit : MouseEventInit {
-//   DataTransfer? dataTransfer = null;
-// };
-
 ///|
 #external
 pub type DragEventInit

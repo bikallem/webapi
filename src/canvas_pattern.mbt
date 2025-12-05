@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=(Window,Worker)]
-// interface CanvasPattern {
-//   // opaque object
-//   undefined setTransform(optional DOMMatrix2DInit transform = {});
-// };
-
 ///|
 #external
 pub type CanvasPattern

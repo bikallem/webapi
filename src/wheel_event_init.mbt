@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary WheelEventInit : MouseEventInit {
-//   double deltaX = 0.0;
-//   double deltaY = 0.0;
-//   double deltaZ = 0.0;
-//   unsigned long deltaMode = 0;
-// };
-
 ///|
 #external
 pub type WheelEventInit

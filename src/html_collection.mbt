@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window, LegacyUnenumerableNamedProperties]
-// interface HTMLCollection {
-//   readonly attribute unsigned long length;
-//   getter Element? item(unsigned long index);
-//   getter Element? namedItem(DOMString name);
-// };
-
 ///|
 #external
 pub type HTMLCollection

@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary HashChangeEventInit : EventInit {
-//   USVString oldURL = "";
-//   USVString newURL = "";
-// };
-
 ///|
 #external
 pub type HashChangeEventInit

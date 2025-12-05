@@ -2,17 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary UIEventInit : EventInit {
-//   Window? view = null;
-//   long detail = 0;
-// };
-// 
-// partial dictionary UIEventInit {
-//   unsigned long which = 0;
-// };
-
 ///|
 #external
 pub type UIEventInit

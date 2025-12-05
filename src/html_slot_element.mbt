@@ -2,18 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLSlotElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// 
-//   [CEReactions, Reflect] attribute DOMString name;
-//   sequence<Node> assignedNodes(optional AssignedNodesOptions options = {});
-//   sequence<Element> assignedElements(optional AssignedNodesOptions options = {});
-//   undefined assign((Element or Text)... nodes);
-// };
-
 ///|
 #external
 pub type HTMLSlotElement

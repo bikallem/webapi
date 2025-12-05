@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary FormDataEventInit : EventInit {
-//   required FormData formData;
-// };
-
 ///|
 #external
 pub type FormDataEventInit

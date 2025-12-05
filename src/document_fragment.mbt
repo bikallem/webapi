@@ -2,33 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface DocumentFragment : Node {
-//   constructor();
-// };
-// 
-// interface mixin NonElementParentNode {
-//   Element? getElementById(DOMString elementId);
-// };
-// 
-// interface mixin ParentNode {
-//   [SameObject] readonly attribute HTMLCollection children;
-//   readonly attribute Element? firstElementChild;
-//   readonly attribute Element? lastElementChild;
-//   readonly attribute unsigned long childElementCount;
-// 
-//   [CEReactions, Unscopable] undefined prepend((Node or DOMString)... nodes);
-//   [CEReactions, Unscopable] undefined append((Node or DOMString)... nodes);
-//   [CEReactions, Unscopable] undefined replaceChildren((Node or DOMString)... nodes);
-// 
-//   [CEReactions] undefined moveBefore(Node node, Node? child);
-// 
-//   Element? querySelector(DOMString selectors);
-//   [NewObject] NodeList querySelectorAll(DOMString selectors);
-// };
-
 ///|
 #external
 pub type DocumentFragment

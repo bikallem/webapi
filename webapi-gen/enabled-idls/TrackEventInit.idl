@@ -1,0 +1,3 @@
+dictionary TrackEventInit : EventInit {
+  (VideoTrack or AudioTrack or TextTrack)? track = null;
+};

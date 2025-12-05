@@ -2,52 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// partial interface HTMLImageElement {
-//   readonly attribute long x;
-//   readonly attribute long y;
-// };
-// 
-// [Exposed=Window,
-//  LegacyFactoryFunction=Image(optional unsigned long width, optional unsigned long height)]
-// interface HTMLImageElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// 
-//   [CEReactions, Reflect] attribute DOMString alt;
-//   [CEReactions, ReflectURL] attribute USVString src;
-//   [CEReactions, Reflect] attribute USVString srcset;
-//   [CEReactions, Reflect] attribute DOMString sizes;
-//   [CEReactions] attribute DOMString? crossOrigin;
-//   [CEReactions, Reflect] attribute DOMString useMap;
-//   [CEReactions, Reflect] attribute boolean isMap;
-//   [CEReactions, ReflectSetter] attribute unsigned long width;
-//   [CEReactions, ReflectSetter] attribute unsigned long height;
-//   readonly attribute unsigned long naturalWidth;
-//   readonly attribute unsigned long naturalHeight;
-//   readonly attribute boolean complete;
-//   readonly attribute USVString currentSrc;
-//   [CEReactions] attribute DOMString referrerPolicy;
-//   [CEReactions] attribute DOMString decoding;
-//   [CEReactions] attribute DOMString loading;
-//   [CEReactions] attribute DOMString fetchPriority;
-// 
-//   Promise<undefined> decode();
-// 
-//   // also has obsolete members
-// };
-// 
-// partial interface HTMLImageElement {
-//   [CEReactions, Reflect] attribute DOMString name;
-//   [CEReactions, ReflectURL] attribute USVString lowsrc;
-//   [CEReactions, Reflect] attribute DOMString align;
-//   [CEReactions, Reflect] attribute unsigned long hspace;
-//   [CEReactions, Reflect] attribute unsigned long vspace;
-//   [CEReactions, ReflectURL] attribute USVString longDesc;
-// 
-//   [CEReactions, Reflect] attribute [LegacyNullToEmptyString] DOMString border;
-// };
-
 ///|
 #external
 pub type HTMLImageElement

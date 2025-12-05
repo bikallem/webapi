@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CustomEventInit : EventInit {
-//   any detail = null;
-// };
-
 ///|
 #external
 pub type CustomEventInit

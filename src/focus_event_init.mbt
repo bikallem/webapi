@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary FocusEventInit : UIEventInit {
-//   EventTarget? relatedTarget = null;
-// };
-
 ///|
 #external
 pub type FocusEventInit

@@ -2,10 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Callback:
-// callback FrameRequestCallback = undefined (DOMHighResTimeStamp time);
-
 ///|
 #external
 pub type FrameRequestCallback

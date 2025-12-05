@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface FocusEvent : UIEvent {
-//   constructor(DOMString type, optional FocusEventInit eventInitDict = {});
-//   readonly attribute EventTarget? relatedTarget;
-// };
-
 ///|
 #external
 pub type FocusEvent

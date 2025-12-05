@@ -1,0 +1,8 @@
+dictionary UIEventInit : EventInit {
+  Window? view = null;
+  long detail = 0;
+};
+
+partial dictionary UIEventInit {
+  unsigned long which = 0;
+};

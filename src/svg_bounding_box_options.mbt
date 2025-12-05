@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary SVGBoundingBoxOptions {
-//   boolean fill = true;
-//   boolean stroke = false;
-//   boolean markers = false;
-//   boolean clipped = false;
-// };
-
 ///|
 #external
 pub type SVGBoundingBoxOptions

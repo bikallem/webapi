@@ -2,16 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface InputEvent : UIEvent {
-//   constructor(DOMString type, optional InputEventInit eventInitDict = {});
-//   readonly attribute USVString? data;
-//   readonly attribute boolean isComposing;
-//   readonly attribute DOMString inputType;
-// };
-
 ///|
 #external
 pub type InputEvent

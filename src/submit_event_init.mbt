@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary SubmitEventInit : EventInit {
-//   HTMLElement? submitter = null;
-// };
-
 ///|
 #external
 pub type SubmitEventInit

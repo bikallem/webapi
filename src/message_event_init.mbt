@@ -2,16 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary MessageEventInit : EventInit {
-//   any data = null;
-//   USVString origin = "";
-//   DOMString lastEventId = "";
-//   MessageEventSource? source = null;
-//   sequence<MessagePort> ports = [];
-// };
-
 ///|
 #external
 pub type MessageEventInit

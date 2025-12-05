@@ -2,45 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLBodyElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// 
-//   // also has obsolete members
-// };
-// 
-// partial interface HTMLBodyElement {
-//   [CEReactions, Reflect] attribute [LegacyNullToEmptyString] DOMString text;
-//   [CEReactions, Reflect] attribute [LegacyNullToEmptyString] DOMString link;
-//   [CEReactions, Reflect] attribute [LegacyNullToEmptyString] DOMString vLink;
-//   [CEReactions, Reflect] attribute [LegacyNullToEmptyString] DOMString aLink;
-//   [CEReactions, Reflect] attribute [LegacyNullToEmptyString] DOMString bgColor;
-//   [CEReactions, Reflect] attribute DOMString background;
-// };
-// 
-// interface mixin WindowEventHandlers {
-//   attribute EventHandler onafterprint;
-//   attribute EventHandler onbeforeprint;
-//   attribute OnBeforeUnloadEventHandler onbeforeunload;
-//   attribute EventHandler onhashchange;
-//   attribute EventHandler onlanguagechange;
-//   attribute EventHandler onmessage;
-//   attribute EventHandler onmessageerror;
-//   attribute EventHandler onoffline;
-//   attribute EventHandler ononline;
-//   attribute EventHandler onpagehide;
-//   attribute EventHandler onpagereveal;
-//   attribute EventHandler onpageshow;
-//   attribute EventHandler onpageswap;
-//   attribute EventHandler onpopstate;
-//   attribute EventHandler onrejectionhandled;
-//   attribute EventHandler onstorage;
-//   attribute EventHandler onunhandledrejection;
-//   attribute EventHandler onunload;
-// };
-
 ///|
 #external
 pub type HTMLBodyElement

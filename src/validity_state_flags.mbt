@@ -2,21 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary ValidityStateFlags {
-//   boolean valueMissing = false;
-//   boolean typeMismatch = false;
-//   boolean patternMismatch = false;
-//   boolean tooLong = false;
-//   boolean tooShort = false;
-//   boolean rangeUnderflow = false;
-//   boolean rangeOverflow = false;
-//   boolean stepMismatch = false;
-//   boolean badInput = false;
-//   boolean customError = false;
-// };
-
 ///|
 #external
 pub type ValidityStateFlags

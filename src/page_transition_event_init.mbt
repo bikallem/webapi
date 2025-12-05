@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary PageTransitionEventInit : EventInit {
-//   boolean persisted = false;
-// };
-
 ///|
 #external
 pub type PageTransitionEventInit

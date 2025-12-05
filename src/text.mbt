@@ -2,27 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface Text : CharacterData {
-//   constructor(optional DOMString data = "");
-// 
-//   [NewObject] Text splitText(unsigned long offset);
-//   readonly attribute DOMString wholeText;
-// };
-// 
-// interface mixin GeometryUtils {
-//   sequence<DOMQuad> getBoxQuads(optional BoxQuadOptions options = {});
-//   DOMQuad convertQuadFromNode(DOMQuadInit quad, GeometryNode from, optional ConvertCoordinateOptions options = {});
-//   DOMQuad convertRectFromNode(DOMRectReadOnly rect, GeometryNode from, optional ConvertCoordinateOptions options = {});
-//   DOMPoint convertPointFromNode(DOMPointInit point, GeometryNode from, optional ConvertCoordinateOptions options = {}); // XXX z,w turns into 0
-// };
-// 
-// interface mixin Slottable {
-//   readonly attribute HTMLSlotElement? assignedSlot;
-// };
-
 ///|
 #external
 pub type Text

@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary PopStateEventInit : EventInit {
-//   any state = null;
-//   boolean hasUAVisualTransition = false;
-// };
-
 ///|
 #external
 pub type PopStateEventInit

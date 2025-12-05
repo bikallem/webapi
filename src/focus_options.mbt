@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary FocusOptions {
-//   boolean preventScroll = false;
-//   boolean focusVisible;
-// };
-
 ///|
 #external
 pub type FocusOptions

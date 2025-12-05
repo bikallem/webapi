@@ -1,0 +1,3 @@
+dictionary SubmitEventInit : EventInit {
+  HTMLElement? submitter = null;
+};

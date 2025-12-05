@@ -2,27 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface HTMLStyleElement : HTMLElement {
-//   [HTMLConstructor] constructor();
-// 
-//   attribute boolean disabled;
-//   [CEReactions, Reflect] attribute DOMString media;
-//   [SameObject, PutForwards=value, Reflect] readonly attribute DOMTokenList blocking;
-// 
-//   // also has obsolete members
-// };
-// 
-// partial interface HTMLStyleElement {
-//   [CEReactions, Reflect] attribute DOMString type;
-// };
-// 
-// interface mixin LinkStyle {
-//   readonly attribute CSSStyleSheet? sheet;
-// };
-
 ///|
 #external
 pub type HTMLStyleElement

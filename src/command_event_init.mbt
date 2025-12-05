@@ -2,13 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CommandEventInit : EventInit {
-//   Element? source = null;
-//   DOMString command = "";
-// };
-
 ///|
 #external
 pub type CommandEventInit

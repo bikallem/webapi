@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CaretPositionFromPointOptions {
-//   sequence<ShadowRoot> shadowRoots = [];
-// };
-
 ///|
 #external
 pub type CaretPositionFromPointOptions

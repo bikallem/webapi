@@ -2,16 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary StorageEventInit : EventInit {
-//   DOMString? key = null;
-//   DOMString? oldValue = null;
-//   DOMString? newValue = null;
-//   USVString url = "";
-//   Storage? storageArea = null;
-// };
-
 ///|
 #external
 pub type StorageEventInit

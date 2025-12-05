@@ -1,0 +1,4 @@
+dictionary ElementCreationOptions {
+  CustomElementRegistry customElementRegistry;
+  DOMString is;
+};

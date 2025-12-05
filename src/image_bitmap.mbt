@@ -2,15 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=(Window,Worker), Serializable, Transferable]
-// interface ImageBitmap {
-//   readonly attribute unsigned long width;
-//   readonly attribute unsigned long height;
-//   undefined close();
-// };
-
 ///|
 #external
 pub type ImageBitmap

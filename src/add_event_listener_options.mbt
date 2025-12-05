@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary AddEventListenerOptions : EventListenerOptions {
-//   boolean passive;
-//   boolean once = false;
-//   AbortSignal signal;
-// };
-
 ///|
 #external
 pub type AddEventListenerOptions

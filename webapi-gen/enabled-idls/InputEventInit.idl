@@ -1,0 +1,5 @@
+dictionary InputEventInit : UIEventInit {
+  DOMString? data = null;
+  boolean isComposing = false;
+  DOMString inputType = "";
+};

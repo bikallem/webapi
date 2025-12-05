@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Typedef:
-// typedef (CanvasImageSource or
-//          Blob or
-//          ImageData) ImageBitmapSource;
-
 ///|
 pub(open) trait TImageBitmapSource {
   to_js(self : Self) -> JsValue

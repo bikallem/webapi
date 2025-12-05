@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary FilePropertyBag : BlobPropertyBag {
-//   long long lastModified;
-// };
-
 ///|
 #external
 pub type FilePropertyBag

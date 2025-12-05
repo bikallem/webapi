@@ -2,14 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary EventInit {
-//   boolean bubbles = false;
-//   boolean cancelable = false;
-//   boolean composed = false;
-// };
-
 ///|
 #external
 pub type EventInit

@@ -2,22 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Interface:
-// [Exposed=Window]
-// interface WheelEvent : MouseEvent {
-//   constructor(DOMString type, optional WheelEventInit eventInitDict = {});
-//   // DeltaModeCode
-//   const unsigned long DOM_DELTA_PIXEL = 0x00;
-//   const unsigned long DOM_DELTA_LINE  = 0x01;
-//   const unsigned long DOM_DELTA_PAGE  = 0x02;
-// 
-//   readonly attribute double deltaX;
-//   readonly attribute double deltaY;
-//   readonly attribute double deltaZ;
-//   readonly attribute unsigned long deltaMode;
-// };
-
 ///|
 #external
 pub type WheelEvent

@@ -2,16 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary CanvasRenderingContext2DSettings {
-//   boolean alpha = true;
-//   boolean desynchronized = false;
-//   PredefinedColorSpace colorSpace = "srgb";
-//   CanvasColorType colorType = "unorm8";
-//   boolean willReadFrequently = false;
-// };
-
 ///|
 #external
 pub type CanvasRenderingContext2DSettings

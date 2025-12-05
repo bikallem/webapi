@@ -2,12 +2,6 @@
 
 // Do not edit manually
 
-//
-// WebIDL Dictionary:
-// dictionary WorkletOptions {
-//   RequestCredentials credentials = "same-origin";
-// };
-
 ///|
 #external
 pub type WorkletOptions

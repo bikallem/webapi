@@ -1,0 +1,7 @@
+dictionary CheckVisibilityOptions {
+    boolean checkOpacity = false;
+    boolean checkVisibilityCSS = false;
+    boolean contentVisibilityAuto = false;
+    boolean opacityProperty = false;
+    boolean visibilityProperty = false;
+};
