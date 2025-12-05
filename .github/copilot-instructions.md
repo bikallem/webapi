@@ -48,7 +48,7 @@ make examples
 ```
 .
 ├── .github/                    # CI/CD and Copilot configuration
-├── AGENTS.md                   # MoonBit language guide (DO NOT MODIFY)
+├── AGENTS.md                   # MoonBit language guide (reference document)
 ├── src/                        # Generated MoonBit bindings (AUTO-GENERATED)
 │   ├── *.mbt                   # Interface/type/enum definitions
 │   ├── moon.pkg.json           # Package configuration
@@ -160,9 +160,9 @@ Generated as:
 ### Safe to Modify
 - `webapi-gen/**/*.ts` - Code generator source
 - `examples/**/*.mbt` - Example code
-- `README.mbt.md` - Documentation
+- `README.mbt.md` / `README.md` - Documentation (README.md is a symlink)
 - `moon.mod.json` - Module configuration
-- `moon.pkg.json` - Package configuration
+- `moon.pkg.json` - Package configuration (in package directories)
 - Build scripts (`Makefile`, `package.json`)
 
 ## Common Tasks
