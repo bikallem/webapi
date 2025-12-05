@@ -113,8 +113,8 @@ pub trait TWindow: TJsValue + TEventTarget {
   set_onemptied(self : Self, value : EventHandler) -> Unit = _
   onended(self : Self) -> EventHandler = _
   set_onended(self : Self, value : EventHandler) -> Unit = _
-  onerror(self : Self) -> OnErrorEventHandler = _
-  set_onerror(self : Self, value : OnErrorEventHandler) -> Unit = _
+  onerror(self : Self) -> EventHandler = _
+  set_onerror(self : Self, value : EventHandler) -> Unit = _
   onfocus(self : Self) -> EventHandler = _
   set_onfocus(self : Self, value : EventHandler) -> Unit = _
   onformdata(self : Self) -> EventHandler = _
@@ -209,8 +209,8 @@ pub trait TWindow: TJsValue + TEventTarget {
   set_onafterprint(self : Self, value : EventHandler) -> Unit = _
   onbeforeprint(self : Self) -> EventHandler = _
   set_onbeforeprint(self : Self, value : EventHandler) -> Unit = _
-  onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler = _
-  set_onbeforeunload(self : Self, value : OnBeforeUnloadEventHandler) -> Unit = _
+  onbeforeunload(self : Self) -> EventHandler = _
+  set_onbeforeunload(self : Self, value : EventHandler) -> Unit = _
   onhashchange(self : Self) -> EventHandler = _
   set_onhashchange(self : Self, value : EventHandler) -> Unit = _
   onlanguagechange(self : Self) -> EventHandler = _
@@ -1673,7 +1673,7 @@ impl TWindow with set_onended(self : Self, value : EventHandler) -> Unit {
 fn window_onerror_ffi(obj : JsValue) -> JsValue = "webapi_Window" "onerror"
 
 ///|
-impl TWindow with onerror(self : Self) -> OnErrorEventHandler {
+impl TWindow with onerror(self : Self) -> EventHandler {
   window_onerror_ffi(self.to_js()).unsafe_cast()
 }
 
@@ -1681,7 +1681,7 @@ impl TWindow with onerror(self : Self) -> OnErrorEventHandler {
 fn window_set_onerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Window" "set_onerror"
 
 ///|
-impl TWindow with set_onerror(self : Self, value : OnErrorEventHandler) -> Unit {
+impl TWindow with set_onerror(self : Self, value : EventHandler) -> Unit {
   window_set_onerror_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
@@ -2459,7 +2459,7 @@ impl TWindow with set_onbeforeprint(self : Self, value : EventHandler) -> Unit {
 fn window_onbeforeunload_ffi(obj : JsValue) -> JsValue = "webapi_Window" "onbeforeunload"
 
 ///|
-impl TWindow with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler {
+impl TWindow with onbeforeunload(self : Self) -> EventHandler {
   window_onbeforeunload_ffi(self.to_js()).unsafe_cast()
 }
 
@@ -2467,10 +2467,7 @@ impl TWindow with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler {
 fn window_set_onbeforeunload_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Window" "set_onbeforeunload"
 
 ///|
-impl TWindow with set_onbeforeunload(
-  self : Self,
-  value : OnBeforeUnloadEventHandler,
-) -> Unit {
+impl TWindow with set_onbeforeunload(self : Self, value : EventHandler) -> Unit {
   window_set_onbeforeunload_ffi(self.to_js(), TJsValue::to_js(value))
 }
 

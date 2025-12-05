@@ -268,16 +268,11 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
           isOptional: false,
         };
       }
-      if (name === "OnErrorEventHandler") {
+      // Map OnErrorEventHandler and OnBeforeUnloadEventHandler to EventHandler
+      // since their underlying types are excluded from generation
+      if (name === "OnErrorEventHandler" || name === "OnBeforeUnloadEventHandler") {
         return {
-          moonbitType: "OnErrorEventHandler",
-          needsConversion: true,
-          isOptional: false,
-        };
-      }
-      if (name === "OnBeforeUnloadEventHandler") {
-        return {
-          moonbitType: "OnBeforeUnloadEventHandler",
+          moonbitType: "EventHandler",
           needsConversion: true,
           isOptional: false,
         };

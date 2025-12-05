@@ -80,8 +80,6 @@ pub fn default_js_value() -> JsValue
 
 pub let document : Document
 
-pub fn[T] fn_to_js(T) -> JsValue
-
 pub let navigator : Navigator
 
 pub fn[T : TJsValue] opt_to_js(T?) -> JsValue
@@ -775,11 +773,6 @@ pub fn FrameRequestCallback::new((Double) -> Unit) -> Self
 pub impl TJsValue for FrameRequestCallback
 
 #external
-pub type FunctionStringCallback
-pub fn FunctionStringCallback::new((String) -> Unit) -> Self
-pub impl TJsValue for FunctionStringCallback
-
-#external
 pub type GetHTMLOptions
 pub fn GetHTMLOptions::empty() -> Self
 pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[ShadowRoot]) -> Self
@@ -1164,11 +1157,6 @@ pub fn MouseEventInit::new(screen_x? : Int, screen_y? : Int, client_x? : Int, cl
 pub impl TJsValue for MouseEventInit
 
 #external
-pub type MutationCallback
-pub fn MutationCallback::new((Array[MutationRecord], MutationObserver) -> Unit) -> Self
-pub impl TJsValue for MutationCallback
-
-#external
 pub type MutationObserver
 pub fn MutationObserver::new(JsValue) -> Self
 pub fn MutationObserver::null() -> Self
@@ -1280,26 +1268,6 @@ pub fn OffscreenRenderingContextId::from(String) -> Self?
 pub impl TJsValue for OffscreenRenderingContextId
 pub impl Eq for OffscreenRenderingContextId
 pub impl Show for OffscreenRenderingContextId
-
-#external
-pub type OnBeforeUnloadEventHandler
-pub fn OnBeforeUnloadEventHandler::new((Event) -> String?) -> Self
-pub impl TJsValue for OnBeforeUnloadEventHandler
-
-#external
-pub type OnBeforeUnloadEventHandlerNonNull
-pub fn OnBeforeUnloadEventHandlerNonNull::new((Event) -> String?) -> Self
-pub impl TJsValue for OnBeforeUnloadEventHandlerNonNull
-
-#external
-pub type OnErrorEventHandler
-pub fn OnErrorEventHandler::new((JsValue, String, UInt, UInt, JsValue) -> JsValue) -> Self
-pub impl TJsValue for OnErrorEventHandler
-
-#external
-pub type OnErrorEventHandlerNonNull
-pub fn OnErrorEventHandlerNonNull::new((JsValue, String, UInt, UInt, JsValue) -> JsValue) -> Self
-pub impl TJsValue for OnErrorEventHandlerNonNull
 
 #external
 pub type OuterHTML
@@ -2180,8 +2148,8 @@ pub trait TDocument : TJsValue + TNode {
   set_onemptied(Self, EventHandler) -> Unit
   onended(Self) -> EventHandler
   set_onended(Self, EventHandler) -> Unit
-  onerror(Self) -> OnErrorEventHandler
-  set_onerror(Self, OnErrorEventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
   onfocus(Self) -> EventHandler
   set_onfocus(Self, EventHandler) -> Unit
   onformdata(Self) -> EventHandler
@@ -2589,8 +2557,8 @@ pub trait THTMLBodyElement : TJsValue + THTMLElement {
   set_onafterprint(Self, EventHandler) -> Unit
   onbeforeprint(Self) -> EventHandler
   set_onbeforeprint(Self, EventHandler) -> Unit
-  onbeforeunload(Self) -> OnBeforeUnloadEventHandler
-  set_onbeforeunload(Self, OnBeforeUnloadEventHandler) -> Unit
+  onbeforeunload(Self) -> EventHandler
+  set_onbeforeunload(Self, EventHandler) -> Unit
   onhashchange(Self) -> EventHandler
   set_onhashchange(Self, EventHandler) -> Unit
   onlanguagechange(Self) -> EventHandler
@@ -2785,8 +2753,8 @@ pub trait THTMLElement : TJsValue + TElement {
   set_onemptied(Self, EventHandler) -> Unit
   onended(Self) -> EventHandler
   set_onended(Self, EventHandler) -> Unit
-  onerror(Self) -> OnErrorEventHandler
-  set_onerror(Self, OnErrorEventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
   onfocus(Self) -> EventHandler
   set_onfocus(Self, EventHandler) -> Unit
   onformdata(Self) -> EventHandler
@@ -3822,8 +3790,8 @@ pub trait TWindow : TJsValue + TEventTarget {
   set_onemptied(Self, EventHandler) -> Unit
   onended(Self) -> EventHandler
   set_onended(Self, EventHandler) -> Unit
-  onerror(Self) -> OnErrorEventHandler
-  set_onerror(Self, OnErrorEventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
   onfocus(Self) -> EventHandler
   set_onfocus(Self, EventHandler) -> Unit
   onformdata(Self) -> EventHandler
@@ -3918,8 +3886,8 @@ pub trait TWindow : TJsValue + TEventTarget {
   set_onafterprint(Self, EventHandler) -> Unit
   onbeforeprint(Self) -> EventHandler
   set_onbeforeprint(Self, EventHandler) -> Unit
-  onbeforeunload(Self) -> OnBeforeUnloadEventHandler
-  set_onbeforeunload(Self, OnBeforeUnloadEventHandler) -> Unit
+  onbeforeunload(Self) -> EventHandler
+  set_onbeforeunload(Self, EventHandler) -> Unit
   onhashchange(Self) -> EventHandler
   set_onhashchange(Self, EventHandler) -> Unit
   onlanguagechange(Self) -> EventHandler

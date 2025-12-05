@@ -91,6 +91,22 @@ const EXCLUDED_DICTIONARY_PREFIXES = [
 ];
 
 /**
+ * Callbacks and typedefs to exclude from generation
+ * These have complex signatures that don't work well with current FFI approach
+ */
+const EXCLUDED_CALLBACKS = new Set([
+  "FunctionStringCallback",
+  "MutationCallback",
+  "OnBeforeUnloadEventHandlerNonNull",
+  "OnErrorEventHandlerNonNull",
+]);
+
+const EXCLUDED_TYPEDEFS = new Set([
+  "OnBeforeUnloadEventHandler",
+  "OnErrorEventHandler",
+]);
+
+/**
  * Filter interfaces to core DOM APIs
  * This set is extended dynamically with interfaces referenced in typedef unions
  */
@@ -450,6 +466,9 @@ async function generateMoonBitFiles(
 
   // Generate callback files
   for (const [name, callback] of idl.callbacks) {
+    if (EXCLUDED_CALLBACKS.has(name)) {
+      continue;
+    }
     const filename = getCallbackFilename(name);
     const content = emitCallback(callback);
     const filepath = path.join(OUTPUT_DIR, filename);
@@ -462,6 +481,9 @@ async function generateMoonBitFiles(
 
   // Generate typedef files
   for (const [name, typedef] of idl.typedefs) {
+    if (EXCLUDED_TYPEDEFS.has(name)) {
+      continue;
+    }
     const filename = getTypedefFilename(name);
     const content = emitTypedef(typedef, idl);
     const filepath = path.join(OUTPUT_DIR, filename);

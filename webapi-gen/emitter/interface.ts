@@ -221,7 +221,6 @@ function emitCallbackInterfaceConstructor(iface: ParsedInterface): string | unde
   const method = iface.methods[0];
   if (!method) return undefined;
 
-  const ffiName = `${toSnakeCase(iface.name)}_new_ffi`;
   const moduleName = `webapi_${iface.name}`;
 
   // Build the function signature for the callback
@@ -235,17 +234,11 @@ function emitCallbackInterfaceConstructor(iface: ParsedInterface): string | unde
   const closureParamStr = paramTypes.join(", ");
   const closureType = `(${closureParamStr}) -> ${returnType}`;
 
-  // FFI function
-  const ffiFn = `///|
-fn ${ffiName}(f : JsValue) -> ${iface.name} = "${moduleName}" "new"`;
-
-  // Wrapper
+  // Wrapper passes function directly
   const wrapperFn = `///|
-pub fn ${iface.name}::new(f : ${closureType}) -> ${iface.name} {
-  ${ffiName}(fn_to_js(f))
-}`;
+pub fn ${iface.name}::new(f : ${closureType}) -> ${iface.name} = "${moduleName}" "new"`;
 
-  return `${ffiFn}\n\n${wrapperFn}`;
+  return `${wrapperFn}`;
 }
 
 /**

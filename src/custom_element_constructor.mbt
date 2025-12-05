@@ -12,11 +12,6 @@ pub impl TJsValue for CustomElementConstructor with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-fn custom_element_constructor_new_ffi(f : JsValue) -> CustomElementConstructor = "webapi_CustomElementConstructor" "new"
-
-///|
 pub fn CustomElementConstructor::new(
   f : () -> HTMLElement,
-) -> CustomElementConstructor {
-  custom_element_constructor_new_ffi(fn_to_js(f))
-}
+) -> CustomElementConstructor = "webapi_CustomElementConstructor" "new"

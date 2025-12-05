@@ -24,8 +24,8 @@ pub trait THTMLBodyElement: TJsValue + THTMLElement {
   set_onafterprint(self : Self, value : EventHandler) -> Unit = _
   onbeforeprint(self : Self) -> EventHandler = _
   set_onbeforeprint(self : Self, value : EventHandler) -> Unit = _
-  onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler = _
-  set_onbeforeunload(self : Self, value : OnBeforeUnloadEventHandler) -> Unit = _
+  onbeforeunload(self : Self) -> EventHandler = _
+  set_onbeforeunload(self : Self, value : EventHandler) -> Unit = _
   onhashchange(self : Self) -> EventHandler = _
   set_onhashchange(self : Self, value : EventHandler) -> Unit = _
   onlanguagechange(self : Self) -> EventHandler = _
@@ -214,7 +214,7 @@ impl THTMLBodyElement with set_onbeforeprint(self : Self, value : EventHandler) 
 fn html_body_element_onbeforeunload_ffi(obj : JsValue) -> JsValue = "webapi_HTMLBodyElement" "onbeforeunload"
 
 ///|
-impl THTMLBodyElement with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler {
+impl THTMLBodyElement with onbeforeunload(self : Self) -> EventHandler {
   html_body_element_onbeforeunload_ffi(self.to_js()).unsafe_cast()
 }
 
@@ -225,10 +225,7 @@ fn html_body_element_set_onbeforeunload_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onbeforeunload"
 
 ///|
-impl THTMLBodyElement with set_onbeforeunload(
-  self : Self,
-  value : OnBeforeUnloadEventHandler,
-) -> Unit {
+impl THTMLBodyElement with set_onbeforeunload(self : Self, value : EventHandler) -> Unit {
   html_body_element_set_onbeforeunload_ffi(self.to_js(), TJsValue::to_js(value))
 }
 

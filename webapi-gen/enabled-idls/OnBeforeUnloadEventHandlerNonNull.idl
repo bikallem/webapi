@@ -1,2 +1,0 @@
-[LegacyTreatNonObjectAsNull]
-callback OnBeforeUnloadEventHandlerNonNull = DOMString? (Event event);

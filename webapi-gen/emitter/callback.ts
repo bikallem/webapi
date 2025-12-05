@@ -29,12 +29,10 @@ pub impl TJsValue for ${callback.name} with to_js(self : ${callback.name}) -> Js
  * Emit callback constructor as TypeName::new with _ffi wrapper
  * 
  * Creates functions like:
- * fn event_handler_new_ffi(f: JsValue) -> EventHandler
  * pub fn EventHandler::new(f: (Event) -> Unit) -> EventHandler
  */
 function emitCallbackConstructor(callback: ParsedCallback): string {
   const moduleName = toFfiModuleName(callback.name);
-  const ffiName = `${toSnakeCase(callback.name)}_new_ffi`;
 
   // Build the function signature for the callback
   const paramTypes: string[] = [];
@@ -49,17 +47,10 @@ function emitCallbackConstructor(callback: ParsedCallback): string {
   const closureParamStr = paramTypes.join(", ");
   const closureType = `(${closureParamStr}) -> ${returnType}`;
 
-  // FFI function takes JsValue
-  const ffiFn = `///|
-fn ${ffiName}(f : JsValue) -> ${callback.name} = "${moduleName}" "new"`;
-
-  // Wrapper converts function to JsValue
+  // Public constructor passes function directly
   const wrapperFn = `///|
-pub fn ${callback.name}::new(f : ${closureType}) -> ${callback.name} {
-  ${ffiName}(fn_to_js(f))
-}`;
-
-  return `${ffiFn}\n\n${wrapperFn}`;
+pub fn ${callback.name}::new(f : ${closureType}) -> ${callback.name} = "${moduleName}" "new"`;
+  return `${wrapperFn}`;
 }
 
 /**

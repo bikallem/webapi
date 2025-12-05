@@ -69,7 +69,3 @@ pub fn[T : TJsValue] opt_to_js(opt : T?) -> JsValue {
     None => JsValue::undefined()
   }
 }
-
-///|
-/// Convert a MoonBit function to JsValue for use in callbacks
-pub fn[T] fn_to_js(f : T) -> JsValue = "%identity"

@@ -65,19 +65,11 @@ function emitTypedefConstructor(typedef: ParsedTypedef, idl: ParsedIdl): string 
     const closureParamStr = paramTypes.join(", ");
     const closureType = `(${closureParamStr}) -> ${returnType}`;
 
-    const ffiName = `${toSnakeCase(typedef.name)}_new_ffi`;
-
-    // FFI function
-    const ffiFn = `///|
-fn ${ffiName}(f : JsValue) -> ${typedef.name} = "webapi_${underlyingName}" "new"`;
-
-    // Wrapper that delegates to underlying type's constructor logic
+    // Wrapper passes function directly
     const wrapperFn = `///|
-pub fn ${typedef.name}::new(f : ${closureType}) -> ${typedef.name} {
-  ${ffiName}(fn_to_js(f))
-}`;
+pub fn ${typedef.name}::new(f : ${closureType}) -> ${typedef.name} = "webapi_${underlyingName}" "new"`;
 
-    return `${ffiFn}\n\n${wrapperFn}`;
+    return `${wrapperFn}`;
 }
 
 /**

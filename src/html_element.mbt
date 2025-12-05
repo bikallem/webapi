@@ -110,8 +110,8 @@ pub trait THTMLElement: TJsValue + TElement {
   set_onemptied(self : Self, value : EventHandler) -> Unit = _
   onended(self : Self) -> EventHandler = _
   set_onended(self : Self, value : EventHandler) -> Unit = _
-  onerror(self : Self) -> OnErrorEventHandler = _
-  set_onerror(self : Self, value : OnErrorEventHandler) -> Unit = _
+  onerror(self : Self) -> EventHandler = _
+  set_onerror(self : Self, value : EventHandler) -> Unit = _
   onfocus(self : Self) -> EventHandler = _
   set_onfocus(self : Self, value : EventHandler) -> Unit = _
   onformdata(self : Self) -> EventHandler = _
@@ -1154,7 +1154,7 @@ impl THTMLElement with set_onended(self : Self, value : EventHandler) -> Unit {
 fn html_element_onerror_ffi(obj : JsValue) -> JsValue = "webapi_HTMLElement" "onerror"
 
 ///|
-impl THTMLElement with onerror(self : Self) -> OnErrorEventHandler {
+impl THTMLElement with onerror(self : Self) -> EventHandler {
   html_element_onerror_ffi(self.to_js()).unsafe_cast()
 }
 
@@ -1162,7 +1162,7 @@ impl THTMLElement with onerror(self : Self) -> OnErrorEventHandler {
 fn html_element_set_onerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_onerror"
 
 ///|
-impl THTMLElement with set_onerror(self : Self, value : OnErrorEventHandler) -> Unit {
+impl THTMLElement with set_onerror(self : Self, value : EventHandler) -> Unit {
   html_element_set_onerror_ffi(self.to_js(), TJsValue::to_js(value))
 }
 

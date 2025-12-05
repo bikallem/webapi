@@ -133,8 +133,8 @@ pub trait TDocument: TJsValue + TNode {
   set_onemptied(self : Self, value : EventHandler) -> Unit = _
   onended(self : Self) -> EventHandler = _
   set_onended(self : Self, value : EventHandler) -> Unit = _
-  onerror(self : Self) -> OnErrorEventHandler = _
-  set_onerror(self : Self, value : OnErrorEventHandler) -> Unit = _
+  onerror(self : Self) -> EventHandler = _
+  set_onerror(self : Self, value : EventHandler) -> Unit = _
   onfocus(self : Self) -> EventHandler = _
   set_onfocus(self : Self, value : EventHandler) -> Unit = _
   onformdata(self : Self) -> EventHandler = _
@@ -2220,7 +2220,7 @@ impl TDocument with set_onended(self : Self, value : EventHandler) -> Unit {
 fn document_onerror_ffi(obj : JsValue) -> JsValue = "webapi_Document" "onerror"
 
 ///|
-impl TDocument with onerror(self : Self) -> OnErrorEventHandler {
+impl TDocument with onerror(self : Self) -> EventHandler {
   document_onerror_ffi(self.to_js()).unsafe_cast()
 }
 
@@ -2228,7 +2228,7 @@ impl TDocument with onerror(self : Self) -> OnErrorEventHandler {
 fn document_set_onerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onerror"
 
 ///|
-impl TDocument with set_onerror(self : Self, value : OnErrorEventHandler) -> Unit {
+impl TDocument with set_onerror(self : Self, value : EventHandler) -> Unit {
   document_set_onerror_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
