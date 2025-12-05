@@ -9,6 +9,7 @@
 import type { ParsedTypedef, ParsedIdl, ParsedType } from "../types.js";
 import { toSnakeCase } from "../utils.js";
 import { mapIdlType, formatReturnType, isKnownTypedef } from "../mapping.js";
+import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 
 /**
  * Emit external type declaration for typedef
@@ -54,22 +55,8 @@ function emitTypedefConstructor(typedef: ParsedTypedef, idl: ParsedIdl): string 
     const callback = idl.callbacks.get(underlyingName);
     if (!callback) return undefined;
 
-    // Build the function signature for the callback
-    const paramTypes: string[] = [];
-    for (const param of callback.params) {
-        const mapped = mapIdlType(param.type);
-        paramTypes.push(mapped.moonbitType);
-    }
-
-    const returnType = formatReturnType(callback.returnType);
-    const closureParamStr = paramTypes.join(", ");
-    const closureType = `(${closureParamStr}) -> ${returnType}`;
-
-    // Wrapper passes function directly
-    const wrapperFn = `///|
-pub fn ${typedef.name}::new(f : ${closureType}) -> ${typedef.name} = "webapi_${underlyingName}" "new"`;
-
-    return `${wrapperFn}`;
+    const closureType = buildClosureType(callback.params, callback.returnType);
+    return emitCallbackConstructor(typedef.name, `webapi_${underlyingName}`, closureType);
 }
 
 /**

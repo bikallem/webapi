@@ -9,6 +9,38 @@ import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatReturnType } from "../mapping.js";
 
 /**
+ * Generate a closure type string from parameters and return type
+ * Example: (Event) -> Unit or (String, Int) -> Promise[String]
+ */
+export function buildClosureType(
+  params: ParsedParam[],
+  returnType: any
+): string {
+  const paramTypes: string[] = [];
+  for (const param of params) {
+    const mapped = mapIdlType(param.type);
+    paramTypes.push(mapped.moonbitType);
+  }
+
+  const returnTypeStr = formatReturnType(returnType);
+  const closureParamStr = paramTypes.join(", ");
+  return `(${closureParamStr}) -> ${returnTypeStr}`;
+}
+
+/**
+ * Generate a constructor function for a callback-like type
+ * Example: pub fn EventHandler::new(f : (Event) -> Unit) -> EventHandler = "webapi_EventHandler" "new"
+ */
+export function emitCallbackConstructor(
+  typeName: string,
+  moduleName: string,
+  closureType: string
+): string {
+  return `///|
+pub fn ${typeName}::new(f : ${closureType}) -> ${typeName} = "${moduleName}" "new"`;
+}
+
+/**
  * Emit external type declaration for callback
  */
 function emitCallbackType(callback: ParsedCallback): string {
@@ -26,31 +58,15 @@ pub impl TJsValue for ${callback.name} with to_js(self : ${callback.name}) -> Js
 }
 
 /**
- * Emit callback constructor as TypeName::new with _ffi wrapper
+ * Emit callback constructor as TypeName::new FFI binding
  * 
  * Creates functions like:
  * pub fn EventHandler::new(f: (Event) -> Unit) -> EventHandler
  */
-function emitCallbackConstructor(callback: ParsedCallback): string {
+function emitCallbackConstructorImpl(callback: ParsedCallback): string {
   const moduleName = toFfiModuleName(callback.name);
-
-  // Build the function signature for the callback
-  const paramTypes: string[] = [];
-  for (const param of callback.params) {
-    const mapped = mapIdlType(param.type);
-    paramTypes.push(mapped.moonbitType);
-  }
-
-  const returnType = formatReturnType(callback.returnType);
-
-  // Build closure type: (ParamTypes) -> ReturnType
-  const closureParamStr = paramTypes.join(", ");
-  const closureType = `(${closureParamStr}) -> ${returnType}`;
-
-  // Public constructor passes function directly
-  const wrapperFn = `///|
-pub fn ${callback.name}::new(f : ${closureType}) -> ${callback.name} = "${moduleName}" "new"`;
-  return `${wrapperFn}`;
+  const closureType = buildClosureType(callback.params, callback.returnType);
+  return emitCallbackConstructor(callback.name, moduleName, closureType);
 }
 
 /**
@@ -69,7 +85,7 @@ export function emitCallback(callback: ParsedCallback): string {
   parts.push(emitTJsValueImpl(callback));
 
   // Constructor
-  parts.push(emitCallbackConstructor(callback));
+  parts.push(emitCallbackConstructorImpl(callback));
 
   return parts.join("\n\n");
 }

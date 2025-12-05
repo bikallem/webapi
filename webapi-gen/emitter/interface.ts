@@ -15,6 +15,7 @@ import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
 import { getAllTraitAncestors } from "../widlprocess.js";
 import { mapIdlType, formatReturnType, isAbstractInterface } from "../mapping.js";
+import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 
 /**
  * Check if an interface has a real constructor (not [HTMLConstructor])
@@ -222,23 +223,8 @@ function emitCallbackInterfaceConstructor(iface: ParsedInterface): string | unde
   if (!method) return undefined;
 
   const moduleName = `webapi_${iface.name}`;
-
-  // Build the function signature for the callback
-  const paramTypes: string[] = [];
-  for (const param of method.params) {
-    const mapped = mapIdlType(param.type);
-    paramTypes.push(mapped.moonbitType);
-  }
-
-  const returnType = formatReturnType(method.returnType);
-  const closureParamStr = paramTypes.join(", ");
-  const closureType = `(${closureParamStr}) -> ${returnType}`;
-
-  // Wrapper passes function directly
-  const wrapperFn = `///|
-pub fn ${iface.name}::new(f : ${closureType}) -> ${iface.name} = "${moduleName}" "new"`;
-
-  return `${wrapperFn}`;
+  const closureType = buildClosureType(method.params, method.returnType);
+  return emitCallbackConstructor(iface.name, moduleName, closureType);
 }
 
 /**
