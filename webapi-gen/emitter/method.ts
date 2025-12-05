@@ -19,6 +19,7 @@ import {
   SKIP_UNION_TYPES,
 } from "./unionUtils.js";
 import { unwrapNullableType } from "./typeUtils.js";
+import { generateMethodFfiName } from "./namingUtils.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates
@@ -31,13 +32,6 @@ const emittedUnionTraits = new Set<string>();
  */
 export function resetEmittedUnionTraits(): void {
   emittedUnionTraits.clear();
-}
-
-/**
- * Generate FFI function name for a method
- */
-function getFfiName(interfaceName: string, methodName: string): string {
-  return `${toSnakeCase(interfaceName)}_${toSnakeCase(methodName)}_ffi`;
 }
 
 /**
@@ -193,7 +187,7 @@ export function emitTraitMethods(iface: ParsedInterface, hasDefaultImpl: boolean
  * Emit FFI function declaration for a method
  */
 function emitMethodFfi(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
-  const ffiName = getFfiName(iface.name, method.name) + suffix;
+  const ffiName = generateMethodFfiName(iface.name, method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
   const jsFuncName = method.name;
 
@@ -240,7 +234,7 @@ function getUnionDefaultDictType(unionType: ParsedType): string | undefined {
  */
 function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
   const methodName = toSnakeCase(method.name) + suffix;
-  const ffiName = getFfiName(iface.name, method.name) + suffix;
+  const ffiName = generateMethodFfiName(iface.name, method.name) + suffix;
   const traitName = toTraitName(iface.name);
 
   // Build parameter list - same as trait signature

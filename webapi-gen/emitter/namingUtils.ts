@@ -54,18 +54,18 @@ export function generateMethodFfiName(
 
 /**
  * Generate property getter FFI function name
- * Example: getAttribute -> element_get_attribute_ffi
+ * Example: element + tagName -> element_tag_name_ffi
  */
 export function generatePropertyGetterFfiName(
     typeName: string,
     propertyName: string
 ): string {
-    return `${toSnakeCase(typeName)}_get_${toSnakeCase(propertyName)}_ffi`
+    return `${toSnakeCase(typeName)}_${toSnakeCase(propertyName)}_ffi`
 }
 
 /**
  * Generate property setter FFI function name
- * Example: setAttribute -> element_set_attribute_ffi
+ * Example: element + innerHTML -> element_set_inner_html_ffi
  */
 export function generatePropertySetterFfiName(
     typeName: string,

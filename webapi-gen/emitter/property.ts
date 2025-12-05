@@ -1,6 +1,7 @@
 import { ParsedInterface, ParsedProperty, ParsedType } from '../types.js';
 import { toSnakeCase, escapeKeyword, toFfiModuleName, toTraitName } from '../utils.js';
 import { mapIdlType, formatReturnType, isKnownEnum, isKnownUnionType } from '../mapping.js';
+import { generatePropertyGetterFfiName, generatePropertySetterFfiName } from './namingUtils.js';
 
 /**
  * Get the context name for a property type if it's a union
@@ -117,7 +118,7 @@ function isFfiSafeType(moonbitType: string): boolean {
  * Emit FFI function for property getter
  */
 function emitPropertyGetterFfi(iface: ParsedInterface, prop: ParsedProperty): string {
-  const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(prop.name)}_ffi`;
+  const ffiName = generatePropertyGetterFfiName(iface.name, prop.name);
   const moduleName = toFfiModuleName(iface.name);
   const mapped = mapPropertyType(prop);
 
@@ -134,7 +135,7 @@ fn ${ffiName}(obj : JsValue) -> ${ffiReturnType} = "${moduleName}" "${prop.name}
  * Emit FFI function for property setter
  */
 function emitPropertySetterFfi(iface: ParsedInterface, prop: ParsedProperty): string {
-  const ffiName = `${toSnakeCase(iface.name)}_set_${toSnakeCase(prop.name)}_ffi`;
+  const ffiName = generatePropertySetterFfiName(iface.name, prop.name);
   const moduleName = toFfiModuleName(iface.name);
   const mapped = mapPropertyType(prop);
 
@@ -150,7 +151,7 @@ fn ${ffiName}(obj : JsValue, value : ${paramType}) -> Unit = "${moduleName}" "se
  */
 function emitPropertyGetterImpl(iface: ParsedInterface, prop: ParsedProperty): string {
   const methodName = escapeKeyword(toSnakeCase(prop.name));
-  const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(prop.name)}_ffi`;
+  const ffiName = generatePropertyGetterFfiName(iface.name, prop.name);
   const traitName = toTraitName(iface.name);
   const returnType = formatPropertyReturnType(prop);
   const mapped = mapPropertyType(prop);
@@ -186,7 +187,7 @@ impl ${traitName} with ${methodName}(self : Self) -> ${returnType} {
  */
 function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): string {
   const methodName = `set_${escapeKeyword(toSnakeCase(prop.name))}`;
-  const ffiName = `${toSnakeCase(iface.name)}_set_${toSnakeCase(prop.name)}_ffi`;
+  const ffiName = generatePropertySetterFfiName(iface.name, prop.name);
   const traitName = toTraitName(iface.name);
   const mapped = mapPropertyType(prop);
   const contextName = getPropertyUnionContextName(prop);
