@@ -4,7 +4,7 @@
  * Generates MoonBit code for Web IDL callback types.
  */
 
-import type { ParsedCallback, ParsedParam } from "../types.js";
+import type { ParsedCallback, ParsedParam, ParsedType } from "../types.js";
 import { toSnakeCase, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatReturnType } from "../mapping.js";
 import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
@@ -15,7 +15,7 @@ import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJs
  */
 export function buildClosureType(
   params: ParsedParam[],
-  returnType: any
+  returnType: ParsedType
 ): string {
   const paramTypes: string[] = [];
   for (const param of params) {
