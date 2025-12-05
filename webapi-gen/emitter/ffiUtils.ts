@@ -50,19 +50,3 @@ export function isFfiSafeType(moonbitType: string): boolean {
     // Only allow known safe primitives
     return FFI_SAFE_PRIMITIVES.has(moonbitType)
 }
-
-/**
- * Extract the closure type string from a parameter list
- * Returns the closure representation for use in public function signatures
- */
-export function buildClosureTypeFromParams(
-    params: Array<{ name: string; type: string }>,
-    returnType: string
-): string {
-    if (params.length === 0) {
-        return `() -> ${returnType}`
-    }
-
-    const paramTypes = params.map(p => p.type).join(', ')
-    return `(${paramTypes}) -> ${returnType}`
-}
