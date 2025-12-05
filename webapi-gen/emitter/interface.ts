@@ -16,6 +16,7 @@ import { emitConstructors } from "./constructor.js";
 import { getAllTraitAncestors } from "../widlprocess.js";
 import { mapIdlType, formatReturnType, isAbstractInterface } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
+import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 
 /**
  * Check if an interface has a real constructor (not [HTMLConstructor])
@@ -72,17 +73,14 @@ function emitConstants(iface: ParsedInterface): string | undefined {
  * Emit the external type declaration
  */
 function emitExternalType(iface: ParsedInterface): string {
-  return `///|
-#external
-pub type ${iface.name}`;
+  return emitExternalTypeCommon(iface.name);
 }
 
 /**
  * Emit TJsValue implementation for the type
  */
 function emitTJsValueImpl(iface: ParsedInterface): string {
-  return `///|
-pub impl TJsValue for ${iface.name} with to_js(self : ${iface.name}) -> JsValue = "%identity"`;
+  return emitTJsValueImplCommon(iface.name);
 }
 
 /**

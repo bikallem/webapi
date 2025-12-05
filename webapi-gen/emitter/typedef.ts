@@ -10,22 +10,20 @@ import type { ParsedTypedef, ParsedIdl, ParsedType } from "../types.js";
 import { toSnakeCase } from "../utils.js";
 import { mapIdlType, formatReturnType, isKnownTypedef } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
+import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 
 /**
  * Emit external type declaration for typedef
  */
 function emitTypedefType(typedef: ParsedTypedef): string {
-    return `///|
-#external
-pub type ${typedef.name}`;
+    return emitExternalTypeCommon(typedef.name);
 }
 
 /**
  * Emit TJsValue implementation
  */
 function emitTJsValueImpl(typedef: ParsedTypedef): string {
-    return `///|
-pub impl TJsValue for ${typedef.name} with to_js(self : ${typedef.name}) -> JsValue = "%identity"`;
+    return emitTJsValueImplCommon(typedef.name);
 }
 
 /**

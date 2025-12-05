@@ -7,6 +7,7 @@
 import type { ParsedCallback, ParsedParam } from "../types.js";
 import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatReturnType } from "../mapping.js";
+import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 
 /**
  * Generate a closure type string from parameters and return type
@@ -44,17 +45,14 @@ pub fn ${typeName}::new(f : ${closureType}) -> ${typeName} = "${moduleName}" "ne
  * Emit external type declaration for callback
  */
 function emitCallbackType(callback: ParsedCallback): string {
-  return `///|
-#external
-pub type ${callback.name}`;
+  return emitExternalTypeCommon(callback.name);
 }
 
 /**
  * Emit TJsValue implementation
  */
 function emitTJsValueImpl(callback: ParsedCallback): string {
-  return `///|
-pub impl TJsValue for ${callback.name} with to_js(self : ${callback.name}) -> JsValue = "%identity"`;
+  return emitTJsValueImplCommon(callback.name);
 }
 
 /**

@@ -7,22 +7,20 @@
 import type { ParsedDictionary, ParsedDictionaryMember } from "../types.js";
 import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatParam, getDefaultValueExpr } from "../mapping.js";
+import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
 
 /**
  * Emit external type declaration for dictionary
  */
 function emitDictionaryType(dict: ParsedDictionary): string {
-  return `///|
-#external
-pub type ${dict.name}`;
+  return emitExternalTypeCommon(dict.name);
 }
 
 /**
  * Emit TJsValue implementation
  */
 function emitTJsValueImpl(dict: ParsedDictionary): string {
-  return `///|
-pub impl TJsValue for ${dict.name} with to_js(self : ${dict.name}) -> JsValue = "%identity"`;
+  return emitTJsValueImplCommon(dict.name);
 }
 
 /**
