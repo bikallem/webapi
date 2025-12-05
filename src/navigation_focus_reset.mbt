@@ -17,9 +17,8 @@ pub impl TJsValue for NavigationFocusReset with to_js(self) {
 }
 
 ///|
-pub fn NavigationFocusReset::from_js(value : JsValue) -> NavigationFocusReset? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn NavigationFocusReset::from(value : String) -> NavigationFocusReset? {
+  match value {
     "after-transition" => Some(NavigationFocusReset::AfterTransition)
     "manual" => Some(NavigationFocusReset::Manual)
     _ => None

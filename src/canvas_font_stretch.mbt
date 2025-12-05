@@ -31,9 +31,8 @@ pub impl TJsValue for CanvasFontStretch with to_js(self) {
 }
 
 ///|
-pub fn CanvasFontStretch::from_js(value : JsValue) -> CanvasFontStretch? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasFontStretch::from(value : String) -> CanvasFontStretch? {
+  match value {
     "ultra-condensed" => Some(CanvasFontStretch::UltraCondensed)
     "extra-condensed" => Some(CanvasFontStretch::ExtraCondensed)
     "condensed" => Some(CanvasFontStretch::Condensed)

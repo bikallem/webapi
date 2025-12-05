@@ -19,9 +19,8 @@ pub impl TJsValue for PremultiplyAlpha with to_js(self) {
 }
 
 ///|
-pub fn PremultiplyAlpha::from_js(value : JsValue) -> PremultiplyAlpha? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn PremultiplyAlpha::from(value : String) -> PremultiplyAlpha? {
+  match value {
     "none" => Some(PremultiplyAlpha::None)
     "premultiply" => Some(PremultiplyAlpha::Premultiply)
     "default" => Some(PremultiplyAlpha::Default)

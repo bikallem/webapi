@@ -21,9 +21,8 @@ pub impl TJsValue for SelectionMode with to_js(self) {
 }
 
 ///|
-pub fn SelectionMode::from_js(value : JsValue) -> SelectionMode? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn SelectionMode::from(value : String) -> SelectionMode? {
+  match value {
     "select" => Some(SelectionMode::Select)
     "start" => Some(SelectionMode::Start)
     "end" => Some(SelectionMode::End)

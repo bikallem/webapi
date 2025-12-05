@@ -101,7 +101,9 @@ fn image_data_pixel_format_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "p
 
 ///|
 impl TImageData with pixel_format(self : Self) -> ImageDataPixelFormat {
-  ImageDataPixelFormat::from_js(image_data_pixel_format_ffi(self.to_js())).unwrap()
+  ImageDataPixelFormat::from(
+    image_data_pixel_format_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|
@@ -109,5 +111,7 @@ fn image_data_color_space_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "co
 
 ///|
 impl TImageData with color_space(self : Self) -> PredefinedColorSpace {
-  PredefinedColorSpace::from_js(image_data_color_space_ffi(self.to_js())).unwrap()
+  PredefinedColorSpace::from(
+    image_data_color_space_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }

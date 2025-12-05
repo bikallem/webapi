@@ -19,9 +19,8 @@ pub impl TJsValue for CanPlayTypeResult with to_js(self) {
 }
 
 ///|
-pub fn CanPlayTypeResult::from_js(value : JsValue) -> CanPlayTypeResult? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanPlayTypeResult::from(value : String) -> CanPlayTypeResult? {
+  match value {
     "" => Some(CanPlayTypeResult::Empty)
     "maybe" => Some(CanPlayTypeResult::Maybe)
     "probably" => Some(CanPlayTypeResult::Probably)

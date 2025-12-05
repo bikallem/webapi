@@ -19,9 +19,8 @@ pub impl TJsValue for CanvasLineCap with to_js(self) {
 }
 
 ///|
-pub fn CanvasLineCap::from_js(value : JsValue) -> CanvasLineCap? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasLineCap::from(value : String) -> CanvasLineCap? {
+  match value {
     "butt" => Some(CanvasLineCap::Butt)
     "round" => Some(CanvasLineCap::Round)
     "square" => Some(CanvasLineCap::Square)

@@ -17,9 +17,8 @@ pub impl TJsValue for ColorSpaceConversion with to_js(self) {
 }
 
 ///|
-pub fn ColorSpaceConversion::from_js(value : JsValue) -> ColorSpaceConversion? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ColorSpaceConversion::from(value : String) -> ColorSpaceConversion? {
+  match value {
     "none" => Some(ColorSpaceConversion::None)
     "default" => Some(ColorSpaceConversion::Default)
     _ => None

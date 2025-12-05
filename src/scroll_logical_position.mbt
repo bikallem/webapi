@@ -21,11 +21,8 @@ pub impl TJsValue for ScrollLogicalPosition with to_js(self) {
 }
 
 ///|
-pub fn ScrollLogicalPosition::from_js(
-  value : JsValue,
-) -> ScrollLogicalPosition? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ScrollLogicalPosition::from(value : String) -> ScrollLogicalPosition? {
+  match value {
     "start" => Some(ScrollLogicalPosition::Start)
     "center" => Some(ScrollLogicalPosition::Center)
     "end" => Some(ScrollLogicalPosition::End)

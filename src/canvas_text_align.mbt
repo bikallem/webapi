@@ -23,9 +23,8 @@ pub impl TJsValue for CanvasTextAlign with to_js(self) {
 }
 
 ///|
-pub fn CanvasTextAlign::from_js(value : JsValue) -> CanvasTextAlign? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasTextAlign::from(value : String) -> CanvasTextAlign? {
+  match value {
     "start" => Some(CanvasTextAlign::Start)
     "end" => Some(CanvasTextAlign::End)
     "left" => Some(CanvasTextAlign::Left)

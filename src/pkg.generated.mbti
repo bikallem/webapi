@@ -173,7 +173,7 @@ pub enum CSSBoxType {
   Padding
   Content
 }
-pub fn CSSBoxType::from_js(JsValue) -> Self?
+pub fn CSSBoxType::from(String) -> Self?
 pub impl TJsValue for CSSBoxType
 pub impl Eq for CSSBoxType
 pub impl Show for CSSBoxType
@@ -189,7 +189,7 @@ pub enum CanPlayTypeResult {
   Maybe
   Probably
 }
-pub fn CanPlayTypeResult::from_js(JsValue) -> Self?
+pub fn CanPlayTypeResult::from(String) -> Self?
 pub impl TJsValue for CanPlayTypeResult
 pub impl Eq for CanPlayTypeResult
 pub impl Show for CanPlayTypeResult
@@ -202,7 +202,7 @@ pub enum CanvasColorType {
   Unorm8
   Float16
 }
-pub fn CanvasColorType::from_js(JsValue) -> Self?
+pub fn CanvasColorType::from(String) -> Self?
 pub impl TJsValue for CanvasColorType
 pub impl Eq for CanvasColorType
 pub impl Show for CanvasColorType
@@ -212,7 +212,7 @@ pub enum CanvasDirection {
   Rtl
   Inherit
 }
-pub fn CanvasDirection::from_js(JsValue) -> Self?
+pub fn CanvasDirection::from(String) -> Self?
 pub impl TJsValue for CanvasDirection
 pub impl Eq for CanvasDirection
 pub impl Show for CanvasDirection
@@ -221,7 +221,7 @@ pub enum CanvasFillRule {
   Nonzero
   Evenodd
 }
-pub fn CanvasFillRule::from_js(JsValue) -> Self?
+pub fn CanvasFillRule::from(String) -> Self?
 pub impl TJsValue for CanvasFillRule
 pub impl Eq for CanvasFillRule
 pub impl Show for CanvasFillRule
@@ -231,7 +231,7 @@ pub enum CanvasFontKerning {
   Normal
   None
 }
-pub fn CanvasFontKerning::from_js(JsValue) -> Self?
+pub fn CanvasFontKerning::from(String) -> Self?
 pub impl TJsValue for CanvasFontKerning
 pub impl Eq for CanvasFontKerning
 pub impl Show for CanvasFontKerning
@@ -247,7 +247,7 @@ pub enum CanvasFontStretch {
   ExtraExpanded
   UltraExpanded
 }
-pub fn CanvasFontStretch::from_js(JsValue) -> Self?
+pub fn CanvasFontStretch::from(String) -> Self?
 pub impl TJsValue for CanvasFontStretch
 pub impl Eq for CanvasFontStretch
 pub impl Show for CanvasFontStretch
@@ -261,7 +261,7 @@ pub enum CanvasFontVariantCaps {
   Unicase
   TitlingCaps
 }
-pub fn CanvasFontVariantCaps::from_js(JsValue) -> Self?
+pub fn CanvasFontVariantCaps::from(String) -> Self?
 pub impl TJsValue for CanvasFontVariantCaps
 pub impl Eq for CanvasFontVariantCaps
 pub impl Show for CanvasFontVariantCaps
@@ -278,7 +278,7 @@ pub enum CanvasLineCap {
   Round
   Square
 }
-pub fn CanvasLineCap::from_js(JsValue) -> Self?
+pub fn CanvasLineCap::from(String) -> Self?
 pub impl TJsValue for CanvasLineCap
 pub impl Eq for CanvasLineCap
 pub impl Show for CanvasLineCap
@@ -288,7 +288,7 @@ pub enum CanvasLineJoin {
   Bevel
   Miter
 }
-pub fn CanvasLineJoin::from_js(JsValue) -> Self?
+pub fn CanvasLineJoin::from(String) -> Self?
 pub impl TJsValue for CanvasLineJoin
 pub impl Eq for CanvasLineJoin
 pub impl Show for CanvasLineJoin
@@ -319,7 +319,7 @@ pub enum CanvasTextAlign {
   Right
   Center
 }
-pub fn CanvasTextAlign::from_js(JsValue) -> Self?
+pub fn CanvasTextAlign::from(String) -> Self?
 pub impl TJsValue for CanvasTextAlign
 pub impl Eq for CanvasTextAlign
 pub impl Show for CanvasTextAlign
@@ -332,7 +332,7 @@ pub enum CanvasTextBaseline {
   Ideographic
   Bottom
 }
-pub fn CanvasTextBaseline::from_js(JsValue) -> Self?
+pub fn CanvasTextBaseline::from(String) -> Self?
 pub impl TJsValue for CanvasTextBaseline
 pub impl Eq for CanvasTextBaseline
 pub impl Show for CanvasTextBaseline
@@ -343,7 +343,7 @@ pub enum CanvasTextRendering {
   Optimizelegibility
   Geometricprecision
 }
-pub fn CanvasTextRendering::from_js(JsValue) -> Self?
+pub fn CanvasTextRendering::from(String) -> Self?
 pub impl TJsValue for CanvasTextRendering
 pub impl Eq for CanvasTextRendering
 pub impl Show for CanvasTextRendering
@@ -378,7 +378,7 @@ pub enum ColorSpaceConversion {
   None
   Default
 }
-pub fn ColorSpaceConversion::from_js(JsValue) -> Self?
+pub fn ColorSpaceConversion::from(String) -> Self?
 pub impl TJsValue for ColorSpaceConversion
 pub impl Eq for ColorSpaceConversion
 pub impl Show for ColorSpaceConversion
@@ -471,7 +471,7 @@ pub enum DOMParserSupportedType {
   ApplicationXhtmlXml
   ImageSvgXml
 }
-pub fn DOMParserSupportedType::from_js(JsValue) -> Self?
+pub fn DOMParserSupportedType::from(String) -> Self?
 pub impl TJsValue for DOMParserSupportedType
 pub impl Eq for DOMParserSupportedType
 pub impl Show for DOMParserSupportedType
@@ -565,7 +565,7 @@ pub enum DocumentReadyState {
   Interactive
   Complete
 }
-pub fn DocumentReadyState::from_js(JsValue) -> Self?
+pub fn DocumentReadyState::from(String) -> Self?
 pub impl TJsValue for DocumentReadyState
 pub impl Eq for DocumentReadyState
 pub impl Show for DocumentReadyState
@@ -581,7 +581,7 @@ pub enum DocumentVisibilityState {
   Visible
   Hidden
 }
-pub fn DocumentVisibilityState::from_js(JsValue) -> Self?
+pub fn DocumentVisibilityState::from(String) -> Self?
 pub impl TJsValue for DocumentVisibilityState
 pub impl Eq for DocumentVisibilityState
 pub impl Show for DocumentVisibilityState
@@ -619,7 +619,7 @@ pub enum EndingType {
   Transparent
   Native
 }
-pub fn EndingType::from_js(JsValue) -> Self?
+pub fn EndingType::from(String) -> Self?
 pub impl TJsValue for EndingType
 pub impl Eq for EndingType
 pub impl Show for EndingType
@@ -985,7 +985,7 @@ pub enum ImageDataPixelFormat {
   RgbaUnorm8
   RgbaFloat16
 }
-pub fn ImageDataPixelFormat::from_js(JsValue) -> Self?
+pub fn ImageDataPixelFormat::from(String) -> Self?
 pub impl TJsValue for ImageDataPixelFormat
 pub impl Eq for ImageDataPixelFormat
 pub impl Show for ImageDataPixelFormat
@@ -1006,7 +1006,7 @@ pub enum ImageOrientation {
   FromImage
   Flipy
 }
-pub fn ImageOrientation::from_js(JsValue) -> Self?
+pub fn ImageOrientation::from(String) -> Self?
 pub impl TJsValue for ImageOrientation
 pub impl Eq for ImageOrientation
 pub impl Show for ImageOrientation
@@ -1016,7 +1016,7 @@ pub enum ImageSmoothingQuality {
   Medium
   High
 }
-pub fn ImageSmoothingQuality::from_js(JsValue) -> Self?
+pub fn ImageSmoothingQuality::from(String) -> Self?
 pub impl TJsValue for ImageSmoothingQuality
 pub impl Eq for ImageSmoothingQuality
 pub impl Show for ImageSmoothingQuality
@@ -1159,7 +1159,7 @@ pub enum NavigationFocusReset {
   AfterTransition
   Manual
 }
-pub fn NavigationFocusReset::from_js(JsValue) -> Self?
+pub fn NavigationFocusReset::from(String) -> Self?
 pub impl TJsValue for NavigationFocusReset
 pub impl Eq for NavigationFocusReset
 pub impl Show for NavigationFocusReset
@@ -1169,7 +1169,7 @@ pub enum NavigationHistoryBehavior {
   Push
   Replace
 }
-pub fn NavigationHistoryBehavior::from_js(JsValue) -> Self?
+pub fn NavigationHistoryBehavior::from(String) -> Self?
 pub impl TJsValue for NavigationHistoryBehavior
 pub impl Eq for NavigationHistoryBehavior
 pub impl Show for NavigationHistoryBehavior
@@ -1178,7 +1178,7 @@ pub enum NavigationScrollBehavior {
   AfterTransition
   Manual
 }
-pub fn NavigationScrollBehavior::from_js(JsValue) -> Self?
+pub fn NavigationScrollBehavior::from(String) -> Self?
 pub impl TJsValue for NavigationScrollBehavior
 pub impl Eq for NavigationScrollBehavior
 pub impl Show for NavigationScrollBehavior
@@ -1189,7 +1189,7 @@ pub enum NavigationType {
   Reload
   Traverse
 }
-pub fn NavigationType::from_js(JsValue) -> Self?
+pub fn NavigationType::from(String) -> Self?
 pub impl TJsValue for NavigationType
 pub impl Eq for NavigationType
 pub impl Show for NavigationType
@@ -1240,7 +1240,7 @@ pub enum OffscreenRenderingContextId {
   Webgl2
   Webgpu
 }
-pub fn OffscreenRenderingContextId::from_js(JsValue) -> Self?
+pub fn OffscreenRenderingContextId::from(String) -> Self?
 pub impl TJsValue for OffscreenRenderingContextId
 pub impl Eq for OffscreenRenderingContextId
 pub impl Show for OffscreenRenderingContextId
@@ -1285,7 +1285,7 @@ pub enum PredefinedColorSpace {
   Srgb
   DisplayP3
 }
-pub fn PredefinedColorSpace::from_js(JsValue) -> Self?
+pub fn PredefinedColorSpace::from(String) -> Self?
 pub impl TJsValue for PredefinedColorSpace
 pub impl Eq for PredefinedColorSpace
 pub impl Show for PredefinedColorSpace
@@ -1295,7 +1295,7 @@ pub enum PremultiplyAlpha {
   Premultiply
   Default
 }
-pub fn PremultiplyAlpha::from_js(JsValue) -> Self?
+pub fn PremultiplyAlpha::from(String) -> Self?
 pub impl TJsValue for PremultiplyAlpha
 pub impl Eq for PremultiplyAlpha
 pub impl Show for PremultiplyAlpha
@@ -1327,7 +1327,7 @@ pub enum ResizeQuality {
   Medium
   High
 }
-pub fn ResizeQuality::from_js(JsValue) -> Self?
+pub fn ResizeQuality::from(String) -> Self?
 pub impl TJsValue for ResizeQuality
 pub impl Eq for ResizeQuality
 pub impl Show for ResizeQuality
@@ -1351,7 +1351,7 @@ pub enum ScrollBehavior {
   Instant
   Smooth
 }
-pub fn ScrollBehavior::from_js(JsValue) -> Self?
+pub fn ScrollBehavior::from(String) -> Self?
 pub impl TJsValue for ScrollBehavior
 pub impl Eq for ScrollBehavior
 pub impl Show for ScrollBehavior
@@ -1360,7 +1360,7 @@ pub enum ScrollIntoViewContainer {
   All
   Nearest
 }
-pub fn ScrollIntoViewContainer::from_js(JsValue) -> Self?
+pub fn ScrollIntoViewContainer::from(String) -> Self?
 pub impl TJsValue for ScrollIntoViewContainer
 pub impl Eq for ScrollIntoViewContainer
 pub impl Show for ScrollIntoViewContainer
@@ -1378,7 +1378,7 @@ pub enum ScrollLogicalPosition {
   End
   Nearest
 }
-pub fn ScrollLogicalPosition::from_js(JsValue) -> Self?
+pub fn ScrollLogicalPosition::from(String) -> Self?
 pub impl TJsValue for ScrollLogicalPosition
 pub impl Eq for ScrollLogicalPosition
 pub impl Show for ScrollLogicalPosition
@@ -1393,7 +1393,7 @@ pub enum ScrollRestoration {
   Auto
   Manual
 }
-pub fn ScrollRestoration::from_js(JsValue) -> Self?
+pub fn ScrollRestoration::from(String) -> Self?
 pub impl TJsValue for ScrollRestoration
 pub impl Eq for ScrollRestoration
 pub impl Show for ScrollRestoration
@@ -1410,7 +1410,7 @@ pub enum SelectionMode {
   End
   Preserve
 }
-pub fn SelectionMode::from_js(JsValue) -> Self?
+pub fn SelectionMode::from(String) -> Self?
 pub impl TJsValue for SelectionMode
 pub impl Eq for SelectionMode
 pub impl Show for SelectionMode
@@ -1433,7 +1433,7 @@ pub enum ShadowRootMode {
   Open
   Closed
 }
-pub fn ShadowRootMode::from_js(JsValue) -> Self?
+pub fn ShadowRootMode::from(String) -> Self?
 pub impl TJsValue for ShadowRootMode
 pub impl Eq for ShadowRootMode
 pub impl Show for ShadowRootMode
@@ -1448,7 +1448,7 @@ pub enum SlotAssignmentMode {
   Manual
   Named
 }
-pub fn SlotAssignmentMode::from_js(JsValue) -> Self?
+pub fn SlotAssignmentMode::from(String) -> Self?
 pub impl TJsValue for SlotAssignmentMode
 pub impl Eq for SlotAssignmentMode
 pub impl Show for SlotAssignmentMode
@@ -1505,7 +1505,7 @@ pub enum TextTrackKind {
   Chapters
   Metadata
 }
-pub fn TextTrackKind::from_js(JsValue) -> Self?
+pub fn TextTrackKind::from(String) -> Self?
 pub impl TJsValue for TextTrackKind
 pub impl Eq for TextTrackKind
 pub impl Show for TextTrackKind
@@ -1515,7 +1515,7 @@ pub enum TextTrackMode {
   Hidden
   Showing
 }
-pub fn TextTrackMode::from_js(JsValue) -> Self?
+pub fn TextTrackMode::from(String) -> Self?
 pub impl TJsValue for TextTrackMode
 pub impl Eq for TextTrackMode
 pub impl Show for TextTrackMode
@@ -1614,7 +1614,7 @@ pub enum WorkerType {
   Classic
   Module
 }
-pub fn WorkerType::from_js(JsValue) -> Self?
+pub fn WorkerType::from(String) -> Self?
 pub impl TJsValue for WorkerType
 pub impl Eq for WorkerType
 pub impl Show for WorkerType

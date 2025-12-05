@@ -24,11 +24,10 @@ pub impl TJsValue for OffscreenRenderingContextId with to_js(self) {
 }
 
 ///|
-pub fn OffscreenRenderingContextId::from_js(
-  value : JsValue,
+pub fn OffscreenRenderingContextId::from(
+  value : String,
 ) -> OffscreenRenderingContextId? {
-  let str : String = value.unsafe_cast()
-  match str {
+  match value {
     "2d" => Some(OffscreenRenderingContextId::V2d)
     "bitmaprenderer" => Some(OffscreenRenderingContextId::Bitmaprenderer)
     "webgl" => Some(OffscreenRenderingContextId::Webgl)

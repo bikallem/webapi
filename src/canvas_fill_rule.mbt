@@ -17,9 +17,8 @@ pub impl TJsValue for CanvasFillRule with to_js(self) {
 }
 
 ///|
-pub fn CanvasFillRule::from_js(value : JsValue) -> CanvasFillRule? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasFillRule::from(value : String) -> CanvasFillRule? {
+  match value {
     "nonzero" => Some(CanvasFillRule::Nonzero)
     "evenodd" => Some(CanvasFillRule::Evenodd)
     _ => None

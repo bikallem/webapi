@@ -21,9 +21,8 @@ pub impl TJsValue for CSSBoxType with to_js(self) {
 }
 
 ///|
-pub fn CSSBoxType::from_js(value : JsValue) -> CSSBoxType? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CSSBoxType::from(value : String) -> CSSBoxType? {
+  match value {
     "margin" => Some(CSSBoxType::Margin)
     "border" => Some(CSSBoxType::Border)
     "padding" => Some(CSSBoxType::Padding)

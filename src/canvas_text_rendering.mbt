@@ -23,9 +23,8 @@ pub impl TJsValue for CanvasTextRendering with to_js(self) {
 }
 
 ///|
-pub fn CanvasTextRendering::from_js(value : JsValue) -> CanvasTextRendering? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasTextRendering::from(value : String) -> CanvasTextRendering? {
+  match value {
     "auto" => Some(CanvasTextRendering::Auto)
     "optimizeSpeed" => Some(CanvasTextRendering::Optimizespeed)
     "optimizeLegibility" => Some(CanvasTextRendering::Optimizelegibility)

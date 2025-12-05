@@ -17,9 +17,8 @@ pub impl TJsValue for ImageOrientation with to_js(self) {
 }
 
 ///|
-pub fn ImageOrientation::from_js(value : JsValue) -> ImageOrientation? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ImageOrientation::from(value : String) -> ImageOrientation? {
+  match value {
     "from-image" => Some(ImageOrientation::FromImage)
     "flipY" => Some(ImageOrientation::Flipy)
     _ => None

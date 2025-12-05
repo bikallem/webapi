@@ -454,8 +454,8 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
       // Use as_option for nullable returns
       returnExpr = `${returnExpr}.as_option()`;
     } else if (isKnownEnum(returnMapped.moonbitType)) {
-      // Use from_js for enum types
-      returnExpr = `${returnMapped.moonbitType}::from_js(${returnExpr}).unwrap()`;
+      // Use from() for enum types - cast JsValue to String and call from()
+      returnExpr = `${returnMapped.moonbitType}::from(${returnExpr}.unsafe_cast()).unwrap()`;
     } else {
       // Use unsafe_cast for type conversion (all non-Unit FFI returns are JsValue)
       returnExpr = `${returnExpr}.unsafe_cast()`;

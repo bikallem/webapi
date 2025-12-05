@@ -1544,8 +1544,8 @@ fn canvas_rendering_context2_d_image_smoothing_quality_ffi(
 
 ///|
 impl TCanvasRenderingContext2D with image_smoothing_quality(self : Self) -> ImageSmoothingQuality {
-  ImageSmoothingQuality::from_js(
-    canvas_rendering_context2_d_image_smoothing_quality_ffi(self.to_js()),
+  ImageSmoothingQuality::from(
+    canvas_rendering_context2_d_image_smoothing_quality_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1744,7 +1744,9 @@ fn canvas_rendering_context2_d_line_cap_ffi(obj : JsValue) -> JsValue = "webapi_
 
 ///|
 impl TCanvasRenderingContext2D with line_cap(self : Self) -> CanvasLineCap {
-  CanvasLineCap::from_js(canvas_rendering_context2_d_line_cap_ffi(self.to_js())).unwrap()
+  CanvasLineCap::from(
+    canvas_rendering_context2_d_line_cap_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|
@@ -1769,8 +1771,8 @@ fn canvas_rendering_context2_d_line_join_ffi(obj : JsValue) -> JsValue = "webapi
 
 ///|
 impl TCanvasRenderingContext2D with line_join(self : Self) -> CanvasLineJoin {
-  CanvasLineJoin::from_js(
-    canvas_rendering_context2_d_line_join_ffi(self.to_js()),
+  CanvasLineJoin::from(
+    canvas_rendering_context2_d_line_join_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1875,8 +1877,8 @@ fn canvas_rendering_context2_d_text_align_ffi(obj : JsValue) -> JsValue = "webap
 
 ///|
 impl TCanvasRenderingContext2D with text_align(self : Self) -> CanvasTextAlign {
-  CanvasTextAlign::from_js(
-    canvas_rendering_context2_d_text_align_ffi(self.to_js()),
+  CanvasTextAlign::from(
+    canvas_rendering_context2_d_text_align_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1902,8 +1904,8 @@ fn canvas_rendering_context2_d_text_baseline_ffi(obj : JsValue) -> JsValue = "we
 
 ///|
 impl TCanvasRenderingContext2D with text_baseline(self : Self) -> CanvasTextBaseline {
-  CanvasTextBaseline::from_js(
-    canvas_rendering_context2_d_text_baseline_ffi(self.to_js()),
+  CanvasTextBaseline::from(
+    canvas_rendering_context2_d_text_baseline_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1929,8 +1931,8 @@ fn canvas_rendering_context2_d_direction_ffi(obj : JsValue) -> JsValue = "webapi
 
 ///|
 impl TCanvasRenderingContext2D with direction(self : Self) -> CanvasDirection {
-  CanvasDirection::from_js(
-    canvas_rendering_context2_d_direction_ffi(self.to_js()),
+  CanvasDirection::from(
+    canvas_rendering_context2_d_direction_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1978,8 +1980,8 @@ fn canvas_rendering_context2_d_font_kerning_ffi(obj : JsValue) -> JsValue = "web
 
 ///|
 impl TCanvasRenderingContext2D with font_kerning(self : Self) -> CanvasFontKerning {
-  CanvasFontKerning::from_js(
-    canvas_rendering_context2_d_font_kerning_ffi(self.to_js()),
+  CanvasFontKerning::from(
+    canvas_rendering_context2_d_font_kerning_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -2005,8 +2007,8 @@ fn canvas_rendering_context2_d_font_stretch_ffi(obj : JsValue) -> JsValue = "web
 
 ///|
 impl TCanvasRenderingContext2D with font_stretch(self : Self) -> CanvasFontStretch {
-  CanvasFontStretch::from_js(
-    canvas_rendering_context2_d_font_stretch_ffi(self.to_js()),
+  CanvasFontStretch::from(
+    canvas_rendering_context2_d_font_stretch_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -2032,8 +2034,8 @@ fn canvas_rendering_context2_d_font_variant_caps_ffi(obj : JsValue) -> JsValue =
 
 ///|
 impl TCanvasRenderingContext2D with font_variant_caps(self : Self) -> CanvasFontVariantCaps {
-  CanvasFontVariantCaps::from_js(
-    canvas_rendering_context2_d_font_variant_caps_ffi(self.to_js()),
+  CanvasFontVariantCaps::from(
+    canvas_rendering_context2_d_font_variant_caps_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -2059,8 +2061,8 @@ fn canvas_rendering_context2_d_text_rendering_ffi(obj : JsValue) -> JsValue = "w
 
 ///|
 impl TCanvasRenderingContext2D with text_rendering(self : Self) -> CanvasTextRendering {
-  CanvasTextRendering::from_js(
-    canvas_rendering_context2_d_text_rendering_ffi(self.to_js()),
+  CanvasTextRendering::from(
+    canvas_rendering_context2_d_text_rendering_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 

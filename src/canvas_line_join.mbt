@@ -19,9 +19,8 @@ pub impl TJsValue for CanvasLineJoin with to_js(self) {
 }
 
 ///|
-pub fn CanvasLineJoin::from_js(value : JsValue) -> CanvasLineJoin? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasLineJoin::from(value : String) -> CanvasLineJoin? {
+  match value {
     "round" => Some(CanvasLineJoin::Round)
     "bevel" => Some(CanvasLineJoin::Bevel)
     "miter" => Some(CanvasLineJoin::Miter)

@@ -168,8 +168,8 @@ function emitPropertyGetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
     // Use as_option for nullable returns
     bodyExpr = `${ffiName}(self.to_js()).as_option()`;
   } else if (isKnownEnum(mapped.moonbitType)) {
-    // Use from_js for enum types and unwrap since browser values should be valid
-    bodyExpr = `${mapped.moonbitType}::from_js(${ffiName}(self.to_js())).unwrap()`;
+    // Use from() for enum types - cast to String and unwrap since browser values should be valid
+    bodyExpr = `${mapped.moonbitType}::from(${ffiName}(self.to_js()).unsafe_cast()).unwrap()`;
   } else {
     // Use unsafe_cast for type conversion
     bodyExpr = `${ffiName}(self.to_js()).unsafe_cast()`;

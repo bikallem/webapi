@@ -24,11 +24,8 @@ pub impl TJsValue for DOMParserSupportedType with to_js(self) {
 }
 
 ///|
-pub fn DOMParserSupportedType::from_js(
-  value : JsValue,
-) -> DOMParserSupportedType? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn DOMParserSupportedType::from(value : String) -> DOMParserSupportedType? {
+  match value {
     "text/html" => Some(DOMParserSupportedType::TextHtml)
     "text/xml" => Some(DOMParserSupportedType::TextXml)
     "application/xml" => Some(DOMParserSupportedType::ApplicationXml)

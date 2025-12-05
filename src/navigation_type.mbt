@@ -21,9 +21,8 @@ pub impl TJsValue for NavigationType with to_js(self) {
 }
 
 ///|
-pub fn NavigationType::from_js(value : JsValue) -> NavigationType? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn NavigationType::from(value : String) -> NavigationType? {
+  match value {
     "push" => Some(NavigationType::Push)
     "replace" => Some(NavigationType::Replace)
     "reload" => Some(NavigationType::Reload)

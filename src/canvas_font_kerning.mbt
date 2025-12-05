@@ -19,9 +19,8 @@ pub impl TJsValue for CanvasFontKerning with to_js(self) {
 }
 
 ///|
-pub fn CanvasFontKerning::from_js(value : JsValue) -> CanvasFontKerning? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasFontKerning::from(value : String) -> CanvasFontKerning? {
+  match value {
     "auto" => Some(CanvasFontKerning::Auto)
     "normal" => Some(CanvasFontKerning::Normal)
     "none" => Some(CanvasFontKerning::None)

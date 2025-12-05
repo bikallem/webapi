@@ -17,9 +17,8 @@ pub impl TJsValue for SlotAssignmentMode with to_js(self) {
 }
 
 ///|
-pub fn SlotAssignmentMode::from_js(value : JsValue) -> SlotAssignmentMode? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn SlotAssignmentMode::from(value : String) -> SlotAssignmentMode? {
+  match value {
     "manual" => Some(SlotAssignmentMode::Manual)
     "named" => Some(SlotAssignmentMode::Named)
     _ => None

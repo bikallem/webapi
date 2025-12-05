@@ -19,9 +19,8 @@ pub impl TJsValue for ScrollBehavior with to_js(self) {
 }
 
 ///|
-pub fn ScrollBehavior::from_js(value : JsValue) -> ScrollBehavior? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ScrollBehavior::from(value : String) -> ScrollBehavior? {
+  match value {
     "auto" => Some(ScrollBehavior::Auto)
     "instant" => Some(ScrollBehavior::Instant)
     "smooth" => Some(ScrollBehavior::Smooth)

@@ -17,11 +17,10 @@ pub impl TJsValue for DocumentVisibilityState with to_js(self) {
 }
 
 ///|
-pub fn DocumentVisibilityState::from_js(
-  value : JsValue,
+pub fn DocumentVisibilityState::from(
+  value : String,
 ) -> DocumentVisibilityState? {
-  let str : String = value.unsafe_cast()
-  match str {
+  match value {
     "visible" => Some(DocumentVisibilityState::Visible)
     "hidden" => Some(DocumentVisibilityState::Hidden)
     _ => None

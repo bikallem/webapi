@@ -19,11 +19,8 @@ pub impl TJsValue for ImageSmoothingQuality with to_js(self) {
 }
 
 ///|
-pub fn ImageSmoothingQuality::from_js(
-  value : JsValue,
-) -> ImageSmoothingQuality? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ImageSmoothingQuality::from(value : String) -> ImageSmoothingQuality? {
+  match value {
     "low" => Some(ImageSmoothingQuality::Low)
     "medium" => Some(ImageSmoothingQuality::Medium)
     "high" => Some(ImageSmoothingQuality::High)

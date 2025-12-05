@@ -17,11 +17,10 @@ pub impl TJsValue for ScrollIntoViewContainer with to_js(self) {
 }
 
 ///|
-pub fn ScrollIntoViewContainer::from_js(
-  value : JsValue,
+pub fn ScrollIntoViewContainer::from(
+  value : String,
 ) -> ScrollIntoViewContainer? {
-  let str : String = value.unsafe_cast()
-  match str {
+  match value {
     "all" => Some(ScrollIntoViewContainer::All)
     "nearest" => Some(ScrollIntoViewContainer::Nearest)
     _ => None

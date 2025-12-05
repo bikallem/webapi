@@ -1365,7 +1365,7 @@ fn document_ready_state_ffi(obj : JsValue) -> JsValue = "webapi_Document" "ready
 
 ///|
 impl TDocument with ready_state(self : Self) -> DocumentReadyState {
-  DocumentReadyState::from_js(document_ready_state_ffi(self.to_js())).unwrap()
+  DocumentReadyState::from(document_ready_state_ffi(self.to_js()).unsafe_cast()).unwrap()
 }
 
 ///|
@@ -1517,7 +1517,9 @@ fn document_visibility_state_ffi(obj : JsValue) -> JsValue = "webapi_Document" "
 
 ///|
 impl TDocument with visibility_state(self : Self) -> DocumentVisibilityState {
-  DocumentVisibilityState::from_js(document_visibility_state_ffi(self.to_js())).unwrap()
+  DocumentVisibilityState::from(
+    document_visibility_state_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|

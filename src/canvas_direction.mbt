@@ -19,9 +19,8 @@ pub impl TJsValue for CanvasDirection with to_js(self) {
 }
 
 ///|
-pub fn CanvasDirection::from_js(value : JsValue) -> CanvasDirection? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasDirection::from(value : String) -> CanvasDirection? {
+  match value {
     "ltr" => Some(CanvasDirection::Ltr)
     "rtl" => Some(CanvasDirection::Rtl)
     "inherit" => Some(CanvasDirection::Inherit)

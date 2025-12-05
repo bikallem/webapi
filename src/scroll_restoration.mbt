@@ -17,9 +17,8 @@ pub impl TJsValue for ScrollRestoration with to_js(self) {
 }
 
 ///|
-pub fn ScrollRestoration::from_js(value : JsValue) -> ScrollRestoration? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ScrollRestoration::from(value : String) -> ScrollRestoration? {
+  match value {
     "auto" => Some(ScrollRestoration::Auto)
     "manual" => Some(ScrollRestoration::Manual)
     _ => None

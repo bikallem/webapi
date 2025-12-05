@@ -19,11 +19,10 @@ pub impl TJsValue for NavigationHistoryBehavior with to_js(self) {
 }
 
 ///|
-pub fn NavigationHistoryBehavior::from_js(
-  value : JsValue,
+pub fn NavigationHistoryBehavior::from(
+  value : String,
 ) -> NavigationHistoryBehavior? {
-  let str : String = value.unsafe_cast()
-  match str {
+  match value {
     "auto" => Some(NavigationHistoryBehavior::Auto)
     "push" => Some(NavigationHistoryBehavior::Push)
     "replace" => Some(NavigationHistoryBehavior::Replace)

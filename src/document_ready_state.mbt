@@ -19,9 +19,8 @@ pub impl TJsValue for DocumentReadyState with to_js(self) {
 }
 
 ///|
-pub fn DocumentReadyState::from_js(value : JsValue) -> DocumentReadyState? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn DocumentReadyState::from(value : String) -> DocumentReadyState? {
+  match value {
     "loading" => Some(DocumentReadyState::Loading)
     "interactive" => Some(DocumentReadyState::Interactive)
     "complete" => Some(DocumentReadyState::Complete)

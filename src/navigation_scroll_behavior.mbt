@@ -18,11 +18,10 @@ pub impl TJsValue for NavigationScrollBehavior with to_js(self) {
 }
 
 ///|
-pub fn NavigationScrollBehavior::from_js(
-  value : JsValue,
+pub fn NavigationScrollBehavior::from(
+  value : String,
 ) -> NavigationScrollBehavior? {
-  let str : String = value.unsafe_cast()
-  match str {
+  match value {
     "after-transition" => Some(NavigationScrollBehavior::AfterTransition)
     "manual" => Some(NavigationScrollBehavior::Manual)
     _ => None

@@ -25,9 +25,8 @@ pub impl TJsValue for CanvasTextBaseline with to_js(self) {
 }
 
 ///|
-pub fn CanvasTextBaseline::from_js(value : JsValue) -> CanvasTextBaseline? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasTextBaseline::from(value : String) -> CanvasTextBaseline? {
+  match value {
     "top" => Some(CanvasTextBaseline::Top)
     "hanging" => Some(CanvasTextBaseline::Hanging)
     "middle" => Some(CanvasTextBaseline::Middle)

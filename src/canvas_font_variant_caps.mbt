@@ -27,11 +27,8 @@ pub impl TJsValue for CanvasFontVariantCaps with to_js(self) {
 }
 
 ///|
-pub fn CanvasFontVariantCaps::from_js(
-  value : JsValue,
-) -> CanvasFontVariantCaps? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasFontVariantCaps::from(value : String) -> CanvasFontVariantCaps? {
+  match value {
     "normal" => Some(CanvasFontVariantCaps::Normal)
     "small-caps" => Some(CanvasFontVariantCaps::SmallCaps)
     "all-small-caps" => Some(CanvasFontVariantCaps::AllSmallCaps)

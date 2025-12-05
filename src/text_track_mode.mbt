@@ -19,9 +19,8 @@ pub impl TJsValue for TextTrackMode with to_js(self) {
 }
 
 ///|
-pub fn TextTrackMode::from_js(value : JsValue) -> TextTrackMode? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn TextTrackMode::from(value : String) -> TextTrackMode? {
+  match value {
     "disabled" => Some(TextTrackMode::Disabled)
     "hidden" => Some(TextTrackMode::Hidden)
     "showing" => Some(TextTrackMode::Showing)

@@ -66,7 +66,7 @@ fn shadow_root_mode_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "mode"
 
 ///|
 impl TShadowRoot with mode(self : Self) -> ShadowRootMode {
-  ShadowRootMode::from_js(shadow_root_mode_ffi(self.to_js())).unwrap()
+  ShadowRootMode::from(shadow_root_mode_ffi(self.to_js()).unsafe_cast()).unwrap()
 }
 
 ///|
@@ -82,7 +82,9 @@ fn shadow_root_slot_assignment_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoo
 
 ///|
 impl TShadowRoot with slot_assignment(self : Self) -> SlotAssignmentMode {
-  SlotAssignmentMode::from_js(shadow_root_slot_assignment_ffi(self.to_js())).unwrap()
+  SlotAssignmentMode::from(
+    shadow_root_slot_assignment_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|

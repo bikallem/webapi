@@ -17,9 +17,8 @@ pub impl TJsValue for WorkerType with to_js(self) {
 }
 
 ///|
-pub fn WorkerType::from_js(value : JsValue) -> WorkerType? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn WorkerType::from(value : String) -> WorkerType? {
+  match value {
     "classic" => Some(WorkerType::Classic)
     "module" => Some(WorkerType::Module)
     _ => None

@@ -17,9 +17,8 @@ pub impl TJsValue for EndingType with to_js(self) {
 }
 
 ///|
-pub fn EndingType::from_js(value : JsValue) -> EndingType? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn EndingType::from(value : String) -> EndingType? {
+  match value {
     "transparent" => Some(EndingType::Transparent)
     "native" => Some(EndingType::Native)
     _ => None

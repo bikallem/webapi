@@ -21,9 +21,8 @@ pub impl TJsValue for ResizeQuality with to_js(self) {
 }
 
 ///|
-pub fn ResizeQuality::from_js(value : JsValue) -> ResizeQuality? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ResizeQuality::from(value : String) -> ResizeQuality? {
+  match value {
     "pixelated" => Some(ResizeQuality::Pixelated)
     "low" => Some(ResizeQuality::Low)
     "medium" => Some(ResizeQuality::Medium)

@@ -17,9 +17,8 @@ pub impl TJsValue for CanvasColorType with to_js(self) {
 }
 
 ///|
-pub fn CanvasColorType::from_js(value : JsValue) -> CanvasColorType? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn CanvasColorType::from(value : String) -> CanvasColorType? {
+  match value {
     "unorm8" => Some(CanvasColorType::Unorm8)
     "float16" => Some(CanvasColorType::Float16)
     _ => None

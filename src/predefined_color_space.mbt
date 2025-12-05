@@ -17,9 +17,8 @@ pub impl TJsValue for PredefinedColorSpace with to_js(self) {
 }
 
 ///|
-pub fn PredefinedColorSpace::from_js(value : JsValue) -> PredefinedColorSpace? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn PredefinedColorSpace::from(value : String) -> PredefinedColorSpace? {
+  match value {
     "srgb" => Some(PredefinedColorSpace::Srgb)
     "display-p3" => Some(PredefinedColorSpace::DisplayP3)
     _ => None

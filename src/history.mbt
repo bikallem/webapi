@@ -111,7 +111,9 @@ fn history_scroll_restoration_ffi(obj : JsValue) -> JsValue = "webapi_History" "
 
 ///|
 impl THistory with scroll_restoration(self : Self) -> ScrollRestoration {
-  ScrollRestoration::from_js(history_scroll_restoration_ffi(self.to_js())).unwrap()
+  ScrollRestoration::from(
+    history_scroll_restoration_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|

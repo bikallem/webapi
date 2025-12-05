@@ -23,9 +23,8 @@ pub impl TJsValue for TextTrackKind with to_js(self) {
 }
 
 ///|
-pub fn TextTrackKind::from_js(value : JsValue) -> TextTrackKind? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn TextTrackKind::from(value : String) -> TextTrackKind? {
+  match value {
     "subtitles" => Some(TextTrackKind::Subtitles)
     "captions" => Some(TextTrackKind::Captions)
     "descriptions" => Some(TextTrackKind::Descriptions)

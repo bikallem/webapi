@@ -17,9 +17,8 @@ pub impl TJsValue for ImageDataPixelFormat with to_js(self) {
 }
 
 ///|
-pub fn ImageDataPixelFormat::from_js(value : JsValue) -> ImageDataPixelFormat? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ImageDataPixelFormat::from(value : String) -> ImageDataPixelFormat? {
+  match value {
     "rgba-unorm8" => Some(ImageDataPixelFormat::RgbaUnorm8)
     "rgba-float16" => Some(ImageDataPixelFormat::RgbaFloat16)
     _ => None

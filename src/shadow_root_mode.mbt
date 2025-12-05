@@ -17,9 +17,8 @@ pub impl TJsValue for ShadowRootMode with to_js(self) {
 }
 
 ///|
-pub fn ShadowRootMode::from_js(value : JsValue) -> ShadowRootMode? {
-  let str : String = value.unsafe_cast()
-  match str {
+pub fn ShadowRootMode::from(value : String) -> ShadowRootMode? {
+  match value {
     "open" => Some(ShadowRootMode::Open)
     "closed" => Some(ShadowRootMode::Closed)
     _ => None

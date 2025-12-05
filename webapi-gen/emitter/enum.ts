@@ -34,7 +34,7 @@ function toVariantName(value: string): string {
  * WebIDL enums are string-backed, so we emit:
  * 1. A MoonBit enum with variants for each value
  * 2. TJsValue impl for to_js() conversion
- * 3. from_js static method for reverse conversion
+ * 3. from() static method for reverse conversion (takes String)
  */
 export function emitEnum(enumDef: ParsedEnum): string {
     const lines: string[] = [];
@@ -68,11 +68,10 @@ export function emitEnum(enumDef: ParsedEnum): string {
     lines.push('}');
     lines.push('');
 
-    // Emit from_js conversion - cast JsValue to String directly
+    // Emit from() conversion - accepts String directly since all enums are string-backed
     lines.push('///|');
-    lines.push(`pub fn ${typeName}::from_js(value : JsValue) -> ${typeName}? {`);
-    lines.push('  let str : String = value.unsafe_cast()');
-    lines.push('  match str {');
+    lines.push(`pub fn ${typeName}::from(value : String) -> ${typeName}? {`);
+    lines.push('  match value {');
     for (const value of enumDef.values) {
         const variantName = toVariantName(value);
         lines.push(`    "${value}" => Some(${typeName}::${variantName})`);

@@ -1548,10 +1548,10 @@ fn offscreen_canvas_rendering_context2_d_image_smoothing_quality_ffi(
 impl TOffscreenCanvasRenderingContext2D with image_smoothing_quality(
   self : Self,
 ) -> ImageSmoothingQuality {
-  ImageSmoothingQuality::from_js(
+  ImageSmoothingQuality::from(
     offscreen_canvas_rendering_context2_d_image_smoothing_quality_ffi(
       self.to_js(),
-    ),
+    ).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1782,8 +1782,8 @@ fn offscreen_canvas_rendering_context2_d_line_cap_ffi(obj : JsValue) -> JsValue 
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with line_cap(self : Self) -> CanvasLineCap {
-  CanvasLineCap::from_js(
-    offscreen_canvas_rendering_context2_d_line_cap_ffi(self.to_js()),
+  CanvasLineCap::from(
+    offscreen_canvas_rendering_context2_d_line_cap_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1811,8 +1811,8 @@ fn offscreen_canvas_rendering_context2_d_line_join_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with line_join(self : Self) -> CanvasLineJoin {
-  CanvasLineJoin::from_js(
-    offscreen_canvas_rendering_context2_d_line_join_ffi(self.to_js()),
+  CanvasLineJoin::from(
+    offscreen_canvas_rendering_context2_d_line_join_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1935,8 +1935,8 @@ fn offscreen_canvas_rendering_context2_d_text_align_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with text_align(self : Self) -> CanvasTextAlign {
-  CanvasTextAlign::from_js(
-    offscreen_canvas_rendering_context2_d_text_align_ffi(self.to_js()),
+  CanvasTextAlign::from(
+    offscreen_canvas_rendering_context2_d_text_align_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1964,8 +1964,8 @@ fn offscreen_canvas_rendering_context2_d_text_baseline_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with text_baseline(self : Self) -> CanvasTextBaseline {
-  CanvasTextBaseline::from_js(
-    offscreen_canvas_rendering_context2_d_text_baseline_ffi(self.to_js()),
+  CanvasTextBaseline::from(
+    offscreen_canvas_rendering_context2_d_text_baseline_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -1993,8 +1993,8 @@ fn offscreen_canvas_rendering_context2_d_direction_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with direction(self : Self) -> CanvasDirection {
-  CanvasDirection::from_js(
-    offscreen_canvas_rendering_context2_d_direction_ffi(self.to_js()),
+  CanvasDirection::from(
+    offscreen_canvas_rendering_context2_d_direction_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -2049,8 +2049,8 @@ fn offscreen_canvas_rendering_context2_d_font_kerning_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with font_kerning(self : Self) -> CanvasFontKerning {
-  CanvasFontKerning::from_js(
-    offscreen_canvas_rendering_context2_d_font_kerning_ffi(self.to_js()),
+  CanvasFontKerning::from(
+    offscreen_canvas_rendering_context2_d_font_kerning_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -2078,8 +2078,8 @@ fn offscreen_canvas_rendering_context2_d_font_stretch_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with font_stretch(self : Self) -> CanvasFontStretch {
-  CanvasFontStretch::from_js(
-    offscreen_canvas_rendering_context2_d_font_stretch_ffi(self.to_js()),
+  CanvasFontStretch::from(
+    offscreen_canvas_rendering_context2_d_font_stretch_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -2107,8 +2107,8 @@ fn offscreen_canvas_rendering_context2_d_font_variant_caps_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with font_variant_caps(self : Self) -> CanvasFontVariantCaps {
-  CanvasFontVariantCaps::from_js(
-    offscreen_canvas_rendering_context2_d_font_variant_caps_ffi(self.to_js()),
+  CanvasFontVariantCaps::from(
+    offscreen_canvas_rendering_context2_d_font_variant_caps_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
@@ -2136,8 +2136,8 @@ fn offscreen_canvas_rendering_context2_d_text_rendering_ffi(
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with text_rendering(self : Self) -> CanvasTextRendering {
-  CanvasTextRendering::from_js(
-    offscreen_canvas_rendering_context2_d_text_rendering_ffi(self.to_js()),
+  CanvasTextRendering::from(
+    offscreen_canvas_rendering_context2_d_text_rendering_ffi(self.to_js()).unsafe_cast(),
   ).unwrap()
 }
 
