@@ -12,17 +12,17 @@
  * Unsafe types: closure types like (String) -> Unit
  */
 export function isFfiSafeType(moonbitType: string): boolean {
-  // Closure types are not FFI safe
-  if (moonbitType.includes('->')) {
-    return false
-  }
+    // Closure types are not FFI safe
+    if (moonbitType.includes('->')) {
+        return false
+    }
 
-  // Generic types with closure parameters are not safe
-  if (moonbitType.includes('[') && moonbitType.includes('->')) {
-    return false
-  }
+    // Generic types with closure parameters are not safe
+    if (moonbitType.includes('[') && moonbitType.includes('->')) {
+        return false
+    }
 
-  return true
+    return true
 }
 
 /**
@@ -30,13 +30,13 @@ export function isFfiSafeType(moonbitType: string): boolean {
  * Returns the closure representation for use in public function signatures
  */
 export function buildClosureTypeFromParams(
-  params: Array<{ name: string; type: string }>,
-  returnType: string
+    params: Array<{ name: string; type: string }>,
+    returnType: string
 ): string {
-  if (params.length === 0) {
-    return `() -> ${returnType}`
-  }
+    if (params.length === 0) {
+        return `() -> ${returnType}`
+    }
 
-  const paramTypes = params.map(p => p.type).join(', ')
-  return `(${paramTypes}) -> ${returnType}`
+    const paramTypes = params.map(p => p.type).join(', ')
+    return `(${paramTypes}) -> ${returnType}`
 }

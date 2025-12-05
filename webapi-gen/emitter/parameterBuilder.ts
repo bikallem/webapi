@@ -12,9 +12,9 @@ import { toSnakeCase, escapeKeyword } from '../utils.js'
  * Build a list of parameter names for calling FFI functions
  */
 export function buildFfiCallParameters(
-  params: ParsedParam[]
+    params: ParsedParam[]
 ): string[] {
-  return params.map(p => escapeKeyword(toSnakeCase(p.name)))
+    return params.map(p => escapeKeyword(toSnakeCase(p.name)))
 }
 
 /**
@@ -22,15 +22,15 @@ export function buildFfiCallParameters(
  * Example: [name, value] -> "name : String, value : Int"
  */
 export function buildParameterDeclarations(
-  params: ParsedParam[]
+    params: ParsedParam[]
 ): string {
-  return params
-    .map(p => {
-      const mapped = mapIdlType(p.type)
-      const paramName = escapeKeyword(toSnakeCase(p.name))
-      return `${paramName} : ${mapped.moonbitType}`
-    })
-    .join(', ')
+    return params
+        .map(p => {
+            const mapped = mapIdlType(p.type)
+            const paramName = escapeKeyword(toSnakeCase(p.name))
+            return `${paramName} : ${mapped.moonbitType}`
+        })
+        .join(', ')
 }
 
 /**
@@ -38,23 +38,23 @@ export function buildParameterDeclarations(
  * Example: (String, Int) -> Unit
  */
 export function buildFunctionSignature(
-  params: ParsedParam[],
-  returnType: ParsedType
+    params: ParsedParam[],
+    returnType: ParsedType
 ): string {
-  const paramDecls = buildParameterDeclarations(params)
-  const returnTypeStr = mapIdlType(returnType).moonbitType
+    const paramDecls = buildParameterDeclarations(params)
+    const returnTypeStr = mapIdlType(returnType).moonbitType
 
-  if (!paramDecls) {
-    return `() -> ${returnTypeStr}`
-  }
-  return `(${paramDecls}) -> ${returnTypeStr}`
+    if (!paramDecls) {
+        return `() -> ${returnTypeStr}`
+    }
+    return `(${paramDecls}) -> ${returnTypeStr}`
 }
 
 /**
  * Build parameter list where all params are JsValue (for internal FFI)
  */
 export function buildJsValueParameters(
-  paramNames: string[]
+    paramNames: string[]
 ): string {
-  return paramNames.map(name => `${name} : JsValue`).join(', ')
+    return paramNames.map(name => `${name} : JsValue`).join(', ')
 }

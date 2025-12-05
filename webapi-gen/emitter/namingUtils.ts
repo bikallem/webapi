@@ -11,7 +11,7 @@ import { toFfiModuleName, toSnakeCase, toTraitName } from '../utils.js'
  * Example: EventHandler -> webapi_EventHandler
  */
 export function generateFfiModuleName(typeName: string): string {
-  return `webapi_${typeName}`
+    return `webapi_${typeName}`
 }
 
 /**
@@ -19,7 +19,7 @@ export function generateFfiModuleName(typeName: string): string {
  * Example: EventHandler -> event_handler
  */
 export function generateFfiName(typeName: string): string {
-  return toSnakeCase(typeName)
+    return toSnakeCase(typeName)
 }
 
 /**
@@ -27,7 +27,7 @@ export function generateFfiName(typeName: string): string {
  * Example: EventHandler -> TEventHandler
  */
 export function generateTraitName(typeName: string): string {
-  return toTraitName(typeName)
+    return toTraitName(typeName)
 }
 
 /**
@@ -35,10 +35,10 @@ export function generateTraitName(typeName: string): string {
  * Example: = "webapi_EventHandler" "new"
  */
 export function buildFfiDeclaration(
-  moduleName: string,
-  methodName: string
+    moduleName: string,
+    methodName: string
 ): string {
-  return `= "${moduleName}" "${methodName}"`
+    return `= "${moduleName}" "${methodName}"`
 }
 
 /**
@@ -46,10 +46,10 @@ export function buildFfiDeclaration(
  * Example: getAttribute -> attribute_get_attribute_ffi
  */
 export function generateMethodFfiName(
-  typeName: string,
-  methodName: string
+    typeName: string,
+    methodName: string
 ): string {
-  return `${toSnakeCase(typeName)}_${toSnakeCase(methodName)}_ffi`
+    return `${toSnakeCase(typeName)}_${toSnakeCase(methodName)}_ffi`
 }
 
 /**
@@ -57,10 +57,10 @@ export function generateMethodFfiName(
  * Example: getAttribute -> element_get_attribute_ffi
  */
 export function generatePropertyGetterFfiName(
-  typeName: string,
-  propertyName: string
+    typeName: string,
+    propertyName: string
 ): string {
-  return `${toSnakeCase(typeName)}_get_${toSnakeCase(propertyName)}_ffi`
+    return `${toSnakeCase(typeName)}_get_${toSnakeCase(propertyName)}_ffi`
 }
 
 /**
@@ -68,8 +68,8 @@ export function generatePropertyGetterFfiName(
  * Example: setAttribute -> element_set_attribute_ffi
  */
 export function generatePropertySetterFfiName(
-  typeName: string,
-  propertyName: string
+    typeName: string,
+    propertyName: string
 ): string {
-  return `${toSnakeCase(typeName)}_set_${toSnakeCase(propertyName)}_ffi`
+    return `${toSnakeCase(typeName)}_set_${toSnakeCase(propertyName)}_ffi`
 }
