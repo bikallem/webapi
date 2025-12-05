@@ -1,6 +1,6 @@
 /**
  * Build Orchestrator
- * 
+ *
  * Main entry point that coordinates the generation process:
  * 1. Fetches Web IDL from @webref/idl
  * 2. Parses and merges all IDL
@@ -16,7 +16,11 @@ import { minify } from "terser";
 
 import { parseIdl, mergeIdl, applyMixins } from "./widlprocess.js";
 import type { ParsedIdl } from "./types.js";
-import { registerDictionaries, registerEnums, registerAbstractInterface } from "./mapping.js";
+import {
+  registerDictionaries,
+  registerEnums,
+  registerAbstractInterface,
+} from "./mapping.js";
 import {
   emitInterface,
   getInterfaceFilename,
@@ -47,12 +51,12 @@ const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
  * Abstract base interfaces that are never instantiated directly.
  * These types use trait objects instead of external types.
  * Only base classes in an inheritance hierarchy go here.
- * 
+ *
  * Types like Window/Navigator are NOT abstract - they have instances
  * (created by the browser), just no user-accessible constructor.
- * 
+ *
  * Types like Event/EventTarget DO have constructors and are NOT abstract.
- * 
+ *
  * Types with [HTMLConstructor] (like HTMLElement) get external type but no new().
  */
 const ABSTRACT_BASE_INTERFACES = new Set([
@@ -67,15 +71,15 @@ const ABSTRACT_BASE_INTERFACES = new Set([
  * Core DOM specs to include
  */
 const CORE_SPECS = [
-  "dom",           // Core DOM interfaces
-  "html",          // HTML elements
-  "uievents",      // UI events
-  "cssom",         // CSS Object Model
-  "cssom-view",    // CSSOM View (scrolling, etc.)
-  "geometry",      // DOMPoint, DOMRect, DOMMatrix, etc.
-  "FileAPI",       // Blob, File, FileReader, etc.
-  "dom-shadow",    // Shadow DOM (ShadowRoot, slots, etc.)
-  "SVG",           // SVG elements (for SVGImageElement, etc.)
+  "dom", // Core DOM interfaces
+  "html", // HTML elements
+  "uievents", // UI events
+  "cssom", // CSS Object Model
+  "cssom-view", // CSSOM View (scrolling, etc.)
+  "geometry", // DOMPoint, DOMRect, DOMMatrix, etc.
+  "FileAPI", // Blob, File, FileReader, etc.
+  "dom-shadow", // Shadow DOM (ShadowRoot, slots, etc.)
+  "SVG", // SVG elements (for SVGImageElement, etc.)
 ];
 
 /**
@@ -252,7 +256,10 @@ async function fetchIdl(): Promise<ParsedIdl[]> {
  * Recursively collect interface names from typedef unions
  * This ensures that interfaces referenced in union types are included
  */
-function collectInterfacesFromTypedefs(idl: ParsedIdl, typedefNames: Set<string>): Set<string> {
+function collectInterfacesFromTypedefs(
+  idl: ParsedIdl,
+  typedefNames: Set<string>,
+): Set<string> {
   const interfaces = new Set<string>();
   const visited = new Set<string>();
 
@@ -261,7 +268,11 @@ function collectInterfacesFromTypedefs(idl: ParsedIdl, typedefNames: Set<string>
     visited.add(name);
 
     const typedef = idl.typedefs.get(name);
-    if (!typedef || typedef.type.type !== "union" || !typedef.type.memberTypes) {
+    if (
+      !typedef ||
+      typedef.type.type !== "union" ||
+      !typedef.type.memberTypes
+    ) {
       return;
     }
 
@@ -316,7 +327,10 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
   ]);
 
   // Collect interfaces referenced in typedef unions and add them to CORE_INTERFACES
-  const typedefInterfaces = collectInterfacesFromTypedefs(idl, GENERATED_TYPEDEFS);
+  const typedefInterfaces = collectInterfacesFromTypedefs(
+    idl,
+    GENERATED_TYPEDEFS,
+  );
   for (const name of typedefInterfaces) {
     CORE_INTERFACES.add(name);
   }
@@ -330,7 +344,9 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
 
   // Keep dictionaries that aren't from excluded specs
   for (const [name, dict] of idl.dictionaries) {
-    const isExcluded = EXCLUDED_DICTIONARY_PREFIXES.some(prefix => name.startsWith(prefix));
+    const isExcluded = EXCLUDED_DICTIONARY_PREFIXES.some((prefix) =>
+      name.startsWith(prefix),
+    );
     if (!isExcluded) {
       filtered.dictionaries.set(name, dict);
     }
@@ -341,7 +357,9 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
 
   // Keep callbacks that aren't from excluded specs
   for (const [name, callback] of idl.callbacks) {
-    const isExcluded = EXCLUDED_DICTIONARY_PREFIXES.some(prefix => name.startsWith(prefix));
+    const isExcluded = EXCLUDED_DICTIONARY_PREFIXES.some((prefix) =>
+      name.startsWith(prefix),
+    );
     if (!isExcluded) {
       filtered.callbacks.set(name, callback);
     }
@@ -410,7 +428,10 @@ async function copyTemplates(): Promise<void> {
  */
 async function generateMoonBitFiles(
   idl: ParsedIdl,
-  propertyUnionTypes: Map<string, import("./emitter/index.js").CollectedUnionType>
+  propertyUnionTypes: Map<
+    string,
+    import("./emitter/index.js").CollectedUnionType
+  >,
 ): Promise<void> {
   console.log("Generating MoonBit files...");
 
@@ -571,7 +592,9 @@ async function build(): Promise<void> {
         abstractCount++;
       }
     }
-    console.log(`  - ${abstractCount} abstract base interfaces (use trait objects)`);
+    console.log(
+      `  - ${abstractCount} abstract base interfaces (use trait objects)`,
+    );
 
     // Report what we're generating
     console.log(`\nGenerating bindings for:`);
@@ -609,7 +632,6 @@ async function build(): Promise<void> {
 
     console.log("\n=== Build complete! ===");
     console.log(`Output directory: ${OUTPUT_DIR}`);
-
   } catch (err) {
     console.error("\nBuild failed:", err);
     process.exit(1);

@@ -164,10 +164,12 @@ export function joinBlocks(...blocks: (string | undefined)[]): string {
  * Format WebIDL source as MoonBit comments
  * Each line is prefixed with "// "
  */
-export function formatIdlSourceAsComment(idlSource: string | undefined): string | undefined {
+export function formatIdlSourceAsComment(
+  idlSource: string | undefined,
+): string | undefined {
   if (!idlSource) return undefined;
 
   const lines = idlSource.split("\n");
-  const commentLines = lines.map(line => `// ${line}`);
+  const commentLines = lines.map((line) => `// ${line}`);
   return commentLines.join("\n");
 }

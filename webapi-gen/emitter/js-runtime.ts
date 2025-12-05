@@ -1,23 +1,69 @@
 /**
  * JavaScript Runtime Emitter
- * 
+ *
  * Generates the companion JavaScript/ESM file that provides the WebAssembly import object
  * with all the FFI function implementations.
  */
 
-import type { ParsedIdl, ParsedInterface, ParsedDictionary, ParsedCallback, ParsedMethod, ParsedProperty } from "../types.js";
+import type {
+  ParsedIdl,
+  ParsedInterface,
+  ParsedDictionary,
+  ParsedCallback,
+  ParsedMethod,
+  ParsedProperty,
+} from "../types.js";
 import { toFfiModuleName } from "../utils.js";
 
 /**
  * JavaScript reserved keywords that need escaping when used as parameter names
  */
 const JS_RESERVED_KEYWORDS = new Set([
-  "break", "case", "catch", "continue", "debugger", "default", "delete",
-  "do", "else", "finally", "for", "function", "if", "in", "instanceof",
-  "new", "return", "switch", "this", "throw", "try", "typeof", "var",
-  "void", "while", "with", "class", "const", "enum", "export", "extends",
-  "import", "super", "implements", "interface", "let", "package", "private",
-  "protected", "public", "static", "yield", "await", "arguments", "eval"
+  "break",
+  "case",
+  "catch",
+  "continue",
+  "debugger",
+  "default",
+  "delete",
+  "do",
+  "else",
+  "finally",
+  "for",
+  "function",
+  "if",
+  "in",
+  "instanceof",
+  "new",
+  "return",
+  "switch",
+  "this",
+  "throw",
+  "try",
+  "typeof",
+  "var",
+  "void",
+  "while",
+  "with",
+  "class",
+  "const",
+  "enum",
+  "export",
+  "extends",
+  "import",
+  "super",
+  "implements",
+  "interface",
+  "let",
+  "package",
+  "private",
+  "protected",
+  "public",
+  "static",
+  "yield",
+  "await",
+  "arguments",
+  "eval",
 ]);
 
 /**
@@ -34,7 +80,9 @@ function escapeJsKeyword(name: string): string {
  * Emit method wrapper for JS runtime
  */
 function emitJsMethod(method: ParsedMethod): string {
-  const paramNames = method.params.map((p, i) => escapeJsKeyword(p.name || `arg${i}`));
+  const paramNames = method.params.map((p, i) =>
+    escapeJsKeyword(p.name || `arg${i}`),
+  );
 
   if (method.static) {
     const argsStr = paramNames.join(", ");
@@ -76,7 +124,9 @@ function emitJsInterface(iface: ParsedInterface): string {
   // Constructor
   if (iface.constructors.length > 0) {
     const firstCtor = iface.constructors[0];
-    const paramNames = firstCtor.params.map((p, i) => escapeJsKeyword(p.name || `arg${i}`));
+    const paramNames = firstCtor.params.map((p, i) =>
+      escapeJsKeyword(p.name || `arg${i}`),
+    );
     const argsStr = paramNames.join(", ");
     entries.push(`    new: (${argsStr}) => new ${iface.name}(${argsStr})`);
   }
@@ -116,8 +166,8 @@ function emitJsDictionary(dict: ParsedDictionary): string {
   }`;
   }
 
-  const paramNames = dict.members.map(m => escapeJsKeyword(m.name));
-  const originalNames = dict.members.map(m => m.name);
+  const paramNames = dict.members.map((m) => escapeJsKeyword(m.name));
+  const originalNames = dict.members.map((m) => m.name);
   const paramsStr = paramNames.join(", ");
 
   return `  ${moduleName}: {

@@ -1,6 +1,6 @@
 /**
  * Type Mapping
- * 
+ *
  * Maps Web IDL types to MoonBit types and provides conversion expressions.
  */
 
@@ -15,20 +15,20 @@ const PRIMITIVE_TYPE_MAP: Record<string, string> = {
   boolean: "Bool",
 
   // Integer types (WebIDL -> MoonBit)
-  byte: "Int",              // 8-bit signed → Int (no signed 8-bit in MoonBit)
-  octet: "Byte",            // 8-bit unsigned → Byte
-  short: "Int",             // 16-bit signed → Int (Int16 exists but Int is more common)
+  byte: "Int", // 8-bit signed → Int (no signed 8-bit in MoonBit)
+  octet: "Byte", // 8-bit unsigned → Byte
+  short: "Int", // 16-bit signed → Int (Int16 exists but Int is more common)
   "unsigned short": "UInt", // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
-  long: "Int",              // 32-bit signed → Int
-  "unsigned long": "UInt",  // 32-bit unsigned → UInt
-  "long long": "Int64",     // 64-bit signed → Int64
+  long: "Int", // 32-bit signed → Int
+  "unsigned long": "UInt", // 32-bit unsigned → UInt
+  "long long": "Int64", // 64-bit signed → Int64
   "unsigned long long": "UInt64", // 64-bit unsigned → UInt64
-  bigint: "Int64",          // BigInt → Int64
+  bigint: "Int64", // BigInt → Int64
 
   // Floating point types (WebIDL -> MoonBit)
-  float: "Float",           // 32-bit float → Float
+  float: "Float", // 32-bit float → Float
   "unrestricted float": "Float", // 32-bit unrestricted float → Float
-  double: "Double",         // 64-bit float → Double
+  double: "Double", // 64-bit float → Double
   "unrestricted double": "Double", // 64-bit unrestricted float → Double
 
   // String types
@@ -47,36 +47,91 @@ const PRIMITIVE_TYPE_MAP: Record<string, string> = {
  */
 const KNOWN_INTERFACES = new Set([
   // Core DOM
-  "EventTarget", "Event", "CustomEvent", "EventListener",
-  "Node", "Document", "DocumentFragment", "DocumentType", "Element",
-  "Attr", "CharacterData", "Text", "Comment", "CDATASection", "ProcessingInstruction",
+  "EventTarget",
+  "Event",
+  "CustomEvent",
+  "EventListener",
+  "Node",
+  "Document",
+  "DocumentFragment",
+  "DocumentType",
+  "Element",
+  "Attr",
+  "CharacterData",
+  "Text",
+  "Comment",
+  "CDATASection",
+  "ProcessingInstruction",
   // HTML Elements
-  "HTMLElement", "HTMLHtmlElement", "HTMLHeadElement", "HTMLBodyElement",
-  "HTMLDivElement", "HTMLSpanElement", "HTMLParagraphElement", "HTMLAnchorElement",
-  "HTMLButtonElement", "HTMLInputElement", "HTMLFormElement", "HTMLImageElement",
-  "HTMLScriptElement", "HTMLStyleElement", "HTMLLinkElement", "HTMLCanvasElement",
-  "HTMLVideoElement", "HTMLAudioElement",
+  "HTMLElement",
+  "HTMLHtmlElement",
+  "HTMLHeadElement",
+  "HTMLBodyElement",
+  "HTMLDivElement",
+  "HTMLSpanElement",
+  "HTMLParagraphElement",
+  "HTMLAnchorElement",
+  "HTMLButtonElement",
+  "HTMLInputElement",
+  "HTMLFormElement",
+  "HTMLImageElement",
+  "HTMLScriptElement",
+  "HTMLStyleElement",
+  "HTMLLinkElement",
+  "HTMLCanvasElement",
+  "HTMLVideoElement",
+  "HTMLAudioElement",
   // Collections
-  "NodeList", "HTMLCollection", "NamedNodeMap", "DOMTokenList",
+  "NodeList",
+  "HTMLCollection",
+  "NamedNodeMap",
+  "DOMTokenList",
   // Events
-  "UIEvent", "MouseEvent", "KeyboardEvent", "FocusEvent", "InputEvent", "WheelEvent",
+  "UIEvent",
+  "MouseEvent",
+  "KeyboardEvent",
+  "FocusEvent",
+  "InputEvent",
+  "WheelEvent",
   // Canvas related
-  "CanvasRenderingContext2D", "ImageBitmapRenderingContext", "OffscreenCanvasRenderingContext2D",
-  "CanvasGradient", "CanvasPattern", "OffscreenCanvas",
+  "CanvasRenderingContext2D",
+  "ImageBitmapRenderingContext",
+  "OffscreenCanvasRenderingContext2D",
+  "CanvasGradient",
+  "CanvasPattern",
+  "OffscreenCanvas",
   // Types needed for union types
-  "ImageBitmap", "ImageData", "Blob",
+  "ImageBitmap",
+  "ImageData",
+  "Blob",
   // Shadow DOM
-  "ShadowRoot", "HTMLSlotElement",
+  "ShadowRoot",
+  "HTMLSlotElement",
   // Typed Arrays (JavaScript built-in types)
-  "Float32Array", "Float64Array",
-  "Int8Array", "Int16Array", "Int32Array",
-  "Uint8Array", "Uint8ClampedArray", "Uint16Array", "Uint32Array",
-  "BigInt64Array", "BigUint64Array",
-  "ArrayBuffer", "DataView",
+  "Float32Array",
+  "Float64Array",
+  "Int8Array",
+  "Int16Array",
+  "Int32Array",
+  "Uint8Array",
+  "Uint8ClampedArray",
+  "Uint16Array",
+  "Uint32Array",
+  "BigInt64Array",
+  "BigUint64Array",
+  "ArrayBuffer",
+  "DataView",
   // Other
-  "Window", "Navigator", "Location", "History", "Storage",
-  "AbortController", "AbortSignal", "Range",
-  "MutationObserver", "MutationRecord",
+  "Window",
+  "Navigator",
+  "Location",
+  "History",
+  "Storage",
+  "AbortController",
+  "AbortSignal",
+  "Range",
+  "MutationObserver",
+  "MutationRecord",
 ]);
 
 /**
@@ -208,27 +263,42 @@ export interface MappedType {
   isOptional: boolean;
   unionContext?: UnionTypeContext;
   isDictionary?: boolean;
-  isTypedefUnion?: boolean;  // True if this is a typedef union (like CanvasImageSource)
+  isTypedefUnion?: boolean; // True if this is a typedef union (like CanvasImageSource)
 }
 
 /**
  * Map a parsed IDL type to MoonBit type
  */
-export function mapIdlType(idlType: ParsedType, contextName?: string): MappedType {
+export function mapIdlType(
+  idlType: ParsedType,
+  contextName?: string,
+): MappedType {
   switch (idlType.type) {
     case "void":
       return { moonbitType: "Unit", needsConversion: false, isOptional: false };
 
     case "any":
-      return { moonbitType: "JsValue", needsConversion: false, isOptional: false };
+      return {
+        moonbitType: "JsValue",
+        needsConversion: false,
+        isOptional: false,
+      };
 
     case "primitive": {
       const name = idlType.name;
       if (!name) {
-        return { moonbitType: "JsValue", needsConversion: false, isOptional: false };
+        return {
+          moonbitType: "JsValue",
+          needsConversion: false,
+          isOptional: false,
+        };
       }
       if (name === "undefined") {
-        return { moonbitType: "Unit", needsConversion: false, isOptional: false };
+        return {
+          moonbitType: "Unit",
+          needsConversion: false,
+          isOptional: false,
+        };
       }
       const primitiveType = PRIMITIVE_TYPE_MAP[name] || "JsValue";
       return {
@@ -270,7 +340,10 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
       }
       // Map OnErrorEventHandler and OnBeforeUnloadEventHandler to EventHandler
       // since their underlying types are excluded from generation
-      if (name === "OnErrorEventHandler" || name === "OnBeforeUnloadEventHandler") {
+      if (
+        name === "OnErrorEventHandler" ||
+        name === "OnBeforeUnloadEventHandler"
+      ) {
         return {
           moonbitType: "EventHandler",
           needsConversion: true,
@@ -413,7 +486,11 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
       };
 
     default:
-      return { moonbitType: "JsValue", needsConversion: false, isOptional: false };
+      return {
+        moonbitType: "JsValue",
+        needsConversion: false,
+        isOptional: false,
+      };
   }
 }
 
@@ -422,7 +499,7 @@ export function mapIdlType(idlType: ParsedType, contextName?: string): MappedTyp
  */
 export function getDefaultValueExpr(
   defaultValue: string | undefined,
-  idlType: ParsedType
+  idlType: ParsedType,
 ): string | undefined {
   if (!defaultValue) return undefined;
 
@@ -515,7 +592,7 @@ export function formatParam(
   name: string,
   type: ParsedType,
   optional: boolean,
-  defaultValue?: string
+  defaultValue?: string,
 ): string {
   const mapped = mapIdlType(type);
   const safeName = escapeKeyword(toSnakeCase(name));
@@ -558,7 +635,7 @@ export function formatReturnType(type: ParsedType): string {
 export function toJsConversionExpr(
   varName: string,
   idlType: ParsedType,
-  isOptional: boolean = false
+  isOptional: boolean = false,
 ): string {
   const mapped = mapIdlType(idlType);
   const safeName = escapeKeyword(toSnakeCase(varName));

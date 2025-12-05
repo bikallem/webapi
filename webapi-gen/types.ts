@@ -11,7 +11,17 @@ export interface ParsedParam {
 }
 
 export interface ParsedType {
-  type: "primitive" | "reference" | "sequence" | "promise" | "union" | "nullable" | "record" | "frozen-array" | "any" | "void";
+  type:
+    | "primitive"
+    | "reference"
+    | "sequence"
+    | "promise"
+    | "union"
+    | "nullable"
+    | "record"
+    | "frozen-array"
+    | "any"
+    | "void";
   name?: string; // For primitive and reference types
   elementType?: ParsedType; // For sequence, promise, nullable, frozen-array
   memberTypes?: ParsedType[]; // For union types

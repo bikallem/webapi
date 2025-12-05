@@ -1,13 +1,16 @@
 /**
  * Dictionary Emitter
- * 
+ *
  * Generates MoonBit code for Web IDL dictionaries (options objects).
  */
 
 import type { ParsedDictionary } from "../types.js";
 import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
 import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
-import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
+import {
+  emitExternalType as emitExternalTypeCommon,
+  emitTJsValueImpl as emitTJsValueImplCommon,
+} from "./common.js";
 
 /**
  * Emit external type declaration for dictionary
@@ -64,7 +67,11 @@ pub fn ${dict.name}::new() -> ${dict.name} {
   // Build parameter list with optional params and defaults
   const params: string[] = [];
   // Track which params are truly optional (Option type) vs have defaults
-  const memberInfo: { name: string; isOption: boolean; needsConversion: boolean }[] = [];
+  const memberInfo: {
+    name: string;
+    isOption: boolean;
+    needsConversion: boolean;
+  }[] = [];
 
   for (const member of dict.members) {
     const paramName = escapeKeyword(toSnakeCase(member.name));
@@ -72,18 +79,30 @@ pub fn ${dict.name}::new() -> ${dict.name} {
 
     if (member.required) {
       params.push(`${paramName} : ${mapped.moonbitType}`);
-      memberInfo.push({ name: paramName, isOption: false, needsConversion: mapped.needsConversion });
+      memberInfo.push({
+        name: paramName,
+        isOption: false,
+        needsConversion: mapped.needsConversion,
+      });
     } else {
       // Optional with possible default
       const defaultExpr = getDefaultValueExpr(member.default, member.type);
       if (defaultExpr) {
         // Has default - not wrapped in Option
         params.push(`${paramName}? : ${mapped.moonbitType} = ${defaultExpr}`);
-        memberInfo.push({ name: paramName, isOption: false, needsConversion: mapped.needsConversion });
+        memberInfo.push({
+          name: paramName,
+          isOption: false,
+          needsConversion: mapped.needsConversion,
+        });
       } else {
         // No default - truly optional (Option type)
         params.push(`${paramName}? : ${mapped.moonbitType}`);
-        memberInfo.push({ name: paramName, isOption: true, needsConversion: mapped.needsConversion });
+        memberInfo.push({
+          name: paramName,
+          isOption: true,
+          needsConversion: mapped.needsConversion,
+        });
       }
     }
   }
@@ -113,7 +132,8 @@ pub fn ${dict.name}::new() -> ${dict.name} {
   }
 
   const argsStr = args.join(", ");
-  const bindingsStr = letBindings.length > 0 ? letBindings.join("\n") + "\n" : "";
+  const bindingsStr =
+    letBindings.length > 0 ? letBindings.join("\n") + "\n" : "";
 
   return `///|
 pub fn ${dict.name}::new(
@@ -140,7 +160,6 @@ export function emitDictionary(dict: ParsedDictionary): string {
   // Header
   parts.push(`// Auto-generated MoonBit bindings for ${dict.name} dictionary`);
   parts.push(`// Do not edit manually`);
-
 
   // Type and impl
   parts.push(emitDictionaryType(dict));

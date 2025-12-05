@@ -1,20 +1,20 @@
 /**
  * Union Type Emitter
- * 
+ *
  * Generates MoonBit code for Web IDL union types.
- * 
+ *
  * For argument unions like (DOMString or long), generates traits:
- * 
+ *
  * trait SomeContextArg {
  *   to_js(Self) -> JsValue
  * }
- * 
+ *
  * For property unions like strokeStyle: (DOMString or CanvasGradient or CanvasPattern),
  * generates external types with traits (like RenderingContext pattern):
- * 
+ *
  * #external
  * pub type StrokeStyle
- * 
+ *
  * pub(open) trait TStrokeStyle {
  *   to_js(self : Self) -> JsValue
  * }
@@ -93,7 +93,7 @@ pub impl ${union.contextName} for JsNull with to_js(self : JsNull) -> JsValue = 
  */
 export function collectAndEmitUnions(
   interfaceName: string,
-  unions: Map<string, UnionTypeContext>
+  unions: Map<string, UnionTypeContext>,
 ): string {
   const parts: string[] = [];
 
@@ -149,7 +149,9 @@ function propertyNameToTypeName(propName: string): string {
  * Collect union types from all properties in parsed IDL
  * Returns a map of union type name -> CollectedUnionType
  */
-export function collectPropertyUnionTypes(idl: ParsedIdl): Map<string, CollectedUnionType> {
+export function collectPropertyUnionTypes(
+  idl: ParsedIdl,
+): Map<string, CollectedUnionType> {
   const unionTypes = new Map<string, CollectedUnionType>();
 
   for (const [_, iface] of idl.interfaces) {
@@ -180,7 +182,9 @@ export function collectPropertyUnionTypes(idl: ParsedIdl): Map<string, Collected
 /**
  * Register all collected union types so they can be recognized in type mapping
  */
-export function registerCollectedUnionTypes(unionTypes: Map<string, CollectedUnionType>): void {
+export function registerCollectedUnionTypes(
+  unionTypes: Map<string, CollectedUnionType>,
+): void {
   for (const [name, unionType] of unionTypes) {
     registerUnionType(name, unionType.memberNames);
   }
@@ -190,7 +194,10 @@ export function registerCollectedUnionTypes(unionTypes: Map<string, CollectedUni
  * Emit a property union type file using the external type + open trait pattern
  * Skips fully abstract interface types (they have no external type)
  */
-export function emitPropertyUnionType(unionType: CollectedUnionType, idl: ParsedIdl): string {
+export function emitPropertyUnionType(
+  unionType: CollectedUnionType,
+  idl: ParsedIdl,
+): string {
   const lines: string[] = [];
   const typeName = unionType.name;
   const traitName = `T${typeName}`;
@@ -216,14 +223,19 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
 
   // into method for downcasting
   lines.push("///|");
-  lines.push(`pub fn[T : ${traitName}] ${typeName}::into(self : ${typeName}) -> T = "%identity"`);
+  lines.push(
+    `pub fn[T : ${traitName}] ${typeName}::into(self : ${typeName}) -> T = "%identity"`,
+  );
   lines.push("");
 
   // Trait implementations for each member type
   for (const memberName of unionType.memberNames) {
     // Check if it's a primitive type
-    const isPrimitive = memberName === "String" || memberName === "Double" ||
-      memberName === "Int" || memberName === "Bool";
+    const isPrimitive =
+      memberName === "String" ||
+      memberName === "Double" ||
+      memberName === "Int" ||
+      memberName === "Bool";
 
     // Check if it's a known interface
     const isKnownInterface = idl.interfaces.has(memberName);
@@ -280,4 +292,3 @@ export function emitPropertyUnionType(unionType: CollectedUnionType, idl: Parsed
 export function getPropertyUnionTypeFilename(name: string): string {
   return `${toSnakeCase(name)}.mbt`;
 }
-

@@ -1,8 +1,16 @@
-import { ParsedInterface, ParsedProperty } from '../types.js';
-import { toSnakeCase, escapeKeyword, toFfiModuleName, toTraitName } from '../utils.js';
-import { mapIdlType, isKnownEnum, isKnownUnionType } from '../mapping.js';
-import { generatePropertyGetterFfiName, generatePropertySetterFfiName } from './namingUtils.js';
-import { isFfiSafeType } from './ffiUtils.js';
+import { ParsedInterface, ParsedProperty } from "../types.js";
+import {
+  toSnakeCase,
+  escapeKeyword,
+  toFfiModuleName,
+  toTraitName,
+} from "../utils.js";
+import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapping.js";
+import {
+  generatePropertyGetterFfiName,
+  generatePropertySetterFfiName,
+} from "./namingUtils.js";
+import { isFfiSafeType } from "./ffiUtils.js";
 
 /**
  * Get the context name for a property type if it's a union
@@ -48,7 +56,10 @@ function formatPropertyReturnType(prop: ParsedProperty): string {
  * @param prop The property to emit
  * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitPropertyGetter(prop: ParsedProperty, hasDefaultImpl: boolean = true): string {
+export function emitTraitPropertyGetter(
+  prop: ParsedProperty,
+  hasDefaultImpl: boolean = true,
+): string {
   const methodName = escapeKeyword(toSnakeCase(prop.name));
   const returnType = formatPropertyReturnType(prop);
   const defaultImpl = hasDefaultImpl ? " = _" : "";
@@ -63,7 +74,10 @@ export function emitTraitPropertyGetter(prop: ParsedProperty, hasDefaultImpl: bo
  * @param prop The property to emit
  * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitPropertySetter(prop: ParsedProperty, hasDefaultImpl: boolean = true): string {
+export function emitTraitPropertySetter(
+  prop: ParsedProperty,
+  hasDefaultImpl: boolean = true,
+): string {
   const methodName = `set_${escapeKeyword(toSnakeCase(prop.name))}`;
   const mapped = mapPropertyType(prop);
   const contextName = getPropertyUnionContextName(prop);
@@ -86,7 +100,10 @@ export function emitTraitPropertySetter(prop: ParsedProperty, hasDefaultImpl: bo
  * @param iface The interface to emit properties for
  * @param hasDefaultImpl If true, add `= _` to indicate default implementations exist
  */
-export function emitTraitProperties(iface: ParsedInterface, hasDefaultImpl: boolean = true): string[] {
+export function emitTraitProperties(
+  iface: ParsedInterface,
+  hasDefaultImpl: boolean = true,
+): string[] {
   const lines: string[] = [];
 
   for (const prop of iface.properties) {
@@ -107,15 +124,19 @@ export function emitTraitProperties(iface: ParsedInterface, hasDefaultImpl: bool
 /**
  * Emit FFI function for property getter
  */
-function emitPropertyGetterFfi(iface: ParsedInterface, prop: ParsedProperty): string {
+function emitPropertyGetterFfi(
+  iface: ParsedInterface,
+  prop: ParsedProperty,
+): string {
   const ffiName = generatePropertyGetterFfiName(iface.name, prop.name);
   const moduleName = toFfiModuleName(iface.name);
   const mapped = mapPropertyType(prop);
 
   // FFI can only return primitive types or JsValue
-  const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
-    ? mapped.moonbitType
-    : "JsValue";
+  const ffiReturnType =
+    isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
+      ? mapped.moonbitType
+      : "JsValue";
 
   return `///|
 fn ${ffiName}(obj : JsValue) -> ${ffiReturnType} = "${moduleName}" "${prop.name}"`;
@@ -124,13 +145,18 @@ fn ${ffiName}(obj : JsValue) -> ${ffiReturnType} = "${moduleName}" "${prop.name}
 /**
  * Emit FFI function for property setter
  */
-function emitPropertySetterFfi(iface: ParsedInterface, prop: ParsedProperty): string {
+function emitPropertySetterFfi(
+  iface: ParsedInterface,
+  prop: ParsedProperty,
+): string {
   const ffiName = generatePropertySetterFfiName(iface.name, prop.name);
   const moduleName = toFfiModuleName(iface.name);
   const mapped = mapPropertyType(prop);
 
   // For setter, use JsValue if not FFI-safe
-  const paramType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
+  const paramType = isFfiSafeType(mapped.moonbitType)
+    ? mapped.moonbitType
+    : "JsValue";
 
   return `///|
 fn ${ffiName}(obj : JsValue, value : ${paramType}) -> Unit = "${moduleName}" "set_${prop.name}"`;
@@ -139,7 +165,10 @@ fn ${ffiName}(obj : JsValue, value : ${paramType}) -> Unit = "${moduleName}" "se
 /**
  * Emit trait impl for property getter
  */
-function emitPropertyGetterImpl(iface: ParsedInterface, prop: ParsedProperty): string {
+function emitPropertyGetterImpl(
+  iface: ParsedInterface,
+  prop: ParsedProperty,
+): string {
   const methodName = escapeKeyword(toSnakeCase(prop.name));
   const ffiName = generatePropertyGetterFfiName(iface.name, prop.name);
   const traitName = toTraitName(iface.name);
@@ -147,9 +176,10 @@ function emitPropertyGetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   const mapped = mapPropertyType(prop);
 
   // Determine if we need type conversion
-  const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
-    ? mapped.moonbitType
-    : "JsValue";
+  const ffiReturnType =
+    isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
+      ? mapped.moonbitType
+      : "JsValue";
 
   let bodyExpr: string;
   if (ffiReturnType === returnType) {
@@ -175,7 +205,10 @@ impl ${traitName} with ${methodName}(self : Self) -> ${returnType} {
 /**
  * Emit trait impl for property setter
  */
-function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): string {
+function emitPropertySetterImpl(
+  iface: ParsedInterface,
+  prop: ParsedProperty,
+): string {
   const methodName = `set_${escapeKeyword(toSnakeCase(prop.name))}`;
   const ffiName = generatePropertySetterFfiName(iface.name, prop.name);
   const traitName = toTraitName(iface.name);
@@ -183,8 +216,11 @@ function emitPropertySetterImpl(iface: ParsedInterface, prop: ParsedProperty): s
   const contextName = getPropertyUnionContextName(prop);
 
   // For setter, use JsValue if not FFI-safe
-  const paramType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
-  const needsConversion = paramType === "JsValue" && mapped.moonbitType !== "JsValue";
+  const paramType = isFfiSafeType(mapped.moonbitType)
+    ? mapped.moonbitType
+    : "JsValue";
+  const needsConversion =
+    paramType === "JsValue" && mapped.moonbitType !== "JsValue";
 
   // Check if the type is optional (ends with ?)
   const isOptionalType = mapped.moonbitType.endsWith("?");
@@ -225,7 +261,10 @@ impl ${traitName} with ${methodName}(self : Self, value : ${sigParamType}) -> Un
  * @param iface The interface to emit properties for
  * @param isFullyAbstract If true, skip static properties (no external type exists)
  */
-export function emitProperties(iface: ParsedInterface, isFullyAbstract: boolean = false): string {
+export function emitProperties(
+  iface: ParsedInterface,
+  isFullyAbstract: boolean = false,
+): string {
   const parts: string[] = [];
 
   for (const prop of iface.properties) {
@@ -239,15 +278,18 @@ export function emitProperties(iface: ParsedInterface, isFullyAbstract: boolean 
       const moduleName = toFfiModuleName(iface.name);
 
       // Use FFI-safe return type
-      const ffiReturnType = isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
-        ? mapped.moonbitType
-        : "JsValue";
+      const ffiReturnType =
+        isFfiSafeType(mapped.moonbitType) && !mapped.isOptional
+          ? mapped.moonbitType
+          : "JsValue";
 
       parts.push(`///|
 pub fn ${iface.name}::${methodName}() -> ${ffiReturnType} = "${moduleName}" "static_${prop.name}"`);
 
       if (!prop.readonly) {
-        const setterParamType = isFfiSafeType(mapped.moonbitType) ? mapped.moonbitType : "JsValue";
+        const setterParamType = isFfiSafeType(mapped.moonbitType)
+          ? mapped.moonbitType
+          : "JsValue";
         parts.push(`///|
 pub fn ${iface.name}::set_${methodName}(value : ${setterParamType}) -> Unit = "${moduleName}" "static_set_${prop.name}"`);
       }
@@ -263,5 +305,5 @@ pub fn ${iface.name}::set_${methodName}(value : ${setterParamType}) -> Unit = "$
     }
   }
 
-  return parts.join('\n\n');
+  return parts.join("\n\n");
 }

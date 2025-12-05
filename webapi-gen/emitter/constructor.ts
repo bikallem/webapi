@@ -1,8 +1,8 @@
 /**
  * Constructor Emitter
- * 
+ *
  * Generates MoonBit FFI functions for Web IDL constructors.
- * 
+ *
  * Key points:
  * - Optional params with defaults (e.g., data? : String = "") receive that type directly
  * - Optional params without defaults receive T? and need match expression
@@ -10,11 +10,7 @@
  */
 
 import type { ParsedInterface, ParsedConstructor } from "../types.js";
-import {
-  toSnakeCase,
-  escapeKeyword,
-  toFfiModuleName,
-} from "../utils.js";
+import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../utils.js";
 import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
 
 /**
@@ -23,7 +19,7 @@ import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
 function emitConstructor(
   iface: ParsedInterface,
   constructor: ParsedConstructor,
-  index: number
+  index: number,
 ): string {
   const moduleName = toFfiModuleName(iface.name);
 
@@ -47,7 +43,9 @@ pub fn ${iface.name}::${methodName}() -> ${iface.name} = "${moduleName}" "new"`;
 
     if (param.optional) {
       // Get default value if any
-      const defaultVal = param.default ? getDefaultValueExpr(param.default, param.type) : undefined;
+      const defaultVal = param.default
+        ? getDefaultValueExpr(param.default, param.type)
+        : undefined;
       if (defaultVal) {
         // Has default - param receives the type directly, not Option
         params.push(`${paramName}? : ${mapped.moonbitType} = ${defaultVal}`);
@@ -64,14 +62,18 @@ pub fn ${iface.name}::${methodName}() -> ${iface.name} = "${moduleName}" "new"`;
   const paramsStr = params.join(", ");
 
   // Check if we need a wrapper (for optional params or type conversion)
-  const hasOptionalParams = constructor.params.some(p => p.optional);
-  const needsConversion = constructor.params.some(p => mapIdlType(p.type).needsConversion);
+  const hasOptionalParams = constructor.params.some((p) => p.optional);
+  const needsConversion = constructor.params.some(
+    (p) => mapIdlType(p.type).needsConversion,
+  );
 
   if (!hasOptionalParams && !needsConversion) {
     // Direct FFI binding - but need to check if types are FFI-safe
-    const allFfiSafe = constructor.params.every(p => {
+    const allFfiSafe = constructor.params.every((p) => {
       const mapped = mapIdlType(p.type);
-      return !mapped.moonbitType.includes("[") && !mapped.moonbitType.startsWith("&");
+      return (
+        !mapped.moonbitType.includes("[") && !mapped.moonbitType.startsWith("&")
+      );
     });
 
     if (allFfiSafe) {

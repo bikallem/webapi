@@ -1,13 +1,16 @@
 /**
  * Callback Emitter
- * 
+ *
  * Generates MoonBit code for Web IDL callback types.
  */
 
 import type { ParsedCallback, ParsedParam, ParsedType } from "../types.js";
 import { toSnakeCase, toFfiModuleName } from "../utils.js";
 import { mapIdlType, formatReturnType } from "../mapping.js";
-import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
+import {
+  emitExternalType as emitExternalTypeCommon,
+  emitTJsValueImpl as emitTJsValueImplCommon,
+} from "./common.js";
 
 /**
  * Generate a closure type string from parameters and return type
@@ -15,7 +18,7 @@ import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJs
  */
 export function buildClosureType(
   params: ParsedParam[],
-  returnType: ParsedType
+  returnType: ParsedType,
 ): string {
   const paramTypes: string[] = [];
   for (const param of params) {
@@ -35,7 +38,7 @@ export function buildClosureType(
 export function emitCallbackConstructor(
   typeName: string,
   moduleName: string,
-  closureType: string
+  closureType: string,
 ): string {
   return `///|
 pub fn ${typeName}::new(f : ${closureType}) -> ${typeName} = "${moduleName}" "new"`;
@@ -57,7 +60,7 @@ function emitTJsValueImpl(callback: ParsedCallback): string {
 
 /**
  * Emit callback constructor as TypeName::new FFI binding
- * 
+ *
  * Creates functions like:
  * pub fn EventHandler::new(f: (Event) -> Unit) -> EventHandler
  */
@@ -74,9 +77,10 @@ export function emitCallback(callback: ParsedCallback): string {
   const parts: string[] = [];
 
   // Header
-  parts.push(`// Auto-generated MoonBit bindings for ${callback.name} callback`);
+  parts.push(
+    `// Auto-generated MoonBit bindings for ${callback.name} callback`,
+  );
   parts.push(`// Do not edit manually`);
-
 
   // Type and impl
   parts.push(emitCallbackType(callback));

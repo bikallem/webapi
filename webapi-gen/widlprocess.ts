@@ -1,6 +1,6 @@
 /**
  * Web IDL Parser and Merger
- * 
+ *
  * Parses Web IDL text using webidl2 and converts to internal representation.
  * Handles merging of partial interfaces and mixins.
  */
@@ -75,7 +75,9 @@ function parseGenericType(idlType: webidl2.IDLTypeDescription): ParsedType {
  * Parse a union type
  */
 function parseUnionType(idlType: webidl2.IDLTypeDescription): ParsedType {
-  const memberTypes = (idlType.idlType as webidl2.IDLTypeDescription[]).map(parseIdlType);
+  const memberTypes = (idlType.idlType as webidl2.IDLTypeDescription[]).map(
+    parseIdlType,
+  );
   return {
     type: "union",
     memberTypes,
@@ -87,11 +89,27 @@ function parseUnionType(idlType: webidl2.IDLTypeDescription): ParsedType {
  */
 function parseSimpleType(typeName: string): ParsedType {
   const primitives = [
-    "boolean", "byte", "octet", "short", "unsigned short",
-    "long", "unsigned long", "long long", "unsigned long long",
-    "float", "unrestricted float", "double", "unrestricted double",
-    "DOMString", "USVString", "ByteString", "bigint",
-    "undefined", "void", "any", "object"
+    "boolean",
+    "byte",
+    "octet",
+    "short",
+    "unsigned short",
+    "long",
+    "unsigned long",
+    "long long",
+    "unsigned long long",
+    "float",
+    "unrestricted float",
+    "double",
+    "unrestricted double",
+    "DOMString",
+    "USVString",
+    "ByteString",
+    "bigint",
+    "undefined",
+    "void",
+    "any",
+    "object",
   ];
 
   if (typeName === "any") {
@@ -213,9 +231,13 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
             params: parseParams(member.arguments),
             returnType: parseIdlType(member.idlType),
             static: member.special === "static",
-            special: member.special === "getter" || member.special === "setter" ||
-              member.special === "deleter" || member.special === "stringifier"
-              ? member.special : undefined,
+            special:
+              member.special === "getter" ||
+              member.special === "setter" ||
+              member.special === "deleter" ||
+              member.special === "stringifier"
+                ? member.special
+                : undefined,
           });
         }
         break;
@@ -239,9 +261,10 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
       }
 
       case "constructor": {
-        const isHTMLConstructor = member.extAttrs?.some(
-          (attr: { name: string }) => attr.name === "HTMLConstructor"
-        ) ?? false;
+        const isHTMLConstructor =
+          member.extAttrs?.some(
+            (attr: { name: string }) => attr.name === "HTMLConstructor",
+          ) ?? false;
         constructors.push({
           params: parseParams(member.arguments),
           isHTMLConstructor,
@@ -263,12 +286,18 @@ function parseInterfaceMembers(members: webidl2.IDLInterfaceMemberType[]): {
 /**
  * Parse a single interface or mixin definition
  */
-function parseInterface(def: webidl2.InterfaceType | webidl2.InterfaceMixinType): ParsedInterface {
-  const { methods, properties, constants, constructors } = parseInterfaceMembers(def.members);
+function parseInterface(
+  def: webidl2.InterfaceType | webidl2.InterfaceMixinType,
+): ParsedInterface {
+  const { methods, properties, constants, constructors } =
+    parseInterfaceMembers(def.members);
 
   return {
     name: def.name,
-    inheritance: def.type === "interface" ? ((def as webidl2.InterfaceType).inheritance ?? undefined) : undefined,
+    inheritance:
+      def.type === "interface"
+        ? ((def as webidl2.InterfaceType).inheritance ?? undefined)
+        : undefined,
     mixins: [],
     methods,
     properties,
@@ -282,7 +311,9 @@ function parseInterface(def: webidl2.InterfaceType | webidl2.InterfaceMixinType)
 /**
  * Parse dictionary members
  */
-function parseDictionaryMembers(members: webidl2.DictionaryMemberType[]): ParsedDictionaryMember[] {
+function parseDictionaryMembers(
+  members: webidl2.DictionaryMemberType[],
+): ParsedDictionaryMember[] {
   return members.map((member) => ({
     name: member.name,
     type: parseIdlType(member.idlType),
@@ -447,7 +478,10 @@ function mergeInterface(base: ParsedInterface, partial: ParsedInterface): void {
 /**
  * Merge partial dictionary into base dictionary
  */
-function mergeDictionary(base: ParsedDictionary, partial: ParsedDictionary): void {
+function mergeDictionary(
+  base: ParsedDictionary,
+  partial: ParsedDictionary,
+): void {
   base.members.push(...partial.members);
   // Combine IDL sources
   if (partial.idlSource) {
@@ -536,7 +570,7 @@ export function applyMixins(idl: ParsedIdl): void {
  */
 export function getInheritanceChain(
   interfaceName: string,
-  interfaces: Map<string, ParsedInterface>
+  interfaces: Map<string, ParsedInterface>,
 ): string[] {
   const chain: string[] = [];
   let current = interfaces.get(interfaceName);
@@ -554,7 +588,7 @@ export function getInheritanceChain(
  */
 export function getAllTraitAncestors(
   interfaceName: string,
-  interfaces: Map<string, ParsedInterface>
+  interfaces: Map<string, ParsedInterface>,
 ): string[] {
   const ancestors = new Set<string>();
   const visited = new Set<string>();

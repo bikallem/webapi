@@ -1,17 +1,27 @@
 /**
  * Method Emitter
- * 
+ *
  * Generates MoonBit FFI functions and trait method signatures for Web IDL methods.
  */
 
-import type { ParsedInterface, ParsedMethod, ParsedType, ParsedIdl } from "../types.js";
+import type {
+  ParsedInterface,
+  ParsedMethod,
+  ParsedType,
+  ParsedIdl,
+} from "../types.js";
 import {
   toSnakeCase,
   escapeKeyword,
   toFfiModuleName,
   toTraitName,
 } from "../utils.js";
-import { mapIdlType, formatReturnType, getDefaultValueExpr, isKnownEnum } from "../mapping.js";
+import {
+  mapIdlType,
+  formatReturnType,
+  getDefaultValueExpr,
+  isKnownEnum,
+} from "../mapping.js";
 import {
   getUnionMemberMoonbitType,
   getFilteredUnionMembers,
@@ -39,9 +49,11 @@ export function resetEmittedUnionTraits(): void {
  */
 function getUnionArgTraitName(methodName: string, paramName: string): string {
   // Capitalize first letter of method name (already in camelCase/PascalCase)
-  const methodCapitalized = methodName.charAt(0).toUpperCase() + methodName.slice(1);
+  const methodCapitalized =
+    methodName.charAt(0).toUpperCase() + methodName.slice(1);
   // Capitalize first letter of param name
-  const paramCapitalized = paramName.charAt(0).toUpperCase() + paramName.slice(1);
+  const paramCapitalized =
+    paramName.charAt(0).toUpperCase() + paramName.slice(1);
   return `T${methodCapitalized}${paramCapitalized}Arg`;
 }
 
@@ -50,7 +62,12 @@ function getUnionArgTraitName(methodName: string, paramName: string): string {
  * Returns empty string if union collapses to single type or if already emitted
  * Skips fully abstract interface types (they have no external type)
  */
-function emitUnionArgTrait(methodName: string, paramName: string, unionType: ParsedType, _idl: ParsedIdl): string {
+function emitUnionArgTrait(
+  methodName: string,
+  paramName: string,
+  unionType: ParsedType,
+  _idl: ParsedIdl,
+): string {
   if (unionType.type !== "union" || !unionType.memberTypes) {
     return "";
   }
@@ -92,7 +109,9 @@ pub impl ${traitName} for ${moonbitType} with to_js(self : ${moonbitType}) -> Js
 /**
  * Collect all union argument types from a method
  */
-function collectUnionArgs(method: ParsedMethod): Array<{ paramName: string; unionType: ParsedType }> {
+function collectUnionArgs(
+  method: ParsedMethod,
+): Array<{ paramName: string; unionType: ParsedType }> {
   const unionArgs: Array<{ paramName: string; unionType: ParsedType }> = [];
 
   for (const param of method.params) {
@@ -113,7 +132,11 @@ function collectUnionArgs(method: ParsedMethod): Array<{ paramName: string; unio
  * @param suffix Optional suffix for overloaded methods
  * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = "", hasDefaultImpl: boolean = true): string {
+export function emitTraitMethodSignature(
+  method: ParsedMethod,
+  suffix: string = "",
+  hasDefaultImpl: boolean = true,
+): string {
   const methodName = toSnakeCase(method.name) + suffix;
 
   // Build parameter list - self first, then all params with optional wrapped in ?
@@ -166,7 +189,10 @@ export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = 
  * @param iface The interface to emit methods for
  * @param hasDefaultImpl If true, add `= _` to indicate default implementations exist
  */
-export function emitTraitMethods(iface: ParsedInterface, hasDefaultImpl: boolean = true): string[] {
+export function emitTraitMethods(
+  iface: ParsedInterface,
+  hasDefaultImpl: boolean = true,
+): string[] {
   const signatures: string[] = [];
   const methodNameCounts: Map<string, number> = new Map();
 
@@ -185,7 +211,11 @@ export function emitTraitMethods(iface: ParsedInterface, hasDefaultImpl: boolean
 /**
  * Emit FFI function declaration for a method
  */
-function emitMethodFfi(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
+function emitMethodFfi(
+  iface: ParsedInterface,
+  method: ParsedMethod,
+  suffix: string = "",
+): string {
   const ffiName = generateMethodFfiName(iface.name, method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
   const jsFuncName = method.name;
@@ -231,7 +261,11 @@ function getUnionDefaultDictType(unionType: ParsedType): string | undefined {
  * Emit trait method implementation
  * No defaults in impl - all params are required, optional ones are T?
  */
-function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
+function emitTraitMethodImpl(
+  iface: ParsedInterface,
+  method: ParsedMethod,
+  suffix: string = "",
+): string {
   const methodName = toSnakeCase(method.name) + suffix;
   const ffiName = generateMethodFfiName(iface.name, method.name) + suffix;
   const traitName = toTraitName(iface.name);
@@ -270,7 +304,11 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
           }
         }
       }
-    } else if (mapped.isDictionary && param.optional && param.default === "{}") {
+    } else if (
+      mapped.isDictionary &&
+      param.optional &&
+      param.default === "{}"
+    ) {
       // Dictionary param with {} default - use proper type with ::empty() default
       paramType = mapped.moonbitType;
       defaultExpr = `${mapped.moonbitType}::empty()`;
@@ -307,7 +345,9 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
 
     // Check if union collapses to single type
-    const collapsedType = isUnionArg ? getCollapsedUnionType(typeToCheck) : undefined;
+    const collapsedType = isUnionArg
+      ? getCollapsedUnionType(typeToCheck)
+      : undefined;
     const isCollapsedUnion = collapsedType !== undefined;
 
     // Check if this param has a default value of {}
@@ -317,9 +357,11 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
       if (mapped.isTypedefUnion) {
         // Typedef union optional - use explicit trait syntax
         // mapped.moonbitType is &TTypeName, extract TTypeName for the to_js call
-        const traitName = mapped.moonbitType.replace(/^&/, '');
+        const traitName = mapped.moonbitType.replace(/^&/, "");
         const jsVarName = `${paramName}_js`;
-        letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => ${traitName}::to_js(v), None => JsValue::undefined() }`);
+        letBindings.push(
+          `  let ${jsVarName} = match ${paramName} { Some(v) => ${traitName}::to_js(v), None => JsValue::undefined() }`,
+        );
         args.push(jsVarName);
       } else if (isUnionArg && !isCollapsedUnion) {
         if (hasDefaultEmpty) {
@@ -328,7 +370,9 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
         } else {
           // No default - use match to handle Option
           const jsVarName = `${paramName}_js`;
-          letBindings.push(`  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`);
+          letBindings.push(
+            `  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`,
+          );
           args.push(jsVarName);
         }
       } else if (mapped.isDictionary && hasDefaultEmpty) {
@@ -349,7 +393,7 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
       if (mapped.isTypedefUnion) {
         // Typedef union - use explicit trait syntax
         // mapped.moonbitType is &TTypeName, extract TTypeName for the to_js call
-        const traitName = mapped.moonbitType.replace(/^&/, '');
+        const traitName = mapped.moonbitType.replace(/^&/, "");
         args.push(`${traitName}::to_js(${paramName})`);
       } else if (isUnionArg && !isCollapsedUnion) {
         // Union trait objects have their own to_js method
@@ -366,7 +410,8 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
   }
 
   const argsStr = args.join(", ");
-  const bindingsStr = letBindings.length > 0 ? "\n" + letBindings.join("\n") : "";
+  const bindingsStr =
+    letBindings.length > 0 ? "\n" + letBindings.join("\n") : "";
 
   // For reference types, we need type conversion
   // FFI functions always return JsValue, so any non-Unit return needs casting
@@ -394,7 +439,11 @@ impl ${traitName} with ${methodName}(${paramsStr}) -> ${returnType} {${bindingsS
  * Emit static method as a type method (X::method_name)
  * Static methods always use a wrapper to handle type conversions
  */
-function emitStaticMethod(iface: ParsedInterface, method: ParsedMethod, suffix: string = ""): string {
+function emitStaticMethod(
+  iface: ParsedInterface,
+  method: ParsedMethod,
+  suffix: string = "",
+): string {
   const methodName = toSnakeCase(method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
   const jsFuncName = method.name;
@@ -425,10 +474,14 @@ fn ${ffiName}(${ffiParamsStr}) -> ${returnType} = "${moduleName}" "${jsFuncName}
 
     if (param.optional) {
       // Add optional param with default
-      const defaultVal = param.default ? getDefaultValueExpr(param.default, param.type) : undefined;
+      const defaultVal = param.default
+        ? getDefaultValueExpr(param.default, param.type)
+        : undefined;
       if (defaultVal) {
         // With default value: `name? : Type = default` - param is of type Type
-        wrapperParams.push(`${safeName}? : ${mapped.moonbitType} = ${defaultVal}`);
+        wrapperParams.push(
+          `${safeName}? : ${mapped.moonbitType} = ${defaultVal}`,
+        );
         // Convert directly to JsValue
         if (mapped.needsConversion) {
           callArgs.push(`TJsValue::to_js(${safeName})`);
@@ -456,7 +509,8 @@ fn ${ffiName}(${ffiParamsStr}) -> ${returnType} = "${moduleName}" "${jsFuncName}
 
   const wrapperParamsStr = wrapperParams.join(", ");
   const callArgsStr = callArgs.join(", ");
-  const bindingsStr = letBindings.length > 0 ? "\n" + letBindings.join("\n") : "";
+  const bindingsStr =
+    letBindings.length > 0 ? "\n" + letBindings.join("\n") : "";
 
   return `${ffiFn}
 
@@ -472,7 +526,11 @@ pub fn ${iface.name}::${methodName}(${wrapperParamsStr}) -> ${returnType} {${bin
  * @param idl The parsed IDL (needed to check for fully abstract types in unions)
  * @param isFullyAbstract If true, skip static methods (no external type exists)
  */
-export function emitMethods(iface: ParsedInterface, idl: ParsedIdl, isFullyAbstract: boolean = false): string {
+export function emitMethods(
+  iface: ParsedInterface,
+  idl: ParsedIdl,
+  isFullyAbstract: boolean = false,
+): string {
   const parts: string[] = [];
 
   // Track method name occurrences to handle overloads
@@ -490,7 +548,12 @@ export function emitMethods(iface: ParsedInterface, idl: ParsedIdl, isFullyAbstr
     if (count === 0) {
       const unionArgs = collectUnionArgs(method);
       for (const { paramName, unionType } of unionArgs) {
-        const unionTrait = emitUnionArgTrait(method.name, paramName, unionType, idl);
+        const unionTrait = emitUnionArgTrait(
+          method.name,
+          paramName,
+          unionType,
+          idl,
+        );
         if (unionTrait) {
           parts.push(unionTrait);
         }

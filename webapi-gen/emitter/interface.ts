@@ -1,6 +1,6 @@
 /**
  * Interface Emitter
- * 
+ *
  * Generates MoonBit code for Web IDL interfaces including:
  * - External type declaration (only for concrete types with constructors)
  * - TJsValue implementation
@@ -15,14 +15,17 @@ import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
 import { mapIdlType, isAbstractInterface } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
-import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
+import {
+  emitExternalType as emitExternalTypeCommon,
+  emitTJsValueImpl as emitTJsValueImplCommon,
+} from "./common.js";
 
 /**
  * Check if an interface has a real constructor (not [HTMLConstructor])
  * Interfaces with real constructors can be instantiated with new()
  */
 export function hasRealConstructor(iface: ParsedInterface): boolean {
-  return iface.constructors.some(c => !c.isHTMLConstructor);
+  return iface.constructors.some((c) => !c.isHTMLConstructor);
 }
 
 /**
@@ -44,7 +47,10 @@ export function isFullyAbstract(iface: ParsedInterface): boolean {
 /**
  * Check if an interface has subtypes (other interfaces inherit from it)
  */
-function hasSubtypes(iface: ParsedInterface, interfaces: Map<string, ParsedInterface>): boolean {
+function hasSubtypes(
+  iface: ParsedInterface,
+  interfaces: Map<string, ParsedInterface>,
+): boolean {
   for (const [, other] of interfaces) {
     if (other.inheritance === iface.name) {
       return true;
@@ -63,7 +69,9 @@ function emitConstants(iface: ParsedInterface): string | undefined {
 
   for (const constant of iface.constants) {
     const mapped = mapIdlType(constant.type, `${iface.name}::${constant.name}`);
-    lines.push(`pub const ${constant.name} : ${mapped.moonbitType} = ${constant.value}`);
+    lines.push(
+      `pub const ${constant.name} : ${mapped.moonbitType} = ${constant.value}`,
+    );
   }
 
   return lines.join("\n");
@@ -108,7 +116,7 @@ pub fn[T : ${traitName}] ${iface.name}::into(self : ${iface.name}) -> T = "%iden
  */
 function getTraitBounds(
   iface: ParsedInterface,
-  allInterfaces: Map<string, ParsedInterface>
+  allInterfaces: Map<string, ParsedInterface>,
 ): string[] {
   const bounds: string[] = [];
 
@@ -136,7 +144,7 @@ function getTraitBounds(
  */
 function emitTraitDefinition(
   iface: ParsedInterface,
-  allInterfaces: Map<string, ParsedInterface>
+  allInterfaces: Map<string, ParsedInterface>,
 ): string {
   const traitName = toTraitName(iface.name);
   const bounds = getTraitBounds(iface, allInterfaces);
@@ -171,7 +179,7 @@ ${signaturesBlock}
  */
 function emitTraitImpl(
   iface: ParsedInterface,
-  allInterfaces: Map<string, ParsedInterface>
+  allInterfaces: Map<string, ParsedInterface>,
 ): string {
   const traitName = toTraitName(iface.name);
   const parts: string[] = [];
@@ -202,7 +210,9 @@ function emitTraitImpl(
  * Emit constructor for callback interface
  * Callback interfaces have a single method that defines their signature
  */
-function emitCallbackInterfaceConstructor(iface: ParsedInterface): string | undefined {
+function emitCallbackInterfaceConstructor(
+  iface: ParsedInterface,
+): string | undefined {
   if (!iface.isCallbackInterface) return undefined;
 
   // Find the callback method (usually there's just one)
@@ -217,10 +227,7 @@ function emitCallbackInterfaceConstructor(iface: ParsedInterface): string | unde
 /**
  * Emit complete MoonBit file for an interface
  */
-export function emitInterface(
-  iface: ParsedInterface,
-  idl: ParsedIdl
-): string {
+export function emitInterface(iface: ParsedInterface, idl: ParsedIdl): string {
   const parts: string[] = [];
   const isConcrete = hasRealConstructor(iface);
   const fullyAbstract = isFullyAbstract(iface);
@@ -228,7 +235,6 @@ export function emitInterface(
   // Header comment
   parts.push(`// Auto-generated MoonBit bindings for ${iface.name}`);
   parts.push(`// Do not edit manually`);
-
 
   // External type declaration - now generated for all interfaces including abstract ones
   parts.push(emitExternalType(iface));
