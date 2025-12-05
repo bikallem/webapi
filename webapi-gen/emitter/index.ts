@@ -23,3 +23,4 @@ export type { CollectedUnionType } from "./union.js";
 export { emitEnum, getEnumFilename } from "./enum.js";
 export { emitGlobals } from "./globals.js";
 export { emitJsRuntime } from "./js-runtime.js";
+export { emitImports, getImportsFilename } from "./imports.js";

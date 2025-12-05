@@ -37,6 +37,8 @@ import {
   registerCollectedUnionTypes,
   emitPropertyUnionType,
   getPropertyUnionTypeFilename,
+  emitImports,
+  getImportsFilename,
 } from "./emitter/index.js";
 import {
   classifyType,
@@ -398,6 +400,11 @@ async function preparePackageDirectories(): Promise<Map<PackageName, string>> {
     
     // Create package configuration
     await createPackageJson(pkg, pkgDir);
+    
+    // Generate imports.mbt for package dependencies
+    const importsContent = emitImports(pkg);
+    const importsPath = path.join(pkgDir, getImportsFilename());
+    await fs.writeFile(importsPath, importsContent, "utf-8");
     
     console.log(`  Created ${pkg}/ package`);
   }

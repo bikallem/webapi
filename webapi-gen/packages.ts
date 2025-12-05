@@ -35,11 +35,13 @@ const CORE_TYPES = new Set([
   'JsValue',
   'JsArray',
   'JsPromise',
-  
+
   // Blob/File API
   'Blob',
   'File',
-  
+  'BlobPropertyBag',
+  'EndingType',
+
   // Typed Arrays
   'ArrayBuffer',
   'DataView',
@@ -54,7 +56,7 @@ const CORE_TYPES = new Set([
   'BigUint64Array',
   'Float32Array',
   'Float64Array',
-  
+
   // Storage
   'Storage',
 ]);
@@ -101,6 +103,7 @@ const SVG_TYPES = new Set([
 
 /**
  * HTML package: HTML elements (excluding HTMLCanvasElement which is in canvas)
+ * Note: HTMLCollection is in dom package since DOM APIs like getElementsByTagName return it
  */
 const HTML_TYPES = new Set([
   'HTMLElement',
@@ -140,24 +143,24 @@ const DOM_TYPES = new Set([
   'Comment',
   'CDATASection',
   'ProcessingInstruction',
-  
+
   // Collections
   'NodeList',
   'NamedNodeMap',
   'DOMTokenList',
-  
+
   // Range and selection
   'Range',
   'Selection',
   'StaticRange',
-  
+
   // Shadow DOM
   'ShadowRoot',
-  
+
   // Mutation Observer
   'MutationObserver',
   'MutationRecord',
-  
+
   // Events (merged with DOM to avoid cycle)
   'EventTarget',
   'Event',
@@ -173,7 +176,7 @@ const DOM_TYPES = new Set([
   'ClipboardEvent',
   'TouchEvent',
   'PointerEvent',
-  
+
   // Browser/Window (part of DOM as they are global interfaces)
   'Window',
   'Document',
@@ -193,7 +196,7 @@ export function classifyType(name: string): PackageName {
   if (CANVAS_TYPES.has(name)) return 'canvas';
   if (HTML_TYPES.has(name)) return 'html';
   if (DOM_TYPES.has(name)) return 'dom';
-  
+
   // Classify by naming patterns
   if (name.startsWith('HTML')) return 'html';
   if (name.startsWith('SVG')) return 'svg';
@@ -201,12 +204,12 @@ export function classifyType(name: string): PackageName {
   if (name.startsWith('DOM') && (name.includes('Matrix') || name.includes('Point') || name.includes('Rect') || name.includes('Quad'))) {
     return 'geometry';
   }
-  
+
   // Event-related types go to dom
   if (name.includes('Event') || name === 'EventTarget' || name === 'EventListener') {
     return 'dom';
   }
-  
+
   // Default to dom for unknown types
   return 'dom';
 }
@@ -241,7 +244,7 @@ export function getPackageInfo(pkg: PackageName): PackageInfo {
       description: 'Geometry types (DOMRect, DOMMatrix, DOMPoint)',
     },
   };
-  
+
   return packageInfoMap[pkg];
 }
 
@@ -257,7 +260,7 @@ export function getPackageDependencies(pkg: PackageName): PackageName[] {
     canvas: ['core', 'dom'],
     svg: ['core', 'dom'],
   };
-  
+
   return dependencyMap[pkg];
 }
 
@@ -266,4 +269,70 @@ export function getPackageDependencies(pkg: PackageName): PackageName[] {
  */
 export function getPackagesInDependencyOrder(): PackageName[] {
   return ['core', 'geometry', 'dom', 'html', 'canvas', 'svg'];
+}
+
+/**
+ * Core types that need @core. prefix when used in non-core packages
+ */
+const CORE_TYPE_NAMES = new Set([
+  'JsValue',
+  'TJsValue',
+  'JsArray',
+  'JsPromise',
+  'Blob',
+  'TBlob',
+  'File',
+  'TFile',
+  'BlobPropertyBag',
+  'EndingType',
+  'ArrayBuffer',
+  'DataView',
+  'Int8Array',
+  'Int16Array',
+  'Int32Array',
+  'Uint8Array',
+  'Uint8ClampedArray',
+  'Uint16Array',
+  'Uint32Array',
+  'BigInt64Array',
+  'BigUint64Array',
+  'Float32Array',
+  'Float64Array',
+  'Storage',
+  'TStorage',
+]);
+
+/**
+ * Qualify a type name with package prefix if needed
+ * @param typeName The type name to qualify
+ * @param targetPackage The package the code is being generated for
+ * @returns The qualified type name (e.g., "@core.JsValue" or just "JsValue" if in core)
+ */
+export function qualifyType(typeName: string, targetPackage: PackageName): string {
+  if (targetPackage === 'core') {
+    return typeName; // No prefix needed in core package
+  }
+  
+  if (CORE_TYPE_NAMES.has(typeName)) {
+    return `@core.${typeName}`;
+  }
+  
+  // Check if it's a geometry type and we're not in geometry
+  if (targetPackage !== 'geometry' && GEOMETRY_TYPES.has(typeName)) {
+    return `@geometry.${typeName}`;
+  }
+  
+  // Check if it's a DOM type and we're in html/canvas/svg
+  if ((targetPackage === 'html' || targetPackage === 'canvas' || targetPackage === 'svg') && DOM_TYPES.has(typeName)) {
+    return `@dom.${typeName}`;
+  }
+  
+  return typeName;
+}
+
+/**
+ * Get the package prefix for core types (empty string for core package)
+ */
+export function getCorePrefix(targetPackage: PackageName): string {
+  return targetPackage === 'core' ? '' : '@core.';
 }

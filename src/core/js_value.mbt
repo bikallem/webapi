@@ -11,7 +11,7 @@ pub type JsValue
 /// Trait for types that can be converted to JsValue
 /// Note: null() is not in the trait to allow trait objects.
 /// Each concrete type implements its own null() method.
-pub trait TJsValue {
+pub(open) trait TJsValue {
   to_js(Self) -> JsValue
   is_null(Self) -> Bool = _
 }

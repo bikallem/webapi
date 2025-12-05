@@ -15,6 +15,7 @@ import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
 import { getAllTraitAncestors } from "../widlprocess.js";
 import { mapIdlType, formatReturnType, isAbstractInterface } from "../mapping.js";
+import { classifyType, type PackageName } from "../packages.js";
 
 /**
  * Check if an interface has a real constructor (not [HTMLConstructor])
@@ -125,7 +126,7 @@ function getTraitBounds(
   const bounds: string[] = [];
 
   // Always include TJsValue as base
-  bounds.push("TJsValue");
+  bounds.push(`TJsValue`);
 
   // Add inheritance parent
   if (iface.inheritance && allInterfaces.has(iface.inheritance)) {
