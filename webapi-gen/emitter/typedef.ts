@@ -11,6 +11,7 @@ import { toSnakeCase } from "../utils.js";
 import { mapIdlType, formatReturnType, isKnownTypedef } from "../mapping.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 import { emitExternalType as emitExternalTypeCommon, emitTJsValueImpl as emitTJsValueImplCommon } from "./common.js";
+import { unwrapNullableType, getReferenceTypeName } from "./typeUtils.js";
 
 /**
  * Emit external type declaration for typedef
@@ -31,15 +32,8 @@ function emitTJsValueImpl(typedef: ParsedTypedef): string {
  * For nullable types like "EventHandlerNonNull?", returns "EventHandlerNonNull"
  */
 function getUnderlyingTypeName(typedef: ParsedTypedef): string | undefined {
-    if (typedef.type.type === "nullable" && typedef.type.elementType) {
-        if (typedef.type.elementType.type === "reference" && typedef.type.elementType.name) {
-            return typedef.type.elementType.name;
-        }
-    }
-    if (typedef.type.type === "reference" && typedef.type.name) {
-        return typedef.type.name;
-    }
-    return undefined;
+    const unwrapped = unwrapNullableType(typedef.type);
+    return getReferenceTypeName(unwrapped);
 }
 
 /**

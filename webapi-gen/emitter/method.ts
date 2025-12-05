@@ -18,6 +18,7 @@ import {
   getCollapsedUnionType,
   SKIP_UNION_TYPES,
 } from "./unionUtils.js";
+import { unwrapNullableType } from "./typeUtils.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates
@@ -102,12 +103,7 @@ function collectUnionArgs(method: ParsedMethod): Array<{ paramName: string; unio
   const unionArgs: Array<{ paramName: string; unionType: ParsedType }> = [];
 
   for (const param of method.params) {
-    let typeToCheck = param.type;
-
-    // Unwrap nullable to check for union inside
-    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
-      typeToCheck = typeToCheck.elementType;
-    }
+    const typeToCheck = unwrapNullableType(param.type);
 
     if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
       unionArgs.push({ paramName: param.name, unionType: typeToCheck });
@@ -135,10 +131,7 @@ export function emitTraitMethodSignature(method: ParsedMethod, suffix: string = 
     const paramName = escapeKeyword(toSnakeCase(param.name));
 
     // Check if this is a union type (possibly wrapped in nullable)
-    let typeToCheck = param.type;
-    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
-      typeToCheck = typeToCheck.elementType;
-    }
+    const typeToCheck = unwrapNullableType(param.type);
 
     let paramType: string;
     if (mapped.isTypedefUnion) {
@@ -257,10 +250,7 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     const paramName = escapeKeyword(toSnakeCase(param.name));
 
     // Check if this is a union type (possibly wrapped in nullable)
-    let typeToCheck = param.type;
-    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
-      typeToCheck = typeToCheck.elementType;
-    }
+    const typeToCheck = unwrapNullableType(param.type);
 
     let paramType: string;
     let defaultExpr: string | undefined;
@@ -320,10 +310,7 @@ function emitTraitMethodImpl(iface: ParsedInterface, method: ParsedMethod, suffi
     const mapped = mapIdlType(param.type);
 
     // Check if this is a union type
-    let typeToCheck = param.type;
-    if (typeToCheck.type === "nullable" && typeToCheck.elementType) {
-      typeToCheck = typeToCheck.elementType;
-    }
+    const typeToCheck = unwrapNullableType(param.type);
     const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
 
     // Check if union collapses to single type
