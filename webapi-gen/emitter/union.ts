@@ -20,7 +20,7 @@
  * }
  */
 
-import type { ParsedType, ParsedIdl } from "../idl-model.js";
+import type { ParsedType, ParsedIdl } from "../parser.js";
 import type { UnionTypeContext } from "../mapping.js";
 import {
   mapIdlType,

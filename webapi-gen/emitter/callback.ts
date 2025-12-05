@@ -4,7 +4,7 @@
  * Generates MoonBit code for Web IDL callback types.
  */
 
-import type { ParsedCallback, ParsedParam, ParsedType } from "../idl-model.js";
+import type { ParsedCallback, ParsedParam, ParsedType } from "../parser.js";
 import {
   toSnakeCase,
   toFfiModuleName,

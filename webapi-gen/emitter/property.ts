@@ -1,4 +1,4 @@
-import { ParsedInterface, ParsedProperty } from "../idl-model.js";
+import { ParsedInterface, ParsedProperty } from "../parser.js";
 import {
   toSnakeCase,
   escapeKeyword,

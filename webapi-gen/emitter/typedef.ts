@@ -11,7 +11,7 @@ import {
   type ParsedIdl,
   unwrapNullableType,
   getReferenceTypeName,
-} from "../idl-model.js";
+} from "../parser.js";
 import {
   toSnakeCase,
   emitExternalType as emitExternalTypeCommon,

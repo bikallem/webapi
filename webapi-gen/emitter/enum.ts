@@ -1,4 +1,4 @@
-import { ParsedEnum } from "../idl-model.js";
+import { ParsedEnum } from "../parser.js";
 import { toSnakeCase } from "../gen-utils.js";
 
 /**

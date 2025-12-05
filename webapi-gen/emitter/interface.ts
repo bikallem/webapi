@@ -8,7 +8,7 @@
  * - Trait implementation
  */
 
-import type { ParsedInterface, ParsedIdl } from "../idl-model.js";
+import type { ParsedInterface, ParsedIdl } from "../parser.js";
 import {
   toSnakeCase,
   toTraitName,

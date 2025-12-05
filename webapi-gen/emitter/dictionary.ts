@@ -4,7 +4,7 @@
  * Generates MoonBit code for Web IDL dictionaries (options objects).
  */
 
-import type { ParsedDictionary } from "../idl-model.js";
+import type { ParsedDictionary } from "../parser.js";
 import {
   toSnakeCase,
   escapeKeyword,

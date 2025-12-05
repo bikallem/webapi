@@ -12,7 +12,7 @@ import type {
   ParsedCallback,
   ParsedMethod,
   ParsedProperty,
-} from "../idl-model.js";
+} from "../parser.js";
 import { toFfiModuleName } from "../gen-utils.js";
 
 /**

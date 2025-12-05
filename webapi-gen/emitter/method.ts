@@ -10,7 +10,7 @@ import {
   type ParsedType,
   type ParsedIdl,
   unwrapNullableType,
-} from "../idl-model.js";
+} from "../parser.js";
 import {
   toSnakeCase,
   escapeKeyword,

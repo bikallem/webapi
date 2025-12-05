@@ -9,7 +9,7 @@
  * - MoonBit match syntax uses newlines between cases, not commas
  */
 
-import type { ParsedInterface, ParsedConstructor } from "../idl-model.js";
+import type { ParsedInterface, ParsedConstructor } from "../parser.js";
 import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../gen-utils.js";
 import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
 

@@ -4,7 +4,7 @@
  * Generates MoonBit code for global singleton objects like document and window.
  */
 
-import type { ParsedIdl } from "../idl-model.js";
+import type { ParsedIdl } from "../parser.js";
 
 /**
  * Emit globals.mbt file content
