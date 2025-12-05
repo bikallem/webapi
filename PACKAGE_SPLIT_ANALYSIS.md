@@ -80,7 +80,7 @@ core
 - ✅ Fewer packages to manage
 
 **Cons:**
-- ❌ DOM package will be larger (~50-60 files)
+- ❌ DOM package will be larger (~60 files)
 - ❌ Less fine-grained modularity
 
 ### Alternative Structure (Option 2: Core Package Pattern)
@@ -158,7 +158,7 @@ See `poc_packages/` directory for a minimal example demonstrating the cycle.
 
 Based on Web API specifications, files would be grouped as:
 
-### DOM Package (~50 files)
+### DOM Package (~60 files)
 ```
 node.mbt, element.mbt, document.mbt, document_fragment.mbt,
 attr.mbt, character_data.mbt, text.mbt, comment.mbt,

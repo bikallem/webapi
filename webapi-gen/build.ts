@@ -38,6 +38,14 @@ import {
   emitPropertyUnionType,
   getPropertyUnionTypeFilename,
 } from "./emitter/index.js";
+import {
+  classifyType,
+  getPackageInfo,
+  getPackageDependencies,
+  getPackagesInDependencyOrder,
+  getMdnUrl,
+  type PackageName,
+} from "./packages.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
@@ -344,6 +352,96 @@ function filterToCoreInterfaces(idl: ParsedIdl): ParsedIdl {
 }
 
 /**
+ * Create package moon.pkg.json
+ */
+async function createPackageJson(pkg: PackageName, pkgDir: string): Promise<void> {
+  const deps = getPackageDependencies(pkg);
+  const imports = deps.map(dep => `bikallem/webapi/${dep}`);
+  
+  const config = {
+    import: imports.length > 0 ? imports : undefined,
+    "supported-targets": ["js", "wasm-gc"],
+    link: {
+      "wasm-gc": {
+        "use-js-builtin-string": true,
+        "imported-string-constants": "_"
+      }
+    }
+  };
+  
+  // Remove undefined fields
+  const cleanConfig = JSON.parse(JSON.stringify(config));
+  
+  const filepath = path.join(pkgDir, "moon.pkg.json");
+  await fs.writeFile(filepath, JSON.stringify(cleanConfig, null, 2) + "\n", "utf-8");
+}
+
+/**
+ * Create package README.md with MDN links
+ */
+async function createPackageReadme(
+  pkg: PackageName,
+  pkgDir: string,
+  types: Set<string>
+): Promise<void> {
+  const info = getPackageInfo(pkg);
+  const sortedTypes = Array.from(types).sort();
+  
+  let content = `# ${pkg} package\n\n`;
+  content += `${info.description}\n\n`;
+  content += `## Types\n\n`;
+  
+  for (const typeName of sortedTypes) {
+    const url = getMdnUrl(typeName, pkg);
+    content += `- [\`${typeName}\`](${url})\n`;
+  }
+  
+  content += `\n## See Also\n\n`;
+  if (info.mdnCategory) {
+    content += `- [MDN Web Docs - ${info.mdnCategory.replace(/_/g, ' ')}](https://developer.mozilla.org/en-US/docs/Web/${info.mdnCategory})\n`;
+  }
+  
+  const filepath = path.join(pkgDir, "README.md");
+  await fs.writeFile(filepath, content, "utf-8");
+}
+
+/**
+ * Prepare package directories
+ */
+async function preparePackageDirectories(): Promise<Map<PackageName, string>> {
+  console.log("Preparing package directories...");
+  
+  const packageDirs = new Map<PackageName, string>();
+  
+  for (const pkg of getPackagesInDependencyOrder()) {
+    const pkgDir = path.join(OUTPUT_DIR, pkg);
+    packageDirs.set(pkg, pkgDir);
+    
+    // Create package directory
+    await fs.mkdir(pkgDir, { recursive: true });
+    
+    // Clean existing .mbt files in package directory
+    try {
+      const files = await fs.readdir(pkgDir);
+      for (const file of files) {
+        if (file.endsWith(".mbt")) {
+          await fs.unlink(path.join(pkgDir, file));
+        }
+      }
+    } catch (err) {
+      // Directory might not exist yet, that's fine
+    }
+    
+    // Create package configuration
+    await createPackageJson(pkg, pkgDir);
+    
+    console.log(`  Created ${pkg}/ package`);
+  }
+  
+  return packageDirs;
+}
+
+/**
  * Ensure output directory exists and is clean
  */
 async function prepareOutputDir(): Promise<void> {
@@ -362,34 +460,37 @@ async function prepareOutputDir(): Promise<void> {
 }
 
 /**
- * Copy template files
+ * Copy template files to appropriate packages
  */
-async function copyTemplates(): Promise<void> {
+async function copyTemplates(packageDirs: Map<PackageName, string>): Promise<void> {
   console.log("Copying template files...");
 
-  const templateFiles = [
-    "js_value.mbt",
-    "js_promise.mbt",
-    "js_array.mbt",
-    "primitives.mbt",
-    "event_listener.mbt",
-    "typed_arrays.mbt",
-  ];
+  // Map template files to their target packages
+  const templateMapping: Record<string, PackageName> = {
+    "js_value.mbt": "core",
+    "js_promise.mbt": "core",
+    "js_array.mbt": "core",
+    "primitives.mbt": "core",
+    "event_listener.mbt": "dom",
+    "typed_arrays.mbt": "core",
+  };
 
-  for (const file of templateFiles) {
+  for (const [file, pkg] of Object.entries(templateMapping)) {
     const src = path.join(TEMPLATES_DIR, file);
-    const dst = path.join(OUTPUT_DIR, file);
-    console.log(`  Copying ${file}...`);
+    const pkgDir = packageDirs.get(pkg)!;
+    const dst = path.join(pkgDir, file);
+    console.log(`  Copying ${file} to ${pkg}/...`);
     await fs.copyFile(src, dst);
   }
 }
 
 /**
- * Generate all MoonBit files
+ * Generate all MoonBit files into packages
  */
 async function generateMoonBitFiles(
   idl: ParsedIdl,
-  propertyUnionTypes: Map<string, import("./emitter/index.js").CollectedUnionType>
+  propertyUnionTypes: Map<string, import("./emitter/index.js").CollectedUnionType>,
+  packageDirs: Map<PackageName, string>
 ): Promise<void> {
   console.log("Generating MoonBit files...");
 
@@ -400,6 +501,12 @@ async function generateMoonBitFiles(
   // Reset the union traits tracker before generating interfaces
   // This prevents duplicates from shared mixins (e.g., CanvasPath)
   resetEmittedUnionTraits();
+  
+  // Track types per package for README generation
+  const packageTypes = new Map<PackageName, Set<string>>();
+  for (const pkg of getPackagesInDependencyOrder()) {
+    packageTypes.set(pkg, new Set());
+  }
 
   // Helper to write IDL source to separate files
   const writeIdlSource = async (name: string, idlSource?: string) => {
@@ -410,89 +517,118 @@ async function generateMoonBitFiles(
 
   // Generate property union type files FIRST so they're available for interfaces
   for (const [name, unionType] of propertyUnionTypes) {
+    const pkg = classifyType(name);
+    const pkgDir = packageDirs.get(pkg)!;
     const filename = getPropertyUnionTypeFilename(name);
     const content = emitPropertyUnionType(unionType, idl);
-    const filepath = path.join(OUTPUT_DIR, filename);
+    const filepath = path.join(pkgDir, filename);
 
-    console.log(`  Writing ${filename}...`);
+    console.log(`  Writing ${pkg}/${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+    packageTypes.get(pkg)!.add(name);
   }
 
   // Generate interface files
   for (const [name, iface] of idl.interfaces) {
+    const pkg = classifyType(name);
+    const pkgDir = packageDirs.get(pkg)!;
     const filename = getInterfaceFilename(name);
     const content = emitInterface(iface, idl);
-    const filepath = path.join(OUTPUT_DIR, filename);
+    const filepath = path.join(pkgDir, filename);
 
-    console.log(`  Writing ${filename}...`);
+    console.log(`  Writing ${pkg}/${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+    packageTypes.get(pkg)!.add(name);
 
     await writeIdlSource(name, iface.idlSource);
   }
 
   // Generate dictionary files
   for (const [name, dict] of idl.dictionaries) {
+    const pkg = classifyType(name);
+    const pkgDir = packageDirs.get(pkg)!;
     const filename = getDictionaryFilename(name);
     const content = emitDictionary(dict);
-    const filepath = path.join(OUTPUT_DIR, filename);
+    const filepath = path.join(pkgDir, filename);
 
-    console.log(`  Writing ${filename}...`);
+    console.log(`  Writing ${pkg}/${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+    packageTypes.get(pkg)!.add(name);
 
     await writeIdlSource(name, dict.idlSource);
   }
 
   // Generate callback files
   for (const [name, callback] of idl.callbacks) {
+    const pkg = classifyType(name);
+    const pkgDir = packageDirs.get(pkg)!;
     const filename = getCallbackFilename(name);
     const content = emitCallback(callback);
-    const filepath = path.join(OUTPUT_DIR, filename);
+    const filepath = path.join(pkgDir, filename);
 
-    console.log(`  Writing ${filename}...`);
+    console.log(`  Writing ${pkg}/${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+    packageTypes.get(pkg)!.add(name);
 
     await writeIdlSource(name, callback.idlSource);
   }
 
   // Generate typedef files
   for (const [name, typedef] of idl.typedefs) {
+    const pkg = classifyType(name);
+    const pkgDir = packageDirs.get(pkg)!;
     const filename = getTypedefFilename(name);
     const content = emitTypedef(typedef, idl);
-    const filepath = path.join(OUTPUT_DIR, filename);
+    const filepath = path.join(pkgDir, filename);
 
-    console.log(`  Writing ${filename}...`);
+    console.log(`  Writing ${pkg}/${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+    packageTypes.get(pkg)!.add(name);
 
     await writeIdlSource(name, typedef.idlSource);
   }
 
   // Generate enum files
   for (const [name, enumDef] of idl.enums) {
+    const pkg = classifyType(name);
+    const pkgDir = packageDirs.get(pkg)!;
     const filename = getEnumFilename(name);
     const content = emitEnum(enumDef);
-    const filepath = path.join(OUTPUT_DIR, filename);
+    const filepath = path.join(pkgDir, filename);
 
-    console.log(`  Writing ${filename}...`);
+    console.log(`  Writing ${pkg}/${filename}...`);
     await fs.writeFile(filepath, content, "utf-8");
+    packageTypes.get(pkg)!.add(name);
 
     await writeIdlSource(name, enumDef.idlSource);
   }
 
-  // Generate globals file
+  // Generate globals file (goes to dom package)
   const globalsContent = emitGlobals(idl);
-  const globalsPath = path.join(OUTPUT_DIR, "globals.mbt");
-  console.log("  Writing globals.mbt...");
+  const globalsPath = path.join(packageDirs.get('dom')!, "globals.mbt");
+  console.log("  Writing dom/globals.mbt...");
   await fs.writeFile(globalsPath, globalsContent, "utf-8");
+  
+  // Generate README for each package
+  console.log("\nGenerating package READMEs...");
+  for (const [pkg, types] of packageTypes) {
+    if (types.size > 0) {
+      const pkgDir = packageDirs.get(pkg)!;
+      await createPackageReadme(pkg, pkgDir, types);
+      console.log(`  Created ${pkg}/README.md (${types.size} types)`);
+    }
+  }
 }
 
 /**
  * Generate JavaScript runtime file
  */
-async function generateJsRuntime(idl: ParsedIdl): Promise<void> {
+async function generateJsRuntime(idl: ParsedIdl, packageDirs: Map<PackageName, string>): Promise<void> {
   console.log("Generating JavaScript runtime...");
 
   const content = emitJsRuntime(idl);
-  const filepath = path.join(OUTPUT_DIR, "webapi.mjs");
+  // Put runtime in dom package as it's used by all DOM/HTML types
+  const filepath = path.join(packageDirs.get('dom')!, "webapi.mjs");
 
   await fs.writeFile(filepath, content, "utf-8");
 
@@ -500,7 +636,7 @@ async function generateJsRuntime(idl: ParsedIdl): Promise<void> {
   try {
     const result = await minify(content, { module: true });
     if (result.code) {
-      const minPath = path.join(OUTPUT_DIR, "webapi.min.mjs");
+      const minPath = path.join(packageDirs.get('dom')!, "webapi.min.mjs");
       await fs.writeFile(minPath, result.code, "utf-8");
     }
   } catch (err) {
@@ -565,14 +701,17 @@ async function build(): Promise<void> {
     registerDictionaries(mergedIdl.dictionaries.keys());
     registerEnums(mergedIdl.enums.keys());
 
+    // Prepare package directories
+    const packageDirs = await preparePackageDirectories();
+
     // Copy template files
-    await copyTemplates();
+    await copyTemplates(packageDirs);
 
     // Generate MoonBit files
-    await generateMoonBitFiles(mergedIdl, propertyUnionTypes);
+    await generateMoonBitFiles(mergedIdl, propertyUnionTypes, packageDirs);
 
-    // Generate JS runtime
-    await generateJsRuntime(mergedIdl);
+    // Generate JS runtime (goes to dom package as it needs to be accessible)
+    await generateJsRuntime(mergedIdl, packageDirs);
 
     // Format generated files with moon fmt
     console.log("Formatting generated files...");
@@ -582,6 +721,10 @@ async function build(): Promise<void> {
 
     console.log("\n=== Build complete! ===");
     console.log(`Output directory: ${OUTPUT_DIR}`);
+    console.log("\nPackage structure:");
+    for (const pkg of getPackagesInDependencyOrder()) {
+      console.log(`  - ${pkg}/`);
+    }
 
   } catch (err) {
     console.error("\nBuild failed:", err);

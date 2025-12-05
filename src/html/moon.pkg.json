@@ -1,0 +1,16 @@
+{
+  "import": [
+    "bikallem/webapi/core",
+    "bikallem/webapi/dom"
+  ],
+  "supported-targets": [
+    "js",
+    "wasm-gc"
+  ],
+  "link": {
+    "wasm-gc": {
+      "use-js-builtin-string": true,
+      "imported-string-constants": "_"
+    }
+  }
+}
