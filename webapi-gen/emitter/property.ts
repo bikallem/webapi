@@ -4,12 +4,10 @@ import {
   escapeKeyword,
   toFfiModuleName,
   toTraitName,
-} from "../utils.js";
-import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapping.js";
-import {
   generatePropertyGetterFfiName,
   generatePropertySetterFfiName,
-} from "./namingUtils.js";
+} from "../utils.js";
+import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapping.js";
 import { isFfiSafeType } from "./ffiUtils.js";
 
 /**

@@ -16,19 +16,17 @@ import {
   escapeKeyword,
   toFfiModuleName,
   toTraitName,
+  generateMethodFfiName,
 } from "../utils.js";
 import {
   mapIdlType,
   formatReturnType,
   getDefaultValueExpr,
   isKnownEnum,
-} from "../mapping.js";
-import {
   getUnionMemberMoonbitType,
   getFilteredUnionMembers,
   getCollapsedUnionType,
-} from "./unionUtils.js";
-import { generateMethodFfiName } from "./namingUtils.js";
+} from "../mapping.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates

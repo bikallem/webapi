@@ -22,9 +22,12 @@
 
 import type { ParsedType, ParsedIdl } from "../types.js";
 import type { UnionTypeContext } from "../mapping.js";
-import { mapIdlType, registerUnionType } from "../mapping.js";
+import {
+  mapIdlType,
+  registerUnionType,
+  getUnionMemberMoonbitType,
+} from "../mapping.js";
 import { toSnakeCase } from "../utils.js";
-import { getUnionMemberMoonbitType } from "./unionUtils.js";
 
 /**
  * Built-in types from typed_arrays.mbt that can be used in unions
