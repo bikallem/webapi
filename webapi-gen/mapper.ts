@@ -1030,6 +1030,36 @@ export function formatReturnType(type: ParsedType): string {
 }
 
 /**
+ * Format return value conversion from FFI call.
+ * Single source of truth for converting JsValue returns to proper MoonBit types.
+ *
+ * @param ffiCall The FFI function call expression
+ * @param mapped The mapped type info for the return type
+ * @returns MoonBit expression with proper type conversion
+ */
+export function formatReturnConversion(
+  ffiCall: string,
+  mapped: MappedType,
+): string {
+  if (mapped.moonbitType === "Unit") {
+    return ffiCall;
+  }
+
+  if (mapped.isOptional) {
+    // Use as_option for nullable returns
+    return `${ffiCall}.as_option()`;
+  }
+
+  if (isKnownEnum(mapped.moonbitType)) {
+    // Use from() for enum types - cast JsValue to String and call from()
+    return `${mapped.moonbitType}::from(${ffiCall}.unsafe_cast()).unwrap()`;
+  }
+
+  // Use unsafe_cast for type conversion (all non-Unit FFI returns are JsValue)
+  return `${ffiCall}.unsafe_cast()`;
+}
+
+/**
  * Generate MoonBit expression to convert a value to JsValue
  */
 export function toJsConversionExpr(

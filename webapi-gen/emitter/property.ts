@@ -7,8 +7,10 @@ import {
   generatePropertyGetterFfiName,
   generatePropertySetterFfiName,
   isFfiSafeType,
+  mapIdlType,
+  isKnownUnionType,
+  formatReturnConversion,
 } from "../mapper.js";
-import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapper.js";
 
 /**
  * Get the context name for a property type if it's a union
@@ -179,20 +181,9 @@ function emitPropertyGetterImpl(
       ? mapped.moonbitType
       : "JsValue";
 
-  let bodyExpr: string;
-  if (ffiReturnType === returnType) {
-    // No conversion needed
-    bodyExpr = `${ffiName}(self.to_js())`;
-  } else if (mapped.isOptional) {
-    // Use as_option for nullable returns
-    bodyExpr = `${ffiName}(self.to_js()).as_option()`;
-  } else if (isKnownEnum(mapped.moonbitType)) {
-    // Use from() for enum types - cast to String and unwrap since browser values should be valid
-    bodyExpr = `${mapped.moonbitType}::from(${ffiName}(self.to_js()).unsafe_cast()).unwrap()`;
-  } else {
-    // Use unsafe_cast for type conversion
-    bodyExpr = `${ffiName}(self.to_js()).unsafe_cast()`;
-  }
+  const ffiCall = `${ffiName}(self.to_js())`;
+  const bodyExpr =
+    ffiReturnType === returnType ? ffiCall : formatReturnConversion(ffiCall, mapped);
 
   return `///|
 impl ${traitName} with ${methodName}(self : Self) -> ${returnType} {

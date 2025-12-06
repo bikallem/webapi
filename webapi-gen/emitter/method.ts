@@ -19,8 +19,8 @@ import {
   generateMethodFfiName,
   mapIdlType,
   formatReturnType,
+  formatReturnConversion,
   getDefaultValueExpr,
-  isKnownEnum,
   getUnionMemberMoonbitType,
   getFilteredUnionMembers,
   mapMethodParamType,
@@ -356,21 +356,9 @@ function emitTraitMethodImpl(
   const bindingsStr =
     letBindings.length > 0 ? "\n" + letBindings.join("\n") : "";
 
-  // For reference types, we need type conversion
-  // FFI functions always return JsValue, so any non-Unit return needs casting
-  let returnExpr = `${ffiName}(${argsStr})`;
-  if (returnType !== "Unit") {
-    if (returnMapped.isOptional) {
-      // Use as_option for nullable returns
-      returnExpr = `${returnExpr}.as_option()`;
-    } else if (isKnownEnum(returnMapped.moonbitType)) {
-      // Use from() for enum types - cast JsValue to String and call from()
-      returnExpr = `${returnMapped.moonbitType}::from(${returnExpr}.unsafe_cast()).unwrap()`;
-    } else {
-      // Use unsafe_cast for type conversion (all non-Unit FFI returns are JsValue)
-      returnExpr = `${returnExpr}.unsafe_cast()`;
-    }
-  }
+  // Use shared return conversion logic
+  const ffiCall = `${ffiName}(${argsStr})`;
+  const returnExpr = formatReturnConversion(ffiCall, returnMapped);
 
   return `///|
 impl ${traitName} with ${methodName}(${paramsStr}) -> ${returnType} {${bindingsStr}
