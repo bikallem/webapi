@@ -30,29 +30,6 @@ export function toSnakeCase(name: string): string {
     .toLowerCase();
 }
 
-/**
- * Convert to PascalCase (for type names)
- * Examples:
- *   event_target -> EventTarget
- *   html_element -> HtmlElement
- */
-export function toPascalCase(name: string): string {
-  return name
-    .split(/[_-]/)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
-    .join("");
-}
-
-/**
- * Convert to camelCase (for method names in JS)
- * Examples:
- *   add_event_listener -> addEventListener
- */
-export function toCamelCase(name: string): string {
-  const pascal = toPascalCase(name);
-  return pascal.charAt(0).toLowerCase() + pascal.slice(1);
-}
-
 // =============================================================================
 // MoonBit Keyword Escaping
 // =============================================================================
@@ -120,29 +97,6 @@ export function escapeKeyword(name: string): string {
   return name;
 }
 
-/**
- * Escape a parameter name (combines snake_case conversion and keyword escaping)
- */
-export function escapeParamName(name: string): string {
-  return escapeKeyword(toSnakeCase(name));
-}
-
-/**
- * Generate a valid MoonBit identifier from any string
- */
-export function toMoonBitIdent(name: string): string {
-  // First convert to snake_case
-  let ident = toSnakeCase(name);
-  // Remove any invalid characters
-  ident = ident.replace(/[^a-z0-9_]/g, "_");
-  // Ensure it doesn't start with a number
-  if (/^[0-9]/.test(ident)) {
-    ident = "_" + ident;
-  }
-  // Escape if it's a keyword
-  return escapeKeyword(ident);
-}
-
 // =============================================================================
 // FFI Name Generation
 // =============================================================================
@@ -208,27 +162,6 @@ export function indent(str: string, spaces: number = 2): string {
   return str
     .split("\n")
     .map((line) => (line.trim() ? indentation + line : line))
-    .join("\n");
-}
-
-/**
- * Join multiple code blocks with blank lines
- */
-export function joinBlocks(...blocks: (string | undefined)[]): string {
-  return blocks.filter((b) => b && b.trim()).join("\n\n");
-}
-
-/**
- * Format WebIDL source as MoonBit comments
- * Each line is prefixed with "// "
- */
-export function formatIdlSourceAsComment(
-  idlSource: string | undefined,
-): string {
-  if (!idlSource) return "";
-  return idlSource
-    .split("\n")
-    .map((line) => `// ${line}`)
     .join("\n");
 }
 
@@ -484,14 +417,14 @@ export function registerEnums(names: Iterable<string>): void {
 /**
  * Check if a type name is a known dictionary
  */
-export function isKnownDictionary(name: string): boolean {
+function isKnownDictionary(name: string): boolean {
   return KNOWN_DICTIONARIES.has(name);
 }
 
 /**
  * Check if a type name is a known enum
  */
-export function isKnownEnum(name: string): boolean {
+function isKnownEnum(name: string): boolean {
   return KNOWN_ENUMS.has(name);
 }
 
@@ -917,53 +850,6 @@ export function getDefaultValueExpr(
       }
       return undefined;
   }
-}
-
-/**
- * Check if a type is a known interface
- */
-export function isInterfaceType(typeName: string): boolean {
-  if (PRIMITIVE_TYPE_MAP[typeName]) return false;
-  const nonInterfaces = ["void", "undefined", "any", "object"];
-  if (nonInterfaces.includes(typeName)) return false;
-  return true;
-}
-
-/**
- * Get all type references from a parsed type
- */
-export function getTypeReferences(idlType: ParsedType): string[] {
-  const refs: string[] = [];
-
-  switch (idlType.type) {
-    case "reference":
-      if (idlType.name) refs.push(idlType.name);
-      break;
-
-    case "sequence":
-    case "promise":
-    case "nullable":
-    case "frozen-array":
-      if (idlType.elementType) {
-        refs.push(...getTypeReferences(idlType.elementType));
-      }
-      break;
-
-    case "union":
-      if (idlType.memberTypes) {
-        for (const memberType of idlType.memberTypes) {
-          refs.push(...getTypeReferences(memberType));
-        }
-      }
-      break;
-
-    case "record":
-      if (idlType.keyType) refs.push(...getTypeReferences(idlType.keyType));
-      if (idlType.valueType) refs.push(...getTypeReferences(idlType.valueType));
-      break;
-  }
-
-  return refs;
 }
 
 /**
