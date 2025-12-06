@@ -37,83 +37,76 @@ Add to your `moon.mod.json`:
 
 ## Quick Example
 
-```mbt check
-fn main {
+```mbt
+///|
+fn quick_example() -> Unit {
   // Get document and create elements  
   let div = document.create_element("div")
-  
+
   // Set attributes and content
   div.set_id("my-div")
   div.set_inner_html("<p>Hello from MoonBit!</p>")
-  
+
   // Append to body
-  document.body().append_child(div)
-  
+  let _ = document.body().unwrap().append_child(div)
+
   // Add event listener
-  div.add_event_listener("click", event_listener((event) {
-    println("Clicked!")
-  }))
+  div.add_event_listener(
+    "click",
+    EventListener::new(fn(_event) { println("Clicked!") }),
+  )
 }
 ```
 
 ## Shadow DOM Example
 
-```mbt check
-
+```mbt
 ///|
-fn create_web_component {
+fn create_web_component() -> Unit {
   let doc = document
   let host = doc.create_element("div")
-  
-  // Attach shadow root
-  let shadow = host.attach_shadow({ mode: ShadowRootMode::Open, delegates_focus: false })
-  
+
+  // Attach shadow root using constructor
+  let shadow = host.attach_shadow(ShadowRootInit::new(ShadowRootMode::Open))
+
   // Add content to shadow DOM
   let style = doc.create_element("style")
-  style.set_text_content(
+  let css =
     #|:host { display: block; padding: 10px; }
     #|slot { color: blue; }
-    #|
-  )
-  shadow.append_child(style)
-  
+  style.set_text_content(css)
+  let _ = shadow.append_child(style)
+
   // Add slot for content projection
   let slot = doc.create_element("slot")
-  shadow.append_child(slot)
-  
-  doc.body().append_child(host)
+  let _ = shadow.append_child(slot)
+  let _ = doc.body().unwrap().append_child(host)
+
 }
 ```
 
 ## Canvas Example
 
-```mbt check
-
+```mbt
 ///|
-fn draw_canvas {
-  let canvas : HTMLCanvasElement = document.get_element_by_id("canvas").unwrap()
-  let ctx = canvas.get_context_2d().unwrap()
-  
+fn draw_canvas(canvas : HTMLCanvasElement) -> Unit {
+  let ctx = canvas.get_context("2d").unwrap().unsafe_cast()
+
   // Type-safe enum properties
   ctx.set_line_join(CanvasLineJoin::Round)
   ctx.set_line_cap(CanvasLineCap::Butt)
   ctx.set_text_align(CanvasTextAlign::Center)
-  
+
   // Type-safe union properties - accepts String, CanvasGradient, or CanvasPattern
   ctx.set_stroke_style("red")
   ctx.set_fill_style("blue")
-  
+
   // Or use a gradient
   let gradient = ctx.create_linear_gradient(0.0, 0.0, 200.0, 0.0)
   gradient.add_color_stop(0.0, "red")
   gradient.add_color_stop(1.0, "blue")
   ctx.set_fill_style(gradient)
-  
-  // Typedef union - accepts HTMLCanvasElement, HTMLImageElement, or HTMLVideoElement
-  let img : HTMLImageElement = document().create_element("img")
-  ctx.draw_image(img, 0.0, 0.0)  // Type-safe, no JsValue!
-  ctx.draw_image(canvas, 50.0, 50.0)  // Can also pass canvas
-  
+
   // Drawing operations
   ctx.begin_path()
   ctx.arc(100.0, 100.0, 50.0, 0.0, 6.28318)
@@ -181,32 +174,14 @@ TEventTarget
 
 WebIDL enums are converted to MoonBit enums with a `from(String)` method for runtime conversion:
 
-```mbt check
-
+```mbt
 ///|
-pub enum CanvasLineCap {
-  Butt
-  Round
-  Square
-}
-
-///|
-pub fn CanvasLineCap::from(value : String) -> CanvasLineCap {
-  match value {
-    "butt" => Butt
-    "round" => Round
-    "square" => Square
-    _ => abort("Invalid CanvasLineCap value")
-  }
-}
-
-///|
-pub fn CanvasLineCap::to_js(self : CanvasLineCap) -> JsValue {
+pub fn CanvasLineCap::to_string(self : CanvasLineCap) -> String {
   match self {
-    Butt => "butt"
-    Round => "round"
-    Square => "square"
-  }.to_js_string()
+    CanvasLineCap::Butt => "butt"
+    CanvasLineCap::Round => "round"
+    CanvasLineCap::Square => "square"
+  }
 }
 ```
 
@@ -214,8 +189,7 @@ pub fn CanvasLineCap::to_js(self : CanvasLineCap) -> JsValue {
 
 WebIDL interface constants are exposed as `pub const` values:
 
-```mbt check
-
+```mbt
 ///|
 // Node.ELEMENT_NODE, Node.TEXT_NODE, etc.
 pub const ELEMENT_NODE : UInt = 1
@@ -237,38 +211,16 @@ WebIDL typedef unions like `typedef (HTMLCanvasElement or HTMLImageElement or HT
 - A **trait** (e.g., `TCanvasImageSource`) for type conversion
 - Trait implementations for each member type
 
-```mbt check
+Usage example - function accepts `&TCanvasImageSource` parameter:
 
+```mbt
 ///|
-// typedef union generated as:
-#external
-pub type CanvasImageSource
-
-///|
-pub trait TCanvasImageSource {
-  to_js(Self) -> JsValue
-}
-
-///|
-pub impl TCanvasImageSource for HTMLCanvasElement with to_js(self) {
-  ...
-}
-
-///|
-pub impl TCanvasImageSource for HTMLImageElement with to_js(self) {
-  ...
-}
-
-///|
-pub impl TCanvasImageSource for HTMLVideoElement with to_js(self) {
-  ...
-}
-
-///|
-// Usage - function accepts &TCanvasImageSource parameter
-fn use_canvas_image(ctx : CanvasRenderingContext2D, img : HTMLImageElement) {
-  ctx.draw_image(img, 0.0, 0.0)        // HTMLImageElement
-  ctx.draw_image(ctx.canvas(), 0.0, 0.0)  // HTMLCanvasElement
+fn use_canvas_image(
+  ctx : CanvasRenderingContext2D,
+  img : HTMLImageElement,
+) -> Unit {
+  ctx.draw_image(img, 0.0, 0.0) // HTMLImageElement
+  ctx.draw_image(ctx.canvas(), 0.0, 0.0) // HTMLCanvasElement
   // Both work - type-safe with no JsValue!
 }
 ```
@@ -298,11 +250,11 @@ make all
 ```
 ├── webapi-gen/          # TypeScript code generator
 │   ├── build.ts         # Main orchestrator
-│   ├── widlprocess.ts   # WebIDL parser
-│   ├── mapping.ts       # Type mapping
+│   ├── parser.ts        # WebIDL parser
+│   ├── mapper.ts        # Type mapping
 │   ├── emitter/         # Code emitters
 │   └── enabled-idls/    # Extracted WebIDL snippets per type
-├── webapi/dom/          # Generated MoonBit bindings
+├── src/                 # Generated MoonBit bindings
 ├── examples/            # Usage examples
 └── Makefile
 ```

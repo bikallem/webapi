@@ -4,8 +4,6 @@ build:
 gen:
 	npm run build && node dist/build.js
 
-all: clean fmt build info
-
 fmt:
 	moon fmt
 
@@ -24,4 +22,6 @@ examples:
 	moon build --target js -C examples
 	moon info --target js -C examples
 
-.PHONY: build gen fmt clean info check examples
+all: clean gen fmt build info examples
+
+.PHONY: build gen all fmt clean info check examples
