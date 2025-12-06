@@ -31,13 +31,7 @@
 </head>
 
 <body>
-    <div id="counter-app">
-        <h1>Counter</h1>
-        <div id="count-display">0</div>
-        <button id="decrement">−</button>
-        <button id="increment">+</button>
-        <button id="reset">Reset</button>
-    </div>
+    <div id="app"></div>
     <script type="module">
         import { wasmImportObject } from "../webapi.min.mjs";
         Object.assign(globalThis, wasmImportObject);

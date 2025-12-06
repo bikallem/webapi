@@ -256,21 +256,21 @@ pub trait TDocument: TJsValue + TNode {
   create_cdata_section(self : Self, data : String) -> CDATASection = _
   create_comment(self : Self, data : String) -> Comment = _
   create_processing_instruction(self : Self, target : String, data : String) -> ProcessingInstruction = _
-  import_node(self : Self, node : Node, options? : &TImportNodeOptionsArg) -> Node = _
-  adopt_node(self : Self, node : Node) -> Node = _
+  import_node(self : Self, node : &TNode, options? : &TImportNodeOptionsArg) -> Node = _
+  adopt_node(self : Self, node : &TNode) -> Node = _
   create_attribute(self : Self, local_name : String) -> Attr = _
   create_attribute_ns(self : Self, namespace_ : String, qualified_name : String) -> Attr = _
   create_event(self : Self, interface : String) -> Event = _
   create_range(self : Self) -> Range = _
   create_node_iterator(
     self : Self,
-    root : Node,
+    root : &TNode,
     what_to_show? : UInt,
     filter? : JsValue,
   ) -> JsValue = _
   create_tree_walker(
     self : Self,
-    root : Node,
+    root : &TNode,
     what_to_show? : UInt,
     filter? : JsValue,
   ) -> JsValue = _
@@ -318,15 +318,15 @@ pub trait TDocument: TJsValue + TNode {
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
   replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
-  move_before(self : Self, node : Node, child : Node) -> Unit = _
+  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   create_expression(self : Self, expression : String, resolver? : JsValue) -> JsValue = _
-  create_ns_resolver(self : Self, node_resolver : Node) -> Node = _
+  create_ns_resolver(self : Self, node_resolver : &TNode) -> Node = _
   evaluate(
     self : Self,
     expression : String,
-    context_node : Node,
+    context_node : &TNode,
     resolver? : JsValue,
     type_? : UInt,
     result? : JsValue,
@@ -614,7 +614,7 @@ fn document_import_node_ffi(
 ///|
 impl TDocument with import_node(
   self : Self,
-  node : Node,
+  node : &TNode,
   options? : &TImportNodeOptionsArg,
 ) -> Node {
   let options_js = match options {
@@ -632,7 +632,7 @@ impl TDocument with import_node(
 fn document_adopt_node_ffi(obj : JsValue, node : JsValue) -> JsValue = "webapi_Document" "adoptNode"
 
 ///|
-impl TDocument with adopt_node(self : Self, node : Node) -> Node {
+impl TDocument with adopt_node(self : Self, node : &TNode) -> Node {
   document_adopt_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node)).unsafe_cast()
 }
 
@@ -697,7 +697,7 @@ fn document_create_node_iterator_ffi(
 ///|
 impl TDocument with create_node_iterator(
   self : Self,
-  root : Node,
+  root : &TNode,
   what_to_show? : UInt,
   filter? : JsValue,
 ) -> JsValue {
@@ -722,7 +722,7 @@ fn document_create_tree_walker_ffi(
 ///|
 impl TDocument with create_tree_walker(
   self : Self,
-  root : Node,
+  root : &TNode,
   what_to_show? : UInt,
   filter? : JsValue,
 ) -> JsValue {
@@ -1147,7 +1147,7 @@ fn document_move_before_ffi(
 ) -> Unit = "webapi_Document" "moveBefore"
 
 ///|
-impl TDocument with move_before(self : Self, node : Node, child : Node) -> Unit {
+impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
   document_move_before_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -1205,7 +1205,7 @@ fn document_create_ns_resolver_ffi(
 ) -> JsValue = "webapi_Document" "createNSResolver"
 
 ///|
-impl TDocument with create_ns_resolver(self : Self, node_resolver : Node) -> Node {
+impl TDocument with create_ns_resolver(self : Self, node_resolver : &TNode) -> Node {
   document_create_ns_resolver_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node_resolver),
@@ -1226,7 +1226,7 @@ fn document_evaluate_ffi(
 impl TDocument with evaluate(
   self : Self,
   expression : String,
-  context_node : Node,
+  context_node : &TNode,
   resolver? : JsValue,
   type_? : UInt,
   result? : JsValue,

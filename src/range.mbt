@@ -23,26 +23,26 @@ pub trait TRange: TJsValue {
   common_ancestor_container(self : Self) -> Node = _
   get_client_rects(self : Self) -> JsValue = _
   get_bounding_client_rect(self : Self) -> JsValue = _
-  set_start(self : Self, node : Node, offset : UInt) -> Unit = _
-  set_end(self : Self, node : Node, offset : UInt) -> Unit = _
-  set_start_before(self : Self, node : Node) -> Unit = _
-  set_start_after(self : Self, node : Node) -> Unit = _
-  set_end_before(self : Self, node : Node) -> Unit = _
-  set_end_after(self : Self, node : Node) -> Unit = _
+  set_start(self : Self, node : &TNode, offset : UInt) -> Unit = _
+  set_end(self : Self, node : &TNode, offset : UInt) -> Unit = _
+  set_start_before(self : Self, node : &TNode) -> Unit = _
+  set_start_after(self : Self, node : &TNode) -> Unit = _
+  set_end_before(self : Self, node : &TNode) -> Unit = _
+  set_end_after(self : Self, node : &TNode) -> Unit = _
   collapse(self : Self, to_start? : Bool) -> Unit = _
-  select_node(self : Self, node : Node) -> Unit = _
-  select_node_contents(self : Self, node : Node) -> Unit = _
-  compare_boundary_points(self : Self, how : UInt, source_range : Range) -> Int = _
+  select_node(self : Self, node : &TNode) -> Unit = _
+  select_node_contents(self : Self, node : &TNode) -> Unit = _
+  compare_boundary_points(self : Self, how : UInt, source_range : &TRange) -> Int = _
   delete_contents(self : Self) -> Unit = _
   extract_contents(self : Self) -> DocumentFragment = _
   clone_contents(self : Self) -> DocumentFragment = _
-  insert_node(self : Self, node : Node) -> Unit = _
-  surround_contents(self : Self, new_parent : Node) -> Unit = _
+  insert_node(self : Self, node : &TNode) -> Unit = _
+  surround_contents(self : Self, new_parent : &TNode) -> Unit = _
   clone_range(self : Self) -> Range = _
   detach(self : Self) -> Unit = _
-  is_point_in_range(self : Self, node : Node, offset : UInt) -> Bool = _
-  compare_point(self : Self, node : Node, offset : UInt) -> Int = _
-  intersects_node(self : Self, node : Node) -> Bool = _
+  is_point_in_range(self : Self, node : &TNode, offset : UInt) -> Bool = _
+  compare_point(self : Self, node : &TNode, offset : UInt) -> Int = _
+  intersects_node(self : Self, node : &TNode) -> Bool = _
   create_contextual_fragment(
     self : Self,
     string : &TCreateContextualFragmentStringArg,
@@ -83,7 +83,7 @@ impl TRange with get_bounding_client_rect(self : Self) -> JsValue {
 fn range_set_start_ffi(obj : JsValue, node : JsValue, offset : JsValue) -> Unit = "webapi_Range" "setStart"
 
 ///|
-impl TRange with set_start(self : Self, node : Node, offset : UInt) -> Unit {
+impl TRange with set_start(self : Self, node : &TNode, offset : UInt) -> Unit {
   range_set_start_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -95,7 +95,7 @@ impl TRange with set_start(self : Self, node : Node, offset : UInt) -> Unit {
 fn range_set_end_ffi(obj : JsValue, node : JsValue, offset : JsValue) -> Unit = "webapi_Range" "setEnd"
 
 ///|
-impl TRange with set_end(self : Self, node : Node, offset : UInt) -> Unit {
+impl TRange with set_end(self : Self, node : &TNode, offset : UInt) -> Unit {
   range_set_end_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -107,7 +107,7 @@ impl TRange with set_end(self : Self, node : Node, offset : UInt) -> Unit {
 fn range_set_start_before_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setStartBefore"
 
 ///|
-impl TRange with set_start_before(self : Self, node : Node) -> Unit {
+impl TRange with set_start_before(self : Self, node : &TNode) -> Unit {
   range_set_start_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -115,7 +115,7 @@ impl TRange with set_start_before(self : Self, node : Node) -> Unit {
 fn range_set_start_after_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setStartAfter"
 
 ///|
-impl TRange with set_start_after(self : Self, node : Node) -> Unit {
+impl TRange with set_start_after(self : Self, node : &TNode) -> Unit {
   range_set_start_after_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -123,7 +123,7 @@ impl TRange with set_start_after(self : Self, node : Node) -> Unit {
 fn range_set_end_before_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setEndBefore"
 
 ///|
-impl TRange with set_end_before(self : Self, node : Node) -> Unit {
+impl TRange with set_end_before(self : Self, node : &TNode) -> Unit {
   range_set_end_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -131,7 +131,7 @@ impl TRange with set_end_before(self : Self, node : Node) -> Unit {
 fn range_set_end_after_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setEndAfter"
 
 ///|
-impl TRange with set_end_after(self : Self, node : Node) -> Unit {
+impl TRange with set_end_after(self : Self, node : &TNode) -> Unit {
   range_set_end_after_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -148,7 +148,7 @@ impl TRange with collapse(self : Self, to_start? : Bool) -> Unit {
 fn range_select_node_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "selectNode"
 
 ///|
-impl TRange with select_node(self : Self, node : Node) -> Unit {
+impl TRange with select_node(self : Self, node : &TNode) -> Unit {
   range_select_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -156,7 +156,7 @@ impl TRange with select_node(self : Self, node : Node) -> Unit {
 fn range_select_node_contents_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "selectNodeContents"
 
 ///|
-impl TRange with select_node_contents(self : Self, node : Node) -> Unit {
+impl TRange with select_node_contents(self : Self, node : &TNode) -> Unit {
   range_select_node_contents_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -171,7 +171,7 @@ fn range_compare_boundary_points_ffi(
 impl TRange with compare_boundary_points(
   self : Self,
   how : UInt,
-  source_range : Range,
+  source_range : &TRange,
 ) -> Int {
   range_compare_boundary_points_ffi(
     TJsValue::to_js(self),
@@ -208,7 +208,7 @@ impl TRange with clone_contents(self : Self) -> DocumentFragment {
 fn range_insert_node_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "insertNode"
 
 ///|
-impl TRange with insert_node(self : Self, node : Node) -> Unit {
+impl TRange with insert_node(self : Self, node : &TNode) -> Unit {
   range_insert_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -216,7 +216,7 @@ impl TRange with insert_node(self : Self, node : Node) -> Unit {
 fn range_surround_contents_ffi(obj : JsValue, new_parent : JsValue) -> Unit = "webapi_Range" "surroundContents"
 
 ///|
-impl TRange with surround_contents(self : Self, new_parent : Node) -> Unit {
+impl TRange with surround_contents(self : Self, new_parent : &TNode) -> Unit {
   range_surround_contents_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(new_parent),
@@ -247,7 +247,7 @@ fn range_is_point_in_range_ffi(
 ) -> JsValue = "webapi_Range" "isPointInRange"
 
 ///|
-impl TRange with is_point_in_range(self : Self, node : Node, offset : UInt) -> Bool {
+impl TRange with is_point_in_range(self : Self, node : &TNode, offset : UInt) -> Bool {
   range_is_point_in_range_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -263,7 +263,7 @@ fn range_compare_point_ffi(
 ) -> JsValue = "webapi_Range" "comparePoint"
 
 ///|
-impl TRange with compare_point(self : Self, node : Node, offset : UInt) -> Int {
+impl TRange with compare_point(self : Self, node : &TNode, offset : UInt) -> Int {
   range_compare_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -275,7 +275,7 @@ impl TRange with compare_point(self : Self, node : Node, offset : UInt) -> Int {
 fn range_intersects_node_ffi(obj : JsValue, node : JsValue) -> JsValue = "webapi_Range" "intersectsNode"
 
 ///|
-impl TRange with intersects_node(self : Self, node : Node) -> Bool {
+impl TRange with intersects_node(self : Self, node : &TNode) -> Bool {
   range_intersects_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node)).unsafe_cast()
 }
 

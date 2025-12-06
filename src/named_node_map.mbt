@@ -12,8 +12,8 @@ pub trait TNamedNodeMap: TJsValue {
   item(self : Self, index : UInt) -> Attr? = _
   get_named_item(self : Self, qualified_name : String) -> Attr? = _
   get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr? = _
-  set_named_item(self : Self, attr : Attr) -> Attr? = _
-  set_named_item_ns(self : Self, attr : Attr) -> Attr? = _
+  set_named_item(self : Self, attr : &TAttr) -> Attr? = _
+  set_named_item_ns(self : Self, attr : &TAttr) -> Attr? = _
   remove_named_item(self : Self, qualified_name : String) -> Attr = _
   remove_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
 }
@@ -70,7 +70,7 @@ impl TNamedNodeMap with get_named_item_ns(
 fn named_node_map_set_named_item_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_NamedNodeMap" "setNamedItem"
 
 ///|
-impl TNamedNodeMap with set_named_item(self : Self, attr : Attr) -> Attr? {
+impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
   named_node_map_set_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -84,7 +84,7 @@ fn named_node_map_set_named_item_ns_ffi(
 ) -> JsValue = "webapi_NamedNodeMap" "setNamedItemNS"
 
 ///|
-impl TNamedNodeMap with set_named_item_ns(self : Self, attr : Attr) -> Attr? {
+impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr? {
   named_node_map_set_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),

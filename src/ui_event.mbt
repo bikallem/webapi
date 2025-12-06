@@ -16,7 +16,7 @@ pub trait TUIEvent: TJsValue + TEvent {
     type_arg : String,
     bubbles_arg? : Bool,
     cancelable_arg? : Bool,
-    view_arg? : Window,
+    view_arg? : &TWindow,
     detail_arg? : Int,
   ) -> Unit = _
 }
@@ -65,7 +65,7 @@ impl TUIEvent with init_ui_event(
   type_arg : String,
   bubbles_arg? : Bool,
   cancelable_arg? : Bool,
-  view_arg? : Window,
+  view_arg? : &TWindow,
   detail_arg? : Int,
 ) -> Unit {
   let bubbles_arg_js = opt_to_js(bubbles_arg)

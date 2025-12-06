@@ -9,7 +9,7 @@
  * 5. Code emission utilities
  */
 
-import type { ParsedType } from "./parser.js";
+import { type ParsedType, unwrapNullableType } from "./parser.js";
 
 // =============================================================================
 // Name Conversion Utilities
@@ -567,6 +567,7 @@ export interface MappedType {
   unionContext?: UnionTypeContext;
   isDictionary?: boolean;
   isTypedefUnion?: boolean; // True if this is a typedef union (like CanvasImageSource)
+  isInterface?: boolean; // True if this is a known interface type
 }
 
 /**
@@ -724,6 +725,7 @@ export function mapIdlType(
         moonbitType: name,
         needsConversion: true,
         isOptional: false,
+        isInterface: true,
       };
     }
 
@@ -752,6 +754,9 @@ export function mapIdlType(
         needsConversion: nullableMapped.needsConversion,
         isOptional: true,
         unionContext: nullableMapped.unionContext,
+        isDictionary: nullableMapped.isDictionary,
+        isTypedefUnion: nullableMapped.isTypedefUnion,
+        isInterface: nullableMapped.isInterface,
       };
     }
 
@@ -795,6 +800,98 @@ export function mapIdlType(
         isOptional: false,
       };
   }
+}
+
+/**
+ * Result of mapping a method parameter type
+ */
+export interface MappedParamType {
+  /** The MoonBit type string for use in signatures */
+  paramType: string;
+  /** The underlying mapped type info */
+  mapped: MappedType;
+  /** Whether this is a union argument with a generated trait */
+  isUnionArg: boolean;
+  /** The trait name if this is a union argument */
+  unionTraitName?: string;
+  /** Whether the union collapsed to a single type */
+  isCollapsedUnion: boolean;
+}
+
+/**
+ * Generate union argument trait name
+ * e.g., addEventListener + options -> TAddEventListenerOptionsArg
+ */
+export function getUnionArgTraitName(
+  methodName: string,
+  paramName: string,
+): string {
+  const methodCapitalized =
+    methodName.charAt(0).toUpperCase() + methodName.slice(1);
+  const paramCapitalized =
+    paramName.charAt(0).toUpperCase() + paramName.slice(1);
+  return `T${methodCapitalized}${paramCapitalized}Arg`;
+}
+
+/**
+ * Single source of truth for mapping method parameter types.
+ * This handles all the logic for determining the correct MoonBit type
+ * for a method parameter, including:
+ * - Typedef unions (e.g., CanvasImageSource -> &TCanvasImageSource)
+ * - Interface types (e.g., Node -> &TNode)
+ * - Inline union types (e.g., (boolean or AddEventListenerOptions) -> &TAddEventListenerOptionsArg)
+ * - Collapsed unions (single remaining type after filtering)
+ * - Regular types
+ *
+ * @param paramType The parsed IDL type of the parameter
+ * @param methodName The method name (used for generating union trait names)
+ * @param paramName The parameter name (used for generating union trait names)
+ */
+export function mapMethodParamType(
+  paramType: ParsedType,
+  methodName: string,
+  paramName: string,
+): MappedParamType {
+  const mapped = mapIdlType(paramType);
+
+  // Check if this is a union type (possibly wrapped in nullable)
+  const typeToCheck = unwrapNullableType(paramType);
+
+  let resultType: string;
+  let isUnionArg = false;
+  let unionTraitName: string | undefined;
+  let isCollapsedUnion = false;
+
+  if (mapped.isTypedefUnion) {
+    // mapIdlType already returns trait object type for typedef unions (e.g., &TCanvasImageSource)
+    resultType = mapped.moonbitType;
+  } else if (mapped.isInterface) {
+    // Use trait object type for interface arguments (e.g., &TNode)
+    resultType = `&T${mapped.moonbitType}`;
+  } else if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
+    // Check if union collapses to single type after filtering
+    const collapsedType = getCollapsedUnionType(typeToCheck);
+    if (collapsedType) {
+      // Use the single remaining type directly
+      resultType = collapsedType;
+      isCollapsedUnion = true;
+    } else {
+      // Use trait object type for union arguments
+      unionTraitName = getUnionArgTraitName(methodName, paramName);
+      resultType = `&${unionTraitName}`;
+      isUnionArg = true;
+    }
+  } else {
+    resultType = mapped.moonbitType;
+  }
+
+  return {
+    paramType: resultType,
+    mapped,
+    isUnionArg,
+    unionTraitName,
+    isCollapsedUnion,
+  };
 }
 
 /**

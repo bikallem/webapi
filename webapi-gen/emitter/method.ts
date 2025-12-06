@@ -17,15 +17,14 @@ import {
   toFfiModuleName,
   toTraitName,
   generateMethodFfiName,
-} from "../mapper.js";
-import {
   mapIdlType,
   formatReturnType,
   getDefaultValueExpr,
   isKnownEnum,
   getUnionMemberMoonbitType,
   getFilteredUnionMembers,
-  getCollapsedUnionType,
+  mapMethodParamType,
+  getUnionArgTraitName,
 } from "../mapper.js";
 
 /**
@@ -39,20 +38,6 @@ const emittedUnionTraits = new Set<string>();
  */
 export function resetEmittedUnionTraits(): void {
   emittedUnionTraits.clear();
-}
-
-/**
- * Generate union argument trait name
- * e.g., addEventListener + options -> TAddEventListenerOptionsArg
- */
-function getUnionArgTraitName(methodName: string, paramName: string): string {
-  // Capitalize first letter of method name (already in camelCase/PascalCase)
-  const methodCapitalized =
-    methodName.charAt(0).toUpperCase() + methodName.slice(1);
-  // Capitalize first letter of param name
-  const paramCapitalized =
-    paramName.charAt(0).toUpperCase() + paramName.slice(1);
-  return `T${methodCapitalized}${paramCapitalized}Arg`;
 }
 
 /**
@@ -141,30 +126,12 @@ export function emitTraitMethodSignature(
   const params: string[] = ["self : Self"];
 
   for (const param of method.params) {
-    const mapped = mapIdlType(param.type);
     const paramName = escapeKeyword(toSnakeCase(param.name));
-
-    // Check if this is a union type (possibly wrapped in nullable)
-    const typeToCheck = unwrapNullableType(param.type);
-
-    let paramType: string;
-    if (mapped.isTypedefUnion) {
-      // mapIdlType already returns trait object type for typedef unions (e.g., &TCanvasImageSource)
-      paramType = mapped.moonbitType;
-    } else if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
-      // Check if union collapses to single type after filtering
-      const collapsedType = getCollapsedUnionType(typeToCheck);
-      if (collapsedType) {
-        // Use the single remaining type directly
-        paramType = collapsedType;
-      } else {
-        // Use trait object type for union arguments
-        const traitName = getUnionArgTraitName(method.name, param.name);
-        paramType = `&${traitName}`;
-      }
-    } else {
-      paramType = mapped.moonbitType;
-    }
+    const { paramType } = mapMethodParamType(
+      param.type,
+      method.name,
+      param.name,
+    );
 
     // Optional params use paramName? : Type syntax
     if (param.optional) {
@@ -271,36 +238,23 @@ function emitTraitMethodImpl(
   // Build parameter list - same as trait signature
   const params: string[] = ["self : Self"];
   for (const param of method.params) {
-    const mapped = mapIdlType(param.type);
     const paramName = escapeKeyword(toSnakeCase(param.name));
+    const { paramType, mapped, isUnionArg } = mapMethodParamType(
+      param.type,
+      method.name,
+      param.name,
+    );
 
-    // Check if this is a union type (possibly wrapped in nullable)
+    // Check if this is a union type for default value handling
     const typeToCheck = unwrapNullableType(param.type);
 
-    let paramType: string;
     let defaultExpr: string | undefined;
 
-    if (mapped.isTypedefUnion) {
-      // mapIdlType already returns trait object type for typedef unions (e.g., &TCanvasImageSource)
-      paramType = mapped.moonbitType;
-    } else if (typeToCheck.type === "union" && typeToCheck.memberTypes) {
-      // Check if union collapses to single type after filtering
-      const collapsedType = getCollapsedUnionType(typeToCheck);
-      if (collapsedType) {
-        // Use the single remaining type directly
-        paramType = collapsedType;
-      } else {
-        // Use trait object type for union arguments
-        const unionTraitName = getUnionArgTraitName(method.name, param.name);
-        paramType = `&${unionTraitName}`;
-
-        // Handle default value for union types
-        if (param.optional && param.default === "{}") {
-          const dictType = getUnionDefaultDictType(typeToCheck);
-          if (dictType) {
-            defaultExpr = `${dictType}::empty()`;
-          }
-        }
+    if (isUnionArg && param.optional && param.default === "{}") {
+      // Handle default value for union types
+      const dictType = getUnionDefaultDictType(typeToCheck);
+      if (dictType) {
+        defaultExpr = `${dictType}::empty()`;
       }
     } else if (
       mapped.isDictionary &&
@@ -308,10 +262,7 @@ function emitTraitMethodImpl(
       param.default === "{}"
     ) {
       // Dictionary param with {} default - use proper type with ::empty() default
-      paramType = mapped.moonbitType;
       defaultExpr = `${mapped.moonbitType}::empty()`;
-    } else {
-      paramType = mapped.moonbitType;
     }
 
     // Optional params use paramName? : Type syntax
@@ -336,17 +287,11 @@ function emitTraitMethodImpl(
 
   for (const param of method.params) {
     const paramName = escapeKeyword(toSnakeCase(param.name));
-    const mapped = mapIdlType(param.type);
-
-    // Check if this is a union type
-    const typeToCheck = unwrapNullableType(param.type);
-    const isUnionArg = typeToCheck.type === "union" && typeToCheck.memberTypes;
-
-    // Check if union collapses to single type
-    const collapsedType = isUnionArg
-      ? getCollapsedUnionType(typeToCheck)
-      : undefined;
-    const isCollapsedUnion = collapsedType !== undefined;
+    const { mapped, isUnionArg, isCollapsedUnion } = mapMethodParamType(
+      param.type,
+      method.name,
+      param.name,
+    );
 
     // Check if this param has a default value of {}
     const hasDefaultEmpty = param.optional && param.default === "{}";
@@ -361,7 +306,7 @@ function emitTraitMethodImpl(
           `  let ${jsVarName} = match ${paramName} { Some(v) => ${traitName}::to_js(v), None => JsValue::undefined() }`,
         );
         args.push(jsVarName);
-      } else if (isUnionArg && !isCollapsedUnion) {
+      } else if (isUnionArg) {
         if (hasDefaultEmpty) {
           // Has default value - param is not Option, just call to_js directly
           args.push(`${paramName}.to_js()`);
@@ -393,7 +338,7 @@ function emitTraitMethodImpl(
         // mapped.moonbitType is &TTypeName, extract TTypeName for the to_js call
         const traitName = mapped.moonbitType.replace(/^&/, "");
         args.push(`${traitName}::to_js(${paramName})`);
-      } else if (isUnionArg && !isCollapsedUnion) {
+      } else if (isUnionArg) {
         // Union trait objects have their own to_js method
         args.push(`${paramName}.to_js()`);
       } else {

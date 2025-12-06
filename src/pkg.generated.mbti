@@ -1808,8 +1808,8 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : CanvasFillRule) -> Bool
   is_point_in_stroke(Self, Double, Double) -> Bool
   is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
-  draw_focus_if_needed(Self, Element) -> Unit
-  draw_focus_if_needed2(Self, JsValue, Element) -> Unit
+  draw_focus_if_needed(Self, &TElement) -> Unit
+  draw_focus_if_needed2(Self, JsValue, &TElement) -> Unit
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> JsValue
@@ -1817,10 +1817,10 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   draw_image2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
   draw_image3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
   create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
-  create_image_data2(Self, ImageData) -> ImageData
+  create_image_data2(Self, &TImageData) -> ImageData
   get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
-  put_image_data(Self, ImageData, Int, Int) -> Unit
-  put_image_data2(Self, ImageData, Int, Int, Int, Int, Int, Int) -> Unit
+  put_image_data(Self, &TImageData, Int, Int) -> Unit
+  put_image_data2(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
   set_line_dash(Self, Array[Double]) -> Unit
   get_line_dash(Self) -> Array[Double]
   close_path(Self) -> Unit
@@ -2265,14 +2265,14 @@ pub trait TDocument : TJsValue + TNode {
   create_cdata_section(Self, String) -> CDATASection
   create_comment(Self, String) -> Comment
   create_processing_instruction(Self, String, String) -> ProcessingInstruction
-  import_node(Self, Node, options? : &TImportNodeOptionsArg) -> Node
-  adopt_node(Self, Node) -> Node
+  import_node(Self, &TNode, options? : &TImportNodeOptionsArg) -> Node
+  adopt_node(Self, &TNode) -> Node
   create_attribute(Self, String) -> Attr
   create_attribute_ns(Self, String, String) -> Attr
   create_event(Self, String) -> Event
   create_range(Self) -> Range
-  create_node_iterator(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
-  create_tree_walker(Self, Node, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_node_iterator(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_tree_walker(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
   get_elements_by_name(Self, String) -> NodeList
   open(Self, unused1? : String, unused2? : String) -> Document
   open2(Self, String, String, String) -> Window?
@@ -2297,12 +2297,12 @@ pub trait TDocument : TJsValue + TNode {
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, Node, Node) -> Unit
+  move_before(Self, &TNode, &TNode) -> Unit
   query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   create_expression(Self, String, resolver? : JsValue) -> JsValue
-  create_ns_resolver(Self, Node) -> Node
-  evaluate(Self, String, Node, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
+  create_ns_resolver(Self, &TNode) -> Node
+  evaluate(Self, String, &TNode, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
 }
 
 pub trait TDocumentFragment : TJsValue + TNode {
@@ -2314,7 +2314,7 @@ pub trait TDocumentFragment : TJsValue + TNode {
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, Node, Node) -> Unit
+  move_before(Self, &TNode, &TNode) -> Unit
   query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
 }
@@ -2389,9 +2389,9 @@ pub trait TElement : TJsValue + TNode {
   has_attribute_ns(Self, String, String) -> Bool
   get_attribute_node(Self, String) -> Attr?
   get_attribute_node_ns(Self, String, String) -> Attr?
-  set_attribute_node(Self, Attr) -> Attr?
-  set_attribute_node_ns(Self, Attr) -> Attr?
-  remove_attribute_node(Self, Attr) -> Attr
+  set_attribute_node(Self, &TAttr) -> Attr?
+  set_attribute_node_ns(Self, &TAttr) -> Attr?
+  remove_attribute_node(Self, &TAttr) -> Attr
   attach_shadow(Self, ShadowRootInit) -> ShadowRoot
   closest(Self, String) -> Element?
   matches(Self, String) -> Bool
@@ -2399,7 +2399,7 @@ pub trait TElement : TJsValue + TNode {
   get_elements_by_tag_name(Self, String) -> HTMLCollection
   get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
   get_elements_by_class_name(Self, String) -> HTMLCollection
-  insert_adjacent_element(Self, String, Element) -> Element?
+  insert_adjacent_element(Self, String, &TElement) -> Element?
   insert_adjacent_text(Self, String, String) -> Unit
   set_html_unsafe(Self, &TSetHTMLUnsafeHtmlArg) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
@@ -2411,7 +2411,7 @@ pub trait TElement : TJsValue + TNode {
   prepend(Self, &TPrependNodesArg) -> Unit
   append(Self, &TAppendNodesArg) -> Unit
   replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
-  move_before(Self, Node, Node) -> Unit
+  move_before(Self, &TNode, &TNode) -> Unit
   query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   before(Self, &TBeforeNodesArg) -> Unit
@@ -2446,7 +2446,7 @@ pub trait TEvent : TJsValue {
 pub trait TEventTarget : TJsValue {
   add_event_listener(Self, String, EventListener, options? : &TAddEventListenerOptionsArg) -> Unit
   remove_event_listener(Self, String, EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit
-  dispatch_event(Self, Event) -> Bool
+  dispatch_event(Self, &TEvent) -> Bool
 }
 
 pub trait TFile : TJsValue + TBlob {
@@ -2475,18 +2475,18 @@ pub trait TFileReader : TJsValue + TEventTarget {
   set_onerror(Self, EventHandler) -> Unit
   onloadend(Self) -> EventHandler
   set_onloadend(Self, EventHandler) -> Unit
-  read_as_array_buffer(Self, Blob) -> Unit
-  read_as_binary_string(Self, Blob) -> Unit
-  read_as_text(Self, Blob, encoding? : String) -> Unit
-  read_as_data_url(Self, Blob) -> Unit
+  read_as_array_buffer(Self, &TBlob) -> Unit
+  read_as_binary_string(Self, &TBlob) -> Unit
+  read_as_text(Self, &TBlob, encoding? : String) -> Unit
+  read_as_data_url(Self, &TBlob) -> Unit
   abort(Self) -> Unit
 }
 
 pub trait TFileReaderSync : TJsValue {
-  read_as_array_buffer(Self, Blob) -> ArrayBuffer
-  read_as_binary_string(Self, Blob) -> String
-  read_as_text(Self, Blob, encoding? : String) -> String
-  read_as_data_url(Self, Blob) -> String
+  read_as_array_buffer(Self, &TBlob) -> ArrayBuffer
+  read_as_binary_string(Self, &TBlob) -> String
+  read_as_text(Self, &TBlob, encoding? : String) -> String
+  read_as_data_url(Self, &TBlob) -> String
 }
 
 pub(open) trait TFillStyle {
@@ -2905,7 +2905,7 @@ pub trait THTMLFormElement : TJsValue + THTMLElement {
   elements(Self) -> JsValue
   length(Self) -> UInt
   submit(Self) -> Unit
-  request_submit(Self, submitter? : HTMLElement) -> Unit
+  request_submit(Self, submitter? : &THTMLElement) -> Unit
   reset(Self) -> Unit
   check_validity(Self) -> Bool
   report_validity(Self) -> Bool
@@ -3215,7 +3215,7 @@ pub trait TImageBitmap : TJsValue {
 
 pub trait TImageBitmapRenderingContext : TJsValue {
   canvas(Self) -> Canvas
-  transfer_from_image_bitmap(Self, ImageBitmap) -> Unit
+  transfer_from_image_bitmap(Self, &TImageBitmap) -> Unit
 }
 
 pub(open) trait TImageBitmapSource {
@@ -3280,7 +3280,7 @@ pub trait TKeyboardEvent : TJsValue + TUIEvent {
   char_code(Self) -> UInt
   key_code(Self) -> UInt
   get_modifier_state(Self, String) -> Bool
-  init_keyboard_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, key_arg? : String, location_arg? : UInt, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit
+  init_keyboard_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, key_arg? : String, location_arg? : UInt, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit
 }
 
 pub trait TLocation : TJsValue {
@@ -3328,11 +3328,11 @@ pub trait TMouseEvent : TJsValue + TUIEvent {
   buttons(Self) -> UInt
   related_target(Self) -> EventTarget?
   get_modifier_state(Self, String) -> Bool
-  init_mouse_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : EventTarget) -> Unit
+  init_mouse_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : &TEventTarget) -> Unit
 }
 
 pub trait TMutationObserver : TJsValue {
-  observe(Self, Node, options? : MutationObserverInit) -> Unit
+  observe(Self, &TNode, options? : MutationObserverInit) -> Unit
   disconnect(Self) -> Unit
   take_records(Self) -> Array[MutationRecord]
 }
@@ -3354,8 +3354,8 @@ pub trait TNamedNodeMap : TJsValue {
   item(Self, UInt) -> Attr?
   get_named_item(Self, String) -> Attr?
   get_named_item_ns(Self, String, String) -> Attr?
-  set_named_item(Self, Attr) -> Attr?
-  set_named_item_ns(Self, Attr) -> Attr?
+  set_named_item(Self, &TAttr) -> Attr?
+  set_named_item_ns(Self, &TAttr) -> Attr?
   remove_named_item(Self, String) -> Attr
   remove_named_item_ns(Self, String, String) -> Attr
 }
@@ -3407,17 +3407,17 @@ pub trait TNode : TJsValue + TEventTarget {
   has_child_nodes(Self) -> Bool
   normalize(Self) -> Unit
   clone_node(Self, subtree? : Bool) -> Node
-  is_equal_node(Self, Node) -> Bool
-  is_same_node(Self, Node) -> Bool
-  compare_document_position(Self, Node) -> UInt
-  contains(Self, Node) -> Bool
+  is_equal_node(Self, &TNode) -> Bool
+  is_same_node(Self, &TNode) -> Bool
+  compare_document_position(Self, &TNode) -> UInt
+  contains(Self, &TNode) -> Bool
   lookup_prefix(Self, String) -> String?
   lookup_namespace_uri(Self, String) -> String?
   is_default_namespace(Self, String) -> Bool
-  insert_before(Self, Node, Node) -> Node
-  append_child(Self, Node) -> Node
-  replace_child(Self, Node, Node) -> Node
-  remove_child(Self, Node) -> Node
+  insert_before(Self, &TNode, &TNode) -> Node
+  append_child(Self, &TNode) -> Node
+  replace_child(Self, &TNode, &TNode) -> Node
+  remove_child(Self, &TNode) -> Node
 }
 
 pub trait TNodeList : TJsValue {
@@ -3533,10 +3533,10 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   draw_image2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
   draw_image3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
   create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
-  create_image_data2(Self, ImageData) -> ImageData
+  create_image_data2(Self, &TImageData) -> ImageData
   get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
-  put_image_data(Self, ImageData, Int, Int) -> Unit
-  put_image_data2(Self, ImageData, Int, Int, Int, Int, Int, Int) -> Unit
+  put_image_data(Self, &TImageData, Int, Int) -> Unit
+  put_image_data2(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
   set_line_dash(Self, Array[Double]) -> Unit
   get_line_dash(Self) -> Array[Double]
   close_path(Self) -> Unit
@@ -3575,26 +3575,26 @@ pub trait TRange : TJsValue {
   common_ancestor_container(Self) -> Node
   get_client_rects(Self) -> JsValue
   get_bounding_client_rect(Self) -> JsValue
-  set_start(Self, Node, UInt) -> Unit
-  set_end(Self, Node, UInt) -> Unit
-  set_start_before(Self, Node) -> Unit
-  set_start_after(Self, Node) -> Unit
-  set_end_before(Self, Node) -> Unit
-  set_end_after(Self, Node) -> Unit
+  set_start(Self, &TNode, UInt) -> Unit
+  set_end(Self, &TNode, UInt) -> Unit
+  set_start_before(Self, &TNode) -> Unit
+  set_start_after(Self, &TNode) -> Unit
+  set_end_before(Self, &TNode) -> Unit
+  set_end_after(Self, &TNode) -> Unit
   collapse(Self, to_start? : Bool) -> Unit
-  select_node(Self, Node) -> Unit
-  select_node_contents(Self, Node) -> Unit
-  compare_boundary_points(Self, UInt, Range) -> Int
+  select_node(Self, &TNode) -> Unit
+  select_node_contents(Self, &TNode) -> Unit
+  compare_boundary_points(Self, UInt, &TRange) -> Int
   delete_contents(Self) -> Unit
   extract_contents(Self) -> DocumentFragment
   clone_contents(Self) -> DocumentFragment
-  insert_node(Self, Node) -> Unit
-  surround_contents(Self, Node) -> Unit
+  insert_node(Self, &TNode) -> Unit
+  surround_contents(Self, &TNode) -> Unit
   clone_range(Self) -> Range
   detach(Self) -> Unit
-  is_point_in_range(Self, Node, UInt) -> Bool
-  compare_point(Self, Node, UInt) -> Int
-  intersects_node(Self, Node) -> Bool
+  is_point_in_range(Self, &TNode, UInt) -> Bool
+  compare_point(Self, &TNode, UInt) -> Int
+  intersects_node(Self, &TNode) -> Bool
   create_contextual_fragment(Self, &TCreateContextualFragmentStringArg) -> DocumentFragment
 }
 
@@ -3713,7 +3713,7 @@ pub trait TUIEvent : TJsValue + TEvent {
   view(Self) -> Window?
   detail(Self) -> Int
   which(Self) -> UInt
-  init_ui_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, detail_arg? : Int) -> Unit
+  init_ui_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, detail_arg? : Int) -> Unit
 }
 
 pub trait TWheelEvent : TJsValue + TMouseEvent {
@@ -3973,7 +3973,7 @@ pub trait TWindow : TJsValue + TEventTarget {
   scroll_to2(Self, Double, Double) -> JsPromise[Unit]
   scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
   scroll_by2(Self, Double, Double) -> JsPromise[Unit]
-  get_computed_style(Self, Element, pseudo_elt? : JsValue) -> JsValue
+  get_computed_style(Self, &TElement, pseudo_elt? : JsValue) -> JsValue
   close(Self) -> Unit
   stop(Self) -> Unit
   focus(Self) -> Unit

@@ -182,7 +182,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     sh : Int,
     settings? : ImageDataSettings,
   ) -> ImageData = _
-  create_image_data2(self : Self, image_data : ImageData) -> ImageData = _
+  create_image_data2(self : Self, image_data : &TImageData) -> ImageData = _
   get_image_data(
     self : Self,
     sx : Int,
@@ -191,10 +191,10 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     sh : Int,
     settings? : ImageDataSettings,
   ) -> ImageData = _
-  put_image_data(self : Self, image_data : ImageData, dx : Int, dy : Int) -> Unit = _
+  put_image_data(self : Self, image_data : &TImageData, dx : Int, dy : Int) -> Unit = _
   put_image_data2(
     self : Self,
-    image_data : ImageData,
+    image_data : &TImageData,
     dx : Int,
     dy : Int,
     dirty_x : Int,
@@ -1052,7 +1052,7 @@ fn offscreen_canvas_rendering_context2_d_create_image_data_ffi2(
 ///|
 impl TOffscreenCanvasRenderingContext2D with create_image_data2(
   self : Self,
-  image_data : ImageData,
+  image_data : &TImageData,
 ) -> ImageData {
   offscreen_canvas_rendering_context2_d_create_image_data_ffi2(
     TJsValue::to_js(self),
@@ -1100,7 +1100,7 @@ fn offscreen_canvas_rendering_context2_d_put_image_data_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with put_image_data(
   self : Self,
-  image_data : ImageData,
+  image_data : &TImageData,
   dx : Int,
   dy : Int,
 ) -> Unit {
@@ -1127,7 +1127,7 @@ fn offscreen_canvas_rendering_context2_d_put_image_data_ffi2(
 ///|
 impl TOffscreenCanvasRenderingContext2D with put_image_data2(
   self : Self,
-  image_data : ImageData,
+  image_data : &TImageData,
   dx : Int,
   dy : Int,
   dirty_x : Int,

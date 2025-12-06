@@ -32,7 +32,7 @@ pub trait THTMLFormElement: TJsValue + THTMLElement {
   elements(self : Self) -> JsValue = _
   length(self : Self) -> UInt = _
   submit(self : Self) -> Unit = _
-  request_submit(self : Self, submitter? : HTMLElement) -> Unit = _
+  request_submit(self : Self, submitter? : &THTMLElement) -> Unit = _
   reset(self : Self) -> Unit = _
   check_validity(self : Self) -> Bool = _
   report_validity(self : Self) -> Bool = _
@@ -71,7 +71,10 @@ fn html_form_element_request_submit_ffi(
 ) -> Unit = "webapi_HTMLFormElement" "requestSubmit"
 
 ///|
-impl THTMLFormElement with request_submit(self : Self, submitter? : HTMLElement) -> Unit {
+impl THTMLFormElement with request_submit(
+  self : Self,
+  submitter? : &THTMLElement,
+) -> Unit {
   let submitter_js = opt_to_js(submitter)
   html_form_element_request_submit_ffi(TJsValue::to_js(self), submitter_js)
 }

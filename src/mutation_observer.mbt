@@ -8,7 +8,7 @@ pub type MutationObserver
 
 ///|
 pub trait TMutationObserver: TJsValue {
-  observe(self : Self, target : Node, options? : MutationObserverInit) -> Unit = _
+  observe(self : Self, target : &TNode, options? : MutationObserverInit) -> Unit = _
   disconnect(self : Self) -> Unit = _
   take_records(self : Self) -> Array[MutationRecord] = _
 }
@@ -37,7 +37,7 @@ fn mutation_observer_observe_ffi(
 ///|
 impl TMutationObserver with observe(
   self : Self,
-  target : Node,
+  target : &TNode,
   options? : MutationObserverInit = MutationObserverInit::empty(),
 ) -> Unit {
   mutation_observer_observe_ffi(

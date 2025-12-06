@@ -33,7 +33,7 @@ pub trait TMouseEvent: TJsValue + TUIEvent {
     type_arg : String,
     bubbles_arg? : Bool,
     cancelable_arg? : Bool,
-    view_arg? : Window,
+    view_arg? : &TWindow,
     detail_arg? : Int,
     screen_x_arg? : Int,
     screen_y_arg? : Int,
@@ -44,7 +44,7 @@ pub trait TMouseEvent: TJsValue + TUIEvent {
     shift_key_arg? : Bool,
     meta_key_arg? : Bool,
     button_arg? : Int,
-    related_target_arg? : EventTarget,
+    related_target_arg? : &TEventTarget,
   ) -> Unit = _
 }
 
@@ -122,7 +122,7 @@ impl TMouseEvent with init_mouse_event(
   type_arg : String,
   bubbles_arg? : Bool,
   cancelable_arg? : Bool,
-  view_arg? : Window,
+  view_arg? : &TWindow,
   detail_arg? : Int,
   screen_x_arg? : Int,
   screen_y_arg? : Int,
@@ -133,7 +133,7 @@ impl TMouseEvent with init_mouse_event(
   shift_key_arg? : Bool,
   meta_key_arg? : Bool,
   button_arg? : Int,
-  related_target_arg? : EventTarget,
+  related_target_arg? : &TEventTarget,
 ) -> Unit {
   let bubbles_arg_js = opt_to_js(bubbles_arg)
   let cancelable_arg_js = opt_to_js(cancelable_arg)

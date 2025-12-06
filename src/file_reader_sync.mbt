@@ -8,10 +8,10 @@ pub type FileReaderSync
 
 ///|
 pub trait TFileReaderSync: TJsValue {
-  read_as_array_buffer(self : Self, blob : Blob) -> ArrayBuffer = _
-  read_as_binary_string(self : Self, blob : Blob) -> String = _
-  read_as_text(self : Self, blob : Blob, encoding? : String) -> String = _
-  read_as_data_url(self : Self, blob : Blob) -> String = _
+  read_as_array_buffer(self : Self, blob : &TBlob) -> ArrayBuffer = _
+  read_as_binary_string(self : Self, blob : &TBlob) -> String = _
+  read_as_text(self : Self, blob : &TBlob, encoding? : String) -> String = _
+  read_as_data_url(self : Self, blob : &TBlob) -> String = _
 }
 
 ///|
@@ -35,7 +35,7 @@ fn file_reader_sync_read_as_array_buffer_ffi(
 ) -> JsValue = "webapi_FileReaderSync" "readAsArrayBuffer"
 
 ///|
-impl TFileReaderSync with read_as_array_buffer(self : Self, blob : Blob) -> ArrayBuffer {
+impl TFileReaderSync with read_as_array_buffer(self : Self, blob : &TBlob) -> ArrayBuffer {
   file_reader_sync_read_as_array_buffer_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(blob),
@@ -49,7 +49,7 @@ fn file_reader_sync_read_as_binary_string_ffi(
 ) -> JsValue = "webapi_FileReaderSync" "readAsBinaryString"
 
 ///|
-impl TFileReaderSync with read_as_binary_string(self : Self, blob : Blob) -> String {
+impl TFileReaderSync with read_as_binary_string(self : Self, blob : &TBlob) -> String {
   file_reader_sync_read_as_binary_string_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(blob),
@@ -66,7 +66,7 @@ fn file_reader_sync_read_as_text_ffi(
 ///|
 impl TFileReaderSync with read_as_text(
   self : Self,
-  blob : Blob,
+  blob : &TBlob,
   encoding? : String,
 ) -> String {
   let encoding_js = opt_to_js(encoding)
@@ -84,7 +84,7 @@ fn file_reader_sync_read_as_data_url_ffi(
 ) -> JsValue = "webapi_FileReaderSync" "readAsDataURL"
 
 ///|
-impl TFileReaderSync with read_as_data_url(self : Self, blob : Blob) -> String {
+impl TFileReaderSync with read_as_data_url(self : Self, blob : &TBlob) -> String {
   file_reader_sync_read_as_data_url_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(blob),

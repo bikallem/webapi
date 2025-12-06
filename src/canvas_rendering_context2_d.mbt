@@ -140,8 +140,8 @@ pub trait TCanvasRenderingContext2D: TJsValue {
   ) -> Bool = _
   is_point_in_stroke(self : Self, x : Double, y : Double) -> Bool = _
   is_point_in_stroke2(self : Self, path : JsValue, x : Double, y : Double) -> Bool = _
-  draw_focus_if_needed(self : Self, element : Element) -> Unit = _
-  draw_focus_if_needed2(self : Self, path : JsValue, element : Element) -> Unit = _
+  draw_focus_if_needed(self : Self, element : &TElement) -> Unit = _
+  draw_focus_if_needed2(self : Self, path : JsValue, element : &TElement) -> Unit = _
   fill_text(
     self : Self,
     text : String,
@@ -184,7 +184,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     sh : Int,
     settings? : ImageDataSettings,
   ) -> ImageData = _
-  create_image_data2(self : Self, image_data : ImageData) -> ImageData = _
+  create_image_data2(self : Self, image_data : &TImageData) -> ImageData = _
   get_image_data(
     self : Self,
     sx : Int,
@@ -193,10 +193,10 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     sh : Int,
     settings? : ImageDataSettings,
   ) -> ImageData = _
-  put_image_data(self : Self, image_data : ImageData, dx : Int, dy : Int) -> Unit = _
+  put_image_data(self : Self, image_data : &TImageData, dx : Int, dy : Int) -> Unit = _
   put_image_data2(
     self : Self,
-    image_data : ImageData,
+    image_data : &TImageData,
     dx : Int,
     dy : Int,
     dirty_x : Int,
@@ -842,7 +842,7 @@ fn canvas_rendering_context2_d_draw_focus_if_needed_ffi(
 ///|
 impl TCanvasRenderingContext2D with draw_focus_if_needed(
   self : Self,
-  element : Element,
+  element : &TElement,
 ) -> Unit {
   canvas_rendering_context2_d_draw_focus_if_needed_ffi(
     TJsValue::to_js(self),
@@ -861,7 +861,7 @@ fn canvas_rendering_context2_d_draw_focus_if_needed_ffi2(
 impl TCanvasRenderingContext2D with draw_focus_if_needed2(
   self : Self,
   path : JsValue,
-  element : Element,
+  element : &TElement,
 ) -> Unit {
   canvas_rendering_context2_d_draw_focus_if_needed_ffi2(
     TJsValue::to_js(self),
@@ -1063,7 +1063,7 @@ fn canvas_rendering_context2_d_create_image_data_ffi2(
 ///|
 impl TCanvasRenderingContext2D with create_image_data2(
   self : Self,
-  image_data : ImageData,
+  image_data : &TImageData,
 ) -> ImageData {
   canvas_rendering_context2_d_create_image_data_ffi2(
     TJsValue::to_js(self),
@@ -1111,7 +1111,7 @@ fn canvas_rendering_context2_d_put_image_data_ffi(
 ///|
 impl TCanvasRenderingContext2D with put_image_data(
   self : Self,
-  image_data : ImageData,
+  image_data : &TImageData,
   dx : Int,
   dy : Int,
 ) -> Unit {
@@ -1138,7 +1138,7 @@ fn canvas_rendering_context2_d_put_image_data_ffi2(
 ///|
 impl TCanvasRenderingContext2D with put_image_data2(
   self : Self,
-  image_data : ImageData,
+  image_data : &TImageData,
   dx : Int,
   dy : Int,
   dirty_x : Int,

@@ -20,7 +20,7 @@ pub trait TEventTarget: TJsValue {
     callback : EventListener,
     options? : &TRemoveEventListenerOptionsArg,
   ) -> Unit = _
-  dispatch_event(self : Self, event : Event) -> Bool = _
+  dispatch_event(self : Self, event : &TEvent) -> Bool = _
 }
 
 ///|
@@ -118,6 +118,6 @@ impl TEventTarget with remove_event_listener(
 fn event_target_dispatch_event_ffi(obj : JsValue, event : JsValue) -> JsValue = "webapi_EventTarget" "dispatchEvent"
 
 ///|
-impl TEventTarget with dispatch_event(self : Self, event : Event) -> Bool {
+impl TEventTarget with dispatch_event(self : Self, event : &TEvent) -> Bool {
   event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event)).unsafe_cast()
 }

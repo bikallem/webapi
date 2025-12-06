@@ -257,7 +257,7 @@ pub trait TWindow: TJsValue + TEventTarget {
   scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
   scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
-  get_computed_style(self : Self, elt : Element, pseudo_elt? : JsValue) -> JsValue = _
+  get_computed_style(self : Self, elt : &TElement, pseudo_elt? : JsValue) -> JsValue = _
   close(self : Self) -> Unit = _
   stop(self : Self) -> Unit = _
   focus(self : Self) -> Unit = _
@@ -476,7 +476,7 @@ fn window_get_computed_style_ffi(
 ///|
 impl TWindow with get_computed_style(
   self : Self,
-  elt : Element,
+  elt : &TElement,
   pseudo_elt? : JsValue,
 ) -> JsValue {
   let pseudo_elt_js = opt_to_js(pseudo_elt)

@@ -16,7 +16,7 @@ pub trait TDocumentFragment: TJsValue + TNode {
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
   replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
-  move_before(self : Self, node : Node, child : Node) -> Unit = _
+  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
 }
@@ -98,7 +98,11 @@ fn document_fragment_move_before_ffi(
 ) -> Unit = "webapi_DocumentFragment" "moveBefore"
 
 ///|
-impl TDocumentFragment with move_before(self : Self, node : Node, child : Node) -> Unit {
+impl TDocumentFragment with move_before(
+  self : Self,
+  node : &TNode,
+  child : &TNode,
+) -> Unit {
   document_fragment_move_before_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),

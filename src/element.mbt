@@ -78,9 +78,9 @@ pub trait TElement: TJsValue + TNode {
   has_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Bool = _
   get_attribute_node(self : Self, qualified_name : String) -> Attr? = _
   get_attribute_node_ns(self : Self, namespace_ : String, local_name : String) -> Attr? = _
-  set_attribute_node(self : Self, attr : Attr) -> Attr? = _
-  set_attribute_node_ns(self : Self, attr : Attr) -> Attr? = _
-  remove_attribute_node(self : Self, attr : Attr) -> Attr = _
+  set_attribute_node(self : Self, attr : &TAttr) -> Attr? = _
+  set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? = _
+  remove_attribute_node(self : Self, attr : &TAttr) -> Attr = _
   attach_shadow(self : Self, init_ : ShadowRootInit) -> ShadowRoot = _
   closest(self : Self, selectors : String) -> Element? = _
   matches(self : Self, selectors : String) -> Bool = _
@@ -92,7 +92,7 @@ pub trait TElement: TJsValue + TNode {
     local_name : String,
   ) -> HTMLCollection = _
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
-  insert_adjacent_element(self : Self, where_ : String, element : Element) -> Element? = _
+  insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> Element? = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
   set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
@@ -123,7 +123,7 @@ pub trait TElement: TJsValue + TNode {
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
   replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
-  move_before(self : Self, node : Node, child : Node) -> Unit = _
+  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   before(self : Self, nodes : &TBeforeNodesArg) -> Unit = _
@@ -518,7 +518,7 @@ impl TElement with get_attribute_node_ns(
 fn element_set_attribute_node_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_Element" "setAttributeNode"
 
 ///|
-impl TElement with set_attribute_node(self : Self, attr : Attr) -> Attr? {
+impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr? {
   element_set_attribute_node_ffi(TJsValue::to_js(self), TJsValue::to_js(attr)).as_option()
 }
 
@@ -526,7 +526,7 @@ impl TElement with set_attribute_node(self : Self, attr : Attr) -> Attr? {
 fn element_set_attribute_node_ns_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_Element" "setAttributeNodeNS"
 
 ///|
-impl TElement with set_attribute_node_ns(self : Self, attr : Attr) -> Attr? {
+impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? {
   element_set_attribute_node_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -537,7 +537,7 @@ impl TElement with set_attribute_node_ns(self : Self, attr : Attr) -> Attr? {
 fn element_remove_attribute_node_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_Element" "removeAttributeNode"
 
 ///|
-impl TElement with remove_attribute_node(self : Self, attr : Attr) -> Attr {
+impl TElement with remove_attribute_node(self : Self, attr : &TAttr) -> Attr {
   element_remove_attribute_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -644,7 +644,7 @@ fn element_insert_adjacent_element_ffi(
 impl TElement with insert_adjacent_element(
   self : Self,
   where_ : String,
-  element : Element,
+  element : &TElement,
 ) -> Element? {
   element_insert_adjacent_element_ffi(
     TJsValue::to_js(self),
@@ -851,7 +851,7 @@ fn element_move_before_ffi(
 ) -> Unit = "webapi_Element" "moveBefore"
 
 ///|
-impl TElement with move_before(self : Self, node : Node, child : Node) -> Unit {
+impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
   element_move_before_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
