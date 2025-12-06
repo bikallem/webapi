@@ -23,7 +23,7 @@ fn main {
   count_display
   ..set_attribute("id", "count-display")
   ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
-  .set_text_content("0")
+  ..set_text_content("0")
 
   // Helper to update display
   let update_display = fn() {
@@ -39,7 +39,7 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  .add_event_listener(
+  ..add_event_listener(
     "click",
     event_listener(fn(_event) {
       count = count - 1
@@ -56,9 +56,9 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  .add_event_listener(
+  ..add_event_listener(
     "click",
-    EventListener::new(fn(_event) {
+    event_listener(fn(_event) {
       count = count + 1
       update_display()
     }),
@@ -79,7 +79,6 @@ fn main {
   )
 
   // Build the DOM tree
-
   for
     child in (
       [heading, count_display, decrement_btn, increment_btn, reset_btn] :

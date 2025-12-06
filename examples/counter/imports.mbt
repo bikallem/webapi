@@ -1,7 +1,6 @@
 ///|
 using @webapi {
   document,
-  type EventListener,
   type HTMLButtonElement,
   type HTMLDivElement,
   type HTMLHeadElement,
