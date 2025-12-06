@@ -55,11 +55,12 @@ fn main {
 
   // Create reset button
   let reset_btn = document.create_element("button")
-  reset_btn.set_text_content("Reset")
-  reset_btn.set_attribute(
+  reset_btn
+  ..set_text_content("Reset")
+  ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  reset_btn.add_event_listener(
+  ..add_event_listener(
     "click",
     event_listener(fn(_event) {
       count = 0
