@@ -457,11 +457,7 @@ pub fn ${iface.name}::${methodName}(${wrapperParamsStr}) -> ${returnType} {${bin
  * @param idl The parsed IDL (needed to check for fully abstract types in unions)
  * @param isFullyAbstract If true, skip static methods (no external type exists)
  */
-export function emitMethods(
-  iface: ParsedInterface,
-  idl: ParsedIdl,
-  isFullyAbstract: boolean = false,
-): string {
+export function emitMethods(iface: ParsedInterface, idl: ParsedIdl): string {
   const parts: string[] = [];
 
   // Track method name occurrences to handle overloads
@@ -492,10 +488,8 @@ export function emitMethods(
     }
 
     if (method.static) {
-      // Skip static methods for fully abstract types (no external type to attach to)
-      if (!isFullyAbstract) {
-        parts.push(emitStaticMethod(iface, method, suffix));
-      }
+      // Emit static method
+      parts.push(emitStaticMethod(iface, method, suffix));
     } else {
       // Instance methods: FFI + impl (default implementations for trait)
       parts.push(emitMethodFfi(iface, method, suffix));

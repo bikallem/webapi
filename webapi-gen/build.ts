@@ -16,11 +16,7 @@ import { minify } from "terser";
 
 import { parseIdl, mergeIdl, applyMixins } from "./parser.js";
 import type { ParsedIdl } from "./parser.js";
-import {
-  registerDictionaries,
-  registerEnums,
-  registerAbstractInterface,
-} from "./mapper.js";
+import { registerDictionaries, registerEnums } from "./mapper.js";
 import {
   emitInterface,
   getInterfaceFilename,
@@ -59,13 +55,6 @@ const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
  *
  * Types with [HTMLConstructor] (like HTMLElement) get external type but no new().
  */
-const ABSTRACT_BASE_INTERFACES = new Set([
-  // Core DOM hierarchy (never used directly, always via subtypes)
-  "Node",
-  "Element",
-  "CharacterData",
-  // Note: HTMLElement has [HTMLConstructor] so it gets external type but no new()
-]);
 
 /**
  * Core DOM specs to include
@@ -580,21 +569,6 @@ async function build(): Promise<void> {
     // Filter to core interfaces (after mixins are applied)
     console.log("Filtering to core interfaces...");
     mergedIdl = filterToCoreInterfaces(mergedIdl);
-
-    // Register abstract base interfaces from our explicit list
-    // These use trait objects (&TNode, &TElement) instead of external types
-    // This must happen BEFORE type mapping so abstract types use trait objects
-    console.log("Registering abstract base interfaces...");
-    let abstractCount = 0;
-    for (const name of ABSTRACT_BASE_INTERFACES) {
-      if (mergedIdl.interfaces.has(name)) {
-        registerAbstractInterface(name);
-        abstractCount++;
-      }
-    }
-    console.log(
-      `  - ${abstractCount} abstract base interfaces (use trait objects)`,
-    );
 
     // Report what we're generating
     console.log(`\nGenerating bindings for:`);

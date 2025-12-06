@@ -18,7 +18,7 @@ import {
 import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
-import { mapIdlType, isAbstractInterface } from "../mapper.js";
+import { mapIdlType } from "../mapper.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 
 /**
@@ -35,14 +35,6 @@ export function hasRealConstructor(iface: ParsedInterface): boolean {
  */
 export function hasAnyConstructor(iface: ParsedInterface): boolean {
   return iface.constructors.length > 0;
-}
-
-/**
- * Check if an interface is fully abstract (registered as abstract base class)
- * These use trait objects (&TNode, &TElement) instead of external types
- */
-export function isFullyAbstract(iface: ParsedInterface): boolean {
-  return isAbstractInterface(iface.name);
 }
 
 /**
@@ -231,7 +223,6 @@ function emitCallbackInterfaceConstructor(
 export function emitInterface(iface: ParsedInterface, idl: ParsedIdl): string {
   const parts: string[] = [];
   const isConcrete = hasRealConstructor(iface);
-  const fullyAbstract = isFullyAbstract(iface);
 
   // Header comment
   parts.push(`// Auto-generated MoonBit bindings for ${iface.name}`);
@@ -250,7 +241,7 @@ export function emitInterface(iface: ParsedInterface, idl: ParsedIdl): string {
 
   // into() method for types with subtypes (enables downcasting)
   const hasSubtypesFlag = hasSubtypes(iface, idl.interfaces);
-  if (fullyAbstract || hasSubtypesFlag) {
+  if (hasSubtypesFlag) {
     // For types with subtypes (including abstract types), generate into() on external type
     parts.push(emitConcreteTypeInto(iface));
   }
@@ -282,16 +273,19 @@ export function emitInterface(iface: ParsedInterface, idl: ParsedIdl): string {
   // For fully abstract types: generates default implementations (impl TNode with method(...))
   // For concrete types: generates impl Type with method(...) for the specific type
   // Static methods skipped for fully abstract (no external type)
-  const methodsFfi = emitMethods(iface, idl, fullyAbstract);
+  const methodsFfi = emitMethods(iface, idl);
   if (methodsFfi) {
     parts.push(methodsFfi);
   }
 
   // FFI functions for properties
-  const propertiesFfi = emitProperties(iface, fullyAbstract);
+  const propertiesFfi = emitProperties(iface);
   if (propertiesFfi) {
     parts.push(propertiesFfi);
   }
+
+  // Note: we can remove the check for fullyAbstract here because emitMethods and emitProperties
+  // will now naturally handle all static members on the generated external types.
 
   return parts.join("\n\n");
 }

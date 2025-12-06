@@ -252,17 +252,11 @@ impl ${traitName} with ${methodName}(self : Self, value : ${sigParamType}) -> Un
  * @param iface The interface to emit properties for
  * @param isFullyAbstract If true, skip static properties (no external type exists)
  */
-export function emitProperties(
-  iface: ParsedInterface,
-  isFullyAbstract: boolean = false,
-): string {
+export function emitProperties(iface: ParsedInterface): string {
   const parts: string[] = [];
 
   for (const prop of iface.properties) {
     if (prop.static) {
-      // Skip static properties for fully abstract types (no external type to attach to)
-      if (isFullyAbstract) continue;
-
       // Static properties as type methods with direct FFI
       const methodName = escapeKeyword(toSnakeCase(prop.name));
       const mapped = mapPropertyType(prop);
