@@ -25,7 +25,7 @@ fn main {
   ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
   ..set_text_content("0")
 
-  // Helper to update display
+  // Update display
   let update_display = fn() {
     count_display.set_text_content(count.to_string())
   }
@@ -48,9 +48,7 @@ fn main {
   )
 
   // Create increment button
-  let increment_btn : HTMLButtonElement = document
-    .create_element("button")
-    .into()
+  let increment_btn = document.create_element("button")
   increment_btn
   ..set_text_content("+")
   ..set_attribute(
@@ -65,7 +63,7 @@ fn main {
   )
 
   // Create reset button
-  let reset_btn : HTMLButtonElement = document.create_element("button").into()
+  let reset_btn = document.create_element("button")
   reset_btn.set_text_content("Reset")
   reset_btn.set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
