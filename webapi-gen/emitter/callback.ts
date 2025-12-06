@@ -10,8 +10,8 @@ import {
   toFfiModuleName,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "../gen-utils.js";
-import { mapIdlType, formatReturnType } from "../mapping.js";
+} from "../mapper.js";
+import { mapIdlType, formatReturnType } from "../mapper.js";
 
 /**
  * Generate a closure type string from parameters and return type

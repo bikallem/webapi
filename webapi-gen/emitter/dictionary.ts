@@ -11,8 +11,8 @@ import {
   toFfiModuleName,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "../gen-utils.js";
-import { mapIdlType, getDefaultValueExpr } from "../mapping.js";
+} from "../mapper.js";
+import { mapIdlType, getDefaultValueExpr } from "../mapper.js";
 
 /**
  * Emit external type declaration for dictionary

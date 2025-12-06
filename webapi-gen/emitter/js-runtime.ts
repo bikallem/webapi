@@ -13,7 +13,7 @@ import type {
   ParsedMethod,
   ParsedProperty,
 } from "../parser.js";
-import { toFfiModuleName } from "../gen-utils.js";
+import { toFfiModuleName } from "../mapper.js";
 
 /**
  * JavaScript reserved keywords that need escaping when used as parameter names

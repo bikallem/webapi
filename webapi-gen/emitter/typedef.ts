@@ -16,8 +16,8 @@ import {
   toSnakeCase,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "../gen-utils.js";
-import { isKnownTypedef } from "../mapping.js";
+} from "../mapper.js";
+import { isKnownTypedef } from "../mapper.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 
 /**

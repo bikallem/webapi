@@ -14,11 +14,11 @@ import {
   toTraitName,
   emitExternalType as emitExternalTypeCommon,
   emitTJsValueImpl as emitTJsValueImplCommon,
-} from "../gen-utils.js";
+} from "../mapper.js";
 import { emitMethods, emitTraitMethods } from "./method.js";
 import { emitProperties, emitTraitProperties } from "./property.js";
 import { emitConstructors } from "./constructor.js";
-import { mapIdlType, isAbstractInterface } from "../mapping.js";
+import { mapIdlType, isAbstractInterface } from "../mapper.js";
 import { buildClosureType, emitCallbackConstructor } from "./callback.js";
 
 /**

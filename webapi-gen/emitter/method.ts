@@ -17,7 +17,7 @@ import {
   toFfiModuleName,
   toTraitName,
   generateMethodFfiName,
-} from "../gen-utils.js";
+} from "../mapper.js";
 import {
   mapIdlType,
   formatReturnType,
@@ -26,7 +26,7 @@ import {
   getUnionMemberMoonbitType,
   getFilteredUnionMembers,
   getCollapsedUnionType,
-} from "../mapping.js";
+} from "../mapper.js";
 
 /**
  * Global tracker for emitted union arg traits to prevent duplicates

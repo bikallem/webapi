@@ -7,8 +7,8 @@ import {
   generatePropertyGetterFfiName,
   generatePropertySetterFfiName,
   isFfiSafeType,
-} from "../gen-utils.js";
-import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapping.js";
+} from "../mapper.js";
+import { mapIdlType, isKnownEnum, isKnownUnionType } from "../mapper.js";
 
 /**
  * Get the context name for a property type if it's a union

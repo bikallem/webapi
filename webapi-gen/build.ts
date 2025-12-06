@@ -20,7 +20,7 @@ import {
   registerDictionaries,
   registerEnums,
   registerAbstractInterface,
-} from "./mapping.js";
+} from "./mapper.js";
 import {
   emitInterface,
   getInterfaceFilename,
