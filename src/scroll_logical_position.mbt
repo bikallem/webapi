@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ScrollLogicalPosition {
+pub(all) enum ScrollLogicalPosition {
   Start
   Center
   End

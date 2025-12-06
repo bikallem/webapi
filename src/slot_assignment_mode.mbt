@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum SlotAssignmentMode {
+pub(all) enum SlotAssignmentMode {
   Manual
   Named
 } derive(Eq)

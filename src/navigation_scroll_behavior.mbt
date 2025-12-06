@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum NavigationScrollBehavior {
+pub(all) enum NavigationScrollBehavior {
   AfterTransition
   Manual
 } derive(Eq)

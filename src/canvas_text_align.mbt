@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasTextAlign {
+pub(all) enum CanvasTextAlign {
   Start
   End
   Left

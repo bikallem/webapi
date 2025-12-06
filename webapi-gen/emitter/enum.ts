@@ -48,7 +48,7 @@ export function emitEnum(enumDef: ParsedEnum): string {
 
   // Emit enum type
   lines.push("///|");
-  lines.push(`pub enum ${typeName} {`);
+  lines.push(`pub(all) enum ${typeName} {`);
   for (const value of enumDef.values) {
     const variantName = toVariantName(value);
     lines.push(`  ${variantName}`);

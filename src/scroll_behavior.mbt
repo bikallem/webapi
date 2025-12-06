@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ScrollBehavior {
+pub(all) enum ScrollBehavior {
   Auto
   Instant
   Smooth

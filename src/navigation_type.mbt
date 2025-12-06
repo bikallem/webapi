@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum NavigationType {
+pub(all) enum NavigationType {
   Push
   Replace
   Reload

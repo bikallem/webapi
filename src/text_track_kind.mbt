@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum TextTrackKind {
+pub(all) enum TextTrackKind {
   Subtitles
   Captions
   Descriptions

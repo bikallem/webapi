@@ -169,7 +169,7 @@ pub impl TJsValue for CDATASection
 pub impl TNode for CDATASection
 pub impl TText for CDATASection
 
-pub enum CSSBoxType {
+pub(all) enum CSSBoxType {
   Margin
   Border
   Padding
@@ -186,7 +186,7 @@ pub fn CSSStyleSheetInit::empty() -> Self
 pub fn CSSStyleSheetInit::new(base_url? : String, media? : JsValue, disabled? : Bool) -> Self
 pub impl TJsValue for CSSStyleSheetInit
 
-pub enum CanPlayTypeResult {
+pub(all) enum CanPlayTypeResult {
   Empty
   Maybe
   Probably
@@ -200,7 +200,7 @@ pub impl Show for CanPlayTypeResult
 pub type Canvas
 pub fn[T : TCanvas] Canvas::into(Self) -> T
 
-pub enum CanvasColorType {
+pub(all) enum CanvasColorType {
   Unorm8
   Float16
 }
@@ -209,7 +209,7 @@ pub impl TJsValue for CanvasColorType
 pub impl Eq for CanvasColorType
 pub impl Show for CanvasColorType
 
-pub enum CanvasDirection {
+pub(all) enum CanvasDirection {
   Ltr
   Rtl
   Inherit
@@ -219,7 +219,7 @@ pub impl TJsValue for CanvasDirection
 pub impl Eq for CanvasDirection
 pub impl Show for CanvasDirection
 
-pub enum CanvasFillRule {
+pub(all) enum CanvasFillRule {
   Nonzero
   Evenodd
 }
@@ -228,7 +228,7 @@ pub impl TJsValue for CanvasFillRule
 pub impl Eq for CanvasFillRule
 pub impl Show for CanvasFillRule
 
-pub enum CanvasFontKerning {
+pub(all) enum CanvasFontKerning {
   Auto
   Normal
   None
@@ -238,7 +238,7 @@ pub impl TJsValue for CanvasFontKerning
 pub impl Eq for CanvasFontKerning
 pub impl Show for CanvasFontKerning
 
-pub enum CanvasFontStretch {
+pub(all) enum CanvasFontStretch {
   UltraCondensed
   ExtraCondensed
   Condensed
@@ -254,7 +254,7 @@ pub impl TJsValue for CanvasFontStretch
 pub impl Eq for CanvasFontStretch
 pub impl Show for CanvasFontStretch
 
-pub enum CanvasFontVariantCaps {
+pub(all) enum CanvasFontVariantCaps {
   Normal
   SmallCaps
   AllSmallCaps
@@ -275,7 +275,7 @@ pub impl TFillStyle for CanvasGradient
 pub impl TJsValue for CanvasGradient
 pub impl TStrokeStyle for CanvasGradient
 
-pub enum CanvasLineCap {
+pub(all) enum CanvasLineCap {
   Butt
   Round
   Square
@@ -285,7 +285,7 @@ pub impl TJsValue for CanvasLineCap
 pub impl Eq for CanvasLineCap
 pub impl Show for CanvasLineCap
 
-pub enum CanvasLineJoin {
+pub(all) enum CanvasLineJoin {
   Round
   Bevel
   Miter
@@ -314,7 +314,7 @@ pub fn CanvasRenderingContext2DSettings::empty() -> Self
 pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : PredefinedColorSpace, color_type? : CanvasColorType, will_read_frequently? : Bool) -> Self
 pub impl TJsValue for CanvasRenderingContext2DSettings
 
-pub enum CanvasTextAlign {
+pub(all) enum CanvasTextAlign {
   Start
   End
   Left
@@ -326,7 +326,7 @@ pub impl TJsValue for CanvasTextAlign
 pub impl Eq for CanvasTextAlign
 pub impl Show for CanvasTextAlign
 
-pub enum CanvasTextBaseline {
+pub(all) enum CanvasTextBaseline {
   Top
   Hanging
   Middle
@@ -339,7 +339,7 @@ pub impl TJsValue for CanvasTextBaseline
 pub impl Eq for CanvasTextBaseline
 pub impl Show for CanvasTextBaseline
 
-pub enum CanvasTextRendering {
+pub(all) enum CanvasTextRendering {
   Auto
   Optimizespeed
   Optimizelegibility
@@ -376,7 +376,7 @@ pub fn CloseWatcherOptions::empty() -> Self
 pub fn CloseWatcherOptions::new(signal? : AbortSignal) -> Self
 pub impl TJsValue for CloseWatcherOptions
 
-pub enum ColorSpaceConversion {
+pub(all) enum ColorSpaceConversion {
   None
   Default
 }
@@ -466,7 +466,7 @@ pub fn DOMMatrixReadOnly::null() -> Self
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
 pub impl TJsValue for DOMMatrixReadOnly
 
-pub enum DOMParserSupportedType {
+pub(all) enum DOMParserSupportedType {
   TextHtml
   TextXml
   ApplicationXml
@@ -562,7 +562,7 @@ pub impl TEventTarget for DocumentFragment
 pub impl TJsValue for DocumentFragment
 pub impl TNode for DocumentFragment
 
-pub enum DocumentReadyState {
+pub(all) enum DocumentReadyState {
   Loading
   Interactive
   Complete
@@ -579,7 +579,7 @@ pub impl TEventTarget for DocumentType
 pub impl TJsValue for DocumentType
 pub impl TNode for DocumentType
 
-pub enum DocumentVisibilityState {
+pub(all) enum DocumentVisibilityState {
   Visible
   Hidden
 }
@@ -617,7 +617,7 @@ pub fn ElementDefinitionOptions::empty() -> Self
 pub fn ElementDefinitionOptions::new(extends? : String) -> Self
 pub impl TJsValue for ElementDefinitionOptions
 
-pub enum EndingType {
+pub(all) enum EndingType {
   Transparent
   Native
 }
@@ -1006,7 +1006,7 @@ pub impl TImageBitmapSource for ImageData
 pub impl TImageData for ImageData
 pub impl TJsValue for ImageData
 
-pub enum ImageDataPixelFormat {
+pub(all) enum ImageDataPixelFormat {
   RgbaUnorm8
   RgbaFloat16
 }
@@ -1027,7 +1027,7 @@ pub fn ImageEncodeOptions::empty() -> Self
 pub fn ImageEncodeOptions::new(type_? : String, quality? : Double) -> Self
 pub impl TJsValue for ImageEncodeOptions
 
-pub enum ImageOrientation {
+pub(all) enum ImageOrientation {
   FromImage
   Flipy
 }
@@ -1036,7 +1036,7 @@ pub impl TJsValue for ImageOrientation
 pub impl Eq for ImageOrientation
 pub impl Show for ImageOrientation
 
-pub enum ImageSmoothingQuality {
+pub(all) enum ImageSmoothingQuality {
   Low
   Medium
   High
@@ -1180,7 +1180,7 @@ pub type NamedNodeMap
 pub impl TJsValue for NamedNodeMap
 pub impl TNamedNodeMap for NamedNodeMap
 
-pub enum NavigationFocusReset {
+pub(all) enum NavigationFocusReset {
   AfterTransition
   Manual
 }
@@ -1189,7 +1189,7 @@ pub impl TJsValue for NavigationFocusReset
 pub impl Eq for NavigationFocusReset
 pub impl Show for NavigationFocusReset
 
-pub enum NavigationHistoryBehavior {
+pub(all) enum NavigationHistoryBehavior {
   Auto
   Push
   Replace
@@ -1199,7 +1199,7 @@ pub impl TJsValue for NavigationHistoryBehavior
 pub impl Eq for NavigationHistoryBehavior
 pub impl Show for NavigationHistoryBehavior
 
-pub enum NavigationScrollBehavior {
+pub(all) enum NavigationScrollBehavior {
   AfterTransition
   Manual
 }
@@ -1208,7 +1208,7 @@ pub impl TJsValue for NavigationScrollBehavior
 pub impl Eq for NavigationScrollBehavior
 pub impl Show for NavigationScrollBehavior
 
-pub enum NavigationType {
+pub(all) enum NavigationType {
   Push
   Replace
   Reload
@@ -1258,7 +1258,7 @@ pub type OffscreenCanvasRenderingContext2D
 pub impl TJsValue for OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
-pub enum OffscreenRenderingContextId {
+pub(all) enum OffscreenRenderingContextId {
   V2d
   Bitmaprenderer
   Webgl
@@ -1286,7 +1286,7 @@ pub fn PopStateEventInit::empty() -> Self
 pub fn PopStateEventInit::new(state? : JsValue, has_ua_visual_transition? : Bool) -> Self
 pub impl TJsValue for PopStateEventInit
 
-pub enum PredefinedColorSpace {
+pub(all) enum PredefinedColorSpace {
   Srgb
   DisplayP3
 }
@@ -1295,7 +1295,7 @@ pub impl TJsValue for PredefinedColorSpace
 pub impl Eq for PredefinedColorSpace
 pub impl Show for PredefinedColorSpace
 
-pub enum PremultiplyAlpha {
+pub(all) enum PremultiplyAlpha {
   None
   Premultiply
   Default
@@ -1326,7 +1326,7 @@ pub fn Range::null() -> Self
 pub impl TJsValue for Range
 pub impl TRange for Range
 
-pub enum ResizeQuality {
+pub(all) enum ResizeQuality {
   Pixelated
   Low
   Medium
@@ -1355,7 +1355,7 @@ pub impl TImageBitmapSource for SVGImageElement
 pub impl TJsValue for SVGImageElement
 pub impl TSVGImageElement for SVGImageElement
 
-pub enum ScrollBehavior {
+pub(all) enum ScrollBehavior {
   Auto
   Instant
   Smooth
@@ -1365,7 +1365,7 @@ pub impl TJsValue for ScrollBehavior
 pub impl Eq for ScrollBehavior
 pub impl Show for ScrollBehavior
 
-pub enum ScrollIntoViewContainer {
+pub(all) enum ScrollIntoViewContainer {
   All
   Nearest
 }
@@ -1381,7 +1381,7 @@ pub fn ScrollIntoViewOptions::new(block? : ScrollLogicalPosition, inline? : Scro
 pub impl TJsValue for ScrollIntoViewOptions
 pub impl TScrollIntoViewArgArg for ScrollIntoViewOptions
 
-pub enum ScrollLogicalPosition {
+pub(all) enum ScrollLogicalPosition {
   Start
   Center
   End
@@ -1398,7 +1398,7 @@ pub fn ScrollOptions::empty() -> Self
 pub fn ScrollOptions::new(behavior? : ScrollBehavior) -> Self
 pub impl TJsValue for ScrollOptions
 
-pub enum ScrollRestoration {
+pub(all) enum ScrollRestoration {
   Auto
   Manual
 }
@@ -1413,7 +1413,7 @@ pub fn ScrollToOptions::empty() -> Self
 pub fn ScrollToOptions::new(left? : Double, top? : Double) -> Self
 pub impl TJsValue for ScrollToOptions
 
-pub enum SelectionMode {
+pub(all) enum SelectionMode {
   Select
   Start
   End
@@ -1438,7 +1438,7 @@ pub fn ShadowRootInit::empty() -> Self
 pub fn ShadowRootInit::new(ShadowRootMode, delegates_focus? : Bool, slot_assignment? : SlotAssignmentMode, clonable? : Bool, serializable? : Bool, custom_element_registry? : JsValue) -> Self
 pub impl TJsValue for ShadowRootInit
 
-pub enum ShadowRootMode {
+pub(all) enum ShadowRootMode {
   Open
   Closed
 }
@@ -1453,7 +1453,7 @@ pub fn ShowPopoverOptions::empty() -> Self
 pub fn ShowPopoverOptions::new(source? : HTMLElement) -> Self
 pub impl TJsValue for ShowPopoverOptions
 
-pub enum SlotAssignmentMode {
+pub(all) enum SlotAssignmentMode {
   Manual
   Named
 }
@@ -1507,7 +1507,7 @@ pub impl TJsValue for Text
 pub impl TNode for Text
 pub impl TText for Text
 
-pub enum TextTrackKind {
+pub(all) enum TextTrackKind {
   Subtitles
   Captions
   Descriptions
@@ -1519,7 +1519,7 @@ pub impl TJsValue for TextTrackKind
 pub impl Eq for TextTrackKind
 pub impl Show for TextTrackKind
 
-pub enum TextTrackMode {
+pub(all) enum TextTrackMode {
   Disabled
   Hidden
   Showing
@@ -1619,7 +1619,7 @@ pub fn WorkerOptions::empty() -> Self
 pub fn WorkerOptions::new(name? : String, type_? : WorkerType, credentials? : JsValue) -> Self
 pub impl TJsValue for WorkerOptions
 
-pub enum WorkerType {
+pub(all) enum WorkerType {
   Classic
   Module
 }

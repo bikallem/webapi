@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum DocumentReadyState {
+pub(all) enum DocumentReadyState {
   Loading
   Interactive
   Complete

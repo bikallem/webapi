@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum NavigationHistoryBehavior {
+pub(all) enum NavigationHistoryBehavior {
   Auto
   Push
   Replace

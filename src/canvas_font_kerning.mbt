@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasFontKerning {
+pub(all) enum CanvasFontKerning {
   Auto
   Normal
   None

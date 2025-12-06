@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum PremultiplyAlpha {
+pub(all) enum PremultiplyAlpha {
   None
   Premultiply
   Default

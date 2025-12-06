@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum TextTrackMode {
+pub(all) enum TextTrackMode {
   Disabled
   Hidden
   Showing

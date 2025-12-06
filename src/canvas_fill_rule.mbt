@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasFillRule {
+pub(all) enum CanvasFillRule {
   Nonzero
   Evenodd
 } derive(Eq)

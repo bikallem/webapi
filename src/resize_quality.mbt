@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ResizeQuality {
+pub(all) enum ResizeQuality {
   Pixelated
   Low
   Medium

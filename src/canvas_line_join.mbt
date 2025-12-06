@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasLineJoin {
+pub(all) enum CanvasLineJoin {
   Round
   Bevel
   Miter

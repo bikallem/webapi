@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanPlayTypeResult {
+pub(all) enum CanPlayTypeResult {
   Empty
   Maybe
   Probably

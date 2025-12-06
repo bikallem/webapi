@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum EndingType {
+pub(all) enum EndingType {
   Transparent
   Native
 } derive(Eq)

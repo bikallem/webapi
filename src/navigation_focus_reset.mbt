@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum NavigationFocusReset {
+pub(all) enum NavigationFocusReset {
   AfterTransition
   Manual
 } derive(Eq)

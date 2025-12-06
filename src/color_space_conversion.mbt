@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ColorSpaceConversion {
+pub(all) enum ColorSpaceConversion {
   None
   Default
 } derive(Eq)

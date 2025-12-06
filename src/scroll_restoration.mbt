@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ScrollRestoration {
+pub(all) enum ScrollRestoration {
   Auto
   Manual
 } derive(Eq)

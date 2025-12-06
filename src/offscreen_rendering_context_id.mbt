@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum OffscreenRenderingContextId {
+pub(all) enum OffscreenRenderingContextId {
   V2d
   Bitmaprenderer
   Webgl

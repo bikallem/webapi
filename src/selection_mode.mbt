@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum SelectionMode {
+pub(all) enum SelectionMode {
   Select
   Start
   End

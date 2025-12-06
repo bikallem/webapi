@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CSSBoxType {
+pub(all) enum CSSBoxType {
   Margin
   Border
   Padding

@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasDirection {
+pub(all) enum CanvasDirection {
   Ltr
   Rtl
   Inherit

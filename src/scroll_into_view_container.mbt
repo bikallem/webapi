@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ScrollIntoViewContainer {
+pub(all) enum ScrollIntoViewContainer {
   All
   Nearest
 } derive(Eq)

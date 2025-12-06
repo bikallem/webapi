@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ImageDataPixelFormat {
+pub(all) enum ImageDataPixelFormat {
   RgbaUnorm8
   RgbaFloat16
 } derive(Eq)

@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasColorType {
+pub(all) enum CanvasColorType {
   Unorm8
   Float16
 } derive(Eq)

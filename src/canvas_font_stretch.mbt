@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasFontStretch {
+pub(all) enum CanvasFontStretch {
   UltraCondensed
   ExtraCondensed
   Condensed

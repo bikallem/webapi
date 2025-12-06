@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasTextBaseline {
+pub(all) enum CanvasTextBaseline {
   Top
   Hanging
   Middle

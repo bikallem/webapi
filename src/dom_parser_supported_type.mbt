@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum DOMParserSupportedType {
+pub(all) enum DOMParserSupportedType {
   TextHtml
   TextXml
   ApplicationXml

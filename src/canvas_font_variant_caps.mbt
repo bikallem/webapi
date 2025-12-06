@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasFontVariantCaps {
+pub(all) enum CanvasFontVariantCaps {
   Normal
   SmallCaps
   AllSmallCaps

@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum WorkerType {
+pub(all) enum WorkerType {
   Classic
   Module
 } derive(Eq)

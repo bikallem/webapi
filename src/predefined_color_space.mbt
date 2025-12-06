@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum PredefinedColorSpace {
+pub(all) enum PredefinedColorSpace {
   Srgb
   DisplayP3
 } derive(Eq)

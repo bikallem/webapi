@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum DocumentVisibilityState {
+pub(all) enum DocumentVisibilityState {
   Visible
   Hidden
 } derive(Eq)

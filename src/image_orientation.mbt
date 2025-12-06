@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ImageOrientation {
+pub(all) enum ImageOrientation {
   FromImage
   Flipy
 } derive(Eq)

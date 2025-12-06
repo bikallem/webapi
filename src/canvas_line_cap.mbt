@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasLineCap {
+pub(all) enum CanvasLineCap {
   Butt
   Round
   Square

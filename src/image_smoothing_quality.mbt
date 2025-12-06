@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ImageSmoothingQuality {
+pub(all) enum ImageSmoothingQuality {
   Low
   Medium
   High

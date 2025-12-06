@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum CanvasTextRendering {
+pub(all) enum CanvasTextRendering {
   Auto
   Optimizespeed
   Optimizelegibility

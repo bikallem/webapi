@@ -3,7 +3,7 @@
 // Do not edit manually
 
 ///|
-pub enum ShadowRootMode {
+pub(all) enum ShadowRootMode {
   Open
   Closed
 } derive(Eq)
