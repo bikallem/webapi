@@ -11,8 +11,12 @@ The generator fetches official WebIDL definitions from `@webref/idl`, which prov
 - `uievents` - UI events
 - `cssom` - CSS Object Model
 - `cssom-view` - CSSOM View (scrolling, etc.)
+- `geometry` - DOMPoint, DOMRect, DOMMatrix, etc.
+- `FileAPI` - Blob, File, FileReader, etc.
+- `dom-shadow` - Shadow DOM (ShadowRoot, slots, etc.)
+- `SVG` - SVG elements (for SVGImageElement, etc.)
 
-### 2. Parse WebIDL (`widlprocess.ts`)
+### 2. Parse WebIDL (`parser.ts`)
 Uses `webidl2` to parse the IDL text into an AST, then transforms it into our internal representation:
 - **Interfaces** - Types with methods and properties
 - **Dictionaries** - Structured data types (like TypeScript interfaces)
@@ -20,7 +24,7 @@ Uses `webidl2` to parse the IDL text into an AST, then transforms it into our in
 - **Typedefs** - Type aliases
 - **Mixins** - Shared functionality applied to multiple interfaces
 
-### 3. Apply Mixins (`widlprocess.ts`)
+### 3. Merge and Apply Mixins (`parser.ts`)
 WebIDL uses "includes" statements to mix in shared functionality. For example:
 ```webidl
 Document includes DocumentOrShadowRoot;
@@ -43,7 +47,7 @@ Each emitter module generates a specific part of the output:
 | `globals.ts` | Global functions (document, window, etc.) |
 | `js-runtime.ts` | JavaScript runtime support (webapi.mjs) |
 
-### 5. Type Mapping (`mapping.ts`)
+### 5. Type Mapping (`mapper.ts`)
 Maps WebIDL types to MoonBit types:
 
 | WebIDL | MoonBit |
@@ -60,9 +64,9 @@ Maps WebIDL types to MoonBit types:
 | `Promise<T>` | `JsPromise[T]` |
 
 ### 6. Output Structure
-Generated files go to `webapi/dom/`:
+Generated files go to `src/`:
 ```
-webapi/dom/
+src/
 ├── js_value.mbt        # Core FFI types (from base.mbt/)
 ├── js_array.mbt        # Array support
 ├── js_promise.mbt      # Promise support
