@@ -1108,16 +1108,5 @@ export function getCollapsedUnionType(
     return getUnionMemberMoonbitType(members[0]);
   }
 
-  if (members.length === 2) {
-    const moonbitTypes = members.map((m) => getUnionMemberMoonbitType(m));
-    if (
-      (moonbitTypes.includes("String") &&
-        moonbitTypes.includes("ArrayBuffer")) ||
-      (moonbitTypes.includes("ArrayBuffer") && moonbitTypes.includes("String"))
-    ) {
-      return `Result[String, ArrayBuffer]`;
-    }
-  }
-
   return undefined;
 }
