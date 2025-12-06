@@ -1078,10 +1078,7 @@ export const SKIP_UNION_TYPES = new Set([
  * Get the MoonBit type representation of a union member
  */
 export function getUnionMemberMoonbitType(memberType: ParsedType): string {
-    let type = memberType;
-    if (type.type === "nullable" && type.elementType) {
-        type = type.elementType;
-    }
+    const type = unwrapNullableType(memberType);
     const mapped = mapIdlType(type);
     return mapped.moonbitType;
 }
