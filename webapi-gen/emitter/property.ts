@@ -56,7 +56,7 @@ function formatPropertyReturnType(prop: ParsedProperty): string {
  * @param prop The property to emit
  * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitPropertyGetter(
+function emitTraitPropertyGetter(
   prop: ParsedProperty,
   hasDefaultImpl: boolean = true,
 ): string {
@@ -74,7 +74,7 @@ export function emitTraitPropertyGetter(
  * @param prop The property to emit
  * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitPropertySetter(
+function emitTraitPropertySetter(
   prop: ParsedProperty,
   hasDefaultImpl: boolean = true,
 ): string {

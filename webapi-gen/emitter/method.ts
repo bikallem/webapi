@@ -115,7 +115,7 @@ function collectUnionArgs(
  * @param suffix Optional suffix for overloaded methods
  * @param hasDefaultImpl If true, add `= _` to indicate default implementation exists
  */
-export function emitTraitMethodSignature(
+function emitTraitMethodSignature(
   method: ParsedMethod,
   suffix: string = "",
   hasDefaultImpl: boolean = true,

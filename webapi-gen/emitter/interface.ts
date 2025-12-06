@@ -25,16 +25,8 @@ import { buildClosureType, emitCallbackConstructor } from "./callback.js";
  * Check if an interface has a real constructor (not [HTMLConstructor])
  * Interfaces with real constructors can be instantiated with new()
  */
-export function hasRealConstructor(iface: ParsedInterface): boolean {
+function hasRealConstructor(iface: ParsedInterface): boolean {
   return iface.constructors.some((c) => !c.isHTMLConstructor);
-}
-
-/**
- * Check if an interface has any constructor (real or [HTMLConstructor])
- * Interfaces with no constructors at all are fully abstract (use trait objects)
- */
-export function hasAnyConstructor(iface: ParsedInterface): boolean {
-  return iface.constructors.length > 0;
 }
 
 /**
