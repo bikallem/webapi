@@ -11,7 +11,7 @@ pub type JsValue
 /// Trait for types that can be converted to JsValue
 /// Note: null() is not in the trait to allow trait objects.
 /// Each concrete type implements its own null() method.
-pub trait TJsValue {
+pub(open) trait TJsValue {
   to_js(Self) -> JsValue
   is_null(Self) -> Bool = _
 }
@@ -41,14 +41,14 @@ pub fn[T] JsValue::null() -> T {
 /// Unsafe cast from JsValue to any type.
 /// This is used internally for FFI returns that need type conversion.
 /// WARNING: No runtime type checking is performed.
-pub fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
+fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
 
 ///|
 pub fn JsValue::is_null(self : JsValue) -> Bool = "JsValue" "isNull"
 
 ///|
 /// Cast JsValue to an optional type (nullable return from JS)
-pub fn[T] JsValue::as_option(self : JsValue) -> T? {
+fn[T] JsValue::as_option(self : JsValue) -> T? {
   match self {
     v if JsValue::is_null(v) => None
     _ => Some(self.unsafe_cast())
@@ -56,14 +56,8 @@ pub fn[T] JsValue::as_option(self : JsValue) -> T? {
 }
 
 ///|
-/// Get undefined as a default value for optional JsValue parameters
-pub fn default_js_value() -> JsValue {
-  JsValue::undefined()
-}
-
-///|
 /// Convert an Option[T] to JsValue - returns undefined if None
-pub fn[T : TJsValue] opt_to_js(opt : T?) -> JsValue {
+fn[T : TJsValue] opt_to_js(opt : T?) -> JsValue {
   match opt {
     Some(v) => v.to_js()
     None => JsValue::undefined()

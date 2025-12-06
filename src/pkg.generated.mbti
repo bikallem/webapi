@@ -76,13 +76,9 @@ pub const TEXT_NODE : UInt = 3
 
 pub fn[T : TJsValue] array_to_js(Array[T]) -> JsValue
 
-pub fn default_js_value() -> JsValue
-
 pub let document : Document
 
 pub let navigator : Navigator
-
-pub fn[T : TJsValue] opt_to_js(T?) -> JsValue
 
 pub let window : Window
 
@@ -1100,11 +1096,9 @@ pub fn JsPromise::wait(Self[JsValue]) -> JsValue
 
 #external
 pub type JsValue
-pub fn[T] JsValue::as_option(Self) -> T?
 pub fn JsValue::is_null(Self) -> Bool
 pub fn[T] JsValue::null() -> T
 pub fn JsValue::undefined() -> Self
-pub fn[T] JsValue::unsafe_cast(Self) -> T
 pub impl TCreateContextualFragmentStringArg for JsValue
 pub impl TInsertAdjacentHTMLStringArg for JsValue
 pub impl TJsValue for JsValue
@@ -3252,9 +3246,9 @@ pub(open) trait TInsertAdjacentHTMLStringArg {
 }
 pub impl TInsertAdjacentHTMLStringArg for String
 
-pub trait TJsValue {
+pub(open) trait TJsValue {
   to_js(Self) -> JsValue
-  is_null(Self) -> Bool
+  is_null(Self) -> Bool = _
 }
 pub impl TJsValue for Bool
 pub impl TJsValue for Byte
