@@ -48,7 +48,7 @@ fn quick_example() -> Unit {
   div.set_inner_html("<p>Hello from MoonBit!</p>")
 
   // Append to body
-  let _ = document.body().unwrap().append_child(div)
+  document.body().unwrap().append_child(div) |> ignore
 
   // Add event listener
   div.add_event_listener(
@@ -75,13 +75,12 @@ fn create_web_component() -> Unit {
     #|:host { display: block; padding: 10px; }
     #|slot { color: blue; }
   style.set_text_content(css)
-  let _ = shadow.append_child(style)
+  shadow.append_child(style) |> ignore
 
   // Add slot for content projection
   let slot = doc.create_element("slot")
-  let _ = shadow.append_child(slot)
-  let _ = doc.body().unwrap().append_child(host)
-
+  shadow.append_child(slot) |> ignore
+  doc.body().unwrap().append_child(host)
 }
 ```
 
