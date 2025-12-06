@@ -5,15 +5,14 @@ fn main {
   // Create mutable counter state
   let mut count = 0
 
-  // Get body element
-  let body = document.get_element_by_id("app").unwrap()
+  // Get app element
+  let app = document.get_element_by_id("app").unwrap()
 
   // Create container div
   let container : HTMLDivElement = document.create_element("div").into()
-  container.set_attribute("id", "counter-app")
-  container.set_attribute(
-    "style", "text-align: center; font-family: system-ui;",
-  )
+  container
+  ..set_attribute("id", "counter-app")
+  .set_attribute("style", "text-align: center; font-family: system-ui;")
 
   // Create heading
   let heading : HTMLHeadElement = document.create_element("h1").into()
@@ -21,9 +20,10 @@ fn main {
 
   // Create count display
   let count_display : HTMLDivElement = document.create_element("div").into()
-  count_display.set_attribute("id", "count-display")
-  count_display.set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
-  count_display.set_text_content("0")
+  count_display
+  ..set_attribute("id", "count-display")
+  ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
+  .set_text_content("0")
 
   // Helper to update display
   let update_display = fn() {
@@ -34,11 +34,12 @@ fn main {
   let decrement_btn : HTMLButtonElement = document
     .create_element("button")
     .into()
-  decrement_btn.set_text_content("−")
-  decrement_btn.set_attribute(
+  decrement_btn
+  ..set_text_content("−")
+  ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  decrement_btn.add_event_listener(
+  .add_event_listener(
     "click",
     event_listener(fn(_event) {
       count = count - 1
@@ -50,11 +51,12 @@ fn main {
   let increment_btn : HTMLButtonElement = document
     .create_element("button")
     .into()
-  increment_btn.set_text_content("+")
-  increment_btn.set_attribute(
+  increment_btn
+  ..set_text_content("+")
+  ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  increment_btn.add_event_listener(
+  .add_event_listener(
     "click",
     EventListener::new(fn(_event) {
       count = count + 1
@@ -77,11 +79,13 @@ fn main {
   )
 
   // Build the DOM tree
-  let _ = container.append_child(heading)
-  let _ = container.append_child(count_display)
-  let _ = container.append_child(decrement_btn)
-  let _ = container.append_child(increment_btn)
-  let _ = container.append_child(reset_btn)
-  let _ = body.append_child(container)
+
+  for
+    child in (
+      [heading, count_display, decrement_btn, increment_btn, reset_btn] :
+      Array[&TNode]) {
+    container.append_child(child) |> ignore
+  }
+  let _ = app.append_child(container)
 
 }
