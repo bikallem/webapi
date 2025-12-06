@@ -5,15 +5,6 @@ fn main {
   // Create mutable counter state
   let mut count = 0
 
-  // Get app element
-  let app = document.get_element_by_id("app").unwrap()
-
-  // Create container div
-  let container : HTMLDivElement = document.create_element("div").into()
-  container
-  ..set_attribute("id", "counter-app")
-  .set_attribute("style", "text-align: center; font-family: system-ui;")
-
   // Create heading
   let heading : HTMLHeadElement = document.create_element("h1").into()
   heading.set_text_content("Counter")
@@ -76,11 +67,16 @@ fn main {
     }),
   )
 
-  // Build the DOM tree
-  for
-    child in (
-      [heading, count_display, decrement_btn, increment_btn, reset_btn] :
-      Array[&TNode]) {
+  // Build the DOM tree  
+  let app = document.get_element_by_id("app").unwrap()
+  let container : HTMLDivElement = document.create_element("div").into()
+  container
+  ..set_attribute("id", "counter-app")
+  ..set_attribute("style", "text-align: center; font-family: system-ui;")
+  let children : Array[&TNode] = [
+    heading, count_display, decrement_btn, increment_btn, reset_btn,
+  ]
+  for child in children {
     container.append_child(child) |> ignore
   }
   let _ = app.append_child(container)
