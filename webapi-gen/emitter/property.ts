@@ -183,7 +183,9 @@ function emitPropertyGetterImpl(
 
   const ffiCall = `${ffiName}(self.to_js())`;
   const bodyExpr =
-    ffiReturnType === returnType ? ffiCall : formatReturnConversion(ffiCall, mapped);
+    ffiReturnType === returnType
+      ? ffiCall
+      : formatReturnConversion(ffiCall, mapped);
 
   return `///|
 impl ${traitName} with ${methodName}(self : Self) -> ${returnType} {

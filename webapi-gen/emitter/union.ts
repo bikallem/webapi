@@ -251,39 +251,12 @@ export function emitPropertyUnionType(
       continue;
     }
 
-    // For String, use String type directly
-    if (memberName === "String") {
-      lines.push("///|");
-      lines.push(`pub impl ${traitName} for String with to_js(`);
-      lines.push("  self : String,");
-      lines.push(`) -> JsValue = "%identity"`);
-      lines.push("");
-    } else if (memberName === "Double") {
-      lines.push("///|");
-      lines.push(`pub impl ${traitName} for Double with to_js(`);
-      lines.push("  self : Double,");
-      lines.push(`) -> JsValue = "%identity"`);
-      lines.push("");
-    } else if (memberName === "Int") {
-      lines.push("///|");
-      lines.push(`pub impl ${traitName} for Int with to_js(`);
-      lines.push("  self : Int,");
-      lines.push(`) -> JsValue = "%identity"`);
-      lines.push("");
-    } else if (memberName === "Bool") {
-      lines.push("///|");
-      lines.push(`pub impl ${traitName} for Bool with to_js(`);
-      lines.push("  self : Bool,");
-      lines.push(`) -> JsValue = "%identity"`);
-      lines.push("");
-    } else {
-      // Reference to a concrete interface
-      lines.push("///|");
-      lines.push(`pub impl ${traitName} for ${memberName} with to_js(`);
-      lines.push(`  self : ${memberName},`);
-      lines.push(`) -> JsValue = "%identity"`);
-      lines.push("");
-    }
+    // Emit trait impl - same pattern for all types
+    lines.push("///|");
+    lines.push(`pub impl ${traitName} for ${memberName} with to_js(`);
+    lines.push(`  self : ${memberName},`);
+    lines.push(`) -> JsValue = "%identity"`);
+    lines.push("");
   }
 
   return lines.join("\n");
