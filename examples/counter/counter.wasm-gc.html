@@ -34,7 +34,7 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        import { instantiateWithBuiltins } from "../webapi.min.mjs";
+        import { instantiateWithBuiltins } from "../webapi.mjs";
         const instance = await instantiateWithBuiltins("../target/wasm-gc/release/build/counter/counter.wasm");
         instance.exports._start();
     </script>
