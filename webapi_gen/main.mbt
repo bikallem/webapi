@@ -7,7 +7,7 @@ fn main {
   }
   let filepath = args[1]
   try {
-    let defs = @webidl_parser.parse_file(filepath)
+    let defs = @parser.parse_file(filepath)
     println(defs.to_json().stringify())
   } catch {
     e => println("Error: \{e}")

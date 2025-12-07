@@ -1,7 +1,7 @@
 ///|
 /// Unit tests for WebIDL parser
 test "parse empty input" {
-  let result = @webidl_parser.parse("")
+  let result = @parser.parse("")
   assert_eq(result.length(), 0)
 }
 
@@ -11,10 +11,10 @@ test "parse simple interface" {
     #|interface Foo {
     #|  attribute DOMString bar;
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "Foo")
       assert_eq(i.members.length(), 1)
     }
@@ -27,10 +27,10 @@ test "parse interface with inheritance" {
   let idl =
     #|interface Child : Parent {
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "Child")
       assert_eq(i.inheritance, Some("Parent"))
     }
@@ -44,10 +44,10 @@ test "parse interface with extended attributes" {
     #|[Exposed=Window]
     #|interface EventTarget {
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "EventTarget")
       assert_eq(i.extended_attributes.length(), 1)
     }
@@ -62,10 +62,10 @@ test "parse dictionary" {
     #|  boolean enabled = true;
     #|  DOMString name;
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Dictionary(d) => {
+    @parser.Definition::Dictionary(d) => {
       assert_eq(d.name, "Options")
       assert_eq(d.members.length(), 2)
     }
@@ -77,10 +77,10 @@ test "parse dictionary" {
 test "parse enum" {
   let idl =
     #|enum Color { "red", "green", "blue" };
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Enum_(e) => {
+    @parser.Definition::Enum_(e) => {
       assert_eq(e.name, "Color")
       assert_eq(e.values.length(), 3)
     }
@@ -92,10 +92,10 @@ test "parse enum" {
 test "parse typedef" {
   let idl =
     #|typedef sequence<DOMString> StringList;
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Typedef(t) => assert_eq(t.name, "StringList")
+    @parser.Definition::Typedef(t) => assert_eq(t.name, "StringList")
     _ => fail("Expected Typedef")
   }
 }
@@ -104,10 +104,10 @@ test "parse typedef" {
 test "parse callback function" {
   let idl =
     #|callback Handler = undefined (Event ev);
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::CallbackFunction(c) => {
+    @parser.Definition::CallbackFunction(c) => {
       assert_eq(c.name, "Handler")
       assert_eq(c.arguments.length(), 1)
     }
@@ -121,10 +121,10 @@ test "parse callback interface" {
     #|callback interface EventListener {
     #|  undefined handleEvent(Event event);
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::CallbackInterface(c) => {
+    @parser.Definition::CallbackInterface(c) => {
       assert_eq(c.name, "EventListener")
       assert_eq(c.members.length(), 1)
     }
@@ -138,10 +138,10 @@ test "parse namespace" {
     #|namespace CSS {
     #|  boolean supports(DOMString property, DOMString value);
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Namespace(n) => {
+    @parser.Definition::Namespace(n) => {
       assert_eq(n.name, "CSS")
       assert_eq(n.members.length(), 1)
     }
@@ -153,10 +153,10 @@ test "parse namespace" {
 test "parse includes statement" {
   let idl =
     #|Window includes GlobalEventHandlers;
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Includes(i) => {
+    @parser.Definition::Includes(i) => {
       assert_eq(i.interface_name, "Window")
       assert_eq(i.mixin_name, "GlobalEventHandlers")
     }
@@ -170,10 +170,10 @@ test "parse interface mixin" {
     #|interface mixin EventHandlers {
     #|  attribute EventHandler? onclick;
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Mixin(m) => {
+    @parser.Definition::Mixin(m) => {
       assert_eq(m.name, "EventHandlers")
       assert_eq(m.members.length(), 1)
     }
@@ -187,10 +187,10 @@ test "parse partial interface" {
     #|partial interface Document {
     #|  readonly attribute Element? body;
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::PartialInterface(p) => {
+    @parser.Definition::PartialInterface(p) => {
       assert_eq(p.name, "Document")
       assert_eq(p.members.length(), 1)
     }
@@ -204,10 +204,10 @@ test "parse interface with constructor" {
     #|interface URL {
     #|  constructor(DOMString url);
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "URL")
       assert_eq(i.members.length(), 1)
     }
@@ -221,10 +221,10 @@ test "parse interface with getter" {
     #|interface Collection {
     #|  getter Element? item(unsigned long index);
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "Collection")
       assert_eq(i.members.length(), 1)
     }
@@ -238,10 +238,10 @@ test "parse interface with iterable" {
     #|interface List {
     #|  iterable<DOMString>;
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "List")
       assert_eq(i.members.length(), 1)
     }
@@ -255,10 +255,10 @@ test "parse interface with maplike" {
     #|interface Headers {
     #|  readonly maplike<DOMString, DOMString>;
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "Headers")
       assert_eq(i.members.length(), 1)
     }
@@ -272,10 +272,10 @@ test "parse interface with static operation" {
     #|interface URL {
     #|  static boolean canParse(DOMString url);
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "URL")
       assert_eq(i.members.length(), 1)
     }
@@ -289,10 +289,10 @@ test "parse buffer type" {
     #|interface Blob {
     #|  ArrayBuffer arrayBuffer();
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => assert_eq(i.name, "Blob")
+    @parser.Definition::Interface(i) => assert_eq(i.name, "Blob")
     // Check that the operation return type is Type::ArrayBuffer
     _ => fail("Expected Interface")
   }
@@ -303,7 +303,7 @@ test "parse single line comment" {
   let idl =
     #|// This is a comment
     #|interface Foo { };
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
 }
 
@@ -313,14 +313,14 @@ test "parse multi line comment" {
     #|/* This is a
     #|   multi-line comment */
     #|interface Foo { };
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
 }
 
 ///|
 test "tokenize returns positions" {
   let idl = "interface Foo { };"
-  let tokens = @webidl_parser.tokenize(idl)
+  let tokens = @parser.tokenize(idl)
   assert_true(tokens.length() > 0)
   // First token is 'interface'
   let (_, start, end) = tokens[0]
@@ -335,13 +335,13 @@ test "position tracks line numbers" {
   let idl =
     #|interface
     #|Foo { };
-  let tokens = @webidl_parser.tokenize(idl)
+  let tokens = @parser.tokenize(idl)
   // Find 'Foo' token - should be on line 2
   let foo_token = tokens
     .iter()
     .find_first(fn(t) {
       match t.0 {
-        @webidl_parser.Token::IDENTIFIER(name) => name == "Foo"
+        @parser.Token::IDENTIFIER(name) => name == "Foo"
         _ => false
       }
     })
@@ -354,7 +354,7 @@ test "position tracks line numbers" {
 ///|
 test "position tracks column numbers" {
   let idl = "   interface Foo { };"
-  let tokens = @webidl_parser.tokenize(idl)
+  let tokens = @parser.tokenize(idl)
   // 'interface' starts at column 4 (after 3 spaces)
   let (_, start, _) = tokens[0]
   assert_eq(start.column, 4)
@@ -365,7 +365,7 @@ test "position file is set" {
   let idl = "interface Foo { };"
   // Note: tokenize doesn't take file parameter in current API
   // but the Position struct supports it
-  let tokens = @webidl_parser.tokenize(idl)
+  let tokens = @parser.tokenize(idl)
   let (_, start, _) = tokens[0]
   assert_eq(start.file, "")
 }
@@ -485,12 +485,12 @@ test "comprehensive integration test" {
     #|  attribute DOMString src;
     #|  readonly attribute unsigned long width;
     #|};
-  let result = @webidl_parser.parse(idl)
+  let result = @parser.parse(idl)
   assert_eq(result.length(), 19)
 
   // 1. Interface: EventTarget (3 members)
   match result[0] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "EventTarget")
       assert_eq(i.members.length(), 3)
     }
@@ -499,14 +499,14 @@ test "comprehensive integration test" {
 
   // 2. Callback Interface: EventListener
   match result[1] {
-    @webidl_parser.Definition::CallbackInterface(c) =>
+    @parser.Definition::CallbackInterface(c) =>
       assert_eq(c.name, "EventListener")
     _ => fail("Expected CallbackInterface EventListener")
   }
 
   // 3. Partial Interface: Document (2 members)
   match result[2] {
-    @webidl_parser.Definition::PartialInterface(p) => {
+    @parser.Definition::PartialInterface(p) => {
       assert_eq(p.name, "Document")
       assert_eq(p.members.length(), 2)
     }
@@ -515,7 +515,7 @@ test "comprehensive integration test" {
 
   // 4. Mixin: WindowEventHandlers (2 members)
   match result[3] {
-    @webidl_parser.Definition::Mixin(m) => {
+    @parser.Definition::Mixin(m) => {
       assert_eq(m.name, "WindowEventHandlers")
       assert_eq(m.members.length(), 2)
     }
@@ -524,7 +524,7 @@ test "comprehensive integration test" {
 
   // 5. Partial Mixin: GlobalEventHandlers (1 members)
   match result[4] {
-    @webidl_parser.Definition::PartialMixin(p) => {
+    @parser.Definition::PartialMixin(p) => {
       assert_eq(p.name, "GlobalEventHandlers")
       assert_eq(p.members.length(), 1)
     }
@@ -533,7 +533,7 @@ test "comprehensive integration test" {
 
   // 6. Namespace: CSS (2 members)
   match result[5] {
-    @webidl_parser.Definition::Namespace(n) => {
+    @parser.Definition::Namespace(n) => {
       assert_eq(n.name, "CSS")
       assert_eq(n.members.length(), 2)
     }
@@ -542,7 +542,7 @@ test "comprehensive integration test" {
 
   // 7. Partial Namespace: CSS (1 members)
   match result[6] {
-    @webidl_parser.Definition::PartialNamespace(p) => {
+    @parser.Definition::PartialNamespace(p) => {
       assert_eq(p.name, "CSS")
       assert_eq(p.members.length(), 1)
     }
@@ -551,7 +551,7 @@ test "comprehensive integration test" {
 
   // 8. Dictionary: AddEventListenerOptions (2 members)
   match result[7] {
-    @webidl_parser.Definition::Dictionary(d) => {
+    @parser.Definition::Dictionary(d) => {
       assert_eq(d.name, "AddEventListenerOptions")
       assert_eq(d.members.length(), 2)
     }
@@ -560,7 +560,7 @@ test "comprehensive integration test" {
 
   // 9. Dictionary: EventListenerOptions (1 members)
   match result[8] {
-    @webidl_parser.Definition::Dictionary(d) => {
+    @parser.Definition::Dictionary(d) => {
       assert_eq(d.name, "EventListenerOptions")
       assert_eq(d.members.length(), 1)
     }
@@ -569,7 +569,7 @@ test "comprehensive integration test" {
 
   // 10. Partial Dictionary: RequestInit (2 members)
   match result[9] {
-    @webidl_parser.Definition::PartialDictionary(p) => {
+    @parser.Definition::PartialDictionary(p) => {
       assert_eq(p.name, "RequestInit")
       assert_eq(p.members.length(), 2)
     }
@@ -578,7 +578,7 @@ test "comprehensive integration test" {
 
   // 11. Enum: ScrollBehavior (3 values)
   match result[10] {
-    @webidl_parser.Definition::Enum_(e) => {
+    @parser.Definition::Enum_(e) => {
       assert_eq(e.name, "ScrollBehavior")
       assert_eq(e.values.length(), 3)
     }
@@ -587,20 +587,19 @@ test "comprehensive integration test" {
 
   // 12. Typedef: DOMStringList
   match result[11] {
-    @webidl_parser.Definition::Typedef(t) => assert_eq(t.name, "DOMStringList")
+    @parser.Definition::Typedef(t) => assert_eq(t.name, "DOMStringList")
     _ => fail("Expected Typedef DOMStringList")
   }
 
   // 13. Callback: EventHandler
   match result[12] {
-    @webidl_parser.Definition::CallbackFunction(c) =>
-      assert_eq(c.name, "EventHandler")
+    @parser.Definition::CallbackFunction(c) => assert_eq(c.name, "EventHandler")
     _ => fail("Expected CallbackFunction EventHandler")
   }
 
   // 14. Includes: Window includes WindowEventHandlers
   match result[13] {
-    @webidl_parser.Definition::Includes(i) => {
+    @parser.Definition::Includes(i) => {
       assert_eq(i.interface_name, "Window")
       assert_eq(i.mixin_name, "WindowEventHandlers")
     }
@@ -609,7 +608,7 @@ test "comprehensive integration test" {
 
   // 15. Interface: HTMLCollection (4 members)
   match result[14] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "HTMLCollection")
       assert_eq(i.members.length(), 4)
     }
@@ -618,7 +617,7 @@ test "comprehensive integration test" {
 
   // 16. Interface: Headers (1 members)
   match result[15] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "Headers")
       assert_eq(i.members.length(), 1)
     }
@@ -627,7 +626,7 @@ test "comprehensive integration test" {
 
   // 17. Interface: DOMTokenList (1 members)
   match result[16] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "DOMTokenList")
       assert_eq(i.members.length(), 1)
     }
@@ -636,7 +635,7 @@ test "comprehensive integration test" {
 
   // 18. Interface: URL (2 members)
   match result[17] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "URL")
       assert_eq(i.members.length(), 2)
     }
@@ -645,7 +644,7 @@ test "comprehensive integration test" {
 
   // 19. Interface: HTMLImageElement (2 members)
   match result[18] {
-    @webidl_parser.Definition::Interface(i) => {
+    @parser.Definition::Interface(i) => {
       assert_eq(i.name, "HTMLImageElement")
       assert_eq(i.members.length(), 2)
     }

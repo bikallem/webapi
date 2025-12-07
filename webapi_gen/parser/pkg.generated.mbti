@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "bikallem/webidl_parser"
+package "bikallem/webapi_gen/parser"
 
 // Values
 pub fn definitions(Array[(Token, Position, Position)], initial_pos? : Position) -> Array[Definition] raise ParseError
