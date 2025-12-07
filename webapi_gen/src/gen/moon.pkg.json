@@ -1,0 +1,6 @@
+{
+    "import": [
+        "bikallem/webapi_gen/core",
+        "bikallem/webapi_gen/types"
+    ]
+}

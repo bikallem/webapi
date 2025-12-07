@@ -1,0 +1,8 @@
+{
+    "import": [
+        "bikallem/webapi_gen/config",
+        "bikallem/webapi_gen/core",
+        "bikallem/webapi_gen/gen"
+    ],
+    "is-main": true
+}
