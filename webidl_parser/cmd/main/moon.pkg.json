@@ -1,6 +1,7 @@
 {
   "is-main": true,
   "import": [
-    "bikallem/webidl_parser"
+    "bikallem/webidl_parser",
+    "moonbitlang/x/sys"
   ]
 }

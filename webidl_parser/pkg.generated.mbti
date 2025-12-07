@@ -8,6 +8,8 @@ pub fn lex(StringView, file? : String) -> Array[(Token, Position, Position)] rai
 
 pub fn parse(String) -> Array[Definition] raise WebIdlError
 
+pub fn parse_file(String) -> Array[Definition] raise WebIdlError
+
 pub fn tokenize(String) -> Array[(Token, Position, Position)] raise LexError
 
 // Errors
@@ -535,6 +537,21 @@ pub enum Type {
   Any
   Object
   Symbol
+  ArrayBuffer
+  SharedArrayBuffer
+  DataView
+  Int8Array
+  Int16Array
+  Int32Array
+  Uint8Array
+  Uint16Array
+  Uint32Array
+  Uint8ClampedArray
+  BigInt64Array
+  BigUint64Array
+  Float16Array
+  Float32Array
+  Float64Array
   Identifier(String)
   Sequence(Type)
   FrozenArray(Type)
