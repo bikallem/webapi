@@ -138,7 +138,6 @@
 %type<Array[NamespaceMember]> namespace_members
 %type<NamespaceMember> namespace_member
 %type<ConstMember> const_member
-%type<AttributeMember> attribute_member
 %type<OperationMember> operation_member
 %type<ConstructorMember> constructor_member
 %type<IterableMember> iterable_member
@@ -298,12 +297,6 @@ namespace_member:
 const_member:
   | "const" type IDENTIFIER "=" const_value ";"
       { { extended_attributes: [], type_: $2, name: $3, value: $5 } }
-
-attribute_member:
-  | "readonly" "attribute" type IDENTIFIER ";"
-      { { extended_attributes: [], type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false } }
-  | "attribute" type IDENTIFIER ";"
-      { { extended_attributes: [], type_: $2, name: $3, is_readonly: false, static_: false, is_inherit: false } }
 
 operation_member:
   | type IDENTIFIER "(" argument_list ")" ";"
