@@ -1,9 +1,9 @@
 // WebIDL Parser Grammar - Extended
 // Based on the WebIDL grammar: https://webidl.spec.whatwg.org/#idl-grammar
 
-%derive<Show> Token
+%derive<Show,ToJson> Token
 %derive<Show> ParseError
-%position<Int>
+%position<Position>
 %start definitions
 
 // Token declarations

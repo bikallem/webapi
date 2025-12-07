@@ -89,7 +89,7 @@ pub(all) enum Token {
   QUESTION
   ELLIPSIS
   STAR
-} derive(Show)
+} derive(Show, ToJson)
 
 pub fn Token::kind(self : Token) -> TokenKind {
   match self {

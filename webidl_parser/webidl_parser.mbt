@@ -12,12 +12,7 @@ pub suberror WebIdlError {
 ///|
 /// Parse WebIDL text into an array of definitions
 pub fn parse(input : String) -> Array[Definition] raise WebIdlError {
-  let tokens_with_pos = lex(input[:]) catch { e => raise Lex(e) }
-  // Convert Position to Int for parser compatibility
-  let tokens : Array[(Token, Int, Int)] = tokens_with_pos.map(fn(t) {
-    let (tok, start, end) = t
-    (tok, start.column, end.column)
-  })
+  let tokens = lex(input[:]) catch { e => raise Lex(e) }
   definitions(tokens) catch {
     e => raise Parse(e)
   }
