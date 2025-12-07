@@ -403,7 +403,7 @@ impl TWindow with scroll(
 }
 
 ///|
-fn window_scroll_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scroll"
+fn window_scroll_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scroll2"
 
 ///|
 impl TWindow with scroll2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -428,7 +428,7 @@ impl TWindow with scroll_to(
 }
 
 ///|
-fn window_scroll_to_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollTo"
+fn window_scroll_to_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollTo2"
 
 ///|
 impl TWindow with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -453,7 +453,7 @@ impl TWindow with scroll_by(
 }
 
 ///|
-fn window_scroll_by_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollBy"
+fn window_scroll_by_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollBy2"
 
 ///|
 impl TWindow with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -551,7 +551,7 @@ impl TWindow with alert(self : Self) -> Unit {
 }
 
 ///|
-fn window_alert_ffi2(obj : JsValue, message : JsValue) -> Unit = "webapi_Window" "alert"
+fn window_alert_ffi2(obj : JsValue, message : JsValue) -> Unit = "webapi_Window" "alert2"
 
 ///|
 impl TWindow with alert2(self : Self, message : String) -> Unit {
@@ -622,7 +622,7 @@ fn window_post_message_ffi2(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "webapi_Window" "postMessage"
+) -> Unit = "webapi_Window" "postMessage2"
 
 ///|
 impl TWindow with post_message2(
@@ -776,7 +776,7 @@ fn window_create_image_bitmap_ffi2(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsValue = "webapi_Window" "createImageBitmap"
+) -> JsValue = "webapi_Window" "createImageBitmap2"
 
 ///|
 impl TWindow with create_image_bitmap2(

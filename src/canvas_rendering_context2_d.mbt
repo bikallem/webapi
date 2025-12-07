@@ -440,7 +440,7 @@ impl TCanvasRenderingContext2D with set_transform(
 fn canvas_rendering_context2_d_set_transform_ffi2(
   obj : JsValue,
   transform : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "setTransform"
+) -> Unit = "webapi_CanvasRenderingContext2D" "setTransform2"
 
 ///|
 impl TCanvasRenderingContext2D with set_transform2(
@@ -670,7 +670,7 @@ fn canvas_rendering_context2_d_fill_ffi2(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "fill"
+) -> Unit = "webapi_CanvasRenderingContext2D" "fill2"
 
 ///|
 impl TCanvasRenderingContext2D with fill2(
@@ -697,7 +697,7 @@ impl TCanvasRenderingContext2D with stroke(self : Self) -> Unit {
 fn canvas_rendering_context2_d_stroke_ffi2(
   obj : JsValue,
   path : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "stroke"
+) -> Unit = "webapi_CanvasRenderingContext2D" "stroke2"
 
 ///|
 impl TCanvasRenderingContext2D with stroke2(self : Self, path : JsValue) -> Unit {
@@ -726,7 +726,7 @@ fn canvas_rendering_context2_d_clip_ffi2(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "clip"
+) -> Unit = "webapi_CanvasRenderingContext2D" "clip2"
 
 ///|
 impl TCanvasRenderingContext2D with clip2(
@@ -771,7 +771,7 @@ fn canvas_rendering_context2_d_is_point_in_path_ffi2(
   x : JsValue,
   y : JsValue,
   fill_rule : JsValue,
-) -> JsValue = "webapi_CanvasRenderingContext2D" "isPointInPath"
+) -> JsValue = "webapi_CanvasRenderingContext2D" "isPointInPath2"
 
 ///|
 impl TCanvasRenderingContext2D with is_point_in_path2(
@@ -816,7 +816,7 @@ fn canvas_rendering_context2_d_is_point_in_stroke_ffi2(
   path : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "webapi_CanvasRenderingContext2D" "isPointInStroke"
+) -> JsValue = "webapi_CanvasRenderingContext2D" "isPointInStroke2"
 
 ///|
 impl TCanvasRenderingContext2D with is_point_in_stroke2(
@@ -855,7 +855,7 @@ fn canvas_rendering_context2_d_draw_focus_if_needed_ffi2(
   obj : JsValue,
   path : JsValue,
   element : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "drawFocusIfNeeded"
+) -> Unit = "webapi_CanvasRenderingContext2D" "drawFocusIfNeeded2"
 
 ///|
 impl TCanvasRenderingContext2D with draw_focus_if_needed2(
@@ -969,7 +969,7 @@ fn canvas_rendering_context2_d_draw_image_ffi2(
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "drawImage"
+) -> Unit = "webapi_CanvasRenderingContext2D" "drawImage2"
 
 ///|
 impl TCanvasRenderingContext2D with draw_image2(
@@ -1002,7 +1002,7 @@ fn canvas_rendering_context2_d_draw_image_ffi3(
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "drawImage"
+) -> Unit = "webapi_CanvasRenderingContext2D" "drawImage3"
 
 ///|
 impl TCanvasRenderingContext2D with draw_image3(
@@ -1058,7 +1058,7 @@ impl TCanvasRenderingContext2D with create_image_data(
 fn canvas_rendering_context2_d_create_image_data_ffi2(
   obj : JsValue,
   image_data : JsValue,
-) -> JsValue = "webapi_CanvasRenderingContext2D" "createImageData"
+) -> JsValue = "webapi_CanvasRenderingContext2D" "createImageData2"
 
 ///|
 impl TCanvasRenderingContext2D with create_image_data2(
@@ -1133,7 +1133,7 @@ fn canvas_rendering_context2_d_put_image_data_ffi2(
   dirty_y : JsValue,
   dirty_width : JsValue,
   dirty_height : JsValue,
-) -> Unit = "webapi_CanvasRenderingContext2D" "putImageData"
+) -> Unit = "webapi_CanvasRenderingContext2D" "putImageData2"
 
 ///|
 impl TCanvasRenderingContext2D with put_image_data2(

@@ -9,7 +9,11 @@
  * 5. Code emission utilities
  */
 
-import { type ParsedType, type ParsedIdl, unwrapNullableType } from "./parser.js";
+import {
+  type ParsedType,
+  type ParsedIdl,
+  unwrapNullableType,
+} from "./parser.js";
 import { toVariantName } from "./emitter/enum.js";
 
 // =============================================================================

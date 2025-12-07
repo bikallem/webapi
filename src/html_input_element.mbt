@@ -216,7 +216,7 @@ fn html_input_element_set_range_text_ffi2(
   start : JsValue,
   end : JsValue,
   selection_mode : JsValue,
-) -> Unit = "webapi_HTMLInputElement" "setRangeText"
+) -> Unit = "webapi_HTMLInputElement" "setRangeText2"
 
 ///|
 impl THTMLInputElement with set_range_text2(

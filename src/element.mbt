@@ -211,7 +211,7 @@ impl TElement with scroll(
 }
 
 ///|
-fn element_scroll_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scroll"
+fn element_scroll_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scroll2"
 
 ///|
 impl TElement with scroll2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -236,7 +236,7 @@ impl TElement with scroll_to(
 }
 
 ///|
-fn element_scroll_to_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scrollTo"
+fn element_scroll_to_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scrollTo2"
 
 ///|
 impl TElement with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -261,7 +261,7 @@ impl TElement with scroll_by(
 }
 
 ///|
-fn element_scroll_by_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scrollBy"
+fn element_scroll_by_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scrollBy2"
 
 ///|
 impl TElement with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[

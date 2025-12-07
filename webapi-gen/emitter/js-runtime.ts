@@ -78,19 +78,21 @@ function escapeJsKeyword(name: string): string {
 
 /**
  * Emit method wrapper for JS runtime
+ * @param suffix Optional suffix for overloaded methods (e.g., "2" for fill2)
  */
-function emitJsMethod(method: ParsedMethod): string {
+function emitJsMethod(method: ParsedMethod, suffix: string = ""): string {
   const paramNames = method.params.map((p, i) =>
     escapeJsKeyword(p.name || `arg${i}`),
   );
+  const jsMethodName = method.name + suffix;
 
   if (method.static) {
     const argsStr = paramNames.join(", ");
-    return `    ${method.name}: (${argsStr}) => ${method.name}(${argsStr})`;
+    return `    ${jsMethodName}: (${argsStr}) => ${method.name}(${argsStr})`;
   } else {
     const argsStr = paramNames.length > 0 ? ", " + paramNames.join(", ") : "";
     const callArgs = paramNames.join(", ");
-    return `    ${method.name}: (obj${argsStr}) => obj.${method.name}(${callArgs})`;
+    return `    ${jsMethodName}: (obj${argsStr}) => obj.${method.name}(${callArgs})`;
   }
 }
 
@@ -131,10 +133,14 @@ function emitJsInterface(iface: ParsedInterface): string {
     entries.push(`    new: (${argsStr}) => new ${iface.name}(${argsStr})`);
   }
 
-  // Methods
+  // Methods - track overloads and add suffixes
+  const methodNameCounts: Map<string, number> = new Map();
   for (const method of iface.methods) {
     if (!method.name) continue;
-    entries.push(emitJsMethod(method));
+    const count = methodNameCounts.get(method.name) || 0;
+    methodNameCounts.set(method.name, count + 1);
+    const suffix = count === 0 ? "" : String(count + 1);
+    entries.push(emitJsMethod(method, suffix));
   }
 
   // Properties

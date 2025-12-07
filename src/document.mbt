@@ -788,7 +788,7 @@ fn document_open_ffi2(
   url : JsValue,
   name : JsValue,
   features : JsValue,
-) -> JsValue = "webapi_Document" "open"
+) -> JsValue = "webapi_Document" "open2"
 
 ///|
 impl TDocument with open2(

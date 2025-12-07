@@ -56,7 +56,10 @@ fn ${ffiName}(${paramsStr}) -> ${dict.name} = "${moduleName}" "new"`;
 /**
  * Emit the public constructor method with optional parameters
  */
-function emitDictionaryBuilder(dict: ParsedDictionary, idl?: ParsedIdl): string {
+function emitDictionaryBuilder(
+  dict: ParsedDictionary,
+  idl?: ParsedIdl,
+): string {
   const ffiName = `${toSnakeCase(dict.name)}_ffi`;
 
   if (dict.members.length === 0) {
@@ -156,7 +159,10 @@ pub fn ${dict.name}::empty() -> ${dict.name} = "webapi_Dictionary" "empty"`;
 /**
  * Emit complete code for a dictionary
  */
-export function emitDictionary(dict: ParsedDictionary, idl?: ParsedIdl): string {
+export function emitDictionary(
+  dict: ParsedDictionary,
+  idl?: ParsedIdl,
+): string {
   const parts: string[] = [];
 
   // Header

@@ -183,7 +183,7 @@ function emitMethodFfi(
 ): string {
   const ffiName = generateMethodFfiName(iface.name, method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
-  const jsFuncName = method.name;
+  const jsFuncName = method.name + suffix;
 
   // Build parameter list - for FFI, all params should be JsValue
   const params: string[] = ["obj : JsValue"];
@@ -388,7 +388,7 @@ function emitStaticMethod(
 ): string {
   const methodName = toSnakeCase(method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
-  const jsFuncName = method.name;
+  const jsFuncName = method.name + suffix;
   const ffiName = `${toSnakeCase(iface.name)}_${toSnakeCase(method.name)}_ffi${suffix}`;
 
   const returnMapped = mapIdlType(method.returnType);

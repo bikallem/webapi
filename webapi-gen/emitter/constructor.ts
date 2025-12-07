@@ -9,7 +9,11 @@
  * - MoonBit match syntax uses newlines between cases, not commas
  */
 
-import type { ParsedInterface, ParsedConstructor, ParsedIdl } from "../parser.js";
+import type {
+  ParsedInterface,
+  ParsedConstructor,
+  ParsedIdl,
+} from "../parser.js";
 import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../mapper.js";
 import { mapIdlType, getDefaultValueExpr } from "../mapper.js";
 
@@ -140,7 +144,10 @@ pub fn ${iface.name}::${methodName}(${paramsStr}) -> ${iface.name} {
 /**
  * Emit all constructors for an interface
  */
-export function emitConstructors(iface: ParsedInterface, idl?: ParsedIdl): string {
+export function emitConstructors(
+  iface: ParsedInterface,
+  idl?: ParsedIdl,
+): string {
   if (iface.constructors.length === 0) {
     return "";
   }
