@@ -402,21 +402,21 @@ string_type:
   | "USVString"                 { Type::USVString }
 
 buffer_type:
-  | "ArrayBuffer"               { Type::Identifier("ArrayBuffer") }
-  | "SharedArrayBuffer"         { Type::Identifier("SharedArrayBuffer") }
-  | "DataView"                  { Type::Identifier("DataView") }
-  | "Int8Array"                 { Type::Identifier("Int8Array") }
-  | "Int16Array"                { Type::Identifier("Int16Array") }
-  | "Int32Array"                { Type::Identifier("Int32Array") }
-  | "Uint8Array"                { Type::Identifier("Uint8Array") }
-  | "Uint16Array"               { Type::Identifier("Uint16Array") }
-  | "Uint32Array"               { Type::Identifier("Uint32Array") }
-  | "Uint8ClampedArray"         { Type::Identifier("Uint8ClampedArray") }
-  | "BigInt64Array"             { Type::Identifier("BigInt64Array") }
-  | "BigUint64Array"            { Type::Identifier("BigUint64Array") }
-  | "Float16Array"              { Type::Identifier("Float16Array") }
-  | "Float32Array"              { Type::Identifier("Float32Array") }
-  | "Float64Array"              { Type::Identifier("Float64Array") }
+  | "ArrayBuffer"               { Type::ArrayBuffer }
+  | "SharedArrayBuffer"         { Type::SharedArrayBuffer }
+  | "DataView"                  { Type::DataView }
+  | "Int8Array"                 { Type::Int8Array }
+  | "Int16Array"                { Type::Int16Array }
+  | "Int32Array"                { Type::Int32Array }
+  | "Uint8Array"                { Type::Uint8Array }
+  | "Uint16Array"               { Type::Uint16Array }
+  | "Uint32Array"               { Type::Uint32Array }
+  | "Uint8ClampedArray"         { Type::Uint8ClampedArray }
+  | "BigInt64Array"             { Type::BigInt64Array }
+  | "BigUint64Array"            { Type::BigUint64Array }
+  | "Float16Array"              { Type::Float16Array }
+  | "Float32Array"              { Type::Float32Array }
+  | "Float64Array"              { Type::Float64Array }
 
 null_modifier:
   | "?"                         { Some(Type::Void) }

@@ -1200,93 +1200,93 @@ fn yy_action_120(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 405|    "ArrayBuffer"               { Type::Identifier("ArrayBuffer") }
+// 405|    "ArrayBuffer"               { Type::ArrayBuffer }
 fn yy_action_121(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("ArrayBuffer") })
+  YYObj_Type({();  Type::ArrayBuffer })
 }
 
 // file:///./parser.mbty
-// 406|    "SharedArrayBuffer"         { Type::Identifier("SharedArrayBuffer") }
+// 406|    "SharedArrayBuffer"         { Type::SharedArrayBuffer }
 fn yy_action_122(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("SharedArrayBuffer") })
+  YYObj_Type({();  Type::SharedArrayBuffer })
 }
 
 // file:///./parser.mbty
-// 407|    "DataView"                  { Type::Identifier("DataView") }
+// 407|    "DataView"                  { Type::DataView }
 fn yy_action_123(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("DataView") })
+  YYObj_Type({();  Type::DataView })
 }
 
 // file:///./parser.mbty
-// 408|    "Int8Array"                 { Type::Identifier("Int8Array") }
+// 408|    "Int8Array"                 { Type::Int8Array }
 fn yy_action_124(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Int8Array") })
+  YYObj_Type({();  Type::Int8Array })
 }
 
 // file:///./parser.mbty
-// 409|    "Int16Array"                { Type::Identifier("Int16Array") }
+// 409|    "Int16Array"                { Type::Int16Array }
 fn yy_action_125(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Int16Array") })
+  YYObj_Type({();  Type::Int16Array })
 }
 
 // file:///./parser.mbty
-// 410|    "Int32Array"                { Type::Identifier("Int32Array") }
+// 410|    "Int32Array"                { Type::Int32Array }
 fn yy_action_126(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Int32Array") })
+  YYObj_Type({();  Type::Int32Array })
 }
 
 // file:///./parser.mbty
-// 411|    "Uint8Array"                { Type::Identifier("Uint8Array") }
+// 411|    "Uint8Array"                { Type::Uint8Array }
 fn yy_action_127(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Uint8Array") })
+  YYObj_Type({();  Type::Uint8Array })
 }
 
 // file:///./parser.mbty
-// 412|    "Uint16Array"               { Type::Identifier("Uint16Array") }
+// 412|    "Uint16Array"               { Type::Uint16Array }
 fn yy_action_128(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Uint16Array") })
+  YYObj_Type({();  Type::Uint16Array })
 }
 
 // file:///./parser.mbty
-// 413|    "Uint32Array"               { Type::Identifier("Uint32Array") }
+// 413|    "Uint32Array"               { Type::Uint32Array }
 fn yy_action_129(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Uint32Array") })
+  YYObj_Type({();  Type::Uint32Array })
 }
 
 // file:///./parser.mbty
-// 414|    "Uint8ClampedArray"         { Type::Identifier("Uint8ClampedArray") }
+// 414|    "Uint8ClampedArray"         { Type::Uint8ClampedArray }
 fn yy_action_130(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Uint8ClampedArray") })
+  YYObj_Type({();  Type::Uint8ClampedArray })
 }
 
 // file:///./parser.mbty
-// 415|    "BigInt64Array"             { Type::Identifier("BigInt64Array") }
+// 415|    "BigInt64Array"             { Type::BigInt64Array }
 fn yy_action_131(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("BigInt64Array") })
+  YYObj_Type({();  Type::BigInt64Array })
 }
 
 // file:///./parser.mbty
-// 416|    "BigUint64Array"            { Type::Identifier("BigUint64Array") }
+// 416|    "BigUint64Array"            { Type::BigUint64Array }
 fn yy_action_132(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("BigUint64Array") })
+  YYObj_Type({();  Type::BigUint64Array })
 }
 
 // file:///./parser.mbty
-// 417|    "Float16Array"              { Type::Identifier("Float16Array") }
+// 417|    "Float16Array"              { Type::Float16Array }
 fn yy_action_133(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Float16Array") })
+  YYObj_Type({();  Type::Float16Array })
 }
 
 // file:///./parser.mbty
-// 418|    "Float32Array"              { Type::Identifier("Float32Array") }
+// 418|    "Float32Array"              { Type::Float32Array }
 fn yy_action_134(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Float32Array") })
+  YYObj_Type({();  Type::Float32Array })
 }
 
 // file:///./parser.mbty
-// 419|    "Float64Array"              { Type::Identifier("Float64Array") }
+// 419|    "Float64Array"              { Type::Float64Array }
 fn yy_action_135(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Type({();  Type::Identifier("Float64Array") })
+  YYObj_Type({();  Type::Float64Array })
 }
 
 // file:///./parser.mbty
