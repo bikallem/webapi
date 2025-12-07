@@ -22,6 +22,7 @@
           buildInputs = with pkgs; [
             wabt # WebAssembly Binary Toolkit (wasm-objdump, wasm2wat, etc.)
             wasm-tools # Rust Wasm tools with GC support (wasm-tools print)
+            nodejs # Node.js for running the parser
           ];
 
           shellHook = ''
