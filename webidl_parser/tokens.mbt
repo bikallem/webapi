@@ -1,0 +1,386 @@
+pub(all) enum Token {
+  EOF
+  INTEGER(String)
+  FLOAT(String)
+  STRING(String)
+  IDENTIFIER(String)
+  INTERFACE
+  PARTIAL
+  MIXIN
+  DICTIONARY
+  ENUM
+  TYPEDEF
+  CALLBACK
+  NAMESPACE
+  INCLUDES
+  ATTRIBUTE
+  CONST
+  READONLY
+  INHERIT
+  STATIC
+  STRINGIFIER
+  GETTER
+  SETTER
+  DELETER
+  CONSTRUCTOR
+  ITERABLE
+  ASYNC
+  MAPLIKE
+  SETLIKE
+  REQUIRED
+  OPTIONAL
+  VOID
+  UNDEFINED
+  BOOLEAN
+  BYTE
+  OCTET
+  SHORT
+  LONG
+  UNSIGNED
+  FLOAT_KW
+  DOUBLE
+  UNRESTRICTED
+  BIGINT
+  DOMSTRING
+  BYTESTRING
+  USVSTRING
+  ANY
+  OBJECT
+  SYMBOL
+  SEQUENCE
+  PROMISE
+  FROZENARRAY
+  OBSERVABLEARRAY
+  RECORD
+  OR
+  ARRAYBUFFER
+  SHAREDARRAYBUFFER
+  DATAVIEW
+  INT8ARRAY
+  INT16ARRAY
+  INT32ARRAY
+  UINT8ARRAY
+  UINT16ARRAY
+  UINT32ARRAY
+  UINT8CLAMPEDARRAY
+  BIGINT64ARRAY
+  BIGUINT64ARRAY
+  FLOAT16ARRAY
+  FLOAT32ARRAY
+  FLOAT64ARRAY
+  TRUE
+  FALSE
+  NULL
+  INFINITY
+  NEG_INFINITY
+  NAN
+  LBRACE
+  RBRACE
+  LPAREN
+  RPAREN
+  LBRACKET
+  RBRACKET
+  LANGLE
+  RANGLE
+  COMMA
+  SEMICOLON
+  COLON
+  EQUALS
+  QUESTION
+  ELLIPSIS
+  DOT
+  MINUS
+  STAR
+} derive(Show)
+
+pub fn Token::kind(self : Token) -> TokenKind {
+  match self {
+    EOF => TK_EOF
+    INTEGER(_) => TK_INTEGER
+    FLOAT(_) => TK_FLOAT
+    STRING(_) => TK_STRING
+    IDENTIFIER(_) => TK_IDENTIFIER
+    INTERFACE => TK_INTERFACE
+    PARTIAL => TK_PARTIAL
+    MIXIN => TK_MIXIN
+    DICTIONARY => TK_DICTIONARY
+    ENUM => TK_ENUM
+    TYPEDEF => TK_TYPEDEF
+    CALLBACK => TK_CALLBACK
+    NAMESPACE => TK_NAMESPACE
+    INCLUDES => TK_INCLUDES
+    ATTRIBUTE => TK_ATTRIBUTE
+    CONST => TK_CONST
+    READONLY => TK_READONLY
+    INHERIT => TK_INHERIT
+    STATIC => TK_STATIC
+    STRINGIFIER => TK_STRINGIFIER
+    GETTER => TK_GETTER
+    SETTER => TK_SETTER
+    DELETER => TK_DELETER
+    CONSTRUCTOR => TK_CONSTRUCTOR
+    ITERABLE => TK_ITERABLE
+    ASYNC => TK_ASYNC
+    MAPLIKE => TK_MAPLIKE
+    SETLIKE => TK_SETLIKE
+    REQUIRED => TK_REQUIRED
+    OPTIONAL => TK_OPTIONAL
+    VOID => TK_VOID
+    UNDEFINED => TK_UNDEFINED
+    BOOLEAN => TK_BOOLEAN
+    BYTE => TK_BYTE
+    OCTET => TK_OCTET
+    SHORT => TK_SHORT
+    LONG => TK_LONG
+    UNSIGNED => TK_UNSIGNED
+    FLOAT_KW => TK_FLOAT_KW
+    DOUBLE => TK_DOUBLE
+    UNRESTRICTED => TK_UNRESTRICTED
+    BIGINT => TK_BIGINT
+    DOMSTRING => TK_DOMSTRING
+    BYTESTRING => TK_BYTESTRING
+    USVSTRING => TK_USVSTRING
+    ANY => TK_ANY
+    OBJECT => TK_OBJECT
+    SYMBOL => TK_SYMBOL
+    SEQUENCE => TK_SEQUENCE
+    PROMISE => TK_PROMISE
+    FROZENARRAY => TK_FROZENARRAY
+    OBSERVABLEARRAY => TK_OBSERVABLEARRAY
+    RECORD => TK_RECORD
+    OR => TK_OR
+    ARRAYBUFFER => TK_ARRAYBUFFER
+    SHAREDARRAYBUFFER => TK_SHAREDARRAYBUFFER
+    DATAVIEW => TK_DATAVIEW
+    INT8ARRAY => TK_INT8ARRAY
+    INT16ARRAY => TK_INT16ARRAY
+    INT32ARRAY => TK_INT32ARRAY
+    UINT8ARRAY => TK_UINT8ARRAY
+    UINT16ARRAY => TK_UINT16ARRAY
+    UINT32ARRAY => TK_UINT32ARRAY
+    UINT8CLAMPEDARRAY => TK_UINT8CLAMPEDARRAY
+    BIGINT64ARRAY => TK_BIGINT64ARRAY
+    BIGUINT64ARRAY => TK_BIGUINT64ARRAY
+    FLOAT16ARRAY => TK_FLOAT16ARRAY
+    FLOAT32ARRAY => TK_FLOAT32ARRAY
+    FLOAT64ARRAY => TK_FLOAT64ARRAY
+    TRUE => TK_TRUE
+    FALSE => TK_FALSE
+    NULL => TK_NULL
+    INFINITY => TK_INFINITY
+    NEG_INFINITY => TK_NEG_INFINITY
+    NAN => TK_NAN
+    LBRACE => TK_LBRACE
+    RBRACE => TK_RBRACE
+    LPAREN => TK_LPAREN
+    RPAREN => TK_RPAREN
+    LBRACKET => TK_LBRACKET
+    RBRACKET => TK_RBRACKET
+    LANGLE => TK_LANGLE
+    RANGLE => TK_RANGLE
+    COMMA => TK_COMMA
+    SEMICOLON => TK_SEMICOLON
+    COLON => TK_COLON
+    EQUALS => TK_EQUALS
+    QUESTION => TK_QUESTION
+    ELLIPSIS => TK_ELLIPSIS
+    DOT => TK_DOT
+    MINUS => TK_MINUS
+    STAR => TK_STAR
+  }
+}
+
+pub(all) enum TokenKind {
+  TK_EOF
+  TK_INTEGER
+  TK_FLOAT
+  TK_STRING
+  TK_IDENTIFIER
+  TK_INTERFACE
+  TK_PARTIAL
+  TK_MIXIN
+  TK_DICTIONARY
+  TK_ENUM
+  TK_TYPEDEF
+  TK_CALLBACK
+  TK_NAMESPACE
+  TK_INCLUDES
+  TK_ATTRIBUTE
+  TK_CONST
+  TK_READONLY
+  TK_INHERIT
+  TK_STATIC
+  TK_STRINGIFIER
+  TK_GETTER
+  TK_SETTER
+  TK_DELETER
+  TK_CONSTRUCTOR
+  TK_ITERABLE
+  TK_ASYNC
+  TK_MAPLIKE
+  TK_SETLIKE
+  TK_REQUIRED
+  TK_OPTIONAL
+  TK_VOID
+  TK_UNDEFINED
+  TK_BOOLEAN
+  TK_BYTE
+  TK_OCTET
+  TK_SHORT
+  TK_LONG
+  TK_UNSIGNED
+  TK_FLOAT_KW
+  TK_DOUBLE
+  TK_UNRESTRICTED
+  TK_BIGINT
+  TK_DOMSTRING
+  TK_BYTESTRING
+  TK_USVSTRING
+  TK_ANY
+  TK_OBJECT
+  TK_SYMBOL
+  TK_SEQUENCE
+  TK_PROMISE
+  TK_FROZENARRAY
+  TK_OBSERVABLEARRAY
+  TK_RECORD
+  TK_OR
+  TK_ARRAYBUFFER
+  TK_SHAREDARRAYBUFFER
+  TK_DATAVIEW
+  TK_INT8ARRAY
+  TK_INT16ARRAY
+  TK_INT32ARRAY
+  TK_UINT8ARRAY
+  TK_UINT16ARRAY
+  TK_UINT32ARRAY
+  TK_UINT8CLAMPEDARRAY
+  TK_BIGINT64ARRAY
+  TK_BIGUINT64ARRAY
+  TK_FLOAT16ARRAY
+  TK_FLOAT32ARRAY
+  TK_FLOAT64ARRAY
+  TK_TRUE
+  TK_FALSE
+  TK_NULL
+  TK_INFINITY
+  TK_NEG_INFINITY
+  TK_NAN
+  TK_LBRACE
+  TK_RBRACE
+  TK_LPAREN
+  TK_RPAREN
+  TK_LBRACKET
+  TK_RBRACKET
+  TK_LANGLE
+  TK_RANGLE
+  TK_COMMA
+  TK_SEMICOLON
+  TK_COLON
+  TK_EQUALS
+  TK_QUESTION
+  TK_ELLIPSIS
+  TK_DOT
+  TK_MINUS
+  TK_STAR
+}
+
+pub impl Show for TokenKind with output(self, logger) {
+  logger.write_string(
+    match self {
+      TK_EOF => "EOF"
+      TK_INTEGER => "INTEGER"
+      TK_FLOAT => "FLOAT"
+      TK_STRING => "STRING"
+      TK_IDENTIFIER => "IDENTIFIER"
+      TK_INTERFACE => "\"interface\""
+      TK_PARTIAL => "\"partial\""
+      TK_MIXIN => "\"mixin\""
+      TK_DICTIONARY => "\"dictionary\""
+      TK_ENUM => "\"enum\""
+      TK_TYPEDEF => "\"typedef\""
+      TK_CALLBACK => "\"callback\""
+      TK_NAMESPACE => "\"namespace\""
+      TK_INCLUDES => "\"includes\""
+      TK_ATTRIBUTE => "\"attribute\""
+      TK_CONST => "\"const\""
+      TK_READONLY => "\"readonly\""
+      TK_INHERIT => "\"inherit\""
+      TK_STATIC => "\"static\""
+      TK_STRINGIFIER => "\"stringifier\""
+      TK_GETTER => "\"getter\""
+      TK_SETTER => "\"setter\""
+      TK_DELETER => "\"deleter\""
+      TK_CONSTRUCTOR => "\"constructor\""
+      TK_ITERABLE => "\"iterable\""
+      TK_ASYNC => "\"async\""
+      TK_MAPLIKE => "\"maplike\""
+      TK_SETLIKE => "\"setlike\""
+      TK_REQUIRED => "\"required\""
+      TK_OPTIONAL => "\"optional\""
+      TK_VOID => "\"void\""
+      TK_UNDEFINED => "\"undefined\""
+      TK_BOOLEAN => "\"boolean\""
+      TK_BYTE => "\"byte\""
+      TK_OCTET => "\"octet\""
+      TK_SHORT => "\"short\""
+      TK_LONG => "\"long\""
+      TK_UNSIGNED => "\"unsigned\""
+      TK_FLOAT_KW => "\"float\""
+      TK_DOUBLE => "\"double\""
+      TK_UNRESTRICTED => "\"unrestricted\""
+      TK_BIGINT => "\"bigint\""
+      TK_DOMSTRING => "\"DOMString\""
+      TK_BYTESTRING => "\"ByteString\""
+      TK_USVSTRING => "\"USVString\""
+      TK_ANY => "\"any\""
+      TK_OBJECT => "\"object\""
+      TK_SYMBOL => "\"symbol\""
+      TK_SEQUENCE => "\"sequence\""
+      TK_PROMISE => "\"Promise\""
+      TK_FROZENARRAY => "\"FrozenArray\""
+      TK_OBSERVABLEARRAY => "\"ObservableArray\""
+      TK_RECORD => "\"record\""
+      TK_OR => "\"or\""
+      TK_ARRAYBUFFER => "\"ArrayBuffer\""
+      TK_SHAREDARRAYBUFFER => "\"SharedArrayBuffer\""
+      TK_DATAVIEW => "\"DataView\""
+      TK_INT8ARRAY => "\"Int8Array\""
+      TK_INT16ARRAY => "\"Int16Array\""
+      TK_INT32ARRAY => "\"Int32Array\""
+      TK_UINT8ARRAY => "\"Uint8Array\""
+      TK_UINT16ARRAY => "\"Uint16Array\""
+      TK_UINT32ARRAY => "\"Uint32Array\""
+      TK_UINT8CLAMPEDARRAY => "\"Uint8ClampedArray\""
+      TK_BIGINT64ARRAY => "\"BigInt64Array\""
+      TK_BIGUINT64ARRAY => "\"BigUint64Array\""
+      TK_FLOAT16ARRAY => "\"Float16Array\""
+      TK_FLOAT32ARRAY => "\"Float32Array\""
+      TK_FLOAT64ARRAY => "\"Float64Array\""
+      TK_TRUE => "\"true\""
+      TK_FALSE => "\"false\""
+      TK_NULL => "\"null\""
+      TK_INFINITY => "\"Infinity\""
+      TK_NEG_INFINITY => "\"-Infinity\""
+      TK_NAN => "\"NaN\""
+      TK_LBRACE => "\"{\""
+      TK_RBRACE => "\"}\""
+      TK_LPAREN => "\"(\""
+      TK_RPAREN => "\")\""
+      TK_LBRACKET => "\"[\""
+      TK_RBRACKET => "\"]\""
+      TK_LANGLE => "\"<\""
+      TK_RANGLE => "\">\""
+      TK_COMMA => "\",\""
+      TK_SEMICOLON => "\";\""
+      TK_COLON => "\":\""
+      TK_EQUALS => "\"=\""
+      TK_QUESTION => "\"?\""
+      TK_ELLIPSIS => "\"...\""
+      TK_DOT => "\".\""
+      TK_MINUS => "\"-\""
+      TK_STAR => "\"*\""
+    }
+  )
+}
+
