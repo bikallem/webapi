@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <title>Counter</title>
+    <style>
+        body {
+            font-family: system-ui;
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #counter-app {
+            text-align: center;
+        }
+
+        #count-display {
+            font-size: 3em;
+            margin: 0.5em 0;
+        }
+
+        button {
+            padding: 0.5em 1em;
+            font-size: 1em;
+            margin: 0 0.25em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { instantiateWithBuiltins } from "../webapi.min.mjs";
+        const instance = await instantiateWithBuiltins("../target/wasm-gc/release/build/counter/counter.wasm");
+        instance.exports._start();
+    </script>
+</body>
+
+</html>

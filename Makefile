@@ -1,5 +1,5 @@
 build:
-	moon build --target js
+	moon build
 
 gen:
 	npm run build && node dist/build.js
@@ -11,16 +11,17 @@ clean:
 	moon clean
 
 info:
-	moon info --target js
+	moon info
 
 check:
-	moon check --target js
+	moon check
 
 examples:
 	moon clean -C examples
 	moon fmt -C examples
+	moon build --target wasm-gc -C examples
 	moon build --target js -C examples
-	moon info --target js -C examples
+	moon info -C examples
 
 all: clean gen fmt build info examples
 
