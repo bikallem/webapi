@@ -1,0 +1,527 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webidl_parser"
+
+// Values
+pub fn definitions(Array[(Token, Int, Int)], initial_pos? : Int) -> Array[Definition] raise ParseError
+
+pub fn lex(StringView, file? : String) -> Array[(Token, Position, Position)] raise LexError
+
+pub fn parse(String) -> Array[Definition] raise WebIdlError
+
+pub fn tokenize(String) -> Array[(Token, Position, Position)] raise LexError
+
+// Errors
+pub suberror LexError {
+  LexFailed(StringView)
+}
+pub impl Show for LexError
+
+pub suberror ParseError {
+  UnexpectedToken(Token, (Int, Int), Array[TokenKind])
+  UnexpectedEndOfInput(Int, Array[TokenKind])
+}
+pub impl Show for ParseError
+
+pub suberror WebIdlError {
+  Lex(LexError)
+  Parse(ParseError)
+}
+pub impl Show for WebIdlError
+
+// Types and methods
+pub struct Argument {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+  name : String
+  optional : Bool
+  variadic : Bool
+  default_value : DefaultValue?
+}
+pub impl Show for Argument
+
+pub struct AsyncIterableMember {
+  extended_attributes : Array[ExtendedAttribute]
+  key_type : Type?
+  value_type : Type
+  arguments : Array[Argument]
+}
+pub impl Show for AsyncIterableMember
+
+pub struct AttributeMember {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+  name : String
+  is_readonly : Bool
+  static_ : Bool
+  is_inherit : Bool
+}
+pub impl Show for AttributeMember
+
+pub struct CallbackFunctionDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  return_type : Type
+  arguments : Array[Argument]
+}
+pub impl Show for CallbackFunctionDefinition
+
+pub struct CallbackInterfaceDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  members : Array[InterfaceMember]
+}
+pub impl Show for CallbackInterfaceDefinition
+
+pub struct ConstMember {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+  name : String
+  value : ConstValue
+}
+pub impl Show for ConstMember
+
+pub enum ConstValue {
+  Boolean(Bool)
+  Integer(String)
+  Float(String)
+  Infinity
+  NegInfinity
+  NaN
+}
+pub impl Show for ConstValue
+
+pub struct ConstructorMember {
+  extended_attributes : Array[ExtendedAttribute]
+  arguments : Array[Argument]
+}
+pub impl Show for ConstructorMember
+
+pub enum DefaultValue {
+  ConstValue(ConstValue)
+  String(String)
+  EmptySequence
+  EmptyObject
+  Null
+  Undefined
+}
+pub impl Show for DefaultValue
+
+pub enum Definition {
+  Interface(InterfaceDefinition)
+  PartialInterface(PartialInterfaceDefinition)
+  Mixin(MixinDefinition)
+  PartialMixin(PartialMixinDefinition)
+  Namespace(NamespaceDefinition)
+  PartialNamespace(PartialNamespaceDefinition)
+  Dictionary(DictionaryDefinition)
+  PartialDictionary(PartialDictionaryDefinition)
+  Enum_(EnumDefinition)
+  Typedef(TypedefDefinition)
+  CallbackFunction(CallbackFunctionDefinition)
+  CallbackInterface(CallbackInterfaceDefinition)
+  Includes(IncludesStatement)
+}
+pub impl Show for Definition
+
+pub struct DictionaryDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  inheritance : String?
+  members : Array[DictionaryMember]
+}
+pub impl Show for DictionaryDefinition
+
+pub struct DictionaryMember {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+  name : String
+  required : Bool
+  default_value : DefaultValue?
+}
+pub impl Show for DictionaryMember
+
+pub struct EnumDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  values : Array[String]
+}
+pub impl Show for EnumDefinition
+
+pub enum ExtendedAttribute {
+  NoArgs(String)
+  Ident(String, String)
+  Wildcard(String)
+  ArgList(String, Array[Argument])
+  NamedArgList(String, String, Array[Argument])
+}
+pub impl Show for ExtendedAttribute
+
+pub struct IncludesStatement {
+  extended_attributes : Array[ExtendedAttribute]
+  interface_name : String
+  mixin_name : String
+}
+pub impl Show for IncludesStatement
+
+pub struct InterfaceDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  inheritance : String?
+  members : Array[InterfaceMember]
+}
+pub impl Show for InterfaceDefinition
+
+pub enum InterfaceMember {
+  Const(ConstMember)
+  Attribute(AttributeMember)
+  Operation(OperationMember)
+  Constructor(ConstructorMember)
+  Iterable(IterableMember)
+  AsyncIterable(AsyncIterableMember)
+  Maplike(MaplikeMember)
+  Setlike(SetlikeMember)
+  Stringifier(StringifierMember)
+}
+pub impl Show for InterfaceMember
+
+pub struct IterableMember {
+  extended_attributes : Array[ExtendedAttribute]
+  key_type : Type?
+  value_type : Type
+}
+pub impl Show for IterableMember
+
+pub struct MaplikeMember {
+  extended_attributes : Array[ExtendedAttribute]
+  key_type : Type
+  value_type : Type
+  is_readonly : Bool
+}
+pub impl Show for MaplikeMember
+
+pub struct MixinDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  members : Array[InterfaceMember]
+}
+pub impl Show for MixinDefinition
+
+pub struct NamespaceDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  members : Array[NamespaceMember]
+}
+pub impl Show for NamespaceDefinition
+
+pub enum NamespaceMember {
+  Operation(OperationMember)
+  Attribute(AttributeMember)
+  Const(ConstMember)
+}
+pub impl Show for NamespaceMember
+
+pub struct OperationMember {
+  extended_attributes : Array[ExtendedAttribute]
+  return_type : Type
+  name : String?
+  arguments : Array[Argument]
+  static_ : Bool
+  special : Special?
+}
+pub impl Show for OperationMember
+
+pub struct PartialDictionaryDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  members : Array[DictionaryMember]
+}
+pub impl Show for PartialDictionaryDefinition
+
+pub struct PartialInterfaceDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  members : Array[InterfaceMember]
+}
+pub impl Show for PartialInterfaceDefinition
+
+pub struct PartialMixinDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  members : Array[InterfaceMember]
+}
+pub impl Show for PartialMixinDefinition
+
+pub struct PartialNamespaceDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  name : String
+  members : Array[NamespaceMember]
+}
+pub impl Show for PartialNamespaceDefinition
+
+pub struct Position {
+  file : String
+  line : Int
+  column : Int
+}
+pub impl Show for Position
+
+pub struct SetlikeMember {
+  extended_attributes : Array[ExtendedAttribute]
+  value_type : Type
+  is_readonly : Bool
+}
+pub impl Show for SetlikeMember
+
+pub enum Special {
+  Getter
+  Setter
+  Deleter
+}
+pub impl Show for Special
+
+pub enum StringType {
+  DOMString
+  ByteString
+  USVString
+}
+pub impl Show for StringType
+
+pub enum StringifierMember {
+  Bare
+}
+pub impl Show for StringifierMember
+
+pub(all) enum Token {
+  EOF
+  INTEGER(String)
+  FLOAT(String)
+  STRING(String)
+  IDENTIFIER(String)
+  INTERFACE
+  PARTIAL
+  MIXIN
+  DICTIONARY
+  ENUM
+  TYPEDEF
+  CALLBACK
+  NAMESPACE
+  INCLUDES
+  ATTRIBUTE
+  CONST
+  READONLY
+  INHERIT
+  STATIC
+  STRINGIFIER
+  GETTER
+  SETTER
+  DELETER
+  CONSTRUCTOR
+  ITERABLE
+  ASYNC
+  MAPLIKE
+  SETLIKE
+  REQUIRED
+  OPTIONAL
+  VOID
+  UNDEFINED
+  BOOLEAN
+  BYTE
+  OCTET
+  SHORT
+  LONG
+  UNSIGNED
+  FLOAT_KW
+  DOUBLE
+  UNRESTRICTED
+  BIGINT
+  DOMSTRING
+  BYTESTRING
+  USVSTRING
+  ANY
+  OBJECT
+  SYMBOL
+  SEQUENCE
+  PROMISE
+  FROZENARRAY
+  OBSERVABLEARRAY
+  RECORD
+  OR
+  ARRAYBUFFER
+  SHAREDARRAYBUFFER
+  DATAVIEW
+  INT8ARRAY
+  INT16ARRAY
+  INT32ARRAY
+  UINT8ARRAY
+  UINT16ARRAY
+  UINT32ARRAY
+  UINT8CLAMPEDARRAY
+  BIGINT64ARRAY
+  BIGUINT64ARRAY
+  FLOAT16ARRAY
+  FLOAT32ARRAY
+  FLOAT64ARRAY
+  TRUE
+  FALSE
+  NULL
+  INFINITY
+  NEG_INFINITY
+  NAN
+  LBRACE
+  RBRACE
+  LPAREN
+  RPAREN
+  LBRACKET
+  RBRACKET
+  LANGLE
+  RANGLE
+  COMMA
+  SEMICOLON
+  COLON
+  EQUALS
+  QUESTION
+  ELLIPSIS
+  STAR
+}
+pub fn Token::kind(Self) -> TokenKind
+pub impl Show for Token
+
+pub(all) enum TokenKind {
+  TK_EOF
+  TK_INTEGER
+  TK_FLOAT
+  TK_STRING
+  TK_IDENTIFIER
+  TK_INTERFACE
+  TK_PARTIAL
+  TK_MIXIN
+  TK_DICTIONARY
+  TK_ENUM
+  TK_TYPEDEF
+  TK_CALLBACK
+  TK_NAMESPACE
+  TK_INCLUDES
+  TK_ATTRIBUTE
+  TK_CONST
+  TK_READONLY
+  TK_INHERIT
+  TK_STATIC
+  TK_STRINGIFIER
+  TK_GETTER
+  TK_SETTER
+  TK_DELETER
+  TK_CONSTRUCTOR
+  TK_ITERABLE
+  TK_ASYNC
+  TK_MAPLIKE
+  TK_SETLIKE
+  TK_REQUIRED
+  TK_OPTIONAL
+  TK_VOID
+  TK_UNDEFINED
+  TK_BOOLEAN
+  TK_BYTE
+  TK_OCTET
+  TK_SHORT
+  TK_LONG
+  TK_UNSIGNED
+  TK_FLOAT_KW
+  TK_DOUBLE
+  TK_UNRESTRICTED
+  TK_BIGINT
+  TK_DOMSTRING
+  TK_BYTESTRING
+  TK_USVSTRING
+  TK_ANY
+  TK_OBJECT
+  TK_SYMBOL
+  TK_SEQUENCE
+  TK_PROMISE
+  TK_FROZENARRAY
+  TK_OBSERVABLEARRAY
+  TK_RECORD
+  TK_OR
+  TK_ARRAYBUFFER
+  TK_SHAREDARRAYBUFFER
+  TK_DATAVIEW
+  TK_INT8ARRAY
+  TK_INT16ARRAY
+  TK_INT32ARRAY
+  TK_UINT8ARRAY
+  TK_UINT16ARRAY
+  TK_UINT32ARRAY
+  TK_UINT8CLAMPEDARRAY
+  TK_BIGINT64ARRAY
+  TK_BIGUINT64ARRAY
+  TK_FLOAT16ARRAY
+  TK_FLOAT32ARRAY
+  TK_FLOAT64ARRAY
+  TK_TRUE
+  TK_FALSE
+  TK_NULL
+  TK_INFINITY
+  TK_NEG_INFINITY
+  TK_NAN
+  TK_LBRACE
+  TK_RBRACE
+  TK_LPAREN
+  TK_RPAREN
+  TK_LBRACKET
+  TK_RBRACKET
+  TK_LANGLE
+  TK_RANGLE
+  TK_COMMA
+  TK_SEMICOLON
+  TK_COLON
+  TK_EQUALS
+  TK_QUESTION
+  TK_ELLIPSIS
+  TK_STAR
+}
+pub impl Show for TokenKind
+
+pub enum Type {
+  Void
+  Undefined
+  Boolean
+  Byte
+  Octet
+  Short
+  UnsignedShort
+  Long
+  UnsignedLong
+  LongLong
+  UnsignedLongLong
+  Float
+  UnrestrictedFloat
+  Double
+  UnrestrictedDouble
+  Bigint
+  DOMString
+  ByteString
+  USVString
+  Any
+  Object
+  Symbol
+  Identifier(String)
+  Sequence(Type)
+  FrozenArray(Type)
+  ObservableArray(Type)
+  Promise(Type)
+  Record(StringType, Type)
+  Union(Array[Type])
+  Nullable(Type)
+}
+pub impl Show for Type
+
+pub struct TypedefDefinition {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+  name : String
+}
+pub impl Show for TypedefDefinition
+
+// Type aliases
+
+// Traits
+

@@ -88,8 +88,6 @@ pub(all) enum Token {
   EQUALS
   QUESTION
   ELLIPSIS
-  DOT
-  MINUS
   STAR
 } derive(Show)
 
@@ -184,8 +182,6 @@ pub fn Token::kind(self : Token) -> TokenKind {
     EQUALS => TK_EQUALS
     QUESTION => TK_QUESTION
     ELLIPSIS => TK_ELLIPSIS
-    DOT => TK_DOT
-    MINUS => TK_MINUS
     STAR => TK_STAR
   }
 }
@@ -280,8 +276,6 @@ pub(all) enum TokenKind {
   TK_EQUALS
   TK_QUESTION
   TK_ELLIPSIS
-  TK_DOT
-  TK_MINUS
   TK_STAR
 }
 
@@ -377,8 +371,6 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_EQUALS => "\"=\""
       TK_QUESTION => "\"?\""
       TK_ELLIPSIS => "\"...\""
-      TK_DOT => "\".\""
-      TK_MINUS => "\"-\""
       TK_STAR => "\"*\""
     }
   )

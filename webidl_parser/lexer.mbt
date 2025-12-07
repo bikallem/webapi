@@ -162,8 +162,6 @@ pub fn lex(
       ("\[", xs) => push(LBRACKET, "[", xs)
       ("\]", xs) => push(RBRACKET, "]", xs)
       (",", xs) => push(COMMA, ",", xs)
-      ("\.", xs) => push(DOT, ".", xs)
-      ("-", xs) => push(MINUS, "-", xs)
       ("$", _) => {
         push(EOF, "", "")
         break

@@ -14,7 +14,6 @@ pub enum ExtendedAttribute {
   Wildcard(String) // [Exposed=*]
   ArgList(String, Array[Argument]) // [Constructor(DOMString url)]
   NamedArgList(String, String, Array[Argument]) // [NamedConstructor=Image(DOMString src)]
-  IdentList(String, Array[String]) // [Exposed=(Window, Worker)]
 } derive(Show)
 
 // =============================================================================
@@ -69,26 +68,6 @@ pub enum StringType {
   DOMString
   ByteString
   USVString
-} derive(Show)
-
-///|
-/// Buffer-related types
-pub enum BufferType {
-  ArrayBuffer
-  SharedArrayBuffer
-  DataView
-  Int8Array
-  Int16Array
-  Int32Array
-  Uint8Array
-  Uint16Array
-  Uint32Array
-  Uint8ClampedArray
-  BigInt64Array
-  BigUint64Array
-  Float16Array
-  Float32Array
-  Float64Array
 } derive(Show)
 
 // =============================================================================
@@ -227,10 +206,8 @@ pub struct SetlikeMember {
 } derive(Show)
 
 ///|
-/// Stringifier member
+/// Stringifier member (simplified - only bare stringifier supported)
 pub enum StringifierMember {
-  Attribute(AttributeMember)
-  Operation(OperationMember)
   Bare
 } derive(Show)
 
