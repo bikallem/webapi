@@ -1,4 +1,7 @@
 {
+    "import": [
+        "moonbitlang/x/fs"
+    ],
     "pre-build": [
         {
             "command": "node $mod_dir/.mooncakes/moonbitlang/yacc/target/js/release/build/main/main.cjs --mode only-tokens $input -o $output",
