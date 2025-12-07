@@ -1,6 +1,0 @@
-{
-    "import": [
-        "bikallem/webidl_parser",
-        "bikallem/webapi_gen/types"
-    ]
-}
