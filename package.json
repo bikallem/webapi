@@ -1,15 +1,15 @@
 {
-    "name": "mbt-dom-gen",
+    "name": "webapi-gen-ts",
     "version": "0.1.0",
-    "description": "Generate MoonBit DOM bindings from Web IDL",
+    "description": "Generate MoonBit DOM bindings from Web IDL (TypeScript version)",
     "type": "module",
     "main": "dist/build.js",
     "scripts": {
         "build": "tsc",
-        "lint": "eslint webapi-gen",
-        "format": "prettier --write \"webapi-gen/**/*.ts\"",
+        "lint": "eslint webapi-gen-ts",
+        "format": "prettier --write \"webapi-gen-ts/**/*.ts\"",
         "generate": "tsc && node dist/build.js",
-        "clean": "rm -rf dist webapi/dom/*.mbt webapi/dom/*.mjs"
+        "clean": "rm -rf dist src/*.mbt src/*.mjs"
     },
     "keywords": [
         "moonbit",

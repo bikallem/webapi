@@ -4,7 +4,7 @@
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "outDir": "dist",
-        "rootDir": "webapi-gen",
+        "rootDir": "webapi-gen-ts",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
@@ -13,7 +13,7 @@
         "resolveJsonModule": true
     },
     "include": [
-        "webapi-gen/**/*"
+        "webapi-gen-ts/**/*"
     ],
     "exclude": [
         "node_modules",
