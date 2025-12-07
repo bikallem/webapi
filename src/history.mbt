@@ -29,9 +29,8 @@ pub impl TJsValue for History with to_js(self : History) -> JsValue = "%identity
 fn history_go_ffi(obj : JsValue, delta : JsValue) -> Unit = "webapi_History" "go"
 
 ///|
-impl THistory with go(self : Self, delta? : Int) -> Unit {
-  let delta_js = opt_to_js(delta)
-  history_go_ffi(TJsValue::to_js(self), delta_js)
+impl THistory with go(self : Self, delta? : Int = 0) -> Unit {
+  history_go_ffi(TJsValue::to_js(self), TJsValue::to_js(delta))
 }
 
 ///|
@@ -63,14 +62,13 @@ impl THistory with push_state(
   self : Self,
   data : JsValue,
   unused : String,
-  url? : String,
+  url? : String = JsValue::null(),
 ) -> Unit {
-  let url_js = opt_to_js(url)
   history_push_state_ffi(
     TJsValue::to_js(self),
     data,
     TJsValue::to_js(unused),
-    url_js,
+    TJsValue::to_js(url),
   )
 }
 
@@ -87,14 +85,13 @@ impl THistory with replace_state(
   self : Self,
   data : JsValue,
   unused : String,
-  url? : String,
+  url? : String = JsValue::null(),
 ) -> Unit {
-  let url_js = opt_to_js(url)
   history_replace_state_ffi(
     TJsValue::to_js(self),
     data,
     TJsValue::to_js(unused),
-    url_js,
+    TJsValue::to_js(url),
   )
 }
 

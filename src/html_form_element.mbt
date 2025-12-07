@@ -73,10 +73,12 @@ fn html_form_element_request_submit_ffi(
 ///|
 impl THTMLFormElement with request_submit(
   self : Self,
-  submitter? : &THTMLElement,
+  submitter? : &THTMLElement = JsValue::null(),
 ) -> Unit {
-  let submitter_js = opt_to_js(submitter)
-  html_form_element_request_submit_ffi(TJsValue::to_js(self), submitter_js)
+  html_form_element_request_submit_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(submitter),
+  )
 }
 
 ///|

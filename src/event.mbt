@@ -111,16 +111,14 @@ fn event_init_event_ffi(
 impl TEvent with init_event(
   self : Self,
   type_ : String,
-  bubbles? : Bool,
-  cancelable? : Bool,
+  bubbles? : Bool = false,
+  cancelable? : Bool = false,
 ) -> Unit {
-  let bubbles_js = opt_to_js(bubbles)
-  let cancelable_js = opt_to_js(cancelable)
   event_init_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-    bubbles_js,
-    cancelable_js,
+    TJsValue::to_js(bubbles),
+    TJsValue::to_js(cancelable),
   )
 }
 

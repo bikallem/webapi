@@ -14,12 +14,11 @@ fn box_quad_options_ffi(box : JsValue, relative_to : JsValue) -> BoxQuadOptions 
 
 ///|
 pub fn BoxQuadOptions::new(
-  box? : CSSBoxType,
+  box? : CSSBoxType = CSSBoxType::Border,
   relative_to? : JsValue,
 ) -> BoxQuadOptions {
-  let box_js = opt_to_js(box)
   let relative_to_js = opt_to_js(relative_to)
-  box_quad_options_ffi(box_js, relative_to_js)
+  box_quad_options_ffi(TJsValue::to_js(box), relative_to_js)
 }
 
 ///|

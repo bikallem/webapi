@@ -230,6 +230,7 @@ function emitTraitMethodImpl(
   iface: ParsedInterface,
   method: ParsedMethod,
   suffix: string = "",
+  idl?: ParsedIdl,
 ): string {
   const methodName = toSnakeCase(method.name) + suffix;
   const ffiName = generateMethodFfiName(iface.name, method.name) + suffix;
@@ -237,6 +238,9 @@ function emitTraitMethodImpl(
 
   // Build parameter list - same as trait signature
   const params: string[] = ["self : Self"];
+  // Track which optional params have defaults (these receive the type directly, not Option)
+  const optionalWithDefault = new Set<string>();
+
   for (const param of method.params) {
     const paramName = escapeKeyword(toSnakeCase(param.name));
     const { paramType, mapped, isUnionArg } = mapMethodParamType(
@@ -263,12 +267,16 @@ function emitTraitMethodImpl(
     ) {
       // Dictionary param with {} default - use proper type with ::empty() default
       defaultExpr = `${mapped.moonbitType}::empty()`;
+    } else if (param.optional && param.default) {
+      // Fallback to getDefaultValueExpr for all other defaults (including enums)
+      defaultExpr = getDefaultValueExpr(param.default, param.type, idl);
     }
 
     // Optional params use paramName? : Type syntax
     if (param.optional) {
       if (defaultExpr) {
         params.push(`${paramName}? : ${paramType} = ${defaultExpr}`);
+        optionalWithDefault.add(paramName);
       } else {
         params.push(`${paramName}? : ${paramType}`);
       }
@@ -293,11 +301,21 @@ function emitTraitMethodImpl(
       param.name,
     );
 
-    // Check if this param has a default value of {}
-    const hasDefaultEmpty = param.optional && param.default === "{}";
+    // Check if this param has a default value
+    const hasDefault = optionalWithDefault.has(paramName);
 
     if (param.optional) {
-      if (mapped.isTypedefUnion) {
+      if (hasDefault) {
+        // Has default value - param is the type directly, not Option
+        if (isUnionArg) {
+          // Union trait objects use their own to_js method
+          args.push(`${paramName}.to_js()`);
+        } else if (mapped.needsConversion) {
+          args.push(`TJsValue::to_js(${paramName})`);
+        } else {
+          args.push(paramName);
+        }
+      } else if (mapped.isTypedefUnion) {
         // Typedef union optional - use explicit trait syntax
         // mapped.moonbitType is &TTypeName, extract TTypeName for the to_js call
         const traitName = mapped.moonbitType.replace(/^&/, "");
@@ -307,27 +325,19 @@ function emitTraitMethodImpl(
         );
         args.push(jsVarName);
       } else if (isUnionArg) {
-        if (hasDefaultEmpty) {
-          // Has default value - param is not Option, just call to_js directly
-          args.push(`${paramName}.to_js()`);
-        } else {
-          // No default - use match to handle Option
-          const jsVarName = `${paramName}_js`;
-          letBindings.push(
-            `  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`,
-          );
-          args.push(jsVarName);
-        }
-      } else if (mapped.isDictionary && hasDefaultEmpty) {
-        // Dictionary with {} default - has actual value, convert directly
-        args.push(`TJsValue::to_js(${paramName})`);
+        // No default - use match to handle Option
+        const jsVarName = `${paramName}_js`;
+        letBindings.push(
+          `  let ${jsVarName} = match ${paramName} { Some(v) => v.to_js(), None => JsValue::undefined() }`,
+        );
+        args.push(jsVarName);
       } else if (isCollapsedUnion) {
         // Collapsed union - treat like a regular type
         const jsVarName = `${paramName}_js`;
         letBindings.push(`  let ${jsVarName} = opt_to_js(${paramName})`);
         args.push(jsVarName);
       } else {
-        // Non-union optional - use opt_to_js
+        // Non-union optional without default - use opt_to_js
         const jsVarName = `${paramName}_js`;
         letBindings.push(`  let ${jsVarName} = opt_to_js(${paramName})`);
         args.push(jsVarName);
@@ -374,6 +384,7 @@ function emitStaticMethod(
   iface: ParsedInterface,
   method: ParsedMethod,
   suffix: string = "",
+  idl?: ParsedIdl,
 ): string {
   const methodName = toSnakeCase(method.name) + suffix;
   const moduleName = toFfiModuleName(iface.name);
@@ -406,7 +417,7 @@ fn ${ffiName}(${ffiParamsStr}) -> ${returnType} = "${moduleName}" "${jsFuncName}
     if (param.optional) {
       // Add optional param with default
       const defaultVal = param.default
-        ? getDefaultValueExpr(param.default, param.type)
+        ? getDefaultValueExpr(param.default, param.type, idl)
         : undefined;
       if (defaultVal) {
         // With default value: `name? : Type = default` - param is of type Type
@@ -489,11 +500,11 @@ export function emitMethods(iface: ParsedInterface, idl: ParsedIdl): string {
 
     if (method.static) {
       // Emit static method
-      parts.push(emitStaticMethod(iface, method, suffix));
+      parts.push(emitStaticMethod(iface, method, suffix, idl));
     } else {
       // Instance methods: FFI + impl (default implementations for trait)
       parts.push(emitMethodFfi(iface, method, suffix));
-      parts.push(emitTraitMethodImpl(iface, method, suffix));
+      parts.push(emitTraitMethodImpl(iface, method, suffix, idl));
     }
   }
 

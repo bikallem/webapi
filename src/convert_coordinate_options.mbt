@@ -19,12 +19,13 @@ fn convert_coordinate_options_ffi(
 
 ///|
 pub fn ConvertCoordinateOptions::new(
-  from_box? : CSSBoxType,
-  to_box? : CSSBoxType,
+  from_box? : CSSBoxType = CSSBoxType::Border,
+  to_box? : CSSBoxType = CSSBoxType::Border,
 ) -> ConvertCoordinateOptions {
-  let from_box_js = opt_to_js(from_box)
-  let to_box_js = opt_to_js(to_box)
-  convert_coordinate_options_ffi(from_box_js, to_box_js)
+  convert_coordinate_options_ffi(
+    TJsValue::to_js(from_box),
+    TJsValue::to_js(to_box),
+  )
 }
 
 ///|

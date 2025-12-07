@@ -530,14 +530,16 @@ fn window_open_ffi(
 ///|
 impl TWindow with open(
   self : Self,
-  url? : String,
-  target? : String,
-  features? : String,
+  url? : String = "",
+  target? : String = "_blank",
+  features? : String = "",
 ) -> Window? {
-  let url_js = opt_to_js(url)
-  let target_js = opt_to_js(target)
-  let features_js = opt_to_js(features)
-  window_open_ffi(TJsValue::to_js(self), url_js, target_js, features_js).as_option()
+  window_open_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(url),
+    TJsValue::to_js(target),
+    TJsValue::to_js(features),
+  ).as_option()
 }
 
 ///|
@@ -560,9 +562,8 @@ impl TWindow with alert2(self : Self, message : String) -> Unit {
 fn window_confirm_ffi(obj : JsValue, message : JsValue) -> JsValue = "webapi_Window" "confirm"
 
 ///|
-impl TWindow with confirm(self : Self, message? : String) -> Bool {
-  let message_js = opt_to_js(message)
-  window_confirm_ffi(TJsValue::to_js(self), message_js).unsafe_cast()
+impl TWindow with confirm(self : Self, message? : String = "") -> Bool {
+  window_confirm_ffi(TJsValue::to_js(self), TJsValue::to_js(message)).unsafe_cast()
 }
 
 ///|
@@ -573,10 +574,16 @@ fn window_prompt_ffi(
 ) -> JsValue = "webapi_Window" "prompt"
 
 ///|
-impl TWindow with prompt(self : Self, message? : String, default? : String) -> String? {
-  let message_js = opt_to_js(message)
-  let default_js = opt_to_js(default)
-  window_prompt_ffi(TJsValue::to_js(self), message_js, default_js).as_option()
+impl TWindow with prompt(
+  self : Self,
+  message? : String = "",
+  default? : String = "",
+) -> String? {
+  window_prompt_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(message),
+    TJsValue::to_js(default),
+  ).as_option()
 }
 
 ///|
@@ -600,14 +607,13 @@ impl TWindow with post_message(
   self : Self,
   message : JsValue,
   target_origin : String,
-  transfer? : Array[JsValue],
+  transfer? : Array[JsValue] = [],
 ) -> Unit {
-  let transfer_js = opt_to_js(transfer)
   window_post_message_ffi(
     TJsValue::to_js(self),
     message,
     TJsValue::to_js(target_origin),
-    transfer_js,
+    TJsValue::to_js(transfer),
   )
 }
 
@@ -683,20 +689,23 @@ fn window_set_timeout_ffi(
 impl TWindow with set_timeout(
   self : Self,
   handler : JsValue,
-  timeout? : Int,
+  timeout? : Int = 0,
   arguments : JsValue,
 ) -> Int {
-  let timeout_js = opt_to_js(timeout)
-  window_set_timeout_ffi(TJsValue::to_js(self), handler, timeout_js, arguments).unsafe_cast()
+  window_set_timeout_ffi(
+    TJsValue::to_js(self),
+    handler,
+    TJsValue::to_js(timeout),
+    arguments,
+  ).unsafe_cast()
 }
 
 ///|
 fn window_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_Window" "clearTimeout"
 
 ///|
-impl TWindow with clear_timeout(self : Self, id? : Int) -> Unit {
-  let id_js = opt_to_js(id)
-  window_clear_timeout_ffi(TJsValue::to_js(self), id_js)
+impl TWindow with clear_timeout(self : Self, id? : Int = 0) -> Unit {
+  window_clear_timeout_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
 }
 
 ///|
@@ -711,20 +720,23 @@ fn window_set_interval_ffi(
 impl TWindow with set_interval(
   self : Self,
   handler : JsValue,
-  timeout? : Int,
+  timeout? : Int = 0,
   arguments : JsValue,
 ) -> Int {
-  let timeout_js = opt_to_js(timeout)
-  window_set_interval_ffi(TJsValue::to_js(self), handler, timeout_js, arguments).unsafe_cast()
+  window_set_interval_ffi(
+    TJsValue::to_js(self),
+    handler,
+    TJsValue::to_js(timeout),
+    arguments,
+  ).unsafe_cast()
 }
 
 ///|
 fn window_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_Window" "clearInterval"
 
 ///|
-impl TWindow with clear_interval(self : Self, id? : Int) -> Unit {
-  let id_js = opt_to_js(id)
-  window_clear_interval_ffi(TJsValue::to_js(self), id_js)
+impl TWindow with clear_interval(self : Self, id? : Int = 0) -> Unit {
+  window_clear_interval_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
 }
 
 ///|

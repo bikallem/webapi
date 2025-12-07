@@ -59,18 +59,16 @@ fn custom_event_init_custom_event_ffi(
 impl TCustomEvent with init_custom_event(
   self : Self,
   type_ : String,
-  bubbles? : Bool,
-  cancelable? : Bool,
+  bubbles? : Bool = false,
+  cancelable? : Bool = false,
   detail? : JsValue,
 ) -> Unit {
-  let bubbles_js = opt_to_js(bubbles)
-  let cancelable_js = opt_to_js(cancelable)
   let detail_js = opt_to_js(detail)
   custom_event_init_custom_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-    bubbles_js,
-    cancelable_js,
+    TJsValue::to_js(bubbles),
+    TJsValue::to_js(cancelable),
     detail_js,
   )
 }

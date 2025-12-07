@@ -20,14 +20,15 @@ fn scroll_into_view_options_ffi(
 
 ///|
 pub fn ScrollIntoViewOptions::new(
-  block? : ScrollLogicalPosition,
-  inline? : ScrollLogicalPosition,
-  container? : ScrollIntoViewContainer,
+  block? : ScrollLogicalPosition = ScrollLogicalPosition::Start,
+  inline? : ScrollLogicalPosition = ScrollLogicalPosition::Nearest,
+  container? : ScrollIntoViewContainer = ScrollIntoViewContainer::All,
 ) -> ScrollIntoViewOptions {
-  let block_js = opt_to_js(block)
-  let inline_js = opt_to_js(inline)
-  let container_js = opt_to_js(container)
-  scroll_into_view_options_ffi(block_js, inline_js, container_js)
+  scroll_into_view_options_ffi(
+    TJsValue::to_js(block),
+    TJsValue::to_js(inline),
+    TJsValue::to_js(container),
+  )
 }
 
 ///|

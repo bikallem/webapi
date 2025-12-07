@@ -24,17 +24,15 @@ fn canvas_rendering_context2_d_settings_ffi(
 pub fn CanvasRenderingContext2DSettings::new(
   alpha? : Bool = true,
   desynchronized? : Bool = false,
-  color_space? : PredefinedColorSpace,
-  color_type? : CanvasColorType,
+  color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb,
+  color_type? : CanvasColorType = CanvasColorType::Unorm8,
   will_read_frequently? : Bool = false,
 ) -> CanvasRenderingContext2DSettings {
-  let color_space_js = opt_to_js(color_space)
-  let color_type_js = opt_to_js(color_type)
   canvas_rendering_context2_d_settings_ffi(
     TJsValue::to_js(alpha),
     TJsValue::to_js(desynchronized),
-    color_space_js,
-    color_type_js,
+    TJsValue::to_js(color_space),
+    TJsValue::to_js(color_type),
     TJsValue::to_js(will_read_frequently),
   )
 }

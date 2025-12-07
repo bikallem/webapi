@@ -9,7 +9,7 @@ import { toSnakeCase } from "../mapper.js";
  * Plus-separated values like "xhtml+xml" -> "XhtmlXml"
  * Values starting with digits get prefixed with "V" (e.g., "2d" -> "V2d")
  */
-function toVariantName(value: string): string {
+export function toVariantName(value: string): string {
   // Handle empty string
   if (value === "") {
     return "Empty";

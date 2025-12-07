@@ -138,9 +138,8 @@ impl TNode with normalize(self : Self) -> Unit {
 fn node_clone_node_ffi(obj : JsValue, subtree : JsValue) -> JsValue = "webapi_Node" "cloneNode"
 
 ///|
-impl TNode with clone_node(self : Self, subtree? : Bool) -> Node {
-  let subtree_js = opt_to_js(subtree)
-  node_clone_node_ffi(TJsValue::to_js(self), subtree_js).unsafe_cast()
+impl TNode with clone_node(self : Self, subtree? : Bool = false) -> Node {
+  node_clone_node_ffi(TJsValue::to_js(self), TJsValue::to_js(subtree)).unsafe_cast()
 }
 
 ///|

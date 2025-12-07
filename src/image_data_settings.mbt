@@ -18,11 +18,10 @@ fn image_data_settings_ffi(
 ///|
 pub fn ImageDataSettings::new(
   color_space? : PredefinedColorSpace,
-  pixel_format? : ImageDataPixelFormat,
+  pixel_format? : ImageDataPixelFormat = ImageDataPixelFormat::RgbaUnorm8,
 ) -> ImageDataSettings {
   let color_space_js = opt_to_js(color_space)
-  let pixel_format_js = opt_to_js(pixel_format)
-  image_data_settings_ffi(color_space_js, pixel_format_js)
+  image_data_settings_ffi(color_space_js, TJsValue::to_js(pixel_format))
 }
 
 ///|

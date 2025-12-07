@@ -4,7 +4,7 @@
  * Generates MoonBit code for Web IDL dictionaries (options objects).
  */
 
-import type { ParsedDictionary } from "../parser.js";
+import type { ParsedDictionary, ParsedIdl } from "../parser.js";
 import {
   toSnakeCase,
   escapeKeyword,
@@ -56,7 +56,7 @@ fn ${ffiName}(${paramsStr}) -> ${dict.name} = "${moduleName}" "new"`;
 /**
  * Emit the public constructor method with optional parameters
  */
-function emitDictionaryBuilder(dict: ParsedDictionary): string {
+function emitDictionaryBuilder(dict: ParsedDictionary, idl?: ParsedIdl): string {
   const ffiName = `${toSnakeCase(dict.name)}_ffi`;
 
   if (dict.members.length === 0) {
@@ -88,7 +88,7 @@ pub fn ${dict.name}::new() -> ${dict.name} {
       });
     } else {
       // Optional with possible default
-      const defaultExpr = getDefaultValueExpr(member.default, member.type);
+      const defaultExpr = getDefaultValueExpr(member.default, member.type, idl);
       if (defaultExpr) {
         // Has default - not wrapped in Option
         params.push(`${paramName}? : ${mapped.moonbitType} = ${defaultExpr}`);
@@ -156,7 +156,7 @@ pub fn ${dict.name}::empty() -> ${dict.name} = "webapi_Dictionary" "empty"`;
 /**
  * Emit complete code for a dictionary
  */
-export function emitDictionary(dict: ParsedDictionary): string {
+export function emitDictionary(dict: ParsedDictionary, idl?: ParsedIdl): string {
   const parts: string[] = [];
 
   // Header
@@ -170,7 +170,7 @@ export function emitDictionary(dict: ParsedDictionary): string {
   // FFI and builder
   if (dict.members.length > 0) {
     parts.push(emitDictionaryFfi(dict));
-    parts.push(emitDictionaryBuilder(dict));
+    parts.push(emitDictionaryBuilder(dict, idl));
   }
 
   // Default constructor

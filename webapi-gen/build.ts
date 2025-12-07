@@ -464,7 +464,7 @@ async function generateMoonBitFiles(
   // Generate dictionary files
   for (const [name, dict] of idl.dictionaries) {
     const filename = getDictionaryFilename(name);
-    const content = emitDictionary(dict);
+    const content = emitDictionary(dict, idl);
     const filepath = path.join(OUTPUT_DIR, filename);
 
     console.log(`  Writing ${filename}...`);

@@ -21,22 +21,22 @@ fn image_bitmap_options_ffi(
 
 ///|
 pub fn ImageBitmapOptions::new(
-  image_orientation? : ImageOrientation,
-  premultiply_alpha? : PremultiplyAlpha,
-  color_space_conversion? : ColorSpaceConversion,
+  image_orientation? : ImageOrientation = ImageOrientation::FromImage,
+  premultiply_alpha? : PremultiplyAlpha = PremultiplyAlpha::Default,
+  color_space_conversion? : ColorSpaceConversion = ColorSpaceConversion::Default,
   resize_width? : UInt,
   resize_height? : UInt,
-  resize_quality? : ResizeQuality,
+  resize_quality? : ResizeQuality = ResizeQuality::Low,
 ) -> ImageBitmapOptions {
-  let image_orientation_js = opt_to_js(image_orientation)
-  let premultiply_alpha_js = opt_to_js(premultiply_alpha)
-  let color_space_conversion_js = opt_to_js(color_space_conversion)
   let resize_width_js = opt_to_js(resize_width)
   let resize_height_js = opt_to_js(resize_height)
-  let resize_quality_js = opt_to_js(resize_quality)
   image_bitmap_options_ffi(
-    image_orientation_js, premultiply_alpha_js, color_space_conversion_js, resize_width_js,
-    resize_height_js, resize_quality_js,
+    TJsValue::to_js(image_orientation),
+    TJsValue::to_js(premultiply_alpha),
+    TJsValue::to_js(color_space_conversion),
+    resize_width_js,
+    resize_height_js,
+    TJsValue::to_js(resize_quality),
   )
 }
 

@@ -9,7 +9,8 @@
  * 5. Code emission utilities
  */
 
-import { type ParsedType, unwrapNullableType } from "./parser.js";
+import { type ParsedType, type ParsedIdl, unwrapNullableType } from "./parser.js";
+import { toVariantName } from "./emitter/enum.js";
 
 // =============================================================================
 // Name Conversion Utilities
@@ -810,10 +811,14 @@ export function mapMethodParamType(
 
 /**
  * Get the default value expression for an optional parameter
+ * @param defaultValue The default value string from IDL (e.g., "nonzero", "true", "{}")
+ * @param idlType The parsed IDL type
+ * @param idl Optional ParsedIdl for looking up enum definitions
  */
 export function getDefaultValueExpr(
   defaultValue: string | undefined,
   idlType: ParsedType,
+  idl?: ParsedIdl,
 ): string | undefined {
   if (!defaultValue) return undefined;
 
@@ -839,6 +844,16 @@ export function getDefaultValueExpr(
       return `${mapped.moonbitType}::empty()`;
     default:
       if (defaultValue.startsWith('"')) {
+        // Check if this is an enum type with a string default
+        if (idl && idlType.name) {
+          const enumDef = idl.enums.get(idlType.name);
+          if (enumDef) {
+            // It's an enum - convert string default to variant constructor
+            const strValue = defaultValue.slice(1, -1); // Remove quotes
+            const variantName = toVariantName(strValue);
+            return `${idlType.name}::${variantName}`;
+          }
+        }
         // String default - only use if type is String
         if (mapped.moonbitType === "String") {
           return defaultValue;

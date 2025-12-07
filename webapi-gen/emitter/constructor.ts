@@ -9,7 +9,7 @@
  * - MoonBit match syntax uses newlines between cases, not commas
  */
 
-import type { ParsedInterface, ParsedConstructor } from "../parser.js";
+import type { ParsedInterface, ParsedConstructor, ParsedIdl } from "../parser.js";
 import { toSnakeCase, escapeKeyword, toFfiModuleName } from "../mapper.js";
 import { mapIdlType, getDefaultValueExpr } from "../mapper.js";
 
@@ -20,6 +20,7 @@ function emitConstructor(
   iface: ParsedInterface,
   constructor: ParsedConstructor,
   index: number,
+  idl?: ParsedIdl,
 ): string {
   const moduleName = toFfiModuleName(iface.name);
 
@@ -44,7 +45,7 @@ pub fn ${iface.name}::${methodName}() -> ${iface.name} = "${moduleName}" "new"`;
     if (param.optional) {
       // Get default value if any
       const defaultVal = param.default
-        ? getDefaultValueExpr(param.default, param.type)
+        ? getDefaultValueExpr(param.default, param.type, idl)
         : undefined;
       if (defaultVal) {
         // Has default - param receives the type directly, not Option
@@ -139,7 +140,7 @@ pub fn ${iface.name}::${methodName}(${paramsStr}) -> ${iface.name} {
 /**
  * Emit all constructors for an interface
  */
-export function emitConstructors(iface: ParsedInterface): string {
+export function emitConstructors(iface: ParsedInterface, idl?: ParsedIdl): string {
   if (iface.constructors.length === 0) {
     return "";
   }
@@ -147,7 +148,7 @@ export function emitConstructors(iface: ParsedInterface): string {
   const parts: string[] = [];
 
   for (let i = 0; i < iface.constructors.length; i++) {
-    parts.push(emitConstructor(iface, iface.constructors[i], i));
+    parts.push(emitConstructor(iface, iface.constructors[i], i, idl));
   }
 
   return parts.join("\n\n");

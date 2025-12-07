@@ -37,9 +37,9 @@ Add to your `moon.mod.json`:
 
 ## Quick Example
 
-```mbt
+```mbt check
 ///|
-fn quick_example() -> Unit {
+fn _quick_example() -> Unit {
   // Get document and create elements  
   let div = document.create_element("div")
 
@@ -60,9 +60,9 @@ fn quick_example() -> Unit {
 
 ## Shadow DOM Example
 
-```mbt
+```mbt check
 ///|
-fn create_web_component() -> Unit {
+fn _create_web_component() -> Unit {
   let doc = document
   let host = doc.create_element("div")
 
@@ -80,7 +80,7 @@ fn create_web_component() -> Unit {
   // Add slot for content projection
   let slot = doc.create_element("slot")
   shadow.append_child(slot) |> ignore
-  doc.body().unwrap().append_child(host)
+  doc.body().unwrap().append_child(host) |> ignore
 }
 ```
 
@@ -88,8 +88,8 @@ fn create_web_component() -> Unit {
 
 ```mbt
 ///|
-fn draw_canvas(canvas : HTMLCanvasElement) -> Unit {
-  let ctx = canvas.get_context("2d").unwrap().unsafe_cast()
+fn _draw_canvas(canvas : HTMLCanvasElement) -> Unit {
+  let ctx = canvas.get_context("2d").unwrap().into()
 
   // Type-safe enum properties
   ctx.set_line_join(CanvasLineJoin::Round)

@@ -19,12 +19,15 @@ fn worker_options_ffi(
 ///|
 pub fn WorkerOptions::new(
   name? : String = "",
-  type_? : WorkerType,
+  type_? : WorkerType = WorkerType::Classic,
   credentials? : JsValue,
 ) -> WorkerOptions {
-  let type__js = opt_to_js(type_)
   let credentials_js = opt_to_js(credentials)
-  worker_options_ffi(TJsValue::to_js(name), type__js, credentials_js)
+  worker_options_ffi(
+    TJsValue::to_js(name),
+    TJsValue::to_js(type_),
+    credentials_js,
+  )
 }
 
 ///|

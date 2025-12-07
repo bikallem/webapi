@@ -145,18 +145,16 @@ pub impl TJsValue for HTMLInputElement with to_js(self : HTMLInputElement) -> Js
 fn html_input_element_step_up_ffi(obj : JsValue, n : JsValue) -> Unit = "webapi_HTMLInputElement" "stepUp"
 
 ///|
-impl THTMLInputElement with step_up(self : Self, n? : Int) -> Unit {
-  let n_js = opt_to_js(n)
-  html_input_element_step_up_ffi(TJsValue::to_js(self), n_js)
+impl THTMLInputElement with step_up(self : Self, n? : Int = 1) -> Unit {
+  html_input_element_step_up_ffi(TJsValue::to_js(self), TJsValue::to_js(n))
 }
 
 ///|
 fn html_input_element_step_down_ffi(obj : JsValue, n : JsValue) -> Unit = "webapi_HTMLInputElement" "stepDown"
 
 ///|
-impl THTMLInputElement with step_down(self : Self, n? : Int) -> Unit {
-  let n_js = opt_to_js(n)
-  html_input_element_step_down_ffi(TJsValue::to_js(self), n_js)
+impl THTMLInputElement with step_down(self : Self, n? : Int = 1) -> Unit {
+  html_input_element_step_down_ffi(TJsValue::to_js(self), TJsValue::to_js(n))
 }
 
 ///|
@@ -226,15 +224,14 @@ impl THTMLInputElement with set_range_text2(
   replacement : String,
   start : UInt,
   end : UInt,
-  selection_mode? : SelectionMode,
+  selection_mode? : SelectionMode = SelectionMode::Preserve,
 ) -> Unit {
-  let selection_mode_js = opt_to_js(selection_mode)
   html_input_element_set_range_text_ffi2(
     TJsValue::to_js(self),
     TJsValue::to_js(replacement),
     TJsValue::to_js(start),
     TJsValue::to_js(end),
-    selection_mode_js,
+    TJsValue::to_js(selection_mode),
   )
 }
 

@@ -139,9 +139,8 @@ impl TRange with set_end_after(self : Self, node : &TNode) -> Unit {
 fn range_collapse_ffi(obj : JsValue, to_start : JsValue) -> Unit = "webapi_Range" "collapse"
 
 ///|
-impl TRange with collapse(self : Self, to_start? : Bool) -> Unit {
-  let to_start_js = opt_to_js(to_start)
-  range_collapse_ffi(TJsValue::to_js(self), to_start_js)
+impl TRange with collapse(self : Self, to_start? : Bool = false) -> Unit {
+  range_collapse_ffi(TJsValue::to_js(self), TJsValue::to_js(to_start))
 }
 
 ///|

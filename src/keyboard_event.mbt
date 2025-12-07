@@ -114,37 +114,28 @@ fn keyboard_event_init_keyboard_event_ffi(
 impl TKeyboardEvent with init_keyboard_event(
   self : Self,
   type_arg : String,
-  bubbles_arg? : Bool,
-  cancelable_arg? : Bool,
-  view_arg? : &TWindow,
-  key_arg? : String,
-  location_arg? : UInt,
-  ctrl_key? : Bool,
-  alt_key? : Bool,
-  shift_key? : Bool,
-  meta_key? : Bool,
+  bubbles_arg? : Bool = false,
+  cancelable_arg? : Bool = false,
+  view_arg? : &TWindow = JsValue::null(),
+  key_arg? : String = "",
+  location_arg? : UInt = 0,
+  ctrl_key? : Bool = false,
+  alt_key? : Bool = false,
+  shift_key? : Bool = false,
+  meta_key? : Bool = false,
 ) -> Unit {
-  let bubbles_arg_js = opt_to_js(bubbles_arg)
-  let cancelable_arg_js = opt_to_js(cancelable_arg)
-  let view_arg_js = opt_to_js(view_arg)
-  let key_arg_js = opt_to_js(key_arg)
-  let location_arg_js = opt_to_js(location_arg)
-  let ctrl_key_js = opt_to_js(ctrl_key)
-  let alt_key_js = opt_to_js(alt_key)
-  let shift_key_js = opt_to_js(shift_key)
-  let meta_key_js = opt_to_js(meta_key)
   keyboard_event_init_keyboard_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
-    bubbles_arg_js,
-    cancelable_arg_js,
-    view_arg_js,
-    key_arg_js,
-    location_arg_js,
-    ctrl_key_js,
-    alt_key_js,
-    shift_key_js,
-    meta_key_js,
+    TJsValue::to_js(bubbles_arg),
+    TJsValue::to_js(cancelable_arg),
+    TJsValue::to_js(view_arg),
+    TJsValue::to_js(key_arg),
+    TJsValue::to_js(location_arg),
+    TJsValue::to_js(ctrl_key),
+    TJsValue::to_js(alt_key),
+    TJsValue::to_js(shift_key),
+    TJsValue::to_js(meta_key),
   )
 }
 

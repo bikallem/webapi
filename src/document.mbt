@@ -698,15 +698,14 @@ fn document_create_node_iterator_ffi(
 impl TDocument with create_node_iterator(
   self : Self,
   root : &TNode,
-  what_to_show? : UInt,
+  what_to_show? : UInt = 0xFFFFFFFF,
   filter? : JsValue,
 ) -> JsValue {
-  let what_to_show_js = opt_to_js(what_to_show)
   let filter_js = opt_to_js(filter)
   document_create_node_iterator_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(root),
-    what_to_show_js,
+    TJsValue::to_js(what_to_show),
     filter_js,
   ).unsafe_cast()
 }
@@ -723,15 +722,14 @@ fn document_create_tree_walker_ffi(
 impl TDocument with create_tree_walker(
   self : Self,
   root : &TNode,
-  what_to_show? : UInt,
+  what_to_show? : UInt = 0xFFFFFFFF,
   filter? : JsValue,
 ) -> JsValue {
-  let what_to_show_js = opt_to_js(what_to_show)
   let filter_js = opt_to_js(filter)
   document_create_tree_walker_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(root),
-    what_to_show_js,
+    TJsValue::to_js(what_to_show),
     filter_js,
   ).unsafe_cast()
 }
@@ -875,16 +873,14 @@ fn document_exec_command_ffi(
 impl TDocument with exec_command(
   self : Self,
   command_id : String,
-  show_ui? : Bool,
-  value? : String,
+  show_ui? : Bool = false,
+  value? : String = "",
 ) -> Bool {
-  let show_ui_js = opt_to_js(show_ui)
-  let value_js = opt_to_js(value)
   document_exec_command_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(command_id),
-    show_ui_js,
-    value_js,
+    TJsValue::to_js(show_ui),
+    TJsValue::to_js(value),
   ).unsafe_cast()
 }
 
@@ -1228,18 +1224,17 @@ impl TDocument with evaluate(
   expression : String,
   context_node : &TNode,
   resolver? : JsValue,
-  type_? : UInt,
+  type_? : UInt = 0,
   result? : JsValue,
 ) -> JsValue {
   let resolver_js = opt_to_js(resolver)
-  let type__js = opt_to_js(type_)
   let result_js = opt_to_js(result)
   document_evaluate_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(expression),
     TJsValue::to_js(context_node),
     resolver_js,
-    type__js,
+    TJsValue::to_js(type_),
     result_js,
   ).unsafe_cast()
 }

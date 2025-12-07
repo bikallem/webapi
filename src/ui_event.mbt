@@ -63,22 +63,18 @@ fn ui_event_init_ui_event_ffi(
 impl TUIEvent with init_ui_event(
   self : Self,
   type_arg : String,
-  bubbles_arg? : Bool,
-  cancelable_arg? : Bool,
-  view_arg? : &TWindow,
-  detail_arg? : Int,
+  bubbles_arg? : Bool = false,
+  cancelable_arg? : Bool = false,
+  view_arg? : &TWindow = JsValue::null(),
+  detail_arg? : Int = 0,
 ) -> Unit {
-  let bubbles_arg_js = opt_to_js(bubbles_arg)
-  let cancelable_arg_js = opt_to_js(cancelable_arg)
-  let view_arg_js = opt_to_js(view_arg)
-  let detail_arg_js = opt_to_js(detail_arg)
   ui_event_init_ui_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
-    bubbles_arg_js,
-    cancelable_arg_js,
-    view_arg_js,
-    detail_arg_js,
+    TJsValue::to_js(bubbles_arg),
+    TJsValue::to_js(cancelable_arg),
+    TJsValue::to_js(view_arg),
+    TJsValue::to_js(detail_arg),
   )
 }
 

@@ -249,7 +249,7 @@ export function emitInterface(iface: ParsedInterface, idl: ParsedIdl): string {
 
   // Constructors - only for concrete types with real constructors
   if (isConcrete) {
-    const constructorCode = emitConstructors(iface);
+    const constructorCode = emitConstructors(iface, idl);
     if (constructorCode) {
       parts.push(constructorCode);
     }

@@ -67,14 +67,13 @@ fn html_canvas_element_to_data_url_ffi(
 ///|
 impl THTMLCanvasElement with to_data_url(
   self : Self,
-  type_? : String,
+  type_? : String = "image/png",
   quality? : JsValue,
 ) -> String {
-  let type__js = opt_to_js(type_)
   let quality_js = opt_to_js(quality)
   html_canvas_element_to_data_url_ffi(
     TJsValue::to_js(self),
-    type__js,
+    TJsValue::to_js(type_),
     quality_js,
   ).unsafe_cast()
 }
@@ -91,15 +90,14 @@ fn html_canvas_element_to_blob_ffi(
 impl THTMLCanvasElement with to_blob(
   self : Self,
   callback : JsValue,
-  type_? : String,
+  type_? : String = "image/png",
   quality? : JsValue,
 ) -> Unit {
-  let type__js = opt_to_js(type_)
   let quality_js = opt_to_js(quality)
   html_canvas_element_to_blob_ffi(
     TJsValue::to_js(self),
     callback,
-    type__js,
+    TJsValue::to_js(type_),
     quality_js,
   )
 }

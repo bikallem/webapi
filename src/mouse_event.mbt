@@ -120,52 +120,38 @@ fn mouse_event_init_mouse_event_ffi(
 impl TMouseEvent with init_mouse_event(
   self : Self,
   type_arg : String,
-  bubbles_arg? : Bool,
-  cancelable_arg? : Bool,
-  view_arg? : &TWindow,
-  detail_arg? : Int,
-  screen_x_arg? : Int,
-  screen_y_arg? : Int,
-  client_x_arg? : Int,
-  client_y_arg? : Int,
-  ctrl_key_arg? : Bool,
-  alt_key_arg? : Bool,
-  shift_key_arg? : Bool,
-  meta_key_arg? : Bool,
-  button_arg? : Int,
-  related_target_arg? : &TEventTarget,
+  bubbles_arg? : Bool = false,
+  cancelable_arg? : Bool = false,
+  view_arg? : &TWindow = JsValue::null(),
+  detail_arg? : Int = 0,
+  screen_x_arg? : Int = 0,
+  screen_y_arg? : Int = 0,
+  client_x_arg? : Int = 0,
+  client_y_arg? : Int = 0,
+  ctrl_key_arg? : Bool = false,
+  alt_key_arg? : Bool = false,
+  shift_key_arg? : Bool = false,
+  meta_key_arg? : Bool = false,
+  button_arg? : Int = 0,
+  related_target_arg? : &TEventTarget = JsValue::null(),
 ) -> Unit {
-  let bubbles_arg_js = opt_to_js(bubbles_arg)
-  let cancelable_arg_js = opt_to_js(cancelable_arg)
-  let view_arg_js = opt_to_js(view_arg)
-  let detail_arg_js = opt_to_js(detail_arg)
-  let screen_x_arg_js = opt_to_js(screen_x_arg)
-  let screen_y_arg_js = opt_to_js(screen_y_arg)
-  let client_x_arg_js = opt_to_js(client_x_arg)
-  let client_y_arg_js = opt_to_js(client_y_arg)
-  let ctrl_key_arg_js = opt_to_js(ctrl_key_arg)
-  let alt_key_arg_js = opt_to_js(alt_key_arg)
-  let shift_key_arg_js = opt_to_js(shift_key_arg)
-  let meta_key_arg_js = opt_to_js(meta_key_arg)
-  let button_arg_js = opt_to_js(button_arg)
-  let related_target_arg_js = opt_to_js(related_target_arg)
   mouse_event_init_mouse_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
-    bubbles_arg_js,
-    cancelable_arg_js,
-    view_arg_js,
-    detail_arg_js,
-    screen_x_arg_js,
-    screen_y_arg_js,
-    client_x_arg_js,
-    client_y_arg_js,
-    ctrl_key_arg_js,
-    alt_key_arg_js,
-    shift_key_arg_js,
-    meta_key_arg_js,
-    button_arg_js,
-    related_target_arg_js,
+    TJsValue::to_js(bubbles_arg),
+    TJsValue::to_js(cancelable_arg),
+    TJsValue::to_js(view_arg),
+    TJsValue::to_js(detail_arg),
+    TJsValue::to_js(screen_x_arg),
+    TJsValue::to_js(screen_y_arg),
+    TJsValue::to_js(client_x_arg),
+    TJsValue::to_js(client_y_arg),
+    TJsValue::to_js(ctrl_key_arg),
+    TJsValue::to_js(alt_key_arg),
+    TJsValue::to_js(shift_key_arg),
+    TJsValue::to_js(meta_key_arg),
+    TJsValue::to_js(button_arg),
+    TJsValue::to_js(related_target_arg),
   )
 }
 
