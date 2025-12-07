@@ -40,14 +40,6 @@ export const wasmImportObject = {
     navigator: () => navigator
   },
 
-  webapi_Console: {
-    log: (console, ...args) => console.log(...args),
-    warn: (console, ...args) => console.warn(...args),
-    error: (console, ...args) => console.error(...args),
-    info: (console, ...args) => console.info(...args),
-    debug: (console, ...args) => console.debug(...args)
-  },
-
   webapi_EventListener: {
     new: (f) => f
   },

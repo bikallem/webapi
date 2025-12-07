@@ -38,7 +38,6 @@ Add to your `moon.mod.json`:
 ## Quick Example
 
 ```mbt check
-
 ///|
 fn _quick_example() -> Unit {
   // Get document and create elements  
@@ -62,7 +61,6 @@ fn _quick_example() -> Unit {
 ## Shadow DOM Example
 
 ```mbt check
-
 ///|
 fn _create_web_component() -> Unit {
   let doc = document
@@ -89,7 +87,6 @@ fn _create_web_component() -> Unit {
 ## Canvas Example
 
 ```mbt check
-
 ///|
 fn _draw_canvas(canvas : HTMLCanvasElement) -> Unit {
   let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
@@ -177,7 +174,6 @@ TEventTarget
 WebIDL enums are converted to MoonBit enums with a `from(String)` method for runtime conversion:
 
 ```mbt
-
 ///|
 pub fn CanvasLineCap::to_string(self : CanvasLineCap) -> String {
   match self {
@@ -193,7 +189,6 @@ pub fn CanvasLineCap::to_string(self : CanvasLineCap) -> String {
 WebIDL interface constants are exposed as `pub const` values:
 
 ```mbt
-
 ///|
 // Node.ELEMENT_NODE, Node.TEXT_NODE, etc.
 pub const ELEMENT_NODE : UInt = 1
@@ -218,7 +213,6 @@ WebIDL typedef unions like `typedef (HTMLCanvasElement or HTMLImageElement or HT
 Usage example - function accepts `&TCanvasImageSource` parameter:
 
 ```mbt
-
 ///|
 fn use_canvas_image(
   ctx : CanvasRenderingContext2D,

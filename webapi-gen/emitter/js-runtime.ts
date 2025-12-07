@@ -251,15 +251,6 @@ export function emitJsRuntime(idl: ParsedIdl): string {
     navigator: () => navigator
   }`);
 
-  // Console (commonly used)
-  modules.push(`  webapi_Console: {
-    log: (console, ...args) => console.log(...args),
-    warn: (console, ...args) => console.warn(...args),
-    error: (console, ...args) => console.error(...args),
-    info: (console, ...args) => console.info(...args),
-    debug: (console, ...args) => console.debug(...args)
-  }`);
-
   // EventListener (from template file)
   modules.push(`  webapi_EventListener: {
     new: (f) => f
