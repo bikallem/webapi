@@ -7,6 +7,15 @@ struct MergedInterfaceIR {
 } derive(Show, ToJson)
 
 ///|
+fn MergedInterfaceIR::new(
+  name : String,
+  members : Array[InterfaceMember],
+  inheritance : String?,
+) -> MergedInterfaceIR {
+  MergedInterfaceIR::{ name, inheritance, members }
+}
+
+///|
 fn MergedInterfaceIR::merge(
   self : MergedInterfaceIR,
   members : Array[InterfaceMember],
@@ -20,36 +29,40 @@ fn MergedInterfaceIR::merge(
 }
 
 ///|
-fn MergedInterfaceIR::new(
-  name : String,
-  members : Array[InterfaceMember],
-  inheritance : String?,
-) -> MergedInterfaceIR {
-  MergedInterfaceIR::{ name, inheritance, members }
-}
-
-///|
 /// Merged Dictionary with all partials combined.
-struct MergedDictionary {
+struct MergedDictionaryIR {
   name : String
-  inherits : String?
   members : Array[DictionaryMember]
+  inheritance : String?
 } derive(Show, ToJson)
 
 ///|
-fn MergedDictionary::new(
+fn MergedDictionaryIR::new(
   name : String,
-  inherits? : String,
-  members? : Array[DictionaryMember] = [],
-) -> MergedDictionary {
-  MergedDictionary::{ name, inherits, members }
+  members : Array[DictionaryMember],
+  inheritance : String?,
+) -> MergedDictionaryIR {
+  MergedDictionaryIR::{ name, inheritance, members }
+}
+
+///|
+fn MergedDictionaryIR::merge(
+  self : MergedDictionaryIR,
+  members : Array[DictionaryMember],
+  inheritance : String?,
+) -> MergedDictionaryIR {
+  let inheritance = match inheritance {
+    None => self.inheritance
+    Some(_) => inheritance
+  }
+  { ..self, members: self.members + members, inheritance }
 }
 
 ///|
 /// Consolidated IDL after merging partials and applying mixins.
 struct MergedIdl {
   interfaces : Map[String, MergedInterfaceIR]
-  dictionaries : Map[String, MergedDictionary]
+  dictionaries : Map[String, MergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
   callbacks : Map[String, CallbackFunctionDefinition]
