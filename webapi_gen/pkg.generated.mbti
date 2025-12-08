@@ -30,9 +30,9 @@ pub fn MergedIdl::new() -> Self
 pub impl Show for MergedIdl
 pub impl ToJson for MergedIdl
 
-type MergedInterface
-pub impl Show for MergedInterface
-pub impl ToJson for MergedInterface
+type MergedInterfaceIR
+pub impl Show for MergedInterfaceIR
+pub impl ToJson for MergedInterfaceIR
 
 type TypeRegistry
 pub impl Show for TypeRegistry

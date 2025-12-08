@@ -1,34 +1,4 @@
 ///|
-/// Merged interface with all partials and mixin members combined
-struct MergedInterface {
-  name : String
-  members : Array[InterfaceMember]
-  inheritance : String?
-} derive(Show, ToJson)
-
-///|
-fn MergedInterface::merge(
-  self : MergedInterface,
-  members : Array[InterfaceMember],
-  inheritance : String?,
-) -> MergedInterface {
-  let inheritance = match inheritance {
-    Some(_) => inheritance
-    None => self.inheritance
-  }
-  { ..self, members: self.members + members, inheritance }
-}
-
-///|
-fn MergedInterface::new(
-  name : String,
-  members : Array[InterfaceMember],
-  inheritance : String?,
-) -> MergedInterface {
-  MergedInterface::{ name, inheritance, members }
-}
-
-///|
 /// Merged Dictionary with all partials combined.
 struct MergedDictionary {
   name : String
@@ -48,7 +18,7 @@ fn MergedDictionary::new(
 ///|
 /// Consolidated IDL after merging partials and applying mixins.
 struct MergedIdl {
-  interfaces : Map[String, MergedInterface]
+  interfaces : Map[String, MergedInterfaceIR]
   dictionaries : Map[String, MergedDictionary]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
@@ -118,7 +88,7 @@ fn TypeRegistry::is_enum(self : TypeRegistry, name : String) -> Bool {
 
 ///|
 test "MergedInterface::new() creates interface with defaults" {
-  let iface = MergedInterface::new("Element", [], Some("Node"))
+  let iface = MergedInterfaceIR::new("Element", [], Some("Node"))
   inspect(iface.name, content="Element")
   inspect(
     iface.inheritance,
@@ -130,7 +100,7 @@ test "MergedInterface::new() creates interface with defaults" {
 
 ///|
 test "MergedInterface::merge() combines members and inheritance" {
-  let iface1 = MergedInterface::new(
+  let iface1 = MergedInterfaceIR::new(
     "Element",
     [
       Attribute({
@@ -188,7 +158,7 @@ test "MergedInterface::merge() combines members and inheritance" {
 
 ///|
 test "MergedInterface::merge() retains existing inheritance if none provided" {
-  let iface1 = MergedInterface::new("Element", [], Some("Node"))
+  let iface1 = MergedInterfaceIR::new("Element", [], Some("Node"))
   let iface2 = iface1.merge(
     [
       Operation({
