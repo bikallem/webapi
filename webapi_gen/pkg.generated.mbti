@@ -2,6 +2,7 @@
 package "bikallem/webapi_gen"
 
 import(
+  "bikallem/webapi_gen/parser"
   "moonbitlang/core/json"
 )
 
@@ -36,4 +37,33 @@ pub impl ToJson for TypeRegistry
 // Type aliases
 
 // Traits
+pub(open) trait DefinitionVisitor {
+  visit_definitions(Self, Array[@parser.Definition]) -> Unit = _
+  visit_definition(Self, @parser.Definition) -> Unit = _
+  visit_interface(Self, @parser.InterfaceDefinition) -> Unit = _
+  visit_partial_interface(Self, @parser.PartialInterfaceDefinition) -> Unit = _
+  visit_mixin(Self, @parser.MixinDefinition) -> Unit = _
+  visit_partial_mixin(Self, @parser.PartialMixinDefinition) -> Unit = _
+  visit_dictionary(Self, @parser.DictionaryDefinition) -> Unit = _
+  visit_partial_dictionary(Self, @parser.PartialDictionaryDefinition) -> Unit = _
+  visit_enum(Self, @parser.EnumDefinition) -> Unit = _
+  visit_typedef(Self, @parser.TypedefDefinition) -> Unit = _
+  visit_callback_function(Self, @parser.CallbackFunctionDefinition) -> Unit = _
+  visit_callback_interface(Self, @parser.CallbackInterfaceDefinition) -> Unit = _
+  visit_includes(Self, @parser.IncludesStatement) -> Unit = _
+  visit_interface_member(Self, @parser.InterfaceMember) -> Unit = _
+  visit_dictionary_member(Self, @parser.DictionaryMember) -> Unit = _
+  visit_type(Self, @parser.Type) -> Unit = _
+  visit_string_type(Self, @parser.StringType) -> Unit = _
+  visit_argument(Self, @parser.Argument) -> Unit = _
+  visit_const(Self, @parser.ConstMember) -> Unit = _
+  visit_attribute(Self, @parser.AttributeMember) -> Unit = _
+  visit_operation(Self, @parser.OperationMember) -> Unit = _
+  visit_constructor(Self, @parser.ConstructorMember) -> Unit = _
+  visit_iterable(Self, @parser.IterableMember) -> Unit = _
+  visit_async_iterable(Self, @parser.AsyncIterableMember) -> Unit = _
+  visit_maplike(Self, @parser.MaplikeMember) -> Unit = _
+  visit_setlike(Self, @parser.SetlikeMember) -> Unit = _
+  visit_stringifier(Self, @parser.StringifierMember) -> Unit = _
+}
 
