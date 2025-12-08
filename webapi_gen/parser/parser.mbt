@@ -370,13 +370,13 @@ fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 190|    "interface" IDENTIFIER inheritance "{" interface_members "}" ";"
-// 191|      { { extended_attributes: [], name: $2, inheritance: $3, members: $5 } }
+// 190|    "interface" name = IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
+// 191|      { { extended_attributes: [], name, inheritance, members } }
 fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[2].0 is YYObj_String_(_dollar3)
-  guard _args[4].0 is YYObj_Array_InterfaceMember_(_dollar5)
-  YYObj_InterfaceDefinition({();  { extended_attributes: [], name: _dollar2, inheritance: _dollar3, members: _dollar5 } })
+  guard _args[1].0 is YYObj_String(name)
+  guard _args[2].0 is YYObj_String_(inheritance)
+  guard _args[4].0 is YYObj_Array_InterfaceMember_(members)
+  YYObj_InterfaceDefinition({();  { extended_attributes: [], name, inheritance, members } })
 }
 
 // file:///./parser.mbty

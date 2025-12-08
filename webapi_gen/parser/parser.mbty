@@ -187,8 +187,8 @@ definition:
   | extended_attribute_list includes_statement { Definition::Includes({ ..$2, extended_attributes: $1 }) }
 
 interface_def:
-  | "interface" IDENTIFIER inheritance "{" interface_members "}" ";"
-      { { extended_attributes: [], name: $2, inheritance: $3, members: $5 } }
+  | "interface" name = IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
+      { { extended_attributes: [], name, inheritance, members } }
 
 partial_interface_def:
   | "partial" "interface" IDENTIFIER "{" interface_members "}" ";"
