@@ -43,7 +43,7 @@ pub impl Eq for Argument
 pub impl Show for Argument
 pub impl ToJson for Argument
 
-pub struct AsyncIterableMember {
+pub(all) struct AsyncIterableMember {
   extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
@@ -84,7 +84,7 @@ pub impl Eq for CallbackInterfaceDefinition
 pub impl Show for CallbackInterfaceDefinition
 pub impl ToJson for CallbackInterfaceDefinition
 
-pub struct ConstMember {
+pub(all) struct ConstMember {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -94,7 +94,7 @@ pub impl Eq for ConstMember
 pub impl Show for ConstMember
 pub impl ToJson for ConstMember
 
-pub enum ConstValue {
+pub(all) enum ConstValue {
   Boolean(Bool)
   Integer(String)
   Float(String)
@@ -106,7 +106,7 @@ pub impl Eq for ConstValue
 pub impl Show for ConstValue
 pub impl ToJson for ConstValue
 
-pub struct ConstructorMember {
+pub(all) struct ConstructorMember {
   extended_attributes : Array[ExtendedAttribute]
   arguments : Array[Argument]
 }
@@ -114,7 +114,7 @@ pub impl Eq for ConstructorMember
 pub impl Show for ConstructorMember
 pub impl ToJson for ConstructorMember
 
-pub enum DefaultValue {
+pub(all) enum DefaultValue {
   ConstValue(ConstValue)
   String(String)
   EmptySequence
@@ -155,7 +155,7 @@ pub impl Eq for DictionaryDefinition
 pub impl Show for DictionaryDefinition
 pub impl ToJson for DictionaryDefinition
 
-pub struct DictionaryMember {
+pub(all) struct DictionaryMember {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -175,7 +175,7 @@ pub impl Eq for EnumDefinition
 pub impl Show for EnumDefinition
 pub impl ToJson for EnumDefinition
 
-pub enum ExtendedAttribute {
+pub(all) enum ExtendedAttribute {
   NoArgs(String)
   Ident(String, String)
   Wildcard(String)
@@ -220,7 +220,7 @@ pub impl Eq for InterfaceMember
 pub impl Show for InterfaceMember
 pub impl ToJson for InterfaceMember
 
-pub struct IterableMember {
+pub(all) struct IterableMember {
   extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
@@ -229,7 +229,7 @@ pub impl Eq for IterableMember
 pub impl Show for IterableMember
 pub impl ToJson for IterableMember
 
-pub struct MaplikeMember {
+pub(all) struct MaplikeMember {
   extended_attributes : Array[ExtendedAttribute]
   key_type : Type
   value_type : Type
@@ -248,7 +248,7 @@ pub impl Eq for MixinDefinition
 pub impl Show for MixinDefinition
 pub impl ToJson for MixinDefinition
 
-pub struct NamespaceDefinition {
+pub(all) struct NamespaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
@@ -257,7 +257,7 @@ pub impl Eq for NamespaceDefinition
 pub impl Show for NamespaceDefinition
 pub impl ToJson for NamespaceDefinition
 
-pub enum NamespaceMember {
+pub(all) enum NamespaceMember {
   Operation(OperationMember)
   Attribute(AttributeMember)
   Const(ConstMember)
@@ -305,7 +305,7 @@ pub impl Eq for PartialMixinDefinition
 pub impl Show for PartialMixinDefinition
 pub impl ToJson for PartialMixinDefinition
 
-pub struct PartialNamespaceDefinition {
+pub(all) struct PartialNamespaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
@@ -321,7 +321,7 @@ pub struct Position {
 }
 pub impl Show for Position
 
-pub struct SetlikeMember {
+pub(all) struct SetlikeMember {
   extended_attributes : Array[ExtendedAttribute]
   value_type : Type
   is_readonly : Bool
@@ -330,7 +330,7 @@ pub impl Eq for SetlikeMember
 pub impl Show for SetlikeMember
 pub impl ToJson for SetlikeMember
 
-pub enum Special {
+pub(all) enum Special {
   Getter
   Setter
   Deleter
@@ -339,7 +339,7 @@ pub impl Eq for Special
 pub impl Show for Special
 pub impl ToJson for Special
 
-pub enum StringType {
+pub(all) enum StringType {
   DOMString
   ByteString
   USVString
@@ -348,7 +348,7 @@ pub impl Eq for StringType
 pub impl Show for StringType
 pub impl ToJson for StringType
 
-pub enum StringifierMember {
+pub(all) enum StringifierMember {
   Bare
 }
 pub impl Eq for StringifierMember
