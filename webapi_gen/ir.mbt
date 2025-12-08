@@ -2,19 +2,30 @@
 /// Merged interface with all partials and mixin members combined
 struct MergedInterface {
   name : String
-  inherits : Array[String] // TODO, this should just be String, since there is only single inheritance
   members : Array[InterfaceMember]
-  is_mixin : Bool // TODO: why do we need this if this is a merged Interface, How about is_partial?
+  inheritance : String?
 } derive(Show, ToJson)
+
+///|
+fn MergedInterface::merge(
+  self : MergedInterface,
+  members : Array[InterfaceMember],
+  inheritance? : String,
+) -> MergedInterface {
+  let inheritance = match inheritance {
+    Some(_) => inheritance
+    None => self.inheritance
+  }
+  { ..self, members: self.members + members, inheritance }
+}
 
 ///|
 fn MergedInterface::new(
   name : String,
-  inherits? : Array[String] = [],
   members? : Array[InterfaceMember] = [],
-  is_mixin? : Bool = false,
+  inheritance? : String,
 ) -> MergedInterface {
-  MergedInterface::{ name, inherits, members, is_mixin }
+  MergedInterface::{ name, inheritance, members }
 }
 
 ///|
@@ -107,15 +118,68 @@ fn TypeRegistry::is_enum(self : TypeRegistry, name : String) -> Bool {
 
 ///|
 test "MergedInterface::new() creates interface with defaults" {
-  let iface = MergedInterface::new("Element", inherits=["Element"])
+  let iface = MergedInterface::new("Element", inheritance="Node")
   inspect(iface.name, content="Element")
   inspect(
-    iface.inherits,
+    iface.inheritance,
     content=(
-      #|["Element"]
+      #|Some("Node")
     ),
   )
-  inspect(iface.is_mixin, content="false")
+}
+
+///|
+test "MergedInterface::merge() combines members and inheritance" {
+  let iface1 = MergedInterface::new("Element", members=[
+    Attribute({
+      is_inherit: false,
+      name: "id",
+      type_: Type::Identifier("DOMString"),
+      is_readonly: false,
+      static_: false,
+      extended_attributes: [],
+    }),
+  ])
+  let iface2 = iface1.merge(
+    [
+      Operation({
+        extended_attributes: [],
+        return_type: Type::Identifier("void"),
+        name: Some("focus"),
+        static_: false,
+        arguments: [],
+        special: None,
+      }),
+    ],
+    inheritance="HTMLElement",
+  )
+  inspect(
+    iface2,
+    content=(
+      #|{name: "Element", members: [Attribute({extended_attributes: [], type_: Identifier("DOMString"), name: "id", is_readonly: false, static_: false, is_inherit: false}), Operation({extended_attributes: [], return_type: Identifier("void"), name: Some("focus"), arguments: [], static_: false, special: None})], inheritance: Some("HTMLElement")}
+    ),
+  )
+}
+
+///|
+test "MergedInterface::merge() retains existing inheritance if none provided" {
+  let iface1 = MergedInterface::new("Element", inheritance="Node")
+  let iface2 = iface1.merge([
+    Operation({
+      extended_attributes: [],
+      return_type: Type::Identifier("void"),
+      name: Some("focus"),
+      static_: false,
+      arguments: [],
+      special: None,
+    }),
+  ])
+  inspect(
+    iface2,
+    content=(
+      #|{name: "Element", members: [Operation({extended_attributes: [], return_type: Identifier("void"), name: Some("focus"), arguments: [], static_: false, special: None})], inheritance: Some("Node")}
+    ),
+  )
 }
 
 ///|
