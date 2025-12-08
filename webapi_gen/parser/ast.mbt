@@ -8,7 +8,7 @@
 
 ///|
 /// Extended attribute forms: [Attr], [Attr=Value], [Attr(args)], etc.
-pub enum ExtendedAttribute {
+pub(all) enum ExtendedAttribute {
   NoArgs(String) // [Exposed]
   Ident(String, String) // [Exposed=Window]
   Wildcard(String) // [Exposed=*]
@@ -80,7 +80,7 @@ pub(all) enum Type {
 
 ///|
 /// String type for Record key
-pub enum StringType {
+pub(all) enum StringType {
   DOMString
   ByteString
   USVString
@@ -103,7 +103,7 @@ pub(all) struct Argument {
 
 ///|
 /// Default value for optional arguments
-pub enum DefaultValue {
+pub(all) enum DefaultValue {
   ConstValue(ConstValue)
   String(String)
   EmptySequence // []
@@ -114,7 +114,7 @@ pub enum DefaultValue {
 
 ///|
 /// Constant value
-pub enum ConstValue {
+pub(all) enum ConstValue {
   Boolean(Bool)
   Integer(String)
   Float(String)
@@ -143,7 +143,7 @@ pub(all) enum InterfaceMember {
 
 ///|
 /// Constant member
-pub struct ConstMember {
+pub(all) struct ConstMember {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -174,7 +174,7 @@ pub(all) struct OperationMember {
 
 ///|
 /// Special operation type
-pub enum Special {
+pub(all) enum Special {
   Getter
   Setter
   Deleter
@@ -182,14 +182,14 @@ pub enum Special {
 
 ///|
 /// Constructor member
-pub struct ConstructorMember {
+pub(all) struct ConstructorMember {
   extended_attributes : Array[ExtendedAttribute]
   arguments : Array[Argument]
 } derive(Show, Eq, ToJson)
 
 ///|
 /// Iterable declaration
-pub struct IterableMember {
+pub(all) struct IterableMember {
   extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
@@ -197,7 +197,7 @@ pub struct IterableMember {
 
 ///|
 /// Async iterable declaration
-pub struct AsyncIterableMember {
+pub(all) struct AsyncIterableMember {
   extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
@@ -206,7 +206,7 @@ pub struct AsyncIterableMember {
 
 ///|
 /// Maplike declaration
-pub struct MaplikeMember {
+pub(all) struct MaplikeMember {
   extended_attributes : Array[ExtendedAttribute]
   key_type : Type
   value_type : Type
@@ -215,7 +215,7 @@ pub struct MaplikeMember {
 
 ///|
 /// Setlike declaration
-pub struct SetlikeMember {
+pub(all) struct SetlikeMember {
   extended_attributes : Array[ExtendedAttribute]
   value_type : Type
   is_readonly : Bool
@@ -223,7 +223,7 @@ pub struct SetlikeMember {
 
 ///|
 /// Stringifier member (simplified - only bare stringifier supported)
-pub enum StringifierMember {
+pub(all) enum StringifierMember {
   Bare
 } derive(Show, Eq, ToJson)
 
@@ -233,7 +233,7 @@ pub enum StringifierMember {
 
 ///|
 /// Dictionary member
-pub struct DictionaryMember {
+pub(all) struct DictionaryMember {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -247,7 +247,7 @@ pub struct DictionaryMember {
 
 ///|
 /// Namespace member
-pub enum NamespaceMember {
+pub(all) enum NamespaceMember {
   Operation(OperationMember)
   Attribute(AttributeMember)
   Const(ConstMember)
@@ -310,7 +310,7 @@ pub(all) struct PartialMixinDefinition {
 
 ///|
 /// Namespace definition
-pub struct NamespaceDefinition {
+pub(all) struct NamespaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
@@ -318,7 +318,7 @@ pub struct NamespaceDefinition {
 
 ///|
 /// Partial namespace definition
-pub struct PartialNamespaceDefinition {
+pub(all) struct PartialNamespaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
