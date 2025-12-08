@@ -10,7 +10,7 @@ struct GeneratorConfig {
 
 ///|
 /// Returns empty GeneratorConfig instance.
-fn GeneratorConfig::empty() -> GeneratorConfig {
+fn GeneratorConfig::new() -> GeneratorConfig {
   {
     core_specs: [],
     core_interfaces: [],
@@ -35,8 +35,8 @@ fn GeneratorConfig::load_config(path : String) -> GeneratorConfig raise {
 }
 
 ///|
-test "GeneratorConfig::empty() returns empty config" {
-  let cfg = GeneratorConfig::empty()
+test "GeneratorConfig::new() returns empty config" {
+  let cfg = GeneratorConfig::new()
   inspect(cfg.core_specs.length(), content="0")
   inspect(cfg.core_interfaces.length(), content="0")
   inspect(cfg.excluded_callbacks.length(), content="0")
