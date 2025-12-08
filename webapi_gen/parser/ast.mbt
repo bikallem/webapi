@@ -14,7 +14,7 @@ pub enum ExtendedAttribute {
   Wildcard(String) // [Exposed=*]
   ArgList(String, Array[Argument]) // [Constructor(DOMString url)]
   NamedArgList(String, String, Array[Argument]) // [NamedConstructor=Image(DOMString src)]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 // =============================================================================
 // Types
@@ -76,7 +76,7 @@ pub enum Type {
   Union(Array[Type])
   // Nullable type
   Nullable(Type)
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// String type for Record key
@@ -84,7 +84,7 @@ pub enum StringType {
   DOMString
   ByteString
   USVString
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 // =============================================================================
 // Arguments
@@ -99,7 +99,7 @@ pub struct Argument {
   optional : Bool
   variadic : Bool
   default_value : DefaultValue?
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Default value for optional arguments
@@ -110,7 +110,7 @@ pub enum DefaultValue {
   EmptyObject // {}
   Null
   Undefined
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Constant value
@@ -121,7 +121,7 @@ pub enum ConstValue {
   Infinity
   NegInfinity
   NaN
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 // =============================================================================
 // Members
@@ -139,7 +139,7 @@ pub enum InterfaceMember {
   Maplike(MaplikeMember)
   Setlike(SetlikeMember)
   Stringifier(StringifierMember)
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Constant member
@@ -148,7 +148,7 @@ pub struct ConstMember {
   type_ : Type
   name : String
   value : ConstValue
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Attribute member
@@ -159,7 +159,7 @@ pub struct AttributeMember {
   is_readonly : Bool
   static_ : Bool
   is_inherit : Bool
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Operation (method) member
@@ -170,7 +170,7 @@ pub struct OperationMember {
   arguments : Array[Argument]
   static_ : Bool
   special : Special?
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Special operation type
@@ -178,14 +178,14 @@ pub enum Special {
   Getter
   Setter
   Deleter
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Constructor member
 pub struct ConstructorMember {
   extended_attributes : Array[ExtendedAttribute]
   arguments : Array[Argument]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Iterable declaration
@@ -193,7 +193,7 @@ pub struct IterableMember {
   extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Async iterable declaration
@@ -202,7 +202,7 @@ pub struct AsyncIterableMember {
   key_type : Type?
   value_type : Type
   arguments : Array[Argument]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Maplike declaration
@@ -211,7 +211,7 @@ pub struct MaplikeMember {
   key_type : Type
   value_type : Type
   is_readonly : Bool
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Setlike declaration
@@ -219,13 +219,13 @@ pub struct SetlikeMember {
   extended_attributes : Array[ExtendedAttribute]
   value_type : Type
   is_readonly : Bool
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Stringifier member (simplified - only bare stringifier supported)
 pub enum StringifierMember {
   Bare
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 // =============================================================================
 // Dictionary Members
@@ -239,7 +239,7 @@ pub struct DictionaryMember {
   name : String
   required : Bool
   default_value : DefaultValue?
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 // =============================================================================
 // Namespace Members
@@ -251,7 +251,7 @@ pub enum NamespaceMember {
   Operation(OperationMember)
   Attribute(AttributeMember)
   Const(ConstMember)
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 // =============================================================================
 // Top-level Definitions
@@ -273,7 +273,7 @@ pub enum Definition {
   CallbackFunction(CallbackFunctionDefinition)
   CallbackInterface(CallbackInterfaceDefinition)
   Includes(IncludesStatement)
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Interface definition
@@ -282,7 +282,7 @@ pub struct InterfaceDefinition {
   name : String
   inheritance : String?
   members : Array[InterfaceMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Partial interface definition
@@ -290,7 +290,7 @@ pub struct PartialInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Mixin definition
@@ -298,7 +298,7 @@ pub struct MixinDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Partial mixin definition
@@ -306,7 +306,7 @@ pub struct PartialMixinDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Namespace definition
@@ -314,7 +314,7 @@ pub struct NamespaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Partial namespace definition
@@ -322,7 +322,7 @@ pub struct PartialNamespaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Dictionary definition
@@ -331,7 +331,7 @@ pub struct DictionaryDefinition {
   name : String
   inheritance : String?
   members : Array[DictionaryMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Partial dictionary definition
@@ -339,7 +339,7 @@ pub struct PartialDictionaryDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[DictionaryMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Enum definition
@@ -347,7 +347,7 @@ pub struct EnumDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   values : Array[String]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Typedef definition
@@ -355,7 +355,7 @@ pub struct TypedefDefinition {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Callback function definition
@@ -364,7 +364,7 @@ pub struct CallbackFunctionDefinition {
   name : String
   return_type : Type
   arguments : Array[Argument]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Callback interface definition
@@ -372,7 +372,7 @@ pub struct CallbackInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
 
 ///|
 /// Includes statement (e.g., "Window includes GlobalEventHandlers;")
@@ -380,4 +380,4 @@ pub struct IncludesStatement {
   extended_attributes : Array[ExtendedAttribute]
   interface_name : String
   mixin_name : String
-} derive(Show, ToJson)
+} derive(Show, Eq, ToJson)
