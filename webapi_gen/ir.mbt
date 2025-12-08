@@ -1,4 +1,34 @@
 ///|
+/// Merged interface IR with all partials and mixin members combined
+struct MergedInterfaceIR {
+  name : String
+  members : Array[InterfaceMember]
+  inheritance : String?
+} derive(Show, ToJson)
+
+///|
+fn MergedInterfaceIR::merge(
+  self : MergedInterfaceIR,
+  members : Array[InterfaceMember],
+  inheritance : String?,
+) -> MergedInterfaceIR {
+  let inheritance = match inheritance {
+    Some(_) => inheritance
+    None => self.inheritance
+  }
+  { ..self, members: self.members + members, inheritance }
+}
+
+///|
+fn MergedInterfaceIR::new(
+  name : String,
+  members : Array[InterfaceMember],
+  inheritance : String?,
+) -> MergedInterfaceIR {
+  MergedInterfaceIR::{ name, inheritance, members }
+}
+
+///|
 /// Merged Dictionary with all partials combined.
 struct MergedDictionary {
   name : String
