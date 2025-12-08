@@ -31,7 +31,7 @@ pub suberror WebIdlError {
 pub impl Show for WebIdlError
 
 // Types and methods
-pub struct Argument {
+pub(all) struct Argument {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -53,7 +53,7 @@ pub impl Eq for AsyncIterableMember
 pub impl Show for AsyncIterableMember
 pub impl ToJson for AsyncIterableMember
 
-pub struct AttributeMember {
+pub(all) struct AttributeMember {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -65,7 +65,7 @@ pub impl Eq for AttributeMember
 pub impl Show for AttributeMember
 pub impl ToJson for AttributeMember
 
-pub struct CallbackFunctionDefinition {
+pub(all) struct CallbackFunctionDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   return_type : Type
@@ -75,7 +75,7 @@ pub impl Eq for CallbackFunctionDefinition
 pub impl Show for CallbackFunctionDefinition
 pub impl ToJson for CallbackFunctionDefinition
 
-pub struct CallbackInterfaceDefinition {
+pub(all) struct CallbackInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -126,7 +126,7 @@ pub impl Eq for DefaultValue
 pub impl Show for DefaultValue
 pub impl ToJson for DefaultValue
 
-pub enum Definition {
+pub(all) enum Definition {
   Interface(InterfaceDefinition)
   PartialInterface(PartialInterfaceDefinition)
   Mixin(MixinDefinition)
@@ -145,7 +145,7 @@ pub impl Eq for Definition
 pub impl Show for Definition
 pub impl ToJson for Definition
 
-pub struct DictionaryDefinition {
+pub(all) struct DictionaryDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   inheritance : String?
@@ -166,7 +166,7 @@ pub impl Eq for DictionaryMember
 pub impl Show for DictionaryMember
 pub impl ToJson for DictionaryMember
 
-pub struct EnumDefinition {
+pub(all) struct EnumDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   values : Array[String]
@@ -186,7 +186,7 @@ pub impl Eq for ExtendedAttribute
 pub impl Show for ExtendedAttribute
 pub impl ToJson for ExtendedAttribute
 
-pub struct IncludesStatement {
+pub(all) struct IncludesStatement {
   extended_attributes : Array[ExtendedAttribute]
   interface_name : String
   mixin_name : String
@@ -195,7 +195,7 @@ pub impl Eq for IncludesStatement
 pub impl Show for IncludesStatement
 pub impl ToJson for IncludesStatement
 
-pub struct InterfaceDefinition {
+pub(all) struct InterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   inheritance : String?
@@ -205,7 +205,7 @@ pub impl Eq for InterfaceDefinition
 pub impl Show for InterfaceDefinition
 pub impl ToJson for InterfaceDefinition
 
-pub enum InterfaceMember {
+pub(all) enum InterfaceMember {
   Const(ConstMember)
   Attribute(AttributeMember)
   Operation(OperationMember)
@@ -239,7 +239,7 @@ pub impl Eq for MaplikeMember
 pub impl Show for MaplikeMember
 pub impl ToJson for MaplikeMember
 
-pub struct MixinDefinition {
+pub(all) struct MixinDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -266,7 +266,7 @@ pub impl Eq for NamespaceMember
 pub impl Show for NamespaceMember
 pub impl ToJson for NamespaceMember
 
-pub struct OperationMember {
+pub(all) struct OperationMember {
   extended_attributes : Array[ExtendedAttribute]
   return_type : Type
   name : String?
@@ -278,7 +278,7 @@ pub impl Eq for OperationMember
 pub impl Show for OperationMember
 pub impl ToJson for OperationMember
 
-pub struct PartialDictionaryDefinition {
+pub(all) struct PartialDictionaryDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[DictionaryMember]
@@ -287,7 +287,7 @@ pub impl Eq for PartialDictionaryDefinition
 pub impl Show for PartialDictionaryDefinition
 pub impl ToJson for PartialDictionaryDefinition
 
-pub struct PartialInterfaceDefinition {
+pub(all) struct PartialInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -296,7 +296,7 @@ pub impl Eq for PartialInterfaceDefinition
 pub impl Show for PartialInterfaceDefinition
 pub impl ToJson for PartialInterfaceDefinition
 
-pub struct PartialMixinDefinition {
+pub(all) struct PartialMixinDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -545,7 +545,7 @@ pub(all) enum TokenKind {
 }
 pub impl Show for TokenKind
 
-pub enum Type {
+pub(all) enum Type {
   Void
   Undefined
   Boolean
@@ -596,7 +596,7 @@ pub impl Eq for Type
 pub impl Show for Type
 pub impl ToJson for Type
 
-pub struct TypedefDefinition {
+pub(all) struct TypedefDefinition {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String

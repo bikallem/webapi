@@ -22,7 +22,7 @@ pub enum ExtendedAttribute {
 
 ///|
 /// WebIDL type representation
-pub enum Type {
+pub(all) enum Type {
   // Primitive types
   Void
   Undefined
@@ -92,7 +92,7 @@ pub enum StringType {
 
 ///|
 /// Operation/constructor argument
-pub struct Argument {
+pub(all) struct Argument {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -129,7 +129,7 @@ pub enum ConstValue {
 
 ///|
 /// Interface/mixin member
-pub enum InterfaceMember {
+pub(all) enum InterfaceMember {
   Const(ConstMember)
   Attribute(AttributeMember)
   Operation(OperationMember)
@@ -152,7 +152,7 @@ pub struct ConstMember {
 
 ///|
 /// Attribute member
-pub struct AttributeMember {
+pub(all) struct AttributeMember {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -163,7 +163,7 @@ pub struct AttributeMember {
 
 ///|
 /// Operation (method) member
-pub struct OperationMember {
+pub(all) struct OperationMember {
   extended_attributes : Array[ExtendedAttribute]
   return_type : Type
   name : String?
@@ -259,7 +259,7 @@ pub enum NamespaceMember {
 
 ///|
 /// Top-level WebIDL definition
-pub enum Definition {
+pub(all) enum Definition {
   Interface(InterfaceDefinition)
   PartialInterface(PartialInterfaceDefinition)
   Mixin(MixinDefinition)
@@ -277,7 +277,7 @@ pub enum Definition {
 
 ///|
 /// Interface definition
-pub struct InterfaceDefinition {
+pub(all) struct InterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   inheritance : String?
@@ -286,7 +286,7 @@ pub struct InterfaceDefinition {
 
 ///|
 /// Partial interface definition
-pub struct PartialInterfaceDefinition {
+pub(all) struct PartialInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -294,7 +294,7 @@ pub struct PartialInterfaceDefinition {
 
 ///|
 /// Mixin definition
-pub struct MixinDefinition {
+pub(all) struct MixinDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -302,7 +302,7 @@ pub struct MixinDefinition {
 
 ///|
 /// Partial mixin definition
-pub struct PartialMixinDefinition {
+pub(all) struct PartialMixinDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -326,7 +326,7 @@ pub struct PartialNamespaceDefinition {
 
 ///|
 /// Dictionary definition
-pub struct DictionaryDefinition {
+pub(all) struct DictionaryDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   inheritance : String?
@@ -335,7 +335,7 @@ pub struct DictionaryDefinition {
 
 ///|
 /// Partial dictionary definition
-pub struct PartialDictionaryDefinition {
+pub(all) struct PartialDictionaryDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[DictionaryMember]
@@ -343,7 +343,7 @@ pub struct PartialDictionaryDefinition {
 
 ///|
 /// Enum definition
-pub struct EnumDefinition {
+pub(all) struct EnumDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   values : Array[String]
@@ -351,7 +351,7 @@ pub struct EnumDefinition {
 
 ///|
 /// Typedef definition
-pub struct TypedefDefinition {
+pub(all) struct TypedefDefinition {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
@@ -359,7 +359,7 @@ pub struct TypedefDefinition {
 
 ///|
 /// Callback function definition
-pub struct CallbackFunctionDefinition {
+pub(all) struct CallbackFunctionDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   return_type : Type
@@ -368,7 +368,7 @@ pub struct CallbackFunctionDefinition {
 
 ///|
 /// Callback interface definition
-pub struct CallbackInterfaceDefinition {
+pub(all) struct CallbackInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
@@ -376,7 +376,7 @@ pub struct CallbackInterfaceDefinition {
 
 ///|
 /// Includes statement (e.g., "Window includes GlobalEventHandlers;")
-pub struct IncludesStatement {
+pub(all) struct IncludesStatement {
   extended_attributes : Array[ExtendedAttribute]
   interface_name : String
   mixin_name : String

@@ -11,6 +11,8 @@ import(
 // Errors
 
 // Types and methods
+type CountingVisitor
+
 type GeneratorConfig
 pub impl Eq for GeneratorConfig
 pub impl Show for GeneratorConfig
