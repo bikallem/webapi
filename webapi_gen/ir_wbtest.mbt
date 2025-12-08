@@ -103,6 +103,36 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
 }
 
 ///|
+test "MergedDictionary::merge() combines members and inheritance" {
+  let dict1 = MergedDictionaryIR::new("ElementInit", [], None)
+  let _dict2 = dict1.merge(
+    [
+      DictionaryMember::{
+        extended_attributes: [],
+        type_: Type::Identifier("DOMString"),
+        name: "id",
+        required: false,
+        default_value: Some(DefaultValue::String("")),
+      },
+    ],
+    Some("NodeInit"),
+  )
+  @json.inspect(_dict2, content={
+    "name": "ElementInit",
+    "members": [
+      {
+        "extended_attributes": [],
+        "type_": ["Identifier", "DOMString"],
+        "name": "id",
+        "required": false,
+        "default_value": ["String", ""],
+      },
+    ],
+    "inheritance": "NodeInit",
+  })
+}
+
+///|
 test "TypeRegistry::contains checks all type categories" {
   let reg : TypeRegistry = {
     interface_names: @hashset.from_array(["Element"]),

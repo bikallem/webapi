@@ -26,4 +26,5 @@ using @parser {
   type SetlikeMember,
   type StringifierMember,
   type StringType,
+  type DefaultValue,
 }
