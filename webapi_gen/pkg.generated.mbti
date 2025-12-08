@@ -54,7 +54,7 @@ pub(open) trait DefinitionVisitor {
   visit_typedef(Self, @parser.TypedefDefinition) -> Unit = _
   visit_callback_function(Self, @parser.CallbackFunctionDefinition) -> Unit = _
   visit_callback_interface(Self, @parser.CallbackInterfaceDefinition) -> Unit = _
-  visit_includes(Self, @parser.IncludesStatement) -> Unit = _
+  visit_include_statements(Self, @parser.IncludesStatement) -> Unit = _
   visit_interface_member(Self, @parser.InterfaceMember) -> Unit = _
   visit_dictionary_member(Self, @parser.DictionaryMember) -> Unit = _
   visit_type(Self, @parser.Type) -> Unit = _

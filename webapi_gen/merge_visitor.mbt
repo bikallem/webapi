@@ -4,11 +4,24 @@
 struct MergeVisitor {
   interfaces : Map[String, MergedInterfaceIR]
   dictionaries : Map[String, MergedDictionaryIR]
+  enums : Map[String, EnumDefinition]
+  typedefs : Map[String, TypedefDefinition]
+  callback_functions : Map[String, CallbackFunctionDefinition]
+  callback_interfaces : Map[String, CallbackInterfaceDefinition]
+  includes : Array[IncludesStatement]
 }
 
 ///|
 fn MergeVisitor::new() -> MergeVisitor {
-  MergeVisitor::{ interfaces: Map::new(), dictionaries: Map::new() }
+  MergeVisitor::{
+    interfaces: Map::new(),
+    dictionaries: Map::new(),
+    enums: Map::new(),
+    typedefs: Map::new(),
+    callback_functions: Map::new(),
+    callback_interfaces: Map::new(),
+    includes: Array::new(),
+  }
 }
 
 //=============================================================================
@@ -84,4 +97,29 @@ impl DefinitionVisitor for MergeVisitor with visit_partial_dictionary(
   pdict,
 ) -> Unit {
   self.merge_dictionary(pdict.name, pdict.members, None)
+}
+
+///|
+impl DefinitionVisitor for MergeVisitor with visit_enum(self, enm) -> Unit {
+  self.enums[enm.name] = enm
+}
+
+///|
+impl DefinitionVisitor for MergeVisitor with visit_typedef(self, td) -> Unit {
+  self.typedefs[td.name] = td
+}
+
+///|
+impl DefinitionVisitor for MergeVisitor with visit_callback_function(self, cbf) -> Unit {
+  self.callback_functions[cbf.name] = cbf
+}
+
+///|
+impl DefinitionVisitor for MergeVisitor with visit_callback_interface(self, cbi) -> Unit {
+  self.callback_interfaces[cbi.name] = cbi
+}
+
+///|
+impl DefinitionVisitor for MergeVisitor with visit_include_statements(self, inc) -> Unit {
+  self.includes.push(inc)
 }

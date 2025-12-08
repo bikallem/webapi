@@ -15,7 +15,7 @@ pub(open) trait DefinitionVisitor {
   visit_typedef(Self, TypedefDefinition) -> Unit = _
   visit_callback_function(Self, CallbackFunctionDefinition) -> Unit = _
   visit_callback_interface(Self, CallbackInterfaceDefinition) -> Unit = _
-  visit_includes(Self, IncludesStatement) -> Unit = _
+  visit_include_statements(Self, IncludesStatement) -> Unit = _
   visit_interface_member(Self, InterfaceMember) -> Unit = _
   visit_dictionary_member(Self, DictionaryMember) -> Unit = _
 
@@ -73,7 +73,7 @@ fn[T : DefinitionVisitor] default_visit_definition(
     Typedef(td) => visitor.visit_typedef(td)
     CallbackFunction(cbf) => visitor.visit_callback_function(cbf)
     CallbackInterface(cbi) => visitor.visit_callback_interface(cbi)
-    Includes(inc) => visitor.visit_includes(inc)
+    Includes(inc) => visitor.visit_include_statements(inc)
   }
 }
 
@@ -214,7 +214,7 @@ impl DefinitionVisitor with visit_callback_interface(self, cbi) -> Unit {
 }
 
 ///|
-impl DefinitionVisitor with visit_includes(_self, _inc) -> Unit {
+impl DefinitionVisitor with visit_include_statements(_self, _inc) -> Unit {
 
 }
 
