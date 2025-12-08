@@ -75,7 +75,6 @@ test "MergeVisitor/dictionary_inheritance" {
   let merged = visitor.dictionaries["UIEventInit"]
   @json.inspect(merged, content={
     "name": "UIEventInit",
-    "inheritance": "EventInit",
     "members": [
       {
         "extended_attributes": [],
@@ -84,6 +83,7 @@ test "MergeVisitor/dictionary_inheritance" {
         "required": false,
       },
     ],
+    "inheritance": "EventInit",
   })
 }
 
