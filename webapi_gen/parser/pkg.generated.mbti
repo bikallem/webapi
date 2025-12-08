@@ -39,6 +39,7 @@ pub struct Argument {
   variadic : Bool
   default_value : DefaultValue?
 }
+pub impl Eq for Argument
 pub impl Show for Argument
 pub impl ToJson for Argument
 
@@ -48,6 +49,7 @@ pub struct AsyncIterableMember {
   value_type : Type
   arguments : Array[Argument]
 }
+pub impl Eq for AsyncIterableMember
 pub impl Show for AsyncIterableMember
 pub impl ToJson for AsyncIterableMember
 
@@ -59,6 +61,7 @@ pub struct AttributeMember {
   static_ : Bool
   is_inherit : Bool
 }
+pub impl Eq for AttributeMember
 pub impl Show for AttributeMember
 pub impl ToJson for AttributeMember
 
@@ -68,6 +71,7 @@ pub struct CallbackFunctionDefinition {
   return_type : Type
   arguments : Array[Argument]
 }
+pub impl Eq for CallbackFunctionDefinition
 pub impl Show for CallbackFunctionDefinition
 pub impl ToJson for CallbackFunctionDefinition
 
@@ -76,6 +80,7 @@ pub struct CallbackInterfaceDefinition {
   name : String
   members : Array[InterfaceMember]
 }
+pub impl Eq for CallbackInterfaceDefinition
 pub impl Show for CallbackInterfaceDefinition
 pub impl ToJson for CallbackInterfaceDefinition
 
@@ -85,6 +90,7 @@ pub struct ConstMember {
   name : String
   value : ConstValue
 }
+pub impl Eq for ConstMember
 pub impl Show for ConstMember
 pub impl ToJson for ConstMember
 
@@ -96,6 +102,7 @@ pub enum ConstValue {
   NegInfinity
   NaN
 }
+pub impl Eq for ConstValue
 pub impl Show for ConstValue
 pub impl ToJson for ConstValue
 
@@ -103,6 +110,7 @@ pub struct ConstructorMember {
   extended_attributes : Array[ExtendedAttribute]
   arguments : Array[Argument]
 }
+pub impl Eq for ConstructorMember
 pub impl Show for ConstructorMember
 pub impl ToJson for ConstructorMember
 
@@ -114,6 +122,7 @@ pub enum DefaultValue {
   Null
   Undefined
 }
+pub impl Eq for DefaultValue
 pub impl Show for DefaultValue
 pub impl ToJson for DefaultValue
 
@@ -132,6 +141,7 @@ pub enum Definition {
   CallbackInterface(CallbackInterfaceDefinition)
   Includes(IncludesStatement)
 }
+pub impl Eq for Definition
 pub impl Show for Definition
 pub impl ToJson for Definition
 
@@ -141,6 +151,7 @@ pub struct DictionaryDefinition {
   inheritance : String?
   members : Array[DictionaryMember]
 }
+pub impl Eq for DictionaryDefinition
 pub impl Show for DictionaryDefinition
 pub impl ToJson for DictionaryDefinition
 
@@ -151,6 +162,7 @@ pub struct DictionaryMember {
   required : Bool
   default_value : DefaultValue?
 }
+pub impl Eq for DictionaryMember
 pub impl Show for DictionaryMember
 pub impl ToJson for DictionaryMember
 
@@ -159,6 +171,7 @@ pub struct EnumDefinition {
   name : String
   values : Array[String]
 }
+pub impl Eq for EnumDefinition
 pub impl Show for EnumDefinition
 pub impl ToJson for EnumDefinition
 
@@ -169,6 +182,7 @@ pub enum ExtendedAttribute {
   ArgList(String, Array[Argument])
   NamedArgList(String, String, Array[Argument])
 }
+pub impl Eq for ExtendedAttribute
 pub impl Show for ExtendedAttribute
 pub impl ToJson for ExtendedAttribute
 
@@ -177,6 +191,7 @@ pub struct IncludesStatement {
   interface_name : String
   mixin_name : String
 }
+pub impl Eq for IncludesStatement
 pub impl Show for IncludesStatement
 pub impl ToJson for IncludesStatement
 
@@ -186,6 +201,7 @@ pub struct InterfaceDefinition {
   inheritance : String?
   members : Array[InterfaceMember]
 }
+pub impl Eq for InterfaceDefinition
 pub impl Show for InterfaceDefinition
 pub impl ToJson for InterfaceDefinition
 
@@ -200,6 +216,7 @@ pub enum InterfaceMember {
   Setlike(SetlikeMember)
   Stringifier(StringifierMember)
 }
+pub impl Eq for InterfaceMember
 pub impl Show for InterfaceMember
 pub impl ToJson for InterfaceMember
 
@@ -208,6 +225,7 @@ pub struct IterableMember {
   key_type : Type?
   value_type : Type
 }
+pub impl Eq for IterableMember
 pub impl Show for IterableMember
 pub impl ToJson for IterableMember
 
@@ -217,6 +235,7 @@ pub struct MaplikeMember {
   value_type : Type
   is_readonly : Bool
 }
+pub impl Eq for MaplikeMember
 pub impl Show for MaplikeMember
 pub impl ToJson for MaplikeMember
 
@@ -225,6 +244,7 @@ pub struct MixinDefinition {
   name : String
   members : Array[InterfaceMember]
 }
+pub impl Eq for MixinDefinition
 pub impl Show for MixinDefinition
 pub impl ToJson for MixinDefinition
 
@@ -233,6 +253,7 @@ pub struct NamespaceDefinition {
   name : String
   members : Array[NamespaceMember]
 }
+pub impl Eq for NamespaceDefinition
 pub impl Show for NamespaceDefinition
 pub impl ToJson for NamespaceDefinition
 
@@ -241,6 +262,7 @@ pub enum NamespaceMember {
   Attribute(AttributeMember)
   Const(ConstMember)
 }
+pub impl Eq for NamespaceMember
 pub impl Show for NamespaceMember
 pub impl ToJson for NamespaceMember
 
@@ -252,6 +274,7 @@ pub struct OperationMember {
   static_ : Bool
   special : Special?
 }
+pub impl Eq for OperationMember
 pub impl Show for OperationMember
 pub impl ToJson for OperationMember
 
@@ -260,6 +283,7 @@ pub struct PartialDictionaryDefinition {
   name : String
   members : Array[DictionaryMember]
 }
+pub impl Eq for PartialDictionaryDefinition
 pub impl Show for PartialDictionaryDefinition
 pub impl ToJson for PartialDictionaryDefinition
 
@@ -268,6 +292,7 @@ pub struct PartialInterfaceDefinition {
   name : String
   members : Array[InterfaceMember]
 }
+pub impl Eq for PartialInterfaceDefinition
 pub impl Show for PartialInterfaceDefinition
 pub impl ToJson for PartialInterfaceDefinition
 
@@ -276,6 +301,7 @@ pub struct PartialMixinDefinition {
   name : String
   members : Array[InterfaceMember]
 }
+pub impl Eq for PartialMixinDefinition
 pub impl Show for PartialMixinDefinition
 pub impl ToJson for PartialMixinDefinition
 
@@ -284,6 +310,7 @@ pub struct PartialNamespaceDefinition {
   name : String
   members : Array[NamespaceMember]
 }
+pub impl Eq for PartialNamespaceDefinition
 pub impl Show for PartialNamespaceDefinition
 pub impl ToJson for PartialNamespaceDefinition
 
@@ -299,6 +326,7 @@ pub struct SetlikeMember {
   value_type : Type
   is_readonly : Bool
 }
+pub impl Eq for SetlikeMember
 pub impl Show for SetlikeMember
 pub impl ToJson for SetlikeMember
 
@@ -307,6 +335,7 @@ pub enum Special {
   Setter
   Deleter
 }
+pub impl Eq for Special
 pub impl Show for Special
 pub impl ToJson for Special
 
@@ -315,12 +344,14 @@ pub enum StringType {
   ByteString
   USVString
 }
+pub impl Eq for StringType
 pub impl Show for StringType
 pub impl ToJson for StringType
 
 pub enum StringifierMember {
   Bare
 }
+pub impl Eq for StringifierMember
 pub impl Show for StringifierMember
 pub impl ToJson for StringifierMember
 
@@ -561,6 +592,7 @@ pub enum Type {
   Union(Array[Type])
   Nullable(Type)
 }
+pub impl Eq for Type
 pub impl Show for Type
 pub impl ToJson for Type
 
@@ -569,6 +601,7 @@ pub struct TypedefDefinition {
   type_ : Type
   name : String
 }
+pub impl Eq for TypedefDefinition
 pub impl Show for TypedefDefinition
 pub impl ToJson for TypedefDefinition
 
