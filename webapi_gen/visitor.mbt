@@ -41,71 +41,135 @@ pub(open) trait DefinitionVisitor {
 }
 
 ///|
-impl DefinitionVisitor with visit_definitions(self, defs) -> Unit {
+fn[T : DefinitionVisitor] default_visit_definitions(
+  visitor : T,
+  defs : Array[Definition],
+) -> Unit {
   for def in defs {
-    self.visit_definition(def)
+    visitor.visit_definition(def)
+  }
+}
+
+///|
+impl DefinitionVisitor with visit_definitions(self, defs) -> Unit {
+  default_visit_definitions(self, defs)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_definition(
+  visitor : T,
+  def : Definition,
+) -> Unit {
+  match def {
+    Interface(iface) => visitor.visit_interface(iface)
+    PartialInterface(piface) => visitor.visit_partial_interface(piface)
+    Mixin(mxn) => visitor.visit_mixin(mxn)
+    PartialMixin(pmxn) => visitor.visit_partial_mixin(pmxn)
+    Namespace(_) => () // namespaces support is disabled for now
+    PartialNamespace(_) => () // namespaces support is disabled for now
+    Dictionary(dict) => visitor.visit_dictionary(dict)
+    PartialDictionary(pdict) => visitor.visit_partial_dictionary(pdict)
+    Enum(e) => visitor.visit_enum(e)
+    Typedef(td) => visitor.visit_typedef(td)
+    CallbackFunction(cbf) => visitor.visit_callback_function(cbf)
+    CallbackInterface(cbi) => visitor.visit_callback_interface(cbi)
+    Includes(inc) => visitor.visit_includes(inc)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_definition(self, def) -> Unit {
-  match def {
-    Interface(iface) => self.visit_interface(iface)
-    PartialInterface(piface) => self.visit_partial_interface(piface)
-    Mixin(mxn) => self.visit_mixin(mxn)
-    PartialMixin(pmxn) => self.visit_partial_mixin(pmxn)
-    Namespace(_) => () // namespaces support is disabled for now
-    PartialNamespace(_) => () // namespaces support is disabled for now
-    Dictionary(dict) => self.visit_dictionary(dict)
-    PartialDictionary(pdict) => self.visit_partial_dictionary(pdict)
-    Enum(e) => self.visit_enum(e)
-    Typedef(td) => self.visit_typedef(td)
-    CallbackFunction(cbf) => self.visit_callback_function(cbf)
-    CallbackInterface(cbi) => self.visit_callback_interface(cbi)
-    Includes(inc) => self.visit_includes(inc)
+  default_visit_definition(self, def)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_interface(
+  visitor : T,
+  iface : InterfaceDefinition,
+) -> Unit {
+  for memb in iface.members {
+    visitor.visit_interface_member(memb)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_interface(self, iface) -> Unit {
-  for memb in iface.members {
-    self.visit_interface_member(memb)
+  default_visit_interface(self, iface)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_partial_interface(
+  visitor : T,
+  piface : PartialInterfaceDefinition,
+) -> Unit {
+  for memb in piface.members {
+    visitor.visit_interface_member(memb)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_partial_interface(self, piface) -> Unit {
-  for memb in piface.members {
-    self.visit_interface_member(memb)
+  default_visit_partial_interface(self, piface)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_mixin(
+  visitor : T,
+  mxn : MixinDefinition,
+) -> Unit {
+  for memb in mxn.members {
+    visitor.visit_interface_member(memb)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_mixin(self, mxn) -> Unit {
-  for memb in mxn.members {
-    self.visit_interface_member(memb)
+  default_visit_mixin(self, mxn)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_partial_mixin(
+  visitor : T,
+  pmxn : PartialMixinDefinition,
+) -> Unit {
+  for memb in pmxn.members {
+    visitor.visit_interface_member(memb)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_partial_mixin(self, pmxn) -> Unit {
-  for memb in pmxn.members {
-    self.visit_interface_member(memb)
+  default_visit_partial_mixin(self, pmxn)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_dictionary(
+  visitor : T,
+  dict : DictionaryDefinition,
+) -> Unit {
+  for memb in dict.members {
+    visitor.visit_dictionary_member(memb)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_dictionary(self, dict) -> Unit {
-  for memb in dict.members {
-    self.visit_dictionary_member(memb)
+  default_visit_dictionary(self, dict)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_partial_dictionary(
+  visitor : T,
+  pdict : PartialDictionaryDefinition,
+) -> Unit {
+  for memb in pdict.members {
+    visitor.visit_dictionary_member(memb)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_partial_dictionary(self, pdict) -> Unit {
-  for memb in pdict.members {
-    self.visit_dictionary_member(memb)
-  }
+  default_visit_partial_dictionary(self, pdict)
 }
 
 ///|
@@ -119,18 +183,34 @@ impl DefinitionVisitor with visit_typedef(self, td) -> Unit {
 }
 
 ///|
-impl DefinitionVisitor with visit_callback_function(self, cbf) -> Unit {
-  self.visit_type(cbf.return_type)
+fn[T : DefinitionVisitor] default_visit_callback_function(
+  visitor : T,
+  cbf : CallbackFunctionDefinition,
+) -> Unit {
+  visitor.visit_type(cbf.return_type)
   for arg in cbf.arguments {
-    self.visit_argument(arg)
+    visitor.visit_argument(arg)
+  }
+}
+
+///|
+impl DefinitionVisitor with visit_callback_function(self, cbf) -> Unit {
+  default_visit_callback_function(self, cbf)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_callback_interface(
+  visitor : T,
+  cbi : CallbackInterfaceDefinition,
+) -> Unit {
+  for memb in cbi.members {
+    visitor.visit_interface_member(memb)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_callback_interface(self, cbi) -> Unit {
-  for memb in cbi.members {
-    self.visit_interface_member(memb)
-  }
+  default_visit_callback_interface(self, cbi)
 }
 
 ///|
@@ -139,18 +219,26 @@ impl DefinitionVisitor with visit_includes(_self, _inc) -> Unit {
 }
 
 ///|
-impl DefinitionVisitor with visit_interface_member(self, memb) -> Unit {
+fn[T : DefinitionVisitor] default_visit_interface_member(
+  visitor : T,
+  memb : InterfaceMember,
+) -> Unit {
   match memb {
-    Const(c) => self.visit_const(c)
-    Attribute(a) => self.visit_attribute(a)
-    Operation(o) => self.visit_operation(o)
-    Constructor(cnstr) => self.visit_constructor(cnstr)
-    Iterable(it) => self.visit_iterable(it)
-    AsyncIterable(ait) => self.visit_async_iterable(ait)
-    Maplike(ml) => self.visit_maplike(ml)
-    Setlike(sl) => self.visit_setlike(sl)
-    Stringifier(strg) => self.visit_stringifier(strg)
+    Const(c) => visitor.visit_const(c)
+    Attribute(a) => visitor.visit_attribute(a)
+    Operation(o) => visitor.visit_operation(o)
+    Constructor(cnstr) => visitor.visit_constructor(cnstr)
+    Iterable(it) => visitor.visit_iterable(it)
+    AsyncIterable(ait) => visitor.visit_async_iterable(ait)
+    Maplike(ml) => visitor.visit_maplike(ml)
+    Setlike(sl) => visitor.visit_setlike(sl)
+    Stringifier(strg) => visitor.visit_stringifier(strg)
   }
+}
+
+///|
+impl DefinitionVisitor with visit_interface_member(self, memb) -> Unit {
+  default_visit_interface_member(self, memb)
 }
 
 ///|
@@ -159,23 +247,28 @@ impl DefinitionVisitor with visit_dictionary_member(_self, _memb) -> Unit {
 }
 
 ///|
-impl DefinitionVisitor with visit_type(self, typ) -> Unit {
+fn[T : DefinitionVisitor] default_visit_type(visitor : T, typ : Type) -> Unit {
   match typ {
     Union(types) =>
       for t in types {
-        self.visit_type(t)
+        visitor.visit_type(t)
       }
     Record(key, val) => {
-      self.visit_string_type(key)
-      self.visit_type(val)
+      visitor.visit_string_type(key)
+      visitor.visit_type(val)
     }
     Promise(typ)
     | ObservableArray(typ)
     | FrozenArray(typ)
     | Sequence(typ)
-    | Nullable(typ) => self.visit_type(typ)
-    _ => () // Primitive types
+    | Nullable(typ) => visitor.visit_type(typ)
+    t => visitor.visit_type(t) // Primitive types
   }
+}
+
+///|
+impl DefinitionVisitor with visit_type(self, typ) -> Unit {
+  default_visit_type(self, typ)
 }
 
 ///|
@@ -199,18 +292,34 @@ impl DefinitionVisitor with visit_attribute(self, attr) -> Unit {
 }
 
 ///|
-impl DefinitionVisitor with visit_operation(self, op) -> Unit {
-  self.visit_type(op.return_type)
+fn[T : DefinitionVisitor] default_visit_operation(
+  visitor : T,
+  op : OperationMember,
+) -> Unit {
+  visitor.visit_type(op.return_type)
   for arg in op.arguments {
-    self.visit_argument(arg)
+    visitor.visit_argument(arg)
+  }
+}
+
+///|
+impl DefinitionVisitor with visit_operation(self, op) -> Unit {
+  default_visit_operation(self, op)
+}
+
+///|
+fn[T : DefinitionVisitor] default_visit_constructor(
+  visitor : T,
+  cnstr : ConstructorMember,
+) -> Unit {
+  for arg in cnstr.arguments {
+    visitor.visit_argument(arg)
   }
 }
 
 ///|
 impl DefinitionVisitor with visit_constructor(self, cnstr) -> Unit {
-  for arg in cnstr.arguments {
-    self.visit_argument(arg)
-  }
+  default_visit_constructor(self, cnstr)
 }
 
 ///|
@@ -224,9 +333,17 @@ impl DefinitionVisitor with visit_async_iterable(self, ait) -> Unit {
 }
 
 ///|
+fn[T : DefinitionVisitor] default_visit_maplike(
+  visitor : T,
+  ml : MaplikeMember,
+) -> Unit {
+  visitor.visit_type(ml.key_type)
+  visitor.visit_type(ml.value_type)
+}
+
+///|
 impl DefinitionVisitor with visit_maplike(self, ml) -> Unit {
-  self.visit_type(ml.key_type)
-  self.visit_type(ml.value_type)
+  default_visit_maplike(self, ml)
 }
 
 ///|

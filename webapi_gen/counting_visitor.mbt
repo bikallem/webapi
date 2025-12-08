@@ -26,9 +26,7 @@ fn CountingVisitor::new() -> CountingVisitor {
 ///|
 impl DefinitionVisitor for CountingVisitor with visit_interface(self, iface) -> Unit {
   self.interface_count += 1
-  for memb in iface.members {
-    self.visit_interface_member(memb)
-  }
+  default_visit_interface(self, iface)
 }
 
 ///|
