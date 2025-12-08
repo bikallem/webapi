@@ -32,24 +32,24 @@ impl DefinitionVisitor for CountingVisitor with visit_interface(self, iface) -> 
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_dictionary(self, dict) -> Unit {
+impl DefinitionVisitor for CountingVisitor with visit_dictionary(self, _dict) -> Unit {
   self.dictionary_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_enum(self, e) -> Unit {
+impl DefinitionVisitor for CountingVisitor with visit_enum(self, _e) -> Unit {
   self.enum_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_typedef(self, td) -> Unit {
+impl DefinitionVisitor for CountingVisitor with visit_typedef(self, _td) -> Unit {
   self.typedef_count += 1
 }
 
 ///|
 impl DefinitionVisitor for CountingVisitor with visit_callback_function(
   self,
-  cbf,
+  _cbf,
 ) -> Unit {
   self.callback_function_count += 1
 }
@@ -57,13 +57,13 @@ impl DefinitionVisitor for CountingVisitor with visit_callback_function(
 ///|
 impl DefinitionVisitor for CountingVisitor with visit_callback_interface(
   self,
-  cbi,
+  _cbi,
 ) -> Unit {
   self.callback_interface_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_type(self, typ) -> Unit {
+impl DefinitionVisitor for CountingVisitor with visit_type(self, _typ) -> Unit {
   self.type_count += 1
 }
 
