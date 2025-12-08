@@ -157,12 +157,33 @@ test "MergedInterface::merge() combines members and inheritance" {
     ],
     Some("HTMLElement"),
   )
-  inspect(
-    iface2,
-    content=(
-      #|{name: "Element", members: [Attribute({extended_attributes: [], type_: Identifier("DOMString"), name: "id", is_readonly: false, static_: false, is_inherit: false}), Operation({extended_attributes: [], return_type: Identifier("void"), name: Some("focus"), arguments: [], static_: false, special: None})], inheritance: Some("HTMLElement")}
-    ),
-  )
+  @json.inspect(iface2, content={
+    "name": "Element",
+    "members": [
+      [
+        "Attribute",
+        {
+          "extended_attributes": [],
+          "type_": ["Identifier", "DOMString"],
+          "name": "id",
+          "is_readonly": false,
+          "static_": false,
+          "is_inherit": false,
+        },
+      ],
+      [
+        "Operation",
+        {
+          "extended_attributes": [],
+          "return_type": ["Identifier", "void"],
+          "name": "focus",
+          "arguments": [],
+          "static_": false,
+        },
+      ],
+    ],
+    "inheritance": "HTMLElement",
+  })
 }
 
 ///|
@@ -181,12 +202,22 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
     ],
     None,
   )
-  inspect(
-    iface2,
-    content=(
-      #|{name: "Element", members: [Operation({extended_attributes: [], return_type: Identifier("void"), name: Some("focus"), arguments: [], static_: false, special: None})], inheritance: Some("Node")}
-    ),
-  )
+  @json.inspect(iface2, content={
+    "name": "Element",
+    "members": [
+      [
+        "Operation",
+        {
+          "extended_attributes": [],
+          "return_type": ["Identifier", "void"],
+          "name": "focus",
+          "arguments": [],
+          "static_": false,
+        },
+      ],
+    ],
+    "inheritance": "Node",
+  })
 }
 
 ///|
