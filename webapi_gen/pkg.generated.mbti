@@ -20,6 +20,7 @@ pub impl ToJson for GeneratorConfig
 pub impl @json.FromJson for GeneratorConfig
 
 type MergeVisitor
+pub fn MergeVisitor::new() -> Self
 
 type MergedDictionary
 pub impl Show for MergedDictionary

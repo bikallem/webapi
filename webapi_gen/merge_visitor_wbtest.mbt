@@ -69,9 +69,7 @@ test "MergeVisitor merges interfaces, partials, and mixins correctly" {
       ],
     }),
   ]
-  for def in defs {
-    visitor.visit_definition(def)
-  }
+  visitor.visit_definitions(defs)
   let merged = visitor.interfaces["MyInterface"]
   @json.inspect(merged, content={
     "name": "MyInterface",
