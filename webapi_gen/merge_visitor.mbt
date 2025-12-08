@@ -61,7 +61,7 @@ fn MergeVisitor::merge_dictionary(
   self : MergeVisitor,
   name : String,
   members : Array[DictionaryMember],
-  inheritance? : String,
+  inheritance : String?,
 ) -> Unit {
   match self.dictionaries.get(name) {
     Some(current) =>
@@ -71,4 +71,17 @@ fn MergeVisitor::merge_dictionary(
         name, members, inheritance,
       )
   }
+}
+
+///|
+impl DefinitionVisitor for MergeVisitor with visit_dictionary(self, dict) -> Unit {
+  self.merge_dictionary(dict.name, dict.members, dict.inheritance)
+}
+
+///|
+impl DefinitionVisitor for MergeVisitor with visit_partial_dictionary(
+  self,
+  pdict,
+) -> Unit {
+  self.merge_dictionary(pdict.name, pdict.members, None)
 }
