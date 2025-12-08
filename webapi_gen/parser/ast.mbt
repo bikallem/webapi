@@ -268,7 +268,7 @@ pub enum Definition {
   PartialNamespace(PartialNamespaceDefinition)
   Dictionary(DictionaryDefinition)
   PartialDictionary(PartialDictionaryDefinition)
-  Enum_(EnumDefinition)
+  Enum(EnumDefinition)
   Typedef(TypedefDefinition)
   CallbackFunction(CallbackFunctionDefinition)
   CallbackInterface(CallbackInterfaceDefinition)

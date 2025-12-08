@@ -80,7 +80,7 @@ test "parse enum" {
   let result = @parser.parse(idl)
   assert_eq(result.length(), 1)
   match result[0] {
-    @parser.Definition::Enum_(e) => {
+    @parser.Definition::Enum(e) => {
       assert_eq(e.name, "Color")
       assert_eq(e.values.length(), 3)
     }
@@ -578,7 +578,7 @@ test "comprehensive integration test" {
 
   // 11. Enum: ScrollBehavior (3 values)
   match result[10] {
-    @parser.Definition::Enum_(e) => {
+    @parser.Definition::Enum(e) => {
       assert_eq(e.name, "ScrollBehavior")
       assert_eq(e.values.length(), 3)
     }

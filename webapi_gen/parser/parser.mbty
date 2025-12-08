@@ -180,7 +180,7 @@ definition:
   | extended_attribute_list partial_namespace_def { Definition::PartialNamespace({ ..$2, extended_attributes: $1 }) }
   | extended_attribute_list dictionary_def    { Definition::Dictionary({ ..$2, extended_attributes: $1 }) }
   | extended_attribute_list partial_dictionary_def { Definition::PartialDictionary({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list enum_def          { Definition::Enum_({ ..$2, extended_attributes: $1 }) }
+  | extended_attribute_list enum_def          { Definition::Enum({ ..$2, extended_attributes: $1 }) }
   | extended_attribute_list typedef_def       { Definition::Typedef({ ..$2, extended_attributes: $1 }) }
   | extended_attribute_list callback_def      { Definition::CallbackFunction({ ..$2, extended_attributes: $1 }) }
   | extended_attribute_list callback_interface_def { Definition::CallbackInterface({ ..$2, extended_attributes: $1 }) }

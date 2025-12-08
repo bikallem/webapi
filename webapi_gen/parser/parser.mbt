@@ -330,11 +330,11 @@ fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 }
 
 // file:///./parser.mbty
-// 183|    extended_attribute_list enum_def          { Definition::Enum_({ ..$2, extended_attributes: $1 }) }
+// 183|    extended_attribute_list enum_def          { Definition::Enum({ ..$2, extended_attributes: $1 }) }
 fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_EnumDefinition(_dollar2)
   guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Enum_({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::Enum({ .._dollar2, extended_attributes: _dollar1 }) })
 }
 
 // file:///./parser.mbty
