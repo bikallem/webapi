@@ -11,6 +11,10 @@ fn MergeVisitor::new() -> MergeVisitor {
   MergeVisitor::{ interfaces: Map::new(), dictionaries: Map::new() }
 }
 
+//=============================================================================
+// merge_interface
+//=============================================================================
+
 ///|
 fn MergeVisitor::merge_interface(
   self : MergeVisitor,
@@ -46,4 +50,25 @@ impl DefinitionVisitor for MergeVisitor with visit_mixin(self, mxn) -> Unit {
 ///|
 impl DefinitionVisitor for MergeVisitor with visit_partial_mixin(self, pmxn) -> Unit {
   self.merge_interface(pmxn.name, pmxn.members, None)
+}
+
+//=============================================================================
+// merge_dictionary
+//=============================================================================
+
+///|
+fn MergeVisitor::merge_dictionary(
+  self : MergeVisitor,
+  name : String,
+  members : Array[DictionaryMember],
+  inheritance? : String,
+) -> Unit {
+  match self.dictionaries.get(name) {
+    Some(current) =>
+      self.dictionaries[name] = current.merge(members, inheritance)
+    None =>
+      self.dictionaries[name] = MergedDictionaryIR::new(
+        name, members, inheritance,
+      )
+  }
 }
