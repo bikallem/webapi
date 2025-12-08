@@ -10,7 +10,7 @@ struct MergedInterface {
 fn MergedInterface::merge(
   self : MergedInterface,
   members : Array[InterfaceMember],
-  inheritance? : String,
+  inheritance : String?,
 ) -> MergedInterface {
   let inheritance = match inheritance {
     Some(_) => inheritance
@@ -22,8 +22,8 @@ fn MergedInterface::merge(
 ///|
 fn MergedInterface::new(
   name : String,
-  members? : Array[InterfaceMember] = [],
-  inheritance? : String,
+  members : Array[InterfaceMember],
+  inheritance : String?,
 ) -> MergedInterface {
   MergedInterface::{ name, inheritance, members }
 }
@@ -118,7 +118,7 @@ fn TypeRegistry::is_enum(self : TypeRegistry, name : String) -> Bool {
 
 ///|
 test "MergedInterface::new() creates interface with defaults" {
-  let iface = MergedInterface::new("Element", inheritance="Node")
+  let iface = MergedInterface::new("Element", [], Some("Node"))
   inspect(iface.name, content="Element")
   inspect(
     iface.inheritance,
@@ -130,16 +130,20 @@ test "MergedInterface::new() creates interface with defaults" {
 
 ///|
 test "MergedInterface::merge() combines members and inheritance" {
-  let iface1 = MergedInterface::new("Element", members=[
-    Attribute({
-      is_inherit: false,
-      name: "id",
-      type_: Type::Identifier("DOMString"),
-      is_readonly: false,
-      static_: false,
-      extended_attributes: [],
-    }),
-  ])
+  let iface1 = MergedInterface::new(
+    "Element",
+    [
+      Attribute({
+        is_inherit: false,
+        name: "id",
+        type_: Type::Identifier("DOMString"),
+        is_readonly: false,
+        static_: false,
+        extended_attributes: [],
+      }),
+    ],
+    None,
+  )
   let iface2 = iface1.merge(
     [
       Operation({
@@ -151,7 +155,7 @@ test "MergedInterface::merge() combines members and inheritance" {
         special: None,
       }),
     ],
-    inheritance="HTMLElement",
+    Some("HTMLElement"),
   )
   inspect(
     iface2,
@@ -163,17 +167,20 @@ test "MergedInterface::merge() combines members and inheritance" {
 
 ///|
 test "MergedInterface::merge() retains existing inheritance if none provided" {
-  let iface1 = MergedInterface::new("Element", inheritance="Node")
-  let iface2 = iface1.merge([
-    Operation({
-      extended_attributes: [],
-      return_type: Type::Identifier("void"),
-      name: Some("focus"),
-      static_: false,
-      arguments: [],
-      special: None,
-    }),
-  ])
+  let iface1 = MergedInterface::new("Element", [], Some("Node"))
+  let iface2 = iface1.merge(
+    [
+      Operation({
+        extended_attributes: [],
+        return_type: Type::Identifier("void"),
+        name: Some("focus"),
+        static_: false,
+        arguments: [],
+        special: None,
+      }),
+    ],
+    None,
+  )
   inspect(
     iface2,
     content=(
