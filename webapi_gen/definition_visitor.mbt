@@ -65,8 +65,8 @@ fn[T : DefinitionVisitor] default_visit_definition(
     PartialInterface(piface) => visitor.visit_partial_interface(piface)
     Mixin(mxn) => visitor.visit_mixin(mxn)
     PartialMixin(pmxn) => visitor.visit_partial_mixin(pmxn)
-    Namespace(_) => () // namespaces support is disabled for now
-    PartialNamespace(_) => () // namespaces support is disabled for now
+    Namespace(_) => abort("namespaces support is disabled for now")
+    PartialNamespace(_) => abort("namespaces support is disabled for now")
     Dictionary(dict) => visitor.visit_dictionary(dict)
     PartialDictionary(pdict) => visitor.visit_partial_dictionary(pdict)
     Enum(e) => visitor.visit_enum(e)
