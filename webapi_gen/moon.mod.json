@@ -1,0 +1,18 @@
+{
+  "name": "bikallem/webapi_gen",
+  "version": "0.1.0",
+  "deps": {
+    "moonbitlang/x": "0.4.37"
+  },
+  "bin-deps": {
+    "moonbitlang/yacc": "0.7.6"
+  },
+  "readme": "README.mbt.md",
+  "repository": "",
+  "license": "Apache-2.0",
+  "keywords": [
+    "webapi",
+    "parser"
+  ],
+  "description": "WebIDL to Moonbit WebAPI generator. See https://webidl.spec.whatwg.org for more information."
+}

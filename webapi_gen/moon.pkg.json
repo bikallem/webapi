@@ -1,0 +1,7 @@
+{
+  "is-main": true,
+  "import": [
+    "bikallem/webapi_gen/parser",
+    "moonbitlang/x/sys"
+  ]
+}

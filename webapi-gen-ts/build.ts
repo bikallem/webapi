@@ -40,8 +40,8 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, "src");
-const IDL_OUTPUT_DIR = path.join(PROJECT_ROOT, "webapi-gen", "enabled-idls");
-const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen", "base.mbt");
+const IDL_OUTPUT_DIR = path.join(PROJECT_ROOT, "webapi-gen-ts", "enabled-idls");
+const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen-ts", "base.mbt");
 
 /**
  * Abstract base interfaces that are never instantiated directly.
