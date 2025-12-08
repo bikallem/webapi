@@ -3,7 +3,7 @@
 /// primary definitions.
 struct MergeVisitor {
   interfaces : Map[String, MergedInterfaceIR]
-  dictionaries : Map[String, MergedDictionary]
+  dictionaries : Map[String, MergedDictionaryIR]
 }
 
 ///|
@@ -12,7 +12,7 @@ fn MergeVisitor::new() -> MergeVisitor {
 }
 
 ///|
-fn MergeVisitor::merge(
+fn MergeVisitor::merge_interface(
   self : MergeVisitor,
   name : String,
   members : Array[InterfaceMember],
@@ -27,7 +27,7 @@ fn MergeVisitor::merge(
 
 ///|
 impl DefinitionVisitor for MergeVisitor with visit_interface(self, iface) -> Unit {
-  self.merge(iface.name, iface.members, iface.inheritance)
+  self.merge_interface(iface.name, iface.members, iface.inheritance)
 }
 
 ///|
@@ -35,15 +35,15 @@ impl DefinitionVisitor for MergeVisitor with visit_partial_interface(
   self,
   piface,
 ) -> Unit {
-  self.merge(piface.name, piface.members, None)
+  self.merge_interface(piface.name, piface.members, None)
 }
 
 ///|
 impl DefinitionVisitor for MergeVisitor with visit_mixin(self, mxn) -> Unit {
-  self.merge(mxn.name, mxn.members, None)
+  self.merge_interface(mxn.name, mxn.members, None)
 }
 
 ///|
 impl DefinitionVisitor for MergeVisitor with visit_partial_mixin(self, pmxn) -> Unit {
-  self.merge(pmxn.name, pmxn.members, None)
+  self.merge_interface(pmxn.name, pmxn.members, None)
 }
