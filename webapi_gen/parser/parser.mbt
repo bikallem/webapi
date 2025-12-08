@@ -266,107 +266,107 @@ fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 }
 
 // file:///./parser.mbty
-// 175|    extended_attribute_list interface_def     { Definition::Interface({ ..$2, extended_attributes: $1 }) }
+// 175|    extended_attributes = extended_attribute_list interface = interface_def   { Definition::Interface({ ..interface, extended_attributes }) }
 fn yy_action_2(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_InterfaceDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Interface({ .._dollar2, extended_attributes: _dollar1 }) })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
+  guard _args[1].0 is YYObj_InterfaceDefinition(interface)
+  YYObj_Definition({();  Definition::Interface({ ..interface, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 176|    extended_attribute_list mixin_def         { Definition::Mixin({ ..$2, extended_attributes: $1 }) }
+// 176|    extended_attributes = extended_attribute_list mixin_def = mixin_def       { Definition::Mixin({ ..mixin_def, extended_attributes }) }
 fn yy_action_3(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_MixinDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Mixin({ .._dollar2, extended_attributes: _dollar1 }) })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
+  guard _args[1].0 is YYObj_MixinDefinition(mixin_def)
+  YYObj_Definition({();  Definition::Mixin({ ..mixin_def, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 177|    extended_attribute_list partial_interface_def { Definition::PartialInterface({ ..$2, extended_attributes: $1 }) }
+// 177|    extended_attributes = extended_attribute_list partial_interface_def       { Definition::PartialInterface({ ..$2, extended_attributes }) }
 fn yy_action_4(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_PartialInterfaceDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::PartialInterface({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::PartialInterface({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 178|    extended_attribute_list partial_mixin_def { Definition::PartialMixin({ ..$2, extended_attributes: $1 }) }
+// 178|    extended_attributes = extended_attribute_list partial_mixin_def           { Definition::PartialMixin({ ..$2, extended_attributes }) }
 fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_PartialMixinDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::PartialMixin({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::PartialMixin({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 179|    extended_attribute_list namespace_def     { Definition::Namespace({ ..$2, extended_attributes: $1 }) }
+// 179|    extended_attributes = extended_attribute_list namespace_def               { Definition::Namespace({ ..$2, extended_attributes }) }
 fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_NamespaceDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Namespace({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::Namespace({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 180|    extended_attribute_list partial_namespace_def { Definition::PartialNamespace({ ..$2, extended_attributes: $1 }) }
+// 180|    extended_attributes = extended_attribute_list partial_namespace_def       { Definition::PartialNamespace({ ..$2, extended_attributes }) }
 fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_PartialNamespaceDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::PartialNamespace({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::PartialNamespace({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 181|    extended_attribute_list dictionary_def    { Definition::Dictionary({ ..$2, extended_attributes: $1 }) }
+// 181|    extended_attributes = extended_attribute_list dictionary_def              { Definition::Dictionary({ ..$2, extended_attributes }) }
 fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_DictionaryDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Dictionary({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::Dictionary({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 182|    extended_attribute_list partial_dictionary_def { Definition::PartialDictionary({ ..$2, extended_attributes: $1 }) }
+// 182|    extended_attributes = extended_attribute_list partial_dictionary_def      { Definition::PartialDictionary({ ..$2, extended_attributes }) }
 fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_PartialDictionaryDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::PartialDictionary({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::PartialDictionary({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 183|    extended_attribute_list enum_def          { Definition::Enum({ ..$2, extended_attributes: $1 }) }
+// 183|    extended_attributes = extended_attribute_list enum_def                    { Definition::Enum({ ..$2, extended_attributes }) }
 fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_EnumDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Enum({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::Enum({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 184|    extended_attribute_list typedef_def       { Definition::Typedef({ ..$2, extended_attributes: $1 }) }
+// 184|    extended_attributes = extended_attribute_list typedef_def                 { Definition::Typedef({ ..$2, extended_attributes }) }
 fn yy_action_11(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_TypedefDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Typedef({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::Typedef({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 185|    extended_attribute_list callback_def      { Definition::CallbackFunction({ ..$2, extended_attributes: $1 }) }
+// 185|    extended_attributes = extended_attribute_list callback_def                { Definition::CallbackFunction({ ..$2, extended_attributes }) }
 fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_CallbackFunctionDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::CallbackFunction({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::CallbackFunction({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 186|    extended_attribute_list callback_interface_def { Definition::CallbackInterface({ ..$2, extended_attributes: $1 }) }
+// 186|    extended_attributes = extended_attribute_list callback_interface_def      { Definition::CallbackInterface({ ..$2, extended_attributes }) }
 fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_CallbackInterfaceDefinition(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::CallbackInterface({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::CallbackInterface({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty
-// 187|    extended_attribute_list includes_statement { Definition::Includes({ ..$2, extended_attributes: $1 }) }
+// 187|    extended_attributes = extended_attribute_list includes_statement          { Definition::Includes({ ..$2, extended_attributes }) }
 fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_IncludesStatement(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  YYObj_Definition({();  Definition::Includes({ .._dollar2, extended_attributes: _dollar1 }) })
+  YYObj_Definition({();  Definition::Includes({ .._dollar2, extended_attributes }) })
 }
 
 // file:///./parser.mbty

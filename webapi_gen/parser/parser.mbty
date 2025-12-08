@@ -172,19 +172,19 @@ definitions:
   | EOF                             { [] }
 
 definition:
-  | extended_attribute_list interface_def     { Definition::Interface({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list mixin_def         { Definition::Mixin({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list partial_interface_def { Definition::PartialInterface({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list partial_mixin_def { Definition::PartialMixin({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list namespace_def     { Definition::Namespace({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list partial_namespace_def { Definition::PartialNamespace({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list dictionary_def    { Definition::Dictionary({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list partial_dictionary_def { Definition::PartialDictionary({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list enum_def          { Definition::Enum({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list typedef_def       { Definition::Typedef({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list callback_def      { Definition::CallbackFunction({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list callback_interface_def { Definition::CallbackInterface({ ..$2, extended_attributes: $1 }) }
-  | extended_attribute_list includes_statement { Definition::Includes({ ..$2, extended_attributes: $1 }) }
+  | extended_attributes = extended_attribute_list interface = interface_def   { Definition::Interface({ ..interface, extended_attributes }) }
+  | extended_attributes = extended_attribute_list mixin_def = mixin_def       { Definition::Mixin({ ..mixin_def, extended_attributes }) }
+  | extended_attributes = extended_attribute_list partial_interface_def       { Definition::PartialInterface({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list partial_mixin_def           { Definition::PartialMixin({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list namespace_def               { Definition::Namespace({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list partial_namespace_def       { Definition::PartialNamespace({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list dictionary_def              { Definition::Dictionary({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list partial_dictionary_def      { Definition::PartialDictionary({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list enum_def                    { Definition::Enum({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list typedef_def                 { Definition::Typedef({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list callback_def                { Definition::CallbackFunction({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list callback_interface_def      { Definition::CallbackInterface({ ..$2, extended_attributes }) }
+  | extended_attributes = extended_attribute_list includes_statement          { Definition::Includes({ ..$2, extended_attributes }) }
 
 interface_def:
   | "interface" name = IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
