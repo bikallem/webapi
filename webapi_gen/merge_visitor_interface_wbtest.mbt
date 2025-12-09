@@ -1,74 +1,20 @@
 ///|
 test "MergeVisitor merges interfaces, partials, and mixins correctly" {
   let visitor = MergeVisitor::new()
-  let defs : Array[Definition] = [
-    Interface({
-      extended_attributes: [],
-      name: "MyInterface",
-      members: [
-        Attribute({
-          is_inherit: false,
-          name: "textContent",
-          type_: Nullable(DOMString),
-          is_readonly: false,
-          static_: false,
-          extended_attributes: [],
-        }),
-      ],
-      inheritance: None,
-    }),
-    PartialInterface({
-      extended_attributes: [],
-      name: "MyInterface",
-      members: [
-        Operation({
-          extended_attributes: [],
-          return_type: Identifier("Node"),
-          name: Some("appendChild"),
-          static_: false,
-          arguments: [
-            Argument::{
-              extended_attributes: [],
-              type_: Identifier("Element"),
-              name: "newChild",
-              optional: false,
-              default_value: None,
-              variadic: false,
-            },
-          ],
-          special: None,
-        }),
-      ],
-    }),
-    Mixin({
-      name: "MyInterface",
-      extended_attributes: [],
-      members: [
-        Attribute({
-          is_inherit: false,
-          name: "textContent2",
-          type_: Nullable(DOMString),
-          is_readonly: false,
-          static_: false,
-          extended_attributes: [],
-        }),
-      ],
-    }),
-    PartialMixin({
-      name: "MyInterface",
-      extended_attributes: [],
-      members: [
-        Operation({
-          extended_attributes: [],
-          return_type: Identifier("void"),
-          name: Some("doSomething"),
-          static_: false,
-          arguments: [],
-          special: None,
-        }),
-      ],
-    }),
-  ]
+  let widl : String =
+    #|interface MyInterface {
+    #|  attribute DOMString? textContent;
+    #|};
+    #|partial interface MyInterface {
+    #|  Node appendChild(Element newChild);
+    #|};
+    #|interface mixin MyInterface {
+    #|  attribute DOMString? textContent2;
+    #|};
+    #|partial interface mixin MyInterface {
+    #|  void doSomething();
+    #|};
+  let defs = @parser.parse(widl)
   visitor.visit(defs)
   let merged = visitor.interfaces["MyInterface"]
   @json.inspect(merged, content={
@@ -118,7 +64,7 @@ test "MergeVisitor merges interfaces, partials, and mixins correctly" {
         "Operation",
         {
           "extended_attributes": [],
-          "return_type": ["Identifier", "void"],
+          "return_type": "Void",
           "name": "doSomething",
           "arguments": [],
           "static_": false,
