@@ -1,5 +1,5 @@
 ///|
-test "MergeVisitor merges interfaces, partials, and mixins correctly" {
+test "MergeVisitor merges interfaces, partials" {
   let visitor = MergeVisitor::new()
   let widl : String =
     #|interface MyInterface {
@@ -7,13 +7,7 @@ test "MergeVisitor merges interfaces, partials, and mixins correctly" {
     #|};
     #|partial interface MyInterface {
     #|  Node appendChild(Element newChild);
-    #|};
-    #|interface mixin MyInterface {
-    #|  attribute DOMString? textContent2;
-    #|};
-    #|partial interface mixin MyInterface {
-    #|  void doSomething();
-    #|};
+    #|};    
   let defs = @parser.parse(widl)
   visitor.visit(defs)
   let merged = visitor.interfaces["MyInterface"]
@@ -49,6 +43,26 @@ test "MergeVisitor merges interfaces, partials, and mixins correctly" {
           "static_": false,
         },
       ],
+    ],
+  })
+}
+
+///|
+test "PartialMergeVisitor merges mixins and partial mixins" {
+  let visitor = MergeVisitor::new()
+  let widl : String =
+    #|interface mixin MyMixin {
+    #|  attribute DOMString? textContent2;
+    #|};
+    #|partial interface mixin MyMixin {
+    #|  void doSomething();
+    #|};
+  let defs = @parser.parse(widl)
+  visitor.visit(defs)
+  let merged_mixin = visitor.mixins["MyMixin"]
+  @json.inspect(merged_mixin, content={
+    "name": "MyMixin",
+    "members": [
       [
         "Attribute",
         {

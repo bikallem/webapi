@@ -3,6 +3,7 @@
 /// primary definitions.
 struct MergeVisitor {
   interfaces : Map[String, MergedInterfaceIR]
+  mixins : Map[String, MergedInterfaceIR]
   dictionaries : Map[String, MergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
@@ -15,6 +16,7 @@ struct MergeVisitor {
 fn MergeVisitor::new() -> MergeVisitor {
   MergeVisitor::{
     interfaces: Map::new(),
+    mixins: Map::new(),
     dictionaries: Map::new(),
     enums: Map::new(),
     typedefs: Map::new(),
@@ -24,46 +26,59 @@ fn MergeVisitor::new() -> MergeVisitor {
   }
 }
 
-//=============================================================================
-// merge_interface
-//=============================================================================
-
 ///|
 fn MergeVisitor::merge_interface(
-  self : MergeVisitor,
+  map : Map[String, MergedInterfaceIR],
   name : String,
   members : Array[InterfaceMember],
   inheritance : String?,
 ) -> Unit {
-  match self.interfaces.get(name) {
-    Some(current) => self.interfaces[name] = current.merge(members, inheritance)
-    None =>
-      self.interfaces[name] = MergedInterfaceIR::new(name, members, inheritance)
+  match map.get(name) {
+    Some(current) => map[name] = current.merge(members, inheritance)
+    None => map[name] = MergedInterfaceIR::new(name, members, inheritance)
   }
 }
 
+//=============================================================================
+// merge interface
+//=============================================================================
+
 ///|
 impl WebIdlVisitor for MergeVisitor with visit_interface(self, iface) -> Unit {
-  self.merge_interface(iface.name, iface.members, iface.inheritance)
+  MergeVisitor::merge_interface(
+    self.interfaces,
+    iface.name,
+    iface.members,
+    iface.inheritance,
+  )
 }
 
 ///|
 impl WebIdlVisitor for MergeVisitor with visit_partial_interface(self, piface) -> Unit {
-  self.merge_interface(piface.name, piface.members, None)
+  MergeVisitor::merge_interface(
+    self.interfaces,
+    piface.name,
+    piface.members,
+    None,
+  )
 }
+
+//=============================================================================
+// merge mixin
+//=============================================================================
 
 ///|
 impl WebIdlVisitor for MergeVisitor with visit_mixin(self, mxn) -> Unit {
-  self.merge_interface(mxn.name, mxn.members, None)
+  MergeVisitor::merge_interface(self.mixins, mxn.name, mxn.members, None)
 }
 
 ///|
 impl WebIdlVisitor for MergeVisitor with visit_partial_mixin(self, pmxn) -> Unit {
-  self.merge_interface(pmxn.name, pmxn.members, None)
+  MergeVisitor::merge_interface(self.mixins, pmxn.name, pmxn.members, None)
 }
 
 //=============================================================================
-// merge_dictionary
+// merge dictionary
 //=============================================================================
 
 ///|
@@ -92,6 +107,10 @@ impl WebIdlVisitor for MergeVisitor with visit_dictionary(self, dict) -> Unit {
 impl WebIdlVisitor for MergeVisitor with visit_partial_dictionary(self, pdict) -> Unit {
   self.merge_dictionary(pdict.name, pdict.members, None)
 }
+
+//=============================================================================
+// merge other definitions
+//=============================================================================
 
 ///|
 impl WebIdlVisitor for MergeVisitor with visit_enum(self, enm) -> Unit {
