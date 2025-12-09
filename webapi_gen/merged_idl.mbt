@@ -168,8 +168,7 @@ test "panic: MergedIdl::from aborts when parent dictionary is missing" {
   let defs = @parser.parse(widl)
   let visitor = PartialMergeVisitor::new()
   visitor.visit(defs)
-  let _merged_idl = MergedIdl::from(visitor)
-  ()
+  MergedIdl::from(visitor) |> ignore
 }
 
 ///|
@@ -260,6 +259,5 @@ test "panic: MergedIdl::from aborts when mixin is missing" {
   let defs = @parser.parse(widl)
   let visitor = PartialMergeVisitor::new()
   visitor.visit(defs)
-  let _merged_idl = MergedIdl::from(visitor)
-  ()
+  MergedIdl::from(visitor) |> ignore
 }
