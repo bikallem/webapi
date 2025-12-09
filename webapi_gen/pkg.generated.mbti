@@ -13,6 +13,10 @@ import(
 // Types and methods
 type CountingVisitor
 
+type FilteredIdl
+pub impl Show for FilteredIdl
+pub impl ToJson for FilteredIdl
+
 type GeneratorConfig
 pub impl Eq for GeneratorConfig
 pub impl Show for GeneratorConfig

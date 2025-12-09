@@ -136,7 +136,7 @@ test "MergedDictionary::merge() combines members and inheritance" {
 test "TypeRegistry::contains checks all type categories" {
   let reg : TypeRegistry = {
     interface_names: @hashset.from_array(["Element"]),
-    dicitionary_names: @hashset.from_array(["EventInit"]),
+    dictionary_names: @hashset.from_array(["EventInit"]),
     enum_names: @hashset.from_array(["ScrollBehaviour"]),
     typedef_names: @hashset.from_array(["DOMString"]),
     callback_names: @hashset.from_array(["EventListener"]),
