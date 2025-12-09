@@ -31,6 +31,10 @@ type MergedInterfaceIR
 pub impl Show for MergedInterfaceIR
 pub impl ToJson for MergedInterfaceIR
 
+type MergedMixinIR
+pub impl Show for MergedMixinIR
+pub impl ToJson for MergedMixinIR
+
 type PartialMergeVisitor
 pub impl Show for PartialMergeVisitor
 pub impl ToJson for PartialMergeVisitor

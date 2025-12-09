@@ -29,6 +29,29 @@ fn MergedInterfaceIR::merge(
 }
 
 ///|
+/// Merged mixin IR with all partials combined.
+struct MergedMixinIR {
+  name : String
+  members : Array[InterfaceMember]
+} derive(Show, ToJson)
+
+///|
+fn MergedMixinIR::new(
+  name : String,
+  members : Array[InterfaceMember],
+) -> MergedMixinIR {
+  MergedMixinIR::{ name, members }
+}
+
+///|
+fn MergedMixinIR::merge(
+  self : MergedMixinIR,
+  members : Array[InterfaceMember],
+) -> MergedMixinIR {
+  { ..self, members: self.members + members }
+}
+
+///|
 /// Merged Dictionary with all partials combined.
 struct PartialMergedDictionaryIR {
   name : String

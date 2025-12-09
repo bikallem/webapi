@@ -3,7 +3,7 @@
 /// primary definitions.
 struct PartialMergeVisitor {
   interfaces : Map[String, MergedInterfaceIR]
-  mixins : Map[String, MergedInterfaceIR]
+  mixins : Map[String, MergedMixinIR]
   dictionaries : Map[String, PartialMergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
@@ -28,14 +28,15 @@ fn PartialMergeVisitor::new() -> PartialMergeVisitor {
 
 ///|
 fn PartialMergeVisitor::merge_interface(
-  map : Map[String, MergedInterfaceIR],
+  self : PartialMergeVisitor,
   name : String,
   members : Array[InterfaceMember],
   inheritance : String?,
 ) -> Unit {
-  match map.get(name) {
-    Some(current) => map[name] = current.merge(members, inheritance)
-    None => map[name] = MergedInterfaceIR::new(name, members, inheritance)
+  match self.interfaces.get(name) {
+    Some(current) => self.interfaces[name] = current.merge(members, inheritance)
+    None =>
+      self.interfaces[name] = MergedInterfaceIR::new(name, members, inheritance)
   }
 }
 
@@ -44,13 +45,20 @@ fn PartialMergeVisitor::merge_interface(
 //=============================================================================
 
 ///|
+fn PartialMergeVisitor::merge_mixin(
+  self : PartialMergeVisitor,
+  name : String,
+  members : Array[InterfaceMember],
+) -> Unit {
+  match self.mixins.get(name) {
+    Some(current) => self.mixins[name] = current.merge(members)
+    None => self.mixins[name] = MergedMixinIR::new(name, members)
+  }
+}
+
+///|
 impl WebIdlVisitor for PartialMergeVisitor with visit_interface(self, iface) -> Unit {
-  PartialMergeVisitor::merge_interface(
-    self.interfaces,
-    iface.name,
-    iface.members,
-    iface.inheritance,
-  )
+  self.merge_interface(iface.name, iface.members, iface.inheritance)
 }
 
 ///|
@@ -58,12 +66,7 @@ impl WebIdlVisitor for PartialMergeVisitor with visit_partial_interface(
   self,
   piface,
 ) -> Unit {
-  PartialMergeVisitor::merge_interface(
-    self.interfaces,
-    piface.name,
-    piface.members,
-    None,
-  )
+  self..merge_interface(piface.name, piface.members, None)
 }
 
 //=============================================================================
@@ -72,17 +75,12 @@ impl WebIdlVisitor for PartialMergeVisitor with visit_partial_interface(
 
 ///|
 impl WebIdlVisitor for PartialMergeVisitor with visit_mixin(self, mxn) -> Unit {
-  PartialMergeVisitor::merge_interface(self.mixins, mxn.name, mxn.members, None)
+  self..merge_mixin(mxn.name, mxn.members)
 }
 
 ///|
 impl WebIdlVisitor for PartialMergeVisitor with visit_partial_mixin(self, pmxn) -> Unit {
-  PartialMergeVisitor::merge_interface(
-    self.mixins,
-    pmxn.name,
-    pmxn.members,
-    None,
-  )
+  self..merge_mixin(pmxn.name, pmxn.members)
 }
 
 //=============================================================================
