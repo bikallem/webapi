@@ -1,35 +1,14 @@
 ///|
 test "MergeVisitor correctly merges dictionaries" {
   let visitor = MergeVisitor::new()
-  let defs : Array[Definition] = [
-    Dictionary({
-      extended_attributes: [],
-      name: "EventInit",
-      inheritance: None,
-      members: [
-        DictionaryMember::{
-          extended_attributes: [],
-          type_: Type::Identifier("DOMString"),
-          name: "type",
-          required: true,
-          default_value: None,
-        },
-      ],
-    }),
-    PartialDictionary({
-      extended_attributes: [],
-      name: "EventInit",
-      members: [
-        DictionaryMember::{
-          extended_attributes: [],
-          type_: Type::Identifier("Bool"),
-          name: "bubbles",
-          required: false,
-          default_value: Some(DefaultValue::ConstValue(Boolean(false))),
-        },
-      ],
-    }),
-  ]
+  let widl : String =
+    #|dictionary EventInit {
+    #|  required DOMString type;
+    #|};
+    #|partial dictionary EventInit {
+    #|  boolean bubbles = false;
+    #|};
+  let defs = @parser.parse(widl)
   visitor.visit_definitions(defs)
   let merged = visitor.dictionaries["EventInit"]
   @json.inspect(merged, content={
@@ -37,13 +16,13 @@ test "MergeVisitor correctly merges dictionaries" {
     "members": [
       {
         "extended_attributes": [],
-        "type_": ["Identifier", "DOMString"],
+        "type_": "DOMString",
         "name": "type",
         "required": true,
       },
       {
         "extended_attributes": [],
-        "type_": ["Identifier", "Bool"],
+        "type_": "Boolean",
         "name": "bubbles",
         "required": false,
         "default_value": ["ConstValue", ["Boolean", false]],
@@ -55,22 +34,11 @@ test "MergeVisitor correctly merges dictionaries" {
 ///|
 test "MergeVisitor/dictionary_inheritance" {
   let visitor = MergeVisitor::new()
-  let defs : Array[Definition] = [
-    Dictionary({
-      extended_attributes: [],
-      name: "UIEventInit",
-      inheritance: Some("EventInit"),
-      members: [
-        DictionaryMember::{
-          extended_attributes: [],
-          type_: Type::Identifier("Window"),
-          name: "view",
-          required: false,
-          default_value: None,
-        },
-      ],
-    }),
-  ]
+  let widl : String =
+    #|dictionary UIEventInit : EventInit {
+    #|  Window view;
+    #|};
+  let defs = @parser.parse(widl)
   visitor.visit_definitions(defs)
   let merged = visitor.dictionaries["UIEventInit"]
   @json.inspect(merged, content={
@@ -90,14 +58,10 @@ test "MergeVisitor/dictionary_inheritance" {
 ///|
 test "MergeVisitor/empty_dictionary" {
   let visitor = MergeVisitor::new()
-  let defs : Array[Definition] = [
-    Dictionary({
-      extended_attributes: [],
-      name: "EmptyDict",
-      inheritance: None,
-      members: [],
-    }),
-  ]
+  let widl : String =
+    #|dictionary EmptyDict {
+    #|};
+  let defs = @parser.parse(widl)
   visitor.visit_definitions(defs)
   let merged = visitor.dictionaries["EmptyDict"]
   @json.inspect(merged, content={ "name": "EmptyDict", "members": [] })
