@@ -160,7 +160,9 @@ test "PartialMergeVisitor empty_dictionary" {
 ///|
 
 ///|
-test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callbacks, and includes" {
+test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callbacks, and includes" (
+  t : @test.Test,
+) {
   let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|interface MyInterface {
@@ -192,148 +194,6 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
   visitor.visit(defs)
-  @json.inspect(visitor, content={
-    "interfaces": {
-      "MyInterface": {
-        "name": "MyInterface",
-        "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": ["Nullable", "DOMString"],
-              "name": "textContent",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false,
-            },
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": ["Identifier", "Node"],
-              "name": "appendChild",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": ["Identifier", "Element"],
-                  "name": "newChild",
-                  "optional": false,
-                  "variadic": false,
-                },
-              ],
-              "static_": false,
-            },
-          ],
-        ],
-      },
-    },
-    "mixins": {
-      "MyMixin": {
-        "name": "MyMixin",
-        "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": ["Nullable", "DOMString"],
-              "name": "textContent2",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false,
-            },
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": "Void",
-              "name": "doSomething",
-              "arguments": [],
-              "static_": false,
-            },
-          ],
-        ],
-      },
-    },
-    "dictionaries": {
-      "EventInit": {
-        "name": "EventInit",
-        "members": [
-          {
-            "extended_attributes": [],
-            "type_": "DOMString",
-            "name": "type",
-            "required": true,
-          },
-          {
-            "extended_attributes": [],
-            "type_": "Boolean",
-            "name": "bubbles",
-            "required": false,
-            "default_value": ["ConstValue", ["Boolean", false]],
-          },
-        ],
-        "inheritance": "Event",
-      },
-    },
-    "enums": {
-      "MyEnum": {
-        "extended_attributes": [],
-        "name": "MyEnum",
-        "values": ["\"value1\"", "\"value2\""],
-      },
-    },
-    "typedefs": {},
-    "callback_functions": {
-      "MyCallback": {
-        "extended_attributes": [],
-        "name": "MyCallback",
-        "return_type": "Void",
-        "arguments": [
-          {
-            "extended_attributes": [],
-            "type_": "DOMString",
-            "name": "arg",
-            "optional": false,
-            "variadic": false,
-          },
-        ],
-      },
-    },
-    "callback_interfaces": {
-      "MyCallbackInterface": {
-        "extended_attributes": [],
-        "name": "MyCallbackInterface",
-        "members": [
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": "Void",
-              "name": "onEvent",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": ["Identifier", "Event"],
-                  "name": "e",
-                  "optional": false,
-                  "variadic": false,
-                },
-              ],
-              "static_": false,
-            },
-          ],
-        ],
-      },
-    },
-    "include_statements": [
-      {
-        "extended_attributes": [],
-        "interface_name": "MyInterface",
-        "mixin_name": "MyMixin",
-      },
-    ],
-  })
+  t.write(visitor.to_json().stringify(indent=2))
+  t.snapshot(filename="partial_merge_visitor_snapshot.json")
 }
