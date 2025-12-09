@@ -24,7 +24,6 @@ pub impl Show for MergedDictionaryIR
 pub impl ToJson for MergedDictionaryIR
 
 type MergedIdl
-pub fn MergedIdl::new() -> Self
 pub impl Show for MergedIdl
 pub impl ToJson for MergedIdl
 
@@ -33,6 +32,12 @@ pub impl Show for MergedInterfaceIR
 pub impl ToJson for MergedInterfaceIR
 
 type PartialMergeVisitor
+pub impl Show for PartialMergeVisitor
+pub impl ToJson for PartialMergeVisitor
+
+type PartialMergedDictionaryIR
+pub impl Show for PartialMergedDictionaryIR
+pub impl ToJson for PartialMergedDictionaryIR
 
 type TypeRegistry
 pub impl Show for TypeRegistry

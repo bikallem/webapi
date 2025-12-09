@@ -104,7 +104,7 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
 
 ///|
 test "MergedDictionary::merge() combines members and inheritance" {
-  let dict1 = MergedDictionaryIR::new("ElementInit", [], None)
+  let dict1 = PartialMergedDictionaryIR::new("ElementInit", [], None)
   let _dict2 = dict1.merge(
     [
       DictionaryMember::{

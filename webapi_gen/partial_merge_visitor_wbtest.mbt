@@ -328,7 +328,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
         ],
       },
     },
-    "includes": [
+    "include_statements": [
       {
         "extended_attributes": [],
         "interface_name": "MyInterface",

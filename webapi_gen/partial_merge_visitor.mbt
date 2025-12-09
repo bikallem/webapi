@@ -4,12 +4,12 @@
 struct PartialMergeVisitor {
   interfaces : Map[String, MergedInterfaceIR]
   mixins : Map[String, MergedInterfaceIR]
-  dictionaries : Map[String, MergedDictionaryIR]
+  dictionaries : Map[String, PartialMergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
   callback_functions : Map[String, CallbackFunctionDefinition]
   callback_interfaces : Map[String, CallbackInterfaceDefinition]
-  includes : Array[IncludesStatement]
+  include_statements : Array[IncludesStatement]
 } derive(Show, ToJson)
 
 ///|
@@ -22,7 +22,7 @@ fn PartialMergeVisitor::new() -> PartialMergeVisitor {
     typedefs: Map::new(),
     callback_functions: Map::new(),
     callback_interfaces: Map::new(),
-    includes: Array::new(),
+    include_statements: Array::new(),
   }
 }
 
@@ -100,7 +100,7 @@ fn PartialMergeVisitor::merge_dictionary(
     Some(current) =>
       self.dictionaries[name] = current.merge(members, inheritance)
     None =>
-      self.dictionaries[name] = MergedDictionaryIR::new(
+      self.dictionaries[name] = PartialMergedDictionaryIR::new(
         name, members, inheritance,
       )
   }
@@ -154,5 +154,5 @@ impl WebIdlVisitor for PartialMergeVisitor with visit_include_statements(
   self,
   inc,
 ) -> Unit {
-  self.includes.push(inc)
+  self.include_statements.push(inc)
 }

@@ -30,57 +30,32 @@ fn MergedInterfaceIR::merge(
 
 ///|
 /// Merged Dictionary with all partials combined.
-struct MergedDictionaryIR {
+struct PartialMergedDictionaryIR {
   name : String
   members : Array[DictionaryMember]
   inheritance : String?
 } derive(Show, ToJson)
 
 ///|
-fn MergedDictionaryIR::new(
+fn PartialMergedDictionaryIR::new(
   name : String,
   members : Array[DictionaryMember],
   inheritance : String?,
-) -> MergedDictionaryIR {
-  MergedDictionaryIR::{ name, inheritance, members }
+) -> PartialMergedDictionaryIR {
+  PartialMergedDictionaryIR::{ name, inheritance, members }
 }
 
 ///|
-fn MergedDictionaryIR::merge(
-  self : MergedDictionaryIR,
+fn PartialMergedDictionaryIR::merge(
+  self : PartialMergedDictionaryIR,
   members : Array[DictionaryMember],
   inheritance : String?,
-) -> MergedDictionaryIR {
+) -> PartialMergedDictionaryIR {
   let inheritance = match inheritance {
     None => self.inheritance
     Some(_) => inheritance
   }
   { ..self, members: self.members + members, inheritance }
-}
-
-///|
-/// Consolidated IDL after merging partials and applying mixins.
-struct MergedIdl {
-  interfaces : Map[String, MergedInterfaceIR]
-  dictionaries : Map[String, MergedDictionaryIR]
-  enums : Map[String, EnumDefinition]
-  typedefs : Map[String, TypedefDefinition]
-  callbacks : Map[String, CallbackFunctionDefinition]
-  callback_interfaces : Map[String, CallbackInterfaceDefinition]
-  includes : Array[IncludesStatement]
-} derive(Show, ToJson)
-
-///|
-pub fn MergedIdl::new() -> MergedIdl {
-  MergedIdl::{
-    interfaces: {},
-    dictionaries: {},
-    enums: {},
-    typedefs: {},
-    callbacks: {},
-    callback_interfaces: {},
-    includes: [],
-  }
 }
 
 ///|
