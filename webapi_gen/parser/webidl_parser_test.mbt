@@ -122,14 +122,33 @@ test "parse callback interface" {
     #|  undefined handleEvent(Event event);
     #|};
   let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::CallbackInterface(c) => {
-      assert_eq(c.name, "EventListener")
-      assert_eq(c.members.length(), 1)
-    }
-    _ => fail("Expected CallbackInterface")
-  }
+  @json.inspect(result[0], content=[
+    "CallbackInterface",
+    {
+      "extended_attributes": [],
+      "name": "EventListener",
+      "members": [
+        [
+          "Operation",
+          {
+            "extended_attributes": [],
+            "return_type": "Undefined",
+            "name": "handleEvent",
+            "arguments": [
+              {
+                "extended_attributes": [],
+                "type_": ["Identifier", "Event"],
+                "name": "event",
+                "optional": false,
+                "variadic": false,
+              },
+            ],
+            "static_": false,
+          },
+        ],
+      ],
+    },
+  ])
 }
 
 ///|
