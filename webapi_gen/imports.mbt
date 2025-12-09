@@ -6,6 +6,7 @@ using @parser {
   type TypedefDefinition,
   type CallbackFunctionDefinition,
   type CallbackInterfaceDefinition,
+  type CallbackInterfaceMember,
   type IncludesStatement,
   type Definition,
   type InterfaceDefinition,

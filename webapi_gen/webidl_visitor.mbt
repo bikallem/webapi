@@ -38,6 +38,9 @@ pub(open) trait WebIdlVisitor {
   visit_maplike(Self, MaplikeMember) -> Unit = _
   visit_setlike(Self, SetlikeMember) -> Unit = _
   visit_stringifier(Self, StringifierMember) -> Unit = _
+
+  // CallbackInterfaceMember visitors
+  visit_callback_interface_member(Self, CallbackInterfaceMember) -> Unit = _
 }
 
 ///|
@@ -204,7 +207,7 @@ fn[T : WebIdlVisitor] default_visit_callback_interface(
   cbi : CallbackInterfaceDefinition,
 ) -> Unit {
   for memb in cbi.members {
-    visitor.visit_interface_member(memb)
+    visitor.visit_callback_interface_member(memb)
   }
 }
 
@@ -354,4 +357,15 @@ impl WebIdlVisitor with visit_setlike(self, sl) -> Unit {
 ///|
 impl WebIdlVisitor with visit_stringifier(_self, _strg) -> Unit {
 
+}
+
+///|
+impl WebIdlVisitor with visit_callback_interface_member(
+  self,
+  memb : CallbackInterfaceMember,
+) -> Unit {
+  match memb {
+    Const(c) => self.visit_const(c)
+    Operation(o) => self.visit_operation(o)
+  }
 }
