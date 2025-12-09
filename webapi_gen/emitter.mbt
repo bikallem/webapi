@@ -62,6 +62,11 @@ fn ffi_name(type_name : String, method_name : String) -> String {
 }
 
 ///|
+fn ffi_module_name(type_name : String) -> String {
+  "webapi_\{type_name}"
+}
+
+///|
 test "to_snake_case converts PascalCase" {
   inspect(to_snake_case("HTMLElement"), content="h_t_m_l_element")
   inspect(to_snake_case("getElementById"), content="get_element_by_id")
