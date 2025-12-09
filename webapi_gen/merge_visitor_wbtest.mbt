@@ -1,6 +1,6 @@
 ///|
-test "MergeVisitor merges interfaces, partials" {
-  let visitor = MergeVisitor::new()
+test "PartialMergeVisitor merges interface and partial interface" {
+  let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|interface MyInterface {
     #|  attribute DOMString? textContent;
@@ -48,8 +48,8 @@ test "MergeVisitor merges interfaces, partials" {
 }
 
 ///|
-test "PartialMergeVisitor merges mixins and partial mixins" {
-  let visitor = MergeVisitor::new()
+test "PartialMergeVisitor merges mixin and partial mixin" {
+  let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|interface mixin MyMixin {
     #|  attribute DOMString? textContent2;
@@ -89,8 +89,8 @@ test "PartialMergeVisitor merges mixins and partial mixins" {
 }
 
 ///|
-test "MergeVisitor correctly merges dictionaries" {
-  let visitor = MergeVisitor::new()
+test "PartialMergeVisitor merges dictionary and partial dictionary" {
+  let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|dictionary EventInit {
     #|  required DOMString type;
@@ -122,8 +122,8 @@ test "MergeVisitor correctly merges dictionaries" {
 }
 
 ///|
-test "MergeVisitor/dictionary_inheritance" {
-  let visitor = MergeVisitor::new()
+test "PartialMergeVisitor merges dictionary with inheritance" {
+  let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|dictionary UIEventInit : EventInit {
     #|  Window view;
@@ -146,8 +146,8 @@ test "MergeVisitor/dictionary_inheritance" {
 }
 
 ///|
-test "MergeVisitor/empty_dictionary" {
-  let visitor = MergeVisitor::new()
+test "PartialMergeVisitor empty_dictionary" {
+  let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|dictionary EmptyDict {
     #|};

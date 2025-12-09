@@ -19,8 +19,6 @@ pub impl Show for GeneratorConfig
 pub impl ToJson for GeneratorConfig
 pub impl @json.FromJson for GeneratorConfig
 
-type MergeVisitor
-
 type MergedDictionaryIR
 pub impl Show for MergedDictionaryIR
 pub impl ToJson for MergedDictionaryIR
@@ -33,6 +31,8 @@ pub impl ToJson for MergedIdl
 type MergedInterfaceIR
 pub impl Show for MergedInterfaceIR
 pub impl ToJson for MergedInterfaceIR
+
+type PartialMergeVisitor
 
 type TypeRegistry
 pub impl Show for TypeRegistry
