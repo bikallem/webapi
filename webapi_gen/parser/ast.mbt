@@ -371,7 +371,13 @@ pub(all) struct CallbackFunctionDefinition {
 pub(all) struct CallbackInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
-  members : Array[InterfaceMember]
+  members : Array[CallbackInterfaceMember]
+} derive(Show, Eq, ToJson)
+
+///|
+pub(all) enum CallbackInterfaceMember {
+  Operation(OperationMember)
+  Const(ConstMember)
 } derive(Show, Eq, ToJson)
 
 ///|

@@ -11,15 +11,28 @@ test "parse simple interface" {
     #|interface Foo {
     #|  attribute DOMString bar;
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "Foo")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "Foo",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": "DOMString",
+              "name": "bar",
+              "is_readonly": false,
+              "static_": false,
+              "is_inherit": false,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -27,15 +40,17 @@ test "parse interface with inheritance" {
   let idl =
     #|interface Child : Parent {
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "Child")
-      assert_eq(i.inheritance, Some("Parent"))
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "Child",
+        "inheritance": "Parent",
+        "members": [],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -44,15 +59,16 @@ test "parse interface with extended attributes" {
     #|[Exposed=Window]
     #|interface EventTarget {
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "EventTarget")
-      assert_eq(i.extended_attributes.length(), 1)
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [["Ident", "Exposed", "Window"]],
+        "name": "EventTarget",
+        "members": [],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -62,57 +78,87 @@ test "parse dictionary" {
     #|  boolean enabled = true;
     #|  DOMString name;
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Dictionary(d) => {
-      assert_eq(d.name, "Options")
-      assert_eq(d.members.length(), 2)
-    }
-    _ => fail("Expected Dictionary")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Dictionary",
+      {
+        "extended_attributes": [],
+        "name": "Options",
+        "members": [
+          {
+            "extended_attributes": [],
+            "type_": "Boolean",
+            "name": "enabled",
+            "required": false,
+            "default_value": ["ConstValue", ["Boolean", true]],
+          },
+          {
+            "extended_attributes": [],
+            "type_": "DOMString",
+            "name": "name",
+            "required": false,
+          },
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
 test "parse enum" {
   let idl =
     #|enum Color { "red", "green", "blue" };
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Enum(e) => {
-      assert_eq(e.name, "Color")
-      assert_eq(e.values.length(), 3)
-    }
-    _ => fail("Expected Enum")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Enum",
+      {
+        "extended_attributes": [],
+        "name": "Color",
+        "values": ["\"red\"", "\"green\"", "\"blue\""],
+      },
+    ],
+  ])
 }
 
 ///|
 test "parse typedef" {
   let idl =
     #|typedef sequence<DOMString> StringList;
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Typedef(t) => assert_eq(t.name, "StringList")
-    _ => fail("Expected Typedef")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Typedef",
+      {
+        "extended_attributes": [],
+        "type_": ["Sequence", "DOMString"],
+        "name": "StringList",
+      },
+    ],
+  ])
 }
 
 ///|
 test "parse callback function" {
   let idl =
     #|callback Handler = undefined (Event ev);
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::CallbackFunction(c) => {
-      assert_eq(c.name, "Handler")
-      assert_eq(c.arguments.length(), 1)
-    }
-    _ => fail("Expected CallbackFunction")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "CallbackFunction",
+      {
+        "extended_attributes": [],
+        "name": "Handler",
+        "return_type": "Undefined",
+        "arguments": [
+          {
+            "extended_attributes": [],
+            "type_": ["Identifier", "Event"],
+            "name": "ev",
+            "optional": false,
+            "variadic": false,
+          },
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -157,30 +203,58 @@ test "parse namespace" {
     #|namespace CSS {
     #|  boolean supports(DOMString property, DOMString value);
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Namespace(n) => {
-      assert_eq(n.name, "CSS")
-      assert_eq(n.members.length(), 1)
-    }
-    _ => fail("Expected Namespace")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Namespace",
+      {
+        "extended_attributes": [],
+        "name": "CSS",
+        "members": [
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "Boolean",
+              "name": "supports",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": "DOMString",
+                  "name": "property",
+                  "optional": false,
+                  "variadic": false,
+                },
+                {
+                  "extended_attributes": [],
+                  "type_": "DOMString",
+                  "name": "value",
+                  "optional": false,
+                  "variadic": false,
+                },
+              ],
+              "static_": false,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
 test "parse includes statement" {
   let idl =
     #|Window includes GlobalEventHandlers;
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Includes(i) => {
-      assert_eq(i.interface_name, "Window")
-      assert_eq(i.mixin_name, "GlobalEventHandlers")
-    }
-    _ => fail("Expected Includes")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Includes",
+      {
+        "extended_attributes": [],
+        "interface_name": "Window",
+        "mixin_name": "GlobalEventHandlers",
+      },
+    ],
+  ])
 }
 
 ///|
@@ -189,15 +263,28 @@ test "parse interface mixin" {
     #|interface mixin EventHandlers {
     #|  attribute EventHandler? onclick;
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Mixin(m) => {
-      assert_eq(m.name, "EventHandlers")
-      assert_eq(m.members.length(), 1)
-    }
-    _ => fail("Expected Mixin")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Mixin",
+      {
+        "extended_attributes": [],
+        "name": "EventHandlers",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": ["Nullable", ["Identifier", "EventHandler"]],
+              "name": "onclick",
+              "is_readonly": false,
+              "static_": false,
+              "is_inherit": false,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -206,15 +293,28 @@ test "parse partial interface" {
     #|partial interface Document {
     #|  readonly attribute Element? body;
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::PartialInterface(p) => {
-      assert_eq(p.name, "Document")
-      assert_eq(p.members.length(), 1)
-    }
-    _ => fail("Expected PartialInterface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "PartialInterface",
+      {
+        "extended_attributes": [],
+        "name": "Document",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": ["Nullable", ["Identifier", "Element"]],
+              "name": "body",
+              "is_readonly": true,
+              "static_": false,
+              "is_inherit": false,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -223,15 +323,32 @@ test "parse interface with constructor" {
     #|interface URL {
     #|  constructor(DOMString url);
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "URL")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "URL",
+        "members": [
+          [
+            "Constructor",
+            {
+              "extended_attributes": [],
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": "DOMString",
+                  "name": "url",
+                  "optional": false,
+                  "variadic": false,
+                },
+              ],
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -240,15 +357,36 @@ test "parse interface with getter" {
     #|interface Collection {
     #|  getter Element? item(unsigned long index);
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "Collection")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "Collection",
+        "members": [
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": ["Nullable", ["Identifier", "Element"]],
+              "name": "item",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": "UnsignedLong",
+                  "name": "index",
+                  "optional": false,
+                  "variadic": false,
+                },
+              ],
+              "static_": false,
+              "special": "Getter",
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -257,15 +395,18 @@ test "parse interface with iterable" {
     #|interface List {
     #|  iterable<DOMString>;
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "List")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "List",
+        "members": [
+          ["Iterable", { "extended_attributes": [], "value_type": "DOMString" }],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -274,15 +415,26 @@ test "parse interface with maplike" {
     #|interface Headers {
     #|  readonly maplike<DOMString, DOMString>;
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "Headers")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "Headers",
+        "members": [
+          [
+            "Maplike",
+            {
+              "extended_attributes": [],
+              "key_type": "DOMString",
+              "value_type": "DOMString",
+              "is_readonly": true,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -291,15 +443,35 @@ test "parse interface with static operation" {
     #|interface URL {
     #|  static boolean canParse(DOMString url);
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "URL")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "URL",
+        "members": [
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "Boolean",
+              "name": "canParse",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": "DOMString",
+                  "name": "url",
+                  "optional": false,
+                  "variadic": false,
+                },
+              ],
+              "static_": true,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -308,13 +480,27 @@ test "parse buffer type" {
     #|interface Blob {
     #|  ArrayBuffer arrayBuffer();
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
-  match result[0] {
-    @parser.Definition::Interface(i) => assert_eq(i.name, "Blob")
-    // Check that the operation return type is Type::ArrayBuffer
-    _ => fail("Expected Interface")
-  }
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "Blob",
+        "members": [
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "ArrayBuffer",
+              "name": "arrayBuffer",
+              "arguments": [],
+              "static_": false,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
 }
 
 ///|
@@ -322,8 +508,9 @@ test "parse single line comment" {
   let idl =
     #|// This is a comment
     #|interface Foo { };
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
+  @json.inspect(@parser.parse(idl), content=[
+    ["Interface", { "extended_attributes": [], "name": "Foo", "members": [] }],
+  ])
 }
 
 ///|
@@ -332,8 +519,9 @@ test "parse multi line comment" {
     #|/* This is a
     #|   multi-line comment */
     #|interface Foo { };
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 1)
+  @json.inspect(@parser.parse(idl), content=[
+    ["Interface", { "extended_attributes": [], "name": "Foo", "members": [] }],
+  ])
 }
 
 ///|
@@ -390,7 +578,7 @@ test "position file is set" {
 }
 
 ///|
-test "comprehensive integration test" {
+test "comprehensive integration test" (t : @test.Test) {
   let idl =
     #|// Test WebIDL Parser - Comprehensive Test
     #|/* This tests all supported WebIDL constructs:
@@ -504,169 +692,7 @@ test "comprehensive integration test" {
     #|  attribute DOMString src;
     #|  readonly attribute unsigned long width;
     #|};
-  let result = @parser.parse(idl)
-  assert_eq(result.length(), 19)
-
-  // 1. Interface: EventTarget (3 members)
-  match result[0] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "EventTarget")
-      assert_eq(i.members.length(), 3)
-    }
-    _ => fail("Expected Interface EventTarget")
-  }
-
-  // 2. Callback Interface: EventListener
-  match result[1] {
-    @parser.Definition::CallbackInterface(c) =>
-      assert_eq(c.name, "EventListener")
-    _ => fail("Expected CallbackInterface EventListener")
-  }
-
-  // 3. Partial Interface: Document (2 members)
-  match result[2] {
-    @parser.Definition::PartialInterface(p) => {
-      assert_eq(p.name, "Document")
-      assert_eq(p.members.length(), 2)
-    }
-    _ => fail("Expected PartialInterface Document")
-  }
-
-  // 4. Mixin: WindowEventHandlers (2 members)
-  match result[3] {
-    @parser.Definition::Mixin(m) => {
-      assert_eq(m.name, "WindowEventHandlers")
-      assert_eq(m.members.length(), 2)
-    }
-    _ => fail("Expected Mixin WindowEventHandlers")
-  }
-
-  // 5. Partial Mixin: GlobalEventHandlers (1 members)
-  match result[4] {
-    @parser.Definition::PartialMixin(p) => {
-      assert_eq(p.name, "GlobalEventHandlers")
-      assert_eq(p.members.length(), 1)
-    }
-    _ => fail("Expected PartialMixin GlobalEventHandlers")
-  }
-
-  // 6. Namespace: CSS (2 members)
-  match result[5] {
-    @parser.Definition::Namespace(n) => {
-      assert_eq(n.name, "CSS")
-      assert_eq(n.members.length(), 2)
-    }
-    _ => fail("Expected Namespace CSS")
-  }
-
-  // 7. Partial Namespace: CSS (1 members)
-  match result[6] {
-    @parser.Definition::PartialNamespace(p) => {
-      assert_eq(p.name, "CSS")
-      assert_eq(p.members.length(), 1)
-    }
-    _ => fail("Expected PartialNamespace CSS")
-  }
-
-  // 8. Dictionary: AddEventListenerOptions (2 members)
-  match result[7] {
-    @parser.Definition::Dictionary(d) => {
-      assert_eq(d.name, "AddEventListenerOptions")
-      assert_eq(d.members.length(), 2)
-    }
-    _ => fail("Expected Dictionary AddEventListenerOptions")
-  }
-
-  // 9. Dictionary: EventListenerOptions (1 members)
-  match result[8] {
-    @parser.Definition::Dictionary(d) => {
-      assert_eq(d.name, "EventListenerOptions")
-      assert_eq(d.members.length(), 1)
-    }
-    _ => fail("Expected Dictionary EventListenerOptions")
-  }
-
-  // 10. Partial Dictionary: RequestInit (2 members)
-  match result[9] {
-    @parser.Definition::PartialDictionary(p) => {
-      assert_eq(p.name, "RequestInit")
-      assert_eq(p.members.length(), 2)
-    }
-    _ => fail("Expected PartialDictionary RequestInit")
-  }
-
-  // 11. Enum: ScrollBehavior (3 values)
-  match result[10] {
-    @parser.Definition::Enum(e) => {
-      assert_eq(e.name, "ScrollBehavior")
-      assert_eq(e.values.length(), 3)
-    }
-    _ => fail("Expected Enum ScrollBehavior")
-  }
-
-  // 12. Typedef: DOMStringList
-  match result[11] {
-    @parser.Definition::Typedef(t) => assert_eq(t.name, "DOMStringList")
-    _ => fail("Expected Typedef DOMStringList")
-  }
-
-  // 13. Callback: EventHandler
-  match result[12] {
-    @parser.Definition::CallbackFunction(c) => assert_eq(c.name, "EventHandler")
-    _ => fail("Expected CallbackFunction EventHandler")
-  }
-
-  // 14. Includes: Window includes WindowEventHandlers
-  match result[13] {
-    @parser.Definition::Includes(i) => {
-      assert_eq(i.interface_name, "Window")
-      assert_eq(i.mixin_name, "WindowEventHandlers")
-    }
-    _ => fail("Expected Includes")
-  }
-
-  // 15. Interface: HTMLCollection (4 members)
-  match result[14] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "HTMLCollection")
-      assert_eq(i.members.length(), 4)
-    }
-    _ => fail("Expected Interface HTMLCollection")
-  }
-
-  // 16. Interface: Headers (1 members)
-  match result[15] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "Headers")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface Headers")
-  }
-
-  // 17. Interface: DOMTokenList (1 members)
-  match result[16] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "DOMTokenList")
-      assert_eq(i.members.length(), 1)
-    }
-    _ => fail("Expected Interface DOMTokenList")
-  }
-
-  // 18. Interface: URL (2 members)
-  match result[17] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "URL")
-      assert_eq(i.members.length(), 2)
-    }
-    _ => fail("Expected Interface URL")
-  }
-
-  // 19. Interface: HTMLImageElement (2 members)
-  match result[18] {
-    @parser.Definition::Interface(i) => {
-      assert_eq(i.name, "HTMLImageElement")
-      assert_eq(i.members.length(), 2)
-    }
-    _ => fail("Expected Interface HTMLImageElement")
-  }
+  let defs = @parser.parse(idl)
+  t.write(defs.to_json().stringify(indent=2))
+  t.snapshot(filename="webidl_parser_comprehensive_integration_test.json")
 }
