@@ -96,7 +96,7 @@ test "map_idl_type handles named types" {
   inspect(map_idl_type(Identifier("Element")), content="Element")
   inspect(map_idl_type(Identifier("EventInit")), content="EventInit")
   inspect(map_idl_type(Identifier("DOMString")), content="String")
-  inspect(map_idl_type(Identifier("ArrayBuffer")), content="JsArrayBuffer")
+  inspect(map_idl_type(Identifier("ArrayBuffer")), content="ArrayBuffer")
 }
 
 ///|
