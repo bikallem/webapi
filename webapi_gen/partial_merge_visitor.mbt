@@ -10,7 +10,7 @@ struct PartialMergeVisitor {
   callback_functions : Map[String, CallbackFunctionDefinition]
   callback_interfaces : Map[String, CallbackInterfaceDefinition]
   includes : Array[IncludesStatement]
-}
+} derive(Show, ToJson)
 
 ///|
 fn PartialMergeVisitor::new() -> PartialMergeVisitor {
