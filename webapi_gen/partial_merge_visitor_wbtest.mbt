@@ -175,7 +175,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
     #|partial interface mixin MyMixin {
     #|  void doSomething();
     #|};
-    #|dictionary EventInit {
+    #|dictionary EventInit : Event {
     #|  required DOMString type;
     #|};
     #|partial dictionary EventInit {
@@ -275,6 +275,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
             "default_value": ["ConstValue", ["Boolean", false]],
           },
         ],
+        "inheritance": "Event",
       },
     },
     "enums": {
