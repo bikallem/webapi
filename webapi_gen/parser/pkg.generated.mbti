@@ -78,11 +78,19 @@ pub impl ToJson for CallbackFunctionDefinition
 pub(all) struct CallbackInterfaceDefinition {
   extended_attributes : Array[ExtendedAttribute]
   name : String
-  members : Array[InterfaceMember]
+  members : Array[CallbackInterfaceMember]
 }
 pub impl Eq for CallbackInterfaceDefinition
 pub impl Show for CallbackInterfaceDefinition
 pub impl ToJson for CallbackInterfaceDefinition
+
+pub(all) enum CallbackInterfaceMember {
+  Operation(OperationMember)
+  Const(ConstMember)
+}
+pub impl Eq for CallbackInterfaceMember
+pub impl Show for CallbackInterfaceMember
+pub impl ToJson for CallbackInterfaceMember
 
 pub(all) struct ConstMember {
   extended_attributes : Array[ExtendedAttribute]
