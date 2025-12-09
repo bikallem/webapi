@@ -112,7 +112,7 @@ test "MergedDictionary::merge() combines members and inheritance" {
         type_: Type::Identifier("DOMString"),
         name: "id",
         required: false,
-        default_value: Some(DefaultValue::String("")),
+        default_value: Some(@parser.DefaultValue::String("")),
       },
     ],
     Some("NodeInit"),
