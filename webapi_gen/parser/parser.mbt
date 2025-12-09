@@ -272,144 +272,135 @@ fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 }
 
 // file:///./parser.mbty
-// 177|    extended_attributes = extended_attribute_list interface = interface_def   { Definition::Interface({ ..interface, extended_attributes }) }
+// 177|    interface_def               { Definition::Interface($1) }
 fn yy_action_2(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_InterfaceDefinition(interface)
-  YYObj_Definition({();  Definition::Interface({ ..interface, extended_attributes }) })
+  guard _args[0].0 is YYObj_InterfaceDefinition(_dollar1)
+  YYObj_Definition({();  Definition::Interface(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 178|    extended_attributes = extended_attribute_list mixin_def = mixin_def       { Definition::Mixin({ ..mixin_def, extended_attributes }) }
+// 178|    mixin_def                   { Definition::Mixin($1) }
 fn yy_action_3(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_MixinDefinition(mixin_def)
-  YYObj_Definition({();  Definition::Mixin({ ..mixin_def, extended_attributes }) })
+  guard _args[0].0 is YYObj_MixinDefinition(_dollar1)
+  YYObj_Definition({();  Definition::Mixin(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 179|    extended_attributes = extended_attribute_list partial_interface_def       { Definition::PartialInterface({ ..$2, extended_attributes }) }
+// 179|    partial_interface_def       { Definition::PartialInterface($1) }
 fn yy_action_4(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_PartialInterfaceDefinition(_dollar2)
-  YYObj_Definition({();  Definition::PartialInterface({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_PartialInterfaceDefinition(_dollar1)
+  YYObj_Definition({();  Definition::PartialInterface(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 180|    extended_attributes = extended_attribute_list partial_mixin_def           { Definition::PartialMixin({ ..$2, extended_attributes }) }
+// 180|    partial_mixin_def           { Definition::PartialMixin($1) }
 fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_PartialMixinDefinition(_dollar2)
-  YYObj_Definition({();  Definition::PartialMixin({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_PartialMixinDefinition(_dollar1)
+  YYObj_Definition({();  Definition::PartialMixin(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 181|    extended_attributes = extended_attribute_list namespace_def               { Definition::Namespace({ ..$2, extended_attributes }) }
+// 181|    namespace_def               { Definition::Namespace($1) }
 fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_NamespaceDefinition(_dollar2)
-  YYObj_Definition({();  Definition::Namespace({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_NamespaceDefinition(_dollar1)
+  YYObj_Definition({();  Definition::Namespace(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 182|    extended_attributes = extended_attribute_list partial_namespace_def       { Definition::PartialNamespace({ ..$2, extended_attributes }) }
+// 182|    partial_namespace_def       { Definition::PartialNamespace($1) }
 fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_PartialNamespaceDefinition(_dollar2)
-  YYObj_Definition({();  Definition::PartialNamespace({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_PartialNamespaceDefinition(_dollar1)
+  YYObj_Definition({();  Definition::PartialNamespace(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 183|    extended_attributes = extended_attribute_list dictionary_def              { Definition::Dictionary({ ..$2, extended_attributes }) }
+// 183|    dictionary_def              { Definition::Dictionary($1) }
 fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_DictionaryDefinition(_dollar2)
-  YYObj_Definition({();  Definition::Dictionary({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_DictionaryDefinition(_dollar1)
+  YYObj_Definition({();  Definition::Dictionary(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 184|    extended_attributes = extended_attribute_list partial_dictionary_def      { Definition::PartialDictionary({ ..$2, extended_attributes }) }
+// 184|    partial_dictionary_def      { Definition::PartialDictionary($1) }
 fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_PartialDictionaryDefinition(_dollar2)
-  YYObj_Definition({();  Definition::PartialDictionary({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_PartialDictionaryDefinition(_dollar1)
+  YYObj_Definition({();  Definition::PartialDictionary(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 185|    extended_attributes = extended_attribute_list enum_def                    { Definition::Enum({ ..$2, extended_attributes }) }
+// 185|    enum_def                    { Definition::Enum($1) }
 fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_EnumDefinition(_dollar2)
-  YYObj_Definition({();  Definition::Enum({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_EnumDefinition(_dollar1)
+  YYObj_Definition({();  Definition::Enum(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 186|    extended_attributes = extended_attribute_list typedef_def                 { Definition::Typedef({ ..$2, extended_attributes }) }
+// 186|    typedef_def                 { Definition::Typedef($1) }
 fn yy_action_11(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_TypedefDefinition(_dollar2)
-  YYObj_Definition({();  Definition::Typedef({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_TypedefDefinition(_dollar1)
+  YYObj_Definition({();  Definition::Typedef(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 187|    extended_attributes = extended_attribute_list callback_def                { Definition::CallbackFunction({ ..$2, extended_attributes }) }
+// 187|    callback_def                { Definition::CallbackFunction($1) }
 fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_CallbackFunctionDefinition(_dollar2)
-  YYObj_Definition({();  Definition::CallbackFunction({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_CallbackFunctionDefinition(_dollar1)
+  YYObj_Definition({();  Definition::CallbackFunction(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 188|    extended_attributes = extended_attribute_list callback_interface_def      { Definition::CallbackInterface({ ..$2, extended_attributes }) }
+// 188|    callback_interface_def      { Definition::CallbackInterface($1) }
 fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_CallbackInterfaceDefinition(_dollar2)
-  YYObj_Definition({();  Definition::CallbackInterface({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_CallbackInterfaceDefinition(_dollar1)
+  YYObj_Definition({();  Definition::CallbackInterface(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 189|    extended_attributes = extended_attribute_list includes_statement          { Definition::Includes({ ..$2, extended_attributes }) }
+// 189|    includes_statement          { Definition::Includes($1) }
 fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
-  guard _args[1].0 is YYObj_IncludesStatement(_dollar2)
-  YYObj_Definition({();  Definition::Includes({ .._dollar2, extended_attributes }) })
+  guard _args[0].0 is YYObj_IncludesStatement(_dollar1)
+  YYObj_Definition({();  Definition::Includes(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 192|    "interface" name = IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
-// 193|      { { extended_attributes: [], name, inheritance, members } }
+// 192|    extended_attribute_list "interface" IDENTIFIER inheritance "{" interface_members "}" ";"
+// 193|      { { extended_attributes: $1, name: $3, inheritance: $4, members: $6 } }
 fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(name)
-  guard _args[2].0 is YYObj_String_(inheritance)
-  guard _args[4].0 is YYObj_Array_InterfaceMember_(members)
-  YYObj_InterfaceDefinition({();  { extended_attributes: [], name, inheritance, members } })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[2].0 is YYObj_String(_dollar3)
+  guard _args[3].0 is YYObj_String_(_dollar4)
+  guard _args[5].0 is YYObj_Array_InterfaceMember_(_dollar6)
+  YYObj_InterfaceDefinition({();  { extended_attributes: _dollar1, name: _dollar3, inheritance: _dollar4, members: _dollar6 } })
 }
 
 // file:///./parser.mbty
-// 200|    "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
-// 201|      { { extended_attributes: [], name: $3, members: $5 } }
+// 200|    extended_attribute_list "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
+// 201|      { { extended_attributes: $1, name: $4, members: $6 } }
 fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_InterfaceMember_(_dollar5)
-  YYObj_MixinDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
-}
-
-// file:///./parser.mbty
-// 196|    "partial" "interface" IDENTIFIER "{" interface_members "}" ";"
-// 197|      { { extended_attributes: [], name: $3, members: $5 } }
-fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_InterfaceMember_(_dollar5)
-  YYObj_PartialInterfaceDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
-}
-
-// file:///./parser.mbty
-// 204|    "partial" "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
-// 205|      { { extended_attributes: [], name: $4, members: $6 } }
-fn yy_action_18(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
   guard _args[3].0 is YYObj_String(_dollar4)
   guard _args[5].0 is YYObj_Array_InterfaceMember_(_dollar6)
-  YYObj_PartialMixinDefinition({();  { extended_attributes: [], name: _dollar4, members: _dollar6 } })
+  YYObj_MixinDefinition({();  { extended_attributes: _dollar1, name: _dollar4, members: _dollar6 } })
+}
+
+// file:///./parser.mbty
+// 196|    extended_attribute_list "partial" "interface" IDENTIFIER "{" interface_members "}" ";"
+// 197|      { { extended_attributes: $1, name: $4, members: $6 } }
+fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[3].0 is YYObj_String(_dollar4)
+  guard _args[5].0 is YYObj_Array_InterfaceMember_(_dollar6)
+  YYObj_PartialInterfaceDefinition({();  { extended_attributes: _dollar1, name: _dollar4, members: _dollar6 } })
+}
+
+// file:///./parser.mbty
+// 204|    extended_attribute_list "partial" "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
+// 205|      { { extended_attributes: $1, name: $5, members: $7 } }
+fn yy_action_18(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[4].0 is YYObj_String(_dollar5)
+  guard _args[6].0 is YYObj_Array_InterfaceMember_(_dollar7)
+  YYObj_PartialMixinDefinition({();  { extended_attributes: _dollar1, name: _dollar5, members: _dollar7 } })
 }
 
 // file:///./parser.mbty
@@ -653,30 +644,33 @@ fn yy_action_48(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 212|    "partial" "namespace" IDENTIFIER "{" namespace_members "}" ";"
-// 213|      { { extended_attributes: [], name: $3, members: $5 } }
+// 212|    extended_attribute_list "partial" "namespace" IDENTIFIER "{" namespace_members "}" ";"
+// 213|      { { extended_attributes: $1, name: $4, members: $6 } }
 fn yy_action_49(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[3].0 is YYObj_String(_dollar4)
+  guard _args[5].0 is YYObj_Array_NamespaceMember_(_dollar6)
+  YYObj_PartialNamespaceDefinition({();  { extended_attributes: _dollar1, name: _dollar4, members: _dollar6 } })
+}
+
+// file:///./parser.mbty
+// 220|    extended_attribute_list "partial" "dictionary" IDENTIFIER "{" dictionary_members "}" ";"
+// 221|      { { extended_attributes: $1, name: $4, members: $6 } }
+fn yy_action_50(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[3].0 is YYObj_String(_dollar4)
+  guard _args[5].0 is YYObj_Array_DictionaryMember_(_dollar6)
+  YYObj_PartialDictionaryDefinition({();  { extended_attributes: _dollar1, name: _dollar4, members: _dollar6 } })
+}
+
+// file:///./parser.mbty
+// 208|    extended_attribute_list "namespace" IDENTIFIER "{" namespace_members "}" ";"
+// 209|      { { extended_attributes: $1, name: $3, members: $5 } }
+fn yy_action_51(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
   guard _args[2].0 is YYObj_String(_dollar3)
   guard _args[4].0 is YYObj_Array_NamespaceMember_(_dollar5)
-  YYObj_PartialNamespaceDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
-}
-
-// file:///./parser.mbty
-// 220|    "partial" "dictionary" IDENTIFIER "{" dictionary_members "}" ";"
-// 221|      { { extended_attributes: [], name: $3, members: $5 } }
-fn yy_action_50(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_DictionaryMember_(_dollar5)
-  YYObj_PartialDictionaryDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
-}
-
-// file:///./parser.mbty
-// 208|    "namespace" IDENTIFIER "{" namespace_members "}" ";"
-// 209|      { { extended_attributes: [], name: $2, members: $4 } }
-fn yy_action_51(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[3].0 is YYObj_Array_NamespaceMember_(_dollar4)
-  YYObj_NamespaceDefinition({();  { extended_attributes: [], name: _dollar2, members: _dollar4 } })
+  YYObj_NamespaceDefinition({();  { extended_attributes: _dollar1, name: _dollar3, members: _dollar5 } })
 }
 
 // file:///./parser.mbty
@@ -722,13 +716,14 @@ fn yy_action_56(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 216|    "dictionary" IDENTIFIER inheritance "{" dictionary_members "}" ";"
-// 217|      { { extended_attributes: [], name: $2, inheritance: $3, members: $5 } }
+// 216|    extended_attribute_list "dictionary" IDENTIFIER inheritance "{" dictionary_members "}" ";"
+// 217|      { { extended_attributes: $1, name: $3, inheritance: $4, members: $6 } }
 fn yy_action_57(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[2].0 is YYObj_String_(_dollar3)
-  guard _args[4].0 is YYObj_Array_DictionaryMember_(_dollar5)
-  YYObj_DictionaryDefinition({();  { extended_attributes: [], name: _dollar2, inheritance: _dollar3, members: _dollar5 } })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[2].0 is YYObj_String(_dollar3)
+  guard _args[3].0 is YYObj_String_(_dollar4)
+  guard _args[5].0 is YYObj_Array_DictionaryMember_(_dollar6)
+  YYObj_DictionaryDefinition({();  { extended_attributes: _dollar1, name: _dollar3, inheritance: _dollar4, members: _dollar6 } })
 }
 
 // file:///./parser.mbty
@@ -780,12 +775,13 @@ fn yy_action_63(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 224|    "enum" IDENTIFIER "{" enum_value_list "}" ";"
-// 225|      { { extended_attributes: [], name: $2, values: $4 } }
+// 224|    extended_attribute_list "enum" IDENTIFIER "{" enum_value_list "}" ";"
+// 225|      { { extended_attributes: $1, name: $3, values: $5 } }
 fn yy_action_64(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[3].0 is YYObj_Array_String_(_dollar4)
-  YYObj_EnumDefinition({();  { extended_attributes: [], name: _dollar2, values: _dollar4 } })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[2].0 is YYObj_String(_dollar3)
+  guard _args[4].0 is YYObj_Array_String_(_dollar5)
+  YYObj_EnumDefinition({();  { extended_attributes: _dollar1, name: _dollar3, values: _dollar5 } })
 }
 
 // file:///./parser.mbty
@@ -817,31 +813,34 @@ fn yy_action_68(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 228|    "typedef" type IDENTIFIER ";"
-// 229|      { { extended_attributes: [], type_: $2, name: $3 } }
+// 228|    extended_attribute_list "typedef" type IDENTIFIER ";"
+// 229|      { { extended_attributes: $1, type_: $3, name: $4 } }
 fn yy_action_69(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_Type(_dollar2)
-  guard _args[2].0 is YYObj_String(_dollar3)
-  YYObj_TypedefDefinition({();  { extended_attributes: [], type_: _dollar2, name: _dollar3 } })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[2].0 is YYObj_Type(_dollar3)
+  guard _args[3].0 is YYObj_String(_dollar4)
+  YYObj_TypedefDefinition({();  { extended_attributes: _dollar1, type_: _dollar3, name: _dollar4 } })
 }
 
 // file:///./parser.mbty
-// 232|    "callback" IDENTIFIER "=" type "(" argument_list ")" ";"
-// 233|      { { extended_attributes: [], name: $2, return_type: $4, arguments: $6 } }
+// 232|    extended_attribute_list "callback" IDENTIFIER "=" type "(" argument_list ")" ";"
+// 233|      { { extended_attributes: $1, name: $3, return_type: $5, arguments: $7 } }
 fn yy_action_70(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[3].0 is YYObj_Type(_dollar4)
-  guard _args[5].0 is YYObj_Array_Argument_(_dollar6)
-  YYObj_CallbackFunctionDefinition({();  { extended_attributes: [], name: _dollar2, return_type: _dollar4, arguments: _dollar6 } })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[2].0 is YYObj_String(_dollar3)
+  guard _args[4].0 is YYObj_Type(_dollar5)
+  guard _args[6].0 is YYObj_Array_Argument_(_dollar7)
+  YYObj_CallbackFunctionDefinition({();  { extended_attributes: _dollar1, name: _dollar3, return_type: _dollar5, arguments: _dollar7 } })
 }
 
 // file:///./parser.mbty
-// 236|    "callback" "interface" IDENTIFIER "{" callback_interface_members "}" ";"
-// 237|      { { extended_attributes: [], name: $3, members: $5 } }
+// 236|    extended_attribute_list "callback" "interface" IDENTIFIER "{" callback_interface_members "}" ";"
+// 237|      { { extended_attributes: $1, name: $4, members: $6 } }
 fn yy_action_71(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_CallbackInterfaceMember_(_dollar5)
-  YYObj_CallbackInterfaceDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
+  guard _args[3].0 is YYObj_String(_dollar4)
+  guard _args[5].0 is YYObj_Array_CallbackInterfaceMember_(_dollar6)
+  YYObj_CallbackInterfaceDefinition({();  { extended_attributes: _dollar1, name: _dollar4, members: _dollar6 } })
 }
 
 // file:///./parser.mbty
@@ -1580,10 +1579,24 @@ fn yy_state_0(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     NT_definitions => Shift(yy_state_1)
     T_LBRACKET => Shift(yy_state_2)
-    NT_extended_attribute_list => Shift(yy_state_125)
+    T_IDENTIFIER => Shift(yy_state_125)
+    NT_extended_attribute_list => Shift(yy_state_129)
+    NT_includes_statement => Shift(yy_state_357)
+    NT_callback_interface_def => Shift(yy_state_358)
+    NT_callback_def => Shift(yy_state_359)
+    NT_typedef_def => Shift(yy_state_360)
+    NT_enum_def => Shift(yy_state_361)
+    NT_partial_dictionary_def => Shift(yy_state_362)
+    NT_dictionary_def => Shift(yy_state_363)
+    NT_partial_namespace_def => Shift(yy_state_364)
+    NT_namespace_def => Shift(yy_state_365)
+    NT_partial_mixin_def => Shift(yy_state_366)
+    NT_partial_interface_def => Shift(yy_state_367)
+    NT_mixin_def => Shift(yy_state_368)
+    NT_interface_def => Shift(yy_state_369)
     T_EOF => Shift(yy_state_370)
     NT_definition => Shift(yy_state_371)
-    T_IDENTIFIER | T_INTERFACE | T_PARTIAL | T_DICTIONARY | T_ENUM | T_TYPEDEF | T_CALLBACK | T_NAMESPACE => Reduce(0, NT_extended_attribute_list, yy_action_162)
+    T_INTERFACE | T_PARTIAL | T_DICTIONARY | T_ENUM | T_TYPEDEF | T_CALLBACK | T_NAMESPACE => Reduce(0, NT_extended_attribute_list, yy_action_162)
     _ => Error
   }
 }
@@ -2688,7 +2701,31 @@ fn yy_state_124(_lookahead : YYSymbol) -> YYDecision {
 
 fn yy_state_125(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    T_IDENTIFIER => Shift(yy_state_126)
+    T_INCLUDES => Shift(yy_state_126)
+    _ => Error
+  }
+}
+
+fn yy_state_126(_lookahead : YYSymbol) -> YYDecision {
+  match _lookahead {
+    T_IDENTIFIER => Shift(yy_state_127)
+    _ => Error
+  }
+}
+
+fn yy_state_127(_lookahead : YYSymbol) -> YYDecision {
+  match _lookahead {
+    T_SEMICOLON => Shift(yy_state_128)
+    _ => Error
+  }
+}
+
+fn yy_state_128(_lookahead : YYSymbol) -> YYDecision {
+  ReduceNoLookahead(4, NT_includes_statement, yy_action_79)
+}
+
+fn yy_state_129(_lookahead : YYSymbol) -> YYDecision {
+  match _lookahead {
     T_CALLBACK => Shift(yy_state_130)
     T_TYPEDEF => Shift(yy_state_165)
     T_ENUM => Shift(yy_state_169)
@@ -2696,46 +2733,8 @@ fn yy_state_125(_lookahead : YYSymbol) -> YYDecision {
     T_NAMESPACE => Shift(yy_state_200)
     T_PARTIAL => Shift(yy_state_221)
     T_INTERFACE => Shift(yy_state_344)
-    NT_includes_statement => Shift(yy_state_357)
-    NT_callback_interface_def => Shift(yy_state_358)
-    NT_callback_def => Shift(yy_state_359)
-    NT_typedef_def => Shift(yy_state_360)
-    NT_enum_def => Shift(yy_state_361)
-    NT_partial_dictionary_def => Shift(yy_state_362)
-    NT_dictionary_def => Shift(yy_state_363)
-    NT_partial_namespace_def => Shift(yy_state_364)
-    NT_namespace_def => Shift(yy_state_365)
-    NT_partial_mixin_def => Shift(yy_state_366)
-    NT_partial_interface_def => Shift(yy_state_367)
-    NT_mixin_def => Shift(yy_state_368)
-    NT_interface_def => Shift(yy_state_369)
     _ => Error
   }
-}
-
-fn yy_state_126(_lookahead : YYSymbol) -> YYDecision {
-  match _lookahead {
-    T_INCLUDES => Shift(yy_state_127)
-    _ => Error
-  }
-}
-
-fn yy_state_127(_lookahead : YYSymbol) -> YYDecision {
-  match _lookahead {
-    T_IDENTIFIER => Shift(yy_state_128)
-    _ => Error
-  }
-}
-
-fn yy_state_128(_lookahead : YYSymbol) -> YYDecision {
-  match _lookahead {
-    T_SEMICOLON => Shift(yy_state_129)
-    _ => Error
-  }
-}
-
-fn yy_state_129(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(4, NT_includes_statement, yy_action_79)
 }
 
 fn yy_state_130(_lookahead : YYSymbol) -> YYDecision {
@@ -3029,7 +3028,7 @@ fn yy_state_156(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_157(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_callback_interface_def, yy_action_71)
+  ReduceNoLookahead(8, NT_callback_interface_def, yy_action_71)
 }
 
 fn yy_state_158(_lookahead : YYSymbol) -> YYDecision {
@@ -3124,7 +3123,7 @@ fn yy_state_163(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_164(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(8, NT_callback_def, yy_action_70)
+  ReduceNoLookahead(9, NT_callback_def, yy_action_70)
 }
 
 fn yy_state_165(_lookahead : YYSymbol) -> YYDecision {
@@ -3193,7 +3192,7 @@ fn yy_state_167(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_168(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(4, NT_typedef_def, yy_action_69)
+  ReduceNoLookahead(5, NT_typedef_def, yy_action_69)
 }
 
 fn yy_state_169(_lookahead : YYSymbol) -> YYDecision {
@@ -3267,7 +3266,7 @@ fn yy_state_178(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_179(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(6, NT_enum_def, yy_action_64)
+  ReduceNoLookahead(7, NT_enum_def, yy_action_64)
 }
 
 fn yy_state_180(_lookahead : YYSymbol) -> YYDecision {
@@ -3494,7 +3493,7 @@ fn yy_state_198(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_199(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_dictionary_def, yy_action_57)
+  ReduceNoLookahead(8, NT_dictionary_def, yy_action_57)
 }
 
 fn yy_state_200(_lookahead : YYSymbol) -> YYDecision {
@@ -3731,7 +3730,7 @@ fn yy_state_219(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_220(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(6, NT_namespace_def, yy_action_51)
+  ReduceNoLookahead(7, NT_namespace_def, yy_action_51)
 }
 
 fn yy_state_221(_lookahead : YYSymbol) -> YYDecision {
@@ -3783,7 +3782,7 @@ fn yy_state_226(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_227(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_partial_dictionary_def, yy_action_50)
+  ReduceNoLookahead(8, NT_partial_dictionary_def, yy_action_50)
 }
 
 fn yy_state_228(_lookahead : YYSymbol) -> YYDecision {
@@ -3826,7 +3825,7 @@ fn yy_state_232(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_233(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_partial_namespace_def, yy_action_49)
+  ReduceNoLookahead(8, NT_partial_namespace_def, yy_action_49)
 }
 
 fn yy_state_234(_lookahead : YYSymbol) -> YYDecision {
@@ -5236,7 +5235,7 @@ fn yy_state_337(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_338(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(8, NT_partial_mixin_def, yy_action_18)
+  ReduceNoLookahead(9, NT_partial_mixin_def, yy_action_18)
 }
 
 fn yy_state_339(_lookahead : YYSymbol) -> YYDecision {
@@ -5272,7 +5271,7 @@ fn yy_state_342(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_343(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_partial_interface_def, yy_action_17)
+  ReduceNoLookahead(8, NT_partial_interface_def, yy_action_17)
 }
 
 fn yy_state_344(_lookahead : YYSymbol) -> YYDecision {
@@ -5323,7 +5322,7 @@ fn yy_state_349(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_350(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_mixin_def, yy_action_16)
+  ReduceNoLookahead(8, NT_mixin_def, yy_action_16)
 }
 
 fn yy_state_351(_lookahead : YYSymbol) -> YYDecision {
@@ -5368,59 +5367,59 @@ fn yy_state_355(_lookahead : YYSymbol) -> YYDecision {
 }
 
 fn yy_state_356(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_interface_def, yy_action_15)
+  ReduceNoLookahead(8, NT_interface_def, yy_action_15)
 }
 
 fn yy_state_357(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_14)
+  ReduceNoLookahead(1, NT_definition, yy_action_14)
 }
 
 fn yy_state_358(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_13)
+  ReduceNoLookahead(1, NT_definition, yy_action_13)
 }
 
 fn yy_state_359(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_12)
+  ReduceNoLookahead(1, NT_definition, yy_action_12)
 }
 
 fn yy_state_360(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_11)
+  ReduceNoLookahead(1, NT_definition, yy_action_11)
 }
 
 fn yy_state_361(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_10)
+  ReduceNoLookahead(1, NT_definition, yy_action_10)
 }
 
 fn yy_state_362(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_9)
+  ReduceNoLookahead(1, NT_definition, yy_action_9)
 }
 
 fn yy_state_363(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_8)
+  ReduceNoLookahead(1, NT_definition, yy_action_8)
 }
 
 fn yy_state_364(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_7)
+  ReduceNoLookahead(1, NT_definition, yy_action_7)
 }
 
 fn yy_state_365(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_6)
+  ReduceNoLookahead(1, NT_definition, yy_action_6)
 }
 
 fn yy_state_366(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_5)
+  ReduceNoLookahead(1, NT_definition, yy_action_5)
 }
 
 fn yy_state_367(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_4)
+  ReduceNoLookahead(1, NT_definition, yy_action_4)
 }
 
 fn yy_state_368(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_3)
+  ReduceNoLookahead(1, NT_definition, yy_action_3)
 }
 
 fn yy_state_369(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_definition, yy_action_2)
+  ReduceNoLookahead(1, NT_definition, yy_action_2)
 }
 
 fn yy_state_370(_lookahead : YYSymbol) -> YYDecision {
@@ -5430,11 +5429,25 @@ fn yy_state_370(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_371(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LBRACKET => Shift(yy_state_2)
-    NT_extended_attribute_list => Shift(yy_state_125)
+    T_IDENTIFIER => Shift(yy_state_125)
+    NT_extended_attribute_list => Shift(yy_state_129)
+    NT_includes_statement => Shift(yy_state_357)
+    NT_callback_interface_def => Shift(yy_state_358)
+    NT_callback_def => Shift(yy_state_359)
+    NT_typedef_def => Shift(yy_state_360)
+    NT_enum_def => Shift(yy_state_361)
+    NT_partial_dictionary_def => Shift(yy_state_362)
+    NT_dictionary_def => Shift(yy_state_363)
+    NT_partial_namespace_def => Shift(yy_state_364)
+    NT_namespace_def => Shift(yy_state_365)
+    NT_partial_mixin_def => Shift(yy_state_366)
+    NT_partial_interface_def => Shift(yy_state_367)
+    NT_mixin_def => Shift(yy_state_368)
+    NT_interface_def => Shift(yy_state_369)
     T_EOF => Shift(yy_state_370)
     NT_definition => Shift(yy_state_371)
     NT_definitions => Shift(yy_state_372)
-    T_IDENTIFIER | T_INTERFACE | T_PARTIAL | T_DICTIONARY | T_ENUM | T_TYPEDEF | T_CALLBACK | T_NAMESPACE => Reduce(0, NT_extended_attribute_list, yy_action_162)
+    T_INTERFACE | T_PARTIAL | T_DICTIONARY | T_ENUM | T_TYPEDEF | T_CALLBACK | T_NAMESPACE => Reduce(0, NT_extended_attribute_list, yy_action_162)
     _ => Error
   }
 }
