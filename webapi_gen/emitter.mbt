@@ -179,3 +179,10 @@ fn enum_value_to_variant(value : String) -> String {
   }
   to_pascal_case(unquoted.to_string())
 }
+
+///|
+/// Generate a safe MoonBit identifier from a WebIDL name.
+/// Handles keywords and invalid characters.
+fn safe_identifier(name : String) -> String {
+  escape_keyword(to_snake_case(name))
+}

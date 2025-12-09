@@ -111,3 +111,11 @@ test "enum_value_to_variant converts enum values" {
   inspect(enum_value_to_variant("\"ltr\""), content="Ltr")
   inspect(enum_value_to_variant("smooth"), content="Smooth")
 }
+
+///|
+test "safe_identifier handles keywords and casing" {
+  inspect(safe_identifier("type"), content="type_")
+  inspect(safe_identifier("match"), content="match_")
+  inspect(safe_identifier("getElementById"), content="get_element_by_id")
+  inspect(safe_identifier("appendChild"), content="append_child")
+}
