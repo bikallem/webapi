@@ -38,6 +38,24 @@ fn to_pascal_case(s : String) -> String {
 }
 
 ///|
+/// Moonbit reserved keywords that need escaping
+let keywords : @hashset.HashSet[String] = [
+    "fn", "let", "mut", "if", "else", "match", "while", "for", "break", "continue",
+    "return", "struct", "enum", "type", "trait", "impl", "pub", "priv", "true", "false",
+    "as", "is", "in", "loop", "test", "raise", "try", "catch",
+  ]
+  |> @hashset.from_array
+
+///|
+/// Escape MoonBit reserved keywords by appending underscore.
+fn escape_keyword(name : String) -> String {
+  match keywords.contains(name) {
+    true => "\{name}_"
+    false => name
+  }
+}
+
+///|
 test "to_snake_case converts PascalCase" {
   inspect(to_snake_case("HTMLElement"), content="h_t_m_l_element")
   inspect(to_snake_case("getElementById"), content="get_element_by_id")
@@ -68,4 +86,19 @@ test "to_pascal_case handles hyphenated strings" {
 test "to_pascal_case handles already PascalCase" {
   inspect(to_pascal_case("HTMLElement"), content="HTMLElement")
   inspect(to_pascal_case("DOMString"), content="DOMString")
+}
+
+///|
+test "escape_keyword escapes reserved words" {
+  inspect(escape_keyword("fn"), content="fn_")
+  inspect(escape_keyword("let"), content="let_")
+  inspect(escape_keyword("type"), content="type_")
+  inspect(escape_keyword("match"), content="match_")
+}
+
+///|
+test "escape_keyword passes non-keywords" {
+  inspect(escape_keyword("element"), content="element")
+  inspect(escape_keyword("document"), content="document")
+  inspect(escape_keyword("appendChild"), content="appendChild")
 }
