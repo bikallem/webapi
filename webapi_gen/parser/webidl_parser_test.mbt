@@ -9,6 +9,7 @@ test "parse empty input" {
 test "parse simple interface" {
   let idl =
     #|interface Foo {
+    #|  constructor(optional sequence<BlobPart> blobParts, optional BlobPropertyBag options = {});
     #|  attribute DOMString bar;
     #|};
   @json.inspect(@parser.parse(idl), content=[
@@ -18,6 +19,29 @@ test "parse simple interface" {
         "extended_attributes": [],
         "name": "Foo",
         "members": [
+          [
+            "Constructor",
+            {
+              "extended_attributes": [],
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": ["Sequence", ["Identifier", "BlobPart"]],
+                  "name": "blobParts",
+                  "optional": true,
+                  "variadic": false,
+                },
+                {
+                  "extended_attributes": [],
+                  "type_": ["Identifier", "BlobPropertyBag"],
+                  "name": "options",
+                  "optional": true,
+                  "variadic": false,
+                  "default_value": "EmptyObject",
+                },
+              ],
+            },
+          ],
           [
             "Attribute",
             {
