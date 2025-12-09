@@ -103,3 +103,11 @@ test "map_idl_type handles named types" {
 test "map_idl_type handles union types" {
   inspect(map_idl_type(Union([DOMString, Long])), content="JsValue")
 }
+
+///|
+test "enum_value_to_variant converts enum values" {
+  inspect(enum_value_to_variant("\"auto\""), content="Auto")
+  inspect(enum_value_to_variant("\"no-repeat\""), content="NoRepeat")
+  inspect(enum_value_to_variant("\"ltr\""), content="Ltr")
+  inspect(enum_value_to_variant("smooth"), content="Smooth")
+}
