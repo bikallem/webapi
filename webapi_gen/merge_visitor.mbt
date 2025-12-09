@@ -43,25 +43,22 @@ fn MergeVisitor::merge_interface(
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_interface(self, iface) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_interface(self, iface) -> Unit {
   self.merge_interface(iface.name, iface.members, iface.inheritance)
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_partial_interface(
-  self,
-  piface,
-) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_partial_interface(self, piface) -> Unit {
   self.merge_interface(piface.name, piface.members, None)
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_mixin(self, mxn) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_mixin(self, mxn) -> Unit {
   self.merge_interface(mxn.name, mxn.members, None)
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_partial_mixin(self, pmxn) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_partial_mixin(self, pmxn) -> Unit {
   self.merge_interface(pmxn.name, pmxn.members, None)
 }
 
@@ -87,39 +84,36 @@ fn MergeVisitor::merge_dictionary(
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_dictionary(self, dict) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_dictionary(self, dict) -> Unit {
   self.merge_dictionary(dict.name, dict.members, dict.inheritance)
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_partial_dictionary(
-  self,
-  pdict,
-) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_partial_dictionary(self, pdict) -> Unit {
   self.merge_dictionary(pdict.name, pdict.members, None)
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_enum(self, enm) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_enum(self, enm) -> Unit {
   self.enums[enm.name] = enm
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_typedef(self, td) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_typedef(self, td) -> Unit {
   self.typedefs[td.name] = td
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_callback_function(self, cbf) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_callback_function(self, cbf) -> Unit {
   self.callback_functions[cbf.name] = cbf
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_callback_interface(self, cbi) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_callback_interface(self, cbi) -> Unit {
   self.callback_interfaces[cbi.name] = cbi
 }
 
 ///|
-impl DefinitionVisitor for MergeVisitor with visit_include_statements(self, inc) -> Unit {
+impl WebIdlVisitor for MergeVisitor with visit_include_statements(self, inc) -> Unit {
   self.includes.push(inc)
 }

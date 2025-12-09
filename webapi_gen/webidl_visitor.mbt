@@ -1,6 +1,6 @@
 ///|
 /// Base visitor trait for traversing WebIDL definitions.
-pub(open) trait DefinitionVisitor {
+pub(open) trait WebIdlVisitor {
   visit(Self, Array[Definition]) -> Unit = _
   visit_definition(Self, Definition) -> Unit = _
 
@@ -41,7 +41,7 @@ pub(open) trait DefinitionVisitor {
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_definitions(
+fn[T : WebIdlVisitor] default_visit_definitions(
   visitor : T,
   defs : Array[Definition],
 ) -> Unit {
@@ -51,12 +51,12 @@ fn[T : DefinitionVisitor] default_visit_definitions(
 }
 
 ///|
-impl DefinitionVisitor with visit(self, defs) -> Unit {
+impl WebIdlVisitor with visit(self, defs) -> Unit {
   default_visit_definitions(self, defs)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_definition(
+fn[T : WebIdlVisitor] default_visit_definition(
   visitor : T,
   def : Definition,
 ) -> Unit {
@@ -78,12 +78,12 @@ fn[T : DefinitionVisitor] default_visit_definition(
 }
 
 ///|
-impl DefinitionVisitor with visit_definition(self, def) -> Unit {
+impl WebIdlVisitor with visit_definition(self, def) -> Unit {
   default_visit_definition(self, def)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_interface(
+fn[T : WebIdlVisitor] default_visit_interface(
   visitor : T,
   iface : InterfaceDefinition,
 ) -> Unit {
@@ -93,12 +93,12 @@ fn[T : DefinitionVisitor] default_visit_interface(
 }
 
 ///|
-impl DefinitionVisitor with visit_interface(self, iface) -> Unit {
+impl WebIdlVisitor with visit_interface(self, iface) -> Unit {
   default_visit_interface(self, iface)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_partial_interface(
+fn[T : WebIdlVisitor] default_visit_partial_interface(
   visitor : T,
   piface : PartialInterfaceDefinition,
 ) -> Unit {
@@ -108,12 +108,12 @@ fn[T : DefinitionVisitor] default_visit_partial_interface(
 }
 
 ///|
-impl DefinitionVisitor with visit_partial_interface(self, piface) -> Unit {
+impl WebIdlVisitor with visit_partial_interface(self, piface) -> Unit {
   default_visit_partial_interface(self, piface)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_mixin(
+fn[T : WebIdlVisitor] default_visit_mixin(
   visitor : T,
   mxn : MixinDefinition,
 ) -> Unit {
@@ -123,12 +123,12 @@ fn[T : DefinitionVisitor] default_visit_mixin(
 }
 
 ///|
-impl DefinitionVisitor with visit_mixin(self, mxn) -> Unit {
+impl WebIdlVisitor with visit_mixin(self, mxn) -> Unit {
   default_visit_mixin(self, mxn)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_partial_mixin(
+fn[T : WebIdlVisitor] default_visit_partial_mixin(
   visitor : T,
   pmxn : PartialMixinDefinition,
 ) -> Unit {
@@ -138,12 +138,12 @@ fn[T : DefinitionVisitor] default_visit_partial_mixin(
 }
 
 ///|
-impl DefinitionVisitor with visit_partial_mixin(self, pmxn) -> Unit {
+impl WebIdlVisitor with visit_partial_mixin(self, pmxn) -> Unit {
   default_visit_partial_mixin(self, pmxn)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_dictionary(
+fn[T : WebIdlVisitor] default_visit_dictionary(
   visitor : T,
   dict : DictionaryDefinition,
 ) -> Unit {
@@ -153,12 +153,12 @@ fn[T : DefinitionVisitor] default_visit_dictionary(
 }
 
 ///|
-impl DefinitionVisitor with visit_dictionary(self, dict) -> Unit {
+impl WebIdlVisitor with visit_dictionary(self, dict) -> Unit {
   default_visit_dictionary(self, dict)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_partial_dictionary(
+fn[T : WebIdlVisitor] default_visit_partial_dictionary(
   visitor : T,
   pdict : PartialDictionaryDefinition,
 ) -> Unit {
@@ -168,22 +168,22 @@ fn[T : DefinitionVisitor] default_visit_partial_dictionary(
 }
 
 ///|
-impl DefinitionVisitor with visit_partial_dictionary(self, pdict) -> Unit {
+impl WebIdlVisitor with visit_partial_dictionary(self, pdict) -> Unit {
   default_visit_partial_dictionary(self, pdict)
 }
 
 ///|
-impl DefinitionVisitor with visit_enum(_self, _e) -> Unit {
+impl WebIdlVisitor with visit_enum(_self, _e) -> Unit {
 
 }
 
 ///|
-impl DefinitionVisitor with visit_typedef(self, td) -> Unit {
+impl WebIdlVisitor with visit_typedef(self, td) -> Unit {
   self.visit_type(td.type_)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_callback_function(
+fn[T : WebIdlVisitor] default_visit_callback_function(
   visitor : T,
   cbf : CallbackFunctionDefinition,
 ) -> Unit {
@@ -194,12 +194,12 @@ fn[T : DefinitionVisitor] default_visit_callback_function(
 }
 
 ///|
-impl DefinitionVisitor with visit_callback_function(self, cbf) -> Unit {
+impl WebIdlVisitor with visit_callback_function(self, cbf) -> Unit {
   default_visit_callback_function(self, cbf)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_callback_interface(
+fn[T : WebIdlVisitor] default_visit_callback_interface(
   visitor : T,
   cbi : CallbackInterfaceDefinition,
 ) -> Unit {
@@ -209,17 +209,17 @@ fn[T : DefinitionVisitor] default_visit_callback_interface(
 }
 
 ///|
-impl DefinitionVisitor with visit_callback_interface(self, cbi) -> Unit {
+impl WebIdlVisitor with visit_callback_interface(self, cbi) -> Unit {
   default_visit_callback_interface(self, cbi)
 }
 
 ///|
-impl DefinitionVisitor with visit_include_statements(_self, _inc) -> Unit {
+impl WebIdlVisitor with visit_include_statements(_self, _inc) -> Unit {
 
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_interface_member(
+fn[T : WebIdlVisitor] default_visit_interface_member(
   visitor : T,
   memb : InterfaceMember,
 ) -> Unit {
@@ -237,17 +237,17 @@ fn[T : DefinitionVisitor] default_visit_interface_member(
 }
 
 ///|
-impl DefinitionVisitor with visit_interface_member(self, memb) -> Unit {
+impl WebIdlVisitor with visit_interface_member(self, memb) -> Unit {
   default_visit_interface_member(self, memb)
 }
 
 ///|
-impl DefinitionVisitor with visit_dictionary_member(_self, _memb) -> Unit {
+impl WebIdlVisitor with visit_dictionary_member(_self, _memb) -> Unit {
 
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_type(visitor : T, typ : Type) -> Unit {
+fn[T : WebIdlVisitor] default_visit_type(visitor : T, typ : Type) -> Unit {
   match typ {
     Union(types) =>
       for t in types {
@@ -267,32 +267,32 @@ fn[T : DefinitionVisitor] default_visit_type(visitor : T, typ : Type) -> Unit {
 }
 
 ///|
-impl DefinitionVisitor with visit_type(self, typ) -> Unit {
+impl WebIdlVisitor with visit_type(self, typ) -> Unit {
   default_visit_type(self, typ)
 }
 
 ///|
-impl DefinitionVisitor with visit_string_type(_self, _str_type) -> Unit {
+impl WebIdlVisitor with visit_string_type(_self, _str_type) -> Unit {
 
 }
 
 ///|
-impl DefinitionVisitor with visit_argument(self, arg) -> Unit {
+impl WebIdlVisitor with visit_argument(self, arg) -> Unit {
   self.visit_type(arg.type_)
 }
 
 ///|
-impl DefinitionVisitor with visit_const(_self, _c) -> Unit {
+impl WebIdlVisitor with visit_const(_self, _c) -> Unit {
 
 }
 
 ///|
-impl DefinitionVisitor with visit_attribute(self, attr) -> Unit {
+impl WebIdlVisitor with visit_attribute(self, attr) -> Unit {
   self.visit_type(attr.type_)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_operation(
+fn[T : WebIdlVisitor] default_visit_operation(
   visitor : T,
   op : OperationMember,
 ) -> Unit {
@@ -303,12 +303,12 @@ fn[T : DefinitionVisitor] default_visit_operation(
 }
 
 ///|
-impl DefinitionVisitor with visit_operation(self, op) -> Unit {
+impl WebIdlVisitor with visit_operation(self, op) -> Unit {
   default_visit_operation(self, op)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_constructor(
+fn[T : WebIdlVisitor] default_visit_constructor(
   visitor : T,
   cnstr : ConstructorMember,
 ) -> Unit {
@@ -318,22 +318,22 @@ fn[T : DefinitionVisitor] default_visit_constructor(
 }
 
 ///|
-impl DefinitionVisitor with visit_constructor(self, cnstr) -> Unit {
+impl WebIdlVisitor with visit_constructor(self, cnstr) -> Unit {
   default_visit_constructor(self, cnstr)
 }
 
 ///|
-impl DefinitionVisitor with visit_iterable(self, it) -> Unit {
+impl WebIdlVisitor with visit_iterable(self, it) -> Unit {
   self.visit_type(it.value_type)
 }
 
 ///|
-impl DefinitionVisitor with visit_async_iterable(self, ait) -> Unit {
+impl WebIdlVisitor with visit_async_iterable(self, ait) -> Unit {
   self.visit_type(ait.value_type)
 }
 
 ///|
-fn[T : DefinitionVisitor] default_visit_maplike(
+fn[T : WebIdlVisitor] default_visit_maplike(
   visitor : T,
   ml : MaplikeMember,
 ) -> Unit {
@@ -342,16 +342,16 @@ fn[T : DefinitionVisitor] default_visit_maplike(
 }
 
 ///|
-impl DefinitionVisitor with visit_maplike(self, ml) -> Unit {
+impl WebIdlVisitor with visit_maplike(self, ml) -> Unit {
   default_visit_maplike(self, ml)
 }
 
 ///|
-impl DefinitionVisitor with visit_setlike(self, sl) -> Unit {
+impl WebIdlVisitor with visit_setlike(self, sl) -> Unit {
   self.visit_type(sl.value_type)
 }
 
 ///|
-impl DefinitionVisitor with visit_stringifier(_self, _strg) -> Unit {
+impl WebIdlVisitor with visit_stringifier(_self, _strg) -> Unit {
 
 }

@@ -24,44 +24,38 @@ fn CountingVisitor::new() -> CountingVisitor {
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_interface(self, iface) -> Unit {
+impl WebIdlVisitor for CountingVisitor with visit_interface(self, iface) -> Unit {
   self.interface_count += 1
   default_visit_interface(self, iface)
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_dictionary(self, _dict) -> Unit {
+impl WebIdlVisitor for CountingVisitor with visit_dictionary(self, _dict) -> Unit {
   self.dictionary_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_enum(self, _e) -> Unit {
+impl WebIdlVisitor for CountingVisitor with visit_enum(self, _e) -> Unit {
   self.enum_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_typedef(self, _td) -> Unit {
+impl WebIdlVisitor for CountingVisitor with visit_typedef(self, _td) -> Unit {
   self.typedef_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_callback_function(
-  self,
-  _cbf,
-) -> Unit {
+impl WebIdlVisitor for CountingVisitor with visit_callback_function(self, _cbf) -> Unit {
   self.callback_function_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_callback_interface(
-  self,
-  _cbi,
-) -> Unit {
+impl WebIdlVisitor for CountingVisitor with visit_callback_interface(self, _cbi) -> Unit {
   self.callback_interface_count += 1
 }
 
 ///|
-impl DefinitionVisitor for CountingVisitor with visit_type(self, _typ) -> Unit {
+impl WebIdlVisitor for CountingVisitor with visit_type(self, _typ) -> Unit {
   self.type_count += 1
 }
 
