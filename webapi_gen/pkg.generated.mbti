@@ -27,14 +27,6 @@ type MergedIdl
 pub impl Show for MergedIdl
 pub impl ToJson for MergedIdl
 
-type MergedInterfaceIR
-pub impl Show for MergedInterfaceIR
-pub impl ToJson for MergedInterfaceIR
-
-type MergedMixinIR
-pub impl Show for MergedMixinIR
-pub impl ToJson for MergedMixinIR
-
 type PartialMergeVisitor
 pub impl Show for PartialMergeVisitor
 pub impl ToJson for PartialMergeVisitor
@@ -42,6 +34,14 @@ pub impl ToJson for PartialMergeVisitor
 type PartialMergedDictionaryIR
 pub impl Show for PartialMergedDictionaryIR
 pub impl ToJson for PartialMergedDictionaryIR
+
+type PartialMergedMixinIR
+pub impl Show for PartialMergedMixinIR
+pub impl ToJson for PartialMergedMixinIR
+
+type PartilMergedInterfaceIR
+pub impl Show for PartilMergedInterfaceIR
+pub impl ToJson for PartilMergedInterfaceIR
 
 type TypeRegistry
 pub impl Show for TypeRegistry

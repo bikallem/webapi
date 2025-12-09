@@ -30,24 +30,24 @@ fn PartilMergedInterfaceIR::merge(
 
 ///|
 /// Merged mixin IR with all partials combined.
-struct MergedMixinIR {
+struct PartialMergedMixinIR {
   name : String
   members : Array[InterfaceMember]
 } derive(Show, ToJson)
 
 ///|
-fn MergedMixinIR::new(
+fn PartialMergedMixinIR::new(
   name : String,
   members : Array[InterfaceMember],
-) -> MergedMixinIR {
-  MergedMixinIR::{ name, members }
+) -> PartialMergedMixinIR {
+  PartialMergedMixinIR::{ name, members }
 }
 
 ///|
-fn MergedMixinIR::merge(
-  self : MergedMixinIR,
+fn PartialMergedMixinIR::merge(
+  self : PartialMergedMixinIR,
   members : Array[InterfaceMember],
-) -> MergedMixinIR {
+) -> PartialMergedMixinIR {
   { ..self, members: self.members + members }
 }
 
@@ -86,7 +86,7 @@ fn PartialMergedDictionaryIR::merge(
 /// primary definitions.
 struct PartialMergeVisitor {
   interfaces : Map[String, PartilMergedInterfaceIR]
-  mixins : Map[String, MergedMixinIR]
+  mixins : Map[String, PartialMergedMixinIR]
   dictionaries : Map[String, PartialMergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
@@ -137,7 +137,7 @@ fn PartialMergeVisitor::merge_mixin(
 ) -> Unit {
   match self.mixins.get(name) {
     Some(current) => self.mixins[name] = current.merge(members)
-    None => self.mixins[name] = MergedMixinIR::new(name, members)
+    None => self.mixins[name] = PartialMergedMixinIR::new(name, members)
   }
 }
 
