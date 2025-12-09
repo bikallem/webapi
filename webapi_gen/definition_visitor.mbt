@@ -1,7 +1,7 @@
 ///|
 /// Base visitor trait for traversing WebIDL definitions.
 pub(open) trait DefinitionVisitor {
-  visit_definitions(Self, Array[Definition]) -> Unit = _
+  visit(Self, Array[Definition]) -> Unit = _
   visit_definition(Self, Definition) -> Unit = _
 
   // InterfaceDefinition visitors
@@ -51,7 +51,7 @@ fn[T : DefinitionVisitor] default_visit_definitions(
 }
 
 ///|
-impl DefinitionVisitor with visit_definitions(self, defs) -> Unit {
+impl DefinitionVisitor with visit(self, defs) -> Unit {
   default_visit_definitions(self, defs)
 }
 

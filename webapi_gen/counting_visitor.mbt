@@ -98,7 +98,7 @@ test "CountingVisitor counts definitions correctly" {
       arguments: [],
     }),
   ]
-  visitor.visit_definitions(defs)
+  visitor.visit(defs)
   inspect(visitor.interface_count, content="1")
   inspect(visitor.dictionary_count, content="1")
   inspect(visitor.enum_count, content="1")
@@ -145,7 +145,7 @@ test "CountingVisitor visits nested types in interface members" {
       ],
     }),
   ]
-  visitor.visit_definitions(defs)
+  visitor.visit(defs)
   inspect(visitor.interface_count, content="1")
   inspect(visitor.type_count, content="3") // Identifier("Element"), Nullable(DOMString), Identifier("Element")
 }

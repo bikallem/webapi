@@ -9,7 +9,7 @@ test "MergeVisitor correctly merges dictionaries" {
     #|  boolean bubbles = false;
     #|};
   let defs = @parser.parse(widl)
-  visitor.visit_definitions(defs)
+  visitor.visit(defs)
   let merged = visitor.dictionaries["EventInit"]
   @json.inspect(merged, content={
     "name": "EventInit",
@@ -39,7 +39,7 @@ test "MergeVisitor/dictionary_inheritance" {
     #|  Window view;
     #|};
   let defs = @parser.parse(widl)
-  visitor.visit_definitions(defs)
+  visitor.visit(defs)
   let merged = visitor.dictionaries["UIEventInit"]
   @json.inspect(merged, content={
     "name": "UIEventInit",
@@ -62,7 +62,7 @@ test "MergeVisitor/empty_dictionary" {
     #|dictionary EmptyDict {
     #|};
   let defs = @parser.parse(widl)
-  visitor.visit_definitions(defs)
+  visitor.visit(defs)
   let merged = visitor.dictionaries["EmptyDict"]
   @json.inspect(merged, content={ "name": "EmptyDict", "members": [] })
 }
