@@ -1,7 +1,7 @@
 ///|
 /// Consolidated IDL after merging partials, flattening mixins, and resolving dictionary inheritance.
 struct MergedIdl {
-  interfaces : Map[String, MergedInterfaceIR]
+  interfaces : Map[String, PartilMergedInterfaceIR]
   dictionaries : Map[String, MergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
