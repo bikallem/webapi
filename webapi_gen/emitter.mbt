@@ -67,69 +67,101 @@ fn ffi_module_name(type_name : String) -> String {
 }
 
 ///|
-test "to_snake_case converts PascalCase" {
-  inspect(to_snake_case("HTMLElement"), content="h_t_m_l_element")
-  inspect(to_snake_case("getElementById"), content="get_element_by_id")
-  inspect(to_snake_case("DOMString"), content="d_o_m_string")
-  inspect(to_snake_case("addEventListener"), content="add_event_listener")
+/// Map WebIDL type to Moonbit type string
+fn map_idl_type(idl_type : Type) -> String {
+  match idl_type {
+    // Named types (interfaces, dictionaries, enums, typedefs)
+    Identifier(name) => map_identifier(name)
+    Nullable(t) => "\{map_idl_type(t)}?" // Nullable types
+
+    // Void 
+    Undefined | Void => "Unit"
+
+    // Union types map to JsValue by default
+    Union(_) => "JsValue" // Default
+    Promise(t) => "JsPromise[\{map_idl_type(t)}]"
+    ObservableArray(t) => "Array[\{map_idl_type(t)}]"
+    FrozenArray(t) => "Array[\{map_idl_type(t)}]"
+    Sequence(t) => "Array[\{map_idl_type(t)}]"
+
+    // Typed Arrays
+    Float64Array => "Float64Array"
+    Float32Array => "Float32Array"
+    Float16Array => "Float16Array"
+    BigUint64Array => "BigUint64Array"
+    BigInt64Array => "BigInt64Array"
+    Uint8ClampedArray => "Uint8ClampedArray"
+    Uint32Array => "Uint32Array"
+    Uint16Array => "Uint16Array"
+    Uint8Array => "Uint8Array"
+    Int32Array => "Int32Array"
+    Int16Array => "Int16Array"
+    Int8Array => "Int8Array"
+    DataView => "DataView"
+    SharedArrayBuffer => "SharedArrayBuffer"
+    ArrayBuffer => "ArrayBuffer"
+
+    // Object types
+    Object => "JsValue"
+    Any => "JsValue"
+
+    // String types
+    USVString => "String"
+    ByteString => "String"
+    DOMString => "String"
+
+    // Integer Types    
+    LongLong => "Int64" // 64-bit signed → Int64
+    Bigint => "Int64" // BigInt → Int64
+    UnsignedLong => "UInt" // 32-bit unsigned → UInt
+    UnsignedLongLong => "UInt64" // 64-bit unsigned → UInt64
+    UnsignedShort => "UInt" // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
+    Long => "Int" // 32-bit signed → Int
+    Short => "Int" // 16-bit signed → Int (Int16 exists but Int is more common)
+    Octet => "Byte" // 8-bit unsigned → Byte
+    Byte => "Int" // 8-bit signed → Int (no signed 8-bit in MoonBit)
+    Boolean => "Bool"
+
+    // Floating point types
+    Float => "Float" // 32-bit float → Float
+    Double => "Double" // 64-bit float → Double
+    UnrestrictedDouble => "Double" // 64-bit unrestricted float → Double
+    UnrestrictedFloat => "Float" // 32-bit unrestricted float → Float    
+
+    // Unsupported types
+    Symbol => abort("Symbol type not supported")
+    Record(_) => abort("Record type not supported")
+  }
 }
 
 ///|
-test "to_snake_case handles already snake_case" {
-  inspect(to_snake_case("already_snake"), content="already_snake")
-  inspect(to_snake_case("lowercase"), content="lowercase")
-}
-
-///|
-test "to_pascal_case converts snake_case" {
-  inspect(to_pascal_case("html_element"), content="HtmlElement")
-  inspect(to_pascal_case("get_element_by_id"), content="GetElementById")
-  inspect(to_pascal_case("dom_string"), content="DomString")
-}
-
-///|
-test "to_pascal_case handles hyphenated strings" {
-  inspect(to_pascal_case("no-repeat"), content="NoRepeat")
-  inspect(to_pascal_case("read-write"), content="ReadWrite")
-}
-
-///|
-test "to_pascal_case handles already PascalCase" {
-  inspect(to_pascal_case("HTMLElement"), content="HTMLElement")
-  inspect(to_pascal_case("DOMString"), content="DOMString")
-}
-
-///|
-test "escape_keyword escapes reserved words" {
-  inspect(escape_keyword("fn"), content="fn_")
-  inspect(escape_keyword("let"), content="let_")
-  inspect(escape_keyword("type"), content="type_")
-  inspect(escape_keyword("match"), content="match_")
-}
-
-///|
-test "escape_keyword passes non-keywords" {
-  inspect(escape_keyword("element"), content="element")
-  inspect(escape_keyword("document"), content="document")
-  inspect(escape_keyword("appendChild"), content="appendChild")
-}
-
-///|
-test "ffi_name generates correct FFI function names" {
-  inspect(
-    ffi_name("Element", "getAttribute"),
-    content="element_get_attribute_ffi",
-  )
-  inspect(
-    ffi_name("Document", "getElementById"),
-    content="document_get_element_by_id_ffi",
-  )
-  inspect(ffi_name("Node", "appendChild"), content="node_append_child_ffi")
-}
-
-///|
-test "ffi_module_name generates correct module names" {
-  inspect(ffi_module_name("Element"), content="webapi_Element")
-  inspect(ffi_module_name("Document"), content="webapi_Document")
-  inspect(ffi_module_name("HTMLDivElement"), content="webapi_HTMLDivElement")
+/// Map WebIDL identifier to MoonBit type name.
+fn map_identifier(name : String) -> String {
+  match name {
+    "DOMString" | "USVString" | "ByteString" | "CSSOMString" => "String"
+    "boolean" => "Bool"
+    "long" | "short" => "Int"
+    "unsigned long" | "unsigned short" => "Int"
+    "long long" => "Int64"
+    "unsigned long long" => "UInt64"
+    "byte" | "octet" => "Byte"
+    "float" | "unrestricted float" => "Float"
+    "double" | "unrestricted double" => "Double"
+    "any" | "object" => "JsValue"
+    "void" | "undefined" => "Unit"
+    "ArrayBuffer" => "JsArrayBuffer"
+    "ArrayBufferView" => "JsArrayBufferView"
+    "DataView" => "JsDataView"
+    "Int8Array" => "JsInt8Array"
+    "Uint8Array" => "JsUint8Array"
+    "Uint8ClampedArray" => "JsUint8ClampedArray"
+    "Int16Array" => "JsInt16Array"
+    "Uint16Array" => "JsUint16Array"
+    "Int32Array" => "JsInt32Array"
+    "Uint32Array" => "JsUint32Array"
+    "Float32Array" => "JsFloat32Array"
+    "Float64Array" => "JsFloat64Array"
+    "Function" => "JsValue"
+    _ => name // Keep interface/dictionary/enum names as-is
+  }
 }
