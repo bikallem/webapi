@@ -1,0 +1,253 @@
+{
+  "interfaces": {
+    "Dummy": {
+      "name": "Dummy",
+      "members": [
+        [
+          "Operation",
+          {
+            "extended_attributes": [],
+            "return_type": "Void",
+            "name": "dummyMethod",
+            "arguments": [],
+            "static_": false
+          }
+        ]
+      ]
+    },
+    "MyInterface": {
+      "name": "MyInterface",
+      "members": [
+        [
+          "Attribute",
+          {
+            "extended_attributes": [],
+            "type_": [
+              "Nullable",
+              "DOMString"
+            ],
+            "name": "textContent",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false
+          }
+        ],
+        [
+          "Operation",
+          {
+            "extended_attributes": [],
+            "return_type": [
+              "Identifier",
+              "Node"
+            ],
+            "name": "appendChild",
+            "arguments": [
+              {
+                "extended_attributes": [],
+                "type_": [
+                  "Identifier",
+                  "Element"
+                ],
+                "name": "newChild",
+                "optional": false,
+                "variadic": false
+              }
+            ],
+            "static_": false
+          }
+        ],
+        [
+          "Attribute",
+          {
+            "extended_attributes": [],
+            "type_": [
+              "Nullable",
+              "DOMString"
+            ],
+            "name": "textContent2",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false
+          }
+        ],
+        [
+          "Operation",
+          {
+            "extended_attributes": [],
+            "return_type": "Void",
+            "name": "doSomething",
+            "arguments": [],
+            "static_": false
+          }
+        ]
+      ],
+      "inheritance": "ParentInterface"
+    }
+  },
+  "dictionaries": {
+    "EventInit": {
+      "name": "EventInit",
+      "members": [
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "bubbles",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        },
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "cancelable",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        },
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "composed",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        },
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "partial_dict",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    "MyEvent": {
+      "name": "MyEvent",
+      "members": [
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "bubbles",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        },
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "cancelable",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        },
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "composed",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        },
+        {
+          "extended_attributes": [],
+          "type_": "Boolean",
+          "name": "partial_dict",
+          "required": false,
+          "default_value": [
+            "ConstValue",
+            [
+              "Boolean",
+              false
+            ]
+          ]
+        },
+        {
+          "extended_attributes": [],
+          "type_": "DOMString",
+          "name": "type",
+          "required": true
+        }
+      ]
+    }
+  },
+  "enums": {
+    "MyEnum": {
+      "extended_attributes": [],
+      "name": "MyEnum",
+      "values": [
+        "\"value1\"",
+        "\"value2\""
+      ]
+    }
+  },
+  "typedefs": {},
+  "callbacks": {
+    "MyCallback": {
+      "extended_attributes": [],
+      "name": "MyCallback",
+      "return_type": "Void",
+      "arguments": [
+        {
+          "extended_attributes": [],
+          "type_": "DOMString",
+          "name": "arg",
+          "optional": false,
+          "variadic": false
+        }
+      ]
+    },
+    "MyCallbackInterface": {
+      "extended_attributes": [],
+      "name": "MyCallbackInterface",
+      "return_type": "Void",
+      "arguments": [
+        {
+          "extended_attributes": [],
+          "type_": [
+            "Identifier",
+            "Event"
+          ],
+          "name": "e",
+          "optional": false,
+          "variadic": false
+        }
+      ]
+    }
+  }
+}

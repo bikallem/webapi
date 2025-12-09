@@ -173,3 +173,51 @@ test "panic: MergedIdl::from aborts when mixin is missing" {
   visitor.visit(defs)
   MergedIdl::from(visitor) |> ignore
 }
+
+///|
+test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and callbacks" (
+  t : @test.Test,
+) {
+  let visitor = PartialMergeVisitor::new()
+  let widl : String =
+    #|interface Dummy {
+    #|  void dummyMethod();
+    #|};
+    #|interface MyInterface: ParentInterface {
+    #|  attribute DOMString? textContent;
+    #|};
+    #|partial interface MyInterface {
+    #|  Node appendChild(Element newChild);
+    #|};
+    #|interface mixin MyMixin {
+    #|  attribute DOMString? textContent2;
+    #|};
+    #|partial interface mixin MyMixin {
+    #|  void doSomething();
+    #|};
+    #|dictionary EventInit {
+    #|  boolean bubbles = false;
+    #|  boolean cancelable = false;
+    #|  boolean composed = false;
+    #|};
+    #|dictionary MyEvent : EventInit {
+    #|  required DOMString type;
+    #|};
+    #|partial dictionary EventInit {
+    #|  boolean partial_dict = false;
+    #|};
+    #|enum MyEnum {
+    #|  "value1",
+    #|  "value2"
+    #|};
+    #|callback MyCallback = void (DOMString arg);
+    #|callback interface MyCallbackInterface {
+    #|  void onEvent(Event e);
+    #|};
+    #|MyInterface includes MyMixin;
+  let defs = @parser.parse(widl)
+  visitor.visit(defs)
+  let merged_idl = MergedIdl::from(visitor)
+  t.write(merged_idl.to_json().stringify(indent=2))
+  t.snapshot(filename="merged_idl_snapshot.json")
+}

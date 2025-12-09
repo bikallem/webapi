@@ -6,7 +6,6 @@ struct MergedIdl {
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
   callbacks : Map[String, CallbackFunctionDefinition]
-  callback_interfaces : Map[String, CallbackInterfaceDefinition]
 } derive(Show, ToJson)
 
 ///|
@@ -61,14 +60,34 @@ fn MergedIdl::from(partial_merge_visitor : PartialMergeVisitor) -> MergedIdl {
         )
     }
   }
-  MergedIdl::{
+  let merged_idl = MergedIdl::{
     interfaces: partial_merge_visitor.interfaces,
     dictionaries,
     enums: partial_merge_visitor.enums,
     typedefs: partial_merge_visitor.typedefs,
     callbacks: partial_merge_visitor.callback_functions,
-    callback_interfaces: partial_merge_visitor.callback_interfaces,
   }
+
+  // Transform CallbackInterfaceDefinitions to CallbackFunctionDefinitions  
+  for name, cbi in partial_merge_visitor.callback_interfaces {
+    // CallbackInterface::members only holds one operation member
+    let op = loop cbi.members[:] {
+      [] =>
+        abort(
+          "CallbackInterface '\{name}' has no operation member to convert to CallbackFunction",
+        )
+      [Operation(op), ..] => break op
+      [_, .. rest] => continue rest
+    }
+    let cbf = CallbackFunctionDefinition::{
+      name: cbi.name,
+      extended_attributes: cbi.extended_attributes,
+      return_type: op.return_type,
+      arguments: op.arguments,
+    }
+    merged_idl.callbacks[name] = cbf
+  }
+  merged_idl
 }
 
 ///|
