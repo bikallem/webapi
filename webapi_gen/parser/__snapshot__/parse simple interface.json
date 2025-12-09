@@ -1,0 +1,99 @@
+[
+  [
+    "Interface",
+    {
+      "extended_attributes": [],
+      "name": "Foo",
+      "members": [
+        [
+          "Constructor",
+          {
+            "extended_attributes": [],
+            "arguments": [
+              {
+                "extended_attributes": [],
+                "type_": [
+                  "Sequence",
+                  [
+                    "Identifier",
+                    "BlobPart"
+                  ]
+                ],
+                "name": "blobParts",
+                "optional": true,
+                "variadic": false
+              },
+              {
+                "extended_attributes": [],
+                "type_": [
+                  "Identifier",
+                  "BlobPropertyBag"
+                ],
+                "name": "options",
+                "optional": true,
+                "variadic": false,
+                "default_value": "EmptyObject"
+              }
+            ]
+          }
+        ],
+        [
+          "Attribute",
+          {
+            "extended_attributes": [],
+            "type_": "DOMString",
+            "name": "bar",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false
+          }
+        ],
+        [
+          "Operation",
+          {
+            "extended_attributes": [],
+            "return_type": [
+              "Identifier",
+              "Blob"
+            ],
+            "name": "slice",
+            "arguments": [
+              {
+                "extended_attributes": [
+                  [
+                    "NoArgs",
+                    "Clamp"
+                  ]
+                ],
+                "type_": "LongLong",
+                "name": "start",
+                "optional": true,
+                "variadic": false
+              },
+              {
+                "extended_attributes": [
+                  [
+                    "NoArgs",
+                    "Clamp"
+                  ]
+                ],
+                "type_": "LongLong",
+                "name": "end",
+                "optional": true,
+                "variadic": false
+              },
+              {
+                "extended_attributes": [],
+                "type_": "DOMString",
+                "name": "contentType",
+                "optional": true,
+                "variadic": false
+              }
+            ],
+            "static_": false
+          }
+        ]
+      ]
+    }
+  ]
+]

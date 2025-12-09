@@ -6,57 +6,20 @@ test "parse empty input" {
 }
 
 ///|
-test "parse simple interface" {
+test "parse simple interface" (t : @test.Test) {
   let idl =
     #|interface Foo {
     #|  constructor(optional sequence<BlobPart> blobParts, optional BlobPropertyBag options = {});
     #|  attribute DOMString bar;
+    #|  
+    #|  // slice Blob into byte-ranged chunks
+    #|  Blob slice(optional [Clamp] long long start,
+    #|        optional [Clamp] long long end,
+    #|        optional DOMString contentType);
     #|};
-  @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "Foo",
-        "members": [
-          [
-            "Constructor",
-            {
-              "extended_attributes": [],
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": ["Sequence", ["Identifier", "BlobPart"]],
-                  "name": "blobParts",
-                  "optional": true,
-                  "variadic": false,
-                },
-                {
-                  "extended_attributes": [],
-                  "type_": ["Identifier", "BlobPropertyBag"],
-                  "name": "options",
-                  "optional": true,
-                  "variadic": false,
-                  "default_value": "EmptyObject",
-                },
-              ],
-            },
-          ],
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": "DOMString",
-              "name": "bar",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false,
-            },
-          ],
-        ],
-      },
-    ],
-  ])
+  let result = @parser.parse(idl)
+  t.write(result.to_json().stringify(indent=2))
+  t.snapshot(filename="parse simple interface.json")
 }
 
 ///|

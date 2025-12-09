@@ -468,8 +468,10 @@ arguments:
 argument:
   | extended_attribute_list "optional" type IDENTIFIER default_value_opt
       { { extended_attributes: $1, type_: $3, name: $4, optional: true, variadic: false, default_value: $5 } }
+  | "optional" extended_attribute_list type IDENTIFIER default_value_opt
+      { { extended_attributes: $2, type_: $3, name: $4, optional: true, variadic: false, default_value: $5 } }
   | extended_attribute_list type ellipsis IDENTIFIER
-      { { extended_attributes: $1, type_: $2, name: $4, optional: false, variadic: $3, default_value: None } }
+      { { extended_attributes: $1, type_: $2, name: $4, optional: false, variadic: false, default_value: None } }
 
 ellipsis:
   | "..."                       { true }
