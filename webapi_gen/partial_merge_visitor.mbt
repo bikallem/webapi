@@ -109,6 +109,10 @@ fn PartialMergeVisitor::new() -> PartialMergeVisitor {
   }
 }
 
+//=============================================================================
+// merge interface
+//=============================================================================
+
 ///|
 fn PartialMergeVisitor::merge_interface(
   self : PartialMergeVisitor,
@@ -125,8 +129,21 @@ fn PartialMergeVisitor::merge_interface(
   }
 }
 
+///|
+impl WebIdlVisitor for PartialMergeVisitor with visit_interface(self, iface) -> Unit {
+  self.merge_interface(iface.name, iface.members, iface.inheritance)
+}
+
+///|
+impl WebIdlVisitor for PartialMergeVisitor with visit_partial_interface(
+  self,
+  piface,
+) -> Unit {
+  self.merge_interface(piface.name, piface.members, None)
+}
+
 //=============================================================================
-// merge interface
+// merge mixin
 //=============================================================================
 
 ///|
@@ -140,23 +157,6 @@ fn PartialMergeVisitor::merge_mixin(
     None => self.mixins[name] = PartialMergedMixinIR::new(name, members)
   }
 }
-
-///|
-impl WebIdlVisitor for PartialMergeVisitor with visit_interface(self, iface) -> Unit {
-  self.merge_interface(iface.name, iface.members, iface.inheritance)
-}
-
-///|
-impl WebIdlVisitor for PartialMergeVisitor with visit_partial_interface(
-  self,
-  piface,
-) -> Unit {
-  self..merge_interface(piface.name, piface.members, None)
-}
-
-//=============================================================================
-// merge mixin
-//=============================================================================
 
 ///|
 impl WebIdlVisitor for PartialMergeVisitor with visit_mixin(self, mxn) -> Unit {
@@ -203,7 +203,7 @@ impl WebIdlVisitor for PartialMergeVisitor with visit_partial_dictionary(
 }
 
 //=============================================================================
-// merge other definitions
+// Other definitions are simply collected
 //=============================================================================
 
 ///|
