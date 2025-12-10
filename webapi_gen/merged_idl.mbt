@@ -1,5 +1,6 @@
 ///|
-/// Consolidated IDL after merging partials, flattening mixins, and resolving dictionary inheritance.
+/// Consolidated IDL after merging partials, flattening mixins, resolving dictionary 
+/// inheritance and converting callback interfaces to callback functions.
 struct MergedIdl {
   interfaces : Map[String, PartialMergedInterfaceIR]
   dictionaries : Map[String, MergedDictionaryIR]
