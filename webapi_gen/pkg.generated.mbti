@@ -71,6 +71,7 @@ pub(open) trait WebIdlVisitor {
   visit_interface_member(Self, @parser.InterfaceMember) -> Unit = _
   visit_dictionary_member(Self, @parser.DictionaryMember) -> Unit = _
   visit_type(Self, @parser.Type) -> Unit = _
+  visit_type_with_extended_attributes(Self, @parser.TypeWithExtendedAttributes) -> Unit = _
   visit_string_type(Self, @parser.StringType) -> Unit = _
   visit_argument(Self, @parser.Argument) -> Unit = _
   visit_const(Self, @parser.ConstMember) -> Unit = _

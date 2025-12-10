@@ -104,7 +104,61 @@ test "MergedIdl::from flattens mixins into interfaces" {
   visitor.visit(defs)
   let merged_idl = MergedIdl::from(visitor)
   let iface2 = merged_idl.interfaces["MyInterface"]
-  @json.inspect(iface2, content=({"name":"MyInterface","members":[["Attribute",{"extended_attributes":[],"type_":["Nullable","DOMString"],"name":"textContent","is_readonly":false,"static_":false,"is_inherit":false}],["Operation",{"extended_attributes":[],"return_type":["Identifier","Node"],"name":"appendChild","arguments":[{"extended_attributes":[],"type_":["Identifier","Element"],"name":"newChild","optional":false,"variadic":false}],"static_":false}],["Attribute",{"extended_attributes":[],"type_":["Nullable","DOMString"],"name":"textContent2","is_readonly":false,"static_":false,"is_inherit":false}],["Operation",{"extended_attributes":[],"return_type":"Undefined","name":"doSomething","arguments":[],"static_":false}]]}))
+  @json.inspect(iface2, content={
+    "name": "MyInterface",
+    "members": [
+      [
+        "Attribute",
+        {
+          "extended_attributes": [],
+          "type_": ["Nullable", "DOMString"],
+          "name": "textContent",
+          "is_readonly": false,
+          "static_": false,
+          "is_inherit": false,
+        },
+      ],
+      [
+        "Operation",
+        {
+          "extended_attributes": [],
+          "return_type": ["Identifier", "Node"],
+          "name": "appendChild",
+          "arguments": [
+            {
+              "extended_attributes": [],
+              "type_": ["Identifier", "Element"],
+              "name": "newChild",
+              "optional": false,
+              "variadic": false,
+            },
+          ],
+          "static_": false,
+        },
+      ],
+      [
+        "Attribute",
+        {
+          "extended_attributes": [],
+          "type_": ["Nullable", "DOMString"],
+          "name": "textContent2",
+          "is_readonly": false,
+          "static_": false,
+          "is_inherit": false,
+        },
+      ],
+      [
+        "Operation",
+        {
+          "extended_attributes": [],
+          "return_type": "Undefined",
+          "name": "doSomething",
+          "arguments": [],
+          "static_": false,
+        },
+      ],
+    ],
+  })
 }
 
 ///|

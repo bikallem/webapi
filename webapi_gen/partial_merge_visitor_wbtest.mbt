@@ -212,7 +212,32 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
   let defs = @parser.parse(widl)
   visitor.visit(defs)
   let merged_mixin = visitor.mixins["MyMixin"]
-  @json.inspect(merged_mixin, content=({"name":"MyMixin","members":[["Attribute",{"extended_attributes":[],"type_":["Nullable","DOMString"],"name":"textContent2","is_readonly":false,"static_":false,"is_inherit":false}],["Operation",{"extended_attributes":[],"return_type":"Undefined","name":"doSomething","arguments":[],"static_":false}]]}))
+  @json.inspect(merged_mixin, content={
+    "name": "MyMixin",
+    "members": [
+      [
+        "Attribute",
+        {
+          "extended_attributes": [],
+          "type_": ["Nullable", "DOMString"],
+          "name": "textContent2",
+          "is_readonly": false,
+          "static_": false,
+          "is_inherit": false,
+        },
+      ],
+      [
+        "Operation",
+        {
+          "extended_attributes": [],
+          "return_type": "Undefined",
+          "name": "doSomething",
+          "arguments": [],
+          "static_": false,
+        },
+      ],
+    ],
+  })
 }
 
 ///|

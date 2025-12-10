@@ -21,6 +21,7 @@ pub(open) trait WebIdlVisitor {
 
   // Type visitors
   visit_type(Self, Type) -> Unit = _
+  visit_type_with_extended_attributes(Self, @parser.TypeWithExtendedAttributes) -> Unit = _
 
   // StringType visitor
   visit_string_type(Self, StringType) -> Unit = _
@@ -254,7 +255,7 @@ fn[T : WebIdlVisitor] default_visit_type(visitor : T, typ : Type) -> Unit {
   match typ {
     Union(types) =>
       for t in types {
-        visitor.visit_type(t)
+        visitor.visit_type_with_extended_attributes(t)
       }
     // Record(key, val) => {
     //   visitor.visit_string_type(key)
@@ -265,6 +266,19 @@ fn[T : WebIdlVisitor] default_visit_type(visitor : T, typ : Type) -> Unit {
     //   visitor.visit_type(typ)
     t => visitor.visit_type(t) // Primitive types
   }
+}
+
+///|
+fn[T : WebIdlVisitor] default_visit_type_with_extended_attributes(
+  visitor : T,
+  typ : @parser.TypeWithExtendedAttributes,
+) -> Unit {
+  visitor.visit_type(typ.type_)
+}
+
+///|
+impl WebIdlVisitor with visit_type_with_extended_attributes(self, typ) -> Unit {
+  default_visit_type_with_extended_attributes(self, typ)
 }
 
 ///|

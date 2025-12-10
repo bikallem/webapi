@@ -98,7 +98,15 @@ test "map_idl_type handles named types" {
 
 ///|
 test "map_idl_type handles union types" {
-  inspect(map_idl_type(Union([DOMString, Long])), content="JsValue")
+  inspect(
+    map_idl_type(
+      Union([
+        { extended_attributes: [], type_: DOMString },
+        { extended_attributes: [], type_: Long },
+      ]),
+    ),
+    content="JsValue",
+  )
 }
 
 ///|

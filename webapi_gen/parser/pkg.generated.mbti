@@ -395,7 +395,6 @@ pub(all) enum Token {
   SETLIKE
   REQUIRED
   OPTIONAL
-  VOID
   UNDEFINED
   BOOLEAN
   BYTE
@@ -492,7 +491,6 @@ pub(all) enum TokenKind {
   TK_SETLIKE
   TK_REQUIRED
   TK_OPTIONAL
-  TK_VOID
   TK_UNDEFINED
   TK_BOOLEAN
   TK_BYTE
@@ -556,7 +554,6 @@ pub(all) enum TokenKind {
 pub impl Show for TokenKind
 
 pub(all) enum Type {
-  Void
   Undefined
   Boolean
   Byte
@@ -595,11 +592,12 @@ pub(all) enum Type {
   Float64Array
   Identifier(String)
   Sequence(Type)
-  FrozenArray(Type)
-  ObservableArray(Type)
+  AsyncSequence(TypeWithExtendedAttributes)
+  FrozenArray(TypeWithExtendedAttributes)
+  ObservableArray(TypeWithExtendedAttributes)
   Promise(Type)
-  Record(StringType, Type)
-  Union(Array[Type])
+  Record(StringType, TypeWithExtendedAttributes)
+  Union(Array[TypeWithExtendedAttributes])
   Nullable(Type)
 }
 pub impl Eq for Type

@@ -313,25 +313,28 @@ enum_value_list_rest -> Array[String]:
   |                                  { [] }
 
 type -> Type:
-  | type_=single_type is_null=null_modifier   
-    { 
-      if is_null {
-        Type::Nullable(type_)
-      } else {
-        type_
-      }
-    }
-  | "(" single_type "or" single_type ")" null=null_modifier {
-      let union = Type::Union([$2, $4])
-      match null {
-        true => Type::Nullable(union)
-        false => union
-      }
-    }
+  | type_=single_type { type_ }
+  | union_type=union_type { union_type }
 
 // Union types
 union_type -> Type:
-  | "(" type "or" type ")"      { Type::Union([$2, $4]) }
+  | "(" union_member_type "or" union_member_type union_member_types ")"      { Type::Union([$2, $4, ..$5]) }
+
+union_member_type -> TypeWithExtendedAttributes:
+  | extended_attributes = extended_attribute_list type_=distinguishable_type
+    { {extended_attributes, type_} }
+  | union_type=union_type is_null=null_modifier
+    {
+      let ty = match is_null {
+        true => Type::Nullable(union_type)
+        false => union_type
+      }
+      { extended_attributes: [], type_: ty }
+    }
+
+union_member_types -> Array[TypeWithExtendedAttributes]:
+  | "or" union_member_type union_member_types   { [$2, ..$3] }
+  |                                             { [] }
 
 type_with_extended_attributes -> (Array[ExtendedAttribute], Type):
   | extended_attribute_list type  { ($1, $2) }
@@ -358,7 +361,14 @@ distinguishable_type -> Type:
   | "undefined"                 { Type::Undefined }
 
 single_type -> Type:
-  | distinguishable_type        { $1 }
+  | type_=distinguishable_type is_null=null_modifier
+    { 
+      if is_null {
+        Type::Nullable(type_)
+      } else {
+        type_
+      }
+    }
   | "any"                       { Type::Any }
   | "Promise" "<" type ">"      { Type::Promise($3) }
 

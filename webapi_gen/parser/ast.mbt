@@ -79,7 +79,7 @@ pub(all) enum Type {
   Record(StringType, TypeWithExtendedAttributes)
 
   // Union type
-  Union(Array[Type])
+  Union(Array[TypeWithExtendedAttributes])
 
   // Nullable type
   Nullable(Type)
