@@ -5609,3 +5609,4 @@ fn type_to_string_type(t : Type) -> StringType {
     _ => StringType::DOMString
   }
 }
+

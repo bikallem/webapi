@@ -120,7 +120,7 @@
 %token STAR           "*"
 
 // Type declarations
-%type<Array[Definition]> definitions
+
 %type<Definition> definition
 %type<InterfaceDefinition> interface_def
 %type<PartialInterfaceDefinition> partial_interface_def
@@ -172,8 +172,8 @@
 
 %%
 
-definitions:
-  | definition definitions          { [$1, ..$2] }
+definitions -> Array[Definition]
+  : definition definitions          { [$1, ..$2] }
   | EOF                             { [] }
 
 definition:
@@ -500,7 +500,7 @@ extended_attribute:
   | IDENTIFIER "(" argument_list ")"  { ExtendedAttribute::ArgList($1, $3) }
   | IDENTIFIER                  { ExtendedAttribute::NoArgs($1) }
 
-%%
+%{
 
 // Helper functions
 
@@ -541,3 +541,5 @@ fn type_to_string_type(t : Type) -> StringType {
     _ => StringType::DOMString
   }
 }
+
+%}
