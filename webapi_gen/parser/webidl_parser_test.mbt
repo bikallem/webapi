@@ -52,24 +52,26 @@ test "parse with union type" {
         {
           "name": "Example",
           "members": [
-            [
-              "Attribute",
-              {
-                "extended_attributes": [],
-                "type_": [
-                  "Union",
-                  [
-                    { "extended_attributes": [], "type_": "DOMString" },
-                    { "extended_attributes": [], "type_": "Long" },
-                    { "extended_attributes": [], "type_": "Boolean" },
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Attribute",
+                {
+                  "type_": [
+                    "Union",
+                    [
+                      { "extended_attributes": [], "type_": "DOMString" },
+                      { "extended_attributes": [], "type_": "Long" },
+                      { "extended_attributes": [], "type_": "Boolean" },
+                    ],
                   ],
-                ],
-                "name": "exampleAttr",
-                "is_readonly": false,
-                "static_": false,
-                "is_inherit": false,
-              },
-            ],
+                  "name": "exampleAttr",
+                  "is_readonly": false,
+                  "static_": false,
+                  "is_inherit": false,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -203,7 +205,6 @@ test "parse callback interface" {
           [
             "Operation",
             {
-              "extended_attributes": [],
               "return_type": "Undefined",
               "name": "handleEvent",
               "arguments": [
@@ -244,7 +245,6 @@ test "parse namespace" {
             [
               "Operation",
               {
-                "extended_attributes": [],
                 "return_type": "Boolean",
                 "name": "supports",
                 "arguments": [
@@ -306,17 +306,19 @@ test "parse interface mixin" {
         {
           "name": "EventHandlers",
           "members": [
-            [
-              "Attribute",
-              {
-                "extended_attributes": [],
-                "type_": ["Nullable", ["Identifier", "EventHandler"]],
-                "name": "onclick",
-                "is_readonly": false,
-                "static_": false,
-                "is_inherit": false,
-              },
-            ],
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Attribute",
+                {
+                  "type_": ["Nullable", ["Identifier", "EventHandler"]],
+                  "name": "onclick",
+                  "is_readonly": false,
+                  "static_": false,
+                  "is_inherit": false,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -338,17 +340,19 @@ test "parse partial interface" {
         {
           "name": "Document",
           "members": [
-            [
-              "Attribute",
-              {
-                "extended_attributes": [],
-                "type_": ["Nullable", ["Identifier", "Element"]],
-                "name": "body",
-                "is_readonly": true,
-                "static_": false,
-                "is_inherit": false,
-              },
-            ],
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Attribute",
+                {
+                  "type_": ["Nullable", ["Identifier", "Element"]],
+                  "name": "body",
+                  "is_readonly": true,
+                  "static_": false,
+                  "is_inherit": false,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -370,21 +374,26 @@ test "parse interface with constructor" {
         {
           "name": "URL",
           "members": [
-            [
-              "Constructor",
-              {
-                "extended_attributes": [],
-                "arguments": [
-                  {
-                    "extended_attributes": [],
-                    "type_": { "extended_attributes": [], "type_": "DOMString" },
-                    "name": "url",
-                    "optional": false,
-                    "variadic": false,
-                  },
-                ],
-              },
-            ],
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Constructor",
+                {
+                  "arguments": [
+                    {
+                      "extended_attributes": [],
+                      "type_": {
+                        "extended_attributes": [],
+                        "type_": "DOMString",
+                      },
+                      "name": "url",
+                      "optional": false,
+                      "variadic": false,
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -406,28 +415,30 @@ test "parse interface with getter" {
         {
           "name": "Collection",
           "members": [
-            [
-              "Operation",
-              {
-                "extended_attributes": [],
-                "return_type": ["Nullable", ["Identifier", "Element"]],
-                "name": "item",
-                "arguments": [
-                  {
-                    "extended_attributes": [],
-                    "type_": {
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Operation",
+                {
+                  "return_type": ["Nullable", ["Identifier", "Element"]],
+                  "name": "item",
+                  "arguments": [
+                    {
                       "extended_attributes": [],
-                      "type_": "UnsignedLong",
+                      "type_": {
+                        "extended_attributes": [],
+                        "type_": "UnsignedLong",
+                      },
+                      "name": "index",
+                      "optional": false,
+                      "variadic": false,
                     },
-                    "name": "index",
-                    "optional": false,
-                    "variadic": false,
-                  },
-                ],
-                "static_": false,
-                "special": "Getter",
-              },
-            ],
+                  ],
+                  "static_": false,
+                  "special": "Getter",
+                },
+              ],
+            },
           ],
         },
       ],
@@ -449,10 +460,10 @@ test "parse interface with iterable" {
         {
           "name": "List",
           "members": [
-            [
-              "Iterable",
-              { "extended_attributes": [], "value_type": "DOMString" },
-            ],
+            {
+              "extended_attributes": [],
+              "interface_member": ["Iterable", { "value_type": "DOMString" }],
+            },
           ],
         },
       ],
@@ -474,15 +485,17 @@ test "parse interface with maplike" {
         {
           "name": "Headers",
           "members": [
-            [
-              "Maplike",
-              {
-                "extended_attributes": [],
-                "key_type": "DOMString",
-                "value_type": "DOMString",
-                "is_readonly": true,
-              },
-            ],
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Maplike",
+                {
+                  "key_type": "DOMString",
+                  "value_type": "DOMString",
+                  "is_readonly": true,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -504,24 +517,29 @@ test "parse interface with static operation" {
         {
           "name": "URL",
           "members": [
-            [
-              "Operation",
-              {
-                "extended_attributes": [],
-                "return_type": "Boolean",
-                "name": "canParse",
-                "arguments": [
-                  {
-                    "extended_attributes": [],
-                    "type_": { "extended_attributes": [], "type_": "DOMString" },
-                    "name": "url",
-                    "optional": false,
-                    "variadic": false,
-                  },
-                ],
-                "static_": true,
-              },
-            ],
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Operation",
+                {
+                  "return_type": "Boolean",
+                  "name": "canParse",
+                  "arguments": [
+                    {
+                      "extended_attributes": [],
+                      "type_": {
+                        "extended_attributes": [],
+                        "type_": "DOMString",
+                      },
+                      "name": "url",
+                      "optional": false,
+                      "variadic": false,
+                    },
+                  ],
+                  "static_": true,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -543,16 +561,18 @@ test "parse buffer type" {
         {
           "name": "Blob",
           "members": [
-            [
-              "Operation",
-              {
-                "extended_attributes": [],
-                "return_type": "ArrayBuffer",
-                "name": "arrayBuffer",
-                "arguments": [],
-                "static_": false,
-              },
-            ],
+            {
+              "extended_attributes": [],
+              "interface_member": [
+                "Operation",
+                {
+                  "return_type": "ArrayBuffer",
+                  "name": "arrayBuffer",
+                  "arguments": [],
+                  "static_": false,
+                },
+              ],
+            },
           ],
         },
       ],

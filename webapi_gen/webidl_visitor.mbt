@@ -16,7 +16,7 @@ pub(open) trait WebIdlVisitor {
   visit_callback_function(Self, CallbackFunctionDefinition) -> Unit = _
   visit_callback_interface(Self, CallbackInterfaceDefinition) -> Unit = _
   visit_include_statements(Self, IncludesStatement) -> Unit = _
-  visit_interface_member(Self, InterfaceMember) -> Unit = _
+  visit_interface_member(Self, InterfaceMemberExtendedAttributes) -> Unit = _
   visit_dictionary_member(Self, DictionaryMember) -> Unit = _
 
   // Type visitors
@@ -225,9 +225,9 @@ impl WebIdlVisitor with visit_include_statements(_self, _inc) -> Unit {
 ///|
 fn[T : WebIdlVisitor] default_visit_interface_member(
   visitor : T,
-  memb : InterfaceMember,
+  memb : InterfaceMemberExtendedAttributes,
 ) -> Unit {
-  match memb {
+  match memb.interface_member {
     Const(c) => visitor.visit_const(c)
     Attribute(a) => visitor.visit_attribute(a)
     Operation(o) => visitor.visit_operation(o)

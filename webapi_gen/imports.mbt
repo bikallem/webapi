@@ -1,7 +1,7 @@
 ///|
 using @parser {
   type DefinitionExtendedAttributes,
-  type InterfaceMember,
+  type InterfaceMemberExtendedAttributes,
   type DictionaryMember,
   type EnumDefinition,
   type TypedefDefinition,

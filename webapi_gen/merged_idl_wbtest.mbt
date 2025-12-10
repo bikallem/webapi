@@ -107,59 +107,67 @@ test "MergedIdl::from flattens mixins into interfaces" {
   @json.inspect(iface2, content={
     "name": "MyInterface",
     "members": [
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Nullable", "DOMString"],
-          "name": "textContent",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": ["Identifier", "Node"],
-          "name": "appendChild",
-          "arguments": [
-            {
-              "extended_attributes": [],
-              "type_": {
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Attribute",
+          {
+            "type_": ["Nullable", "DOMString"],
+            "name": "textContent",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false,
+          },
+        ],
+      },
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Operation",
+          {
+            "return_type": ["Identifier", "Node"],
+            "name": "appendChild",
+            "arguments": [
+              {
                 "extended_attributes": [],
-                "type_": ["Identifier", "Element"],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": ["Identifier", "Element"],
+                },
+                "name": "newChild",
+                "optional": false,
+                "variadic": false,
               },
-              "name": "newChild",
-              "optional": false,
-              "variadic": false,
-            },
-          ],
-          "static_": false,
-        },
-      ],
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Nullable", "DOMString"],
-          "name": "textContent2",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": "Undefined",
-          "name": "doSomething",
-          "arguments": [],
-          "static_": false,
-        },
-      ],
+            ],
+            "static_": false,
+          },
+        ],
+      },
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Attribute",
+          {
+            "type_": ["Nullable", "DOMString"],
+            "name": "textContent2",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false,
+          },
+        ],
+      },
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Operation",
+          {
+            "return_type": "Undefined",
+            "name": "doSomething",
+            "arguments": [],
+            "static_": false,
+          },
+        ],
+      },
     ],
   })
 }

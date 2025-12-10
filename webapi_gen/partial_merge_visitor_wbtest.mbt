@@ -15,54 +15,62 @@ test "MergedInterface::merge() combines members and inheritance" {
   let iface1 = PartilMergedInterfaceIR::new(
     "Element",
     [
-      Attribute({
-        is_inherit: false,
-        name: "id",
-        type_: Type::Identifier("DOMString"),
-        is_readonly: false,
-        static_: false,
+      {
         extended_attributes: [],
-      }),
+        interface_member: Attribute({
+          is_inherit: false,
+          name: "id",
+          type_: Type::Identifier("DOMString"),
+          is_readonly: false,
+          static_: false,
+        }),
+      },
     ],
     None,
   )
   let iface2 = iface1.merge(
     [
-      Operation({
+      {
         extended_attributes: [],
-        return_type: Type::Identifier("undefined"),
-        name: Some("focus"),
-        static_: false,
-        arguments: [],
-        special: None,
-      }),
+        interface_member: Operation({
+          return_type: Type::Identifier("undefined"),
+          name: Some("focus"),
+          static_: false,
+          arguments: [],
+          special: None,
+        }),
+      },
     ],
     Some("HTMLElement"),
   )
   @json.inspect(iface2, content={
     "name": "Element",
     "members": [
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Identifier", "DOMString"],
-          "name": "id",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": ["Identifier", "undefined"],
-          "name": "focus",
-          "arguments": [],
-          "static_": false,
-        },
-      ],
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Attribute",
+          {
+            "type_": ["Identifier", "DOMString"],
+            "name": "id",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false,
+          },
+        ],
+      },
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Operation",
+          {
+            "return_type": ["Identifier", "undefined"],
+            "name": "focus",
+            "arguments": [],
+            "static_": false,
+          },
+        ],
+      },
     ],
     "inheritance": "HTMLElement",
   })
@@ -73,30 +81,34 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
   let iface1 = PartilMergedInterfaceIR::new("Element", [], Some("Node"))
   let iface2 = iface1.merge(
     [
-      Operation({
+      {
         extended_attributes: [],
-        return_type: Type::Identifier("void"),
-        name: Some("focus"),
-        static_: false,
-        arguments: [],
-        special: None,
-      }),
+        interface_member: Operation({
+          return_type: Type::Identifier("void"),
+          name: Some("focus"),
+          static_: false,
+          arguments: [],
+          special: None,
+        }),
+      },
     ],
     None,
   )
   @json.inspect(iface2, content={
     "name": "Element",
     "members": [
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": ["Identifier", "void"],
-          "name": "focus",
-          "arguments": [],
-          "static_": false,
-        },
-      ],
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Operation",
+          {
+            "return_type": ["Identifier", "void"],
+            "name": "focus",
+            "arguments": [],
+            "static_": false,
+          },
+        ],
+      },
     ],
     "inheritance": "Node",
   })
@@ -166,38 +178,42 @@ test "PartialMergeVisitor merges interface and partial interface" {
   @json.inspect(merged, content={
     "name": "MyInterface",
     "members": [
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Nullable", "DOMString"],
-          "name": "textContent",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": ["Identifier", "Node"],
-          "name": "appendChild",
-          "arguments": [
-            {
-              "extended_attributes": [],
-              "type_": {
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Attribute",
+          {
+            "type_": ["Nullable", "DOMString"],
+            "name": "textContent",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false,
+          },
+        ],
+      },
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Operation",
+          {
+            "return_type": ["Identifier", "Node"],
+            "name": "appendChild",
+            "arguments": [
+              {
                 "extended_attributes": [],
-                "type_": ["Identifier", "Element"],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": ["Identifier", "Element"],
+                },
+                "name": "newChild",
+                "optional": false,
+                "variadic": false,
               },
-              "name": "newChild",
-              "optional": false,
-              "variadic": false,
-            },
-          ],
-          "static_": false,
-        },
-      ],
+            ],
+            "static_": false,
+          },
+        ],
+      },
     ],
   })
 }
@@ -218,27 +234,31 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
   @json.inspect(merged_mixin, content={
     "name": "MyMixin",
     "members": [
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Nullable", "DOMString"],
-          "name": "textContent2",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": "Undefined",
-          "name": "doSomething",
-          "arguments": [],
-          "static_": false,
-        },
-      ],
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Attribute",
+          {
+            "type_": ["Nullable", "DOMString"],
+            "name": "textContent2",
+            "is_readonly": false,
+            "static_": false,
+            "is_inherit": false,
+          },
+        ],
+      },
+      {
+        "extended_attributes": [],
+        "interface_member": [
+          "Operation",
+          {
+            "return_type": "Undefined",
+            "name": "doSomething",
+            "arguments": [],
+            "static_": false,
+          },
+        ],
+      },
     ],
   })
 }

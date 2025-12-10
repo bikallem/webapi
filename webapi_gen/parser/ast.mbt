@@ -155,9 +155,14 @@ pub(all) enum InterfaceMember {
 } derive(Show, Eq, ToJson)
 
 ///|
+pub(all) struct InterfaceMemberExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  interface_member : InterfaceMember
+} derive(Show, Eq, ToJson)
+
+///|
 /// Constant member
 pub(all) struct ConstMember {
-  extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
   value : ConstValue
@@ -166,7 +171,6 @@ pub(all) struct ConstMember {
 ///|
 /// Attribute member
 pub(all) struct AttributeMember {
-  extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
   is_readonly : Bool
@@ -177,7 +181,6 @@ pub(all) struct AttributeMember {
 ///|
 /// Operation (method) member
 pub(all) struct OperationMember {
-  extended_attributes : Array[ExtendedAttribute]
   return_type : Type
   name : String?
   arguments : Array[Argument]
@@ -196,14 +199,12 @@ pub(all) enum Special {
 ///|
 /// Constructor member
 pub(all) struct ConstructorMember {
-  extended_attributes : Array[ExtendedAttribute]
   arguments : Array[Argument]
 } derive(Show, Eq, ToJson)
 
 ///|
 /// Iterable declaration
 pub(all) struct IterableMember {
-  extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
 } derive(Show, Eq, ToJson)
@@ -211,7 +212,6 @@ pub(all) struct IterableMember {
 ///|
 /// Async iterable declaration
 pub(all) struct AsyncIterableMember {
-  extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
   arguments : Array[Argument]
@@ -220,7 +220,6 @@ pub(all) struct AsyncIterableMember {
 ///|
 /// Maplike declaration
 pub(all) struct MaplikeMember {
-  extended_attributes : Array[ExtendedAttribute]
   key_type : Type
   value_type : Type
   is_readonly : Bool
@@ -229,7 +228,6 @@ pub(all) struct MaplikeMember {
 ///|
 /// Setlike declaration
 pub(all) struct SetlikeMember {
-  extended_attributes : Array[ExtendedAttribute]
   value_type : Type
   is_readonly : Bool
 } derive(Show, Eq, ToJson)
@@ -299,28 +297,28 @@ pub(all) struct DefinitionExtendedAttributes {
 pub(all) struct InterfaceDefinition {
   name : String
   inheritance : String?
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 } derive(Show, Eq, ToJson)
 
 ///|
 /// Partial interface definition
 pub(all) struct PartialInterfaceDefinition {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 } derive(Show, Eq, ToJson)
 
 ///|
 /// Mixin definition
 pub(all) struct MixinDefinition {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 } derive(Show, Eq, ToJson)
 
 ///|
 /// Partial mixin definition
 pub(all) struct PartialMixinDefinition {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 } derive(Show, Eq, ToJson)
 
 ///|

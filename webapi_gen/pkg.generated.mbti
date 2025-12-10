@@ -66,7 +66,7 @@ pub(open) trait WebIdlVisitor {
   visit_callback_function(Self, @parser.CallbackFunctionDefinition) -> Unit = _
   visit_callback_interface(Self, @parser.CallbackInterfaceDefinition) -> Unit = _
   visit_include_statements(Self, @parser.IncludesStatement) -> Unit = _
-  visit_interface_member(Self, @parser.InterfaceMember) -> Unit = _
+  visit_interface_member(Self, @parser.InterfaceMemberExtendedAttributes) -> Unit = _
   visit_dictionary_member(Self, @parser.DictionaryMember) -> Unit = _
   visit_type(Self, @parser.Type) -> Unit = _
   visit_type_with_extended_attributes(Self, @parser.TypeWithExtendedAttributes) -> Unit = _

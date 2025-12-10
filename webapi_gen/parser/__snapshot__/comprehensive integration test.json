@@ -12,74 +12,80 @@
       {
         "name": "EventTarget",
         "members": [
-          [
-            "Constructor",
-            {
-              "extended_attributes": [],
-              "arguments": []
-            }
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": "Undefined",
-              "name": "addEventListener",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Constructor",
+              {
+                "arguments": []
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Operation",
+              {
+                "return_type": "Undefined",
+                "name": "addEventListener",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "type",
+                    "optional": false,
+                    "variadic": false
                   },
-                  "name": "type",
-                  "optional": false,
-                  "variadic": false
-                },
-                {
-                  "extended_attributes": [],
-                  "type_": {
+                  {
                     "extended_attributes": [],
-                    "type_": [
-                      "Nullable",
-                      [
-                        "Identifier",
-                        "EventListener"
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": [
+                        "Nullable",
+                        [
+                          "Identifier",
+                          "EventListener"
+                        ]
                       ]
-                    ]
-                  },
-                  "name": "listener",
-                  "optional": false,
-                  "variadic": false
-                }
-              ],
-              "static_": false
-            }
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": "Boolean",
-              "name": "dispatchEvent",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+                    },
+                    "name": "listener",
+                    "optional": false,
+                    "variadic": false
+                  }
+                ],
+                "static_": false
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Operation",
+              {
+                "return_type": "Boolean",
+                "name": "dispatchEvent",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": [
-                      "Identifier",
-                      "Event"
-                    ]
-                  },
-                  "name": "event",
-                  "optional": false,
-                  "variadic": false
-                }
-              ],
-              "static_": false
-            }
-          ]
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": [
+                        "Identifier",
+                        "Event"
+                      ]
+                    },
+                    "name": "event",
+                    "optional": false,
+                    "variadic": false
+                  }
+                ],
+                "static_": false
+              }
+            ]
+          }
         ]
       }
     ]
@@ -94,7 +100,6 @@
           [
             "Operation",
             {
-              "extended_attributes": [],
               "return_type": "Undefined",
               "name": "handleEvent",
               "arguments": [
@@ -132,50 +137,54 @@
       {
         "name": "Document",
         "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": [
-                "Nullable",
-                [
-                  "Identifier",
-                  "Element"
-                ]
-              ],
-              "name": "documentElement",
-              "is_readonly": true,
-              "static_": false,
-              "is_inherit": false
-            }
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": [
-                "Nullable",
-                [
-                  "Identifier",
-                  "Element"
-                ]
-              ],
-              "name": "getElementById",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": [
+                  "Nullable",
+                  [
+                    "Identifier",
+                    "Element"
+                  ]
+                ],
+                "name": "documentElement",
+                "is_readonly": true,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Operation",
+              {
+                "return_type": [
+                  "Nullable",
+                  [
+                    "Identifier",
+                    "Element"
+                  ]
+                ],
+                "name": "getElementById",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
-                  },
-                  "name": "elementId",
-                  "optional": false,
-                  "variadic": false
-                }
-              ],
-              "static_": false
-            }
-          ]
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "elementId",
+                    "optional": false,
+                    "variadic": false
+                  }
+                ],
+                "static_": false
+              }
+            ]
+          }
         ]
       }
     ]
@@ -187,40 +196,44 @@
       {
         "name": "WindowEventHandlers",
         "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": [
-                "Nullable",
-                [
-                  "Identifier",
-                  "EventHandler"
-                ]
-              ],
-              "name": "onload",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false
-            }
-          ],
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": [
-                "Nullable",
-                [
-                  "Identifier",
-                  "EventHandler"
-                ]
-              ],
-              "name": "onerror",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false
-            }
-          ]
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": [
+                  "Nullable",
+                  [
+                    "Identifier",
+                    "EventHandler"
+                  ]
+                ],
+                "name": "onload",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": [
+                  "Nullable",
+                  [
+                    "Identifier",
+                    "EventHandler"
+                  ]
+                ],
+                "name": "onerror",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          }
         ]
       }
     ]
@@ -232,23 +245,25 @@
       {
         "name": "GlobalEventHandlers",
         "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": [
-                "Nullable",
-                [
-                  "Identifier",
-                  "EventHandler"
-                ]
-              ],
-              "name": "onclick",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false
-            }
-          ]
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": [
+                  "Nullable",
+                  [
+                    "Identifier",
+                    "EventHandler"
+                  ]
+                ],
+                "name": "onclick",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          }
         ]
       }
     ]
@@ -263,7 +278,6 @@
           [
             "Attribute",
             {
-              "extended_attributes": [],
               "type_": "DOMString",
               "name": "cssText",
               "is_readonly": true,
@@ -274,7 +288,6 @@
           [
             "Operation",
             {
-              "extended_attributes": [],
               "return_type": "Boolean",
               "name": "supports",
               "arguments": [
@@ -316,7 +329,6 @@
           [
             "Operation",
             {
-              "extended_attributes": [],
               "return_type": [
                 "Identifier",
                 "CSSStyleDeclaration"
@@ -510,83 +522,91 @@
         "name": "HTMLCollection",
         "inheritance": "Node",
         "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": "UnsignedLong",
-              "name": "length",
-              "is_readonly": true,
-              "static_": false,
-              "is_inherit": false
-            }
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": [
-                "Nullable",
-                [
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": "UnsignedLong",
+                "name": "length",
+                "is_readonly": true,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Operation",
+              {
+                "return_type": [
+                  "Nullable",
+                  [
+                    "Identifier",
+                    "Element"
+                  ]
+                ],
+                "name": "item",
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "UnsignedLong"
+                    },
+                    "name": "index",
+                    "optional": false,
+                    "variadic": false
+                  }
+                ],
+                "static_": false,
+                "special": "Getter"
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Operation",
+              {
+                "return_type": [
+                  "Nullable",
+                  [
+                    "Identifier",
+                    "Element"
+                  ]
+                ],
+                "name": "namedItem",
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "name",
+                    "optional": false,
+                    "variadic": false
+                  }
+                ],
+                "static_": false,
+                "special": "Getter"
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Iterable",
+              {
+                "value_type": [
                   "Identifier",
                   "Element"
                 ]
-              ],
-              "name": "item",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
-                    "extended_attributes": [],
-                    "type_": "UnsignedLong"
-                  },
-                  "name": "index",
-                  "optional": false,
-                  "variadic": false
-                }
-              ],
-              "static_": false,
-              "special": "Getter"
-            }
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": [
-                "Nullable",
-                [
-                  "Identifier",
-                  "Element"
-                ]
-              ],
-              "name": "namedItem",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
-                    "extended_attributes": [],
-                    "type_": "DOMString"
-                  },
-                  "name": "name",
-                  "optional": false,
-                  "variadic": false
-                }
-              ],
-              "static_": false,
-              "special": "Getter"
-            }
-          ],
-          [
-            "Iterable",
-            {
-              "extended_attributes": [],
-              "value_type": [
-                "Identifier",
-                "Element"
-              ]
-            }
-          ]
+              }
+            ]
+          }
         ]
       }
     ]
@@ -598,15 +618,17 @@
       {
         "name": "Headers",
         "members": [
-          [
-            "Maplike",
-            {
-              "extended_attributes": [],
-              "key_type": "DOMString",
-              "value_type": "DOMString",
-              "is_readonly": true
-            }
-          ]
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Maplike",
+              {
+                "key_type": "DOMString",
+                "value_type": "DOMString",
+                "is_readonly": true
+              }
+            ]
+          }
         ]
       }
     ]
@@ -618,14 +640,16 @@
       {
         "name": "DOMTokenList",
         "members": [
-          [
-            "Setlike",
-            {
-              "extended_attributes": [],
-              "value_type": "DOMString",
-              "is_readonly": false
-            }
-          ]
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Setlike",
+              {
+                "value_type": "DOMString",
+                "is_readonly": false
+              }
+            ]
+          }
         ]
       }
     ]
@@ -643,65 +667,69 @@
       {
         "name": "URL",
         "members": [
-          [
-            "Constructor",
-            {
-              "extended_attributes": [],
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Constructor",
+              {
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "url",
+                    "optional": false,
+                    "variadic": false
                   },
-                  "name": "url",
-                  "optional": false,
-                  "variadic": false
-                },
-                {
-                  "extended_attributes": [],
-                  "type_": {
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
-                  },
-                  "name": "base",
-                  "optional": true,
-                  "variadic": false
-                }
-              ]
-            }
-          ],
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": "Boolean",
-              "name": "canParse",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "base",
+                    "optional": true,
+                    "variadic": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Operation",
+              {
+                "return_type": "Boolean",
+                "name": "canParse",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "url",
+                    "optional": false,
+                    "variadic": false
                   },
-                  "name": "url",
-                  "optional": false,
-                  "variadic": false
-                },
-                {
-                  "extended_attributes": [],
-                  "type_": {
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
-                  },
-                  "name": "base",
-                  "optional": true,
-                  "variadic": false
-                }
-              ],
-              "static_": true
-            }
-          ]
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "base",
+                    "optional": true,
+                    "variadic": false
+                  }
+                ],
+                "static_": true
+              }
+            ]
+          }
         ]
       }
     ]
@@ -737,28 +765,32 @@
         "name": "HTMLImageElement",
         "inheritance": "HTMLElement",
         "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": "DOMString",
-              "name": "src",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false
-            }
-          ],
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": "UnsignedLong",
-              "name": "width",
-              "is_readonly": true,
-              "static_": false,
-              "is_inherit": false
-            }
-          ]
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": "DOMString",
+                "name": "src",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": "UnsignedLong",
+                "name": "width",
+                "is_readonly": true,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          }
         ]
       }
     ]

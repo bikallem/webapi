@@ -2,14 +2,14 @@
 /// Merged interface IR with all partials and mixin members combined
 struct PartilMergedInterfaceIR {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
   inheritance : String?
 } derive(Show, ToJson)
 
 ///|
 fn PartilMergedInterfaceIR::new(
   name : String,
-  members : Array[InterfaceMember],
+  members : Array[InterfaceMemberExtendedAttributes],
   inheritance : String?,
 ) -> PartilMergedInterfaceIR {
   PartilMergedInterfaceIR::{ name, inheritance, members }
@@ -18,7 +18,7 @@ fn PartilMergedInterfaceIR::new(
 ///|
 fn PartilMergedInterfaceIR::merge(
   self : PartilMergedInterfaceIR,
-  members : Array[InterfaceMember],
+  members : Array[InterfaceMemberExtendedAttributes],
   inheritance : String?,
 ) -> PartilMergedInterfaceIR {
   let inheritance = match inheritance {
@@ -32,13 +32,13 @@ fn PartilMergedInterfaceIR::merge(
 /// Merged mixin IR with all partials combined.
 struct PartialMergedMixinIR {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 } derive(Show, ToJson)
 
 ///|
 fn PartialMergedMixinIR::new(
   name : String,
-  members : Array[InterfaceMember],
+  members : Array[InterfaceMemberExtendedAttributes],
 ) -> PartialMergedMixinIR {
   PartialMergedMixinIR::{ name, members }
 }
@@ -46,7 +46,7 @@ fn PartialMergedMixinIR::new(
 ///|
 fn PartialMergedMixinIR::merge(
   self : PartialMergedMixinIR,
-  members : Array[InterfaceMember],
+  members : Array[InterfaceMemberExtendedAttributes],
 ) -> PartialMergedMixinIR {
   { ..self, members: self.members + members }
 }
@@ -113,7 +113,7 @@ fn PartialMergeVisitor::new() -> PartialMergeVisitor {
 fn PartialMergeVisitor::merge_interface(
   self : PartialMergeVisitor,
   name : String,
-  members : Array[InterfaceMember],
+  members : Array[InterfaceMemberExtendedAttributes],
   inheritance : String?,
 ) -> Unit {
   match self.interfaces.get(name) {
@@ -133,7 +133,7 @@ fn PartialMergeVisitor::merge_interface(
 fn PartialMergeVisitor::merge_mixin(
   self : PartialMergeVisitor,
   name : String,
-  members : Array[InterfaceMember],
+  members : Array[InterfaceMemberExtendedAttributes],
 ) -> Unit {
   match self.mixins.get(name) {
     Some(current) => self.mixins[name] = current.merge(members)

@@ -44,7 +44,6 @@ pub impl Show for Argument
 pub impl ToJson for Argument
 
 pub(all) struct AsyncIterableMember {
-  extended_attributes : Array[ExtendedAttribute]
   key_type : Type?
   value_type : Type
   arguments : Array[Argument]
@@ -54,7 +53,6 @@ pub impl Show for AsyncIterableMember
 pub impl ToJson for AsyncIterableMember
 
 pub(all) struct AttributeMember {
-  extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
   is_readonly : Bool
@@ -91,7 +89,6 @@ pub impl Show for CallbackInterfaceMember
 pub impl ToJson for CallbackInterfaceMember
 
 pub(all) struct ConstMember {
-  extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
   value : ConstValue
@@ -113,7 +110,6 @@ pub impl Show for ConstValue
 pub impl ToJson for ConstValue
 
 pub(all) struct ConstructorMember {
-  extended_attributes : Array[ExtendedAttribute]
   arguments : Array[Argument]
 }
 pub impl Eq for ConstructorMember
@@ -210,7 +206,7 @@ pub impl ToJson for IncludesStatement
 pub(all) struct InterfaceDefinition {
   name : String
   inheritance : String?
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for InterfaceDefinition
 pub impl Show for InterfaceDefinition
@@ -231,8 +227,15 @@ pub impl Eq for InterfaceMember
 pub impl Show for InterfaceMember
 pub impl ToJson for InterfaceMember
 
-pub(all) struct IterableMember {
+pub(all) struct InterfaceMemberExtendedAttributes {
   extended_attributes : Array[ExtendedAttribute]
+  interface_member : InterfaceMember
+}
+pub impl Eq for InterfaceMemberExtendedAttributes
+pub impl Show for InterfaceMemberExtendedAttributes
+pub impl ToJson for InterfaceMemberExtendedAttributes
+
+pub(all) struct IterableMember {
   key_type : Type?
   value_type : Type
 }
@@ -241,7 +244,6 @@ pub impl Show for IterableMember
 pub impl ToJson for IterableMember
 
 pub(all) struct MaplikeMember {
-  extended_attributes : Array[ExtendedAttribute]
   key_type : Type
   value_type : Type
   is_readonly : Bool
@@ -252,7 +254,7 @@ pub impl ToJson for MaplikeMember
 
 pub(all) struct MixinDefinition {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for MixinDefinition
 pub impl Show for MixinDefinition
@@ -276,7 +278,6 @@ pub impl Show for NamespaceMember
 pub impl ToJson for NamespaceMember
 
 pub(all) struct OperationMember {
-  extended_attributes : Array[ExtendedAttribute]
   return_type : Type
   name : String?
   arguments : Array[Argument]
@@ -297,7 +298,7 @@ pub impl ToJson for PartialDictionaryDefinition
 
 pub(all) struct PartialInterfaceDefinition {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for PartialInterfaceDefinition
 pub impl Show for PartialInterfaceDefinition
@@ -305,7 +306,7 @@ pub impl ToJson for PartialInterfaceDefinition
 
 pub(all) struct PartialMixinDefinition {
   name : String
-  members : Array[InterfaceMember]
+  members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for PartialMixinDefinition
 pub impl Show for PartialMixinDefinition
@@ -327,7 +328,6 @@ pub struct Position {
 pub impl Show for Position
 
 pub(all) struct SetlikeMember {
-  extended_attributes : Array[ExtendedAttribute]
   value_type : Type
   is_readonly : Bool
 }
