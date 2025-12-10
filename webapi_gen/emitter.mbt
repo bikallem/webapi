@@ -71,7 +71,7 @@ fn ffi_module_name(type_name : String) -> String {
 fn map_idl_type(idl_type : Type) -> String {
   match idl_type {
     // Named types (interfaces, dictionaries, enums, typedefs)
-    Identifier(name) => map_identifier(name)
+    Identifier(name) => name
     Nullable(t) => "\{map_idl_type(t)}?" // Nullable types
 
     // Void 
@@ -131,39 +131,6 @@ fn map_idl_type(idl_type : Type) -> String {
     // Unsupported types
     Symbol => abort("Symbol type not supported")
     Record(_) => abort("Record type not supported")
-  }
-}
-
-///|
-/// Map WebIDL identifier to MoonBit type name.
-fn map_identifier(name : String) -> String {
-  match name {
-    "DOMString" | "USVString" | "ByteString" | "CSSOMString" => "String"
-    "boolean" => "Bool"
-    "long" | "short" => "Int"
-    "octet" => "Byte"
-    "unsigned long" | "unsigned short" => "Int"
-    "long long" => "Int64"
-    "unsigned long long" => "UInt64"
-    "byte" => "Int"
-    "float" | "unrestricted float" => "Float"
-    "double" | "unrestricted double" => "Double"
-    "any" | "object" => "JsValue"
-    "void" | "undefined" => "Unit"
-    "ArrayBuffer" => "ArrayBuffer"
-    "ArrayBufferView" => "ArrayBufferView"
-    "DataView" => "DataView"
-    "Int8Array" => "Int8Array"
-    "Uint8Array" => "Uint8Array"
-    "Uint8ClampedArray" => "Uint8ClampedArray"
-    "Int16Array" => "Int16Array"
-    "Uint16Array" => "Uint16Array"
-    "Int32Array" => "Int32Array"
-    "Uint32Array" => "Uint32Array"
-    "Float32Array" => "Float32Array"
-    "Float64Array" => "Float64Array"
-    "Function" => "JsValue"
-    _ => name // Keep interface/dictionary/enum names as-is
   }
 }
 
