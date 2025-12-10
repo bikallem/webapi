@@ -7,7 +7,7 @@
           "Operation",
           {
             "extended_attributes": [],
-            "return_type": "Void",
+            "return_type": "Undefined",
             "name": "dummyMethod",
             "arguments": [],
             "static_": false
@@ -74,7 +74,7 @@
           "Operation",
           {
             "extended_attributes": [],
-            "return_type": "Void",
+            "return_type": "Undefined",
             "name": "doSomething",
             "arguments": [],
             "static_": false
@@ -221,7 +221,7 @@
     "MyCallback": {
       "extended_attributes": [],
       "name": "MyCallback",
-      "return_type": "Void",
+      "return_type": "Undefined",
       "arguments": [
         {
           "extended_attributes": [],
@@ -235,7 +235,7 @@
     "MyCallbackInterface": {
       "extended_attributes": [],
       "name": "MyCallbackInterface",
-      "return_type": "Void",
+      "return_type": "Undefined",
       "arguments": [
         {
           "extended_attributes": [],

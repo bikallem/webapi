@@ -72,7 +72,6 @@ test "map_idl_type handles primitive types" {
   inspect(map_idl_type(Long), content="Int")
   inspect(map_idl_type(UnsignedLong), content="UInt")
   inspect(map_idl_type(Double), content="Double")
-  inspect(map_idl_type(Void), content="Unit")
   inspect(map_idl_type(Undefined), content="Unit")
 }
 
@@ -87,7 +86,7 @@ test "map_idl_type handles string types" {
 test "map_idl_type handles parameterized types" {
   inspect(map_idl_type(Nullable(DOMString)), content="String?")
   inspect(map_idl_type(Sequence(Long)), content="Array[Int]")
-  inspect(map_idl_type(Promise(Void)), content="JsPromise[Unit]")
+  inspect(map_idl_type(Promise(Undefined)), content="JsPromise[Unit]")
   // inspect(map_idl_type(Record(DOMString, Long)), content="Map[String, Int]")
 }
 

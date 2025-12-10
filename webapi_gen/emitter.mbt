@@ -75,14 +75,17 @@ fn map_idl_type(idl_type : Type) -> String {
     Nullable(t) => "\{map_idl_type(t)}?" // Nullable types
 
     // Void 
-    Undefined | Void => "Unit"
+    Undefined => "Unit"
 
     // Union types map to JsValue by default
     Union(_) => "JsValue" // Default
+
+    // Parameterized types
     Promise(t) => "JsPromise[\{map_idl_type(t)}]"
-    ObservableArray(t) => "Array[\{map_idl_type(t)}]"
-    FrozenArray(t) => "Array[\{map_idl_type(t)}]"
+    ObservableArray({ type_, .. }) => "Array[\{map_idl_type(type_)}]"
+    FrozenArray({ type_, .. }) => "Array[\{map_idl_type(type_)}]"
     Sequence(t) => "Array[\{map_idl_type(t)}]"
+    AsyncSequence({ type_, .. }) => "Array[\{map_idl_type(type_)}]"
 
     // Typed Arrays
     Float64Array => "Float64Array"

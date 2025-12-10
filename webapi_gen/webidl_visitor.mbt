@@ -256,15 +256,13 @@ fn[T : WebIdlVisitor] default_visit_type(visitor : T, typ : Type) -> Unit {
       for t in types {
         visitor.visit_type(t)
       }
-    Record(key, val) => {
-      visitor.visit_string_type(key)
-      visitor.visit_type(val)
-    }
-    Promise(typ)
-    | ObservableArray(typ)
-    | FrozenArray(typ)
-    | Sequence(typ)
-    | Nullable(typ) => visitor.visit_type(typ)
+    // Record(key, val) => {
+    //   visitor.visit_string_type(key)
+    //   visitor.visit_type(val)
+    // }
+    // Promise(typ) => visitor.visit_type(typ)
+    // ObservableArray(typ) | FrozenArray(typ) | Sequence(typ) | Nullable(typ) =>
+    //   visitor.visit_type(typ)
     t => visitor.visit_type(t) // Primitive types
   }
 }

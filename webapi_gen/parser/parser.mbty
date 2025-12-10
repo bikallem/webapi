@@ -44,7 +44,6 @@
 %token OPTIONAL       "optional"
 
 // Type keywords - Primitive
-%token VOID           "void"
 %token UNDEFINED      "undefined"
 %token BOOLEAN        "boolean"
 %token BYTE           "byte"
@@ -314,53 +313,78 @@ enum_value_list_rest -> Array[String]:
   |                                  { [] }
 
 type -> Type:
-  | type_=single_type null=null_modifier   { 
-      match null {
-        Some(_) => Type::Nullable(type_)
-        None => type_
+  | type_=single_type is_null=null_modifier   
+    { 
+      if is_null {
+        Type::Nullable(type_)
+      } else {
+        type_
       }
     }
   | "(" single_type "or" single_type ")" null=null_modifier {
       let union = Type::Union([$2, $4])
       match null {
-        Some(_) => Type::Nullable(union)
-        None => union
+        true => Type::Nullable(union)
+        false => union
       }
     }
+
+// Union types
+union_type -> Type:
+  | "(" type "or" type ")"      { Type::Union([$2, $4]) }
 
 type_with_extended_attributes -> (Array[ExtendedAttribute], Type):
   | extended_attribute_list type  { ($1, $2) }
 
-single_type -> Type:
-  | primitive_type              { $1 }
-  | string_type                 { $1 }
-  | buffer_type                 { $1 }
-  | IDENTIFIER                  { Type::Identifier($1) }
-  | "sequence" "<" type ">"     { Type::Sequence($3) }
-  | "Promise" "<" type ">"      { Type::Promise($3) }
-  | "FrozenArray" "<" type ">"  { Type::FrozenArray($3) }
-  | "ObservableArray" "<" type ">" { Type::ObservableArray($3) }
-  | "record" "<" string_type "," type ">" { Type::Record(type_to_string_type($3), $5) }
-  | "any"                       { Type::Any }
+type_with_extended_attributes2 -> TypeWithExtendedAttributes:
+  | extended_attributes=extended_attribute_list type_=type  { { extended_attributes, type_ } }
+
+distinguishable_type -> Type:
+  | primitive_type                { $1 }
+  | string_type                   { $1 }
+  | IDENTIFIER                    { Type::Identifier($1) }
+  | "sequence" "<" type ">"       { Type::Sequence($3) }
+  | "async_sequence" "<" type_with_extended_attributes2 ">" 
+    { Type::AsyncSequence($3) }
   | "object"                    { Type::Object }
   | "symbol"                    { Type::Symbol }
+  | buffer_type                 { $1 }
+  | "FrozenArray" "<" type_with_extended_attributes2 ">"
+    { Type::FrozenArray($3) }
+  | "ObservableArray" "<" type_with_extended_attributes2 ">"
+    { Type::ObservableArray($3) }
+  | "record" "<" string_type "," type_with_extended_attributes2 ">" 
+    { Type::Record(type_to_string_type($3), $5) }
   | "undefined"                 { Type::Undefined }
-  | "void"                      { Type::Void }
+
+single_type -> Type:
+  | distinguishable_type        { $1 }
+  | "any"                       { Type::Any }
+  | "Promise" "<" type ">"      { Type::Promise($3) }
 
 primitive_type -> Type:
+  // Unsigned integer types
+  | "unsigned" "short"          { Type::UnsignedShort }
+  | "unsigned" "long" "long"    { Type::UnsignedLongLong }
+  | "unsigned" "long"           { Type::UnsignedLong }
+  
+  // Signed integer types
+  | "short"                     { Type::Short }  
+  | "long"                      { Type::Long }
+  | "long" "long"               { Type::LongLong }  
+  
+  // Unrestricted float types
+  | "unrestricted" "float"      { Type::UnrestrictedFloat }
+  | "unrestricted" "double"     { Type::UnrestrictedDouble }
+  
+  // Float types
+  | "float"                     { Type::Float }  
+  | "double"                    { Type::Double }
+
+  // Other primitive types
   | "boolean"                   { Type::Boolean }
   | "byte"                      { Type::Byte }
   | "octet"                     { Type::Octet }
-  | "short"                     { Type::Short }
-  | "unsigned" "short"          { Type::UnsignedShort }
-  | "long"                      { Type::Long }
-  | "unsigned" "long"           { Type::UnsignedLong }
-  | "long" "long"               { Type::LongLong }
-  | "unsigned" "long" "long"    { Type::UnsignedLongLong }
-  | "float"                     { Type::Float }
-  | "unrestricted" "float"      { Type::UnrestrictedFloat }
-  | "double"                    { Type::Double }
-  | "unrestricted" "double"     { Type::UnrestrictedDouble }
   | "bigint"                    { Type::Bigint }
 
 string_type -> Type:
@@ -385,9 +409,9 @@ buffer_type -> Type:
   | "Float32Array"              { Type::Float32Array }
   | "Float64Array"              { Type::Float64Array }
 
-null_modifier -> Option[Type]:
-  | "?"                         { Some(Type::Void) }
-  |                             { None }
+null_modifier -> Bool:
+  | "?"                         { true }
+  |                             { false }
 
 // Const values
 const_value -> ConstValue:

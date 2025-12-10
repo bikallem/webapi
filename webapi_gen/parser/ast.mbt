@@ -23,8 +23,7 @@ pub(all) enum ExtendedAttribute {
 ///|
 /// WebIDL type representation
 pub(all) enum Type {
-  // Primitive types
-  Void
+  // Primitive types  
   Undefined
   Boolean
   Byte
@@ -40,14 +39,17 @@ pub(all) enum Type {
   Double
   UnrestrictedDouble
   Bigint
+
   // String types
   DOMString
   ByteString
   USVString
+
   // Special types
   Any
   Object
   Symbol
+
   // Buffer types
   ArrayBuffer
   SharedArrayBuffer
@@ -64,16 +66,21 @@ pub(all) enum Type {
   Float16Array
   Float32Array
   Float64Array
+
   // Reference type
   Identifier(String)
+
   // Parameterized types
   Sequence(Type)
-  FrozenArray(Type)
-  ObservableArray(Type)
+  AsyncSequence(TypeWithExtendedAttributes)
+  FrozenArray(TypeWithExtendedAttributes)
+  ObservableArray(TypeWithExtendedAttributes)
   Promise(Type)
-  Record(StringType, Type)
+  Record(StringType, TypeWithExtendedAttributes)
+
   // Union type
   Union(Array[Type])
+
   // Nullable type
   Nullable(Type)
 } derive(Show, Eq, ToJson)

@@ -30,7 +30,7 @@ test "MergedInterface::merge() combines members and inheritance" {
     [
       Operation({
         extended_attributes: [],
-        return_type: Type::Identifier("void"),
+        return_type: Type::Identifier("undefined"),
         name: Some("focus"),
         static_: false,
         arguments: [],
@@ -57,7 +57,7 @@ test "MergedInterface::merge() combines members and inheritance" {
         "Operation",
         {
           "extended_attributes": [],
-          "return_type": ["Identifier", "void"],
+          "return_type": ["Identifier", "undefined"],
           "name": "focus",
           "arguments": [],
           "static_": false,
@@ -207,37 +207,12 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
     #|  attribute DOMString? textContent2;
     #|};
     #|partial interface mixin MyMixin {
-    #|  void doSomething();
+    #|  undefined doSomething();
     #|};
   let defs = @parser.parse(widl)
   visitor.visit(defs)
   let merged_mixin = visitor.mixins["MyMixin"]
-  @json.inspect(merged_mixin, content={
-    "name": "MyMixin",
-    "members": [
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Nullable", "DOMString"],
-          "name": "textContent2",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": "Void",
-          "name": "doSomething",
-          "arguments": [],
-          "static_": false,
-        },
-      ],
-    ],
-  })
+  @json.inspect(merged_mixin, content=({"name":"MyMixin","members":[["Attribute",{"extended_attributes":[],"type_":["Nullable","DOMString"],"name":"textContent2","is_readonly":false,"static_":false,"is_inherit":false}],["Operation",{"extended_attributes":[],"return_type":"Undefined","name":"doSomething","arguments":[],"static_":false}]]}))
 }
 
 ///|
@@ -327,7 +302,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
     #|  attribute DOMString? textContent2;
     #|};
     #|partial interface mixin MyMixin {
-    #|  void doSomething();
+    #|  undefined doSomething();
     #|};
     #|dictionary EventInit : Event {
     #|  required DOMString type;
@@ -339,9 +314,9 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
     #|  "value1",
     #|  "value2"
     #|};
-    #|callback MyCallback = void (DOMString arg);
+    #|callback MyCallback = undefined (DOMString arg);
     #|callback interface MyCallbackInterface {
-    #|  void onEvent(Event e);
+    #|  undefined onEvent(Event e);
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)

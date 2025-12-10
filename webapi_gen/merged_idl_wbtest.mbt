@@ -96,7 +96,7 @@ test "MergedIdl::from flattens mixins into interfaces" {
     #|  attribute DOMString? textContent2;
     #|};
     #|partial interface mixin MyMixin {
-    #|  void doSomething();
+    #|  undefined doSomething();
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
@@ -104,61 +104,7 @@ test "MergedIdl::from flattens mixins into interfaces" {
   visitor.visit(defs)
   let merged_idl = MergedIdl::from(visitor)
   let iface2 = merged_idl.interfaces["MyInterface"]
-  @json.inspect(iface2, content={
-    "name": "MyInterface",
-    "members": [
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Nullable", "DOMString"],
-          "name": "textContent",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": ["Identifier", "Node"],
-          "name": "appendChild",
-          "arguments": [
-            {
-              "extended_attributes": [],
-              "type_": ["Identifier", "Element"],
-              "name": "newChild",
-              "optional": false,
-              "variadic": false,
-            },
-          ],
-          "static_": false,
-        },
-      ],
-      [
-        "Attribute",
-        {
-          "extended_attributes": [],
-          "type_": ["Nullable", "DOMString"],
-          "name": "textContent2",
-          "is_readonly": false,
-          "static_": false,
-          "is_inherit": false,
-        },
-      ],
-      [
-        "Operation",
-        {
-          "extended_attributes": [],
-          "return_type": "Void",
-          "name": "doSomething",
-          "arguments": [],
-          "static_": false,
-        },
-      ],
-    ],
-  })
+  @json.inspect(iface2, content=({"name":"MyInterface","members":[["Attribute",{"extended_attributes":[],"type_":["Nullable","DOMString"],"name":"textContent","is_readonly":false,"static_":false,"is_inherit":false}],["Operation",{"extended_attributes":[],"return_type":["Identifier","Node"],"name":"appendChild","arguments":[{"extended_attributes":[],"type_":["Identifier","Element"],"name":"newChild","optional":false,"variadic":false}],"static_":false}],["Attribute",{"extended_attributes":[],"type_":["Nullable","DOMString"],"name":"textContent2","is_readonly":false,"static_":false,"is_inherit":false}],["Operation",{"extended_attributes":[],"return_type":"Undefined","name":"doSomething","arguments":[],"static_":false}]]}))
 }
 
 ///|
@@ -181,7 +127,7 @@ test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and call
   let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|interface Dummy {
-    #|  void dummyMethod();
+    #|  undefined dummyMethod();
     #|};
     #|interface MyInterface: ParentInterface {
     #|  attribute DOMString? textContent;
@@ -193,7 +139,7 @@ test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and call
     #|  attribute DOMString? textContent2;
     #|};
     #|partial interface mixin MyMixin {
-    #|  void doSomething();
+    #|  undefined doSomething();
     #|};
     #|dictionary EventInit {
     #|  boolean bubbles = false;
@@ -210,9 +156,9 @@ test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and call
     #|  "value1",
     #|  "value2"
     #|};
-    #|callback MyCallback = void (DOMString arg);
+    #|callback MyCallback = undefined (DOMString arg);
     #|callback interface MyCallbackInterface {
-    #|  void onEvent(Event e);
+    #|  undefined onEvent(Event e);
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)

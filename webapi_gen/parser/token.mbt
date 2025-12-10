@@ -30,7 +30,6 @@ pub(all) enum Token {
   SETLIKE
   REQUIRED
   OPTIONAL
-  VOID
   UNDEFINED
   BOOLEAN
   BYTE
@@ -125,7 +124,6 @@ pub fn Token::kind(self : Token) -> TokenKind {
     SETLIKE => TK_SETLIKE
     REQUIRED => TK_REQUIRED
     OPTIONAL => TK_OPTIONAL
-    VOID => TK_VOID
     UNDEFINED => TK_UNDEFINED
     BOOLEAN => TK_BOOLEAN
     BYTE => TK_BYTE
@@ -220,7 +218,6 @@ pub(all) enum TokenKind {
   TK_SETLIKE
   TK_REQUIRED
   TK_OPTIONAL
-  TK_VOID
   TK_UNDEFINED
   TK_BOOLEAN
   TK_BYTE
@@ -316,7 +313,6 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_SETLIKE => "\"setlike\""
       TK_REQUIRED => "\"required\""
       TK_OPTIONAL => "\"optional\""
-      TK_VOID => "\"void\""
       TK_UNDEFINED => "\"undefined\""
       TK_BOOLEAN => "\"boolean\""
       TK_BYTE => "\"byte\""
