@@ -126,19 +126,19 @@ definitions -> Array[DefinitionExtendedAttributes]:
   | EOF { [] }
 
 definition -> Definition:
-  | interface_def               { Definition::Interface($1) }
-  | mixin_def                   { Definition::Mixin($1) }
-  | partial_interface_def       { Definition::PartialInterface($1) }
-  | partial_mixin_def           { Definition::PartialMixin($1) }
-  | namespace_def               { Definition::Namespace($1) }
-  | partial_namespace_def       { Definition::PartialNamespace($1) }
-  | dictionary_def              { Definition::Dictionary($1) }
-  | partial_dictionary_def      { Definition::PartialDictionary($1) }
-  | enum_def                    { Definition::Enum($1) }
-  | typedef_def                 { Definition::Typedef($1) }
-  | callback_def                { Definition::CallbackFunction($1) }
-  | callback_interface_def      { Definition::CallbackInterface($1) }
-  | includes_statement          { Definition::Includes($1) }
+  | i=interface_def               { Definition::Interface(i) }
+  | m=mixin_def                   { Definition::Mixin(m) }
+  | p=partial_interface_def       { Definition::PartialInterface(p) }
+  | p=partial_mixin_def           { Definition::PartialMixin(p) }
+  | n=namespace_def               { Definition::Namespace(n) }
+  | p=partial_namespace_def       { Definition::PartialNamespace(p) }
+  | d=dictionary_def              { Definition::Dictionary(d) }
+  | p=partial_dictionary_def      { Definition::PartialDictionary(p) }
+  | e=enum_def                    { Definition::Enum(e) }
+  | t=typedef_def                 { Definition::Typedef(t) }
+  | c=callback_def                { Definition::CallbackFunction(c) }
+  | ci=callback_interface_def     { Definition::CallbackInterface(ci) }
+  | inc=includes_statement        { Definition::Includes(inc) }
 
 // Interface definitions
 interface_def -> InterfaceDefinition:
@@ -202,7 +202,8 @@ interface_members -> Array[InterfaceMemberExtendedAttributes]:
 
 interface_member -> InterfaceMember:
   | c=const_member                { Const(c) }
-  | cm=constructor_member         { Constructor(cm) }
+  //| cm=constructor_member         { Constructor(cm) }
+  | "constructor" "(" arguments=argument_list ")" ";" { Constructor({ arguments, }) }
   | "stringifier" ";"             { Stringifier(StringifierMember::Bare) }
   | "static" "readonly" "attribute" type_=type name=IDENTIFIER ";"
       { Attribute({ type_, name, is_readonly: true, static_: true, is_inherit: false }) }
@@ -246,18 +247,18 @@ special -> Special:
   | "setter"                    { Special::Setter }
   | "deleter"                   { Special::Deleter }
 
-constructor_member -> ConstructorMember:
-  | "constructor" "(" argument_list ")" ";" { { arguments: $3 } }
+//constructor_member -> ConstructorMember:
+//  | "constructor" "(" arguments=argument_list ")" ";" { { arguments } }
 
 iterable_member -> IterableMember:
-  | "iterable" "<" type ">" ";" { { key_type: None, value_type: $3 } }
-  | "iterable" "<" type "," type ">" ";" { { key_type: Some($3), value_type: $5 } }
+  | "iterable" "<" value_type=type ">" ";" { { key_type: None, value_type } }
+  | "iterable" "<" key_type=type "," value_type=type ">" ";" { { key_type: Some(key_type), value_type } }
 
 maplike_member -> MaplikeMember:
-  | "maplike" "<" type "," type ">" ";" { { key_type: $3, value_type: $5, is_readonly: false } }
+  | "maplike" "<" key_type=type "," value_type=type ">" ";" { { key_type, value_type, is_readonly: false } }
 
 setlike_member -> SetlikeMember:
-  | "setlike" "<" type ">" ";" { { value_type: $3, is_readonly: false } }
+  | "setlike" "<" value_type=type ">" ";" { { value_type, is_readonly: false } }
 
 // Namespace members
 namespace_members -> Array[NamespaceMemberExtendedAttributes]:
@@ -266,8 +267,8 @@ namespace_members -> Array[NamespaceMemberExtendedAttributes]:
   |                             { [] }
 
 namespace_member -> NamespaceMember:
-  | "readonly" "attribute" type IDENTIFIER ";" 
-    { Attribute({ type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
+  | "readonly" "attribute" type_=type name=IDENTIFIER ";" 
+    { Attribute({ type_, name, is_readonly: true, static_: false, is_inherit: false }) }
   | op=regular_operation_member { Operation(op) }
   | const_member                { Const($1) }
 
@@ -294,11 +295,11 @@ enum_value_list_rest -> Array[String]:
 
 // Arguments
 argument_list -> Array[Argument]:
-  | argument arguments          { [$1, ..$2] }
-  |                             { [] }
+  | arg=argument arguments=arguments  { [arg, ..arguments] }
+  |                                   { [] }
 
 arguments -> Array[Argument]:
-  | "," argument arguments      { [$2, ..$3] }
+  | "," arg=argument arguments=arguments  { [arg, ..arguments] }
   |                             { [] }
 
 argument -> Argument:
@@ -319,8 +320,8 @@ ellipsis -> Bool:
   |                             { false }
 
 argument_name -> String:
-  | argument_name_keyword   { $1 }
-  | IDENTIFIER              { $1 }
+  | name=argument_name_keyword   { name }
+  | name=IDENTIFIER              { name }
 
 argument_name_keyword -> String
   : "attribute"    { "attribute" }
@@ -377,21 +378,17 @@ union_member_types -> Array[TypeWithExtendedAttributes]:
   |                                             { [] }
 
 distinguishable_type -> Type:
-  | primitive_type                { $1 }
-  | string_type                   { $1 }
-  | IDENTIFIER                    { Type::Identifier($1) }
-  | "sequence" "<" type ">"       { Type::Sequence($3) }
-  | "async_sequence" "<" type_with_extended_attributes ">" 
-    { Type::AsyncSequence($3) }
+  | p=primitive_type              { p }
+  | st=string_type                { st }
+  | id=IDENTIFIER                 { Type::Identifier(id) }
+  | "sequence" "<" t=type ">"       { Type::Sequence(t) }
+  | "async_sequence" "<" type_=type_with_extended_attributes ">" { Type::AsyncSequence(type_) }
   | "object"                    { Type::Object }
   | "symbol"                    { Type::Symbol }
-  | buffer_type                 { $1 }
-  | "FrozenArray" "<" type_with_extended_attributes ">"
-    { Type::FrozenArray($3) }
-  | "ObservableArray" "<" type_with_extended_attributes ">"
-    { Type::ObservableArray($3) }
-  | "record" "<" string_type "," type_with_extended_attributes ">" 
-    { Type::Record(type_to_string_type($3), $5) }
+  | bt=buffer_type                 { bt }
+  | "FrozenArray" "<" t=type_with_extended_attributes ">" { Type::FrozenArray(t) }
+  | "ObservableArray" "<" t=type_with_extended_attributes ">" { Type::ObservableArray(t) }
+  | "record" "<" st=string_type "," t=type_with_extended_attributes ">" { Type::Record(type_to_string_type(st), t) }
   | "undefined"                 { Type::Undefined }
 
 single_type -> Type:
@@ -482,20 +479,20 @@ default_value -> DefaultValue:
 
 // Extended attributes
 extended_attribute_list -> Array[ExtendedAttribute]:
-  | "[" extended_attribute extended_attributes "]"  { [$2, ..$3] }
+  | "[" ext_attr=extended_attribute attrs=extended_attributes "]"  { [ext_attr, ..attrs] }
   |                             { [] }
 
 extended_attributes -> Array[ExtendedAttribute]:
-  | "," extended_attribute extended_attributes  { [$2, ..$3] }
+  | "," ext_attr=extended_attribute attrs=extended_attributes  { [ext_attr, ..attrs] }
   |                             { [] }
 
 extended_attribute -> ExtendedAttribute:
-  | IDENTIFIER "=" IDENTIFIER "(" argument_list ")" { ExtendedAttribute::NamedArgList($1, $3, $5) }
-  | IDENTIFIER "=" IDENTIFIER   { ExtendedAttribute::Ident($1, $3) }
-  | IDENTIFIER "=" STRING       { ExtendedAttribute::Ident($1, $3) }
-  | IDENTIFIER "=" "*"          { ExtendedAttribute::Wildcard($1) }
-  | IDENTIFIER "(" argument_list ")"  { ExtendedAttribute::ArgList($1, $3) }
-  | IDENTIFIER                  { ExtendedAttribute::NoArgs($1) }
+  | arg_name=IDENTIFIER "=" arg_value=IDENTIFIER "(" args=argument_list ")" { ExtendedAttribute::NamedArgList(arg_name, arg_value, args) }
+  | attr_name=IDENTIFIER "=" attr_value=IDENTIFIER { ExtendedAttribute::Ident(attr_name, attr_value) }
+  | attr_name=IDENTIFIER "=" STRING             { ExtendedAttribute::Ident(attr_name, $3) }
+  | id=IDENTIFIER "=" "*"                       { ExtendedAttribute::Wildcard(id) }
+  | name=IDENTIFIER "(" args=argument_list ")"  { ExtendedAttribute::ArgList(name, args) }
+  | name=IDENTIFIER                             { ExtendedAttribute::NoArgs(name) }
 
 %{
 
