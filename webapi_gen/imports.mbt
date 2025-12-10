@@ -7,6 +7,7 @@ using @parser {
   type TypedefDefinition,
   type CallbackFunctionDefinition,
   type CallbackInterfaceDefinition,
+  type CallbackInterfaceMemberExtendedAttributes,
   type CallbackInterfaceMember,
   type IncludesStatement,
   type InterfaceDefinition,

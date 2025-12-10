@@ -22,13 +22,13 @@ priv suberror YYObj_Array_DictionaryMember_ Array[DictionaryMember]
 
 priv suberror YYObj_Array_ExtendedAttribute_ Array[ExtendedAttribute]
 
-priv suberror YYObj_Array_CallbackInterfaceMember_ Array[CallbackInterfaceMember]
-
 priv suberror YYObj_Array_TypeWithExtendedAttributes_ Array[TypeWithExtendedAttributes]
 
 priv suberror YYObj_Array_DefinitionExtendedAttributes_ Array[DefinitionExtendedAttributes]
 
 priv suberror YYObj_Array_InterfaceMemberExtendedAttributes_ Array[InterfaceMemberExtendedAttributes]
+
+priv suberror YYObj_Array_CallbackInterfaceMemberExtendedAttributes_ Array[CallbackInterfaceMemberExtendedAttributes]
 
 priv suberror YYObj_Option_DefaultValue_ Option[DefaultValue]
 
@@ -812,18 +812,18 @@ fn yy_action_69(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 // 178|    "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";" { { name, members } }
 fn yy_action_70(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_String(name)
-  guard _args[4].0 is YYObj_Array_CallbackInterfaceMember_(members)
+  guard _args[4].0 is YYObj_Array_CallbackInterfaceMemberExtendedAttributes_(members)
   YYObj_CallbackInterfaceDefinition({();  { name, members } })
 }
 
 // file:///./parser.mbty
-// 189|    ext_attr=extended_attribute_list m=callback_interface_member members=callback_interface_members
-// 190|      { [m, ..members] }
+// 189|    extended_attributes=extended_attribute_list m=callback_interface_member members=callback_interface_members
+// 190|      { [ { extended_attributes, callback_interface_member: m }, ..members] }
 fn yy_action_71(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(ext_attr)
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_CallbackInterfaceMember(m)
-  guard _args[2].0 is YYObj_Array_CallbackInterfaceMember_(members)
-  YYObj_Array_CallbackInterfaceMember_({();  [m, ..members] })
+  guard _args[2].0 is YYObj_Array_CallbackInterfaceMemberExtendedAttributes_(members)
+  YYObj_Array_CallbackInterfaceMemberExtendedAttributes_({();  [ { extended_attributes, callback_interface_member: m }, ..members] })
 }
 
 // file:///./parser.mbty
@@ -869,7 +869,7 @@ fn yy_action_76(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 // file:///./parser.mbty
 // 191|      { [] }
 fn yy_action_77(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Array_CallbackInterfaceMember_({();  [] })
+  YYObj_Array_CallbackInterfaceMemberExtendedAttributes_({();  [] })
 }
 
 // file:///./parser.mbty

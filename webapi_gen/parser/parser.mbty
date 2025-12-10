@@ -185,9 +185,9 @@ inheritance -> String?:
   |                             { None }
 
 // Callback interface members
-callback_interface_members -> Array[CallbackInterfaceMember]:
-  | ext_attr=extended_attribute_list m=callback_interface_member members=callback_interface_members
-      { [m, ..members] }
+callback_interface_members -> Array[CallbackInterfaceMemberExtendedAttributes]:
+  | extended_attributes=extended_attribute_list m=callback_interface_member members=callback_interface_members
+      { [ { extended_attributes, callback_interface_member: m }, ..members] }
   |   { [] }
 
 callback_interface_member -> CallbackInterfaceMember:

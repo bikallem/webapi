@@ -81,6 +81,6 @@ pub(open) trait WebIdlVisitor {
   visit_maplike(Self, @parser.MaplikeMember) -> Unit = _
   visit_setlike(Self, @parser.SetlikeMember) -> Unit = _
   visit_stringifier(Self, @parser.StringifierMember) -> Unit = _
-  visit_callback_interface_member(Self, @parser.CallbackInterfaceMember) -> Unit = _
+  visit_callback_interface_member(Self, @parser.CallbackInterfaceMemberExtendedAttributes) -> Unit = _
 }
 

@@ -71,7 +71,7 @@ fn MergedIdl::from(partial_merge_visitor : PartialMergeVisitor) -> MergedIdl {
   // Transform CallbackInterfaceDefinitions to CallbackFunctionDefinitions  
   for name, cbi in partial_merge_visitor.callback_interfaces {
     // CallbackInterface::members only holds one operation member
-    let op = loop cbi.members[:] {
+    let op = loop cbi.members.map(m => m.callback_interface_member)[:] {
       [] =>
         abort(
           "CallbackInterface '\{name}' has no operation member to convert to CallbackFunction",

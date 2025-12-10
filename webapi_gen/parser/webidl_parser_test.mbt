@@ -202,26 +202,29 @@ test "parse callback interface" {
       {
         "name": "EventListener",
         "members": [
-          [
-            "Operation",
-            {
-              "return_type": "Undefined",
-              "name": "handleEvent",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+          {
+            "extended_attributes": [],
+            "callback_interface_member": [
+              "Operation",
+              {
+                "return_type": "Undefined",
+                "name": "handleEvent",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": ["Identifier", "Event"],
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": ["Identifier", "Event"],
+                    },
+                    "name": "event",
+                    "optional": false,
+                    "variadic": false,
                   },
-                  "name": "event",
-                  "optional": false,
-                  "variadic": false,
-                },
-              ],
-              "static_": false,
-            },
-          ],
+                ],
+                "static_": false,
+              },
+            ],
+          },
         ],
       },
     ],

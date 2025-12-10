@@ -74,7 +74,7 @@ pub impl ToJson for CallbackFunctionDefinition
 
 pub(all) struct CallbackInterfaceDefinition {
   name : String
-  members : Array[CallbackInterfaceMember]
+  members : Array[CallbackInterfaceMemberExtendedAttributes]
 }
 pub impl Eq for CallbackInterfaceDefinition
 pub impl Show for CallbackInterfaceDefinition
@@ -87,6 +87,14 @@ pub(all) enum CallbackInterfaceMember {
 pub impl Eq for CallbackInterfaceMember
 pub impl Show for CallbackInterfaceMember
 pub impl ToJson for CallbackInterfaceMember
+
+pub(all) struct CallbackInterfaceMemberExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  callback_interface_member : CallbackInterfaceMember
+}
+pub impl Eq for CallbackInterfaceMemberExtendedAttributes
+pub impl Show for CallbackInterfaceMemberExtendedAttributes
+pub impl ToJson for CallbackInterfaceMemberExtendedAttributes
 
 pub(all) struct ConstMember {
   type_ : Type

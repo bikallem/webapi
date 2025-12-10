@@ -41,7 +41,10 @@ pub(open) trait WebIdlVisitor {
   visit_stringifier(Self, StringifierMember) -> Unit = _
 
   // CallbackInterfaceMember visitors
-  visit_callback_interface_member(Self, CallbackInterfaceMember) -> Unit = _
+  visit_callback_interface_member(
+    Self,
+    CallbackInterfaceMemberExtendedAttributes,
+  ) -> Unit = _
 }
 
 ///|
@@ -374,9 +377,9 @@ impl WebIdlVisitor with visit_stringifier(_self, _strg) -> Unit {
 ///|
 impl WebIdlVisitor with visit_callback_interface_member(
   self,
-  memb : CallbackInterfaceMember,
+  memb : CallbackInterfaceMemberExtendedAttributes,
 ) -> Unit {
-  match memb {
+  match memb.callback_interface_member {
     Const(c) => self.visit_const(c)
     Operation(o) => self.visit_operation(o)
   }
