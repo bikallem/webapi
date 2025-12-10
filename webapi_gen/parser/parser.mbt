@@ -259,7 +259,7 @@ fn init {
 }
 
 // file:///./parser.mbty
-// 163|    ext_attr = extended_attribute_list def=definition defs = definitions  { [add_definition_ext_attrs(def, ext_attr), ..defs] }
+// 158|    ext_attr = extended_attribute_list def=definition defs = definitions  { [add_definition_ext_attrs(def, ext_attr), ..defs] }
 fn yy_action_0(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Array_ExtendedAttribute_(ext_attr)
   guard _args[1].0 is YYObj_Definition(def)
@@ -268,99 +268,99 @@ fn yy_action_0(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 }
 
 // file:///./parser.mbty
-// 167|    interface_def               { Definition::Interface($1) }
+// 162|    interface_def               { Definition::Interface($1) }
 fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_InterfaceDefinition(_dollar1)
   YYObj_Definition({();  Definition::Interface(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 168|    mixin_def                   { Definition::Mixin($1) }
+// 163|    mixin_def                   { Definition::Mixin($1) }
 fn yy_action_2(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_MixinDefinition(_dollar1)
   YYObj_Definition({();  Definition::Mixin(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 169|    partial_interface_def       { Definition::PartialInterface($1) }
+// 164|    partial_interface_def       { Definition::PartialInterface($1) }
 fn yy_action_3(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_PartialInterfaceDefinition(_dollar1)
   YYObj_Definition({();  Definition::PartialInterface(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 170|    partial_mixin_def           { Definition::PartialMixin($1) }
+// 165|    partial_mixin_def           { Definition::PartialMixin($1) }
 fn yy_action_4(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_PartialMixinDefinition(_dollar1)
   YYObj_Definition({();  Definition::PartialMixin(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 171|    namespace_def               { Definition::Namespace($1) }
+// 166|    namespace_def               { Definition::Namespace($1) }
 fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_NamespaceDefinition(_dollar1)
   YYObj_Definition({();  Definition::Namespace(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 172|    partial_namespace_def       { Definition::PartialNamespace($1) }
+// 167|    partial_namespace_def       { Definition::PartialNamespace($1) }
 fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_PartialNamespaceDefinition(_dollar1)
   YYObj_Definition({();  Definition::PartialNamespace(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 173|    dictionary_def              { Definition::Dictionary($1) }
+// 168|    dictionary_def              { Definition::Dictionary($1) }
 fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_DictionaryDefinition(_dollar1)
   YYObj_Definition({();  Definition::Dictionary(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 174|    partial_dictionary_def      { Definition::PartialDictionary($1) }
+// 169|    partial_dictionary_def      { Definition::PartialDictionary($1) }
 fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_PartialDictionaryDefinition(_dollar1)
   YYObj_Definition({();  Definition::PartialDictionary(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 175|    enum_def                    { Definition::Enum($1) }
+// 170|    enum_def                    { Definition::Enum($1) }
 fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_EnumDefinition(_dollar1)
   YYObj_Definition({();  Definition::Enum(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 176|    typedef_def                 { Definition::Typedef($1) }
+// 171|    typedef_def                 { Definition::Typedef($1) }
 fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_TypedefDefinition(_dollar1)
   YYObj_Definition({();  Definition::Typedef(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 177|    callback_def                { Definition::CallbackFunction($1) }
+// 172|    callback_def                { Definition::CallbackFunction($1) }
 fn yy_action_11(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_CallbackFunctionDefinition(_dollar1)
   YYObj_Definition({();  Definition::CallbackFunction(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 178|    callback_interface_def      { Definition::CallbackInterface($1) }
+// 173|    callback_interface_def      { Definition::CallbackInterface($1) }
 fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_CallbackInterfaceDefinition(_dollar1)
   YYObj_Definition({();  Definition::CallbackInterface(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 179|    includes_statement          { Definition::Includes($1) }
+// 174|    includes_statement          { Definition::Includes($1) }
 fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_IncludesStatement(_dollar1)
   YYObj_Definition({();  Definition::Includes(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 182|    "interface" name=IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
-// 183|      { { extended_attributes: [], name, inheritance, members } }
+// 177|    "interface" name=IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
+// 178|      { { extended_attributes: [], name, inheritance, members } }
 fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(name)
   guard _args[2].0 is YYObj_String_(inheritance)
@@ -369,8 +369,8 @@ fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 190|    "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
-// 191|      { { extended_attributes: [], name, members } }
+// 185|    "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
+// 186|      { { extended_attributes: [], name, members } }
 fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_String(name)
   guard _args[4].0 is YYObj_Array_InterfaceMember_(members)
@@ -378,8 +378,8 @@ fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 186|    "partial" "interface" name=IDENTIFIER "{" members = interface_members "}" ";"  
-// 187|      { { extended_attributes: [], name, members } }
+// 181|    "partial" "interface" name=IDENTIFIER "{" members = interface_members "}" ";"  
+// 182|      { { extended_attributes: [], name, members } }
 fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_String(name)
   guard _args[4].0 is YYObj_Array_InterfaceMember_(members)
@@ -387,8 +387,8 @@ fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 194|    "partial" "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
-// 195|      { { extended_attributes: [], name, members } }
+// 189|    "partial" "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
+// 190|      { { extended_attributes: [], name, members } }
 fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[3].0 is YYObj_String(name)
   guard _args[5].0 is YYObj_Array_InterfaceMember_(members)
@@ -396,38 +396,38 @@ fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 250|    extended_attribute_list interface_member interface_members
-// 251|      { [add_interface_member_ext_attrs($2, $1), ..$3] }
+// 245|    ext_attr=extended_attribute_list m=interface_member members=interface_members
+// 246|      { [add_interface_member_ext_attrs(m, ext_attr), ..members] }
 fn yy_action_18(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_InterfaceMember(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  guard _args[2].0 is YYObj_Array_InterfaceMember_(_dollar3)
-  YYObj_Array_InterfaceMember_({();  [add_interface_member_ext_attrs(_dollar2, _dollar1), .._dollar3] })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(ext_attr)
+  guard _args[1].0 is YYObj_InterfaceMember(m)
+  guard _args[2].0 is YYObj_Array_InterfaceMember_(members)
+  YYObj_Array_InterfaceMember_({();  [add_interface_member_ext_attrs(m, ext_attr), ..members] })
 }
 
 // file:///./parser.mbty
-// 255|    const_member                { InterfaceMember::Const($1) }
+// 250|    const_member                { InterfaceMember::Const($1) }
 fn yy_action_19(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_ConstMember(_dollar1)
   YYObj_InterfaceMember({();  InterfaceMember::Const(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 256|    constructor_member          { InterfaceMember::Constructor($1) }
+// 251|    constructor_member          { InterfaceMember::Constructor($1) }
 fn yy_action_20(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_ConstructorMember(_dollar1)
   YYObj_InterfaceMember({();  InterfaceMember::Constructor(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 257|    "stringifier" ";"           { InterfaceMember::Stringifier(StringifierMember::Bare) }
+// 252|    "stringifier" ";"           { InterfaceMember::Stringifier(StringifierMember::Bare) }
 fn yy_action_21(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_InterfaceMember({();  InterfaceMember::Stringifier(StringifierMember::Bare) })
 }
 
 // file:///./parser.mbty
-// 258|    "static" "readonly" "attribute" type IDENTIFIER ";"
-// 259|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $4, name: $5, is_readonly: true, static_: true, is_inherit: false }) }
+// 253|    "static" "readonly" "attribute" type IDENTIFIER ";"
+// 254|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $4, name: $5, is_readonly: true, static_: true, is_inherit: false }) }
 fn yy_action_22(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[3].0 is YYObj_Type(_dollar4)
   guard _args[4].0 is YYObj_String(_dollar5)
@@ -435,8 +435,8 @@ fn yy_action_22(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 260|    "static" "attribute" type IDENTIFIER ";"
-// 261|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: false, static_: true, is_inherit: false }) }
+// 255|    "static" "attribute" type IDENTIFIER ";"
+// 256|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: false, static_: true, is_inherit: false }) }
 fn yy_action_23(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[3].0 is YYObj_String(_dollar4)
@@ -444,8 +444,8 @@ fn yy_action_23(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 262|    "static" type IDENTIFIER "(" argument_list ")" ";"
-// 263|      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: Some($3), arguments: $5, static_: true, special: None }) }
+// 257|    "static" type IDENTIFIER "(" argument_list ")" ";"
+// 258|      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: Some($3), arguments: $5, static_: true, special: None }) }
 fn yy_action_24(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -454,23 +454,23 @@ fn yy_action_24(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 264|    iterable_member             { InterfaceMember::Iterable($1) }
+// 259|    iterable_member             { InterfaceMember::Iterable($1) }
 fn yy_action_25(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_IterableMember(_dollar1)
   YYObj_InterfaceMember({();  InterfaceMember::Iterable(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 265|    "async_iterable" "<" type ">" ";"
-// 266|      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: None, value_type: $3, arguments: [] }) }
+// 260|    "async_iterable" "<" type ">" ";"
+// 261|      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: None, value_type: $3, arguments: [] }) }
 fn yy_action_26(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_InterfaceMember({();  InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: None, value_type: _dollar3, arguments: [] }) })
 }
 
 // file:///./parser.mbty
-// 267|    "async_iterable" "<" type "," type ">" ";"
-// 268|      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: Some($3), value_type: $5, arguments: [] }) }
+// 262|    "async_iterable" "<" type "," type ">" ";"
+// 263|      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: Some($3), value_type: $5, arguments: [] }) }
 fn yy_action_27(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[4].0 is YYObj_Type(_dollar5)
@@ -478,22 +478,22 @@ fn yy_action_27(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 269|    "readonly" maplike_member   { InterfaceMember::Maplike({ ..$2, is_readonly: true }) }
+// 264|    "readonly" maplike_member   { InterfaceMember::Maplike({ ..$2, is_readonly: true }) }
 fn yy_action_28(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_MaplikeMember(_dollar2)
   YYObj_InterfaceMember({();  InterfaceMember::Maplike({ .._dollar2, is_readonly: true }) })
 }
 
 // file:///./parser.mbty
-// 271|    "readonly" setlike_member   { InterfaceMember::Setlike({ ..$2, is_readonly: true }) }
+// 266|    "readonly" setlike_member   { InterfaceMember::Setlike({ ..$2, is_readonly: true }) }
 fn yy_action_29(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_SetlikeMember(_dollar2)
   YYObj_InterfaceMember({();  InterfaceMember::Setlike({ .._dollar2, is_readonly: true }) })
 }
 
 // file:///./parser.mbty
-// 277|    "readonly" "attribute" type IDENTIFIER ";"
-// 278|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
+// 272|    "readonly" "attribute" type IDENTIFIER ";"
+// 273|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
 fn yy_action_30(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[3].0 is YYObj_String(_dollar4)
@@ -501,22 +501,22 @@ fn yy_action_30(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 270|    maplike_member              { InterfaceMember::Maplike($1) }
+// 265|    maplike_member              { InterfaceMember::Maplike($1) }
 fn yy_action_31(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_MaplikeMember(_dollar1)
   YYObj_InterfaceMember({();  InterfaceMember::Maplike(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 272|    setlike_member              { InterfaceMember::Setlike($1) }
+// 267|    setlike_member              { InterfaceMember::Setlike($1) }
 fn yy_action_32(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_SetlikeMember(_dollar1)
   YYObj_InterfaceMember({();  InterfaceMember::Setlike(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 273|    "inherit" "readonly" "attribute" type IDENTIFIER ";"
-// 274|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $4, name: $5, is_readonly: true, static_: false, is_inherit: true }) }
+// 268|    "inherit" "readonly" "attribute" type IDENTIFIER ";"
+// 269|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $4, name: $5, is_readonly: true, static_: false, is_inherit: true }) }
 fn yy_action_33(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[3].0 is YYObj_Type(_dollar4)
   guard _args[4].0 is YYObj_String(_dollar5)
@@ -524,8 +524,8 @@ fn yy_action_33(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 275|    "inherit" "attribute" type IDENTIFIER ";"
-// 276|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: false, static_: false, is_inherit: true }) }
+// 270|    "inherit" "attribute" type IDENTIFIER ";"
+// 271|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: false, static_: false, is_inherit: true }) }
 fn yy_action_34(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[3].0 is YYObj_String(_dollar4)
@@ -533,8 +533,8 @@ fn yy_action_34(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 279|    "attribute" type IDENTIFIER ";"
-// 280|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $2, name: $3, is_readonly: false, static_: false, is_inherit: false }) }
+// 274|    "attribute" type IDENTIFIER ";"
+// 275|      { InterfaceMember::Attribute({ extended_attributes: [], type_: $2, name: $3, is_readonly: false, static_: false, is_inherit: false }) }
 fn yy_action_35(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -542,8 +542,8 @@ fn yy_action_35(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 281|    special type IDENTIFIER "(" argument_list ")" ";"
-// 282|      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: Some($3), arguments: $5, static_: false, special: Some($1) }) }
+// 276|    special type IDENTIFIER "(" argument_list ")" ";"
+// 277|      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: Some($3), arguments: $5, static_: false, special: Some($1) }) }
 fn yy_action_36(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -553,8 +553,8 @@ fn yy_action_36(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 283|    special type "(" argument_list ")" ";"
-// 284|      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: None, arguments: $4, static_: false, special: Some($1) }) }
+// 278|    special type "(" argument_list ")" ";"
+// 279|      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: None, arguments: $4, static_: false, special: Some($1) }) }
 fn yy_action_37(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[3].0 is YYObj_Array_Argument_(_dollar4)
@@ -563,49 +563,49 @@ fn yy_action_37(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 285|    operation_member            { InterfaceMember::Operation($1) }
+// 280|    operation_member            { InterfaceMember::Operation($1) }
 fn yy_action_38(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_OperationMember(_dollar1)
   YYObj_InterfaceMember({();  InterfaceMember::Operation(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 311|    "getter"                    { Special::Getter }
+// 306|    "getter"                    { Special::Getter }
 fn yy_action_39(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Special({();  Special::Getter })
 }
 
 // file:///./parser.mbty
-// 312|    "setter"                    { Special::Setter }
+// 307|    "setter"                    { Special::Setter }
 fn yy_action_40(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Special({();  Special::Setter })
 }
 
 // file:///./parser.mbty
-// 313|    "deleter"                   { Special::Deleter }
+// 308|    "deleter"                   { Special::Deleter }
 fn yy_action_41(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Special({();  Special::Deleter })
 }
 
 // file:///./parser.mbty
-// 316|    "constructor" "(" argument_list ")" ";"
-// 317|      { { extended_attributes: [], arguments: $3 } }
+// 311|    "constructor" "(" argument_list ")" ";"
+// 312|      { { extended_attributes: [], arguments: $3 } }
 fn yy_action_42(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Array_Argument_(_dollar3)
   YYObj_ConstructorMember({();  { extended_attributes: [], arguments: _dollar3 } })
 }
 
 // file:///./parser.mbty
-// 320|    "iterable" "<" type ">" ";"
-// 321|      { { extended_attributes: [], key_type: None, value_type: $3 } }
+// 315|    "iterable" "<" type ">" ";"
+// 316|      { { extended_attributes: [], key_type: None, value_type: $3 } }
 fn yy_action_43(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_IterableMember({();  { extended_attributes: [], key_type: None, value_type: _dollar3 } })
 }
 
 // file:///./parser.mbty
-// 322|    "iterable" "<" type "," type ">" ";"
-// 323|      { { extended_attributes: [], key_type: Some($3), value_type: $5 } }
+// 317|    "iterable" "<" type "," type ">" ";"
+// 318|      { { extended_attributes: [], key_type: Some($3), value_type: $5 } }
 fn yy_action_44(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[4].0 is YYObj_Type(_dollar5)
@@ -613,8 +613,8 @@ fn yy_action_44(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 326|    "maplike" "<" type "," type ">" ";"
-// 327|      { { extended_attributes: [], key_type: $3, value_type: $5, is_readonly: false } }
+// 321|    "maplike" "<" type "," type ">" ";"
+// 322|      { { extended_attributes: [], key_type: $3, value_type: $5, is_readonly: false } }
 fn yy_action_45(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[4].0 is YYObj_Type(_dollar5)
@@ -622,22 +622,22 @@ fn yy_action_45(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 330|    "setlike" "<" type ">" ";"
-// 331|      { { extended_attributes: [], value_type: $3, is_readonly: false } }
+// 325|    "setlike" "<" type ">" ";"
+// 326|      { { extended_attributes: [], value_type: $3, is_readonly: false } }
 fn yy_action_46(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_SetlikeMember({();  { extended_attributes: [], value_type: _dollar3, is_readonly: false } })
 }
 
 // file:///./parser.mbty
-// 252|                                { [] }
+// 247|      { [] }
 fn yy_action_47(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_InterfaceMember_({();  [] })
 }
 
 // file:///./parser.mbty
-// 202|    "partial" "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
-// 203|      { { extended_attributes: [], name, members } }
+// 197|    "partial" "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
+// 198|      { { extended_attributes: [], name, members } }
 fn yy_action_48(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_String(name)
   guard _args[4].0 is YYObj_Array_NamespaceMember_(members)
@@ -645,8 +645,8 @@ fn yy_action_48(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 210|    "partial" "dictionary" name=IDENTIFIER "{" members = dictionary_members "}" ";"
-// 211|      { { extended_attributes: [], name, members } }
+// 205|    "partial" "dictionary" name=IDENTIFIER "{" members = dictionary_members "}" ";"
+// 206|      { { extended_attributes: [], name, members } }
 fn yy_action_49(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_String(name)
   guard _args[4].0 is YYObj_Array_DictionaryMember_(members)
@@ -654,8 +654,8 @@ fn yy_action_49(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 198|    "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
-// 199|      { { extended_attributes: [], name, members } }
+// 193|    "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
+// 194|      { { extended_attributes: [], name, members } }
 fn yy_action_50(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(name)
   guard _args[3].0 is YYObj_Array_NamespaceMember_(members)
@@ -663,8 +663,8 @@ fn yy_action_50(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 289|    extended_attribute_list namespace_member namespace_members
-// 290|      { [add_namespace_member_ext_attrs($2, $1), ..$3] }
+// 284|    extended_attribute_list namespace_member namespace_members
+// 285|      { [add_namespace_member_ext_attrs($2, $1), ..$3] }
 fn yy_action_51(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_NamespaceMember(_dollar2)
   guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
@@ -673,8 +673,8 @@ fn yy_action_51(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 294|    "readonly" "attribute" type IDENTIFIER ";"
-// 295|      { NamespaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
+// 289|    "readonly" "attribute" type IDENTIFIER ";"
+// 290|      { NamespaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
 fn yy_action_52(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[3].0 is YYObj_String(_dollar4)
@@ -682,8 +682,8 @@ fn yy_action_52(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 296|    type IDENTIFIER "(" argument_list ")" ";"
-// 297|      { NamespaceMember::Operation({ extended_attributes: [], return_type: $1, name: Some($2), arguments: $4, static_: false, special: None }) }
+// 291|    type IDENTIFIER "(" argument_list ")" ";"
+// 292|      { NamespaceMember::Operation({ extended_attributes: [], return_type: $1, name: Some($2), arguments: $4, static_: false, special: None }) }
 fn yy_action_53(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   guard _args[1].0 is YYObj_String(_dollar2)
@@ -692,21 +692,21 @@ fn yy_action_53(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 298|    const_member                { NamespaceMember::Const($1) }
+// 293|    const_member                { NamespaceMember::Const($1) }
 fn yy_action_54(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_ConstMember(_dollar1)
   YYObj_NamespaceMember({();  NamespaceMember::Const(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 291|                                { [] }
+// 286|                                { [] }
 fn yy_action_55(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_NamespaceMember_({();  [] })
 }
 
 // file:///./parser.mbty
-// 206|    "dictionary" name=IDENTIFIER inheritance = inheritance "{" members = dictionary_members "}" ";"
-// 207|      { { extended_attributes: [], name, inheritance, members } }
+// 201|    "dictionary" name=IDENTIFIER inheritance = inheritance "{" members = dictionary_members "}" ";"
+// 202|      { { extended_attributes: [], name, inheritance, members } }
 fn yy_action_56(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(name)
   guard _args[2].0 is YYObj_String_(inheritance)
@@ -715,8 +715,8 @@ fn yy_action_56(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 335|    extended_attribute_list dictionary_member dictionary_members
-// 336|      { [{ ..$2, extended_attributes: $1 }, ..$3] }
+// 330|    extended_attribute_list dictionary_member dictionary_members
+// 331|      { [{ ..$2, extended_attributes: $1 }, ..$3] }
 fn yy_action_57(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_DictionaryMember(_dollar2)
   guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
@@ -725,8 +725,8 @@ fn yy_action_57(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 340|    "required" type IDENTIFIER ";"
-// 341|      { { extended_attributes: [], type_: $2, name: $3, required: true, default_value: None } }
+// 335|    "required" type IDENTIFIER ";"
+// 336|      { { extended_attributes: [], type_: $2, name: $3, required: true, default_value: None } }
 fn yy_action_58(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -734,8 +734,8 @@ fn yy_action_58(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 342|    type IDENTIFIER default_value_opt ";"
-// 343|      { { extended_attributes: [], type_: $1, name: $2, required: false, default_value: $3 } }
+// 337|    type IDENTIFIER default_value_opt ";"
+// 338|      { { extended_attributes: [], type_: $1, name: $2, required: false, default_value: $3 } }
 fn yy_action_59(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   guard _args[1].0 is YYObj_String(_dollar2)
@@ -744,27 +744,27 @@ fn yy_action_59(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 337|                                { [] }
+// 332|                                { [] }
 fn yy_action_60(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_DictionaryMember_({();  [] })
 }
 
 // file:///./parser.mbty
-// 245|    ":" IDENTIFIER              { Some($2) }
+// 240|    ":" name=IDENTIFIER         { Some(name) }
 fn yy_action_61(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  YYObj_String_({();  Some(_dollar2) })
+  guard _args[1].0 is YYObj_String(name)
+  YYObj_String_({();  Some(name) })
 }
 
 // file:///./parser.mbty
-// 246|                                { None }
+// 241|                                { None }
 fn yy_action_62(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_String_({();  None })
 }
 
 // file:///./parser.mbty
-// 214|    "enum" name=IDENTIFIER "{" values = enum_value_list "}" ";"
-// 215|      { { extended_attributes: [], name, values } }
+// 209|    "enum" name=IDENTIFIER "{" values = enum_value_list "}" ";"
+// 210|      { { extended_attributes: [], name, values } }
 fn yy_action_63(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(name)
   guard _args[3].0 is YYObj_Array_String_(values)
@@ -772,7 +772,7 @@ fn yy_action_63(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 347|    STRING enum_value_list_rest { [$1, ..$2] }
+// 342|    STRING enum_value_list_rest { [$1, ..$2] }
 fn yy_action_64(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[1].0 is YYObj_Array_String_(_dollar2)
@@ -780,7 +780,7 @@ fn yy_action_64(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 350|    "," STRING enum_value_list_rest  { [$2, ..$3] }
+// 345|    "," STRING enum_value_list_rest  { [$2, ..$3] }
 fn yy_action_65(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(_dollar2)
   guard _args[2].0 is YYObj_Array_String_(_dollar3)
@@ -788,20 +788,20 @@ fn yy_action_65(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 351|    ","                              { [] }
+// 346|    ","                              { [] }
 fn yy_action_66(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_String_({();  [] })
 }
 
 // file:///./parser.mbty
-// 352|                                     { [] }
+// 347|                                     { [] }
 fn yy_action_67(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_String_({();  [] })
 }
 
 // file:///./parser.mbty
-// 218|    "typedef" type_=type name=IDENTIFIER ";"
-// 219|      { { extended_attributes: [], type_, name } }
+// 213|    "typedef" type_=type name=IDENTIFIER ";"
+// 214|      { { extended_attributes: [], type_, name } }
 fn yy_action_68(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(type_)
   guard _args[2].0 is YYObj_String(name)
@@ -809,8 +809,8 @@ fn yy_action_68(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 222|    "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";"
-// 223|      { { extended_attributes: [], name, return_type, arguments } }
+// 217|    "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";"
+// 218|      { { extended_attributes: [], name, return_type, arguments } }
 fn yy_action_69(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(name)
   guard _args[3].0 is YYObj_Type(return_type)
@@ -819,8 +819,8 @@ fn yy_action_69(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 226|    "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";"
-// 227|      { { extended_attributes: [], name, members } }
+// 221|    "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";"
+// 222|      { { extended_attributes: [], name, members } }
 fn yy_action_70(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_String(name)
   guard _args[4].0 is YYObj_Array_CallbackInterfaceMember_(members)
@@ -828,32 +828,32 @@ fn yy_action_70(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 232|    extended_attribute_list callback_interface_member callback_interface_members
-// 233|      { [add_callback_interface_member_ext_attrs($2, $1), ..$3] }
+// 227|    ext_attr=extended_attribute_list m=callback_interface_member members=callback_interface_members
+// 228|      { [add_callback_interface_member_ext_attrs(m, ext_attr), ..members] }
 fn yy_action_71(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_CallbackInterfaceMember(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  guard _args[2].0 is YYObj_Array_CallbackInterfaceMember_(_dollar3)
-  YYObj_Array_CallbackInterfaceMember_({();  [add_callback_interface_member_ext_attrs(_dollar2, _dollar1), .._dollar3] })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(ext_attr)
+  guard _args[1].0 is YYObj_CallbackInterfaceMember(m)
+  guard _args[2].0 is YYObj_Array_CallbackInterfaceMember_(members)
+  YYObj_Array_CallbackInterfaceMember_({();  [add_callback_interface_member_ext_attrs(m, ext_attr), ..members] })
 }
 
 // file:///./parser.mbty
-// 237|    operation_member            { CallbackInterfaceMember::Operation($1) }
+// 232|    op=operation_member           { CallbackInterfaceMember::Operation(op) }
 fn yy_action_72(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_OperationMember(_dollar1)
-  YYObj_CallbackInterfaceMember({();  CallbackInterfaceMember::Operation(_dollar1) })
+  guard _args[0].0 is YYObj_OperationMember(op)
+  YYObj_CallbackInterfaceMember({();  CallbackInterfaceMember::Operation(op) })
 }
 
 // file:///./parser.mbty
-// 238|    const_member                { CallbackInterfaceMember::Const($1) }
+// 233|    c=const_member                { CallbackInterfaceMember::Const(c) }
 fn yy_action_73(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_ConstMember(_dollar1)
-  YYObj_CallbackInterfaceMember({();  CallbackInterfaceMember::Const(_dollar1) })
+  guard _args[0].0 is YYObj_ConstMember(c)
+  YYObj_CallbackInterfaceMember({();  CallbackInterfaceMember::Const(c) })
 }
 
 // file:///./parser.mbty
-// 301|    "const" type IDENTIFIER "=" const_value ";"
-// 302|      { { extended_attributes: [], type_: $2, name: $3, value: $5 } }
+// 296|    "const" type IDENTIFIER "=" const_value ";"
+// 297|      { { extended_attributes: [], type_: $2, name: $3, value: $5 } }
 fn yy_action_74(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -862,8 +862,8 @@ fn yy_action_74(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 305|    type IDENTIFIER "(" argument_list ")" ";"
-// 306|      { { extended_attributes: [], return_type: $1, name: Some($2), arguments: $4, static_: false, special: None } }
+// 300|    type IDENTIFIER "(" argument_list ")" ";"
+// 301|      { { extended_attributes: [], return_type: $1, name: Some($2), arguments: $4, static_: false, special: None } }
 fn yy_action_75(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   guard _args[1].0 is YYObj_String(_dollar2)
@@ -872,8 +872,8 @@ fn yy_action_75(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 307|    type "(" argument_list ")" ";"
-// 308|      { { extended_attributes: [], return_type: $1, name: None, arguments: $3, static_: false, special: None } }
+// 302|    type "(" argument_list ")" ";"
+// 303|      { { extended_attributes: [], return_type: $1, name: None, arguments: $3, static_: false, special: None } }
 fn yy_action_76(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   guard _args[2].0 is YYObj_Array_Argument_(_dollar3)
@@ -881,28 +881,28 @@ fn yy_action_76(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 234|                                { [] }
+// 229|      { [] }
 fn yy_action_77(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_CallbackInterfaceMember_({();  [] })
 }
 
 // file:///./parser.mbty
-// 241|    IDENTIFIER "includes" IDENTIFIER ";"
-// 242|      { { extended_attributes: [], interface_name: $1, mixin_name: $3 } }
+// 236|    interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";"
+// 237|      { { extended_attributes: [], interface_name, mixin_name } }
 fn yy_action_78(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(_dollar1)
-  guard _args[2].0 is YYObj_String(_dollar3)
-  YYObj_IncludesStatement({();  { extended_attributes: [], interface_name: _dollar1, mixin_name: _dollar3 } })
+  guard _args[0].0 is YYObj_String(interface_name)
+  guard _args[2].0 is YYObj_String(mixin_name)
+  YYObj_IncludesStatement({();  { extended_attributes: [], interface_name, mixin_name } })
 }
 
 // file:///./parser.mbty
-// 164|    EOF                                             { [] }
+// 159|    EOF                                             { [] }
 fn yy_action_79(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_Definition_({();  [] })
 }
 
 // file:///./parser.mbty
-// 477|    "[" extended_attribute extended_attributes "]"  { [$2, ..$3] }
+// 472|    "[" extended_attribute extended_attributes "]"  { [$2, ..$3] }
 fn yy_action_80(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_ExtendedAttribute(_dollar2)
   guard _args[2].0 is YYObj_Array_ExtendedAttribute_(_dollar3)
@@ -910,7 +910,7 @@ fn yy_action_80(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 481|    "," extended_attribute extended_attributes  { [$2, ..$3] }
+// 476|    "," extended_attribute extended_attributes  { [$2, ..$3] }
 fn yy_action_81(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_ExtendedAttribute(_dollar2)
   guard _args[2].0 is YYObj_Array_ExtendedAttribute_(_dollar3)
@@ -918,13 +918,13 @@ fn yy_action_81(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 482|                                { [] }
+// 477|                                { [] }
 fn yy_action_82(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_ExtendedAttribute_({();  [] })
 }
 
 // file:///./parser.mbty
-// 485|    IDENTIFIER "=" IDENTIFIER "(" argument_list ")" { ExtendedAttribute::NamedArgList($1, $3, $5) }
+// 480|    IDENTIFIER "=" IDENTIFIER "(" argument_list ")" { ExtendedAttribute::NamedArgList($1, $3, $5) }
 fn yy_action_83(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -933,7 +933,7 @@ fn yy_action_83(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 486|    IDENTIFIER "=" IDENTIFIER   { ExtendedAttribute::Ident($1, $3) }
+// 481|    IDENTIFIER "=" IDENTIFIER   { ExtendedAttribute::Ident($1, $3) }
 fn yy_action_84(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -941,7 +941,7 @@ fn yy_action_84(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 487|    IDENTIFIER "=" STRING       { ExtendedAttribute::Ident($1, $3) }
+// 482|    IDENTIFIER "=" STRING       { ExtendedAttribute::Ident($1, $3) }
 fn yy_action_85(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -949,14 +949,14 @@ fn yy_action_85(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 488|    IDENTIFIER "=" "*"          { ExtendedAttribute::Wildcard($1) }
+// 483|    IDENTIFIER "=" "*"          { ExtendedAttribute::Wildcard($1) }
 fn yy_action_86(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   YYObj_ExtendedAttribute({();  ExtendedAttribute::Wildcard(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 453|    argument arguments          { [$1, ..$2] }
+// 448|    argument arguments          { [$1, ..$2] }
 fn yy_action_87(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Argument(_dollar1)
   guard _args[1].0 is YYObj_Array_Argument_(_dollar2)
@@ -964,7 +964,7 @@ fn yy_action_87(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 457|    "," argument arguments      { [$2, ..$3] }
+// 452|    "," argument arguments      { [$2, ..$3] }
 fn yy_action_88(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Argument(_dollar2)
   guard _args[2].0 is YYObj_Array_Argument_(_dollar3)
@@ -972,103 +972,103 @@ fn yy_action_88(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 458|                                { [] }
+// 453|                                { [] }
 fn yy_action_89(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_Argument_({();  [] })
 }
 
 // file:///./parser.mbty
-// 430|    "true"                      { ConstValue::Boolean(true) }
+// 425|    "true"                      { ConstValue::Boolean(true) }
 fn yy_action_90(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_ConstValue({();  ConstValue::Boolean(true) })
 }
 
 // file:///./parser.mbty
-// 431|    "false"                     { ConstValue::Boolean(false) }
+// 426|    "false"                     { ConstValue::Boolean(false) }
 fn yy_action_91(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_ConstValue({();  ConstValue::Boolean(false) })
 }
 
 // file:///./parser.mbty
-// 432|    INTEGER                     { ConstValue::Integer($1) }
+// 427|    INTEGER                     { ConstValue::Integer($1) }
 fn yy_action_92(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   YYObj_ConstValue({();  ConstValue::Integer(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 433|    FLOAT                       { ConstValue::Float($1) }
+// 428|    FLOAT                       { ConstValue::Float($1) }
 fn yy_action_93(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   YYObj_ConstValue({();  ConstValue::Float(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 434|    "Infinity"                  { ConstValue::Infinity }
+// 429|    "Infinity"                  { ConstValue::Infinity }
 fn yy_action_94(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_ConstValue({();  ConstValue::Infinity })
 }
 
 // file:///./parser.mbty
-// 435|    "-Infinity"                 { ConstValue::NegInfinity }
+// 430|    "-Infinity"                 { ConstValue::NegInfinity }
 fn yy_action_95(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_ConstValue({();  ConstValue::NegInfinity })
 }
 
 // file:///./parser.mbty
-// 436|    "NaN"                       { ConstValue::NaN }
+// 431|    "NaN"                       { ConstValue::NaN }
 fn yy_action_96(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_ConstValue({();  ConstValue::NaN })
 }
 
 // file:///./parser.mbty
-// 440|    "=" default_value           { Some($2) }
+// 435|    "=" default_value           { Some($2) }
 fn yy_action_97(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_DefaultValue(_dollar2)
   YYObj_DefaultValue_({();  Some(_dollar2) })
 }
 
 // file:///./parser.mbty
-// 444|    const_value                 { DefaultValue::ConstValue($1) }
+// 439|    const_value                 { DefaultValue::ConstValue($1) }
 fn yy_action_98(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_ConstValue(_dollar1)
   YYObj_DefaultValue({();  DefaultValue::ConstValue(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 445|    STRING                      { DefaultValue::String($1) }
+// 440|    STRING                      { DefaultValue::String($1) }
 fn yy_action_99(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   YYObj_DefaultValue({();  DefaultValue::String(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 446|    "[" "]"                     { DefaultValue::EmptySequence }
+// 441|    "[" "]"                     { DefaultValue::EmptySequence }
 fn yy_action_100(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_DefaultValue({();  DefaultValue::EmptySequence })
 }
 
 // file:///./parser.mbty
-// 447|    "{" "}"                     { DefaultValue::EmptyObject }
+// 442|    "{" "}"                     { DefaultValue::EmptyObject }
 fn yy_action_101(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_DefaultValue({();  DefaultValue::EmptyObject })
 }
 
 // file:///./parser.mbty
-// 448|    "null"                      { DefaultValue::Null }
+// 443|    "null"                      { DefaultValue::Null }
 fn yy_action_102(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_DefaultValue({();  DefaultValue::Null })
 }
 
 // file:///./parser.mbty
-// 449|    "undefined"                 { DefaultValue::Undefined }
+// 444|    "undefined"                 { DefaultValue::Undefined }
 fn yy_action_103(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_DefaultValue({();  DefaultValue::Undefined })
 }
 
 // file:///./parser.mbty
-// 465|    "optional" type_with_extended_attributes IDENTIFIER default_value_opt
-// 466|      { { extended_attributes: $2.0, type_: $2.1, name: $3, optional: true, variadic: false, default_value: $4 } }
+// 460|    "optional" type_with_extended_attributes IDENTIFIER default_value_opt
+// 461|      { { extended_attributes: $2.0, type_: $2.1, name: $3, optional: true, variadic: false, default_value: $4 } }
 fn yy_action_104(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj__Array_ExtendedAttribute___Type_(_dollar2)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -1077,14 +1077,14 @@ fn yy_action_104(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 441|                                { None }
+// 436|                                { None }
 fn yy_action_105(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_DefaultValue_({();  None })
 }
 
 // file:///./parser.mbty
-// 467|    type_with_extended_attributes "..." IDENTIFIER
-// 468|      { { extended_attributes: $1.0, type_: $1.1, name: $3, optional: false, variadic: true, default_value: None } }
+// 462|    type_with_extended_attributes "..." IDENTIFIER
+// 463|      { { extended_attributes: $1.0, type_: $1.1, name: $3, optional: false, variadic: true, default_value: None } }
 fn yy_action_106(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj__Array_ExtendedAttribute___Type_(_dollar1)
   guard _args[2].0 is YYObj_String(_dollar3)
@@ -1092,8 +1092,8 @@ fn yy_action_106(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 469|    type_with_extended_attributes IDENTIFIER
-// 470|      { { extended_attributes: $1.0, type_: $1.1, name: $2, optional: false, variadic: false, default_value: None } }
+// 464|    type_with_extended_attributes IDENTIFIER
+// 465|      { { extended_attributes: $1.0, type_: $1.1, name: $2, optional: false, variadic: false, default_value: None } }
 fn yy_action_107(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj__Array_ExtendedAttribute___Type_(_dollar1)
   guard _args[1].0 is YYObj_String(_dollar2)
@@ -1101,12 +1101,12 @@ fn yy_action_107(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 356|    single_type null_modifier   { 
-// 357|      match $2 {
-// 358|        Some(_) => Type::Nullable($1)
-// 359|        None => $1 
-// 360|      }
-// 361|    }
+// 351|    single_type null_modifier   { 
+// 352|      match $2 {
+// 353|        Some(_) => Type::Nullable($1)
+// 354|        None => $1 
+// 355|      }
+// 356|    }
 fn yy_action_108(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type_(_dollar2)
   guard _args[0].0 is YYObj_Type(_dollar1)
@@ -1119,13 +1119,13 @@ fn yy_action_108(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 362|    "(" single_type "or" single_type ")" null_modifier {
-// 363|      let union = Type::Union([$2, $4])
-// 364|      match $6 {
-// 365|        Some(_) => Type::Nullable(union)
-// 366|        None => union
-// 367|      }
-// 368|    }
+// 357|    "(" single_type "or" single_type ")" null_modifier {
+// 358|      let union = Type::Union([$2, $4])
+// 359|      match $6 {
+// 360|        Some(_) => Type::Nullable(union)
+// 361|        None => union
+// 362|      }
+// 363|    }
 fn yy_action_109(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[3].0 is YYObj_Type(_dollar4)
@@ -1140,75 +1140,75 @@ fn yy_action_109(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 425|    "?"                         { Some(Type::Void) }
+// 420|    "?"                         { Some(Type::Void) }
 fn yy_action_110(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type_({();  Some(Type::Void) })
 }
 
 // file:///./parser.mbty
-// 426|                                { None }
+// 421|                                { None }
 fn yy_action_111(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type_({();  None })
 }
 
 // file:///./parser.mbty
-// 371|    primitive_type              { $1 }
+// 366|    primitive_type              { $1 }
 fn yy_action_112(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   YYObj_Type({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 372|    string_type                 { $1 }
+// 367|    string_type                 { $1 }
 fn yy_action_113(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   YYObj_Type({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 373|    buffer_type                 { $1 }
+// 368|    buffer_type                 { $1 }
 fn yy_action_114(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   YYObj_Type({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 374|    IDENTIFIER                  { Type::Identifier($1) }
+// 369|    IDENTIFIER                  { Type::Identifier($1) }
 fn yy_action_115(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   YYObj_Type({();  Type::Identifier(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 375|    "sequence" "<" type ">"     { Type::Sequence($3) }
+// 370|    "sequence" "<" type ">"     { Type::Sequence($3) }
 fn yy_action_116(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_Type({();  Type::Sequence(_dollar3) })
 }
 
 // file:///./parser.mbty
-// 376|    "Promise" "<" type ">"      { Type::Promise($3) }
+// 371|    "Promise" "<" type ">"      { Type::Promise($3) }
 fn yy_action_117(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_Type({();  Type::Promise(_dollar3) })
 }
 
 // file:///./parser.mbty
-// 377|    "FrozenArray" "<" type ">"  { Type::FrozenArray($3) }
+// 372|    "FrozenArray" "<" type ">"  { Type::FrozenArray($3) }
 fn yy_action_118(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_Type({();  Type::FrozenArray(_dollar3) })
 }
 
 // file:///./parser.mbty
-// 378|    "ObservableArray" "<" type ">" { Type::ObservableArray($3) }
+// 373|    "ObservableArray" "<" type ">" { Type::ObservableArray($3) }
 fn yy_action_119(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_Type({();  Type::ObservableArray(_dollar3) })
 }
 
 // file:///./parser.mbty
-// 379|    "record" "<" string_type "," type ">" { Type::Record(type_to_string_type($3), $5) }
+// 374|    "record" "<" string_type "," type ">" { Type::Record(type_to_string_type($3), $5) }
 fn yy_action_120(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[4].0 is YYObj_Type(_dollar5)
@@ -1216,229 +1216,229 @@ fn yy_action_120(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 380|    "any"                       { Type::Any }
+// 375|    "any"                       { Type::Any }
 fn yy_action_121(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Any })
 }
 
 // file:///./parser.mbty
-// 381|    "object"                    { Type::Object }
+// 376|    "object"                    { Type::Object }
 fn yy_action_122(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Object })
 }
 
 // file:///./parser.mbty
-// 382|    "symbol"                    { Type::Symbol }
+// 377|    "symbol"                    { Type::Symbol }
 fn yy_action_123(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Symbol })
 }
 
 // file:///./parser.mbty
-// 383|    "undefined"                 { Type::Undefined }
+// 378|    "undefined"                 { Type::Undefined }
 fn yy_action_124(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Undefined })
 }
 
 // file:///./parser.mbty
-// 384|    "void"                      { Type::Void }
+// 379|    "void"                      { Type::Void }
 fn yy_action_125(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Void })
 }
 
 // file:///./parser.mbty
-// 387|    "boolean"                   { Type::Boolean }
+// 382|    "boolean"                   { Type::Boolean }
 fn yy_action_126(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Boolean })
 }
 
 // file:///./parser.mbty
-// 388|    "byte"                      { Type::Byte }
+// 383|    "byte"                      { Type::Byte }
 fn yy_action_127(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Byte })
 }
 
 // file:///./parser.mbty
-// 389|    "octet"                     { Type::Octet }
+// 384|    "octet"                     { Type::Octet }
 fn yy_action_128(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Octet })
 }
 
 // file:///./parser.mbty
-// 390|    "short"                     { Type::Short }
+// 385|    "short"                     { Type::Short }
 fn yy_action_129(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Short })
 }
 
 // file:///./parser.mbty
-// 391|    "unsigned" "short"          { Type::UnsignedShort }
+// 386|    "unsigned" "short"          { Type::UnsignedShort }
 fn yy_action_130(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::UnsignedShort })
 }
 
 // file:///./parser.mbty
-// 395|    "unsigned" "long" "long"    { Type::UnsignedLongLong }
+// 390|    "unsigned" "long" "long"    { Type::UnsignedLongLong }
 fn yy_action_131(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::UnsignedLongLong })
 }
 
 // file:///./parser.mbty
-// 393|    "unsigned" "long"           { Type::UnsignedLong }
+// 388|    "unsigned" "long"           { Type::UnsignedLong }
 fn yy_action_132(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::UnsignedLong })
 }
 
 // file:///./parser.mbty
-// 394|    "long" "long"               { Type::LongLong }
+// 389|    "long" "long"               { Type::LongLong }
 fn yy_action_133(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::LongLong })
 }
 
 // file:///./parser.mbty
-// 392|    "long"                      { Type::Long }
+// 387|    "long"                      { Type::Long }
 fn yy_action_134(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Long })
 }
 
 // file:///./parser.mbty
-// 396|    "float"                     { Type::Float }
+// 391|    "float"                     { Type::Float }
 fn yy_action_135(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Float })
 }
 
 // file:///./parser.mbty
-// 397|    "unrestricted" "float"      { Type::UnrestrictedFloat }
+// 392|    "unrestricted" "float"      { Type::UnrestrictedFloat }
 fn yy_action_136(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::UnrestrictedFloat })
 }
 
 // file:///./parser.mbty
-// 399|    "unrestricted" "double"     { Type::UnrestrictedDouble }
+// 394|    "unrestricted" "double"     { Type::UnrestrictedDouble }
 fn yy_action_137(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::UnrestrictedDouble })
 }
 
 // file:///./parser.mbty
-// 398|    "double"                    { Type::Double }
+// 393|    "double"                    { Type::Double }
 fn yy_action_138(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Double })
 }
 
 // file:///./parser.mbty
-// 400|    "bigint"                    { Type::Bigint }
+// 395|    "bigint"                    { Type::Bigint }
 fn yy_action_139(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Bigint })
 }
 
 // file:///./parser.mbty
-// 403|    "DOMString"                 { Type::DOMString }
+// 398|    "DOMString"                 { Type::DOMString }
 fn yy_action_140(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::DOMString })
 }
 
 // file:///./parser.mbty
-// 404|    "ByteString"                { Type::ByteString }
+// 399|    "ByteString"                { Type::ByteString }
 fn yy_action_141(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::ByteString })
 }
 
 // file:///./parser.mbty
-// 405|    "USVString"                 { Type::USVString }
+// 400|    "USVString"                 { Type::USVString }
 fn yy_action_142(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::USVString })
 }
 
 // file:///./parser.mbty
-// 408|    "ArrayBuffer"               { Type::ArrayBuffer }
+// 403|    "ArrayBuffer"               { Type::ArrayBuffer }
 fn yy_action_143(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::ArrayBuffer })
 }
 
 // file:///./parser.mbty
-// 409|    "SharedArrayBuffer"         { Type::SharedArrayBuffer }
+// 404|    "SharedArrayBuffer"         { Type::SharedArrayBuffer }
 fn yy_action_144(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::SharedArrayBuffer })
 }
 
 // file:///./parser.mbty
-// 410|    "DataView"                  { Type::DataView }
+// 405|    "DataView"                  { Type::DataView }
 fn yy_action_145(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::DataView })
 }
 
 // file:///./parser.mbty
-// 411|    "Int8Array"                 { Type::Int8Array }
+// 406|    "Int8Array"                 { Type::Int8Array }
 fn yy_action_146(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Int8Array })
 }
 
 // file:///./parser.mbty
-// 412|    "Int16Array"                { Type::Int16Array }
+// 407|    "Int16Array"                { Type::Int16Array }
 fn yy_action_147(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Int16Array })
 }
 
 // file:///./parser.mbty
-// 413|    "Int32Array"                { Type::Int32Array }
+// 408|    "Int32Array"                { Type::Int32Array }
 fn yy_action_148(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Int32Array })
 }
 
 // file:///./parser.mbty
-// 414|    "Uint8Array"                { Type::Uint8Array }
+// 409|    "Uint8Array"                { Type::Uint8Array }
 fn yy_action_149(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Uint8Array })
 }
 
 // file:///./parser.mbty
-// 415|    "Uint16Array"               { Type::Uint16Array }
+// 410|    "Uint16Array"               { Type::Uint16Array }
 fn yy_action_150(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Uint16Array })
 }
 
 // file:///./parser.mbty
-// 416|    "Uint32Array"               { Type::Uint32Array }
+// 411|    "Uint32Array"               { Type::Uint32Array }
 fn yy_action_151(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Uint32Array })
 }
 
 // file:///./parser.mbty
-// 417|    "Uint8ClampedArray"         { Type::Uint8ClampedArray }
+// 412|    "Uint8ClampedArray"         { Type::Uint8ClampedArray }
 fn yy_action_152(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Uint8ClampedArray })
 }
 
 // file:///./parser.mbty
-// 418|    "BigInt64Array"             { Type::BigInt64Array }
+// 413|    "BigInt64Array"             { Type::BigInt64Array }
 fn yy_action_153(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::BigInt64Array })
 }
 
 // file:///./parser.mbty
-// 419|    "BigUint64Array"            { Type::BigUint64Array }
+// 414|    "BigUint64Array"            { Type::BigUint64Array }
 fn yy_action_154(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::BigUint64Array })
 }
 
 // file:///./parser.mbty
-// 420|    "Float16Array"              { Type::Float16Array }
+// 415|    "Float16Array"              { Type::Float16Array }
 fn yy_action_155(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Float16Array })
 }
 
 // file:///./parser.mbty
-// 421|    "Float32Array"              { Type::Float32Array }
+// 416|    "Float32Array"              { Type::Float32Array }
 fn yy_action_156(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Float32Array })
 }
 
 // file:///./parser.mbty
-// 422|    "Float64Array"              { Type::Float64Array }
+// 417|    "Float64Array"              { Type::Float64Array }
 fn yy_action_157(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Type({();  Type::Float64Array })
 }
 
 // file:///./parser.mbty
-// 473|    extended_attribute_list type  { ($1, $2) }
+// 468|    extended_attribute_list type  { ($1, $2) }
 fn yy_action_158(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
   guard _args[1].0 is YYObj_Type(_dollar2)
@@ -1446,7 +1446,7 @@ fn yy_action_158(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 489|    IDENTIFIER "(" argument_list ")"  { ExtendedAttribute::ArgList($1, $3) }
+// 484|    IDENTIFIER "(" argument_list ")"  { ExtendedAttribute::ArgList($1, $3) }
 fn yy_action_159(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[2].0 is YYObj_Array_Argument_(_dollar3)
@@ -1454,20 +1454,20 @@ fn yy_action_159(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 454|                                { [] }
+// 449|                                { [] }
 fn yy_action_160(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_Argument_({();  [] })
 }
 
 // file:///./parser.mbty
-// 490|    IDENTIFIER                  { ExtendedAttribute::NoArgs($1) }
+// 485|    IDENTIFIER                  { ExtendedAttribute::NoArgs($1) }
 fn yy_action_161(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   YYObj_ExtendedAttribute({();  ExtendedAttribute::NoArgs(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 478|                                { [] }
+// 473|                                { [] }
 fn yy_action_162(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Array_ExtendedAttribute_({();  [] })
 }
