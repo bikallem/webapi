@@ -226,10 +226,9 @@ interface_member -> InterfaceMember:
   | "attribute" type_=type name=IDENTIFIER ";"
       { Attribute({ type_, name, is_readonly: false, static_: false, is_inherit: false }) }
   | special=special return_type=type name=operation_name "(" arguments=argument_list ")" ";"
-      { SpecialOperation({ return_type, name, arguments, special }) } 
-  | "static" op=regular_operation_member
-      { RegularOperation({ ..op, static_: true }) }
-  | op=regular_operation_member   { RegularOperation(op) }
+      { SpecialOperation({ return_type, name, arguments, special }) }
+  | "static" op=regular_operation_member  { RegularOperation({ ..op, static_: true }) }
+  | op=regular_operation_member           { RegularOperation(op) }
 
 regular_operation_member -> RegularOperationMember:
   | return_type=type name=IDENTIFIER "(" arguments=argument_list ")" ";"
