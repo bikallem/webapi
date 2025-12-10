@@ -1,5 +1,6 @@
 ///|
 using @parser {
+  type DefinitionExtendedAttributes,
   type InterfaceMember,
   type DictionaryMember,
   type EnumDefinition,
@@ -8,7 +9,6 @@ using @parser {
   type CallbackInterfaceDefinition,
   type CallbackInterfaceMember,
   type IncludesStatement,
-  type Definition,
   type InterfaceDefinition,
   type PartialInterfaceDefinition,
   type PartialMixinDefinition,

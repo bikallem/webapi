@@ -16,7 +16,6 @@ test "filter_idl with empty config returns all types" {
     "dictionaries": { "EventInit": { "name": "EventInit", "members": [] } },
     "enums": {
       "ScrollBehavior": {
-        "extended_attributes": [],
         "name": "ScrollBehavior",
         "values": ["auto", "smooth"],
       },
@@ -88,7 +87,6 @@ test "filter_idl excludes callbacks" {
     "typedefs": {},
     "callbacks": {
       "EventListener": {
-        "extended_attributes": [],
         "name": "EventListener",
         "return_type": "Undefined",
         "arguments": [
@@ -134,11 +132,7 @@ test "filter_idl excludes typedefs" {
     "dictionaries": {},
     "enums": {},
     "typedefs": {
-      "DOMTimeStamp": {
-        "extended_attributes": [],
-        "type_": "UnsignedLongLong",
-        "name": "DOMTimeStamp",
-      },
+      "DOMTimeStamp": { "type_": "UnsignedLongLong", "name": "DOMTimeStamp" },
     },
     "callbacks": {},
     "registry": {

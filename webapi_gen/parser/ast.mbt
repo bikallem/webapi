@@ -289,9 +289,14 @@ pub(all) enum Definition {
 } derive(Show, Eq, ToJson)
 
 ///|
+pub(all) struct DefinitionExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  definition : Definition
+} derive(Show, Eq, ToJson)
+
+///|
 /// Interface definition
 pub(all) struct InterfaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   inheritance : String?
   members : Array[InterfaceMember]
@@ -300,7 +305,6 @@ pub(all) struct InterfaceDefinition {
 ///|
 /// Partial interface definition
 pub(all) struct PartialInterfaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
 } derive(Show, Eq, ToJson)
@@ -308,7 +312,6 @@ pub(all) struct PartialInterfaceDefinition {
 ///|
 /// Mixin definition
 pub(all) struct MixinDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
 } derive(Show, Eq, ToJson)
@@ -316,7 +319,6 @@ pub(all) struct MixinDefinition {
 ///|
 /// Partial mixin definition
 pub(all) struct PartialMixinDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
 } derive(Show, Eq, ToJson)
@@ -324,7 +326,6 @@ pub(all) struct PartialMixinDefinition {
 ///|
 /// Namespace definition
 pub(all) struct NamespaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
 } derive(Show, Eq, ToJson)
@@ -332,7 +333,6 @@ pub(all) struct NamespaceDefinition {
 ///|
 /// Partial namespace definition
 pub(all) struct PartialNamespaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
 } derive(Show, Eq, ToJson)
@@ -340,7 +340,6 @@ pub(all) struct PartialNamespaceDefinition {
 ///|
 /// Dictionary definition
 pub(all) struct DictionaryDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   inheritance : String?
   members : Array[DictionaryMember]
@@ -349,7 +348,6 @@ pub(all) struct DictionaryDefinition {
 ///|
 /// Partial dictionary definition
 pub(all) struct PartialDictionaryDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[DictionaryMember]
 } derive(Show, Eq, ToJson)
@@ -357,7 +355,6 @@ pub(all) struct PartialDictionaryDefinition {
 ///|
 /// Enum definition
 pub(all) struct EnumDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   values : Array[String]
 } derive(Show, Eq, ToJson)
@@ -365,7 +362,6 @@ pub(all) struct EnumDefinition {
 ///|
 /// Typedef definition
 pub(all) struct TypedefDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
 } derive(Show, Eq, ToJson)
@@ -373,7 +369,6 @@ pub(all) struct TypedefDefinition {
 ///|
 /// Callback function definition
 pub(all) struct CallbackFunctionDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   return_type : Type
   arguments : Array[Argument]
@@ -382,7 +377,6 @@ pub(all) struct CallbackFunctionDefinition {
 ///|
 /// Callback interface definition
 pub(all) struct CallbackInterfaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[CallbackInterfaceMember]
 } derive(Show, Eq, ToJson)

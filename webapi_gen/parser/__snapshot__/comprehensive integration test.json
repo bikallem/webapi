@@ -1,727 +1,766 @@
 [
-  [
-    "Interface",
-    {
-      "extended_attributes": [
-        [
-          "Ident",
-          "Exposed",
-          "Window"
-        ]
-      ],
-      "name": "EventTarget",
-      "members": [
-        [
-          "Constructor",
-          {
-            "extended_attributes": [],
-            "arguments": []
-          }
-        ],
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": "Undefined",
-            "name": "addEventListener",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "type",
-                "optional": false,
-                "variadic": false
-              },
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": [
-                    "Nullable",
-                    [
-                      "Identifier",
-                      "EventListener"
-                    ]
-                  ]
-                },
-                "name": "listener",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false
-          }
-        ],
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": "Boolean",
-            "name": "dispatchEvent",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": [
-                    "Identifier",
-                    "Event"
-                  ]
-                },
-                "name": "event",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false
-          }
-        ]
+  {
+    "extended_attributes": [
+      [
+        "Ident",
+        "Exposed",
+        "Window"
       ]
-    }
-  ],
-  [
-    "CallbackInterface",
-    {
-      "extended_attributes": [],
-      "name": "EventListener",
-      "members": [
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": "Undefined",
-            "name": "handleEvent",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": [
-                    "Identifier",
-                    "Event"
-                  ]
-                },
-                "name": "event",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "PartialInterface",
-    {
-      "extended_attributes": [
-        [
-          "Ident",
-          "Exposed",
-          "Window"
-        ]
-      ],
-      "name": "Document",
-      "members": [
-        [
-          "Attribute",
-          {
-            "extended_attributes": [],
-            "type_": [
-              "Nullable",
-              [
-                "Identifier",
-                "Element"
-              ]
-            ],
-            "name": "documentElement",
-            "is_readonly": true,
-            "static_": false,
-            "is_inherit": false
-          }
-        ],
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": [
-              "Nullable",
-              [
-                "Identifier",
-                "Element"
-              ]
-            ],
-            "name": "getElementById",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "elementId",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "Mixin",
-    {
-      "extended_attributes": [],
-      "name": "WindowEventHandlers",
-      "members": [
-        [
-          "Attribute",
-          {
-            "extended_attributes": [],
-            "type_": [
-              "Nullable",
-              [
-                "Identifier",
-                "EventHandler"
-              ]
-            ],
-            "name": "onload",
-            "is_readonly": false,
-            "static_": false,
-            "is_inherit": false
-          }
-        ],
-        [
-          "Attribute",
-          {
-            "extended_attributes": [],
-            "type_": [
-              "Nullable",
-              [
-                "Identifier",
-                "EventHandler"
-              ]
-            ],
-            "name": "onerror",
-            "is_readonly": false,
-            "static_": false,
-            "is_inherit": false
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "PartialMixin",
-    {
-      "extended_attributes": [],
-      "name": "GlobalEventHandlers",
-      "members": [
-        [
-          "Attribute",
-          {
-            "extended_attributes": [],
-            "type_": [
-              "Nullable",
-              [
-                "Identifier",
-                "EventHandler"
-              ]
-            ],
-            "name": "onclick",
-            "is_readonly": false,
-            "static_": false,
-            "is_inherit": false
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "Namespace",
-    {
-      "extended_attributes": [],
-      "name": "CSS",
-      "members": [
-        [
-          "Attribute",
-          {
-            "extended_attributes": [],
-            "type_": "DOMString",
-            "name": "cssText",
-            "is_readonly": true,
-            "static_": false,
-            "is_inherit": false
-          }
-        ],
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": "Boolean",
-            "name": "supports",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "property",
-                "optional": false,
-                "variadic": false
-              },
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "value",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "PartialNamespace",
-    {
-      "extended_attributes": [],
-      "name": "CSS",
-      "members": [
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": [
-              "Identifier",
-              "CSSStyleDeclaration"
-            ],
-            "name": "parseStyleValue",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "property",
-                "optional": false,
-                "variadic": false
-              },
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "value",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "Dictionary",
-    {
-      "extended_attributes": [],
-      "name": "AddEventListenerOptions",
-      "inheritance": "EventListenerOptions",
-      "members": [
-        {
-          "extended_attributes": [],
-          "type_": "Boolean",
-          "name": "passive",
-          "required": false,
-          "default_value": [
-            "ConstValue",
-            [
-              "Boolean",
-              false
-            ]
-          ]
-        },
-        {
-          "extended_attributes": [],
-          "type_": "Boolean",
-          "name": "once",
-          "required": false,
-          "default_value": [
-            "ConstValue",
-            [
-              "Boolean",
-              false
-            ]
-          ]
-        }
-      ]
-    }
-  ],
-  [
-    "Dictionary",
-    {
-      "extended_attributes": [],
-      "name": "EventListenerOptions",
-      "members": [
-        {
-          "extended_attributes": [],
-          "type_": "Boolean",
-          "name": "capture",
-          "required": false,
-          "default_value": [
-            "ConstValue",
-            [
-              "Boolean",
-              false
-            ]
-          ]
-        }
-      ]
-    }
-  ],
-  [
-    "PartialDictionary",
-    {
-      "extended_attributes": [],
-      "name": "RequestInit",
-      "members": [
-        {
-          "extended_attributes": [],
-          "type_": "DOMString",
-          "name": "method",
-          "required": false
-        },
-        {
-          "extended_attributes": [],
-          "type_": [
-            "Identifier",
-            "HeadersInit"
-          ],
-          "name": "headers",
-          "required": true
-        }
-      ]
-    }
-  ],
-  [
-    "Enum",
-    {
-      "extended_attributes": [],
-      "name": "ScrollBehavior",
-      "values": [
-        "auto",
-        "instant",
-        "smooth"
-      ]
-    }
-  ],
-  [
-    "Typedef",
-    {
-      "extended_attributes": [],
-      "type_": [
-        "Sequence",
-        "DOMString"
-      ],
-      "name": "DOMStringList"
-    }
-  ],
-  [
-    "CallbackFunction",
-    {
-      "extended_attributes": [],
-      "name": "EventHandler",
-      "return_type": "Undefined",
-      "arguments": [
-        {
-          "extended_attributes": [],
-          "type_": {
-            "extended_attributes": [],
-            "type_": [
-              "Identifier",
-              "Event"
-            ]
-          },
-          "name": "ev",
-          "optional": false,
-          "variadic": false
-        }
-      ]
-    }
-  ],
-  [
-    "Includes",
-    {
-      "extended_attributes": [],
-      "interface_name": "Window",
-      "mixin_name": "WindowEventHandlers"
-    }
-  ],
-  [
-    "Interface",
-    {
-      "extended_attributes": [],
-      "name": "HTMLCollection",
-      "inheritance": "Node",
-      "members": [
-        [
-          "Attribute",
-          {
-            "extended_attributes": [],
-            "type_": "UnsignedLong",
-            "name": "length",
-            "is_readonly": true,
-            "static_": false,
-            "is_inherit": false
-          }
-        ],
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": [
-              "Nullable",
-              [
-                "Identifier",
-                "Element"
-              ]
-            ],
-            "name": "item",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "UnsignedLong"
-                },
-                "name": "index",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false,
-            "special": "Getter"
-          }
-        ],
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": [
-              "Nullable",
-              [
-                "Identifier",
-                "Element"
-              ]
-            ],
-            "name": "namedItem",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "name",
-                "optional": false,
-                "variadic": false
-              }
-            ],
-            "static_": false,
-            "special": "Getter"
-          }
-        ],
-        [
-          "Iterable",
-          {
-            "extended_attributes": [],
-            "value_type": [
-              "Identifier",
-              "Element"
-            ]
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "Interface",
-    {
-      "extended_attributes": [],
-      "name": "Headers",
-      "members": [
-        [
-          "Maplike",
-          {
-            "extended_attributes": [],
-            "key_type": "DOMString",
-            "value_type": "DOMString",
-            "is_readonly": true
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "Interface",
-    {
-      "extended_attributes": [],
-      "name": "DOMTokenList",
-      "members": [
-        [
-          "Setlike",
-          {
-            "extended_attributes": [],
-            "value_type": "DOMString",
-            "is_readonly": false
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "Interface",
-    {
-      "extended_attributes": [
-        [
-          "Ident",
-          "Exposed",
-          "Window"
-        ]
-      ],
-      "name": "URL",
-      "members": [
-        [
-          "Constructor",
-          {
-            "extended_attributes": [],
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "url",
-                "optional": false,
-                "variadic": false
-              },
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "base",
-                "optional": true,
-                "variadic": false
-              }
-            ]
-          }
-        ],
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": "Boolean",
-            "name": "canParse",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "url",
-                "optional": false,
-                "variadic": false
-              },
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": "DOMString"
-                },
-                "name": "base",
-                "optional": true,
-                "variadic": false
-              }
-            ],
-            "static_": true
-          }
-        ]
-      ]
-    }
-  ],
-  [
-    "Interface",
-    {
-      "extended_attributes": [
-        [
-          "Ident",
-          "Exposed",
-          "Window"
-        ],
-        [
-          "NamedArgList",
-          "LegacyFactoryFunction",
-          "Image",
+    ],
+    "definition": [
+      "Interface",
+      {
+        "name": "EventTarget",
+        "members": [
           [
+            "Constructor",
             {
               "extended_attributes": [],
-              "type_": {
-                "extended_attributes": [],
-                "type_": "DOMString"
-              },
-              "name": "src",
-              "optional": true,
-              "variadic": false
+              "arguments": []
+            }
+          ],
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "Undefined",
+              "name": "addEventListener",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "type",
+                  "optional": false,
+                  "variadic": false
+                },
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": [
+                      "Nullable",
+                      [
+                        "Identifier",
+                        "EventListener"
+                      ]
+                    ]
+                  },
+                  "name": "listener",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false
+            }
+          ],
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "Boolean",
+              "name": "dispatchEvent",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": [
+                      "Identifier",
+                      "Event"
+                    ]
+                  },
+                  "name": "event",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false
             }
           ]
         ]
-      ],
-      "name": "HTMLImageElement",
-      "inheritance": "HTMLElement",
-      "members": [
-        [
-          "Attribute",
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "CallbackInterface",
+      {
+        "name": "EventListener",
+        "members": [
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "Undefined",
+              "name": "handleEvent",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": [
+                      "Identifier",
+                      "Event"
+                    ]
+                  },
+                  "name": "event",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [
+      [
+        "Ident",
+        "Exposed",
+        "Window"
+      ]
+    ],
+    "definition": [
+      "PartialInterface",
+      {
+        "name": "Document",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": [
+                "Nullable",
+                [
+                  "Identifier",
+                  "Element"
+                ]
+              ],
+              "name": "documentElement",
+              "is_readonly": true,
+              "static_": false,
+              "is_inherit": false
+            }
+          ],
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": [
+                "Nullable",
+                [
+                  "Identifier",
+                  "Element"
+                ]
+              ],
+              "name": "getElementById",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "elementId",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Mixin",
+      {
+        "name": "WindowEventHandlers",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": [
+                "Nullable",
+                [
+                  "Identifier",
+                  "EventHandler"
+                ]
+              ],
+              "name": "onload",
+              "is_readonly": false,
+              "static_": false,
+              "is_inherit": false
+            }
+          ],
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": [
+                "Nullable",
+                [
+                  "Identifier",
+                  "EventHandler"
+                ]
+              ],
+              "name": "onerror",
+              "is_readonly": false,
+              "static_": false,
+              "is_inherit": false
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "PartialMixin",
+      {
+        "name": "GlobalEventHandlers",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": [
+                "Nullable",
+                [
+                  "Identifier",
+                  "EventHandler"
+                ]
+              ],
+              "name": "onclick",
+              "is_readonly": false,
+              "static_": false,
+              "is_inherit": false
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Namespace",
+      {
+        "name": "CSS",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": "DOMString",
+              "name": "cssText",
+              "is_readonly": true,
+              "static_": false,
+              "is_inherit": false
+            }
+          ],
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "Boolean",
+              "name": "supports",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "property",
+                  "optional": false,
+                  "variadic": false
+                },
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "value",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "PartialNamespace",
+      {
+        "name": "CSS",
+        "members": [
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": [
+                "Identifier",
+                "CSSStyleDeclaration"
+              ],
+              "name": "parseStyleValue",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "property",
+                  "optional": false,
+                  "variadic": false
+                },
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "value",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Dictionary",
+      {
+        "name": "AddEventListenerOptions",
+        "inheritance": "EventListenerOptions",
+        "members": [
+          {
+            "extended_attributes": [],
+            "type_": "Boolean",
+            "name": "passive",
+            "required": false,
+            "default_value": [
+              "ConstValue",
+              [
+                "Boolean",
+                false
+              ]
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "type_": "Boolean",
+            "name": "once",
+            "required": false,
+            "default_value": [
+              "ConstValue",
+              [
+                "Boolean",
+                false
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Dictionary",
+      {
+        "name": "EventListenerOptions",
+        "members": [
+          {
+            "extended_attributes": [],
+            "type_": "Boolean",
+            "name": "capture",
+            "required": false,
+            "default_value": [
+              "ConstValue",
+              [
+                "Boolean",
+                false
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "PartialDictionary",
+      {
+        "name": "RequestInit",
+        "members": [
           {
             "extended_attributes": [],
             "type_": "DOMString",
-            "name": "src",
-            "is_readonly": false,
-            "static_": false,
-            "is_inherit": false
-          }
-        ],
-        [
-          "Attribute",
+            "name": "method",
+            "required": false
+          },
           {
             "extended_attributes": [],
-            "type_": "UnsignedLong",
-            "name": "width",
-            "is_readonly": true,
-            "static_": false,
-            "is_inherit": false
+            "type_": [
+              "Identifier",
+              "HeadersInit"
+            ],
+            "name": "headers",
+            "required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Enum",
+      {
+        "name": "ScrollBehavior",
+        "values": [
+          "auto",
+          "instant",
+          "smooth"
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Typedef",
+      {
+        "type_": [
+          "Sequence",
+          "DOMString"
+        ],
+        "name": "DOMStringList"
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "CallbackFunction",
+      {
+        "name": "EventHandler",
+        "return_type": "Undefined",
+        "arguments": [
+          {
+            "extended_attributes": [],
+            "type_": {
+              "extended_attributes": [],
+              "type_": [
+                "Identifier",
+                "Event"
+              ]
+            },
+            "name": "ev",
+            "optional": false,
+            "variadic": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Includes",
+      {
+        "extended_attributes": [],
+        "interface_name": "Window",
+        "mixin_name": "WindowEventHandlers"
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Interface",
+      {
+        "name": "HTMLCollection",
+        "inheritance": "Node",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": "UnsignedLong",
+              "name": "length",
+              "is_readonly": true,
+              "static_": false,
+              "is_inherit": false
+            }
+          ],
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": [
+                "Nullable",
+                [
+                  "Identifier",
+                  "Element"
+                ]
+              ],
+              "name": "item",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "UnsignedLong"
+                  },
+                  "name": "index",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false,
+              "special": "Getter"
+            }
+          ],
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": [
+                "Nullable",
+                [
+                  "Identifier",
+                  "Element"
+                ]
+              ],
+              "name": "namedItem",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "name",
+                  "optional": false,
+                  "variadic": false
+                }
+              ],
+              "static_": false,
+              "special": "Getter"
+            }
+          ],
+          [
+            "Iterable",
+            {
+              "extended_attributes": [],
+              "value_type": [
+                "Identifier",
+                "Element"
+              ]
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Interface",
+      {
+        "name": "Headers",
+        "members": [
+          [
+            "Maplike",
+            {
+              "extended_attributes": [],
+              "key_type": "DOMString",
+              "value_type": "DOMString",
+              "is_readonly": true
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [],
+    "definition": [
+      "Interface",
+      {
+        "name": "DOMTokenList",
+        "members": [
+          [
+            "Setlike",
+            {
+              "extended_attributes": [],
+              "value_type": "DOMString",
+              "is_readonly": false
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [
+      [
+        "Ident",
+        "Exposed",
+        "Window"
+      ]
+    ],
+    "definition": [
+      "Interface",
+      {
+        "name": "URL",
+        "members": [
+          [
+            "Constructor",
+            {
+              "extended_attributes": [],
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "url",
+                  "optional": false,
+                  "variadic": false
+                },
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "base",
+                  "optional": true,
+                  "variadic": false
+                }
+              ]
+            }
+          ],
+          [
+            "Operation",
+            {
+              "extended_attributes": [],
+              "return_type": "Boolean",
+              "name": "canParse",
+              "arguments": [
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "url",
+                  "optional": false,
+                  "variadic": false
+                },
+                {
+                  "extended_attributes": [],
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "DOMString"
+                  },
+                  "name": "base",
+                  "optional": true,
+                  "variadic": false
+                }
+              ],
+              "static_": true
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "extended_attributes": [
+      [
+        "Ident",
+        "Exposed",
+        "Window"
+      ],
+      [
+        "NamedArgList",
+        "LegacyFactoryFunction",
+        "Image",
+        [
+          {
+            "extended_attributes": [],
+            "type_": {
+              "extended_attributes": [],
+              "type_": "DOMString"
+            },
+            "name": "src",
+            "optional": true,
+            "variadic": false
           }
         ]
       ]
-    }
-  ]
+    ],
+    "definition": [
+      "Interface",
+      {
+        "name": "HTMLImageElement",
+        "inheritance": "HTMLElement",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": "DOMString",
+              "name": "src",
+              "is_readonly": false,
+              "static_": false,
+              "is_inherit": false
+            }
+          ],
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": "UnsignedLong",
+              "name": "width",
+              "is_readonly": true,
+              "static_": false,
+              "is_inherit": false
+            }
+          ]
+        ]
+      }
+    ]
+  }
 ]

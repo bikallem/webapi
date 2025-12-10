@@ -120,9 +120,10 @@
 
 %%
 
-definitions -> Array[Definition]:
-  | ext_attr = extended_attribute_list def=definition defs = definitions  { [add_definition_ext_attrs(def, ext_attr), ..defs] }
-  | EOF                                             { [] }
+definitions -> Array[DefinitionExtendedAttributes]:
+  | extended_attributes = extended_attribute_list definition=definition defs=definitions  
+    { [{extended_attributes, definition}, ..defs] }
+  | EOF { [] }
 
 definition -> Definition:
   | interface_def               { Definition::Interface($1) }
@@ -139,54 +140,51 @@ definition -> Definition:
   | callback_interface_def      { Definition::CallbackInterface($1) }
   | includes_statement          { Definition::Includes($1) }
 
+// Interface definitions
 interface_def -> InterfaceDefinition:
-  | "interface" name=IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
-      { { extended_attributes: [], name, inheritance, members } }
+  | "interface" name=IDENTIFIER inheritance=inheritance "{" members=interface_members "}" ";" { { name, inheritance, members } }
 
 partial_interface_def -> PartialInterfaceDefinition:
-  | "partial" "interface" name=IDENTIFIER "{" members = interface_members "}" ";"  
-      { { extended_attributes: [], name, members } }
+  | "partial" "interface" name=IDENTIFIER "{" members=interface_members "}" ";"  { { name, members } }
 
 mixin_def -> MixinDefinition:
-  | "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
-      { { extended_attributes: [], name, members } }
+  | "interface" "mixin" name=IDENTIFIER "{" members=interface_members "}" ";" { { name, members } }
 
 partial_mixin_def -> PartialMixinDefinition:
-  | "partial" "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
-      { { extended_attributes: [], name, members } }
+  | "partial" "interface" "mixin" name=IDENTIFIER "{" members=interface_members "}" ";" { { name, members } }
 
 namespace_def -> NamespaceDefinition:
-  | "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
-      { { extended_attributes: [], name, members } }
+  | "namespace" name=IDENTIFIER "{" members=namespace_members "}" ";" { { name, members } }
 
 partial_namespace_def -> PartialNamespaceDefinition:
-  | "partial" "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
-      { { extended_attributes: [], name, members } }
+  | "partial" "namespace" name=IDENTIFIER "{" members=namespace_members "}" ";" { { name, members } }
 
 dictionary_def -> DictionaryDefinition:
-  | "dictionary" name=IDENTIFIER inheritance = inheritance "{" members = dictionary_members "}" ";"
-      { { extended_attributes: [], name, inheritance, members } }
+  | "dictionary" name=IDENTIFIER inheritance=inheritance "{" members=dictionary_members "}" ";" { { name, inheritance, members } }
 
 partial_dictionary_def -> PartialDictionaryDefinition:
-  | "partial" "dictionary" name=IDENTIFIER "{" members = dictionary_members "}" ";"
-      { { extended_attributes: [], name, members } }
+  | "partial" "dictionary" name=IDENTIFIER "{" members=dictionary_members "}" ";" { { name, members } }
 
 enum_def -> EnumDefinition:
-  | "enum" name=IDENTIFIER "{" values = enum_value_list "}" ";"
-      { { extended_attributes: [], name, values } }
+  | "enum" name=IDENTIFIER "{" values=enum_value_list "}" ";" { { name, values } }
       
 typedef_def -> TypedefDefinition:
-  | "typedef" type_=type name=IDENTIFIER ";"
-      { { extended_attributes: [], type_, name } }
+  | "typedef" type_=type name=IDENTIFIER ";" { { type_, name } }
 
 callback_def -> CallbackFunctionDefinition:
-  | "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";"
-      { { extended_attributes: [], name, return_type, arguments } }
+  | "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";" { { name, return_type, arguments } }
 
 callback_interface_def -> CallbackInterfaceDefinition:
-  | "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";"
-      { { extended_attributes: [], name, members } }
+  | "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";" { { name, members } }
 
+includes_statement -> IncludesStatement:
+  | interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";" { { extended_attributes: [], interface_name, mixin_name } }
+
+inheritance -> String?:
+  | ":" name=IDENTIFIER         { Some(name) }
+  |                             { None }
+
+// Callback interface members
 callback_interface_members -> Array[CallbackInterfaceMember]:
   | ext_attr=extended_attribute_list m=callback_interface_member members=callback_interface_members
       { [add_callback_interface_member_ext_attrs(m, ext_attr), ..members] }
@@ -195,14 +193,6 @@ callback_interface_members -> Array[CallbackInterfaceMember]:
 callback_interface_member -> CallbackInterfaceMember:
   | op=operation_member           { CallbackInterfaceMember::Operation(op) }
   | c=const_member                { CallbackInterfaceMember::Const(c) }
-
-includes_statement -> IncludesStatement:
-  | interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";"
-      { { extended_attributes: [], interface_name, mixin_name } }
-
-inheritance -> String?:
-  | ":" name=IDENTIFIER         { Some(name) }
-  |                             { None }
 
 // Interface members
 interface_members -> Array[InterfaceMember]:
@@ -518,27 +508,6 @@ extended_attribute -> ExtendedAttribute:
 %{
 
 // Helper functions
-
-fn add_definition_ext_attrs(d : Definition, extended_attributes : Array[ExtendedAttribute]) -> Definition {
-  guard extended_attributes.length() > 0 else {
-    return d
-  }
-  match d {
-    Definition::Interface(i) => Definition::Interface({ ..i, extended_attributes })
-    Definition::PartialInterface(pi) => Definition::PartialInterface({ ..pi, extended_attributes })
-    Definition::Mixin(m) => Definition::Mixin({ ..m, extended_attributes })
-    Definition::PartialMixin(pm) => Definition::PartialMixin({ ..pm, extended_attributes })
-    Definition::Namespace(n) => Definition::Namespace({ ..n, extended_attributes })
-    Definition::PartialNamespace(pn) => Definition::PartialNamespace({ ..pn, extended_attributes })
-    Definition::Dictionary(di) => Definition::Dictionary({ ..di, extended_attributes })
-    Definition::PartialDictionary(pdi) => Definition::PartialDictionary({ ..pdi, extended_attributes })
-    Definition::Enum(e) => Definition::Enum({ ..e, extended_attributes })
-    Definition::Typedef(t) => Definition::Typedef({ ..t, extended_attributes })
-    Definition::CallbackFunction(c) => Definition::CallbackFunction({ ..c, extended_attributes })
-    Definition::CallbackInterface(ci) => Definition::CallbackInterface({ ..ci, extended_attributes })
-    def => def
-  }
-}
 
 fn add_interface_member_ext_attrs(m : InterfaceMember, attrs : Array[ExtendedAttribute]) -> InterfaceMember {
   guard attrs.length() > 0 else {

@@ -11,8 +11,6 @@ import(
 // Errors
 
 // Types and methods
-type CountingVisitor
-
 type FilteredIdl
 pub impl Show for FilteredIdl
 pub impl ToJson for FilteredIdl
@@ -55,8 +53,8 @@ pub impl ToJson for TypeRegistry
 
 // Traits
 pub(open) trait WebIdlVisitor {
-  visit(Self, Array[@parser.Definition]) -> Unit = _
-  visit_definition(Self, @parser.Definition) -> Unit = _
+  visit(Self, Array[@parser.DefinitionExtendedAttributes]) -> Unit = _
+  visit_definition(Self, @parser.DefinitionExtendedAttributes) -> Unit = _
   visit_interface(Self, @parser.InterfaceDefinition) -> Unit = _
   visit_partial_interface(Self, @parser.PartialInterfaceDefinition) -> Unit = _
   visit_mixin(Self, @parser.MixinDefinition) -> Unit = _

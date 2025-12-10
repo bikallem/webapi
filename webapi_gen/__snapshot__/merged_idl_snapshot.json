@@ -211,7 +211,6 @@
   },
   "enums": {
     "MyEnum": {
-      "extended_attributes": [],
       "name": "MyEnum",
       "values": [
         "value1",
@@ -222,7 +221,6 @@
   "typedefs": {},
   "callbacks": {
     "MyCallback": {
-      "extended_attributes": [],
       "name": "MyCallback",
       "return_type": "Undefined",
       "arguments": [
@@ -239,7 +237,6 @@
       ]
     },
     "MyCallbackInterface": {
-      "extended_attributes": [],
       "name": "MyCallbackInterface",
       "return_type": "Undefined",
       "arguments": [

@@ -81,7 +81,6 @@ fn MergedIdl::from(partial_merge_visitor : PartialMergeVisitor) -> MergedIdl {
     }
     let cbf = CallbackFunctionDefinition::{
       name: cbi.name,
-      extended_attributes: cbi.extended_attributes,
       return_type: op.return_type,
       arguments: op.arguments,
     }

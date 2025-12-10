@@ -1,8 +1,8 @@
 ///|
 /// Base visitor trait for traversing WebIDL definitions.
 pub(open) trait WebIdlVisitor {
-  visit(Self, Array[Definition]) -> Unit = _
-  visit_definition(Self, Definition) -> Unit = _
+  visit(Self, Array[DefinitionExtendedAttributes]) -> Unit = _
+  visit_definition(Self, DefinitionExtendedAttributes) -> Unit = _
 
   // InterfaceDefinition visitors
   visit_interface(Self, InterfaceDefinition) -> Unit = _
@@ -47,7 +47,7 @@ pub(open) trait WebIdlVisitor {
 ///|
 fn[T : WebIdlVisitor] default_visit_definitions(
   visitor : T,
-  defs : Array[Definition],
+  defs : Array[DefinitionExtendedAttributes],
 ) -> Unit {
   for def in defs {
     visitor.visit_definition(def)
@@ -62,9 +62,9 @@ impl WebIdlVisitor with visit(self, defs) -> Unit {
 ///|
 fn[T : WebIdlVisitor] default_visit_definition(
   visitor : T,
-  def : Definition,
+  def : DefinitionExtendedAttributes,
 ) -> Unit {
-  match def {
+  match def.definition {
     Interface(iface) => visitor.visit_interface(iface)
     PartialInterface(piface) => visitor.visit_partial_interface(piface)
     Mixin(mxn) => visitor.visit_mixin(mxn)

@@ -2,13 +2,13 @@
 package "bikallem/webapi_gen/parser"
 
 // Values
-pub fn definitions(Array[(Token, Position, Position)], initial_pos? : Position) -> Array[Definition] raise ParseError
+pub fn definitions(Array[(Token, Position, Position)], initial_pos? : Position) -> Array[DefinitionExtendedAttributes] raise ParseError
 
 pub fn lex(StringView, file? : String) -> Array[(Token, Position, Position)] raise LexError
 
-pub fn parse(String) -> Array[Definition] raise WebIdlError
+pub fn parse(String) -> Array[DefinitionExtendedAttributes] raise WebIdlError
 
-pub fn parse_file(String) -> Array[Definition] raise WebIdlError
+pub fn parse_file(String) -> Array[DefinitionExtendedAttributes] raise WebIdlError
 
 pub fn tokenize(String) -> Array[(Token, Position, Position)] raise LexError
 
@@ -66,7 +66,6 @@ pub impl Show for AttributeMember
 pub impl ToJson for AttributeMember
 
 pub(all) struct CallbackFunctionDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   return_type : Type
   arguments : Array[Argument]
@@ -76,7 +75,6 @@ pub impl Show for CallbackFunctionDefinition
 pub impl ToJson for CallbackFunctionDefinition
 
 pub(all) struct CallbackInterfaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[CallbackInterfaceMember]
 }
@@ -153,8 +151,15 @@ pub impl Eq for Definition
 pub impl Show for Definition
 pub impl ToJson for Definition
 
-pub(all) struct DictionaryDefinition {
+pub(all) struct DefinitionExtendedAttributes {
   extended_attributes : Array[ExtendedAttribute]
+  definition : Definition
+}
+pub impl Eq for DefinitionExtendedAttributes
+pub impl Show for DefinitionExtendedAttributes
+pub impl ToJson for DefinitionExtendedAttributes
+
+pub(all) struct DictionaryDefinition {
   name : String
   inheritance : String?
   members : Array[DictionaryMember]
@@ -175,7 +180,6 @@ pub impl Show for DictionaryMember
 pub impl ToJson for DictionaryMember
 
 pub(all) struct EnumDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   values : Array[String]
 }
@@ -204,7 +208,6 @@ pub impl Show for IncludesStatement
 pub impl ToJson for IncludesStatement
 
 pub(all) struct InterfaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   inheritance : String?
   members : Array[InterfaceMember]
@@ -248,7 +251,6 @@ pub impl Show for MaplikeMember
 pub impl ToJson for MaplikeMember
 
 pub(all) struct MixinDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
 }
@@ -257,7 +259,6 @@ pub impl Show for MixinDefinition
 pub impl ToJson for MixinDefinition
 
 pub(all) struct NamespaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
 }
@@ -287,7 +288,6 @@ pub impl Show for OperationMember
 pub impl ToJson for OperationMember
 
 pub(all) struct PartialDictionaryDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[DictionaryMember]
 }
@@ -296,7 +296,6 @@ pub impl Show for PartialDictionaryDefinition
 pub impl ToJson for PartialDictionaryDefinition
 
 pub(all) struct PartialInterfaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
 }
@@ -305,7 +304,6 @@ pub impl Show for PartialInterfaceDefinition
 pub impl ToJson for PartialInterfaceDefinition
 
 pub(all) struct PartialMixinDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[InterfaceMember]
 }
@@ -314,7 +312,6 @@ pub impl Show for PartialMixinDefinition
 pub impl ToJson for PartialMixinDefinition
 
 pub(all) struct PartialNamespaceDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   name : String
   members : Array[NamespaceMember]
 }
@@ -613,7 +610,6 @@ pub impl Show for TypeWithExtendedAttributes
 pub impl ToJson for TypeWithExtendedAttributes
 
 pub(all) struct TypedefDefinition {
-  extended_attributes : Array[ExtendedAttribute]
   type_ : Type
   name : String
 }

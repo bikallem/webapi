@@ -28,15 +28,13 @@ test "parse interface with inheritance" {
     #|interface Child : Parent {
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "Child",
-        "inheritance": "Parent",
-        "members": [],
-      },
-    ],
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        { "name": "Child", "inheritance": "Parent", "members": [] },
+      ],
+    },
   ])
 }
 
@@ -47,33 +45,35 @@ test "parse with union type" {
     #|  attribute (DOMString or long or boolean) exampleAttr;
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "Example",
-        "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": [
-                "Union",
-                [
-                  { "extended_attributes": [], "type_": "DOMString" },
-                  { "extended_attributes": [], "type_": "Long" },
-                  { "extended_attributes": [], "type_": "Boolean" },
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        {
+          "name": "Example",
+          "members": [
+            [
+              "Attribute",
+              {
+                "extended_attributes": [],
+                "type_": [
+                  "Union",
+                  [
+                    { "extended_attributes": [], "type_": "DOMString" },
+                    { "extended_attributes": [], "type_": "Long" },
+                    { "extended_attributes": [], "type_": "Boolean" },
+                  ],
                 ],
-              ],
-              "name": "exampleAttr",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false,
-            },
+                "name": "exampleAttr",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false,
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -84,14 +84,10 @@ test "parse interface with extended attributes" {
     #|interface EventTarget {
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [["Ident", "Exposed", "Window"]],
-        "name": "EventTarget",
-        "members": [],
-      },
-    ],
+    {
+      "extended_attributes": [["Ident", "Exposed", "Window"]],
+      "definition": ["Interface", { "name": "EventTarget", "members": [] }],
+    },
   ])
 }
 
@@ -103,28 +99,30 @@ test "parse dictionary" {
     #|  DOMString name;
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Dictionary",
-      {
-        "extended_attributes": [],
-        "name": "Options",
-        "members": [
-          {
-            "extended_attributes": [],
-            "type_": "Boolean",
-            "name": "enabled",
-            "required": false,
-            "default_value": ["ConstValue", ["Boolean", true]],
-          },
-          {
-            "extended_attributes": [],
-            "type_": "DOMString",
-            "name": "name",
-            "required": false,
-          },
-        ],
-      },
-    ],
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Dictionary",
+        {
+          "name": "Options",
+          "members": [
+            {
+              "extended_attributes": [],
+              "type_": "Boolean",
+              "name": "enabled",
+              "required": false,
+              "default_value": ["ConstValue", ["Boolean", true]],
+            },
+            {
+              "extended_attributes": [],
+              "type_": "DOMString",
+              "name": "name",
+              "required": false,
+            },
+          ],
+        },
+      ],
+    },
   ])
 }
 
@@ -133,14 +131,13 @@ test "parse enum" {
   let idl =
     #|enum Color { "red", "green", "blue" };
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Enum",
-      {
-        "extended_attributes": [],
-        "name": "Color",
-        "values": ["red", "green", "blue"],
-      },
-    ],
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Enum",
+        { "name": "Color", "values": ["red", "green", "blue"] },
+      ],
+    },
   ])
 }
 
@@ -149,14 +146,13 @@ test "parse typedef" {
   let idl =
     #|typedef sequence<DOMString> StringList;
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Typedef",
-      {
-        "extended_attributes": [],
-        "type_": ["Sequence", "DOMString"],
-        "name": "StringList",
-      },
-    ],
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Typedef",
+        { "type_": ["Sequence", "DOMString"], "name": "StringList" },
+      ],
+    },
   ])
 }
 
@@ -165,26 +161,28 @@ test "parse callback function" {
   let idl =
     #|callback Handler = undefined (Event ev);
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "CallbackFunction",
-      {
-        "extended_attributes": [],
-        "name": "Handler",
-        "return_type": "Undefined",
-        "arguments": [
-          {
-            "extended_attributes": [],
-            "type_": {
+    {
+      "extended_attributes": [],
+      "definition": [
+        "CallbackFunction",
+        {
+          "name": "Handler",
+          "return_type": "Undefined",
+          "arguments": [
+            {
               "extended_attributes": [],
-              "type_": ["Identifier", "Event"],
+              "type_": {
+                "extended_attributes": [],
+                "type_": ["Identifier", "Event"],
+              },
+              "name": "ev",
+              "optional": false,
+              "variadic": false,
             },
-            "name": "ev",
-            "optional": false,
-            "variadic": false,
-          },
-        ],
-      },
-    ],
+          ],
+        },
+      ],
+    },
   ])
 }
 
@@ -195,69 +193,27 @@ test "parse callback interface" {
     #|  undefined handleEvent(Event event);
     #|};
   let result = @parser.parse(idl)
-  @json.inspect(result[0], content=[
-    "CallbackInterface",
-    {
-      "extended_attributes": [],
-      "name": "EventListener",
-      "members": [
-        [
-          "Operation",
-          {
-            "extended_attributes": [],
-            "return_type": "Undefined",
-            "name": "handleEvent",
-            "arguments": [
-              {
-                "extended_attributes": [],
-                "type_": {
-                  "extended_attributes": [],
-                  "type_": ["Identifier", "Event"],
-                },
-                "name": "event",
-                "optional": false,
-                "variadic": false,
-              },
-            ],
-            "static_": false,
-          },
-        ],
-      ],
-    },
-  ])
-}
-
-///|
-test "parse namespace" {
-  let idl =
-    #|namespace CSS {
-    #|  boolean supports(DOMString property, DOMString value);
-    #|};
-  @json.inspect(@parser.parse(idl), content=[
-    [
-      "Namespace",
+  @json.inspect(result[0], content={
+    "extended_attributes": [],
+    "definition": [
+      "CallbackInterface",
       {
-        "extended_attributes": [],
-        "name": "CSS",
+        "name": "EventListener",
         "members": [
           [
             "Operation",
             {
               "extended_attributes": [],
-              "return_type": "Boolean",
-              "name": "supports",
+              "return_type": "Undefined",
+              "name": "handleEvent",
               "arguments": [
                 {
                   "extended_attributes": [],
-                  "type_": { "extended_attributes": [], "type_": "DOMString" },
-                  "name": "property",
-                  "optional": false,
-                  "variadic": false,
-                },
-                {
-                  "extended_attributes": [],
-                  "type_": { "extended_attributes": [], "type_": "DOMString" },
-                  "name": "value",
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": ["Identifier", "Event"],
+                  },
+                  "name": "event",
                   "optional": false,
                   "variadic": false,
                 },
@@ -268,6 +224,52 @@ test "parse namespace" {
         ],
       },
     ],
+  })
+}
+
+///|
+test "parse namespace" {
+  let idl =
+    #|namespace CSS {
+    #|  boolean supports(DOMString property, DOMString value);
+    #|};
+  @json.inspect(@parser.parse(idl), content=[
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Namespace",
+        {
+          "name": "CSS",
+          "members": [
+            [
+              "Operation",
+              {
+                "extended_attributes": [],
+                "return_type": "Boolean",
+                "name": "supports",
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": { "extended_attributes": [], "type_": "DOMString" },
+                    "name": "property",
+                    "optional": false,
+                    "variadic": false,
+                  },
+                  {
+                    "extended_attributes": [],
+                    "type_": { "extended_attributes": [], "type_": "DOMString" },
+                    "name": "value",
+                    "optional": false,
+                    "variadic": false,
+                  },
+                ],
+                "static_": false,
+              },
+            ],
+          ],
+        },
+      ],
+    },
   ])
 }
 
@@ -276,14 +278,17 @@ test "parse includes statement" {
   let idl =
     #|Window includes GlobalEventHandlers;
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Includes",
-      {
-        "extended_attributes": [],
-        "interface_name": "Window",
-        "mixin_name": "GlobalEventHandlers",
-      },
-    ],
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Includes",
+        {
+          "extended_attributes": [],
+          "interface_name": "Window",
+          "mixin_name": "GlobalEventHandlers",
+        },
+      ],
+    },
   ])
 }
 
@@ -294,26 +299,28 @@ test "parse interface mixin" {
     #|  attribute EventHandler? onclick;
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Mixin",
-      {
-        "extended_attributes": [],
-        "name": "EventHandlers",
-        "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": ["Nullable", ["Identifier", "EventHandler"]],
-              "name": "onclick",
-              "is_readonly": false,
-              "static_": false,
-              "is_inherit": false,
-            },
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Mixin",
+        {
+          "name": "EventHandlers",
+          "members": [
+            [
+              "Attribute",
+              {
+                "extended_attributes": [],
+                "type_": ["Nullable", ["Identifier", "EventHandler"]],
+                "name": "onclick",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false,
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -324,26 +331,28 @@ test "parse partial interface" {
     #|  readonly attribute Element? body;
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "PartialInterface",
-      {
-        "extended_attributes": [],
-        "name": "Document",
-        "members": [
-          [
-            "Attribute",
-            {
-              "extended_attributes": [],
-              "type_": ["Nullable", ["Identifier", "Element"]],
-              "name": "body",
-              "is_readonly": true,
-              "static_": false,
-              "is_inherit": false,
-            },
+    {
+      "extended_attributes": [],
+      "definition": [
+        "PartialInterface",
+        {
+          "name": "Document",
+          "members": [
+            [
+              "Attribute",
+              {
+                "extended_attributes": [],
+                "type_": ["Nullable", ["Identifier", "Element"]],
+                "name": "body",
+                "is_readonly": true,
+                "static_": false,
+                "is_inherit": false,
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -354,30 +363,32 @@ test "parse interface with constructor" {
     #|  constructor(DOMString url);
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "URL",
-        "members": [
-          [
-            "Constructor",
-            {
-              "extended_attributes": [],
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": { "extended_attributes": [], "type_": "DOMString" },
-                  "name": "url",
-                  "optional": false,
-                  "variadic": false,
-                },
-              ],
-            },
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        {
+          "name": "URL",
+          "members": [
+            [
+              "Constructor",
+              {
+                "extended_attributes": [],
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": { "extended_attributes": [], "type_": "DOMString" },
+                    "name": "url",
+                    "optional": false,
+                    "variadic": false,
+                  },
+                ],
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -388,37 +399,39 @@ test "parse interface with getter" {
     #|  getter Element? item(unsigned long index);
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "Collection",
-        "members": [
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": ["Nullable", ["Identifier", "Element"]],
-              "name": "item",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        {
+          "name": "Collection",
+          "members": [
+            [
+              "Operation",
+              {
+                "extended_attributes": [],
+                "return_type": ["Nullable", ["Identifier", "Element"]],
+                "name": "item",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": "UnsignedLong",
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "UnsignedLong",
+                    },
+                    "name": "index",
+                    "optional": false,
+                    "variadic": false,
                   },
-                  "name": "index",
-                  "optional": false,
-                  "variadic": false,
-                },
-              ],
-              "static_": false,
-              "special": "Getter",
-            },
+                ],
+                "static_": false,
+                "special": "Getter",
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -429,16 +442,21 @@ test "parse interface with iterable" {
     #|  iterable<DOMString>;
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "List",
-        "members": [
-          ["Iterable", { "extended_attributes": [], "value_type": "DOMString" }],
-        ],
-      },
-    ],
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        {
+          "name": "List",
+          "members": [
+            [
+              "Iterable",
+              { "extended_attributes": [], "value_type": "DOMString" },
+            ],
+          ],
+        },
+      ],
+    },
   ])
 }
 
@@ -449,24 +467,26 @@ test "parse interface with maplike" {
     #|  readonly maplike<DOMString, DOMString>;
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "Headers",
-        "members": [
-          [
-            "Maplike",
-            {
-              "extended_attributes": [],
-              "key_type": "DOMString",
-              "value_type": "DOMString",
-              "is_readonly": true,
-            },
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        {
+          "name": "Headers",
+          "members": [
+            [
+              "Maplike",
+              {
+                "extended_attributes": [],
+                "key_type": "DOMString",
+                "value_type": "DOMString",
+                "is_readonly": true,
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -477,33 +497,35 @@ test "parse interface with static operation" {
     #|  static boolean canParse(DOMString url);
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "URL",
-        "members": [
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": "Boolean",
-              "name": "canParse",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": { "extended_attributes": [], "type_": "DOMString" },
-                  "name": "url",
-                  "optional": false,
-                  "variadic": false,
-                },
-              ],
-              "static_": true,
-            },
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        {
+          "name": "URL",
+          "members": [
+            [
+              "Operation",
+              {
+                "extended_attributes": [],
+                "return_type": "Boolean",
+                "name": "canParse",
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": { "extended_attributes": [], "type_": "DOMString" },
+                    "name": "url",
+                    "optional": false,
+                    "variadic": false,
+                  },
+                ],
+                "static_": true,
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -514,25 +536,27 @@ test "parse buffer type" {
     #|  ArrayBuffer arrayBuffer();
     #|};
   @json.inspect(@parser.parse(idl), content=[
-    [
-      "Interface",
-      {
-        "extended_attributes": [],
-        "name": "Blob",
-        "members": [
-          [
-            "Operation",
-            {
-              "extended_attributes": [],
-              "return_type": "ArrayBuffer",
-              "name": "arrayBuffer",
-              "arguments": [],
-              "static_": false,
-            },
+    {
+      "extended_attributes": [],
+      "definition": [
+        "Interface",
+        {
+          "name": "Blob",
+          "members": [
+            [
+              "Operation",
+              {
+                "extended_attributes": [],
+                "return_type": "ArrayBuffer",
+                "name": "arrayBuffer",
+                "arguments": [],
+                "static_": false,
+              },
+            ],
           ],
-        ],
-      },
-    ],
+        },
+      ],
+    },
   ])
 }
 
@@ -542,7 +566,10 @@ test "parse single line comment" {
     #|// This is a comment
     #|interface Foo { };
   @json.inspect(@parser.parse(idl), content=[
-    ["Interface", { "extended_attributes": [], "name": "Foo", "members": [] }],
+    {
+      "extended_attributes": [],
+      "definition": ["Interface", { "name": "Foo", "members": [] }],
+    },
   ])
 }
 
@@ -553,7 +580,10 @@ test "parse multi line comment" {
     #|   multi-line comment */
     #|interface Foo { };
   @json.inspect(@parser.parse(idl), content=[
-    ["Interface", { "extended_attributes": [], "name": "Foo", "members": [] }],
+    {
+      "extended_attributes": [],
+      "definition": ["Interface", { "name": "Foo", "members": [] }],
+    },
   ])
 }
 
