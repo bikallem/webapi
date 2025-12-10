@@ -14,8 +14,7 @@ fn MergedIdl::from(partial_merge_visitor : PartialMergeVisitor) -> MergedIdl {
   let dictionaries = partial_merge_visitor.dictionaries
     .iter()
     .map(it => {
-      let dict_name = it.0
-      let dict = it.1 // PartialMergedDictionaryIR
+      let (dict_name, dict) : (String, PartialMergedDictionaryIR) = it
       match dict.inheritance {
         None => // No inheritance, just copy members to MergedDictionaryIR
           (dict_name, MergedDictionaryIR::new(dict.name, dict.members))
