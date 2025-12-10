@@ -195,7 +195,6 @@ pub impl Show for ExtendedAttribute
 pub impl ToJson for ExtendedAttribute
 
 pub(all) struct IncludesStatement {
-  extended_attributes : Array[ExtendedAttribute]
   interface_name : String
   mixin_name : String
 }

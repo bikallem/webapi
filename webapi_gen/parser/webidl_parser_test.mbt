@@ -282,11 +282,7 @@ test "parse includes statement" {
       "extended_attributes": [],
       "definition": [
         "Includes",
-        {
-          "extended_attributes": [],
-          "interface_name": "Window",
-          "mixin_name": "GlobalEventHandlers",
-        },
+        { "interface_name": "Window", "mixin_name": "GlobalEventHandlers" },
       ],
     },
   ])

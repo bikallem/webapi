@@ -178,7 +178,7 @@ callback_interface_def -> CallbackInterfaceDefinition:
   | "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";" { { name, members } }
 
 includes_statement -> IncludesStatement:
-  | interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";" { { extended_attributes: [], interface_name, mixin_name } }
+  | interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";" { { interface_name, mixin_name } }
 
 inheritance -> String?:
   | ":" name=IDENTIFIER         { Some(name) }

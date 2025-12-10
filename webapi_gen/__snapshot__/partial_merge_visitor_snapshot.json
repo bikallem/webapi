@@ -173,7 +173,6 @@
   },
   "include_statements": [
     {
-      "extended_attributes": [],
       "interface_name": "MyInterface",
       "mixin_name": "MyMixin"
     }

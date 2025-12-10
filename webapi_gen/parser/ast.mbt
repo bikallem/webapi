@@ -388,7 +388,6 @@ pub(all) enum CallbackInterfaceMember {
 ///|
 /// Includes statement (e.g., "Window includes GlobalEventHandlers;")
 pub(all) struct IncludesStatement {
-  extended_attributes : Array[ExtendedAttribute]
   interface_name : String
   mixin_name : String
 } derive(Show, Eq, ToJson)

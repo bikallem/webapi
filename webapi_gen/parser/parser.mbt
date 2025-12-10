@@ -873,11 +873,11 @@ fn yy_action_77(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 181|    interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";" { { extended_attributes: [], interface_name, mixin_name } }
+// 181|    interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";" { { interface_name, mixin_name } }
 fn yy_action_78(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(interface_name)
   guard _args[2].0 is YYObj_String(mixin_name)
-  YYObj_IncludesStatement({();  { extended_attributes: [], interface_name, mixin_name } })
+  YYObj_IncludesStatement({();  { interface_name, mixin_name } })
 }
 
 // file:///./parser.mbty
@@ -5932,7 +5932,6 @@ pub fn definitions(tokens : Array[(Token, Position, Position)], initial_pos? : P
 
 
 // Helper functions
-
 
 fn type_to_string_type(t : Type) -> StringType {
   match t {

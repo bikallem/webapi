@@ -508,7 +508,6 @@
     "definition": [
       "Includes",
       {
-        "extended_attributes": [],
         "interface_name": "Window",
         "mixin_name": "WindowEventHandlers"
       }
