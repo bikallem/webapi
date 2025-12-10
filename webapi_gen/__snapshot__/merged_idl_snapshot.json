@@ -211,8 +211,8 @@
       "extended_attributes": [],
       "name": "MyEnum",
       "values": [
-        "\"value1\"",
-        "\"value2\""
+        "value1",
+        "value2"
       ]
     }
   },

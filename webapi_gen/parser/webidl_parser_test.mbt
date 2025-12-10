@@ -131,7 +131,7 @@ test "parse enum" {
       {
         "extended_attributes": [],
         "name": "Color",
-        "values": ["\"red\"", "\"green\"", "\"blue\""],
+        "values": ["red", "green", "blue"],
       },
     ],
   ])

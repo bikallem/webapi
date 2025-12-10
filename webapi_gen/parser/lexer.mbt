@@ -124,7 +124,7 @@ pub fn lex(
         }
         push(tok, s, xs)
       }
-      ("\"[^\"]*\"" as s, xs) => push(STRING(s.to_string()), s, xs)
+      ("\"" ("[^\"]*" as s) "\"", xs) => push(STRING(s.to_string()), s, xs)
       ("(\r\n)|\n|\r", xs) => {
         line += 1
         column = 1

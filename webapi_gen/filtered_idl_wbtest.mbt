@@ -18,7 +18,7 @@ test "filter_idl with empty config returns all types" {
       "ScrollBehavior": {
         "extended_attributes": [],
         "name": "ScrollBehavior",
-        "values": ["\"auto\"", "\"smooth\""],
+        "values": ["auto", "smooth"],
       },
     },
     "typedefs": {},

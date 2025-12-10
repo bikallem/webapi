@@ -398,9 +398,9 @@
       "extended_attributes": [],
       "name": "ScrollBehavior",
       "values": [
-        "\"auto\"",
-        "\"instant\"",
-        "\"smooth\""
+        "auto",
+        "instant",
+        "smooth"
       ]
     }
   ],
