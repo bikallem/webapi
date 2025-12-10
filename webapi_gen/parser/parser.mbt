@@ -5547,6 +5547,9 @@ pub fn definitions(tokens : Array[(Token, Position, Position)], initial_pos? : P
 // Helper functions
 
 fn add_definition_ext_attrs(d : Definition, extended_attributes : Array[ExtendedAttribute]) -> Definition {
+  guard extended_attributes.length() > 0 else {
+    return d
+  }
   match d {
     Definition::Interface(i) => Definition::Interface({ ..i, extended_attributes })
     Definition::PartialInterface(pi) => Definition::PartialInterface({ ..pi, extended_attributes })
@@ -5565,6 +5568,9 @@ fn add_definition_ext_attrs(d : Definition, extended_attributes : Array[Extended
 }
 
 fn add_interface_member_ext_attrs(m : InterfaceMember, attrs : Array[ExtendedAttribute]) -> InterfaceMember {
+  guard attrs.length() > 0 else {
+    return m
+  }
   match m {
     InterfaceMember::Const(c) => InterfaceMember::Const({ ..c, extended_attributes: attrs })
     InterfaceMember::Attribute(a) => InterfaceMember::Attribute({ ..a, extended_attributes: attrs })
@@ -5579,6 +5585,9 @@ fn add_interface_member_ext_attrs(m : InterfaceMember, attrs : Array[ExtendedAtt
 }
 
 fn add_callback_interface_member_ext_attrs(m : CallbackInterfaceMember, attrs : Array[ExtendedAttribute]) -> CallbackInterfaceMember {
+  guard attrs.length() > 0 else {
+    return m
+  }
   match m {
     CallbackInterfaceMember::Operation(o) => CallbackInterfaceMember::Operation({ ..o, extended_attributes: attrs })
     CallbackInterfaceMember::Const(c) => CallbackInterfaceMember::Const({ ..c, extended_attributes: attrs })
@@ -5586,6 +5595,9 @@ fn add_callback_interface_member_ext_attrs(m : CallbackInterfaceMember, attrs : 
 }
 
 fn add_namespace_member_ext_attrs(m : NamespaceMember, attrs : Array[ExtendedAttribute]) -> NamespaceMember {
+  guard attrs.length() > 0 else {
+    return m
+  }
   match m {
     NamespaceMember::Attribute(a) => NamespaceMember::Attribute({ ..a, extended_attributes: attrs })
     NamespaceMember::Operation(o) => NamespaceMember::Operation({ ..o, extended_attributes: attrs })
