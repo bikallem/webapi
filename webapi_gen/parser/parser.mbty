@@ -234,7 +234,7 @@ interface_member -> InterfaceMember:
   | op=operation_member            { Operation(op) }
 
 const_member -> ConstMember:
-  | "const" type IDENTIFIER "=" const_value ";" { { type_: $2, name: $3, value: $5 } }
+  | "const" type_=type name=IDENTIFIER "=" value=const_value ";" { { type_, name, value } }
 
 operation_member -> OperationMember:
   | type IDENTIFIER "(" argument_list ")" ";" { { return_type: $1, name: Some($2), arguments: $4, static_: false, special: None } }
