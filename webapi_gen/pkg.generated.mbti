@@ -37,13 +37,13 @@ type PartialMergedDictionaryIR
 pub impl Show for PartialMergedDictionaryIR
 pub impl ToJson for PartialMergedDictionaryIR
 
+type PartialMergedInterfaceIR
+pub impl Show for PartialMergedInterfaceIR
+pub impl ToJson for PartialMergedInterfaceIR
+
 type PartialMergedMixinIR
 pub impl Show for PartialMergedMixinIR
 pub impl ToJson for PartialMergedMixinIR
-
-type PartilMergedInterfaceIR
-pub impl Show for PartilMergedInterfaceIR
-pub impl ToJson for PartilMergedInterfaceIR
 
 type TypeRegistry
 pub impl Show for TypeRegistry

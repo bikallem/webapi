@@ -1,7 +1,7 @@
 ///|
 /// Filtered IDL with only whitelisted interfaces, dictionaries, enums, typedefs, and callbacks.
 struct FilteredIdl {
-  interfaces : Map[String, PartilMergedInterfaceIR]
+  interfaces : Map[String, PartialMergedInterfaceIR]
   dictionaries : Map[String, MergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]

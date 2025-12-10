@@ -1,6 +1,6 @@
 ///|
 test "MergedInterface::new() creates interface with defaults" {
-  let iface = PartilMergedInterfaceIR::new("Element", [], Some("Node"))
+  let iface = PartialMergedInterfaceIR::new("Element", [], Some("Node"))
   inspect(iface.name, content="Element")
   inspect(
     iface.inheritance,
@@ -12,7 +12,7 @@ test "MergedInterface::new() creates interface with defaults" {
 
 ///|
 test "MergedInterface::merge() combines members and inheritance" {
-  let iface1 = PartilMergedInterfaceIR::new(
+  let iface1 = PartialMergedInterfaceIR::new(
     "Element",
     [
       {
@@ -77,7 +77,7 @@ test "MergedInterface::merge() combines members and inheritance" {
 
 ///|
 test "MergedInterface::merge() retains existing inheritance if none provided" {
-  let iface1 = PartilMergedInterfaceIR::new("Element", [], Some("Node"))
+  let iface1 = PartialMergedInterfaceIR::new("Element", [], Some("Node"))
   let iface2 = iface1.merge(
     [
       {

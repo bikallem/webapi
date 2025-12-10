@@ -1,26 +1,26 @@
 ///|
 /// Merged interface IR with all partials and mixin members combined
-struct PartilMergedInterfaceIR {
+struct PartialMergedInterfaceIR {
   name : String
   members : Array[InterfaceMemberExtendedAttributes]
   inheritance : String?
 } derive(Show, ToJson)
 
 ///|
-fn PartilMergedInterfaceIR::new(
+fn PartialMergedInterfaceIR::new(
   name : String,
   members : Array[InterfaceMemberExtendedAttributes],
   inheritance : String?,
-) -> PartilMergedInterfaceIR {
-  PartilMergedInterfaceIR::{ name, inheritance, members }
+) -> PartialMergedInterfaceIR {
+  PartialMergedInterfaceIR::{ name, inheritance, members }
 }
 
 ///|
-fn PartilMergedInterfaceIR::merge(
-  self : PartilMergedInterfaceIR,
+fn PartialMergedInterfaceIR::merge(
+  self : PartialMergedInterfaceIR,
   members : Array[InterfaceMemberExtendedAttributes],
   inheritance : String?,
-) -> PartilMergedInterfaceIR {
+) -> PartialMergedInterfaceIR {
   let inheritance = match inheritance {
     Some(_) => inheritance
     None => self.inheritance
@@ -85,7 +85,7 @@ fn PartialMergedDictionaryIR::merge(
 /// Visitor that merges partial interfaces, mixins, and dictionaries into their
 /// primary definitions.
 struct PartialMergeVisitor {
-  interfaces : Map[String, PartilMergedInterfaceIR]
+  interfaces : Map[String, PartialMergedInterfaceIR]
   mixins : Map[String, PartialMergedMixinIR]
   dictionaries : Map[String, PartialMergedDictionaryIR]
   enums : Map[String, EnumDefinition]
@@ -119,7 +119,7 @@ fn PartialMergeVisitor::merge_interface(
   match self.interfaces.get(name) {
     Some(current) => self.interfaces[name] = current.merge(members, inheritance)
     None =>
-      self.interfaces[name] = PartilMergedInterfaceIR::new(
+      self.interfaces[name] = PartialMergedInterfaceIR::new(
         name, members, inheritance,
       )
   }
