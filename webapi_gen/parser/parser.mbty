@@ -160,7 +160,7 @@
 %%
 
 definitions -> Array[Definition]:
-  | extended_attribute_list definition definitions  { [add_definition_ext_attrs($2, $1), ..$3] }
+  | ext_attr = extended_attribute_list def=definition defs = definitions  { [add_definition_ext_attrs(def, ext_attr), ..defs] }
   | EOF                                             { [] }
 
 definition -> Definition:
@@ -225,6 +225,8 @@ callback_def -> CallbackFunctionDefinition:
 callback_interface_def -> CallbackInterfaceDefinition:
   | "callback" "interface" IDENTIFIER "{" callback_interface_members "}" ";"
       { { extended_attributes: [], name: $3, members: $5 } }
+
+
 
 callback_interface_members:
   | extended_attribute_list callback_interface_member callback_interface_members
