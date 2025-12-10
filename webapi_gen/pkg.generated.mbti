@@ -74,7 +74,8 @@ pub(open) trait WebIdlVisitor {
   visit_argument(Self, @parser.Argument) -> Unit = _
   visit_const(Self, @parser.ConstMember) -> Unit = _
   visit_attribute(Self, @parser.AttributeMember) -> Unit = _
-  visit_operation(Self, @parser.OperationMember) -> Unit = _
+  visit_regular_operation(Self, @parser.RegularOperationMember) -> Unit = _
+  visit_special_operation(Self, @parser.SpecialOperationMember) -> Unit = _
   visit_constructor(Self, @parser.ConstructorMember) -> Unit = _
   visit_iterable(Self, @parser.IterableMember) -> Unit = _
   visit_async_iterable(Self, @parser.AsyncIterableMember) -> Unit = _

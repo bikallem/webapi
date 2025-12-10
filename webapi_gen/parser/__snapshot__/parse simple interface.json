@@ -62,7 +62,7 @@
           {
             "extended_attributes": [],
             "interface_member": [
-              "Operation",
+              "RegularOperation",
               {
                 "return_type": [
                   "Identifier",

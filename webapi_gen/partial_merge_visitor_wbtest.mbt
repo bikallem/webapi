@@ -32,12 +32,11 @@ test "MergedInterface::merge() combines members and inheritance" {
     [
       {
         extended_attributes: [],
-        interface_member: Operation({
+        interface_member: RegularOperation({
           return_type: Type::Identifier("undefined"),
-          name: Some("focus"),
-          static_: false,
+          name: "focus",
           arguments: [],
-          special: None,
+          static_: false,
         }),
       },
     ],
@@ -62,7 +61,7 @@ test "MergedInterface::merge() combines members and inheritance" {
       {
         "extended_attributes": [],
         "interface_member": [
-          "Operation",
+          "RegularOperation",
           {
             "return_type": ["Identifier", "undefined"],
             "name": "focus",
@@ -83,12 +82,11 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
     [
       {
         extended_attributes: [],
-        interface_member: Operation({
+        interface_member: RegularOperation({
           return_type: Type::Identifier("void"),
-          name: Some("focus"),
+          name: "focus",
           static_: false,
           arguments: [],
-          special: None,
         }),
       },
     ],
@@ -100,7 +98,7 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
       {
         "extended_attributes": [],
         "interface_member": [
-          "Operation",
+          "RegularOperation",
           {
             "return_type": ["Identifier", "void"],
             "name": "focus",
@@ -194,7 +192,7 @@ test "PartialMergeVisitor merges interface and partial interface" {
       {
         "extended_attributes": [],
         "interface_member": [
-          "Operation",
+          "RegularOperation",
           {
             "return_type": ["Identifier", "Node"],
             "name": "appendChild",
@@ -250,7 +248,7 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
       {
         "extended_attributes": [],
         "interface_member": [
-          "Operation",
+          "RegularOperation",
           {
             "return_type": "Undefined",
             "name": "doSomething",

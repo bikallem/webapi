@@ -123,7 +123,7 @@ test "MergedIdl::from flattens mixins into interfaces" {
       {
         "extended_attributes": [],
         "interface_member": [
-          "Operation",
+          "RegularOperation",
           {
             "return_type": ["Identifier", "Node"],
             "name": "appendChild",
@@ -159,7 +159,7 @@ test "MergedIdl::from flattens mixins into interfaces" {
       {
         "extended_attributes": [],
         "interface_member": [
-          "Operation",
+          "RegularOperation",
           {
             "return_type": "Undefined",
             "name": "doSomething",

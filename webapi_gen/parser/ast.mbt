@@ -145,7 +145,8 @@ pub(all) enum ConstValue {
 pub(all) enum InterfaceMember {
   Const(ConstMember)
   Attribute(AttributeMember)
-  Operation(OperationMember)
+  RegularOperation(RegularOperationMember)
+  SpecialOperation(SpecialOperationMember)
   Constructor(ConstructorMember)
   Iterable(IterableMember)
   AsyncIterable(AsyncIterableMember)
@@ -179,13 +180,21 @@ pub(all) struct AttributeMember {
 } derive(Show, Eq, ToJson)
 
 ///|
-/// Operation (method) member
-pub(all) struct OperationMember {
+/// Regular operation (non-special) member
+pub(all) struct RegularOperationMember {
+  return_type : Type
+  name : String
+  arguments : Array[Argument]
+  static_ : Bool
+} derive(Show, Eq, ToJson)
+
+///|
+/// Special operation member (getter/setter/deleter)
+pub(all) struct SpecialOperationMember {
   return_type : Type
   name : String?
   arguments : Array[Argument]
-  static_ : Bool
-  special : Special?
+  special : Special
 } derive(Show, Eq, ToJson)
 
 ///|
@@ -259,7 +268,7 @@ pub(all) struct DictionaryMember {
 ///|
 /// Namespace member
 pub(all) enum NamespaceMember {
-  Operation(OperationMember)
+  Operation(RegularOperationMember)
   Attribute(AttributeMember)
   Const(ConstMember)
 } derive(Show, Eq, ToJson)
@@ -387,7 +396,7 @@ pub(all) struct CallbackInterfaceDefinition {
 
 ///|
 pub(all) enum CallbackInterfaceMember {
-  Operation(OperationMember)
+  Operation(RegularOperationMember)
   Const(ConstMember)
 } derive(Show, Eq, ToJson)
 

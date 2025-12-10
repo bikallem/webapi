@@ -32,7 +32,8 @@ pub(open) trait WebIdlVisitor {
   // InterfaceMember visitors
   visit_const(Self, ConstMember) -> Unit = _
   visit_attribute(Self, AttributeMember) -> Unit = _
-  visit_operation(Self, OperationMember) -> Unit = _
+  visit_regular_operation(Self, RegularOperationMember) -> Unit = _
+  visit_special_operation(Self, SpecialOperationMember) -> Unit = _
   visit_constructor(Self, ConstructorMember) -> Unit = _
   visit_iterable(Self, IterableMember) -> Unit = _
   visit_async_iterable(Self, AsyncIterableMember) -> Unit = _
@@ -233,7 +234,8 @@ fn[T : WebIdlVisitor] default_visit_interface_member(
   match memb.interface_member {
     Const(c) => visitor.visit_const(c)
     Attribute(a) => visitor.visit_attribute(a)
-    Operation(o) => visitor.visit_operation(o)
+    RegularOperation(op) => visitor.visit_regular_operation(op)
+    SpecialOperation(op) => visitor.visit_special_operation(op)
     Constructor(cnstr) => visitor.visit_constructor(cnstr)
     Iterable(it) => visitor.visit_iterable(it)
     AsyncIterable(ait) => visitor.visit_async_iterable(ait)
@@ -310,9 +312,9 @@ impl WebIdlVisitor with visit_attribute(self, attr) -> Unit {
 }
 
 ///|
-fn[T : WebIdlVisitor] default_visit_operation(
+fn[T : WebIdlVisitor] default_visit_regular_operation(
   visitor : T,
-  op : OperationMember,
+  op : RegularOperationMember,
 ) -> Unit {
   visitor.visit_type(op.return_type)
   for arg in op.arguments {
@@ -321,8 +323,24 @@ fn[T : WebIdlVisitor] default_visit_operation(
 }
 
 ///|
-impl WebIdlVisitor with visit_operation(self, op) -> Unit {
-  default_visit_operation(self, op)
+impl WebIdlVisitor with visit_regular_operation(self, op) -> Unit {
+  default_visit_regular_operation(self, op)
+}
+
+///|
+fn[T : WebIdlVisitor] default_visit_special_operation(
+  visitor : T,
+  op : SpecialOperationMember,
+) -> Unit {
+  visitor.visit_type(op.return_type)
+  for arg in op.arguments {
+    visitor.visit_argument(arg)
+  }
+}
+
+///|
+impl WebIdlVisitor with visit_special_operation(self, op) -> Unit {
+  default_visit_special_operation(self, op)
 }
 
 ///|
@@ -381,6 +399,6 @@ impl WebIdlVisitor with visit_callback_interface_member(
 ) -> Unit {
   match memb.callback_interface_member {
     Const(c) => self.visit_const(c)
-    Operation(o) => self.visit_operation(o)
+    Operation(op) => self.visit_regular_operation(op)
   }
 }

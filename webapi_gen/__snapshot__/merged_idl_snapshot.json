@@ -6,7 +6,7 @@
         {
           "extended_attributes": [],
           "interface_member": [
-            "Operation",
+            "RegularOperation",
             {
               "return_type": "Undefined",
               "name": "dummyMethod",
@@ -39,7 +39,7 @@
         {
           "extended_attributes": [],
           "interface_member": [
-            "Operation",
+            "RegularOperation",
             {
               "return_type": [
                 "Identifier",
@@ -84,7 +84,7 @@
         {
           "extended_attributes": [],
           "interface_member": [
-            "Operation",
+            "RegularOperation",
             {
               "return_type": "Undefined",
               "name": "doSomething",

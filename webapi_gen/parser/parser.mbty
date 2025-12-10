@@ -191,7 +191,7 @@ callback_interface_members -> Array[CallbackInterfaceMemberExtendedAttributes]:
   |   { [] }
 
 callback_interface_member -> CallbackInterfaceMember:
-  | op=operation_member           { CallbackInterfaceMember::Operation(op) }
+  | op=regular_operation_member   { CallbackInterfaceMember::Operation(op) }
   | c=const_member                { CallbackInterfaceMember::Const(c) }
 
 // Interface members
@@ -207,9 +207,7 @@ interface_member -> InterfaceMember:
   | "static" "readonly" "attribute" type_=type name=IDENTIFIER ";"
       { Attribute({ type_, name, is_readonly: true, static_: true, is_inherit: false }) }
   | "static" "attribute" type_=type name=IDENTIFIER ";"
-      { Attribute({ type_, name, is_readonly: false, static_: true, is_inherit: false }) }
-  | "static" type_=type name=IDENTIFIER "(" arguments=argument_list ")" ";"
-      { Operation({ return_type: type_, name: Some(name), arguments, static_: true, special: None }) }
+      { Attribute({ type_, name, is_readonly: false, static_: true, is_inherit: false }) }  
   | i=iterable_member             { Iterable(i) }
   | "async_iterable" "<" type ">" ";"
       { AsyncIterable({ key_type: None, value_type: $3, arguments: [] }) }
@@ -227,18 +225,22 @@ interface_member -> InterfaceMember:
       { Attribute({ type_, name, is_readonly: true, static_: false, is_inherit: false }) }
   | "attribute" type_=type name=IDENTIFIER ";"
       { Attribute({ type_, name, is_readonly: false, static_: false, is_inherit: false }) }
-  | sp=special type_=type name=IDENTIFIER "(" arguments=argument_list ")" ";"
-      { Operation({ return_type: type_, name: Some(name), arguments: arguments, static_: false, special: Some(sp) }) }
-  | sp=special type_=type "(" arguments=argument_list ")" ";"
-      { Operation({ return_type: type_, name: None, arguments: arguments, static_: false, special: Some(sp) }) }
-  | op=operation_member            { Operation(op) }
+  | special=special return_type=type name=operation_name "(" arguments=argument_list ")" ";"
+      { SpecialOperation({ return_type, name, arguments, special }) } 
+  | "static" op=regular_operation_member
+      { RegularOperation({ ..op, static_: true }) }
+  | op=regular_operation_member   { RegularOperation(op) }
+
+regular_operation_member -> RegularOperationMember:
+  | return_type=type name=IDENTIFIER "(" arguments=argument_list ")" ";"
+      { { return_type, name, arguments, static_: false } }
 
 const_member -> ConstMember:
   | "const" type_=type name=IDENTIFIER "=" value=const_value ";" { { type_, name, value } }
 
-operation_member -> OperationMember:
-  | return_type=type name=IDENTIFIER "(" argument_list ")" ";" { { return_type, name: Some(name), arguments: $4, static_: false, special: None } }
-  | type "(" argument_list ")" ";" { { return_type: $1, name: None, arguments: $3, static_: false, special: None } }
+operation_name -> String?:
+  | name=IDENTIFIER           { Some(name) }
+  |                           { None }
 
 special -> Special:
   | "getter"                    { Special::Getter }
@@ -267,8 +269,7 @@ namespace_members -> Array[NamespaceMemberExtendedAttributes]:
 namespace_member -> NamespaceMember:
   | "readonly" "attribute" type IDENTIFIER ";" 
     { Attribute({ type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
-  | type IDENTIFIER "(" argument_list ")" ";"  
-    { Operation({ return_type: $1, name: Some($2), arguments: $4, static_: false, special: None }) }
+  | op=regular_operation_member { Operation(op) }
   | const_member                { Const($1) }
 
 // Dictionary members

@@ -426,7 +426,7 @@ test "parse interface with getter" {
             {
               "extended_attributes": [],
               "interface_member": [
-                "Operation",
+                "SpecialOperation",
                 {
                   "return_type": ["Nullable", ["Identifier", "Element"]],
                   "name": "item",
@@ -442,7 +442,6 @@ test "parse interface with getter" {
                       "variadic": false,
                     },
                   ],
-                  "static_": false,
                   "special": "Getter",
                 },
               ],
@@ -528,7 +527,7 @@ test "parse interface with static operation" {
             {
               "extended_attributes": [],
               "interface_member": [
-                "Operation",
+                "RegularOperation",
                 {
                   "return_type": "Boolean",
                   "name": "canParse",
@@ -572,7 +571,7 @@ test "parse buffer type" {
             {
               "extended_attributes": [],
               "interface_member": [
-                "Operation",
+                "RegularOperation",
                 {
                   "return_type": "ArrayBuffer",
                   "name": "arrayBuffer",
