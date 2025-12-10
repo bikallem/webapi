@@ -606,6 +606,14 @@ pub impl Eq for Type
 pub impl Show for Type
 pub impl ToJson for Type
 
+pub(all) struct TypeWithExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+}
+pub impl Eq for TypeWithExtendedAttributes
+pub impl Show for TypeWithExtendedAttributes
+pub impl ToJson for TypeWithExtendedAttributes
+
 pub(all) struct TypedefDefinition {
   extended_attributes : Array[ExtendedAttribute]
   type_ : Type

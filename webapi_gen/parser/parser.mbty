@@ -214,37 +214,37 @@ interface_members -> Array[InterfaceMember]:
   |   { [] }
 
 interface_member -> InterfaceMember:
-  | const_member                { InterfaceMember::Const($1) }
-  | constructor_member          { InterfaceMember::Constructor($1) }
-  | "stringifier" ";"           { InterfaceMember::Stringifier(StringifierMember::Bare) }
-  | "static" "readonly" "attribute" type IDENTIFIER ";"
-      { InterfaceMember::Attribute({ extended_attributes: [], type_: $4, name: $5, is_readonly: true, static_: true, is_inherit: false }) }
-  | "static" "attribute" type IDENTIFIER ";"
-      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: false, static_: true, is_inherit: false }) }
-  | "static" type IDENTIFIER "(" argument_list ")" ";"
-      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: Some($3), arguments: $5, static_: true, special: None }) }
-  | iterable_member             { InterfaceMember::Iterable($1) }
+  | c=const_member                { Const(c) }
+  | cm=constructor_member         { Constructor(cm) }
+  | "stringifier" ";"             { Stringifier(StringifierMember::Bare) }
+  | "static" "readonly" "attribute" type_=type name=IDENTIFIER ";"
+      { Attribute({ extended_attributes: [], type_: type_, name, is_readonly: true, static_: true, is_inherit: false }) }
+  | "static" "attribute" type_=type name=IDENTIFIER ";"
+      { Attribute({ extended_attributes: [], type_: type_, name, is_readonly: false, static_: true, is_inherit: false }) }
+  | "static" type_=type name=IDENTIFIER "(" arguments=argument_list ")" ";"
+      { Operation({ extended_attributes: [], return_type: type_, name: Some(name), arguments, static_: true, special: None }) }
+  | i=iterable_member             { Iterable(i) }
   | "async_iterable" "<" type ">" ";"
-      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: None, value_type: $3, arguments: [] }) }
+      { AsyncIterable({ extended_attributes: [], key_type: None, value_type: $3, arguments: [] }) }
   | "async_iterable" "<" type "," type ">" ";"
-      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: Some($3), value_type: $5, arguments: [] }) }
-  | "readonly" maplike_member   { InterfaceMember::Maplike({ ..$2, is_readonly: true }) }
-  | maplike_member              { InterfaceMember::Maplike($1) }
-  | "readonly" setlike_member   { InterfaceMember::Setlike({ ..$2, is_readonly: true }) }
-  | setlike_member              { InterfaceMember::Setlike($1) }
-  | "inherit" "readonly" "attribute" type IDENTIFIER ";"
-      { InterfaceMember::Attribute({ extended_attributes: [], type_: $4, name: $5, is_readonly: true, static_: false, is_inherit: true }) }
-  | "inherit" "attribute" type IDENTIFIER ";"
-      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: false, static_: false, is_inherit: true }) }
-  | "readonly" "attribute" type IDENTIFIER ";"
-      { InterfaceMember::Attribute({ extended_attributes: [], type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
-  | "attribute" type IDENTIFIER ";"
-      { InterfaceMember::Attribute({ extended_attributes: [], type_: $2, name: $3, is_readonly: false, static_: false, is_inherit: false }) }
-  | special type IDENTIFIER "(" argument_list ")" ";"
-      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: Some($3), arguments: $5, static_: false, special: Some($1) }) }
-  | special type "(" argument_list ")" ";"
-      { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: None, arguments: $4, static_: false, special: Some($1) }) }
-  | operation_member            { InterfaceMember::Operation($1) }
+      { AsyncIterable({ extended_attributes: [], key_type: Some($3), value_type: $5, arguments: [] }) }
+  | "readonly" m=maplike_member   { Maplike({ ..m, is_readonly: true }) }
+  | m=maplike_member              { Maplike(m) }
+  | "readonly" s=setlike_member   { Setlike({ ..s, is_readonly: true }) }
+  | s=setlike_member              { Setlike(s) }
+  | "inherit" "readonly" "attribute" type_=type name=IDENTIFIER ";"
+      { Attribute({ extended_attributes: [], type_, name, is_readonly: true, static_: false, is_inherit: true }) }
+  | "inherit" "attribute" type_=type name=IDENTIFIER ";"
+      { Attribute({ extended_attributes: [], type_, name, is_readonly: false, static_: false, is_inherit: true }) }
+  | "readonly" "attribute" type_=type name=IDENTIFIER ";"
+      { Attribute({ extended_attributes: [], type_, name, is_readonly: true, static_: false, is_inherit: false }) }
+  | "attribute" type_=type name=IDENTIFIER ";"
+      { Attribute({ extended_attributes: [], type_, name, is_readonly: false, static_: false, is_inherit: false }) }
+  | sp=special type_=type name=IDENTIFIER "(" arguments=argument_list ")" ";"
+      { Operation({ extended_attributes: [], return_type: type_, name: Some(name), arguments: arguments, static_: false, special: Some(sp) }) }
+  | sp=special type_=type "(" arguments=argument_list ")" ";"
+      { Operation({ extended_attributes: [], return_type: type_, name: None, arguments: arguments, static_: false, special: Some(sp) }) }
+  | op=operation_member            { Operation(op) }
 
 // Namespace members
 namespace_members -> Array[NamespaceMember]:
@@ -328,6 +328,9 @@ type -> Type:
       }
     }
 
+type_with_extended_attributes -> (Array[ExtendedAttribute], Type):
+  | extended_attribute_list type  { ($1, $2) }
+
 single_type -> Type:
   | primitive_type              { $1 }
   | string_type                 { $1 }
@@ -385,9 +388,6 @@ buffer_type -> Type:
 null_modifier -> Option[Type]:
   | "?"                         { Some(Type::Void) }
   |                             { None }
-
-type_with_extended_attributes -> (Array[ExtendedAttribute], Type):
-  | extended_attribute_list type  { ($1, $2) }
 
 // Const values
 const_value -> ConstValue:

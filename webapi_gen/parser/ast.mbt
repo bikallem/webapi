@@ -79,6 +79,12 @@ pub(all) enum Type {
 } derive(Show, Eq, ToJson)
 
 ///|
+pub(all) struct TypeWithExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+} derive(Show, Eq, ToJson)
+
+///|
 /// String type for Record key
 pub(all) enum StringType {
   DOMString
