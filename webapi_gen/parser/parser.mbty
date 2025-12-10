@@ -161,7 +161,7 @@
 %type<Array[Argument]> argument_list
 %type<Array[Argument]> arguments
 %type<Argument> argument
-%type<Bool> ellipsis
+%type<(Array[ExtendedAttribute], Type)> type_with_extended_attributes
 %type<Array[ExtendedAttribute]> extended_attribute_list
 %type<Array[ExtendedAttribute]> extended_attributes
 %type<ExtendedAttribute> extended_attribute
@@ -465,17 +465,20 @@ arguments:
   | "," argument arguments      { [$2, ..$3] }
   |                             { [] }
 
+// WebIDL ArgumentRest:
+//   "optional" TypeWithExtendedAttributes ArgumentName Default
+//   Type Ellipsis ArgumentName
+// TypeWithExtendedAttributes = ExtendedAttributeList Type
 argument:
-  | extended_attribute_list "optional" type IDENTIFIER default_value_opt
-      { { extended_attributes: $1, type_: $3, name: $4, optional: true, variadic: false, default_value: $5 } }
-  | "optional" extended_attribute_list type IDENTIFIER default_value_opt
-      { { extended_attributes: $2, type_: $3, name: $4, optional: true, variadic: false, default_value: $5 } }
-  | extended_attribute_list type ellipsis IDENTIFIER
-      { { extended_attributes: $1, type_: $2, name: $4, optional: false, variadic: false, default_value: None } }
+  | "optional" type_with_extended_attributes IDENTIFIER default_value_opt
+      { { extended_attributes: $2.0, type_: $2.1, name: $3, optional: true, variadic: false, default_value: $4 } }
+  | type_with_extended_attributes "..." IDENTIFIER
+      { { extended_attributes: $1.0, type_: $1.1, name: $3, optional: false, variadic: true, default_value: None } }
+  | type_with_extended_attributes IDENTIFIER
+      { { extended_attributes: $1.0, type_: $1.1, name: $2, optional: false, variadic: false, default_value: None } }
 
-ellipsis:
-  | "..."                       { true }
-  |                             { false }
+type_with_extended_attributes:
+  | extended_attribute_list type  { ($1, $2) }
 
 // Extended attributes
 extended_attribute_list:
