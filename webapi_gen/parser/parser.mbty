@@ -294,35 +294,35 @@ setlike_member -> SetlikeMember:
 
 // Dictionary members
 dictionary_members -> Array[DictionaryMember]:
-  | extended_attribute_list dictionary_member dictionary_members
-      { [{ ..$2, extended_attributes: $1 }, ..$3] }
+  | extended_attributes=extended_attribute_list m=dictionary_member members=dictionary_members
+      { [{ ..m, extended_attributes }, ..members] }
   |                             { [] }
 
 dictionary_member -> DictionaryMember:
-  | "required" type IDENTIFIER ";"
-      { { extended_attributes: [], type_: $2, name: $3, required: true, default_value: None } }
-  | type IDENTIFIER default_value_opt ";"
-      { { extended_attributes: [], type_: $1, name: $2, required: false, default_value: $3 } }
+  | "required" type_=type name=IDENTIFIER ";"
+      { { extended_attributes: [], type_, name, required: true, default_value: None } }
+  | type_=type name=IDENTIFIER default_value=default_value_opt ";"
+      { { extended_attributes: [], type_, name, required: false, default_value } }
 
 // Enum values
 enum_value_list -> Array[String]:
-  | STRING enum_value_list_rest { [$1, ..$2] }
+  | e=STRING enums=enum_value_list_rest { [e, ..enums] }
 
 enum_value_list_rest -> Array[String]:
-  | "," STRING enum_value_list_rest  { [$2, ..$3] }
+  | "," e=STRING enums=enum_value_list_rest  { [e, ..enums] }
   | ","                              { [] }
   |                                  { [] }
 
 type -> Type:
-  | single_type null_modifier   { 
-      match $2 {
-        Some(_) => Type::Nullable($1)
-        None => $1 
+  | type_=single_type null=null_modifier   { 
+      match null {
+        Some(_) => Type::Nullable(type_)
+        None => type_
       }
     }
-  | "(" single_type "or" single_type ")" null_modifier {
+  | "(" single_type "or" single_type ")" null=null_modifier {
       let union = Type::Union([$2, $4])
-      match $6 {
+      match null {
         Some(_) => Type::Nullable(union)
         None => union
       }

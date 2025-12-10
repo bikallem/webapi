@@ -715,32 +715,32 @@ fn yy_action_56(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 297|    extended_attribute_list dictionary_member dictionary_members
-// 298|      { [{ ..$2, extended_attributes: $1 }, ..$3] }
+// 297|    extended_attributes=extended_attribute_list m=dictionary_member members=dictionary_members
+// 298|      { [{ ..m, extended_attributes }, ..members] }
 fn yy_action_57(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_DictionaryMember(_dollar2)
-  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(_dollar1)
-  guard _args[2].0 is YYObj_Array_DictionaryMember_(_dollar3)
-  YYObj_Array_DictionaryMember_({();  [{ .._dollar2, extended_attributes: _dollar1 }, .._dollar3] })
+  guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
+  guard _args[1].0 is YYObj_DictionaryMember(m)
+  guard _args[2].0 is YYObj_Array_DictionaryMember_(members)
+  YYObj_Array_DictionaryMember_({();  [{ ..m, extended_attributes }, ..members] })
 }
 
 // file:///./parser.mbty
-// 302|    "required" type IDENTIFIER ";"
-// 303|      { { extended_attributes: [], type_: $2, name: $3, required: true, default_value: None } }
+// 302|    "required" type_=type name=IDENTIFIER ";"
+// 303|      { { extended_attributes: [], type_, name, required: true, default_value: None } }
 fn yy_action_58(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_Type(_dollar2)
-  guard _args[2].0 is YYObj_String(_dollar3)
-  YYObj_DictionaryMember({();  { extended_attributes: [], type_: _dollar2, name: _dollar3, required: true, default_value: None } })
+  guard _args[1].0 is YYObj_Type(type_)
+  guard _args[2].0 is YYObj_String(name)
+  YYObj_DictionaryMember({();  { extended_attributes: [], type_, name, required: true, default_value: None } })
 }
 
 // file:///./parser.mbty
-// 304|    type IDENTIFIER default_value_opt ";"
-// 305|      { { extended_attributes: [], type_: $1, name: $2, required: false, default_value: $3 } }
+// 304|    type_=type name=IDENTIFIER default_value=default_value_opt ";"
+// 305|      { { extended_attributes: [], type_, name, required: false, default_value } }
 fn yy_action_59(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Type(_dollar1)
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[2].0 is YYObj_Option_DefaultValue_(_dollar3)
-  YYObj_DictionaryMember({();  { extended_attributes: [], type_: _dollar1, name: _dollar2, required: false, default_value: _dollar3 } })
+  guard _args[0].0 is YYObj_Type(type_)
+  guard _args[1].0 is YYObj_String(name)
+  guard _args[2].0 is YYObj_Option_DefaultValue_(default_value)
+  YYObj_DictionaryMember({();  { extended_attributes: [], type_, name, required: false, default_value } })
 }
 
 // file:///./parser.mbty
@@ -772,19 +772,19 @@ fn yy_action_63(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 309|    STRING enum_value_list_rest { [$1, ..$2] }
+// 309|    e=STRING enums=enum_value_list_rest { [e, ..enums] }
 fn yy_action_64(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(_dollar1)
-  guard _args[1].0 is YYObj_Array_String_(_dollar2)
-  YYObj_Array_String_({();  [_dollar1, .._dollar2] })
+  guard _args[0].0 is YYObj_String(e)
+  guard _args[1].0 is YYObj_Array_String_(enums)
+  YYObj_Array_String_({();  [e, ..enums] })
 }
 
 // file:///./parser.mbty
-// 312|    "," STRING enum_value_list_rest  { [$2, ..$3] }
+// 312|    "," e=STRING enums=enum_value_list_rest  { [e, ..enums] }
 fn yy_action_65(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[2].0 is YYObj_Array_String_(_dollar3)
-  YYObj_Array_String_({();  [_dollar2, .._dollar3] })
+  guard _args[1].0 is YYObj_String(e)
+  guard _args[2].0 is YYObj_Array_String_(enums)
+  YYObj_Array_String_({();  [e, ..enums] })
 }
 
 // file:///./parser.mbty
@@ -986,38 +986,38 @@ fn yy_action_90(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 317|    single_type null_modifier   { 
-// 318|      match $2 {
-// 319|        Some(_) => Type::Nullable($1)
-// 320|        None => $1 
+// 317|    type_=single_type null=null_modifier   { 
+// 318|      match null {
+// 319|        Some(_) => Type::Nullable(type_)
+// 320|        None => type_
 // 321|      }
 // 322|    }
 fn yy_action_91(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_Option_Type_(_dollar2)
-  guard _args[0].0 is YYObj_Type(_dollar1)
+  guard _args[0].0 is YYObj_Type(type_)
+  guard _args[1].0 is YYObj_Option_Type_(null)
   YYObj_Type({();  
-      match _dollar2 {
-        Some(_) => Type::Nullable(_dollar1)
-        None => _dollar1 
+      match null {
+        Some(_) => Type::Nullable(type_)
+        None => type_
       }
     })
 }
 
 // file:///./parser.mbty
-// 323|    "(" single_type "or" single_type ")" null_modifier {
+// 323|    "(" single_type "or" single_type ")" null=null_modifier {
 // 324|      let union = Type::Union([$2, $4])
-// 325|      match $6 {
+// 325|      match null {
 // 326|        Some(_) => Type::Nullable(union)
 // 327|        None => union
 // 328|      }
 // 329|    }
 fn yy_action_92(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[5].0 is YYObj_Option_Type_(null)
   guard _args[1].0 is YYObj_Type(_dollar2)
   guard _args[3].0 is YYObj_Type(_dollar4)
-  guard _args[5].0 is YYObj_Option_Type_(_dollar6)
   YYObj_Type({(); 
       let union = Type::Union([_dollar2, _dollar4])
-      match _dollar6 {
+      match null {
         Some(_) => Type::Nullable(union)
         None => union
       }
