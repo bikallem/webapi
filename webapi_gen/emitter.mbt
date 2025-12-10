@@ -137,14 +137,7 @@ fn map_idl_type(idl_type : Type) -> String {
 ///|
 /// Convert WebIDL enum value to MoonBit enum variant name
 fn enum_value_to_variant(value : String) -> String {
-  let unquoted = if value.has_prefix("\"") && value.has_suffix("\"") {
-    value.sub(start=1, end=value.length() - 1) catch {
-      _ => value
-    }
-  } else {
-    value
-  }
-  to_pascal_case(unquoted.to_string())
+  to_pascal_case(value.to_string())
 }
 
 ///|
