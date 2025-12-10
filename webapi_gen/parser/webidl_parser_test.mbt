@@ -711,5 +711,5 @@ test "comprehensive integration test" (t : @test.Test) {
     #|};
   let defs = @parser.parse(idl)
   t.write(defs.to_json().stringify(indent=2))
-  t.snapshot(filename="webidl_parser_comprehensive_integration_test.json")
+  t.snapshot(filename="comprehensive integration test.json")
 }
