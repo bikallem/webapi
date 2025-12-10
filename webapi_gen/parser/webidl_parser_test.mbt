@@ -245,30 +245,39 @@ test "parse namespace" {
         {
           "name": "CSS",
           "members": [
-            [
-              "Operation",
-              {
-                "return_type": "Boolean",
-                "name": "supports",
-                "arguments": [
-                  {
-                    "extended_attributes": [],
-                    "type_": { "extended_attributes": [], "type_": "DOMString" },
-                    "name": "property",
-                    "optional": false,
-                    "variadic": false,
-                  },
-                  {
-                    "extended_attributes": [],
-                    "type_": { "extended_attributes": [], "type_": "DOMString" },
-                    "name": "value",
-                    "optional": false,
-                    "variadic": false,
-                  },
-                ],
-                "static_": false,
-              },
-            ],
+            {
+              "extended_attributes": [],
+              "namespace_member": [
+                "Operation",
+                {
+                  "return_type": "Boolean",
+                  "name": "supports",
+                  "arguments": [
+                    {
+                      "extended_attributes": [],
+                      "type_": {
+                        "extended_attributes": [],
+                        "type_": "DOMString",
+                      },
+                      "name": "property",
+                      "optional": false,
+                      "variadic": false,
+                    },
+                    {
+                      "extended_attributes": [],
+                      "type_": {
+                        "extended_attributes": [],
+                        "type_": "DOMString",
+                      },
+                      "name": "value",
+                      "optional": false,
+                      "variadic": false,
+                    },
+                  ],
+                  "static_": false,
+                },
+              ],
+            },
           ],
         },
       ],

@@ -259,8 +259,9 @@ setlike_member -> SetlikeMember:
   | "setlike" "<" type ">" ";" { { value_type: $3, is_readonly: false } }
 
 // Namespace members
-namespace_members -> Array[NamespaceMember]:
-  | extended_attribute_list namespace_member namespace_members { [$2, ..$3] }
+namespace_members -> Array[NamespaceMemberExtendedAttributes]:
+  | extended_attributes=extended_attribute_list namespace_member = namespace_member namespaces=namespace_members 
+    { [{ extended_attributes, namespace_member}, ..namespaces] }
   |                             { [] }
 
 namespace_member -> NamespaceMember:

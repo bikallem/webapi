@@ -264,6 +264,12 @@ pub(all) enum NamespaceMember {
   Const(ConstMember)
 } derive(Show, Eq, ToJson)
 
+///|
+pub(all) struct NamespaceMemberExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  namespace_member : NamespaceMember
+} derive(Show, Eq, ToJson)
+
 // =============================================================================
 // Top-level Definitions
 // =============================================================================
@@ -325,14 +331,14 @@ pub(all) struct PartialMixinDefinition {
 /// Namespace definition
 pub(all) struct NamespaceDefinition {
   name : String
-  members : Array[NamespaceMember]
+  members : Array[NamespaceMemberExtendedAttributes]
 } derive(Show, Eq, ToJson)
 
 ///|
 /// Partial namespace definition
 pub(all) struct PartialNamespaceDefinition {
   name : String
-  members : Array[NamespaceMember]
+  members : Array[NamespaceMemberExtendedAttributes]
 } derive(Show, Eq, ToJson)
 
 ///|

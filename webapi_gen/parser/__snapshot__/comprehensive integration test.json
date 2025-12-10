@@ -278,46 +278,52 @@
       {
         "name": "CSS",
         "members": [
-          [
-            "Attribute",
-            {
-              "type_": "DOMString",
-              "name": "cssText",
-              "is_readonly": true,
-              "static_": false,
-              "is_inherit": false
-            }
-          ],
-          [
-            "Operation",
-            {
-              "return_type": "Boolean",
-              "name": "supports",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+          {
+            "extended_attributes": [],
+            "namespace_member": [
+              "Attribute",
+              {
+                "type_": "DOMString",
+                "name": "cssText",
+                "is_readonly": true,
+                "static_": false,
+                "is_inherit": false
+              }
+            ]
+          },
+          {
+            "extended_attributes": [],
+            "namespace_member": [
+              "Operation",
+              {
+                "return_type": "Boolean",
+                "name": "supports",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "property",
+                    "optional": false,
+                    "variadic": false
                   },
-                  "name": "property",
-                  "optional": false,
-                  "variadic": false
-                },
-                {
-                  "extended_attributes": [],
-                  "type_": {
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
-                  },
-                  "name": "value",
-                  "optional": false,
-                  "variadic": false
-                }
-              ],
-              "static_": false
-            }
-          ]
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "value",
+                    "optional": false,
+                    "variadic": false
+                  }
+                ],
+                "static_": false
+              }
+            ]
+          }
         ]
       }
     ]
@@ -329,39 +335,42 @@
       {
         "name": "CSS",
         "members": [
-          [
-            "Operation",
-            {
-              "return_type": [
-                "Identifier",
-                "CSSStyleDeclaration"
-              ],
-              "name": "parseStyleValue",
-              "arguments": [
-                {
-                  "extended_attributes": [],
-                  "type_": {
+          {
+            "extended_attributes": [],
+            "namespace_member": [
+              "Operation",
+              {
+                "return_type": [
+                  "Identifier",
+                  "CSSStyleDeclaration"
+                ],
+                "name": "parseStyleValue",
+                "arguments": [
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "property",
+                    "optional": false,
+                    "variadic": false
                   },
-                  "name": "property",
-                  "optional": false,
-                  "variadic": false
-                },
-                {
-                  "extended_attributes": [],
-                  "type_": {
+                  {
                     "extended_attributes": [],
-                    "type_": "DOMString"
-                  },
-                  "name": "value",
-                  "optional": false,
-                  "variadic": false
-                }
-              ],
-              "static_": false
-            }
-          ]
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": "DOMString"
+                    },
+                    "name": "value",
+                    "optional": false,
+                    "variadic": false
+                  }
+                ],
+                "static_": false
+              }
+            ]
+          }
         ]
       }
     ]

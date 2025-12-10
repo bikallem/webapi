@@ -269,7 +269,7 @@ pub impl ToJson for MixinDefinition
 
 pub(all) struct NamespaceDefinition {
   name : String
-  members : Array[NamespaceMember]
+  members : Array[NamespaceMemberExtendedAttributes]
 }
 pub impl Eq for NamespaceDefinition
 pub impl Show for NamespaceDefinition
@@ -283,6 +283,14 @@ pub(all) enum NamespaceMember {
 pub impl Eq for NamespaceMember
 pub impl Show for NamespaceMember
 pub impl ToJson for NamespaceMember
+
+pub(all) struct NamespaceMemberExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  namespace_member : NamespaceMember
+}
+pub impl Eq for NamespaceMemberExtendedAttributes
+pub impl Show for NamespaceMemberExtendedAttributes
+pub impl ToJson for NamespaceMemberExtendedAttributes
 
 pub(all) struct OperationMember {
   return_type : Type
@@ -321,7 +329,7 @@ pub impl ToJson for PartialMixinDefinition
 
 pub(all) struct PartialNamespaceDefinition {
   name : String
-  members : Array[NamespaceMember]
+  members : Array[NamespaceMemberExtendedAttributes]
 }
 pub impl Eq for PartialNamespaceDefinition
 pub impl Show for PartialNamespaceDefinition
