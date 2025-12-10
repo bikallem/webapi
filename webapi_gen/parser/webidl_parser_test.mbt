@@ -41,6 +41,36 @@ test "parse interface with inheritance" {
 }
 
 ///|
+test "parse with union type" {
+  let idl =
+    #|interface Example {
+    #|  attribute (DOMString or long) exampleAttr;
+    #|};
+  @json.inspect(@parser.parse(idl), content=[
+    [
+      "Interface",
+      {
+        "extended_attributes": [],
+        "name": "Example",
+        "members": [
+          [
+            "Attribute",
+            {
+              "extended_attributes": [],
+              "type_": ["Union", ["DOMString", "Long"]],
+              "name": "exampleAttr",
+              "is_readonly": false,
+              "static_": false,
+              "is_inherit": false,
+            },
+          ],
+        ],
+      },
+    ],
+  ])
+}
+
+///|
 test "parse interface with extended attributes" {
   let idl =
     #|[Exposed=Window]
