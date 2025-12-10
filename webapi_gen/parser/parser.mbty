@@ -265,8 +265,10 @@ namespace_members -> Array[NamespaceMemberExtendedAttributes]:
   |                             { [] }
 
 namespace_member -> NamespaceMember:
-  | "readonly" "attribute" type IDENTIFIER ";" { Attribute({ type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
-  | type IDENTIFIER "(" argument_list ")" ";"  { Operation({ return_type: $1, name: Some($2), arguments: $4, static_: false, special: None }) }
+  | "readonly" "attribute" type IDENTIFIER ";" 
+    { Attribute({ type_: $3, name: $4, is_readonly: true, static_: false, is_inherit: false }) }
+  | type IDENTIFIER "(" argument_list ")" ";"  
+    { Operation({ return_type: $1, name: Some($2), arguments: $4, static_: false, special: None }) }
   | const_member                { Const($1) }
 
 // Dictionary members
