@@ -174,7 +174,10 @@ test "parse callback function" {
         "arguments": [
           {
             "extended_attributes": [],
-            "type_": ["Identifier", "Event"],
+            "type_": {
+              "extended_attributes": [],
+              "type_": ["Identifier", "Event"],
+            },
             "name": "ev",
             "optional": false,
             "variadic": false,
@@ -207,7 +210,10 @@ test "parse callback interface" {
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": ["Identifier", "Event"],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": ["Identifier", "Event"],
+                },
                 "name": "event",
                 "optional": false,
                 "variadic": false,
@@ -243,14 +249,14 @@ test "parse namespace" {
               "arguments": [
                 {
                   "extended_attributes": [],
-                  "type_": "DOMString",
+                  "type_": { "extended_attributes": [], "type_": "DOMString" },
                   "name": "property",
                   "optional": false,
                   "variadic": false,
                 },
                 {
                   "extended_attributes": [],
-                  "type_": "DOMString",
+                  "type_": { "extended_attributes": [], "type_": "DOMString" },
                   "name": "value",
                   "optional": false,
                   "variadic": false,
@@ -361,7 +367,7 @@ test "parse interface with constructor" {
               "arguments": [
                 {
                   "extended_attributes": [],
-                  "type_": "DOMString",
+                  "type_": { "extended_attributes": [], "type_": "DOMString" },
                   "name": "url",
                   "optional": false,
                   "variadic": false,
@@ -397,7 +403,10 @@ test "parse interface with getter" {
               "arguments": [
                 {
                   "extended_attributes": [],
-                  "type_": "UnsignedLong",
+                  "type_": {
+                    "extended_attributes": [],
+                    "type_": "UnsignedLong",
+                  },
                   "name": "index",
                   "optional": false,
                   "variadic": false,
@@ -483,7 +492,7 @@ test "parse interface with static operation" {
               "arguments": [
                 {
                   "extended_attributes": [],
-                  "type_": "DOMString",
+                  "type_": { "extended_attributes": [], "type_": "DOMString" },
                   "name": "url",
                   "optional": false,
                   "variadic": false,

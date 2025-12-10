@@ -293,7 +293,7 @@ impl WebIdlVisitor with visit_string_type(_self, _str_type) -> Unit {
 
 ///|
 impl WebIdlVisitor with visit_argument(self, arg) -> Unit {
-  self.visit_type(arg.type_)
+  self.visit_type_with_extended_attributes(arg.type_)
 }
 
 ///|

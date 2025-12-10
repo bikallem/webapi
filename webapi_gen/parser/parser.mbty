@@ -187,8 +187,6 @@ callback_interface_def -> CallbackInterfaceDefinition:
   | "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";"
       { { extended_attributes: [], name, members } }
 
-
-
 callback_interface_members -> Array[CallbackInterfaceMember]:
   | ext_attr=extended_attribute_list m=callback_interface_member members=callback_interface_members
       { [add_callback_interface_member_ext_attrs(m, ext_attr), ..members] }
@@ -312,9 +310,69 @@ enum_value_list_rest -> Array[String]:
   | ","                              { [] }
   |                                  { [] }
 
+// Arguments
+argument_list -> Array[Argument]:
+  | argument arguments          { [$1, ..$2] }
+  |                             { [] }
+
+arguments -> Array[Argument]:
+  | "," argument arguments      { [$2, ..$3] }
+  |                             { [] }
+
+argument -> Argument:
+  | extended_attributes=extended_attribute_list arg=argument_rest
+      { { ..arg, extended_attributes } }
+
+argument_rest -> Argument:
+  | "optional" type_=type_with_extended_attributes name=argument_name default_value=default_value_opt
+      { { extended_attributes:[], type_, name, optional: true, variadic: false, default_value } }
+  | type_=type variadic=ellipsis  name=argument_name
+      { 
+        let type_ = { extended_attributes: [], type_ }
+        { extended_attributes:[], type_, name, optional: false, variadic, default_value: None } 
+      }
+
+ellipsis -> Bool:
+  | "..."                       { true }
+  |                             { false }
+
+argument_name -> String:
+  | argument_name_keyword   { $1 }
+  | IDENTIFIER              { $1 }
+
+argument_name_keyword -> String
+  : "attribute"    { "attribute" }
+  | "callback"     { "callback" }
+  | "const"        { "const" }
+  | "constructor"  { "constructor" }
+  | "deleter"      { "deleter" }
+  | "dictionary"   { "dictionary" }
+  | "enum"         { "enum" }
+  | "getter"       { "getter" }
+  | "includes"     { "includes" }
+  | "inherit"      { "inherit" }
+  | "interface"    { "interface" }
+  | "iterable"     { "iterable" }
+  | "maplike"      { "maplike" }
+  | "mixin"        { "mixin" }
+  | "namespace"    { "namespace" }
+  | "partial"      { "partial" }
+  | "readonly"     { "readonly" }
+  | "required"     { "required" }
+  | "setlike"      { "setlike" }
+  | "setter"       { "setter" }
+  | "static"       { "static" }
+  | "stringifier"  { "stringifier" }
+  | "typedef"      { "typedef" }
+  | "unrestricted" { "unrestricted" }
+  ;
+
 type -> Type:
   | type_=single_type { type_ }
   | union_type=union_type { union_type }
+
+type_with_extended_attributes -> TypeWithExtendedAttributes:
+  | extended_attributes=extended_attribute_list type_=type  { { extended_attributes, type_ } }
 
 // Union types
 union_type -> Type:
@@ -336,27 +394,21 @@ union_member_types -> Array[TypeWithExtendedAttributes]:
   | "or" union_member_type union_member_types   { [$2, ..$3] }
   |                                             { [] }
 
-type_with_extended_attributes -> (Array[ExtendedAttribute], Type):
-  | extended_attribute_list type  { ($1, $2) }
-
-type_with_extended_attributes2 -> TypeWithExtendedAttributes:
-  | extended_attributes=extended_attribute_list type_=type  { { extended_attributes, type_ } }
-
 distinguishable_type -> Type:
   | primitive_type                { $1 }
   | string_type                   { $1 }
   | IDENTIFIER                    { Type::Identifier($1) }
   | "sequence" "<" type ">"       { Type::Sequence($3) }
-  | "async_sequence" "<" type_with_extended_attributes2 ">" 
+  | "async_sequence" "<" type_with_extended_attributes ">" 
     { Type::AsyncSequence($3) }
   | "object"                    { Type::Object }
   | "symbol"                    { Type::Symbol }
   | buffer_type                 { $1 }
-  | "FrozenArray" "<" type_with_extended_attributes2 ">"
+  | "FrozenArray" "<" type_with_extended_attributes ">"
     { Type::FrozenArray($3) }
-  | "ObservableArray" "<" type_with_extended_attributes2 ">"
+  | "ObservableArray" "<" type_with_extended_attributes ">"
     { Type::ObservableArray($3) }
-  | "record" "<" string_type "," type_with_extended_attributes2 ">" 
+  | "record" "<" string_type "," type_with_extended_attributes ">" 
     { Type::Record(type_to_string_type($3), $5) }
   | "undefined"                 { Type::Undefined }
 
@@ -445,23 +497,6 @@ default_value -> DefaultValue:
   | "{" "}"                     { DefaultValue::EmptyObject }
   | "null"                      { DefaultValue::Null }
   | "undefined"                 { DefaultValue::Undefined }
-
-// Arguments
-argument_list -> Array[Argument]:
-  | argument arguments          { [$1, ..$2] }
-  |                             { [] }
-
-arguments -> Array[Argument]:
-  | "," argument arguments      { [$2, ..$3] }
-  |                             { [] }
-
-argument -> Argument:
-  | "optional" type_with_extended_attributes IDENTIFIER default_value_opt
-      { { extended_attributes: $2.0, type_: $2.1, name: $3, optional: true, variadic: false, default_value: $4 } }
-  | type_with_extended_attributes "..." IDENTIFIER
-      { { extended_attributes: $1.0, type_: $1.1, name: $3, optional: false, variadic: true, default_value: None } }
-  | type_with_extended_attributes IDENTIFIER
-      { { extended_attributes: $1.0, type_: $1.1, name: $2, optional: false, variadic: false, default_value: None } }
 
 // Extended attributes
 extended_attribute_list -> Array[ExtendedAttribute]:

@@ -27,20 +27,26 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "type",
                 "optional": false,
                 "variadic": false
               },
               {
                 "extended_attributes": [],
-                "type_": [
-                  "Nullable",
-                  [
-                    "Identifier",
-                    "EventListener"
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": [
+                    "Nullable",
+                    [
+                      "Identifier",
+                      "EventListener"
+                    ]
                   ]
-                ],
+                },
                 "name": "listener",
                 "optional": false,
                 "variadic": false
@@ -58,10 +64,13 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": [
-                  "Identifier",
-                  "Event"
-                ],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": [
+                    "Identifier",
+                    "Event"
+                  ]
+                },
                 "name": "event",
                 "optional": false,
                 "variadic": false
@@ -88,10 +97,13 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": [
-                  "Identifier",
-                  "Event"
-                ],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": [
+                    "Identifier",
+                    "Event"
+                  ]
+                },
                 "name": "event",
                 "optional": false,
                 "variadic": false
@@ -147,7 +159,10 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "elementId",
                 "optional": false,
                 "variadic": false
@@ -254,14 +269,20 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "property",
                 "optional": false,
                 "variadic": false
               },
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "value",
                 "optional": false,
                 "variadic": false
@@ -291,14 +312,20 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "property",
                 "optional": false,
                 "variadic": false
               },
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "value",
                 "optional": false,
                 "variadic": false
@@ -424,10 +451,13 @@
       "arguments": [
         {
           "extended_attributes": [],
-          "type_": [
-            "Identifier",
-            "Event"
-          ],
+          "type_": {
+            "extended_attributes": [],
+            "type_": [
+              "Identifier",
+              "Event"
+            ]
+          },
           "name": "ev",
           "optional": false,
           "variadic": false
@@ -476,7 +506,10 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "UnsignedLong",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "UnsignedLong"
+                },
                 "name": "index",
                 "optional": false,
                 "variadic": false
@@ -501,7 +534,10 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "name",
                 "optional": false,
                 "variadic": false
@@ -578,14 +614,20 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "url",
                 "optional": false,
                 "variadic": false
               },
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "base",
                 "optional": true,
                 "variadic": false
@@ -602,14 +644,20 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "url",
                 "optional": false,
                 "variadic": false
               },
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "base",
                 "optional": true,
                 "variadic": false
@@ -637,7 +685,10 @@
           [
             {
               "extended_attributes": [],
-              "type_": "DOMString",
+              "type_": {
+                "extended_attributes": [],
+                "type_": "DOMString"
+              },
               "name": "src",
               "optional": true,
               "variadic": false

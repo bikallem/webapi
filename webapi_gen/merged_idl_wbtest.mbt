@@ -127,7 +127,10 @@ test "MergedIdl::from flattens mixins into interfaces" {
           "arguments": [
             {
               "extended_attributes": [],
-              "type_": ["Identifier", "Element"],
+              "type_": {
+                "extended_attributes": [],
+                "type_": ["Identifier", "Element"],
+              },
               "name": "newChild",
               "optional": false,
               "variadic": false,

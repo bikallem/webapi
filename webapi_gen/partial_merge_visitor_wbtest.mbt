@@ -186,7 +186,10 @@ test "PartialMergeVisitor merges interface and partial interface" {
           "arguments": [
             {
               "extended_attributes": [],
-              "type_": ["Identifier", "Element"],
+              "type_": {
+                "extended_attributes": [],
+                "type_": ["Identifier", "Element"],
+              },
               "name": "newChild",
               "optional": false,
               "variadic": false,

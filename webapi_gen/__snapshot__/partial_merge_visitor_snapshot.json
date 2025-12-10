@@ -29,10 +29,13 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": [
-                  "Identifier",
-                  "Element"
-                ],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": [
+                    "Identifier",
+                    "Element"
+                  ]
+                },
                 "name": "newChild",
                 "optional": false,
                 "variadic": false
@@ -121,7 +124,10 @@
       "arguments": [
         {
           "extended_attributes": [],
-          "type_": "DOMString",
+          "type_": {
+            "extended_attributes": [],
+            "type_": "DOMString"
+          },
           "name": "arg",
           "optional": false,
           "variadic": false
@@ -143,10 +149,13 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": [
-                  "Identifier",
-                  "Event"
-                ],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": [
+                    "Identifier",
+                    "Event"
+                  ]
+                },
                 "name": "e",
                 "optional": false,
                 "variadic": false

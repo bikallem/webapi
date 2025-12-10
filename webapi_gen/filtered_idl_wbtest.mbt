@@ -94,7 +94,10 @@ test "filter_idl excludes callbacks" {
         "arguments": [
           {
             "extended_attributes": [],
-            "type_": ["Identifier", "Event"],
+            "type_": {
+              "extended_attributes": [],
+              "type_": ["Identifier", "Event"],
+            },
             "name": "event",
             "optional": false,
             "variadic": false,

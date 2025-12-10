@@ -127,7 +127,7 @@ test "CountingVisitor visits nested types in interface members" {
           arguments: [
             Argument::{
               extended_attributes: [],
-              type_: Identifier("Element"),
+              type_: { extended_attributes: [], type_: Identifier("Element") },
               name: "newChild",
               optional: false,
               default_value: None,

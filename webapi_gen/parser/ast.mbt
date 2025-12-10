@@ -107,7 +107,7 @@ pub(all) enum StringType {
 /// Operation/constructor argument
 pub(all) struct Argument {
   extended_attributes : Array[ExtendedAttribute]
-  type_ : Type
+  type_ : TypeWithExtendedAttributes
   name : String
   optional : Bool
   variadic : Bool

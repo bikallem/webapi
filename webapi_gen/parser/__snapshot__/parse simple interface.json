@@ -12,23 +12,29 @@
             "arguments": [
               {
                 "extended_attributes": [],
-                "type_": [
-                  "Sequence",
-                  [
-                    "Identifier",
-                    "BlobPart"
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": [
+                    "Sequence",
+                    [
+                      "Identifier",
+                      "BlobPart"
+                    ]
                   ]
-                ],
+                },
                 "name": "blobParts",
                 "optional": true,
                 "variadic": false
               },
               {
                 "extended_attributes": [],
-                "type_": [
-                  "Identifier",
-                  "BlobPropertyBag"
-                ],
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": [
+                    "Identifier",
+                    "BlobPropertyBag"
+                  ]
+                },
                 "name": "options",
                 "optional": true,
                 "variadic": false,
@@ -59,32 +65,41 @@
             "name": "slice",
             "arguments": [
               {
-                "extended_attributes": [
-                  [
-                    "NoArgs",
-                    "Clamp"
-                  ]
-                ],
-                "type_": "LongLong",
+                "extended_attributes": [],
+                "type_": {
+                  "extended_attributes": [
+                    [
+                      "NoArgs",
+                      "Clamp"
+                    ]
+                  ],
+                  "type_": "LongLong"
+                },
                 "name": "start",
                 "optional": true,
                 "variadic": false
               },
               {
-                "extended_attributes": [
-                  [
-                    "NoArgs",
-                    "Clamp"
-                  ]
-                ],
-                "type_": "LongLong",
+                "extended_attributes": [],
+                "type_": {
+                  "extended_attributes": [
+                    [
+                      "NoArgs",
+                      "Clamp"
+                    ]
+                  ],
+                  "type_": "LongLong"
+                },
                 "name": "end",
                 "optional": true,
                 "variadic": false
               },
               {
                 "extended_attributes": [],
-                "type_": "DOMString",
+                "type_": {
+                  "extended_attributes": [],
+                  "type_": "DOMString"
+                },
                 "name": "contentType",
                 "optional": true,
                 "variadic": false
