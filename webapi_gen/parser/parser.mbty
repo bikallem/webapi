@@ -179,52 +179,52 @@ definition -> Definition:
   | includes_statement          { Definition::Includes($1) }
 
 interface_def -> InterfaceDefinition:
-  | "interface" IDENTIFIER inheritance "{" interface_members "}" ";"
-      { { extended_attributes: [], name: $2, inheritance: $3, members: $5 } }
+  | "interface" name=IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
+      { { extended_attributes: [], name, inheritance, members } }
 
 partial_interface_def -> PartialInterfaceDefinition:
-  | "partial" "interface" IDENTIFIER "{" interface_members "}" ";"
-      { { extended_attributes: [], name: $3, members: $5 } }
+  | "partial" "interface" name=IDENTIFIER "{" members = interface_members "}" ";"  
+      { { extended_attributes: [], name, members } }
 
 mixin_def -> MixinDefinition:
-  | "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
-      { { extended_attributes: [], name: $3, members: $5 } }
+  | "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
+      { { extended_attributes: [], name, members } }
 
 partial_mixin_def -> PartialMixinDefinition:
-  | "partial" "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
-      { { extended_attributes: [], name: $4, members: $6 } }
+  | "partial" "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
+      { { extended_attributes: [], name, members } }
 
 namespace_def -> NamespaceDefinition:
-  | "namespace" IDENTIFIER "{" namespace_members "}" ";"
-      { { extended_attributes: [], name: $2, members: $4 } }
+  | "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
+      { { extended_attributes: [], name, members } }
 
 partial_namespace_def -> PartialNamespaceDefinition:
-  | "partial" "namespace" IDENTIFIER "{" namespace_members "}" ";"
-      { { extended_attributes: [], name: $3, members: $5 } }
+  | "partial" "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
+      { { extended_attributes: [], name, members } }
 
 dictionary_def -> DictionaryDefinition:
-  | "dictionary" IDENTIFIER inheritance "{" dictionary_members "}" ";"
-      { { extended_attributes: [], name: $2, inheritance: $3, members: $5 } }
+  | "dictionary" name=IDENTIFIER inheritance = inheritance "{" members = dictionary_members "}" ";"
+      { { extended_attributes: [], name, inheritance, members } }
 
 partial_dictionary_def -> PartialDictionaryDefinition:
-  | "partial" "dictionary" IDENTIFIER "{" dictionary_members "}" ";"
-      { { extended_attributes: [], name: $3, members: $5 } }
+  | "partial" "dictionary" name=IDENTIFIER "{" members = dictionary_members "}" ";"
+      { { extended_attributes: [], name, members } }
 
 enum_def -> EnumDefinition:
-  | "enum" IDENTIFIER "{" enum_value_list "}" ";"
-      { { extended_attributes: [], name: $2, values: $4 } }
+  | "enum" name=IDENTIFIER "{" values = enum_value_list "}" ";"
+      { { extended_attributes: [], name, values } }
       
 typedef_def -> TypedefDefinition:
-  | "typedef" type IDENTIFIER ";"
-      { { extended_attributes: [], type_: $2, name: $3 } }
+  | "typedef" type_=type name=IDENTIFIER ";"
+      { { extended_attributes: [], type_, name } }
 
 callback_def -> CallbackFunctionDefinition:
-  | "callback" IDENTIFIER "=" type "(" argument_list ")" ";"
-      { { extended_attributes: [], name: $2, return_type: $4, arguments: $6 } }
+  | "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";"
+      { { extended_attributes: [], name, return_type, arguments } }
 
 callback_interface_def -> CallbackInterfaceDefinition:
-  | "callback" "interface" IDENTIFIER "{" callback_interface_members "}" ";"
-      { { extended_attributes: [], name: $3, members: $5 } }
+  | "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";"
+      { { extended_attributes: [], name, members } }
 
 
 

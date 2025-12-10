@@ -359,40 +359,40 @@ fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 182|    "interface" IDENTIFIER inheritance "{" interface_members "}" ";"
-// 183|      { { extended_attributes: [], name: $2, inheritance: $3, members: $5 } }
+// 182|    "interface" name=IDENTIFIER inheritance = inheritance "{" members = interface_members "}" ";"
+// 183|      { { extended_attributes: [], name, inheritance, members } }
 fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[2].0 is YYObj_String_(_dollar3)
-  guard _args[4].0 is YYObj_Array_InterfaceMember_(_dollar5)
-  YYObj_InterfaceDefinition({();  { extended_attributes: [], name: _dollar2, inheritance: _dollar3, members: _dollar5 } })
+  guard _args[1].0 is YYObj_String(name)
+  guard _args[2].0 is YYObj_String_(inheritance)
+  guard _args[4].0 is YYObj_Array_InterfaceMember_(members)
+  YYObj_InterfaceDefinition({();  { extended_attributes: [], name, inheritance, members } })
 }
 
 // file:///./parser.mbty
-// 190|    "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
-// 191|      { { extended_attributes: [], name: $3, members: $5 } }
+// 190|    "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
+// 191|      { { extended_attributes: [], name, members } }
 fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_InterfaceMember_(_dollar5)
-  YYObj_MixinDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
+  guard _args[2].0 is YYObj_String(name)
+  guard _args[4].0 is YYObj_Array_InterfaceMember_(members)
+  YYObj_MixinDefinition({();  { extended_attributes: [], name, members } })
 }
 
 // file:///./parser.mbty
-// 186|    "partial" "interface" IDENTIFIER "{" interface_members "}" ";"
-// 187|      { { extended_attributes: [], name: $3, members: $5 } }
+// 186|    "partial" "interface" name=IDENTIFIER "{" members = interface_members "}" ";"  
+// 187|      { { extended_attributes: [], name, members } }
 fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_InterfaceMember_(_dollar5)
-  YYObj_PartialInterfaceDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
+  guard _args[2].0 is YYObj_String(name)
+  guard _args[4].0 is YYObj_Array_InterfaceMember_(members)
+  YYObj_PartialInterfaceDefinition({();  { extended_attributes: [], name, members } })
 }
 
 // file:///./parser.mbty
-// 194|    "partial" "interface" "mixin" IDENTIFIER "{" interface_members "}" ";"
-// 195|      { { extended_attributes: [], name: $4, members: $6 } }
+// 194|    "partial" "interface" "mixin" name=IDENTIFIER "{" members = interface_members "}" ";"
+// 195|      { { extended_attributes: [], name, members } }
 fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[3].0 is YYObj_String(_dollar4)
-  guard _args[5].0 is YYObj_Array_InterfaceMember_(_dollar6)
-  YYObj_PartialMixinDefinition({();  { extended_attributes: [], name: _dollar4, members: _dollar6 } })
+  guard _args[3].0 is YYObj_String(name)
+  guard _args[5].0 is YYObj_Array_InterfaceMember_(members)
+  YYObj_PartialMixinDefinition({();  { extended_attributes: [], name, members } })
 }
 
 // file:///./parser.mbty
@@ -636,30 +636,30 @@ fn yy_action_47(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 202|    "partial" "namespace" IDENTIFIER "{" namespace_members "}" ";"
-// 203|      { { extended_attributes: [], name: $3, members: $5 } }
+// 202|    "partial" "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
+// 203|      { { extended_attributes: [], name, members } }
 fn yy_action_48(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_NamespaceMember_(_dollar5)
-  YYObj_PartialNamespaceDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
+  guard _args[2].0 is YYObj_String(name)
+  guard _args[4].0 is YYObj_Array_NamespaceMember_(members)
+  YYObj_PartialNamespaceDefinition({();  { extended_attributes: [], name, members } })
 }
 
 // file:///./parser.mbty
-// 210|    "partial" "dictionary" IDENTIFIER "{" dictionary_members "}" ";"
-// 211|      { { extended_attributes: [], name: $3, members: $5 } }
+// 210|    "partial" "dictionary" name=IDENTIFIER "{" members = dictionary_members "}" ";"
+// 211|      { { extended_attributes: [], name, members } }
 fn yy_action_49(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_DictionaryMember_(_dollar5)
-  YYObj_PartialDictionaryDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
+  guard _args[2].0 is YYObj_String(name)
+  guard _args[4].0 is YYObj_Array_DictionaryMember_(members)
+  YYObj_PartialDictionaryDefinition({();  { extended_attributes: [], name, members } })
 }
 
 // file:///./parser.mbty
-// 198|    "namespace" IDENTIFIER "{" namespace_members "}" ";"
-// 199|      { { extended_attributes: [], name: $2, members: $4 } }
+// 198|    "namespace" name=IDENTIFIER "{" members = namespace_members "}" ";"
+// 199|      { { extended_attributes: [], name, members } }
 fn yy_action_50(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[3].0 is YYObj_Array_NamespaceMember_(_dollar4)
-  YYObj_NamespaceDefinition({();  { extended_attributes: [], name: _dollar2, members: _dollar4 } })
+  guard _args[1].0 is YYObj_String(name)
+  guard _args[3].0 is YYObj_Array_NamespaceMember_(members)
+  YYObj_NamespaceDefinition({();  { extended_attributes: [], name, members } })
 }
 
 // file:///./parser.mbty
@@ -705,13 +705,13 @@ fn yy_action_55(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 206|    "dictionary" IDENTIFIER inheritance "{" dictionary_members "}" ";"
-// 207|      { { extended_attributes: [], name: $2, inheritance: $3, members: $5 } }
+// 206|    "dictionary" name=IDENTIFIER inheritance = inheritance "{" members = dictionary_members "}" ";"
+// 207|      { { extended_attributes: [], name, inheritance, members } }
 fn yy_action_56(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[2].0 is YYObj_String_(_dollar3)
-  guard _args[4].0 is YYObj_Array_DictionaryMember_(_dollar5)
-  YYObj_DictionaryDefinition({();  { extended_attributes: [], name: _dollar2, inheritance: _dollar3, members: _dollar5 } })
+  guard _args[1].0 is YYObj_String(name)
+  guard _args[2].0 is YYObj_String_(inheritance)
+  guard _args[4].0 is YYObj_Array_DictionaryMember_(members)
+  YYObj_DictionaryDefinition({();  { extended_attributes: [], name, inheritance, members } })
 }
 
 // file:///./parser.mbty
@@ -763,12 +763,12 @@ fn yy_action_62(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 214|    "enum" IDENTIFIER "{" enum_value_list "}" ";"
-// 215|      { { extended_attributes: [], name: $2, values: $4 } }
+// 214|    "enum" name=IDENTIFIER "{" values = enum_value_list "}" ";"
+// 215|      { { extended_attributes: [], name, values } }
 fn yy_action_63(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[3].0 is YYObj_Array_String_(_dollar4)
-  YYObj_EnumDefinition({();  { extended_attributes: [], name: _dollar2, values: _dollar4 } })
+  guard _args[1].0 is YYObj_String(name)
+  guard _args[3].0 is YYObj_Array_String_(values)
+  YYObj_EnumDefinition({();  { extended_attributes: [], name, values } })
 }
 
 // file:///./parser.mbty
@@ -800,31 +800,31 @@ fn yy_action_67(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 218|    "typedef" type IDENTIFIER ";"
-// 219|      { { extended_attributes: [], type_: $2, name: $3 } }
+// 218|    "typedef" type_=type name=IDENTIFIER ";"
+// 219|      { { extended_attributes: [], type_, name } }
 fn yy_action_68(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_Type(_dollar2)
-  guard _args[2].0 is YYObj_String(_dollar3)
-  YYObj_TypedefDefinition({();  { extended_attributes: [], type_: _dollar2, name: _dollar3 } })
+  guard _args[1].0 is YYObj_Type(type_)
+  guard _args[2].0 is YYObj_String(name)
+  YYObj_TypedefDefinition({();  { extended_attributes: [], type_, name } })
 }
 
 // file:///./parser.mbty
-// 222|    "callback" IDENTIFIER "=" type "(" argument_list ")" ";"
-// 223|      { { extended_attributes: [], name: $2, return_type: $4, arguments: $6 } }
+// 222|    "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";"
+// 223|      { { extended_attributes: [], name, return_type, arguments } }
 fn yy_action_69(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_String(_dollar2)
-  guard _args[3].0 is YYObj_Type(_dollar4)
-  guard _args[5].0 is YYObj_Array_Argument_(_dollar6)
-  YYObj_CallbackFunctionDefinition({();  { extended_attributes: [], name: _dollar2, return_type: _dollar4, arguments: _dollar6 } })
+  guard _args[1].0 is YYObj_String(name)
+  guard _args[3].0 is YYObj_Type(return_type)
+  guard _args[5].0 is YYObj_Array_Argument_(arguments)
+  YYObj_CallbackFunctionDefinition({();  { extended_attributes: [], name, return_type, arguments } })
 }
 
 // file:///./parser.mbty
-// 226|    "callback" "interface" IDENTIFIER "{" callback_interface_members "}" ";"
-// 227|      { { extended_attributes: [], name: $3, members: $5 } }
+// 226|    "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";"
+// 227|      { { extended_attributes: [], name, members } }
 fn yy_action_70(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[2].0 is YYObj_String(_dollar3)
-  guard _args[4].0 is YYObj_Array_CallbackInterfaceMember_(_dollar5)
-  YYObj_CallbackInterfaceDefinition({();  { extended_attributes: [], name: _dollar3, members: _dollar5 } })
+  guard _args[2].0 is YYObj_String(name)
+  guard _args[4].0 is YYObj_Array_CallbackInterfaceMember_(members)
+  YYObj_CallbackInterfaceDefinition({();  { extended_attributes: [], name, members } })
 }
 
 // file:///./parser.mbty
