@@ -237,7 +237,7 @@ const_member -> ConstMember:
   | "const" type_=type name=IDENTIFIER "=" value=const_value ";" { { type_, name, value } }
 
 operation_member -> OperationMember:
-  | type IDENTIFIER "(" argument_list ")" ";" { { return_type: $1, name: Some($2), arguments: $4, static_: false, special: None } }
+  | return_type=type name=IDENTIFIER "(" argument_list ")" ";" { { return_type, name: Some(name), arguments: $4, static_: false, special: None } }
   | type "(" argument_list ")" ";" { { return_type: $1, name: None, arguments: $3, static_: false, special: None } }
 
 special -> Special:

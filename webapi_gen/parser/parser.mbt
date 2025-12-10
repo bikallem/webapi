@@ -854,12 +854,12 @@ fn yy_action_74(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 240|    type IDENTIFIER "(" argument_list ")" ";" { { return_type: $1, name: Some($2), arguments: $4, static_: false, special: None } }
+// 240|    return_type=type name=IDENTIFIER "(" argument_list ")" ";" { { return_type, name: Some(name), arguments: $4, static_: false, special: None } }
 fn yy_action_75(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Type(_dollar1)
-  guard _args[1].0 is YYObj_String(_dollar2)
+  guard _args[0].0 is YYObj_Type(return_type)
+  guard _args[1].0 is YYObj_String(name)
   guard _args[3].0 is YYObj_Array_Argument_(_dollar4)
-  YYObj_OperationMember({();  { return_type: _dollar1, name: Some(_dollar2), arguments: _dollar4, static_: false, special: None } })
+  YYObj_OperationMember({();  { return_type, name: Some(name), arguments: _dollar4, static_: false, special: None } })
 }
 
 // file:///./parser.mbty
