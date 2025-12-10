@@ -74,7 +74,8 @@ let keywords : Map[String, Token] = {
   "optional": OPTIONAL,
   "or": OR,
   "void": VOID,
-  "async": ASYNC,
+  "async_iterable": ASYNC_ITERABLE,
+  "async_sequence": ASYNC_SEQUENCE,
 }
 
 ///|

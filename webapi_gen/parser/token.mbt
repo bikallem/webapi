@@ -24,7 +24,8 @@ pub(all) enum Token {
   DELETER
   CONSTRUCTOR
   ITERABLE
-  ASYNC
+  ASYNC_ITERABLE
+  ASYNC_SEQUENCE
   MAPLIKE
   SETLIKE
   REQUIRED
@@ -118,7 +119,8 @@ pub fn Token::kind(self : Token) -> TokenKind {
     DELETER => TK_DELETER
     CONSTRUCTOR => TK_CONSTRUCTOR
     ITERABLE => TK_ITERABLE
-    ASYNC => TK_ASYNC
+    ASYNC_ITERABLE => TK_ASYNC_ITERABLE
+    ASYNC_SEQUENCE => TK_ASYNC_SEQUENCE
     MAPLIKE => TK_MAPLIKE
     SETLIKE => TK_SETLIKE
     REQUIRED => TK_REQUIRED
@@ -212,7 +214,8 @@ pub(all) enum TokenKind {
   TK_DELETER
   TK_CONSTRUCTOR
   TK_ITERABLE
-  TK_ASYNC
+  TK_ASYNC_ITERABLE
+  TK_ASYNC_SEQUENCE
   TK_MAPLIKE
   TK_SETLIKE
   TK_REQUIRED
@@ -307,7 +310,8 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_DELETER => "\"deleter\""
       TK_CONSTRUCTOR => "\"constructor\""
       TK_ITERABLE => "\"iterable\""
-      TK_ASYNC => "\"async\""
+      TK_ASYNC_ITERABLE => "\"async_iterable\""
+      TK_ASYNC_SEQUENCE => "\"async_sequence\""
       TK_MAPLIKE => "\"maplike\""
       TK_SETLIKE => "\"setlike\""
       TK_REQUIRED => "\"required\""

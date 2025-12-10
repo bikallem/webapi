@@ -36,7 +36,8 @@
 %token DELETER        "deleter"
 %token CONSTRUCTOR    "constructor"
 %token ITERABLE       "iterable"
-%token ASYNC          "async"
+%token ASYNC_ITERABLE "async_iterable"
+%token ASYNC_SEQUENCE  "async_sequence"
 %token MAPLIKE        "maplike"
 %token SETLIKE        "setlike"
 %token REQUIRED       "required"
@@ -72,6 +73,8 @@
 %token FROZENARRAY    "FrozenArray"
 %token OBSERVABLEARRAY "ObservableArray"
 %token RECORD         "record"
+
+// Operators
 %token OR             "or"
 
 // Type keywords - Buffer types
@@ -270,10 +273,10 @@ interface_member:
   | "static" type IDENTIFIER "(" argument_list ")" ";"
       { InterfaceMember::Operation({ extended_attributes: [], return_type: $2, name: Some($3), arguments: $5, static_: true, special: None }) }
   | iterable_member             { InterfaceMember::Iterable($1) }
-  | "async" "iterable" "<" type ">" ";"
-      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: None, value_type: $4, arguments: [] }) }
-  | "async" "iterable" "<" type "," type ">" ";"
-      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: Some($4), value_type: $6, arguments: [] }) }
+  | "async_iterable" "<" type ">" ";"
+      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: None, value_type: $3, arguments: [] }) }
+  | "async_iterable" "<" type "," type ">" ";"
+      { InterfaceMember::AsyncIterable({ extended_attributes: [], key_type: Some($3), value_type: $5, arguments: [] }) }
   | "readonly" maplike_member   { InterfaceMember::Maplike({ ..$2, is_readonly: true }) }
   | maplike_member              { InterfaceMember::Maplike($1) }
   | "readonly" setlike_member   { InterfaceMember::Setlike({ ..$2, is_readonly: true }) }
