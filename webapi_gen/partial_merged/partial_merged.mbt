@@ -1,7 +1,7 @@
 ///|
 /// Visitor that merges partial interfaces, mixins, and dictionaries into their
 /// primary definitions.
-struct PartialMerged {
+pub struct PartialMerged {
   interfaces : Map[String, PartialMergedInterface]
   mixins : Map[String, PartialMergedMixin]
   dictionaries : Map[String, PartialMergedDictionary]
@@ -62,7 +62,7 @@ fn PartialMerged::merge_dictionary(
 
 ///|
 /// Merges partial definitions from filtered IDL definitions
-fn merge_partials(
+pub fn merge_partials(
   filtered : Array[DefinitionExtendedAttributes],
 ) -> PartialMerged {
   let partial_merged = PartialMerged::{

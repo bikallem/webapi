@@ -24,22 +24,6 @@ type MergedDictionaryIR
 pub impl Show for MergedDictionaryIR
 pub impl ToJson for MergedDictionaryIR
 
-type PartialMerged
-pub impl Show for PartialMerged
-pub impl ToJson for PartialMerged
-
-type PartialMergedDictionary
-pub impl Show for PartialMergedDictionary
-pub impl ToJson for PartialMergedDictionary
-
-type PartialMergedInterface
-pub impl Show for PartialMergedInterface
-pub impl ToJson for PartialMergedInterface
-
-type PartialMergedMixin
-pub impl Show for PartialMergedMixin
-pub impl ToJson for PartialMergedMixin
-
 type TypeRegistry
 pub impl Show for TypeRegistry
 pub impl ToJson for TypeRegistry

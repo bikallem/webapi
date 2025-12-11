@@ -1,6 +1,6 @@
 ///|
 /// Merged interface IR with all partials and mixin members combined
-struct PartialMergedInterface {
+pub struct PartialMergedInterface {
   name : String
   members : Array[InterfaceMemberExtendedAttributes]
   inheritance : String?
@@ -16,7 +16,7 @@ fn PartialMergedInterface::new(
 }
 
 ///|
-fn PartialMergedInterface::merge(
+pub fn PartialMergedInterface::merge(
   self : PartialMergedInterface,
   members : Array[InterfaceMemberExtendedAttributes],
   inheritance : String?,

@@ -12,9 +12,9 @@ struct FlattenedIdl {
 ///|
 /// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces 
 /// and converting callback interfaces to callback functions.
-fn flatten(partial_merge_visitor : PartialMerged) -> FlattenedIdl {
+fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
   // Merge dictionaries by combining members from parent dictionaries
-  let dictionaries = partial_merge_visitor.dictionaries
+  let dictionaries = partial_merged.dictionaries
     .iter()
     .map(it => {
       let (dict_name, dict) : (String, PartialMergedDictionary) = it
@@ -22,7 +22,7 @@ fn flatten(partial_merge_visitor : PartialMerged) -> FlattenedIdl {
         None => // No inheritance, just copy members to MergedDictionaryIR
           (dict_name, MergedDictionaryIR::new(dict.name, dict.members))
         Some(parent_name) => // Merge parent members
-          match partial_merge_visitor.dictionaries.get(parent_name) {
+          match partial_merged.dictionaries.get(parent_name) {
             Some(parent_dict) => {
               let merged_members = parent_dict.members + dict.members
               let merged_dict = MergedDictionaryIR::new(
@@ -41,13 +41,12 @@ fn flatten(partial_merge_visitor : PartialMerged) -> FlattenedIdl {
     |> Map::from_iter
 
   // flatten mixins into interfaces
-  for include_stmt in partial_merge_visitor.include_statements {
-    match partial_merge_visitor.mixins.get(include_stmt.mixin_name) {
+  for include_stmt in partial_merged.include_statements {
+    match partial_merged.mixins.get(include_stmt.mixin_name) {
       Some(mxn) =>
-        match
-          partial_merge_visitor.interfaces.get(include_stmt.interface_name) {
+        match partial_merged.interfaces.get(include_stmt.interface_name) {
           Some(iface) =>
-            partial_merge_visitor.interfaces[include_stmt.interface_name] = iface.merge(
+            partial_merged.interfaces[include_stmt.interface_name] = iface.merge(
               mxn.members,
               iface.inheritance,
             )
@@ -63,15 +62,15 @@ fn flatten(partial_merge_visitor : PartialMerged) -> FlattenedIdl {
     }
   }
   let merged_idl = FlattenedIdl::{
-    interfaces: partial_merge_visitor.interfaces,
+    interfaces: partial_merged.interfaces,
     dictionaries,
-    enums: partial_merge_visitor.enums,
-    typedefs: partial_merge_visitor.typedefs,
-    callbacks: partial_merge_visitor.callback_functions,
+    enums: partial_merged.enums,
+    typedefs: partial_merged.typedefs,
+    callbacks: partial_merged.callback_functions,
   }
 
   // Transform CallbackInterfaceDefinitions to CallbackFunctionDefinitions  
-  for name, cbi in partial_merge_visitor.callback_interfaces {
+  for name, cbi in partial_merged.callback_interfaces {
     // CallbackInterface::members only holds one operation member
     let op = loop cbi.members.map(m => m.callback_interface_member)[:] {
       [] =>

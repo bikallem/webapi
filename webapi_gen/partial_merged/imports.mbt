@@ -1,17 +1,12 @@
 ///|
 using @parser {
   type DefinitionExtendedAttributes,
+  type InterfaceMemberExtendedAttributes,
   type DictionaryMember,
   type EnumDefinition,
   type TypedefDefinition,
   type CallbackFunctionDefinition,
+  type CallbackInterfaceDefinition,
+  type IncludesStatement,
   type Type,
-}
-
-///|
-using @partial_merged {
-  type PartialMerged,
-  type PartialMergedInterface,
-  type PartialMergedDictionary,
-  merge_partials,
 }

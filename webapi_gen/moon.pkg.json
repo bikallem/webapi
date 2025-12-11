@@ -2,6 +2,7 @@
   "is-main": true,
   "import": [
     "bikallem/webapi_gen/parser",
+    "bikallem/webapi_gen/partial_merged",
     "moonbitlang/x/sys",
     "moonbitlang/x/fs"
   ]

@@ -1,6 +1,6 @@
 ///|
 /// Merged Dictionary with all partials combined.
-struct PartialMergedDictionary {
+pub struct PartialMergedDictionary {
   name : String
   members : Array[DictionaryMember]
   inheritance : String?

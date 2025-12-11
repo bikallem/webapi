@@ -1,6 +1,6 @@
 ///|
 /// Merged mixin IR with all partials combined.
-struct PartialMergedMixin {
+pub struct PartialMergedMixin {
   name : String
   members : Array[InterfaceMemberExtendedAttributes]
 } derive(Show, ToJson)
