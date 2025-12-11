@@ -1,21 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/webapi_gen"
 
-import(
-  "moonbitlang/core/json"
-)
-
 // Values
 
 // Errors
 
 // Types and methods
-type GeneratorConfig
-pub impl Eq for GeneratorConfig
-pub impl Show for GeneratorConfig
-pub impl ToJson for GeneratorConfig
-pub impl @json.FromJson for GeneratorConfig
-
 type TypeRegistry
 pub impl Show for TypeRegistry
 pub impl ToJson for TypeRegistry

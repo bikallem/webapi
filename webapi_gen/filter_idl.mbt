@@ -51,7 +51,17 @@ test "filter_idl with empty config returns all types" {
     #|dictionary EventInit {};
     #|enum ScrollBehavior { "auto", "smooth" };
   let defs = @parser.parse(widl)
-  let config = GeneratorConfig::new()
+  let config = @config.load_config_from_string(
+    (
+      #|{
+      #| "core_specs": [],
+      #| "core_interfaces": [],
+      #|  "excluded_callbacks": [],
+      #|  "excluded_typedefs": [],
+      #|  "excluded_dictionary_prefixes": []
+      #|}
+    ),
+  )
   let filtered = filter_idl(config, defs)
   @json.inspect(filtered, content=[
     {
@@ -75,10 +85,17 @@ test "filter_idl filters interfaces by whitelist" {
     #|interface Node {};
     #|interface Document {};
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = {
-    ..GeneratorConfig::new(),
-    core_interfaces: ["Element", "Node"],
-  }
+  let config : GeneratorConfig = @config.load_config_from_string(
+    (
+      #|{
+      #| "core_specs": [],
+      #| "core_interfaces": ["Element", "Node"],
+      #|  "excluded_callbacks": [],
+      #|  "excluded_typedefs": [],
+      #|  "excluded_dictionary_prefixes": []
+      #|}
+    ),
+  )
   let filtered = filter_idl(config, defs)
   @json.inspect(filtered, content=[
     {
@@ -98,10 +115,17 @@ test "filter_idl excludes callbacks" {
     #|callback EventListener = undefined (Event event);
     #|callback MutationCallback = undefined (sequence<MutationRecord> mutations);
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = {
-    ..GeneratorConfig::new(),
-    excluded_callbacks: ["MutationCallback"],
-  }
+  let config : GeneratorConfig = @config.load_config_from_string(
+    (
+      #|{
+      #| "core_specs": [],
+      #| "core_interfaces": [],
+      #| "excluded_callbacks": ["MutationCallback"],
+      #| "excluded_typedefs": [],
+      #| "excluded_dictionary_prefixes": []
+      #|}
+    ),
+  )
   let filtered = filter_idl(config, defs)
   @json.inspect(filtered, content=[
     {
@@ -135,10 +159,17 @@ test "filter_idl excludes typedefs" {
     #|typedef (DOMString or Function) EventHandler;
     #|typedef unsigned long long DOMTimeStamp;
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = {
-    ..GeneratorConfig::new(),
-    excluded_typedefs: ["EventHandler"],
-  }
+  let config : GeneratorConfig = @config.load_config_from_string(
+    (
+      #|{
+      #| "core_specs": [],
+      #| "core_interfaces": [],
+      #| "excluded_callbacks": ["MutationCallback"],
+      #| "excluded_typedefs": ["EventHandler"],
+      #| "excluded_dictionary_prefixes": []      
+      #|}
+    ),
+  )
   let filtered = filter_idl(config, defs)
   @json.inspect(filtered, content=[
     {
@@ -158,10 +189,17 @@ test "filter_idl excludes dictionaries by prefix" {
     #|dictionary ElementCreationOptions {};
     #|dictionary ElementDefinitionOptions {};
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = {
-    ..GeneratorConfig::new(),
-    excluded_dictionary_prefixes: ["Element"],
-  }
+  let config : GeneratorConfig = @config.load_config_from_string(
+    (
+      #|{
+      #| "core_specs": [],
+      #| "core_interfaces": [],
+      #| "excluded_callbacks": ["MutationCallback"],
+      #| "excluded_typedefs": ["EventHandler"],
+      #| "excluded_dictionary_prefixes": ["Element"]
+      #|}
+    ),
+  )
   let filtered = filter_idl(config, defs)
   @json.inspect(filtered, content=[
     {

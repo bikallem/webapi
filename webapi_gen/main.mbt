@@ -8,7 +8,10 @@ fn main {
   let filepath = args[1]
   let config_file = if args.length() > 2 { args[2] } else { "config.json" }
   try {
-    let config = GeneratorConfig::load_config(config_file)
+    let content = @fs.read_file_to_string(config_file) catch {
+      e => fail("failed to read config file: \{e}")
+    }
+    let config = @config.load_config_from_string(content)
     let flattened = @parser.parse_file(filepath)
       |> filter_idl(config, _)
       |> merge_partials
