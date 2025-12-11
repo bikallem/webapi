@@ -10,7 +10,7 @@ struct MergedIdl {
 } derive(Show, ToJson)
 
 ///|
-fn MergedIdl::from(partial_merge_visitor : PartialMerged) -> MergedIdl {
+fn merge_all(partial_merge_visitor : PartialMerged) -> MergedIdl {
   // Merge dictionaries by inheriting members from parent dictionaries
   let dictionaries = partial_merge_visitor.dictionaries
     .iter()

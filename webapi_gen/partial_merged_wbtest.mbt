@@ -8,7 +8,7 @@ test "PartialMergeVisitor merges interface and partial interface" {
     #|  Node appendChild(Element newChild);
     #|};    
   let defs = @parser.parse(widl)
-  let partial_merged = PartialMerged::new(defs)
+  let partial_merged = merge_partials(defs)
   @json.inspect(partial_merged, content={
     "interfaces": {
       "MyInterface": {
@@ -73,7 +73,7 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
     #|  undefined doSomething();
     #|};
   let defs = @parser.parse(widl)
-  let partial_merged = PartialMerged::new(defs)
+  let partial_merged = merge_partials(defs)
   let merged_mixin = partial_merged.mixins["MyMixin"]
   @json.inspect(merged_mixin, content={
     "name": "MyMixin",
@@ -117,7 +117,7 @@ test "PartialMergeVisitor merges dictionary and partial dictionary" {
     #|  boolean bubbles = false;
     #|};
   let defs = @parser.parse(widl)
-  let partial_merged = PartialMerged::new(defs)
+  let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["EventInit"]
   @json.inspect(merged, content={
     "name": "EventInit",
@@ -146,7 +146,7 @@ test "PartialMergeVisitor merges dictionary with inheritance" {
     #|  Window view;
     #|};
   let defs = @parser.parse(widl)
-  let partial_merged = PartialMerged::new(defs)
+  let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["UIEventInit"]
   @json.inspect(merged, content={
     "name": "UIEventInit",
@@ -168,7 +168,7 @@ test "PartialMergeVisitor empty_dictionary" {
     #|dictionary EmptyDict {
     #|};
   let defs = @parser.parse(widl)
-  let partial_merged = PartialMerged::new(defs)
+  let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["EmptyDict"]
   @json.inspect(merged, content={ "name": "EmptyDict", "members": [] })
 }
@@ -208,7 +208,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
-  let partial_merged = PartialMerged::new(defs)
+  let partial_merged = merge_partials(defs)
   t.write(partial_merged.to_json().stringify(indent=2))
   t.snapshot(filename="partial_merge_visitor_snapshot.json")
 }

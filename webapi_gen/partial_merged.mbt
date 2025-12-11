@@ -14,7 +14,7 @@ struct PartialMerged {
 
 ///|
 /// Merges partial definitions from filtered IDL definitions
-fn PartialMerged::new(
+fn merge_partials(
   filtered : Array[DefinitionExtendedAttributes],
 ) -> PartialMerged {
   let partial_merged = PartialMerged::{
