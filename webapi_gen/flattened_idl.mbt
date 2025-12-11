@@ -51,7 +51,7 @@ fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
               iface.inheritance,
             )
           None =>
-            println(
+            abort(
               "Interface '\{include_stmt.interface_name}' for includes statement not found",
             )
         }
