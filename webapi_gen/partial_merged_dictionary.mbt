@@ -1,0 +1,59 @@
+///|
+/// Merged Dictionary with all partials combined.
+struct PartialMergedDictionary {
+  name : String
+  members : Array[DictionaryMember]
+  inheritance : String?
+} derive(Show, ToJson)
+
+///|
+fn PartialMergedDictionary::new(
+  name : String,
+  members : Array[DictionaryMember],
+  inheritance : String?,
+) -> PartialMergedDictionary {
+  PartialMergedDictionary::{ name, inheritance, members }
+}
+
+///|
+fn PartialMergedDictionary::merge(
+  self : PartialMergedDictionary,
+  members : Array[DictionaryMember],
+  inheritance : String?,
+) -> PartialMergedDictionary {
+  let inheritance = match inheritance {
+    None => self.inheritance
+    Some(_) => inheritance
+  }
+  { ..self, members: self.members + members, inheritance }
+}
+
+///|
+test "MergedDictionary::merge() combines members and inheritance" {
+  let dict1 = PartialMergedDictionary::new("ElementInit", [], None)
+  let _dict2 = dict1.merge(
+    [
+      DictionaryMember::{
+        extended_attributes: [],
+        type_: Type::Identifier("DOMString"),
+        name: "id",
+        required: false,
+        default_value: Some(@parser.DefaultValue::String("")),
+      },
+    ],
+    Some("NodeInit"),
+  )
+  @json.inspect(_dict2, content={
+    "name": "ElementInit",
+    "members": [
+      {
+        "extended_attributes": [],
+        "type_": ["Identifier", "DOMString"],
+        "name": "id",
+        "required": false,
+        "default_value": ["String", ""],
+      },
+    ],
+    "inheritance": "NodeInit",
+  })
+}

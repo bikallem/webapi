@@ -53,3 +53,21 @@ fn TypeRegistry::is_typedef(self : TypeRegistry, name : String) -> Bool {
 fn TypeRegistry::is_callback(self : TypeRegistry, name : String) -> Bool {
   self.callback_names.contains(name)
 }
+
+///|
+test "TypeRegistry::contains checks all type categories" {
+  let reg : TypeRegistry = {
+    interface_names: @hashset.from_array(["Element"]),
+    dictionary_names: @hashset.from_array(["EventInit"]),
+    enum_names: @hashset.from_array(["ScrollBehaviour"]),
+    typedef_names: @hashset.from_array(["DOMString"]),
+    callback_names: @hashset.from_array(["EventListener"]),
+  }
+  inspect(reg.contains("Element"), content="true")
+  inspect(reg.contains("EventInit"), content="true")
+  inspect(reg.contains("ScrollBehaviour"), content="true")
+  inspect(reg.contains("Unknown"), content="false")
+  inspect(reg.is_interface("Element"), content="true")
+  inspect(reg.is_dictionary("EventInit"), content="true")
+  inspect(reg.is_enum("ScrollBehaviour"), content="true")
+}

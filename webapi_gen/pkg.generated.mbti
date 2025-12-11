@@ -2,7 +2,6 @@
 package "bikallem/webapi_gen"
 
 import(
-  "bikallem/webapi_gen/parser"
   "moonbitlang/core/json"
 )
 
@@ -11,10 +10,6 @@ import(
 // Errors
 
 // Types and methods
-type FilteredIdl
-pub impl Show for FilteredIdl
-pub impl ToJson for FilteredIdl
-
 type GeneratorConfig
 pub impl Eq for GeneratorConfig
 pub impl Show for GeneratorConfig
@@ -29,21 +24,21 @@ type MergedIdl
 pub impl Show for MergedIdl
 pub impl ToJson for MergedIdl
 
-type PartialMergeVisitor
-pub impl Show for PartialMergeVisitor
-pub impl ToJson for PartialMergeVisitor
+type PartialMerged
+pub impl Show for PartialMerged
+pub impl ToJson for PartialMerged
 
-type PartialMergedDictionaryIR
-pub impl Show for PartialMergedDictionaryIR
-pub impl ToJson for PartialMergedDictionaryIR
+type PartialMergedDictionary
+pub impl Show for PartialMergedDictionary
+pub impl ToJson for PartialMergedDictionary
 
-type PartialMergedInterfaceIR
-pub impl Show for PartialMergedInterfaceIR
-pub impl ToJson for PartialMergedInterfaceIR
+type PartialMergedInterface
+pub impl Show for PartialMergedInterface
+pub impl ToJson for PartialMergedInterface
 
-type PartialMergedMixinIR
-pub impl Show for PartialMergedMixinIR
-pub impl ToJson for PartialMergedMixinIR
+type PartialMergedMixin
+pub impl Show for PartialMergedMixin
+pub impl ToJson for PartialMergedMixin
 
 type TypeRegistry
 pub impl Show for TypeRegistry
@@ -52,36 +47,4 @@ pub impl ToJson for TypeRegistry
 // Type aliases
 
 // Traits
-pub(open) trait WebIdlVisitor {
-  visit(Self, Array[@parser.DefinitionExtendedAttributes]) -> Unit = _
-  visit_definition(Self, @parser.DefinitionExtendedAttributes) -> Unit = _
-  visit_interface(Self, @parser.InterfaceDefinition) -> Unit = _
-  visit_partial_interface(Self, @parser.PartialInterfaceDefinition) -> Unit = _
-  visit_mixin(Self, @parser.MixinDefinition) -> Unit = _
-  visit_partial_mixin(Self, @parser.PartialMixinDefinition) -> Unit = _
-  visit_dictionary(Self, @parser.DictionaryDefinition) -> Unit = _
-  visit_partial_dictionary(Self, @parser.PartialDictionaryDefinition) -> Unit = _
-  visit_enum(Self, @parser.EnumDefinition) -> Unit = _
-  visit_typedef(Self, @parser.TypedefDefinition) -> Unit = _
-  visit_callback_function(Self, @parser.CallbackFunctionDefinition) -> Unit = _
-  visit_callback_interface(Self, @parser.CallbackInterfaceDefinition) -> Unit = _
-  visit_include_statements(Self, @parser.IncludesStatement) -> Unit = _
-  visit_interface_member(Self, @parser.InterfaceMemberExtendedAttributes) -> Unit = _
-  visit_dictionary_member(Self, @parser.DictionaryMember) -> Unit = _
-  visit_type(Self, @parser.Type) -> Unit = _
-  visit_type_with_extended_attributes(Self, @parser.TypeWithExtendedAttributes) -> Unit = _
-  visit_string_type(Self, @parser.StringType) -> Unit = _
-  visit_argument(Self, @parser.Argument) -> Unit = _
-  visit_const(Self, @parser.ConstMember) -> Unit = _
-  visit_attribute(Self, @parser.AttributeMember) -> Unit = _
-  visit_regular_operation(Self, @parser.RegularOperationMember) -> Unit = _
-  visit_special_operation(Self, @parser.SpecialOperationMember) -> Unit = _
-  visit_constructor(Self, @parser.ConstructorMember) -> Unit = _
-  visit_iterable(Self, @parser.IterableMember) -> Unit = _
-  visit_async_iterable(Self, @parser.AsyncIterableMember) -> Unit = _
-  visit_maplike(Self, @parser.MaplikeMember) -> Unit = _
-  visit_setlike(Self, @parser.SetlikeMember) -> Unit = _
-  visit_stringifier(Self, @parser.StringifierMember) -> Unit = _
-  visit_callback_interface_member(Self, @parser.CallbackInterfaceMemberExtendedAttributes) -> Unit = _
-}
 

@@ -10,9 +10,8 @@ test "MergedIdl::from merges dictionary inheritance" {
     #|  boolean property1 = false;
     #|};
   let defs = @parser.parse(widl)
-  let visitor = PartialMergeVisitor::new()
-  visitor.visit(defs)
-  let merged_idl = MergedIdl::from(visitor)
+  let partial_merged = PartialMerged::new(defs)
+  let merged_idl = MergedIdl::from(partial_merged)
   let merged_dict = merged_idl.dictionaries["ChildDict"]
   @json.inspect(merged_dict, content={
     "name": "ChildDict",
@@ -54,9 +53,8 @@ test "MergedIdl::from handles dictionary without inheritance" {
     #|  DOMString simpleProp;
     #|};
   let defs = @parser.parse(widl)
-  let visitor = PartialMergeVisitor::new()
-  visitor.visit(defs)
-  let merged_idl = MergedIdl::from(visitor)
+  let partial_merged = PartialMerged::new(defs)
+  let merged_idl = MergedIdl::from(partial_merged)
   let merged_dict = merged_idl.dictionaries["SimpleDict"]
   @json.inspect(merged_dict, content={
     "name": "SimpleDict",
@@ -78,9 +76,8 @@ test "panic: MergedIdl::from aborts when parent dictionary is missing" {
     #|  DOMString childProp;
     #|};
   let defs = @parser.parse(widl)
-  let visitor = PartialMergeVisitor::new()
-  visitor.visit(defs)
-  MergedIdl::from(visitor) |> ignore
+  let partial_merged = PartialMerged::new(defs)
+  MergedIdl::from(partial_merged) |> ignore
 }
 
 ///|
@@ -100,9 +97,8 @@ test "MergedIdl::from flattens mixins into interfaces" {
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
-  let visitor = PartialMergeVisitor::new()
-  visitor.visit(defs)
-  let merged_idl = MergedIdl::from(visitor)
+  let partial_merged = PartialMerged::new(defs)
+  let merged_idl = MergedIdl::from(partial_merged)
   let iface2 = merged_idl.interfaces["MyInterface"]
   @json.inspect(iface2, content={
     "name": "MyInterface",
@@ -180,16 +176,14 @@ test "panic: MergedIdl::from aborts when mixin is missing" {
     #|};
     #|MyInterface includes MissingMixin;
   let defs = @parser.parse(widl)
-  let visitor = PartialMergeVisitor::new()
-  visitor.visit(defs)
-  MergedIdl::from(visitor) |> ignore
+  let partial_merged = PartialMerged::new(defs)
+  MergedIdl::from(partial_merged) |> ignore
 }
 
 ///|
 test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and callbacks" (
   t : @test.Test,
 ) {
-  let visitor = PartialMergeVisitor::new()
   let widl : String =
     #|interface Dummy {
     #|  undefined dummyMethod();
@@ -227,8 +221,8 @@ test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and call
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
-  visitor.visit(defs)
-  let merged_idl = MergedIdl::from(visitor)
+  let partial_merged = PartialMerged::new(defs)
+  let merged_idl = MergedIdl::from(partial_merged)
   t.write(merged_idl.to_json().stringify(indent=2))
   t.snapshot(filename="merged_idl_snapshot.json")
 }

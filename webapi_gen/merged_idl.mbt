@@ -2,7 +2,7 @@
 /// Consolidated IDL after merging partials, flattening mixins, resolving dictionary 
 /// inheritance and converting callback interfaces to callback functions.
 struct MergedIdl {
-  interfaces : Map[String, PartialMergedInterfaceIR]
+  interfaces : Map[String, PartialMergedInterface]
   dictionaries : Map[String, MergedDictionaryIR]
   enums : Map[String, EnumDefinition]
   typedefs : Map[String, TypedefDefinition]
@@ -10,12 +10,12 @@ struct MergedIdl {
 } derive(Show, ToJson)
 
 ///|
-fn MergedIdl::from(partial_merge_visitor : PartialMergeVisitor) -> MergedIdl {
+fn MergedIdl::from(partial_merge_visitor : PartialMerged) -> MergedIdl {
   // Merge dictionaries by inheriting members from parent dictionaries
   let dictionaries = partial_merge_visitor.dictionaries
     .iter()
     .map(it => {
-      let (dict_name, dict) : (String, PartialMergedDictionaryIR) = it
+      let (dict_name, dict) : (String, PartialMergedDictionary) = it
       match dict.inheritance {
         None => // No inheritance, just copy members to MergedDictionaryIR
           (dict_name, MergedDictionaryIR::new(dict.name, dict.members))

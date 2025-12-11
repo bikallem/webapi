@@ -11,7 +11,9 @@ fn main {
     let config = GeneratorConfig::load_config(config_file)
     let defs = @parser.parse_file(filepath)
     let filtered = filter_idl(config, defs)
-    println(filtered.to_json().stringify(indent=2))
+    let partial_merged = PartialMerged::new(filtered)
+    let merged = MergedIdl::from(partial_merged)
+    println(merged.to_json().stringify(indent=2))
   } catch {
     e => println("Error: \{e}")
   }
