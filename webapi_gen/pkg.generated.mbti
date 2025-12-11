@@ -10,6 +10,10 @@ import(
 // Errors
 
 // Types and methods
+type FlattenedIdl
+pub impl Show for FlattenedIdl
+pub impl ToJson for FlattenedIdl
+
 type GeneratorConfig
 pub impl Eq for GeneratorConfig
 pub impl Show for GeneratorConfig
@@ -19,10 +23,6 @@ pub impl @json.FromJson for GeneratorConfig
 type MergedDictionaryIR
 pub impl Show for MergedDictionaryIR
 pub impl ToJson for MergedDictionaryIR
-
-type MergedIdl
-pub impl Show for MergedIdl
-pub impl ToJson for MergedIdl
 
 type PartialMerged
 pub impl Show for PartialMerged

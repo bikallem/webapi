@@ -12,7 +12,7 @@ fn main {
     let merged = @parser.parse_file(filepath)
       |> filter_idl(config, _)
       |> merge_partials
-      |> merge_all
+      |> flatten
     println(merged.to_json().stringify(indent=2))
   } catch {
     e => println("Error: \{e}")
