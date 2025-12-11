@@ -2,10 +2,13 @@
 package "bikallem/webapi_gen/emitter"
 
 import(
+  "bikallem/webapi_gen/flattened_idl"
   "bikallem/webapi_gen/parser"
 )
 
 // Values
+pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
+
 pub fn emit_enum(@parser.EnumDefinition) -> String
 
 // Errors

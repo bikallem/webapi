@@ -187,6 +187,17 @@ pub fn emit_enum(enum_def : EnumDefinition) -> String {
 }
 
 ///|
+/// Emit all enums from a FlattenedIdl
+pub fn emit_all_enums(flattened_idl : FlattenedIdl) -> Map[String, String] {
+  let result = {}
+  for name, enum_def in flattened_idl.enums {
+    let filename = "\{to_snake_case(name)}_enum.mbt"
+    result[filename] = emit_enum(enum_def)
+  }
+  result
+}
+
+///|
 /// Convert WebIDL enum value to MoonBit enum variant name
 fn enum_value_to_variant(value : String) -> String {
   to_pascal_case(value.to_string())
