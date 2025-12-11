@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi_gen/emitter"
+
+import(
+  "bikallem/webapi_gen/parser"
+)
+
+// Values
+pub fn emit_enum(@parser.EnumDefinition) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

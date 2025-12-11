@@ -124,3 +124,87 @@ test "safe_identifier handles keywords and casing" {
   inspect(safe_identifier("getElementById"), content="get_element_by_id")
   inspect(safe_identifier("appendChild"), content="append_child")
 }
+
+// enum
+
+///|
+test "emit_enum generates correct MoonBit code" {
+  let enum_def : EnumDefinition = {
+    name: "ScrollBehavior",
+    values: ["auto", "instant", "smooth"],
+  }
+  let code = emit_enum(enum_def)
+  inspect(
+    code,
+    content=(
+      #|///|
+      #|pub(all) enum ScrollBehavior {
+      #|  Auto
+      #|  Instant
+      #|  Smooth
+      #|} derive(Eq,Show)
+      #|
+      #|///|
+      #|pub fn ScrollBehavior::from(value: String) -> ScrollBehavior {
+      #|  match value {
+      #|    "auto" => Auto
+      #|    "instant" => Instant
+      #|    "smooth" => Smooth
+      #|    _ => Auto
+      #|  }
+      #|}
+      #|
+      #|///|
+      #|pub fn ScrollBehavior::to_js(self : ScrollBehavior) -> String {
+      #|  match self {
+      #|    Auto => "auto"
+      #|    Instant => "instant"
+      #|    Smooth => "smooth"
+      #|  }
+      #|}
+      #|
+    ),
+  )
+}
+
+//|
+
+///|
+test "emit_enum handles hyphenated values" {
+  let enum_def : EnumDefinition = {
+    name: "TextDirection",
+    values: ["ltr", "rtl", "no-change"],
+  }
+  let code = emit_enum(enum_def)
+  inspect(
+    code,
+    content=(
+      #|///|
+      #|pub(all) enum TextDirection {
+      #|  Ltr
+      #|  Rtl
+      #|  NoChange
+      #|} derive(Eq,Show)
+      #|
+      #|///|
+      #|pub fn TextDirection::from(value: String) -> TextDirection {
+      #|  match value {
+      #|    "ltr" => Ltr
+      #|    "rtl" => Rtl
+      #|    "no-change" => NoChange
+      #|    _ => Ltr
+      #|  }
+      #|}
+      #|
+      #|///|
+      #|pub fn TextDirection::to_js(self : TextDirection) -> String {
+      #|  match self {
+      #|    Ltr => "ltr"
+      #|    Rtl => "rtl"
+      #|    NoChange => "no-change"
+      #|  }
+      #|}
+      #|
+    ),
+  )
+}

@@ -9,11 +9,11 @@ fn main {
   let config_file = if args.length() > 2 { args[2] } else { "config.json" }
   try {
     let config = GeneratorConfig::load_config(config_file)
-    let merged = @parser.parse_file(filepath)
+    let flattened = @parser.parse_file(filepath)
       |> filter_idl(config, _)
       |> merge_partials
       |> flatten
-    println(merged.to_json().stringify(indent=2))
+    println(flattened.to_json().stringify(indent=2))
   } catch {
     e => println("Error: \{e}")
   }
