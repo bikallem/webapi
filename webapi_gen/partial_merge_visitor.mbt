@@ -109,6 +109,9 @@ fn PartialMergeVisitor::new() -> PartialMergeVisitor {
   }
 }
 
+///|
+impl WebIdlVisitor for PartialMergeVisitor
+
 //=============================================================================
 // merge interface
 //=============================================================================
