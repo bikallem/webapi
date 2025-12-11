@@ -4,6 +4,7 @@
     "bikallem/webapi_gen/parser",
     "bikallem/webapi_gen/partial_merged",
     "moonbitlang/x/sys",
-    "moonbitlang/x/fs"
+    "moonbitlang/x/fs",
+    "bikallem/webapi_gen/flattened_idl"
   ]
 }

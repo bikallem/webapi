@@ -10,7 +10,7 @@ test "flatten merges dictionary inheritance" {
     #|  boolean property1 = false;
     #|};
   let defs = @parser.parse(widl)
-  let partial_merged = merge_partials(defs)
+  let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged)
   let flattened_dict = flattened_idl.dictionaries["ChildDict"]
   @json.inspect(flattened_dict, content={
@@ -53,7 +53,7 @@ test "flatten handles dictionary without inheritance" {
     #|  DOMString simpleProp;
     #|};
   let defs = @parser.parse(widl)
-  let partial_merged = merge_partials(defs)
+  let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged)
   let flattened_dict = flattened_idl.dictionaries["SimpleDict"]
   @json.inspect(flattened_dict, content={
@@ -76,7 +76,7 @@ test "panic: flatten aborts when parent dictionary is missing" {
     #|  DOMString childProp;
     #|};
   let defs = @parser.parse(widl)
-  let partial_merged = merge_partials(defs)
+  let partial_merged = @partial_merged.merge_partials(defs)
   flatten(partial_merged) |> ignore
 }
 
@@ -97,7 +97,7 @@ test "flatten merges/includes mixin members into interface" {
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
-  let partial_merged = merge_partials(defs)
+  let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged)
   let iface2 = flattened_idl.interfaces["MyInterface"]
   @json.inspect(iface2, content={
@@ -176,7 +176,7 @@ test "panic: flatten aborts when mixin is missing" {
     #|};
     #|MyInterface includes MissingMixin;
   let defs = @parser.parse(widl)
-  let partial_merged = merge_partials(defs)
+  let partial_merged = @partial_merged.merge_partials(defs)
   flatten(partial_merged) |> ignore
 }
 
@@ -221,7 +221,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
-  let partial_merged = merge_partials(defs)
+  let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged)
   t.write(flattened_idl.to_json().stringify(indent=2))
   t.snapshot(filename="flattened_idl_snapshot.json")

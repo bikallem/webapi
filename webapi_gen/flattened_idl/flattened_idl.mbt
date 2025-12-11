@@ -1,7 +1,7 @@
 ///|
 /// Flattened IDL after flattening mixins, flattening dictionaries inheritance 
 /// hierarchy and flattening callback interfaces to callback functions.
-struct FlattenedIdl {
+pub struct FlattenedIdl {
   interfaces : Map[String, PartialMergedInterface]
   dictionaries : Map[String, MergedDictionaryIR]
   enums : Map[String, EnumDefinition]
@@ -12,7 +12,7 @@ struct FlattenedIdl {
 ///|
 /// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces 
 /// and converting callback interfaces to callback functions.
-fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
+pub fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
   // Merge dictionaries by combining members from parent dictionaries
   let dictionaries = partial_merged.dictionaries
     .iter()

@@ -1,17 +1,8 @@
 ///|
-using @parser {
-  type DefinitionExtendedAttributes,
-  type DictionaryMember,
-  type EnumDefinition,
-  type TypedefDefinition,
-  type CallbackFunctionDefinition,
-  type Type,
-}
+using @parser {type DefinitionExtendedAttributes}
 
 ///|
-using @partial_merged {
-  type PartialMerged,
-  type PartialMergedInterface,
-  type PartialMergedDictionary,
-  merge_partials,
-}
+using @partial_merged {merge_partials}
+
+///|
+using @flattened_idl {flatten}

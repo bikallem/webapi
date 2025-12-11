@@ -1,0 +1,32 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi_gen/flattened_idl"
+
+import(
+  "bikallem/webapi_gen/parser"
+  "bikallem/webapi_gen/partial_merged"
+)
+
+// Values
+pub fn flatten(@partial_merged.PartialMerged) -> FlattenedIdl
+
+// Errors
+
+// Types and methods
+pub struct FlattenedIdl {
+  interfaces : Map[String, @partial_merged.PartialMergedInterface]
+  dictionaries : Map[String, MergedDictionaryIR]
+  enums : Map[String, @parser.EnumDefinition]
+  typedefs : Map[String, @parser.TypedefDefinition]
+  callbacks : Map[String, @parser.CallbackFunctionDefinition]
+}
+pub impl Show for FlattenedIdl
+pub impl ToJson for FlattenedIdl
+
+type MergedDictionaryIR
+pub impl Show for MergedDictionaryIR
+pub impl ToJson for MergedDictionaryIR
+
+// Type aliases
+
+// Traits
+
