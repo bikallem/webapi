@@ -16,7 +16,15 @@ fn main {
       |> filter_idl(config, _)
       |> merge_partials
       |> flatten
-    println(flattened.to_json().stringify(indent=2))
+
+    // emit enums
+    let enum_files = emit_all_enums(flattened)
+
+    // Output generated code
+    for filename, content in enum_files {
+      println("\n-- \{filename} ---")
+      println(content)
+    }
   } catch {
     e => println("Error: \{e}")
   }

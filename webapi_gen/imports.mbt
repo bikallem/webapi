@@ -9,3 +9,6 @@ using @flattened_idl {flatten}
 
 ///|
 using @config {type GeneratorConfig}
+
+///|
+using @emitter {emit_all_enums}
