@@ -8,9 +8,7 @@ pub fn emit_enum(enum_def : EnumDefinition) -> String {
   })
 
   // Header
-  buf.write_string(
-    "// Auto-generated MoonBit bindings for \{name} dictionary\n",
-  )
+  buf.write_string("// Auto-generated MoonBit bindings for \{name} enum\n")
   buf.write_string("// Do not edit manually\n\n")
 
   // Emit enum type definition
@@ -73,7 +71,7 @@ test "emit_enum generates correct MoonBit code" {
   inspect(
     code,
     content=(
-      #|// Auto-generated MoonBit bindings for ScrollBehavior dictionary
+      #|// Auto-generated MoonBit bindings for ScrollBehavior enum
       #|// Do not edit manually
       #|
       #|///|
@@ -118,7 +116,7 @@ test "emit_enum handles hyphenated values" {
   inspect(
     code,
     content=(
-      #|// Auto-generated MoonBit bindings for TextDirection dictionary
+      #|// Auto-generated MoonBit bindings for TextDirection enum
       #|// Do not edit manually
       #|
       #|///|
