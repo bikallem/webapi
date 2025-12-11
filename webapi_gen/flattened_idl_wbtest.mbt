@@ -70,7 +70,7 @@ test "flatten handles dictionary without inheritance" {
 }
 
 ///|
-test "panic: MergedIdl::from aborts when parent dictionary is missing" {
+test "panic: flatten aborts when parent dictionary is missing" {
   let widl : String =
     #|dictionary ChildDict : MissingParentDict {
     #|  DOMString childProp;
@@ -81,7 +81,7 @@ test "panic: MergedIdl::from aborts when parent dictionary is missing" {
 }
 
 ///|
-test "flatten flattens mixins into interfaces" {
+test "flatten merges/includes mixin members into interface" {
   let widl : String =
     #|interface MyInterface {
     #|  attribute DOMString? textContent;
@@ -169,7 +169,7 @@ test "flatten flattens mixins into interfaces" {
 }
 
 ///|
-test "panic: MergedIdl::from aborts when mixin is missing" {
+test "panic: flatten aborts when mixin is missing" {
   let widl : String =
     #|interface MyInterface {
     #|  attribute DOMString? textContent;
