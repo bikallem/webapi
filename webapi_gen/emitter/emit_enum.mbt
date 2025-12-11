@@ -7,6 +7,12 @@ pub fn emit_enum(enum_def : EnumDefinition) -> String {
     (enum_value_to_variant(v), v)
   })
 
+  // Header
+  buf.write_string(
+    "// Auto-generated MoonBit bindings for \{name} dictionary\n",
+  )
+  buf.write_string("// Do not edit manually\n\n")
+
   // Emit enum type definition
   buf.write_string("///|\n")
   buf.write_string("pub(all) enum \{name} {\n")
@@ -55,4 +61,92 @@ pub fn emit_all_enums(flattened_idl : FlattenedIdl) -> Map[String, String] {
 /// Convert WebIDL enum value to MoonBit enum variant name
 fn enum_value_to_variant(value : String) -> String {
   to_pascal_case(value.to_string())
+}
+
+///|
+test "emit_enum generates correct MoonBit code" {
+  let enum_def : EnumDefinition = {
+    name: "ScrollBehavior",
+    values: ["auto", "instant", "smooth"],
+  }
+  let code = emit_enum(enum_def)
+  inspect(
+    code,
+    content=(
+      #|// Auto-generated MoonBit bindings for ScrollBehavior dictionary
+      #|// Do not edit manually
+      #|
+      #|///|
+      #|pub(all) enum ScrollBehavior {
+      #|  Auto
+      #|  Instant
+      #|  Smooth
+      #|} derive(Eq,Show)
+      #|
+      #|///|
+      #|pub fn ScrollBehavior::from(value: String) -> ScrollBehavior {
+      #|  match value {
+      #|    "auto" => Auto
+      #|    "instant" => Instant
+      #|    "smooth" => Smooth
+      #|    _ => Auto
+      #|  }
+      #|}
+      #|
+      #|///|
+      #|pub fn ScrollBehavior::to_js(self : ScrollBehavior) -> String {
+      #|  match self {
+      #|    Auto => "auto"
+      #|    Instant => "instant"
+      #|    Smooth => "smooth"
+      #|  }
+      #|}
+      #|
+    ),
+  )
+}
+
+//|
+
+///|
+test "emit_enum handles hyphenated values" {
+  let enum_def : EnumDefinition = {
+    name: "TextDirection",
+    values: ["ltr", "rtl", "no-change"],
+  }
+  let code = emit_enum(enum_def)
+  inspect(
+    code,
+    content=(
+      #|// Auto-generated MoonBit bindings for TextDirection dictionary
+      #|// Do not edit manually
+      #|
+      #|///|
+      #|pub(all) enum TextDirection {
+      #|  Ltr
+      #|  Rtl
+      #|  NoChange
+      #|} derive(Eq,Show)
+      #|
+      #|///|
+      #|pub fn TextDirection::from(value: String) -> TextDirection {
+      #|  match value {
+      #|    "ltr" => Ltr
+      #|    "rtl" => Rtl
+      #|    "no-change" => NoChange
+      #|    _ => Ltr
+      #|  }
+      #|}
+      #|
+      #|///|
+      #|pub fn TextDirection::to_js(self : TextDirection) -> String {
+      #|  match self {
+      #|    Ltr => "ltr"
+      #|    Rtl => "rtl"
+      #|    NoChange => "no-change"
+      #|  }
+      #|}
+      #|
+    ),
+  )
 }
