@@ -11,3 +11,5 @@ dist/
 *.map.json
 
 *.prompt.md
+
+webapi_gen/tmp

@@ -2,13 +2,16 @@
 fn main {
   let args = @sys.get_cli_args()
   if args.length() < 2 {
-    println("Usage: moon run cmd/main <webidl_file>")
+    println("Usage: moon run cmd/main <webidl_file> [config_file]")
     return
   }
   let filepath = args[1]
+  let config_file = if args.length() > 2 { args[2] } else { "config.json" }
   try {
+    let config = GeneratorConfig::load_config(config_file)
     let defs = @parser.parse_file(filepath)
-    println(defs.to_json().stringify())
+    let filtered = filter_idl(config, defs)
+    println(filtered.to_json().stringify(indent=2))
   } catch {
     e => println("Error: \{e}")
   }
