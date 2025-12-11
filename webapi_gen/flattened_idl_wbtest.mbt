@@ -1,5 +1,5 @@
 ///|
-test "MergedIdl::from merges dictionary inheritance" {
+test "flatten merges dictionary inheritance" {
   let widl : String =
     #|dictionary BaseDict {
     #|  DOMString baseProp;
@@ -11,9 +11,9 @@ test "MergedIdl::from merges dictionary inheritance" {
     #|};
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
-  let merged_idl = flatten(partial_merged)
-  let merged_dict = merged_idl.dictionaries["ChildDict"]
-  @json.inspect(merged_dict, content={
+  let flattened_idl = flatten(partial_merged)
+  let flattened_dict = flattened_idl.dictionaries["ChildDict"]
+  @json.inspect(flattened_dict, content={
     "name": "ChildDict",
     "members": [
       {
@@ -47,15 +47,16 @@ test "MergedIdl::from merges dictionary inheritance" {
 }
 
 ///|
-test "MergedIdl::from handles dictionary without inheritance" {
+test "flatten handles dictionary without inheritance" {
   let widl : String =
     #|dictionary SimpleDict {
     #|  DOMString simpleProp;
     #|};
   let defs = @parser.parse(widl)
-  let merged_idl = merge_partials(defs) |> flatten
-  let merged_dict = merged_idl.dictionaries["SimpleDict"]
-  @json.inspect(merged_dict, content={
+  let partial_merged = merge_partials(defs)
+  let flattened_idl = flatten(partial_merged)
+  let flattened_dict = flattened_idl.dictionaries["SimpleDict"]
+  @json.inspect(flattened_dict, content={
     "name": "SimpleDict",
     "members": [
       {
@@ -75,11 +76,12 @@ test "panic: MergedIdl::from aborts when parent dictionary is missing" {
     #|  DOMString childProp;
     #|};
   let defs = @parser.parse(widl)
-  merge_partials(defs) |> flatten |> ignore
+  let partial_merged = merge_partials(defs)
+  flatten(partial_merged) |> ignore
 }
 
 ///|
-test "MergedIdl::from flattens mixins into interfaces" {
+test "flatten flattens mixins into interfaces" {
   let widl : String =
     #|interface MyInterface {
     #|  attribute DOMString? textContent;
@@ -95,8 +97,9 @@ test "MergedIdl::from flattens mixins into interfaces" {
     #|};
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
-  let merged_idl = merge_partials(defs) |> flatten
-  let iface2 = merged_idl.interfaces["MyInterface"]
+  let partial_merged = merge_partials(defs)
+  let flattened_idl = flatten(partial_merged)
+  let iface2 = flattened_idl.interfaces["MyInterface"]
   @json.inspect(iface2, content={
     "name": "MyInterface",
     "members": [
@@ -173,11 +176,12 @@ test "panic: MergedIdl::from aborts when mixin is missing" {
     #|};
     #|MyInterface includes MissingMixin;
   let defs = @parser.parse(widl)
-  merge_partials(defs) |> flatten |> ignore
+  let partial_merged = merge_partials(defs)
+  flatten(partial_merged) |> ignore
 }
 
 ///|
-test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and callbacks" (
+test "flatten includes merged interfaces, mixins, dictionaries, enums and callbacks" (
   t : @test.Test,
 ) {
   let widl : String =
@@ -218,7 +222,7 @@ test "MergedIdl includes merged interfaces, mixins, dictionaries, enums and call
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
-  let merged_idl = flatten(partial_merged)
-  t.write(merged_idl.to_json().stringify(indent=2))
-  t.snapshot(filename="merged_idl_snapshot.json")
+  let flattened_idl = flatten(partial_merged)
+  t.write(flattened_idl.to_json().stringify(indent=2))
+  t.snapshot(filename="flattened_idl_snapshot.json")
 }

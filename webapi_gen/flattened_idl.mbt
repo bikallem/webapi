@@ -13,7 +13,7 @@ struct FlattenedIdl {
 /// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces 
 /// and converting callback interfaces to callback functions.
 fn flatten(partial_merge_visitor : PartialMerged) -> FlattenedIdl {
-  // Merge dictionaries by inheriting members from parent dictionaries
+  // Merge dictionaries by combining members from parent dictionaries
   let dictionaries = partial_merge_visitor.dictionaries
     .iter()
     .map(it => {
