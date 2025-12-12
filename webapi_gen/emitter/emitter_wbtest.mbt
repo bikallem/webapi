@@ -84,7 +84,7 @@ test "map_idl_type handles string types" {
 
 ///|
 test "map_idl_type handles parameterized types" {
-  inspect(to_mbt_type_string(Nullable(DOMString)), content="String?")
+  inspect(to_mbt_type_string(Nullable(DOMString)), content="String")
   inspect(to_mbt_type_string(Sequence(Long)), content="Array[Int]")
   inspect(to_mbt_type_string(Promise(Undefined)), content="JsPromise[Unit]")
   // inspect(map_idl_type(Record(DOMString, Long)), content="Map[String, Int]")

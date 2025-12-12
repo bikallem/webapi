@@ -72,7 +72,7 @@ fn to_mbt_type_string(idl_type : Type) -> String {
   match idl_type {
     // Named types (interfaces, dictionaries, enums, typedefs)
     Identifier(name) => name
-    Nullable(t) => "\{to_mbt_type_string(t)}?" // Nullable types
+    Nullable(t) => "\{to_mbt_type_string(t)}" // Nullable types
 
     // Void 
     Undefined => "Unit"
