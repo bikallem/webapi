@@ -1,0 +1,34 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi_gen/type_registry"
+
+import(
+  "bikallem/webapi_gen/parser"
+  "moonbitlang/core/hashset"
+)
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct TypeRegistry {
+  interface_names : @hashset.HashSet[String]
+  dictionary_names : @hashset.HashSet[String]
+  enum_names : @hashset.HashSet[String]
+  typedef_names : @hashset.HashSet[String]
+  callback_names : @hashset.HashSet[String]
+}
+pub fn TypeRegistry::contains(Self, String) -> Bool
+pub fn TypeRegistry::is_callback(Self, String) -> Bool
+pub fn TypeRegistry::is_dictionary(Self, String) -> Bool
+pub fn TypeRegistry::is_enum(Self, String) -> Bool
+pub fn TypeRegistry::is_interface(Self, String) -> Bool
+pub fn TypeRegistry::is_typedef(Self, String) -> Bool
+pub fn TypeRegistry::new(Array[@parser.DefinitionExtendedAttributes]) -> Self
+pub impl Show for TypeRegistry
+pub impl ToJson for TypeRegistry
+
+// Type aliases
+
+// Traits
+

@@ -6,9 +6,6 @@ package "bikallem/webapi_gen"
 // Errors
 
 // Types and methods
-type TypeRegistry
-pub impl Show for TypeRegistry
-pub impl ToJson for TypeRegistry
 
 // Type aliases
 
