@@ -69,33 +69,36 @@ fn emit_dictionary_new_method(
 
   // Build parameter list with optional params and defaults
   let params = StringBuilder::new()
-  // let bindings = StringBuilder::new()
-  let args = StringBuilder::new()
+  let ffi_call = StringBuilder::new()
   for i, mem in dict.members {
     let param_name = safe_identifier(mem.name)
     let mapped_type = to_mbt_type_string(mem.type_)
     if i > 0 {
       params.write_string(",\n  ")
-      args.write_string("     ,")
+      ffi_call.write_string("     ,")
     }
     params.write_string("\{param_name}")
     if mem.required {
       params.write_string(" : \{mapped_type}")
+      ffi_call.write_string("TJsValue::to_js(\{param_name})\n")
     } else {
       params.write_string("? : \{mapped_type}")
-      if mem.default_value is Some(default_value) {
-        params.write_string(
-          "? : \{mapped_type} = \{to_mbt_default_value(default_value, mapped_type)}",
-        )
+      match mem.default_value {
+        None => ffi_call.write_string("opt_to_js(\{param_name})\n")
+        Some(default_value) => {
+          params.write_string(
+            "? : \{mapped_type} = \{to_mbt_default_value(default_value, mapped_type)}",
+          )
+          ffi_call.write_string("TJsValue::to_js(\{param_name})\n")
+        }
       }
     }
-    args.write_string("TJsValue::to_js(\{param_name})\n")
   }
   let buf = StringBuilder::new()
   buf.write_string("pub fn \{dict.name}::new(\n")
   buf.write_string("  \{params.to_string()}) -> \{dict.name} {\n")
   buf.write_string("    \{ffi_name}(\n")
-  buf.write_string("      \{args.to_string()}")
+  buf.write_string("      \{ffi_call.to_string()}")
   buf.write_string("    )\n")
   buf.write_string("}\n")
   buf.to_string()
@@ -158,7 +161,7 @@ test "emit_dictionary() generates code for simple dictionary" {
       #|     ,TJsValue::to_js(cancelable)
       #|     ,TJsValue::to_js(composed)
       #|     ,TJsValue::to_js(code)
-      #|     ,TJsValue::to_js(opt)
+      #|     ,opt_to_js(opt)
       #|     ,TJsValue::to_js(code)
       #|    )
       #|}
