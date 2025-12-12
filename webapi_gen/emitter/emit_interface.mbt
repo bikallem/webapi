@@ -4,19 +4,18 @@ pub fn emit_interface(
   type_registry : TypeRegistry,
 ) -> String {
   let buf = StringBuilder::new()
+  let name = interface.name
 
   // Header
-  buf.write_string(
-    "// Auto-generated MoonBit bindings for \{interface.name} interface\n",
-  )
+  buf.write_string("// Auto-generated MoonBit bindings for \{name} interface\n")
   buf.write_string("// Do not edit manually\n\n")
 
   // Emit external type declaration
-  buf.write_string(emit_external_type(interface.name))
+  buf.write_string(emit_external_type(name))
   buf.write_string("\n\n")
 
   // Emit TJSValue implementation
-  buf.write_string(emit_external_type_tjs_impl(interface.name))
+  buf.write_string(emit_external_type_tjs_impl(name))
   buf.write_string("\n\n")
 
   // Emit trait definition
