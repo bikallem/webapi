@@ -31,7 +31,7 @@ pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
 
 ///|
 fn emit_external_type(type_name : String) -> String {
-  "external\npub type \{type_name}"
+  "#external\npub type \{type_name}"
 }
 
 ///|
@@ -132,7 +132,7 @@ test "emit_dictionary() generates code for simple dictionary" {
       #|// Auto-generated MoonBit bindings for EventInit dictionary
       #|// Do not edit manually
       #|
-      #|external
+      #|#external
       #|pub type EventInit
       #|
       #|pub impl TJsValue for EventInit with to_js(self: EventInit) -> JsValue = "%identity"
