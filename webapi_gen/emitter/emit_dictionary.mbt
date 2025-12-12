@@ -78,16 +78,18 @@ fn emit_dictionary_new_method(
       params.write_string(",\n  ")
       args.write_string("     ,")
     }
+    params.write_string("\{param_name}")
     if mem.required {
-      // Required parameters
-      params.write_string("\{param_name} : \{mapped_type}")
-      args.write_string("TJsValue::to_js(\{param_name})\n")
+      params.write_string(" : \{mapped_type}")
     } else {
-      // Optional parameter with default
-      // let default_value = get_default_value(mem.type_)
-      params.write_string("\{param_name}? : \{mapped_type}")
-      args.write_string("TJsValue::to_js(\{param_name})\n")
+      params.write_string("? : \{mapped_type}")
+      if mem.default_value is Some(default_value) {
+        params.write_string(
+          "? : \{mapped_type} = \{to_mbt_default_value(default_value, mapped_type)}",
+        )
+      }
     }
+    args.write_string("TJsValue::to_js(\{param_name})\n")
   }
   let buf = StringBuilder::new()
   buf.write_string("pub fn \{dict.name}::new(\n")
@@ -120,7 +122,10 @@ test "emit_dictionary() generates code for simple dictionary" {
     #|dictionary EventInit {
     #|  boolean bubbles = false;
     #|  boolean cancelable = false;
-    #|  boolean composed = false;
+    #|  required boolean composed;
+    #|  float code = NaN;
+    #|  DictA opt;
+    #|  int code = 42;
     #|};
   let flattened = @parser.parse(idl)
     |> @partial_merged.merge_partials
@@ -138,17 +143,23 @@ test "emit_dictionary() generates code for simple dictionary" {
       #|pub impl TJsValue for EventInit with to_js(self: EventInit) -> JsValue = "%identity"
       #|
       #|
-      #|fn event_init_ffi(bubbles : JsValue, cancelable : JsValue, composed : JsValue) -> EventInit = "webapi_EventInit" "new"
+      #|fn event_init_ffi(bubbles : JsValue, cancelable : JsValue, composed : JsValue, code : JsValue, opt : JsValue, code : JsValue) -> EventInit = "webapi_EventInit" "new"
       #|
       #|
       #|pub fn EventInit::new(
-      #|  bubbles? : Bool,
-      #|  cancelable? : Bool,
-      #|  composed? : Bool) -> EventInit {
+      #|  bubbles? : Bool? : Bool = false,
+      #|  cancelable? : Bool? : Bool = false,
+      #|  composed : Bool,
+      #|  code? : Float? : Float = @float.not_a_number,
+      #|  opt? : DictA,
+      #|  code? : int? : int = 42) -> EventInit {
       #|    event_init_ffi(
       #|      TJsValue::to_js(bubbles)
       #|     ,TJsValue::to_js(cancelable)
       #|     ,TJsValue::to_js(composed)
+      #|     ,TJsValue::to_js(code)
+      #|     ,TJsValue::to_js(opt)
+      #|     ,TJsValue::to_js(code)
       #|    )
       #|}
       #|

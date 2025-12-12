@@ -143,3 +143,30 @@ fn to_mbt_type_string(idl_type : Type) -> String {
 fn safe_identifier(name : String) -> String {
   escape_keyword(to_snake_case(name))
 }
+
+///|
+/// Convert default value representation in WebIDL to MoonBit code
+fn to_mbt_default_value(
+  default_value : @parser.DefaultValue,
+  mbt_type : String,
+) -> String {
+  match default_value {
+    Null => "\{mbt_type}::null()"
+    EmptyObject => "\{mbt_type}::empty()"
+    EmptySequence => "[]"
+    String(s) => "\"\{s}\""
+    ConstValue(c) =>
+      match c {
+        Boolean(b) => b
+        Integer(i) => i
+        Float(f) =>
+          match f {
+            Float(f) => f
+            Infinity => "@float.infinity"
+            NegInfinity => "@float.neg_infinity"
+            NaN => "@float.not_a_number"
+          }
+      }
+    Undefined => "\{mbt_type}::undefined()"
+  }
+}
