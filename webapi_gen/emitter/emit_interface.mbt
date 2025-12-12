@@ -1,5 +1,8 @@
 ///|
-pub fn emit_interface(interface : PartialMergedInterface) -> String {
+pub fn emit_interface(
+  interface : PartialMergedInterface,
+  type_registry : TypeRegistry,
+) -> String {
   let buf = StringBuilder::new()
 
   // Header
@@ -88,10 +91,12 @@ test "emit_interface generates moonbit code for simple interface" {
     #|  boolean dispatchEvent(Event event);
     #|};
     #|
-  let flattened = @parser.parse(idl)
-    |> @partial_merged.merge_partials
+    #|interface Event {};
+  let definitions = @parser.parse(idl)
+  let type_registry = TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten
-  let code = emit_interface(flattened.interfaces["EventTarget"])
+  let code = emit_interface(flattened.interfaces["EventTarget"], type_registry)
   inspect(
     code,
     content=(
