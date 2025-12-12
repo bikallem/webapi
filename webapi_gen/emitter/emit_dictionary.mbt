@@ -25,7 +25,6 @@ pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
 
   // Emit empty dictionary constructor
   buf.write_string(emit_empty_dictionary(dict))
-  buf.write_string("\n")
   buf.to_string()
 }
 
@@ -106,7 +105,7 @@ fn emit_dictionary_new_method(
 
 ///|
 fn emit_empty_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
-  "pub fn \{dict.name}::empty() -> \{dict.name} = \"webapi_Dictionary\" \"empty\"\n"
+  "pub fn \{dict.name}::empty() -> \{dict.name} = \"webapi_Dictionary\" \"empty\""
 }
 
 ///|
@@ -168,8 +167,6 @@ test "emit_dictionary() generates code for simple dictionary" {
       #|
       #|
       #|pub fn EventInit::empty() -> EventInit = "webapi_Dictionary" "empty"
-      #|
-      #|
     ),
   )
 }
