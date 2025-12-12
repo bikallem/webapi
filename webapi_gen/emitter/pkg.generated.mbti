@@ -5,6 +5,7 @@ import(
   "bikallem/webapi_gen/flattened_idl"
   "bikallem/webapi_gen/parser"
   "bikallem/webapi_gen/partial_merged"
+  "bikallem/webapi_gen/type_registry"
 )
 
 // Values
@@ -12,11 +13,13 @@ pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl) -> Map[String, String]
 
 pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
 
+pub fn emit_all_interfaces(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+
 pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR) -> String
 
 pub fn emit_enum(@parser.EnumDefinition) -> String
 
-pub fn emit_interface(@partial_merged.PartialMergedInterface) -> String
+pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry) -> String
 
 // Errors
 

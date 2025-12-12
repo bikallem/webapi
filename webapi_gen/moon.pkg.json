@@ -7,7 +7,8 @@
     "moonbitlang/x/fs",
     "bikallem/webapi_gen/config",
     "bikallem/webapi_gen/flattened_idl",
-    "bikallem/webapi_gen/emitter"
+    "bikallem/webapi_gen/emitter",
+    "bikallem/webapi_gen/type_registry"
   ],
   "wbtest-import": [
     "bikallem/webapi_gen/config"

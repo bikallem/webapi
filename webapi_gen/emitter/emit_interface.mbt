@@ -1,7 +1,7 @@
 ///|
 pub fn emit_interface(
   interface : PartialMergedInterface,
-  type_registry : TypeRegistry,
+  _type_registry : TypeRegistry,
 ) -> String {
   let buf = StringBuilder::new()
 
@@ -77,6 +77,19 @@ fn emit_interface_trait(interface : PartialMergedInterface) -> String {
   }
   buf.write_string("}")
   buf.to_string()
+}
+
+///|
+pub fn emit_all_interfaces(
+  flattened_idl : FlattenedIdl,
+  type_registry : TypeRegistry,
+) -> Map[String, String] {
+  let result : Map[String, String] = {}
+  for name, interface in flattened_idl.interfaces {
+    let filename = "\{to_snake_case(name)}.mbt"
+    result[filename] = emit_interface(interface, type_registry)
+  }
+  result
 }
 
 ///|

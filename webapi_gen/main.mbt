@@ -12,26 +12,32 @@ fn main {
       e => fail("failed to read config file: \{e}")
     }
     let config = @config.load_config_from_string(content)
-    let flattened = @parser.parse_file(filepath)
-      |> filter_idl(config, _)
-      |> merge_partials
-      |> flatten
+    let definitions = @parser.parse_file(filepath) |> filter_idl(config, _)
+    let type_registry = TypeRegistry::new(definitions)
+    let flattened = merge_partials(definitions) |> flatten
 
     // emit enums
     let enum_files = emit_all_enums(flattened)
 
-    // Output generated code
+    // Generate enums
     println("=== Generated Enums ===")
-    for filename, enum_content in enum_files {
-      println("\n-- \{filename} ---")
-      println(enum_content)
+    for filename, code in enum_files {
+      println("\n--- \{filename} ---")
+      println(code)
     }
 
-    // Output generated dictionaries
+    // Generate dictionaries
     println("=== Generated Dictionaries ===")
-    for filename, dict_content in emit_all_dictionaries(flattened) {
-      println("\n-- \{filename} ---")
-      println(dict_content)
+    for filename, code in emit_all_dictionaries(flattened) {
+      println("\n--- \{filename} ---")
+      println(code)
+    }
+
+    // Generate interfaces
+    println("=== Generated Interfaces ===")
+    for filename, code in emit_all_interfaces(flattened, type_registry) {
+      println("\n--- \{filename} ---")
+      println(code)
     }
   } catch {
     e => println("Error: \{e}")
