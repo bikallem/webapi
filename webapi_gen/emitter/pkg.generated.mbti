@@ -7,7 +7,11 @@ import(
 )
 
 // Values
+pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl) -> Map[String, String]
+
 pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
+
+pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR) -> String
 
 pub fn emit_enum(@parser.EnumDefinition) -> String
 

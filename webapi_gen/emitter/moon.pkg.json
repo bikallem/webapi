@@ -1,6 +1,10 @@
 {
-    "import": [
-        "bikallem/webapi_gen/parser",
-        "bikallem/webapi_gen/flattened_idl"
-    ]
+  "import": [
+    "bikallem/webapi_gen/parser",
+    "bikallem/webapi_gen/flattened_idl",
+    "bikallem/webapi_gen/partial_merged"
+  ],
+  "wbtest-import": [
+    "bikallem/webapi_gen/partial_merged"
+  ]
 }
