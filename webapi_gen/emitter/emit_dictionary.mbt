@@ -1,5 +1,8 @@
 ///|
-pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
+pub fn emit_dictionary(
+  dict : @flattened_idl.MergedDictionaryIR,
+  type_registry : TypeRegistry,
+) -> String {
   let buf = StringBuilder::new()
   let type_name = dict.name
 
@@ -20,7 +23,7 @@ pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
   // Emit FFI and builder only if there are members
   buf.write_string(emit_dictionary_ffi(dict))
   buf.write_string("\n\n")
-  buf.write_string(emit_dictionary_new_method(dict))
+  buf.write_string(emit_dictionary_new_method(dict, type_registry))
   buf.write_string("\n\n")
 
   // Emit empty dictionary constructor
@@ -53,6 +56,7 @@ fn emit_dictionary_ffi(dict : @flattened_idl.MergedDictionaryIR) -> String {
 /// Emit the new() method with optional parameters
 fn emit_dictionary_new_method(
   dict : @flattened_idl.MergedDictionaryIR,
+  type_registry : TypeRegistry,
 ) -> String {
   let ffi_name = "\{to_snake_case(dict.name)}_ffi"
 
@@ -61,7 +65,7 @@ fn emit_dictionary_new_method(
   let ffi_call = StringBuilder::new()
   for i, mem in dict.members {
     let param_name = safe_identifier(mem.name)
-    let mapped_type = to_mbt_type_string(mem.type_)
+    let mapped_type = to_mbt_type_string(mem.type_, type_registry)
     if i > 0 {
       params.write_string(",\n  ")
       ffi_call.write_string("     ,")
@@ -99,11 +103,14 @@ fn emit_empty_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
 }
 
 ///|
-pub fn emit_all_dictionaries(idl : FlattenedIdl) -> Map[String, String] {
+pub fn emit_all_dictionaries(
+  idl : FlattenedIdl,
+  type_registry : TypeRegistry,
+) -> Map[String, String] {
   let result = {}
   for name, dict in idl.dictionaries {
     let filename = "\{to_snake_case(name)}_dictionary.mbt"
-    result[filename] = emit_dictionary(dict)
+    result[filename] = emit_dictionary(dict, type_registry)
   }
   result
 }
@@ -119,10 +126,11 @@ test "emit_dictionary() generates code for simple dictionary" {
     #|  DictA opt;
     #|  int code = 42;
     #|};
-  let flattened = @parser.parse(idl)
-    |> @partial_merged.merge_partials
+  let definitions = @parser.parse(idl)
+  let type_registry = TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten
-  let code = emit_dictionary(flattened.dictionaries["EventInit"])
+  let code = emit_dictionary(flattened.dictionaries["EventInit"], type_registry)
   inspect(
     code,
     content=(
@@ -166,10 +174,11 @@ test "emit_dictionary handles empty dictionary" {
   let idl =
     #|dictionary EmptyDict {
     #|};
-  let flattened = @parser.parse(idl)
-    |> @partial_merged.merge_partials
+  let definitions = @parser.parse(idl)
+  let type_registry = TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten
-  let code = emit_dictionary(flattened.dictionaries["EmptyDict"])
+  let code = emit_dictionary(flattened.dictionaries["EmptyDict"], type_registry)
   inspect(
     code,
     content=(

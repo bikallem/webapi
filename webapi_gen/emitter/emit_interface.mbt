@@ -1,7 +1,7 @@
 ///|
 pub fn emit_interface(
   interface : PartialMergedInterface,
-  _type_registry : TypeRegistry,
+  type_registry : TypeRegistry,
 ) -> String {
   let buf = StringBuilder::new()
 
@@ -20,13 +20,16 @@ pub fn emit_interface(
   buf.write_string("\n\n")
 
   // Emit trait definition
-  buf.write_string(emit_interface_trait(interface))
+  buf.write_string(emit_interface_trait(interface, type_registry))
   buf.to_string()
 }
 
 ///|
 /// Emit trait definition for the interface
-fn emit_interface_trait(interface : PartialMergedInterface) -> String {
+fn emit_interface_trait(
+  interface : PartialMergedInterface,
+  type_registry : TypeRegistry,
+) -> String {
   let buf = StringBuilder::new()
   fn trait_name(type_name : String) {
     "T\{type_name}"
@@ -53,11 +56,11 @@ fn emit_interface_trait(interface : PartialMergedInterface) -> String {
       SpecialOperation(_) => ()
       RegularOperation(op) => {
         let method_name = safe_identifier(op.name)
-        let return_type = to_mbt_type_string(op.return_type)
+        let return_type = to_mbt_type_string(op.return_type, type_registry)
         let params = op.arguments
           .map(arg => {
             let optioanl = if arg.optional { "?" } else { "" }
-            "\{safe_identifier(arg.name)}\{optioanl} : \{to_mbt_type_string(arg.type_.type_)}"
+            "\{safe_identifier(arg.name)}\{optioanl} : \{to_mbt_type_string(arg.type_.type_, type_registry)}"
           })
           .join(", ")
         if op.static_ {
@@ -125,7 +128,7 @@ test "emit_interface generates moonbit code for simple interface" {
       #|pub trait TEventTarget: TJSValue {
       #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit
       #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit
-      #|  dispatch_event(self: Self, event : Event) -> Bool
+      #|  dispatch_event(self: Self, event : &TEvent) -> Bool
       #|}
     ),
   )

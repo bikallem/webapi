@@ -55,42 +55,48 @@ test "ffi_module_name generates correct module names" {
 
 ///|
 test "map_idl_type handles primitive types" {
-  inspect(to_mbt_type_string(Boolean), content="Bool")
-  inspect(to_mbt_type_string(Long), content="Int")
-  inspect(to_mbt_type_string(UnsignedLong), content="UInt")
-  inspect(to_mbt_type_string(Double), content="Double")
-  inspect(to_mbt_type_string(Undefined), content="Unit")
+  let tr = TypeRegistry::new([])
+  inspect(to_mbt_type_string(Boolean, tr), content="Bool")
+  inspect(to_mbt_type_string(Long, tr), content="Int")
+  inspect(to_mbt_type_string(UnsignedLong, tr), content="UInt")
+  inspect(to_mbt_type_string(Double, tr), content="Double")
+  inspect(to_mbt_type_string(Undefined, tr), content="Unit")
 }
 
 ///|
 test "map_idl_type handles string types" {
-  inspect(to_mbt_type_string(DOMString), content="String")
-  inspect(to_mbt_type_string(USVString), content="String")
-  inspect(to_mbt_type_string(ByteString), content="String")
+  let tr = TypeRegistry::new([])
+  inspect(to_mbt_type_string(DOMString, tr), content="String")
+  inspect(to_mbt_type_string(USVString, tr), content="String")
+  inspect(to_mbt_type_string(ByteString, tr), content="String")
 }
 
 ///|
 test "map_idl_type handles parameterized types" {
-  inspect(to_mbt_type_string(Nullable(DOMString)), content="String")
-  inspect(to_mbt_type_string(Sequence(Long)), content="Array[Int]")
-  inspect(to_mbt_type_string(Promise(Undefined)), content="JsPromise[Unit]")
+  let tr = TypeRegistry::new([])
+  inspect(to_mbt_type_string(Nullable(DOMString), tr), content="String")
+  inspect(to_mbt_type_string(Sequence(Long), tr), content="Array[Int]")
+  inspect(to_mbt_type_string(Promise(Undefined), tr), content="JsPromise[Unit]")
   // inspect(map_idl_type(Record(DOMString, Long)), content="Map[String, Int]")
 }
 
 ///|
 test "map_idl_type handles named types" {
-  inspect(to_mbt_type_string(Identifier("Element")), content="Element")
-  inspect(to_mbt_type_string(Identifier("EventInit")), content="EventInit")
+  let tr = TypeRegistry::new([])
+  inspect(to_mbt_type_string(Identifier("Element"), tr), content="Element")
+  inspect(to_mbt_type_string(Identifier("EventInit"), tr), content="EventInit")
 }
 
 ///|
 test "map_idl_type handles union types" {
+  let tr = TypeRegistry::new([])
   inspect(
     to_mbt_type_string(
       Union([
         { extended_attributes: [], type_: DOMString },
         { extended_attributes: [], type_: Long },
       ]),
+      tr,
     ),
     content="JsValue",
   )

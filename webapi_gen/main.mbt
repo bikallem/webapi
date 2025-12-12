@@ -28,7 +28,7 @@ fn main {
 
     // Generate dictionaries
     println("=== Generated Dictionaries ===")
-    for filename, code in emit_all_dictionaries(flattened) {
+    for filename, code in emit_all_dictionaries(flattened, type_registry) {
       println("\n--- \{filename} ---")
       println(code)
     }

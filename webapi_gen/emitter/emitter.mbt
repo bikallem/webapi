@@ -62,11 +62,16 @@ fn ffi_module_name(type_name : String) -> String {
 
 ///|
 /// Map WebIDL type to Moonbit type string
-fn to_mbt_type_string(idl_type : Type) -> String {
+fn to_mbt_type_string(idl_type : Type, type_registry : TypeRegistry) -> String {
   match idl_type {
     // Named types (interfaces, dictionaries, enums, typedefs)
-    Identifier(name) => name
-    Nullable(t) => "\{to_mbt_type_string(t)}" // Nullable types
+    Identifier(name) =>
+      if type_registry.is_interface(name) {
+        "&T\{name}"
+      } else {
+        name
+      }
+    Nullable(t) => "\{to_mbt_type_string(t, type_registry)}" // Nullable types
 
     // Void 
     Undefined => "Unit"
@@ -75,11 +80,14 @@ fn to_mbt_type_string(idl_type : Type) -> String {
     Union(_) => "JsValue" // Default
 
     // Parameterized types
-    Promise(t) => "JsPromise[\{to_mbt_type_string(t)}]"
-    ObservableArray({ type_, .. }) => "Array[\{to_mbt_type_string(type_)}]"
-    FrozenArray({ type_, .. }) => "Array[\{to_mbt_type_string(type_)}]"
-    Sequence(t) => "Array[\{to_mbt_type_string(t)}]"
-    AsyncSequence({ type_, .. }) => "Array[\{to_mbt_type_string(type_)}]"
+    Promise(t) => "JsPromise[\{to_mbt_type_string(t, type_registry)}]"
+    ObservableArray({ type_, .. }) =>
+      "Array[\{to_mbt_type_string(type_, type_registry)}]"
+    FrozenArray({ type_, .. }) =>
+      "Array[\{to_mbt_type_string(type_, type_registry)}]"
+    Sequence(t) => "Array[\{to_mbt_type_string(t, type_registry)}]"
+    AsyncSequence({ type_, .. }) =>
+      "Array[\{to_mbt_type_string(type_, type_registry)}]"
 
     // Typed Arrays
     Float64Array => "Float64Array"
