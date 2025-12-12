@@ -78,16 +78,12 @@ fn emit_dictionary_new_method(
       params.write_string(",\n  ")
       args.write_string("     ,")
     }
-    if mem.required {
-      // Required parameters
-      params.write_string("\{param_name}: \{mapped_type}")
-      args.write_string("TJsValue::to_js(\{param_name})\n")
-    } else {
-      // Optional parameter with default
-      // let default_value = get_default_value(mem.type_)
-      params.write_string("\{param_name}? : \{mapped_type}")
-      args.write_string("TJsValue::to_js(\{param_name})\n")
+    params.write_string("\{param_name}")
+    if !mem.required {
+      params.write_string("?")
     }
+    params.write_string(" : \{mapped_type}")
+    args.write_string("TJsValue::to_js(\{param_name})\n")
   }
   let buf = StringBuilder::new()
   buf.write_string("pub fn \{dict.name}::new(\n")
