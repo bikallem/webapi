@@ -21,9 +21,17 @@ fn main {
     let enum_files = emit_all_enums(flattened)
 
     // Output generated code
-    for filename, content in enum_files {
+    println("=== Generated Enums ===")
+    for filename, enum_content in enum_files {
       println("\n-- \{filename} ---")
-      println(content)
+      println(enum_content)
+    }
+
+    // Output generated dictionaries
+    println("=== Generated Dictionaries ===")
+    for filename, dict_content in emit_all_dictionaries(flattened) {
+      println("\n-- \{filename} ---")
+      println(dict_content)
     }
   } catch {
     e => println("Error: \{e}")
