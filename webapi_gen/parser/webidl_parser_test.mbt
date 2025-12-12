@@ -94,10 +94,16 @@ test "parse interface with extended attributes" {
 }
 
 ///|
-test "parse dictionary" {
+test "parse dictionary with default values" {
   let idl =
     #|dictionary Options {
     #|  boolean enabled = true;
+    #|  float f_value = 0.2;
+    #|  int v = 1;
+    #|  DictA x = {};
+    #|  DictB y = [];
+    #|  A a = null;
+    #|  B b = undefined;
     #|  DOMString name;
     #|};
   @json.inspect(@parser.parse(idl), content=[
@@ -114,6 +120,48 @@ test "parse dictionary" {
               "name": "enabled",
               "required": false,
               "default_value": ["ConstValue", ["Boolean", true]],
+            },
+            {
+              "extended_attributes": [],
+              "type_": "Float",
+              "name": "f_value",
+              "required": false,
+              "default_value": ["ConstValue", ["Float", 0.20000000298023224]],
+            },
+            {
+              "extended_attributes": [],
+              "type_": ["Identifier", "int"],
+              "name": "v",
+              "required": false,
+              "default_value": ["ConstValue", ["Integer", 1]],
+            },
+            {
+              "extended_attributes": [],
+              "type_": ["Identifier", "DictA"],
+              "name": "x",
+              "required": false,
+              "default_value": "EmptyObject",
+            },
+            {
+              "extended_attributes": [],
+              "type_": ["Identifier", "DictB"],
+              "name": "y",
+              "required": false,
+              "default_value": "EmptySequence",
+            },
+            {
+              "extended_attributes": [],
+              "type_": ["Identifier", "A"],
+              "name": "a",
+              "required": false,
+              "default_value": "Null",
+            },
+            {
+              "extended_attributes": [],
+              "type_": ["Identifier", "B"],
+              "name": "b",
+              "required": false,
+              "default_value": "Undefined",
             },
             {
               "extended_attributes": [],

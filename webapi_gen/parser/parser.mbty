@@ -456,13 +456,19 @@ null_modifier -> Bool:
 
 // Const values
 const_value -> ConstValue:
-  | "true"                      { ConstValue::Boolean(true) }
-  | "false"                     { ConstValue::Boolean(false) }
-  | INTEGER                     { ConstValue::Integer($1) }
-  | FLOAT                       { ConstValue::Float($1) }
-  | "Infinity"                  { ConstValue::Infinity }
-  | "-Infinity"                 { ConstValue::NegInfinity }
-  | "NaN"                       { ConstValue::NaN }
+  | bool=boolean_literal        { ConstValue::Boolean(bool) }
+  | f=float_literal             { ConstValue::Float(f) }
+  | i=INTEGER                   { ConstValue::Integer(@strconv.parse_int(i) catch { e => abort("Invalid int value: \{e}") }) }  
+
+boolean_literal -> Bool:
+  | "true"                      { true }
+  | "false"                     { false }
+
+float_literal -> Float:
+  | f=FLOAT                     { Float::from_double(@strconv.parse_double(f) catch {e => abort("Invalid float value: \{e}")}) }
+  | "Infinity"                  { @float.infinity }
+  | "-Infinity"                 { @float.neg_infinity }
+  | "NaN"                       { @float.not_a_number }
 
 // Default values
 default_value_opt -> Option[DefaultValue]:

@@ -129,11 +129,8 @@ pub(all) enum DefaultValue {
 /// Constant value
 pub(all) enum ConstValue {
   Boolean(Bool)
-  Integer(String)
-  Float(String)
-  Infinity
-  NegInfinity
-  NaN
+  Integer(Int)
+  Float(Float)
 } derive(Show, Eq, ToJson)
 
 // =============================================================================
