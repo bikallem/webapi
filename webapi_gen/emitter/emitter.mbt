@@ -56,12 +56,6 @@ fn escape_keyword(name : String) -> String {
 }
 
 ///|
-/// Generate FFI function name from type and method name
-fn ffi_name(type_name : String, method_name : String) -> String {
-  "\{to_snake_case(type_name)}_\{to_snake_case(method_name)}_ffi"
-}
-
-///|
 fn ffi_module_name(type_name : String) -> String {
   "webapi_\{type_name}"
 }

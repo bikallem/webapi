@@ -47,19 +47,6 @@ test "escape_keyword passes non-keywords" {
 }
 
 ///|
-test "ffi_name generates correct FFI function names" {
-  inspect(
-    ffi_name("Element", "getAttribute"),
-    content="element_get_attribute_ffi",
-  )
-  inspect(
-    ffi_name("Document", "getElementById"),
-    content="document_get_element_by_id_ffi",
-  )
-  inspect(ffi_name("Node", "appendChild"), content="node_append_child_ffi")
-}
-
-///|
 test "ffi_module_name generates correct module names" {
   inspect(ffi_module_name("Element"), content="webapi_Element")
   inspect(ffi_module_name("Document"), content="webapi_Document")
