@@ -92,7 +92,7 @@ pub fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
 
 ///|
 /// Merged dictionary IR with all inherited members combined.
-struct MergedDictionaryIR {
+pub(all) struct MergedDictionaryIR {
   name : String
   members : Array[DictionaryMember]
 } derive(Show, ToJson)

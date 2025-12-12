@@ -22,7 +22,10 @@ pub struct FlattenedIdl {
 pub impl Show for FlattenedIdl
 pub impl ToJson for FlattenedIdl
 
-type MergedDictionaryIR
+pub struct MergedDictionaryIR {
+  name : String
+  members : Array[@parser.DictionaryMember]
+}
 pub impl Show for MergedDictionaryIR
 pub impl ToJson for MergedDictionaryIR
 
