@@ -4,6 +4,7 @@ package "bikallem/webapi_gen/emitter"
 import(
   "bikallem/webapi_gen/flattened_idl"
   "bikallem/webapi_gen/parser"
+  "bikallem/webapi_gen/partial_merged"
 )
 
 // Values
@@ -14,6 +15,8 @@ pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
 pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR) -> String
 
 pub fn emit_enum(@parser.EnumDefinition) -> String
+
+pub fn emit_interface(@partial_merged.PartialMergedInterface) -> String
 
 // Errors
 
