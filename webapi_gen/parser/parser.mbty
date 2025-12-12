@@ -455,10 +455,10 @@ null_modifier -> Bool:
   |                             { false }
 
 // Const values
-const_value -> ConstValue:
-  | b=boolean_literal           { ConstValue::Boolean(b) }
-  | f=float_literal             { ConstValue::Float(f) }
-  | i=INTEGER                   { ConstValue::Integer(i) }  
+const_value -> Const:
+  | b=boolean_literal           { Const::Boolean(b) }
+  | f=float_literal             { Const::Float(f) }
+  | i=INTEGER                   { Const::Integer(i) }  
 
 boolean_literal -> String:
   | "true"                      { "true" }

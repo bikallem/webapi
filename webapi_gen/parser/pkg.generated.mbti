@@ -96,23 +96,23 @@ pub impl Eq for CallbackInterfaceMemberExtendedAttributes
 pub impl Show for CallbackInterfaceMemberExtendedAttributes
 pub impl ToJson for CallbackInterfaceMemberExtendedAttributes
 
-pub(all) struct ConstMember {
-  type_ : Type
-  name : String
-  value : ConstValue
-}
-pub impl Eq for ConstMember
-pub impl Show for ConstMember
-pub impl ToJson for ConstMember
-
-pub(all) enum ConstValue {
+pub(all) enum Const {
   Boolean(String)
   Integer(String)
   Float(FloatLiteral)
 }
-pub impl Eq for ConstValue
-pub impl Show for ConstValue
-pub impl ToJson for ConstValue
+pub impl Eq for Const
+pub impl Show for Const
+pub impl ToJson for Const
+
+pub(all) struct ConstMember {
+  type_ : Type
+  name : String
+  value : Const
+}
+pub impl Eq for ConstMember
+pub impl Show for ConstMember
+pub impl ToJson for ConstMember
 
 pub(all) struct ConstructorMember {
   arguments : Array[Argument]
@@ -122,7 +122,7 @@ pub impl Show for ConstructorMember
 pub impl ToJson for ConstructorMember
 
 pub(all) enum DefaultValue {
-  ConstValue(ConstValue)
+  ConstValue(Const)
   String(String)
   EmptySequence
   EmptyObject

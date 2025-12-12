@@ -117,7 +117,7 @@ pub(all) struct Argument {
 ///|
 /// Default value for optional arguments
 pub(all) enum DefaultValue {
-  ConstValue(ConstValue)
+  ConstValue(Const)
   String(String)
   EmptySequence // []
   EmptyObject // {}
@@ -127,7 +127,7 @@ pub(all) enum DefaultValue {
 
 ///|
 /// Constant value
-pub(all) enum ConstValue {
+pub(all) enum Const {
   Boolean(String)
   Integer(String)
   Float(FloatLiteral)
@@ -171,7 +171,7 @@ pub(all) struct InterfaceMemberExtendedAttributes {
 pub(all) struct ConstMember {
   type_ : Type
   name : String
-  value : ConstValue
+  value : Const
 } derive(Show, Eq, ToJson)
 
 ///|

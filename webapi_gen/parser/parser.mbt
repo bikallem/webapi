@@ -30,6 +30,8 @@ priv suberror YYObj_Array_NamespaceMemberExtendedAttributes_ Array[NamespaceMemb
 
 priv suberror YYObj_Array_CallbackInterfaceMemberExtendedAttributes_ Array[CallbackInterfaceMemberExtendedAttributes]
 
+priv suberror YYObj_Const Const
+
 priv suberror YYObj_Option_DefaultValue_ Option[DefaultValue]
 
 priv suberror YYObj_String String
@@ -37,8 +39,6 @@ priv suberror YYObj_String String
 priv suberror YYObj_Special Special
 
 priv suberror YYObj_Argument Argument
-
-priv suberror YYObj_ConstValue ConstValue
 
 priv suberror YYObj_Definition Definition
 
@@ -851,7 +851,7 @@ fn yy_action_74(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 fn yy_action_75(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(type_)
   guard _args[2].0 is YYObj_String(name)
-  guard _args[4].0 is YYObj_ConstValue(value)
+  guard _args[4].0 is YYObj_Const(value)
   YYObj_ConstMember({();  { type_, name, value } })
 }
 
@@ -971,24 +971,24 @@ fn yy_action_90(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 459|    b=boolean_literal           { ConstValue::Boolean(b) }
+// 459|    b=boolean_literal           { Const::Boolean(b) }
 fn yy_action_91(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(b)
-  YYObj_ConstValue({();  ConstValue::Boolean(b) })
+  YYObj_Const({();  Const::Boolean(b) })
 }
 
 // file:///./parser.mbty
-// 460|    f=float_literal             { ConstValue::Float(f) }
+// 460|    f=float_literal             { Const::Float(f) }
 fn yy_action_92(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_FloatLiteral(f)
-  YYObj_ConstValue({();  ConstValue::Float(f) })
+  YYObj_Const({();  Const::Float(f) })
 }
 
 // file:///./parser.mbty
-// 461|    i=INTEGER                   { ConstValue::Integer(i) }
+// 461|    i=INTEGER                   { Const::Integer(i) }
 fn yy_action_93(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(i)
-  YYObj_ConstValue({();  ConstValue::Integer(i) })
+  YYObj_Const({();  Const::Integer(i) })
 }
 
 // file:///./parser.mbty
@@ -1038,7 +1038,7 @@ fn yy_action_100(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 // file:///./parser.mbty
 // 479|    const_value                 { DefaultValue::ConstValue($1) }
 fn yy_action_101(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_ConstValue(_dollar1)
+  guard _args[0].0 is YYObj_Const(_dollar1)
   YYObj_DefaultValue({();  DefaultValue::ConstValue(_dollar1) })
 }
 
