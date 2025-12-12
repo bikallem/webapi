@@ -170,3 +170,38 @@ test "emit_dictionary() generates code for simple dictionary" {
     ),
   )
 }
+
+///|
+test "emit_dictionary handles empty dictionary" {
+  let idl =
+    #|dictionary EmptyDict {
+    #|};
+  let flattened = @parser.parse(idl)
+    |> @partial_merged.merge_partials
+    |> @flattened_idl.flatten
+  let code = emit_dictionary(flattened.dictionaries["EmptyDict"])
+  inspect(
+    code,
+    content=(
+      #|// Auto-generated MoonBit bindings for EmptyDict dictionary
+      #|// Do not edit manually
+      #|
+      #|#external
+      #|pub type EmptyDict
+      #|
+      #|pub impl TJsValue for EmptyDict with to_js(self: EmptyDict) -> JsValue = "%identity"
+      #|
+      #|
+      #|fn empty_dict_ffi() -> EmptyDict = "webapi_EmptyDict" "new"
+      #|
+      #|pub fn EmptyDict::new(
+      #|  ) -> EmptyDict {
+      #|    empty_dict_ffi(
+      #|          )
+      #|}
+      #|
+      #|
+      #|pub fn EmptyDict::empty() -> EmptyDict = "webapi_Dictionary" "empty"
+    ),
+  )
+}
