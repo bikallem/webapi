@@ -68,11 +68,11 @@ fn ffi_module_name(type_name : String) -> String {
 
 ///|
 /// Map WebIDL type to Moonbit type string
-fn map_idl_type(idl_type : Type) -> String {
+fn to_mbt_type_string(idl_type : Type) -> String {
   match idl_type {
     // Named types (interfaces, dictionaries, enums, typedefs)
     Identifier(name) => name
-    Nullable(t) => "\{map_idl_type(t)}?" // Nullable types
+    Nullable(t) => "\{to_mbt_type_string(t)}?" // Nullable types
 
     // Void 
     Undefined => "Unit"
@@ -81,11 +81,11 @@ fn map_idl_type(idl_type : Type) -> String {
     Union(_) => "JsValue" // Default
 
     // Parameterized types
-    Promise(t) => "JsPromise[\{map_idl_type(t)}]"
-    ObservableArray({ type_, .. }) => "Array[\{map_idl_type(type_)}]"
-    FrozenArray({ type_, .. }) => "Array[\{map_idl_type(type_)}]"
-    Sequence(t) => "Array[\{map_idl_type(t)}]"
-    AsyncSequence({ type_, .. }) => "Array[\{map_idl_type(type_)}]"
+    Promise(t) => "JsPromise[\{to_mbt_type_string(t)}]"
+    ObservableArray({ type_, .. }) => "Array[\{to_mbt_type_string(type_)}]"
+    FrozenArray({ type_, .. }) => "Array[\{to_mbt_type_string(type_)}]"
+    Sequence(t) => "Array[\{to_mbt_type_string(t)}]"
+    AsyncSequence({ type_, .. }) => "Array[\{to_mbt_type_string(type_)}]"
 
     // Typed Arrays
     Float64Array => "Float64Array"

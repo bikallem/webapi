@@ -68,38 +68,38 @@ test "ffi_module_name generates correct module names" {
 
 ///|
 test "map_idl_type handles primitive types" {
-  inspect(map_idl_type(Boolean), content="Bool")
-  inspect(map_idl_type(Long), content="Int")
-  inspect(map_idl_type(UnsignedLong), content="UInt")
-  inspect(map_idl_type(Double), content="Double")
-  inspect(map_idl_type(Undefined), content="Unit")
+  inspect(to_mbt_type_string(Boolean), content="Bool")
+  inspect(to_mbt_type_string(Long), content="Int")
+  inspect(to_mbt_type_string(UnsignedLong), content="UInt")
+  inspect(to_mbt_type_string(Double), content="Double")
+  inspect(to_mbt_type_string(Undefined), content="Unit")
 }
 
 ///|
 test "map_idl_type handles string types" {
-  inspect(map_idl_type(DOMString), content="String")
-  inspect(map_idl_type(USVString), content="String")
-  inspect(map_idl_type(ByteString), content="String")
+  inspect(to_mbt_type_string(DOMString), content="String")
+  inspect(to_mbt_type_string(USVString), content="String")
+  inspect(to_mbt_type_string(ByteString), content="String")
 }
 
 ///|
 test "map_idl_type handles parameterized types" {
-  inspect(map_idl_type(Nullable(DOMString)), content="String?")
-  inspect(map_idl_type(Sequence(Long)), content="Array[Int]")
-  inspect(map_idl_type(Promise(Undefined)), content="JsPromise[Unit]")
+  inspect(to_mbt_type_string(Nullable(DOMString)), content="String?")
+  inspect(to_mbt_type_string(Sequence(Long)), content="Array[Int]")
+  inspect(to_mbt_type_string(Promise(Undefined)), content="JsPromise[Unit]")
   // inspect(map_idl_type(Record(DOMString, Long)), content="Map[String, Int]")
 }
 
 ///|
 test "map_idl_type handles named types" {
-  inspect(map_idl_type(Identifier("Element")), content="Element")
-  inspect(map_idl_type(Identifier("EventInit")), content="EventInit")
+  inspect(to_mbt_type_string(Identifier("Element")), content="Element")
+  inspect(to_mbt_type_string(Identifier("EventInit")), content="EventInit")
 }
 
 ///|
 test "map_idl_type handles union types" {
   inspect(
-    map_idl_type(
+    to_mbt_type_string(
       Union([
         { extended_attributes: [], type_: DOMString },
         { extended_attributes: [], type_: Long },

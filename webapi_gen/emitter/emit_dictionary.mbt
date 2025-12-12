@@ -73,7 +73,7 @@ fn emit_dictionary_new_method(
   let args = StringBuilder::new()
   for i, mem in dict.members {
     let param_name = safe_identifier(mem.name)
-    let mapped_type = map_idl_type(mem.type_)
+    let mapped_type = to_mbt_type_string(mem.type_)
     if i > 0 {
       params.write_string(",\n  ")
       args.write_string("     ,")
