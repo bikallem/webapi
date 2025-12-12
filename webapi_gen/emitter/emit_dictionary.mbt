@@ -14,7 +14,7 @@ pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
   buf.write_string("\n\n")
 
   // Emit TJSValue implementation
-  buf.write_string(emit_tjs_value_impl(type_name))
+  buf.write_string(emit_external_type_tjs_impl(type_name))
   buf.write_string("\n\n")
 
   // Emit FFI and builder only if there are members
@@ -26,16 +26,6 @@ pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
   // Emit empty dictionary constructor
   buf.write_string(emit_empty_dictionary(dict))
   buf.to_string()
-}
-
-///|
-fn emit_external_type(type_name : String) -> String {
-  "#external\npub type \{type_name}"
-}
-
-///|
-fn emit_tjs_value_impl(type_name : String) -> String {
-  "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"\n"
 }
 
 ///|

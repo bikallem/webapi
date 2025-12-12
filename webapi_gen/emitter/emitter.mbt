@@ -170,3 +170,13 @@ fn to_mbt_default_value(
     Undefined => "\{mbt_type}::undefined()"
   }
 }
+
+///|
+fn emit_external_type(type_name : String) -> String {
+  "#external\npub type \{type_name}"
+}
+
+///|
+fn emit_external_type_tjs_impl(type_name : String) -> String {
+  "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"\n"
+}
