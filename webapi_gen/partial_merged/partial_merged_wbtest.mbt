@@ -133,7 +133,7 @@ test "PartialMergeVisitor merges dictionary and partial dictionary" {
         "type_": "Boolean",
         "name": "bubbles",
         "required": false,
-        "default_value": ["ConstValue", ["Boolean", false]],
+        "default_value": ["ConstValue", ["Boolean", "false"]],
       },
     ],
   })

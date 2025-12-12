@@ -106,12 +106,9 @@ pub impl Show for ConstMember
 pub impl ToJson for ConstMember
 
 pub(all) enum ConstValue {
-  Boolean(Bool)
+  Boolean(String)
   Integer(String)
-  Float(String)
-  Infinity
-  NegInfinity
-  NaN
+  Float(FloatLiteral)
 }
 pub impl Eq for ConstValue
 pub impl Show for ConstValue
@@ -201,6 +198,16 @@ pub(all) enum ExtendedAttribute {
 pub impl Eq for ExtendedAttribute
 pub impl Show for ExtendedAttribute
 pub impl ToJson for ExtendedAttribute
+
+pub(all) enum FloatLiteral {
+  Float(String)
+  Infinity
+  NegInfinity
+  NaN
+}
+pub impl Eq for FloatLiteral
+pub impl Show for FloatLiteral
+pub impl ToJson for FloatLiteral
 
 pub(all) struct IncludesStatement {
   interface_name : String

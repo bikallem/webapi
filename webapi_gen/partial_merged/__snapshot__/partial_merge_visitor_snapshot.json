@@ -105,7 +105,7 @@
             "ConstValue",
             [
               "Boolean",
-              false
+              "false"
             ]
           ]
         }

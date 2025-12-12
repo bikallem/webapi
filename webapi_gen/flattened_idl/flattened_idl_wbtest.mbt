@@ -27,7 +27,7 @@ test "flatten merges dictionary inheritance" {
         "type_": "Boolean",
         "name": "bubbles",
         "required": false,
-        "default_value": ["ConstValue", ["Boolean", false]],
+        "default_value": ["ConstValue", ["Boolean", "false"]],
       },
       {
         "extended_attributes": [],
@@ -40,7 +40,7 @@ test "flatten merges dictionary inheritance" {
         "type_": "Boolean",
         "name": "property1",
         "required": false,
-        "default_value": ["ConstValue", ["Boolean", false]],
+        "default_value": ["ConstValue", ["Boolean", "false"]],
       },
     ],
   })

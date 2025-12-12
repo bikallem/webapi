@@ -30,8 +30,6 @@ priv suberror YYObj_Array_NamespaceMemberExtendedAttributes_ Array[NamespaceMemb
 
 priv suberror YYObj_Array_CallbackInterfaceMemberExtendedAttributes_ Array[CallbackInterfaceMemberExtendedAttributes]
 
-priv suberror YYObj_Float Float
-
 priv suberror YYObj_Option_DefaultValue_ Option[DefaultValue]
 
 priv suberror YYObj_String String
@@ -47,6 +45,8 @@ priv suberror YYObj_Definition Definition
 priv suberror YYObj_ConstMember ConstMember
 
 priv suberror YYObj_DefaultValue DefaultValue
+
+priv suberror YYObj_FloatLiteral FloatLiteral
 
 priv suberror YYObj_MaplikeMember MaplikeMember
 
@@ -971,61 +971,61 @@ fn yy_action_90(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 459|    bool=boolean_literal        { ConstValue::Boolean(bool) }
+// 459|    b=boolean_literal           { ConstValue::Boolean(b) }
 fn yy_action_91(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Bool(bool)
-  YYObj_ConstValue({();  ConstValue::Boolean(bool) })
+  guard _args[0].0 is YYObj_String(b)
+  YYObj_ConstValue({();  ConstValue::Boolean(b) })
 }
 
 // file:///./parser.mbty
 // 460|    f=float_literal             { ConstValue::Float(f) }
 fn yy_action_92(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Float(f)
+  guard _args[0].0 is YYObj_FloatLiteral(f)
   YYObj_ConstValue({();  ConstValue::Float(f) })
 }
 
 // file:///./parser.mbty
-// 461|    i=INTEGER                   { ConstValue::Integer(@strconv.parse_int(i) catch { e => abort("Invalid int value: \{e}") }) }
+// 461|    i=INTEGER                   { ConstValue::Integer(i) }
 fn yy_action_93(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(i)
-  YYObj_ConstValue({();  ConstValue::Integer(@strconv.parse_int(i) catch { e => abort("Invalid int value: \{e}") }) })
+  YYObj_ConstValue({();  ConstValue::Integer(i) })
 }
 
 // file:///./parser.mbty
-// 464|    "true"                      { true }
+// 464|    "true"                      { "true" }
 fn yy_action_94(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Bool({();  true })
+  YYObj_String({();  "true" })
 }
 
 // file:///./parser.mbty
-// 465|    "false"                     { false }
+// 465|    "false"                     { "false" }
 fn yy_action_95(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Bool({();  false })
+  YYObj_String({();  "false" })
 }
 
 // file:///./parser.mbty
-// 468|    f=FLOAT                     { Float::from_double(@strconv.parse_double(f) catch {e => abort("Invalid float value: \{e}")}) }
+// 468|    f=FLOAT                     { FloatLiteral::Float(f) }
 fn yy_action_96(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(f)
-  YYObj_Float({();  Float::from_double(@strconv.parse_double(f) catch {e => abort("Invalid float value: \{e}")}) })
+  YYObj_FloatLiteral({();  FloatLiteral::Float(f) })
 }
 
 // file:///./parser.mbty
-// 469|    "Infinity"                  { @float.infinity }
+// 469|    "Infinity"                  { FloatLiteral::Infinity }
 fn yy_action_97(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Float({();  @float.infinity })
+  YYObj_FloatLiteral({();  FloatLiteral::Infinity })
 }
 
 // file:///./parser.mbty
-// 470|    "-Infinity"                 { @float.neg_infinity }
+// 470|    "-Infinity"                 { FloatLiteral::NegInfinity }
 fn yy_action_98(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Float({();  @float.neg_infinity })
+  YYObj_FloatLiteral({();  FloatLiteral::NegInfinity })
 }
 
 // file:///./parser.mbty
-// 471|    "NaN"                       { @float.not_a_number }
+// 471|    "NaN"                       { FloatLiteral::NaN }
 fn yy_action_99(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_Float({();  @float.not_a_number })
+  YYObj_FloatLiteral({();  FloatLiteral::NaN })
 }
 
 // file:///./parser.mbty
