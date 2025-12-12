@@ -64,14 +64,15 @@ fn emit_interface_trait(
           })
           .join(", ")
         if op.static_ {
-          buf.write_string("  \{method_name}(\{params}) -> \{return_type}\n")
+          buf.write_string("  \{method_name}(\{params}) -> \{return_type}")
         } else if params.is_empty() {
-          buf.write_string("  \{method_name}(self: Self) -> \{return_type}\n")
+          buf.write_string("  \{method_name}(self: Self) -> \{return_type}")
         } else {
           buf.write_string(
-            "  \{method_name}(self: Self, \{params}) -> \{return_type}\n",
+            "  \{method_name}(self: Self, \{params}) -> \{return_type}",
           )
         }
+        buf.write_string(" = _\n")
       }
       Attribute(_) => ()
       Const(_) => ()
@@ -126,9 +127,9 @@ test "emit_interface generates moonbit code for simple interface" {
       #|
       #|
       #|pub trait TEventTarget: TJSValue {
-      #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit
-      #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit
-      #|  dispatch_event(self: Self, event : &TEvent) -> Bool
+      #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
+      #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
+      #|  dispatch_event(self: Self, event : &TEvent) -> Bool = _
       #|}
     ),
   )
