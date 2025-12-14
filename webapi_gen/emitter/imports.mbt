@@ -1,5 +1,5 @@
 ///|
-using @parser {type EnumDefinition, type Type}
+using @parser {type EnumDefinition, type Type, type Argument}
 
 ///|
 using @flattened_idl {type FlattenedIdl}

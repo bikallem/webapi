@@ -11,22 +11,20 @@ pub fn emit_interface(
   buf.write_string("// Do not edit manually\n\n")
 
   // Emit external type declaration, TJSValue implementation and into method
-  buf.write_string(emit_interface_external_type(name))
+  buf.write_string(emit_interface_external_type(interface))
   buf.write_string("\n\n")
 
   // Emit trait definition
   buf.write_string(emit_interface_trait(interface, type_registry))
-
-  // Emit trait implementation for this type
-  buf.write_string(emit_interface_trait_impl(interface))
 
   // Return the generated code
   buf.to_string()
 }
 
 ///|
-fn emit_interface_external_type(type_name : String) -> String {
+fn emit_interface_external_type(interface : PartialMergedInterface) -> String {
   let buf = StringBuilder::new()
+  let type_name = interface.name
 
   // Emit external type declaration
   buf.write_string(emit_external_type(type_name))
@@ -40,7 +38,16 @@ fn emit_interface_external_type(type_name : String) -> String {
   buf.write_string(
     "pub fn[T: \{trait_name(type_name)}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
   )
-  buf.write_string("\n\n")
+  buf.write_string("\n")
+
+  // Emit constructor FFI and method if there are constructors
+  match
+    interface.members
+    .iter()
+    .find_first(mem => mem.interface_member is Constructor(_)) {
+    None => ()
+    Some(_ctor) => ()
+  }
 
   // Emit trait implementation
   buf.write_string("pub impl \{trait_name(type_name)} for \{type_name} {}")
@@ -59,14 +66,14 @@ fn emit_interface_trait(
   type_registry : TypeRegistry,
 ) -> String {
   let buf = StringBuilder::new()
+  let iname = interface.name
 
   // trait inheritance
   match interface.inheritance {
-    None =>
-      buf.write_string("pub trait \{trait_name(interface.name)}: TJSValue {\n")
+    None => buf.write_string("pub trait \{trait_name(iname)}: TJSValue {\n")
     Some(parent) =>
       buf.write_string(
-        "pub trait \{trait_name(interface.name)}: TJsValue + T\{trait_name(parent)} {\n",
+        "pub trait \{trait_name(iname)}: TJsValue + T\{trait_name(parent)} {\n",
       )
   }
 
@@ -82,19 +89,14 @@ fn emit_interface_trait(
       RegularOperation(op) => {
         let method_name = safe_identifier(op.name)
         let return_type = to_mbt_type_string(op.return_type, type_registry)
-        let params = op.arguments
-          .map(arg => {
-            let optioanl = if arg.optional { "?" } else { "" }
-            "\{safe_identifier(arg.name)}\{optioanl} : \{to_mbt_type_string(arg.type_.type_, type_registry)}"
-          })
-          .join(", ")
+        let args = emit_method_arguments(op.arguments, type_registry)
         if op.static_ {
-          buf.write_string("  \{method_name}(\{params}) -> \{return_type}")
-        } else if params.is_empty() {
+          buf.write_string("  \{method_name}(\{args}) -> \{return_type}")
+        } else if args.is_empty() {
           buf.write_string("  \{method_name}(self: Self) -> \{return_type}")
         } else {
           buf.write_string(
-            "  \{method_name}(self: Self, \{params}) -> \{return_type}",
+            "  \{method_name}(self: Self, \{args}) -> \{return_type}",
           )
         }
         buf.write_string(" = _\n")
@@ -109,17 +111,17 @@ fn emit_interface_trait(
 }
 
 ///|
-fn emit_interface_trait_impl(interface : PartialMergedInterface) -> String {
-  let buf = StringBuilder::new()
-  fn trait_name(type_name : String) {
-    "T\{type_name}"
-  }
-
-  buf.write_string(
-    "pub impl \{trait_name(interface.name)} for \{interface.name} {\n",
-  )
-  buf.write_string("}\n")
-  buf.to_string()
+fn emit_method_arguments(
+  arguments : Array[Argument],
+  type_registry : TypeRegistry,
+) -> String {
+  let args = arguments
+    .map(arg => {
+      let optional = if arg.optional { "?" } else { "" }
+      "\{safe_identifier(arg.name)}\{optional} : \{to_mbt_type_string(arg.type_.type_, type_registry)}"
+    })
+    .join(", ")
+  args
 }
 
 ///|
@@ -166,16 +168,13 @@ test "emit_interface generates moonbit code for simple interface" {
       #|
       #|
       #|pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
-      #|
       #|pub impl TEventTarget for EventTarget {}
       #|
       #|pub trait TEventTarget: TJSValue {
       #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
       #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
       #|  dispatch_event(self: Self, event : &TEvent) -> Bool = _
-      #|}pub impl TEventTarget for EventTarget {
       #|}
-      #|
     ),
   )
 }
