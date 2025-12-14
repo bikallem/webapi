@@ -112,7 +112,7 @@ fn emit_interface_trait(
 
 ///|
 fn emit_method_arguments(
-  arguments : Array[Argument],
+  arguments : Array[@parser.Argument],
   type_registry : TypeRegistry,
 ) -> String {
   let args = arguments
