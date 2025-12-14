@@ -10,17 +10,46 @@ pub fn emit_interface(
   buf.write_string("// Auto-generated MoonBit bindings for \{name} interface\n")
   buf.write_string("// Do not edit manually\n\n")
 
-  // Emit external type declaration
-  buf.write_string(emit_external_type(name))
-  buf.write_string("\n\n")
-
-  // Emit TJSValue implementation
-  buf.write_string(emit_external_type_tjs_impl(name))
+  // Emit external type declaration, TJSValue implementation and into method
+  buf.write_string(emit_interface_external_type(name))
   buf.write_string("\n\n")
 
   // Emit trait definition
   buf.write_string(emit_interface_trait(interface, type_registry))
+
+  // Emit trait implementation for this type
+  buf.write_string(emit_interface_trait_impl(interface))
+
+  // Return the generated code
   buf.to_string()
+}
+
+///|
+fn emit_interface_external_type(type_name : String) -> String {
+  let buf = StringBuilder::new()
+
+  // Emit external type declaration
+  buf.write_string(emit_external_type(type_name))
+  buf.write_string("\n\n")
+
+  // Emit TJSValue implementation
+  buf.write_string(emit_external_type_tjs_impl(type_name))
+  buf.write_string("\n\n")
+
+  // Emit into method
+  buf.write_string(
+    "pub fn[T: \{trait_name(type_name)}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
+  )
+  buf.write_string("\n\n")
+
+  // Emit trait implementation
+  buf.write_string("pub impl \{trait_name(type_name)} for \{type_name} {}")
+  buf.to_string()
+}
+
+///|
+fn trait_name(type_name : String) -> String {
+  "T\{type_name}"
 }
 
 ///|
@@ -30,9 +59,6 @@ fn emit_interface_trait(
   type_registry : TypeRegistry,
 ) -> String {
   let buf = StringBuilder::new()
-  fn trait_name(type_name : String) {
-    "T\{type_name}"
-  }
 
   // trait inheritance
   match interface.inheritance {
@@ -83,6 +109,20 @@ fn emit_interface_trait(
 }
 
 ///|
+fn emit_interface_trait_impl(interface : PartialMergedInterface) -> String {
+  let buf = StringBuilder::new()
+  fn trait_name(type_name : String) {
+    "T\{type_name}"
+  }
+
+  buf.write_string(
+    "pub impl \{trait_name(interface.name)} for \{interface.name} {\n",
+  )
+  buf.write_string("}\n")
+  buf.to_string()
+}
+
+///|
 pub fn emit_all_interfaces(
   flattened_idl : FlattenedIdl,
   type_registry : TypeRegistry,
@@ -125,11 +165,17 @@ test "emit_interface generates moonbit code for simple interface" {
       #|pub impl TJsValue for EventTarget with to_js(self: EventTarget) -> JsValue = "%identity"
       #|
       #|
+      #|pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+      #|
+      #|pub impl TEventTarget for EventTarget {}
+      #|
       #|pub trait TEventTarget: TJSValue {
       #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
       #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
       #|  dispatch_event(self: Self, event : &TEvent) -> Bool = _
+      #|}pub impl TEventTarget for EventTarget {
       #|}
+      #|
     ),
   )
 }
