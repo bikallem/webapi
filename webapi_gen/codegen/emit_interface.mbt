@@ -71,7 +71,26 @@ fn interface_to_emit(
           }
         }
       }
-      Attribute(_) => ()
+      Attribute(attr) => {
+        let method_name = safe_identifier(attr.name)
+        let return_type = to_mbt_type_string(attr.type_, type_registry)
+        // Getter
+        methods.push(TraitMethodEmit::{
+          method_name,
+          return_type,
+          args: "",
+          is_static: attr.static_,
+        })
+        // Setter (if not readonly)
+        if not(attr.is_readonly) {
+          methods.push(TraitMethodEmit::{
+            method_name: "set_\{method_name}",
+            return_type: "Unit",
+            args: "value : \{return_type}",
+            is_static: attr.static_,
+          })
+        }
+      }
       Const(_) => ()
       Stringifier(_) => ()
     }

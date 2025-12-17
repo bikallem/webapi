@@ -59,3 +59,55 @@ test "emit_interface generates moonbit code for simple interface" {
     ),
   )
 }
+
+///|
+/// Test emit for attributes (from @webref/idl Event interface)
+/// Verifies both readonly and non-readonly attributes generate correct trait methods
+test "emit_interface generates getter and setter for attributes" {
+  // Based on Event interface from @webref/idl/dom.idl
+  let idl =
+    #|[Exposed=*]
+    #|interface Event {
+    #|  constructor(DOMString type);
+    #|
+    #|  readonly attribute DOMString type;
+    #|  readonly attribute EventTarget? target;
+    #|  readonly attribute unsigned short eventPhase;
+    #|
+    #|  attribute boolean cancelBubble;
+    #|  attribute boolean returnValue;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten
+  let code = emit_interface(flattened.interfaces["Event"], type_registry)
+  inspect(
+    code,
+    content=(
+      #|// Auto-generated MoonBit bindings for Event interface
+      #|// Do not edit manually
+      #|
+      #|#external
+      #|pub type Event
+      #|
+      #|pub impl TJsValue for Event with to_js(self: Event) -> JsValue = "%identity"
+      #|
+      #|
+      #|pub fn[T: TEvent] Event::into(self : Event) -> T = "%identity"
+      #|pub impl TEvent for Event
+      #|
+      #|pub fn Event::new(type_ : String) -> Event = "webapi_Event" "new"
+      #|
+      #|pub trait TEvent: TJSValue {
+      #|  type_(self: Self) -> String = _
+      #|  target(self: Self) -> EventTarget = _
+      #|  event_phase(self: Self) -> UInt = _
+      #|  cancel_bubble(self: Self) -> Bool = _
+      #|  set_cancel_bubble(self: Self, value : Bool) -> Unit = _
+      #|  return_value(self: Self) -> Bool = _
+      #|  set_return_value(self: Self, value : Bool) -> Unit = _
+      #|}
+    ),
+  )
+}
