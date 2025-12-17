@@ -220,3 +220,116 @@ fn emit_external_type(type_name : String) -> String {
 fn emit_external_type_tjs_impl(type_name : String) -> String {
   "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"\n"
 }
+
+///|
+/// FFI-safe primitive types that can be used directly in FFI declarations
+let ffi_safe_primitives : @hashset.HashSet[String] = [
+    "Bool", "Int", "UInt", "Int64", "UInt64", "Float", "Double", "String", "Byte",
+    "Unit", "JsValue",
+  ]
+  |> @hashset.from_array
+
+///|
+/// Check if a MoonBit type is safe to use in FFI declarations
+fn is_ffi_safe_type(mbt_type : String) -> Bool {
+  // Trait object types (start with &) are not FFI-safe
+  if mbt_type.has_prefix("&") {
+    return false
+  }
+  // Arrays/generics (contain [) are not FFI-safe
+  if mbt_type.contains("[") {
+    return false
+  }
+  // Optional types (contain ?) are not FFI-safe
+  if mbt_type.contains("?") {
+    return false
+  }
+  ffi_safe_primitives.contains(mbt_type)
+}
+
+///|
+/// Generate FFI function name for attribute getter
+fn ffi_getter_name(interface_name : String, attr_name : String) -> String {
+  let iface_snake = to_snake_case(interface_name)
+  let attr_snake = to_snake_case(attr_name)
+  "\{iface_snake}_\{attr_snake}_ffi"
+}
+
+///|
+/// Generate FFI function name for attribute setter
+fn ffi_setter_name(interface_name : String, attr_name : String) -> String {
+  let iface_snake = to_snake_case(interface_name)
+  let attr_snake = to_snake_case(attr_name)
+  "\{iface_snake}_set_\{attr_snake}_ffi"
+}
+
+///|
+/// Generate FFI function name for method
+fn ffi_method_name(interface_name : String, method_name : String) -> String {
+  let iface_snake = to_snake_case(interface_name)
+  let method_snake = to_snake_case(method_name)
+  "\{iface_snake}_\{method_snake}_ffi"
+}
+
+///|
+/// Emit FFI function for attribute getter
+fn emit_attribute_getter_ffi(
+  interface_name : String,
+  attr_name : String,
+  mbt_type : String,
+) -> String {
+  let ffi_name = ffi_getter_name(interface_name, attr_name)
+  let ffi_module = ffi_module_name(interface_name)
+  let ffi_return = if is_ffi_safe_type(mbt_type) { mbt_type } else { "JsValue" }
+  "///|\nfn \{ffi_name}(obj : JsValue) -> \{ffi_return} = \"\{ffi_module}\" \"\{attr_name}\""
+}
+
+///|
+/// Emit FFI function for attribute setter
+fn emit_attribute_setter_ffi(
+  interface_name : String,
+  attr_name : String,
+  mbt_type : String,
+) -> String {
+  let ffi_name = ffi_setter_name(interface_name, attr_name)
+  let ffi_module = ffi_module_name(interface_name)
+  let ffi_param = if is_ffi_safe_type(mbt_type) { mbt_type } else { "JsValue" }
+  "///|\nfn \{ffi_name}(obj : JsValue, value : \{ffi_param}) -> Unit = \"\{ffi_module}\" \"set_\{attr_name}\""
+}
+
+///|
+/// Emit trait default implementation for attribute getter
+fn emit_attribute_getter_impl(
+  interface_name : String,
+  attr_name : String,
+  method_name : String,
+  mbt_type : String,
+) -> String {
+  let ffi_name = ffi_getter_name(interface_name, attr_name)
+  let trait_name = "T\{interface_name}"
+  let ffi_call = "\{ffi_name}(self.to_js())"
+  let body = if is_ffi_safe_type(mbt_type) {
+    ffi_call
+  } else {
+    "\{ffi_call}.unsafe_cast()"
+  }
+  "///|\nimpl \{trait_name} with \{method_name}(self : Self) -> \{mbt_type} {\n  \{body}\n}"
+}
+
+///|
+/// Emit trait default implementation for attribute setter
+fn emit_attribute_setter_impl(
+  interface_name : String,
+  attr_name : String,
+  method_name : String,
+  mbt_type : String,
+) -> String {
+  let ffi_name = ffi_setter_name(interface_name, attr_name)
+  let trait_name = "T\{interface_name}"
+  let value_expr = if is_ffi_safe_type(mbt_type) {
+    "value"
+  } else {
+    "TJsValue::to_js(value)"
+  }
+  "///|\nimpl \{trait_name} with \{method_name}(self : Self, value : \{mbt_type}) -> Unit {\n  \{ffi_name}(self.to_js(), \{value_expr})\n}"
+}

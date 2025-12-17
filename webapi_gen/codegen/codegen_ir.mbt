@@ -40,6 +40,30 @@ struct UnionArgTraitEmit {
 }
 
 ///|
+/// Attribute emit for generating FFI and trait default implementations
+struct AttributeEmit {
+  interface_name : String // e.g., "Event"
+  attr_name : String // Original attribute name, e.g., "type"
+  method_name : String // Snake_case method name, e.g., "type_"
+  mbt_type : String // MoonBit type string, e.g., "String"
+  is_readonly : Bool
+  is_static : Bool
+}
+
+///|
+/// Method emit for generating FFI and trait default implementations
+struct MethodEmit {
+  interface_name : String // e.g., "EventTarget"
+  original_name : String // Original method name, e.g., "addEventListener"
+  method_name : String // Snake_case method name, e.g., "add_event_listener"
+  return_type : String // MoonBit return type string
+  args : String // Already formatted argument list for trait signature
+  ffi_args : String // FFI argument list (obj : JsValue, ...)
+  ffi_call_args : String // Arguments for FFI call (self.to_js(), TJsValue::to_js(arg1), ...)
+  is_static : Bool
+}
+
+///|
 /// Container for all interface-related emissions
 pub struct InterfaceEmit {
   name : String
@@ -47,4 +71,6 @@ pub struct InterfaceEmit {
   trait_def : TraitEmit
   ctor : ConstructorEmit? // Optional constructor
   union_arg_traits : Array[UnionArgTraitEmit] // Union argument traits for method params
+  attributes : Array[AttributeEmit] // Attributes for FFI/impl generation
+  operations : Array[MethodEmit] // Methods for FFI/impl generation
 }
