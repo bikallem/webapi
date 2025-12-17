@@ -47,7 +47,6 @@ struct AttributeEmit {
   method_name : String // Snake_case method name, e.g., "type_"
   mbt_type : String // MoonBit type string, e.g., "String"
   is_readonly : Bool
-  is_static : Bool
 }
 
 ///|

@@ -24,6 +24,8 @@ pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.Typ
 // Errors
 
 // Types and methods
+type AttributeEmit
+
 type ConstructorEmit
 
 type ExternalTypeEmit
@@ -34,7 +36,11 @@ pub struct InterfaceEmit {
   trait_def : TraitEmit
   ctor : ConstructorEmit?
   union_arg_traits : Array[UnionArgTraitEmit]
+  attributes : Array[AttributeEmit]
+  operations : Array[MethodEmit]
 }
+
+type MethodEmit
 
 type TraitEmit
 

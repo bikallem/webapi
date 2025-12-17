@@ -106,7 +106,6 @@ fn interface_to_emit(
           method_name,
           mbt_type,
           is_readonly: attr.is_readonly,
-          is_static: attr.static_,
         })
         // Getter trait method signature
         methods.push(TraitMethodEmit::{
