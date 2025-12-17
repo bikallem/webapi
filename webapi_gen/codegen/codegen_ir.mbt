@@ -25,6 +25,31 @@ struct ExternalTypeEmit {
 }
 
 ///|
+/// Trait method signature in a trait definition
+struct TraitMethodEmit {
+  method_name : String
+  return_type : String // Already resolved MoonBit type string
+  args : String // Already formatted argument list
+  is_static : Bool
+}
+
+///|
+/// Trait definition emission
+struct TraitEmit {
+  trait_name : String // e.g., "TEventTarget"
+  parent_trait : String? // Inheritance: e.g., "TJsValue" or "TNode"
+  methods : Array[TraitMethodEmit]
+}
+
+///|
+/// Container for all interface-related emissions
+pub struct InterfaceEmit {
+  name : String
+  external_type : ExternalTypeEmit
+  trait_def : TraitEmit
+}
+
+///|
 pub enum Emit {
   ExternalType(ExternalTypeEmit)
   Method(MethodEmit)

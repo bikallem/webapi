@@ -3,86 +3,20 @@ pub fn emit_interface(
   interface : PartialMergedInterface,
   type_registry : TypeRegistry,
 ) -> String {
-  let buf = StringBuilder::new()
-  let name = interface.name
-
-  // Header
-  buf.write_string("// Auto-generated MoonBit bindings for \{name} interface\n")
-  buf.write_string("// Do not edit manually\n\n")
-
-  // Emit external type declaration, TJSValue implementation and into method
-  buf.write_string(emit_interface_external_type(interface, true))
-  buf.write_string("\n\n")
-
-  // Emit trait definition
-  buf.write_string(emit_interface_trait(interface, type_registry))
-
-  // Return the generated code
-  buf.to_string()
+  let emit = interface_to_emit(interface, type_registry)
+  emit_from_interface_emit(emit)
 }
 
 ///|
-fn emit_interface_external_type(
-  interface : PartialMergedInterface,
-  implements_trait : Bool,
-) -> String {
-  let buf = StringBuilder::new()
-  let type_name = interface.name
-
-  // Emit external type declaration
-  buf.write_string(emit_external_type(type_name))
-  buf.write_string("\n\n")
-
-  // Emit TJSValue implementation
-  buf.write_string(emit_external_type_tjs_impl(type_name))
-  buf.write_string("\n\n")
-
-  // Emit into method
-  buf.write_string(
-    "pub fn[T: \{trait_name(type_name)}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
-  )
-  buf.write_string("\n")
-
-  // Emit constructor FFI and method if there are constructors
-  match
-    interface.members
-    .iter()
-    .find_first(mem => mem.interface_member is Constructor(_)) {
-    None => ()
-    Some(_ctor) => ()
-  }
-
-  // Emit trait implementation if required
-  if implements_trait {
-    buf.write_string("pub impl \{trait_name(type_name)} for \{type_name} {}")
-  }
-  buf.to_string()
-}
-
-///|
-fn trait_name(type_name : String) -> String {
-  "T\{type_name}"
-}
-
-///|
-/// Emit trait definition for the interface
-fn emit_interface_trait(
+/// Map interface to DSL representation
+fn interface_to_emit(
   interface : PartialMergedInterface,
   type_registry : TypeRegistry,
-) -> String {
-  let buf = StringBuilder::new()
-  let iname = interface.name
+) -> InterfaceEmit {
+  let name = interface.name
 
-  // trait inheritance
-  match interface.inheritance {
-    None => buf.write_string("pub trait \{trait_name(iname)}: TJSValue {\n")
-    Some(parent) =>
-      buf.write_string(
-        "pub trait \{trait_name(iname)}: TJsValue + T\{trait_name(parent)} {\n",
-      )
-  }
-
-  // emit method signatures to trait
+  // Build trait methods from interface members
+  let methods : Array[TraitMethodEmit] = []
   for mem in interface.members {
     match mem.interface_member {
       Setlike(_) => ()
@@ -95,24 +29,109 @@ fn emit_interface_trait(
         let method_name = safe_identifier(op.name)
         let return_type = to_mbt_type_string(op.return_type, type_registry)
         let args = emit_method_arguments(op.arguments, type_registry)
-        if op.static_ {
-          buf.write_string("  \{method_name}(\{args}) -> \{return_type}")
-        } else if args.is_empty() {
-          buf.write_string("  \{method_name}(self: Self) -> \{return_type}")
-        } else {
-          buf.write_string(
-            "  \{method_name}(self: Self, \{args}) -> \{return_type}",
-          )
-        }
-        buf.write_string(" = _\n")
+        methods.push(TraitMethodEmit::{
+          method_name,
+          return_type,
+          args,
+          is_static: op.static_,
+        })
       }
       Attribute(_) => ()
       Const(_) => ()
       Stringifier(_) => ()
     }
   }
+
+  // Determine parent trait
+  let parent_trait = match interface.inheritance {
+    None => None
+    Some(parent) => Some("TJsValue + T\{trait_name(parent)}")
+  }
+  InterfaceEmit::{
+    name,
+    external_type: ExternalTypeEmit::{ type_name: name, implements_trait: true },
+    trait_def: TraitEmit::{
+      trait_name: trait_name(name),
+      parent_trait,
+      methods,
+    },
+  }
+}
+
+///|
+/// Emit MoonBit code from InterfaceEmit DSL
+fn emit_from_interface_emit(emit : InterfaceEmit) -> String {
+  let buf = StringBuilder::new()
+  let name = emit.name
+  let type_name = emit.external_type.type_name
+
+  // Header
+  buf.write_string("// Auto-generated MoonBit bindings for \{name} interface\n")
+  buf.write_string("// Do not edit manually\n\n")
+
+  // Emit external type declaration
+  buf.write_string(emit_external_type(type_name))
+  buf.write_string("\n\n")
+
+  // Emit TJSValue implementation
+  buf.write_string(emit_external_type_tjs_impl(type_name))
+  buf.write_string("\n\n")
+
+  // Emit into method
+  buf.write_string(
+    "pub fn[T: \{emit.trait_def.trait_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
+  )
+  buf.write_string("\n")
+
+  // Emit trait implementation if required
+  if emit.external_type.implements_trait {
+    buf.write_string(
+      "pub impl \{emit.trait_def.trait_name} for \{type_name} {}",
+    )
+  }
+
+  // Emit trait definition
+  buf.write_string("\n\n")
+  buf.write_string(emit_trait_from_dsl(emit.trait_def))
+  buf.to_string()
+}
+
+///|
+/// Emit trait definition from TraitEmit DSL
+fn emit_trait_from_dsl(trait_def : TraitEmit) -> String {
+  let buf = StringBuilder::new()
+
+  // trait header with inheritance
+  match trait_def.parent_trait {
+    None => buf.write_string("pub trait \{trait_def.trait_name}: TJSValue {\n")
+    Some(parent) =>
+      buf.write_string("pub trait \{trait_def.trait_name}: \{parent} {\n")
+  }
+
+  // emit method signatures
+  for meth in trait_def.methods {
+    if meth.is_static {
+      buf.write_string(
+        "  \{meth.method_name}(\{meth.args}) -> \{meth.return_type}",
+      )
+    } else if meth.args.is_empty() {
+      buf.write_string(
+        "  \{meth.method_name}(self: Self) -> \{meth.return_type}",
+      )
+    } else {
+      buf.write_string(
+        "  \{meth.method_name}(self: Self, \{meth.args}) -> \{meth.return_type}",
+      )
+    }
+    buf.write_string(" = _\n")
+  }
   buf.write_string("}")
   buf.to_string()
+}
+
+///|
+fn trait_name(type_name : String) -> String {
+  "T\{type_name}"
 }
 
 ///|
