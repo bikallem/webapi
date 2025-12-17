@@ -11,7 +11,7 @@ pub fn emit_interface(
   buf.write_string("// Do not edit manually\n\n")
 
   // Emit external type declaration, TJSValue implementation and into method
-  buf.write_string(emit_interface_external_type(interface))
+  buf.write_string(emit_interface_external_type(interface, true))
   buf.write_string("\n\n")
 
   // Emit trait definition
@@ -22,7 +22,10 @@ pub fn emit_interface(
 }
 
 ///|
-fn emit_interface_external_type(interface : PartialMergedInterface) -> String {
+fn emit_interface_external_type(
+  interface : PartialMergedInterface,
+  implements_trait : Bool,
+) -> String {
   let buf = StringBuilder::new()
   let type_name = interface.name
 
@@ -49,8 +52,10 @@ fn emit_interface_external_type(interface : PartialMergedInterface) -> String {
     Some(_ctor) => ()
   }
 
-  // Emit trait implementation
-  buf.write_string("pub impl \{trait_name(type_name)} for \{type_name} {}")
+  // Emit trait implementation if required
+  if implements_trait {
+    buf.write_string("pub impl \{trait_name(type_name)} for \{type_name} {}")
+  }
   buf.to_string()
 }
 
