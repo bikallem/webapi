@@ -1,23 +1,6 @@
 // CG - Code Generation IR
 
 ///|
-priv struct MethodEmit {
-  type_name : String
-  method_name : String
-  return_type : @parser.Type
-  args : Array[ArgumentEmit]
-  calls_ffi : Bool // whether this method calls an FFI function
-}
-
-///|
-priv struct ArgumentEmit {
-  name : String
-  optional : Bool
-  type_ : @parser.Type
-  default_value : @parser.DefaultValue?
-}
-
-///|
 /// External type codegen info. Always implements TJSValue
 struct ExternalTypeEmit {
   type_name : String
@@ -50,16 +33,18 @@ struct ConstructorEmit {
 }
 
 ///|
+/// Union argument trait emission for inline union types in method parameters
+struct UnionArgTraitEmit {
+  trait_name : String // e.g., "TAddEventListenerOptionsArg"
+  member_types : Array[String] // MoonBit types that implement this trait
+}
+
+///|
 /// Container for all interface-related emissions
 pub struct InterfaceEmit {
   name : String
   external_type : ExternalTypeEmit
   trait_def : TraitEmit
   ctor : ConstructorEmit? // Optional constructor
-}
-
-///|
-priv enum Emit {
-  ExternalType(ExternalTypeEmit)
-  Method(MethodEmit)
+  union_arg_traits : Array[UnionArgTraitEmit] // Union argument traits for method params
 }

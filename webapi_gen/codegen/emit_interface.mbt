@@ -15,8 +15,10 @@ fn interface_to_emit(
 ) -> InterfaceEmit {
   let name = interface.name
 
-  // Build trait methods from interface members
+  // Build trait methods and collect union arg traits
   let methods : Array[TraitMethodEmit] = []
+  let union_arg_traits : Array[UnionArgTraitEmit] = []
+  let seen_union_traits : @hashset.HashSet[String] = @hashset.new()
   for mem in interface.members {
     match mem.interface_member {
       Setlike(_) => ()
@@ -28,13 +30,46 @@ fn interface_to_emit(
       RegularOperation(op) => {
         let method_name = safe_identifier(op.name)
         let return_type = to_mbt_type_string(op.return_type, type_registry)
-        let args = emit_method_arguments(op.arguments, type_registry)
+        let args = emit_method_arguments(op.arguments, op.name, type_registry)
         methods.push(TraitMethodEmit::{
           method_name,
           return_type,
           args,
           is_static: op.static_,
         })
+
+        // Collect union arg traits from method parameters
+        for arg in op.arguments {
+          match arg.type_.type_ {
+            Union(members) => {
+              let trait_name = get_union_arg_trait_name(op.name, arg.name)
+              if not(seen_union_traits.contains(trait_name)) {
+                let member_types = filter_union_members(members, type_registry)
+                if member_types.length() > 1 {
+                  seen_union_traits.add(trait_name)
+                  union_arg_traits.push(UnionArgTraitEmit::{
+                    trait_name,
+                    member_types,
+                  })
+                }
+              }
+            }
+            Nullable(Union(members)) => {
+              let trait_name = get_union_arg_trait_name(op.name, arg.name)
+              if not(seen_union_traits.contains(trait_name)) {
+                let member_types = filter_union_members(members, type_registry)
+                if member_types.length() > 1 {
+                  seen_union_traits.add(trait_name)
+                  union_arg_traits.push(UnionArgTraitEmit::{
+                    trait_name,
+                    member_types,
+                  })
+                }
+              }
+            }
+            _ => ()
+          }
+        }
       }
       Attribute(_) => ()
       Const(_) => ()
@@ -54,7 +89,11 @@ fn interface_to_emit(
     .find_first(mem => mem.interface_member is Constructor(_))
     .map(mem => match mem.interface_member {
       Constructor(ctor_member) => {
-        let args = emit_method_arguments(ctor_member.arguments, type_registry)
+        let args = emit_method_arguments(
+          ctor_member.arguments,
+          "new",
+          type_registry,
+        )
         ConstructorEmit::{
           type_name: name,
           args,
@@ -72,6 +111,7 @@ fn interface_to_emit(
       methods,
     },
     ctor,
+    union_arg_traits,
   }
 }
 
@@ -124,9 +164,36 @@ fn emit_from_interface_emit(emit : InterfaceEmit) -> String {
     None => ()
   }
 
+  // Emit union arg traits
+  for union_trait in emit.union_arg_traits {
+    buf.write_string("\n\n")
+    buf.write_string(emit_union_arg_trait(union_trait))
+  }
+
   // Emit trait definition
   buf.write_string("\n\n")
   buf.write_string(emit_trait_from_dsl(emit.trait_def))
+  buf.to_string()
+}
+
+///|
+/// Emit a single union arg trait definition and implementations
+fn emit_union_arg_trait(union_trait : UnionArgTraitEmit) -> String {
+  let buf = StringBuilder::new()
+
+  // Emit trait definition
+  buf.write_string("/// Union arg trait\n")
+  buf.write_string("pub(open) trait \{union_trait.trait_name} {\n")
+  buf.write_string("  to_js(self : Self) -> JsValue\n")
+  buf.write_string("}")
+
+  // Emit impl for each member type
+  for member_type in union_trait.member_types {
+    buf.write_string("\n\n")
+    buf.write_string(
+      "pub impl \{union_trait.trait_name} for \{member_type} with to_js(self : \{member_type}) -> JsValue = \"%identity\"",
+    )
+  }
   buf.to_string()
 }
 
@@ -171,15 +238,49 @@ fn trait_name(type_name : String) -> String {
 ///|
 fn emit_method_arguments(
   arguments : Array[@parser.Argument],
+  method_name : String,
   type_registry : TypeRegistry,
 ) -> String {
   let args = arguments
     .map(arg => {
       let optional = if arg.optional { "?" } else { "" }
-      "\{safe_identifier(arg.name)}\{optional} : \{to_mbt_type_string(arg.type_.type_, type_registry)}"
+      let arg_type = arg_type_to_string(
+        arg.type_.type_,
+        method_name,
+        arg.name,
+        type_registry,
+      )
+      "\{safe_identifier(arg.name)}\{optional} : \{arg_type}"
     })
     .join(", ")
   args
+}
+
+///|
+/// Map argument type, using trait objects for union types
+fn arg_type_to_string(
+  idl_type : @parser.Type,
+  method_name : String,
+  param_name : String,
+  type_registry : TypeRegistry,
+) -> String {
+  match idl_type {
+    Union(members) => {
+      let filtered = filter_union_members(members, type_registry)
+      if filtered.length() > 1 {
+        // Multi-member union: use trait object
+        "&\{get_union_arg_trait_name(method_name, param_name)}"
+      } else if filtered.length() == 1 {
+        // Collapsed union: use single type
+        filtered[0]
+      } else {
+        "JsValue"
+      }
+    }
+    Nullable(inner) =>
+      arg_type_to_string(inner, method_name, param_name, type_registry)
+    _ => to_mbt_type_string(idl_type, type_registry)
+  }
 }
 
 ///|
@@ -230,9 +331,27 @@ test "emit_interface generates moonbit code for simple interface" {
       #|
       #|pub fn EventTarget::new() -> EventTarget = "webapi_EventTarget" "new"
       #|
+      #|/// Union arg trait
+      #|pub(open) trait TAddEventListenerOptionsArg {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub impl TAddEventListenerOptionsArg for AddEventListenerOptions with to_js(self : AddEventListenerOptions) -> JsValue = "%identity"
+      #|
+      #|pub impl TAddEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+      #|
+      #|/// Union arg trait
+      #|pub(open) trait TRemoveEventListenerOptionsArg {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub impl TRemoveEventListenerOptionsArg for EventListenerOptions with to_js(self : EventListenerOptions) -> JsValue = "%identity"
+      #|
+      #|pub impl TRemoveEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+      #|
       #|pub trait TEventTarget: TJSValue {
-      #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
-      #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _
+      #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TAddEventListenerOptionsArg) -> Unit = _
+      #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit = _
       #|  dispatch_event(self: Self, event : &TEvent) -> Bool = _
       #|}
     ),
