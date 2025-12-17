@@ -47,6 +47,22 @@ fn interface_to_emit(
     None => None
     Some(parent) => Some("TJsValue + T\{trait_name(parent)}")
   }
+
+  // Find first constructor if any
+  let ctor : ConstructorEmit? = interface.members
+    .iter()
+    .find_first(mem => mem.interface_member is Constructor(_))
+    .map(mem => match mem.interface_member {
+      Constructor(ctor_member) => {
+        let args = emit_method_arguments(ctor_member.arguments, type_registry)
+        ConstructorEmit::{
+          type_name: name,
+          args,
+          ffi_module: ffi_module_name(name),
+        }
+      }
+      _ => panic()
+    })
   InterfaceEmit::{
     name,
     external_type: ExternalTypeEmit::{ type_name: name, implements_trait: true },
@@ -55,6 +71,7 @@ fn interface_to_emit(
       parent_trait,
       methods,
     },
+    ctor,
   }
 }
 
@@ -88,6 +105,23 @@ fn emit_from_interface_emit(emit : InterfaceEmit) -> String {
     buf.write_string(
       "pub impl \{emit.trait_def.trait_name} for \{type_name} {}",
     )
+  }
+
+  // Emit constructor new() method if present
+  match emit.ctor {
+    Some(ctor) => {
+      buf.write_string("\n\n")
+      if ctor.args.is_empty() {
+        buf.write_string(
+          "pub fn \{ctor.type_name}::new() -> \{ctor.type_name} = \"\{ctor.ffi_module}\" \"new\"",
+        )
+      } else {
+        buf.write_string(
+          "pub fn \{ctor.type_name}::new(\{ctor.args}) -> \{ctor.type_name} = \"\{ctor.ffi_module}\" \"new\"",
+        )
+      }
+    }
+    None => ()
   }
 
   // Emit trait definition
@@ -193,6 +227,8 @@ test "emit_interface generates moonbit code for simple interface" {
       #|
       #|pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
       #|pub impl TEventTarget for EventTarget {}
+      #|
+      #|pub fn EventTarget::new() -> EventTarget = "webapi_EventTarget" "new"
       #|
       #|pub trait TEventTarget: TJSValue {
       #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : JsValue) -> Unit = _

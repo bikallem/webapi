@@ -1,7 +1,7 @@
 // CG - Code Generation IR
 
 ///|
-struct MethodEmit {
+priv struct MethodEmit {
   type_name : String
   method_name : String
   return_type : @parser.Type
@@ -10,7 +10,7 @@ struct MethodEmit {
 }
 
 ///|
-struct ArgumentEmit {
+priv struct ArgumentEmit {
   name : String
   optional : Bool
   type_ : @parser.Type
@@ -26,7 +26,7 @@ struct ExternalTypeEmit {
 
 ///|
 /// Trait method signature in a trait definition
-struct TraitMethodEmit {
+priv struct TraitMethodEmit {
   method_name : String
   return_type : String // Already resolved MoonBit type string
   args : String // Already formatted argument list
@@ -42,66 +42,24 @@ struct TraitEmit {
 }
 
 ///|
+/// Constructor emission for interfaces with constructor()
+struct ConstructorEmit {
+  type_name : String // The type being constructed, e.g., "EventTarget"
+  args : String // Already formatted argument list
+  ffi_module : String // e.g., "webapi_EventTarget"
+}
+
+///|
 /// Container for all interface-related emissions
 pub struct InterfaceEmit {
   name : String
   external_type : ExternalTypeEmit
   trait_def : TraitEmit
+  ctor : ConstructorEmit? // Optional constructor
 }
 
 ///|
-pub enum Emit {
+priv enum Emit {
   ExternalType(ExternalTypeEmit)
   Method(MethodEmit)
-}
-
-///|
-pub fn emit_interface2(
-  interface : PartialMergedInterface,
-  type_registry : TypeRegistry,
-) -> Array[Emit] {
-  let result = []
-
-  // External type
-  result.push(
-    Emit::ExternalType({ type_name: interface.name, implements_trait: true }),
-  )
-
-  // Methods
-  for mem in interface.members {
-    match mem.interface_member {
-      RegularOperation(op) => {
-        let args = op.arguments.map(arg => ArgumentEmit::{
-          name: arg.name,
-          optional: arg.optional,
-          type_: arg.type_.type_,
-          default_value: arg.default_value,
-        })
-        result.push(
-          Emit::Method(MethodEmit::{
-            type_name: interface.name,
-            method_name: op.name,
-            return_type: op.return_type,
-            args,
-            calls_ffi: true,
-          }),
-        )
-      }
-      _ => ()
-    }
-  }
-  result
-}
-
-///|
-pub fn emit_all_interfaces2(
-  flattened_idl : FlattenedIdl,
-  type_registry : TypeRegistry,
-) -> Map[String, String] {
-  let result = {}
-  for name, interface in flattened_idl.interfaces {
-    let filename = "\{to_snake_case(name)}_interface.mbt"
-    result[filename] = emit_interface(interface, type_registry)
-  }
-  result
 }
