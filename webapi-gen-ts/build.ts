@@ -39,7 +39,7 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
-const OUTPUT_DIR = path.join(PROJECT_ROOT, "src");
+const OUTPUT_DIR = path.join(PROJECT_ROOT, "src-ts");
 const IDL_OUTPUT_DIR = path.join(PROJECT_ROOT, "webapi-gen-ts", "enabled-idls");
 const TEMPLATES_DIR = path.join(PROJECT_ROOT, "webapi-gen-ts", "base.mbt");
 
