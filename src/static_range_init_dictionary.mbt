@@ -1,0 +1,27 @@
+// Auto-generated MoonBit bindings for StaticRangeInit dictionary
+// Do not edit manually
+
+#external
+pub type StaticRangeInit
+
+pub impl TJsValue for StaticRangeInit with to_js(self: StaticRangeInit) -> JsValue = "%identity"
+
+
+fn static_range_init_ffi(start_container : JsValue, start_offset : JsValue, end_container : JsValue, end_offset : JsValue) -> StaticRangeInit = "webapi_StaticRangeInit" "new"
+
+
+pub fn StaticRangeInit::new(
+  start_container : &TNode,
+  start_offset : UInt,
+  end_container : &TNode,
+  end_offset : UInt) -> StaticRangeInit {
+    static_range_init_ffi(
+      TJsValue::to_js(start_container)
+     ,TJsValue::to_js(start_offset)
+     ,TJsValue::to_js(end_container)
+     ,TJsValue::to_js(end_offset)
+    )
+}
+
+
+pub fn StaticRangeInit::empty() -> StaticRangeInit = "webapi_Dictionary" "empty"
