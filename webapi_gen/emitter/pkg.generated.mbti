@@ -11,6 +11,8 @@ import(
 // Values
 pub fn build_callback_emit(@parser.CallbackFunctionDefinition, @type_registry.TypeRegistry) -> CallbackEmit
 
+pub fn emit_all_callbacks(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+
 pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
 
 pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]

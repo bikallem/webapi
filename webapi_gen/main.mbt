@@ -161,7 +161,6 @@ fn main {
         e => fail("failed to write file: \{e}")
       }
     }
-
     println("\n=== Generation complete! ===")
     println(
       "Generated \{enum_files.length()} enums, \{typedef_files.length()} typedefs, \{dict_files.length()} dictionaries, \{iface_files.length()} interfaces, \{callback_files.length()} callbacks",
