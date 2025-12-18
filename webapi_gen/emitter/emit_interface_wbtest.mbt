@@ -51,7 +51,7 @@ test "emit_interface generates moonbit code for simple interface" {
       #|
       #|pub impl TRemoveEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
       #|
-      #|pub trait TEventTarget: TJSValue {
+      #|pub trait TEventTarget: TJsValue {
       #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TAddEventListenerOptionsArg) -> Unit = _
       #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit = _
       #|  dispatch_event(self: Self, event : &TEvent) -> Bool = _
@@ -123,7 +123,7 @@ test "emit_interface generates getter and setter for attributes" {
       #|
       #|pub fn Event::new(type_ : String) -> Event = "webapi_Event" "new"
       #|
-      #|pub trait TEvent: TJSValue {
+      #|pub trait TEvent: TJsValue {
       #|  type_(self: Self) -> String = _
       #|  target(self: Self) -> EventTarget = _
       #|  event_phase(self: Self) -> UInt = _

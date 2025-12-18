@@ -309,7 +309,7 @@ fn emit_trait_from_dsl(trait_def : TraitEmit) -> String {
 
   // trait header with inheritance
   match trait_def.parent_trait {
-    None => buf.write_string("pub trait \{trait_def.trait_name}: TJSValue {\n")
+    None => buf.write_string("pub trait \{trait_def.trait_name}: TJsValue {\n")
     Some(parent) =>
       buf.write_string("pub trait \{trait_def.trait_name}: \{parent} {\n")
   }
