@@ -83,7 +83,6 @@ fn emit_js_method(
   for arg in args {
     arg_names.push(safe_identifier(arg.name))
   }
-
   let comma_sep = ", "
   if is_static {
     // Static method: no obj parameter
@@ -93,11 +92,7 @@ fn emit_js_method(
   } else {
     // Instance method: obj is first parameter
     let args_str = arg_names.join(comma_sep)
-    let params = if arg_names.length() > 0 {
-      "obj, \{args_str}"
-    } else {
-      "obj"
-    }
+    let params = if arg_names.length() > 0 { "obj, \{args_str}" } else { "obj" }
     let call_args = arg_names.join(comma_sep)
     "    \{method_name}: (\{params}) => obj.\{method_name}(\{call_args})"
   }
@@ -121,10 +116,11 @@ fn emit_js_constructor(
 
 ///|
 /// Emit a complete JS module for an interface
-fn emit_js_interface_module(iface : @partial_merged.PartialMergedInterface) -> String {
+fn emit_js_interface_module(
+  iface : @partial_merged.PartialMergedInterface,
+) -> String {
   let buf = StringBuilder::new()
   buf.write_string("  webapi_\{iface.name}: {\n")
-
   let entries : Array[String] = []
 
   // Constructor if present
@@ -154,11 +150,11 @@ fn emit_js_interface_module(iface : @partial_merged.PartialMergedInterface) -> S
   // Operations (methods)
   for m in iface.members {
     match m.interface_member {
-      RegularOperation(op) => entries.push(emit_js_method(op.name, op.arguments, op.static_))
+      RegularOperation(op) =>
+        entries.push(emit_js_method(op.name, op.arguments, op.static_))
       _ => continue
     }
   }
-
   buf.write_string(entries.join(",\n"))
   if entries.length() > 0 {
     buf.write_string("\n")
@@ -175,7 +171,6 @@ pub fn emit_js_runtime(flattened : FlattenedIdl) -> String {
   // Preamble
   buf.write_string(emit_js_preamble())
   buf.write_string("\n")
-
   let modules : Array[String] = []
 
   // Callbacks
@@ -187,7 +182,6 @@ pub fn emit_js_runtime(flattened : FlattenedIdl) -> String {
   for _name, iface in flattened.interfaces {
     modules.push(emit_js_interface_module(iface))
   }
-
   buf.write_string(modules.join(",\n\n"))
   buf.write_string("\n};\n")
   buf.to_string()

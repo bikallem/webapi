@@ -18,6 +18,7 @@ using @emitter {
   emit_all_interfaces,
   emit_all_callbacks,
   emit_js_runtime,
+  emit_globals,
 }
 
 ///|

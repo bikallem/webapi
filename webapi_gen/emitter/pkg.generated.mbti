@@ -27,7 +27,11 @@ pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeReg
 
 pub fn emit_enum(@parser.EnumDefinition) -> String
 
+pub fn emit_globals(@flattened_idl.FlattenedIdl) -> String
+
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry) -> String
+
+pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
 pub fn emit_typedef(@parser.TypedefDefinition, @type_registry.TypeRegistry) -> String
 
