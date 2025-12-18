@@ -3,8 +3,36 @@ pub fn emit_dictionary(
   dict : @flattened_idl.MergedDictionaryIR,
   type_registry : TypeRegistry,
 ) -> String {
+  let emit = dictionary_to_emit(dict, type_registry)
+  emit_from_dictionary_emit(emit)
+}
+
+///|
+fn dictionary_to_emit(
+  dict : @flattened_idl.MergedDictionaryIR,
+  type_registry : TypeRegistry,
+) -> DictionaryEmit {
+  let members = dict.members.map(fn(mem) {
+    let mbt_type = to_mbt_type_string(mem.type_, type_registry)
+    let default_value = match mem.default_value {
+      Some(v) => Some(to_mbt_default_value(v, mbt_type))
+      None => None
+    }
+    DictionaryMemberEmit::{
+      name: mem.name,
+      param_name: safe_identifier(mem.name),
+      mbt_type,
+      required: mem.required,
+      default_value,
+    }
+  })
+  DictionaryEmit::{ name: dict.name, members }
+}
+
+///|
+fn emit_from_dictionary_emit(emit : DictionaryEmit) -> String {
   let buf = StringBuilder::new()
-  let type_name = dict.name
+  let type_name = emit.name
 
   // Header
   buf.write_string(
@@ -21,19 +49,19 @@ pub fn emit_dictionary(
   buf.write_string("\n\n")
 
   // Emit FFI and builder only if there are members
-  buf.write_string(emit_dictionary_ffi(dict))
+  buf.write_string(emit_dictionary_ffi(emit))
   buf.write_string("\n\n")
-  buf.write_string(emit_dictionary_new_method(dict, type_registry))
+  buf.write_string(emit_dictionary_new_method(emit))
   buf.write_string("\n\n")
 
   // Emit empty dictionary constructor
-  buf.write_string(emit_empty_dictionary(dict))
+  buf.write_string(emit_empty_dictionary(emit))
   buf.to_string()
 }
 
 ///|
 /// Emit the FFI constructor function.
-fn emit_dictionary_ffi(dict : @flattened_idl.MergedDictionaryIR) -> String {
+fn emit_dictionary_ffi(dict : DictionaryEmit) -> String {
   let module_name = ffi_module_name(dict.name)
   let ffi_name = "\{to_snake_case(dict.name)}_ffi"
   guard dict.members.length() > 0 else {
@@ -46,43 +74,35 @@ fn emit_dictionary_ffi(dict : @flattened_idl.MergedDictionaryIR) -> String {
     if i > 0 {
       params.write_string(", ")
     }
-    let param_name = safe_identifier(mem.name)
-    params.write_string("\{param_name} : JsValue")
+    params.write_string("\{mem.param_name} : JsValue")
   }
   "fn \{ffi_name}(\{params.to_string()}) -> \{dict.name} = \"\{module_name}\" \"new\"\n"
 }
 
 ///|
 /// Emit the new() method with optional parameters
-fn emit_dictionary_new_method(
-  dict : @flattened_idl.MergedDictionaryIR,
-  type_registry : TypeRegistry,
-) -> String {
+fn emit_dictionary_new_method(dict : DictionaryEmit) -> String {
   let ffi_name = "\{to_snake_case(dict.name)}_ffi"
 
   // Build parameter list with optional params and defaults
   let params = StringBuilder::new()
   let ffi_call = StringBuilder::new()
   for i, mem in dict.members {
-    let param_name = safe_identifier(mem.name)
-    let mapped_type = to_mbt_type_string(mem.type_, type_registry)
     if i > 0 {
       params.write_string(",\n  ")
       ffi_call.write_string("     ,")
     }
-    params.write_string("\{param_name}")
+    params.write_string("\{mem.param_name}")
     if mem.required {
-      params.write_string(" : \{mapped_type}")
-      ffi_call.write_string("TJsValue::to_js(\{param_name})\n")
+      params.write_string(" : \{mem.mbt_type}")
+      ffi_call.write_string("TJsValue::to_js(\{mem.param_name})\n")
     } else {
-      params.write_string("? : \{mapped_type}")
+      params.write_string("? : \{mem.mbt_type}")
       match mem.default_value {
-        None => ffi_call.write_string("opt_to_js(\{param_name})\n")
+        None => ffi_call.write_string("opt_to_js(\{mem.param_name})\n")
         Some(default_value) => {
-          params.write_string(
-            "? : \{mapped_type} = \{to_mbt_default_value(default_value, mapped_type)}",
-          )
-          ffi_call.write_string("TJsValue::to_js(\{param_name})\n")
+          params.write_string("? : \{mem.mbt_type} = \{default_value}")
+          ffi_call.write_string("TJsValue::to_js(\{mem.param_name})\n")
         }
       }
     }
@@ -98,7 +118,7 @@ fn emit_dictionary_new_method(
 }
 
 ///|
-fn emit_empty_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> String {
+fn emit_empty_dictionary(dict : DictionaryEmit) -> String {
   "pub fn \{dict.name}::empty() -> \{dict.name} = \"webapi_Dictionary\" \"empty\""
 }
 

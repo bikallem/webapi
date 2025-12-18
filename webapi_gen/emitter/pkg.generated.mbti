@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "bikallem/webapi_gen/codegen"
+package "bikallem/webapi_gen/emitter"
 
 import(
   "bikallem/webapi_gen/flattened_idl"
@@ -27,6 +27,19 @@ pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.Typ
 type AttributeEmit
 
 type ConstructorEmit
+
+pub struct DictionaryEmit {
+  name : String
+  members : Array[DictionaryMemberEmit]
+}
+
+pub struct DictionaryMemberEmit {
+  name : String
+  param_name : String
+  mbt_type : String
+  required : Bool
+  default_value : String?
+}
 
 type ExternalTypeEmit
 

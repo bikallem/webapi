@@ -73,3 +73,20 @@ pub struct InterfaceEmit {
   attributes : Array[AttributeEmit] // Attributes for FFI/impl generation
   operations : Array[MethodEmit] // Methods for FFI/impl generation
 }
+
+///|
+/// Dictionary member emission
+pub struct DictionaryMemberEmit {
+  name : String // Member name, e.g., "bubbles"
+  param_name : String // Safe parameter name, e.g., "bubbles"
+  mbt_type : String // MoonBit type, e.g., "Bool"
+  required : Bool
+  default_value : String? // Default value as MoonBit string if any
+}
+
+///|
+/// Dictionary emmission
+pub struct DictionaryEmit {
+  name : String // Dictionary name
+  members : Array[DictionaryMemberEmit]
+}
