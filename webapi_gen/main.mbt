@@ -161,6 +161,16 @@ fn main {
         e => fail("failed to write file: \{e}")
       }
     }
+
+    // Generate and write JS runtime
+    println("=== Generating JS Runtime ===")
+    let js_runtime = emit_js_runtime(flattened)
+    let js_runtime_path = "\{output_dir}/webapi.mjs"
+    println("  Writing \{js_runtime_path}...")
+    @fs.write_string_to_file(js_runtime_path, js_runtime) catch {
+      e => fail("failed to write JS runtime: \{e}")
+    }
+
     println("\n=== Generation complete! ===")
     println(
       "Generated \{enum_files.length()} enums, \{typedef_files.length()} typedefs, \{dict_files.length()} dictionaries, \{iface_files.length()} interfaces, \{callback_files.length()} callbacks",
