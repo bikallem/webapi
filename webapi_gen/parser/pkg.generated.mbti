@@ -191,6 +191,10 @@ pub impl ToJson for EnumDefinition
 pub(all) enum ExtendedAttribute {
   NoArgs(String)
   Ident(String, String)
+  IdentList(String, Array[String])
+  IntValue(String, String)
+  FloatValue(String, String)
+  IntPair(String, String, String)
   Wildcard(String)
   ArgList(String, Array[Argument])
   NamedArgList(String, String, Array[Argument])

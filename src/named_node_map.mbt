@@ -12,11 +12,11 @@ pub impl TNamedNodeMap for NamedNodeMap
 
 pub trait TNamedNodeMap: TJSValue {
   length(self: Self) -> UInt = _
-  get_named_item_n_s(self: Self, namespace : String, local_name : String) -> &TAttr = _
+  get_named_item_ns(self: Self, namespace : String, local_name : String) -> &TAttr = _
   set_named_item(self: Self, attr : &TAttr) -> &TAttr = _
-  set_named_item_n_s(self: Self, attr : &TAttr) -> &TAttr = _
+  set_named_item_ns(self: Self, attr : &TAttr) -> &TAttr = _
   remove_named_item(self: Self, qualified_name : String) -> &TAttr = _
-  remove_named_item_n_s(self: Self, namespace : String, local_name : String) -> &TAttr = _
+  remove_named_item_ns(self: Self, namespace : String, local_name : String) -> &TAttr = _
 }
 
 ///|
@@ -28,11 +28,11 @@ impl TNamedNodeMap with length(self : Self) -> UInt {
 }
 
 ///|
-fn named_node_map_get_named_item_n_s_ffi(obj : JsValue, namespace : JsValue, local_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "getNamedItemNS"
+fn named_node_map_get_named_item_ns_ffi(obj : JsValue, namespace : JsValue, local_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "getNamedItemNS"
 
 ///|
-impl TNamedNodeMap with get_named_item_n_s(self : Self, namespace : String, local_name : String) -> &TAttr {
-  named_node_map_get_named_item_n_s_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(local_name)).unsafe_cast()
+impl TNamedNodeMap with get_named_item_ns(self : Self, namespace : String, local_name : String) -> &TAttr {
+  named_node_map_get_named_item_ns_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(local_name)).unsafe_cast()
 }
 
 ///|
@@ -44,11 +44,11 @@ impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> &TAttr {
 }
 
 ///|
-fn named_node_map_set_named_item_n_s_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_NamedNodeMap" "setNamedItemNS"
+fn named_node_map_set_named_item_ns_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_NamedNodeMap" "setNamedItemNS"
 
 ///|
-impl TNamedNodeMap with set_named_item_n_s(self : Self, attr : &TAttr) -> &TAttr {
-  named_node_map_set_named_item_n_s_ffi(self.to_js(), attr.to_js()).unsafe_cast()
+impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> &TAttr {
+  named_node_map_set_named_item_ns_ffi(self.to_js(), attr.to_js()).unsafe_cast()
 }
 
 ///|
@@ -60,9 +60,9 @@ impl TNamedNodeMap with remove_named_item(self : Self, qualified_name : String) 
 }
 
 ///|
-fn named_node_map_remove_named_item_n_s_ffi(obj : JsValue, namespace : JsValue, local_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "removeNamedItemNS"
+fn named_node_map_remove_named_item_ns_ffi(obj : JsValue, namespace : JsValue, local_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "removeNamedItemNS"
 
 ///|
-impl TNamedNodeMap with remove_named_item_n_s(self : Self, namespace : String, local_name : String) -> &TAttr {
-  named_node_map_remove_named_item_n_s_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(local_name)).unsafe_cast()
+impl TNamedNodeMap with remove_named_item_ns(self : Self, namespace : String, local_name : String) -> &TAttr {
+  named_node_map_remove_named_item_ns_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(local_name)).unsafe_cast()
 }

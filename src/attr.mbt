@@ -11,7 +11,7 @@ pub fn[T: TAttr] Attr::into(self : Attr) -> T = "%identity"
 pub impl TAttr for Attr
 
 pub trait TAttr: TJsValue + TTNode {
-  namespace_u_r_i(self: Self) -> String = _
+  namespace_uri(self: Self) -> String = _
   prefix(self: Self) -> String = _
   local_name(self: Self) -> String = _
   name(self: Self) -> String = _
@@ -22,11 +22,11 @@ pub trait TAttr: TJsValue + TTNode {
 }
 
 ///|
-fn attr_namespace_u_r_i_ffi(obj : JsValue) -> String = "webapi_Attr" "namespaceURI"
+fn attr_namespace_uri_ffi(obj : JsValue) -> String = "webapi_Attr" "namespaceURI"
 
 ///|
-impl TAttr with namespace_u_r_i(self : Self) -> String {
-  attr_namespace_u_r_i_ffi(self.to_js())
+impl TAttr with namespace_uri(self : Self) -> String {
+  attr_namespace_uri_ffi(self.to_js())
 }
 
 ///|

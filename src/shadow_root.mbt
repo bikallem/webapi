@@ -19,10 +19,10 @@ pub trait TShadowRoot: TJsValue + TTDocumentFragment {
   host(self: Self) -> &TElement = _
   onslotchange(self: Self) -> EventHandler = _
   set_onslotchange(self: Self, value : EventHandler) -> Unit = _
-  set_h_t_m_l_unsafe(self: Self, html : String) -> Unit = _
-  get_h_t_m_l(self: Self, options? : GetHTMLOptions) -> String = _
-  inner_h_t_m_l(self: Self) -> JsValue = _
-  set_inner_h_t_m_l(self: Self, value : JsValue) -> Unit = _
+  set_html_unsafe(self: Self, html : String) -> Unit = _
+  get_html(self: Self, options? : GetHTMLOptions) -> String = _
+  inner_html(self: Self) -> JsValue = _
+  set_inner_html(self: Self, value : JsValue) -> Unit = _
 }
 
 ///|
@@ -90,33 +90,33 @@ impl TShadowRoot with set_onslotchange(self : Self, value : EventHandler) -> Uni
 }
 
 ///|
-fn shadow_root_inner_h_t_m_l_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "innerHTML"
+fn shadow_root_inner_html_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "innerHTML"
 
 ///|
-impl TShadowRoot with inner_h_t_m_l(self : Self) -> JsValue {
-  shadow_root_inner_h_t_m_l_ffi(self.to_js())
+impl TShadowRoot with inner_html(self : Self) -> JsValue {
+  shadow_root_inner_html_ffi(self.to_js())
 }
 
 ///|
-fn shadow_root_set_inner_h_t_m_l_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_ShadowRoot" "set_innerHTML"
+fn shadow_root_set_inner_html_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_ShadowRoot" "set_innerHTML"
 
 ///|
-impl TShadowRoot with set_inner_h_t_m_l(self : Self, value : JsValue) -> Unit {
-  shadow_root_set_inner_h_t_m_l_ffi(self.to_js(), value)
+impl TShadowRoot with set_inner_html(self : Self, value : JsValue) -> Unit {
+  shadow_root_set_inner_html_ffi(self.to_js(), value)
 }
 
 ///|
-fn shadow_root_set_h_t_m_l_unsafe_ffi(obj : JsValue, html : JsValue) -> Unit = "webapi_ShadowRoot" "setHTMLUnsafe"
+fn shadow_root_set_html_unsafe_ffi(obj : JsValue, html : JsValue) -> Unit = "webapi_ShadowRoot" "setHTMLUnsafe"
 
 ///|
-impl TShadowRoot with set_h_t_m_l_unsafe(self : Self, html : String) -> Unit {
-  shadow_root_set_h_t_m_l_unsafe_ffi(self.to_js(), TJsValue::to_js(html))
+impl TShadowRoot with set_html_unsafe(self : Self, html : String) -> Unit {
+  shadow_root_set_html_unsafe_ffi(self.to_js(), TJsValue::to_js(html))
 }
 
 ///|
-fn shadow_root_get_h_t_m_l_ffi(obj : JsValue, options : JsValue) -> String = "webapi_ShadowRoot" "getHTML"
+fn shadow_root_get_html_ffi(obj : JsValue, options : JsValue) -> String = "webapi_ShadowRoot" "getHTML"
 
 ///|
-impl TShadowRoot with get_h_t_m_l(self : Self, options? : GetHTMLOptions) -> String {
-  shadow_root_get_h_t_m_l_ffi(self.to_js(), TJsValue::to_js(options))
+impl TShadowRoot with get_html(self : Self, options? : GetHTMLOptions) -> String {
+  shadow_root_get_html_ffi(self.to_js(), TJsValue::to_js(options))
 }

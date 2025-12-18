@@ -42,8 +42,8 @@ pub impl TImportNodeOptionsArg for ImportNodeOptions with to_js(self : ImportNod
 pub trait TDocument: TJsValue + TTNode {
   root_element(self: Self) -> SVGSVGElement = _
   implementation(self: Self) -> &TDOMImplementation = _
-  u_r_l(self: Self) -> String = _
-  document_u_r_i(self: Self) -> String = _
+  url(self: Self) -> String = _
+  document_uri(self: Self) -> String = _
   compat_mode(self: Self) -> String = _
   character_set(self: Self) -> String = _
   charset(self: Self) -> String = _
@@ -52,24 +52,24 @@ pub trait TDocument: TJsValue + TTNode {
   doctype(self: Self) -> &TDocumentType = _
   document_element(self: Self) -> &TElement = _
   get_elements_by_tag_name(self: Self, qualified_name : String) -> &THTMLCollection = _
-  get_elements_by_tag_name_n_s(self: Self, namespace : String, local_name : String) -> &THTMLCollection = _
+  get_elements_by_tag_name_ns(self: Self, namespace : String, local_name : String) -> &THTMLCollection = _
   get_elements_by_class_name(self: Self, class_names : String) -> &THTMLCollection = _
   create_element(self: Self, local_name : String, options? : &TCreateElementOptionsArg) -> &TElement = _
-  create_element_n_s(self: Self, namespace : String, qualified_name : String, options? : &TCreateElementNSOptionsArg) -> &TElement = _
+  create_element_ns(self: Self, namespace : String, qualified_name : String, options? : &TCreateElementNSOptionsArg) -> &TElement = _
   create_document_fragment(self: Self) -> &TDocumentFragment = _
   create_text_node(self: Self, data : String) -> &TText = _
-  create_c_d_a_t_a_section(self: Self, data : String) -> &TCDATASection = _
+  create_cdata_section(self: Self, data : String) -> &TCDATASection = _
   create_comment(self: Self, data : String) -> &TComment = _
   create_processing_instruction(self: Self, target : String, data : String) -> &TProcessingInstruction = _
   import_node(self: Self, node : &TNode, options? : &TImportNodeOptionsArg) -> &TNode = _
   adopt_node(self: Self, node : &TNode) -> &TNode = _
   create_attribute(self: Self, local_name : String) -> &TAttr = _
-  create_attribute_n_s(self: Self, namespace : String, qualified_name : String) -> &TAttr = _
+  create_attribute_ns(self: Self, namespace : String, qualified_name : String) -> &TAttr = _
   create_event(self: Self, interface : String) -> &TEvent = _
   create_range(self: Self) -> &TRange = _
   create_node_iterator(self: Self, root : &TNode, what_to_show? : UInt, filter? : NodeFilter) -> NodeIterator = _
   create_tree_walker(self: Self, root : &TNode, what_to_show? : UInt, filter? : NodeFilter) -> &TTreeWalker = _
-  parse_h_t_m_l_unsafe(html : String) -> &TDocument = _
+  parse_html_unsafe(html : String) -> &TDocument = _
   location(self: Self) -> Location = _
   domain(self: Self) -> String = _
   set_domain(self: Self, value : String) -> Unit = _
@@ -102,7 +102,7 @@ pub trait TDocument: TJsValue + TTNode {
   has_focus(self: Self) -> Bool = _
   design_mode(self: Self) -> String = _
   set_design_mode(self: Self, value : String) -> Unit = _
-  exec_command(self: Self, command_id : String, show_u_i? : Bool, value? : String) -> Bool = _
+  exec_command(self: Self, command_id : String, show_ui? : Bool, value? : String) -> Bool = _
   query_command_enabled(self: Self, command_id : String) -> Bool = _
   query_command_indeterm(self: Self, command_id : String) -> Bool = _
   query_command_state(self: Self, command_id : String) -> Bool = _
@@ -153,19 +153,19 @@ impl TDocument with implementation(self : Self) -> &TDOMImplementation {
 }
 
 ///|
-fn document_u_r_l_ffi(obj : JsValue) -> String = "webapi_Document" "URL"
+fn document_url_ffi(obj : JsValue) -> String = "webapi_Document" "URL"
 
 ///|
-impl TDocument with u_r_l(self : Self) -> String {
-  document_u_r_l_ffi(self.to_js())
+impl TDocument with url(self : Self) -> String {
+  document_url_ffi(self.to_js())
 }
 
 ///|
-fn document_document_u_r_i_ffi(obj : JsValue) -> String = "webapi_Document" "documentURI"
+fn document_document_uri_ffi(obj : JsValue) -> String = "webapi_Document" "documentURI"
 
 ///|
-impl TDocument with document_u_r_i(self : Self) -> String {
-  document_document_u_r_i_ffi(self.to_js())
+impl TDocument with document_uri(self : Self) -> String {
+  document_document_uri_ffi(self.to_js())
 }
 
 ///|
@@ -593,11 +593,11 @@ impl TDocument with get_elements_by_tag_name(self : Self, qualified_name : Strin
 }
 
 ///|
-fn document_get_elements_by_tag_name_n_s_ffi(obj : JsValue, namespace : JsValue, local_name : JsValue) -> JsValue = "webapi_Document" "getElementsByTagNameNS"
+fn document_get_elements_by_tag_name_ns_ffi(obj : JsValue, namespace : JsValue, local_name : JsValue) -> JsValue = "webapi_Document" "getElementsByTagNameNS"
 
 ///|
-impl TDocument with get_elements_by_tag_name_n_s(self : Self, namespace : String, local_name : String) -> &THTMLCollection {
-  document_get_elements_by_tag_name_n_s_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(local_name)).unsafe_cast()
+impl TDocument with get_elements_by_tag_name_ns(self : Self, namespace : String, local_name : String) -> &THTMLCollection {
+  document_get_elements_by_tag_name_ns_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(local_name)).unsafe_cast()
 }
 
 ///|
@@ -617,11 +617,11 @@ impl TDocument with create_element(self : Self, local_name : String, options? : 
 }
 
 ///|
-fn document_create_element_n_s_ffi(obj : JsValue, namespace : JsValue, qualified_name : JsValue, options : JsValue) -> JsValue = "webapi_Document" "createElementNS"
+fn document_create_element_ns_ffi(obj : JsValue, namespace : JsValue, qualified_name : JsValue, options : JsValue) -> JsValue = "webapi_Document" "createElementNS"
 
 ///|
-impl TDocument with create_element_n_s(self : Self, namespace : String, qualified_name : String, options? : &TCreateElementNSOptionsArg) -> &TElement {
-  document_create_element_n_s_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(qualified_name), options.to_js()).unsafe_cast()
+impl TDocument with create_element_ns(self : Self, namespace : String, qualified_name : String, options? : &TCreateElementNSOptionsArg) -> &TElement {
+  document_create_element_ns_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(qualified_name), options.to_js()).unsafe_cast()
 }
 
 ///|
@@ -641,11 +641,11 @@ impl TDocument with create_text_node(self : Self, data : String) -> &TText {
 }
 
 ///|
-fn document_create_c_d_a_t_a_section_ffi(obj : JsValue, data : JsValue) -> JsValue = "webapi_Document" "createCDATASection"
+fn document_create_cdata_section_ffi(obj : JsValue, data : JsValue) -> JsValue = "webapi_Document" "createCDATASection"
 
 ///|
-impl TDocument with create_c_d_a_t_a_section(self : Self, data : String) -> &TCDATASection {
-  document_create_c_d_a_t_a_section_ffi(self.to_js(), TJsValue::to_js(data)).unsafe_cast()
+impl TDocument with create_cdata_section(self : Self, data : String) -> &TCDATASection {
+  document_create_cdata_section_ffi(self.to_js(), TJsValue::to_js(data)).unsafe_cast()
 }
 
 ///|
@@ -689,11 +689,11 @@ impl TDocument with create_attribute(self : Self, local_name : String) -> &TAttr
 }
 
 ///|
-fn document_create_attribute_n_s_ffi(obj : JsValue, namespace : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Document" "createAttributeNS"
+fn document_create_attribute_ns_ffi(obj : JsValue, namespace : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Document" "createAttributeNS"
 
 ///|
-impl TDocument with create_attribute_n_s(self : Self, namespace : String, qualified_name : String) -> &TAttr {
-  document_create_attribute_n_s_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(qualified_name)).unsafe_cast()
+impl TDocument with create_attribute_ns(self : Self, namespace : String, qualified_name : String) -> &TAttr {
+  document_create_attribute_ns_ffi(self.to_js(), TJsValue::to_js(namespace), TJsValue::to_js(qualified_name)).unsafe_cast()
 }
 
 ///|
@@ -729,11 +729,11 @@ impl TDocument with create_tree_walker(self : Self, root : &TNode, what_to_show?
 }
 
 ///|
-fn document_parse_h_t_m_l_unsafe_ffi(html : JsValue) -> JsValue = "webapi_Document" "parseHTMLUnsafe"
+fn document_parse_html_unsafe_ffi(html : JsValue) -> JsValue = "webapi_Document" "parseHTMLUnsafe"
 
 ///|
-impl TDocument with parse_h_t_m_l_unsafe(html : String) -> &TDocument {
-  document_parse_h_t_m_l_unsafe_ffi(TJsValue::to_js(html)).unsafe_cast()
+impl TDocument with parse_html_unsafe(html : String) -> &TDocument {
+  document_parse_html_unsafe_ffi(TJsValue::to_js(html)).unsafe_cast()
 }
 
 ///|
@@ -793,11 +793,11 @@ impl TDocument with has_focus(self : Self) -> Bool {
 }
 
 ///|
-fn document_exec_command_ffi(obj : JsValue, command_id : JsValue, show_u_i : JsValue, value : JsValue) -> Bool = "webapi_Document" "execCommand"
+fn document_exec_command_ffi(obj : JsValue, command_id : JsValue, show_ui : JsValue, value : JsValue) -> Bool = "webapi_Document" "execCommand"
 
 ///|
-impl TDocument with exec_command(self : Self, command_id : String, show_u_i? : Bool, value? : String) -> Bool {
-  document_exec_command_ffi(self.to_js(), TJsValue::to_js(command_id), TJsValue::to_js(show_u_i), TJsValue::to_js(value))
+impl TDocument with exec_command(self : Self, command_id : String, show_ui? : Bool, value? : String) -> Bool {
+  document_exec_command_ffi(self.to_js(), TJsValue::to_js(command_id), TJsValue::to_js(show_ui), TJsValue::to_js(value))
 }
 
 ///|

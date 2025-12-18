@@ -1,8 +1,8 @@
 ///|
 test "to_snake_case converts PascalCase" {
-  inspect(to_snake_case("HTMLElement"), content="h_t_m_l_element")
+  inspect(to_snake_case("HTMLElement"), content="html_element")
   inspect(to_snake_case("getElementById"), content="get_element_by_id")
-  inspect(to_snake_case("DOMString"), content="d_o_m_string")
+  inspect(to_snake_case("DOMString"), content="dom_string")
   inspect(to_snake_case("addEventListener"), content="add_event_listener")
 }
 

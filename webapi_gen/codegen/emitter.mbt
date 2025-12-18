@@ -1,16 +1,56 @@
 ///|
 /// Convert a string to snake case
+fn is_upper(c : Char) -> Bool {
+  c >= 'A' && c <= 'Z'
+}
+
+///|
+fn is_lower(c : Char) -> Bool {
+  c >= 'a' && c <= 'z'
+}
+
+///|
+fn to_lower_char(c : Char) -> Char {
+  if is_upper(c) {
+    Int::to_char(c.to_int() + 32).unwrap()
+  } else {
+    c
+  }
+}
+
+///|
+/// Convert a string to snake case
+/// Handles acronyms: DOMImplementation -> dom_implementation
 fn to_snake_case(s : String) -> String {
   let buf = StringBuilder::new()
-  for i, c in s {
-    match c {
-      'A'..='Z' => {
-        if i > 0 {
+  let chars = []
+  for c in s {
+    chars.push(c)
+  }
+  for i, c in chars {
+    if is_upper(c) {
+      if i > 0 {
+        let prev = chars[i - 1]
+        let mut split = false
+        if is_lower(prev) {
+          split = true
+        } else if is_upper(prev) && i + 1 < chars.length() {
+          let next = chars[i + 1]
+          if is_lower(next) {
+            split = true
+          }
+        }
+        // Prevent double underscore if input already has underscore
+        if prev == '_' {
+          split = false
+        }
+        if split {
           buf.write_char('_')
         }
-        buf.write_char(Int::to_char(c.to_int() + 32).unwrap())
       }
-      c => buf.write_char(c)
+      buf.write_char(to_lower_char(c))
+    } else {
+      buf.write_char(c)
     }
   }
   buf.to_string()

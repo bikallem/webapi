@@ -13,7 +13,7 @@ pub impl TNode for Node
 pub trait TNode: TJsValue + TTEventTarget {
   node_type(self: Self) -> UInt = _
   node_name(self: Self) -> String = _
-  base_u_r_i(self: Self) -> String = _
+  base_uri(self: Self) -> String = _
   is_connected(self: Self) -> Bool = _
   owner_document(self: Self) -> &TDocument = _
   get_root_node(self: Self, options? : GetRootNodeOptions) -> &TNode = _
@@ -36,7 +36,7 @@ pub trait TNode: TJsValue + TTEventTarget {
   compare_document_position(self: Self, other : &TNode) -> UInt = _
   contains(self: Self, other : &TNode) -> Bool = _
   lookup_prefix(self: Self, namespace : String) -> String = _
-  lookup_namespace_u_r_i(self: Self, prefix : String) -> String = _
+  lookup_namespace_uri(self: Self, prefix : String) -> String = _
   is_default_namespace(self: Self, namespace : String) -> Bool = _
   insert_before(self: Self, node : &TNode, child : &TNode) -> &TNode = _
   append_child(self: Self, node : &TNode) -> &TNode = _
@@ -61,11 +61,11 @@ impl TNode with node_name(self : Self) -> String {
 }
 
 ///|
-fn node_base_u_r_i_ffi(obj : JsValue) -> String = "webapi_Node" "baseURI"
+fn node_base_uri_ffi(obj : JsValue) -> String = "webapi_Node" "baseURI"
 
 ///|
-impl TNode with base_u_r_i(self : Self) -> String {
-  node_base_u_r_i_ffi(self.to_js())
+impl TNode with base_uri(self : Self) -> String {
+  node_base_uri_ffi(self.to_js())
 }
 
 ///|
@@ -245,11 +245,11 @@ impl TNode with lookup_prefix(self : Self, namespace : String) -> String {
 }
 
 ///|
-fn node_lookup_namespace_u_r_i_ffi(obj : JsValue, prefix : JsValue) -> String = "webapi_Node" "lookupNamespaceURI"
+fn node_lookup_namespace_uri_ffi(obj : JsValue, prefix : JsValue) -> String = "webapi_Node" "lookupNamespaceURI"
 
 ///|
-impl TNode with lookup_namespace_u_r_i(self : Self, prefix : String) -> String {
-  node_lookup_namespace_u_r_i_ffi(self.to_js(), TJsValue::to_js(prefix))
+impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String {
+  node_lookup_namespace_uri_ffi(self.to_js(), TJsValue::to_js(prefix))
 }
 
 ///|
