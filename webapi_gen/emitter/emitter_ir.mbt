@@ -104,3 +104,10 @@ pub struct EnumEmit {
   name : String
   variants : Array[EnumMemberEmit]
 }
+
+///|
+/// Typedef emission
+pub struct TypedefEmit {
+  name : String
+  target_type : String
+}
