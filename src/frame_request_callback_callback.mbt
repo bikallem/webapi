@@ -1,0 +1,13 @@
+// Auto-generated MoonBit bindings for FrameRequestCallback callback
+
+// Do not edit manually
+
+///|
+#external
+pub type FrameRequestCallback
+
+///|
+pub impl TJsValue for FrameRequestCallback with to_js(self : FrameRequestCallback) -> JsValue = "%identity"
+
+///|
+pub fn FrameRequestCallback::new(f : (DOMHighResTimeStamp) -> Unit) -> FrameRequestCallback = "webapi_FrameRequestCallback" "new"

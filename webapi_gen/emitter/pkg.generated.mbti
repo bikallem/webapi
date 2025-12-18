@@ -9,6 +9,8 @@ import(
 )
 
 // Values
+pub fn build_callback_emit(@parser.CallbackFunctionDefinition, @type_registry.TypeRegistry) -> CallbackEmit
+
 pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
 
 pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
@@ -16,6 +18,8 @@ pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
 pub fn emit_all_interfaces(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
 
 pub fn emit_all_typedefs(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+
+pub fn emit_callback(CallbackEmit) -> String
 
 pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeRegistry) -> String
 
@@ -29,6 +33,18 @@ pub fn emit_typedef(@parser.TypedefDefinition, @type_registry.TypeRegistry) -> S
 
 // Types and methods
 type AttributeEmit
+
+pub struct CallbackArgEmit {
+  name : String
+  mbt_type : String
+}
+
+pub struct CallbackEmit {
+  name : String
+  args : Array[CallbackArgEmit]
+  return_type : String
+  ffi_module : String
+}
 
 type ConstructorEmit
 

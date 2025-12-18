@@ -150,9 +150,21 @@ fn main {
         e => fail("failed to write file: \{e}")
       }
     }
+
+    // Generate and write callbacks
+    println("=== Generating Callbacks ===")
+    let callback_files = emit_all_callbacks(flattened, type_registry)
+    for filename, code in callback_files {
+      let filepath = "\{output_dir}/\{filename}"
+      println("  Writing \{filepath}...")
+      @fs.write_string_to_file(filepath, code) catch {
+        e => fail("failed to write file: \{e}")
+      }
+    }
+
     println("\n=== Generation complete! ===")
     println(
-      "Generated \{enum_files.length()} enums, \{typedef_files.length()} typedefs, \{dict_files.length()} dictionaries, \{iface_files.length()} interfaces",
+      "Generated \{enum_files.length()} enums, \{typedef_files.length()} typedefs, \{dict_files.length()} dictionaries, \{iface_files.length()} interfaces, \{callback_files.length()} callbacks",
     )
     println("Output directory: \{output_dir}")
   } catch {

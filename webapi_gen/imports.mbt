@@ -16,6 +16,7 @@ using @emitter {
   emit_all_enums,
   emit_all_dictionaries,
   emit_all_interfaces,
+  emit_all_callbacks,
 }
 
 ///|
