@@ -205,10 +205,15 @@ interface_member -> InterfaceMember:
   //| cm=constructor_member         { Constructor(cm) }
   | "constructor" "(" arguments=argument_list ")" ";" { Constructor({ arguments, }) }
   | "stringifier" ";"             { Stringifier(StringifierMember::Bare) }
-  | "static" "readonly" "attribute" type_=type name=IDENTIFIER ";"
-      { Attribute({ type_, name, is_readonly: true, static_: true, is_inherit: false }) }
-  | "static" "attribute" type_=type name=IDENTIFIER ";"
-      { Attribute({ type_, name, is_readonly: false, static_: true, is_inherit: false }) }  
+  // stringifier attribute forms
+  | "stringifier" "readonly" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: true, static_: false, is_inherit: false }) }
+  | "stringifier" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: false, static_: false, is_inherit: false }) }
+  | "static" "readonly" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: true, static_: true, is_inherit: false }) }
+  | "static" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: false, static_: true, is_inherit: false }) }
   | i=iterable_member             { Iterable(i) }
   | "async_iterable" "<" type ">" ";"
       { AsyncIterable({ key_type: None, value_type: $3, arguments: [] }) }
@@ -218,14 +223,14 @@ interface_member -> InterfaceMember:
   | m=maplike_member              { Maplike(m) }
   | "readonly" s=setlike_member   { Setlike({ ..s, is_readonly: true }) }
   | s=setlike_member              { Setlike(s) }
-  | "inherit" "readonly" "attribute" type_=type name=IDENTIFIER ";"
-      { Attribute({ type_, name, is_readonly: true, static_: false, is_inherit: true }) }
-  | "inherit" "attribute" type_=type name=IDENTIFIER ";"
-      { Attribute({ type_, name, is_readonly: false, static_: false, is_inherit: true }) }
-  | "readonly" "attribute" type_=type name=IDENTIFIER ";"
-      { Attribute({ type_, name, is_readonly: true, static_: false, is_inherit: false }) }
-  | "attribute" type_=type name=IDENTIFIER ";"
-      { Attribute({ type_, name, is_readonly: false, static_: false, is_inherit: false }) }
+  | "inherit" "readonly" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: true, static_: false, is_inherit: true }) }
+  | "inherit" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: false, static_: false, is_inherit: true }) }
+  | "readonly" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: true, static_: false, is_inherit: false }) }
+  | "attribute" type_=type_with_extended_attributes name=attribute_name ";"
+      { Attribute({ type_: type_.type_, name, is_readonly: false, static_: false, is_inherit: false }) }
   | special=special return_type=type name=operation_name "(" arguments=argument_list ")" ";"
       { SpecialOperation({ return_type, name, arguments, special }) }
   | "static" op=regular_operation_member  { RegularOperation({ ..op, static_: true }) }
@@ -319,6 +324,10 @@ ellipsis -> Bool:
   | "..."                       { true }
   |                             { false }
 
+attribute_name -> String:
+  | name=argument_name_keyword   { name }
+  | name=IDENTIFIER              { name }
+
 argument_name -> String:
   | name=argument_name_keyword   { name }
   | name=IDENTIFIER              { name }
@@ -352,6 +361,7 @@ argument_name_keyword -> String
 
 type -> Type:
   | type_=single_type { type_ }
+  | union_type=union_type "?" { Type::Nullable(union_type) }
   | union_type=union_type { union_type }
 
 type_with_extended_attributes -> TypeWithExtendedAttributes:
@@ -494,11 +504,22 @@ extended_attributes -> Array[ExtendedAttribute]:
 
 extended_attribute -> ExtendedAttribute:
   | arg_name=IDENTIFIER "=" arg_value=IDENTIFIER "(" args=argument_list ")" { ExtendedAttribute::NamedArgList(arg_name, arg_value, args) }
+  | attr_name=IDENTIFIER "=" "(" i1=INTEGER "," i2=INTEGER ")" { ExtendedAttribute::IntPair(attr_name, i1, i2) }
+  | attr_name=IDENTIFIER "=" "(" idents=identifier_list ")" { ExtendedAttribute::IdentList(attr_name, idents) }
   | attr_name=IDENTIFIER "=" attr_value=IDENTIFIER { ExtendedAttribute::Ident(attr_name, attr_value) }
+  | attr_name=IDENTIFIER "=" int_val=INTEGER { ExtendedAttribute::IntValue(attr_name, int_val) }
+  | attr_name=IDENTIFIER "=" float_val=FLOAT { ExtendedAttribute::FloatValue(attr_name, float_val) }
   | attr_name=IDENTIFIER "=" STRING             { ExtendedAttribute::Ident(attr_name, $3) }
   | id=IDENTIFIER "=" "*"                       { ExtendedAttribute::Wildcard(id) }
   | name=IDENTIFIER "(" args=argument_list ")"  { ExtendedAttribute::ArgList(name, args) }
   | name=IDENTIFIER                             { ExtendedAttribute::NoArgs(name) }
+
+identifier_list -> Array[String]:
+  | id=IDENTIFIER rest=identifier_list_rest { [id, ..rest] }
+
+identifier_list_rest -> Array[String]:
+  | "," id=IDENTIFIER rest=identifier_list_rest { [id, ..rest] }
+  |                                             { [] }
 
 %{
 

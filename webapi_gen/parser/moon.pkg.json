@@ -4,12 +4,12 @@
     ],
     "pre-build": [
         {
-            "command": "node $mod_dir/.mooncakes/moonbitlang/yacc/target/js/release/build/main/main.cjs --mode only-tokens $input -o $output",
+            "command": "node $mod_dir/../../moonyacc/target/js/release/build/main/main.js --mode only-tokens $input -o $output",
             "input": "parser.mbty",
             "output": "token.mbt"
         },
         {
-            "command": "node $mod_dir/.mooncakes/moonbitlang/yacc/target/js/release/build/main/main.cjs --no-comments --external-tokens $input -o $output",
+            "command": "node $mod_dir/../../moonyacc/target/js/release/build/main/main.js --no-comments --external-tokens $input -o $output",
             "input": "parser.mbty",
             "output": "parser.mbt"
         }

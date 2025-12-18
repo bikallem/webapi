@@ -129,7 +129,7 @@ test "emit_dictionary() generates code for simple dictionary" {
   let definitions = @parser.parse(idl)
   let type_registry = TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten
+    |> @flattened_idl.flatten(ignore)
   let code = emit_dictionary(flattened.dictionaries["EventInit"], type_registry)
   inspect(
     code,
@@ -177,7 +177,7 @@ test "emit_dictionary handles empty dictionary" {
   let definitions = @parser.parse(idl)
   let type_registry = TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten
+    |> @flattened_idl.flatten(ignore)
   let code = emit_dictionary(flattened.dictionaries["EmptyDict"], type_registry)
   inspect(
     code,

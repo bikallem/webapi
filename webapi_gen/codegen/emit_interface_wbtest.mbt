@@ -14,7 +14,7 @@ test "emit_interface generates moonbit code for simple interface" {
   let definitions = @parser.parse(idl)
   let type_registry = TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten
+    |> @flattened_idl.flatten(ignore)
   let code = emit_interface(flattened.interfaces["EventTarget"], type_registry)
   inspect(
     code,
@@ -104,7 +104,7 @@ test "emit_interface generates getter and setter for attributes" {
   let definitions = @parser.parse(idl)
   let type_registry = TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten
+    |> @flattened_idl.flatten(ignore)
   let code = emit_interface(flattened.interfaces["Event"], type_registry)
   inspect(
     code,

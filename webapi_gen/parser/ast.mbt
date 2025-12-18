@@ -11,6 +11,10 @@
 pub(all) enum ExtendedAttribute {
   NoArgs(String) // [Exposed]
   Ident(String, String) // [Exposed=Window]
+  IdentList(String, Array[String]) // [Exposed=(Window,Worker)]
+  IntValue(String, String) // [ReflectDefault=1]
+  FloatValue(String, String) // [ReflectDefault=1.0]
+  IntPair(String, String, String) // [ReflectRange=(0, 8)]
   Wildcard(String) // [Exposed=*]
   ArgList(String, Array[Argument]) // [Constructor(DOMString url)]
   NamedArgList(String, String, Array[Argument]) // [NamedConstructor=Image(DOMString src)]

@@ -2,10 +2,12 @@
   "name": "bikallem/webapi_gen",
   "version": "0.1.0",
   "deps": {
-    "moonbitlang/x": "0.4.37"
+    "moonbitlang/x": "0.4.38"
   },
   "bin-deps": {
-    "moonbitlang/yacc": "0.7.6"
+    "moonbitlang/yacc": {
+      "path": "../../moonyacc"
+    }
   },
   "readme": "README.mbt.md",
   "repository": "",

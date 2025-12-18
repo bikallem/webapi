@@ -12,7 +12,10 @@ pub struct FlattenedIdl {
 ///|
 /// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces 
 /// and converting callback interfaces to callback functions.
-pub fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
+pub fn flatten(
+  partial_merged : PartialMerged,
+  logger : (String) -> Unit,
+) -> FlattenedIdl {
   // Merge dictionaries by combining members from parent dictionaries
   let dictionaries = partial_merged.dictionaries
     .iter()
@@ -41,6 +44,7 @@ pub fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
     |> Map::from_iter
 
   // flatten mixins into interfaces
+  // Skip include statements where interface or mixin is missing (may have been filtered out)
   for include_stmt in partial_merged.include_statements {
     match partial_merged.mixins.get(include_stmt.mixin_name) {
       Some(mxn) =>
@@ -51,13 +55,13 @@ pub fn flatten(partial_merged : PartialMerged) -> FlattenedIdl {
               iface.inheritance,
             )
           None =>
-            abort(
-              "Interface '\{include_stmt.interface_name}' for includes statement not found",
+            logger(
+              "Skipped includes statement: Interface '\{include_stmt.interface_name}' not found",
             )
         }
       None =>
-        abort(
-          "Mixin included in interface '\{include_stmt.interface_name}' not found",
+        logger(
+          "Skipped includes statement: Mixin '\{include_stmt.mixin_name}' not found",
         )
     }
   }

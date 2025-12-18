@@ -11,7 +11,7 @@ test "flatten merges dictionary inheritance" {
     #|};
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
-  let flattened_idl = flatten(partial_merged)
+  let flattened_idl = flatten(partial_merged, ignore)
   let flattened_dict = flattened_idl.dictionaries["ChildDict"]
   @json.inspect(flattened_dict, content={
     "name": "ChildDict",
@@ -54,7 +54,7 @@ test "flatten handles dictionary without inheritance" {
     #|};
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
-  let flattened_idl = flatten(partial_merged)
+  let flattened_idl = flatten(partial_merged, ignore)
   let flattened_dict = flattened_idl.dictionaries["SimpleDict"]
   @json.inspect(flattened_dict, content={
     "name": "SimpleDict",
@@ -77,7 +77,7 @@ test "panic: flatten aborts when parent dictionary is missing" {
     #|};
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
-  flatten(partial_merged) |> ignore
+  flatten(partial_merged, ignore) |> ignore
 }
 
 ///|
@@ -98,7 +98,7 @@ test "flatten merges/includes mixin members into interface" {
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
-  let flattened_idl = flatten(partial_merged)
+  let flattened_idl = flatten(partial_merged, ignore)
   let iface2 = flattened_idl.interfaces["MyInterface"]
   @json.inspect(iface2, content={
     "name": "MyInterface",
@@ -169,7 +169,7 @@ test "flatten merges/includes mixin members into interface" {
 }
 
 ///|
-test "panic: flatten aborts when mixin is missing" {
+test "flatten skips includes statement when mixin is missing" {
   let widl : String =
     #|interface MyInterface {
     #|  attribute DOMString? textContent;
@@ -177,7 +177,10 @@ test "panic: flatten aborts when mixin is missing" {
     #|MyInterface includes MissingMixin;
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
-  flatten(partial_merged) |> ignore
+  let flattened = flatten(partial_merged, ignore)
+  // Should still have the interface, just without mixin members
+  let iface = flattened.interfaces["MyInterface"]
+  inspect(iface.members.length(), content="1")
 }
 
 ///|
@@ -222,7 +225,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
-  let flattened_idl = flatten(partial_merged)
+  let flattened_idl = flatten(partial_merged, ignore)
   t.write(flattened_idl.to_json().stringify(indent=2))
   t.snapshot(filename="flattened_idl_snapshot.json")
 }

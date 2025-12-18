@@ -3,6 +3,7 @@
 fn filter_idl(
   config : GeneratorConfig,
   defns : Array[DefinitionExtendedAttributes],
+  logger : (String) -> Unit,
 ) -> Array[DefinitionExtendedAttributes] {
   let core_interfaces = @hashset.from_iter(config.core_interfaces.iter())
   let excluded_callbacks = @hashset.from_iter(config.excluded_callbacks.iter())
@@ -24,8 +25,8 @@ fn filter_idl(
         filtered_defns.push(def)
       PartialMixin(pmxn) if core_interfaces.contains(pmxn.name) =>
         filtered_defns.push(def)
-      Namespace(_) => abort("namespaces are not supported")
-      PartialNamespace(_) => abort("namespaces are not supported")
+      Namespace(ns) => logger("Skipped namespace: \{ns.name}")
+      PartialNamespace(pns) => logger("Skipped partial namespace: \{pns.name}")
       Dictionary(dict) if !is_dictionary_prefix_excluded(dict.name) =>
         filtered_defns.push(def)
       PartialDictionary(pdict) if !is_dictionary_prefix_excluded(pdict.name) =>
@@ -62,7 +63,7 @@ test "filter_idl with empty config returns all types" {
       #|}
     ),
   )
-  let filtered = filter_idl(config, defs)
+  let filtered = filter_idl(config, defs, ignore)
   @json.inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -96,7 +97,7 @@ test "filter_idl filters interfaces by whitelist" {
       #|}
     ),
   )
-  let filtered = filter_idl(config, defs)
+  let filtered = filter_idl(config, defs, ignore)
   @json.inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -126,7 +127,7 @@ test "filter_idl excludes callbacks" {
       #|}
     ),
   )
-  let filtered = filter_idl(config, defs)
+  let filtered = filter_idl(config, defs, ignore)
   @json.inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -170,7 +171,7 @@ test "filter_idl excludes typedefs" {
       #|}
     ),
   )
-  let filtered = filter_idl(config, defs)
+  let filtered = filter_idl(config, defs, ignore)
   @json.inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -200,7 +201,7 @@ test "filter_idl excludes dictionaries by prefix" {
       #|}
     ),
   )
-  let filtered = filter_idl(config, defs)
+  let filtered = filter_idl(config, defs, ignore)
   @json.inspect(filtered, content=[
     {
       "extended_attributes": [],
