@@ -118,6 +118,17 @@ fn main {
       }
     }
 
+    // Generate and write typedefs
+    println("=== Generating Typedefs ===")
+    let typedef_files = emit_all_typedefs(flattened, type_registry)
+    for filename, code in typedef_files {
+      let filepath = "\{output_dir}/\{filename}"
+      println("  Writing \{filepath}...")
+      @fs.write_string_to_file(filepath, code) catch {
+        e => fail("failed to write file: \{e}")
+      }
+    }
+
     // Generate and write dictionaries
     println("=== Generating Dictionaries ===")
     let dict_files = emit_all_dictionaries(flattened, type_registry)
@@ -141,7 +152,7 @@ fn main {
     }
     println("\n=== Generation complete! ===")
     println(
-      "Generated \{enum_files.length()} enums, \{dict_files.length()} dictionaries, \{iface_files.length()} interfaces",
+      "Generated \{enum_files.length()} enums, \{typedef_files.length()} typedefs, \{dict_files.length()} dictionaries, \{iface_files.length()} interfaces",
     )
     println("Output directory: \{output_dir}")
   } catch {

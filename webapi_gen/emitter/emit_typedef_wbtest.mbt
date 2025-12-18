@@ -96,7 +96,18 @@ test "emit_typedef/union" {
     content=(
       #|// Auto-generated MoonBit bindings for StringOrLong typedef
       #|///|
-      #|pub typealias StringOrLong = JsValue
+      #|pub(open) trait TStringOrLong {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|///|
+      #|pub fn[T : TStringOrLong] &TStringOrLong::into(self : &TStringOrLong) -> T = "%identity"
+      #|
+      #|///|
+      #|pub impl TStringOrLong for String with to_js(self : String) -> JsValue = "%identity"
+      #|
+      #|///|
+      #|pub impl TStringOrLong for Int with to_js(self : Int) -> JsValue = "%identity"
       #|
     ),
   )

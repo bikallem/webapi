@@ -12,59 +12,59 @@ fn typedef_to_emit(
   typedef_def : @parser.TypedefDefinition,
   type_registry : TypeRegistry,
 ) -> TypedefEmit {
-  let target_type = to_mbt_type_string(typedef_def.type_, type_registry)
-  TypedefEmit::{ name: typedef_def.name, target_type }
+  match typedef_def.type_ {
+    Union(members) => {
+      let member_types = filter_union_members(members, type_registry)
+      Union({ name: typedef_def.name, member_types })
+    }
+    _ => {
+      let target_type = to_mbt_type_string(typedef_def.type_, type_registry)
+      Alias({ name: typedef_def.name, target_type })
+    }
+  }
 }
 
 ///|
 fn emit_from_typedef_emit(emit : TypedefEmit) -> String {
   let buf = StringBuilder::new()
+  let name = match emit {
+    Alias(a) => a.name
+    Union(u) => u.name
+  }
 
   // Header
-  buf.write_string(
-    "// Auto-generated MoonBit bindings for \{emit.name} typedef\n",
-  )
+  buf.write_string("// Auto-generated MoonBit bindings for \{name} typedef\n")
+  match emit {
+    Alias(typedef_alias) =>
+      buf.write_string(
+        "///|\npub typealias \{typedef_alias.name} = \{typedef_alias.target_type}\n",
+      )
+    Union(union_def) => {
+      let name = union_def.name
+      let trait_name = "T\{name}"
 
-  // Type alias
-  // Note: For now we just use a type alias. If we need more complex logic
-  // (like trait implementations for unions), we might need to expand this.
-  // But usually typedefs in WebIDL map to type aliases or just the underlying type.
-  // However, since MoonBit doesn't have `type Alias = Target`, we usually
-  // don't emit anything if it's just an alias, OR we emit a new type wrapper.
-  // BUT consistent with how we handle other named types, we probably want a distinct type
-  // that wraps the underlying type, or just don't emit it and use the underlying type everywhere.
-  //
-  // Looking at existing patterns (e.g. Enums are distinct types, Interfaces are distinct types),
-  // but `typedef` often just names a union or primitive.
-  // 
-  // If we look at how `to_mbt_type_string` handles Identifier(name):
-  //     if type_registry.is_interface(name) { "&T\{name}" } else { name }
-  // This implies we ARE expecting a type named `name` to exist.
-  //
-  // So we should emit a type alias. MoonBit supports `type NewType = OldType`? No, creates a new type.
-  // `type MyString String`
-  //
-  // Let's try to map it to a type alias if possible, or a newtype wrapper.
-  // simple `pub typealias Name = Target` is supported in recent MoonBit versions?
-  // Let's check if we can use `pub typealias`. If not, we might need `pub type Name Target` (newtype).
+      // Emit trait definition
+      buf.write_string("///|\npub(open) trait \{trait_name} {\n")
+      buf.write_string("  to_js(self : Self) -> JsValue\n")
+      buf.write_string("}\n\n")
 
-  // Wait, if I use `type Name String`, it's a new type distinct from String.
-  // If the webapi expects `DOMString` (which maps to `String`), and we have `typedef DOMString MyString`,
-  // then `MyString` should be usable as `String`?
-  // 
-  // Actually, in `to_mbt_type_string`:
-  //     USVString => "String"
-  //     DOMString => "String"
-  //
-  // If we have `typedef DOMString MyLabel;`, then `MyLabel` should just be `String`.
-  // If we define `pub typealias MyLabel = String`, then it works.
+      // Emit into method
+      buf.write_string(
+        "///|\npub fn[T : \{trait_name}] &\{trait_name}::into(self : &\{trait_name}) -> T = \"%identity\"\n\n",
+      )
 
-  buf.write_string("///|\npub typealias \{emit.name} = \{emit.target_type}\n")
-
-  // We should also implement TJsValue for it if it's not a primitive that already has it?
-  // If it's a type alias, it inherits traits? No, type alias is just a synonym.
-  // So if `emit.target_type` implements TJsValue, so does `emit.name`.
-
+      // Emit impl for each member type
+      for i, member_type in union_def.member_types {
+        buf.write_string(
+          "///|\npub impl \{trait_name} for \{member_type} with to_js(self : \{member_type}) -> JsValue = \"%identity\"",
+        )
+        if i < union_def.member_types.length() - 1 {
+          buf.write_string("\n\n")
+        }
+      }
+      buf.write_string("\n")
+    }
+  }
   buf.to_string()
 }
 

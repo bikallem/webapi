@@ -15,11 +15,15 @@ pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
 
 pub fn emit_all_interfaces(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
 
+pub fn emit_all_typedefs(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+
 pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeRegistry) -> String
 
 pub fn emit_enum(@parser.EnumDefinition) -> String
 
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry) -> String
+
+pub fn emit_typedef(@parser.TypedefDefinition, @type_registry.TypeRegistry) -> String
 
 // Errors
 
@@ -66,6 +70,21 @@ pub struct InterfaceEmit {
 type MethodEmit
 
 type TraitEmit
+
+pub struct TypedefAliasEmit {
+  name : String
+  target_type : String
+}
+
+pub enum TypedefEmit {
+  Alias(TypedefAliasEmit)
+  Union(TypedefUnionEmit)
+}
+
+pub struct TypedefUnionEmit {
+  name : String
+  member_types : Array[String]
+}
 
 type UnionArgTraitEmit
 

@@ -107,7 +107,24 @@ pub struct EnumEmit {
 
 ///|
 /// Typedef emission
-pub struct TypedefEmit {
+
+///|
+/// Typedef alias emission
+pub struct TypedefAliasEmit {
   name : String
   target_type : String
+}
+
+///|
+/// Typedef union emission
+pub struct TypedefUnionEmit {
+  name : String
+  member_types : Array[String]
+}
+
+///|
+/// Typedef emission
+pub enum TypedefEmit {
+  Alias(TypedefAliasEmit)
+  Union(TypedefUnionEmit)
 }
