@@ -90,3 +90,17 @@ pub struct DictionaryEmit {
   name : String // Dictionary name
   members : Array[DictionaryMemberEmit]
 }
+
+///|
+/// Enum member emission
+pub struct EnumMemberEmit {
+  variant_name : String
+  original_value : String
+}
+
+///|
+/// Enum emission
+pub struct EnumEmit {
+  name : String
+  variants : Array[EnumMemberEmit]
+}

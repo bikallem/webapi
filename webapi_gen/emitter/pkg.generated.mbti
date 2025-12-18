@@ -41,6 +41,16 @@ pub struct DictionaryMemberEmit {
   default_value : String?
 }
 
+pub struct EnumEmit {
+  name : String
+  variants : Array[EnumMemberEmit]
+}
+
+pub struct EnumMemberEmit {
+  variant_name : String
+  original_value : String
+}
+
 type ExternalTypeEmit
 
 pub struct InterfaceEmit {
