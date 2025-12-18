@@ -1,11 +1,23 @@
 {
+    "idl_dir": "../node_modules/@webref/idl",
+    "output_dir": "../src",
+    "templates_dir": "base.mbt",
+    "template_files": [
+        "js_value.mbt",
+        "js_promise.mbt",
+        "js_array.mbt",
+        "primitives.mbt",
+        "typed_arrays.mbt"
+    ],
     "core_specs": [
         "dom",
         "html",
         "uievents",
         "cssom",
         "cssom-view",
-        "geometry"
+        "geometry",
+        "FileAPI",
+        "SVG"
     ],
     "core_interfaces": [
         "AbortController",

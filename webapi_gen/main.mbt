@@ -1,39 +1,10 @@
 ///|
-/// Default paths relative to webapi_gen directory (run from webapi_gen/)
-let default_idl_dir : String = "../node_modules/@webref/idl"
-
-///|
+/// Default config file path (run from webapi_gen/)
 let default_config_file : String = "config.json"
 
 ///|
-let default_output_dir : String = "../src"
-
-///|
-/// Directory containing base template files
-let default_templates_dir : String = "base.mbt"
-
-///|
-/// Template files to copy to output directory
-let template_files : Array[String] = [
-  "js_value.mbt", "js_promise.mbt", "js_array.mbt", "primitives.mbt", "typed_arrays.mbt",
-]
-
-///|
-/// Core DOM specs to include (matching webapi-gen-ts)
-let core_specs : Array[String] = [
-  "dom", // Core DOM interfaces
-   "html", // HTML elements
-   "uievents", // UI events
-   "cssom", // CSS Object Model
-   "cssom-view", // CSSOM View (scrolling, etc.)
-   "geometry", // DOMPoint, DOMRect, DOMMatrix, etc.
-   "FileAPI", // Blob, File, FileReader, etc.
-   "SVG", // SVG elements (for SVGImageElement, etc.)
-]
-
-///|
 /// Check if a filename matches one of the core specs
-fn is_core_spec(filename : String) -> Bool {
+fn is_core_spec(filename : String, core_specs : Array[String]) -> Bool {
   // Remove .idl extension to get spec name
   match filename.strip_suffix(".idl") {
     Some(spec_name) =>
@@ -44,7 +15,11 @@ fn is_core_spec(filename : String) -> Bool {
 
 ///|
 /// Copy template files from templates_dir to output_dir
-fn copy_templates(templates_dir : String, output_dir : String) -> Unit raise {
+fn copy_templates(
+  templates_dir : String,
+  output_dir : String,
+  template_files : Array[String],
+) -> Unit raise {
   println("=== Copying Template Files ===")
   for filename in template_files {
     let src_path = "\{templates_dir}/\{filename}"
@@ -62,30 +37,26 @@ fn copy_templates(templates_dir : String, output_dir : String) -> Unit raise {
 ///|
 fn main {
   let args = @sys.get_cli_args()
-  // Parse optional command line arguments
-  let idl_dir = if args.length() > 1 { args[1] } else { default_idl_dir }
-  let config_file = if args.length() > 2 {
-    args[2]
+  // Parse optional command line argument for config file
+  let config_file = if args.length() > 1 {
+    args[1]
   } else {
     default_config_file
   }
-  let output_dir = if args.length() > 3 { args[3] } else { default_output_dir }
-  let templates_dir = if args.length() > 4 {
-    args[4]
-  } else {
-    default_templates_dir
-  }
   println("=== MoonBit WebAPI Bindings Generator ===\n")
-  println("IDL directory: \{idl_dir}")
   println("Config file: \{config_file}")
-  println("Output directory: \{output_dir}")
-  println("Templates directory: \{templates_dir}\n")
   try {
     // Read config
     let content = @fs.read_file_to_string(config_file) catch {
       e => fail("failed to read config file: \{e}")
     }
     let config = @config.load_config_from_string(content)
+    let idl_dir = config.idl_dir
+    let output_dir = config.output_dir
+    let templates_dir = config.templates_dir
+    println("IDL directory: \{idl_dir}")
+    println("Output directory: \{output_dir}")
+    println("Templates directory: \{templates_dir}\n")
 
     // Initialize logger
     let skipped_logs : Array[String] = []
@@ -99,7 +70,7 @@ fn main {
     }
     let idl_paths = []
     for file in idl_files {
-      if file.has_suffix(".idl") && is_core_spec(file) {
+      if file.has_suffix(".idl") && is_core_spec(file, config.core_specs) {
         idl_paths.push("\{idl_dir}/\{file}")
       }
     }
@@ -131,7 +102,7 @@ fn main {
     }
 
     // Copy base template files
-    copy_templates(templates_dir, output_dir)
+    copy_templates(templates_dir, output_dir, config.template_files)
 
     // Write skipped log
     if skipped_logs.length() > 0 {

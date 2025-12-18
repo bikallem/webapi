@@ -1,6 +1,10 @@
 ///|
 /// Generator configuration loaded from 'config.json'.
 pub struct GeneratorConfig {
+  idl_dir : String
+  output_dir : String
+  templates_dir : String
+  template_files : Array[String]
   core_specs : Array[String]
   core_interfaces : Array[String]
   excluded_callbacks : Array[String]
@@ -21,6 +25,10 @@ pub fn load_config_from_string(content : String) -> GeneratorConfig raise {
 ///|
 test "GeneratorConfig roundtrip via JSON" {
   let cfg : GeneratorConfig = {
+    idl_dir: "../node_modules/@webref/idl",
+    output_dir: "../src",
+    templates_dir: "base.mbt",
+    template_files: ["js_value.mbt"],
     core_specs: ["dom", "html"],
     core_interfaces: ["Element", "Node"],
     excluded_callbacks: ["MutationCallback"],
@@ -47,6 +55,10 @@ test "load_from_string with invalid JSON raises" {
 test "load_from_string with valid JSON" {
   let valid_json =
     #|{
+    #| "idl_dir": "../node_modules/@webref/idl",
+    #| "output_dir": "../src",
+    #| "templates_dir": "base.mbt",
+    #| "template_files": ["js_value.mbt"],
     #| "core_specs": ["dom", "html"],
     #| "core_interfaces": ["Element", "Node"],
     #|  "excluded_callbacks": ["MutationCallback"],
@@ -55,6 +67,10 @@ test "load_from_string with valid JSON" {
     #|}
   let cfg = load_config_from_string(valid_json)
   assert_eq(cfg, {
+    idl_dir: "../node_modules/@webref/idl",
+    output_dir: "../src",
+    templates_dir: "base.mbt",
+    template_files: ["js_value.mbt"],
     core_specs: ["dom", "html"],
     core_interfaces: ["Element", "Node"],
     excluded_callbacks: ["MutationCallback"],
@@ -67,6 +83,10 @@ test "load_from_string with valid JSON" {
 test "load_from_string with empty value uses defaults" {
   let empty_json =
     #|{
+    #| "idl_dir": "",
+    #| "output_dir": "",
+    #| "templates_dir": "",
+    #| "template_files": [],
     #| "core_specs": [],
     #| "core_interfaces": [],
     #|  "excluded_callbacks": [],
@@ -75,6 +95,10 @@ test "load_from_string with empty value uses defaults" {
     #|}
   let cfg = load_config_from_string(empty_json)
   assert_eq(cfg, {
+    idl_dir: "",
+    output_dir: "",
+    templates_dir: "",
+    template_files: [],
     core_specs: [],
     core_interfaces: [],
     excluded_callbacks: [],

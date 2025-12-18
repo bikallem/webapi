@@ -12,6 +12,10 @@ pub fn load_config_from_string(String) -> GeneratorConfig raise
 
 // Types and methods
 pub struct GeneratorConfig {
+  idl_dir : String
+  output_dir : String
+  templates_dir : String
+  template_files : Array[String]
   core_specs : Array[String]
   core_interfaces : Array[String]
   excluded_callbacks : Array[String]

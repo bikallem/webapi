@@ -55,6 +55,10 @@ test "filter_idl with empty config returns all types" {
   let config = @config.load_config_from_string(
     (
       #|{
+      #| "idl_dir": "",
+      #| "output_dir": "",
+      #| "templates_dir": "",
+      #| "template_files": [],
       #| "core_specs": [],
       #| "core_interfaces": [],
       #|  "excluded_callbacks": [],
@@ -89,6 +93,10 @@ test "filter_idl filters interfaces by whitelist" {
   let config : GeneratorConfig = @config.load_config_from_string(
     (
       #|{
+      #| "idl_dir": "",
+      #| "output_dir": "",
+      #| "templates_dir": "",
+      #| "template_files": [],
       #| "core_specs": [],
       #| "core_interfaces": ["Element", "Node"],
       #|  "excluded_callbacks": [],
@@ -119,6 +127,10 @@ test "filter_idl excludes callbacks" {
   let config : GeneratorConfig = @config.load_config_from_string(
     (
       #|{
+      #| "idl_dir": "",
+      #| "output_dir": "",
+      #| "templates_dir": "",
+      #| "template_files": [],
       #| "core_specs": [],
       #| "core_interfaces": [],
       #| "excluded_callbacks": ["MutationCallback"],
@@ -163,6 +175,10 @@ test "filter_idl excludes typedefs" {
   let config : GeneratorConfig = @config.load_config_from_string(
     (
       #|{
+      #| "idl_dir": "",
+      #| "output_dir": "",
+      #| "templates_dir": "",
+      #| "template_files": [],
       #| "core_specs": [],
       #| "core_interfaces": [],
       #| "excluded_callbacks": ["MutationCallback"],
@@ -193,6 +209,10 @@ test "filter_idl excludes dictionaries by prefix" {
   let config : GeneratorConfig = @config.load_config_from_string(
     (
       #|{
+      #| "idl_dir": "",
+      #| "output_dir": "",
+      #| "templates_dir": "",
+      #| "template_files": [],
       #| "core_specs": [],
       #| "core_interfaces": [],
       #| "excluded_callbacks": ["MutationCallback"],
