@@ -9,6 +9,16 @@ let default_config_file : String = "config.json"
 let default_output_dir : String = "../src"
 
 ///|
+/// Directory containing base template files
+let default_templates_dir : String = "base.mbt"
+
+///|
+/// Template files to copy to output directory
+let template_files : Array[String] = [
+  "js_value.mbt", "js_promise.mbt", "js_array.mbt", "primitives.mbt", "typed_arrays.mbt",
+]
+
+///|
 /// Core DOM specs to include (matching webapi-gen-ts)
 let core_specs : Array[String] = [
   "dom", // Core DOM interfaces
@@ -33,6 +43,23 @@ fn is_core_spec(filename : String) -> Bool {
 }
 
 ///|
+/// Copy template files from templates_dir to output_dir
+fn copy_templates(templates_dir : String, output_dir : String) -> Unit raise {
+  println("=== Copying Template Files ===")
+  for filename in template_files {
+    let src_path = "\{templates_dir}/\{filename}"
+    let dst_path = "\{output_dir}/\{filename}"
+    println("  Copying \{filename}...")
+    let content = @fs.read_file_to_string(src_path) catch {
+      e => fail("failed to read template \{src_path}: \{e}")
+    }
+    @fs.write_string_to_file(dst_path, content) catch {
+      e => fail("failed to write template \{dst_path}: \{e}")
+    }
+  }
+}
+
+///|
 fn main {
   let args = @sys.get_cli_args()
   // Parse optional command line arguments
@@ -43,10 +70,16 @@ fn main {
     default_config_file
   }
   let output_dir = if args.length() > 3 { args[3] } else { default_output_dir }
+  let templates_dir = if args.length() > 4 {
+    args[4]
+  } else {
+    default_templates_dir
+  }
   println("=== MoonBit WebAPI Bindings Generator ===\n")
   println("IDL directory: \{idl_dir}")
   println("Config file: \{config_file}")
-  println("Output directory: \{output_dir}\n")
+  println("Output directory: \{output_dir}")
+  println("Templates directory: \{templates_dir}\n")
   try {
     // Read config
     let content = @fs.read_file_to_string(config_file) catch {
@@ -96,6 +129,9 @@ fn main {
         e => fail("failed to create output directory: \{e}")
       }
     }
+
+    // Copy base template files
+    copy_templates(templates_dir, output_dir)
 
     // Write skipped log
     if skipped_logs.length() > 0 {
