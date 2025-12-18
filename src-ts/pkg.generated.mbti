@@ -1,0 +1,4009 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi"
+
+// Values
+pub const ATTRIBUTE_NODE : UInt = 2
+
+pub const AT_TARGET : UInt = 2
+
+pub const BUBBLING_PHASE : UInt = 3
+
+pub const CAPTURING_PHASE : UInt = 1
+
+pub const CDATA_SECTION_NODE : UInt = 4
+
+pub const COMMENT_NODE : UInt = 8
+
+pub const DOCUMENT_FRAGMENT_NODE : UInt = 11
+
+pub const DOCUMENT_NODE : UInt = 9
+
+pub const DOCUMENT_POSITION_CONTAINED_BY : UInt = 0x10
+
+pub const DOCUMENT_POSITION_CONTAINS : UInt = 0x08
+
+pub const DOCUMENT_POSITION_DISCONNECTED : UInt = 0x01
+
+pub const DOCUMENT_POSITION_FOLLOWING : UInt = 0x04
+
+pub const DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : UInt = 0x20
+
+pub const DOCUMENT_POSITION_PRECEDING : UInt = 0x02
+
+pub const DOCUMENT_TYPE_NODE : UInt = 10
+
+pub const DOM_DELTA_LINE : UInt = 0x01
+
+pub const DOM_DELTA_PAGE : UInt = 0x02
+
+pub const DOM_DELTA_PIXEL : UInt = 0x00
+
+pub const DOM_KEY_LOCATION_LEFT : UInt = 0x01
+
+pub const DOM_KEY_LOCATION_NUMPAD : UInt = 0x03
+
+pub const DOM_KEY_LOCATION_RIGHT : UInt = 0x02
+
+pub const DOM_KEY_LOCATION_STANDARD : UInt = 0x00
+
+pub const DONE : UInt = 2
+
+pub const ELEMENT_NODE : UInt = 1
+
+pub const EMPTY : UInt = 0
+
+pub const END_TO_END : UInt = 2
+
+pub const END_TO_START : UInt = 3
+
+pub const ENTITY_NODE : UInt = 6
+
+pub const ENTITY_REFERENCE_NODE : UInt = 5
+
+pub const LOADING : UInt = 1
+
+pub const NONE : UInt = 0
+
+pub const NOTATION_NODE : UInt = 12
+
+pub const PROCESSING_INSTRUCTION_NODE : UInt = 7
+
+pub const START_TO_END : UInt = 1
+
+pub const START_TO_START : UInt = 0
+
+pub const TEXT_NODE : UInt = 3
+
+pub fn[T : TJsValue] array_to_js(Array[T]) -> JsValue
+
+pub let document : Document
+
+pub let navigator : Navigator
+
+pub let window : Window
+
+// Errors
+
+// Types and methods
+#external
+pub type AbortController
+pub fn AbortController::new() -> Self
+pub fn AbortController::null() -> Self
+pub impl TAbortController for AbortController
+pub impl TJsValue for AbortController
+
+#external
+pub type AbortSignal
+pub fn AbortSignal::abort(reason? : JsValue) -> JsValue
+pub fn AbortSignal::any(Array[Self]) -> JsValue
+pub fn AbortSignal::timeout(UInt64) -> JsValue
+pub impl TAbortSignal for AbortSignal
+pub impl TEventTarget for AbortSignal
+pub impl TJsValue for AbortSignal
+
+#external
+pub type AddEventListenerOptions
+pub fn AddEventListenerOptions::empty() -> Self
+pub fn AddEventListenerOptions::new(passive? : Bool, once? : Bool, signal? : AbortSignal) -> Self
+pub impl TAddEventListenerOptionsArg for AddEventListenerOptions
+pub impl TJsValue for AddEventListenerOptions
+
+#external
+pub type ArrayBuffer
+pub impl TJsValue for ArrayBuffer
+pub impl TResult for ArrayBuffer
+
+#external
+pub type AssignedNodesOptions
+pub fn AssignedNodesOptions::empty() -> Self
+pub fn AssignedNodesOptions::new(flatten? : Bool) -> Self
+pub impl TJsValue for AssignedNodesOptions
+
+#external
+pub type Attr
+pub impl TAttr for Attr
+pub impl TEventTarget for Attr
+pub impl TJsValue for Attr
+pub impl TNode for Attr
+
+#external
+pub type BigInt64Array
+pub impl TJsValue for BigInt64Array
+
+#external
+pub type BigUint64Array
+pub impl TJsValue for BigUint64Array
+
+#external
+pub type Blob
+pub fn[T : TBlob] Blob::into(Self) -> T
+pub fn Blob::new(blob_parts? : Array[JsValue], options? : BlobPropertyBag) -> Self
+pub fn Blob::null() -> Self
+pub impl TBlob for Blob
+pub impl TImageBitmapSource for Blob
+pub impl TJsValue for Blob
+
+#external
+pub type BlobCallback
+pub fn BlobCallback::new((Blob) -> Unit) -> Self
+pub impl TJsValue for BlobCallback
+
+#external
+pub type BlobPropertyBag
+pub fn BlobPropertyBag::empty() -> Self
+pub fn BlobPropertyBag::new(type_? : String, endings? : EndingType) -> Self
+pub impl TJsValue for BlobPropertyBag
+
+#external
+pub type BoxQuadOptions
+pub fn BoxQuadOptions::empty() -> Self
+pub fn BoxQuadOptions::new(box? : CSSBoxType, relative_to? : JsValue) -> Self
+pub impl TJsValue for BoxQuadOptions
+
+#external
+pub type CDATASection
+pub impl TCDATASection for CDATASection
+pub impl TCharacterData for CDATASection
+pub impl TEventTarget for CDATASection
+pub impl TJsValue for CDATASection
+pub impl TNode for CDATASection
+pub impl TText for CDATASection
+
+pub(all) enum CSSBoxType {
+  Margin
+  Border
+  Padding
+  Content
+}
+pub fn CSSBoxType::from(String) -> Self?
+pub impl TJsValue for CSSBoxType
+pub impl Eq for CSSBoxType
+pub impl Show for CSSBoxType
+
+#external
+pub type CSSStyleSheetInit
+pub fn CSSStyleSheetInit::empty() -> Self
+pub fn CSSStyleSheetInit::new(base_url? : String, media? : JsValue, disabled? : Bool) -> Self
+pub impl TJsValue for CSSStyleSheetInit
+
+pub(all) enum CanPlayTypeResult {
+  Empty
+  Maybe
+  Probably
+}
+pub fn CanPlayTypeResult::from(String) -> Self?
+pub impl TJsValue for CanPlayTypeResult
+pub impl Eq for CanPlayTypeResult
+pub impl Show for CanPlayTypeResult
+
+#external
+pub type Canvas
+pub fn[T : TCanvas] Canvas::into(Self) -> T
+
+pub(all) enum CanvasColorType {
+  Unorm8
+  Float16
+}
+pub fn CanvasColorType::from(String) -> Self?
+pub impl TJsValue for CanvasColorType
+pub impl Eq for CanvasColorType
+pub impl Show for CanvasColorType
+
+pub(all) enum CanvasDirection {
+  Ltr
+  Rtl
+  Inherit
+}
+pub fn CanvasDirection::from(String) -> Self?
+pub impl TJsValue for CanvasDirection
+pub impl Eq for CanvasDirection
+pub impl Show for CanvasDirection
+
+pub(all) enum CanvasFillRule {
+  Nonzero
+  Evenodd
+}
+pub fn CanvasFillRule::from(String) -> Self?
+pub impl TJsValue for CanvasFillRule
+pub impl Eq for CanvasFillRule
+pub impl Show for CanvasFillRule
+
+pub(all) enum CanvasFontKerning {
+  Auto
+  Normal
+  None
+}
+pub fn CanvasFontKerning::from(String) -> Self?
+pub impl TJsValue for CanvasFontKerning
+pub impl Eq for CanvasFontKerning
+pub impl Show for CanvasFontKerning
+
+pub(all) enum CanvasFontStretch {
+  UltraCondensed
+  ExtraCondensed
+  Condensed
+  SemiCondensed
+  Normal
+  SemiExpanded
+  Expanded
+  ExtraExpanded
+  UltraExpanded
+}
+pub fn CanvasFontStretch::from(String) -> Self?
+pub impl TJsValue for CanvasFontStretch
+pub impl Eq for CanvasFontStretch
+pub impl Show for CanvasFontStretch
+
+pub(all) enum CanvasFontVariantCaps {
+  Normal
+  SmallCaps
+  AllSmallCaps
+  PetiteCaps
+  AllPetiteCaps
+  Unicase
+  TitlingCaps
+}
+pub fn CanvasFontVariantCaps::from(String) -> Self?
+pub impl TJsValue for CanvasFontVariantCaps
+pub impl Eq for CanvasFontVariantCaps
+pub impl Show for CanvasFontVariantCaps
+
+#external
+pub type CanvasGradient
+pub impl TCanvasGradient for CanvasGradient
+pub impl TFillStyle for CanvasGradient
+pub impl TJsValue for CanvasGradient
+pub impl TStrokeStyle for CanvasGradient
+
+pub(all) enum CanvasLineCap {
+  Butt
+  Round
+  Square
+}
+pub fn CanvasLineCap::from(String) -> Self?
+pub impl TJsValue for CanvasLineCap
+pub impl Eq for CanvasLineCap
+pub impl Show for CanvasLineCap
+
+pub(all) enum CanvasLineJoin {
+  Round
+  Bevel
+  Miter
+}
+pub fn CanvasLineJoin::from(String) -> Self?
+pub impl TJsValue for CanvasLineJoin
+pub impl Eq for CanvasLineJoin
+pub impl Show for CanvasLineJoin
+
+#external
+pub type CanvasPattern
+pub impl TCanvasPattern for CanvasPattern
+pub impl TFillStyle for CanvasPattern
+pub impl TJsValue for CanvasPattern
+pub impl TStrokeStyle for CanvasPattern
+
+#external
+pub type CanvasRenderingContext2D
+pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
+pub impl TJsValue for CanvasRenderingContext2D
+pub impl TRenderingContext for CanvasRenderingContext2D
+
+#external
+pub type CanvasRenderingContext2DSettings
+pub fn CanvasRenderingContext2DSettings::empty() -> Self
+pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : PredefinedColorSpace, color_type? : CanvasColorType, will_read_frequently? : Bool) -> Self
+pub impl TJsValue for CanvasRenderingContext2DSettings
+
+pub(all) enum CanvasTextAlign {
+  Start
+  End
+  Left
+  Right
+  Center
+}
+pub fn CanvasTextAlign::from(String) -> Self?
+pub impl TJsValue for CanvasTextAlign
+pub impl Eq for CanvasTextAlign
+pub impl Show for CanvasTextAlign
+
+pub(all) enum CanvasTextBaseline {
+  Top
+  Hanging
+  Middle
+  Alphabetic
+  Ideographic
+  Bottom
+}
+pub fn CanvasTextBaseline::from(String) -> Self?
+pub impl TJsValue for CanvasTextBaseline
+pub impl Eq for CanvasTextBaseline
+pub impl Show for CanvasTextBaseline
+
+pub(all) enum CanvasTextRendering {
+  Auto
+  Optimizespeed
+  Optimizelegibility
+  Geometricprecision
+}
+pub fn CanvasTextRendering::from(String) -> Self?
+pub impl TJsValue for CanvasTextRendering
+pub impl Eq for CanvasTextRendering
+pub impl Show for CanvasTextRendering
+
+#external
+pub type CaretPositionFromPointOptions
+pub fn CaretPositionFromPointOptions::empty() -> Self
+pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[ShadowRoot]) -> Self
+pub impl TJsValue for CaretPositionFromPointOptions
+
+#external
+pub type CharacterData
+pub fn[T : TCharacterData] CharacterData::into(Self) -> T
+pub impl TCharacterData for CharacterData
+pub impl TEventTarget for CharacterData
+pub impl TJsValue for CharacterData
+pub impl TNode for CharacterData
+
+#external
+pub type CheckVisibilityOptions
+pub fn CheckVisibilityOptions::empty() -> Self
+pub fn CheckVisibilityOptions::new(check_opacity? : Bool, check_visibility_css? : Bool, content_visibility_auto? : Bool, opacity_property? : Bool, visibility_property? : Bool) -> Self
+pub impl TJsValue for CheckVisibilityOptions
+
+#external
+pub type CloseWatcherOptions
+pub fn CloseWatcherOptions::empty() -> Self
+pub fn CloseWatcherOptions::new(signal? : AbortSignal) -> Self
+pub impl TJsValue for CloseWatcherOptions
+
+pub(all) enum ColorSpaceConversion {
+  None
+  Default
+}
+pub fn ColorSpaceConversion::from(String) -> Self?
+pub impl TJsValue for ColorSpaceConversion
+pub impl Eq for ColorSpaceConversion
+pub impl Show for ColorSpaceConversion
+
+#external
+pub type CommandEventInit
+pub fn CommandEventInit::empty() -> Self
+pub fn CommandEventInit::new(source? : Element, command? : String) -> Self
+pub impl TJsValue for CommandEventInit
+
+#external
+pub type Comment
+pub fn Comment::new(data? : String) -> Self
+pub fn Comment::null() -> Self
+pub impl TCharacterData for Comment
+pub impl TComment for Comment
+pub impl TEventTarget for Comment
+pub impl TJsValue for Comment
+pub impl TNode for Comment
+
+#external
+pub type CompositionEventInit
+pub fn CompositionEventInit::empty() -> Self
+pub fn CompositionEventInit::new(data? : String) -> Self
+pub impl TJsValue for CompositionEventInit
+
+#external
+pub type ConvertCoordinateOptions
+pub fn ConvertCoordinateOptions::empty() -> Self
+pub fn ConvertCoordinateOptions::new(from_box? : CSSBoxType, to_box? : CSSBoxType) -> Self
+pub impl TJsValue for ConvertCoordinateOptions
+
+#external
+pub type CustomElementConstructor
+pub fn CustomElementConstructor::new(() -> HTMLElement) -> Self
+pub impl TJsValue for CustomElementConstructor
+
+#external
+pub type CustomEvent
+pub fn CustomEvent::new(String, event_init_dict? : CustomEventInit) -> Self
+pub fn CustomEvent::null() -> Self
+pub impl TCustomEvent for CustomEvent
+pub impl TEvent for CustomEvent
+pub impl TJsValue for CustomEvent
+
+#external
+pub type CustomEventInit
+pub fn CustomEventInit::empty() -> Self
+pub fn CustomEventInit::new(detail? : JsValue) -> Self
+pub impl TJsValue for CustomEventInit
+
+#external
+pub type DOMMatrix
+pub fn DOMMatrix::from_float32_array(Float32Array) -> JsValue
+pub fn DOMMatrix::from_float64_array(Float64Array) -> JsValue
+pub fn DOMMatrix::from_matrix(other? : DOMMatrixInit) -> JsValue
+pub fn DOMMatrix::new(init_? : JsValue) -> Self
+pub fn DOMMatrix::null() -> Self
+pub impl TDOMMatrix for DOMMatrix
+pub impl TDOMMatrixReadOnly for DOMMatrix
+pub impl TJsValue for DOMMatrix
+
+#external
+pub type DOMMatrix2DInit
+pub fn DOMMatrix2DInit::empty() -> Self
+pub fn DOMMatrix2DInit::new(a? : Double, b? : Double, c? : Double, d? : Double, e? : Double, f? : Double, m11? : Double, m12? : Double, m21? : Double, m22? : Double, m41? : Double, m42? : Double) -> Self
+pub impl TJsValue for DOMMatrix2DInit
+
+#external
+pub type DOMMatrixInit
+pub fn DOMMatrixInit::empty() -> Self
+pub fn DOMMatrixInit::new(m13? : Double, m14? : Double, m23? : Double, m24? : Double, m31? : Double, m32? : Double, m33? : Double, m34? : Double, m43? : Double, m44? : Double, is2_d? : Bool) -> Self
+pub impl TJsValue for DOMMatrixInit
+
+#external
+pub type DOMMatrixReadOnly
+pub fn DOMMatrixReadOnly::from_float32_array(Float32Array) -> JsValue
+pub fn DOMMatrixReadOnly::from_float64_array(Float64Array) -> JsValue
+pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit) -> JsValue
+pub fn[T : TDOMMatrixReadOnly] DOMMatrixReadOnly::into(Self) -> T
+pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> Self
+pub fn DOMMatrixReadOnly::null() -> Self
+pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
+pub impl TJsValue for DOMMatrixReadOnly
+
+pub(all) enum DOMParserSupportedType {
+  TextHtml
+  TextXml
+  ApplicationXml
+  ApplicationXhtmlXml
+  ImageSvgXml
+}
+pub fn DOMParserSupportedType::from(String) -> Self?
+pub impl TJsValue for DOMParserSupportedType
+pub impl Eq for DOMParserSupportedType
+pub impl Show for DOMParserSupportedType
+
+#external
+pub type DOMPoint
+pub fn DOMPoint::from_point(other? : DOMPointInit) -> JsValue
+pub fn DOMPoint::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub fn DOMPoint::null() -> Self
+pub impl TDOMPoint for DOMPoint
+pub impl TDOMPointReadOnly for DOMPoint
+pub impl TJsValue for DOMPoint
+
+#external
+pub type DOMPointInit
+pub fn DOMPointInit::empty() -> Self
+pub fn DOMPointInit::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub impl TJsValue for DOMPointInit
+pub impl TRoundRectRadiiArg for DOMPointInit
+
+#external
+pub type DOMPointReadOnly
+pub fn DOMPointReadOnly::from_point(other? : DOMPointInit) -> JsValue
+pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(Self) -> T
+pub fn DOMPointReadOnly::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub fn DOMPointReadOnly::null() -> Self
+pub impl TDOMPointReadOnly for DOMPointReadOnly
+pub impl TJsValue for DOMPointReadOnly
+
+#external
+pub type DOMQuadInit
+pub fn DOMQuadInit::empty() -> Self
+pub fn DOMQuadInit::new(p1? : DOMPointInit, p2? : DOMPointInit, p3? : DOMPointInit, p4? : DOMPointInit) -> Self
+pub impl TJsValue for DOMQuadInit
+
+#external
+pub type DOMRect
+pub fn DOMRect::from_rect(other? : DOMRectInit) -> JsValue
+pub fn DOMRect::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub fn DOMRect::null() -> Self
+pub impl TDOMRect for DOMRect
+pub impl TDOMRectReadOnly for DOMRect
+pub impl TJsValue for DOMRect
+
+#external
+pub type DOMRectInit
+pub fn DOMRectInit::empty() -> Self
+pub fn DOMRectInit::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub impl TJsValue for DOMRectInit
+
+#external
+pub type DOMRectReadOnly
+pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit) -> JsValue
+pub fn[T : TDOMRectReadOnly] DOMRectReadOnly::into(Self) -> T
+pub fn DOMRectReadOnly::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub fn DOMRectReadOnly::null() -> Self
+pub impl TDOMRectReadOnly for DOMRectReadOnly
+pub impl TJsValue for DOMRectReadOnly
+
+#external
+pub type DOMTokenList
+pub impl TDOMTokenList for DOMTokenList
+pub impl TJsValue for DOMTokenList
+
+#external
+pub type DataView
+pub impl TJsValue for DataView
+
+#external
+pub type Document
+pub fn Document::new() -> Self
+pub fn Document::null() -> Self
+pub fn Document::parse_html_unsafe(JsValue) -> JsValue
+pub impl TDocument for Document
+pub impl TEventTarget for Document
+pub impl TJsValue for Document
+pub impl TNode for Document
+
+#external
+pub type DocumentFragment
+pub fn[T : TDocumentFragment] DocumentFragment::into(Self) -> T
+pub fn DocumentFragment::new() -> Self
+pub fn DocumentFragment::null() -> Self
+pub impl TDocumentFragment for DocumentFragment
+pub impl TEventTarget for DocumentFragment
+pub impl TJsValue for DocumentFragment
+pub impl TNode for DocumentFragment
+
+pub(all) enum DocumentReadyState {
+  Loading
+  Interactive
+  Complete
+}
+pub fn DocumentReadyState::from(String) -> Self?
+pub impl TJsValue for DocumentReadyState
+pub impl Eq for DocumentReadyState
+pub impl Show for DocumentReadyState
+
+#external
+pub type DocumentType
+pub impl TDocumentType for DocumentType
+pub impl TEventTarget for DocumentType
+pub impl TJsValue for DocumentType
+pub impl TNode for DocumentType
+
+pub(all) enum DocumentVisibilityState {
+  Visible
+  Hidden
+}
+pub fn DocumentVisibilityState::from(String) -> Self?
+pub impl TJsValue for DocumentVisibilityState
+pub impl Eq for DocumentVisibilityState
+pub impl Show for DocumentVisibilityState
+
+#external
+pub type DragEventInit
+pub fn DragEventInit::empty() -> Self
+pub fn DragEventInit::new(data_transfer? : JsValue) -> Self
+pub impl TJsValue for DragEventInit
+
+#external
+pub type Element
+pub fn[T : TElement] Element::into(Self) -> T
+pub impl TAssignNodesArg for Element
+pub impl TElement for Element
+pub impl TEventTarget for Element
+pub impl TJsValue for Element
+pub impl TNode for Element
+
+#external
+pub type ElementCreationOptions
+pub fn ElementCreationOptions::empty() -> Self
+pub fn ElementCreationOptions::new(custom_element_registry? : JsValue, is_? : String) -> Self
+pub impl TCreateElementNSOptionsArg for ElementCreationOptions
+pub impl TCreateElementOptionsArg for ElementCreationOptions
+pub impl TJsValue for ElementCreationOptions
+
+#external
+pub type ElementDefinitionOptions
+pub fn ElementDefinitionOptions::empty() -> Self
+pub fn ElementDefinitionOptions::new(extends? : String) -> Self
+pub impl TJsValue for ElementDefinitionOptions
+
+pub(all) enum EndingType {
+  Transparent
+  Native
+}
+pub fn EndingType::from(String) -> Self?
+pub impl TJsValue for EndingType
+pub impl Eq for EndingType
+pub impl Show for EndingType
+
+#external
+pub type ErrorEventInit
+pub fn ErrorEventInit::empty() -> Self
+pub fn ErrorEventInit::new(message? : String, filename? : String, lineno? : UInt, colno? : UInt, error? : JsValue) -> Self
+pub impl TJsValue for ErrorEventInit
+
+#external
+pub type Event
+pub fn[T : TEvent] Event::into(Self) -> T
+pub fn Event::new(String, event_init_dict? : EventInit) -> Self
+pub fn Event::null() -> Self
+pub impl TEvent for Event
+pub impl TJsValue for Event
+
+#external
+pub type EventHandler
+pub fn EventHandler::new((Event) -> JsValue) -> Self
+pub impl TJsValue for EventHandler
+
+#external
+pub type EventHandlerNonNull
+pub fn EventHandlerNonNull::new((Event) -> JsValue) -> Self
+pub impl TJsValue for EventHandlerNonNull
+
+#external
+pub type EventInit
+pub fn EventInit::empty() -> Self
+pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool) -> Self
+pub impl TJsValue for EventInit
+
+#external
+pub type EventListener
+#as_free_fn(event_listener)
+pub fn EventListener::new((Event) -> Unit) -> Self
+pub fn EventListener::null() -> Self
+pub impl TJsValue for EventListener
+
+#external
+pub type EventListenerOptions
+pub fn EventListenerOptions::empty() -> Self
+pub fn EventListenerOptions::new(capture? : Bool) -> Self
+pub impl TJsValue for EventListenerOptions
+pub impl TRemoveEventListenerOptionsArg for EventListenerOptions
+
+#external
+pub type EventModifierInit
+pub fn EventModifierInit::empty() -> Self
+pub fn EventModifierInit::new(ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool) -> Self
+pub impl TJsValue for EventModifierInit
+
+#external
+pub type EventSourceInit
+pub fn EventSourceInit::empty() -> Self
+pub fn EventSourceInit::new(with_credentials? : Bool) -> Self
+pub impl TJsValue for EventSourceInit
+
+#external
+pub type EventTarget
+pub fn[T : TEventTarget] EventTarget::into(Self) -> T
+pub fn EventTarget::new() -> Self
+pub fn EventTarget::null() -> Self
+pub impl TEventTarget for EventTarget
+pub impl TJsValue for EventTarget
+
+#external
+pub type File
+pub fn File::new(Array[JsValue], String, options? : FilePropertyBag) -> Self
+pub fn File::null() -> Self
+pub impl TBlob for File
+pub impl TFile for File
+pub impl TJsValue for File
+
+#external
+pub type FileList
+pub impl TFileList for FileList
+pub impl TJsValue for FileList
+
+#external
+pub type FilePropertyBag
+pub fn FilePropertyBag::empty() -> Self
+pub fn FilePropertyBag::new(last_modified? : Int64) -> Self
+pub impl TJsValue for FilePropertyBag
+
+#external
+pub type FileReader
+pub fn FileReader::new() -> Self
+pub fn FileReader::null() -> Self
+pub impl TEventTarget for FileReader
+pub impl TFileReader for FileReader
+pub impl TJsValue for FileReader
+
+#external
+pub type FileReaderSync
+pub fn FileReaderSync::new() -> Self
+pub fn FileReaderSync::null() -> Self
+pub impl TFileReaderSync for FileReaderSync
+pub impl TJsValue for FileReaderSync
+
+#external
+pub type FillStyle
+pub fn[T : TFillStyle] FillStyle::into(Self) -> T
+
+#external
+pub type Float32Array
+pub impl TJsValue for Float32Array
+
+#external
+pub type Float64Array
+pub impl TJsValue for Float64Array
+
+#external
+pub type FocusEvent
+pub fn FocusEvent::new(String, event_init_dict? : FocusEventInit) -> Self
+pub fn FocusEvent::null() -> Self
+pub impl TEvent for FocusEvent
+pub impl TFocusEvent for FocusEvent
+pub impl TJsValue for FocusEvent
+pub impl TUIEvent for FocusEvent
+
+#external
+pub type FocusEventInit
+pub fn FocusEventInit::empty() -> Self
+pub fn FocusEventInit::new(related_target? : EventTarget) -> Self
+pub impl TJsValue for FocusEventInit
+
+#external
+pub type FocusOptions
+pub fn FocusOptions::empty() -> Self
+pub fn FocusOptions::new(prevent_scroll? : Bool, focus_visible? : Bool) -> Self
+pub impl TJsValue for FocusOptions
+
+#external
+pub type FormDataEventInit
+pub fn FormDataEventInit::empty() -> Self
+pub fn FormDataEventInit::new(JsValue) -> Self
+pub impl TJsValue for FormDataEventInit
+
+#external
+pub type FrameRequestCallback
+pub fn FrameRequestCallback::new((Double) -> Unit) -> Self
+pub impl TJsValue for FrameRequestCallback
+
+#external
+pub type GetHTMLOptions
+pub fn GetHTMLOptions::empty() -> Self
+pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[ShadowRoot]) -> Self
+pub impl TJsValue for GetHTMLOptions
+
+#external
+pub type GetRootNodeOptions
+pub fn GetRootNodeOptions::empty() -> Self
+pub fn GetRootNodeOptions::new(composed? : Bool) -> Self
+pub impl TJsValue for GetRootNodeOptions
+
+#external
+pub type HTMLAnchorElement
+pub impl TElement for HTMLAnchorElement
+pub impl TEventTarget for HTMLAnchorElement
+pub impl THTMLAnchorElement for HTMLAnchorElement
+pub impl THTMLElement for HTMLAnchorElement
+pub impl TJsValue for HTMLAnchorElement
+pub impl TNode for HTMLAnchorElement
+
+#external
+pub type HTMLAudioElement
+pub impl THTMLAudioElement for HTMLAudioElement
+pub impl TJsValue for HTMLAudioElement
+
+#external
+pub type HTMLBodyElement
+pub impl TElement for HTMLBodyElement
+pub impl TEventTarget for HTMLBodyElement
+pub impl THTMLBodyElement for HTMLBodyElement
+pub impl THTMLElement for HTMLBodyElement
+pub impl TJsValue for HTMLBodyElement
+pub impl TNode for HTMLBodyElement
+
+#external
+pub type HTMLButtonElement
+pub impl TElement for HTMLButtonElement
+pub impl TEventTarget for HTMLButtonElement
+pub impl THTMLButtonElement for HTMLButtonElement
+pub impl THTMLElement for HTMLButtonElement
+pub impl TJsValue for HTMLButtonElement
+pub impl TNode for HTMLButtonElement
+
+#external
+pub type HTMLCanvasElement
+pub impl TCanvas for HTMLCanvasElement
+pub impl TCanvasImageSource for HTMLCanvasElement
+pub impl TElement for HTMLCanvasElement
+pub impl TEventTarget for HTMLCanvasElement
+pub impl THTMLCanvasElement for HTMLCanvasElement
+pub impl THTMLElement for HTMLCanvasElement
+pub impl TImageBitmapSource for HTMLCanvasElement
+pub impl TJsValue for HTMLCanvasElement
+pub impl TNode for HTMLCanvasElement
+
+#external
+pub type HTMLCollection
+pub impl THTMLCollection for HTMLCollection
+pub impl TJsValue for HTMLCollection
+
+#external
+pub type HTMLDivElement
+pub impl TElement for HTMLDivElement
+pub impl TEventTarget for HTMLDivElement
+pub impl THTMLDivElement for HTMLDivElement
+pub impl THTMLElement for HTMLDivElement
+pub impl TJsValue for HTMLDivElement
+pub impl TNode for HTMLDivElement
+
+#external
+pub type HTMLElement
+pub fn[T : THTMLElement] HTMLElement::into(Self) -> T
+pub impl TElement for HTMLElement
+pub impl TEventTarget for HTMLElement
+pub impl THTMLElement for HTMLElement
+pub impl TJsValue for HTMLElement
+pub impl TNode for HTMLElement
+
+#external
+pub type HTMLFormElement
+pub impl TElement for HTMLFormElement
+pub impl TEventTarget for HTMLFormElement
+pub impl THTMLElement for HTMLFormElement
+pub impl THTMLFormElement for HTMLFormElement
+pub impl TJsValue for HTMLFormElement
+pub impl TNode for HTMLFormElement
+
+#external
+pub type HTMLHeadElement
+pub impl TElement for HTMLHeadElement
+pub impl TEventTarget for HTMLHeadElement
+pub impl THTMLElement for HTMLHeadElement
+pub impl THTMLHeadElement for HTMLHeadElement
+pub impl TJsValue for HTMLHeadElement
+pub impl TNode for HTMLHeadElement
+
+#external
+pub type HTMLHtmlElement
+pub impl TElement for HTMLHtmlElement
+pub impl TEventTarget for HTMLHtmlElement
+pub impl THTMLElement for HTMLHtmlElement
+pub impl THTMLHtmlElement for HTMLHtmlElement
+pub impl TJsValue for HTMLHtmlElement
+pub impl TNode for HTMLHtmlElement
+
+#external
+pub type HTMLImageElement
+pub impl TCanvasImageSource for HTMLImageElement
+pub impl TElement for HTMLImageElement
+pub impl TEventTarget for HTMLImageElement
+pub impl THTMLElement for HTMLImageElement
+pub impl THTMLImageElement for HTMLImageElement
+pub impl THTMLOrSVGImageElement for HTMLImageElement
+pub impl TImageBitmapSource for HTMLImageElement
+pub impl TJsValue for HTMLImageElement
+pub impl TNode for HTMLImageElement
+
+#external
+pub type HTMLInputElement
+pub impl TElement for HTMLInputElement
+pub impl TEventTarget for HTMLInputElement
+pub impl THTMLElement for HTMLInputElement
+pub impl THTMLInputElement for HTMLInputElement
+pub impl TJsValue for HTMLInputElement
+pub impl TNode for HTMLInputElement
+
+#external
+pub type HTMLLinkElement
+pub impl TElement for HTMLLinkElement
+pub impl TEventTarget for HTMLLinkElement
+pub impl THTMLElement for HTMLLinkElement
+pub impl THTMLLinkElement for HTMLLinkElement
+pub impl TJsValue for HTMLLinkElement
+pub impl TNode for HTMLLinkElement
+
+#external
+pub type HTMLParagraphElement
+pub impl TElement for HTMLParagraphElement
+pub impl TEventTarget for HTMLParagraphElement
+pub impl THTMLElement for HTMLParagraphElement
+pub impl THTMLParagraphElement for HTMLParagraphElement
+pub impl TJsValue for HTMLParagraphElement
+pub impl TNode for HTMLParagraphElement
+
+#external
+pub type HTMLScriptElement
+pub fn HTMLScriptElement::supports(String) -> JsValue
+pub impl TElement for HTMLScriptElement
+pub impl TEventTarget for HTMLScriptElement
+pub impl THTMLElement for HTMLScriptElement
+pub impl THTMLScriptElement for HTMLScriptElement
+pub impl TJsValue for HTMLScriptElement
+pub impl TNode for HTMLScriptElement
+
+#external
+pub type HTMLSlotElement
+pub impl TElement for HTMLSlotElement
+pub impl TEventTarget for HTMLSlotElement
+pub impl THTMLElement for HTMLSlotElement
+pub impl THTMLSlotElement for HTMLSlotElement
+pub impl TJsValue for HTMLSlotElement
+pub impl TNode for HTMLSlotElement
+
+#external
+pub type HTMLSpanElement
+pub impl TElement for HTMLSpanElement
+pub impl TEventTarget for HTMLSpanElement
+pub impl THTMLElement for HTMLSpanElement
+pub impl THTMLSpanElement for HTMLSpanElement
+pub impl TJsValue for HTMLSpanElement
+pub impl TNode for HTMLSpanElement
+
+#external
+pub type HTMLStyleElement
+pub impl TElement for HTMLStyleElement
+pub impl TEventTarget for HTMLStyleElement
+pub impl THTMLElement for HTMLStyleElement
+pub impl THTMLStyleElement for HTMLStyleElement
+pub impl TJsValue for HTMLStyleElement
+pub impl TNode for HTMLStyleElement
+
+#external
+pub type HTMLVideoElement
+pub impl TCanvasImageSource for HTMLVideoElement
+pub impl THTMLVideoElement for HTMLVideoElement
+pub impl TImageBitmapSource for HTMLVideoElement
+pub impl TJsValue for HTMLVideoElement
+
+#external
+pub type HashChangeEventInit
+pub fn HashChangeEventInit::empty() -> Self
+pub fn HashChangeEventInit::new(old_url? : String, new_url? : String) -> Self
+pub impl TJsValue for HashChangeEventInit
+
+#external
+pub type Hidden
+pub fn[T : THidden] Hidden::into(Self) -> T
+
+#external
+pub type History
+pub impl THistory for History
+pub impl TJsValue for History
+
+#external
+pub type ImageBitmap
+pub impl TCanvasImageSource for ImageBitmap
+pub impl TImageBitmap for ImageBitmap
+pub impl TImageBitmapSource for ImageBitmap
+pub impl TJsValue for ImageBitmap
+
+#external
+pub type ImageBitmapOptions
+pub fn ImageBitmapOptions::empty() -> Self
+pub fn ImageBitmapOptions::new(image_orientation? : ImageOrientation, premultiply_alpha? : PremultiplyAlpha, color_space_conversion? : ColorSpaceConversion, resize_width? : UInt, resize_height? : UInt, resize_quality? : ResizeQuality) -> Self
+pub impl TJsValue for ImageBitmapOptions
+
+#external
+pub type ImageBitmapRenderingContext
+pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
+pub impl TJsValue for ImageBitmapRenderingContext
+pub impl TRenderingContext for ImageBitmapRenderingContext
+
+#external
+pub type ImageBitmapRenderingContextSettings
+pub fn ImageBitmapRenderingContextSettings::empty() -> Self
+pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
+pub impl TJsValue for ImageBitmapRenderingContextSettings
+
+#external
+pub type ImageData
+pub fn ImageData::new(UInt, UInt, settings? : ImageDataSettings) -> Self
+pub fn ImageData::new2(JsValue, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
+pub fn ImageData::null() -> Self
+pub impl TImageBitmapSource for ImageData
+pub impl TImageData for ImageData
+pub impl TJsValue for ImageData
+
+pub(all) enum ImageDataPixelFormat {
+  RgbaUnorm8
+  RgbaFloat16
+}
+pub fn ImageDataPixelFormat::from(String) -> Self?
+pub impl TJsValue for ImageDataPixelFormat
+pub impl Eq for ImageDataPixelFormat
+pub impl Show for ImageDataPixelFormat
+
+#external
+pub type ImageDataSettings
+pub fn ImageDataSettings::empty() -> Self
+pub fn ImageDataSettings::new(color_space? : PredefinedColorSpace, pixel_format? : ImageDataPixelFormat) -> Self
+pub impl TJsValue for ImageDataSettings
+
+#external
+pub type ImageEncodeOptions
+pub fn ImageEncodeOptions::empty() -> Self
+pub fn ImageEncodeOptions::new(type_? : String, quality? : Double) -> Self
+pub impl TJsValue for ImageEncodeOptions
+
+pub(all) enum ImageOrientation {
+  FromImage
+  Flipy
+}
+pub fn ImageOrientation::from(String) -> Self?
+pub impl TJsValue for ImageOrientation
+pub impl Eq for ImageOrientation
+pub impl Show for ImageOrientation
+
+pub(all) enum ImageSmoothingQuality {
+  Low
+  Medium
+  High
+}
+pub fn ImageSmoothingQuality::from(String) -> Self?
+pub impl TJsValue for ImageSmoothingQuality
+pub impl Eq for ImageSmoothingQuality
+pub impl Show for ImageSmoothingQuality
+
+#external
+pub type ImportNodeOptions
+pub fn ImportNodeOptions::empty() -> Self
+pub fn ImportNodeOptions::new(custom_element_registry? : JsValue, self_only? : Bool) -> Self
+pub impl TImportNodeOptionsArg for ImportNodeOptions
+pub impl TJsValue for ImportNodeOptions
+
+#external
+pub type InnerHTML
+pub fn[T : TInnerHTML] InnerHTML::into(Self) -> T
+
+#external
+pub type InputEvent
+pub fn InputEvent::new(String, event_init_dict? : InputEventInit) -> Self
+pub fn InputEvent::null() -> Self
+pub impl TEvent for InputEvent
+pub impl TInputEvent for InputEvent
+pub impl TJsValue for InputEvent
+pub impl TUIEvent for InputEvent
+
+#external
+pub type InputEventInit
+pub fn InputEventInit::empty() -> Self
+pub fn InputEventInit::new(data? : String, is_composing? : Bool, input_type? : String) -> Self
+pub impl TJsValue for InputEventInit
+
+#external
+pub type Int16Array
+pub impl TJsValue for Int16Array
+
+#external
+pub type Int32Array
+pub impl TJsValue for Int32Array
+
+#external
+pub type Int8Array
+pub impl TJsValue for Int8Array
+
+#external
+pub type JsArray
+pub fn JsArray::empty() -> Self
+pub fn JsArray::push(Self, JsValue) -> Unit
+pub impl TJsValue for JsArray
+
+#external
+pub type JsPromise[T]
+pub fn JsPromise::wait(Self[JsValue]) -> JsValue
+
+#external
+pub type JsValue
+pub fn JsValue::is_null(Self) -> Bool
+pub fn[T] JsValue::null() -> T
+pub fn JsValue::undefined() -> Self
+pub impl TCreateContextualFragmentStringArg for JsValue
+pub impl TInsertAdjacentHTMLStringArg for JsValue
+pub impl TJsValue for JsValue
+pub impl TParseHTMLUnsafeHtmlArg for JsValue
+pub impl TSetAttributeNSValueArg for JsValue
+pub impl TSetAttributeValueArg for JsValue
+pub impl TSetHTMLUnsafeHtmlArg for JsValue
+pub impl TWriteTextArg for JsValue
+pub impl TWritelnTextArg for JsValue
+
+#external
+pub type KeyboardEvent
+pub fn KeyboardEvent::new(String, event_init_dict? : KeyboardEventInit) -> Self
+pub fn KeyboardEvent::null() -> Self
+pub impl TEvent for KeyboardEvent
+pub impl TJsValue for KeyboardEvent
+pub impl TKeyboardEvent for KeyboardEvent
+pub impl TUIEvent for KeyboardEvent
+
+#external
+pub type KeyboardEventInit
+pub fn KeyboardEventInit::empty() -> Self
+pub fn KeyboardEventInit::new(key? : String, code? : String, location? : UInt, repeat? : Bool, is_composing? : Bool, char_code? : UInt, key_code? : UInt) -> Self
+pub impl TJsValue for KeyboardEventInit
+
+#external
+pub type Location
+pub impl TJsValue for Location
+pub impl TLocation for Location
+
+#external
+pub type MediaQueryListEventInit
+pub fn MediaQueryListEventInit::empty() -> Self
+pub fn MediaQueryListEventInit::new(media? : JsValue, matches? : Bool) -> Self
+pub impl TJsValue for MediaQueryListEventInit
+
+#external
+pub type MessageEventInit
+pub fn MessageEventInit::empty() -> Self
+pub fn MessageEventInit::new(data? : JsValue, origin? : String, last_event_id? : String, source? : JsValue, ports? : Array[JsValue]) -> Self
+pub impl TJsValue for MessageEventInit
+
+#external
+pub type MouseEvent
+pub fn[T : TMouseEvent] MouseEvent::into(Self) -> T
+pub fn MouseEvent::new(String, event_init_dict? : MouseEventInit) -> Self
+pub fn MouseEvent::null() -> Self
+pub impl TEvent for MouseEvent
+pub impl TJsValue for MouseEvent
+pub impl TMouseEvent for MouseEvent
+pub impl TUIEvent for MouseEvent
+
+#external
+pub type MouseEventInit
+pub fn MouseEventInit::empty() -> Self
+pub fn MouseEventInit::new(screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : EventTarget) -> Self
+pub impl TJsValue for MouseEventInit
+
+#external
+pub type MutationObserver
+pub fn MutationObserver::new(JsValue) -> Self
+pub fn MutationObserver::null() -> Self
+pub impl TJsValue for MutationObserver
+pub impl TMutationObserver for MutationObserver
+
+#external
+pub type MutationObserverInit
+pub fn MutationObserverInit::empty() -> Self
+pub fn MutationObserverInit::new(child_list? : Bool, attributes? : Bool, character_data? : Bool, subtree? : Bool, attribute_old_value? : Bool, character_data_old_value? : Bool, attribute_filter? : Array[String]) -> Self
+pub impl TJsValue for MutationObserverInit
+
+#external
+pub type MutationRecord
+pub impl TJsValue for MutationRecord
+pub impl TMutationRecord for MutationRecord
+
+#external
+pub type NamedNodeMap
+pub impl TJsValue for NamedNodeMap
+pub impl TNamedNodeMap for NamedNodeMap
+
+pub(all) enum NavigationFocusReset {
+  AfterTransition
+  Manual
+}
+pub fn NavigationFocusReset::from(String) -> Self?
+pub impl TJsValue for NavigationFocusReset
+pub impl Eq for NavigationFocusReset
+pub impl Show for NavigationFocusReset
+
+pub(all) enum NavigationHistoryBehavior {
+  Auto
+  Push
+  Replace
+}
+pub fn NavigationHistoryBehavior::from(String) -> Self?
+pub impl TJsValue for NavigationHistoryBehavior
+pub impl Eq for NavigationHistoryBehavior
+pub impl Show for NavigationHistoryBehavior
+
+pub(all) enum NavigationScrollBehavior {
+  AfterTransition
+  Manual
+}
+pub fn NavigationScrollBehavior::from(String) -> Self?
+pub impl TJsValue for NavigationScrollBehavior
+pub impl Eq for NavigationScrollBehavior
+pub impl Show for NavigationScrollBehavior
+
+pub(all) enum NavigationType {
+  Push
+  Replace
+  Reload
+  Traverse
+}
+pub fn NavigationType::from(String) -> Self?
+pub impl TJsValue for NavigationType
+pub impl Eq for NavigationType
+pub impl Show for NavigationType
+
+#external
+pub type Navigator
+pub impl TJsValue for Navigator
+pub impl TNavigator for Navigator
+
+#external
+pub type Node
+pub fn[T : TNode] Node::into(Self) -> T
+pub impl TAfterNodesArg for Node
+pub impl TAppendNodesArg for Node
+pub impl TBeforeNodesArg for Node
+pub impl TEventTarget for Node
+pub impl TJsValue for Node
+pub impl TNode for Node
+pub impl TPrependNodesArg for Node
+pub impl TReplaceChildrenNodesArg for Node
+pub impl TReplaceWithNodesArg for Node
+
+#external
+pub type NodeList
+pub impl TJsValue for NodeList
+pub impl TNodeList for NodeList
+
+#external
+pub type OffscreenCanvas
+pub fn OffscreenCanvas::new(UInt64, UInt64) -> Self
+pub fn OffscreenCanvas::null() -> Self
+pub impl TCanvas for OffscreenCanvas
+pub impl TCanvasImageSource for OffscreenCanvas
+pub impl TEventTarget for OffscreenCanvas
+pub impl TImageBitmapSource for OffscreenCanvas
+pub impl TJsValue for OffscreenCanvas
+pub impl TOffscreenCanvas for OffscreenCanvas
+
+#external
+pub type OffscreenCanvasRenderingContext2D
+pub impl TJsValue for OffscreenCanvasRenderingContext2D
+pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
+
+pub(all) enum OffscreenRenderingContextId {
+  V2d
+  Bitmaprenderer
+  Webgl
+  Webgl2
+  Webgpu
+}
+pub fn OffscreenRenderingContextId::from(String) -> Self?
+pub impl TJsValue for OffscreenRenderingContextId
+pub impl Eq for OffscreenRenderingContextId
+pub impl Show for OffscreenRenderingContextId
+
+#external
+pub type OuterHTML
+pub fn[T : TOuterHTML] OuterHTML::into(Self) -> T
+
+#external
+pub type PageTransitionEventInit
+pub fn PageTransitionEventInit::empty() -> Self
+pub fn PageTransitionEventInit::new(persisted? : Bool) -> Self
+pub impl TJsValue for PageTransitionEventInit
+
+#external
+pub type PopStateEventInit
+pub fn PopStateEventInit::empty() -> Self
+pub fn PopStateEventInit::new(state? : JsValue, has_ua_visual_transition? : Bool) -> Self
+pub impl TJsValue for PopStateEventInit
+
+pub(all) enum PredefinedColorSpace {
+  Srgb
+  DisplayP3
+}
+pub fn PredefinedColorSpace::from(String) -> Self?
+pub impl TJsValue for PredefinedColorSpace
+pub impl Eq for PredefinedColorSpace
+pub impl Show for PredefinedColorSpace
+
+pub(all) enum PremultiplyAlpha {
+  None
+  Premultiply
+  Default
+}
+pub fn PremultiplyAlpha::from(String) -> Self?
+pub impl TJsValue for PremultiplyAlpha
+pub impl Eq for PremultiplyAlpha
+pub impl Show for PremultiplyAlpha
+
+#external
+pub type ProcessingInstruction
+pub impl TCharacterData for ProcessingInstruction
+pub impl TEventTarget for ProcessingInstruction
+pub impl TJsValue for ProcessingInstruction
+pub impl TNode for ProcessingInstruction
+pub impl TProcessingInstruction for ProcessingInstruction
+
+#external
+pub type PromiseRejectionEventInit
+pub fn PromiseRejectionEventInit::empty() -> Self
+pub fn PromiseRejectionEventInit::new(JsValue, reason? : JsValue) -> Self
+pub impl TJsValue for PromiseRejectionEventInit
+
+#external
+pub type Range
+pub fn Range::new() -> Self
+pub fn Range::null() -> Self
+pub impl TJsValue for Range
+pub impl TRange for Range
+
+pub(all) enum ResizeQuality {
+  Pixelated
+  Low
+  Medium
+  High
+}
+pub fn ResizeQuality::from(String) -> Self?
+pub impl TJsValue for ResizeQuality
+pub impl Eq for ResizeQuality
+pub impl Show for ResizeQuality
+
+#external
+pub type Result
+pub fn[T : TResult] Result::into(Self) -> T
+
+#external
+pub type SVGBoundingBoxOptions
+pub fn SVGBoundingBoxOptions::empty() -> Self
+pub fn SVGBoundingBoxOptions::new(fill? : Bool, stroke? : Bool, markers? : Bool, clipped? : Bool) -> Self
+pub impl TJsValue for SVGBoundingBoxOptions
+
+#external
+pub type SVGImageElement
+pub impl TCanvasImageSource for SVGImageElement
+pub impl THTMLOrSVGImageElement for SVGImageElement
+pub impl TImageBitmapSource for SVGImageElement
+pub impl TJsValue for SVGImageElement
+pub impl TSVGImageElement for SVGImageElement
+
+pub(all) enum ScrollBehavior {
+  Auto
+  Instant
+  Smooth
+}
+pub fn ScrollBehavior::from(String) -> Self?
+pub impl TJsValue for ScrollBehavior
+pub impl Eq for ScrollBehavior
+pub impl Show for ScrollBehavior
+
+pub(all) enum ScrollIntoViewContainer {
+  All
+  Nearest
+}
+pub fn ScrollIntoViewContainer::from(String) -> Self?
+pub impl TJsValue for ScrollIntoViewContainer
+pub impl Eq for ScrollIntoViewContainer
+pub impl Show for ScrollIntoViewContainer
+
+#external
+pub type ScrollIntoViewOptions
+pub fn ScrollIntoViewOptions::empty() -> Self
+pub fn ScrollIntoViewOptions::new(block? : ScrollLogicalPosition, inline? : ScrollLogicalPosition, container? : ScrollIntoViewContainer) -> Self
+pub impl TJsValue for ScrollIntoViewOptions
+pub impl TScrollIntoViewArgArg for ScrollIntoViewOptions
+
+pub(all) enum ScrollLogicalPosition {
+  Start
+  Center
+  End
+  Nearest
+}
+pub fn ScrollLogicalPosition::from(String) -> Self?
+pub impl TJsValue for ScrollLogicalPosition
+pub impl Eq for ScrollLogicalPosition
+pub impl Show for ScrollLogicalPosition
+
+#external
+pub type ScrollOptions
+pub fn ScrollOptions::empty() -> Self
+pub fn ScrollOptions::new(behavior? : ScrollBehavior) -> Self
+pub impl TJsValue for ScrollOptions
+
+pub(all) enum ScrollRestoration {
+  Auto
+  Manual
+}
+pub fn ScrollRestoration::from(String) -> Self?
+pub impl TJsValue for ScrollRestoration
+pub impl Eq for ScrollRestoration
+pub impl Show for ScrollRestoration
+
+#external
+pub type ScrollToOptions
+pub fn ScrollToOptions::empty() -> Self
+pub fn ScrollToOptions::new(left? : Double, top? : Double) -> Self
+pub impl TJsValue for ScrollToOptions
+
+pub(all) enum SelectionMode {
+  Select
+  Start
+  End
+  Preserve
+}
+pub fn SelectionMode::from(String) -> Self?
+pub impl TJsValue for SelectionMode
+pub impl Eq for SelectionMode
+pub impl Show for SelectionMode
+
+#external
+pub type ShadowRoot
+pub impl TDocumentFragment for ShadowRoot
+pub impl TEventTarget for ShadowRoot
+pub impl TJsValue for ShadowRoot
+pub impl TNode for ShadowRoot
+pub impl TShadowRoot for ShadowRoot
+
+#external
+pub type ShadowRootInit
+pub fn ShadowRootInit::empty() -> Self
+pub fn ShadowRootInit::new(ShadowRootMode, delegates_focus? : Bool, slot_assignment? : SlotAssignmentMode, clonable? : Bool, serializable? : Bool, custom_element_registry? : JsValue) -> Self
+pub impl TJsValue for ShadowRootInit
+
+pub(all) enum ShadowRootMode {
+  Open
+  Closed
+}
+pub fn ShadowRootMode::from(String) -> Self?
+pub impl TJsValue for ShadowRootMode
+pub impl Eq for ShadowRootMode
+pub impl Show for ShadowRootMode
+
+#external
+pub type ShowPopoverOptions
+pub fn ShowPopoverOptions::empty() -> Self
+pub fn ShowPopoverOptions::new(source? : HTMLElement) -> Self
+pub impl TJsValue for ShowPopoverOptions
+
+pub(all) enum SlotAssignmentMode {
+  Manual
+  Named
+}
+pub fn SlotAssignmentMode::from(String) -> Self?
+pub impl TJsValue for SlotAssignmentMode
+pub impl Eq for SlotAssignmentMode
+pub impl Show for SlotAssignmentMode
+
+#external
+pub type StaticRangeInit
+pub fn StaticRangeInit::empty() -> Self
+pub fn StaticRangeInit::new(Node, UInt, Node, UInt) -> Self
+pub impl TJsValue for StaticRangeInit
+
+#external
+pub type Storage
+pub impl TJsValue for Storage
+pub impl TStorage for Storage
+
+#external
+pub type StorageEventInit
+pub fn StorageEventInit::empty() -> Self
+pub fn StorageEventInit::new(key? : String, old_value? : String, new_value? : String, url? : String, storage_area? : Storage) -> Self
+pub impl TJsValue for StorageEventInit
+
+#external
+pub type StrokeStyle
+pub fn[T : TStrokeStyle] StrokeStyle::into(Self) -> T
+
+#external
+pub type StructuredSerializeOptions
+pub fn StructuredSerializeOptions::empty() -> Self
+pub fn StructuredSerializeOptions::new(transfer? : Array[JsValue]) -> Self
+pub impl TJsValue for StructuredSerializeOptions
+
+#external
+pub type SubmitEventInit
+pub fn SubmitEventInit::empty() -> Self
+pub fn SubmitEventInit::new(submitter? : HTMLElement) -> Self
+pub impl TJsValue for SubmitEventInit
+
+#external
+pub type Text
+pub fn[T : TText] Text::into(Self) -> T
+pub fn Text::new(data? : String) -> Self
+pub fn Text::null() -> Self
+pub impl TAssignNodesArg for Text
+pub impl TCharacterData for Text
+pub impl TEventTarget for Text
+pub impl TJsValue for Text
+pub impl TNode for Text
+pub impl TText for Text
+
+pub(all) enum TextTrackKind {
+  Subtitles
+  Captions
+  Descriptions
+  Chapters
+  Metadata
+}
+pub fn TextTrackKind::from(String) -> Self?
+pub impl TJsValue for TextTrackKind
+pub impl Eq for TextTrackKind
+pub impl Show for TextTrackKind
+
+pub(all) enum TextTrackMode {
+  Disabled
+  Hidden
+  Showing
+}
+pub fn TextTrackMode::from(String) -> Self?
+pub impl TJsValue for TextTrackMode
+pub impl Eq for TextTrackMode
+pub impl Show for TextTrackMode
+
+#external
+pub type ToggleEventInit
+pub fn ToggleEventInit::empty() -> Self
+pub fn ToggleEventInit::new(old_state? : String, new_state? : String, source? : Element) -> Self
+pub impl TJsValue for ToggleEventInit
+
+#external
+pub type TogglePopoverOptions
+pub fn TogglePopoverOptions::empty() -> Self
+pub fn TogglePopoverOptions::new(force? : Bool) -> Self
+pub impl TJsValue for TogglePopoverOptions
+pub impl TTogglePopoverOptionsArg for TogglePopoverOptions
+
+#external
+pub type TrackEventInit
+pub fn TrackEventInit::empty() -> Self
+pub fn TrackEventInit::new(track? : JsValue) -> Self
+pub impl TJsValue for TrackEventInit
+
+#external
+pub type UIEvent
+pub fn[T : TUIEvent] UIEvent::into(Self) -> T
+pub fn UIEvent::new(String, event_init_dict? : UIEventInit) -> Self
+pub fn UIEvent::null() -> Self
+pub impl TEvent for UIEvent
+pub impl TJsValue for UIEvent
+pub impl TUIEvent for UIEvent
+
+#external
+pub type UIEventInit
+pub fn UIEventInit::empty() -> Self
+pub fn UIEventInit::new(view? : Window, detail? : Int, which? : UInt) -> Self
+pub impl TJsValue for UIEventInit
+
+#external
+pub type Uint16Array
+pub impl TJsValue for Uint16Array
+
+#external
+pub type Uint32Array
+pub impl TJsValue for Uint32Array
+
+#external
+pub type Uint8Array
+pub impl TJsValue for Uint8Array
+
+#external
+pub type Uint8ClampedArray
+pub impl TJsValue for Uint8ClampedArray
+
+#external
+pub type ValidityStateFlags
+pub fn ValidityStateFlags::empty() -> Self
+pub fn ValidityStateFlags::new(value_missing? : Bool, type_mismatch? : Bool, pattern_mismatch? : Bool, too_long? : Bool, too_short? : Bool, range_underflow? : Bool, range_overflow? : Bool, step_mismatch? : Bool, bad_input? : Bool, custom_error? : Bool) -> Self
+pub impl TJsValue for ValidityStateFlags
+
+#external
+pub type WheelEvent
+pub fn WheelEvent::new(String, event_init_dict? : WheelEventInit) -> Self
+pub fn WheelEvent::null() -> Self
+pub impl TEvent for WheelEvent
+pub impl TJsValue for WheelEvent
+pub impl TMouseEvent for WheelEvent
+pub impl TUIEvent for WheelEvent
+pub impl TWheelEvent for WheelEvent
+
+#external
+pub type WheelEventInit
+pub fn WheelEventInit::empty() -> Self
+pub fn WheelEventInit::new(delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : UInt) -> Self
+pub impl TJsValue for WheelEventInit
+
+#external
+pub type Window
+pub impl TEventTarget for Window
+pub impl TJsValue for Window
+pub impl TWindow for Window
+
+#external
+pub type WindowPostMessageOptions
+pub fn WindowPostMessageOptions::empty() -> Self
+pub fn WindowPostMessageOptions::new(target_origin? : String) -> Self
+pub impl TJsValue for WindowPostMessageOptions
+
+#external
+pub type WorkerOptions
+pub fn WorkerOptions::empty() -> Self
+pub fn WorkerOptions::new(name? : String, type_? : WorkerType, credentials? : JsValue) -> Self
+pub impl TJsValue for WorkerOptions
+
+pub(all) enum WorkerType {
+  Classic
+  Module
+}
+pub fn WorkerType::from(String) -> Self?
+pub impl TJsValue for WorkerType
+pub impl Eq for WorkerType
+pub impl Show for WorkerType
+
+#external
+pub type WorkletOptions
+pub fn WorkletOptions::empty() -> Self
+pub fn WorkletOptions::new(credentials? : JsValue) -> Self
+pub impl TJsValue for WorkletOptions
+
+// Type aliases
+
+// Traits
+pub trait TAbortController : TJsValue {
+  signal(Self) -> AbortSignal
+  abort(Self, reason? : JsValue) -> Unit
+}
+
+pub trait TAbortSignal : TJsValue + TEventTarget {
+  aborted(Self) -> Bool
+  reason(Self) -> JsValue
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  throw_if_aborted(Self) -> Unit
+}
+
+pub(open) trait TAddEventListenerOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TAddEventListenerOptionsArg for Bool
+
+pub(open) trait TAfterNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TAfterNodesArg for String
+
+pub(open) trait TAppendNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TAppendNodesArg for String
+
+pub(open) trait TAssignNodesArg {
+  to_js(Self) -> JsValue
+}
+
+pub trait TAttr : TJsValue + TNode {
+  namespace_uri(Self) -> String?
+  prefix(Self) -> String?
+  local_name(Self) -> String
+  name(Self) -> String
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  owner_element(Self) -> Element?
+  specified(Self) -> Bool
+}
+
+pub(open) trait TBeforeNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TBeforeNodesArg for String
+
+pub trait TBlob : TJsValue {
+  size(Self) -> UInt64
+  type_(Self) -> String
+  slice(Self, start? : Int64, end? : Int64, content_type? : String) -> Blob
+  stream(Self) -> JsValue
+  text(Self) -> JsPromise[String]
+  array_buffer(Self) -> JsPromise[ArrayBuffer]
+  bytes(Self) -> JsPromise[Uint8Array]
+}
+
+pub trait TCDATASection : TJsValue + TText {
+}
+
+pub(open) trait TCanvas {
+  to_js(Self) -> JsValue
+}
+
+pub trait TCanvasGradient : TJsValue {
+  add_color_stop(Self, Double, String) -> Unit
+}
+
+pub(open) trait TCanvasImageSource {
+  to_js(Self) -> JsValue
+}
+pub fn[T : TCanvasImageSource] &TCanvasImageSource::into(Self) -> T
+
+pub trait TCanvasPattern : TJsValue {
+  set_transform(Self, transform? : DOMMatrix2DInit) -> Unit
+}
+
+pub trait TCanvasRenderingContext2D : TJsValue {
+  canvas(Self) -> HTMLCanvasElement
+  global_alpha(Self) -> Double
+  set_global_alpha(Self, Double) -> Unit
+  global_composite_operation(Self) -> String
+  set_global_composite_operation(Self, String) -> Unit
+  image_smoothing_enabled(Self) -> Bool
+  set_image_smoothing_enabled(Self, Bool) -> Unit
+  image_smoothing_quality(Self) -> ImageSmoothingQuality
+  set_image_smoothing_quality(Self, ImageSmoothingQuality) -> Unit
+  stroke_style(Self) -> StrokeStyle
+  set_stroke_style(Self, &TStrokeStyle) -> Unit
+  fill_style(Self) -> FillStyle
+  set_fill_style(Self, &TFillStyle) -> Unit
+  shadow_offset_x(Self) -> Double
+  set_shadow_offset_x(Self, Double) -> Unit
+  shadow_offset_y(Self) -> Double
+  set_shadow_offset_y(Self, Double) -> Unit
+  shadow_blur(Self) -> Double
+  set_shadow_blur(Self, Double) -> Unit
+  shadow_color(Self) -> String
+  set_shadow_color(Self, String) -> Unit
+  filter(Self) -> String
+  set_filter(Self, String) -> Unit
+  line_width(Self) -> Double
+  set_line_width(Self, Double) -> Unit
+  line_cap(Self) -> CanvasLineCap
+  set_line_cap(Self, CanvasLineCap) -> Unit
+  line_join(Self) -> CanvasLineJoin
+  set_line_join(Self, CanvasLineJoin) -> Unit
+  miter_limit(Self) -> Double
+  set_miter_limit(Self, Double) -> Unit
+  line_dash_offset(Self) -> Double
+  set_line_dash_offset(Self, Double) -> Unit
+  lang(Self) -> String
+  set_lang(Self, String) -> Unit
+  font(Self) -> String
+  set_font(Self, String) -> Unit
+  text_align(Self) -> CanvasTextAlign
+  set_text_align(Self, CanvasTextAlign) -> Unit
+  text_baseline(Self) -> CanvasTextBaseline
+  set_text_baseline(Self, CanvasTextBaseline) -> Unit
+  direction(Self) -> CanvasDirection
+  set_direction(Self, CanvasDirection) -> Unit
+  letter_spacing(Self) -> String
+  set_letter_spacing(Self, String) -> Unit
+  font_kerning(Self) -> CanvasFontKerning
+  set_font_kerning(Self, CanvasFontKerning) -> Unit
+  font_stretch(Self) -> CanvasFontStretch
+  set_font_stretch(Self, CanvasFontStretch) -> Unit
+  font_variant_caps(Self) -> CanvasFontVariantCaps
+  set_font_variant_caps(Self, CanvasFontVariantCaps) -> Unit
+  text_rendering(Self) -> CanvasTextRendering
+  set_text_rendering(Self, CanvasTextRendering) -> Unit
+  word_spacing(Self) -> String
+  set_word_spacing(Self, String) -> Unit
+  get_context_attributes(Self) -> CanvasRenderingContext2DSettings
+  save(Self) -> Unit
+  restore(Self) -> Unit
+  reset(Self) -> Unit
+  is_context_lost(Self) -> Bool
+  scale(Self, Double, Double) -> Unit
+  rotate(Self, Double) -> Unit
+  translate(Self, Double, Double) -> Unit
+  transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  get_transform(Self) -> JsValue
+  set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  set_transform2(Self, transform? : DOMMatrix2DInit) -> Unit
+  reset_transform(Self) -> Unit
+  create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
+  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
+  create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
+  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
+  clear_rect(Self, Double, Double, Double, Double) -> Unit
+  fill_rect(Self, Double, Double, Double, Double) -> Unit
+  stroke_rect(Self, Double, Double, Double, Double) -> Unit
+  begin_path(Self) -> Unit
+  fill(Self, fill_rule? : CanvasFillRule) -> Unit
+  fill2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
+  stroke(Self) -> Unit
+  stroke2(Self, JsValue) -> Unit
+  clip(Self, fill_rule? : CanvasFillRule) -> Unit
+  clip2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
+  is_point_in_path(Self, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_stroke(Self, Double, Double) -> Bool
+  is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
+  draw_focus_if_needed(Self, &TElement) -> Unit
+  draw_focus_if_needed2(Self, JsValue, &TElement) -> Unit
+  fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  measure_text(Self, String) -> JsValue
+  draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
+  draw_image2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
+  create_image_data2(Self, &TImageData) -> ImageData
+  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
+  put_image_data(Self, &TImageData, Int, Int) -> Unit
+  put_image_data2(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
+  set_line_dash(Self, Array[Double]) -> Unit
+  get_line_dash(Self) -> Array[Double]
+  close_path(Self) -> Unit
+  move_to(Self, Double, Double) -> Unit
+  line_to(Self, Double, Double) -> Unit
+  quadratic_curve_to(Self, Double, Double, Double, Double) -> Unit
+  bezier_curve_to(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  arc_to(Self, Double, Double, Double, Double, Double) -> Unit
+  rect(Self, Double, Double, Double, Double) -> Unit
+  round_rect(Self, Double, Double, Double, Double, radii? : &TRoundRectRadiiArg) -> Unit
+  arc(Self, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
+  ellipse(Self, Double, Double, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
+}
+
+pub trait TCharacterData : TJsValue + TNode {
+  data(Self) -> String
+  set_data(Self, String) -> Unit
+  length(Self) -> UInt
+  previous_element_sibling(Self) -> Element?
+  next_element_sibling(Self) -> Element?
+  substring_data(Self, UInt, UInt) -> String
+  append_data(Self, String) -> Unit
+  insert_data(Self, UInt, String) -> Unit
+  delete_data(Self, UInt, UInt) -> Unit
+  replace_data(Self, UInt, UInt, String) -> Unit
+  before(Self, &TBeforeNodesArg) -> Unit
+  after(Self, &TAfterNodesArg) -> Unit
+  replace_with(Self, &TReplaceWithNodesArg) -> Unit
+  remove(Self) -> Unit
+}
+
+pub trait TComment : TJsValue + TCharacterData {
+}
+
+pub(open) trait TCreateContextualFragmentStringArg {
+  to_js(Self) -> JsValue
+}
+pub impl TCreateContextualFragmentStringArg for String
+
+pub(open) trait TCreateElementNSOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TCreateElementNSOptionsArg for String
+
+pub(open) trait TCreateElementOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TCreateElementOptionsArg for String
+
+pub trait TCustomEvent : TJsValue + TEvent {
+  detail(Self) -> JsValue
+  init_custom_event(Self, String, bubbles? : Bool, cancelable? : Bool, detail? : JsValue) -> Unit
+}
+
+pub trait TDOMMatrix : TJsValue + TDOMMatrixReadOnly {
+  a(Self) -> Double
+  set_a(Self, Double) -> Unit
+  b(Self) -> Double
+  set_b(Self, Double) -> Unit
+  c(Self) -> Double
+  set_c(Self, Double) -> Unit
+  d(Self) -> Double
+  set_d(Self, Double) -> Unit
+  e(Self) -> Double
+  set_e(Self, Double) -> Unit
+  f(Self) -> Double
+  set_f(Self, Double) -> Unit
+  m11(Self) -> Double
+  set_m11(Self, Double) -> Unit
+  m12(Self) -> Double
+  set_m12(Self, Double) -> Unit
+  m13(Self) -> Double
+  set_m13(Self, Double) -> Unit
+  m14(Self) -> Double
+  set_m14(Self, Double) -> Unit
+  m21(Self) -> Double
+  set_m21(Self, Double) -> Unit
+  m22(Self) -> Double
+  set_m22(Self, Double) -> Unit
+  m23(Self) -> Double
+  set_m23(Self, Double) -> Unit
+  m24(Self) -> Double
+  set_m24(Self, Double) -> Unit
+  m31(Self) -> Double
+  set_m31(Self, Double) -> Unit
+  m32(Self) -> Double
+  set_m32(Self, Double) -> Unit
+  m33(Self) -> Double
+  set_m33(Self, Double) -> Unit
+  m34(Self) -> Double
+  set_m34(Self, Double) -> Unit
+  m41(Self) -> Double
+  set_m41(Self, Double) -> Unit
+  m42(Self) -> Double
+  set_m42(Self, Double) -> Unit
+  m43(Self) -> Double
+  set_m43(Self, Double) -> Unit
+  m44(Self) -> Double
+  set_m44(Self, Double) -> Unit
+  multiply_self(Self, other? : DOMMatrixInit) -> JsValue
+  pre_multiply_self(Self, other? : DOMMatrixInit) -> JsValue
+  translate_self(Self, tx? : Double, ty? : Double, tz? : Double) -> JsValue
+  scale_self(Self, scale_x? : Double, scale_y? : Double, scale_z? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  scale3d_self(Self, scale? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  rotate_self(Self, rot_x? : Double, rot_y? : Double, rot_z? : Double) -> JsValue
+  rotate_from_vector_self(Self, x? : Double, y? : Double) -> JsValue
+  rotate_axis_angle_self(Self, x? : Double, y? : Double, z? : Double, angle? : Double) -> JsValue
+  skew_x_self(Self, sx? : Double) -> JsValue
+  skew_y_self(Self, sy? : Double) -> JsValue
+  invert_self(Self) -> JsValue
+  set_matrix_value(Self, String) -> JsValue
+}
+
+pub trait TDOMMatrixReadOnly : TJsValue {
+  a(Self) -> Double
+  b(Self) -> Double
+  c(Self) -> Double
+  d(Self) -> Double
+  e(Self) -> Double
+  f(Self) -> Double
+  m11(Self) -> Double
+  m12(Self) -> Double
+  m13(Self) -> Double
+  m14(Self) -> Double
+  m21(Self) -> Double
+  m22(Self) -> Double
+  m23(Self) -> Double
+  m24(Self) -> Double
+  m31(Self) -> Double
+  m32(Self) -> Double
+  m33(Self) -> Double
+  m34(Self) -> Double
+  m41(Self) -> Double
+  m42(Self) -> Double
+  m43(Self) -> Double
+  m44(Self) -> Double
+  is2_d(Self) -> Bool
+  is_identity(Self) -> Bool
+  translate(Self, tx? : Double, ty? : Double, tz? : Double) -> JsValue
+  scale(Self, scale_x? : Double, scale_y? : Double, scale_z? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  scale_non_uniform(Self, scale_x? : Double, scale_y? : Double) -> JsValue
+  scale3d(Self, scale? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue
+  rotate(Self, rot_x? : Double, rot_y? : Double, rot_z? : Double) -> JsValue
+  rotate_from_vector(Self, x? : Double, y? : Double) -> JsValue
+  rotate_axis_angle(Self, x? : Double, y? : Double, z? : Double, angle? : Double) -> JsValue
+  skew_x(Self, sx? : Double) -> JsValue
+  skew_y(Self, sy? : Double) -> JsValue
+  multiply(Self, other? : DOMMatrixInit) -> JsValue
+  flip_x(Self) -> JsValue
+  flip_y(Self) -> JsValue
+  inverse(Self) -> JsValue
+  transform_point(Self, point? : DOMPointInit) -> JsValue
+  to_float32_array(Self) -> Float32Array
+  to_float64_array(Self) -> Float64Array
+  to_json(Self) -> JsValue
+}
+
+pub trait TDOMPoint : TJsValue + TDOMPointReadOnly {
+  x(Self) -> Double
+  set_x(Self, Double) -> Unit
+  y(Self) -> Double
+  set_y(Self, Double) -> Unit
+  z(Self) -> Double
+  set_z(Self, Double) -> Unit
+  w(Self) -> Double
+  set_w(Self, Double) -> Unit
+}
+
+pub trait TDOMPointReadOnly : TJsValue {
+  x(Self) -> Double
+  y(Self) -> Double
+  z(Self) -> Double
+  w(Self) -> Double
+  matrix_transform(Self, matrix? : DOMMatrixInit) -> JsValue
+  to_json(Self) -> JsValue
+}
+
+pub trait TDOMRect : TJsValue + TDOMRectReadOnly {
+  x(Self) -> Double
+  set_x(Self, Double) -> Unit
+  y(Self) -> Double
+  set_y(Self, Double) -> Unit
+  width(Self) -> Double
+  set_width(Self, Double) -> Unit
+  height(Self) -> Double
+  set_height(Self, Double) -> Unit
+}
+
+pub trait TDOMRectReadOnly : TJsValue {
+  x(Self) -> Double
+  y(Self) -> Double
+  width(Self) -> Double
+  height(Self) -> Double
+  top(Self) -> Double
+  right(Self) -> Double
+  bottom(Self) -> Double
+  left(Self) -> Double
+  to_json(Self) -> JsValue
+}
+
+pub trait TDOMTokenList : TJsValue {
+  length(Self) -> UInt
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  item(Self, UInt) -> String?
+  contains(Self, String) -> Bool
+  add(Self, String) -> Unit
+  remove(Self, String) -> Unit
+  toggle(Self, String, force? : Bool) -> Bool
+  replace(Self, String, String) -> Bool
+  supports(Self, String) -> Bool
+}
+
+pub trait TDocument : TJsValue + TNode {
+  root_element(Self) -> JsValue?
+  scrolling_element(Self) -> Element?
+  implementation(Self) -> JsValue
+  url(Self) -> String
+  document_uri(Self) -> String
+  compat_mode(Self) -> String
+  character_set(Self) -> String
+  charset(Self) -> String
+  input_encoding(Self) -> String
+  content_type(Self) -> String
+  doctype(Self) -> DocumentType?
+  document_element(Self) -> Element?
+  location(Self) -> Location?
+  domain(Self) -> String
+  set_domain(Self, String) -> Unit
+  referrer(Self) -> String
+  cookie(Self) -> String
+  set_cookie(Self, String) -> Unit
+  last_modified(Self) -> String
+  ready_state(Self) -> DocumentReadyState
+  title(Self) -> String
+  set_title(Self, String) -> Unit
+  dir(Self) -> String
+  set_dir(Self, String) -> Unit
+  body(Self) -> HTMLElement?
+  set_body(Self, HTMLElement) -> Unit
+  head(Self) -> HTMLHeadElement?
+  images(Self) -> HTMLCollection
+  embeds(Self) -> HTMLCollection
+  plugins(Self) -> HTMLCollection
+  links(Self) -> HTMLCollection
+  forms(Self) -> HTMLCollection
+  scripts(Self) -> HTMLCollection
+  current_script(Self) -> JsValue?
+  default_view(Self) -> Window?
+  design_mode(Self) -> String
+  set_design_mode(Self, String) -> Unit
+  hidden(Self) -> Bool
+  visibility_state(Self) -> DocumentVisibilityState
+  onreadystatechange(Self) -> EventHandler
+  set_onreadystatechange(Self, EventHandler) -> Unit
+  onvisibilitychange(Self) -> EventHandler
+  set_onvisibilitychange(Self, EventHandler) -> Unit
+  fg_color(Self) -> String
+  set_fg_color(Self, String) -> Unit
+  link_color(Self) -> String
+  set_link_color(Self, String) -> Unit
+  vlink_color(Self) -> String
+  set_vlink_color(Self, String) -> Unit
+  alink_color(Self) -> String
+  set_alink_color(Self, String) -> Unit
+  bg_color(Self) -> String
+  set_bg_color(Self, String) -> Unit
+  anchors(Self) -> HTMLCollection
+  applets(Self) -> HTMLCollection
+  all(Self) -> JsValue
+  style_sheets(Self) -> JsValue
+  adopted_style_sheets(Self) -> Array[JsValue]
+  set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
+  custom_element_registry(Self) -> JsValue?
+  active_element(Self) -> Element?
+  children(Self) -> HTMLCollection
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
+  child_element_count(Self) -> UInt
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onauxclick(Self) -> EventHandler
+  set_onauxclick(Self, EventHandler) -> Unit
+  onbeforeinput(Self) -> EventHandler
+  set_onbeforeinput(Self, EventHandler) -> Unit
+  onbeforematch(Self) -> EventHandler
+  set_onbeforematch(Self, EventHandler) -> Unit
+  onbeforetoggle(Self) -> EventHandler
+  set_onbeforetoggle(Self, EventHandler) -> Unit
+  onblur(Self) -> EventHandler
+  set_onblur(Self, EventHandler) -> Unit
+  oncancel(Self) -> EventHandler
+  set_oncancel(Self, EventHandler) -> Unit
+  oncanplay(Self) -> EventHandler
+  set_oncanplay(Self, EventHandler) -> Unit
+  oncanplaythrough(Self) -> EventHandler
+  set_oncanplaythrough(Self, EventHandler) -> Unit
+  onchange(Self) -> EventHandler
+  set_onchange(Self, EventHandler) -> Unit
+  onclick(Self) -> EventHandler
+  set_onclick(Self, EventHandler) -> Unit
+  onclose(Self) -> EventHandler
+  set_onclose(Self, EventHandler) -> Unit
+  oncommand(Self) -> EventHandler
+  set_oncommand(Self, EventHandler) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextmenu(Self) -> EventHandler
+  set_oncontextmenu(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  oncopy(Self) -> EventHandler
+  set_oncopy(Self, EventHandler) -> Unit
+  oncuechange(Self) -> EventHandler
+  set_oncuechange(Self, EventHandler) -> Unit
+  oncut(Self) -> EventHandler
+  set_oncut(Self, EventHandler) -> Unit
+  ondblclick(Self) -> EventHandler
+  set_ondblclick(Self, EventHandler) -> Unit
+  ondrag(Self) -> EventHandler
+  set_ondrag(Self, EventHandler) -> Unit
+  ondragend(Self) -> EventHandler
+  set_ondragend(Self, EventHandler) -> Unit
+  ondragenter(Self) -> EventHandler
+  set_ondragenter(Self, EventHandler) -> Unit
+  ondragleave(Self) -> EventHandler
+  set_ondragleave(Self, EventHandler) -> Unit
+  ondragover(Self) -> EventHandler
+  set_ondragover(Self, EventHandler) -> Unit
+  ondragstart(Self) -> EventHandler
+  set_ondragstart(Self, EventHandler) -> Unit
+  ondrop(Self) -> EventHandler
+  set_ondrop(Self, EventHandler) -> Unit
+  ondurationchange(Self) -> EventHandler
+  set_ondurationchange(Self, EventHandler) -> Unit
+  onemptied(Self) -> EventHandler
+  set_onemptied(Self, EventHandler) -> Unit
+  onended(Self) -> EventHandler
+  set_onended(Self, EventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
+  onfocus(Self) -> EventHandler
+  set_onfocus(Self, EventHandler) -> Unit
+  onformdata(Self) -> EventHandler
+  set_onformdata(Self, EventHandler) -> Unit
+  oninput(Self) -> EventHandler
+  set_oninput(Self, EventHandler) -> Unit
+  oninvalid(Self) -> EventHandler
+  set_oninvalid(Self, EventHandler) -> Unit
+  onkeydown(Self) -> EventHandler
+  set_onkeydown(Self, EventHandler) -> Unit
+  onkeypress(Self) -> EventHandler
+  set_onkeypress(Self, EventHandler) -> Unit
+  onkeyup(Self) -> EventHandler
+  set_onkeyup(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onloadeddata(Self) -> EventHandler
+  set_onloadeddata(Self, EventHandler) -> Unit
+  onloadedmetadata(Self) -> EventHandler
+  set_onloadedmetadata(Self, EventHandler) -> Unit
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onmousedown(Self) -> EventHandler
+  set_onmousedown(Self, EventHandler) -> Unit
+  onmouseenter(Self) -> EventHandler
+  set_onmouseenter(Self, EventHandler) -> Unit
+  onmouseleave(Self) -> EventHandler
+  set_onmouseleave(Self, EventHandler) -> Unit
+  onmousemove(Self) -> EventHandler
+  set_onmousemove(Self, EventHandler) -> Unit
+  onmouseout(Self) -> EventHandler
+  set_onmouseout(Self, EventHandler) -> Unit
+  onmouseover(Self) -> EventHandler
+  set_onmouseover(Self, EventHandler) -> Unit
+  onmouseup(Self) -> EventHandler
+  set_onmouseup(Self, EventHandler) -> Unit
+  onpaste(Self) -> EventHandler
+  set_onpaste(Self, EventHandler) -> Unit
+  onpause(Self) -> EventHandler
+  set_onpause(Self, EventHandler) -> Unit
+  onplay(Self) -> EventHandler
+  set_onplay(Self, EventHandler) -> Unit
+  onplaying(Self) -> EventHandler
+  set_onplaying(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onratechange(Self) -> EventHandler
+  set_onratechange(Self, EventHandler) -> Unit
+  onreset(Self) -> EventHandler
+  set_onreset(Self, EventHandler) -> Unit
+  onresize(Self) -> EventHandler
+  set_onresize(Self, EventHandler) -> Unit
+  onscroll(Self) -> EventHandler
+  set_onscroll(Self, EventHandler) -> Unit
+  onscrollend(Self) -> EventHandler
+  set_onscrollend(Self, EventHandler) -> Unit
+  onsecuritypolicyviolation(Self) -> EventHandler
+  set_onsecuritypolicyviolation(Self, EventHandler) -> Unit
+  onseeked(Self) -> EventHandler
+  set_onseeked(Self, EventHandler) -> Unit
+  onseeking(Self) -> EventHandler
+  set_onseeking(Self, EventHandler) -> Unit
+  onselect(Self) -> EventHandler
+  set_onselect(Self, EventHandler) -> Unit
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  onstalled(Self) -> EventHandler
+  set_onstalled(Self, EventHandler) -> Unit
+  onsubmit(Self) -> EventHandler
+  set_onsubmit(Self, EventHandler) -> Unit
+  onsuspend(Self) -> EventHandler
+  set_onsuspend(Self, EventHandler) -> Unit
+  ontimeupdate(Self) -> EventHandler
+  set_ontimeupdate(Self, EventHandler) -> Unit
+  ontoggle(Self) -> EventHandler
+  set_ontoggle(Self, EventHandler) -> Unit
+  onvolumechange(Self) -> EventHandler
+  set_onvolumechange(Self, EventHandler) -> Unit
+  onwaiting(Self) -> EventHandler
+  set_onwaiting(Self, EventHandler) -> Unit
+  onwebkitanimationend(Self) -> EventHandler
+  set_onwebkitanimationend(Self, EventHandler) -> Unit
+  onwebkitanimationiteration(Self) -> EventHandler
+  set_onwebkitanimationiteration(Self, EventHandler) -> Unit
+  onwebkitanimationstart(Self) -> EventHandler
+  set_onwebkitanimationstart(Self, EventHandler) -> Unit
+  onwebkittransitionend(Self) -> EventHandler
+  set_onwebkittransitionend(Self, EventHandler) -> Unit
+  onwheel(Self) -> EventHandler
+  set_onwheel(Self, EventHandler) -> Unit
+  element_from_point(Self, Double, Double) -> Element?
+  elements_from_point(Self, Double, Double) -> Array[Element]
+  caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> JsValue?
+  get_elements_by_tag_name(Self, String) -> HTMLCollection
+  get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
+  get_elements_by_class_name(Self, String) -> HTMLCollection
+  create_element(Self, String, options? : &TCreateElementOptionsArg) -> Element
+  create_element_ns(Self, String, String, options? : &TCreateElementNSOptionsArg) -> Element
+  create_document_fragment(Self) -> DocumentFragment
+  create_text_node(Self, String) -> Text
+  create_cdata_section(Self, String) -> CDATASection
+  create_comment(Self, String) -> Comment
+  create_processing_instruction(Self, String, String) -> ProcessingInstruction
+  import_node(Self, &TNode, options? : &TImportNodeOptionsArg) -> Node
+  adopt_node(Self, &TNode) -> Node
+  create_attribute(Self, String) -> Attr
+  create_attribute_ns(Self, String, String) -> Attr
+  create_event(Self, String) -> Event
+  create_range(Self) -> Range
+  create_node_iterator(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  create_tree_walker(Self, &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue
+  get_elements_by_name(Self, String) -> NodeList
+  open(Self, unused1? : String, unused2? : String) -> Document
+  open2(Self, String, String, String) -> Window?
+  close(Self) -> Unit
+  write(Self, &TWriteTextArg) -> Unit
+  writeln(Self, &TWritelnTextArg) -> Unit
+  has_focus(Self) -> Bool
+  exec_command(Self, String, show_ui? : Bool, value? : String) -> Bool
+  query_command_enabled(Self, String) -> Bool
+  query_command_indeterm(Self, String) -> Bool
+  query_command_state(Self, String) -> Bool
+  query_command_supported(Self, String) -> Bool
+  query_command_value(Self, String) -> String
+  clear(Self) -> Unit
+  capture_events(Self) -> Unit
+  release_events(Self) -> Unit
+  get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
+  convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  get_element_by_id(Self, String) -> Element?
+  prepend(Self, &TPrependNodesArg) -> Unit
+  append(Self, &TAppendNodesArg) -> Unit
+  replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
+  move_before(Self, &TNode, &TNode) -> Unit
+  query_selector(Self, String) -> Element?
+  query_selector_all(Self, String) -> NodeList
+  create_expression(Self, String, resolver? : JsValue) -> JsValue
+  create_ns_resolver(Self, &TNode) -> Node
+  evaluate(Self, String, &TNode, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue
+}
+
+pub trait TDocumentFragment : TJsValue + TNode {
+  children(Self) -> HTMLCollection
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
+  child_element_count(Self) -> UInt
+  get_element_by_id(Self, String) -> Element?
+  prepend(Self, &TPrependNodesArg) -> Unit
+  append(Self, &TAppendNodesArg) -> Unit
+  replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
+  move_before(Self, &TNode, &TNode) -> Unit
+  query_selector(Self, String) -> Element?
+  query_selector_all(Self, String) -> NodeList
+}
+
+pub trait TDocumentType : TJsValue + TNode {
+  name(Self) -> String
+  public_id(Self) -> String
+  system_id(Self) -> String
+  before(Self, &TBeforeNodesArg) -> Unit
+  after(Self, &TAfterNodesArg) -> Unit
+  replace_with(Self, &TReplaceWithNodesArg) -> Unit
+  remove(Self) -> Unit
+}
+
+pub trait TElement : TJsValue + TNode {
+  scroll_top(Self) -> Double
+  set_scroll_top(Self, Double) -> Unit
+  scroll_left(Self) -> Double
+  set_scroll_left(Self, Double) -> Unit
+  scroll_width(Self) -> Int
+  scroll_height(Self) -> Int
+  client_top(Self) -> Int
+  client_left(Self) -> Int
+  client_width(Self) -> Int
+  client_height(Self) -> Int
+  current_css_zoom(Self) -> Double
+  namespace_uri(Self) -> String?
+  prefix(Self) -> String?
+  local_name(Self) -> String
+  tag_name(Self) -> String
+  id(Self) -> String
+  set_id(Self, String) -> Unit
+  class_name(Self) -> String
+  set_class_name(Self, String) -> Unit
+  class_list(Self) -> DOMTokenList
+  slot(Self) -> String
+  set_slot(Self, String) -> Unit
+  attributes(Self) -> NamedNodeMap
+  shadow_root(Self) -> ShadowRoot?
+  custom_element_registry(Self) -> JsValue?
+  inner_html(Self) -> InnerHTML
+  set_inner_html(Self, &TInnerHTML) -> Unit
+  outer_html(Self) -> OuterHTML
+  set_outer_html(Self, &TOuterHTML) -> Unit
+  children(Self) -> HTMLCollection
+  first_element_child(Self) -> Element?
+  last_element_child(Self) -> Element?
+  child_element_count(Self) -> UInt
+  previous_element_sibling(Self) -> Element?
+  next_element_sibling(Self) -> Element?
+  assigned_slot(Self) -> HTMLSlotElement?
+  get_client_rects(Self) -> JsValue
+  get_bounding_client_rect(Self) -> JsValue
+  check_visibility(Self, options? : CheckVisibilityOptions) -> Bool
+  scroll_into_view(Self, arg? : &TScrollIntoViewArgArg) -> JsPromise[Unit]
+  scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_to2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_by2(Self, Double, Double) -> JsPromise[Unit]
+  has_attributes(Self) -> Bool
+  get_attribute_names(Self) -> Array[String]
+  get_attribute(Self, String) -> String?
+  get_attribute_ns(Self, String, String) -> String?
+  set_attribute(Self, String, &TSetAttributeValueArg) -> Unit
+  set_attribute_ns(Self, String, String, &TSetAttributeNSValueArg) -> Unit
+  remove_attribute(Self, String) -> Unit
+  remove_attribute_ns(Self, String, String) -> Unit
+  toggle_attribute(Self, String, force? : Bool) -> Bool
+  has_attribute(Self, String) -> Bool
+  has_attribute_ns(Self, String, String) -> Bool
+  get_attribute_node(Self, String) -> Attr?
+  get_attribute_node_ns(Self, String, String) -> Attr?
+  set_attribute_node(Self, &TAttr) -> Attr?
+  set_attribute_node_ns(Self, &TAttr) -> Attr?
+  remove_attribute_node(Self, &TAttr) -> Attr
+  attach_shadow(Self, ShadowRootInit) -> ShadowRoot
+  closest(Self, String) -> Element?
+  matches(Self, String) -> Bool
+  webkit_matches_selector(Self, String) -> Bool
+  get_elements_by_tag_name(Self, String) -> HTMLCollection
+  get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
+  get_elements_by_class_name(Self, String) -> HTMLCollection
+  insert_adjacent_element(Self, String, &TElement) -> Element?
+  insert_adjacent_text(Self, String, String) -> Unit
+  set_html_unsafe(Self, &TSetHTMLUnsafeHtmlArg) -> Unit
+  get_html(Self, options? : GetHTMLOptions) -> String
+  insert_adjacent_html(Self, String, &TInsertAdjacentHTMLStringArg) -> Unit
+  get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
+  convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  prepend(Self, &TPrependNodesArg) -> Unit
+  append(Self, &TAppendNodesArg) -> Unit
+  replace_children(Self, &TReplaceChildrenNodesArg) -> Unit
+  move_before(Self, &TNode, &TNode) -> Unit
+  query_selector(Self, String) -> Element?
+  query_selector_all(Self, String) -> NodeList
+  before(Self, &TBeforeNodesArg) -> Unit
+  after(Self, &TAfterNodesArg) -> Unit
+  replace_with(Self, &TReplaceWithNodesArg) -> Unit
+  remove(Self) -> Unit
+}
+
+pub trait TEvent : TJsValue {
+  type_(Self) -> String
+  target(Self) -> EventTarget?
+  src_element(Self) -> EventTarget?
+  current_target(Self) -> EventTarget?
+  event_phase(Self) -> UInt
+  cancel_bubble(Self) -> Bool
+  set_cancel_bubble(Self, Bool) -> Unit
+  bubbles(Self) -> Bool
+  cancelable(Self) -> Bool
+  return_value(Self) -> Bool
+  set_return_value(Self, Bool) -> Unit
+  default_prevented(Self) -> Bool
+  composed(Self) -> Bool
+  is_trusted(Self) -> Bool
+  time_stamp(Self) -> Double
+  composed_path(Self) -> Array[EventTarget]
+  stop_propagation(Self) -> Unit
+  stop_immediate_propagation(Self) -> Unit
+  prevent_default(Self) -> Unit
+  init_event(Self, String, bubbles? : Bool, cancelable? : Bool) -> Unit
+}
+
+pub trait TEventTarget : TJsValue {
+  add_event_listener(Self, String, EventListener, options? : &TAddEventListenerOptionsArg) -> Unit
+  remove_event_listener(Self, String, EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit
+  dispatch_event(Self, &TEvent) -> Bool
+}
+
+pub trait TFile : TJsValue + TBlob {
+  name(Self) -> String
+  last_modified(Self) -> Int64
+}
+
+pub trait TFileList : TJsValue {
+  length(Self) -> UInt
+  item(Self, UInt) -> JsValue?
+}
+
+pub trait TFileReader : TJsValue + TEventTarget {
+  ready_state(Self) -> UInt
+  result(Self) -> Result
+  error(Self) -> JsValue?
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
+  onloadend(Self) -> EventHandler
+  set_onloadend(Self, EventHandler) -> Unit
+  read_as_array_buffer(Self, &TBlob) -> Unit
+  read_as_binary_string(Self, &TBlob) -> Unit
+  read_as_text(Self, &TBlob, encoding? : String) -> Unit
+  read_as_data_url(Self, &TBlob) -> Unit
+  abort(Self) -> Unit
+}
+
+pub trait TFileReaderSync : TJsValue {
+  read_as_array_buffer(Self, &TBlob) -> ArrayBuffer
+  read_as_binary_string(Self, &TBlob) -> String
+  read_as_text(Self, &TBlob, encoding? : String) -> String
+  read_as_data_url(Self, &TBlob) -> String
+}
+
+pub(open) trait TFillStyle {
+  to_js(Self) -> JsValue
+}
+pub impl TFillStyle for String
+
+pub trait TFocusEvent : TJsValue + TUIEvent {
+  related_target(Self) -> EventTarget?
+}
+
+pub trait THTMLAnchorElement : TJsValue + THTMLElement {
+  target(Self) -> String
+  set_target(Self, String) -> Unit
+  download(Self) -> String
+  set_download(Self, String) -> Unit
+  ping(Self) -> String
+  set_ping(Self, String) -> Unit
+  rel(Self) -> String
+  set_rel(Self, String) -> Unit
+  rel_list(Self) -> DOMTokenList
+  hreflang(Self) -> String
+  set_hreflang(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  text(Self) -> String
+  set_text(Self, String) -> Unit
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  coords(Self) -> String
+  set_coords(Self, String) -> Unit
+  charset(Self) -> String
+  set_charset(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  rev(Self) -> String
+  set_rev(Self, String) -> Unit
+  shape(Self) -> String
+  set_shape(Self, String) -> Unit
+  href(Self) -> String
+  set_href(Self, String) -> Unit
+  origin(Self) -> String
+  protocol(Self) -> String
+  set_protocol(Self, String) -> Unit
+  username(Self) -> String
+  set_username(Self, String) -> Unit
+  password(Self) -> String
+  set_password(Self, String) -> Unit
+  host(Self) -> String
+  set_host(Self, String) -> Unit
+  hostname(Self) -> String
+  set_hostname(Self, String) -> Unit
+  port(Self) -> String
+  set_port(Self, String) -> Unit
+  pathname(Self) -> String
+  set_pathname(Self, String) -> Unit
+  search(Self) -> String
+  set_search(Self, String) -> Unit
+  hash(Self) -> String
+  set_hash(Self, String) -> Unit
+}
+
+pub trait THTMLAudioElement : TJsValue {
+}
+
+pub trait THTMLBodyElement : TJsValue + THTMLElement {
+  text(Self) -> String
+  set_text(Self, String) -> Unit
+  link(Self) -> String
+  set_link(Self, String) -> Unit
+  v_link(Self) -> String
+  set_v_link(Self, String) -> Unit
+  a_link(Self) -> String
+  set_a_link(Self, String) -> Unit
+  bg_color(Self) -> String
+  set_bg_color(Self, String) -> Unit
+  background(Self) -> String
+  set_background(Self, String) -> Unit
+  onafterprint(Self) -> EventHandler
+  set_onafterprint(Self, EventHandler) -> Unit
+  onbeforeprint(Self) -> EventHandler
+  set_onbeforeprint(Self, EventHandler) -> Unit
+  onbeforeunload(Self) -> EventHandler
+  set_onbeforeunload(Self, EventHandler) -> Unit
+  onhashchange(Self) -> EventHandler
+  set_onhashchange(Self, EventHandler) -> Unit
+  onlanguagechange(Self) -> EventHandler
+  set_onlanguagechange(Self, EventHandler) -> Unit
+  onmessage(Self) -> EventHandler
+  set_onmessage(Self, EventHandler) -> Unit
+  onmessageerror(Self) -> EventHandler
+  set_onmessageerror(Self, EventHandler) -> Unit
+  onoffline(Self) -> EventHandler
+  set_onoffline(Self, EventHandler) -> Unit
+  ononline(Self) -> EventHandler
+  set_ononline(Self, EventHandler) -> Unit
+  onpagehide(Self) -> EventHandler
+  set_onpagehide(Self, EventHandler) -> Unit
+  onpagereveal(Self) -> EventHandler
+  set_onpagereveal(Self, EventHandler) -> Unit
+  onpageshow(Self) -> EventHandler
+  set_onpageshow(Self, EventHandler) -> Unit
+  onpageswap(Self) -> EventHandler
+  set_onpageswap(Self, EventHandler) -> Unit
+  onpopstate(Self) -> EventHandler
+  set_onpopstate(Self, EventHandler) -> Unit
+  onrejectionhandled(Self) -> EventHandler
+  set_onrejectionhandled(Self, EventHandler) -> Unit
+  onstorage(Self) -> EventHandler
+  set_onstorage(Self, EventHandler) -> Unit
+  onunhandledrejection(Self) -> EventHandler
+  set_onunhandledrejection(Self, EventHandler) -> Unit
+  onunload(Self) -> EventHandler
+  set_onunload(Self, EventHandler) -> Unit
+}
+
+pub trait THTMLButtonElement : TJsValue + THTMLElement {
+  command(Self) -> String
+  set_command(Self, String) -> Unit
+  command_for_element(Self) -> Element?
+  set_command_for_element(Self, Element) -> Unit
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  form(Self) -> HTMLFormElement?
+  form_action(Self) -> String
+  set_form_action(Self, String) -> Unit
+  form_enctype(Self) -> String
+  set_form_enctype(Self, String) -> Unit
+  form_method(Self) -> String
+  set_form_method(Self, String) -> Unit
+  form_no_validate(Self) -> Bool
+  set_form_no_validate(Self, Bool) -> Unit
+  form_target(Self) -> String
+  set_form_target(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  will_validate(Self) -> Bool
+  validity(Self) -> JsValue
+  validation_message(Self) -> String
+  labels(Self) -> NodeList
+  popover_target_element(Self) -> Element?
+  set_popover_target_element(Self, Element) -> Unit
+  popover_target_action(Self) -> String
+  set_popover_target_action(Self, String) -> Unit
+  check_validity(Self) -> Bool
+  report_validity(Self) -> Bool
+  set_custom_validity(Self, String) -> Unit
+}
+
+pub trait THTMLCanvasElement : TJsValue + THTMLElement {
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
+  get_context(Self, String, options? : JsValue) -> &TRenderingContext?
+  to_data_url(Self, type_? : String, quality? : JsValue) -> String
+  to_blob(Self, JsValue, type_? : String, quality? : JsValue) -> Unit
+  transfer_control_to_offscreen(Self) -> OffscreenCanvas
+}
+
+pub trait THTMLCollection : TJsValue {
+  length(Self) -> UInt
+  item(Self, UInt) -> Element?
+  named_item(Self, String) -> Element?
+}
+
+pub trait THTMLDivElement : TJsValue + THTMLElement {
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+}
+
+pub trait THTMLElement : TJsValue + TElement {
+  scroll_parent(Self) -> Element?
+  offset_parent(Self) -> Element?
+  offset_top(Self) -> Int
+  offset_left(Self) -> Int
+  offset_width(Self) -> Int
+  offset_height(Self) -> Int
+  title(Self) -> String
+  set_title(Self, String) -> Unit
+  lang(Self) -> String
+  set_lang(Self, String) -> Unit
+  translate(Self) -> Bool
+  set_translate(Self, Bool) -> Unit
+  dir(Self) -> String
+  set_dir(Self, String) -> Unit
+  hidden(Self) -> Hidden
+  set_hidden(Self, &THidden) -> Unit
+  inert(Self) -> Bool
+  set_inert(Self, Bool) -> Unit
+  access_key(Self) -> String
+  set_access_key(Self, String) -> Unit
+  access_key_label(Self) -> String
+  draggable(Self) -> Bool
+  set_draggable(Self, Bool) -> Unit
+  spellcheck(Self) -> Bool
+  set_spellcheck(Self, Bool) -> Unit
+  writing_suggestions(Self) -> String
+  set_writing_suggestions(Self, String) -> Unit
+  autocapitalize(Self) -> String
+  set_autocapitalize(Self, String) -> Unit
+  autocorrect(Self) -> Bool
+  set_autocorrect(Self, Bool) -> Unit
+  inner_text(Self) -> String
+  set_inner_text(Self, String) -> Unit
+  outer_text(Self) -> String
+  set_outer_text(Self, String) -> Unit
+  popover(Self) -> String?
+  set_popover(Self, String) -> Unit
+  heading_offset(Self) -> UInt
+  set_heading_offset(Self, UInt) -> Unit
+  heading_reset(Self) -> Bool
+  set_heading_reset(Self, Bool) -> Unit
+  style(Self) -> JsValue
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onauxclick(Self) -> EventHandler
+  set_onauxclick(Self, EventHandler) -> Unit
+  onbeforeinput(Self) -> EventHandler
+  set_onbeforeinput(Self, EventHandler) -> Unit
+  onbeforematch(Self) -> EventHandler
+  set_onbeforematch(Self, EventHandler) -> Unit
+  onbeforetoggle(Self) -> EventHandler
+  set_onbeforetoggle(Self, EventHandler) -> Unit
+  onblur(Self) -> EventHandler
+  set_onblur(Self, EventHandler) -> Unit
+  oncancel(Self) -> EventHandler
+  set_oncancel(Self, EventHandler) -> Unit
+  oncanplay(Self) -> EventHandler
+  set_oncanplay(Self, EventHandler) -> Unit
+  oncanplaythrough(Self) -> EventHandler
+  set_oncanplaythrough(Self, EventHandler) -> Unit
+  onchange(Self) -> EventHandler
+  set_onchange(Self, EventHandler) -> Unit
+  onclick(Self) -> EventHandler
+  set_onclick(Self, EventHandler) -> Unit
+  onclose(Self) -> EventHandler
+  set_onclose(Self, EventHandler) -> Unit
+  oncommand(Self) -> EventHandler
+  set_oncommand(Self, EventHandler) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextmenu(Self) -> EventHandler
+  set_oncontextmenu(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  oncopy(Self) -> EventHandler
+  set_oncopy(Self, EventHandler) -> Unit
+  oncuechange(Self) -> EventHandler
+  set_oncuechange(Self, EventHandler) -> Unit
+  oncut(Self) -> EventHandler
+  set_oncut(Self, EventHandler) -> Unit
+  ondblclick(Self) -> EventHandler
+  set_ondblclick(Self, EventHandler) -> Unit
+  ondrag(Self) -> EventHandler
+  set_ondrag(Self, EventHandler) -> Unit
+  ondragend(Self) -> EventHandler
+  set_ondragend(Self, EventHandler) -> Unit
+  ondragenter(Self) -> EventHandler
+  set_ondragenter(Self, EventHandler) -> Unit
+  ondragleave(Self) -> EventHandler
+  set_ondragleave(Self, EventHandler) -> Unit
+  ondragover(Self) -> EventHandler
+  set_ondragover(Self, EventHandler) -> Unit
+  ondragstart(Self) -> EventHandler
+  set_ondragstart(Self, EventHandler) -> Unit
+  ondrop(Self) -> EventHandler
+  set_ondrop(Self, EventHandler) -> Unit
+  ondurationchange(Self) -> EventHandler
+  set_ondurationchange(Self, EventHandler) -> Unit
+  onemptied(Self) -> EventHandler
+  set_onemptied(Self, EventHandler) -> Unit
+  onended(Self) -> EventHandler
+  set_onended(Self, EventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
+  onfocus(Self) -> EventHandler
+  set_onfocus(Self, EventHandler) -> Unit
+  onformdata(Self) -> EventHandler
+  set_onformdata(Self, EventHandler) -> Unit
+  oninput(Self) -> EventHandler
+  set_oninput(Self, EventHandler) -> Unit
+  oninvalid(Self) -> EventHandler
+  set_oninvalid(Self, EventHandler) -> Unit
+  onkeydown(Self) -> EventHandler
+  set_onkeydown(Self, EventHandler) -> Unit
+  onkeypress(Self) -> EventHandler
+  set_onkeypress(Self, EventHandler) -> Unit
+  onkeyup(Self) -> EventHandler
+  set_onkeyup(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onloadeddata(Self) -> EventHandler
+  set_onloadeddata(Self, EventHandler) -> Unit
+  onloadedmetadata(Self) -> EventHandler
+  set_onloadedmetadata(Self, EventHandler) -> Unit
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onmousedown(Self) -> EventHandler
+  set_onmousedown(Self, EventHandler) -> Unit
+  onmouseenter(Self) -> EventHandler
+  set_onmouseenter(Self, EventHandler) -> Unit
+  onmouseleave(Self) -> EventHandler
+  set_onmouseleave(Self, EventHandler) -> Unit
+  onmousemove(Self) -> EventHandler
+  set_onmousemove(Self, EventHandler) -> Unit
+  onmouseout(Self) -> EventHandler
+  set_onmouseout(Self, EventHandler) -> Unit
+  onmouseover(Self) -> EventHandler
+  set_onmouseover(Self, EventHandler) -> Unit
+  onmouseup(Self) -> EventHandler
+  set_onmouseup(Self, EventHandler) -> Unit
+  onpaste(Self) -> EventHandler
+  set_onpaste(Self, EventHandler) -> Unit
+  onpause(Self) -> EventHandler
+  set_onpause(Self, EventHandler) -> Unit
+  onplay(Self) -> EventHandler
+  set_onplay(Self, EventHandler) -> Unit
+  onplaying(Self) -> EventHandler
+  set_onplaying(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onratechange(Self) -> EventHandler
+  set_onratechange(Self, EventHandler) -> Unit
+  onreset(Self) -> EventHandler
+  set_onreset(Self, EventHandler) -> Unit
+  onresize(Self) -> EventHandler
+  set_onresize(Self, EventHandler) -> Unit
+  onscroll(Self) -> EventHandler
+  set_onscroll(Self, EventHandler) -> Unit
+  onscrollend(Self) -> EventHandler
+  set_onscrollend(Self, EventHandler) -> Unit
+  onsecuritypolicyviolation(Self) -> EventHandler
+  set_onsecuritypolicyviolation(Self, EventHandler) -> Unit
+  onseeked(Self) -> EventHandler
+  set_onseeked(Self, EventHandler) -> Unit
+  onseeking(Self) -> EventHandler
+  set_onseeking(Self, EventHandler) -> Unit
+  onselect(Self) -> EventHandler
+  set_onselect(Self, EventHandler) -> Unit
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  onstalled(Self) -> EventHandler
+  set_onstalled(Self, EventHandler) -> Unit
+  onsubmit(Self) -> EventHandler
+  set_onsubmit(Self, EventHandler) -> Unit
+  onsuspend(Self) -> EventHandler
+  set_onsuspend(Self, EventHandler) -> Unit
+  ontimeupdate(Self) -> EventHandler
+  set_ontimeupdate(Self, EventHandler) -> Unit
+  ontoggle(Self) -> EventHandler
+  set_ontoggle(Self, EventHandler) -> Unit
+  onvolumechange(Self) -> EventHandler
+  set_onvolumechange(Self, EventHandler) -> Unit
+  onwaiting(Self) -> EventHandler
+  set_onwaiting(Self, EventHandler) -> Unit
+  onwebkitanimationend(Self) -> EventHandler
+  set_onwebkitanimationend(Self, EventHandler) -> Unit
+  onwebkitanimationiteration(Self) -> EventHandler
+  set_onwebkitanimationiteration(Self, EventHandler) -> Unit
+  onwebkitanimationstart(Self) -> EventHandler
+  set_onwebkitanimationstart(Self, EventHandler) -> Unit
+  onwebkittransitionend(Self) -> EventHandler
+  set_onwebkittransitionend(Self, EventHandler) -> Unit
+  onwheel(Self) -> EventHandler
+  set_onwheel(Self, EventHandler) -> Unit
+  content_editable(Self) -> String
+  set_content_editable(Self, String) -> Unit
+  enter_key_hint(Self) -> String
+  set_enter_key_hint(Self, String) -> Unit
+  is_content_editable(Self) -> Bool
+  input_mode(Self) -> String
+  set_input_mode(Self, String) -> Unit
+  dataset(Self) -> JsValue
+  nonce(Self) -> String
+  set_nonce(Self, String) -> Unit
+  autofocus(Self) -> Bool
+  set_autofocus(Self, Bool) -> Unit
+  tab_index(Self) -> Int
+  set_tab_index(Self, Int) -> Unit
+  click(Self) -> Unit
+  attach_internals(Self) -> JsValue
+  show_popover(Self, options? : ShowPopoverOptions) -> Unit
+  hide_popover(Self) -> Unit
+  toggle_popover(Self, options? : &TTogglePopoverOptionsArg) -> Bool
+  focus(Self, options? : FocusOptions) -> Unit
+  blur(Self) -> Unit
+}
+
+pub trait THTMLFormElement : TJsValue + THTMLElement {
+  accept_charset(Self) -> String
+  set_accept_charset(Self, String) -> Unit
+  action(Self) -> String
+  set_action(Self, String) -> Unit
+  autocomplete(Self) -> String
+  set_autocomplete(Self, String) -> Unit
+  enctype(Self) -> String
+  set_enctype(Self, String) -> Unit
+  encoding(Self) -> String
+  set_encoding(Self, String) -> Unit
+  method_(Self) -> String
+  set_method_(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  no_validate(Self) -> Bool
+  set_no_validate(Self, Bool) -> Unit
+  target(Self) -> String
+  set_target(Self, String) -> Unit
+  rel(Self) -> String
+  set_rel(Self, String) -> Unit
+  rel_list(Self) -> DOMTokenList
+  elements(Self) -> JsValue
+  length(Self) -> UInt
+  submit(Self) -> Unit
+  request_submit(Self, submitter? : &THTMLElement) -> Unit
+  reset(Self) -> Unit
+  check_validity(Self) -> Bool
+  report_validity(Self) -> Bool
+}
+
+pub trait THTMLHeadElement : TJsValue + THTMLElement {
+}
+
+pub trait THTMLHtmlElement : TJsValue + THTMLElement {
+  version(Self) -> String
+  set_version(Self, String) -> Unit
+}
+
+pub trait THTMLImageElement : TJsValue + THTMLElement {
+  x(Self) -> Int
+  y(Self) -> Int
+  alt(Self) -> String
+  set_alt(Self, String) -> Unit
+  src(Self) -> String
+  set_src(Self, String) -> Unit
+  srcset(Self) -> String
+  set_srcset(Self, String) -> Unit
+  sizes(Self) -> String
+  set_sizes(Self, String) -> Unit
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  use_map(Self) -> String
+  set_use_map(Self, String) -> Unit
+  is_map(Self) -> Bool
+  set_is_map(Self, Bool) -> Unit
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
+  natural_width(Self) -> UInt
+  natural_height(Self) -> UInt
+  complete(Self) -> Bool
+  current_src(Self) -> String
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  decoding(Self) -> String
+  set_decoding(Self, String) -> Unit
+  loading(Self) -> String
+  set_loading(Self, String) -> Unit
+  fetch_priority(Self) -> String
+  set_fetch_priority(Self, String) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  lowsrc(Self) -> String
+  set_lowsrc(Self, String) -> Unit
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+  hspace(Self) -> UInt
+  set_hspace(Self, UInt) -> Unit
+  vspace(Self) -> UInt
+  set_vspace(Self, UInt) -> Unit
+  long_desc(Self) -> String
+  set_long_desc(Self, String) -> Unit
+  border(Self) -> String
+  set_border(Self, String) -> Unit
+  decode(Self) -> JsPromise[Unit]
+}
+
+pub trait THTMLInputElement : TJsValue + THTMLElement {
+  accept(Self) -> String
+  set_accept(Self, String) -> Unit
+  alpha(Self) -> Bool
+  set_alpha(Self, Bool) -> Unit
+  alt(Self) -> String
+  set_alt(Self, String) -> Unit
+  autocomplete(Self) -> String
+  set_autocomplete(Self, String) -> Unit
+  default_checked(Self) -> Bool
+  set_default_checked(Self, Bool) -> Unit
+  checked(Self) -> Bool
+  set_checked(Self, Bool) -> Unit
+  color_space(Self) -> String
+  set_color_space(Self, String) -> Unit
+  dir_name(Self) -> String
+  set_dir_name(Self, String) -> Unit
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  form(Self) -> HTMLFormElement?
+  files(Self) -> JsValue?
+  set_files(Self, JsValue) -> Unit
+  form_action(Self) -> String
+  set_form_action(Self, String) -> Unit
+  form_enctype(Self) -> String
+  set_form_enctype(Self, String) -> Unit
+  form_method(Self) -> String
+  set_form_method(Self, String) -> Unit
+  form_no_validate(Self) -> Bool
+  set_form_no_validate(Self, Bool) -> Unit
+  form_target(Self) -> String
+  set_form_target(Self, String) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
+  indeterminate(Self) -> Bool
+  set_indeterminate(Self, Bool) -> Unit
+  list(Self) -> JsValue?
+  max(Self) -> String
+  set_max(Self, String) -> Unit
+  max_length(Self) -> Int
+  set_max_length(Self, Int) -> Unit
+  min(Self) -> String
+  set_min(Self, String) -> Unit
+  min_length(Self) -> Int
+  set_min_length(Self, Int) -> Unit
+  multiple(Self) -> Bool
+  set_multiple(Self, Bool) -> Unit
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  pattern(Self) -> String
+  set_pattern(Self, String) -> Unit
+  placeholder(Self) -> String
+  set_placeholder(Self, String) -> Unit
+  read_only(Self) -> Bool
+  set_read_only(Self, Bool) -> Unit
+  required(Self) -> Bool
+  set_required(Self, Bool) -> Unit
+  size(Self) -> UInt
+  set_size(Self, UInt) -> Unit
+  src(Self) -> String
+  set_src(Self, String) -> Unit
+  step(Self) -> String
+  set_step(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  default_value(Self) -> String
+  set_default_value(Self, String) -> Unit
+  value(Self) -> String
+  set_value(Self, String) -> Unit
+  value_as_date(Self) -> JsValue?
+  set_value_as_date(Self, JsValue) -> Unit
+  value_as_number(Self) -> Double
+  set_value_as_number(Self, Double) -> Unit
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
+  will_validate(Self) -> Bool
+  validity(Self) -> JsValue
+  validation_message(Self) -> String
+  labels(Self) -> NodeList?
+  selection_start(Self) -> UInt?
+  set_selection_start(Self, UInt) -> Unit
+  selection_end(Self) -> UInt?
+  set_selection_end(Self, UInt) -> Unit
+  selection_direction(Self) -> String?
+  set_selection_direction(Self, String) -> Unit
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+  use_map(Self) -> String
+  set_use_map(Self, String) -> Unit
+  popover_target_element(Self) -> Element?
+  set_popover_target_element(Self, Element) -> Unit
+  popover_target_action(Self) -> String
+  set_popover_target_action(Self, String) -> Unit
+  step_up(Self, n? : Int) -> Unit
+  step_down(Self, n? : Int) -> Unit
+  check_validity(Self) -> Bool
+  report_validity(Self) -> Bool
+  set_custom_validity(Self, String) -> Unit
+  select(Self) -> Unit
+  set_range_text(Self, String) -> Unit
+  set_range_text2(Self, String, UInt, UInt, selection_mode? : SelectionMode) -> Unit
+  set_selection_range(Self, UInt, UInt, direction? : String) -> Unit
+  show_picker(Self) -> Unit
+}
+
+pub trait THTMLLinkElement : TJsValue + THTMLElement {
+  href(Self) -> String
+  set_href(Self, String) -> Unit
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  rel(Self) -> String
+  set_rel(Self, String) -> Unit
+  as_(Self) -> String
+  set_as_(Self, String) -> Unit
+  rel_list(Self) -> DOMTokenList
+  media(Self) -> String
+  set_media(Self, String) -> Unit
+  integrity(Self) -> String
+  set_integrity(Self, String) -> Unit
+  hreflang(Self) -> String
+  set_hreflang(Self, String) -> Unit
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  sizes(Self) -> DOMTokenList
+  image_srcset(Self) -> String
+  set_image_srcset(Self, String) -> Unit
+  image_sizes(Self) -> String
+  set_image_sizes(Self, String) -> Unit
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  blocking(Self) -> DOMTokenList
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  fetch_priority(Self) -> String
+  set_fetch_priority(Self, String) -> Unit
+  charset(Self) -> String
+  set_charset(Self, String) -> Unit
+  rev(Self) -> String
+  set_rev(Self, String) -> Unit
+  target(Self) -> String
+  set_target(Self, String) -> Unit
+  sheet(Self) -> JsValue?
+}
+
+pub(open) trait THTMLOrSVGImageElement {
+  to_js(Self) -> JsValue
+}
+pub fn[T : THTMLOrSVGImageElement] &THTMLOrSVGImageElement::into(Self) -> T
+
+pub trait THTMLParagraphElement : TJsValue + THTMLElement {
+  align(Self) -> String
+  set_align(Self, String) -> Unit
+}
+
+pub trait THTMLScriptElement : TJsValue + THTMLElement {
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  src(Self) -> String
+  set_src(Self, String) -> Unit
+  no_module(Self) -> Bool
+  set_no_module(Self, Bool) -> Unit
+  async_(Self) -> Bool
+  set_async_(Self, Bool) -> Unit
+  defer_(Self) -> Bool
+  set_defer_(Self, Bool) -> Unit
+  blocking(Self) -> DOMTokenList
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  referrer_policy(Self) -> String
+  set_referrer_policy(Self, String) -> Unit
+  integrity(Self) -> String
+  set_integrity(Self, String) -> Unit
+  fetch_priority(Self) -> String
+  set_fetch_priority(Self, String) -> Unit
+  text(Self) -> String
+  set_text(Self, String) -> Unit
+  charset(Self) -> String
+  set_charset(Self, String) -> Unit
+  event(Self) -> String
+  set_event(Self, String) -> Unit
+  html_for(Self) -> String
+  set_html_for(Self, String) -> Unit
+}
+
+pub trait THTMLSlotElement : TJsValue + THTMLElement {
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  assigned_nodes(Self, options? : AssignedNodesOptions) -> Array[Node]
+  assigned_elements(Self, options? : AssignedNodesOptions) -> Array[Element]
+  assign(Self, &TAssignNodesArg) -> Unit
+}
+
+pub trait THTMLSpanElement : TJsValue + THTMLElement {
+}
+
+pub trait THTMLStyleElement : TJsValue + THTMLElement {
+  disabled(Self) -> Bool
+  set_disabled(Self, Bool) -> Unit
+  media(Self) -> String
+  set_media(Self, String) -> Unit
+  blocking(Self) -> DOMTokenList
+  type_(Self) -> String
+  set_type_(Self, String) -> Unit
+  sheet(Self) -> JsValue?
+}
+
+pub trait THTMLVideoElement : TJsValue {
+  width(Self) -> UInt
+  set_width(Self, UInt) -> Unit
+  height(Self) -> UInt
+  set_height(Self, UInt) -> Unit
+  video_width(Self) -> UInt
+  video_height(Self) -> UInt
+  poster(Self) -> String
+  set_poster(Self, String) -> Unit
+  plays_inline(Self) -> Bool
+  set_plays_inline(Self, Bool) -> Unit
+}
+
+pub(open) trait THidden {
+  to_js(Self) -> JsValue
+}
+pub impl THidden for Bool
+pub impl THidden for Double
+pub impl THidden for String
+
+pub trait THistory : TJsValue {
+  length(Self) -> UInt
+  scroll_restoration(Self) -> ScrollRestoration
+  set_scroll_restoration(Self, ScrollRestoration) -> Unit
+  state(Self) -> JsValue
+  go(Self, delta? : Int) -> Unit
+  back(Self) -> Unit
+  forward(Self) -> Unit
+  push_state(Self, JsValue, String, url? : String) -> Unit
+  replace_state(Self, JsValue, String, url? : String) -> Unit
+}
+
+pub trait TImageBitmap : TJsValue {
+  width(Self) -> UInt
+  height(Self) -> UInt
+  close(Self) -> Unit
+}
+
+pub trait TImageBitmapRenderingContext : TJsValue {
+  canvas(Self) -> Canvas
+  transfer_from_image_bitmap(Self, &TImageBitmap) -> Unit
+}
+
+pub(open) trait TImageBitmapSource {
+  to_js(Self) -> JsValue
+}
+pub fn[T : TImageBitmapSource] &TImageBitmapSource::into(Self) -> T
+
+pub trait TImageData : TJsValue {
+  width(Self) -> UInt
+  height(Self) -> UInt
+  data(Self) -> JsValue
+  pixel_format(Self) -> ImageDataPixelFormat
+  color_space(Self) -> PredefinedColorSpace
+}
+
+pub(open) trait TImportNodeOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TImportNodeOptionsArg for Bool
+
+pub(open) trait TInnerHTML {
+  to_js(Self) -> JsValue
+}
+pub impl TInnerHTML for String
+
+pub trait TInputEvent : TJsValue + TUIEvent {
+  data(Self) -> String?
+  is_composing(Self) -> Bool
+  input_type(Self) -> String
+}
+
+pub(open) trait TInsertAdjacentHTMLStringArg {
+  to_js(Self) -> JsValue
+}
+pub impl TInsertAdjacentHTMLStringArg for String
+
+pub(open) trait TJsValue {
+  to_js(Self) -> JsValue
+  is_null(Self) -> Bool = _
+}
+pub impl TJsValue for Bool
+pub impl TJsValue for Byte
+pub impl TJsValue for Int
+pub impl TJsValue for Int64
+pub impl TJsValue for UInt
+pub impl TJsValue for UInt64
+pub impl TJsValue for Float
+pub impl TJsValue for Double
+pub impl TJsValue for String
+pub impl[T : TJsValue] TJsValue for Array[T]
+
+pub trait TKeyboardEvent : TJsValue + TUIEvent {
+  key(Self) -> String
+  code(Self) -> String
+  location(Self) -> UInt
+  ctrl_key(Self) -> Bool
+  shift_key(Self) -> Bool
+  alt_key(Self) -> Bool
+  meta_key(Self) -> Bool
+  repeat(Self) -> Bool
+  is_composing(Self) -> Bool
+  char_code(Self) -> UInt
+  key_code(Self) -> UInt
+  get_modifier_state(Self, String) -> Bool
+  init_keyboard_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, key_arg? : String, location_arg? : UInt, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit
+}
+
+pub trait TLocation : TJsValue {
+  href(Self) -> String
+  set_href(Self, String) -> Unit
+  origin(Self) -> String
+  protocol(Self) -> String
+  set_protocol(Self, String) -> Unit
+  host(Self) -> String
+  set_host(Self, String) -> Unit
+  hostname(Self) -> String
+  set_hostname(Self, String) -> Unit
+  port(Self) -> String
+  set_port(Self, String) -> Unit
+  pathname(Self) -> String
+  set_pathname(Self, String) -> Unit
+  search(Self) -> String
+  set_search(Self, String) -> Unit
+  hash(Self) -> String
+  set_hash(Self, String) -> Unit
+  ancestor_origins(Self) -> JsValue
+  assign(Self, String) -> Unit
+  replace(Self, String) -> Unit
+  reload(Self) -> Unit
+}
+
+pub trait TMouseEvent : TJsValue + TUIEvent {
+  page_x(Self) -> Double
+  page_y(Self) -> Double
+  x(Self) -> Double
+  y(Self) -> Double
+  offset_x(Self) -> Double
+  offset_y(Self) -> Double
+  screen_x(Self) -> Int
+  screen_y(Self) -> Int
+  client_x(Self) -> Int
+  client_y(Self) -> Int
+  layer_x(Self) -> Int
+  layer_y(Self) -> Int
+  ctrl_key(Self) -> Bool
+  shift_key(Self) -> Bool
+  alt_key(Self) -> Bool
+  meta_key(Self) -> Bool
+  button(Self) -> Int
+  buttons(Self) -> UInt
+  related_target(Self) -> EventTarget?
+  get_modifier_state(Self, String) -> Bool
+  init_mouse_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : &TEventTarget) -> Unit
+}
+
+pub trait TMutationObserver : TJsValue {
+  observe(Self, &TNode, options? : MutationObserverInit) -> Unit
+  disconnect(Self) -> Unit
+  take_records(Self) -> Array[MutationRecord]
+}
+
+pub trait TMutationRecord : TJsValue {
+  type_(Self) -> String
+  target(Self) -> Node
+  added_nodes(Self) -> NodeList
+  removed_nodes(Self) -> NodeList
+  previous_sibling(Self) -> Node?
+  next_sibling(Self) -> Node?
+  attribute_name(Self) -> String?
+  attribute_namespace(Self) -> String?
+  old_value(Self) -> String?
+}
+
+pub trait TNamedNodeMap : TJsValue {
+  length(Self) -> UInt
+  item(Self, UInt) -> Attr?
+  get_named_item(Self, String) -> Attr?
+  get_named_item_ns(Self, String, String) -> Attr?
+  set_named_item(Self, &TAttr) -> Attr?
+  set_named_item_ns(Self, &TAttr) -> Attr?
+  remove_named_item(Self, String) -> Attr
+  remove_named_item_ns(Self, String, String) -> Attr
+}
+
+pub trait TNavigator : TJsValue {
+  user_activation(Self) -> JsValue
+  app_code_name(Self) -> String
+  app_name(Self) -> String
+  app_version(Self) -> String
+  platform(Self) -> String
+  product(Self) -> String
+  product_sub(Self) -> String
+  user_agent(Self) -> String
+  vendor(Self) -> String
+  vendor_sub(Self) -> String
+  oscpu(Self) -> String
+  language(Self) -> String
+  languages(Self) -> Array[String]
+  on_line(Self) -> Bool
+  cookie_enabled(Self) -> Bool
+  plugins(Self) -> JsValue
+  mime_types(Self) -> JsValue
+  pdf_viewer_enabled(Self) -> Bool
+  hardware_concurrency(Self) -> UInt64
+  taint_enabled(Self) -> Bool
+  register_protocol_handler(Self, String, String) -> Unit
+  unregister_protocol_handler(Self, String, String) -> Unit
+  java_enabled(Self) -> Bool
+}
+
+pub trait TNode : TJsValue + TEventTarget {
+  node_type(Self) -> UInt
+  node_name(Self) -> String
+  base_uri(Self) -> String
+  is_connected(Self) -> Bool
+  owner_document(Self) -> Document?
+  parent_node(Self) -> Node?
+  parent_element(Self) -> Element?
+  child_nodes(Self) -> NodeList
+  first_child(Self) -> Node?
+  last_child(Self) -> Node?
+  previous_sibling(Self) -> Node?
+  next_sibling(Self) -> Node?
+  node_value(Self) -> String?
+  set_node_value(Self, String) -> Unit
+  text_content(Self) -> String?
+  set_text_content(Self, String) -> Unit
+  get_root_node(Self, options? : GetRootNodeOptions) -> Node
+  has_child_nodes(Self) -> Bool
+  normalize(Self) -> Unit
+  clone_node(Self, subtree? : Bool) -> Node
+  is_equal_node(Self, &TNode) -> Bool
+  is_same_node(Self, &TNode) -> Bool
+  compare_document_position(Self, &TNode) -> UInt
+  contains(Self, &TNode) -> Bool
+  lookup_prefix(Self, String) -> String?
+  lookup_namespace_uri(Self, String) -> String?
+  is_default_namespace(Self, String) -> Bool
+  insert_before(Self, &TNode, &TNode) -> Node
+  append_child(Self, &TNode) -> Node
+  replace_child(Self, &TNode, &TNode) -> Node
+  remove_child(Self, &TNode) -> Node
+}
+
+pub trait TNodeList : TJsValue {
+  length(Self) -> UInt
+  item(Self, UInt) -> Node?
+}
+
+pub trait TOffscreenCanvas : TJsValue + TEventTarget {
+  width(Self) -> UInt64
+  set_width(Self, UInt64) -> Unit
+  height(Self) -> UInt64
+  set_height(Self, UInt64) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  get_context(Self, OffscreenRenderingContextId, options? : JsValue) -> JsValue?
+  transfer_to_image_bitmap(Self) -> ImageBitmap
+  convert_to_blob(Self, options? : ImageEncodeOptions) -> JsPromise[Blob]
+}
+
+pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
+  canvas(Self) -> OffscreenCanvas
+  global_alpha(Self) -> Double
+  set_global_alpha(Self, Double) -> Unit
+  global_composite_operation(Self) -> String
+  set_global_composite_operation(Self, String) -> Unit
+  image_smoothing_enabled(Self) -> Bool
+  set_image_smoothing_enabled(Self, Bool) -> Unit
+  image_smoothing_quality(Self) -> ImageSmoothingQuality
+  set_image_smoothing_quality(Self, ImageSmoothingQuality) -> Unit
+  stroke_style(Self) -> StrokeStyle
+  set_stroke_style(Self, &TStrokeStyle) -> Unit
+  fill_style(Self) -> FillStyle
+  set_fill_style(Self, &TFillStyle) -> Unit
+  shadow_offset_x(Self) -> Double
+  set_shadow_offset_x(Self, Double) -> Unit
+  shadow_offset_y(Self) -> Double
+  set_shadow_offset_y(Self, Double) -> Unit
+  shadow_blur(Self) -> Double
+  set_shadow_blur(Self, Double) -> Unit
+  shadow_color(Self) -> String
+  set_shadow_color(Self, String) -> Unit
+  filter(Self) -> String
+  set_filter(Self, String) -> Unit
+  line_width(Self) -> Double
+  set_line_width(Self, Double) -> Unit
+  line_cap(Self) -> CanvasLineCap
+  set_line_cap(Self, CanvasLineCap) -> Unit
+  line_join(Self) -> CanvasLineJoin
+  set_line_join(Self, CanvasLineJoin) -> Unit
+  miter_limit(Self) -> Double
+  set_miter_limit(Self, Double) -> Unit
+  line_dash_offset(Self) -> Double
+  set_line_dash_offset(Self, Double) -> Unit
+  lang(Self) -> String
+  set_lang(Self, String) -> Unit
+  font(Self) -> String
+  set_font(Self, String) -> Unit
+  text_align(Self) -> CanvasTextAlign
+  set_text_align(Self, CanvasTextAlign) -> Unit
+  text_baseline(Self) -> CanvasTextBaseline
+  set_text_baseline(Self, CanvasTextBaseline) -> Unit
+  direction(Self) -> CanvasDirection
+  set_direction(Self, CanvasDirection) -> Unit
+  letter_spacing(Self) -> String
+  set_letter_spacing(Self, String) -> Unit
+  font_kerning(Self) -> CanvasFontKerning
+  set_font_kerning(Self, CanvasFontKerning) -> Unit
+  font_stretch(Self) -> CanvasFontStretch
+  set_font_stretch(Self, CanvasFontStretch) -> Unit
+  font_variant_caps(Self) -> CanvasFontVariantCaps
+  set_font_variant_caps(Self, CanvasFontVariantCaps) -> Unit
+  text_rendering(Self) -> CanvasTextRendering
+  set_text_rendering(Self, CanvasTextRendering) -> Unit
+  word_spacing(Self) -> String
+  set_word_spacing(Self, String) -> Unit
+  get_context_attributes(Self) -> CanvasRenderingContext2DSettings
+  save(Self) -> Unit
+  restore(Self) -> Unit
+  reset(Self) -> Unit
+  is_context_lost(Self) -> Bool
+  scale(Self, Double, Double) -> Unit
+  rotate(Self, Double) -> Unit
+  translate(Self, Double, Double) -> Unit
+  transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  get_transform(Self) -> JsValue
+  set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  set_transform2(Self, transform? : DOMMatrix2DInit) -> Unit
+  reset_transform(Self) -> Unit
+  create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
+  create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
+  create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
+  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
+  clear_rect(Self, Double, Double, Double, Double) -> Unit
+  fill_rect(Self, Double, Double, Double, Double) -> Unit
+  stroke_rect(Self, Double, Double, Double, Double) -> Unit
+  begin_path(Self) -> Unit
+  fill(Self, fill_rule? : CanvasFillRule) -> Unit
+  fill2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
+  stroke(Self) -> Unit
+  stroke2(Self, JsValue) -> Unit
+  clip(Self, fill_rule? : CanvasFillRule) -> Unit
+  clip2(Self, JsValue, fill_rule? : CanvasFillRule) -> Unit
+  is_point_in_path(Self, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_path2(Self, JsValue, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_stroke(Self, Double, Double) -> Bool
+  is_point_in_stroke2(Self, JsValue, Double, Double) -> Bool
+  fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
+  measure_text(Self, String) -> JsValue
+  draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
+  draw_image2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
+  create_image_data2(Self, &TImageData) -> ImageData
+  get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
+  put_image_data(Self, &TImageData, Int, Int) -> Unit
+  put_image_data2(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
+  set_line_dash(Self, Array[Double]) -> Unit
+  get_line_dash(Self) -> Array[Double]
+  close_path(Self) -> Unit
+  move_to(Self, Double, Double) -> Unit
+  line_to(Self, Double, Double) -> Unit
+  quadratic_curve_to(Self, Double, Double, Double, Double) -> Unit
+  bezier_curve_to(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  arc_to(Self, Double, Double, Double, Double, Double) -> Unit
+  rect(Self, Double, Double, Double, Double) -> Unit
+  round_rect(Self, Double, Double, Double, Double, radii? : &TRoundRectRadiiArg) -> Unit
+  arc(Self, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
+  ellipse(Self, Double, Double, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
+}
+
+pub(open) trait TOuterHTML {
+  to_js(Self) -> JsValue
+}
+pub impl TOuterHTML for String
+
+pub(open) trait TParseHTMLUnsafeHtmlArg {
+  to_js(Self) -> JsValue
+}
+pub impl TParseHTMLUnsafeHtmlArg for String
+
+pub(open) trait TPrependNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TPrependNodesArg for String
+
+pub trait TProcessingInstruction : TJsValue + TCharacterData {
+  target(Self) -> String
+  sheet(Self) -> JsValue?
+}
+
+pub trait TRange : TJsValue {
+  common_ancestor_container(Self) -> Node
+  get_client_rects(Self) -> JsValue
+  get_bounding_client_rect(Self) -> JsValue
+  set_start(Self, &TNode, UInt) -> Unit
+  set_end(Self, &TNode, UInt) -> Unit
+  set_start_before(Self, &TNode) -> Unit
+  set_start_after(Self, &TNode) -> Unit
+  set_end_before(Self, &TNode) -> Unit
+  set_end_after(Self, &TNode) -> Unit
+  collapse(Self, to_start? : Bool) -> Unit
+  select_node(Self, &TNode) -> Unit
+  select_node_contents(Self, &TNode) -> Unit
+  compare_boundary_points(Self, UInt, &TRange) -> Int
+  delete_contents(Self) -> Unit
+  extract_contents(Self) -> DocumentFragment
+  clone_contents(Self) -> DocumentFragment
+  insert_node(Self, &TNode) -> Unit
+  surround_contents(Self, &TNode) -> Unit
+  clone_range(Self) -> Range
+  detach(Self) -> Unit
+  is_point_in_range(Self, &TNode, UInt) -> Bool
+  compare_point(Self, &TNode, UInt) -> Int
+  intersects_node(Self, &TNode) -> Bool
+  create_contextual_fragment(Self, &TCreateContextualFragmentStringArg) -> DocumentFragment
+}
+
+pub(open) trait TRemoveEventListenerOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TRemoveEventListenerOptionsArg for Bool
+
+pub(open) trait TRenderingContext {
+  to_js(Self) -> JsValue
+}
+pub fn[T : TRenderingContext] &TRenderingContext::into(Self) -> T
+
+pub(open) trait TReplaceChildrenNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TReplaceChildrenNodesArg for String
+
+pub(open) trait TReplaceWithNodesArg {
+  to_js(Self) -> JsValue
+}
+pub impl TReplaceWithNodesArg for String
+
+pub(open) trait TResult {
+  to_js(Self) -> JsValue
+}
+pub impl TResult for String
+
+pub(open) trait TRoundRectRadiiArg {
+  to_js(Self) -> JsValue
+}
+pub impl TRoundRectRadiiArg for Double
+pub impl TRoundRectRadiiArg for Array[JsValue]
+
+pub trait TSVGImageElement : TJsValue {
+  x(Self) -> JsValue
+  y(Self) -> JsValue
+  width(Self) -> JsValue
+  height(Self) -> JsValue
+  preserve_aspect_ratio(Self) -> JsValue
+  cross_origin(Self) -> String?
+  set_cross_origin(Self, String) -> Unit
+  href(Self) -> JsValue
+}
+
+pub(open) trait TScrollIntoViewArgArg {
+  to_js(Self) -> JsValue
+}
+pub impl TScrollIntoViewArgArg for Bool
+
+pub(open) trait TSetAttributeNSValueArg {
+  to_js(Self) -> JsValue
+}
+pub impl TSetAttributeNSValueArg for String
+
+pub(open) trait TSetAttributeValueArg {
+  to_js(Self) -> JsValue
+}
+pub impl TSetAttributeValueArg for String
+
+pub(open) trait TSetHTMLUnsafeHtmlArg {
+  to_js(Self) -> JsValue
+}
+pub impl TSetHTMLUnsafeHtmlArg for String
+
+pub trait TShadowRoot : TJsValue + TDocumentFragment {
+  mode(Self) -> ShadowRootMode
+  delegates_focus(Self) -> Bool
+  slot_assignment(Self) -> SlotAssignmentMode
+  clonable(Self) -> Bool
+  serializable(Self) -> Bool
+  host(Self) -> Element
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  inner_html(Self) -> InnerHTML
+  set_inner_html(Self, &TInnerHTML) -> Unit
+  style_sheets(Self) -> JsValue
+  adopted_style_sheets(Self) -> Array[JsValue]
+  set_adopted_style_sheets(Self, Array[JsValue]) -> Unit
+  custom_element_registry(Self) -> JsValue?
+  active_element(Self) -> Element?
+  set_html_unsafe(Self, &TSetHTMLUnsafeHtmlArg) -> Unit
+  get_html(Self, options? : GetHTMLOptions) -> String
+}
+
+pub trait TStorage : TJsValue {
+  length(Self) -> UInt
+  key(Self, UInt) -> String?
+  get_item(Self, String) -> String?
+  set_item(Self, String, String) -> Unit
+  remove_item(Self, String) -> Unit
+  clear(Self) -> Unit
+}
+
+pub(open) trait TStrokeStyle {
+  to_js(Self) -> JsValue
+}
+pub impl TStrokeStyle for String
+
+pub trait TText : TJsValue + TCharacterData {
+  whole_text(Self) -> String
+  assigned_slot(Self) -> HTMLSlotElement?
+  split_text(Self, UInt) -> Text
+  get_box_quads(Self, options? : BoxQuadOptions) -> Array[JsValue]
+  convert_quad_from_node(Self, DOMQuadInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_rect_from_node(Self, JsValue, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+  convert_point_from_node(Self, DOMPointInit, JsValue, options? : ConvertCoordinateOptions) -> JsValue
+}
+
+pub(open) trait TTogglePopoverOptionsArg {
+  to_js(Self) -> JsValue
+}
+pub impl TTogglePopoverOptionsArg for Bool
+
+pub trait TUIEvent : TJsValue + TEvent {
+  view(Self) -> Window?
+  detail(Self) -> Int
+  which(Self) -> UInt
+  init_ui_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, detail_arg? : Int) -> Unit
+}
+
+pub trait TWheelEvent : TJsValue + TMouseEvent {
+  delta_x(Self) -> Double
+  delta_y(Self) -> Double
+  delta_z(Self) -> Double
+  delta_mode(Self) -> UInt
+}
+
+pub trait TWindow : TJsValue + TEventTarget {
+  screen(Self) -> JsValue
+  visual_viewport(Self) -> JsValue?
+  inner_width(Self) -> Int
+  inner_height(Self) -> Int
+  scroll_x(Self) -> Double
+  page_x_offset(Self) -> Double
+  scroll_y(Self) -> Double
+  page_y_offset(Self) -> Double
+  screen_x(Self) -> Int
+  screen_left(Self) -> Int
+  screen_y(Self) -> Int
+  screen_top(Self) -> Int
+  outer_width(Self) -> Int
+  outer_height(Self) -> Int
+  device_pixel_ratio(Self) -> Double
+  event(Self) -> Event
+  window(Self) -> Window
+  self_(Self) -> Window
+  document(Self) -> Document
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  location(Self) -> Location
+  history(Self) -> History
+  navigation(Self) -> JsValue
+  custom_elements(Self) -> JsValue
+  locationbar(Self) -> JsValue
+  menubar(Self) -> JsValue
+  personalbar(Self) -> JsValue
+  scrollbars(Self) -> JsValue
+  statusbar(Self) -> JsValue
+  toolbar(Self) -> JsValue
+  status(Self) -> String
+  set_status(Self, String) -> Unit
+  closed(Self) -> Bool
+  frames(Self) -> Window
+  length(Self) -> UInt
+  top(Self) -> Window?
+  opener(Self) -> JsValue
+  set_opener(Self, JsValue) -> Unit
+  parent(Self) -> Window?
+  frame_element(Self) -> Element?
+  navigator(Self) -> Navigator
+  client_information(Self) -> Navigator
+  origin_agent_cluster(Self) -> Bool
+  external(Self) -> JsValue
+  onabort(Self) -> EventHandler
+  set_onabort(Self, EventHandler) -> Unit
+  onauxclick(Self) -> EventHandler
+  set_onauxclick(Self, EventHandler) -> Unit
+  onbeforeinput(Self) -> EventHandler
+  set_onbeforeinput(Self, EventHandler) -> Unit
+  onbeforematch(Self) -> EventHandler
+  set_onbeforematch(Self, EventHandler) -> Unit
+  onbeforetoggle(Self) -> EventHandler
+  set_onbeforetoggle(Self, EventHandler) -> Unit
+  onblur(Self) -> EventHandler
+  set_onblur(Self, EventHandler) -> Unit
+  oncancel(Self) -> EventHandler
+  set_oncancel(Self, EventHandler) -> Unit
+  oncanplay(Self) -> EventHandler
+  set_oncanplay(Self, EventHandler) -> Unit
+  oncanplaythrough(Self) -> EventHandler
+  set_oncanplaythrough(Self, EventHandler) -> Unit
+  onchange(Self) -> EventHandler
+  set_onchange(Self, EventHandler) -> Unit
+  onclick(Self) -> EventHandler
+  set_onclick(Self, EventHandler) -> Unit
+  onclose(Self) -> EventHandler
+  set_onclose(Self, EventHandler) -> Unit
+  oncommand(Self) -> EventHandler
+  set_oncommand(Self, EventHandler) -> Unit
+  oncontextlost(Self) -> EventHandler
+  set_oncontextlost(Self, EventHandler) -> Unit
+  oncontextmenu(Self) -> EventHandler
+  set_oncontextmenu(Self, EventHandler) -> Unit
+  oncontextrestored(Self) -> EventHandler
+  set_oncontextrestored(Self, EventHandler) -> Unit
+  oncopy(Self) -> EventHandler
+  set_oncopy(Self, EventHandler) -> Unit
+  oncuechange(Self) -> EventHandler
+  set_oncuechange(Self, EventHandler) -> Unit
+  oncut(Self) -> EventHandler
+  set_oncut(Self, EventHandler) -> Unit
+  ondblclick(Self) -> EventHandler
+  set_ondblclick(Self, EventHandler) -> Unit
+  ondrag(Self) -> EventHandler
+  set_ondrag(Self, EventHandler) -> Unit
+  ondragend(Self) -> EventHandler
+  set_ondragend(Self, EventHandler) -> Unit
+  ondragenter(Self) -> EventHandler
+  set_ondragenter(Self, EventHandler) -> Unit
+  ondragleave(Self) -> EventHandler
+  set_ondragleave(Self, EventHandler) -> Unit
+  ondragover(Self) -> EventHandler
+  set_ondragover(Self, EventHandler) -> Unit
+  ondragstart(Self) -> EventHandler
+  set_ondragstart(Self, EventHandler) -> Unit
+  ondrop(Self) -> EventHandler
+  set_ondrop(Self, EventHandler) -> Unit
+  ondurationchange(Self) -> EventHandler
+  set_ondurationchange(Self, EventHandler) -> Unit
+  onemptied(Self) -> EventHandler
+  set_onemptied(Self, EventHandler) -> Unit
+  onended(Self) -> EventHandler
+  set_onended(Self, EventHandler) -> Unit
+  onerror(Self) -> EventHandler
+  set_onerror(Self, EventHandler) -> Unit
+  onfocus(Self) -> EventHandler
+  set_onfocus(Self, EventHandler) -> Unit
+  onformdata(Self) -> EventHandler
+  set_onformdata(Self, EventHandler) -> Unit
+  oninput(Self) -> EventHandler
+  set_oninput(Self, EventHandler) -> Unit
+  oninvalid(Self) -> EventHandler
+  set_oninvalid(Self, EventHandler) -> Unit
+  onkeydown(Self) -> EventHandler
+  set_onkeydown(Self, EventHandler) -> Unit
+  onkeypress(Self) -> EventHandler
+  set_onkeypress(Self, EventHandler) -> Unit
+  onkeyup(Self) -> EventHandler
+  set_onkeyup(Self, EventHandler) -> Unit
+  onload(Self) -> EventHandler
+  set_onload(Self, EventHandler) -> Unit
+  onloadeddata(Self) -> EventHandler
+  set_onloadeddata(Self, EventHandler) -> Unit
+  onloadedmetadata(Self) -> EventHandler
+  set_onloadedmetadata(Self, EventHandler) -> Unit
+  onloadstart(Self) -> EventHandler
+  set_onloadstart(Self, EventHandler) -> Unit
+  onmousedown(Self) -> EventHandler
+  set_onmousedown(Self, EventHandler) -> Unit
+  onmouseenter(Self) -> EventHandler
+  set_onmouseenter(Self, EventHandler) -> Unit
+  onmouseleave(Self) -> EventHandler
+  set_onmouseleave(Self, EventHandler) -> Unit
+  onmousemove(Self) -> EventHandler
+  set_onmousemove(Self, EventHandler) -> Unit
+  onmouseout(Self) -> EventHandler
+  set_onmouseout(Self, EventHandler) -> Unit
+  onmouseover(Self) -> EventHandler
+  set_onmouseover(Self, EventHandler) -> Unit
+  onmouseup(Self) -> EventHandler
+  set_onmouseup(Self, EventHandler) -> Unit
+  onpaste(Self) -> EventHandler
+  set_onpaste(Self, EventHandler) -> Unit
+  onpause(Self) -> EventHandler
+  set_onpause(Self, EventHandler) -> Unit
+  onplay(Self) -> EventHandler
+  set_onplay(Self, EventHandler) -> Unit
+  onplaying(Self) -> EventHandler
+  set_onplaying(Self, EventHandler) -> Unit
+  onprogress(Self) -> EventHandler
+  set_onprogress(Self, EventHandler) -> Unit
+  onratechange(Self) -> EventHandler
+  set_onratechange(Self, EventHandler) -> Unit
+  onreset(Self) -> EventHandler
+  set_onreset(Self, EventHandler) -> Unit
+  onresize(Self) -> EventHandler
+  set_onresize(Self, EventHandler) -> Unit
+  onscroll(Self) -> EventHandler
+  set_onscroll(Self, EventHandler) -> Unit
+  onscrollend(Self) -> EventHandler
+  set_onscrollend(Self, EventHandler) -> Unit
+  onsecuritypolicyviolation(Self) -> EventHandler
+  set_onsecuritypolicyviolation(Self, EventHandler) -> Unit
+  onseeked(Self) -> EventHandler
+  set_onseeked(Self, EventHandler) -> Unit
+  onseeking(Self) -> EventHandler
+  set_onseeking(Self, EventHandler) -> Unit
+  onselect(Self) -> EventHandler
+  set_onselect(Self, EventHandler) -> Unit
+  onslotchange(Self) -> EventHandler
+  set_onslotchange(Self, EventHandler) -> Unit
+  onstalled(Self) -> EventHandler
+  set_onstalled(Self, EventHandler) -> Unit
+  onsubmit(Self) -> EventHandler
+  set_onsubmit(Self, EventHandler) -> Unit
+  onsuspend(Self) -> EventHandler
+  set_onsuspend(Self, EventHandler) -> Unit
+  ontimeupdate(Self) -> EventHandler
+  set_ontimeupdate(Self, EventHandler) -> Unit
+  ontoggle(Self) -> EventHandler
+  set_ontoggle(Self, EventHandler) -> Unit
+  onvolumechange(Self) -> EventHandler
+  set_onvolumechange(Self, EventHandler) -> Unit
+  onwaiting(Self) -> EventHandler
+  set_onwaiting(Self, EventHandler) -> Unit
+  onwebkitanimationend(Self) -> EventHandler
+  set_onwebkitanimationend(Self, EventHandler) -> Unit
+  onwebkitanimationiteration(Self) -> EventHandler
+  set_onwebkitanimationiteration(Self, EventHandler) -> Unit
+  onwebkitanimationstart(Self) -> EventHandler
+  set_onwebkitanimationstart(Self, EventHandler) -> Unit
+  onwebkittransitionend(Self) -> EventHandler
+  set_onwebkittransitionend(Self, EventHandler) -> Unit
+  onwheel(Self) -> EventHandler
+  set_onwheel(Self, EventHandler) -> Unit
+  onafterprint(Self) -> EventHandler
+  set_onafterprint(Self, EventHandler) -> Unit
+  onbeforeprint(Self) -> EventHandler
+  set_onbeforeprint(Self, EventHandler) -> Unit
+  onbeforeunload(Self) -> EventHandler
+  set_onbeforeunload(Self, EventHandler) -> Unit
+  onhashchange(Self) -> EventHandler
+  set_onhashchange(Self, EventHandler) -> Unit
+  onlanguagechange(Self) -> EventHandler
+  set_onlanguagechange(Self, EventHandler) -> Unit
+  onmessage(Self) -> EventHandler
+  set_onmessage(Self, EventHandler) -> Unit
+  onmessageerror(Self) -> EventHandler
+  set_onmessageerror(Self, EventHandler) -> Unit
+  onoffline(Self) -> EventHandler
+  set_onoffline(Self, EventHandler) -> Unit
+  ononline(Self) -> EventHandler
+  set_ononline(Self, EventHandler) -> Unit
+  onpagehide(Self) -> EventHandler
+  set_onpagehide(Self, EventHandler) -> Unit
+  onpagereveal(Self) -> EventHandler
+  set_onpagereveal(Self, EventHandler) -> Unit
+  onpageshow(Self) -> EventHandler
+  set_onpageshow(Self, EventHandler) -> Unit
+  onpageswap(Self) -> EventHandler
+  set_onpageswap(Self, EventHandler) -> Unit
+  onpopstate(Self) -> EventHandler
+  set_onpopstate(Self, EventHandler) -> Unit
+  onrejectionhandled(Self) -> EventHandler
+  set_onrejectionhandled(Self, EventHandler) -> Unit
+  onstorage(Self) -> EventHandler
+  set_onstorage(Self, EventHandler) -> Unit
+  onunhandledrejection(Self) -> EventHandler
+  set_onunhandledrejection(Self, EventHandler) -> Unit
+  onunload(Self) -> EventHandler
+  set_onunload(Self, EventHandler) -> Unit
+  origin(Self) -> String
+  is_secure_context(Self) -> Bool
+  cross_origin_isolated(Self) -> Bool
+  session_storage(Self) -> Storage
+  local_storage(Self) -> Storage
+  match_media(Self, JsValue) -> JsValue
+  move_to(Self, Int, Int) -> Unit
+  move_by(Self, Int, Int) -> Unit
+  resize_to(Self, Int, Int) -> Unit
+  resize_by(Self, Int, Int) -> Unit
+  scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_to2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_by2(Self, Double, Double) -> JsPromise[Unit]
+  get_computed_style(Self, &TElement, pseudo_elt? : JsValue) -> JsValue
+  close(Self) -> Unit
+  stop(Self) -> Unit
+  focus(Self) -> Unit
+  blur(Self) -> Unit
+  open(Self, url? : String, target? : String, features? : String) -> Window?
+  alert(Self) -> Unit
+  alert2(Self, String) -> Unit
+  confirm(Self, message? : String) -> Bool
+  prompt(Self, message? : String, default? : String) -> String?
+  print(Self) -> Unit
+  post_message(Self, JsValue, String, transfer? : Array[JsValue]) -> Unit
+  post_message2(Self, JsValue, options? : WindowPostMessageOptions) -> Unit
+  capture_events(Self) -> Unit
+  release_events(Self) -> Unit
+  report_error(Self, JsValue) -> Unit
+  btoa(Self, String) -> String
+  atob(Self, String) -> String
+  set_timeout(Self, JsValue, timeout? : Int, JsValue) -> Int
+  clear_timeout(Self, id? : Int) -> Unit
+  set_interval(Self, JsValue, timeout? : Int, JsValue) -> Int
+  clear_interval(Self, id? : Int) -> Unit
+  queue_microtask(Self, JsValue) -> Unit
+  create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap2(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
+  request_animation_frame(Self, JsValue) -> UInt
+  cancel_animation_frame(Self, UInt) -> Unit
+}
+
+pub(open) trait TWriteTextArg {
+  to_js(Self) -> JsValue
+}
+pub impl TWriteTextArg for String
+
+pub(open) trait TWritelnTextArg {
+  to_js(Self) -> JsValue
+}
+pub impl TWritelnTextArg for String
+
