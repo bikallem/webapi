@@ -14,7 +14,7 @@ fn event_source_init_ffi(with_credentials : JsValue) -> EventSourceInit = "webap
 
 ///|
 pub fn EventSourceInit::new(
-  with_credentials? : Bool = false
+  with_credentials? : Bool = false,
 ) -> EventSourceInit {
   event_source_init_ffi(TJsValue::to_js(with_credentials))
 }

@@ -35,18 +35,34 @@ pub fn Blob::null() -> Blob {
 fn blob_new_ffi(blob_parts : JsValue, options : JsValue) -> Blob = "webapi_Blob" "new"
 
 ///|
-pub fn Blob::new(blob_parts? : Array[JsValue], options? : BlobPropertyBag = BlobPropertyBag::empty()) -> Blob {
-  blob_new_ffi(match blob_parts {
+pub fn Blob::new(
+  blob_parts? : Array[JsValue],
+  options? : BlobPropertyBag = BlobPropertyBag::empty(),
+) -> Blob {
+  blob_new_ffi(
+    match blob_parts {
       Some(v) => TJsValue::to_js(v)
       None => JsValue::undefined()
-    }, TJsValue::to_js(options))
+    },
+    TJsValue::to_js(options),
+  )
 }
 
 ///|
-fn blob_slice_ffi(obj : JsValue, start : JsValue, end : JsValue, content_type : JsValue) -> JsValue = "webapi_Blob" "slice"
+fn blob_slice_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  content_type : JsValue,
+) -> JsValue = "webapi_Blob" "slice"
 
 ///|
-impl TBlob with slice(self : Self, start? : Int64, end? : Int64, content_type? : String) -> Blob {
+impl TBlob with slice(
+  self : Self,
+  start? : Int64,
+  end? : Int64,
+  content_type? : String,
+) -> Blob {
   let start_js = opt_to_js(start)
   let end_js = opt_to_js(end)
   let content_type_js = opt_to_js(content_type)

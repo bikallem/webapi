@@ -17,7 +17,9 @@ pub impl TJsValue for ScrollIntoViewContainer with to_js(self) {
 }
 
 ///|
-pub fn ScrollIntoViewContainer::from(value : String) -> ScrollIntoViewContainer? {
+pub fn ScrollIntoViewContainer::from(
+  value : String,
+) -> ScrollIntoViewContainer? {
   match value {
     "all" => Some(ScrollIntoViewContainer::All)
     "nearest" => Some(ScrollIntoViewContainer::Nearest)

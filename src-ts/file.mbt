@@ -27,11 +27,23 @@ pub fn File::null() -> File {
 }
 
 ///|
-fn file_new_ffi(file_bits : JsValue, file_name : JsValue, options : JsValue) -> File = "webapi_File" "new"
+fn file_new_ffi(
+  file_bits : JsValue,
+  file_name : JsValue,
+  options : JsValue,
+) -> File = "webapi_File" "new"
 
 ///|
-pub fn File::new(file_bits : Array[JsValue], file_name : String, options? : FilePropertyBag = FilePropertyBag::empty()) -> File {
-  file_new_ffi(TJsValue::to_js(file_bits), TJsValue::to_js(file_name), TJsValue::to_js(options))
+pub fn File::new(
+  file_bits : Array[JsValue],
+  file_name : String,
+  options? : FilePropertyBag = FilePropertyBag::empty(),
+) -> File {
+  file_new_ffi(
+    TJsValue::to_js(file_bits),
+    TJsValue::to_js(file_name),
+    TJsValue::to_js(options),
+  )
 }
 
 ///|

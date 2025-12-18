@@ -8,8 +8,14 @@ pub type Event
 
 ///|
 pub const NONE : UInt = 0
+
+///|
 pub const CAPTURING_PHASE : UInt = 1
+
+///|
 pub const AT_TARGET : UInt = 2
+
+///|
 pub const BUBBLING_PHASE : UInt = 3
 
 ///|
@@ -54,7 +60,10 @@ pub fn Event::null() -> Event {
 fn event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> Event = "webapi_Event" "new"
 
 ///|
-pub fn Event::new(type_ : String, event_init_dict? : EventInit = EventInit::empty()) -> Event {
+pub fn Event::new(
+  type_ : String,
+  event_init_dict? : EventInit = EventInit::empty(),
+) -> Event {
   event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
@@ -91,11 +100,26 @@ impl TEvent with prevent_default(self : Self) -> Unit {
 }
 
 ///|
-fn event_init_event_ffi(obj : JsValue, type_ : JsValue, bubbles : JsValue, cancelable : JsValue) -> Unit = "webapi_Event" "initEvent"
+fn event_init_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+) -> Unit = "webapi_Event" "initEvent"
 
 ///|
-impl TEvent with init_event(self : Self, type_ : String, bubbles? : Bool = false, cancelable? : Bool = false) -> Unit {
-  event_init_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(bubbles), TJsValue::to_js(cancelable))
+impl TEvent with init_event(
+  self : Self,
+  type_ : String,
+  bubbles? : Bool = false,
+  cancelable? : Bool = false,
+) -> Unit {
+  event_init_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_),
+    TJsValue::to_js(bubbles),
+    TJsValue::to_js(cancelable),
+  )
 }
 
 ///|

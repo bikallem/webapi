@@ -12,9 +12,24 @@ pub trait TText: TJsValue + TCharacterData {
   assigned_slot(self : Self) -> HTMLSlotElement? = _
   split_text(self : Self, offset : UInt) -> Text = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
-  convert_quad_from_node(self : Self, quad : DOMQuadInit, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
-  convert_rect_from_node(self : Self, rect : JsValue, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
-  convert_point_from_node(self : Self, point : DOMPointInit, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
+  convert_quad_from_node(
+    self : Self,
+    quad : DOMQuadInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_rect_from_node(
+    self : Self,
+    rect : JsValue,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_point_from_node(
+    self : Self,
+    point : DOMPointInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
 }
 
 ///|
@@ -60,32 +75,80 @@ impl TText with split_text(self : Self, offset : UInt) -> Text {
 fn text_get_box_quads_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Text" "getBoxQuads"
 
 ///|
-impl TText with get_box_quads(self : Self, options? : BoxQuadOptions = BoxQuadOptions::empty()) -> Array[JsValue] {
+impl TText with get_box_quads(
+  self : Self,
+  options? : BoxQuadOptions = BoxQuadOptions::empty(),
+) -> Array[JsValue] {
   text_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
 ///|
-fn text_convert_quad_from_node_ffi(obj : JsValue, quad : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Text" "convertQuadFromNode"
+fn text_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Text" "convertQuadFromNode"
 
 ///|
-impl TText with convert_quad_from_node(self : Self, quad : DOMQuadInit, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  text_convert_quad_from_node_ffi(TJsValue::to_js(self), TJsValue::to_js(quad), from, TJsValue::to_js(options)).unsafe_cast()
+impl TText with convert_quad_from_node(
+  self : Self,
+  quad : DOMQuadInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  text_convert_quad_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(quad),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn text_convert_rect_from_node_ffi(obj : JsValue, rect : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Text" "convertRectFromNode"
+fn text_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Text" "convertRectFromNode"
 
 ///|
-impl TText with convert_rect_from_node(self : Self, rect : JsValue, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  text_convert_rect_from_node_ffi(TJsValue::to_js(self), rect, from, TJsValue::to_js(options)).unsafe_cast()
+impl TText with convert_rect_from_node(
+  self : Self,
+  rect : JsValue,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  text_convert_rect_from_node_ffi(
+    TJsValue::to_js(self),
+    rect,
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn text_convert_point_from_node_ffi(obj : JsValue, point : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Text" "convertPointFromNode"
+fn text_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Text" "convertPointFromNode"
 
 ///|
-impl TText with convert_point_from_node(self : Self, point : DOMPointInit, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  text_convert_point_from_node_ffi(TJsValue::to_js(self), TJsValue::to_js(point), from, TJsValue::to_js(options)).unsafe_cast()
+impl TText with convert_point_from_node(
+  self : Self,
+  point : DOMPointInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  text_convert_point_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|

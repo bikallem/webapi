@@ -33,18 +33,35 @@ pub fn DOMPoint::null() -> DOMPoint {
 }
 
 ///|
-fn dom_point_new_ffi(x : JsValue, y : JsValue, z : JsValue, w : JsValue) -> DOMPoint = "webapi_DOMPoint" "new"
+fn dom_point_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  w : JsValue,
+) -> DOMPoint = "webapi_DOMPoint" "new"
 
 ///|
-pub fn DOMPoint::new(x? : Double = 0, y? : Double = 0, z? : Double = 0, w? : Double = 1) -> DOMPoint {
-  dom_point_new_ffi(TJsValue::to_js(x), TJsValue::to_js(y), TJsValue::to_js(z), TJsValue::to_js(w))
+pub fn DOMPoint::new(
+  x? : Double = 0,
+  y? : Double = 0,
+  z? : Double = 0,
+  w? : Double = 1,
+) -> DOMPoint {
+  dom_point_new_ffi(
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+    TJsValue::to_js(z),
+    TJsValue::to_js(w),
+  )
 }
 
 ///|
 fn dom_point_from_point_ffi(other : JsValue) -> JsValue = "webapi_DOMPoint" "fromPoint"
 
 ///|
-pub fn DOMPoint::from_point(other? : DOMPointInit = DOMPointInit::empty()) -> JsValue {
+pub fn DOMPoint::from_point(
+  other? : DOMPointInit = DOMPointInit::empty(),
+) -> JsValue {
   dom_point_from_point_ffi(TJsValue::to_js(other))
 }
 

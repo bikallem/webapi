@@ -13,9 +13,7 @@ pub impl TJsValue for CloseWatcherOptions with to_js(self : CloseWatcherOptions)
 fn close_watcher_options_ffi(signal : JsValue) -> CloseWatcherOptions = "webapi_CloseWatcherOptions" "new"
 
 ///|
-pub fn CloseWatcherOptions::new(
-  signal? : AbortSignal
-) -> CloseWatcherOptions {
+pub fn CloseWatcherOptions::new(signal? : AbortSignal) -> CloseWatcherOptions {
   let signal_js = opt_to_js(signal)
   close_watcher_options_ffi(signal_js)
 }

@@ -13,9 +13,7 @@ pub impl TJsValue for FormDataEventInit with to_js(self : FormDataEventInit) -> 
 fn form_data_event_init_ffi(form_data : JsValue) -> FormDataEventInit = "webapi_FormDataEventInit" "new"
 
 ///|
-pub fn FormDataEventInit::new(
-  form_data : JsValue
-) -> FormDataEventInit {
+pub fn FormDataEventInit::new(form_data : JsValue) -> FormDataEventInit {
   form_data_event_init_ffi(form_data)
 }
 

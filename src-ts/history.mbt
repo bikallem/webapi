@@ -50,19 +50,49 @@ impl THistory with forward(self : Self) -> Unit {
 }
 
 ///|
-fn history_push_state_ffi(obj : JsValue, data : JsValue, unused : JsValue, url : JsValue) -> Unit = "webapi_History" "pushState"
+fn history_push_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_History" "pushState"
 
 ///|
-impl THistory with push_state(self : Self, data : JsValue, unused : String, url? : String = JsValue::null()) -> Unit {
-  history_push_state_ffi(TJsValue::to_js(self), data, TJsValue::to_js(unused), TJsValue::to_js(url))
+impl THistory with push_state(
+  self : Self,
+  data : JsValue,
+  unused : String,
+  url? : String = JsValue::null(),
+) -> Unit {
+  history_push_state_ffi(
+    TJsValue::to_js(self),
+    data,
+    TJsValue::to_js(unused),
+    TJsValue::to_js(url),
+  )
 }
 
 ///|
-fn history_replace_state_ffi(obj : JsValue, data : JsValue, unused : JsValue, url : JsValue) -> Unit = "webapi_History" "replaceState"
+fn history_replace_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_History" "replaceState"
 
 ///|
-impl THistory with replace_state(self : Self, data : JsValue, unused : String, url? : String = JsValue::null()) -> Unit {
-  history_replace_state_ffi(TJsValue::to_js(self), data, TJsValue::to_js(unused), TJsValue::to_js(url))
+impl THistory with replace_state(
+  self : Self,
+  data : JsValue,
+  unused : String,
+  url? : String = JsValue::null(),
+) -> Unit {
+  history_replace_state_ffi(
+    TJsValue::to_js(self),
+    data,
+    TJsValue::to_js(unused),
+    TJsValue::to_js(url),
+  )
 }
 
 ///|
@@ -78,14 +108,19 @@ fn history_scroll_restoration_ffi(obj : JsValue) -> JsValue = "webapi_History" "
 
 ///|
 impl THistory with scroll_restoration(self : Self) -> ScrollRestoration {
-  ScrollRestoration::from(history_scroll_restoration_ffi(self.to_js()).unsafe_cast()).unwrap()
+  ScrollRestoration::from(
+    history_scroll_restoration_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|
 fn history_set_scroll_restoration_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_History" "set_scrollRestoration"
 
 ///|
-impl THistory with set_scroll_restoration(self : Self, value : ScrollRestoration) -> Unit {
+impl THistory with set_scroll_restoration(
+  self : Self,
+  value : ScrollRestoration,
+) -> Unit {
   history_set_scroll_restoration_ffi(self.to_js(), TJsValue::to_js(value))
 }
 

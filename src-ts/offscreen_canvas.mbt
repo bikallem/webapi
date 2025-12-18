@@ -16,7 +16,11 @@ pub trait TOffscreenCanvas: TJsValue + TEventTarget {
   set_oncontextlost(self : Self, value : EventHandler) -> Unit = _
   oncontextrestored(self : Self) -> EventHandler = _
   set_oncontextrestored(self : Self, value : EventHandler) -> Unit = _
-  get_context(self : Self, context_id : OffscreenRenderingContextId, options? : JsValue) -> JsValue? = _
+  get_context(
+    self : Self,
+    context_id : OffscreenRenderingContextId,
+    options? : JsValue,
+  ) -> JsValue? = _
   transfer_to_image_bitmap(self : Self) -> ImageBitmap = _
   convert_to_blob(self : Self, options? : ImageEncodeOptions) -> JsPromise[Blob] = _
 }
@@ -36,7 +40,10 @@ pub fn OffscreenCanvas::null() -> OffscreenCanvas {
 }
 
 ///|
-fn offscreen_canvas_new_ffi(width : JsValue, height : JsValue) -> OffscreenCanvas = "webapi_OffscreenCanvas" "new"
+fn offscreen_canvas_new_ffi(
+  width : JsValue,
+  height : JsValue,
+) -> OffscreenCanvas = "webapi_OffscreenCanvas" "new"
 
 ///|
 pub fn OffscreenCanvas::new(width : UInt64, height : UInt64) -> OffscreenCanvas {
@@ -44,12 +51,24 @@ pub fn OffscreenCanvas::new(width : UInt64, height : UInt64) -> OffscreenCanvas 
 }
 
 ///|
-fn offscreen_canvas_get_context_ffi(obj : JsValue, context_id : JsValue, options : JsValue) -> JsValue = "webapi_OffscreenCanvas" "getContext"
+fn offscreen_canvas_get_context_ffi(
+  obj : JsValue,
+  context_id : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_OffscreenCanvas" "getContext"
 
 ///|
-impl TOffscreenCanvas with get_context(self : Self, context_id : OffscreenRenderingContextId, options? : JsValue) -> JsValue? {
+impl TOffscreenCanvas with get_context(
+  self : Self,
+  context_id : OffscreenRenderingContextId,
+  options? : JsValue,
+) -> JsValue? {
   let options_js = opt_to_js(options)
-  offscreen_canvas_get_context_ffi(TJsValue::to_js(self), TJsValue::to_js(context_id), options_js).as_option()
+  offscreen_canvas_get_context_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(context_id),
+    options_js,
+  ).as_option()
 }
 
 ///|
@@ -61,11 +80,20 @@ impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> ImageBitmap 
 }
 
 ///|
-fn offscreen_canvas_convert_to_blob_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_OffscreenCanvas" "convertToBlob"
+fn offscreen_canvas_convert_to_blob_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_OffscreenCanvas" "convertToBlob"
 
 ///|
-impl TOffscreenCanvas with convert_to_blob(self : Self, options? : ImageEncodeOptions = ImageEncodeOptions::empty()) -> JsPromise[Blob] {
-  offscreen_canvas_convert_to_blob_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
+impl TOffscreenCanvas with convert_to_blob(
+  self : Self,
+  options? : ImageEncodeOptions = ImageEncodeOptions::empty(),
+) -> JsPromise[Blob] {
+  offscreen_canvas_convert_to_blob_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
@@ -109,7 +137,10 @@ impl TOffscreenCanvas with oncontextlost(self : Self) -> EventHandler {
 }
 
 ///|
-fn offscreen_canvas_set_oncontextlost_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_OffscreenCanvas" "set_oncontextlost"
+fn offscreen_canvas_set_oncontextlost_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_OffscreenCanvas" "set_oncontextlost"
 
 ///|
 impl TOffscreenCanvas with set_oncontextlost(self : Self, value : EventHandler) -> Unit {
@@ -125,9 +156,18 @@ impl TOffscreenCanvas with oncontextrestored(self : Self) -> EventHandler {
 }
 
 ///|
-fn offscreen_canvas_set_oncontextrestored_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_OffscreenCanvas" "set_oncontextrestored"
+fn offscreen_canvas_set_oncontextrestored_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_OffscreenCanvas" "set_oncontextrestored"
 
 ///|
-impl TOffscreenCanvas with set_oncontextrestored(self : Self, value : EventHandler) -> Unit {
-  offscreen_canvas_set_oncontextrestored_ffi(self.to_js(), TJsValue::to_js(value))
+impl TOffscreenCanvas with set_oncontextrestored(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  offscreen_canvas_set_oncontextrestored_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }

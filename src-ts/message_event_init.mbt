@@ -10,7 +10,13 @@ pub type MessageEventInit
 pub impl TJsValue for MessageEventInit with to_js(self : MessageEventInit) -> JsValue = "%identity"
 
 ///|
-fn message_event_init_ffi(data : JsValue, origin : JsValue, last_event_id : JsValue, source : JsValue, ports : JsValue) -> MessageEventInit = "webapi_MessageEventInit" "new"
+fn message_event_init_ffi(
+  data : JsValue,
+  origin : JsValue,
+  last_event_id : JsValue,
+  source : JsValue,
+  ports : JsValue,
+) -> MessageEventInit = "webapi_MessageEventInit" "new"
 
 ///|
 pub fn MessageEventInit::new(
@@ -18,11 +24,17 @@ pub fn MessageEventInit::new(
   origin? : String = "",
   last_event_id? : String = "",
   source? : JsValue,
-  ports? : Array[JsValue] = []
+  ports? : Array[JsValue] = [],
 ) -> MessageEventInit {
   let data_js = opt_to_js(data)
   let source_js = opt_to_js(source)
-  message_event_init_ffi(data_js, TJsValue::to_js(origin), TJsValue::to_js(last_event_id), source_js, TJsValue::to_js(ports))
+  message_event_init_ffi(
+    data_js,
+    TJsValue::to_js(origin),
+    TJsValue::to_js(last_event_id),
+    source_js,
+    TJsValue::to_js(ports),
+  )
 }
 
 ///|

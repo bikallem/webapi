@@ -205,7 +205,10 @@ impl THTMLAnchorElement with referrer_policy(self : Self) -> String {
 }
 
 ///|
-fn html_anchor_element_set_referrer_policy_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLAnchorElement" "set_referrerPolicy"
+fn html_anchor_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLAnchorElement" "set_referrerPolicy"
 
 ///|
 impl THTMLAnchorElement with set_referrer_policy(self : Self, value : String) -> Unit {

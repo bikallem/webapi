@@ -11,7 +11,14 @@ pub trait TUIEvent: TJsValue + TEvent {
   view(self : Self) -> Window? = _
   detail(self : Self) -> Int = _
   which(self : Self) -> UInt = _
-  init_ui_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, detail_arg? : Int) -> Unit = _
+  init_ui_event(
+    self : Self,
+    type_arg : String,
+    bubbles_arg? : Bool,
+    cancelable_arg? : Bool,
+    view_arg? : &TWindow,
+    detail_arg? : Int,
+  ) -> Unit = _
 }
 
 ///|
@@ -35,16 +42,40 @@ pub fn UIEvent::null() -> UIEvent {
 fn ui_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> UIEvent = "webapi_UIEvent" "new"
 
 ///|
-pub fn UIEvent::new(type_ : String, event_init_dict? : UIEventInit = UIEventInit::empty()) -> UIEvent {
+pub fn UIEvent::new(
+  type_ : String,
+  event_init_dict? : UIEventInit = UIEventInit::empty(),
+) -> UIEvent {
   ui_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|
-fn ui_event_init_ui_event_ffi(obj : JsValue, type_arg : JsValue, bubbles_arg : JsValue, cancelable_arg : JsValue, view_arg : JsValue, detail_arg : JsValue) -> Unit = "webapi_UIEvent" "initUIEvent"
+fn ui_event_init_ui_event_ffi(
+  obj : JsValue,
+  type_arg : JsValue,
+  bubbles_arg : JsValue,
+  cancelable_arg : JsValue,
+  view_arg : JsValue,
+  detail_arg : JsValue,
+) -> Unit = "webapi_UIEvent" "initUIEvent"
 
 ///|
-impl TUIEvent with init_ui_event(self : Self, type_arg : String, bubbles_arg? : Bool = false, cancelable_arg? : Bool = false, view_arg? : &TWindow = JsValue::null(), detail_arg? : Int = 0) -> Unit {
-  ui_event_init_ui_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_arg), TJsValue::to_js(bubbles_arg), TJsValue::to_js(cancelable_arg), TJsValue::to_js(view_arg), TJsValue::to_js(detail_arg))
+impl TUIEvent with init_ui_event(
+  self : Self,
+  type_arg : String,
+  bubbles_arg? : Bool = false,
+  cancelable_arg? : Bool = false,
+  view_arg? : &TWindow = JsValue::null(),
+  detail_arg? : Int = 0,
+) -> Unit {
+  ui_event_init_ui_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_arg),
+    TJsValue::to_js(bubbles_arg),
+    TJsValue::to_js(cancelable_arg),
+    TJsValue::to_js(view_arg),
+    TJsValue::to_js(detail_arg),
+  )
 }
 
 ///|

@@ -7,14 +7,18 @@
 pub type CaretPositionFromPointOptions
 
 ///|
-pub impl TJsValue for CaretPositionFromPointOptions with to_js(self : CaretPositionFromPointOptions) -> JsValue = "%identity"
+pub impl TJsValue for CaretPositionFromPointOptions with to_js(
+  self : CaretPositionFromPointOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn caret_position_from_point_options_ffi(shadow_roots : JsValue) -> CaretPositionFromPointOptions = "webapi_CaretPositionFromPointOptions" "new"
+fn caret_position_from_point_options_ffi(
+  shadow_roots : JsValue,
+) -> CaretPositionFromPointOptions = "webapi_CaretPositionFromPointOptions" "new"
 
 ///|
 pub fn CaretPositionFromPointOptions::new(
-  shadow_roots? : Array[ShadowRoot] = []
+  shadow_roots? : Array[ShadowRoot] = [],
 ) -> CaretPositionFromPointOptions {
   caret_position_from_point_options_ffi(TJsValue::to_js(shadow_roots))
 }

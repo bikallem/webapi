@@ -17,7 +17,8 @@ pub impl TJsValue for DOMParserSupportedType with to_js(self) {
     DOMParserSupportedType::TextHtml => TJsValue::to_js("text/html")
     DOMParserSupportedType::TextXml => TJsValue::to_js("text/xml")
     DOMParserSupportedType::ApplicationXml => TJsValue::to_js("application/xml")
-    DOMParserSupportedType::ApplicationXhtmlXml => TJsValue::to_js("application/xhtml+xml")
+    DOMParserSupportedType::ApplicationXhtmlXml =>
+      TJsValue::to_js("application/xhtml+xml")
     DOMParserSupportedType::ImageSvgXml => TJsValue::to_js("image/svg+xml")
   }
 }
@@ -39,8 +40,10 @@ pub impl Show for DOMParserSupportedType with output(self, logger) {
   match self {
     DOMParserSupportedType::TextHtml => logger.write_string("text/html")
     DOMParserSupportedType::TextXml => logger.write_string("text/xml")
-    DOMParserSupportedType::ApplicationXml => logger.write_string("application/xml")
-    DOMParserSupportedType::ApplicationXhtmlXml => logger.write_string("application/xhtml+xml")
+    DOMParserSupportedType::ApplicationXml =>
+      logger.write_string("application/xml")
+    DOMParserSupportedType::ApplicationXhtmlXml =>
+      logger.write_string("application/xhtml+xml")
     DOMParserSupportedType::ImageSvgXml => logger.write_string("image/svg+xml")
   }
 }

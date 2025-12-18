@@ -7,10 +7,18 @@
 pub type CheckVisibilityOptions
 
 ///|
-pub impl TJsValue for CheckVisibilityOptions with to_js(self : CheckVisibilityOptions) -> JsValue = "%identity"
+pub impl TJsValue for CheckVisibilityOptions with to_js(
+  self : CheckVisibilityOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn check_visibility_options_ffi(check_opacity : JsValue, check_visibility_css : JsValue, content_visibility_auto : JsValue, opacity_property : JsValue, visibility_property : JsValue) -> CheckVisibilityOptions = "webapi_CheckVisibilityOptions" "new"
+fn check_visibility_options_ffi(
+  check_opacity : JsValue,
+  check_visibility_css : JsValue,
+  content_visibility_auto : JsValue,
+  opacity_property : JsValue,
+  visibility_property : JsValue,
+) -> CheckVisibilityOptions = "webapi_CheckVisibilityOptions" "new"
 
 ///|
 pub fn CheckVisibilityOptions::new(
@@ -18,9 +26,15 @@ pub fn CheckVisibilityOptions::new(
   check_visibility_css? : Bool = false,
   content_visibility_auto? : Bool = false,
   opacity_property? : Bool = false,
-  visibility_property? : Bool = false
+  visibility_property? : Bool = false,
 ) -> CheckVisibilityOptions {
-  check_visibility_options_ffi(TJsValue::to_js(check_opacity), TJsValue::to_js(check_visibility_css), TJsValue::to_js(content_visibility_auto), TJsValue::to_js(opacity_property), TJsValue::to_js(visibility_property))
+  check_visibility_options_ffi(
+    TJsValue::to_js(check_opacity),
+    TJsValue::to_js(check_visibility_css),
+    TJsValue::to_js(content_visibility_auto),
+    TJsValue::to_js(opacity_property),
+    TJsValue::to_js(visibility_property),
+  )
 }
 
 ///|

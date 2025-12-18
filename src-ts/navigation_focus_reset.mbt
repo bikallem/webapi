@@ -28,7 +28,8 @@ pub fn NavigationFocusReset::from(value : String) -> NavigationFocusReset? {
 ///|
 pub impl Show for NavigationFocusReset with output(self, logger) {
   match self {
-    NavigationFocusReset::AfterTransition => logger.write_string("after-transition")
+    NavigationFocusReset::AfterTransition =>
+      logger.write_string("after-transition")
     NavigationFocusReset::Manual => logger.write_string("manual")
   }
 }

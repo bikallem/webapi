@@ -8,7 +8,11 @@ pub type FileReader
 
 ///|
 pub const EMPTY : UInt = 0
+
+///|
 pub const LOADING : UInt = 1
+
+///|
 pub const DONE : UInt = 2
 
 ///|
@@ -57,7 +61,10 @@ fn file_reader_read_as_array_buffer_ffi(obj : JsValue, blob : JsValue) -> Unit =
 
 ///|
 impl TFileReader with read_as_array_buffer(self : Self, blob : &TBlob) -> Unit {
-  file_reader_read_as_array_buffer_ffi(TJsValue::to_js(self), TJsValue::to_js(blob))
+  file_reader_read_as_array_buffer_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(blob),
+  )
 }
 
 ///|
@@ -65,16 +72,31 @@ fn file_reader_read_as_binary_string_ffi(obj : JsValue, blob : JsValue) -> Unit 
 
 ///|
 impl TFileReader with read_as_binary_string(self : Self, blob : &TBlob) -> Unit {
-  file_reader_read_as_binary_string_ffi(TJsValue::to_js(self), TJsValue::to_js(blob))
+  file_reader_read_as_binary_string_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(blob),
+  )
 }
 
 ///|
-fn file_reader_read_as_text_ffi(obj : JsValue, blob : JsValue, encoding : JsValue) -> Unit = "webapi_FileReader" "readAsText"
+fn file_reader_read_as_text_ffi(
+  obj : JsValue,
+  blob : JsValue,
+  encoding : JsValue,
+) -> Unit = "webapi_FileReader" "readAsText"
 
 ///|
-impl TFileReader with read_as_text(self : Self, blob : &TBlob, encoding? : String) -> Unit {
+impl TFileReader with read_as_text(
+  self : Self,
+  blob : &TBlob,
+  encoding? : String,
+) -> Unit {
   let encoding_js = opt_to_js(encoding)
-  file_reader_read_as_text_ffi(TJsValue::to_js(self), TJsValue::to_js(blob), encoding_js)
+  file_reader_read_as_text_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(blob),
+    encoding_js,
+  )
 }
 
 ///|

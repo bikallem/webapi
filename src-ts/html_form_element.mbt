@@ -65,11 +65,20 @@ impl THTMLFormElement with submit(self : Self) -> Unit {
 }
 
 ///|
-fn html_form_element_request_submit_ffi(obj : JsValue, submitter : JsValue) -> Unit = "webapi_HTMLFormElement" "requestSubmit"
+fn html_form_element_request_submit_ffi(
+  obj : JsValue,
+  submitter : JsValue,
+) -> Unit = "webapi_HTMLFormElement" "requestSubmit"
 
 ///|
-impl THTMLFormElement with request_submit(self : Self, submitter? : &THTMLElement = JsValue::null()) -> Unit {
-  html_form_element_request_submit_ffi(TJsValue::to_js(self), TJsValue::to_js(submitter))
+impl THTMLFormElement with request_submit(
+  self : Self,
+  submitter? : &THTMLElement = JsValue::null(),
+) -> Unit {
+  html_form_element_request_submit_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(submitter),
+  )
 }
 
 ///|
@@ -105,7 +114,10 @@ impl THTMLFormElement with accept_charset(self : Self) -> String {
 }
 
 ///|
-fn html_form_element_set_accept_charset_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLFormElement" "set_acceptCharset"
+fn html_form_element_set_accept_charset_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLFormElement" "set_acceptCharset"
 
 ///|
 impl THTMLFormElement with set_accept_charset(self : Self, value : String) -> Unit {
@@ -137,7 +149,10 @@ impl THTMLFormElement with autocomplete(self : Self) -> String {
 }
 
 ///|
-fn html_form_element_set_autocomplete_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLFormElement" "set_autocomplete"
+fn html_form_element_set_autocomplete_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLFormElement" "set_autocomplete"
 
 ///|
 impl THTMLFormElement with set_autocomplete(self : Self, value : String) -> Unit {

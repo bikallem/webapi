@@ -7,19 +7,31 @@
 pub type SVGBoundingBoxOptions
 
 ///|
-pub impl TJsValue for SVGBoundingBoxOptions with to_js(self : SVGBoundingBoxOptions) -> JsValue = "%identity"
+pub impl TJsValue for SVGBoundingBoxOptions with to_js(
+  self : SVGBoundingBoxOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn svg_bounding_box_options_ffi(fill : JsValue, stroke : JsValue, markers : JsValue, clipped : JsValue) -> SVGBoundingBoxOptions = "webapi_SVGBoundingBoxOptions" "new"
+fn svg_bounding_box_options_ffi(
+  fill : JsValue,
+  stroke : JsValue,
+  markers : JsValue,
+  clipped : JsValue,
+) -> SVGBoundingBoxOptions = "webapi_SVGBoundingBoxOptions" "new"
 
 ///|
 pub fn SVGBoundingBoxOptions::new(
   fill? : Bool = true,
   stroke? : Bool = false,
   markers? : Bool = false,
-  clipped? : Bool = false
+  clipped? : Bool = false,
 ) -> SVGBoundingBoxOptions {
-  svg_bounding_box_options_ffi(TJsValue::to_js(fill), TJsValue::to_js(stroke), TJsValue::to_js(markers), TJsValue::to_js(clipped))
+  svg_bounding_box_options_ffi(
+    TJsValue::to_js(fill),
+    TJsValue::to_js(stroke),
+    TJsValue::to_js(markers),
+    TJsValue::to_js(clipped),
+  )
 }
 
 ///|

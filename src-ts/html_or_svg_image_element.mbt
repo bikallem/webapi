@@ -8,7 +8,9 @@ pub(open) trait THTMLOrSVGImageElement {
 }
 
 ///|
-pub fn[T : THTMLOrSVGImageElement] &THTMLOrSVGImageElement::into(self : &THTMLOrSVGImageElement) -> T = "%identity"
+pub fn[T : THTMLOrSVGImageElement] &THTMLOrSVGImageElement::into(
+  self : &THTMLOrSVGImageElement,
+) -> T = "%identity"
 
 ///|
 pub impl THTMLOrSVGImageElement for HTMLImageElement with to_js(

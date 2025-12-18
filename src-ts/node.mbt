@@ -8,22 +8,56 @@ pub type Node
 
 ///|
 pub const ELEMENT_NODE : UInt = 1
+
+///|
 pub const ATTRIBUTE_NODE : UInt = 2
+
+///|
 pub const TEXT_NODE : UInt = 3
+
+///|
 pub const CDATA_SECTION_NODE : UInt = 4
+
+///|
 pub const ENTITY_REFERENCE_NODE : UInt = 5
+
+///|
 pub const ENTITY_NODE : UInt = 6
+
+///|
 pub const PROCESSING_INSTRUCTION_NODE : UInt = 7
+
+///|
 pub const COMMENT_NODE : UInt = 8
+
+///|
 pub const DOCUMENT_NODE : UInt = 9
+
+///|
 pub const DOCUMENT_TYPE_NODE : UInt = 10
+
+///|
 pub const DOCUMENT_FRAGMENT_NODE : UInt = 11
+
+///|
 pub const NOTATION_NODE : UInt = 12
+
+///|
 pub const DOCUMENT_POSITION_DISCONNECTED : UInt = 0x01
+
+///|
 pub const DOCUMENT_POSITION_PRECEDING : UInt = 0x02
+
+///|
 pub const DOCUMENT_POSITION_FOLLOWING : UInt = 0x04
+
+///|
 pub const DOCUMENT_POSITION_CONTAINS : UInt = 0x08
+
+///|
 pub const DOCUMENT_POSITION_CONTAINED_BY : UInt = 0x10
+
+///|
 pub const DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : UInt = 0x20
 
 ///|
@@ -77,7 +111,10 @@ pub impl TJsValue for Node with to_js(self : Node) -> JsValue = "%identity"
 fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Node" "getRootNode"
 
 ///|
-impl TNode with get_root_node(self : Self, options? : GetRootNodeOptions = GetRootNodeOptions::empty()) -> Node {
+impl TNode with get_root_node(
+  self : Self,
+  options? : GetRootNodeOptions = GetRootNodeOptions::empty(),
+) -> Node {
   node_get_root_node_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -122,11 +159,17 @@ impl TNode with is_same_node(self : Self, other_node : &TNode) -> Bool {
 }
 
 ///|
-fn node_compare_document_position_ffi(obj : JsValue, other : JsValue) -> JsValue = "webapi_Node" "compareDocumentPosition"
+fn node_compare_document_position_ffi(
+  obj : JsValue,
+  other : JsValue,
+) -> JsValue = "webapi_Node" "compareDocumentPosition"
 
 ///|
 impl TNode with compare_document_position(self : Self, other : &TNode) -> UInt {
-  node_compare_document_position_ffi(TJsValue::to_js(self), TJsValue::to_js(other)).unsafe_cast()
+  node_compare_document_position_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(other),
+  ).unsafe_cast()
 }
 
 ///|
@@ -154,19 +197,33 @@ impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String? {
 }
 
 ///|
-fn node_is_default_namespace_ffi(obj : JsValue, namespace_ : JsValue) -> JsValue = "webapi_Node" "isDefaultNamespace"
+fn node_is_default_namespace_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+) -> JsValue = "webapi_Node" "isDefaultNamespace"
 
 ///|
 impl TNode with is_default_namespace(self : Self, namespace_ : String) -> Bool {
-  node_is_default_namespace_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_)).unsafe_cast()
+  node_is_default_namespace_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+  ).unsafe_cast()
 }
 
 ///|
-fn node_insert_before_ffi(obj : JsValue, node : JsValue, child : JsValue) -> JsValue = "webapi_Node" "insertBefore"
+fn node_insert_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> JsValue = "webapi_Node" "insertBefore"
 
 ///|
 impl TNode with insert_before(self : Self, node : &TNode, child : &TNode) -> Node {
-  node_insert_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node), TJsValue::to_js(child)).unsafe_cast()
+  node_insert_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  ).unsafe_cast()
 }
 
 ///|
@@ -178,11 +235,19 @@ impl TNode with append_child(self : Self, node : &TNode) -> Node {
 }
 
 ///|
-fn node_replace_child_ffi(obj : JsValue, node : JsValue, child : JsValue) -> JsValue = "webapi_Node" "replaceChild"
+fn node_replace_child_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> JsValue = "webapi_Node" "replaceChild"
 
 ///|
 impl TNode with replace_child(self : Self, node : &TNode, child : &TNode) -> Node {
-  node_replace_child_ffi(TJsValue::to_js(self), TJsValue::to_js(node), TJsValue::to_js(child)).unsafe_cast()
+  node_replace_child_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  ).unsafe_cast()
 }
 
 ///|

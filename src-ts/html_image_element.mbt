@@ -172,7 +172,10 @@ impl THTMLImageElement with cross_origin(self : Self) -> String? {
 }
 
 ///|
-fn html_image_element_set_cross_origin_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLImageElement" "set_crossOrigin"
+fn html_image_element_set_cross_origin_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLImageElement" "set_crossOrigin"
 
 ///|
 impl THTMLImageElement with set_cross_origin(self : Self, value : String) -> Unit {
@@ -284,7 +287,10 @@ impl THTMLImageElement with referrer_policy(self : Self) -> String {
 }
 
 ///|
-fn html_image_element_set_referrer_policy_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLImageElement" "set_referrerPolicy"
+fn html_image_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLImageElement" "set_referrerPolicy"
 
 ///|
 impl THTMLImageElement with set_referrer_policy(self : Self, value : String) -> Unit {
@@ -332,7 +338,10 @@ impl THTMLImageElement with fetch_priority(self : Self) -> String {
 }
 
 ///|
-fn html_image_element_set_fetch_priority_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLImageElement" "set_fetchPriority"
+fn html_image_element_set_fetch_priority_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLImageElement" "set_fetchPriority"
 
 ///|
 impl THTMLImageElement with set_fetch_priority(self : Self, value : String) -> Unit {

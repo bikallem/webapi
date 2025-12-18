@@ -15,8 +15,10 @@ pub impl TJsValue for CanvasTextRendering with to_js(self) {
   match self {
     CanvasTextRendering::Auto => TJsValue::to_js("auto")
     CanvasTextRendering::Optimizespeed => TJsValue::to_js("optimizeSpeed")
-    CanvasTextRendering::Optimizelegibility => TJsValue::to_js("optimizeLegibility")
-    CanvasTextRendering::Geometricprecision => TJsValue::to_js("geometricPrecision")
+    CanvasTextRendering::Optimizelegibility =>
+      TJsValue::to_js("optimizeLegibility")
+    CanvasTextRendering::Geometricprecision =>
+      TJsValue::to_js("geometricPrecision")
   }
 }
 
@@ -36,7 +38,9 @@ pub impl Show for CanvasTextRendering with output(self, logger) {
   match self {
     CanvasTextRendering::Auto => logger.write_string("auto")
     CanvasTextRendering::Optimizespeed => logger.write_string("optimizeSpeed")
-    CanvasTextRendering::Optimizelegibility => logger.write_string("optimizeLegibility")
-    CanvasTextRendering::Geometricprecision => logger.write_string("geometricPrecision")
+    CanvasTextRendering::Optimizelegibility =>
+      logger.write_string("optimizeLegibility")
+    CanvasTextRendering::Geometricprecision =>
+      logger.write_string("geometricPrecision")
   }
 }

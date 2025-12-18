@@ -181,7 +181,10 @@ impl THTMLBodyElement with onafterprint(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onafterprint_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onafterprint"
+fn html_body_element_set_onafterprint_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onafterprint"
 
 ///|
 impl THTMLBodyElement with set_onafterprint(self : Self, value : EventHandler) -> Unit {
@@ -197,7 +200,10 @@ impl THTMLBodyElement with onbeforeprint(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onbeforeprint_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onbeforeprint"
+fn html_body_element_set_onbeforeprint_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onbeforeprint"
 
 ///|
 impl THTMLBodyElement with set_onbeforeprint(self : Self, value : EventHandler) -> Unit {
@@ -213,7 +219,10 @@ impl THTMLBodyElement with onbeforeunload(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onbeforeunload_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onbeforeunload"
+fn html_body_element_set_onbeforeunload_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onbeforeunload"
 
 ///|
 impl THTMLBodyElement with set_onbeforeunload(self : Self, value : EventHandler) -> Unit {
@@ -229,7 +238,10 @@ impl THTMLBodyElement with onhashchange(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onhashchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onhashchange"
+fn html_body_element_set_onhashchange_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onhashchange"
 
 ///|
 impl THTMLBodyElement with set_onhashchange(self : Self, value : EventHandler) -> Unit {
@@ -245,11 +257,20 @@ impl THTMLBodyElement with onlanguagechange(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onlanguagechange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onlanguagechange"
+fn html_body_element_set_onlanguagechange_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onlanguagechange"
 
 ///|
-impl THTMLBodyElement with set_onlanguagechange(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onlanguagechange_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLBodyElement with set_onlanguagechange(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_body_element_set_onlanguagechange_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -277,7 +298,10 @@ impl THTMLBodyElement with onmessageerror(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onmessageerror_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onmessageerror"
+fn html_body_element_set_onmessageerror_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onmessageerror"
 
 ///|
 impl THTMLBodyElement with set_onmessageerror(self : Self, value : EventHandler) -> Unit {
@@ -341,7 +365,10 @@ impl THTMLBodyElement with onpagereveal(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onpagereveal_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onpagereveal"
+fn html_body_element_set_onpagereveal_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onpagereveal"
 
 ///|
 impl THTMLBodyElement with set_onpagereveal(self : Self, value : EventHandler) -> Unit {
@@ -405,11 +432,20 @@ impl THTMLBodyElement with onrejectionhandled(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onrejectionhandled_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onrejectionhandled"
+fn html_body_element_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onrejectionhandled"
 
 ///|
-impl THTMLBodyElement with set_onrejectionhandled(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onrejectionhandled_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLBodyElement with set_onrejectionhandled(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_body_element_set_onrejectionhandled_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -437,11 +473,20 @@ impl THTMLBodyElement with onunhandledrejection(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_body_element_set_onunhandledrejection_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLBodyElement" "set_onunhandledrejection"
+fn html_body_element_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLBodyElement" "set_onunhandledrejection"
 
 ///|
-impl THTMLBodyElement with set_onunhandledrejection(self : Self, value : EventHandler) -> Unit {
-  html_body_element_set_onunhandledrejection_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLBodyElement with set_onunhandledrejection(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_body_element_set_onunhandledrejection_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|

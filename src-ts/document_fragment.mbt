@@ -22,7 +22,9 @@ pub trait TDocumentFragment: TJsValue + TNode {
 }
 
 ///|
-pub fn[T : TDocumentFragment] DocumentFragment::into(self : DocumentFragment) -> T = "%identity"
+pub fn[T : TDocumentFragment] DocumentFragment::into(
+  self : DocumentFragment,
+) -> T = "%identity"
 
 ///|
 pub impl TEventTarget for DocumentFragment
@@ -45,11 +47,17 @@ pub fn DocumentFragment::null() -> DocumentFragment {
 pub fn DocumentFragment::new() -> DocumentFragment = "webapi_DocumentFragment" "new"
 
 ///|
-fn document_fragment_get_element_by_id_ffi(obj : JsValue, element_id : JsValue) -> JsValue = "webapi_DocumentFragment" "getElementById"
+fn document_fragment_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> JsValue = "webapi_DocumentFragment" "getElementById"
 
 ///|
 impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element? {
-  document_fragment_get_element_by_id_ffi(TJsValue::to_js(self), TJsValue::to_js(element_id)).as_option()
+  document_fragment_get_element_by_id_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(element_id),
+  ).as_option()
 }
 
 ///|
@@ -69,35 +77,65 @@ impl TDocumentFragment with append(self : Self, nodes : &TAppendNodesArg) -> Uni
 }
 
 ///|
-fn document_fragment_replace_children_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentFragment" "replaceChildren"
+fn document_fragment_replace_children_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "webapi_DocumentFragment" "replaceChildren"
 
 ///|
-impl TDocumentFragment with replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit {
+impl TDocumentFragment with replace_children(
+  self : Self,
+  nodes : &TReplaceChildrenNodesArg,
+) -> Unit {
   document_fragment_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
 ///|
-fn document_fragment_move_before_ffi(obj : JsValue, node : JsValue, child : JsValue) -> Unit = "webapi_DocumentFragment" "moveBefore"
+fn document_fragment_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "webapi_DocumentFragment" "moveBefore"
 
 ///|
-impl TDocumentFragment with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
-  document_fragment_move_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node), TJsValue::to_js(child))
+impl TDocumentFragment with move_before(
+  self : Self,
+  node : &TNode,
+  child : &TNode,
+) -> Unit {
+  document_fragment_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
 }
 
 ///|
-fn document_fragment_query_selector_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_DocumentFragment" "querySelector"
+fn document_fragment_query_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_DocumentFragment" "querySelector"
 
 ///|
 impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element? {
-  document_fragment_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).as_option()
+  document_fragment_query_selector_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).as_option()
 }
 
 ///|
-fn document_fragment_query_selector_all_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_DocumentFragment" "querySelectorAll"
+fn document_fragment_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_DocumentFragment" "querySelectorAll"
 
 ///|
 impl TDocumentFragment with query_selector_all(self : Self, selectors : String) -> NodeList {
-  document_fragment_query_selector_all_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).unsafe_cast()
+  document_fragment_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).unsafe_cast()
 }
 
 ///|

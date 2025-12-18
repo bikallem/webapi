@@ -7,14 +7,18 @@
 pub type PageTransitionEventInit
 
 ///|
-pub impl TJsValue for PageTransitionEventInit with to_js(self : PageTransitionEventInit) -> JsValue = "%identity"
+pub impl TJsValue for PageTransitionEventInit with to_js(
+  self : PageTransitionEventInit,
+) -> JsValue = "%identity"
 
 ///|
-fn page_transition_event_init_ffi(persisted : JsValue) -> PageTransitionEventInit = "webapi_PageTransitionEventInit" "new"
+fn page_transition_event_init_ffi(
+  persisted : JsValue,
+) -> PageTransitionEventInit = "webapi_PageTransitionEventInit" "new"
 
 ///|
 pub fn PageTransitionEventInit::new(
-  persisted? : Bool = false
+  persisted? : Bool = false,
 ) -> PageTransitionEventInit {
   page_transition_event_init_ffi(TJsValue::to_js(persisted))
 }

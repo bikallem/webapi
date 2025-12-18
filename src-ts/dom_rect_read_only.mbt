@@ -34,18 +34,35 @@ pub fn DOMRectReadOnly::null() -> DOMRectReadOnly {
 }
 
 ///|
-fn dom_rect_read_only_new_ffi(x : JsValue, y : JsValue, width : JsValue, height : JsValue) -> DOMRectReadOnly = "webapi_DOMRectReadOnly" "new"
+fn dom_rect_read_only_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> DOMRectReadOnly = "webapi_DOMRectReadOnly" "new"
 
 ///|
-pub fn DOMRectReadOnly::new(x? : Double = 0, y? : Double = 0, width? : Double = 0, height? : Double = 0) -> DOMRectReadOnly {
-  dom_rect_read_only_new_ffi(TJsValue::to_js(x), TJsValue::to_js(y), TJsValue::to_js(width), TJsValue::to_js(height))
+pub fn DOMRectReadOnly::new(
+  x? : Double = 0,
+  y? : Double = 0,
+  width? : Double = 0,
+  height? : Double = 0,
+) -> DOMRectReadOnly {
+  dom_rect_read_only_new_ffi(
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+    TJsValue::to_js(width),
+    TJsValue::to_js(height),
+  )
 }
 
 ///|
 fn dom_rect_read_only_from_rect_ffi(other : JsValue) -> JsValue = "webapi_DOMRectReadOnly" "fromRect"
 
 ///|
-pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit = DOMRectInit::empty()) -> JsValue {
+pub fn DOMRectReadOnly::from_rect(
+  other? : DOMRectInit = DOMRectInit::empty(),
+) -> JsValue {
   dom_rect_read_only_from_rect_ffi(TJsValue::to_js(other))
 }
 

@@ -17,7 +17,9 @@ pub trait TDOMPointReadOnly: TJsValue {
 }
 
 ///|
-pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(self : DOMPointReadOnly) -> T = "%identity"
+pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(
+  self : DOMPointReadOnly,
+) -> T = "%identity"
 
 ///|
 pub impl TDOMPointReadOnly for DOMPointReadOnly
@@ -31,27 +33,53 @@ pub fn DOMPointReadOnly::null() -> DOMPointReadOnly {
 }
 
 ///|
-fn dom_point_read_only_new_ffi(x : JsValue, y : JsValue, z : JsValue, w : JsValue) -> DOMPointReadOnly = "webapi_DOMPointReadOnly" "new"
+fn dom_point_read_only_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  w : JsValue,
+) -> DOMPointReadOnly = "webapi_DOMPointReadOnly" "new"
 
 ///|
-pub fn DOMPointReadOnly::new(x? : Double = 0, y? : Double = 0, z? : Double = 0, w? : Double = 1) -> DOMPointReadOnly {
-  dom_point_read_only_new_ffi(TJsValue::to_js(x), TJsValue::to_js(y), TJsValue::to_js(z), TJsValue::to_js(w))
+pub fn DOMPointReadOnly::new(
+  x? : Double = 0,
+  y? : Double = 0,
+  z? : Double = 0,
+  w? : Double = 1,
+) -> DOMPointReadOnly {
+  dom_point_read_only_new_ffi(
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+    TJsValue::to_js(z),
+    TJsValue::to_js(w),
+  )
 }
 
 ///|
 fn dom_point_read_only_from_point_ffi(other : JsValue) -> JsValue = "webapi_DOMPointReadOnly" "fromPoint"
 
 ///|
-pub fn DOMPointReadOnly::from_point(other? : DOMPointInit = DOMPointInit::empty()) -> JsValue {
+pub fn DOMPointReadOnly::from_point(
+  other? : DOMPointInit = DOMPointInit::empty(),
+) -> JsValue {
   dom_point_read_only_from_point_ffi(TJsValue::to_js(other))
 }
 
 ///|
-fn dom_point_read_only_matrix_transform_ffi(obj : JsValue, matrix : JsValue) -> JsValue = "webapi_DOMPointReadOnly" "matrixTransform"
+fn dom_point_read_only_matrix_transform_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> JsValue = "webapi_DOMPointReadOnly" "matrixTransform"
 
 ///|
-impl TDOMPointReadOnly with matrix_transform(self : Self, matrix? : DOMMatrixInit = DOMMatrixInit::empty()) -> JsValue {
-  dom_point_read_only_matrix_transform_ffi(TJsValue::to_js(self), TJsValue::to_js(matrix)).unsafe_cast()
+impl TDOMPointReadOnly with matrix_transform(
+  self : Self,
+  matrix? : DOMMatrixInit = DOMMatrixInit::empty(),
+) -> JsValue {
+  dom_point_read_only_matrix_transform_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(matrix),
+  ).unsafe_cast()
 }
 
 ///|

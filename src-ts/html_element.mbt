@@ -263,7 +263,10 @@ impl THTMLElement with attach_internals(self : Self) -> JsValue {
 fn html_element_show_popover_ffi(obj : JsValue, options : JsValue) -> Unit = "webapi_HTMLElement" "showPopover"
 
 ///|
-impl THTMLElement with show_popover(self : Self, options? : ShowPopoverOptions = ShowPopoverOptions::empty()) -> Unit {
+impl THTMLElement with show_popover(
+  self : Self,
+  options? : ShowPopoverOptions = ShowPopoverOptions::empty(),
+) -> Unit {
   html_element_show_popover_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -275,13 +278,16 @@ impl THTMLElement with hide_popover(self : Self) -> Unit {
   html_element_hide_popover_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// Arg : options
 pub(open) trait TTogglePopoverOptionsArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TTogglePopoverOptionsArg for TogglePopoverOptions with to_js(self : TogglePopoverOptions) -> JsValue = "%identity"
+pub impl TTogglePopoverOptionsArg for TogglePopoverOptions with to_js(
+  self : TogglePopoverOptions,
+) -> JsValue = "%identity"
 
 ///|
 pub impl TTogglePopoverOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
@@ -290,7 +296,10 @@ pub impl TTogglePopoverOptionsArg for Bool with to_js(self : Bool) -> JsValue = 
 fn html_element_toggle_popover_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_HTMLElement" "togglePopover"
 
 ///|
-impl THTMLElement with toggle_popover(self : Self, options? : &TTogglePopoverOptionsArg = TogglePopoverOptions::empty()) -> Bool {
+impl THTMLElement with toggle_popover(
+  self : Self,
+  options? : &TTogglePopoverOptionsArg = TogglePopoverOptions::empty(),
+) -> Bool {
   html_element_toggle_popover_ffi(TJsValue::to_js(self), options.to_js()).unsafe_cast()
 }
 
@@ -298,7 +307,10 @@ impl THTMLElement with toggle_popover(self : Self, options? : &TTogglePopoverOpt
 fn html_element_focus_ffi(obj : JsValue, options : JsValue) -> Unit = "webapi_HTMLElement" "focus"
 
 ///|
-impl THTMLElement with focus(self : Self, options? : FocusOptions = FocusOptions::empty()) -> Unit {
+impl THTMLElement with focus(
+  self : Self,
+  options? : FocusOptions = FocusOptions::empty(),
+) -> Unit {
   html_element_focus_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -519,7 +531,10 @@ impl THTMLElement with writing_suggestions(self : Self) -> String {
 }
 
 ///|
-fn html_element_set_writing_suggestions_ffi(obj : JsValue, value : String) -> Unit = "webapi_HTMLElement" "set_writingSuggestions"
+fn html_element_set_writing_suggestions_ffi(
+  obj : JsValue,
+  value : String,
+) -> Unit = "webapi_HTMLElement" "set_writingSuggestions"
 
 ///|
 impl THTMLElement with set_writing_suggestions(self : Self, value : String) -> Unit {
@@ -783,7 +798,10 @@ impl THTMLElement with oncanplaythrough(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_oncanplaythrough_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_oncanplaythrough"
+fn html_element_set_oncanplaythrough_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_oncanplaythrough"
 
 ///|
 impl THTMLElement with set_oncanplaythrough(self : Self, value : EventHandler) -> Unit {
@@ -895,7 +913,10 @@ impl THTMLElement with oncontextrestored(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_oncontextrestored_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_oncontextrestored"
+fn html_element_set_oncontextrestored_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_oncontextrestored"
 
 ///|
 impl THTMLElement with set_oncontextrestored(self : Self, value : EventHandler) -> Unit {
@@ -1087,7 +1108,10 @@ impl THTMLElement with ondurationchange(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_ondurationchange_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_ondurationchange"
+fn html_element_set_ondurationchange_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_ondurationchange"
 
 ///|
 impl THTMLElement with set_ondurationchange(self : Self, value : EventHandler) -> Unit {
@@ -1295,7 +1319,10 @@ impl THTMLElement with onloadedmetadata(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_onloadedmetadata_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_onloadedmetadata"
+fn html_element_set_onloadedmetadata_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onloadedmetadata"
 
 ///|
 impl THTMLElement with set_onloadedmetadata(self : Self, value : EventHandler) -> Unit {
@@ -1599,11 +1626,20 @@ impl THTMLElement with onsecuritypolicyviolation(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_onsecuritypolicyviolation_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_onsecuritypolicyviolation"
+fn html_element_set_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onsecuritypolicyviolation"
 
 ///|
-impl THTMLElement with set_onsecuritypolicyviolation(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onsecuritypolicyviolation_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLElement with set_onsecuritypolicyviolation(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_element_set_onsecuritypolicyviolation_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -1791,11 +1827,20 @@ impl THTMLElement with onwebkitanimationend(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_onwebkitanimationend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_onwebkitanimationend"
+fn html_element_set_onwebkitanimationend_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onwebkitanimationend"
 
 ///|
-impl THTMLElement with set_onwebkitanimationend(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onwebkitanimationend_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLElement with set_onwebkitanimationend(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_element_set_onwebkitanimationend_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -1807,11 +1852,20 @@ impl THTMLElement with onwebkitanimationiteration(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_onwebkitanimationiteration_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_onwebkitanimationiteration"
+fn html_element_set_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onwebkitanimationiteration"
 
 ///|
-impl THTMLElement with set_onwebkitanimationiteration(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onwebkitanimationiteration_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLElement with set_onwebkitanimationiteration(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_element_set_onwebkitanimationiteration_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -1823,11 +1877,20 @@ impl THTMLElement with onwebkitanimationstart(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_onwebkitanimationstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_onwebkitanimationstart"
+fn html_element_set_onwebkitanimationstart_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onwebkitanimationstart"
 
 ///|
-impl THTMLElement with set_onwebkitanimationstart(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onwebkitanimationstart_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLElement with set_onwebkitanimationstart(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_element_set_onwebkitanimationstart_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -1839,11 +1902,20 @@ impl THTMLElement with onwebkittransitionend(self : Self) -> EventHandler {
 }
 
 ///|
-fn html_element_set_onwebkittransitionend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLElement" "set_onwebkittransitionend"
+fn html_element_set_onwebkittransitionend_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onwebkittransitionend"
 
 ///|
-impl THTMLElement with set_onwebkittransitionend(self : Self, value : EventHandler) -> Unit {
-  html_element_set_onwebkittransitionend_ffi(self.to_js(), TJsValue::to_js(value))
+impl THTMLElement with set_onwebkittransitionend(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  html_element_set_onwebkittransitionend_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|

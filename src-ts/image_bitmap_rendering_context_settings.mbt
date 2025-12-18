@@ -7,14 +7,18 @@
 pub type ImageBitmapRenderingContextSettings
 
 ///|
-pub impl TJsValue for ImageBitmapRenderingContextSettings with to_js(self : ImageBitmapRenderingContextSettings) -> JsValue = "%identity"
+pub impl TJsValue for ImageBitmapRenderingContextSettings with to_js(
+  self : ImageBitmapRenderingContextSettings,
+) -> JsValue = "%identity"
 
 ///|
-fn image_bitmap_rendering_context_settings_ffi(alpha : JsValue) -> ImageBitmapRenderingContextSettings = "webapi_ImageBitmapRenderingContextSettings" "new"
+fn image_bitmap_rendering_context_settings_ffi(
+  alpha : JsValue,
+) -> ImageBitmapRenderingContextSettings = "webapi_ImageBitmapRenderingContextSettings" "new"
 
 ///|
 pub fn ImageBitmapRenderingContextSettings::new(
-  alpha? : Bool = true
+  alpha? : Bool = true,
 ) -> ImageBitmapRenderingContextSettings {
   image_bitmap_rendering_context_settings_ffi(TJsValue::to_js(alpha))
 }

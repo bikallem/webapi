@@ -21,6 +21,12 @@ pub impl TJsValue for CanvasPattern with to_js(self : CanvasPattern) -> JsValue 
 fn canvas_pattern_set_transform_ffi(obj : JsValue, transform : JsValue) -> Unit = "webapi_CanvasPattern" "setTransform"
 
 ///|
-impl TCanvasPattern with set_transform(self : Self, transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty()) -> Unit {
-  canvas_pattern_set_transform_ffi(TJsValue::to_js(self), TJsValue::to_js(transform))
+impl TCanvasPattern with set_transform(
+  self : Self,
+  transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
+) -> Unit {
+  canvas_pattern_set_transform_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(transform),
+  )
 }

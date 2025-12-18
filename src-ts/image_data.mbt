@@ -27,22 +27,49 @@ pub fn ImageData::null() -> ImageData {
 }
 
 ///|
-fn image_data_new_ffi(sw : JsValue, sh : JsValue, settings : JsValue) -> ImageData = "webapi_ImageData" "new"
+fn image_data_new_ffi(
+  sw : JsValue,
+  sh : JsValue,
+  settings : JsValue,
+) -> ImageData = "webapi_ImageData" "new"
 
 ///|
-pub fn ImageData::new(sw : UInt, sh : UInt, settings? : ImageDataSettings = ImageDataSettings::empty()) -> ImageData {
-  image_data_new_ffi(TJsValue::to_js(sw), TJsValue::to_js(sh), TJsValue::to_js(settings))
+pub fn ImageData::new(
+  sw : UInt,
+  sh : UInt,
+  settings? : ImageDataSettings = ImageDataSettings::empty(),
+) -> ImageData {
+  image_data_new_ffi(
+    TJsValue::to_js(sw),
+    TJsValue::to_js(sh),
+    TJsValue::to_js(settings),
+  )
 }
 
 ///|
-fn image_data_new2_ffi(data : JsValue, sw : JsValue, sh : JsValue, settings : JsValue) -> ImageData = "webapi_ImageData" "new"
+fn image_data_new2_ffi(
+  data : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  settings : JsValue,
+) -> ImageData = "webapi_ImageData" "new"
 
 ///|
-pub fn ImageData::new2(data : JsValue, sw : UInt, sh? : UInt, settings? : ImageDataSettings = ImageDataSettings::empty()) -> ImageData {
-  image_data_new2_ffi(data, TJsValue::to_js(sw), match sh {
+pub fn ImageData::new2(
+  data : JsValue,
+  sw : UInt,
+  sh? : UInt,
+  settings? : ImageDataSettings = ImageDataSettings::empty(),
+) -> ImageData {
+  image_data_new2_ffi(
+    data,
+    TJsValue::to_js(sw),
+    match sh {
       Some(v) => TJsValue::to_js(v)
       None => JsValue::undefined()
-    }, TJsValue::to_js(settings))
+    },
+    TJsValue::to_js(settings),
+  )
 }
 
 ///|
@@ -74,7 +101,9 @@ fn image_data_pixel_format_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "p
 
 ///|
 impl TImageData with pixel_format(self : Self) -> ImageDataPixelFormat {
-  ImageDataPixelFormat::from(image_data_pixel_format_ffi(self.to_js()).unsafe_cast()).unwrap()
+  ImageDataPixelFormat::from(
+    image_data_pixel_format_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|
@@ -82,5 +111,7 @@ fn image_data_color_space_ffi(obj : JsValue) -> JsValue = "webapi_ImageData" "co
 
 ///|
 impl TImageData with color_space(self : Self) -> PredefinedColorSpace {
-  PredefinedColorSpace::from(image_data_color_space_ffi(self.to_js()).unsafe_cast()).unwrap()
+  PredefinedColorSpace::from(
+    image_data_color_space_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }

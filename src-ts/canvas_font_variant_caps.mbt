@@ -47,7 +47,8 @@ pub impl Show for CanvasFontVariantCaps with output(self, logger) {
     CanvasFontVariantCaps::SmallCaps => logger.write_string("small-caps")
     CanvasFontVariantCaps::AllSmallCaps => logger.write_string("all-small-caps")
     CanvasFontVariantCaps::PetiteCaps => logger.write_string("petite-caps")
-    CanvasFontVariantCaps::AllPetiteCaps => logger.write_string("all-petite-caps")
+    CanvasFontVariantCaps::AllPetiteCaps =>
+      logger.write_string("all-petite-caps")
     CanvasFontVariantCaps::Unicase => logger.write_string("unicase")
     CanvasFontVariantCaps::TitlingCaps => logger.write_string("titling-caps")
   }

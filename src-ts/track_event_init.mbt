@@ -13,9 +13,7 @@ pub impl TJsValue for TrackEventInit with to_js(self : TrackEventInit) -> JsValu
 fn track_event_init_ffi(track : JsValue) -> TrackEventInit = "webapi_TrackEventInit" "new"
 
 ///|
-pub fn TrackEventInit::new(
-  track? : JsValue
-) -> TrackEventInit {
+pub fn TrackEventInit::new(track? : JsValue) -> TrackEventInit {
   let track_js = opt_to_js(track)
   track_event_init_ffi(track_js)
 }

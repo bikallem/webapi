@@ -28,7 +28,9 @@ pub impl THTMLElement for HTMLParagraphElement
 pub impl THTMLParagraphElement for HTMLParagraphElement
 
 ///|
-pub impl TJsValue for HTMLParagraphElement with to_js(self : HTMLParagraphElement) -> JsValue = "%identity"
+pub impl TJsValue for HTMLParagraphElement with to_js(
+  self : HTMLParagraphElement,
+) -> JsValue = "%identity"
 
 ///|
 fn html_paragraph_element_align_ffi(obj : JsValue) -> String = "webapi_HTMLParagraphElement" "align"

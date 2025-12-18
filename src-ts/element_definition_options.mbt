@@ -7,14 +7,18 @@
 pub type ElementDefinitionOptions
 
 ///|
-pub impl TJsValue for ElementDefinitionOptions with to_js(self : ElementDefinitionOptions) -> JsValue = "%identity"
+pub impl TJsValue for ElementDefinitionOptions with to_js(
+  self : ElementDefinitionOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn element_definition_options_ffi(extends : JsValue) -> ElementDefinitionOptions = "webapi_ElementDefinitionOptions" "new"
+fn element_definition_options_ffi(
+  extends : JsValue,
+) -> ElementDefinitionOptions = "webapi_ElementDefinitionOptions" "new"
 
 ///|
 pub fn ElementDefinitionOptions::new(
-  extends? : String
+  extends? : String,
 ) -> ElementDefinitionOptions {
   let extends_js = opt_to_js(extends)
   element_definition_options_ffi(extends_js)

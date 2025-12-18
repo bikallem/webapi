@@ -7,15 +7,15 @@
 pub type TogglePopoverOptions
 
 ///|
-pub impl TJsValue for TogglePopoverOptions with to_js(self : TogglePopoverOptions) -> JsValue = "%identity"
+pub impl TJsValue for TogglePopoverOptions with to_js(
+  self : TogglePopoverOptions,
+) -> JsValue = "%identity"
 
 ///|
 fn toggle_popover_options_ffi(force : JsValue) -> TogglePopoverOptions = "webapi_TogglePopoverOptions" "new"
 
 ///|
-pub fn TogglePopoverOptions::new(
-  force? : Bool
-) -> TogglePopoverOptions {
+pub fn TogglePopoverOptions::new(force? : Bool) -> TogglePopoverOptions {
   let force_js = opt_to_js(force)
   toggle_popover_options_ffi(force_js)
 }

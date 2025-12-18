@@ -15,11 +15,7 @@ pub(open) trait TCanvas {
 pub fn[T : TCanvas] Canvas::into(self : Canvas) -> T = "%identity"
 
 ///|
-pub impl TCanvas for HTMLCanvasElement with to_js(
-  self : HTMLCanvasElement,
-) -> JsValue = "%identity"
+pub impl TCanvas for HTMLCanvasElement with to_js(self : HTMLCanvasElement) -> JsValue = "%identity"
 
 ///|
-pub impl TCanvas for OffscreenCanvas with to_js(
-  self : OffscreenCanvas,
-) -> JsValue = "%identity"
+pub impl TCanvas for OffscreenCanvas with to_js(self : OffscreenCanvas) -> JsValue = "%identity"

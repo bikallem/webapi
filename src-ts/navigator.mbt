@@ -48,19 +48,43 @@ impl TNavigator with taint_enabled(self : Self) -> Bool {
 }
 
 ///|
-fn navigator_register_protocol_handler_ffi(obj : JsValue, scheme : JsValue, url : JsValue) -> Unit = "webapi_Navigator" "registerProtocolHandler"
+fn navigator_register_protocol_handler_ffi(
+  obj : JsValue,
+  scheme : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_Navigator" "registerProtocolHandler"
 
 ///|
-impl TNavigator with register_protocol_handler(self : Self, scheme : String, url : String) -> Unit {
-  navigator_register_protocol_handler_ffi(TJsValue::to_js(self), TJsValue::to_js(scheme), TJsValue::to_js(url))
+impl TNavigator with register_protocol_handler(
+  self : Self,
+  scheme : String,
+  url : String,
+) -> Unit {
+  navigator_register_protocol_handler_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(scheme),
+    TJsValue::to_js(url),
+  )
 }
 
 ///|
-fn navigator_unregister_protocol_handler_ffi(obj : JsValue, scheme : JsValue, url : JsValue) -> Unit = "webapi_Navigator" "unregisterProtocolHandler"
+fn navigator_unregister_protocol_handler_ffi(
+  obj : JsValue,
+  scheme : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_Navigator" "unregisterProtocolHandler"
 
 ///|
-impl TNavigator with unregister_protocol_handler(self : Self, scheme : String, url : String) -> Unit {
-  navigator_unregister_protocol_handler_ffi(TJsValue::to_js(self), TJsValue::to_js(scheme), TJsValue::to_js(url))
+impl TNavigator with unregister_protocol_handler(
+  self : Self,
+  scheme : String,
+  url : String,
+) -> Unit {
+  navigator_unregister_protocol_handler_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(scheme),
+    TJsValue::to_js(url),
+  )
 }
 
 ///|

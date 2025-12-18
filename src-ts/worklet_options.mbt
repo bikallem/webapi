@@ -13,9 +13,7 @@ pub impl TJsValue for WorkletOptions with to_js(self : WorkletOptions) -> JsValu
 fn worklet_options_ffi(credentials : JsValue) -> WorkletOptions = "webapi_WorkletOptions" "new"
 
 ///|
-pub fn WorkletOptions::new(
-  credentials? : JsValue
-) -> WorkletOptions {
+pub fn WorkletOptions::new(credentials? : JsValue) -> WorkletOptions {
   let credentials_js = opt_to_js(credentials)
   worklet_options_ffi(credentials_js)
 }

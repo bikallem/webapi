@@ -8,7 +8,9 @@ pub(open) trait TRenderingContext {
 }
 
 ///|
-pub fn[T : TRenderingContext] &TRenderingContext::into(self : &TRenderingContext) -> T = "%identity"
+pub fn[T : TRenderingContext] &TRenderingContext::into(
+  self : &TRenderingContext,
+) -> T = "%identity"
 
 ///|
 pub impl TRenderingContext for CanvasRenderingContext2D with to_js(

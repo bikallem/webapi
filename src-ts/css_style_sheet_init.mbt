@@ -10,16 +10,24 @@ pub type CSSStyleSheetInit
 pub impl TJsValue for CSSStyleSheetInit with to_js(self : CSSStyleSheetInit) -> JsValue = "%identity"
 
 ///|
-fn css_style_sheet_init_ffi(base_url : JsValue, media : JsValue, disabled : JsValue) -> CSSStyleSheetInit = "webapi_CSSStyleSheetInit" "new"
+fn css_style_sheet_init_ffi(
+  base_url : JsValue,
+  media : JsValue,
+  disabled : JsValue,
+) -> CSSStyleSheetInit = "webapi_CSSStyleSheetInit" "new"
 
 ///|
 pub fn CSSStyleSheetInit::new(
   base_url? : String = JsValue::null(),
   media? : JsValue,
-  disabled? : Bool = false
+  disabled? : Bool = false,
 ) -> CSSStyleSheetInit {
   let media_js = opt_to_js(media)
-  css_style_sheet_init_ffi(TJsValue::to_js(base_url), media_js, TJsValue::to_js(disabled))
+  css_style_sheet_init_ffi(
+    TJsValue::to_js(base_url),
+    media_js,
+    TJsValue::to_js(disabled),
+  )
 }
 
 ///|

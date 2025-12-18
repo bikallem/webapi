@@ -227,12 +227,30 @@ pub trait TDocument: TJsValue + TNode {
   set_onwheel(self : Self, value : EventHandler) -> Unit = _
   element_from_point(self : Self, x : Double, y : Double) -> Element? = _
   elements_from_point(self : Self, x : Double, y : Double) -> Array[Element] = _
-  caret_position_from_point(self : Self, x : Double, y : Double, options? : CaretPositionFromPointOptions) -> JsValue? = _
+  caret_position_from_point(
+    self : Self,
+    x : Double,
+    y : Double,
+    options? : CaretPositionFromPointOptions,
+  ) -> JsValue? = _
   get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection = _
-  get_elements_by_tag_name_ns(self : Self, namespace_ : String, local_name : String) -> HTMLCollection = _
+  get_elements_by_tag_name_ns(
+    self : Self,
+    namespace_ : String,
+    local_name : String,
+  ) -> HTMLCollection = _
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
-  create_element(self : Self, local_name : String, options? : &TCreateElementOptionsArg) -> Element = _
-  create_element_ns(self : Self, namespace_ : String, qualified_name : String, options? : &TCreateElementNSOptionsArg) -> Element = _
+  create_element(
+    self : Self,
+    local_name : String,
+    options? : &TCreateElementOptionsArg,
+  ) -> Element = _
+  create_element_ns(
+    self : Self,
+    namespace_ : String,
+    qualified_name : String,
+    options? : &TCreateElementNSOptionsArg,
+  ) -> Element = _
   create_document_fragment(self : Self) -> DocumentFragment = _
   create_text_node(self : Self, data : String) -> Text = _
   create_cdata_section(self : Self, data : String) -> CDATASection = _
@@ -244,8 +262,18 @@ pub trait TDocument: TJsValue + TNode {
   create_attribute_ns(self : Self, namespace_ : String, qualified_name : String) -> Attr = _
   create_event(self : Self, interface : String) -> Event = _
   create_range(self : Self) -> Range = _
-  create_node_iterator(self : Self, root : &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue = _
-  create_tree_walker(self : Self, root : &TNode, what_to_show? : UInt, filter? : JsValue) -> JsValue = _
+  create_node_iterator(
+    self : Self,
+    root : &TNode,
+    what_to_show? : UInt,
+    filter? : JsValue,
+  ) -> JsValue = _
+  create_tree_walker(
+    self : Self,
+    root : &TNode,
+    what_to_show? : UInt,
+    filter? : JsValue,
+  ) -> JsValue = _
   get_elements_by_name(self : Self, element_name : String) -> NodeList = _
   open(self : Self, unused1? : String, unused2? : String) -> Document = _
   open2(self : Self, url : String, name : String, features : String) -> Window? = _
@@ -253,7 +281,12 @@ pub trait TDocument: TJsValue + TNode {
   write(self : Self, text : &TWriteTextArg) -> Unit = _
   writeln(self : Self, text : &TWritelnTextArg) -> Unit = _
   has_focus(self : Self) -> Bool = _
-  exec_command(self : Self, command_id : String, show_ui? : Bool, value? : String) -> Bool = _
+  exec_command(
+    self : Self,
+    command_id : String,
+    show_ui? : Bool,
+    value? : String,
+  ) -> Bool = _
   query_command_enabled(self : Self, command_id : String) -> Bool = _
   query_command_indeterm(self : Self, command_id : String) -> Bool = _
   query_command_state(self : Self, command_id : String) -> Bool = _
@@ -263,9 +296,24 @@ pub trait TDocument: TJsValue + TNode {
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
-  convert_quad_from_node(self : Self, quad : DOMQuadInit, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
-  convert_rect_from_node(self : Self, rect : JsValue, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
-  convert_point_from_node(self : Self, point : DOMPointInit, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
+  convert_quad_from_node(
+    self : Self,
+    quad : DOMQuadInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_rect_from_node(
+    self : Self,
+    rect : JsValue,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_point_from_node(
+    self : Self,
+    point : DOMPointInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
   get_element_by_id(self : Self, element_id : String) -> Element? = _
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
@@ -275,7 +323,14 @@ pub trait TDocument: TJsValue + TNode {
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   create_expression(self : Self, expression : String, resolver? : JsValue) -> JsValue = _
   create_ns_resolver(self : Self, node_resolver : &TNode) -> Node = _
-  evaluate(self : Self, expression : String, context_node : &TNode, resolver? : JsValue, type_? : UInt, result? : JsValue) -> JsValue = _
+  evaluate(
+    self : Self,
+    expression : String,
+    context_node : &TNode,
+    resolver? : JsValue,
+    type_? : UInt,
+    result? : JsValue,
+  ) -> JsValue = _
 }
 
 ///|
@@ -299,53 +354,117 @@ pub fn Document::null() -> Document {
 pub fn Document::new() -> Document = "webapi_Document" "new"
 
 ///|
-fn document_element_from_point_ffi(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Document" "elementFromPoint"
+fn document_element_from_point_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Document" "elementFromPoint"
 
 ///|
 impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element? {
-  document_element_from_point_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).as_option()
+  document_element_from_point_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).as_option()
 }
 
 ///|
-fn document_elements_from_point_ffi(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Document" "elementsFromPoint"
+fn document_elements_from_point_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Document" "elementsFromPoint"
 
 ///|
-impl TDocument with elements_from_point(self : Self, x : Double, y : Double) -> Array[Element] {
-  document_elements_from_point_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TDocument with elements_from_point(self : Self, x : Double, y : Double) -> Array[
+  Element,
+] {
+  document_elements_from_point_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_caret_position_from_point_ffi(obj : JsValue, x : JsValue, y : JsValue, options : JsValue) -> JsValue = "webapi_Document" "caretPositionFromPoint"
+fn document_caret_position_from_point_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "caretPositionFromPoint"
 
 ///|
-impl TDocument with caret_position_from_point(self : Self, x : Double, y : Double, options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty()) -> JsValue? {
-  document_caret_position_from_point_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y), TJsValue::to_js(options)).as_option()
+impl TDocument with caret_position_from_point(
+  self : Self,
+  x : Double,
+  y : Double,
+  options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
+) -> JsValue? {
+  document_caret_position_from_point_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+    TJsValue::to_js(options),
+  ).as_option()
 }
 
 ///|
-fn document_get_elements_by_tag_name_ffi(obj : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Document" "getElementsByTagName"
+fn document_get_elements_by_tag_name_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Document" "getElementsByTagName"
 
 ///|
-impl TDocument with get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection {
-  document_get_elements_by_tag_name_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name)).unsafe_cast()
+impl TDocument with get_elements_by_tag_name(
+  self : Self,
+  qualified_name : String,
+) -> HTMLCollection {
+  document_get_elements_by_tag_name_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_get_elements_by_tag_name_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> JsValue = "webapi_Document" "getElementsByTagNameNS"
+fn document_get_elements_by_tag_name_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Document" "getElementsByTagNameNS"
 
 ///|
-impl TDocument with get_elements_by_tag_name_ns(self : Self, namespace_ : String, local_name : String) -> HTMLCollection {
-  document_get_elements_by_tag_name_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name)).unsafe_cast()
+impl TDocument with get_elements_by_tag_name_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> HTMLCollection {
+  document_get_elements_by_tag_name_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_get_elements_by_class_name_ffi(obj : JsValue, class_names : JsValue) -> JsValue = "webapi_Document" "getElementsByClassName"
+fn document_get_elements_by_class_name_ffi(
+  obj : JsValue,
+  class_names : JsValue,
+) -> JsValue = "webapi_Document" "getElementsByClassName"
 
 ///|
-impl TDocument with get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection {
-  document_get_elements_by_class_name_ffi(TJsValue::to_js(self), TJsValue::to_js(class_names)).unsafe_cast()
+impl TDocument with get_elements_by_class_name(
+  self : Self,
+  class_names : String,
+) -> HTMLCollection {
+  document_get_elements_by_class_name_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(class_names),
+  ).unsafe_cast()
 }
 
+///|
 /// Arg : options
 pub(open) trait TCreateElementOptionsArg {
   to_js(self : Self) -> JsValue
@@ -355,16 +474,31 @@ pub(open) trait TCreateElementOptionsArg {
 pub impl TCreateElementOptionsArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TCreateElementOptionsArg for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
+pub impl TCreateElementOptionsArg for ElementCreationOptions with to_js(
+  self : ElementCreationOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn document_create_element_ffi(obj : JsValue, local_name : JsValue, options : JsValue) -> JsValue = "webapi_Document" "createElement"
+fn document_create_element_ffi(
+  obj : JsValue,
+  local_name : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "createElement"
 
 ///|
-impl TDocument with create_element(self : Self, local_name : String, options? : &TCreateElementOptionsArg = ElementCreationOptions::empty()) -> Element {
-  document_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), options.to_js()).unsafe_cast()
+impl TDocument with create_element(
+  self : Self,
+  local_name : String,
+  options? : &TCreateElementOptionsArg = ElementCreationOptions::empty(),
+) -> Element {
+  document_create_element_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(local_name),
+    options.to_js(),
+  ).unsafe_cast()
 }
 
+///|
 /// Arg : options
 pub(open) trait TCreateElementNSOptionsArg {
   to_js(self : Self) -> JsValue
@@ -374,14 +508,31 @@ pub(open) trait TCreateElementNSOptionsArg {
 pub impl TCreateElementNSOptionsArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TCreateElementNSOptionsArg for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
+pub impl TCreateElementNSOptionsArg for ElementCreationOptions with to_js(
+  self : ElementCreationOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn document_create_element_ns_ffi(obj : JsValue, namespace_ : JsValue, qualified_name : JsValue, options : JsValue) -> JsValue = "webapi_Document" "createElementNS"
+fn document_create_element_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  qualified_name : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "createElementNS"
 
 ///|
-impl TDocument with create_element_ns(self : Self, namespace_ : String, qualified_name : String, options? : &TCreateElementNSOptionsArg = ElementCreationOptions::empty()) -> Element {
-  document_create_element_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(qualified_name), options.to_js()).unsafe_cast()
+impl TDocument with create_element_ns(
+  self : Self,
+  namespace_ : String,
+  qualified_name : String,
+  options? : &TCreateElementNSOptionsArg = ElementCreationOptions::empty(),
+) -> Element {
+  document_create_element_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(qualified_name),
+    options.to_js(),
+  ).unsafe_cast()
 }
 
 ///|
@@ -405,7 +556,10 @@ fn document_create_cdata_section_ffi(obj : JsValue, data : JsValue) -> JsValue =
 
 ///|
 impl TDocument with create_cdata_section(self : Self, data : String) -> CDATASection {
-  document_create_cdata_section_ffi(TJsValue::to_js(self), TJsValue::to_js(data)).unsafe_cast()
+  document_create_cdata_section_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(data),
+  ).unsafe_cast()
 }
 
 ///|
@@ -417,13 +571,26 @@ impl TDocument with create_comment(self : Self, data : String) -> Comment {
 }
 
 ///|
-fn document_create_processing_instruction_ffi(obj : JsValue, target : JsValue, data : JsValue) -> JsValue = "webapi_Document" "createProcessingInstruction"
+fn document_create_processing_instruction_ffi(
+  obj : JsValue,
+  target : JsValue,
+  data : JsValue,
+) -> JsValue = "webapi_Document" "createProcessingInstruction"
 
 ///|
-impl TDocument with create_processing_instruction(self : Self, target : String, data : String) -> ProcessingInstruction {
-  document_create_processing_instruction_ffi(TJsValue::to_js(self), TJsValue::to_js(target), TJsValue::to_js(data)).unsafe_cast()
+impl TDocument with create_processing_instruction(
+  self : Self,
+  target : String,
+  data : String,
+) -> ProcessingInstruction {
+  document_create_processing_instruction_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(target),
+    TJsValue::to_js(data),
+  ).unsafe_cast()
 }
 
+///|
 /// Arg : options
 pub(open) trait TImportNodeOptionsArg {
   to_js(self : Self) -> JsValue
@@ -433,15 +600,32 @@ pub(open) trait TImportNodeOptionsArg {
 pub impl TImportNodeOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
-pub impl TImportNodeOptionsArg for ImportNodeOptions with to_js(self : ImportNodeOptions) -> JsValue = "%identity"
+pub impl TImportNodeOptionsArg for ImportNodeOptions with to_js(
+  self : ImportNodeOptions,
+) -> JsValue = "%identity"
 
 ///|
-fn document_import_node_ffi(obj : JsValue, node : JsValue, options : JsValue) -> JsValue = "webapi_Document" "importNode"
+fn document_import_node_ffi(
+  obj : JsValue,
+  node : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "importNode"
 
 ///|
-impl TDocument with import_node(self : Self, node : &TNode, options? : &TImportNodeOptionsArg) -> Node {
-  let options_js = match options { Some(v) => v.to_js(), None => JsValue::undefined() }
-  document_import_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node), options_js).unsafe_cast()
+impl TDocument with import_node(
+  self : Self,
+  node : &TNode,
+  options? : &TImportNodeOptionsArg,
+) -> Node {
+  let options_js = match options {
+    Some(v) => v.to_js()
+    None => JsValue::undefined()
+  }
+  document_import_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    options_js,
+  ).unsafe_cast()
 }
 
 ///|
@@ -453,19 +637,37 @@ impl TDocument with adopt_node(self : Self, node : &TNode) -> Node {
 }
 
 ///|
-fn document_create_attribute_ffi(obj : JsValue, local_name : JsValue) -> JsValue = "webapi_Document" "createAttribute"
+fn document_create_attribute_ffi(
+  obj : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Document" "createAttribute"
 
 ///|
 impl TDocument with create_attribute(self : Self, local_name : String) -> Attr {
-  document_create_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name)).unsafe_cast()
+  document_create_attribute_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(local_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_create_attribute_ns_ffi(obj : JsValue, namespace_ : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Document" "createAttributeNS"
+fn document_create_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Document" "createAttributeNS"
 
 ///|
-impl TDocument with create_attribute_ns(self : Self, namespace_ : String, qualified_name : String) -> Attr {
-  document_create_attribute_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(qualified_name)).unsafe_cast()
+impl TDocument with create_attribute_ns(
+  self : Self,
+  namespace_ : String,
+  qualified_name : String,
+) -> Attr {
+  document_create_attribute_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(qualified_name),
+  ).unsafe_cast()
 }
 
 ///|
@@ -485,23 +687,54 @@ impl TDocument with create_range(self : Self) -> Range {
 }
 
 ///|
-fn document_create_node_iterator_ffi(obj : JsValue, root : JsValue, what_to_show : JsValue, filter : JsValue) -> JsValue = "webapi_Document" "createNodeIterator"
+fn document_create_node_iterator_ffi(
+  obj : JsValue,
+  root : JsValue,
+  what_to_show : JsValue,
+  filter : JsValue,
+) -> JsValue = "webapi_Document" "createNodeIterator"
 
 ///|
-impl TDocument with create_node_iterator(self : Self, root : &TNode, what_to_show? : UInt = 0xFFFFFFFF, filter? : JsValue) -> JsValue {
+impl TDocument with create_node_iterator(
+  self : Self,
+  root : &TNode,
+  what_to_show? : UInt = 0xFFFFFFFF,
+  filter? : JsValue,
+) -> JsValue {
   let filter_js = opt_to_js(filter)
-  document_create_node_iterator_ffi(TJsValue::to_js(self), TJsValue::to_js(root), TJsValue::to_js(what_to_show), filter_js).unsafe_cast()
+  document_create_node_iterator_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(root),
+    TJsValue::to_js(what_to_show),
+    filter_js,
+  ).unsafe_cast()
 }
 
 ///|
-fn document_create_tree_walker_ffi(obj : JsValue, root : JsValue, what_to_show : JsValue, filter : JsValue) -> JsValue = "webapi_Document" "createTreeWalker"
+fn document_create_tree_walker_ffi(
+  obj : JsValue,
+  root : JsValue,
+  what_to_show : JsValue,
+  filter : JsValue,
+) -> JsValue = "webapi_Document" "createTreeWalker"
 
 ///|
-impl TDocument with create_tree_walker(self : Self, root : &TNode, what_to_show? : UInt = 0xFFFFFFFF, filter? : JsValue) -> JsValue {
+impl TDocument with create_tree_walker(
+  self : Self,
+  root : &TNode,
+  what_to_show? : UInt = 0xFFFFFFFF,
+  filter? : JsValue,
+) -> JsValue {
   let filter_js = opt_to_js(filter)
-  document_create_tree_walker_ffi(TJsValue::to_js(self), TJsValue::to_js(root), TJsValue::to_js(what_to_show), filter_js).unsafe_cast()
+  document_create_tree_walker_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(root),
+    TJsValue::to_js(what_to_show),
+    filter_js,
+  ).unsafe_cast()
 }
 
+///|
 /// Arg : html
 pub(open) trait TParseHTMLUnsafeHtmlArg {
   to_js(self : Self) -> JsValue
@@ -522,15 +755,25 @@ pub fn Document::parse_html_unsafe(html : JsValue) -> JsValue {
 }
 
 ///|
-fn document_get_elements_by_name_ffi(obj : JsValue, element_name : JsValue) -> JsValue = "webapi_Document" "getElementsByName"
+fn document_get_elements_by_name_ffi(
+  obj : JsValue,
+  element_name : JsValue,
+) -> JsValue = "webapi_Document" "getElementsByName"
 
 ///|
 impl TDocument with get_elements_by_name(self : Self, element_name : String) -> NodeList {
-  document_get_elements_by_name_ffi(TJsValue::to_js(self), TJsValue::to_js(element_name)).unsafe_cast()
+  document_get_elements_by_name_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(element_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_open_ffi(obj : JsValue, unused1 : JsValue, unused2 : JsValue) -> JsValue = "webapi_Document" "open"
+fn document_open_ffi(
+  obj : JsValue,
+  unused1 : JsValue,
+  unused2 : JsValue,
+) -> JsValue = "webapi_Document" "open"
 
 ///|
 impl TDocument with open(self : Self, unused1? : String, unused2? : String) -> Document {
@@ -540,11 +783,26 @@ impl TDocument with open(self : Self, unused1? : String, unused2? : String) -> D
 }
 
 ///|
-fn document_open_ffi2(obj : JsValue, url : JsValue, name : JsValue, features : JsValue) -> JsValue = "webapi_Document" "open2"
+fn document_open_ffi2(
+  obj : JsValue,
+  url : JsValue,
+  name : JsValue,
+  features : JsValue,
+) -> JsValue = "webapi_Document" "open2"
 
 ///|
-impl TDocument with open2(self : Self, url : String, name : String, features : String) -> Window? {
-  document_open_ffi2(TJsValue::to_js(self), TJsValue::to_js(url), TJsValue::to_js(name), TJsValue::to_js(features)).as_option()
+impl TDocument with open2(
+  self : Self,
+  url : String,
+  name : String,
+  features : String,
+) -> Window? {
+  document_open_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(url),
+    TJsValue::to_js(name),
+    TJsValue::to_js(features),
+  ).as_option()
 }
 
 ///|
@@ -555,6 +813,7 @@ impl TDocument with close(self : Self) -> Unit {
   document_close_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// Arg : text
 pub(open) trait TWriteTextArg {
   to_js(self : Self) -> JsValue
@@ -574,6 +833,7 @@ impl TDocument with write(self : Self, text : &TWriteTextArg) -> Unit {
   document_write_ffi(TJsValue::to_js(self), text.to_js())
 }
 
+///|
 /// Arg : text
 pub(open) trait TWritelnTextArg {
   to_js(self : Self) -> JsValue
@@ -602,51 +862,96 @@ impl TDocument with has_focus(self : Self) -> Bool {
 }
 
 ///|
-fn document_exec_command_ffi(obj : JsValue, command_id : JsValue, show_ui : JsValue, value : JsValue) -> JsValue = "webapi_Document" "execCommand"
+fn document_exec_command_ffi(
+  obj : JsValue,
+  command_id : JsValue,
+  show_ui : JsValue,
+  value : JsValue,
+) -> JsValue = "webapi_Document" "execCommand"
 
 ///|
-impl TDocument with exec_command(self : Self, command_id : String, show_ui? : Bool = false, value? : String = "") -> Bool {
-  document_exec_command_ffi(TJsValue::to_js(self), TJsValue::to_js(command_id), TJsValue::to_js(show_ui), TJsValue::to_js(value)).unsafe_cast()
+impl TDocument with exec_command(
+  self : Self,
+  command_id : String,
+  show_ui? : Bool = false,
+  value? : String = "",
+) -> Bool {
+  document_exec_command_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(command_id),
+    TJsValue::to_js(show_ui),
+    TJsValue::to_js(value),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_query_command_enabled_ffi(obj : JsValue, command_id : JsValue) -> JsValue = "webapi_Document" "queryCommandEnabled"
+fn document_query_command_enabled_ffi(
+  obj : JsValue,
+  command_id : JsValue,
+) -> JsValue = "webapi_Document" "queryCommandEnabled"
 
 ///|
 impl TDocument with query_command_enabled(self : Self, command_id : String) -> Bool {
-  document_query_command_enabled_ffi(TJsValue::to_js(self), TJsValue::to_js(command_id)).unsafe_cast()
+  document_query_command_enabled_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(command_id),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_query_command_indeterm_ffi(obj : JsValue, command_id : JsValue) -> JsValue = "webapi_Document" "queryCommandIndeterm"
+fn document_query_command_indeterm_ffi(
+  obj : JsValue,
+  command_id : JsValue,
+) -> JsValue = "webapi_Document" "queryCommandIndeterm"
 
 ///|
 impl TDocument with query_command_indeterm(self : Self, command_id : String) -> Bool {
-  document_query_command_indeterm_ffi(TJsValue::to_js(self), TJsValue::to_js(command_id)).unsafe_cast()
+  document_query_command_indeterm_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(command_id),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_query_command_state_ffi(obj : JsValue, command_id : JsValue) -> JsValue = "webapi_Document" "queryCommandState"
+fn document_query_command_state_ffi(
+  obj : JsValue,
+  command_id : JsValue,
+) -> JsValue = "webapi_Document" "queryCommandState"
 
 ///|
 impl TDocument with query_command_state(self : Self, command_id : String) -> Bool {
-  document_query_command_state_ffi(TJsValue::to_js(self), TJsValue::to_js(command_id)).unsafe_cast()
+  document_query_command_state_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(command_id),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_query_command_supported_ffi(obj : JsValue, command_id : JsValue) -> JsValue = "webapi_Document" "queryCommandSupported"
+fn document_query_command_supported_ffi(
+  obj : JsValue,
+  command_id : JsValue,
+) -> JsValue = "webapi_Document" "queryCommandSupported"
 
 ///|
 impl TDocument with query_command_supported(self : Self, command_id : String) -> Bool {
-  document_query_command_supported_ffi(TJsValue::to_js(self), TJsValue::to_js(command_id)).unsafe_cast()
+  document_query_command_supported_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(command_id),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_query_command_value_ffi(obj : JsValue, command_id : JsValue) -> JsValue = "webapi_Document" "queryCommandValue"
+fn document_query_command_value_ffi(
+  obj : JsValue,
+  command_id : JsValue,
+) -> JsValue = "webapi_Document" "queryCommandValue"
 
 ///|
 impl TDocument with query_command_value(self : Self, command_id : String) -> String {
-  document_query_command_value_ffi(TJsValue::to_js(self), TJsValue::to_js(command_id)).unsafe_cast()
+  document_query_command_value_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(command_id),
+  ).unsafe_cast()
 }
 
 ///|
@@ -677,42 +982,97 @@ impl TDocument with release_events(self : Self) -> Unit {
 fn document_get_box_quads_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Document" "getBoxQuads"
 
 ///|
-impl TDocument with get_box_quads(self : Self, options? : BoxQuadOptions = BoxQuadOptions::empty()) -> Array[JsValue] {
+impl TDocument with get_box_quads(
+  self : Self,
+  options? : BoxQuadOptions = BoxQuadOptions::empty(),
+) -> Array[JsValue] {
   document_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
 ///|
-fn document_convert_quad_from_node_ffi(obj : JsValue, quad : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Document" "convertQuadFromNode"
+fn document_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "convertQuadFromNode"
 
 ///|
-impl TDocument with convert_quad_from_node(self : Self, quad : DOMQuadInit, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  document_convert_quad_from_node_ffi(TJsValue::to_js(self), TJsValue::to_js(quad), from, TJsValue::to_js(options)).unsafe_cast()
+impl TDocument with convert_quad_from_node(
+  self : Self,
+  quad : DOMQuadInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  document_convert_quad_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(quad),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_convert_rect_from_node_ffi(obj : JsValue, rect : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Document" "convertRectFromNode"
+fn document_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "convertRectFromNode"
 
 ///|
-impl TDocument with convert_rect_from_node(self : Self, rect : JsValue, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  document_convert_rect_from_node_ffi(TJsValue::to_js(self), rect, from, TJsValue::to_js(options)).unsafe_cast()
+impl TDocument with convert_rect_from_node(
+  self : Self,
+  rect : JsValue,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  document_convert_rect_from_node_ffi(
+    TJsValue::to_js(self),
+    rect,
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_convert_point_from_node_ffi(obj : JsValue, point : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Document" "convertPointFromNode"
+fn document_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Document" "convertPointFromNode"
 
 ///|
-impl TDocument with convert_point_from_node(self : Self, point : DOMPointInit, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  document_convert_point_from_node_ffi(TJsValue::to_js(self), TJsValue::to_js(point), from, TJsValue::to_js(options)).unsafe_cast()
+impl TDocument with convert_point_from_node(
+  self : Self,
+  point : DOMPointInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  document_convert_point_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_get_element_by_id_ffi(obj : JsValue, element_id : JsValue) -> JsValue = "webapi_Document" "getElementById"
+fn document_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> JsValue = "webapi_Document" "getElementById"
 
 ///|
 impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
-  document_get_element_by_id_ffi(TJsValue::to_js(self), TJsValue::to_js(element_id)).as_option()
+  document_get_element_by_id_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(element_id),
+  ).as_option()
 }
 
+///|
 /// Arg : nodes
 pub(open) trait TPrependNodesArg {
   to_js(self : Self) -> JsValue
@@ -732,6 +1092,7 @@ impl TDocument with prepend(self : Self, nodes : &TPrependNodesArg) -> Unit {
   document_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
+///|
 /// Arg : nodes
 pub(open) trait TAppendNodesArg {
   to_js(self : Self) -> JsValue
@@ -751,6 +1112,7 @@ impl TDocument with append(self : Self, nodes : &TAppendNodesArg) -> Unit {
   document_append_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
+///|
 /// Arg : nodes
 pub(open) trait TReplaceChildrenNodesArg {
   to_js(self : Self) -> JsValue
@@ -766,16 +1128,27 @@ pub impl TReplaceChildrenNodesArg for String with to_js(self : String) -> JsValu
 fn document_replace_children_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Document" "replaceChildren"
 
 ///|
-impl TDocument with replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit {
+impl TDocument with replace_children(
+  self : Self,
+  nodes : &TReplaceChildrenNodesArg,
+) -> Unit {
   document_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
 ///|
-fn document_move_before_ffi(obj : JsValue, node : JsValue, child : JsValue) -> Unit = "webapi_Document" "moveBefore"
+fn document_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "webapi_Document" "moveBefore"
 
 ///|
 impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
-  document_move_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node), TJsValue::to_js(child))
+  document_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
 }
 
 ///|
@@ -787,38 +1160,83 @@ impl TDocument with query_selector(self : Self, selectors : String) -> Element? 
 }
 
 ///|
-fn document_query_selector_all_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Document" "querySelectorAll"
+fn document_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_Document" "querySelectorAll"
 
 ///|
 impl TDocument with query_selector_all(self : Self, selectors : String) -> NodeList {
-  document_query_selector_all_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).unsafe_cast()
+  document_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_create_expression_ffi(obj : JsValue, expression : JsValue, resolver : JsValue) -> JsValue = "webapi_Document" "createExpression"
+fn document_create_expression_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  resolver : JsValue,
+) -> JsValue = "webapi_Document" "createExpression"
 
 ///|
-impl TDocument with create_expression(self : Self, expression : String, resolver? : JsValue) -> JsValue {
+impl TDocument with create_expression(
+  self : Self,
+  expression : String,
+  resolver? : JsValue,
+) -> JsValue {
   let resolver_js = opt_to_js(resolver)
-  document_create_expression_ffi(TJsValue::to_js(self), TJsValue::to_js(expression), resolver_js).unsafe_cast()
+  document_create_expression_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(expression),
+    resolver_js,
+  ).unsafe_cast()
 }
 
 ///|
-fn document_create_ns_resolver_ffi(obj : JsValue, node_resolver : JsValue) -> JsValue = "webapi_Document" "createNSResolver"
+fn document_create_ns_resolver_ffi(
+  obj : JsValue,
+  node_resolver : JsValue,
+) -> JsValue = "webapi_Document" "createNSResolver"
 
 ///|
 impl TDocument with create_ns_resolver(self : Self, node_resolver : &TNode) -> Node {
-  document_create_ns_resolver_ffi(TJsValue::to_js(self), TJsValue::to_js(node_resolver)).unsafe_cast()
+  document_create_ns_resolver_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node_resolver),
+  ).unsafe_cast()
 }
 
 ///|
-fn document_evaluate_ffi(obj : JsValue, expression : JsValue, context_node : JsValue, resolver : JsValue, type_ : JsValue, result : JsValue) -> JsValue = "webapi_Document" "evaluate"
+fn document_evaluate_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  context_node : JsValue,
+  resolver : JsValue,
+  type_ : JsValue,
+  result : JsValue,
+) -> JsValue = "webapi_Document" "evaluate"
 
 ///|
-impl TDocument with evaluate(self : Self, expression : String, context_node : &TNode, resolver? : JsValue, type_? : UInt = 0, result? : JsValue) -> JsValue {
+impl TDocument with evaluate(
+  self : Self,
+  expression : String,
+  context_node : &TNode,
+  resolver? : JsValue,
+  type_? : UInt = 0,
+  result? : JsValue,
+) -> JsValue {
   let resolver_js = opt_to_js(resolver)
   let result_js = opt_to_js(result)
-  document_evaluate_ffi(TJsValue::to_js(self), TJsValue::to_js(expression), TJsValue::to_js(context_node), resolver_js, TJsValue::to_js(type_), result_js).unsafe_cast()
+  document_evaluate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(expression),
+    TJsValue::to_js(context_node),
+    resolver_js,
+    TJsValue::to_js(type_),
+    result_js,
+  ).unsafe_cast()
 }
 
 ///|
@@ -1130,7 +1548,9 @@ fn document_visibility_state_ffi(obj : JsValue) -> JsValue = "webapi_Document" "
 
 ///|
 impl TDocument with visibility_state(self : Self) -> DocumentVisibilityState {
-  DocumentVisibilityState::from(document_visibility_state_ffi(self.to_js()).unsafe_cast()).unwrap()
+  DocumentVisibilityState::from(
+    document_visibility_state_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|
@@ -1286,10 +1706,16 @@ impl TDocument with adopted_style_sheets(self : Self) -> Array[JsValue] {
 }
 
 ///|
-fn document_set_adopted_style_sheets_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_adoptedStyleSheets"
+fn document_set_adopted_style_sheets_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_adoptedStyleSheets"
 
 ///|
-impl TDocument with set_adopted_style_sheets(self : Self, value : Array[JsValue]) -> Unit {
+impl TDocument with set_adopted_style_sheets(
+  self : Self,
+  value : Array[JsValue],
+) -> Unit {
   document_set_adopted_style_sheets_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
@@ -2294,11 +2720,20 @@ impl TDocument with onsecuritypolicyviolation(self : Self) -> EventHandler {
 }
 
 ///|
-fn document_set_onsecuritypolicyviolation_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onsecuritypolicyviolation"
+fn document_set_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onsecuritypolicyviolation"
 
 ///|
-impl TDocument with set_onsecuritypolicyviolation(self : Self, value : EventHandler) -> Unit {
-  document_set_onsecuritypolicyviolation_ffi(self.to_js(), TJsValue::to_js(value))
+impl TDocument with set_onsecuritypolicyviolation(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  document_set_onsecuritypolicyviolation_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -2486,7 +2921,10 @@ impl TDocument with onwebkitanimationend(self : Self) -> EventHandler {
 }
 
 ///|
-fn document_set_onwebkitanimationend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onwebkitanimationend"
+fn document_set_onwebkitanimationend_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkitanimationend"
 
 ///|
 impl TDocument with set_onwebkitanimationend(self : Self, value : EventHandler) -> Unit {
@@ -2502,11 +2940,20 @@ impl TDocument with onwebkitanimationiteration(self : Self) -> EventHandler {
 }
 
 ///|
-fn document_set_onwebkitanimationiteration_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onwebkitanimationiteration"
+fn document_set_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkitanimationiteration"
 
 ///|
-impl TDocument with set_onwebkitanimationiteration(self : Self, value : EventHandler) -> Unit {
-  document_set_onwebkitanimationiteration_ffi(self.to_js(), TJsValue::to_js(value))
+impl TDocument with set_onwebkitanimationiteration(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  document_set_onwebkitanimationiteration_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -2518,10 +2965,16 @@ impl TDocument with onwebkitanimationstart(self : Self) -> EventHandler {
 }
 
 ///|
-fn document_set_onwebkitanimationstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onwebkitanimationstart"
+fn document_set_onwebkitanimationstart_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkitanimationstart"
 
 ///|
-impl TDocument with set_onwebkitanimationstart(self : Self, value : EventHandler) -> Unit {
+impl TDocument with set_onwebkitanimationstart(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
   document_set_onwebkitanimationstart_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
@@ -2534,7 +2987,10 @@ impl TDocument with onwebkittransitionend(self : Self) -> EventHandler {
 }
 
 ///|
-fn document_set_onwebkittransitionend_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Document" "set_onwebkittransitionend"
+fn document_set_onwebkittransitionend_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Document" "set_onwebkittransitionend"
 
 ///|
 impl TDocument with set_onwebkittransitionend(self : Self, value : EventHandler) -> Unit {

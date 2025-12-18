@@ -14,7 +14,7 @@ fn scroll_options_ffi(behavior : JsValue) -> ScrollOptions = "webapi_ScrollOptio
 
 ///|
 pub fn ScrollOptions::new(
-  behavior? : ScrollBehavior = ScrollBehavior::Auto
+  behavior? : ScrollBehavior = ScrollBehavior::Auto,
 ) -> ScrollOptions {
   scroll_options_ffi(TJsValue::to_js(behavior))
 }

@@ -8,7 +8,11 @@ pub type WheelEvent
 
 ///|
 pub const DOM_DELTA_PIXEL : UInt = 0x00
+
+///|
 pub const DOM_DELTA_LINE : UInt = 0x01
+
+///|
 pub const DOM_DELTA_PAGE : UInt = 0x02
 
 ///|
@@ -40,10 +44,16 @@ pub fn WheelEvent::null() -> WheelEvent {
 }
 
 ///|
-fn wheel_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> WheelEvent = "webapi_WheelEvent" "new"
+fn wheel_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> WheelEvent = "webapi_WheelEvent" "new"
 
 ///|
-pub fn WheelEvent::new(type_ : String, event_init_dict? : WheelEventInit = WheelEventInit::empty()) -> WheelEvent {
+pub fn WheelEvent::new(
+  type_ : String,
+  event_init_dict? : WheelEventInit = WheelEventInit::empty(),
+) -> WheelEvent {
   wheel_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 

@@ -14,7 +14,7 @@ fn focus_event_init_ffi(related_target : JsValue) -> FocusEventInit = "webapi_Fo
 
 ///|
 pub fn FocusEventInit::new(
-  related_target? : EventTarget = JsValue::null()
+  related_target? : EventTarget = JsValue::null(),
 ) -> FocusEventInit {
   focus_event_init_ffi(TJsValue::to_js(related_target))
 }

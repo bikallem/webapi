@@ -33,12 +33,32 @@ pub trait TDOMMatrixReadOnly: TJsValue {
   is2_d(self : Self) -> Bool = _
   is_identity(self : Self) -> Bool = _
   translate(self : Self, tx? : Double, ty? : Double, tz? : Double) -> JsValue = _
-  scale(self : Self, scale_x? : Double, scale_y? : Double, scale_z? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue = _
+  scale(
+    self : Self,
+    scale_x? : Double,
+    scale_y? : Double,
+    scale_z? : Double,
+    origin_x? : Double,
+    origin_y? : Double,
+    origin_z? : Double,
+  ) -> JsValue = _
   scale_non_uniform(self : Self, scale_x? : Double, scale_y? : Double) -> JsValue = _
-  scale3d(self : Self, scale? : Double, origin_x? : Double, origin_y? : Double, origin_z? : Double) -> JsValue = _
+  scale3d(
+    self : Self,
+    scale? : Double,
+    origin_x? : Double,
+    origin_y? : Double,
+    origin_z? : Double,
+  ) -> JsValue = _
   rotate(self : Self, rot_x? : Double, rot_y? : Double, rot_z? : Double) -> JsValue = _
   rotate_from_vector(self : Self, x? : Double, y? : Double) -> JsValue = _
-  rotate_axis_angle(self : Self, x? : Double, y? : Double, z? : Double, angle? : Double) -> JsValue = _
+  rotate_axis_angle(
+    self : Self,
+    x? : Double,
+    y? : Double,
+    z? : Double,
+    angle? : Double,
+  ) -> JsValue = _
   skew_x(self : Self, sx? : Double) -> JsValue = _
   skew_y(self : Self, sy? : Double) -> JsValue = _
   multiply(self : Self, other? : DOMMatrixInit) -> JsValue = _
@@ -52,7 +72,9 @@ pub trait TDOMMatrixReadOnly: TJsValue {
 }
 
 ///|
-pub fn[T : TDOMMatrixReadOnly] DOMMatrixReadOnly::into(self : DOMMatrixReadOnly) -> T = "%identity"
+pub fn[T : TDOMMatrixReadOnly] DOMMatrixReadOnly::into(
+  self : DOMMatrixReadOnly,
+) -> T = "%identity"
 
 ///|
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
@@ -70,17 +92,21 @@ fn dom_matrix_read_only_new_ffi(init_ : JsValue) -> DOMMatrixReadOnly = "webapi_
 
 ///|
 pub fn DOMMatrixReadOnly::new(init_? : JsValue) -> DOMMatrixReadOnly {
-  dom_matrix_read_only_new_ffi(match init_ {
+  dom_matrix_read_only_new_ffi(
+    match init_ {
       Some(v) => TJsValue::to_js(v)
       None => JsValue::undefined()
-    })
+    },
+  )
 }
 
 ///|
 fn dom_matrix_read_only_from_matrix_ffi(other : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "fromMatrix"
 
 ///|
-pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit = DOMMatrixInit::empty()) -> JsValue {
+pub fn DOMMatrixReadOnly::from_matrix(
+  other? : DOMMatrixInit = DOMMatrixInit::empty(),
+) -> JsValue {
   dom_matrix_read_only_from_matrix_ffi(TJsValue::to_js(other))
 }
 
@@ -101,62 +127,176 @@ pub fn DOMMatrixReadOnly::from_float64_array(array64 : Float64Array) -> JsValue 
 }
 
 ///|
-fn dom_matrix_read_only_translate_ffi(obj : JsValue, tx : JsValue, ty : JsValue, tz : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "translate"
+fn dom_matrix_read_only_translate_ffi(
+  obj : JsValue,
+  tx : JsValue,
+  ty : JsValue,
+  tz : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "translate"
 
 ///|
-impl TDOMMatrixReadOnly with translate(self : Self, tx? : Double = 0, ty? : Double = 0, tz? : Double = 0) -> JsValue {
-  dom_matrix_read_only_translate_ffi(TJsValue::to_js(self), TJsValue::to_js(tx), TJsValue::to_js(ty), TJsValue::to_js(tz)).unsafe_cast()
+impl TDOMMatrixReadOnly with translate(
+  self : Self,
+  tx? : Double = 0,
+  ty? : Double = 0,
+  tz? : Double = 0,
+) -> JsValue {
+  dom_matrix_read_only_translate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(tx),
+    TJsValue::to_js(ty),
+    TJsValue::to_js(tz),
+  ).unsafe_cast()
 }
 
 ///|
-fn dom_matrix_read_only_scale_ffi(obj : JsValue, scale_x : JsValue, scale_y : JsValue, scale_z : JsValue, origin_x : JsValue, origin_y : JsValue, origin_z : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "scale"
+fn dom_matrix_read_only_scale_ffi(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+  scale_z : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "scale"
 
 ///|
-impl TDOMMatrixReadOnly with scale(self : Self, scale_x? : Double = 1, scale_y? : Double, scale_z? : Double = 1, origin_x? : Double = 0, origin_y? : Double = 0, origin_z? : Double = 0) -> JsValue {
+impl TDOMMatrixReadOnly with scale(
+  self : Self,
+  scale_x? : Double = 1,
+  scale_y? : Double,
+  scale_z? : Double = 1,
+  origin_x? : Double = 0,
+  origin_y? : Double = 0,
+  origin_z? : Double = 0,
+) -> JsValue {
   let scale_y_js = opt_to_js(scale_y)
-  dom_matrix_read_only_scale_ffi(TJsValue::to_js(self), TJsValue::to_js(scale_x), scale_y_js, TJsValue::to_js(scale_z), TJsValue::to_js(origin_x), TJsValue::to_js(origin_y), TJsValue::to_js(origin_z)).unsafe_cast()
+  dom_matrix_read_only_scale_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(scale_x),
+    scale_y_js,
+    TJsValue::to_js(scale_z),
+    TJsValue::to_js(origin_x),
+    TJsValue::to_js(origin_y),
+    TJsValue::to_js(origin_z),
+  ).unsafe_cast()
 }
 
 ///|
-fn dom_matrix_read_only_scale_non_uniform_ffi(obj : JsValue, scale_x : JsValue, scale_y : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "scaleNonUniform"
+fn dom_matrix_read_only_scale_non_uniform_ffi(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "scaleNonUniform"
 
 ///|
-impl TDOMMatrixReadOnly with scale_non_uniform(self : Self, scale_x? : Double = 1, scale_y? : Double = 1) -> JsValue {
-  dom_matrix_read_only_scale_non_uniform_ffi(TJsValue::to_js(self), TJsValue::to_js(scale_x), TJsValue::to_js(scale_y)).unsafe_cast()
+impl TDOMMatrixReadOnly with scale_non_uniform(
+  self : Self,
+  scale_x? : Double = 1,
+  scale_y? : Double = 1,
+) -> JsValue {
+  dom_matrix_read_only_scale_non_uniform_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(scale_x),
+    TJsValue::to_js(scale_y),
+  ).unsafe_cast()
 }
 
 ///|
-fn dom_matrix_read_only_scale3d_ffi(obj : JsValue, scale : JsValue, origin_x : JsValue, origin_y : JsValue, origin_z : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "scale3d"
+fn dom_matrix_read_only_scale3d_ffi(
+  obj : JsValue,
+  scale : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "scale3d"
 
 ///|
-impl TDOMMatrixReadOnly with scale3d(self : Self, scale? : Double = 1, origin_x? : Double = 0, origin_y? : Double = 0, origin_z? : Double = 0) -> JsValue {
-  dom_matrix_read_only_scale3d_ffi(TJsValue::to_js(self), TJsValue::to_js(scale), TJsValue::to_js(origin_x), TJsValue::to_js(origin_y), TJsValue::to_js(origin_z)).unsafe_cast()
+impl TDOMMatrixReadOnly with scale3d(
+  self : Self,
+  scale? : Double = 1,
+  origin_x? : Double = 0,
+  origin_y? : Double = 0,
+  origin_z? : Double = 0,
+) -> JsValue {
+  dom_matrix_read_only_scale3d_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(scale),
+    TJsValue::to_js(origin_x),
+    TJsValue::to_js(origin_y),
+    TJsValue::to_js(origin_z),
+  ).unsafe_cast()
 }
 
 ///|
-fn dom_matrix_read_only_rotate_ffi(obj : JsValue, rot_x : JsValue, rot_y : JsValue, rot_z : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "rotate"
+fn dom_matrix_read_only_rotate_ffi(
+  obj : JsValue,
+  rot_x : JsValue,
+  rot_y : JsValue,
+  rot_z : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "rotate"
 
 ///|
-impl TDOMMatrixReadOnly with rotate(self : Self, rot_x? : Double = 0, rot_y? : Double, rot_z? : Double) -> JsValue {
+impl TDOMMatrixReadOnly with rotate(
+  self : Self,
+  rot_x? : Double = 0,
+  rot_y? : Double,
+  rot_z? : Double,
+) -> JsValue {
   let rot_y_js = opt_to_js(rot_y)
   let rot_z_js = opt_to_js(rot_z)
-  dom_matrix_read_only_rotate_ffi(TJsValue::to_js(self), TJsValue::to_js(rot_x), rot_y_js, rot_z_js).unsafe_cast()
+  dom_matrix_read_only_rotate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(rot_x),
+    rot_y_js,
+    rot_z_js,
+  ).unsafe_cast()
 }
 
 ///|
-fn dom_matrix_read_only_rotate_from_vector_ffi(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "rotateFromVector"
+fn dom_matrix_read_only_rotate_from_vector_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "rotateFromVector"
 
 ///|
-impl TDOMMatrixReadOnly with rotate_from_vector(self : Self, x? : Double = 0, y? : Double = 0) -> JsValue {
-  dom_matrix_read_only_rotate_from_vector_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TDOMMatrixReadOnly with rotate_from_vector(
+  self : Self,
+  x? : Double = 0,
+  y? : Double = 0,
+) -> JsValue {
+  dom_matrix_read_only_rotate_from_vector_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
-fn dom_matrix_read_only_rotate_axis_angle_ffi(obj : JsValue, x : JsValue, y : JsValue, z : JsValue, angle : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "rotateAxisAngle"
+fn dom_matrix_read_only_rotate_axis_angle_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  angle : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "rotateAxisAngle"
 
 ///|
-impl TDOMMatrixReadOnly with rotate_axis_angle(self : Self, x? : Double = 0, y? : Double = 0, z? : Double = 0, angle? : Double = 0) -> JsValue {
-  dom_matrix_read_only_rotate_axis_angle_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y), TJsValue::to_js(z), TJsValue::to_js(angle)).unsafe_cast()
+impl TDOMMatrixReadOnly with rotate_axis_angle(
+  self : Self,
+  x? : Double = 0,
+  y? : Double = 0,
+  z? : Double = 0,
+  angle? : Double = 0,
+) -> JsValue {
+  dom_matrix_read_only_rotate_axis_angle_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+    TJsValue::to_js(z),
+    TJsValue::to_js(angle),
+  ).unsafe_cast()
 }
 
 ///|
@@ -179,8 +319,14 @@ impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double = 0) -> JsValue {
 fn dom_matrix_read_only_multiply_ffi(obj : JsValue, other : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "multiply"
 
 ///|
-impl TDOMMatrixReadOnly with multiply(self : Self, other? : DOMMatrixInit = DOMMatrixInit::empty()) -> JsValue {
-  dom_matrix_read_only_multiply_ffi(TJsValue::to_js(self), TJsValue::to_js(other)).unsafe_cast()
+impl TDOMMatrixReadOnly with multiply(
+  self : Self,
+  other? : DOMMatrixInit = DOMMatrixInit::empty(),
+) -> JsValue {
+  dom_matrix_read_only_multiply_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(other),
+  ).unsafe_cast()
 }
 
 ///|
@@ -208,11 +354,20 @@ impl TDOMMatrixReadOnly with inverse(self : Self) -> JsValue {
 }
 
 ///|
-fn dom_matrix_read_only_transform_point_ffi(obj : JsValue, point : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "transformPoint"
+fn dom_matrix_read_only_transform_point_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> JsValue = "webapi_DOMMatrixReadOnly" "transformPoint"
 
 ///|
-impl TDOMMatrixReadOnly with transform_point(self : Self, point? : DOMPointInit = DOMPointInit::empty()) -> JsValue {
-  dom_matrix_read_only_transform_point_ffi(TJsValue::to_js(self), TJsValue::to_js(point)).unsafe_cast()
+impl TDOMMatrixReadOnly with transform_point(
+  self : Self,
+  point? : DOMPointInit = DOMPointInit::empty(),
+) -> JsValue {
+  dom_matrix_read_only_transform_point_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+  ).unsafe_cast()
 }
 
 ///|

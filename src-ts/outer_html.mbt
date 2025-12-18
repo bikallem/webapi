@@ -15,6 +15,4 @@ pub(open) trait TOuterHTML {
 pub fn[T : TOuterHTML] OuterHTML::into(self : OuterHTML) -> T = "%identity"
 
 ///|
-pub impl TOuterHTML for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TOuterHTML for String with to_js(self : String) -> JsValue = "%identity"

@@ -33,19 +33,37 @@ impl TNamedNodeMap with item(self : Self, index : UInt) -> Attr? {
 }
 
 ///|
-fn named_node_map_get_named_item_ffi(obj : JsValue, qualified_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "getNamedItem"
+fn named_node_map_get_named_item_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "getNamedItem"
 
 ///|
 impl TNamedNodeMap with get_named_item(self : Self, qualified_name : String) -> Attr? {
-  named_node_map_get_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name)).as_option()
+  named_node_map_get_named_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  ).as_option()
 }
 
 ///|
-fn named_node_map_get_named_item_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "getNamedItemNS"
+fn named_node_map_get_named_item_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "getNamedItemNS"
 
 ///|
-impl TNamedNodeMap with get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr? {
-  named_node_map_get_named_item_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name)).as_option()
+impl TNamedNodeMap with get_named_item_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> Attr? {
+  named_node_map_get_named_item_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  ).as_option()
 }
 
 ///|
@@ -53,31 +71,58 @@ fn named_node_map_set_named_item_ffi(obj : JsValue, attr : JsValue) -> JsValue =
 
 ///|
 impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
-  named_node_map_set_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(attr)).as_option()
+  named_node_map_set_named_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(attr),
+  ).as_option()
 }
 
 ///|
-fn named_node_map_set_named_item_ns_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_NamedNodeMap" "setNamedItemNS"
+fn named_node_map_set_named_item_ns_ffi(
+  obj : JsValue,
+  attr : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "setNamedItemNS"
 
 ///|
 impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr? {
-  named_node_map_set_named_item_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(attr)).as_option()
+  named_node_map_set_named_item_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(attr),
+  ).as_option()
 }
 
 ///|
-fn named_node_map_remove_named_item_ffi(obj : JsValue, qualified_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "removeNamedItem"
+fn named_node_map_remove_named_item_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "removeNamedItem"
 
 ///|
 impl TNamedNodeMap with remove_named_item(self : Self, qualified_name : String) -> Attr {
-  named_node_map_remove_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name)).unsafe_cast()
+  named_node_map_remove_named_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn named_node_map_remove_named_item_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> JsValue = "webapi_NamedNodeMap" "removeNamedItemNS"
+fn named_node_map_remove_named_item_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "removeNamedItemNS"
 
 ///|
-impl TNamedNodeMap with remove_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr {
-  named_node_map_remove_named_item_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name)).unsafe_cast()
+impl TNamedNodeMap with remove_named_item_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> Attr {
+  named_node_map_remove_named_item_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  ).unsafe_cast()
 }
 
 ///|

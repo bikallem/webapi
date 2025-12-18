@@ -10,7 +10,20 @@ pub type DOMMatrix2DInit
 pub impl TJsValue for DOMMatrix2DInit with to_js(self : DOMMatrix2DInit) -> JsValue = "%identity"
 
 ///|
-fn dom_matrix2_d_init_ffi(a : JsValue, b : JsValue, c : JsValue, d : JsValue, e : JsValue, f : JsValue, m11 : JsValue, m12 : JsValue, m21 : JsValue, m22 : JsValue, m41 : JsValue, m42 : JsValue) -> DOMMatrix2DInit = "webapi_DOMMatrix2DInit" "new"
+fn dom_matrix2_d_init_ffi(
+  a : JsValue,
+  b : JsValue,
+  c : JsValue,
+  d : JsValue,
+  e : JsValue,
+  f : JsValue,
+  m11 : JsValue,
+  m12 : JsValue,
+  m21 : JsValue,
+  m22 : JsValue,
+  m41 : JsValue,
+  m42 : JsValue,
+) -> DOMMatrix2DInit = "webapi_DOMMatrix2DInit" "new"
 
 ///|
 pub fn DOMMatrix2DInit::new(
@@ -25,7 +38,7 @@ pub fn DOMMatrix2DInit::new(
   m21? : Double,
   m22? : Double,
   m41? : Double,
-  m42? : Double
+  m42? : Double,
 ) -> DOMMatrix2DInit {
   let a_js = opt_to_js(a)
   let b_js = opt_to_js(b)
@@ -39,7 +52,9 @@ pub fn DOMMatrix2DInit::new(
   let m22_js = opt_to_js(m22)
   let m41_js = opt_to_js(m41)
   let m42_js = opt_to_js(m42)
-  dom_matrix2_d_init_ffi(a_js, b_js, c_js, d_js, e_js, f_js, m11_js, m12_js, m21_js, m22_js, m41_js, m42_js)
+  dom_matrix2_d_init_ffi(
+    a_js, b_js, c_js, d_js, e_js, f_js, m11_js, m12_js, m21_js, m22_js, m41_js, m42_js,
+  )
 }
 
 ///|

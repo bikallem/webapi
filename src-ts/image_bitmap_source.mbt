@@ -8,7 +8,9 @@ pub(open) trait TImageBitmapSource {
 }
 
 ///|
-pub fn[T : TImageBitmapSource] &TImageBitmapSource::into(self : &TImageBitmapSource) -> T = "%identity"
+pub fn[T : TImageBitmapSource] &TImageBitmapSource::into(
+  self : &TImageBitmapSource,
+) -> T = "%identity"
 
 ///|
 pub impl TImageBitmapSource for HTMLImageElement with to_js(
@@ -31,9 +33,7 @@ pub impl TImageBitmapSource for HTMLCanvasElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TImageBitmapSource for ImageBitmap with to_js(
-  self : ImageBitmap,
-) -> JsValue = "%identity"
+pub impl TImageBitmapSource for ImageBitmap with to_js(self : ImageBitmap) -> JsValue = "%identity"
 
 ///|
 pub impl TImageBitmapSource for OffscreenCanvas with to_js(
@@ -41,11 +41,7 @@ pub impl TImageBitmapSource for OffscreenCanvas with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TImageBitmapSource for Blob with to_js(
-  self : Blob,
-) -> JsValue = "%identity"
+pub impl TImageBitmapSource for Blob with to_js(self : Blob) -> JsValue = "%identity"
 
 ///|
-pub impl TImageBitmapSource for ImageData with to_js(
-  self : ImageData,
-) -> JsValue = "%identity"
+pub impl TImageBitmapSource for ImageData with to_js(self : ImageData) -> JsValue = "%identity"

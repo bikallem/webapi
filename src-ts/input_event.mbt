@@ -31,10 +31,16 @@ pub fn InputEvent::null() -> InputEvent {
 }
 
 ///|
-fn input_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> InputEvent = "webapi_InputEvent" "new"
+fn input_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> InputEvent = "webapi_InputEvent" "new"
 
 ///|
-pub fn InputEvent::new(type_ : String, event_init_dict? : InputEventInit = InputEventInit::empty()) -> InputEvent {
+pub fn InputEvent::new(
+  type_ : String,
+  event_init_dict? : InputEventInit = InputEventInit::empty(),
+) -> InputEvent {
   input_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 

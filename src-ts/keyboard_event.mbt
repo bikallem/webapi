@@ -8,8 +8,14 @@ pub type KeyboardEvent
 
 ///|
 pub const DOM_KEY_LOCATION_STANDARD : UInt = 0x00
+
+///|
 pub const DOM_KEY_LOCATION_LEFT : UInt = 0x01
+
+///|
 pub const DOM_KEY_LOCATION_RIGHT : UInt = 0x02
+
+///|
 pub const DOM_KEY_LOCATION_NUMPAD : UInt = 0x03
 
 ///|
@@ -26,7 +32,19 @@ pub trait TKeyboardEvent: TJsValue + TUIEvent {
   char_code(self : Self) -> UInt = _
   key_code(self : Self) -> UInt = _
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
-  init_keyboard_event(self : Self, type_arg : String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, key_arg? : String, location_arg? : UInt, ctrl_key? : Bool, alt_key? : Bool, shift_key? : Bool, meta_key? : Bool) -> Unit = _
+  init_keyboard_event(
+    self : Self,
+    type_arg : String,
+    bubbles_arg? : Bool,
+    cancelable_arg? : Bool,
+    view_arg? : &TWindow,
+    key_arg? : String,
+    location_arg? : UInt,
+    ctrl_key? : Bool,
+    alt_key? : Bool,
+    shift_key? : Bool,
+    meta_key? : Bool,
+  ) -> Unit = _
 }
 
 ///|
@@ -47,27 +65,78 @@ pub fn KeyboardEvent::null() -> KeyboardEvent {
 }
 
 ///|
-fn keyboard_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> KeyboardEvent = "webapi_KeyboardEvent" "new"
+fn keyboard_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> KeyboardEvent = "webapi_KeyboardEvent" "new"
 
 ///|
-pub fn KeyboardEvent::new(type_ : String, event_init_dict? : KeyboardEventInit = KeyboardEventInit::empty()) -> KeyboardEvent {
-  keyboard_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+pub fn KeyboardEvent::new(
+  type_ : String,
+  event_init_dict? : KeyboardEventInit = KeyboardEventInit::empty(),
+) -> KeyboardEvent {
+  keyboard_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
 }
 
 ///|
-fn keyboard_event_get_modifier_state_ffi(obj : JsValue, key_arg : JsValue) -> JsValue = "webapi_KeyboardEvent" "getModifierState"
+fn keyboard_event_get_modifier_state_ffi(
+  obj : JsValue,
+  key_arg : JsValue,
+) -> JsValue = "webapi_KeyboardEvent" "getModifierState"
 
 ///|
 impl TKeyboardEvent with get_modifier_state(self : Self, key_arg : String) -> Bool {
-  keyboard_event_get_modifier_state_ffi(TJsValue::to_js(self), TJsValue::to_js(key_arg)).unsafe_cast()
+  keyboard_event_get_modifier_state_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(key_arg),
+  ).unsafe_cast()
 }
 
 ///|
-fn keyboard_event_init_keyboard_event_ffi(obj : JsValue, type_arg : JsValue, bubbles_arg : JsValue, cancelable_arg : JsValue, view_arg : JsValue, key_arg : JsValue, location_arg : JsValue, ctrl_key : JsValue, alt_key : JsValue, shift_key : JsValue, meta_key : JsValue) -> Unit = "webapi_KeyboardEvent" "initKeyboardEvent"
+fn keyboard_event_init_keyboard_event_ffi(
+  obj : JsValue,
+  type_arg : JsValue,
+  bubbles_arg : JsValue,
+  cancelable_arg : JsValue,
+  view_arg : JsValue,
+  key_arg : JsValue,
+  location_arg : JsValue,
+  ctrl_key : JsValue,
+  alt_key : JsValue,
+  shift_key : JsValue,
+  meta_key : JsValue,
+) -> Unit = "webapi_KeyboardEvent" "initKeyboardEvent"
 
 ///|
-impl TKeyboardEvent with init_keyboard_event(self : Self, type_arg : String, bubbles_arg? : Bool = false, cancelable_arg? : Bool = false, view_arg? : &TWindow = JsValue::null(), key_arg? : String = "", location_arg? : UInt = 0, ctrl_key? : Bool = false, alt_key? : Bool = false, shift_key? : Bool = false, meta_key? : Bool = false) -> Unit {
-  keyboard_event_init_keyboard_event_ffi(TJsValue::to_js(self), TJsValue::to_js(type_arg), TJsValue::to_js(bubbles_arg), TJsValue::to_js(cancelable_arg), TJsValue::to_js(view_arg), TJsValue::to_js(key_arg), TJsValue::to_js(location_arg), TJsValue::to_js(ctrl_key), TJsValue::to_js(alt_key), TJsValue::to_js(shift_key), TJsValue::to_js(meta_key))
+impl TKeyboardEvent with init_keyboard_event(
+  self : Self,
+  type_arg : String,
+  bubbles_arg? : Bool = false,
+  cancelable_arg? : Bool = false,
+  view_arg? : &TWindow = JsValue::null(),
+  key_arg? : String = "",
+  location_arg? : UInt = 0,
+  ctrl_key? : Bool = false,
+  alt_key? : Bool = false,
+  shift_key? : Bool = false,
+  meta_key? : Bool = false,
+) -> Unit {
+  keyboard_event_init_keyboard_event_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_arg),
+    TJsValue::to_js(bubbles_arg),
+    TJsValue::to_js(cancelable_arg),
+    TJsValue::to_js(view_arg),
+    TJsValue::to_js(key_arg),
+    TJsValue::to_js(location_arg),
+    TJsValue::to_js(ctrl_key),
+    TJsValue::to_js(alt_key),
+    TJsValue::to_js(shift_key),
+    TJsValue::to_js(meta_key),
+  )
 }
 
 ///|

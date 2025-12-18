@@ -17,7 +17,9 @@ pub impl TJsValue for DocumentVisibilityState with to_js(self) {
 }
 
 ///|
-pub fn DocumentVisibilityState::from(value : String) -> DocumentVisibilityState? {
+pub fn DocumentVisibilityState::from(
+  value : String,
+) -> DocumentVisibilityState? {
   match value {
     "visible" => Some(DocumentVisibilityState::Visible)
     "hidden" => Some(DocumentVisibilityState::Hidden)

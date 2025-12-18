@@ -15,7 +15,7 @@ fn blob_property_bag_ffi(type_ : JsValue, endings : JsValue) -> BlobPropertyBag 
 ///|
 pub fn BlobPropertyBag::new(
   type_? : String = "",
-  endings? : EndingType = EndingType::Transparent
+  endings? : EndingType = EndingType::Transparent,
 ) -> BlobPropertyBag {
   blob_property_bag_ffi(TJsValue::to_js(type_), TJsValue::to_js(endings))
 }

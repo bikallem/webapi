@@ -47,7 +47,9 @@ pub trait TElement: TJsValue + TNode {
   get_client_rects(self : Self) -> JsValue = _
   get_bounding_client_rect(self : Self) -> JsValue = _
   check_visibility(self : Self, options? : CheckVisibilityOptions) -> Bool = _
-  scroll_into_view(self : Self, arg? : &TScrollIntoViewArgArg) -> JsPromise[Unit] = _
+  scroll_into_view(self : Self, arg? : &TScrollIntoViewArgArg) -> JsPromise[
+    Unit,
+  ] = _
   scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
   scroll2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
@@ -58,8 +60,17 @@ pub trait TElement: TJsValue + TNode {
   get_attribute_names(self : Self) -> Array[String] = _
   get_attribute(self : Self, qualified_name : String) -> String? = _
   get_attribute_ns(self : Self, namespace_ : String, local_name : String) -> String? = _
-  set_attribute(self : Self, qualified_name : String, value : &TSetAttributeValueArg) -> Unit = _
-  set_attribute_ns(self : Self, namespace_ : String, qualified_name : String, value : &TSetAttributeNSValueArg) -> Unit = _
+  set_attribute(
+    self : Self,
+    qualified_name : String,
+    value : &TSetAttributeValueArg,
+  ) -> Unit = _
+  set_attribute_ns(
+    self : Self,
+    namespace_ : String,
+    qualified_name : String,
+    value : &TSetAttributeNSValueArg,
+  ) -> Unit = _
   remove_attribute(self : Self, qualified_name : String) -> Unit = _
   remove_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Unit = _
   toggle_attribute(self : Self, qualified_name : String, force? : Bool) -> Bool = _
@@ -75,17 +86,40 @@ pub trait TElement: TJsValue + TNode {
   matches(self : Self, selectors : String) -> Bool = _
   webkit_matches_selector(self : Self, selectors : String) -> Bool = _
   get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection = _
-  get_elements_by_tag_name_ns(self : Self, namespace_ : String, local_name : String) -> HTMLCollection = _
+  get_elements_by_tag_name_ns(
+    self : Self,
+    namespace_ : String,
+    local_name : String,
+  ) -> HTMLCollection = _
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
   insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> Element? = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
   set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
-  insert_adjacent_html(self : Self, position : String, string : &TInsertAdjacentHTMLStringArg) -> Unit = _
+  insert_adjacent_html(
+    self : Self,
+    position : String,
+    string : &TInsertAdjacentHTMLStringArg,
+  ) -> Unit = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[JsValue] = _
-  convert_quad_from_node(self : Self, quad : DOMQuadInit, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
-  convert_rect_from_node(self : Self, rect : JsValue, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
-  convert_point_from_node(self : Self, point : DOMPointInit, from : JsValue, options? : ConvertCoordinateOptions) -> JsValue = _
+  convert_quad_from_node(
+    self : Self,
+    quad : DOMQuadInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_rect_from_node(
+    self : Self,
+    rect : JsValue,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
+  convert_point_from_node(
+    self : Self,
+    point : DOMPointInit,
+    from : JsValue,
+    options? : ConvertCoordinateOptions,
+  ) -> JsValue = _
   prepend(self : Self, nodes : &TPrependNodesArg) -> Unit = _
   append(self : Self, nodes : &TAppendNodesArg) -> Unit = _
   replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit = _
@@ -133,10 +167,14 @@ impl TElement with get_bounding_client_rect(self : Self) -> JsValue {
 fn element_check_visibility_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "checkVisibility"
 
 ///|
-impl TElement with check_visibility(self : Self, options? : CheckVisibilityOptions = CheckVisibilityOptions::empty()) -> Bool {
+impl TElement with check_visibility(
+  self : Self,
+  options? : CheckVisibilityOptions = CheckVisibilityOptions::empty(),
+) -> Bool {
   element_check_visibility_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
+///|
 /// Arg : arg
 pub(open) trait TScrollIntoViewArgArg {
   to_js(self : Self) -> JsValue
@@ -146,13 +184,18 @@ pub(open) trait TScrollIntoViewArgArg {
 pub impl TScrollIntoViewArgArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
-pub impl TScrollIntoViewArgArg for ScrollIntoViewOptions with to_js(self : ScrollIntoViewOptions) -> JsValue = "%identity"
+pub impl TScrollIntoViewArgArg for ScrollIntoViewOptions with to_js(
+  self : ScrollIntoViewOptions,
+) -> JsValue = "%identity"
 
 ///|
 fn element_scroll_into_view_ffi(obj : JsValue, arg : JsValue) -> JsValue = "webapi_Element" "scrollIntoView"
 
 ///|
-impl TElement with scroll_into_view(self : Self, arg? : &TScrollIntoViewArgArg = ScrollIntoViewOptions::empty()) -> JsPromise[Unit] {
+impl TElement with scroll_into_view(
+  self : Self,
+  arg? : &TScrollIntoViewArgArg = ScrollIntoViewOptions::empty(),
+) -> JsPromise[Unit] {
   element_scroll_into_view_ffi(TJsValue::to_js(self), arg.to_js()).unsafe_cast()
 }
 
@@ -160,7 +203,10 @@ impl TElement with scroll_into_view(self : Self, arg? : &TScrollIntoViewArgArg =
 fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scroll"
 
 ///|
-impl TElement with scroll(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TElement with scroll(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   element_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -168,15 +214,24 @@ impl TElement with scroll(self : Self, options? : ScrollToOptions = ScrollToOpti
 fn element_scroll_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scroll2"
 
 ///|
-impl TElement with scroll2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  element_scroll_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TElement with scroll2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  element_scroll_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
 fn element_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollTo"
 
 ///|
-impl TElement with scroll_to(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TElement with scroll_to(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   element_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -184,15 +239,24 @@ impl TElement with scroll_to(self : Self, options? : ScrollToOptions = ScrollToO
 fn element_scroll_to_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scrollTo2"
 
 ///|
-impl TElement with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  element_scroll_to_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TElement with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  element_scroll_to_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
 fn element_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollBy"
 
 ///|
-impl TElement with scroll_by(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TElement with scroll_by(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   element_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -200,8 +264,14 @@ impl TElement with scroll_by(self : Self, options? : ScrollToOptions = ScrollToO
 fn element_scroll_by_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Element" "scrollBy2"
 
 ///|
-impl TElement with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  element_scroll_by_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TElement with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  element_scroll_by_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
@@ -221,21 +291,40 @@ impl TElement with get_attribute_names(self : Self) -> Array[String] {
 }
 
 ///|
-fn element_get_attribute_ffi(obj : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Element" "getAttribute"
+fn element_get_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttribute"
 
 ///|
 impl TElement with get_attribute(self : Self, qualified_name : String) -> String? {
-  element_get_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name)).as_option()
+  element_get_attribute_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  ).as_option()
 }
 
 ///|
-fn element_get_attribute_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> JsValue = "webapi_Element" "getAttributeNS"
+fn element_get_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttributeNS"
 
 ///|
-impl TElement with get_attribute_ns(self : Self, namespace_ : String, local_name : String) -> String? {
-  element_get_attribute_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name)).as_option()
+impl TElement with get_attribute_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> String? {
+  element_get_attribute_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  ).as_option()
 }
 
+///|
 /// Arg : value
 pub(open) trait TSetAttributeValueArg {
   to_js(self : Self) -> JsValue
@@ -248,13 +337,26 @@ pub impl TSetAttributeValueArg for JsValue with to_js(self : JsValue) -> JsValue
 pub impl TSetAttributeValueArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-fn element_set_attribute_ffi(obj : JsValue, qualified_name : JsValue, value : JsValue) -> Unit = "webapi_Element" "setAttribute"
+fn element_set_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Element" "setAttribute"
 
 ///|
-impl TElement with set_attribute(self : Self, qualified_name : String, value : &TSetAttributeValueArg) -> Unit {
-  element_set_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name), value.to_js())
+impl TElement with set_attribute(
+  self : Self,
+  qualified_name : String,
+  value : &TSetAttributeValueArg,
+) -> Unit {
+  element_set_attribute_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+    value.to_js(),
+  )
 }
 
+///|
 /// Arg : value
 pub(open) trait TSetAttributeNSValueArg {
   to_js(self : Self) -> JsValue
@@ -267,68 +369,149 @@ pub impl TSetAttributeNSValueArg for JsValue with to_js(self : JsValue) -> JsVal
 pub impl TSetAttributeNSValueArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-fn element_set_attribute_ns_ffi(obj : JsValue, namespace_ : JsValue, qualified_name : JsValue, value : JsValue) -> Unit = "webapi_Element" "setAttributeNS"
+fn element_set_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  qualified_name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Element" "setAttributeNS"
 
 ///|
-impl TElement with set_attribute_ns(self : Self, namespace_ : String, qualified_name : String, value : &TSetAttributeNSValueArg) -> Unit {
-  element_set_attribute_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(qualified_name), value.to_js())
+impl TElement with set_attribute_ns(
+  self : Self,
+  namespace_ : String,
+  qualified_name : String,
+  value : &TSetAttributeNSValueArg,
+) -> Unit {
+  element_set_attribute_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(qualified_name),
+    value.to_js(),
+  )
 }
 
 ///|
-fn element_remove_attribute_ffi(obj : JsValue, qualified_name : JsValue) -> Unit = "webapi_Element" "removeAttribute"
+fn element_remove_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> Unit = "webapi_Element" "removeAttribute"
 
 ///|
 impl TElement with remove_attribute(self : Self, qualified_name : String) -> Unit {
-  element_remove_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name))
+  element_remove_attribute_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  )
 }
 
 ///|
-fn element_remove_attribute_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> Unit = "webapi_Element" "removeAttributeNS"
+fn element_remove_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> Unit = "webapi_Element" "removeAttributeNS"
 
 ///|
-impl TElement with remove_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Unit {
-  element_remove_attribute_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name))
+impl TElement with remove_attribute_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> Unit {
+  element_remove_attribute_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  )
 }
 
 ///|
-fn element_toggle_attribute_ffi(obj : JsValue, qualified_name : JsValue, force : JsValue) -> JsValue = "webapi_Element" "toggleAttribute"
+fn element_toggle_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+  force : JsValue,
+) -> JsValue = "webapi_Element" "toggleAttribute"
 
 ///|
-impl TElement with toggle_attribute(self : Self, qualified_name : String, force? : Bool) -> Bool {
+impl TElement with toggle_attribute(
+  self : Self,
+  qualified_name : String,
+  force? : Bool,
+) -> Bool {
   let force_js = opt_to_js(force)
-  element_toggle_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name), force_js).unsafe_cast()
+  element_toggle_attribute_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+    force_js,
+  ).unsafe_cast()
 }
 
 ///|
-fn element_has_attribute_ffi(obj : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Element" "hasAttribute"
+fn element_has_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Element" "hasAttribute"
 
 ///|
 impl TElement with has_attribute(self : Self, qualified_name : String) -> Bool {
-  element_has_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name)).unsafe_cast()
+  element_has_attribute_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_has_attribute_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> JsValue = "webapi_Element" "hasAttributeNS"
+fn element_has_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Element" "hasAttributeNS"
 
 ///|
-impl TElement with has_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Bool {
-  element_has_attribute_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name)).unsafe_cast()
+impl TElement with has_attribute_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> Bool {
+  element_has_attribute_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_get_attribute_node_ffi(obj : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Element" "getAttributeNode"
+fn element_get_attribute_node_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttributeNode"
 
 ///|
 impl TElement with get_attribute_node(self : Self, qualified_name : String) -> Attr? {
-  element_get_attribute_node_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name)).as_option()
+  element_get_attribute_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  ).as_option()
 }
 
 ///|
-fn element_get_attribute_node_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> JsValue = "webapi_Element" "getAttributeNodeNS"
+fn element_get_attribute_node_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttributeNodeNS"
 
 ///|
-impl TElement with get_attribute_node_ns(self : Self, namespace_ : String, local_name : String) -> Attr? {
-  element_get_attribute_node_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name)).as_option()
+impl TElement with get_attribute_node_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> Attr? {
+  element_get_attribute_node_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  ).as_option()
 }
 
 ///|
@@ -344,7 +527,10 @@ fn element_set_attribute_node_ns_ffi(obj : JsValue, attr : JsValue) -> JsValue =
 
 ///|
 impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? {
-  element_set_attribute_node_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(attr)).as_option()
+  element_set_attribute_node_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(attr),
+  ).as_option()
 }
 
 ///|
@@ -352,7 +538,10 @@ fn element_remove_attribute_node_ffi(obj : JsValue, attr : JsValue) -> JsValue =
 
 ///|
 impl TElement with remove_attribute_node(self : Self, attr : &TAttr) -> Attr {
-  element_remove_attribute_node_ffi(TJsValue::to_js(self), TJsValue::to_js(attr)).unsafe_cast()
+  element_remove_attribute_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(attr),
+  ).unsafe_cast()
 }
 
 ///|
@@ -380,53 +569,111 @@ impl TElement with matches(self : Self, selectors : String) -> Bool {
 }
 
 ///|
-fn element_webkit_matches_selector_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Element" "webkitMatchesSelector"
+fn element_webkit_matches_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_Element" "webkitMatchesSelector"
 
 ///|
 impl TElement with webkit_matches_selector(self : Self, selectors : String) -> Bool {
-  element_webkit_matches_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).unsafe_cast()
+  element_webkit_matches_selector_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_get_elements_by_tag_name_ffi(obj : JsValue, qualified_name : JsValue) -> JsValue = "webapi_Element" "getElementsByTagName"
+fn element_get_elements_by_tag_name_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Element" "getElementsByTagName"
 
 ///|
-impl TElement with get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection {
-  element_get_elements_by_tag_name_ffi(TJsValue::to_js(self), TJsValue::to_js(qualified_name)).unsafe_cast()
+impl TElement with get_elements_by_tag_name(
+  self : Self,
+  qualified_name : String,
+) -> HTMLCollection {
+  element_get_elements_by_tag_name_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_get_elements_by_tag_name_ns_ffi(obj : JsValue, namespace_ : JsValue, local_name : JsValue) -> JsValue = "webapi_Element" "getElementsByTagNameNS"
+fn element_get_elements_by_tag_name_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Element" "getElementsByTagNameNS"
 
 ///|
-impl TElement with get_elements_by_tag_name_ns(self : Self, namespace_ : String, local_name : String) -> HTMLCollection {
-  element_get_elements_by_tag_name_ns_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_), TJsValue::to_js(local_name)).unsafe_cast()
+impl TElement with get_elements_by_tag_name_ns(
+  self : Self,
+  namespace_ : String,
+  local_name : String,
+) -> HTMLCollection {
+  element_get_elements_by_tag_name_ns_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+    TJsValue::to_js(local_name),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_get_elements_by_class_name_ffi(obj : JsValue, class_names : JsValue) -> JsValue = "webapi_Element" "getElementsByClassName"
+fn element_get_elements_by_class_name_ffi(
+  obj : JsValue,
+  class_names : JsValue,
+) -> JsValue = "webapi_Element" "getElementsByClassName"
 
 ///|
 impl TElement with get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection {
-  element_get_elements_by_class_name_ffi(TJsValue::to_js(self), TJsValue::to_js(class_names)).unsafe_cast()
+  element_get_elements_by_class_name_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(class_names),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_insert_adjacent_element_ffi(obj : JsValue, where_ : JsValue, element : JsValue) -> JsValue = "webapi_Element" "insertAdjacentElement"
+fn element_insert_adjacent_element_ffi(
+  obj : JsValue,
+  where_ : JsValue,
+  element : JsValue,
+) -> JsValue = "webapi_Element" "insertAdjacentElement"
 
 ///|
-impl TElement with insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> Element? {
-  element_insert_adjacent_element_ffi(TJsValue::to_js(self), TJsValue::to_js(where_), TJsValue::to_js(element)).as_option()
+impl TElement with insert_adjacent_element(
+  self : Self,
+  where_ : String,
+  element : &TElement,
+) -> Element? {
+  element_insert_adjacent_element_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(where_),
+    TJsValue::to_js(element),
+  ).as_option()
 }
 
 ///|
-fn element_insert_adjacent_text_ffi(obj : JsValue, where_ : JsValue, data : JsValue) -> Unit = "webapi_Element" "insertAdjacentText"
+fn element_insert_adjacent_text_ffi(
+  obj : JsValue,
+  where_ : JsValue,
+  data : JsValue,
+) -> Unit = "webapi_Element" "insertAdjacentText"
 
 ///|
-impl TElement with insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit {
-  element_insert_adjacent_text_ffi(TJsValue::to_js(self), TJsValue::to_js(where_), TJsValue::to_js(data))
+impl TElement with insert_adjacent_text(
+  self : Self,
+  where_ : String,
+  data : String,
+) -> Unit {
+  element_insert_adjacent_text_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(where_),
+    TJsValue::to_js(data),
+  )
 }
 
+///|
 /// Arg : html
 pub(open) trait TSetHTMLUnsafeHtmlArg {
   to_js(self : Self) -> JsValue
@@ -450,10 +697,14 @@ impl TElement with set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg) -
 fn element_get_html_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "getHTML"
 
 ///|
-impl TElement with get_html(self : Self, options? : GetHTMLOptions = GetHTMLOptions::empty()) -> String {
+impl TElement with get_html(
+  self : Self,
+  options? : GetHTMLOptions = GetHTMLOptions::empty(),
+) -> String {
   element_get_html_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
+///|
 /// Arg : string
 pub(open) trait TInsertAdjacentHTMLStringArg {
   to_js(self : Self) -> JsValue
@@ -466,43 +717,103 @@ pub impl TInsertAdjacentHTMLStringArg for JsValue with to_js(self : JsValue) -> 
 pub impl TInsertAdjacentHTMLStringArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-fn element_insert_adjacent_html_ffi(obj : JsValue, position : JsValue, string : JsValue) -> Unit = "webapi_Element" "insertAdjacentHTML"
+fn element_insert_adjacent_html_ffi(
+  obj : JsValue,
+  position : JsValue,
+  string : JsValue,
+) -> Unit = "webapi_Element" "insertAdjacentHTML"
 
 ///|
-impl TElement with insert_adjacent_html(self : Self, position : String, string : &TInsertAdjacentHTMLStringArg) -> Unit {
-  element_insert_adjacent_html_ffi(TJsValue::to_js(self), TJsValue::to_js(position), string.to_js())
+impl TElement with insert_adjacent_html(
+  self : Self,
+  position : String,
+  string : &TInsertAdjacentHTMLStringArg,
+) -> Unit {
+  element_insert_adjacent_html_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(position),
+    string.to_js(),
+  )
 }
 
 ///|
 fn element_get_box_quads_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "getBoxQuads"
 
 ///|
-impl TElement with get_box_quads(self : Self, options? : BoxQuadOptions = BoxQuadOptions::empty()) -> Array[JsValue] {
+impl TElement with get_box_quads(
+  self : Self,
+  options? : BoxQuadOptions = BoxQuadOptions::empty(),
+) -> Array[JsValue] {
   element_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
 ///|
-fn element_convert_quad_from_node_ffi(obj : JsValue, quad : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Element" "convertQuadFromNode"
+fn element_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "convertQuadFromNode"
 
 ///|
-impl TElement with convert_quad_from_node(self : Self, quad : DOMQuadInit, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  element_convert_quad_from_node_ffi(TJsValue::to_js(self), TJsValue::to_js(quad), from, TJsValue::to_js(options)).unsafe_cast()
+impl TElement with convert_quad_from_node(
+  self : Self,
+  quad : DOMQuadInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  element_convert_quad_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(quad),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_convert_rect_from_node_ffi(obj : JsValue, rect : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Element" "convertRectFromNode"
+fn element_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "convertRectFromNode"
 
 ///|
-impl TElement with convert_rect_from_node(self : Self, rect : JsValue, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  element_convert_rect_from_node_ffi(TJsValue::to_js(self), rect, from, TJsValue::to_js(options)).unsafe_cast()
+impl TElement with convert_rect_from_node(
+  self : Self,
+  rect : JsValue,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  element_convert_rect_from_node_ffi(
+    TJsValue::to_js(self),
+    rect,
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn element_convert_point_from_node_ffi(obj : JsValue, point : JsValue, from : JsValue, options : JsValue) -> JsValue = "webapi_Element" "convertPointFromNode"
+fn element_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "convertPointFromNode"
 
 ///|
-impl TElement with convert_point_from_node(self : Self, point : DOMPointInit, from : JsValue, options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty()) -> JsValue {
-  element_convert_point_from_node_ffi(TJsValue::to_js(self), TJsValue::to_js(point), from, TJsValue::to_js(options)).unsafe_cast()
+impl TElement with convert_point_from_node(
+  self : Self,
+  point : DOMPointInit,
+  from : JsValue,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> JsValue {
+  element_convert_point_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+    from,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
@@ -525,16 +836,27 @@ impl TElement with append(self : Self, nodes : &TAppendNodesArg) -> Unit {
 fn element_replace_children_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "replaceChildren"
 
 ///|
-impl TElement with replace_children(self : Self, nodes : &TReplaceChildrenNodesArg) -> Unit {
+impl TElement with replace_children(
+  self : Self,
+  nodes : &TReplaceChildrenNodesArg,
+) -> Unit {
   element_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
 ///|
-fn element_move_before_ffi(obj : JsValue, node : JsValue, child : JsValue) -> Unit = "webapi_Element" "moveBefore"
+fn element_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "webapi_Element" "moveBefore"
 
 ///|
 impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
-  element_move_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node), TJsValue::to_js(child))
+  element_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
 }
 
 ///|
@@ -546,13 +868,20 @@ impl TElement with query_selector(self : Self, selectors : String) -> Element? {
 }
 
 ///|
-fn element_query_selector_all_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Element" "querySelectorAll"
+fn element_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_Element" "querySelectorAll"
 
 ///|
 impl TElement with query_selector_all(self : Self, selectors : String) -> NodeList {
-  element_query_selector_all_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).unsafe_cast()
+  element_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).unsafe_cast()
 }
 
+///|
 /// Arg : nodes
 pub(open) trait TBeforeNodesArg {
   to_js(self : Self) -> JsValue
@@ -572,6 +901,7 @@ impl TElement with before(self : Self, nodes : &TBeforeNodesArg) -> Unit {
   element_before_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
+///|
 /// Arg : nodes
 pub(open) trait TAfterNodesArg {
   to_js(self : Self) -> JsValue
@@ -591,6 +921,7 @@ impl TElement with after(self : Self, nodes : &TAfterNodesArg) -> Unit {
   element_after_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
+///|
 /// Arg : nodes
 pub(open) trait TReplaceWithNodesArg {
   to_js(self : Self) -> JsValue

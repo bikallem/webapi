@@ -33,18 +33,35 @@ pub fn DOMRect::null() -> DOMRect {
 }
 
 ///|
-fn dom_rect_new_ffi(x : JsValue, y : JsValue, width : JsValue, height : JsValue) -> DOMRect = "webapi_DOMRect" "new"
+fn dom_rect_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> DOMRect = "webapi_DOMRect" "new"
 
 ///|
-pub fn DOMRect::new(x? : Double = 0, y? : Double = 0, width? : Double = 0, height? : Double = 0) -> DOMRect {
-  dom_rect_new_ffi(TJsValue::to_js(x), TJsValue::to_js(y), TJsValue::to_js(width), TJsValue::to_js(height))
+pub fn DOMRect::new(
+  x? : Double = 0,
+  y? : Double = 0,
+  width? : Double = 0,
+  height? : Double = 0,
+) -> DOMRect {
+  dom_rect_new_ffi(
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+    TJsValue::to_js(width),
+    TJsValue::to_js(height),
+  )
 }
 
 ///|
 fn dom_rect_from_rect_ffi(other : JsValue) -> JsValue = "webapi_DOMRect" "fromRect"
 
 ///|
-pub fn DOMRect::from_rect(other? : DOMRectInit = DOMRectInit::empty()) -> JsValue {
+pub fn DOMRect::from_rect(
+  other? : DOMRectInit = DOMRectInit::empty(),
+) -> JsValue {
   dom_rect_from_rect_ffi(TJsValue::to_js(other))
 }
 

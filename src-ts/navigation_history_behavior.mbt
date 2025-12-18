@@ -19,7 +19,9 @@ pub impl TJsValue for NavigationHistoryBehavior with to_js(self) {
 }
 
 ///|
-pub fn NavigationHistoryBehavior::from(value : String) -> NavigationHistoryBehavior? {
+pub fn NavigationHistoryBehavior::from(
+  value : String,
+) -> NavigationHistoryBehavior? {
   match value {
     "auto" => Some(NavigationHistoryBehavior::Auto)
     "push" => Some(NavigationHistoryBehavior::Push)

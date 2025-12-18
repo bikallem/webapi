@@ -13,9 +13,7 @@ pub impl TJsValue for FilePropertyBag with to_js(self : FilePropertyBag) -> JsVa
 fn file_property_bag_ffi(last_modified : JsValue) -> FilePropertyBag = "webapi_FilePropertyBag" "new"
 
 ///|
-pub fn FilePropertyBag::new(
-  last_modified? : Int64
-) -> FilePropertyBag {
+pub fn FilePropertyBag::new(last_modified? : Int64) -> FilePropertyBag {
   let last_modified_js = opt_to_js(last_modified)
   file_property_bag_ffi(last_modified_js)
 }

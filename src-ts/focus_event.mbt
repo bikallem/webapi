@@ -29,10 +29,16 @@ pub fn FocusEvent::null() -> FocusEvent {
 }
 
 ///|
-fn focus_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> FocusEvent = "webapi_FocusEvent" "new"
+fn focus_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> FocusEvent = "webapi_FocusEvent" "new"
 
 ///|
-pub fn FocusEvent::new(type_ : String, event_init_dict? : FocusEventInit = FocusEventInit::empty()) -> FocusEvent {
+pub fn FocusEvent::new(
+  type_ : String,
+  event_init_dict? : FocusEventInit = FocusEventInit::empty(),
+) -> FocusEvent {
   focus_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 

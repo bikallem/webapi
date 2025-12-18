@@ -268,21 +268,56 @@ pub trait TWindow: TJsValue + TEventTarget {
   confirm(self : Self, message? : String) -> Bool = _
   prompt(self : Self, message? : String, default? : String) -> String? = _
   print(self : Self) -> Unit = _
-  post_message(self : Self, message : JsValue, target_origin : String, transfer? : Array[JsValue]) -> Unit = _
-  post_message2(self : Self, message : JsValue, options? : WindowPostMessageOptions) -> Unit = _
+  post_message(
+    self : Self,
+    message : JsValue,
+    target_origin : String,
+    transfer? : Array[JsValue],
+  ) -> Unit = _
+  post_message2(
+    self : Self,
+    message : JsValue,
+    options? : WindowPostMessageOptions,
+  ) -> Unit = _
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
   report_error(self : Self, e : JsValue) -> Unit = _
   btoa(self : Self, data : String) -> String = _
   atob(self : Self, data : String) -> String = _
-  set_timeout(self : Self, handler : JsValue, timeout? : Int, arguments : JsValue) -> Int = _
+  set_timeout(
+    self : Self,
+    handler : JsValue,
+    timeout? : Int,
+    arguments : JsValue,
+  ) -> Int = _
   clear_timeout(self : Self, id? : Int) -> Unit = _
-  set_interval(self : Self, handler : JsValue, timeout? : Int, arguments : JsValue) -> Int = _
+  set_interval(
+    self : Self,
+    handler : JsValue,
+    timeout? : Int,
+    arguments : JsValue,
+  ) -> Int = _
   clear_interval(self : Self, id? : Int) -> Unit = _
   queue_microtask(self : Self, callback : JsValue) -> Unit = _
-  create_image_bitmap(self : Self, image : &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap] = _
-  create_image_bitmap2(self : Self, image : &TImageBitmapSource, sx : Int, sy : Int, sw : Int, sh : Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap] = _
-  structured_clone(self : Self, value : JsValue, options? : StructuredSerializeOptions) -> JsValue = _
+  create_image_bitmap(
+    self : Self,
+    image : &TImageBitmapSource,
+    options? : ImageBitmapOptions,
+  ) -> JsPromise[ImageBitmap] = _
+  create_image_bitmap2(
+    self : Self,
+    image : &TImageBitmapSource,
+    sx : Int,
+    sy : Int,
+    sw : Int,
+    sh : Int,
+    options? : ImageBitmapOptions,
+  ) -> JsPromise[ImageBitmap] = _
+  structured_clone(
+    self : Self,
+    value : JsValue,
+    options? : StructuredSerializeOptions,
+  ) -> JsValue = _
   request_animation_frame(self : Self, callback : JsValue) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
 }
@@ -309,7 +344,11 @@ fn window_move_to_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with move_to(self : Self, x : Int, y : Int) -> Unit {
-  window_move_to_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y))
+  window_move_to_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  )
 }
 
 ///|
@@ -317,15 +356,27 @@ fn window_move_by_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "webapi
 
 ///|
 impl TWindow with move_by(self : Self, x : Int, y : Int) -> Unit {
-  window_move_by_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y))
+  window_move_by_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  )
 }
 
 ///|
-fn window_resize_to_ffi(obj : JsValue, width : JsValue, height : JsValue) -> Unit = "webapi_Window" "resizeTo"
+fn window_resize_to_ffi(
+  obj : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> Unit = "webapi_Window" "resizeTo"
 
 ///|
 impl TWindow with resize_to(self : Self, width : Int, height : Int) -> Unit {
-  window_resize_to_ffi(TJsValue::to_js(self), TJsValue::to_js(width), TJsValue::to_js(height))
+  window_resize_to_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(width),
+    TJsValue::to_js(height),
+  )
 }
 
 ///|
@@ -333,14 +384,21 @@ fn window_resize_by_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "weba
 
 ///|
 impl TWindow with resize_by(self : Self, x : Int, y : Int) -> Unit {
-  window_resize_by_ffi(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y))
+  window_resize_by_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  )
 }
 
 ///|
 fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scroll"
 
 ///|
-impl TWindow with scroll(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TWindow with scroll(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -348,15 +406,24 @@ impl TWindow with scroll(self : Self, options? : ScrollToOptions = ScrollToOptio
 fn window_scroll_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scroll2"
 
 ///|
-impl TWindow with scroll2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  window_scroll_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TWindow with scroll2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  window_scroll_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
 fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollTo"
 
 ///|
-impl TWindow with scroll_to(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TWindow with scroll_to(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -364,15 +431,24 @@ impl TWindow with scroll_to(self : Self, options? : ScrollToOptions = ScrollToOp
 fn window_scroll_to_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollTo2"
 
 ///|
-impl TWindow with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  window_scroll_to_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TWindow with scroll_to2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  window_scroll_to_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
 fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollBy"
 
 ///|
-impl TWindow with scroll_by(self : Self, options? : ScrollToOptions = ScrollToOptions::empty()) -> JsPromise[Unit] {
+impl TWindow with scroll_by(
+  self : Self,
+  options? : ScrollToOptions = ScrollToOptions::empty(),
+) -> JsPromise[Unit] {
   window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -380,17 +456,35 @@ impl TWindow with scroll_by(self : Self, options? : ScrollToOptions = ScrollToOp
 fn window_scroll_by_ffi2(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scrollBy2"
 
 ///|
-impl TWindow with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[Unit] {
-  window_scroll_by_ffi2(TJsValue::to_js(self), TJsValue::to_js(x), TJsValue::to_js(y)).unsafe_cast()
+impl TWindow with scroll_by2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
+  window_scroll_by_ffi2(
+    TJsValue::to_js(self),
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+  ).unsafe_cast()
 }
 
 ///|
-fn window_get_computed_style_ffi(obj : JsValue, elt : JsValue, pseudo_elt : JsValue) -> JsValue = "webapi_Window" "getComputedStyle"
+fn window_get_computed_style_ffi(
+  obj : JsValue,
+  elt : JsValue,
+  pseudo_elt : JsValue,
+) -> JsValue = "webapi_Window" "getComputedStyle"
 
 ///|
-impl TWindow with get_computed_style(self : Self, elt : &TElement, pseudo_elt? : JsValue) -> JsValue {
+impl TWindow with get_computed_style(
+  self : Self,
+  elt : &TElement,
+  pseudo_elt? : JsValue,
+) -> JsValue {
   let pseudo_elt_js = opt_to_js(pseudo_elt)
-  window_get_computed_style_ffi(TJsValue::to_js(self), TJsValue::to_js(elt), pseudo_elt_js).unsafe_cast()
+  window_get_computed_style_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(elt),
+    pseudo_elt_js,
+  ).unsafe_cast()
 }
 
 ///|
@@ -426,11 +520,26 @@ impl TWindow with blur(self : Self) -> Unit {
 }
 
 ///|
-fn window_open_ffi(obj : JsValue, url : JsValue, target : JsValue, features : JsValue) -> JsValue = "webapi_Window" "open"
+fn window_open_ffi(
+  obj : JsValue,
+  url : JsValue,
+  target : JsValue,
+  features : JsValue,
+) -> JsValue = "webapi_Window" "open"
 
 ///|
-impl TWindow with open(self : Self, url? : String = "", target? : String = "_blank", features? : String = "") -> Window? {
-  window_open_ffi(TJsValue::to_js(self), TJsValue::to_js(url), TJsValue::to_js(target), TJsValue::to_js(features)).as_option()
+impl TWindow with open(
+  self : Self,
+  url? : String = "",
+  target? : String = "_blank",
+  features? : String = "",
+) -> Window? {
+  window_open_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(url),
+    TJsValue::to_js(target),
+    TJsValue::to_js(features),
+  ).as_option()
 }
 
 ///|
@@ -458,11 +567,23 @@ impl TWindow with confirm(self : Self, message? : String = "") -> Bool {
 }
 
 ///|
-fn window_prompt_ffi(obj : JsValue, message : JsValue, default : JsValue) -> JsValue = "webapi_Window" "prompt"
+fn window_prompt_ffi(
+  obj : JsValue,
+  message : JsValue,
+  default : JsValue,
+) -> JsValue = "webapi_Window" "prompt"
 
 ///|
-impl TWindow with prompt(self : Self, message? : String = "", default? : String = "") -> String? {
-  window_prompt_ffi(TJsValue::to_js(self), TJsValue::to_js(message), TJsValue::to_js(default)).as_option()
+impl TWindow with prompt(
+  self : Self,
+  message? : String = "",
+  default? : String = "",
+) -> String? {
+  window_prompt_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(message),
+    TJsValue::to_js(default),
+  ).as_option()
 }
 
 ///|
@@ -474,19 +595,46 @@ impl TWindow with print(self : Self) -> Unit {
 }
 
 ///|
-fn window_post_message_ffi(obj : JsValue, message : JsValue, target_origin : JsValue, transfer : JsValue) -> Unit = "webapi_Window" "postMessage"
+fn window_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  target_origin : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_Window" "postMessage"
 
 ///|
-impl TWindow with post_message(self : Self, message : JsValue, target_origin : String, transfer? : Array[JsValue] = []) -> Unit {
-  window_post_message_ffi(TJsValue::to_js(self), message, TJsValue::to_js(target_origin), TJsValue::to_js(transfer))
+impl TWindow with post_message(
+  self : Self,
+  message : JsValue,
+  target_origin : String,
+  transfer? : Array[JsValue] = [],
+) -> Unit {
+  window_post_message_ffi(
+    TJsValue::to_js(self),
+    message,
+    TJsValue::to_js(target_origin),
+    TJsValue::to_js(transfer),
+  )
 }
 
 ///|
-fn window_post_message_ffi2(obj : JsValue, message : JsValue, options : JsValue) -> Unit = "webapi_Window" "postMessage2"
+fn window_post_message_ffi2(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_Window" "postMessage2"
 
 ///|
-impl TWindow with post_message2(self : Self, message : JsValue, options? : WindowPostMessageOptions = WindowPostMessageOptions::empty()) -> Unit {
-  window_post_message_ffi2(TJsValue::to_js(self), message, TJsValue::to_js(options))
+impl TWindow with post_message2(
+  self : Self,
+  message : JsValue,
+  options? : WindowPostMessageOptions = WindowPostMessageOptions::empty(),
+) -> Unit {
+  window_post_message_ffi2(
+    TJsValue::to_js(self),
+    message,
+    TJsValue::to_js(options),
+  )
 }
 
 ///|
@@ -530,11 +678,26 @@ impl TWindow with atob(self : Self, data : String) -> String {
 }
 
 ///|
-fn window_set_timeout_ffi(obj : JsValue, handler : JsValue, timeout : JsValue, arguments : JsValue) -> JsValue = "webapi_Window" "setTimeout"
+fn window_set_timeout_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> JsValue = "webapi_Window" "setTimeout"
 
 ///|
-impl TWindow with set_timeout(self : Self, handler : JsValue, timeout? : Int = 0, arguments : JsValue) -> Int {
-  window_set_timeout_ffi(TJsValue::to_js(self), handler, TJsValue::to_js(timeout), arguments).unsafe_cast()
+impl TWindow with set_timeout(
+  self : Self,
+  handler : JsValue,
+  timeout? : Int = 0,
+  arguments : JsValue,
+) -> Int {
+  window_set_timeout_ffi(
+    TJsValue::to_js(self),
+    handler,
+    TJsValue::to_js(timeout),
+    arguments,
+  ).unsafe_cast()
 }
 
 ///|
@@ -546,11 +709,26 @@ impl TWindow with clear_timeout(self : Self, id? : Int = 0) -> Unit {
 }
 
 ///|
-fn window_set_interval_ffi(obj : JsValue, handler : JsValue, timeout : JsValue, arguments : JsValue) -> JsValue = "webapi_Window" "setInterval"
+fn window_set_interval_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> JsValue = "webapi_Window" "setInterval"
 
 ///|
-impl TWindow with set_interval(self : Self, handler : JsValue, timeout? : Int = 0, arguments : JsValue) -> Int {
-  window_set_interval_ffi(TJsValue::to_js(self), handler, TJsValue::to_js(timeout), arguments).unsafe_cast()
+impl TWindow with set_interval(
+  self : Self,
+  handler : JsValue,
+  timeout? : Int = 0,
+  arguments : JsValue,
+) -> Int {
+  window_set_interval_ffi(
+    TJsValue::to_js(self),
+    handler,
+    TJsValue::to_js(timeout),
+    arguments,
+  ).unsafe_cast()
 }
 
 ///|
@@ -570,31 +748,82 @@ impl TWindow with queue_microtask(self : Self, callback : JsValue) -> Unit {
 }
 
 ///|
-fn window_create_image_bitmap_ffi(obj : JsValue, image : JsValue, options : JsValue) -> JsValue = "webapi_Window" "createImageBitmap"
+fn window_create_image_bitmap_ffi(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "createImageBitmap"
 
 ///|
-impl TWindow with create_image_bitmap(self : Self, image : &TImageBitmapSource, options? : ImageBitmapOptions = ImageBitmapOptions::empty()) -> JsPromise[ImageBitmap] {
-  window_create_image_bitmap_ffi(TJsValue::to_js(self), TImageBitmapSource::to_js(image), TJsValue::to_js(options)).unsafe_cast()
+impl TWindow with create_image_bitmap(
+  self : Self,
+  image : &TImageBitmapSource,
+  options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
+) -> JsPromise[ImageBitmap] {
+  window_create_image_bitmap_ffi(
+    TJsValue::to_js(self),
+    TImageBitmapSource::to_js(image),
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn window_create_image_bitmap_ffi2(obj : JsValue, image : JsValue, sx : JsValue, sy : JsValue, sw : JsValue, sh : JsValue, options : JsValue) -> JsValue = "webapi_Window" "createImageBitmap2"
+fn window_create_image_bitmap_ffi2(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "createImageBitmap2"
 
 ///|
-impl TWindow with create_image_bitmap2(self : Self, image : &TImageBitmapSource, sx : Int, sy : Int, sw : Int, sh : Int, options? : ImageBitmapOptions = ImageBitmapOptions::empty()) -> JsPromise[ImageBitmap] {
-  window_create_image_bitmap_ffi2(TJsValue::to_js(self), TImageBitmapSource::to_js(image), TJsValue::to_js(sx), TJsValue::to_js(sy), TJsValue::to_js(sw), TJsValue::to_js(sh), TJsValue::to_js(options)).unsafe_cast()
+impl TWindow with create_image_bitmap2(
+  self : Self,
+  image : &TImageBitmapSource,
+  sx : Int,
+  sy : Int,
+  sw : Int,
+  sh : Int,
+  options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
+) -> JsPromise[ImageBitmap] {
+  window_create_image_bitmap_ffi2(
+    TJsValue::to_js(self),
+    TImageBitmapSource::to_js(image),
+    TJsValue::to_js(sx),
+    TJsValue::to_js(sy),
+    TJsValue::to_js(sw),
+    TJsValue::to_js(sh),
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn window_structured_clone_ffi(obj : JsValue, value : JsValue, options : JsValue) -> JsValue = "webapi_Window" "structuredClone"
+fn window_structured_clone_ffi(
+  obj : JsValue,
+  value : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "structuredClone"
 
 ///|
-impl TWindow with structured_clone(self : Self, value : JsValue, options? : StructuredSerializeOptions = StructuredSerializeOptions::empty()) -> JsValue {
-  window_structured_clone_ffi(TJsValue::to_js(self), value, TJsValue::to_js(options)).unsafe_cast()
+impl TWindow with structured_clone(
+  self : Self,
+  value : JsValue,
+  options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
+) -> JsValue {
+  window_structured_clone_ffi(
+    TJsValue::to_js(self),
+    value,
+    TJsValue::to_js(options),
+  ).unsafe_cast()
 }
 
 ///|
-fn window_request_animation_frame_ffi(obj : JsValue, callback : JsValue) -> JsValue = "webapi_Window" "requestAnimationFrame"
+fn window_request_animation_frame_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> JsValue = "webapi_Window" "requestAnimationFrame"
 
 ///|
 impl TWindow with request_animation_frame(self : Self, callback : JsValue) -> UInt {
@@ -606,7 +835,10 @@ fn window_cancel_animation_frame_ffi(obj : JsValue, handle : JsValue) -> Unit = 
 
 ///|
 impl TWindow with cancel_animation_frame(self : Self, handle : UInt) -> Unit {
-  window_cancel_animation_frame_ffi(TJsValue::to_js(self), TJsValue::to_js(handle))
+  window_cancel_animation_frame_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(handle),
+  )
 }
 
 ///|
@@ -1922,10 +2154,16 @@ impl TWindow with onsecuritypolicyviolation(self : Self) -> EventHandler {
 }
 
 ///|
-fn window_set_onsecuritypolicyviolation_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Window" "set_onsecuritypolicyviolation"
+fn window_set_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Window" "set_onsecuritypolicyviolation"
 
 ///|
-impl TWindow with set_onsecuritypolicyviolation(self : Self, value : EventHandler) -> Unit {
+impl TWindow with set_onsecuritypolicyviolation(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
   window_set_onsecuritypolicyviolation_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
@@ -2130,11 +2368,20 @@ impl TWindow with onwebkitanimationiteration(self : Self) -> EventHandler {
 }
 
 ///|
-fn window_set_onwebkitanimationiteration_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Window" "set_onwebkitanimationiteration"
+fn window_set_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Window" "set_onwebkitanimationiteration"
 
 ///|
-impl TWindow with set_onwebkitanimationiteration(self : Self, value : EventHandler) -> Unit {
-  window_set_onwebkitanimationiteration_ffi(self.to_js(), TJsValue::to_js(value))
+impl TWindow with set_onwebkitanimationiteration(
+  self : Self,
+  value : EventHandler,
+) -> Unit {
+  window_set_onwebkitanimationiteration_ffi(
+    self.to_js(),
+    TJsValue::to_js(value),
+  )
 }
 
 ///|
@@ -2146,7 +2393,10 @@ impl TWindow with onwebkitanimationstart(self : Self) -> EventHandler {
 }
 
 ///|
-fn window_set_onwebkitanimationstart_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Window" "set_onwebkitanimationstart"
+fn window_set_onwebkitanimationstart_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Window" "set_onwebkitanimationstart"
 
 ///|
 impl TWindow with set_onwebkitanimationstart(self : Self, value : EventHandler) -> Unit {

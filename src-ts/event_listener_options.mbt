@@ -7,14 +7,16 @@
 pub type EventListenerOptions
 
 ///|
-pub impl TJsValue for EventListenerOptions with to_js(self : EventListenerOptions) -> JsValue = "%identity"
+pub impl TJsValue for EventListenerOptions with to_js(
+  self : EventListenerOptions,
+) -> JsValue = "%identity"
 
 ///|
 fn event_listener_options_ffi(capture : JsValue) -> EventListenerOptions = "webapi_EventListenerOptions" "new"
 
 ///|
 pub fn EventListenerOptions::new(
-  capture? : Bool = false
+  capture? : Bool = false,
 ) -> EventListenerOptions {
   event_listener_options_ffi(TJsValue::to_js(capture))
 }

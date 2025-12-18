@@ -8,7 +8,9 @@ pub(open) trait TCanvasImageSource {
 }
 
 ///|
-pub fn[T : TCanvasImageSource] &TCanvasImageSource::into(self : &TCanvasImageSource) -> T = "%identity"
+pub fn[T : TCanvasImageSource] &TCanvasImageSource::into(
+  self : &TCanvasImageSource,
+) -> T = "%identity"
 
 ///|
 pub impl TCanvasImageSource for HTMLImageElement with to_js(
@@ -31,9 +33,7 @@ pub impl TCanvasImageSource for HTMLCanvasElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TCanvasImageSource for ImageBitmap with to_js(
-  self : ImageBitmap,
-) -> JsValue = "%identity"
+pub impl TCanvasImageSource for ImageBitmap with to_js(self : ImageBitmap) -> JsValue = "%identity"
 
 ///|
 pub impl TCanvasImageSource for OffscreenCanvas with to_js(

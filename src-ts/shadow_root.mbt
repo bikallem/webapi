@@ -46,7 +46,10 @@ pub impl TJsValue for ShadowRoot with to_js(self : ShadowRoot) -> JsValue = "%id
 fn shadow_root_set_html_unsafe_ffi(obj : JsValue, html : JsValue) -> Unit = "webapi_ShadowRoot" "setHTMLUnsafe"
 
 ///|
-impl TShadowRoot with set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg) -> Unit {
+impl TShadowRoot with set_html_unsafe(
+  self : Self,
+  html : &TSetHTMLUnsafeHtmlArg,
+) -> Unit {
   shadow_root_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }
 
@@ -54,7 +57,10 @@ impl TShadowRoot with set_html_unsafe(self : Self, html : &TSetHTMLUnsafeHtmlArg
 fn shadow_root_get_html_ffi(obj : JsValue, options : JsValue) -> JsValue = "webapi_ShadowRoot" "getHTML"
 
 ///|
-impl TShadowRoot with get_html(self : Self, options? : GetHTMLOptions = GetHTMLOptions::empty()) -> String {
+impl TShadowRoot with get_html(
+  self : Self,
+  options? : GetHTMLOptions = GetHTMLOptions::empty(),
+) -> String {
   shadow_root_get_html_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
 
@@ -79,7 +85,9 @@ fn shadow_root_slot_assignment_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoo
 
 ///|
 impl TShadowRoot with slot_assignment(self : Self) -> SlotAssignmentMode {
-  SlotAssignmentMode::from(shadow_root_slot_assignment_ffi(self.to_js()).unsafe_cast()).unwrap()
+  SlotAssignmentMode::from(
+    shadow_root_slot_assignment_ffi(self.to_js()).unsafe_cast(),
+  ).unwrap()
 }
 
 ///|
@@ -155,10 +163,16 @@ impl TShadowRoot with adopted_style_sheets(self : Self) -> Array[JsValue] {
 }
 
 ///|
-fn shadow_root_set_adopted_style_sheets_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_ShadowRoot" "set_adoptedStyleSheets"
+fn shadow_root_set_adopted_style_sheets_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_ShadowRoot" "set_adoptedStyleSheets"
 
 ///|
-impl TShadowRoot with set_adopted_style_sheets(self : Self, value : Array[JsValue]) -> Unit {
+impl TShadowRoot with set_adopted_style_sheets(
+  self : Self,
+  value : Array[JsValue],
+) -> Unit {
   shadow_root_set_adopted_style_sheets_ffi(self.to_js(), TJsValue::to_js(value))
 }
 
