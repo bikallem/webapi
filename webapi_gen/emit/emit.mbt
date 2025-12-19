@@ -191,6 +191,86 @@ pub enum ArgType {
   Resolved(String) // Already resolved type, no need for further mapping
 }
 
+//============================ Emitter ===========================
+
+///|
+fn js_emitter(emits : Array[Emit]) -> String {
+  fn args_to_string(args : Array[MethodArg]) -> String {
+    args
+    .map(arg => {
+      let arg_name = if arg.optional { "\{arg.name}?" } else { arg.name }
+      match arg.type_ {
+        ArgType::Self => "\{arg_name} : Self"
+        ArgType::Type(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
+        ArgType::Resolved(r) => "\{arg_name} : \{r}"
+      }
+    })
+    .join(", ")
+  }
+
+  let buf = StringBuilder::new()
+  for i, emit in emits {
+    match emit {
+      Emit::External(type_name) => {
+        buf.write_string("#external\npub type \{type_name}")
+        buf.write_string("\n\n")
+        buf.write_string(
+          "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",
+        )
+      }
+      Emit::IntoMethod(type_name) =>
+        buf.write_string(
+          "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
+        )
+      Emit::EmptyMethod(type_name) => {
+        buf.write_string(
+          "extern \"js\" fn \{type_name}_empty_ffi() -> \{type_name} = \"() => {}\"",
+        )
+        buf.write_string(
+          "pub fn \{type_name}::empty() -> \{type_name} { \{type_name}_empty_ffi() }",
+        )
+      }
+      Emit::ImplTrait(type_name) =>
+        buf.write_string("pub impl T\{type_name} for \{type_name}")
+      Emit::TraitDef(trait_def) => {
+        let parents = trait_def.parent_traits.join(" + ")
+        buf.write_string("pub trait T\{trait_def.trait_name}: \{parents} {\n")
+        for meth in trait_def.methods {
+          let args = args_to_string(meth.args)
+          buf.write_string(
+            "  \{meth.method_name}(\{args}) -> \{idl_to_mbt_type(meth.return_type)} = _\n",
+          )
+        }
+        buf.write_string("}")
+      }
+      Emit::UnionArgTrait(trait_name) => {
+        buf.write_string("pub(open) trait \{trait_name} {\n")
+        buf.write_string("  to_js(self : Self) -> JsValue\n")
+        buf.write_string("}")
+      }
+      Emit::UnionArgTraitImpl(type_, trait_name) => {
+        let mbt_type = idl_to_mbt_type(type_)
+        buf.write_string(
+          "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
+        )
+      }
+      Emit::ConstructorMethod(type_name, args) => {
+        let method_args = args_to_string(args)
+        buf.write_string(
+          "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
+        )
+        buf.write_string("}")
+      }
+    }
+    if i < emits.length() - 1 {
+      buf.write_string("\n\n")
+    }
+  }
+  buf.to_string()
+}
+
+//============================ Utility Functions ============================
+
 ///|
 /// Moonbit reserved keywords that need escaping
 let keywords : @hashset.HashSet[String] = [
@@ -326,5 +406,71 @@ fn arg_default_value(
         Float(NaN) => "@float.not_a_number"
       }
     Undefined => "\{mbt_type}::undefined()"
+  }
+}
+
+///|
+/// Map WebIDL type to Moonbit type string
+fn idl_to_mbt_type(idl_type : @parser.Type) -> String {
+  match idl_type {
+    // Named types (interfaces, dictionaries, enums, typedefs, union options)
+    Identifier(name) => name
+
+    // Void 
+    Undefined => "Unit"
+
+    // TODO: rethink these mappings (Parameterized types)
+    // Promise(t) => "JsPromise[\{mbt_type_string(t)}]"
+    // ObservableArray({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
+    // FrozenArray({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
+    // Sequence(t) => "Array[\{mbt_type_string(t)}]"
+    // AsyncSequence({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
+
+    // Typed Arrays
+    Float64Array => "Float64Array"
+    Float32Array => "Float32Array"
+    Float16Array => "Float16Array"
+    BigUint64Array => "BigUint64Array"
+    BigInt64Array => "BigInt64Array"
+    Uint8ClampedArray => "Uint8ClampedArray"
+    Uint32Array => "Uint32Array"
+    Uint16Array => "Uint16Array"
+    Uint8Array => "Uint8Array"
+    Int32Array => "Int32Array"
+    Int16Array => "Int16Array"
+    Int8Array => "Int8Array"
+    DataView => "DataView"
+    SharedArrayBuffer => "SharedArrayBuffer"
+    ArrayBuffer => "ArrayBuffer"
+
+    // Object types
+    Object => "JsValue"
+    Any => "JsValue"
+
+    // String types
+    USVString => "String"
+    ByteString => "String"
+    DOMString => "String"
+
+    // Integer Types    
+    LongLong => "Int64" // 64-bit signed → Int64
+    Bigint => "Int64" // BigInt → Int64
+    UnsignedLong => "UInt" // 32-bit unsigned → UInt
+    UnsignedLongLong => "UInt64" // 64-bit unsigned → UInt64
+    UnsignedShort => "UInt" // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
+    Long => "Int" // 32-bit signed → Int
+    Short => "Int" // 16-bit signed → Int (Int16 exists but Int is more common)
+    Octet => "Byte" // 8-bit unsigned → Byte
+    Byte => "Int" // 8-bit signed → Int (no signed 8-bit in MoonBit)
+    Boolean => "Bool"
+
+    // Floating point types
+    Float => "Float" // 32-bit float → Float
+    Double => "Double" // 64-bit float → Double
+    UnrestrictedDouble => "Double" // 64-bit unrestricted float → Double
+    UnrestrictedFloat => "Float" // 32-bit unrestricted float → Float    
+
+    // Default fallback
+    _ => "JsValue" // Fallback to JsValue for unsupported types
   }
 }
