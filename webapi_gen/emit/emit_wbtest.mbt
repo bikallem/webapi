@@ -1,4 +1,128 @@
 ///|
+test "arg_default_value" {
+  let registry = @type_registry.TypeRegistry::new([])
+
+  // Test basic default values
+  inspect(
+    arg_default_value(@parser.Null, @parser.Identifier("MyType"), registry),
+    content="MyType::null()",
+  )
+  inspect(
+    arg_default_value(@parser.EmptyObject, @parser.Identifier("Dict"), registry),
+    content="Dict::empty()",
+  )
+  inspect(
+    arg_default_value(@parser.EmptySequence, @parser.Boolean, registry),
+    content="[]",
+  )
+  inspect(
+    arg_default_value(
+      @parser.Undefined,
+      @parser.Identifier("SomeType"),
+      registry,
+    ),
+    content="SomeType::undefined()",
+  )
+}
+
+///|
+test "arg_default_value/string_values" {
+  let registry = @type_registry.TypeRegistry::new([])
+
+  // Test string default values for regular types
+  inspect(
+    arg_default_value(@parser.String("hello"), @parser.DOMString, registry),
+    content="\"hello\"",
+  )
+
+  // Test string default values for enum types (when registry indicates it's an enum)
+  let state_enum = @parser.DefinitionExtendedAttributes::{
+    extended_attributes: [],
+    definition: @parser.Enum({
+      name: "State",
+      values: ["active", "inactive", "pending"],
+    }),
+  }
+  let enum_registry = @type_registry.TypeRegistry::new([state_enum])
+  // Note: This test assumes the registry will properly identify enums
+  inspect(
+    arg_default_value(
+      @parser.String("active"),
+      @parser.Identifier("State"),
+      enum_registry,
+    ),
+    content="State::Active", // Now properly recognized as enum
+  )
+}
+
+///|
+test "arg_default_value/const_values" {
+  let registry = @type_registry.TypeRegistry::new([])
+
+  // Test constant boolean values
+  inspect(
+    arg_default_value(
+      @parser.ConstValue(@parser.Boolean("true")),
+      @parser.Boolean,
+      registry,
+    ),
+    content="true",
+  )
+  inspect(
+    arg_default_value(
+      @parser.ConstValue(@parser.Boolean("false")),
+      @parser.Boolean,
+      registry,
+    ),
+    content="false",
+  )
+
+  // Test constant numeric values
+  inspect(
+    arg_default_value(
+      @parser.ConstValue(@parser.Integer("42")),
+      @parser.Long,
+      registry,
+    ),
+    content="42",
+  )
+  inspect(
+    arg_default_value(
+      @parser.ConstValue(@parser.Float(@parser.Float("3.14"))),
+      @parser.Double,
+      registry,
+    ),
+    content="3.14",
+  )
+
+  // Test special float values
+  inspect(
+    arg_default_value(
+      @parser.ConstValue(@parser.Float(@parser.Infinity)),
+      @parser.Double,
+      registry,
+    ),
+    content="@float.infinity",
+  )
+  inspect(
+    arg_default_value(
+      @parser.ConstValue(@parser.Float(@parser.NegInfinity)),
+      @parser.Double,
+      registry,
+    ),
+    content="@float.neg_infinity",
+  )
+  inspect(
+    arg_default_value(
+      @parser.ConstValue(@parser.Float(@parser.NaN)),
+      @parser.Double,
+      registry,
+    ),
+    content="@float.not_a_number",
+  )
+}
+
+///|
 test "emit_js() generates MoonBit code for interface" {
   let idl =
     #|[Exposed=*]
@@ -9,9 +133,10 @@ test "emit_js() generates MoonBit code for interface" {
     #|  boolean dispatchEvent(Event event);
     #|};
   let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let emits = emit_interface(flattened.interfaces["EventTarget"])
+  let emits = emit_interface(flattened.interfaces["EventTarget"], type_registry)
   let code = js_emitter(emits)
   inspect(
     code,
@@ -64,6 +189,16 @@ test "emit_js() generates MoonBit code for dictionary" {
     #|  boolean willReadFrequently = false;
     #|};
   let definitions = @parser.parse(idl)
+  let predefined_color_space_enum = @parser.DefinitionExtendedAttributes::{
+    extended_attributes: [],
+    definition: @parser.Enum({ name: "PredefinedColorSpace", values: ["srgb"] }),
+  }
+  let canvas_color_type_enum = @parser.DefinitionExtendedAttributes::{
+    extended_attributes: [],
+    definition: @parser.Enum({ name: "CanvasColorType", values: ["unorm8"] }),
+  }
+  definitions.push(predefined_color_space_enum)
+  definitions.push(canvas_color_type_enum)
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
@@ -82,8 +217,8 @@ test "emit_js() generates MoonBit code for dictionary" {
       #|
       #|pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool = true, 
       #|desynchronized? : Bool = false, 
-      #|color_space? : PredefinedColorSpace = "srgb", 
-      #|color_type? : CanvasColorType = "unorm8", 
+      #|color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
+      #|color_type? : CanvasColorType = CanvasColorType::Unorm8, 
       #|will_read_frequently? : Bool = false) -> CanvasRenderingContext2DSettings {
       #|}
       #|

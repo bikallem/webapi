@@ -1,6 +1,7 @@
 ///|
 pub fn emit_interface(
   interface : @partial_merged.PartialMergedInterface,
+  type_registry : @type_registry.TypeRegistry,
 ) -> Array[Emit] {
   let emits = []
   emits.push(Emit::External(interface.name))
@@ -29,6 +30,7 @@ pub fn emit_interface(
         default_value: arg.default_value.map(dv => arg_default_value(
           dv,
           arg.type_.type_,
+          type_registry,
         )),
       })
     }
@@ -110,6 +112,7 @@ pub fn emit_dictionary(
       default_value: mem.default_value.map(dv => arg_default_value(
         dv,
         mem.type_,
+        type_registry,
       )),
     })
   }
@@ -398,23 +401,34 @@ fn to_pascal_case(s : String) -> String {
 fn arg_default_value(
   default_value : @parser.DefaultValue,
   arg_type : @parser.Type,
+  type_registry : @type_registry.TypeRegistry,
 ) -> String {
-  let mbt_type = match arg_type {
-    Identifier(name) => name
-    Union(options) =>
-      // if the arg type is a union, find the first identifier option and return it
-      loop options {
-        [] => "JsValue" // shouldn't happen
-        [o, ..] if o.type_ is Identifier(name) => break name
-        rest => continue rest
-      }
-    _ => "JsValue" // shouldn't happen
+  fn mbt_type() {
+    match arg_type {
+      Identifier(name) => name
+      Union(options) =>
+        // if the arg type is a union, find the first identifier option and return it
+        loop options {
+          [] => "JsValue" // shouldn't happen
+          [o, ..] if o.type_ is Identifier(name) => break name
+          rest => continue rest
+        }
+      _ => "JsValue" // shouldn't happen
+    }
   }
+
   match default_value {
-    Null => "\{mbt_type}::null()"
-    EmptyObject => "\{mbt_type}::empty()" // A dictionary type
+    Null => "\{mbt_type()}::null()"
+    EmptyObject => "\{mbt_type()}::empty()" // A dictionary type
     EmptySequence => "[]"
-    String(s) => "\"\{s}\""
+    String(s) =>
+      if arg_type is Identifier(name) && type_registry.is_enum(name) {
+        // For enum types, convert string to enum variant
+        let enum_variant = to_pascal_case(s)
+        "\{name}::\{enum_variant}"
+      } else {
+        "\"\{s}\""
+      }
     ConstValue(c) =>
       match c {
         Boolean(b) => b
@@ -424,7 +438,7 @@ fn arg_default_value(
         Float(NegInfinity) => "@float.neg_infinity"
         Float(NaN) => "@float.not_a_number"
       }
-    Undefined => "\{mbt_type}::undefined()"
+    Undefined => "\{mbt_type()}::undefined()"
   }
 }
 
