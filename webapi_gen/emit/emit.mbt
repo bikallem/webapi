@@ -1,3 +1,5 @@
+//============================ Emit Helpers ============================
+
 ///|
 pub fn emit_interface(
   interface : @partial_merged.PartialMergedInterface,
@@ -153,6 +155,8 @@ fn arg_type(
   }
 }
 
+// ============================ Emit IR ===========================
+
 ///|
 pub enum Emit {
   External(String) // External type, eg. #external EventTarget
@@ -194,10 +198,11 @@ pub enum ArgType {
   Resolved(String) // Already resolved type, no need for further mapping
 }
 
-//============================ Emitter ===========================
+//============================ Code generators ===========================
 
 ///|
-fn js_emitter(emits : Array[Emit]) -> String {
+/// Generate MoonBit code from Emit array for js backend
+fn js_code_gen(emits : Array[Emit]) -> String {
   fn method_args_to_string(args : Array[MethodArg]) -> String {
     args
     .map(arg => {
