@@ -8,7 +8,7 @@ pub fn emit_interface(
   emits.push(Emit::ImplTrait(interface.name))
 
   // Generate trait method args
-  fn method_args(
+  fn fill_method_args(
     method_args : Array[@parser.Argument],
     method_name : String,
     output_args : Array[MethodArg],
@@ -43,7 +43,7 @@ pub fn emit_interface(
       Constructor(ctor) => {
         let args = []
         let method_name = "new"
-        method_args(ctor.arguments, method_name, args)
+        fill_method_args(ctor.arguments, method_name, args)
         emits.push(Emit::ConstructorMethod(interface.name, args))
       }
       RegularOperation(op) => {
@@ -60,7 +60,7 @@ pub fn emit_interface(
           },
         ]
         let method_name = safe_identifier(op.name)
-        method_args(op.arguments, method_name, args)
+        fill_method_args(op.arguments, method_name, args)
         // trait method
         let trait_method = TraitMethod::{
           method_name,
@@ -89,9 +89,43 @@ pub fn emit_interface(
 }
 
 ///|
+pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> Array[Emit] {
+  let emits = [Emit::External(dict.name), Emit::ImplTrait(dict.name)]
+
+  // Constructor method args
+  let args = []
+  for mem in dict.members {
+    let type_ = match mem.type_ {
+      Union(options) => {
+        let type_name = "T\{to_pascal_case(dict.name)}\{to_pascal_case(mem.name)}Arg"
+        emits.push(Emit::UnionArgTrait(type_name))
+        for option in options {
+          emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
+        }
+        ArgType::Resolved(type_name)
+      }
+      _ => ArgType::Type(mem.type_)
+    }
+    args.push(MethodArg::{
+      name: safe_identifier(mem.name),
+      type_,
+      optional: !mem.required,
+      default_value: mem.default_value.map(dv => arg_default_value(
+        dv,
+        mem.type_,
+      )),
+    })
+  }
+  emits.push(Emit::ConstructorMethod(dict.name, args)) // empty constructor
+  emits.push(Emit::EmptyMethod(dict.name))
+  emits
+}
+
+///|
 pub enum Emit {
   External(String) // External type, eg. #external EventTarget
   IntoMethod(String) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+  EmptyMethod(String) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(String) // eg. impl TEventTarget for EventTarget
   TraitDef(TraitDef) // eg. trait TEventTarget { ... }
   UnionArgTrait(String) // eg. trait TEventTargetArg { ... }

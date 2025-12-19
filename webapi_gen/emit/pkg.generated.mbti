@@ -2,11 +2,14 @@
 package "bikallem/webapi_gen/emit"
 
 import(
+  "bikallem/webapi_gen/flattened_idl"
   "bikallem/webapi_gen/parser"
   "bikallem/webapi_gen/partial_merged"
 )
 
 // Values
+pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR) -> Array[Emit]
+
 pub fn emit_interface(@partial_merged.PartialMergedInterface) -> Array[Emit]
 
 // Errors
@@ -21,6 +24,7 @@ pub enum ArgType {
 pub enum Emit {
   External(String)
   IntoMethod(String)
+  EmptyMethod(String)
   ImplTrait(String)
   TraitDef(TraitDef)
   UnionArgTrait(String)
