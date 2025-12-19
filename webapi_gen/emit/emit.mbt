@@ -208,7 +208,8 @@ pub enum ArgType {
 fn method_args_to_string(args : Array[MethodArg]) -> String {
   args
   .map(arg => {
-    let arg_name = if arg.optional { "\{arg.name}?" } else { arg.name }
+    let arg_name = safe_identifier(arg.name)
+    let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
     let arg_decl = match arg.type_ {
       ArgType::Self => "\{arg_name} : Self"
       ArgType::Type(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
@@ -220,6 +221,22 @@ fn method_args_to_string(args : Array[MethodArg]) -> String {
     }
   })
   .join(", \n")
+}
+
+///|
+fn func_call_args(args : Array[MethodArg]) -> String {
+  args
+  .map(arg => {
+    let arg_name = safe_identifier(arg.name)
+    if !arg.optional {
+      "TJsValue::to_js(\{arg_name})"
+    } else if arg.optional && arg.default_value is Some(_) {
+      "\{arg_name}.to_js()"
+    } else {
+      "opt_to_js(\{arg_name})"
+    }
+  })
+  .join(", ")
 }
 
 ///|
@@ -295,15 +312,7 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
           // Emit default trait method implementation
           let method_args = method_args_to_string(meth.args)
           let method_name = safe_identifier(meth.method_name)
-          let call_args = meth.args
-            .map(arg => if !arg.optional {
-              "TJsValue::to_js(\{arg.name})"
-            } else if arg.optional && arg.default_value is Some(_) {
-              "\{arg.name}.to_js()"
-            } else {
-              "opt_to_js(\{arg.name})"
-            })
-            .join(", ")
+          let call_args = func_call_args(meth.args)
           buf.write_string(
             "impl T\{trait_def.trait_name} with \{method_name}(\{method_args}) -> \{ret_type_str} {\n",
           )
@@ -353,8 +362,8 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
         buf.write_string(
           "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
         )
-        buf.write_string("  \{ffi_name}(\n")
-        let call_args = args
+        let call_args = func_call_args(args)
+        buf.write_string("  \{ffi_name}(\{call_args})\n")
         buf.write_string("}")
       }
     }

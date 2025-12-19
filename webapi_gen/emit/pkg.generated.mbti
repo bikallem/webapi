@@ -32,7 +32,7 @@ pub enum Emit {
   TraitDefinition(TraitDef)
   UnionArgTrait(TypeName)
   UnionArgTraitImpl(@parser.Type, TypeName)
-  ConstructorMethod(TypeName, Array[MethodArg])
+  DictionaryCreate(TypeName, Array[MethodArg])
 }
 
 pub struct MethodArg {

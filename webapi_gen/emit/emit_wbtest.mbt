@@ -150,12 +150,14 @@ test "emit_js() generates MoonBit code for interface" {
       #|
       #|pub impl TEventTarget for EventTarget
       #|
-      #|extern "js" fn event_target_ffi() -> EventTarget = "() => {
-      #|  const obj = {};
-      #|  return obj;
-      #|}"
+      #|extern "js" fn event_target_ffi() -> EventTarget = 
+      #|#|() => {
+      #|#|  const obj = {};
+      #|#|  return obj;
+      #|#|}
       #|
       #|pub fn EventTarget::new() -> EventTarget {
+      #|  event_target_ffi()
       #|}
       #|
       #|pub(open) trait TAddEventListenerOptionsArg {
@@ -258,9 +260,10 @@ test "emit_js() generates MoonBit code for dictionary" {
       #|
       #|pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool = true, 
       #|desynchronized? : Bool = false, 
-      #|colorSpace? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
-      #|colorType? : CanvasColorType = CanvasColorType::Unorm8, 
-      #|willReadFrequently? : Bool = false) -> CanvasRenderingContext2DSettings {
+      #|color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
+      #|color_type? : CanvasColorType = CanvasColorType::Unorm8, 
+      #|will_read_frequently? : Bool = false) -> CanvasRenderingContext2DSettings {
+      #|  canvas_rendering_context2d_settings_ffi(alpha.to_js(), desynchronized.to_js(), color_space.to_js(), color_type.to_js(), will_read_frequently.to_js())
       #|}
       #|
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
