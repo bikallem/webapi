@@ -150,6 +150,11 @@ test "emit_js() generates MoonBit code for interface" {
       #|
       #|pub impl TEventTarget for EventTarget
       #|
+      #|extern "js" fn event_target_ffi() -> EventTarget = "() => {
+      #|  const obj = {};
+      #|  return obj;
+      #|}"
+      #|
       #|pub fn EventTarget::new() -> EventTarget {
       #|}
       #|
@@ -240,11 +245,22 @@ test "emit_js() generates MoonBit code for dictionary" {
       #|
       #|pub impl TJsValue for CanvasRenderingContext2DSettings with to_js(self: CanvasRenderingContext2DSettings) -> JsValue = "%identity"
       #|
+      #|extern "js" fn canvas_rendering_context2d_settings_ffi(alpha: JsValue, desynchronized: JsValue, color_space: JsValue, color_type: JsValue, will_read_frequently: JsValue) -> CanvasRenderingContext2DSettings = 
+      #|#|(alpha, desynchronized, colorSpace, colorType, willReadFrequently) => {
+      #|#|  const obj = {};
+      #|#|  if (alpha !== undefined) obj.alpha = alpha;
+      #|#|  if (desynchronized !== undefined) obj.desynchronized = desynchronized;
+      #|#|  if (colorSpace !== undefined) obj.colorSpace = colorSpace;
+      #|#|  if (colorType !== undefined) obj.colorType = colorType;
+      #|#|  if (willReadFrequently !== undefined) obj.willReadFrequently = willReadFrequently;
+      #|#|  return obj;
+      #|#|}
+      #|
       #|pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool = true, 
       #|desynchronized? : Bool = false, 
-      #|color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
-      #|color_type? : CanvasColorType = CanvasColorType::Unorm8, 
-      #|will_read_frequently? : Bool = false) -> CanvasRenderingContext2DSettings {
+      #|colorSpace? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
+      #|colorType? : CanvasColorType = CanvasColorType::Unorm8, 
+      #|willReadFrequently? : Bool = false) -> CanvasRenderingContext2DSettings {
       #|}
       #|
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
