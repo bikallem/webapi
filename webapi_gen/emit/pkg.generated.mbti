@@ -25,6 +25,14 @@ pub enum Emit {
   TraitDef(TraitDef)
   UnionArgTrait(String)
   UnionArgTraitImpl(@parser.Type, String)
+  ConstructorMethod(String, Array[MethodArg])
+}
+
+pub struct MethodArg {
+  name : String
+  type_ : ArgType
+  optional : Bool
+  default_value : String?
 }
 
 pub struct TraitDef {
@@ -36,14 +44,7 @@ pub struct TraitDef {
 pub struct TraitMethod {
   method_name : String
   return_type : @parser.Type
-  args : Array[TraitMethodArg]
-}
-
-pub struct TraitMethodArg {
-  name : String
-  type_ : ArgType
-  optional : Bool
-  default_value : String?
+  args : Array[MethodArg]
 }
 
 // Type aliases

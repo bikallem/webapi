@@ -6,22 +6,53 @@ pub fn emit_interface(
   emits.push(Emit::External(interface.name))
   emits.push(Emit::IntoMethod(interface.name))
   emits.push(Emit::ImplTrait(interface.name))
+
+  // Generate trait method args
+  fn method_args(
+    method_args : Array[@parser.Argument],
+    method_name : String,
+    output_args : Array[MethodArg],
+  ) {
+    for arg in method_args {
+      let type_ = match arg.type_.type_ {
+        Union(options) => {
+          let type_name = "T\{to_pascal_case(method_name)}\{to_pascal_case(arg.name)}Arg"
+          emits.push(Emit::UnionArgTrait(type_name))
+          for option in options {
+            emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
+          }
+          ArgType::Resolved(type_name)
+        }
+        type_ => ArgType::Type(type_)
+      }
+      output_args.push(MethodArg::{
+        name: safe_identifier(arg.name),
+        type_,
+        optional: arg.optional,
+        default_value: arg.default_value.map(dv => arg_default_value(
+          dv,
+          arg.type_.type_,
+        )),
+      })
+    }
+  }
+
   let trait_methods = []
   for mem in interface.members {
     match mem.interface_member {
-      Setlike(_) => ()
-      Maplike(_) => ()
-      AsyncIterable(_) => ()
-      Iterable(_) => ()
-      Constructor(_) => ()
-      SpecialOperation(_) => ()
+      Constructor(ctor) => {
+        let args = []
+        let method_name = "new"
+        method_args(ctor.arguments, method_name, args)
+        emits.push(Emit::ConstructorMethod(interface.name, args))
+      }
       RegularOperation(op) => {
         if op.static_ {
           continue // TODO: determine how to map static methods, perhaps to external type?
         }
         // trait method args
         let args = [
-          TraitMethodArg::{
+          MethodArg::{
             name: "self",
             type_: ArgType::Self,
             optional: false,
@@ -29,28 +60,7 @@ pub fn emit_interface(
           },
         ]
         let method_name = safe_identifier(op.name)
-        for arg in op.arguments {
-          let type_ = match arg.type_.type_ {
-            Union(options) => {
-              let type_name = "T\{to_pascal_case(op.name)}\{to_pascal_case(arg.name)}Arg"
-              emits.push(Emit::UnionArgTrait(type_name))
-              for option in options {
-                emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
-              }
-              ArgType::Resolved(type_name)
-            }
-            type_ => ArgType::Type(type_)
-          }
-          args.push(TraitMethodArg::{
-            name: safe_identifier(arg.name),
-            type_,
-            optional: arg.optional,
-            default_value: arg.default_value.map(dv => arg_default_value(
-              dv,
-              arg.type_.type_,
-            )),
-          })
-        }
+        method_args(op.arguments, method_name, args)
         // trait method
         let trait_method = TraitMethod::{
           method_name,
@@ -60,8 +70,7 @@ pub fn emit_interface(
         trait_methods.push(trait_method)
       }
       Attribute(_) => ()
-      Const(_) => ()
-      Stringifier(_) => ()
+      _ => ()
     }
   }
   let parent_traits = ["TJsValue"]
@@ -87,6 +96,7 @@ pub enum Emit {
   TraitDef(TraitDef) // eg. trait TEventTarget { ... }
   UnionArgTrait(String) // eg. trait TEventTargetArg { ... }
   UnionArgTraitImpl(@parser.Type, String) // eg. impl TEventTargetArg for TEventTarget
+  ConstructorMethod(String, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
 }
 
 ///|
@@ -100,11 +110,11 @@ pub struct TraitDef {
 pub struct TraitMethod {
   method_name : String
   return_type : @parser.Type
-  args : Array[TraitMethodArg]
+  args : Array[MethodArg]
 }
 
 ///|
-pub struct TraitMethodArg {
+pub struct MethodArg {
   name : String
   type_ : ArgType
   optional : Bool
