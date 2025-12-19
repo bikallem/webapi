@@ -52,3 +52,44 @@ test "emit_js() generates MoonBit code for interface" {
     ),
   )
 }
+
+///|
+test "emit_js() generates MoonBit code for dictionary" {
+  let idl =
+    #|dictionary CanvasRenderingContext2DSettings {
+    #|  boolean alpha = true;
+    #|  boolean desynchronized = false;
+    #|  PredefinedColorSpace colorSpace = "srgb";
+    #|  CanvasColorType colorType = "unorm8";
+    #|  boolean willReadFrequently = false;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let emits = emit_dictionary(
+    flattened.dictionaries["CanvasRenderingContext2DSettings"],
+    type_registry,
+  )
+  let code = js_emitter(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type CanvasRenderingContext2DSettings
+      #|
+      #|pub impl TJsValue for CanvasRenderingContext2DSettings with to_js(self: CanvasRenderingContext2DSettings) -> JsValue = "%identity"
+      #|
+      #|pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool = true, 
+      #|desynchronized? : Bool = false, 
+      #|color_space? : PredefinedColorSpace = "srgb", 
+      #|color_type? : CanvasColorType = "unorm8", 
+      #|will_read_frequently? : Bool = false) -> CanvasRenderingContext2DSettings {
+      #|}
+      #|
+      #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
+      #|
+      #|pub fn CanvasRenderingContext2DSettings::empty() -> CanvasRenderingContext2DSettings { canvas_rendering_context2d_settings_empty_ffi() }
+    ),
+  )
+}

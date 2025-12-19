@@ -90,7 +90,7 @@ pub fn emit_dictionary(
   dict : @flattened_idl.MergedDictionaryIR,
   type_registry : @type_registry.TypeRegistry,
 ) -> Array[Emit] {
-  let emits = [Emit::External(dict.name), Emit::ImplTrait(dict.name)]
+  let emits = [Emit::External(dict.name)]
 
   // Constructor method args
   let args = []
@@ -195,17 +195,21 @@ pub enum ArgType {
 
 ///|
 fn js_emitter(emits : Array[Emit]) -> String {
-  fn args_to_string(args : Array[MethodArg]) -> String {
+  fn method_args_to_string(args : Array[MethodArg]) -> String {
     args
     .map(arg => {
       let arg_name = if arg.optional { "\{arg.name}?" } else { arg.name }
-      match arg.type_ {
+      let arg_decl = match arg.type_ {
         ArgType::Self => "\{arg_name} : Self"
         ArgType::Type(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
         ArgType::Resolved(r) => "\{arg_name} : \{r}"
       }
+      match arg.default_value {
+        Some(dv) => "\{arg_decl} = \{dv}"
+        None => arg_decl
+      }
     })
-    .join(", ")
+    .join(", \n")
   }
 
   let buf = StringBuilder::new()
@@ -223,11 +227,13 @@ fn js_emitter(emits : Array[Emit]) -> String {
           "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
         )
       Emit::EmptyMethod(type_name) => {
+        let ffi_name = "\{to_snake_case(type_name)}_empty_ffi"
         buf.write_string(
-          "extern \"js\" fn \{type_name}_empty_ffi() -> \{type_name} = \"() => {}\"",
+          "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
         )
+        buf.write_string("\n\n")
         buf.write_string(
-          "pub fn \{type_name}::empty() -> \{type_name} { \{type_name}_empty_ffi() }",
+          "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }",
         )
       }
       Emit::ImplTrait(type_name) =>
@@ -236,7 +242,20 @@ fn js_emitter(emits : Array[Emit]) -> String {
         let parents = trait_def.parent_traits.join(" + ")
         buf.write_string("pub trait T\{trait_def.trait_name}: \{parents} {\n")
         for meth in trait_def.methods {
-          let args = args_to_string(meth.args)
+          let args = meth.args
+            .map(arg => {
+              let arg_name = if arg.optional {
+                "\{arg.name}?"
+              } else {
+                arg.name
+              }
+              match arg.type_ {
+                ArgType::Self => "\{arg_name} : Self"
+                ArgType::Type(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
+                ArgType::Resolved(r) => "\{arg_name} : \{r}"
+              }
+            })
+            .join(", ")
           buf.write_string(
             "  \{meth.method_name}(\{args}) -> \{idl_to_mbt_type(meth.return_type)} = _\n",
           )
@@ -255,7 +274,7 @@ fn js_emitter(emits : Array[Emit]) -> String {
         )
       }
       Emit::ConstructorMethod(type_name, args) => {
-        let method_args = args_to_string(args)
+        let method_args = method_args_to_string(args)
         buf.write_string(
           "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
         )
