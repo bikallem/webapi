@@ -14,17 +14,14 @@ pub fn emit_interface(
     output_args : Array[MethodArg],
   ) {
     for arg in method_args {
-      let type_ = match arg.type_.type_ {
-        Union(options) => {
-          let type_name = "T\{to_pascal_case(method_name)}\{to_pascal_case(arg.name)}Arg"
-          emits.push(Emit::UnionArgTrait(type_name))
-          for option in options {
-            emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
-          }
-          ArgType::Resolved(type_name)
-        }
-        type_ => ArgType::Type(type_)
-      }
+      let (type_, arg_emits) = arg_type(
+        arg.type_.type_,
+        method_name,
+        arg.name,
+        @type_registry.TypeRegistry::new([]), // empty registry since we don't need it here
+      )
+      // Push any additional emits needed for the arg type, e.g. union arg traits
+      emits.push_iter(arg_emits.iter())
       output_args.push(MethodArg::{
         name: safe_identifier(arg.name),
         type_,
@@ -89,23 +86,23 @@ pub fn emit_interface(
 }
 
 ///|
-pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> Array[Emit] {
+pub fn emit_dictionary(
+  dict : @flattened_idl.MergedDictionaryIR,
+  type_registry : @type_registry.TypeRegistry,
+) -> Array[Emit] {
   let emits = [Emit::External(dict.name), Emit::ImplTrait(dict.name)]
 
   // Constructor method args
   let args = []
   for mem in dict.members {
-    let type_ = match mem.type_ {
-      Union(options) => {
-        let type_name = "T\{to_pascal_case(dict.name)}\{to_pascal_case(mem.name)}Arg"
-        emits.push(Emit::UnionArgTrait(type_name))
-        for option in options {
-          emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
-        }
-        ArgType::Resolved(type_name)
-      }
-      _ => ArgType::Type(mem.type_)
-    }
+    let (type_, arg_emits) = arg_type(
+      mem.type_,
+      dict.name,
+      mem.name,
+      type_registry,
+    )
+    // Push any additional emits needed for the arg type, e.g. union arg traits
+    emits.push_iter(arg_emits.iter())
     args.push(MethodArg::{
       name: safe_identifier(mem.name),
       type_,
@@ -119,6 +116,38 @@ pub fn emit_dictionary(dict : @flattened_idl.MergedDictionaryIR) -> Array[Emit] 
   emits.push(Emit::ConstructorMethod(dict.name, args)) // empty constructor
   emits.push(Emit::EmptyMethod(dict.name))
   emits
+}
+
+///|
+fn arg_type(
+  type_ : @parser.Type,
+  method_name : String,
+  arg_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> (ArgType, Array[Emit]) {
+  let emits = []
+  match type_ {
+    Union(options) => {
+      let type_name = "T\{to_pascal_case(method_name)}\{to_pascal_case(arg_name)}Arg"
+      emits.push(Emit::UnionArgTrait(type_name))
+      for option in options {
+        emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
+      }
+      (ArgType::Resolved("&\{type_name}"), emits)
+    }
+    Identifier(name) => {
+      let name = if type_registry.is_interface(name) {
+        "&T\{name}"
+      } else {
+        name
+      }
+      (ArgType::Resolved(name), emits)
+    }
+    Nullable(type_) =>
+      // TODO: what happens if the nullable type is a union and none of the options are identifiers?
+      arg_type(type_, method_name, arg_name, type_registry)
+    _ => (ArgType::Type(type_), emits)
+  }
 }
 
 ///|
