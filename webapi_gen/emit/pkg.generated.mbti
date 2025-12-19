@@ -13,6 +13,8 @@ pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeReg
 
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry) -> Array[Emit]
 
+pub fn js_code_gen(Array[Emit]) -> String
+
 // Errors
 
 // Types and methods
@@ -27,7 +29,7 @@ pub enum Emit {
   IntoMethod(String)
   EmptyMethod(String)
   ImplTrait(String)
-  TraitDef(TraitDef)
+  TraitDefinition(TraitDef)
   UnionArgTrait(String)
   UnionArgTraitImpl(@parser.Type, String)
   ConstructorMethod(String, Array[MethodArg])

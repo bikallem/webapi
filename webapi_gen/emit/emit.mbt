@@ -80,7 +80,7 @@ pub fn emit_interface(
     Some(parent) => parent_traits.push(parent)
   }
   emits.push(
-    Emit::TraitDef(TraitDef::{
+    Emit::TraitDefinition(TraitDef::{
       trait_name: interface.name,
       parent_traits,
       methods: trait_methods,
@@ -163,7 +163,7 @@ pub enum Emit {
   IntoMethod(String) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
   EmptyMethod(String) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(String) // eg. impl TEventTarget for EventTarget
-  TraitDef(TraitDef) // eg. trait TEventTarget { ... }
+  TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
   UnionArgTrait(String) // eg. trait TEventTargetArg { ... }
   UnionArgTraitImpl(@parser.Type, String) // eg. impl TEventTargetArg for TEventTarget
   ConstructorMethod(String, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
@@ -202,7 +202,7 @@ pub enum ArgType {
 
 ///|
 /// Generate MoonBit code from Emit array for js backend
-fn js_code_gen(emits : Array[Emit]) -> String {
+pub fn js_code_gen(emits : Array[Emit]) -> String {
   fn method_args_to_string(args : Array[MethodArg]) -> String {
     args
     .map(arg => {
@@ -246,7 +246,7 @@ fn js_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::ImplTrait(type_name) =>
         buf.write_string("pub impl T\{type_name} for \{type_name}")
-      Emit::TraitDef(trait_def) => {
+      Emit::TraitDefinition(trait_def) => {
         let parents = trait_def.parent_traits.join(" + ")
         buf.write_string("pub trait T\{trait_def.trait_name}: \{parents} {\n")
         for meth in trait_def.methods {
