@@ -1,5 +1,5 @@
 ///|
-/// Merged interface IR with all partials and mixin members combined
+/// Merged interface IR with all partials combined.
 pub struct PartialMergedInterface {
   name : String
   members : Array[InterfaceMemberExtendedAttributes]
