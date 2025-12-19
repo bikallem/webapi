@@ -60,6 +60,11 @@ pub fn emit_interface(
   emits.push(Emit::External(interface.name))
   emits.push(Emit::IntoMethod(interface.name))
   emits.push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
+  match interface.inheritance {
+    None => ()
+    Some(parent) =>
+      emits.push(Emit::ImplTrait(interface.name, TraitName("T" + parent)))
+  }
 
   // Generate trait method args
   fn fill_method_args(
