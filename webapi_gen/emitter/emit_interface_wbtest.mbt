@@ -52,8 +52,8 @@ test "emit_interface generates moonbit code for simple interface" {
       #|pub impl TRemoveEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
       #|
       #|pub trait TEventTarget: TJsValue {
-      #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TAddEventListenerOptionsArg = &TAddEventListenerOptionsArg::empty()) -> Unit = _
-      #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TRemoveEventListenerOptionsArg = &TRemoveEventListenerOptionsArg::empty()) -> Unit = _
+      #|  add_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TAddEventListenerOptionsArg) -> Unit = _
+      #|  remove_event_listener(self: Self, type_ : String, callback : EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit = _
       #|  dispatch_event(self: Self, event : &TEvent) -> Bool = _
       #|}
       #|
@@ -61,7 +61,7 @@ test "emit_interface generates moonbit code for simple interface" {
       #|fn event_target_add_event_listener_ffi(obj : JsValue, type_ : JsValue, callback : JsValue, options : JsValue) -> Unit = "webapi_EventTarget" "addEventListener"
       #|
       #|///|
-      #|impl TEventTarget with add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TAddEventListenerOptionsArg = &TAddEventListenerOptionsArg::empty()) -> Unit {
+      #|impl TEventTarget with add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TAddEventListenerOptionsArg) -> Unit {
       #|  event_target_add_event_listener_ffi(self.to_js(), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
       #|}
       #|
@@ -69,7 +69,7 @@ test "emit_interface generates moonbit code for simple interface" {
       #|fn event_target_remove_event_listener_ffi(obj : JsValue, type_ : JsValue, callback : JsValue, options : JsValue) -> Unit = "webapi_EventTarget" "removeEventListener"
       #|
       #|///|
-      #|impl TEventTarget with remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TRemoveEventListenerOptionsArg = &TRemoveEventListenerOptionsArg::empty()) -> Unit {
+      #|impl TEventTarget with remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit {
       #|  event_target_remove_event_listener_ffi(self.to_js(), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
       #|}
       #|
@@ -80,7 +80,6 @@ test "emit_interface generates moonbit code for simple interface" {
       #|impl TEventTarget with dispatch_event(self : Self, event : &TEvent) -> Bool {
       #|  event_target_dispatch_event_ffi(self.to_js(), event.to_js())
       #|}
-
 
     ),
   )
