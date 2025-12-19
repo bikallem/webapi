@@ -150,11 +150,7 @@ test "emit_js() generates MoonBit code for interface" {
       #|
       #|pub impl TEventTarget for EventTarget
       #|
-      #|extern "js" fn event_target_ffi() -> EventTarget = 
-      #|#|() => {
-      #|#|  const obj = {};
-      #|#|  return obj;
-      #|#|}
+      #|extern "js" fn event_target_ffi() -> EventTarget = "() => new EventTarget()"
       #|
       #|pub fn EventTarget::new() -> EventTarget {
       #|  event_target_ffi()

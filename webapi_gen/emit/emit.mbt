@@ -45,7 +45,7 @@ pub fn emit_interface(
         let args = []
         let method_name = "new"
         fill_method_args(ctor.arguments, method_name, args)
-        emits.push(Emit::DictionaryCreate(interface.name, args))
+        emits.push(Emit::ConstructorMethod(interface.name, args))
       }
       RegularOperation(op) => {
         if op.static_ {
@@ -171,6 +171,7 @@ pub enum Emit {
   UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
   UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
+  ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
 }
 
 ///|
@@ -358,6 +359,25 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
         buf.write_string("\n\n")
 
         // Emit new() method
+        let method_args = method_args_to_string(args)
+        buf.write_string(
+          "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
+        )
+        let call_args = func_call_args(args)
+        buf.write_string("  \{ffi_name}(\{call_args})\n")
+        buf.write_string("}")
+      }
+      Emit::ConstructorMethod(TypeName(type_name), args) => {
+        // Emit FFI function
+        let ffi_name = "\{to_snake_case(type_name)}_ffi"
+        let ffi_args = args
+          .map(arg => "\{safe_identifier(arg.name)}: JsValue")
+          .join(", ")
+        let ffi_js_args = args.map(arg => arg.name).join(", ")
+        buf.write_string(
+          "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
+        )
+        buf.write_string("\n\n")
         let method_args = method_args_to_string(args)
         buf.write_string(
           "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
