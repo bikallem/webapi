@@ -80,7 +80,6 @@ test "emit_interface generates moonbit code for simple interface" {
       #|impl TEventTarget with dispatch_event(self : Self, event : &TEvent) -> Bool {
       #|  event_target_dispatch_event_ffi(self.to_js(), event.to_js())
       #|}
-
     ),
   )
 }

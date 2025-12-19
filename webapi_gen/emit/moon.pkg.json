@@ -1,0 +1,7 @@
+{
+    "import": [
+        // "bikallem/webapi_gen/flattened_idl",
+        "bikallem/webapi_gen/partial_merged",
+        "bikallem/webapi_gen/parser"
+    ]
+}

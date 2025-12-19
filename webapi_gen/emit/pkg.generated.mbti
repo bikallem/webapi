@@ -1,0 +1,52 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi_gen/emit"
+
+import(
+  "bikallem/webapi_gen/parser"
+  "bikallem/webapi_gen/partial_merged"
+)
+
+// Values
+pub fn emit_interface(@partial_merged.PartialMergedInterface) -> Array[Emit]
+
+// Errors
+
+// Types and methods
+pub enum ArgType {
+  Self
+  Type(@parser.Type)
+  Resolved(String)
+}
+
+pub enum Emit {
+  External(String)
+  IntoMethod(String)
+  ImplTrait(String)
+  TraitDef(TraitDef)
+  UnionArgTrait(String)
+  UnionArgTraitImpl(@parser.Type, String)
+}
+
+pub struct TraitDef {
+  trait_name : String
+  parent_traits : Array[String]
+  methods : Array[TraitMethod]
+}
+
+pub struct TraitMethod {
+  method_name : String
+  return_type : @parser.Type
+  args : Array[TraitMethodArg]
+}
+
+pub struct TraitMethodArg {
+  name : String
+  type_ : ArgType
+  optional : Bool
+  default_value : String?
+}
+
+// Type aliases
+
+// Traits
+
