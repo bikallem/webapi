@@ -25,14 +25,14 @@ pub enum ArgType {
 }
 
 pub enum Emit {
-  External(String)
-  IntoMethod(String)
-  EmptyMethod(String)
-  ImplTrait(String)
+  External(TypeName)
+  IntoMethod(TypeName)
+  EmptyMethod(TypeName)
+  ImplTrait(TypeName)
   TraitDefinition(TraitDef)
-  UnionArgTrait(String)
-  UnionArgTraitImpl(@parser.Type, String)
-  ConstructorMethod(String, Array[MethodArg])
+  UnionArgTrait(TypeName)
+  UnionArgTraitImpl(@parser.Type, TypeName)
+  ConstructorMethod(TypeName, Array[MethodArg])
 }
 
 pub struct MethodArg {
@@ -53,6 +53,8 @@ pub struct TraitMethod {
   return_type : @parser.Type
   args : Array[MethodArg]
 }
+
+type TypeName
 
 // Type aliases
 

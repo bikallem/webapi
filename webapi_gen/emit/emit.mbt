@@ -158,15 +158,19 @@ fn arg_type(
 // ============================ Emit IR ===========================
 
 ///|
+/// Represents a type name
+struct TypeName(String)
+
+///|
 pub enum Emit {
-  External(String) // External type, eg. #external EventTarget
-  IntoMethod(String) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
-  EmptyMethod(String) // eg. pub fn Event::empty() -> EventTarget
-  ImplTrait(String) // eg. impl TEventTarget for EventTarget
+  External(TypeName) // External type, eg. #external EventTarget
+  IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+  EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
+  ImplTrait(TypeName) // eg. impl TEventTarget for EventTarget
   TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
-  UnionArgTrait(String) // eg. trait TEventTargetArg { ... }
-  UnionArgTraitImpl(@parser.Type, String) // eg. impl TEventTargetArg for TEventTarget
-  ConstructorMethod(String, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
+  UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
+  UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
+  ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"  
 }
 
 ///|
@@ -223,18 +227,18 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
   let buf = StringBuilder::new()
   for i, emit in emits {
     match emit {
-      Emit::External(type_name) => {
+      Emit::External(TypeName(type_name)) => {
         buf.write_string("#external\npub type \{type_name}")
         buf.write_string("\n\n")
         buf.write_string(
           "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",
         )
       }
-      Emit::IntoMethod(type_name) =>
+      Emit::IntoMethod(TypeName(type_name)) =>
         buf.write_string(
           "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
         )
-      Emit::EmptyMethod(type_name) => {
+      Emit::EmptyMethod(TypeName(type_name)) => {
         let ffi_name = "\{to_snake_case(type_name)}_empty_ffi"
         buf.write_string(
           "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
@@ -244,7 +248,7 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
           "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }",
         )
       }
-      Emit::ImplTrait(type_name) =>
+      Emit::ImplTrait(TypeName(type_name)) =>
         buf.write_string("pub impl T\{type_name} for \{type_name}")
       Emit::TraitDefinition(trait_def) => {
         let parents = trait_def.parent_traits.join(" + ")
@@ -270,18 +274,18 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
         }
         buf.write_string("}")
       }
-      Emit::UnionArgTrait(trait_name) => {
+      Emit::UnionArgTrait(TypeName(trait_name)) => {
         buf.write_string("pub(open) trait \{trait_name} {\n")
         buf.write_string("  to_js(self : Self) -> JsValue\n")
         buf.write_string("}")
       }
-      Emit::UnionArgTraitImpl(type_, trait_name) => {
+      Emit::UnionArgTraitImpl(type_, TypeName(trait_name)) => {
         let mbt_type = idl_to_mbt_type(type_)
         buf.write_string(
           "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
         )
       }
-      Emit::ConstructorMethod(type_name, args) => {
+      Emit::ConstructorMethod(TypeName(type_name), args) => {
         let method_args = method_args_to_string(args)
         buf.write_string(
           "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
