@@ -34,7 +34,7 @@ pub enum Emit {
   External(TypeName)
   IntoMethod(TypeName)
   EmptyMethod(TypeName)
-  ImplTrait(TypeName)
+  ImplTrait(TypeName, TraitName)
   TraitDefinition(TraitDef)
   UnionArgTrait(TypeName)
   UnionArgTraitImpl(@parser.Type, TypeName)
@@ -68,6 +68,10 @@ pub struct TraitMethod {
 }
 pub impl Show for TraitMethod
 pub impl ToJson for TraitMethod
+
+type TraitName
+pub impl Show for TraitName
+pub impl ToJson for TraitName
 
 type TypeName
 pub impl Show for TypeName

@@ -1,3 +1,54 @@
+// ============================ Emit IR ===========================
+
+///|
+/// Represents a type name
+struct TypeName(String) derive(Show, ToJson)
+
+///|
+struct TraitName(String) derive(Show, ToJson)
+
+///|
+pub enum Emit {
+  External(TypeName) // External type, eg. #external EventTarget
+  IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+  EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
+  ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
+  TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
+  UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
+  UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
+  DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
+  ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
+} derive(Show, ToJson)
+
+///|
+pub struct TraitDef {
+  trait_name : String
+  parent_trait : String
+  methods : Array[TraitMethod]
+} derive(Show, ToJson)
+
+///|
+pub struct TraitMethod {
+  method_name : String
+  return_type : @parser.Type
+  args : Array[MethodArg]
+} derive(Show, ToJson)
+
+///|
+pub struct MethodArg {
+  name : String
+  type_ : ArgType
+  optional : Bool
+  default_value : String?
+} derive(Show, ToJson)
+
+///|
+pub enum ArgType {
+  Self
+  Type(@parser.Type)
+  Resolved(String) // Already resolved type, no need for further mapping
+} derive(Show, ToJson)
+
 //============================ Emit Helpers ============================
 
 ///|
@@ -8,7 +59,7 @@ pub fn emit_interface(
   let emits = []
   emits.push(Emit::External(interface.name))
   emits.push(Emit::IntoMethod(interface.name))
-  emits.push(Emit::ImplTrait(interface.name))
+  emits.push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
 
   // Generate trait method args
   fn fill_method_args(
@@ -180,54 +231,6 @@ fn arg_type(
   }
 }
 
-// ============================ Emit IR ===========================
-
-///|
-/// Represents a type name
-struct TypeName(String) derive(Show, ToJson)
-
-///|
-pub enum Emit {
-  External(TypeName) // External type, eg. #external EventTarget
-  IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
-  EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
-  ImplTrait(TypeName) // eg. impl TEventTarget for EventTarget
-  TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
-  UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
-  UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
-  DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
-  ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
-} derive(Show, ToJson)
-
-///|
-pub struct TraitDef {
-  trait_name : String
-  parent_trait : String
-  methods : Array[TraitMethod]
-} derive(Show, ToJson)
-
-///|
-pub struct TraitMethod {
-  method_name : String
-  return_type : @parser.Type
-  args : Array[MethodArg]
-} derive(Show, ToJson)
-
-///|
-pub struct MethodArg {
-  name : String
-  type_ : ArgType
-  optional : Bool
-  default_value : String?
-} derive(Show, ToJson)
-
-///|
-pub enum ArgType {
-  Self
-  Type(@parser.Type)
-  Resolved(String) // Already resolved type, no need for further mapping
-} derive(Show, ToJson)
-
 //============================ Code generator ===========================
 
 ///|
@@ -292,8 +295,8 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
           "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }",
         )
       }
-      Emit::ImplTrait(TypeName(type_name)) =>
-        buf.write_string("pub impl T\{type_name} for \{type_name}")
+      Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
+        buf.write_string("pub impl \{trait_name} for \{type_name}")
       Emit::TraitDefinition(trait_def) => {
         buf.write_string(
           "pub trait T\{trait_def.trait_name}: \{trait_def.parent_trait} {\n",
