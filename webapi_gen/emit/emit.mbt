@@ -74,15 +74,14 @@ pub fn emit_interface(
       _ => ()
     }
   }
-  let parent_traits = ["TJsValue"]
-  match interface.inheritance {
-    None => ()
-    Some(parent) => parent_traits.push(parent)
+  let parent_trait = match interface.inheritance {
+    None => "TJsValue"
+    Some(parent) => "T\{parent}"
   }
   emits.push(
     Emit::TraitDefinition(TraitDef::{
       trait_name: interface.name,
-      parent_traits,
+      parent_trait,
       methods: trait_methods,
     }),
   )
@@ -203,7 +202,7 @@ pub enum Emit {
 ///|
 pub struct TraitDef {
   trait_name : String
-  parent_traits : Array[String]
+  parent_trait : String
   methods : Array[TraitMethod]
 } derive(Show, ToJson)
 
@@ -296,8 +295,9 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
       Emit::ImplTrait(TypeName(type_name)) =>
         buf.write_string("pub impl T\{type_name} for \{type_name}")
       Emit::TraitDefinition(trait_def) => {
-        let parents = trait_def.parent_traits.join(" + ")
-        buf.write_string("pub trait T\{trait_def.trait_name}: \{parents} {\n")
+        buf.write_string(
+          "pub trait T\{trait_def.trait_name}: \{trait_def.parent_trait} {\n",
+        )
         for meth in trait_def.methods {
           let args = meth.args
             .map(arg => {

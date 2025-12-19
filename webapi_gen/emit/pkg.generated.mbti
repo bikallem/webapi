@@ -55,7 +55,7 @@ pub impl ToJson for MethodArg
 
 pub struct TraitDef {
   trait_name : String
-  parent_traits : Array[String]
+  parent_trait : String
   methods : Array[TraitMethod]
 }
 pub impl Show for TraitDef
