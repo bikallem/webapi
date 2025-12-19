@@ -131,6 +131,7 @@ test "emit_js() generates MoonBit code for interface" {
     #|  undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
     #|  undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
     #|  boolean dispatchEvent(Event event);
+    #|  [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
     #|};
   let definitions = @parser.parse(idl)
   let type_registry = @type_registry.TypeRegistry::new(definitions)
@@ -172,10 +173,19 @@ test "emit_js() generates MoonBit code for interface" {
       #|
       #|pub impl TRemoveEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
       #|
+      #|pub(open) trait TCreateElementOptionsArg {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub impl TCreateElementOptionsArg for String with to_js(self : String) -> JsValue = "%identity"
+      #|
+      #|pub impl TCreateElementOptionsArg for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
+      #|
       #|pub trait TEventTarget: TJsValue {
       #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TAddEventListenerOptionsArg) -> Unit = _
       #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TRemoveEventListenerOptionsArg) -> Unit = _
       #|  dispatch_event(self : Self, event : Event) -> Bool = _
+      #|  create_element(self : Self, local_name : String, options? : &TCreateElementOptionsArg) -> Element = _
       #|}
       #|
       #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
@@ -201,6 +211,14 @@ test "emit_js() generates MoonBit code for interface" {
       #|impl TEventTarget with dispatch_event(self : Self, 
       #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
+      #|}
+      #|
+      #|extern "js" fn event_target_create_element_ffi(obj: JsValue, local_name: JsValue, options: JsValue) -> Element = "(obj, local_name, options) => obj.createElement(obj, local_name, options)"
+      #|
+      #|impl TEventTarget with create_element(self : Self, 
+      #|local_name : String, 
+      #|options? : &TCreateElementOptionsArg = ElementCreationOptions::empty()) -> Element {
+      #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), options.to_js())
       #|}
     ),
   )

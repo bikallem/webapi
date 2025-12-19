@@ -185,7 +185,7 @@ fn arg_type(
 
 ///|
 /// Represents a type name
-struct TypeName(String)
+struct TypeName(String) derive(Show, ToJson)
 
 ///|
 pub enum Emit {
@@ -198,21 +198,21 @@ pub enum Emit {
   UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
   ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
-}
+} derive(Show, ToJson)
 
 ///|
 pub struct TraitDef {
   trait_name : String
   parent_traits : Array[String]
   methods : Array[TraitMethod]
-}
+} derive(Show, ToJson)
 
 ///|
 pub struct TraitMethod {
   method_name : String
   return_type : @parser.Type
   args : Array[MethodArg]
-}
+} derive(Show, ToJson)
 
 ///|
 pub struct MethodArg {
@@ -220,14 +220,14 @@ pub struct MethodArg {
   type_ : ArgType
   optional : Bool
   default_value : String?
-}
+} derive(Show, ToJson)
 
 ///|
 pub enum ArgType {
   Self
   Type(@parser.Type)
   Resolved(String) // Already resolved type, no need for further mapping
-}
+} derive(Show, ToJson)
 
 //============================ Code generator ===========================
 
@@ -537,10 +537,14 @@ fn arg_default_value(
       Identifier(name) => name
       Union(options) =>
         // if the arg type is a union, find the first identifier option and return it
-        loop options {
+        loop options[:] {
           [] => "JsValue" // shouldn't happen
-          [o, ..] if o.type_ is Identifier(name) => break name
-          rest => continue rest
+          [o, .. rest] =>
+            if o.type_ is Identifier(name) {
+              break name
+            } else {
+              continue rest
+            }
         }
       _ => "JsValue" // shouldn't happen
     }

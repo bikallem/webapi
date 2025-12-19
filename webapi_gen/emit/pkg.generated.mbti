@@ -27,6 +27,8 @@ pub enum ArgType {
   Type(@parser.Type)
   Resolved(String)
 }
+pub impl Show for ArgType
+pub impl ToJson for ArgType
 
 pub enum Emit {
   External(TypeName)
@@ -39,6 +41,8 @@ pub enum Emit {
   DictionaryCreate(TypeName, Array[MethodArg])
   ConstructorMethod(TypeName, Array[MethodArg])
 }
+pub impl Show for Emit
+pub impl ToJson for Emit
 
 pub struct MethodArg {
   name : String
@@ -46,20 +50,28 @@ pub struct MethodArg {
   optional : Bool
   default_value : String?
 }
+pub impl Show for MethodArg
+pub impl ToJson for MethodArg
 
 pub struct TraitDef {
   trait_name : String
   parent_traits : Array[String]
   methods : Array[TraitMethod]
 }
+pub impl Show for TraitDef
+pub impl ToJson for TraitDef
 
 pub struct TraitMethod {
   method_name : String
   return_type : @parser.Type
   args : Array[MethodArg]
 }
+pub impl Show for TraitMethod
+pub impl ToJson for TraitMethod
 
 type TypeName
+pub impl Show for TypeName
+pub impl ToJson for TypeName
 
 // Type aliases
 
