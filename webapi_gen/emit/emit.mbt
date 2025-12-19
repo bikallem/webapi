@@ -124,6 +124,32 @@ pub fn emit_dictionary(
 }
 
 ///|
+pub fn emit_all_dictionaries(
+  idl : @flattened_idl.FlattenedIdl,
+  type_registry : @type_registry.TypeRegistry,
+) -> Map[String, String] {
+  let result = {}
+  for name, dict in idl.dictionaries {
+    let filename = "\{to_snake_case(name)}_dictionary.mbt"
+    result[filename] = emit_dictionary(dict, type_registry) |> js_code_gen
+  }
+  result
+}
+
+///|
+pub fn emit_all_interfaces(
+  idl : @flattened_idl.FlattenedIdl,
+  type_registry : @type_registry.TypeRegistry,
+) -> Map[String, String] {
+  let result = {}
+  for name, interface in idl.interfaces {
+    let filename = "\{to_snake_case(name)}_interface.mbt"
+    result[filename] = emit_interface(interface, type_registry) |> js_code_gen
+  }
+  result
+}
+
+///|
 fn arg_type(
   type_ : @parser.Type,
   method_name : String,
@@ -203,7 +229,7 @@ pub enum ArgType {
   Resolved(String) // Already resolved type, no need for further mapping
 }
 
-//============================ Code generators ===========================
+//============================ Code generator ===========================
 
 ///|
 fn method_args_to_string(args : Array[MethodArg]) -> String {

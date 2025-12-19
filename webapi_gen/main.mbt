@@ -138,7 +138,7 @@ fn main {
 
     // Generate and write dictionaries
     println("=== Generating Dictionaries ===")
-    let dict_files = emit_all_dictionaries(flattened, type_registry)
+    let dict_files = @emit.emit_all_dictionaries(flattened, type_registry)
     for filename, code in dict_files {
       let filepath = "\{output_dir}/\{filename}"
       println("  Writing \{filepath}...")
@@ -149,7 +149,7 @@ fn main {
 
     // Generate and write interfaces
     println("=== Generating Interfaces ===")
-    let iface_files = emit_all_interfaces(flattened, type_registry)
+    let iface_files = @emit.emit_all_interfaces(flattened, type_registry)
     for filename, code in iface_files {
       let filepath = "\{output_dir}/\{filename}"
       println("  Writing \{filepath}...")

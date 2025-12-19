@@ -9,6 +9,10 @@ import(
 )
 
 // Values
+pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+
+pub fn emit_all_interfaces(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+
 pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeRegistry) -> Array[Emit]
 
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry) -> Array[Emit]
