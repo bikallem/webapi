@@ -140,7 +140,7 @@ fn func_call_args(args : Array[MethodArg]) -> String {
 
 ///|
 /// Generate MoonBit code from Emit array for js backend
-pub fn js_code_gen(emits : Array[Emit]) -> String {
+pub fn mbt_code_gen(emits : Array[Emit]) -> String {
   let buf = StringBuilder::new()
   for i, emit in emits {
     match emit {

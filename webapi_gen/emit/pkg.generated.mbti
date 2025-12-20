@@ -19,7 +19,7 @@ pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.Typ
 
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
-pub fn js_code_gen(Array[Emit]) -> String
+pub fn mbt_code_gen(Array[Emit]) -> String
 
 // Errors
 

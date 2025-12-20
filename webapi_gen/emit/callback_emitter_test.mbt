@@ -73,7 +73,7 @@ test "js_code_gen Callback generates correct code" {
     _ => fail("Expected callback function")
   }
   let emits = emit_callback(cb_def, registry)
-  let code = js_code_gen(emits)
+  let code = mbt_code_gen(emits)
   inspect(
     code,
     content=(
@@ -104,7 +104,7 @@ test "js_code_gen Callback with multiple args" {
     _ => fail("Expected callback function")
   }
   let emits = emit_callback(cb_def, registry)
-  let code = js_code_gen(emits)
+  let code = mbt_code_gen(emits)
   assert_true(
     code.contains(
       "(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback",

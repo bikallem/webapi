@@ -22,7 +22,7 @@ pub fn[E : Emitter] emit_all(
   let result = {}
   for name in names {
     let (filename, emits) = emitter.emit(name)
-    result[filename] = Code(js_code_gen(emits))
+    result[filename] = Code(mbt_code_gen(emits))
   }
   result
 }

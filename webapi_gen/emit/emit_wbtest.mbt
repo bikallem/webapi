@@ -142,7 +142,7 @@ test "emit_js() generates MoonBit code for interface" {
     type_registry,
     [],
   )
-  let code = js_code_gen(emits)
+  let code = mbt_code_gen(emits)
   inspect(
     code,
     content=(
@@ -254,7 +254,7 @@ test "emit_js() generates MoonBit code for dictionary" {
     |> @flattened_idl.flatten(ignore)
   let dictionary_emitter = DictionaryEmitter::{ idl: flattened, type_registry }
   let (_, emits) = dictionary_emitter.emit("CanvasRenderingContext2DSettings")
-  let code = js_code_gen(emits)
+  let code = mbt_code_gen(emits)
   inspect(
     code,
     content=(
