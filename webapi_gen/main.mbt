@@ -138,11 +138,14 @@ fn main {
 
     // Generate and write dictionaries
     println("=== Generating Dictionaries ===")
-    let dict_files = @emit.emit_all_dictionaries(flattened, type_registry)
+    let dict_files = @emit.emit_all(
+      @emit.DictionaryEmitter::{ idl: flattened, type_registry },
+      flattened.dictionaries.keys(),
+    )
     for filename, code in dict_files {
-      let filepath = "\{output_dir}/\{filename}"
+      let filepath = "\{output_dir}/\{filename.0}"
       println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code) catch {
+      @fs.write_string_to_file(filepath, code.0) catch {
         e => fail("failed to write file: \{e}")
       }
     }

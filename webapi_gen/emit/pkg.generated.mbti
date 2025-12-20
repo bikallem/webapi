@@ -11,8 +11,6 @@ import(
 // Values
 pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 
-pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
-
 pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeRegistry) -> Array[Emit]
 
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry, Array[String]) -> Array[Emit]
@@ -35,6 +33,12 @@ pub(all) struct Code(String)
 pub fn Code::inner(Self) -> String
 pub impl Show for Code
 pub impl ToJson for Code
+
+pub(all) struct DictionaryEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for DictionaryEmitter
 
 pub enum Emit {
   External(TypeName)

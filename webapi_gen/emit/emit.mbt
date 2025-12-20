@@ -8,19 +8,6 @@ struct TypeName(String) derive(Show, ToJson)
 struct TraitName(String) derive(Show, ToJson)
 
 ///|
-pub enum Emit {
-  External(TypeName) // External type, eg. #external EventTarget
-  IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
-  EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
-  ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
-  TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
-  UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
-  UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
-  DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
-  ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
-} derive(Show, ToJson)
-
-///|
 pub struct TraitDef {
   trait_name : String
   parent_trait : String
@@ -49,69 +36,20 @@ pub enum ArgType {
   Resolved(String) // Already resolved type, no need for further mapping
 } derive(Show, ToJson)
 
+///|
+pub enum Emit {
+  External(TypeName) // External type, eg. #external EventTarget
+  IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+  EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
+  ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
+  TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
+  UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
+  UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
+  DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
+  ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
+} derive(Show, ToJson)
+
 //============================ Emit Helpers ============================
-
-///|
-pub fn emit_dictionary(
-  dict : @flattened_idl.MergedDictionaryIR,
-  type_registry : @type_registry.TypeRegistry,
-) -> Array[Emit] {
-  let emits = [Emit::External(dict.name)]
-
-  // Constructor method args
-  let args = []
-  for mem in dict.members {
-    let (type_, arg_emits) = arg_type(
-      mem.type_,
-      dict.name,
-      mem.name,
-      type_registry,
-    )
-    // Push any additional emits needed for the arg type, e.g. union arg traits
-    emits.push_iter(arg_emits.iter())
-    args.push(MethodArg::{
-      name: mem.name,
-      type_,
-      optional: !mem.required,
-      default_value: mem.default_value.map(dv => arg_default_value(
-        dv,
-        mem.type_,
-        type_registry,
-      )),
-    })
-  }
-  emits.push(Emit::DictionaryCreate(dict.name, args)) // empty constructor
-  emits.push(Emit::EmptyMethod(dict.name))
-  emits
-}
-
-///|
-pub fn emit_all_dictionaries(
-  idl : @flattened_idl.FlattenedIdl,
-  type_registry : @type_registry.TypeRegistry,
-) -> Map[String, String] {
-  let result = {}
-  for name, dict in idl.dictionaries {
-    let filename = "\{to_snake_case(name)}_dictionary.mbt"
-    result[filename] = emit_dictionary(dict, type_registry) |> js_code_gen
-  }
-  result
-}
-
-///|
-// pub fn emit_all_interfaces(
-//   idl : @flattened_idl.FlattenedIdl,
-//   type_registry : @type_registry.TypeRegistry,
-// ) -> Map[String, String] {
-//   let result = {}
-//   for name, interface in idl.interfaces {
-//     let filename = "\{to_snake_case(name)}_interface.mbt"
-//     let ancestors = @flattened_idl.get_interface_ancestors(idl, name)
-//     result[filename] = emit_interface(interface, type_registry, ancestors)
-//       |> js_code_gen
-//   }
-//   result
-// }
 
 ///|
 fn arg_type(
