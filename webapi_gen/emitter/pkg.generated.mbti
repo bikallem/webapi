@@ -4,7 +4,6 @@ package "bikallem/webapi_gen/emitter"
 import(
   "bikallem/webapi_gen/flattened_idl"
   "bikallem/webapi_gen/parser"
-  "bikallem/webapi_gen/partial_merged"
   "bikallem/webapi_gen/type_registry"
 )
 
@@ -13,23 +12,11 @@ pub fn build_callback_emit(@parser.CallbackFunctionDefinition, @type_registry.Ty
 
 pub fn emit_all_callbacks(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
 
-pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
-
-pub fn emit_all_enums(@flattened_idl.FlattenedIdl) -> Map[String, String]
-
-pub fn emit_all_interfaces(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
-
 pub fn emit_all_typedefs(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
 
 pub fn emit_callback(CallbackEmit) -> String
 
-pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeRegistry) -> String
-
-pub fn emit_enum(@parser.EnumDefinition) -> String
-
 pub fn emit_globals(@flattened_idl.FlattenedIdl) -> String
-
-pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry) -> String
 
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
@@ -38,8 +25,6 @@ pub fn emit_typedef(@parser.TypedefDefinition, @type_registry.TypeRegistry) -> S
 // Errors
 
 // Types and methods
-type AttributeEmit
-
 pub struct CallbackArgEmit {
   name : String
   mbt_type : String
@@ -51,47 +36,6 @@ pub struct CallbackEmit {
   return_type : String
   ffi_module : String
 }
-
-type ConstructorEmit
-
-pub struct DictionaryEmit {
-  name : String
-  members : Array[DictionaryMemberEmit]
-}
-
-pub struct DictionaryMemberEmit {
-  name : String
-  param_name : String
-  mbt_type : String
-  required : Bool
-  default_value : String?
-}
-
-pub struct EnumEmit {
-  name : String
-  variants : Array[EnumMemberEmit]
-}
-
-pub struct EnumMemberEmit {
-  variant_name : String
-  original_value : String
-}
-
-type ExternalTypeEmit
-
-pub struct InterfaceEmit {
-  name : String
-  external_type : ExternalTypeEmit
-  trait_def : TraitEmit
-  ctor : ConstructorEmit?
-  union_arg_traits : Array[UnionArgTraitEmit]
-  attributes : Array[AttributeEmit]
-  operations : Array[MethodEmit]
-}
-
-type MethodEmit
-
-type TraitEmit
 
 pub struct TypedefAliasEmit {
   name : String
@@ -107,8 +51,6 @@ pub struct TypedefUnionEmit {
   name : String
   member_types : Array[String]
 }
-
-type UnionArgTraitEmit
 
 // Type aliases
 
