@@ -25,27 +25,19 @@ pub fn get_interface_ancestors(
     return []
   }
   let ancestors : Array[String] = []
-  let visited : Map[String, Bool] = {}
-  visited[name] = true
+  let visited : @hashset.HashSet[String] = @hashset.HashSet::from_array([name])
   let mut current = name
   while true {
-    match idl.interfaces.get(current) {
+    guard idl.interfaces.get(current) is Some(iface) else { break }
+    match iface.inheritance {
       None => break
-      Some(iface) =>
-        match iface.inheritance {
-          None => break
-          Some(parent) => {
-            if visited.contains(parent) {
-              break
-            }
-            if not(idl.interfaces.contains(parent)) {
-              break
-            }
-            ancestors.push(parent)
-            visited[parent] = true
-            current = parent
-          }
-        }
+      Some(parent) if visited.contains(parent) ||
+        not(idl.interfaces.contains(parent)) => break
+      Some(parent) => {
+        ancestors.push(parent)
+        visited.add(parent)
+        current = parent
+      }
     }
   }
   ancestors
