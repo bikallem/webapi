@@ -10,6 +10,48 @@ pub struct FlattenedIdl {
 } derive(Show, ToJson)
 
 ///|
+/// Returns the transitive inheritance chain (direct parent first) for an
+/// interface name.
+///
+/// Example: `HTMLElement` -> `["Element", "Node", "EventTarget"]`.
+///
+/// If the interface is unknown, or a parent is missing, the chain is truncated.
+/// Cycles are detected and terminate the walk.
+pub fn get_interface_ancestors(
+  idl : FlattenedIdl,
+  name : String,
+) -> Array[String] {
+  if not(idl.interfaces.contains(name)) {
+    return []
+  }
+  let ancestors : Array[String] = []
+  let visited : Map[String, Bool] = {}
+  visited[name] = true
+  let mut current = name
+  while true {
+    match idl.interfaces.get(current) {
+      None => break
+      Some(iface) =>
+        match iface.inheritance {
+          None => break
+          Some(parent) => {
+            if visited.contains(parent) {
+              break
+            }
+            if not(idl.interfaces.contains(parent)) {
+              break
+            }
+            ancestors.push(parent)
+            visited[parent] = true
+            current = parent
+          }
+        }
+    }
+  }
+  ancestors
+}
+
+///|
 /// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces 
 /// and converting callback interfaces to callback functions.
 pub fn flatten(

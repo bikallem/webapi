@@ -229,3 +229,17 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
   t.write(flattened_idl.to_json().stringify(indent=2))
   t.snapshot(filename="flattened_idl_snapshot.json")
 }
+
+///|
+test "get_interface_ancestors returns transitive parent chain" {
+  let widl : String =
+    #|interface EventTarget {};
+    #|interface Node : EventTarget {};
+    #|interface Element : Node {};
+    #|interface HTMLElement : Element {};
+  let defs = @parser.parse(widl)
+  let partial_merged = @partial_merged.merge_partials(defs)
+  let flattened_idl = flatten(partial_merged, ignore)
+  let ancestors = get_interface_ancestors(flattened_idl, "HTMLElement")
+  @json.inspect(ancestors, content=["Element", "Node", "EventTarget"])
+}
