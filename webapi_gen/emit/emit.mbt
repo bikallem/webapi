@@ -354,7 +354,7 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
         // Build closure type signature: (ArgType1, ArgType2) -> ReturnType
         let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
         let closure_type = "(\{arg_types}) -> \{return_type}"
-        let ffi_module = "webapi_\{name}"
+        let ffi_name = "\{to_snake_case(name)}_ffi"
 
         // External type
         buf.write_string("///|\n")
@@ -369,10 +369,17 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
         )
         buf.write_string("\n\n")
 
+        // FFI function - callbacks just pass the function through
+        buf.write_string("///|\n")
+        buf.write_string(
+          "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
+        )
+        buf.write_string("\n\n")
+
         // Constructor from MoonBit closure
         buf.write_string("///|\n")
         buf.write_string(
-          "pub fn \{name}::new(f : \{closure_type}) -> \{name} = \"\{ffi_module}\" \"new\"",
+          "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
         )
       }
     }

@@ -74,17 +74,23 @@ test "js_code_gen Callback generates correct code" {
   }
   let emits = emit_callback(cb_def, registry)
   let code = js_code_gen(emits)
-  let expected =
-    #|///|
-    #|#external
-    #|pub type EventListener
-    #|
-    #|///|
-    #|pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
-    #|
-    #|///|
-    #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener = "webapi_EventListener" "new"
-  inspect(code, content=expected)
+  inspect(
+    code,
+    content=(
+      #|///|
+      #|#external
+      #|pub type EventListener
+      #|
+      #|///|
+      #|pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
+      #|
+      #|///|
+      #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
+      #|
+      #|///|
+      #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+    ),
+  )
 }
 
 ///|
