@@ -49,6 +49,7 @@ pub impl Emitter for InterfaceEmitter with emit(
   }
 
   let trait_methods = []
+  let method_counter : Map[String, Int] = {} // to handle overloaded methods
   for mem in interface.members {
     match mem.interface_member {
       Constructor(ctor) => {
@@ -61,6 +62,16 @@ pub impl Emitter for InterfaceEmitter with emit(
         if op.static_ {
           continue // TODO: determine how to map static methods, perhaps to external type?
         }
+        let orig_method_name = match method_counter.get(op.name) {
+          None => {
+            method_counter[op.name] = 1
+            op.name
+          }
+          Some(count) => {
+            method_counter[op.name] += 1
+            "\{op.name}_\{count+1}"
+          }
+        }
         // trait method args
         let args = [
           MethodArg::{
@@ -70,11 +81,11 @@ pub impl Emitter for InterfaceEmitter with emit(
             default_value: None,
           },
         ]
-        let method_name = safe_identifier(op.name)
-        fill_method_args(op.arguments, method_name, args)
+        fill_method_args(op.arguments, safe_identifier(orig_method_name), args)
+
         // trait method
         let trait_method = TraitMethod::{
-          method_name: op.name,
+          method_name: orig_method_name,
           return_type: op.return_type,
           args,
         }
