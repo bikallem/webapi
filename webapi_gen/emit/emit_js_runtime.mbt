@@ -39,24 +39,7 @@ fn emit_js_preamble() -> String {
     #|    empty: () => ({})
     #|  },
     #|
-    #|  webapi_Globals: {
-    #|    document: () => document,
-    #|    window: () => window,
-    #|    console: () => console,
-    #|    navigator: () => navigator
-    #|  },
-    #|
   preamble
-}
-
-///|
-/// Emit JS module for a callback - callbacks just pass the function through
-fn emit_js_callback(name : String) -> String {
-  let buf = StringBuilder::new()
-  buf.write_string("  webapi_\{name}: {\n")
-  buf.write_string("    new: (f) => f\n")
-  buf.write_string("  }")
-  buf.to_string()
 }
 
 ///|
@@ -165,18 +148,13 @@ fn emit_js_interface_module(
 
 ///|
 /// Emit the complete JS runtime from FlattenedIdl
-pub fn emit_js_runtime(flattened : FlattenedIdl) -> String {
+pub fn emit_js_runtime(flattened : @flattened_idl.FlattenedIdl) -> String {
   let buf = StringBuilder::new()
 
   // Preamble
   buf.write_string(emit_js_preamble())
   buf.write_string("\n")
   let modules : Array[String] = []
-
-  // Callbacks
-  for name, _cb in flattened.callbacks {
-    modules.push(emit_js_callback(name))
-  }
 
   // Interfaces
   for _name, iface in flattened.interfaces {
@@ -200,14 +178,4 @@ test "emit_js_setter" {
     result,
     content="    set_innerHTML: (obj, value) => { obj.innerHTML = value; }",
   )
-}
-
-///|
-test "emit_js_callback" {
-  let result = emit_js_callback("EventListener")
-  let expected =
-    #|  webapi_EventListener: {
-    #|    new: (f) => f
-    #|  }
-  inspect(result, content=expected)
 }

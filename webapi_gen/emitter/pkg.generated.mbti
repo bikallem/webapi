@@ -1,14 +1,7 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/webapi_gen/emitter"
 
-import(
-  "bikallem/webapi_gen/flattened_idl"
-)
-
 // Values
-pub fn emit_globals(@flattened_idl.FlattenedIdl) -> String
-
-pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
 // Errors
 

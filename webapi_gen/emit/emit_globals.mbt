@@ -20,7 +20,7 @@ fn emit_global_binding(
   let buf = StringBuilder::new()
   buf.write_string("///|\n")
   buf.write_string(
-    "fn \{ffi_name}() -> \{interface_name} = \"webapi_Globals\" \"\{js_property}\"\n",
+    "extern \"js\" fn \{ffi_name}() -> \{interface_name} = \"() => \{js_property}\"\n",
   )
   buf.write_string("\n")
   buf.write_string("///|\n")
@@ -31,7 +31,7 @@ fn emit_global_binding(
 ///|
 /// Emit globals.mbt file content
 /// Only emits globals for interfaces that exist in the flattened IDL
-pub fn emit_globals(flattened : FlattenedIdl) -> String {
+pub fn emit_globals(flattened : @flattened_idl.FlattenedIdl) -> String {
   let buf = StringBuilder::new()
 
   // Header
@@ -60,7 +60,7 @@ test "emit_global_binding" {
   let result = emit_global_binding("document", "Document", "document")
   let expected =
     #|///|
-    #|fn document_ffi() -> Document = "webapi_Globals" "document"
+    #|extern "js" fn document_ffi() -> Document = "() => document"
     #|
     #|///|
     #|pub let document : Document = document_ffi()
@@ -82,7 +82,7 @@ test "emit_globals with Document interface" {
       #|// Do not edit manually
       #|
       #|///|
-      #|fn document_ffi() -> Document = "webapi_Globals" "document"
+      #|extern "js" fn document_ffi() -> Document = "() => document"
       #|
       #|///|
       #|pub let document : Document = document_ffi()
@@ -107,13 +107,13 @@ test "emit_globals with multiple interfaces" {
       #|// Do not edit manually
       #|
       #|///|
-      #|fn document_ffi() -> Document = "webapi_Globals" "document"
+      #|extern "js" fn document_ffi() -> Document = "() => document"
       #|
       #|///|
       #|pub let document : Document = document_ffi()
       #|
       #|///|
-      #|fn window_ffi() -> Window = "webapi_Globals" "window"
+      #|extern "js" fn window_ffi() -> Window = "() => window"
       #|
       #|///|
       #|pub let window : Window = window_ffi()

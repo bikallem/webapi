@@ -13,7 +13,11 @@ pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 
 pub fn emit_callback(@parser.CallbackFunctionDefinition, @type_registry.TypeRegistry) -> Array[Emit]
 
+pub fn emit_globals(@flattened_idl.FlattenedIdl) -> String
+
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry, Array[String]) -> Array[Emit]
+
+pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
 pub fn js_code_gen(Array[Emit]) -> String
 
