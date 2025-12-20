@@ -15,8 +15,6 @@ pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeReg
 
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry, Array[String]) -> Array[Emit]
 
-pub fn emit_typedef(@parser.TypedefDefinition, @type_registry.TypeRegistry) -> Array[Emit]
-
 pub fn js_code_gen(Array[Emit]) -> String
 
 // Errors

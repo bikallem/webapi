@@ -11,24 +11,20 @@ pub impl Emitter for TypedefEmitter with emit(
 ) -> (Filename, Array[Emit]) {
   let filename = Filename("\{to_snake_case(name)}_typedef.mbt")
   let typedef_def = self.idl.typedefs[name]
-  (filename, emit_typedef(typedef_def, self.type_registry))
-}
-
-///|
-pub fn emit_typedef(
-  typedef_def : @parser.TypedefDefinition,
-  type_registry : @type_registry.TypeRegistry,
-) -> Array[Emit] {
-  match typedef_def.type_ {
+  let typedef_emit = match typedef_def.type_ {
     Union(members) => {
-      let member_types = filter_typedef_union_members(members, type_registry)
-      [Emit::TypedefUnion(typedef_def.name, member_types)]
+      let member_types = filter_typedef_union_members(
+        members,
+        self.type_registry,
+      )
+      Emit::TypedefUnion(typedef_def.name, member_types)
     }
     _ => {
       let target_type = idl_to_mbt_type(typedef_def.type_)
-      [Emit::TypedefAlias(typedef_def.name, target_type)]
+      Emit::TypedefAlias(typedef_def.name, target_type)
     }
   }
+  (filename, [typedef_emit])
 }
 
 ///|
