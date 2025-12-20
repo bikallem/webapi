@@ -149,11 +149,14 @@ fn main {
 
     // Generate and write interfaces
     println("=== Generating Interfaces ===")
-    let iface_files = @emit.emit_all_interfaces(flattened, type_registry)
+    let iface_files = @emit.emit_all(
+      @emit.InterfaceEmitter::{ idl: flattened, type_registry },
+      flattened.interfaces.keys(),
+    )
     for filename, code in iface_files {
-      let filepath = "\{output_dir}/\{filename}"
+      let filepath = "\{output_dir}/\{filename.0}"
       println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code) catch {
+      @fs.write_string_to_file(filepath, code.0) catch {
         e => fail("failed to write file: \{e}")
       }
     }

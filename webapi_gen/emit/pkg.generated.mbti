@@ -9,13 +9,13 @@ import(
 )
 
 // Values
-pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 
-pub fn emit_all_interfaces(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
+pub fn emit_all_dictionaries(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
 
 pub fn emit_dictionary(@flattened_idl.MergedDictionaryIR, @type_registry.TypeRegistry) -> Array[Emit]
 
-pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry) -> Array[Emit]
+pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry, Array[String]) -> Array[Emit]
 
 pub fn js_code_gen(Array[Emit]) -> String
 
@@ -30,6 +30,12 @@ pub enum ArgType {
 pub impl Show for ArgType
 pub impl ToJson for ArgType
 
+pub(all) struct Code(String)
+#deprecated
+pub fn Code::inner(Self) -> String
+pub impl Show for Code
+pub impl ToJson for Code
+
 pub enum Emit {
   External(TypeName)
   IntoMethod(TypeName)
@@ -43,6 +49,20 @@ pub enum Emit {
 }
 pub impl Show for Emit
 pub impl ToJson for Emit
+
+pub(all) struct Filename(String)
+#deprecated
+pub fn Filename::inner(Self) -> String
+pub impl Eq for Filename
+pub impl Hash for Filename
+pub impl Show for Filename
+pub impl ToJson for Filename
+
+pub(all) struct InterfaceEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for InterfaceEmitter
 
 pub struct MethodArg {
   name : String
@@ -80,4 +100,7 @@ pub impl ToJson for TypeName
 // Type aliases
 
 // Traits
+pub(open) trait Emitter {
+  emit(Self, String) -> (Filename, Array[Emit])
+}
 
