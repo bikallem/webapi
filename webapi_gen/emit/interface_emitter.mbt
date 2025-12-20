@@ -12,15 +12,6 @@ pub impl Emitter for InterfaceEmitter with emit(
   let filename = Filename("\{to_snake_case(name)}_interface.mbt")
   let interface = self.idl.interfaces[name]
   let ancestors = @flattened_idl.get_interface_ancestors(self.idl, name)
-  (filename, emit_interface(interface, self.type_registry, ancestors))
-}
-
-///|
-pub fn emit_interface(
-  interface : @partial_merged.PartialMergedInterface,
-  type_registry : @type_registry.TypeRegistry,
-  ancestors : Array[String],
-) -> Array[Emit] {
   let emits = []
   emits.push(Emit::External(interface.name))
   emits.push(Emit::IntoMethod(interface.name))
@@ -51,7 +42,7 @@ pub fn emit_interface(
         default_value: arg.default_value.map(dv => arg_default_value(
           dv,
           arg.type_.type_,
-          type_registry,
+          self.type_registry,
         )),
       })
     }
@@ -104,5 +95,5 @@ pub fn emit_interface(
       methods: trait_methods,
     }),
   )
-  emits
+  (filename, emits)
 }

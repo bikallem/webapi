@@ -137,11 +137,8 @@ test "emit_js() generates MoonBit code for interface" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let emits = emit_interface(
-    flattened.interfaces["EventTarget"],
-    type_registry,
-    [],
-  )
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("EventTarget")
   let code = mbt_code_gen(emits)
   inspect(
     code,
