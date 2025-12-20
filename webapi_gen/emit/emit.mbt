@@ -55,15 +55,14 @@ pub enum ArgType {
 pub fn emit_interface(
   interface : @partial_merged.PartialMergedInterface,
   type_registry : @type_registry.TypeRegistry,
+  ancestors : Array[String],
 ) -> Array[Emit] {
   let emits = []
   emits.push(Emit::External(interface.name))
   emits.push(Emit::IntoMethod(interface.name))
   emits.push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
-  match interface.inheritance {
-    None => ()
-    Some(parent) =>
-      emits.push(Emit::ImplTrait(interface.name, TraitName("T" + parent)))
+  for ancestor in ancestors {
+    emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
 
   // Generate trait method args
@@ -199,7 +198,9 @@ pub fn emit_all_interfaces(
   let result = {}
   for name, interface in idl.interfaces {
     let filename = "\{to_snake_case(name)}_interface.mbt"
-    result[filename] = emit_interface(interface, type_registry) |> js_code_gen
+    let ancestors = @flattened_idl.get_interface_ancestors(idl, name)
+    result[filename] = emit_interface(interface, type_registry, ancestors)
+      |> js_code_gen
   }
   result
 }
