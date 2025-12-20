@@ -252,10 +252,8 @@ test "emit_js() generates MoonBit code for dictionary" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let emits = emit_dictionary(
-    flattened.dictionaries["CanvasRenderingContext2DSettings"],
-    type_registry,
-  )
+  let dictionary_emitter = DictionaryEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = dictionary_emitter.emit("CanvasRenderingContext2DSettings")
   let code = js_code_gen(emits)
   inspect(
     code,
