@@ -317,7 +317,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
             "    \"\{variant.original_value}\" => Some(\{name}::\{variant.variant_name})\n",
           )
         }
-        buf.write_string("    _ => None,\n")
+        buf.write_string("    _ => None\n")
         buf.write_string("  }\n")
         buf.write_string("}")
       }
@@ -558,9 +558,9 @@ fn idl_to_mbt_type(idl_type : @parser.Type) -> String {
     // TODO: rethink these mappings (Parameterized types)
     // Promise(t) => "JsPromise[\{mbt_type_string(t)}]"
     // ObservableArray({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
-    // FrozenArray({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
-    // Sequence(t) => "Array[\{mbt_type_string(t)}]"
+    // FrozenArray({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"    
     // AsyncSequence({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
+    Sequence(t) => "Array[\{idl_to_mbt_type(t)}]"
 
     // Typed Arrays
     Float64Array => "Float64Array"
