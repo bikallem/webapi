@@ -80,33 +80,6 @@ fn ffi_module_name(type_name : String) -> String {
 }
 
 ///|
-/// Types to skip in union filtering (rarely used or not in bindings)
-let skip_union_types : @hashset.HashSet[String] = [
-    "TrustedType", "TrustedHTML", "TrustedScript", "TrustedScriptURL",
-  ]
-  |> @hashset.from_array
-
-///|
-/// Get filtered union member types, removing duplicates, Unit, and skip types
-fn filter_union_members(
-  members : Array[@parser.TypeWithExtendedAttributes],
-  type_registry : TypeRegistry,
-) -> Array[String] {
-  let seen : @hashset.HashSet[String] = @hashset.new()
-  let result : Array[String] = []
-  for mem in members {
-    let mbt_type = to_mbt_type_string(mem.type_, type_registry)
-    if mbt_type != "Unit" &&
-      not(skip_union_types.contains(mbt_type)) &&
-      not(seen.contains(mbt_type)) {
-      seen.add(mbt_type)
-      result.push(mbt_type)
-    }
-  }
-  result
-}
-
-///|
 /// Map WebIDL type to Moonbit type string
 fn to_mbt_type_string(idl_type : Type, type_registry : TypeRegistry) -> String {
   match idl_type {

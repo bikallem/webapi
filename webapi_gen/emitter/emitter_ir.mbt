@@ -1,27 +1,6 @@
 // CG - Code Generation IR
 
 ///|
-/// Typedef alias emission
-pub struct TypedefAliasEmit {
-  name : String
-  target_type : String
-}
-
-///|
-/// Typedef union emission
-pub struct TypedefUnionEmit {
-  name : String
-  member_types : Array[String]
-}
-
-///|
-/// Typedef emission
-pub enum TypedefEmit {
-  Alias(TypedefAliasEmit)
-  Union(TypedefUnionEmit)
-}
-
-///|
 /// Callback function argument emission  
 pub struct CallbackArgEmit {
   name : String // Argument name, e.g., "event"
