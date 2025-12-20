@@ -44,6 +44,15 @@ pub struct EnumVariantEmit {
 } derive(Show, ToJson)
 
 ///|
+
+///|
+/// Callback argument emit representation
+pub(all) struct CallbackArgEmit {
+  name : String
+  mbt_type : String
+} derive(Show, ToJson)
+
+///|
 pub enum Emit {
   External(TypeName) // External type, eg. #external EventTarget
   IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
@@ -57,6 +66,7 @@ pub enum Emit {
   Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
   TypedefAlias(TypeName, String) // eg. pub typealias EventHandler = EventHandlerNonNull?
   TypedefUnion(TypeName, Array[String]) // eg. pub(open) trait TCanvasImageSource { ... } with impls
+  Callback(TypeName, Array[CallbackArgEmit], String) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
 } derive(Show, ToJson)
 
 //============================ Emit Helpers ============================
@@ -339,6 +349,31 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
             buf.write_string("\n\n")
           }
         }
+      }
+      Emit::Callback(TypeName(name), args, return_type) => {
+        // Build closure type signature: (ArgType1, ArgType2) -> ReturnType
+        let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
+        let closure_type = "(\{arg_types}) -> \{return_type}"
+        let ffi_module = "webapi_\{name}"
+
+        // External type
+        buf.write_string("///|\n")
+        buf.write_string("#external\n")
+        buf.write_string("pub type \{name}")
+        buf.write_string("\n\n")
+
+        // TJsValue impl
+        buf.write_string("///|\n")
+        buf.write_string(
+          "pub impl TJsValue for \{name} with to_js(self : \{name}) -> JsValue = \"%identity\"",
+        )
+        buf.write_string("\n\n")
+
+        // Constructor from MoonBit closure
+        buf.write_string("///|\n")
+        buf.write_string(
+          "pub fn \{name}::new(f : \{closure_type}) -> \{name} = \"\{ffi_module}\" \"new\"",
+        )
       }
     }
     if i < emits.length() - 1 {

@@ -11,6 +11,8 @@ import(
 // Values
 pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 
+pub fn emit_callback(@parser.CallbackFunctionDefinition, @type_registry.TypeRegistry) -> Array[Emit]
+
 pub fn emit_interface(@partial_merged.PartialMergedInterface, @type_registry.TypeRegistry, Array[String]) -> Array[Emit]
 
 pub fn js_code_gen(Array[Emit]) -> String
@@ -25,6 +27,19 @@ pub enum ArgType {
 }
 pub impl Show for ArgType
 pub impl ToJson for ArgType
+
+pub(all) struct CallbackArgEmit {
+  name : String
+  mbt_type : String
+}
+pub impl Show for CallbackArgEmit
+pub impl ToJson for CallbackArgEmit
+
+pub(all) struct CallbackEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for CallbackEmitter
 
 pub(all) struct Code(String)
 #deprecated
@@ -51,6 +66,7 @@ pub enum Emit {
   Enum(TypeName, Array[EnumVariantEmit])
   TypedefAlias(TypeName, String)
   TypedefUnion(TypeName, Array[String])
+  Callback(TypeName, Array[CallbackArgEmit], String)
 }
 pub impl Show for Emit
 pub impl ToJson for Emit
