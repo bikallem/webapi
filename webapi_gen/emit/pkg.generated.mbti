@@ -50,9 +50,23 @@ pub enum Emit {
   UnionArgTraitImpl(@parser.Type, TypeName)
   DictionaryCreate(TypeName, Array[MethodArg])
   ConstructorMethod(TypeName, Array[MethodArg])
+  Enum(TypeName, Array[EnumVariantEmit])
 }
 pub impl Show for Emit
 pub impl ToJson for Emit
+
+pub(all) struct EnumEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for EnumEmitter
+
+pub struct EnumVariantEmit {
+  variant_name : String
+  original_value : String
+}
+pub impl Show for EnumVariantEmit
+pub impl ToJson for EnumVariantEmit
 
 pub(all) struct Filename(String)
 #deprecated

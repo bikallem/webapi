@@ -116,11 +116,14 @@ fn main {
 
     // Generate and write enums
     println("=== Generating Enums ===")
-    let enum_files = emit_all_enums(flattened)
+    let enum_files = @emit.emit_all(
+      @emit.EnumEmitter::{ idl: flattened, type_registry },
+      flattened.enums.keys(),
+    )
     for filename, code in enum_files {
-      let filepath = "\{output_dir}/\{filename}"
+      let filepath = "\{output_dir}/\{filename.0}"
       println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code) catch {
+      @fs.write_string_to_file(filepath, code.0) catch {
         e => fail("failed to write file: \{e}")
       }
     }

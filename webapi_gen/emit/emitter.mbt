@@ -7,7 +7,8 @@ pub(all) struct Filename(String) derive(Show, ToJson, Eq, Hash)
 pub(all) struct Code(String) derive(Show, ToJson)
 
 ///|
-/// Emits filename and code for the given IDL definition.
+/// Emitter trait. Abstract functionality to emit filename and mbt code for 
+/// a given IDL definition.
 pub(open) trait Emitter {
   emit(self : Self, name : String) -> (Filename, Array[Emit])
 }

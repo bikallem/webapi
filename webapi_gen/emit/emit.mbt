@@ -5,6 +5,7 @@
 struct TypeName(String) derive(Show, ToJson)
 
 ///|
+/// Represents a trait name
 struct TraitName(String) derive(Show, ToJson)
 
 ///|
@@ -37,6 +38,12 @@ pub enum ArgType {
 } derive(Show, ToJson)
 
 ///|
+pub struct EnumVariantEmit {
+  variant_name : String
+  original_value : String
+} derive(Show, ToJson)
+
+///|
 pub enum Emit {
   External(TypeName) // External type, eg. #external EventTarget
   IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
@@ -47,6 +54,7 @@ pub enum Emit {
   UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
   ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
+  Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
 } derive(Show, ToJson)
 
 //============================ Emit Helpers ============================
@@ -263,6 +271,42 @@ pub fn js_code_gen(emits : Array[Emit]) -> String {
         )
         let call_args = func_call_args(args)
         buf.write_string("  \{ffi_name}(\{call_args})\n")
+        buf.write_string("}")
+      }
+      Emit::Enum(TypeName(name), variants) => {
+        // Emit enum type definition
+        buf.write_string("///|\n")
+        buf.write_string("pub(all) enum \{name} {\n")
+        for variant in variants {
+          buf.write_string("  \{variant.variant_name}\n")
+        }
+        buf.write_string("} derive(Eq,Show)")
+        buf.write_string("\n\n")
+
+        // Emit TJsValue impl
+        buf.write_string(
+          "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
+        )
+        buf.write_string("  match self {\n")
+        for variant in variants {
+          buf.write_string(
+            "    \{name}::\{variant.variant_name} => TJsValue::to_js(\"\{variant.variant_name}\")\n",
+          )
+        }
+        buf.write_string("  }\n")
+        buf.write_string("}")
+        buf.write_string("\n\n")
+
+        // Emit from method
+        buf.write_string("pub fn \{name}::from(value: String) -> \{name}? {\n")
+        buf.write_string("  match value {\n")
+        for variant in variants {
+          buf.write_string(
+            "    \"\{variant.original_value}\" => Some(\{name}::\{variant.variant_name})\n",
+          )
+        }
+        buf.write_string("    _ => None,\n")
+        buf.write_string("  }\n")
         buf.write_string("}")
       }
     }
