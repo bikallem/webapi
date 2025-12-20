@@ -130,11 +130,14 @@ fn main {
 
     // Generate and write typedefs
     println("=== Generating Typedefs ===")
-    let typedef_files = emit_all_typedefs(flattened, type_registry)
+    let typedef_files = @emit.emit_all(
+      @emit.TypedefEmitter::{ idl: flattened, type_registry },
+      flattened.typedefs.keys(),
+    )
     for filename, code in typedef_files {
-      let filepath = "\{output_dir}/\{filename}"
+      let filepath = "\{output_dir}/\{filename.0}"
       println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code) catch {
+      @fs.write_string_to_file(filepath, code.0) catch {
         e => fail("failed to write file: \{e}")
       }
     }
