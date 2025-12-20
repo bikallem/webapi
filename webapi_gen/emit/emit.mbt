@@ -262,12 +262,10 @@ fn func_call_args(args : Array[MethodArg]) -> String {
   args
   .map(arg => {
     let arg_name = safe_identifier(arg.name)
-    if !arg.optional {
-      "TJsValue::to_js(\{arg_name})"
-    } else if arg.optional && arg.default_value is Some(_) {
-      "\{arg_name}.to_js()"
-    } else {
+    if arg.optional && arg.default_value is None {
       "opt_to_js(\{arg_name})"
+    } else {
+      "TJsValue::to_js(\{arg_name})"
     }
   })
   .join(", ")
