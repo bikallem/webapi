@@ -11,7 +11,7 @@ using @flattened_idl {flatten}
 using @config {type GeneratorConfig}
 
 ///|
-using @emitter {emit_all_callbacks, emit_js_runtime, emit_globals}
+using @emitter {emit_js_runtime, emit_globals}
 
 ///|
 using @type_registry {type TypeRegistry}

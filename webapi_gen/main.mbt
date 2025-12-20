@@ -172,11 +172,14 @@ fn main {
 
     // Generate and write callbacks
     println("=== Generating Callbacks ===")
-    let callback_files = emit_all_callbacks(flattened, type_registry)
+    let callback_files = @emit.emit_all(
+      @emit.CallbackEmitter::{ idl: flattened, type_registry },
+      flattened.callbacks.keys(),
+    )
     for filename, code in callback_files {
-      let filepath = "\{output_dir}/\{filename}"
+      let filepath = "\{output_dir}/\{filename.0}"
       println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code) catch {
+      @fs.write_string_to_file(filepath, code.0) catch {
         e => fail("failed to write file: \{e}")
       }
     }

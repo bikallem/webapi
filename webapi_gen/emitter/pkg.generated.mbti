@@ -3,17 +3,9 @@ package "bikallem/webapi_gen/emitter"
 
 import(
   "bikallem/webapi_gen/flattened_idl"
-  "bikallem/webapi_gen/parser"
-  "bikallem/webapi_gen/type_registry"
 )
 
 // Values
-pub fn build_callback_emit(@parser.CallbackFunctionDefinition, @type_registry.TypeRegistry) -> CallbackEmit
-
-pub fn emit_all_callbacks(@flattened_idl.FlattenedIdl, @type_registry.TypeRegistry) -> Map[String, String]
-
-pub fn emit_callback(CallbackEmit) -> String
-
 pub fn emit_globals(@flattened_idl.FlattenedIdl) -> String
 
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
@@ -21,17 +13,6 @@ pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 // Errors
 
 // Types and methods
-pub struct CallbackArgEmit {
-  name : String
-  mbt_type : String
-}
-
-pub struct CallbackEmit {
-  name : String
-  args : Array[CallbackArgEmit]
-  return_type : String
-  ffi_module : String
-}
 
 // Type aliases
 
