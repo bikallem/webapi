@@ -13,7 +13,7 @@ test "filter_idl with empty config returns all types" {
       #|templates_dir = ""
       #|template_files = []
       #|core_specs = []
-      #|core_interfaces = []
+      #|excluded_interfaces = []
       #|excluded_callbacks = []
       #|excluded_typedefs = []
       #|excluded_dictionary_prefixes = []
@@ -50,7 +50,7 @@ test "filter_idl filters interfaces by whitelist" {
       #|templates_dir = ""
       #|template_files = []
       #|core_specs = []
-      #|core_interfaces = ["Element", "Node"]
+      #|excluded_interfaces = ["Element", "Node"]
       #|excluded_callbacks = []
       #|excluded_typedefs = []
       #|excluded_dictionary_prefixes = []
@@ -83,7 +83,7 @@ test "filter_idl excludes callbacks" {
       #|templates_dir = ""
       #|template_files = []
       #|core_specs = []
-      #|core_interfaces = []
+      #|excluded_interfaces = []
       #|excluded_callbacks = ["MutationCallback"]
       #|excluded_typedefs = []
       #|excluded_dictionary_prefixes = []
@@ -130,7 +130,7 @@ test "filter_idl excludes typedefs" {
       #|templates_dir = ""
       #|template_files = []
       #|core_specs = []
-      #|core_interfaces = []
+      #|excluded_interfaces = []
       #|excluded_callbacks = ["MutationCallback"]
       #|excluded_typedefs = ["EventHandler"]
       #|excluded_dictionary_prefixes = []
@@ -163,7 +163,7 @@ test "filter_idl excludes dictionaries by prefix" {
       #|templates_dir = ""
       #|template_files = []
       #|core_specs = []
-      #|core_interfaces = []
+      #|excluded_interfaces = []
       #|excluded_callbacks = ["MutationCallback"]
       #|excluded_typedefs = ["EventHandler"]
       #|excluded_dictionary_prefixes = ["Element"]

@@ -64,7 +64,7 @@ fn filter_idl(
   defns : Array[@parser.DefinitionExtendedAttributes],
   logger : (String) -> Unit,
 ) -> Array[@parser.DefinitionExtendedAttributes] {
-  let core_interfaces = config.core_interfaces
+  let core_interfaces = config.excluded_interfaces
   let excluded_callbacks = config.excluded_callbacks
   let excluded_typedefs = config.excluded_typedefs
   let filtered_defns = []

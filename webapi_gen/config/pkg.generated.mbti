@@ -15,9 +15,9 @@ pub struct GeneratorConfig {
   idl_dir : String
   output_dir : String
   templates_dir : String
-  core_interfaces : @hashset.HashSet[String]
   template_files : Array[String]
   core_specs : @hashset.HashSet[String]
+  excluded_interfaces : @hashset.HashSet[String]
   excluded_callbacks : @hashset.HashSet[String]
   excluded_typedefs : @hashset.HashSet[String]
   excluded_dictionary_prefixes : @hashset.HashSet[String]
