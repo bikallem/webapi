@@ -537,7 +537,7 @@ fn arg_default_value(
     String(s) =>
       if arg_type is Identifier(name) && type_registry.is_enum(name) {
         // For enum types, convert string to enum variant
-        let enum_variant = to_pascal_case(s)
+        let enum_variant = enum_variant(s)
         "\{name}::\{enum_variant}"
       } else {
         "\"\{s}\""
