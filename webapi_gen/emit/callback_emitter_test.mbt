@@ -32,12 +32,7 @@ test "emit_callback with interface argument uses trait reference" {
     _ => fail("Expected callback function")
   }
   let emits = emit_callback(cb_def, registry)
-  @json.inspect(emits[0], content=[
-    "Callback",
-    ["TypeName", "EventListener"],
-    [{ "name": "event", "mbt_type": "&TEvent" }],
-    "Unit",
-  ])
+  @json.inspect(emits[0], content=(["Callback",["TypeName","EventListener"],[{"name":"event","mbt_type":"Event"}],"Unit"]))
 }
 
 ///|

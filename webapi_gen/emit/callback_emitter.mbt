@@ -36,12 +36,7 @@ fn callback_arg_to_mbt(
   type_registry : @type_registry.TypeRegistry,
 ) -> String {
   match idl_type {
-    Identifier(name) =>
-      if type_registry.is_interface(name) {
-        "&T\{name}"
-      } else {
-        name
-      }
+    Identifier(name) => name
     Sequence(t) => "Array[\{callback_arg_to_mbt(t, type_registry)}]"
     Nullable(t) => "\{callback_arg_to_mbt(t, type_registry)}?"
     _ => idl_to_mbt_type(idl_type)
