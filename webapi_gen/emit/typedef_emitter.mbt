@@ -150,5 +150,5 @@ test "typedef emitter emits alias of nullable interface" {
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (_filename, emits) = emitter.emit("MyNullableInterface")
   let code = mbt_code_gen(emits)
-  inspect(code, content="pub type MyNullableInterface = JsValue")
+  inspect(code, content="pub type MyNullableInterface = MyInterface")
 }

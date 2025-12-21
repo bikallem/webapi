@@ -4,19 +4,25 @@ test "emit_callback simple EventListener" {
     #|callback EventListener = undefined (Event event);
   let definitions = @parser.parse(idl)
   let registry = @type_registry.TypeRegistry::new(definitions)
-  // Extract the callback from parsed definitions
   let cb_def = match definitions[0].definition {
     CallbackFunction(cb) => cb
     _ => fail("Expected callback function")
   }
   let emits = emit_callback(cb_def, registry)
-  inspect(emits.length(), content="1")
-  @json.inspect(emits[0], content=[
-    "Callback",
-    ["TypeName", "EventListener"],
-    [{ "name": "event", "mbt_type": "Event" }],
-    "Unit",
-  ])
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type EventListener
+      #|
+      #|pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
+      #|
+      #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
+      #|
+      #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+    ),
+  )
 }
 
 ///|
@@ -32,7 +38,20 @@ test "emit_callback with interface argument uses trait reference" {
     _ => fail("Expected callback function")
   }
   let emits = emit_callback(cb_def, registry)
-  @json.inspect(emits[0], content=(["Callback",["TypeName","EventListener"],[{"name":"event","mbt_type":"Event"}],"Unit"]))
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type EventListener
+      #|
+      #|pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
+      #|
+      #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
+      #|
+      #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+    ),
+  )
 }
 
 ///|
@@ -46,15 +65,20 @@ test "emit_callback multi-arg MutationCallback" {
     _ => fail("Expected callback function")
   }
   let emits = emit_callback(cb_def, registry)
-  @json.inspect(emits[0], content=[
-    "Callback",
-    ["TypeName", "MutationCallback"],
-    [
-      { "name": "mutations", "mbt_type": "Array[MutationRecord]" },
-      { "name": "observer", "mbt_type": "MutationObserver" },
-    ],
-    "Unit",
-  ])
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type MutationCallback
+      #|
+      #|pub impl TJsValue for MutationCallback with to_js(self : MutationCallback) -> JsValue = "%identity"
+      #|
+      #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
+      #|
+      #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(f) }
+    ),
+  )
 }
 
 ///|
@@ -80,7 +104,6 @@ test "js_code_gen Callback generates correct code" {
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
-
     ),
   )
 }
@@ -97,9 +120,17 @@ test "js_code_gen Callback with multiple args" {
   }
   let emits = emit_callback(cb_def, registry)
   let code = mbt_code_gen(emits)
-  assert_true(
-    code.contains(
-      "(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback",
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type MutationCallback
+      #|
+      #|pub impl TJsValue for MutationCallback with to_js(self : MutationCallback) -> JsValue = "%identity"
+      #|
+      #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
+      #|
+      #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(f) }
     ),
   )
 }

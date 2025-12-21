@@ -559,6 +559,9 @@ fn idl_to_mbt_type(idl_type : @parser.Type) -> String {
     // Named types (interfaces, dictionaries, enums, typedefs, union options)
     Identifier(name) => name
 
+    // Nullable
+    Nullable(t) => idl_to_mbt_type(t)
+
     // Void 
     Undefined => "Unit"
 
