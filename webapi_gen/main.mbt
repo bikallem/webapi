@@ -35,6 +35,27 @@ fn copy_templates(
 }
 
 ///|
+/// Emit and write files of a specific type
+fn[E : @emit.Emitter] emit_and_write(
+  output_dir : String,
+  type_name : String,
+  emitter : E,
+  keys : Iter[String],
+) -> Int raise {
+  println("=== Generating \{type_name} ===")
+  let files = @emit.emit_all(emitter, keys)
+  let count = files.length()
+  for filename, code in files {
+    let filepath = "\{output_dir}/\{filename.0}"
+    println("  Writing \{filepath}...")
+    @fs.write_string_to_file(filepath, code.0) catch {
+      e => fail("failed to write file: \{e}")
+    }
+  }
+  count
+}
+
+///|
 fn main {
   let args = @sys.get_cli_args()
   // Parse optional command line argument for config file
@@ -115,83 +136,45 @@ fn main {
       }
     }
 
-    // Generate and write enums
-    println("=== Generating Enums ===")
-    let enum_files = @emit.emit_all(
+    // Generate and write generated code files
+    let enum_count = emit_and_write(
+      output_dir,
+      "Enums",
       @emit.EnumEmitter::{ idl: flattened, type_registry },
       flattened.enums.keys(),
     )
-    for filename, code in enum_files {
-      let filepath = "\{output_dir}/\{filename.0}"
-      println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code.0) catch {
-        e => fail("failed to write file: \{e}")
-      }
-    }
-
-    // Generate and write typedefs
-    println("=== Generating Typedefs ===")
-    let typedef_files = @emit.emit_all(
+    let typedef_count = emit_and_write(
+      output_dir,
+      "Typedefs",
       @emit.TypedefEmitter::{ idl: flattened, type_registry },
       flattened.typedefs.keys(),
     )
-    for filename, code in typedef_files {
-      let filepath = "\{output_dir}/\{filename.0}"
-      println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code.0) catch {
-        e => fail("failed to write file: \{e}")
-      }
-    }
-
-    // Generate and write dictionaries
-    println("=== Generating Dictionaries ===")
-    let dict_files = @emit.emit_all(
+    let dict_count = emit_and_write(
+      output_dir,
+      "Dictionaries",
       @emit.DictionaryEmitter::{ idl: flattened, type_registry },
       flattened.dictionaries.keys(),
     )
-    for filename, code in dict_files {
-      let filepath = "\{output_dir}/\{filename.0}"
-      println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code.0) catch {
-        e => fail("failed to write file: \{e}")
-      }
-    }
-
-    // Generate and write interfaces
-    println("=== Generating Interfaces ===")
-    let iface_files = @emit.emit_all(
+    let iface_count = emit_and_write(
+      output_dir,
+      "Interfaces",
       @emit.InterfaceEmitter::{ idl: flattened, type_registry },
       flattened.interfaces.keys(),
     )
-    for filename, code in iface_files {
-      let filepath = "\{output_dir}/\{filename.0}"
-      println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code.0) catch {
-        e => fail("failed to write file: \{e}")
-      }
-    }
-
-    // Generate and write callbacks
-    println("=== Generating Callbacks ===")
-    let callback_files = @emit.emit_all(
+    let callback_count = emit_and_write(
+      output_dir,
+      "Callbacks",
       @emit.CallbackEmitter::{ idl: flattened, type_registry },
       flattened.callbacks.keys(),
     )
-    for filename, code in callback_files {
-      let filepath = "\{output_dir}/\{filename.0}"
-      println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, code.0) catch {
-        e => fail("failed to write file: \{e}")
-      }
-    }
 
     // Generate and write globals
     println("=== Generating Globals ===")
     let globals_code = @emit.emit_globals(flattened)
-    let globals_path = "\{output_dir}/globals.mbt"
-    println("  Writing \{globals_path}...")
-    @fs.write_string_to_file(globals_path, globals_code) catch {
-      e => fail("failed to write globals: \{e}")
+    let globals_filepath = "\{output_dir}/globals.mbt"
+    println("  Writing \{globals_filepath}...")
+    @fs.write_string_to_file(globals_filepath, globals_code) catch {
+      e => fail("failed to write file: \{e}")
     }
 
     // XXX: Disabled for now since we only need JS bindings
@@ -205,7 +188,7 @@ fn main {
     // }
     println("\n=== Generation complete! ===")
     println(
-      "Generated \{enum_files.length()} enums, \{typedef_files.length()} typedefs, \{dict_files.length()} dictionaries, \{iface_files.length()} interfaces, \{callback_files.length()} callbacks",
+      "Generated \{enum_count} enums, \{typedef_count} typedefs, \{dict_count} dictionaries, \{iface_count} interfaces, \{callback_count} callbacks",
     )
     println("Output directory: \{output_dir}")
   } catch {
