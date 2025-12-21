@@ -407,6 +407,7 @@ let keywords : @hashset.HashSet[String] = [
     "fn", "let", "mut", "if", "else", "match", "while", "for", "break", "continue",
     "return", "struct", "enum", "type", "trait", "impl", "pub", "priv", "true", "false",
     "as", "is", "in", "loop", "test", "raise", "try", "catch", "namespace", "using",
+    "where",
   ]
   |> @hashset.from_array
 
