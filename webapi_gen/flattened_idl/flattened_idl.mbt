@@ -2,24 +2,24 @@
 /// Flattened IDL after flattening mixins, flattening dictionaries inheritance 
 /// hierarchy and flattening callback interfaces to callback functions.
 pub struct FlattenedIdl {
-  interfaces : Map[String, PartialMergedInterface]
+  interfaces : Map[String, @partial_merged.PartialMergedInterface]
   dictionaries : Map[String, MergedDictionaryIR]
-  enums : Map[String, EnumDefinition]
-  typedefs : Map[String, TypedefDefinition]
-  callbacks : Map[String, CallbackFunctionDefinition]
+  enums : Map[String, @parser.EnumDefinition]
+  typedefs : Map[String, @parser.TypedefDefinition]
+  callbacks : Map[String, @parser.CallbackFunctionDefinition]
 } derive(Show, ToJson)
 
 ///|
 /// Merged dictionary IR with all inherited members combined.
 pub(all) struct MergedDictionaryIR {
   name : String
-  members : Array[DictionaryMember]
+  members : Array[@parser.DictionaryMember]
 } derive(Show, ToJson)
 
 ///|
 fn MergedDictionaryIR::new(
   name : String,
-  members : Array[DictionaryMember],
+  members : Array[@parser.DictionaryMember],
 ) -> MergedDictionaryIR {
   MergedDictionaryIR::{ name, members }
 }
@@ -28,14 +28,14 @@ fn MergedDictionaryIR::new(
 /// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces 
 /// and converting callback interfaces to callback functions.
 pub fn flatten(
-  partial_merged : PartialMerged,
+  partial_merged : @partial_merged.PartialMerged,
   logger : (String) -> Unit,
 ) -> FlattenedIdl {
   // Merge dictionaries by combining members from parent dictionaries
   let dictionaries = partial_merged.dictionaries
     .iter()
     .map(it => {
-      let (dict_name, dict) : (String, PartialMergedDictionary) = it
+      let (dict_name, dict) : (String, @partial_merged.PartialMergedDictionary) = it
       match dict.inheritance {
         None => // No inheritance, just copy members to MergedDictionaryIR
           (dict_name, MergedDictionaryIR::new(dict.name, dict.members))
@@ -101,7 +101,7 @@ pub fn flatten(
       [Operation(op), ..] => break op
       [_, .. rest] => continue rest
     }
-    let cbf = CallbackFunctionDefinition::{
+    let cbf = @parser.CallbackFunctionDefinition::{
       name: cbi.name,
       return_type: op.return_type,
       arguments: op.arguments,
