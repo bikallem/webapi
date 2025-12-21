@@ -132,13 +132,8 @@ fn func_call_args(args : Array[MethodArg]) -> String {
   args
   .map(arg => {
     let arg_name = safe_identifier(arg.name)
-    if arg.optional &&
-      arg.default_value is Some(_) &&
-      (
-        arg.type_ is Interface(_) ||
-        arg.type_ is Union(_) ||
-        arg.type_ is Resolved(_)
-      ) {
+    if (arg.type_ is Union(_) && arg.optional && arg.default_value is Some(_)) ||
+      (arg.type_ is Union(_) && !arg.optional) {
       "\{arg_name}.to_js()"
     } else if arg.optional && arg.default_value is None {
       "opt_to_js(\{arg_name})"
