@@ -23,8 +23,10 @@ pub fn mbt_code_gen(Array[Emit]) -> String
 // Types and methods
 pub enum ArgType {
   Self
-  Type(@parser.Type)
+  UnresolvedType(@parser.Type)
   Resolved(String)
+  Union(String)
+  Interface(String)
 }
 pub impl Show for ArgType
 pub impl ToJson for ArgType

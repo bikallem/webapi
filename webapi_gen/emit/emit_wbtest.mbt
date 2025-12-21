@@ -276,7 +276,7 @@ test "emit_js() generates MoonBit code for dictionary" {
       #|color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
       #|color_type? : CanvasColorType = CanvasColorType::Unorm8, 
       #|will_read_frequently? : Bool = false) -> CanvasRenderingContext2DSettings {
-      #|  canvas_rendering_context2d_settings_ffi(alpha.to_js(), desynchronized.to_js(), color_space.to_js(), color_type.to_js(), will_read_frequently.to_js())
+      #|  canvas_rendering_context2d_settings_ffi(TJsValue::to_js(alpha), TJsValue::to_js(desynchronized), color_space.to_js(), color_type.to_js(), TJsValue::to_js(will_read_frequently))
       #|}
       #|
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"

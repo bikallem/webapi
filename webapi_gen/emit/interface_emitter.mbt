@@ -25,7 +25,7 @@ pub impl Emitter for InterfaceEmitter with emit(
     method_args : Array[@parser.Argument],
     method_name : String,
     output_args : Array[MethodArg],
-  ) {
+  ) -> Unit {
     for arg in method_args {
       let (type_, arg_emits) = arg_type(
         arg.type_.type_,

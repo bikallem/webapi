@@ -32,9 +32,11 @@ pub struct MethodArg {
 
 ///|
 pub enum ArgType {
-  Self
-  Type(@parser.Type)
-  Resolved(String) // Already resolved type, no need for further mapping
+  Self // Represents 'self' argument
+  UnresolvedType(@parser.Type) // Type that needs to be mapped
+  Resolved(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef, callback
+  Union(String) // Union type represented by a trait
+  Interface(String) // Interface type represented by a trait
 } derive(Show, ToJson)
 
 ///|
@@ -86,20 +88,20 @@ fn arg_type(
       for option in options {
         emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
       }
-      (ArgType::Resolved("&\{type_name}"), emits)
+      (ArgType::Union("&\{type_name}"), emits)
     }
     Identifier(name) => {
       let name = if type_registry.is_interface(name) {
-        "&T\{name}"
+        ArgType::Interface("&T\{name}")
       } else {
-        name
+        ArgType::Resolved(name)
       }
-      (ArgType::Resolved(name), emits)
+      (name, emits)
     }
     Nullable(type_) =>
       // TODO: what happens if the nullable type is a union and none of the options are identifiers?
       arg_type(type_, method_name, arg_name, type_registry)
-    _ => (ArgType::Type(type_), emits)
+    _ => (ArgType::UnresolvedType(type_), emits)
   }
 }
 
@@ -113,8 +115,9 @@ fn method_args_to_string(args : Array[MethodArg]) -> String {
     let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
     let arg_decl = match arg.type_ {
       ArgType::Self => "\{arg_name} : Self"
-      ArgType::Type(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
-      ArgType::Resolved(r) => "\{arg_name} : \{r}"
+      ArgType::UnresolvedType(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
+      ArgType::Interface(t) | ArgType::Union(t) | ArgType::Resolved(t) =>
+        "\{arg_name} : \{t}"
     }
     match arg.default_value {
       Some(dv) => "\{arg_decl} = \{dv}"
@@ -129,7 +132,13 @@ fn func_call_args(args : Array[MethodArg]) -> String {
   args
   .map(arg => {
     let arg_name = safe_identifier(arg.name)
-    if arg.optional && arg.default_value is Some(_) {
+    if arg.optional &&
+      arg.default_value is Some(_) &&
+      (
+        arg.type_ is Interface(_) ||
+        arg.type_ is Union(_) ||
+        arg.type_ is Resolved(_)
+      ) {
       "\{arg_name}.to_js()"
     } else if arg.optional && arg.default_value is None {
       "opt_to_js(\{arg_name})"
@@ -183,8 +192,11 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
               }
               match arg.type_ {
                 ArgType::Self => "\{arg_name} : Self"
-                ArgType::Type(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
-                ArgType::Resolved(r) => "\{arg_name} : \{r}"
+                ArgType::UnresolvedType(t) =>
+                  "\{arg_name} : \{idl_to_mbt_type(t)}"
+                ArgType::Interface(t)
+                | ArgType::Union(t)
+                | ArgType::Resolved(t) => "\{arg_name} : \{t}"
               }
             })
             .join(", ")
