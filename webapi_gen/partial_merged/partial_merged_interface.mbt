@@ -2,14 +2,14 @@
 /// Merged interface IR with all partials combined.
 pub struct PartialMergedInterface {
   name : String
-  members : Array[InterfaceMemberExtendedAttributes]
+  members : Array[@parser.InterfaceMemberExtendedAttributes]
   inheritance : String?
 } derive(Show, ToJson)
 
 ///|
 fn PartialMergedInterface::new(
   name : String,
-  members : Array[InterfaceMemberExtendedAttributes],
+  members : Array[@parser.InterfaceMemberExtendedAttributes],
   inheritance : String?,
 ) -> PartialMergedInterface {
   PartialMergedInterface::{ name, inheritance, members }
@@ -18,7 +18,7 @@ fn PartialMergedInterface::new(
 ///|
 pub fn PartialMergedInterface::merge(
   self : PartialMergedInterface,
-  members : Array[InterfaceMemberExtendedAttributes],
+  members : Array[@parser.InterfaceMemberExtendedAttributes],
   inheritance : String?,
 ) -> PartialMergedInterface {
   let inheritance = match inheritance {
@@ -38,7 +38,7 @@ test "MergedInterface::merge() combines members and inheritance" {
         interface_member: Attribute({
           is_inherit: false,
           name: "id",
-          type_: Type::Identifier("DOMString"),
+          type_: @parser.Type::Identifier("DOMString"),
           is_readonly: false,
           static_: false,
         }),
@@ -51,7 +51,7 @@ test "MergedInterface::merge() combines members and inheritance" {
       {
         extended_attributes: [],
         interface_member: RegularOperation({
-          return_type: Type::Identifier("undefined"),
+          return_type: @parser.Type::Identifier("undefined"),
           name: "focus",
           arguments: [],
           static_: false,
@@ -101,7 +101,7 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
       {
         extended_attributes: [],
         interface_member: RegularOperation({
-          return_type: Type::Identifier("void"),
+          return_type: @parser.Type::Identifier("void"),
           name: "focus",
           static_: false,
           arguments: [],

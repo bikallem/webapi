@@ -2,14 +2,14 @@
 /// Merged Dictionary with all partials combined.
 pub struct PartialMergedDictionary {
   name : String
-  members : Array[DictionaryMember]
+  members : Array[@parser.DictionaryMember]
   inheritance : String?
 } derive(Show, ToJson)
 
 ///|
 fn PartialMergedDictionary::new(
   name : String,
-  members : Array[DictionaryMember],
+  members : Array[@parser.DictionaryMember],
   inheritance : String?,
 ) -> PartialMergedDictionary {
   PartialMergedDictionary::{ name, inheritance, members }
@@ -18,7 +18,7 @@ fn PartialMergedDictionary::new(
 ///|
 fn PartialMergedDictionary::merge(
   self : PartialMergedDictionary,
-  members : Array[DictionaryMember],
+  members : Array[@parser.DictionaryMember],
   inheritance : String?,
 ) -> PartialMergedDictionary {
   let inheritance = match inheritance {
@@ -33,9 +33,9 @@ test "MergedDictionary::merge() combines members and inheritance" {
   let dict1 = PartialMergedDictionary::new("ElementInit", [], None)
   let _dict2 = dict1.merge(
     [
-      DictionaryMember::{
+      @parser.DictionaryMember::{
         extended_attributes: [],
-        type_: Type::Identifier("DOMString"),
+        type_: @parser.Type::Identifier("DOMString"),
         name: "id",
         required: false,
         default_value: Some(@parser.DefaultValue::String("")),

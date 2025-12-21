@@ -5,11 +5,11 @@ pub struct PartialMerged {
   interfaces : Map[String, PartialMergedInterface]
   mixins : Map[String, PartialMergedMixin]
   dictionaries : Map[String, PartialMergedDictionary]
-  enums : Map[String, EnumDefinition]
-  typedefs : Map[String, TypedefDefinition]
-  callback_functions : Map[String, CallbackFunctionDefinition]
-  callback_interfaces : Map[String, CallbackInterfaceDefinition]
-  include_statements : Array[IncludesStatement]
+  enums : Map[String, @parser.EnumDefinition]
+  typedefs : Map[String, @parser.TypedefDefinition]
+  callback_functions : Map[String, @parser.CallbackFunctionDefinition]
+  callback_interfaces : Map[String, @parser.CallbackInterfaceDefinition]
+  include_statements : Array[@parser.IncludesStatement]
 } derive(Show, ToJson)
 
 ///|
@@ -17,7 +17,7 @@ pub struct PartialMerged {
 fn PartialMerged::merge_interface(
   self : PartialMerged,
   name : String,
-  members : Array[InterfaceMemberExtendedAttributes],
+  members : Array[@parser.InterfaceMemberExtendedAttributes],
   inheritance : String?,
 ) -> Unit {
   match self.interfaces.get(name) {
@@ -34,7 +34,7 @@ fn PartialMerged::merge_interface(
 fn PartialMerged::merge_mixin(
   self : PartialMerged,
   name : String,
-  members : Array[InterfaceMemberExtendedAttributes],
+  members : Array[@parser.InterfaceMemberExtendedAttributes],
 ) -> Unit {
   match self.mixins.get(name) {
     Some(current) => self.mixins[name] = current.merge(members)
@@ -47,7 +47,7 @@ fn PartialMerged::merge_mixin(
 fn PartialMerged::merge_dictionary(
   self : PartialMerged,
   name : String,
-  members : Array[DictionaryMember],
+  members : Array[@parser.DictionaryMember],
   inheritance : String?,
 ) -> Unit {
   match self.dictionaries.get(name) {
@@ -63,7 +63,7 @@ fn PartialMerged::merge_dictionary(
 ///|
 /// Merges partial definitions from filtered IDL definitions
 pub fn merge_partials(
-  filtered : Array[DefinitionExtendedAttributes],
+  filtered : Array[@parser.DefinitionExtendedAttributes],
 ) -> PartialMerged {
   let partial_merged = PartialMerged::{
     interfaces: Map::new(),
