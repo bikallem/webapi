@@ -74,8 +74,10 @@ pub enum Emit {
 //============================ Emit Helpers ============================
 
 ///|
+/// Determine argument type and any additional emits needed
 fn arg_type(
   type_ : @parser.Type,
+  type_name : String,
   method_name : String,
   arg_name : String,
   type_registry : @type_registry.TypeRegistry,
@@ -83,12 +85,12 @@ fn arg_type(
   let emits = []
   match type_ {
     Union(options) => {
-      let type_name = "T\{to_pascal_case(method_name)}\{to_pascal_case(arg_name)}Arg"
-      emits.push(Emit::UnionArgTrait(type_name))
+      let union_type_name = "T\{type_name}\{to_pascal_case(method_name)}\{to_pascal_case(arg_name)}Arg"
+      emits.push(Emit::UnionArgTrait(union_type_name))
       for option in options {
-        emits.push(Emit::UnionArgTraitImpl(option.type_, type_name))
+        emits.push(Emit::UnionArgTraitImpl(option.type_, union_type_name))
       }
-      (ArgType::Union("&\{type_name}"), emits)
+      (ArgType::Union("&\{union_type_name}"), emits)
     }
     Identifier(name) => {
       let name = if type_registry.is_interface(name) {
@@ -100,7 +102,7 @@ fn arg_type(
     }
     Nullable(type_) =>
       // TODO: what happens if the nullable type is a union and none of the options are identifiers?
-      arg_type(type_, method_name, arg_name, type_registry)
+      arg_type(type_, type_name, method_name, arg_name, type_registry)
     _ => (ArgType::UnresolvedType(type_), emits)
   }
 }
