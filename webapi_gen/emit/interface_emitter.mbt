@@ -31,7 +31,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         arg.type_.type_,
         method_name,
         arg.name,
-        @type_registry.TypeRegistry::new([]), // empty registry since we don't need it here
+        self.type_registry,
       )
       // Push any additional emits needed for the arg type, e.g. union arg traits
       emits.push_iter(arg_emits.iter())
