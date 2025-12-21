@@ -16,7 +16,7 @@ fn emit_global_binding(
   interface_name : String,
   js_property : String,
 ) -> String {
-  let ffi_name = "\{global_name}_ffi"
+  let ffi_name = "global_\{global_name}_ffi"
   let buf = StringBuilder::new()
   buf.write_string("///|\n")
   buf.write_string(
@@ -58,13 +58,16 @@ pub fn emit_globals(flattened : @flattened_idl.FlattenedIdl) -> String {
 ///|
 test "emit_global_binding" {
   let result = emit_global_binding("document", "Document", "document")
-  let expected =
-    #|///|
-    #|extern "js" fn document_ffi() -> Document = "() => document"
-    #|
-    #|///|
-    #|pub let document : Document = document_ffi()
-  inspect(result, content=expected)
+  inspect(
+    result,
+    content=(
+      #|///|
+      #|extern "js" fn global_document_ffi() -> Document = "() => document"
+      #|
+      #|///|
+      #|pub let document : Document = global_document_ffi()
+    ),
+  )
 }
 
 ///|
@@ -82,10 +85,10 @@ test "emit_globals with Document interface" {
       #|// Do not edit manually
       #|
       #|///|
-      #|extern "js" fn document_ffi() -> Document = "() => document"
+      #|extern "js" fn global_document_ffi() -> Document = "() => document"
       #|
       #|///|
-      #|pub let document : Document = document_ffi()
+      #|pub let document : Document = global_document_ffi()
       #|
     ),
   )
@@ -107,16 +110,16 @@ test "emit_globals with multiple interfaces" {
       #|// Do not edit manually
       #|
       #|///|
-      #|extern "js" fn document_ffi() -> Document = "() => document"
+      #|extern "js" fn global_document_ffi() -> Document = "() => document"
       #|
       #|///|
-      #|pub let document : Document = document_ffi()
+      #|pub let document : Document = global_document_ffi()
       #|
       #|///|
-      #|extern "js" fn window_ffi() -> Window = "() => window"
+      #|extern "js" fn global_window_ffi() -> Window = "() => window"
       #|
       #|///|
-      #|pub let window : Window = window_ffi()
+      #|pub let window : Window = global_window_ffi()
       #|
     ),
   )
