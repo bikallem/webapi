@@ -10,37 +10,18 @@ pub struct FlattenedIdl {
 } derive(Show, ToJson)
 
 ///|
-/// Returns the transitive inheritance chain (direct parent first) for an
-/// interface name.
-///
-/// Example: `HTMLElement` -> `["Element", "Node", "EventTarget"]`.
-///
-/// If the interface is unknown, or a parent is missing, the chain is truncated.
-/// Cycles are detected and terminate the walk.
-pub fn get_interface_ancestors(
-  idl : FlattenedIdl,
+/// Merged dictionary IR with all inherited members combined.
+pub(all) struct MergedDictionaryIR {
+  name : String
+  members : Array[DictionaryMember]
+} derive(Show, ToJson)
+
+///|
+fn MergedDictionaryIR::new(
   name : String,
-) -> Array[String] {
-  if not(idl.interfaces.contains(name)) {
-    return []
-  }
-  let ancestors : Array[String] = []
-  let visited : @hashset.HashSet[String] = @hashset.HashSet::from_array([name])
-  let mut current = name
-  while true {
-    guard idl.interfaces.get(current) is Some(iface) else { break }
-    match iface.inheritance {
-      None => break
-      Some(parent) if visited.contains(parent) ||
-        not(idl.interfaces.contains(parent)) => break
-      Some(parent) => {
-        ancestors.push(parent)
-        visited.add(parent)
-        current = parent
-      }
-    }
-  }
-  ancestors
+  members : Array[DictionaryMember],
+) -> MergedDictionaryIR {
+  MergedDictionaryIR::{ name, members }
 }
 
 ///|
@@ -131,16 +112,35 @@ pub fn flatten(
 }
 
 ///|
-/// Merged dictionary IR with all inherited members combined.
-pub(all) struct MergedDictionaryIR {
-  name : String
-  members : Array[DictionaryMember]
-} derive(Show, ToJson)
-
-///|
-fn MergedDictionaryIR::new(
+/// Returns the transitive inheritance chain (direct parent first) for an
+/// interface name.
+///
+/// Example: `HTMLElement` -> `["Element", "Node", "EventTarget"]`.
+///
+/// If the interface is unknown, or a parent is missing, the chain is truncated.
+/// Cycles are detected and terminate the walk.
+pub fn get_interface_ancestors(
+  idl : FlattenedIdl,
   name : String,
-  members : Array[DictionaryMember],
-) -> MergedDictionaryIR {
-  MergedDictionaryIR::{ name, members }
+) -> Array[String] {
+  if not(idl.interfaces.contains(name)) {
+    return []
+  }
+  let ancestors : Array[String] = []
+  let visited : @hashset.HashSet[String] = @hashset.HashSet::from_array([name])
+  let mut current = name
+  while true {
+    guard idl.interfaces.get(current) is Some(iface) else { break }
+    match iface.inheritance {
+      None => break
+      Some(parent) if visited.contains(parent) ||
+        not(idl.interfaces.contains(parent)) => break
+      Some(parent) => {
+        ancestors.push(parent)
+        visited.add(parent)
+        current = parent
+      }
+    }
+  }
+  ancestors
 }
