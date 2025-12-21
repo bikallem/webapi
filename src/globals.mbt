@@ -1,0 +1,14 @@
+// Auto-generated MoonBit bindings for global objects
+// Do not edit manually
+
+///|
+extern "js" fn global_document_ffi() -> Document = "() => document"
+
+///|
+pub let document : Document = global_document_ffi()
+
+///|
+extern "js" fn global_window_ffi() -> Window = "() => window"
+
+///|
+pub let window : Window = global_window_ffi()
