@@ -38,7 +38,7 @@ pub fn DragEventInit::new(
   button? : Int = 0,
   buttons? : UInt = 0,
   related_target? : &TEventTarget = JsValue::null(),
-  data_transfer? : DataTransfer = JsValue::null(),
+  data_transfer? : &TDataTransfer = JsValue::null(),
 ) -> DragEventInit {
   drag_event_init_ffi(
     TJsValue::to_js(screen_x),

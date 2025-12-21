@@ -85,11 +85,77 @@ pub impl TElementScrollIntoViewArgArg for ScrollIntoViewOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub(open) trait TElementPrependNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TElementPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementAppendNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TElementAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementReplaceChildrenNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementReplaceChildrenNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TElementReplaceChildrenNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementBeforeNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementBeforeNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TElementBeforeNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementAfterNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementAfterNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TElementAfterNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementReplaceWithNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementReplaceWithNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TElementReplaceWithNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 pub trait TElement: TNode {
   has_attributes(self : Self) -> Bool = _
   get_attribute_names(self : Self) -> Array[String] = _
-  get_attribute(self : Self, qualified_name : String) -> JsValue = _
-  get_attribute_ns(self : Self, namespace_ : String, local_name : String) -> JsValue = _
+  get_attribute(self : Self, qualified_name : String) -> String = _
+  get_attribute_ns(self : Self, namespace_ : String, local_name : String) -> String = _
   set_attribute(
     self : Self,
     qualified_name : String,
@@ -106,13 +172,13 @@ pub trait TElement: TNode {
   toggle_attribute(self : Self, qualified_name : String, force? : Bool) -> Bool = _
   has_attribute(self : Self, qualified_name : String) -> Bool = _
   has_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Bool = _
-  get_attribute_node(self : Self, qualified_name : String) -> JsValue = _
-  get_attribute_node_ns(self : Self, namespace_ : String, local_name : String) -> JsValue = _
-  set_attribute_node(self : Self, attr : &TAttr) -> JsValue = _
-  set_attribute_node_ns(self : Self, attr : &TAttr) -> JsValue = _
+  get_attribute_node(self : Self, qualified_name : String) -> Attr = _
+  get_attribute_node_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
+  set_attribute_node(self : Self, attr : &TAttr) -> Attr = _
+  set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr = _
   remove_attribute_node(self : Self, attr : &TAttr) -> Attr = _
   attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRoot = _
-  closest(self : Self, selectors : String) -> JsValue = _
+  closest(self : Self, selectors : String) -> Element = _
   matches(self : Self, selectors : String) -> Bool = _
   webkit_matches_selector(self : Self, selectors : String) -> Bool = _
   get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection = _
@@ -122,7 +188,7 @@ pub trait TElement: TNode {
     local_name : String,
   ) -> HTMLCollection = _
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
-  insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> JsValue = _
+  insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> Element = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
   set_html_unsafe(self : Self, html : &TElementSetHtmlUnsafeHtmlArg) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
@@ -141,6 +207,35 @@ pub trait TElement: TNode {
   scroll_to_2(self : Self, x : Double, y : Double) -> JsValue = _
   scroll_by(self : Self, options? : ScrollToOptions) -> JsValue = _
   scroll_by_2(self : Self, x : Double, y : Double) -> JsValue = _
+  prepend(self : Self, nodes : &TElementPrependNodesArg) -> Unit = _
+  append(self : Self, nodes : &TElementAppendNodesArg) -> Unit = _
+  replace_children(self : Self, nodes : &TElementReplaceChildrenNodesArg) -> Unit = _
+  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
+  query_selector(self : Self, selectors : String) -> Element = _
+  query_selector_all(self : Self, selectors : String) -> NodeList = _
+  before(self : Self, nodes : &TElementBeforeNodesArg) -> Unit = _
+  after(self : Self, nodes : &TElementAfterNodesArg) -> Unit = _
+  replace_with(self : Self, nodes : &TElementReplaceWithNodesArg) -> Unit = _
+  remove(self : Self) -> Unit = _
+  get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[DOMQuad] = _
+  convert_quad_from_node(
+    self : Self,
+    quad : DOMQuadInit,
+    from : GeometryNode,
+    options? : ConvertCoordinateOptions,
+  ) -> DOMQuad = _
+  convert_rect_from_node(
+    self : Self,
+    rect : &TDOMRectReadOnly,
+    from : GeometryNode,
+    options? : ConvertCoordinateOptions,
+  ) -> DOMQuad = _
+  convert_point_from_node(
+    self : Self,
+    point : DOMPointInit,
+    from : GeometryNode,
+    options? : ConvertCoordinateOptions,
+  ) -> DOMPoint = _
 }
 
 ///|
@@ -163,10 +258,10 @@ impl TElement with get_attribute_names(self : Self) -> Array[String] {
 extern "js" fn element_get_attribute_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> JsValue = "(obj, qualified_name) => obj.getAttribute(obj, qualified_name)"
+) -> String = "(obj, qualified_name) => obj.getAttribute(obj, qualified_name)"
 
 ///|
-impl TElement with get_attribute(self : Self, qualified_name : String) -> JsValue {
+impl TElement with get_attribute(self : Self, qualified_name : String) -> String {
   element_get_attribute_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
@@ -178,14 +273,14 @@ extern "js" fn element_get_attribute_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNS(obj, namespace_, local_name)"
+) -> String = "(obj, namespace_, local_name) => obj.getAttributeNS(obj, namespace_, local_name)"
 
 ///|
 impl TElement with get_attribute_ns(
   self : Self,
   namespace_ : String,
   local_name : String,
-) -> JsValue {
+) -> String {
   element_get_attribute_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
@@ -328,10 +423,10 @@ impl TElement with has_attribute_ns(
 extern "js" fn element_get_attribute_node_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> JsValue = "(obj, qualified_name) => obj.getAttributeNode(obj, qualified_name)"
+) -> Attr = "(obj, qualified_name) => obj.getAttributeNode(obj, qualified_name)"
 
 ///|
-impl TElement with get_attribute_node(self : Self, qualified_name : String) -> JsValue {
+impl TElement with get_attribute_node(self : Self, qualified_name : String) -> Attr {
   element_get_attribute_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
@@ -343,14 +438,14 @@ extern "js" fn element_get_attribute_node_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNodeNS(obj, namespace_, local_name)"
+) -> Attr = "(obj, namespace_, local_name) => obj.getAttributeNodeNS(obj, namespace_, local_name)"
 
 ///|
 impl TElement with get_attribute_node_ns(
   self : Self,
   namespace_ : String,
   local_name : String,
-) -> JsValue {
+) -> Attr {
   element_get_attribute_node_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
@@ -362,10 +457,10 @@ impl TElement with get_attribute_node_ns(
 extern "js" fn element_set_attribute_node_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setAttributeNode(obj, attr)"
+) -> Attr = "(obj, attr) => obj.setAttributeNode(obj, attr)"
 
 ///|
-impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> JsValue {
+impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr {
   element_set_attribute_node_ffi(TJsValue::to_js(self), TJsValue::to_js(attr))
 }
 
@@ -373,10 +468,10 @@ impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> JsValue {
 extern "js" fn element_set_attribute_node_ns_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setAttributeNodeNS(obj, attr)"
+) -> Attr = "(obj, attr) => obj.setAttributeNodeNS(obj, attr)"
 
 ///|
-impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> JsValue {
+impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr {
   element_set_attribute_node_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -412,10 +507,10 @@ impl TElement with attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRo
 extern "js" fn element_closest_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> JsValue = "(obj, selectors) => obj.closest(obj, selectors)"
+) -> Element = "(obj, selectors) => obj.closest(obj, selectors)"
 
 ///|
-impl TElement with closest(self : Self, selectors : String) -> JsValue {
+impl TElement with closest(self : Self, selectors : String) -> Element {
   element_closest_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
 }
 
@@ -497,14 +592,14 @@ extern "js" fn element_insert_adjacent_element_ffi(
   obj : JsValue,
   where_ : JsValue,
   element : JsValue,
-) -> JsValue = "(obj, where_, element) => obj.insertAdjacentElement(obj, where_, element)"
+) -> Element = "(obj, where_, element) => obj.insertAdjacentElement(obj, where_, element)"
 
 ///|
 impl TElement with insert_adjacent_element(
   self : Self,
   where_ : String,
   element : &TElement,
-) -> JsValue {
+) -> Element {
   element_insert_adjacent_element_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(where_),
@@ -705,5 +800,194 @@ impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsValue {
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
+  )
+}
+
+///|
+extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
+
+///|
+impl TElement with prepend(self : Self, nodes : &TElementPrependNodesArg) -> Unit {
+  element_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
+
+///|
+impl TElement with append(self : Self, nodes : &TElementAppendNodesArg) -> Unit {
+  element_append_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn element_replace_children_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.replaceChildren(obj, nodes)"
+
+///|
+impl TElement with replace_children(
+  self : Self,
+  nodes : &TElementReplaceChildrenNodesArg,
+) -> Unit {
+  element_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn element_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "(obj, node, child) => obj.moveBefore(obj, node, child)"
+
+///|
+impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
+  element_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
+}
+
+///|
+extern "js" fn element_query_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> Element = "(obj, selectors) => obj.querySelector(obj, selectors)"
+
+///|
+impl TElement with query_selector(self : Self, selectors : String) -> Element {
+  element_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
+}
+
+///|
+extern "js" fn element_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> NodeList = "(obj, selectors) => obj.querySelectorAll(obj, selectors)"
+
+///|
+impl TElement with query_selector_all(self : Self, selectors : String) -> NodeList {
+  element_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  )
+}
+
+///|
+extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
+
+///|
+impl TElement with before(self : Self, nodes : &TElementBeforeNodesArg) -> Unit {
+  element_before_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(obj, nodes)"
+
+///|
+impl TElement with after(self : Self, nodes : &TElementAfterNodesArg) -> Unit {
+  element_after_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(obj, nodes)"
+
+///|
+impl TElement with replace_with(
+  self : Self,
+  nodes : &TElementReplaceWithNodesArg,
+) -> Unit {
+  element_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove(obj)"
+
+///|
+impl TElement with remove(self : Self) -> Unit {
+  element_remove_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_get_box_quads_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(obj, options)"
+
+///|
+impl TElement with get_box_quads(
+  self : Self,
+  options? : BoxQuadOptions = BoxQuadOptions::empty(),
+) -> Array[DOMQuad] {
+  element_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+}
+
+///|
+extern "js" fn element_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(obj, quad, from, options)"
+
+///|
+impl TElement with convert_quad_from_node(
+  self : Self,
+  quad : DOMQuadInit,
+  from : GeometryNode,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> DOMQuad {
+  element_convert_quad_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(quad),
+    TJsValue::to_js(from),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn element_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(obj, rect, from, options)"
+
+///|
+impl TElement with convert_rect_from_node(
+  self : Self,
+  rect : &TDOMRectReadOnly,
+  from : GeometryNode,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> DOMQuad {
+  element_convert_rect_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(rect),
+    TJsValue::to_js(from),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn element_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(obj, point, from, options)"
+
+///|
+impl TElement with convert_point_from_node(
+  self : Self,
+  point : DOMPointInit,
+  from : GeometryNode,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> DOMPoint {
+  element_convert_point_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+    TJsValue::to_js(from),
+    TJsValue::to_js(options),
   )
 }

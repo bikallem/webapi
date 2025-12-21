@@ -35,7 +35,7 @@ pub fn HTMLCanvasElement::new() -> HTMLCanvasElement {
 
 ///|
 pub trait THTMLCanvasElement: THTMLElement {
-  get_context(self : Self, context_id : String, options? : JsValue) -> JsValue = _
+  get_context(self : Self, context_id : String, options? : JsValue) -> RenderingContext = _
   to_data_url(self : Self, type_? : String, quality? : JsValue) -> String = _
   to_blob(
     self : Self,
@@ -51,14 +51,14 @@ extern "js" fn html_canvas_element_get_context_ffi(
   obj : JsValue,
   context_id : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, context_id, options) => obj.getContext(obj, context_id, options)"
+) -> RenderingContext = "(obj, context_id, options) => obj.getContext(obj, context_id, options)"
 
 ///|
 impl THTMLCanvasElement with get_context(
   self : Self,
   context_id : String,
   options? : JsValue = JsValue::null(),
-) -> JsValue {
+) -> RenderingContext {
   html_canvas_element_get_context_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(context_id),

@@ -63,7 +63,7 @@ pub impl THTMLSelectElementAddBeforeArg for Int with to_js(self : Int) -> JsValu
 
 ///|
 pub trait THTMLSelectElement: THTMLElement {
-  named_item(self : Self, name : String) -> JsValue = _
+  named_item(self : Self, name : String) -> HTMLOptionElement = _
   add(
     self : Self,
     element : &THTMLSelectElementAddElementArg,
@@ -81,10 +81,10 @@ pub trait THTMLSelectElement: THTMLElement {
 extern "js" fn html_select_element_named_item_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsValue = "(obj, name) => obj.namedItem(obj, name)"
+) -> HTMLOptionElement = "(obj, name) => obj.namedItem(obj, name)"
 
 ///|
-impl THTMLSelectElement with named_item(self : Self, name : String) -> JsValue {
+impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement {
   html_select_element_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),

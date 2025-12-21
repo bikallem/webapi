@@ -1,0 +1,122 @@
+///|
+#external
+pub type CSSStyleSheet
+
+///|
+pub impl TJsValue for CSSStyleSheet with to_js(self : CSSStyleSheet) -> JsValue = "%identity"
+
+///|
+pub fn[T : TCSSStyleSheet] CSSStyleSheet::into(self : CSSStyleSheet) -> T = "%identity"
+
+///|
+pub impl TCSSStyleSheet for CSSStyleSheet
+
+///|
+pub impl TStyleSheet for CSSStyleSheet
+
+///|
+extern "js" fn css_style_sheet_ffi(options : JsValue) -> CSSStyleSheet = "(options) => new CSSStyleSheet(options)"
+
+///|
+pub fn CSSStyleSheet::new(
+  options? : CSSStyleSheetInit = CSSStyleSheetInit::empty(),
+) -> CSSStyleSheet {
+  css_style_sheet_ffi(TJsValue::to_js(options))
+}
+
+///|
+pub trait TCSSStyleSheet: TStyleSheet {
+  insert_rule(self : Self, rule : CSSOMString, index? : UInt) -> UInt = _
+  delete_rule(self : Self, index : UInt) -> Unit = _
+  replace(self : Self, text : String) -> JsValue = _
+  replace_sync(self : Self, text : String) -> Unit = _
+  add_rule(self : Self, selector? : String, style? : String, index? : UInt) -> Int = _
+  remove_rule(self : Self, index? : UInt) -> Unit = _
+}
+
+///|
+extern "js" fn css_style_sheet_insert_rule_ffi(
+  obj : JsValue,
+  rule : JsValue,
+  index : JsValue,
+) -> UInt = "(obj, rule, index) => obj.insertRule(obj, rule, index)"
+
+///|
+impl TCSSStyleSheet with insert_rule(
+  self : Self,
+  rule : CSSOMString,
+  index? : UInt = 0,
+) -> UInt {
+  css_style_sheet_insert_rule_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(rule),
+    TJsValue::to_js(index),
+  )
+}
+
+///|
+extern "js" fn css_style_sheet_delete_rule_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> Unit = "(obj, index) => obj.deleteRule(obj, index)"
+
+///|
+impl TCSSStyleSheet with delete_rule(self : Self, index : UInt) -> Unit {
+  css_style_sheet_delete_rule_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+}
+
+///|
+extern "js" fn css_style_sheet_replace_ffi(
+  obj : JsValue,
+  text : JsValue,
+) -> JsValue = "(obj, text) => obj.replace(obj, text)"
+
+///|
+impl TCSSStyleSheet with replace(self : Self, text : String) -> JsValue {
+  css_style_sheet_replace_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
+}
+
+///|
+extern "js" fn css_style_sheet_replace_sync_ffi(
+  obj : JsValue,
+  text : JsValue,
+) -> Unit = "(obj, text) => obj.replaceSync(obj, text)"
+
+///|
+impl TCSSStyleSheet with replace_sync(self : Self, text : String) -> Unit {
+  css_style_sheet_replace_sync_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
+}
+
+///|
+extern "js" fn css_style_sheet_add_rule_ffi(
+  obj : JsValue,
+  selector : JsValue,
+  style : JsValue,
+  index : JsValue,
+) -> Int = "(obj, selector, style, index) => obj.addRule(obj, selector, style, index)"
+
+///|
+impl TCSSStyleSheet with add_rule(
+  self : Self,
+  selector? : String = "undefined",
+  style? : String = "undefined",
+  index? : UInt,
+) -> Int {
+  css_style_sheet_add_rule_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selector),
+    TJsValue::to_js(style),
+    opt_to_js(index),
+  )
+}
+
+///|
+extern "js" fn css_style_sheet_remove_rule_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> Unit = "(obj, index) => obj.removeRule(obj, index)"
+
+///|
+impl TCSSStyleSheet with remove_rule(self : Self, index? : UInt = 0) -> Unit {
+  css_style_sheet_remove_rule_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+}

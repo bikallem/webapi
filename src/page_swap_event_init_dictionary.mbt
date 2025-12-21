@@ -28,7 +28,7 @@ pub fn PageSwapEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  activation? : NavigationActivation = JsValue::null(),
+  activation? : &TNavigationActivation = JsValue::null(),
   view_transition? : ViewTransition = JsValue::null(),
 ) -> PageSwapEventInit {
   page_swap_event_init_ffi(

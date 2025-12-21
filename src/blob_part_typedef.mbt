@@ -1,10 +1,17 @@
 ///|
+#external
+pub type BlobPart
+
+///|
+pub impl TJsValue for BlobPart with to_js(self : BlobPart) -> JsValue = "%identity"
+
+///|
 pub(open) trait TBlobPart {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub fn[T : TBlobPart] &TBlobPart::into(self : &TBlobPart) -> T = "%identity"
+pub fn[T : TBlobPart] BlobPart::into(self : BlobPart) -> T = "%identity"
 
 ///|
 pub impl TBlobPart for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"

@@ -35,15 +35,15 @@ pub fn HTMLEmbedElement::new() -> HTMLEmbedElement {
 
 ///|
 pub trait THTMLEmbedElement: THTMLElement {
-  get_svg_document(self : Self) -> JsValue = _
+  get_svg_document(self : Self) -> Document = _
 }
 
 ///|
 extern "js" fn html_embed_element_get_svg_document_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
+) -> Document = "(obj) => obj.getSVGDocument(obj)"
 
 ///|
-impl THTMLEmbedElement with get_svg_document(self : Self) -> JsValue {
+impl THTMLEmbedElement with get_svg_document(self : Self) -> Document {
   html_embed_element_get_svg_document_ffi(TJsValue::to_js(self))
 }

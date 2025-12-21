@@ -35,15 +35,15 @@ pub fn HTMLIFrameElement::new() -> HTMLIFrameElement {
 
 ///|
 pub trait THTMLIFrameElement: THTMLElement {
-  get_svg_document(self : Self) -> JsValue = _
+  get_svg_document(self : Self) -> Document = _
 }
 
 ///|
 extern "js" fn htmli_frame_element_get_svg_document_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
+) -> Document = "(obj) => obj.getSVGDocument(obj)"
 
 ///|
-impl THTMLIFrameElement with get_svg_document(self : Self) -> JsValue {
+impl THTMLIFrameElement with get_svg_document(self : Self) -> Document {
   htmli_frame_element_get_svg_document_ffi(TJsValue::to_js(self))
 }

@@ -1,0 +1,113 @@
+///|
+#external
+pub type SVGTransform
+
+///|
+pub impl TJsValue for SVGTransform with to_js(self : SVGTransform) -> JsValue = "%identity"
+
+///|
+pub fn[T : TSVGTransform] SVGTransform::into(self : SVGTransform) -> T = "%identity"
+
+///|
+pub impl TSVGTransform for SVGTransform
+
+///|
+pub trait TSVGTransform: TJsValue {
+  set_matrix(self : Self, matrix? : DOMMatrix2DInit) -> Unit = _
+  set_translate(self : Self, tx : Float, ty : Float) -> Unit = _
+  set_scale(self : Self, sx : Float, sy : Float) -> Unit = _
+  set_rotate(self : Self, angle : Float, cx : Float, cy : Float) -> Unit = _
+  set_skew_x(self : Self, angle : Float) -> Unit = _
+  set_skew_y(self : Self, angle : Float) -> Unit = _
+}
+
+///|
+extern "js" fn svg_transform_set_matrix_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> Unit = "(obj, matrix) => obj.setMatrix(obj, matrix)"
+
+///|
+impl TSVGTransform with set_matrix(
+  self : Self,
+  matrix? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
+) -> Unit {
+  svg_transform_set_matrix_ffi(TJsValue::to_js(self), TJsValue::to_js(matrix))
+}
+
+///|
+extern "js" fn svg_transform_set_translate_ffi(
+  obj : JsValue,
+  tx : JsValue,
+  ty : JsValue,
+) -> Unit = "(obj, tx, ty) => obj.setTranslate(obj, tx, ty)"
+
+///|
+impl TSVGTransform with set_translate(self : Self, tx : Float, ty : Float) -> Unit {
+  svg_transform_set_translate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(tx),
+    TJsValue::to_js(ty),
+  )
+}
+
+///|
+extern "js" fn svg_transform_set_scale_ffi(
+  obj : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+) -> Unit = "(obj, sx, sy) => obj.setScale(obj, sx, sy)"
+
+///|
+impl TSVGTransform with set_scale(self : Self, sx : Float, sy : Float) -> Unit {
+  svg_transform_set_scale_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(sx),
+    TJsValue::to_js(sy),
+  )
+}
+
+///|
+extern "js" fn svg_transform_set_rotate_ffi(
+  obj : JsValue,
+  angle : JsValue,
+  cx : JsValue,
+  cy : JsValue,
+) -> Unit = "(obj, angle, cx, cy) => obj.setRotate(obj, angle, cx, cy)"
+
+///|
+impl TSVGTransform with set_rotate(
+  self : Self,
+  angle : Float,
+  cx : Float,
+  cy : Float,
+) -> Unit {
+  svg_transform_set_rotate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(angle),
+    TJsValue::to_js(cx),
+    TJsValue::to_js(cy),
+  )
+}
+
+///|
+extern "js" fn svg_transform_set_skew_x_ffi(
+  obj : JsValue,
+  angle : JsValue,
+) -> Unit = "(obj, angle) => obj.setSkewX(obj, angle)"
+
+///|
+impl TSVGTransform with set_skew_x(self : Self, angle : Float) -> Unit {
+  svg_transform_set_skew_x_ffi(TJsValue::to_js(self), TJsValue::to_js(angle))
+}
+
+///|
+extern "js" fn svg_transform_set_skew_y_ffi(
+  obj : JsValue,
+  angle : JsValue,
+) -> Unit = "(obj, angle) => obj.setSkewY(obj, angle)"
+
+///|
+impl TSVGTransform with set_skew_y(self : Self, angle : Float) -> Unit {
+  svg_transform_set_skew_y_ffi(TJsValue::to_js(self), TJsValue::to_js(angle))
+}

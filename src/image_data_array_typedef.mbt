@@ -1,12 +1,17 @@
 ///|
+#external
+pub type ImageDataArray
+
+///|
+pub impl TJsValue for ImageDataArray with to_js(self : ImageDataArray) -> JsValue = "%identity"
+
+///|
 pub(open) trait TImageDataArray {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub fn[T : TImageDataArray] &TImageDataArray::into(
-  self : &TImageDataArray,
-) -> T = "%identity"
+pub fn[T : TImageDataArray] ImageDataArray::into(self : ImageDataArray) -> T = "%identity"
 
 ///|
 pub impl TImageDataArray for Uint8ClampedArray with to_js(

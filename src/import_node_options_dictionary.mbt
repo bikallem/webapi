@@ -19,7 +19,7 @@ extern "js" fn import_node_options_ffi(
 
 ///|
 pub fn ImportNodeOptions::new(
-  custom_element_registry? : CustomElementRegistry,
+  custom_element_registry? : &TCustomElementRegistry,
   self_only? : Bool = false,
 ) -> ImportNodeOptions {
   import_node_options_ffi(

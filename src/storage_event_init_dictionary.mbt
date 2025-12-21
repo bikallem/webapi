@@ -38,7 +38,7 @@ pub fn StorageEventInit::new(
   old_value? : String = JsValue::null(),
   new_value? : String = JsValue::null(),
   url? : String = "",
-  storage_area? : Storage = JsValue::null(),
+  storage_area? : &TStorage = JsValue::null(),
 ) -> StorageEventInit {
   storage_event_init_ffi(
     TJsValue::to_js(bubbles),

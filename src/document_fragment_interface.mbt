@@ -28,4 +28,156 @@ pub fn DocumentFragment::new() -> DocumentFragment {
 }
 
 ///|
-pub trait TDocumentFragment: TNode {}
+pub(open) trait TDocumentFragmentPrependNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TDocumentFragmentPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TDocumentFragmentPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TDocumentFragmentAppendNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TDocumentFragmentAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TDocumentFragmentAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TDocumentFragmentReplaceChildrenNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TDocumentFragmentReplaceChildrenNodesArg for Node with to_js(
+  self : Node,
+) -> JsValue = "%identity"
+
+///|
+pub impl TDocumentFragmentReplaceChildrenNodesArg for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub trait TDocumentFragment: TNode {
+  get_element_by_id(self : Self, element_id : String) -> Element = _
+  prepend(self : Self, nodes : &TDocumentFragmentPrependNodesArg) -> Unit = _
+  append(self : Self, nodes : &TDocumentFragmentAppendNodesArg) -> Unit = _
+  replace_children(
+    self : Self,
+    nodes : &TDocumentFragmentReplaceChildrenNodesArg,
+  ) -> Unit = _
+  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
+  query_selector(self : Self, selectors : String) -> Element = _
+  query_selector_all(self : Self, selectors : String) -> NodeList = _
+}
+
+///|
+extern "js" fn document_fragment_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> Element = "(obj, element_id) => obj.getElementById(obj, element_id)"
+
+///|
+impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element {
+  document_fragment_get_element_by_id_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(element_id),
+  )
+}
+
+///|
+extern "js" fn document_fragment_prepend_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
+
+///|
+impl TDocumentFragment with prepend(
+  self : Self,
+  nodes : &TDocumentFragmentPrependNodesArg,
+) -> Unit {
+  document_fragment_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn document_fragment_append_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
+
+///|
+impl TDocumentFragment with append(
+  self : Self,
+  nodes : &TDocumentFragmentAppendNodesArg,
+) -> Unit {
+  document_fragment_append_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn document_fragment_replace_children_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.replaceChildren(obj, nodes)"
+
+///|
+impl TDocumentFragment with replace_children(
+  self : Self,
+  nodes : &TDocumentFragmentReplaceChildrenNodesArg,
+) -> Unit {
+  document_fragment_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn document_fragment_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "(obj, node, child) => obj.moveBefore(obj, node, child)"
+
+///|
+impl TDocumentFragment with move_before(
+  self : Self,
+  node : &TNode,
+  child : &TNode,
+) -> Unit {
+  document_fragment_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
+}
+
+///|
+extern "js" fn document_fragment_query_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> Element = "(obj, selectors) => obj.querySelector(obj, selectors)"
+
+///|
+impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element {
+  document_fragment_query_selector_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  )
+}
+
+///|
+extern "js" fn document_fragment_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> NodeList = "(obj, selectors) => obj.querySelectorAll(obj, selectors)"
+
+///|
+impl TDocumentFragment with query_selector_all(self : Self, selectors : String) -> NodeList {
+  document_fragment_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  )
+}

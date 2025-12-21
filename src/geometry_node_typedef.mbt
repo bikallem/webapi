@@ -1,19 +1,26 @@
 ///|
+#external
+pub type GeometryNode
+
+///|
+pub impl TJsValue for GeometryNode with to_js(self : GeometryNode) -> JsValue = "%identity"
+
+///|
 pub(open) trait TGeometryNode {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub fn[T : TGeometryNode] &TGeometryNode::into(self : &TGeometryNode) -> T = "%identity"
+pub fn[T : TGeometryNode] GeometryNode::into(self : GeometryNode) -> T = "%identity"
 
 ///|
-pub impl TGeometryNode for &TText with to_js(self : &TText) -> JsValue = "%identity"
+pub impl TGeometryNode for Text with to_js(self : Text) -> JsValue = "%identity"
 
 ///|
-pub impl TGeometryNode for &TElement with to_js(self : &TElement) -> JsValue = "%identity"
+pub impl TGeometryNode for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
 pub impl TGeometryNode for CSSPseudoElement with to_js(self : CSSPseudoElement) -> JsValue = "%identity"
 
 ///|
-pub impl TGeometryNode for &TDocument with to_js(self : &TDocument) -> JsValue = "%identity"
+pub impl TGeometryNode for Document with to_js(self : Document) -> JsValue = "%identity"

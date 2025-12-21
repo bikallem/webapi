@@ -26,7 +26,7 @@ pub fn FormDataEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  form_data : FormData,
+  form_data : &TFormData,
 ) -> FormDataEventInit {
   form_data_event_init_ffi(
     TJsValue::to_js(bubbles),

@@ -35,7 +35,7 @@ pub fn HTMLObjectElement::new() -> HTMLObjectElement {
 
 ///|
 pub trait THTMLObjectElement: THTMLElement {
-  get_svg_document(self : Self) -> JsValue = _
+  get_svg_document(self : Self) -> Document = _
   check_validity(self : Self) -> Bool = _
   report_validity(self : Self) -> Bool = _
   set_custom_validity(self : Self, error : String) -> Unit = _
@@ -44,10 +44,10 @@ pub trait THTMLObjectElement: THTMLElement {
 ///|
 extern "js" fn html_object_element_get_svg_document_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
+) -> Document = "(obj) => obj.getSVGDocument(obj)"
 
 ///|
-impl THTMLObjectElement with get_svg_document(self : Self) -> JsValue {
+impl THTMLObjectElement with get_svg_document(self : Self) -> Document {
   html_object_element_get_svg_document_ffi(TJsValue::to_js(self))
 }
 

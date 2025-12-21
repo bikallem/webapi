@@ -48,6 +48,8 @@ pub trait THTMLElement: TElement {
   show_popover(self : Self, options? : ShowPopoverOptions) -> Unit = _
   hide_popover(self : Self) -> Unit = _
   toggle_popover(self : Self, options? : &THTMLElementTogglePopoverOptionsArg) -> Bool = _
+  focus(self : Self, options? : FocusOptions) -> Unit = _
+  blur(self : Self) -> Unit = _
 }
 
 ///|
@@ -102,4 +104,23 @@ impl THTMLElement with toggle_popover(
   options? : &THTMLElementTogglePopoverOptionsArg = TogglePopoverOptions::empty(),
 ) -> Bool {
   html_element_toggle_popover_ffi(TJsValue::to_js(self), options.to_js())
+}
+
+///|
+extern "js" fn html_element_focus_ffi(obj : JsValue, options : JsValue) -> Unit = "(obj, options) => obj.focus(obj, options)"
+
+///|
+impl THTMLElement with focus(
+  self : Self,
+  options? : FocusOptions = FocusOptions::empty(),
+) -> Unit {
+  html_element_focus_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+}
+
+///|
+extern "js" fn html_element_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur(obj)"
+
+///|
+impl THTMLElement with blur(self : Self) -> Unit {
+  html_element_blur_ffi(TJsValue::to_js(self))
 }

@@ -13,9 +13,9 @@ pub impl TNamedNodeMap for NamedNodeMap
 
 ///|
 pub trait TNamedNodeMap: TJsValue {
-  get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> JsValue = _
-  set_named_item(self : Self, attr : &TAttr) -> JsValue = _
-  set_named_item_ns(self : Self, attr : &TAttr) -> JsValue = _
+  get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
+  set_named_item(self : Self, attr : &TAttr) -> Attr = _
+  set_named_item_ns(self : Self, attr : &TAttr) -> Attr = _
   remove_named_item(self : Self, qualified_name : String) -> Attr = _
   remove_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
 }
@@ -25,14 +25,14 @@ extern "js" fn named_node_map_get_named_item_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getNamedItemNS(obj, namespace_, local_name)"
+) -> Attr = "(obj, namespace_, local_name) => obj.getNamedItemNS(obj, namespace_, local_name)"
 
 ///|
 impl TNamedNodeMap with get_named_item_ns(
   self : Self,
   namespace_ : String,
   local_name : String,
-) -> JsValue {
+) -> Attr {
   named_node_map_get_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
@@ -44,10 +44,10 @@ impl TNamedNodeMap with get_named_item_ns(
 extern "js" fn named_node_map_set_named_item_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setNamedItem(obj, attr)"
+) -> Attr = "(obj, attr) => obj.setNamedItem(obj, attr)"
 
 ///|
-impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> JsValue {
+impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr {
   named_node_map_set_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -58,10 +58,10 @@ impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> JsValue {
 extern "js" fn named_node_map_set_named_item_ns_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setNamedItemNS(obj, attr)"
+) -> Attr = "(obj, attr) => obj.setNamedItemNS(obj, attr)"
 
 ///|
-impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> JsValue {
+impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr {
   named_node_map_set_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),

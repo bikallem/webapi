@@ -87,6 +87,39 @@ pub impl TDocumentWritelnTextArg for TrustedHTML with to_js(self : TrustedHTML) 
 pub impl TDocumentWritelnTextArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
+pub(open) trait TDocumentPrependNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TDocumentPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TDocumentPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TDocumentAppendNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TDocumentAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TDocumentAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub(open) trait TDocumentReplaceChildrenNodesArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TDocumentReplaceChildrenNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+
+///|
+pub impl TDocumentReplaceChildrenNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 pub trait TDocument: TNode {
   get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection = _
   get_elements_by_tag_name_ns(
@@ -135,7 +168,7 @@ pub trait TDocument: TNode {
   ) -> TreeWalker = _
   get_elements_by_name(self : Self, element_name : String) -> NodeList = _
   open(self : Self, unused1? : String, unused2? : String) -> Document = _
-  open_2(self : Self, url : String, name : String, features : String) -> JsValue = _
+  open_2(self : Self, url : String, name : String, features : String) -> WindowProxy = _
   close(self : Self) -> Unit = _
   write(self : Self, text : &TDocumentWriteTextArg) -> Unit = _
   writeln(self : Self, text : &TDocumentWritelnTextArg) -> Unit = _
@@ -154,14 +187,54 @@ pub trait TDocument: TNode {
   clear(self : Self) -> Unit = _
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
-  element_from_point(self : Self, x : Double, y : Double) -> JsValue = _
+  element_from_point(self : Self, x : Double, y : Double) -> Element = _
   elements_from_point(self : Self, x : Double, y : Double) -> Array[Element] = _
   caret_position_from_point(
     self : Self,
     x : Double,
     y : Double,
     options? : CaretPositionFromPointOptions,
-  ) -> JsValue = _
+  ) -> CaretPosition = _
+  get_element_by_id(self : Self, element_id : String) -> Element = _
+  prepend(self : Self, nodes : &TDocumentPrependNodesArg) -> Unit = _
+  append(self : Self, nodes : &TDocumentAppendNodesArg) -> Unit = _
+  replace_children(self : Self, nodes : &TDocumentReplaceChildrenNodesArg) -> Unit = _
+  move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
+  query_selector(self : Self, selectors : String) -> Element = _
+  query_selector_all(self : Self, selectors : String) -> NodeList = _
+  create_expression(
+    self : Self,
+    expression : String,
+    resolver? : XPathNSResolver,
+  ) -> XPathExpression = _
+  create_ns_resolver(self : Self, node_resolver : &TNode) -> Node = _
+  evaluate(
+    self : Self,
+    expression : String,
+    context_node : &TNode,
+    resolver? : XPathNSResolver,
+    type_? : UInt,
+    result? : &TXPathResult,
+  ) -> XPathResult = _
+  get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[DOMQuad] = _
+  convert_quad_from_node(
+    self : Self,
+    quad : DOMQuadInit,
+    from : GeometryNode,
+    options? : ConvertCoordinateOptions,
+  ) -> DOMQuad = _
+  convert_rect_from_node(
+    self : Self,
+    rect : &TDOMRectReadOnly,
+    from : GeometryNode,
+    options? : ConvertCoordinateOptions,
+  ) -> DOMQuad = _
+  convert_point_from_node(
+    self : Self,
+    point : DOMPointInit,
+    from : GeometryNode,
+    options? : ConvertCoordinateOptions,
+  ) -> DOMPoint = _
 }
 
 ///|
@@ -490,7 +563,7 @@ extern "js" fn document_open_2_ffi(
   url : JsValue,
   name : JsValue,
   features : JsValue,
-) -> JsValue = "(obj, url, name, features) => obj.open_2(obj, url, name, features)"
+) -> WindowProxy = "(obj, url, name, features) => obj.open_2(obj, url, name, features)"
 
 ///|
 impl TDocument with open_2(
@@ -498,7 +571,7 @@ impl TDocument with open_2(
   url : String,
   name : String,
   features : String,
-) -> JsValue {
+) -> WindowProxy {
   document_open_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
@@ -661,10 +734,10 @@ extern "js" fn document_element_from_point_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.elementFromPoint(obj, x, y)"
+) -> Element = "(obj, x, y) => obj.elementFromPoint(obj, x, y)"
 
 ///|
-impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> JsValue {
+impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element {
   document_element_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -696,7 +769,7 @@ extern "js" fn document_caret_position_from_point_ffi(
   x : JsValue,
   y : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, x, y, options) => obj.caretPositionFromPoint(obj, x, y, options)"
+) -> CaretPosition = "(obj, x, y, options) => obj.caretPositionFromPoint(obj, x, y, options)"
 
 ///|
 impl TDocument with caret_position_from_point(
@@ -704,11 +777,242 @@ impl TDocument with caret_position_from_point(
   x : Double,
   y : Double,
   options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
-) -> JsValue {
+) -> CaretPosition {
   document_caret_position_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn document_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> Element = "(obj, element_id) => obj.getElementById(obj, element_id)"
+
+///|
+impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element {
+  document_get_element_by_id_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(element_id),
+  )
+}
+
+///|
+extern "js" fn document_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
+
+///|
+impl TDocument with prepend(self : Self, nodes : &TDocumentPrependNodesArg) -> Unit {
+  document_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn document_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
+
+///|
+impl TDocument with append(self : Self, nodes : &TDocumentAppendNodesArg) -> Unit {
+  document_append_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn document_replace_children_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.replaceChildren(obj, nodes)"
+
+///|
+impl TDocument with replace_children(
+  self : Self,
+  nodes : &TDocumentReplaceChildrenNodesArg,
+) -> Unit {
+  document_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+}
+
+///|
+extern "js" fn document_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "(obj, node, child) => obj.moveBefore(obj, node, child)"
+
+///|
+impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
+  document_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
+}
+
+///|
+extern "js" fn document_query_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> Element = "(obj, selectors) => obj.querySelector(obj, selectors)"
+
+///|
+impl TDocument with query_selector(self : Self, selectors : String) -> Element {
+  document_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
+}
+
+///|
+extern "js" fn document_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> NodeList = "(obj, selectors) => obj.querySelectorAll(obj, selectors)"
+
+///|
+impl TDocument with query_selector_all(self : Self, selectors : String) -> NodeList {
+  document_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  )
+}
+
+///|
+extern "js" fn document_create_expression_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  resolver : JsValue,
+) -> XPathExpression = "(obj, expression, resolver) => obj.createExpression(obj, expression, resolver)"
+
+///|
+impl TDocument with create_expression(
+  self : Self,
+  expression : String,
+  resolver? : XPathNSResolver = JsValue::null(),
+) -> XPathExpression {
+  document_create_expression_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(expression),
+    TJsValue::to_js(resolver),
+  )
+}
+
+///|
+extern "js" fn document_create_ns_resolver_ffi(
+  obj : JsValue,
+  node_resolver : JsValue,
+) -> Node = "(obj, node_resolver) => obj.createNSResolver(obj, node_resolver)"
+
+///|
+impl TDocument with create_ns_resolver(self : Self, node_resolver : &TNode) -> Node {
+  document_create_ns_resolver_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node_resolver),
+  )
+}
+
+///|
+extern "js" fn document_evaluate_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  context_node : JsValue,
+  resolver : JsValue,
+  type_ : JsValue,
+  result : JsValue,
+) -> XPathResult = "(obj, expression, context_node, resolver, type_, result) => obj.evaluate(obj, expression, context_node, resolver, type_, result)"
+
+///|
+impl TDocument with evaluate(
+  self : Self,
+  expression : String,
+  context_node : &TNode,
+  resolver? : XPathNSResolver = JsValue::null(),
+  type_? : UInt = 0,
+  result? : &TXPathResult = JsValue::null(),
+) -> XPathResult {
+  document_evaluate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(expression),
+    TJsValue::to_js(context_node),
+    TJsValue::to_js(resolver),
+    TJsValue::to_js(type_),
+    TJsValue::to_js(result),
+  )
+}
+
+///|
+extern "js" fn document_get_box_quads_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(obj, options)"
+
+///|
+impl TDocument with get_box_quads(
+  self : Self,
+  options? : BoxQuadOptions = BoxQuadOptions::empty(),
+) -> Array[DOMQuad] {
+  document_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+}
+
+///|
+extern "js" fn document_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(obj, quad, from, options)"
+
+///|
+impl TDocument with convert_quad_from_node(
+  self : Self,
+  quad : DOMQuadInit,
+  from : GeometryNode,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> DOMQuad {
+  document_convert_quad_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(quad),
+    TJsValue::to_js(from),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn document_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(obj, rect, from, options)"
+
+///|
+impl TDocument with convert_rect_from_node(
+  self : Self,
+  rect : &TDOMRectReadOnly,
+  from : GeometryNode,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> DOMQuad {
+  document_convert_rect_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(rect),
+    TJsValue::to_js(from),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn document_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(obj, point, from, options)"
+
+///|
+impl TDocument with convert_point_from_node(
+  self : Self,
+  point : DOMPointInit,
+  from : GeometryNode,
+  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+) -> DOMPoint {
+  document_convert_point_from_node_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(point),
+    TJsValue::to_js(from),
     TJsValue::to_js(options),
   )
 }

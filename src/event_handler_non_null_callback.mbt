@@ -7,12 +7,10 @@ pub impl TJsValue for EventHandlerNonNull with to_js(self : EventHandlerNonNull)
 
 ///|
 extern "js" fn event_handler_non_null_ffi(
-  f : (&TEvent) -> JsValue,
+  f : (Event) -> JsValue,
 ) -> EventHandlerNonNull = "(f) => f"
 
 ///|
-pub fn EventHandlerNonNull::new(
-  f : (&TEvent) -> JsValue,
-) -> EventHandlerNonNull {
+pub fn EventHandlerNonNull::new(f : (Event) -> JsValue) -> EventHandlerNonNull {
   event_handler_non_null_ffi(f)
 }
