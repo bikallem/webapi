@@ -137,6 +137,8 @@ fn func_call_args(args : Array[MethodArg]) -> String {
     if (arg.type_ is Union(_) && arg.optional && arg.default_value is Some(_)) ||
       (arg.type_ is Union(_) && !arg.optional) {
       "\{arg_name}.to_js()"
+    } else if arg.type_ is Union(_) && arg.optional && arg.default_value is None {
+      "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n},"
     } else if arg.optional && arg.default_value is None {
       "opt_to_js(\{arg_name})"
     } else {
