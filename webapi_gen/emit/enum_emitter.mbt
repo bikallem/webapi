@@ -16,17 +16,30 @@ pub impl Emitter for EnumEmitter with emit(self : EnumEmitter, name : String) ->
     let variant_name = if original_value.is_empty() {
       "Empty"
     } else {
-      let chars = []
-      for c in original_value {
-        if c.is_ascii_alphabetic() {
-          chars.push(c)
-        } else {
-          chars.push('_')
-        }
-      }
-      to_pascal_case(String::from_array(chars))
+      enum_variant(original_value)
     }
     variants.push(EnumVariantEmit::{ variant_name, original_value })
   }
   (filename, [Emit::Enum(TypeName(enum_.name), variants)])
+}
+
+///|
+fn enum_variant(original_value : String) -> String {
+  if original_value.is_empty() {
+    "Empty"
+  } else {
+    let chars = []
+    for c in original_value {
+      if c.is_ascii_alphabetic() || c.is_ascii_digit() {
+        chars.push(c)
+      } else {
+        chars.push('_')
+      }
+    }
+    let variant = to_pascal_case(String::from_array(chars))
+    match variant.code_unit_at(0) {
+      '0'..='9' => "V" + variant
+      _ => variant
+    }
+  }
 }
