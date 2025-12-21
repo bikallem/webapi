@@ -2,7 +2,7 @@
 package "bikallem/webapi_gen/config"
 
 import(
-  "moonbitlang/core/json"
+  "moonbitlang/core/hashset"
 )
 
 // Values
@@ -15,17 +15,15 @@ pub struct GeneratorConfig {
   idl_dir : String
   output_dir : String
   templates_dir : String
+  core_interfaces : @hashset.HashSet[String]
   template_files : Array[String]
-  core_specs : Array[String]
-  core_interfaces : Array[String]
-  excluded_callbacks : Array[String]
-  excluded_typedefs : Array[String]
-  excluded_dictionary_prefixes : Array[String]
+  core_specs : @hashset.HashSet[String]
+  excluded_callbacks : @hashset.HashSet[String]
+  excluded_typedefs : @hashset.HashSet[String]
+  excluded_dictionary_prefixes : @hashset.HashSet[String]
 }
-pub impl Eq for GeneratorConfig
 pub impl Show for GeneratorConfig
 pub impl ToJson for GeneratorConfig
-pub impl @json.FromJson for GeneratorConfig
 
 // Type aliases
 

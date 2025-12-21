@@ -4,11 +4,13 @@ let default_config_file : String = "config.toml"
 
 ///|
 /// Check if a filename matches one of the core specs
-fn is_core_spec(filename : String, core_specs : Array[String]) -> Bool {
+fn is_core_spec(
+  filename : String,
+  core_specs : @hashset.HashSet[String],
+) -> Bool {
   // Remove .idl extension to get spec name
   match filename.strip_suffix(".idl") {
-    Some(spec_name) =>
-      core_specs.iter().any(fn(s) { s == spec_name.to_string() })
+    Some(spec_name) => core_specs.contains(spec_name.to_string())
     None => false
   }
 }
@@ -62,9 +64,9 @@ fn filter_idl(
   defns : Array[@parser.DefinitionExtendedAttributes],
   logger : (String) -> Unit,
 ) -> Array[@parser.DefinitionExtendedAttributes] {
-  let core_interfaces = @hashset.from_iter(config.core_interfaces.iter())
-  let excluded_callbacks = @hashset.from_iter(config.excluded_callbacks.iter())
-  let excluded_typedefs = @hashset.from_iter(config.excluded_typedefs.iter())
+  let core_interfaces = config.core_interfaces
+  let excluded_callbacks = config.excluded_callbacks
+  let excluded_typedefs = config.excluded_typedefs
   let filtered_defns = []
   fn is_dictionary_prefix_excluded(name : String) -> Bool {
     config.excluded_dictionary_prefixes

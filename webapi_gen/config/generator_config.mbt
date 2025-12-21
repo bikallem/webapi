@@ -4,13 +4,13 @@ pub struct GeneratorConfig {
   idl_dir : String
   output_dir : String
   templates_dir : String
+  core_interfaces : @hashset.HashSet[String]
   template_files : Array[String]
-  core_specs : Array[String]
-  core_interfaces : Array[String]
-  excluded_callbacks : Array[String]
-  excluded_typedefs : Array[String]
-  excluded_dictionary_prefixes : Array[String]
-} derive(Show, Eq, ToJson, FromJson)
+  core_specs : @hashset.HashSet[String]
+  excluded_callbacks : @hashset.HashSet[String]
+  excluded_typedefs : @hashset.HashSet[String]
+  excluded_dictionary_prefixes : @hashset.HashSet[String]
+} derive(Show, ToJson)
 
 ///|
 /// Extract a string value from a TomlValue
@@ -60,12 +60,18 @@ pub fn load_config_from_string(content : String) -> GeneratorConfig raise {
     output_dir: get_string(table, "output_dir"),
     templates_dir: get_string(table, "templates_dir"),
     template_files: get_string_array(table, "template_files"),
-    core_specs: get_string_array(table, "core_specs"),
-    core_interfaces: get_string_array(table, "core_interfaces"),
-    excluded_callbacks: get_string_array(table, "excluded_callbacks"),
-    excluded_typedefs: get_string_array(table, "excluded_typedefs"),
-    excluded_dictionary_prefixes: get_string_array(
-      table, "excluded_dictionary_prefixes",
+    core_specs: @hashset.from_array(get_string_array(table, "core_specs")),
+    core_interfaces: @hashset.from_array(
+      get_string_array(table, "core_interfaces"),
+    ),
+    excluded_callbacks: @hashset.from_array(
+      get_string_array(table, "excluded_callbacks"),
+    ),
+    excluded_typedefs: @hashset.from_array(
+      get_string_array(table, "excluded_typedefs"),
+    ),
+    excluded_dictionary_prefixes: @hashset.from_array(
+      get_string_array(table, "excluded_dictionary_prefixes"),
     ),
   }
 }
@@ -95,16 +101,16 @@ test "load_from_string with valid TOML" {
     #|excluded_dictionary_prefixes = ["ElementCreationOptions"]
     #|
   let cfg = load_config_from_string(valid_toml)
-  assert_eq(cfg, {
-    idl_dir: "../node_modules/@webref/idl",
-    output_dir: "../src",
-    templates_dir: "base.mbt",
-    template_files: ["js_value.mbt"],
-    core_specs: ["dom", "html"],
-    core_interfaces: ["Element", "Node"],
-    excluded_callbacks: ["MutationCallback"],
-    excluded_typedefs: ["EventHandler"],
-    excluded_dictionary_prefixes: ["ElementCreationOptions"],
+  @json.inspect(cfg, content={
+    "idl_dir": "../node_modules/@webref/idl",
+    "output_dir": "../src",
+    "templates_dir": "base.mbt",
+    "core_interfaces": ["Element", "Node"],
+    "template_files": ["js_value.mbt"],
+    "core_specs": ["dom", "html"],
+    "excluded_callbacks": ["MutationCallback"],
+    "excluded_typedefs": ["EventHandler"],
+    "excluded_dictionary_prefixes": ["ElementCreationOptions"],
   })
 }
 
@@ -122,15 +128,15 @@ test "load_from_string with empty arrays" {
     #|excluded_dictionary_prefixes = []
     #|
   let cfg = load_config_from_string(empty_toml)
-  assert_eq(cfg, {
-    idl_dir: "",
-    output_dir: "",
-    templates_dir: "",
-    template_files: [],
-    core_specs: [],
-    core_interfaces: [],
-    excluded_callbacks: [],
-    excluded_typedefs: [],
-    excluded_dictionary_prefixes: [],
+  @json.inspect(cfg, content={
+    "idl_dir": "",
+    "output_dir": "",
+    "templates_dir": "",
+    "core_interfaces": [],
+    "template_files": [],
+    "core_specs": [],
+    "excluded_callbacks": [],
+    "excluded_typedefs": [],
+    "excluded_dictionary_prefixes": [],
   })
 }
