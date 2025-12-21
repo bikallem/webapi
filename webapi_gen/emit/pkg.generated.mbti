@@ -68,7 +68,6 @@ pub enum Emit {
   ConstructorMethod(TypeName, Array[MethodArg])
   Enum(TypeName, Array[EnumVariantEmit])
   TypedefAlias(TypeName, String)
-  TypedefUnion(TypeName, Array[String])
   Callback(TypeName, Array[CallbackArgEmit], String)
 }
 pub impl Show for Emit
