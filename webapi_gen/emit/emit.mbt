@@ -311,7 +311,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string("  match self {\n")
         for variant in variants {
           buf.write_string(
-            "    \{name}::\{variant.variant_name} => TJsValue::to_js(\"\{variant.variant_name}\")\n",
+            "    \{name}::\{variant.variant_name} => TJsValue::to_js(\"\{variant.original_value}\")\n",
           )
         }
         buf.write_string("  }\n")

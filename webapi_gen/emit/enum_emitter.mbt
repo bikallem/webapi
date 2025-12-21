@@ -16,7 +16,15 @@ pub impl Emitter for EnumEmitter with emit(self : EnumEmitter, name : String) ->
     let variant_name = if original_value.is_empty() {
       "Empty"
     } else {
-      to_pascal_case(original_value)
+      let chars = []
+      for c in original_value {
+        if c.is_ascii_alphabetic() {
+          chars.push(c)
+        } else {
+          chars.push('_')
+        }
+      }
+      to_pascal_case(String::from_array(chars))
     }
     variants.push(EnumVariantEmit::{ variant_name, original_value })
   }
