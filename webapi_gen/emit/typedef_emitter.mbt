@@ -54,13 +54,101 @@ fn typedef_type_to_mbt(
   type_registry : @type_registry.TypeRegistry,
 ) -> String {
   match idl_type {
-    Identifier(name) =>
-      if type_registry.is_interface(name) {
-        "&T\{name}"
-      } else {
-        name
-      }
+    Identifier(name) => name
     Nullable(t) => typedef_type_to_mbt(t, type_registry)
     _ => idl_to_mbt_type(idl_type)
   }
+}
+
+///|
+test "typedef emiiter emits alias typedef" {
+  let idl =
+    #|typedef DOMString MyString;
+  let definitions = @parser.parse(idl)
+  let registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
+  let (filename, emits) = emitter.emit("MyString")
+  let code = mbt_code_gen(emits)
+  @json.inspect(filename, content=["Filename", "my_string_typedef.mbt"])
+  inspect(code, content="pub type MyString = String")
+}
+
+///|
+test "typedef emitter emits union typedef" {
+  let idl =
+    #|typedef (DOMString or Function or undefined) MyUnion;
+  let definitions = @parser.parse(idl)
+  let registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
+  let (filename, emits) = emitter.emit("MyUnion")
+  let code = mbt_code_gen(emits)
+  inspect(
+    filename,
+    content=(
+      #|Filename("my_union_typedef.mbt")
+    ),
+  )
+  inspect(
+    code,
+    content=(
+      #|pub(open) trait TMyUnion {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub fn[T : TMyUnion] TMyUnion::into(self : TMyUnion) -> T = "%identity"
+      #|
+      #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+      #|
+      #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
+    ),
+  )
+}
+
+///|
+test "typedef emitter emit interface types as trait references in union typedef" {
+  let idl =
+    #|interface MyInterface {};
+    #|
+    #|typedef (MyInterface or DOMString) MyUnion;
+  let definitions = @parser.parse(idl)
+  let registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
+  let (_filename, emits) = emitter.emit("MyUnion")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|pub(open) trait TMyUnion {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub fn[T : TMyUnion] TMyUnion::into(self : TMyUnion) -> T = "%identity"
+      #|
+      #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+    ),
+  )
+}
+
+///|
+test "typedef emitter emits alias of nullable interface" {
+  let idl =
+    #|interface MyInterface {};
+    #|
+    #|typedef MyInterface? MyNullableInterface;
+  let definitions = @parser.parse(idl)
+  let registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
+  let (_filename, emits) = emitter.emit("MyNullableInterface")
+  let code = mbt_code_gen(emits)
+  inspect(code, content="pub type MyNullableInterface = JsValue")
 }

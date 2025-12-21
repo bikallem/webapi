@@ -299,8 +299,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string("}")
       }
       Emit::Enum(TypeName(name), variants) => {
-        // Emit enum type definition
-        buf.write_string("///|\n")
+        // Emit enum type definition        
         buf.write_string("pub(all) enum \{name} {\n")
         for variant in variants {
           buf.write_string("  \{variant.variant_name}\n")
@@ -334,27 +333,24 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string("  }\n")
         buf.write_string("}")
       }
-      Emit::TypedefAlias(TypeName(name), target_type) => {
-        buf.write_string("///|\n")
+      Emit::TypedefAlias(TypeName(name), target_type) =>
         buf.write_string("pub type \{name} = \{target_type}")
-      }
       Emit::TypedefUnion(TypeName(name), member_types) => {
         let trait_name = "T\{name}"
+
         // Emit trait definition
-        buf.write_string("///|\n")
         buf.write_string("pub(open) trait \{trait_name} {\n")
         buf.write_string("  to_js(self : Self) -> JsValue\n")
         buf.write_string("}")
         buf.write_string("\n\n")
+
         // Emit into method
-        buf.write_string("///|\n")
         buf.write_string(
-          "pub fn[T : \{trait_name}] &\{trait_name}::into(self : &\{trait_name}) -> T = \"%identity\"",
+          "pub fn[T : \{trait_name}] \{trait_name}::into(self : \{trait_name}) -> T = \"%identity\"",
         )
         buf.write_string("\n\n")
         // Emit impl for each member type
         for i, member_type in member_types {
-          buf.write_string("///|\n")
           buf.write_string(
             "pub impl \{trait_name} for \{member_type} with to_js(self : \{member_type}) -> JsValue = \"%identity\"",
           )
@@ -370,27 +366,24 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         let ffi_name = "\{to_snake_case(name)}_ffi"
 
         // External type
-        buf.write_string("///|\n")
         buf.write_string("#external\n")
         buf.write_string("pub type \{name}")
         buf.write_string("\n\n")
 
         // TJsValue impl
-        buf.write_string("///|\n")
         buf.write_string(
           "pub impl TJsValue for \{name} with to_js(self : \{name}) -> JsValue = \"%identity\"",
         )
         buf.write_string("\n\n")
 
         // FFI function - callbacks just pass the function through
-        buf.write_string("///|\n")
+
         buf.write_string(
           "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
         )
         buf.write_string("\n\n")
 
         // Constructor from MoonBit closure
-        buf.write_string("///|\n")
         buf.write_string(
           "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
         )
