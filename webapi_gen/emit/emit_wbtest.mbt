@@ -195,7 +195,7 @@ test "emit_js() generates MoonBit code for interface" {
       #|type_ : String, 
       #|callback : EventListener, 
       #|options? : &TAddEventListenerOptionsArg = AddEventListenerOptions::empty()) -> Unit {
-      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
+      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
       #|}
       #|
       #|extern "js" fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
@@ -204,7 +204,7 @@ test "emit_js() generates MoonBit code for interface" {
       #|type_ : String, 
       #|callback : EventListener, 
       #|options? : &TRemoveEventListenerOptionsArg = EventListenerOptions::empty()) -> Unit {
-      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
+      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
       #|}
       #|
       #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool = "(obj, event) => obj.dispatchEvent(obj, event)"
@@ -219,7 +219,7 @@ test "emit_js() generates MoonBit code for interface" {
       #|impl TEventTarget with create_element(self : Self, 
       #|local_name : String, 
       #|options? : &TCreateElementOptionsArg = ElementCreationOptions::empty()) -> Element {
-      #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), TJsValue::to_js(options))
+      #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), options.to_js())
       #|}
     ),
   )
@@ -276,7 +276,7 @@ test "emit_js() generates MoonBit code for dictionary" {
       #|color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
       #|color_type? : CanvasColorType = CanvasColorType::Unorm8, 
       #|will_read_frequently? : Bool = false) -> CanvasRenderingContext2DSettings {
-      #|  canvas_rendering_context2d_settings_ffi(TJsValue::to_js(alpha), TJsValue::to_js(desynchronized), TJsValue::to_js(color_space), TJsValue::to_js(color_type), TJsValue::to_js(will_read_frequently))
+      #|  canvas_rendering_context2d_settings_ffi(alpha.to_js(), desynchronized.to_js(), color_space.to_js(), color_type.to_js(), will_read_frequently.to_js())
       #|}
       #|
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
