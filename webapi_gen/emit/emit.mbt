@@ -574,19 +574,27 @@ fn idl_to_mbt_type(idl_type : @parser.Type) -> String {
     // AsyncSequence({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
     Sequence(t) => "Array[\{idl_to_mbt_type(t)}]"
 
-    // Typed Arrays
-    Float64Array => "Float64Array"
-    Float32Array => "Float32Array"
+    // Float Arrays
     Float16Array => "Float16Array"
+    Float32Array => "Float32Array"
+    Float64Array => "Float64Array"
+
+    // Integer arrays
+    Int8Array => "Int8Array"
+    Int16Array => "Int16Array"
+    Int32Array => "Int32Array"
+
+    // BigUint and BigInt arrays
     BigUint64Array => "BigUint64Array"
     BigInt64Array => "BigInt64Array"
-    Uint8ClampedArray => "Uint8ClampedArray"
-    Uint32Array => "Uint32Array"
-    Uint16Array => "Uint16Array"
+
+    // Unsigned integer arrays
     Uint8Array => "Uint8Array"
-    Int32Array => "Int32Array"
-    Int16Array => "Int16Array"
-    Int8Array => "Int8Array"
+    Uint16Array => "Uint16Array"
+    Uint32Array => "Uint32Array"
+    Uint8ClampedArray => "Uint8ClampedArray"
+
+    // Other typed arrays
     DataView => "DataView"
     SharedArrayBuffer => "SharedArrayBuffer"
     ArrayBuffer => "ArrayBuffer"
