@@ -2,7 +2,8 @@
   "name": "bikallem/webapi_gen",
   "version": "0.1.0",
   "deps": {
-    "moonbitlang/x": "0.4.38"
+    "moonbitlang/x": "0.4.38",
+    "bobzhang/toml": "0.1.7"
   },
   "bin-deps": {
     "moonbitlang/yacc": {

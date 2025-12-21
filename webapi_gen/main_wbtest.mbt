@@ -8,17 +8,16 @@ test "filter_idl with empty config returns all types" {
   let defs = @parser.parse(widl)
   let config = @config.load_config_from_string(
     (
-      #|{
-      #| "idl_dir": "",
-      #| "output_dir": "",
-      #| "templates_dir": "",
-      #| "template_files": [],
-      #| "core_specs": [],
-      #| "core_interfaces": [],
-      #|  "excluded_callbacks": [],
-      #|  "excluded_typedefs": [],
-      #|  "excluded_dictionary_prefixes": []
-      #|}
+      #|idl_dir = ""
+      #|output_dir = ""
+      #|templates_dir = ""
+      #|template_files = []
+      #|core_specs = []
+      #|core_interfaces = []
+      #|excluded_callbacks = []
+      #|excluded_typedefs = []
+      #|excluded_dictionary_prefixes = []
+      #|
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
@@ -46,17 +45,16 @@ test "filter_idl filters interfaces by whitelist" {
   let defs = @parser.parse(widl)
   let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
-      #|{
-      #| "idl_dir": "",
-      #| "output_dir": "",
-      #| "templates_dir": "",
-      #| "template_files": [],
-      #| "core_specs": [],
-      #| "core_interfaces": ["Element", "Node"],
-      #|  "excluded_callbacks": [],
-      #|  "excluded_typedefs": [],
-      #|  "excluded_dictionary_prefixes": []
-      #|}
+      #|idl_dir = ""
+      #|output_dir = ""
+      #|templates_dir = ""
+      #|template_files = []
+      #|core_specs = []
+      #|core_interfaces = ["Element", "Node"]
+      #|excluded_callbacks = []
+      #|excluded_typedefs = []
+      #|excluded_dictionary_prefixes = []
+      #|
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
@@ -80,17 +78,16 @@ test "filter_idl excludes callbacks" {
   let defs = @parser.parse(widl)
   let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
-      #|{
-      #| "idl_dir": "",
-      #| "output_dir": "",
-      #| "templates_dir": "",
-      #| "template_files": [],
-      #| "core_specs": [],
-      #| "core_interfaces": [],
-      #| "excluded_callbacks": ["MutationCallback"],
-      #| "excluded_typedefs": [],
-      #| "excluded_dictionary_prefixes": []
-      #|}
+      #|idl_dir = ""
+      #|output_dir = ""
+      #|templates_dir = ""
+      #|template_files = []
+      #|core_specs = []
+      #|core_interfaces = []
+      #|excluded_callbacks = ["MutationCallback"]
+      #|excluded_typedefs = []
+      #|excluded_dictionary_prefixes = []
+      #|
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
@@ -128,17 +125,16 @@ test "filter_idl excludes typedefs" {
   let defs = @parser.parse(widl)
   let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
-      #|{
-      #| "idl_dir": "",
-      #| "output_dir": "",
-      #| "templates_dir": "",
-      #| "template_files": [],
-      #| "core_specs": [],
-      #| "core_interfaces": [],
-      #| "excluded_callbacks": ["MutationCallback"],
-      #| "excluded_typedefs": ["EventHandler"],
-      #| "excluded_dictionary_prefixes": []      
-      #|}
+      #|idl_dir = ""
+      #|output_dir = ""
+      #|templates_dir = ""
+      #|template_files = []
+      #|core_specs = []
+      #|core_interfaces = []
+      #|excluded_callbacks = ["MutationCallback"]
+      #|excluded_typedefs = ["EventHandler"]
+      #|excluded_dictionary_prefixes = []
+      #|
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
@@ -162,17 +158,16 @@ test "filter_idl excludes dictionaries by prefix" {
   let defs = @parser.parse(widl)
   let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
-      #|{
-      #| "idl_dir": "",
-      #| "output_dir": "",
-      #| "templates_dir": "",
-      #| "template_files": [],
-      #| "core_specs": [],
-      #| "core_interfaces": [],
-      #| "excluded_callbacks": ["MutationCallback"],
-      #| "excluded_typedefs": ["EventHandler"],
-      #| "excluded_dictionary_prefixes": ["Element"]
-      #|}
+      #|idl_dir = ""
+      #|output_dir = ""
+      #|templates_dir = ""
+      #|template_files = []
+      #|core_specs = []
+      #|core_interfaces = []
+      #|excluded_callbacks = ["MutationCallback"]
+      #|excluded_typedefs = ["EventHandler"]
+      #|excluded_dictionary_prefixes = ["Element"]
+      #|
     ),
   )
   let filtered = filter_idl(config, defs, ignore)

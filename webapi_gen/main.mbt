@@ -1,6 +1,6 @@
 ///|
 /// Default config file path (run from webapi_gen/)
-let default_config_file : String = "config.json"
+let default_config_file : String = "config.toml"
 
 ///|
 /// Check if a filename matches one of the core specs
