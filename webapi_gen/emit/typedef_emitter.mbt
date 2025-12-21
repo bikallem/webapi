@@ -14,6 +14,7 @@ pub impl Emitter for TypedefEmitter with emit(
   let typedef_emits = match typedef_def.type_ {
     Union(options) => {
       let emits = []
+      emits.push(Emit::External(typedef_def.name))
       emits.push(Emit::UnionArgTrait("T\{typedef_def.name}"))
       emits.push(Emit::IntoMethod(typedef_def.name))
       for opt in filter_typedef_union_members(options) {
@@ -84,6 +85,11 @@ test "typedef emitter emits union typedef" {
   inspect(
     code,
     content=(
+      #|#external
+      #|pub type MyUnion
+      #|
+      #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
+      #|
       #|pub(open) trait TMyUnion {
       #|  to_js(self : Self) -> JsValue
       #|}
@@ -93,6 +99,7 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
+
     ),
   )
 }
@@ -113,6 +120,11 @@ test "typedef emitter emit interface types as trait references in union typedef"
   inspect(
     code,
     content=(
+      #|#external
+      #|pub type MyUnion
+      #|
+      #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
+      #|
       #|pub(open) trait TMyUnion {
       #|  to_js(self : Self) -> JsValue
       #|}
@@ -122,6 +134,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+
     ),
   )
 }
