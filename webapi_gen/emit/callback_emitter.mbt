@@ -11,21 +11,14 @@ pub impl Emitter for CallbackEmitter with emit(
 ) -> (Filename, Array[Emit]) {
   let filename = Filename("\{to_snake_case(name)}_callback.mbt")
   let cb_def = self.idl.callbacks[name]
-  (filename, emit_callback(cb_def, self.type_registry))
-}
-
-///|
-pub fn emit_callback(
-  cb_def : @parser.CallbackFunctionDefinition,
-  type_registry : @type_registry.TypeRegistry,
-) -> Array[Emit] {
   let args : Array[CallbackArgEmit] = []
   for arg in cb_def.arguments {
-    let mbt_type = callback_arg_to_mbt(arg.type_.type_, type_registry)
+    let mbt_type = callback_arg_to_mbt(arg.type_.type_, self.type_registry)
     args.push(CallbackArgEmit::{ name: safe_identifier(arg.name), mbt_type })
   }
   let return_type = idl_to_mbt_type(cb_def.return_type)
-  [Emit::Callback(cb_def.name, args, return_type)]
+  let emit_callback = [Emit::Callback(cb_def.name, args, return_type)]
+  (filename, emit_callback)
 }
 
 ///|

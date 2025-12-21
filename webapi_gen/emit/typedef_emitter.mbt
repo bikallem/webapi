@@ -99,7 +99,6 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
-
     ),
   )
 }
@@ -134,7 +133,6 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
-
     ),
   )
 }

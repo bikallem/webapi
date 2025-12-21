@@ -4,11 +4,13 @@ test "emit_callback simple EventListener" {
     #|callback EventListener = undefined (Event event);
   let definitions = @parser.parse(idl)
   let registry = @type_registry.TypeRegistry::new(definitions)
-  let cb_def = match definitions[0].definition {
-    CallbackFunction(cb) => cb
-    _ => fail("Expected callback function")
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let callback_emitter = CallbackEmitter::{
+    idl: flattened,
+    type_registry: registry,
   }
-  let emits = emit_callback(cb_def, registry)
+  let (_filename, emits) = callback_emitter.emit("EventListener")
   let code = mbt_code_gen(emits)
   inspect(
     code,
@@ -32,12 +34,13 @@ test "emit_callback with interface argument uses trait reference" {
     #|callback EventListener = undefined (Event event);
   let definitions = @parser.parse(idl)
   let registry = @type_registry.TypeRegistry::new(definitions)
-  // Extract the callback from parsed definitions
-  let cb_def = match definitions[1].definition {
-    CallbackFunction(cb) => cb
-    _ => fail("Expected callback function")
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let callback_emitter = CallbackEmitter::{
+    idl: flattened,
+    type_registry: registry,
   }
-  let emits = emit_callback(cb_def, registry)
+  let (_filename, emits) = callback_emitter.emit("EventListener")
   let code = mbt_code_gen(emits)
   inspect(
     code,
@@ -60,11 +63,13 @@ test "emit_callback multi-arg MutationCallback" {
     #|callback MutationCallback = undefined (sequence<MutationRecord> mutations, MutationObserver observer);
   let definitions = @parser.parse(idl)
   let registry = @type_registry.TypeRegistry::new(definitions)
-  let cb_def = match definitions[0].definition {
-    CallbackFunction(cb) => cb
-    _ => fail("Expected callback function")
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let callback_emitter = CallbackEmitter::{
+    idl: flattened,
+    type_registry: registry,
   }
-  let emits = emit_callback(cb_def, registry)
+  let (_filename, emits) = callback_emitter.emit("MutationCallback")
   let code = mbt_code_gen(emits)
   inspect(
     code,
@@ -87,11 +92,13 @@ test "js_code_gen Callback generates correct code" {
     #|callback EventListener = undefined (Event event);
   let definitions = @parser.parse(idl)
   let registry = @type_registry.TypeRegistry::new(definitions)
-  let cb_def = match definitions[0].definition {
-    CallbackFunction(cb) => cb
-    _ => fail("Expected callback function")
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let callback_emitter = CallbackEmitter::{
+    idl: flattened,
+    type_registry: registry,
   }
-  let emits = emit_callback(cb_def, registry)
+  let (_filename, emits) = callback_emitter.emit("EventListener")
   let code = mbt_code_gen(emits)
   inspect(
     code,
@@ -114,11 +121,13 @@ test "js_code_gen Callback with multiple args" {
     #|callback MutationCallback = undefined (sequence<MutationRecord> mutations, MutationObserver observer);
   let definitions = @parser.parse(idl)
   let registry = @type_registry.TypeRegistry::new(definitions)
-  let cb_def = match definitions[0].definition {
-    CallbackFunction(cb) => cb
-    _ => fail("Expected callback function")
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let callback_emitter = CallbackEmitter::{
+    idl: flattened,
+    type_registry: registry,
   }
-  let emits = emit_callback(cb_def, registry)
+  let (_filename, emits) = callback_emitter.emit("MutationCallback")
   let code = mbt_code_gen(emits)
   inspect(
     code,

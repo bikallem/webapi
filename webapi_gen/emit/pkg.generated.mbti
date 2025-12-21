@@ -10,8 +10,6 @@ import(
 // Values
 pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 
-pub fn emit_callback(@parser.CallbackFunctionDefinition, @type_registry.TypeRegistry) -> Array[Emit]
-
 pub fn emit_globals(@flattened_idl.FlattenedIdl) -> String
 
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
