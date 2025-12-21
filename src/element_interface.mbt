@@ -18,61 +18,69 @@ pub impl TNode for Element
 pub impl TEventTarget for Element
 
 ///|
-pub(open) trait TSetAttributeValueArg {
+pub(open) trait TElementSetAttributeValueArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TSetAttributeValueArg for TrustedType with to_js(self : TrustedType) -> JsValue = "%identity"
+pub impl TElementSetAttributeValueArg for TrustedType with to_js(
+  self : TrustedType,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TSetAttributeValueArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetAttributeValueArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TSetAttributeNsValueArg {
+pub(open) trait TElementSetAttributeNsValueArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TSetAttributeNsValueArg for TrustedType with to_js(self : TrustedType) -> JsValue = "%identity"
+pub impl TElementSetAttributeNsValueArg for TrustedType with to_js(
+  self : TrustedType,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TSetAttributeNsValueArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetAttributeNsValueArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TSetHtmlUnsafeHtmlArg {
+pub(open) trait TElementSetHtmlUnsafeHtmlArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TSetHtmlUnsafeHtmlArg for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
-
-///|
-pub impl TSetHtmlUnsafeHtmlArg for String with to_js(self : String) -> JsValue = "%identity"
-
-///|
-pub(open) trait TInsertAdjacentHtmlStringArg {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TInsertAdjacentHtmlStringArg for TrustedHTML with to_js(
+pub impl TElementSetHtmlUnsafeHtmlArg for TrustedHTML with to_js(
   self : TrustedHTML,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TInsertAdjacentHtmlStringArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetHtmlUnsafeHtmlArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TScrollIntoViewArgArg {
+pub(open) trait TElementInsertAdjacentHtmlStringArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TScrollIntoViewArgArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TElementInsertAdjacentHtmlStringArg for TrustedHTML with to_js(
+  self : TrustedHTML,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TScrollIntoViewArgArg for ScrollIntoViewOptions with to_js(
+pub impl TElementInsertAdjacentHtmlStringArg for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementScrollIntoViewArgArg {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementScrollIntoViewArgArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+
+///|
+pub impl TElementScrollIntoViewArgArg for ScrollIntoViewOptions with to_js(
   self : ScrollIntoViewOptions,
 ) -> JsValue = "%identity"
 
@@ -85,13 +93,13 @@ pub trait TElement: TNode {
   set_attribute(
     self : Self,
     qualified_name : String,
-    value : &TSetAttributeValueArg,
+    value : &TElementSetAttributeValueArg,
   ) -> Unit = _
   set_attribute_ns(
     self : Self,
     namespace_ : String,
     qualified_name : String,
-    value : &TSetAttributeNsValueArg,
+    value : &TElementSetAttributeNsValueArg,
   ) -> Unit = _
   remove_attribute(self : Self, qualified_name : String) -> Unit = _
   remove_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Unit = _
@@ -100,9 +108,9 @@ pub trait TElement: TNode {
   has_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Bool = _
   get_attribute_node(self : Self, qualified_name : String) -> JsValue = _
   get_attribute_node_ns(self : Self, namespace_ : String, local_name : String) -> JsValue = _
-  set_attribute_node(self : Self, attr : Attr) -> JsValue = _
-  set_attribute_node_ns(self : Self, attr : Attr) -> JsValue = _
-  remove_attribute_node(self : Self, attr : Attr) -> Attr = _
+  set_attribute_node(self : Self, attr : &TAttr) -> JsValue = _
+  set_attribute_node_ns(self : Self, attr : &TAttr) -> JsValue = _
+  remove_attribute_node(self : Self, attr : &TAttr) -> Attr = _
   attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRoot = _
   closest(self : Self, selectors : String) -> JsValue = _
   matches(self : Self, selectors : String) -> Bool = _
@@ -114,19 +122,19 @@ pub trait TElement: TNode {
     local_name : String,
   ) -> HTMLCollection = _
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
-  insert_adjacent_element(self : Self, where_ : String, element : Element) -> JsValue = _
+  insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> JsValue = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
-  set_html_unsafe(self : Self, html : &TSetHtmlUnsafeHtmlArg) -> Unit = _
+  set_html_unsafe(self : Self, html : &TElementSetHtmlUnsafeHtmlArg) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
   insert_adjacent_html(
     self : Self,
     position : String,
-    string : &TInsertAdjacentHtmlStringArg,
+    string : &TElementInsertAdjacentHtmlStringArg,
   ) -> Unit = _
   get_client_rects(self : Self) -> DOMRectList = _
   get_bounding_client_rect(self : Self) -> DOMRect = _
   check_visibility(self : Self, options? : CheckVisibilityOptions) -> Bool = _
-  scroll_into_view(self : Self, arg? : &TScrollIntoViewArgArg) -> JsValue = _
+  scroll_into_view(self : Self, arg? : &TElementScrollIntoViewArgArg) -> JsValue = _
   scroll(self : Self, options? : ScrollToOptions) -> JsValue = _
   scroll_2(self : Self, x : Double, y : Double) -> JsValue = _
   scroll_to(self : Self, options? : ScrollToOptions) -> JsValue = _
@@ -196,7 +204,7 @@ extern "js" fn element_set_attribute_ffi(
 impl TElement with set_attribute(
   self : Self,
   qualified_name : String,
-  value : &TSetAttributeValueArg,
+  value : &TElementSetAttributeValueArg,
 ) -> Unit {
   element_set_attribute_ffi(
     TJsValue::to_js(self),
@@ -218,7 +226,7 @@ impl TElement with set_attribute_ns(
   self : Self,
   namespace_ : String,
   qualified_name : String,
-  value : &TSetAttributeNsValueArg,
+  value : &TElementSetAttributeNsValueArg,
 ) -> Unit {
   element_set_attribute_ns_ffi(
     TJsValue::to_js(self),
@@ -357,7 +365,7 @@ extern "js" fn element_set_attribute_node_ffi(
 ) -> JsValue = "(obj, attr) => obj.setAttributeNode(obj, attr)"
 
 ///|
-impl TElement with set_attribute_node(self : Self, attr : Attr) -> JsValue {
+impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> JsValue {
   element_set_attribute_node_ffi(TJsValue::to_js(self), TJsValue::to_js(attr))
 }
 
@@ -368,7 +376,7 @@ extern "js" fn element_set_attribute_node_ns_ffi(
 ) -> JsValue = "(obj, attr) => obj.setAttributeNodeNS(obj, attr)"
 
 ///|
-impl TElement with set_attribute_node_ns(self : Self, attr : Attr) -> JsValue {
+impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> JsValue {
   element_set_attribute_node_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -382,7 +390,7 @@ extern "js" fn element_remove_attribute_node_ffi(
 ) -> Attr = "(obj, attr) => obj.removeAttributeNode(obj, attr)"
 
 ///|
-impl TElement with remove_attribute_node(self : Self, attr : Attr) -> Attr {
+impl TElement with remove_attribute_node(self : Self, attr : &TAttr) -> Attr {
   element_remove_attribute_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -495,7 +503,7 @@ extern "js" fn element_insert_adjacent_element_ffi(
 impl TElement with insert_adjacent_element(
   self : Self,
   where_ : String,
-  element : Element,
+  element : &TElement,
 ) -> JsValue {
   element_insert_adjacent_element_ffi(
     TJsValue::to_js(self),
@@ -531,7 +539,10 @@ extern "js" fn element_set_html_unsafe_ffi(
 ) -> Unit = "(obj, html) => obj.setHTMLUnsafe(obj, html)"
 
 ///|
-impl TElement with set_html_unsafe(self : Self, html : &TSetHtmlUnsafeHtmlArg) -> Unit {
+impl TElement with set_html_unsafe(
+  self : Self,
+  html : &TElementSetHtmlUnsafeHtmlArg,
+) -> Unit {
   element_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }
 
@@ -557,7 +568,7 @@ extern "js" fn element_insert_adjacent_html_ffi(
 impl TElement with insert_adjacent_html(
   self : Self,
   position : String,
-  string : &TInsertAdjacentHtmlStringArg,
+  string : &TElementInsertAdjacentHtmlStringArg,
 ) -> Unit {
   element_insert_adjacent_html_ffi(
     TJsValue::to_js(self),
@@ -605,7 +616,7 @@ extern "js" fn element_scroll_into_view_ffi(
 ///|
 impl TElement with scroll_into_view(
   self : Self,
-  arg? : &TScrollIntoViewArgArg = ScrollIntoViewOptions::empty(),
+  arg? : &TElementScrollIntoViewArgArg = ScrollIntoViewOptions::empty(),
 ) -> JsValue {
   element_scroll_into_view_ffi(TJsValue::to_js(self), arg.to_js())
 }

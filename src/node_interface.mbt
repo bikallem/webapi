@@ -20,17 +20,17 @@ pub trait TNode: TEventTarget {
   has_child_nodes(self : Self) -> Bool = _
   normalize(self : Self) -> Unit = _
   clone_node(self : Self, subtree? : Bool) -> Node = _
-  is_equal_node(self : Self, other_node : Node) -> Bool = _
-  is_same_node(self : Self, other_node : Node) -> Bool = _
-  compare_document_position(self : Self, other : Node) -> UInt = _
-  contains(self : Self, other : Node) -> Bool = _
+  is_equal_node(self : Self, other_node : &TNode) -> Bool = _
+  is_same_node(self : Self, other_node : &TNode) -> Bool = _
+  compare_document_position(self : Self, other : &TNode) -> UInt = _
+  contains(self : Self, other : &TNode) -> Bool = _
   lookup_prefix(self : Self, namespace_ : String) -> JsValue = _
   lookup_namespace_uri(self : Self, prefix : String) -> JsValue = _
   is_default_namespace(self : Self, namespace_ : String) -> Bool = _
-  insert_before(self : Self, node : Node, child : Node) -> Node = _
-  append_child(self : Self, node : Node) -> Node = _
-  replace_child(self : Self, node : Node, child : Node) -> Node = _
-  remove_child(self : Self, child : Node) -> Node = _
+  insert_before(self : Self, node : &TNode, child : &TNode) -> Node = _
+  append_child(self : Self, node : &TNode) -> Node = _
+  replace_child(self : Self, node : &TNode, child : &TNode) -> Node = _
+  remove_child(self : Self, child : &TNode) -> Node = _
 }
 
 ///|
@@ -75,7 +75,7 @@ extern "js" fn node_is_equal_node_ffi(
 ) -> Bool = "(obj, other_node) => obj.isEqualNode(obj, other_node)"
 
 ///|
-impl TNode with is_equal_node(self : Self, other_node : Node) -> Bool {
+impl TNode with is_equal_node(self : Self, other_node : &TNode) -> Bool {
   node_is_equal_node_ffi(TJsValue::to_js(self), TJsValue::to_js(other_node))
 }
 
@@ -86,7 +86,7 @@ extern "js" fn node_is_same_node_ffi(
 ) -> Bool = "(obj, other_node) => obj.isSameNode(obj, other_node)"
 
 ///|
-impl TNode with is_same_node(self : Self, other_node : Node) -> Bool {
+impl TNode with is_same_node(self : Self, other_node : &TNode) -> Bool {
   node_is_same_node_ffi(TJsValue::to_js(self), TJsValue::to_js(other_node))
 }
 
@@ -97,7 +97,7 @@ extern "js" fn node_compare_document_position_ffi(
 ) -> UInt = "(obj, other) => obj.compareDocumentPosition(obj, other)"
 
 ///|
-impl TNode with compare_document_position(self : Self, other : Node) -> UInt {
+impl TNode with compare_document_position(self : Self, other : &TNode) -> UInt {
   node_compare_document_position_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(other),
@@ -108,7 +108,7 @@ impl TNode with compare_document_position(self : Self, other : Node) -> UInt {
 extern "js" fn node_contains_ffi(obj : JsValue, other : JsValue) -> Bool = "(obj, other) => obj.contains(obj, other)"
 
 ///|
-impl TNode with contains(self : Self, other : Node) -> Bool {
+impl TNode with contains(self : Self, other : &TNode) -> Bool {
   node_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(other))
 }
 
@@ -156,7 +156,7 @@ extern "js" fn node_insert_before_ffi(
 ) -> Node = "(obj, node, child) => obj.insertBefore(obj, node, child)"
 
 ///|
-impl TNode with insert_before(self : Self, node : Node, child : Node) -> Node {
+impl TNode with insert_before(self : Self, node : &TNode, child : &TNode) -> Node {
   node_insert_before_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -168,7 +168,7 @@ impl TNode with insert_before(self : Self, node : Node, child : Node) -> Node {
 extern "js" fn node_append_child_ffi(obj : JsValue, node : JsValue) -> Node = "(obj, node) => obj.appendChild(obj, node)"
 
 ///|
-impl TNode with append_child(self : Self, node : Node) -> Node {
+impl TNode with append_child(self : Self, node : &TNode) -> Node {
   node_append_child_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
 
@@ -180,7 +180,7 @@ extern "js" fn node_replace_child_ffi(
 ) -> Node = "(obj, node, child) => obj.replaceChild(obj, node, child)"
 
 ///|
-impl TNode with replace_child(self : Self, node : Node, child : Node) -> Node {
+impl TNode with replace_child(self : Self, node : &TNode, child : &TNode) -> Node {
   node_replace_child_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
@@ -192,6 +192,6 @@ impl TNode with replace_child(self : Self, node : Node, child : Node) -> Node {
 extern "js" fn node_remove_child_ffi(obj : JsValue, child : JsValue) -> Node = "(obj, child) => obj.removeChild(obj, child)"
 
 ///|
-impl TNode with remove_child(self : Self, child : Node) -> Node {
+impl TNode with remove_child(self : Self, child : &TNode) -> Node {
   node_remove_child_ffi(TJsValue::to_js(self), TJsValue::to_js(child))
 }

@@ -29,17 +29,17 @@ pub fn HTMLElement::new() -> HTMLElement {
 }
 
 ///|
-pub(open) trait TTogglePopoverOptionsArg {
+pub(open) trait THTMLElementTogglePopoverOptionsArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TTogglePopoverOptionsArg for TogglePopoverOptions with to_js(
+pub impl THTMLElementTogglePopoverOptionsArg for TogglePopoverOptions with to_js(
   self : TogglePopoverOptions,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TTogglePopoverOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl THTMLElementTogglePopoverOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
 pub trait THTMLElement: TElement {
@@ -47,7 +47,7 @@ pub trait THTMLElement: TElement {
   attach_internals(self : Self) -> ElementInternals = _
   show_popover(self : Self, options? : ShowPopoverOptions) -> Unit = _
   hide_popover(self : Self) -> Unit = _
-  toggle_popover(self : Self, options? : &TTogglePopoverOptionsArg) -> Bool = _
+  toggle_popover(self : Self, options? : &THTMLElementTogglePopoverOptionsArg) -> Bool = _
 }
 
 ///|
@@ -99,7 +99,7 @@ extern "js" fn html_element_toggle_popover_ffi(
 ///|
 impl THTMLElement with toggle_popover(
   self : Self,
-  options? : &TTogglePopoverOptionsArg = TogglePopoverOptions::empty(),
+  options? : &THTMLElementTogglePopoverOptionsArg = TogglePopoverOptions::empty(),
 ) -> Bool {
   html_element_toggle_popover_ffi(TJsValue::to_js(self), options.to_js())
 }

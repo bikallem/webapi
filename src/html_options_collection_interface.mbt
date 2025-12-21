@@ -19,34 +19,40 @@ pub impl THTMLOptionsCollection for HTMLOptionsCollection
 pub impl THTMLCollection for HTMLOptionsCollection
 
 ///|
-pub(open) trait TAddElementArg {
+pub(open) trait THTMLOptionsCollectionAddElementArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TAddElementArg for HTMLOptionElement with to_js(
+pub impl THTMLOptionsCollectionAddElementArg for HTMLOptionElement with to_js(
   self : HTMLOptionElement,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TAddElementArg for HTMLOptGroupElement with to_js(
+pub impl THTMLOptionsCollectionAddElementArg for HTMLOptGroupElement with to_js(
   self : HTMLOptGroupElement,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TAddBeforeArg {
+pub(open) trait THTMLOptionsCollectionAddBeforeArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TAddBeforeArg for HTMLElement with to_js(self : HTMLElement) -> JsValue = "%identity"
+pub impl THTMLOptionsCollectionAddBeforeArg for HTMLElement with to_js(
+  self : HTMLElement,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TAddBeforeArg for Int with to_js(self : Int) -> JsValue = "%identity"
+pub impl THTMLOptionsCollectionAddBeforeArg for Int with to_js(self : Int) -> JsValue = "%identity"
 
 ///|
 pub trait THTMLOptionsCollection: THTMLCollection {
-  add(self : Self, element : &TAddElementArg, before? : &TAddBeforeArg) -> Unit = _
+  add(
+    self : Self,
+    element : &THTMLOptionsCollectionAddElementArg,
+    before? : &THTMLOptionsCollectionAddBeforeArg,
+  ) -> Unit = _
   remove(self : Self, index : Int) -> Unit = _
 }
 
@@ -60,8 +66,8 @@ extern "js" fn html_options_collection_add_ffi(
 ///|
 impl THTMLOptionsCollection with add(
   self : Self,
-  element : &TAddElementArg,
-  before? : &TAddBeforeArg = JsValue::null(),
+  element : &THTMLOptionsCollectionAddElementArg,
+  before? : &THTMLOptionsCollectionAddBeforeArg = JsValue::null(),
 ) -> Unit {
   html_options_collection_add_ffi(
     TJsValue::to_js(self),

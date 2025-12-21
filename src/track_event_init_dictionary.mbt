@@ -6,18 +6,24 @@ pub type TrackEventInit
 pub impl TJsValue for TrackEventInit with to_js(self : TrackEventInit) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TTrackEventInitTrackArg {
+pub(open) trait TTrackEventInitTrackEventInitTrackArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TTrackEventInitTrackArg for VideoTrack with to_js(self : VideoTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitTrackEventInitTrackArg for VideoTrack with to_js(
+  self : VideoTrack,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TTrackEventInitTrackArg for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitTrackEventInitTrackArg for AudioTrack with to_js(
+  self : AudioTrack,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TTrackEventInitTrackArg for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitTrackEventInitTrackArg for TextTrack with to_js(
+  self : TextTrack,
+) -> JsValue = "%identity"
 
 ///|
 extern "js" fn track_event_init_ffi(
@@ -40,7 +46,7 @@ pub fn TrackEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  track? : &TTrackEventInitTrackArg = JsValue::null(),
+  track? : &TTrackEventInitTrackEventInitTrackArg = JsValue::null(),
 ) -> TrackEventInit {
   track_event_init_ffi(
     TJsValue::to_js(bubbles),

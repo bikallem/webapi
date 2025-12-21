@@ -34,7 +34,7 @@ pub fn HTMLFormElement::new() -> HTMLFormElement {
 ///|
 pub trait THTMLFormElement: THTMLElement {
   submit(self : Self) -> Unit = _
-  request_submit(self : Self, submitter? : HTMLElement) -> Unit = _
+  request_submit(self : Self, submitter? : &THTMLElement) -> Unit = _
   reset(self : Self) -> Unit = _
   check_validity(self : Self) -> Bool = _
   report_validity(self : Self) -> Bool = _
@@ -57,7 +57,7 @@ extern "js" fn html_form_element_request_submit_ffi(
 ///|
 impl THTMLFormElement with request_submit(
   self : Self,
-  submitter? : HTMLElement = JsValue::null(),
+  submitter? : &THTMLElement = JsValue::null(),
 ) -> Unit {
   html_form_element_request_submit_ffi(
     TJsValue::to_js(self),

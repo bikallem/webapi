@@ -39,7 +39,7 @@ pub trait TWindow: TEventTarget {
   ) -> Unit = _
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
-  get_computed_style(self : Self, elt : Element, pseudo_elt? : CSSOMString) -> CSSStyleProperties = _
+  get_computed_style(self : Self, elt : &TElement, pseudo_elt? : CSSOMString) -> CSSStyleProperties = _
   match_media(self : Self, query : CSSOMString) -> MediaQueryList = _
   move_to(self : Self, x : Int, y : Int) -> Unit = _
   move_by(self : Self, x : Int, y : Int) -> Unit = _
@@ -229,7 +229,7 @@ extern "js" fn window_get_computed_style_ffi(
 ///|
 impl TWindow with get_computed_style(
   self : Self,
-  elt : Element,
+  elt : &TElement,
   pseudo_elt? : CSSOMString,
 ) -> CSSStyleProperties {
   window_get_computed_style_ffi(

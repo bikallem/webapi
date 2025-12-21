@@ -25,7 +25,7 @@ pub trait TDOMImplementation: TJsValue {
     self : Self,
     namespace_ : String,
     qualified_name : String,
-    doctype? : DocumentType,
+    doctype? : &TDocumentType,
   ) -> XMLDocument = _
   create_html_document(self : Self, title? : String) -> Document = _
   has_feature(self : Self) -> Bool = _
@@ -67,7 +67,7 @@ impl TDOMImplementation with create_document(
   self : Self,
   namespace_ : String,
   qualified_name : String,
-  doctype? : DocumentType = JsValue::null(),
+  doctype? : &TDocumentType = JsValue::null(),
 ) -> XMLDocument {
   dom_implementation_create_document_ffi(
     TJsValue::to_js(self),

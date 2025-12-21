@@ -6,15 +6,19 @@ pub type CSSStyleSheetInit
 pub impl TJsValue for CSSStyleSheetInit with to_js(self : CSSStyleSheetInit) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TCSSStyleSheetInitMediaArg {
+pub(open) trait TCSSStyleSheetInitCSSStyleSheetInitMediaArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TCSSStyleSheetInitMediaArg for MediaList with to_js(self : MediaList) -> JsValue = "%identity"
+pub impl TCSSStyleSheetInitCSSStyleSheetInitMediaArg for MediaList with to_js(
+  self : MediaList,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TCSSStyleSheetInitMediaArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCSSStyleSheetInitCSSStyleSheetInitMediaArg for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
 
 ///|
 extern "js" fn css_style_sheet_init_ffi(
@@ -33,7 +37,7 @@ extern "js" fn css_style_sheet_init_ffi(
 ///|
 pub fn CSSStyleSheetInit::new(
   base_url? : String = JsValue::null(),
-  media? : &TCSSStyleSheetInitMediaArg = "",
+  media? : &TCSSStyleSheetInitCSSStyleSheetInitMediaArg = "",
   disabled? : Bool = false,
 ) -> CSSStyleSheetInit {
   css_style_sheet_init_ffi(

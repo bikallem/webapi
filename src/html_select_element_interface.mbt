@@ -34,35 +34,41 @@ pub fn HTMLSelectElement::new() -> HTMLSelectElement {
 }
 
 ///|
-pub(open) trait TAddElementArg {
+pub(open) trait THTMLSelectElementAddElementArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TAddElementArg for HTMLOptionElement with to_js(
+pub impl THTMLSelectElementAddElementArg for HTMLOptionElement with to_js(
   self : HTMLOptionElement,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TAddElementArg for HTMLOptGroupElement with to_js(
+pub impl THTMLSelectElementAddElementArg for HTMLOptGroupElement with to_js(
   self : HTMLOptGroupElement,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TAddBeforeArg {
+pub(open) trait THTMLSelectElementAddBeforeArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TAddBeforeArg for HTMLElement with to_js(self : HTMLElement) -> JsValue = "%identity"
+pub impl THTMLSelectElementAddBeforeArg for HTMLElement with to_js(
+  self : HTMLElement,
+) -> JsValue = "%identity"
 
 ///|
-pub impl TAddBeforeArg for Int with to_js(self : Int) -> JsValue = "%identity"
+pub impl THTMLSelectElementAddBeforeArg for Int with to_js(self : Int) -> JsValue = "%identity"
 
 ///|
 pub trait THTMLSelectElement: THTMLElement {
   named_item(self : Self, name : String) -> JsValue = _
-  add(self : Self, element : &TAddElementArg, before? : &TAddBeforeArg) -> Unit = _
+  add(
+    self : Self,
+    element : &THTMLSelectElementAddElementArg,
+    before? : &THTMLSelectElementAddBeforeArg,
+  ) -> Unit = _
   remove(self : Self) -> Unit = _
   remove_2(self : Self, index : Int) -> Unit = _
   check_validity(self : Self) -> Bool = _
@@ -95,8 +101,8 @@ extern "js" fn html_select_element_add_ffi(
 ///|
 impl THTMLSelectElement with add(
   self : Self,
-  element : &TAddElementArg,
-  before? : &TAddBeforeArg = JsValue::null(),
+  element : &THTMLSelectElementAddElementArg,
+  before? : &THTMLSelectElementAddBeforeArg = JsValue::null(),
 ) -> Unit {
   html_select_element_add_ffi(
     TJsValue::to_js(self),

@@ -32,15 +32,15 @@ pub fn HTMLSlotElement::new() -> HTMLSlotElement {
 }
 
 ///|
-pub(open) trait TAssignNodesArg {
+pub(open) trait THTMLSlotElementAssignNodesArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TAssignNodesArg for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl THTMLSlotElementAssignNodesArg for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
-pub impl TAssignNodesArg for Text with to_js(self : Text) -> JsValue = "%identity"
+pub impl THTMLSlotElementAssignNodesArg for Text with to_js(self : Text) -> JsValue = "%identity"
 
 ///|
 pub trait THTMLSlotElement: THTMLElement {
@@ -48,7 +48,7 @@ pub trait THTMLSlotElement: THTMLElement {
   assigned_elements(self : Self, options? : AssignedNodesOptions) -> Array[
     Element,
   ] = _
-  assign(self : Self, nodes : &TAssignNodesArg) -> Unit = _
+  assign(self : Self, nodes : &THTMLSlotElementAssignNodesArg) -> Unit = _
 }
 
 ///|
@@ -92,6 +92,9 @@ extern "js" fn html_slot_element_assign_ffi(
 ) -> Unit = "(obj, nodes) => obj.assign(obj, nodes)"
 
 ///|
-impl THTMLSlotElement with assign(self : Self, nodes : &TAssignNodesArg) -> Unit {
+impl THTMLSlotElement with assign(
+  self : Self,
+  nodes : &THTMLSlotElementAssignNodesArg,
+) -> Unit {
   html_slot_element_assign_ffi(TJsValue::to_js(self), nodes.to_js())
 }
