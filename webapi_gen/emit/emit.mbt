@@ -336,7 +336,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::TypedefAlias(TypeName(name), target_type) => {
         buf.write_string("///|\n")
-        buf.write_string("pub typealias \{name} = \{target_type}")
+        buf.write_string("pub type \{name} = \{target_type}")
       }
       Emit::TypedefUnion(TypeName(name), member_types) => {
         let trait_name = "T\{name}"

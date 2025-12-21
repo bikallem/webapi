@@ -28,14 +28,6 @@ pub impl Emitter for TypedefEmitter with emit(
 }
 
 ///|
-/// Types to skip in union typedef generation
-let skip_union_types : @hashset.HashSet[String] = [
-    "WindowProxy", "MediaProvider", "HTMLOrSVGScriptElement", "TrustedType", "TrustedHTML",
-    "TrustedScript", "TrustedScriptURL",
-  ]
-  |> @hashset.from_array
-
-///|
 /// Filters union members to produce MoonBit type names, removing duplicates,
 /// Unit, and skip types.
 fn filter_typedef_union_members(
@@ -46,9 +38,7 @@ fn filter_typedef_union_members(
   let result : Array[String] = []
   for mem in members {
     let mbt_type = typedef_type_to_mbt(mem.type_, type_registry)
-    if mbt_type != "Unit" &&
-      not(skip_union_types.contains(mbt_type)) &&
-      not(seen.contains(mbt_type)) {
+    if mbt_type != "Unit" && not(seen.contains(mbt_type)) {
       seen.add(mbt_type)
       result.push(mbt_type)
     }

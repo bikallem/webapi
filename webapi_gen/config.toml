@@ -21,6 +21,7 @@ core_specs = [
     "geometry",
     "FileAPI",
     "SVG",
+    "xhr",
 ]
 
 excluded_interfaces = []
