@@ -209,7 +209,6 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|options? : &TEventTargetCreateElementOptionsArg = ElementCreationOptions::empty()) -> Element {
       #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), options.to_js())
       #|}
-
     ),
   )
 }

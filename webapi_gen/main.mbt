@@ -79,7 +79,7 @@ fn main {
     println("Found \{idl_paths.length()} core spec IDL files\n")
 
     // Parse all IDL files and merge definitions
-    let all_definitions : Array[DefinitionExtendedAttributes] = []
+    let all_definitions : Array[@parser.DefinitionExtendedAttributes] = []
     for idl_path in idl_paths {
       println("  Parsing \{idl_path}...")
       let definitions = @parser.parse_file(idl_path)
@@ -89,9 +89,10 @@ fn main {
     }
     println("Total definitions: \{all_definitions.length()}")
     println("Creating type registry...")
-    let type_registry = TypeRegistry::new(all_definitions)
+    let type_registry = @type_registry.TypeRegistry::new(all_definitions)
     println("Merging partials...")
-    let flattened = merge_partials(all_definitions) |> flatten(log_skipped)
+    let flattened = @partial_merged.merge_partials(all_definitions)
+      |> @flattened_idl.flatten(log_skipped)
     println("Flattened \{flattened.interfaces.length()} interfaces")
 
     // Create output directory if it doesn't exist

@@ -1,10 +1,10 @@
 ///|
 /// Filter IDL with only whitelisted interfaces, dictionaries, enums, typedefs, and callbacks.
 fn filter_idl(
-  config : GeneratorConfig,
-  defns : Array[DefinitionExtendedAttributes],
+  config : @config.GeneratorConfig,
+  defns : Array[@parser.DefinitionExtendedAttributes],
   logger : (String) -> Unit,
-) -> Array[DefinitionExtendedAttributes] {
+) -> Array[@parser.DefinitionExtendedAttributes] {
   let core_interfaces = @hashset.from_iter(config.core_interfaces.iter())
   let excluded_callbacks = @hashset.from_iter(config.excluded_callbacks.iter())
   let excluded_typedefs = @hashset.from_iter(config.excluded_typedefs.iter())
@@ -90,7 +90,7 @@ test "filter_idl filters interfaces by whitelist" {
     #|interface Node {};
     #|interface Document {};
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = @config.load_config_from_string(
+  let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
       #|{
       #| "idl_dir": "",
@@ -124,7 +124,7 @@ test "filter_idl excludes callbacks" {
     #|callback EventListener = undefined (Event event);
     #|callback MutationCallback = undefined (sequence<MutationRecord> mutations);
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = @config.load_config_from_string(
+  let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
       #|{
       #| "idl_dir": "",
@@ -172,7 +172,7 @@ test "filter_idl excludes typedefs" {
     #|typedef (DOMString or Function) EventHandler;
     #|typedef unsigned long long DOMTimeStamp;
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = @config.load_config_from_string(
+  let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
       #|{
       #| "idl_dir": "",
@@ -206,7 +206,7 @@ test "filter_idl excludes dictionaries by prefix" {
     #|dictionary ElementCreationOptions {};
     #|dictionary ElementDefinitionOptions {};
   let defs = @parser.parse(widl)
-  let config : GeneratorConfig = @config.load_config_from_string(
+  let config : @config.GeneratorConfig = @config.load_config_from_string(
     (
       #|{
       #| "idl_dir": "",
