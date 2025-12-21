@@ -76,13 +76,13 @@ fn filter_idl(
 
   for def in defns {
     match def.definition {
-      Interface(iface) if core_interfaces.contains(iface.name) =>
+      Interface(iface) if !core_interfaces.contains(iface.name) =>
         filtered_defns.push(def)
-      PartialInterface(piface) if core_interfaces.contains(piface.name) =>
+      PartialInterface(piface) if !core_interfaces.contains(piface.name) =>
         filtered_defns.push(def)
-      Mixin(mxn) if core_interfaces.contains(mxn.name) =>
+      Mixin(mxn) if !core_interfaces.contains(mxn.name) =>
         filtered_defns.push(def)
-      PartialMixin(pmxn) if core_interfaces.contains(pmxn.name) =>
+      PartialMixin(pmxn) if !core_interfaces.contains(pmxn.name) =>
         filtered_defns.push(def)
       Namespace(ns) => logger("Skipped namespace: \{ns.name}")
       PartialNamespace(pns) => logger("Skipped partial namespace: \{pns.name}")

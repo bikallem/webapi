@@ -13,7 +13,7 @@ test "filter_idl with empty config returns all types" {
       #|templates_dir = ""
       #|template_files = []
       #|core_specs = []
-      #|excluded_interfaces = []
+      #|excluded_interfaces = ["Element"]
       #|excluded_callbacks = []
       #|excluded_typedefs = []
       #|excluded_dictionary_prefixes = []
@@ -22,6 +22,10 @@ test "filter_idl with empty config returns all types" {
   )
   let filtered = filter_idl(config, defs, ignore)
   @json.inspect(filtered, content=[
+    {
+      "extended_attributes": [],
+      "definition": ["Interface", { "name": "Node", "members": [] }],
+    },
     {
       "extended_attributes": [],
       "definition": ["Dictionary", { "name": "EventInit", "members": [] }],
@@ -61,11 +65,7 @@ test "filter_idl filters interfaces by whitelist" {
   @json.inspect(filtered, content=[
     {
       "extended_attributes": [],
-      "definition": ["Interface", { "name": "Element", "members": [] }],
-    },
-    {
-      "extended_attributes": [],
-      "definition": ["Interface", { "name": "Node", "members": [] }],
+      "definition": ["Interface", { "name": "Document", "members": [] }],
     },
   ])
 }
