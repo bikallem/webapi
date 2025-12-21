@@ -111,10 +111,12 @@ pub fn flatten(
   for name, cbi in partial_merged.callback_interfaces {
     // CallbackInterface::members only holds one operation member
     let op = loop cbi.members.map(m => m.callback_interface_member)[:] {
-      [] =>
-        abort(
+      [] => {
+        logger(
           "CallbackInterface '\{name}' has no operation member to convert to CallbackFunction",
         )
+        panic()
+      }
       [Operation(op), ..] => break op
       [_, .. rest] => continue rest
     }
