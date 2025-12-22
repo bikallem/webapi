@@ -26,11 +26,11 @@ pub impl TNode for HTMLTableRowElement
 pub impl TEventTarget for HTMLTableRowElement
 
 ///|
-extern "js" fn html_table_row_element_ffi() -> HTMLTableRowElement = "() => new HTMLTableRowElement()"
+extern "js" fn html_table_row_element_new_ffi() -> HTMLTableRowElement = "() => new HTMLTableRowElement()"
 
 ///|
 pub fn HTMLTableRowElement::new() -> HTMLTableRowElement {
-  html_table_row_element_ffi()
+  html_table_row_element_new_ffi()
 }
 
 ///|

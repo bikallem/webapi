@@ -26,11 +26,11 @@ pub impl TNode for HTMLHeadingElement
 pub impl TEventTarget for HTMLHeadingElement
 
 ///|
-extern "js" fn html_heading_element_ffi() -> HTMLHeadingElement = "() => new HTMLHeadingElement()"
+extern "js" fn html_heading_element_new_ffi() -> HTMLHeadingElement = "() => new HTMLHeadingElement()"
 
 ///|
 pub fn HTMLHeadingElement::new() -> HTMLHeadingElement {
-  html_heading_element_ffi()
+  html_heading_element_new_ffi()
 }
 
 ///|

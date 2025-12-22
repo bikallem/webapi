@@ -20,11 +20,11 @@ pub impl TNode for DocumentFragment
 pub impl TEventTarget for DocumentFragment
 
 ///|
-extern "js" fn document_fragment_ffi() -> DocumentFragment = "() => new DocumentFragment()"
+extern "js" fn document_fragment_new_ffi() -> DocumentFragment = "() => new DocumentFragment()"
 
 ///|
 pub fn DocumentFragment::new() -> DocumentFragment {
-  document_fragment_ffi()
+  document_fragment_new_ffi()
 }
 
 ///|

@@ -24,11 +24,11 @@ pub impl TNode for HTMLBaseElement
 pub impl TEventTarget for HTMLBaseElement
 
 ///|
-extern "js" fn html_base_element_ffi() -> HTMLBaseElement = "() => new HTMLBaseElement()"
+extern "js" fn html_base_element_new_ffi() -> HTMLBaseElement = "() => new HTMLBaseElement()"
 
 ///|
 pub fn HTMLBaseElement::new() -> HTMLBaseElement {
-  html_base_element_ffi()
+  html_base_element_new_ffi()
 }
 
 ///|

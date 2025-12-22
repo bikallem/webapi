@@ -26,11 +26,11 @@ pub impl TDOMMatrixNewInitArg for String with to_js(self : String) -> JsValue = 
 pub impl TDOMMatrixNewInitArg for Array[Double] with to_js(self : Array[Double]) -> JsValue = "%identity"
 
 ///|
-extern "js" fn dom_matrix_ffi(init : JsValue) -> DOMMatrix = "(init) => new DOMMatrix(init)"
+extern "js" fn dom_matrix_new_ffi(init : JsValue) -> DOMMatrix = "(init) => new DOMMatrix(init)"
 
 ///|
 pub fn DOMMatrix::new(init? : &TDOMMatrixNewInitArg) -> DOMMatrix {
-  dom_matrix_ffi(
+  dom_matrix_new_ffi(
     match init {
       Some(v) => v.to_js()
       None => JsValue::undefined()

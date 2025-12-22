@@ -20,7 +20,7 @@ pub impl TUIEvent for CompositionEvent
 pub impl TEvent for CompositionEvent
 
 ///|
-extern "js" fn composition_event_ffi(
+extern "js" fn composition_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> CompositionEvent = "(type_, event_init_dict) => new CompositionEvent(type_, event_init_dict)"
@@ -30,7 +30,7 @@ pub fn CompositionEvent::new(
   type_ : String,
   event_init_dict? : CompositionEventInit = CompositionEventInit::empty(),
 ) -> CompositionEvent {
-  composition_event_ffi(
+  composition_event_new_ffi(
     TJsValue::to_js(type_),
     TJsValue::to_js(event_init_dict),
   )

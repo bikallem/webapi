@@ -12,11 +12,11 @@ pub fn[T : TFileReaderSync] FileReaderSync::into(self : FileReaderSync) -> T = "
 pub impl TFileReaderSync for FileReaderSync
 
 ///|
-extern "js" fn file_reader_sync_ffi() -> FileReaderSync = "() => new FileReaderSync()"
+extern "js" fn file_reader_sync_new_ffi() -> FileReaderSync = "() => new FileReaderSync()"
 
 ///|
 pub fn FileReaderSync::new() -> FileReaderSync {
-  file_reader_sync_ffi()
+  file_reader_sync_new_ffi()
 }
 
 ///|

@@ -26,11 +26,11 @@ pub impl TNode for HTMLParamElement
 pub impl TEventTarget for HTMLParamElement
 
 ///|
-extern "js" fn html_param_element_ffi() -> HTMLParamElement = "() => new HTMLParamElement()"
+extern "js" fn html_param_element_new_ffi() -> HTMLParamElement = "() => new HTMLParamElement()"
 
 ///|
 pub fn HTMLParamElement::new() -> HTMLParamElement {
-  html_param_element_ffi()
+  html_param_element_new_ffi()
 }
 
 ///|

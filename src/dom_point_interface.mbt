@@ -15,7 +15,7 @@ pub impl TDOMPoint for DOMPoint
 pub impl TDOMPointReadOnly for DOMPoint
 
 ///|
-extern "js" fn dom_point_ffi(
+extern "js" fn dom_point_new_ffi(
   x : JsValue,
   y : JsValue,
   z : JsValue,
@@ -29,7 +29,7 @@ pub fn DOMPoint::new(
   z? : Double = 0,
   w? : Double = 1,
 ) -> DOMPoint {
-  dom_point_ffi(
+  dom_point_new_ffi(
     TJsValue::to_js(x),
     TJsValue::to_js(y),
     TJsValue::to_js(z),

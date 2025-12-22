@@ -26,11 +26,11 @@ pub impl TNode for HTMLEmbedElement
 pub impl TEventTarget for HTMLEmbedElement
 
 ///|
-extern "js" fn html_embed_element_ffi() -> HTMLEmbedElement = "() => new HTMLEmbedElement()"
+extern "js" fn html_embed_element_new_ffi() -> HTMLEmbedElement = "() => new HTMLEmbedElement()"
 
 ///|
 pub fn HTMLEmbedElement::new() -> HTMLEmbedElement {
-  html_embed_element_ffi()
+  html_embed_element_new_ffi()
 }
 
 ///|

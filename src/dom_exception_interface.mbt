@@ -12,7 +12,7 @@ pub fn[T : TDOMException] DOMException::into(self : DOMException) -> T = "%ident
 pub impl TDOMException for DOMException
 
 ///|
-extern "js" fn dom_exception_ffi(
+extern "js" fn dom_exception_new_ffi(
   message : JsValue,
   name : JsValue,
 ) -> DOMException = "(message, name) => new DOMException(message, name)"
@@ -22,7 +22,7 @@ pub fn DOMException::new(
   message? : String = "",
   name? : String = "Error",
 ) -> DOMException {
-  dom_exception_ffi(TJsValue::to_js(message), TJsValue::to_js(name))
+  dom_exception_new_ffi(TJsValue::to_js(message), TJsValue::to_js(name))
 }
 
 ///|

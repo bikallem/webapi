@@ -15,7 +15,7 @@ pub impl TEventSource for EventSource
 pub impl TEventTarget for EventSource
 
 ///|
-extern "js" fn event_source_ffi(
+extern "js" fn event_source_new_ffi(
   url : JsValue,
   event_source_init_dict : JsValue,
 ) -> EventSource = "(url, event_source_init_dict) => new EventSource(url, event_source_init_dict)"
@@ -25,7 +25,7 @@ pub fn EventSource::new(
   url : String,
   event_source_init_dict? : EventSourceInit = EventSourceInit::empty(),
 ) -> EventSource {
-  event_source_ffi(
+  event_source_new_ffi(
     TJsValue::to_js(url),
     TJsValue::to_js(event_source_init_dict),
   )

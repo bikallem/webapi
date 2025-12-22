@@ -24,11 +24,11 @@ pub impl TNode for HTMLAreaElement
 pub impl TEventTarget for HTMLAreaElement
 
 ///|
-extern "js" fn html_area_element_ffi() -> HTMLAreaElement = "() => new HTMLAreaElement()"
+extern "js" fn html_area_element_new_ffi() -> HTMLAreaElement = "() => new HTMLAreaElement()"
 
 ///|
 pub fn HTMLAreaElement::new() -> HTMLAreaElement {
-  html_area_element_ffi()
+  html_area_element_new_ffi()
 }
 
 ///|

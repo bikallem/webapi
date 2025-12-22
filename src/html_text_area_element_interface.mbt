@@ -26,11 +26,11 @@ pub impl TNode for HTMLTextAreaElement
 pub impl TEventTarget for HTMLTextAreaElement
 
 ///|
-extern "js" fn html_text_area_element_ffi() -> HTMLTextAreaElement = "() => new HTMLTextAreaElement()"
+extern "js" fn html_text_area_element_new_ffi() -> HTMLTextAreaElement = "() => new HTMLTextAreaElement()"
 
 ///|
 pub fn HTMLTextAreaElement::new() -> HTMLTextAreaElement {
-  html_text_area_element_ffi()
+  html_text_area_element_new_ffi()
 }
 
 ///|

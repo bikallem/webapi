@@ -26,11 +26,11 @@ pub impl TNode for HTMLOptGroupElement
 pub impl TEventTarget for HTMLOptGroupElement
 
 ///|
-extern "js" fn html_opt_group_element_ffi() -> HTMLOptGroupElement = "() => new HTMLOptGroupElement()"
+extern "js" fn html_opt_group_element_new_ffi() -> HTMLOptGroupElement = "() => new HTMLOptGroupElement()"
 
 ///|
 pub fn HTMLOptGroupElement::new() -> HTMLOptGroupElement {
-  html_opt_group_element_ffi()
+  html_opt_group_element_new_ffi()
 }
 
 ///|

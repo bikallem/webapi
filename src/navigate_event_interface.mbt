@@ -15,7 +15,7 @@ pub impl TNavigateEvent for NavigateEvent
 pub impl TEvent for NavigateEvent
 
 ///|
-extern "js" fn navigate_event_ffi(
+extern "js" fn navigate_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> NavigateEvent = "(type_, event_init_dict) => new NavigateEvent(type_, event_init_dict)"
@@ -25,7 +25,10 @@ pub fn NavigateEvent::new(
   type_ : String,
   event_init_dict : NavigateEventInit,
 ) -> NavigateEvent {
-  navigate_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  navigate_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
 }
 
 ///|

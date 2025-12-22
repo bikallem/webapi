@@ -24,11 +24,11 @@ pub impl TNode for HTMLMenuElement
 pub impl TEventTarget for HTMLMenuElement
 
 ///|
-extern "js" fn html_menu_element_ffi() -> HTMLMenuElement = "() => new HTMLMenuElement()"
+extern "js" fn html_menu_element_new_ffi() -> HTMLMenuElement = "() => new HTMLMenuElement()"
 
 ///|
 pub fn HTMLMenuElement::new() -> HTMLMenuElement {
-  html_menu_element_ffi()
+  html_menu_element_new_ffi()
 }
 
 ///|

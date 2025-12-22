@@ -15,7 +15,7 @@ pub impl TPageRevealEvent for PageRevealEvent
 pub impl TEvent for PageRevealEvent
 
 ///|
-extern "js" fn page_reveal_event_ffi(
+extern "js" fn page_reveal_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> PageRevealEvent = "(type_, event_init_dict) => new PageRevealEvent(type_, event_init_dict)"
@@ -25,7 +25,7 @@ pub fn PageRevealEvent::new(
   type_ : String,
   event_init_dict? : PageRevealEventInit = PageRevealEventInit::empty(),
 ) -> PageRevealEvent {
-  page_reveal_event_ffi(
+  page_reveal_event_new_ffi(
     TJsValue::to_js(type_),
     TJsValue::to_js(event_init_dict),
   )

@@ -28,11 +28,11 @@ pub impl TNode for HTMLDirectoryElement
 pub impl TEventTarget for HTMLDirectoryElement
 
 ///|
-extern "js" fn html_directory_element_ffi() -> HTMLDirectoryElement = "() => new HTMLDirectoryElement()"
+extern "js" fn html_directory_element_new_ffi() -> HTMLDirectoryElement = "() => new HTMLDirectoryElement()"
 
 ///|
 pub fn HTMLDirectoryElement::new() -> HTMLDirectoryElement {
-  html_directory_element_ffi()
+  html_directory_element_new_ffi()
 }
 
 ///|

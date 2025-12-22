@@ -24,11 +24,11 @@ pub impl TNode for HTMLSlotElement
 pub impl TEventTarget for HTMLSlotElement
 
 ///|
-extern "js" fn html_slot_element_ffi() -> HTMLSlotElement = "() => new HTMLSlotElement()"
+extern "js" fn html_slot_element_new_ffi() -> HTMLSlotElement = "() => new HTMLSlotElement()"
 
 ///|
 pub fn HTMLSlotElement::new() -> HTMLSlotElement {
-  html_slot_element_ffi()
+  html_slot_element_new_ffi()
 }
 
 ///|

@@ -26,11 +26,11 @@ pub impl TNode for HTMLDListElement
 pub impl TEventTarget for HTMLDListElement
 
 ///|
-extern "js" fn htmld_list_element_ffi() -> HTMLDListElement = "() => new HTMLDListElement()"
+extern "js" fn htmld_list_element_new_ffi() -> HTMLDListElement = "() => new HTMLDListElement()"
 
 ///|
 pub fn HTMLDListElement::new() -> HTMLDListElement {
-  htmld_list_element_ffi()
+  htmld_list_element_new_ffi()
 }
 
 ///|

@@ -24,11 +24,11 @@ pub impl TNode for HTMLHRElement
 pub impl TEventTarget for HTMLHRElement
 
 ///|
-extern "js" fn htmlhr_element_ffi() -> HTMLHRElement = "() => new HTMLHRElement()"
+extern "js" fn htmlhr_element_new_ffi() -> HTMLHRElement = "() => new HTMLHRElement()"
 
 ///|
 pub fn HTMLHRElement::new() -> HTMLHRElement {
-  htmlhr_element_ffi()
+  htmlhr_element_new_ffi()
 }
 
 ///|

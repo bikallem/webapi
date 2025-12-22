@@ -28,11 +28,11 @@ pub impl TNode for HTMLTableCaptionElement
 pub impl TEventTarget for HTMLTableCaptionElement
 
 ///|
-extern "js" fn html_table_caption_element_ffi() -> HTMLTableCaptionElement = "() => new HTMLTableCaptionElement()"
+extern "js" fn html_table_caption_element_new_ffi() -> HTMLTableCaptionElement = "() => new HTMLTableCaptionElement()"
 
 ///|
 pub fn HTMLTableCaptionElement::new() -> HTMLTableCaptionElement {
-  html_table_caption_element_ffi()
+  html_table_caption_element_new_ffi()
 }
 
 ///|

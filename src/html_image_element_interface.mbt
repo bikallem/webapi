@@ -26,11 +26,11 @@ pub impl TNode for HTMLImageElement
 pub impl TEventTarget for HTMLImageElement
 
 ///|
-extern "js" fn html_image_element_ffi() -> HTMLImageElement = "() => new HTMLImageElement()"
+extern "js" fn html_image_element_new_ffi() -> HTMLImageElement = "() => new HTMLImageElement()"
 
 ///|
 pub fn HTMLImageElement::new() -> HTMLImageElement {
-  html_image_element_ffi()
+  html_image_element_new_ffi()
 }
 
 ///|

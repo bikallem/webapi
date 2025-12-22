@@ -26,11 +26,11 @@ pub impl TNode for HTMLTemplateElement
 pub impl TEventTarget for HTMLTemplateElement
 
 ///|
-extern "js" fn html_template_element_ffi() -> HTMLTemplateElement = "() => new HTMLTemplateElement()"
+extern "js" fn html_template_element_new_ffi() -> HTMLTemplateElement = "() => new HTMLTemplateElement()"
 
 ///|
 pub fn HTMLTemplateElement::new() -> HTMLTemplateElement {
-  html_template_element_ffi()
+  html_template_element_new_ffi()
 }
 
 ///|

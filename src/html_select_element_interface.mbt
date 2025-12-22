@@ -26,11 +26,11 @@ pub impl TNode for HTMLSelectElement
 pub impl TEventTarget for HTMLSelectElement
 
 ///|
-extern "js" fn html_select_element_ffi() -> HTMLSelectElement = "() => new HTMLSelectElement()"
+extern "js" fn html_select_element_new_ffi() -> HTMLSelectElement = "() => new HTMLSelectElement()"
 
 ///|
 pub fn HTMLSelectElement::new() -> HTMLSelectElement {
-  html_select_element_ffi()
+  html_select_element_new_ffi()
 }
 
 ///|

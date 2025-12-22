@@ -26,11 +26,11 @@ pub impl TNode for HTMLMarqueeElement
 pub impl TEventTarget for HTMLMarqueeElement
 
 ///|
-extern "js" fn html_marquee_element_ffi() -> HTMLMarqueeElement = "() => new HTMLMarqueeElement()"
+extern "js" fn html_marquee_element_new_ffi() -> HTMLMarqueeElement = "() => new HTMLMarqueeElement()"
 
 ///|
 pub fn HTMLMarqueeElement::new() -> HTMLMarqueeElement {
-  html_marquee_element_ffi()
+  html_marquee_element_new_ffi()
 }
 
 ///|

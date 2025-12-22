@@ -18,7 +18,7 @@ pub impl TUIEvent for MouseEvent
 pub impl TEvent for MouseEvent
 
 ///|
-extern "js" fn mouse_event_ffi(
+extern "js" fn mouse_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> MouseEvent = "(type_, event_init_dict) => new MouseEvent(type_, event_init_dict)"
@@ -28,7 +28,7 @@ pub fn MouseEvent::new(
   type_ : String,
   event_init_dict? : MouseEventInit = MouseEventInit::empty(),
 ) -> MouseEvent {
-  mouse_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  mouse_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|

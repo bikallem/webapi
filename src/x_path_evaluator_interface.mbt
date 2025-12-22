@@ -12,11 +12,11 @@ pub fn[T : TXPathEvaluator] XPathEvaluator::into(self : XPathEvaluator) -> T = "
 pub impl TXPathEvaluator for XPathEvaluator
 
 ///|
-extern "js" fn x_path_evaluator_ffi() -> XPathEvaluator = "() => new XPathEvaluator()"
+extern "js" fn x_path_evaluator_new_ffi() -> XPathEvaluator = "() => new XPathEvaluator()"
 
 ///|
 pub fn XPathEvaluator::new() -> XPathEvaluator {
-  x_path_evaluator_ffi()
+  x_path_evaluator_new_ffi()
 }
 
 ///|

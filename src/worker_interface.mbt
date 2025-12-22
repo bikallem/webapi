@@ -28,14 +28,17 @@ pub impl TWorkerNewScriptURLArg for TrustedScriptURL with to_js(
 pub impl TWorkerNewScriptURLArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-extern "js" fn worker_ffi(script_url : JsValue, options : JsValue) -> Worker = "(script_url, options) => new Worker(script_url, options)"
+extern "js" fn worker_new_ffi(
+  script_url : JsValue,
+  options : JsValue,
+) -> Worker = "(script_url, options) => new Worker(script_url, options)"
 
 ///|
 pub fn Worker::new(
   script_url : &TWorkerNewScriptURLArg,
   options? : WorkerOptions = WorkerOptions::empty(),
 ) -> Worker {
-  worker_ffi(script_url.to_js(), TJsValue::to_js(options))
+  worker_new_ffi(script_url.to_js(), TJsValue::to_js(options))
 }
 
 ///|

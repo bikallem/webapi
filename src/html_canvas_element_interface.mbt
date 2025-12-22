@@ -26,11 +26,11 @@ pub impl TNode for HTMLCanvasElement
 pub impl TEventTarget for HTMLCanvasElement
 
 ///|
-extern "js" fn html_canvas_element_ffi() -> HTMLCanvasElement = "() => new HTMLCanvasElement()"
+extern "js" fn html_canvas_element_new_ffi() -> HTMLCanvasElement = "() => new HTMLCanvasElement()"
 
 ///|
 pub fn HTMLCanvasElement::new() -> HTMLCanvasElement {
-  html_canvas_element_ffi()
+  html_canvas_element_new_ffi()
 }
 
 ///|

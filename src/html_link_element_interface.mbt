@@ -24,11 +24,11 @@ pub impl TNode for HTMLLinkElement
 pub impl TEventTarget for HTMLLinkElement
 
 ///|
-extern "js" fn html_link_element_ffi() -> HTMLLinkElement = "() => new HTMLLinkElement()"
+extern "js" fn html_link_element_new_ffi() -> HTMLLinkElement = "() => new HTMLLinkElement()"
 
 ///|
 pub fn HTMLLinkElement::new() -> HTMLLinkElement {
-  html_link_element_ffi()
+  html_link_element_new_ffi()
 }
 
 ///|

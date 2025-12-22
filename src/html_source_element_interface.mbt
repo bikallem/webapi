@@ -26,11 +26,11 @@ pub impl TNode for HTMLSourceElement
 pub impl TEventTarget for HTMLSourceElement
 
 ///|
-extern "js" fn html_source_element_ffi() -> HTMLSourceElement = "() => new HTMLSourceElement()"
+extern "js" fn html_source_element_new_ffi() -> HTMLSourceElement = "() => new HTMLSourceElement()"
 
 ///|
 pub fn HTMLSourceElement::new() -> HTMLSourceElement {
-  html_source_element_ffi()
+  html_source_element_new_ffi()
 }
 
 ///|

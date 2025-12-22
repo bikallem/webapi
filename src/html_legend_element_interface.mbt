@@ -26,11 +26,11 @@ pub impl TNode for HTMLLegendElement
 pub impl TEventTarget for HTMLLegendElement
 
 ///|
-extern "js" fn html_legend_element_ffi() -> HTMLLegendElement = "() => new HTMLLegendElement()"
+extern "js" fn html_legend_element_new_ffi() -> HTMLLegendElement = "() => new HTMLLegendElement()"
 
 ///|
 pub fn HTMLLegendElement::new() -> HTMLLegendElement {
-  html_legend_element_ffi()
+  html_legend_element_new_ffi()
 }
 
 ///|

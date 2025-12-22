@@ -24,11 +24,11 @@ pub impl TNode for HTMLFormElement
 pub impl TEventTarget for HTMLFormElement
 
 ///|
-extern "js" fn html_form_element_ffi() -> HTMLFormElement = "() => new HTMLFormElement()"
+extern "js" fn html_form_element_new_ffi() -> HTMLFormElement = "() => new HTMLFormElement()"
 
 ///|
 pub fn HTMLFormElement::new() -> HTMLFormElement {
-  html_form_element_ffi()
+  html_form_element_new_ffi()
 }
 
 ///|

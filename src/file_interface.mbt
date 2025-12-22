@@ -15,7 +15,7 @@ pub impl TFile for File
 pub impl TBlob for File
 
 ///|
-extern "js" fn file_ffi(
+extern "js" fn file_new_ffi(
   file_bits : JsValue,
   file_name : JsValue,
   options : JsValue,
@@ -27,7 +27,7 @@ pub fn File::new(
   file_name : String,
   options? : FilePropertyBag = FilePropertyBag::empty(),
 ) -> File {
-  file_ffi(
+  file_new_ffi(
     TJsValue::to_js(file_bits),
     TJsValue::to_js(file_name),
     TJsValue::to_js(options),

@@ -15,7 +15,7 @@ pub impl TMessageEvent for MessageEvent
 pub impl TEvent for MessageEvent
 
 ///|
-extern "js" fn message_event_ffi(
+extern "js" fn message_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> MessageEvent = "(type_, event_init_dict) => new MessageEvent(type_, event_init_dict)"
@@ -25,7 +25,10 @@ pub fn MessageEvent::new(
   type_ : String,
   event_init_dict? : MessageEventInit = MessageEventInit::empty(),
 ) -> MessageEvent {
-  message_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  message_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
 }
 
 ///|

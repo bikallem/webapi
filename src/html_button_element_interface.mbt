@@ -26,11 +26,11 @@ pub impl TNode for HTMLButtonElement
 pub impl TEventTarget for HTMLButtonElement
 
 ///|
-extern "js" fn html_button_element_ffi() -> HTMLButtonElement = "() => new HTMLButtonElement()"
+extern "js" fn html_button_element_new_ffi() -> HTMLButtonElement = "() => new HTMLButtonElement()"
 
 ///|
 pub fn HTMLButtonElement::new() -> HTMLButtonElement {
-  html_button_element_ffi()
+  html_button_element_new_ffi()
 }
 
 ///|

@@ -24,11 +24,11 @@ pub impl TNode for HTMLLIElement
 pub impl TEventTarget for HTMLLIElement
 
 ///|
-extern "js" fn htmlli_element_ffi() -> HTMLLIElement = "() => new HTMLLIElement()"
+extern "js" fn htmlli_element_new_ffi() -> HTMLLIElement = "() => new HTMLLIElement()"
 
 ///|
 pub fn HTMLLIElement::new() -> HTMLLIElement {
-  htmlli_element_ffi()
+  htmlli_element_new_ffi()
 }
 
 ///|

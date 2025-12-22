@@ -26,11 +26,11 @@ pub impl TNode for HTMLStyleElement
 pub impl TEventTarget for HTMLStyleElement
 
 ///|
-extern "js" fn html_style_element_ffi() -> HTMLStyleElement = "() => new HTMLStyleElement()"
+extern "js" fn html_style_element_new_ffi() -> HTMLStyleElement = "() => new HTMLStyleElement()"
 
 ///|
 pub fn HTMLStyleElement::new() -> HTMLStyleElement {
-  html_style_element_ffi()
+  html_style_element_new_ffi()
 }
 
 ///|

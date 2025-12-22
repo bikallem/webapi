@@ -26,11 +26,11 @@ pub impl TNode for HTMLQuoteElement
 pub impl TEventTarget for HTMLQuoteElement
 
 ///|
-extern "js" fn html_quote_element_ffi() -> HTMLQuoteElement = "() => new HTMLQuoteElement()"
+extern "js" fn html_quote_element_new_ffi() -> HTMLQuoteElement = "() => new HTMLQuoteElement()"
 
 ///|
 pub fn HTMLQuoteElement::new() -> HTMLQuoteElement {
-  html_quote_element_ffi()
+  html_quote_element_new_ffi()
 }
 
 ///|

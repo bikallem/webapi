@@ -26,11 +26,11 @@ pub impl TNode for HTMLDetailsElement
 pub impl TEventTarget for HTMLDetailsElement
 
 ///|
-extern "js" fn html_details_element_ffi() -> HTMLDetailsElement = "() => new HTMLDetailsElement()"
+extern "js" fn html_details_element_new_ffi() -> HTMLDetailsElement = "() => new HTMLDetailsElement()"
 
 ///|
 pub fn HTMLDetailsElement::new() -> HTMLDetailsElement {
-  html_details_element_ffi()
+  html_details_element_new_ffi()
 }
 
 ///|

@@ -24,11 +24,11 @@ pub impl TNode for HTMLMapElement
 pub impl TEventTarget for HTMLMapElement
 
 ///|
-extern "js" fn html_map_element_ffi() -> HTMLMapElement = "() => new HTMLMapElement()"
+extern "js" fn html_map_element_new_ffi() -> HTMLMapElement = "() => new HTMLMapElement()"
 
 ///|
 pub fn HTMLMapElement::new() -> HTMLMapElement {
-  html_map_element_ffi()
+  html_map_element_new_ffi()
 }
 
 ///|

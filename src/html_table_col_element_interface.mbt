@@ -26,11 +26,11 @@ pub impl TNode for HTMLTableColElement
 pub impl TEventTarget for HTMLTableColElement
 
 ///|
-extern "js" fn html_table_col_element_ffi() -> HTMLTableColElement = "() => new HTMLTableColElement()"
+extern "js" fn html_table_col_element_new_ffi() -> HTMLTableColElement = "() => new HTMLTableColElement()"
 
 ///|
 pub fn HTMLTableColElement::new() -> HTMLTableColElement {
-  html_table_col_element_ffi()
+  html_table_col_element_new_ffi()
 }
 
 ///|

@@ -26,11 +26,11 @@ pub impl TNode for HTMLScriptElement
 pub impl TEventTarget for HTMLScriptElement
 
 ///|
-extern "js" fn html_script_element_ffi() -> HTMLScriptElement = "() => new HTMLScriptElement()"
+extern "js" fn html_script_element_new_ffi() -> HTMLScriptElement = "() => new HTMLScriptElement()"
 
 ///|
 pub fn HTMLScriptElement::new() -> HTMLScriptElement {
-  html_script_element_ffi()
+  html_script_element_new_ffi()
 }
 
 ///|

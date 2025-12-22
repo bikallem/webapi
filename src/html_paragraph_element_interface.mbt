@@ -28,11 +28,11 @@ pub impl TNode for HTMLParagraphElement
 pub impl TEventTarget for HTMLParagraphElement
 
 ///|
-extern "js" fn html_paragraph_element_ffi() -> HTMLParagraphElement = "() => new HTMLParagraphElement()"
+extern "js" fn html_paragraph_element_new_ffi() -> HTMLParagraphElement = "() => new HTMLParagraphElement()"
 
 ///|
 pub fn HTMLParagraphElement::new() -> HTMLParagraphElement {
-  html_paragraph_element_ffi()
+  html_paragraph_element_new_ffi()
 }
 
 ///|

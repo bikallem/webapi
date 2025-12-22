@@ -26,11 +26,11 @@ pub impl TNode for HTMLObjectElement
 pub impl TEventTarget for HTMLObjectElement
 
 ///|
-extern "js" fn html_object_element_ffi() -> HTMLObjectElement = "() => new HTMLObjectElement()"
+extern "js" fn html_object_element_new_ffi() -> HTMLObjectElement = "() => new HTMLObjectElement()"
 
 ///|
 pub fn HTMLObjectElement::new() -> HTMLObjectElement {
-  html_object_element_ffi()
+  html_object_element_new_ffi()
 }
 
 ///|

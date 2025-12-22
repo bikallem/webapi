@@ -17,11 +17,11 @@ pub impl TBroadcastChannel for BroadcastChannel
 pub impl TEventTarget for BroadcastChannel
 
 ///|
-extern "js" fn broadcast_channel_ffi(name : JsValue) -> BroadcastChannel = "(name) => new BroadcastChannel(name)"
+extern "js" fn broadcast_channel_new_ffi(name : JsValue) -> BroadcastChannel = "(name) => new BroadcastChannel(name)"
 
 ///|
 pub fn BroadcastChannel::new(name : String) -> BroadcastChannel {
-  broadcast_channel_ffi(TJsValue::to_js(name))
+  broadcast_channel_new_ffi(TJsValue::to_js(name))
 }
 
 ///|

@@ -15,7 +15,7 @@ pub impl TCustomEvent for CustomEvent
 pub impl TEvent for CustomEvent
 
 ///|
-extern "js" fn custom_event_ffi(
+extern "js" fn custom_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> CustomEvent = "(type_, event_init_dict) => new CustomEvent(type_, event_init_dict)"
@@ -25,7 +25,7 @@ pub fn CustomEvent::new(
   type_ : String,
   event_init_dict? : CustomEventInit = CustomEventInit::empty(),
 ) -> CustomEvent {
-  custom_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  custom_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|

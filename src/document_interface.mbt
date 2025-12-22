@@ -18,11 +18,11 @@ pub impl TNode for Document
 pub impl TEventTarget for Document
 
 ///|
-extern "js" fn document_ffi() -> Document = "() => new Document()"
+extern "js" fn document_new_ffi() -> Document = "() => new Document()"
 
 ///|
 pub fn Document::new() -> Document {
-  document_ffi()
+  document_new_ffi()
 }
 
 ///|

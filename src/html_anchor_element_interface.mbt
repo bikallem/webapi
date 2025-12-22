@@ -26,11 +26,11 @@ pub impl TNode for HTMLAnchorElement
 pub impl TEventTarget for HTMLAnchorElement
 
 ///|
-extern "js" fn html_anchor_element_ffi() -> HTMLAnchorElement = "() => new HTMLAnchorElement()"
+extern "js" fn html_anchor_element_new_ffi() -> HTMLAnchorElement = "() => new HTMLAnchorElement()"
 
 ///|
 pub fn HTMLAnchorElement::new() -> HTMLAnchorElement {
-  html_anchor_element_ffi()
+  html_anchor_element_new_ffi()
 }
 
 ///|

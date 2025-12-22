@@ -12,11 +12,11 @@ pub fn[T : TDOMParser] DOMParser::into(self : DOMParser) -> T = "%identity"
 pub impl TDOMParser for DOMParser
 
 ///|
-extern "js" fn dom_parser_ffi() -> DOMParser = "() => new DOMParser()"
+extern "js" fn dom_parser_new_ffi() -> DOMParser = "() => new DOMParser()"
 
 ///|
 pub fn DOMParser::new() -> DOMParser {
-  dom_parser_ffi()
+  dom_parser_new_ffi()
 }
 
 ///|

@@ -26,11 +26,11 @@ pub impl TNode for HTMLProgressElement
 pub impl TEventTarget for HTMLProgressElement
 
 ///|
-extern "js" fn html_progress_element_ffi() -> HTMLProgressElement = "() => new HTMLProgressElement()"
+extern "js" fn html_progress_element_new_ffi() -> HTMLProgressElement = "() => new HTMLProgressElement()"
 
 ///|
 pub fn HTMLProgressElement::new() -> HTMLProgressElement {
-  html_progress_element_ffi()
+  html_progress_element_new_ffi()
 }
 
 ///|

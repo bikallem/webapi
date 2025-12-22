@@ -23,11 +23,11 @@ pub impl TPath2DNewPathArg for Path2D with to_js(self : Path2D) -> JsValue = "%i
 pub impl TPath2DNewPathArg for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-extern "js" fn path2d_ffi(path : JsValue) -> Path2D = "(path) => new Path2D(path)"
+extern "js" fn path2d_new_ffi(path : JsValue) -> Path2D = "(path) => new Path2D(path)"
 
 ///|
 pub fn Path2D::new(path? : &TPath2DNewPathArg) -> Path2D {
-  path2d_ffi(
+  path2d_new_ffi(
     match path {
       Some(v) => v.to_js()
       None => JsValue::undefined()

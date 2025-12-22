@@ -12,14 +12,17 @@ pub fn[T : TEvent] Event::into(self : Event) -> T = "%identity"
 pub impl TEvent for Event
 
 ///|
-extern "js" fn event_ffi(type_ : JsValue, event_init_dict : JsValue) -> Event = "(type_, event_init_dict) => new Event(type_, event_init_dict)"
+extern "js" fn event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> Event = "(type_, event_init_dict) => new Event(type_, event_init_dict)"
 
 ///|
 pub fn Event::new(
   type_ : String,
   event_init_dict? : EventInit = EventInit::empty(),
 ) -> Event {
-  event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|

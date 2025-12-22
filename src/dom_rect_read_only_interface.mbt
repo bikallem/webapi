@@ -12,7 +12,7 @@ pub fn[T : TDOMRectReadOnly] DOMRectReadOnly::into(self : DOMRectReadOnly) -> T 
 pub impl TDOMRectReadOnly for DOMRectReadOnly
 
 ///|
-extern "js" fn dom_rect_read_only_ffi(
+extern "js" fn dom_rect_read_only_new_ffi(
   x : JsValue,
   y : JsValue,
   width : JsValue,
@@ -26,7 +26,7 @@ pub fn DOMRectReadOnly::new(
   width? : Double = 0,
   height? : Double = 0,
 ) -> DOMRectReadOnly {
-  dom_rect_read_only_ffi(
+  dom_rect_read_only_new_ffi(
     TJsValue::to_js(x),
     TJsValue::to_js(y),
     TJsValue::to_js(width),

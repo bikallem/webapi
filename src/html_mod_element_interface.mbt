@@ -24,11 +24,11 @@ pub impl TNode for HTMLModElement
 pub impl TEventTarget for HTMLModElement
 
 ///|
-extern "js" fn html_mod_element_ffi() -> HTMLModElement = "() => new HTMLModElement()"
+extern "js" fn html_mod_element_new_ffi() -> HTMLModElement = "() => new HTMLModElement()"
 
 ///|
 pub fn HTMLModElement::new() -> HTMLModElement {
-  html_mod_element_ffi()
+  html_mod_element_new_ffi()
 }
 
 ///|

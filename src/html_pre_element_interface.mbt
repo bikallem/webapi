@@ -24,11 +24,11 @@ pub impl TNode for HTMLPreElement
 pub impl TEventTarget for HTMLPreElement
 
 ///|
-extern "js" fn html_pre_element_ffi() -> HTMLPreElement = "() => new HTMLPreElement()"
+extern "js" fn html_pre_element_new_ffi() -> HTMLPreElement = "() => new HTMLPreElement()"
 
 ///|
 pub fn HTMLPreElement::new() -> HTMLPreElement {
-  html_pre_element_ffi()
+  html_pre_element_new_ffi()
 }
 
 ///|

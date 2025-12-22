@@ -24,11 +24,11 @@ pub impl TNode for HTMLMetaElement
 pub impl TEventTarget for HTMLMetaElement
 
 ///|
-extern "js" fn html_meta_element_ffi() -> HTMLMetaElement = "() => new HTMLMetaElement()"
+extern "js" fn html_meta_element_new_ffi() -> HTMLMetaElement = "() => new HTMLMetaElement()"
 
 ///|
 pub fn HTMLMetaElement::new() -> HTMLMetaElement {
-  html_meta_element_ffi()
+  html_meta_element_new_ffi()
 }
 
 ///|

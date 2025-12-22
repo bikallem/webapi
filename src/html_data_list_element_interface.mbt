@@ -26,11 +26,11 @@ pub impl TNode for HTMLDataListElement
 pub impl TEventTarget for HTMLDataListElement
 
 ///|
-extern "js" fn html_data_list_element_ffi() -> HTMLDataListElement = "() => new HTMLDataListElement()"
+extern "js" fn html_data_list_element_new_ffi() -> HTMLDataListElement = "() => new HTMLDataListElement()"
 
 ///|
 pub fn HTMLDataListElement::new() -> HTMLDataListElement {
-  html_data_list_element_ffi()
+  html_data_list_element_new_ffi()
 }
 
 ///|

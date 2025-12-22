@@ -26,11 +26,11 @@ pub impl TNode for HTMLDialogElement
 pub impl TEventTarget for HTMLDialogElement
 
 ///|
-extern "js" fn html_dialog_element_ffi() -> HTMLDialogElement = "() => new HTMLDialogElement()"
+extern "js" fn html_dialog_element_new_ffi() -> HTMLDialogElement = "() => new HTMLDialogElement()"
 
 ///|
 pub fn HTMLDialogElement::new() -> HTMLDialogElement {
-  html_dialog_element_ffi()
+  html_dialog_element_new_ffi()
 }
 
 ///|

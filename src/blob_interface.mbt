@@ -12,14 +12,14 @@ pub fn[T : TBlob] Blob::into(self : Blob) -> T = "%identity"
 pub impl TBlob for Blob
 
 ///|
-extern "js" fn blob_ffi(blob_parts : JsValue, options : JsValue) -> Blob = "(blob_parts, options) => new Blob(blob_parts, options)"
+extern "js" fn blob_new_ffi(blob_parts : JsValue, options : JsValue) -> Blob = "(blob_parts, options) => new Blob(blob_parts, options)"
 
 ///|
 pub fn Blob::new(
   blob_parts? : Array[BlobPart],
   options? : BlobPropertyBag = BlobPropertyBag::empty(),
 ) -> Blob {
-  blob_ffi(opt_to_js(blob_parts), TJsValue::to_js(options))
+  blob_new_ffi(opt_to_js(blob_parts), TJsValue::to_js(options))
 }
 
 ///|

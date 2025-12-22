@@ -24,11 +24,11 @@ pub impl TNode for HTMLBRElement
 pub impl TEventTarget for HTMLBRElement
 
 ///|
-extern "js" fn htmlbr_element_ffi() -> HTMLBRElement = "() => new HTMLBRElement()"
+extern "js" fn htmlbr_element_new_ffi() -> HTMLBRElement = "() => new HTMLBRElement()"
 
 ///|
 pub fn HTMLBRElement::new() -> HTMLBRElement {
-  htmlbr_element_ffi()
+  htmlbr_element_new_ffi()
 }
 
 ///|

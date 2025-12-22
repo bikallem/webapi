@@ -26,11 +26,11 @@ pub impl TNode for HTMLInputElement
 pub impl TEventTarget for HTMLInputElement
 
 ///|
-extern "js" fn html_input_element_ffi() -> HTMLInputElement = "() => new HTMLInputElement()"
+extern "js" fn html_input_element_new_ffi() -> HTMLInputElement = "() => new HTMLInputElement()"
 
 ///|
 pub fn HTMLInputElement::new() -> HTMLInputElement {
-  html_input_element_ffi()
+  html_input_element_new_ffi()
 }
 
 ///|

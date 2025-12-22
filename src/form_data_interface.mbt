@@ -12,14 +12,17 @@ pub fn[T : TFormData] FormData::into(self : FormData) -> T = "%identity"
 pub impl TFormData for FormData
 
 ///|
-extern "js" fn form_data_ffi(form : JsValue, submitter : JsValue) -> FormData = "(form, submitter) => new FormData(form, submitter)"
+extern "js" fn form_data_new_ffi(
+  form : JsValue,
+  submitter : JsValue,
+) -> FormData = "(form, submitter) => new FormData(form, submitter)"
 
 ///|
 pub fn FormData::new(
   form? : &THTMLFormElement,
   submitter? : &THTMLElement = JsValue::null(),
 ) -> FormData {
-  form_data_ffi(opt_to_js(form), TJsValue::to_js(submitter))
+  form_data_new_ffi(opt_to_js(form), TJsValue::to_js(submitter))
 }
 
 ///|

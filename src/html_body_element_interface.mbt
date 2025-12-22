@@ -24,11 +24,11 @@ pub impl TNode for HTMLBodyElement
 pub impl TEventTarget for HTMLBodyElement
 
 ///|
-extern "js" fn html_body_element_ffi() -> HTMLBodyElement = "() => new HTMLBodyElement()"
+extern "js" fn html_body_element_new_ffi() -> HTMLBodyElement = "() => new HTMLBodyElement()"
 
 ///|
 pub fn HTMLBodyElement::new() -> HTMLBodyElement {
-  html_body_element_ffi()
+  html_body_element_new_ffi()
 }
 
 ///|

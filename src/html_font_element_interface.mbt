@@ -24,11 +24,11 @@ pub impl TNode for HTMLFontElement
 pub impl TEventTarget for HTMLFontElement
 
 ///|
-extern "js" fn html_font_element_ffi() -> HTMLFontElement = "() => new HTMLFontElement()"
+extern "js" fn html_font_element_new_ffi() -> HTMLFontElement = "() => new HTMLFontElement()"
 
 ///|
 pub fn HTMLFontElement::new() -> HTMLFontElement {
-  html_font_element_ffi()
+  html_font_element_new_ffi()
 }
 
 ///|

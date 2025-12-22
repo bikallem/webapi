@@ -12,11 +12,11 @@ pub fn[T : TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity
 pub impl TEventTarget for EventTarget
 
 ///|
-extern "js" fn event_target_ffi() -> EventTarget = "() => new EventTarget()"
+extern "js" fn event_target_new_ffi() -> EventTarget = "() => new EventTarget()"
 
 ///|
 pub fn EventTarget::new() -> EventTarget {
-  event_target_ffi()
+  event_target_new_ffi()
 }
 
 ///|

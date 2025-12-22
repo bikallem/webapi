@@ -26,11 +26,11 @@ pub impl TNode for HTMLLabelElement
 pub impl TEventTarget for HTMLLabelElement
 
 ///|
-extern "js" fn html_label_element_ffi() -> HTMLLabelElement = "() => new HTMLLabelElement()"
+extern "js" fn html_label_element_new_ffi() -> HTMLLabelElement = "() => new HTMLLabelElement()"
 
 ///|
 pub fn HTMLLabelElement::new() -> HTMLLabelElement {
-  html_label_element_ffi()
+  html_label_element_new_ffi()
 }
 
 ///|

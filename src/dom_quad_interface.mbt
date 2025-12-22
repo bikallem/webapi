@@ -12,7 +12,7 @@ pub fn[T : TDOMQuad] DOMQuad::into(self : DOMQuad) -> T = "%identity"
 pub impl TDOMQuad for DOMQuad
 
 ///|
-extern "js" fn dom_quad_ffi(
+extern "js" fn dom_quad_new_ffi(
   p1 : JsValue,
   p2 : JsValue,
   p3 : JsValue,
@@ -26,7 +26,7 @@ pub fn DOMQuad::new(
   p3? : DOMPointInit = DOMPointInit::empty(),
   p4? : DOMPointInit = DOMPointInit::empty(),
 ) -> DOMQuad {
-  dom_quad_ffi(
+  dom_quad_new_ffi(
     TJsValue::to_js(p1),
     TJsValue::to_js(p2),
     TJsValue::to_js(p3),

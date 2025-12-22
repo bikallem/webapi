@@ -12,11 +12,11 @@ pub fn[T : TXSLTProcessor] XSLTProcessor::into(self : XSLTProcessor) -> T = "%id
 pub impl TXSLTProcessor for XSLTProcessor
 
 ///|
-extern "js" fn xslt_processor_ffi() -> XSLTProcessor = "() => new XSLTProcessor()"
+extern "js" fn xslt_processor_new_ffi() -> XSLTProcessor = "() => new XSLTProcessor()"
 
 ///|
 pub fn XSLTProcessor::new() -> XSLTProcessor {
-  xslt_processor_ffi()
+  xslt_processor_new_ffi()
 }
 
 ///|

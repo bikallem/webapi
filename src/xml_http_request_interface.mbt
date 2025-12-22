@@ -18,11 +18,11 @@ pub impl TXMLHttpRequestEventTarget for XMLHttpRequest
 pub impl TEventTarget for XMLHttpRequest
 
 ///|
-extern "js" fn xml_http_request_ffi() -> XMLHttpRequest = "() => new XMLHttpRequest()"
+extern "js" fn xml_http_request_new_ffi() -> XMLHttpRequest = "() => new XMLHttpRequest()"
 
 ///|
 pub fn XMLHttpRequest::new() -> XMLHttpRequest {
-  xml_http_request_ffi()
+  xml_http_request_new_ffi()
 }
 
 ///|

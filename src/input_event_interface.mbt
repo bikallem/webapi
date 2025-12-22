@@ -18,7 +18,7 @@ pub impl TUIEvent for InputEvent
 pub impl TEvent for InputEvent
 
 ///|
-extern "js" fn input_event_ffi(
+extern "js" fn input_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> InputEvent = "(type_, event_init_dict) => new InputEvent(type_, event_init_dict)"
@@ -28,7 +28,7 @@ pub fn InputEvent::new(
   type_ : String,
   event_init_dict? : InputEventInit = InputEventInit::empty(),
 ) -> InputEvent {
-  input_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  input_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|

@@ -26,11 +26,11 @@ pub impl TNode for HTMLFrameSetElement
 pub impl TEventTarget for HTMLFrameSetElement
 
 ///|
-extern "js" fn html_frame_set_element_ffi() -> HTMLFrameSetElement = "() => new HTMLFrameSetElement()"
+extern "js" fn html_frame_set_element_new_ffi() -> HTMLFrameSetElement = "() => new HTMLFrameSetElement()"
 
 ///|
 pub fn HTMLFrameSetElement::new() -> HTMLFrameSetElement {
-  html_frame_set_element_ffi()
+  html_frame_set_element_new_ffi()
 }
 
 ///|

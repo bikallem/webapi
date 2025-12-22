@@ -16,11 +16,11 @@ pub fn[T : TCustomElementRegistry] CustomElementRegistry::into(
 pub impl TCustomElementRegistry for CustomElementRegistry
 
 ///|
-extern "js" fn custom_element_registry_ffi() -> CustomElementRegistry = "() => new CustomElementRegistry()"
+extern "js" fn custom_element_registry_new_ffi() -> CustomElementRegistry = "() => new CustomElementRegistry()"
 
 ///|
 pub fn CustomElementRegistry::new() -> CustomElementRegistry {
-  custom_element_registry_ffi()
+  custom_element_registry_new_ffi()
 }
 
 ///|

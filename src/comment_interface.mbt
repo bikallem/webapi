@@ -21,11 +21,11 @@ pub impl TNode for Comment
 pub impl TEventTarget for Comment
 
 ///|
-extern "js" fn comment_ffi(data : JsValue) -> Comment = "(data) => new Comment(data)"
+extern "js" fn comment_new_ffi(data : JsValue) -> Comment = "(data) => new Comment(data)"
 
 ///|
 pub fn Comment::new(data? : String = "") -> Comment {
-  comment_ffi(TJsValue::to_js(data))
+  comment_new_ffi(TJsValue::to_js(data))
 }
 
 ///|

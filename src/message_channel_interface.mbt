@@ -12,11 +12,11 @@ pub fn[T : TMessageChannel] MessageChannel::into(self : MessageChannel) -> T = "
 pub impl TMessageChannel for MessageChannel
 
 ///|
-extern "js" fn message_channel_ffi() -> MessageChannel = "() => new MessageChannel()"
+extern "js" fn message_channel_new_ffi() -> MessageChannel = "() => new MessageChannel()"
 
 ///|
 pub fn MessageChannel::new() -> MessageChannel {
-  message_channel_ffi()
+  message_channel_new_ffi()
 }
 
 ///|

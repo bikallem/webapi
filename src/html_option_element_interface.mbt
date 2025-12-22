@@ -26,11 +26,11 @@ pub impl TNode for HTMLOptionElement
 pub impl TEventTarget for HTMLOptionElement
 
 ///|
-extern "js" fn html_option_element_ffi() -> HTMLOptionElement = "() => new HTMLOptionElement()"
+extern "js" fn html_option_element_new_ffi() -> HTMLOptionElement = "() => new HTMLOptionElement()"
 
 ///|
 pub fn HTMLOptionElement::new() -> HTMLOptionElement {
-  html_option_element_ffi()
+  html_option_element_new_ffi()
 }
 
 ///|

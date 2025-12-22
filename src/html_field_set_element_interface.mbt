@@ -26,11 +26,11 @@ pub impl TNode for HTMLFieldSetElement
 pub impl TEventTarget for HTMLFieldSetElement
 
 ///|
-extern "js" fn html_field_set_element_ffi() -> HTMLFieldSetElement = "() => new HTMLFieldSetElement()"
+extern "js" fn html_field_set_element_new_ffi() -> HTMLFieldSetElement = "() => new HTMLFieldSetElement()"
 
 ///|
 pub fn HTMLFieldSetElement::new() -> HTMLFieldSetElement {
-  html_field_set_element_ffi()
+  html_field_set_element_new_ffi()
 }
 
 ///|

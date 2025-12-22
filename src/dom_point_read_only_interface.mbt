@@ -14,7 +14,7 @@ pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(
 pub impl TDOMPointReadOnly for DOMPointReadOnly
 
 ///|
-extern "js" fn dom_point_read_only_ffi(
+extern "js" fn dom_point_read_only_new_ffi(
   x : JsValue,
   y : JsValue,
   z : JsValue,
@@ -28,7 +28,7 @@ pub fn DOMPointReadOnly::new(
   z? : Double = 0,
   w? : Double = 1,
 ) -> DOMPointReadOnly {
-  dom_point_read_only_ffi(
+  dom_point_read_only_new_ffi(
     TJsValue::to_js(x),
     TJsValue::to_js(y),
     TJsValue::to_js(z),

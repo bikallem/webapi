@@ -24,11 +24,11 @@ pub impl TNode for HTMLSpanElement
 pub impl TEventTarget for HTMLSpanElement
 
 ///|
-extern "js" fn html_span_element_ffi() -> HTMLSpanElement = "() => new HTMLSpanElement()"
+extern "js" fn html_span_element_new_ffi() -> HTMLSpanElement = "() => new HTMLSpanElement()"
 
 ///|
 pub fn HTMLSpanElement::new() -> HTMLSpanElement {
-  html_span_element_ffi()
+  html_span_element_new_ffi()
 }
 
 ///|

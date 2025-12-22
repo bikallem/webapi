@@ -24,11 +24,11 @@ pub impl TNode for HTMLTimeElement
 pub impl TEventTarget for HTMLTimeElement
 
 ///|
-extern "js" fn html_time_element_ffi() -> HTMLTimeElement = "() => new HTMLTimeElement()"
+extern "js" fn html_time_element_new_ffi() -> HTMLTimeElement = "() => new HTMLTimeElement()"
 
 ///|
 pub fn HTMLTimeElement::new() -> HTMLTimeElement {
-  html_time_element_ffi()
+  html_time_element_new_ffi()
 }
 
 ///|

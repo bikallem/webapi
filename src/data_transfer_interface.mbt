@@ -12,11 +12,11 @@ pub fn[T : TDataTransfer] DataTransfer::into(self : DataTransfer) -> T = "%ident
 pub impl TDataTransfer for DataTransfer
 
 ///|
-extern "js" fn data_transfer_ffi() -> DataTransfer = "() => new DataTransfer()"
+extern "js" fn data_transfer_new_ffi() -> DataTransfer = "() => new DataTransfer()"
 
 ///|
 pub fn DataTransfer::new() -> DataTransfer {
-  data_transfer_ffi()
+  data_transfer_new_ffi()
 }
 
 ///|

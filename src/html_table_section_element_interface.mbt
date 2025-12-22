@@ -28,11 +28,11 @@ pub impl TNode for HTMLTableSectionElement
 pub impl TEventTarget for HTMLTableSectionElement
 
 ///|
-extern "js" fn html_table_section_element_ffi() -> HTMLTableSectionElement = "() => new HTMLTableSectionElement()"
+extern "js" fn html_table_section_element_new_ffi() -> HTMLTableSectionElement = "() => new HTMLTableSectionElement()"
 
 ///|
 pub fn HTMLTableSectionElement::new() -> HTMLTableSectionElement {
-  html_table_section_element_ffi()
+  html_table_section_element_new_ffi()
 }
 
 ///|

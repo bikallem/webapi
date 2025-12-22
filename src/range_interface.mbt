@@ -15,11 +15,11 @@ pub impl TRange for Range
 pub impl TAbstractRange for Range
 
 ///|
-extern "js" fn range_ffi() -> Range = "() => new Range()"
+extern "js" fn range_new_ffi() -> Range = "() => new Range()"
 
 ///|
 pub fn Range::new() -> Range {
-  range_ffi()
+  range_new_ffi()
 }
 
 ///|

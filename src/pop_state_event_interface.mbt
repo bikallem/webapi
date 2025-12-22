@@ -15,7 +15,7 @@ pub impl TPopStateEvent for PopStateEvent
 pub impl TEvent for PopStateEvent
 
 ///|
-extern "js" fn pop_state_event_ffi(
+extern "js" fn pop_state_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> PopStateEvent = "(type_, event_init_dict) => new PopStateEvent(type_, event_init_dict)"
@@ -25,7 +25,10 @@ pub fn PopStateEvent::new(
   type_ : String,
   event_init_dict? : PopStateEventInit = PopStateEventInit::empty(),
 ) -> PopStateEvent {
-  pop_state_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  pop_state_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
 }
 
 ///|

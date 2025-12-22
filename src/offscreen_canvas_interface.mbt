@@ -15,14 +15,14 @@ pub impl TOffscreenCanvas for OffscreenCanvas
 pub impl TEventTarget for OffscreenCanvas
 
 ///|
-extern "js" fn offscreen_canvas_ffi(
+extern "js" fn offscreen_canvas_new_ffi(
   width : JsValue,
   height : JsValue,
 ) -> OffscreenCanvas = "(width, height) => new OffscreenCanvas(width, height)"
 
 ///|
 pub fn OffscreenCanvas::new(width : UInt64, height : UInt64) -> OffscreenCanvas {
-  offscreen_canvas_ffi(TJsValue::to_js(width), TJsValue::to_js(height))
+  offscreen_canvas_new_ffi(TJsValue::to_js(width), TJsValue::to_js(height))
 }
 
 ///|

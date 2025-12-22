@@ -26,11 +26,11 @@ pub impl TNode for HTMLIFrameElement
 pub impl TEventTarget for HTMLIFrameElement
 
 ///|
-extern "js" fn htmli_frame_element_ffi() -> HTMLIFrameElement = "() => new HTMLIFrameElement()"
+extern "js" fn htmli_frame_element_new_ffi() -> HTMLIFrameElement = "() => new HTMLIFrameElement()"
 
 ///|
 pub fn HTMLIFrameElement::new() -> HTMLIFrameElement {
-  htmli_frame_element_ffi()
+  htmli_frame_element_new_ffi()
 }
 
 ///|

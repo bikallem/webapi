@@ -26,11 +26,11 @@ pub impl TNode for HTMLOutputElement
 pub impl TEventTarget for HTMLOutputElement
 
 ///|
-extern "js" fn html_output_element_ffi() -> HTMLOutputElement = "() => new HTMLOutputElement()"
+extern "js" fn html_output_element_new_ffi() -> HTMLOutputElement = "() => new HTMLOutputElement()"
 
 ///|
 pub fn HTMLOutputElement::new() -> HTMLOutputElement {
-  html_output_element_ffi()
+  html_output_element_new_ffi()
 }
 
 ///|

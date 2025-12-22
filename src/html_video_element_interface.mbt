@@ -29,11 +29,11 @@ pub impl TNode for HTMLVideoElement
 pub impl TEventTarget for HTMLVideoElement
 
 ///|
-extern "js" fn html_video_element_ffi() -> HTMLVideoElement = "() => new HTMLVideoElement()"
+extern "js" fn html_video_element_new_ffi() -> HTMLVideoElement = "() => new HTMLVideoElement()"
 
 ///|
 pub fn HTMLVideoElement::new() -> HTMLVideoElement {
-  html_video_element_ffi()
+  html_video_element_new_ffi()
 }
 
 ///|

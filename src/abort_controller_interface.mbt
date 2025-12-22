@@ -12,11 +12,11 @@ pub fn[T : TAbortController] AbortController::into(self : AbortController) -> T 
 pub impl TAbortController for AbortController
 
 ///|
-extern "js" fn abort_controller_ffi() -> AbortController = "() => new AbortController()"
+extern "js" fn abort_controller_new_ffi() -> AbortController = "() => new AbortController()"
 
 ///|
 pub fn AbortController::new() -> AbortController {
-  abort_controller_ffi()
+  abort_controller_new_ffi()
 }
 
 ///|

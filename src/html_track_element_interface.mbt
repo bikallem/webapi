@@ -26,11 +26,11 @@ pub impl TNode for HTMLTrackElement
 pub impl TEventTarget for HTMLTrackElement
 
 ///|
-extern "js" fn html_track_element_ffi() -> HTMLTrackElement = "() => new HTMLTrackElement()"
+extern "js" fn html_track_element_new_ffi() -> HTMLTrackElement = "() => new HTMLTrackElement()"
 
 ///|
 pub fn HTMLTrackElement::new() -> HTMLTrackElement {
-  html_track_element_ffi()
+  html_track_element_new_ffi()
 }
 
 ///|

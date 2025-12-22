@@ -12,11 +12,11 @@ pub fn[T : TXMLSerializer] XMLSerializer::into(self : XMLSerializer) -> T = "%id
 pub impl TXMLSerializer for XMLSerializer
 
 ///|
-extern "js" fn xml_serializer_ffi() -> XMLSerializer = "() => new XMLSerializer()"
+extern "js" fn xml_serializer_new_ffi() -> XMLSerializer = "() => new XMLSerializer()"
 
 ///|
 pub fn XMLSerializer::new() -> XMLSerializer {
-  xml_serializer_ffi()
+  xml_serializer_new_ffi()
 }
 
 ///|

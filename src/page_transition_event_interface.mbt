@@ -17,7 +17,7 @@ pub impl TPageTransitionEvent for PageTransitionEvent
 pub impl TEvent for PageTransitionEvent
 
 ///|
-extern "js" fn page_transition_event_ffi(
+extern "js" fn page_transition_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> PageTransitionEvent = "(type_, event_init_dict) => new PageTransitionEvent(type_, event_init_dict)"
@@ -27,7 +27,7 @@ pub fn PageTransitionEvent::new(
   type_ : String,
   event_init_dict? : PageTransitionEventInit = PageTransitionEventInit::empty(),
 ) -> PageTransitionEvent {
-  page_transition_event_ffi(
+  page_transition_event_new_ffi(
     TJsValue::to_js(type_),
     TJsValue::to_js(event_init_dict),
   )

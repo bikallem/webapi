@@ -15,13 +15,13 @@ pub impl TCSSStyleSheet for CSSStyleSheet
 pub impl TStyleSheet for CSSStyleSheet
 
 ///|
-extern "js" fn css_style_sheet_ffi(options : JsValue) -> CSSStyleSheet = "(options) => new CSSStyleSheet(options)"
+extern "js" fn css_style_sheet_new_ffi(options : JsValue) -> CSSStyleSheet = "(options) => new CSSStyleSheet(options)"
 
 ///|
 pub fn CSSStyleSheet::new(
   options? : CSSStyleSheetInit = CSSStyleSheetInit::empty(),
 ) -> CSSStyleSheet {
-  css_style_sheet_ffi(TJsValue::to_js(options))
+  css_style_sheet_new_ffi(TJsValue::to_js(options))
 }
 
 ///|

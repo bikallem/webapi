@@ -26,11 +26,11 @@ pub impl TNode for HTMLTitleElement
 pub impl TEventTarget for HTMLTitleElement
 
 ///|
-extern "js" fn html_title_element_ffi() -> HTMLTitleElement = "() => new HTMLTitleElement()"
+extern "js" fn html_title_element_new_ffi() -> HTMLTitleElement = "() => new HTMLTitleElement()"
 
 ///|
 pub fn HTMLTitleElement::new() -> HTMLTitleElement {
-  html_title_element_ffi()
+  html_title_element_new_ffi()
 }
 
 ///|

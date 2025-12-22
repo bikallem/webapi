@@ -27,13 +27,15 @@ pub impl TDOMMatrixReadOnlyNewInitArg for Array[Double] with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn dom_matrix_read_only_ffi(init : JsValue) -> DOMMatrixReadOnly = "(init) => new DOMMatrixReadOnly(init)"
+extern "js" fn dom_matrix_read_only_new_ffi(
+  init : JsValue,
+) -> DOMMatrixReadOnly = "(init) => new DOMMatrixReadOnly(init)"
 
 ///|
 pub fn DOMMatrixReadOnly::new(
   init? : &TDOMMatrixReadOnlyNewInitArg,
 ) -> DOMMatrixReadOnly {
-  dom_matrix_read_only_ffi(
+  dom_matrix_read_only_new_ffi(
     match init {
       Some(v) => v.to_js()
       None => JsValue::undefined()

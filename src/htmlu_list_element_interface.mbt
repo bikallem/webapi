@@ -26,11 +26,11 @@ pub impl TNode for HTMLUListElement
 pub impl TEventTarget for HTMLUListElement
 
 ///|
-extern "js" fn htmlu_list_element_ffi() -> HTMLUListElement = "() => new HTMLUListElement()"
+extern "js" fn htmlu_list_element_new_ffi() -> HTMLUListElement = "() => new HTMLUListElement()"
 
 ///|
 pub fn HTMLUListElement::new() -> HTMLUListElement {
-  htmlu_list_element_ffi()
+  htmlu_list_element_new_ffi()
 }
 
 ///|

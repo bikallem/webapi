@@ -24,11 +24,11 @@ pub impl TNode for HTMLHtmlElement
 pub impl TEventTarget for HTMLHtmlElement
 
 ///|
-extern "js" fn html_html_element_ffi() -> HTMLHtmlElement = "() => new HTMLHtmlElement()"
+extern "js" fn html_html_element_new_ffi() -> HTMLHtmlElement = "() => new HTMLHtmlElement()"
 
 ///|
 pub fn HTMLHtmlElement::new() -> HTMLHtmlElement {
-  html_html_element_ffi()
+  html_html_element_new_ffi()
 }
 
 ///|

@@ -24,11 +24,11 @@ pub impl TNode for HTMLDataElement
 pub impl TEventTarget for HTMLDataElement
 
 ///|
-extern "js" fn html_data_element_ffi() -> HTMLDataElement = "() => new HTMLDataElement()"
+extern "js" fn html_data_element_new_ffi() -> HTMLDataElement = "() => new HTMLDataElement()"
 
 ///|
 pub fn HTMLDataElement::new() -> HTMLDataElement {
-  html_data_element_ffi()
+  html_data_element_new_ffi()
 }
 
 ///|

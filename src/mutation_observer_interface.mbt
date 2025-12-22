@@ -14,11 +14,13 @@ pub fn[T : TMutationObserver] MutationObserver::into(
 pub impl TMutationObserver for MutationObserver
 
 ///|
-extern "js" fn mutation_observer_ffi(callback : JsValue) -> MutationObserver = "(callback) => new MutationObserver(callback)"
+extern "js" fn mutation_observer_new_ffi(
+  callback : JsValue,
+) -> MutationObserver = "(callback) => new MutationObserver(callback)"
 
 ///|
 pub fn MutationObserver::new(callback : MutationCallback) -> MutationObserver {
-  mutation_observer_ffi(TJsValue::to_js(callback))
+  mutation_observer_new_ffi(TJsValue::to_js(callback))
 }
 
 ///|

@@ -25,7 +25,7 @@ pub impl TShadowAnimationNewNewTargetArg for CSSPseudoElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn shadow_animation_ffi(
+extern "js" fn shadow_animation_new_ffi(
   source : JsValue,
   new_target : JsValue,
 ) -> ShadowAnimation = "(source, new_target) => new ShadowAnimation(source, new_target)"
@@ -35,7 +35,7 @@ pub fn ShadowAnimation::new(
   source : Animation,
   new_target : &TShadowAnimationNewNewTargetArg,
 ) -> ShadowAnimation {
-  shadow_animation_ffi(TJsValue::to_js(source), new_target.to_js())
+  shadow_animation_new_ffi(TJsValue::to_js(source), new_target.to_js())
 }
 
 ///|

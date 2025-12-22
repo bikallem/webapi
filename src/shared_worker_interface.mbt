@@ -41,7 +41,7 @@ pub impl TSharedWorkerNewOptionsArg for WorkerOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn shared_worker_ffi(
+extern "js" fn shared_worker_new_ffi(
   script_url : JsValue,
   options : JsValue,
 ) -> SharedWorker = "(script_url, options) => new SharedWorker(script_url, options)"
@@ -51,7 +51,7 @@ pub fn SharedWorker::new(
   script_url : &TSharedWorkerNewScriptURLArg,
   options? : &TSharedWorkerNewOptionsArg = WorkerOptions::empty(),
 ) -> SharedWorker {
-  shared_worker_ffi(script_url.to_js(), options.to_js())
+  shared_worker_new_ffi(script_url.to_js(), options.to_js())
 }
 
 ///|

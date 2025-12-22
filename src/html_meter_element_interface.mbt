@@ -26,11 +26,11 @@ pub impl TNode for HTMLMeterElement
 pub impl TEventTarget for HTMLMeterElement
 
 ///|
-extern "js" fn html_meter_element_ffi() -> HTMLMeterElement = "() => new HTMLMeterElement()"
+extern "js" fn html_meter_element_new_ffi() -> HTMLMeterElement = "() => new HTMLMeterElement()"
 
 ///|
 pub fn HTMLMeterElement::new() -> HTMLMeterElement {
-  html_meter_element_ffi()
+  html_meter_element_new_ffi()
 }
 
 ///|

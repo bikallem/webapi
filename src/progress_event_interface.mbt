@@ -15,7 +15,7 @@ pub impl TProgressEvent for ProgressEvent
 pub impl TEvent for ProgressEvent
 
 ///|
-extern "js" fn progress_event_ffi(
+extern "js" fn progress_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> ProgressEvent = "(type_, event_init_dict) => new ProgressEvent(type_, event_init_dict)"
@@ -25,7 +25,10 @@ pub fn ProgressEvent::new(
   type_ : String,
   event_init_dict? : ProgressEventInit = ProgressEventInit::empty(),
 ) -> ProgressEvent {
-  progress_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  progress_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
 }
 
 ///|

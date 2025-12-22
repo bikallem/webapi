@@ -26,11 +26,11 @@ pub impl TNode for HTMLOListElement
 pub impl TEventTarget for HTMLOListElement
 
 ///|
-extern "js" fn htmlo_list_element_ffi() -> HTMLOListElement = "() => new HTMLOListElement()"
+extern "js" fn htmlo_list_element_new_ffi() -> HTMLOListElement = "() => new HTMLOListElement()"
 
 ///|
 pub fn HTMLOListElement::new() -> HTMLOListElement {
-  htmlo_list_element_ffi()
+  htmlo_list_element_new_ffi()
 }
 
 ///|

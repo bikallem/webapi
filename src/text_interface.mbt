@@ -21,11 +21,11 @@ pub impl TNode for Text
 pub impl TEventTarget for Text
 
 ///|
-extern "js" fn text_ffi(data : JsValue) -> Text = "(data) => new Text(data)"
+extern "js" fn text_new_ffi(data : JsValue) -> Text = "(data) => new Text(data)"
 
 ///|
 pub fn Text::new(data? : String = "") -> Text {
-  text_ffi(TJsValue::to_js(data))
+  text_new_ffi(TJsValue::to_js(data))
 }
 
 ///|

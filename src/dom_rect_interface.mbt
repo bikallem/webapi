@@ -15,7 +15,7 @@ pub impl TDOMRect for DOMRect
 pub impl TDOMRectReadOnly for DOMRect
 
 ///|
-extern "js" fn dom_rect_ffi(
+extern "js" fn dom_rect_new_ffi(
   x : JsValue,
   y : JsValue,
   width : JsValue,
@@ -29,7 +29,7 @@ pub fn DOMRect::new(
   width? : Double = 0,
   height? : Double = 0,
 ) -> DOMRect {
-  dom_rect_ffi(
+  dom_rect_new_ffi(
     TJsValue::to_js(x),
     TJsValue::to_js(y),
     TJsValue::to_js(width),

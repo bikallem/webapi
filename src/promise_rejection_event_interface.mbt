@@ -19,7 +19,7 @@ pub impl TPromiseRejectionEvent for PromiseRejectionEvent
 pub impl TEvent for PromiseRejectionEvent
 
 ///|
-extern "js" fn promise_rejection_event_ffi(
+extern "js" fn promise_rejection_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> PromiseRejectionEvent = "(type_, event_init_dict) => new PromiseRejectionEvent(type_, event_init_dict)"
@@ -29,7 +29,7 @@ pub fn PromiseRejectionEvent::new(
   type_ : String,
   event_init_dict : PromiseRejectionEventInit,
 ) -> PromiseRejectionEvent {
-  promise_rejection_event_ffi(
+  promise_rejection_event_new_ffi(
     TJsValue::to_js(type_),
     TJsValue::to_js(event_init_dict),
   )

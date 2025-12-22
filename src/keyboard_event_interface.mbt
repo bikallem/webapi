@@ -18,7 +18,7 @@ pub impl TUIEvent for KeyboardEvent
 pub impl TEvent for KeyboardEvent
 
 ///|
-extern "js" fn keyboard_event_ffi(
+extern "js" fn keyboard_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> KeyboardEvent = "(type_, event_init_dict) => new KeyboardEvent(type_, event_init_dict)"
@@ -28,7 +28,10 @@ pub fn KeyboardEvent::new(
   type_ : String,
   event_init_dict? : KeyboardEventInit = KeyboardEventInit::empty(),
 ) -> KeyboardEvent {
-  keyboard_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  keyboard_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
 }
 
 ///|

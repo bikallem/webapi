@@ -15,7 +15,7 @@ pub impl TUIEvent for UIEvent
 pub impl TEvent for UIEvent
 
 ///|
-extern "js" fn ui_event_ffi(
+extern "js" fn ui_event_new_ffi(
   type_ : JsValue,
   event_init_dict : JsValue,
 ) -> UIEvent = "(type_, event_init_dict) => new UIEvent(type_, event_init_dict)"
@@ -25,7 +25,7 @@ pub fn UIEvent::new(
   type_ : String,
   event_init_dict? : UIEventInit = UIEventInit::empty(),
 ) -> UIEvent {
-  ui_event_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  ui_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
 }
 
 ///|

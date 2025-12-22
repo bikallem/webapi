@@ -15,11 +15,11 @@ pub impl TFileReader for FileReader
 pub impl TEventTarget for FileReader
 
 ///|
-extern "js" fn file_reader_ffi() -> FileReader = "() => new FileReader()"
+extern "js" fn file_reader_new_ffi() -> FileReader = "() => new FileReader()"
 
 ///|
 pub fn FileReader::new() -> FileReader {
-  file_reader_ffi()
+  file_reader_new_ffi()
 }
 
 ///|
