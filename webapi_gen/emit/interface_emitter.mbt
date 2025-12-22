@@ -89,7 +89,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         let args = [
           MethodArg::{
             name: "self",
-            type_: ArgType::Self,
+            type_: MbtType::Self,
             optional: false,
             default_value: None,
           },

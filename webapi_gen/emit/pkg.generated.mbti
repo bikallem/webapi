@@ -19,16 +19,6 @@ pub fn mbt_code_gen(Array[Emit]) -> String
 // Errors
 
 // Types and methods
-pub enum ArgType {
-  Self
-  UnresolvedType(@parser.Type)
-  Resolved(String)
-  Union(String)
-  Interface(String)
-}
-pub impl Show for ArgType
-pub impl ToJson for ArgType
-
 pub(all) struct CallbackArgEmit {
   name : String
   mbt_type : String
@@ -102,9 +92,19 @@ pub(all) struct InterfaceEmitter {
 }
 pub impl Emitter for InterfaceEmitter
 
+pub enum MbtType {
+  Self
+  UnresolvedType(@parser.Type)
+  Resolved(String)
+  Union(String)
+  Interface(String)
+}
+pub impl Show for MbtType
+pub impl ToJson for MbtType
+
 pub struct MethodArg {
   name : String
-  type_ : ArgType
+  type_ : MbtType
   optional : Bool
   default_value : String?
 }

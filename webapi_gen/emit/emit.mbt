@@ -29,13 +29,13 @@ pub struct TraitMethod {
 ///|
 pub struct MethodArg {
   name : String
-  type_ : ArgType
+  type_ : MbtType
   optional : Bool
   default_value : String?
 } derive(Show, ToJson)
 
 ///|
-pub enum ArgType {
+pub enum MbtType {
   Self // Represents 'self' argument
   UnresolvedType(@parser.Type) // Type that needs to be mapped
   Resolved(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef, callback
@@ -82,7 +82,7 @@ fn arg_type(
   method_name : String,
   arg_name : String,
   type_registry : @type_registry.TypeRegistry,
-) -> (ArgType, Array[Emit]) {
+) -> (MbtType, Array[Emit]) {
   let emits = []
   match type_ {
     Union(options) => {
@@ -91,20 +91,20 @@ fn arg_type(
       for option in options {
         emits.push(Emit::UnionArgTraitImpl(option.type_, union_type_name))
       }
-      (ArgType::Union("&\{union_type_name}"), emits)
+      (MbtType::Union("&\{union_type_name}"), emits)
     }
     Identifier(name) => {
       let name = if type_registry.is_interface(name) {
-        ArgType::Interface("&T\{name}")
+        MbtType::Interface("&T\{name}")
       } else {
-        ArgType::Resolved(name)
+        MbtType::Resolved(name)
       }
       (name, emits)
     }
     Nullable(type_) =>
       // TODO: what happens if the nullable type is a union and none of the options are identifiers?
       arg_type(type_, type_name, method_name, arg_name, type_registry)
-    _ => (ArgType::UnresolvedType(type_), emits)
+    _ => (MbtType::UnresolvedType(type_), emits)
   }
 }
 
@@ -117,9 +117,9 @@ fn method_args_to_string(args : Array[MethodArg]) -> String {
     let arg_name = safe_identifier(arg.name)
     let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
     let arg_decl = match arg.type_ {
-      ArgType::Self => "\{arg_name} : Self"
-      ArgType::UnresolvedType(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
-      ArgType::Interface(t) | ArgType::Union(t) | ArgType::Resolved(t) =>
+      MbtType::Self => "\{arg_name} : Self"
+      MbtType::UnresolvedType(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
+      MbtType::Interface(t) | MbtType::Union(t) | MbtType::Resolved(t) =>
         "\{arg_name} : \{t}"
     }
     match arg.default_value {
@@ -191,12 +191,12 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
                 arg.name
               }
               match arg.type_ {
-                ArgType::Self => "\{arg_name} : Self"
-                ArgType::UnresolvedType(t) =>
+                MbtType::Self => "\{arg_name} : Self"
+                MbtType::UnresolvedType(t) =>
                   "\{arg_name} : \{idl_to_mbt_type(t)}"
-                ArgType::Interface(t)
-                | ArgType::Union(t)
-                | ArgType::Resolved(t) => "\{arg_name} : \{t}"
+                MbtType::Interface(t)
+                | MbtType::Union(t)
+                | MbtType::Resolved(t) => "\{arg_name} : \{t}"
               }
             })
             .join(", ")
@@ -213,7 +213,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
           let ret_type_str = idl_to_mbt_type(meth.return_type)
           let ffi_name = "\{to_snake_case(trait_def.trait_name)}_\{to_snake_case(meth.method_name)}_ffi"
           let ffi_argnames = meth.args.map(arg => match arg.type_ {
-            ArgType::Self => "obj"
+            MbtType::Self => "obj"
             _ => arg.name
           })
           let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
