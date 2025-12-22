@@ -27,7 +27,7 @@ pub impl Emitter for InterfaceEmitter with emit(
     output_args : Array[MethodArg],
   ) -> Unit {
     for arg in method_args {
-      let (type_, arg_emits) = arg_type(
+      let (type_, arg_emits) = arg_mbt_type(
         arg.type_.type_,
         interface.name,
         method_name,
@@ -89,17 +89,23 @@ pub impl Emitter for InterfaceEmitter with emit(
         let args = [
           MethodArg::{
             name: "self",
-            type_: MbtType::Self,
+            type_: ArgMbtType::Self,
             optional: false,
             default_value: None,
           },
         ]
         fill_method_args(op.arguments, safe_identifier(orig_method_name), args)
-
+        let return_type = arg_mbt_type(
+          op.return_type,
+          interface.name,
+          orig_method_name,
+          "return",
+          self.type_registry,
+        )
         // trait method
         let trait_method = TraitMethod::{
           method_name: orig_method_name,
-          return_type: op.return_type,
+          return_type: return_type.to_string(),
           args,
         }
         trait_methods.push(trait_method)
@@ -158,68 +164,68 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|  event_target_new_ffi()
       #|}
       #|
-      #|pub(open) trait TEventTargetAddEventListenerOptionsArg {
+      #|pub(open) trait TEventTargetAddEventListenerOptions {
       #|  to_js(self : Self) -> JsValue
       #|}
       #|
-      #|pub impl TEventTargetAddEventListenerOptionsArg for AddEventListenerOptions with to_js(self : AddEventListenerOptions) -> JsValue = "%identity"
+      #|pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions with to_js(self : AddEventListenerOptions) -> JsValue = "%identity"
       #|
-      #|pub impl TEventTargetAddEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+      #|pub impl TEventTargetAddEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
       #|
-      #|pub(open) trait TEventTargetRemoveEventListenerOptionsArg {
+      #|pub(open) trait TEventTargetRemoveEventListenerOptions {
       #|  to_js(self : Self) -> JsValue
       #|}
       #|
-      #|pub impl TEventTargetRemoveEventListenerOptionsArg for EventListenerOptions with to_js(self : EventListenerOptions) -> JsValue = "%identity"
+      #|pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions with to_js(self : EventListenerOptions) -> JsValue = "%identity"
       #|
-      #|pub impl TEventTargetRemoveEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+      #|pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
       #|
-      #|pub(open) trait TEventTargetCreateElementOptionsArg {
+      #|pub(open) trait TEventTargetCreateElementOptions {
       #|  to_js(self : Self) -> JsValue
       #|}
       #|
-      #|pub impl TEventTargetCreateElementOptionsArg for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TEventTargetCreateElementOptions for String with to_js(self : String) -> JsValue = "%identity"
       #|
-      #|pub impl TEventTargetCreateElementOptionsArg for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
+      #|pub impl TEventTargetCreateElementOptions for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
       #|
       #|pub trait TEventTarget: TJsValue {
-      #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetAddEventListenerOptionsArg) -> Unit = _
-      #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetRemoveEventListenerOptionsArg) -> Unit = _
-      #|  dispatch_event(self : Self, event : Event) -> Bool = _
-      #|  create_element(self : Self, local_name : String, options? : &TEventTargetCreateElementOptionsArg) -> Element = _
+      #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetAddEventListenerOptions) -> (Other("Unit"), []) = _
+      #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetRemoveEventListenerOptions) -> (Other("Unit"), []) = _
+      #|  dispatch_event(self : Self, event : Event) -> (Other("Bool"), []) = _
+      #|  create_element(self : Self, local_name : String, options? : &TEventTargetCreateElementOptions) -> (Other("Element"), []) = _
       #|}
       #|
-      #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
+      #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> (Other("Unit"), []) = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
       #|
       #|impl TEventTarget with add_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
-      #|options? : &TEventTargetAddEventListenerOptionsArg = AddEventListenerOptions::empty()) -> Unit {
-      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
+      #|options? : &TEventTargetAddEventListenerOptions = AddEventListenerOptions::empty()) -> (Other("Unit"), []) {
+      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
       #|}
       #|
-      #|extern "js" fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
+      #|extern "js" fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> (Other("Unit"), []) = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
       #|
       #|impl TEventTarget with remove_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
-      #|options? : &TEventTargetRemoveEventListenerOptionsArg = EventListenerOptions::empty()) -> Unit {
-      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
+      #|options? : &TEventTargetRemoveEventListenerOptions = EventListenerOptions::empty()) -> (Other("Unit"), []) {
+      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
       #|}
       #|
-      #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool = "(obj, event) => obj.dispatchEvent(obj, event)"
+      #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> (Other("Bool"), []) = "(obj, event) => obj.dispatchEvent(obj, event)"
       #|
       #|impl TEventTarget with dispatch_event(self : Self, 
-      #|event : Event) -> Bool {
+      #|event : Event) -> (Other("Bool"), []) {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
       #|}
       #|
-      #|extern "js" fn event_target_create_element_ffi(obj: JsValue, local_name: JsValue, options: JsValue) -> Element = "(obj, local_name, options) => obj.createElement(obj, local_name, options)"
+      #|extern "js" fn event_target_create_element_ffi(obj: JsValue, local_name: JsValue, options: JsValue) -> (Other("Element"), []) = "(obj, local_name, options) => obj.createElement(obj, local_name, options)"
       #|
       #|impl TEventTarget with create_element(self : Self, 
       #|local_name : String, 
-      #|options? : &TEventTargetCreateElementOptionsArg = ElementCreationOptions::empty()) -> Element {
-      #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), options.to_js())
+      #|options? : &TEventTargetCreateElementOptions = ElementCreationOptions::empty()) -> (Other("Element"), []) {
+      #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), TJsValue::to_js(options))
       #|}
     ),
   )

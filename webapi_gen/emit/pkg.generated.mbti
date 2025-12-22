@@ -3,7 +3,6 @@ package "bikallem/webapi_gen/emit"
 
 import(
   "bikallem/webapi_gen/flattened_idl"
-  "bikallem/webapi_gen/parser"
   "bikallem/webapi_gen/type_registry"
 )
 
@@ -19,6 +18,17 @@ pub fn mbt_code_gen(Array[Emit]) -> String
 // Errors
 
 // Types and methods
+pub enum ArgMbtType {
+  Self
+  Other(String)
+  Union(String)
+  Interface(String)
+}
+pub impl Eq for ArgMbtType
+pub impl Hash for ArgMbtType
+pub impl Show for ArgMbtType
+pub impl ToJson for ArgMbtType
+
 pub(all) struct CallbackArgEmit {
   name : String
   mbt_type : String
@@ -54,13 +64,13 @@ pub enum Emit {
   EmptyMethod(TypeName)
   ImplTrait(TypeName, TraitName)
   TraitDefinition(TraitDef)
-  UnionArgTrait(TypeName)
-  UnionArgTraitImpl(@parser.Type, TypeName)
+  UnionArgTrait(TraitName)
+  UnionArgTraitImpl(TypeName, TraitName)
   DictionaryCreate(TypeName, Array[MethodArg])
   ConstructorMethod(ConstructorName, TypeName, Array[MethodArg])
   Enum(TypeName, Array[EnumVariantEmit])
   TypedefAlias(TypeName, String)
-  Callback(TypeName, Array[CallbackArgEmit], String)
+  Callback(TypeName, Array[CallbackArgEmit], TypeName)
 }
 pub impl Show for Emit
 pub impl ToJson for Emit
@@ -92,19 +102,9 @@ pub(all) struct InterfaceEmitter {
 }
 pub impl Emitter for InterfaceEmitter
 
-pub enum MbtType {
-  Self
-  UnresolvedType(@parser.Type)
-  Resolved(String)
-  Union(String)
-  Interface(String)
-}
-pub impl Show for MbtType
-pub impl ToJson for MbtType
-
 pub struct MethodArg {
   name : String
-  type_ : MbtType
+  type_ : ArgMbtType
   optional : Bool
   default_value : String?
 }
@@ -121,7 +121,7 @@ pub impl ToJson for TraitDef
 
 pub struct TraitMethod {
   method_name : String
-  return_type : @parser.Type
+  return_type : String
   args : Array[MethodArg]
 }
 pub impl Show for TraitMethod

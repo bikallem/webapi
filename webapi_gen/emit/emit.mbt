@@ -22,26 +22,34 @@ pub struct TraitDef {
 ///|
 pub struct TraitMethod {
   method_name : String
-  return_type : @parser.Type
+  return_type : String
   args : Array[MethodArg]
 } derive(Show, ToJson)
 
 ///|
 pub struct MethodArg {
   name : String
-  type_ : MbtType
+  type_ : ArgMbtType
   optional : Bool
   default_value : String?
 } derive(Show, ToJson)
 
 ///|
-pub enum MbtType {
-  Self // Represents 'self' argument
-  UnresolvedType(@parser.Type) // Type that needs to be mapped
-  Resolved(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef, callback
+/// Argument MoonBit type representation
+pub enum ArgMbtType {
+  Self // Represents 'self' argument  
+  Other(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef, callback
   Union(String) // Union type represented by a trait
   Interface(String) // Interface type represented by a trait
-} derive(Show, ToJson)
+} derive(Show, ToJson, Eq, Hash)
+
+///|
+fn ArgMbtType::name(self : ArgMbtType) -> String {
+  match self {
+    Self => "Self"
+    Other(t) | Union(t) | Interface(t) => t
+  }
+}
 
 ///|
 pub struct EnumVariantEmit {
@@ -63,50 +71,14 @@ pub enum Emit {
   EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
   TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
-  UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
-  UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
+  UnionArgTrait(TraitName) // eg. trait TEventTargetArg { ... }
+  UnionArgTraitImpl(TypeName, TraitName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
   ConstructorMethod(ConstructorName, TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
   Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
   TypedefAlias(TypeName, String) // eg. pub typealias EventHandler = EventHandlerNonNull?
-  Callback(TypeName, Array[CallbackArgEmit], String) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
+  Callback(TypeName, Array[CallbackArgEmit], TypeName) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
 } derive(Show, ToJson)
-
-//============================ Emit Helpers ============================
-
-///|
-/// Determine argument type and any additional emits needed
-fn arg_type(
-  type_ : @parser.Type,
-  type_name : String,
-  method_name : String,
-  arg_name : String,
-  type_registry : @type_registry.TypeRegistry,
-) -> (MbtType, Array[Emit]) {
-  let emits = []
-  match type_ {
-    Union(options) => {
-      let union_type_name = "T\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}Arg"
-      emits.push(Emit::UnionArgTrait(union_type_name))
-      for option in options {
-        emits.push(Emit::UnionArgTraitImpl(option.type_, union_type_name))
-      }
-      (MbtType::Union("&\{union_type_name}"), emits)
-    }
-    Identifier(name) => {
-      let name = if type_registry.is_interface(name) {
-        MbtType::Interface("&T\{name}")
-      } else {
-        MbtType::Resolved(name)
-      }
-      (name, emits)
-    }
-    Nullable(type_) =>
-      // TODO: what happens if the nullable type is a union and none of the options are identifiers?
-      arg_type(type_, type_name, method_name, arg_name, type_registry)
-    _ => (MbtType::UnresolvedType(type_), emits)
-  }
-}
 
 //============================ Code generator ===========================
 
@@ -117,9 +89,8 @@ fn method_args_to_string(args : Array[MethodArg]) -> String {
     let arg_name = safe_identifier(arg.name)
     let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
     let arg_decl = match arg.type_ {
-      MbtType::Self => "\{arg_name} : Self"
-      MbtType::UnresolvedType(t) => "\{arg_name} : \{idl_to_mbt_type(t)}"
-      MbtType::Interface(t) | MbtType::Union(t) | MbtType::Resolved(t) =>
+      ArgMbtType::Self => "\{arg_name} : Self"
+      ArgMbtType::Interface(t) | ArgMbtType::Union(t) | ArgMbtType::Other(t) =>
         "\{arg_name} : \{t}"
     }
     match arg.default_value {
@@ -191,18 +162,17 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
                 arg.name
               }
               match arg.type_ {
-                MbtType::Self => "\{arg_name} : Self"
-                MbtType::UnresolvedType(t) =>
-                  "\{arg_name} : \{idl_to_mbt_type(t)}"
-                MbtType::Interface(t)
-                | MbtType::Union(t)
-                | MbtType::Resolved(t) => "\{arg_name} : \{t}"
+                ArgMbtType::Self => "\{arg_name} : Self"
+                ArgMbtType::Interface(t)
+                | ArgMbtType::Union(t)
+                | ArgMbtType::Other(t) => "\{arg_name} : \{t}"
               }
             })
             .join(", ")
-          let ret_type_str = idl_to_mbt_type(meth.return_type)
           let method_name = safe_identifier(meth.method_name)
-          buf.write_string("  \{method_name}(\{args}) -> \{ret_type_str} = _\n")
+          buf.write_string(
+            "  \{method_name}(\{args}) -> \{meth.return_type} = _\n",
+          )
         }
         buf.write_string("}")
         buf.write_string("\n\n")
@@ -210,10 +180,10 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         // Emit default trait method implementations
         for i, meth in trait_def.methods {
           // Emit FFI function
-          let ret_type_str = idl_to_mbt_type(meth.return_type)
+          let ret_type_str = meth.return_type
           let ffi_name = "\{snake_case(trait_def.trait_name)}_\{snake_case(meth.method_name)}_ffi"
           let ffi_argnames = meth.args.map(arg => match arg.type_ {
-            MbtType::Self => "obj"
+            ArgMbtType::Self => "obj"
             _ => arg.name
           })
           let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
@@ -237,17 +207,15 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
           }
         }
       }
-      Emit::UnionArgTrait(TypeName(trait_name)) => {
+      Emit::UnionArgTrait(TraitName(trait_name)) => {
         buf.write_string("pub(open) trait \{trait_name} {\n")
         buf.write_string("  to_js(self : Self) -> JsValue\n")
         buf.write_string("}")
       }
-      Emit::UnionArgTraitImpl(type_, TypeName(trait_name)) => {
-        let mbt_type = idl_to_mbt_type(type_)
+      Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) =>
         buf.write_string(
           "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
         )
-      }
       Emit::DictionaryCreate(TypeName(type_name), args) => {
         // Emit FFI function
         let ffi_name = "\{snake_case(type_name)}_ffi"
@@ -340,7 +308,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::TypedefAlias(TypeName(name), target_type) =>
         buf.write_string("pub type \{name} = \{target_type}")
-      Emit::Callback(TypeName(name), args, return_type) => {
+      Emit::Callback(TypeName(name), args, TypeName(return_type)) => {
         // Build closure type signature: (ArgType1, ArgType2) -> ReturnType
         let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
         let closure_type = "(\{arg_types}) -> \{return_type}"
@@ -377,7 +345,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
   buf.to_string()
 }
 
-//============================ Utility Functions ============================
+//============================ Emit Helpers ============================
 
 ///|
 /// Moonbit reserved keywords that need escaping
@@ -532,78 +500,145 @@ fn arg_default_value(
 }
 
 ///|
-/// Map WebIDL type to Moonbit type string
-fn idl_to_mbt_type(idl_type : @parser.Type) -> String {
-  match idl_type {
-    // Named types (interfaces, dictionaries, enums, typedefs, union options)
-    Identifier(name) => name
-
-    // Nullable
-    Nullable(t) => idl_to_mbt_type(t)
-
-    // Void 
-    Undefined => "Unit"
-
-    // TODO: rethink these mappings (Parameterized types)
-    // Promise(t) => "JsPromise[\{mbt_type_string(t)}]"
-    // ObservableArray({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
-    // FrozenArray({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"    
-    // AsyncSequence({ type_, .. }) => "Array[\{mbt_type_string(type_)}]"
-    Sequence(t) => "Array[\{idl_to_mbt_type(t)}]"
-
+fn arg_mbt_type(
+  idl_type : @parser.Type,
+  type_name : String,
+  method_name : String,
+  arg_name : String,
+  type_registry : @type_registry.TypeRegistry,
+  union_type_call_depth? : Int = 0, // used to suffix union type names
+) -> (ArgMbtType, Array[Emit]) {
+  let emits = []
+  let type_ = match idl_type {
     // Float Arrays
-    Float16Array => "Float16Array"
-    Float32Array => "Float32Array"
-    Float64Array => "Float64Array"
+    Float16Array => ArgMbtType::Other("Float16Array")
+    Float32Array => ArgMbtType::Other("Float32Array")
+    Float64Array => ArgMbtType::Other("Float64Array")
 
     // Integer arrays
-    Int8Array => "Int8Array"
-    Int16Array => "Int16Array"
-    Int32Array => "Int32Array"
+    Int8Array => ArgMbtType::Other("Int8Array")
+    Int16Array => ArgMbtType::Other("Int16Array")
+    Int32Array => ArgMbtType::Other("Int32Array")
 
     // BigUint and BigInt arrays
-    BigUint64Array => "BigUint64Array"
-    BigInt64Array => "BigInt64Array"
+    BigUint64Array => ArgMbtType::Other("BigUint64Array")
+    BigInt64Array => ArgMbtType::Other("BigInt64Array")
 
     // Unsigned integer arrays
-    Uint8Array => "Uint8Array"
-    Uint16Array => "Uint16Array"
-    Uint32Array => "Uint32Array"
-    Uint8ClampedArray => "Uint8ClampedArray"
+    Uint8Array => ArgMbtType::Other("Uint8Array")
+    Uint16Array => ArgMbtType::Other("Uint16Array")
+    Uint32Array => ArgMbtType::Other("Uint32Array")
+    Uint8ClampedArray => ArgMbtType::Other("Uint8ClampedArray")
 
     // Other typed arrays
-    DataView => "DataView"
-    SharedArrayBuffer => "SharedArrayBuffer"
-    ArrayBuffer => "ArrayBuffer"
+    DataView => ArgMbtType::Other("DataView")
+    SharedArrayBuffer => ArgMbtType::Other("SharedArrayBuffer")
+    ArrayBuffer => ArgMbtType::Other("ArrayBuffer")
 
     // Object types
-    Object => "JsValue"
-    Any => "JsValue"
+    Object => ArgMbtType::Other("JsValue")
+    Any => ArgMbtType::Other("JsValue")
 
     // String types
-    USVString => "String"
-    ByteString => "String"
-    DOMString => "String"
+    USVString => ArgMbtType::Other("String")
+    ByteString => ArgMbtType::Other("String")
+    DOMString => ArgMbtType::Other("String")
 
     // Integer Types    
-    LongLong => "Int64" // 64-bit signed → Int64
-    Bigint => "Int64" // BigInt → Int64
-    UnsignedLong => "UInt" // 32-bit unsigned → UInt
-    UnsignedLongLong => "UInt64" // 64-bit unsigned → UInt64
-    UnsignedShort => "UInt" // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
-    Long => "Int" // 32-bit signed → Int
-    Short => "Int" // 16-bit signed → Int (Int16 exists but Int is more common)
-    Octet => "Byte" // 8-bit unsigned → Byte
-    Byte => "Int" // 8-bit signed → Int (no signed 8-bit in MoonBit)
-    Boolean => "Bool"
-
+    LongLong => ArgMbtType::Other("Int64") // 64-bit signed → Int64
+    Bigint => ArgMbtType::Other("Int64") // BigInt → Int64
+    UnsignedLong => ArgMbtType::Other("UInt") // 32-bit unsigned → UInt
+    UnsignedLongLong => ArgMbtType::Other("UInt64") // 64-bit unsigned → UInt64
+    UnsignedShort => ArgMbtType::Other("UInt") // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
+    Long => ArgMbtType::Other("Int") // 32-bit signed → Int
+    Short => ArgMbtType::Other("Int") // 16-bit signed → Int (Int16 exists but Int is more common)
+    Octet => ArgMbtType::Other("Byte") // 8-bit unsigned → Byte
+    Byte => ArgMbtType::Other("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
+    Boolean => ArgMbtType::Other("Bool")
     // Floating point types
-    Float => "Float" // 32-bit float → Float
-    Double => "Double" // 64-bit float → Double
-    UnrestrictedDouble => "Double" // 64-bit unrestricted float → Double
-    UnrestrictedFloat => "Float" // 32-bit unrestricted float → Float    
+    Float => ArgMbtType::Other("Float") // 32-bit float → Float
+    Double => ArgMbtType::Other("Double") // 64-bit float → Double
+    UnrestrictedDouble => ArgMbtType::Other("Double") // 64-bit unrestricted float → Double
+    UnrestrictedFloat => ArgMbtType::Other("Float") // 32-bit unrestricted float → Float    
 
-    // Default fallback
-    _ => "JsValue" // Fallback to JsValue for unsupported types
+    // Named types (interfaces, dictionaries, enums, typedefs, union options)
+    Identifier(name) =>
+      if type_registry.is_interface(name) {
+        ArgMbtType::Interface("&T\{name}")
+      } else {
+        ArgMbtType::Other(name)
+      }
+
+    // Nullable
+    Nullable(t) => {
+      let (type_, emits_) = arg_mbt_type(
+        t, type_name, method_name, arg_name, type_registry,
+      )
+      emits.push_iter(emits_.iter())
+      type_
+    }
+
+    // Void 
+    Undefined => ArgMbtType::Other("Unit")
+
+    // Array type
+    Sequence(t) => {
+      let (type_, emits_) = arg_mbt_type(
+        t, type_name, method_name, arg_name, type_registry,
+      )
+      emits.push_iter(emits_.iter())
+      ArgMbtType::Other("Array[\{type_.name()}]")
+    }
+
+    // Js Promise
+    Promise(t) => {
+      let (type_, emits_) = arg_mbt_type(
+        t, type_name, method_name, arg_name, type_registry,
+      )
+      emits.push_iter(emits_.iter())
+      ArgMbtType::Other("JsPromise[\{type_.name()}]")
+    }
+
+    // Union type
+    Union(options) => {
+      let union_type_name = "T\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}"
+      let union_type_name = if union_type_call_depth > 0 {
+        "\{union_type_name}\{union_type_call_depth+1}"
+      } else {
+        union_type_name
+      }
+      emits.push(Emit::UnionArgTrait(union_type_name))
+      for option in options {
+        let (mbt_type, option_emits) = arg_mbt_type(
+          option.type_,
+          type_name,
+          method_name,
+          arg_name,
+          type_registry,
+          union_type_call_depth=union_type_call_depth + 1,
+        )
+        emits.push_iter(option_emits.iter())
+        let mbt_type = if option.type_ is Union(_) {
+          "&\{mbt_type.name()}"
+        } else {
+          mbt_type.name()
+        }
+        emits.push(
+          Emit::UnionArgTraitImpl(
+            TypeName(mbt_type),
+            TraitName(union_type_name),
+          ),
+        )
+      }
+      ArgMbtType::Other("&\{union_type_name}")
+    }
+
+    // TODO: rethink these mappings (Parameterized types)
+    Record(_, _) => ArgMbtType::Other("JsValue") // Fallback to JsValue for unsupported types
+    ObservableArray(_) => ArgMbtType::Other("JsValue")
+    FrozenArray(_) => ArgMbtType::Other("JsValue")
+    AsyncSequence(_) => ArgMbtType::Other("JsValue")
+    Symbol => ArgMbtType::Other("JsValue") // WebIDL Symbol is not used in practice as yet c2025
   }
+  (type_, emits)
 }

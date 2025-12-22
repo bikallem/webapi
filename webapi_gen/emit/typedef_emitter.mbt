@@ -14,40 +14,42 @@ pub impl Emitter for TypedefEmitter with emit(
   let typedef_emits = match typedef_def.type_ {
     Union(options) => {
       let emits = []
-      emits.push(Emit::External(typedef_def.name))
-      emits.push(Emit::UnionArgTrait("T\{typedef_def.name}"))
-      emits.push(Emit::IntoMethod(typedef_def.name))
-      for opt in filter_typedef_union_members(options) {
-        emits.push(
-          Emit::UnionArgTraitImpl(opt, TypeName("T\{typedef_def.name}")),
+      let trait_name = TraitName("T\{typedef_def.name}")
+      let external_name = TypeName(typedef_def.name)
+      emits.push(Emit::External(external_name))
+      emits.push(Emit::UnionArgTrait(trait_name))
+      emits.push(Emit::IntoMethod(external_name))
+      let seen : @hashset.HashSet[ArgMbtType] = @hashset.new()
+      for opt in options {
+        let (mbt_type, arg_emits) = arg_mbt_type(
+          opt.type_,
+          typedef_def.name,
+          "",
+          "",
+          self.type_registry,
         )
+        if !seen.contains(mbt_type) {
+          seen.add(mbt_type)
+          emits.push_iter(arg_emits.iter())
+          emits.push(
+            Emit::UnionArgTraitImpl(TypeName(mbt_type.name()), trait_name),
+          )
+        }
       }
       emits
     }
     _ => {
-      let target_type = idl_to_mbt_type(typedef_def.type_)
-      [Emit::TypedefAlias(typedef_def.name, target_type)]
+      let (target_type, _) = arg_mbt_type(
+        typedef_def.type_,
+        typedef_def.name,
+        "",
+        "",
+        self.type_registry,
+      )
+      [Emit::TypedefAlias(typedef_def.name, target_type.name())]
     }
   }
   (filename, typedef_emits)
-}
-
-///|
-/// Filters union members to produce MoonBit type names, removing duplicates,
-/// Unit, and skip types.
-fn filter_typedef_union_members(
-  members : Array[@parser.TypeWithExtendedAttributes],
-) -> Array[@parser.Type] {
-  let seen : @hashset.HashSet[String] = @hashset.new()
-  let result : Array[@parser.Type] = []
-  for mem in members {
-    let mbt_type = idl_to_mbt_type(mem.type_)
-    if mbt_type != "Unit" && not(seen.contains(mbt_type)) {
-      seen.add(mbt_type)
-      result.push(mem.type_)
-    }
-  }
-  result
 }
 
 ///|
@@ -99,6 +101,8 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
+      #|
+      #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
     ),
   )
 }
@@ -130,7 +134,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|
       #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
       #|
-      #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
+      #|pub impl TMyUnion for &TMyInterface with to_js(self : &TMyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
     ),
@@ -150,5 +154,5 @@ test "typedef emitter emits alias of nullable interface" {
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (_filename, emits) = emitter.emit("MyNullableInterface")
   let code = mbt_code_gen(emits)
-  inspect(code, content="pub type MyNullableInterface = MyInterface")
+  inspect(code, content="pub type MyNullableInterface = &TMyInterface")
 }

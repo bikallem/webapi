@@ -12,28 +12,36 @@ pub impl Emitter for CallbackEmitter with emit(
   let filename = Filename("\{snake_case(name)}_callback.mbt")
   let cb_def = self.idl.callbacks[name]
   let args : Array[CallbackArgEmit] = []
+  let emits = []
   for arg in cb_def.arguments {
-    let mbt_type = callback_arg_to_mbt(arg.type_.type_, self.type_registry)
-    args.push(CallbackArgEmit::{ name: safe_identifier(arg.name), mbt_type })
+    let (mbt_type, arg_emits) = arg_mbt_type(
+      arg.type_.type_,
+      name,
+      "",
+      arg.name,
+      self.type_registry,
+    )
+    let mbt_type = if mbt_type is Interface(type_name) {
+      Interface(type_name.trim_start(chars="&T").to_string())
+    } else {
+      mbt_type
+    }
+    emits.push_iter(arg_emits.iter())
+    args.push(CallbackArgEmit::{
+      name: safe_identifier(arg.name),
+      mbt_type: mbt_type.name(),
+    })
   }
-  let return_type = idl_to_mbt_type(cb_def.return_type)
-  let emit_callback = [Emit::Callback(cb_def.name, args, return_type)]
-  (filename, emit_callback)
-}
-
-///|
-/// Map WebIDL type to MoonBit type string for callback arguments.
-/// Interfaces become trait references (&TName).
-fn callback_arg_to_mbt(
-  idl_type : @parser.Type,
-  type_registry : @type_registry.TypeRegistry,
-) -> String {
-  match idl_type {
-    Identifier(name) => name
-    Sequence(t) => "Array[\{callback_arg_to_mbt(t, type_registry)}]"
-    Nullable(t) => "\{callback_arg_to_mbt(t, type_registry)}?"
-    _ => idl_to_mbt_type(idl_type)
-  }
+  let (return_type, return_emits) = arg_mbt_type(
+    cb_def.return_type,
+    "",
+    "",
+    "",
+    self.type_registry,
+  )
+  emits.push_iter(return_emits.iter())
+  let emits = [Emit::Callback(cb_def.name, args, TypeName(return_type.name()))]
+  (filename, emits)
 }
 
 ///|

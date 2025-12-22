@@ -16,7 +16,7 @@ pub impl Emitter for DictionaryEmitter with emit(
   // Constructor method args
   let args = []
   for mem in dict.members {
-    let (type_, arg_emits) = arg_type(
+    let (mbt_type, emits) = arg_mbt_type(
       mem.type_,
       name,
       dict.name,
@@ -24,10 +24,10 @@ pub impl Emitter for DictionaryEmitter with emit(
       self.type_registry,
     )
     // Push any additional emits needed for the arg type, e.g. union arg traits
-    emits.push_iter(arg_emits.iter())
+    emits.push_iter(emits.iter())
     args.push(MethodArg::{
       name: mem.name,
-      type_,
+      type_: mbt_type,
       optional: !mem.required,
       default_value: mem.default_value.map(dv => arg_default_value(
         dv,
