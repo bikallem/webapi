@@ -9,6 +9,10 @@ struct TypeName(String) derive(Show, ToJson)
 struct TraitName(String) derive(Show, ToJson)
 
 ///|
+/// Represents a constructor name, such as "new" or "new_2" for overloaded constructors
+struct ConstructorName(String) derive(Show, ToJson)
+
+///|
 pub struct TraitDef {
   trait_name : String
   parent_trait : String
@@ -64,7 +68,7 @@ pub enum Emit {
   UnionArgTrait(TypeName) // eg. trait TEventTargetArg { ... }
   UnionArgTraitImpl(@parser.Type, TypeName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
-  ConstructorMethod(TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
+  ConstructorMethod(ConstructorName, TypeName, Array[MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
   Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
   TypedefAlias(TypeName, String) // eg. pub typealias EventHandler = EventHandlerNonNull?
   Callback(TypeName, Array[CallbackArgEmit], String) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
@@ -278,9 +282,13 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string("  \{ffi_name}(\{call_args})\n")
         buf.write_string("}")
       }
-      Emit::ConstructorMethod(TypeName(type_name), args) => {
+      Emit::ConstructorMethod(
+        ConstructorName(constructor_name),
+        TypeName(type_name),
+        args
+      ) => {
         // Emit FFI function
-        let ffi_name = "\{to_snake_case(type_name)}_ffi"
+        let ffi_name = "\{to_snake_case(type_name)}_\{to_snake_case(constructor_name)}_ffi"
         let ffi_args = args
           .map(arg => "\{safe_identifier(arg.name)}: JsValue")
           .join(", ")
@@ -291,7 +299,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string("\n\n")
         let method_args = method_args_to_string(args)
         buf.write_string(
-          "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
+          "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n",
         )
         let call_args = func_call_args(args)
         buf.write_string("  \{ffi_name}(\{call_args})\n")

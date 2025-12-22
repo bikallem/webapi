@@ -51,13 +51,25 @@ pub impl Emitter for InterfaceEmitter with emit(
 
   let trait_methods = []
   let method_counter : Map[String, Int] = {} // to handle overloaded methods
+  let mut constructor_count = 0 // to handle overloaded constructors
   for mem in interface.members {
     match mem.interface_member {
       Constructor(ctor) => {
         let args = []
-        let method_name = "new"
+        let method_name = if constructor_count == 0 {
+          "new"
+        } else {
+          "new_\{constructor_count+1}"
+        }
+        constructor_count += 1
         fill_method_args(ctor.arguments, method_name, args)
-        emits.push(Emit::ConstructorMethod(interface.name, args))
+        emits.push(
+          Emit::ConstructorMethod(
+            ConstructorName(method_name),
+            TypeName(interface.name),
+            args,
+          ),
+        )
       }
       RegularOperation(op) => {
         if op.static_ {
@@ -140,10 +152,10 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|pub impl TEventTarget for EventTarget
       #|
-      #|extern "js" fn event_target_ffi() -> EventTarget = "() => new EventTarget()"
+      #|extern "js" fn event_target_new_ffi() -> EventTarget = "() => new EventTarget()"
       #|
       #|pub fn EventTarget::new() -> EventTarget {
-      #|  event_target_ffi()
+      #|  event_target_new_ffi()
       #|}
       #|
       #|pub(open) trait TEventTargetAddEventListenerOptionsArg {

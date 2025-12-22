@@ -48,6 +48,10 @@ pub fn Code::inner(Self) -> String
 pub impl Show for Code
 pub impl ToJson for Code
 
+type ConstructorName
+pub impl Show for ConstructorName
+pub impl ToJson for ConstructorName
+
 pub(all) struct DictionaryEmitter {
   idl : @flattened_idl.FlattenedIdl
   type_registry : @type_registry.TypeRegistry
@@ -63,7 +67,7 @@ pub enum Emit {
   UnionArgTrait(TypeName)
   UnionArgTraitImpl(@parser.Type, TypeName)
   DictionaryCreate(TypeName, Array[MethodArg])
-  ConstructorMethod(TypeName, Array[MethodArg])
+  ConstructorMethod(ConstructorName, TypeName, Array[MethodArg])
   Enum(TypeName, Array[EnumVariantEmit])
   TypedefAlias(TypeName, String)
   Callback(TypeName, Array[CallbackArgEmit], String)
