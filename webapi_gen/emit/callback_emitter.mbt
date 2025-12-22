@@ -9,7 +9,7 @@ pub impl Emitter for CallbackEmitter with emit(
   self : CallbackEmitter,
   name : String,
 ) -> (Filename, Array[Emit]) {
-  let filename = Filename("\{to_snake_case(name)}_callback.mbt")
+  let filename = Filename("\{snake_case(name)}_callback.mbt")
   let cb_def = self.idl.callbacks[name]
   let args : Array[CallbackArgEmit] = []
   for arg in cb_def.arguments {

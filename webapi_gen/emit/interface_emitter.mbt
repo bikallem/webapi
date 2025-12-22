@@ -9,7 +9,7 @@ pub impl Emitter for InterfaceEmitter with emit(
   self : InterfaceEmitter,
   name : String,
 ) -> (Filename, Array[Emit]) {
-  let filename = Filename("\{to_snake_case(name)}_interface.mbt")
+  let filename = Filename("\{snake_case(name)}_interface.mbt")
   let interface = self.idl.interfaces[name]
   let ancestors = @flattened_idl.get_interface_ancestors(self.idl, name)
   let emits = []

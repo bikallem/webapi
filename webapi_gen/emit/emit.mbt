@@ -86,7 +86,7 @@ fn arg_type(
   let emits = []
   match type_ {
     Union(options) => {
-      let union_type_name = "T\{type_name}\{to_pascal_case(method_name)}\{to_pascal_case(arg_name)}Arg"
+      let union_type_name = "T\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}Arg"
       emits.push(Emit::UnionArgTrait(union_type_name))
       for option in options {
         emits.push(Emit::UnionArgTraitImpl(option.type_, union_type_name))
@@ -167,7 +167,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
           "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
         )
       Emit::EmptyMethod(TypeName(type_name)) => {
-        let ffi_name = "\{to_snake_case(type_name)}_empty_ffi"
+        let ffi_name = "\{snake_case(type_name)}_empty_ffi"
         buf.write_string(
           "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
         )
@@ -211,7 +211,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         for i, meth in trait_def.methods {
           // Emit FFI function
           let ret_type_str = idl_to_mbt_type(meth.return_type)
-          let ffi_name = "\{to_snake_case(trait_def.trait_name)}_\{to_snake_case(meth.method_name)}_ffi"
+          let ffi_name = "\{snake_case(trait_def.trait_name)}_\{snake_case(meth.method_name)}_ffi"
           let ffi_argnames = meth.args.map(arg => match arg.type_ {
             MbtType::Self => "obj"
             _ => arg.name
@@ -250,7 +250,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::DictionaryCreate(TypeName(type_name), args) => {
         // Emit FFI function
-        let ffi_name = "\{to_snake_case(type_name)}_ffi"
+        let ffi_name = "\{snake_case(type_name)}_ffi"
         let ffi_args = args
           .map(arg => "\{safe_identifier(arg.name)}: JsValue")
           .join(", ")
@@ -286,7 +286,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         args
       ) => {
         // Emit FFI function
-        let ffi_name = "\{to_snake_case(type_name)}_\{to_snake_case(constructor_name)}_ffi"
+        let ffi_name = "\{snake_case(type_name)}_\{snake_case(constructor_name)}_ffi"
         let ffi_args = args
           .map(arg => "\{safe_identifier(arg.name)}: JsValue")
           .join(", ")
@@ -344,7 +344,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         // Build closure type signature: (ArgType1, ArgType2) -> ReturnType
         let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
         let closure_type = "(\{arg_types}) -> \{return_type}"
-        let ffi_name = "\{to_snake_case(name)}_ffi"
+        let ffi_name = "\{snake_case(name)}_ffi"
 
         // External type
         buf.write_string("#external\n")
@@ -393,7 +393,7 @@ let keywords : @hashset.HashSet[String] = [
 /// Generate a safe MoonBit identifier from a WebIDL name.
 /// Handles keywords and invalid characters.
 fn safe_identifier(name : String) -> String {
-  let name = to_snake_case(name)
+  let name = snake_case(name)
 
   // Escape MoonBit reserved keywords by appending underscore.
   if keywords.contains(name) {
@@ -426,7 +426,7 @@ fn to_lower_char(c : Char) -> Char {
 ///|
 /// Convert a string to snake case
 /// Handles acronyms: DOMImplementation -> dom_implementation
-fn to_snake_case(s : String) -> String {
+fn snake_case(s : String) -> String {
   let buf = StringBuilder::new()
   let chars = []
   for c in s {
@@ -463,7 +463,7 @@ fn to_snake_case(s : String) -> String {
 
 ///|
 /// Convert a string to PascalCase
-fn to_pascal_case(s : String) -> String {
+fn pascal_case(s : String) -> String {
   let buf = StringBuilder::new()
   let mut capitalize_next = true
   for c in s {

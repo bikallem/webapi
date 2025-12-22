@@ -9,7 +9,7 @@ pub impl Emitter for TypedefEmitter with emit(
   self : TypedefEmitter,
   name : String,
 ) -> (Filename, Array[Emit]) {
-  let filename = Filename("\{to_snake_case(name)}_typedef.mbt")
+  let filename = Filename("\{snake_case(name)}_typedef.mbt")
   let typedef_def = self.idl.typedefs[name]
   let typedef_emits = match typedef_def.type_ {
     Union(options) => {

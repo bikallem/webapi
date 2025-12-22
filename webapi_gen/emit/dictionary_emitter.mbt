@@ -9,7 +9,7 @@ pub impl Emitter for DictionaryEmitter with emit(
   self : DictionaryEmitter,
   name : String,
 ) -> (Filename, Array[Emit]) {
-  let filename = Filename("\{to_snake_case(name)}_dictionary.mbt")
+  let filename = Filename("\{snake_case(name)}_dictionary.mbt")
   let dict = self.idl.dictionaries[name]
   let emits = [Emit::External(dict.name)]
 

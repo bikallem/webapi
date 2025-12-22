@@ -9,7 +9,7 @@ pub impl Emitter for EnumEmitter with emit(self : EnumEmitter, name : String) ->
   Filename,
   Array[Emit],
 ) {
-  let filename = Filename("\{to_snake_case(name)}_enum.mbt")
+  let filename = Filename("\{snake_case(name)}_enum.mbt")
   let enum_ = self.idl.enums[name]
   let variants = []
   for original_value in enum_.values {
@@ -36,7 +36,7 @@ fn enum_variant(original_value : String) -> String {
         chars.push('_')
       }
     }
-    let variant = to_pascal_case(String::from_array(chars))
+    let variant = pascal_case(String::from_array(chars))
     match variant.code_unit_at(0) {
       '0'..='9' => "V" + variant
       _ => variant
