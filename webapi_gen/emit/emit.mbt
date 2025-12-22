@@ -390,19 +390,17 @@ let keywords : @hashset.HashSet[String] = [
   |> @hashset.from_array
 
 ///|
-/// Escape MoonBit reserved keywords by appending underscore.
-fn escape_keyword(name : String) -> String {
-  match keywords.contains(name) {
-    true => "\{name}_"
-    false => name
-  }
-}
-
-///|
 /// Generate a safe MoonBit identifier from a WebIDL name.
 /// Handles keywords and invalid characters.
 fn safe_identifier(name : String) -> String {
-  escape_keyword(to_snake_case(name))
+  let name = to_snake_case(name)
+
+  // Escape MoonBit reserved keywords by appending underscore.
+  if keywords.contains(name) {
+    "\{name}_"
+  } else {
+    name
+  }
 }
 
 ///|
