@@ -50,8 +50,6 @@ pub struct EnumVariantEmit {
 } derive(Show, ToJson)
 
 ///|
-
-///|
 /// Callback argument emit representation
 pub(all) struct CallbackArgEmit {
   name : String
