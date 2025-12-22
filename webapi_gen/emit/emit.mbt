@@ -334,30 +334,6 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::TypedefAlias(TypeName(name), target_type) =>
         buf.write_string("pub type \{name} = \{target_type}")
-      // Emit::TypedefUnion(TypeName(name), member_types) => {
-      //   let trait_name = "T\{name}"
-
-      //   // Emit trait definition
-      //   buf.write_string("pub(open) trait \{trait_name} {\n")
-      //   buf.write_string("  to_js(self : Self) -> JsValue\n")
-      //   buf.write_string("}")
-      //   buf.write_string("\n\n")
-
-      //   // Emit into method
-      //   buf.write_string(
-      //     "pub fn[T : \{trait_name}] \{trait_name}::into(self : \{trait_name}) -> T = \"%identity\"",
-      //   )
-      //   buf.write_string("\n\n")
-      //   // Emit impl for each member type
-      //   for i, member_type in member_types {
-      //     buf.write_string(
-      //       "pub impl \{trait_name} for \{member_type} with to_js(self : \{member_type}) -> JsValue = \"%identity\"",
-      //     )
-      //     if i < member_types.length() - 1 {
-      //       buf.write_string("\n\n")
-      //     }
-      //   }
-      // }
       Emit::Callback(TypeName(name), args, return_type) => {
         // Build closure type signature: (ArgType1, ArgType2) -> ReturnType
         let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
