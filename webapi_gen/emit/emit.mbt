@@ -376,13 +376,11 @@ fn safe_identifier(name : String) -> String {
 /// Convert a string to snake case
 /// Handles acronyms: DOMImplementation -> dom_implementation
 fn snake_case(s : String) -> String {
-  let buf = StringBuilder::new()
   let chars = s.to_array()
-  buf.write_char(chars[0].to_ascii_lowercase())
-  let chars = chars[1:]
-  for i, c in chars {
-    match c {
-      'A'..='Z' => {
+  let buf = [chars[0].to_ascii_lowercase()]
+  for i = 1; i < chars.length(); i = i + 1 {
+    match chars[i] {
+      'A'..='Z' as c => {
         let prev = chars[i - 1]
         let mut split = false
         if prev.is_ascii_lowercase() {
@@ -398,14 +396,26 @@ fn snake_case(s : String) -> String {
           split = false
         }
         if split {
-          buf.write_char('_')
+          buf.push('_')
         }
-        buf.write_char(c.to_ascii_lowercase())
+        buf.push(c.to_ascii_lowercase())
       }
-      _ => buf.write_char(c)
+      c => buf.push(c)
     }
   }
-  buf.to_string()
+  String::from_array(buf)
+}
+
+///|
+test "snake_case function" {
+  inspect(
+    snake_case("CanvasRenderingContext2D"),
+    content="canvas_rendering_context2d",
+  )
+  inspect(snake_case("XMLHttpRequest"), content="xml_http_request")
+  inspect(snake_case("DOMImplementation"), content="dom_implementation")
+  inspect(snake_case("MyAPIInterface"), content="my_api_interface")
+  inspect(snake_case("already_snake_case"), content="already_snake_case")
 }
 
 ///|
