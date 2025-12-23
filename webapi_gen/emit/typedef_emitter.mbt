@@ -134,7 +134,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|
       #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
       #|
-      #|pub impl TMyUnion for &TMyInterface with to_js(self : &TMyInterface) -> JsValue = "%identity"
+      #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
     ),
@@ -154,5 +154,5 @@ test "typedef emitter emits alias of nullable interface" {
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (_filename, emits) = emitter.emit("MyNullableInterface")
   let code = mbt_code_gen(emits)
-  inspect(code, content="pub type MyNullableInterface = &TMyInterface")
+  inspect(code, content="pub type MyNullableInterface = MyInterface")
 }

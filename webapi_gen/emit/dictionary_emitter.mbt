@@ -12,30 +12,18 @@ pub impl Emitter for DictionaryEmitter with emit(
   let filename = Filename("\{snake_case(name)}_dictionary.mbt")
   let dict = self.idl.dictionaries[name]
   let emits = [Emit::External(dict.name)]
-
-  // Constructor method args
-  let args = []
-  for mem in dict.members {
-    let (mbt_type, emits) = arg_mbt_type(
-      mem.type_,
-      name,
-      dict.name,
+  let (args, arg_emits) = method_args(
+    dict.members.map(mem => (
       mem.name,
-      self.type_registry,
-    )
-    // Push any additional emits needed for the arg type, e.g. union arg traits
-    emits.push_iter(emits.iter())
-    args.push(MethodArg::{
-      name: mem.name,
-      type_: mbt_type,
-      optional: !mem.required,
-      default_value: mem.default_value.map(dv => arg_default_value(
-        dv,
-        mem.type_,
-        self.type_registry,
-      )),
-    })
-  }
+      mem.type_,
+      !mem.required,
+      mem.default_value,
+    )),
+    dict.name,
+    "new",
+    self.type_registry,
+  )
+  emits.push_iter(arg_emits.iter())
   emits.push(Emit::DictionaryCreate(dict.name, args)) // empty constructor
   emits.push(Emit::EmptyMethod(dict.name))
   (filename, emits)

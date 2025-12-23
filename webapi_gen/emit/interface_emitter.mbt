@@ -5,6 +5,41 @@ pub(all) struct InterfaceEmitter {
 }
 
 ///|
+/// Convert method arguments from IDL to MBT types, collecting any additional emits needed
+/// for complex types (e.g., union arg traits).
+fn method_args(
+  args : Array[(String, @parser.Type, Bool, @parser.DefaultValue?)],
+  interface_name : String,
+  method_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> (Array[MethodArg], Array[Emit]) {
+  let emits = []
+  let mbt_args = []
+  for arg in args {
+    let (arg_name, type_, optional, default_value) = arg
+    let (mbt_type, arg_emits) = arg_mbt_type(
+      type_, interface_name, method_name, arg_name, type_registry,
+    )
+    // Push any additional emits needed for the arg type, e.g. union arg traits
+    emits.push_iter(arg_emits.iter())
+    let mbt_type = match mbt_type {
+      ArgMbtType::Interface(name) => ArgMbtType::Interface("&T\{name}")
+      _ => mbt_type
+    }
+    mbt_args.push(MethodArg::{
+      name: safe_identifier(arg_name),
+      original_name: arg_name,
+      type_: mbt_type,
+      optional,
+      default_value: default_value.map(dv => arg_default_value(
+        dv, type_, type_registry,
+      )),
+    })
+  }
+  (mbt_args, emits)
+}
+
+///|
 pub impl Emitter for InterfaceEmitter with emit(
   self : InterfaceEmitter,
   name : String,
@@ -19,50 +54,30 @@ pub impl Emitter for InterfaceEmitter with emit(
   for ancestor in ancestors {
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
-
-  // Generate trait method args
-  fn fill_method_args(
-    method_args : Array[@parser.Argument],
-    method_name : String,
-    output_args : Array[MethodArg],
-  ) -> Unit {
-    for arg in method_args {
-      let (type_, arg_emits) = arg_mbt_type(
-        arg.type_.type_,
-        interface.name,
-        method_name,
-        arg.name,
-        self.type_registry,
-      )
-      // Push any additional emits needed for the arg type, e.g. union arg traits
-      emits.push_iter(arg_emits.iter())
-      output_args.push(MethodArg::{
-        name: safe_identifier(arg.name),
-        type_,
-        optional: arg.optional,
-        default_value: arg.default_value.map(dv => arg_default_value(
-          dv,
-          arg.type_.type_,
-          self.type_registry,
-        )),
-      })
-    }
-  }
-
   let trait_methods = []
   let method_counter : Map[String, Int] = {} // to handle overloaded methods
   let mut constructor_count = 0 // to handle overloaded constructors
   for mem in interface.members {
     match mem.interface_member {
       Constructor(ctor) => {
-        let args = []
         let method_name = if constructor_count == 0 {
           "new"
         } else {
           "new_\{constructor_count+1}"
         }
         constructor_count += 1
-        fill_method_args(ctor.arguments, method_name, args)
+        let (args, arg_emits) = method_args(
+          ctor.arguments.map(arg => (
+            arg.name,
+            arg.type_.type_,
+            arg.optional,
+            arg.default_value,
+          )),
+          interface.name,
+          method_name,
+          self.type_registry,
+        )
+        emits.push_iter(arg_emits.iter())
         emits.push(
           Emit::ConstructorMethod(
             ConstructorName(method_name),
@@ -86,26 +101,41 @@ pub impl Emitter for InterfaceEmitter with emit(
           }
         }
         // trait method args
-        let args = [
-          MethodArg::{
-            name: "self",
-            type_: ArgMbtType::Self,
-            optional: false,
-            default_value: None,
-          },
-        ]
-        fill_method_args(op.arguments, safe_identifier(orig_method_name), args)
-        let return_type = arg_mbt_type(
+        let self_arg = MethodArg::{
+          name: "self",
+          original_name: "self",
+          type_: ArgMbtType::Self,
+          optional: false,
+          default_value: None,
+        }
+        let (args, arg_emits) = method_args(
+          op.arguments.map(arg => (
+            arg.name,
+            arg.type_.type_,
+            arg.optional,
+            arg.default_value,
+          )),
+          interface.name,
+          orig_method_name,
+          self.type_registry,
+        )
+        emits.push_iter(arg_emits.iter())
+        let args = [self_arg] + args
+
+        // return type
+        let (return_type, return_emits) = arg_mbt_type(
           op.return_type,
           interface.name,
           orig_method_name,
-          "return",
+          "",
           self.type_registry,
         )
+        emits.push_iter(return_emits.iter())
+
         // trait method
         let trait_method = TraitMethod::{
           method_name: orig_method_name,
-          return_type: return_type.to_string(),
+          return_type: return_type.name(),
           args,
         }
         trait_methods.push(trait_method)
@@ -189,42 +219,42 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|pub impl TEventTargetCreateElementOptions for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
       #|
       #|pub trait TEventTarget: TJsValue {
-      #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetAddEventListenerOptions) -> (Other("Unit"), []) = _
-      #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetRemoveEventListenerOptions) -> (Other("Unit"), []) = _
-      #|  dispatch_event(self : Self, event : Event) -> (Other("Bool"), []) = _
-      #|  create_element(self : Self, local_name : String, options? : &TEventTargetCreateElementOptions) -> (Other("Element"), []) = _
+      #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetAddEventListenerOptions) -> Unit = _
+      #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetRemoveEventListenerOptions) -> Unit = _
+      #|  dispatch_event(self : Self, event : Event) -> Bool = _
+      #|  create_element(self : Self, local_name : String, options? : &TEventTargetCreateElementOptions) -> Element = _
       #|}
       #|
-      #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> (Other("Unit"), []) = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
+      #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
       #|
       #|impl TEventTarget with add_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
-      #|options? : &TEventTargetAddEventListenerOptions = AddEventListenerOptions::empty()) -> (Other("Unit"), []) {
+      #|options? : &TEventTargetAddEventListenerOptions = AddEventListenerOptions::empty()) -> Unit {
       #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
       #|}
       #|
-      #|extern "js" fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> (Other("Unit"), []) = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
+      #|extern "js" fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
       #|
       #|impl TEventTarget with remove_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
-      #|options? : &TEventTargetRemoveEventListenerOptions = EventListenerOptions::empty()) -> (Other("Unit"), []) {
+      #|options? : &TEventTargetRemoveEventListenerOptions = EventListenerOptions::empty()) -> Unit {
       #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
       #|}
       #|
-      #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> (Other("Bool"), []) = "(obj, event) => obj.dispatchEvent(obj, event)"
+      #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool = "(obj, event) => obj.dispatchEvent(obj, event)"
       #|
       #|impl TEventTarget with dispatch_event(self : Self, 
-      #|event : Event) -> (Other("Bool"), []) {
+      #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
       #|}
       #|
-      #|extern "js" fn event_target_create_element_ffi(obj: JsValue, local_name: JsValue, options: JsValue) -> (Other("Element"), []) = "(obj, local_name, options) => obj.createElement(obj, local_name, options)"
+      #|extern "js" fn event_target_create_element_ffi(obj: JsValue, local_name: JsValue, options: JsValue) -> Element = "(obj, local_name, options) => obj.createElement(obj, local_name, options)"
       #|
       #|impl TEventTarget with create_element(self : Self, 
       #|local_name : String, 
-      #|options? : &TEventTargetCreateElementOptions = ElementCreationOptions::empty()) -> (Other("Element"), []) {
+      #|options? : &TEventTargetCreateElementOptions = ElementCreationOptions::empty()) -> Element {
       #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), TJsValue::to_js(options))
       #|}
     ),

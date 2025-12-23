@@ -21,11 +21,6 @@ pub impl Emitter for CallbackEmitter with emit(
       arg.name,
       self.type_registry,
     )
-    let mbt_type = if mbt_type is Interface(type_name) {
-      Interface(type_name.trim_start(chars="&T").to_string())
-    } else {
-      mbt_type
-    }
     emits.push_iter(arg_emits.iter())
     args.push(CallbackArgEmit::{
       name: safe_identifier(arg.name),

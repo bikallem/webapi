@@ -29,6 +29,7 @@ pub struct TraitMethod {
 ///|
 pub struct MethodArg {
   name : String
+  original_name : String
   type_ : ArgMbtType
   optional : Bool
   default_value : String?
@@ -222,7 +223,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         let ffi_args = args
           .map(arg => "\{safe_identifier(arg.name)}: JsValue")
           .join(", ")
-        let ffi_js_args = args.map(arg => arg.name).join(", ")
+        let ffi_js_args = args.map(arg => arg.original_name).join(", ")
 
         // FFI function body 
         buf.write_string(
@@ -232,7 +233,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string("#|  const obj = {};\n")
         for arg in args {
           buf.write_string(
-            "#|  if (\{arg.name} !== undefined) obj.\{arg.name} = \{arg.name};\n",
+            "#|  if (\{arg.original_name} !== undefined) obj.\{arg.original_name} = \{arg.original_name};\n",
           )
         }
         buf.write_string("#|  return obj;\n")
@@ -564,7 +565,7 @@ fn arg_mbt_type(
     // Named types (interfaces, dictionaries, enums, typedefs, union options)
     Identifier(name) =>
       if type_registry.is_interface(name) {
-        ArgMbtType::Interface("&T\{name}")
+        ArgMbtType::Interface(name)
       } else {
         ArgMbtType::Other(name)
       }
