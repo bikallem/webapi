@@ -40,6 +40,7 @@ pub(all) struct Argument {
   default_value : DefaultValue?
 }
 pub impl Eq for Argument
+pub impl Hash for Argument
 pub impl Show for Argument
 pub impl ToJson for Argument
 
@@ -49,6 +50,7 @@ pub(all) struct AsyncIterableMember {
   arguments : Array[Argument]
 }
 pub impl Eq for AsyncIterableMember
+pub impl Hash for AsyncIterableMember
 pub impl Show for AsyncIterableMember
 pub impl ToJson for AsyncIterableMember
 
@@ -60,6 +62,7 @@ pub(all) struct AttributeMember {
   is_inherit : Bool
 }
 pub impl Eq for AttributeMember
+pub impl Hash for AttributeMember
 pub impl Show for AttributeMember
 pub impl ToJson for AttributeMember
 
@@ -69,6 +72,7 @@ pub(all) struct CallbackFunctionDefinition {
   arguments : Array[Argument]
 }
 pub impl Eq for CallbackFunctionDefinition
+pub impl Hash for CallbackFunctionDefinition
 pub impl Show for CallbackFunctionDefinition
 pub impl ToJson for CallbackFunctionDefinition
 
@@ -77,6 +81,7 @@ pub(all) struct CallbackInterfaceDefinition {
   members : Array[CallbackInterfaceMemberExtendedAttributes]
 }
 pub impl Eq for CallbackInterfaceDefinition
+pub impl Hash for CallbackInterfaceDefinition
 pub impl Show for CallbackInterfaceDefinition
 pub impl ToJson for CallbackInterfaceDefinition
 
@@ -85,6 +90,7 @@ pub(all) enum CallbackInterfaceMember {
   Const(ConstMember)
 }
 pub impl Eq for CallbackInterfaceMember
+pub impl Hash for CallbackInterfaceMember
 pub impl Show for CallbackInterfaceMember
 pub impl ToJson for CallbackInterfaceMember
 
@@ -93,6 +99,7 @@ pub(all) struct CallbackInterfaceMemberExtendedAttributes {
   callback_interface_member : CallbackInterfaceMember
 }
 pub impl Eq for CallbackInterfaceMemberExtendedAttributes
+pub impl Hash for CallbackInterfaceMemberExtendedAttributes
 pub impl Show for CallbackInterfaceMemberExtendedAttributes
 pub impl ToJson for CallbackInterfaceMemberExtendedAttributes
 
@@ -102,6 +109,7 @@ pub(all) enum Const {
   Float(FloatLiteral)
 }
 pub impl Eq for Const
+pub impl Hash for Const
 pub impl Show for Const
 pub impl ToJson for Const
 
@@ -111,6 +119,7 @@ pub(all) struct ConstMember {
   value : Const
 }
 pub impl Eq for ConstMember
+pub impl Hash for ConstMember
 pub impl Show for ConstMember
 pub impl ToJson for ConstMember
 
@@ -118,6 +127,7 @@ pub(all) struct ConstructorMember {
   arguments : Array[Argument]
 }
 pub impl Eq for ConstructorMember
+pub impl Hash for ConstructorMember
 pub impl Show for ConstructorMember
 pub impl ToJson for ConstructorMember
 
@@ -130,6 +140,7 @@ pub(all) enum DefaultValue {
   Undefined
 }
 pub impl Eq for DefaultValue
+pub impl Hash for DefaultValue
 pub impl Show for DefaultValue
 pub impl ToJson for DefaultValue
 
@@ -149,6 +160,7 @@ pub(all) enum Definition {
   Includes(IncludesStatement)
 }
 pub impl Eq for Definition
+pub impl Hash for Definition
 pub impl Show for Definition
 pub impl ToJson for Definition
 
@@ -157,6 +169,7 @@ pub(all) struct DefinitionExtendedAttributes {
   definition : Definition
 }
 pub impl Eq for DefinitionExtendedAttributes
+pub impl Hash for DefinitionExtendedAttributes
 pub impl Show for DefinitionExtendedAttributes
 pub impl ToJson for DefinitionExtendedAttributes
 
@@ -166,6 +179,7 @@ pub(all) struct DictionaryDefinition {
   members : Array[DictionaryMember]
 }
 pub impl Eq for DictionaryDefinition
+pub impl Hash for DictionaryDefinition
 pub impl Show for DictionaryDefinition
 pub impl ToJson for DictionaryDefinition
 
@@ -177,6 +191,7 @@ pub(all) struct DictionaryMember {
   default_value : DefaultValue?
 }
 pub impl Eq for DictionaryMember
+pub impl Hash for DictionaryMember
 pub impl Show for DictionaryMember
 pub impl ToJson for DictionaryMember
 
@@ -185,6 +200,7 @@ pub(all) struct EnumDefinition {
   values : Array[String]
 }
 pub impl Eq for EnumDefinition
+pub impl Hash for EnumDefinition
 pub impl Show for EnumDefinition
 pub impl ToJson for EnumDefinition
 
@@ -200,6 +216,7 @@ pub(all) enum ExtendedAttribute {
   NamedArgList(String, String, Array[Argument])
 }
 pub impl Eq for ExtendedAttribute
+pub impl Hash for ExtendedAttribute
 pub impl Show for ExtendedAttribute
 pub impl ToJson for ExtendedAttribute
 
@@ -210,6 +227,7 @@ pub(all) enum FloatLiteral {
   NaN
 }
 pub impl Eq for FloatLiteral
+pub impl Hash for FloatLiteral
 pub impl Show for FloatLiteral
 pub impl ToJson for FloatLiteral
 
@@ -218,6 +236,7 @@ pub(all) struct IncludesStatement {
   mixin_name : String
 }
 pub impl Eq for IncludesStatement
+pub impl Hash for IncludesStatement
 pub impl Show for IncludesStatement
 pub impl ToJson for IncludesStatement
 
@@ -227,6 +246,7 @@ pub(all) struct InterfaceDefinition {
   members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for InterfaceDefinition
+pub impl Hash for InterfaceDefinition
 pub impl Show for InterfaceDefinition
 pub impl ToJson for InterfaceDefinition
 
@@ -243,6 +263,7 @@ pub(all) enum InterfaceMember {
   Stringifier(StringifierMember)
 }
 pub impl Eq for InterfaceMember
+pub impl Hash for InterfaceMember
 pub impl Show for InterfaceMember
 pub impl ToJson for InterfaceMember
 
@@ -251,6 +272,7 @@ pub(all) struct InterfaceMemberExtendedAttributes {
   interface_member : InterfaceMember
 }
 pub impl Eq for InterfaceMemberExtendedAttributes
+pub impl Hash for InterfaceMemberExtendedAttributes
 pub impl Show for InterfaceMemberExtendedAttributes
 pub impl ToJson for InterfaceMemberExtendedAttributes
 
@@ -259,6 +281,7 @@ pub(all) struct IterableMember {
   value_type : Type
 }
 pub impl Eq for IterableMember
+pub impl Hash for IterableMember
 pub impl Show for IterableMember
 pub impl ToJson for IterableMember
 
@@ -268,6 +291,7 @@ pub(all) struct MaplikeMember {
   is_readonly : Bool
 }
 pub impl Eq for MaplikeMember
+pub impl Hash for MaplikeMember
 pub impl Show for MaplikeMember
 pub impl ToJson for MaplikeMember
 
@@ -276,6 +300,7 @@ pub(all) struct MixinDefinition {
   members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for MixinDefinition
+pub impl Hash for MixinDefinition
 pub impl Show for MixinDefinition
 pub impl ToJson for MixinDefinition
 
@@ -284,6 +309,7 @@ pub(all) struct NamespaceDefinition {
   members : Array[NamespaceMemberExtendedAttributes]
 }
 pub impl Eq for NamespaceDefinition
+pub impl Hash for NamespaceDefinition
 pub impl Show for NamespaceDefinition
 pub impl ToJson for NamespaceDefinition
 
@@ -293,6 +319,7 @@ pub(all) enum NamespaceMember {
   Const(ConstMember)
 }
 pub impl Eq for NamespaceMember
+pub impl Hash for NamespaceMember
 pub impl Show for NamespaceMember
 pub impl ToJson for NamespaceMember
 
@@ -301,6 +328,7 @@ pub(all) struct NamespaceMemberExtendedAttributes {
   namespace_member : NamespaceMember
 }
 pub impl Eq for NamespaceMemberExtendedAttributes
+pub impl Hash for NamespaceMemberExtendedAttributes
 pub impl Show for NamespaceMemberExtendedAttributes
 pub impl ToJson for NamespaceMemberExtendedAttributes
 
@@ -309,6 +337,7 @@ pub(all) struct PartialDictionaryDefinition {
   members : Array[DictionaryMember]
 }
 pub impl Eq for PartialDictionaryDefinition
+pub impl Hash for PartialDictionaryDefinition
 pub impl Show for PartialDictionaryDefinition
 pub impl ToJson for PartialDictionaryDefinition
 
@@ -317,6 +346,7 @@ pub(all) struct PartialInterfaceDefinition {
   members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for PartialInterfaceDefinition
+pub impl Hash for PartialInterfaceDefinition
 pub impl Show for PartialInterfaceDefinition
 pub impl ToJson for PartialInterfaceDefinition
 
@@ -325,6 +355,7 @@ pub(all) struct PartialMixinDefinition {
   members : Array[InterfaceMemberExtendedAttributes]
 }
 pub impl Eq for PartialMixinDefinition
+pub impl Hash for PartialMixinDefinition
 pub impl Show for PartialMixinDefinition
 pub impl ToJson for PartialMixinDefinition
 
@@ -333,6 +364,7 @@ pub(all) struct PartialNamespaceDefinition {
   members : Array[NamespaceMemberExtendedAttributes]
 }
 pub impl Eq for PartialNamespaceDefinition
+pub impl Hash for PartialNamespaceDefinition
 pub impl Show for PartialNamespaceDefinition
 pub impl ToJson for PartialNamespaceDefinition
 
@@ -350,6 +382,7 @@ pub(all) struct RegularOperationMember {
   static_ : Bool
 }
 pub impl Eq for RegularOperationMember
+pub impl Hash for RegularOperationMember
 pub impl Show for RegularOperationMember
 pub impl ToJson for RegularOperationMember
 
@@ -358,6 +391,7 @@ pub(all) struct SetlikeMember {
   is_readonly : Bool
 }
 pub impl Eq for SetlikeMember
+pub impl Hash for SetlikeMember
 pub impl Show for SetlikeMember
 pub impl ToJson for SetlikeMember
 
@@ -367,6 +401,7 @@ pub(all) enum Special {
   Deleter
 }
 pub impl Eq for Special
+pub impl Hash for Special
 pub impl Show for Special
 pub impl ToJson for Special
 
@@ -377,6 +412,7 @@ pub(all) struct SpecialOperationMember {
   special : Special
 }
 pub impl Eq for SpecialOperationMember
+pub impl Hash for SpecialOperationMember
 pub impl Show for SpecialOperationMember
 pub impl ToJson for SpecialOperationMember
 
@@ -386,6 +422,7 @@ pub(all) enum StringType {
   USVString
 }
 pub impl Eq for StringType
+pub impl Hash for StringType
 pub impl Show for StringType
 pub impl ToJson for StringType
 
@@ -393,6 +430,7 @@ pub(all) enum StringifierMember {
   Bare
 }
 pub impl Eq for StringifierMember
+pub impl Hash for StringifierMember
 pub impl Show for StringifierMember
 pub impl ToJson for StringifierMember
 
@@ -634,6 +672,7 @@ pub(all) enum Type {
   Nullable(Type)
 }
 pub impl Eq for Type
+pub impl Hash for Type
 pub impl Show for Type
 pub impl ToJson for Type
 
@@ -642,6 +681,7 @@ pub(all) struct TypeWithExtendedAttributes {
   type_ : Type
 }
 pub impl Eq for TypeWithExtendedAttributes
+pub impl Hash for TypeWithExtendedAttributes
 pub impl Show for TypeWithExtendedAttributes
 pub impl ToJson for TypeWithExtendedAttributes
 
@@ -650,6 +690,7 @@ pub(all) struct TypedefDefinition {
   name : String
 }
 pub impl Eq for TypedefDefinition
+pub impl Hash for TypedefDefinition
 pub impl Show for TypedefDefinition
 pub impl ToJson for TypedefDefinition
 

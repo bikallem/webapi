@@ -28,51 +28,46 @@ pub fn DocumentFragment::new() -> DocumentFragment {
 }
 
 ///|
-pub(open) trait TDocumentFragmentPrependNodesArg {
+pub(open) trait TDocumentFragmentPrependNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentFragmentPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentFragmentPrependNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentFragmentPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentFragmentPrependNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentFragmentAppendNodesArg {
+pub(open) trait TDocumentFragmentAppendNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentFragmentAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentFragmentAppendNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentFragmentAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentFragmentAppendNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentFragmentReplaceChildrenNodesArg {
+pub(open) trait TDocumentFragmentReplaceChildrenNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentFragmentReplaceChildrenNodesArg for Node with to_js(
-  self : Node,
-) -> JsValue = "%identity"
+pub impl TDocumentFragmentReplaceChildrenNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentFragmentReplaceChildrenNodesArg for String with to_js(
+pub impl TDocumentFragmentReplaceChildrenNodes for String with to_js(
   self : String,
 ) -> JsValue = "%identity"
 
 ///|
 pub trait TDocumentFragment: TNode {
   get_element_by_id(self : Self, element_id : String) -> Element = _
-  prepend(self : Self, nodes : &TDocumentFragmentPrependNodesArg) -> Unit = _
-  append(self : Self, nodes : &TDocumentFragmentAppendNodesArg) -> Unit = _
-  replace_children(
-    self : Self,
-    nodes : &TDocumentFragmentReplaceChildrenNodesArg,
-  ) -> Unit = _
+  prepend(self : Self, nodes : &TDocumentFragmentPrependNodes) -> Unit = _
+  append(self : Self, nodes : &TDocumentFragmentAppendNodes) -> Unit = _
+  replace_children(self : Self, nodes : &TDocumentFragmentReplaceChildrenNodes) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
@@ -101,7 +96,7 @@ extern "js" fn document_fragment_prepend_ffi(
 ///|
 impl TDocumentFragment with prepend(
   self : Self,
-  nodes : &TDocumentFragmentPrependNodesArg,
+  nodes : &TDocumentFragmentPrependNodes,
 ) -> Unit {
   document_fragment_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
 }
@@ -115,7 +110,7 @@ extern "js" fn document_fragment_append_ffi(
 ///|
 impl TDocumentFragment with append(
   self : Self,
-  nodes : &TDocumentFragmentAppendNodesArg,
+  nodes : &TDocumentFragmentAppendNodes,
 ) -> Unit {
   document_fragment_append_ffi(TJsValue::to_js(self), nodes.to_js())
 }
@@ -129,7 +124,7 @@ extern "js" fn document_fragment_replace_children_ffi(
 ///|
 impl TDocumentFragment with replace_children(
   self : Self,
-  nodes : &TDocumentFragmentReplaceChildrenNodesArg,
+  nodes : &TDocumentFragmentReplaceChildrenNodes,
 ) -> Unit {
   document_fragment_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
 }

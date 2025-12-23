@@ -26,98 +26,98 @@ pub fn Document::new() -> Document {
 }
 
 ///|
-pub(open) trait TDocumentCreateElementOptionsArg {
+pub(open) trait TDocumentCreateElementOptions {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentCreateElementOptionsArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentCreateElementOptions for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentCreateElementOptionsArg for ElementCreationOptions with to_js(
+pub impl TDocumentCreateElementOptions for ElementCreationOptions with to_js(
   self : ElementCreationOptions,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentCreateElementNsOptionsArg {
+pub(open) trait TDocumentCreateElementNSOptions {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentCreateElementNsOptionsArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentCreateElementNSOptions for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentCreateElementNsOptionsArg for ElementCreationOptions with to_js(
+pub impl TDocumentCreateElementNSOptions for ElementCreationOptions with to_js(
   self : ElementCreationOptions,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentImportNodeOptionsArg {
+pub(open) trait TDocumentImportNodeOptions {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentImportNodeOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TDocumentImportNodeOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentImportNodeOptionsArg for ImportNodeOptions with to_js(
+pub impl TDocumentImportNodeOptions for ImportNodeOptions with to_js(
   self : ImportNodeOptions,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentWriteTextArg {
+pub(open) trait TDocumentWriteText {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentWriteTextArg for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TDocumentWriteText for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentWriteTextArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentWriteText for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentWritelnTextArg {
+pub(open) trait TDocumentWritelnText {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentWritelnTextArg for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TDocumentWritelnText for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentWritelnTextArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentWritelnText for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentPrependNodesArg {
+pub(open) trait TDocumentPrependNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentPrependNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentPrependNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentAppendNodesArg {
+pub(open) trait TDocumentAppendNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentAppendNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentAppendNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentReplaceChildrenNodesArg {
+pub(open) trait TDocumentReplaceChildrenNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentReplaceChildrenNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentReplaceChildrenNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentReplaceChildrenNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentReplaceChildrenNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub trait TDocument: TNode {
@@ -131,13 +131,13 @@ pub trait TDocument: TNode {
   create_element(
     self : Self,
     local_name : String,
-    options? : &TDocumentCreateElementOptionsArg,
+    options? : &TDocumentCreateElementOptions,
   ) -> Element = _
   create_element_ns(
     self : Self,
     namespace_ : String,
     qualified_name : String,
-    options? : &TDocumentCreateElementNsOptionsArg,
+    options? : &TDocumentCreateElementNSOptions,
   ) -> Element = _
   create_document_fragment(self : Self) -> DocumentFragment = _
   create_text_node(self : Self, data : String) -> Text = _
@@ -147,7 +147,7 @@ pub trait TDocument: TNode {
   import_node(
     self : Self,
     node : &TNode,
-    options? : &TDocumentImportNodeOptionsArg,
+    options? : &TDocumentImportNodeOptions,
   ) -> Node = _
   adopt_node(self : Self, node : &TNode) -> Node = _
   create_attribute(self : Self, local_name : String) -> Attr = _
@@ -170,8 +170,8 @@ pub trait TDocument: TNode {
   open(self : Self, unused1? : String, unused2? : String) -> Document = _
   open_2(self : Self, url : String, name : String, features : String) -> WindowProxy = _
   close(self : Self) -> Unit = _
-  write(self : Self, text : &TDocumentWriteTextArg) -> Unit = _
-  writeln(self : Self, text : &TDocumentWritelnTextArg) -> Unit = _
+  write(self : Self, text : &TDocumentWriteText) -> Unit = _
+  writeln(self : Self, text : &TDocumentWritelnText) -> Unit = _
   has_focus(self : Self) -> Bool = _
   exec_command(
     self : Self,
@@ -196,9 +196,9 @@ pub trait TDocument: TNode {
     options? : CaretPositionFromPointOptions,
   ) -> CaretPosition = _
   get_element_by_id(self : Self, element_id : String) -> Element = _
-  prepend(self : Self, nodes : &TDocumentPrependNodesArg) -> Unit = _
-  append(self : Self, nodes : &TDocumentAppendNodesArg) -> Unit = _
-  replace_children(self : Self, nodes : &TDocumentReplaceChildrenNodesArg) -> Unit = _
+  prepend(self : Self, nodes : &TDocumentPrependNodes) -> Unit = _
+  append(self : Self, nodes : &TDocumentAppendNodes) -> Unit = _
+  replace_children(self : Self, nodes : &TDocumentReplaceChildrenNodes) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
@@ -302,7 +302,7 @@ extern "js" fn document_create_element_ffi(
 impl TDocument with create_element(
   self : Self,
   local_name : String,
-  options? : &TDocumentCreateElementOptionsArg = ElementCreationOptions::empty(),
+  options? : &TDocumentCreateElementOptions = ElementCreationOptions::empty(),
 ) -> Element {
   document_create_element_ffi(
     TJsValue::to_js(self),
@@ -324,7 +324,7 @@ impl TDocument with create_element_ns(
   self : Self,
   namespace_ : String,
   qualified_name : String,
-  options? : &TDocumentCreateElementNsOptionsArg = ElementCreationOptions::empty(),
+  options? : &TDocumentCreateElementNSOptions = ElementCreationOptions::empty(),
 ) -> Element {
   document_create_element_ns_ffi(
     TJsValue::to_js(self),
@@ -411,7 +411,7 @@ extern "js" fn document_import_node_ffi(
 impl TDocument with import_node(
   self : Self,
   node : &TNode,
-  options? : &TDocumentImportNodeOptionsArg = false,
+  options? : &TDocumentImportNodeOptions = false,
 ) -> Node {
   document_import_node_ffi(
     TJsValue::to_js(self),
@@ -592,7 +592,7 @@ impl TDocument with close(self : Self) -> Unit {
 extern "js" fn document_write_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.write(obj, text)"
 
 ///|
-impl TDocument with write(self : Self, text : &TDocumentWriteTextArg) -> Unit {
+impl TDocument with write(self : Self, text : &TDocumentWriteText) -> Unit {
   document_write_ffi(TJsValue::to_js(self), text.to_js())
 }
 
@@ -600,7 +600,7 @@ impl TDocument with write(self : Self, text : &TDocumentWriteTextArg) -> Unit {
 extern "js" fn document_writeln_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.writeln(obj, text)"
 
 ///|
-impl TDocument with writeln(self : Self, text : &TDocumentWritelnTextArg) -> Unit {
+impl TDocument with writeln(self : Self, text : &TDocumentWritelnText) -> Unit {
   document_writeln_ffi(TJsValue::to_js(self), text.to_js())
 }
 
@@ -804,7 +804,7 @@ impl TDocument with get_element_by_id(self : Self, element_id : String) -> Eleme
 extern "js" fn document_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
 
 ///|
-impl TDocument with prepend(self : Self, nodes : &TDocumentPrependNodesArg) -> Unit {
+impl TDocument with prepend(self : Self, nodes : &TDocumentPrependNodes) -> Unit {
   document_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -812,7 +812,7 @@ impl TDocument with prepend(self : Self, nodes : &TDocumentPrependNodesArg) -> U
 extern "js" fn document_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
 
 ///|
-impl TDocument with append(self : Self, nodes : &TDocumentAppendNodesArg) -> Unit {
+impl TDocument with append(self : Self, nodes : &TDocumentAppendNodes) -> Unit {
   document_append_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -825,7 +825,7 @@ extern "js" fn document_replace_children_ffi(
 ///|
 impl TDocument with replace_children(
   self : Self,
-  nodes : &TDocumentReplaceChildrenNodesArg,
+  nodes : &TDocumentReplaceChildrenNodes,
 ) -> Unit {
   document_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
 }

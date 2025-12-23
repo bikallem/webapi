@@ -18,43 +18,43 @@ pub impl TNode for DocumentType
 pub impl TEventTarget for DocumentType
 
 ///|
-pub(open) trait TDocumentTypeBeforeNodesArg {
+pub(open) trait TDocumentTypeBeforeNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentTypeBeforeNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentTypeBeforeNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentTypeBeforeNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentTypeBeforeNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentTypeAfterNodesArg {
+pub(open) trait TDocumentTypeAfterNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentTypeAfterNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentTypeAfterNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentTypeAfterNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentTypeAfterNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TDocumentTypeReplaceWithNodesArg {
+pub(open) trait TDocumentTypeReplaceWithNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDocumentTypeReplaceWithNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentTypeReplaceWithNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TDocumentTypeReplaceWithNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentTypeReplaceWithNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub trait TDocumentType: TNode {
-  before(self : Self, nodes : &TDocumentTypeBeforeNodesArg) -> Unit = _
-  after(self : Self, nodes : &TDocumentTypeAfterNodesArg) -> Unit = _
-  replace_with(self : Self, nodes : &TDocumentTypeReplaceWithNodesArg) -> Unit = _
+  before(self : Self, nodes : &TDocumentTypeBeforeNodes) -> Unit = _
+  after(self : Self, nodes : &TDocumentTypeAfterNodes) -> Unit = _
+  replace_with(self : Self, nodes : &TDocumentTypeReplaceWithNodes) -> Unit = _
   remove(self : Self) -> Unit = _
 }
 
@@ -62,10 +62,7 @@ pub trait TDocumentType: TNode {
 extern "js" fn document_type_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
 
 ///|
-impl TDocumentType with before(
-  self : Self,
-  nodes : &TDocumentTypeBeforeNodesArg,
-) -> Unit {
+impl TDocumentType with before(self : Self, nodes : &TDocumentTypeBeforeNodes) -> Unit {
   document_type_before_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -73,7 +70,7 @@ impl TDocumentType with before(
 extern "js" fn document_type_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(obj, nodes)"
 
 ///|
-impl TDocumentType with after(self : Self, nodes : &TDocumentTypeAfterNodesArg) -> Unit {
+impl TDocumentType with after(self : Self, nodes : &TDocumentTypeAfterNodes) -> Unit {
   document_type_after_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -86,7 +83,7 @@ extern "js" fn document_type_replace_with_ffi(
 ///|
 impl TDocumentType with replace_with(
   self : Self,
-  nodes : &TDocumentTypeReplaceWithNodesArg,
+  nodes : &TDocumentTypeReplaceWithNodes,
 ) -> Unit {
   document_type_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
 }

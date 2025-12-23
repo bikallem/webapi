@@ -18,137 +18,135 @@ pub impl TNode for Element
 pub impl TEventTarget for Element
 
 ///|
-pub(open) trait TElementSetAttributeValueArg {
+pub(open) trait TElementSetAttributeValue {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementSetAttributeValueArg for TrustedType with to_js(
+pub impl TElementSetAttributeValue for TrustedType with to_js(
   self : TrustedType,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TElementSetAttributeValueArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetAttributeValue for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementSetAttributeNsValueArg {
+pub(open) trait TElementSetAttributeNSValue {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementSetAttributeNsValueArg for TrustedType with to_js(
+pub impl TElementSetAttributeNSValue for TrustedType with to_js(
   self : TrustedType,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TElementSetAttributeNsValueArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetAttributeNSValue for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementSetHtmlUnsafeHtmlArg {
+pub(open) trait TElementSetHTMLUnsafeHtml {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementSetHtmlUnsafeHtmlArg for TrustedHTML with to_js(
+pub impl TElementSetHTMLUnsafeHtml for TrustedHTML with to_js(
   self : TrustedHTML,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TElementSetHtmlUnsafeHtmlArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementInsertAdjacentHtmlStringArg {
+pub(open) trait TElementInsertAdjacentHTMLString {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementInsertAdjacentHtmlStringArg for TrustedHTML with to_js(
+pub impl TElementInsertAdjacentHTMLString for TrustedHTML with to_js(
   self : TrustedHTML,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TElementInsertAdjacentHtmlStringArg for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TElementInsertAdjacentHTMLString for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementScrollIntoViewArgArg {
+pub(open) trait TElementScrollIntoViewArg {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementScrollIntoViewArgArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TElementScrollIntoViewArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
-pub impl TElementScrollIntoViewArgArg for ScrollIntoViewOptions with to_js(
+pub impl TElementScrollIntoViewArg for ScrollIntoViewOptions with to_js(
   self : ScrollIntoViewOptions,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementPrependNodesArg {
+pub(open) trait TElementPrependNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementPrependNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementPrependNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TElementPrependNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementPrependNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementAppendNodesArg {
+pub(open) trait TElementAppendNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementAppendNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementAppendNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TElementAppendNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementAppendNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementReplaceChildrenNodesArg {
+pub(open) trait TElementReplaceChildrenNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementReplaceChildrenNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementReplaceChildrenNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TElementReplaceChildrenNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementReplaceChildrenNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementBeforeNodesArg {
+pub(open) trait TElementBeforeNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementBeforeNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementBeforeNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TElementBeforeNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementBeforeNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementAfterNodesArg {
+pub(open) trait TElementAfterNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementAfterNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementAfterNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TElementAfterNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementAfterNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementReplaceWithNodesArg {
+pub(open) trait TElementReplaceWithNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementReplaceWithNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementReplaceWithNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TElementReplaceWithNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementReplaceWithNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub trait TElement: TNode {
@@ -159,13 +157,13 @@ pub trait TElement: TNode {
   set_attribute(
     self : Self,
     qualified_name : String,
-    value : &TElementSetAttributeValueArg,
+    value : &TElementSetAttributeValue,
   ) -> Unit = _
   set_attribute_ns(
     self : Self,
     namespace_ : String,
     qualified_name : String,
-    value : &TElementSetAttributeNsValueArg,
+    value : &TElementSetAttributeNSValue,
   ) -> Unit = _
   remove_attribute(self : Self, qualified_name : String) -> Unit = _
   remove_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Unit = _
@@ -190,32 +188,34 @@ pub trait TElement: TNode {
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
   insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> Element = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
-  set_html_unsafe(self : Self, html : &TElementSetHtmlUnsafeHtmlArg) -> Unit = _
+  set_html_unsafe(self : Self, html : &TElementSetHTMLUnsafeHtml) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
   insert_adjacent_html(
     self : Self,
     position : String,
-    string : &TElementInsertAdjacentHtmlStringArg,
+    string : &TElementInsertAdjacentHTMLString,
   ) -> Unit = _
   get_client_rects(self : Self) -> DOMRectList = _
   get_bounding_client_rect(self : Self) -> DOMRect = _
   check_visibility(self : Self, options? : CheckVisibilityOptions) -> Bool = _
-  scroll_into_view(self : Self, arg? : &TElementScrollIntoViewArgArg) -> JsValue = _
-  scroll(self : Self, options? : ScrollToOptions) -> JsValue = _
-  scroll_2(self : Self, x : Double, y : Double) -> JsValue = _
-  scroll_to(self : Self, options? : ScrollToOptions) -> JsValue = _
-  scroll_to_2(self : Self, x : Double, y : Double) -> JsValue = _
-  scroll_by(self : Self, options? : ScrollToOptions) -> JsValue = _
-  scroll_by_2(self : Self, x : Double, y : Double) -> JsValue = _
-  prepend(self : Self, nodes : &TElementPrependNodesArg) -> Unit = _
-  append(self : Self, nodes : &TElementAppendNodesArg) -> Unit = _
-  replace_children(self : Self, nodes : &TElementReplaceChildrenNodesArg) -> Unit = _
+  scroll_into_view(self : Self, arg? : &TElementScrollIntoViewArg) -> JsPromise[
+    Unit,
+  ] = _
+  scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  prepend(self : Self, nodes : &TElementPrependNodes) -> Unit = _
+  append(self : Self, nodes : &TElementAppendNodes) -> Unit = _
+  replace_children(self : Self, nodes : &TElementReplaceChildrenNodes) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
-  before(self : Self, nodes : &TElementBeforeNodesArg) -> Unit = _
-  after(self : Self, nodes : &TElementAfterNodesArg) -> Unit = _
-  replace_with(self : Self, nodes : &TElementReplaceWithNodesArg) -> Unit = _
+  before(self : Self, nodes : &TElementBeforeNodes) -> Unit = _
+  after(self : Self, nodes : &TElementAfterNodes) -> Unit = _
+  replace_with(self : Self, nodes : &TElementReplaceWithNodes) -> Unit = _
   remove(self : Self) -> Unit = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[DOMQuad] = _
   convert_quad_from_node(
@@ -299,7 +299,7 @@ extern "js" fn element_set_attribute_ffi(
 impl TElement with set_attribute(
   self : Self,
   qualified_name : String,
-  value : &TElementSetAttributeValueArg,
+  value : &TElementSetAttributeValue,
 ) -> Unit {
   element_set_attribute_ffi(
     TJsValue::to_js(self),
@@ -321,7 +321,7 @@ impl TElement with set_attribute_ns(
   self : Self,
   namespace_ : String,
   qualified_name : String,
-  value : &TElementSetAttributeNsValueArg,
+  value : &TElementSetAttributeNSValue,
 ) -> Unit {
   element_set_attribute_ns_ffi(
     TJsValue::to_js(self),
@@ -636,7 +636,7 @@ extern "js" fn element_set_html_unsafe_ffi(
 ///|
 impl TElement with set_html_unsafe(
   self : Self,
-  html : &TElementSetHtmlUnsafeHtmlArg,
+  html : &TElementSetHTMLUnsafeHtml,
 ) -> Unit {
   element_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }
@@ -663,7 +663,7 @@ extern "js" fn element_insert_adjacent_html_ffi(
 impl TElement with insert_adjacent_html(
   self : Self,
   position : String,
-  string : &TElementInsertAdjacentHtmlStringArg,
+  string : &TElementInsertAdjacentHTMLString,
 ) -> Unit {
   element_insert_adjacent_html_ffi(
     TJsValue::to_js(self),
@@ -706,24 +706,27 @@ impl TElement with check_visibility(
 extern "js" fn element_scroll_into_view_ffi(
   obj : JsValue,
   arg : JsValue,
-) -> JsValue = "(obj, arg) => obj.scrollIntoView(obj, arg)"
+) -> JsPromise[Unit] = "(obj, arg) => obj.scrollIntoView(obj, arg)"
 
 ///|
 impl TElement with scroll_into_view(
   self : Self,
-  arg? : &TElementScrollIntoViewArgArg = ScrollIntoViewOptions::empty(),
-) -> JsValue {
+  arg? : &TElementScrollIntoViewArg = ScrollIntoViewOptions::empty(),
+) -> JsPromise[Unit] {
   element_scroll_into_view_ffi(TJsValue::to_js(self), arg.to_js())
 }
 
 ///|
-extern "js" fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsValue = "(obj, options) => obj.scroll(obj, options)"
+extern "js" fn element_scroll_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Unit] = "(obj, options) => obj.scroll(obj, options)"
 
 ///|
 impl TElement with scroll(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsValue {
+) -> JsPromise[Unit] {
   element_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -732,10 +735,12 @@ extern "js" fn element_scroll_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scroll_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(obj, x, y)"
 
 ///|
-impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsValue {
+impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
   element_scroll_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -747,13 +752,13 @@ impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsValue {
 extern "js" fn element_scroll_to_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, options) => obj.scrollTo(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(obj, options)"
 
 ///|
 impl TElement with scroll_to(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsValue {
+) -> JsPromise[Unit] {
   element_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -762,10 +767,12 @@ extern "js" fn element_scroll_to_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollTo_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(obj, x, y)"
 
 ///|
-impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsValue {
+impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
   element_scroll_to_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -777,13 +784,13 @@ impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsValue {
 extern "js" fn element_scroll_by_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, options) => obj.scrollBy(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(obj, options)"
 
 ///|
 impl TElement with scroll_by(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsValue {
+) -> JsPromise[Unit] {
   element_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -792,10 +799,12 @@ extern "js" fn element_scroll_by_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollBy_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(obj, x, y)"
 
 ///|
-impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsValue {
+impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
   element_scroll_by_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -807,7 +816,7 @@ impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsValue {
 extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
 
 ///|
-impl TElement with prepend(self : Self, nodes : &TElementPrependNodesArg) -> Unit {
+impl TElement with prepend(self : Self, nodes : &TElementPrependNodes) -> Unit {
   element_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -815,7 +824,7 @@ impl TElement with prepend(self : Self, nodes : &TElementPrependNodesArg) -> Uni
 extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
 
 ///|
-impl TElement with append(self : Self, nodes : &TElementAppendNodesArg) -> Unit {
+impl TElement with append(self : Self, nodes : &TElementAppendNodes) -> Unit {
   element_append_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -828,7 +837,7 @@ extern "js" fn element_replace_children_ffi(
 ///|
 impl TElement with replace_children(
   self : Self,
-  nodes : &TElementReplaceChildrenNodesArg,
+  nodes : &TElementReplaceChildrenNodes,
 ) -> Unit {
   element_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
 }
@@ -878,7 +887,7 @@ impl TElement with query_selector_all(self : Self, selectors : String) -> NodeLi
 extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
 
 ///|
-impl TElement with before(self : Self, nodes : &TElementBeforeNodesArg) -> Unit {
+impl TElement with before(self : Self, nodes : &TElementBeforeNodes) -> Unit {
   element_before_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -886,7 +895,7 @@ impl TElement with before(self : Self, nodes : &TElementBeforeNodesArg) -> Unit 
 extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(obj, nodes)"
 
 ///|
-impl TElement with after(self : Self, nodes : &TElementAfterNodesArg) -> Unit {
+impl TElement with after(self : Self, nodes : &TElementAfterNodes) -> Unit {
   element_after_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
@@ -894,10 +903,7 @@ impl TElement with after(self : Self, nodes : &TElementAfterNodesArg) -> Unit {
 extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(obj, nodes)"
 
 ///|
-impl TElement with replace_with(
-  self : Self,
-  nodes : &TElementReplaceWithNodesArg,
-) -> Unit {
+impl TElement with replace_with(self : Self, nodes : &TElementReplaceWithNodes) -> Unit {
   element_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 

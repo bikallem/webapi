@@ -20,23 +20,23 @@ pub fn DOMParser::new() -> DOMParser {
 }
 
 ///|
-pub(open) trait TDOMParserParseFromStringStringArg {
+pub(open) trait TDOMParserParseFromStringString {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TDOMParserParseFromStringStringArg for TrustedHTML with to_js(
+pub impl TDOMParserParseFromStringString for TrustedHTML with to_js(
   self : TrustedHTML,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TDOMParserParseFromStringStringArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDOMParserParseFromStringString for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub trait TDOMParser: TJsValue {
   parse_from_string(
     self : Self,
-    string : &TDOMParserParseFromStringStringArg,
+    string : &TDOMParserParseFromStringString,
     type_ : DOMParserSupportedType,
   ) -> Document = _
 }
@@ -51,7 +51,7 @@ extern "js" fn dom_parser_parse_from_string_ffi(
 ///|
 impl TDOMParser with parse_from_string(
   self : Self,
-  string : &TDOMParserParseFromStringStringArg,
+  string : &TDOMParserParseFromStringString,
   type_ : DOMParserSupportedType,
 ) -> Document {
   dom_parser_parse_from_string_ffi(

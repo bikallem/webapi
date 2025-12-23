@@ -14,38 +14,34 @@ pub fn[T : TElementInternals] ElementInternals::into(
 pub impl TElementInternals for ElementInternals
 
 ///|
-pub(open) trait TElementInternalsSetFormValueValueArg {
+pub(open) trait TElementInternalsSetFormValueValue {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementInternalsSetFormValueValueArg for File with to_js(self : File) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueValue for File with to_js(self : File) -> JsValue = "%identity"
 
 ///|
-pub impl TElementInternalsSetFormValueValueArg for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueValue for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TElementInternalsSetFormValueValueArg for FormData with to_js(
+pub impl TElementInternalsSetFormValueValue for FormData with to_js(
   self : FormData,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementInternalsSetFormValueStateArg {
+pub(open) trait TElementInternalsSetFormValueState {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementInternalsSetFormValueStateArg for File with to_js(self : File) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueState for File with to_js(self : File) -> JsValue = "%identity"
 
 ///|
-pub impl TElementInternalsSetFormValueStateArg for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueState for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TElementInternalsSetFormValueStateArg for FormData with to_js(
+pub impl TElementInternalsSetFormValueState for FormData with to_js(
   self : FormData,
 ) -> JsValue = "%identity"
 
@@ -53,8 +49,8 @@ pub impl TElementInternalsSetFormValueStateArg for FormData with to_js(
 pub trait TElementInternals: TJsValue {
   set_form_value(
     self : Self,
-    value : &TElementInternalsSetFormValueValueArg,
-    state? : &TElementInternalsSetFormValueStateArg,
+    value : &TElementInternalsSetFormValueValue,
+    state? : &TElementInternalsSetFormValueState,
   ) -> Unit = _
   set_validity(
     self : Self,
@@ -76,8 +72,8 @@ extern "js" fn element_internals_set_form_value_ffi(
 ///|
 impl TElementInternals with set_form_value(
   self : Self,
-  value : &TElementInternalsSetFormValueValueArg,
-  state? : &TElementInternalsSetFormValueStateArg,
+  value : &TElementInternalsSetFormValueValue,
+  state? : &TElementInternalsSetFormValueState,
 ) -> Unit {
   element_internals_set_form_value_ffi(
     TJsValue::to_js(self),

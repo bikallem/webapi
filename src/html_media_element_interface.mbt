@@ -31,7 +31,7 @@ pub trait THTMLMediaElement: THTMLElement {
   can_play_type(self : Self, type_ : String) -> CanPlayTypeResult = _
   fast_seek(self : Self, time : Double) -> Unit = _
   get_start_date(self : Self) -> JsValue = _
-  play(self : Self) -> JsValue = _
+  play(self : Self) -> JsPromise[Unit] = _
   pause(self : Self) -> Unit = _
   add_text_track(
     self : Self,
@@ -83,10 +83,10 @@ impl THTMLMediaElement with get_start_date(self : Self) -> JsValue {
 }
 
 ///|
-extern "js" fn html_media_element_play_ffi(obj : JsValue) -> JsValue = "(obj) => obj.play(obj)"
+extern "js" fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[Unit] = "(obj) => obj.play(obj)"
 
 ///|
-impl THTMLMediaElement with play(self : Self) -> JsValue {
+impl THTMLMediaElement with play(self : Self) -> JsPromise[Unit] {
   html_media_element_play_ffi(TJsValue::to_js(self))
 }
 

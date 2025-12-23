@@ -38,7 +38,7 @@ pub fn CSSStyleSheetInit::new(
 ) -> CSSStyleSheetInit {
   css_style_sheet_init_ffi(
     TJsValue::to_js(base_url),
-    TJsValue::to_js(media),
+    media.to_js(),
     TJsValue::to_js(disabled),
   )
 }

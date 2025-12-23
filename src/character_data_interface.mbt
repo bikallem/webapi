@@ -157,7 +157,7 @@ extern "js" fn character_data_before_ffi(
 
 ///|
 impl TCharacterData with before(self : Self, nodes : &TCharacterDataBeforeNodes) -> Unit {
-  character_data_before_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes))
+  character_data_before_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
 ///|
@@ -165,7 +165,7 @@ extern "js" fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit 
 
 ///|
 impl TCharacterData with after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit {
-  character_data_after_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes))
+  character_data_after_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
 ///|
@@ -179,7 +179,7 @@ impl TCharacterData with replace_with(
   self : Self,
   nodes : &TCharacterDataReplaceWithNodes,
 ) -> Unit {
-  character_data_replace_with_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes))
+  character_data_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
 }
 
 ///|

@@ -20,32 +20,30 @@ pub fn EventTarget::new() -> EventTarget {
 }
 
 ///|
-pub(open) trait TEventTargetAddEventListenerOptionsArg {
+pub(open) trait TEventTargetAddEventListenerOptions {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TEventTargetAddEventListenerOptionsArg for AddEventListenerOptions with to_js(
+pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions with to_js(
   self : AddEventListenerOptions,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TEventTargetAddEventListenerOptionsArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TEventTargetAddEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TEventTargetRemoveEventListenerOptionsArg {
+pub(open) trait TEventTargetRemoveEventListenerOptions {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TEventTargetRemoveEventListenerOptionsArg for EventListenerOptions with to_js(
+pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions with to_js(
   self : EventListenerOptions,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TEventTargetRemoveEventListenerOptionsArg for Bool with to_js(
-  self : Bool,
-) -> JsValue = "%identity"
+pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
 
 ///|
 pub trait TEventTarget: TJsValue {
@@ -53,13 +51,13 @@ pub trait TEventTarget: TJsValue {
     self : Self,
     type_ : String,
     callback : EventListener,
-    options? : &TEventTargetAddEventListenerOptionsArg,
+    options? : &TEventTargetAddEventListenerOptions,
   ) -> Unit = _
   remove_event_listener(
     self : Self,
     type_ : String,
     callback : EventListener,
-    options? : &TEventTargetRemoveEventListenerOptionsArg,
+    options? : &TEventTargetRemoveEventListenerOptions,
   ) -> Unit = _
   dispatch_event(self : Self, event : &TEvent) -> Bool = _
 }
@@ -77,7 +75,7 @@ impl TEventTarget with add_event_listener(
   self : Self,
   type_ : String,
   callback : EventListener,
-  options? : &TEventTargetAddEventListenerOptionsArg = AddEventListenerOptions::empty(),
+  options? : &TEventTargetAddEventListenerOptions = AddEventListenerOptions::empty(),
 ) -> Unit {
   event_target_add_event_listener_ffi(
     TJsValue::to_js(self),
@@ -100,7 +98,7 @@ impl TEventTarget with remove_event_listener(
   self : Self,
   type_ : String,
   callback : EventListener,
-  options? : &TEventTargetRemoveEventListenerOptionsArg = EventListenerOptions::empty(),
+  options? : &TEventTargetRemoveEventListenerOptions = EventListenerOptions::empty(),
 ) -> Unit {
   event_target_remove_event_listener_ffi(
     TJsValue::to_js(self),
