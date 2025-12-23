@@ -17,6 +17,7 @@ pub impl Emitter for TypedefEmitter with emit(
       let trait_name = TraitName("T\{typedef_def.name}")
       let external_name = TypeName(typedef_def.name)
       emits.push(Emit::External(external_name))
+      emits.push(Emit::ImplTJsValue(external_name))
       emits.push(Emit::UnionArgTrait(trait_name))
       emits.push(Emit::IntoMethod(external_name))
       let seen : @hashset.HashSet[ArgMbtType] = @hashset.new()
