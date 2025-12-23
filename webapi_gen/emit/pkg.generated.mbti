@@ -104,6 +104,7 @@ pub impl Emitter for InterfaceEmitter
 
 pub struct MethodArg {
   name : String
+  original_name : String
   type_ : ArgMbtType
   optional : Bool
   default_value : String?

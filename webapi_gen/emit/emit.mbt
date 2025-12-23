@@ -225,7 +225,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
           .join(", ")
         let ffi_js_args = args.map(arg => arg.original_name).join(", ")
 
-        // FFI function body 
+        // FFI function body
         buf.write_string(
           "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \n",
         )
@@ -374,55 +374,32 @@ fn safe_identifier(name : String) -> String {
 
 ///|
 /// Convert a string to snake case
-fn is_upper(c : Char) -> Bool {
-  c >= 'A' && c <= 'Z'
-}
-
-///|
-fn is_lower(c : Char) -> Bool {
-  c >= 'a' && c <= 'z'
-}
-
-///|
-fn to_lower_char(c : Char) -> Char {
-  if is_upper(c) {
-    Int::to_char(c.to_int() + 32).unwrap()
-  } else {
-    c
-  }
-}
-
-///|
-/// Convert a string to snake case
 /// Handles acronyms: DOMImplementation -> dom_implementation
 fn snake_case(s : String) -> String {
   let buf = StringBuilder::new()
-  let chars = []
-  for c in s {
-    chars.push(c)
-  }
+  let chars = s.to_array()
+  buf.write_char(chars[0].to_ascii_lowercase())
+  let chars = chars[1:]
   for i, c in chars {
-    if is_upper(c) {
-      if i > 0 {
-        let prev = chars[i - 1]
-        let mut split = false
-        if is_lower(prev) {
+    if c.is_ascii_uppercase() {
+      let prev = chars[i - 1]
+      let mut split = false
+      if prev.is_ascii_lowercase() {
+        split = true
+      } else if prev.is_ascii_uppercase() && i + 1 < chars.length() {
+        let next = chars[i + 1]
+        if next.is_ascii_lowercase() {
           split = true
-        } else if is_upper(prev) && i + 1 < chars.length() {
-          let next = chars[i + 1]
-          if is_lower(next) {
-            split = true
-          }
-        }
-        // Prevent double underscore if input already has underscore
-        if prev == '_' {
-          split = false
-        }
-        if split {
-          buf.write_char('_')
         }
       }
-      buf.write_char(to_lower_char(c))
+      // Prevent double underscore if input already has underscore
+      if prev == '_' {
+        split = false
+      }
+      if split {
+        buf.write_char('_')
+      }
+      buf.write_char(c.to_ascii_lowercase())
     } else {
       buf.write_char(c)
     }

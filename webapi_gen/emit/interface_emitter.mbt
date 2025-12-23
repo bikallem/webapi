@@ -261,3 +261,58 @@ test "InterfaceEmitter generates MoonBit code for interface" {
     ),
   )
 }
+
+///|
+test "InterfaceEmitter handles interface with nested union arg types" {
+  let idl =
+    #|interface TestInterface {
+    #|  void testMethod(optional (DOMString or (unsigned long or boolean)) param = "default");
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub(open) trait TTestInterfaceTestMethodParam {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub impl TTestInterfaceTestMethodParam for String with to_js(self : String) -> JsValue = "%identity"
+      #|
+      #|pub(open) trait TTestInterfaceTestMethodParam2 {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub impl TTestInterfaceTestMethodParam2 for UInt with to_js(self : UInt) -> JsValue = "%identity"
+      #|
+      #|pub impl TTestInterfaceTestMethodParam2 for Bool with to_js(self : Bool) -> JsValue = "%identity"
+      #|
+      #|pub impl TTestInterfaceTestMethodParam for &&TTestInterfaceTestMethodParam2 with to_js(self : &&TTestInterfaceTestMethodParam2) -> JsValue = "%identity"
+      #|
+      #|pub trait TTestInterface: TJsValue {
+      #|  test_method(self : Self, param? : &TTestInterfaceTestMethodParam) -> void = _
+      #|}
+      #|
+      #|extern "js" fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void = "(obj, param) => obj.testMethod(obj, param)"
+      #|
+      #|impl TTestInterface with test_method(self : Self, 
+      #|param? : &TTestInterfaceTestMethodParam = "default") -> void {
+      #|  test_interface_test_method_ffi(TJsValue::to_js(self), TJsValue::to_js(param))
+      #|}
+    ),
+  )
+}
