@@ -11,7 +11,7 @@ pub impl Emitter for DictionaryEmitter with emit(
 ) -> (Filename, Array[Emit]) {
   let filename = Filename("\{snake_case(name)}_dictionary.mbt")
   let dict = self.idl.dictionaries[name]
-  let emits = [Emit::External(dict.name)]
+  let emits = [Emit::External(dict.name), Emit::ImplTJsValue(dict.name)]
   let (args, arg_emits) = method_args(
     dict.members.map(mem => (
       mem.name,
