@@ -60,7 +60,7 @@ fn[E : @emit.Emitter] emit_and_write(
 ///|
 /// Filter IDL with only whitelisted interfaces, dictionaries, enums, typedefs, and callbacks.
 fn filter_idl(
-  config : @config.GeneratorConfig,
+  config : @config.Config,
   defns : Array[@parser.DefinitionExtendedAttributes],
   logger : (String) -> Unit,
 ) -> Array[@parser.DefinitionExtendedAttributes] {
