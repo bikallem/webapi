@@ -23,7 +23,7 @@ test "arg_mbt_type identifies union types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union("&TTestInterfaceTestMethodParam")
+      #|Union("TestInterfaceTestMethodParam")
     ),
   )
   @json.inspect(emits, content=[
@@ -66,7 +66,7 @@ test "arg_mbt_type identifies nested union types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union("&TTestInterfaceTestMethodParam")
+      #|Union("TestInterfaceTestMethodParam")
     ),
   )
   @json.inspect(emits, content=[
@@ -89,7 +89,7 @@ test "arg_mbt_type identifies nested union types correctly" {
     ],
     [
       "UnionArgTraitImpl",
-      ["TypeName", "&&TTestInterfaceTestMethodParam2"],
+      ["TypeName", "&TTestInterfaceTestMethodParam2"],
       ["TraitName", "TTestInterfaceTestMethodParam"],
     ],
   ]) // Traits and impls for nested union options
@@ -120,7 +120,7 @@ test "arg_mbt_type identifies nested union within sequence types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union("&TTestInterfaceTestMethodParam")
+      #|Union("TestInterfaceTestMethodParam")
     ),
   )
   @json.inspect(emits, content=[
@@ -143,7 +143,7 @@ test "arg_mbt_type identifies nested union within sequence types correctly" {
     ],
     [
       "UnionArgTraitImpl",
-      ["TypeName", "Array[&TTestInterfaceTestMethodParam2]"],
+      ["TypeName", "Array[TestInterfaceTestMethodParam2]"],
       ["TraitName", "TTestInterfaceTestMethodParam"],
     ],
   ]) // One trait + two impls for union options
