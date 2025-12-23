@@ -68,6 +68,7 @@ pub(all) struct CallbackArgEmit {
 ///|
 pub enum Emit {
   External(TypeName) // External type, eg. #external EventTarget
+  ImplTJsValue(TypeName) // eg. pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
   IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
   EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
@@ -127,13 +128,12 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
   let buf = StringBuilder::new()
   for i, emit in emits {
     match emit {
-      Emit::External(TypeName(type_name)) => {
+      Emit::External(TypeName(type_name)) =>
         buf.write_string("#external\npub type \{type_name}")
-        buf.write_string("\n\n")
+      Emit::ImplTJsValue(TypeName(type_name)) =>
         buf.write_string(
           "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",
         )
-      }
       Emit::IntoMethod(TypeName(type_name)) =>
         buf.write_string(
           "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
@@ -315,19 +315,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         let closure_type = "(\{arg_types}) -> \{return_type}"
         let ffi_name = "\{snake_case(name)}_ffi"
 
-        // External type
-        buf.write_string("#external\n")
-        buf.write_string("pub type \{name}")
-        buf.write_string("\n\n")
-
-        // TJsValue impl
-        buf.write_string(
-          "pub impl TJsValue for \{name} with to_js(self : \{name}) -> JsValue = \"%identity\"",
-        )
-        buf.write_string("\n\n")
-
         // FFI function - callbacks just pass the function through
-
         buf.write_string(
           "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
         )
@@ -598,13 +586,14 @@ fn arg_mbt_type(
 
       // Union type
       Union(options) => {
-        let union_type_name = "T\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}"
+        let union_type_name = "\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}"
         let union_type_name = if call_depth > 0 {
           "\{union_type_name}\{call_depth+1}"
         } else {
           union_type_name
         }
-        emits.push(Emit::UnionArgTrait(union_type_name))
+        let union_trait_name = TraitName("T\{union_type_name}")
+        emits.push(Emit::UnionArgTrait(union_trait_name))
         for option in options {
           let (mbt_type, option_emits) = go(
             option.type_,
@@ -616,18 +605,15 @@ fn arg_mbt_type(
           )
           emits.push_iter(option_emits.iter())
           let mbt_type = if option.type_ is Union(_) {
-            "&\{mbt_type.name()}"
+            "&T\{mbt_type.name()}"
           } else {
             mbt_type.name()
           }
           emits.push(
-            Emit::UnionArgTraitImpl(
-              TypeName(mbt_type),
-              TraitName(union_type_name),
-            ),
+            Emit::UnionArgTraitImpl(TypeName(mbt_type), union_trait_name),
           )
         }
-        ArgMbtType::Union("&\{union_type_name}")
+        ArgMbtType::Union(union_type_name)
       }
 
       // TODO: rethink these mappings (Parameterized types)
