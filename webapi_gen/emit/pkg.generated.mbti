@@ -60,6 +60,7 @@ pub impl Emitter for DictionaryEmitter
 
 pub enum Emit {
   External(TypeName)
+  ImplTJsValue(TypeName)
   IntoMethod(TypeName)
   EmptyMethod(TypeName)
   ImplTrait(TypeName, TraitName)
