@@ -26,9 +26,9 @@ pub fn Blob::new(
 pub trait TBlob: TJsValue {
   slice(self : Self, start? : Int64, end? : Int64, content_type? : String) -> Blob = _
   stream(self : Self) -> ReadableStream = _
-  text(self : Self) -> JsValue = _
-  array_buffer(self : Self) -> JsValue = _
-  bytes(self : Self) -> JsValue = _
+  text(self : Self) -> JsPromise[String] = _
+  array_buffer(self : Self) -> JsPromise[ArrayBuffer] = _
+  bytes(self : Self) -> JsPromise[Uint8Array] = _
 }
 
 ///|
@@ -63,25 +63,25 @@ impl TBlob with stream(self : Self) -> ReadableStream {
 }
 
 ///|
-extern "js" fn blob_text_ffi(obj : JsValue) -> JsValue = "(obj) => obj.text(obj)"
+extern "js" fn blob_text_ffi(obj : JsValue) -> JsPromise[String] = "(obj) => obj.text(obj)"
 
 ///|
-impl TBlob with text(self : Self) -> JsValue {
+impl TBlob with text(self : Self) -> JsPromise[String] {
   blob_text_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn blob_array_buffer_ffi(obj : JsValue) -> JsValue = "(obj) => obj.arrayBuffer(obj)"
+extern "js" fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] = "(obj) => obj.arrayBuffer(obj)"
 
 ///|
-impl TBlob with array_buffer(self : Self) -> JsValue {
+impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
   blob_array_buffer_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn blob_bytes_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bytes(obj)"
+extern "js" fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] = "(obj) => obj.bytes(obj)"
 
 ///|
-impl TBlob with bytes(self : Self) -> JsValue {
+impl TBlob with bytes(self : Self) -> JsPromise[Uint8Array] {
   blob_bytes_ffi(TJsValue::to_js(self))
 }

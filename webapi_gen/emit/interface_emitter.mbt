@@ -57,92 +57,93 @@ pub impl Emitter for InterfaceEmitter with emit(
   let trait_methods = []
   let method_counter : Map[String, Int] = {} // to handle overloaded methods
   let mut constructor_count = 0 // to handle overloaded constructors
-  for mem in interface.members {
-    match mem.interface_member {
-      Constructor(ctor) => {
-        let method_name = if constructor_count == 0 {
-          "new"
-        } else {
-          "new_\{constructor_count+1}"
-        }
-        constructor_count += 1
-        let (args, arg_emits) = method_args(
-          ctor.arguments.map(arg => (
-            arg.name,
-            arg.type_.type_,
-            arg.optional,
-            arg.default_value,
-          )),
-          interface.name,
-          method_name,
-          self.type_registry,
-        )
-        emits.push_iter(arg_emits.iter())
-        emits.push(
-          Emit::ConstructorMethod(
-            ConstructorName(method_name),
-            TypeName(interface.name),
-            args,
-          ),
-        )
+  loop interface.members.map(mem => mem.interface_member)[:] {
+    [] => break
+    [Constructor(ctor), .. rest] => {
+      let method_name = if constructor_count == 0 {
+        "new"
+      } else {
+        "new_\{constructor_count+1}"
       }
-      RegularOperation(op) => {
-        if op.static_ {
-          continue // TODO: determine how to map static methods, perhaps to external type?
-        }
-        let orig_method_name = match method_counter.get(op.name) {
-          None => {
-            method_counter[op.name] = 1
-            op.name
-          }
-          Some(count) => {
-            method_counter[op.name] += 1
-            "\{op.name}_\{count+1}"
-          }
-        }
-        // trait method args
-        let self_arg = MethodArg::{
-          name: "self",
-          original_name: "self",
-          type_: ArgMbtType::Self,
-          optional: false,
-          default_value: None,
-        }
-        let (args, arg_emits) = method_args(
-          op.arguments.map(arg => (
-            arg.name,
-            arg.type_.type_,
-            arg.optional,
-            arg.default_value,
-          )),
-          interface.name,
-          orig_method_name,
-          self.type_registry,
-        )
-        emits.push_iter(arg_emits.iter())
-        let args = [self_arg] + args
-
-        // return type
-        let (return_type, return_emits) = arg_mbt_type(
-          op.return_type,
-          interface.name,
-          orig_method_name,
-          "",
-          self.type_registry,
-        )
-        emits.push_iter(return_emits.iter())
-
-        // trait method
-        let trait_method = TraitMethod::{
-          method_name: orig_method_name,
-          return_type: return_type.name(),
+      constructor_count += 1
+      let (args, arg_emits) = method_args(
+        ctor.arguments.map(arg => (
+          arg.name,
+          arg.type_.type_,
+          arg.optional,
+          arg.default_value,
+        )),
+        interface.name,
+        method_name,
+        self.type_registry,
+      )
+      emits.push_iter(arg_emits.iter())
+      emits.push(
+        Emit::ConstructorMethod(
+          ConstructorName(method_name),
+          TypeName(interface.name),
           args,
-        }
-        trait_methods.push(trait_method)
-      }
-      Attribute(_) => ()
-      _ => ()
+        ),
+      )
+      continue rest
     }
+    [RegularOperation(op), .. rest] => {
+      if op.static_ {
+        continue rest // TODO: determine how to map static methods, perhaps to external type?
+      }
+      let orig_method_name = match method_counter.get(op.name) {
+        None => {
+          method_counter[op.name] = 1
+          op.name
+        }
+        Some(count) => {
+          method_counter[op.name] += 1
+          "\{op.name}_\{count+1}"
+        }
+      }
+      // trait method args
+      let self_arg = MethodArg::{
+        name: "self",
+        original_name: "self",
+        type_: ArgMbtType::Self,
+        optional: false,
+        default_value: None,
+      }
+      let (args, arg_emits) = method_args(
+        op.arguments.map(arg => (
+          arg.name,
+          arg.type_.type_,
+          arg.optional,
+          arg.default_value,
+        )),
+        interface.name,
+        orig_method_name,
+        self.type_registry,
+      )
+      emits.push_iter(arg_emits.iter())
+      let args = [self_arg] + args
+
+      // return type
+      let (return_type, return_emits) = arg_mbt_type(
+        op.return_type,
+        interface.name,
+        orig_method_name,
+        "",
+        self.type_registry,
+      )
+      emits.push_iter(return_emits.iter())
+
+      // trait method
+      let trait_method = TraitMethod::{
+        method_name: orig_method_name,
+        return_type: return_type.name(),
+        args,
+      }
+      trait_methods.push(trait_method)
+      continue rest
+    }
+    [Attribute(_), .. rest] => continue rest // Attributes are not yet handled
+    [_, .. rest] => continue rest
   }
   let parent_trait = match interface.inheritance {
     None => "TJsValue"

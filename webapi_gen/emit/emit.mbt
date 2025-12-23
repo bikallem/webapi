@@ -556,6 +556,7 @@ fn arg_mbt_type(
     Octet => ArgMbtType::Other("Byte") // 8-bit unsigned → Byte
     Byte => ArgMbtType::Other("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
     Boolean => ArgMbtType::Other("Bool")
+
     // Floating point types
     Float => ArgMbtType::Other("Float") // 32-bit float → Float
     Double => ArgMbtType::Other("Double") // 64-bit float → Double

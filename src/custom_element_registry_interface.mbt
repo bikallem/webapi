@@ -24,6 +24,19 @@ pub fn CustomElementRegistry::new() -> CustomElementRegistry {
 }
 
 ///|
+pub(open) trait TCustomElementRegistryGet {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TCustomElementRegistryGet for CustomElementConstructor with to_js(
+  self : CustomElementConstructor,
+) -> JsValue = "%identity"
+
+///|
+pub impl TCustomElementRegistryGet for Unit with to_js(self : Unit) -> JsValue = "%identity"
+
+///|
 pub trait TCustomElementRegistry: TJsValue {
   define(
     self : Self,
@@ -31,9 +44,11 @@ pub trait TCustomElementRegistry: TJsValue {
     constructor : CustomElementConstructor,
     options? : ElementDefinitionOptions,
   ) -> Unit = _
-  get(self : Self, name : String) -> JsValue = _
+  get(self : Self, name : String) -> &TCustomElementRegistryGet = _
   get_name(self : Self, constructor : CustomElementConstructor) -> String = _
-  when_defined(self : Self, name : String) -> JsValue = _
+  when_defined(self : Self, name : String) -> JsPromise[
+    CustomElementConstructor,
+  ] = _
   upgrade(self : Self, root : &TNode) -> Unit = _
   initialize(self : Self, root : &TNode) -> Unit = _
 }
@@ -65,10 +80,10 @@ impl TCustomElementRegistry with define(
 extern "js" fn custom_element_registry_get_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsValue = "(obj, name) => obj.get(obj, name)"
+) -> &TCustomElementRegistryGet = "(obj, name) => obj.get(obj, name)"
 
 ///|
-impl TCustomElementRegistry with get(self : Self, name : String) -> JsValue {
+impl TCustomElementRegistry with get(self : Self, name : String) -> &TCustomElementRegistryGet {
   custom_element_registry_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
 
@@ -93,10 +108,12 @@ impl TCustomElementRegistry with get_name(
 extern "js" fn custom_element_registry_when_defined_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsValue = "(obj, name) => obj.whenDefined(obj, name)"
+) -> JsPromise[CustomElementConstructor] = "(obj, name) => obj.whenDefined(obj, name)"
 
 ///|
-impl TCustomElementRegistry with when_defined(self : Self, name : String) -> JsValue {
+impl TCustomElementRegistry with when_defined(self : Self, name : String) -> JsPromise[
+  CustomElementConstructor,
+] {
   custom_element_registry_when_defined_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),

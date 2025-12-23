@@ -18,37 +18,37 @@ pub impl TNode for CharacterData
 pub impl TEventTarget for CharacterData
 
 ///|
-pub(open) trait TCharacterDataBeforeNodesArg {
+pub(open) trait TCharacterDataBeforeNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TCharacterDataBeforeNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TCharacterDataBeforeNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TCharacterDataBeforeNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCharacterDataBeforeNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TCharacterDataAfterNodesArg {
+pub(open) trait TCharacterDataAfterNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TCharacterDataAfterNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TCharacterDataAfterNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TCharacterDataAfterNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCharacterDataAfterNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TCharacterDataReplaceWithNodesArg {
+pub(open) trait TCharacterDataReplaceWithNodes {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TCharacterDataReplaceWithNodesArg for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TCharacterDataReplaceWithNodes for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
-pub impl TCharacterDataReplaceWithNodesArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCharacterDataReplaceWithNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub trait TCharacterData: TNode {
@@ -57,9 +57,9 @@ pub trait TCharacterData: TNode {
   insert_data(self : Self, offset : UInt, data : String) -> Unit = _
   delete_data(self : Self, offset : UInt, count : UInt) -> Unit = _
   replace_data(self : Self, offset : UInt, count : UInt, data : String) -> Unit = _
-  before(self : Self, nodes : &TCharacterDataBeforeNodesArg) -> Unit = _
-  after(self : Self, nodes : &TCharacterDataAfterNodesArg) -> Unit = _
-  replace_with(self : Self, nodes : &TCharacterDataReplaceWithNodesArg) -> Unit = _
+  before(self : Self, nodes : &TCharacterDataBeforeNodes) -> Unit = _
+  after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit = _
+  replace_with(self : Self, nodes : &TCharacterDataReplaceWithNodes) -> Unit = _
   remove(self : Self) -> Unit = _
 }
 
@@ -156,22 +156,16 @@ extern "js" fn character_data_before_ffi(
 ) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
 
 ///|
-impl TCharacterData with before(
-  self : Self,
-  nodes : &TCharacterDataBeforeNodesArg,
-) -> Unit {
-  character_data_before_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TCharacterData with before(self : Self, nodes : &TCharacterDataBeforeNodes) -> Unit {
+  character_data_before_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes))
 }
 
 ///|
 extern "js" fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(obj, nodes)"
 
 ///|
-impl TCharacterData with after(
-  self : Self,
-  nodes : &TCharacterDataAfterNodesArg,
-) -> Unit {
-  character_data_after_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TCharacterData with after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit {
+  character_data_after_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes))
 }
 
 ///|
@@ -183,9 +177,9 @@ extern "js" fn character_data_replace_with_ffi(
 ///|
 impl TCharacterData with replace_with(
   self : Self,
-  nodes : &TCharacterDataReplaceWithNodesArg,
+  nodes : &TCharacterDataReplaceWithNodes,
 ) -> Unit {
-  character_data_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+  character_data_replace_with_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes))
 }
 
 ///|

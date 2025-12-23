@@ -28,7 +28,7 @@ pub fn CSSStyleSheet::new(
 pub trait TCSSStyleSheet: TStyleSheet {
   insert_rule(self : Self, rule : CSSOMString, index? : UInt) -> UInt = _
   delete_rule(self : Self, index : UInt) -> Unit = _
-  replace(self : Self, text : String) -> JsValue = _
+  replace(self : Self, text : String) -> JsPromise[CSSStyleSheet] = _
   replace_sync(self : Self, text : String) -> Unit = _
   add_rule(self : Self, selector? : String, style? : String, index? : UInt) -> Int = _
   remove_rule(self : Self, index? : UInt) -> Unit = _
@@ -69,10 +69,12 @@ impl TCSSStyleSheet with delete_rule(self : Self, index : UInt) -> Unit {
 extern "js" fn css_style_sheet_replace_ffi(
   obj : JsValue,
   text : JsValue,
-) -> JsValue = "(obj, text) => obj.replace(obj, text)"
+) -> JsPromise[CSSStyleSheet] = "(obj, text) => obj.replace(obj, text)"
 
 ///|
-impl TCSSStyleSheet with replace(self : Self, text : String) -> JsValue {
+impl TCSSStyleSheet with replace(self : Self, text : String) -> JsPromise[
+  CSSStyleSheet,
+] {
   css_style_sheet_replace_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
 }
 
