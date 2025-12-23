@@ -381,27 +381,28 @@ fn snake_case(s : String) -> String {
   buf.write_char(chars[0].to_ascii_lowercase())
   let chars = chars[1:]
   for i, c in chars {
-    if c.is_ascii_uppercase() {
-      let prev = chars[i - 1]
-      let mut split = false
-      if prev.is_ascii_lowercase() {
-        split = true
-      } else if prev.is_ascii_uppercase() && i + 1 < chars.length() {
-        let next = chars[i + 1]
-        if next.is_ascii_lowercase() {
+    match c {
+      'A'..='Z' => {
+        let prev = chars[i - 1]
+        let mut split = false
+        if prev.is_ascii_lowercase() {
           split = true
+        } else if prev.is_ascii_uppercase() && i + 1 < chars.length() {
+          let next = chars[i + 1]
+          if next.is_ascii_lowercase() {
+            split = true
+          }
         }
+        // Prevent double underscore if input already has underscore
+        if prev == '_' {
+          split = false
+        }
+        if split {
+          buf.write_char('_')
+        }
+        buf.write_char(c.to_ascii_lowercase())
       }
-      // Prevent double underscore if input already has underscore
-      if prev == '_' {
-        split = false
-      }
-      if split {
-        buf.write_char('_')
-      }
-      buf.write_char(c.to_ascii_lowercase())
-    } else {
-      buf.write_char(c)
+      _ => buf.write_char(c)
     }
   }
   buf.to_string()
