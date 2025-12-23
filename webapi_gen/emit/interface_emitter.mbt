@@ -50,10 +50,11 @@ pub impl Emitter for InterfaceEmitter with emit(
   let interface = self.idl.interfaces[name]
   let ancestors = @flattened_idl.get_interface_ancestors(self.idl, name)
   let emits = []
-  emits.push(Emit::External(interface.name))
-  emits.push(Emit::ImplTJsValue(interface.name))
-  emits.push(Emit::IntoMethod(interface.name))
-  emits.push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
+  emits
+  ..push(Emit::External(interface.name))
+  ..push(Emit::ImplTJsValue(interface.name))
+  ..push(Emit::IntoMethod(interface.name))
+  ..push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
   for ancestor in ancestors {
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
@@ -135,9 +136,10 @@ pub impl Emitter for InterfaceEmitter with emit(
         self.type_registry,
       )
       if return_type is ArgMbtType::Union(_) {
-        emits.push(Emit::External(return_type.name()))
-        emits.push(Emit::IntoMethod(return_type.name()))
-        emits.push(
+        emits
+        ..push(Emit::External(return_type.name()))
+        ..push(Emit::IntoMethod(return_type.name()))
+        .push(
           Emit::UnionArgTraitImpl(
             TypeName(return_type.name()),
             TraitName("T\{return_type.name()}"),

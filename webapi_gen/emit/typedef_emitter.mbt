@@ -16,10 +16,11 @@ pub impl Emitter for TypedefEmitter with emit(
       let emits = []
       let trait_name = TraitName("T\{typedef_def.name}")
       let external_name = TypeName(typedef_def.name)
-      emits.push(Emit::External(external_name))
-      emits.push(Emit::ImplTJsValue(external_name))
-      emits.push(Emit::UnionArgTrait(trait_name))
-      emits.push(Emit::IntoMethod(external_name))
+      emits
+      ..push(Emit::External(external_name))
+      ..push(Emit::ImplTJsValue(external_name))
+      ..push(Emit::UnionArgTrait(trait_name))
+      ..push(Emit::IntoMethod(external_name))
       let seen : @hashset.HashSet[ArgMbtType] = @hashset.new()
       for opt in options {
         let (mbt_type, arg_emits) = arg_mbt_type(
@@ -31,10 +32,9 @@ pub impl Emitter for TypedefEmitter with emit(
         )
         if !seen.contains(mbt_type) {
           seen.add(mbt_type)
-          emits.push_iter(arg_emits.iter())
-          emits.push(
-            Emit::UnionArgTraitImpl(TypeName(mbt_type.name()), trait_name),
-          )
+          emits
+          ..push_iter(arg_emits.iter())
+          ..push(Emit::UnionArgTraitImpl(TypeName(mbt_type.name()), trait_name))
         }
       }
       emits

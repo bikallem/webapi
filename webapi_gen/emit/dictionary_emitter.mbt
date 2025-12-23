@@ -23,9 +23,10 @@ pub impl Emitter for DictionaryEmitter with emit(
     "new",
     self.type_registry,
   )
-  emits.push_iter(arg_emits.iter())
-  emits.push(Emit::DictionaryCreate(dict.name, args)) // empty constructor
-  emits.push(Emit::EmptyMethod(dict.name))
+  emits
+  ..push_iter(arg_emits.iter())
+  ..push(Emit::DictionaryCreate(dict.name, args)) // empty constructor
+  ..push(Emit::EmptyMethod(dict.name))
   (filename, emits)
 }
 
