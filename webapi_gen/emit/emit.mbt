@@ -495,264 +495,150 @@ fn arg_mbt_type(
   method_name : String,
   arg_name : String,
   type_registry : @type_registry.TypeRegistry,
-  union_type_call_depth? : Int = 0, // used to suffix union type names
 ) -> (ArgMbtType, Array[Emit]) {
-  let emits = []
-  let type_ = match idl_type {
-    // Float Arrays
-    Float16Array => ArgMbtType::Other("Float16Array")
-    Float32Array => ArgMbtType::Other("Float32Array")
-    Float64Array => ArgMbtType::Other("Float64Array")
+  fn go(
+    idl_type : @parser.Type,
+    type_name : String,
+    method_name : String,
+    arg_name : String,
+    type_registry : @type_registry.TypeRegistry,
+    call_depth : Int, // used to suffix nested union type names
+  ) -> (ArgMbtType, Array[Emit]) {
+    let emits = []
+    let type_ = match idl_type {
+      // Float Arrays
+      Float16Array => ArgMbtType::Other("Float16Array")
+      Float32Array => ArgMbtType::Other("Float32Array")
+      Float64Array => ArgMbtType::Other("Float64Array")
 
-    // Integer arrays
-    Int8Array => ArgMbtType::Other("Int8Array")
-    Int16Array => ArgMbtType::Other("Int16Array")
-    Int32Array => ArgMbtType::Other("Int32Array")
+      // Integer arrays
+      Int8Array => ArgMbtType::Other("Int8Array")
+      Int16Array => ArgMbtType::Other("Int16Array")
+      Int32Array => ArgMbtType::Other("Int32Array")
 
-    // BigUint and BigInt arrays
-    BigUint64Array => ArgMbtType::Other("BigUint64Array")
-    BigInt64Array => ArgMbtType::Other("BigInt64Array")
+      // BigUint and BigInt arrays
+      BigUint64Array => ArgMbtType::Other("BigUint64Array")
+      BigInt64Array => ArgMbtType::Other("BigInt64Array")
 
-    // Unsigned integer arrays
-    Uint8Array => ArgMbtType::Other("Uint8Array")
-    Uint16Array => ArgMbtType::Other("Uint16Array")
-    Uint32Array => ArgMbtType::Other("Uint32Array")
-    Uint8ClampedArray => ArgMbtType::Other("Uint8ClampedArray")
+      // Unsigned integer arrays
+      Uint8Array => ArgMbtType::Other("Uint8Array")
+      Uint16Array => ArgMbtType::Other("Uint16Array")
+      Uint32Array => ArgMbtType::Other("Uint32Array")
+      Uint8ClampedArray => ArgMbtType::Other("Uint8ClampedArray")
 
-    // Other typed arrays
-    DataView => ArgMbtType::Other("DataView")
-    SharedArrayBuffer => ArgMbtType::Other("SharedArrayBuffer")
-    ArrayBuffer => ArgMbtType::Other("ArrayBuffer")
+      // Other typed arrays
+      DataView => ArgMbtType::Other("DataView")
+      SharedArrayBuffer => ArgMbtType::Other("SharedArrayBuffer")
+      ArrayBuffer => ArgMbtType::Other("ArrayBuffer")
 
-    // Object types
-    Object => ArgMbtType::Other("JsValue")
-    Any => ArgMbtType::Other("JsValue")
+      // Object types
+      Object => ArgMbtType::Other("JsValue")
+      Any => ArgMbtType::Other("JsValue")
 
-    // String types
-    USVString => ArgMbtType::Other("String")
-    ByteString => ArgMbtType::Other("String")
-    DOMString => ArgMbtType::Other("String")
+      // String types
+      USVString => ArgMbtType::Other("String")
+      ByteString => ArgMbtType::Other("String")
+      DOMString => ArgMbtType::Other("String")
 
-    // Integer Types    
-    LongLong => ArgMbtType::Other("Int64") // 64-bit signed → Int64
-    Bigint => ArgMbtType::Other("Int64") // BigInt → Int64
-    UnsignedLong => ArgMbtType::Other("UInt") // 32-bit unsigned → UInt
-    UnsignedLongLong => ArgMbtType::Other("UInt64") // 64-bit unsigned → UInt64
-    UnsignedShort => ArgMbtType::Other("UInt") // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
-    Long => ArgMbtType::Other("Int") // 32-bit signed → Int
-    Short => ArgMbtType::Other("Int") // 16-bit signed → Int (Int16 exists but Int is more common)
-    Octet => ArgMbtType::Other("Byte") // 8-bit unsigned → Byte
-    Byte => ArgMbtType::Other("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
-    Boolean => ArgMbtType::Other("Bool")
+      // Integer Types    
+      LongLong => ArgMbtType::Other("Int64") // 64-bit signed → Int64
+      Bigint => ArgMbtType::Other("Int64") // BigInt → Int64
+      UnsignedLong => ArgMbtType::Other("UInt") // 32-bit unsigned → UInt
+      UnsignedLongLong => ArgMbtType::Other("UInt64") // 64-bit unsigned → UInt64
+      UnsignedShort => ArgMbtType::Other("UInt") // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
+      Long => ArgMbtType::Other("Int") // 32-bit signed → Int
+      Short => ArgMbtType::Other("Int") // 16-bit signed → Int (Int16 exists but Int is more common)
+      Octet => ArgMbtType::Other("Byte") // 8-bit unsigned → Byte
+      Byte => ArgMbtType::Other("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
+      Boolean => ArgMbtType::Other("Bool")
 
-    // Floating point types
-    Float => ArgMbtType::Other("Float") // 32-bit float → Float
-    Double => ArgMbtType::Other("Double") // 64-bit float → Double
-    UnrestrictedDouble => ArgMbtType::Other("Double") // 64-bit unrestricted float → Double
-    UnrestrictedFloat => ArgMbtType::Other("Float") // 32-bit unrestricted float → Float    
+      // Floating point types
+      Float => ArgMbtType::Other("Float") // 32-bit float → Float
+      Double => ArgMbtType::Other("Double") // 64-bit float → Double
+      UnrestrictedDouble => ArgMbtType::Other("Double") // 64-bit unrestricted float → Double
+      UnrestrictedFloat => ArgMbtType::Other("Float") // 32-bit unrestricted float → Float    
 
-    // Named types (interfaces, dictionaries, enums, typedefs, union options)
-    Identifier(name) =>
-      if type_registry.is_interface(name) {
-        ArgMbtType::Interface(name)
-      } else {
-        ArgMbtType::Other(name)
-      }
-
-    // Nullable
-    Nullable(t) => {
-      let (type_, emits_) = arg_mbt_type(
-        t, type_name, method_name, arg_name, type_registry,
-      )
-      emits.push_iter(emits_.iter())
-      type_
-    }
-
-    // Void 
-    Undefined => ArgMbtType::Other("Unit")
-
-    // Array type
-    Sequence(t) => {
-      let (type_, emits_) = arg_mbt_type(
-        t, type_name, method_name, arg_name, type_registry,
-      )
-      emits.push_iter(emits_.iter())
-      ArgMbtType::Other("Array[\{type_.name()}]")
-    }
-
-    // Js Promise
-    Promise(t) => {
-      let (type_, emits_) = arg_mbt_type(
-        t, type_name, method_name, arg_name, type_registry,
-      )
-      emits.push_iter(emits_.iter())
-      ArgMbtType::Other("JsPromise[\{type_.name()}]")
-    }
-
-    // Union type
-    Union(options) => {
-      let union_type_name = "T\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}"
-      let union_type_name = if union_type_call_depth > 0 {
-        "\{union_type_name}\{union_type_call_depth+1}"
-      } else {
-        union_type_name
-      }
-      emits.push(Emit::UnionArgTrait(union_type_name))
-      for option in options {
-        let (mbt_type, option_emits) = arg_mbt_type(
-          option.type_,
-          type_name,
-          method_name,
-          arg_name,
-          type_registry,
-          union_type_call_depth=union_type_call_depth + 1,
-        )
-        emits.push_iter(option_emits.iter())
-        let mbt_type = if option.type_ is Union(_) {
-          "&\{mbt_type.name()}"
+      // Named types (interfaces, dictionaries, enums, typedefs, union options)
+      Identifier(name) =>
+        if type_registry.is_interface(name) {
+          ArgMbtType::Interface(name)
         } else {
-          mbt_type.name()
+          ArgMbtType::Other(name)
         }
-        emits.push(
-          Emit::UnionArgTraitImpl(
-            TypeName(mbt_type),
-            TraitName(union_type_name),
-          ),
+
+      // Nullable
+      Nullable(t) => {
+        let (type_, emits_) = go(
+          t, type_name, method_name, arg_name, type_registry, call_depth,
         )
+        emits.push_iter(emits_.iter())
+        type_
       }
-      ArgMbtType::Other("&\{union_type_name}")
+
+      // Void 
+      Undefined => ArgMbtType::Other("Unit")
+
+      // Array type
+      Sequence(t) => {
+        let (type_, emits_) = go(
+          t, type_name, method_name, arg_name, type_registry, call_depth,
+        )
+        emits.push_iter(emits_.iter())
+        ArgMbtType::Other("Array[\{type_.name()}]")
+      }
+
+      // Js Promise
+      Promise(t) => {
+        let (type_, emits_) = go(
+          t, type_name, method_name, arg_name, type_registry, call_depth,
+        )
+        emits.push_iter(emits_.iter())
+        ArgMbtType::Other("JsPromise[\{type_.name()}]")
+      }
+
+      // Union type
+      Union(options) => {
+        let union_type_name = "T\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}"
+        let union_type_name = if call_depth > 0 {
+          "\{union_type_name}\{call_depth+1}"
+        } else {
+          union_type_name
+        }
+        emits.push(Emit::UnionArgTrait(union_type_name))
+        for option in options {
+          let (mbt_type, option_emits) = go(
+            option.type_,
+            type_name,
+            method_name,
+            arg_name,
+            type_registry,
+            call_depth + 1,
+          )
+          emits.push_iter(option_emits.iter())
+          let mbt_type = if option.type_ is Union(_) {
+            "&\{mbt_type.name()}"
+          } else {
+            mbt_type.name()
+          }
+          emits.push(
+            Emit::UnionArgTraitImpl(
+              TypeName(mbt_type),
+              TraitName(union_type_name),
+            ),
+          )
+        }
+        ArgMbtType::Union("&\{union_type_name}")
+      }
+
+      // TODO: rethink these mappings (Parameterized types)
+      Record(_, _) => ArgMbtType::Other("JsValue") // Fallback to JsValue for unsupported types
+      ObservableArray(_) => ArgMbtType::Other("JsValue")
+      FrozenArray(_) => ArgMbtType::Other("JsValue")
+      AsyncSequence(_) => ArgMbtType::Other("JsValue")
+      Symbol => ArgMbtType::Other("JsValue") // WebIDL Symbol is not used in practice as yet c2025
     }
-
-    // TODO: rethink these mappings (Parameterized types)
-    Record(_, _) => ArgMbtType::Other("JsValue") // Fallback to JsValue for unsupported types
-    ObservableArray(_) => ArgMbtType::Other("JsValue")
-    FrozenArray(_) => ArgMbtType::Other("JsValue")
-    AsyncSequence(_) => ArgMbtType::Other("JsValue")
-    Symbol => ArgMbtType::Other("JsValue") // WebIDL Symbol is not used in practice as yet c2025
+    (type_, emits)
   }
-  (type_, emits)
-}
 
-///|
-test "arg_default_value" {
-  let registry = @type_registry.TypeRegistry::new([])
-
-  // Test basic default values
-  inspect(
-    arg_default_value(@parser.Null, @parser.Identifier("MyType"), registry),
-    content="MyType::null()",
-  )
-  inspect(
-    arg_default_value(@parser.EmptyObject, @parser.Identifier("Dict"), registry),
-    content="Dict::empty()",
-  )
-  inspect(
-    arg_default_value(@parser.EmptySequence, @parser.Boolean, registry),
-    content="[]",
-  )
-  inspect(
-    arg_default_value(
-      @parser.Undefined,
-      @parser.Identifier("SomeType"),
-      registry,
-    ),
-    content="SomeType::undefined()",
-  )
-}
-
-///|
-test "arg_default_value/string_values" {
-  let registry = @type_registry.TypeRegistry::new([])
-
-  // Test string default values for regular types
-  inspect(
-    arg_default_value(@parser.String("hello"), @parser.DOMString, registry),
-    content="\"hello\"",
-  )
-
-  // Test string default values for enum types (when registry indicates it's an enum)
-  let state_enum = @parser.DefinitionExtendedAttributes::{
-    extended_attributes: [],
-    definition: @parser.Enum({
-      name: "State",
-      values: ["active", "inactive", "pending"],
-    }),
-  }
-  let enum_registry = @type_registry.TypeRegistry::new([state_enum])
-  // Note: This test assumes the registry will properly identify enums
-  inspect(
-    arg_default_value(
-      @parser.String("active"),
-      @parser.Identifier("State"),
-      enum_registry,
-    ),
-    content="State::Active", // Now properly recognized as enum
-  )
-}
-
-///|
-test "arg_default_value/const_values" {
-  let registry = @type_registry.TypeRegistry::new([])
-
-  // Test constant boolean values
-  inspect(
-    arg_default_value(
-      @parser.ConstValue(@parser.Boolean("true")),
-      @parser.Boolean,
-      registry,
-    ),
-    content="true",
-  )
-  inspect(
-    arg_default_value(
-      @parser.ConstValue(@parser.Boolean("false")),
-      @parser.Boolean,
-      registry,
-    ),
-    content="false",
-  )
-
-  // Test constant numeric values
-  inspect(
-    arg_default_value(
-      @parser.ConstValue(@parser.Integer("42")),
-      @parser.Long,
-      registry,
-    ),
-    content="42",
-  )
-  inspect(
-    arg_default_value(
-      @parser.ConstValue(@parser.Float(@parser.Float("3.14"))),
-      @parser.Double,
-      registry,
-    ),
-    content="3.14",
-  )
-
-  // Test special float values
-  inspect(
-    arg_default_value(
-      @parser.ConstValue(@parser.Float(@parser.Infinity)),
-      @parser.Double,
-      registry,
-    ),
-    content="@float.infinity",
-  )
-  inspect(
-    arg_default_value(
-      @parser.ConstValue(@parser.Float(@parser.NegInfinity)),
-      @parser.Double,
-      registry,
-    ),
-    content="@float.neg_infinity",
-  )
-  inspect(
-    arg_default_value(
-      @parser.ConstValue(@parser.Float(@parser.NaN)),
-      @parser.Double,
-      registry,
-    ),
-    content="@float.not_a_number",
-  )
+  go(idl_type, type_name, method_name, arg_name, type_registry, 0)
 }

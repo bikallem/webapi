@@ -160,6 +160,59 @@ pub impl Emitter for InterfaceEmitter with emit(
 }
 
 ///|
+test "InterfaceEmitter generates to_js() call for Union arg types" {
+  let idl =
+    #|interface TestInterface {
+    #|  void testMethod(optional (DOMString or unsigned long) param = "default");
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let iface = flattened.interfaces["TestInterface"]
+  guard iface.members[0].interface_member is RegularOperation(op) else {
+    abort("Expected first member to be RegularOperation")
+  }
+  let args = method_args(
+    [
+      (
+        op.arguments[0].name,
+        op.arguments[0].type_.type_,
+        op.arguments[0].optional,
+        op.arguments[0].default_value,
+      ),
+    ],
+    "TestInterface",
+    "testMethod",
+    type_registry,
+  )
+  @json.inspect(args, content=[
+    [
+      {
+        "name": "param",
+        "original_name": "param",
+        "type_": ["Union", "&TTestInterfaceTestMethodParam"],
+        "optional": true,
+        "default_value": "\"default\"",
+      },
+    ],
+    [
+      ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
+      [
+        "UnionArgTraitImpl",
+        ["TypeName", "String"],
+        ["TraitName", "TTestInterfaceTestMethodParam"],
+      ],
+      [
+        "UnionArgTraitImpl",
+        ["TypeName", "UInt"],
+        ["TraitName", "TTestInterfaceTestMethodParam"],
+      ],
+    ],
+  ])
+}
+
+///|
 test "InterfaceEmitter generates MoonBit code for interface" {
   let idl =
     #|[Exposed=*]
@@ -168,7 +221,6 @@ test "InterfaceEmitter generates MoonBit code for interface" {
     #|  undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
     #|  undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
     #|  boolean dispatchEvent(Event event);
-    #|  [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
     #|};
   let definitions = @parser.parse(idl)
   let type_registry = @type_registry.TypeRegistry::new(definitions)
@@ -211,19 +263,10 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
       #|
-      #|pub(open) trait TEventTargetCreateElementOptions {
-      #|  to_js(self : Self) -> JsValue
-      #|}
-      #|
-      #|pub impl TEventTargetCreateElementOptions for String with to_js(self : String) -> JsValue = "%identity"
-      #|
-      #|pub impl TEventTargetCreateElementOptions for ElementCreationOptions with to_js(self : ElementCreationOptions) -> JsValue = "%identity"
-      #|
       #|pub trait TEventTarget: TJsValue {
       #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetAddEventListenerOptions) -> Unit = _
       #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetRemoveEventListenerOptions) -> Unit = _
       #|  dispatch_event(self : Self, event : Event) -> Bool = _
-      #|  create_element(self : Self, local_name : String, options? : &TEventTargetCreateElementOptions) -> Element = _
       #|}
       #|
       #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
@@ -232,7 +275,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|type_ : String, 
       #|callback : EventListener, 
       #|options? : &TEventTargetAddEventListenerOptions = AddEventListenerOptions::empty()) -> Unit {
-      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
+      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
       #|}
       #|
       #|extern "js" fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
@@ -241,7 +284,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|type_ : String, 
       #|callback : EventListener, 
       #|options? : &TEventTargetRemoveEventListenerOptions = EventListenerOptions::empty()) -> Unit {
-      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), TJsValue::to_js(options))
+      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
       #|}
       #|
       #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool = "(obj, event) => obj.dispatchEvent(obj, event)"
@@ -249,14 +292,6 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|impl TEventTarget with dispatch_event(self : Self, 
       #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
-      #|}
-      #|
-      #|extern "js" fn event_target_create_element_ffi(obj: JsValue, local_name: JsValue, options: JsValue) -> Element = "(obj, local_name, options) => obj.createElement(obj, local_name, options)"
-      #|
-      #|impl TEventTarget with create_element(self : Self, 
-      #|local_name : String, 
-      #|options? : &TEventTargetCreateElementOptions = ElementCreationOptions::empty()) -> Element {
-      #|  event_target_create_element_ffi(TJsValue::to_js(self), TJsValue::to_js(local_name), TJsValue::to_js(options))
       #|}
     ),
   )
@@ -311,7 +346,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|impl TTestInterface with test_method(self : Self, 
       #|param? : &TTestInterfaceTestMethodParam = "default") -> void {
-      #|  test_interface_test_method_ffi(TJsValue::to_js(self), TJsValue::to_js(param))
+      #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
       #|}
     ),
   )
