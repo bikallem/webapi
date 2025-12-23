@@ -35,7 +35,11 @@ pub impl Emitter for CallbackEmitter with emit(
     self.type_registry,
   )
   emits.push_iter(return_emits.iter())
-  let emits = [Emit::Callback(cb_def.name, args, TypeName(return_type.name()))]
+  let emits = [
+    Emit::External(cb_def.name),
+    Emit::ImplTJsValue(cb_def.name),
+    Emit::Callback(cb_def.name, args, TypeName(return_type.name())),
+  ]
   (filename, emits)
 }
 
@@ -59,7 +63,7 @@ test "emit_callback simple EventListener" {
       #|#external
       #|pub type EventListener
       #|
-      #|pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
+      #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
@@ -89,7 +93,7 @@ test "emit_callback with interface argument uses trait reference" {
       #|#external
       #|pub type EventListener
       #|
-      #|pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
+      #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
@@ -118,7 +122,7 @@ test "emit_callback multi-arg MutationCallback" {
       #|#external
       #|pub type MutationCallback
       #|
-      #|pub impl TJsValue for MutationCallback with to_js(self : MutationCallback) -> JsValue = "%identity"
+      #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
       #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
       #|
@@ -147,7 +151,7 @@ test "js_code_gen Callback generates correct code" {
       #|#external
       #|pub type EventListener
       #|
-      #|pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
+      #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
@@ -176,7 +180,7 @@ test "js_code_gen Callback with multiple args" {
       #|#external
       #|pub type MutationCallback
       #|
-      #|pub impl TJsValue for MutationCallback with to_js(self : MutationCallback) -> JsValue = "%identity"
+      #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
       #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
       #|
