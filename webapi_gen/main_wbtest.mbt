@@ -47,7 +47,7 @@ test "filter_idl filters interfaces by whitelist" {
     #|interface Node {};
     #|interface Document {};
   let defs = @parser.parse(widl)
-  let config : @config.GeneratorConfig = @config.load_config_from_string(
+  let config : @config.Config = @config.load_config_from_string(
     (
       #|idl_dir = ""
       #|output_dir = ""
@@ -76,7 +76,7 @@ test "filter_idl excludes callbacks" {
     #|callback EventListener = undefined (Event event);
     #|callback MutationCallback = undefined (sequence<MutationRecord> mutations);
   let defs = @parser.parse(widl)
-  let config : @config.GeneratorConfig = @config.load_config_from_string(
+  let config : @config.Config = @config.load_config_from_string(
     (
       #|idl_dir = ""
       #|output_dir = ""
@@ -123,7 +123,7 @@ test "filter_idl excludes typedefs" {
     #|typedef (DOMString or Function) EventHandler;
     #|typedef unsigned long long DOMTimeStamp;
   let defs = @parser.parse(widl)
-  let config : @config.GeneratorConfig = @config.load_config_from_string(
+  let config : @config.Config = @config.load_config_from_string(
     (
       #|idl_dir = ""
       #|output_dir = ""
@@ -156,7 +156,7 @@ test "filter_idl excludes dictionaries by prefix" {
     #|dictionary ElementCreationOptions {};
     #|dictionary ElementDefinitionOptions {};
   let defs = @parser.parse(widl)
-  let config : @config.GeneratorConfig = @config.load_config_from_string(
+  let config : @config.Config = @config.load_config_from_string(
     (
       #|idl_dir = ""
       #|output_dir = ""

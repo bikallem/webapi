@@ -6,12 +6,12 @@ import(
 )
 
 // Values
-pub fn load_config_from_string(String) -> GeneratorConfig raise
+pub fn load_config_from_string(String) -> Config raise
 
 // Errors
 
 // Types and methods
-pub struct GeneratorConfig {
+pub struct Config {
   idl_dir : String
   output_dir : String
   templates_dir : String
@@ -22,8 +22,8 @@ pub struct GeneratorConfig {
   excluded_typedefs : @hashset.HashSet[String]
   excluded_dictionary_prefixes : @hashset.HashSet[String]
 }
-pub impl Show for GeneratorConfig
-pub impl ToJson for GeneratorConfig
+pub impl Show for Config
+pub impl ToJson for Config
 
 // Type aliases
 

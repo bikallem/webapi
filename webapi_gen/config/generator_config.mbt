@@ -1,6 +1,6 @@
 ///|
 /// Generator configuration loaded from 'config.toml'.
-pub struct GeneratorConfig {
+pub struct Config {
   idl_dir : String
   output_dir : String
   templates_dir : String
@@ -48,7 +48,7 @@ fn get_string_array(
 }
 
 ///|
-pub fn load_config_from_string(content : String) -> GeneratorConfig raise {
+pub fn load_config_from_string(content : String) -> Config raise {
   let toml = @toml.parse(content) catch {
     e => fail("Invalid config TOML: \{e}")
   }
@@ -80,7 +80,7 @@ pub fn load_config_from_string(content : String) -> GeneratorConfig raise {
 test "load_from_string with invalid TOML raises" {
   let invalid_toml = "invalid = ["
   try {
-    let _ : GeneratorConfig = load_config_from_string(invalid_toml)
+    let _ : Config = load_config_from_string(invalid_toml)
     fail("expected error")
   } catch {
     e => assert_true(e.to_string().contains("Invalid config TOML"))
