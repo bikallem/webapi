@@ -27,6 +27,10 @@ pub impl Hash for ArgMbtType
 pub impl Show for ArgMbtType
 pub impl ToJson for ArgMbtType
 
+type AttributeTraitMethodEmit
+pub impl Show for AttributeTraitMethodEmit
+pub impl ToJson for AttributeTraitMethodEmit
+
 pub(all) struct CallbackArgEmit {
   name : String
   mbt_type : String
@@ -117,13 +121,7 @@ pub struct MethodArg {
 pub impl Show for MethodArg
 pub impl ToJson for MethodArg
 
-pub struct RegularTraitMethodEmit {
-  interface_name : String
-  original_name : String
-  return_type : String
-  args : Array[MethodArg]
-}
-pub impl TraitMethodEmit for RegularTraitMethodEmit
+type RegularTraitMethodEmit
 pub impl Show for RegularTraitMethodEmit
 pub impl ToJson for RegularTraitMethodEmit
 

@@ -1,12 +1,15 @@
 ///|
+/// Trait for emitting trait methods.
 trait TraitMethodEmit: ToJson + Show {
   method_decl(self : Self) -> Code // Generate method declaration code  
   method_impl(self : Self) -> Code // Generate method implementation code
 }
 
+//============================ Regular Method Emit ============================
+
 ///|
 /// Regular trait method emission.
-pub struct RegularTraitMethodEmit {
+struct RegularTraitMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original method name from IDL, eg "getElementById"
   return_type : String
@@ -14,7 +17,7 @@ pub struct RegularTraitMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-pub impl TraitMethodEmit for RegularTraitMethodEmit with method_decl(
+impl TraitMethodEmit for RegularTraitMethodEmit with method_decl(
   self : RegularTraitMethodEmit,
 ) -> Code {
   let args = trait_method_decl_args(self.args)
@@ -24,7 +27,7 @@ pub impl TraitMethodEmit for RegularTraitMethodEmit with method_decl(
 }
 
 ///|
-pub impl TraitMethodEmit for RegularTraitMethodEmit with method_impl(
+impl TraitMethodEmit for RegularTraitMethodEmit with method_impl(
   self : RegularTraitMethodEmit,
 ) -> Code {
   // Emit FFI function
@@ -56,6 +59,52 @@ pub impl TraitMethodEmit for RegularTraitMethodEmit with method_impl(
   ..write_string("}")
   Code(code.to_string())
 }
+
+//============================ Attribute Method Emit ==========================
+
+///|
+struct AttributeTraitMethodEmit {
+  interface_name : String // Name of the interface this method belongs to, eg. Document
+  original_name : String // Original attribute name from IDL, eg "title"
+  return_type : String
+} derive(Show, ToJson)
+
+///|
+impl TraitMethodEmit for AttributeTraitMethodEmit with method_decl(
+  self : AttributeTraitMethodEmit,
+) -> Code {
+  Code(
+    "  \{safe_identifier(self.original_name)}(self : Self) -> \{self.return_type} = _",
+  )
+}
+
+///|
+impl TraitMethodEmit for AttributeTraitMethodEmit with method_impl(
+  self : AttributeTraitMethodEmit,
+) -> Code {
+  // Emit FFI function
+  let ret_type_str = self.return_type
+  let trait_name = self.interface_name
+  let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
+  let code = StringBuilder::new()
+  code
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(obj: JsValue) -> \{ret_type_str} = \"(obj) => obj.\{self.original_name}\"",
+  )
+  ..write_string("\n\n")
+
+  // Emit default trait method implementation
+  let method_name = safe_identifier(self.original_name)
+  code
+  ..write_string(
+    "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
+  )
+  ..write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
+  ..write_string("}")
+  Code(code.to_string())
+}
+
+//============================ Method Emit Helpers ============================
 
 ///|
 /// Generate method declaration arguments string for trait method.

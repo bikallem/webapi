@@ -161,7 +161,42 @@ pub impl Emitter for InterfaceEmitter with emit(
       trait_methods.push(trait_method)
       continue rest
     }
-    [Attribute(_), .. rest] => continue rest // Attributes are not yet handled
+    [Attribute(attr), .. rest] => {
+      if attr.static_ {
+        continue rest // TODO: determine how to map static attributes, perhaps to external type?
+      }
+      let (attr_type, attr_emits) = arg_mbt_type(
+        attr.type_,
+        interface.name,
+        attr.name,
+        "",
+        self.type_registry,
+      )
+      if attr_type is ArgMbtType::Union(union_type_name, has_undefined) {
+        emits
+        ..push(Emit::External(union_type_name))
+        ..push(Emit::IntoMethod(union_type_name))
+        if has_undefined {
+          emits.push(Emit::IsUndefinedMethod(union_type_name))
+        }
+        emits.push(
+          Emit::UnionArgTraitImpl(
+            TypeName(union_type_name),
+            TraitName("T\{union_type_name}"),
+          ),
+        )
+      }
+      emits.push_iter(attr_emits.iter())
+
+      // attr method
+      let attr_getter_method = AttributeTraitMethodEmit::{
+        interface_name: interface.name,
+        original_name: attr.name,
+        return_type: attr_type.name(),
+      }
+      trait_methods.push(attr_getter_method)
+      continue rest // Attributes are not yet handled
+    }
     [Const(const_val), .. rest] => {
       let const_name = ConstName(
         "\{snake_case(interface.name).to_upper()}_\{snake_case(const_val.name).to_upper()}",
@@ -481,6 +516,52 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|}
       #|
       #|
+    ),
+  )
+}
+
+///|
+test "InterfaceEmitter generates MoonBit code for attributes" {
+  let idl =
+    #|interface TestInterface {
+    #|  undefined sayHello();
+    #|  readonly attribute DOMString name;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub trait TTestInterface: TJsValue {
+      #|  say_hello(self : Self) -> Unit = _
+      #|  name(self : Self) -> String = _
+      #|}
+      #|
+      #|extern "js" fn test_interface_say_hello_ffi(obj: JsValue) -> Unit = "(obj) => obj.sayHello(obj)"
+      #|
+      #|impl TTestInterface with say_hello(self : Self) -> Unit {
+      #|  test_interface_say_hello_ffi(TJsValue::to_js(self))
+      #|}
+      #|
+      #|extern "js" fn test_interface_name_ffi(obj: JsValue) -> String = "(obj) => obj.name"
+      #|
+      #|impl TTestInterface with name(self : Self) -> String {
+      #|  test_interface_name_ffi(TJsValue::to_js(self))
+      #|}
     ),
   )
 }
