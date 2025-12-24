@@ -11,7 +11,6 @@ test "filter_idl with empty config returns all types" {
       #|idl_dir = ""
       #|output_dir = ""
       #|templates_dir = ""
-      #|template_files = []
       #|core_specs = []
       #|excluded_interfaces = ["Element"]
       #|excluded_callbacks = []
@@ -52,7 +51,6 @@ test "filter_idl filters interfaces by whitelist" {
       #|idl_dir = ""
       #|output_dir = ""
       #|templates_dir = ""
-      #|template_files = []
       #|core_specs = []
       #|excluded_interfaces = ["Element", "Node"]
       #|excluded_callbacks = []
@@ -81,7 +79,6 @@ test "filter_idl excludes callbacks" {
       #|idl_dir = ""
       #|output_dir = ""
       #|templates_dir = ""
-      #|template_files = []
       #|core_specs = []
       #|excluded_interfaces = []
       #|excluded_callbacks = ["MutationCallback"]
@@ -128,7 +125,6 @@ test "filter_idl excludes typedefs" {
       #|idl_dir = ""
       #|output_dir = ""
       #|templates_dir = ""
-      #|template_files = []
       #|core_specs = []
       #|excluded_interfaces = []
       #|excluded_callbacks = ["MutationCallback"]
@@ -161,7 +157,6 @@ test "filter_idl excludes dictionaries by prefix" {
       #|idl_dir = ""
       #|output_dir = ""
       #|templates_dir = ""
-      #|template_files = []
       #|core_specs = []
       #|excluded_interfaces = []
       #|excluded_callbacks = ["MutationCallback"]
