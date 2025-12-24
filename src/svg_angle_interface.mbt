@@ -28,12 +28,90 @@ pub const SVG_ANGLE_SVG_ANGLETYPE_GRAD : UInt = 4
 
 ///|
 pub trait TSVGAngle: TJsValue {
+  unit_type(self : Self) -> UInt = _
+  value(self : Self) -> Float = _
+  set_value(self : Self, value : Float) -> Unit = _
+  value_in_specified_units(self : Self) -> Float = _
+  set_value_in_specified_units(self : Self, value_in_specified_units : Float) -> Unit = _
+  value_as_string(self : Self) -> String = _
+  set_value_as_string(self : Self, value_as_string : String) -> Unit = _
   new_value_specified_units(
     self : Self,
     unit_type : UInt,
     value_in_specified_units : Float,
   ) -> Unit = _
   convert_to_specified_units(self : Self, unit_type : UInt) -> Unit = _
+}
+
+///|
+extern "js" fn svg_angle_unit_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.unitType"
+
+///|
+impl TSVGAngle with unit_type(self : Self) -> UInt {
+  svg_angle_unit_type_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_angle_value_ffi(obj : JsValue) -> Float = "(obj) => obj.value"
+
+///|
+impl TSVGAngle with value(self : Self) -> Float {
+  svg_angle_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_angle_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+impl TSVGAngle with set_value(self : Self, value : Float) -> Unit {
+  svg_angle_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
+}
+
+///|
+extern "js" fn svg_angle_value_in_specified_units_ffi(obj : JsValue) -> Float = "(obj) => obj.valueInSpecifiedUnits"
+
+///|
+impl TSVGAngle with value_in_specified_units(self : Self) -> Float {
+  svg_angle_value_in_specified_units_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_angle_set_value_in_specified_units_ffi(
+  obj : JsValue,
+  value_in_specified_units : JsValue,
+) -> Unit = "(obj, valueInSpecifiedUnits) => { obj.valueInSpecifiedUnits = valueInSpecifiedUnits; }"
+
+///|
+impl TSVGAngle with set_value_in_specified_units(
+  self : Self,
+  value_in_specified_units : Float,
+) -> Unit {
+  svg_angle_set_value_in_specified_units_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(value_in_specified_units),
+  )
+}
+
+///|
+extern "js" fn svg_angle_value_as_string_ffi(obj : JsValue) -> String = "(obj) => obj.valueAsString"
+
+///|
+impl TSVGAngle with value_as_string(self : Self) -> String {
+  svg_angle_value_as_string_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_angle_set_value_as_string_ffi(
+  obj : JsValue,
+  value_as_string : JsValue,
+) -> Unit = "(obj, valueAsString) => { obj.valueAsString = valueAsString; }"
+
+///|
+impl TSVGAngle with set_value_as_string(self : Self, value_as_string : String) -> Unit {
+  svg_angle_set_value_as_string_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(value_as_string),
+  )
 }
 
 ///|

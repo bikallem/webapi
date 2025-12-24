@@ -51,6 +51,7 @@ pub impl TRangeCreateContextualFragmentString for String with to_js(
 
 ///|
 pub trait TRange: TAbstractRange {
+  common_ancestor_container(self : Self) -> Node = _
   set_start(self : Self, node : &TNode, offset : UInt) -> Unit = _
   set_end(self : Self, node : &TNode, offset : UInt) -> Unit = _
   set_start_before(self : Self, node : &TNode) -> Unit = _
@@ -77,6 +78,14 @@ pub trait TRange: TAbstractRange {
   ) -> DocumentFragment = _
   get_client_rects(self : Self) -> DOMRectList = _
   get_bounding_client_rect(self : Self) -> DOMRect = _
+}
+
+///|
+extern "js" fn range_common_ancestor_container_ffi(obj : JsValue) -> Node = "(obj) => obj.commonAncestorContainer"
+
+///|
+impl TRange with common_ancestor_container(self : Self) -> Node {
+  range_common_ancestor_container_ffi(TJsValue::to_js(self))
 }
 
 ///|

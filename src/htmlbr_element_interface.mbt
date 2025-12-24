@@ -32,4 +32,26 @@ pub fn HTMLBRElement::new() -> HTMLBRElement {
 }
 
 ///|
-pub trait THTMLBRElement: THTMLElement {}
+pub trait THTMLBRElement: THTMLElement {
+  clear(self : Self) -> String = _
+  set_clear(self : Self, clear : String) -> Unit = _
+}
+
+///|
+extern "js" fn htmlbr_element_clear_ffi(obj : JsValue) -> String = "(obj) => obj.clear"
+
+///|
+impl THTMLBRElement with clear(self : Self) -> String {
+  htmlbr_element_clear_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn htmlbr_element_set_clear_ffi(
+  obj : JsValue,
+  clear : JsValue,
+) -> Unit = "(obj, clear) => { obj.clear = clear; }"
+
+///|
+impl THTMLBRElement with set_clear(self : Self, clear : String) -> Unit {
+  htmlbr_element_set_clear_ffi(TJsValue::to_js(self), TJsValue::to_js(clear))
+}

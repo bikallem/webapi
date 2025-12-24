@@ -34,4 +34,29 @@ pub fn HTMLDListElement::new() -> HTMLDListElement {
 }
 
 ///|
-pub trait THTMLDListElement: THTMLElement {}
+pub trait THTMLDListElement: THTMLElement {
+  compact(self : Self) -> Bool = _
+  set_compact(self : Self, compact : Bool) -> Unit = _
+}
+
+///|
+extern "js" fn htmld_list_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
+
+///|
+impl THTMLDListElement with compact(self : Self) -> Bool {
+  htmld_list_element_compact_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn htmld_list_element_set_compact_ffi(
+  obj : JsValue,
+  compact : JsValue,
+) -> Unit = "(obj, compact) => { obj.compact = compact; }"
+
+///|
+impl THTMLDListElement with set_compact(self : Self, compact : Bool) -> Unit {
+  htmld_list_element_set_compact_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(compact),
+  )
+}

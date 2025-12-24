@@ -15,7 +15,16 @@ pub impl TTextTrackCueList for TextTrackCueList
 
 ///|
 pub trait TTextTrackCueList: TJsValue {
+  length(self : Self) -> UInt = _
   get_cue_by_id(self : Self, id : String) -> TextTrackCue = _
+}
+
+///|
+extern "js" fn text_track_cue_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TTextTrackCueList with length(self : Self) -> UInt {
+  text_track_cue_list_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

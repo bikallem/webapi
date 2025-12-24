@@ -23,6 +23,7 @@ pub impl TEventTarget for DedicatedWorkerGlobalScope
 
 ///|
 pub trait TDedicatedWorkerGlobalScope: TWorkerGlobalScope {
+  name(self : Self) -> String = _
   post_message(self : Self, message : JsValue, transfer : Array[JsValue]) -> Unit = _
   post_message_2(
     self : Self,
@@ -32,6 +33,18 @@ pub trait TDedicatedWorkerGlobalScope: TWorkerGlobalScope {
   close(self : Self) -> Unit = _
   request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
+  onmessage(self : Self) -> EventHandler = _
+  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  onmessageerror(self : Self) -> EventHandler = _
+  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+}
+
+///|
+extern "js" fn dedicated_worker_global_scope_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
+
+///|
+impl TDedicatedWorkerGlobalScope with name(self : Self) -> String {
+  dedicated_worker_global_scope_name_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -113,5 +126,59 @@ impl TDedicatedWorkerGlobalScope with cancel_animation_frame(
   dedicated_worker_global_scope_cancel_animation_frame_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(handle),
+  )
+}
+
+///|
+extern "js" fn dedicated_worker_global_scope_onmessage_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onmessage"
+
+///|
+impl TDedicatedWorkerGlobalScope with onmessage(self : Self) -> EventHandler {
+  dedicated_worker_global_scope_onmessage_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dedicated_worker_global_scope_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+impl TDedicatedWorkerGlobalScope with set_onmessage(
+  self : Self,
+  onmessage : EventHandler,
+) -> Unit {
+  dedicated_worker_global_scope_set_onmessage_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmessage),
+  )
+}
+
+///|
+extern "js" fn dedicated_worker_global_scope_onmessageerror_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onmessageerror"
+
+///|
+impl TDedicatedWorkerGlobalScope with onmessageerror(self : Self) -> EventHandler {
+  dedicated_worker_global_scope_onmessageerror_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dedicated_worker_global_scope_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+impl TDedicatedWorkerGlobalScope with set_onmessageerror(
+  self : Self,
+  onmessageerror : EventHandler,
+) -> Unit {
+  dedicated_worker_global_scope_set_onmessageerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmessageerror),
   )
 }

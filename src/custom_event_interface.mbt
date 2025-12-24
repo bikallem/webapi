@@ -30,6 +30,7 @@ pub fn CustomEvent::new(
 
 ///|
 pub trait TCustomEvent: TEvent {
+  detail(self : Self) -> JsValue = _
   init_custom_event(
     self : Self,
     type_ : String,
@@ -37,6 +38,14 @@ pub trait TCustomEvent: TEvent {
     cancelable? : Bool,
     detail? : JsValue,
   ) -> Unit = _
+}
+
+///|
+extern "js" fn custom_event_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+impl TCustomEvent with detail(self : Self) -> JsValue {
+  custom_event_detail_ffi(TJsValue::to_js(self))
 }
 
 ///|

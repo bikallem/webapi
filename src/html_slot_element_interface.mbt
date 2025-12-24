@@ -44,11 +44,32 @@ pub impl THTMLSlotElementAssignNodes for Text with to_js(self : Text) -> JsValue
 
 ///|
 pub trait THTMLSlotElement: THTMLElement {
+  name(self : Self) -> String = _
+  set_name(self : Self, name : String) -> Unit = _
   assigned_nodes(self : Self, options? : AssignedNodesOptions) -> Array[Node] = _
   assigned_elements(self : Self, options? : AssignedNodesOptions) -> Array[
     Element,
   ] = _
   assign(self : Self, nodes : &THTMLSlotElementAssignNodes) -> Unit = _
+}
+
+///|
+extern "js" fn html_slot_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
+
+///|
+impl THTMLSlotElement with name(self : Self) -> String {
+  html_slot_element_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_slot_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+impl THTMLSlotElement with set_name(self : Self, name : String) -> Unit {
+  html_slot_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
 
 ///|

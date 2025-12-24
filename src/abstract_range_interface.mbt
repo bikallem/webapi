@@ -12,4 +12,50 @@ pub fn[T : TAbstractRange] AbstractRange::into(self : AbstractRange) -> T = "%id
 pub impl TAbstractRange for AbstractRange
 
 ///|
-pub trait TAbstractRange: TJsValue {}
+pub trait TAbstractRange: TJsValue {
+  start_container(self : Self) -> Node = _
+  start_offset(self : Self) -> UInt = _
+  end_container(self : Self) -> Node = _
+  end_offset(self : Self) -> UInt = _
+  collapsed(self : Self) -> Bool = _
+}
+
+///|
+extern "js" fn abstract_range_start_container_ffi(obj : JsValue) -> Node = "(obj) => obj.startContainer"
+
+///|
+impl TAbstractRange with start_container(self : Self) -> Node {
+  abstract_range_start_container_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn abstract_range_start_offset_ffi(obj : JsValue) -> UInt = "(obj) => obj.startOffset"
+
+///|
+impl TAbstractRange with start_offset(self : Self) -> UInt {
+  abstract_range_start_offset_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn abstract_range_end_container_ffi(obj : JsValue) -> Node = "(obj) => obj.endContainer"
+
+///|
+impl TAbstractRange with end_container(self : Self) -> Node {
+  abstract_range_end_container_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn abstract_range_end_offset_ffi(obj : JsValue) -> UInt = "(obj) => obj.endOffset"
+
+///|
+impl TAbstractRange with end_offset(self : Self) -> UInt {
+  abstract_range_end_offset_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn abstract_range_collapsed_ffi(obj : JsValue) -> Bool = "(obj) => obj.collapsed"
+
+///|
+impl TAbstractRange with collapsed(self : Self) -> Bool {
+  abstract_range_collapsed_ffi(TJsValue::to_js(self))
+}

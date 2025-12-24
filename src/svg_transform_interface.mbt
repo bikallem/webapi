@@ -34,12 +34,39 @@ pub const SVG_TRANSFORM_SVG_TRANSFORM_SKEWY : UInt = 6
 
 ///|
 pub trait TSVGTransform: TJsValue {
+  type_(self : Self) -> UInt = _
+  matrix(self : Self) -> DOMMatrix = _
+  angle(self : Self) -> Float = _
   set_matrix(self : Self, matrix? : DOMMatrix2DInit) -> Unit = _
   set_translate(self : Self, tx : Float, ty : Float) -> Unit = _
   set_scale(self : Self, sx : Float, sy : Float) -> Unit = _
   set_rotate(self : Self, angle : Float, cx : Float, cy : Float) -> Unit = _
   set_skew_x(self : Self, angle : Float) -> Unit = _
   set_skew_y(self : Self, angle : Float) -> Unit = _
+}
+
+///|
+extern "js" fn svg_transform_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.type"
+
+///|
+impl TSVGTransform with type_(self : Self) -> UInt {
+  svg_transform_type_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_transform_matrix_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.matrix"
+
+///|
+impl TSVGTransform with matrix(self : Self) -> DOMMatrix {
+  svg_transform_matrix_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_transform_angle_ffi(obj : JsValue) -> Float = "(obj) => obj.angle"
+
+///|
+impl TSVGTransform with angle(self : Self) -> Float {
+  svg_transform_angle_ffi(TJsValue::to_js(self))
 }
 
 ///|

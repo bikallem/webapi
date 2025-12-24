@@ -36,7 +36,79 @@ pub fn DOMRectReadOnly::new(
 
 ///|
 pub trait TDOMRectReadOnly: TJsValue {
+  x(self : Self) -> Double = _
+  y(self : Self) -> Double = _
+  width(self : Self) -> Double = _
+  height(self : Self) -> Double = _
+  top(self : Self) -> Double = _
+  right(self : Self) -> Double = _
+  bottom(self : Self) -> Double = _
+  left(self : Self) -> Double = _
   to_json(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn dom_rect_read_only_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
+
+///|
+impl TDOMRectReadOnly with x(self : Self) -> Double {
+  dom_rect_read_only_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_rect_read_only_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
+
+///|
+impl TDOMRectReadOnly with y(self : Self) -> Double {
+  dom_rect_read_only_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_rect_read_only_width_ffi(obj : JsValue) -> Double = "(obj) => obj.width"
+
+///|
+impl TDOMRectReadOnly with width(self : Self) -> Double {
+  dom_rect_read_only_width_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_rect_read_only_height_ffi(obj : JsValue) -> Double = "(obj) => obj.height"
+
+///|
+impl TDOMRectReadOnly with height(self : Self) -> Double {
+  dom_rect_read_only_height_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_rect_read_only_top_ffi(obj : JsValue) -> Double = "(obj) => obj.top"
+
+///|
+impl TDOMRectReadOnly with top(self : Self) -> Double {
+  dom_rect_read_only_top_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_rect_read_only_right_ffi(obj : JsValue) -> Double = "(obj) => obj.right"
+
+///|
+impl TDOMRectReadOnly with right(self : Self) -> Double {
+  dom_rect_read_only_right_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_rect_read_only_bottom_ffi(obj : JsValue) -> Double = "(obj) => obj.bottom"
+
+///|
+impl TDOMRectReadOnly with bottom(self : Self) -> Double {
+  dom_rect_read_only_bottom_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_rect_read_only_left_ffi(obj : JsValue) -> Double = "(obj) => obj.left"
+
+///|
+impl TDOMRectReadOnly with left(self : Self) -> Double {
+  dom_rect_read_only_left_ffi(TJsValue::to_js(self))
 }
 
 ///|

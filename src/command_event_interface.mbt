@@ -32,4 +32,23 @@ pub fn CommandEvent::new(
 }
 
 ///|
-pub trait TCommandEvent: TEvent {}
+pub trait TCommandEvent: TEvent {
+  source(self : Self) -> Element = _
+  command(self : Self) -> String = _
+}
+
+///|
+extern "js" fn command_event_source_ffi(obj : JsValue) -> Element = "(obj) => obj.source"
+
+///|
+impl TCommandEvent with source(self : Self) -> Element {
+  command_event_source_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn command_event_command_ffi(obj : JsValue) -> String = "(obj) => obj.command"
+
+///|
+impl TCommandEvent with command(self : Self) -> String {
+  command_event_command_ffi(TJsValue::to_js(self))
+}

@@ -32,4 +32,32 @@ pub fn InputEvent::new(
 }
 
 ///|
-pub trait TInputEvent: TUIEvent {}
+pub trait TInputEvent: TUIEvent {
+  data(self : Self) -> String = _
+  is_composing(self : Self) -> Bool = _
+  input_type(self : Self) -> String = _
+}
+
+///|
+extern "js" fn input_event_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
+
+///|
+impl TInputEvent with data(self : Self) -> String {
+  input_event_data_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn input_event_is_composing_ffi(obj : JsValue) -> Bool = "(obj) => obj.isComposing"
+
+///|
+impl TInputEvent with is_composing(self : Self) -> Bool {
+  input_event_is_composing_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn input_event_input_type_ffi(obj : JsValue) -> String = "(obj) => obj.inputType"
+
+///|
+impl TInputEvent with input_type(self : Self) -> String {
+  input_event_input_type_ffi(TJsValue::to_js(self))
+}

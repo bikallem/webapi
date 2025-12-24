@@ -58,4 +58,58 @@ pub const SVG_PRESERVE_ASPECT_RATIO_SVG_MEETORSLICE_MEET : UInt = 1
 pub const SVG_PRESERVE_ASPECT_RATIO_SVG_MEETORSLICE_SLICE : UInt = 2
 
 ///|
-pub trait TSVGPreserveAspectRatio: TJsValue {}
+pub trait TSVGPreserveAspectRatio: TJsValue {
+  align(self : Self) -> UInt = _
+  set_align(self : Self, align : UInt) -> Unit = _
+  meet_or_slice(self : Self) -> UInt = _
+  set_meet_or_slice(self : Self, meet_or_slice : UInt) -> Unit = _
+}
+
+///|
+extern "js" fn svg_preserve_aspect_ratio_align_ffi(obj : JsValue) -> UInt = "(obj) => obj.align"
+
+///|
+impl TSVGPreserveAspectRatio with align(self : Self) -> UInt {
+  svg_preserve_aspect_ratio_align_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_preserve_aspect_ratio_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+impl TSVGPreserveAspectRatio with set_align(self : Self, align : UInt) -> Unit {
+  svg_preserve_aspect_ratio_set_align_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(align),
+  )
+}
+
+///|
+extern "js" fn svg_preserve_aspect_ratio_meet_or_slice_ffi(
+  obj : JsValue,
+) -> UInt = "(obj) => obj.meetOrSlice"
+
+///|
+impl TSVGPreserveAspectRatio with meet_or_slice(self : Self) -> UInt {
+  svg_preserve_aspect_ratio_meet_or_slice_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_preserve_aspect_ratio_set_meet_or_slice_ffi(
+  obj : JsValue,
+  meet_or_slice : JsValue,
+) -> Unit = "(obj, meetOrSlice) => { obj.meetOrSlice = meetOrSlice; }"
+
+///|
+impl TSVGPreserveAspectRatio with set_meet_or_slice(
+  self : Self,
+  meet_or_slice : UInt,
+) -> Unit {
+  svg_preserve_aspect_ratio_set_meet_or_slice_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(meet_or_slice),
+  )
+}

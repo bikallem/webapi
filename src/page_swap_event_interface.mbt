@@ -32,4 +32,27 @@ pub fn PageSwapEvent::new(
 }
 
 ///|
-pub trait TPageSwapEvent: TEvent {}
+pub trait TPageSwapEvent: TEvent {
+  activation(self : Self) -> NavigationActivation = _
+  view_transition(self : Self) -> ViewTransition = _
+}
+
+///|
+extern "js" fn page_swap_event_activation_ffi(
+  obj : JsValue,
+) -> NavigationActivation = "(obj) => obj.activation"
+
+///|
+impl TPageSwapEvent with activation(self : Self) -> NavigationActivation {
+  page_swap_event_activation_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn page_swap_event_view_transition_ffi(
+  obj : JsValue,
+) -> ViewTransition = "(obj) => obj.viewTransition"
+
+///|
+impl TPageSwapEvent with view_transition(self : Self) -> ViewTransition {
+  page_swap_event_view_transition_ffi(TJsValue::to_js(self))
+}

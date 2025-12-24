@@ -22,8 +22,1942 @@ pub impl TEventTarget for SVGElement
 
 ///|
 pub trait TSVGElement: TElement {
+  class_name(self : Self) -> SVGAnimatedString = _
+  owner_svg_element(self : Self) -> SVGSVGElement = _
+  viewport_element(self : Self) -> SVGElement = _
+  onabort(self : Self) -> EventHandler = _
+  set_onabort(self : Self, onabort : EventHandler) -> Unit = _
+  onauxclick(self : Self) -> EventHandler = _
+  set_onauxclick(self : Self, onauxclick : EventHandler) -> Unit = _
+  onbeforeinput(self : Self) -> EventHandler = _
+  set_onbeforeinput(self : Self, onbeforeinput : EventHandler) -> Unit = _
+  onbeforematch(self : Self) -> EventHandler = _
+  set_onbeforematch(self : Self, onbeforematch : EventHandler) -> Unit = _
+  onbeforetoggle(self : Self) -> EventHandler = _
+  set_onbeforetoggle(self : Self, onbeforetoggle : EventHandler) -> Unit = _
+  onblur(self : Self) -> EventHandler = _
+  set_onblur(self : Self, onblur : EventHandler) -> Unit = _
+  oncancel(self : Self) -> EventHandler = _
+  set_oncancel(self : Self, oncancel : EventHandler) -> Unit = _
+  oncanplay(self : Self) -> EventHandler = _
+  set_oncanplay(self : Self, oncanplay : EventHandler) -> Unit = _
+  oncanplaythrough(self : Self) -> EventHandler = _
+  set_oncanplaythrough(self : Self, oncanplaythrough : EventHandler) -> Unit = _
+  onchange(self : Self) -> EventHandler = _
+  set_onchange(self : Self, onchange : EventHandler) -> Unit = _
+  onclick(self : Self) -> EventHandler = _
+  set_onclick(self : Self, onclick : EventHandler) -> Unit = _
+  onclose(self : Self) -> EventHandler = _
+  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  oncommand(self : Self) -> EventHandler = _
+  set_oncommand(self : Self, oncommand : EventHandler) -> Unit = _
+  oncontextlost(self : Self) -> EventHandler = _
+  set_oncontextlost(self : Self, oncontextlost : EventHandler) -> Unit = _
+  oncontextmenu(self : Self) -> EventHandler = _
+  set_oncontextmenu(self : Self, oncontextmenu : EventHandler) -> Unit = _
+  oncontextrestored(self : Self) -> EventHandler = _
+  set_oncontextrestored(self : Self, oncontextrestored : EventHandler) -> Unit = _
+  oncopy(self : Self) -> EventHandler = _
+  set_oncopy(self : Self, oncopy : EventHandler) -> Unit = _
+  oncuechange(self : Self) -> EventHandler = _
+  set_oncuechange(self : Self, oncuechange : EventHandler) -> Unit = _
+  oncut(self : Self) -> EventHandler = _
+  set_oncut(self : Self, oncut : EventHandler) -> Unit = _
+  ondblclick(self : Self) -> EventHandler = _
+  set_ondblclick(self : Self, ondblclick : EventHandler) -> Unit = _
+  ondrag(self : Self) -> EventHandler = _
+  set_ondrag(self : Self, ondrag : EventHandler) -> Unit = _
+  ondragend(self : Self) -> EventHandler = _
+  set_ondragend(self : Self, ondragend : EventHandler) -> Unit = _
+  ondragenter(self : Self) -> EventHandler = _
+  set_ondragenter(self : Self, ondragenter : EventHandler) -> Unit = _
+  ondragleave(self : Self) -> EventHandler = _
+  set_ondragleave(self : Self, ondragleave : EventHandler) -> Unit = _
+  ondragover(self : Self) -> EventHandler = _
+  set_ondragover(self : Self, ondragover : EventHandler) -> Unit = _
+  ondragstart(self : Self) -> EventHandler = _
+  set_ondragstart(self : Self, ondragstart : EventHandler) -> Unit = _
+  ondrop(self : Self) -> EventHandler = _
+  set_ondrop(self : Self, ondrop : EventHandler) -> Unit = _
+  ondurationchange(self : Self) -> EventHandler = _
+  set_ondurationchange(self : Self, ondurationchange : EventHandler) -> Unit = _
+  onemptied(self : Self) -> EventHandler = _
+  set_onemptied(self : Self, onemptied : EventHandler) -> Unit = _
+  onended(self : Self) -> EventHandler = _
+  set_onended(self : Self, onended : EventHandler) -> Unit = _
+  onerror(self : Self) -> OnErrorEventHandler = _
+  set_onerror(self : Self, onerror : OnErrorEventHandler) -> Unit = _
+  onfocus(self : Self) -> EventHandler = _
+  set_onfocus(self : Self, onfocus : EventHandler) -> Unit = _
+  onformdata(self : Self) -> EventHandler = _
+  set_onformdata(self : Self, onformdata : EventHandler) -> Unit = _
+  oninput(self : Self) -> EventHandler = _
+  set_oninput(self : Self, oninput : EventHandler) -> Unit = _
+  oninvalid(self : Self) -> EventHandler = _
+  set_oninvalid(self : Self, oninvalid : EventHandler) -> Unit = _
+  onkeydown(self : Self) -> EventHandler = _
+  set_onkeydown(self : Self, onkeydown : EventHandler) -> Unit = _
+  onkeypress(self : Self) -> EventHandler = _
+  set_onkeypress(self : Self, onkeypress : EventHandler) -> Unit = _
+  onkeyup(self : Self) -> EventHandler = _
+  set_onkeyup(self : Self, onkeyup : EventHandler) -> Unit = _
+  onload(self : Self) -> EventHandler = _
+  set_onload(self : Self, onload : EventHandler) -> Unit = _
+  onloadeddata(self : Self) -> EventHandler = _
+  set_onloadeddata(self : Self, onloadeddata : EventHandler) -> Unit = _
+  onloadedmetadata(self : Self) -> EventHandler = _
+  set_onloadedmetadata(self : Self, onloadedmetadata : EventHandler) -> Unit = _
+  onloadstart(self : Self) -> EventHandler = _
+  set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit = _
+  onmousedown(self : Self) -> EventHandler = _
+  set_onmousedown(self : Self, onmousedown : EventHandler) -> Unit = _
+  onmouseenter(self : Self) -> EventHandler = _
+  set_onmouseenter(self : Self, onmouseenter : EventHandler) -> Unit = _
+  onmouseleave(self : Self) -> EventHandler = _
+  set_onmouseleave(self : Self, onmouseleave : EventHandler) -> Unit = _
+  onmousemove(self : Self) -> EventHandler = _
+  set_onmousemove(self : Self, onmousemove : EventHandler) -> Unit = _
+  onmouseout(self : Self) -> EventHandler = _
+  set_onmouseout(self : Self, onmouseout : EventHandler) -> Unit = _
+  onmouseover(self : Self) -> EventHandler = _
+  set_onmouseover(self : Self, onmouseover : EventHandler) -> Unit = _
+  onmouseup(self : Self) -> EventHandler = _
+  set_onmouseup(self : Self, onmouseup : EventHandler) -> Unit = _
+  onpaste(self : Self) -> EventHandler = _
+  set_onpaste(self : Self, onpaste : EventHandler) -> Unit = _
+  onpause(self : Self) -> EventHandler = _
+  set_onpause(self : Self, onpause : EventHandler) -> Unit = _
+  onplay(self : Self) -> EventHandler = _
+  set_onplay(self : Self, onplay : EventHandler) -> Unit = _
+  onplaying(self : Self) -> EventHandler = _
+  set_onplaying(self : Self, onplaying : EventHandler) -> Unit = _
+  onprogress(self : Self) -> EventHandler = _
+  set_onprogress(self : Self, onprogress : EventHandler) -> Unit = _
+  onratechange(self : Self) -> EventHandler = _
+  set_onratechange(self : Self, onratechange : EventHandler) -> Unit = _
+  onreset(self : Self) -> EventHandler = _
+  set_onreset(self : Self, onreset : EventHandler) -> Unit = _
+  onresize(self : Self) -> EventHandler = _
+  set_onresize(self : Self, onresize : EventHandler) -> Unit = _
+  onscroll(self : Self) -> EventHandler = _
+  set_onscroll(self : Self, onscroll : EventHandler) -> Unit = _
+  onscrollend(self : Self) -> EventHandler = _
+  set_onscrollend(self : Self, onscrollend : EventHandler) -> Unit = _
+  onsecuritypolicyviolation(self : Self) -> EventHandler = _
+  set_onsecuritypolicyviolation(
+    self : Self,
+    onsecuritypolicyviolation : EventHandler,
+  ) -> Unit = _
+  onseeked(self : Self) -> EventHandler = _
+  set_onseeked(self : Self, onseeked : EventHandler) -> Unit = _
+  onseeking(self : Self) -> EventHandler = _
+  set_onseeking(self : Self, onseeking : EventHandler) -> Unit = _
+  onselect(self : Self) -> EventHandler = _
+  set_onselect(self : Self, onselect : EventHandler) -> Unit = _
+  onslotchange(self : Self) -> EventHandler = _
+  set_onslotchange(self : Self, onslotchange : EventHandler) -> Unit = _
+  onstalled(self : Self) -> EventHandler = _
+  set_onstalled(self : Self, onstalled : EventHandler) -> Unit = _
+  onsubmit(self : Self) -> EventHandler = _
+  set_onsubmit(self : Self, onsubmit : EventHandler) -> Unit = _
+  onsuspend(self : Self) -> EventHandler = _
+  set_onsuspend(self : Self, onsuspend : EventHandler) -> Unit = _
+  ontimeupdate(self : Self) -> EventHandler = _
+  set_ontimeupdate(self : Self, ontimeupdate : EventHandler) -> Unit = _
+  ontoggle(self : Self) -> EventHandler = _
+  set_ontoggle(self : Self, ontoggle : EventHandler) -> Unit = _
+  onvolumechange(self : Self) -> EventHandler = _
+  set_onvolumechange(self : Self, onvolumechange : EventHandler) -> Unit = _
+  onwaiting(self : Self) -> EventHandler = _
+  set_onwaiting(self : Self, onwaiting : EventHandler) -> Unit = _
+  onwebkitanimationend(self : Self) -> EventHandler = _
+  set_onwebkitanimationend(self : Self, onwebkitanimationend : EventHandler) -> Unit = _
+  onwebkitanimationiteration(self : Self) -> EventHandler = _
+  set_onwebkitanimationiteration(
+    self : Self,
+    onwebkitanimationiteration : EventHandler,
+  ) -> Unit = _
+  onwebkitanimationstart(self : Self) -> EventHandler = _
+  set_onwebkitanimationstart(self : Self, onwebkitanimationstart : EventHandler) -> Unit = _
+  onwebkittransitionend(self : Self) -> EventHandler = _
+  set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
+  onwheel(self : Self) -> EventHandler = _
+  set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  corresponding_element(self : Self) -> SVGElement = _
+  corresponding_use_element(self : Self) -> SVGUseElement = _
+  dataset(self : Self) -> DOMStringMap = _
+  nonce(self : Self) -> String = _
+  set_nonce(self : Self, nonce : String) -> Unit = _
+  autofocus(self : Self) -> Bool = _
+  set_autofocus(self : Self, autofocus : Bool) -> Unit = _
+  tab_index(self : Self) -> Int = _
+  set_tab_index(self : Self, tab_index : Int) -> Unit = _
   focus(self : Self, options? : FocusOptions) -> Unit = _
   blur(self : Self) -> Unit = _
+  style(self : Self) -> CSSStyleProperties = _
+}
+
+///|
+extern "js" fn svg_element_class_name_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.className"
+
+///|
+impl TSVGElement with class_name(self : Self) -> SVGAnimatedString {
+  svg_element_class_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_owner_svg_element_ffi(
+  obj : JsValue,
+) -> SVGSVGElement = "(obj) => obj.ownerSVGElement"
+
+///|
+impl TSVGElement with owner_svg_element(self : Self) -> SVGSVGElement {
+  svg_element_owner_svg_element_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_viewport_element_ffi(obj : JsValue) -> SVGElement = "(obj) => obj.viewportElement"
+
+///|
+impl TSVGElement with viewport_element(self : Self) -> SVGElement {
+  svg_element_viewport_element_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_onabort_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onabort"
+
+///|
+impl TSVGElement with onabort(self : Self) -> EventHandler {
+  svg_element_onabort_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onabort_ffi(
+  obj : JsValue,
+  onabort : JsValue,
+) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
+
+///|
+impl TSVGElement with set_onabort(self : Self, onabort : EventHandler) -> Unit {
+  svg_element_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(onabort))
+}
+
+///|
+extern "js" fn svg_element_onauxclick_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onauxclick"
+
+///|
+impl TSVGElement with onauxclick(self : Self) -> EventHandler {
+  svg_element_onauxclick_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onauxclick_ffi(
+  obj : JsValue,
+  onauxclick : JsValue,
+) -> Unit = "(obj, onauxclick) => { obj.onauxclick = onauxclick; }"
+
+///|
+impl TSVGElement with set_onauxclick(self : Self, onauxclick : EventHandler) -> Unit {
+  svg_element_set_onauxclick_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onauxclick),
+  )
+}
+
+///|
+extern "js" fn svg_element_onbeforeinput_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforeinput"
+
+///|
+impl TSVGElement with onbeforeinput(self : Self) -> EventHandler {
+  svg_element_onbeforeinput_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onbeforeinput_ffi(
+  obj : JsValue,
+  onbeforeinput : JsValue,
+) -> Unit = "(obj, onbeforeinput) => { obj.onbeforeinput = onbeforeinput; }"
+
+///|
+impl TSVGElement with set_onbeforeinput(
+  self : Self,
+  onbeforeinput : EventHandler,
+) -> Unit {
+  svg_element_set_onbeforeinput_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onbeforeinput),
+  )
+}
+
+///|
+extern "js" fn svg_element_onbeforematch_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforematch"
+
+///|
+impl TSVGElement with onbeforematch(self : Self) -> EventHandler {
+  svg_element_onbeforematch_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onbeforematch_ffi(
+  obj : JsValue,
+  onbeforematch : JsValue,
+) -> Unit = "(obj, onbeforematch) => { obj.onbeforematch = onbeforematch; }"
+
+///|
+impl TSVGElement with set_onbeforematch(
+  self : Self,
+  onbeforematch : EventHandler,
+) -> Unit {
+  svg_element_set_onbeforematch_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onbeforematch),
+  )
+}
+
+///|
+extern "js" fn svg_element_onbeforetoggle_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforetoggle"
+
+///|
+impl TSVGElement with onbeforetoggle(self : Self) -> EventHandler {
+  svg_element_onbeforetoggle_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onbeforetoggle_ffi(
+  obj : JsValue,
+  onbeforetoggle : JsValue,
+) -> Unit = "(obj, onbeforetoggle) => { obj.onbeforetoggle = onbeforetoggle; }"
+
+///|
+impl TSVGElement with set_onbeforetoggle(
+  self : Self,
+  onbeforetoggle : EventHandler,
+) -> Unit {
+  svg_element_set_onbeforetoggle_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onbeforetoggle),
+  )
+}
+
+///|
+extern "js" fn svg_element_onblur_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onblur"
+
+///|
+impl TSVGElement with onblur(self : Self) -> EventHandler {
+  svg_element_onblur_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onblur_ffi(
+  obj : JsValue,
+  onblur : JsValue,
+) -> Unit = "(obj, onblur) => { obj.onblur = onblur; }"
+
+///|
+impl TSVGElement with set_onblur(self : Self, onblur : EventHandler) -> Unit {
+  svg_element_set_onblur_ffi(TJsValue::to_js(self), TJsValue::to_js(onblur))
+}
+
+///|
+extern "js" fn svg_element_oncancel_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncancel"
+
+///|
+impl TSVGElement with oncancel(self : Self) -> EventHandler {
+  svg_element_oncancel_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncancel_ffi(
+  obj : JsValue,
+  oncancel : JsValue,
+) -> Unit = "(obj, oncancel) => { obj.oncancel = oncancel; }"
+
+///|
+impl TSVGElement with set_oncancel(self : Self, oncancel : EventHandler) -> Unit {
+  svg_element_set_oncancel_ffi(TJsValue::to_js(self), TJsValue::to_js(oncancel))
+}
+
+///|
+extern "js" fn svg_element_oncanplay_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncanplay"
+
+///|
+impl TSVGElement with oncanplay(self : Self) -> EventHandler {
+  svg_element_oncanplay_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncanplay_ffi(
+  obj : JsValue,
+  oncanplay : JsValue,
+) -> Unit = "(obj, oncanplay) => { obj.oncanplay = oncanplay; }"
+
+///|
+impl TSVGElement with set_oncanplay(self : Self, oncanplay : EventHandler) -> Unit {
+  svg_element_set_oncanplay_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncanplay),
+  )
+}
+
+///|
+extern "js" fn svg_element_oncanplaythrough_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncanplaythrough"
+
+///|
+impl TSVGElement with oncanplaythrough(self : Self) -> EventHandler {
+  svg_element_oncanplaythrough_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncanplaythrough_ffi(
+  obj : JsValue,
+  oncanplaythrough : JsValue,
+) -> Unit = "(obj, oncanplaythrough) => { obj.oncanplaythrough = oncanplaythrough; }"
+
+///|
+impl TSVGElement with set_oncanplaythrough(
+  self : Self,
+  oncanplaythrough : EventHandler,
+) -> Unit {
+  svg_element_set_oncanplaythrough_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncanplaythrough),
+  )
+}
+
+///|
+extern "js" fn svg_element_onchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onchange"
+
+///|
+impl TSVGElement with onchange(self : Self) -> EventHandler {
+  svg_element_onchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+
+///|
+impl TSVGElement with set_onchange(self : Self, onchange : EventHandler) -> Unit {
+  svg_element_set_onchange_ffi(TJsValue::to_js(self), TJsValue::to_js(onchange))
+}
+
+///|
+extern "js" fn svg_element_onclick_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onclick"
+
+///|
+impl TSVGElement with onclick(self : Self) -> EventHandler {
+  svg_element_onclick_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onclick_ffi(
+  obj : JsValue,
+  onclick : JsValue,
+) -> Unit = "(obj, onclick) => { obj.onclick = onclick; }"
+
+///|
+impl TSVGElement with set_onclick(self : Self, onclick : EventHandler) -> Unit {
+  svg_element_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(onclick))
+}
+
+///|
+extern "js" fn svg_element_onclose_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onclose"
+
+///|
+impl TSVGElement with onclose(self : Self) -> EventHandler {
+  svg_element_onclose_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onclose_ffi(
+  obj : JsValue,
+  onclose : JsValue,
+) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
+
+///|
+impl TSVGElement with set_onclose(self : Self, onclose : EventHandler) -> Unit {
+  svg_element_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
+}
+
+///|
+extern "js" fn svg_element_oncommand_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncommand"
+
+///|
+impl TSVGElement with oncommand(self : Self) -> EventHandler {
+  svg_element_oncommand_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncommand_ffi(
+  obj : JsValue,
+  oncommand : JsValue,
+) -> Unit = "(obj, oncommand) => { obj.oncommand = oncommand; }"
+
+///|
+impl TSVGElement with set_oncommand(self : Self, oncommand : EventHandler) -> Unit {
+  svg_element_set_oncommand_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncommand),
+  )
+}
+
+///|
+extern "js" fn svg_element_oncontextlost_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncontextlost"
+
+///|
+impl TSVGElement with oncontextlost(self : Self) -> EventHandler {
+  svg_element_oncontextlost_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncontextlost_ffi(
+  obj : JsValue,
+  oncontextlost : JsValue,
+) -> Unit = "(obj, oncontextlost) => { obj.oncontextlost = oncontextlost; }"
+
+///|
+impl TSVGElement with set_oncontextlost(
+  self : Self,
+  oncontextlost : EventHandler,
+) -> Unit {
+  svg_element_set_oncontextlost_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncontextlost),
+  )
+}
+
+///|
+extern "js" fn svg_element_oncontextmenu_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncontextmenu"
+
+///|
+impl TSVGElement with oncontextmenu(self : Self) -> EventHandler {
+  svg_element_oncontextmenu_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncontextmenu_ffi(
+  obj : JsValue,
+  oncontextmenu : JsValue,
+) -> Unit = "(obj, oncontextmenu) => { obj.oncontextmenu = oncontextmenu; }"
+
+///|
+impl TSVGElement with set_oncontextmenu(
+  self : Self,
+  oncontextmenu : EventHandler,
+) -> Unit {
+  svg_element_set_oncontextmenu_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncontextmenu),
+  )
+}
+
+///|
+extern "js" fn svg_element_oncontextrestored_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncontextrestored"
+
+///|
+impl TSVGElement with oncontextrestored(self : Self) -> EventHandler {
+  svg_element_oncontextrestored_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncontextrestored_ffi(
+  obj : JsValue,
+  oncontextrestored : JsValue,
+) -> Unit = "(obj, oncontextrestored) => { obj.oncontextrestored = oncontextrestored; }"
+
+///|
+impl TSVGElement with set_oncontextrestored(
+  self : Self,
+  oncontextrestored : EventHandler,
+) -> Unit {
+  svg_element_set_oncontextrestored_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncontextrestored),
+  )
+}
+
+///|
+extern "js" fn svg_element_oncopy_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncopy"
+
+///|
+impl TSVGElement with oncopy(self : Self) -> EventHandler {
+  svg_element_oncopy_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncopy_ffi(
+  obj : JsValue,
+  oncopy : JsValue,
+) -> Unit = "(obj, oncopy) => { obj.oncopy = oncopy; }"
+
+///|
+impl TSVGElement with set_oncopy(self : Self, oncopy : EventHandler) -> Unit {
+  svg_element_set_oncopy_ffi(TJsValue::to_js(self), TJsValue::to_js(oncopy))
+}
+
+///|
+extern "js" fn svg_element_oncuechange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncuechange"
+
+///|
+impl TSVGElement with oncuechange(self : Self) -> EventHandler {
+  svg_element_oncuechange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncuechange_ffi(
+  obj : JsValue,
+  oncuechange : JsValue,
+) -> Unit = "(obj, oncuechange) => { obj.oncuechange = oncuechange; }"
+
+///|
+impl TSVGElement with set_oncuechange(self : Self, oncuechange : EventHandler) -> Unit {
+  svg_element_set_oncuechange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncuechange),
+  )
+}
+
+///|
+extern "js" fn svg_element_oncut_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncut"
+
+///|
+impl TSVGElement with oncut(self : Self) -> EventHandler {
+  svg_element_oncut_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oncut_ffi(
+  obj : JsValue,
+  oncut : JsValue,
+) -> Unit = "(obj, oncut) => { obj.oncut = oncut; }"
+
+///|
+impl TSVGElement with set_oncut(self : Self, oncut : EventHandler) -> Unit {
+  svg_element_set_oncut_ffi(TJsValue::to_js(self), TJsValue::to_js(oncut))
+}
+
+///|
+extern "js" fn svg_element_ondblclick_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondblclick"
+
+///|
+impl TSVGElement with ondblclick(self : Self) -> EventHandler {
+  svg_element_ondblclick_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondblclick_ffi(
+  obj : JsValue,
+  ondblclick : JsValue,
+) -> Unit = "(obj, ondblclick) => { obj.ondblclick = ondblclick; }"
+
+///|
+impl TSVGElement with set_ondblclick(self : Self, ondblclick : EventHandler) -> Unit {
+  svg_element_set_ondblclick_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ondblclick),
+  )
+}
+
+///|
+extern "js" fn svg_element_ondrag_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondrag"
+
+///|
+impl TSVGElement with ondrag(self : Self) -> EventHandler {
+  svg_element_ondrag_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondrag_ffi(
+  obj : JsValue,
+  ondrag : JsValue,
+) -> Unit = "(obj, ondrag) => { obj.ondrag = ondrag; }"
+
+///|
+impl TSVGElement with set_ondrag(self : Self, ondrag : EventHandler) -> Unit {
+  svg_element_set_ondrag_ffi(TJsValue::to_js(self), TJsValue::to_js(ondrag))
+}
+
+///|
+extern "js" fn svg_element_ondragend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragend"
+
+///|
+impl TSVGElement with ondragend(self : Self) -> EventHandler {
+  svg_element_ondragend_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondragend_ffi(
+  obj : JsValue,
+  ondragend : JsValue,
+) -> Unit = "(obj, ondragend) => { obj.ondragend = ondragend; }"
+
+///|
+impl TSVGElement with set_ondragend(self : Self, ondragend : EventHandler) -> Unit {
+  svg_element_set_ondragend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ondragend),
+  )
+}
+
+///|
+extern "js" fn svg_element_ondragenter_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragenter"
+
+///|
+impl TSVGElement with ondragenter(self : Self) -> EventHandler {
+  svg_element_ondragenter_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondragenter_ffi(
+  obj : JsValue,
+  ondragenter : JsValue,
+) -> Unit = "(obj, ondragenter) => { obj.ondragenter = ondragenter; }"
+
+///|
+impl TSVGElement with set_ondragenter(self : Self, ondragenter : EventHandler) -> Unit {
+  svg_element_set_ondragenter_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ondragenter),
+  )
+}
+
+///|
+extern "js" fn svg_element_ondragleave_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragleave"
+
+///|
+impl TSVGElement with ondragleave(self : Self) -> EventHandler {
+  svg_element_ondragleave_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondragleave_ffi(
+  obj : JsValue,
+  ondragleave : JsValue,
+) -> Unit = "(obj, ondragleave) => { obj.ondragleave = ondragleave; }"
+
+///|
+impl TSVGElement with set_ondragleave(self : Self, ondragleave : EventHandler) -> Unit {
+  svg_element_set_ondragleave_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ondragleave),
+  )
+}
+
+///|
+extern "js" fn svg_element_ondragover_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragover"
+
+///|
+impl TSVGElement with ondragover(self : Self) -> EventHandler {
+  svg_element_ondragover_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondragover_ffi(
+  obj : JsValue,
+  ondragover : JsValue,
+) -> Unit = "(obj, ondragover) => { obj.ondragover = ondragover; }"
+
+///|
+impl TSVGElement with set_ondragover(self : Self, ondragover : EventHandler) -> Unit {
+  svg_element_set_ondragover_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ondragover),
+  )
+}
+
+///|
+extern "js" fn svg_element_ondragstart_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragstart"
+
+///|
+impl TSVGElement with ondragstart(self : Self) -> EventHandler {
+  svg_element_ondragstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondragstart_ffi(
+  obj : JsValue,
+  ondragstart : JsValue,
+) -> Unit = "(obj, ondragstart) => { obj.ondragstart = ondragstart; }"
+
+///|
+impl TSVGElement with set_ondragstart(self : Self, ondragstart : EventHandler) -> Unit {
+  svg_element_set_ondragstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ondragstart),
+  )
+}
+
+///|
+extern "js" fn svg_element_ondrop_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondrop"
+
+///|
+impl TSVGElement with ondrop(self : Self) -> EventHandler {
+  svg_element_ondrop_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondrop_ffi(
+  obj : JsValue,
+  ondrop : JsValue,
+) -> Unit = "(obj, ondrop) => { obj.ondrop = ondrop; }"
+
+///|
+impl TSVGElement with set_ondrop(self : Self, ondrop : EventHandler) -> Unit {
+  svg_element_set_ondrop_ffi(TJsValue::to_js(self), TJsValue::to_js(ondrop))
+}
+
+///|
+extern "js" fn svg_element_ondurationchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondurationchange"
+
+///|
+impl TSVGElement with ondurationchange(self : Self) -> EventHandler {
+  svg_element_ondurationchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ondurationchange_ffi(
+  obj : JsValue,
+  ondurationchange : JsValue,
+) -> Unit = "(obj, ondurationchange) => { obj.ondurationchange = ondurationchange; }"
+
+///|
+impl TSVGElement with set_ondurationchange(
+  self : Self,
+  ondurationchange : EventHandler,
+) -> Unit {
+  svg_element_set_ondurationchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ondurationchange),
+  )
+}
+
+///|
+extern "js" fn svg_element_onemptied_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onemptied"
+
+///|
+impl TSVGElement with onemptied(self : Self) -> EventHandler {
+  svg_element_onemptied_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onemptied_ffi(
+  obj : JsValue,
+  onemptied : JsValue,
+) -> Unit = "(obj, onemptied) => { obj.onemptied = onemptied; }"
+
+///|
+impl TSVGElement with set_onemptied(self : Self, onemptied : EventHandler) -> Unit {
+  svg_element_set_onemptied_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onemptied),
+  )
+}
+
+///|
+extern "js" fn svg_element_onended_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onended"
+
+///|
+impl TSVGElement with onended(self : Self) -> EventHandler {
+  svg_element_onended_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onended_ffi(
+  obj : JsValue,
+  onended : JsValue,
+) -> Unit = "(obj, onended) => { obj.onended = onended; }"
+
+///|
+impl TSVGElement with set_onended(self : Self, onended : EventHandler) -> Unit {
+  svg_element_set_onended_ffi(TJsValue::to_js(self), TJsValue::to_js(onended))
+}
+
+///|
+extern "js" fn svg_element_onerror_ffi(obj : JsValue) -> OnErrorEventHandler = "(obj) => obj.onerror"
+
+///|
+impl TSVGElement with onerror(self : Self) -> OnErrorEventHandler {
+  svg_element_onerror_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+impl TSVGElement with set_onerror(self : Self, onerror : OnErrorEventHandler) -> Unit {
+  svg_element_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+}
+
+///|
+extern "js" fn svg_element_onfocus_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onfocus"
+
+///|
+impl TSVGElement with onfocus(self : Self) -> EventHandler {
+  svg_element_onfocus_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onfocus_ffi(
+  obj : JsValue,
+  onfocus : JsValue,
+) -> Unit = "(obj, onfocus) => { obj.onfocus = onfocus; }"
+
+///|
+impl TSVGElement with set_onfocus(self : Self, onfocus : EventHandler) -> Unit {
+  svg_element_set_onfocus_ffi(TJsValue::to_js(self), TJsValue::to_js(onfocus))
+}
+
+///|
+extern "js" fn svg_element_onformdata_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onformdata"
+
+///|
+impl TSVGElement with onformdata(self : Self) -> EventHandler {
+  svg_element_onformdata_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onformdata_ffi(
+  obj : JsValue,
+  onformdata : JsValue,
+) -> Unit = "(obj, onformdata) => { obj.onformdata = onformdata; }"
+
+///|
+impl TSVGElement with set_onformdata(self : Self, onformdata : EventHandler) -> Unit {
+  svg_element_set_onformdata_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onformdata),
+  )
+}
+
+///|
+extern "js" fn svg_element_oninput_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oninput"
+
+///|
+impl TSVGElement with oninput(self : Self) -> EventHandler {
+  svg_element_oninput_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oninput_ffi(
+  obj : JsValue,
+  oninput : JsValue,
+) -> Unit = "(obj, oninput) => { obj.oninput = oninput; }"
+
+///|
+impl TSVGElement with set_oninput(self : Self, oninput : EventHandler) -> Unit {
+  svg_element_set_oninput_ffi(TJsValue::to_js(self), TJsValue::to_js(oninput))
+}
+
+///|
+extern "js" fn svg_element_oninvalid_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oninvalid"
+
+///|
+impl TSVGElement with oninvalid(self : Self) -> EventHandler {
+  svg_element_oninvalid_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_oninvalid_ffi(
+  obj : JsValue,
+  oninvalid : JsValue,
+) -> Unit = "(obj, oninvalid) => { obj.oninvalid = oninvalid; }"
+
+///|
+impl TSVGElement with set_oninvalid(self : Self, oninvalid : EventHandler) -> Unit {
+  svg_element_set_oninvalid_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oninvalid),
+  )
+}
+
+///|
+extern "js" fn svg_element_onkeydown_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onkeydown"
+
+///|
+impl TSVGElement with onkeydown(self : Self) -> EventHandler {
+  svg_element_onkeydown_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onkeydown_ffi(
+  obj : JsValue,
+  onkeydown : JsValue,
+) -> Unit = "(obj, onkeydown) => { obj.onkeydown = onkeydown; }"
+
+///|
+impl TSVGElement with set_onkeydown(self : Self, onkeydown : EventHandler) -> Unit {
+  svg_element_set_onkeydown_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onkeydown),
+  )
+}
+
+///|
+extern "js" fn svg_element_onkeypress_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onkeypress"
+
+///|
+impl TSVGElement with onkeypress(self : Self) -> EventHandler {
+  svg_element_onkeypress_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onkeypress_ffi(
+  obj : JsValue,
+  onkeypress : JsValue,
+) -> Unit = "(obj, onkeypress) => { obj.onkeypress = onkeypress; }"
+
+///|
+impl TSVGElement with set_onkeypress(self : Self, onkeypress : EventHandler) -> Unit {
+  svg_element_set_onkeypress_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onkeypress),
+  )
+}
+
+///|
+extern "js" fn svg_element_onkeyup_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onkeyup"
+
+///|
+impl TSVGElement with onkeyup(self : Self) -> EventHandler {
+  svg_element_onkeyup_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onkeyup_ffi(
+  obj : JsValue,
+  onkeyup : JsValue,
+) -> Unit = "(obj, onkeyup) => { obj.onkeyup = onkeyup; }"
+
+///|
+impl TSVGElement with set_onkeyup(self : Self, onkeyup : EventHandler) -> Unit {
+  svg_element_set_onkeyup_ffi(TJsValue::to_js(self), TJsValue::to_js(onkeyup))
+}
+
+///|
+extern "js" fn svg_element_onload_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onload"
+
+///|
+impl TSVGElement with onload(self : Self) -> EventHandler {
+  svg_element_onload_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onload_ffi(
+  obj : JsValue,
+  onload : JsValue,
+) -> Unit = "(obj, onload) => { obj.onload = onload; }"
+
+///|
+impl TSVGElement with set_onload(self : Self, onload : EventHandler) -> Unit {
+  svg_element_set_onload_ffi(TJsValue::to_js(self), TJsValue::to_js(onload))
+}
+
+///|
+extern "js" fn svg_element_onloadeddata_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadeddata"
+
+///|
+impl TSVGElement with onloadeddata(self : Self) -> EventHandler {
+  svg_element_onloadeddata_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onloadeddata_ffi(
+  obj : JsValue,
+  onloadeddata : JsValue,
+) -> Unit = "(obj, onloadeddata) => { obj.onloadeddata = onloadeddata; }"
+
+///|
+impl TSVGElement with set_onloadeddata(self : Self, onloadeddata : EventHandler) -> Unit {
+  svg_element_set_onloadeddata_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onloadeddata),
+  )
+}
+
+///|
+extern "js" fn svg_element_onloadedmetadata_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadedmetadata"
+
+///|
+impl TSVGElement with onloadedmetadata(self : Self) -> EventHandler {
+  svg_element_onloadedmetadata_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onloadedmetadata_ffi(
+  obj : JsValue,
+  onloadedmetadata : JsValue,
+) -> Unit = "(obj, onloadedmetadata) => { obj.onloadedmetadata = onloadedmetadata; }"
+
+///|
+impl TSVGElement with set_onloadedmetadata(
+  self : Self,
+  onloadedmetadata : EventHandler,
+) -> Unit {
+  svg_element_set_onloadedmetadata_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onloadedmetadata),
+  )
+}
+
+///|
+extern "js" fn svg_element_onloadstart_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadstart"
+
+///|
+impl TSVGElement with onloadstart(self : Self) -> EventHandler {
+  svg_element_onloadstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onloadstart_ffi(
+  obj : JsValue,
+  onloadstart : JsValue,
+) -> Unit = "(obj, onloadstart) => { obj.onloadstart = onloadstart; }"
+
+///|
+impl TSVGElement with set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit {
+  svg_element_set_onloadstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onloadstart),
+  )
+}
+
+///|
+extern "js" fn svg_element_onmousedown_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmousedown"
+
+///|
+impl TSVGElement with onmousedown(self : Self) -> EventHandler {
+  svg_element_onmousedown_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onmousedown_ffi(
+  obj : JsValue,
+  onmousedown : JsValue,
+) -> Unit = "(obj, onmousedown) => { obj.onmousedown = onmousedown; }"
+
+///|
+impl TSVGElement with set_onmousedown(self : Self, onmousedown : EventHandler) -> Unit {
+  svg_element_set_onmousedown_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmousedown),
+  )
+}
+
+///|
+extern "js" fn svg_element_onmouseenter_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseenter"
+
+///|
+impl TSVGElement with onmouseenter(self : Self) -> EventHandler {
+  svg_element_onmouseenter_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onmouseenter_ffi(
+  obj : JsValue,
+  onmouseenter : JsValue,
+) -> Unit = "(obj, onmouseenter) => { obj.onmouseenter = onmouseenter; }"
+
+///|
+impl TSVGElement with set_onmouseenter(self : Self, onmouseenter : EventHandler) -> Unit {
+  svg_element_set_onmouseenter_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmouseenter),
+  )
+}
+
+///|
+extern "js" fn svg_element_onmouseleave_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseleave"
+
+///|
+impl TSVGElement with onmouseleave(self : Self) -> EventHandler {
+  svg_element_onmouseleave_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onmouseleave_ffi(
+  obj : JsValue,
+  onmouseleave : JsValue,
+) -> Unit = "(obj, onmouseleave) => { obj.onmouseleave = onmouseleave; }"
+
+///|
+impl TSVGElement with set_onmouseleave(self : Self, onmouseleave : EventHandler) -> Unit {
+  svg_element_set_onmouseleave_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmouseleave),
+  )
+}
+
+///|
+extern "js" fn svg_element_onmousemove_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmousemove"
+
+///|
+impl TSVGElement with onmousemove(self : Self) -> EventHandler {
+  svg_element_onmousemove_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onmousemove_ffi(
+  obj : JsValue,
+  onmousemove : JsValue,
+) -> Unit = "(obj, onmousemove) => { obj.onmousemove = onmousemove; }"
+
+///|
+impl TSVGElement with set_onmousemove(self : Self, onmousemove : EventHandler) -> Unit {
+  svg_element_set_onmousemove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmousemove),
+  )
+}
+
+///|
+extern "js" fn svg_element_onmouseout_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseout"
+
+///|
+impl TSVGElement with onmouseout(self : Self) -> EventHandler {
+  svg_element_onmouseout_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onmouseout_ffi(
+  obj : JsValue,
+  onmouseout : JsValue,
+) -> Unit = "(obj, onmouseout) => { obj.onmouseout = onmouseout; }"
+
+///|
+impl TSVGElement with set_onmouseout(self : Self, onmouseout : EventHandler) -> Unit {
+  svg_element_set_onmouseout_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmouseout),
+  )
+}
+
+///|
+extern "js" fn svg_element_onmouseover_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseover"
+
+///|
+impl TSVGElement with onmouseover(self : Self) -> EventHandler {
+  svg_element_onmouseover_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onmouseover_ffi(
+  obj : JsValue,
+  onmouseover : JsValue,
+) -> Unit = "(obj, onmouseover) => { obj.onmouseover = onmouseover; }"
+
+///|
+impl TSVGElement with set_onmouseover(self : Self, onmouseover : EventHandler) -> Unit {
+  svg_element_set_onmouseover_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmouseover),
+  )
+}
+
+///|
+extern "js" fn svg_element_onmouseup_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseup"
+
+///|
+impl TSVGElement with onmouseup(self : Self) -> EventHandler {
+  svg_element_onmouseup_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onmouseup_ffi(
+  obj : JsValue,
+  onmouseup : JsValue,
+) -> Unit = "(obj, onmouseup) => { obj.onmouseup = onmouseup; }"
+
+///|
+impl TSVGElement with set_onmouseup(self : Self, onmouseup : EventHandler) -> Unit {
+  svg_element_set_onmouseup_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmouseup),
+  )
+}
+
+///|
+extern "js" fn svg_element_onpaste_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpaste"
+
+///|
+impl TSVGElement with onpaste(self : Self) -> EventHandler {
+  svg_element_onpaste_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onpaste_ffi(
+  obj : JsValue,
+  onpaste : JsValue,
+) -> Unit = "(obj, onpaste) => { obj.onpaste = onpaste; }"
+
+///|
+impl TSVGElement with set_onpaste(self : Self, onpaste : EventHandler) -> Unit {
+  svg_element_set_onpaste_ffi(TJsValue::to_js(self), TJsValue::to_js(onpaste))
+}
+
+///|
+extern "js" fn svg_element_onpause_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpause"
+
+///|
+impl TSVGElement with onpause(self : Self) -> EventHandler {
+  svg_element_onpause_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onpause_ffi(
+  obj : JsValue,
+  onpause : JsValue,
+) -> Unit = "(obj, onpause) => { obj.onpause = onpause; }"
+
+///|
+impl TSVGElement with set_onpause(self : Self, onpause : EventHandler) -> Unit {
+  svg_element_set_onpause_ffi(TJsValue::to_js(self), TJsValue::to_js(onpause))
+}
+
+///|
+extern "js" fn svg_element_onplay_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onplay"
+
+///|
+impl TSVGElement with onplay(self : Self) -> EventHandler {
+  svg_element_onplay_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onplay_ffi(
+  obj : JsValue,
+  onplay : JsValue,
+) -> Unit = "(obj, onplay) => { obj.onplay = onplay; }"
+
+///|
+impl TSVGElement with set_onplay(self : Self, onplay : EventHandler) -> Unit {
+  svg_element_set_onplay_ffi(TJsValue::to_js(self), TJsValue::to_js(onplay))
+}
+
+///|
+extern "js" fn svg_element_onplaying_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onplaying"
+
+///|
+impl TSVGElement with onplaying(self : Self) -> EventHandler {
+  svg_element_onplaying_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onplaying_ffi(
+  obj : JsValue,
+  onplaying : JsValue,
+) -> Unit = "(obj, onplaying) => { obj.onplaying = onplaying; }"
+
+///|
+impl TSVGElement with set_onplaying(self : Self, onplaying : EventHandler) -> Unit {
+  svg_element_set_onplaying_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onplaying),
+  )
+}
+
+///|
+extern "js" fn svg_element_onprogress_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onprogress"
+
+///|
+impl TSVGElement with onprogress(self : Self) -> EventHandler {
+  svg_element_onprogress_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onprogress_ffi(
+  obj : JsValue,
+  onprogress : JsValue,
+) -> Unit = "(obj, onprogress) => { obj.onprogress = onprogress; }"
+
+///|
+impl TSVGElement with set_onprogress(self : Self, onprogress : EventHandler) -> Unit {
+  svg_element_set_onprogress_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onprogress),
+  )
+}
+
+///|
+extern "js" fn svg_element_onratechange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onratechange"
+
+///|
+impl TSVGElement with onratechange(self : Self) -> EventHandler {
+  svg_element_onratechange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onratechange_ffi(
+  obj : JsValue,
+  onratechange : JsValue,
+) -> Unit = "(obj, onratechange) => { obj.onratechange = onratechange; }"
+
+///|
+impl TSVGElement with set_onratechange(self : Self, onratechange : EventHandler) -> Unit {
+  svg_element_set_onratechange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onratechange),
+  )
+}
+
+///|
+extern "js" fn svg_element_onreset_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onreset"
+
+///|
+impl TSVGElement with onreset(self : Self) -> EventHandler {
+  svg_element_onreset_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onreset_ffi(
+  obj : JsValue,
+  onreset : JsValue,
+) -> Unit = "(obj, onreset) => { obj.onreset = onreset; }"
+
+///|
+impl TSVGElement with set_onreset(self : Self, onreset : EventHandler) -> Unit {
+  svg_element_set_onreset_ffi(TJsValue::to_js(self), TJsValue::to_js(onreset))
+}
+
+///|
+extern "js" fn svg_element_onresize_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onresize"
+
+///|
+impl TSVGElement with onresize(self : Self) -> EventHandler {
+  svg_element_onresize_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onresize_ffi(
+  obj : JsValue,
+  onresize : JsValue,
+) -> Unit = "(obj, onresize) => { obj.onresize = onresize; }"
+
+///|
+impl TSVGElement with set_onresize(self : Self, onresize : EventHandler) -> Unit {
+  svg_element_set_onresize_ffi(TJsValue::to_js(self), TJsValue::to_js(onresize))
+}
+
+///|
+extern "js" fn svg_element_onscroll_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onscroll"
+
+///|
+impl TSVGElement with onscroll(self : Self) -> EventHandler {
+  svg_element_onscroll_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onscroll_ffi(
+  obj : JsValue,
+  onscroll : JsValue,
+) -> Unit = "(obj, onscroll) => { obj.onscroll = onscroll; }"
+
+///|
+impl TSVGElement with set_onscroll(self : Self, onscroll : EventHandler) -> Unit {
+  svg_element_set_onscroll_ffi(TJsValue::to_js(self), TJsValue::to_js(onscroll))
+}
+
+///|
+extern "js" fn svg_element_onscrollend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onscrollend"
+
+///|
+impl TSVGElement with onscrollend(self : Self) -> EventHandler {
+  svg_element_onscrollend_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onscrollend_ffi(
+  obj : JsValue,
+  onscrollend : JsValue,
+) -> Unit = "(obj, onscrollend) => { obj.onscrollend = onscrollend; }"
+
+///|
+impl TSVGElement with set_onscrollend(self : Self, onscrollend : EventHandler) -> Unit {
+  svg_element_set_onscrollend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onscrollend),
+  )
+}
+
+///|
+extern "js" fn svg_element_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onsecuritypolicyviolation"
+
+///|
+impl TSVGElement with onsecuritypolicyviolation(self : Self) -> EventHandler {
+  svg_element_onsecuritypolicyviolation_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+  onsecuritypolicyviolation : JsValue,
+) -> Unit = "(obj, onsecuritypolicyviolation) => { obj.onsecuritypolicyviolation = onsecuritypolicyviolation; }"
+
+///|
+impl TSVGElement with set_onsecuritypolicyviolation(
+  self : Self,
+  onsecuritypolicyviolation : EventHandler,
+) -> Unit {
+  svg_element_set_onsecuritypolicyviolation_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onsecuritypolicyviolation),
+  )
+}
+
+///|
+extern "js" fn svg_element_onseeked_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onseeked"
+
+///|
+impl TSVGElement with onseeked(self : Self) -> EventHandler {
+  svg_element_onseeked_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onseeked_ffi(
+  obj : JsValue,
+  onseeked : JsValue,
+) -> Unit = "(obj, onseeked) => { obj.onseeked = onseeked; }"
+
+///|
+impl TSVGElement with set_onseeked(self : Self, onseeked : EventHandler) -> Unit {
+  svg_element_set_onseeked_ffi(TJsValue::to_js(self), TJsValue::to_js(onseeked))
+}
+
+///|
+extern "js" fn svg_element_onseeking_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onseeking"
+
+///|
+impl TSVGElement with onseeking(self : Self) -> EventHandler {
+  svg_element_onseeking_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onseeking_ffi(
+  obj : JsValue,
+  onseeking : JsValue,
+) -> Unit = "(obj, onseeking) => { obj.onseeking = onseeking; }"
+
+///|
+impl TSVGElement with set_onseeking(self : Self, onseeking : EventHandler) -> Unit {
+  svg_element_set_onseeking_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onseeking),
+  )
+}
+
+///|
+extern "js" fn svg_element_onselect_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onselect"
+
+///|
+impl TSVGElement with onselect(self : Self) -> EventHandler {
+  svg_element_onselect_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onselect_ffi(
+  obj : JsValue,
+  onselect : JsValue,
+) -> Unit = "(obj, onselect) => { obj.onselect = onselect; }"
+
+///|
+impl TSVGElement with set_onselect(self : Self, onselect : EventHandler) -> Unit {
+  svg_element_set_onselect_ffi(TJsValue::to_js(self), TJsValue::to_js(onselect))
+}
+
+///|
+extern "js" fn svg_element_onslotchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onslotchange"
+
+///|
+impl TSVGElement with onslotchange(self : Self) -> EventHandler {
+  svg_element_onslotchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onslotchange_ffi(
+  obj : JsValue,
+  onslotchange : JsValue,
+) -> Unit = "(obj, onslotchange) => { obj.onslotchange = onslotchange; }"
+
+///|
+impl TSVGElement with set_onslotchange(self : Self, onslotchange : EventHandler) -> Unit {
+  svg_element_set_onslotchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onslotchange),
+  )
+}
+
+///|
+extern "js" fn svg_element_onstalled_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onstalled"
+
+///|
+impl TSVGElement with onstalled(self : Self) -> EventHandler {
+  svg_element_onstalled_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onstalled_ffi(
+  obj : JsValue,
+  onstalled : JsValue,
+) -> Unit = "(obj, onstalled) => { obj.onstalled = onstalled; }"
+
+///|
+impl TSVGElement with set_onstalled(self : Self, onstalled : EventHandler) -> Unit {
+  svg_element_set_onstalled_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onstalled),
+  )
+}
+
+///|
+extern "js" fn svg_element_onsubmit_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onsubmit"
+
+///|
+impl TSVGElement with onsubmit(self : Self) -> EventHandler {
+  svg_element_onsubmit_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onsubmit_ffi(
+  obj : JsValue,
+  onsubmit : JsValue,
+) -> Unit = "(obj, onsubmit) => { obj.onsubmit = onsubmit; }"
+
+///|
+impl TSVGElement with set_onsubmit(self : Self, onsubmit : EventHandler) -> Unit {
+  svg_element_set_onsubmit_ffi(TJsValue::to_js(self), TJsValue::to_js(onsubmit))
+}
+
+///|
+extern "js" fn svg_element_onsuspend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onsuspend"
+
+///|
+impl TSVGElement with onsuspend(self : Self) -> EventHandler {
+  svg_element_onsuspend_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onsuspend_ffi(
+  obj : JsValue,
+  onsuspend : JsValue,
+) -> Unit = "(obj, onsuspend) => { obj.onsuspend = onsuspend; }"
+
+///|
+impl TSVGElement with set_onsuspend(self : Self, onsuspend : EventHandler) -> Unit {
+  svg_element_set_onsuspend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onsuspend),
+  )
+}
+
+///|
+extern "js" fn svg_element_ontimeupdate_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ontimeupdate"
+
+///|
+impl TSVGElement with ontimeupdate(self : Self) -> EventHandler {
+  svg_element_ontimeupdate_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ontimeupdate_ffi(
+  obj : JsValue,
+  ontimeupdate : JsValue,
+) -> Unit = "(obj, ontimeupdate) => { obj.ontimeupdate = ontimeupdate; }"
+
+///|
+impl TSVGElement with set_ontimeupdate(self : Self, ontimeupdate : EventHandler) -> Unit {
+  svg_element_set_ontimeupdate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontimeupdate),
+  )
+}
+
+///|
+extern "js" fn svg_element_ontoggle_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ontoggle"
+
+///|
+impl TSVGElement with ontoggle(self : Self) -> EventHandler {
+  svg_element_ontoggle_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_ontoggle_ffi(
+  obj : JsValue,
+  ontoggle : JsValue,
+) -> Unit = "(obj, ontoggle) => { obj.ontoggle = ontoggle; }"
+
+///|
+impl TSVGElement with set_ontoggle(self : Self, ontoggle : EventHandler) -> Unit {
+  svg_element_set_ontoggle_ffi(TJsValue::to_js(self), TJsValue::to_js(ontoggle))
+}
+
+///|
+extern "js" fn svg_element_onvolumechange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onvolumechange"
+
+///|
+impl TSVGElement with onvolumechange(self : Self) -> EventHandler {
+  svg_element_onvolumechange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onvolumechange_ffi(
+  obj : JsValue,
+  onvolumechange : JsValue,
+) -> Unit = "(obj, onvolumechange) => { obj.onvolumechange = onvolumechange; }"
+
+///|
+impl TSVGElement with set_onvolumechange(
+  self : Self,
+  onvolumechange : EventHandler,
+) -> Unit {
+  svg_element_set_onvolumechange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onvolumechange),
+  )
+}
+
+///|
+extern "js" fn svg_element_onwaiting_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onwaiting"
+
+///|
+impl TSVGElement with onwaiting(self : Self) -> EventHandler {
+  svg_element_onwaiting_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onwaiting_ffi(
+  obj : JsValue,
+  onwaiting : JsValue,
+) -> Unit = "(obj, onwaiting) => { obj.onwaiting = onwaiting; }"
+
+///|
+impl TSVGElement with set_onwaiting(self : Self, onwaiting : EventHandler) -> Unit {
+  svg_element_set_onwaiting_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onwaiting),
+  )
+}
+
+///|
+extern "js" fn svg_element_onwebkitanimationend_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onwebkitanimationend"
+
+///|
+impl TSVGElement with onwebkitanimationend(self : Self) -> EventHandler {
+  svg_element_onwebkitanimationend_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onwebkitanimationend_ffi(
+  obj : JsValue,
+  onwebkitanimationend : JsValue,
+) -> Unit = "(obj, onwebkitanimationend) => { obj.onwebkitanimationend = onwebkitanimationend; }"
+
+///|
+impl TSVGElement with set_onwebkitanimationend(
+  self : Self,
+  onwebkitanimationend : EventHandler,
+) -> Unit {
+  svg_element_set_onwebkitanimationend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onwebkitanimationend),
+  )
+}
+
+///|
+extern "js" fn svg_element_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onwebkitanimationiteration"
+
+///|
+impl TSVGElement with onwebkitanimationiteration(self : Self) -> EventHandler {
+  svg_element_onwebkitanimationiteration_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+  onwebkitanimationiteration : JsValue,
+) -> Unit = "(obj, onwebkitanimationiteration) => { obj.onwebkitanimationiteration = onwebkitanimationiteration; }"
+
+///|
+impl TSVGElement with set_onwebkitanimationiteration(
+  self : Self,
+  onwebkitanimationiteration : EventHandler,
+) -> Unit {
+  svg_element_set_onwebkitanimationiteration_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onwebkitanimationiteration),
+  )
+}
+
+///|
+extern "js" fn svg_element_onwebkitanimationstart_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onwebkitanimationstart"
+
+///|
+impl TSVGElement with onwebkitanimationstart(self : Self) -> EventHandler {
+  svg_element_onwebkitanimationstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onwebkitanimationstart_ffi(
+  obj : JsValue,
+  onwebkitanimationstart : JsValue,
+) -> Unit = "(obj, onwebkitanimationstart) => { obj.onwebkitanimationstart = onwebkitanimationstart; }"
+
+///|
+impl TSVGElement with set_onwebkitanimationstart(
+  self : Self,
+  onwebkitanimationstart : EventHandler,
+) -> Unit {
+  svg_element_set_onwebkitanimationstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onwebkitanimationstart),
+  )
+}
+
+///|
+extern "js" fn svg_element_onwebkittransitionend_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onwebkittransitionend"
+
+///|
+impl TSVGElement with onwebkittransitionend(self : Self) -> EventHandler {
+  svg_element_onwebkittransitionend_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onwebkittransitionend_ffi(
+  obj : JsValue,
+  onwebkittransitionend : JsValue,
+) -> Unit = "(obj, onwebkittransitionend) => { obj.onwebkittransitionend = onwebkittransitionend; }"
+
+///|
+impl TSVGElement with set_onwebkittransitionend(
+  self : Self,
+  onwebkittransitionend : EventHandler,
+) -> Unit {
+  svg_element_set_onwebkittransitionend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onwebkittransitionend),
+  )
+}
+
+///|
+extern "js" fn svg_element_onwheel_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onwheel"
+
+///|
+impl TSVGElement with onwheel(self : Self) -> EventHandler {
+  svg_element_onwheel_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_onwheel_ffi(
+  obj : JsValue,
+  onwheel : JsValue,
+) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
+
+///|
+impl TSVGElement with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
+  svg_element_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+extern "js" fn svg_element_corresponding_element_ffi(
+  obj : JsValue,
+) -> SVGElement = "(obj) => obj.correspondingElement"
+
+///|
+impl TSVGElement with corresponding_element(self : Self) -> SVGElement {
+  svg_element_corresponding_element_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_corresponding_use_element_ffi(
+  obj : JsValue,
+) -> SVGUseElement = "(obj) => obj.correspondingUseElement"
+
+///|
+impl TSVGElement with corresponding_use_element(self : Self) -> SVGUseElement {
+  svg_element_corresponding_use_element_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_dataset_ffi(obj : JsValue) -> DOMStringMap = "(obj) => obj.dataset"
+
+///|
+impl TSVGElement with dataset(self : Self) -> DOMStringMap {
+  svg_element_dataset_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_nonce_ffi(obj : JsValue) -> String = "(obj) => obj.nonce"
+
+///|
+impl TSVGElement with nonce(self : Self) -> String {
+  svg_element_nonce_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_nonce_ffi(
+  obj : JsValue,
+  nonce : JsValue,
+) -> Unit = "(obj, nonce) => { obj.nonce = nonce; }"
+
+///|
+impl TSVGElement with set_nonce(self : Self, nonce : String) -> Unit {
+  svg_element_set_nonce_ffi(TJsValue::to_js(self), TJsValue::to_js(nonce))
+}
+
+///|
+extern "js" fn svg_element_autofocus_ffi(obj : JsValue) -> Bool = "(obj) => obj.autofocus"
+
+///|
+impl TSVGElement with autofocus(self : Self) -> Bool {
+  svg_element_autofocus_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_autofocus_ffi(
+  obj : JsValue,
+  autofocus : JsValue,
+) -> Unit = "(obj, autofocus) => { obj.autofocus = autofocus; }"
+
+///|
+impl TSVGElement with set_autofocus(self : Self, autofocus : Bool) -> Unit {
+  svg_element_set_autofocus_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(autofocus),
+  )
+}
+
+///|
+extern "js" fn svg_element_tab_index_ffi(obj : JsValue) -> Int = "(obj) => obj.tabIndex"
+
+///|
+impl TSVGElement with tab_index(self : Self) -> Int {
+  svg_element_tab_index_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_set_tab_index_ffi(
+  obj : JsValue,
+  tab_index : JsValue,
+) -> Unit = "(obj, tabIndex) => { obj.tabIndex = tabIndex; }"
+
+///|
+impl TSVGElement with set_tab_index(self : Self, tab_index : Int) -> Unit {
+  svg_element_set_tab_index_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(tab_index),
+  )
 }
 
 ///|
@@ -43,4 +1977,12 @@ extern "js" fn svg_element_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur(
 ///|
 impl TSVGElement with blur(self : Self) -> Unit {
   svg_element_blur_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_element_style_ffi(obj : JsValue) -> CSSStyleProperties = "(obj) => obj.style"
+
+///|
+impl TSVGElement with style(self : Self) -> CSSStyleProperties {
+  svg_element_style_ffi(TJsValue::to_js(self))
 }

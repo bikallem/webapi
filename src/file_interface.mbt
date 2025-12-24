@@ -35,4 +35,23 @@ pub fn File::new(
 }
 
 ///|
-pub trait TFile: TBlob {}
+pub trait TFile: TBlob {
+  name(self : Self) -> String = _
+  last_modified(self : Self) -> Int64 = _
+}
+
+///|
+extern "js" fn file_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
+
+///|
+impl TFile with name(self : Self) -> String {
+  file_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn file_last_modified_ffi(obj : JsValue) -> Int64 = "(obj) => obj.lastModified"
+
+///|
+impl TFile with last_modified(self : Self) -> Int64 {
+  file_last_modified_ffi(TJsValue::to_js(self))
+}

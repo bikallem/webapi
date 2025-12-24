@@ -47,19 +47,34 @@ pub impl TElementInternalsSetFormValueState for FormData with to_js(
 
 ///|
 pub trait TElementInternals: TJsValue {
+  shadow_root(self : Self) -> ShadowRoot = _
   set_form_value(
     self : Self,
     value : &TElementInternalsSetFormValueValue,
     state? : &TElementInternalsSetFormValueState,
   ) -> Unit = _
+  form(self : Self) -> HTMLFormElement = _
   set_validity(
     self : Self,
     flags? : ValidityStateFlags,
     message? : String,
     anchor? : &THTMLElement,
   ) -> Unit = _
+  will_validate(self : Self) -> Bool = _
+  validity(self : Self) -> ValidityState = _
+  validation_message(self : Self) -> String = _
   check_validity(self : Self) -> Bool = _
   report_validity(self : Self) -> Bool = _
+  labels(self : Self) -> NodeList = _
+  states(self : Self) -> CustomStateSet = _
+}
+
+///|
+extern "js" fn element_internals_shadow_root_ffi(obj : JsValue) -> ShadowRoot = "(obj) => obj.shadowRoot"
+
+///|
+impl TElementInternals with shadow_root(self : Self) -> ShadowRoot {
+  element_internals_shadow_root_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -86,6 +101,14 @@ impl TElementInternals with set_form_value(
 }
 
 ///|
+extern "js" fn element_internals_form_ffi(obj : JsValue) -> HTMLFormElement = "(obj) => obj.form"
+
+///|
+impl TElementInternals with form(self : Self) -> HTMLFormElement {
+  element_internals_form_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn element_internals_set_validity_ffi(
   obj : JsValue,
   flags : JsValue,
@@ -109,6 +132,32 @@ impl TElementInternals with set_validity(
 }
 
 ///|
+extern "js" fn element_internals_will_validate_ffi(obj : JsValue) -> Bool = "(obj) => obj.willValidate"
+
+///|
+impl TElementInternals with will_validate(self : Self) -> Bool {
+  element_internals_will_validate_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_internals_validity_ffi(obj : JsValue) -> ValidityState = "(obj) => obj.validity"
+
+///|
+impl TElementInternals with validity(self : Self) -> ValidityState {
+  element_internals_validity_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_internals_validation_message_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.validationMessage"
+
+///|
+impl TElementInternals with validation_message(self : Self) -> String {
+  element_internals_validation_message_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn element_internals_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
 
 ///|
@@ -122,4 +171,20 @@ extern "js" fn element_internals_report_validity_ffi(obj : JsValue) -> Bool = "(
 ///|
 impl TElementInternals with report_validity(self : Self) -> Bool {
   element_internals_report_validity_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_internals_labels_ffi(obj : JsValue) -> NodeList = "(obj) => obj.labels"
+
+///|
+impl TElementInternals with labels(self : Self) -> NodeList {
+  element_internals_labels_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_internals_states_ffi(obj : JsValue) -> CustomStateSet = "(obj) => obj.states"
+
+///|
+impl TElementInternals with states(self : Self) -> CustomStateSet {
+  element_internals_states_ffi(TJsValue::to_js(self))
 }

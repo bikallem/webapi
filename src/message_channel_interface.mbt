@@ -20,4 +20,23 @@ pub fn MessageChannel::new() -> MessageChannel {
 }
 
 ///|
-pub trait TMessageChannel: TJsValue {}
+pub trait TMessageChannel: TJsValue {
+  port1(self : Self) -> MessagePort = _
+  port2(self : Self) -> MessagePort = _
+}
+
+///|
+extern "js" fn message_channel_port1_ffi(obj : JsValue) -> MessagePort = "(obj) => obj.port1"
+
+///|
+impl TMessageChannel with port1(self : Self) -> MessagePort {
+  message_channel_port1_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn message_channel_port2_ffi(obj : JsValue) -> MessagePort = "(obj) => obj.port2"
+
+///|
+impl TMessageChannel with port2(self : Self) -> MessagePort {
+  message_channel_port2_ffi(TJsValue::to_js(self))
+}

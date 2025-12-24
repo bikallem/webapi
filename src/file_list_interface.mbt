@@ -12,4 +12,14 @@ pub fn[T : TFileList] FileList::into(self : FileList) -> T = "%identity"
 pub impl TFileList for FileList
 
 ///|
-pub trait TFileList: TJsValue {}
+pub trait TFileList: TJsValue {
+  length(self : Self) -> UInt = _
+}
+
+///|
+extern "js" fn file_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TFileList with length(self : Self) -> UInt {
+  file_list_length_ffi(TJsValue::to_js(self))
+}

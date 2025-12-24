@@ -13,12 +13,30 @@ pub impl TSVGNumberList for SVGNumberList
 
 ///|
 pub trait TSVGNumberList: TJsValue {
+  length(self : Self) -> UInt = _
+  number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : &TSVGNumber) -> SVGNumber = _
   insert_item_before(self : Self, new_item : &TSVGNumber, index : UInt) -> SVGNumber = _
   replace_item(self : Self, new_item : &TSVGNumber, index : UInt) -> SVGNumber = _
   remove_item(self : Self, index : UInt) -> SVGNumber = _
   append_item(self : Self, new_item : &TSVGNumber) -> SVGNumber = _
+}
+
+///|
+extern "js" fn svg_number_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TSVGNumberList with length(self : Self) -> UInt {
+  svg_number_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_number_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
+
+///|
+impl TSVGNumberList with number_of_items(self : Self) -> UInt {
+  svg_number_list_number_of_items_ffi(TJsValue::to_js(self))
 }
 
 ///|

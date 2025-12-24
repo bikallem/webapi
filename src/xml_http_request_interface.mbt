@@ -55,6 +55,9 @@ pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit with to_js(
 
 ///|
 pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
+  onreadystatechange(self : Self) -> EventHandler = _
+  set_onreadystatechange(self : Self, onreadystatechange : EventHandler) -> Unit = _
+  ready_state(self : Self) -> UInt = _
   open(self : Self, method_ : String, url : String) -> Unit = _
   open_2(
     self : Self,
@@ -65,11 +68,59 @@ pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
     password? : String,
   ) -> Unit = _
   set_request_header(self : Self, name : String, value : String) -> Unit = _
+  timeout(self : Self) -> UInt = _
+  set_timeout(self : Self, timeout : UInt) -> Unit = _
+  with_credentials(self : Self) -> Bool = _
+  set_with_credentials(self : Self, with_credentials : Bool) -> Unit = _
+  upload(self : Self) -> XMLHttpRequestUpload = _
   send(self : Self, body? : &TXMLHttpRequestSendBody) -> Unit = _
   abort(self : Self) -> Unit = _
+  response_url(self : Self) -> String = _
+  status(self : Self) -> UInt = _
+  status_text(self : Self) -> String = _
   get_response_header(self : Self, name : String) -> String = _
   get_all_response_headers(self : Self) -> String = _
   override_mime_type(self : Self, mime : String) -> Unit = _
+  response_type(self : Self) -> XMLHttpRequestResponseType = _
+  set_response_type(self : Self, response_type : XMLHttpRequestResponseType) -> Unit = _
+  response(self : Self) -> JsValue = _
+  response_text(self : Self) -> String = _
+  response_xml(self : Self) -> Document = _
+}
+
+///|
+extern "js" fn xml_http_request_onreadystatechange_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onreadystatechange"
+
+///|
+impl TXMLHttpRequest with onreadystatechange(self : Self) -> EventHandler {
+  xml_http_request_onreadystatechange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_set_onreadystatechange_ffi(
+  obj : JsValue,
+  onreadystatechange : JsValue,
+) -> Unit = "(obj, onreadystatechange) => { obj.onreadystatechange = onreadystatechange; }"
+
+///|
+impl TXMLHttpRequest with set_onreadystatechange(
+  self : Self,
+  onreadystatechange : EventHandler,
+) -> Unit {
+  xml_http_request_set_onreadystatechange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onreadystatechange),
+  )
+}
+
+///|
+extern "js" fn xml_http_request_ready_state_ffi(obj : JsValue) -> UInt = "(obj) => obj.readyState"
+
+///|
+impl TXMLHttpRequest with ready_state(self : Self) -> UInt {
+  xml_http_request_ready_state_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -138,6 +189,63 @@ impl TXMLHttpRequest with set_request_header(
 }
 
 ///|
+extern "js" fn xml_http_request_timeout_ffi(obj : JsValue) -> UInt = "(obj) => obj.timeout"
+
+///|
+impl TXMLHttpRequest with timeout(self : Self) -> UInt {
+  xml_http_request_timeout_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_set_timeout_ffi(
+  obj : JsValue,
+  timeout : JsValue,
+) -> Unit = "(obj, timeout) => { obj.timeout = timeout; }"
+
+///|
+impl TXMLHttpRequest with set_timeout(self : Self, timeout : UInt) -> Unit {
+  xml_http_request_set_timeout_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(timeout),
+  )
+}
+
+///|
+extern "js" fn xml_http_request_with_credentials_ffi(obj : JsValue) -> Bool = "(obj) => obj.withCredentials"
+
+///|
+impl TXMLHttpRequest with with_credentials(self : Self) -> Bool {
+  xml_http_request_with_credentials_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_set_with_credentials_ffi(
+  obj : JsValue,
+  with_credentials : JsValue,
+) -> Unit = "(obj, withCredentials) => { obj.withCredentials = withCredentials; }"
+
+///|
+impl TXMLHttpRequest with set_with_credentials(
+  self : Self,
+  with_credentials : Bool,
+) -> Unit {
+  xml_http_request_set_with_credentials_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(with_credentials),
+  )
+}
+
+///|
+extern "js" fn xml_http_request_upload_ffi(
+  obj : JsValue,
+) -> XMLHttpRequestUpload = "(obj) => obj.upload"
+
+///|
+impl TXMLHttpRequest with upload(self : Self) -> XMLHttpRequestUpload {
+  xml_http_request_upload_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn xml_http_request_send_ffi(obj : JsValue, body : JsValue) -> Unit = "(obj, body) => obj.send(obj, body)"
 
 ///|
@@ -154,6 +262,30 @@ extern "js" fn xml_http_request_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj
 ///|
 impl TXMLHttpRequest with abort(self : Self) -> Unit {
   xml_http_request_abort_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_response_url_ffi(obj : JsValue) -> String = "(obj) => obj.responseURL"
+
+///|
+impl TXMLHttpRequest with response_url(self : Self) -> String {
+  xml_http_request_response_url_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_status_ffi(obj : JsValue) -> UInt = "(obj) => obj.status"
+
+///|
+impl TXMLHttpRequest with status(self : Self) -> UInt {
+  xml_http_request_status_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_status_text_ffi(obj : JsValue) -> String = "(obj) => obj.statusText"
+
+///|
+impl TXMLHttpRequest with status_text(self : Self) -> String {
+  xml_http_request_status_text_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -192,4 +324,55 @@ impl TXMLHttpRequest with override_mime_type(self : Self, mime : String) -> Unit
     TJsValue::to_js(self),
     TJsValue::to_js(mime),
   )
+}
+
+///|
+extern "js" fn xml_http_request_response_type_ffi(
+  obj : JsValue,
+) -> XMLHttpRequestResponseType = "(obj) => obj.responseType"
+
+///|
+impl TXMLHttpRequest with response_type(self : Self) -> XMLHttpRequestResponseType {
+  xml_http_request_response_type_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_set_response_type_ffi(
+  obj : JsValue,
+  response_type : JsValue,
+) -> Unit = "(obj, responseType) => { obj.responseType = responseType; }"
+
+///|
+impl TXMLHttpRequest with set_response_type(
+  self : Self,
+  response_type : XMLHttpRequestResponseType,
+) -> Unit {
+  xml_http_request_set_response_type_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(response_type),
+  )
+}
+
+///|
+extern "js" fn xml_http_request_response_ffi(obj : JsValue) -> JsValue = "(obj) => obj.response"
+
+///|
+impl TXMLHttpRequest with response(self : Self) -> JsValue {
+  xml_http_request_response_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_response_text_ffi(obj : JsValue) -> String = "(obj) => obj.responseText"
+
+///|
+impl TXMLHttpRequest with response_text(self : Self) -> String {
+  xml_http_request_response_text_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn xml_http_request_response_xml_ffi(obj : JsValue) -> Document = "(obj) => obj.responseXML"
+
+///|
+impl TXMLHttpRequest with response_xml(self : Self) -> Document {
+  xml_http_request_response_xml_ffi(TJsValue::to_js(self))
 }

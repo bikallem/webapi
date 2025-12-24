@@ -31,4 +31,71 @@ pub impl TNode for SVGRadialGradientElement
 pub impl TEventTarget for SVGRadialGradientElement
 
 ///|
-pub trait TSVGRadialGradientElement: TSVGGradientElement {}
+pub trait TSVGRadialGradientElement: TSVGGradientElement {
+  cx(self : Self) -> SVGAnimatedLength = _
+  cy(self : Self) -> SVGAnimatedLength = _
+  r(self : Self) -> SVGAnimatedLength = _
+  fx(self : Self) -> SVGAnimatedLength = _
+  fy(self : Self) -> SVGAnimatedLength = _
+  fr(self : Self) -> SVGAnimatedLength = _
+}
+
+///|
+extern "js" fn svg_radial_gradient_element_cx_ffi(
+  obj : JsValue,
+) -> SVGAnimatedLength = "(obj) => obj.cx"
+
+///|
+impl TSVGRadialGradientElement with cx(self : Self) -> SVGAnimatedLength {
+  svg_radial_gradient_element_cx_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_radial_gradient_element_cy_ffi(
+  obj : JsValue,
+) -> SVGAnimatedLength = "(obj) => obj.cy"
+
+///|
+impl TSVGRadialGradientElement with cy(self : Self) -> SVGAnimatedLength {
+  svg_radial_gradient_element_cy_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_radial_gradient_element_r_ffi(
+  obj : JsValue,
+) -> SVGAnimatedLength = "(obj) => obj.r"
+
+///|
+impl TSVGRadialGradientElement with r(self : Self) -> SVGAnimatedLength {
+  svg_radial_gradient_element_r_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_radial_gradient_element_fx_ffi(
+  obj : JsValue,
+) -> SVGAnimatedLength = "(obj) => obj.fx"
+
+///|
+impl TSVGRadialGradientElement with fx(self : Self) -> SVGAnimatedLength {
+  svg_radial_gradient_element_fx_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_radial_gradient_element_fy_ffi(
+  obj : JsValue,
+) -> SVGAnimatedLength = "(obj) => obj.fy"
+
+///|
+impl TSVGRadialGradientElement with fy(self : Self) -> SVGAnimatedLength {
+  svg_radial_gradient_element_fy_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_radial_gradient_element_fr_ffi(
+  obj : JsValue,
+) -> SVGAnimatedLength = "(obj) => obj.fr"
+
+///|
+impl TSVGRadialGradientElement with fr(self : Self) -> SVGAnimatedLength {
+  svg_radial_gradient_element_fr_ffi(TJsValue::to_js(self))
+}

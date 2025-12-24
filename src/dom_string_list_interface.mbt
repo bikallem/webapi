@@ -13,7 +13,16 @@ pub impl TDOMStringList for DOMStringList
 
 ///|
 pub trait TDOMStringList: TJsValue {
+  length(self : Self) -> UInt = _
   contains(self : Self, string : String) -> Bool = _
+}
+
+///|
+extern "js" fn dom_string_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TDOMStringList with length(self : Self) -> UInt {
+  dom_string_list_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

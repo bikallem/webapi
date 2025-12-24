@@ -50,6 +50,12 @@ pub trait TWorker: TEventTarget {
     message : JsValue,
     options? : StructuredSerializeOptions,
   ) -> Unit = _
+  onerror(self : Self) -> EventHandler = _
+  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  onmessage(self : Self) -> EventHandler = _
+  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  onmessageerror(self : Self) -> EventHandler = _
+  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
 }
 
 ///|
@@ -97,5 +103,62 @@ impl TWorker with post_message_2(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn worker_onerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onerror"
+
+///|
+impl TWorker with onerror(self : Self) -> EventHandler {
+  worker_onerror_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+impl TWorker with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+  worker_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+}
+
+///|
+extern "js" fn worker_onmessage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessage"
+
+///|
+impl TWorker with onmessage(self : Self) -> EventHandler {
+  worker_onmessage_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+impl TWorker with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+  worker_set_onmessage_ffi(TJsValue::to_js(self), TJsValue::to_js(onmessage))
+}
+
+///|
+extern "js" fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessageerror"
+
+///|
+impl TWorker with onmessageerror(self : Self) -> EventHandler {
+  worker_onmessageerror_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+impl TWorker with set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit {
+  worker_set_onmessageerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onmessageerror),
   )
 }

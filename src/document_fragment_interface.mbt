@@ -65,6 +65,10 @@ pub impl TDocumentFragmentReplaceChildrenNodes for String with to_js(
 ///|
 pub trait TDocumentFragment: TNode {
   get_element_by_id(self : Self, element_id : String) -> Element = _
+  children(self : Self) -> HTMLCollection = _
+  first_element_child(self : Self) -> Element = _
+  last_element_child(self : Self) -> Element = _
+  child_element_count(self : Self) -> UInt = _
   prepend(self : Self, nodes : &TDocumentFragmentPrependNodes) -> Unit = _
   append(self : Self, nodes : &TDocumentFragmentAppendNodes) -> Unit = _
   replace_children(self : Self, nodes : &TDocumentFragmentReplaceChildrenNodes) -> Unit = _
@@ -85,6 +89,42 @@ impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) 
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
   )
+}
+
+///|
+extern "js" fn document_fragment_children_ffi(obj : JsValue) -> HTMLCollection = "(obj) => obj.children"
+
+///|
+impl TDocumentFragment with children(self : Self) -> HTMLCollection {
+  document_fragment_children_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn document_fragment_first_element_child_ffi(
+  obj : JsValue,
+) -> Element = "(obj) => obj.firstElementChild"
+
+///|
+impl TDocumentFragment with first_element_child(self : Self) -> Element {
+  document_fragment_first_element_child_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn document_fragment_last_element_child_ffi(
+  obj : JsValue,
+) -> Element = "(obj) => obj.lastElementChild"
+
+///|
+impl TDocumentFragment with last_element_child(self : Self) -> Element {
+  document_fragment_last_element_child_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn document_fragment_child_element_count_ffi(obj : JsValue) -> UInt = "(obj) => obj.childElementCount"
+
+///|
+impl TDocumentFragment with child_element_count(self : Self) -> UInt {
+  document_fragment_child_element_count_ffi(TJsValue::to_js(self))
 }
 
 ///|

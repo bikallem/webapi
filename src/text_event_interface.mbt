@@ -19,6 +19,7 @@ pub impl TEvent for TextEvent
 
 ///|
 pub trait TTextEvent: TUIEvent {
+  data(self : Self) -> String = _
   init_text_event(
     self : Self,
     type_ : String,
@@ -27,6 +28,14 @@ pub trait TTextEvent: TUIEvent {
     view? : &TWindow,
     data? : String,
   ) -> Unit = _
+}
+
+///|
+extern "js" fn text_event_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
+
+///|
+impl TTextEvent with data(self : Self) -> String {
+  text_event_data_ffi(TJsValue::to_js(self))
 }
 
 ///|

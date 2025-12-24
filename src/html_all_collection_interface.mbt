@@ -23,18 +23,6 @@ pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::into(
 ) -> T = "%identity"
 
 ///|
-extern "js" fn html_all_collection_item_is_undefined_ffi(
-  obj : HTMLAllCollectionItem,
-) -> Bool = "(obj) => obj === undefined"
-
-///|
-pub fn HTMLAllCollectionItem::is_undefined(
-  self : HTMLAllCollectionItem,
-) -> Bool {
-  html_all_collection_item_is_undefined_ffi(self)
-}
-
-///|
 pub impl THTMLAllCollectionItem for HTMLAllCollectionItem with to_js(
   self : HTMLAllCollectionItem,
 ) -> JsValue = "%identity"
@@ -54,7 +42,16 @@ pub impl THTMLAllCollectionItem for Element with to_js(self : Element) -> JsValu
 
 ///|
 pub trait THTMLAllCollection: TJsValue {
+  length(self : Self) -> UInt = _
   item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem = _
+}
+
+///|
+extern "js" fn html_all_collection_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl THTMLAllCollection with length(self : Self) -> UInt {
+  html_all_collection_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

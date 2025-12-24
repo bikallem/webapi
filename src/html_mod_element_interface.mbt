@@ -32,4 +32,50 @@ pub fn HTMLModElement::new() -> HTMLModElement {
 }
 
 ///|
-pub trait THTMLModElement: THTMLElement {}
+pub trait THTMLModElement: THTMLElement {
+  cite(self : Self) -> String = _
+  set_cite(self : Self, cite : String) -> Unit = _
+  date_time(self : Self) -> String = _
+  set_date_time(self : Self, date_time : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_mod_element_cite_ffi(obj : JsValue) -> String = "(obj) => obj.cite"
+
+///|
+impl THTMLModElement with cite(self : Self) -> String {
+  html_mod_element_cite_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_mod_element_set_cite_ffi(
+  obj : JsValue,
+  cite : JsValue,
+) -> Unit = "(obj, cite) => { obj.cite = cite; }"
+
+///|
+impl THTMLModElement with set_cite(self : Self, cite : String) -> Unit {
+  html_mod_element_set_cite_ffi(TJsValue::to_js(self), TJsValue::to_js(cite))
+}
+
+///|
+extern "js" fn html_mod_element_date_time_ffi(obj : JsValue) -> String = "(obj) => obj.dateTime"
+
+///|
+impl THTMLModElement with date_time(self : Self) -> String {
+  html_mod_element_date_time_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_mod_element_set_date_time_ffi(
+  obj : JsValue,
+  date_time : JsValue,
+) -> Unit = "(obj, dateTime) => { obj.dateTime = dateTime; }"
+
+///|
+impl THTMLModElement with set_date_time(self : Self, date_time : String) -> Unit {
+  html_mod_element_set_date_time_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(date_time),
+  )
+}

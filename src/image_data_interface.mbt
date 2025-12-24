@@ -55,4 +55,54 @@ pub fn ImageData::new_2(
 }
 
 ///|
-pub trait TImageData: TJsValue {}
+pub trait TImageData: TJsValue {
+  width(self : Self) -> UInt = _
+  height(self : Self) -> UInt = _
+  data(self : Self) -> ImageDataArray = _
+  pixel_format(self : Self) -> ImageDataPixelFormat = _
+  color_space(self : Self) -> PredefinedColorSpace = _
+}
+
+///|
+extern "js" fn image_data_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
+
+///|
+impl TImageData with width(self : Self) -> UInt {
+  image_data_width_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn image_data_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
+
+///|
+impl TImageData with height(self : Self) -> UInt {
+  image_data_height_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn image_data_data_ffi(obj : JsValue) -> ImageDataArray = "(obj) => obj.data"
+
+///|
+impl TImageData with data(self : Self) -> ImageDataArray {
+  image_data_data_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn image_data_pixel_format_ffi(
+  obj : JsValue,
+) -> ImageDataPixelFormat = "(obj) => obj.pixelFormat"
+
+///|
+impl TImageData with pixel_format(self : Self) -> ImageDataPixelFormat {
+  image_data_pixel_format_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn image_data_color_space_ffi(
+  obj : JsValue,
+) -> PredefinedColorSpace = "(obj) => obj.colorSpace"
+
+///|
+impl TImageData with color_space(self : Self) -> PredefinedColorSpace {
+  image_data_color_space_ffi(TJsValue::to_js(self))
+}

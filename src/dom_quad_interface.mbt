@@ -36,8 +36,44 @@ pub fn DOMQuad::new(
 
 ///|
 pub trait TDOMQuad: TJsValue {
+  p1(self : Self) -> DOMPoint = _
+  p2(self : Self) -> DOMPoint = _
+  p3(self : Self) -> DOMPoint = _
+  p4(self : Self) -> DOMPoint = _
   get_bounds(self : Self) -> DOMRect = _
   to_json(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn dom_quad_p1_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.p1"
+
+///|
+impl TDOMQuad with p1(self : Self) -> DOMPoint {
+  dom_quad_p1_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_quad_p2_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.p2"
+
+///|
+impl TDOMQuad with p2(self : Self) -> DOMPoint {
+  dom_quad_p2_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_quad_p3_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.p3"
+
+///|
+impl TDOMQuad with p3(self : Self) -> DOMPoint {
+  dom_quad_p3_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_quad_p4_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.p4"
+
+///|
+impl TDOMQuad with p4(self : Self) -> DOMPoint {
+  dom_quad_p4_ffi(TJsValue::to_js(self))
 }
 
 ///|

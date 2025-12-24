@@ -38,8 +38,44 @@ pub fn DOMPointReadOnly::new(
 
 ///|
 pub trait TDOMPointReadOnly: TJsValue {
+  x(self : Self) -> Double = _
+  y(self : Self) -> Double = _
+  z(self : Self) -> Double = _
+  w(self : Self) -> Double = _
   matrix_transform(self : Self, matrix? : DOMMatrixInit) -> DOMPoint = _
   to_json(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn dom_point_read_only_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
+
+///|
+impl TDOMPointReadOnly with x(self : Self) -> Double {
+  dom_point_read_only_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_point_read_only_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
+
+///|
+impl TDOMPointReadOnly with y(self : Self) -> Double {
+  dom_point_read_only_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_point_read_only_z_ffi(obj : JsValue) -> Double = "(obj) => obj.z"
+
+///|
+impl TDOMPointReadOnly with z(self : Self) -> Double {
+  dom_point_read_only_z_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_point_read_only_w_ffi(obj : JsValue) -> Double = "(obj) => obj.w"
+
+///|
+impl TDOMPointReadOnly with w(self : Self) -> Double {
+  dom_point_read_only_w_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -35,4 +35,14 @@ pub fn DragEvent::new(
 }
 
 ///|
-pub trait TDragEvent: TMouseEvent {}
+pub trait TDragEvent: TMouseEvent {
+  data_transfer(self : Self) -> DataTransfer = _
+}
+
+///|
+extern "js" fn drag_event_data_transfer_ffi(obj : JsValue) -> DataTransfer = "(obj) => obj.dataTransfer"
+
+///|
+impl TDragEvent with data_transfer(self : Self) -> DataTransfer {
+  drag_event_data_transfer_ffi(TJsValue::to_js(self))
+}

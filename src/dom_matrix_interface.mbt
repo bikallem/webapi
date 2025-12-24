@@ -40,6 +40,50 @@ pub fn DOMMatrix::new(init? : &TDOMMatrixNewInit) -> DOMMatrix {
 
 ///|
 pub trait TDOMMatrix: TDOMMatrixReadOnly {
+  a(self : Self) -> Double = _
+  set_a(self : Self, a : Double) -> Unit = _
+  b(self : Self) -> Double = _
+  set_b(self : Self, b : Double) -> Unit = _
+  c(self : Self) -> Double = _
+  set_c(self : Self, c : Double) -> Unit = _
+  d(self : Self) -> Double = _
+  set_d(self : Self, d : Double) -> Unit = _
+  e(self : Self) -> Double = _
+  set_e(self : Self, e : Double) -> Unit = _
+  f(self : Self) -> Double = _
+  set_f(self : Self, f : Double) -> Unit = _
+  m11(self : Self) -> Double = _
+  set_m11(self : Self, m11 : Double) -> Unit = _
+  m12(self : Self) -> Double = _
+  set_m12(self : Self, m12 : Double) -> Unit = _
+  m13(self : Self) -> Double = _
+  set_m13(self : Self, m13 : Double) -> Unit = _
+  m14(self : Self) -> Double = _
+  set_m14(self : Self, m14 : Double) -> Unit = _
+  m21(self : Self) -> Double = _
+  set_m21(self : Self, m21 : Double) -> Unit = _
+  m22(self : Self) -> Double = _
+  set_m22(self : Self, m22 : Double) -> Unit = _
+  m23(self : Self) -> Double = _
+  set_m23(self : Self, m23 : Double) -> Unit = _
+  m24(self : Self) -> Double = _
+  set_m24(self : Self, m24 : Double) -> Unit = _
+  m31(self : Self) -> Double = _
+  set_m31(self : Self, m31 : Double) -> Unit = _
+  m32(self : Self) -> Double = _
+  set_m32(self : Self, m32 : Double) -> Unit = _
+  m33(self : Self) -> Double = _
+  set_m33(self : Self, m33 : Double) -> Unit = _
+  m34(self : Self) -> Double = _
+  set_m34(self : Self, m34 : Double) -> Unit = _
+  m41(self : Self) -> Double = _
+  set_m41(self : Self, m41 : Double) -> Unit = _
+  m42(self : Self) -> Double = _
+  set_m42(self : Self, m42 : Double) -> Unit = _
+  m43(self : Self) -> Double = _
+  set_m43(self : Self, m43 : Double) -> Unit = _
+  m44(self : Self) -> Double = _
+  set_m44(self : Self, m44 : Double) -> Unit = _
   multiply_self(self : Self, other? : DOMMatrixInit) -> DOMMatrix = _
   pre_multiply_self(self : Self, other? : DOMMatrixInit) -> DOMMatrix = _
   translate_self(self : Self, tx? : Double, ty? : Double, tz? : Double) -> DOMMatrix = _
@@ -72,6 +116,358 @@ pub trait TDOMMatrix: TDOMMatrixReadOnly {
   skew_y_self(self : Self, sy? : Double) -> DOMMatrix = _
   invert_self(self : Self) -> DOMMatrix = _
   set_matrix_value(self : Self, transform_list : String) -> DOMMatrix = _
+}
+
+///|
+extern "js" fn dom_matrix_a_ffi(obj : JsValue) -> Double = "(obj) => obj.a"
+
+///|
+impl TDOMMatrix with a(self : Self) -> Double {
+  dom_matrix_a_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_a_ffi(obj : JsValue, a : JsValue) -> Unit = "(obj, a) => { obj.a = a; }"
+
+///|
+impl TDOMMatrix with set_a(self : Self, a : Double) -> Unit {
+  dom_matrix_set_a_ffi(TJsValue::to_js(self), TJsValue::to_js(a))
+}
+
+///|
+extern "js" fn dom_matrix_b_ffi(obj : JsValue) -> Double = "(obj) => obj.b"
+
+///|
+impl TDOMMatrix with b(self : Self) -> Double {
+  dom_matrix_b_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_b_ffi(obj : JsValue, b : JsValue) -> Unit = "(obj, b) => { obj.b = b; }"
+
+///|
+impl TDOMMatrix with set_b(self : Self, b : Double) -> Unit {
+  dom_matrix_set_b_ffi(TJsValue::to_js(self), TJsValue::to_js(b))
+}
+
+///|
+extern "js" fn dom_matrix_c_ffi(obj : JsValue) -> Double = "(obj) => obj.c"
+
+///|
+impl TDOMMatrix with c(self : Self) -> Double {
+  dom_matrix_c_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_c_ffi(obj : JsValue, c : JsValue) -> Unit = "(obj, c) => { obj.c = c; }"
+
+///|
+impl TDOMMatrix with set_c(self : Self, c : Double) -> Unit {
+  dom_matrix_set_c_ffi(TJsValue::to_js(self), TJsValue::to_js(c))
+}
+
+///|
+extern "js" fn dom_matrix_d_ffi(obj : JsValue) -> Double = "(obj) => obj.d"
+
+///|
+impl TDOMMatrix with d(self : Self) -> Double {
+  dom_matrix_d_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_d_ffi(obj : JsValue, d : JsValue) -> Unit = "(obj, d) => { obj.d = d; }"
+
+///|
+impl TDOMMatrix with set_d(self : Self, d : Double) -> Unit {
+  dom_matrix_set_d_ffi(TJsValue::to_js(self), TJsValue::to_js(d))
+}
+
+///|
+extern "js" fn dom_matrix_e_ffi(obj : JsValue) -> Double = "(obj) => obj.e"
+
+///|
+impl TDOMMatrix with e(self : Self) -> Double {
+  dom_matrix_e_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_e_ffi(obj : JsValue, e : JsValue) -> Unit = "(obj, e) => { obj.e = e; }"
+
+///|
+impl TDOMMatrix with set_e(self : Self, e : Double) -> Unit {
+  dom_matrix_set_e_ffi(TJsValue::to_js(self), TJsValue::to_js(e))
+}
+
+///|
+extern "js" fn dom_matrix_f_ffi(obj : JsValue) -> Double = "(obj) => obj.f"
+
+///|
+impl TDOMMatrix with f(self : Self) -> Double {
+  dom_matrix_f_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_f_ffi(obj : JsValue, f : JsValue) -> Unit = "(obj, f) => { obj.f = f; }"
+
+///|
+impl TDOMMatrix with set_f(self : Self, f : Double) -> Unit {
+  dom_matrix_set_f_ffi(TJsValue::to_js(self), TJsValue::to_js(f))
+}
+
+///|
+extern "js" fn dom_matrix_m11_ffi(obj : JsValue) -> Double = "(obj) => obj.m11"
+
+///|
+impl TDOMMatrix with m11(self : Self) -> Double {
+  dom_matrix_m11_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m11_ffi(obj : JsValue, m11 : JsValue) -> Unit = "(obj, m11) => { obj.m11 = m11; }"
+
+///|
+impl TDOMMatrix with set_m11(self : Self, m11 : Double) -> Unit {
+  dom_matrix_set_m11_ffi(TJsValue::to_js(self), TJsValue::to_js(m11))
+}
+
+///|
+extern "js" fn dom_matrix_m12_ffi(obj : JsValue) -> Double = "(obj) => obj.m12"
+
+///|
+impl TDOMMatrix with m12(self : Self) -> Double {
+  dom_matrix_m12_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m12_ffi(obj : JsValue, m12 : JsValue) -> Unit = "(obj, m12) => { obj.m12 = m12; }"
+
+///|
+impl TDOMMatrix with set_m12(self : Self, m12 : Double) -> Unit {
+  dom_matrix_set_m12_ffi(TJsValue::to_js(self), TJsValue::to_js(m12))
+}
+
+///|
+extern "js" fn dom_matrix_m13_ffi(obj : JsValue) -> Double = "(obj) => obj.m13"
+
+///|
+impl TDOMMatrix with m13(self : Self) -> Double {
+  dom_matrix_m13_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m13_ffi(obj : JsValue, m13 : JsValue) -> Unit = "(obj, m13) => { obj.m13 = m13; }"
+
+///|
+impl TDOMMatrix with set_m13(self : Self, m13 : Double) -> Unit {
+  dom_matrix_set_m13_ffi(TJsValue::to_js(self), TJsValue::to_js(m13))
+}
+
+///|
+extern "js" fn dom_matrix_m14_ffi(obj : JsValue) -> Double = "(obj) => obj.m14"
+
+///|
+impl TDOMMatrix with m14(self : Self) -> Double {
+  dom_matrix_m14_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m14_ffi(obj : JsValue, m14 : JsValue) -> Unit = "(obj, m14) => { obj.m14 = m14; }"
+
+///|
+impl TDOMMatrix with set_m14(self : Self, m14 : Double) -> Unit {
+  dom_matrix_set_m14_ffi(TJsValue::to_js(self), TJsValue::to_js(m14))
+}
+
+///|
+extern "js" fn dom_matrix_m21_ffi(obj : JsValue) -> Double = "(obj) => obj.m21"
+
+///|
+impl TDOMMatrix with m21(self : Self) -> Double {
+  dom_matrix_m21_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m21_ffi(obj : JsValue, m21 : JsValue) -> Unit = "(obj, m21) => { obj.m21 = m21; }"
+
+///|
+impl TDOMMatrix with set_m21(self : Self, m21 : Double) -> Unit {
+  dom_matrix_set_m21_ffi(TJsValue::to_js(self), TJsValue::to_js(m21))
+}
+
+///|
+extern "js" fn dom_matrix_m22_ffi(obj : JsValue) -> Double = "(obj) => obj.m22"
+
+///|
+impl TDOMMatrix with m22(self : Self) -> Double {
+  dom_matrix_m22_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m22_ffi(obj : JsValue, m22 : JsValue) -> Unit = "(obj, m22) => { obj.m22 = m22; }"
+
+///|
+impl TDOMMatrix with set_m22(self : Self, m22 : Double) -> Unit {
+  dom_matrix_set_m22_ffi(TJsValue::to_js(self), TJsValue::to_js(m22))
+}
+
+///|
+extern "js" fn dom_matrix_m23_ffi(obj : JsValue) -> Double = "(obj) => obj.m23"
+
+///|
+impl TDOMMatrix with m23(self : Self) -> Double {
+  dom_matrix_m23_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m23_ffi(obj : JsValue, m23 : JsValue) -> Unit = "(obj, m23) => { obj.m23 = m23; }"
+
+///|
+impl TDOMMatrix with set_m23(self : Self, m23 : Double) -> Unit {
+  dom_matrix_set_m23_ffi(TJsValue::to_js(self), TJsValue::to_js(m23))
+}
+
+///|
+extern "js" fn dom_matrix_m24_ffi(obj : JsValue) -> Double = "(obj) => obj.m24"
+
+///|
+impl TDOMMatrix with m24(self : Self) -> Double {
+  dom_matrix_m24_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m24_ffi(obj : JsValue, m24 : JsValue) -> Unit = "(obj, m24) => { obj.m24 = m24; }"
+
+///|
+impl TDOMMatrix with set_m24(self : Self, m24 : Double) -> Unit {
+  dom_matrix_set_m24_ffi(TJsValue::to_js(self), TJsValue::to_js(m24))
+}
+
+///|
+extern "js" fn dom_matrix_m31_ffi(obj : JsValue) -> Double = "(obj) => obj.m31"
+
+///|
+impl TDOMMatrix with m31(self : Self) -> Double {
+  dom_matrix_m31_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m31_ffi(obj : JsValue, m31 : JsValue) -> Unit = "(obj, m31) => { obj.m31 = m31; }"
+
+///|
+impl TDOMMatrix with set_m31(self : Self, m31 : Double) -> Unit {
+  dom_matrix_set_m31_ffi(TJsValue::to_js(self), TJsValue::to_js(m31))
+}
+
+///|
+extern "js" fn dom_matrix_m32_ffi(obj : JsValue) -> Double = "(obj) => obj.m32"
+
+///|
+impl TDOMMatrix with m32(self : Self) -> Double {
+  dom_matrix_m32_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m32_ffi(obj : JsValue, m32 : JsValue) -> Unit = "(obj, m32) => { obj.m32 = m32; }"
+
+///|
+impl TDOMMatrix with set_m32(self : Self, m32 : Double) -> Unit {
+  dom_matrix_set_m32_ffi(TJsValue::to_js(self), TJsValue::to_js(m32))
+}
+
+///|
+extern "js" fn dom_matrix_m33_ffi(obj : JsValue) -> Double = "(obj) => obj.m33"
+
+///|
+impl TDOMMatrix with m33(self : Self) -> Double {
+  dom_matrix_m33_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m33_ffi(obj : JsValue, m33 : JsValue) -> Unit = "(obj, m33) => { obj.m33 = m33; }"
+
+///|
+impl TDOMMatrix with set_m33(self : Self, m33 : Double) -> Unit {
+  dom_matrix_set_m33_ffi(TJsValue::to_js(self), TJsValue::to_js(m33))
+}
+
+///|
+extern "js" fn dom_matrix_m34_ffi(obj : JsValue) -> Double = "(obj) => obj.m34"
+
+///|
+impl TDOMMatrix with m34(self : Self) -> Double {
+  dom_matrix_m34_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m34_ffi(obj : JsValue, m34 : JsValue) -> Unit = "(obj, m34) => { obj.m34 = m34; }"
+
+///|
+impl TDOMMatrix with set_m34(self : Self, m34 : Double) -> Unit {
+  dom_matrix_set_m34_ffi(TJsValue::to_js(self), TJsValue::to_js(m34))
+}
+
+///|
+extern "js" fn dom_matrix_m41_ffi(obj : JsValue) -> Double = "(obj) => obj.m41"
+
+///|
+impl TDOMMatrix with m41(self : Self) -> Double {
+  dom_matrix_m41_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m41_ffi(obj : JsValue, m41 : JsValue) -> Unit = "(obj, m41) => { obj.m41 = m41; }"
+
+///|
+impl TDOMMatrix with set_m41(self : Self, m41 : Double) -> Unit {
+  dom_matrix_set_m41_ffi(TJsValue::to_js(self), TJsValue::to_js(m41))
+}
+
+///|
+extern "js" fn dom_matrix_m42_ffi(obj : JsValue) -> Double = "(obj) => obj.m42"
+
+///|
+impl TDOMMatrix with m42(self : Self) -> Double {
+  dom_matrix_m42_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m42_ffi(obj : JsValue, m42 : JsValue) -> Unit = "(obj, m42) => { obj.m42 = m42; }"
+
+///|
+impl TDOMMatrix with set_m42(self : Self, m42 : Double) -> Unit {
+  dom_matrix_set_m42_ffi(TJsValue::to_js(self), TJsValue::to_js(m42))
+}
+
+///|
+extern "js" fn dom_matrix_m43_ffi(obj : JsValue) -> Double = "(obj) => obj.m43"
+
+///|
+impl TDOMMatrix with m43(self : Self) -> Double {
+  dom_matrix_m43_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m43_ffi(obj : JsValue, m43 : JsValue) -> Unit = "(obj, m43) => { obj.m43 = m43; }"
+
+///|
+impl TDOMMatrix with set_m43(self : Self, m43 : Double) -> Unit {
+  dom_matrix_set_m43_ffi(TJsValue::to_js(self), TJsValue::to_js(m43))
+}
+
+///|
+extern "js" fn dom_matrix_m44_ffi(obj : JsValue) -> Double = "(obj) => obj.m44"
+
+///|
+impl TDOMMatrix with m44(self : Self) -> Double {
+  dom_matrix_m44_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_set_m44_ffi(obj : JsValue, m44 : JsValue) -> Unit = "(obj, m44) => { obj.m44 = m44; }"
+
+///|
+impl TDOMMatrix with set_m44(self : Self, m44 : Double) -> Unit {
+  dom_matrix_set_m44_ffi(TJsValue::to_js(self), TJsValue::to_js(m44))
 }
 
 ///|

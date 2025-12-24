@@ -32,4 +32,16 @@ pub fn PageRevealEvent::new(
 }
 
 ///|
-pub trait TPageRevealEvent: TEvent {}
+pub trait TPageRevealEvent: TEvent {
+  view_transition(self : Self) -> ViewTransition = _
+}
+
+///|
+extern "js" fn page_reveal_event_view_transition_ffi(
+  obj : JsValue,
+) -> ViewTransition = "(obj) => obj.viewTransition"
+
+///|
+impl TPageRevealEvent with view_transition(self : Self) -> ViewTransition {
+  page_reveal_event_view_transition_ffi(TJsValue::to_js(self))
+}

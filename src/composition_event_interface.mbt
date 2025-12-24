@@ -38,6 +38,7 @@ pub fn CompositionEvent::new(
 
 ///|
 pub trait TCompositionEvent: TUIEvent {
+  data(self : Self) -> String = _
   init_composition_event(
     self : Self,
     type_arg : String,
@@ -46,6 +47,14 @@ pub trait TCompositionEvent: TUIEvent {
     view_arg? : WindowProxy,
     data_arg? : String,
   ) -> Unit = _
+}
+
+///|
+extern "js" fn composition_event_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
+
+///|
+impl TCompositionEvent with data(self : Self) -> String {
+  composition_event_data_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -27,9 +27,22 @@ pub impl TEventTarget for SVGGraphicsElement
 
 ///|
 pub trait TSVGGraphicsElement: TSVGElement {
+  transform(self : Self) -> SVGAnimatedTransformList = _
   get_b_box(self : Self, options? : SVGBoundingBoxOptions) -> DOMRect = _
   get_ctm(self : Self) -> DOMMatrix = _
   get_screen_ctm(self : Self) -> DOMMatrix = _
+  required_extensions(self : Self) -> SVGStringList = _
+  system_language(self : Self) -> SVGStringList = _
+}
+
+///|
+extern "js" fn svg_graphics_element_transform_ffi(
+  obj : JsValue,
+) -> SVGAnimatedTransformList = "(obj) => obj.transform"
+
+///|
+impl TSVGGraphicsElement with transform(self : Self) -> SVGAnimatedTransformList {
+  svg_graphics_element_transform_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -65,4 +78,24 @@ extern "js" fn svg_graphics_element_get_screen_ctm_ffi(
 ///|
 impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix {
   svg_graphics_element_get_screen_ctm_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_graphics_element_required_extensions_ffi(
+  obj : JsValue,
+) -> SVGStringList = "(obj) => obj.requiredExtensions"
+
+///|
+impl TSVGGraphicsElement with required_extensions(self : Self) -> SVGStringList {
+  svg_graphics_element_required_extensions_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_graphics_element_system_language_ffi(
+  obj : JsValue,
+) -> SVGStringList = "(obj) => obj.systemLanguage"
+
+///|
+impl TSVGGraphicsElement with system_language(self : Self) -> SVGStringList {
+  svg_graphics_element_system_language_ffi(TJsValue::to_js(self))
 }

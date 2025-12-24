@@ -29,6 +29,10 @@ pub trait TCloseWatcher: TEventTarget {
   request_close(self : Self) -> Unit = _
   close(self : Self) -> Unit = _
   destroy(self : Self) -> Unit = _
+  oncancel(self : Self) -> EventHandler = _
+  set_oncancel(self : Self, oncancel : EventHandler) -> Unit = _
+  onclose(self : Self) -> EventHandler = _
+  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
 }
 
 ///|
@@ -53,4 +57,45 @@ extern "js" fn close_watcher_destroy_ffi(obj : JsValue) -> Unit = "(obj) => obj.
 ///|
 impl TCloseWatcher with destroy(self : Self) -> Unit {
   close_watcher_destroy_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn close_watcher_oncancel_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncancel"
+
+///|
+impl TCloseWatcher with oncancel(self : Self) -> EventHandler {
+  close_watcher_oncancel_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn close_watcher_set_oncancel_ffi(
+  obj : JsValue,
+  oncancel : JsValue,
+) -> Unit = "(obj, oncancel) => { obj.oncancel = oncancel; }"
+
+///|
+impl TCloseWatcher with set_oncancel(self : Self, oncancel : EventHandler) -> Unit {
+  close_watcher_set_oncancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(oncancel),
+  )
+}
+
+///|
+extern "js" fn close_watcher_onclose_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onclose"
+
+///|
+impl TCloseWatcher with onclose(self : Self) -> EventHandler {
+  close_watcher_onclose_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn close_watcher_set_onclose_ffi(
+  obj : JsValue,
+  onclose : JsValue,
+) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
+
+///|
+impl TCloseWatcher with set_onclose(self : Self, onclose : EventHandler) -> Unit {
+  close_watcher_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
 }

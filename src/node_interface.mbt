@@ -70,8 +70,24 @@ pub const NODE_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : UInt = 0x20
 
 ///|
 pub trait TNode: TEventTarget {
+  node_type(self : Self) -> UInt = _
+  node_name(self : Self) -> String = _
+  base_uri(self : Self) -> String = _
+  is_connected(self : Self) -> Bool = _
+  owner_document(self : Self) -> Document = _
   get_root_node(self : Self, options? : GetRootNodeOptions) -> Node = _
+  parent_node(self : Self) -> Node = _
+  parent_element(self : Self) -> Element = _
   has_child_nodes(self : Self) -> Bool = _
+  child_nodes(self : Self) -> NodeList = _
+  first_child(self : Self) -> Node = _
+  last_child(self : Self) -> Node = _
+  previous_sibling(self : Self) -> Node = _
+  next_sibling(self : Self) -> Node = _
+  node_value(self : Self) -> String = _
+  set_node_value(self : Self, node_value : String) -> Unit = _
+  text_content(self : Self) -> String = _
+  set_text_content(self : Self, text_content : String) -> Unit = _
   normalize(self : Self) -> Unit = _
   clone_node(self : Self, subtree? : Bool) -> Node = _
   is_equal_node(self : Self, other_node : &TNode) -> Bool = _
@@ -88,6 +104,46 @@ pub trait TNode: TEventTarget {
 }
 
 ///|
+extern "js" fn node_node_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.nodeType"
+
+///|
+impl TNode with node_type(self : Self) -> UInt {
+  node_node_type_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_node_name_ffi(obj : JsValue) -> String = "(obj) => obj.nodeName"
+
+///|
+impl TNode with node_name(self : Self) -> String {
+  node_node_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_base_uri_ffi(obj : JsValue) -> String = "(obj) => obj.baseURI"
+
+///|
+impl TNode with base_uri(self : Self) -> String {
+  node_base_uri_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_is_connected_ffi(obj : JsValue) -> Bool = "(obj) => obj.isConnected"
+
+///|
+impl TNode with is_connected(self : Self) -> Bool {
+  node_is_connected_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_owner_document_ffi(obj : JsValue) -> Document = "(obj) => obj.ownerDocument"
+
+///|
+impl TNode with owner_document(self : Self) -> Document {
+  node_owner_document_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> Node = "(obj, options) => obj.getRootNode(obj, options)"
 
 ///|
@@ -99,11 +155,108 @@ impl TNode with get_root_node(
 }
 
 ///|
+extern "js" fn node_parent_node_ffi(obj : JsValue) -> Node = "(obj) => obj.parentNode"
+
+///|
+impl TNode with parent_node(self : Self) -> Node {
+  node_parent_node_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_parent_element_ffi(obj : JsValue) -> Element = "(obj) => obj.parentElement"
+
+///|
+impl TNode with parent_element(self : Self) -> Element {
+  node_parent_element_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn node_has_child_nodes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasChildNodes(obj)"
 
 ///|
 impl TNode with has_child_nodes(self : Self) -> Bool {
   node_has_child_nodes_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_child_nodes_ffi(obj : JsValue) -> NodeList = "(obj) => obj.childNodes"
+
+///|
+impl TNode with child_nodes(self : Self) -> NodeList {
+  node_child_nodes_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_first_child_ffi(obj : JsValue) -> Node = "(obj) => obj.firstChild"
+
+///|
+impl TNode with first_child(self : Self) -> Node {
+  node_first_child_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_last_child_ffi(obj : JsValue) -> Node = "(obj) => obj.lastChild"
+
+///|
+impl TNode with last_child(self : Self) -> Node {
+  node_last_child_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_previous_sibling_ffi(obj : JsValue) -> Node = "(obj) => obj.previousSibling"
+
+///|
+impl TNode with previous_sibling(self : Self) -> Node {
+  node_previous_sibling_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_next_sibling_ffi(obj : JsValue) -> Node = "(obj) => obj.nextSibling"
+
+///|
+impl TNode with next_sibling(self : Self) -> Node {
+  node_next_sibling_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_node_value_ffi(obj : JsValue) -> String = "(obj) => obj.nodeValue"
+
+///|
+impl TNode with node_value(self : Self) -> String {
+  node_node_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_set_node_value_ffi(
+  obj : JsValue,
+  node_value : JsValue,
+) -> Unit = "(obj, nodeValue) => { obj.nodeValue = nodeValue; }"
+
+///|
+impl TNode with set_node_value(self : Self, node_value : String) -> Unit {
+  node_set_node_value_ffi(TJsValue::to_js(self), TJsValue::to_js(node_value))
+}
+
+///|
+extern "js" fn node_text_content_ffi(obj : JsValue) -> String = "(obj) => obj.textContent"
+
+///|
+impl TNode with text_content(self : Self) -> String {
+  node_text_content_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn node_set_text_content_ffi(
+  obj : JsValue,
+  text_content : JsValue,
+) -> Unit = "(obj, textContent) => { obj.textContent = textContent; }"
+
+///|
+impl TNode with set_text_content(self : Self, text_content : String) -> Unit {
+  node_set_text_content_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(text_content),
+  )
 }
 
 ///|

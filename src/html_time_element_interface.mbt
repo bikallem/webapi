@@ -32,4 +32,29 @@ pub fn HTMLTimeElement::new() -> HTMLTimeElement {
 }
 
 ///|
-pub trait THTMLTimeElement: THTMLElement {}
+pub trait THTMLTimeElement: THTMLElement {
+  date_time(self : Self) -> String = _
+  set_date_time(self : Self, date_time : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_time_element_date_time_ffi(obj : JsValue) -> String = "(obj) => obj.dateTime"
+
+///|
+impl THTMLTimeElement with date_time(self : Self) -> String {
+  html_time_element_date_time_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_time_element_set_date_time_ffi(
+  obj : JsValue,
+  date_time : JsValue,
+) -> Unit = "(obj, dateTime) => { obj.dateTime = dateTime; }"
+
+///|
+impl THTMLTimeElement with set_date_time(self : Self, date_time : String) -> Unit {
+  html_time_element_set_date_time_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(date_time),
+  )
+}

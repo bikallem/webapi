@@ -41,6 +41,8 @@ pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_SPACINGANDGLYPHS : UInt = 2
 
 ///|
 pub trait TSVGTextContentElement: TSVGGraphicsElement {
+  text_length(self : Self) -> SVGAnimatedLength = _
+  length_adjust(self : Self) -> SVGAnimatedEnumeration = _
   get_number_of_chars(self : Self) -> Int = _
   get_computed_text_length(self : Self) -> Float = _
   get_sub_string_length(self : Self, charnum : UInt, nchars : UInt) -> Float = _
@@ -50,6 +52,26 @@ pub trait TSVGTextContentElement: TSVGGraphicsElement {
   get_rotation_of_char(self : Self, charnum : UInt) -> Float = _
   get_char_num_at_position(self : Self, point? : DOMPointInit) -> Int = _
   select_sub_string(self : Self, charnum : UInt, nchars : UInt) -> Unit = _
+}
+
+///|
+extern "js" fn svg_text_content_element_text_length_ffi(
+  obj : JsValue,
+) -> SVGAnimatedLength = "(obj) => obj.textLength"
+
+///|
+impl TSVGTextContentElement with text_length(self : Self) -> SVGAnimatedLength {
+  svg_text_content_element_text_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_text_content_element_length_adjust_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration = "(obj) => obj.lengthAdjust"
+
+///|
+impl TSVGTextContentElement with length_adjust(self : Self) -> SVGAnimatedEnumeration {
+  svg_text_content_element_length_adjust_ffi(TJsValue::to_js(self))
 }
 
 ///|

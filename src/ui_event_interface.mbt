@@ -30,6 +30,8 @@ pub fn UIEvent::new(
 
 ///|
 pub trait TUIEvent: TEvent {
+  view(self : Self) -> Window = _
+  detail(self : Self) -> Int = _
   init_ui_event(
     self : Self,
     type_arg : String,
@@ -38,6 +40,23 @@ pub trait TUIEvent: TEvent {
     view_arg? : &TWindow,
     detail_arg? : Int,
   ) -> Unit = _
+  which(self : Self) -> UInt = _
+}
+
+///|
+extern "js" fn ui_event_view_ffi(obj : JsValue) -> Window = "(obj) => obj.view"
+
+///|
+impl TUIEvent with view(self : Self) -> Window {
+  ui_event_view_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn ui_event_detail_ffi(obj : JsValue) -> Int = "(obj) => obj.detail"
+
+///|
+impl TUIEvent with detail(self : Self) -> Int {
+  ui_event_detail_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -67,4 +86,12 @@ impl TUIEvent with init_ui_event(
     TJsValue::to_js(view_arg),
     TJsValue::to_js(detail_arg),
   )
+}
+
+///|
+extern "js" fn ui_event_which_ffi(obj : JsValue) -> UInt = "(obj) => obj.which"
+
+///|
+impl TUIEvent with which(self : Self) -> UInt {
+  ui_event_which_ffi(TJsValue::to_js(self))
 }

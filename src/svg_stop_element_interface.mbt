@@ -24,4 +24,14 @@ pub impl TNode for SVGStopElement
 pub impl TEventTarget for SVGStopElement
 
 ///|
-pub trait TSVGStopElement: TSVGElement {}
+pub trait TSVGStopElement: TSVGElement {
+  offset(self : Self) -> SVGAnimatedNumber = _
+}
+
+///|
+extern "js" fn svg_stop_element_offset_ffi(obj : JsValue) -> SVGAnimatedNumber = "(obj) => obj.offset"
+
+///|
+impl TSVGStopElement with offset(self : Self) -> SVGAnimatedNumber {
+  svg_stop_element_offset_ffi(TJsValue::to_js(self))
+}

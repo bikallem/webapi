@@ -13,11 +13,20 @@ pub impl TNamedNodeMap for NamedNodeMap
 
 ///|
 pub trait TNamedNodeMap: TJsValue {
+  length(self : Self) -> UInt = _
   get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
   set_named_item(self : Self, attr : &TAttr) -> Attr = _
   set_named_item_ns(self : Self, attr : &TAttr) -> Attr = _
   remove_named_item(self : Self, qualified_name : String) -> Attr = _
   remove_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
+}
+
+///|
+extern "js" fn named_node_map_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TNamedNodeMap with length(self : Self) -> UInt {
+  named_node_map_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -16,6 +16,74 @@ pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
 ///|
+#external
+pub type OffscreenCanvasRenderingContext2DStrokeStyle
+
+///|
+pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle] OffscreenCanvasRenderingContext2DStrokeStyle::into(
+  self : OffscreenCanvasRenderingContext2DStrokeStyle,
+) -> T = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRenderingContext2DStrokeStyle with to_js(
+  self : OffscreenCanvasRenderingContext2DStrokeStyle,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TOffscreenCanvasRenderingContext2DStrokeStyle {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient with to_js(
+  self : CanvasGradient,
+) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
+  self : CanvasPattern,
+) -> JsValue = "%identity"
+
+///|
+#external
+pub type OffscreenCanvasRenderingContext2DFillStyle
+
+///|
+pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRenderingContext2DFillStyle::into(
+  self : OffscreenCanvasRenderingContext2DFillStyle,
+) -> T = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for OffscreenCanvasRenderingContext2DFillStyle with to_js(
+  self : OffscreenCanvasRenderingContext2DFillStyle,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TOffscreenCanvasRenderingContext2DFillStyle {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasGradient with to_js(
+  self : CanvasGradient,
+) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasPattern with to_js(
+  self : CanvasPattern,
+) -> JsValue = "%identity"
+
+///|
 pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii {
   to_js(self : Self) -> JsValue
 }
@@ -52,6 +120,7 @@ pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Array[
 
 ///|
 pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
+  canvas(self : Self) -> OffscreenCanvas = _
   get_context_attributes(self : Self) -> CanvasRenderingContext2DSettings = _
   save(self : Self) -> Unit = _
   restore(self : Self) -> Unit = _
@@ -81,6 +150,30 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
   ) -> Unit = _
   set_transform_2(self : Self, transform? : DOMMatrix2DInit) -> Unit = _
   reset_transform(self : Self) -> Unit = _
+  global_alpha(self : Self) -> Double = _
+  set_global_alpha(self : Self, global_alpha : Double) -> Unit = _
+  global_composite_operation(self : Self) -> String = _
+  set_global_composite_operation(
+    self : Self,
+    global_composite_operation : String,
+  ) -> Unit = _
+  image_smoothing_enabled(self : Self) -> Bool = _
+  set_image_smoothing_enabled(self : Self, image_smoothing_enabled : Bool) -> Unit = _
+  image_smoothing_quality(self : Self) -> ImageSmoothingQuality = _
+  set_image_smoothing_quality(
+    self : Self,
+    image_smoothing_quality : ImageSmoothingQuality,
+  ) -> Unit = _
+  stroke_style(self : Self) -> OffscreenCanvasRenderingContext2DStrokeStyle = _
+  set_stroke_style(
+    self : Self,
+    stroke_style : OffscreenCanvasRenderingContext2DStrokeStyle,
+  ) -> Unit = _
+  fill_style(self : Self) -> OffscreenCanvasRenderingContext2DFillStyle = _
+  set_fill_style(
+    self : Self,
+    fill_style : OffscreenCanvasRenderingContext2DFillStyle,
+  ) -> Unit = _
   create_linear_gradient(
     self : Self,
     x0 : Double,
@@ -104,6 +197,16 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     y : Double,
   ) -> CanvasGradient = _
   create_pattern(self : Self, image : CanvasImageSource, repetition : String) -> CanvasPattern = _
+  shadow_offset_x(self : Self) -> Double = _
+  set_shadow_offset_x(self : Self, shadow_offset_x : Double) -> Unit = _
+  shadow_offset_y(self : Self) -> Double = _
+  set_shadow_offset_y(self : Self, shadow_offset_y : Double) -> Unit = _
+  shadow_blur(self : Self) -> Double = _
+  set_shadow_blur(self : Self, shadow_blur : Double) -> Unit = _
+  shadow_color(self : Self) -> String = _
+  set_shadow_color(self : Self, shadow_color : String) -> Unit = _
+  filter(self : Self) -> String = _
+  set_filter(self : Self, filter : String) -> Unit = _
   clear_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   fill_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   stroke_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
@@ -191,8 +294,40 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     dirty_width : Int,
     dirty_height : Int,
   ) -> Unit = _
+  line_width(self : Self) -> Double = _
+  set_line_width(self : Self, line_width : Double) -> Unit = _
+  line_cap(self : Self) -> CanvasLineCap = _
+  set_line_cap(self : Self, line_cap : CanvasLineCap) -> Unit = _
+  line_join(self : Self) -> CanvasLineJoin = _
+  set_line_join(self : Self, line_join : CanvasLineJoin) -> Unit = _
+  miter_limit(self : Self) -> Double = _
+  set_miter_limit(self : Self, miter_limit : Double) -> Unit = _
   set_line_dash(self : Self, segments : Array[Double]) -> Unit = _
   get_line_dash(self : Self) -> Array[Double] = _
+  line_dash_offset(self : Self) -> Double = _
+  set_line_dash_offset(self : Self, line_dash_offset : Double) -> Unit = _
+  lang(self : Self) -> String = _
+  set_lang(self : Self, lang : String) -> Unit = _
+  font(self : Self) -> String = _
+  set_font(self : Self, font : String) -> Unit = _
+  text_align(self : Self) -> CanvasTextAlign = _
+  set_text_align(self : Self, text_align : CanvasTextAlign) -> Unit = _
+  text_baseline(self : Self) -> CanvasTextBaseline = _
+  set_text_baseline(self : Self, text_baseline : CanvasTextBaseline) -> Unit = _
+  direction(self : Self) -> CanvasDirection = _
+  set_direction(self : Self, direction : CanvasDirection) -> Unit = _
+  letter_spacing(self : Self) -> String = _
+  set_letter_spacing(self : Self, letter_spacing : String) -> Unit = _
+  font_kerning(self : Self) -> CanvasFontKerning = _
+  set_font_kerning(self : Self, font_kerning : CanvasFontKerning) -> Unit = _
+  font_stretch(self : Self) -> CanvasFontStretch = _
+  set_font_stretch(self : Self, font_stretch : CanvasFontStretch) -> Unit = _
+  font_variant_caps(self : Self) -> CanvasFontVariantCaps = _
+  set_font_variant_caps(self : Self, font_variant_caps : CanvasFontVariantCaps) -> Unit = _
+  text_rendering(self : Self) -> CanvasTextRendering = _
+  set_text_rendering(self : Self, text_rendering : CanvasTextRendering) -> Unit = _
+  word_spacing(self : Self) -> String = _
+  set_word_spacing(self : Self, word_spacing : String) -> Unit = _
   close_path(self : Self) -> Unit = _
   move_to(self : Self, x : Double, y : Double) -> Unit = _
   line_to(self : Self, x : Double, y : Double) -> Unit = _
@@ -249,6 +384,16 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     end_angle : Double,
     counterclockwise? : Bool,
   ) -> Unit = _
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_canvas_ffi(
+  obj : JsValue,
+) -> OffscreenCanvas = "(obj) => obj.canvas"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with canvas(self : Self) -> OffscreenCanvas {
+  offscreen_canvas_rendering_context2d_canvas_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -463,6 +608,180 @@ impl TOffscreenCanvasRenderingContext2D with reset_transform(self : Self) -> Uni
 }
 
 ///|
+extern "js" fn offscreen_canvas_rendering_context2d_global_alpha_ffi(
+  obj : JsValue,
+) -> Double = "(obj) => obj.globalAlpha"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with global_alpha(self : Self) -> Double {
+  offscreen_canvas_rendering_context2d_global_alpha_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_global_alpha_ffi(
+  obj : JsValue,
+  global_alpha : JsValue,
+) -> Unit = "(obj, globalAlpha) => { obj.globalAlpha = globalAlpha; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_global_alpha(
+  self : Self,
+  global_alpha : Double,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_global_alpha_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(global_alpha),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_global_composite_operation_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.globalCompositeOperation"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with global_composite_operation(
+  self : Self,
+) -> String {
+  offscreen_canvas_rendering_context2d_global_composite_operation_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_global_composite_operation_ffi(
+  obj : JsValue,
+  global_composite_operation : JsValue,
+) -> Unit = "(obj, globalCompositeOperation) => { obj.globalCompositeOperation = globalCompositeOperation; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_global_composite_operation(
+  self : Self,
+  global_composite_operation : String,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_global_composite_operation_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(global_composite_operation),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_image_smoothing_enabled_ffi(
+  obj : JsValue,
+) -> Bool = "(obj) => obj.imageSmoothingEnabled"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with image_smoothing_enabled(
+  self : Self,
+) -> Bool {
+  offscreen_canvas_rendering_context2d_image_smoothing_enabled_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_image_smoothing_enabled_ffi(
+  obj : JsValue,
+  image_smoothing_enabled : JsValue,
+) -> Unit = "(obj, imageSmoothingEnabled) => { obj.imageSmoothingEnabled = imageSmoothingEnabled; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_enabled(
+  self : Self,
+  image_smoothing_enabled : Bool,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_image_smoothing_enabled_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(image_smoothing_enabled),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi(
+  obj : JsValue,
+) -> ImageSmoothingQuality = "(obj) => obj.imageSmoothingQuality"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with image_smoothing_quality(
+  self : Self,
+) -> ImageSmoothingQuality {
+  offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_image_smoothing_quality_ffi(
+  obj : JsValue,
+  image_smoothing_quality : JsValue,
+) -> Unit = "(obj, imageSmoothingQuality) => { obj.imageSmoothingQuality = imageSmoothingQuality; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_quality(
+  self : Self,
+  image_smoothing_quality : ImageSmoothingQuality,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_image_smoothing_quality_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(image_smoothing_quality),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_stroke_style_ffi(
+  obj : JsValue,
+) -> OffscreenCanvasRenderingContext2DStrokeStyle = "(obj) => obj.strokeStyle"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with stroke_style(self : Self) -> OffscreenCanvasRenderingContext2DStrokeStyle {
+  offscreen_canvas_rendering_context2d_stroke_style_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
+  obj : JsValue,
+  stroke_style : JsValue,
+) -> Unit = "(obj, strokeStyle) => { obj.strokeStyle = strokeStyle; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_stroke_style(
+  self : Self,
+  stroke_style : OffscreenCanvasRenderingContext2DStrokeStyle,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(stroke_style),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_fill_style_ffi(
+  obj : JsValue,
+) -> OffscreenCanvasRenderingContext2DFillStyle = "(obj) => obj.fillStyle"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with fill_style(self : Self) -> OffscreenCanvasRenderingContext2DFillStyle {
+  offscreen_canvas_rendering_context2d_fill_style_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_fill_style_ffi(
+  obj : JsValue,
+  fill_style : JsValue,
+) -> Unit = "(obj, fillStyle) => { obj.fillStyle = fillStyle; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_fill_style(
+  self : Self,
+  fill_style : OffscreenCanvasRenderingContext2DFillStyle,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_fill_style_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(fill_style),
+  )
+}
+
+///|
 extern "js" fn offscreen_canvas_rendering_context2d_create_linear_gradient_ffi(
   obj : JsValue,
   x0 : JsValue,
@@ -560,6 +879,145 @@ impl TOffscreenCanvasRenderingContext2D with create_pattern(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
     TJsValue::to_js(repetition),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_shadow_offset_x_ffi(
+  obj : JsValue,
+) -> Double = "(obj) => obj.shadowOffsetX"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with shadow_offset_x(self : Self) -> Double {
+  offscreen_canvas_rendering_context2d_shadow_offset_x_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_offset_x_ffi(
+  obj : JsValue,
+  shadow_offset_x : JsValue,
+) -> Unit = "(obj, shadowOffsetX) => { obj.shadowOffsetX = shadowOffsetX; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_shadow_offset_x(
+  self : Self,
+  shadow_offset_x : Double,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_shadow_offset_x_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(shadow_offset_x),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_shadow_offset_y_ffi(
+  obj : JsValue,
+) -> Double = "(obj) => obj.shadowOffsetY"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with shadow_offset_y(self : Self) -> Double {
+  offscreen_canvas_rendering_context2d_shadow_offset_y_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_offset_y_ffi(
+  obj : JsValue,
+  shadow_offset_y : JsValue,
+) -> Unit = "(obj, shadowOffsetY) => { obj.shadowOffsetY = shadowOffsetY; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_shadow_offset_y(
+  self : Self,
+  shadow_offset_y : Double,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_shadow_offset_y_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(shadow_offset_y),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_shadow_blur_ffi(
+  obj : JsValue,
+) -> Double = "(obj) => obj.shadowBlur"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with shadow_blur(self : Self) -> Double {
+  offscreen_canvas_rendering_context2d_shadow_blur_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_blur_ffi(
+  obj : JsValue,
+  shadow_blur : JsValue,
+) -> Unit = "(obj, shadowBlur) => { obj.shadowBlur = shadowBlur; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_shadow_blur(
+  self : Self,
+  shadow_blur : Double,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_shadow_blur_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(shadow_blur),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_shadow_color_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.shadowColor"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with shadow_color(self : Self) -> String {
+  offscreen_canvas_rendering_context2d_shadow_color_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_color_ffi(
+  obj : JsValue,
+  shadow_color : JsValue,
+) -> Unit = "(obj, shadowColor) => { obj.shadowColor = shadowColor; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_shadow_color(
+  self : Self,
+  shadow_color : String,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_shadow_color_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(shadow_color),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_filter_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.filter"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with filter(self : Self) -> String {
+  offscreen_canvas_rendering_context2d_filter_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_filter_ffi(
+  obj : JsValue,
+  filter : JsValue,
+) -> Unit = "(obj, filter) => { obj.filter = filter; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_filter(
+  self : Self,
+  filter : String,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_filter_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(filter),
   )
 }
 
@@ -1134,6 +1592,114 @@ impl TOffscreenCanvasRenderingContext2D with put_image_data_2(
 }
 
 ///|
+extern "js" fn offscreen_canvas_rendering_context2d_line_width_ffi(
+  obj : JsValue,
+) -> Double = "(obj) => obj.lineWidth"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with line_width(self : Self) -> Double {
+  offscreen_canvas_rendering_context2d_line_width_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_line_width_ffi(
+  obj : JsValue,
+  line_width : JsValue,
+) -> Unit = "(obj, lineWidth) => { obj.lineWidth = lineWidth; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_line_width(
+  self : Self,
+  line_width : Double,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_line_width_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(line_width),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_line_cap_ffi(
+  obj : JsValue,
+) -> CanvasLineCap = "(obj) => obj.lineCap"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with line_cap(self : Self) -> CanvasLineCap {
+  offscreen_canvas_rendering_context2d_line_cap_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_line_cap_ffi(
+  obj : JsValue,
+  line_cap : JsValue,
+) -> Unit = "(obj, lineCap) => { obj.lineCap = lineCap; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_line_cap(
+  self : Self,
+  line_cap : CanvasLineCap,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_line_cap_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(line_cap),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_line_join_ffi(
+  obj : JsValue,
+) -> CanvasLineJoin = "(obj) => obj.lineJoin"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with line_join(self : Self) -> CanvasLineJoin {
+  offscreen_canvas_rendering_context2d_line_join_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_line_join_ffi(
+  obj : JsValue,
+  line_join : JsValue,
+) -> Unit = "(obj, lineJoin) => { obj.lineJoin = lineJoin; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_line_join(
+  self : Self,
+  line_join : CanvasLineJoin,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_line_join_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(line_join),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_miter_limit_ffi(
+  obj : JsValue,
+) -> Double = "(obj) => obj.miterLimit"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with miter_limit(self : Self) -> Double {
+  offscreen_canvas_rendering_context2d_miter_limit_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_miter_limit_ffi(
+  obj : JsValue,
+  miter_limit : JsValue,
+) -> Unit = "(obj, miterLimit) => { obj.miterLimit = miterLimit; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_miter_limit(
+  self : Self,
+  miter_limit : Double,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_miter_limit_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(miter_limit),
+  )
+}
+
+///|
 extern "js" fn offscreen_canvas_rendering_context2d_set_line_dash_ffi(
   obj : JsValue,
   segments : JsValue,
@@ -1160,6 +1726,334 @@ impl TOffscreenCanvasRenderingContext2D with get_line_dash(self : Self) -> Array
   Double,
 ] {
   offscreen_canvas_rendering_context2d_get_line_dash_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_line_dash_offset_ffi(
+  obj : JsValue,
+) -> Double = "(obj) => obj.lineDashOffset"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with line_dash_offset(self : Self) -> Double {
+  offscreen_canvas_rendering_context2d_line_dash_offset_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_line_dash_offset_ffi(
+  obj : JsValue,
+  line_dash_offset : JsValue,
+) -> Unit = "(obj, lineDashOffset) => { obj.lineDashOffset = lineDashOffset; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_line_dash_offset(
+  self : Self,
+  line_dash_offset : Double,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_line_dash_offset_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(line_dash_offset),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_lang_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.lang"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with lang(self : Self) -> String {
+  offscreen_canvas_rendering_context2d_lang_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_lang_ffi(
+  obj : JsValue,
+  lang : JsValue,
+) -> Unit = "(obj, lang) => { obj.lang = lang; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_lang(
+  self : Self,
+  lang : String,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_lang_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(lang),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_font_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.font"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with font(self : Self) -> String {
+  offscreen_canvas_rendering_context2d_font_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_font_ffi(
+  obj : JsValue,
+  font : JsValue,
+) -> Unit = "(obj, font) => { obj.font = font; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_font(
+  self : Self,
+  font : String,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_font_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(font),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_text_align_ffi(
+  obj : JsValue,
+) -> CanvasTextAlign = "(obj) => obj.textAlign"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with text_align(self : Self) -> CanvasTextAlign {
+  offscreen_canvas_rendering_context2d_text_align_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_text_align_ffi(
+  obj : JsValue,
+  text_align : JsValue,
+) -> Unit = "(obj, textAlign) => { obj.textAlign = textAlign; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_text_align(
+  self : Self,
+  text_align : CanvasTextAlign,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_text_align_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(text_align),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_text_baseline_ffi(
+  obj : JsValue,
+) -> CanvasTextBaseline = "(obj) => obj.textBaseline"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with text_baseline(self : Self) -> CanvasTextBaseline {
+  offscreen_canvas_rendering_context2d_text_baseline_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_text_baseline_ffi(
+  obj : JsValue,
+  text_baseline : JsValue,
+) -> Unit = "(obj, textBaseline) => { obj.textBaseline = textBaseline; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_text_baseline(
+  self : Self,
+  text_baseline : CanvasTextBaseline,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_text_baseline_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(text_baseline),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_direction_ffi(
+  obj : JsValue,
+) -> CanvasDirection = "(obj) => obj.direction"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with direction(self : Self) -> CanvasDirection {
+  offscreen_canvas_rendering_context2d_direction_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_direction_ffi(
+  obj : JsValue,
+  direction : JsValue,
+) -> Unit = "(obj, direction) => { obj.direction = direction; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_direction(
+  self : Self,
+  direction : CanvasDirection,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_direction_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(direction),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_letter_spacing_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.letterSpacing"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with letter_spacing(self : Self) -> String {
+  offscreen_canvas_rendering_context2d_letter_spacing_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_letter_spacing_ffi(
+  obj : JsValue,
+  letter_spacing : JsValue,
+) -> Unit = "(obj, letterSpacing) => { obj.letterSpacing = letterSpacing; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_letter_spacing(
+  self : Self,
+  letter_spacing : String,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_letter_spacing_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(letter_spacing),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_font_kerning_ffi(
+  obj : JsValue,
+) -> CanvasFontKerning = "(obj) => obj.fontKerning"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with font_kerning(self : Self) -> CanvasFontKerning {
+  offscreen_canvas_rendering_context2d_font_kerning_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_font_kerning_ffi(
+  obj : JsValue,
+  font_kerning : JsValue,
+) -> Unit = "(obj, fontKerning) => { obj.fontKerning = fontKerning; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_font_kerning(
+  self : Self,
+  font_kerning : CanvasFontKerning,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_font_kerning_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(font_kerning),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_font_stretch_ffi(
+  obj : JsValue,
+) -> CanvasFontStretch = "(obj) => obj.fontStretch"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with font_stretch(self : Self) -> CanvasFontStretch {
+  offscreen_canvas_rendering_context2d_font_stretch_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_font_stretch_ffi(
+  obj : JsValue,
+  font_stretch : JsValue,
+) -> Unit = "(obj, fontStretch) => { obj.fontStretch = fontStretch; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_font_stretch(
+  self : Self,
+  font_stretch : CanvasFontStretch,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_font_stretch_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(font_stretch),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_font_variant_caps_ffi(
+  obj : JsValue,
+) -> CanvasFontVariantCaps = "(obj) => obj.fontVariantCaps"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with font_variant_caps(self : Self) -> CanvasFontVariantCaps {
+  offscreen_canvas_rendering_context2d_font_variant_caps_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_font_variant_caps_ffi(
+  obj : JsValue,
+  font_variant_caps : JsValue,
+) -> Unit = "(obj, fontVariantCaps) => { obj.fontVariantCaps = fontVariantCaps; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_font_variant_caps(
+  self : Self,
+  font_variant_caps : CanvasFontVariantCaps,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_font_variant_caps_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(font_variant_caps),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_text_rendering_ffi(
+  obj : JsValue,
+) -> CanvasTextRendering = "(obj) => obj.textRendering"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with text_rendering(self : Self) -> CanvasTextRendering {
+  offscreen_canvas_rendering_context2d_text_rendering_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_text_rendering_ffi(
+  obj : JsValue,
+  text_rendering : JsValue,
+) -> Unit = "(obj, textRendering) => { obj.textRendering = textRendering; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_text_rendering(
+  self : Self,
+  text_rendering : CanvasTextRendering,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_text_rendering_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(text_rendering),
+  )
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_word_spacing_ffi(
+  obj : JsValue,
+) -> String = "(obj) => obj.wordSpacing"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with word_spacing(self : Self) -> String {
+  offscreen_canvas_rendering_context2d_word_spacing_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn offscreen_canvas_rendering_context2d_set_word_spacing_ffi(
+  obj : JsValue,
+  word_spacing : JsValue,
+) -> Unit = "(obj, wordSpacing) => { obj.wordSpacing = wordSpacing; }"
+
+///|
+impl TOffscreenCanvasRenderingContext2D with set_word_spacing(
+  self : Self,
+  word_spacing : String,
+) -> Unit {
+  offscreen_canvas_rendering_context2d_set_word_spacing_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(word_spacing),
+  )
 }
 
 ///|

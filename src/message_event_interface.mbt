@@ -33,6 +33,11 @@ pub fn MessageEvent::new(
 
 ///|
 pub trait TMessageEvent: TEvent {
+  data(self : Self) -> JsValue = _
+  origin(self : Self) -> String = _
+  last_event_id(self : Self) -> String = _
+  source(self : Self) -> MessageEventSource = _
+  ports(self : Self) -> JsValue = _
   init_message_event(
     self : Self,
     type_ : String,
@@ -44,6 +49,46 @@ pub trait TMessageEvent: TEvent {
     source? : MessageEventSource,
     ports? : Array[MessagePort],
   ) -> Unit = _
+}
+
+///|
+extern "js" fn message_event_data_ffi(obj : JsValue) -> JsValue = "(obj) => obj.data"
+
+///|
+impl TMessageEvent with data(self : Self) -> JsValue {
+  message_event_data_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn message_event_origin_ffi(obj : JsValue) -> String = "(obj) => obj.origin"
+
+///|
+impl TMessageEvent with origin(self : Self) -> String {
+  message_event_origin_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn message_event_last_event_id_ffi(obj : JsValue) -> String = "(obj) => obj.lastEventId"
+
+///|
+impl TMessageEvent with last_event_id(self : Self) -> String {
+  message_event_last_event_id_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn message_event_source_ffi(obj : JsValue) -> MessageEventSource = "(obj) => obj.source"
+
+///|
+impl TMessageEvent with source(self : Self) -> MessageEventSource {
+  message_event_source_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn message_event_ports_ffi(obj : JsValue) -> JsValue = "(obj) => obj.ports"
+
+///|
+impl TMessageEvent with ports(self : Self) -> JsValue {
+  message_event_ports_ffi(TJsValue::to_js(self))
 }
 
 ///|

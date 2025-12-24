@@ -32,4 +32,32 @@ pub fn ProgressEvent::new(
 }
 
 ///|
-pub trait TProgressEvent: TEvent {}
+pub trait TProgressEvent: TEvent {
+  length_computable(self : Self) -> Bool = _
+  loaded(self : Self) -> Double = _
+  total(self : Self) -> Double = _
+}
+
+///|
+extern "js" fn progress_event_length_computable_ffi(obj : JsValue) -> Bool = "(obj) => obj.lengthComputable"
+
+///|
+impl TProgressEvent with length_computable(self : Self) -> Bool {
+  progress_event_length_computable_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn progress_event_loaded_ffi(obj : JsValue) -> Double = "(obj) => obj.loaded"
+
+///|
+impl TProgressEvent with loaded(self : Self) -> Double {
+  progress_event_loaded_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn progress_event_total_ffi(obj : JsValue) -> Double = "(obj) => obj.total"
+
+///|
+impl TProgressEvent with total(self : Self) -> Double {
+  progress_event_total_ffi(TJsValue::to_js(self))
+}

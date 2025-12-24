@@ -32,4 +32,14 @@ pub fn FormDataEvent::new(
 }
 
 ///|
-pub trait TFormDataEvent: TEvent {}
+pub trait TFormDataEvent: TEvent {
+  form_data(self : Self) -> FormData = _
+}
+
+///|
+extern "js" fn form_data_event_form_data_ffi(obj : JsValue) -> FormData = "(obj) => obj.formData"
+
+///|
+impl TFormDataEvent with form_data(self : Self) -> FormData {
+  form_data_event_form_data_ffi(TJsValue::to_js(self))
+}

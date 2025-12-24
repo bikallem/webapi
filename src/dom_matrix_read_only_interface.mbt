@@ -45,6 +45,30 @@ pub fn DOMMatrixReadOnly::new(
 
 ///|
 pub trait TDOMMatrixReadOnly: TJsValue {
+  a(self : Self) -> Double = _
+  b(self : Self) -> Double = _
+  c(self : Self) -> Double = _
+  d(self : Self) -> Double = _
+  e(self : Self) -> Double = _
+  f(self : Self) -> Double = _
+  m11(self : Self) -> Double = _
+  m12(self : Self) -> Double = _
+  m13(self : Self) -> Double = _
+  m14(self : Self) -> Double = _
+  m21(self : Self) -> Double = _
+  m22(self : Self) -> Double = _
+  m23(self : Self) -> Double = _
+  m24(self : Self) -> Double = _
+  m31(self : Self) -> Double = _
+  m32(self : Self) -> Double = _
+  m33(self : Self) -> Double = _
+  m34(self : Self) -> Double = _
+  m41(self : Self) -> Double = _
+  m42(self : Self) -> Double = _
+  m43(self : Self) -> Double = _
+  m44(self : Self) -> Double = _
+  is2d(self : Self) -> Bool = _
+  is_identity(self : Self) -> Bool = _
   translate(self : Self, tx? : Double, ty? : Double, tz? : Double) -> DOMMatrix = _
   scale(
     self : Self,
@@ -82,6 +106,198 @@ pub trait TDOMMatrixReadOnly: TJsValue {
   to_float32array(self : Self) -> Float32Array = _
   to_float64array(self : Self) -> Float64Array = _
   to_json(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn dom_matrix_read_only_a_ffi(obj : JsValue) -> Double = "(obj) => obj.a"
+
+///|
+impl TDOMMatrixReadOnly with a(self : Self) -> Double {
+  dom_matrix_read_only_a_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_b_ffi(obj : JsValue) -> Double = "(obj) => obj.b"
+
+///|
+impl TDOMMatrixReadOnly with b(self : Self) -> Double {
+  dom_matrix_read_only_b_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_c_ffi(obj : JsValue) -> Double = "(obj) => obj.c"
+
+///|
+impl TDOMMatrixReadOnly with c(self : Self) -> Double {
+  dom_matrix_read_only_c_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_d_ffi(obj : JsValue) -> Double = "(obj) => obj.d"
+
+///|
+impl TDOMMatrixReadOnly with d(self : Self) -> Double {
+  dom_matrix_read_only_d_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_e_ffi(obj : JsValue) -> Double = "(obj) => obj.e"
+
+///|
+impl TDOMMatrixReadOnly with e(self : Self) -> Double {
+  dom_matrix_read_only_e_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_f_ffi(obj : JsValue) -> Double = "(obj) => obj.f"
+
+///|
+impl TDOMMatrixReadOnly with f(self : Self) -> Double {
+  dom_matrix_read_only_f_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m11_ffi(obj : JsValue) -> Double = "(obj) => obj.m11"
+
+///|
+impl TDOMMatrixReadOnly with m11(self : Self) -> Double {
+  dom_matrix_read_only_m11_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m12_ffi(obj : JsValue) -> Double = "(obj) => obj.m12"
+
+///|
+impl TDOMMatrixReadOnly with m12(self : Self) -> Double {
+  dom_matrix_read_only_m12_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m13_ffi(obj : JsValue) -> Double = "(obj) => obj.m13"
+
+///|
+impl TDOMMatrixReadOnly with m13(self : Self) -> Double {
+  dom_matrix_read_only_m13_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m14_ffi(obj : JsValue) -> Double = "(obj) => obj.m14"
+
+///|
+impl TDOMMatrixReadOnly with m14(self : Self) -> Double {
+  dom_matrix_read_only_m14_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m21_ffi(obj : JsValue) -> Double = "(obj) => obj.m21"
+
+///|
+impl TDOMMatrixReadOnly with m21(self : Self) -> Double {
+  dom_matrix_read_only_m21_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m22_ffi(obj : JsValue) -> Double = "(obj) => obj.m22"
+
+///|
+impl TDOMMatrixReadOnly with m22(self : Self) -> Double {
+  dom_matrix_read_only_m22_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m23_ffi(obj : JsValue) -> Double = "(obj) => obj.m23"
+
+///|
+impl TDOMMatrixReadOnly with m23(self : Self) -> Double {
+  dom_matrix_read_only_m23_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m24_ffi(obj : JsValue) -> Double = "(obj) => obj.m24"
+
+///|
+impl TDOMMatrixReadOnly with m24(self : Self) -> Double {
+  dom_matrix_read_only_m24_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m31_ffi(obj : JsValue) -> Double = "(obj) => obj.m31"
+
+///|
+impl TDOMMatrixReadOnly with m31(self : Self) -> Double {
+  dom_matrix_read_only_m31_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m32_ffi(obj : JsValue) -> Double = "(obj) => obj.m32"
+
+///|
+impl TDOMMatrixReadOnly with m32(self : Self) -> Double {
+  dom_matrix_read_only_m32_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m33_ffi(obj : JsValue) -> Double = "(obj) => obj.m33"
+
+///|
+impl TDOMMatrixReadOnly with m33(self : Self) -> Double {
+  dom_matrix_read_only_m33_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m34_ffi(obj : JsValue) -> Double = "(obj) => obj.m34"
+
+///|
+impl TDOMMatrixReadOnly with m34(self : Self) -> Double {
+  dom_matrix_read_only_m34_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m41_ffi(obj : JsValue) -> Double = "(obj) => obj.m41"
+
+///|
+impl TDOMMatrixReadOnly with m41(self : Self) -> Double {
+  dom_matrix_read_only_m41_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m42_ffi(obj : JsValue) -> Double = "(obj) => obj.m42"
+
+///|
+impl TDOMMatrixReadOnly with m42(self : Self) -> Double {
+  dom_matrix_read_only_m42_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m43_ffi(obj : JsValue) -> Double = "(obj) => obj.m43"
+
+///|
+impl TDOMMatrixReadOnly with m43(self : Self) -> Double {
+  dom_matrix_read_only_m43_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_m44_ffi(obj : JsValue) -> Double = "(obj) => obj.m44"
+
+///|
+impl TDOMMatrixReadOnly with m44(self : Self) -> Double {
+  dom_matrix_read_only_m44_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_is2d_ffi(obj : JsValue) -> Bool = "(obj) => obj.is2D"
+
+///|
+impl TDOMMatrixReadOnly with is2d(self : Self) -> Bool {
+  dom_matrix_read_only_is2d_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_is_identity_ffi(obj : JsValue) -> Bool = "(obj) => obj.isIdentity"
+
+///|
+impl TDOMMatrixReadOnly with is_identity(self : Self) -> Bool {
+  dom_matrix_read_only_is_identity_ffi(TJsValue::to_js(self))
 }
 
 ///|

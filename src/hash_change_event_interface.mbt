@@ -32,4 +32,23 @@ pub fn HashChangeEvent::new(
 }
 
 ///|
-pub trait THashChangeEvent: TEvent {}
+pub trait THashChangeEvent: TEvent {
+  old_url(self : Self) -> String = _
+  new_url(self : Self) -> String = _
+}
+
+///|
+extern "js" fn hash_change_event_old_url_ffi(obj : JsValue) -> String = "(obj) => obj.oldURL"
+
+///|
+impl THashChangeEvent with old_url(self : Self) -> String {
+  hash_change_event_old_url_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn hash_change_event_new_url_ffi(obj : JsValue) -> String = "(obj) => obj.newURL"
+
+///|
+impl THashChangeEvent with new_url(self : Self) -> String {
+  hash_change_event_new_url_ffi(TJsValue::to_js(self))
+}

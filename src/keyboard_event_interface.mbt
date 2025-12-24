@@ -48,6 +48,15 @@ pub const KEYBOARD_EVENT_DOM_KEY_LOCATION_NUMPAD : UInt = 0x03
 
 ///|
 pub trait TKeyboardEvent: TUIEvent {
+  key(self : Self) -> String = _
+  code(self : Self) -> String = _
+  location(self : Self) -> UInt = _
+  ctrl_key(self : Self) -> Bool = _
+  shift_key(self : Self) -> Bool = _
+  alt_key(self : Self) -> Bool = _
+  meta_key(self : Self) -> Bool = _
+  repeat(self : Self) -> Bool = _
+  is_composing(self : Self) -> Bool = _
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
   init_keyboard_event(
     self : Self,
@@ -62,6 +71,80 @@ pub trait TKeyboardEvent: TUIEvent {
     shift_key? : Bool,
     meta_key? : Bool,
   ) -> Unit = _
+  char_code(self : Self) -> UInt = _
+  key_code(self : Self) -> UInt = _
+}
+
+///|
+extern "js" fn keyboard_event_key_ffi(obj : JsValue) -> String = "(obj) => obj.key"
+
+///|
+impl TKeyboardEvent with key(self : Self) -> String {
+  keyboard_event_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_code_ffi(obj : JsValue) -> String = "(obj) => obj.code"
+
+///|
+impl TKeyboardEvent with code(self : Self) -> String {
+  keyboard_event_code_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_location_ffi(obj : JsValue) -> UInt = "(obj) => obj.location"
+
+///|
+impl TKeyboardEvent with location(self : Self) -> UInt {
+  keyboard_event_location_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_ctrl_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.ctrlKey"
+
+///|
+impl TKeyboardEvent with ctrl_key(self : Self) -> Bool {
+  keyboard_event_ctrl_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_shift_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.shiftKey"
+
+///|
+impl TKeyboardEvent with shift_key(self : Self) -> Bool {
+  keyboard_event_shift_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_alt_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.altKey"
+
+///|
+impl TKeyboardEvent with alt_key(self : Self) -> Bool {
+  keyboard_event_alt_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_meta_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.metaKey"
+
+///|
+impl TKeyboardEvent with meta_key(self : Self) -> Bool {
+  keyboard_event_meta_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_repeat_ffi(obj : JsValue) -> Bool = "(obj) => obj.repeat"
+
+///|
+impl TKeyboardEvent with repeat(self : Self) -> Bool {
+  keyboard_event_repeat_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_is_composing_ffi(obj : JsValue) -> Bool = "(obj) => obj.isComposing"
+
+///|
+impl TKeyboardEvent with is_composing(self : Self) -> Bool {
+  keyboard_event_is_composing_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -120,4 +203,20 @@ impl TKeyboardEvent with init_keyboard_event(
     TJsValue::to_js(shift_key),
     TJsValue::to_js(meta_key),
   )
+}
+
+///|
+extern "js" fn keyboard_event_char_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.charCode"
+
+///|
+impl TKeyboardEvent with char_code(self : Self) -> UInt {
+  keyboard_event_char_code_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn keyboard_event_key_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.keyCode"
+
+///|
+impl TKeyboardEvent with key_code(self : Self) -> UInt {
+  keyboard_event_key_code_ffi(TJsValue::to_js(self))
 }

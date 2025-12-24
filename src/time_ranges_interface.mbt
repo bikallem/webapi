@@ -13,8 +13,17 @@ pub impl TTimeRanges for TimeRanges
 
 ///|
 pub trait TTimeRanges: TJsValue {
+  length(self : Self) -> UInt = _
   start(self : Self, index : UInt) -> Double = _
   end(self : Self, index : UInt) -> Double = _
+}
+
+///|
+extern "js" fn time_ranges_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TTimeRanges with length(self : Self) -> UInt {
+  time_ranges_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

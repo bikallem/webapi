@@ -34,4 +34,26 @@ pub fn HTMLTitleElement::new() -> HTMLTitleElement {
 }
 
 ///|
-pub trait THTMLTitleElement: THTMLElement {}
+pub trait THTMLTitleElement: THTMLElement {
+  text(self : Self) -> String = _
+  set_text(self : Self, text : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_title_element_text_ffi(obj : JsValue) -> String = "(obj) => obj.text"
+
+///|
+impl THTMLTitleElement with text(self : Self) -> String {
+  html_title_element_text_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_title_element_set_text_ffi(
+  obj : JsValue,
+  text : JsValue,
+) -> Unit = "(obj, text) => { obj.text = text; }"
+
+///|
+impl THTMLTitleElement with set_text(self : Self, text : String) -> Unit {
+  html_title_element_set_text_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
+}

@@ -17,7 +17,16 @@ pub impl TNotRestoredReasonDetails for NotRestoredReasonDetails
 
 ///|
 pub trait TNotRestoredReasonDetails: TJsValue {
+  reason(self : Self) -> String = _
   to_json(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn not_restored_reason_details_reason_ffi(obj : JsValue) -> String = "(obj) => obj.reason"
+
+///|
+impl TNotRestoredReasonDetails with reason(self : Self) -> String {
+  not_restored_reason_details_reason_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -36,4 +36,29 @@ pub fn HTMLTableCaptionElement::new() -> HTMLTableCaptionElement {
 }
 
 ///|
-pub trait THTMLTableCaptionElement: THTMLElement {}
+pub trait THTMLTableCaptionElement: THTMLElement {
+  align(self : Self) -> String = _
+  set_align(self : Self, align : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_table_caption_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
+
+///|
+impl THTMLTableCaptionElement with align(self : Self) -> String {
+  html_table_caption_element_align_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_table_caption_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+impl THTMLTableCaptionElement with set_align(self : Self, align : String) -> Unit {
+  html_table_caption_element_set_align_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(align),
+  )
+}

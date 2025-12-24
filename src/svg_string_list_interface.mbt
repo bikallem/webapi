@@ -13,12 +13,30 @@ pub impl TSVGStringList for SVGStringList
 
 ///|
 pub trait TSVGStringList: TJsValue {
+  length(self : Self) -> UInt = _
+  number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : String) -> String = _
   insert_item_before(self : Self, new_item : String, index : UInt) -> String = _
   replace_item(self : Self, new_item : String, index : UInt) -> String = _
   remove_item(self : Self, index : UInt) -> String = _
   append_item(self : Self, new_item : String) -> String = _
+}
+
+///|
+extern "js" fn svg_string_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TSVGStringList with length(self : Self) -> UInt {
+  svg_string_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_string_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
+
+///|
+impl TSVGStringList with number_of_items(self : Self) -> UInt {
+  svg_string_list_number_of_items_ffi(TJsValue::to_js(self))
 }
 
 ///|

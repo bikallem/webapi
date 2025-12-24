@@ -34,4 +34,14 @@ pub fn PageTransitionEvent::new(
 }
 
 ///|
-pub trait TPageTransitionEvent: TEvent {}
+pub trait TPageTransitionEvent: TEvent {
+  persisted(self : Self) -> Bool = _
+}
+
+///|
+extern "js" fn page_transition_event_persisted_ffi(obj : JsValue) -> Bool = "(obj) => obj.persisted"
+
+///|
+impl TPageTransitionEvent with persisted(self : Self) -> Bool {
+  page_transition_event_persisted_ffi(TJsValue::to_js(self))
+}

@@ -14,6 +14,7 @@ pub impl TPluginArray for PluginArray
 ///|
 pub trait TPluginArray: TJsValue {
   refresh(self : Self) -> Unit = _
+  length(self : Self) -> UInt = _
 }
 
 ///|
@@ -22,4 +23,12 @@ extern "js" fn plugin_array_refresh_ffi(obj : JsValue) -> Unit = "(obj) => obj.r
 ///|
 impl TPluginArray with refresh(self : Self) -> Unit {
   plugin_array_refresh_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn plugin_array_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TPluginArray with length(self : Self) -> UInt {
+  plugin_array_length_ffi(TJsValue::to_js(self))
 }

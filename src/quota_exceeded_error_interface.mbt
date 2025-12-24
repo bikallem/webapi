@@ -34,4 +34,23 @@ pub fn QuotaExceededError::new(
 }
 
 ///|
-pub trait TQuotaExceededError: TDOMException {}
+pub trait TQuotaExceededError: TDOMException {
+  quota(self : Self) -> Double = _
+  requested(self : Self) -> Double = _
+}
+
+///|
+extern "js" fn quota_exceeded_error_quota_ffi(obj : JsValue) -> Double = "(obj) => obj.quota"
+
+///|
+impl TQuotaExceededError with quota(self : Self) -> Double {
+  quota_exceeded_error_quota_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn quota_exceeded_error_requested_ffi(obj : JsValue) -> Double = "(obj) => obj.requested"
+
+///|
+impl TQuotaExceededError with requested(self : Self) -> Double {
+  quota_exceeded_error_requested_ffi(TJsValue::to_js(self))
+}

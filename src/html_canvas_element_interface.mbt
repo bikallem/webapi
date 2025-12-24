@@ -35,6 +35,10 @@ pub fn HTMLCanvasElement::new() -> HTMLCanvasElement {
 
 ///|
 pub trait THTMLCanvasElement: THTMLElement {
+  width(self : Self) -> UInt = _
+  set_width(self : Self, width : UInt) -> Unit = _
+  height(self : Self) -> UInt = _
+  set_height(self : Self, height : UInt) -> Unit = _
   get_context(self : Self, context_id : String, options? : JsValue) -> RenderingContext = _
   to_data_url(self : Self, type_? : String, quality? : JsValue) -> String = _
   to_blob(
@@ -44,6 +48,50 @@ pub trait THTMLCanvasElement: THTMLElement {
     quality? : JsValue,
   ) -> Unit = _
   transfer_control_to_offscreen(self : Self) -> OffscreenCanvas = _
+}
+
+///|
+extern "js" fn html_canvas_element_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
+
+///|
+impl THTMLCanvasElement with width(self : Self) -> UInt {
+  html_canvas_element_width_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_canvas_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+impl THTMLCanvasElement with set_width(self : Self, width : UInt) -> Unit {
+  html_canvas_element_set_width_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(width),
+  )
+}
+
+///|
+extern "js" fn html_canvas_element_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
+
+///|
+impl THTMLCanvasElement with height(self : Self) -> UInt {
+  html_canvas_element_height_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_canvas_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+impl THTMLCanvasElement with set_height(self : Self, height : UInt) -> Unit {
+  html_canvas_element_set_height_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(height),
+  )
 }
 
 ///|

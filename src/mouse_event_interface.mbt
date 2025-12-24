@@ -33,6 +33,19 @@ pub fn MouseEvent::new(
 
 ///|
 pub trait TMouseEvent: TUIEvent {
+  screen_x(self : Self) -> Int = _
+  screen_y(self : Self) -> Int = _
+  client_x(self : Self) -> Int = _
+  client_y(self : Self) -> Int = _
+  layer_x(self : Self) -> Int = _
+  layer_y(self : Self) -> Int = _
+  ctrl_key(self : Self) -> Bool = _
+  shift_key(self : Self) -> Bool = _
+  alt_key(self : Self) -> Bool = _
+  meta_key(self : Self) -> Bool = _
+  button(self : Self) -> Int = _
+  buttons(self : Self) -> UInt = _
+  related_target(self : Self) -> EventTarget = _
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
   init_mouse_event(
     self : Self,
@@ -52,6 +65,116 @@ pub trait TMouseEvent: TUIEvent {
     button_arg? : Int,
     related_target_arg? : &TEventTarget,
   ) -> Unit = _
+  page_x(self : Self) -> Double = _
+  page_y(self : Self) -> Double = _
+  x(self : Self) -> Double = _
+  y(self : Self) -> Double = _
+  offset_x(self : Self) -> Double = _
+  offset_y(self : Self) -> Double = _
+}
+
+///|
+extern "js" fn mouse_event_screen_x_ffi(obj : JsValue) -> Int = "(obj) => obj.screenX"
+
+///|
+impl TMouseEvent with screen_x(self : Self) -> Int {
+  mouse_event_screen_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_screen_y_ffi(obj : JsValue) -> Int = "(obj) => obj.screenY"
+
+///|
+impl TMouseEvent with screen_y(self : Self) -> Int {
+  mouse_event_screen_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_client_x_ffi(obj : JsValue) -> Int = "(obj) => obj.clientX"
+
+///|
+impl TMouseEvent with client_x(self : Self) -> Int {
+  mouse_event_client_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_client_y_ffi(obj : JsValue) -> Int = "(obj) => obj.clientY"
+
+///|
+impl TMouseEvent with client_y(self : Self) -> Int {
+  mouse_event_client_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_layer_x_ffi(obj : JsValue) -> Int = "(obj) => obj.layerX"
+
+///|
+impl TMouseEvent with layer_x(self : Self) -> Int {
+  mouse_event_layer_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_layer_y_ffi(obj : JsValue) -> Int = "(obj) => obj.layerY"
+
+///|
+impl TMouseEvent with layer_y(self : Self) -> Int {
+  mouse_event_layer_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_ctrl_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.ctrlKey"
+
+///|
+impl TMouseEvent with ctrl_key(self : Self) -> Bool {
+  mouse_event_ctrl_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_shift_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.shiftKey"
+
+///|
+impl TMouseEvent with shift_key(self : Self) -> Bool {
+  mouse_event_shift_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_alt_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.altKey"
+
+///|
+impl TMouseEvent with alt_key(self : Self) -> Bool {
+  mouse_event_alt_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_meta_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.metaKey"
+
+///|
+impl TMouseEvent with meta_key(self : Self) -> Bool {
+  mouse_event_meta_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_button_ffi(obj : JsValue) -> Int = "(obj) => obj.button"
+
+///|
+impl TMouseEvent with button(self : Self) -> Int {
+  mouse_event_button_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_buttons_ffi(obj : JsValue) -> UInt = "(obj) => obj.buttons"
+
+///|
+impl TMouseEvent with buttons(self : Self) -> UInt {
+  mouse_event_buttons_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_related_target_ffi(obj : JsValue) -> EventTarget = "(obj) => obj.relatedTarget"
+
+///|
+impl TMouseEvent with related_target(self : Self) -> EventTarget {
+  mouse_event_related_target_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -125,4 +248,52 @@ impl TMouseEvent with init_mouse_event(
     TJsValue::to_js(button_arg),
     TJsValue::to_js(related_target_arg),
   )
+}
+
+///|
+extern "js" fn mouse_event_page_x_ffi(obj : JsValue) -> Double = "(obj) => obj.pageX"
+
+///|
+impl TMouseEvent with page_x(self : Self) -> Double {
+  mouse_event_page_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_page_y_ffi(obj : JsValue) -> Double = "(obj) => obj.pageY"
+
+///|
+impl TMouseEvent with page_y(self : Self) -> Double {
+  mouse_event_page_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
+
+///|
+impl TMouseEvent with x(self : Self) -> Double {
+  mouse_event_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
+
+///|
+impl TMouseEvent with y(self : Self) -> Double {
+  mouse_event_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_offset_x_ffi(obj : JsValue) -> Double = "(obj) => obj.offsetX"
+
+///|
+impl TMouseEvent with offset_x(self : Self) -> Double {
+  mouse_event_offset_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn mouse_event_offset_y_ffi(obj : JsValue) -> Double = "(obj) => obj.offsetY"
+
+///|
+impl TMouseEvent with offset_y(self : Self) -> Double {
+  mouse_event_offset_y_ffi(TJsValue::to_js(self))
 }

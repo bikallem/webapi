@@ -13,12 +13,30 @@ pub impl TSVGPointList for SVGPointList
 
 ///|
 pub trait TSVGPointList: TJsValue {
+  length(self : Self) -> UInt = _
+  number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : &TDOMPoint) -> DOMPoint = _
   insert_item_before(self : Self, new_item : &TDOMPoint, index : UInt) -> DOMPoint = _
   replace_item(self : Self, new_item : &TDOMPoint, index : UInt) -> DOMPoint = _
   remove_item(self : Self, index : UInt) -> DOMPoint = _
   append_item(self : Self, new_item : &TDOMPoint) -> DOMPoint = _
+}
+
+///|
+extern "js" fn svg_point_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TSVGPointList with length(self : Self) -> UInt {
+  svg_point_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_point_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
+
+///|
+impl TSVGPointList with number_of_items(self : Self) -> UInt {
+  svg_point_list_number_of_items_ffi(TJsValue::to_js(self))
 }
 
 ///|

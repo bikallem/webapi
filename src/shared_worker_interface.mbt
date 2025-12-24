@@ -55,4 +55,35 @@ pub fn SharedWorker::new(
 }
 
 ///|
-pub trait TSharedWorker: TEventTarget {}
+pub trait TSharedWorker: TEventTarget {
+  port(self : Self) -> MessagePort = _
+  onerror(self : Self) -> EventHandler = _
+  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+}
+
+///|
+extern "js" fn shared_worker_port_ffi(obj : JsValue) -> MessagePort = "(obj) => obj.port"
+
+///|
+impl TSharedWorker with port(self : Self) -> MessagePort {
+  shared_worker_port_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn shared_worker_onerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onerror"
+
+///|
+impl TSharedWorker with onerror(self : Self) -> EventHandler {
+  shared_worker_onerror_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn shared_worker_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+impl TSharedWorker with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+  shared_worker_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+}

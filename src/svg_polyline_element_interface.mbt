@@ -32,4 +32,25 @@ pub impl TNode for SVGPolylineElement
 pub impl TEventTarget for SVGPolylineElement
 
 ///|
-pub trait TSVGPolylineElement: TSVGGeometryElement {}
+pub trait TSVGPolylineElement: TSVGGeometryElement {
+  points(self : Self) -> SVGPointList = _
+  animated_points(self : Self) -> SVGPointList = _
+}
+
+///|
+extern "js" fn svg_polyline_element_points_ffi(obj : JsValue) -> SVGPointList = "(obj) => obj.points"
+
+///|
+impl TSVGPolylineElement with points(self : Self) -> SVGPointList {
+  svg_polyline_element_points_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_polyline_element_animated_points_ffi(
+  obj : JsValue,
+) -> SVGPointList = "(obj) => obj.animatedPoints"
+
+///|
+impl TSVGPolylineElement with animated_points(self : Self) -> SVGPointList {
+  svg_polyline_element_animated_points_ffi(TJsValue::to_js(self))
+}

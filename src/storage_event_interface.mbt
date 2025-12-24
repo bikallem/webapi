@@ -33,6 +33,11 @@ pub fn StorageEvent::new(
 
 ///|
 pub trait TStorageEvent: TEvent {
+  key(self : Self) -> String = _
+  old_value(self : Self) -> String = _
+  new_value(self : Self) -> String = _
+  url(self : Self) -> String = _
+  storage_area(self : Self) -> Storage = _
   init_storage_event(
     self : Self,
     type_ : String,
@@ -44,6 +49,46 @@ pub trait TStorageEvent: TEvent {
     url? : String,
     storage_area? : &TStorage,
   ) -> Unit = _
+}
+
+///|
+extern "js" fn storage_event_key_ffi(obj : JsValue) -> String = "(obj) => obj.key"
+
+///|
+impl TStorageEvent with key(self : Self) -> String {
+  storage_event_key_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn storage_event_old_value_ffi(obj : JsValue) -> String = "(obj) => obj.oldValue"
+
+///|
+impl TStorageEvent with old_value(self : Self) -> String {
+  storage_event_old_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn storage_event_new_value_ffi(obj : JsValue) -> String = "(obj) => obj.newValue"
+
+///|
+impl TStorageEvent with new_value(self : Self) -> String {
+  storage_event_new_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn storage_event_url_ffi(obj : JsValue) -> String = "(obj) => obj.url"
+
+///|
+impl TStorageEvent with url(self : Self) -> String {
+  storage_event_url_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn storage_event_storage_area_ffi(obj : JsValue) -> Storage = "(obj) => obj.storageArea"
+
+///|
+impl TStorageEvent with storage_area(self : Self) -> Storage {
+  storage_event_storage_area_ffi(TJsValue::to_js(self))
 }
 
 ///|

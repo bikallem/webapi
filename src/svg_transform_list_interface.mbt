@@ -15,6 +15,8 @@ pub impl TSVGTransformList for SVGTransformList
 
 ///|
 pub trait TSVGTransformList: TJsValue {
+  length(self : Self) -> UInt = _
+  number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : &TSVGTransform) -> SVGTransform = _
   insert_item_before(self : Self, new_item : &TSVGTransform, index : UInt) -> SVGTransform = _
@@ -23,6 +25,22 @@ pub trait TSVGTransformList: TJsValue {
   append_item(self : Self, new_item : &TSVGTransform) -> SVGTransform = _
   create_svg_transform_from_matrix(self : Self, matrix? : DOMMatrix2DInit) -> SVGTransform = _
   consolidate(self : Self) -> SVGTransform = _
+}
+
+///|
+extern "js" fn svg_transform_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TSVGTransformList with length(self : Self) -> UInt {
+  svg_transform_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_transform_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
+
+///|
+impl TSVGTransformList with number_of_items(self : Self) -> UInt {
+  svg_transform_list_number_of_items_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -13,8 +13,41 @@ pub impl TMediaList for MediaList
 
 ///|
 pub trait TMediaList: TJsValue {
+  media_text(self : Self) -> CSSOMString = _
+  set_media_text(self : Self, media_text : CSSOMString) -> Unit = _
+  length(self : Self) -> UInt = _
   append_medium(self : Self, medium : CSSOMString) -> Unit = _
   delete_medium(self : Self, medium : CSSOMString) -> Unit = _
+}
+
+///|
+extern "js" fn media_list_media_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.mediaText"
+
+///|
+impl TMediaList with media_text(self : Self) -> CSSOMString {
+  media_list_media_text_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn media_list_set_media_text_ffi(
+  obj : JsValue,
+  media_text : JsValue,
+) -> Unit = "(obj, mediaText) => { obj.mediaText = mediaText; }"
+
+///|
+impl TMediaList with set_media_text(self : Self, media_text : CSSOMString) -> Unit {
+  media_list_set_media_text_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(media_text),
+  )
+}
+
+///|
+extern "js" fn media_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TMediaList with length(self : Self) -> UInt {
+  media_list_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

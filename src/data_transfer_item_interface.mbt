@@ -15,8 +15,26 @@ pub impl TDataTransferItem for DataTransferItem
 
 ///|
 pub trait TDataTransferItem: TJsValue {
+  kind(self : Self) -> String = _
+  type_(self : Self) -> String = _
   get_as_string(self : Self, _callback : FunctionStringCallback) -> Unit = _
   get_as_file(self : Self) -> File = _
+}
+
+///|
+extern "js" fn data_transfer_item_kind_ffi(obj : JsValue) -> String = "(obj) => obj.kind"
+
+///|
+impl TDataTransferItem with kind(self : Self) -> String {
+  data_transfer_item_kind_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn data_transfer_item_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
+
+///|
+impl TDataTransferItem with type_(self : Self) -> String {
+  data_transfer_item_type_ffi(TJsValue::to_js(self))
 }
 
 ///|

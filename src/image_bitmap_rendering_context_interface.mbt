@@ -16,8 +16,48 @@ pub fn[T : TImageBitmapRenderingContext] ImageBitmapRenderingContext::into(
 pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 
 ///|
+#external
+pub type ImageBitmapRenderingContextCanvas
+
+///|
+pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas::into(
+  self : ImageBitmapRenderingContextCanvas,
+) -> T = "%identity"
+
+///|
+pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanvas with to_js(
+  self : ImageBitmapRenderingContextCanvas,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TImageBitmapRenderingContextCanvas {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TImageBitmapRenderingContextCanvas for HTMLCanvasElement with to_js(
+  self : HTMLCanvasElement,
+) -> JsValue = "%identity"
+
+///|
+pub impl TImageBitmapRenderingContextCanvas for OffscreenCanvas with to_js(
+  self : OffscreenCanvas,
+) -> JsValue = "%identity"
+
+///|
 pub trait TImageBitmapRenderingContext: TJsValue {
+  canvas(self : Self) -> ImageBitmapRenderingContextCanvas = _
   transfer_from_image_bitmap(self : Self, bitmap : &TImageBitmap) -> Unit = _
+}
+
+///|
+extern "js" fn image_bitmap_rendering_context_canvas_ffi(
+  obj : JsValue,
+) -> ImageBitmapRenderingContextCanvas = "(obj) => obj.canvas"
+
+///|
+impl TImageBitmapRenderingContext with canvas(self : Self) -> ImageBitmapRenderingContextCanvas {
+  image_bitmap_rendering_context_canvas_ffi(TJsValue::to_js(self))
 }
 
 ///|

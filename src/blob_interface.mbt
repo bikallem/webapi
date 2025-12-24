@@ -24,11 +24,29 @@ pub fn Blob::new(
 
 ///|
 pub trait TBlob: TJsValue {
+  size(self : Self) -> UInt64 = _
+  type_(self : Self) -> String = _
   slice(self : Self, start? : Int64, end? : Int64, content_type? : String) -> Blob = _
   stream(self : Self) -> ReadableStream = _
   text(self : Self) -> JsPromise[String] = _
   array_buffer(self : Self) -> JsPromise[ArrayBuffer] = _
   bytes(self : Self) -> JsPromise[Uint8Array] = _
+}
+
+///|
+extern "js" fn blob_size_ffi(obj : JsValue) -> UInt64 = "(obj) => obj.size"
+
+///|
+impl TBlob with size(self : Self) -> UInt64 {
+  blob_size_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn blob_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
+
+///|
+impl TBlob with type_(self : Self) -> String {
+  blob_type_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -32,4 +32,26 @@ pub fn HTMLDataElement::new() -> HTMLDataElement {
 }
 
 ///|
-pub trait THTMLDataElement: THTMLElement {}
+pub trait THTMLDataElement: THTMLElement {
+  value(self : Self) -> String = _
+  set_value(self : Self, value : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_data_element_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
+
+///|
+impl THTMLDataElement with value(self : Self) -> String {
+  html_data_element_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_data_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+impl THTMLDataElement with set_value(self : Self, value : String) -> Unit {
+  html_data_element_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
+}

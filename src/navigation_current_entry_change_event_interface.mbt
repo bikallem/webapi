@@ -36,4 +36,29 @@ pub fn NavigationCurrentEntryChangeEvent::new(
 }
 
 ///|
-pub trait TNavigationCurrentEntryChangeEvent: TEvent {}
+pub trait TNavigationCurrentEntryChangeEvent: TEvent {
+  navigation_type(self : Self) -> NavigationType = _
+  from(self : Self) -> NavigationHistoryEntry = _
+}
+
+///|
+extern "js" fn navigation_current_entry_change_event_navigation_type_ffi(
+  obj : JsValue,
+) -> NavigationType = "(obj) => obj.navigationType"
+
+///|
+impl TNavigationCurrentEntryChangeEvent with navigation_type(self : Self) -> NavigationType {
+  navigation_current_entry_change_event_navigation_type_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+extern "js" fn navigation_current_entry_change_event_from_ffi(
+  obj : JsValue,
+) -> NavigationHistoryEntry = "(obj) => obj.from"
+
+///|
+impl TNavigationCurrentEntryChangeEvent with from(self : Self) -> NavigationHistoryEntry {
+  navigation_current_entry_change_event_from_ffi(TJsValue::to_js(self))
+}

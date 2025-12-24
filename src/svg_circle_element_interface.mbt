@@ -32,4 +32,32 @@ pub impl TNode for SVGCircleElement
 pub impl TEventTarget for SVGCircleElement
 
 ///|
-pub trait TSVGCircleElement: TSVGGeometryElement {}
+pub trait TSVGCircleElement: TSVGGeometryElement {
+  cx(self : Self) -> SVGAnimatedLength = _
+  cy(self : Self) -> SVGAnimatedLength = _
+  r(self : Self) -> SVGAnimatedLength = _
+}
+
+///|
+extern "js" fn svg_circle_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cx"
+
+///|
+impl TSVGCircleElement with cx(self : Self) -> SVGAnimatedLength {
+  svg_circle_element_cx_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_circle_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cy"
+
+///|
+impl TSVGCircleElement with cy(self : Self) -> SVGAnimatedLength {
+  svg_circle_element_cy_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_circle_element_r_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.r"
+
+///|
+impl TSVGCircleElement with r(self : Self) -> SVGAnimatedLength {
+  svg_circle_element_r_ffi(TJsValue::to_js(self))
+}

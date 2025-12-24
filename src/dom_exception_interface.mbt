@@ -101,4 +101,32 @@ pub const DOM_EXCEPTION_INVALID_NODE_TYPE_ERR : UInt = 24
 pub const DOM_EXCEPTION_DATA_CLONE_ERR : UInt = 25
 
 ///|
-pub trait TDOMException: TJsValue {}
+pub trait TDOMException: TJsValue {
+  name(self : Self) -> String = _
+  message(self : Self) -> String = _
+  code(self : Self) -> UInt = _
+}
+
+///|
+extern "js" fn dom_exception_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
+
+///|
+impl TDOMException with name(self : Self) -> String {
+  dom_exception_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_exception_message_ffi(obj : JsValue) -> String = "(obj) => obj.message"
+
+///|
+impl TDOMException with message(self : Self) -> String {
+  dom_exception_message_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_exception_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.code"
+
+///|
+impl TDOMException with code(self : Self) -> UInt {
+  dom_exception_code_ffi(TJsValue::to_js(self))
+}

@@ -57,6 +57,56 @@ pub impl TElementSetHTMLUnsafeHtml for TrustedHTML with to_js(
 pub impl TElementSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
+#external
+pub type ElementInnerHTML
+
+///|
+pub fn[T : TElementInnerHTML] ElementInnerHTML::into(
+  self : ElementInnerHTML,
+) -> T = "%identity"
+
+///|
+pub impl TElementInnerHTML for ElementInnerHTML with to_js(
+  self : ElementInnerHTML,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementInnerHTML {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementInnerHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+
+///|
+pub impl TElementInnerHTML for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+#external
+pub type ElementOuterHTML
+
+///|
+pub fn[T : TElementOuterHTML] ElementOuterHTML::into(
+  self : ElementOuterHTML,
+) -> T = "%identity"
+
+///|
+pub impl TElementOuterHTML for ElementOuterHTML with to_js(
+  self : ElementOuterHTML,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TElementOuterHTML {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementOuterHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+
+///|
+pub impl TElementOuterHTML for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 pub(open) trait TElementInsertAdjacentHTMLString {
   to_js(self : Self) -> JsValue
 }
@@ -150,7 +200,19 @@ pub impl TElementReplaceWithNodes for String with to_js(self : String) -> JsValu
 
 ///|
 pub trait TElement: TNode {
+  namespace_uri(self : Self) -> String = _
+  prefix(self : Self) -> String = _
+  local_name(self : Self) -> String = _
+  tag_name(self : Self) -> String = _
+  id(self : Self) -> String = _
+  set_id(self : Self, id : String) -> Unit = _
+  class_name(self : Self) -> String = _
+  set_class_name(self : Self, class_name : String) -> Unit = _
+  class_list(self : Self) -> DOMTokenList = _
+  slot(self : Self) -> String = _
+  set_slot(self : Self, slot : String) -> Unit = _
   has_attributes(self : Self) -> Bool = _
+  attributes(self : Self) -> NamedNodeMap = _
   get_attribute_names(self : Self) -> Array[String] = _
   get_attribute(self : Self, qualified_name : String) -> String = _
   get_attribute_ns(self : Self, namespace_ : String, local_name : String) -> String = _
@@ -176,6 +238,8 @@ pub trait TElement: TNode {
   set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr = _
   remove_attribute_node(self : Self, attr : &TAttr) -> Attr = _
   attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRoot = _
+  shadow_root(self : Self) -> ShadowRoot = _
+  custom_element_registry(self : Self) -> CustomElementRegistry = _
   closest(self : Self, selectors : String) -> Element = _
   matches(self : Self, selectors : String) -> Bool = _
   webkit_matches_selector(self : Self, selectors : String) -> Bool = _
@@ -190,6 +254,10 @@ pub trait TElement: TNode {
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
   set_html_unsafe(self : Self, html : &TElementSetHTMLUnsafeHtml) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
+  inner_html(self : Self) -> ElementInnerHTML = _
+  set_inner_html(self : Self, inner_html : ElementInnerHTML) -> Unit = _
+  outer_html(self : Self) -> ElementOuterHTML = _
+  set_outer_html(self : Self, outer_html : ElementOuterHTML) -> Unit = _
   insert_adjacent_html(
     self : Self,
     position : String,
@@ -207,16 +275,34 @@ pub trait TElement: TNode {
   scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
   scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_top(self : Self) -> Double = _
+  set_scroll_top(self : Self, scroll_top : Double) -> Unit = _
+  scroll_left(self : Self) -> Double = _
+  set_scroll_left(self : Self, scroll_left : Double) -> Unit = _
+  scroll_width(self : Self) -> Int = _
+  scroll_height(self : Self) -> Int = _
+  client_top(self : Self) -> Int = _
+  client_left(self : Self) -> Int = _
+  client_width(self : Self) -> Int = _
+  client_height(self : Self) -> Int = _
+  current_css_zoom(self : Self) -> Double = _
+  children(self : Self) -> HTMLCollection = _
+  first_element_child(self : Self) -> Element = _
+  last_element_child(self : Self) -> Element = _
+  child_element_count(self : Self) -> UInt = _
   prepend(self : Self, nodes : &TElementPrependNodes) -> Unit = _
   append(self : Self, nodes : &TElementAppendNodes) -> Unit = _
   replace_children(self : Self, nodes : &TElementReplaceChildrenNodes) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
+  previous_element_sibling(self : Self) -> Element = _
+  next_element_sibling(self : Self) -> Element = _
   before(self : Self, nodes : &TElementBeforeNodes) -> Unit = _
   after(self : Self, nodes : &TElementAfterNodes) -> Unit = _
   replace_with(self : Self, nodes : &TElementReplaceWithNodes) -> Unit = _
   remove(self : Self) -> Unit = _
+  assigned_slot(self : Self) -> HTMLSlotElement = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[DOMQuad] = _
   convert_quad_from_node(
     self : Self,
@@ -239,11 +325,110 @@ pub trait TElement: TNode {
 }
 
 ///|
+extern "js" fn element_namespace_uri_ffi(obj : JsValue) -> String = "(obj) => obj.namespaceURI"
+
+///|
+impl TElement with namespace_uri(self : Self) -> String {
+  element_namespace_uri_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_prefix_ffi(obj : JsValue) -> String = "(obj) => obj.prefix"
+
+///|
+impl TElement with prefix(self : Self) -> String {
+  element_prefix_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_local_name_ffi(obj : JsValue) -> String = "(obj) => obj.localName"
+
+///|
+impl TElement with local_name(self : Self) -> String {
+  element_local_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_tag_name_ffi(obj : JsValue) -> String = "(obj) => obj.tagName"
+
+///|
+impl TElement with tag_name(self : Self) -> String {
+  element_tag_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_id_ffi(obj : JsValue) -> String = "(obj) => obj.id"
+
+///|
+impl TElement with id(self : Self) -> String {
+  element_id_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => { obj.id = id; }"
+
+///|
+impl TElement with set_id(self : Self, id : String) -> Unit {
+  element_set_id_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
+}
+
+///|
+extern "js" fn element_class_name_ffi(obj : JsValue) -> String = "(obj) => obj.className"
+
+///|
+impl TElement with class_name(self : Self) -> String {
+  element_class_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_set_class_name_ffi(
+  obj : JsValue,
+  class_name : JsValue,
+) -> Unit = "(obj, className) => { obj.className = className; }"
+
+///|
+impl TElement with set_class_name(self : Self, class_name : String) -> Unit {
+  element_set_class_name_ffi(TJsValue::to_js(self), TJsValue::to_js(class_name))
+}
+
+///|
+extern "js" fn element_class_list_ffi(obj : JsValue) -> DOMTokenList = "(obj) => obj.classList"
+
+///|
+impl TElement with class_list(self : Self) -> DOMTokenList {
+  element_class_list_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_slot_ffi(obj : JsValue) -> String = "(obj) => obj.slot"
+
+///|
+impl TElement with slot(self : Self) -> String {
+  element_slot_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_set_slot_ffi(obj : JsValue, slot : JsValue) -> Unit = "(obj, slot) => { obj.slot = slot; }"
+
+///|
+impl TElement with set_slot(self : Self, slot : String) -> Unit {
+  element_set_slot_ffi(TJsValue::to_js(self), TJsValue::to_js(slot))
+}
+
+///|
 extern "js" fn element_has_attributes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasAttributes(obj)"
 
 ///|
 impl TElement with has_attributes(self : Self) -> Bool {
   element_has_attributes_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_attributes_ffi(obj : JsValue) -> NamedNodeMap = "(obj) => obj.attributes"
+
+///|
+impl TElement with attributes(self : Self) -> NamedNodeMap {
+  element_attributes_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -504,6 +689,24 @@ impl TElement with attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRo
 }
 
 ///|
+extern "js" fn element_shadow_root_ffi(obj : JsValue) -> ShadowRoot = "(obj) => obj.shadowRoot"
+
+///|
+impl TElement with shadow_root(self : Self) -> ShadowRoot {
+  element_shadow_root_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_custom_element_registry_ffi(
+  obj : JsValue,
+) -> CustomElementRegistry = "(obj) => obj.customElementRegistry"
+
+///|
+impl TElement with custom_element_registry(self : Self) -> CustomElementRegistry {
+  element_custom_element_registry_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn element_closest_ffi(
   obj : JsValue,
   selectors : JsValue,
@@ -650,6 +853,44 @@ impl TElement with get_html(
   options? : GetHTMLOptions = GetHTMLOptions::empty(),
 ) -> String {
   element_get_html_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+}
+
+///|
+extern "js" fn element_inner_html_ffi(obj : JsValue) -> ElementInnerHTML = "(obj) => obj.innerHTML"
+
+///|
+impl TElement with inner_html(self : Self) -> ElementInnerHTML {
+  element_inner_html_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_set_inner_html_ffi(
+  obj : JsValue,
+  inner_html : JsValue,
+) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
+
+///|
+impl TElement with set_inner_html(self : Self, inner_html : ElementInnerHTML) -> Unit {
+  element_set_inner_html_ffi(TJsValue::to_js(self), TJsValue::to_js(inner_html))
+}
+
+///|
+extern "js" fn element_outer_html_ffi(obj : JsValue) -> ElementOuterHTML = "(obj) => obj.outerHTML"
+
+///|
+impl TElement with outer_html(self : Self) -> ElementOuterHTML {
+  element_outer_html_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_set_outer_html_ffi(
+  obj : JsValue,
+  outer_html : JsValue,
+) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outerHTML; }"
+
+///|
+impl TElement with set_outer_html(self : Self, outer_html : ElementOuterHTML) -> Unit {
+  element_set_outer_html_ffi(TJsValue::to_js(self), TJsValue::to_js(outer_html))
 }
 
 ///|
@@ -813,6 +1054,135 @@ impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise
 }
 
 ///|
+extern "js" fn element_scroll_top_ffi(obj : JsValue) -> Double = "(obj) => obj.scrollTop"
+
+///|
+impl TElement with scroll_top(self : Self) -> Double {
+  element_scroll_top_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_set_scroll_top_ffi(
+  obj : JsValue,
+  scroll_top : JsValue,
+) -> Unit = "(obj, scrollTop) => { obj.scrollTop = scrollTop; }"
+
+///|
+impl TElement with set_scroll_top(self : Self, scroll_top : Double) -> Unit {
+  element_set_scroll_top_ffi(TJsValue::to_js(self), TJsValue::to_js(scroll_top))
+}
+
+///|
+extern "js" fn element_scroll_left_ffi(obj : JsValue) -> Double = "(obj) => obj.scrollLeft"
+
+///|
+impl TElement with scroll_left(self : Self) -> Double {
+  element_scroll_left_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_set_scroll_left_ffi(
+  obj : JsValue,
+  scroll_left : JsValue,
+) -> Unit = "(obj, scrollLeft) => { obj.scrollLeft = scrollLeft; }"
+
+///|
+impl TElement with set_scroll_left(self : Self, scroll_left : Double) -> Unit {
+  element_set_scroll_left_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(scroll_left),
+  )
+}
+
+///|
+extern "js" fn element_scroll_width_ffi(obj : JsValue) -> Int = "(obj) => obj.scrollWidth"
+
+///|
+impl TElement with scroll_width(self : Self) -> Int {
+  element_scroll_width_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_scroll_height_ffi(obj : JsValue) -> Int = "(obj) => obj.scrollHeight"
+
+///|
+impl TElement with scroll_height(self : Self) -> Int {
+  element_scroll_height_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_client_top_ffi(obj : JsValue) -> Int = "(obj) => obj.clientTop"
+
+///|
+impl TElement with client_top(self : Self) -> Int {
+  element_client_top_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_client_left_ffi(obj : JsValue) -> Int = "(obj) => obj.clientLeft"
+
+///|
+impl TElement with client_left(self : Self) -> Int {
+  element_client_left_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_client_width_ffi(obj : JsValue) -> Int = "(obj) => obj.clientWidth"
+
+///|
+impl TElement with client_width(self : Self) -> Int {
+  element_client_width_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_client_height_ffi(obj : JsValue) -> Int = "(obj) => obj.clientHeight"
+
+///|
+impl TElement with client_height(self : Self) -> Int {
+  element_client_height_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_current_css_zoom_ffi(obj : JsValue) -> Double = "(obj) => obj.currentCSSZoom"
+
+///|
+impl TElement with current_css_zoom(self : Self) -> Double {
+  element_current_css_zoom_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_children_ffi(obj : JsValue) -> HTMLCollection = "(obj) => obj.children"
+
+///|
+impl TElement with children(self : Self) -> HTMLCollection {
+  element_children_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_first_element_child_ffi(obj : JsValue) -> Element = "(obj) => obj.firstElementChild"
+
+///|
+impl TElement with first_element_child(self : Self) -> Element {
+  element_first_element_child_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_last_element_child_ffi(obj : JsValue) -> Element = "(obj) => obj.lastElementChild"
+
+///|
+impl TElement with last_element_child(self : Self) -> Element {
+  element_last_element_child_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_child_element_count_ffi(obj : JsValue) -> UInt = "(obj) => obj.childElementCount"
+
+///|
+impl TElement with child_element_count(self : Self) -> UInt {
+  element_child_element_count_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
 
 ///|
@@ -884,6 +1254,22 @@ impl TElement with query_selector_all(self : Self, selectors : String) -> NodeLi
 }
 
 ///|
+extern "js" fn element_previous_element_sibling_ffi(obj : JsValue) -> Element = "(obj) => obj.previousElementSibling"
+
+///|
+impl TElement with previous_element_sibling(self : Self) -> Element {
+  element_previous_element_sibling_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_next_element_sibling_ffi(obj : JsValue) -> Element = "(obj) => obj.nextElementSibling"
+
+///|
+impl TElement with next_element_sibling(self : Self) -> Element {
+  element_next_element_sibling_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
 
 ///|
@@ -913,6 +1299,14 @@ extern "js" fn element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove(
 ///|
 impl TElement with remove(self : Self) -> Unit {
   element_remove_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn element_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement = "(obj) => obj.assignedSlot"
+
+///|
+impl TElement with assigned_slot(self : Self) -> HTMLSlotElement {
+  element_assigned_slot_ffi(TJsValue::to_js(self))
 }
 
 ///|

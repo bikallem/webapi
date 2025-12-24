@@ -32,4 +32,25 @@ pub impl TNode for SVGPolygonElement
 pub impl TEventTarget for SVGPolygonElement
 
 ///|
-pub trait TSVGPolygonElement: TSVGGeometryElement {}
+pub trait TSVGPolygonElement: TSVGGeometryElement {
+  points(self : Self) -> SVGPointList = _
+  animated_points(self : Self) -> SVGPointList = _
+}
+
+///|
+extern "js" fn svg_polygon_element_points_ffi(obj : JsValue) -> SVGPointList = "(obj) => obj.points"
+
+///|
+impl TSVGPolygonElement with points(self : Self) -> SVGPointList {
+  svg_polygon_element_points_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn svg_polygon_element_animated_points_ffi(
+  obj : JsValue,
+) -> SVGPointList = "(obj) => obj.animatedPoints"
+
+///|
+impl TSVGPolygonElement with animated_points(self : Self) -> SVGPointList {
+  svg_polygon_element_animated_points_ffi(TJsValue::to_js(self))
+}

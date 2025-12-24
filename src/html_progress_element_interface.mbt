@@ -34,4 +34,68 @@ pub fn HTMLProgressElement::new() -> HTMLProgressElement {
 }
 
 ///|
-pub trait THTMLProgressElement: THTMLElement {}
+pub trait THTMLProgressElement: THTMLElement {
+  value(self : Self) -> Double = _
+  set_value(self : Self, value : Double) -> Unit = _
+  max(self : Self) -> Double = _
+  set_max(self : Self, max : Double) -> Unit = _
+  position(self : Self) -> Double = _
+  labels(self : Self) -> NodeList = _
+}
+
+///|
+extern "js" fn html_progress_element_value_ffi(obj : JsValue) -> Double = "(obj) => obj.value"
+
+///|
+impl THTMLProgressElement with value(self : Self) -> Double {
+  html_progress_element_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_progress_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+impl THTMLProgressElement with set_value(self : Self, value : Double) -> Unit {
+  html_progress_element_set_value_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(value),
+  )
+}
+
+///|
+extern "js" fn html_progress_element_max_ffi(obj : JsValue) -> Double = "(obj) => obj.max"
+
+///|
+impl THTMLProgressElement with max(self : Self) -> Double {
+  html_progress_element_max_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_progress_element_set_max_ffi(
+  obj : JsValue,
+  max : JsValue,
+) -> Unit = "(obj, max) => { obj.max = max; }"
+
+///|
+impl THTMLProgressElement with set_max(self : Self, max : Double) -> Unit {
+  html_progress_element_set_max_ffi(TJsValue::to_js(self), TJsValue::to_js(max))
+}
+
+///|
+extern "js" fn html_progress_element_position_ffi(obj : JsValue) -> Double = "(obj) => obj.position"
+
+///|
+impl THTMLProgressElement with position(self : Self) -> Double {
+  html_progress_element_position_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_progress_element_labels_ffi(obj : JsValue) -> NodeList = "(obj) => obj.labels"
+
+///|
+impl THTMLProgressElement with labels(self : Self) -> NodeList {
+  html_progress_element_labels_ffi(TJsValue::to_js(self))
+}

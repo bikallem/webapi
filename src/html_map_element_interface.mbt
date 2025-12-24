@@ -32,4 +32,35 @@ pub fn HTMLMapElement::new() -> HTMLMapElement {
 }
 
 ///|
-pub trait THTMLMapElement: THTMLElement {}
+pub trait THTMLMapElement: THTMLElement {
+  name(self : Self) -> String = _
+  set_name(self : Self, name : String) -> Unit = _
+  areas(self : Self) -> HTMLCollection = _
+}
+
+///|
+extern "js" fn html_map_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
+
+///|
+impl THTMLMapElement with name(self : Self) -> String {
+  html_map_element_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_map_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+impl THTMLMapElement with set_name(self : Self, name : String) -> Unit {
+  html_map_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+}
+
+///|
+extern "js" fn html_map_element_areas_ffi(obj : JsValue) -> HTMLCollection = "(obj) => obj.areas"
+
+///|
+impl THTMLMapElement with areas(self : Self) -> HTMLCollection {
+  html_map_element_areas_ffi(TJsValue::to_js(self))
+}

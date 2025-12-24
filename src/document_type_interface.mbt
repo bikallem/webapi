@@ -52,10 +52,37 @@ pub impl TDocumentTypeReplaceWithNodes for String with to_js(self : String) -> J
 
 ///|
 pub trait TDocumentType: TNode {
+  name(self : Self) -> String = _
+  public_id(self : Self) -> String = _
+  system_id(self : Self) -> String = _
   before(self : Self, nodes : &TDocumentTypeBeforeNodes) -> Unit = _
   after(self : Self, nodes : &TDocumentTypeAfterNodes) -> Unit = _
   replace_with(self : Self, nodes : &TDocumentTypeReplaceWithNodes) -> Unit = _
   remove(self : Self) -> Unit = _
+}
+
+///|
+extern "js" fn document_type_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
+
+///|
+impl TDocumentType with name(self : Self) -> String {
+  document_type_name_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn document_type_public_id_ffi(obj : JsValue) -> String = "(obj) => obj.publicId"
+
+///|
+impl TDocumentType with public_id(self : Self) -> String {
+  document_type_public_id_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn document_type_system_id_ffi(obj : JsValue) -> String = "(obj) => obj.systemId"
+
+///|
+impl TDocumentType with system_id(self : Self) -> String {
+  document_type_system_id_ffi(TJsValue::to_js(self))
 }
 
 ///|

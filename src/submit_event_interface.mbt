@@ -29,4 +29,14 @@ pub fn SubmitEvent::new(
 }
 
 ///|
-pub trait TSubmitEvent: TEvent {}
+pub trait TSubmitEvent: TEvent {
+  submitter(self : Self) -> HTMLElement = _
+}
+
+///|
+extern "js" fn submit_event_submitter_ffi(obj : JsValue) -> HTMLElement = "(obj) => obj.submitter"
+
+///|
+impl TSubmitEvent with submitter(self : Self) -> HTMLElement {
+  submit_event_submitter_ffi(TJsValue::to_js(self))
+}

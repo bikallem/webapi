@@ -12,4 +12,14 @@ pub fn[T : THTMLCollection] HTMLCollection::into(self : HTMLCollection) -> T = "
 pub impl THTMLCollection for HTMLCollection
 
 ///|
-pub trait THTMLCollection: TJsValue {}
+pub trait THTMLCollection: TJsValue {
+  length(self : Self) -> UInt = _
+}
+
+///|
+extern "js" fn html_collection_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl THTMLCollection with length(self : Self) -> UInt {
+  html_collection_length_ffi(TJsValue::to_js(self))
+}

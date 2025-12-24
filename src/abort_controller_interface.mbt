@@ -21,7 +21,16 @@ pub fn AbortController::new() -> AbortController {
 
 ///|
 pub trait TAbortController: TJsValue {
+  signal(self : Self) -> AbortSignal = _
   abort(self : Self, reason? : JsValue) -> Unit = _
+}
+
+///|
+extern "js" fn abort_controller_signal_ffi(obj : JsValue) -> AbortSignal = "(obj) => obj.signal"
+
+///|
+impl TAbortController with signal(self : Self) -> AbortSignal {
+  abort_controller_signal_ffi(TJsValue::to_js(self))
 }
 
 ///|

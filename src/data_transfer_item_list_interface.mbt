@@ -17,10 +17,19 @@ pub impl TDataTransferItemList for DataTransferItemList
 
 ///|
 pub trait TDataTransferItemList: TJsValue {
+  length(self : Self) -> UInt = _
   add(self : Self, data : String, type_ : String) -> DataTransferItem = _
   add_2(self : Self, data : &TFile) -> DataTransferItem = _
   remove(self : Self, index : UInt) -> Unit = _
   clear(self : Self) -> Unit = _
+}
+
+///|
+extern "js" fn data_transfer_item_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TDataTransferItemList with length(self : Self) -> UInt {
+  data_transfer_item_list_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

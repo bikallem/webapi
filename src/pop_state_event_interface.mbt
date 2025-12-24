@@ -32,4 +32,25 @@ pub fn PopStateEvent::new(
 }
 
 ///|
-pub trait TPopStateEvent: TEvent {}
+pub trait TPopStateEvent: TEvent {
+  state(self : Self) -> JsValue = _
+  has_ua_visual_transition(self : Self) -> Bool = _
+}
+
+///|
+extern "js" fn pop_state_event_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.state"
+
+///|
+impl TPopStateEvent with state(self : Self) -> JsValue {
+  pop_state_event_state_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn pop_state_event_has_ua_visual_transition_ffi(
+  obj : JsValue,
+) -> Bool = "(obj) => obj.hasUAVisualTransition"
+
+///|
+impl TPopStateEvent with has_ua_visual_transition(self : Self) -> Bool {
+  pop_state_event_has_ua_visual_transition_ffi(TJsValue::to_js(self))
+}

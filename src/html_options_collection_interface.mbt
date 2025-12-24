@@ -48,12 +48,38 @@ pub impl THTMLOptionsCollectionAddBefore for Int with to_js(self : Int) -> JsVal
 
 ///|
 pub trait THTMLOptionsCollection: THTMLCollection {
+  length(self : Self) -> UInt = _
+  set_length(self : Self, length : UInt) -> Unit = _
   add(
     self : Self,
     element : &THTMLOptionsCollectionAddElement,
     before? : &THTMLOptionsCollectionAddBefore,
   ) -> Unit = _
   remove(self : Self, index : Int) -> Unit = _
+  selected_index(self : Self) -> Int = _
+  set_selected_index(self : Self, selected_index : Int) -> Unit = _
+}
+
+///|
+extern "js" fn html_options_collection_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl THTMLOptionsCollection with length(self : Self) -> UInt {
+  html_options_collection_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_options_collection_set_length_ffi(
+  obj : JsValue,
+  length : JsValue,
+) -> Unit = "(obj, length) => { obj.length = length; }"
+
+///|
+impl THTMLOptionsCollection with set_length(self : Self, length : UInt) -> Unit {
+  html_options_collection_set_length_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(length),
+  )
 }
 
 ///|
@@ -87,5 +113,30 @@ impl THTMLOptionsCollection with remove(self : Self, index : Int) -> Unit {
   html_options_collection_remove_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(index),
+  )
+}
+
+///|
+extern "js" fn html_options_collection_selected_index_ffi(obj : JsValue) -> Int = "(obj) => obj.selectedIndex"
+
+///|
+impl THTMLOptionsCollection with selected_index(self : Self) -> Int {
+  html_options_collection_selected_index_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_options_collection_set_selected_index_ffi(
+  obj : JsValue,
+  selected_index : JsValue,
+) -> Unit = "(obj, selectedIndex) => { obj.selectedIndex = selectedIndex; }"
+
+///|
+impl THTMLOptionsCollection with set_selected_index(
+  self : Self,
+  selected_index : Int,
+) -> Unit {
+  html_options_collection_set_selected_index_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selected_index),
   )
 }

@@ -13,11 +13,58 @@ pub impl THistory for History
 
 ///|
 pub trait THistory: TJsValue {
+  length(self : Self) -> UInt = _
+  scroll_restoration(self : Self) -> ScrollRestoration = _
+  set_scroll_restoration(self : Self, scroll_restoration : ScrollRestoration) -> Unit = _
+  state(self : Self) -> JsValue = _
   go(self : Self, delta? : Int) -> Unit = _
   back(self : Self) -> Unit = _
   forward(self : Self) -> Unit = _
   push_state(self : Self, data : JsValue, unused : String, url? : String) -> Unit = _
   replace_state(self : Self, data : JsValue, unused : String, url? : String) -> Unit = _
+}
+
+///|
+extern "js" fn history_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl THistory with length(self : Self) -> UInt {
+  history_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn history_scroll_restoration_ffi(
+  obj : JsValue,
+) -> ScrollRestoration = "(obj) => obj.scrollRestoration"
+
+///|
+impl THistory with scroll_restoration(self : Self) -> ScrollRestoration {
+  history_scroll_restoration_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn history_set_scroll_restoration_ffi(
+  obj : JsValue,
+  scroll_restoration : JsValue,
+) -> Unit = "(obj, scrollRestoration) => { obj.scrollRestoration = scrollRestoration; }"
+
+///|
+impl THistory with set_scroll_restoration(
+  self : Self,
+  scroll_restoration : ScrollRestoration,
+) -> Unit {
+  history_set_scroll_restoration_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(scroll_restoration),
+  )
+}
+
+///|
+extern "js" fn history_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.state"
+
+///|
+impl THistory with state(self : Self) -> JsValue {
+  history_state_ffi(TJsValue::to_js(self))
 }
 
 ///|

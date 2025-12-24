@@ -13,12 +13,23 @@ pub impl TDOMTokenList for DOMTokenList
 
 ///|
 pub trait TDOMTokenList: TJsValue {
+  length(self : Self) -> UInt = _
   contains(self : Self, token : String) -> Bool = _
   add(self : Self, tokens : String) -> Unit = _
   remove(self : Self, tokens : String) -> Unit = _
   toggle(self : Self, token : String, force? : Bool) -> Bool = _
   replace(self : Self, token : String, new_token : String) -> Bool = _
   supports(self : Self, token : String) -> Bool = _
+  value(self : Self) -> String = _
+  set_value(self : Self, value : String) -> Unit = _
+}
+
+///|
+extern "js" fn dom_token_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TDOMTokenList with length(self : Self) -> UInt {
+  dom_token_list_length_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -92,4 +103,23 @@ extern "js" fn dom_token_list_supports_ffi(
 ///|
 impl TDOMTokenList with supports(self : Self, token : String) -> Bool {
   dom_token_list_supports_ffi(TJsValue::to_js(self), TJsValue::to_js(token))
+}
+
+///|
+extern "js" fn dom_token_list_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
+
+///|
+impl TDOMTokenList with value(self : Self) -> String {
+  dom_token_list_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_token_list_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+impl TDOMTokenList with set_value(self : Self, value : String) -> Unit {
+  dom_token_list_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }

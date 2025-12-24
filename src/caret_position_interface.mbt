@@ -13,7 +13,25 @@ pub impl TCaretPosition for CaretPosition
 
 ///|
 pub trait TCaretPosition: TJsValue {
+  offset_node(self : Self) -> Node = _
+  offset(self : Self) -> UInt = _
   get_client_rect(self : Self) -> DOMRect = _
+}
+
+///|
+extern "js" fn caret_position_offset_node_ffi(obj : JsValue) -> Node = "(obj) => obj.offsetNode"
+
+///|
+impl TCaretPosition with offset_node(self : Self) -> Node {
+  caret_position_offset_node_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn caret_position_offset_ffi(obj : JsValue) -> UInt = "(obj) => obj.offset"
+
+///|
+impl TCaretPosition with offset(self : Self) -> UInt {
+  caret_position_offset_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -13,8 +13,17 @@ pub impl TStorage for Storage
 
 ///|
 pub trait TStorage: TJsValue {
+  length(self : Self) -> UInt = _
   key(self : Self, index : UInt) -> String = _
   clear(self : Self) -> Unit = _
+}
+
+///|
+extern "js" fn storage_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TStorage with length(self : Self) -> UInt {
+  storage_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

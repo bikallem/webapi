@@ -32,4 +32,26 @@ pub fn HTMLDivElement::new() -> HTMLDivElement {
 }
 
 ///|
-pub trait THTMLDivElement: THTMLElement {}
+pub trait THTMLDivElement: THTMLElement {
+  align(self : Self) -> String = _
+  set_align(self : Self, align : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_div_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
+
+///|
+impl THTMLDivElement with align(self : Self) -> String {
+  html_div_element_align_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_div_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+impl THTMLDivElement with set_align(self : Self, align : String) -> Unit {
+  html_div_element_set_align_ffi(TJsValue::to_js(self), TJsValue::to_js(align))
+}

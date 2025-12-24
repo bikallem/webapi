@@ -29,4 +29,38 @@ pub fn TrackEvent::new(
 }
 
 ///|
-pub trait TTrackEvent: TEvent {}
+#external
+pub type TrackEventTrack
+
+///|
+pub fn[T : TTrackEventTrack] TrackEventTrack::into(self : TrackEventTrack) -> T = "%identity"
+
+///|
+pub impl TTrackEventTrack for TrackEventTrack with to_js(self : TrackEventTrack) -> JsValue = "%identity"
+
+///|
+pub(open) trait TTrackEventTrack {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TTrackEventTrack for VideoTrack with to_js(self : VideoTrack) -> JsValue = "%identity"
+
+///|
+pub impl TTrackEventTrack for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
+
+///|
+pub impl TTrackEventTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
+
+///|
+pub trait TTrackEvent: TEvent {
+  track(self : Self) -> TrackEventTrack = _
+}
+
+///|
+extern "js" fn track_event_track_ffi(obj : JsValue) -> TrackEventTrack = "(obj) => obj.track"
+
+///|
+impl TTrackEvent with track(self : Self) -> TrackEventTrack {
+  track_event_track_ffi(TJsValue::to_js(self))
+}

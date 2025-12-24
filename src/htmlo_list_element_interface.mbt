@@ -34,4 +34,98 @@ pub fn HTMLOListElement::new() -> HTMLOListElement {
 }
 
 ///|
-pub trait THTMLOListElement: THTMLElement {}
+pub trait THTMLOListElement: THTMLElement {
+  reversed(self : Self) -> Bool = _
+  set_reversed(self : Self, reversed : Bool) -> Unit = _
+  start(self : Self) -> Int = _
+  set_start(self : Self, start : Int) -> Unit = _
+  type_(self : Self) -> String = _
+  set_type_(self : Self, type_ : String) -> Unit = _
+  compact(self : Self) -> Bool = _
+  set_compact(self : Self, compact : Bool) -> Unit = _
+}
+
+///|
+extern "js" fn htmlo_list_element_reversed_ffi(obj : JsValue) -> Bool = "(obj) => obj.reversed"
+
+///|
+impl THTMLOListElement with reversed(self : Self) -> Bool {
+  htmlo_list_element_reversed_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn htmlo_list_element_set_reversed_ffi(
+  obj : JsValue,
+  reversed : JsValue,
+) -> Unit = "(obj, reversed) => { obj.reversed = reversed; }"
+
+///|
+impl THTMLOListElement with set_reversed(self : Self, reversed : Bool) -> Unit {
+  htmlo_list_element_set_reversed_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(reversed),
+  )
+}
+
+///|
+extern "js" fn htmlo_list_element_start_ffi(obj : JsValue) -> Int = "(obj) => obj.start"
+
+///|
+impl THTMLOListElement with start(self : Self) -> Int {
+  htmlo_list_element_start_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn htmlo_list_element_set_start_ffi(
+  obj : JsValue,
+  start : JsValue,
+) -> Unit = "(obj, start) => { obj.start = start; }"
+
+///|
+impl THTMLOListElement with set_start(self : Self, start : Int) -> Unit {
+  htmlo_list_element_set_start_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(start),
+  )
+}
+
+///|
+extern "js" fn htmlo_list_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
+
+///|
+impl THTMLOListElement with type_(self : Self) -> String {
+  htmlo_list_element_type_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn htmlo_list_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+impl THTMLOListElement with set_type_(self : Self, type_ : String) -> Unit {
+  htmlo_list_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
+}
+
+///|
+extern "js" fn htmlo_list_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
+
+///|
+impl THTMLOListElement with compact(self : Self) -> Bool {
+  htmlo_list_element_compact_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn htmlo_list_element_set_compact_ffi(
+  obj : JsValue,
+  compact : JsValue,
+) -> Unit = "(obj, compact) => { obj.compact = compact; }"
+
+///|
+impl THTMLOListElement with set_compact(self : Self, compact : Bool) -> Unit {
+  htmlo_list_element_set_compact_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(compact),
+  )
+}

@@ -52,15 +52,47 @@ pub impl TCharacterDataReplaceWithNodes for String with to_js(self : String) -> 
 
 ///|
 pub trait TCharacterData: TNode {
+  data(self : Self) -> String = _
+  set_data(self : Self, data : String) -> Unit = _
+  length(self : Self) -> UInt = _
   substring_data(self : Self, offset : UInt, count : UInt) -> String = _
   append_data(self : Self, data : String) -> Unit = _
   insert_data(self : Self, offset : UInt, data : String) -> Unit = _
   delete_data(self : Self, offset : UInt, count : UInt) -> Unit = _
   replace_data(self : Self, offset : UInt, count : UInt, data : String) -> Unit = _
+  previous_element_sibling(self : Self) -> Element = _
+  next_element_sibling(self : Self) -> Element = _
   before(self : Self, nodes : &TCharacterDataBeforeNodes) -> Unit = _
   after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit = _
   replace_with(self : Self, nodes : &TCharacterDataReplaceWithNodes) -> Unit = _
   remove(self : Self) -> Unit = _
+}
+
+///|
+extern "js" fn character_data_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
+
+///|
+impl TCharacterData with data(self : Self) -> String {
+  character_data_data_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn character_data_set_data_ffi(
+  obj : JsValue,
+  data : JsValue,
+) -> Unit = "(obj, data) => { obj.data = data; }"
+
+///|
+impl TCharacterData with set_data(self : Self, data : String) -> Unit {
+  character_data_set_data_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
+}
+
+///|
+extern "js" fn character_data_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TCharacterData with length(self : Self) -> UInt {
+  character_data_length_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -147,6 +179,26 @@ impl TCharacterData with replace_data(
     TJsValue::to_js(count),
     TJsValue::to_js(data),
   )
+}
+
+///|
+extern "js" fn character_data_previous_element_sibling_ffi(
+  obj : JsValue,
+) -> Element = "(obj) => obj.previousElementSibling"
+
+///|
+impl TCharacterData with previous_element_sibling(self : Self) -> Element {
+  character_data_previous_element_sibling_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn character_data_next_element_sibling_ffi(
+  obj : JsValue,
+) -> Element = "(obj) => obj.nextElementSibling"
+
+///|
+impl TCharacterData with next_element_sibling(self : Self) -> Element {
+  character_data_next_element_sibling_ffi(TJsValue::to_js(self))
 }
 
 ///|

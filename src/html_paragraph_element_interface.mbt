@@ -36,4 +36,29 @@ pub fn HTMLParagraphElement::new() -> HTMLParagraphElement {
 }
 
 ///|
-pub trait THTMLParagraphElement: THTMLElement {}
+pub trait THTMLParagraphElement: THTMLElement {
+  align(self : Self) -> String = _
+  set_align(self : Self, align : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_paragraph_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
+
+///|
+impl THTMLParagraphElement with align(self : Self) -> String {
+  html_paragraph_element_align_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_paragraph_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+impl THTMLParagraphElement with set_align(self : Self, align : String) -> Unit {
+  html_paragraph_element_set_align_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(align),
+  )
+}

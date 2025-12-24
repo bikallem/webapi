@@ -31,6 +31,8 @@ pub fn Text::new(data? : String = "") -> Text {
 ///|
 pub trait TText: TCharacterData {
   split_text(self : Self, offset : UInt) -> Text = _
+  whole_text(self : Self) -> String = _
+  assigned_slot(self : Self) -> HTMLSlotElement = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[DOMQuad] = _
   convert_quad_from_node(
     self : Self,
@@ -58,6 +60,22 @@ extern "js" fn text_split_text_ffi(obj : JsValue, offset : JsValue) -> Text = "(
 ///|
 impl TText with split_text(self : Self, offset : UInt) -> Text {
   text_split_text_ffi(TJsValue::to_js(self), TJsValue::to_js(offset))
+}
+
+///|
+extern "js" fn text_whole_text_ffi(obj : JsValue) -> String = "(obj) => obj.wholeText"
+
+///|
+impl TText with whole_text(self : Self) -> String {
+  text_whole_text_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn text_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement = "(obj) => obj.assignedSlot"
+
+///|
+impl TText with assigned_slot(self : Self) -> HTMLSlotElement {
+  text_assigned_slot_ffi(TJsValue::to_js(self))
 }
 
 ///|

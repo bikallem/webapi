@@ -32,4 +32,14 @@ pub fn FocusEvent::new(
 }
 
 ///|
-pub trait TFocusEvent: TUIEvent {}
+pub trait TFocusEvent: TUIEvent {
+  related_target(self : Self) -> EventTarget = _
+}
+
+///|
+extern "js" fn focus_event_related_target_ffi(obj : JsValue) -> EventTarget = "(obj) => obj.relatedTarget"
+
+///|
+impl TFocusEvent with related_target(self : Self) -> EventTarget {
+  focus_event_related_target_ffi(TJsValue::to_js(self))
+}

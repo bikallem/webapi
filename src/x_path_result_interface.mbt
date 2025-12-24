@@ -43,8 +43,71 @@ pub const X_PATH_RESULT_FIRST_ORDERED_NODE_TYPE : UInt = 9
 
 ///|
 pub trait TXPathResult: TJsValue {
+  result_type(self : Self) -> UInt = _
+  number_value(self : Self) -> Double = _
+  string_value(self : Self) -> String = _
+  boolean_value(self : Self) -> Bool = _
+  single_node_value(self : Self) -> Node = _
+  invalid_iterator_state(self : Self) -> Bool = _
+  snapshot_length(self : Self) -> UInt = _
   iterate_next(self : Self) -> Node = _
   snapshot_item(self : Self, index : UInt) -> Node = _
+}
+
+///|
+extern "js" fn x_path_result_result_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.resultType"
+
+///|
+impl TXPathResult with result_type(self : Self) -> UInt {
+  x_path_result_result_type_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn x_path_result_number_value_ffi(obj : JsValue) -> Double = "(obj) => obj.numberValue"
+
+///|
+impl TXPathResult with number_value(self : Self) -> Double {
+  x_path_result_number_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn x_path_result_string_value_ffi(obj : JsValue) -> String = "(obj) => obj.stringValue"
+
+///|
+impl TXPathResult with string_value(self : Self) -> String {
+  x_path_result_string_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn x_path_result_boolean_value_ffi(obj : JsValue) -> Bool = "(obj) => obj.booleanValue"
+
+///|
+impl TXPathResult with boolean_value(self : Self) -> Bool {
+  x_path_result_boolean_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn x_path_result_single_node_value_ffi(obj : JsValue) -> Node = "(obj) => obj.singleNodeValue"
+
+///|
+impl TXPathResult with single_node_value(self : Self) -> Node {
+  x_path_result_single_node_value_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn x_path_result_invalid_iterator_state_ffi(obj : JsValue) -> Bool = "(obj) => obj.invalidIteratorState"
+
+///|
+impl TXPathResult with invalid_iterator_state(self : Self) -> Bool {
+  x_path_result_invalid_iterator_state_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn x_path_result_snapshot_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.snapshotLength"
+
+///|
+impl TXPathResult with snapshot_length(self : Self) -> UInt {
+  x_path_result_snapshot_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

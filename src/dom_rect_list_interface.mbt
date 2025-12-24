@@ -12,4 +12,14 @@ pub fn[T : TDOMRectList] DOMRectList::into(self : DOMRectList) -> T = "%identity
 pub impl TDOMRectList for DOMRectList
 
 ///|
-pub trait TDOMRectList: TJsValue {}
+pub trait TDOMRectList: TJsValue {
+  length(self : Self) -> UInt = _
+}
+
+///|
+extern "js" fn dom_rect_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
+
+///|
+impl TDOMRectList with length(self : Self) -> UInt {
+  dom_rect_list_length_ffi(TJsValue::to_js(self))
+}

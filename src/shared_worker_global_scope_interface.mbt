@@ -23,7 +23,18 @@ pub impl TEventTarget for SharedWorkerGlobalScope
 
 ///|
 pub trait TSharedWorkerGlobalScope: TWorkerGlobalScope {
+  name(self : Self) -> String = _
   close(self : Self) -> Unit = _
+  onconnect(self : Self) -> EventHandler = _
+  set_onconnect(self : Self, onconnect : EventHandler) -> Unit = _
+}
+
+///|
+extern "js" fn shared_worker_global_scope_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
+
+///|
+impl TSharedWorkerGlobalScope with name(self : Self) -> String {
+  shared_worker_global_scope_name_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -32,4 +43,31 @@ extern "js" fn shared_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(o
 ///|
 impl TSharedWorkerGlobalScope with close(self : Self) -> Unit {
   shared_worker_global_scope_close_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn shared_worker_global_scope_onconnect_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onconnect"
+
+///|
+impl TSharedWorkerGlobalScope with onconnect(self : Self) -> EventHandler {
+  shared_worker_global_scope_onconnect_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn shared_worker_global_scope_set_onconnect_ffi(
+  obj : JsValue,
+  onconnect : JsValue,
+) -> Unit = "(obj, onconnect) => { obj.onconnect = onconnect; }"
+
+///|
+impl TSharedWorkerGlobalScope with set_onconnect(
+  self : Self,
+  onconnect : EventHandler,
+) -> Unit {
+  shared_worker_global_scope_set_onconnect_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onconnect),
+  )
 }

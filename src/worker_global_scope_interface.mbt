@@ -33,7 +33,25 @@ pub impl TWorkerGlobalScopeImportScriptsUrls for String with to_js(
 
 ///|
 pub trait TWorkerGlobalScope: TEventTarget {
+  self(self : Self) -> WorkerGlobalScope = _
+  location(self : Self) -> WorkerLocation = _
+  navigator(self : Self) -> WorkerNavigator = _
   import_scripts(self : Self, urls : &TWorkerGlobalScopeImportScriptsUrls) -> Unit = _
+  onerror(self : Self) -> OnErrorEventHandler = _
+  set_onerror(self : Self, onerror : OnErrorEventHandler) -> Unit = _
+  onlanguagechange(self : Self) -> EventHandler = _
+  set_onlanguagechange(self : Self, onlanguagechange : EventHandler) -> Unit = _
+  onoffline(self : Self) -> EventHandler = _
+  set_onoffline(self : Self, onoffline : EventHandler) -> Unit = _
+  ononline(self : Self) -> EventHandler = _
+  set_ononline(self : Self, ononline : EventHandler) -> Unit = _
+  onrejectionhandled(self : Self) -> EventHandler = _
+  set_onrejectionhandled(self : Self, onrejectionhandled : EventHandler) -> Unit = _
+  onunhandledrejection(self : Self) -> EventHandler = _
+  set_onunhandledrejection(self : Self, onunhandledrejection : EventHandler) -> Unit = _
+  origin(self : Self) -> String = _
+  is_secure_context(self : Self) -> Bool = _
+  cross_origin_isolated(self : Self) -> Bool = _
   report_error(self : Self, e : JsValue) -> Unit = _
   btoa(self : Self, data : String) -> String = _
   atob(self : Self, data : String) -> String = _
@@ -74,6 +92,34 @@ pub trait TWorkerGlobalScope: TEventTarget {
 }
 
 ///|
+extern "js" fn worker_global_scope_self_ffi(obj : JsValue) -> WorkerGlobalScope = "(obj) => obj.self"
+
+///|
+impl TWorkerGlobalScope with self(self : Self) -> WorkerGlobalScope {
+  worker_global_scope_self_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_location_ffi(
+  obj : JsValue,
+) -> WorkerLocation = "(obj) => obj.location"
+
+///|
+impl TWorkerGlobalScope with location(self : Self) -> WorkerLocation {
+  worker_global_scope_location_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_navigator_ffi(
+  obj : JsValue,
+) -> WorkerNavigator = "(obj) => obj.navigator"
+
+///|
+impl TWorkerGlobalScope with navigator(self : Self) -> WorkerNavigator {
+  worker_global_scope_navigator_ffi(TJsValue::to_js(self))
+}
+
+///|
 extern "js" fn worker_global_scope_import_scripts_ffi(
   obj : JsValue,
   urls : JsValue,
@@ -85,6 +131,187 @@ impl TWorkerGlobalScope with import_scripts(
   urls : &TWorkerGlobalScopeImportScriptsUrls,
 ) -> Unit {
   worker_global_scope_import_scripts_ffi(TJsValue::to_js(self), urls.to_js())
+}
+
+///|
+extern "js" fn worker_global_scope_onerror_ffi(
+  obj : JsValue,
+) -> OnErrorEventHandler = "(obj) => obj.onerror"
+
+///|
+impl TWorkerGlobalScope with onerror(self : Self) -> OnErrorEventHandler {
+  worker_global_scope_onerror_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+impl TWorkerGlobalScope with set_onerror(
+  self : Self,
+  onerror : OnErrorEventHandler,
+) -> Unit {
+  worker_global_scope_set_onerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onerror),
+  )
+}
+
+///|
+extern "js" fn worker_global_scope_onlanguagechange_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onlanguagechange"
+
+///|
+impl TWorkerGlobalScope with onlanguagechange(self : Self) -> EventHandler {
+  worker_global_scope_onlanguagechange_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_set_onlanguagechange_ffi(
+  obj : JsValue,
+  onlanguagechange : JsValue,
+) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
+
+///|
+impl TWorkerGlobalScope with set_onlanguagechange(
+  self : Self,
+  onlanguagechange : EventHandler,
+) -> Unit {
+  worker_global_scope_set_onlanguagechange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onlanguagechange),
+  )
+}
+
+///|
+extern "js" fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onoffline"
+
+///|
+impl TWorkerGlobalScope with onoffline(self : Self) -> EventHandler {
+  worker_global_scope_onoffline_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_set_onoffline_ffi(
+  obj : JsValue,
+  onoffline : JsValue,
+) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
+
+///|
+impl TWorkerGlobalScope with set_onoffline(
+  self : Self,
+  onoffline : EventHandler,
+) -> Unit {
+  worker_global_scope_set_onoffline_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onoffline),
+  )
+}
+
+///|
+extern "js" fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ononline"
+
+///|
+impl TWorkerGlobalScope with ononline(self : Self) -> EventHandler {
+  worker_global_scope_ononline_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_set_ononline_ffi(
+  obj : JsValue,
+  ononline : JsValue,
+) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
+
+///|
+impl TWorkerGlobalScope with set_ononline(self : Self, ononline : EventHandler) -> Unit {
+  worker_global_scope_set_ononline_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ononline),
+  )
+}
+
+///|
+extern "js" fn worker_global_scope_onrejectionhandled_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onrejectionhandled"
+
+///|
+impl TWorkerGlobalScope with onrejectionhandled(self : Self) -> EventHandler {
+  worker_global_scope_onrejectionhandled_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  onrejectionhandled : JsValue,
+) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
+
+///|
+impl TWorkerGlobalScope with set_onrejectionhandled(
+  self : Self,
+  onrejectionhandled : EventHandler,
+) -> Unit {
+  worker_global_scope_set_onrejectionhandled_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onrejectionhandled),
+  )
+}
+
+///|
+extern "js" fn worker_global_scope_onunhandledrejection_ffi(
+  obj : JsValue,
+) -> EventHandler = "(obj) => obj.onunhandledrejection"
+
+///|
+impl TWorkerGlobalScope with onunhandledrejection(self : Self) -> EventHandler {
+  worker_global_scope_onunhandledrejection_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  onunhandledrejection : JsValue,
+) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
+
+///|
+impl TWorkerGlobalScope with set_onunhandledrejection(
+  self : Self,
+  onunhandledrejection : EventHandler,
+) -> Unit {
+  worker_global_scope_set_onunhandledrejection_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onunhandledrejection),
+  )
+}
+
+///|
+extern "js" fn worker_global_scope_origin_ffi(obj : JsValue) -> String = "(obj) => obj.origin"
+
+///|
+impl TWorkerGlobalScope with origin(self : Self) -> String {
+  worker_global_scope_origin_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_is_secure_context_ffi(obj : JsValue) -> Bool = "(obj) => obj.isSecureContext"
+
+///|
+impl TWorkerGlobalScope with is_secure_context(self : Self) -> Bool {
+  worker_global_scope_is_secure_context_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn worker_global_scope_cross_origin_isolated_ffi(
+  obj : JsValue,
+) -> Bool = "(obj) => obj.crossOriginIsolated"
+
+///|
+impl TWorkerGlobalScope with cross_origin_isolated(self : Self) -> Bool {
+  worker_global_scope_cross_origin_isolated_ffi(TJsValue::to_js(self))
 }
 
 ///|

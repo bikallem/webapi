@@ -30,10 +30,21 @@ pub impl TEventTarget for SVGGeometryElement
 
 ///|
 pub trait TSVGGeometryElement: TSVGGraphicsElement {
+  path_length(self : Self) -> SVGAnimatedNumber = _
   is_point_in_fill(self : Self, point? : DOMPointInit) -> Bool = _
   is_point_in_stroke(self : Self, point? : DOMPointInit) -> Bool = _
   get_total_length(self : Self) -> Float = _
   get_point_at_length(self : Self, distance : Float) -> DOMPoint = _
+}
+
+///|
+extern "js" fn svg_geometry_element_path_length_ffi(
+  obj : JsValue,
+) -> SVGAnimatedNumber = "(obj) => obj.pathLength"
+
+///|
+impl TSVGGeometryElement with path_length(self : Self) -> SVGAnimatedNumber {
+  svg_geometry_element_path_length_ffi(TJsValue::to_js(self))
 }
 
 ///|

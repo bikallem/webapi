@@ -34,4 +34,16 @@ pub fn HTMLDataListElement::new() -> HTMLDataListElement {
 }
 
 ///|
-pub trait THTMLDataListElement: THTMLElement {}
+pub trait THTMLDataListElement: THTMLElement {
+  options(self : Self) -> HTMLCollection = _
+}
+
+///|
+extern "js" fn html_data_list_element_options_ffi(
+  obj : JsValue,
+) -> HTMLCollection = "(obj) => obj.options"
+
+///|
+impl THTMLDataListElement with options(self : Self) -> HTMLCollection {
+  html_data_list_element_options_ffi(TJsValue::to_js(self))
+}

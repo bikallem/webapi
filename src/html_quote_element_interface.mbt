@@ -34,4 +34,26 @@ pub fn HTMLQuoteElement::new() -> HTMLQuoteElement {
 }
 
 ///|
-pub trait THTMLQuoteElement: THTMLElement {}
+pub trait THTMLQuoteElement: THTMLElement {
+  cite(self : Self) -> String = _
+  set_cite(self : Self, cite : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_quote_element_cite_ffi(obj : JsValue) -> String = "(obj) => obj.cite"
+
+///|
+impl THTMLQuoteElement with cite(self : Self) -> String {
+  html_quote_element_cite_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_quote_element_set_cite_ffi(
+  obj : JsValue,
+  cite : JsValue,
+) -> Unit = "(obj, cite) => { obj.cite = cite; }"
+
+///|
+impl THTMLQuoteElement with set_cite(self : Self, cite : String) -> Unit {
+  html_quote_element_set_cite_ffi(TJsValue::to_js(self), TJsValue::to_js(cite))
+}

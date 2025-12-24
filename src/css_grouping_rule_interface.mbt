@@ -16,8 +16,17 @@ pub impl TCSSRule for CSSGroupingRule
 
 ///|
 pub trait TCSSGroupingRule: TCSSRule {
+  css_rules(self : Self) -> CSSRuleList = _
   insert_rule(self : Self, rule : CSSOMString, index? : UInt) -> UInt = _
   delete_rule(self : Self, index : UInt) -> Unit = _
+}
+
+///|
+extern "js" fn css_grouping_rule_css_rules_ffi(obj : JsValue) -> CSSRuleList = "(obj) => obj.cssRules"
+
+///|
+impl TCSSGroupingRule with css_rules(self : Self) -> CSSRuleList {
+  css_grouping_rule_css_rules_ffi(TJsValue::to_js(self))
 }
 
 ///|

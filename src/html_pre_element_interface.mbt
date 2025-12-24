@@ -32,4 +32,26 @@ pub fn HTMLPreElement::new() -> HTMLPreElement {
 }
 
 ///|
-pub trait THTMLPreElement: THTMLElement {}
+pub trait THTMLPreElement: THTMLElement {
+  width(self : Self) -> Int = _
+  set_width(self : Self, width : Int) -> Unit = _
+}
+
+///|
+extern "js" fn html_pre_element_width_ffi(obj : JsValue) -> Int = "(obj) => obj.width"
+
+///|
+impl THTMLPreElement with width(self : Self) -> Int {
+  html_pre_element_width_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_pre_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+impl THTMLPreElement with set_width(self : Self, width : Int) -> Unit {
+  html_pre_element_set_width_ffi(TJsValue::to_js(self), TJsValue::to_js(width))
+}

@@ -32,4 +32,29 @@ pub fn HTMLMenuElement::new() -> HTMLMenuElement {
 }
 
 ///|
-pub trait THTMLMenuElement: THTMLElement {}
+pub trait THTMLMenuElement: THTMLElement {
+  compact(self : Self) -> Bool = _
+  set_compact(self : Self, compact : Bool) -> Unit = _
+}
+
+///|
+extern "js" fn html_menu_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
+
+///|
+impl THTMLMenuElement with compact(self : Self) -> Bool {
+  html_menu_element_compact_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_menu_element_set_compact_ffi(
+  obj : JsValue,
+  compact : JsValue,
+) -> Unit = "(obj, compact) => { obj.compact = compact; }"
+
+///|
+impl THTMLMenuElement with set_compact(self : Self, compact : Bool) -> Unit {
+  html_menu_element_set_compact_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(compact),
+  )
+}

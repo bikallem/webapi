@@ -32,4 +32,29 @@ pub fn HTMLHtmlElement::new() -> HTMLHtmlElement {
 }
 
 ///|
-pub trait THTMLHtmlElement: THTMLElement {}
+pub trait THTMLHtmlElement: THTMLElement {
+  version(self : Self) -> String = _
+  set_version(self : Self, version : String) -> Unit = _
+}
+
+///|
+extern "js" fn html_html_element_version_ffi(obj : JsValue) -> String = "(obj) => obj.version"
+
+///|
+impl THTMLHtmlElement with version(self : Self) -> String {
+  html_html_element_version_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn html_html_element_set_version_ffi(
+  obj : JsValue,
+  version : JsValue,
+) -> Unit = "(obj, version) => { obj.version = version; }"
+
+///|
+impl THTMLHtmlElement with set_version(self : Self, version : String) -> Unit {
+  html_html_element_set_version_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(version),
+  )
+}

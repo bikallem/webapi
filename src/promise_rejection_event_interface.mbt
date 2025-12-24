@@ -36,4 +36,23 @@ pub fn PromiseRejectionEvent::new(
 }
 
 ///|
-pub trait TPromiseRejectionEvent: TEvent {}
+pub trait TPromiseRejectionEvent: TEvent {
+  promise(self : Self) -> JsValue = _
+  reason(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn promise_rejection_event_promise_ffi(obj : JsValue) -> JsValue = "(obj) => obj.promise"
+
+///|
+impl TPromiseRejectionEvent with promise(self : Self) -> JsValue {
+  promise_rejection_event_promise_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn promise_rejection_event_reason_ffi(obj : JsValue) -> JsValue = "(obj) => obj.reason"
+
+///|
+impl TPromiseRejectionEvent with reason(self : Self) -> JsValue {
+  promise_rejection_event_reason_ffi(TJsValue::to_js(self))
+}

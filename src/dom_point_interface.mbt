@@ -38,4 +38,77 @@ pub fn DOMPoint::new(
 }
 
 ///|
-pub trait TDOMPoint: TDOMPointReadOnly {}
+pub trait TDOMPoint: TDOMPointReadOnly {
+  x(self : Self) -> Double = _
+  set_x(self : Self, x : Double) -> Unit = _
+  y(self : Self) -> Double = _
+  set_y(self : Self, y : Double) -> Unit = _
+  z(self : Self) -> Double = _
+  set_z(self : Self, z : Double) -> Unit = _
+  w(self : Self) -> Double = _
+  set_w(self : Self, w : Double) -> Unit = _
+}
+
+///|
+extern "js" fn dom_point_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
+
+///|
+impl TDOMPoint with x(self : Self) -> Double {
+  dom_point_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_point_set_x_ffi(obj : JsValue, x : JsValue) -> Unit = "(obj, x) => { obj.x = x; }"
+
+///|
+impl TDOMPoint with set_x(self : Self, x : Double) -> Unit {
+  dom_point_set_x_ffi(TJsValue::to_js(self), TJsValue::to_js(x))
+}
+
+///|
+extern "js" fn dom_point_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
+
+///|
+impl TDOMPoint with y(self : Self) -> Double {
+  dom_point_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_point_set_y_ffi(obj : JsValue, y : JsValue) -> Unit = "(obj, y) => { obj.y = y; }"
+
+///|
+impl TDOMPoint with set_y(self : Self, y : Double) -> Unit {
+  dom_point_set_y_ffi(TJsValue::to_js(self), TJsValue::to_js(y))
+}
+
+///|
+extern "js" fn dom_point_z_ffi(obj : JsValue) -> Double = "(obj) => obj.z"
+
+///|
+impl TDOMPoint with z(self : Self) -> Double {
+  dom_point_z_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_point_set_z_ffi(obj : JsValue, z : JsValue) -> Unit = "(obj, z) => { obj.z = z; }"
+
+///|
+impl TDOMPoint with set_z(self : Self, z : Double) -> Unit {
+  dom_point_set_z_ffi(TJsValue::to_js(self), TJsValue::to_js(z))
+}
+
+///|
+extern "js" fn dom_point_w_ffi(obj : JsValue) -> Double = "(obj) => obj.w"
+
+///|
+impl TDOMPoint with w(self : Self) -> Double {
+  dom_point_w_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn dom_point_set_w_ffi(obj : JsValue, w : JsValue) -> Unit = "(obj, w) => { obj.w = w; }"
+
+///|
+impl TDOMPoint with set_w(self : Self, w : Double) -> Unit {
+  dom_point_set_w_ffi(TJsValue::to_js(self), TJsValue::to_js(w))
+}

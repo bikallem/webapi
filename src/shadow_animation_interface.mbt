@@ -39,4 +39,16 @@ pub fn ShadowAnimation::new(
 }
 
 ///|
-pub trait TShadowAnimation: TAnimation {}
+pub trait TShadowAnimation: TAnimation {
+  source_animation(self : Self) -> Animation = _
+}
+
+///|
+extern "js" fn shadow_animation_source_animation_ffi(
+  obj : JsValue,
+) -> Animation = "(obj) => obj.sourceAnimation"
+
+///|
+impl TShadowAnimation with source_animation(self : Self) -> Animation {
+  shadow_animation_source_animation_ffi(TJsValue::to_js(self))
+}
