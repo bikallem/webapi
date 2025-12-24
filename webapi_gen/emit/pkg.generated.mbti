@@ -31,6 +31,10 @@ type AttributeGetMethodEmit
 pub impl Show for AttributeGetMethodEmit
 pub impl ToJson for AttributeGetMethodEmit
 
+type AttributeSetMethodEmit
+pub impl Show for AttributeSetMethodEmit
+pub impl ToJson for AttributeSetMethodEmit
+
 pub(all) struct CallbackArgEmit {
   name : String
   mbt_type : String

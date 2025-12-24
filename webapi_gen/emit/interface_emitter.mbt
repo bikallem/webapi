@@ -188,13 +188,23 @@ pub impl Emitter for InterfaceEmitter with emit(
       }
       emits.push_iter(attr_emits.iter())
 
-      // attr method
+      // Get Attribute method
       let attr_getter_method = AttributeGetMethodEmit::{
         interface_name: interface.name,
         original_name: attr.name,
         return_type: attr_type.name(),
       }
       trait_methods.push(attr_getter_method)
+      if !attr.is_readonly || attr.is_inherit {
+
+        // Set Attribute method
+        let attr_setter_method = AttributeSetMethodEmit::{
+          interface_name: interface.name,
+          original_name: attr.name,
+          arg_type: attr_type.name(),
+        }
+        trait_methods.push(attr_setter_method)
+      }
       continue rest // Attributes are not yet handled
     }
     [Const(const_val), .. rest] => {
@@ -561,6 +571,127 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
+      #|}
+    ),
+  )
+}
+
+///|
+test "InterfaceEmitter generates MoonBit code for attribute setter" {
+  let idl =
+    #|interface TestInterface {
+    #|  attribute DOMString lastName;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub trait TTestInterface: TJsValue {
+      #|  last_name(self : Self) -> String = _
+      #|  set_last_name(self : Self, last_name : String) -> Unit = _
+      #|}
+      #|
+      #|extern "js" fn test_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
+      #|
+      #|impl TTestInterface with last_name(self : Self) -> String {
+      #|  test_interface_last_name_ffi(TJsValue::to_js(self))
+      #|}
+      #|
+      #|extern "js" fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+      #|
+      #|impl TTestInterface with set_last_name(self : Self, last_name : String) -> Unit {
+      #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
+      #|}
+    ),
+  )
+}
+
+///|
+test "InterfaceEmitter generates MoonBit code for readonly and inherit attributes" {
+  let idl =
+    #|interface ParentInterface {
+    #|  readonly attribute DOMString lastName;
+    #|};
+    #|
+    #|interface ChildInterface : ParentInterface {
+    #|  inherit attribute DOMString lastName;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("ParentInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type ParentInterface
+      #|
+      #|pub impl TJsValue for ParentInterface with to_js(self: ParentInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TParentInterface] ParentInterface::into(self : ParentInterface) -> T = "%identity"
+      #|
+      #|pub impl TParentInterface for ParentInterface
+      #|
+      #|pub trait TParentInterface: TJsValue {
+      #|  last_name(self : Self) -> String = _
+      #|}
+      #|
+      #|extern "js" fn parent_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
+      #|
+      #|impl TParentInterface with last_name(self : Self) -> String {
+      #|  parent_interface_last_name_ffi(TJsValue::to_js(self))
+      #|}
+    ),
+  )
+  let (_, emits) = interface_emitter.emit("ChildInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type ChildInterface
+      #|
+      #|pub impl TJsValue for ChildInterface with to_js(self: ChildInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TChildInterface] ChildInterface::into(self : ChildInterface) -> T = "%identity"
+      #|
+      #|pub impl TChildInterface for ChildInterface
+      #|
+      #|pub impl TParentInterface for ChildInterface
+      #|
+      #|pub trait TChildInterface: TParentInterface {
+      #|  last_name(self : Self) -> String = _
+      #|  set_last_name(self : Self, last_name : String) -> Unit = _
+      #|}
+      #|
+      #|extern "js" fn child_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
+      #|
+      #|impl TChildInterface with last_name(self : Self) -> String {
+      #|  child_interface_last_name_ffi(TJsValue::to_js(self))
+      #|}
+      #|
+      #|extern "js" fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+      #|
+      #|impl TChildInterface with set_last_name(self : Self, last_name : String) -> Unit {
+      #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
     ),
   )

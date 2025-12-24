@@ -341,6 +341,7 @@ test "snake_case function" {
   inspect(snake_case("DOMImplementation"), content="dom_implementation")
   inspect(snake_case("MyAPIInterface"), content="my_api_interface")
   inspect(snake_case("already_snake_case"), content="already_snake_case")
+  inspect(snake_case("name"), content="name")
 }
 
 ///|

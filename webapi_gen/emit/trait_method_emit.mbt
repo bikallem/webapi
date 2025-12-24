@@ -60,7 +60,7 @@ impl TraitMethodEmit for RegularMethodEmit with method_impl(
   Code(code.to_string())
 }
 
-//============================ Attribute Method Emit ==========================
+//============================ Attribute Get Method Emit ==========================
 
 ///|
 struct AttributeGetMethodEmit {
@@ -100,6 +100,52 @@ impl TraitMethodEmit for AttributeGetMethodEmit with method_impl(
     "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
   )
   ..write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
+  ..write_string("}")
+  Code(code.to_string())
+}
+
+//============================ Attribute Set Method Emit ==========================
+
+///|
+struct AttributeSetMethodEmit {
+  interface_name : String // Name of the interface this method belongs to, eg. Document
+  original_name : String // Original attribute name from IDL, eg "title"
+  arg_type : String
+} derive(Show, ToJson)
+
+///|
+impl TraitMethodEmit for AttributeSetMethodEmit with method_decl(
+  self : AttributeSetMethodEmit,
+) -> Code {
+  Code(
+    "  set_\{safe_identifier(self.original_name)}(self : Self, \{safe_identifier(self.original_name)} : \{self.arg_type}) -> Unit = _",
+  )
+}
+
+///|
+impl TraitMethodEmit for AttributeSetMethodEmit with method_impl(
+  self : AttributeSetMethodEmit,
+) -> Code {
+  // Emit FFI function
+  let trait_name = self.interface_name
+  let ffi_name = "\{snake_case(trait_name)}_set_\{snake_case(self.original_name)}_ffi"
+  let arg_name = safe_identifier(self.original_name)
+  let code = StringBuilder::new()
+  code
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
+  )
+  ..write_string("\n\n")
+
+  // Emit default trait method implementation
+  let method_name = safe_identifier(self.original_name)
+  code
+  ..write_string(
+    "impl T\{trait_name} with set_\{method_name}(self : Self, \{arg_name} : \{self.arg_type}) -> Unit {\n",
+  )
+  ..write_string(
+    "  \{ffi_name}(TJsValue::to_js(self), TJsValue::to_js(\{arg_name}))\n",
+  )
   ..write_string("}")
   Code(code.to_string())
 }
