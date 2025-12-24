@@ -170,8 +170,9 @@ pub impl Emitter for InterfaceEmitter with emit(
         const_val.name,
         self.type_registry,
       )
-      emits.push_iter(const_emits.iter())
-      emits.push(
+      emits
+      ..push_iter(const_emits.iter())
+      ..push(
         Emit::Const(
           const_name,
           TypeName(mbt_type.name()),
@@ -480,7 +481,6 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|}
       #|
       #|
-
     ),
   )
 }
