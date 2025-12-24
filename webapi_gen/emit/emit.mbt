@@ -144,7 +144,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         let ffi_name = "\{snake_case(type_name)}_is_undefined_ffi"
         buf
         ..write_string(
-          "extern \"js\" fn \{ffi_name}(self : \{type_name}) -> Bool = \"(self) => self === undefined\"",
+          "extern \"js\" fn \{ffi_name}(obj : \{type_name}) -> Bool = \"(obj) => obj === undefined\"",
         )
         ..write_string("\n\n")
         .write_string(
