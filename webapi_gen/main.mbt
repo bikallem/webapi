@@ -218,15 +218,6 @@ fn main {
       flattened.callbacks.keys(),
     )
 
-    // Generate and write globals
-    println("=== Generating Globals ===")
-    let globals_code = @emit.emit_globals(flattened)
-    let globals_filepath = "\{output_dir}/globals.mbt"
-    println("  Writing \{globals_filepath}...")
-    @fs.write_string_to_file(globals_filepath, globals_code) catch {
-      e => fail("failed to write file: \{e}")
-    }
-
     // XXX: Disabled for now since we only need JS bindings
     // Generate and write JS runtime
     // println("=== Generating JS Runtime ===")
