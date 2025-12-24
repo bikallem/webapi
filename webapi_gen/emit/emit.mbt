@@ -40,7 +40,7 @@ pub struct MethodArg {
 pub enum ArgMbtType {
   Self // Represents 'self' argument  
   Other(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef, callback
-  Union(String) // Union type represented by a trait
+  Union(String, Bool) // Union type represented by a trait, Bool indicates if 'undefined' is an option
   Interface(String) // Interface type represented by a trait
 } derive(Show, ToJson, Eq, Hash)
 
@@ -48,7 +48,7 @@ pub enum ArgMbtType {
 fn ArgMbtType::name(self : ArgMbtType) -> String {
   match self {
     Self => "Self"
-    Other(t) | Union(t) | Interface(t) => t
+    Other(t) | Union(t, _) | Interface(t) => t
   }
 }
 
@@ -92,8 +92,9 @@ fn method_args_to_string(args : Array[MethodArg]) -> String {
     let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
     let arg_decl = match arg.type_ {
       ArgMbtType::Self => "\{arg_name} : Self"
-      ArgMbtType::Interface(t) | ArgMbtType::Union(t) | ArgMbtType::Other(t) =>
-        "\{arg_name} : \{t}"
+      ArgMbtType::Interface(t)
+      | ArgMbtType::Union(t, _)
+      | ArgMbtType::Other(t) => "\{arg_name} : \{t}"
     }
     match arg.default_value {
       Some(dv) => "\{arg_decl} = \{dv}"
@@ -166,7 +167,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
               match arg.type_ {
                 ArgMbtType::Self => "\{arg_name} : Self"
                 ArgMbtType::Interface(t)
-                | ArgMbtType::Union(t)
+                | ArgMbtType::Union(t, _)
                 | ArgMbtType::Other(t) => "\{arg_name} : \{t}"
               }
             })
@@ -571,6 +572,9 @@ fn arg_mbt_type(
       }
 
       // Void 
+      // Majority of use cases of 'void' are for return types. They can also be used 
+      // in union types as an option, eg. (DOMString or void). In those case we map 
+      // it to 'JsUndefined' type. See ArgMbtType::Union case below.      
       Undefined => ArgMbtType::Other("Unit")
 
       // Array type
@@ -601,7 +605,9 @@ fn arg_mbt_type(
         }
         let union_trait_name = TraitName("T\{union_type_name}")
         emits.push(Emit::UnionArgTrait(union_trait_name))
+        let mut has_undefined = false
         for option in options {
+          let is_undefined = option.type_ is Undefined
           let (mbt_type, option_emits) = go(
             option.type_,
             type_name,
@@ -610,8 +616,9 @@ fn arg_mbt_type(
             type_registry,
             call_depth + 1,
           )
-          let mbt_type = if mbt_type is ArgMbtType::Other("Unit") {
+          let mbt_type = if is_undefined {
             // Map 'undefined' type to 'JsUndefined' for union option
+            has_undefined = is_undefined
             ArgMbtType::Other("JsUndefined")
           } else {
             mbt_type
@@ -626,7 +633,7 @@ fn arg_mbt_type(
             Emit::UnionArgTraitImpl(TypeName(mbt_type), union_trait_name),
           )
         }
-        ArgMbtType::Union(union_type_name)
+        ArgMbtType::Union(union_type_name, has_undefined)
       }
 
       // TODO: rethink these mappings (Parameterized types)

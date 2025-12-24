@@ -23,7 +23,7 @@ test "arg_mbt_type identifies union types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union("TestInterfaceTestMethodParam")
+      #|Union("TestInterfaceTestMethodParam", false)
     ),
   )
   @json.inspect(emits, content=[
@@ -66,7 +66,7 @@ test "arg_mbt_type identifies nested union types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union("TestInterfaceTestMethodParam")
+      #|Union("TestInterfaceTestMethodParam", false)
     ),
   )
   @json.inspect(emits, content=[
@@ -120,7 +120,7 @@ test "arg_mbt_type identifies nested union within sequence types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union("TestInterfaceTestMethodParam")
+      #|Union("TestInterfaceTestMethodParam", false)
     ),
   )
   @json.inspect(emits, content=[
@@ -147,6 +147,49 @@ test "arg_mbt_type identifies nested union within sequence types correctly" {
       ["TraitName", "TTestInterfaceTestMethodParam"],
     ],
   ]) // One trait + two impls for union options
+}
+
+///|
+test "arg_mbt_type identifies union with undefined option correctly" {
+  let idl =
+    #|interface TestInterface {
+    #|  void testMethod((DOMString or undefined) param);
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let iface = flattened.interfaces["TestInterface"]
+  guard iface.members[0].interface_member is RegularOperation(op) else {
+    abort("Expected first member to be RegularOperation")
+  }
+  let arg = op.arguments[0]
+  let (mbt_type, emits) = arg_mbt_type(
+    arg.type_.type_,
+    "TestInterface",
+    "testMethod",
+    arg.name,
+    type_registry,
+  )
+  inspect(
+    mbt_type,
+    content=(
+      #|Union("TestInterfaceTestMethodParam", true)
+    ),
+  )
+  @json.inspect(emits, content=[
+    ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
+    [
+      "UnionArgTraitImpl",
+      ["TypeName", "String"],
+      ["TraitName", "TTestInterfaceTestMethodParam"],
+    ],
+    [
+      "UnionArgTraitImpl",
+      ["TypeName", "JsUndefined"],
+      ["TraitName", "TTestInterfaceTestMethodParam"],
+    ],
+  ]) // One trait + two impls for union options including undefined
 }
 
 ///|

@@ -24,8 +24,8 @@ fn method_args(
     emits.push_iter(arg_emits.iter())
     let mbt_type = match mbt_type {
       ArgMbtType::Interface(name) => ArgMbtType::Interface("&T\{name}")
-      ArgMbtType::Union(union_type_name) =>
-        ArgMbtType::Union("&T\{union_type_name}")
+      ArgMbtType::Union(union_type_name, has_undefined) =>
+        ArgMbtType::Union("&T\{union_type_name}", has_undefined)
       _ => mbt_type
     }
     mbt_args.push(MethodArg::{
@@ -135,14 +135,14 @@ pub impl Emitter for InterfaceEmitter with emit(
         "",
         self.type_registry,
       )
-      if return_type is ArgMbtType::Union(_) {
+      if return_type is ArgMbtType::Union(union_type_name, _has_undefined) {
         emits
-        ..push(Emit::External(return_type.name()))
-        ..push(Emit::IntoMethod(return_type.name()))
+        ..push(Emit::External(union_type_name))
+        ..push(Emit::IntoMethod(union_type_name))
         .push(
           Emit::UnionArgTraitImpl(
-            TypeName(return_type.name()),
-            TraitName("T\{return_type.name()}"),
+            TypeName(union_type_name),
+            TraitName("T\{union_type_name}"),
           ),
         )
       }
@@ -202,30 +202,7 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
     "testMethod",
     type_registry,
   )
-  @json.inspect(args, content=[
-    [
-      {
-        "name": "param",
-        "original_name": "param",
-        "type_": ["Union", "&TTestInterfaceTestMethodParam"],
-        "optional": true,
-        "default_value": "\"default\"",
-      },
-    ],
-    [
-      ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
-      [
-        "UnionArgTraitImpl",
-        ["TypeName", "String"],
-        ["TraitName", "TTestInterfaceTestMethodParam"],
-      ],
-      [
-        "UnionArgTraitImpl",
-        ["TypeName", "UInt"],
-        ["TraitName", "TTestInterfaceTestMethodParam"],
-      ],
-    ],
-  ])
+  @json.inspect(args, content=([[{"name":"param","original_name":"param","type_":["Union","&TTestInterfaceTestMethodParam",false],"optional":true,"default_value":"\"default\""}],[["UnionArgTrait",["TraitName","TTestInterfaceTestMethodParam"]],["UnionArgTraitImpl",["TypeName","String"],["TraitName","TTestInterfaceTestMethodParam"]],["UnionArgTraitImpl",["TypeName","UInt"],["TraitName","TTestInterfaceTestMethodParam"]]]]))
 }
 
 ///|
