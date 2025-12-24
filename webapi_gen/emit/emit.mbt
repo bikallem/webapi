@@ -13,6 +13,9 @@ struct TraitName(String) derive(Show, ToJson)
 struct ConstructorName(String) derive(Show, ToJson)
 
 ///|
+struct ConstName(String) derive(Show, ToJson)
+
+///|
 pub struct TraitDef {
   trait_name : String
   parent_trait : String
@@ -81,6 +84,7 @@ pub enum Emit {
   Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
   TypedefAlias(TypeName, String) // eg. pub typealias EventHandler = EventHandlerNonNull?
   Callback(TypeName, Array[CallbackArgEmit], TypeName) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
+  Const(ConstName, TypeName, String) // eg. pub const SOME_CONST: SomeType = "some_value"
 } derive(Show, ToJson)
 
 //============================ Code generator ===========================
@@ -346,6 +350,8 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
           "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
         )
       }
+      Emit::Const(ConstName(const_name), TypeName(type_name), value) =>
+        buf.write_string("pub const \{const_name}: \{type_name} = \{value}")
     }
     if i < emits.length() - 1 {
       buf.write_string("\n\n")
@@ -483,16 +489,20 @@ fn arg_default_value(
       } else {
         "\"\{s}\""
       }
-    ConstValue(c) =>
-      match c {
-        Boolean(b) => b
-        Integer(i) => i
-        Float(Float(f)) => f
-        Float(Infinity) => "@float.infinity"
-        Float(NegInfinity) => "@float.neg_infinity"
-        Float(NaN) => "@float.not_a_number"
-      }
+    ConstValue(c) => const_value(c)
     Undefined => "\{mbt_type()}::undefined()"
+  }
+}
+
+///|
+fn const_value(const_value : @parser.Const) -> String {
+  match const_value {
+    Boolean(b) => b
+    Integer(i) => i
+    Float(Float(f)) => f
+    Float(Infinity) => "@float.infinity"
+    Float(NegInfinity) => "@float.neg_infinity"
+    Float(NaN) => "@float.not_a_number"
   }
 }
 

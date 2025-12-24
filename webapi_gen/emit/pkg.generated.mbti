@@ -48,6 +48,10 @@ pub fn Code::inner(Self) -> String
 pub impl Show for Code
 pub impl ToJson for Code
 
+type ConstName
+pub impl Show for ConstName
+pub impl ToJson for ConstName
+
 type ConstructorName
 pub impl Show for ConstructorName
 pub impl ToJson for ConstructorName
@@ -73,6 +77,7 @@ pub enum Emit {
   Enum(TypeName, Array[EnumVariantEmit])
   TypedefAlias(TypeName, String)
   Callback(TypeName, Array[CallbackArgEmit], TypeName)
+  Const(ConstName, TypeName, String)
 }
 pub impl Show for Emit
 pub impl ToJson for Emit

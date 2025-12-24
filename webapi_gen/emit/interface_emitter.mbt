@@ -159,7 +159,25 @@ pub impl Emitter for InterfaceEmitter with emit(
       continue rest
     }
     [Attribute(_), .. rest] => continue rest // Attributes are not yet handled
-    [Const(_), .. rest] => continue rest // Consts are not yet handled
+    [Const(const_val), .. rest] => {
+      let const_name = ConstName(snake_case(const_val.name).to_upper())
+      let (mbt_type, const_emits) = arg_mbt_type(
+        const_val.type_,
+        interface.name,
+        "",
+        const_val.name,
+        self.type_registry,
+      )
+      emits.push_iter(const_emits.iter())
+      emits.push(
+        Emit::Const(
+          const_name,
+          TypeName(mbt_type.name()),
+          const_value(const_val.value),
+        ),
+      )
+      continue rest
+    }
     [_, .. rest] => continue rest
   }
   let parent_trait = match interface.inheritance {
@@ -422,6 +440,44 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|impl TTestInterface with test_method(self : Self) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self))
       #|}
+    ),
+  )
+}
+
+///|
+test "InterfaceEmitter generates MoonBit code for constants" {
+  let idl =
+    #|interface TestInterface {
+    #|  const float EMPTY = 21;
+    #|  const unsigned long NUM_CONST = 42;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub const EMPTY: Float = 21
+      #|
+      #|pub const NUM_CONST: UInt = 42
+      #|
+      #|pub trait TTestInterface: TJsValue {
+      #|}
+      #|
+      #|
     ),
   )
 }
