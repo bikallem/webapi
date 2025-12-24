@@ -23,17 +23,17 @@ pub fn Range::new() -> Range {
 }
 
 ///|
-pub(open) trait TRangeCreateContextualFragmentStringArg {
+pub(open) trait TRangeCreateContextualFragmentString {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TRangeCreateContextualFragmentStringArg for TrustedHTML with to_js(
+pub impl TRangeCreateContextualFragmentString for TrustedHTML with to_js(
   self : TrustedHTML,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TRangeCreateContextualFragmentStringArg for String with to_js(
+pub impl TRangeCreateContextualFragmentString for String with to_js(
   self : String,
 ) -> JsValue = "%identity"
 
@@ -61,7 +61,7 @@ pub trait TRange: TAbstractRange {
   intersects_node(self : Self, node : &TNode) -> Bool = _
   create_contextual_fragment(
     self : Self,
-    string : &TRangeCreateContextualFragmentStringArg,
+    string : &TRangeCreateContextualFragmentString,
   ) -> DocumentFragment = _
   get_client_rects(self : Self) -> DOMRectList = _
   get_bounding_client_rect(self : Self) -> DOMRect = _
@@ -292,7 +292,7 @@ extern "js" fn range_create_contextual_fragment_ffi(
 ///|
 impl TRange with create_contextual_fragment(
   self : Self,
-  string : &TRangeCreateContextualFragmentStringArg,
+  string : &TRangeCreateContextualFragmentString,
 ) -> DocumentFragment {
   range_create_contextual_fragment_ffi(TJsValue::to_js(self), string.to_js())
 }

@@ -19,8 +19,8 @@ extern "js" fn navigation_result_ffi(
 
 ///|
 pub fn NavigationResult::new(
-  committed? : JsValue,
-  finished? : JsValue,
+  committed? : JsPromise[NavigationHistoryEntry],
+  finished? : JsPromise[NavigationHistoryEntry],
 ) -> NavigationResult {
   navigation_result_ffi(opt_to_js(committed), opt_to_js(finished))
 }

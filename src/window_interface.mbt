@@ -45,12 +45,12 @@ pub trait TWindow: TEventTarget {
   move_by(self : Self, x : Int, y : Int) -> Unit = _
   resize_to(self : Self, width : Int, height : Int) -> Unit = _
   resize_by(self : Self, x : Int, y : Int) -> Unit = _
-  scroll(self : Self, options? : ScrollToOptions) -> JsValue = _
-  scroll_2(self : Self, x : Double, y : Double) -> JsValue = _
-  scroll_to(self : Self, options? : ScrollToOptions) -> JsValue = _
-  scroll_to_2(self : Self, x : Double, y : Double) -> JsValue = _
-  scroll_by(self : Self, options? : ScrollToOptions) -> JsValue = _
-  scroll_by_2(self : Self, x : Double, y : Double) -> JsValue = _
+  scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   report_error(self : Self, e : JsValue) -> Unit = _
   btoa(self : Self, data : String) -> String = _
   atob(self : Self, data : String) -> String = _
@@ -73,7 +73,7 @@ pub trait TWindow: TEventTarget {
     self : Self,
     image : ImageBitmapSource,
     options? : ImageBitmapOptions,
-  ) -> JsValue = _
+  ) -> JsPromise[ImageBitmap] = _
   create_image_bitmap_2(
     self : Self,
     image : ImageBitmapSource,
@@ -82,7 +82,7 @@ pub trait TWindow: TEventTarget {
     sw : Int,
     sh : Int,
     options? : ImageBitmapOptions,
-  ) -> JsValue = _
+  ) -> JsPromise[ImageBitmap] = _
   structured_clone(
     self : Self,
     value : JsValue,
@@ -354,13 +354,16 @@ impl TWindow with resize_by(self : Self, x : Int, y : Int) -> Unit {
 }
 
 ///|
-extern "js" fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsValue = "(obj, options) => obj.scroll(obj, options)"
+extern "js" fn window_scroll_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Unit] = "(obj, options) => obj.scroll(obj, options)"
 
 ///|
 impl TWindow with scroll(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsValue {
+) -> JsPromise[Unit] {
   window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -369,10 +372,12 @@ extern "js" fn window_scroll_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scroll_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(obj, x, y)"
 
 ///|
-impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsValue {
+impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
   window_scroll_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -384,13 +389,13 @@ impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsValue {
 extern "js" fn window_scroll_to_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, options) => obj.scrollTo(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(obj, options)"
 
 ///|
 impl TWindow with scroll_to(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsValue {
+) -> JsPromise[Unit] {
   window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -399,10 +404,12 @@ extern "js" fn window_scroll_to_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollTo_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(obj, x, y)"
 
 ///|
-impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsValue {
+impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
   window_scroll_to_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -414,13 +421,13 @@ impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsValue {
 extern "js" fn window_scroll_by_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, options) => obj.scrollBy(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(obj, options)"
 
 ///|
 impl TWindow with scroll_by(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsValue {
+) -> JsPromise[Unit] {
   window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
@@ -429,10 +436,12 @@ extern "js" fn window_scroll_by_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollBy_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(obj, x, y)"
 
 ///|
-impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> JsValue {
+impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
+  Unit,
+] {
   window_scroll_by_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -542,14 +551,14 @@ extern "js" fn window_create_image_bitmap_ffi(
   obj : JsValue,
   image : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, image, options) => obj.createImageBitmap(obj, image, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(obj, image, options)"
 
 ///|
 impl TWindow with create_image_bitmap(
   self : Self,
   image : ImageBitmapSource,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsValue {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
@@ -566,7 +575,7 @@ extern "js" fn window_create_image_bitmap_2_ffi(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(obj, image, sx, sy, sw, sh, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(obj, image, sx, sy, sw, sh, options)"
 
 ///|
 impl TWindow with create_image_bitmap_2(
@@ -577,7 +586,7 @@ impl TWindow with create_image_bitmap_2(
   sw : Int,
   sh : Int,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsValue {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),

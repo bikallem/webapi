@@ -35,13 +35,13 @@ pub fn HTMLImageElement::new() -> HTMLImageElement {
 
 ///|
 pub trait THTMLImageElement: THTMLElement {
-  decode(self : Self) -> JsValue = _
+  decode(self : Self) -> JsPromise[Unit] = _
 }
 
 ///|
-extern "js" fn html_image_element_decode_ffi(obj : JsValue) -> JsValue = "(obj) => obj.decode(obj)"
+extern "js" fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[Unit] = "(obj) => obj.decode(obj)"
 
 ///|
-impl THTMLImageElement with decode(self : Self) -> JsValue {
+impl THTMLImageElement with decode(self : Self) -> JsPromise[Unit] {
   html_image_element_decode_ffi(TJsValue::to_js(self))
 }

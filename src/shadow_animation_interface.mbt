@@ -12,15 +12,15 @@ pub fn[T : TShadowAnimation] ShadowAnimation::into(self : ShadowAnimation) -> T 
 pub impl TShadowAnimation for ShadowAnimation
 
 ///|
-pub(open) trait TShadowAnimationNewNewTargetArg {
+pub(open) trait TShadowAnimationNewNewTarget {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TShadowAnimationNewNewTargetArg for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl TShadowAnimationNewNewTarget for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
-pub impl TShadowAnimationNewNewTargetArg for CSSPseudoElement with to_js(
+pub impl TShadowAnimationNewNewTarget for CSSPseudoElement with to_js(
   self : CSSPseudoElement,
 ) -> JsValue = "%identity"
 
@@ -33,7 +33,7 @@ extern "js" fn shadow_animation_new_ffi(
 ///|
 pub fn ShadowAnimation::new(
   source : Animation,
-  new_target : &TShadowAnimationNewNewTargetArg,
+  new_target : &TShadowAnimationNewNewTarget,
 ) -> ShadowAnimation {
   shadow_animation_new_ffi(TJsValue::to_js(source), new_target.to_js())
 }

@@ -24,6 +24,20 @@ pub fn CustomElementRegistry::new() -> CustomElementRegistry {
 }
 
 ///|
+#external
+pub type CustomElementRegistryGet
+
+///|
+pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::into(
+  self : CustomElementRegistryGet,
+) -> T = "%identity"
+
+///|
+pub impl TCustomElementRegistryGet for CustomElementRegistryGet with to_js(
+  self : CustomElementRegistryGet,
+) -> JsValue = "%identity"
+
+///|
 pub(open) trait TCustomElementRegistryGet {
   to_js(self : Self) -> JsValue
 }
@@ -38,14 +52,14 @@ pub impl TCustomElementRegistryGet for Unit with to_js(self : Unit) -> JsValue =
 
 ///|
 pub trait TCustomElementRegistry: TJsValue {
-  define(
+  define_(
     self : Self,
     name : String,
-    constructor : CustomElementConstructor,
+    constructor_ : CustomElementConstructor,
     options? : ElementDefinitionOptions,
   ) -> Unit = _
-  get(self : Self, name : String) -> &TCustomElementRegistryGet = _
-  get_name(self : Self, constructor : CustomElementConstructor) -> String = _
+  get(self : Self, name : String) -> CustomElementRegistryGet = _
+  get_name(self : Self, constructor_ : CustomElementConstructor) -> String = _
   when_defined(self : Self, name : String) -> JsPromise[
     CustomElementConstructor,
   ] = _
@@ -57,21 +71,21 @@ pub trait TCustomElementRegistry: TJsValue {
 extern "js" fn custom_element_registry_define_ffi(
   obj : JsValue,
   name : JsValue,
-  constructor : JsValue,
+  constructor_ : JsValue,
   options : JsValue,
-) -> Unit = "(obj, name, constructor, options) => obj.define(obj, name, constructor, options)"
+) -> Unit = "(obj, name, constructor_, options) => obj.define(obj, name, constructor_, options)"
 
 ///|
-impl TCustomElementRegistry with define(
+impl TCustomElementRegistry with define_(
   self : Self,
   name : String,
-  constructor : CustomElementConstructor,
+  constructor_ : CustomElementConstructor,
   options? : ElementDefinitionOptions = ElementDefinitionOptions::empty(),
 ) -> Unit {
   custom_element_registry_define_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-    TJsValue::to_js(constructor),
+    TJsValue::to_js(constructor_),
     TJsValue::to_js(options),
   )
 }
@@ -80,27 +94,27 @@ impl TCustomElementRegistry with define(
 extern "js" fn custom_element_registry_get_ffi(
   obj : JsValue,
   name : JsValue,
-) -> &TCustomElementRegistryGet = "(obj, name) => obj.get(obj, name)"
+) -> CustomElementRegistryGet = "(obj, name) => obj.get(obj, name)"
 
 ///|
-impl TCustomElementRegistry with get(self : Self, name : String) -> &TCustomElementRegistryGet {
+impl TCustomElementRegistry with get(self : Self, name : String) -> CustomElementRegistryGet {
   custom_element_registry_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
 
 ///|
 extern "js" fn custom_element_registry_get_name_ffi(
   obj : JsValue,
-  constructor : JsValue,
-) -> String = "(obj, constructor) => obj.getName(obj, constructor)"
+  constructor_ : JsValue,
+) -> String = "(obj, constructor_) => obj.getName(obj, constructor_)"
 
 ///|
 impl TCustomElementRegistry with get_name(
   self : Self,
-  constructor : CustomElementConstructor,
+  constructor_ : CustomElementConstructor,
 ) -> String {
   custom_element_registry_get_name_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(constructor),
+    TJsValue::to_js(constructor_),
   )
 }
 

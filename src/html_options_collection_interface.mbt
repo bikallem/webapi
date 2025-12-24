@@ -19,39 +19,39 @@ pub impl THTMLOptionsCollection for HTMLOptionsCollection
 pub impl THTMLCollection for HTMLOptionsCollection
 
 ///|
-pub(open) trait THTMLOptionsCollectionAddElementArg {
+pub(open) trait THTMLOptionsCollectionAddElement {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl THTMLOptionsCollectionAddElementArg for HTMLOptionElement with to_js(
+pub impl THTMLOptionsCollectionAddElement for HTMLOptionElement with to_js(
   self : HTMLOptionElement,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl THTMLOptionsCollectionAddElementArg for HTMLOptGroupElement with to_js(
+pub impl THTMLOptionsCollectionAddElement for HTMLOptGroupElement with to_js(
   self : HTMLOptGroupElement,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait THTMLOptionsCollectionAddBeforeArg {
+pub(open) trait THTMLOptionsCollectionAddBefore {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl THTMLOptionsCollectionAddBeforeArg for HTMLElement with to_js(
+pub impl THTMLOptionsCollectionAddBefore for HTMLElement with to_js(
   self : HTMLElement,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl THTMLOptionsCollectionAddBeforeArg for Int with to_js(self : Int) -> JsValue = "%identity"
+pub impl THTMLOptionsCollectionAddBefore for Int with to_js(self : Int) -> JsValue = "%identity"
 
 ///|
 pub trait THTMLOptionsCollection: THTMLCollection {
   add(
     self : Self,
-    element : &THTMLOptionsCollectionAddElementArg,
-    before? : &THTMLOptionsCollectionAddBeforeArg,
+    element : &THTMLOptionsCollectionAddElement,
+    before? : &THTMLOptionsCollectionAddBefore,
   ) -> Unit = _
   remove(self : Self, index : Int) -> Unit = _
 }
@@ -66,8 +66,8 @@ extern "js" fn html_options_collection_add_ffi(
 ///|
 impl THTMLOptionsCollection with add(
   self : Self,
-  element : &THTMLOptionsCollectionAddElementArg,
-  before? : &THTMLOptionsCollectionAddBeforeArg = JsValue::null(),
+  element : &THTMLOptionsCollectionAddElement,
+  before? : &THTMLOptionsCollectionAddBefore = JsValue::null(),
 ) -> Unit {
   html_options_collection_add_ffi(
     TJsValue::to_js(self),

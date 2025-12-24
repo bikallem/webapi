@@ -17,23 +17,23 @@ pub impl TWorkerGlobalScope for WorkerGlobalScope
 pub impl TEventTarget for WorkerGlobalScope
 
 ///|
-pub(open) trait TWorkerGlobalScopeImportScriptsUrlsArg {
+pub(open) trait TWorkerGlobalScopeImportScriptsUrls {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TWorkerGlobalScopeImportScriptsUrlsArg for TrustedScriptURL with to_js(
+pub impl TWorkerGlobalScopeImportScriptsUrls for TrustedScriptURL with to_js(
   self : TrustedScriptURL,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TWorkerGlobalScopeImportScriptsUrlsArg for String with to_js(
+pub impl TWorkerGlobalScopeImportScriptsUrls for String with to_js(
   self : String,
 ) -> JsValue = "%identity"
 
 ///|
 pub trait TWorkerGlobalScope: TEventTarget {
-  import_scripts(self : Self, urls : &TWorkerGlobalScopeImportScriptsUrlsArg) -> Unit = _
+  import_scripts(self : Self, urls : &TWorkerGlobalScopeImportScriptsUrls) -> Unit = _
   report_error(self : Self, e : JsValue) -> Unit = _
   btoa(self : Self, data : String) -> String = _
   atob(self : Self, data : String) -> String = _
@@ -56,7 +56,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     self : Self,
     image : ImageBitmapSource,
     options? : ImageBitmapOptions,
-  ) -> JsValue = _
+  ) -> JsPromise[ImageBitmap] = _
   create_image_bitmap_2(
     self : Self,
     image : ImageBitmapSource,
@@ -65,7 +65,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     sw : Int,
     sh : Int,
     options? : ImageBitmapOptions,
-  ) -> JsValue = _
+  ) -> JsPromise[ImageBitmap] = _
   structured_clone(
     self : Self,
     value : JsValue,
@@ -82,7 +82,7 @@ extern "js" fn worker_global_scope_import_scripts_ffi(
 ///|
 impl TWorkerGlobalScope with import_scripts(
   self : Self,
-  urls : &TWorkerGlobalScopeImportScriptsUrlsArg,
+  urls : &TWorkerGlobalScopeImportScriptsUrls,
 ) -> Unit {
   worker_global_scope_import_scripts_ffi(TJsValue::to_js(self), urls.to_js())
 }
@@ -219,14 +219,14 @@ extern "js" fn worker_global_scope_create_image_bitmap_ffi(
   obj : JsValue,
   image : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, image, options) => obj.createImageBitmap(obj, image, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(obj, image, options)"
 
 ///|
 impl TWorkerGlobalScope with create_image_bitmap(
   self : Self,
   image : ImageBitmapSource,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsValue {
+) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
@@ -243,7 +243,7 @@ extern "js" fn worker_global_scope_create_image_bitmap_2_ffi(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(obj, image, sx, sy, sw, sh, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(obj, image, sx, sy, sw, sh, options)"
 
 ///|
 impl TWorkerGlobalScope with create_image_bitmap_2(
@@ -254,7 +254,7 @@ impl TWorkerGlobalScope with create_image_bitmap_2(
   sw : Int,
   sh : Int,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsValue {
+) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),

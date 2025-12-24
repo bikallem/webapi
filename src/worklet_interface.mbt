@@ -13,7 +13,9 @@ pub impl TWorklet for Worklet
 
 ///|
 pub trait TWorklet: TJsValue {
-  add_module(self : Self, module_url : String, options? : WorkletOptions) -> JsValue = _
+  add_module(self : Self, module_url : String, options? : WorkletOptions) -> JsPromise[
+    Unit,
+  ] = _
 }
 
 ///|
@@ -21,14 +23,14 @@ extern "js" fn worklet_add_module_ffi(
   obj : JsValue,
   module_url : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, module_url, options) => obj.addModule(obj, module_url, options)"
+) -> JsPromise[Unit] = "(obj, module_url, options) => obj.addModule(obj, module_url, options)"
 
 ///|
 impl TWorklet with add_module(
   self : Self,
   module_url : String,
   options? : WorkletOptions = WorkletOptions::empty(),
-) -> JsValue {
+) -> JsPromise[Unit] {
   worklet_add_module_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(module_url),

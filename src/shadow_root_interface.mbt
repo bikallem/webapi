@@ -21,21 +21,21 @@ pub impl TNode for ShadowRoot
 pub impl TEventTarget for ShadowRoot
 
 ///|
-pub(open) trait TShadowRootSetHtmlUnsafeHtmlArg {
+pub(open) trait TShadowRootSetHTMLUnsafeHtml {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TShadowRootSetHtmlUnsafeHtmlArg for TrustedHTML with to_js(
+pub impl TShadowRootSetHTMLUnsafeHtml for TrustedHTML with to_js(
   self : TrustedHTML,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TShadowRootSetHtmlUnsafeHtmlArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TShadowRootSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub trait TShadowRoot: TDocumentFragment {
-  set_html_unsafe(self : Self, html : &TShadowRootSetHtmlUnsafeHtmlArg) -> Unit = _
+  set_html_unsafe(self : Self, html : &TShadowRootSetHTMLUnsafeHtml) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
 }
 
@@ -48,7 +48,7 @@ extern "js" fn shadow_root_set_html_unsafe_ffi(
 ///|
 impl TShadowRoot with set_html_unsafe(
   self : Self,
-  html : &TShadowRootSetHtmlUnsafeHtmlArg,
+  html : &TShadowRootSetHTMLUnsafeHtml,
 ) -> Unit {
   shadow_root_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }

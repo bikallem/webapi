@@ -15,17 +15,17 @@ pub impl TWorker for Worker
 pub impl TEventTarget for Worker
 
 ///|
-pub(open) trait TWorkerNewScriptURLArg {
+pub(open) trait TWorkerNewScriptURL {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TWorkerNewScriptURLArg for TrustedScriptURL with to_js(
+pub impl TWorkerNewScriptURL for TrustedScriptURL with to_js(
   self : TrustedScriptURL,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TWorkerNewScriptURLArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TWorkerNewScriptURL for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 extern "js" fn worker_new_ffi(
@@ -35,7 +35,7 @@ extern "js" fn worker_new_ffi(
 
 ///|
 pub fn Worker::new(
-  script_url : &TWorkerNewScriptURLArg,
+  script_url : &TWorkerNewScriptURL,
   options? : WorkerOptions = WorkerOptions::empty(),
 ) -> Worker {
   worker_new_ffi(script_url.to_js(), TJsValue::to_js(options))

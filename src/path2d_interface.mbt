@@ -12,21 +12,21 @@ pub fn[T : TPath2D] Path2D::into(self : Path2D) -> T = "%identity"
 pub impl TPath2D for Path2D
 
 ///|
-pub(open) trait TPath2DNewPathArg {
+pub(open) trait TPath2DNewPath {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TPath2DNewPathArg for Path2D with to_js(self : Path2D) -> JsValue = "%identity"
+pub impl TPath2DNewPath for Path2D with to_js(self : Path2D) -> JsValue = "%identity"
 
 ///|
-pub impl TPath2DNewPathArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TPath2DNewPath for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 extern "js" fn path2d_new_ffi(path : JsValue) -> Path2D = "(path) => new Path2D(path)"
 
 ///|
-pub fn Path2D::new(path? : &TPath2DNewPathArg) -> Path2D {
+pub fn Path2D::new(path? : &TPath2DNewPath) -> Path2D {
   path2d_new_ffi(
     match path {
       Some(v) => v.to_js()
@@ -36,21 +36,30 @@ pub fn Path2D::new(path? : &TPath2DNewPathArg) -> Path2D {
 }
 
 ///|
-pub(open) trait TPath2DRoundRectRadiiArg {
+pub(open) trait TPath2DRoundRectRadii {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TPath2DRoundRectRadiiArg for Double with to_js(self : Double) -> JsValue = "%identity"
+pub impl TPath2DRoundRectRadii for Double with to_js(self : Double) -> JsValue = "%identity"
 
 ///|
-pub impl TPath2DRoundRectRadiiArg for DOMPointInit with to_js(
-  self : DOMPointInit,
-) -> JsValue = "%identity"
+pub impl TPath2DRoundRectRadii for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
 
 ///|
-pub impl TPath2DRoundRectRadiiArg for Array[JsValue] with to_js(
-  self : Array[JsValue],
+pub(open) trait TPath2DRoundRectRadii2 {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TPath2DRoundRectRadii2 for Double with to_js(self : Double) -> JsValue = "%identity"
+
+///|
+pub impl TPath2DRoundRectRadii2 for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
+
+///|
+pub impl TPath2DRoundRectRadii for Array[Path2DRoundRectRadii2] with to_js(
+  self : Array[Path2DRoundRectRadii2],
 ) -> JsValue = "%identity"
 
 ///|
@@ -90,7 +99,7 @@ pub trait TPath2D: TJsValue {
     y : Double,
     w : Double,
     h : Double,
-    radii? : &TPath2DRoundRectRadiiArg,
+    radii? : &TPath2DRoundRectRadii,
   ) -> Unit = _
   arc(
     self : Self,
@@ -304,7 +313,7 @@ impl TPath2D with round_rect(
   y : Double,
   w : Double,
   h : Double,
-  radii? : &TPath2DRoundRectRadiiArg = 0,
+  radii? : &TPath2DRoundRectRadii = 0,
 ) -> Unit {
   path2d_round_rect_ffi(
     TJsValue::to_js(self),

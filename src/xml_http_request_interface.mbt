@@ -26,15 +26,15 @@ pub fn XMLHttpRequest::new() -> XMLHttpRequest {
 }
 
 ///|
-pub(open) trait TXMLHttpRequestSendBodyArg {
+pub(open) trait TXMLHttpRequestSendBody {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TXMLHttpRequestSendBodyArg for Document with to_js(self : Document) -> JsValue = "%identity"
+pub impl TXMLHttpRequestSendBody for Document with to_js(self : Document) -> JsValue = "%identity"
 
 ///|
-pub impl TXMLHttpRequestSendBodyArg for XMLHttpRequestBodyInit with to_js(
+pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit with to_js(
   self : XMLHttpRequestBodyInit,
 ) -> JsValue = "%identity"
 
@@ -50,7 +50,7 @@ pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
     password? : String,
   ) -> Unit = _
   set_request_header(self : Self, name : String, value : String) -> Unit = _
-  send(self : Self, body? : &TXMLHttpRequestSendBodyArg) -> Unit = _
+  send(self : Self, body? : &TXMLHttpRequestSendBody) -> Unit = _
   abort(self : Self) -> Unit = _
   get_response_header(self : Self, name : String) -> String = _
   get_all_response_headers(self : Self) -> String = _
@@ -128,7 +128,7 @@ extern "js" fn xml_http_request_send_ffi(obj : JsValue, body : JsValue) -> Unit 
 ///|
 impl TXMLHttpRequest with send(
   self : Self,
-  body? : &TXMLHttpRequestSendBodyArg = JsValue::null(),
+  body? : &TXMLHttpRequestSendBody = JsValue::null(),
 ) -> Unit {
   xml_http_request_send_ffi(TJsValue::to_js(self), body.to_js())
 }

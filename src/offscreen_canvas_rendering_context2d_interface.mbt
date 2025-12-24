@@ -16,24 +16,39 @@ pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
 ///|
-pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadiiArg {
+pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DRoundRectRadiiArg for Double with to_js(
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Double with to_js(
   self : Double,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DRoundRectRadiiArg for DOMPointInit with to_js(
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for DOMPointInit with to_js(
   self : DOMPointInit,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DRoundRectRadiiArg for Array[JsValue] with to_js(
-  self : Array[JsValue],
+pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii2 {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for Double with to_js(
+  self : Double,
 ) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit with to_js(
+  self : DOMPointInit,
+) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Array[
+  OffscreenCanvasRenderingContext2DRoundRectRadii2,
+] with to_js(self : Array[OffscreenCanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
 
 ///|
 pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
@@ -212,7 +227,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     y : Double,
     w : Double,
     h : Double,
-    radii? : &TOffscreenCanvasRenderingContext2DRoundRectRadiiArg,
+    radii? : &TOffscreenCanvasRenderingContext2DRoundRectRadii,
   ) -> Unit = _
   arc(
     self : Self,
@@ -1327,7 +1342,7 @@ impl TOffscreenCanvasRenderingContext2D with round_rect(
   y : Double,
   w : Double,
   h : Double,
-  radii? : &TOffscreenCanvasRenderingContext2DRoundRectRadiiArg = 0,
+  radii? : &TOffscreenCanvasRenderingContext2DRoundRectRadii = 0,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_round_rect_ffi(
     TJsValue::to_js(self),

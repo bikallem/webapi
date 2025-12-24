@@ -15,28 +15,28 @@ pub impl TSharedWorker for SharedWorker
 pub impl TEventTarget for SharedWorker
 
 ///|
-pub(open) trait TSharedWorkerNewScriptURLArg {
+pub(open) trait TSharedWorkerNewScriptURL {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TSharedWorkerNewScriptURLArg for TrustedScriptURL with to_js(
+pub impl TSharedWorkerNewScriptURL for TrustedScriptURL with to_js(
   self : TrustedScriptURL,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TSharedWorkerNewScriptURLArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TSharedWorkerNewScriptURL for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TSharedWorkerNewOptionsArg {
+pub(open) trait TSharedWorkerNewOptions {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TSharedWorkerNewOptionsArg for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TSharedWorkerNewOptions for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TSharedWorkerNewOptionsArg for WorkerOptions with to_js(
+pub impl TSharedWorkerNewOptions for WorkerOptions with to_js(
   self : WorkerOptions,
 ) -> JsValue = "%identity"
 
@@ -48,8 +48,8 @@ extern "js" fn shared_worker_new_ffi(
 
 ///|
 pub fn SharedWorker::new(
-  script_url : &TSharedWorkerNewScriptURLArg,
-  options? : &TSharedWorkerNewOptionsArg = WorkerOptions::empty(),
+  script_url : &TSharedWorkerNewScriptURL,
+  options? : &TSharedWorkerNewOptions = WorkerOptions::empty(),
 ) -> SharedWorker {
   shared_worker_new_ffi(script_url.to_js(), options.to_js())
 }

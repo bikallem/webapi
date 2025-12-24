@@ -16,24 +16,39 @@ pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 
 ///|
-pub(open) trait TCanvasRenderingContext2DRoundRectRadiiArg {
+pub(open) trait TCanvasRenderingContext2DRoundRectRadii {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TCanvasRenderingContext2DRoundRectRadiiArg for Double with to_js(
+pub impl TCanvasRenderingContext2DRoundRectRadii for Double with to_js(
   self : Double,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TCanvasRenderingContext2DRoundRectRadiiArg for DOMPointInit with to_js(
+pub impl TCanvasRenderingContext2DRoundRectRadii for DOMPointInit with to_js(
   self : DOMPointInit,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TCanvasRenderingContext2DRoundRectRadiiArg for Array[JsValue] with to_js(
-  self : Array[JsValue],
+pub(open) trait TCanvasRenderingContext2DRoundRectRadii2 {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TCanvasRenderingContext2DRoundRectRadii2 for Double with to_js(
+  self : Double,
 ) -> JsValue = "%identity"
+
+///|
+pub impl TCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit with to_js(
+  self : DOMPointInit,
+) -> JsValue = "%identity"
+
+///|
+pub impl TCanvasRenderingContext2DRoundRectRadii for Array[
+  CanvasRenderingContext2DRoundRectRadii2,
+] with to_js(self : Array[CanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
 
 ///|
 pub trait TCanvasRenderingContext2D: TJsValue {
@@ -214,7 +229,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     y : Double,
     w : Double,
     h : Double,
-    radii? : &TCanvasRenderingContext2DRoundRectRadiiArg,
+    radii? : &TCanvasRenderingContext2DRoundRectRadii,
   ) -> Unit = _
   arc(
     self : Self,
@@ -1328,7 +1343,7 @@ impl TCanvasRenderingContext2D with round_rect(
   y : Double,
   w : Double,
   h : Double,
-  radii? : &TCanvasRenderingContext2DRoundRectRadiiArg = 0,
+  radii? : &TCanvasRenderingContext2DRoundRectRadii = 0,
 ) -> Unit {
   canvas_rendering_context2d_round_rect_ffi(
     TJsValue::to_js(self),

@@ -9,12 +9,12 @@ pub impl TJsValue for OnErrorEventHandlerNonNull with to_js(
 
 ///|
 extern "js" fn on_error_event_handler_non_null_ffi(
-  f : (JsValue, String, UInt, UInt, JsValue) -> JsValue,
+  f : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
 ) -> OnErrorEventHandlerNonNull = "(f) => f"
 
 ///|
 pub fn OnErrorEventHandlerNonNull::new(
-  f : (JsValue, String, UInt, UInt, JsValue) -> JsValue,
+  f : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
 ) -> OnErrorEventHandlerNonNull {
   on_error_event_handler_non_null_ffi(f)
 }

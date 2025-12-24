@@ -9,12 +9,12 @@ pub impl TJsValue for NavigationInterceptHandler with to_js(
 
 ///|
 extern "js" fn navigation_intercept_handler_ffi(
-  f : () -> JsValue,
+  f : () -> JsPromise[Unit],
 ) -> NavigationInterceptHandler = "(f) => f"
 
 ///|
 pub fn NavigationInterceptHandler::new(
-  f : () -> JsValue,
+  f : () -> JsPromise[Unit],
 ) -> NavigationInterceptHandler {
   navigation_intercept_handler_ffi(f)
 }
