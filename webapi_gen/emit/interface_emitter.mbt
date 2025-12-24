@@ -135,12 +135,14 @@ pub impl Emitter for InterfaceEmitter with emit(
         "",
         self.type_registry,
       )
-      if return_type is ArgMbtType::Union(union_type_name, _has_undefined) {
+      if return_type is ArgMbtType::Union(union_type_name, has_undefined) {
         emits
         ..push(Emit::External(union_type_name))
         ..push(Emit::IntoMethod(union_type_name))
-        ..push(Emit::IsUndefinedMethod(union_type_name))
-        .push(
+        if has_undefined {
+          emits.push(Emit::IsUndefinedMethod(union_type_name))
+        }
+        emits.push(
           Emit::UnionArgTraitImpl(
             TypeName(union_type_name),
             TraitName("T\{union_type_name}"),
@@ -420,10 +422,6 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|pub type TestInterfaceTestMethod
       #|
       #|pub fn[T: TTestInterfaceTestMethod] TestInterfaceTestMethod::into(self : TestInterfaceTestMethod) -> T = "%identity"
-      #|
-      #|extern "js" fn test_interface_test_method_is_undefined_ffi(obj : TestInterfaceTestMethod) -> Bool = "(obj) => obj === undefined"
-      #|
-      #|pub fn TestInterfaceTestMethod::is_undefined(self : TestInterfaceTestMethod) -> Bool { test_interface_test_method_is_undefined_ffi(self) }
       #|
       #|pub impl TTestInterfaceTestMethod for TestInterfaceTestMethod with to_js(self : TestInterfaceTestMethod) -> JsValue = "%identity"
       #|
