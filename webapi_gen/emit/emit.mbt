@@ -349,7 +349,7 @@ let keywords : @hashset.HashSet[String] = [
     "fn", "let", "mut", "if", "else", "match", "while", "for", "break", "continue",
     "return", "struct", "enum", "type", "trait", "impl", "pub", "priv", "true", "false",
     "as", "is", "in", "loop", "test", "raise", "try", "catch", "namespace", "using",
-    "where", "method", "async",
+    "where", "method", "async", "constructor", "define",
   ]
   |> @hashset.from_array
 
