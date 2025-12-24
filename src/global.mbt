@@ -1,5 +1,4 @@
-// Auto-generated MoonBit bindings for global objects
-// Do not edit manually
+// MoonBit bindings for global objects
 
 ///|
 extern "js" fn global_document_ffi() -> Document = "() => document"
