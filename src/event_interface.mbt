@@ -26,6 +26,18 @@ pub fn Event::new(
 }
 
 ///|
+pub const EVENT_NONE : UInt = 0
+
+///|
+pub const EVENT_CAPTURING_PHASE : UInt = 1
+
+///|
+pub const EVENT_AT_TARGET : UInt = 2
+
+///|
+pub const EVENT_BUBBLING_PHASE : UInt = 3
+
+///|
 pub trait TEvent: TJsValue {
   composed_path(self : Self) -> Array[EventTarget] = _
   stop_propagation(self : Self) -> Unit = _

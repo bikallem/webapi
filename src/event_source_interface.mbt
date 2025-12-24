@@ -32,6 +32,15 @@ pub fn EventSource::new(
 }
 
 ///|
+pub const EVENT_SOURCE_CONNECTING : UInt = 0
+
+///|
+pub const EVENT_SOURCE_OPEN : UInt = 1
+
+///|
+pub const EVENT_SOURCE_CLOSED : UInt = 2
+
+///|
 pub trait TEventSource: TEventTarget {
   close(self : Self) -> Unit = _
 }

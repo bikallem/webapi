@@ -35,6 +35,18 @@ pub fn KeyboardEvent::new(
 }
 
 ///|
+pub const KEYBOARD_EVENT_DOM_KEY_LOCATION_STANDARD : UInt = 0x00
+
+///|
+pub const KEYBOARD_EVENT_DOM_KEY_LOCATION_LEFT : UInt = 0x01
+
+///|
+pub const KEYBOARD_EVENT_DOM_KEY_LOCATION_RIGHT : UInt = 0x02
+
+///|
+pub const KEYBOARD_EVENT_DOM_KEY_LOCATION_NUMPAD : UInt = 0x03
+
+///|
 pub trait TKeyboardEvent: TUIEvent {
   get_modifier_state(self : Self, key_arg : String) -> Bool = _
   init_keyboard_event(

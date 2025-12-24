@@ -26,4 +26,16 @@ pub impl TNode for SVGGradientElement
 pub impl TEventTarget for SVGGradientElement
 
 ///|
+pub const SVG_GRADIENT_ELEMENT_SVG_SPREADMETHOD_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_GRADIENT_ELEMENT_SVG_SPREADMETHOD_PAD : UInt = 1
+
+///|
+pub const SVG_GRADIENT_ELEMENT_SVG_SPREADMETHOD_REFLECT : UInt = 2
+
+///|
+pub const SVG_GRADIENT_ELEMENT_SVG_SPREADMETHOD_REPEAT : UInt = 3
+
+///|
 pub trait TSVGGradientElement: TSVGElement {}

@@ -23,6 +23,15 @@ pub fn FileReader::new() -> FileReader {
 }
 
 ///|
+pub const FILE_READER_EMPTY : UInt = 0
+
+///|
+pub const FILE_READER_LOADING : UInt = 1
+
+///|
+pub const FILE_READER_DONE : UInt = 2
+
+///|
 pub trait TFileReader: TEventTarget {
   read_as_array_buffer(self : Self, blob : &TBlob) -> Unit = _
   read_as_binary_string(self : Self, blob : &TBlob) -> Unit = _

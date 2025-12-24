@@ -32,4 +32,22 @@ pub impl TNode for SVGTextPathElement
 pub impl TEventTarget for SVGTextPathElement
 
 ///|
+pub const SVG_TEXT_PATH_ELEMENT_TEXTPATH_METHODTYPE_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_TEXT_PATH_ELEMENT_TEXTPATH_METHODTYPE_ALIGN : UInt = 1
+
+///|
+pub const SVG_TEXT_PATH_ELEMENT_TEXTPATH_METHODTYPE_STRETCH : UInt = 2
+
+///|
+pub const SVG_TEXT_PATH_ELEMENT_TEXTPATH_SPACINGTYPE_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_TEXT_PATH_ELEMENT_TEXTPATH_SPACINGTYPE_AUTO : UInt = 1
+
+///|
+pub const SVG_TEXT_PATH_ELEMENT_TEXTPATH_SPACINGTYPE_EXACT : UInt = 2
+
+///|
 pub trait TSVGTextPathElement: TSVGTextContentElement {}

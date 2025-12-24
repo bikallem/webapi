@@ -12,6 +12,27 @@ pub fn[T : TSVGTransform] SVGTransform::into(self : SVGTransform) -> T = "%ident
 pub impl TSVGTransform for SVGTransform
 
 ///|
+pub const SVG_TRANSFORM_SVG_TRANSFORM_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_TRANSFORM_SVG_TRANSFORM_MATRIX : UInt = 1
+
+///|
+pub const SVG_TRANSFORM_SVG_TRANSFORM_TRANSLATE : UInt = 2
+
+///|
+pub const SVG_TRANSFORM_SVG_TRANSFORM_SCALE : UInt = 3
+
+///|
+pub const SVG_TRANSFORM_SVG_TRANSFORM_ROTATE : UInt = 4
+
+///|
+pub const SVG_TRANSFORM_SVG_TRANSFORM_SKEWX : UInt = 5
+
+///|
+pub const SVG_TRANSFORM_SVG_TRANSFORM_SKEWY : UInt = 6
+
+///|
 pub trait TSVGTransform: TJsValue {
   set_matrix(self : Self, matrix? : DOMMatrix2DInit) -> Unit = _
   set_translate(self : Self, tx : Float, ty : Float) -> Unit = _

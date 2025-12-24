@@ -35,4 +35,13 @@ pub fn WheelEvent::new(
 }
 
 ///|
+pub const WHEEL_EVENT_DOM_DELTA_PIXEL : UInt = 0x00
+
+///|
+pub const WHEEL_EVENT_DOM_DELTA_LINE : UInt = 0x01
+
+///|
+pub const WHEEL_EVENT_DOM_DELTA_PAGE : UInt = 0x02
+
+///|
 pub trait TWheelEvent: TMouseEvent {}

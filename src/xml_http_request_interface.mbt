@@ -26,6 +26,21 @@ pub fn XMLHttpRequest::new() -> XMLHttpRequest {
 }
 
 ///|
+pub const XML_HTTP_REQUEST_UNSENT : UInt = 0
+
+///|
+pub const XML_HTTP_REQUEST_OPENED : UInt = 1
+
+///|
+pub const XML_HTTP_REQUEST_HEADERS_RECEIVED : UInt = 2
+
+///|
+pub const XML_HTTP_REQUEST_LOADING : UInt = 3
+
+///|
+pub const XML_HTTP_REQUEST_DONE : UInt = 4
+
+///|
 pub(open) trait TXMLHttpRequestSendBody {
   to_js(self : Self) -> JsValue
 }

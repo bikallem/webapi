@@ -26,6 +26,27 @@ pub impl TNode for SVGMarkerElement
 pub impl TEventTarget for SVGMarkerElement
 
 ///|
+pub const SVG_MARKER_ELEMENT_SVG_MARKERUNITS_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_MARKER_ELEMENT_SVG_MARKERUNITS_USERSPACEONUSE : UInt = 1
+
+///|
+pub const SVG_MARKER_ELEMENT_SVG_MARKERUNITS_STROKEWIDTH : UInt = 2
+
+///|
+pub const SVG_MARKER_ELEMENT_SVG_MARKER_ORIENT_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_MARKER_ELEMENT_SVG_MARKER_ORIENT_AUTO : UInt = 1
+
+///|
+pub const SVG_MARKER_ELEMENT_SVG_MARKER_ORIENT_ANGLE : UInt = 2
+
+///|
+pub const SVG_MARKER_ELEMENT_SVG_MARKER_ORIENT_AUTO_START_REVERSE : UInt = 3
+
+///|
 pub trait TSVGMarkerElement: TSVGElement {
   set_orient_to_auto(self : Self) -> Unit = _
   set_orient_to_angle(self : Self, angle : &TSVGAngle) -> Unit = _

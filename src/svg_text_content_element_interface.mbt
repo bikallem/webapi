@@ -31,6 +31,15 @@ pub impl TNode for SVGTextContentElement
 pub impl TEventTarget for SVGTextContentElement
 
 ///|
+pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_SPACING : UInt = 1
+
+///|
+pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_SPACINGANDGLYPHS : UInt = 2
+
+///|
 pub trait TSVGTextContentElement: TSVGGraphicsElement {
   get_number_of_chars(self : Self) -> Int = _
   get_computed_text_length(self : Self) -> Float = _

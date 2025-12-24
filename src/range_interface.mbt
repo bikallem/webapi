@@ -23,6 +23,18 @@ pub fn Range::new() -> Range {
 }
 
 ///|
+pub const RANGE_START_TO_START : UInt = 0
+
+///|
+pub const RANGE_START_TO_END : UInt = 1
+
+///|
+pub const RANGE_END_TO_END : UInt = 2
+
+///|
+pub const RANGE_END_TO_START : UInt = 3
+
+///|
 pub(open) trait TRangeCreateContextualFragmentString {
   to_js(self : Self) -> JsValue
 }

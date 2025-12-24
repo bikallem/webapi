@@ -26,6 +26,33 @@ pub impl TNode for HTMLMediaElement
 pub impl TEventTarget for HTMLMediaElement
 
 ///|
+pub const HTML_MEDIA_ELEMENT_NETWORK_EMPTY : UInt = 0
+
+///|
+pub const HTML_MEDIA_ELEMENT_NETWORK_IDLE : UInt = 1
+
+///|
+pub const HTML_MEDIA_ELEMENT_NETWORK_LOADING : UInt = 2
+
+///|
+pub const HTML_MEDIA_ELEMENT_NETWORK_NO_SOURCE : UInt = 3
+
+///|
+pub const HTML_MEDIA_ELEMENT_HAVE_NOTHING : UInt = 0
+
+///|
+pub const HTML_MEDIA_ELEMENT_HAVE_METADATA : UInt = 1
+
+///|
+pub const HTML_MEDIA_ELEMENT_HAVE_CURRENT_DATA : UInt = 2
+
+///|
+pub const HTML_MEDIA_ELEMENT_HAVE_FUTURE_DATA : UInt = 3
+
+///|
+pub const HTML_MEDIA_ELEMENT_HAVE_ENOUGH_DATA : UInt = 4
+
+///|
 pub trait THTMLMediaElement: THTMLElement {
   load(self : Self) -> Unit = _
   can_play_type(self : Self, type_ : String) -> CanPlayTypeResult = _

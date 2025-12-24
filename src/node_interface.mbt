@@ -15,6 +15,60 @@ pub impl TNode for Node
 pub impl TEventTarget for Node
 
 ///|
+pub const NODE_ELEMENT_NODE : UInt = 1
+
+///|
+pub const NODE_ATTRIBUTE_NODE : UInt = 2
+
+///|
+pub const NODE_TEXT_NODE : UInt = 3
+
+///|
+pub const NODE_CDATA_SECTION_NODE : UInt = 4
+
+///|
+pub const NODE_ENTITY_REFERENCE_NODE : UInt = 5
+
+///|
+pub const NODE_ENTITY_NODE : UInt = 6
+
+///|
+pub const NODE_PROCESSING_INSTRUCTION_NODE : UInt = 7
+
+///|
+pub const NODE_COMMENT_NODE : UInt = 8
+
+///|
+pub const NODE_DOCUMENT_NODE : UInt = 9
+
+///|
+pub const NODE_DOCUMENT_TYPE_NODE : UInt = 10
+
+///|
+pub const NODE_DOCUMENT_FRAGMENT_NODE : UInt = 11
+
+///|
+pub const NODE_NOTATION_NODE : UInt = 12
+
+///|
+pub const NODE_DOCUMENT_POSITION_DISCONNECTED : UInt = 0x01
+
+///|
+pub const NODE_DOCUMENT_POSITION_PRECEDING : UInt = 0x02
+
+///|
+pub const NODE_DOCUMENT_POSITION_FOLLOWING : UInt = 0x04
+
+///|
+pub const NODE_DOCUMENT_POSITION_CONTAINS : UInt = 0x08
+
+///|
+pub const NODE_DOCUMENT_POSITION_CONTAINED_BY : UInt = 0x10
+
+///|
+pub const NODE_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : UInt = 0x20
+
+///|
 pub trait TNode: TEventTarget {
   get_root_node(self : Self, options? : GetRootNodeOptions) -> Node = _
   has_child_nodes(self : Self) -> Bool = _

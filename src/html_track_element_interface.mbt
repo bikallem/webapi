@@ -34,4 +34,16 @@ pub fn HTMLTrackElement::new() -> HTMLTrackElement {
 }
 
 ///|
+pub const HTML_TRACK_ELEMENT_NONE : UInt = 0
+
+///|
+pub const HTML_TRACK_ELEMENT_LOADING : UInt = 1
+
+///|
+pub const HTML_TRACK_ELEMENT_LOADED : UInt = 2
+
+///|
+pub const HTML_TRACK_ELEMENT_ERROR : UInt = 3
+
+///|
 pub trait THTMLTrackElement: THTMLElement {}

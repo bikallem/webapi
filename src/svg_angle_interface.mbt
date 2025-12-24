@@ -12,6 +12,21 @@ pub fn[T : TSVGAngle] SVGAngle::into(self : SVGAngle) -> T = "%identity"
 pub impl TSVGAngle for SVGAngle
 
 ///|
+pub const SVG_ANGLE_SVG_ANGLETYPE_UNKNOWN : UInt = 0
+
+///|
+pub const SVG_ANGLE_SVG_ANGLETYPE_UNSPECIFIED : UInt = 1
+
+///|
+pub const SVG_ANGLE_SVG_ANGLETYPE_DEG : UInt = 2
+
+///|
+pub const SVG_ANGLE_SVG_ANGLETYPE_RAD : UInt = 3
+
+///|
+pub const SVG_ANGLE_SVG_ANGLETYPE_GRAD : UInt = 4
+
+///|
 pub trait TSVGAngle: TJsValue {
   new_value_specified_units(
     self : Self,
