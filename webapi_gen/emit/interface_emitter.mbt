@@ -399,7 +399,7 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub fn[T: TTestInterfaceTestMethod] TestInterfaceTestMethod::into(self : TestInterfaceTestMethod) -> T = "%identity"
       #|
-      #|extern "js" fn test_interface_test_method_is_undefined_ffi(self : TestInterfaceTestMethod) -> Bool = "(self) => self === undefined"
+      #|extern "js" fn test_interface_test_method_is_undefined_ffi(obj : TestInterfaceTestMethod) -> Bool = "(obj) => obj === undefined"
       #|
       #|pub fn TestInterfaceTestMethod::is_undefined(self : TestInterfaceTestMethod) -> Bool { test_interface_test_method_is_undefined_ffi(self) }
       #|
