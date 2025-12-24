@@ -23,6 +23,18 @@ pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::into(
 ) -> T = "%identity"
 
 ///|
+extern "js" fn html_all_collection_item_is_undefined_ffi(
+  obj : HTMLAllCollectionItem,
+) -> Bool = "(obj) => obj === undefined"
+
+///|
+pub fn HTMLAllCollectionItem::is_undefined(
+  self : HTMLAllCollectionItem,
+) -> Bool {
+  html_all_collection_item_is_undefined_ffi(self)
+}
+
+///|
 pub impl THTMLAllCollectionItem for HTMLAllCollectionItem with to_js(
   self : HTMLAllCollectionItem,
 ) -> JsValue = "%identity"

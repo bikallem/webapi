@@ -33,6 +33,18 @@ pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::into(
 ) -> T = "%identity"
 
 ///|
+extern "js" fn custom_element_registry_get_is_undefined_ffi(
+  obj : CustomElementRegistryGet,
+) -> Bool = "(obj) => obj === undefined"
+
+///|
+pub fn CustomElementRegistryGet::is_undefined(
+  self : CustomElementRegistryGet,
+) -> Bool {
+  custom_element_registry_get_is_undefined_ffi(self)
+}
+
+///|
 pub impl TCustomElementRegistryGet for CustomElementRegistryGet with to_js(
   self : CustomElementRegistryGet,
 ) -> JsValue = "%identity"
