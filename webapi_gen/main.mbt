@@ -16,22 +16,24 @@ fn is_core_spec(
 }
 
 ///|
-/// Copy template files from templates_dir to output_dir
-fn copy_templates(
-  templates_dir : String,
-  output_dir : String,
-  template_files : Array[String],
-) -> Unit raise {
+/// Copy all .mbt template files from templates_dir to output_dir
+fn copy_templates(templates_dir : String, output_dir : String) -> Unit raise {
   println("=== Copying Template Files ===")
+  let template_files = @fs.read_dir(templates_dir) catch {
+    e => fail("failed to read templates directory \{templates_dir}: \{e}")
+  }
   for filename in template_files {
-    let src_path = "\{templates_dir}/\{filename}"
-    let dst_path = "\{output_dir}/\{filename}"
-    println("  Copying \{filename}...")
-    let content = @fs.read_file_to_string(src_path) catch {
-      e => fail("failed to read template \{src_path}: \{e}")
-    }
-    @fs.write_string_to_file(dst_path, content) catch {
-      e => fail("failed to write template \{dst_path}: \{e}")
+    // Only copy .mbt files (skip non-.mbt files like README.md)
+    if filename.has_suffix(".mbt") {
+      let src_path = "\{templates_dir}/\{filename}"
+      let dst_path = "\{output_dir}/\{filename}"
+      println("  Copying \{filename}...")
+      let content = @fs.read_file_to_string(src_path) catch {
+        e => fail("failed to read template \{src_path}: \{e}")
+      }
+      @fs.write_string_to_file(dst_path, content) catch {
+        e => fail("failed to write template \{dst_path}: \{e}")
+      }
     }
   }
 }
@@ -172,7 +174,7 @@ fn main {
     }
 
     // Copy base template files
-    copy_templates(templates_dir, output_dir, config.template_files)
+    copy_templates(templates_dir, output_dir)
 
     // Write skipped log
     if skipped_logs.length() > 0 {

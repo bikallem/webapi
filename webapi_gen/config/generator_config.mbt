@@ -4,7 +4,6 @@ pub struct Config {
   idl_dir : String
   output_dir : String
   templates_dir : String
-  template_files : Array[String]
   core_specs : @hashset.HashSet[String]
   excluded_interfaces : @hashset.HashSet[String]
   excluded_callbacks : @hashset.HashSet[String]
@@ -59,7 +58,6 @@ pub fn load_config_from_string(content : String) -> Config raise {
     idl_dir: get_string(table, "idl_dir"),
     output_dir: get_string(table, "output_dir"),
     templates_dir: get_string(table, "templates_dir"),
-    template_files: get_string_array(table, "template_files"),
     core_specs: @hashset.from_array(get_string_array(table, "core_specs")),
     excluded_interfaces: @hashset.from_array(
       get_string_array(table, "excluded_interfaces"),
@@ -93,7 +91,6 @@ test "load_from_string with valid TOML" {
     #|idl_dir = "../node_modules/@webref/idl"
     #|output_dir = "../src"
     #|templates_dir = "base.mbt"
-    #|template_files = ["js_value.mbt"]
     #|core_specs = ["dom", "html"]
     #|excluded_interfaces = ["Element", "Node"]
     #|excluded_callbacks = ["MutationCallback"]
@@ -105,7 +102,6 @@ test "load_from_string with valid TOML" {
     "idl_dir": "../node_modules/@webref/idl",
     "output_dir": "../src",
     "templates_dir": "base.mbt",
-    "template_files": ["js_value.mbt"],
     "core_specs": ["dom", "html"],
     "excluded_interfaces": ["Element", "Node"],
     "excluded_callbacks": ["MutationCallback"],
@@ -120,7 +116,6 @@ test "load_from_string with empty arrays" {
     #|idl_dir = ""
     #|output_dir = ""
     #|templates_dir = ""
-    #|template_files = []
     #|core_specs = []
     #|excluded_interfaces = []
     #|excluded_callbacks = []
@@ -132,7 +127,6 @@ test "load_from_string with empty arrays" {
     "idl_dir": "",
     "output_dir": "",
     "templates_dir": "",
-    "template_files": [],
     "core_specs": [],
     "excluded_interfaces": [],
     "excluded_callbacks": [],
