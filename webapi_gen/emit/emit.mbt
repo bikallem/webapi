@@ -610,6 +610,12 @@ fn arg_mbt_type(
             type_registry,
             call_depth + 1,
           )
+          let mbt_type = if mbt_type is ArgMbtType::Other("Unit") {
+            // Map 'undefined' type to 'JsUndefined' for union option
+            ArgMbtType::Other("JsUndefined")
+          } else {
+            mbt_type
+          }
           emits.push_iter(option_emits.iter())
           let mbt_type = if option.type_ is Union(_) {
             "&T\{mbt_type.name()}"

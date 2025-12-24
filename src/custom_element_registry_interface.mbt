@@ -48,7 +48,9 @@ pub impl TCustomElementRegistryGet for CustomElementConstructor with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TCustomElementRegistryGet for Unit with to_js(self : Unit) -> JsValue = "%identity"
+pub impl TCustomElementRegistryGet for JsUndefined with to_js(
+  self : JsUndefined,
+) -> JsValue = "%identity"
 
 ///|
 pub trait TCustomElementRegistry: TJsValue {
