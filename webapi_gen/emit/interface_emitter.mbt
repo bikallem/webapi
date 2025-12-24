@@ -160,7 +160,9 @@ pub impl Emitter for InterfaceEmitter with emit(
     }
     [Attribute(_), .. rest] => continue rest // Attributes are not yet handled
     [Const(const_val), .. rest] => {
-      let const_name = ConstName(snake_case(const_val.name).to_upper())
+      let const_name = ConstName(
+        "\{snake_case(interface.name).to_upper()}_\{snake_case(const_val.name).to_upper()}",
+      )
       let (mbt_type, const_emits) = arg_mbt_type(
         const_val.type_,
         interface.name,
@@ -470,14 +472,15 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
-      #|pub const EMPTY: Float = 21
+      #|pub const TEST_INTERFACE_EMPTY: Float = 21
       #|
-      #|pub const NUM_CONST: UInt = 42
+      #|pub const TEST_INTERFACE_NUM_CONST: UInt = 42
       #|
       #|pub trait TTestInterface: TJsValue {
       #|}
       #|
       #|
+
     ),
   )
 }
