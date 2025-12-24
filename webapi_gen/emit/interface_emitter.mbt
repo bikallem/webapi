@@ -152,7 +152,7 @@ pub impl Emitter for InterfaceEmitter with emit(
       emits.push_iter(return_emits.iter())
 
       // trait method
-      let trait_method = RegularTraitMethodEmit::{
+      let trait_method = RegularMethodEmit::{
         interface_name: interface.name,
         original_name: orig_method_name,
         return_type: return_type.name(),
@@ -189,7 +189,7 @@ pub impl Emitter for InterfaceEmitter with emit(
       emits.push_iter(attr_emits.iter())
 
       // attr method
-      let attr_getter_method = AttributeTraitMethodEmit::{
+      let attr_getter_method = AttributeGetMethodEmit::{
         interface_name: interface.name,
         original_name: attr.name,
         return_type: attr_type.name(),

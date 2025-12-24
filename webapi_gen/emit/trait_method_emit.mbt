@@ -9,7 +9,7 @@ trait TraitMethodEmit: ToJson + Show {
 
 ///|
 /// Regular trait method emission.
-struct RegularTraitMethodEmit {
+struct RegularMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original method name from IDL, eg "getElementById"
   return_type : String
@@ -17,8 +17,8 @@ struct RegularTraitMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for RegularTraitMethodEmit with method_decl(
-  self : RegularTraitMethodEmit,
+impl TraitMethodEmit for RegularMethodEmit with method_decl(
+  self : RegularMethodEmit,
 ) -> Code {
   let args = trait_method_decl_args(self.args)
   Code(
@@ -27,8 +27,8 @@ impl TraitMethodEmit for RegularTraitMethodEmit with method_decl(
 }
 
 ///|
-impl TraitMethodEmit for RegularTraitMethodEmit with method_impl(
-  self : RegularTraitMethodEmit,
+impl TraitMethodEmit for RegularMethodEmit with method_impl(
+  self : RegularMethodEmit,
 ) -> Code {
   // Emit FFI function
   let ret_type_str = self.return_type
@@ -63,15 +63,15 @@ impl TraitMethodEmit for RegularTraitMethodEmit with method_impl(
 //============================ Attribute Method Emit ==========================
 
 ///|
-struct AttributeTraitMethodEmit {
+struct AttributeGetMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original attribute name from IDL, eg "title"
   return_type : String
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for AttributeTraitMethodEmit with method_decl(
-  self : AttributeTraitMethodEmit,
+impl TraitMethodEmit for AttributeGetMethodEmit with method_decl(
+  self : AttributeGetMethodEmit,
 ) -> Code {
   Code(
     "  \{safe_identifier(self.original_name)}(self : Self) -> \{self.return_type} = _",
@@ -79,8 +79,8 @@ impl TraitMethodEmit for AttributeTraitMethodEmit with method_decl(
 }
 
 ///|
-impl TraitMethodEmit for AttributeTraitMethodEmit with method_impl(
-  self : AttributeTraitMethodEmit,
+impl TraitMethodEmit for AttributeGetMethodEmit with method_impl(
+  self : AttributeGetMethodEmit,
 ) -> Code {
   // Emit FFI function
   let ret_type_str = self.return_type

@@ -27,9 +27,9 @@ pub impl Hash for ArgMbtType
 pub impl Show for ArgMbtType
 pub impl ToJson for ArgMbtType
 
-type AttributeTraitMethodEmit
-pub impl Show for AttributeTraitMethodEmit
-pub impl ToJson for AttributeTraitMethodEmit
+type AttributeGetMethodEmit
+pub impl Show for AttributeGetMethodEmit
+pub impl ToJson for AttributeGetMethodEmit
 
 pub(all) struct CallbackArgEmit {
   name : String
@@ -121,9 +121,9 @@ pub struct MethodArg {
 pub impl Show for MethodArg
 pub impl ToJson for MethodArg
 
-type RegularTraitMethodEmit
-pub impl Show for RegularTraitMethodEmit
-pub impl ToJson for RegularTraitMethodEmit
+type RegularMethodEmit
+pub impl Show for RegularMethodEmit
+pub impl ToJson for RegularMethodEmit
 
 pub struct TraitDef {
   trait_name : String
