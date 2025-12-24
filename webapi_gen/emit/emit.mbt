@@ -19,14 +19,7 @@ struct ConstName(String) derive(Show, ToJson)
 pub struct TraitDef {
   trait_name : String
   parent_trait : String
-  methods : Array[TraitMethod]
-} derive(Show, ToJson)
-
-///|
-pub struct TraitMethod {
-  method_name : String
-  return_type : String
-  args : Array[MethodArg]
+  methods : Array[&TraitMethodEmit]
 } derive(Show, ToJson)
 
 ///|
@@ -90,45 +83,6 @@ pub enum Emit {
 //============================ Code generator ===========================
 
 ///|
-fn method_args_to_string(args : Array[MethodArg]) -> String {
-  args
-  .map(arg => {
-    let arg_name = safe_identifier(arg.name)
-    let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
-    let arg_decl = match arg.type_ {
-      ArgMbtType::Self => "\{arg_name} : Self"
-      ArgMbtType::Interface(t)
-      | ArgMbtType::Union(t, _)
-      | ArgMbtType::Other(t) => "\{arg_name} : \{t}"
-    }
-    match arg.default_value {
-      Some(dv) => "\{arg_decl} = \{dv}"
-      None => arg_decl
-    }
-  })
-  .join(", \n")
-}
-
-///|
-fn func_call_args(args : Array[MethodArg]) -> String {
-  args
-  .map(arg => {
-    let arg_name = safe_identifier(arg.name)
-    if (arg.type_ is Union(_) && arg.optional && arg.default_value is Some(_)) ||
-      (arg.type_ is Union(_) && !arg.optional) {
-      "\{arg_name}.to_js()"
-    } else if arg.type_ is Union(_) && arg.optional && arg.default_value is None {
-      "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n},"
-    } else if arg.optional && arg.default_value is None {
-      "opt_to_js(\{arg_name})"
-    } else {
-      "TJsValue::to_js(\{arg_name})"
-    }
-  })
-  .join(", ")
-}
-
-///|
 /// Generate MoonBit code from Emit array for js backend
 pub fn mbt_code_gen(emits : Array[Emit]) -> String {
   let buf = StringBuilder::new()
@@ -172,60 +126,17 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string(
           "pub trait T\{trait_def.trait_name}: \{trait_def.parent_trait} {\n",
         )
-        for meth in trait_def.methods {
-          let args = meth.args
-            .map(arg => {
-              let arg_name = if arg.optional {
-                "\{arg.name}?"
-              } else {
-                arg.name
-              }
-              match arg.type_ {
-                ArgMbtType::Self => "\{arg_name} : Self"
-                ArgMbtType::Interface(t)
-                | ArgMbtType::Union(t, _)
-                | ArgMbtType::Other(t) => "\{arg_name} : \{t}"
-              }
-            })
-            .join(", ")
-          let method_name = safe_identifier(meth.method_name)
-          buf.write_string(
-            "  \{method_name}(\{args}) -> \{meth.return_type} = _\n",
-          )
-        }
-        buf..write_string("}")..write_string("\n\n")
+        // Emit trait method declarations
+        let trait_defs = trait_def.methods
+          .map(meth => meth.method_decl().0)
+          .join("\n")
+        buf..write_string(trait_defs)..write_string("\n}")..write_string("\n\n")
 
         // Emit default trait method implementations
-        for i, meth in trait_def.methods {
-          // Emit FFI function
-          let ret_type_str = meth.return_type
-          let ffi_name = "\{snake_case(trait_def.trait_name)}_\{snake_case(meth.method_name)}_ffi"
-          let ffi_argnames = meth.args.map(arg => match arg.type_ {
-            ArgMbtType::Self => "obj"
-            _ => arg.name
-          })
-          let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-          let ffi_js_args = ffi_argnames.join(", ")
-          buf
-          ..write_string(
-            "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ret_type_str} = \"(\{ffi_js_args}) => obj.\{meth.method_name}(\{ffi_js_args})\"",
-          )
-          ..write_string("\n\n")
-
-          // Emit default trait method implementation
-          let method_args = method_args_to_string(meth.args)
-          let method_name = safe_identifier(meth.method_name)
-          let call_args = func_call_args(meth.args)
-          buf
-          ..write_string(
-            "impl T\{trait_def.trait_name} with \{method_name}(\{method_args}) -> \{ret_type_str} {\n",
-          )
-          ..write_string("  \{ffi_name}(\{call_args})\n")
-          ..write_string("}")
-          if i < trait_def.methods.length() - 1 {
-            buf.write_string("\n\n")
-          }
-        }
+        let default_trait_impls = trait_def.methods
+          .map(meth => meth.method_impl().0)
+          .join("\n\n")
+        buf..write_string(default_trait_impls)
       }
       Emit::UnionArgTrait(TraitName(trait_name)) =>
         buf
@@ -262,7 +173,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         ..write_string("\n\n")
 
         // Emit new() method
-        let method_args = method_args_to_string(args)
+        let method_args = trait_method_impl_args(args)
         buf..write_string(
           "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
         )
@@ -285,7 +196,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
           "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
         )
         ..write_string("\n\n")
-        let method_args = method_args_to_string(args)
+        let method_args = trait_method_impl_args(args)
         buf.write_string(
           "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n",
         )

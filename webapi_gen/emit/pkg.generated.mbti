@@ -117,21 +117,23 @@ pub struct MethodArg {
 pub impl Show for MethodArg
 pub impl ToJson for MethodArg
 
-pub struct TraitDef {
-  trait_name : String
-  parent_trait : String
-  methods : Array[TraitMethod]
-}
-pub impl Show for TraitDef
-pub impl ToJson for TraitDef
-
-pub struct TraitMethod {
-  method_name : String
+pub struct RegularTraitMethodEmit {
+  interface_name : String
+  original_name : String
   return_type : String
   args : Array[MethodArg]
 }
-pub impl Show for TraitMethod
-pub impl ToJson for TraitMethod
+pub impl TraitMethodEmit for RegularTraitMethodEmit
+pub impl Show for RegularTraitMethodEmit
+pub impl ToJson for RegularTraitMethodEmit
+
+pub struct TraitDef {
+  trait_name : String
+  parent_trait : String
+  methods : Array[&TraitMethodEmit]
+}
+pub impl Show for TraitDef
+pub impl ToJson for TraitDef
 
 type TraitName
 pub impl Show for TraitName
@@ -153,4 +155,6 @@ pub impl Emitter for TypedefEmitter
 pub(open) trait Emitter {
   emit(Self, String) -> (Filename, Array[Emit])
 }
+
+trait TraitMethodEmit : ToJson + Show
 

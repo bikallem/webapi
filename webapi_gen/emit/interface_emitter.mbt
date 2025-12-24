@@ -58,7 +58,7 @@ pub impl Emitter for InterfaceEmitter with emit(
   for ancestor in ancestors {
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
-  let trait_methods = []
+  let trait_methods : Array[&TraitMethodEmit] = []
   let method_counter : Map[String, Int] = {} // to handle overloaded methods
   let mut constructor_count = 0 // to handle overloaded constructors
   loop interface.members.map(mem => mem.interface_member)[:] {
@@ -150,8 +150,9 @@ pub impl Emitter for InterfaceEmitter with emit(
       emits.push_iter(return_emits.iter())
 
       // trait method
-      let trait_method = TraitMethod::{
-        method_name: orig_method_name,
+      let trait_method = RegularTraitMethodEmit::{
+        interface_name: interface.name,
+        original_name: orig_method_name,
         return_type: return_type.name(),
         args,
       }
@@ -478,6 +479,7 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|pub const TEST_INTERFACE_NUM_CONST: UInt = 42
       #|
       #|pub trait TTestInterface: TJsValue {
+      #|
       #|}
       #|
       #|
