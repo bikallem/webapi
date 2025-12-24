@@ -139,6 +139,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         emits
         ..push(Emit::External(union_type_name))
         ..push(Emit::IntoMethod(union_type_name))
+        ..push(Emit::IsUndefinedMethod(union_type_name))
         .push(
           Emit::UnionArgTraitImpl(
             TypeName(union_type_name),
@@ -202,7 +203,30 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
     "testMethod",
     type_registry,
   )
-  @json.inspect(args, content=([[{"name":"param","original_name":"param","type_":["Union","&TTestInterfaceTestMethodParam",false],"optional":true,"default_value":"\"default\""}],[["UnionArgTrait",["TraitName","TTestInterfaceTestMethodParam"]],["UnionArgTraitImpl",["TypeName","String"],["TraitName","TTestInterfaceTestMethodParam"]],["UnionArgTraitImpl",["TypeName","UInt"],["TraitName","TTestInterfaceTestMethodParam"]]]]))
+  @json.inspect(args, content=[
+    [
+      {
+        "name": "param",
+        "original_name": "param",
+        "type_": ["Union", "&TTestInterfaceTestMethodParam", false],
+        "optional": true,
+        "default_value": "\"default\"",
+      },
+    ],
+    [
+      ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
+      [
+        "UnionArgTraitImpl",
+        ["TypeName", "String"],
+        ["TraitName", "TTestInterfaceTestMethodParam"],
+      ],
+      [
+        "UnionArgTraitImpl",
+        ["TypeName", "UInt"],
+        ["TraitName", "TTestInterfaceTestMethodParam"],
+      ],
+    ],
+  ])
 }
 
 ///|
@@ -374,6 +398,10 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|pub type TestInterfaceTestMethod
       #|
       #|pub fn[T: TTestInterfaceTestMethod] TestInterfaceTestMethod::into(self : TestInterfaceTestMethod) -> T = "%identity"
+      #|
+      #|extern "js" fn test_interface_test_method_is_undefined_ffi(self : TestInterfaceTestMethod) -> Bool = "(self) => self === undefined"
+      #|
+      #|pub fn TestInterfaceTestMethod::is_undefined(self : TestInterfaceTestMethod) -> Bool { test_interface_test_method_is_undefined_ffi(self) }
       #|
       #|pub impl TTestInterfaceTestMethod for TestInterfaceTestMethod with to_js(self : TestInterfaceTestMethod) -> JsValue = "%identity"
       #|

@@ -70,6 +70,7 @@ pub enum Emit {
   External(TypeName) // External type, eg. #external EventTarget
   ImplTJsValue(TypeName) // eg. pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
   IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+  IsUndefinedMethod(TypeName) // eg. pub fn EventTarget::is_undefined(self : EventTarget) -> Bool { ... }
   EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
   TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
@@ -139,6 +140,17 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string(
           "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
         )
+      Emit::IsUndefinedMethod(TypeName(type_name)) => {
+        let ffi_name = "\{snake_case(type_name)}_is_undefined_ffi"
+        buf
+        ..write_string(
+          "extern \"js\" fn \{ffi_name}(self : \{type_name}) -> Bool = \"(self) => self === undefined\"",
+        )
+        ..write_string("\n\n")
+        .write_string(
+          "pub fn \{type_name}::is_undefined(self : \{type_name}) -> Bool { \{ffi_name}(self) }",
+        )
+      }
       Emit::EmptyMethod(TypeName(type_name)) => {
         let ffi_name = "\{snake_case(type_name)}_empty_ffi"
         buf

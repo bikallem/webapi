@@ -21,7 +21,7 @@ pub fn mbt_code_gen(Array[Emit]) -> String
 pub enum ArgMbtType {
   Self
   Other(String)
-  Union(String)
+  Union(String, Bool)
   Interface(String)
 }
 pub impl Eq for ArgMbtType
@@ -62,6 +62,7 @@ pub enum Emit {
   External(TypeName)
   ImplTJsValue(TypeName)
   IntoMethod(TypeName)
+  IsUndefinedMethod(TypeName)
   EmptyMethod(TypeName)
   ImplTrait(TypeName, TraitName)
   TraitDefinition(TraitDef)
