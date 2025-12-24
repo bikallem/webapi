@@ -15,7 +15,6 @@ pub struct Config {
   idl_dir : String
   output_dir : String
   templates_dir : String
-  template_files : Array[String]
   core_specs : @hashset.HashSet[String]
   excluded_interfaces : @hashset.HashSet[String]
   excluded_callbacks : @hashset.HashSet[String]
