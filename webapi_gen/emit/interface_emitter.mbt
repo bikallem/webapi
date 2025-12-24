@@ -158,6 +158,7 @@ pub impl Emitter for InterfaceEmitter with emit(
       continue rest
     }
     [Attribute(_), .. rest] => continue rest // Attributes are not yet handled
+    [Const(_), .. rest] => continue rest // Consts are not yet handled
     [_, .. rest] => continue rest
   }
   let parent_trait = match interface.inheritance {
