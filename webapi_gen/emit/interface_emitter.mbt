@@ -229,7 +229,15 @@ pub impl Emitter for InterfaceEmitter with emit(
       )
       continue rest
     }
-    [_, .. rest] => continue rest
+    [
+      Setlike(_)
+      | Maplike(_)
+      | AsyncIterable(_)
+      | Iterable(_)
+      | SpecialOperation(_)
+      | Stringifier(Bare),
+      .. rest,
+    ] => continue rest
   }
   let parent_trait = match interface.inheritance {
     None => "TJsValue"
