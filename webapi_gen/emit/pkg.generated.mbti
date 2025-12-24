@@ -9,8 +9,6 @@ import(
 // Values
 pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 
-pub fn emit_globals(@flattened_idl.FlattenedIdl) -> String
-
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
 pub fn mbt_code_gen(Array[Emit]) -> String
