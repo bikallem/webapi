@@ -23,7 +23,7 @@ fn copy_templates(templates_dir : String, output_dir : String) -> Unit raise {
     e => fail("failed to read templates directory \{templates_dir}: \{e}")
   }
   for filename in template_files {
-    // Only copy .mbt files (skip README.md and other files)
+    // Only copy .mbt files (skip non-.mbt files like README.md)
     if filename.has_suffix(".mbt") {
       let src_path = "\{templates_dir}/\{filename}"
       let dst_path = "\{output_dir}/\{filename}"
