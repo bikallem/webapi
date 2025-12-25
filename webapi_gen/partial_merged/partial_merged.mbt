@@ -86,7 +86,10 @@ pub fn merge_partials(
         partial_merged.callback_functions[cbf.name] = cbf
         cbf.spec = def.spec
       }
-      Typedef(td) => partial_merged.typedefs[td.name] = td
+      Typedef(td) => {
+        partial_merged.typedefs[td.name] = td
+        td.spec = def.spec
+      }
       Enum(enm) => partial_merged.enums[enm.name] = enm
       PartialDictionary(pdict) =>
         partial_merged.merge_dictionary(

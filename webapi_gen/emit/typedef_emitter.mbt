@@ -11,6 +11,12 @@ pub impl Emitter for TypedefEmitter with emit(
 ) -> (Filename, Array[Emit]) {
   let filename = Filename("\{snake_case(name)}_typedef.mbt")
   let typedef_def = self.idl.typedefs[name]
+  let specs = @hashset.HashSet::new()
+  match typedef_def.spec {
+    Some(s) => specs.add(s)
+    None => ()
+  }
+  let emits = [Emit::FileHeader(TypeName(typedef_def.name), Specs(specs))]
   let typedef_emits = match typedef_def.type_ {
     Union(options) => {
       let emits = []
@@ -50,7 +56,8 @@ pub impl Emitter for TypedefEmitter with emit(
       [Emit::TypedefAlias(typedef_def.name, target_type.name())]
     }
   }
-  (filename, typedef_emits)
+  emits.push_iter(typedef_emits.iter())
+  (filename, emits)
 }
 
 ///|
@@ -65,7 +72,13 @@ test "typedef emiiter emits alias typedef" {
   let (filename, emits) = emitter.emit("MyString")
   let code = mbt_code_gen(emits)
   @json.inspect(filename, content=["Filename", "my_string_typedef.mbt"])
-  inspect(code, content="pub type MyString = String")
+  inspect(code, content=(
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: MyString
+    #|
+    #|
+    #|pub type MyString = String
+  ))
 }
 
 ///|
@@ -88,6 +101,10 @@ test "typedef emitter emits union typedef" {
   inspect(
     code,
     content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: MyUnion
+      #|
+      #|
       #|#external
       #|pub type MyUnion
       #|
@@ -104,6 +121,7 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
+
     ),
   )
 }
@@ -124,6 +142,10 @@ test "typedef emitter emit interface types as trait references in union typedef"
   inspect(
     code,
     content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: MyUnion
+      #|
+      #|
       #|#external
       #|pub type MyUnion
       #|
@@ -138,6 +160,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+
     ),
   )
 }
@@ -155,5 +178,11 @@ test "typedef emitter emits alias of nullable interface" {
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (_filename, emits) = emitter.emit("MyNullableInterface")
   let code = mbt_code_gen(emits)
-  inspect(code, content="pub type MyNullableInterface = MyInterface")
+  inspect(code, content=(
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: MyNullableInterface
+    #|
+    #|
+    #|pub type MyNullableInterface = MyInterface
+  ))
 }

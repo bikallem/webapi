@@ -823,11 +823,11 @@ fn yy_action_71(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 172|    "typedef" type_=type name=IDENTIFIER ";" { { type_, name } }
+// 172|    "typedef" type_=type name=IDENTIFIER ";" { { type_, name, spec: None } }
 fn yy_action_72(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_Type(type_)
   guard _args[2].0 is YYObj_String(name)
-  YYObj_TypedefDefinition({();  { type_, name } })
+  YYObj_TypedefDefinition({();  { type_, name, spec: None } })
 }
 
 // file:///./parser.mbty

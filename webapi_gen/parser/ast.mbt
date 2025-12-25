@@ -387,6 +387,7 @@ pub(all) struct EnumDefinition {
 pub(all) struct TypedefDefinition {
   type_ : Type
   name : String
+  mut spec : String?
 } derive(Show, Eq, ToJson, Hash)
 
 ///|
