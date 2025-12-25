@@ -45,9 +45,6 @@ pub fn DOMMatrixReadOnly::new(
 
 ///|
 pub trait TDOMMatrixReadOnly: TJsValue {
-  from_matrix(other? : DOMMatrixInit) -> DOMMatrixReadOnly = _
-  from_float32array(array32 : Float32Array) -> DOMMatrixReadOnly = _
-  from_float64array(array64 : Float64Array) -> DOMMatrixReadOnly = _
   a(self : Self) -> Double = _
   b(self : Self) -> Double = _
   c(self : Self) -> Double = _
@@ -109,38 +106,6 @@ pub trait TDOMMatrixReadOnly: TJsValue {
   to_float32array(self : Self) -> Float32Array = _
   to_float64array(self : Self) -> Float64Array = _
   to_json(self : Self) -> JsValue = _
-}
-
-///|
-extern "js" fn dom_matrix_read_only_from_matrix_ffi(
-  other : JsValue,
-) -> DOMMatrixReadOnly = "(other) => { DOMMatrixReadOnly.fromMatrix(other) }"
-
-///|
-impl TDOMMatrixReadOnly with from_matrix(
-  other? : DOMMatrixInit = DOMMatrixInit::empty(),
-) -> DOMMatrixReadOnly {
-  dom_matrix_read_only_from_matrix_ffi(TJsValue::to_js(other))
-}
-
-///|
-extern "js" fn dom_matrix_read_only_from_float32array_ffi(
-  array32 : JsValue,
-) -> DOMMatrixReadOnly = "(array32) => { DOMMatrixReadOnly.fromFloat32Array(array32) }"
-
-///|
-impl TDOMMatrixReadOnly with from_float32array(array32 : Float32Array) -> DOMMatrixReadOnly {
-  dom_matrix_read_only_from_float32array_ffi(TJsValue::to_js(array32))
-}
-
-///|
-extern "js" fn dom_matrix_read_only_from_float64array_ffi(
-  array64 : JsValue,
-) -> DOMMatrixReadOnly = "(array64) => { DOMMatrixReadOnly.fromFloat64Array(array64) }"
-
-///|
-impl TDOMMatrixReadOnly with from_float64array(array64 : Float64Array) -> DOMMatrixReadOnly {
-  dom_matrix_read_only_from_float64array_ffi(TJsValue::to_js(array64))
 }
 
 ///|

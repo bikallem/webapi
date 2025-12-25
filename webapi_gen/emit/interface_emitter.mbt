@@ -91,6 +91,7 @@ pub impl Emitter for InterfaceEmitter with emit(
       )
       continue rest
     }
+    [RegularOperation(op), .. rest] if op.static_ => continue rest // Static methods are not yet handled
     [RegularOperation(op), .. rest] => {
       let orig_method_name = match method_counter.get(op.name) {
         None => {
@@ -114,21 +115,15 @@ pub impl Emitter for InterfaceEmitter with emit(
         orig_method_name,
         self.type_registry,
       )
-      // Add 'self' argument for non-static methods
-      let mut self_arg = None
-      if !op.static_ {
-        self_arg = Some(MethodArg::{
-          name: "self",
-          original_name: "self",
-          type_: ArgMbtType::Self,
-          optional: false,
-          default_value: None,
-        })
+      // Add 'self' argument 
+      let self_arg = MethodArg::{
+        name: "self",
+        original_name: "self",
+        type_: ArgMbtType::Self,
+        optional: false,
+        default_value: None,
       }
-      let args = match self_arg {
-        Some(sa) => [sa, ..args]
-        None => args
-      }
+      let args = [self_arg, ..args]
       emits.push_iter(arg_emits.iter())
 
       // return type
@@ -161,7 +156,6 @@ pub impl Emitter for InterfaceEmitter with emit(
         original_name: orig_method_name,
         return_type: return_type.name(),
         args,
-        is_static: op.static_,
       }
       trait_methods.push(trait_method)
       continue rest
@@ -736,15 +730,10 @@ test "InterfaceEmitter emits static methods" {
       #|pub impl TTestInterface for TestInterface
       #|
       #|pub trait TTestInterface: TJsValue {
-      #|  redirect(url : String, status? : UInt) -> Response = _
+      #|
       #|}
       #|
-      #|extern "js" fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response = "(url, status) => { TestInterface.redirect(url, status) }"
       #|
-      #|impl TTestInterface with redirect(url : String, 
-      #|status? : UInt = 302) -> Response {
-      #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
-      #|}
     ),
   )
 }
