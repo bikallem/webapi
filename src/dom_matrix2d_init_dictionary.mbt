@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: DOMMatrix2DInit
+// Specifications: geometry.idl
+
 ///|
 #external
 pub type DOMMatrix2DInit

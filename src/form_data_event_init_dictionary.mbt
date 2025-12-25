@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: FormDataEventInit
+// Specifications: dom.idl, html.idl
+
 ///|
 #external
 pub type FormDataEventInit

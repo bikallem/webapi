@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CaretPositionFromPointOptions
+// Specifications: cssom-view.idl
+
 ///|
 #external
 pub type CaretPositionFromPointOptions

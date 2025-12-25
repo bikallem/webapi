@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CompositionEventInit
+// Specifications: uievents.idl
+
 ///|
 #external
 pub type CompositionEventInit

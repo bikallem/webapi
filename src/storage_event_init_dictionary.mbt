@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: StorageEventInit
+// Specifications: dom.idl, html.idl
+
 ///|
 #external
 pub type StorageEventInit

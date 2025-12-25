@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: HashChangeEventInit
+// Specifications: dom.idl, html.idl
+
 ///|
 #external
 pub type HashChangeEventInit

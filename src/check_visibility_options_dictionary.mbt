@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CheckVisibilityOptions
+// Specifications: cssom-view.idl
+
 ///|
 #external
 pub type CheckVisibilityOptions

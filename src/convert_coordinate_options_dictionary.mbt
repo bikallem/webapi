@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: ConvertCoordinateOptions
+// Specifications: cssom-view.idl
+
 ///|
 #external
 pub type ConvertCoordinateOptions

@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: PageTransitionEventInit
+// Specifications: dom.idl, html.idl
+
 ///|
 #external
 pub type PageTransitionEventInit

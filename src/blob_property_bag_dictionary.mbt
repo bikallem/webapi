@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: BlobPropertyBag
+// Specifications: FileAPI.idl
+
 ///|
 #external
 pub type BlobPropertyBag

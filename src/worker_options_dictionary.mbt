@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: WorkerOptions
+// Specifications: html.idl
+
 ///|
 #external
 pub type WorkerOptions

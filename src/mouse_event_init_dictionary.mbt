@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: MouseEventInit
+// Specifications: uievents.idl
+
 ///|
 #external
 pub type MouseEventInit
