@@ -58,7 +58,7 @@ pub impl Emitter for InterfaceEmitter with emit(
   for ancestor in ancestors {
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
-  let trait_methods : Array[&TraitMethodEmit] = []
+  let interface_methods : Array[&InterfaceMethodEmit] = []
   let method_counter : Map[String, Int] = {} // to handle overloaded methods
   let mut constructor_count = 0 // to handle overloaded constructors
   loop interface.members.map(mem => mem.interface_member)[:] {
@@ -81,8 +81,9 @@ pub impl Emitter for InterfaceEmitter with emit(
         method_name,
         self.type_registry,
       )
-      emits.push_iter(arg_emits.iter())
-      emits.push(
+      emits
+      ..push_iter(arg_emits.iter())
+      ..push(
         Emit::ConstructorMethod(
           ConstructorName(method_name),
           TypeName(interface.name),
@@ -145,7 +146,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         return_type: return_type.name(),
         args,
       }
-      trait_methods.push(static_method)
+      interface_methods.push(static_method)
       continue rest
     }
     [RegularOperation(op), .. rest] => {
@@ -213,7 +214,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         return_type: return_type.name(),
         args,
       }
-      trait_methods.push(trait_method)
+      interface_methods.push(trait_method)
       continue rest
     }
     [Attribute(attr), .. rest] => {
@@ -249,7 +250,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         original_name: attr.name,
         return_type: attr_type.name(),
       }
-      trait_methods.push(attr_getter_method)
+      interface_methods.push(attr_getter_method)
 
       // Set Attribute method if specified
       if !attr.is_readonly || attr.is_inherit {
@@ -258,7 +259,7 @@ pub impl Emitter for InterfaceEmitter with emit(
           original_name: attr.name,
           arg_type: attr_type.name(),
         }
-        trait_methods.push(attr_setter_method)
+        interface_methods.push(attr_setter_method)
       }
       continue rest // Attributes are not yet handled
     }
@@ -299,10 +300,10 @@ pub impl Emitter for InterfaceEmitter with emit(
     Some(parent) => "T\{parent}"
   }
   emits.push(
-    Emit::TraitDefinition(TraitDef::{
+    Emit::InterfaceDefinition(InterfaceDef::{
       trait_name: interface.name,
       parent_trait,
-      methods: trait_methods,
+      methods: interface_methods,
     }),
   )
   (filename, emits)

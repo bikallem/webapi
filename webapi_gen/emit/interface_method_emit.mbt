@@ -1,6 +1,6 @@
 ///|
-/// Trait for emitting trait methods.
-trait TraitMethodEmit: ToJson + Show {
+/// Trait for emitting interface methods.
+trait InterfaceMethodEmit: ToJson + Show {
   decl_emit(self : Self) -> Code // Generate method declaration code  
   impl_emit(self : Self) -> Code // Generate method implementation code
 }
@@ -17,7 +17,7 @@ struct RegularMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for RegularMethodEmit with decl_emit(
+impl InterfaceMethodEmit for RegularMethodEmit with decl_emit(
   self : RegularMethodEmit,
 ) -> Code {
   let args = trait_method_decl_args(self.args)
@@ -27,7 +27,7 @@ impl TraitMethodEmit for RegularMethodEmit with decl_emit(
 }
 
 ///|
-impl TraitMethodEmit for RegularMethodEmit with impl_emit(
+impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   self : RegularMethodEmit,
 ) -> Code {
   // Emit FFI function
@@ -71,14 +71,14 @@ struct StaticMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for StaticMethodEmit with decl_emit(
+impl InterfaceMethodEmit for StaticMethodEmit with decl_emit(
   _self : StaticMethodEmit,
 ) -> Code {
   Code("") // Static methods are not included in trait declarations
 }
 
 ///|
-impl TraitMethodEmit for StaticMethodEmit with impl_emit(
+impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   self : StaticMethodEmit,
 ) -> Code {
   // Emit FFI function
@@ -118,7 +118,7 @@ struct AttributeGetMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for AttributeGetMethodEmit with decl_emit(
+impl InterfaceMethodEmit for AttributeGetMethodEmit with decl_emit(
   self : AttributeGetMethodEmit,
 ) -> Code {
   Code(
@@ -127,7 +127,7 @@ impl TraitMethodEmit for AttributeGetMethodEmit with decl_emit(
 }
 
 ///|
-impl TraitMethodEmit for AttributeGetMethodEmit with impl_emit(
+impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
   self : AttributeGetMethodEmit,
 ) -> Code {
   // Emit FFI function
@@ -162,7 +162,7 @@ struct AttributeSetMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for AttributeSetMethodEmit with decl_emit(
+impl InterfaceMethodEmit for AttributeSetMethodEmit with decl_emit(
   self : AttributeSetMethodEmit,
 ) -> Code {
   Code(
@@ -171,7 +171,7 @@ impl TraitMethodEmit for AttributeSetMethodEmit with decl_emit(
 }
 
 ///|
-impl TraitMethodEmit for AttributeSetMethodEmit with impl_emit(
+impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
   self : AttributeSetMethodEmit,
 ) -> Code {
   // Emit FFI function

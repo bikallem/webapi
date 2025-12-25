@@ -75,7 +75,7 @@ pub enum Emit {
   IsUndefinedMethod(TypeName)
   EmptyMethod(TypeName)
   ImplTrait(TypeName, TraitName)
-  TraitDefinition(TraitDef)
+  InterfaceDefinition(InterfaceDef)
   UnionArgTrait(TraitName)
   UnionArgTraitImpl(TypeName, TraitName)
   DictionaryCreate(TypeName, Array[MethodArg])
@@ -109,6 +109,14 @@ pub impl Hash for Filename
 pub impl Show for Filename
 pub impl ToJson for Filename
 
+pub struct InterfaceDef {
+  trait_name : String
+  parent_trait : String
+  methods : Array[&InterfaceMethodEmit]
+}
+pub impl Show for InterfaceDef
+pub impl ToJson for InterfaceDef
+
 pub(all) struct InterfaceEmitter {
   idl : @flattened_idl.FlattenedIdl
   type_registry : @type_registry.TypeRegistry
@@ -133,14 +141,6 @@ type StaticMethodEmit
 pub impl Show for StaticMethodEmit
 pub impl ToJson for StaticMethodEmit
 
-pub struct TraitDef {
-  trait_name : String
-  parent_trait : String
-  methods : Array[&TraitMethodEmit]
-}
-pub impl Show for TraitDef
-pub impl ToJson for TraitDef
-
 type TraitName
 pub impl Show for TraitName
 pub impl ToJson for TraitName
@@ -162,5 +162,5 @@ pub(open) trait Emitter {
   emit(Self, String) -> (Filename, Array[Emit])
 }
 
-trait TraitMethodEmit : ToJson + Show
+trait InterfaceMethodEmit : ToJson + Show
 

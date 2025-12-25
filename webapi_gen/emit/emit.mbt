@@ -16,10 +16,10 @@ struct ConstructorName(String) derive(Show, ToJson)
 struct ConstName(String) derive(Show, ToJson)
 
 ///|
-pub struct TraitDef {
+pub struct InterfaceDef {
   trait_name : String
   parent_trait : String
-  methods : Array[&TraitMethodEmit]
+  methods : Array[&InterfaceMethodEmit]
 } derive(Show, ToJson)
 
 ///|
@@ -69,7 +69,7 @@ pub enum Emit {
   IsUndefinedMethod(TypeName) // eg. pub fn EventTarget::is_undefined(self : EventTarget) -> Bool { ... }
   EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
-  TraitDefinition(TraitDef) // eg. trait TEventTarget { ... }
+  InterfaceDefinition(InterfaceDef) // eg. trait TEventTarget { ... }
   UnionArgTrait(TraitName) // eg. trait TEventTargetArg { ... }
   UnionArgTraitImpl(TypeName, TraitName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
@@ -122,7 +122,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
         buf.write_string("pub impl \{trait_name} for \{type_name}")
-      Emit::TraitDefinition(trait_def) => {
+      Emit::InterfaceDefinition(trait_def) => {
         buf.write_string(
           "pub trait T\{trait_def.trait_name}: \{trait_def.parent_trait} {\n",
         )
