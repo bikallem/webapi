@@ -137,6 +137,10 @@ type RegularMethodEmit
 pub impl Show for RegularMethodEmit
 pub impl ToJson for RegularMethodEmit
 
+type StaticAttributeGetMethodEmit
+pub impl Show for StaticAttributeGetMethodEmit
+pub impl ToJson for StaticAttributeGetMethodEmit
+
 type StaticMethodEmit
 pub impl Show for StaticMethodEmit
 pub impl ToJson for StaticMethodEmit

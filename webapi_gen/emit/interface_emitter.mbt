@@ -217,9 +217,45 @@ pub impl Emitter for InterfaceEmitter with emit(
       interface_methods.push(trait_method)
       continue rest
     }
-    [Attribute(attr), .. rest] if attr.static_ =>
-      // Static attributes are not yet handled
+    [Attribute(attr), .. rest] if attr.static_ => {
+      if !attr.is_readonly && !attr.is_inherit {
+        // only static readonly attributes are supported for now
+        // TODO: log this
+        continue rest
+      }
+      let (attr_type, attr_emits) = arg_mbt_type(
+        attr.type_,
+        interface.name,
+        attr.name,
+        "",
+        self.type_registry,
+      )
+      emits.push_iter(attr_emits.iter())
+      if attr_type is ArgMbtType::Union(union_type_name, has_undefined) {
+        emits
+        ..push(Emit::External(union_type_name))
+        ..push(Emit::IntoMethod(union_type_name))
+        if has_undefined {
+          emits.push(Emit::IsUndefinedMethod(union_type_name))
+        }
+        emits.push(
+          Emit::UnionArgTraitImpl(
+            TypeName(union_type_name),
+            TraitName("T\{union_type_name}"),
+          ),
+        )
+      }
+      emits.push_iter(attr_emits.iter())
+
+      // Static Attribute Get method
+      let static_attr_getter_method = StaticAttributeGetMethodEmit::{
+        interface_name: interface.name,
+        original_name: attr.name,
+        return_type: attr_type.name(),
+      }
+      interface_methods.push(static_attr_getter_method)
       continue rest
+    }
     [Attribute(attr), .. rest] => {
       let (attr_type, attr_emits) = arg_mbt_type(
         attr.type_,
@@ -795,6 +831,44 @@ test "InterfaceEmitter emits static methods" {
       #|pub fn TestInterface::redirect(url : String, 
       #|status? : UInt = 302) -> Response {
       #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
+      #|}
+    ),
+  )
+}
+
+///|
+test "InterfaceEmitter emits static attribute getter methods" {
+  let idl =
+    #|interface TestInterface {
+    #|  static readonly attribute DOMString appName;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub trait TTestInterface: TJsValue {
+      #|
+      #|}
+      #|
+      #|extern "js" fn test_interface_app_name_ffi() -> String = "() => TestInterface.appName"
+      #|
+      #|pub fn TestInterface::app_name() -> String {
+      #|  test_interface_app_name_ffi()
       #|}
     ),
   )

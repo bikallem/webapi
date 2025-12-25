@@ -198,6 +198,48 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
   Code(code.to_string())
 }
 
+//============================ Static Attribute Get Method Emit ===================
+
+///|
+struct StaticAttributeGetMethodEmit {
+  interface_name : String // Name of the interface this method belongs to, eg. Document
+  original_name : String // Original attribute name from IDL, eg "title"
+  return_type : String
+} derive(Show, ToJson)
+
+///|
+impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with decl_emit(
+  _self : StaticAttributeGetMethodEmit,
+) -> Code {
+  Code("") // Static attributes are not included in trait declarations
+}
+
+///|
+impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
+  self : StaticAttributeGetMethodEmit,
+) -> Code {
+  // Emit FFI function
+  let ret_type_str = self.return_type
+  let trait_name = self.interface_name
+  let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
+  let code = StringBuilder::new()
+  code
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}() -> \{ret_type_str} = \"() => \{trait_name}.\{self.original_name}\"",
+  )
+  ..write_string("\n\n")
+
+  // Emit static attribute getter implementation
+  let method_name = safe_identifier(self.original_name)
+  code
+  ..write_string(
+    "pub fn \{trait_name}::\{method_name}() -> \{ret_type_str} {\n",
+  )
+  ..write_string("  \{ffi_name}()\n")
+  ..write_string("}")
+  Code(code.to_string())
+}
+
 //============================ Method Emit Helpers ============================
 
 ///|
