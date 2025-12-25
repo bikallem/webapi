@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: SVGPreserveAspectRatio
+// Specifications: SVG.idl
+
 ///|
 #external
 pub type SVGPreserveAspectRatio

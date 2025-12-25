@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: NotRestoredReasonDetails
+// Specifications: html.idl
+
 ///|
 #external
 pub type NotRestoredReasonDetails

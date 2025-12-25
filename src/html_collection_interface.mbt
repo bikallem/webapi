@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: HTMLCollection
+// Specifications: dom.idl
+
 ///|
 #external
 pub type HTMLCollection

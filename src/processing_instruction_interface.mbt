@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: ProcessingInstruction
+// Specifications: dom.idl
+
 ///|
 #external
 pub type ProcessingInstruction

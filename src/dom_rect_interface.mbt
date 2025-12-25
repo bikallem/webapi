@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: DOMRect
+// Specifications: geometry.idl
+
 ///|
 #external
 pub type DOMRect

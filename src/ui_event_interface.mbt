@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: UIEvent
+// Specifications: uievents.idl
+
 ///|
 #external
 pub type UIEvent

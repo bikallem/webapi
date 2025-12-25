@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: External
+// Specifications: html.idl
+
 ///|
 #external
 pub type External

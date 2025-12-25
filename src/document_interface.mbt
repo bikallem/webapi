@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: Document
+// Specifications: cssom-view.idl, SVG.idl, dom.idl, html.idl
+
 ///|
 #external
 pub type Document

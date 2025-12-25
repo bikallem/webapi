@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: BeforeUnloadEvent
+// Specifications: html.idl
+
 ///|
 #external
 pub type BeforeUnloadEvent

@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: FileReaderSync
+// Specifications: FileAPI.idl
+
 ///|
 #external
 pub type FileReaderSync

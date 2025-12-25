@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CSSStyleProperties
+// Specifications: cssom.idl
+
 ///|
 #external
 pub type CSSStyleProperties

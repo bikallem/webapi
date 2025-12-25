@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: Window
+// Specifications: cssom-view.idl, cssom.idl, dom.idl, html.idl
+
 ///|
 #external
 pub type Window

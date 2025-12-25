@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: Range
+// Specifications: cssom-view.idl, dom.idl, html.idl
+
 ///|
 #external
 pub type Range

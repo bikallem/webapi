@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: XMLHttpRequestUpload
+// Specifications: xhr.idl
+
 ///|
 #external
 pub type XMLHttpRequestUpload

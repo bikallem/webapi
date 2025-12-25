@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: Comment
+// Specifications: dom.idl
+
 ///|
 #external
 pub type Comment

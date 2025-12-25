@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CSSPageRule
+// Specifications: cssom.idl
+
 ///|
 #external
 pub type CSSPageRule

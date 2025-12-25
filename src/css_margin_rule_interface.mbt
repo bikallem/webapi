@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CSSMarginRule
+// Specifications: cssom.idl
+
 ///|
 #external
 pub type CSSMarginRule

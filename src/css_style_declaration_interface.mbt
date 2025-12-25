@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CSSStyleDeclaration
+// Specifications: cssom.idl
+
 ///|
 #external
 pub type CSSStyleDeclaration

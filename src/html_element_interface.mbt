@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: HTMLElement
+// Specifications: cssom-view.idl, html.idl
+
 ///|
 #external
 pub type HTMLElement

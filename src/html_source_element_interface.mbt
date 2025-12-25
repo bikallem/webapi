@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: HTMLSourceElement
+// Specifications: html.idl
+
 ///|
 #external
 pub type HTMLSourceElement

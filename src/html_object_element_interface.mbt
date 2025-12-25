@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: HTMLObjectElement
+// Specifications: html.idl
+
 ///|
 #external
 pub type HTMLObjectElement

@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: SVGLineElement
+// Specifications: SVG.idl
+
 ///|
 #external
 pub type SVGLineElement

@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: MouseEvent
+// Specifications: uievents.idl, cssom-view.idl
+
 ///|
 #external
 pub type MouseEvent

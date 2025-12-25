@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: DocumentType
+// Specifications: dom.idl
+
 ///|
 #external
 pub type DocumentType

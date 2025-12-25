@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: HTMLTrackElement
+// Specifications: html.idl
+
 ///|
 #external
 pub type HTMLTrackElement

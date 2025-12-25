@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: Screen
+// Specifications: cssom-view.idl
+
 ///|
 #external
 pub type Screen

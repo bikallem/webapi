@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: OffscreenCanvasRenderingContext2D
+// Specifications: html.idl
+
 ///|
 #external
 pub type OffscreenCanvasRenderingContext2D

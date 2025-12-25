@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: FileList
+// Specifications: FileAPI.idl
+
 ///|
 #external
 pub type FileList

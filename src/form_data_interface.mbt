@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: FormData
+// Specifications: xhr.idl
+
 ///|
 #external
 pub type FormData

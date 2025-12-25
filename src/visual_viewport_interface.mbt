@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: VisualViewport
+// Specifications: cssom-view.idl
+
 ///|
 #external
 pub type VisualViewport

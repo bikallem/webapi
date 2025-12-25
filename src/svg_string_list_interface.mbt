@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: SVGStringList
+// Specifications: SVG.idl
+
 ///|
 #external
 pub type SVGStringList

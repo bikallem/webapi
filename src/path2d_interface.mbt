@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: Path2D
+// Specifications: html.idl
+
 ///|
 #external
 pub type Path2D
