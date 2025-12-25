@@ -51,6 +51,7 @@ test "PartialMergeVisitor merges interface and partial interface" {
             ],
           },
         ],
+        "specs": [],
       },
     },
     "mixins": {},

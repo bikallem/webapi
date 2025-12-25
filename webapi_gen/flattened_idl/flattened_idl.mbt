@@ -75,6 +75,7 @@ pub fn flatten(
             partial_merged.interfaces[include_stmt.interface_name] = iface.merge(
               mxn.members,
               iface.inheritance,
+              iface.specs,
             )
           None =>
             logger(

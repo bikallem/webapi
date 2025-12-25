@@ -51,6 +51,7 @@ pub impl Emitter for InterfaceEmitter with emit(
   let ancestors = @flattened_idl.get_interface_ancestors(self.idl, name)
   let emits = []
   emits
+  ..push(Emit::FileHeader(TypeName(interface.name), Specs(interface.specs)))
   ..push(Emit::External(interface.name))
   ..push(Emit::ImplTJsValue(interface.name))
   ..push(Emit::IntoMethod(interface.name))

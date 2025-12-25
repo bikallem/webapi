@@ -4,6 +4,7 @@ pub struct PartialMergedInterface {
   name : String
   members : Array[@parser.InterfaceMemberExtendedAttributes]
   inheritance : String?
+  specs : @hashset.HashSet[String]
 } derive(Show, ToJson)
 
 ///|
@@ -11,8 +12,9 @@ fn PartialMergedInterface::new(
   name : String,
   members : Array[@parser.InterfaceMemberExtendedAttributes],
   inheritance : String?,
+  specs : @hashset.HashSet[String],
 ) -> PartialMergedInterface {
-  PartialMergedInterface::{ name, inheritance, members }
+  { name, inheritance, members, specs }
 }
 
 ///|
@@ -20,12 +22,14 @@ pub fn PartialMergedInterface::merge(
   self : PartialMergedInterface,
   members : Array[@parser.InterfaceMemberExtendedAttributes],
   inheritance : String?,
+  specs : @hashset.HashSet[String],
 ) -> PartialMergedInterface {
   let inheritance = match inheritance {
     Some(_) => inheritance
     None => self.inheritance
   }
-  { ..self, members: self.members + members, inheritance }
+  let specs = self.specs.union(specs)
+  { ..self, members: self.members + members, inheritance, specs }
 }
 
 ///|
@@ -45,6 +49,7 @@ test "MergedInterface::merge() combines members and inheritance" {
       },
     ],
     None,
+    @hashset.HashSet::from_array(["html.idl"]),
   )
   let iface2 = iface1.merge(
     [
@@ -59,6 +64,7 @@ test "MergedInterface::merge() combines members and inheritance" {
       },
     ],
     Some("HTMLElement"),
+    @hashset.HashSet::from_array(["dom.idl"]),
   )
   @json.inspect(iface2, content={
     "name": "Element",
@@ -90,12 +96,18 @@ test "MergedInterface::merge() combines members and inheritance" {
       },
     ],
     "inheritance": "HTMLElement",
+    "specs": ["dom.idl", "html.idl"],
   })
 }
 
 ///|
 test "MergedInterface::merge() retains existing inheritance if none provided" {
-  let iface1 = PartialMergedInterface::new("Element", [], Some("Node"))
+  let iface1 = PartialMergedInterface::new(
+    "Element",
+    [],
+    Some("Node"),
+    @hashset.HashSet::from_array(["html.idl"]),
+  )
   let iface2 = iface1.merge(
     [
       {
@@ -109,6 +121,7 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
       },
     ],
     None,
+    @hashset.HashSet::from_array(["dom.idl"]),
   )
   @json.inspect(iface2, content={
     "name": "Element",
@@ -127,5 +140,6 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
       },
     ],
     "inheritance": "Node",
+    "specs": ["dom.idl", "html.idl"],
   })
 }

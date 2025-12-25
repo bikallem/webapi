@@ -19,12 +19,14 @@ fn PartialMerged::merge_interface(
   name : String,
   members : Array[@parser.InterfaceMemberExtendedAttributes],
   inheritance : String?,
+  specs : @hashset.HashSet[String],
 ) -> Unit {
   match self.interfaces.get(name) {
-    Some(current) => self.interfaces[name] = current.merge(members, inheritance)
+    Some(current) =>
+      self.interfaces[name] = current.merge(members, inheritance, specs)
     None =>
       self.interfaces[name] = PartialMergedInterface::new(
-        name, members, inheritance,
+        name, members, inheritance, specs,
       )
   }
 }
@@ -112,14 +114,27 @@ pub fn merge_partials(
       PartialMixin(pmxn) =>
         partial_merged.merge_mixin(pmxn.name, pmxn.members, def.spec)
       Mixin(mxn) => partial_merged.merge_mixin(mxn.name, mxn.members, def.spec)
-      PartialInterface(piface) =>
-        partial_merged.merge_interface(piface.name, piface.members, None)
-      Interface(iface) =>
+      PartialInterface(piface) => {
+        let specs = @hashset.HashSet::new()
+        match def.spec {
+          Some(s) => specs.add(s)
+          None => ()
+        }
+        partial_merged.merge_interface(piface.name, piface.members, None, specs)
+      }
+      Interface(iface) => {
+        let specs = @hashset.HashSet::new()
+        match def.spec {
+          Some(s) => specs.add(s)
+          None => ()
+        }
         partial_merged.merge_interface(
           iface.name,
           iface.members,
           iface.inheritance,
+          specs,
         )
+      }
       Includes(inc) => partial_merged.include_statements.push(inc)
       PartialNamespace(_) => println("Partial namespace not supported")
       Namespace(_) => println("Namespace not supported")

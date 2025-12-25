@@ -167,6 +167,7 @@ test "flatten merges/includes mixin members into interface" {
         ],
       },
     ],
+    "specs": [],
   })
 }
 

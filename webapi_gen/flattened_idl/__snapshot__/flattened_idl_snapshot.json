@@ -15,7 +15,8 @@
             }
           ]
         }
-      ]
+      ],
+      "specs": []
     },
     "MyInterface": {
       "name": "MyInterface",
@@ -94,7 +95,8 @@
           ]
         }
       ],
-      "inheritance": "ParentInterface"
+      "inheritance": "ParentInterface",
+      "specs": []
     }
   },
   "dictionaries": {
