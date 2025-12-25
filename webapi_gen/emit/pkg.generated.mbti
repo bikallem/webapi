@@ -129,10 +129,6 @@ type RegularMethodEmit
 pub impl Show for RegularMethodEmit
 pub impl ToJson for RegularMethodEmit
 
-type StaticMethodEmit
-pub impl Show for StaticMethodEmit
-pub impl ToJson for StaticMethodEmit
-
 pub struct TraitDef {
   trait_name : String
   parent_trait : String

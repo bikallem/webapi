@@ -14,6 +14,7 @@ struct RegularMethodEmit {
   original_name : String // Original method name from IDL, eg "getElementById"
   return_type : String
   args : Array[MethodArg]
+  is_static : Bool // Whether the method is static
 } derive(Show, ToJson)
 
 ///|
@@ -41,11 +42,17 @@ impl TraitMethodEmit for RegularMethodEmit with impl_emit(
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ffi_js_args = ffi_argnames.join(", ")
   let code = StringBuilder::new()
-  code
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ret_type_str} = \"(\{ffi_js_args}) => obj.\{self.original_name}(\{ffi_js_args})\"",
+  code..write_string(
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ret_type_str} = \"(\{ffi_js_args}) =>",
   )
-  ..write_string("\n\n")
+  if self.is_static {
+    code.write_string(
+      " { \{trait_name}.\{self.original_name}(\{ffi_js_args}) }\"",
+    )
+  } else {
+    code.write_string(" obj.\{self.original_name}(\{ffi_js_args})\"")
+  }
+  code.write_string("\n\n")
 
   // Emit default trait method implementation
   let method_args = trait_method_impl_args(self.args)

@@ -92,9 +92,6 @@ pub impl Emitter for InterfaceEmitter with emit(
       continue rest
     }
     [RegularOperation(op), .. rest] => {
-      if op.static_ {
-        continue rest // TODO: determine how to map static methods, perhaps to external type?
-      }
       let orig_method_name = match method_counter.get(op.name) {
         None => {
           method_counter[op.name] = 1
@@ -105,14 +102,7 @@ pub impl Emitter for InterfaceEmitter with emit(
           "\{op.name}_\{count+1}"
         }
       }
-      // trait method args
-      let self_arg = MethodArg::{
-        name: "self",
-        original_name: "self",
-        type_: ArgMbtType::Self,
-        optional: false,
-        default_value: None,
-      }
+      // trait method args      
       let (args, arg_emits) = method_args(
         op.arguments.map(arg => (
           arg.name,
@@ -124,8 +114,22 @@ pub impl Emitter for InterfaceEmitter with emit(
         orig_method_name,
         self.type_registry,
       )
+      // Add 'self' argument for non-static methods
+      let mut self_arg = None
+      if !op.static_ {
+        self_arg = Some(MethodArg::{
+          name: "self",
+          original_name: "self",
+          type_: ArgMbtType::Self,
+          optional: false,
+          default_value: None,
+        })
+      }
+      let args = match self_arg {
+        Some(sa) => [sa, ..args]
+        None => args
+      }
       emits.push_iter(arg_emits.iter())
-      let args = [self_arg] + args
 
       // return type
       let (return_type, return_emits) = arg_mbt_type(
@@ -157,6 +161,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         original_name: orig_method_name,
         return_type: return_type.name(),
         args,
+        is_static: op.static_,
       }
       trait_methods.push(trait_method)
       continue rest
@@ -195,9 +200,9 @@ pub impl Emitter for InterfaceEmitter with emit(
         return_type: attr_type.name(),
       }
       trait_methods.push(attr_getter_method)
-      if !attr.is_readonly || attr.is_inherit {
 
-        // Set Attribute method
+      // Set Attribute method if specified
+      if !attr.is_readonly || attr.is_inherit {
         let attr_setter_method = AttributeSetMethodEmit::{
           interface_name: interface.name,
           original_name: attr.name,
@@ -700,6 +705,45 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|
       #|impl TChildInterface with set_last_name(self : Self, last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
+      #|}
+    ),
+  )
+}
+
+///|
+test "InterfaceEmitter emits static methods" {
+  let idl =
+    #|interface TestInterface {
+    #|  [NewObject] static Response redirect(USVString url, optional unsigned short status = 302);
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code,
+    content=(
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub trait TTestInterface: TJsValue {
+      #|  redirect(url : String, status? : UInt) -> Response = _
+      #|}
+      #|
+      #|extern "js" fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response = "(url, status) => { TestInterface.redirect(url, status) }"
+      #|
+      #|impl TTestInterface with redirect(url : String, 
+      #|status? : UInt = 302) -> Response {
+      #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
       #|}
     ),
   )
