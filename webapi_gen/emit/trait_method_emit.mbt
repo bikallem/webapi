@@ -60,6 +60,54 @@ impl TraitMethodEmit for RegularMethodEmit with impl_emit(
   Code(code.to_string())
 }
 
+//============================ Static Method Emit =================================
+
+///|
+struct StaticMethodEmit {
+  interface_name : String // Name of the interface this method belongs to, eg. Document
+  original_name : String // Original method name from IDL, eg "createElement"
+  return_type : String
+  args : Array[MethodArg]
+} derive(Show, ToJson)
+
+///|
+impl TraitMethodEmit for StaticMethodEmit with decl_emit(
+  _self : StaticMethodEmit,
+) -> Code {
+  Code("") // Static methods are not included in trait declarations
+}
+
+///|
+impl TraitMethodEmit for StaticMethodEmit with impl_emit(
+  self : StaticMethodEmit,
+) -> Code {
+  // Emit FFI function
+  let ret_type_str = self.return_type
+  let trait_name = self.interface_name
+  let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
+  let ffi_argnames = self.args.map(arg => arg.name)
+  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ffi_js_args = ffi_argnames.join(", ")
+  let code = StringBuilder::new()
+  code
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ret_type_str} = \"(\{ffi_js_args}) => \{trait_name}.\{self.original_name}(\{ffi_js_args})\"",
+  )
+  ..write_string("\n\n")
+
+  // Emit static method implementation
+  let method_args = trait_method_impl_args(self.args)
+  let method_name = safe_identifier(self.original_name)
+  let call_args = func_call_args(self.args)
+  code
+  ..write_string(
+    "\{trait_name}::\{method_name}(\{method_args}) -> \{ret_type_str} {\n",
+  )
+  ..write_string("  \{ffi_name}(\{call_args})\n")
+  ..write_string("}")
+  Code(code.to_string())
+}
+
 //============================ Attribute Get Method Emit ==========================
 
 ///|

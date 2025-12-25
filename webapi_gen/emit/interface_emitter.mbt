@@ -91,7 +91,63 @@ pub impl Emitter for InterfaceEmitter with emit(
       )
       continue rest
     }
-    [RegularOperation(op), .. rest] if op.static_ => continue rest // Static methods are not yet handled
+    [RegularOperation(op), .. rest] if op.static_ => {
+      let orig_method_name = match method_counter.get(op.name) {
+        None => {
+          method_counter[op.name] = 1
+          op.name
+        }
+        Some(count) => {
+          method_counter[op.name] += 1
+          "\{op.name}_\{count+1}"
+        }
+      }
+      // static method args
+      let (args, arg_emits) = method_args(
+        op.arguments.map(arg => (
+          arg.name,
+          arg.type_.type_,
+          arg.optional,
+          arg.default_value,
+        )),
+        interface.name,
+        orig_method_name,
+        self.type_registry,
+      )
+      emits.push_iter(arg_emits.iter())
+      // return type
+      let (return_type, return_emits) = arg_mbt_type(
+        op.return_type,
+        interface.name,
+        orig_method_name,
+        "",
+        self.type_registry,
+      )
+      if return_type is ArgMbtType::Union(union_type_name, has_undefined) {
+        emits
+        ..push(Emit::External(union_type_name))
+        ..push(Emit::IntoMethod(union_type_name))
+        if has_undefined {
+          emits.push(Emit::IsUndefinedMethod(union_type_name))
+        }
+        emits.push(
+          Emit::UnionArgTraitImpl(
+            TypeName(union_type_name),
+            TraitName("T\{union_type_name}"),
+          ),
+        )
+      }
+      emits.push_iter(return_emits.iter())
+      // static method
+      let static_method = StaticMethodEmit::{
+        interface_name: interface.name,
+        original_name: orig_method_name,
+        return_type: return_type.name(),
+        args,
+      }
+      trait_methods.push(static_method)
+      continue rest
+    }
     [RegularOperation(op), .. rest] => {
       let orig_method_name = match method_counter.get(op.name) {
         None => {
@@ -733,7 +789,12 @@ test "InterfaceEmitter emits static methods" {
       #|
       #|}
       #|
+      #|extern "js" fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response = "(url, status) => TestInterface.redirect(url, status)"
       #|
+      #|TestInterface::redirect(url : String, 
+      #|status? : UInt = 302) -> Response {
+      #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
+      #|}
     ),
   )
 }
