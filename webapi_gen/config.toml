@@ -5,16 +5,16 @@ output_dir = "../src"
 templates_dir = "base.mbt"
 
 core_specs = [
-    "dom",
-    "html",
-    "uievents",
     "cssom",
     "cssom-view",
+    "dom",
+    "html",
     "geometry",
     "FileAPI",
     "SVG",
-    "xhr",
+    "uievents",
     "webidl",
+    "xhr",
 ]
 
 excluded_interfaces = []
