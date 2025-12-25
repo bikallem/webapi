@@ -45,6 +45,26 @@ pub trait TDOMQuad: TJsValue {
 }
 
 ///|
+extern "js" fn dom_quad_from_rect_ffi(other : JsValue) -> DOMQuad = "(other) => DOMQuad.fromRect(other)"
+
+///|
+pub fn DOMQuad::from_rect(
+  other? : DOMRectInit = DOMRectInit::empty(),
+) -> DOMQuad {
+  dom_quad_from_rect_ffi(TJsValue::to_js(other))
+}
+
+///|
+extern "js" fn dom_quad_from_quad_ffi(other : JsValue) -> DOMQuad = "(other) => DOMQuad.fromQuad(other)"
+
+///|
+pub fn DOMQuad::from_quad(
+  other? : DOMQuadInit = DOMQuadInit::empty(),
+) -> DOMQuad {
+  dom_quad_from_quad_ffi(TJsValue::to_js(other))
+}
+
+///|
 extern "js" fn dom_quad_p1_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.p1"
 
 ///|

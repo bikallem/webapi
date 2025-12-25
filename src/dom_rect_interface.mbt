@@ -50,6 +50,16 @@ pub trait TDOMRect: TDOMRectReadOnly {
 }
 
 ///|
+extern "js" fn dom_rect_from_rect_ffi(other : JsValue) -> DOMRect = "(other) => DOMRect.fromRect(other)"
+
+///|
+pub fn DOMRect::from_rect(
+  other? : DOMRectInit = DOMRectInit::empty(),
+) -> DOMRect {
+  dom_rect_from_rect_ffi(TJsValue::to_js(other))
+}
+
+///|
 extern "js" fn dom_rect_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
 
 ///|

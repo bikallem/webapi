@@ -177,6 +177,12 @@ impl THTMLScriptElement with set_text(self : Self, text : String) -> Unit {
   html_script_element_set_text_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
 }
 
+extern "js" fn html_script_element_supports_ffi(type_: JsValue) -> Bool = "(type_) => HTMLScriptElement.supports(type_)"
+
+pub fn HTMLScriptElement::supports(type_ : String) -> Bool {
+  html_script_element_supports_ffi(TJsValue::to_js(type_))
+}
+
 extern "js" fn html_script_element_charset_ffi(obj: JsValue) -> String = "(obj) => obj.charset"
 
 impl THTMLScriptElement with charset(self : Self) -> String {

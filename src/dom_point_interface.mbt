@@ -50,6 +50,16 @@ pub trait TDOMPoint: TDOMPointReadOnly {
 }
 
 ///|
+extern "js" fn dom_point_from_point_ffi(other : JsValue) -> DOMPoint = "(other) => DOMPoint.fromPoint(other)"
+
+///|
+pub fn DOMPoint::from_point(
+  other? : DOMPointInit = DOMPointInit::empty(),
+) -> DOMPoint {
+  dom_point_from_point_ffi(TJsValue::to_js(other))
+}
+
+///|
 extern "js" fn dom_point_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
 
 ///|

@@ -109,6 +109,42 @@ pub trait TDOMMatrixReadOnly: TJsValue {
 }
 
 ///|
+extern "js" fn dom_matrix_read_only_from_matrix_ffi(
+  other : JsValue,
+) -> DOMMatrixReadOnly = "(other) => DOMMatrixReadOnly.fromMatrix(other)"
+
+///|
+pub fn DOMMatrixReadOnly::from_matrix(
+  other? : DOMMatrixInit = DOMMatrixInit::empty(),
+) -> DOMMatrixReadOnly {
+  dom_matrix_read_only_from_matrix_ffi(TJsValue::to_js(other))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_from_float32array_ffi(
+  array32 : JsValue,
+) -> DOMMatrixReadOnly = "(array32) => DOMMatrixReadOnly.fromFloat32Array(array32)"
+
+///|
+pub fn DOMMatrixReadOnly::from_float32array(
+  array32 : Float32Array,
+) -> DOMMatrixReadOnly {
+  dom_matrix_read_only_from_float32array_ffi(TJsValue::to_js(array32))
+}
+
+///|
+extern "js" fn dom_matrix_read_only_from_float64array_ffi(
+  array64 : JsValue,
+) -> DOMMatrixReadOnly = "(array64) => DOMMatrixReadOnly.fromFloat64Array(array64)"
+
+///|
+pub fn DOMMatrixReadOnly::from_float64array(
+  array64 : Float64Array,
+) -> DOMMatrixReadOnly {
+  dom_matrix_read_only_from_float64array_ffi(TJsValue::to_js(array64))
+}
+
+///|
 extern "js" fn dom_matrix_read_only_a_ffi(obj : JsValue) -> Double = "(obj) => obj.a"
 
 ///|

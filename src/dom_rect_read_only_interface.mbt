@@ -48,6 +48,18 @@ pub trait TDOMRectReadOnly: TJsValue {
 }
 
 ///|
+extern "js" fn dom_rect_read_only_from_rect_ffi(
+  other : JsValue,
+) -> DOMRectReadOnly = "(other) => DOMRectReadOnly.fromRect(other)"
+
+///|
+pub fn DOMRectReadOnly::from_rect(
+  other? : DOMRectInit = DOMRectInit::empty(),
+) -> DOMRectReadOnly {
+  dom_rect_read_only_from_rect_ffi(TJsValue::to_js(other))
+}
+
+///|
 extern "js" fn dom_rect_read_only_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
 
 ///|

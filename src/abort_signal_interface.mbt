@@ -24,6 +24,30 @@ pub trait TAbortSignal: TEventTarget {
 }
 
 ///|
+extern "js" fn abort_signal_abort_ffi(reason : JsValue) -> AbortSignal = "(reason) => AbortSignal.abort(reason)"
+
+///|
+pub fn AbortSignal::abort(reason? : JsValue) -> AbortSignal {
+  abort_signal_abort_ffi(opt_to_js(reason))
+}
+
+///|
+extern "js" fn abort_signal_timeout_ffi(milliseconds : JsValue) -> AbortSignal = "(milliseconds) => AbortSignal.timeout(milliseconds)"
+
+///|
+pub fn AbortSignal::timeout(milliseconds : UInt64) -> AbortSignal {
+  abort_signal_timeout_ffi(TJsValue::to_js(milliseconds))
+}
+
+///|
+extern "js" fn abort_signal_any_ffi(signals : JsValue) -> AbortSignal = "(signals) => AbortSignal.any(signals)"
+
+///|
+pub fn AbortSignal::any(signals : Array[AbortSignal]) -> AbortSignal {
+  abort_signal_any_ffi(TJsValue::to_js(signals))
+}
+
+///|
 extern "js" fn abort_signal_aborted_ffi(obj : JsValue) -> Bool = "(obj) => obj.aborted"
 
 ///|
