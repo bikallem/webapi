@@ -35,7 +35,13 @@ pub impl Emitter for CallbackEmitter with emit(
     self.type_registry,
   )
   emits.push_iter(return_emits.iter())
+  let specs = @hashset.HashSet::new()
+  match cb_def.spec {
+    Some(s) => specs.add(s)
+    None => ()
+  }
   let emits = [
+    Emit::FileHeader(TypeName(name), Specs(specs)),
     Emit::External(cb_def.name),
     Emit::ImplTJsValue(cb_def.name),
     Emit::Callback(cb_def.name, args, TypeName(return_type.name())),
@@ -60,6 +66,10 @@ test "emit_callback simple EventListener" {
   inspect(
     code,
     content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: EventListener
+      #|
+      #|
       #|#external
       #|pub type EventListener
       #|
@@ -68,6 +78,7 @@ test "emit_callback simple EventListener" {
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+
     ),
   )
 }
@@ -90,6 +101,10 @@ test "emit_callback with interface argument uses trait reference" {
   inspect(
     code,
     content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: EventListener
+      #|
+      #|
       #|#external
       #|pub type EventListener
       #|
@@ -98,6 +113,7 @@ test "emit_callback with interface argument uses trait reference" {
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+
     ),
   )
 }
@@ -119,6 +135,10 @@ test "emit_callback multi-arg MutationCallback" {
   inspect(
     code,
     content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: MutationCallback
+      #|
+      #|
       #|#external
       #|pub type MutationCallback
       #|
@@ -127,6 +147,7 @@ test "emit_callback multi-arg MutationCallback" {
       #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
       #|
       #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(f) }
+
     ),
   )
 }
@@ -148,6 +169,10 @@ test "js_code_gen Callback generates correct code" {
   inspect(
     code,
     content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: EventListener
+      #|
+      #|
       #|#external
       #|pub type EventListener
       #|
@@ -156,6 +181,7 @@ test "js_code_gen Callback generates correct code" {
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+
     ),
   )
 }
@@ -177,6 +203,10 @@ test "js_code_gen Callback with multiple args" {
   inspect(
     code,
     content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: MutationCallback
+      #|
+      #|
       #|#external
       #|pub type MutationCallback
       #|
@@ -185,6 +215,7 @@ test "js_code_gen Callback with multiple args" {
       #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
       #|
       #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(f) }
+
     ),
   )
 }

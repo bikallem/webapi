@@ -78,9 +78,14 @@ pub fn merge_partials(
   }
   for def in filtered {
     match def.definition {
-      CallbackInterface(cbif) =>
+      CallbackInterface(cbif) => {
         partial_merged.callback_interfaces[cbif.name] = cbif
-      CallbackFunction(cbf) => partial_merged.callback_functions[cbf.name] = cbf
+        cbif.spec = def.spec
+      }
+      CallbackFunction(cbf) => {
+        partial_merged.callback_functions[cbf.name] = cbf
+        cbf.spec = def.spec
+      }
       Typedef(td) => partial_merged.typedefs[td.name] = td
       Enum(enm) => partial_merged.enums[enm.name] = enm
       PartialDictionary(pdict) =>

@@ -70,6 +70,7 @@ pub(all) struct CallbackFunctionDefinition {
   name : String
   return_type : Type
   arguments : Array[Argument]
+  mut spec : String?
 }
 pub impl Eq for CallbackFunctionDefinition
 pub impl Hash for CallbackFunctionDefinition
@@ -79,6 +80,7 @@ pub impl ToJson for CallbackFunctionDefinition
 pub(all) struct CallbackInterfaceDefinition {
   name : String
   members : Array[CallbackInterfaceMemberExtendedAttributes]
+  mut spec : String?
 }
 pub impl Eq for CallbackInterfaceDefinition
 pub impl Hash for CallbackInterfaceDefinition

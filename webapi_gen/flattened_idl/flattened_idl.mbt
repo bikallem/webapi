@@ -108,10 +108,11 @@ pub fn flatten(
       [Operation(op), ..] => break op
       [_, .. rest] => continue rest
     }
-    let cbf = @parser.CallbackFunctionDefinition::{
+    let cbf : @parser.CallbackFunctionDefinition = {
       name: cbi.name,
       return_type: op.return_type,
       arguments: op.arguments,
+      spec: cbi.spec,
     }
     merged_idl.callbacks[name] = cbf
   }

@@ -172,10 +172,11 @@ typedef_def -> TypedefDefinition:
   | "typedef" type_=type name=IDENTIFIER ";" { { type_, name } }
 
 callback_def -> CallbackFunctionDefinition:
-  | "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";" { { name, return_type, arguments } }
+  | "callback" name=IDENTIFIER "=" return_type=type "(" arguments=argument_list ")" ";" 
+      { { name, return_type, arguments, spec: None } }
 
 callback_interface_def -> CallbackInterfaceDefinition:
-  | "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";" { { name, members } }
+  | "callback" "interface" name=IDENTIFIER "{" members = callback_interface_members "}" ";" { { name, members, spec: None } }
 
 includes_statement -> IncludesStatement:
   | interface_name=IDENTIFIER "includes" mixin_name=IDENTIFIER ";" { { interface_name, mixin_name } }
@@ -249,9 +250,6 @@ special -> Special:
   | "getter"                    { Special::Getter }
   | "setter"                    { Special::Setter }
   | "deleter"                   { Special::Deleter }
-
-//constructor_member -> ConstructorMember:
-//  | "constructor" "(" arguments=argument_list ")" ";" { { arguments } }
 
 iterable_member -> IterableMember:
   | "iterable" "<" value_type=type ">" ";" { { key_type: None, value_type } }

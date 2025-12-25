@@ -395,6 +395,7 @@ pub(all) struct CallbackFunctionDefinition {
   name : String
   return_type : Type
   arguments : Array[Argument]
+  mut spec : String?
 } derive(Show, Eq, ToJson, Hash)
 
 ///|
@@ -402,6 +403,7 @@ pub(all) struct CallbackFunctionDefinition {
 pub(all) struct CallbackInterfaceDefinition {
   name : String
   members : Array[CallbackInterfaceMemberExtendedAttributes]
+  mut spec : String?
 } derive(Show, Eq, ToJson, Hash)
 
 ///|
