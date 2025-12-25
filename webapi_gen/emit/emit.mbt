@@ -122,18 +122,21 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
         buf.write_string("pub impl \{trait_name} for \{type_name}")
-      Emit::InterfaceDefinition(trait_def) => {
+      Emit::InterfaceDefinition(interface_def) => {
         buf.write_string(
-          "pub trait T\{trait_def.trait_name}: \{trait_def.parent_trait} {\n",
+          "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
         )
         // Emit trait method declarations
-        let trait_defs = trait_def.methods
-          .map(meth => meth.decl_emit().0)
+        let trait_defs = interface_def.methods
+          .filter_map(meth => match meth.decl_emit() {
+            Code("") => None
+            Code(code) => Some(code)
+          })
           .join("\n")
         buf..write_string(trait_defs)..write_string("\n}")..write_string("\n\n")
 
         // Emit default trait method implementations
-        let default_trait_impls = trait_def.methods
+        let default_trait_impls = interface_def.methods
           .map(meth => meth.impl_emit().0)
           .join("\n\n")
         buf..write_string(default_trait_impls)
