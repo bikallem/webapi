@@ -3,6 +3,7 @@ package "bikallem/webapi_gen/partial_merged"
 
 import(
   "bikallem/webapi_gen/parser"
+  "moonbitlang/core/hashset"
 )
 
 // Values
@@ -28,6 +29,7 @@ pub struct PartialMergedDictionary {
   name : String
   members : Array[@parser.DictionaryMember]
   inheritance : String?
+  specs : @hashset.HashSet[String]
 }
 pub impl Show for PartialMergedDictionary
 pub impl ToJson for PartialMergedDictionary

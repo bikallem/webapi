@@ -16,6 +16,10 @@ struct ConstructorName(String) derive(Show, ToJson)
 struct ConstName(String) derive(Show, ToJson)
 
 ///|
+/// WebIDL Specifications set, eg, "DOM", "HTML", "Fetch"
+struct Specs(@hashset.HashSet[String]) derive(Show, ToJson)
+
+///|
 pub struct InterfaceDef {
   trait_name : String
   parent_trait : String
@@ -77,7 +81,8 @@ pub enum Emit {
   Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
   TypedefAlias(TypeName, String) // eg. pub typealias EventHandler = EventHandlerNonNull?
   Callback(TypeName, Array[CallbackArgEmit], TypeName) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
-  Const(ConstName, TypeName, String) // eg. pub const SOME_CONST: SomeType = "some_value"  
+  Const(ConstName, TypeName, String) // eg. pub const SOME_CONST: SomeType = "some_value"
+  FileHeader(TypeName, Specs) // eg. // This file is generated
 } derive(Show, ToJson)
 
 //============================ Code generator ===========================
@@ -266,6 +271,14 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       }
       Emit::Const(ConstName(const_name), TypeName(type_name), value) =>
         buf.write_string("pub const \{const_name}: \{type_name} = \{value}")
+      Emit::FileHeader(TypeName(type_name), Specs(specs)) => {
+        buf.write_string("// Do not edit. This file is generated.\n")
+        buf.write_string("// MoonBit type: \{type_name}\n")
+        if !specs.is_empty() {
+          let specs_list = specs.to_array().join(", ")
+          buf.write_string("// Specifications: \{specs_list}")
+        }
+      }
     }
     if i < emits.length() - 1 {
       buf.write_string("\n\n")

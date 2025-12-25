@@ -154,7 +154,7 @@ fn main {
     for idl_path in idl_paths {
       println("  Parsing \{idl_path}...")
       let definitions = @parser.parse_file(idl_path)
-        |> filter_idl(config, _, log_skipped)
+      let definitions = filter_idl(config, definitions, log_skipped)
       println("    Parsed \{definitions.length()} definitions")
       all_definitions.append(definitions)
     }
@@ -162,8 +162,8 @@ fn main {
     println("Creating type registry...")
     let type_registry = @type_registry.TypeRegistry::new(all_definitions)
     println("Merging partials...")
-    let flattened = @partial_merged.merge_partials(all_definitions)
-      |> @flattened_idl.flatten(log_skipped)
+    let partials_merged = @partial_merged.merge_partials(all_definitions)
+    let flattened = @flattened_idl.flatten(partials_merged, log_skipped)
     println("Flattened \{flattened.interfaces.length()} interfaces")
 
     // Create output directory if it doesn't exist

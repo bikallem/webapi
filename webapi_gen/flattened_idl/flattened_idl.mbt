@@ -14,14 +14,16 @@ pub struct FlattenedIdl {
 pub(all) struct MergedDictionaryIR {
   name : String
   members : Array[@parser.DictionaryMember]
+  specs : @hashset.HashSet[String]
 } derive(Show, ToJson)
 
 ///|
 fn MergedDictionaryIR::new(
   name : String,
   members : Array[@parser.DictionaryMember],
+  specs : @hashset.HashSet[String],
 ) -> MergedDictionaryIR {
-  MergedDictionaryIR::{ name, members }
+  { name, members, specs }
 }
 
 ///|
@@ -38,14 +40,19 @@ pub fn flatten(
       let (dict_name, dict) : (String, @partial_merged.PartialMergedDictionary) = it
       match dict.inheritance {
         None => // No inheritance, just copy members to MergedDictionaryIR
-          (dict_name, MergedDictionaryIR::new(dict.name, dict.members))
+          (
+            dict_name,
+            MergedDictionaryIR::new(dict.name, dict.members, dict.specs),
+          )
         Some(parent_name) => // Merge parent members
           match partial_merged.dictionaries.get(parent_name) {
             Some(parent_dict) => {
               let merged_members = parent_dict.members + dict.members
+              let merged_specs = parent_dict.specs.union(dict.specs)
               let merged_dict = MergedDictionaryIR::new(
                 dict.name,
                 merged_members,
+                merged_specs,
               )
               (dict_name, merged_dict)
             }

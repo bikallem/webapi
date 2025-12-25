@@ -167,6 +167,7 @@ pub impl ToJson for Definition
 pub(all) struct DefinitionExtendedAttributes {
   extended_attributes : Array[ExtendedAttribute]
   definition : Definition
+  mut spec : String?
 }
 pub impl Eq for DefinitionExtendedAttributes
 pub impl Hash for DefinitionExtendedAttributes

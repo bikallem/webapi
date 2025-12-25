@@ -4,6 +4,7 @@ package "bikallem/webapi_gen/flattened_idl"
 import(
   "bikallem/webapi_gen/parser"
   "bikallem/webapi_gen/partial_merged"
+  "moonbitlang/core/hashset"
 )
 
 // Values
@@ -27,6 +28,7 @@ pub impl ToJson for FlattenedIdl
 pub(all) struct MergedDictionaryIR {
   name : String
   members : Array[@parser.DictionaryMember]
+  specs : @hashset.HashSet[String]
 }
 pub impl Show for MergedDictionaryIR
 pub impl ToJson for MergedDictionaryIR

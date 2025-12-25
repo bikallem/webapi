@@ -84,6 +84,7 @@ pub enum Emit {
   TypedefAlias(TypeName, String)
   Callback(TypeName, Array[CallbackArgEmit], TypeName)
   Const(ConstName, TypeName, String)
+  FileHeader(TypeName, Specs)
 }
 pub impl Show for Emit
 pub impl ToJson for Emit
@@ -136,6 +137,10 @@ pub impl ToJson for MethodArg
 type RegularMethodEmit
 pub impl Show for RegularMethodEmit
 pub impl ToJson for RegularMethodEmit
+
+type Specs
+pub impl Show for Specs
+pub impl ToJson for Specs
 
 type StaticAttributeGetMethodEmit
 pub impl Show for StaticAttributeGetMethodEmit

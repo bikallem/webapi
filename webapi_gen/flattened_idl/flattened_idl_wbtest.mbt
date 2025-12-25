@@ -43,6 +43,7 @@ test "flatten merges dictionary inheritance" {
         "default_value": ["ConstValue", ["Boolean", "false"]],
       },
     ],
+    "specs": [],
   })
 }
 
@@ -66,6 +67,7 @@ test "flatten handles dictionary without inheritance" {
         "required": false,
       },
     ],
+    "specs": [],
   })
 }
 

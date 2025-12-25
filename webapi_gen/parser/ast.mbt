@@ -314,7 +314,7 @@ pub(all) enum Definition {
 pub(all) struct DefinitionExtendedAttributes {
   extended_attributes : Array[ExtendedAttribute]
   definition : Definition
-  spec : String?
+  mut spec : String?
 } derive(Show, Eq, ToJson, Hash)
 
 ///|
