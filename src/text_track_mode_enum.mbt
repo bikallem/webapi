@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: TextTrackMode
+// Specifications: html.idl
+
 ///|
 pub(all) enum TextTrackMode {
   Disabled

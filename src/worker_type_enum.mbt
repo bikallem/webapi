@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: WorkerType
+// Specifications: html.idl
+
 ///|
 pub(all) enum WorkerType {
   Classic

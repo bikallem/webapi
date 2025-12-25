@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: ShadowRootMode
+// Specifications: dom.idl
+
 ///|
 pub(all) enum ShadowRootMode {
   Open

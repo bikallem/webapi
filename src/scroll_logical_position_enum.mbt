@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: ScrollLogicalPosition
+// Specifications: cssom-view.idl
+
 ///|
 pub(all) enum ScrollLogicalPosition {
   Start

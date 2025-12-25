@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: SlotAssignmentMode
+// Specifications: dom.idl
+
 ///|
 pub(all) enum SlotAssignmentMode {
   Manual

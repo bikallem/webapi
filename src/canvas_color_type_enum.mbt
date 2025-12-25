@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: CanvasColorType
+// Specifications: html.idl
+
 ///|
 pub(all) enum CanvasColorType {
   Unorm8

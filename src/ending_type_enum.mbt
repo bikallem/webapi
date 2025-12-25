@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: EndingType
+// Specifications: FileAPI.idl
+
 ///|
 pub(all) enum EndingType {
   Transparent

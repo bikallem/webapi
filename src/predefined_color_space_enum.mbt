@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: PredefinedColorSpace
+// Specifications: html.idl
+
 ///|
 pub(all) enum PredefinedColorSpace {
   Srgb

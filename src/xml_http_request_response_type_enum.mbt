@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: XMLHttpRequestResponseType
+// Specifications: xhr.idl
+
 ///|
 pub(all) enum XMLHttpRequestResponseType {
   Empty

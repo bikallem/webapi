@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: OffscreenRenderingContextId
+// Specifications: html.idl
+
 ///|
 pub(all) enum OffscreenRenderingContextId {
   V2d
