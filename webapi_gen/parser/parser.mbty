@@ -201,11 +201,9 @@ interface_members -> Array[InterfaceMemberExtendedAttributes]:
   |   { [] }
 
 interface_member -> InterfaceMember:
-  | c=const_member                { Const(c) }
-  //| cm=constructor_member         { Constructor(cm) }
+  | c=const_member                { Const(c) }  
   | "constructor" "(" arguments=argument_list ")" ";" { Constructor({ arguments, }) }
-  | "stringifier" ";"             { Stringifier(StringifierMember::Bare) }
-  // stringifier attribute forms
+  | "stringifier" ";"             { Stringifier(StringifierMember::Bare) }  
   | "stringifier" "readonly" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
       { Attribute({ type_: type_.type_, name, is_readonly: true, static_: false, is_inherit: false }) }
   | "stringifier" "attribute" type_=type_with_extended_attributes name=attribute_name ";"
@@ -238,7 +236,7 @@ interface_member -> InterfaceMember:
 
 regular_operation_member -> RegularOperationMember:
   | return_type=type name=IDENTIFIER "(" arguments=argument_list ")" ";"
-      { { return_type, name, arguments, static_: false } }
+      { { return_type, name: name.trim(chars="_").to_string(), arguments, static_: false } }
 
 const_member -> ConstMember:
   | "const" type_=type name=IDENTIFIER "=" value=const_value ";" { { type_, name, value } }
