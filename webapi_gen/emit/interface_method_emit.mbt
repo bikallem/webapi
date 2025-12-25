@@ -101,7 +101,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   let call_args = func_call_args(self.args)
   code
   ..write_string(
-    "\{trait_name}::\{method_name}(\{method_args}) -> \{ret_type_str} {\n",
+    "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{ret_type_str} {\n",
   )
   ..write_string("  \{ffi_name}(\{call_args})\n")
   ..write_string("}")
