@@ -1,3 +1,7 @@
+// Do not edit. This file is generated.
+// MoonBit type: ArrayBufferView
+// Specifications: webidl.idl
+
 ///|
 #external
 pub type ArrayBufferView
