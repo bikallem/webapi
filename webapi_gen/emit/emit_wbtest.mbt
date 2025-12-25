@@ -267,6 +267,7 @@ test "arg_default_value/string_values" {
     definition: @parser.Enum({
       name: "State",
       values: ["active", "inactive", "pending"],
+      spec: None,
     }),
   }
   let enum_registry = @type_registry.TypeRegistry::new([state_enum])

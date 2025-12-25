@@ -787,11 +787,11 @@ fn yy_action_66(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 169|    "enum" name=IDENTIFIER "{" values=enum_value_list "}" ";" { { name, values } }
+// 169|    "enum" name=IDENTIFIER "{" values=enum_value_list "}" ";" { { name, values, spec: None } }
 fn yy_action_67(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(name)
   guard _args[3].0 is YYObj_Array_String_(values)
-  YYObj_EnumDefinition({();  { name, values } })
+  YYObj_EnumDefinition({();  { name, values, spec: None } })
 }
 
 // file:///./parser.mbty

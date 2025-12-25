@@ -201,6 +201,7 @@ pub impl ToJson for DictionaryMember
 pub(all) struct EnumDefinition {
   name : String
   values : Array[String]
+  mut spec : String?
 }
 pub impl Eq for EnumDefinition
 pub impl Hash for EnumDefinition
@@ -691,6 +692,7 @@ pub impl ToJson for TypeWithExtendedAttributes
 pub(all) struct TypedefDefinition {
   type_ : Type
   name : String
+  mut spec : String?
 }
 pub impl Eq for TypedefDefinition
 pub impl Hash for TypedefDefinition

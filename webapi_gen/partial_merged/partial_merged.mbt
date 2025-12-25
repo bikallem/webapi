@@ -90,7 +90,10 @@ pub fn merge_partials(
         partial_merged.typedefs[td.name] = td
         td.spec = def.spec
       }
-      Enum(enm) => partial_merged.enums[enm.name] = enm
+      Enum(enm) => {
+        partial_merged.enums[enm.name] = enm
+        enm.spec = def.spec
+      }
       PartialDictionary(pdict) =>
         partial_merged.merge_dictionary(
           pdict.name,

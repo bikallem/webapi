@@ -380,6 +380,7 @@ pub(all) struct PartialDictionaryDefinition {
 pub(all) struct EnumDefinition {
   name : String
   values : Array[String]
+  mut spec : String?
 } derive(Show, Eq, ToJson, Hash)
 
 ///|

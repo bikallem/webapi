@@ -166,7 +166,7 @@ partial_dictionary_def -> PartialDictionaryDefinition:
   | "partial" "dictionary" name=IDENTIFIER "{" members=dictionary_members "}" ";" { { name, members } }
 
 enum_def -> EnumDefinition:
-  | "enum" name=IDENTIFIER "{" values=enum_value_list "}" ";" { { name, values } }
+  | "enum" name=IDENTIFIER "{" values=enum_value_list "}" ";" { { name, values, spec: None } }
       
 typedef_def -> TypedefDefinition:
   | "typedef" type_=type name=IDENTIFIER ";" { { type_, name, spec: None } }

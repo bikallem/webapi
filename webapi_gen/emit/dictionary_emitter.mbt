@@ -48,12 +48,20 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
   let predefined_color_space_enum = @parser.DefinitionExtendedAttributes::{
     extended_attributes: [],
     spec: None,
-    definition: @parser.Enum({ name: "PredefinedColorSpace", values: ["srgb"] }),
+    definition: @parser.Enum({
+      name: "PredefinedColorSpace",
+      values: ["srgb"],
+      spec: None,
+    }),
   }
   let canvas_color_type_enum = @parser.DefinitionExtendedAttributes::{
     extended_attributes: [],
     spec: None,
-    definition: @parser.Enum({ name: "CanvasColorType", values: ["unorm8"] }),
+    definition: @parser.Enum({
+      name: "CanvasColorType",
+      values: ["unorm8"],
+      spec: None,
+    }),
   }
   definitions.push(predefined_color_space_enum)
   definitions.push(canvas_color_type_enum)
