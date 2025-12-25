@@ -119,24 +119,7 @@ test "PartialMergeVisitor merges dictionary and partial dictionary" {
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["EventInit"]
-  @json.inspect(merged, content={
-    "name": "EventInit",
-    "members": [
-      {
-        "extended_attributes": [],
-        "type_": "DOMString",
-        "name": "type",
-        "required": true,
-      },
-      {
-        "extended_attributes": [],
-        "type_": "Boolean",
-        "name": "bubbles",
-        "required": false,
-        "default_value": ["ConstValue", ["Boolean", "false"]],
-      },
-    ],
-  })
+  @json.inspect(merged, content=({"name":"EventInit","members":[{"extended_attributes":[],"type_":"DOMString","name":"type","required":true},{"extended_attributes":[],"type_":"Boolean","name":"bubbles","required":false,"default_value":["ConstValue",["Boolean","false"]]}],"specs":[]}))
 }
 
 ///|
@@ -148,18 +131,7 @@ test "PartialMergeVisitor merges dictionary with inheritance" {
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["UIEventInit"]
-  @json.inspect(merged, content={
-    "name": "UIEventInit",
-    "members": [
-      {
-        "extended_attributes": [],
-        "type_": ["Identifier", "Window"],
-        "name": "view",
-        "required": false,
-      },
-    ],
-    "inheritance": "EventInit",
-  })
+  @json.inspect(merged, content=({"name":"UIEventInit","members":[{"extended_attributes":[],"type_":["Identifier","Window"],"name":"view","required":false}],"inheritance":"EventInit","specs":[]}))
 }
 
 ///|
@@ -170,7 +142,7 @@ test "PartialMergeVisitor empty_dictionary" {
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["EmptyDict"]
-  @json.inspect(merged, content={ "name": "EmptyDict", "members": [] })
+  @json.inspect(merged, content=({"name":"EmptyDict","members":[],"specs":[]}))
 }
 
 ///|

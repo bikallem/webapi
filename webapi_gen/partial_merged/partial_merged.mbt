@@ -49,13 +49,14 @@ fn PartialMerged::merge_dictionary(
   name : String,
   members : Array[@parser.DictionaryMember],
   inheritance : String?,
+  spec : String?,
 ) -> Unit {
   match self.dictionaries.get(name) {
     Some(current) =>
-      self.dictionaries[name] = current.merge(members, inheritance)
+      self.dictionaries[name] = current.merge(members, inheritance, spec)
     None =>
       self.dictionaries[name] = PartialMergedDictionary::new(
-        name, members, inheritance,
+        name, members, inheritance, spec,
       )
   }
 }
@@ -83,12 +84,18 @@ pub fn merge_partials(
       Typedef(td) => partial_merged.typedefs[td.name] = td
       Enum(enm) => partial_merged.enums[enm.name] = enm
       PartialDictionary(pdict) =>
-        partial_merged.merge_dictionary(pdict.name, pdict.members, None)
+        partial_merged.merge_dictionary(
+          pdict.name,
+          pdict.members,
+          None,
+          def.spec,
+        )
       Dictionary(dict) =>
         partial_merged.merge_dictionary(
           dict.name,
           dict.members,
           dict.inheritance,
+          def.spec,
         )
       PartialMixin(pmxn) => partial_merged.merge_mixin(pmxn.name, pmxn.members)
       Mixin(mxn) => partial_merged.merge_mixin(mxn.name, mxn.members)

@@ -263,6 +263,7 @@ test "arg_default_value/string_values" {
   // Test string default values for enum types (when registry indicates it's an enum)
   let state_enum = @parser.DefinitionExtendedAttributes::{
     extended_attributes: [],
+    spec: None,
     definition: @parser.Enum({
       name: "State",
       values: ["active", "inactive", "pending"],

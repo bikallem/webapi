@@ -274,12 +274,12 @@ fn init {
 
 // file:///./parser.mbty
 // 124|    extended_attributes = extended_attribute_list definition=definition defs=definitions  
-// 125|    { [{extended_attributes, definition}, ..defs] }
+// 125|    { [{extended_attributes, definition, spec: None}, ..defs] }
 fn yy_action_0(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Array_ExtendedAttribute_(extended_attributes)
   guard _args[1].0 is YYObj_Definition(definition)
   guard _args[2].0 is YYObj_Array_DefinitionExtendedAttributes_(defs)
-  YYObj_Array_DefinitionExtendedAttributes_({();  [{extended_attributes, definition}, ..defs] })
+  YYObj_Array_DefinitionExtendedAttributes_({();  [{extended_attributes, definition, spec: None}, ..defs] })
 }
 
 // file:///./parser.mbty

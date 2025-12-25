@@ -110,7 +110,8 @@
           ]
         }
       ],
-      "inheritance": "Event"
+      "inheritance": "Event",
+      "specs": []
     }
   },
   "enums": {
