@@ -77,7 +77,7 @@ pub enum Emit {
   Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
   TypedefAlias(TypeName, String) // eg. pub typealias EventHandler = EventHandlerNonNull?
   Callback(TypeName, Array[CallbackArgEmit], TypeName) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
-  Const(ConstName, TypeName, String) // eg. pub const SOME_CONST: SomeType = "some_value"
+  Const(ConstName, TypeName, String) // eg. pub const SOME_CONST: SomeType = "some_value"  
 } derive(Show, ToJson)
 
 //============================ Code generator ===========================
@@ -128,13 +128,13 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         )
         // Emit trait method declarations
         let trait_defs = trait_def.methods
-          .map(meth => meth.method_decl().0)
+          .map(meth => meth.decl_emit().0)
           .join("\n")
         buf..write_string(trait_defs)..write_string("\n}")..write_string("\n\n")
 
         // Emit default trait method implementations
         let default_trait_impls = trait_def.methods
-          .map(meth => meth.method_impl().0)
+          .map(meth => meth.impl_emit().0)
           .join("\n\n")
         buf..write_string(default_trait_impls)
       }

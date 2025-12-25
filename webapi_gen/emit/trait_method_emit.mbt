@@ -1,8 +1,8 @@
 ///|
 /// Trait for emitting trait methods.
 trait TraitMethodEmit: ToJson + Show {
-  method_decl(self : Self) -> Code // Generate method declaration code  
-  method_impl(self : Self) -> Code // Generate method implementation code
+  decl_emit(self : Self) -> Code // Generate method declaration code  
+  impl_emit(self : Self) -> Code // Generate method implementation code
 }
 
 //============================ Regular Method Emit ============================
@@ -17,7 +17,7 @@ struct RegularMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for RegularMethodEmit with method_decl(
+impl TraitMethodEmit for RegularMethodEmit with decl_emit(
   self : RegularMethodEmit,
 ) -> Code {
   let args = trait_method_decl_args(self.args)
@@ -27,7 +27,7 @@ impl TraitMethodEmit for RegularMethodEmit with method_decl(
 }
 
 ///|
-impl TraitMethodEmit for RegularMethodEmit with method_impl(
+impl TraitMethodEmit for RegularMethodEmit with impl_emit(
   self : RegularMethodEmit,
 ) -> Code {
   // Emit FFI function
@@ -70,7 +70,7 @@ struct AttributeGetMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for AttributeGetMethodEmit with method_decl(
+impl TraitMethodEmit for AttributeGetMethodEmit with decl_emit(
   self : AttributeGetMethodEmit,
 ) -> Code {
   Code(
@@ -79,7 +79,7 @@ impl TraitMethodEmit for AttributeGetMethodEmit with method_decl(
 }
 
 ///|
-impl TraitMethodEmit for AttributeGetMethodEmit with method_impl(
+impl TraitMethodEmit for AttributeGetMethodEmit with impl_emit(
   self : AttributeGetMethodEmit,
 ) -> Code {
   // Emit FFI function
@@ -114,7 +114,7 @@ struct AttributeSetMethodEmit {
 } derive(Show, ToJson)
 
 ///|
-impl TraitMethodEmit for AttributeSetMethodEmit with method_decl(
+impl TraitMethodEmit for AttributeSetMethodEmit with decl_emit(
   self : AttributeSetMethodEmit,
 ) -> Code {
   Code(
@@ -123,7 +123,7 @@ impl TraitMethodEmit for AttributeSetMethodEmit with method_decl(
 }
 
 ///|
-impl TraitMethodEmit for AttributeSetMethodEmit with method_impl(
+impl TraitMethodEmit for AttributeSetMethodEmit with impl_emit(
   self : AttributeSetMethodEmit,
 ) -> Code {
   // Emit FFI function
