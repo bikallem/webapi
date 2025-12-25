@@ -40,6 +40,9 @@ pub fn DOMMatrix::new(init? : &TDOMMatrixNewInit) -> DOMMatrix {
 
 ///|
 pub trait TDOMMatrix: TDOMMatrixReadOnly {
+  from_matrix(other? : DOMMatrixInit) -> DOMMatrix = _
+  from_float32array(array32 : Float32Array) -> DOMMatrix = _
+  from_float64array(array64 : Float64Array) -> DOMMatrix = _
   a(self : Self) -> Double = _
   set_a(self : Self, a : Double) -> Unit = _
   b(self : Self) -> Double = _
@@ -116,6 +119,32 @@ pub trait TDOMMatrix: TDOMMatrixReadOnly {
   skew_y_self(self : Self, sy? : Double) -> DOMMatrix = _
   invert_self(self : Self) -> DOMMatrix = _
   set_matrix_value(self : Self, transform_list : String) -> DOMMatrix = _
+}
+
+///|
+extern "js" fn dom_matrix_from_matrix_ffi(other : JsValue) -> DOMMatrix = "(other) => { DOMMatrix.fromMatrix(other) }"
+
+///|
+impl TDOMMatrix with from_matrix(
+  other? : DOMMatrixInit = DOMMatrixInit::empty(),
+) -> DOMMatrix {
+  dom_matrix_from_matrix_ffi(TJsValue::to_js(other))
+}
+
+///|
+extern "js" fn dom_matrix_from_float32array_ffi(array32 : JsValue) -> DOMMatrix = "(array32) => { DOMMatrix.fromFloat32Array(array32) }"
+
+///|
+impl TDOMMatrix with from_float32array(array32 : Float32Array) -> DOMMatrix {
+  dom_matrix_from_float32array_ffi(TJsValue::to_js(array32))
+}
+
+///|
+extern "js" fn dom_matrix_from_float64array_ffi(array64 : JsValue) -> DOMMatrix = "(array64) => { DOMMatrix.fromFloat64Array(array64) }"
+
+///|
+impl TDOMMatrix with from_float64array(array64 : Float64Array) -> DOMMatrix {
+  dom_matrix_from_float64array_ffi(TJsValue::to_js(array64))
 }
 
 ///|

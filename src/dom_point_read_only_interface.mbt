@@ -38,12 +38,25 @@ pub fn DOMPointReadOnly::new(
 
 ///|
 pub trait TDOMPointReadOnly: TJsValue {
+  from_point(other? : DOMPointInit) -> DOMPointReadOnly = _
   x(self : Self) -> Double = _
   y(self : Self) -> Double = _
   z(self : Self) -> Double = _
   w(self : Self) -> Double = _
   matrix_transform(self : Self, matrix? : DOMMatrixInit) -> DOMPoint = _
   to_json(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn dom_point_read_only_from_point_ffi(
+  other : JsValue,
+) -> DOMPointReadOnly = "(other) => { DOMPointReadOnly.fromPoint(other) }"
+
+///|
+impl TDOMPointReadOnly with from_point(
+  other? : DOMPointInit = DOMPointInit::empty(),
+) -> DOMPointReadOnly {
+  dom_point_read_only_from_point_ffi(TJsValue::to_js(other))
 }
 
 ///|

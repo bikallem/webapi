@@ -36,6 +36,7 @@ pub fn DOMRectReadOnly::new(
 
 ///|
 pub trait TDOMRectReadOnly: TJsValue {
+  from_rect(other? : DOMRectInit) -> DOMRectReadOnly = _
   x(self : Self) -> Double = _
   y(self : Self) -> Double = _
   width(self : Self) -> Double = _
@@ -45,6 +46,18 @@ pub trait TDOMRectReadOnly: TJsValue {
   bottom(self : Self) -> Double = _
   left(self : Self) -> Double = _
   to_json(self : Self) -> JsValue = _
+}
+
+///|
+extern "js" fn dom_rect_read_only_from_rect_ffi(
+  other : JsValue,
+) -> DOMRectReadOnly = "(other) => { DOMRectReadOnly.fromRect(other) }"
+
+///|
+impl TDOMRectReadOnly with from_rect(
+  other? : DOMRectInit = DOMRectInit::empty(),
+) -> DOMRectReadOnly {
+  dom_rect_read_only_from_rect_ffi(TJsValue::to_js(other))
 }
 
 ///|

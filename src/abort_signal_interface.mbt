@@ -16,11 +16,38 @@ pub impl TEventTarget for AbortSignal
 
 ///|
 pub trait TAbortSignal: TEventTarget {
+  abort(reason? : JsValue) -> AbortSignal = _
+  timeout(milliseconds : UInt64) -> AbortSignal = _
+  any(signals : Array[AbortSignal]) -> AbortSignal = _
   aborted(self : Self) -> Bool = _
   reason(self : Self) -> JsValue = _
   throw_if_aborted(self : Self) -> Unit = _
   onabort(self : Self) -> EventHandler = _
   set_onabort(self : Self, onabort : EventHandler) -> Unit = _
+}
+
+///|
+extern "js" fn abort_signal_abort_ffi(reason : JsValue) -> AbortSignal = "(reason) => { AbortSignal.abort(reason) }"
+
+///|
+impl TAbortSignal with abort(reason? : JsValue) -> AbortSignal {
+  abort_signal_abort_ffi(opt_to_js(reason))
+}
+
+///|
+extern "js" fn abort_signal_timeout_ffi(milliseconds : JsValue) -> AbortSignal = "(milliseconds) => { AbortSignal.timeout(milliseconds) }"
+
+///|
+impl TAbortSignal with timeout(milliseconds : UInt64) -> AbortSignal {
+  abort_signal_timeout_ffi(TJsValue::to_js(milliseconds))
+}
+
+///|
+extern "js" fn abort_signal_any_ffi(signals : JsValue) -> AbortSignal = "(signals) => { AbortSignal.any(signals) }"
+
+///|
+impl TAbortSignal with any(signals : Array[AbortSignal]) -> AbortSignal {
+  abort_signal_any_ffi(TJsValue::to_js(signals))
 }
 
 ///|

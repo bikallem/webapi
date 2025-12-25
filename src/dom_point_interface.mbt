@@ -39,6 +39,7 @@ pub fn DOMPoint::new(
 
 ///|
 pub trait TDOMPoint: TDOMPointReadOnly {
+  from_point(other? : DOMPointInit) -> DOMPoint = _
   x(self : Self) -> Double = _
   set_x(self : Self, x : Double) -> Unit = _
   y(self : Self) -> Double = _
@@ -47,6 +48,14 @@ pub trait TDOMPoint: TDOMPointReadOnly {
   set_z(self : Self, z : Double) -> Unit = _
   w(self : Self) -> Double = _
   set_w(self : Self, w : Double) -> Unit = _
+}
+
+///|
+extern "js" fn dom_point_from_point_ffi(other : JsValue) -> DOMPoint = "(other) => { DOMPoint.fromPoint(other) }"
+
+///|
+impl TDOMPoint with from_point(other? : DOMPointInit = DOMPointInit::empty()) -> DOMPoint {
+  dom_point_from_point_ffi(TJsValue::to_js(other))
 }
 
 ///|

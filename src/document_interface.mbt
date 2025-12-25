@@ -65,6 +65,19 @@ pub impl TDocumentImportNodeOptions for ImportNodeOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub(open) trait TDocumentParseHTMLUnsafeHtml {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TDocumentParseHTMLUnsafeHtml for TrustedHTML with to_js(
+  self : TrustedHTML,
+) -> JsValue = "%identity"
+
+///|
+pub impl TDocumentParseHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 pub(open) trait TDocumentWriteText {
   to_js(self : Self) -> JsValue
 }
@@ -177,6 +190,7 @@ pub trait TDocument: TNode {
     what_to_show? : UInt,
     filter? : NodeFilter,
   ) -> TreeWalker = _
+  parse_html_unsafe(html : &TDocumentParseHTMLUnsafeHtml) -> Document = _
   location(self : Self) -> Location = _
   domain(self : Self) -> String = _
   set_domain(self : Self, domain : String) -> Unit = _
@@ -836,6 +850,14 @@ impl TDocument with create_tree_walker(
     TJsValue::to_js(what_to_show),
     TJsValue::to_js(filter),
   )
+}
+
+///|
+extern "js" fn document_parse_html_unsafe_ffi(html : JsValue) -> Document = "(html) => { Document.parseHTMLUnsafe(html) }"
+
+///|
+impl TDocument with parse_html_unsafe(html : &TDocumentParseHTMLUnsafeHtml) -> Document {
+  document_parse_html_unsafe_ffi(html.to_js())
 }
 
 ///|

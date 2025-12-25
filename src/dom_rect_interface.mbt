@@ -39,6 +39,7 @@ pub fn DOMRect::new(
 
 ///|
 pub trait TDOMRect: TDOMRectReadOnly {
+  from_rect(other? : DOMRectInit) -> DOMRect = _
   x(self : Self) -> Double = _
   set_x(self : Self, x : Double) -> Unit = _
   y(self : Self) -> Double = _
@@ -47,6 +48,14 @@ pub trait TDOMRect: TDOMRectReadOnly {
   set_width(self : Self, width : Double) -> Unit = _
   height(self : Self) -> Double = _
   set_height(self : Self, height : Double) -> Unit = _
+}
+
+///|
+extern "js" fn dom_rect_from_rect_ffi(other : JsValue) -> DOMRect = "(other) => { DOMRect.fromRect(other) }"
+
+///|
+impl TDOMRect with from_rect(other? : DOMRectInit = DOMRectInit::empty()) -> DOMRect {
+  dom_rect_from_rect_ffi(TJsValue::to_js(other))
 }
 
 ///|
