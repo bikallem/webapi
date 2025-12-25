@@ -792,7 +792,7 @@ test "InterfaceEmitter emits static methods" {
       #|
       #|extern "js" fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response = "(url, status) => TestInterface.redirect(url, status)"
       #|
-      #|TestInterface::redirect(url : String, 
+      #|pub fn TestInterface::redirect(url : String, 
       #|status? : UInt = 302) -> Response {
       #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
       #|}
