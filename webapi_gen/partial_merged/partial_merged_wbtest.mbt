@@ -104,6 +104,7 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
         ],
       },
     ],
+    "specs": [],
   })
 }
 

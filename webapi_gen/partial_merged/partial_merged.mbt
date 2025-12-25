@@ -35,10 +35,11 @@ fn PartialMerged::merge_mixin(
   self : PartialMerged,
   name : String,
   members : Array[@parser.InterfaceMemberExtendedAttributes],
+  spec : String?,
 ) -> Unit {
   match self.mixins.get(name) {
-    Some(current) => self.mixins[name] = current.merge(members)
-    None => self.mixins[name] = PartialMergedMixin::new(name, members)
+    Some(current) => self.mixins[name] = current.merge(members, spec)
+    None => self.mixins[name] = PartialMergedMixin::new(name, members, spec)
   }
 }
 
@@ -108,8 +109,9 @@ pub fn merge_partials(
           dict.inheritance,
           def.spec,
         )
-      PartialMixin(pmxn) => partial_merged.merge_mixin(pmxn.name, pmxn.members)
-      Mixin(mxn) => partial_merged.merge_mixin(mxn.name, mxn.members)
+      PartialMixin(pmxn) =>
+        partial_merged.merge_mixin(pmxn.name, pmxn.members, def.spec)
+      Mixin(mxn) => partial_merged.merge_mixin(mxn.name, mxn.members, def.spec)
       PartialInterface(piface) =>
         partial_merged.merge_interface(piface.name, piface.members, None)
       Interface(iface) =>
