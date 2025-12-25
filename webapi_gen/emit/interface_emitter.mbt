@@ -217,10 +217,10 @@ pub impl Emitter for InterfaceEmitter with emit(
       interface_methods.push(trait_method)
       continue rest
     }
+    [Attribute(attr), .. rest] if attr.static_ =>
+      // Static attributes are not yet handled
+      continue rest
     [Attribute(attr), .. rest] => {
-      if attr.static_ {
-        continue rest // TODO: determine how to map static attributes, perhaps to external type?
-      }
       let (attr_type, attr_emits) = arg_mbt_type(
         attr.type_,
         interface.name,
