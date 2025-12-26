@@ -32,7 +32,7 @@ pub fn CSSStyleSheet::new(
 pub trait TCSSStyleSheet: TStyleSheet {
   owner_rule(self : Self) -> CSSRule = _
   css_rules(self : Self) -> CSSRuleList = _
-  insert_rule(self : Self, rule : CSSOMString, index? : UInt) -> UInt = _
+  insert_rule(self : Self, rule : String, index? : UInt) -> UInt = _
   delete_rule(self : Self, index : UInt) -> Unit = _
   replace(self : Self, text : String) -> JsPromise[CSSStyleSheet] = _
   replace_sync(self : Self, text : String) -> Unit = _
@@ -67,7 +67,7 @@ extern "js" fn css_style_sheet_insert_rule_ffi(
 ///|
 impl TCSSStyleSheet with insert_rule(
   self : Self,
-  rule : CSSOMString,
+  rule : String,
   index? : UInt = (0 : UInt),
 ) -> UInt {
   css_style_sheet_insert_rule_ffi(

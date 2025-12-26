@@ -34,7 +34,7 @@ pub fn MediaQueryListEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  media? : CSSOMString = "",
+  media? : String = "",
   matches? : Bool = false,
 ) -> MediaQueryListEventInit {
   media_query_list_event_init_ffi(

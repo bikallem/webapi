@@ -23,8 +23,8 @@ pub trait TCSSImportRule: TCSSRule {
   href(self : Self) -> String = _
   media(self : Self) -> MediaList = _
   style_sheet(self : Self) -> CSSStyleSheet = _
-  layer_name(self : Self) -> CSSOMString = _
-  supports_text(self : Self) -> CSSOMString = _
+  layer_name(self : Self) -> String = _
+  supports_text(self : Self) -> String = _
 }
 
 ///|
@@ -52,17 +52,17 @@ impl TCSSImportRule with style_sheet(self : Self) -> CSSStyleSheet {
 }
 
 ///|
-extern "js" fn css_import_rule_layer_name_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.layerName"
+extern "js" fn css_import_rule_layer_name_ffi(obj : JsValue) -> String = "(obj) => obj.layerName"
 
 ///|
-impl TCSSImportRule with layer_name(self : Self) -> CSSOMString {
+impl TCSSImportRule with layer_name(self : Self) -> String {
   css_import_rule_layer_name_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn css_import_rule_supports_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.supportsText"
+extern "js" fn css_import_rule_supports_text_ffi(obj : JsValue) -> String = "(obj) => obj.supportsText"
 
 ///|
-impl TCSSImportRule with supports_text(self : Self) -> CSSOMString {
+impl TCSSImportRule with supports_text(self : Self) -> String {
   css_import_rule_supports_text_ffi(TJsValue::to_js(self))
 }

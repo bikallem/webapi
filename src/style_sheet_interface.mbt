@@ -44,7 +44,7 @@ pub impl TStyleSheetOwnerNode for ProcessingInstruction with to_js(
 
 ///|
 pub trait TStyleSheet: TJsValue {
-  type_(self : Self) -> CSSOMString = _
+  type_(self : Self) -> String = _
   href(self : Self) -> String = _
   owner_node(self : Self) -> StyleSheetOwnerNode = _
   parent_style_sheet(self : Self) -> CSSStyleSheet = _
@@ -55,10 +55,10 @@ pub trait TStyleSheet: TJsValue {
 }
 
 ///|
-extern "js" fn style_sheet_type_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.type"
+extern "js" fn style_sheet_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
-impl TStyleSheet with type_(self : Self) -> CSSOMString {
+impl TStyleSheet with type_(self : Self) -> String {
   style_sheet_type_ffi(TJsValue::to_js(self))
 }
 

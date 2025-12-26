@@ -20,15 +20,15 @@ pub impl TCSSRule for CSSMarginRule
 
 ///|
 pub trait TCSSMarginRule: TCSSRule {
-  name(self : Self) -> CSSOMString = _
+  name(self : Self) -> String = _
   style(self : Self) -> CSSStyleDeclaration = _
 }
 
 ///|
-extern "js" fn css_margin_rule_name_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.name"
+extern "js" fn css_margin_rule_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
-impl TCSSMarginRule with name(self : Self) -> CSSOMString {
+impl TCSSMarginRule with name(self : Self) -> String {
   css_margin_rule_name_ffi(TJsValue::to_js(self))
 }
 

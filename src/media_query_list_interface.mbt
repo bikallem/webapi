@@ -20,7 +20,7 @@ pub impl TEventTarget for MediaQueryList
 
 ///|
 pub trait TMediaQueryList: TEventTarget {
-  media(self : Self) -> CSSOMString = _
+  media(self : Self) -> String = _
   matches(self : Self) -> Bool = _
   add_listener(self : Self, callback : EventListener) -> Unit = _
   remove_listener(self : Self, callback : EventListener) -> Unit = _
@@ -29,10 +29,10 @@ pub trait TMediaQueryList: TEventTarget {
 }
 
 ///|
-extern "js" fn media_query_list_media_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.media"
+extern "js" fn media_query_list_media_ffi(obj : JsValue) -> String = "(obj) => obj.media"
 
 ///|
-impl TMediaQueryList with media(self : Self) -> CSSOMString {
+impl TMediaQueryList with media(self : Self) -> String {
   media_query_list_media_ffi(TJsValue::to_js(self))
 }
 
