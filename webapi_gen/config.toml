@@ -12,6 +12,7 @@ core_specs = [
     "geometry",
     "FileAPI",
     "SVG",
+    "trusted-types",
     "uievents",
     "webidl",
     "xhr",

@@ -93,6 +93,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
+  trusted_types(self : Self) -> TrustedTypePolicyFactory = _
 }
 
 ///|
@@ -515,4 +516,14 @@ impl TWorkerGlobalScope with structured_clone(
     TJsValue::to_js(value),
     TJsValue::to_js(options),
   )
+}
+
+///|
+extern "js" fn worker_global_scope_trusted_types_ffi(
+  obj : JsValue,
+) -> TrustedTypePolicyFactory = "(obj) => obj.trustedTypes"
+
+///|
+impl TWorkerGlobalScope with trusted_types(self : Self) -> TrustedTypePolicyFactory {
+  worker_global_scope_trusted_types_ffi(TJsValue::to_js(self))
 }

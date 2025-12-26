@@ -363,6 +363,7 @@ pub trait TWindow: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
+  trusted_types(self : Self) -> TrustedTypePolicyFactory = _
   request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
   session_storage(self : Self) -> Storage = _
@@ -3170,6 +3171,16 @@ impl TWindow with structured_clone(
     TJsValue::to_js(value),
     TJsValue::to_js(options),
   )
+}
+
+///|
+extern "js" fn window_trusted_types_ffi(
+  obj : JsValue,
+) -> TrustedTypePolicyFactory = "(obj) => obj.trustedTypes"
+
+///|
+impl TWindow with trusted_types(self : Self) -> TrustedTypePolicyFactory {
+  window_trusted_types_ffi(TJsValue::to_js(self))
 }
 
 ///|
