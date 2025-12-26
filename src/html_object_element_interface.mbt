@@ -65,8 +65,8 @@ pub trait THTMLObjectElement: THTMLElement {
   set_archive(self : Self, archive : String) -> Unit = _
   code(self : Self) -> String = _
   set_code(self : Self, code : String) -> Unit = _
-  declare(self : Self) -> Bool = _
-  set_declare(self : Self, declare : Bool) -> Unit = _
+  declare_(self : Self) -> Bool = _
+  set_declare_(self : Self, declare_ : Bool) -> Unit = _
   hspace(self : Self) -> UInt = _
   set_hspace(self : Self, hspace : UInt) -> Unit = _
   standby(self : Self) -> String = _
@@ -348,21 +348,21 @@ impl THTMLObjectElement with set_code(self : Self, code : String) -> Unit {
 extern "js" fn html_object_element_declare_ffi(obj : JsValue) -> Bool = "(obj) => obj.declare"
 
 ///|
-impl THTMLObjectElement with declare(self : Self) -> Bool {
+impl THTMLObjectElement with declare_(self : Self) -> Bool {
   html_object_element_declare_ffi(TJsValue::to_js(self))
 }
 
 ///|
 extern "js" fn html_object_element_set_declare_ffi(
   obj : JsValue,
-  declare : JsValue,
+  declare_ : JsValue,
 ) -> Unit = "(obj, declare) => { obj.declare = declare; }"
 
 ///|
-impl THTMLObjectElement with set_declare(self : Self, declare : Bool) -> Unit {
+impl THTMLObjectElement with set_declare_(self : Self, declare_ : Bool) -> Unit {
   html_object_element_set_declare_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(declare),
+    TJsValue::to_js(declare_),
   )
 }
 
