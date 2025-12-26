@@ -653,19 +653,19 @@ test "functional for loop control flow" {
 
 ## Label and Optional Parameters
 
-Good example: Use labeled and optional parameters
+Good example: use labeled and optional parameters
 
-```mbt
+```mbt check
 fn g(
   positional : Int,
   required~ : Int,
-  optional? : Int,
-  optional_with_default? : Int = 42,
+  optional? : Int, // no default => Option
+  optional_with_default? : Int = 42, // default => plain Int
 ) -> String {
-  // make sure you understand the types of the arguments really is:
+  // These are the inferred types inside the function body.
   let _ : Int = positional
   let _ : Int = required
-  // let _ : Option[Int] = optional 
+  let _ : Int? = optional
   let _ : Int = optional_with_default
   "\{positional},\{required},\{optional},\{optional_with_default}"
 }
@@ -677,11 +677,11 @@ test {
 }
 ```
 
-Misuse: `arg : Type?` is not an optional parameter
+Misuse: `arg : Type?` is not an optional parameter.
+Callers still must pass it (as `None`/`Some(...)`).
 
-```mbt
+```mbt check
 fn with_config(a : Int?, b : Int?, c : Int) -> String {
-  // T? is syntactic sugar for Option[T]
   "\{a},\{b},\{c}"
 }
 
@@ -691,27 +691,36 @@ test {
 }
 ```
 
-Anti pattern: `arg? : Type?` 
+Anti-pattern: `arg? : Type?` (no default => double Option).
+If you want a defaulted optional parameter, write `b? : Int = 1`, not `b? : Int? = Some(1)`.
 
-```mbt
-// How to fix: declare `(a? : Int, b? : Int = 1)` directly
-fn f(a? : Int?, b? : Int? = Some(1)) -> Unit {...}
-test {
-  // How to fix: call `f(b=2)` directly
-  f(a=None, b=Some(2))
+```mbt check
+fn f_misuse(a? : Int?, b? : Int = 1) -> Unit {
+  let _ : Int?? = a // rarely intended
+  let _ : Int = b
+}
+// How to fix: declare `(a? : Int, b? : Int = 1)` directly.
+fn f_correct(a? : Int, b? : Int = 1) -> Unit {
+  let _ : Int? = a
+  let _ : Int = b
+}
+test {  
+  f_misuse(b=3)
+  f_misuse(a=Some(5), b=2) // works but confusing
+  f_correct(b=2)
+  f_correct(a=5)
 }
 ```
 
-Bad example: `arg : APIOptions`
+Bad example: `arg : APIOptions` (use labeled optional parameters instead)
 
-```mbt
+```mbt check
 // Do not use struct to group options.
 struct APIOptions {
   a : Int?
 }
 
 fn not_idiomatic(opts : APIOptions, arg : Int) -> Unit {
-  ...
 }
 
 test {
@@ -1349,7 +1358,7 @@ pub fn Yaml::to_string(y : Yaml) -> String raise {...}
 #declaration_only
 pub fn parse_yaml(s : String) -> Yaml raise {...}
 ```
-- Add `spec_easy_test.mbt`, `spec_difficult_test.mbt` etc to test the spec functions; everything will be type-checked.
+- Add `spec_easy_test.mbt`, `spec_difficult_test.mbt` etc to test the spec functions; everything will be type-checked(`moon check`).
 - The AI or students can implement the `declaration_only` functions in different files thanks to our package organization.
 - Run `moon test` to check everything is correct.
 
