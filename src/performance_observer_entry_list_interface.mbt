@@ -1,0 +1,74 @@
+// Do not edit. This file is generated.
+// MoonBit type: PerformanceObserverEntryList
+// Specifications: performance-timeline.idl
+
+///|
+#external
+pub type PerformanceObserverEntryList
+
+///|
+pub impl TJsValue for PerformanceObserverEntryList with to_js(
+  self : PerformanceObserverEntryList,
+) -> JsValue = "%identity"
+
+///|
+pub fn[T : TPerformanceObserverEntryList] PerformanceObserverEntryList::into(
+  self : PerformanceObserverEntryList,
+) -> T = "%identity"
+
+///|
+pub impl TPerformanceObserverEntryList for PerformanceObserverEntryList
+
+///|
+pub trait TPerformanceObserverEntryList: TJsValue {
+  get_entries(self : Self) -> PerformanceEntryList = _
+  get_entries_by_type(self : Self, type_ : String) -> PerformanceEntryList = _
+  get_entries_by_name(self : Self, name : String, type_? : String) -> PerformanceEntryList = _
+}
+
+///|
+extern "js" fn performance_observer_entry_list_get_entries_ffi(
+  obj : JsValue,
+) -> PerformanceEntryList = "(obj) => obj.getEntries(obj)"
+
+///|
+impl TPerformanceObserverEntryList with get_entries(self : Self) -> PerformanceEntryList {
+  performance_observer_entry_list_get_entries_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn performance_observer_entry_list_get_entries_by_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> PerformanceEntryList = "(obj, type_) => obj.getEntriesByType(obj, type_)"
+
+///|
+impl TPerformanceObserverEntryList with get_entries_by_type(
+  self : Self,
+  type_ : String,
+) -> PerformanceEntryList {
+  performance_observer_entry_list_get_entries_by_type_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(type_),
+  )
+}
+
+///|
+extern "js" fn performance_observer_entry_list_get_entries_by_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+  type_ : JsValue,
+) -> PerformanceEntryList = "(obj, name, type_) => obj.getEntriesByName(obj, name, type_)"
+
+///|
+impl TPerformanceObserverEntryList with get_entries_by_name(
+  self : Self,
+  name : String,
+  type_? : String,
+) -> PerformanceEntryList {
+  performance_observer_entry_list_get_entries_by_name_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(name),
+    opt_to_js(type_),
+  )
+}

@@ -20,6 +20,9 @@ pub fn[T : TVisibilityStateEntry] VisibilityStateEntry::into(
 pub impl TVisibilityStateEntry for VisibilityStateEntry
 
 ///|
+pub impl TPerformanceEntry for VisibilityStateEntry
+
+///|
 pub trait TVisibilityStateEntry: TPerformanceEntry {
   name(self : Self) -> String = _
   entry_type(self : Self) -> String = _

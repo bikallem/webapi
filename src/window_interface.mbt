@@ -363,6 +363,7 @@ pub trait TWindow: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
+  performance(self : Self) -> Performance = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
   request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
@@ -3171,6 +3172,14 @@ impl TWindow with structured_clone(
     TJsValue::to_js(value),
     TJsValue::to_js(options),
   )
+}
+
+///|
+extern "js" fn window_performance_ffi(obj : JsValue) -> Performance = "(obj) => obj.performance"
+
+///|
+impl TWindow with performance(self : Self) -> Performance {
+  window_performance_ffi(TJsValue::to_js(self))
 }
 
 ///|

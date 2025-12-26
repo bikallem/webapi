@@ -93,6 +93,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
+  performance(self : Self) -> Performance = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
 }
 
@@ -516,6 +517,16 @@ impl TWorkerGlobalScope with structured_clone(
     TJsValue::to_js(value),
     TJsValue::to_js(options),
   )
+}
+
+///|
+extern "js" fn worker_global_scope_performance_ffi(
+  obj : JsValue,
+) -> Performance = "(obj) => obj.performance"
+
+///|
+impl TWorkerGlobalScope with performance(self : Self) -> Performance {
+  worker_global_scope_performance_ffi(TJsValue::to_js(self))
 }
 
 ///|
