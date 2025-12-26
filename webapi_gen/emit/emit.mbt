@@ -485,8 +485,6 @@ fn arg_mbt_type(
           ArgMbtType::Enum(name)
         } else if type_registry.is_dictionary(name) {
           ArgMbtType::Dictionary(name)
-        } else if name == "CSSOMString" { // Special case CSSOMString typedef
-          ArgMbtType::Primitive("String")
         } else {
           ArgMbtType::Other(name)
         }

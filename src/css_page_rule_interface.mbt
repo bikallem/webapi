@@ -23,16 +23,16 @@ pub impl TCSSRule for CSSPageRule
 
 ///|
 pub trait TCSSPageRule: TCSSGroupingRule {
-  selector_text(self : Self) -> String = _
-  set_selector_text(self : Self, selector_text : String) -> Unit = _
+  selector_text(self : Self) -> CSSOMString = _
+  set_selector_text(self : Self, selector_text : CSSOMString) -> Unit = _
   style(self : Self) -> CSSPageDescriptors = _
 }
 
 ///|
-extern "js" fn css_page_rule_selector_text_ffi(obj : JsValue) -> String = "(obj) => obj.selectorText"
+extern "js" fn css_page_rule_selector_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.selectorText"
 
 ///|
-impl TCSSPageRule with selector_text(self : Self) -> String {
+impl TCSSPageRule with selector_text(self : Self) -> CSSOMString {
   css_page_rule_selector_text_ffi(TJsValue::to_js(self))
 }
 
@@ -43,7 +43,10 @@ extern "js" fn css_page_rule_set_selector_text_ffi(
 ) -> Unit = "(obj, selectorText) => { obj.selectorText = selectorText; }"
 
 ///|
-impl TCSSPageRule with set_selector_text(self : Self, selector_text : String) -> Unit {
+impl TCSSPageRule with set_selector_text(
+  self : Self,
+  selector_text : CSSOMString,
+) -> Unit {
   css_page_rule_set_selector_text_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(selector_text),

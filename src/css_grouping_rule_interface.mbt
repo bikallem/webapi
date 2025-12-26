@@ -21,7 +21,7 @@ pub impl TCSSRule for CSSGroupingRule
 ///|
 pub trait TCSSGroupingRule: TCSSRule {
   css_rules(self : Self) -> CSSRuleList = _
-  insert_rule(self : Self, rule : String, index? : UInt) -> UInt = _
+  insert_rule(self : Self, rule : CSSOMString, index? : UInt) -> UInt = _
   delete_rule(self : Self, index : UInt) -> Unit = _
 }
 
@@ -43,7 +43,7 @@ extern "js" fn css_grouping_rule_insert_rule_ffi(
 ///|
 impl TCSSGroupingRule with insert_rule(
   self : Self,
-  rule : String,
+  rule : CSSOMString,
   index? : UInt = (0 : UInt),
 ) -> UInt {
   css_grouping_rule_insert_rule_ffi(

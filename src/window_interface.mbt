@@ -102,8 +102,8 @@ pub trait TWindow: TEventTarget {
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
   external(self : Self) -> External = _
-  get_computed_style(self : Self, elt : &TElement, pseudo_elt? : String) -> CSSStyleProperties = _
-  match_media(self : Self, query : String) -> MediaQueryList = _
+  get_computed_style(self : Self, elt : &TElement, pseudo_elt? : CSSOMString) -> CSSStyleProperties = _
+  match_media(self : Self, query : CSSOMString) -> MediaQueryList = _
   screen(self : Self) -> Screen = _
   visual_viewport(self : Self) -> VisualViewport = _
   move_to(self : Self, x : Int, y : Int) -> Unit = _
@@ -789,7 +789,7 @@ extern "js" fn window_get_computed_style_ffi(
 impl TWindow with get_computed_style(
   self : Self,
   elt : &TElement,
-  pseudo_elt? : String,
+  pseudo_elt? : CSSOMString,
 ) -> CSSStyleProperties {
   window_get_computed_style_ffi(
     TJsValue::to_js(self),
@@ -805,7 +805,7 @@ extern "js" fn window_match_media_ffi(
 ) -> MediaQueryList = "(obj, query) => obj.matchMedia(obj, query)"
 
 ///|
-impl TWindow with match_media(self : Self, query : String) -> MediaQueryList {
+impl TWindow with match_media(self : Self, query : CSSOMString) -> MediaQueryList {
   window_match_media_ffi(TJsValue::to_js(self), TJsValue::to_js(query))
 }
 

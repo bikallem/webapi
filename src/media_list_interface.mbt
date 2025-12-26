@@ -17,18 +17,18 @@ pub impl TMediaList for MediaList
 
 ///|
 pub trait TMediaList: TJsValue {
-  media_text(self : Self) -> String = _
-  set_media_text(self : Self, media_text : String) -> Unit = _
+  media_text(self : Self) -> CSSOMString = _
+  set_media_text(self : Self, media_text : CSSOMString) -> Unit = _
   length(self : Self) -> UInt = _
-  append_medium(self : Self, medium : String) -> Unit = _
-  delete_medium(self : Self, medium : String) -> Unit = _
+  append_medium(self : Self, medium : CSSOMString) -> Unit = _
+  delete_medium(self : Self, medium : CSSOMString) -> Unit = _
 }
 
 ///|
-extern "js" fn media_list_media_text_ffi(obj : JsValue) -> String = "(obj) => obj.mediaText"
+extern "js" fn media_list_media_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.mediaText"
 
 ///|
-impl TMediaList with media_text(self : Self) -> String {
+impl TMediaList with media_text(self : Self) -> CSSOMString {
   media_list_media_text_ffi(TJsValue::to_js(self))
 }
 
@@ -39,7 +39,7 @@ extern "js" fn media_list_set_media_text_ffi(
 ) -> Unit = "(obj, mediaText) => { obj.mediaText = mediaText; }"
 
 ///|
-impl TMediaList with set_media_text(self : Self, media_text : String) -> Unit {
+impl TMediaList with set_media_text(self : Self, media_text : CSSOMString) -> Unit {
   media_list_set_media_text_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(media_text),
@@ -61,7 +61,7 @@ extern "js" fn media_list_append_medium_ffi(
 ) -> Unit = "(obj, medium) => obj.appendMedium(obj, medium)"
 
 ///|
-impl TMediaList with append_medium(self : Self, medium : String) -> Unit {
+impl TMediaList with append_medium(self : Self, medium : CSSOMString) -> Unit {
   media_list_append_medium_ffi(TJsValue::to_js(self), TJsValue::to_js(medium))
 }
 
@@ -72,6 +72,6 @@ extern "js" fn media_list_delete_medium_ffi(
 ) -> Unit = "(obj, medium) => obj.deleteMedium(obj, medium)"
 
 ///|
-impl TMediaList with delete_medium(self : Self, medium : String) -> Unit {
+impl TMediaList with delete_medium(self : Self, medium : CSSOMString) -> Unit {
   media_list_delete_medium_ffi(TJsValue::to_js(self), TJsValue::to_js(medium))
 }

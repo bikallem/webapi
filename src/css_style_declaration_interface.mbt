@@ -19,26 +19,26 @@ pub impl TCSSStyleDeclaration for CSSStyleDeclaration
 
 ///|
 pub trait TCSSStyleDeclaration: TJsValue {
-  css_text(self : Self) -> String = _
-  set_css_text(self : Self, css_text : String) -> Unit = _
+  css_text(self : Self) -> CSSOMString = _
+  set_css_text(self : Self, css_text : CSSOMString) -> Unit = _
   length(self : Self) -> UInt = _
-  get_property_value(self : Self, property : String) -> String = _
-  get_property_priority(self : Self, property : String) -> String = _
+  get_property_value(self : Self, property : CSSOMString) -> CSSOMString = _
+  get_property_priority(self : Self, property : CSSOMString) -> CSSOMString = _
   set_property(
     self : Self,
-    property : String,
-    value : String,
-    priority? : String,
+    property : CSSOMString,
+    value : CSSOMString,
+    priority? : CSSOMString,
   ) -> Unit = _
-  remove_property(self : Self, property : String) -> String = _
+  remove_property(self : Self, property : CSSOMString) -> CSSOMString = _
   parent_rule(self : Self) -> CSSRule = _
 }
 
 ///|
-extern "js" fn css_style_declaration_css_text_ffi(obj : JsValue) -> String = "(obj) => obj.cssText"
+extern "js" fn css_style_declaration_css_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.cssText"
 
 ///|
-impl TCSSStyleDeclaration with css_text(self : Self) -> String {
+impl TCSSStyleDeclaration with css_text(self : Self) -> CSSOMString {
   css_style_declaration_css_text_ffi(TJsValue::to_js(self))
 }
 
@@ -49,7 +49,7 @@ extern "js" fn css_style_declaration_set_css_text_ffi(
 ) -> Unit = "(obj, cssText) => { obj.cssText = cssText; }"
 
 ///|
-impl TCSSStyleDeclaration with set_css_text(self : Self, css_text : String) -> Unit {
+impl TCSSStyleDeclaration with set_css_text(self : Self, css_text : CSSOMString) -> Unit {
   css_style_declaration_set_css_text_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(css_text),
@@ -68,13 +68,13 @@ impl TCSSStyleDeclaration with length(self : Self) -> UInt {
 extern "js" fn css_style_declaration_get_property_value_ffi(
   obj : JsValue,
   property : JsValue,
-) -> String = "(obj, property) => obj.getPropertyValue(obj, property)"
+) -> CSSOMString = "(obj, property) => obj.getPropertyValue(obj, property)"
 
 ///|
 impl TCSSStyleDeclaration with get_property_value(
   self : Self,
-  property : String,
-) -> String {
+  property : CSSOMString,
+) -> CSSOMString {
   css_style_declaration_get_property_value_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(property),
@@ -85,13 +85,13 @@ impl TCSSStyleDeclaration with get_property_value(
 extern "js" fn css_style_declaration_get_property_priority_ffi(
   obj : JsValue,
   property : JsValue,
-) -> String = "(obj, property) => obj.getPropertyPriority(obj, property)"
+) -> CSSOMString = "(obj, property) => obj.getPropertyPriority(obj, property)"
 
 ///|
 impl TCSSStyleDeclaration with get_property_priority(
   self : Self,
-  property : String,
-) -> String {
+  property : CSSOMString,
+) -> CSSOMString {
   css_style_declaration_get_property_priority_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(property),
@@ -109,9 +109,9 @@ extern "js" fn css_style_declaration_set_property_ffi(
 ///|
 impl TCSSStyleDeclaration with set_property(
   self : Self,
-  property : String,
-  value : String,
-  priority? : String = "",
+  property : CSSOMString,
+  value : CSSOMString,
+  priority? : CSSOMString = "",
 ) -> Unit {
   css_style_declaration_set_property_ffi(
     TJsValue::to_js(self),
@@ -125,10 +125,13 @@ impl TCSSStyleDeclaration with set_property(
 extern "js" fn css_style_declaration_remove_property_ffi(
   obj : JsValue,
   property : JsValue,
-) -> String = "(obj, property) => obj.removeProperty(obj, property)"
+) -> CSSOMString = "(obj, property) => obj.removeProperty(obj, property)"
 
 ///|
-impl TCSSStyleDeclaration with remove_property(self : Self, property : String) -> String {
+impl TCSSStyleDeclaration with remove_property(
+  self : Self,
+  property : CSSOMString,
+) -> CSSOMString {
   css_style_declaration_remove_property_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(property),

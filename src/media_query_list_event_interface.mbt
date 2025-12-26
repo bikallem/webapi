@@ -28,7 +28,7 @@ extern "js" fn media_query_list_event_new_ffi(
 
 ///|
 pub fn MediaQueryListEvent::new(
-  type_ : String,
+  type_ : CSSOMString,
   event_init_dict? : MediaQueryListEventInit = MediaQueryListEventInit::empty(),
 ) -> MediaQueryListEvent {
   media_query_list_event_new_ffi(
@@ -39,15 +39,15 @@ pub fn MediaQueryListEvent::new(
 
 ///|
 pub trait TMediaQueryListEvent: TEvent {
-  media(self : Self) -> String = _
+  media(self : Self) -> CSSOMString = _
   matches(self : Self) -> Bool = _
 }
 
 ///|
-extern "js" fn media_query_list_event_media_ffi(obj : JsValue) -> String = "(obj) => obj.media"
+extern "js" fn media_query_list_event_media_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.media"
 
 ///|
-impl TMediaQueryListEvent with media(self : Self) -> String {
+impl TMediaQueryListEvent with media(self : Self) -> CSSOMString {
   media_query_list_event_media_ffi(TJsValue::to_js(self))
 }
 

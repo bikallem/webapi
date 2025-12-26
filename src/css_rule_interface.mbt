@@ -41,18 +41,18 @@ pub const CSS_RULE_NAMESPACE_RULE : UInt = 10
 
 ///|
 pub trait TCSSRule: TJsValue {
-  css_text(self : Self) -> String = _
-  set_css_text(self : Self, css_text : String) -> Unit = _
+  css_text(self : Self) -> CSSOMString = _
+  set_css_text(self : Self, css_text : CSSOMString) -> Unit = _
   parent_rule(self : Self) -> CSSRule = _
   parent_style_sheet(self : Self) -> CSSStyleSheet = _
   type_(self : Self) -> UInt = _
 }
 
 ///|
-extern "js" fn css_rule_css_text_ffi(obj : JsValue) -> String = "(obj) => obj.cssText"
+extern "js" fn css_rule_css_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.cssText"
 
 ///|
-impl TCSSRule with css_text(self : Self) -> String {
+impl TCSSRule with css_text(self : Self) -> CSSOMString {
   css_rule_css_text_ffi(TJsValue::to_js(self))
 }
 
@@ -63,7 +63,7 @@ extern "js" fn css_rule_set_css_text_ffi(
 ) -> Unit = "(obj, cssText) => { obj.cssText = cssText; }"
 
 ///|
-impl TCSSRule with set_css_text(self : Self, css_text : String) -> Unit {
+impl TCSSRule with set_css_text(self : Self, css_text : CSSOMString) -> Unit {
   css_rule_set_css_text_ffi(TJsValue::to_js(self), TJsValue::to_js(css_text))
 }
 
