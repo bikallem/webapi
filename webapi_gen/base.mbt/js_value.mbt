@@ -52,15 +52,6 @@ fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
 pub fn JsValue::is_null(self : JsValue) -> Bool = "JsValue" "isNull"
 
 ///|
-/// Cast JsValue to an optional type (nullable return from JS)
-fn[T] JsValue::as_option(self : JsValue) -> T? {
-  match self {
-    v if JsValue::is_null(v) => None
-    _ => Some(self.unsafe_cast())
-  }
-}
-
-///|
 /// Convert an Option[T] to JsValue - returns undefined if None
 fn[T : TJsValue] opt_to_js(opt : T?) -> JsValue {
   match opt {
