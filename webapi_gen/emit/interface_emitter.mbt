@@ -128,6 +128,25 @@ fn mbt_default_value(
 }
 
 ///|
+fn has_hyphen(name : String) -> Bool {
+  for c in name {
+    if c == '-' {
+      return true
+    }
+  }
+  false
+}
+
+///|
+test "has_hyphen identifies names with hyphens correctly" {
+  inspect(has_hyphen("my-method"), content="true")
+  inspect(has_hyphen("myMethod"), content="false")
+  inspect(has_hyphen("method-name-with-hyphens"), content="true")
+  inspect(has_hyphen("method_name_with_underscores"), content="false")
+  inspect(has_hyphen("simplemethod"), content="false")
+}
+
+///|
 pub impl Emitter for InterfaceEmitter with emit(
   self : InterfaceEmitter,
   name : String,
@@ -179,6 +198,8 @@ pub impl Emitter for InterfaceEmitter with emit(
       )
       continue rest
     }
+    [RegularOperation(op), .. rest] if has_hyphen(op.name) => continue rest // skip methods with hyphens
+    [Attribute(attr), .. rest] if has_hyphen(attr.name) => continue rest // skip attributes with hyphens
     [RegularOperation(op), .. rest] if op.static_ => {
       let orig_method_name = match method_counter.get(op.name) {
         None => {
