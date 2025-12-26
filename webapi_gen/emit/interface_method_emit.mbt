@@ -248,12 +248,8 @@ fn trait_method_decl_args(args : Array[MethodArg]) -> String {
   args
   .map(arg => {
     let arg_name = if arg.optional { "\{arg.name}?" } else { arg.name }
-    match arg.type_ {
-      ArgMbtType::Self => "\{arg_name} : Self"
-      ArgMbtType::Interface(t)
-      | ArgMbtType::Union(t, _)
-      | ArgMbtType::Other(t) => "\{arg_name} : \{t}"
-    }
+    let arg_type = arg.type_.name()
+    "\{arg_name} : \{arg_type}"
   })
   .join(", ")
 }
@@ -264,12 +260,7 @@ fn trait_method_impl_args(args : Array[MethodArg]) -> String {
   .map(arg => {
     let arg_name = safe_identifier(arg.name)
     let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
-    let arg_decl = match arg.type_ {
-      ArgMbtType::Self => "\{arg_name} : Self"
-      ArgMbtType::Interface(t)
-      | ArgMbtType::Union(t, _)
-      | ArgMbtType::Other(t) => "\{arg_name} : \{t}"
-    }
+    let arg_decl = "\{arg_name} : \{arg.type_.name()}"
     match arg.default_value {
       Some(dv) => "\{arg_decl} = \{dv}"
       None => arg_decl

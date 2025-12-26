@@ -962,7 +962,7 @@ extern "js" fn html_input_element_step_up_ffi(
 ) -> Unit = "(obj, n) => obj.stepUp(obj, n)"
 
 ///|
-impl THTMLInputElement with step_up(self : Self, n? : Int = 1) -> Unit {
+impl THTMLInputElement with step_up(self : Self, n? : Int = (1 : Int)) -> Unit {
   html_input_element_step_up_ffi(TJsValue::to_js(self), TJsValue::to_js(n))
 }
 
@@ -973,7 +973,7 @@ extern "js" fn html_input_element_step_down_ffi(
 ) -> Unit = "(obj, n) => obj.stepDown(obj, n)"
 
 ///|
-impl THTMLInputElement with step_down(self : Self, n? : Int = 1) -> Unit {
+impl THTMLInputElement with step_down(self : Self, n? : Int = (1 : Int)) -> Unit {
   html_input_element_step_down_ffi(TJsValue::to_js(self), TJsValue::to_js(n))
 }
 

@@ -30,8 +30,8 @@ extern "js" fn composition_event_init_ffi(
 ///|
 pub fn CompositionEventInit::new(
   view? : &TWindow = JsValue::null(),
-  detail? : Int = 0,
-  which? : UInt = 0,
+  detail? : Int = (0 : Int),
+  which? : UInt = (0 : UInt),
   data? : String = "",
 ) -> CompositionEventInit {
   composition_event_init_ffi(

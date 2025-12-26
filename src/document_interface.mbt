@@ -821,7 +821,7 @@ extern "js" fn document_create_node_iterator_ffi(
 impl TDocument with create_node_iterator(
   self : Self,
   root : &TNode,
-  what_to_show? : UInt = 0xFFFFFFFF,
+  what_to_show? : UInt = (0xFFFFFFFF : UInt),
   filter? : NodeFilter = JsValue::null(),
 ) -> NodeIterator {
   document_create_node_iterator_ffi(
@@ -844,7 +844,7 @@ extern "js" fn document_create_tree_walker_ffi(
 impl TDocument with create_tree_walker(
   self : Self,
   root : &TNode,
-  what_to_show? : UInt = 0xFFFFFFFF,
+  what_to_show? : UInt = (0xFFFFFFFF : UInt),
   filter? : NodeFilter = JsValue::null(),
 ) -> TreeWalker {
   document_create_tree_walker_ffi(
@@ -1754,7 +1754,7 @@ impl TDocument with evaluate(
   expression : String,
   context_node : &TNode,
   resolver? : XPathNSResolver = JsValue::null(),
-  type_? : UInt = 0,
+  type_? : UInt = (0 : UInt),
   result? : &TXPathResult = JsValue::null(),
 ) -> XPathResult {
   document_evaluate_ffi(

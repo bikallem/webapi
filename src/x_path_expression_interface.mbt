@@ -37,7 +37,7 @@ extern "js" fn x_path_expression_evaluate_ffi(
 impl TXPathExpression with evaluate(
   self : Self,
   context_node : &TNode,
-  type_? : UInt = 0,
+  type_? : UInt = (0 : UInt),
   result? : &TXPathResult = JsValue::null(),
 ) -> XPathResult {
   x_path_expression_evaluate_ffi(

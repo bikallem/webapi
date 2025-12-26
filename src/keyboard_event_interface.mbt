@@ -188,7 +188,7 @@ impl TKeyboardEvent with init_keyboard_event(
   cancelable_arg? : Bool = false,
   view_arg? : &TWindow = JsValue::null(),
   key_arg? : String = "",
-  location_arg? : UInt = 0,
+  location_arg? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
   alt_key? : Bool = false,
   shift_key? : Bool = false,

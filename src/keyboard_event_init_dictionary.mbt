@@ -77,11 +77,11 @@ pub fn KeyboardEventInit::new(
   modifier_symbol_lock? : Bool = false,
   key? : String = "",
   code? : String = "",
-  location? : UInt = 0,
+  location? : UInt = (0 : UInt),
   repeat? : Bool = false,
   is_composing? : Bool = false,
-  char_code? : UInt = 0,
-  key_code? : UInt = 0,
+  char_code? : UInt = (0 : UInt),
+  key_code? : UInt = (0 : UInt),
 ) -> KeyboardEventInit {
   keyboard_event_init_ffi(
     TJsValue::to_js(ctrl_key),

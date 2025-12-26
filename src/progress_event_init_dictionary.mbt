@@ -35,8 +35,8 @@ pub fn ProgressEventInit::new(
   cancelable? : Bool = false,
   composed? : Bool = false,
   length_computable? : Bool = false,
-  loaded? : Double = 0,
-  total? : Double = 0,
+  loaded? : Double = (0 : Double),
+  total? : Double = (0 : Double),
 ) -> ProgressEventInit {
   progress_event_init_ffi(
     TJsValue::to_js(bubbles),

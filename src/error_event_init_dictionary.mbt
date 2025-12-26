@@ -40,8 +40,8 @@ pub fn ErrorEventInit::new(
   composed? : Bool = false,
   message? : String = "",
   filename? : String = "",
-  lineno? : UInt = 0,
-  colno? : UInt = 0,
+  lineno? : UInt = (0 : UInt),
+  colno? : UInt = (0 : UInt),
   error? : JsValue,
 ) -> ErrorEventInit {
   error_event_init_ffi(

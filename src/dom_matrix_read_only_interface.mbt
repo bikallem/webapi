@@ -351,9 +351,9 @@ extern "js" fn dom_matrix_read_only_translate_ffi(
 ///|
 impl TDOMMatrixReadOnly with translate(
   self : Self,
-  tx? : Double = 0,
-  ty? : Double = 0,
-  tz? : Double = 0,
+  tx? : Double = (0 : Double),
+  ty? : Double = (0 : Double),
+  tz? : Double = (0 : Double),
 ) -> DOMMatrix {
   dom_matrix_read_only_translate_ffi(
     TJsValue::to_js(self),
@@ -377,12 +377,12 @@ extern "js" fn dom_matrix_read_only_scale_ffi(
 ///|
 impl TDOMMatrixReadOnly with scale(
   self : Self,
-  scale_x? : Double = 1,
+  scale_x? : Double = (1 : Double),
   scale_y? : Double,
-  scale_z? : Double = 1,
-  origin_x? : Double = 0,
-  origin_y? : Double = 0,
-  origin_z? : Double = 0,
+  scale_z? : Double = (1 : Double),
+  origin_x? : Double = (0 : Double),
+  origin_y? : Double = (0 : Double),
+  origin_z? : Double = (0 : Double),
 ) -> DOMMatrix {
   dom_matrix_read_only_scale_ffi(
     TJsValue::to_js(self),
@@ -405,8 +405,8 @@ extern "js" fn dom_matrix_read_only_scale_non_uniform_ffi(
 ///|
 impl TDOMMatrixReadOnly with scale_non_uniform(
   self : Self,
-  scale_x? : Double = 1,
-  scale_y? : Double = 1,
+  scale_x? : Double = (1 : Double),
+  scale_y? : Double = (1 : Double),
 ) -> DOMMatrix {
   dom_matrix_read_only_scale_non_uniform_ffi(
     TJsValue::to_js(self),
@@ -427,10 +427,10 @@ extern "js" fn dom_matrix_read_only_scale3d_ffi(
 ///|
 impl TDOMMatrixReadOnly with scale3d(
   self : Self,
-  scale? : Double = 1,
-  origin_x? : Double = 0,
-  origin_y? : Double = 0,
-  origin_z? : Double = 0,
+  scale? : Double = (1 : Double),
+  origin_x? : Double = (0 : Double),
+  origin_y? : Double = (0 : Double),
+  origin_z? : Double = (0 : Double),
 ) -> DOMMatrix {
   dom_matrix_read_only_scale3d_ffi(
     TJsValue::to_js(self),
@@ -452,7 +452,7 @@ extern "js" fn dom_matrix_read_only_rotate_ffi(
 ///|
 impl TDOMMatrixReadOnly with rotate(
   self : Self,
-  rot_x? : Double = 0,
+  rot_x? : Double = (0 : Double),
   rot_y? : Double,
   rot_z? : Double,
 ) -> DOMMatrix {
@@ -474,8 +474,8 @@ extern "js" fn dom_matrix_read_only_rotate_from_vector_ffi(
 ///|
 impl TDOMMatrixReadOnly with rotate_from_vector(
   self : Self,
-  x? : Double = 0,
-  y? : Double = 0,
+  x? : Double = (0 : Double),
+  y? : Double = (0 : Double),
 ) -> DOMMatrix {
   dom_matrix_read_only_rotate_from_vector_ffi(
     TJsValue::to_js(self),
@@ -496,10 +496,10 @@ extern "js" fn dom_matrix_read_only_rotate_axis_angle_ffi(
 ///|
 impl TDOMMatrixReadOnly with rotate_axis_angle(
   self : Self,
-  x? : Double = 0,
-  y? : Double = 0,
-  z? : Double = 0,
-  angle? : Double = 0,
+  x? : Double = (0 : Double),
+  y? : Double = (0 : Double),
+  z? : Double = (0 : Double),
+  angle? : Double = (0 : Double),
 ) -> DOMMatrix {
   dom_matrix_read_only_rotate_axis_angle_ffi(
     TJsValue::to_js(self),
@@ -517,7 +517,7 @@ extern "js" fn dom_matrix_read_only_skew_x_ffi(
 ) -> DOMMatrix = "(obj, sx) => obj.skewX(obj, sx)"
 
 ///|
-impl TDOMMatrixReadOnly with skew_x(self : Self, sx? : Double = 0) -> DOMMatrix {
+impl TDOMMatrixReadOnly with skew_x(self : Self, sx? : Double = (0 : Double)) -> DOMMatrix {
   dom_matrix_read_only_skew_x_ffi(TJsValue::to_js(self), TJsValue::to_js(sx))
 }
 
@@ -528,7 +528,7 @@ extern "js" fn dom_matrix_read_only_skew_y_ffi(
 ) -> DOMMatrix = "(obj, sy) => obj.skewY(obj, sy)"
 
 ///|
-impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double = 0) -> DOMMatrix {
+impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double = (0 : Double)) -> DOMMatrix {
   dom_matrix_read_only_skew_y_ffi(TJsValue::to_js(self), TJsValue::to_js(sy))
 }
 

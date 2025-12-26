@@ -80,7 +80,7 @@ impl TUIEvent with init_ui_event(
   bubbles_arg? : Bool = false,
   cancelable_arg? : Bool = false,
   view_arg? : &TWindow = JsValue::null(),
-  detail_arg? : Int = 0,
+  detail_arg? : Int = (0 : Int),
 ) -> Unit {
   ui_event_init_ui_event_ffi(
     TJsValue::to_js(self),

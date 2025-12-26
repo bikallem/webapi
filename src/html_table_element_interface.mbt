@@ -244,7 +244,7 @@ extern "js" fn html_table_element_insert_row_ffi(
 ) -> HTMLTableRowElement = "(obj, index) => obj.insertRow(obj, index)"
 
 ///|
-impl THTMLTableElement with insert_row(self : Self, index? : Int = -1) -> HTMLTableRowElement {
+impl THTMLTableElement with insert_row(self : Self, index? : Int = (-1 : Int)) -> HTMLTableRowElement {
   html_table_element_insert_row_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(index),

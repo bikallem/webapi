@@ -3039,7 +3039,7 @@ extern "js" fn window_set_timeout_ffi(
 impl TWindow with set_timeout(
   self : Self,
   handler : TimerHandler,
-  timeout? : Int = 0,
+  timeout? : Int = (0 : Int),
   arguments : JsValue,
 ) -> Int {
   window_set_timeout_ffi(
@@ -3054,7 +3054,7 @@ impl TWindow with set_timeout(
 extern "js" fn window_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearTimeout(obj, id)"
 
 ///|
-impl TWindow with clear_timeout(self : Self, id? : Int = 0) -> Unit {
+impl TWindow with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
   window_clear_timeout_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
 }
 
@@ -3070,7 +3070,7 @@ extern "js" fn window_set_interval_ffi(
 impl TWindow with set_interval(
   self : Self,
   handler : TimerHandler,
-  timeout? : Int = 0,
+  timeout? : Int = (0 : Int),
   arguments : JsValue,
 ) -> Int {
   window_set_interval_ffi(
@@ -3085,7 +3085,7 @@ impl TWindow with set_interval(
 extern "js" fn window_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearInterval(obj, id)"
 
 ///|
-impl TWindow with clear_interval(self : Self, id? : Int = 0) -> Unit {
+impl TWindow with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
   window_clear_interval_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
 }
 

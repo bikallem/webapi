@@ -35,8 +35,8 @@ pub fn UIEventInit::new(
   cancelable? : Bool = false,
   composed? : Bool = false,
   view? : &TWindow = JsValue::null(),
-  detail? : Int = 0,
-  which? : UInt = 0,
+  detail? : Int = (0 : Int),
+  which? : UInt = (0 : UInt),
 ) -> UIEventInit {
   ui_event_init_ffi(
     TJsValue::to_js(bubbles),

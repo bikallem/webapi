@@ -25,8 +25,13 @@ impl TJsValue with is_null(self : Self) -> Bool {
 }
 
 ///|
+extern "js" fn undefined_ffi() -> JsValue = "() => undefined"
+
+///|
 /// Get JavaScript undefined value
-pub fn JsValue::undefined() -> JsValue = "JsValue" "undefined"
+pub fn JsValue::undefined() -> JsValue {
+  undefined_ffi()
+}
 
 ///|
 fn js_null_ffi() -> JsValue = "JsValue" "null"

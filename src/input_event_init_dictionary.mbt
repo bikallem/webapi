@@ -32,8 +32,8 @@ extern "js" fn input_event_init_ffi(
 ///|
 pub fn InputEventInit::new(
   view? : &TWindow = JsValue::null(),
-  detail? : Int = 0,
-  which? : UInt = 0,
+  detail? : Int = (0 : Int),
+  which? : UInt = (0 : UInt),
   data? : String = JsValue::null(),
   is_composing? : Bool = false,
   input_type? : String = "",

@@ -68,7 +68,7 @@ extern "js" fn css_style_sheet_insert_rule_ffi(
 impl TCSSStyleSheet with insert_rule(
   self : Self,
   rule : CSSOMString,
-  index? : UInt = 0,
+  index? : UInt = (0 : UInt),
 ) -> UInt {
   css_style_sheet_insert_rule_ffi(
     TJsValue::to_js(self),
@@ -150,6 +150,6 @@ extern "js" fn css_style_sheet_remove_rule_ffi(
 ) -> Unit = "(obj, index) => obj.removeRule(obj, index)"
 
 ///|
-impl TCSSStyleSheet with remove_rule(self : Self, index? : UInt = 0) -> Unit {
+impl TCSSStyleSheet with remove_rule(self : Self, index? : UInt = (0 : UInt)) -> Unit {
   css_style_sheet_remove_rule_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }

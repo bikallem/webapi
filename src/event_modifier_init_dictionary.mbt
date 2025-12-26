@@ -54,8 +54,8 @@ extern "js" fn event_modifier_init_ffi(
 ///|
 pub fn EventModifierInit::new(
   view? : &TWindow = JsValue::null(),
-  detail? : Int = 0,
-  which? : UInt = 0,
+  detail? : Int = (0 : Int),
+  which? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
   shift_key? : Bool = false,
   alt_key? : Bool = false,

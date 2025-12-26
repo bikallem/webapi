@@ -2203,7 +2203,7 @@ impl TCanvasRenderingContext2D with round_rect(
   y : Double,
   w : Double,
   h : Double,
-  radii? : &TCanvasRenderingContext2DRoundRectRadii = 0,
+  radii? : &TCanvasRenderingContext2DRoundRectRadii = (0 : Double),
 ) -> Unit {
   canvas_rendering_context2d_round_rect_ffi(
     TJsValue::to_js(self),

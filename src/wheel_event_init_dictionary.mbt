@@ -41,17 +41,17 @@ extern "js" fn wheel_event_init_ffi(
 
 ///|
 pub fn WheelEventInit::new(
-  screen_x? : Int = 0,
-  screen_y? : Int = 0,
-  client_x? : Int = 0,
-  client_y? : Int = 0,
-  button? : Int = 0,
-  buttons? : UInt = 0,
+  screen_x? : Int = (0 : Int),
+  screen_y? : Int = (0 : Int),
+  client_x? : Int = (0 : Int),
+  client_y? : Int = (0 : Int),
+  button? : Int = (0 : Int),
+  buttons? : UInt = (0 : UInt),
   related_target? : &TEventTarget = JsValue::null(),
-  delta_x? : Double = 0.0,
-  delta_y? : Double = 0.0,
-  delta_z? : Double = 0.0,
-  delta_mode? : UInt = 0,
+  delta_x? : Double = (0.0 : Double),
+  delta_y? : Double = (0.0 : Double),
+  delta_z? : Double = (0.0 : Double),
+  delta_mode? : UInt = (0 : UInt),
 ) -> WheelEventInit {
   wheel_event_init_ffi(
     TJsValue::to_js(screen_x),

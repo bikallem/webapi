@@ -2240,7 +2240,7 @@ impl TOffscreenCanvasRenderingContext2D with round_rect(
   y : Double,
   w : Double,
   h : Double,
-  radii? : &TOffscreenCanvasRenderingContext2DRoundRectRadii = 0,
+  radii? : &TOffscreenCanvasRenderingContext2DRoundRectRadii = (0 : Double),
 ) -> Unit {
   offscreen_canvas_rendering_context2d_round_rect_ffi(
     TJsValue::to_js(self),

@@ -19,8 +19,11 @@ pub fn mbt_code_gen(Array[Emit]) -> String
 pub enum ArgMbtType {
   Self
   Other(String)
-  Union(String, Bool)
+  Primitive(String)
+  Union(UnionType)
   Interface(String)
+  Enum(String)
+  Dictionary(String)
 }
 pub impl Eq for ArgMbtType
 pub impl Hash for ArgMbtType
@@ -163,6 +166,16 @@ pub(all) struct TypedefEmitter {
   type_registry : @type_registry.TypeRegistry
 }
 pub impl Emitter for TypedefEmitter
+
+pub struct UnionType {
+  name : String
+  has_undefined : Bool
+  options : Array[ArgMbtType]
+}
+pub impl Eq for UnionType
+pub impl Hash for UnionType
+pub impl Show for UnionType
+pub impl ToJson for UnionType
 
 // Type aliases
 

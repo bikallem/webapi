@@ -91,7 +91,10 @@ extern "js" fn html_table_row_element_insert_cell_ffi(
 ) -> HTMLTableCellElement = "(obj, index) => obj.insertCell(obj, index)"
 
 ///|
-impl THTMLTableRowElement with insert_cell(self : Self, index? : Int = -1) -> HTMLTableCellElement {
+impl THTMLTableRowElement with insert_cell(
+  self : Self,
+  index? : Int = (-1 : Int),
+) -> HTMLTableCellElement {
   html_table_row_element_insert_cell_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(index),

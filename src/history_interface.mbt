@@ -75,7 +75,7 @@ impl THistory with state(self : Self) -> JsValue {
 extern "js" fn history_go_ffi(obj : JsValue, delta : JsValue) -> Unit = "(obj, delta) => obj.go(obj, delta)"
 
 ///|
-impl THistory with go(self : Self, delta? : Int = 0) -> Unit {
+impl THistory with go(self : Self, delta? : Int = (0 : Int)) -> Unit {
   history_go_ffi(TJsValue::to_js(self), TJsValue::to_js(delta))
 }
 

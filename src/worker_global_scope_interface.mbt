@@ -366,7 +366,7 @@ extern "js" fn worker_global_scope_set_timeout_ffi(
 impl TWorkerGlobalScope with set_timeout(
   self : Self,
   handler : TimerHandler,
-  timeout? : Int = 0,
+  timeout? : Int = (0 : Int),
   arguments : JsValue,
 ) -> Int {
   worker_global_scope_set_timeout_ffi(
@@ -384,7 +384,7 @@ extern "js" fn worker_global_scope_clear_timeout_ffi(
 ) -> Unit = "(obj, id) => obj.clearTimeout(obj, id)"
 
 ///|
-impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = 0) -> Unit {
+impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
   worker_global_scope_clear_timeout_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
@@ -403,7 +403,7 @@ extern "js" fn worker_global_scope_set_interval_ffi(
 impl TWorkerGlobalScope with set_interval(
   self : Self,
   handler : TimerHandler,
-  timeout? : Int = 0,
+  timeout? : Int = (0 : Int),
   arguments : JsValue,
 ) -> Int {
   worker_global_scope_set_interval_ffi(
@@ -421,7 +421,7 @@ extern "js" fn worker_global_scope_clear_interval_ffi(
 ) -> Unit = "(obj, id) => obj.clearInterval(obj, id)"
 
 ///|
-impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = 0) -> Unit {
+impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
   worker_global_scope_clear_interval_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),

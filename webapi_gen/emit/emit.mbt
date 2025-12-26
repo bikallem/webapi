@@ -40,15 +40,26 @@ pub struct MethodArg {
 pub enum ArgMbtType {
   Self // Represents 'self' argument  
   Other(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef, callback
-  Union(String, Bool) // Union type represented by a trait, Bool indicates if 'undefined' is an option
+  Primitive(String) // Primitive type, eg. Int, String, Bool
+  Union(UnionType) // Union type represented by a trait, Bool indicates if 'undefined' is an option
   Interface(String) // Interface type represented by a trait
+  Enum(String) // Enum type
+  Dictionary(String) // Dictionary type
+} derive(Show, ToJson, Eq, Hash)
+
+///|
+pub struct UnionType {
+  name : String
+  has_undefined : Bool
+  options : Array[ArgMbtType]
 } derive(Show, ToJson, Eq, Hash)
 
 ///|
 fn ArgMbtType::name(self : ArgMbtType) -> String {
   match self {
     Self => "Self"
-    Other(t) | Union(t, _) | Interface(t) => t
+    Union(t) => t.name
+    Other(t) | Interface(t) | Primitive(t) | Enum(t) | Dictionary(t) => t
   }
 }
 
@@ -382,47 +393,6 @@ fn pascal_case(s : String) -> String {
 }
 
 ///|
-fn arg_default_value(
-  default_value : @parser.DefaultValue,
-  arg_type : @parser.Type,
-  type_registry : @type_registry.TypeRegistry,
-) -> String {
-  fn mbt_type() {
-    match arg_type {
-      Identifier(name) => name
-      Union(options) =>
-        // if the arg type is a union, find the first identifier option and return it
-        loop options[:] {
-          [] => "JsValue" // shouldn't happen
-          [o, .. rest] =>
-            if o.type_ is Identifier(name) {
-              break name
-            } else {
-              continue rest
-            }
-        }
-      _ => "JsValue" // shouldn't happen
-    }
-  }
-
-  match default_value {
-    Null => "\{mbt_type()}::null()"
-    EmptyObject => "\{mbt_type()}::empty()" // A dictionary type
-    EmptySequence => "[]"
-    String(s) =>
-      if arg_type is Identifier(name) && type_registry.is_enum(name) {
-        // For enum types, convert string to enum variant
-        let enum_variant = enum_variant(s)
-        "\{name}::\{enum_variant}"
-      } else {
-        "\"\{s}\""
-      }
-    ConstValue(c) => const_value(c)
-    Undefined => "\{mbt_type()}::undefined()"
-  }
-}
-
-///|
 fn const_value(const_value : @parser.Const) -> String {
   match const_value {
     Boolean(b) => b
@@ -472,6 +442,31 @@ fn arg_mbt_type(
       Uint32Array => ArgMbtType::Other("Uint32Array")
       Uint8ClampedArray => ArgMbtType::Other("Uint8ClampedArray")
 
+      // String types
+      USVString => ArgMbtType::Primitive("String")
+      ByteString => ArgMbtType::Primitive("String")
+      DOMString => ArgMbtType::Primitive("String")
+
+      // Integer Types    
+      LongLong => ArgMbtType::Primitive("Int64") // 64-bit signed → Int64
+      Bigint => ArgMbtType::Primitive("Int64") // BigInt → Int64
+      UnsignedLong => ArgMbtType::Primitive("UInt") // 32-bit unsigned → UInt
+      UnsignedLongLong => ArgMbtType::Primitive("UInt64") // 64-bit unsigned → UInt64
+      UnsignedShort => ArgMbtType::Primitive("UInt") // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
+      Long => ArgMbtType::Primitive("Int") // 32-bit signed → Int
+      Short => ArgMbtType::Primitive("Int") // 16-bit signed → Int (Int16 exists but Int is more common)
+      Octet => ArgMbtType::Primitive("Byte") // 8-bit unsigned → Byte
+      Byte => ArgMbtType::Primitive("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
+
+      // Boolean type
+      Boolean => ArgMbtType::Primitive("Bool")
+
+      // Floating point types
+      Float => ArgMbtType::Primitive("Float") // 32-bit float → Float
+      Double => ArgMbtType::Primitive("Double") // 64-bit float → Double
+      UnrestrictedDouble => ArgMbtType::Primitive("Double") // 64-bit unrestricted float → Double
+      UnrestrictedFloat => ArgMbtType::Primitive("Float") // 32-bit unrestricted float → Float    
+
       // Other typed arrays
       DataView => ArgMbtType::Other("DataView")
       SharedArrayBuffer => ArgMbtType::Other("SharedArrayBuffer")
@@ -481,33 +476,14 @@ fn arg_mbt_type(
       Object => ArgMbtType::Other("JsValue")
       Any => ArgMbtType::Other("JsValue")
 
-      // String types
-      USVString => ArgMbtType::Other("String")
-      ByteString => ArgMbtType::Other("String")
-      DOMString => ArgMbtType::Other("String")
-
-      // Integer Types    
-      LongLong => ArgMbtType::Other("Int64") // 64-bit signed → Int64
-      Bigint => ArgMbtType::Other("Int64") // BigInt → Int64
-      UnsignedLong => ArgMbtType::Other("UInt") // 32-bit unsigned → UInt
-      UnsignedLongLong => ArgMbtType::Other("UInt64") // 64-bit unsigned → UInt64
-      UnsignedShort => ArgMbtType::Other("UInt") // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
-      Long => ArgMbtType::Other("Int") // 32-bit signed → Int
-      Short => ArgMbtType::Other("Int") // 16-bit signed → Int (Int16 exists but Int is more common)
-      Octet => ArgMbtType::Other("Byte") // 8-bit unsigned → Byte
-      Byte => ArgMbtType::Other("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
-      Boolean => ArgMbtType::Other("Bool")
-
-      // Floating point types
-      Float => ArgMbtType::Other("Float") // 32-bit float → Float
-      Double => ArgMbtType::Other("Double") // 64-bit float → Double
-      UnrestrictedDouble => ArgMbtType::Other("Double") // 64-bit unrestricted float → Double
-      UnrestrictedFloat => ArgMbtType::Other("Float") // 32-bit unrestricted float → Float    
-
       // Named types (interfaces, dictionaries, enums, typedefs, union options)
       Identifier(name) =>
         if type_registry.is_interface(name) {
           ArgMbtType::Interface(name)
+        } else if type_registry.is_enum(name) {
+          ArgMbtType::Enum(name)
+        } else if type_registry.is_dictionary(name) {
+          ArgMbtType::Dictionary(name)
         } else {
           ArgMbtType::Other(name)
         }
@@ -523,7 +499,7 @@ fn arg_mbt_type(
 
       // Void 
       // Majority of use cases of 'void' are for return types. They can also be used 
-      // in union types as an option, eg. (DOMString or void). In those case we map 
+      // in union types as an option, eg. (DOMString or undefined). In those case we map 
       // it to 'JsUndefined' type. See ArgMbtType::Union case below.      
       Undefined => ArgMbtType::Other("Unit")
 
@@ -556,6 +532,7 @@ fn arg_mbt_type(
         let union_trait_name = TraitName("T\{union_type_name}")
         emits.push(Emit::UnionArgTrait(union_trait_name))
         let mut has_undefined = false
+        let option_types : Array[ArgMbtType] = []
         for option in options {
           let is_undefined = option.type_ is Undefined
           let (mbt_type, option_emits) = go(
@@ -573,6 +550,7 @@ fn arg_mbt_type(
           } else {
             mbt_type
           }
+          option_types.push(mbt_type)
           emits.push_iter(option_emits.iter())
           let mbt_type = if option.type_ is Union(_) {
             "&T\{mbt_type.name()}"
@@ -583,7 +561,12 @@ fn arg_mbt_type(
             Emit::UnionArgTraitImpl(TypeName(mbt_type), union_trait_name),
           )
         }
-        ArgMbtType::Union(union_type_name, has_undefined)
+        let union_type = UnionType::{
+          name: union_type_name,
+          has_undefined,
+          options: option_types,
+        }
+        ArgMbtType::Union(union_type)
       }
 
       // TODO: rethink these mappings (Parameterized types)

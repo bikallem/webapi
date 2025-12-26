@@ -28,8 +28,8 @@ extern "js" fn focus_event_init_ffi(
 ///|
 pub fn FocusEventInit::new(
   view? : &TWindow = JsValue::null(),
-  detail? : Int = 0,
-  which? : UInt = 0,
+  detail? : Int = (0 : Int),
+  which? : UInt = (0 : UInt),
   related_target? : &TEventTarget = JsValue::null(),
 ) -> FocusEventInit {
   focus_event_init_ffi(

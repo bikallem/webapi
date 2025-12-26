@@ -28,10 +28,10 @@ extern "js" fn dom_rect_new_ffi(
 
 ///|
 pub fn DOMRect::new(
-  x? : Double = 0,
-  y? : Double = 0,
-  width? : Double = 0,
-  height? : Double = 0,
+  x? : Double = (0 : Double),
+  y? : Double = (0 : Double),
+  width? : Double = (0 : Double),
+  height? : Double = (0 : Double),
 ) -> DOMRect {
   dom_rect_new_ffi(
     TJsValue::to_js(x),

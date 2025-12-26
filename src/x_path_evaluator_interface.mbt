@@ -94,7 +94,7 @@ impl TXPathEvaluator with evaluate(
   expression : String,
   context_node : &TNode,
   resolver? : XPathNSResolver = JsValue::null(),
-  type_? : UInt = 0,
+  type_? : UInt = (0 : UInt),
   result? : &TXPathResult = JsValue::null(),
 ) -> XPathResult {
   x_path_evaluator_evaluate_ffi(

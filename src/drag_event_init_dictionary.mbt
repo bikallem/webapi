@@ -35,12 +35,12 @@ extern "js" fn drag_event_init_ffi(
 
 ///|
 pub fn DragEventInit::new(
-  screen_x? : Int = 0,
-  screen_y? : Int = 0,
-  client_x? : Int = 0,
-  client_y? : Int = 0,
-  button? : Int = 0,
-  buttons? : UInt = 0,
+  screen_x? : Int = (0 : Int),
+  screen_y? : Int = (0 : Int),
+  client_x? : Int = (0 : Int),
+  client_y? : Int = (0 : Int),
+  button? : Int = (0 : Int),
+  buttons? : UInt = (0 : UInt),
   related_target? : &TEventTarget = JsValue::null(),
   data_transfer? : &TDataTransfer = JsValue::null(),
 ) -> DragEventInit {

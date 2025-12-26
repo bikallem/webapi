@@ -44,7 +44,7 @@ extern "js" fn css_grouping_rule_insert_rule_ffi(
 impl TCSSGroupingRule with insert_rule(
   self : Self,
   rule : CSSOMString,
-  index? : UInt = 0,
+  index? : UInt = (0 : UInt),
 ) -> UInt {
   css_grouping_rule_insert_rule_ffi(
     TJsValue::to_js(self),

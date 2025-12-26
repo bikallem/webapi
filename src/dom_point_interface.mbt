@@ -28,10 +28,10 @@ extern "js" fn dom_point_new_ffi(
 
 ///|
 pub fn DOMPoint::new(
-  x? : Double = 0,
-  y? : Double = 0,
-  z? : Double = 0,
-  w? : Double = 1,
+  x? : Double = (0 : Double),
+  y? : Double = (0 : Double),
+  z? : Double = (0 : Double),
+  w? : Double = (1 : Double),
 ) -> DOMPoint {
   dom_point_new_ffi(
     TJsValue::to_js(x),
