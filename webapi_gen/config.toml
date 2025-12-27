@@ -20,7 +20,7 @@ core_specs = [
     "xhr",
 ]
 
-excluded_interfaces = []
+excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]
 
 excluded_callbacks = []
 
