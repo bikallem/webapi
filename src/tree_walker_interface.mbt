@@ -67,7 +67,7 @@ impl TTreeWalker with current_node(self : Self) -> Node {
 extern "js" fn tree_walker_set_current_node_ffi(
   obj : JsValue,
   current_node : JsValue,
-) -> Unit = "(obj, currentNode) => { obj.currentNode = currentNode; }"
+) -> Unit = "(obj, currentNode) => { obj.currentNode = current_node; }"
 
 ///|
 impl TTreeWalker with set_current_node(self : Self, current_node : Node) -> Unit {

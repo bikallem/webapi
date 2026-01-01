@@ -388,7 +388,7 @@ impl TElement with class_name(self : Self) -> String {
 extern "js" fn element_set_class_name_ffi(
   obj : JsValue,
   class_name : JsValue,
-) -> Unit = "(obj, className) => { obj.className = className; }"
+) -> Unit = "(obj, className) => { obj.className = class_name; }"
 
 ///|
 impl TElement with set_class_name(self : Self, class_name : String) -> Unit {
@@ -871,11 +871,11 @@ impl TElement with inner_html(self : Self) -> ElementInnerHTML {
 extern "js" fn element_set_inner_html_ffi(
   obj : JsValue,
   inner_html : JsValue,
-) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
+) -> Unit = "(obj, innerHTML) => { obj.innerHTML = inner_html; }"
 
 ///|
 impl TElement with set_inner_html(self : Self, inner_html : ElementInnerHTML) -> Unit {
-  element_set_inner_html_ffi(TJsValue::to_js(self), TJsValue::to_js(inner_html))
+  element_set_inner_html_ffi(TJsValue::to_js(self), inner_html.to_js())
 }
 
 ///|
@@ -890,11 +890,11 @@ impl TElement with outer_html(self : Self) -> ElementOuterHTML {
 extern "js" fn element_set_outer_html_ffi(
   obj : JsValue,
   outer_html : JsValue,
-) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outerHTML; }"
+) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outer_html; }"
 
 ///|
 impl TElement with set_outer_html(self : Self, outer_html : ElementOuterHTML) -> Unit {
-  element_set_outer_html_ffi(TJsValue::to_js(self), TJsValue::to_js(outer_html))
+  element_set_outer_html_ffi(TJsValue::to_js(self), outer_html.to_js())
 }
 
 ///|
@@ -1069,7 +1069,7 @@ impl TElement with scroll_top(self : Self) -> Double {
 extern "js" fn element_set_scroll_top_ffi(
   obj : JsValue,
   scroll_top : JsValue,
-) -> Unit = "(obj, scrollTop) => { obj.scrollTop = scrollTop; }"
+) -> Unit = "(obj, scrollTop) => { obj.scrollTop = scroll_top; }"
 
 ///|
 impl TElement with set_scroll_top(self : Self, scroll_top : Double) -> Unit {
@@ -1088,7 +1088,7 @@ impl TElement with scroll_left(self : Self) -> Double {
 extern "js" fn element_set_scroll_left_ffi(
   obj : JsValue,
   scroll_left : JsValue,
-) -> Unit = "(obj, scrollLeft) => { obj.scrollLeft = scrollLeft; }"
+) -> Unit = "(obj, scrollLeft) => { obj.scrollLeft = scroll_left; }"
 
 ///|
 impl TElement with set_scroll_left(self : Self, scroll_left : Double) -> Unit {

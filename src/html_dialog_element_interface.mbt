@@ -82,7 +82,7 @@ impl THTMLDialogElement with return_value(self : Self) -> String {
 extern "js" fn html_dialog_element_set_return_value_ffi(
   obj : JsValue,
   return_value : JsValue,
-) -> Unit = "(obj, returnValue) => { obj.returnValue = returnValue; }"
+) -> Unit = "(obj, returnValue) => { obj.returnValue = return_value; }"
 
 ///|
 impl THTMLDialogElement with set_return_value(
@@ -107,7 +107,7 @@ impl THTMLDialogElement with closed_by(self : Self) -> String {
 extern "js" fn html_dialog_element_set_closed_by_ffi(
   obj : JsValue,
   closed_by : JsValue,
-) -> Unit = "(obj, closedBy) => { obj.closedBy = closedBy; }"
+) -> Unit = "(obj, closedBy) => { obj.closedBy = closed_by; }"
 
 ///|
 impl THTMLDialogElement with set_closed_by(self : Self, closed_by : String) -> Unit {

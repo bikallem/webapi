@@ -172,7 +172,7 @@ impl TSVGAElement with type_(self : Self) -> String {
 extern "js" fn svga_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
+) -> Unit = "(obj, type) => { obj.type = type_; }"
 
 ///|
 impl TSVGAElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -191,7 +191,7 @@ impl TSVGAElement with referrer_policy(self : Self) -> String {
 extern "js" fn svga_element_set_referrer_policy_ffi(
   obj : JsValue,
   referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrer_policy; }"
 
 ///|
 impl TSVGAElement with set_referrer_policy(

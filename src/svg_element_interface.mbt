@@ -1954,7 +1954,7 @@ impl TSVGElement with tab_index(self : Self) -> Int {
 extern "js" fn svg_element_set_tab_index_ffi(
   obj : JsValue,
   tab_index : JsValue,
-) -> Unit = "(obj, tabIndex) => { obj.tabIndex = tabIndex; }"
+) -> Unit = "(obj, tabIndex) => { obj.tabIndex = tab_index; }"
 
 ///|
 impl TSVGElement with set_tab_index(self : Self, tab_index : Int) -> Unit {

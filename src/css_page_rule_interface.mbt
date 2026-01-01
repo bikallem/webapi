@@ -40,7 +40,7 @@ impl TCSSPageRule with selector_text(self : Self) -> CSSOMString {
 extern "js" fn css_page_rule_set_selector_text_ffi(
   obj : JsValue,
   selector_text : JsValue,
-) -> Unit = "(obj, selectorText) => { obj.selectorText = selectorText; }"
+) -> Unit = "(obj, selectorText) => { obj.selectorText = selector_text; }"
 
 ///|
 impl TCSSPageRule with set_selector_text(

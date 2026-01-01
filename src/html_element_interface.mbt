@@ -387,7 +387,7 @@ extern "js" fn html_element_set_hidden_ffi(
 
 ///|
 impl THTMLElement with set_hidden(self : Self, hidden : HTMLElementHidden) -> Unit {
-  html_element_set_hidden_ffi(TJsValue::to_js(self), TJsValue::to_js(hidden))
+  html_element_set_hidden_ffi(TJsValue::to_js(self), hidden.to_js())
 }
 
 ///|
@@ -429,7 +429,7 @@ impl THTMLElement with access_key(self : Self) -> String {
 extern "js" fn html_element_set_access_key_ffi(
   obj : JsValue,
   access_key : JsValue,
-) -> Unit = "(obj, accessKey) => { obj.accessKey = accessKey; }"
+) -> Unit = "(obj, accessKey) => { obj.accessKey = access_key; }"
 
 ///|
 impl THTMLElement with set_access_key(self : Self, access_key : String) -> Unit {
@@ -503,7 +503,7 @@ impl THTMLElement with writing_suggestions(self : Self) -> String {
 extern "js" fn html_element_set_writing_suggestions_ffi(
   obj : JsValue,
   writing_suggestions : JsValue,
-) -> Unit = "(obj, writingSuggestions) => { obj.writingSuggestions = writingSuggestions; }"
+) -> Unit = "(obj, writingSuggestions) => { obj.writingSuggestions = writing_suggestions; }"
 
 ///|
 impl THTMLElement with set_writing_suggestions(
@@ -572,7 +572,7 @@ impl THTMLElement with inner_text(self : Self) -> String {
 extern "js" fn html_element_set_inner_text_ffi(
   obj : JsValue,
   inner_text : JsValue,
-) -> Unit = "(obj, innerText) => { obj.innerText = innerText; }"
+) -> Unit = "(obj, innerText) => { obj.innerText = inner_text; }"
 
 ///|
 impl THTMLElement with set_inner_text(self : Self, inner_text : String) -> Unit {
@@ -594,7 +594,7 @@ impl THTMLElement with outer_text(self : Self) -> String {
 extern "js" fn html_element_set_outer_text_ffi(
   obj : JsValue,
   outer_text : JsValue,
-) -> Unit = "(obj, outerText) => { obj.outerText = outerText; }"
+) -> Unit = "(obj, outerText) => { obj.outerText = outer_text; }"
 
 ///|
 impl THTMLElement with set_outer_text(self : Self, outer_text : String) -> Unit {
@@ -681,7 +681,7 @@ impl THTMLElement with heading_offset(self : Self) -> UInt {
 extern "js" fn html_element_set_heading_offset_ffi(
   obj : JsValue,
   heading_offset : JsValue,
-) -> Unit = "(obj, headingOffset) => { obj.headingOffset = headingOffset; }"
+) -> Unit = "(obj, headingOffset) => { obj.headingOffset = heading_offset; }"
 
 ///|
 impl THTMLElement with set_heading_offset(self : Self, heading_offset : UInt) -> Unit {
@@ -703,7 +703,7 @@ impl THTMLElement with heading_reset(self : Self) -> Bool {
 extern "js" fn html_element_set_heading_reset_ffi(
   obj : JsValue,
   heading_reset : JsValue,
-) -> Unit = "(obj, headingReset) => { obj.headingReset = headingReset; }"
+) -> Unit = "(obj, headingReset) => { obj.headingReset = heading_reset; }"
 
 ///|
 impl THTMLElement with set_heading_reset(self : Self, heading_reset : Bool) -> Unit {
@@ -2463,7 +2463,7 @@ impl THTMLElement with content_editable(self : Self) -> String {
 extern "js" fn html_element_set_content_editable_ffi(
   obj : JsValue,
   content_editable : JsValue,
-) -> Unit = "(obj, contentEditable) => { obj.contentEditable = contentEditable; }"
+) -> Unit = "(obj, contentEditable) => { obj.contentEditable = content_editable; }"
 
 ///|
 impl THTMLElement with set_content_editable(
@@ -2488,7 +2488,7 @@ impl THTMLElement with enter_key_hint(self : Self) -> String {
 extern "js" fn html_element_set_enter_key_hint_ffi(
   obj : JsValue,
   enter_key_hint : JsValue,
-) -> Unit = "(obj, enterKeyHint) => { obj.enterKeyHint = enterKeyHint; }"
+) -> Unit = "(obj, enterKeyHint) => { obj.enterKeyHint = enter_key_hint; }"
 
 ///|
 impl THTMLElement with set_enter_key_hint(self : Self, enter_key_hint : String) -> Unit {
@@ -2518,7 +2518,7 @@ impl THTMLElement with input_mode(self : Self) -> String {
 extern "js" fn html_element_set_input_mode_ffi(
   obj : JsValue,
   input_mode : JsValue,
-) -> Unit = "(obj, inputMode) => { obj.inputMode = inputMode; }"
+) -> Unit = "(obj, inputMode) => { obj.inputMode = input_mode; }"
 
 ///|
 impl THTMLElement with set_input_mode(self : Self, input_mode : String) -> Unit {
@@ -2589,7 +2589,7 @@ impl THTMLElement with tab_index(self : Self) -> Int {
 extern "js" fn html_element_set_tab_index_ffi(
   obj : JsValue,
   tab_index : JsValue,
-) -> Unit = "(obj, tabIndex) => { obj.tabIndex = tabIndex; }"
+) -> Unit = "(obj, tabIndex) => { obj.tabIndex = tab_index; }"
 
 ///|
 impl THTMLElement with set_tab_index(self : Self, tab_index : Int) -> Unit {

@@ -119,7 +119,7 @@ impl THTMLOptionElement with default_selected(self : Self) -> Bool {
 extern "js" fn html_option_element_set_default_selected_ffi(
   obj : JsValue,
   default_selected : JsValue,
-) -> Unit = "(obj, defaultSelected) => { obj.defaultSelected = defaultSelected; }"
+) -> Unit = "(obj, defaultSelected) => { obj.defaultSelected = default_selected; }"
 
 ///|
 impl THTMLOptionElement with set_default_selected(

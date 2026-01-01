@@ -99,7 +99,7 @@ impl THTMLMarqueeElement with bg_color(self : Self) -> String {
 extern "js" fn html_marquee_element_set_bg_color_ffi(
   obj : JsValue,
   bg_color : JsValue,
-) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bg_color; }"
 
 ///|
 impl THTMLMarqueeElement with set_bg_color(self : Self, bg_color : String) -> Unit {
@@ -187,7 +187,7 @@ impl THTMLMarqueeElement with loop_(self : Self) -> Int {
 extern "js" fn html_marquee_element_set_loop_ffi(
   obj : JsValue,
   loop_ : JsValue,
-) -> Unit = "(obj, loop) => { obj.loop = loop; }"
+) -> Unit = "(obj, loop) => { obj.loop = loop_; }"
 
 ///|
 impl THTMLMarqueeElement with set_loop_(self : Self, loop_ : Int) -> Unit {
@@ -209,7 +209,7 @@ impl THTMLMarqueeElement with scroll_amount(self : Self) -> UInt {
 extern "js" fn html_marquee_element_set_scroll_amount_ffi(
   obj : JsValue,
   scroll_amount : JsValue,
-) -> Unit = "(obj, scrollAmount) => { obj.scrollAmount = scrollAmount; }"
+) -> Unit = "(obj, scrollAmount) => { obj.scrollAmount = scroll_amount; }"
 
 ///|
 impl THTMLMarqueeElement with set_scroll_amount(
@@ -234,7 +234,7 @@ impl THTMLMarqueeElement with scroll_delay(self : Self) -> UInt {
 extern "js" fn html_marquee_element_set_scroll_delay_ffi(
   obj : JsValue,
   scroll_delay : JsValue,
-) -> Unit = "(obj, scrollDelay) => { obj.scrollDelay = scrollDelay; }"
+) -> Unit = "(obj, scrollDelay) => { obj.scrollDelay = scroll_delay; }"
 
 ///|
 impl THTMLMarqueeElement with set_scroll_delay(self : Self, scroll_delay : UInt) -> Unit {
@@ -256,7 +256,7 @@ impl THTMLMarqueeElement with true_speed(self : Self) -> Bool {
 extern "js" fn html_marquee_element_set_true_speed_ffi(
   obj : JsValue,
   true_speed : JsValue,
-) -> Unit = "(obj, trueSpeed) => { obj.trueSpeed = trueSpeed; }"
+) -> Unit = "(obj, trueSpeed) => { obj.trueSpeed = true_speed; }"
 
 ///|
 impl THTMLMarqueeElement with set_true_speed(self : Self, true_speed : Bool) -> Unit {

@@ -62,8 +62,8 @@ pub impl TPath2DRoundRectRadii2 for Double with to_js(self : Double) -> JsValue 
 pub impl TPath2DRoundRectRadii2 for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
 
 ///|
-pub impl TPath2DRoundRectRadii for Array[Path2DRoundRectRadii2] with to_js(
-  self : Array[Path2DRoundRectRadii2],
+pub impl TPath2DRoundRectRadii for Array[&TPath2DRoundRectRadii2] with to_js(
+  self : Array[&TPath2DRoundRectRadii2],
 ) -> JsValue = "%identity"
 
 ///|

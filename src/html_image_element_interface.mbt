@@ -182,7 +182,7 @@ impl THTMLImageElement with cross_origin(self : Self) -> String {
 extern "js" fn html_image_element_set_cross_origin_ffi(
   obj : JsValue,
   cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = cross_origin; }"
 
 ///|
 impl THTMLImageElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {
@@ -204,7 +204,7 @@ impl THTMLImageElement with use_map(self : Self) -> String {
 extern "js" fn html_image_element_set_use_map_ffi(
   obj : JsValue,
   use_map : JsValue,
-) -> Unit = "(obj, useMap) => { obj.useMap = useMap; }"
+) -> Unit = "(obj, useMap) => { obj.useMap = use_map; }"
 
 ///|
 impl THTMLImageElement with set_use_map(self : Self, use_map : String) -> Unit {
@@ -226,7 +226,7 @@ impl THTMLImageElement with is_map(self : Self) -> Bool {
 extern "js" fn html_image_element_set_is_map_ffi(
   obj : JsValue,
   is_map : JsValue,
-) -> Unit = "(obj, isMap) => { obj.isMap = isMap; }"
+) -> Unit = "(obj, isMap) => { obj.isMap = is_map; }"
 
 ///|
 impl THTMLImageElement with set_is_map(self : Self, is_map : Bool) -> Unit {
@@ -324,7 +324,7 @@ impl THTMLImageElement with referrer_policy(self : Self) -> String {
 extern "js" fn html_image_element_set_referrer_policy_ffi(
   obj : JsValue,
   referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrer_policy; }"
 
 ///|
 impl THTMLImageElement with set_referrer_policy(
@@ -393,7 +393,7 @@ impl THTMLImageElement with fetch_priority(self : Self) -> String {
 extern "js" fn html_image_element_set_fetch_priority_ffi(
   obj : JsValue,
   fetch_priority : JsValue,
-) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
+) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetch_priority; }"
 
 ///|
 impl THTMLImageElement with set_fetch_priority(
@@ -533,7 +533,7 @@ impl THTMLImageElement with long_desc(self : Self) -> String {
 extern "js" fn html_image_element_set_long_desc_ffi(
   obj : JsValue,
   long_desc : JsValue,
-) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
+) -> Unit = "(obj, longDesc) => { obj.longDesc = long_desc; }"
 
 ///|
 impl THTMLImageElement with set_long_desc(self : Self, long_desc : String) -> Unit {

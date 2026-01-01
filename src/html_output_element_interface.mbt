@@ -112,7 +112,7 @@ impl THTMLOutputElement with default_value(self : Self) -> String {
 extern "js" fn html_output_element_set_default_value_ffi(
   obj : JsValue,
   default_value : JsValue,
-) -> Unit = "(obj, defaultValue) => { obj.defaultValue = defaultValue; }"
+) -> Unit = "(obj, defaultValue) => { obj.defaultValue = default_value; }"
 
 ///|
 impl THTMLOutputElement with set_default_value(

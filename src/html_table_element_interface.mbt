@@ -135,7 +135,7 @@ impl THTMLTableElement with t_head(self : Self) -> HTMLTableSectionElement {
 extern "js" fn html_table_element_set_t_head_ffi(
   obj : JsValue,
   t_head : JsValue,
-) -> Unit = "(obj, tHead) => { obj.tHead = tHead; }"
+) -> Unit = "(obj, tHead) => { obj.tHead = t_head; }"
 
 ///|
 impl THTMLTableElement with set_t_head(
@@ -180,7 +180,7 @@ impl THTMLTableElement with t_foot(self : Self) -> HTMLTableSectionElement {
 extern "js" fn html_table_element_set_t_foot_ffi(
   obj : JsValue,
   t_foot : JsValue,
-) -> Unit = "(obj, tFoot) => { obj.tFoot = tFoot; }"
+) -> Unit = "(obj, tFoot) => { obj.tFoot = t_foot; }"
 
 ///|
 impl THTMLTableElement with set_t_foot(
@@ -409,7 +409,7 @@ impl THTMLTableElement with bg_color(self : Self) -> String {
 extern "js" fn html_table_element_set_bg_color_ffi(
   obj : JsValue,
   bg_color : JsValue,
-) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bg_color; }"
 
 ///|
 impl THTMLTableElement with set_bg_color(self : Self, bg_color : String) -> Unit {
@@ -431,7 +431,7 @@ impl THTMLTableElement with cell_padding(self : Self) -> String {
 extern "js" fn html_table_element_set_cell_padding_ffi(
   obj : JsValue,
   cell_padding : JsValue,
-) -> Unit = "(obj, cellPadding) => { obj.cellPadding = cellPadding; }"
+) -> Unit = "(obj, cellPadding) => { obj.cellPadding = cell_padding; }"
 
 ///|
 impl THTMLTableElement with set_cell_padding(self : Self, cell_padding : String) -> Unit {
@@ -453,7 +453,7 @@ impl THTMLTableElement with cell_spacing(self : Self) -> String {
 extern "js" fn html_table_element_set_cell_spacing_ffi(
   obj : JsValue,
   cell_spacing : JsValue,
-) -> Unit = "(obj, cellSpacing) => { obj.cellSpacing = cellSpacing; }"
+) -> Unit = "(obj, cellSpacing) => { obj.cellSpacing = cell_spacing; }"
 
 ///|
 impl THTMLTableElement with set_cell_spacing(self : Self, cell_spacing : String) -> Unit {

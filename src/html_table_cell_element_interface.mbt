@@ -84,7 +84,7 @@ impl THTMLTableCellElement with col_span(self : Self) -> UInt {
 extern "js" fn html_table_cell_element_set_col_span_ffi(
   obj : JsValue,
   col_span : JsValue,
-) -> Unit = "(obj, colSpan) => { obj.colSpan = colSpan; }"
+) -> Unit = "(obj, colSpan) => { obj.colSpan = col_span; }"
 
 ///|
 impl THTMLTableCellElement with set_col_span(self : Self, col_span : UInt) -> Unit {
@@ -106,7 +106,7 @@ impl THTMLTableCellElement with row_span(self : Self) -> UInt {
 extern "js" fn html_table_cell_element_set_row_span_ffi(
   obj : JsValue,
   row_span : JsValue,
-) -> Unit = "(obj, rowSpan) => { obj.rowSpan = rowSpan; }"
+) -> Unit = "(obj, rowSpan) => { obj.rowSpan = row_span; }"
 
 ///|
 impl THTMLTableCellElement with set_row_span(self : Self, row_span : UInt) -> Unit {
@@ -309,7 +309,7 @@ impl THTMLTableCellElement with ch_off(self : Self) -> String {
 extern "js" fn html_table_cell_element_set_ch_off_ffi(
   obj : JsValue,
   ch_off : JsValue,
-) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
+) -> Unit = "(obj, chOff) => { obj.chOff = ch_off; }"
 
 ///|
 impl THTMLTableCellElement with set_ch_off(self : Self, ch_off : String) -> Unit {
@@ -331,7 +331,7 @@ impl THTMLTableCellElement with no_wrap(self : Self) -> Bool {
 extern "js" fn html_table_cell_element_set_no_wrap_ffi(
   obj : JsValue,
   no_wrap : JsValue,
-) -> Unit = "(obj, noWrap) => { obj.noWrap = noWrap; }"
+) -> Unit = "(obj, noWrap) => { obj.noWrap = no_wrap; }"
 
 ///|
 impl THTMLTableCellElement with set_no_wrap(self : Self, no_wrap : Bool) -> Unit {
@@ -353,7 +353,7 @@ impl THTMLTableCellElement with v_align(self : Self) -> String {
 extern "js" fn html_table_cell_element_set_v_align_ffi(
   obj : JsValue,
   v_align : JsValue,
-) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
+) -> Unit = "(obj, vAlign) => { obj.vAlign = v_align; }"
 
 ///|
 impl THTMLTableCellElement with set_v_align(self : Self, v_align : String) -> Unit {
@@ -375,7 +375,7 @@ impl THTMLTableCellElement with bg_color(self : Self) -> String {
 extern "js" fn html_table_cell_element_set_bg_color_ffi(
   obj : JsValue,
   bg_color : JsValue,
-) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bg_color; }"
 
 ///|
 impl THTMLTableCellElement with set_bg_color(self : Self, bg_color : String) -> Unit {

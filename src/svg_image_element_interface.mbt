@@ -96,7 +96,7 @@ impl TSVGImageElement with cross_origin(self : Self) -> String {
 extern "js" fn svg_image_element_set_cross_origin_ffi(
   obj : JsValue,
   cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = cross_origin; }"
 
 ///|
 impl TSVGImageElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {

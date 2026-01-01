@@ -79,7 +79,7 @@ impl THTMLFormElement with accept_charset(self : Self) -> String {
 extern "js" fn html_form_element_set_accept_charset_ffi(
   obj : JsValue,
   accept_charset : JsValue,
-) -> Unit = "(obj, acceptCharset) => { obj.acceptCharset = acceptCharset; }"
+) -> Unit = "(obj, acceptCharset) => { obj.acceptCharset = accept_charset; }"
 
 ///|
 impl THTMLFormElement with set_accept_charset(
@@ -192,7 +192,7 @@ impl THTMLFormElement with method_(self : Self) -> String {
 extern "js" fn html_form_element_set_method_ffi(
   obj : JsValue,
   method_ : JsValue,
-) -> Unit = "(obj, method) => { obj.method = method; }"
+) -> Unit = "(obj, method) => { obj.method = method_; }"
 
 ///|
 impl THTMLFormElement with set_method_(self : Self, method_ : String) -> Unit {
@@ -233,7 +233,7 @@ impl THTMLFormElement with no_validate(self : Self) -> Bool {
 extern "js" fn html_form_element_set_no_validate_ffi(
   obj : JsValue,
   no_validate : JsValue,
-) -> Unit = "(obj, noValidate) => { obj.noValidate = noValidate; }"
+) -> Unit = "(obj, noValidate) => { obj.noValidate = no_validate; }"
 
 ///|
 impl THTMLFormElement with set_no_validate(self : Self, no_validate : Bool) -> Unit {

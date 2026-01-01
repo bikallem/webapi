@@ -148,7 +148,7 @@ impl THTMLVideoElement with plays_inline(self : Self) -> Bool {
 extern "js" fn html_video_element_set_plays_inline_ffi(
   obj : JsValue,
   plays_inline : JsValue,
-) -> Unit = "(obj, playsInline) => { obj.playsInline = playsInline; }"
+) -> Unit = "(obj, playsInline) => { obj.playsInline = plays_inline; }"
 
 ///|
 impl THTMLVideoElement with set_plays_inline(self : Self, plays_inline : Bool) -> Unit {

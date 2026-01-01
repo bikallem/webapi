@@ -36,7 +36,7 @@ impl TSVGAnimatedBoolean with base_val(self : Self) -> Bool {
 extern "js" fn svg_animated_boolean_set_base_val_ffi(
   obj : JsValue,
   base_val : JsValue,
-) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
+) -> Unit = "(obj, baseVal) => { obj.baseVal = base_val; }"
 
 ///|
 impl TSVGAnimatedBoolean with set_base_val(self : Self, base_val : Bool) -> Unit {

@@ -50,7 +50,7 @@ impl TDataTransfer with drop_effect(self : Self) -> String {
 extern "js" fn data_transfer_set_drop_effect_ffi(
   obj : JsValue,
   drop_effect : JsValue,
-) -> Unit = "(obj, dropEffect) => { obj.dropEffect = dropEffect; }"
+) -> Unit = "(obj, dropEffect) => { obj.dropEffect = drop_effect; }"
 
 ///|
 impl TDataTransfer with set_drop_effect(self : Self, drop_effect : String) -> Unit {
@@ -72,7 +72,7 @@ impl TDataTransfer with effect_allowed(self : Self) -> String {
 extern "js" fn data_transfer_set_effect_allowed_ffi(
   obj : JsValue,
   effect_allowed : JsValue,
-) -> Unit = "(obj, effectAllowed) => { obj.effectAllowed = effectAllowed; }"
+) -> Unit = "(obj, effectAllowed) => { obj.effectAllowed = effect_allowed; }"
 
 ///|
 impl TDataTransfer with set_effect_allowed(self : Self, effect_allowed : String) -> Unit {

@@ -65,7 +65,7 @@ impl THTMLLabelElement with html_for(self : Self) -> String {
 extern "js" fn html_label_element_set_html_for_ffi(
   obj : JsValue,
   html_for : JsValue,
-) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
+) -> Unit = "(obj, htmlFor) => { obj.htmlFor = html_for; }"
 
 ///|
 impl THTMLLabelElement with set_html_for(self : Self, html_for : String) -> Unit {

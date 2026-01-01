@@ -117,8 +117,8 @@ pub impl TCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit with to_js(
 
 ///|
 pub impl TCanvasRenderingContext2DRoundRectRadii for Array[
-  CanvasRenderingContext2DRoundRectRadii2,
-] with to_js(self : Array[CanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
+  &TCanvasRenderingContext2DRoundRectRadii2,
+] with to_js(self : Array[&TCanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
 
 ///|
 pub trait TCanvasRenderingContext2D: TJsValue {
@@ -606,7 +606,7 @@ impl TCanvasRenderingContext2D with global_alpha(self : Self) -> Double {
 extern "js" fn canvas_rendering_context2d_set_global_alpha_ffi(
   obj : JsValue,
   global_alpha : JsValue,
-) -> Unit = "(obj, globalAlpha) => { obj.globalAlpha = globalAlpha; }"
+) -> Unit = "(obj, globalAlpha) => { obj.globalAlpha = global_alpha; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_global_alpha(
@@ -635,7 +635,7 @@ impl TCanvasRenderingContext2D with global_composite_operation(self : Self) -> S
 extern "js" fn canvas_rendering_context2d_set_global_composite_operation_ffi(
   obj : JsValue,
   global_composite_operation : JsValue,
-) -> Unit = "(obj, globalCompositeOperation) => { obj.globalCompositeOperation = globalCompositeOperation; }"
+) -> Unit = "(obj, globalCompositeOperation) => { obj.globalCompositeOperation = global_composite_operation; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_global_composite_operation(
@@ -662,7 +662,7 @@ impl TCanvasRenderingContext2D with image_smoothing_enabled(self : Self) -> Bool
 extern "js" fn canvas_rendering_context2d_set_image_smoothing_enabled_ffi(
   obj : JsValue,
   image_smoothing_enabled : JsValue,
-) -> Unit = "(obj, imageSmoothingEnabled) => { obj.imageSmoothingEnabled = imageSmoothingEnabled; }"
+) -> Unit = "(obj, imageSmoothingEnabled) => { obj.imageSmoothingEnabled = image_smoothing_enabled; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_image_smoothing_enabled(
@@ -689,7 +689,7 @@ impl TCanvasRenderingContext2D with image_smoothing_quality(self : Self) -> Imag
 extern "js" fn canvas_rendering_context2d_set_image_smoothing_quality_ffi(
   obj : JsValue,
   image_smoothing_quality : JsValue,
-) -> Unit = "(obj, imageSmoothingQuality) => { obj.imageSmoothingQuality = imageSmoothingQuality; }"
+) -> Unit = "(obj, imageSmoothingQuality) => { obj.imageSmoothingQuality = image_smoothing_quality; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_image_smoothing_quality(
@@ -716,7 +716,7 @@ impl TCanvasRenderingContext2D with stroke_style(self : Self) -> CanvasRendering
 extern "js" fn canvas_rendering_context2d_set_stroke_style_ffi(
   obj : JsValue,
   stroke_style : JsValue,
-) -> Unit = "(obj, strokeStyle) => { obj.strokeStyle = strokeStyle; }"
+) -> Unit = "(obj, strokeStyle) => { obj.strokeStyle = stroke_style; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_stroke_style(
@@ -725,7 +725,7 @@ impl TCanvasRenderingContext2D with set_stroke_style(
 ) -> Unit {
   canvas_rendering_context2d_set_stroke_style_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(stroke_style),
+    stroke_style.to_js(),
   )
 }
 
@@ -743,7 +743,7 @@ impl TCanvasRenderingContext2D with fill_style(self : Self) -> CanvasRenderingCo
 extern "js" fn canvas_rendering_context2d_set_fill_style_ffi(
   obj : JsValue,
   fill_style : JsValue,
-) -> Unit = "(obj, fillStyle) => { obj.fillStyle = fillStyle; }"
+) -> Unit = "(obj, fillStyle) => { obj.fillStyle = fill_style; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_fill_style(
@@ -752,7 +752,7 @@ impl TCanvasRenderingContext2D with set_fill_style(
 ) -> Unit {
   canvas_rendering_context2d_set_fill_style_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(fill_style),
+    fill_style.to_js(),
   )
 }
 
@@ -871,7 +871,7 @@ impl TCanvasRenderingContext2D with shadow_offset_x(self : Self) -> Double {
 extern "js" fn canvas_rendering_context2d_set_shadow_offset_x_ffi(
   obj : JsValue,
   shadow_offset_x : JsValue,
-) -> Unit = "(obj, shadowOffsetX) => { obj.shadowOffsetX = shadowOffsetX; }"
+) -> Unit = "(obj, shadowOffsetX) => { obj.shadowOffsetX = shadow_offset_x; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_shadow_offset_x(
@@ -898,7 +898,7 @@ impl TCanvasRenderingContext2D with shadow_offset_y(self : Self) -> Double {
 extern "js" fn canvas_rendering_context2d_set_shadow_offset_y_ffi(
   obj : JsValue,
   shadow_offset_y : JsValue,
-) -> Unit = "(obj, shadowOffsetY) => { obj.shadowOffsetY = shadowOffsetY; }"
+) -> Unit = "(obj, shadowOffsetY) => { obj.shadowOffsetY = shadow_offset_y; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_shadow_offset_y(
@@ -925,7 +925,7 @@ impl TCanvasRenderingContext2D with shadow_blur(self : Self) -> Double {
 extern "js" fn canvas_rendering_context2d_set_shadow_blur_ffi(
   obj : JsValue,
   shadow_blur : JsValue,
-) -> Unit = "(obj, shadowBlur) => { obj.shadowBlur = shadowBlur; }"
+) -> Unit = "(obj, shadowBlur) => { obj.shadowBlur = shadow_blur; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_shadow_blur(
@@ -952,7 +952,7 @@ impl TCanvasRenderingContext2D with shadow_color(self : Self) -> String {
 extern "js" fn canvas_rendering_context2d_set_shadow_color_ffi(
   obj : JsValue,
   shadow_color : JsValue,
-) -> Unit = "(obj, shadowColor) => { obj.shadowColor = shadowColor; }"
+) -> Unit = "(obj, shadowColor) => { obj.shadowColor = shadow_color; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_shadow_color(
@@ -1598,7 +1598,7 @@ impl TCanvasRenderingContext2D with line_width(self : Self) -> Double {
 extern "js" fn canvas_rendering_context2d_set_line_width_ffi(
   obj : JsValue,
   line_width : JsValue,
-) -> Unit = "(obj, lineWidth) => { obj.lineWidth = lineWidth; }"
+) -> Unit = "(obj, lineWidth) => { obj.lineWidth = line_width; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_line_width(
@@ -1625,7 +1625,7 @@ impl TCanvasRenderingContext2D with line_cap(self : Self) -> CanvasLineCap {
 extern "js" fn canvas_rendering_context2d_set_line_cap_ffi(
   obj : JsValue,
   line_cap : JsValue,
-) -> Unit = "(obj, lineCap) => { obj.lineCap = lineCap; }"
+) -> Unit = "(obj, lineCap) => { obj.lineCap = line_cap; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_line_cap(
@@ -1652,7 +1652,7 @@ impl TCanvasRenderingContext2D with line_join(self : Self) -> CanvasLineJoin {
 extern "js" fn canvas_rendering_context2d_set_line_join_ffi(
   obj : JsValue,
   line_join : JsValue,
-) -> Unit = "(obj, lineJoin) => { obj.lineJoin = lineJoin; }"
+) -> Unit = "(obj, lineJoin) => { obj.lineJoin = line_join; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_line_join(
@@ -1679,7 +1679,7 @@ impl TCanvasRenderingContext2D with miter_limit(self : Self) -> Double {
 extern "js" fn canvas_rendering_context2d_set_miter_limit_ffi(
   obj : JsValue,
   miter_limit : JsValue,
-) -> Unit = "(obj, miterLimit) => { obj.miterLimit = miterLimit; }"
+) -> Unit = "(obj, miterLimit) => { obj.miterLimit = miter_limit; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_miter_limit(
@@ -1733,7 +1733,7 @@ impl TCanvasRenderingContext2D with line_dash_offset(self : Self) -> Double {
 extern "js" fn canvas_rendering_context2d_set_line_dash_offset_ffi(
   obj : JsValue,
   line_dash_offset : JsValue,
-) -> Unit = "(obj, lineDashOffset) => { obj.lineDashOffset = lineDashOffset; }"
+) -> Unit = "(obj, lineDashOffset) => { obj.lineDashOffset = line_dash_offset; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_line_dash_offset(
@@ -1804,7 +1804,7 @@ impl TCanvasRenderingContext2D with text_align(self : Self) -> CanvasTextAlign {
 extern "js" fn canvas_rendering_context2d_set_text_align_ffi(
   obj : JsValue,
   text_align : JsValue,
-) -> Unit = "(obj, textAlign) => { obj.textAlign = textAlign; }"
+) -> Unit = "(obj, textAlign) => { obj.textAlign = text_align; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_text_align(
@@ -1831,7 +1831,7 @@ impl TCanvasRenderingContext2D with text_baseline(self : Self) -> CanvasTextBase
 extern "js" fn canvas_rendering_context2d_set_text_baseline_ffi(
   obj : JsValue,
   text_baseline : JsValue,
-) -> Unit = "(obj, textBaseline) => { obj.textBaseline = textBaseline; }"
+) -> Unit = "(obj, textBaseline) => { obj.textBaseline = text_baseline; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_text_baseline(
@@ -1885,7 +1885,7 @@ impl TCanvasRenderingContext2D with letter_spacing(self : Self) -> String {
 extern "js" fn canvas_rendering_context2d_set_letter_spacing_ffi(
   obj : JsValue,
   letter_spacing : JsValue,
-) -> Unit = "(obj, letterSpacing) => { obj.letterSpacing = letterSpacing; }"
+) -> Unit = "(obj, letterSpacing) => { obj.letterSpacing = letter_spacing; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_letter_spacing(
@@ -1912,7 +1912,7 @@ impl TCanvasRenderingContext2D with font_kerning(self : Self) -> CanvasFontKerni
 extern "js" fn canvas_rendering_context2d_set_font_kerning_ffi(
   obj : JsValue,
   font_kerning : JsValue,
-) -> Unit = "(obj, fontKerning) => { obj.fontKerning = fontKerning; }"
+) -> Unit = "(obj, fontKerning) => { obj.fontKerning = font_kerning; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_font_kerning(
@@ -1939,7 +1939,7 @@ impl TCanvasRenderingContext2D with font_stretch(self : Self) -> CanvasFontStret
 extern "js" fn canvas_rendering_context2d_set_font_stretch_ffi(
   obj : JsValue,
   font_stretch : JsValue,
-) -> Unit = "(obj, fontStretch) => { obj.fontStretch = fontStretch; }"
+) -> Unit = "(obj, fontStretch) => { obj.fontStretch = font_stretch; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_font_stretch(
@@ -1966,7 +1966,7 @@ impl TCanvasRenderingContext2D with font_variant_caps(self : Self) -> CanvasFont
 extern "js" fn canvas_rendering_context2d_set_font_variant_caps_ffi(
   obj : JsValue,
   font_variant_caps : JsValue,
-) -> Unit = "(obj, fontVariantCaps) => { obj.fontVariantCaps = fontVariantCaps; }"
+) -> Unit = "(obj, fontVariantCaps) => { obj.fontVariantCaps = font_variant_caps; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_font_variant_caps(
@@ -1993,7 +1993,7 @@ impl TCanvasRenderingContext2D with text_rendering(self : Self) -> CanvasTextRen
 extern "js" fn canvas_rendering_context2d_set_text_rendering_ffi(
   obj : JsValue,
   text_rendering : JsValue,
-) -> Unit = "(obj, textRendering) => { obj.textRendering = textRendering; }"
+) -> Unit = "(obj, textRendering) => { obj.textRendering = text_rendering; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_text_rendering(
@@ -2020,7 +2020,7 @@ impl TCanvasRenderingContext2D with word_spacing(self : Self) -> String {
 extern "js" fn canvas_rendering_context2d_set_word_spacing_ffi(
   obj : JsValue,
   word_spacing : JsValue,
-) -> Unit = "(obj, wordSpacing) => { obj.wordSpacing = wordSpacing; }"
+) -> Unit = "(obj, wordSpacing) => { obj.wordSpacing = word_spacing; }"
 
 ///|
 impl TCanvasRenderingContext2D with set_word_spacing(

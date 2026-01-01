@@ -101,7 +101,7 @@ impl TSVGLength with value_in_specified_units(self : Self) -> Float {
 extern "js" fn svg_length_set_value_in_specified_units_ffi(
   obj : JsValue,
   value_in_specified_units : JsValue,
-) -> Unit = "(obj, valueInSpecifiedUnits) => { obj.valueInSpecifiedUnits = valueInSpecifiedUnits; }"
+) -> Unit = "(obj, valueInSpecifiedUnits) => { obj.valueInSpecifiedUnits = value_in_specified_units; }"
 
 ///|
 impl TSVGLength with set_value_in_specified_units(
@@ -126,7 +126,7 @@ impl TSVGLength with value_as_string(self : Self) -> String {
 extern "js" fn svg_length_set_value_as_string_ffi(
   obj : JsValue,
   value_as_string : JsValue,
-) -> Unit = "(obj, valueAsString) => { obj.valueAsString = valueAsString; }"
+) -> Unit = "(obj, valueAsString) => { obj.valueAsString = value_as_string; }"
 
 ///|
 impl TSVGLength with set_value_as_string(self : Self, value_as_string : String) -> Unit {

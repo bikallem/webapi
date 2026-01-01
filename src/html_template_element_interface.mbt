@@ -82,7 +82,7 @@ impl THTMLTemplateElement with shadow_root_mode(self : Self) -> String {
 extern "js" fn html_template_element_set_shadow_root_mode_ffi(
   obj : JsValue,
   shadow_root_mode : JsValue,
-) -> Unit = "(obj, shadowRootMode) => { obj.shadowRootMode = shadowRootMode; }"
+) -> Unit = "(obj, shadowRootMode) => { obj.shadowRootMode = shadow_root_mode; }"
 
 ///|
 impl THTMLTemplateElement with set_shadow_root_mode(
@@ -109,7 +109,7 @@ impl THTMLTemplateElement with shadow_root_delegates_focus(self : Self) -> Bool 
 extern "js" fn html_template_element_set_shadow_root_delegates_focus_ffi(
   obj : JsValue,
   shadow_root_delegates_focus : JsValue,
-) -> Unit = "(obj, shadowRootDelegatesFocus) => { obj.shadowRootDelegatesFocus = shadowRootDelegatesFocus; }"
+) -> Unit = "(obj, shadowRootDelegatesFocus) => { obj.shadowRootDelegatesFocus = shadow_root_delegates_focus; }"
 
 ///|
 impl THTMLTemplateElement with set_shadow_root_delegates_focus(
@@ -136,7 +136,7 @@ impl THTMLTemplateElement with shadow_root_clonable(self : Self) -> Bool {
 extern "js" fn html_template_element_set_shadow_root_clonable_ffi(
   obj : JsValue,
   shadow_root_clonable : JsValue,
-) -> Unit = "(obj, shadowRootClonable) => { obj.shadowRootClonable = shadowRootClonable; }"
+) -> Unit = "(obj, shadowRootClonable) => { obj.shadowRootClonable = shadow_root_clonable; }"
 
 ///|
 impl THTMLTemplateElement with set_shadow_root_clonable(
@@ -163,7 +163,7 @@ impl THTMLTemplateElement with shadow_root_serializable(self : Self) -> Bool {
 extern "js" fn html_template_element_set_shadow_root_serializable_ffi(
   obj : JsValue,
   shadow_root_serializable : JsValue,
-) -> Unit = "(obj, shadowRootSerializable) => { obj.shadowRootSerializable = shadowRootSerializable; }"
+) -> Unit = "(obj, shadowRootSerializable) => { obj.shadowRootSerializable = shadow_root_serializable; }"
 
 ///|
 impl THTMLTemplateElement with set_shadow_root_serializable(
@@ -192,7 +192,7 @@ impl THTMLTemplateElement with shadow_root_custom_element_registry(self : Self) 
 extern "js" fn html_template_element_set_shadow_root_custom_element_registry_ffi(
   obj : JsValue,
   shadow_root_custom_element_registry : JsValue,
-) -> Unit = "(obj, shadowRootCustomElementRegistry) => { obj.shadowRootCustomElementRegistry = shadowRootCustomElementRegistry; }"
+) -> Unit = "(obj, shadowRootCustomElementRegistry) => { obj.shadowRootCustomElementRegistry = shadow_root_custom_element_registry; }"
 
 ///|
 impl THTMLTemplateElement with set_shadow_root_custom_element_registry(

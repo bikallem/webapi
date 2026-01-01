@@ -50,7 +50,7 @@ impl TSVGScriptElement with type_(self : Self) -> String {
 extern "js" fn svg_script_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
+) -> Unit = "(obj, type) => { obj.type = type_; }"
 
 ///|
 impl TSVGScriptElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -69,7 +69,7 @@ impl TSVGScriptElement with cross_origin(self : Self) -> String {
 extern "js" fn svg_script_element_set_cross_origin_ffi(
   obj : JsValue,
   cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = cross_origin; }"
 
 ///|
 impl TSVGScriptElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {

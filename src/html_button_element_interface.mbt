@@ -111,7 +111,7 @@ impl THTMLButtonElement with command_for_element(self : Self) -> Element {
 extern "js" fn html_button_element_set_command_for_element_ffi(
   obj : JsValue,
   command_for_element : JsValue,
-) -> Unit = "(obj, commandForElement) => { obj.commandForElement = commandForElement; }"
+) -> Unit = "(obj, commandForElement) => { obj.commandForElement = command_for_element; }"
 
 ///|
 impl THTMLButtonElement with set_command_for_element(
@@ -166,7 +166,7 @@ impl THTMLButtonElement with form_action(self : Self) -> String {
 extern "js" fn html_button_element_set_form_action_ffi(
   obj : JsValue,
   form_action : JsValue,
-) -> Unit = "(obj, formAction) => { obj.formAction = formAction; }"
+) -> Unit = "(obj, formAction) => { obj.formAction = form_action; }"
 
 ///|
 impl THTMLButtonElement with set_form_action(self : Self, form_action : String) -> Unit {
@@ -188,7 +188,7 @@ impl THTMLButtonElement with form_enctype(self : Self) -> String {
 extern "js" fn html_button_element_set_form_enctype_ffi(
   obj : JsValue,
   form_enctype : JsValue,
-) -> Unit = "(obj, formEnctype) => { obj.formEnctype = formEnctype; }"
+) -> Unit = "(obj, formEnctype) => { obj.formEnctype = form_enctype; }"
 
 ///|
 impl THTMLButtonElement with set_form_enctype(
@@ -213,7 +213,7 @@ impl THTMLButtonElement with form_method(self : Self) -> String {
 extern "js" fn html_button_element_set_form_method_ffi(
   obj : JsValue,
   form_method : JsValue,
-) -> Unit = "(obj, formMethod) => { obj.formMethod = formMethod; }"
+) -> Unit = "(obj, formMethod) => { obj.formMethod = form_method; }"
 
 ///|
 impl THTMLButtonElement with set_form_method(self : Self, form_method : String) -> Unit {
@@ -235,7 +235,7 @@ impl THTMLButtonElement with form_no_validate(self : Self) -> Bool {
 extern "js" fn html_button_element_set_form_no_validate_ffi(
   obj : JsValue,
   form_no_validate : JsValue,
-) -> Unit = "(obj, formNoValidate) => { obj.formNoValidate = formNoValidate; }"
+) -> Unit = "(obj, formNoValidate) => { obj.formNoValidate = form_no_validate; }"
 
 ///|
 impl THTMLButtonElement with set_form_no_validate(
@@ -260,7 +260,7 @@ impl THTMLButtonElement with form_target(self : Self) -> String {
 extern "js" fn html_button_element_set_form_target_ffi(
   obj : JsValue,
   form_target : JsValue,
-) -> Unit = "(obj, formTarget) => { obj.formTarget = formTarget; }"
+) -> Unit = "(obj, formTarget) => { obj.formTarget = form_target; }"
 
 ///|
 impl THTMLButtonElement with set_form_target(self : Self, form_target : String) -> Unit {
@@ -301,7 +301,7 @@ impl THTMLButtonElement with type_(self : Self) -> String {
 extern "js" fn html_button_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
+) -> Unit = "(obj, type) => { obj.type = type_; }"
 
 ///|
 impl THTMLButtonElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -411,7 +411,7 @@ impl THTMLButtonElement with popover_target_element(self : Self) -> Element {
 extern "js" fn html_button_element_set_popover_target_element_ffi(
   obj : JsValue,
   popover_target_element : JsValue,
-) -> Unit = "(obj, popoverTargetElement) => { obj.popoverTargetElement = popoverTargetElement; }"
+) -> Unit = "(obj, popoverTargetElement) => { obj.popoverTargetElement = popover_target_element; }"
 
 ///|
 impl THTMLButtonElement with set_popover_target_element(
@@ -438,7 +438,7 @@ impl THTMLButtonElement with popover_target_action(self : Self) -> String {
 extern "js" fn html_button_element_set_popover_target_action_ffi(
   obj : JsValue,
   popover_target_action : JsValue,
-) -> Unit = "(obj, popoverTargetAction) => { obj.popoverTargetAction = popoverTargetAction; }"
+) -> Unit = "(obj, popoverTargetAction) => { obj.popoverTargetAction = popover_target_action; }"
 
 ///|
 impl THTMLButtonElement with set_popover_target_action(

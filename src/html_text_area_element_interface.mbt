@@ -159,7 +159,7 @@ impl THTMLTextAreaElement with dir_name(self : Self) -> String {
 extern "js" fn html_text_area_element_set_dir_name_ffi(
   obj : JsValue,
   dir_name : JsValue,
-) -> Unit = "(obj, dirName) => { obj.dirName = dirName; }"
+) -> Unit = "(obj, dirName) => { obj.dirName = dir_name; }"
 
 ///|
 impl THTMLTextAreaElement with set_dir_name(self : Self, dir_name : String) -> Unit {
@@ -213,7 +213,7 @@ impl THTMLTextAreaElement with max_length(self : Self) -> Int {
 extern "js" fn html_text_area_element_set_max_length_ffi(
   obj : JsValue,
   max_length : JsValue,
-) -> Unit = "(obj, maxLength) => { obj.maxLength = maxLength; }"
+) -> Unit = "(obj, maxLength) => { obj.maxLength = max_length; }"
 
 ///|
 impl THTMLTextAreaElement with set_max_length(self : Self, max_length : Int) -> Unit {
@@ -235,7 +235,7 @@ impl THTMLTextAreaElement with min_length(self : Self) -> Int {
 extern "js" fn html_text_area_element_set_min_length_ffi(
   obj : JsValue,
   min_length : JsValue,
-) -> Unit = "(obj, minLength) => { obj.minLength = minLength; }"
+) -> Unit = "(obj, minLength) => { obj.minLength = min_length; }"
 
 ///|
 impl THTMLTextAreaElement with set_min_length(self : Self, min_length : Int) -> Unit {
@@ -304,7 +304,7 @@ impl THTMLTextAreaElement with read_only(self : Self) -> Bool {
 extern "js" fn html_text_area_element_set_read_only_ffi(
   obj : JsValue,
   read_only : JsValue,
-) -> Unit = "(obj, readOnly) => { obj.readOnly = readOnly; }"
+) -> Unit = "(obj, readOnly) => { obj.readOnly = read_only; }"
 
 ///|
 impl THTMLTextAreaElement with set_read_only(self : Self, read_only : Bool) -> Unit {
@@ -402,7 +402,7 @@ impl THTMLTextAreaElement with default_value(self : Self) -> String {
 extern "js" fn html_text_area_element_set_default_value_ffi(
   obj : JsValue,
   default_value : JsValue,
-) -> Unit = "(obj, defaultValue) => { obj.defaultValue = defaultValue; }"
+) -> Unit = "(obj, defaultValue) => { obj.defaultValue = default_value; }"
 
 ///|
 impl THTMLTextAreaElement with set_default_value(
@@ -535,7 +535,7 @@ impl THTMLTextAreaElement with selection_start(self : Self) -> UInt {
 extern "js" fn html_text_area_element_set_selection_start_ffi(
   obj : JsValue,
   selection_start : JsValue,
-) -> Unit = "(obj, selectionStart) => { obj.selectionStart = selectionStart; }"
+) -> Unit = "(obj, selectionStart) => { obj.selectionStart = selection_start; }"
 
 ///|
 impl THTMLTextAreaElement with set_selection_start(
@@ -560,7 +560,7 @@ impl THTMLTextAreaElement with selection_end(self : Self) -> UInt {
 extern "js" fn html_text_area_element_set_selection_end_ffi(
   obj : JsValue,
   selection_end : JsValue,
-) -> Unit = "(obj, selectionEnd) => { obj.selectionEnd = selectionEnd; }"
+) -> Unit = "(obj, selectionEnd) => { obj.selectionEnd = selection_end; }"
 
 ///|
 impl THTMLTextAreaElement with set_selection_end(
@@ -587,7 +587,7 @@ impl THTMLTextAreaElement with selection_direction(self : Self) -> String {
 extern "js" fn html_text_area_element_set_selection_direction_ffi(
   obj : JsValue,
   selection_direction : JsValue,
-) -> Unit = "(obj, selectionDirection) => { obj.selectionDirection = selectionDirection; }"
+) -> Unit = "(obj, selectionDirection) => { obj.selectionDirection = selection_direction; }"
 
 ///|
 impl THTMLTextAreaElement with set_selection_direction(

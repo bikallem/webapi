@@ -38,7 +38,7 @@ impl TBeforeUnloadEvent with return_value(self : Self) -> String {
 extern "js" fn before_unload_event_set_return_value_ffi(
   obj : JsValue,
   return_value : JsValue,
-) -> Unit = "(obj, returnValue) => { obj.returnValue = returnValue; }"
+) -> Unit = "(obj, returnValue) => { obj.returnValue = return_value; }"
 
 ///|
 impl TBeforeUnloadEvent with set_return_value(

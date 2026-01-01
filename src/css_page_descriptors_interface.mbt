@@ -78,7 +78,7 @@ impl TCSSPageDescriptors with margin_top(self : Self) -> CSSOMString {
 extern "js" fn css_page_descriptors_set_margin_top_ffi(
   obj : JsValue,
   margin_top : JsValue,
-) -> Unit = "(obj, marginTop) => { obj.marginTop = marginTop; }"
+) -> Unit = "(obj, marginTop) => { obj.marginTop = margin_top; }"
 
 ///|
 impl TCSSPageDescriptors with set_margin_top(
@@ -105,7 +105,7 @@ impl TCSSPageDescriptors with margin_right(self : Self) -> CSSOMString {
 extern "js" fn css_page_descriptors_set_margin_right_ffi(
   obj : JsValue,
   margin_right : JsValue,
-) -> Unit = "(obj, marginRight) => { obj.marginRight = marginRight; }"
+) -> Unit = "(obj, marginRight) => { obj.marginRight = margin_right; }"
 
 ///|
 impl TCSSPageDescriptors with set_margin_right(
@@ -132,7 +132,7 @@ impl TCSSPageDescriptors with margin_bottom(self : Self) -> CSSOMString {
 extern "js" fn css_page_descriptors_set_margin_bottom_ffi(
   obj : JsValue,
   margin_bottom : JsValue,
-) -> Unit = "(obj, marginBottom) => { obj.marginBottom = marginBottom; }"
+) -> Unit = "(obj, marginBottom) => { obj.marginBottom = margin_bottom; }"
 
 ///|
 impl TCSSPageDescriptors with set_margin_bottom(
@@ -159,7 +159,7 @@ impl TCSSPageDescriptors with margin_left(self : Self) -> CSSOMString {
 extern "js" fn css_page_descriptors_set_margin_left_ffi(
   obj : JsValue,
   margin_left : JsValue,
-) -> Unit = "(obj, marginLeft) => { obj.marginLeft = marginLeft; }"
+) -> Unit = "(obj, marginLeft) => { obj.marginLeft = margin_left; }"
 
 ///|
 impl TCSSPageDescriptors with set_margin_left(
@@ -208,7 +208,7 @@ impl TCSSPageDescriptors with page_orientation(self : Self) -> CSSOMString {
 extern "js" fn css_page_descriptors_set_page_orientation_ffi(
   obj : JsValue,
   page_orientation : JsValue,
-) -> Unit = "(obj, pageOrientation) => { obj.pageOrientation = pageOrientation; }"
+) -> Unit = "(obj, pageOrientation) => { obj.pageOrientation = page_orientation; }"
 
 ///|
 impl TCSSPageDescriptors with set_page_orientation(

@@ -1148,7 +1148,7 @@ impl TDocument with design_mode(self : Self) -> String {
 extern "js" fn document_set_design_mode_ffi(
   obj : JsValue,
   design_mode : JsValue,
-) -> Unit = "(obj, designMode) => { obj.designMode = designMode; }"
+) -> Unit = "(obj, designMode) => { obj.designMode = design_mode; }"
 
 ///|
 impl TDocument with set_design_mode(self : Self, design_mode : String) -> Unit {
@@ -1331,7 +1331,7 @@ impl TDocument with fg_color(self : Self) -> String {
 extern "js" fn document_set_fg_color_ffi(
   obj : JsValue,
   fg_color : JsValue,
-) -> Unit = "(obj, fgColor) => { obj.fgColor = fgColor; }"
+) -> Unit = "(obj, fgColor) => { obj.fgColor = fg_color; }"
 
 ///|
 impl TDocument with set_fg_color(self : Self, fg_color : String) -> Unit {
@@ -1350,7 +1350,7 @@ impl TDocument with link_color(self : Self) -> String {
 extern "js" fn document_set_link_color_ffi(
   obj : JsValue,
   link_color : JsValue,
-) -> Unit = "(obj, linkColor) => { obj.linkColor = linkColor; }"
+) -> Unit = "(obj, linkColor) => { obj.linkColor = link_color; }"
 
 ///|
 impl TDocument with set_link_color(self : Self, link_color : String) -> Unit {
@@ -1372,7 +1372,7 @@ impl TDocument with vlink_color(self : Self) -> String {
 extern "js" fn document_set_vlink_color_ffi(
   obj : JsValue,
   vlink_color : JsValue,
-) -> Unit = "(obj, vlinkColor) => { obj.vlinkColor = vlinkColor; }"
+) -> Unit = "(obj, vlinkColor) => { obj.vlinkColor = vlink_color; }"
 
 ///|
 impl TDocument with set_vlink_color(self : Self, vlink_color : String) -> Unit {
@@ -1394,7 +1394,7 @@ impl TDocument with alink_color(self : Self) -> String {
 extern "js" fn document_set_alink_color_ffi(
   obj : JsValue,
   alink_color : JsValue,
-) -> Unit = "(obj, alinkColor) => { obj.alinkColor = alinkColor; }"
+) -> Unit = "(obj, alinkColor) => { obj.alinkColor = alink_color; }"
 
 ///|
 impl TDocument with set_alink_color(self : Self, alink_color : String) -> Unit {
@@ -1416,7 +1416,7 @@ impl TDocument with bg_color(self : Self) -> String {
 extern "js" fn document_set_bg_color_ffi(
   obj : JsValue,
   bg_color : JsValue,
-) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bg_color; }"
 
 ///|
 impl TDocument with set_bg_color(self : Self, bg_color : String) -> Unit {
@@ -1588,7 +1588,7 @@ impl TDocument with adopted_style_sheets(self : Self) -> JsValue {
 extern "js" fn document_set_adopted_style_sheets_ffi(
   obj : JsValue,
   adopted_style_sheets : JsValue,
-) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adoptedStyleSheets; }"
+) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adopted_style_sheets; }"
 
 ///|
 impl TDocument with set_adopted_style_sheets(

@@ -86,7 +86,7 @@ impl THTMLSourceElement with type_(self : Self) -> String {
 extern "js" fn html_source_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
+) -> Unit = "(obj, type) => { obj.type = type_; }"
 
 ///|
 impl THTMLSourceElement with set_type_(self : Self, type_ : String) -> Unit {

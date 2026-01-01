@@ -153,7 +153,7 @@ impl TSVGSVGElement with current_scale(self : Self) -> Float {
 extern "js" fn svgsvg_element_set_current_scale_ffi(
   obj : JsValue,
   current_scale : JsValue,
-) -> Unit = "(obj, currentScale) => { obj.currentScale = currentScale; }"
+) -> Unit = "(obj, currentScale) => { obj.currentScale = current_scale; }"
 
 ///|
 impl TSVGSVGElement with set_current_scale(self : Self, current_scale : Float) -> Unit {

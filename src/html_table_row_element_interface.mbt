@@ -168,7 +168,7 @@ impl THTMLTableRowElement with ch_off(self : Self) -> String {
 extern "js" fn html_table_row_element_set_ch_off_ffi(
   obj : JsValue,
   ch_off : JsValue,
-) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
+) -> Unit = "(obj, chOff) => { obj.chOff = ch_off; }"
 
 ///|
 impl THTMLTableRowElement with set_ch_off(self : Self, ch_off : String) -> Unit {
@@ -190,7 +190,7 @@ impl THTMLTableRowElement with v_align(self : Self) -> String {
 extern "js" fn html_table_row_element_set_v_align_ffi(
   obj : JsValue,
   v_align : JsValue,
-) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
+) -> Unit = "(obj, vAlign) => { obj.vAlign = v_align; }"
 
 ///|
 impl THTMLTableRowElement with set_v_align(self : Self, v_align : String) -> Unit {
@@ -212,7 +212,7 @@ impl THTMLTableRowElement with bg_color(self : Self) -> String {
 extern "js" fn html_table_row_element_set_bg_color_ffi(
   obj : JsValue,
   bg_color : JsValue,
-) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bg_color; }"
 
 ///|
 impl THTMLTableRowElement with set_bg_color(self : Self, bg_color : String) -> Unit {
