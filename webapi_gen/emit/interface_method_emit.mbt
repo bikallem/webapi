@@ -158,16 +158,15 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
 struct AttributeSetMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original attribute name from IDL, eg "title"
-  arg_type : String
+  args : Array[MethodArg]
 } derive(Show, ToJson)
 
 ///|
 impl InterfaceMethodEmit for AttributeSetMethodEmit with decl_emit(
   self : AttributeSetMethodEmit,
 ) -> Code {
-  Code(
-    "  set_\{safe_identifier(self.original_name)}(self : Self, \{safe_identifier(self.original_name)} : \{self.arg_type}) -> Unit = _",
-  )
+  let args = trait_method_decl_args(self.args)
+  Code("  set_\{safe_identifier(self.original_name)}(\{args}) -> Unit = _")
 }
 
 ///|
@@ -181,19 +180,19 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
   let code = StringBuilder::new()
   code
   ..write_string(
-    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
+    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{arg_name}; }\"",
   )
   ..write_string("\n\n")
 
   // Emit default trait method implementation
   let method_name = safe_identifier(self.original_name)
+  let method_args = trait_method_impl_args(self.args)
+  let call_args = func_call_args(self.args)
   code
   ..write_string(
-    "impl T\{trait_name} with set_\{method_name}(self : Self, \{arg_name} : \{self.arg_type}) -> Unit {\n",
+    "impl T\{trait_name} with set_\{method_name}(\{method_args}) -> Unit {\n",
   )
-  ..write_string(
-    "  \{ffi_name}(TJsValue::to_js(self), TJsValue::to_js(\{arg_name}))\n",
-  )
+  ..write_string("  \{ffi_name}(\{call_args})\n")
   ..write_string("}")
   Code(code.to_string())
 }

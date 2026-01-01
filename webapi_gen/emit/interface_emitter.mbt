@@ -378,10 +378,28 @@ pub impl Emitter for InterfaceEmitter with emit(
 
       // Set Attribute method if specified
       if !attr.is_readonly || attr.is_inherit {
+        let args = [
+          // Add 'self' argument
+          MethodArg::{
+            name: "self",
+            original_name: "self",
+            type_: ArgMbtType::Self,
+            optional: false,
+            default_value: None,
+          },
+          // Attribute value argument
+          MethodArg::{
+            name: safe_identifier(attr.name),
+            original_name: attr.name,
+            type_: attr_type,
+            optional: false,
+            default_value: None,
+          },
+        ]
         let attr_setter_method = AttributeSetMethodEmit::{
           interface_name: interface.name,
           original_name: attr.name,
-          arg_type: attr_type.name(),
+          args,
         }
         interface_methods.push(attr_setter_method)
       }

@@ -185,6 +185,9 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|pub impl TTestInterfaceTestMethodParam for String with to_js(self : String) -> JsValue = "%identity"
       #|
+      #|#external
+      #|pub type TestInterfaceTestMethodParam2
+      #|
       #|pub(open) trait TTestInterfaceTestMethodParam2 {
       #|  to_js(self : Self) -> JsValue
       #|}
@@ -399,9 +402,10 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|  test_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
       #|
-      #|extern "js" fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+      #|extern "js" fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = last_name; }"
       #|
-      #|impl TTestInterface with set_last_name(self : Self, last_name : String) -> Unit {
+      #|impl TTestInterface with set_last_name(self : Self, 
+      #|last_name : String) -> Unit {
       #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
     ),
@@ -483,9 +487,10 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|  child_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
       #|
-      #|extern "js" fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+      #|extern "js" fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = last_name; }"
       #|
-      #|impl TChildInterface with set_last_name(self : Self, last_name : String) -> Unit {
+      #|impl TChildInterface with set_last_name(self : Self, 
+      #|last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
     ),

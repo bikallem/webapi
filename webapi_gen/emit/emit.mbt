@@ -99,7 +99,7 @@ pub enum Emit {
 //============================ Code generator ===========================
 
 ///|
-/// Generate MoonBit code from Emit array for js backend
+/// Generate MoonBit code from Emit array for js backend 
 pub fn mbt_code_gen(emits : Array[Emit]) -> String {
   let buf = StringBuilder::new()
   for i, emit in emits {
@@ -510,7 +510,12 @@ fn arg_mbt_type(
           t, type_name, method_name, arg_name, type_registry, call_depth,
         )
         emits.push_iter(emits_.iter())
-        ArgMbtType::Other("Array[\{type_.name()}]")
+        let type_name = if type_ is ArgMbtType::Union(_) {
+          "&T\{type_.name()}"
+        } else {
+          type_.name()
+        }
+        ArgMbtType::Other("Array[\{type_name}]")
       }
 
       // Js Promise
@@ -518,8 +523,13 @@ fn arg_mbt_type(
         let (type_, emits_) = go(
           t, type_name, method_name, arg_name, type_registry, call_depth,
         )
+        let type_name = if type_ is ArgMbtType::Union(_) {
+          "&T\{type_.name()}"
+        } else {
+          type_.name()
+        }
         emits.push_iter(emits_.iter())
-        ArgMbtType::Other("JsPromise[\{type_.name()}]")
+        ArgMbtType::Other("JsPromise[\{type_name}]")
       }
 
       // Union type
@@ -544,6 +554,9 @@ fn arg_mbt_type(
             type_registry,
             call_depth + 1,
           )
+          if mbt_type is ArgMbtType::Union(_) {
+            emits.push(Emit::External(TypeName(mbt_type.name())))
+          }
           let mbt_type = if is_undefined {
             // Map 'undefined' type to 'JsUndefined' for union option
             has_undefined = is_undefined
