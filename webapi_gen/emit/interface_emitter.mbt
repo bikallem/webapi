@@ -200,58 +200,6 @@ pub impl Emitter for InterfaceEmitter with emit(
     }
     [RegularOperation(op), .. rest] if has_hyphen(op.name) => continue rest // skip methods with hyphens
     [Attribute(attr), .. rest] if has_hyphen(attr.name) => continue rest // skip attributes with hyphens
-    [RegularOperation(op), .. rest] if op.static_ => {
-      let orig_method_name = match method_counter.get(op.name) {
-        None => {
-          method_counter[op.name] = 1
-          op.name
-        }
-        Some(count) => {
-          method_counter[op.name] += 1
-          "\{op.name}_\{count+1}"
-        }
-      }
-      // static method args
-      let (args, arg_emits) = method_args(
-        op.arguments.map(arg => (
-          arg.name,
-          arg.type_.type_,
-          arg.optional,
-          arg.default_value,
-        )),
-        interface.name,
-        orig_method_name,
-        self.type_registry,
-      )
-      emits.push_iter(arg_emits.iter())
-      // return type
-      let (return_type, return_emits) = arg_mbt_type(
-        op.return_type,
-        interface.name,
-        orig_method_name,
-        "",
-        self.type_registry,
-      )
-      if return_type is ArgMbtType::Union({ name, has_undefined, .. }) {
-        emits..push(Emit::External(name))..push(Emit::IntoMethod(name))
-        if has_undefined {
-          emits.push(Emit::IsUndefinedMethod(name))
-        }
-        emits.push(
-          Emit::UnionArgTraitImpl(TypeName(name), TraitName("T\{name}")),
-        )
-      }
-      emits.push_iter(return_emits.iter())
-      // static method
-      let static_method = StaticMethodEmit::{
-        interface_name: interface.name,
-        original_name: orig_method_name,
-        return_type: return_type.name(),
-        args,
-      }
-      interface_methods.push(static_method)
-      continue rest
-    }
     [RegularOperation(op), .. rest] => {
       let orig_method_name = match method_counter.get(op.name) {
         None => {
@@ -275,15 +223,19 @@ pub impl Emitter for InterfaceEmitter with emit(
         orig_method_name,
         self.type_registry,
       )
-      // Add 'self' argument 
-      let self_arg = MethodArg::{
-        name: "self",
-        original_name: "self",
-        type_: ArgMbtType::Self,
-        optional: false,
-        default_value: None,
+      let args = if op.static_ {
+        args
+      } else {
+        // Add 'self' argument 
+        let self_arg = MethodArg::{
+          name: "self",
+          original_name: "self",
+          type_: ArgMbtType::Self,
+          optional: false,
+          default_value: None,
+        }
+        [self_arg, ..args]
       }
-      let args = [self_arg, ..args]
       emits.push_iter(arg_emits.iter())
 
       // return type
@@ -304,15 +256,25 @@ pub impl Emitter for InterfaceEmitter with emit(
         )
       }
       emits.push_iter(return_emits.iter())
-
-      // trait method
-      let trait_method = RegularMethodEmit::{
-        interface_name: interface.name,
-        original_name: orig_method_name,
-        return_type: return_type.name(),
-        args,
+      if op.static_ {
+        // static method
+        let meth_ = StaticMethodEmit::{
+          interface_name: interface.name,
+          original_name: orig_method_name,
+          return_type: return_type.name(),
+          args,
+        }
+        interface_methods.push(meth_)
+      } else {
+        // trait method
+        let meth_ = RegularMethodEmit::{
+          interface_name: interface.name,
+          original_name: orig_method_name,
+          return_type: return_type.name(),
+          args,
+        }
+        interface_methods.push(meth_)
       }
-      interface_methods.push(trait_method)
       continue rest
     }
     [Attribute(attr), .. rest] if attr.static_ => {
