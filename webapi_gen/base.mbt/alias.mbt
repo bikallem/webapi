@@ -6,6 +6,10 @@ pub type CSSOMString = String
 
 ///|
 #external
+pub type ReadableStream
+
+///|
+#external
 pub type VideoFrame
 
 ///|
