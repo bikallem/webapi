@@ -277,9 +277,9 @@ pub impl Emitter for InterfaceEmitter with emit(
       }
       continue rest
     }
-    [Attribute(attr), .. rest] if attr.static_ => {
-      if !attr.is_readonly && !attr.is_inherit {
-        // only static readonly attributes are supported for now
+    [Attribute(attr), .. rest] => {
+      // For static attributes, only readonly or inherited ones are supported
+      if attr.static_ && !attr.is_readonly && !attr.is_inherit {
         // TODO: log this
         continue rest
       }
@@ -290,7 +290,11 @@ pub impl Emitter for InterfaceEmitter with emit(
         "",
         self.type_registry,
       )
-      emits.push_iter(attr_emits.iter())
+
+      // For static attributes, push attr_emits before union handling
+      if attr.static_ {
+        emits.push_iter(attr_emits.iter())
+      }
       if attr_type is ArgMbtType::Union({ name, has_undefined, .. }) {
         emits..push(Emit::External(name))..push(Emit::IntoMethod(name))
         if has_undefined {
@@ -302,70 +306,51 @@ pub impl Emitter for InterfaceEmitter with emit(
       }
       emits.push_iter(attr_emits.iter())
 
-      // Static Attribute Get method
-      let static_attr_getter_method = StaticAttributeGetMethodEmit::{
-        interface_name: interface.name,
-        original_name: attr.name,
-        return_type: attr_type.name(),
-      }
-      interface_methods.push(static_attr_getter_method)
-      continue rest
-    }
-    [Attribute(attr), .. rest] => {
-      let (attr_type, attr_emits) = arg_mbt_type(
-        attr.type_,
-        interface.name,
-        attr.name,
-        "",
-        self.type_registry,
-      )
-      if attr_type is ArgMbtType::Union({ name, has_undefined, .. }) {
-        emits..push(Emit::External(name))..push(Emit::IntoMethod(name))
-        if has_undefined {
-          emits.push(Emit::IsUndefinedMethod(name))
-        }
-        emits.push(
-          Emit::UnionArgTraitImpl(TypeName(name), TraitName("T\{name}")),
-        )
-      }
-      emits.push_iter(attr_emits.iter())
-
-      // Get Attribute method
-      let attr_getter_method = AttributeGetMethodEmit::{
-        interface_name: interface.name,
-        original_name: attr.name,
-        return_type: attr_type.name(),
-      }
-      interface_methods.push(attr_getter_method)
-
-      // Set Attribute method if specified
-      if !attr.is_readonly || attr.is_inherit {
-        let args = [
-          // Add 'self' argument
-          MethodArg::{
-            name: "self",
-            original_name: "self",
-            type_: ArgMbtType::Self,
-            optional: false,
-            default_value: None,
-          },
-          // Attribute value argument
-          MethodArg::{
-            name: safe_identifier(attr.name),
-            original_name: attr.name,
-            type_: attr_type,
-            optional: false,
-            default_value: None,
-          },
-        ]
-        let attr_setter_method = AttributeSetMethodEmit::{
+      // Getter method (static or regular)
+      if attr.static_ {
+        let static_attr_getter_method = StaticAttributeGetMethodEmit::{
           interface_name: interface.name,
           original_name: attr.name,
-          args,
+          return_type: attr_type.name(),
         }
-        interface_methods.push(attr_setter_method)
+        interface_methods.push(static_attr_getter_method)
+      } else {
+        let attr_getter_method = AttributeGetMethodEmit::{
+          interface_name: interface.name,
+          original_name: attr.name,
+          return_type: attr_type.name(),
+        }
+        interface_methods.push(attr_getter_method)
+
+        // Set Attribute method if specified (only for non-static)
+        if !attr.is_readonly || attr.is_inherit {
+          let args = [
+            // Add 'self' argument
+            MethodArg::{
+              name: "self",
+              original_name: "self",
+              type_: ArgMbtType::Self,
+              optional: false,
+              default_value: None,
+            },
+            // Attribute value argument
+            MethodArg::{
+              name: safe_identifier(attr.name),
+              original_name: attr.name,
+              type_: attr_type,
+              optional: false,
+              default_value: None,
+            },
+          ]
+          let attr_setter_method = AttributeSetMethodEmit::{
+            interface_name: interface.name,
+            original_name: attr.name,
+            args,
+          }
+          interface_methods.push(attr_setter_method)
+        }
       }
-      continue rest // Attributes are not yet handled
+      continue rest
     }
     [Const(const_val), .. rest] => {
       let const_name = ConstName(
