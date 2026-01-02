@@ -1,4 +1,0 @@
-dictionary PromiseRejectionEventInit : EventInit {
-  required object promise;
-  any reason;
-};

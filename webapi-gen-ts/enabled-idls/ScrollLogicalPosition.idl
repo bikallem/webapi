@@ -1,1 +1,0 @@
-enum ScrollLogicalPosition { "start", "center", "end", "nearest" };

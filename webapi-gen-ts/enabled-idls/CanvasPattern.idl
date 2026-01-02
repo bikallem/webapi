@@ -1,5 +1,0 @@
-[Exposed=(Window,Worker)]
-interface CanvasPattern {
-  // opaque object
-  undefined setTransform(optional DOMMatrix2DInit transform = {});
-};

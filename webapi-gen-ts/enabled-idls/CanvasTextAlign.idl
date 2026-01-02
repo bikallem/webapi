@@ -1,1 +1,0 @@
-enum CanvasTextAlign { "start", "end", "left", "right", "center" };

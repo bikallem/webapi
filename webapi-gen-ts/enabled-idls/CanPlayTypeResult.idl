@@ -1,1 +1,0 @@
-enum CanPlayTypeResult { "" /* empty string */, "maybe", "probably" };

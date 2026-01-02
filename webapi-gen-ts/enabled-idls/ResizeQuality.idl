@@ -1,1 +1,0 @@
-enum ResizeQuality { "pixelated", "low", "medium", "high" };

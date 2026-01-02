@@ -1,4 +1,0 @@
-dictionary ImageEncodeOptions {
-  DOMString type = "image/png";
-  unrestricted double quality;
-};

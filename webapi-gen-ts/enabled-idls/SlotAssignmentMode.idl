@@ -1,1 +1,0 @@
-enum SlotAssignmentMode { "manual", "named" };

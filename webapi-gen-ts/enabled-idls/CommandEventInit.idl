@@ -1,4 +1,0 @@
-dictionary CommandEventInit : EventInit {
-  Element? source = null;
-  DOMString command = "";
-};

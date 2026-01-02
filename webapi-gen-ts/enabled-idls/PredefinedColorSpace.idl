@@ -1,1 +1,0 @@
-enum PredefinedColorSpace { "srgb", "display-p3" };

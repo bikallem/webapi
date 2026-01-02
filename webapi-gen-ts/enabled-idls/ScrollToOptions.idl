@@ -1,4 +1,0 @@
-dictionary ScrollToOptions : ScrollOptions {
-    unrestricted double left;
-    unrestricted double top;
-};

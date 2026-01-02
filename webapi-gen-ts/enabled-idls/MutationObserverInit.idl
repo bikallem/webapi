@@ -1,9 +1,0 @@
-dictionary MutationObserverInit {
-  boolean childList = false;
-  boolean attributes;
-  boolean characterData;
-  boolean subtree = false;
-  boolean attributeOldValue;
-  boolean characterDataOldValue;
-  sequence<DOMString> attributeFilter;
-};

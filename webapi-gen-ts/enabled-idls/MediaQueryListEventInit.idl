@@ -1,4 +1,0 @@
-dictionary MediaQueryListEventInit : EventInit {
-  CSSOMString media = "";
-  boolean matches = false;
-};

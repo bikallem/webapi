@@ -1,6 +1,0 @@
-enum SelectionMode {
-  "select",
-  "start",
-  "end",
-  "preserve" // default
-};

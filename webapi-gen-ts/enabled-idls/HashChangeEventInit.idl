@@ -1,4 +1,0 @@
-dictionary HashChangeEventInit : EventInit {
-  USVString oldURL = "";
-  USVString newURL = "";
-};

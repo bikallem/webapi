@@ -1,4 +1,0 @@
-dictionary FocusOptions {
-  boolean preventScroll = false;
-  boolean focusVisible;
-};

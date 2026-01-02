@@ -1,6 +1,0 @@
-dictionary SVGBoundingBoxOptions {
-  boolean fill = true;
-  boolean stroke = false;
-  boolean markers = false;
-  boolean clipped = false;
-};

@@ -1,2 +1,0 @@
-[LegacyTreatNonObjectAsNull]
-callback EventHandlerNonNull = any (Event event);

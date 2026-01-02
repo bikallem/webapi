@@ -1,1 +1,0 @@
-enum CanvasFontKerning { "auto", "normal", "none" };

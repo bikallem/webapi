@@ -1,3 +1,0 @@
-dictionary FocusEventInit : UIEventInit {
-  EventTarget? relatedTarget = null;
-};

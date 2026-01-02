@@ -1,3 +1,0 @@
-typedef (CanvasImageSource or
-         Blob or
-         ImageData) ImageBitmapSource;
