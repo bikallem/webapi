@@ -9,6 +9,9 @@ pub type CSSOMString = String
 pub type ReadableStream
 
 ///|
+pub impl TJsValue for ReadableStream with to_js(self : ReadableStream) -> JsValue = "%identity"
+
+///|
 #external
 pub type VideoFrame
 
