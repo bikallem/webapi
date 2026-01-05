@@ -10,5 +10,6 @@
         "bikallem/webapi": {
             "path": "../"
         }
-    }
+    },
+    "preferred-target": "js"
 }
