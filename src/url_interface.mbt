@@ -62,11 +62,16 @@ pub trait TURL: TJsValue {
 }
 
 ///|
-extern "js" fn url_parse_ffi(url : JsValue, base : JsValue) -> URL = "(url, base) => URL.parse(url, base)"
+extern "js" fn url_parse_ffi(url : JsValue, base : JsValue) -> JsValue = "(url, base) => URL.parse(url, base)"
 
 ///|
-pub fn URL::parse(url : String, base? : String) -> URL {
-  url_parse_ffi(TJsValue::to_js(url), opt_to_js(base))
+pub fn URL::parse(url : String, base? : String) -> URL? {
+  let result = url_parse_ffi(TJsValue::to_js(url), opt_to_js(base))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

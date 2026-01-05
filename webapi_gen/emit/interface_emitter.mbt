@@ -256,20 +256,21 @@ pub impl Emitter for InterfaceEmitter with emit(
         )
       }
       emits.push_iter(return_emits.iter())
+      let return_type = MethodReturn::{
+        type_: return_type,
+        optional: op.return_type is Nullable(_),
+      }
       if op.static_ {
         // static method
         let meth_ = StaticMethodEmit::{
           interface_name: interface.name,
           original_name: orig_method_name,
-          return_type: return_type.name(),
+          return_type,
           args,
         }
         interface_methods.push(meth_)
       } else {
-        let return_type = MethodReturn::{
-          type_: return_type,
-          optional: op.return_type is Nullable(_),
-        }
+
         // trait method
         let meth_ = RegularMethodEmit::{
           interface_name: interface.name,
