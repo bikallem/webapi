@@ -93,6 +93,9 @@ pub trait TWorkerGlobalScope: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
+  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> JsPromise[
+    Response,
+  ] = _
   performance(self : Self) -> Performance = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
 }
@@ -516,6 +519,26 @@ impl TWorkerGlobalScope with structured_clone(
     TJsValue::to_js(self),
     TJsValue::to_js(value),
     TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn worker_global_scope_fetch_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(obj, input, init)"
+
+///|
+impl TWorkerGlobalScope with fetch(
+  self : Self,
+  input : RequestInfo,
+  init? : RequestInit = RequestInit::empty(),
+) -> JsPromise[Response] {
+  worker_global_scope_fetch_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(input),
+    TJsValue::to_js(init),
   )
 }
 

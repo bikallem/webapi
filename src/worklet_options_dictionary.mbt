@@ -19,7 +19,7 @@ extern "js" fn worklet_options_ffi(credentials : JsValue) -> WorkletOptions =
 
 ///|
 pub fn WorkletOptions::new(
-  credentials? : RequestCredentials = "same-origin",
+  credentials? : RequestCredentials = RequestCredentials::SameOrigin,
 ) -> WorkletOptions {
   worklet_options_ffi(TJsValue::to_js(credentials))
 }

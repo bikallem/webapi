@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Window
-// Specifications: cssom-view.idl, cssom.idl, dom.idl, html.idl
+// Specifications: cssom-view.idl, cssom.idl, fetch.idl, dom.idl, html.idl
 
 ///|
 #external
@@ -103,6 +103,7 @@ pub trait TWindow: TEventTarget {
   release_events(self : Self) -> Unit = _
   external(self : Self) -> External = _
   get_computed_style(self : Self, elt : &TElement, pseudo_elt? : CSSOMString) -> CSSStyleProperties = _
+  fetch_later(self : Self, input : RequestInfo, init? : DeferredRequestInit) -> FetchLaterResult = _
   match_media(self : Self, query : CSSOMString) -> MediaQueryList = _
   screen(self : Self) -> Screen = _
   visual_viewport(self : Self) -> VisualViewport = _
@@ -363,6 +364,9 @@ pub trait TWindow: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
+  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> JsPromise[
+    Response,
+  ] = _
   performance(self : Self) -> Performance = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
   request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
@@ -796,6 +800,26 @@ impl TWindow with get_computed_style(
     TJsValue::to_js(self),
     TJsValue::to_js(elt),
     opt_to_js(pseudo_elt),
+  )
+}
+
+///|
+extern "js" fn window_fetch_later_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> FetchLaterResult = "(obj, input, init) => obj.fetchLater(obj, input, init)"
+
+///|
+impl TWindow with fetch_later(
+  self : Self,
+  input : RequestInfo,
+  init? : DeferredRequestInit = DeferredRequestInit::empty(),
+) -> FetchLaterResult {
+  window_fetch_later_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(input),
+    TJsValue::to_js(init),
   )
 }
 
@@ -3171,6 +3195,26 @@ impl TWindow with structured_clone(
     TJsValue::to_js(self),
     TJsValue::to_js(value),
     TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn window_fetch_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(obj, input, init)"
+
+///|
+impl TWindow with fetch(
+  self : Self,
+  input : RequestInfo,
+  init? : RequestInit = RequestInit::empty(),
+) -> JsPromise[Response] {
+  window_fetch_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(input),
+    TJsValue::to_js(init),
   )
 }
 

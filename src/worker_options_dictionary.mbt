@@ -27,7 +27,7 @@ extern "js" fn worker_options_ffi(
 pub fn WorkerOptions::new(
   name? : String = "",
   type_? : WorkerType = WorkerType::Classic,
-  credentials? : RequestCredentials = "same-origin",
+  credentials? : RequestCredentials = RequestCredentials::SameOrigin,
 ) -> WorkerOptions {
   worker_options_ffi(
     TJsValue::to_js(name),

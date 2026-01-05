@@ -86,19 +86,3 @@ pub type OnErrorEventHandlerNonNullEvent
 pub impl TJsValue for OnErrorEventHandlerNonNullEvent with to_js(
   self : OnErrorEventHandlerNonNullEvent,
 ) -> JsValue = "%identity"
-
-///|
-#external
-pub type RequestCredentials
-
-///|
-pub impl TJsValue for RequestCredentials with to_js(self : RequestCredentials) -> JsValue = "%identity"
-
-///|
-#external
-pub type XMLHttpRequestBodyInit
-
-///|
-pub impl TJsValue for XMLHttpRequestBodyInit with to_js(
-  self : XMLHttpRequestBodyInit,
-) -> JsValue = "%identity"
