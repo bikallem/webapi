@@ -68,7 +68,7 @@ pub impl TDocumentFragmentReplaceChildrenNodes for String with to_js(
 
 ///|
 pub trait TDocumentFragment: TNode {
-  get_element_by_id(self : Self, element_id : String) -> Element = _
+  get_element_by_id(self : Self, element_id : String) -> Element? = _
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
@@ -77,7 +77,7 @@ pub trait TDocumentFragment: TNode {
   append(self : Self, nodes : &TDocumentFragmentAppendNodes) -> Unit = _
   replace_children(self : Self, nodes : &TDocumentFragmentReplaceChildrenNodes) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
-  query_selector(self : Self, selectors : String) -> Element = _
+  query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
 }
 
@@ -85,14 +85,19 @@ pub trait TDocumentFragment: TNode {
 extern "js" fn document_fragment_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
-) -> Element = "(obj, element_id) => obj.getElementById(obj, element_id)"
+) -> JsValue = "(obj, element_id) => obj.getElementById(obj, element_id)"
 
 ///|
-impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element {
-  document_fragment_get_element_by_id_ffi(
+impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element? {
+  let result = document_fragment_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -197,14 +202,19 @@ impl TDocumentFragment with move_before(
 extern "js" fn document_fragment_query_selector_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> Element = "(obj, selectors) => obj.querySelector(obj, selectors)"
+) -> JsValue = "(obj, selectors) => obj.querySelector(obj, selectors)"
 
 ///|
-impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element {
-  document_fragment_query_selector_ffi(
+impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element? {
+  let result = document_fragment_query_selector_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(selectors),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

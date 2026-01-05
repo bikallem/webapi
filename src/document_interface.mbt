@@ -218,7 +218,7 @@ pub trait TDocument: TNode {
   get_elements_by_name(self : Self, element_name : String) -> NodeList = _
   current_script(self : Self) -> HTMLOrSVGScriptElement = _
   open(self : Self, unused1? : String, unused2? : String) -> Document = _
-  open_2(self : Self, url : String, name : String, features : String) -> WindowProxy = _
+  open_2(self : Self, url : String, name : String, features : String) -> WindowProxy? = _
   close(self : Self) -> Unit = _
   write(self : Self, text : &TDocumentWriteText) -> Unit = _
   writeln(self : Self, text : &TDocumentWritelnText) -> Unit = _
@@ -259,16 +259,16 @@ pub trait TDocument: TNode {
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
   all(self : Self) -> HTMLAllCollection = _
-  element_from_point(self : Self, x : Double, y : Double) -> Element = _
+  element_from_point(self : Self, x : Double, y : Double) -> Element? = _
   elements_from_point(self : Self, x : Double, y : Double) -> Array[Element] = _
   caret_position_from_point(
     self : Self,
     x : Double,
     y : Double,
     options? : CaretPositionFromPointOptions,
-  ) -> CaretPosition = _
+  ) -> CaretPosition? = _
   scrolling_element(self : Self) -> Element = _
-  get_element_by_id(self : Self, element_id : String) -> Element = _
+  get_element_by_id(self : Self, element_id : String) -> Element? = _
   custom_element_registry(self : Self) -> CustomElementRegistry = _
   active_element(self : Self) -> Element = _
   style_sheets(self : Self) -> StyleSheetList = _
@@ -282,7 +282,7 @@ pub trait TDocument: TNode {
   append(self : Self, nodes : &TDocumentAppendNodes) -> Unit = _
   replace_children(self : Self, nodes : &TDocumentReplaceChildrenNodes) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
-  query_selector(self : Self, selectors : String) -> Element = _
+  query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   create_expression(
     self : Self,
@@ -1079,7 +1079,7 @@ extern "js" fn document_open_2_ffi(
   url : JsValue,
   name : JsValue,
   features : JsValue,
-) -> WindowProxy = "(obj, url, name, features) => obj.open_2(obj, url, name, features)"
+) -> JsValue = "(obj, url, name, features) => obj.open_2(obj, url, name, features)"
 
 ///|
 impl TDocument with open_2(
@@ -1087,13 +1087,18 @@ impl TDocument with open_2(
   url : String,
   name : String,
   features : String,
-) -> WindowProxy {
-  document_open_2_ffi(
+) -> WindowProxy? {
+  let result = document_open_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
     TJsValue::to_js(name),
     TJsValue::to_js(features),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -1476,15 +1481,20 @@ extern "js" fn document_element_from_point_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Element = "(obj, x, y) => obj.elementFromPoint(obj, x, y)"
+) -> JsValue = "(obj, x, y) => obj.elementFromPoint(obj, x, y)"
 
 ///|
-impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element {
-  document_element_from_point_ffi(
+impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element? {
+  let result = document_element_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -1511,7 +1521,7 @@ extern "js" fn document_caret_position_from_point_ffi(
   x : JsValue,
   y : JsValue,
   options : JsValue,
-) -> CaretPosition = "(obj, x, y, options) => obj.caretPositionFromPoint(obj, x, y, options)"
+) -> JsValue = "(obj, x, y, options) => obj.caretPositionFromPoint(obj, x, y, options)"
 
 ///|
 impl TDocument with caret_position_from_point(
@@ -1519,13 +1529,18 @@ impl TDocument with caret_position_from_point(
   x : Double,
   y : Double,
   options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
-) -> CaretPosition {
-  document_caret_position_from_point_ffi(
+) -> CaretPosition? {
+  let result = document_caret_position_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
     TJsValue::to_js(options),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -1540,14 +1555,19 @@ impl TDocument with scrolling_element(self : Self) -> Element {
 extern "js" fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
-) -> Element = "(obj, element_id) => obj.getElementById(obj, element_id)"
+) -> JsValue = "(obj, element_id) => obj.getElementById(obj, element_id)"
 
 ///|
-impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element {
-  document_get_element_by_id_ffi(
+impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
+  let result = document_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -1683,11 +1703,19 @@ impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> U
 extern "js" fn document_query_selector_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> Element = "(obj, selectors) => obj.querySelector(obj, selectors)"
+) -> JsValue = "(obj, selectors) => obj.querySelector(obj, selectors)"
 
 ///|
-impl TDocument with query_selector(self : Self, selectors : String) -> Element {
-  document_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
+impl TDocument with query_selector(self : Self, selectors : String) -> Element? {
+  let result = document_query_selector_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

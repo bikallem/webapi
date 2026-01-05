@@ -21,7 +21,7 @@ pub impl TEventTarget for TextTrackList
 ///|
 pub trait TTextTrackList: TEventTarget {
   length(self : Self) -> UInt = _
-  get_track_by_id(self : Self, id : String) -> TextTrack = _
+  get_track_by_id(self : Self, id : String) -> TextTrack? = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : EventHandler) -> Unit = _
   onaddtrack(self : Self) -> EventHandler = _
@@ -42,14 +42,19 @@ impl TTextTrackList with length(self : Self) -> UInt {
 extern "js" fn text_track_list_get_track_by_id_ffi(
   obj : JsValue,
   id : JsValue,
-) -> TextTrack = "(obj, id) => obj.getTrackById(obj, id)"
+) -> JsValue = "(obj, id) => obj.getTrackById(obj, id)"
 
 ///|
-impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack {
-  text_track_list_get_track_by_id_ffi(
+impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack? {
+  let result = text_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

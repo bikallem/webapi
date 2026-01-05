@@ -47,7 +47,7 @@ pub trait THTMLEmbedElement: THTMLElement {
   set_width(self : Self, width : String) -> Unit = _
   height(self : Self) -> String = _
   set_height(self : Self, height : String) -> Unit = _
-  get_svg_document(self : Self) -> Document = _
+  get_svg_document(self : Self) -> Document? = _
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
   name(self : Self) -> String = _
@@ -139,11 +139,16 @@ impl THTMLEmbedElement with set_height(self : Self, height : String) -> Unit {
 ///|
 extern "js" fn html_embed_element_get_svg_document_ffi(
   obj : JsValue,
-) -> Document = "(obj) => obj.getSVGDocument(obj)"
+) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
 
 ///|
-impl THTMLEmbedElement with get_svg_document(self : Self) -> Document {
-  html_embed_element_get_svg_document_ffi(TJsValue::to_js(self))
+impl THTMLEmbedElement with get_svg_document(self : Self) -> Document? {
+  let result = html_embed_element_get_svg_document_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

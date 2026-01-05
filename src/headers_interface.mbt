@@ -27,7 +27,7 @@ pub fn Headers::new(init? : HeadersInit) -> Headers {
 pub trait THeaders: TJsValue {
   append(self : Self, name : String, value : String) -> Unit = _
   delete(self : Self, name : String) -> Unit = _
-  get(self : Self, name : String) -> String = _
+  get(self : Self, name : String) -> String? = _
   get_set_cookie(self : Self) -> Array[String] = _
   has(self : Self, name : String) -> Bool = _
   set(self : Self, name : String, value : String) -> Unit = _
@@ -58,11 +58,16 @@ impl THeaders with delete(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn headers_get_ffi(obj : JsValue, name : JsValue) -> String = "(obj, name) => obj.get(obj, name)"
+extern "js" fn headers_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(obj, name)"
 
 ///|
-impl THeaders with get(self : Self, name : String) -> String {
-  headers_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+impl THeaders with get(self : Self, name : String) -> String? {
+  let result = headers_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

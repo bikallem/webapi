@@ -28,7 +28,7 @@ pub trait TSVGTransformList: TJsValue {
   remove_item(self : Self, index : UInt) -> SVGTransform = _
   append_item(self : Self, new_item : &TSVGTransform) -> SVGTransform = _
   create_svg_transform_from_matrix(self : Self, matrix? : DOMMatrix2DInit) -> SVGTransform = _
-  consolidate(self : Self) -> SVGTransform = _
+  consolidate(self : Self) -> SVGTransform? = _
 }
 
 ///|
@@ -155,11 +155,14 @@ impl TSVGTransformList with create_svg_transform_from_matrix(
 }
 
 ///|
-extern "js" fn svg_transform_list_consolidate_ffi(
-  obj : JsValue,
-) -> SVGTransform = "(obj) => obj.consolidate(obj)"
+extern "js" fn svg_transform_list_consolidate_ffi(obj : JsValue) -> JsValue = "(obj) => obj.consolidate(obj)"
 
 ///|
-impl TSVGTransformList with consolidate(self : Self) -> SVGTransform {
-  svg_transform_list_consolidate_ffi(TJsValue::to_js(self))
+impl TSVGTransformList with consolidate(self : Self) -> SVGTransform? {
+  let result = svg_transform_list_consolidate_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }

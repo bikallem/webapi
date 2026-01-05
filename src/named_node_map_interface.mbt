@@ -18,9 +18,9 @@ pub impl TNamedNodeMap for NamedNodeMap
 ///|
 pub trait TNamedNodeMap: TJsValue {
   length(self : Self) -> UInt = _
-  get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
-  set_named_item(self : Self, attr : &TAttr) -> Attr = _
-  set_named_item_ns(self : Self, attr : &TAttr) -> Attr = _
+  get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr? = _
+  set_named_item(self : Self, attr : &TAttr) -> Attr? = _
+  set_named_item_ns(self : Self, attr : &TAttr) -> Attr? = _
   remove_named_item(self : Self, qualified_name : String) -> Attr = _
   remove_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
 }
@@ -38,47 +38,62 @@ extern "js" fn named_node_map_get_named_item_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> Attr = "(obj, namespace_, local_name) => obj.getNamedItemNS(obj, namespace_, local_name)"
+) -> JsValue = "(obj, namespace_, local_name) => obj.getNamedItemNS(obj, namespace_, local_name)"
 
 ///|
 impl TNamedNodeMap with get_named_item_ns(
   self : Self,
   namespace_ : String,
   local_name : String,
-) -> Attr {
-  named_node_map_get_named_item_ns_ffi(
+) -> Attr? {
+  let result = named_node_map_get_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
     TJsValue::to_js(local_name),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
 extern "js" fn named_node_map_set_named_item_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> Attr = "(obj, attr) => obj.setNamedItem(obj, attr)"
+) -> JsValue = "(obj, attr) => obj.setNamedItem(obj, attr)"
 
 ///|
-impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr {
-  named_node_map_set_named_item_ffi(
+impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
+  let result = named_node_map_set_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
 extern "js" fn named_node_map_set_named_item_ns_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> Attr = "(obj, attr) => obj.setNamedItemNS(obj, attr)"
+) -> JsValue = "(obj, attr) => obj.setNamedItemNS(obj, attr)"
 
 ///|
-impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr {
-  named_node_map_set_named_item_ns_ffi(
+impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr? {
+  let result = named_node_map_set_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

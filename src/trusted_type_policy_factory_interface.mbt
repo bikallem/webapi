@@ -37,13 +37,13 @@ pub trait TTrustedTypePolicyFactory: TJsValue {
     attribute : String,
     element_ns? : String,
     attr_ns? : String,
-  ) -> String = _
+  ) -> String? = _
   get_property_type(
     self : Self,
     tag_name : String,
     property : String,
     element_ns? : String,
-  ) -> String = _
+  ) -> String? = _
   default_policy(self : Self) -> TrustedTypePolicy = _
 }
 
@@ -136,7 +136,7 @@ extern "js" fn trusted_type_policy_factory_get_attribute_type_ffi(
   attribute : JsValue,
   element_ns : JsValue,
   attr_ns : JsValue,
-) -> String = "(obj, tag_name, attribute, element_ns, attr_ns) => obj.getAttributeType(obj, tag_name, attribute, element_ns, attr_ns)"
+) -> JsValue = "(obj, tag_name, attribute, element_ns, attr_ns) => obj.getAttributeType(obj, tag_name, attribute, element_ns, attr_ns)"
 
 ///|
 impl TTrustedTypePolicyFactory with get_attribute_type(
@@ -145,14 +145,19 @@ impl TTrustedTypePolicyFactory with get_attribute_type(
   attribute : String,
   element_ns? : String = "",
   attr_ns? : String = "",
-) -> String {
-  trusted_type_policy_factory_get_attribute_type_ffi(
+) -> String? {
+  let result = trusted_type_policy_factory_get_attribute_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(tag_name),
     TJsValue::to_js(attribute),
     TJsValue::to_js(element_ns),
     TJsValue::to_js(attr_ns),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -161,7 +166,7 @@ extern "js" fn trusted_type_policy_factory_get_property_type_ffi(
   tag_name : JsValue,
   property : JsValue,
   element_ns : JsValue,
-) -> String = "(obj, tag_name, property, element_ns) => obj.getPropertyType(obj, tag_name, property, element_ns)"
+) -> JsValue = "(obj, tag_name, property, element_ns) => obj.getPropertyType(obj, tag_name, property, element_ns)"
 
 ///|
 impl TTrustedTypePolicyFactory with get_property_type(
@@ -169,13 +174,18 @@ impl TTrustedTypePolicyFactory with get_property_type(
   tag_name : String,
   property : String,
   element_ns? : String = "",
-) -> String {
-  trusted_type_policy_factory_get_property_type_ffi(
+) -> String? {
+  let result = trusted_type_policy_factory_get_property_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(tag_name),
     TJsValue::to_js(property),
     TJsValue::to_js(element_ns),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

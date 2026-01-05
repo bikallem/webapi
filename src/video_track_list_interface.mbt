@@ -21,7 +21,7 @@ pub impl TEventTarget for VideoTrackList
 ///|
 pub trait TVideoTrackList: TEventTarget {
   length(self : Self) -> UInt = _
-  get_track_by_id(self : Self, id : String) -> VideoTrack = _
+  get_track_by_id(self : Self, id : String) -> VideoTrack? = _
   selected_index(self : Self) -> Int = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : EventHandler) -> Unit = _
@@ -43,14 +43,19 @@ impl TVideoTrackList with length(self : Self) -> UInt {
 extern "js" fn video_track_list_get_track_by_id_ffi(
   obj : JsValue,
   id : JsValue,
-) -> VideoTrack = "(obj, id) => obj.getTrackById(obj, id)"
+) -> JsValue = "(obj, id) => obj.getTrackById(obj, id)"
 
 ///|
-impl TVideoTrackList with get_track_by_id(self : Self, id : String) -> VideoTrack {
-  video_track_list_get_track_by_id_ffi(
+impl TVideoTrackList with get_track_by_id(self : Self, id : String) -> VideoTrack? {
+  let result = video_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

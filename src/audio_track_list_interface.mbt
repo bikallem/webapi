@@ -21,7 +21,7 @@ pub impl TEventTarget for AudioTrackList
 ///|
 pub trait TAudioTrackList: TEventTarget {
   length(self : Self) -> UInt = _
-  get_track_by_id(self : Self, id : String) -> AudioTrack = _
+  get_track_by_id(self : Self, id : String) -> AudioTrack? = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : EventHandler) -> Unit = _
   onaddtrack(self : Self) -> EventHandler = _
@@ -42,14 +42,19 @@ impl TAudioTrackList with length(self : Self) -> UInt {
 extern "js" fn audio_track_list_get_track_by_id_ffi(
   obj : JsValue,
   id : JsValue,
-) -> AudioTrack = "(obj, id) => obj.getTrackById(obj, id)"
+) -> JsValue = "(obj, id) => obj.getTrackById(obj, id)"
 
 ///|
-impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrack {
-  audio_track_list_get_track_by_id_ffi(
+impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrack? {
+  let result = audio_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

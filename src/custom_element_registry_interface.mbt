@@ -77,7 +77,7 @@ pub trait TCustomElementRegistry: TJsValue {
     options? : ElementDefinitionOptions,
   ) -> Unit = _
   get(self : Self, name : String) -> CustomElementRegistryGet = _
-  get_name(self : Self, constructor_ : CustomElementConstructor) -> String = _
+  get_name(self : Self, constructor_ : CustomElementConstructor) -> String? = _
   when_defined(self : Self, name : String) -> JsPromise[
     CustomElementConstructor,
   ] = _
@@ -123,17 +123,22 @@ impl TCustomElementRegistry with get(self : Self, name : String) -> CustomElemen
 extern "js" fn custom_element_registry_get_name_ffi(
   obj : JsValue,
   constructor_ : JsValue,
-) -> String = "(obj, constructor_) => obj.getName(obj, constructor_)"
+) -> JsValue = "(obj, constructor_) => obj.getName(obj, constructor_)"
 
 ///|
 impl TCustomElementRegistry with get_name(
   self : Self,
   constructor_ : CustomElementConstructor,
-) -> String {
-  custom_element_registry_get_name_ffi(
+) -> String? {
+  let result = custom_element_registry_get_name_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(constructor_),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

@@ -82,7 +82,7 @@ pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
   response_url(self : Self) -> String = _
   status(self : Self) -> UInt = _
   status_text(self : Self) -> String = _
-  get_response_header(self : Self, name : String) -> String = _
+  get_response_header(self : Self, name : String) -> String? = _
   get_all_response_headers(self : Self) -> String = _
   override_mime_type(self : Self, mime : String) -> Unit = _
   response_type(self : Self) -> XMLHttpRequestResponseType = _
@@ -296,14 +296,19 @@ impl TXMLHttpRequest with status_text(self : Self) -> String {
 extern "js" fn xml_http_request_get_response_header_ffi(
   obj : JsValue,
   name : JsValue,
-) -> String = "(obj, name) => obj.getResponseHeader(obj, name)"
+) -> JsValue = "(obj, name) => obj.getResponseHeader(obj, name)"
 
 ///|
-impl TXMLHttpRequest with get_response_header(self : Self, name : String) -> String {
-  xml_http_request_get_response_header_ffi(
+impl TXMLHttpRequest with get_response_header(self : Self, name : String) -> String? {
+  let result = xml_http_request_get_response_header_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

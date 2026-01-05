@@ -33,8 +33,8 @@ pub impl TEventTarget for SVGGraphicsElement
 pub trait TSVGGraphicsElement: TSVGElement {
   transform(self : Self) -> SVGAnimatedTransformList = _
   get_b_box(self : Self, options? : SVGBoundingBoxOptions) -> DOMRect = _
-  get_ctm(self : Self) -> DOMMatrix = _
-  get_screen_ctm(self : Self) -> DOMMatrix = _
+  get_ctm(self : Self) -> DOMMatrix? = _
+  get_screen_ctm(self : Self) -> DOMMatrix? = _
   required_extensions(self : Self) -> SVGStringList = _
   system_language(self : Self) -> SVGStringList = _
 }
@@ -67,21 +67,31 @@ impl TSVGGraphicsElement with get_b_box(
 }
 
 ///|
-extern "js" fn svg_graphics_element_get_ctm_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.getCTM(obj)"
+extern "js" fn svg_graphics_element_get_ctm_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getCTM(obj)"
 
 ///|
-impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix {
-  svg_graphics_element_get_ctm_ffi(TJsValue::to_js(self))
+impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix? {
+  let result = svg_graphics_element_get_ctm_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
 extern "js" fn svg_graphics_element_get_screen_ctm_ffi(
   obj : JsValue,
-) -> DOMMatrix = "(obj) => obj.getScreenCTM(obj)"
+) -> JsValue = "(obj) => obj.getScreenCTM(obj)"
 
 ///|
-impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix {
-  svg_graphics_element_get_screen_ctm_ffi(TJsValue::to_js(self))
+impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix? {
+  let result = svg_graphics_element_get_screen_ctm_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

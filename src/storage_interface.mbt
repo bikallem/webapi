@@ -18,7 +18,7 @@ pub impl TStorage for Storage
 ///|
 pub trait TStorage: TJsValue {
   length(self : Self) -> UInt = _
-  key(self : Self, index : UInt) -> String = _
+  key(self : Self, index : UInt) -> String? = _
   clear(self : Self) -> Unit = _
 }
 
@@ -31,11 +31,16 @@ impl TStorage with length(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> String = "(obj, index) => obj.key(obj, index)"
+extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.key(obj, index)"
 
 ///|
-impl TStorage with key(self : Self, index : UInt) -> String {
-  storage_key_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+impl TStorage with key(self : Self, index : UInt) -> String? {
+  let result = storage_key_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

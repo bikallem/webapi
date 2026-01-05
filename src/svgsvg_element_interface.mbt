@@ -64,7 +64,7 @@ pub trait TSVGSVGElement: TSVGGraphicsElement {
   create_svg_rect(self : Self) -> DOMRect = _
   create_svg_transform(self : Self) -> SVGTransform = _
   create_svg_transform_from_matrix(self : Self, matrix? : DOMMatrix2DInit) -> SVGTransform = _
-  get_element_by_id(self : Self, element_id : String) -> Element = _
+  get_element_by_id(self : Self, element_id : String) -> Element? = _
   suspend_redraw(self : Self, max_wait_milliseconds : UInt) -> UInt = _
   unsuspend_redraw(self : Self, suspend_handle_id : UInt) -> Unit = _
   unsuspend_redraw_all(self : Self) -> Unit = _
@@ -340,14 +340,19 @@ impl TSVGSVGElement with create_svg_transform_from_matrix(
 extern "js" fn svgsvg_element_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
-) -> Element = "(obj, element_id) => obj.getElementById(obj, element_id)"
+) -> JsValue = "(obj, element_id) => obj.getElementById(obj, element_id)"
 
 ///|
-impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> Element {
-  svgsvg_element_get_element_by_id_ffi(
+impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> Element? {
+  let result = svgsvg_element_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

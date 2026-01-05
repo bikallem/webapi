@@ -52,7 +52,7 @@ pub trait THTMLObjectElement: THTMLElement {
   set_height(self : Self, height : String) -> Unit = _
   content_document(self : Self) -> Document = _
   content_window(self : Self) -> WindowProxy = _
-  get_svg_document(self : Self) -> Document = _
+  get_svg_document(self : Self) -> Document? = _
   will_validate(self : Self) -> Bool = _
   validity(self : Self) -> ValidityState = _
   validation_message(self : Self) -> String = _
@@ -218,11 +218,16 @@ impl THTMLObjectElement with content_window(self : Self) -> WindowProxy {
 ///|
 extern "js" fn html_object_element_get_svg_document_ffi(
   obj : JsValue,
-) -> Document = "(obj) => obj.getSVGDocument(obj)"
+) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
 
 ///|
-impl THTMLObjectElement with get_svg_document(self : Self) -> Document {
-  html_object_element_get_svg_document_ffi(TJsValue::to_js(self))
+impl THTMLObjectElement with get_svg_document(self : Self) -> Document? {
+  let result = html_object_element_get_svg_document_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

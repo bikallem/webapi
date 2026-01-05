@@ -22,7 +22,7 @@ pub trait TDataTransferItem: TJsValue {
   kind(self : Self) -> String = _
   type_(self : Self) -> String = _
   get_as_string(self : Self, _callback : FunctionStringCallback) -> Unit = _
-  get_as_file(self : Self) -> File = _
+  get_as_file(self : Self) -> File? = _
 }
 
 ///|
@@ -59,9 +59,14 @@ impl TDataTransferItem with get_as_string(
 }
 
 ///|
-extern "js" fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> File = "(obj) => obj.getAsFile(obj)"
+extern "js" fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getAsFile(obj)"
 
 ///|
-impl TDataTransferItem with get_as_file(self : Self) -> File {
-  data_transfer_item_get_as_file_ffi(TJsValue::to_js(self))
+impl TDataTransferItem with get_as_file(self : Self) -> File? {
+  let result = data_transfer_item_get_as_file_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }

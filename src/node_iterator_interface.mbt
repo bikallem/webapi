@@ -22,8 +22,8 @@ pub trait TNodeIterator: TJsValue {
   pointer_before_reference_node(self : Self) -> Bool = _
   what_to_show(self : Self) -> UInt = _
   filter(self : Self) -> NodeFilter = _
-  next_node(self : Self) -> Node = _
-  previous_node(self : Self) -> Node = _
+  next_node(self : Self) -> Node? = _
+  previous_node(self : Self) -> Node? = _
   detach(self : Self) -> Unit = _
 }
 
@@ -70,19 +70,29 @@ impl TNodeIterator with filter(self : Self) -> NodeFilter {
 }
 
 ///|
-extern "js" fn node_iterator_next_node_ffi(obj : JsValue) -> Node = "(obj) => obj.nextNode(obj)"
+extern "js" fn node_iterator_next_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextNode(obj)"
 
 ///|
-impl TNodeIterator with next_node(self : Self) -> Node {
-  node_iterator_next_node_ffi(TJsValue::to_js(self))
+impl TNodeIterator with next_node(self : Self) -> Node? {
+  let result = node_iterator_next_node_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
-extern "js" fn node_iterator_previous_node_ffi(obj : JsValue) -> Node = "(obj) => obj.previousNode(obj)"
+extern "js" fn node_iterator_previous_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousNode(obj)"
 
 ///|
-impl TNodeIterator with previous_node(self : Self) -> Node {
-  node_iterator_previous_node_ffi(TJsValue::to_js(self))
+impl TNodeIterator with previous_node(self : Self) -> Node? {
+  let result = node_iterator_previous_node_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

@@ -79,14 +79,14 @@ pub trait TWindow: TEventTarget {
   set_opener(self : Self, opener : JsValue) -> Unit = _
   parent(self : Self) -> WindowProxy = _
   frame_element(self : Self) -> Element = _
-  open(self : Self, url? : String, target? : String, features? : String) -> WindowProxy = _
+  open(self : Self, url? : String, target? : String, features? : String) -> WindowProxy? = _
   navigator(self : Self) -> Navigator = _
   client_information(self : Self) -> Navigator = _
   origin_agent_cluster(self : Self) -> Bool = _
   alert(self : Self) -> Unit = _
   alert_2(self : Self, message : String) -> Unit = _
   confirm(self : Self, message? : String) -> Bool = _
-  prompt(self : Self, message? : String, default? : String) -> String = _
+  prompt(self : Self, message? : String, default? : String) -> String? = _
   print(self : Self) -> Unit = _
   post_message(
     self : Self,
@@ -623,7 +623,7 @@ extern "js" fn window_open_ffi(
   url : JsValue,
   target : JsValue,
   features : JsValue,
-) -> WindowProxy = "(obj, url, target, features) => obj.open(obj, url, target, features)"
+) -> JsValue = "(obj, url, target, features) => obj.open(obj, url, target, features)"
 
 ///|
 impl TWindow with open(
@@ -631,13 +631,18 @@ impl TWindow with open(
   url? : String = "",
   target? : String = "_blank",
   features? : String = "",
-) -> WindowProxy {
-  window_open_ffi(
+) -> WindowProxy? {
+  let result = window_open_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
     TJsValue::to_js(target),
     TJsValue::to_js(features),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -693,19 +698,24 @@ extern "js" fn window_prompt_ffi(
   obj : JsValue,
   message : JsValue,
   default : JsValue,
-) -> String = "(obj, message, default) => obj.prompt(obj, message, default)"
+) -> JsValue = "(obj, message, default) => obj.prompt(obj, message, default)"
 
 ///|
 impl TWindow with prompt(
   self : Self,
   message? : String = "",
   default? : String = "",
-) -> String {
-  window_prompt_ffi(
+) -> String? {
+  let result = window_prompt_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(default),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

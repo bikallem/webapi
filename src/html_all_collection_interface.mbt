@@ -47,7 +47,7 @@ pub impl THTMLAllCollectionItem for Element with to_js(self : Element) -> JsValu
 ///|
 pub trait THTMLAllCollection: TJsValue {
   length(self : Self) -> UInt = _
-  item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem = _
+  item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? = _
 }
 
 ///|
@@ -62,9 +62,17 @@ impl THTMLAllCollection with length(self : Self) -> UInt {
 extern "js" fn html_all_collection_item_ffi(
   obj : JsValue,
   name_or_index : JsValue,
-) -> HTMLAllCollectionItem = "(obj, name_or_index) => obj.item(obj, name_or_index)"
+) -> JsValue = "(obj, name_or_index) => obj.item(obj, name_or_index)"
 
 ///|
-impl THTMLAllCollection with item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem {
-  html_all_collection_item_ffi(TJsValue::to_js(self), opt_to_js(name_or_index))
+impl THTMLAllCollection with item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? {
+  let result = html_all_collection_item_ffi(
+    TJsValue::to_js(self),
+    opt_to_js(name_or_index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }

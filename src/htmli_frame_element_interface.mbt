@@ -85,7 +85,7 @@ pub trait THTMLIFrameElement: THTMLElement {
   set_loading(self : Self, loading : String) -> Unit = _
   content_document(self : Self) -> Document = _
   content_window(self : Self) -> WindowProxy = _
-  get_svg_document(self : Self) -> Document = _
+  get_svg_document(self : Self) -> Document? = _
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
   scrolling(self : Self) -> String = _
@@ -331,11 +331,16 @@ impl THTMLIFrameElement with content_window(self : Self) -> WindowProxy {
 ///|
 extern "js" fn htmli_frame_element_get_svg_document_ffi(
   obj : JsValue,
-) -> Document = "(obj) => obj.getSVGDocument(obj)"
+) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
 
 ///|
-impl THTMLIFrameElement with get_svg_document(self : Self) -> Document {
-  htmli_frame_element_get_svg_document_ffi(TJsValue::to_js(self))
+impl THTMLIFrameElement with get_svg_document(self : Self) -> Document? {
+  let result = htmli_frame_element_get_svg_document_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

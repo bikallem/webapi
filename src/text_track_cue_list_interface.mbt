@@ -20,7 +20,7 @@ pub impl TTextTrackCueList for TextTrackCueList
 ///|
 pub trait TTextTrackCueList: TJsValue {
   length(self : Self) -> UInt = _
-  get_cue_by_id(self : Self, id : String) -> TextTrackCue = _
+  get_cue_by_id(self : Self, id : String) -> TextTrackCue? = _
 }
 
 ///|
@@ -35,12 +35,17 @@ impl TTextTrackCueList with length(self : Self) -> UInt {
 extern "js" fn text_track_cue_list_get_cue_by_id_ffi(
   obj : JsValue,
   id : JsValue,
-) -> TextTrackCue = "(obj, id) => obj.getCueById(obj, id)"
+) -> JsValue = "(obj, id) => obj.getCueById(obj, id)"
 
 ///|
-impl TTextTrackCueList with get_cue_by_id(self : Self, id : String) -> TextTrackCue {
-  text_track_cue_list_get_cue_by_id_ffi(
+impl TTextTrackCueList with get_cue_by_id(self : Self, id : String) -> TextTrackCue? {
+  let result = text_track_cue_list_get_cue_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }

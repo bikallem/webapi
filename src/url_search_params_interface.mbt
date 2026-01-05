@@ -46,7 +46,7 @@ pub trait TURLSearchParams: TJsValue {
   size(self : Self) -> UInt = _
   append(self : Self, name : String, value : String) -> Unit = _
   delete(self : Self, name : String, value? : String) -> Unit = _
-  get(self : Self, name : String) -> String = _
+  get(self : Self, name : String) -> String? = _
   get_all(self : Self, name : String) -> Array[String] = _
   has(self : Self, name : String, value? : String) -> Bool = _
   set(self : Self, name : String, value : String) -> Unit = _
@@ -97,11 +97,19 @@ impl TURLSearchParams with delete(self : Self, name : String, value? : String) -
 extern "js" fn url_search_params_get_ffi(
   obj : JsValue,
   name : JsValue,
-) -> String = "(obj, name) => obj.get(obj, name)"
+) -> JsValue = "(obj, name) => obj.get(obj, name)"
 
 ///|
-impl TURLSearchParams with get(self : Self, name : String) -> String {
-  url_search_params_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+impl TURLSearchParams with get(self : Self, name : String) -> String? {
+  let result = url_search_params_get_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(name),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

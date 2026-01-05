@@ -43,7 +43,7 @@ pub trait THTMLCanvasElement: THTMLElement {
   set_width(self : Self, width : UInt) -> Unit = _
   height(self : Self) -> UInt = _
   set_height(self : Self, height : UInt) -> Unit = _
-  get_context(self : Self, context_id : String, options? : JsValue) -> RenderingContext = _
+  get_context(self : Self, context_id : String, options? : JsValue) -> RenderingContext? = _
   to_data_url(self : Self, type_? : String, quality? : JsValue) -> String = _
   to_blob(
     self : Self,
@@ -103,19 +103,24 @@ extern "js" fn html_canvas_element_get_context_ffi(
   obj : JsValue,
   context_id : JsValue,
   options : JsValue,
-) -> RenderingContext = "(obj, context_id, options) => obj.getContext(obj, context_id, options)"
+) -> JsValue = "(obj, context_id, options) => obj.getContext(obj, context_id, options)"
 
 ///|
 impl THTMLCanvasElement with get_context(
   self : Self,
   context_id : String,
   options? : JsValue = JsValue::null(),
-) -> RenderingContext {
-  html_canvas_element_get_context_ffi(
+) -> RenderingContext? {
+  let result = html_canvas_element_get_context_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(context_id),
     TJsValue::to_js(options),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

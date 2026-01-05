@@ -54,8 +54,8 @@ pub trait TXPathResult: TJsValue {
   single_node_value(self : Self) -> Node = _
   invalid_iterator_state(self : Self) -> Bool = _
   snapshot_length(self : Self) -> UInt = _
-  iterate_next(self : Self) -> Node = _
-  snapshot_item(self : Self, index : UInt) -> Node = _
+  iterate_next(self : Self) -> Node? = _
+  snapshot_item(self : Self, index : UInt) -> Node? = _
 }
 
 ///|
@@ -115,20 +115,33 @@ impl TXPathResult with snapshot_length(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn x_path_result_iterate_next_ffi(obj : JsValue) -> Node = "(obj) => obj.iterateNext(obj)"
+extern "js" fn x_path_result_iterate_next_ffi(obj : JsValue) -> JsValue = "(obj) => obj.iterateNext(obj)"
 
 ///|
-impl TXPathResult with iterate_next(self : Self) -> Node {
-  x_path_result_iterate_next_ffi(TJsValue::to_js(self))
+impl TXPathResult with iterate_next(self : Self) -> Node? {
+  let result = x_path_result_iterate_next_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
 extern "js" fn x_path_result_snapshot_item_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Node = "(obj, index) => obj.snapshotItem(obj, index)"
+) -> JsValue = "(obj, index) => obj.snapshotItem(obj, index)"
 
 ///|
-impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node {
-  x_path_result_snapshot_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node? {
+  let result = x_path_result_snapshot_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }

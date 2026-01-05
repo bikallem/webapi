@@ -4678,7 +4678,7 @@ pub trait TAudioTrack : TJsValue {
 
 pub trait TAudioTrackList : TEventTarget {
   length(Self) -> UInt
-  get_track_by_id(Self, String) -> AudioTrack
+  get_track_by_id(Self, String) -> AudioTrack?
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, EventHandlerNonNull) -> Unit
   onaddtrack(Self) -> EventHandlerNonNull
@@ -4876,7 +4876,7 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, CanvasImageSource, String) -> CanvasPattern
+  create_pattern(Self, CanvasImageSource, String) -> CanvasPattern?
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -4984,7 +4984,7 @@ pub impl TCanvasRenderingContext2DStrokeStyle for String
 pub trait TCaretPosition : TJsValue {
   offset_node(Self) -> Node
   offset(Self) -> UInt
-  get_client_rect(Self) -> DOMRect
+  get_client_rect(Self) -> DOMRect?
 }
 
 pub trait TCharacterData : TNode {
@@ -5045,7 +5045,7 @@ pub trait TCompositionEvent : TUIEvent {
 pub trait TCustomElementRegistry : TJsValue {
   define_(Self, String, CustomElementConstructor, options? : ElementDefinitionOptions) -> Unit
   get(Self, String) -> CustomElementRegistryGet
-  get_name(Self, CustomElementConstructor) -> String
+  get_name(Self, CustomElementConstructor) -> String?
   when_defined(Self, String) -> JsPromise[CustomElementConstructor]
   upgrade(Self, &TNode) -> Unit
   initialize(Self, &TNode) -> Unit
@@ -5294,13 +5294,13 @@ pub trait TDataTransferItem : TJsValue {
   kind(Self) -> String
   type_(Self) -> String
   get_as_string(Self, FunctionStringCallback) -> Unit
-  get_as_file(Self) -> File
+  get_as_file(Self) -> File?
 }
 
 pub trait TDataTransferItemList : TJsValue {
   length(Self) -> UInt
-  add(Self, String, String) -> DataTransferItem
-  add_2(Self, &TFile) -> DataTransferItem
+  add(Self, String, String) -> DataTransferItem?
+  add_2(Self, &TFile) -> DataTransferItem?
   remove(Self, UInt) -> Unit
   clear(Self) -> Unit
 }
@@ -5372,7 +5372,7 @@ pub trait TDocument : TNode {
   get_elements_by_name(Self, String) -> NodeList
   current_script(Self) -> HTMLOrSVGScriptElement
   open(Self, unused1? : String, unused2? : String) -> Document
-  open_2(Self, String, String, String) -> Window
+  open_2(Self, String, String, String) -> Window?
   close(Self) -> Unit
   write(Self, &TDocumentWriteText) -> Unit
   writeln(Self, &TDocumentWritelnText) -> Unit
@@ -5408,11 +5408,11 @@ pub trait TDocument : TNode {
   capture_events(Self) -> Unit
   release_events(Self) -> Unit
   all(Self) -> HTMLAllCollection
-  element_from_point(Self, Double, Double) -> Element
+  element_from_point(Self, Double, Double) -> Element?
   elements_from_point(Self, Double, Double) -> Array[Element]
-  caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> CaretPosition
+  caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> CaretPosition?
   scrolling_element(Self) -> Element
-  get_element_by_id(Self, String) -> Element
+  get_element_by_id(Self, String) -> Element?
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
   style_sheets(Self) -> StyleSheetList
@@ -5426,7 +5426,7 @@ pub trait TDocument : TNode {
   append(Self, &TDocumentAppendNodes) -> Unit
   replace_children(Self, &TDocumentReplaceChildrenNodes) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> Element
+  query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   create_expression(Self, String, resolver? : XPathNSResolver) -> XPathExpression
   create_ns_resolver(Self, &TNode) -> Node
@@ -5605,7 +5605,7 @@ pub(open) trait TDocumentCreateElementOptions {
 pub impl TDocumentCreateElementOptions for String
 
 pub trait TDocumentFragment : TNode {
-  get_element_by_id(Self, String) -> Element
+  get_element_by_id(Self, String) -> Element?
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
@@ -5614,7 +5614,7 @@ pub trait TDocumentFragment : TNode {
   append(Self, &TDocumentFragmentAppendNodes) -> Unit
   replace_children(Self, &TDocumentFragmentReplaceChildrenNodes) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> Element
+  query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
 }
 
@@ -5707,8 +5707,8 @@ pub trait TElement : TNode {
   has_attributes(Self) -> Bool
   attributes(Self) -> NamedNodeMap
   get_attribute_names(Self) -> Array[String]
-  get_attribute(Self, String) -> String
-  get_attribute_ns(Self, String, String) -> String
+  get_attribute(Self, String) -> String?
+  get_attribute_ns(Self, String, String) -> String?
   set_attribute(Self, String, &TElementSetAttributeValue) -> Unit
   set_attribute_ns(Self, String, String, &TElementSetAttributeNSValue) -> Unit
   remove_attribute(Self, String) -> Unit
@@ -5716,21 +5716,21 @@ pub trait TElement : TNode {
   toggle_attribute(Self, String, force? : Bool) -> Bool
   has_attribute(Self, String) -> Bool
   has_attribute_ns(Self, String, String) -> Bool
-  get_attribute_node(Self, String) -> Attr
-  get_attribute_node_ns(Self, String, String) -> Attr
-  set_attribute_node(Self, &TAttr) -> Attr
-  set_attribute_node_ns(Self, &TAttr) -> Attr
+  get_attribute_node(Self, String) -> Attr?
+  get_attribute_node_ns(Self, String, String) -> Attr?
+  set_attribute_node(Self, &TAttr) -> Attr?
+  set_attribute_node_ns(Self, &TAttr) -> Attr?
   remove_attribute_node(Self, &TAttr) -> Attr
   attach_shadow(Self, ShadowRootInit) -> ShadowRoot
   shadow_root(Self) -> ShadowRoot
   custom_element_registry(Self) -> CustomElementRegistry
-  closest(Self, String) -> Element
+  closest(Self, String) -> Element?
   matches(Self, String) -> Bool
   webkit_matches_selector(Self, String) -> Bool
   get_elements_by_tag_name(Self, String) -> HTMLCollection
   get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
   get_elements_by_class_name(Self, String) -> HTMLCollection
-  insert_adjacent_element(Self, String, &TElement) -> Element
+  insert_adjacent_element(Self, String, &TElement) -> Element?
   insert_adjacent_text(Self, String, String) -> Unit
   set_html_unsafe(Self, &TElementSetHTMLUnsafeHtml) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
@@ -5768,7 +5768,7 @@ pub trait TElement : TNode {
   append(Self, &TElementAppendNodes) -> Unit
   replace_children(Self, &TElementReplaceChildrenNodes) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> Element
+  query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   previous_element_sibling(Self) -> Element
   next_element_sibling(Self) -> Element
@@ -5993,7 +5993,7 @@ pub trait TFormData : TJsValue {
   append(Self, String, String) -> Unit
   append_2(Self, String, &TBlob, filename? : String) -> Unit
   delete(Self, String) -> Unit
-  get(Self, String) -> FormDataEntryValue
+  get(Self, String) -> FormDataEntryValue?
   get_all(Self, String) -> Array[FormDataEntryValue]
   has(Self, String) -> Bool
   set(Self, String, String) -> Unit
@@ -6015,7 +6015,7 @@ pub(open) trait TGeometryNode {
 
 pub trait THTMLAllCollection : TJsValue {
   length(Self) -> UInt
-  item(Self, name_or_index? : String) -> HTMLAllCollectionItem
+  item(Self, name_or_index? : String) -> HTMLAllCollectionItem?
 }
 
 pub(open) trait THTMLAllCollectionItem {
@@ -6224,7 +6224,7 @@ pub trait THTMLCanvasElement : THTMLElement {
   set_width(Self, UInt) -> Unit
   height(Self) -> UInt
   set_height(Self, UInt) -> Unit
-  get_context(Self, String, options? : JsValue) -> RenderingContext
+  get_context(Self, String, options? : JsValue) -> RenderingContext?
   to_data_url(Self, type_? : String, quality? : JsValue) -> String
   to_blob(Self, BlobCallback, type_? : String, quality? : JsValue) -> Unit
   transfer_control_to_offscreen(Self) -> OffscreenCanvas
@@ -6517,7 +6517,7 @@ pub trait THTMLEmbedElement : THTMLElement {
   set_width(Self, String) -> Unit
   height(Self) -> String
   set_height(Self, String) -> Unit
-  get_svg_document(Self) -> Document
+  get_svg_document(Self) -> Document?
   align(Self) -> String
   set_align(Self, String) -> Unit
   name(Self) -> String
@@ -6695,7 +6695,7 @@ pub trait THTMLIFrameElement : THTMLElement {
   set_loading(Self, String) -> Unit
   content_document(Self) -> Document
   content_window(Self) -> Window
-  get_svg_document(Self) -> Document
+  get_svg_document(Self) -> Document?
   align(Self) -> String
   set_align(Self, String) -> Unit
   scrolling(Self) -> String
@@ -7080,7 +7080,7 @@ pub trait THTMLObjectElement : THTMLElement {
   set_height(Self, String) -> Unit
   content_document(Self) -> Document
   content_window(Self) -> Window
-  get_svg_document(Self) -> Document
+  get_svg_document(Self) -> Document?
   will_validate(Self) -> Bool
   validity(Self) -> ValidityState
   validation_message(Self) -> String
@@ -7266,7 +7266,7 @@ pub trait THTMLSelectElement : THTMLElement {
   options(Self) -> HTMLOptionsCollection
   length(Self) -> UInt
   set_length(Self, UInt) -> Unit
-  named_item(Self, String) -> HTMLOptionElement
+  named_item(Self, String) -> HTMLOptionElement?
   add(Self, &THTMLSelectElementAddElement, before? : &THTMLSelectElementAddBefore) -> Unit
   remove(Self) -> Unit
   remove_2(Self, Int) -> Unit
@@ -7583,7 +7583,7 @@ pub trait THashChangeEvent : TEvent {
 pub trait THeaders : TJsValue {
   append(Self, String, String) -> Unit
   delete(Self, String) -> Unit
-  get(Self, String) -> String
+  get(Self, String) -> String?
   get_set_cookie(Self) -> Array[String]
   has(Self, String) -> Bool
   set(Self, String, String) -> Unit
@@ -7815,9 +7815,9 @@ pub trait TMutationRecord : TJsValue {
 
 pub trait TNamedNodeMap : TJsValue {
   length(Self) -> UInt
-  get_named_item_ns(Self, String, String) -> Attr
-  set_named_item(Self, &TAttr) -> Attr
-  set_named_item_ns(Self, &TAttr) -> Attr
+  get_named_item_ns(Self, String, String) -> Attr?
+  set_named_item(Self, &TAttr) -> Attr?
+  set_named_item_ns(Self, &TAttr) -> Attr?
   remove_named_item(Self, String) -> Attr
   remove_named_item_ns(Self, String, String) -> Attr
 }
@@ -7954,8 +7954,8 @@ pub trait TNode : TEventTarget {
   is_same_node(Self, &TNode) -> Bool
   compare_document_position(Self, &TNode) -> UInt
   contains(Self, &TNode) -> Bool
-  lookup_prefix(Self, String) -> String
-  lookup_namespace_uri(Self, String) -> String
+  lookup_prefix(Self, String) -> String?
+  lookup_namespace_uri(Self, String) -> String?
   is_default_namespace(Self, String) -> Bool
   insert_before(Self, &TNode, &TNode) -> Node
   append_child(Self, &TNode) -> Node
@@ -7969,8 +7969,8 @@ pub trait TNodeIterator : TJsValue {
   pointer_before_reference_node(Self) -> Bool
   what_to_show(Self) -> UInt
   filter(Self) -> NodeFilter
-  next_node(Self) -> Node
-  previous_node(Self) -> Node
+  next_node(Self) -> Node?
+  previous_node(Self) -> Node?
   detach(Self) -> Unit
 }
 
@@ -7998,7 +7998,7 @@ pub trait TOffscreenCanvas : TEventTarget {
   set_width(Self, UInt64) -> Unit
   height(Self) -> UInt64
   set_height(Self, UInt64) -> Unit
-  get_context(Self, OffscreenRenderingContextId, options? : JsValue) -> OffscreenRenderingContext
+  get_context(Self, OffscreenRenderingContextId, options? : JsValue) -> OffscreenRenderingContext?
   transfer_to_image_bitmap(Self) -> ImageBitmap
   convert_to_blob(Self, options? : ImageEncodeOptions) -> JsPromise[Blob]
   oncontextlost(Self) -> EventHandlerNonNull
@@ -8037,7 +8037,7 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, CanvasImageSource, String) -> CanvasPattern
+  create_pattern(Self, CanvasImageSource, String) -> CanvasPattern?
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -8685,8 +8685,8 @@ pub trait TSVGGradientElement : TSVGElement {
 pub trait TSVGGraphicsElement : TSVGElement {
   transform(Self) -> SVGAnimatedTransformList
   get_b_box(Self, options? : SVGBoundingBoxOptions) -> DOMRect
-  get_ctm(Self) -> DOMMatrix
-  get_screen_ctm(Self) -> DOMMatrix
+  get_ctm(Self) -> DOMMatrix?
+  get_screen_ctm(Self) -> DOMMatrix?
   required_extensions(Self) -> SVGStringList
   system_language(Self) -> SVGStringList
 }
@@ -8854,7 +8854,7 @@ pub trait TSVGSVGElement : TSVGGraphicsElement {
   create_svg_rect(Self) -> DOMRect
   create_svg_transform(Self) -> SVGTransform
   create_svg_transform_from_matrix(Self, matrix? : DOMMatrix2DInit) -> SVGTransform
-  get_element_by_id(Self, String) -> Element
+  get_element_by_id(Self, String) -> Element?
   suspend_redraw(Self, UInt) -> UInt
   unsuspend_redraw(Self, UInt) -> Unit
   unsuspend_redraw_all(Self) -> Unit
@@ -9002,7 +9002,7 @@ pub trait TSVGTransformList : TJsValue {
   remove_item(Self, UInt) -> SVGTransform
   append_item(Self, &TSVGTransform) -> SVGTransform
   create_svg_transform_from_matrix(Self, matrix? : DOMMatrix2DInit) -> SVGTransform
-  consolidate(Self) -> SVGTransform
+  consolidate(Self) -> SVGTransform?
 }
 
 pub trait TSVGUnitTypes : TJsValue {
@@ -9093,7 +9093,7 @@ pub trait TStaticRange : TAbstractRange {
 
 pub trait TStorage : TJsValue {
   length(Self) -> UInt
-  key(Self, UInt) -> String
+  key(Self, UInt) -> String?
   clear(Self) -> Unit
 }
 
@@ -9193,12 +9193,12 @@ pub trait TTextTrackCue : TEventTarget {
 
 pub trait TTextTrackCueList : TJsValue {
   length(Self) -> UInt
-  get_cue_by_id(Self, String) -> TextTrackCue
+  get_cue_by_id(Self, String) -> TextTrackCue?
 }
 
 pub trait TTextTrackList : TEventTarget {
   length(Self) -> UInt
-  get_track_by_id(Self, String) -> TextTrack
+  get_track_by_id(Self, String) -> TextTrack?
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, EventHandlerNonNull) -> Unit
   onaddtrack(Self) -> EventHandlerNonNull
@@ -9242,13 +9242,13 @@ pub trait TTreeWalker : TJsValue {
   filter(Self) -> NodeFilter
   current_node(Self) -> Node
   set_current_node(Self, Node) -> Unit
-  parent_node(Self) -> Node
-  first_child(Self) -> Node
-  last_child(Self) -> Node
-  previous_sibling(Self) -> Node
-  next_sibling(Self) -> Node
-  previous_node(Self) -> Node
-  next_node(Self) -> Node
+  parent_node(Self) -> Node?
+  first_child(Self) -> Node?
+  last_child(Self) -> Node?
+  previous_sibling(Self) -> Node?
+  next_sibling(Self) -> Node?
+  previous_node(Self) -> Node?
+  next_node(Self) -> Node?
 }
 
 pub trait TTrustedHTML : TJsValue {
@@ -9281,8 +9281,8 @@ pub trait TTrustedTypePolicyFactory : TJsValue {
   is_script_url(Self, JsValue) -> Bool
   empty_html(Self) -> TrustedHTML
   empty_script(Self) -> TrustedScript
-  get_attribute_type(Self, String, String, element_ns? : String, attr_ns? : String) -> String
-  get_property_type(Self, String, String, element_ns? : String) -> String
+  get_attribute_type(Self, String, String, element_ns? : String, attr_ns? : String) -> String?
+  get_property_type(Self, String, String, element_ns? : String) -> String?
   default_policy(Self) -> TrustedTypePolicy
 }
 
@@ -9327,7 +9327,7 @@ pub trait TURLSearchParams : TJsValue {
   size(Self) -> UInt
   append(Self, String, String) -> Unit
   delete(Self, String, value? : String) -> Unit
-  get(Self, String) -> String
+  get(Self, String) -> String?
   get_all(Self, String) -> Array[String]
   has(Self, String, value? : String) -> Bool
   set(Self, String, String) -> Unit
@@ -9370,7 +9370,7 @@ pub trait TVideoTrack : TJsValue {
 
 pub trait TVideoTrackList : TEventTarget {
   length(Self) -> UInt
-  get_track_by_id(Self, String) -> VideoTrack
+  get_track_by_id(Self, String) -> VideoTrack?
   selected_index(Self) -> Int
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, EventHandlerNonNull) -> Unit
@@ -9441,14 +9441,14 @@ pub trait TWindow : TEventTarget {
   set_opener(Self, JsValue) -> Unit
   parent(Self) -> Window
   frame_element(Self) -> Element
-  open(Self, url? : String, target? : String, features? : String) -> Window
+  open(Self, url? : String, target? : String, features? : String) -> Window?
   navigator(Self) -> Navigator
   client_information(Self) -> Navigator
   origin_agent_cluster(Self) -> Bool
   alert(Self) -> Unit
   alert_2(Self, String) -> Unit
   confirm(Self, message? : String) -> Bool
-  prompt(Self, message? : String, default? : String) -> String
+  prompt(Self, message? : String, default? : String) -> String?
   print(Self) -> Unit
   post_message(Self, JsValue, String, transfer? : Array[JsValue]) -> Unit
   post_message_2(Self, JsValue, options? : WindowPostMessageOptions) -> Unit
@@ -9813,7 +9813,7 @@ pub trait TXMLHttpRequest : TXMLHttpRequestEventTarget {
   response_url(Self) -> String
   status(Self) -> UInt
   status_text(Self) -> String
-  get_response_header(Self, String) -> String
+  get_response_header(Self, String) -> String?
   get_all_response_headers(Self) -> String
   override_mime_type(Self, String) -> Unit
   response_type(Self) -> XMLHttpRequestResponseType
@@ -9874,8 +9874,8 @@ pub trait TXPathResult : TJsValue {
   single_node_value(Self) -> Node
   invalid_iterator_state(Self) -> Bool
   snapshot_length(Self) -> UInt
-  iterate_next(Self) -> Node
-  snapshot_item(Self, UInt) -> Node
+  iterate_next(Self) -> Node?
+  snapshot_item(Self, UInt) -> Node?
 }
 
 pub trait TXSLTProcessor : TJsValue {

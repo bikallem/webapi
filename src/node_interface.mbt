@@ -98,8 +98,8 @@ pub trait TNode: TEventTarget {
   is_same_node(self : Self, other_node : &TNode) -> Bool = _
   compare_document_position(self : Self, other : &TNode) -> UInt = _
   contains(self : Self, other : &TNode) -> Bool = _
-  lookup_prefix(self : Self, namespace_ : String) -> String = _
-  lookup_namespace_uri(self : Self, prefix : String) -> String = _
+  lookup_prefix(self : Self, namespace_ : String) -> String? = _
+  lookup_namespace_uri(self : Self, prefix : String) -> String? = _
   is_default_namespace(self : Self, namespace_ : String) -> Bool = _
   insert_before(self : Self, node : &TNode, child : &TNode) -> Node = _
   append_child(self : Self, node : &TNode) -> Node = _
@@ -327,22 +327,38 @@ impl TNode with contains(self : Self, other : &TNode) -> Bool {
 extern "js" fn node_lookup_prefix_ffi(
   obj : JsValue,
   namespace_ : JsValue,
-) -> String = "(obj, namespace_) => obj.lookupPrefix(obj, namespace_)"
+) -> JsValue = "(obj, namespace_) => obj.lookupPrefix(obj, namespace_)"
 
 ///|
-impl TNode with lookup_prefix(self : Self, namespace_ : String) -> String {
-  node_lookup_prefix_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_))
+impl TNode with lookup_prefix(self : Self, namespace_ : String) -> String? {
+  let result = node_lookup_prefix_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(namespace_),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
 extern "js" fn node_lookup_namespace_uri_ffi(
   obj : JsValue,
   prefix : JsValue,
-) -> String = "(obj, prefix) => obj.lookupNamespaceURI(obj, prefix)"
+) -> JsValue = "(obj, prefix) => obj.lookupNamespaceURI(obj, prefix)"
 
 ///|
-impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String {
-  node_lookup_namespace_uri_ffi(TJsValue::to_js(self), TJsValue::to_js(prefix))
+impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String? {
+  let result = node_lookup_namespace_uri_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(prefix),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

@@ -200,7 +200,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     x : Double,
     y : Double,
   ) -> CanvasGradient = _
-  create_pattern(self : Self, image : CanvasImageSource, repetition : String) -> CanvasPattern = _
+  create_pattern(self : Self, image : CanvasImageSource, repetition : String) -> CanvasPattern? = _
   shadow_offset_x(self : Self) -> Double = _
   set_shadow_offset_x(self : Self, shadow_offset_x : Double) -> Unit = _
   shadow_offset_y(self : Self) -> Double = _
@@ -871,19 +871,24 @@ extern "js" fn offscreen_canvas_rendering_context2d_create_pattern_ffi(
   obj : JsValue,
   image : JsValue,
   repetition : JsValue,
-) -> CanvasPattern = "(obj, image, repetition) => obj.createPattern(obj, image, repetition)"
+) -> JsValue = "(obj, image, repetition) => obj.createPattern(obj, image, repetition)"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with create_pattern(
   self : Self,
   image : CanvasImageSource,
   repetition : String,
-) -> CanvasPattern {
-  offscreen_canvas_rendering_context2d_create_pattern_ffi(
+) -> CanvasPattern? {
+  let result = offscreen_canvas_rendering_context2d_create_pattern_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
     TJsValue::to_js(repetition),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

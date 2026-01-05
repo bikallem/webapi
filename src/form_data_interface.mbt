@@ -34,7 +34,7 @@ pub trait TFormData: TJsValue {
   append(self : Self, name : String, value : String) -> Unit = _
   append_2(self : Self, name : String, blob_value : &TBlob, filename? : String) -> Unit = _
   delete(self : Self, name : String) -> Unit = _
-  get(self : Self, name : String) -> FormDataEntryValue = _
+  get(self : Self, name : String) -> FormDataEntryValue? = _
   get_all(self : Self, name : String) -> Array[FormDataEntryValue] = _
   has(self : Self, name : String) -> Bool = _
   set(self : Self, name : String, value : String) -> Unit = _
@@ -89,14 +89,16 @@ impl TFormData with delete(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn form_data_get_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> FormDataEntryValue = "(obj, name) => obj.get(obj, name)"
+extern "js" fn form_data_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(obj, name)"
 
 ///|
-impl TFormData with get(self : Self, name : String) -> FormDataEntryValue {
-  form_data_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+impl TFormData with get(self : Self, name : String) -> FormDataEntryValue? {
+  let result = form_data_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

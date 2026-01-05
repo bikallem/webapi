@@ -84,7 +84,7 @@ pub trait THTMLSelectElement: THTMLElement {
   options(self : Self) -> HTMLOptionsCollection = _
   length(self : Self) -> UInt = _
   set_length(self : Self, length : UInt) -> Unit = _
-  named_item(self : Self, name : String) -> HTMLOptionElement = _
+  named_item(self : Self, name : String) -> HTMLOptionElement? = _
   add(
     self : Self,
     element : &THTMLSelectElementAddElement,
@@ -288,14 +288,19 @@ impl THTMLSelectElement with set_length(self : Self, length : UInt) -> Unit {
 extern "js" fn html_select_element_named_item_ffi(
   obj : JsValue,
   name : JsValue,
-) -> HTMLOptionElement = "(obj, name) => obj.namedItem(obj, name)"
+) -> JsValue = "(obj, name) => obj.namedItem(obj, name)"
 
 ///|
-impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement {
-  html_select_element_named_item_ffi(
+impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement? {
+  let result = html_select_element_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
