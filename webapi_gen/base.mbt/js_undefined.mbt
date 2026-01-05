@@ -8,5 +8,5 @@ pub impl TJsValue for JsUndefined with to_js(self : JsUndefined) -> JsValue = "%
 ///|
 #as_free_fn
 pub fn JsUndefined::undefined() -> JsUndefined {
-  JsValue::unsafe_cast(undefined_ffi())
+  JsValue::unsafe_cast(JsValue::undefined())
 }
