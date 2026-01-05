@@ -12,7 +12,7 @@ trait InterfaceMethodEmit: ToJson + Show {
 struct RegularMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original method name from IDL, eg "getElementById"
-  return_type : String
+  return_type : MethodReturn
   args : Array[MethodArg]
 } derive(Show, ToJson)
 
@@ -22,7 +22,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with decl_emit(
 ) -> Code {
   let args = trait_method_decl_args(self.args)
   Code(
-    "  \{safe_identifier(self.original_name)}(\{args}) -> \{self.return_type} = _",
+    "  \{safe_identifier(self.original_name)}(\{args}) -> \{self.return_type.type_name()} = _",
   )
 }
 
@@ -31,7 +31,11 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   self : RegularMethodEmit,
 ) -> Code {
   // Emit FFI function
-  let ret_type_str = self.return_type
+  let ffi_ret_type = if self.return_type.optional {
+    "JsValue"
+  } else {
+    self.return_type.type_name()
+  }
   let trait_name = self.interface_name
   let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
   let ffi_argnames = self.args.map(arg => match arg.type_ {
@@ -43,7 +47,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   let code = StringBuilder::new()
   code
   ..write_string(
-    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ret_type_str} = \"(\{ffi_js_args}) => obj.\{self.original_name}(\{ffi_js_args})\"",
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_args}) => obj.\{self.original_name}(\{ffi_js_args})\"",
   )
   ..write_string("\n\n")
 
@@ -51,12 +55,19 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   let method_args = trait_method_impl_args(self.args)
   let method_name = safe_identifier(self.original_name)
   let call_args = func_call_args(self.args)
-  code
-  ..write_string(
-    "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{ret_type_str} {\n",
+  code..write_string(
+    "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  ..write_string("  \{ffi_name}(\{call_args})\n")
-  ..write_string("}")
+  if self.return_type.optional {
+    code
+    ..write_string("  let result = \{ffi_name}(\{call_args})\n")
+    ..write_string(
+      "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
+    )
+  } else {
+    code..write_string("  \{ffi_name}(\{call_args})\n")
+  }
+  code..write_string("}")
   Code(code.to_string())
 }
 

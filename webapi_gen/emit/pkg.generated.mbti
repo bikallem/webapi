@@ -137,6 +137,13 @@ pub struct MethodArg {
 pub impl Show for MethodArg
 pub impl ToJson for MethodArg
 
+pub struct MethodReturn {
+  type_ : ArgMbtType
+  optional : Bool
+}
+pub impl Show for MethodReturn
+pub impl ToJson for MethodReturn
+
 type RegularMethodEmit
 pub impl Show for RegularMethodEmit
 pub impl ToJson for RegularMethodEmit

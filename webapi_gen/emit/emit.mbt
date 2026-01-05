@@ -36,6 +36,21 @@ pub struct MethodArg {
 } derive(Show, ToJson)
 
 ///|
+pub struct MethodReturn {
+  type_ : ArgMbtType
+  optional : Bool
+} derive(Show, ToJson)
+
+///|
+fn MethodReturn::type_name(self : MethodReturn) -> String {
+  if self.optional {
+    "\{self.type_.name()}?"
+  } else {
+    self.type_.name()
+  }
+}
+
+///|
 /// Argument MoonBit type representation
 pub enum ArgMbtType {
   Self // Represents 'self' argument  
