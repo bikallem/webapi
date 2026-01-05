@@ -4,13 +4,7 @@
     "description": "Generate MoonBit DOM bindings from Web IDL (TypeScript version)",
     "type": "module",
     "main": "dist/build.js",
-    "scripts": {
-        "build": "tsc",
-        "lint": "eslint webapi-gen-ts",
-        "format": "prettier --write \"webapi-gen-ts/**/*.ts\"",
-        "generate": "tsc && node dist/build.js",
-        "clean": "rm -rf dist src/*.mbt src/*.mjs"
-    },
+    "scripts": {},
     "keywords": [
         "moonbit",
         "dom",
