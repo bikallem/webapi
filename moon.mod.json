@@ -5,7 +5,7 @@
   "repository": "",
   "license": "Apache-2.0",
   "keywords": [],
-  "description": "",
+  "description": "Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more",
   "source": "src",
   "preferred-target": "js"
 }
