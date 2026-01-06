@@ -329,6 +329,14 @@ pub impl Emitter for InterfaceEmitter with emit(
 
         // Set Attribute method if specified (only for non-static)
         if !attr.is_readonly || attr.is_inherit {
+          let attr_type = match attr_type {
+            ArgMbtType::Interface(name) => ArgMbtType::Interface("&T\{name}")
+            ArgMbtType::Union(union_type) => {
+              let union_type = { ..union_type, name: "&T\{union_type.name}" }
+              ArgMbtType::Union(union_type)
+            }
+            _ => attr_type
+          }
           let args = [
             // Add 'self' argument
             MethodArg::{
