@@ -52,6 +52,10 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   )
   ..write_string("\n\n")
 
+  // Emit MDN documentation comment
+  let mdn_url = mdn_member_url(trait_name, self.original_name)
+  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+
   // Emit default trait method implementation
   let method_args = trait_method_impl_args(self.args)
   let method_name = safe_identifier(self.original_name)
@@ -111,6 +115,10 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   )
   ..write_string("\n\n")
 
+  // Emit MDN documentation comment
+  let mdn_url = mdn_member_url(trait_name, self.original_name)
+  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+
   // Emit static method implementation
   let method_args = trait_method_impl_args(self.args)
   let method_name = safe_identifier(self.original_name)
@@ -164,6 +172,10 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
   )
   ..write_string("\n\n")
 
+  // Emit MDN documentation comment
+  let mdn_url = mdn_member_url(trait_name, self.original_name)
+  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+
   // Emit default trait method implementation
   let method_name = safe_identifier(self.original_name)
   code
@@ -206,6 +218,10 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
     "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
   )
   ..write_string("\n\n")
+
+  // Emit MDN documentation comment
+  let mdn_url = mdn_member_url(trait_name, self.original_name)
+  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit default trait method implementation
   let method_name = safe_identifier(self.original_name)
@@ -250,6 +266,10 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
     "extern \"js\" fn \{ffi_name}() -> \{ret_type_str} = \"() => \{trait_name}.\{self.original_name}\"",
   )
   ..write_string("\n\n")
+
+  // Emit MDN documentation comment
+  let mdn_url = mdn_member_url(trait_name, self.original_name)
+  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit static attribute getter implementation
   let method_name = safe_identifier(self.original_name)
