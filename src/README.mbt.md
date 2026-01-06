@@ -106,11 +106,11 @@ fn main {
   ..set_fill_style(gradient)
   ..fill_rect(0.0, 0.0, 800.0, 300.0)
 
-  // Draw shapes
+  // Draw shapes (arc uses radians: 2π for full circle)
   ctx
   ..set_fill_style("#228B22")
   ..begin_path()
-  ..arc(400.0, 250.0, 50.0, 0.0, 6.283185)
+  ..arc(400.0, 250.0, 50.0, 0.0, @math.pi * 2.0)
   ..fill()
 
   // Draw text
