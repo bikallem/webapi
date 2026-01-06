@@ -2963,6 +2963,14 @@ pub type OnErrorEventHandlerNonNullEvent
 pub impl TJsValue for OnErrorEventHandlerNonNullEvent
 
 #external
+pub type Origin
+pub fn Origin::from(JsValue) -> Self
+pub fn[T : TOrigin] Origin::into(Self) -> T
+pub fn Origin::new() -> Self
+pub impl TJsValue for Origin
+pub impl TOrigin for Origin
+
+#external
 pub type PageRevealEvent
 pub fn[T : TPageRevealEvent] PageRevealEvent::into(Self) -> T
 pub fn PageRevealEvent::new(String, event_init_dict? : PageRevealEventInit) -> Self
@@ -3084,7 +3092,9 @@ pub impl TJsValue for PopStateEventInit
 
 pub(all) enum PredefinedColorSpace {
   Srgb
+  SrgbLinear
   DisplayP3
+  DisplayP3Linear
 }
 pub fn PredefinedColorSpace::from(String) -> Self?
 pub impl TJsValue for PredefinedColorSpace
@@ -4321,7 +4331,7 @@ pub fn URL::can_parse(String, base? : String) -> Bool
 pub fn URL::create_object_url(&TURLCreateObjectURLObj) -> String
 pub fn[T : TURL] URL::into(Self) -> T
 pub fn URL::new(String, base? : String) -> Self
-pub fn URL::parse(String, base? : String) -> Self
+pub fn URL::parse(String, base? : String) -> Self?
 pub fn URL::revoke_object_url(String) -> Unit
 pub impl TJsValue for URL
 pub impl TURL for URL
@@ -4870,9 +4880,9 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   image_smoothing_quality(Self) -> ImageSmoothingQuality
   set_image_smoothing_quality(Self, ImageSmoothingQuality) -> Unit
   stroke_style(Self) -> CanvasRenderingContext2DStrokeStyle
-  set_stroke_style(Self, CanvasRenderingContext2DStrokeStyle) -> Unit
+  set_stroke_style(Self, &TCanvasRenderingContext2DStrokeStyle) -> Unit
   fill_style(Self) -> CanvasRenderingContext2DFillStyle
-  set_fill_style(Self, CanvasRenderingContext2DFillStyle) -> Unit
+  set_fill_style(Self, &TCanvasRenderingContext2DFillStyle) -> Unit
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
@@ -5361,7 +5371,7 @@ pub trait TDocument : TNode {
   dir(Self) -> String
   set_dir(Self, String) -> Unit
   body(Self) -> HTMLElement
-  set_body(Self, HTMLElement) -> Unit
+  set_body(Self, &THTMLElement) -> Unit
   head(Self) -> HTMLHeadElement
   images(Self) -> HTMLCollection
   embeds(Self) -> HTMLCollection
@@ -5735,9 +5745,9 @@ pub trait TElement : TNode {
   set_html_unsafe(Self, &TElementSetHTMLUnsafeHtml) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
   inner_html(Self) -> ElementInnerHTML
-  set_inner_html(Self, ElementInnerHTML) -> Unit
+  set_inner_html(Self, &TElementInnerHTML) -> Unit
   outer_html(Self) -> ElementOuterHTML
-  set_outer_html(Self, ElementOuterHTML) -> Unit
+  set_outer_html(Self, &TElementOuterHTML) -> Unit
   insert_adjacent_html(Self, String, &TElementInsertAdjacentHTMLString) -> Unit
   get_client_rects(Self) -> DOMRectList
   get_bounding_client_rect(Self) -> DOMRect
@@ -6186,7 +6196,7 @@ pub trait THTMLButtonElement : THTMLElement {
   command(Self) -> String
   set_command(Self, String) -> Unit
   command_for_element(Self) -> Element
-  set_command_for_element(Self, Element) -> Unit
+  set_command_for_element(Self, &TElement) -> Unit
   disabled(Self) -> Bool
   set_disabled(Self, Bool) -> Unit
   form(Self) -> HTMLFormElement
@@ -6214,7 +6224,7 @@ pub trait THTMLButtonElement : THTMLElement {
   set_custom_validity(Self, String) -> Unit
   labels(Self) -> NodeList
   popover_target_element(Self) -> Element
-  set_popover_target_element(Self, Element) -> Unit
+  set_popover_target_element(Self, &TElement) -> Unit
   popover_target_action(Self) -> String
   set_popover_target_action(Self, String) -> Unit
 }
@@ -6288,7 +6298,7 @@ pub trait THTMLElement : TElement {
   dir(Self) -> String
   set_dir(Self, String) -> Unit
   hidden(Self) -> HTMLElementHidden
-  set_hidden(Self, HTMLElementHidden) -> Unit
+  set_hidden(Self, &THTMLElementHidden) -> Unit
   inert(Self) -> Bool
   set_inert(Self, Bool) -> Unit
   click(Self) -> Unit
@@ -6677,7 +6687,7 @@ pub trait THTMLIFrameElement : THTMLElement {
   src(Self) -> String
   set_src(Self, String) -> Unit
   srcdoc(Self) -> HTMLIFrameElementSrcdoc
-  set_srcdoc(Self, HTMLIFrameElementSrcdoc) -> Unit
+  set_srcdoc(Self, &THTMLIFrameElementSrcdoc) -> Unit
   name(Self) -> String
   set_name(Self, String) -> Unit
   sandbox(Self) -> DOMTokenList
@@ -6786,7 +6796,7 @@ pub trait THTMLInputElement : THTMLElement {
   set_disabled(Self, Bool) -> Unit
   form(Self) -> HTMLFormElement
   files(Self) -> FileList
-  set_files(Self, FileList) -> Unit
+  set_files(Self, &TFileList) -> Unit
   form_action(Self) -> String
   set_form_action(Self, String) -> Unit
   form_enctype(Self) -> String
@@ -6865,7 +6875,7 @@ pub trait THTMLInputElement : THTMLElement {
   use_map(Self) -> String
   set_use_map(Self, String) -> Unit
   popover_target_element(Self) -> Element
-  set_popover_target_element(Self, Element) -> Unit
+  set_popover_target_element(Self, &TElement) -> Unit
   popover_target_action(Self) -> String
   set_popover_target_action(Self, String) -> Unit
 }
@@ -7394,15 +7404,15 @@ pub trait THTMLTableColElement : THTMLElement {
 
 pub trait THTMLTableElement : THTMLElement {
   caption(Self) -> HTMLTableCaptionElement
-  set_caption(Self, HTMLTableCaptionElement) -> Unit
+  set_caption(Self, &THTMLTableCaptionElement) -> Unit
   create_caption(Self) -> HTMLTableCaptionElement
   delete_caption(Self) -> Unit
   t_head(Self) -> HTMLTableSectionElement
-  set_t_head(Self, HTMLTableSectionElement) -> Unit
+  set_t_head(Self, &THTMLTableSectionElement) -> Unit
   create_t_head(Self) -> HTMLTableSectionElement
   delete_t_head(Self) -> Unit
   t_foot(Self) -> HTMLTableSectionElement
-  set_t_foot(Self, HTMLTableSectionElement) -> Unit
+  set_t_foot(Self, &THTMLTableSectionElement) -> Unit
   create_t_foot(Self) -> HTMLTableSectionElement
   delete_t_foot(Self) -> Unit
   t_bodies(Self) -> HTMLCollection
@@ -7894,11 +7904,13 @@ pub trait TNavigationHistoryEntry : TEventTarget {
 
 pub trait TNavigationPrecommitController : TJsValue {
   redirect(Self, String, options? : NavigationNavigateOptions) -> Unit
+  add_handler(Self, NavigationInterceptHandler) -> Unit
 }
 
 pub trait TNavigationTransition : TJsValue {
   navigation_type(Self) -> NavigationType
   from(Self) -> NavigationHistoryEntry
+  to(Self) -> NavigationDestination
   committed(Self) -> JsPromise[Unit]
   finished(Self) -> JsPromise[Unit]
 }
@@ -8031,9 +8043,9 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   image_smoothing_quality(Self) -> ImageSmoothingQuality
   set_image_smoothing_quality(Self, ImageSmoothingQuality) -> Unit
   stroke_style(Self) -> OffscreenCanvasRenderingContext2DStrokeStyle
-  set_stroke_style(Self, OffscreenCanvasRenderingContext2DStrokeStyle) -> Unit
+  set_stroke_style(Self, &TOffscreenCanvasRenderingContext2DStrokeStyle) -> Unit
   fill_style(Self) -> OffscreenCanvasRenderingContext2DFillStyle
-  set_fill_style(Self, OffscreenCanvasRenderingContext2DFillStyle) -> Unit
+  set_fill_style(Self, &TOffscreenCanvasRenderingContext2DFillStyle) -> Unit
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
@@ -8142,6 +8154,12 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String
 
 pub(open) trait TOffscreenRenderingContext {
   to_js(Self) -> JsValue
+}
+
+pub trait TOrigin : TJsValue {
+  opaque_(Self) -> Bool
+  is_same_origin(Self, &TOrigin) -> Bool
+  is_same_site(Self, &TOrigin) -> Bool
 }
 
 pub trait TPageRevealEvent : TEvent {
@@ -8454,7 +8472,7 @@ pub trait TSVGAnimatedRect : TJsValue {
 
 pub trait TSVGAnimatedString : TJsValue {
   base_val(Self) -> SVGAnimatedStringBaseVal
-  set_base_val(Self, SVGAnimatedStringBaseVal) -> Unit
+  set_base_val(Self, &TSVGAnimatedStringBaseVal) -> Unit
   anim_val(Self) -> String
 }
 
@@ -9047,7 +9065,7 @@ pub trait TShadowRoot : TDocumentFragment {
   set_html_unsafe(Self, &TShadowRootSetHTMLUnsafeHtml) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
   inner_html(Self) -> ShadowRootInnerHTML
-  set_inner_html(Self, ShadowRootInnerHTML) -> Unit
+  set_inner_html(Self, &TShadowRootInnerHTML) -> Unit
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
   style_sheets(Self) -> StyleSheetList
@@ -9241,7 +9259,7 @@ pub trait TTreeWalker : TJsValue {
   what_to_show(Self) -> UInt
   filter(Self) -> NodeFilter
   current_node(Self) -> Node
-  set_current_node(Self, Node) -> Unit
+  set_current_node(Self, &TNode) -> Unit
   parent_node(Self) -> Node?
   first_child(Self) -> Node?
   last_child(Self) -> Node?

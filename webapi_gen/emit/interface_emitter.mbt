@@ -406,7 +406,9 @@ pub impl Emitter for InterfaceEmitter with emit(
         Stringifier(Bare) => "Stringifier(Bare)"
         _ => "Unknown"
       }
-      (self.log_skipped)("Skipped \{member_type} in interface \{interface.name}")
+      (self.log_skipped)(
+        "Skipped \{member_type} in interface \{interface.name}",
+      )
       continue rest
     }
   }
