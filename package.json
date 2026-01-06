@@ -1,34 +1,15 @@
 {
-    "name": "webapi-gen-ts",
+    "name": "webapi-gen",
     "version": "0.1.0",
-    "description": "Generate MoonBit DOM bindings from Web IDL (TypeScript version)",
+    "description": "",
     "type": "module",
-    "main": "dist/build.js",
     "scripts": {},
-    "keywords": [
-        "moonbit",
-        "dom",
-        "webidl",
-        "codegen",
-        "ffi"
-    ],
+    "keywords": [],
     "author": "",
     "license": "MIT",
     "dependencies": {
         "@webref/events": "^1.19.1",
         "@webref/idl": "^3.49.0",
         "webidl2": "^24.4.1"
-    },
-    "devDependencies": {
-        "@types/node": "^20.10.0",
-        "@types/webidl2": "^24.4.3",
-        "@typescript-eslint/eslint-plugin": "^8.48.1",
-        "@typescript-eslint/parser": "^8.48.1",
-        "eslint": "^9.39.1",
-        "globals": "^16.5.0",
-        "prettier": "^3.1.0",
-        "terser": "^5.44.1",
-        "typescript": "^5.3.0",
-        "typescript-eslint": "^8.48.1"
     }
 }
