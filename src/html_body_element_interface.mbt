@@ -137,7 +137,7 @@ impl THTMLBodyElement with v_link(self : Self) -> String {
 extern "js" fn html_body_element_set_v_link_ffi(
   obj : JsValue,
   v_link : JsValue,
-) -> Unit = "(obj, vLink) => { obj.vLink = v_link; }"
+) -> Unit = "(obj, vLink) => { obj.vLink = vLink; }"
 
 ///|
 impl THTMLBodyElement with set_v_link(self : Self, v_link : String) -> Unit {
@@ -159,7 +159,7 @@ impl THTMLBodyElement with a_link(self : Self) -> String {
 extern "js" fn html_body_element_set_a_link_ffi(
   obj : JsValue,
   a_link : JsValue,
-) -> Unit = "(obj, aLink) => { obj.aLink = a_link; }"
+) -> Unit = "(obj, aLink) => { obj.aLink = aLink; }"
 
 ///|
 impl THTMLBodyElement with set_a_link(self : Self, a_link : String) -> Unit {
@@ -181,7 +181,7 @@ impl THTMLBodyElement with bg_color(self : Self) -> String {
 extern "js" fn html_body_element_set_bg_color_ffi(
   obj : JsValue,
   bg_color : JsValue,
-) -> Unit = "(obj, bgColor) => { obj.bgColor = bg_color; }"
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
 
 ///|
 impl THTMLBodyElement with set_bg_color(self : Self, bg_color : String) -> Unit {

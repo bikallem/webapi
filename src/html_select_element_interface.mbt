@@ -367,7 +367,7 @@ impl THTMLSelectElement with selected_index(self : Self) -> Int {
 extern "js" fn html_select_element_set_selected_index_ffi(
   obj : JsValue,
   selected_index : JsValue,
-) -> Unit = "(obj, selectedIndex) => { obj.selectedIndex = selected_index; }"
+) -> Unit = "(obj, selectedIndex) => { obj.selectedIndex = selectedIndex; }"
 
 ///|
 impl THTMLSelectElement with set_selected_index(

@@ -226,7 +226,7 @@ impl TXMLHttpRequest with with_credentials(self : Self) -> Bool {
 extern "js" fn xml_http_request_set_with_credentials_ffi(
   obj : JsValue,
   with_credentials : JsValue,
-) -> Unit = "(obj, withCredentials) => { obj.withCredentials = with_credentials; }"
+) -> Unit = "(obj, withCredentials) => { obj.withCredentials = withCredentials; }"
 
 ///|
 impl TXMLHttpRequest with set_with_credentials(
@@ -349,7 +349,7 @@ impl TXMLHttpRequest with response_type(self : Self) -> XMLHttpRequestResponseTy
 extern "js" fn xml_http_request_set_response_type_ffi(
   obj : JsValue,
   response_type : JsValue,
-) -> Unit = "(obj, responseType) => { obj.responseType = response_type; }"
+) -> Unit = "(obj, responseType) => { obj.responseType = responseType; }"
 
 ///|
 impl TXMLHttpRequest with set_response_type(

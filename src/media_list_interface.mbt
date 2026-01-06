@@ -36,7 +36,7 @@ impl TMediaList with media_text(self : Self) -> CSSOMString {
 extern "js" fn media_list_set_media_text_ffi(
   obj : JsValue,
   media_text : JsValue,
-) -> Unit = "(obj, mediaText) => { obj.mediaText = media_text; }"
+) -> Unit = "(obj, mediaText) => { obj.mediaText = mediaText; }"
 
 ///|
 impl TMediaList with set_media_text(self : Self, media_text : CSSOMString) -> Unit {

@@ -195,7 +195,7 @@ impl TShadowRoot with inner_html(self : Self) -> ShadowRootInnerHTML {
 extern "js" fn shadow_root_set_inner_html_ffi(
   obj : JsValue,
   inner_html : JsValue,
-) -> Unit = "(obj, innerHTML) => { obj.innerHTML = inner_html; }"
+) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
 
 ///|
 impl TShadowRoot with set_inner_html(
@@ -243,7 +243,7 @@ impl TShadowRoot with adopted_style_sheets(self : Self) -> JsValue {
 extern "js" fn shadow_root_set_adopted_style_sheets_ffi(
   obj : JsValue,
   adopted_style_sheets : JsValue,
-) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adopted_style_sheets; }"
+) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adoptedStyleSheets; }"
 
 ///|
 impl TShadowRoot with set_adopted_style_sheets(

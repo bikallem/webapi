@@ -105,7 +105,7 @@ impl TSVGPreserveAspectRatio with meet_or_slice(self : Self) -> UInt {
 extern "js" fn svg_preserve_aspect_ratio_set_meet_or_slice_ffi(
   obj : JsValue,
   meet_or_slice : JsValue,
-) -> Unit = "(obj, meetOrSlice) => { obj.meetOrSlice = meet_or_slice; }"
+) -> Unit = "(obj, meetOrSlice) => { obj.meetOrSlice = meetOrSlice; }"
 
 ///|
 impl TSVGPreserveAspectRatio with set_meet_or_slice(

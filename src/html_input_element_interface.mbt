@@ -251,7 +251,7 @@ impl THTMLInputElement with default_checked(self : Self) -> Bool {
 extern "js" fn html_input_element_set_default_checked_ffi(
   obj : JsValue,
   default_checked : JsValue,
-) -> Unit = "(obj, defaultChecked) => { obj.defaultChecked = default_checked; }"
+) -> Unit = "(obj, defaultChecked) => { obj.defaultChecked = defaultChecked; }"
 
 ///|
 impl THTMLInputElement with set_default_checked(
@@ -298,7 +298,7 @@ impl THTMLInputElement with color_space(self : Self) -> String {
 extern "js" fn html_input_element_set_color_space_ffi(
   obj : JsValue,
   color_space : JsValue,
-) -> Unit = "(obj, colorSpace) => { obj.colorSpace = color_space; }"
+) -> Unit = "(obj, colorSpace) => { obj.colorSpace = colorSpace; }"
 
 ///|
 impl THTMLInputElement with set_color_space(self : Self, color_space : String) -> Unit {
@@ -320,7 +320,7 @@ impl THTMLInputElement with dir_name(self : Self) -> String {
 extern "js" fn html_input_element_set_dir_name_ffi(
   obj : JsValue,
   dir_name : JsValue,
-) -> Unit = "(obj, dirName) => { obj.dirName = dir_name; }"
+) -> Unit = "(obj, dirName) => { obj.dirName = dirName; }"
 
 ///|
 impl THTMLInputElement with set_dir_name(self : Self, dir_name : String) -> Unit {
@@ -394,7 +394,7 @@ impl THTMLInputElement with form_action(self : Self) -> String {
 extern "js" fn html_input_element_set_form_action_ffi(
   obj : JsValue,
   form_action : JsValue,
-) -> Unit = "(obj, formAction) => { obj.formAction = form_action; }"
+) -> Unit = "(obj, formAction) => { obj.formAction = formAction; }"
 
 ///|
 impl THTMLInputElement with set_form_action(self : Self, form_action : String) -> Unit {
@@ -416,7 +416,7 @@ impl THTMLInputElement with form_enctype(self : Self) -> String {
 extern "js" fn html_input_element_set_form_enctype_ffi(
   obj : JsValue,
   form_enctype : JsValue,
-) -> Unit = "(obj, formEnctype) => { obj.formEnctype = form_enctype; }"
+) -> Unit = "(obj, formEnctype) => { obj.formEnctype = formEnctype; }"
 
 ///|
 impl THTMLInputElement with set_form_enctype(self : Self, form_enctype : String) -> Unit {
@@ -438,7 +438,7 @@ impl THTMLInputElement with form_method(self : Self) -> String {
 extern "js" fn html_input_element_set_form_method_ffi(
   obj : JsValue,
   form_method : JsValue,
-) -> Unit = "(obj, formMethod) => { obj.formMethod = form_method; }"
+) -> Unit = "(obj, formMethod) => { obj.formMethod = formMethod; }"
 
 ///|
 impl THTMLInputElement with set_form_method(self : Self, form_method : String) -> Unit {
@@ -460,7 +460,7 @@ impl THTMLInputElement with form_no_validate(self : Self) -> Bool {
 extern "js" fn html_input_element_set_form_no_validate_ffi(
   obj : JsValue,
   form_no_validate : JsValue,
-) -> Unit = "(obj, formNoValidate) => { obj.formNoValidate = form_no_validate; }"
+) -> Unit = "(obj, formNoValidate) => { obj.formNoValidate = formNoValidate; }"
 
 ///|
 impl THTMLInputElement with set_form_no_validate(
@@ -485,7 +485,7 @@ impl THTMLInputElement with form_target(self : Self) -> String {
 extern "js" fn html_input_element_set_form_target_ffi(
   obj : JsValue,
   form_target : JsValue,
-) -> Unit = "(obj, formTarget) => { obj.formTarget = form_target; }"
+) -> Unit = "(obj, formTarget) => { obj.formTarget = formTarget; }"
 
 ///|
 impl THTMLInputElement with set_form_target(self : Self, form_target : String) -> Unit {
@@ -580,7 +580,7 @@ impl THTMLInputElement with max_length(self : Self) -> Int {
 extern "js" fn html_input_element_set_max_length_ffi(
   obj : JsValue,
   max_length : JsValue,
-) -> Unit = "(obj, maxLength) => { obj.maxLength = max_length; }"
+) -> Unit = "(obj, maxLength) => { obj.maxLength = maxLength; }"
 
 ///|
 impl THTMLInputElement with set_max_length(self : Self, max_length : Int) -> Unit {
@@ -621,7 +621,7 @@ impl THTMLInputElement with min_length(self : Self) -> Int {
 extern "js" fn html_input_element_set_min_length_ffi(
   obj : JsValue,
   min_length : JsValue,
-) -> Unit = "(obj, minLength) => { obj.minLength = min_length; }"
+) -> Unit = "(obj, minLength) => { obj.minLength = minLength; }"
 
 ///|
 impl THTMLInputElement with set_min_length(self : Self, min_length : Int) -> Unit {
@@ -728,7 +728,7 @@ impl THTMLInputElement with read_only(self : Self) -> Bool {
 extern "js" fn html_input_element_set_read_only_ffi(
   obj : JsValue,
   read_only : JsValue,
-) -> Unit = "(obj, readOnly) => { obj.readOnly = read_only; }"
+) -> Unit = "(obj, readOnly) => { obj.readOnly = readOnly; }"
 
 ///|
 impl THTMLInputElement with set_read_only(self : Self, read_only : Bool) -> Unit {
@@ -829,7 +829,7 @@ impl THTMLInputElement with type_(self : Self) -> String {
 extern "js" fn html_input_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type_; }"
+) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 impl THTMLInputElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -848,7 +848,7 @@ impl THTMLInputElement with default_value(self : Self) -> String {
 extern "js" fn html_input_element_set_default_value_ffi(
   obj : JsValue,
   default_value : JsValue,
-) -> Unit = "(obj, defaultValue) => { obj.defaultValue = default_value; }"
+) -> Unit = "(obj, defaultValue) => { obj.defaultValue = defaultValue; }"
 
 ///|
 impl THTMLInputElement with set_default_value(
@@ -895,7 +895,7 @@ impl THTMLInputElement with value_as_date(self : Self) -> JsValue {
 extern "js" fn html_input_element_set_value_as_date_ffi(
   obj : JsValue,
   value_as_date : JsValue,
-) -> Unit = "(obj, valueAsDate) => { obj.valueAsDate = value_as_date; }"
+) -> Unit = "(obj, valueAsDate) => { obj.valueAsDate = valueAsDate; }"
 
 ///|
 impl THTMLInputElement with set_value_as_date(
@@ -920,7 +920,7 @@ impl THTMLInputElement with value_as_number(self : Self) -> Double {
 extern "js" fn html_input_element_set_value_as_number_ffi(
   obj : JsValue,
   value_as_number : JsValue,
-) -> Unit = "(obj, valueAsNumber) => { obj.valueAsNumber = value_as_number; }"
+) -> Unit = "(obj, valueAsNumber) => { obj.valueAsNumber = valueAsNumber; }"
 
 ///|
 impl THTMLInputElement with set_value_as_number(
@@ -1061,7 +1061,7 @@ impl THTMLInputElement with selection_start(self : Self) -> UInt {
 extern "js" fn html_input_element_set_selection_start_ffi(
   obj : JsValue,
   selection_start : JsValue,
-) -> Unit = "(obj, selectionStart) => { obj.selectionStart = selection_start; }"
+) -> Unit = "(obj, selectionStart) => { obj.selectionStart = selectionStart; }"
 
 ///|
 impl THTMLInputElement with set_selection_start(
@@ -1086,7 +1086,7 @@ impl THTMLInputElement with selection_end(self : Self) -> UInt {
 extern "js" fn html_input_element_set_selection_end_ffi(
   obj : JsValue,
   selection_end : JsValue,
-) -> Unit = "(obj, selectionEnd) => { obj.selectionEnd = selection_end; }"
+) -> Unit = "(obj, selectionEnd) => { obj.selectionEnd = selectionEnd; }"
 
 ///|
 impl THTMLInputElement with set_selection_end(self : Self, selection_end : UInt) -> Unit {
@@ -1110,7 +1110,7 @@ impl THTMLInputElement with selection_direction(self : Self) -> String {
 extern "js" fn html_input_element_set_selection_direction_ffi(
   obj : JsValue,
   selection_direction : JsValue,
-) -> Unit = "(obj, selectionDirection) => { obj.selectionDirection = selection_direction; }"
+) -> Unit = "(obj, selectionDirection) => { obj.selectionDirection = selectionDirection; }"
 
 ///|
 impl THTMLInputElement with set_selection_direction(
@@ -1228,7 +1228,7 @@ impl THTMLInputElement with use_map(self : Self) -> String {
 extern "js" fn html_input_element_set_use_map_ffi(
   obj : JsValue,
   use_map : JsValue,
-) -> Unit = "(obj, useMap) => { obj.useMap = use_map; }"
+) -> Unit = "(obj, useMap) => { obj.useMap = useMap; }"
 
 ///|
 impl THTMLInputElement with set_use_map(self : Self, use_map : String) -> Unit {
@@ -1252,7 +1252,7 @@ impl THTMLInputElement with popover_target_element(self : Self) -> Element {
 extern "js" fn html_input_element_set_popover_target_element_ffi(
   obj : JsValue,
   popover_target_element : JsValue,
-) -> Unit = "(obj, popoverTargetElement) => { obj.popoverTargetElement = popover_target_element; }"
+) -> Unit = "(obj, popoverTargetElement) => { obj.popoverTargetElement = popoverTargetElement; }"
 
 ///|
 impl THTMLInputElement with set_popover_target_element(
@@ -1279,7 +1279,7 @@ impl THTMLInputElement with popover_target_action(self : Self) -> String {
 extern "js" fn html_input_element_set_popover_target_action_ffi(
   obj : JsValue,
   popover_target_action : JsValue,
-) -> Unit = "(obj, popoverTargetAction) => { obj.popoverTargetAction = popover_target_action; }"
+) -> Unit = "(obj, popoverTargetAction) => { obj.popoverTargetAction = popoverTargetAction; }"
 
 ///|
 impl THTMLInputElement with set_popover_target_action(

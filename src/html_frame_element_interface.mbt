@@ -131,7 +131,7 @@ impl THTMLFrameElement with frame_border(self : Self) -> String {
 extern "js" fn html_frame_element_set_frame_border_ffi(
   obj : JsValue,
   frame_border : JsValue,
-) -> Unit = "(obj, frameBorder) => { obj.frameBorder = frame_border; }"
+) -> Unit = "(obj, frameBorder) => { obj.frameBorder = frameBorder; }"
 
 ///|
 impl THTMLFrameElement with set_frame_border(self : Self, frame_border : String) -> Unit {
@@ -153,7 +153,7 @@ impl THTMLFrameElement with long_desc(self : Self) -> String {
 extern "js" fn html_frame_element_set_long_desc_ffi(
   obj : JsValue,
   long_desc : JsValue,
-) -> Unit = "(obj, longDesc) => { obj.longDesc = long_desc; }"
+) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
 
 ///|
 impl THTMLFrameElement with set_long_desc(self : Self, long_desc : String) -> Unit {
@@ -175,7 +175,7 @@ impl THTMLFrameElement with no_resize(self : Self) -> Bool {
 extern "js" fn html_frame_element_set_no_resize_ffi(
   obj : JsValue,
   no_resize : JsValue,
-) -> Unit = "(obj, noResize) => { obj.noResize = no_resize; }"
+) -> Unit = "(obj, noResize) => { obj.noResize = noResize; }"
 
 ///|
 impl THTMLFrameElement with set_no_resize(self : Self, no_resize : Bool) -> Unit {
@@ -217,7 +217,7 @@ impl THTMLFrameElement with margin_height(self : Self) -> String {
 extern "js" fn html_frame_element_set_margin_height_ffi(
   obj : JsValue,
   margin_height : JsValue,
-) -> Unit = "(obj, marginHeight) => { obj.marginHeight = margin_height; }"
+) -> Unit = "(obj, marginHeight) => { obj.marginHeight = marginHeight; }"
 
 ///|
 impl THTMLFrameElement with set_margin_height(
@@ -242,7 +242,7 @@ impl THTMLFrameElement with margin_width(self : Self) -> String {
 extern "js" fn html_frame_element_set_margin_width_ffi(
   obj : JsValue,
   margin_width : JsValue,
-) -> Unit = "(obj, marginWidth) => { obj.marginWidth = margin_width; }"
+) -> Unit = "(obj, marginWidth) => { obj.marginWidth = marginWidth; }"
 
 ///|
 impl THTMLFrameElement with set_margin_width(self : Self, margin_width : String) -> Unit {

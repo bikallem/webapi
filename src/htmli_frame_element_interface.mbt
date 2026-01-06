@@ -204,7 +204,7 @@ impl THTMLIFrameElement with allow_fullscreen(self : Self) -> Bool {
 extern "js" fn htmli_frame_element_set_allow_fullscreen_ffi(
   obj : JsValue,
   allow_fullscreen : JsValue,
-) -> Unit = "(obj, allowFullscreen) => { obj.allowFullscreen = allow_fullscreen; }"
+) -> Unit = "(obj, allowFullscreen) => { obj.allowFullscreen = allowFullscreen; }"
 
 ///|
 impl THTMLIFrameElement with set_allow_fullscreen(
@@ -273,7 +273,7 @@ impl THTMLIFrameElement with referrer_policy(self : Self) -> String {
 extern "js" fn htmli_frame_element_set_referrer_policy_ffi(
   obj : JsValue,
   referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrer_policy; }"
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
 impl THTMLIFrameElement with set_referrer_policy(
@@ -399,7 +399,7 @@ impl THTMLIFrameElement with frame_border(self : Self) -> String {
 extern "js" fn htmli_frame_element_set_frame_border_ffi(
   obj : JsValue,
   frame_border : JsValue,
-) -> Unit = "(obj, frameBorder) => { obj.frameBorder = frame_border; }"
+) -> Unit = "(obj, frameBorder) => { obj.frameBorder = frameBorder; }"
 
 ///|
 impl THTMLIFrameElement with set_frame_border(
@@ -424,7 +424,7 @@ impl THTMLIFrameElement with long_desc(self : Self) -> String {
 extern "js" fn htmli_frame_element_set_long_desc_ffi(
   obj : JsValue,
   long_desc : JsValue,
-) -> Unit = "(obj, longDesc) => { obj.longDesc = long_desc; }"
+) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
 
 ///|
 impl THTMLIFrameElement with set_long_desc(self : Self, long_desc : String) -> Unit {
@@ -446,7 +446,7 @@ impl THTMLIFrameElement with margin_height(self : Self) -> String {
 extern "js" fn htmli_frame_element_set_margin_height_ffi(
   obj : JsValue,
   margin_height : JsValue,
-) -> Unit = "(obj, marginHeight) => { obj.marginHeight = margin_height; }"
+) -> Unit = "(obj, marginHeight) => { obj.marginHeight = marginHeight; }"
 
 ///|
 impl THTMLIFrameElement with set_margin_height(
@@ -471,7 +471,7 @@ impl THTMLIFrameElement with margin_width(self : Self) -> String {
 extern "js" fn htmli_frame_element_set_margin_width_ffi(
   obj : JsValue,
   margin_width : JsValue,
-) -> Unit = "(obj, marginWidth) => { obj.marginWidth = margin_width; }"
+) -> Unit = "(obj, marginWidth) => { obj.marginWidth = marginWidth; }"
 
 ///|
 impl THTMLIFrameElement with set_margin_width(

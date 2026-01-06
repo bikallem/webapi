@@ -80,7 +80,7 @@ impl THTMLScriptElement with type_(self : Self) -> String {
 extern "js" fn html_script_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type_; }"
+) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 impl THTMLScriptElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -121,7 +121,7 @@ impl THTMLScriptElement with no_module(self : Self) -> Bool {
 extern "js" fn html_script_element_set_no_module_ffi(
   obj : JsValue,
   no_module : JsValue,
-) -> Unit = "(obj, noModule) => { obj.noModule = no_module; }"
+) -> Unit = "(obj, noModule) => { obj.noModule = noModule; }"
 
 ///|
 impl THTMLScriptElement with set_no_module(self : Self, no_module : Bool) -> Unit {
@@ -143,7 +143,7 @@ impl THTMLScriptElement with async_(self : Self) -> Bool {
 extern "js" fn html_script_element_set_async_ffi(
   obj : JsValue,
   async_ : JsValue,
-) -> Unit = "(obj, async) => { obj.async = async_; }"
+) -> Unit = "(obj, async) => { obj.async = async; }"
 
 ///|
 impl THTMLScriptElement with set_async_(self : Self, async_ : Bool) -> Unit {
@@ -165,7 +165,7 @@ impl THTMLScriptElement with defer_(self : Self) -> Bool {
 extern "js" fn html_script_element_set_defer_ffi(
   obj : JsValue,
   defer_ : JsValue,
-) -> Unit = "(obj, defer) => { obj.defer = defer_; }"
+) -> Unit = "(obj, defer) => { obj.defer = defer; }"
 
 ///|
 impl THTMLScriptElement with set_defer_(self : Self, defer_ : Bool) -> Unit {
@@ -195,7 +195,7 @@ impl THTMLScriptElement with cross_origin(self : Self) -> String {
 extern "js" fn html_script_element_set_cross_origin_ffi(
   obj : JsValue,
   cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = cross_origin; }"
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
 impl THTMLScriptElement with set_cross_origin(
@@ -220,7 +220,7 @@ impl THTMLScriptElement with referrer_policy(self : Self) -> String {
 extern "js" fn html_script_element_set_referrer_policy_ffi(
   obj : JsValue,
   referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrer_policy; }"
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
 impl THTMLScriptElement with set_referrer_policy(
@@ -267,7 +267,7 @@ impl THTMLScriptElement with fetch_priority(self : Self) -> String {
 extern "js" fn html_script_element_set_fetch_priority_ffi(
   obj : JsValue,
   fetch_priority : JsValue,
-) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetch_priority; }"
+) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
 
 ///|
 impl THTMLScriptElement with set_fetch_priority(
@@ -363,7 +363,7 @@ impl THTMLScriptElement with html_for(self : Self) -> String {
 extern "js" fn html_script_element_set_html_for_ffi(
   obj : JsValue,
   html_for : JsValue,
-) -> Unit = "(obj, htmlFor) => { obj.htmlFor = html_for; }"
+) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
 
 ///|
 impl THTMLScriptElement with set_html_for(self : Self, html_for : String) -> Unit {

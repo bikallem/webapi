@@ -80,7 +80,7 @@ impl THTMLMetaElement with http_equiv(self : Self) -> String {
 extern "js" fn html_meta_element_set_http_equiv_ffi(
   obj : JsValue,
   http_equiv : JsValue,
-) -> Unit = "(obj, httpEquiv) => { obj.httpEquiv = http_equiv; }"
+) -> Unit = "(obj, httpEquiv) => { obj.httpEquiv = httpEquiv; }"
 
 ///|
 impl THTMLMetaElement with set_http_equiv(self : Self, http_equiv : String) -> Unit {

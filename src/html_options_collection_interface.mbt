@@ -132,7 +132,7 @@ impl THTMLOptionsCollection with selected_index(self : Self) -> Int {
 extern "js" fn html_options_collection_set_selected_index_ffi(
   obj : JsValue,
   selected_index : JsValue,
-) -> Unit = "(obj, selectedIndex) => { obj.selectedIndex = selected_index; }"
+) -> Unit = "(obj, selectedIndex) => { obj.selectedIndex = selectedIndex; }"
 
 ///|
 impl THTMLOptionsCollection with set_selected_index(

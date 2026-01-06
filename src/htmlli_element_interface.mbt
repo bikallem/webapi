@@ -74,7 +74,7 @@ impl THTMLLIElement with type_(self : Self) -> String {
 extern "js" fn htmlli_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type_; }"
+) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 impl THTMLLIElement with set_type_(self : Self, type_ : String) -> Unit {

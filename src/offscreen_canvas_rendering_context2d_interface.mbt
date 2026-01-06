@@ -625,7 +625,7 @@ impl TOffscreenCanvasRenderingContext2D with global_alpha(self : Self) -> Double
 extern "js" fn offscreen_canvas_rendering_context2d_set_global_alpha_ffi(
   obj : JsValue,
   global_alpha : JsValue,
-) -> Unit = "(obj, globalAlpha) => { obj.globalAlpha = global_alpha; }"
+) -> Unit = "(obj, globalAlpha) => { obj.globalAlpha = globalAlpha; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_global_alpha(
@@ -656,7 +656,7 @@ impl TOffscreenCanvasRenderingContext2D with global_composite_operation(
 extern "js" fn offscreen_canvas_rendering_context2d_set_global_composite_operation_ffi(
   obj : JsValue,
   global_composite_operation : JsValue,
-) -> Unit = "(obj, globalCompositeOperation) => { obj.globalCompositeOperation = global_composite_operation; }"
+) -> Unit = "(obj, globalCompositeOperation) => { obj.globalCompositeOperation = globalCompositeOperation; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_global_composite_operation(
@@ -687,7 +687,7 @@ impl TOffscreenCanvasRenderingContext2D with image_smoothing_enabled(
 extern "js" fn offscreen_canvas_rendering_context2d_set_image_smoothing_enabled_ffi(
   obj : JsValue,
   image_smoothing_enabled : JsValue,
-) -> Unit = "(obj, imageSmoothingEnabled) => { obj.imageSmoothingEnabled = image_smoothing_enabled; }"
+) -> Unit = "(obj, imageSmoothingEnabled) => { obj.imageSmoothingEnabled = imageSmoothingEnabled; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_enabled(
@@ -718,7 +718,7 @@ impl TOffscreenCanvasRenderingContext2D with image_smoothing_quality(
 extern "js" fn offscreen_canvas_rendering_context2d_set_image_smoothing_quality_ffi(
   obj : JsValue,
   image_smoothing_quality : JsValue,
-) -> Unit = "(obj, imageSmoothingQuality) => { obj.imageSmoothingQuality = image_smoothing_quality; }"
+) -> Unit = "(obj, imageSmoothingQuality) => { obj.imageSmoothingQuality = imageSmoothingQuality; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_quality(
@@ -745,7 +745,7 @@ impl TOffscreenCanvasRenderingContext2D with stroke_style(self : Self) -> Offscr
 extern "js" fn offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
   obj : JsValue,
   stroke_style : JsValue,
-) -> Unit = "(obj, strokeStyle) => { obj.strokeStyle = stroke_style; }"
+) -> Unit = "(obj, strokeStyle) => { obj.strokeStyle = strokeStyle; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_stroke_style(
@@ -772,7 +772,7 @@ impl TOffscreenCanvasRenderingContext2D with fill_style(self : Self) -> Offscree
 extern "js" fn offscreen_canvas_rendering_context2d_set_fill_style_ffi(
   obj : JsValue,
   fill_style : JsValue,
-) -> Unit = "(obj, fillStyle) => { obj.fillStyle = fill_style; }"
+) -> Unit = "(obj, fillStyle) => { obj.fillStyle = fillStyle; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_fill_style(
@@ -907,7 +907,7 @@ impl TOffscreenCanvasRenderingContext2D with shadow_offset_x(self : Self) -> Dou
 extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_offset_x_ffi(
   obj : JsValue,
   shadow_offset_x : JsValue,
-) -> Unit = "(obj, shadowOffsetX) => { obj.shadowOffsetX = shadow_offset_x; }"
+) -> Unit = "(obj, shadowOffsetX) => { obj.shadowOffsetX = shadowOffsetX; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_shadow_offset_x(
@@ -936,7 +936,7 @@ impl TOffscreenCanvasRenderingContext2D with shadow_offset_y(self : Self) -> Dou
 extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_offset_y_ffi(
   obj : JsValue,
   shadow_offset_y : JsValue,
-) -> Unit = "(obj, shadowOffsetY) => { obj.shadowOffsetY = shadow_offset_y; }"
+) -> Unit = "(obj, shadowOffsetY) => { obj.shadowOffsetY = shadowOffsetY; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_shadow_offset_y(
@@ -963,7 +963,7 @@ impl TOffscreenCanvasRenderingContext2D with shadow_blur(self : Self) -> Double 
 extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_blur_ffi(
   obj : JsValue,
   shadow_blur : JsValue,
-) -> Unit = "(obj, shadowBlur) => { obj.shadowBlur = shadow_blur; }"
+) -> Unit = "(obj, shadowBlur) => { obj.shadowBlur = shadowBlur; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_shadow_blur(
@@ -990,7 +990,7 @@ impl TOffscreenCanvasRenderingContext2D with shadow_color(self : Self) -> String
 extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_color_ffi(
   obj : JsValue,
   shadow_color : JsValue,
-) -> Unit = "(obj, shadowColor) => { obj.shadowColor = shadow_color; }"
+) -> Unit = "(obj, shadowColor) => { obj.shadowColor = shadowColor; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_shadow_color(
@@ -1614,7 +1614,7 @@ impl TOffscreenCanvasRenderingContext2D with line_width(self : Self) -> Double {
 extern "js" fn offscreen_canvas_rendering_context2d_set_line_width_ffi(
   obj : JsValue,
   line_width : JsValue,
-) -> Unit = "(obj, lineWidth) => { obj.lineWidth = line_width; }"
+) -> Unit = "(obj, lineWidth) => { obj.lineWidth = lineWidth; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_line_width(
@@ -1641,7 +1641,7 @@ impl TOffscreenCanvasRenderingContext2D with line_cap(self : Self) -> CanvasLine
 extern "js" fn offscreen_canvas_rendering_context2d_set_line_cap_ffi(
   obj : JsValue,
   line_cap : JsValue,
-) -> Unit = "(obj, lineCap) => { obj.lineCap = line_cap; }"
+) -> Unit = "(obj, lineCap) => { obj.lineCap = lineCap; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_line_cap(
@@ -1668,7 +1668,7 @@ impl TOffscreenCanvasRenderingContext2D with line_join(self : Self) -> CanvasLin
 extern "js" fn offscreen_canvas_rendering_context2d_set_line_join_ffi(
   obj : JsValue,
   line_join : JsValue,
-) -> Unit = "(obj, lineJoin) => { obj.lineJoin = line_join; }"
+) -> Unit = "(obj, lineJoin) => { obj.lineJoin = lineJoin; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_line_join(
@@ -1695,7 +1695,7 @@ impl TOffscreenCanvasRenderingContext2D with miter_limit(self : Self) -> Double 
 extern "js" fn offscreen_canvas_rendering_context2d_set_miter_limit_ffi(
   obj : JsValue,
   miter_limit : JsValue,
-) -> Unit = "(obj, miterLimit) => { obj.miterLimit = miter_limit; }"
+) -> Unit = "(obj, miterLimit) => { obj.miterLimit = miterLimit; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_miter_limit(
@@ -1753,7 +1753,7 @@ impl TOffscreenCanvasRenderingContext2D with line_dash_offset(self : Self) -> Do
 extern "js" fn offscreen_canvas_rendering_context2d_set_line_dash_offset_ffi(
   obj : JsValue,
   line_dash_offset : JsValue,
-) -> Unit = "(obj, lineDashOffset) => { obj.lineDashOffset = line_dash_offset; }"
+) -> Unit = "(obj, lineDashOffset) => { obj.lineDashOffset = lineDashOffset; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_line_dash_offset(
@@ -1834,7 +1834,7 @@ impl TOffscreenCanvasRenderingContext2D with text_align(self : Self) -> CanvasTe
 extern "js" fn offscreen_canvas_rendering_context2d_set_text_align_ffi(
   obj : JsValue,
   text_align : JsValue,
-) -> Unit = "(obj, textAlign) => { obj.textAlign = text_align; }"
+) -> Unit = "(obj, textAlign) => { obj.textAlign = textAlign; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_text_align(
@@ -1861,7 +1861,7 @@ impl TOffscreenCanvasRenderingContext2D with text_baseline(self : Self) -> Canva
 extern "js" fn offscreen_canvas_rendering_context2d_set_text_baseline_ffi(
   obj : JsValue,
   text_baseline : JsValue,
-) -> Unit = "(obj, textBaseline) => { obj.textBaseline = text_baseline; }"
+) -> Unit = "(obj, textBaseline) => { obj.textBaseline = textBaseline; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_text_baseline(
@@ -1915,7 +1915,7 @@ impl TOffscreenCanvasRenderingContext2D with letter_spacing(self : Self) -> Stri
 extern "js" fn offscreen_canvas_rendering_context2d_set_letter_spacing_ffi(
   obj : JsValue,
   letter_spacing : JsValue,
-) -> Unit = "(obj, letterSpacing) => { obj.letterSpacing = letter_spacing; }"
+) -> Unit = "(obj, letterSpacing) => { obj.letterSpacing = letterSpacing; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_letter_spacing(
@@ -1942,7 +1942,7 @@ impl TOffscreenCanvasRenderingContext2D with font_kerning(self : Self) -> Canvas
 extern "js" fn offscreen_canvas_rendering_context2d_set_font_kerning_ffi(
   obj : JsValue,
   font_kerning : JsValue,
-) -> Unit = "(obj, fontKerning) => { obj.fontKerning = font_kerning; }"
+) -> Unit = "(obj, fontKerning) => { obj.fontKerning = fontKerning; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_font_kerning(
@@ -1969,7 +1969,7 @@ impl TOffscreenCanvasRenderingContext2D with font_stretch(self : Self) -> Canvas
 extern "js" fn offscreen_canvas_rendering_context2d_set_font_stretch_ffi(
   obj : JsValue,
   font_stretch : JsValue,
-) -> Unit = "(obj, fontStretch) => { obj.fontStretch = font_stretch; }"
+) -> Unit = "(obj, fontStretch) => { obj.fontStretch = fontStretch; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_font_stretch(
@@ -1998,7 +1998,7 @@ impl TOffscreenCanvasRenderingContext2D with font_variant_caps(self : Self) -> C
 extern "js" fn offscreen_canvas_rendering_context2d_set_font_variant_caps_ffi(
   obj : JsValue,
   font_variant_caps : JsValue,
-) -> Unit = "(obj, fontVariantCaps) => { obj.fontVariantCaps = font_variant_caps; }"
+) -> Unit = "(obj, fontVariantCaps) => { obj.fontVariantCaps = fontVariantCaps; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_font_variant_caps(
@@ -2025,7 +2025,7 @@ impl TOffscreenCanvasRenderingContext2D with text_rendering(self : Self) -> Canv
 extern "js" fn offscreen_canvas_rendering_context2d_set_text_rendering_ffi(
   obj : JsValue,
   text_rendering : JsValue,
-) -> Unit = "(obj, textRendering) => { obj.textRendering = text_rendering; }"
+) -> Unit = "(obj, textRendering) => { obj.textRendering = textRendering; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_text_rendering(
@@ -2052,7 +2052,7 @@ impl TOffscreenCanvasRenderingContext2D with word_spacing(self : Self) -> String
 extern "js" fn offscreen_canvas_rendering_context2d_set_word_spacing_ffi(
   obj : JsValue,
   word_spacing : JsValue,
-) -> Unit = "(obj, wordSpacing) => { obj.wordSpacing = word_spacing; }"
+) -> Unit = "(obj, wordSpacing) => { obj.wordSpacing = wordSpacing; }"
 
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_word_spacing(

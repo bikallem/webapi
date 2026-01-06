@@ -241,7 +241,7 @@ impl THTMLAreaElement with referrer_policy(self : Self) -> String {
 extern "js" fn html_area_element_set_referrer_policy_ffi(
   obj : JsValue,
   referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrer_policy; }"
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
 impl THTMLAreaElement with set_referrer_policy(
@@ -266,7 +266,7 @@ impl THTMLAreaElement with no_href(self : Self) -> Bool {
 extern "js" fn html_area_element_set_no_href_ffi(
   obj : JsValue,
   no_href : JsValue,
-) -> Unit = "(obj, noHref) => { obj.noHref = no_href; }"
+) -> Unit = "(obj, noHref) => { obj.noHref = noHref; }"
 
 ///|
 impl THTMLAreaElement with set_no_href(self : Self, no_href : Bool) -> Unit {

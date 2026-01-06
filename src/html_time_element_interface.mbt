@@ -53,7 +53,7 @@ impl THTMLTimeElement with date_time(self : Self) -> String {
 extern "js" fn html_time_element_set_date_time_ffi(
   obj : JsValue,
   date_time : JsValue,
-) -> Unit = "(obj, dateTime) => { obj.dateTime = date_time; }"
+) -> Unit = "(obj, dateTime) => { obj.dateTime = dateTime; }"
 
 ///|
 impl THTMLTimeElement with set_date_time(self : Self, date_time : String) -> Unit {

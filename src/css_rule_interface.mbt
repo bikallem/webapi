@@ -60,7 +60,7 @@ impl TCSSRule with css_text(self : Self) -> CSSOMString {
 extern "js" fn css_rule_set_css_text_ffi(
   obj : JsValue,
   css_text : JsValue,
-) -> Unit = "(obj, cssText) => { obj.cssText = css_text; }"
+) -> Unit = "(obj, cssText) => { obj.cssText = cssText; }"
 
 ///|
 impl TCSSRule with set_css_text(self : Self, css_text : CSSOMString) -> Unit {

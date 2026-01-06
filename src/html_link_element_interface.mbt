@@ -106,7 +106,7 @@ impl THTMLLinkElement with cross_origin(self : Self) -> String {
 extern "js" fn html_link_element_set_cross_origin_ffi(
   obj : JsValue,
   cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = cross_origin; }"
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
 impl THTMLLinkElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {
@@ -147,7 +147,7 @@ impl THTMLLinkElement with as_(self : Self) -> String {
 extern "js" fn html_link_element_set_as_ffi(
   obj : JsValue,
   as_ : JsValue,
-) -> Unit = "(obj, as) => { obj.as = as_; }"
+) -> Unit = "(obj, as) => { obj.as = as; }"
 
 ///|
 impl THTMLLinkElement with set_as_(self : Self, as_ : String) -> Unit {
@@ -237,7 +237,7 @@ impl THTMLLinkElement with type_(self : Self) -> String {
 extern "js" fn html_link_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type_; }"
+) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 impl THTMLLinkElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -264,7 +264,7 @@ impl THTMLLinkElement with image_srcset(self : Self) -> String {
 extern "js" fn html_link_element_set_image_srcset_ffi(
   obj : JsValue,
   image_srcset : JsValue,
-) -> Unit = "(obj, imageSrcset) => { obj.imageSrcset = image_srcset; }"
+) -> Unit = "(obj, imageSrcset) => { obj.imageSrcset = imageSrcset; }"
 
 ///|
 impl THTMLLinkElement with set_image_srcset(self : Self, image_srcset : String) -> Unit {
@@ -286,7 +286,7 @@ impl THTMLLinkElement with image_sizes(self : Self) -> String {
 extern "js" fn html_link_element_set_image_sizes_ffi(
   obj : JsValue,
   image_sizes : JsValue,
-) -> Unit = "(obj, imageSizes) => { obj.imageSizes = image_sizes; }"
+) -> Unit = "(obj, imageSizes) => { obj.imageSizes = imageSizes; }"
 
 ///|
 impl THTMLLinkElement with set_image_sizes(self : Self, image_sizes : String) -> Unit {
@@ -308,7 +308,7 @@ impl THTMLLinkElement with referrer_policy(self : Self) -> String {
 extern "js" fn html_link_element_set_referrer_policy_ffi(
   obj : JsValue,
   referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrer_policy; }"
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
 impl THTMLLinkElement with set_referrer_policy(
@@ -363,7 +363,7 @@ impl THTMLLinkElement with fetch_priority(self : Self) -> String {
 extern "js" fn html_link_element_set_fetch_priority_ffi(
   obj : JsValue,
   fetch_priority : JsValue,
-) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetch_priority; }"
+) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
 
 ///|
 impl THTMLLinkElement with set_fetch_priority(

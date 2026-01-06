@@ -155,7 +155,7 @@ impl THTMLMediaElement with src_object(self : Self) -> MediaProvider {
 extern "js" fn html_media_element_set_src_object_ffi(
   obj : JsValue,
   src_object : JsValue,
-) -> Unit = "(obj, srcObject) => { obj.srcObject = src_object; }"
+) -> Unit = "(obj, srcObject) => { obj.srcObject = srcObject; }"
 
 ///|
 impl THTMLMediaElement with set_src_object(
@@ -188,7 +188,7 @@ impl THTMLMediaElement with cross_origin(self : Self) -> String {
 extern "js" fn html_media_element_set_cross_origin_ffi(
   obj : JsValue,
   cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = cross_origin; }"
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
 impl THTMLMediaElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {
@@ -286,7 +286,7 @@ impl THTMLMediaElement with current_time(self : Self) -> Double {
 extern "js" fn html_media_element_set_current_time_ffi(
   obj : JsValue,
   current_time : JsValue,
-) -> Unit = "(obj, currentTime) => { obj.currentTime = current_time; }"
+) -> Unit = "(obj, currentTime) => { obj.currentTime = currentTime; }"
 
 ///|
 impl THTMLMediaElement with set_current_time(self : Self, current_time : Double) -> Unit {
@@ -345,7 +345,7 @@ impl THTMLMediaElement with default_playback_rate(self : Self) -> Double {
 extern "js" fn html_media_element_set_default_playback_rate_ffi(
   obj : JsValue,
   default_playback_rate : JsValue,
-) -> Unit = "(obj, defaultPlaybackRate) => { obj.defaultPlaybackRate = default_playback_rate; }"
+) -> Unit = "(obj, defaultPlaybackRate) => { obj.defaultPlaybackRate = defaultPlaybackRate; }"
 
 ///|
 impl THTMLMediaElement with set_default_playback_rate(
@@ -370,7 +370,7 @@ impl THTMLMediaElement with playback_rate(self : Self) -> Double {
 extern "js" fn html_media_element_set_playback_rate_ffi(
   obj : JsValue,
   playback_rate : JsValue,
-) -> Unit = "(obj, playbackRate) => { obj.playbackRate = playback_rate; }"
+) -> Unit = "(obj, playbackRate) => { obj.playbackRate = playbackRate; }"
 
 ///|
 impl THTMLMediaElement with set_playback_rate(
@@ -395,7 +395,7 @@ impl THTMLMediaElement with preserves_pitch(self : Self) -> Bool {
 extern "js" fn html_media_element_set_preserves_pitch_ffi(
   obj : JsValue,
   preserves_pitch : JsValue,
-) -> Unit = "(obj, preservesPitch) => { obj.preservesPitch = preserves_pitch; }"
+) -> Unit = "(obj, preservesPitch) => { obj.preservesPitch = preservesPitch; }"
 
 ///|
 impl THTMLMediaElement with set_preserves_pitch(
@@ -466,7 +466,7 @@ impl THTMLMediaElement with loop_(self : Self) -> Bool {
 extern "js" fn html_media_element_set_loop_ffi(
   obj : JsValue,
   loop_ : JsValue,
-) -> Unit = "(obj, loop) => { obj.loop = loop_; }"
+) -> Unit = "(obj, loop) => { obj.loop = loop; }"
 
 ///|
 impl THTMLMediaElement with set_loop_(self : Self, loop_ : Bool) -> Unit {
@@ -567,7 +567,7 @@ impl THTMLMediaElement with default_muted(self : Self) -> Bool {
 extern "js" fn html_media_element_set_default_muted_ffi(
   obj : JsValue,
   default_muted : JsValue,
-) -> Unit = "(obj, defaultMuted) => { obj.defaultMuted = default_muted; }"
+) -> Unit = "(obj, defaultMuted) => { obj.defaultMuted = defaultMuted; }"
 
 ///|
 impl THTMLMediaElement with set_default_muted(self : Self, default_muted : Bool) -> Unit {

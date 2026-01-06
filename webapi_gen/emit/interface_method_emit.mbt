@@ -203,7 +203,7 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
   let code = StringBuilder::new()
   code
   ..write_string(
-    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{arg_name}; }\"",
+    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
   )
   ..write_string("\n\n")
 

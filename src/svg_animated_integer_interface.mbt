@@ -36,7 +36,7 @@ impl TSVGAnimatedInteger with base_val(self : Self) -> Int {
 extern "js" fn svg_animated_integer_set_base_val_ffi(
   obj : JsValue,
   base_val : JsValue,
-) -> Unit = "(obj, baseVal) => { obj.baseVal = base_val; }"
+) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
 
 ///|
 impl TSVGAnimatedInteger with set_base_val(self : Self, base_val : Int) -> Unit {

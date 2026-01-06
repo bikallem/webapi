@@ -50,7 +50,7 @@ impl THistory with scroll_restoration(self : Self) -> ScrollRestoration {
 extern "js" fn history_set_scroll_restoration_ffi(
   obj : JsValue,
   scroll_restoration : JsValue,
-) -> Unit = "(obj, scrollRestoration) => { obj.scrollRestoration = scroll_restoration; }"
+) -> Unit = "(obj, scrollRestoration) => { obj.scrollRestoration = scrollRestoration; }"
 
 ///|
 impl THistory with set_scroll_restoration(

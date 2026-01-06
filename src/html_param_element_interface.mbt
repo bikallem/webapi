@@ -102,7 +102,7 @@ impl THTMLParamElement with type_(self : Self) -> String {
 extern "js" fn html_param_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type_; }"
+) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 impl THTMLParamElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -121,7 +121,7 @@ impl THTMLParamElement with value_type(self : Self) -> String {
 extern "js" fn html_param_element_set_value_type_ffi(
   obj : JsValue,
   value_type : JsValue,
-) -> Unit = "(obj, valueType) => { obj.valueType = value_type; }"
+) -> Unit = "(obj, valueType) => { obj.valueType = valueType; }"
 
 ///|
 impl THTMLParamElement with set_value_type(self : Self, value_type : String) -> Unit {

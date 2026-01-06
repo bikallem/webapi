@@ -114,7 +114,7 @@ impl THTMLObjectElement with type_(self : Self) -> String {
 extern "js" fn html_object_element_set_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type_; }"
+) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 impl THTMLObjectElement with set_type_(self : Self, type_ : String) -> Unit {
@@ -361,7 +361,7 @@ impl THTMLObjectElement with declare_(self : Self) -> Bool {
 extern "js" fn html_object_element_set_declare_ffi(
   obj : JsValue,
   declare_ : JsValue,
-) -> Unit = "(obj, declare) => { obj.declare = declare_; }"
+) -> Unit = "(obj, declare) => { obj.declare = declare; }"
 
 ///|
 impl THTMLObjectElement with set_declare_(self : Self, declare_ : Bool) -> Unit {
@@ -449,7 +449,7 @@ impl THTMLObjectElement with code_base(self : Self) -> String {
 extern "js" fn html_object_element_set_code_base_ffi(
   obj : JsValue,
   code_base : JsValue,
-) -> Unit = "(obj, codeBase) => { obj.codeBase = code_base; }"
+) -> Unit = "(obj, codeBase) => { obj.codeBase = codeBase; }"
 
 ///|
 impl THTMLObjectElement with set_code_base(self : Self, code_base : String) -> Unit {
@@ -471,7 +471,7 @@ impl THTMLObjectElement with code_type(self : Self) -> String {
 extern "js" fn html_object_element_set_code_type_ffi(
   obj : JsValue,
   code_type : JsValue,
-) -> Unit = "(obj, codeType) => { obj.codeType = code_type; }"
+) -> Unit = "(obj, codeType) => { obj.codeType = codeType; }"
 
 ///|
 impl THTMLObjectElement with set_code_type(self : Self, code_type : String) -> Unit {
@@ -493,7 +493,7 @@ impl THTMLObjectElement with use_map(self : Self) -> String {
 extern "js" fn html_object_element_set_use_map_ffi(
   obj : JsValue,
   use_map : JsValue,
-) -> Unit = "(obj, useMap) => { obj.useMap = use_map; }"
+) -> Unit = "(obj, useMap) => { obj.useMap = useMap; }"
 
 ///|
 impl THTMLObjectElement with set_use_map(self : Self, use_map : String) -> Unit {

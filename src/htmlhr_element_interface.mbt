@@ -99,7 +99,7 @@ impl THTMLHRElement with no_shade(self : Self) -> Bool {
 extern "js" fn htmlhr_element_set_no_shade_ffi(
   obj : JsValue,
   no_shade : JsValue,
-) -> Unit = "(obj, noShade) => { obj.noShade = no_shade; }"
+) -> Unit = "(obj, noShade) => { obj.noShade = noShade; }"
 
 ///|
 impl THTMLHRElement with set_no_shade(self : Self, no_shade : Bool) -> Unit {

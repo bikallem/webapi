@@ -388,7 +388,7 @@ impl TElement with class_name(self : Self) -> String {
 extern "js" fn element_set_class_name_ffi(
   obj : JsValue,
   class_name : JsValue,
-) -> Unit = "(obj, className) => { obj.className = class_name; }"
+) -> Unit = "(obj, className) => { obj.className = className; }"
 
 ///|
 impl TElement with set_class_name(self : Self, class_name : String) -> Unit {
@@ -917,7 +917,7 @@ impl TElement with inner_html(self : Self) -> ElementInnerHTML {
 extern "js" fn element_set_inner_html_ffi(
   obj : JsValue,
   inner_html : JsValue,
-) -> Unit = "(obj, innerHTML) => { obj.innerHTML = inner_html; }"
+) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
 
 ///|
 impl TElement with set_inner_html(self : Self, inner_html : &TElementInnerHTML) -> Unit {
@@ -936,7 +936,7 @@ impl TElement with outer_html(self : Self) -> ElementOuterHTML {
 extern "js" fn element_set_outer_html_ffi(
   obj : JsValue,
   outer_html : JsValue,
-) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outer_html; }"
+) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outerHTML; }"
 
 ///|
 impl TElement with set_outer_html(self : Self, outer_html : &TElementOuterHTML) -> Unit {
@@ -1115,7 +1115,7 @@ impl TElement with scroll_top(self : Self) -> Double {
 extern "js" fn element_set_scroll_top_ffi(
   obj : JsValue,
   scroll_top : JsValue,
-) -> Unit = "(obj, scrollTop) => { obj.scrollTop = scroll_top; }"
+) -> Unit = "(obj, scrollTop) => { obj.scrollTop = scrollTop; }"
 
 ///|
 impl TElement with set_scroll_top(self : Self, scroll_top : Double) -> Unit {
@@ -1134,7 +1134,7 @@ impl TElement with scroll_left(self : Self) -> Double {
 extern "js" fn element_set_scroll_left_ffi(
   obj : JsValue,
   scroll_left : JsValue,
-) -> Unit = "(obj, scrollLeft) => { obj.scrollLeft = scroll_left; }"
+) -> Unit = "(obj, scrollLeft) => { obj.scrollLeft = scrollLeft; }"
 
 ///|
 impl TElement with set_scroll_left(self : Self, scroll_left : Double) -> Unit {

@@ -133,7 +133,7 @@ impl TEvent with cancel_bubble(self : Self) -> Bool {
 extern "js" fn event_set_cancel_bubble_ffi(
   obj : JsValue,
   cancel_bubble : JsValue,
-) -> Unit = "(obj, cancelBubble) => { obj.cancelBubble = cancel_bubble; }"
+) -> Unit = "(obj, cancelBubble) => { obj.cancelBubble = cancelBubble; }"
 
 ///|
 impl TEvent with set_cancel_bubble(self : Self, cancel_bubble : Bool) -> Unit {
@@ -179,7 +179,7 @@ impl TEvent with return_value(self : Self) -> Bool {
 extern "js" fn event_set_return_value_ffi(
   obj : JsValue,
   return_value : JsValue,
-) -> Unit = "(obj, returnValue) => { obj.returnValue = return_value; }"
+) -> Unit = "(obj, returnValue) => { obj.returnValue = returnValue; }"
 
 ///|
 impl TEvent with set_return_value(self : Self, return_value : Bool) -> Unit {

@@ -65,7 +65,7 @@ impl TSVGAnimatedString with base_val(self : Self) -> SVGAnimatedStringBaseVal {
 extern "js" fn svg_animated_string_set_base_val_ffi(
   obj : JsValue,
   base_val : JsValue,
-) -> Unit = "(obj, baseVal) => { obj.baseVal = base_val; }"
+) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
 
 ///|
 impl TSVGAnimatedString with set_base_val(

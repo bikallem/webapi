@@ -71,7 +71,7 @@ impl TTextTrackCue with start_time(self : Self) -> Double {
 extern "js" fn text_track_cue_set_start_time_ffi(
   obj : JsValue,
   start_time : JsValue,
-) -> Unit = "(obj, startTime) => { obj.startTime = start_time; }"
+) -> Unit = "(obj, startTime) => { obj.startTime = startTime; }"
 
 ///|
 impl TTextTrackCue with set_start_time(self : Self, start_time : Double) -> Unit {
@@ -93,7 +93,7 @@ impl TTextTrackCue with end_time(self : Self) -> Double {
 extern "js" fn text_track_cue_set_end_time_ffi(
   obj : JsValue,
   end_time : JsValue,
-) -> Unit = "(obj, endTime) => { obj.endTime = end_time; }"
+) -> Unit = "(obj, endTime) => { obj.endTime = endTime; }"
 
 ///|
 impl TTextTrackCue with set_end_time(self : Self, end_time : Double) -> Unit {
@@ -115,7 +115,7 @@ impl TTextTrackCue with pause_on_exit(self : Self) -> Bool {
 extern "js" fn text_track_cue_set_pause_on_exit_ffi(
   obj : JsValue,
   pause_on_exit : JsValue,
-) -> Unit = "(obj, pauseOnExit) => { obj.pauseOnExit = pause_on_exit; }"
+) -> Unit = "(obj, pauseOnExit) => { obj.pauseOnExit = pauseOnExit; }"
 
 ///|
 impl TTextTrackCue with set_pause_on_exit(self : Self, pause_on_exit : Bool) -> Unit {

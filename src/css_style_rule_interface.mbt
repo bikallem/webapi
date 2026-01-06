@@ -40,7 +40,7 @@ impl TCSSStyleRule with selector_text(self : Self) -> CSSOMString {
 extern "js" fn css_style_rule_set_selector_text_ffi(
   obj : JsValue,
   selector_text : JsValue,
-) -> Unit = "(obj, selectorText) => { obj.selectorText = selector_text; }"
+) -> Unit = "(obj, selectorText) => { obj.selectorText = selectorText; }"
 
 ///|
 impl TCSSStyleRule with set_selector_text(

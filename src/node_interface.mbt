@@ -234,7 +234,7 @@ impl TNode with node_value(self : Self) -> String {
 extern "js" fn node_set_node_value_ffi(
   obj : JsValue,
   node_value : JsValue,
-) -> Unit = "(obj, nodeValue) => { obj.nodeValue = node_value; }"
+) -> Unit = "(obj, nodeValue) => { obj.nodeValue = nodeValue; }"
 
 ///|
 impl TNode with set_node_value(self : Self, node_value : String) -> Unit {
@@ -253,7 +253,7 @@ impl TNode with text_content(self : Self) -> String {
 extern "js" fn node_set_text_content_ffi(
   obj : JsValue,
   text_content : JsValue,
-) -> Unit = "(obj, textContent) => { obj.textContent = text_content; }"
+) -> Unit = "(obj, textContent) => { obj.textContent = textContent; }"
 
 ///|
 impl TNode with set_text_content(self : Self, text_content : String) -> Unit {

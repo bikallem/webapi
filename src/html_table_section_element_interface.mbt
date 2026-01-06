@@ -151,7 +151,7 @@ impl THTMLTableSectionElement with ch_off(self : Self) -> String {
 extern "js" fn html_table_section_element_set_ch_off_ffi(
   obj : JsValue,
   ch_off : JsValue,
-) -> Unit = "(obj, chOff) => { obj.chOff = ch_off; }"
+) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
 
 ///|
 impl THTMLTableSectionElement with set_ch_off(self : Self, ch_off : String) -> Unit {
@@ -173,7 +173,7 @@ impl THTMLTableSectionElement with v_align(self : Self) -> String {
 extern "js" fn html_table_section_element_set_v_align_ffi(
   obj : JsValue,
   v_align : JsValue,
-) -> Unit = "(obj, vAlign) => { obj.vAlign = v_align; }"
+) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
 
 ///|
 impl THTMLTableSectionElement with set_v_align(self : Self, v_align : String) -> Unit {
