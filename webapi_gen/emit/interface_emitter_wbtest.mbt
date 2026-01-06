@@ -93,6 +93,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|// MoonBit type: EventTarget
       #|
       #|
+      #|/// [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
       #|#external
       #|pub type EventTarget
       #|
@@ -124,6 +125,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
       #|
+      #|/// [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
       #|pub trait TEventTarget: TJsValue {
       #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetAddEventListenerOptions) -> Unit = _
       #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetRemoveEventListenerOptions) -> Unit = _
@@ -132,6 +134,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
       #|
+      #|/// [EventTarget.addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
       #|impl TEventTarget with add_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
@@ -141,6 +144,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|extern "js" fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
       #|
+      #|/// [EventTarget.removeEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)
       #|impl TEventTarget with remove_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
@@ -150,6 +154,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool = "(obj, event) => obj.dispatchEvent(obj, event)"
       #|
+      #|/// [EventTarget.dispatchEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)
       #|impl TEventTarget with dispatch_event(self : Self, 
       #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
@@ -186,6 +191,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|// MoonBit type: TestInterface
       #|
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
       #|pub type TestInterface
       #|
@@ -201,6 +207,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|pub impl TTestInterfaceTestMethodParam for String with to_js(self : String) -> JsValue = "%identity"
       #|
+      #|/// [TestInterfaceTestMethodParam2](https://developer.mozilla.org/en-US/docs/Web/API/TestInterfaceTestMethodParam2)
       #|#external
       #|pub type TestInterfaceTestMethodParam2
       #|
@@ -214,12 +221,14 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|pub impl TTestInterfaceTestMethodParam for &TTestInterfaceTestMethodParam2 with to_js(self : &TTestInterfaceTestMethodParam2) -> JsValue = "%identity"
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
       #|  test_method(self : Self, param? : &TTestInterfaceTestMethodParam) -> void = _
       #|}
       #|
       #|extern "js" fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void = "(obj, param) => obj.testMethod(obj, param)"
       #|
+      #|/// [TestInterface.testMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/testMethod)
       #|impl TTestInterface with test_method(self : Self, 
       #|param? : &TTestInterfaceTestMethodParam = "default") -> void {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
@@ -256,6 +265,7 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|// MoonBit type: TestInterface
       #|
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
       #|pub type TestInterface
       #|
@@ -265,6 +275,7 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
+      #|/// [TestInterfaceTestMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterfaceTestMethod)
       #|#external
       #|pub type TestInterfaceTestMethod
       #|
@@ -280,12 +291,14 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub impl TTestInterfaceTestMethod for UInt with to_js(self : UInt) -> JsValue = "%identity"
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
       #|  test_method(self : Self) -> TestInterfaceTestMethod = _
       #|}
       #|
       #|extern "js" fn test_interface_test_method_ffi(obj: JsValue) -> TestInterfaceTestMethod = "(obj) => obj.testMethod(obj)"
       #|
+      #|/// [TestInterface.testMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/testMethod)
       #|impl TTestInterface with test_method(self : Self) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self))
       #|}
@@ -322,6 +335,7 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|// MoonBit type: TestInterface
       #|
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
       #|pub type TestInterface
       #|
@@ -335,6 +349,7 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|
       #|pub const TEST_INTERFACE_NUM_CONST: UInt = 42
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
       #|
       #|}
@@ -373,6 +388,7 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|// MoonBit type: TestInterface
       #|
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
       #|pub type TestInterface
       #|
@@ -382,6 +398,7 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
       #|  say_hello(self : Self) -> Unit = _
       #|  name(self : Self) -> String = _
@@ -389,12 +406,14 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|
       #|extern "js" fn test_interface_say_hello_ffi(obj: JsValue) -> Unit = "(obj) => obj.sayHello(obj)"
       #|
+      #|/// [TestInterface.sayHello](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/sayHello)
       #|impl TTestInterface with say_hello(self : Self) -> Unit {
       #|  test_interface_say_hello_ffi(TJsValue::to_js(self))
       #|}
       #|
       #|extern "js" fn test_interface_name_ffi(obj: JsValue) -> String = "(obj) => obj.name"
       #|
+      #|/// [TestInterface.name](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/name)
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
       #|}
@@ -430,6 +449,7 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|// MoonBit type: TestInterface
       #|
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
       #|pub type TestInterface
       #|
@@ -439,6 +459,7 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
       #|  last_name(self : Self) -> String = _
       #|  set_last_name(self : Self, last_name : String) -> Unit = _
@@ -446,12 +467,14 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|
       #|extern "js" fn test_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
       #|
+      #|/// [TestInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/lastName)
       #|impl TTestInterface with last_name(self : Self) -> String {
       #|  test_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
       #|
       #|extern "js" fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = last_name; }"
       #|
+      #|/// [TestInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/lastName)
       #|impl TTestInterface with set_last_name(self : Self, 
       #|last_name : String) -> Unit {
       #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
@@ -492,6 +515,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|// MoonBit type: ParentInterface
       #|
       #|
+      #|/// [ParentInterface](https://developer.mozilla.org/en-US/docs/Web/API/ParentInterface)
       #|#external
       #|pub type ParentInterface
       #|
@@ -501,12 +525,14 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|
       #|pub impl TParentInterface for ParentInterface
       #|
+      #|/// [ParentInterface](https://developer.mozilla.org/en-US/docs/Web/API/ParentInterface) interface.
       #|pub trait TParentInterface: TJsValue {
       #|  last_name(self : Self) -> String = _
       #|}
       #|
       #|extern "js" fn parent_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
       #|
+      #|/// [ParentInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/ParentInterface/lastName)
       #|impl TParentInterface with last_name(self : Self) -> String {
       #|  parent_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
@@ -521,6 +547,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|// MoonBit type: ChildInterface
       #|
       #|
+      #|/// [ChildInterface](https://developer.mozilla.org/en-US/docs/Web/API/ChildInterface)
       #|#external
       #|pub type ChildInterface
       #|
@@ -532,6 +559,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|
       #|pub impl TParentInterface for ChildInterface
       #|
+      #|/// [ChildInterface](https://developer.mozilla.org/en-US/docs/Web/API/ChildInterface) interface.
       #|pub trait TChildInterface: TParentInterface {
       #|  last_name(self : Self) -> String = _
       #|  set_last_name(self : Self, last_name : String) -> Unit = _
@@ -539,12 +567,14 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|
       #|extern "js" fn child_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
       #|
+      #|/// [ChildInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/ChildInterface/lastName)
       #|impl TChildInterface with last_name(self : Self) -> String {
       #|  child_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
       #|
       #|extern "js" fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = last_name; }"
       #|
+      #|/// [ChildInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/ChildInterface/lastName)
       #|impl TChildInterface with set_last_name(self : Self, 
       #|last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
@@ -581,6 +611,7 @@ test "InterfaceEmitter emits static methods" {
       #|// MoonBit type: TestInterface
       #|
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
       #|pub type TestInterface
       #|
@@ -590,12 +621,14 @@ test "InterfaceEmitter emits static methods" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
       #|
       #|}
       #|
       #|extern "js" fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response = "(url, status) => TestInterface.redirect(url, status)"
       #|
+      #|/// [TestInterface.redirect](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/redirect)
       #|pub fn TestInterface::redirect(url : String, 
       #|status? : UInt = (302: UInt)) -> Response {
       #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
@@ -632,6 +665,7 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|// MoonBit type: TestInterface
       #|
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
       #|pub type TestInterface
       #|
@@ -641,12 +675,14 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
       #|
       #|}
       #|
       #|extern "js" fn test_interface_app_name_ffi() -> String = "() => TestInterface.appName"
       #|
+      #|/// [TestInterface.appName](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/appName)
       #|pub fn TestInterface::app_name() -> String {
       #|  test_interface_app_name_ffi()
       #|}

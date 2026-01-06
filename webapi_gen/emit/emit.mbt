@@ -20,6 +20,22 @@ struct ConstName(String) derive(Show, ToJson)
 struct Specs(@hashset.HashSet[String]) derive(Show, ToJson)
 
 ///|
+/// MDN documentation URL base
+let mdn_base_url : String = "https://developer.mozilla.org/en-US/docs/Web/API"
+
+///|
+/// Generate MDN documentation URL for an interface
+pub fn mdn_interface_url(interface_name : String) -> String {
+  "\{mdn_base_url}/\{interface_name}"
+}
+
+///|
+/// Generate MDN documentation URL for an interface member (method/attribute)
+pub fn mdn_member_url(interface_name : String, member_name : String) -> String {
+  "\{mdn_base_url}/\{interface_name}/\{member_name}"
+}
+
+///|
 pub struct InterfaceDef {
   trait_name : String
   parent_trait : String
@@ -119,8 +135,10 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
   let buf = StringBuilder::new()
   for i, emit in emits {
     match emit {
-      Emit::External(TypeName(type_name)) =>
-        buf.write_string("#external\npub type \{type_name}")
+      Emit::External(TypeName(type_name)) => {
+        let mdn_url = mdn_interface_url(type_name)
+        buf.write_string("/// [\{type_name}](\{mdn_url})\n#external\npub type \{type_name}")
+      }
       Emit::ImplTJsValue(TypeName(type_name)) =>
         buf.write_string(
           "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",
@@ -154,7 +172,10 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
         buf.write_string("pub impl \{trait_name} for \{type_name}")
       Emit::InterfaceDefinition(interface_def) => {
-        buf.write_string(
+        let mdn_url = mdn_interface_url(interface_def.trait_name)
+        buf
+        ..write_string("/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n")
+        ..write_string(
           "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
         )
         // Emit trait method declarations
