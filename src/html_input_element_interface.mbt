@@ -59,7 +59,7 @@ pub trait THTMLInputElement: THTMLElement {
   set_disabled(self : Self, disabled : Bool) -> Unit = _
   form(self : Self) -> HTMLFormElement = _
   files(self : Self) -> FileList = _
-  set_files(self : Self, files : FileList) -> Unit = _
+  set_files(self : Self, files : &TFileList) -> Unit = _
   form_action(self : Self) -> String = _
   set_form_action(self : Self, form_action : String) -> Unit = _
   form_enctype(self : Self) -> String = _
@@ -149,7 +149,7 @@ pub trait THTMLInputElement: THTMLElement {
   use_map(self : Self) -> String = _
   set_use_map(self : Self, use_map : String) -> Unit = _
   popover_target_element(self : Self) -> Element = _
-  set_popover_target_element(self : Self, popover_target_element : Element) -> Unit = _
+  set_popover_target_element(self : Self, popover_target_element : &TElement) -> Unit = _
   popover_target_action(self : Self) -> String = _
   set_popover_target_action(self : Self, popover_target_action : String) -> Unit = _
 }
@@ -375,7 +375,7 @@ extern "js" fn html_input_element_set_files_ffi(
 ) -> Unit = "(obj, files) => { obj.files = files; }"
 
 ///|
-impl THTMLInputElement with set_files(self : Self, files : FileList) -> Unit {
+impl THTMLInputElement with set_files(self : Self, files : &TFileList) -> Unit {
   html_input_element_set_files_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(files),
@@ -1257,7 +1257,7 @@ extern "js" fn html_input_element_set_popover_target_element_ffi(
 ///|
 impl THTMLInputElement with set_popover_target_element(
   self : Self,
-  popover_target_element : Element,
+  popover_target_element : &TElement,
 ) -> Unit {
   html_input_element_set_popover_target_element_ffi(
     TJsValue::to_js(self),

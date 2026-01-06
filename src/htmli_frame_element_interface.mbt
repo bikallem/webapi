@@ -67,7 +67,7 @@ pub trait THTMLIFrameElement: THTMLElement {
   src(self : Self) -> String = _
   set_src(self : Self, src : String) -> Unit = _
   srcdoc(self : Self) -> HTMLIFrameElementSrcdoc = _
-  set_srcdoc(self : Self, srcdoc : HTMLIFrameElementSrcdoc) -> Unit = _
+  set_srcdoc(self : Self, srcdoc : &THTMLIFrameElementSrcdoc) -> Unit = _
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
   sandbox(self : Self) -> DOMTokenList = _
@@ -138,7 +138,7 @@ extern "js" fn htmli_frame_element_set_srcdoc_ffi(
 ///|
 impl THTMLIFrameElement with set_srcdoc(
   self : Self,
-  srcdoc : HTMLIFrameElementSrcdoc,
+  srcdoc : &THTMLIFrameElementSrcdoc,
 ) -> Unit {
   htmli_frame_element_set_srcdoc_ffi(TJsValue::to_js(self), srcdoc.to_js())
 }

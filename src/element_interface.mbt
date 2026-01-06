@@ -259,9 +259,9 @@ pub trait TElement: TNode {
   set_html_unsafe(self : Self, html : &TElementSetHTMLUnsafeHtml) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
   inner_html(self : Self) -> ElementInnerHTML = _
-  set_inner_html(self : Self, inner_html : ElementInnerHTML) -> Unit = _
+  set_inner_html(self : Self, inner_html : &TElementInnerHTML) -> Unit = _
   outer_html(self : Self) -> ElementOuterHTML = _
-  set_outer_html(self : Self, outer_html : ElementOuterHTML) -> Unit = _
+  set_outer_html(self : Self, outer_html : &TElementOuterHTML) -> Unit = _
   insert_adjacent_html(
     self : Self,
     position : String,
@@ -920,7 +920,7 @@ extern "js" fn element_set_inner_html_ffi(
 ) -> Unit = "(obj, innerHTML) => { obj.innerHTML = inner_html; }"
 
 ///|
-impl TElement with set_inner_html(self : Self, inner_html : ElementInnerHTML) -> Unit {
+impl TElement with set_inner_html(self : Self, inner_html : &TElementInnerHTML) -> Unit {
   element_set_inner_html_ffi(TJsValue::to_js(self), inner_html.to_js())
 }
 
@@ -939,7 +939,7 @@ extern "js" fn element_set_outer_html_ffi(
 ) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outer_html; }"
 
 ///|
-impl TElement with set_outer_html(self : Self, outer_html : ElementOuterHTML) -> Unit {
+impl TElement with set_outer_html(self : Self, outer_html : &TElementOuterHTML) -> Unit {
   element_set_outer_html_ffi(TJsValue::to_js(self), outer_html.to_js())
 }
 

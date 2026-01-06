@@ -207,7 +207,7 @@ pub trait TDocument: TNode {
   dir(self : Self) -> String = _
   set_dir(self : Self, dir : String) -> Unit = _
   body(self : Self) -> HTMLElement = _
-  set_body(self : Self, body : HTMLElement) -> Unit = _
+  set_body(self : Self, body : &THTMLElement) -> Unit = _
   head(self : Self) -> HTMLHeadElement = _
   images(self : Self) -> HTMLCollection = _
   embeds(self : Self) -> HTMLCollection = _
@@ -973,7 +973,7 @@ impl TDocument with body(self : Self) -> HTMLElement {
 extern "js" fn document_set_body_ffi(obj : JsValue, body : JsValue) -> Unit = "(obj, body) => { obj.body = body; }"
 
 ///|
-impl TDocument with set_body(self : Self, body : HTMLElement) -> Unit {
+impl TDocument with set_body(self : Self, body : &THTMLElement) -> Unit {
   document_set_body_ffi(TJsValue::to_js(self), TJsValue::to_js(body))
 }
 

@@ -171,12 +171,12 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
   stroke_style(self : Self) -> OffscreenCanvasRenderingContext2DStrokeStyle = _
   set_stroke_style(
     self : Self,
-    stroke_style : OffscreenCanvasRenderingContext2DStrokeStyle,
+    stroke_style : &TOffscreenCanvasRenderingContext2DStrokeStyle,
   ) -> Unit = _
   fill_style(self : Self) -> OffscreenCanvasRenderingContext2DFillStyle = _
   set_fill_style(
     self : Self,
-    fill_style : OffscreenCanvasRenderingContext2DFillStyle,
+    fill_style : &TOffscreenCanvasRenderingContext2DFillStyle,
   ) -> Unit = _
   create_linear_gradient(
     self : Self,
@@ -750,7 +750,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_stroke_style(
   self : Self,
-  stroke_style : OffscreenCanvasRenderingContext2DStrokeStyle,
+  stroke_style : &TOffscreenCanvasRenderingContext2DStrokeStyle,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
     TJsValue::to_js(self),
@@ -777,7 +777,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_fill_style_ffi(
 ///|
 impl TOffscreenCanvasRenderingContext2D with set_fill_style(
   self : Self,
-  fill_style : OffscreenCanvasRenderingContext2DFillStyle,
+  fill_style : &TOffscreenCanvasRenderingContext2DFillStyle,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_set_fill_style_ffi(
     TJsValue::to_js(self),

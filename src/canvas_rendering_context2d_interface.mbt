@@ -169,10 +169,10 @@ pub trait TCanvasRenderingContext2D: TJsValue {
   stroke_style(self : Self) -> CanvasRenderingContext2DStrokeStyle = _
   set_stroke_style(
     self : Self,
-    stroke_style : CanvasRenderingContext2DStrokeStyle,
+    stroke_style : &TCanvasRenderingContext2DStrokeStyle,
   ) -> Unit = _
   fill_style(self : Self) -> CanvasRenderingContext2DFillStyle = _
-  set_fill_style(self : Self, fill_style : CanvasRenderingContext2DFillStyle) -> Unit = _
+  set_fill_style(self : Self, fill_style : &TCanvasRenderingContext2DFillStyle) -> Unit = _
   create_linear_gradient(
     self : Self,
     x0 : Double,
@@ -721,7 +721,7 @@ extern "js" fn canvas_rendering_context2d_set_stroke_style_ffi(
 ///|
 impl TCanvasRenderingContext2D with set_stroke_style(
   self : Self,
-  stroke_style : CanvasRenderingContext2DStrokeStyle,
+  stroke_style : &TCanvasRenderingContext2DStrokeStyle,
 ) -> Unit {
   canvas_rendering_context2d_set_stroke_style_ffi(
     TJsValue::to_js(self),
@@ -748,7 +748,7 @@ extern "js" fn canvas_rendering_context2d_set_fill_style_ffi(
 ///|
 impl TCanvasRenderingContext2D with set_fill_style(
   self : Self,
-  fill_style : CanvasRenderingContext2DFillStyle,
+  fill_style : &TCanvasRenderingContext2DFillStyle,
 ) -> Unit {
   canvas_rendering_context2d_set_fill_style_ffi(
     TJsValue::to_js(self),

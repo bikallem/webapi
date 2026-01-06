@@ -84,7 +84,7 @@ pub trait THTMLElement: TElement {
   dir(self : Self) -> String = _
   set_dir(self : Self, dir : String) -> Unit = _
   hidden(self : Self) -> HTMLElementHidden = _
-  set_hidden(self : Self, hidden : HTMLElementHidden) -> Unit = _
+  set_hidden(self : Self, hidden : &THTMLElementHidden) -> Unit = _
   inert(self : Self) -> Bool = _
   set_inert(self : Self, inert : Bool) -> Unit = _
   click(self : Self) -> Unit = _
@@ -386,7 +386,7 @@ extern "js" fn html_element_set_hidden_ffi(
 ) -> Unit = "(obj, hidden) => { obj.hidden = hidden; }"
 
 ///|
-impl THTMLElement with set_hidden(self : Self, hidden : HTMLElementHidden) -> Unit {
+impl THTMLElement with set_hidden(self : Self, hidden : &THTMLElementHidden) -> Unit {
   html_element_set_hidden_ffi(TJsValue::to_js(self), hidden.to_js())
 }
 

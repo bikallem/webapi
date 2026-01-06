@@ -40,15 +40,15 @@ pub fn HTMLTableElement::new() -> HTMLTableElement {
 ///|
 pub trait THTMLTableElement: THTMLElement {
   caption(self : Self) -> HTMLTableCaptionElement = _
-  set_caption(self : Self, caption : HTMLTableCaptionElement) -> Unit = _
+  set_caption(self : Self, caption : &THTMLTableCaptionElement) -> Unit = _
   create_caption(self : Self) -> HTMLTableCaptionElement = _
   delete_caption(self : Self) -> Unit = _
   t_head(self : Self) -> HTMLTableSectionElement = _
-  set_t_head(self : Self, t_head : HTMLTableSectionElement) -> Unit = _
+  set_t_head(self : Self, t_head : &THTMLTableSectionElement) -> Unit = _
   create_t_head(self : Self) -> HTMLTableSectionElement = _
   delete_t_head(self : Self) -> Unit = _
   t_foot(self : Self) -> HTMLTableSectionElement = _
-  set_t_foot(self : Self, t_foot : HTMLTableSectionElement) -> Unit = _
+  set_t_foot(self : Self, t_foot : &THTMLTableSectionElement) -> Unit = _
   create_t_foot(self : Self) -> HTMLTableSectionElement = _
   delete_t_foot(self : Self) -> Unit = _
   t_bodies(self : Self) -> HTMLCollection = _
@@ -95,7 +95,7 @@ extern "js" fn html_table_element_set_caption_ffi(
 ///|
 impl THTMLTableElement with set_caption(
   self : Self,
-  caption : HTMLTableCaptionElement,
+  caption : &THTMLTableCaptionElement,
 ) -> Unit {
   html_table_element_set_caption_ffi(
     TJsValue::to_js(self),
@@ -140,7 +140,7 @@ extern "js" fn html_table_element_set_t_head_ffi(
 ///|
 impl THTMLTableElement with set_t_head(
   self : Self,
-  t_head : HTMLTableSectionElement,
+  t_head : &THTMLTableSectionElement,
 ) -> Unit {
   html_table_element_set_t_head_ffi(
     TJsValue::to_js(self),
@@ -185,7 +185,7 @@ extern "js" fn html_table_element_set_t_foot_ffi(
 ///|
 impl THTMLTableElement with set_t_foot(
   self : Self,
-  t_foot : HTMLTableSectionElement,
+  t_foot : &THTMLTableSectionElement,
 ) -> Unit {
   html_table_element_set_t_foot_ffi(
     TJsValue::to_js(self),

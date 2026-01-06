@@ -42,7 +42,7 @@ pub trait THTMLButtonElement: THTMLElement {
   command(self : Self) -> String = _
   set_command(self : Self, command : String) -> Unit = _
   command_for_element(self : Self) -> Element = _
-  set_command_for_element(self : Self, command_for_element : Element) -> Unit = _
+  set_command_for_element(self : Self, command_for_element : &TElement) -> Unit = _
   disabled(self : Self) -> Bool = _
   set_disabled(self : Self, disabled : Bool) -> Unit = _
   form(self : Self) -> HTMLFormElement = _
@@ -70,7 +70,7 @@ pub trait THTMLButtonElement: THTMLElement {
   set_custom_validity(self : Self, error : String) -> Unit = _
   labels(self : Self) -> NodeList = _
   popover_target_element(self : Self) -> Element = _
-  set_popover_target_element(self : Self, popover_target_element : Element) -> Unit = _
+  set_popover_target_element(self : Self, popover_target_element : &TElement) -> Unit = _
   popover_target_action(self : Self) -> String = _
   set_popover_target_action(self : Self, popover_target_action : String) -> Unit = _
 }
@@ -116,7 +116,7 @@ extern "js" fn html_button_element_set_command_for_element_ffi(
 ///|
 impl THTMLButtonElement with set_command_for_element(
   self : Self,
-  command_for_element : Element,
+  command_for_element : &TElement,
 ) -> Unit {
   html_button_element_set_command_for_element_ffi(
     TJsValue::to_js(self),
@@ -416,7 +416,7 @@ extern "js" fn html_button_element_set_popover_target_element_ffi(
 ///|
 impl THTMLButtonElement with set_popover_target_element(
   self : Self,
-  popover_target_element : Element,
+  popover_target_element : &TElement,
 ) -> Unit {
   html_button_element_set_popover_target_element_ffi(
     TJsValue::to_js(self),

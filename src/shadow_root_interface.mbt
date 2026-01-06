@@ -75,7 +75,7 @@ pub trait TShadowRoot: TDocumentFragment {
   set_html_unsafe(self : Self, html : &TShadowRootSetHTMLUnsafeHtml) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
   inner_html(self : Self) -> ShadowRootInnerHTML = _
-  set_inner_html(self : Self, inner_html : ShadowRootInnerHTML) -> Unit = _
+  set_inner_html(self : Self, inner_html : &TShadowRootInnerHTML) -> Unit = _
   custom_element_registry(self : Self) -> CustomElementRegistry = _
   active_element(self : Self) -> Element = _
   style_sheets(self : Self) -> StyleSheetList = _
@@ -200,7 +200,7 @@ extern "js" fn shadow_root_set_inner_html_ffi(
 ///|
 impl TShadowRoot with set_inner_html(
   self : Self,
-  inner_html : ShadowRootInnerHTML,
+  inner_html : &TShadowRootInnerHTML,
 ) -> Unit {
   shadow_root_set_inner_html_ffi(TJsValue::to_js(self), inner_html.to_js())
 }

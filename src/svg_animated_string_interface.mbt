@@ -47,7 +47,7 @@ pub impl TSVGAnimatedStringBaseVal for TrustedScriptURL with to_js(
 ///|
 pub trait TSVGAnimatedString: TJsValue {
   base_val(self : Self) -> SVGAnimatedStringBaseVal = _
-  set_base_val(self : Self, base_val : SVGAnimatedStringBaseVal) -> Unit = _
+  set_base_val(self : Self, base_val : &TSVGAnimatedStringBaseVal) -> Unit = _
   anim_val(self : Self) -> String = _
 }
 
@@ -70,7 +70,7 @@ extern "js" fn svg_animated_string_set_base_val_ffi(
 ///|
 impl TSVGAnimatedString with set_base_val(
   self : Self,
-  base_val : SVGAnimatedStringBaseVal,
+  base_val : &TSVGAnimatedStringBaseVal,
 ) -> Unit {
   svg_animated_string_set_base_val_ffi(TJsValue::to_js(self), base_val.to_js())
 }

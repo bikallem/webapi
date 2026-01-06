@@ -21,7 +21,7 @@ pub trait TTreeWalker: TJsValue {
   what_to_show(self : Self) -> UInt = _
   filter(self : Self) -> NodeFilter = _
   current_node(self : Self) -> Node = _
-  set_current_node(self : Self, current_node : Node) -> Unit = _
+  set_current_node(self : Self, current_node : &TNode) -> Unit = _
   parent_node(self : Self) -> Node? = _
   first_child(self : Self) -> Node? = _
   last_child(self : Self) -> Node? = _
@@ -70,7 +70,7 @@ extern "js" fn tree_walker_set_current_node_ffi(
 ) -> Unit = "(obj, currentNode) => { obj.currentNode = current_node; }"
 
 ///|
-impl TTreeWalker with set_current_node(self : Self, current_node : Node) -> Unit {
+impl TTreeWalker with set_current_node(self : Self, current_node : &TNode) -> Unit {
   tree_walker_set_current_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(current_node),
