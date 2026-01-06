@@ -72,7 +72,7 @@ impl THistory with state(self : Self) -> JsValue {
 }
 
 ///|
-extern "js" fn history_go_ffi(obj : JsValue, delta : JsValue) -> Unit = "(obj, delta) => obj.go(obj, delta)"
+extern "js" fn history_go_ffi(obj : JsValue, delta : JsValue) -> Unit = "(obj, delta) => obj.go(delta)"
 
 ///|
 impl THistory with go(self : Self, delta? : Int = (0 : Int)) -> Unit {
@@ -80,7 +80,7 @@ impl THistory with go(self : Self, delta? : Int = (0 : Int)) -> Unit {
 }
 
 ///|
-extern "js" fn history_back_ffi(obj : JsValue) -> Unit = "(obj) => obj.back(obj)"
+extern "js" fn history_back_ffi(obj : JsValue) -> Unit = "(obj) => obj.back()"
 
 ///|
 impl THistory with back(self : Self) -> Unit {
@@ -88,7 +88,7 @@ impl THistory with back(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn history_forward_ffi(obj : JsValue) -> Unit = "(obj) => obj.forward(obj)"
+extern "js" fn history_forward_ffi(obj : JsValue) -> Unit = "(obj) => obj.forward()"
 
 ///|
 impl THistory with forward(self : Self) -> Unit {
@@ -101,7 +101,7 @@ extern "js" fn history_push_state_ffi(
   data : JsValue,
   unused : JsValue,
   url : JsValue,
-) -> Unit = "(obj, data, unused, url) => obj.pushState(obj, data, unused, url)"
+) -> Unit = "(obj, data, unused, url) => obj.pushState(data, unused, url)"
 
 ///|
 impl THistory with push_state(
@@ -124,7 +124,7 @@ extern "js" fn history_replace_state_ffi(
   data : JsValue,
   unused : JsValue,
   url : JsValue,
-) -> Unit = "(obj, data, unused, url) => obj.replaceState(obj, data, unused, url)"
+) -> Unit = "(obj, data, unused, url) => obj.replaceState(data, unused, url)"
 
 ///|
 impl THistory with replace_state(

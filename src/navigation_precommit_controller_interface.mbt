@@ -22,6 +22,7 @@ pub impl TNavigationPrecommitController for NavigationPrecommitController
 ///|
 pub trait TNavigationPrecommitController: TJsValue {
   redirect(self : Self, url : String, options? : NavigationNavigateOptions) -> Unit = _
+  add_handler(self : Self, handler : NavigationInterceptHandler) -> Unit = _
 }
 
 ///|
@@ -29,7 +30,7 @@ extern "js" fn navigation_precommit_controller_redirect_ffi(
   obj : JsValue,
   url : JsValue,
   options : JsValue,
-) -> Unit = "(obj, url, options) => obj.redirect(obj, url, options)"
+) -> Unit = "(obj, url, options) => obj.redirect(url, options)"
 
 ///|
 impl TNavigationPrecommitController with redirect(
@@ -41,5 +42,22 @@ impl TNavigationPrecommitController with redirect(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
     TJsValue::to_js(options),
+  )
+}
+
+///|
+extern "js" fn navigation_precommit_controller_add_handler_ffi(
+  obj : JsValue,
+  handler : JsValue,
+) -> Unit = "(obj, handler) => obj.addHandler(handler)"
+
+///|
+impl TNavigationPrecommitController with add_handler(
+  self : Self,
+  handler : NavigationInterceptHandler,
+) -> Unit {
+  navigation_precommit_controller_add_handler_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(handler),
   )
 }

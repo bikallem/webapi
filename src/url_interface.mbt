@@ -259,7 +259,7 @@ impl TURL with set_hash(self : Self, hash : String) -> Unit {
 }
 
 ///|
-extern "js" fn url_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON(obj)"
+extern "js" fn url_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON()"
 
 ///|
 impl TURL with to_json(self : Self) -> String {

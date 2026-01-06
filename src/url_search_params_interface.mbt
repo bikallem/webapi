@@ -66,7 +66,7 @@ extern "js" fn url_search_params_append_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.append(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.append(name, value)"
 
 ///|
 impl TURLSearchParams with append(self : Self, name : String, value : String) -> Unit {
@@ -82,7 +82,7 @@ extern "js" fn url_search_params_delete_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.delete(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.delete(name, value)"
 
 ///|
 impl TURLSearchParams with delete(self : Self, name : String, value? : String) -> Unit {
@@ -97,7 +97,7 @@ impl TURLSearchParams with delete(self : Self, name : String, value? : String) -
 extern "js" fn url_search_params_get_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsValue = "(obj, name) => obj.get(obj, name)"
+) -> JsValue = "(obj, name) => obj.get(name)"
 
 ///|
 impl TURLSearchParams with get(self : Self, name : String) -> String? {
@@ -116,7 +116,7 @@ impl TURLSearchParams with get(self : Self, name : String) -> String? {
 extern "js" fn url_search_params_get_all_ffi(
   obj : JsValue,
   name : JsValue,
-) -> Array[String] = "(obj, name) => obj.getAll(obj, name)"
+) -> Array[String] = "(obj, name) => obj.getAll(name)"
 
 ///|
 impl TURLSearchParams with get_all(self : Self, name : String) -> Array[String] {
@@ -128,7 +128,7 @@ extern "js" fn url_search_params_has_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Bool = "(obj, name, value) => obj.has(obj, name, value)"
+) -> Bool = "(obj, name, value) => obj.has(name, value)"
 
 ///|
 impl TURLSearchParams with has(self : Self, name : String, value? : String) -> Bool {
@@ -144,7 +144,7 @@ extern "js" fn url_search_params_set_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.set(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.set(name, value)"
 
 ///|
 impl TURLSearchParams with set(self : Self, name : String, value : String) -> Unit {
@@ -156,7 +156,7 @@ impl TURLSearchParams with set(self : Self, name : String, value : String) -> Un
 }
 
 ///|
-extern "js" fn url_search_params_sort_ffi(obj : JsValue) -> Unit = "(obj) => obj.sort(obj)"
+extern "js" fn url_search_params_sort_ffi(obj : JsValue) -> Unit = "(obj) => obj.sort()"
 
 ///|
 impl TURLSearchParams with sort(self : Self) -> Unit {

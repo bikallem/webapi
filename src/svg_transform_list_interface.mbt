@@ -48,7 +48,7 @@ impl TSVGTransformList with number_of_items(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn svg_transform_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear(obj)"
+extern "js" fn svg_transform_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 impl TSVGTransformList with clear(self : Self) -> Unit {
@@ -59,7 +59,7 @@ impl TSVGTransformList with clear(self : Self) -> Unit {
 extern "js" fn svg_transform_list_initialize_ffi(
   obj : JsValue,
   new_item : JsValue,
-) -> SVGTransform = "(obj, new_item) => obj.initialize(obj, new_item)"
+) -> SVGTransform = "(obj, new_item) => obj.initialize(new_item)"
 
 ///|
 impl TSVGTransformList with initialize(self : Self, new_item : &TSVGTransform) -> SVGTransform {
@@ -74,7 +74,7 @@ extern "js" fn svg_transform_list_insert_item_before_ffi(
   obj : JsValue,
   new_item : JsValue,
   index : JsValue,
-) -> SVGTransform = "(obj, new_item, index) => obj.insertItemBefore(obj, new_item, index)"
+) -> SVGTransform = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
 
 ///|
 impl TSVGTransformList with insert_item_before(
@@ -94,7 +94,7 @@ extern "js" fn svg_transform_list_replace_item_ffi(
   obj : JsValue,
   new_item : JsValue,
   index : JsValue,
-) -> SVGTransform = "(obj, new_item, index) => obj.replaceItem(obj, new_item, index)"
+) -> SVGTransform = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
 
 ///|
 impl TSVGTransformList with replace_item(
@@ -113,7 +113,7 @@ impl TSVGTransformList with replace_item(
 extern "js" fn svg_transform_list_remove_item_ffi(
   obj : JsValue,
   index : JsValue,
-) -> SVGTransform = "(obj, index) => obj.removeItem(obj, index)"
+) -> SVGTransform = "(obj, index) => obj.removeItem(index)"
 
 ///|
 impl TSVGTransformList with remove_item(self : Self, index : UInt) -> SVGTransform {
@@ -127,7 +127,7 @@ impl TSVGTransformList with remove_item(self : Self, index : UInt) -> SVGTransfo
 extern "js" fn svg_transform_list_append_item_ffi(
   obj : JsValue,
   new_item : JsValue,
-) -> SVGTransform = "(obj, new_item) => obj.appendItem(obj, new_item)"
+) -> SVGTransform = "(obj, new_item) => obj.appendItem(new_item)"
 
 ///|
 impl TSVGTransformList with append_item(self : Self, new_item : &TSVGTransform) -> SVGTransform {
@@ -141,7 +141,7 @@ impl TSVGTransformList with append_item(self : Self, new_item : &TSVGTransform) 
 extern "js" fn svg_transform_list_create_svg_transform_from_matrix_ffi(
   obj : JsValue,
   matrix : JsValue,
-) -> SVGTransform = "(obj, matrix) => obj.createSVGTransformFromMatrix(obj, matrix)"
+) -> SVGTransform = "(obj, matrix) => obj.createSVGTransformFromMatrix(matrix)"
 
 ///|
 impl TSVGTransformList with create_svg_transform_from_matrix(
@@ -155,7 +155,7 @@ impl TSVGTransformList with create_svg_transform_from_matrix(
 }
 
 ///|
-extern "js" fn svg_transform_list_consolidate_ffi(obj : JsValue) -> JsValue = "(obj) => obj.consolidate(obj)"
+extern "js" fn svg_transform_list_consolidate_ffi(obj : JsValue) -> JsValue = "(obj) => obj.consolidate()"
 
 ///|
 impl TSVGTransformList with consolidate(self : Self) -> SVGTransform? {

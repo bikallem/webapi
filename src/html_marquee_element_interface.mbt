@@ -311,7 +311,7 @@ impl THTMLMarqueeElement with set_width(self : Self, width : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_marquee_element_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start(obj)"
+extern "js" fn html_marquee_element_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start()"
 
 ///|
 impl THTMLMarqueeElement with start(self : Self) -> Unit {
@@ -319,7 +319,7 @@ impl THTMLMarqueeElement with start(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn html_marquee_element_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop(obj)"
+extern "js" fn html_marquee_element_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop()"
 
 ///|
 impl THTMLMarqueeElement with stop(self : Self) -> Unit {

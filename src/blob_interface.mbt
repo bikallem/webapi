@@ -59,7 +59,7 @@ extern "js" fn blob_slice_ffi(
   start : JsValue,
   end : JsValue,
   content_type : JsValue,
-) -> Blob = "(obj, start, end, content_type) => obj.slice(obj, start, end, content_type)"
+) -> Blob = "(obj, start, end, content_type) => obj.slice(start, end, content_type)"
 
 ///|
 impl TBlob with slice(
@@ -77,7 +77,7 @@ impl TBlob with slice(
 }
 
 ///|
-extern "js" fn blob_stream_ffi(obj : JsValue) -> ReadableStream = "(obj) => obj.stream(obj)"
+extern "js" fn blob_stream_ffi(obj : JsValue) -> ReadableStream = "(obj) => obj.stream()"
 
 ///|
 impl TBlob with stream(self : Self) -> ReadableStream {
@@ -85,7 +85,7 @@ impl TBlob with stream(self : Self) -> ReadableStream {
 }
 
 ///|
-extern "js" fn blob_text_ffi(obj : JsValue) -> JsPromise[String] = "(obj) => obj.text(obj)"
+extern "js" fn blob_text_ffi(obj : JsValue) -> JsPromise[String] = "(obj) => obj.text()"
 
 ///|
 impl TBlob with text(self : Self) -> JsPromise[String] {
@@ -93,7 +93,7 @@ impl TBlob with text(self : Self) -> JsPromise[String] {
 }
 
 ///|
-extern "js" fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] = "(obj) => obj.arrayBuffer(obj)"
+extern "js" fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] = "(obj) => obj.arrayBuffer()"
 
 ///|
 impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
@@ -101,7 +101,7 @@ impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
 }
 
 ///|
-extern "js" fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] = "(obj) => obj.bytes(obj)"
+extern "js" fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] = "(obj) => obj.bytes()"
 
 ///|
 impl TBlob with bytes(self : Self) -> JsPromise[Uint8Array] {

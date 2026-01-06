@@ -36,7 +36,7 @@ impl TNotRestoredReasonDetails with reason(self : Self) -> String {
 ///|
 extern "js" fn not_restored_reason_details_to_json_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.toJSON(obj)"
+) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TNotRestoredReasonDetails with to_json(self : Self) -> JsValue {

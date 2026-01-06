@@ -98,7 +98,7 @@ impl TEvent with current_target(self : Self) -> EventTarget {
 }
 
 ///|
-extern "js" fn event_composed_path_ffi(obj : JsValue) -> Array[EventTarget] = "(obj) => obj.composedPath(obj)"
+extern "js" fn event_composed_path_ffi(obj : JsValue) -> Array[EventTarget] = "(obj) => obj.composedPath()"
 
 ///|
 impl TEvent with composed_path(self : Self) -> Array[EventTarget] {
@@ -114,7 +114,7 @@ impl TEvent with event_phase(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn event_stop_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopPropagation(obj)"
+extern "js" fn event_stop_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopPropagation()"
 
 ///|
 impl TEvent with stop_propagation(self : Self) -> Unit {
@@ -144,7 +144,7 @@ impl TEvent with set_cancel_bubble(self : Self, cancel_bubble : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn event_stop_immediate_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopImmediatePropagation(obj)"
+extern "js" fn event_stop_immediate_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopImmediatePropagation()"
 
 ///|
 impl TEvent with stop_immediate_propagation(self : Self) -> Unit {
@@ -190,7 +190,7 @@ impl TEvent with set_return_value(self : Self, return_value : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn event_prevent_default_ffi(obj : JsValue) -> Unit = "(obj) => obj.preventDefault(obj)"
+extern "js" fn event_prevent_default_ffi(obj : JsValue) -> Unit = "(obj) => obj.preventDefault()"
 
 ///|
 impl TEvent with prevent_default(self : Self) -> Unit {
@@ -235,7 +235,7 @@ extern "js" fn event_init_event_ffi(
   type_ : JsValue,
   bubbles : JsValue,
   cancelable : JsValue,
-) -> Unit = "(obj, type_, bubbles, cancelable) => obj.initEvent(obj, type_, bubbles, cancelable)"
+) -> Unit = "(obj, type_, bubbles, cancelable) => obj.initEvent(type_, bubbles, cancelable)"
 
 ///|
 impl TEvent with init_event(

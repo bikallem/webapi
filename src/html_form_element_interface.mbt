@@ -311,7 +311,7 @@ impl THTMLFormElement with length(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn html_form_element_submit_ffi(obj : JsValue) -> Unit = "(obj) => obj.submit(obj)"
+extern "js" fn html_form_element_submit_ffi(obj : JsValue) -> Unit = "(obj) => obj.submit()"
 
 ///|
 impl THTMLFormElement with submit(self : Self) -> Unit {
@@ -322,7 +322,7 @@ impl THTMLFormElement with submit(self : Self) -> Unit {
 extern "js" fn html_form_element_request_submit_ffi(
   obj : JsValue,
   submitter : JsValue,
-) -> Unit = "(obj, submitter) => obj.requestSubmit(obj, submitter)"
+) -> Unit = "(obj, submitter) => obj.requestSubmit(submitter)"
 
 ///|
 impl THTMLFormElement with request_submit(
@@ -336,7 +336,7 @@ impl THTMLFormElement with request_submit(
 }
 
 ///|
-extern "js" fn html_form_element_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset(obj)"
+extern "js" fn html_form_element_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
 
 ///|
 impl THTMLFormElement with reset(self : Self) -> Unit {
@@ -344,7 +344,7 @@ impl THTMLFormElement with reset(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn html_form_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn html_form_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl THTMLFormElement with check_validity(self : Self) -> Bool {
@@ -352,7 +352,7 @@ impl THTMLFormElement with check_validity(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn html_form_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity(obj)"
+extern "js" fn html_form_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl THTMLFormElement with report_validity(self : Self) -> Bool {

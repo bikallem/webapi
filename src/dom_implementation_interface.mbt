@@ -41,7 +41,7 @@ extern "js" fn dom_implementation_create_document_type_ffi(
   name : JsValue,
   public_id : JsValue,
   system_id : JsValue,
-) -> DocumentType = "(obj, name, public_id, system_id) => obj.createDocumentType(obj, name, public_id, system_id)"
+) -> DocumentType = "(obj, name, public_id, system_id) => obj.createDocumentType(name, public_id, system_id)"
 
 ///|
 impl TDOMImplementation with create_document_type(
@@ -64,7 +64,7 @@ extern "js" fn dom_implementation_create_document_ffi(
   namespace_ : JsValue,
   qualified_name : JsValue,
   doctype : JsValue,
-) -> XMLDocument = "(obj, namespace_, qualified_name, doctype) => obj.createDocument(obj, namespace_, qualified_name, doctype)"
+) -> XMLDocument = "(obj, namespace_, qualified_name, doctype) => obj.createDocument(namespace_, qualified_name, doctype)"
 
 ///|
 impl TDOMImplementation with create_document(
@@ -85,7 +85,7 @@ impl TDOMImplementation with create_document(
 extern "js" fn dom_implementation_create_html_document_ffi(
   obj : JsValue,
   title : JsValue,
-) -> Document = "(obj, title) => obj.createHTMLDocument(obj, title)"
+) -> Document = "(obj, title) => obj.createHTMLDocument(title)"
 
 ///|
 impl TDOMImplementation with create_html_document(self : Self, title? : String) -> Document {
@@ -96,7 +96,7 @@ impl TDOMImplementation with create_html_document(self : Self, title? : String) 
 }
 
 ///|
-extern "js" fn dom_implementation_has_feature_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasFeature(obj)"
+extern "js" fn dom_implementation_has_feature_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasFeature()"
 
 ///|
 impl TDOMImplementation with has_feature(self : Self) -> Bool {

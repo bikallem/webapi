@@ -143,7 +143,7 @@ impl TEventSource with set_onerror(self : Self, onerror : EventHandler) -> Unit 
 }
 
 ///|
-extern "js" fn event_source_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn event_source_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TEventSource with close(self : Self) -> Unit {

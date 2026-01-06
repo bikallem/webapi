@@ -24,7 +24,7 @@ pub trait TCanvasPattern: TJsValue {
 extern "js" fn canvas_pattern_set_transform_ffi(
   obj : JsValue,
   transform : JsValue,
-) -> Unit = "(obj, transform) => obj.setTransform(obj, transform)"
+) -> Unit = "(obj, transform) => obj.setTransform(transform)"
 
 ///|
 impl TCanvasPattern with set_transform(

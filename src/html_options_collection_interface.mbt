@@ -91,7 +91,7 @@ extern "js" fn html_options_collection_add_ffi(
   obj : JsValue,
   element : JsValue,
   before : JsValue,
-) -> Unit = "(obj, element, before) => obj.add(obj, element, before)"
+) -> Unit = "(obj, element, before) => obj.add(element, before)"
 
 ///|
 impl THTMLOptionsCollection with add(
@@ -110,7 +110,7 @@ impl THTMLOptionsCollection with add(
 extern "js" fn html_options_collection_remove_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.remove(obj, index)"
+) -> Unit = "(obj, index) => obj.remove(index)"
 
 ///|
 impl THTMLOptionsCollection with remove(self : Self, index : Int) -> Unit {

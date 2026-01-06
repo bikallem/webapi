@@ -101,7 +101,7 @@ impl TDOMQuad with p4(self : Self) -> DOMPoint {
 }
 
 ///|
-extern "js" fn dom_quad_get_bounds_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBounds(obj)"
+extern "js" fn dom_quad_get_bounds_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBounds()"
 
 ///|
 impl TDOMQuad with get_bounds(self : Self) -> DOMRect {
@@ -109,7 +109,7 @@ impl TDOMQuad with get_bounds(self : Self) -> DOMRect {
 }
 
 ///|
-extern "js" fn dom_quad_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON(obj)"
+extern "js" fn dom_quad_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TDOMQuad with to_json(self : Self) -> JsValue {

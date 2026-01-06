@@ -31,7 +31,7 @@ extern "js" fn x_path_expression_evaluate_ffi(
   context_node : JsValue,
   type_ : JsValue,
   result : JsValue,
-) -> XPathResult = "(obj, context_node, type_, result) => obj.evaluate(obj, context_node, type_, result)"
+) -> XPathResult = "(obj, context_node, type_, result) => obj.evaluate(context_node, type_, result)"
 
 ///|
 impl TXPathExpression with evaluate(

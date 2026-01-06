@@ -159,7 +159,7 @@ impl TShadowRoot with set_onslotchange(self : Self, onslotchange : EventHandler)
 extern "js" fn shadow_root_set_html_unsafe_ffi(
   obj : JsValue,
   html : JsValue,
-) -> Unit = "(obj, html) => obj.setHTMLUnsafe(obj, html)"
+) -> Unit = "(obj, html) => obj.setHTMLUnsafe(html)"
 
 ///|
 impl TShadowRoot with set_html_unsafe(
@@ -173,7 +173,7 @@ impl TShadowRoot with set_html_unsafe(
 extern "js" fn shadow_root_get_html_ffi(
   obj : JsValue,
   options : JsValue,
-) -> String = "(obj, options) => obj.getHTML(obj, options)"
+) -> String = "(obj, options) => obj.getHTML(options)"
 
 ///|
 impl TShadowRoot with get_html(

@@ -115,7 +115,7 @@ impl TXPathResult with snapshot_length(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn x_path_result_iterate_next_ffi(obj : JsValue) -> JsValue = "(obj) => obj.iterateNext(obj)"
+extern "js" fn x_path_result_iterate_next_ffi(obj : JsValue) -> JsValue = "(obj) => obj.iterateNext()"
 
 ///|
 impl TXPathResult with iterate_next(self : Self) -> Node? {
@@ -131,7 +131,7 @@ impl TXPathResult with iterate_next(self : Self) -> Node? {
 extern "js" fn x_path_result_snapshot_item_ffi(
   obj : JsValue,
   index : JsValue,
-) -> JsValue = "(obj, index) => obj.snapshotItem(obj, index)"
+) -> JsValue = "(obj, index) => obj.snapshotItem(index)"
 
 ///|
 impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node? {

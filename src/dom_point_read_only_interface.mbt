@@ -98,7 +98,7 @@ impl TDOMPointReadOnly with w(self : Self) -> Double {
 extern "js" fn dom_point_read_only_matrix_transform_ffi(
   obj : JsValue,
   matrix : JsValue,
-) -> DOMPoint = "(obj, matrix) => obj.matrixTransform(obj, matrix)"
+) -> DOMPoint = "(obj, matrix) => obj.matrixTransform(matrix)"
 
 ///|
 impl TDOMPointReadOnly with matrix_transform(
@@ -112,7 +112,7 @@ impl TDOMPointReadOnly with matrix_transform(
 }
 
 ///|
-extern "js" fn dom_point_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON(obj)"
+extern "js" fn dom_point_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TDOMPointReadOnly with to_json(self : Self) -> JsValue {

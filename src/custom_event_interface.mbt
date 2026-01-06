@@ -59,7 +59,7 @@ extern "js" fn custom_event_init_custom_event_ffi(
   bubbles : JsValue,
   cancelable : JsValue,
   detail : JsValue,
-) -> Unit = "(obj, type_, bubbles, cancelable, detail) => obj.initCustomEvent(obj, type_, bubbles, cancelable, detail)"
+) -> Unit = "(obj, type_, bubbles, cancelable, detail) => obj.initCustomEvent(type_, bubbles, cancelable, detail)"
 
 ///|
 impl TCustomEvent with init_custom_event(

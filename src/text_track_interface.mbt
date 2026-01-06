@@ -110,7 +110,7 @@ impl TTextTrack with active_cues(self : Self) -> TextTrackCueList {
 }
 
 ///|
-extern "js" fn text_track_add_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "(obj, cue) => obj.addCue(obj, cue)"
+extern "js" fn text_track_add_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "(obj, cue) => obj.addCue(cue)"
 
 ///|
 impl TTextTrack with add_cue(self : Self, cue : &TTextTrackCue) -> Unit {
@@ -118,7 +118,7 @@ impl TTextTrack with add_cue(self : Self, cue : &TTextTrackCue) -> Unit {
 }
 
 ///|
-extern "js" fn text_track_remove_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "(obj, cue) => obj.removeCue(obj, cue)"
+extern "js" fn text_track_remove_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "(obj, cue) => obj.removeCue(cue)"
 
 ///|
 impl TTextTrack with remove_cue(self : Self, cue : &TTextTrackCue) -> Unit {

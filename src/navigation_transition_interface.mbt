@@ -23,6 +23,7 @@ pub impl TNavigationTransition for NavigationTransition
 pub trait TNavigationTransition: TJsValue {
   navigation_type(self : Self) -> NavigationType = _
   from(self : Self) -> NavigationHistoryEntry = _
+  to(self : Self) -> NavigationDestination = _
   committed(self : Self) -> JsPromise[Unit] = _
   finished(self : Self) -> JsPromise[Unit] = _
 }
@@ -45,6 +46,16 @@ extern "js" fn navigation_transition_from_ffi(
 ///|
 impl TNavigationTransition with from(self : Self) -> NavigationHistoryEntry {
   navigation_transition_from_ffi(TJsValue::to_js(self))
+}
+
+///|
+extern "js" fn navigation_transition_to_ffi(
+  obj : JsValue,
+) -> NavigationDestination = "(obj) => obj.to"
+
+///|
+impl TNavigationTransition with to(self : Self) -> NavigationDestination {
+  navigation_transition_to_ffi(TJsValue::to_js(self))
 }
 
 ///|

@@ -68,7 +68,7 @@ impl TCSSStyleDeclaration with length(self : Self) -> UInt {
 extern "js" fn css_style_declaration_get_property_value_ffi(
   obj : JsValue,
   property : JsValue,
-) -> CSSOMString = "(obj, property) => obj.getPropertyValue(obj, property)"
+) -> CSSOMString = "(obj, property) => obj.getPropertyValue(property)"
 
 ///|
 impl TCSSStyleDeclaration with get_property_value(
@@ -85,7 +85,7 @@ impl TCSSStyleDeclaration with get_property_value(
 extern "js" fn css_style_declaration_get_property_priority_ffi(
   obj : JsValue,
   property : JsValue,
-) -> CSSOMString = "(obj, property) => obj.getPropertyPriority(obj, property)"
+) -> CSSOMString = "(obj, property) => obj.getPropertyPriority(property)"
 
 ///|
 impl TCSSStyleDeclaration with get_property_priority(
@@ -104,7 +104,7 @@ extern "js" fn css_style_declaration_set_property_ffi(
   property : JsValue,
   value : JsValue,
   priority : JsValue,
-) -> Unit = "(obj, property, value, priority) => obj.setProperty(obj, property, value, priority)"
+) -> Unit = "(obj, property, value, priority) => obj.setProperty(property, value, priority)"
 
 ///|
 impl TCSSStyleDeclaration with set_property(
@@ -125,7 +125,7 @@ impl TCSSStyleDeclaration with set_property(
 extern "js" fn css_style_declaration_remove_property_ffi(
   obj : JsValue,
   property : JsValue,
-) -> CSSOMString = "(obj, property) => obj.removeProperty(obj, property)"
+) -> CSSOMString = "(obj, property) => obj.removeProperty(property)"
 
 ///|
 impl TCSSStyleDeclaration with remove_property(

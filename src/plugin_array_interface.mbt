@@ -22,7 +22,7 @@ pub trait TPluginArray: TJsValue {
 }
 
 ///|
-extern "js" fn plugin_array_refresh_ffi(obj : JsValue) -> Unit = "(obj) => obj.refresh(obj)"
+extern "js" fn plugin_array_refresh_ffi(obj : JsValue) -> Unit = "(obj) => obj.refresh()"
 
 ///|
 impl TPluginArray with refresh(self : Self) -> Unit {

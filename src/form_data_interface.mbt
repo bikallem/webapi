@@ -46,7 +46,7 @@ extern "js" fn form_data_append_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.append(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.append(name, value)"
 
 ///|
 impl TFormData with append(self : Self, name : String, value : String) -> Unit {
@@ -63,7 +63,7 @@ extern "js" fn form_data_append_2_ffi(
   name : JsValue,
   blob_value : JsValue,
   filename : JsValue,
-) -> Unit = "(obj, name, blob_value, filename) => obj.append_2(obj, name, blob_value, filename)"
+) -> Unit = "(obj, name, blob_value, filename) => obj.append_2(name, blob_value, filename)"
 
 ///|
 impl TFormData with append_2(
@@ -81,7 +81,7 @@ impl TFormData with append_2(
 }
 
 ///|
-extern "js" fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(obj, name)"
+extern "js" fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(name)"
 
 ///|
 impl TFormData with delete(self : Self, name : String) -> Unit {
@@ -89,7 +89,7 @@ impl TFormData with delete(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn form_data_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(obj, name)"
+extern "js" fn form_data_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(name)"
 
 ///|
 impl TFormData with get(self : Self, name : String) -> FormDataEntryValue? {
@@ -105,7 +105,7 @@ impl TFormData with get(self : Self, name : String) -> FormDataEntryValue? {
 extern "js" fn form_data_get_all_ffi(
   obj : JsValue,
   name : JsValue,
-) -> Array[FormDataEntryValue] = "(obj, name) => obj.getAll(obj, name)"
+) -> Array[FormDataEntryValue] = "(obj, name) => obj.getAll(name)"
 
 ///|
 impl TFormData with get_all(self : Self, name : String) -> Array[
@@ -115,7 +115,7 @@ impl TFormData with get_all(self : Self, name : String) -> Array[
 }
 
 ///|
-extern "js" fn form_data_has_ffi(obj : JsValue, name : JsValue) -> Bool = "(obj, name) => obj.has(obj, name)"
+extern "js" fn form_data_has_ffi(obj : JsValue, name : JsValue) -> Bool = "(obj, name) => obj.has(name)"
 
 ///|
 impl TFormData with has(self : Self, name : String) -> Bool {
@@ -127,7 +127,7 @@ extern "js" fn form_data_set_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.set(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.set(name, value)"
 
 ///|
 impl TFormData with set(self : Self, name : String, value : String) -> Unit {
@@ -144,7 +144,7 @@ extern "js" fn form_data_set_2_ffi(
   name : JsValue,
   blob_value : JsValue,
   filename : JsValue,
-) -> Unit = "(obj, name, blob_value, filename) => obj.set_2(obj, name, blob_value, filename)"
+) -> Unit = "(obj, name, blob_value, filename) => obj.set_2(name, blob_value, filename)"
 
 ///|
 impl TFormData with set_2(

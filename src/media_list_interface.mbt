@@ -58,7 +58,7 @@ impl TMediaList with length(self : Self) -> UInt {
 extern "js" fn media_list_append_medium_ffi(
   obj : JsValue,
   medium : JsValue,
-) -> Unit = "(obj, medium) => obj.appendMedium(obj, medium)"
+) -> Unit = "(obj, medium) => obj.appendMedium(medium)"
 
 ///|
 impl TMediaList with append_medium(self : Self, medium : CSSOMString) -> Unit {
@@ -69,7 +69,7 @@ impl TMediaList with append_medium(self : Self, medium : CSSOMString) -> Unit {
 extern "js" fn media_list_delete_medium_ffi(
   obj : JsValue,
   medium : JsValue,
-) -> Unit = "(obj, medium) => obj.deleteMedium(obj, medium)"
+) -> Unit = "(obj, medium) => obj.deleteMedium(medium)"
 
 ///|
 impl TMediaList with delete_medium(self : Self, medium : CSSOMString) -> Unit {

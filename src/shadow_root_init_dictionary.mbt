@@ -36,7 +36,7 @@ pub fn ShadowRootInit::new(
   slot_assignment? : SlotAssignmentMode = SlotAssignmentMode::Named,
   clonable? : Bool = false,
   serializable? : Bool = false,
-  custom_element_registry? : &TCustomElementRegistry = JsValue::null(),
+  custom_element_registry? : &TCustomElementRegistry,
 ) -> ShadowRootInit {
   shadow_root_init_ffi(
     TJsValue::to_js(mode),
@@ -44,7 +44,7 @@ pub fn ShadowRootInit::new(
     TJsValue::to_js(slot_assignment),
     TJsValue::to_js(clonable),
     TJsValue::to_js(serializable),
-    TJsValue::to_js(custom_element_registry),
+    opt_to_js(custom_element_registry),
   )
 }
 

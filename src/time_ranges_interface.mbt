@@ -31,7 +31,7 @@ impl TTimeRanges with length(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn time_ranges_start_ffi(obj : JsValue, index : JsValue) -> Double = "(obj, index) => obj.start(obj, index)"
+extern "js" fn time_ranges_start_ffi(obj : JsValue, index : JsValue) -> Double = "(obj, index) => obj.start(index)"
 
 ///|
 impl TTimeRanges with start(self : Self, index : UInt) -> Double {
@@ -39,7 +39,7 @@ impl TTimeRanges with start(self : Self, index : UInt) -> Double {
 }
 
 ///|
-extern "js" fn time_ranges_end_ffi(obj : JsValue, index : JsValue) -> Double = "(obj, index) => obj.end(obj, index)"
+extern "js" fn time_ranges_end_ffi(obj : JsValue, index : JsValue) -> Double = "(obj, index) => obj.end(index)"
 
 ///|
 impl TTimeRanges with end(self : Self, index : UInt) -> Double {

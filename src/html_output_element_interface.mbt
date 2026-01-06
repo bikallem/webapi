@@ -174,7 +174,7 @@ impl THTMLOutputElement with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn html_output_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn html_output_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl THTMLOutputElement with check_validity(self : Self) -> Bool {
@@ -182,7 +182,7 @@ impl THTMLOutputElement with check_validity(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn html_output_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity(obj)"
+extern "js" fn html_output_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl THTMLOutputElement with report_validity(self : Self) -> Bool {
@@ -193,7 +193,7 @@ impl THTMLOutputElement with report_validity(self : Self) -> Bool {
 extern "js" fn html_output_element_set_custom_validity_ffi(
   obj : JsValue,
   error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(obj, error)"
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 impl THTMLOutputElement with set_custom_validity(self : Self, error : String) -> Unit {

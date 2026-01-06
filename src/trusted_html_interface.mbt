@@ -21,7 +21,7 @@ pub trait TTrustedHTML: TJsValue {
 }
 
 ///|
-extern "js" fn trusted_html_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON(obj)"
+extern "js" fn trusted_html_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON()"
 
 ///|
 impl TTrustedHTML with to_json(self : Self) -> String {

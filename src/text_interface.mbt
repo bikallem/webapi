@@ -59,7 +59,7 @@ pub trait TText: TCharacterData {
 }
 
 ///|
-extern "js" fn text_split_text_ffi(obj : JsValue, offset : JsValue) -> Text = "(obj, offset) => obj.splitText(obj, offset)"
+extern "js" fn text_split_text_ffi(obj : JsValue, offset : JsValue) -> Text = "(obj, offset) => obj.splitText(offset)"
 
 ///|
 impl TText with split_text(self : Self, offset : UInt) -> Text {
@@ -86,7 +86,7 @@ impl TText with assigned_slot(self : Self) -> HTMLSlotElement {
 extern "js" fn text_get_box_quads_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(obj, options)"
+) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(options)"
 
 ///|
 impl TText with get_box_quads(
@@ -102,7 +102,7 @@ extern "js" fn text_convert_quad_from_node_ffi(
   quad : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(obj, quad, from, options)"
+) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(quad, from, options)"
 
 ///|
 impl TText with convert_quad_from_node(
@@ -125,7 +125,7 @@ extern "js" fn text_convert_rect_from_node_ffi(
   rect : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(obj, rect, from, options)"
+) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(rect, from, options)"
 
 ///|
 impl TText with convert_rect_from_node(
@@ -148,7 +148,7 @@ extern "js" fn text_convert_point_from_node_ffi(
   point : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(obj, point, from, options)"
+) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(point, from, options)"
 
 ///|
 impl TText with convert_point_from_node(

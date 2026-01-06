@@ -106,7 +106,7 @@ extern "js" fn message_event_init_message_event_ffi(
   last_event_id : JsValue,
   source : JsValue,
   ports : JsValue,
-) -> Unit = "(obj, type_, bubbles, cancelable, data, origin, last_event_id, source, ports) => obj.initMessageEvent(obj, type_, bubbles, cancelable, data, origin, last_event_id, source, ports)"
+) -> Unit = "(obj, type_, bubbles, cancelable, data, origin, last_event_id, source, ports) => obj.initMessageEvent(type_, bubbles, cancelable, data, origin, last_event_id, source, ports)"
 
 ///|
 impl TMessageEvent with init_message_event(

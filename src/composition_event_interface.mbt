@@ -69,7 +69,7 @@ extern "js" fn composition_event_init_composition_event_ffi(
   cancelable_arg : JsValue,
   view_arg : JsValue,
   data_arg : JsValue,
-) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, data_arg) => obj.initCompositionEvent(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, data_arg)"
+) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, data_arg) => obj.initCompositionEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, data_arg)"
 
 ///|
 impl TCompositionEvent with init_composition_event(

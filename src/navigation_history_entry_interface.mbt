@@ -77,7 +77,7 @@ impl TNavigationHistoryEntry with same_document(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn navigation_history_entry_get_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getState(obj)"
+extern "js" fn navigation_history_entry_get_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getState()"
 
 ///|
 impl TNavigationHistoryEntry with get_state(self : Self) -> JsValue {

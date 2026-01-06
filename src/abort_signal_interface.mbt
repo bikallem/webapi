@@ -68,7 +68,7 @@ impl TAbortSignal with reason(self : Self) -> JsValue {
 }
 
 ///|
-extern "js" fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "(obj) => obj.throwIfAborted(obj)"
+extern "js" fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "(obj) => obj.throwIfAborted()"
 
 ///|
 impl TAbortSignal with throw_if_aborted(self : Self) -> Unit {

@@ -156,7 +156,7 @@ impl TSVGMarkerElement with set_orient(self : Self, orient : String) -> Unit {
 }
 
 ///|
-extern "js" fn svg_marker_element_set_orient_to_auto_ffi(obj : JsValue) -> Unit = "(obj) => obj.setOrientToAuto(obj)"
+extern "js" fn svg_marker_element_set_orient_to_auto_ffi(obj : JsValue) -> Unit = "(obj) => obj.setOrientToAuto()"
 
 ///|
 impl TSVGMarkerElement with set_orient_to_auto(self : Self) -> Unit {
@@ -167,7 +167,7 @@ impl TSVGMarkerElement with set_orient_to_auto(self : Self) -> Unit {
 extern "js" fn svg_marker_element_set_orient_to_angle_ffi(
   obj : JsValue,
   angle : JsValue,
-) -> Unit = "(obj, angle) => obj.setOrientToAngle(obj, angle)"
+) -> Unit = "(obj, angle) => obj.setOrientToAngle(angle)"
 
 ///|
 impl TSVGMarkerElement with set_orient_to_angle(self : Self, angle : &TSVGAngle) -> Unit {

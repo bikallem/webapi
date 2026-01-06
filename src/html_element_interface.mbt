@@ -410,7 +410,7 @@ impl THTMLElement with set_inert(self : Self, inert : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn html_element_click_ffi(obj : JsValue) -> Unit = "(obj) => obj.click(obj)"
+extern "js" fn html_element_click_ffi(obj : JsValue) -> Unit = "(obj) => obj.click()"
 
 ///|
 impl THTMLElement with click(self : Self) -> Unit {
@@ -607,7 +607,7 @@ impl THTMLElement with set_outer_text(self : Self, outer_text : String) -> Unit 
 ///|
 extern "js" fn html_element_attach_internals_ffi(
   obj : JsValue,
-) -> ElementInternals = "(obj) => obj.attachInternals(obj)"
+) -> ElementInternals = "(obj) => obj.attachInternals()"
 
 ///|
 impl THTMLElement with attach_internals(self : Self) -> ElementInternals {
@@ -618,7 +618,7 @@ impl THTMLElement with attach_internals(self : Self) -> ElementInternals {
 extern "js" fn html_element_show_popover_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Unit = "(obj, options) => obj.showPopover(obj, options)"
+) -> Unit = "(obj, options) => obj.showPopover(options)"
 
 ///|
 impl THTMLElement with show_popover(
@@ -629,7 +629,7 @@ impl THTMLElement with show_popover(
 }
 
 ///|
-extern "js" fn html_element_hide_popover_ffi(obj : JsValue) -> Unit = "(obj) => obj.hidePopover(obj)"
+extern "js" fn html_element_hide_popover_ffi(obj : JsValue) -> Unit = "(obj) => obj.hidePopover()"
 
 ///|
 impl THTMLElement with hide_popover(self : Self) -> Unit {
@@ -640,7 +640,7 @@ impl THTMLElement with hide_popover(self : Self) -> Unit {
 extern "js" fn html_element_toggle_popover_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Bool = "(obj, options) => obj.togglePopover(obj, options)"
+) -> Bool = "(obj, options) => obj.togglePopover(options)"
 
 ///|
 impl THTMLElement with toggle_popover(
@@ -2600,7 +2600,7 @@ impl THTMLElement with set_tab_index(self : Self, tab_index : Int) -> Unit {
 }
 
 ///|
-extern "js" fn html_element_focus_ffi(obj : JsValue, options : JsValue) -> Unit = "(obj, options) => obj.focus(obj, options)"
+extern "js" fn html_element_focus_ffi(obj : JsValue, options : JsValue) -> Unit = "(obj, options) => obj.focus(options)"
 
 ///|
 impl THTMLElement with focus(
@@ -2611,7 +2611,7 @@ impl THTMLElement with focus(
 }
 
 ///|
-extern "js" fn html_element_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur(obj)"
+extern "js" fn html_element_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur()"
 
 ///|
 impl THTMLElement with blur(self : Self) -> Unit {

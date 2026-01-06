@@ -45,7 +45,7 @@ impl TDataTransferItem with type_(self : Self) -> String {
 extern "js" fn data_transfer_item_get_as_string_ffi(
   obj : JsValue,
   _callback : JsValue,
-) -> Unit = "(obj, _callback) => obj.getAsString(obj, _callback)"
+) -> Unit = "(obj, _callback) => obj.getAsString(_callback)"
 
 ///|
 impl TDataTransferItem with get_as_string(
@@ -59,7 +59,7 @@ impl TDataTransferItem with get_as_string(
 }
 
 ///|
-extern "js" fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getAsFile(obj)"
+extern "js" fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getAsFile()"
 
 ///|
 impl TDataTransferItem with get_as_file(self : Self) -> File? {

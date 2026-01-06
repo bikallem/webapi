@@ -139,7 +139,7 @@ impl THTMLEmbedElement with set_height(self : Self, height : String) -> Unit {
 ///|
 extern "js" fn html_embed_element_get_svg_document_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
+) -> JsValue = "(obj) => obj.getSVGDocument()"
 
 ///|
 impl THTMLEmbedElement with get_svg_document(self : Self) -> Document? {

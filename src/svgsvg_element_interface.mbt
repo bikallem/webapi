@@ -178,7 +178,7 @@ extern "js" fn svgsvg_element_get_intersection_list_ffi(
   obj : JsValue,
   rect : JsValue,
   reference_element : JsValue,
-) -> NodeList = "(obj, rect, reference_element) => obj.getIntersectionList(obj, rect, reference_element)"
+) -> NodeList = "(obj, rect, reference_element) => obj.getIntersectionList(rect, reference_element)"
 
 ///|
 impl TSVGSVGElement with get_intersection_list(
@@ -198,7 +198,7 @@ extern "js" fn svgsvg_element_get_enclosure_list_ffi(
   obj : JsValue,
   rect : JsValue,
   reference_element : JsValue,
-) -> NodeList = "(obj, rect, reference_element) => obj.getEnclosureList(obj, rect, reference_element)"
+) -> NodeList = "(obj, rect, reference_element) => obj.getEnclosureList(rect, reference_element)"
 
 ///|
 impl TSVGSVGElement with get_enclosure_list(
@@ -218,7 +218,7 @@ extern "js" fn svgsvg_element_check_intersection_ffi(
   obj : JsValue,
   element : JsValue,
   rect : JsValue,
-) -> Bool = "(obj, element, rect) => obj.checkIntersection(obj, element, rect)"
+) -> Bool = "(obj, element, rect) => obj.checkIntersection(element, rect)"
 
 ///|
 impl TSVGSVGElement with check_intersection(
@@ -238,7 +238,7 @@ extern "js" fn svgsvg_element_check_enclosure_ffi(
   obj : JsValue,
   element : JsValue,
   rect : JsValue,
-) -> Bool = "(obj, element, rect) => obj.checkEnclosure(obj, element, rect)"
+) -> Bool = "(obj, element, rect) => obj.checkEnclosure(element, rect)"
 
 ///|
 impl TSVGSVGElement with check_enclosure(
@@ -254,7 +254,7 @@ impl TSVGSVGElement with check_enclosure(
 }
 
 ///|
-extern "js" fn svgsvg_element_deselect_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.deselectAll(obj)"
+extern "js" fn svgsvg_element_deselect_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.deselectAll()"
 
 ///|
 impl TSVGSVGElement with deselect_all(self : Self) -> Unit {
@@ -262,7 +262,7 @@ impl TSVGSVGElement with deselect_all(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn svgsvg_element_create_svg_number_ffi(obj : JsValue) -> SVGNumber = "(obj) => obj.createSVGNumber(obj)"
+extern "js" fn svgsvg_element_create_svg_number_ffi(obj : JsValue) -> SVGNumber = "(obj) => obj.createSVGNumber()"
 
 ///|
 impl TSVGSVGElement with create_svg_number(self : Self) -> SVGNumber {
@@ -270,7 +270,7 @@ impl TSVGSVGElement with create_svg_number(self : Self) -> SVGNumber {
 }
 
 ///|
-extern "js" fn svgsvg_element_create_svg_length_ffi(obj : JsValue) -> SVGLength = "(obj) => obj.createSVGLength(obj)"
+extern "js" fn svgsvg_element_create_svg_length_ffi(obj : JsValue) -> SVGLength = "(obj) => obj.createSVGLength()"
 
 ///|
 impl TSVGSVGElement with create_svg_length(self : Self) -> SVGLength {
@@ -278,7 +278,7 @@ impl TSVGSVGElement with create_svg_length(self : Self) -> SVGLength {
 }
 
 ///|
-extern "js" fn svgsvg_element_create_svg_angle_ffi(obj : JsValue) -> SVGAngle = "(obj) => obj.createSVGAngle(obj)"
+extern "js" fn svgsvg_element_create_svg_angle_ffi(obj : JsValue) -> SVGAngle = "(obj) => obj.createSVGAngle()"
 
 ///|
 impl TSVGSVGElement with create_svg_angle(self : Self) -> SVGAngle {
@@ -286,7 +286,7 @@ impl TSVGSVGElement with create_svg_angle(self : Self) -> SVGAngle {
 }
 
 ///|
-extern "js" fn svgsvg_element_create_svg_point_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.createSVGPoint(obj)"
+extern "js" fn svgsvg_element_create_svg_point_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.createSVGPoint()"
 
 ///|
 impl TSVGSVGElement with create_svg_point(self : Self) -> DOMPoint {
@@ -294,7 +294,7 @@ impl TSVGSVGElement with create_svg_point(self : Self) -> DOMPoint {
 }
 
 ///|
-extern "js" fn svgsvg_element_create_svg_matrix_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.createSVGMatrix(obj)"
+extern "js" fn svgsvg_element_create_svg_matrix_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.createSVGMatrix()"
 
 ///|
 impl TSVGSVGElement with create_svg_matrix(self : Self) -> DOMMatrix {
@@ -302,7 +302,7 @@ impl TSVGSVGElement with create_svg_matrix(self : Self) -> DOMMatrix {
 }
 
 ///|
-extern "js" fn svgsvg_element_create_svg_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.createSVGRect(obj)"
+extern "js" fn svgsvg_element_create_svg_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.createSVGRect()"
 
 ///|
 impl TSVGSVGElement with create_svg_rect(self : Self) -> DOMRect {
@@ -312,7 +312,7 @@ impl TSVGSVGElement with create_svg_rect(self : Self) -> DOMRect {
 ///|
 extern "js" fn svgsvg_element_create_svg_transform_ffi(
   obj : JsValue,
-) -> SVGTransform = "(obj) => obj.createSVGTransform(obj)"
+) -> SVGTransform = "(obj) => obj.createSVGTransform()"
 
 ///|
 impl TSVGSVGElement with create_svg_transform(self : Self) -> SVGTransform {
@@ -323,7 +323,7 @@ impl TSVGSVGElement with create_svg_transform(self : Self) -> SVGTransform {
 extern "js" fn svgsvg_element_create_svg_transform_from_matrix_ffi(
   obj : JsValue,
   matrix : JsValue,
-) -> SVGTransform = "(obj, matrix) => obj.createSVGTransformFromMatrix(obj, matrix)"
+) -> SVGTransform = "(obj, matrix) => obj.createSVGTransformFromMatrix(matrix)"
 
 ///|
 impl TSVGSVGElement with create_svg_transform_from_matrix(
@@ -340,7 +340,7 @@ impl TSVGSVGElement with create_svg_transform_from_matrix(
 extern "js" fn svgsvg_element_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
-) -> JsValue = "(obj, element_id) => obj.getElementById(obj, element_id)"
+) -> JsValue = "(obj, element_id) => obj.getElementById(element_id)"
 
 ///|
 impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> Element? {
@@ -359,7 +359,7 @@ impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> 
 extern "js" fn svgsvg_element_suspend_redraw_ffi(
   obj : JsValue,
   max_wait_milliseconds : JsValue,
-) -> UInt = "(obj, max_wait_milliseconds) => obj.suspendRedraw(obj, max_wait_milliseconds)"
+) -> UInt = "(obj, max_wait_milliseconds) => obj.suspendRedraw(max_wait_milliseconds)"
 
 ///|
 impl TSVGSVGElement with suspend_redraw(
@@ -376,7 +376,7 @@ impl TSVGSVGElement with suspend_redraw(
 extern "js" fn svgsvg_element_unsuspend_redraw_ffi(
   obj : JsValue,
   suspend_handle_id : JsValue,
-) -> Unit = "(obj, suspend_handle_id) => obj.unsuspendRedraw(obj, suspend_handle_id)"
+) -> Unit = "(obj, suspend_handle_id) => obj.unsuspendRedraw(suspend_handle_id)"
 
 ///|
 impl TSVGSVGElement with unsuspend_redraw(self : Self, suspend_handle_id : UInt) -> Unit {
@@ -387,7 +387,7 @@ impl TSVGSVGElement with unsuspend_redraw(self : Self, suspend_handle_id : UInt)
 }
 
 ///|
-extern "js" fn svgsvg_element_unsuspend_redraw_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.unsuspendRedrawAll(obj)"
+extern "js" fn svgsvg_element_unsuspend_redraw_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.unsuspendRedrawAll()"
 
 ///|
 impl TSVGSVGElement with unsuspend_redraw_all(self : Self) -> Unit {
@@ -395,7 +395,7 @@ impl TSVGSVGElement with unsuspend_redraw_all(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn svgsvg_element_force_redraw_ffi(obj : JsValue) -> Unit = "(obj) => obj.forceRedraw(obj)"
+extern "js" fn svgsvg_element_force_redraw_ffi(obj : JsValue) -> Unit = "(obj) => obj.forceRedraw()"
 
 ///|
 impl TSVGSVGElement with force_redraw(self : Self) -> Unit {

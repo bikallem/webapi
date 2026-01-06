@@ -44,7 +44,7 @@ impl TSVGNumberList with number_of_items(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn svg_number_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear(obj)"
+extern "js" fn svg_number_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 impl TSVGNumberList with clear(self : Self) -> Unit {
@@ -55,7 +55,7 @@ impl TSVGNumberList with clear(self : Self) -> Unit {
 extern "js" fn svg_number_list_initialize_ffi(
   obj : JsValue,
   new_item : JsValue,
-) -> SVGNumber = "(obj, new_item) => obj.initialize(obj, new_item)"
+) -> SVGNumber = "(obj, new_item) => obj.initialize(new_item)"
 
 ///|
 impl TSVGNumberList with initialize(self : Self, new_item : &TSVGNumber) -> SVGNumber {
@@ -70,7 +70,7 @@ extern "js" fn svg_number_list_insert_item_before_ffi(
   obj : JsValue,
   new_item : JsValue,
   index : JsValue,
-) -> SVGNumber = "(obj, new_item, index) => obj.insertItemBefore(obj, new_item, index)"
+) -> SVGNumber = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
 
 ///|
 impl TSVGNumberList with insert_item_before(
@@ -90,7 +90,7 @@ extern "js" fn svg_number_list_replace_item_ffi(
   obj : JsValue,
   new_item : JsValue,
   index : JsValue,
-) -> SVGNumber = "(obj, new_item, index) => obj.replaceItem(obj, new_item, index)"
+) -> SVGNumber = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
 
 ///|
 impl TSVGNumberList with replace_item(
@@ -109,7 +109,7 @@ impl TSVGNumberList with replace_item(
 extern "js" fn svg_number_list_remove_item_ffi(
   obj : JsValue,
   index : JsValue,
-) -> SVGNumber = "(obj, index) => obj.removeItem(obj, index)"
+) -> SVGNumber = "(obj, index) => obj.removeItem(index)"
 
 ///|
 impl TSVGNumberList with remove_item(self : Self, index : UInt) -> SVGNumber {
@@ -120,7 +120,7 @@ impl TSVGNumberList with remove_item(self : Self, index : UInt) -> SVGNumber {
 extern "js" fn svg_number_list_append_item_ffi(
   obj : JsValue,
   new_item : JsValue,
-) -> SVGNumber = "(obj, new_item) => obj.appendItem(obj, new_item)"
+) -> SVGNumber = "(obj, new_item) => obj.appendItem(new_item)"
 
 ///|
 impl TSVGNumberList with append_item(self : Self, new_item : &TSVGNumber) -> SVGNumber {

@@ -38,7 +38,7 @@ extern "js" fn trusted_type_policy_create_html_ffi(
   obj : JsValue,
   input : JsValue,
   arguments : JsValue,
-) -> TrustedHTML = "(obj, input, arguments) => obj.createHTML(obj, input, arguments)"
+) -> TrustedHTML = "(obj, input, arguments) => obj.createHTML(input, arguments)"
 
 ///|
 impl TTrustedTypePolicy with create_html(
@@ -58,7 +58,7 @@ extern "js" fn trusted_type_policy_create_script_ffi(
   obj : JsValue,
   input : JsValue,
   arguments : JsValue,
-) -> TrustedScript = "(obj, input, arguments) => obj.createScript(obj, input, arguments)"
+) -> TrustedScript = "(obj, input, arguments) => obj.createScript(input, arguments)"
 
 ///|
 impl TTrustedTypePolicy with create_script(
@@ -78,7 +78,7 @@ extern "js" fn trusted_type_policy_create_script_url_ffi(
   obj : JsValue,
   input : JsValue,
   arguments : JsValue,
-) -> TrustedScriptURL = "(obj, input, arguments) => obj.createScriptURL(obj, input, arguments)"
+) -> TrustedScriptURL = "(obj, input, arguments) => obj.createScriptURL(input, arguments)"
 
 ///|
 impl TTrustedTypePolicy with create_script_url(

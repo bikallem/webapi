@@ -184,7 +184,7 @@ impl TRequest with duplex(self : Self) -> RequestDuplex {
 }
 
 ///|
-extern "js" fn request_clone_ffi(obj : JsValue) -> Request = "(obj) => obj.clone(obj)"
+extern "js" fn request_clone_ffi(obj : JsValue) -> Request = "(obj) => obj.clone()"
 
 ///|
 impl TRequest with clone(self : Self) -> Request {
@@ -210,7 +210,7 @@ impl TRequest with body_used(self : Self) -> Bool {
 ///|
 extern "js" fn request_array_buffer_ffi(
   obj : JsValue,
-) -> JsPromise[ArrayBuffer] = "(obj) => obj.arrayBuffer(obj)"
+) -> JsPromise[ArrayBuffer] = "(obj) => obj.arrayBuffer()"
 
 ///|
 impl TRequest with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
@@ -218,7 +218,7 @@ impl TRequest with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
 }
 
 ///|
-extern "js" fn request_blob_ffi(obj : JsValue) -> JsPromise[Blob] = "(obj) => obj.blob(obj)"
+extern "js" fn request_blob_ffi(obj : JsValue) -> JsPromise[Blob] = "(obj) => obj.blob()"
 
 ///|
 impl TRequest with blob(self : Self) -> JsPromise[Blob] {
@@ -226,7 +226,7 @@ impl TRequest with blob(self : Self) -> JsPromise[Blob] {
 }
 
 ///|
-extern "js" fn request_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] = "(obj) => obj.bytes(obj)"
+extern "js" fn request_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] = "(obj) => obj.bytes()"
 
 ///|
 impl TRequest with bytes(self : Self) -> JsPromise[Uint8Array] {
@@ -234,7 +234,7 @@ impl TRequest with bytes(self : Self) -> JsPromise[Uint8Array] {
 }
 
 ///|
-extern "js" fn request_form_data_ffi(obj : JsValue) -> JsPromise[FormData] = "(obj) => obj.formData(obj)"
+extern "js" fn request_form_data_ffi(obj : JsValue) -> JsPromise[FormData] = "(obj) => obj.formData()"
 
 ///|
 impl TRequest with form_data(self : Self) -> JsPromise[FormData] {
@@ -242,7 +242,7 @@ impl TRequest with form_data(self : Self) -> JsPromise[FormData] {
 }
 
 ///|
-extern "js" fn request_json_ffi(obj : JsValue) -> JsPromise[JsValue] = "(obj) => obj.json(obj)"
+extern "js" fn request_json_ffi(obj : JsValue) -> JsPromise[JsValue] = "(obj) => obj.json()"
 
 ///|
 impl TRequest with json(self : Self) -> JsPromise[JsValue] {
@@ -250,7 +250,7 @@ impl TRequest with json(self : Self) -> JsPromise[JsValue] {
 }
 
 ///|
-extern "js" fn request_text_ffi(obj : JsValue) -> JsPromise[String] = "(obj) => obj.text(obj)"
+extern "js" fn request_text_ffi(obj : JsValue) -> JsPromise[String] = "(obj) => obj.text()"
 
 ///|
 impl TRequest with text(self : Self) -> JsPromise[String] {

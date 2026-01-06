@@ -56,7 +56,7 @@ extern "js" fn dedicated_worker_global_scope_post_message_ffi(
   obj : JsValue,
   message : JsValue,
   transfer : JsValue,
-) -> Unit = "(obj, message, transfer) => obj.postMessage(obj, message, transfer)"
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
 
 ///|
 impl TDedicatedWorkerGlobalScope with post_message(
@@ -76,7 +76,7 @@ extern "js" fn dedicated_worker_global_scope_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(obj, message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
 
 ///|
 impl TDedicatedWorkerGlobalScope with post_message_2(
@@ -92,7 +92,7 @@ impl TDedicatedWorkerGlobalScope with post_message_2(
 }
 
 ///|
-extern "js" fn dedicated_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn dedicated_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TDedicatedWorkerGlobalScope with close(self : Self) -> Unit {
@@ -103,7 +103,7 @@ impl TDedicatedWorkerGlobalScope with close(self : Self) -> Unit {
 extern "js" fn dedicated_worker_global_scope_request_animation_frame_ffi(
   obj : JsValue,
   callback : JsValue,
-) -> UInt = "(obj, callback) => obj.requestAnimationFrame(obj, callback)"
+) -> UInt = "(obj, callback) => obj.requestAnimationFrame(callback)"
 
 ///|
 impl TDedicatedWorkerGlobalScope with request_animation_frame(
@@ -120,7 +120,7 @@ impl TDedicatedWorkerGlobalScope with request_animation_frame(
 extern "js" fn dedicated_worker_global_scope_cancel_animation_frame_ffi(
   obj : JsValue,
   handle : JsValue,
-) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(obj, handle)"
+) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(handle)"
 
 ///|
 impl TDedicatedWorkerGlobalScope with cancel_animation_frame(

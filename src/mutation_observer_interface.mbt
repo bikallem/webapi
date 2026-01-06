@@ -39,7 +39,7 @@ extern "js" fn mutation_observer_observe_ffi(
   obj : JsValue,
   target : JsValue,
   options : JsValue,
-) -> Unit = "(obj, target, options) => obj.observe(obj, target, options)"
+) -> Unit = "(obj, target, options) => obj.observe(target, options)"
 
 ///|
 impl TMutationObserver with observe(
@@ -55,7 +55,7 @@ impl TMutationObserver with observe(
 }
 
 ///|
-extern "js" fn mutation_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect(obj)"
+extern "js" fn mutation_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
 
 ///|
 impl TMutationObserver with disconnect(self : Self) -> Unit {
@@ -65,7 +65,7 @@ impl TMutationObserver with disconnect(self : Self) -> Unit {
 ///|
 extern "js" fn mutation_observer_take_records_ffi(
   obj : JsValue,
-) -> Array[MutationRecord] = "(obj) => obj.takeRecords(obj)"
+) -> Array[MutationRecord] = "(obj) => obj.takeRecords()"
 
 ///|
 impl TMutationObserver with take_records(self : Self) -> Array[MutationRecord] {

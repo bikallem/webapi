@@ -148,7 +148,7 @@ impl TNode with owner_document(self : Self) -> Document {
 }
 
 ///|
-extern "js" fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> Node = "(obj, options) => obj.getRootNode(obj, options)"
+extern "js" fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> Node = "(obj, options) => obj.getRootNode(options)"
 
 ///|
 impl TNode with get_root_node(
@@ -175,7 +175,7 @@ impl TNode with parent_element(self : Self) -> Element {
 }
 
 ///|
-extern "js" fn node_has_child_nodes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasChildNodes(obj)"
+extern "js" fn node_has_child_nodes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasChildNodes()"
 
 ///|
 impl TNode with has_child_nodes(self : Self) -> Bool {
@@ -264,7 +264,7 @@ impl TNode with set_text_content(self : Self, text_content : String) -> Unit {
 }
 
 ///|
-extern "js" fn node_normalize_ffi(obj : JsValue) -> Unit = "(obj) => obj.normalize(obj)"
+extern "js" fn node_normalize_ffi(obj : JsValue) -> Unit = "(obj) => obj.normalize()"
 
 ///|
 impl TNode with normalize(self : Self) -> Unit {
@@ -272,7 +272,7 @@ impl TNode with normalize(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn node_clone_node_ffi(obj : JsValue, subtree : JsValue) -> Node = "(obj, subtree) => obj.cloneNode(obj, subtree)"
+extern "js" fn node_clone_node_ffi(obj : JsValue, subtree : JsValue) -> Node = "(obj, subtree) => obj.cloneNode(subtree)"
 
 ///|
 impl TNode with clone_node(self : Self, subtree? : Bool = false) -> Node {
@@ -283,7 +283,7 @@ impl TNode with clone_node(self : Self, subtree? : Bool = false) -> Node {
 extern "js" fn node_is_equal_node_ffi(
   obj : JsValue,
   other_node : JsValue,
-) -> Bool = "(obj, other_node) => obj.isEqualNode(obj, other_node)"
+) -> Bool = "(obj, other_node) => obj.isEqualNode(other_node)"
 
 ///|
 impl TNode with is_equal_node(self : Self, other_node : &TNode) -> Bool {
@@ -294,7 +294,7 @@ impl TNode with is_equal_node(self : Self, other_node : &TNode) -> Bool {
 extern "js" fn node_is_same_node_ffi(
   obj : JsValue,
   other_node : JsValue,
-) -> Bool = "(obj, other_node) => obj.isSameNode(obj, other_node)"
+) -> Bool = "(obj, other_node) => obj.isSameNode(other_node)"
 
 ///|
 impl TNode with is_same_node(self : Self, other_node : &TNode) -> Bool {
@@ -305,7 +305,7 @@ impl TNode with is_same_node(self : Self, other_node : &TNode) -> Bool {
 extern "js" fn node_compare_document_position_ffi(
   obj : JsValue,
   other : JsValue,
-) -> UInt = "(obj, other) => obj.compareDocumentPosition(obj, other)"
+) -> UInt = "(obj, other) => obj.compareDocumentPosition(other)"
 
 ///|
 impl TNode with compare_document_position(self : Self, other : &TNode) -> UInt {
@@ -316,7 +316,7 @@ impl TNode with compare_document_position(self : Self, other : &TNode) -> UInt {
 }
 
 ///|
-extern "js" fn node_contains_ffi(obj : JsValue, other : JsValue) -> Bool = "(obj, other) => obj.contains(obj, other)"
+extern "js" fn node_contains_ffi(obj : JsValue, other : JsValue) -> Bool = "(obj, other) => obj.contains(other)"
 
 ///|
 impl TNode with contains(self : Self, other : &TNode) -> Bool {
@@ -327,7 +327,7 @@ impl TNode with contains(self : Self, other : &TNode) -> Bool {
 extern "js" fn node_lookup_prefix_ffi(
   obj : JsValue,
   namespace_ : JsValue,
-) -> JsValue = "(obj, namespace_) => obj.lookupPrefix(obj, namespace_)"
+) -> JsValue = "(obj, namespace_) => obj.lookupPrefix(namespace_)"
 
 ///|
 impl TNode with lookup_prefix(self : Self, namespace_ : String) -> String? {
@@ -346,7 +346,7 @@ impl TNode with lookup_prefix(self : Self, namespace_ : String) -> String? {
 extern "js" fn node_lookup_namespace_uri_ffi(
   obj : JsValue,
   prefix : JsValue,
-) -> JsValue = "(obj, prefix) => obj.lookupNamespaceURI(obj, prefix)"
+) -> JsValue = "(obj, prefix) => obj.lookupNamespaceURI(prefix)"
 
 ///|
 impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String? {
@@ -365,7 +365,7 @@ impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String? {
 extern "js" fn node_is_default_namespace_ffi(
   obj : JsValue,
   namespace_ : JsValue,
-) -> Bool = "(obj, namespace_) => obj.isDefaultNamespace(obj, namespace_)"
+) -> Bool = "(obj, namespace_) => obj.isDefaultNamespace(namespace_)"
 
 ///|
 impl TNode with is_default_namespace(self : Self, namespace_ : String) -> Bool {
@@ -380,7 +380,7 @@ extern "js" fn node_insert_before_ffi(
   obj : JsValue,
   node : JsValue,
   child : JsValue,
-) -> Node = "(obj, node, child) => obj.insertBefore(obj, node, child)"
+) -> Node = "(obj, node, child) => obj.insertBefore(node, child)"
 
 ///|
 impl TNode with insert_before(self : Self, node : &TNode, child : &TNode) -> Node {
@@ -392,7 +392,7 @@ impl TNode with insert_before(self : Self, node : &TNode, child : &TNode) -> Nod
 }
 
 ///|
-extern "js" fn node_append_child_ffi(obj : JsValue, node : JsValue) -> Node = "(obj, node) => obj.appendChild(obj, node)"
+extern "js" fn node_append_child_ffi(obj : JsValue, node : JsValue) -> Node = "(obj, node) => obj.appendChild(node)"
 
 ///|
 impl TNode with append_child(self : Self, node : &TNode) -> Node {
@@ -404,7 +404,7 @@ extern "js" fn node_replace_child_ffi(
   obj : JsValue,
   node : JsValue,
   child : JsValue,
-) -> Node = "(obj, node, child) => obj.replaceChild(obj, node, child)"
+) -> Node = "(obj, node, child) => obj.replaceChild(node, child)"
 
 ///|
 impl TNode with replace_child(self : Self, node : &TNode, child : &TNode) -> Node {
@@ -416,7 +416,7 @@ impl TNode with replace_child(self : Self, node : &TNode, child : &TNode) -> Nod
 }
 
 ///|
-extern "js" fn node_remove_child_ffi(obj : JsValue, child : JsValue) -> Node = "(obj, child) => obj.removeChild(obj, child)"
+extern "js" fn node_remove_child_ffi(obj : JsValue, child : JsValue) -> Node = "(obj, child) => obj.removeChild(child)"
 
 ///|
 impl TNode with remove_child(self : Self, child : &TNode) -> Node {

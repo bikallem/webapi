@@ -53,7 +53,7 @@ impl TSVGGraphicsElement with transform(self : Self) -> SVGAnimatedTransformList
 extern "js" fn svg_graphics_element_get_b_box_ffi(
   obj : JsValue,
   options : JsValue,
-) -> DOMRect = "(obj, options) => obj.getBBox(obj, options)"
+) -> DOMRect = "(obj, options) => obj.getBBox(options)"
 
 ///|
 impl TSVGGraphicsElement with get_b_box(
@@ -67,7 +67,7 @@ impl TSVGGraphicsElement with get_b_box(
 }
 
 ///|
-extern "js" fn svg_graphics_element_get_ctm_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getCTM(obj)"
+extern "js" fn svg_graphics_element_get_ctm_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getCTM()"
 
 ///|
 impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix? {
@@ -82,7 +82,7 @@ impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix? {
 ///|
 extern "js" fn svg_graphics_element_get_screen_ctm_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.getScreenCTM(obj)"
+) -> JsValue = "(obj) => obj.getScreenCTM()"
 
 ///|
 impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix? {

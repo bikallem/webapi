@@ -123,7 +123,7 @@ extern "js" fn svg_angle_new_value_specified_units_ffi(
   obj : JsValue,
   unit_type : JsValue,
   value_in_specified_units : JsValue,
-) -> Unit = "(obj, unit_type, value_in_specified_units) => obj.newValueSpecifiedUnits(obj, unit_type, value_in_specified_units)"
+) -> Unit = "(obj, unit_type, value_in_specified_units) => obj.newValueSpecifiedUnits(unit_type, value_in_specified_units)"
 
 ///|
 impl TSVGAngle with new_value_specified_units(
@@ -142,7 +142,7 @@ impl TSVGAngle with new_value_specified_units(
 extern "js" fn svg_angle_convert_to_specified_units_ffi(
   obj : JsValue,
   unit_type : JsValue,
-) -> Unit = "(obj, unit_type) => obj.convertToSpecifiedUnits(obj, unit_type)"
+) -> Unit = "(obj, unit_type) => obj.convertToSpecifiedUnits(unit_type)"
 
 ///|
 impl TSVGAngle with convert_to_specified_units(self : Self, unit_type : UInt) -> Unit {

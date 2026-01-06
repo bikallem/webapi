@@ -504,7 +504,7 @@ impl TDOMMatrix with set_m44(self : Self, m44 : Double) -> Unit {
 extern "js" fn dom_matrix_multiply_self_ffi(
   obj : JsValue,
   other : JsValue,
-) -> DOMMatrix = "(obj, other) => obj.multiplySelf(obj, other)"
+) -> DOMMatrix = "(obj, other) => obj.multiplySelf(other)"
 
 ///|
 impl TDOMMatrix with multiply_self(
@@ -518,7 +518,7 @@ impl TDOMMatrix with multiply_self(
 extern "js" fn dom_matrix_pre_multiply_self_ffi(
   obj : JsValue,
   other : JsValue,
-) -> DOMMatrix = "(obj, other) => obj.preMultiplySelf(obj, other)"
+) -> DOMMatrix = "(obj, other) => obj.preMultiplySelf(other)"
 
 ///|
 impl TDOMMatrix with pre_multiply_self(
@@ -537,7 +537,7 @@ extern "js" fn dom_matrix_translate_self_ffi(
   tx : JsValue,
   ty : JsValue,
   tz : JsValue,
-) -> DOMMatrix = "(obj, tx, ty, tz) => obj.translateSelf(obj, tx, ty, tz)"
+) -> DOMMatrix = "(obj, tx, ty, tz) => obj.translateSelf(tx, ty, tz)"
 
 ///|
 impl TDOMMatrix with translate_self(
@@ -563,7 +563,7 @@ extern "js" fn dom_matrix_scale_self_ffi(
   origin_x : JsValue,
   origin_y : JsValue,
   origin_z : JsValue,
-) -> DOMMatrix = "(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z) => obj.scaleSelf(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z)"
+) -> DOMMatrix = "(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z) => obj.scaleSelf(scale_x, scale_y, scale_z, origin_x, origin_y, origin_z)"
 
 ///|
 impl TDOMMatrix with scale_self(
@@ -593,7 +593,7 @@ extern "js" fn dom_matrix_scale3d_self_ffi(
   origin_x : JsValue,
   origin_y : JsValue,
   origin_z : JsValue,
-) -> DOMMatrix = "(obj, scale, origin_x, origin_y, origin_z) => obj.scale3dSelf(obj, scale, origin_x, origin_y, origin_z)"
+) -> DOMMatrix = "(obj, scale, origin_x, origin_y, origin_z) => obj.scale3dSelf(scale, origin_x, origin_y, origin_z)"
 
 ///|
 impl TDOMMatrix with scale3d_self(
@@ -618,7 +618,7 @@ extern "js" fn dom_matrix_rotate_self_ffi(
   rot_x : JsValue,
   rot_y : JsValue,
   rot_z : JsValue,
-) -> DOMMatrix = "(obj, rot_x, rot_y, rot_z) => obj.rotateSelf(obj, rot_x, rot_y, rot_z)"
+) -> DOMMatrix = "(obj, rot_x, rot_y, rot_z) => obj.rotateSelf(rot_x, rot_y, rot_z)"
 
 ///|
 impl TDOMMatrix with rotate_self(
@@ -640,7 +640,7 @@ extern "js" fn dom_matrix_rotate_from_vector_self_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> DOMMatrix = "(obj, x, y) => obj.rotateFromVectorSelf(obj, x, y)"
+) -> DOMMatrix = "(obj, x, y) => obj.rotateFromVectorSelf(x, y)"
 
 ///|
 impl TDOMMatrix with rotate_from_vector_self(
@@ -662,7 +662,7 @@ extern "js" fn dom_matrix_rotate_axis_angle_self_ffi(
   y : JsValue,
   z : JsValue,
   angle : JsValue,
-) -> DOMMatrix = "(obj, x, y, z, angle) => obj.rotateAxisAngleSelf(obj, x, y, z, angle)"
+) -> DOMMatrix = "(obj, x, y, z, angle) => obj.rotateAxisAngleSelf(x, y, z, angle)"
 
 ///|
 impl TDOMMatrix with rotate_axis_angle_self(
@@ -685,7 +685,7 @@ impl TDOMMatrix with rotate_axis_angle_self(
 extern "js" fn dom_matrix_skew_x_self_ffi(
   obj : JsValue,
   sx : JsValue,
-) -> DOMMatrix = "(obj, sx) => obj.skewXSelf(obj, sx)"
+) -> DOMMatrix = "(obj, sx) => obj.skewXSelf(sx)"
 
 ///|
 impl TDOMMatrix with skew_x_self(self : Self, sx? : Double = (0 : Double)) -> DOMMatrix {
@@ -696,7 +696,7 @@ impl TDOMMatrix with skew_x_self(self : Self, sx? : Double = (0 : Double)) -> DO
 extern "js" fn dom_matrix_skew_y_self_ffi(
   obj : JsValue,
   sy : JsValue,
-) -> DOMMatrix = "(obj, sy) => obj.skewYSelf(obj, sy)"
+) -> DOMMatrix = "(obj, sy) => obj.skewYSelf(sy)"
 
 ///|
 impl TDOMMatrix with skew_y_self(self : Self, sy? : Double = (0 : Double)) -> DOMMatrix {
@@ -704,7 +704,7 @@ impl TDOMMatrix with skew_y_self(self : Self, sy? : Double = (0 : Double)) -> DO
 }
 
 ///|
-extern "js" fn dom_matrix_invert_self_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.invertSelf(obj)"
+extern "js" fn dom_matrix_invert_self_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.invertSelf()"
 
 ///|
 impl TDOMMatrix with invert_self(self : Self) -> DOMMatrix {
@@ -715,7 +715,7 @@ impl TDOMMatrix with invert_self(self : Self) -> DOMMatrix {
 extern "js" fn dom_matrix_set_matrix_value_ffi(
   obj : JsValue,
   transform_list : JsValue,
-) -> DOMMatrix = "(obj, transform_list) => obj.setMatrixValue(obj, transform_list)"
+) -> DOMMatrix = "(obj, transform_list) => obj.setMatrixValue(transform_list)"
 
 ///|
 impl TDOMMatrix with set_matrix_value(self : Self, transform_list : String) -> DOMMatrix {

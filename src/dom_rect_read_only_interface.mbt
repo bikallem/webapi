@@ -128,7 +128,7 @@ impl TDOMRectReadOnly with left(self : Self) -> Double {
 }
 
 ///|
-extern "js" fn dom_rect_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON(obj)"
+extern "js" fn dom_rect_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TDOMRectReadOnly with to_json(self : Self) -> JsValue {

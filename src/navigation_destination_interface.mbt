@@ -70,7 +70,7 @@ impl TNavigationDestination with same_document(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn navigation_destination_get_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getState(obj)"
+extern "js" fn navigation_destination_get_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getState()"
 
 ///|
 impl TNavigationDestination with get_state(self : Self) -> JsValue {

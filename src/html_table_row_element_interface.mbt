@@ -88,7 +88,7 @@ impl THTMLTableRowElement with cells(self : Self) -> HTMLCollection {
 extern "js" fn html_table_row_element_insert_cell_ffi(
   obj : JsValue,
   index : JsValue,
-) -> HTMLTableCellElement = "(obj, index) => obj.insertCell(obj, index)"
+) -> HTMLTableCellElement = "(obj, index) => obj.insertCell(index)"
 
 ///|
 impl THTMLTableRowElement with insert_cell(
@@ -105,7 +105,7 @@ impl THTMLTableRowElement with insert_cell(
 extern "js" fn html_table_row_element_delete_cell_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.deleteCell(obj, index)"
+) -> Unit = "(obj, index) => obj.deleteCell(index)"
 
 ///|
 impl THTMLTableRowElement with delete_cell(self : Self, index : Int) -> Unit {

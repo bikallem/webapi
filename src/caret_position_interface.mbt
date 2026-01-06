@@ -39,7 +39,7 @@ impl TCaretPosition with offset(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn caret_position_get_client_rect_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getClientRect(obj)"
+extern "js" fn caret_position_get_client_rect_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getClientRect()"
 
 ///|
 impl TCaretPosition with get_client_rect(self : Self) -> DOMRect? {

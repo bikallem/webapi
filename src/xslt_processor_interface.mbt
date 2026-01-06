@@ -44,7 +44,7 @@ pub trait TXSLTProcessor: TJsValue {
 extern "js" fn xslt_processor_import_stylesheet_ffi(
   obj : JsValue,
   style : JsValue,
-) -> Unit = "(obj, style) => obj.importStylesheet(obj, style)"
+) -> Unit = "(obj, style) => obj.importStylesheet(style)"
 
 ///|
 impl TXSLTProcessor with import_stylesheet(self : Self, style : &TNode) -> Unit {
@@ -59,7 +59,7 @@ extern "js" fn xslt_processor_transform_to_fragment_ffi(
   obj : JsValue,
   source : JsValue,
   output : JsValue,
-) -> DocumentFragment = "(obj, source, output) => obj.transformToFragment(obj, source, output)"
+) -> DocumentFragment = "(obj, source, output) => obj.transformToFragment(source, output)"
 
 ///|
 impl TXSLTProcessor with transform_to_fragment(
@@ -78,7 +78,7 @@ impl TXSLTProcessor with transform_to_fragment(
 extern "js" fn xslt_processor_transform_to_document_ffi(
   obj : JsValue,
   source : JsValue,
-) -> Document = "(obj, source) => obj.transformToDocument(obj, source)"
+) -> Document = "(obj, source) => obj.transformToDocument(source)"
 
 ///|
 impl TXSLTProcessor with transform_to_document(self : Self, source : &TNode) -> Document {
@@ -94,7 +94,7 @@ extern "js" fn xslt_processor_set_parameter_ffi(
   namespace_uri : JsValue,
   local_name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, namespace_uri, local_name, value) => obj.setParameter(obj, namespace_uri, local_name, value)"
+) -> Unit = "(obj, namespace_uri, local_name, value) => obj.setParameter(namespace_uri, local_name, value)"
 
 ///|
 impl TXSLTProcessor with set_parameter(
@@ -116,7 +116,7 @@ extern "js" fn xslt_processor_get_parameter_ffi(
   obj : JsValue,
   namespace_uri : JsValue,
   local_name : JsValue,
-) -> JsValue = "(obj, namespace_uri, local_name) => obj.getParameter(obj, namespace_uri, local_name)"
+) -> JsValue = "(obj, namespace_uri, local_name) => obj.getParameter(namespace_uri, local_name)"
 
 ///|
 impl TXSLTProcessor with get_parameter(
@@ -136,7 +136,7 @@ extern "js" fn xslt_processor_remove_parameter_ffi(
   obj : JsValue,
   namespace_uri : JsValue,
   local_name : JsValue,
-) -> Unit = "(obj, namespace_uri, local_name) => obj.removeParameter(obj, namespace_uri, local_name)"
+) -> Unit = "(obj, namespace_uri, local_name) => obj.removeParameter(namespace_uri, local_name)"
 
 ///|
 impl TXSLTProcessor with remove_parameter(
@@ -152,7 +152,7 @@ impl TXSLTProcessor with remove_parameter(
 }
 
 ///|
-extern "js" fn xslt_processor_clear_parameters_ffi(obj : JsValue) -> Unit = "(obj) => obj.clearParameters(obj)"
+extern "js" fn xslt_processor_clear_parameters_ffi(obj : JsValue) -> Unit = "(obj) => obj.clearParameters()"
 
 ///|
 impl TXSLTProcessor with clear_parameters(self : Self) -> Unit {
@@ -160,7 +160,7 @@ impl TXSLTProcessor with clear_parameters(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn xslt_processor_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset(obj)"
+extern "js" fn xslt_processor_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
 
 ///|
 impl TXSLTProcessor with reset(self : Self) -> Unit {

@@ -91,7 +91,7 @@ extern "js" fn custom_element_registry_define_ffi(
   name : JsValue,
   constructor_ : JsValue,
   options : JsValue,
-) -> Unit = "(obj, name, constructor_, options) => obj.define(obj, name, constructor_, options)"
+) -> Unit = "(obj, name, constructor_, options) => obj.define(name, constructor_, options)"
 
 ///|
 impl TCustomElementRegistry with define_(
@@ -112,7 +112,7 @@ impl TCustomElementRegistry with define_(
 extern "js" fn custom_element_registry_get_ffi(
   obj : JsValue,
   name : JsValue,
-) -> CustomElementRegistryGet = "(obj, name) => obj.get(obj, name)"
+) -> CustomElementRegistryGet = "(obj, name) => obj.get(name)"
 
 ///|
 impl TCustomElementRegistry with get(self : Self, name : String) -> CustomElementRegistryGet {
@@ -123,7 +123,7 @@ impl TCustomElementRegistry with get(self : Self, name : String) -> CustomElemen
 extern "js" fn custom_element_registry_get_name_ffi(
   obj : JsValue,
   constructor_ : JsValue,
-) -> JsValue = "(obj, constructor_) => obj.getName(obj, constructor_)"
+) -> JsValue = "(obj, constructor_) => obj.getName(constructor_)"
 
 ///|
 impl TCustomElementRegistry with get_name(
@@ -145,7 +145,7 @@ impl TCustomElementRegistry with get_name(
 extern "js" fn custom_element_registry_when_defined_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsPromise[CustomElementConstructor] = "(obj, name) => obj.whenDefined(obj, name)"
+) -> JsPromise[CustomElementConstructor] = "(obj, name) => obj.whenDefined(name)"
 
 ///|
 impl TCustomElementRegistry with when_defined(self : Self, name : String) -> JsPromise[
@@ -161,7 +161,7 @@ impl TCustomElementRegistry with when_defined(self : Self, name : String) -> JsP
 extern "js" fn custom_element_registry_upgrade_ffi(
   obj : JsValue,
   root : JsValue,
-) -> Unit = "(obj, root) => obj.upgrade(obj, root)"
+) -> Unit = "(obj, root) => obj.upgrade(root)"
 
 ///|
 impl TCustomElementRegistry with upgrade(self : Self, root : &TNode) -> Unit {
@@ -175,7 +175,7 @@ impl TCustomElementRegistry with upgrade(self : Self, root : &TNode) -> Unit {
 extern "js" fn custom_element_registry_initialize_ffi(
   obj : JsValue,
   root : JsValue,
-) -> Unit = "(obj, root) => obj.initialize(obj, root)"
+) -> Unit = "(obj, root) => obj.initialize(root)"
 
 ///|
 impl TCustomElementRegistry with initialize(self : Self, root : &TNode) -> Unit {

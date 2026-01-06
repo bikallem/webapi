@@ -29,7 +29,7 @@ pub trait TPerformance: TEventTarget {
 }
 
 ///|
-extern "js" fn performance_now_ffi(obj : JsValue) -> DOMHighResTimeStamp = "(obj) => obj.now(obj)"
+extern "js" fn performance_now_ffi(obj : JsValue) -> DOMHighResTimeStamp = "(obj) => obj.now()"
 
 ///|
 impl TPerformance with now(self : Self) -> DOMHighResTimeStamp {
@@ -47,7 +47,7 @@ impl TPerformance with time_origin(self : Self) -> DOMHighResTimeStamp {
 }
 
 ///|
-extern "js" fn performance_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON(obj)"
+extern "js" fn performance_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TPerformance with to_json(self : Self) -> JsValue {
@@ -57,7 +57,7 @@ impl TPerformance with to_json(self : Self) -> JsValue {
 ///|
 extern "js" fn performance_get_entries_ffi(
   obj : JsValue,
-) -> PerformanceEntryList = "(obj) => obj.getEntries(obj)"
+) -> PerformanceEntryList = "(obj) => obj.getEntries()"
 
 ///|
 impl TPerformance with get_entries(self : Self) -> PerformanceEntryList {
@@ -68,7 +68,7 @@ impl TPerformance with get_entries(self : Self) -> PerformanceEntryList {
 extern "js" fn performance_get_entries_by_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList = "(obj, type_) => obj.getEntriesByType(obj, type_)"
+) -> PerformanceEntryList = "(obj, type_) => obj.getEntriesByType(type_)"
 
 ///|
 impl TPerformance with get_entries_by_type(self : Self, type_ : String) -> PerformanceEntryList {
@@ -83,7 +83,7 @@ extern "js" fn performance_get_entries_by_name_ffi(
   obj : JsValue,
   name : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList = "(obj, name, type_) => obj.getEntriesByName(obj, name, type_)"
+) -> PerformanceEntryList = "(obj, name, type_) => obj.getEntriesByName(name, type_)"
 
 ///|
 impl TPerformance with get_entries_by_name(

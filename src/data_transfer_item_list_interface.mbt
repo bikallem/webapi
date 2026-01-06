@@ -41,7 +41,7 @@ extern "js" fn data_transfer_item_list_add_ffi(
   obj : JsValue,
   data : JsValue,
   type_ : JsValue,
-) -> JsValue = "(obj, data, type_) => obj.add(obj, data, type_)"
+) -> JsValue = "(obj, data, type_) => obj.add(data, type_)"
 
 ///|
 impl TDataTransferItemList with add(self : Self, data : String, type_ : String) -> DataTransferItem? {
@@ -61,7 +61,7 @@ impl TDataTransferItemList with add(self : Self, data : String, type_ : String) 
 extern "js" fn data_transfer_item_list_add_2_ffi(
   obj : JsValue,
   data : JsValue,
-) -> JsValue = "(obj, data) => obj.add_2(obj, data)"
+) -> JsValue = "(obj, data) => obj.add_2(data)"
 
 ///|
 impl TDataTransferItemList with add_2(self : Self, data : &TFile) -> DataTransferItem? {
@@ -80,7 +80,7 @@ impl TDataTransferItemList with add_2(self : Self, data : &TFile) -> DataTransfe
 extern "js" fn data_transfer_item_list_remove_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.remove(obj, index)"
+) -> Unit = "(obj, index) => obj.remove(index)"
 
 ///|
 impl TDataTransferItemList with remove(self : Self, index : UInt) -> Unit {
@@ -91,7 +91,7 @@ impl TDataTransferItemList with remove(self : Self, index : UInt) -> Unit {
 }
 
 ///|
-extern "js" fn data_transfer_item_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear(obj)"
+extern "js" fn data_transfer_item_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 impl TDataTransferItemList with clear(self : Self) -> Unit {

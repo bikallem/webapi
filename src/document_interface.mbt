@@ -569,7 +569,7 @@ impl TDocument with document_element(self : Self) -> Element {
 extern "js" fn document_get_elements_by_tag_name_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> HTMLCollection = "(obj, qualified_name) => obj.getElementsByTagName(obj, qualified_name)"
+) -> HTMLCollection = "(obj, qualified_name) => obj.getElementsByTagName(qualified_name)"
 
 ///|
 impl TDocument with get_elements_by_tag_name(
@@ -587,7 +587,7 @@ extern "js" fn document_get_elements_by_tag_name_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> HTMLCollection = "(obj, namespace_, local_name) => obj.getElementsByTagNameNS(obj, namespace_, local_name)"
+) -> HTMLCollection = "(obj, namespace_, local_name) => obj.getElementsByTagNameNS(namespace_, local_name)"
 
 ///|
 impl TDocument with get_elements_by_tag_name_ns(
@@ -606,7 +606,7 @@ impl TDocument with get_elements_by_tag_name_ns(
 extern "js" fn document_get_elements_by_class_name_ffi(
   obj : JsValue,
   class_names : JsValue,
-) -> HTMLCollection = "(obj, class_names) => obj.getElementsByClassName(obj, class_names)"
+) -> HTMLCollection = "(obj, class_names) => obj.getElementsByClassName(class_names)"
 
 ///|
 impl TDocument with get_elements_by_class_name(
@@ -624,7 +624,7 @@ extern "js" fn document_create_element_ffi(
   obj : JsValue,
   local_name : JsValue,
   options : JsValue,
-) -> Element = "(obj, local_name, options) => obj.createElement(obj, local_name, options)"
+) -> Element = "(obj, local_name, options) => obj.createElement(local_name, options)"
 
 ///|
 impl TDocument with create_element(
@@ -645,7 +645,7 @@ extern "js" fn document_create_element_ns_ffi(
   namespace_ : JsValue,
   qualified_name : JsValue,
   options : JsValue,
-) -> Element = "(obj, namespace_, qualified_name, options) => obj.createElementNS(obj, namespace_, qualified_name, options)"
+) -> Element = "(obj, namespace_, qualified_name, options) => obj.createElementNS(namespace_, qualified_name, options)"
 
 ///|
 impl TDocument with create_element_ns(
@@ -665,7 +665,7 @@ impl TDocument with create_element_ns(
 ///|
 extern "js" fn document_create_document_fragment_ffi(
   obj : JsValue,
-) -> DocumentFragment = "(obj) => obj.createDocumentFragment(obj)"
+) -> DocumentFragment = "(obj) => obj.createDocumentFragment()"
 
 ///|
 impl TDocument with create_document_fragment(self : Self) -> DocumentFragment {
@@ -676,7 +676,7 @@ impl TDocument with create_document_fragment(self : Self) -> DocumentFragment {
 extern "js" fn document_create_text_node_ffi(
   obj : JsValue,
   data : JsValue,
-) -> Text = "(obj, data) => obj.createTextNode(obj, data)"
+) -> Text = "(obj, data) => obj.createTextNode(data)"
 
 ///|
 impl TDocument with create_text_node(self : Self, data : String) -> Text {
@@ -687,7 +687,7 @@ impl TDocument with create_text_node(self : Self, data : String) -> Text {
 extern "js" fn document_create_cdata_section_ffi(
   obj : JsValue,
   data : JsValue,
-) -> CDATASection = "(obj, data) => obj.createCDATASection(obj, data)"
+) -> CDATASection = "(obj, data) => obj.createCDATASection(data)"
 
 ///|
 impl TDocument with create_cdata_section(self : Self, data : String) -> CDATASection {
@@ -701,7 +701,7 @@ impl TDocument with create_cdata_section(self : Self, data : String) -> CDATASec
 extern "js" fn document_create_comment_ffi(
   obj : JsValue,
   data : JsValue,
-) -> Comment = "(obj, data) => obj.createComment(obj, data)"
+) -> Comment = "(obj, data) => obj.createComment(data)"
 
 ///|
 impl TDocument with create_comment(self : Self, data : String) -> Comment {
@@ -713,7 +713,7 @@ extern "js" fn document_create_processing_instruction_ffi(
   obj : JsValue,
   target : JsValue,
   data : JsValue,
-) -> ProcessingInstruction = "(obj, target, data) => obj.createProcessingInstruction(obj, target, data)"
+) -> ProcessingInstruction = "(obj, target, data) => obj.createProcessingInstruction(target, data)"
 
 ///|
 impl TDocument with create_processing_instruction(
@@ -733,7 +733,7 @@ extern "js" fn document_import_node_ffi(
   obj : JsValue,
   node : JsValue,
   options : JsValue,
-) -> Node = "(obj, node, options) => obj.importNode(obj, node, options)"
+) -> Node = "(obj, node, options) => obj.importNode(node, options)"
 
 ///|
 impl TDocument with import_node(
@@ -749,7 +749,7 @@ impl TDocument with import_node(
 }
 
 ///|
-extern "js" fn document_adopt_node_ffi(obj : JsValue, node : JsValue) -> Node = "(obj, node) => obj.adoptNode(obj, node)"
+extern "js" fn document_adopt_node_ffi(obj : JsValue, node : JsValue) -> Node = "(obj, node) => obj.adoptNode(node)"
 
 ///|
 impl TDocument with adopt_node(self : Self, node : &TNode) -> Node {
@@ -760,7 +760,7 @@ impl TDocument with adopt_node(self : Self, node : &TNode) -> Node {
 extern "js" fn document_create_attribute_ffi(
   obj : JsValue,
   local_name : JsValue,
-) -> Attr = "(obj, local_name) => obj.createAttribute(obj, local_name)"
+) -> Attr = "(obj, local_name) => obj.createAttribute(local_name)"
 
 ///|
 impl TDocument with create_attribute(self : Self, local_name : String) -> Attr {
@@ -775,7 +775,7 @@ extern "js" fn document_create_attribute_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   qualified_name : JsValue,
-) -> Attr = "(obj, namespace_, qualified_name) => obj.createAttributeNS(obj, namespace_, qualified_name)"
+) -> Attr = "(obj, namespace_, qualified_name) => obj.createAttributeNS(namespace_, qualified_name)"
 
 ///|
 impl TDocument with create_attribute_ns(
@@ -794,7 +794,7 @@ impl TDocument with create_attribute_ns(
 extern "js" fn document_create_event_ffi(
   obj : JsValue,
   interface : JsValue,
-) -> Event = "(obj, interface) => obj.createEvent(obj, interface)"
+) -> Event = "(obj, interface) => obj.createEvent(interface)"
 
 ///|
 impl TDocument with create_event(self : Self, interface : String) -> Event {
@@ -802,7 +802,7 @@ impl TDocument with create_event(self : Self, interface : String) -> Event {
 }
 
 ///|
-extern "js" fn document_create_range_ffi(obj : JsValue) -> Range = "(obj) => obj.createRange(obj)"
+extern "js" fn document_create_range_ffi(obj : JsValue) -> Range = "(obj) => obj.createRange()"
 
 ///|
 impl TDocument with create_range(self : Self) -> Range {
@@ -815,7 +815,7 @@ extern "js" fn document_create_node_iterator_ffi(
   root : JsValue,
   what_to_show : JsValue,
   filter : JsValue,
-) -> NodeIterator = "(obj, root, what_to_show, filter) => obj.createNodeIterator(obj, root, what_to_show, filter)"
+) -> NodeIterator = "(obj, root, what_to_show, filter) => obj.createNodeIterator(root, what_to_show, filter)"
 
 ///|
 impl TDocument with create_node_iterator(
@@ -838,7 +838,7 @@ extern "js" fn document_create_tree_walker_ffi(
   root : JsValue,
   what_to_show : JsValue,
   filter : JsValue,
-) -> TreeWalker = "(obj, root, what_to_show, filter) => obj.createTreeWalker(obj, root, what_to_show, filter)"
+) -> TreeWalker = "(obj, root, what_to_show, filter) => obj.createTreeWalker(root, what_to_show, filter)"
 
 ///|
 impl TDocument with create_tree_walker(
@@ -1037,7 +1037,7 @@ impl TDocument with scripts(self : Self) -> HTMLCollection {
 extern "js" fn document_get_elements_by_name_ffi(
   obj : JsValue,
   element_name : JsValue,
-) -> NodeList = "(obj, element_name) => obj.getElementsByName(obj, element_name)"
+) -> NodeList = "(obj, element_name) => obj.getElementsByName(element_name)"
 
 ///|
 impl TDocument with get_elements_by_name(self : Self, element_name : String) -> NodeList {
@@ -1062,7 +1062,7 @@ extern "js" fn document_open_ffi(
   obj : JsValue,
   unused1 : JsValue,
   unused2 : JsValue,
-) -> Document = "(obj, unused1, unused2) => obj.open(obj, unused1, unused2)"
+) -> Document = "(obj, unused1, unused2) => obj.open(unused1, unused2)"
 
 ///|
 impl TDocument with open(self : Self, unused1? : String, unused2? : String) -> Document {
@@ -1079,7 +1079,7 @@ extern "js" fn document_open_2_ffi(
   url : JsValue,
   name : JsValue,
   features : JsValue,
-) -> JsValue = "(obj, url, name, features) => obj.open_2(obj, url, name, features)"
+) -> JsValue = "(obj, url, name, features) => obj.open_2(url, name, features)"
 
 ///|
 impl TDocument with open_2(
@@ -1102,7 +1102,7 @@ impl TDocument with open_2(
 }
 
 ///|
-extern "js" fn document_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn document_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TDocument with close(self : Self) -> Unit {
@@ -1110,7 +1110,7 @@ impl TDocument with close(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn document_write_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.write(obj, text)"
+extern "js" fn document_write_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.write(text)"
 
 ///|
 impl TDocument with write(self : Self, text : &TDocumentWriteText) -> Unit {
@@ -1118,7 +1118,7 @@ impl TDocument with write(self : Self, text : &TDocumentWriteText) -> Unit {
 }
 
 ///|
-extern "js" fn document_writeln_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.writeln(obj, text)"
+extern "js" fn document_writeln_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.writeln(text)"
 
 ///|
 impl TDocument with writeln(self : Self, text : &TDocumentWritelnText) -> Unit {
@@ -1134,7 +1134,7 @@ impl TDocument with default_view(self : Self) -> WindowProxy {
 }
 
 ///|
-extern "js" fn document_has_focus_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasFocus(obj)"
+extern "js" fn document_has_focus_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasFocus()"
 
 ///|
 impl TDocument with has_focus(self : Self) -> Bool {
@@ -1169,7 +1169,7 @@ extern "js" fn document_exec_command_ffi(
   command_id : JsValue,
   show_ui : JsValue,
   value : JsValue,
-) -> Bool = "(obj, command_id, show_ui, value) => obj.execCommand(obj, command_id, show_ui, value)"
+) -> Bool = "(obj, command_id, show_ui, value) => obj.execCommand(command_id, show_ui, value)"
 
 ///|
 impl TDocument with exec_command(
@@ -1190,7 +1190,7 @@ impl TDocument with exec_command(
 extern "js" fn document_query_command_enabled_ffi(
   obj : JsValue,
   command_id : JsValue,
-) -> Bool = "(obj, command_id) => obj.queryCommandEnabled(obj, command_id)"
+) -> Bool = "(obj, command_id) => obj.queryCommandEnabled(command_id)"
 
 ///|
 impl TDocument with query_command_enabled(self : Self, command_id : String) -> Bool {
@@ -1204,7 +1204,7 @@ impl TDocument with query_command_enabled(self : Self, command_id : String) -> B
 extern "js" fn document_query_command_indeterm_ffi(
   obj : JsValue,
   command_id : JsValue,
-) -> Bool = "(obj, command_id) => obj.queryCommandIndeterm(obj, command_id)"
+) -> Bool = "(obj, command_id) => obj.queryCommandIndeterm(command_id)"
 
 ///|
 impl TDocument with query_command_indeterm(self : Self, command_id : String) -> Bool {
@@ -1218,7 +1218,7 @@ impl TDocument with query_command_indeterm(self : Self, command_id : String) -> 
 extern "js" fn document_query_command_state_ffi(
   obj : JsValue,
   command_id : JsValue,
-) -> Bool = "(obj, command_id) => obj.queryCommandState(obj, command_id)"
+) -> Bool = "(obj, command_id) => obj.queryCommandState(command_id)"
 
 ///|
 impl TDocument with query_command_state(self : Self, command_id : String) -> Bool {
@@ -1232,7 +1232,7 @@ impl TDocument with query_command_state(self : Self, command_id : String) -> Boo
 extern "js" fn document_query_command_supported_ffi(
   obj : JsValue,
   command_id : JsValue,
-) -> Bool = "(obj, command_id) => obj.queryCommandSupported(obj, command_id)"
+) -> Bool = "(obj, command_id) => obj.queryCommandSupported(command_id)"
 
 ///|
 impl TDocument with query_command_supported(self : Self, command_id : String) -> Bool {
@@ -1246,7 +1246,7 @@ impl TDocument with query_command_supported(self : Self, command_id : String) ->
 extern "js" fn document_query_command_value_ffi(
   obj : JsValue,
   command_id : JsValue,
-) -> String = "(obj, command_id) => obj.queryCommandValue(obj, command_id)"
+) -> String = "(obj, command_id) => obj.queryCommandValue(command_id)"
 
 ///|
 impl TDocument with query_command_value(self : Self, command_id : String) -> String {
@@ -1445,7 +1445,7 @@ impl TDocument with applets(self : Self) -> HTMLCollection {
 }
 
 ///|
-extern "js" fn document_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear(obj)"
+extern "js" fn document_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 impl TDocument with clear(self : Self) -> Unit {
@@ -1453,7 +1453,7 @@ impl TDocument with clear(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn document_capture_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.captureEvents(obj)"
+extern "js" fn document_capture_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.captureEvents()"
 
 ///|
 impl TDocument with capture_events(self : Self) -> Unit {
@@ -1461,7 +1461,7 @@ impl TDocument with capture_events(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn document_release_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.releaseEvents(obj)"
+extern "js" fn document_release_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.releaseEvents()"
 
 ///|
 impl TDocument with release_events(self : Self) -> Unit {
@@ -1481,7 +1481,7 @@ extern "js" fn document_element_from_point_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.elementFromPoint(obj, x, y)"
+) -> JsValue = "(obj, x, y) => obj.elementFromPoint(x, y)"
 
 ///|
 impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element? {
@@ -1502,7 +1502,7 @@ extern "js" fn document_elements_from_point_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Array[Element] = "(obj, x, y) => obj.elementsFromPoint(obj, x, y)"
+) -> Array[Element] = "(obj, x, y) => obj.elementsFromPoint(x, y)"
 
 ///|
 impl TDocument with elements_from_point(self : Self, x : Double, y : Double) -> Array[
@@ -1521,7 +1521,7 @@ extern "js" fn document_caret_position_from_point_ffi(
   x : JsValue,
   y : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, x, y, options) => obj.caretPositionFromPoint(obj, x, y, options)"
+) -> JsValue = "(obj, x, y, options) => obj.caretPositionFromPoint(x, y, options)"
 
 ///|
 impl TDocument with caret_position_from_point(
@@ -1555,7 +1555,7 @@ impl TDocument with scrolling_element(self : Self) -> Element {
 extern "js" fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
-) -> JsValue = "(obj, element_id) => obj.getElementById(obj, element_id)"
+) -> JsValue = "(obj, element_id) => obj.getElementById(element_id)"
 
 ///|
 impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
@@ -1654,7 +1654,7 @@ impl TDocument with child_element_count(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn document_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
+extern "js" fn document_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(nodes)"
 
 ///|
 impl TDocument with prepend(self : Self, nodes : &TDocumentPrependNodes) -> Unit {
@@ -1662,7 +1662,7 @@ impl TDocument with prepend(self : Self, nodes : &TDocumentPrependNodes) -> Unit
 }
 
 ///|
-extern "js" fn document_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
+extern "js" fn document_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(nodes)"
 
 ///|
 impl TDocument with append(self : Self, nodes : &TDocumentAppendNodes) -> Unit {
@@ -1673,7 +1673,7 @@ impl TDocument with append(self : Self, nodes : &TDocumentAppendNodes) -> Unit {
 extern "js" fn document_replace_children_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceChildren(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceChildren(nodes)"
 
 ///|
 impl TDocument with replace_children(
@@ -1688,7 +1688,7 @@ extern "js" fn document_move_before_ffi(
   obj : JsValue,
   node : JsValue,
   child : JsValue,
-) -> Unit = "(obj, node, child) => obj.moveBefore(obj, node, child)"
+) -> Unit = "(obj, node, child) => obj.moveBefore(node, child)"
 
 ///|
 impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
@@ -1703,7 +1703,7 @@ impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> U
 extern "js" fn document_query_selector_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> JsValue = "(obj, selectors) => obj.querySelector(obj, selectors)"
+) -> JsValue = "(obj, selectors) => obj.querySelector(selectors)"
 
 ///|
 impl TDocument with query_selector(self : Self, selectors : String) -> Element? {
@@ -1722,7 +1722,7 @@ impl TDocument with query_selector(self : Self, selectors : String) -> Element? 
 extern "js" fn document_query_selector_all_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> NodeList = "(obj, selectors) => obj.querySelectorAll(obj, selectors)"
+) -> NodeList = "(obj, selectors) => obj.querySelectorAll(selectors)"
 
 ///|
 impl TDocument with query_selector_all(self : Self, selectors : String) -> NodeList {
@@ -1737,7 +1737,7 @@ extern "js" fn document_create_expression_ffi(
   obj : JsValue,
   expression : JsValue,
   resolver : JsValue,
-) -> XPathExpression = "(obj, expression, resolver) => obj.createExpression(obj, expression, resolver)"
+) -> XPathExpression = "(obj, expression, resolver) => obj.createExpression(expression, resolver)"
 
 ///|
 impl TDocument with create_expression(
@@ -1756,7 +1756,7 @@ impl TDocument with create_expression(
 extern "js" fn document_create_ns_resolver_ffi(
   obj : JsValue,
   node_resolver : JsValue,
-) -> Node = "(obj, node_resolver) => obj.createNSResolver(obj, node_resolver)"
+) -> Node = "(obj, node_resolver) => obj.createNSResolver(node_resolver)"
 
 ///|
 impl TDocument with create_ns_resolver(self : Self, node_resolver : &TNode) -> Node {
@@ -1774,7 +1774,7 @@ extern "js" fn document_evaluate_ffi(
   resolver : JsValue,
   type_ : JsValue,
   result : JsValue,
-) -> XPathResult = "(obj, expression, context_node, resolver, type_, result) => obj.evaluate(obj, expression, context_node, resolver, type_, result)"
+) -> XPathResult = "(obj, expression, context_node, resolver, type_, result) => obj.evaluate(expression, context_node, resolver, type_, result)"
 
 ///|
 impl TDocument with evaluate(
@@ -3374,7 +3374,7 @@ impl TDocument with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
 extern "js" fn document_get_box_quads_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(obj, options)"
+) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(options)"
 
 ///|
 impl TDocument with get_box_quads(
@@ -3390,7 +3390,7 @@ extern "js" fn document_convert_quad_from_node_ffi(
   quad : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(obj, quad, from, options)"
+) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(quad, from, options)"
 
 ///|
 impl TDocument with convert_quad_from_node(
@@ -3413,7 +3413,7 @@ extern "js" fn document_convert_rect_from_node_ffi(
   rect : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(obj, rect, from, options)"
+) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(rect, from, options)"
 
 ///|
 impl TDocument with convert_rect_from_node(
@@ -3436,7 +3436,7 @@ extern "js" fn document_convert_point_from_node_ffi(
   point : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(obj, point, from, options)"
+) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(point, from, options)"
 
 ///|
 impl TDocument with convert_point_from_node(

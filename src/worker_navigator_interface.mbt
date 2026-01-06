@@ -107,7 +107,7 @@ impl TWorkerNavigator with vendor_sub(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.taintEnabled(obj)"
+extern "js" fn worker_navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.taintEnabled()"
 
 ///|
 impl TWorkerNavigator with taint_enabled(self : Self) -> Bool {

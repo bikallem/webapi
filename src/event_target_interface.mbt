@@ -72,7 +72,7 @@ extern "js" fn event_target_add_event_listener_ffi(
   type_ : JsValue,
   callback : JsValue,
   options : JsValue,
-) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(obj, type_, callback, options)"
+) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(type_, callback, options)"
 
 ///|
 impl TEventTarget with add_event_listener(
@@ -95,7 +95,7 @@ extern "js" fn event_target_remove_event_listener_ffi(
   type_ : JsValue,
   callback : JsValue,
   options : JsValue,
-) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(obj, type_, callback, options)"
+) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(type_, callback, options)"
 
 ///|
 impl TEventTarget with remove_event_listener(
@@ -116,7 +116,7 @@ impl TEventTarget with remove_event_listener(
 extern "js" fn event_target_dispatch_event_ffi(
   obj : JsValue,
   event : JsValue,
-) -> Bool = "(obj, event) => obj.dispatchEvent(obj, event)"
+) -> Bool = "(obj, event) => obj.dispatchEvent(event)"
 
 ///|
 impl TEventTarget with dispatch_event(self : Self, event : &TEvent) -> Bool {

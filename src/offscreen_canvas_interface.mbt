@@ -94,7 +94,7 @@ extern "js" fn offscreen_canvas_get_context_ffi(
   obj : JsValue,
   context_id : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, context_id, options) => obj.getContext(obj, context_id, options)"
+) -> JsValue = "(obj, context_id, options) => obj.getContext(context_id, options)"
 
 ///|
 impl TOffscreenCanvas with get_context(
@@ -117,7 +117,7 @@ impl TOffscreenCanvas with get_context(
 ///|
 extern "js" fn offscreen_canvas_transfer_to_image_bitmap_ffi(
   obj : JsValue,
-) -> ImageBitmap = "(obj) => obj.transferToImageBitmap(obj)"
+) -> ImageBitmap = "(obj) => obj.transferToImageBitmap()"
 
 ///|
 impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> ImageBitmap {
@@ -128,7 +128,7 @@ impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> ImageBitmap 
 extern "js" fn offscreen_canvas_convert_to_blob_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Blob] = "(obj, options) => obj.convertToBlob(obj, options)"
+) -> JsPromise[Blob] = "(obj, options) => obj.convertToBlob(options)"
 
 ///|
 impl TOffscreenCanvas with convert_to_blob(

@@ -44,7 +44,7 @@ impl TSVGLengthList with number_of_items(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn svg_length_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear(obj)"
+extern "js" fn svg_length_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 impl TSVGLengthList with clear(self : Self) -> Unit {
@@ -55,7 +55,7 @@ impl TSVGLengthList with clear(self : Self) -> Unit {
 extern "js" fn svg_length_list_initialize_ffi(
   obj : JsValue,
   new_item : JsValue,
-) -> SVGLength = "(obj, new_item) => obj.initialize(obj, new_item)"
+) -> SVGLength = "(obj, new_item) => obj.initialize(new_item)"
 
 ///|
 impl TSVGLengthList with initialize(self : Self, new_item : &TSVGLength) -> SVGLength {
@@ -70,7 +70,7 @@ extern "js" fn svg_length_list_insert_item_before_ffi(
   obj : JsValue,
   new_item : JsValue,
   index : JsValue,
-) -> SVGLength = "(obj, new_item, index) => obj.insertItemBefore(obj, new_item, index)"
+) -> SVGLength = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
 
 ///|
 impl TSVGLengthList with insert_item_before(
@@ -90,7 +90,7 @@ extern "js" fn svg_length_list_replace_item_ffi(
   obj : JsValue,
   new_item : JsValue,
   index : JsValue,
-) -> SVGLength = "(obj, new_item, index) => obj.replaceItem(obj, new_item, index)"
+) -> SVGLength = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
 
 ///|
 impl TSVGLengthList with replace_item(
@@ -109,7 +109,7 @@ impl TSVGLengthList with replace_item(
 extern "js" fn svg_length_list_remove_item_ffi(
   obj : JsValue,
   index : JsValue,
-) -> SVGLength = "(obj, index) => obj.removeItem(obj, index)"
+) -> SVGLength = "(obj, index) => obj.removeItem(index)"
 
 ///|
 impl TSVGLengthList with remove_item(self : Self, index : UInt) -> SVGLength {
@@ -120,7 +120,7 @@ impl TSVGLengthList with remove_item(self : Self, index : UInt) -> SVGLength {
 extern "js" fn svg_length_list_append_item_ffi(
   obj : JsValue,
   new_item : JsValue,
-) -> SVGLength = "(obj, new_item) => obj.appendItem(obj, new_item)"
+) -> SVGLength = "(obj, new_item) => obj.appendItem(new_item)"
 
 ///|
 impl TSVGLengthList with append_item(self : Self, new_item : &TSVGLength) -> SVGLength {

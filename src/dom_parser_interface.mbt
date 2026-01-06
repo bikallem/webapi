@@ -50,7 +50,7 @@ extern "js" fn dom_parser_parse_from_string_ffi(
   obj : JsValue,
   string : JsValue,
   type_ : JsValue,
-) -> Document = "(obj, string, type_) => obj.parseFromString(obj, string, type_)"
+) -> Document = "(obj, string, type_) => obj.parseFromString(string, type_)"
 
 ///|
 impl TDOMParser with parse_from_string(

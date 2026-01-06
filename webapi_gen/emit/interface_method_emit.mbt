@@ -43,11 +43,12 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
     _ => arg.name
   })
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_args = ffi_argnames.join(", ")
+  let ffi_js_decl_args = ffi_argnames.join(", ")
+  let ffi_js_call_args = ffi_argnames[1:].join(", ")
   let code = StringBuilder::new()
   code
   ..write_string(
-    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_args}) => obj.\{self.original_name}(\{ffi_js_args})\"",
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_decl_args}) => obj.\{self.original_name}(\{ffi_js_call_args})\"",
   )
   ..write_string("\n\n")
 

@@ -38,7 +38,7 @@ extern "js" fn named_node_map_get_named_item_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getNamedItemNS(obj, namespace_, local_name)"
+) -> JsValue = "(obj, namespace_, local_name) => obj.getNamedItemNS(namespace_, local_name)"
 
 ///|
 impl TNamedNodeMap with get_named_item_ns(
@@ -62,7 +62,7 @@ impl TNamedNodeMap with get_named_item_ns(
 extern "js" fn named_node_map_set_named_item_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setNamedItem(obj, attr)"
+) -> JsValue = "(obj, attr) => obj.setNamedItem(attr)"
 
 ///|
 impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
@@ -81,7 +81,7 @@ impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
 extern "js" fn named_node_map_set_named_item_ns_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setNamedItemNS(obj, attr)"
+) -> JsValue = "(obj, attr) => obj.setNamedItemNS(attr)"
 
 ///|
 impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr? {
@@ -100,7 +100,7 @@ impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr? {
 extern "js" fn named_node_map_remove_named_item_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> Attr = "(obj, qualified_name) => obj.removeNamedItem(obj, qualified_name)"
+) -> Attr = "(obj, qualified_name) => obj.removeNamedItem(qualified_name)"
 
 ///|
 impl TNamedNodeMap with remove_named_item(self : Self, qualified_name : String) -> Attr {
@@ -115,7 +115,7 @@ extern "js" fn named_node_map_remove_named_item_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> Attr = "(obj, namespace_, local_name) => obj.removeNamedItemNS(obj, namespace_, local_name)"
+) -> Attr = "(obj, namespace_, local_name) => obj.removeNamedItemNS(namespace_, local_name)"
 
 ///|
 impl TNamedNodeMap with remove_named_item_ns(

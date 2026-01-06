@@ -27,7 +27,7 @@ extern "js" fn worklet_add_module_ffi(
   obj : JsValue,
   module_url : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] = "(obj, module_url, options) => obj.addModule(obj, module_url, options)"
+) -> JsPromise[Unit] = "(obj, module_url, options) => obj.addModule(module_url, options)"
 
 ///|
 impl TWorklet with add_module(

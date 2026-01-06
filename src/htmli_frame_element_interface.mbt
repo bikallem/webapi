@@ -331,7 +331,7 @@ impl THTMLIFrameElement with content_window(self : Self) -> WindowProxy {
 ///|
 extern "js" fn htmli_frame_element_get_svg_document_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
+) -> JsValue = "(obj) => obj.getSVGDocument()"
 
 ///|
 impl THTMLIFrameElement with get_svg_document(self : Self) -> Document? {

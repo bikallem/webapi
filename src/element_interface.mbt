@@ -420,7 +420,7 @@ impl TElement with set_slot(self : Self, slot : String) -> Unit {
 }
 
 ///|
-extern "js" fn element_has_attributes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasAttributes(obj)"
+extern "js" fn element_has_attributes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasAttributes()"
 
 ///|
 impl TElement with has_attributes(self : Self) -> Bool {
@@ -436,7 +436,7 @@ impl TElement with attributes(self : Self) -> NamedNodeMap {
 }
 
 ///|
-extern "js" fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] = "(obj) => obj.getAttributeNames(obj)"
+extern "js" fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] = "(obj) => obj.getAttributeNames()"
 
 ///|
 impl TElement with get_attribute_names(self : Self) -> Array[String] {
@@ -447,7 +447,7 @@ impl TElement with get_attribute_names(self : Self) -> Array[String] {
 extern "js" fn element_get_attribute_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> JsValue = "(obj, qualified_name) => obj.getAttribute(obj, qualified_name)"
+) -> JsValue = "(obj, qualified_name) => obj.getAttribute(qualified_name)"
 
 ///|
 impl TElement with get_attribute(self : Self, qualified_name : String) -> String? {
@@ -467,7 +467,7 @@ extern "js" fn element_get_attribute_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNS(obj, namespace_, local_name)"
+) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNS(namespace_, local_name)"
 
 ///|
 impl TElement with get_attribute_ns(
@@ -492,7 +492,7 @@ extern "js" fn element_set_attribute_ffi(
   obj : JsValue,
   qualified_name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, qualified_name, value) => obj.setAttribute(obj, qualified_name, value)"
+) -> Unit = "(obj, qualified_name, value) => obj.setAttribute(qualified_name, value)"
 
 ///|
 impl TElement with set_attribute(
@@ -513,7 +513,7 @@ extern "js" fn element_set_attribute_ns_ffi(
   namespace_ : JsValue,
   qualified_name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, namespace_, qualified_name, value) => obj.setAttributeNS(obj, namespace_, qualified_name, value)"
+) -> Unit = "(obj, namespace_, qualified_name, value) => obj.setAttributeNS(namespace_, qualified_name, value)"
 
 ///|
 impl TElement with set_attribute_ns(
@@ -534,7 +534,7 @@ impl TElement with set_attribute_ns(
 extern "js" fn element_remove_attribute_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> Unit = "(obj, qualified_name) => obj.removeAttribute(obj, qualified_name)"
+) -> Unit = "(obj, qualified_name) => obj.removeAttribute(qualified_name)"
 
 ///|
 impl TElement with remove_attribute(self : Self, qualified_name : String) -> Unit {
@@ -549,7 +549,7 @@ extern "js" fn element_remove_attribute_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> Unit = "(obj, namespace_, local_name) => obj.removeAttributeNS(obj, namespace_, local_name)"
+) -> Unit = "(obj, namespace_, local_name) => obj.removeAttributeNS(namespace_, local_name)"
 
 ///|
 impl TElement with remove_attribute_ns(
@@ -569,7 +569,7 @@ extern "js" fn element_toggle_attribute_ffi(
   obj : JsValue,
   qualified_name : JsValue,
   force : JsValue,
-) -> Bool = "(obj, qualified_name, force) => obj.toggleAttribute(obj, qualified_name, force)"
+) -> Bool = "(obj, qualified_name, force) => obj.toggleAttribute(qualified_name, force)"
 
 ///|
 impl TElement with toggle_attribute(
@@ -588,7 +588,7 @@ impl TElement with toggle_attribute(
 extern "js" fn element_has_attribute_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> Bool = "(obj, qualified_name) => obj.hasAttribute(obj, qualified_name)"
+) -> Bool = "(obj, qualified_name) => obj.hasAttribute(qualified_name)"
 
 ///|
 impl TElement with has_attribute(self : Self, qualified_name : String) -> Bool {
@@ -603,7 +603,7 @@ extern "js" fn element_has_attribute_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> Bool = "(obj, namespace_, local_name) => obj.hasAttributeNS(obj, namespace_, local_name)"
+) -> Bool = "(obj, namespace_, local_name) => obj.hasAttributeNS(namespace_, local_name)"
 
 ///|
 impl TElement with has_attribute_ns(
@@ -622,7 +622,7 @@ impl TElement with has_attribute_ns(
 extern "js" fn element_get_attribute_node_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> JsValue = "(obj, qualified_name) => obj.getAttributeNode(obj, qualified_name)"
+) -> JsValue = "(obj, qualified_name) => obj.getAttributeNode(qualified_name)"
 
 ///|
 impl TElement with get_attribute_node(self : Self, qualified_name : String) -> Attr? {
@@ -642,7 +642,7 @@ extern "js" fn element_get_attribute_node_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNodeNS(obj, namespace_, local_name)"
+) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNodeNS(namespace_, local_name)"
 
 ///|
 impl TElement with get_attribute_node_ns(
@@ -666,7 +666,7 @@ impl TElement with get_attribute_node_ns(
 extern "js" fn element_set_attribute_node_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setAttributeNode(obj, attr)"
+) -> JsValue = "(obj, attr) => obj.setAttributeNode(attr)"
 
 ///|
 impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr? {
@@ -685,7 +685,7 @@ impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr? {
 extern "js" fn element_set_attribute_node_ns_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setAttributeNodeNS(obj, attr)"
+) -> JsValue = "(obj, attr) => obj.setAttributeNodeNS(attr)"
 
 ///|
 impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? {
@@ -704,7 +704,7 @@ impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? {
 extern "js" fn element_remove_attribute_node_ffi(
   obj : JsValue,
   attr : JsValue,
-) -> Attr = "(obj, attr) => obj.removeAttributeNode(obj, attr)"
+) -> Attr = "(obj, attr) => obj.removeAttributeNode(attr)"
 
 ///|
 impl TElement with remove_attribute_node(self : Self, attr : &TAttr) -> Attr {
@@ -718,7 +718,7 @@ impl TElement with remove_attribute_node(self : Self, attr : &TAttr) -> Attr {
 extern "js" fn element_attach_shadow_ffi(
   obj : JsValue,
   init : JsValue,
-) -> ShadowRoot = "(obj, init) => obj.attachShadow(obj, init)"
+) -> ShadowRoot = "(obj, init) => obj.attachShadow(init)"
 
 ///|
 impl TElement with attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRoot {
@@ -747,7 +747,7 @@ impl TElement with custom_element_registry(self : Self) -> CustomElementRegistry
 extern "js" fn element_closest_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> JsValue = "(obj, selectors) => obj.closest(obj, selectors)"
+) -> JsValue = "(obj, selectors) => obj.closest(selectors)"
 
 ///|
 impl TElement with closest(self : Self, selectors : String) -> Element? {
@@ -763,7 +763,7 @@ impl TElement with closest(self : Self, selectors : String) -> Element? {
 }
 
 ///|
-extern "js" fn element_matches_ffi(obj : JsValue, selectors : JsValue) -> Bool = "(obj, selectors) => obj.matches(obj, selectors)"
+extern "js" fn element_matches_ffi(obj : JsValue, selectors : JsValue) -> Bool = "(obj, selectors) => obj.matches(selectors)"
 
 ///|
 impl TElement with matches(self : Self, selectors : String) -> Bool {
@@ -774,7 +774,7 @@ impl TElement with matches(self : Self, selectors : String) -> Bool {
 extern "js" fn element_webkit_matches_selector_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> Bool = "(obj, selectors) => obj.webkitMatchesSelector(obj, selectors)"
+) -> Bool = "(obj, selectors) => obj.webkitMatchesSelector(selectors)"
 
 ///|
 impl TElement with webkit_matches_selector(self : Self, selectors : String) -> Bool {
@@ -788,7 +788,7 @@ impl TElement with webkit_matches_selector(self : Self, selectors : String) -> B
 extern "js" fn element_get_elements_by_tag_name_ffi(
   obj : JsValue,
   qualified_name : JsValue,
-) -> HTMLCollection = "(obj, qualified_name) => obj.getElementsByTagName(obj, qualified_name)"
+) -> HTMLCollection = "(obj, qualified_name) => obj.getElementsByTagName(qualified_name)"
 
 ///|
 impl TElement with get_elements_by_tag_name(
@@ -806,7 +806,7 @@ extern "js" fn element_get_elements_by_tag_name_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,
   local_name : JsValue,
-) -> HTMLCollection = "(obj, namespace_, local_name) => obj.getElementsByTagNameNS(obj, namespace_, local_name)"
+) -> HTMLCollection = "(obj, namespace_, local_name) => obj.getElementsByTagNameNS(namespace_, local_name)"
 
 ///|
 impl TElement with get_elements_by_tag_name_ns(
@@ -825,7 +825,7 @@ impl TElement with get_elements_by_tag_name_ns(
 extern "js" fn element_get_elements_by_class_name_ffi(
   obj : JsValue,
   class_names : JsValue,
-) -> HTMLCollection = "(obj, class_names) => obj.getElementsByClassName(obj, class_names)"
+) -> HTMLCollection = "(obj, class_names) => obj.getElementsByClassName(class_names)"
 
 ///|
 impl TElement with get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection {
@@ -840,7 +840,7 @@ extern "js" fn element_insert_adjacent_element_ffi(
   obj : JsValue,
   where_ : JsValue,
   element : JsValue,
-) -> JsValue = "(obj, where_, element) => obj.insertAdjacentElement(obj, where_, element)"
+) -> JsValue = "(obj, where_, element) => obj.insertAdjacentElement(where_, element)"
 
 ///|
 impl TElement with insert_adjacent_element(
@@ -865,7 +865,7 @@ extern "js" fn element_insert_adjacent_text_ffi(
   obj : JsValue,
   where_ : JsValue,
   data : JsValue,
-) -> Unit = "(obj, where_, data) => obj.insertAdjacentText(obj, where_, data)"
+) -> Unit = "(obj, where_, data) => obj.insertAdjacentText(where_, data)"
 
 ///|
 impl TElement with insert_adjacent_text(
@@ -884,7 +884,7 @@ impl TElement with insert_adjacent_text(
 extern "js" fn element_set_html_unsafe_ffi(
   obj : JsValue,
   html : JsValue,
-) -> Unit = "(obj, html) => obj.setHTMLUnsafe(obj, html)"
+) -> Unit = "(obj, html) => obj.setHTMLUnsafe(html)"
 
 ///|
 impl TElement with set_html_unsafe(
@@ -895,7 +895,7 @@ impl TElement with set_html_unsafe(
 }
 
 ///|
-extern "js" fn element_get_html_ffi(obj : JsValue, options : JsValue) -> String = "(obj, options) => obj.getHTML(obj, options)"
+extern "js" fn element_get_html_ffi(obj : JsValue, options : JsValue) -> String = "(obj, options) => obj.getHTML(options)"
 
 ///|
 impl TElement with get_html(
@@ -948,7 +948,7 @@ extern "js" fn element_insert_adjacent_html_ffi(
   obj : JsValue,
   position : JsValue,
   string : JsValue,
-) -> Unit = "(obj, position, string) => obj.insertAdjacentHTML(obj, position, string)"
+) -> Unit = "(obj, position, string) => obj.insertAdjacentHTML(position, string)"
 
 ///|
 impl TElement with insert_adjacent_html(
@@ -964,7 +964,7 @@ impl TElement with insert_adjacent_html(
 }
 
 ///|
-extern "js" fn element_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "(obj) => obj.getClientRects(obj)"
+extern "js" fn element_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "(obj) => obj.getClientRects()"
 
 ///|
 impl TElement with get_client_rects(self : Self) -> DOMRectList {
@@ -972,7 +972,7 @@ impl TElement with get_client_rects(self : Self) -> DOMRectList {
 }
 
 ///|
-extern "js" fn element_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBoundingClientRect(obj)"
+extern "js" fn element_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBoundingClientRect()"
 
 ///|
 impl TElement with get_bounding_client_rect(self : Self) -> DOMRect {
@@ -983,7 +983,7 @@ impl TElement with get_bounding_client_rect(self : Self) -> DOMRect {
 extern "js" fn element_check_visibility_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Bool = "(obj, options) => obj.checkVisibility(obj, options)"
+) -> Bool = "(obj, options) => obj.checkVisibility(options)"
 
 ///|
 impl TElement with check_visibility(
@@ -997,7 +997,7 @@ impl TElement with check_visibility(
 extern "js" fn element_scroll_into_view_ffi(
   obj : JsValue,
   arg : JsValue,
-) -> JsPromise[Unit] = "(obj, arg) => obj.scrollIntoView(obj, arg)"
+) -> JsPromise[Unit] = "(obj, arg) => obj.scrollIntoView(arg)"
 
 ///|
 impl TElement with scroll_into_view(
@@ -1011,7 +1011,7 @@ impl TElement with scroll_into_view(
 extern "js" fn element_scroll_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scroll(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scroll(options)"
 
 ///|
 impl TElement with scroll(
@@ -1026,7 +1026,7 @@ extern "js" fn element_scroll_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(x, y)"
 
 ///|
 impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -1043,7 +1043,7 @@ impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
 extern "js" fn element_scroll_to_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(options)"
 
 ///|
 impl TElement with scroll_to(
@@ -1058,7 +1058,7 @@ extern "js" fn element_scroll_to_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(x, y)"
 
 ///|
 impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -1075,7 +1075,7 @@ impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise
 extern "js" fn element_scroll_by_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(options)"
 
 ///|
 impl TElement with scroll_by(
@@ -1090,7 +1090,7 @@ extern "js" fn element_scroll_by_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(x, y)"
 
 ///|
 impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -1233,7 +1233,7 @@ impl TElement with child_element_count(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
+extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(nodes)"
 
 ///|
 impl TElement with prepend(self : Self, nodes : &TElementPrependNodes) -> Unit {
@@ -1241,7 +1241,7 @@ impl TElement with prepend(self : Self, nodes : &TElementPrependNodes) -> Unit {
 }
 
 ///|
-extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
+extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(nodes)"
 
 ///|
 impl TElement with append(self : Self, nodes : &TElementAppendNodes) -> Unit {
@@ -1252,7 +1252,7 @@ impl TElement with append(self : Self, nodes : &TElementAppendNodes) -> Unit {
 extern "js" fn element_replace_children_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceChildren(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceChildren(nodes)"
 
 ///|
 impl TElement with replace_children(
@@ -1267,7 +1267,7 @@ extern "js" fn element_move_before_ffi(
   obj : JsValue,
   node : JsValue,
   child : JsValue,
-) -> Unit = "(obj, node, child) => obj.moveBefore(obj, node, child)"
+) -> Unit = "(obj, node, child) => obj.moveBefore(node, child)"
 
 ///|
 impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
@@ -1282,7 +1282,7 @@ impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Un
 extern "js" fn element_query_selector_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> JsValue = "(obj, selectors) => obj.querySelector(obj, selectors)"
+) -> JsValue = "(obj, selectors) => obj.querySelector(selectors)"
 
 ///|
 impl TElement with query_selector(self : Self, selectors : String) -> Element? {
@@ -1301,7 +1301,7 @@ impl TElement with query_selector(self : Self, selectors : String) -> Element? {
 extern "js" fn element_query_selector_all_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> NodeList = "(obj, selectors) => obj.querySelectorAll(obj, selectors)"
+) -> NodeList = "(obj, selectors) => obj.querySelectorAll(selectors)"
 
 ///|
 impl TElement with query_selector_all(self : Self, selectors : String) -> NodeList {
@@ -1328,7 +1328,7 @@ impl TElement with next_element_sibling(self : Self) -> Element {
 }
 
 ///|
-extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
+extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(nodes)"
 
 ///|
 impl TElement with before(self : Self, nodes : &TElementBeforeNodes) -> Unit {
@@ -1336,7 +1336,7 @@ impl TElement with before(self : Self, nodes : &TElementBeforeNodes) -> Unit {
 }
 
 ///|
-extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(obj, nodes)"
+extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(nodes)"
 
 ///|
 impl TElement with after(self : Self, nodes : &TElementAfterNodes) -> Unit {
@@ -1344,7 +1344,7 @@ impl TElement with after(self : Self, nodes : &TElementAfterNodes) -> Unit {
 }
 
 ///|
-extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(obj, nodes)"
+extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(nodes)"
 
 ///|
 impl TElement with replace_with(self : Self, nodes : &TElementReplaceWithNodes) -> Unit {
@@ -1352,7 +1352,7 @@ impl TElement with replace_with(self : Self, nodes : &TElementReplaceWithNodes) 
 }
 
 ///|
-extern "js" fn element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove(obj)"
+extern "js" fn element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
 
 ///|
 impl TElement with remove(self : Self) -> Unit {
@@ -1371,7 +1371,7 @@ impl TElement with assigned_slot(self : Self) -> HTMLSlotElement {
 extern "js" fn element_get_box_quads_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(obj, options)"
+) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(options)"
 
 ///|
 impl TElement with get_box_quads(
@@ -1387,7 +1387,7 @@ extern "js" fn element_convert_quad_from_node_ffi(
   quad : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(obj, quad, from, options)"
+) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(quad, from, options)"
 
 ///|
 impl TElement with convert_quad_from_node(
@@ -1410,7 +1410,7 @@ extern "js" fn element_convert_rect_from_node_ffi(
   rect : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(obj, rect, from, options)"
+) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(rect, from, options)"
 
 ///|
 impl TElement with convert_rect_from_node(
@@ -1433,7 +1433,7 @@ extern "js" fn element_convert_point_from_node_ffi(
   point : JsValue,
   from : JsValue,
   options : JsValue,
-) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(obj, point, from, options)"
+) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(point, from, options)"
 
 ///|
 impl TElement with convert_point_from_node(

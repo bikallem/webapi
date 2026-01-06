@@ -41,7 +41,7 @@ impl TAbortController with signal(self : Self) -> AbortSignal {
 extern "js" fn abort_controller_abort_ffi(
   obj : JsValue,
   reason : JsValue,
-) -> Unit = "(obj, reason) => obj.abort(obj, reason)"
+) -> Unit = "(obj, reason) => obj.abort(reason)"
 
 ///|
 impl TAbortController with abort(self : Self, reason? : JsValue) -> Unit {

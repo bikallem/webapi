@@ -155,7 +155,7 @@ impl TKeyboardEvent with is_composing(self : Self) -> Bool {
 extern "js" fn keyboard_event_get_modifier_state_ffi(
   obj : JsValue,
   key_arg : JsValue,
-) -> Bool = "(obj, key_arg) => obj.getModifierState(obj, key_arg)"
+) -> Bool = "(obj, key_arg) => obj.getModifierState(key_arg)"
 
 ///|
 impl TKeyboardEvent with get_modifier_state(self : Self, key_arg : String) -> Bool {
@@ -178,7 +178,7 @@ extern "js" fn keyboard_event_init_keyboard_event_ffi(
   alt_key : JsValue,
   shift_key : JsValue,
   meta_key : JsValue,
-) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, key_arg, location_arg, ctrl_key, alt_key, shift_key, meta_key) => obj.initKeyboardEvent(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, key_arg, location_arg, ctrl_key, alt_key, shift_key, meta_key)"
+) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, key_arg, location_arg, ctrl_key, alt_key, shift_key, meta_key) => obj.initKeyboardEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, key_arg, location_arg, ctrl_key, alt_key, shift_key, meta_key)"
 
 ///|
 impl TKeyboardEvent with init_keyboard_event(

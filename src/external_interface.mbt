@@ -22,7 +22,7 @@ pub trait TExternal: TJsValue {
 }
 
 ///|
-extern "js" fn external_add_search_provider_ffi(obj : JsValue) -> Unit = "(obj) => obj.AddSearchProvider(obj)"
+extern "js" fn external_add_search_provider_ffi(obj : JsValue) -> Unit = "(obj) => obj.AddSearchProvider()"
 
 ///|
 impl TExternal with add_search_provider(self : Self) -> Unit {
@@ -30,7 +30,7 @@ impl TExternal with add_search_provider(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn external_is_search_provider_installed_ffi(obj : JsValue) -> Unit = "(obj) => obj.IsSearchProviderInstalled(obj)"
+extern "js" fn external_is_search_provider_installed_ffi(obj : JsValue) -> Unit = "(obj) => obj.IsSearchProviderInstalled()"
 
 ///|
 impl TExternal with is_search_provider_installed(self : Self) -> Unit {

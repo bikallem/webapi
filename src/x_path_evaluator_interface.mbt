@@ -46,7 +46,7 @@ extern "js" fn x_path_evaluator_create_expression_ffi(
   obj : JsValue,
   expression : JsValue,
   resolver : JsValue,
-) -> XPathExpression = "(obj, expression, resolver) => obj.createExpression(obj, expression, resolver)"
+) -> XPathExpression = "(obj, expression, resolver) => obj.createExpression(expression, resolver)"
 
 ///|
 impl TXPathEvaluator with create_expression(
@@ -65,7 +65,7 @@ impl TXPathEvaluator with create_expression(
 extern "js" fn x_path_evaluator_create_ns_resolver_ffi(
   obj : JsValue,
   node_resolver : JsValue,
-) -> Node = "(obj, node_resolver) => obj.createNSResolver(obj, node_resolver)"
+) -> Node = "(obj, node_resolver) => obj.createNSResolver(node_resolver)"
 
 ///|
 impl TXPathEvaluator with create_ns_resolver(
@@ -86,7 +86,7 @@ extern "js" fn x_path_evaluator_evaluate_ffi(
   resolver : JsValue,
   type_ : JsValue,
   result : JsValue,
-) -> XPathResult = "(obj, expression, context_node, resolver, type_, result) => obj.evaluate(obj, expression, context_node, resolver, type_, result)"
+) -> XPathResult = "(obj, expression, context_node, resolver, type_, result) => obj.evaluate(expression, context_node, resolver, type_, result)"
 
 ///|
 impl TXPathEvaluator with evaluate(

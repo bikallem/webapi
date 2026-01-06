@@ -39,7 +39,7 @@ impl TImageBitmap with height(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn image_bitmap_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn image_bitmap_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TImageBitmap with close(self : Self) -> Unit {

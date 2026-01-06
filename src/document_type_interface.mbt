@@ -90,7 +90,7 @@ impl TDocumentType with system_id(self : Self) -> String {
 }
 
 ///|
-extern "js" fn document_type_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
+extern "js" fn document_type_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(nodes)"
 
 ///|
 impl TDocumentType with before(self : Self, nodes : &TDocumentTypeBeforeNodes) -> Unit {
@@ -98,7 +98,7 @@ impl TDocumentType with before(self : Self, nodes : &TDocumentTypeBeforeNodes) -
 }
 
 ///|
-extern "js" fn document_type_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(obj, nodes)"
+extern "js" fn document_type_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(nodes)"
 
 ///|
 impl TDocumentType with after(self : Self, nodes : &TDocumentTypeAfterNodes) -> Unit {
@@ -109,7 +109,7 @@ impl TDocumentType with after(self : Self, nodes : &TDocumentTypeAfterNodes) -> 
 extern "js" fn document_type_replace_with_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceWith(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceWith(nodes)"
 
 ///|
 impl TDocumentType with replace_with(
@@ -120,7 +120,7 @@ impl TDocumentType with replace_with(
 }
 
 ///|
-extern "js" fn document_type_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove(obj)"
+extern "js" fn document_type_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
 
 ///|
 impl TDocumentType with remove(self : Self) -> Unit {

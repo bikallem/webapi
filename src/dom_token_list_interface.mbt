@@ -40,7 +40,7 @@ impl TDOMTokenList with length(self : Self) -> UInt {
 extern "js" fn dom_token_list_contains_ffi(
   obj : JsValue,
   token : JsValue,
-) -> Bool = "(obj, token) => obj.contains(obj, token)"
+) -> Bool = "(obj, token) => obj.contains(token)"
 
 ///|
 impl TDOMTokenList with contains(self : Self, token : String) -> Bool {
@@ -48,7 +48,7 @@ impl TDOMTokenList with contains(self : Self, token : String) -> Bool {
 }
 
 ///|
-extern "js" fn dom_token_list_add_ffi(obj : JsValue, tokens : JsValue) -> Unit = "(obj, tokens) => obj.add(obj, tokens)"
+extern "js" fn dom_token_list_add_ffi(obj : JsValue, tokens : JsValue) -> Unit = "(obj, tokens) => obj.add(tokens)"
 
 ///|
 impl TDOMTokenList with add(self : Self, tokens : String) -> Unit {
@@ -59,7 +59,7 @@ impl TDOMTokenList with add(self : Self, tokens : String) -> Unit {
 extern "js" fn dom_token_list_remove_ffi(
   obj : JsValue,
   tokens : JsValue,
-) -> Unit = "(obj, tokens) => obj.remove(obj, tokens)"
+) -> Unit = "(obj, tokens) => obj.remove(tokens)"
 
 ///|
 impl TDOMTokenList with remove(self : Self, tokens : String) -> Unit {
@@ -71,7 +71,7 @@ extern "js" fn dom_token_list_toggle_ffi(
   obj : JsValue,
   token : JsValue,
   force : JsValue,
-) -> Bool = "(obj, token, force) => obj.toggle(obj, token, force)"
+) -> Bool = "(obj, token, force) => obj.toggle(token, force)"
 
 ///|
 impl TDOMTokenList with toggle(self : Self, token : String, force? : Bool) -> Bool {
@@ -87,7 +87,7 @@ extern "js" fn dom_token_list_replace_ffi(
   obj : JsValue,
   token : JsValue,
   new_token : JsValue,
-) -> Bool = "(obj, token, new_token) => obj.replace(obj, token, new_token)"
+) -> Bool = "(obj, token, new_token) => obj.replace(token, new_token)"
 
 ///|
 impl TDOMTokenList with replace(self : Self, token : String, new_token : String) -> Bool {
@@ -102,7 +102,7 @@ impl TDOMTokenList with replace(self : Self, token : String, new_token : String)
 extern "js" fn dom_token_list_supports_ffi(
   obj : JsValue,
   token : JsValue,
-) -> Bool = "(obj, token) => obj.supports(obj, token)"
+) -> Bool = "(obj, token) => obj.supports(token)"
 
 ///|
 impl TDOMTokenList with supports(self : Self, token : String) -> Bool {

@@ -123,7 +123,7 @@ impl TNavigator with vendor_sub(self : Self) -> String {
 }
 
 ///|
-extern "js" fn navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.taintEnabled(obj)"
+extern "js" fn navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.taintEnabled()"
 
 ///|
 impl TNavigator with taint_enabled(self : Self) -> Bool {
@@ -167,7 +167,7 @@ extern "js" fn navigator_register_protocol_handler_ffi(
   obj : JsValue,
   scheme : JsValue,
   url : JsValue,
-) -> Unit = "(obj, scheme, url) => obj.registerProtocolHandler(obj, scheme, url)"
+) -> Unit = "(obj, scheme, url) => obj.registerProtocolHandler(scheme, url)"
 
 ///|
 impl TNavigator with register_protocol_handler(
@@ -187,7 +187,7 @@ extern "js" fn navigator_unregister_protocol_handler_ffi(
   obj : JsValue,
   scheme : JsValue,
   url : JsValue,
-) -> Unit = "(obj, scheme, url) => obj.unregisterProtocolHandler(obj, scheme, url)"
+) -> Unit = "(obj, scheme, url) => obj.unregisterProtocolHandler(scheme, url)"
 
 ///|
 impl TNavigator with unregister_protocol_handler(
@@ -227,7 +227,7 @@ impl TNavigator with mime_types(self : Self) -> MimeTypeArray {
 }
 
 ///|
-extern "js" fn navigator_java_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.javaEnabled(obj)"
+extern "js" fn navigator_java_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.javaEnabled()"
 
 ///|
 impl TNavigator with java_enabled(self : Self) -> Bool {

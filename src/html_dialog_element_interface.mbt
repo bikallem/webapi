@@ -118,7 +118,7 @@ impl THTMLDialogElement with set_closed_by(self : Self, closed_by : String) -> U
 }
 
 ///|
-extern "js" fn html_dialog_element_show_ffi(obj : JsValue) -> Unit = "(obj) => obj.show(obj)"
+extern "js" fn html_dialog_element_show_ffi(obj : JsValue) -> Unit = "(obj) => obj.show()"
 
 ///|
 impl THTMLDialogElement with show(self : Self) -> Unit {
@@ -126,7 +126,7 @@ impl THTMLDialogElement with show(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn html_dialog_element_show_modal_ffi(obj : JsValue) -> Unit = "(obj) => obj.showModal(obj)"
+extern "js" fn html_dialog_element_show_modal_ffi(obj : JsValue) -> Unit = "(obj) => obj.showModal()"
 
 ///|
 impl THTMLDialogElement with show_modal(self : Self) -> Unit {
@@ -137,7 +137,7 @@ impl THTMLDialogElement with show_modal(self : Self) -> Unit {
 extern "js" fn html_dialog_element_close_ffi(
   obj : JsValue,
   return_value : JsValue,
-) -> Unit = "(obj, return_value) => obj.close(obj, return_value)"
+) -> Unit = "(obj, return_value) => obj.close(return_value)"
 
 ///|
 impl THTMLDialogElement with close(self : Self, return_value? : String) -> Unit {
@@ -148,7 +148,7 @@ impl THTMLDialogElement with close(self : Self, return_value? : String) -> Unit 
 extern "js" fn html_dialog_element_request_close_ffi(
   obj : JsValue,
   return_value : JsValue,
-) -> Unit = "(obj, return_value) => obj.requestClose(obj, return_value)"
+) -> Unit = "(obj, return_value) => obj.requestClose(return_value)"
 
 ///|
 impl THTMLDialogElement with request_close(self : Self, return_value? : String) -> Unit {

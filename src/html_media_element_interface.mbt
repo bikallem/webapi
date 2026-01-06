@@ -237,7 +237,7 @@ impl THTMLMediaElement with buffered(self : Self) -> TimeRanges {
 }
 
 ///|
-extern "js" fn html_media_element_load_ffi(obj : JsValue) -> Unit = "(obj) => obj.load(obj)"
+extern "js" fn html_media_element_load_ffi(obj : JsValue) -> Unit = "(obj) => obj.load()"
 
 ///|
 impl THTMLMediaElement with load(self : Self) -> Unit {
@@ -248,7 +248,7 @@ impl THTMLMediaElement with load(self : Self) -> Unit {
 extern "js" fn html_media_element_can_play_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> CanPlayTypeResult = "(obj, type_) => obj.canPlayType(obj, type_)"
+) -> CanPlayTypeResult = "(obj, type_) => obj.canPlayType(type_)"
 
 ///|
 impl THTMLMediaElement with can_play_type(self : Self, type_ : String) -> CanPlayTypeResult {
@@ -300,7 +300,7 @@ impl THTMLMediaElement with set_current_time(self : Self, current_time : Double)
 extern "js" fn html_media_element_fast_seek_ffi(
   obj : JsValue,
   time : JsValue,
-) -> Unit = "(obj, time) => obj.fastSeek(obj, time)"
+) -> Unit = "(obj, time) => obj.fastSeek(time)"
 
 ///|
 impl THTMLMediaElement with fast_seek(self : Self, time : Double) -> Unit {
@@ -316,7 +316,7 @@ impl THTMLMediaElement with duration(self : Self) -> Double {
 }
 
 ///|
-extern "js" fn html_media_element_get_start_date_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getStartDate(obj)"
+extern "js" fn html_media_element_get_start_date_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getStartDate()"
 
 ///|
 impl THTMLMediaElement with get_start_date(self : Self) -> JsValue {
@@ -474,7 +474,7 @@ impl THTMLMediaElement with set_loop_(self : Self, loop_ : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[Unit] = "(obj) => obj.play(obj)"
+extern "js" fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[Unit] = "(obj) => obj.play()"
 
 ///|
 impl THTMLMediaElement with play(self : Self) -> JsPromise[Unit] {
@@ -482,7 +482,7 @@ impl THTMLMediaElement with play(self : Self) -> JsPromise[Unit] {
 }
 
 ///|
-extern "js" fn html_media_element_pause_ffi(obj : JsValue) -> Unit = "(obj) => obj.pause(obj)"
+extern "js" fn html_media_element_pause_ffi(obj : JsValue) -> Unit = "(obj) => obj.pause()"
 
 ///|
 impl THTMLMediaElement with pause(self : Self) -> Unit {
@@ -613,7 +613,7 @@ extern "js" fn html_media_element_add_text_track_ffi(
   kind : JsValue,
   label : JsValue,
   language : JsValue,
-) -> TextTrack = "(obj, kind, label, language) => obj.addTextTrack(obj, kind, label, language)"
+) -> TextTrack = "(obj, kind, label, language) => obj.addTextTrack(kind, label, language)"
 
 ///|
 impl THTMLMediaElement with add_text_track(

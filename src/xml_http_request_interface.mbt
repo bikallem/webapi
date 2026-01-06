@@ -132,7 +132,7 @@ extern "js" fn xml_http_request_open_ffi(
   obj : JsValue,
   method_ : JsValue,
   url : JsValue,
-) -> Unit = "(obj, method_, url) => obj.open(obj, method_, url)"
+) -> Unit = "(obj, method_, url) => obj.open(method_, url)"
 
 ///|
 impl TXMLHttpRequest with open(self : Self, method_ : String, url : String) -> Unit {
@@ -151,7 +151,7 @@ extern "js" fn xml_http_request_open_2_ffi(
   async_ : JsValue,
   username : JsValue,
   password : JsValue,
-) -> Unit = "(obj, method_, url, async_, username, password) => obj.open_2(obj, method_, url, async_, username, password)"
+) -> Unit = "(obj, method_, url, async_, username, password) => obj.open_2(method_, url, async_, username, password)"
 
 ///|
 impl TXMLHttpRequest with open_2(
@@ -177,7 +177,7 @@ extern "js" fn xml_http_request_set_request_header_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.setRequestHeader(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.setRequestHeader(name, value)"
 
 ///|
 impl TXMLHttpRequest with set_request_header(
@@ -250,7 +250,7 @@ impl TXMLHttpRequest with upload(self : Self) -> XMLHttpRequestUpload {
 }
 
 ///|
-extern "js" fn xml_http_request_send_ffi(obj : JsValue, body : JsValue) -> Unit = "(obj, body) => obj.send(obj, body)"
+extern "js" fn xml_http_request_send_ffi(obj : JsValue, body : JsValue) -> Unit = "(obj, body) => obj.send(body)"
 
 ///|
 impl TXMLHttpRequest with send(
@@ -261,7 +261,7 @@ impl TXMLHttpRequest with send(
 }
 
 ///|
-extern "js" fn xml_http_request_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort(obj)"
+extern "js" fn xml_http_request_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort()"
 
 ///|
 impl TXMLHttpRequest with abort(self : Self) -> Unit {
@@ -296,7 +296,7 @@ impl TXMLHttpRequest with status_text(self : Self) -> String {
 extern "js" fn xml_http_request_get_response_header_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsValue = "(obj, name) => obj.getResponseHeader(obj, name)"
+) -> JsValue = "(obj, name) => obj.getResponseHeader(name)"
 
 ///|
 impl TXMLHttpRequest with get_response_header(self : Self, name : String) -> String? {
@@ -314,7 +314,7 @@ impl TXMLHttpRequest with get_response_header(self : Self, name : String) -> Str
 ///|
 extern "js" fn xml_http_request_get_all_response_headers_ffi(
   obj : JsValue,
-) -> String = "(obj) => obj.getAllResponseHeaders(obj)"
+) -> String = "(obj) => obj.getAllResponseHeaders()"
 
 ///|
 impl TXMLHttpRequest with get_all_response_headers(self : Self) -> String {
@@ -325,7 +325,7 @@ impl TXMLHttpRequest with get_all_response_headers(self : Self) -> String {
 extern "js" fn xml_http_request_override_mime_type_ffi(
   obj : JsValue,
   mime : JsValue,
-) -> Unit = "(obj, mime) => obj.overrideMimeType(obj, mime)"
+) -> Unit = "(obj, mime) => obj.overrideMimeType(mime)"
 
 ///|
 impl TXMLHttpRequest with override_mime_type(self : Self, mime : String) -> Unit {

@@ -50,7 +50,7 @@ extern "js" fn text_event_init_text_event_ffi(
   cancelable : JsValue,
   view : JsValue,
   data : JsValue,
-) -> Unit = "(obj, type_, bubbles, cancelable, view, data) => obj.initTextEvent(obj, type_, bubbles, cancelable, view, data)"
+) -> Unit = "(obj, type_, bubbles, cancelable, view, data) => obj.initTextEvent(type_, bubbles, cancelable, view, data)"
 
 ///|
 impl TTextEvent with init_text_event(

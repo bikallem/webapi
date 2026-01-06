@@ -150,7 +150,7 @@ impl TNavigateEvent with source_element(self : Self) -> Element {
 extern "js" fn navigate_event_intercept_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Unit = "(obj, options) => obj.intercept(obj, options)"
+) -> Unit = "(obj, options) => obj.intercept(options)"
 
 ///|
 impl TNavigateEvent with intercept(
@@ -161,7 +161,7 @@ impl TNavigateEvent with intercept(
 }
 
 ///|
-extern "js" fn navigate_event_scroll_ffi(obj : JsValue) -> Unit = "(obj) => obj.scroll(obj)"
+extern "js" fn navigate_event_scroll_ffi(obj : JsValue) -> Unit = "(obj) => obj.scroll()"
 
 ///|
 impl TNavigateEvent with scroll(self : Self) -> Unit {

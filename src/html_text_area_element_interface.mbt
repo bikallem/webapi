@@ -474,7 +474,7 @@ impl THTMLTextAreaElement with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn html_text_area_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn html_text_area_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl THTMLTextAreaElement with check_validity(self : Self) -> Bool {
@@ -484,7 +484,7 @@ impl THTMLTextAreaElement with check_validity(self : Self) -> Bool {
 ///|
 extern "js" fn html_text_area_element_report_validity_ffi(
   obj : JsValue,
-) -> Bool = "(obj) => obj.reportValidity(obj)"
+) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl THTMLTextAreaElement with report_validity(self : Self) -> Bool {
@@ -495,7 +495,7 @@ impl THTMLTextAreaElement with report_validity(self : Self) -> Bool {
 extern "js" fn html_text_area_element_set_custom_validity_ffi(
   obj : JsValue,
   error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(obj, error)"
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 impl THTMLTextAreaElement with set_custom_validity(self : Self, error : String) -> Unit {
@@ -514,7 +514,7 @@ impl THTMLTextAreaElement with labels(self : Self) -> NodeList {
 }
 
 ///|
-extern "js" fn html_text_area_element_select_ffi(obj : JsValue) -> Unit = "(obj) => obj.select(obj)"
+extern "js" fn html_text_area_element_select_ffi(obj : JsValue) -> Unit = "(obj) => obj.select()"
 
 ///|
 impl THTMLTextAreaElement with select(self : Self) -> Unit {
@@ -604,7 +604,7 @@ impl THTMLTextAreaElement with set_selection_direction(
 extern "js" fn html_text_area_element_set_range_text_ffi(
   obj : JsValue,
   replacement : JsValue,
-) -> Unit = "(obj, replacement) => obj.setRangeText(obj, replacement)"
+) -> Unit = "(obj, replacement) => obj.setRangeText(replacement)"
 
 ///|
 impl THTMLTextAreaElement with set_range_text(self : Self, replacement : String) -> Unit {
@@ -621,7 +621,7 @@ extern "js" fn html_text_area_element_set_range_text_2_ffi(
   start : JsValue,
   end : JsValue,
   selection_mode : JsValue,
-) -> Unit = "(obj, replacement, start, end, selection_mode) => obj.setRangeText_2(obj, replacement, start, end, selection_mode)"
+) -> Unit = "(obj, replacement, start, end, selection_mode) => obj.setRangeText_2(replacement, start, end, selection_mode)"
 
 ///|
 impl THTMLTextAreaElement with set_range_text_2(
@@ -646,7 +646,7 @@ extern "js" fn html_text_area_element_set_selection_range_ffi(
   start : JsValue,
   end : JsValue,
   direction : JsValue,
-) -> Unit = "(obj, start, end, direction) => obj.setSelectionRange(obj, start, end, direction)"
+) -> Unit = "(obj, start, end, direction) => obj.setSelectionRange(start, end, direction)"
 
 ///|
 impl THTMLTextAreaElement with set_selection_range(

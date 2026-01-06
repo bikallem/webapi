@@ -346,7 +346,7 @@ extern "js" fn dom_matrix_read_only_translate_ffi(
   tx : JsValue,
   ty : JsValue,
   tz : JsValue,
-) -> DOMMatrix = "(obj, tx, ty, tz) => obj.translate(obj, tx, ty, tz)"
+) -> DOMMatrix = "(obj, tx, ty, tz) => obj.translate(tx, ty, tz)"
 
 ///|
 impl TDOMMatrixReadOnly with translate(
@@ -372,7 +372,7 @@ extern "js" fn dom_matrix_read_only_scale_ffi(
   origin_x : JsValue,
   origin_y : JsValue,
   origin_z : JsValue,
-) -> DOMMatrix = "(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z) => obj.scale(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z)"
+) -> DOMMatrix = "(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z) => obj.scale(scale_x, scale_y, scale_z, origin_x, origin_y, origin_z)"
 
 ///|
 impl TDOMMatrixReadOnly with scale(
@@ -400,7 +400,7 @@ extern "js" fn dom_matrix_read_only_scale_non_uniform_ffi(
   obj : JsValue,
   scale_x : JsValue,
   scale_y : JsValue,
-) -> DOMMatrix = "(obj, scale_x, scale_y) => obj.scaleNonUniform(obj, scale_x, scale_y)"
+) -> DOMMatrix = "(obj, scale_x, scale_y) => obj.scaleNonUniform(scale_x, scale_y)"
 
 ///|
 impl TDOMMatrixReadOnly with scale_non_uniform(
@@ -422,7 +422,7 @@ extern "js" fn dom_matrix_read_only_scale3d_ffi(
   origin_x : JsValue,
   origin_y : JsValue,
   origin_z : JsValue,
-) -> DOMMatrix = "(obj, scale, origin_x, origin_y, origin_z) => obj.scale3d(obj, scale, origin_x, origin_y, origin_z)"
+) -> DOMMatrix = "(obj, scale, origin_x, origin_y, origin_z) => obj.scale3d(scale, origin_x, origin_y, origin_z)"
 
 ///|
 impl TDOMMatrixReadOnly with scale3d(
@@ -447,7 +447,7 @@ extern "js" fn dom_matrix_read_only_rotate_ffi(
   rot_x : JsValue,
   rot_y : JsValue,
   rot_z : JsValue,
-) -> DOMMatrix = "(obj, rot_x, rot_y, rot_z) => obj.rotate(obj, rot_x, rot_y, rot_z)"
+) -> DOMMatrix = "(obj, rot_x, rot_y, rot_z) => obj.rotate(rot_x, rot_y, rot_z)"
 
 ///|
 impl TDOMMatrixReadOnly with rotate(
@@ -469,7 +469,7 @@ extern "js" fn dom_matrix_read_only_rotate_from_vector_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> DOMMatrix = "(obj, x, y) => obj.rotateFromVector(obj, x, y)"
+) -> DOMMatrix = "(obj, x, y) => obj.rotateFromVector(x, y)"
 
 ///|
 impl TDOMMatrixReadOnly with rotate_from_vector(
@@ -491,7 +491,7 @@ extern "js" fn dom_matrix_read_only_rotate_axis_angle_ffi(
   y : JsValue,
   z : JsValue,
   angle : JsValue,
-) -> DOMMatrix = "(obj, x, y, z, angle) => obj.rotateAxisAngle(obj, x, y, z, angle)"
+) -> DOMMatrix = "(obj, x, y, z, angle) => obj.rotateAxisAngle(x, y, z, angle)"
 
 ///|
 impl TDOMMatrixReadOnly with rotate_axis_angle(
@@ -514,7 +514,7 @@ impl TDOMMatrixReadOnly with rotate_axis_angle(
 extern "js" fn dom_matrix_read_only_skew_x_ffi(
   obj : JsValue,
   sx : JsValue,
-) -> DOMMatrix = "(obj, sx) => obj.skewX(obj, sx)"
+) -> DOMMatrix = "(obj, sx) => obj.skewX(sx)"
 
 ///|
 impl TDOMMatrixReadOnly with skew_x(self : Self, sx? : Double = (0 : Double)) -> DOMMatrix {
@@ -525,7 +525,7 @@ impl TDOMMatrixReadOnly with skew_x(self : Self, sx? : Double = (0 : Double)) ->
 extern "js" fn dom_matrix_read_only_skew_y_ffi(
   obj : JsValue,
   sy : JsValue,
-) -> DOMMatrix = "(obj, sy) => obj.skewY(obj, sy)"
+) -> DOMMatrix = "(obj, sy) => obj.skewY(sy)"
 
 ///|
 impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double = (0 : Double)) -> DOMMatrix {
@@ -536,7 +536,7 @@ impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double = (0 : Double)) ->
 extern "js" fn dom_matrix_read_only_multiply_ffi(
   obj : JsValue,
   other : JsValue,
-) -> DOMMatrix = "(obj, other) => obj.multiply(obj, other)"
+) -> DOMMatrix = "(obj, other) => obj.multiply(other)"
 
 ///|
 impl TDOMMatrixReadOnly with multiply(
@@ -550,7 +550,7 @@ impl TDOMMatrixReadOnly with multiply(
 }
 
 ///|
-extern "js" fn dom_matrix_read_only_flip_x_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.flipX(obj)"
+extern "js" fn dom_matrix_read_only_flip_x_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.flipX()"
 
 ///|
 impl TDOMMatrixReadOnly with flip_x(self : Self) -> DOMMatrix {
@@ -558,7 +558,7 @@ impl TDOMMatrixReadOnly with flip_x(self : Self) -> DOMMatrix {
 }
 
 ///|
-extern "js" fn dom_matrix_read_only_flip_y_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.flipY(obj)"
+extern "js" fn dom_matrix_read_only_flip_y_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.flipY()"
 
 ///|
 impl TDOMMatrixReadOnly with flip_y(self : Self) -> DOMMatrix {
@@ -566,7 +566,7 @@ impl TDOMMatrixReadOnly with flip_y(self : Self) -> DOMMatrix {
 }
 
 ///|
-extern "js" fn dom_matrix_read_only_inverse_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.inverse(obj)"
+extern "js" fn dom_matrix_read_only_inverse_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.inverse()"
 
 ///|
 impl TDOMMatrixReadOnly with inverse(self : Self) -> DOMMatrix {
@@ -577,7 +577,7 @@ impl TDOMMatrixReadOnly with inverse(self : Self) -> DOMMatrix {
 extern "js" fn dom_matrix_read_only_transform_point_ffi(
   obj : JsValue,
   point : JsValue,
-) -> DOMPoint = "(obj, point) => obj.transformPoint(obj, point)"
+) -> DOMPoint = "(obj, point) => obj.transformPoint(point)"
 
 ///|
 impl TDOMMatrixReadOnly with transform_point(
@@ -593,7 +593,7 @@ impl TDOMMatrixReadOnly with transform_point(
 ///|
 extern "js" fn dom_matrix_read_only_to_float32array_ffi(
   obj : JsValue,
-) -> Float32Array = "(obj) => obj.toFloat32Array(obj)"
+) -> Float32Array = "(obj) => obj.toFloat32Array()"
 
 ///|
 impl TDOMMatrixReadOnly with to_float32array(self : Self) -> Float32Array {
@@ -603,7 +603,7 @@ impl TDOMMatrixReadOnly with to_float32array(self : Self) -> Float32Array {
 ///|
 extern "js" fn dom_matrix_read_only_to_float64array_ffi(
   obj : JsValue,
-) -> Float64Array = "(obj) => obj.toFloat64Array(obj)"
+) -> Float64Array = "(obj) => obj.toFloat64Array()"
 
 ///|
 impl TDOMMatrixReadOnly with to_float64array(self : Self) -> Float64Array {
@@ -611,7 +611,7 @@ impl TDOMMatrixReadOnly with to_float64array(self : Self) -> Float64Array {
 }
 
 ///|
-extern "js" fn dom_matrix_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON(obj)"
+extern "js" fn dom_matrix_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TDOMMatrixReadOnly with to_json(self : Self) -> JsValue {

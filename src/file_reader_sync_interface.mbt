@@ -35,7 +35,7 @@ pub trait TFileReaderSync: TJsValue {
 extern "js" fn file_reader_sync_read_as_array_buffer_ffi(
   obj : JsValue,
   blob : JsValue,
-) -> ArrayBuffer = "(obj, blob) => obj.readAsArrayBuffer(obj, blob)"
+) -> ArrayBuffer = "(obj, blob) => obj.readAsArrayBuffer(blob)"
 
 ///|
 impl TFileReaderSync with read_as_array_buffer(self : Self, blob : &TBlob) -> ArrayBuffer {
@@ -49,7 +49,7 @@ impl TFileReaderSync with read_as_array_buffer(self : Self, blob : &TBlob) -> Ar
 extern "js" fn file_reader_sync_read_as_binary_string_ffi(
   obj : JsValue,
   blob : JsValue,
-) -> String = "(obj, blob) => obj.readAsBinaryString(obj, blob)"
+) -> String = "(obj, blob) => obj.readAsBinaryString(blob)"
 
 ///|
 impl TFileReaderSync with read_as_binary_string(self : Self, blob : &TBlob) -> String {
@@ -64,7 +64,7 @@ extern "js" fn file_reader_sync_read_as_text_ffi(
   obj : JsValue,
   blob : JsValue,
   encoding : JsValue,
-) -> String = "(obj, blob, encoding) => obj.readAsText(obj, blob, encoding)"
+) -> String = "(obj, blob, encoding) => obj.readAsText(blob, encoding)"
 
 ///|
 impl TFileReaderSync with read_as_text(
@@ -83,7 +83,7 @@ impl TFileReaderSync with read_as_text(
 extern "js" fn file_reader_sync_read_as_data_url_ffi(
   obj : JsValue,
   blob : JsValue,
-) -> String = "(obj, blob) => obj.readAsDataURL(obj, blob)"
+) -> String = "(obj, blob) => obj.readAsDataURL(blob)"
 
 ///|
 impl TFileReaderSync with read_as_data_url(self : Self, blob : &TBlob) -> String {

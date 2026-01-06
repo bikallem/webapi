@@ -81,7 +81,7 @@ impl TSVGTextContentElement with length_adjust(self : Self) -> SVGAnimatedEnumer
 ///|
 extern "js" fn svg_text_content_element_get_number_of_chars_ffi(
   obj : JsValue,
-) -> Int = "(obj) => obj.getNumberOfChars(obj)"
+) -> Int = "(obj) => obj.getNumberOfChars()"
 
 ///|
 impl TSVGTextContentElement with get_number_of_chars(self : Self) -> Int {
@@ -91,7 +91,7 @@ impl TSVGTextContentElement with get_number_of_chars(self : Self) -> Int {
 ///|
 extern "js" fn svg_text_content_element_get_computed_text_length_ffi(
   obj : JsValue,
-) -> Float = "(obj) => obj.getComputedTextLength(obj)"
+) -> Float = "(obj) => obj.getComputedTextLength()"
 
 ///|
 impl TSVGTextContentElement with get_computed_text_length(self : Self) -> Float {
@@ -103,7 +103,7 @@ extern "js" fn svg_text_content_element_get_sub_string_length_ffi(
   obj : JsValue,
   charnum : JsValue,
   nchars : JsValue,
-) -> Float = "(obj, charnum, nchars) => obj.getSubStringLength(obj, charnum, nchars)"
+) -> Float = "(obj, charnum, nchars) => obj.getSubStringLength(charnum, nchars)"
 
 ///|
 impl TSVGTextContentElement with get_sub_string_length(
@@ -122,7 +122,7 @@ impl TSVGTextContentElement with get_sub_string_length(
 extern "js" fn svg_text_content_element_get_start_position_of_char_ffi(
   obj : JsValue,
   charnum : JsValue,
-) -> DOMPoint = "(obj, charnum) => obj.getStartPositionOfChar(obj, charnum)"
+) -> DOMPoint = "(obj, charnum) => obj.getStartPositionOfChar(charnum)"
 
 ///|
 impl TSVGTextContentElement with get_start_position_of_char(
@@ -139,7 +139,7 @@ impl TSVGTextContentElement with get_start_position_of_char(
 extern "js" fn svg_text_content_element_get_end_position_of_char_ffi(
   obj : JsValue,
   charnum : JsValue,
-) -> DOMPoint = "(obj, charnum) => obj.getEndPositionOfChar(obj, charnum)"
+) -> DOMPoint = "(obj, charnum) => obj.getEndPositionOfChar(charnum)"
 
 ///|
 impl TSVGTextContentElement with get_end_position_of_char(
@@ -156,7 +156,7 @@ impl TSVGTextContentElement with get_end_position_of_char(
 extern "js" fn svg_text_content_element_get_extent_of_char_ffi(
   obj : JsValue,
   charnum : JsValue,
-) -> DOMRect = "(obj, charnum) => obj.getExtentOfChar(obj, charnum)"
+) -> DOMRect = "(obj, charnum) => obj.getExtentOfChar(charnum)"
 
 ///|
 impl TSVGTextContentElement with get_extent_of_char(self : Self, charnum : UInt) -> DOMRect {
@@ -170,7 +170,7 @@ impl TSVGTextContentElement with get_extent_of_char(self : Self, charnum : UInt)
 extern "js" fn svg_text_content_element_get_rotation_of_char_ffi(
   obj : JsValue,
   charnum : JsValue,
-) -> Float = "(obj, charnum) => obj.getRotationOfChar(obj, charnum)"
+) -> Float = "(obj, charnum) => obj.getRotationOfChar(charnum)"
 
 ///|
 impl TSVGTextContentElement with get_rotation_of_char(
@@ -187,7 +187,7 @@ impl TSVGTextContentElement with get_rotation_of_char(
 extern "js" fn svg_text_content_element_get_char_num_at_position_ffi(
   obj : JsValue,
   point : JsValue,
-) -> Int = "(obj, point) => obj.getCharNumAtPosition(obj, point)"
+) -> Int = "(obj, point) => obj.getCharNumAtPosition(point)"
 
 ///|
 impl TSVGTextContentElement with get_char_num_at_position(
@@ -205,7 +205,7 @@ extern "js" fn svg_text_content_element_select_sub_string_ffi(
   obj : JsValue,
   charnum : JsValue,
   nchars : JsValue,
-) -> Unit = "(obj, charnum, nchars) => obj.selectSubString(obj, charnum, nchars)"
+) -> Unit = "(obj, charnum, nchars) => obj.selectSubString(charnum, nchars)"
 
 ///|
 impl TSVGTextContentElement with select_sub_string(

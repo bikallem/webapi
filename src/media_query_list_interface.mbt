@@ -48,7 +48,7 @@ impl TMediaQueryList with matches(self : Self) -> Bool {
 extern "js" fn media_query_list_add_listener_ffi(
   obj : JsValue,
   callback : JsValue,
-) -> Unit = "(obj, callback) => obj.addListener(obj, callback)"
+) -> Unit = "(obj, callback) => obj.addListener(callback)"
 
 ///|
 impl TMediaQueryList with add_listener(self : Self, callback : EventListener) -> Unit {
@@ -62,7 +62,7 @@ impl TMediaQueryList with add_listener(self : Self, callback : EventListener) ->
 extern "js" fn media_query_list_remove_listener_ffi(
   obj : JsValue,
   callback : JsValue,
-) -> Unit = "(obj, callback) => obj.removeListener(obj, callback)"
+) -> Unit = "(obj, callback) => obj.removeListener(callback)"
 
 ///|
 impl TMediaQueryList with remove_listener(self : Self, callback : EventListener) -> Unit {

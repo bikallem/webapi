@@ -40,7 +40,7 @@ pub trait TCloseWatcher: TEventTarget {
 }
 
 ///|
-extern "js" fn close_watcher_request_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.requestClose(obj)"
+extern "js" fn close_watcher_request_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.requestClose()"
 
 ///|
 impl TCloseWatcher with request_close(self : Self) -> Unit {
@@ -48,7 +48,7 @@ impl TCloseWatcher with request_close(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn close_watcher_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn close_watcher_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TCloseWatcher with close(self : Self) -> Unit {
@@ -56,7 +56,7 @@ impl TCloseWatcher with close(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn close_watcher_destroy_ffi(obj : JsValue) -> Unit = "(obj) => obj.destroy(obj)"
+extern "js" fn close_watcher_destroy_ffi(obj : JsValue) -> Unit = "(obj) => obj.destroy()"
 
 ///|
 impl TCloseWatcher with destroy(self : Self) -> Unit {

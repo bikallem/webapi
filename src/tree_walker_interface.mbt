@@ -78,7 +78,7 @@ impl TTreeWalker with set_current_node(self : Self, current_node : &TNode) -> Un
 }
 
 ///|
-extern "js" fn tree_walker_parent_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.parentNode(obj)"
+extern "js" fn tree_walker_parent_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.parentNode()"
 
 ///|
 impl TTreeWalker with parent_node(self : Self) -> Node? {
@@ -91,7 +91,7 @@ impl TTreeWalker with parent_node(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn tree_walker_first_child_ffi(obj : JsValue) -> JsValue = "(obj) => obj.firstChild(obj)"
+extern "js" fn tree_walker_first_child_ffi(obj : JsValue) -> JsValue = "(obj) => obj.firstChild()"
 
 ///|
 impl TTreeWalker with first_child(self : Self) -> Node? {
@@ -104,7 +104,7 @@ impl TTreeWalker with first_child(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn tree_walker_last_child_ffi(obj : JsValue) -> JsValue = "(obj) => obj.lastChild(obj)"
+extern "js" fn tree_walker_last_child_ffi(obj : JsValue) -> JsValue = "(obj) => obj.lastChild()"
 
 ///|
 impl TTreeWalker with last_child(self : Self) -> Node? {
@@ -117,7 +117,7 @@ impl TTreeWalker with last_child(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn tree_walker_previous_sibling_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousSibling(obj)"
+extern "js" fn tree_walker_previous_sibling_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousSibling()"
 
 ///|
 impl TTreeWalker with previous_sibling(self : Self) -> Node? {
@@ -130,7 +130,7 @@ impl TTreeWalker with previous_sibling(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn tree_walker_next_sibling_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextSibling(obj)"
+extern "js" fn tree_walker_next_sibling_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextSibling()"
 
 ///|
 impl TTreeWalker with next_sibling(self : Self) -> Node? {
@@ -143,7 +143,7 @@ impl TTreeWalker with next_sibling(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn tree_walker_previous_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousNode(obj)"
+extern "js" fn tree_walker_previous_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousNode()"
 
 ///|
 impl TTreeWalker with previous_node(self : Self) -> Node? {
@@ -156,7 +156,7 @@ impl TTreeWalker with previous_node(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn tree_walker_next_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextNode(obj)"
+extern "js" fn tree_walker_next_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextNode()"
 
 ///|
 impl TTreeWalker with next_node(self : Self) -> Node? {

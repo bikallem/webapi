@@ -55,7 +55,7 @@ impl TSVGGeometryElement with path_length(self : Self) -> SVGAnimatedNumber {
 extern "js" fn svg_geometry_element_is_point_in_fill_ffi(
   obj : JsValue,
   point : JsValue,
-) -> Bool = "(obj, point) => obj.isPointInFill(obj, point)"
+) -> Bool = "(obj, point) => obj.isPointInFill(point)"
 
 ///|
 impl TSVGGeometryElement with is_point_in_fill(
@@ -72,7 +72,7 @@ impl TSVGGeometryElement with is_point_in_fill(
 extern "js" fn svg_geometry_element_is_point_in_stroke_ffi(
   obj : JsValue,
   point : JsValue,
-) -> Bool = "(obj, point) => obj.isPointInStroke(obj, point)"
+) -> Bool = "(obj, point) => obj.isPointInStroke(point)"
 
 ///|
 impl TSVGGeometryElement with is_point_in_stroke(
@@ -88,7 +88,7 @@ impl TSVGGeometryElement with is_point_in_stroke(
 ///|
 extern "js" fn svg_geometry_element_get_total_length_ffi(
   obj : JsValue,
-) -> Float = "(obj) => obj.getTotalLength(obj)"
+) -> Float = "(obj) => obj.getTotalLength()"
 
 ///|
 impl TSVGGeometryElement with get_total_length(self : Self) -> Float {
@@ -99,7 +99,7 @@ impl TSVGGeometryElement with get_total_length(self : Self) -> Float {
 extern "js" fn svg_geometry_element_get_point_at_length_ffi(
   obj : JsValue,
   distance : JsValue,
-) -> DOMPoint = "(obj, distance) => obj.getPointAtLength(obj, distance)"
+) -> DOMPoint = "(obj, distance) => obj.getPointAtLength(distance)"
 
 ///|
 impl TSVGGeometryElement with get_point_at_length(self : Self, distance : Float) -> DOMPoint {

@@ -186,7 +186,7 @@ impl TLocation with set_hash(self : Self, hash : String) -> Unit {
 }
 
 ///|
-extern "js" fn location_assign_ffi(obj : JsValue, url : JsValue) -> Unit = "(obj, url) => obj.assign(obj, url)"
+extern "js" fn location_assign_ffi(obj : JsValue, url : JsValue) -> Unit = "(obj, url) => obj.assign(url)"
 
 ///|
 impl TLocation with assign(self : Self, url : String) -> Unit {
@@ -194,7 +194,7 @@ impl TLocation with assign(self : Self, url : String) -> Unit {
 }
 
 ///|
-extern "js" fn location_replace_ffi(obj : JsValue, url : JsValue) -> Unit = "(obj, url) => obj.replace(obj, url)"
+extern "js" fn location_replace_ffi(obj : JsValue, url : JsValue) -> Unit = "(obj, url) => obj.replace(url)"
 
 ///|
 impl TLocation with replace(self : Self, url : String) -> Unit {
@@ -202,7 +202,7 @@ impl TLocation with replace(self : Self, url : String) -> Unit {
 }
 
 ///|
-extern "js" fn location_reload_ffi(obj : JsValue) -> Unit = "(obj) => obj.reload(obj)"
+extern "js" fn location_reload_ffi(obj : JsValue) -> Unit = "(obj) => obj.reload()"
 
 ///|
 impl TLocation with reload(self : Self) -> Unit {

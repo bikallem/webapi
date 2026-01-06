@@ -103,7 +103,7 @@ extern "js" fn html_canvas_element_get_context_ffi(
   obj : JsValue,
   context_id : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, context_id, options) => obj.getContext(obj, context_id, options)"
+) -> JsValue = "(obj, context_id, options) => obj.getContext(context_id, options)"
 
 ///|
 impl THTMLCanvasElement with get_context(
@@ -128,7 +128,7 @@ extern "js" fn html_canvas_element_to_data_url_ffi(
   obj : JsValue,
   type_ : JsValue,
   quality : JsValue,
-) -> String = "(obj, type_, quality) => obj.toDataURL(obj, type_, quality)"
+) -> String = "(obj, type_, quality) => obj.toDataURL(type_, quality)"
 
 ///|
 impl THTMLCanvasElement with to_data_url(
@@ -149,7 +149,7 @@ extern "js" fn html_canvas_element_to_blob_ffi(
   _callback : JsValue,
   type_ : JsValue,
   quality : JsValue,
-) -> Unit = "(obj, _callback, type_, quality) => obj.toBlob(obj, _callback, type_, quality)"
+) -> Unit = "(obj, _callback, type_, quality) => obj.toBlob(_callback, type_, quality)"
 
 ///|
 impl THTMLCanvasElement with to_blob(
@@ -169,7 +169,7 @@ impl THTMLCanvasElement with to_blob(
 ///|
 extern "js" fn html_canvas_element_transfer_control_to_offscreen_ffi(
   obj : JsValue,
-) -> OffscreenCanvas = "(obj) => obj.transferControlToOffscreen(obj)"
+) -> OffscreenCanvas = "(obj) => obj.transferControlToOffscreen()"
 
 ///|
 impl THTMLCanvasElement with transfer_control_to_offscreen(self : Self) -> OffscreenCanvas {

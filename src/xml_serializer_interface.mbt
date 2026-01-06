@@ -32,7 +32,7 @@ pub trait TXMLSerializer: TJsValue {
 extern "js" fn xml_serializer_serialize_to_string_ffi(
   obj : JsValue,
   root : JsValue,
-) -> String = "(obj, root) => obj.serializeToString(obj, root)"
+) -> String = "(obj, root) => obj.serializeToString(root)"
 
 ///|
 impl TXMLSerializer with serialize_to_string(self : Self, root : &TNode) -> String {

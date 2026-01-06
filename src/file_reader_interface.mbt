@@ -88,7 +88,7 @@ pub trait TFileReader: TEventTarget {
 extern "js" fn file_reader_read_as_array_buffer_ffi(
   obj : JsValue,
   blob : JsValue,
-) -> Unit = "(obj, blob) => obj.readAsArrayBuffer(obj, blob)"
+) -> Unit = "(obj, blob) => obj.readAsArrayBuffer(blob)"
 
 ///|
 impl TFileReader with read_as_array_buffer(self : Self, blob : &TBlob) -> Unit {
@@ -102,7 +102,7 @@ impl TFileReader with read_as_array_buffer(self : Self, blob : &TBlob) -> Unit {
 extern "js" fn file_reader_read_as_binary_string_ffi(
   obj : JsValue,
   blob : JsValue,
-) -> Unit = "(obj, blob) => obj.readAsBinaryString(obj, blob)"
+) -> Unit = "(obj, blob) => obj.readAsBinaryString(blob)"
 
 ///|
 impl TFileReader with read_as_binary_string(self : Self, blob : &TBlob) -> Unit {
@@ -117,7 +117,7 @@ extern "js" fn file_reader_read_as_text_ffi(
   obj : JsValue,
   blob : JsValue,
   encoding : JsValue,
-) -> Unit = "(obj, blob, encoding) => obj.readAsText(obj, blob, encoding)"
+) -> Unit = "(obj, blob, encoding) => obj.readAsText(blob, encoding)"
 
 ///|
 impl TFileReader with read_as_text(
@@ -136,7 +136,7 @@ impl TFileReader with read_as_text(
 extern "js" fn file_reader_read_as_data_url_ffi(
   obj : JsValue,
   blob : JsValue,
-) -> Unit = "(obj, blob) => obj.readAsDataURL(obj, blob)"
+) -> Unit = "(obj, blob) => obj.readAsDataURL(blob)"
 
 ///|
 impl TFileReader with read_as_data_url(self : Self, blob : &TBlob) -> Unit {
@@ -144,7 +144,7 @@ impl TFileReader with read_as_data_url(self : Self, blob : &TBlob) -> Unit {
 }
 
 ///|
-extern "js" fn file_reader_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort(obj)"
+extern "js" fn file_reader_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort()"
 
 ///|
 impl TFileReader with abort(self : Self) -> Unit {

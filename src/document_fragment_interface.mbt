@@ -85,7 +85,7 @@ pub trait TDocumentFragment: TNode {
 extern "js" fn document_fragment_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
-) -> JsValue = "(obj, element_id) => obj.getElementById(obj, element_id)"
+) -> JsValue = "(obj, element_id) => obj.getElementById(element_id)"
 
 ///|
 impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element? {
@@ -140,7 +140,7 @@ impl TDocumentFragment with child_element_count(self : Self) -> UInt {
 extern "js" fn document_fragment_prepend_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.prepend(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.prepend(nodes)"
 
 ///|
 impl TDocumentFragment with prepend(
@@ -154,7 +154,7 @@ impl TDocumentFragment with prepend(
 extern "js" fn document_fragment_append_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.append(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.append(nodes)"
 
 ///|
 impl TDocumentFragment with append(
@@ -168,7 +168,7 @@ impl TDocumentFragment with append(
 extern "js" fn document_fragment_replace_children_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceChildren(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceChildren(nodes)"
 
 ///|
 impl TDocumentFragment with replace_children(
@@ -183,7 +183,7 @@ extern "js" fn document_fragment_move_before_ffi(
   obj : JsValue,
   node : JsValue,
   child : JsValue,
-) -> Unit = "(obj, node, child) => obj.moveBefore(obj, node, child)"
+) -> Unit = "(obj, node, child) => obj.moveBefore(node, child)"
 
 ///|
 impl TDocumentFragment with move_before(
@@ -202,7 +202,7 @@ impl TDocumentFragment with move_before(
 extern "js" fn document_fragment_query_selector_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> JsValue = "(obj, selectors) => obj.querySelector(obj, selectors)"
+) -> JsValue = "(obj, selectors) => obj.querySelector(selectors)"
 
 ///|
 impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element? {
@@ -221,7 +221,7 @@ impl TDocumentFragment with query_selector(self : Self, selectors : String) -> E
 extern "js" fn document_fragment_query_selector_all_ffi(
   obj : JsValue,
   selectors : JsValue,
-) -> NodeList = "(obj, selectors) => obj.querySelectorAll(obj, selectors)"
+) -> NodeList = "(obj, selectors) => obj.querySelectorAll(selectors)"
 
 ///|
 impl TDocumentFragment with query_selector_all(self : Self, selectors : String) -> NodeList {

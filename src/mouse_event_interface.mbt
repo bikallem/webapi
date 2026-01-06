@@ -185,7 +185,7 @@ impl TMouseEvent with related_target(self : Self) -> EventTarget {
 extern "js" fn mouse_event_get_modifier_state_ffi(
   obj : JsValue,
   key_arg : JsValue,
-) -> Bool = "(obj, key_arg) => obj.getModifierState(obj, key_arg)"
+) -> Bool = "(obj, key_arg) => obj.getModifierState(key_arg)"
 
 ///|
 impl TMouseEvent with get_modifier_state(self : Self, key_arg : String) -> Bool {
@@ -213,7 +213,7 @@ extern "js" fn mouse_event_init_mouse_event_ffi(
   meta_key_arg : JsValue,
   button_arg : JsValue,
   related_target_arg : JsValue,
-) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg) => obj.initMouseEvent(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg)"
+) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg) => obj.initMouseEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg)"
 
 ///|
 impl TMouseEvent with init_mouse_event(

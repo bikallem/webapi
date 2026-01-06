@@ -86,7 +86,7 @@ extern "js" fn element_internals_set_form_value_ffi(
   obj : JsValue,
   value : JsValue,
   state : JsValue,
-) -> Unit = "(obj, value, state) => obj.setFormValue(obj, value, state)"
+) -> Unit = "(obj, value, state) => obj.setFormValue(value, state)"
 
 ///|
 impl TElementInternals with set_form_value(
@@ -118,7 +118,7 @@ extern "js" fn element_internals_set_validity_ffi(
   flags : JsValue,
   message : JsValue,
   anchor : JsValue,
-) -> Unit = "(obj, flags, message, anchor) => obj.setValidity(obj, flags, message, anchor)"
+) -> Unit = "(obj, flags, message, anchor) => obj.setValidity(flags, message, anchor)"
 
 ///|
 impl TElementInternals with set_validity(
@@ -162,7 +162,7 @@ impl TElementInternals with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn element_internals_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn element_internals_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl TElementInternals with check_validity(self : Self) -> Bool {
@@ -170,7 +170,7 @@ impl TElementInternals with check_validity(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn element_internals_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity(obj)"
+extern "js" fn element_internals_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl TElementInternals with report_validity(self : Self) -> Bool {

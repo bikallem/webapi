@@ -62,7 +62,7 @@ extern "js" fn css_style_sheet_insert_rule_ffi(
   obj : JsValue,
   rule : JsValue,
   index : JsValue,
-) -> UInt = "(obj, rule, index) => obj.insertRule(obj, rule, index)"
+) -> UInt = "(obj, rule, index) => obj.insertRule(rule, index)"
 
 ///|
 impl TCSSStyleSheet with insert_rule(
@@ -81,7 +81,7 @@ impl TCSSStyleSheet with insert_rule(
 extern "js" fn css_style_sheet_delete_rule_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.deleteRule(obj, index)"
+) -> Unit = "(obj, index) => obj.deleteRule(index)"
 
 ///|
 impl TCSSStyleSheet with delete_rule(self : Self, index : UInt) -> Unit {
@@ -92,7 +92,7 @@ impl TCSSStyleSheet with delete_rule(self : Self, index : UInt) -> Unit {
 extern "js" fn css_style_sheet_replace_ffi(
   obj : JsValue,
   text : JsValue,
-) -> JsPromise[CSSStyleSheet] = "(obj, text) => obj.replace(obj, text)"
+) -> JsPromise[CSSStyleSheet] = "(obj, text) => obj.replace(text)"
 
 ///|
 impl TCSSStyleSheet with replace(self : Self, text : String) -> JsPromise[
@@ -105,7 +105,7 @@ impl TCSSStyleSheet with replace(self : Self, text : String) -> JsPromise[
 extern "js" fn css_style_sheet_replace_sync_ffi(
   obj : JsValue,
   text : JsValue,
-) -> Unit = "(obj, text) => obj.replaceSync(obj, text)"
+) -> Unit = "(obj, text) => obj.replaceSync(text)"
 
 ///|
 impl TCSSStyleSheet with replace_sync(self : Self, text : String) -> Unit {
@@ -126,7 +126,7 @@ extern "js" fn css_style_sheet_add_rule_ffi(
   selector : JsValue,
   style : JsValue,
   index : JsValue,
-) -> Int = "(obj, selector, style, index) => obj.addRule(obj, selector, style, index)"
+) -> Int = "(obj, selector, style, index) => obj.addRule(selector, style, index)"
 
 ///|
 impl TCSSStyleSheet with add_rule(
@@ -147,7 +147,7 @@ impl TCSSStyleSheet with add_rule(
 extern "js" fn css_style_sheet_remove_rule_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.removeRule(obj, index)"
+) -> Unit = "(obj, index) => obj.removeRule(index)"
 
 ///|
 impl TCSSStyleSheet with remove_rule(self : Self, index? : UInt = (0 : UInt)) -> Unit {

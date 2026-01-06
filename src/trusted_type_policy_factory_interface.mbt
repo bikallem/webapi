@@ -52,7 +52,7 @@ extern "js" fn trusted_type_policy_factory_create_policy_ffi(
   obj : JsValue,
   policy_name : JsValue,
   policy_options : JsValue,
-) -> TrustedTypePolicy = "(obj, policy_name, policy_options) => obj.createPolicy(obj, policy_name, policy_options)"
+) -> TrustedTypePolicy = "(obj, policy_name, policy_options) => obj.createPolicy(policy_name, policy_options)"
 
 ///|
 impl TTrustedTypePolicyFactory with create_policy(
@@ -71,7 +71,7 @@ impl TTrustedTypePolicyFactory with create_policy(
 extern "js" fn trusted_type_policy_factory_is_html_ffi(
   obj : JsValue,
   value : JsValue,
-) -> Bool = "(obj, value) => obj.isHTML(obj, value)"
+) -> Bool = "(obj, value) => obj.isHTML(value)"
 
 ///|
 impl TTrustedTypePolicyFactory with is_html(self : Self, value : JsValue) -> Bool {
@@ -85,7 +85,7 @@ impl TTrustedTypePolicyFactory with is_html(self : Self, value : JsValue) -> Boo
 extern "js" fn trusted_type_policy_factory_is_script_ffi(
   obj : JsValue,
   value : JsValue,
-) -> Bool = "(obj, value) => obj.isScript(obj, value)"
+) -> Bool = "(obj, value) => obj.isScript(value)"
 
 ///|
 impl TTrustedTypePolicyFactory with is_script(self : Self, value : JsValue) -> Bool {
@@ -99,7 +99,7 @@ impl TTrustedTypePolicyFactory with is_script(self : Self, value : JsValue) -> B
 extern "js" fn trusted_type_policy_factory_is_script_url_ffi(
   obj : JsValue,
   value : JsValue,
-) -> Bool = "(obj, value) => obj.isScriptURL(obj, value)"
+) -> Bool = "(obj, value) => obj.isScriptURL(value)"
 
 ///|
 impl TTrustedTypePolicyFactory with is_script_url(self : Self, value : JsValue) -> Bool {
@@ -136,7 +136,7 @@ extern "js" fn trusted_type_policy_factory_get_attribute_type_ffi(
   attribute : JsValue,
   element_ns : JsValue,
   attr_ns : JsValue,
-) -> JsValue = "(obj, tag_name, attribute, element_ns, attr_ns) => obj.getAttributeType(obj, tag_name, attribute, element_ns, attr_ns)"
+) -> JsValue = "(obj, tag_name, attribute, element_ns, attr_ns) => obj.getAttributeType(tag_name, attribute, element_ns, attr_ns)"
 
 ///|
 impl TTrustedTypePolicyFactory with get_attribute_type(
@@ -166,7 +166,7 @@ extern "js" fn trusted_type_policy_factory_get_property_type_ffi(
   tag_name : JsValue,
   property : JsValue,
   element_ns : JsValue,
-) -> JsValue = "(obj, tag_name, property, element_ns) => obj.getPropertyType(obj, tag_name, property, element_ns)"
+) -> JsValue = "(obj, tag_name, property, element_ns) => obj.getPropertyType(tag_name, property, element_ns)"
 
 ///|
 impl TTrustedTypePolicyFactory with get_property_type(

@@ -68,7 +68,7 @@ impl TImageBitmapRenderingContext with canvas(self : Self) -> ImageBitmapRenderi
 extern "js" fn image_bitmap_rendering_context_transfer_from_image_bitmap_ffi(
   obj : JsValue,
   bitmap : JsValue,
-) -> Unit = "(obj, bitmap) => obj.transferFromImageBitmap(obj, bitmap)"
+) -> Unit = "(obj, bitmap) => obj.transferFromImageBitmap(bitmap)"
 
 ///|
 impl TImageBitmapRenderingContext with transfer_from_image_bitmap(

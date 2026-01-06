@@ -48,7 +48,7 @@ pub trait TNavigation: TEventTarget {
 ///|
 extern "js" fn navigation_entries_ffi(
   obj : JsValue,
-) -> Array[NavigationHistoryEntry] = "(obj) => obj.entries(obj)"
+) -> Array[NavigationHistoryEntry] = "(obj) => obj.entries()"
 
 ///|
 impl TNavigation with entries(self : Self) -> Array[NavigationHistoryEntry] {
@@ -69,7 +69,7 @@ impl TNavigation with current_entry(self : Self) -> NavigationHistoryEntry {
 extern "js" fn navigation_update_current_entry_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Unit = "(obj, options) => obj.updateCurrentEntry(obj, options)"
+) -> Unit = "(obj, options) => obj.updateCurrentEntry(options)"
 
 ///|
 impl TNavigation with update_current_entry(
@@ -119,7 +119,7 @@ extern "js" fn navigation_navigate_ffi(
   obj : JsValue,
   url : JsValue,
   options : JsValue,
-) -> NavigationResult = "(obj, url, options) => obj.navigate(obj, url, options)"
+) -> NavigationResult = "(obj, url, options) => obj.navigate(url, options)"
 
 ///|
 impl TNavigation with navigate(
@@ -138,7 +138,7 @@ impl TNavigation with navigate(
 extern "js" fn navigation_reload_ffi(
   obj : JsValue,
   options : JsValue,
-) -> NavigationResult = "(obj, options) => obj.reload(obj, options)"
+) -> NavigationResult = "(obj, options) => obj.reload(options)"
 
 ///|
 impl TNavigation with reload(
@@ -153,7 +153,7 @@ extern "js" fn navigation_traverse_to_ffi(
   obj : JsValue,
   key : JsValue,
   options : JsValue,
-) -> NavigationResult = "(obj, key, options) => obj.traverseTo(obj, key, options)"
+) -> NavigationResult = "(obj, key, options) => obj.traverseTo(key, options)"
 
 ///|
 impl TNavigation with traverse_to(
@@ -172,7 +172,7 @@ impl TNavigation with traverse_to(
 extern "js" fn navigation_back_ffi(
   obj : JsValue,
   options : JsValue,
-) -> NavigationResult = "(obj, options) => obj.back(obj, options)"
+) -> NavigationResult = "(obj, options) => obj.back(options)"
 
 ///|
 impl TNavigation with back(
@@ -186,7 +186,7 @@ impl TNavigation with back(
 extern "js" fn navigation_forward_ffi(
   obj : JsValue,
   options : JsValue,
-) -> NavigationResult = "(obj, options) => obj.forward(obj, options)"
+) -> NavigationResult = "(obj, options) => obj.forward(options)"
 
 ///|
 impl TNavigation with forward(

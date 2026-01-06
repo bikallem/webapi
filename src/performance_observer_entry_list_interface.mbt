@@ -29,7 +29,7 @@ pub trait TPerformanceObserverEntryList: TJsValue {
 ///|
 extern "js" fn performance_observer_entry_list_get_entries_ffi(
   obj : JsValue,
-) -> PerformanceEntryList = "(obj) => obj.getEntries(obj)"
+) -> PerformanceEntryList = "(obj) => obj.getEntries()"
 
 ///|
 impl TPerformanceObserverEntryList with get_entries(self : Self) -> PerformanceEntryList {
@@ -40,7 +40,7 @@ impl TPerformanceObserverEntryList with get_entries(self : Self) -> PerformanceE
 extern "js" fn performance_observer_entry_list_get_entries_by_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList = "(obj, type_) => obj.getEntriesByType(obj, type_)"
+) -> PerformanceEntryList = "(obj, type_) => obj.getEntriesByType(type_)"
 
 ///|
 impl TPerformanceObserverEntryList with get_entries_by_type(
@@ -58,7 +58,7 @@ extern "js" fn performance_observer_entry_list_get_entries_by_name_ffi(
   obj : JsValue,
   name : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList = "(obj, name, type_) => obj.getEntriesByName(obj, name, type_)"
+) -> PerformanceEntryList = "(obj, name, type_) => obj.getEntriesByName(name, type_)"
 
 ///|
 impl TPerformanceObserverEntryList with get_entries_by_name(

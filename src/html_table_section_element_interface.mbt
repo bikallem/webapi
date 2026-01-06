@@ -68,7 +68,7 @@ impl THTMLTableSectionElement with rows(self : Self) -> HTMLCollection {
 extern "js" fn html_table_section_element_insert_row_ffi(
   obj : JsValue,
   index : JsValue,
-) -> HTMLTableRowElement = "(obj, index) => obj.insertRow(obj, index)"
+) -> HTMLTableRowElement = "(obj, index) => obj.insertRow(index)"
 
 ///|
 impl THTMLTableSectionElement with insert_row(
@@ -85,7 +85,7 @@ impl THTMLTableSectionElement with insert_row(
 extern "js" fn html_table_section_element_delete_row_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.deleteRow(obj, index)"
+) -> Unit = "(obj, index) => obj.deleteRow(index)"
 
 ///|
 impl THTMLTableSectionElement with delete_row(self : Self, index : Int) -> Unit {

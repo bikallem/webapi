@@ -81,7 +81,7 @@ impl TPerformanceEntry with navigation_id(self : Self) -> UInt64 {
 }
 
 ///|
-extern "js" fn performance_entry_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON(obj)"
+extern "js" fn performance_entry_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TPerformanceEntry with to_json(self : Self) -> JsValue {

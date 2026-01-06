@@ -132,7 +132,7 @@ extern "js" fn path2d_add_path_ffi(
   obj : JsValue,
   path : JsValue,
   transform : JsValue,
-) -> Unit = "(obj, path, transform) => obj.addPath(obj, path, transform)"
+) -> Unit = "(obj, path, transform) => obj.addPath(path, transform)"
 
 ///|
 impl TPath2D with add_path(
@@ -148,7 +148,7 @@ impl TPath2D with add_path(
 }
 
 ///|
-extern "js" fn path2d_close_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.closePath(obj)"
+extern "js" fn path2d_close_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.closePath()"
 
 ///|
 impl TPath2D with close_path(self : Self) -> Unit {
@@ -160,7 +160,7 @@ extern "js" fn path2d_move_to_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.moveTo(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
 
 ///|
 impl TPath2D with move_to(self : Self, x : Double, y : Double) -> Unit {
@@ -176,7 +176,7 @@ extern "js" fn path2d_line_to_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.lineTo(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.lineTo(x, y)"
 
 ///|
 impl TPath2D with line_to(self : Self, x : Double, y : Double) -> Unit {
@@ -194,7 +194,7 @@ extern "js" fn path2d_quadratic_curve_to_ffi(
   cpy : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, cpx, cpy, x, y) => obj.quadraticCurveTo(obj, cpx, cpy, x, y)"
+) -> Unit = "(obj, cpx, cpy, x, y) => obj.quadraticCurveTo(cpx, cpy, x, y)"
 
 ///|
 impl TPath2D with quadratic_curve_to(
@@ -222,7 +222,7 @@ extern "js" fn path2d_bezier_curve_to_ffi(
   cp2y : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, cp1x, cp1y, cp2x, cp2y, x, y) => obj.bezierCurveTo(obj, cp1x, cp1y, cp2x, cp2y, x, y)"
+) -> Unit = "(obj, cp1x, cp1y, cp2x, cp2y, x, y) => obj.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)"
 
 ///|
 impl TPath2D with bezier_curve_to(
@@ -253,7 +253,7 @@ extern "js" fn path2d_arc_to_ffi(
   x2 : JsValue,
   y2 : JsValue,
   radius : JsValue,
-) -> Unit = "(obj, x1, y1, x2, y2, radius) => obj.arcTo(obj, x1, y1, x2, y2, radius)"
+) -> Unit = "(obj, x1, y1, x2, y2, radius) => obj.arcTo(x1, y1, x2, y2, radius)"
 
 ///|
 impl TPath2D with arc_to(
@@ -281,7 +281,7 @@ extern "js" fn path2d_rect_ffi(
   y : JsValue,
   w : JsValue,
   h : JsValue,
-) -> Unit = "(obj, x, y, w, h) => obj.rect(obj, x, y, w, h)"
+) -> Unit = "(obj, x, y, w, h) => obj.rect(x, y, w, h)"
 
 ///|
 impl TPath2D with rect(
@@ -308,7 +308,7 @@ extern "js" fn path2d_round_rect_ffi(
   w : JsValue,
   h : JsValue,
   radii : JsValue,
-) -> Unit = "(obj, x, y, w, h, radii) => obj.roundRect(obj, x, y, w, h, radii)"
+) -> Unit = "(obj, x, y, w, h, radii) => obj.roundRect(x, y, w, h, radii)"
 
 ///|
 impl TPath2D with round_rect(
@@ -338,7 +338,7 @@ extern "js" fn path2d_arc_ffi(
   start_angle : JsValue,
   end_angle : JsValue,
   counterclockwise : JsValue,
-) -> Unit = "(obj, x, y, radius, start_angle, end_angle, counterclockwise) => obj.arc(obj, x, y, radius, start_angle, end_angle, counterclockwise)"
+) -> Unit = "(obj, x, y, radius, start_angle, end_angle, counterclockwise) => obj.arc(x, y, radius, start_angle, end_angle, counterclockwise)"
 
 ///|
 impl TPath2D with arc(
@@ -372,7 +372,7 @@ extern "js" fn path2d_ellipse_ffi(
   start_angle : JsValue,
   end_angle : JsValue,
   counterclockwise : JsValue,
-) -> Unit = "(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise) => obj.ellipse(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise)"
+) -> Unit = "(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise) => obj.ellipse(x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise)"
 
 ///|
 impl TPath2D with ellipse(

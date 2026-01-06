@@ -106,7 +106,7 @@ impl THTMLTableElement with set_caption(
 ///|
 extern "js" fn html_table_element_create_caption_ffi(
   obj : JsValue,
-) -> HTMLTableCaptionElement = "(obj) => obj.createCaption(obj)"
+) -> HTMLTableCaptionElement = "(obj) => obj.createCaption()"
 
 ///|
 impl THTMLTableElement with create_caption(self : Self) -> HTMLTableCaptionElement {
@@ -114,7 +114,7 @@ impl THTMLTableElement with create_caption(self : Self) -> HTMLTableCaptionEleme
 }
 
 ///|
-extern "js" fn html_table_element_delete_caption_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteCaption(obj)"
+extern "js" fn html_table_element_delete_caption_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteCaption()"
 
 ///|
 impl THTMLTableElement with delete_caption(self : Self) -> Unit {
@@ -151,7 +151,7 @@ impl THTMLTableElement with set_t_head(
 ///|
 extern "js" fn html_table_element_create_t_head_ffi(
   obj : JsValue,
-) -> HTMLTableSectionElement = "(obj) => obj.createTHead(obj)"
+) -> HTMLTableSectionElement = "(obj) => obj.createTHead()"
 
 ///|
 impl THTMLTableElement with create_t_head(self : Self) -> HTMLTableSectionElement {
@@ -159,7 +159,7 @@ impl THTMLTableElement with create_t_head(self : Self) -> HTMLTableSectionElemen
 }
 
 ///|
-extern "js" fn html_table_element_delete_t_head_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteTHead(obj)"
+extern "js" fn html_table_element_delete_t_head_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteTHead()"
 
 ///|
 impl THTMLTableElement with delete_t_head(self : Self) -> Unit {
@@ -196,7 +196,7 @@ impl THTMLTableElement with set_t_foot(
 ///|
 extern "js" fn html_table_element_create_t_foot_ffi(
   obj : JsValue,
-) -> HTMLTableSectionElement = "(obj) => obj.createTFoot(obj)"
+) -> HTMLTableSectionElement = "(obj) => obj.createTFoot()"
 
 ///|
 impl THTMLTableElement with create_t_foot(self : Self) -> HTMLTableSectionElement {
@@ -204,7 +204,7 @@ impl THTMLTableElement with create_t_foot(self : Self) -> HTMLTableSectionElemen
 }
 
 ///|
-extern "js" fn html_table_element_delete_t_foot_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteTFoot(obj)"
+extern "js" fn html_table_element_delete_t_foot_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteTFoot()"
 
 ///|
 impl THTMLTableElement with delete_t_foot(self : Self) -> Unit {
@@ -222,7 +222,7 @@ impl THTMLTableElement with t_bodies(self : Self) -> HTMLCollection {
 ///|
 extern "js" fn html_table_element_create_t_body_ffi(
   obj : JsValue,
-) -> HTMLTableSectionElement = "(obj) => obj.createTBody(obj)"
+) -> HTMLTableSectionElement = "(obj) => obj.createTBody()"
 
 ///|
 impl THTMLTableElement with create_t_body(self : Self) -> HTMLTableSectionElement {
@@ -241,7 +241,7 @@ impl THTMLTableElement with rows(self : Self) -> HTMLCollection {
 extern "js" fn html_table_element_insert_row_ffi(
   obj : JsValue,
   index : JsValue,
-) -> HTMLTableRowElement = "(obj, index) => obj.insertRow(obj, index)"
+) -> HTMLTableRowElement = "(obj, index) => obj.insertRow(index)"
 
 ///|
 impl THTMLTableElement with insert_row(self : Self, index? : Int = (-1 : Int)) -> HTMLTableRowElement {
@@ -255,7 +255,7 @@ impl THTMLTableElement with insert_row(self : Self, index? : Int = (-1 : Int)) -
 extern "js" fn html_table_element_delete_row_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.deleteRow(obj, index)"
+) -> Unit = "(obj, index) => obj.deleteRow(index)"
 
 ///|
 impl THTMLTableElement with delete_row(self : Self, index : Int) -> Unit {

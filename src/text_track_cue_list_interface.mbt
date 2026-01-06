@@ -35,7 +35,7 @@ impl TTextTrackCueList with length(self : Self) -> UInt {
 extern "js" fn text_track_cue_list_get_cue_by_id_ffi(
   obj : JsValue,
   id : JsValue,
-) -> JsValue = "(obj, id) => obj.getCueById(obj, id)"
+) -> JsValue = "(obj, id) => obj.getCueById(id)"
 
 ///|
 impl TTextTrackCueList with get_cue_by_id(self : Self, id : String) -> TextTrackCue? {

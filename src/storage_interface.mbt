@@ -31,7 +31,7 @@ impl TStorage with length(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.key(obj, index)"
+extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.key(index)"
 
 ///|
 impl TStorage with key(self : Self, index : UInt) -> String? {
@@ -44,7 +44,7 @@ impl TStorage with key(self : Self, index : UInt) -> String? {
 }
 
 ///|
-extern "js" fn storage_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear(obj)"
+extern "js" fn storage_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 impl TStorage with clear(self : Self) -> Unit {

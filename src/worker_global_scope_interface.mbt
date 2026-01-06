@@ -132,7 +132,7 @@ impl TWorkerGlobalScope with navigator(self : Self) -> WorkerNavigator {
 extern "js" fn worker_global_scope_import_scripts_ffi(
   obj : JsValue,
   urls : JsValue,
-) -> Unit = "(obj, urls) => obj.importScripts(obj, urls)"
+) -> Unit = "(obj, urls) => obj.importScripts(urls)"
 
 ///|
 impl TWorkerGlobalScope with import_scripts(
@@ -327,7 +327,7 @@ impl TWorkerGlobalScope with cross_origin_isolated(self : Self) -> Bool {
 extern "js" fn worker_global_scope_report_error_ffi(
   obj : JsValue,
   e : JsValue,
-) -> Unit = "(obj, e) => obj.reportError(obj, e)"
+) -> Unit = "(obj, e) => obj.reportError(e)"
 
 ///|
 impl TWorkerGlobalScope with report_error(self : Self, e : JsValue) -> Unit {
@@ -341,7 +341,7 @@ impl TWorkerGlobalScope with report_error(self : Self, e : JsValue) -> Unit {
 extern "js" fn worker_global_scope_btoa_ffi(
   obj : JsValue,
   data : JsValue,
-) -> String = "(obj, data) => obj.btoa(obj, data)"
+) -> String = "(obj, data) => obj.btoa(data)"
 
 ///|
 impl TWorkerGlobalScope with btoa(self : Self, data : String) -> String {
@@ -352,7 +352,7 @@ impl TWorkerGlobalScope with btoa(self : Self, data : String) -> String {
 extern "js" fn worker_global_scope_atob_ffi(
   obj : JsValue,
   data : JsValue,
-) -> String = "(obj, data) => obj.atob(obj, data)"
+) -> String = "(obj, data) => obj.atob(data)"
 
 ///|
 impl TWorkerGlobalScope with atob(self : Self, data : String) -> String {
@@ -365,7 +365,7 @@ extern "js" fn worker_global_scope_set_timeout_ffi(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setTimeout(obj, handler, timeout, arguments)"
+) -> Int = "(obj, handler, timeout, arguments) => obj.setTimeout(handler, timeout, arguments)"
 
 ///|
 impl TWorkerGlobalScope with set_timeout(
@@ -386,7 +386,7 @@ impl TWorkerGlobalScope with set_timeout(
 extern "js" fn worker_global_scope_clear_timeout_ffi(
   obj : JsValue,
   id : JsValue,
-) -> Unit = "(obj, id) => obj.clearTimeout(obj, id)"
+) -> Unit = "(obj, id) => obj.clearTimeout(id)"
 
 ///|
 impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
@@ -402,7 +402,7 @@ extern "js" fn worker_global_scope_set_interval_ffi(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setInterval(obj, handler, timeout, arguments)"
+) -> Int = "(obj, handler, timeout, arguments) => obj.setInterval(handler, timeout, arguments)"
 
 ///|
 impl TWorkerGlobalScope with set_interval(
@@ -423,7 +423,7 @@ impl TWorkerGlobalScope with set_interval(
 extern "js" fn worker_global_scope_clear_interval_ffi(
   obj : JsValue,
   id : JsValue,
-) -> Unit = "(obj, id) => obj.clearInterval(obj, id)"
+) -> Unit = "(obj, id) => obj.clearInterval(id)"
 
 ///|
 impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
@@ -437,7 +437,7 @@ impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = (0 : Int)) 
 extern "js" fn worker_global_scope_queue_microtask_ffi(
   obj : JsValue,
   callback : JsValue,
-) -> Unit = "(obj, callback) => obj.queueMicrotask(obj, callback)"
+) -> Unit = "(obj, callback) => obj.queueMicrotask(callback)"
 
 ///|
 impl TWorkerGlobalScope with queue_microtask(
@@ -455,7 +455,7 @@ extern "js" fn worker_global_scope_create_image_bitmap_ffi(
   obj : JsValue,
   image : JsValue,
   options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(obj, image, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(image, options)"
 
 ///|
 impl TWorkerGlobalScope with create_image_bitmap(
@@ -479,7 +479,7 @@ extern "js" fn worker_global_scope_create_image_bitmap_2_ffi(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(obj, image, sx, sy, sw, sh, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(image, sx, sy, sw, sh, options)"
 
 ///|
 impl TWorkerGlobalScope with create_image_bitmap_2(
@@ -507,7 +507,7 @@ extern "js" fn worker_global_scope_structured_clone_ffi(
   obj : JsValue,
   value : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, value, options) => obj.structuredClone(obj, value, options)"
+) -> JsValue = "(obj, value, options) => obj.structuredClone(value, options)"
 
 ///|
 impl TWorkerGlobalScope with structured_clone(
@@ -527,7 +527,7 @@ extern "js" fn worker_global_scope_fetch_ffi(
   obj : JsValue,
   input : JsValue,
   init : JsValue,
-) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(obj, input, init)"
+) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(input, init)"
 
 ///|
 impl TWorkerGlobalScope with fetch(

@@ -97,7 +97,7 @@ extern "js" fn range_set_start_ffi(
   obj : JsValue,
   node : JsValue,
   offset : JsValue,
-) -> Unit = "(obj, node, offset) => obj.setStart(obj, node, offset)"
+) -> Unit = "(obj, node, offset) => obj.setStart(node, offset)"
 
 ///|
 impl TRange with set_start(self : Self, node : &TNode, offset : UInt) -> Unit {
@@ -113,7 +113,7 @@ extern "js" fn range_set_end_ffi(
   obj : JsValue,
   node : JsValue,
   offset : JsValue,
-) -> Unit = "(obj, node, offset) => obj.setEnd(obj, node, offset)"
+) -> Unit = "(obj, node, offset) => obj.setEnd(node, offset)"
 
 ///|
 impl TRange with set_end(self : Self, node : &TNode, offset : UInt) -> Unit {
@@ -128,7 +128,7 @@ impl TRange with set_end(self : Self, node : &TNode, offset : UInt) -> Unit {
 extern "js" fn range_set_start_before_ffi(
   obj : JsValue,
   node : JsValue,
-) -> Unit = "(obj, node) => obj.setStartBefore(obj, node)"
+) -> Unit = "(obj, node) => obj.setStartBefore(node)"
 
 ///|
 impl TRange with set_start_before(self : Self, node : &TNode) -> Unit {
@@ -136,7 +136,7 @@ impl TRange with set_start_before(self : Self, node : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_set_start_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setStartAfter(obj, node)"
+extern "js" fn range_set_start_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setStartAfter(node)"
 
 ///|
 impl TRange with set_start_after(self : Self, node : &TNode) -> Unit {
@@ -144,7 +144,7 @@ impl TRange with set_start_after(self : Self, node : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_set_end_before_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndBefore(obj, node)"
+extern "js" fn range_set_end_before_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndBefore(node)"
 
 ///|
 impl TRange with set_end_before(self : Self, node : &TNode) -> Unit {
@@ -152,7 +152,7 @@ impl TRange with set_end_before(self : Self, node : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_set_end_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndAfter(obj, node)"
+extern "js" fn range_set_end_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndAfter(node)"
 
 ///|
 impl TRange with set_end_after(self : Self, node : &TNode) -> Unit {
@@ -160,7 +160,7 @@ impl TRange with set_end_after(self : Self, node : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_collapse_ffi(obj : JsValue, to_start : JsValue) -> Unit = "(obj, to_start) => obj.collapse(obj, to_start)"
+extern "js" fn range_collapse_ffi(obj : JsValue, to_start : JsValue) -> Unit = "(obj, to_start) => obj.collapse(to_start)"
 
 ///|
 impl TRange with collapse(self : Self, to_start? : Bool = false) -> Unit {
@@ -168,7 +168,7 @@ impl TRange with collapse(self : Self, to_start? : Bool = false) -> Unit {
 }
 
 ///|
-extern "js" fn range_select_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.selectNode(obj, node)"
+extern "js" fn range_select_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.selectNode(node)"
 
 ///|
 impl TRange with select_node(self : Self, node : &TNode) -> Unit {
@@ -179,7 +179,7 @@ impl TRange with select_node(self : Self, node : &TNode) -> Unit {
 extern "js" fn range_select_node_contents_ffi(
   obj : JsValue,
   node : JsValue,
-) -> Unit = "(obj, node) => obj.selectNodeContents(obj, node)"
+) -> Unit = "(obj, node) => obj.selectNodeContents(node)"
 
 ///|
 impl TRange with select_node_contents(self : Self, node : &TNode) -> Unit {
@@ -191,7 +191,7 @@ extern "js" fn range_compare_boundary_points_ffi(
   obj : JsValue,
   how : JsValue,
   source_range : JsValue,
-) -> Int = "(obj, how, source_range) => obj.compareBoundaryPoints(obj, how, source_range)"
+) -> Int = "(obj, how, source_range) => obj.compareBoundaryPoints(how, source_range)"
 
 ///|
 impl TRange with compare_boundary_points(
@@ -207,7 +207,7 @@ impl TRange with compare_boundary_points(
 }
 
 ///|
-extern "js" fn range_delete_contents_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteContents(obj)"
+extern "js" fn range_delete_contents_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteContents()"
 
 ///|
 impl TRange with delete_contents(self : Self) -> Unit {
@@ -215,7 +215,7 @@ impl TRange with delete_contents(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn range_extract_contents_ffi(obj : JsValue) -> DocumentFragment = "(obj) => obj.extractContents(obj)"
+extern "js" fn range_extract_contents_ffi(obj : JsValue) -> DocumentFragment = "(obj) => obj.extractContents()"
 
 ///|
 impl TRange with extract_contents(self : Self) -> DocumentFragment {
@@ -223,7 +223,7 @@ impl TRange with extract_contents(self : Self) -> DocumentFragment {
 }
 
 ///|
-extern "js" fn range_clone_contents_ffi(obj : JsValue) -> DocumentFragment = "(obj) => obj.cloneContents(obj)"
+extern "js" fn range_clone_contents_ffi(obj : JsValue) -> DocumentFragment = "(obj) => obj.cloneContents()"
 
 ///|
 impl TRange with clone_contents(self : Self) -> DocumentFragment {
@@ -231,7 +231,7 @@ impl TRange with clone_contents(self : Self) -> DocumentFragment {
 }
 
 ///|
-extern "js" fn range_insert_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.insertNode(obj, node)"
+extern "js" fn range_insert_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.insertNode(node)"
 
 ///|
 impl TRange with insert_node(self : Self, node : &TNode) -> Unit {
@@ -242,7 +242,7 @@ impl TRange with insert_node(self : Self, node : &TNode) -> Unit {
 extern "js" fn range_surround_contents_ffi(
   obj : JsValue,
   new_parent : JsValue,
-) -> Unit = "(obj, new_parent) => obj.surroundContents(obj, new_parent)"
+) -> Unit = "(obj, new_parent) => obj.surroundContents(new_parent)"
 
 ///|
 impl TRange with surround_contents(self : Self, new_parent : &TNode) -> Unit {
@@ -253,7 +253,7 @@ impl TRange with surround_contents(self : Self, new_parent : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_clone_range_ffi(obj : JsValue) -> Range = "(obj) => obj.cloneRange(obj)"
+extern "js" fn range_clone_range_ffi(obj : JsValue) -> Range = "(obj) => obj.cloneRange()"
 
 ///|
 impl TRange with clone_range(self : Self) -> Range {
@@ -261,7 +261,7 @@ impl TRange with clone_range(self : Self) -> Range {
 }
 
 ///|
-extern "js" fn range_detach_ffi(obj : JsValue) -> Unit = "(obj) => obj.detach(obj)"
+extern "js" fn range_detach_ffi(obj : JsValue) -> Unit = "(obj) => obj.detach()"
 
 ///|
 impl TRange with detach(self : Self) -> Unit {
@@ -273,7 +273,7 @@ extern "js" fn range_is_point_in_range_ffi(
   obj : JsValue,
   node : JsValue,
   offset : JsValue,
-) -> Bool = "(obj, node, offset) => obj.isPointInRange(obj, node, offset)"
+) -> Bool = "(obj, node, offset) => obj.isPointInRange(node, offset)"
 
 ///|
 impl TRange with is_point_in_range(self : Self, node : &TNode, offset : UInt) -> Bool {
@@ -289,7 +289,7 @@ extern "js" fn range_compare_point_ffi(
   obj : JsValue,
   node : JsValue,
   offset : JsValue,
-) -> Int = "(obj, node, offset) => obj.comparePoint(obj, node, offset)"
+) -> Int = "(obj, node, offset) => obj.comparePoint(node, offset)"
 
 ///|
 impl TRange with compare_point(self : Self, node : &TNode, offset : UInt) -> Int {
@@ -301,7 +301,7 @@ impl TRange with compare_point(self : Self, node : &TNode, offset : UInt) -> Int
 }
 
 ///|
-extern "js" fn range_intersects_node_ffi(obj : JsValue, node : JsValue) -> Bool = "(obj, node) => obj.intersectsNode(obj, node)"
+extern "js" fn range_intersects_node_ffi(obj : JsValue, node : JsValue) -> Bool = "(obj, node) => obj.intersectsNode(node)"
 
 ///|
 impl TRange with intersects_node(self : Self, node : &TNode) -> Bool {
@@ -312,7 +312,7 @@ impl TRange with intersects_node(self : Self, node : &TNode) -> Bool {
 extern "js" fn range_create_contextual_fragment_ffi(
   obj : JsValue,
   string : JsValue,
-) -> DocumentFragment = "(obj, string) => obj.createContextualFragment(obj, string)"
+) -> DocumentFragment = "(obj, string) => obj.createContextualFragment(string)"
 
 ///|
 impl TRange with create_contextual_fragment(
@@ -323,7 +323,7 @@ impl TRange with create_contextual_fragment(
 }
 
 ///|
-extern "js" fn range_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "(obj) => obj.getClientRects(obj)"
+extern "js" fn range_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "(obj) => obj.getClientRects()"
 
 ///|
 impl TRange with get_client_rects(self : Self) -> DOMRectList {
@@ -331,7 +331,7 @@ impl TRange with get_client_rects(self : Self) -> DOMRectList {
 }
 
 ///|
-extern "js" fn range_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBoundingClientRect(obj)"
+extern "js" fn range_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBoundingClientRect()"
 
 ///|
 impl TRange with get_bounding_client_rect(self : Self) -> DOMRect {

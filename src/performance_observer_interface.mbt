@@ -40,7 +40,7 @@ pub trait TPerformanceObserver: TJsValue {
 extern "js" fn performance_observer_observe_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Unit = "(obj, options) => obj.observe(obj, options)"
+) -> Unit = "(obj, options) => obj.observe(options)"
 
 ///|
 impl TPerformanceObserver with observe(
@@ -54,7 +54,7 @@ impl TPerformanceObserver with observe(
 }
 
 ///|
-extern "js" fn performance_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect(obj)"
+extern "js" fn performance_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
 
 ///|
 impl TPerformanceObserver with disconnect(self : Self) -> Unit {
@@ -64,7 +64,7 @@ impl TPerformanceObserver with disconnect(self : Self) -> Unit {
 ///|
 extern "js" fn performance_observer_take_records_ffi(
   obj : JsValue,
-) -> PerformanceEntryList = "(obj) => obj.takeRecords(obj)"
+) -> PerformanceEntryList = "(obj) => obj.takeRecords()"
 
 ///|
 impl TPerformanceObserver with take_records(self : Self) -> PerformanceEntryList {

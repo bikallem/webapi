@@ -400,7 +400,7 @@ impl TCanvasRenderingContext2D with canvas(self : Self) -> HTMLCanvasElement {
 ///|
 extern "js" fn canvas_rendering_context2d_get_context_attributes_ffi(
   obj : JsValue,
-) -> CanvasRenderingContext2DSettings = "(obj) => obj.getContextAttributes(obj)"
+) -> CanvasRenderingContext2DSettings = "(obj) => obj.getContextAttributes()"
 
 ///|
 impl TCanvasRenderingContext2D with get_context_attributes(self : Self) -> CanvasRenderingContext2DSettings {
@@ -408,7 +408,7 @@ impl TCanvasRenderingContext2D with get_context_attributes(self : Self) -> Canva
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_save_ffi(obj : JsValue) -> Unit = "(obj) => obj.save(obj)"
+extern "js" fn canvas_rendering_context2d_save_ffi(obj : JsValue) -> Unit = "(obj) => obj.save()"
 
 ///|
 impl TCanvasRenderingContext2D with save(self : Self) -> Unit {
@@ -416,7 +416,7 @@ impl TCanvasRenderingContext2D with save(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_restore_ffi(obj : JsValue) -> Unit = "(obj) => obj.restore(obj)"
+extern "js" fn canvas_rendering_context2d_restore_ffi(obj : JsValue) -> Unit = "(obj) => obj.restore()"
 
 ///|
 impl TCanvasRenderingContext2D with restore(self : Self) -> Unit {
@@ -424,7 +424,7 @@ impl TCanvasRenderingContext2D with restore(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset(obj)"
+extern "js" fn canvas_rendering_context2d_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
 
 ///|
 impl TCanvasRenderingContext2D with reset(self : Self) -> Unit {
@@ -434,7 +434,7 @@ impl TCanvasRenderingContext2D with reset(self : Self) -> Unit {
 ///|
 extern "js" fn canvas_rendering_context2d_is_context_lost_ffi(
   obj : JsValue,
-) -> Bool = "(obj) => obj.isContextLost(obj)"
+) -> Bool = "(obj) => obj.isContextLost()"
 
 ///|
 impl TCanvasRenderingContext2D with is_context_lost(self : Self) -> Bool {
@@ -446,7 +446,7 @@ extern "js" fn canvas_rendering_context2d_scale_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.scale(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.scale(x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with scale(self : Self, x : Double, y : Double) -> Unit {
@@ -461,7 +461,7 @@ impl TCanvasRenderingContext2D with scale(self : Self, x : Double, y : Double) -
 extern "js" fn canvas_rendering_context2d_rotate_ffi(
   obj : JsValue,
   angle : JsValue,
-) -> Unit = "(obj, angle) => obj.rotate(obj, angle)"
+) -> Unit = "(obj, angle) => obj.rotate(angle)"
 
 ///|
 impl TCanvasRenderingContext2D with rotate(self : Self, angle : Double) -> Unit {
@@ -476,7 +476,7 @@ extern "js" fn canvas_rendering_context2d_translate_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.translate(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.translate(x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with translate(
@@ -500,7 +500,7 @@ extern "js" fn canvas_rendering_context2d_transform_ffi(
   d : JsValue,
   e : JsValue,
   f : JsValue,
-) -> Unit = "(obj, a, b, c, d, e, f) => obj.transform(obj, a, b, c, d, e, f)"
+) -> Unit = "(obj, a, b, c, d, e, f) => obj.transform(a, b, c, d, e, f)"
 
 ///|
 impl TCanvasRenderingContext2D with transform(
@@ -526,7 +526,7 @@ impl TCanvasRenderingContext2D with transform(
 ///|
 extern "js" fn canvas_rendering_context2d_get_transform_ffi(
   obj : JsValue,
-) -> DOMMatrix = "(obj) => obj.getTransform(obj)"
+) -> DOMMatrix = "(obj) => obj.getTransform()"
 
 ///|
 impl TCanvasRenderingContext2D with get_transform(self : Self) -> DOMMatrix {
@@ -542,7 +542,7 @@ extern "js" fn canvas_rendering_context2d_set_transform_ffi(
   d : JsValue,
   e : JsValue,
   f : JsValue,
-) -> Unit = "(obj, a, b, c, d, e, f) => obj.setTransform(obj, a, b, c, d, e, f)"
+) -> Unit = "(obj, a, b, c, d, e, f) => obj.setTransform(a, b, c, d, e, f)"
 
 ///|
 impl TCanvasRenderingContext2D with set_transform(
@@ -569,7 +569,7 @@ impl TCanvasRenderingContext2D with set_transform(
 extern "js" fn canvas_rendering_context2d_set_transform_2_ffi(
   obj : JsValue,
   transform : JsValue,
-) -> Unit = "(obj, transform) => obj.setTransform_2(obj, transform)"
+) -> Unit = "(obj, transform) => obj.setTransform_2(transform)"
 
 ///|
 impl TCanvasRenderingContext2D with set_transform_2(
@@ -585,7 +585,7 @@ impl TCanvasRenderingContext2D with set_transform_2(
 ///|
 extern "js" fn canvas_rendering_context2d_reset_transform_ffi(
   obj : JsValue,
-) -> Unit = "(obj) => obj.resetTransform(obj)"
+) -> Unit = "(obj) => obj.resetTransform()"
 
 ///|
 impl TCanvasRenderingContext2D with reset_transform(self : Self) -> Unit {
@@ -763,7 +763,7 @@ extern "js" fn canvas_rendering_context2d_create_linear_gradient_ffi(
   y0 : JsValue,
   x1 : JsValue,
   y1 : JsValue,
-) -> CanvasGradient = "(obj, x0, y0, x1, y1) => obj.createLinearGradient(obj, x0, y0, x1, y1)"
+) -> CanvasGradient = "(obj, x0, y0, x1, y1) => obj.createLinearGradient(x0, y0, x1, y1)"
 
 ///|
 impl TCanvasRenderingContext2D with create_linear_gradient(
@@ -791,7 +791,7 @@ extern "js" fn canvas_rendering_context2d_create_radial_gradient_ffi(
   x1 : JsValue,
   y1 : JsValue,
   r1 : JsValue,
-) -> CanvasGradient = "(obj, x0, y0, r0, x1, y1, r1) => obj.createRadialGradient(obj, x0, y0, r0, x1, y1, r1)"
+) -> CanvasGradient = "(obj, x0, y0, r0, x1, y1, r1) => obj.createRadialGradient(x0, y0, r0, x1, y1, r1)"
 
 ///|
 impl TCanvasRenderingContext2D with create_radial_gradient(
@@ -820,7 +820,7 @@ extern "js" fn canvas_rendering_context2d_create_conic_gradient_ffi(
   start_angle : JsValue,
   x : JsValue,
   y : JsValue,
-) -> CanvasGradient = "(obj, start_angle, x, y) => obj.createConicGradient(obj, start_angle, x, y)"
+) -> CanvasGradient = "(obj, start_angle, x, y) => obj.createConicGradient(start_angle, x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with create_conic_gradient(
@@ -842,7 +842,7 @@ extern "js" fn canvas_rendering_context2d_create_pattern_ffi(
   obj : JsValue,
   image : JsValue,
   repetition : JsValue,
-) -> JsValue = "(obj, image, repetition) => obj.createPattern(obj, image, repetition)"
+) -> JsValue = "(obj, image, repetition) => obj.createPattern(image, repetition)"
 
 ///|
 impl TCanvasRenderingContext2D with create_pattern(
@@ -999,7 +999,7 @@ extern "js" fn canvas_rendering_context2d_clear_rect_ffi(
   y : JsValue,
   w : JsValue,
   h : JsValue,
-) -> Unit = "(obj, x, y, w, h) => obj.clearRect(obj, x, y, w, h)"
+) -> Unit = "(obj, x, y, w, h) => obj.clearRect(x, y, w, h)"
 
 ///|
 impl TCanvasRenderingContext2D with clear_rect(
@@ -1025,7 +1025,7 @@ extern "js" fn canvas_rendering_context2d_fill_rect_ffi(
   y : JsValue,
   w : JsValue,
   h : JsValue,
-) -> Unit = "(obj, x, y, w, h) => obj.fillRect(obj, x, y, w, h)"
+) -> Unit = "(obj, x, y, w, h) => obj.fillRect(x, y, w, h)"
 
 ///|
 impl TCanvasRenderingContext2D with fill_rect(
@@ -1051,7 +1051,7 @@ extern "js" fn canvas_rendering_context2d_stroke_rect_ffi(
   y : JsValue,
   w : JsValue,
   h : JsValue,
-) -> Unit = "(obj, x, y, w, h) => obj.strokeRect(obj, x, y, w, h)"
+) -> Unit = "(obj, x, y, w, h) => obj.strokeRect(x, y, w, h)"
 
 ///|
 impl TCanvasRenderingContext2D with stroke_rect(
@@ -1071,7 +1071,7 @@ impl TCanvasRenderingContext2D with stroke_rect(
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_begin_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.beginPath(obj)"
+extern "js" fn canvas_rendering_context2d_begin_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.beginPath()"
 
 ///|
 impl TCanvasRenderingContext2D with begin_path(self : Self) -> Unit {
@@ -1082,7 +1082,7 @@ impl TCanvasRenderingContext2D with begin_path(self : Self) -> Unit {
 extern "js" fn canvas_rendering_context2d_fill_ffi(
   obj : JsValue,
   fill_rule : JsValue,
-) -> Unit = "(obj, fill_rule) => obj.fill(obj, fill_rule)"
+) -> Unit = "(obj, fill_rule) => obj.fill(fill_rule)"
 
 ///|
 impl TCanvasRenderingContext2D with fill(
@@ -1100,7 +1100,7 @@ extern "js" fn canvas_rendering_context2d_fill_2_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "(obj, path, fill_rule) => obj.fill_2(obj, path, fill_rule)"
+) -> Unit = "(obj, path, fill_rule) => obj.fill_2(path, fill_rule)"
 
 ///|
 impl TCanvasRenderingContext2D with fill_2(
@@ -1116,7 +1116,7 @@ impl TCanvasRenderingContext2D with fill_2(
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_stroke_ffi(obj : JsValue) -> Unit = "(obj) => obj.stroke(obj)"
+extern "js" fn canvas_rendering_context2d_stroke_ffi(obj : JsValue) -> Unit = "(obj) => obj.stroke()"
 
 ///|
 impl TCanvasRenderingContext2D with stroke(self : Self) -> Unit {
@@ -1127,7 +1127,7 @@ impl TCanvasRenderingContext2D with stroke(self : Self) -> Unit {
 extern "js" fn canvas_rendering_context2d_stroke_2_ffi(
   obj : JsValue,
   path : JsValue,
-) -> Unit = "(obj, path) => obj.stroke_2(obj, path)"
+) -> Unit = "(obj, path) => obj.stroke_2(path)"
 
 ///|
 impl TCanvasRenderingContext2D with stroke_2(self : Self, path : &TPath2D) -> Unit {
@@ -1141,7 +1141,7 @@ impl TCanvasRenderingContext2D with stroke_2(self : Self, path : &TPath2D) -> Un
 extern "js" fn canvas_rendering_context2d_clip_ffi(
   obj : JsValue,
   fill_rule : JsValue,
-) -> Unit = "(obj, fill_rule) => obj.clip(obj, fill_rule)"
+) -> Unit = "(obj, fill_rule) => obj.clip(fill_rule)"
 
 ///|
 impl TCanvasRenderingContext2D with clip(
@@ -1159,7 +1159,7 @@ extern "js" fn canvas_rendering_context2d_clip_2_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "(obj, path, fill_rule) => obj.clip_2(obj, path, fill_rule)"
+) -> Unit = "(obj, path, fill_rule) => obj.clip_2(path, fill_rule)"
 
 ///|
 impl TCanvasRenderingContext2D with clip_2(
@@ -1180,7 +1180,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_path_ffi(
   x : JsValue,
   y : JsValue,
   fill_rule : JsValue,
-) -> Bool = "(obj, x, y, fill_rule) => obj.isPointInPath(obj, x, y, fill_rule)"
+) -> Bool = "(obj, x, y, fill_rule) => obj.isPointInPath(x, y, fill_rule)"
 
 ///|
 impl TCanvasRenderingContext2D with is_point_in_path(
@@ -1204,7 +1204,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_path_2_ffi(
   x : JsValue,
   y : JsValue,
   fill_rule : JsValue,
-) -> Bool = "(obj, path, x, y, fill_rule) => obj.isPointInPath_2(obj, path, x, y, fill_rule)"
+) -> Bool = "(obj, path, x, y, fill_rule) => obj.isPointInPath_2(path, x, y, fill_rule)"
 
 ///|
 impl TCanvasRenderingContext2D with is_point_in_path_2(
@@ -1228,7 +1228,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_stroke_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Bool = "(obj, x, y) => obj.isPointInStroke(obj, x, y)"
+) -> Bool = "(obj, x, y) => obj.isPointInStroke(x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with is_point_in_stroke(
@@ -1249,7 +1249,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_stroke_2_ffi(
   path : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Bool = "(obj, path, x, y) => obj.isPointInStroke_2(obj, path, x, y)"
+) -> Bool = "(obj, path, x, y) => obj.isPointInStroke_2(path, x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with is_point_in_stroke_2(
@@ -1270,7 +1270,7 @@ impl TCanvasRenderingContext2D with is_point_in_stroke_2(
 extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_ffi(
   obj : JsValue,
   element : JsValue,
-) -> Unit = "(obj, element) => obj.drawFocusIfNeeded(obj, element)"
+) -> Unit = "(obj, element) => obj.drawFocusIfNeeded(element)"
 
 ///|
 impl TCanvasRenderingContext2D with draw_focus_if_needed(
@@ -1288,7 +1288,7 @@ extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_2_ffi(
   obj : JsValue,
   path : JsValue,
   element : JsValue,
-) -> Unit = "(obj, path, element) => obj.drawFocusIfNeeded_2(obj, path, element)"
+) -> Unit = "(obj, path, element) => obj.drawFocusIfNeeded_2(path, element)"
 
 ///|
 impl TCanvasRenderingContext2D with draw_focus_if_needed_2(
@@ -1310,7 +1310,7 @@ extern "js" fn canvas_rendering_context2d_fill_text_ffi(
   x : JsValue,
   y : JsValue,
   max_width : JsValue,
-) -> Unit = "(obj, text, x, y, max_width) => obj.fillText(obj, text, x, y, max_width)"
+) -> Unit = "(obj, text, x, y, max_width) => obj.fillText(text, x, y, max_width)"
 
 ///|
 impl TCanvasRenderingContext2D with fill_text(
@@ -1336,7 +1336,7 @@ extern "js" fn canvas_rendering_context2d_stroke_text_ffi(
   x : JsValue,
   y : JsValue,
   max_width : JsValue,
-) -> Unit = "(obj, text, x, y, max_width) => obj.strokeText(obj, text, x, y, max_width)"
+) -> Unit = "(obj, text, x, y, max_width) => obj.strokeText(text, x, y, max_width)"
 
 ///|
 impl TCanvasRenderingContext2D with stroke_text(
@@ -1359,7 +1359,7 @@ impl TCanvasRenderingContext2D with stroke_text(
 extern "js" fn canvas_rendering_context2d_measure_text_ffi(
   obj : JsValue,
   text : JsValue,
-) -> TextMetrics = "(obj, text) => obj.measureText(obj, text)"
+) -> TextMetrics = "(obj, text) => obj.measureText(text)"
 
 ///|
 impl TCanvasRenderingContext2D with measure_text(self : Self, text : String) -> TextMetrics {
@@ -1375,7 +1375,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_ffi(
   image : JsValue,
   dx : JsValue,
   dy : JsValue,
-) -> Unit = "(obj, image, dx, dy) => obj.drawImage(obj, image, dx, dy)"
+) -> Unit = "(obj, image, dx, dy) => obj.drawImage(image, dx, dy)"
 
 ///|
 impl TCanvasRenderingContext2D with draw_image(
@@ -1400,7 +1400,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_2_ffi(
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "(obj, image, dx, dy, dw, dh) => obj.drawImage_2(obj, image, dx, dy, dw, dh)"
+) -> Unit = "(obj, image, dx, dy, dw, dh) => obj.drawImage_2(image, dx, dy, dw, dh)"
 
 ///|
 impl TCanvasRenderingContext2D with draw_image_2(
@@ -1433,7 +1433,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_3_ffi(
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "(obj, image, sx, sy, sw, sh, dx, dy, dw, dh) => obj.drawImage_3(obj, image, sx, sy, sw, sh, dx, dy, dw, dh)"
+) -> Unit = "(obj, image, sx, sy, sw, sh, dx, dy, dw, dh) => obj.drawImage_3(image, sx, sy, sw, sh, dx, dy, dw, dh)"
 
 ///|
 impl TCanvasRenderingContext2D with draw_image_3(
@@ -1468,7 +1468,7 @@ extern "js" fn canvas_rendering_context2d_create_image_data_ffi(
   sw : JsValue,
   sh : JsValue,
   settings : JsValue,
-) -> ImageData = "(obj, sw, sh, settings) => obj.createImageData(obj, sw, sh, settings)"
+) -> ImageData = "(obj, sw, sh, settings) => obj.createImageData(sw, sh, settings)"
 
 ///|
 impl TCanvasRenderingContext2D with create_image_data(
@@ -1489,7 +1489,7 @@ impl TCanvasRenderingContext2D with create_image_data(
 extern "js" fn canvas_rendering_context2d_create_image_data_2_ffi(
   obj : JsValue,
   image_data : JsValue,
-) -> ImageData = "(obj, image_data) => obj.createImageData_2(obj, image_data)"
+) -> ImageData = "(obj, image_data) => obj.createImageData_2(image_data)"
 
 ///|
 impl TCanvasRenderingContext2D with create_image_data_2(
@@ -1510,7 +1510,7 @@ extern "js" fn canvas_rendering_context2d_get_image_data_ffi(
   sw : JsValue,
   sh : JsValue,
   settings : JsValue,
-) -> ImageData = "(obj, sx, sy, sw, sh, settings) => obj.getImageData(obj, sx, sy, sw, sh, settings)"
+) -> ImageData = "(obj, sx, sy, sw, sh, settings) => obj.getImageData(sx, sy, sw, sh, settings)"
 
 ///|
 impl TCanvasRenderingContext2D with get_image_data(
@@ -1537,7 +1537,7 @@ extern "js" fn canvas_rendering_context2d_put_image_data_ffi(
   image_data : JsValue,
   dx : JsValue,
   dy : JsValue,
-) -> Unit = "(obj, image_data, dx, dy) => obj.putImageData(obj, image_data, dx, dy)"
+) -> Unit = "(obj, image_data, dx, dy) => obj.putImageData(image_data, dx, dy)"
 
 ///|
 impl TCanvasRenderingContext2D with put_image_data(
@@ -1564,7 +1564,7 @@ extern "js" fn canvas_rendering_context2d_put_image_data_2_ffi(
   dirty_y : JsValue,
   dirty_width : JsValue,
   dirty_height : JsValue,
-) -> Unit = "(obj, image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height) => obj.putImageData_2(obj, image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height)"
+) -> Unit = "(obj, image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height) => obj.putImageData_2(image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height)"
 
 ///|
 impl TCanvasRenderingContext2D with put_image_data_2(
@@ -1701,7 +1701,7 @@ impl TCanvasRenderingContext2D with set_miter_limit(
 extern "js" fn canvas_rendering_context2d_set_line_dash_ffi(
   obj : JsValue,
   segments : JsValue,
-) -> Unit = "(obj, segments) => obj.setLineDash(obj, segments)"
+) -> Unit = "(obj, segments) => obj.setLineDash(segments)"
 
 ///|
 impl TCanvasRenderingContext2D with set_line_dash(
@@ -1717,7 +1717,7 @@ impl TCanvasRenderingContext2D with set_line_dash(
 ///|
 extern "js" fn canvas_rendering_context2d_get_line_dash_ffi(
   obj : JsValue,
-) -> Array[Double] = "(obj) => obj.getLineDash(obj)"
+) -> Array[Double] = "(obj) => obj.getLineDash()"
 
 ///|
 impl TCanvasRenderingContext2D with get_line_dash(self : Self) -> Array[Double] {
@@ -2039,7 +2039,7 @@ impl TCanvasRenderingContext2D with set_word_spacing(
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_close_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.closePath(obj)"
+extern "js" fn canvas_rendering_context2d_close_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.closePath()"
 
 ///|
 impl TCanvasRenderingContext2D with close_path(self : Self) -> Unit {
@@ -2051,7 +2051,7 @@ extern "js" fn canvas_rendering_context2d_move_to_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.moveTo(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with move_to(self : Self, x : Double, y : Double) -> Unit {
@@ -2067,7 +2067,7 @@ extern "js" fn canvas_rendering_context2d_line_to_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.lineTo(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.lineTo(x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with line_to(self : Self, x : Double, y : Double) -> Unit {
@@ -2085,7 +2085,7 @@ extern "js" fn canvas_rendering_context2d_quadratic_curve_to_ffi(
   cpy : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, cpx, cpy, x, y) => obj.quadraticCurveTo(obj, cpx, cpy, x, y)"
+) -> Unit = "(obj, cpx, cpy, x, y) => obj.quadraticCurveTo(cpx, cpy, x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with quadratic_curve_to(
@@ -2113,7 +2113,7 @@ extern "js" fn canvas_rendering_context2d_bezier_curve_to_ffi(
   cp2y : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, cp1x, cp1y, cp2x, cp2y, x, y) => obj.bezierCurveTo(obj, cp1x, cp1y, cp2x, cp2y, x, y)"
+) -> Unit = "(obj, cp1x, cp1y, cp2x, cp2y, x, y) => obj.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)"
 
 ///|
 impl TCanvasRenderingContext2D with bezier_curve_to(
@@ -2144,7 +2144,7 @@ extern "js" fn canvas_rendering_context2d_arc_to_ffi(
   x2 : JsValue,
   y2 : JsValue,
   radius : JsValue,
-) -> Unit = "(obj, x1, y1, x2, y2, radius) => obj.arcTo(obj, x1, y1, x2, y2, radius)"
+) -> Unit = "(obj, x1, y1, x2, y2, radius) => obj.arcTo(x1, y1, x2, y2, radius)"
 
 ///|
 impl TCanvasRenderingContext2D with arc_to(
@@ -2172,7 +2172,7 @@ extern "js" fn canvas_rendering_context2d_rect_ffi(
   y : JsValue,
   w : JsValue,
   h : JsValue,
-) -> Unit = "(obj, x, y, w, h) => obj.rect(obj, x, y, w, h)"
+) -> Unit = "(obj, x, y, w, h) => obj.rect(x, y, w, h)"
 
 ///|
 impl TCanvasRenderingContext2D with rect(
@@ -2199,7 +2199,7 @@ extern "js" fn canvas_rendering_context2d_round_rect_ffi(
   w : JsValue,
   h : JsValue,
   radii : JsValue,
-) -> Unit = "(obj, x, y, w, h, radii) => obj.roundRect(obj, x, y, w, h, radii)"
+) -> Unit = "(obj, x, y, w, h, radii) => obj.roundRect(x, y, w, h, radii)"
 
 ///|
 impl TCanvasRenderingContext2D with round_rect(
@@ -2229,7 +2229,7 @@ extern "js" fn canvas_rendering_context2d_arc_ffi(
   start_angle : JsValue,
   end_angle : JsValue,
   counterclockwise : JsValue,
-) -> Unit = "(obj, x, y, radius, start_angle, end_angle, counterclockwise) => obj.arc(obj, x, y, radius, start_angle, end_angle, counterclockwise)"
+) -> Unit = "(obj, x, y, radius, start_angle, end_angle, counterclockwise) => obj.arc(x, y, radius, start_angle, end_angle, counterclockwise)"
 
 ///|
 impl TCanvasRenderingContext2D with arc(
@@ -2263,7 +2263,7 @@ extern "js" fn canvas_rendering_context2d_ellipse_ffi(
   start_angle : JsValue,
   end_angle : JsValue,
   counterclockwise : JsValue,
-) -> Unit = "(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise) => obj.ellipse(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise)"
+) -> Unit = "(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise) => obj.ellipse(x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise)"
 
 ///|
 impl TCanvasRenderingContext2D with ellipse(

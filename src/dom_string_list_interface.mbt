@@ -33,7 +33,7 @@ impl TDOMStringList with length(self : Self) -> UInt {
 extern "js" fn dom_string_list_contains_ffi(
   obj : JsValue,
   string : JsValue,
-) -> Bool = "(obj, string) => obj.contains(obj, string)"
+) -> Bool = "(obj, string) => obj.contains(string)"
 
 ///|
 impl TDOMStringList with contains(self : Self, string : String) -> Bool {

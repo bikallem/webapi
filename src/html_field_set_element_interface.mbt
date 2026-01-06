@@ -155,7 +155,7 @@ impl THTMLFieldSetElement with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn html_field_set_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn html_field_set_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl THTMLFieldSetElement with check_validity(self : Self) -> Bool {
@@ -165,7 +165,7 @@ impl THTMLFieldSetElement with check_validity(self : Self) -> Bool {
 ///|
 extern "js" fn html_field_set_element_report_validity_ffi(
   obj : JsValue,
-) -> Bool = "(obj) => obj.reportValidity(obj)"
+) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl THTMLFieldSetElement with report_validity(self : Self) -> Bool {
@@ -176,7 +176,7 @@ impl THTMLFieldSetElement with report_validity(self : Self) -> Bool {
 extern "js" fn html_field_set_element_set_custom_validity_ffi(
   obj : JsValue,
   error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(obj, error)"
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 impl THTMLFieldSetElement with set_custom_validity(self : Self, error : String) -> Unit {

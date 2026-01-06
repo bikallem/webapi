@@ -1965,7 +1965,7 @@ impl TSVGElement with set_tab_index(self : Self, tab_index : Int) -> Unit {
 }
 
 ///|
-extern "js" fn svg_element_focus_ffi(obj : JsValue, options : JsValue) -> Unit = "(obj, options) => obj.focus(obj, options)"
+extern "js" fn svg_element_focus_ffi(obj : JsValue, options : JsValue) -> Unit = "(obj, options) => obj.focus(options)"
 
 ///|
 impl TSVGElement with focus(
@@ -1976,7 +1976,7 @@ impl TSVGElement with focus(
 }
 
 ///|
-extern "js" fn svg_element_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur(obj)"
+extern "js" fn svg_element_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur()"
 
 ///|
 impl TSVGElement with blur(self : Self) -> Unit {

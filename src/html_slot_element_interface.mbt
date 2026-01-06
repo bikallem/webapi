@@ -80,7 +80,7 @@ impl THTMLSlotElement with set_name(self : Self, name : String) -> Unit {
 extern "js" fn html_slot_element_assigned_nodes_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Array[Node] = "(obj, options) => obj.assignedNodes(obj, options)"
+) -> Array[Node] = "(obj, options) => obj.assignedNodes(options)"
 
 ///|
 impl THTMLSlotElement with assigned_nodes(
@@ -97,7 +97,7 @@ impl THTMLSlotElement with assigned_nodes(
 extern "js" fn html_slot_element_assigned_elements_ffi(
   obj : JsValue,
   options : JsValue,
-) -> Array[Element] = "(obj, options) => obj.assignedElements(obj, options)"
+) -> Array[Element] = "(obj, options) => obj.assignedElements(options)"
 
 ///|
 impl THTMLSlotElement with assigned_elements(
@@ -114,7 +114,7 @@ impl THTMLSlotElement with assigned_elements(
 extern "js" fn html_slot_element_assign_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.assign(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.assign(nodes)"
 
 ///|
 impl THTMLSlotElement with assign(

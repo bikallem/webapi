@@ -71,7 +71,7 @@ extern "js" fn ui_event_init_ui_event_ffi(
   cancelable_arg : JsValue,
   view_arg : JsValue,
   detail_arg : JsValue,
-) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg) => obj.initUIEvent(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg)"
+) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg) => obj.initUIEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg)"
 
 ///|
 impl TUIEvent with init_ui_event(

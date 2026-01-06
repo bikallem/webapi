@@ -63,7 +63,7 @@ pub trait TWorker: TEventTarget {
 }
 
 ///|
-extern "js" fn worker_terminate_ffi(obj : JsValue) -> Unit = "(obj) => obj.terminate(obj)"
+extern "js" fn worker_terminate_ffi(obj : JsValue) -> Unit = "(obj) => obj.terminate()"
 
 ///|
 impl TWorker with terminate(self : Self) -> Unit {
@@ -75,7 +75,7 @@ extern "js" fn worker_post_message_ffi(
   obj : JsValue,
   message : JsValue,
   transfer : JsValue,
-) -> Unit = "(obj, message, transfer) => obj.postMessage(obj, message, transfer)"
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
 
 ///|
 impl TWorker with post_message(
@@ -95,7 +95,7 @@ extern "js" fn worker_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(obj, message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
 
 ///|
 impl TWorker with post_message_2(

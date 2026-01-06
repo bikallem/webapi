@@ -104,7 +104,7 @@ extern "js" fn character_data_substring_data_ffi(
   obj : JsValue,
   offset : JsValue,
   count : JsValue,
-) -> String = "(obj, offset, count) => obj.substringData(obj, offset, count)"
+) -> String = "(obj, offset, count) => obj.substringData(offset, count)"
 
 ///|
 impl TCharacterData with substring_data(
@@ -123,7 +123,7 @@ impl TCharacterData with substring_data(
 extern "js" fn character_data_append_data_ffi(
   obj : JsValue,
   data : JsValue,
-) -> Unit = "(obj, data) => obj.appendData(obj, data)"
+) -> Unit = "(obj, data) => obj.appendData(data)"
 
 ///|
 impl TCharacterData with append_data(self : Self, data : String) -> Unit {
@@ -135,7 +135,7 @@ extern "js" fn character_data_insert_data_ffi(
   obj : JsValue,
   offset : JsValue,
   data : JsValue,
-) -> Unit = "(obj, offset, data) => obj.insertData(obj, offset, data)"
+) -> Unit = "(obj, offset, data) => obj.insertData(offset, data)"
 
 ///|
 impl TCharacterData with insert_data(self : Self, offset : UInt, data : String) -> Unit {
@@ -151,7 +151,7 @@ extern "js" fn character_data_delete_data_ffi(
   obj : JsValue,
   offset : JsValue,
   count : JsValue,
-) -> Unit = "(obj, offset, count) => obj.deleteData(obj, offset, count)"
+) -> Unit = "(obj, offset, count) => obj.deleteData(offset, count)"
 
 ///|
 impl TCharacterData with delete_data(self : Self, offset : UInt, count : UInt) -> Unit {
@@ -168,7 +168,7 @@ extern "js" fn character_data_replace_data_ffi(
   offset : JsValue,
   count : JsValue,
   data : JsValue,
-) -> Unit = "(obj, offset, count, data) => obj.replaceData(obj, offset, count, data)"
+) -> Unit = "(obj, offset, count, data) => obj.replaceData(offset, count, data)"
 
 ///|
 impl TCharacterData with replace_data(
@@ -209,7 +209,7 @@ impl TCharacterData with next_element_sibling(self : Self) -> Element {
 extern "js" fn character_data_before_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.before(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.before(nodes)"
 
 ///|
 impl TCharacterData with before(self : Self, nodes : &TCharacterDataBeforeNodes) -> Unit {
@@ -217,7 +217,7 @@ impl TCharacterData with before(self : Self, nodes : &TCharacterDataBeforeNodes)
 }
 
 ///|
-extern "js" fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(obj, nodes)"
+extern "js" fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(nodes)"
 
 ///|
 impl TCharacterData with after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit {
@@ -228,7 +228,7 @@ impl TCharacterData with after(self : Self, nodes : &TCharacterDataAfterNodes) -
 extern "js" fn character_data_replace_with_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceWith(obj, nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceWith(nodes)"
 
 ///|
 impl TCharacterData with replace_with(
@@ -239,7 +239,7 @@ impl TCharacterData with replace_with(
 }
 
 ///|
-extern "js" fn character_data_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove(obj)"
+extern "js" fn character_data_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
 
 ///|
 impl TCharacterData with remove(self : Self) -> Unit {

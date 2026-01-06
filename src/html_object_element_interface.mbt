@@ -218,7 +218,7 @@ impl THTMLObjectElement with content_window(self : Self) -> WindowProxy {
 ///|
 extern "js" fn html_object_element_get_svg_document_ffi(
   obj : JsValue,
-) -> JsValue = "(obj) => obj.getSVGDocument(obj)"
+) -> JsValue = "(obj) => obj.getSVGDocument()"
 
 ///|
 impl THTMLObjectElement with get_svg_document(self : Self) -> Document? {
@@ -257,7 +257,7 @@ impl THTMLObjectElement with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn html_object_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn html_object_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl THTMLObjectElement with check_validity(self : Self) -> Bool {
@@ -265,7 +265,7 @@ impl THTMLObjectElement with check_validity(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn html_object_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity(obj)"
+extern "js" fn html_object_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl THTMLObjectElement with report_validity(self : Self) -> Bool {
@@ -276,7 +276,7 @@ impl THTMLObjectElement with report_validity(self : Self) -> Bool {
 extern "js" fn html_object_element_set_custom_validity_ffi(
   obj : JsValue,
   error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(obj, error)"
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 impl THTMLObjectElement with set_custom_validity(self : Self, error : String) -> Unit {

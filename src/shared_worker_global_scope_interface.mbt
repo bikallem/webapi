@@ -42,7 +42,7 @@ impl TSharedWorkerGlobalScope with name(self : Self) -> String {
 }
 
 ///|
-extern "js" fn shared_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn shared_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TSharedWorkerGlobalScope with close(self : Self) -> Unit {

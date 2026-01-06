@@ -96,7 +96,7 @@ extern "js" fn data_transfer_set_drag_image_ffi(
   image : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, image, x, y) => obj.setDragImage(obj, image, x, y)"
+) -> Unit = "(obj, image, x, y) => obj.setDragImage(image, x, y)"
 
 ///|
 impl TDataTransfer with set_drag_image(
@@ -125,7 +125,7 @@ impl TDataTransfer with types(self : Self) -> JsValue {
 extern "js" fn data_transfer_get_data_ffi(
   obj : JsValue,
   format : JsValue,
-) -> String = "(obj, format) => obj.getData(obj, format)"
+) -> String = "(obj, format) => obj.getData(format)"
 
 ///|
 impl TDataTransfer with get_data(self : Self, format : String) -> String {
@@ -137,7 +137,7 @@ extern "js" fn data_transfer_set_data_ffi(
   obj : JsValue,
   format : JsValue,
   data : JsValue,
-) -> Unit = "(obj, format, data) => obj.setData(obj, format, data)"
+) -> Unit = "(obj, format, data) => obj.setData(format, data)"
 
 ///|
 impl TDataTransfer with set_data(self : Self, format : String, data : String) -> Unit {
@@ -152,7 +152,7 @@ impl TDataTransfer with set_data(self : Self, format : String, data : String) ->
 extern "js" fn data_transfer_clear_data_ffi(
   obj : JsValue,
   format : JsValue,
-) -> Unit = "(obj, format) => obj.clearData(obj, format)"
+) -> Unit = "(obj, format) => obj.clearData(format)"
 
 ///|
 impl TDataTransfer with clear_data(self : Self, format? : String) -> Unit {

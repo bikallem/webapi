@@ -41,7 +41,7 @@ extern "js" fn message_port_post_message_ffi(
   obj : JsValue,
   message : JsValue,
   transfer : JsValue,
-) -> Unit = "(obj, message, transfer) => obj.postMessage(obj, message, transfer)"
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
 
 ///|
 impl TMessagePort with post_message(
@@ -61,7 +61,7 @@ extern "js" fn message_port_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(obj, message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
 
 ///|
 impl TMessagePort with post_message_2(
@@ -77,7 +77,7 @@ impl TMessagePort with post_message_2(
 }
 
 ///|
-extern "js" fn message_port_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start(obj)"
+extern "js" fn message_port_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start()"
 
 ///|
 impl TMessagePort with start(self : Self) -> Unit {
@@ -85,7 +85,7 @@ impl TMessagePort with start(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn message_port_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn message_port_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TMessagePort with close(self : Self) -> Unit {

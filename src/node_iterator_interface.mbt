@@ -70,7 +70,7 @@ impl TNodeIterator with filter(self : Self) -> NodeFilter {
 }
 
 ///|
-extern "js" fn node_iterator_next_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextNode(obj)"
+extern "js" fn node_iterator_next_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextNode()"
 
 ///|
 impl TNodeIterator with next_node(self : Self) -> Node? {
@@ -83,7 +83,7 @@ impl TNodeIterator with next_node(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn node_iterator_previous_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousNode(obj)"
+extern "js" fn node_iterator_previous_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousNode()"
 
 ///|
 impl TNodeIterator with previous_node(self : Self) -> Node? {
@@ -96,7 +96,7 @@ impl TNodeIterator with previous_node(self : Self) -> Node? {
 }
 
 ///|
-extern "js" fn node_iterator_detach_ffi(obj : JsValue) -> Unit = "(obj) => obj.detach(obj)"
+extern "js" fn node_iterator_detach_ffi(obj : JsValue) -> Unit = "(obj) => obj.detach()"
 
 ///|
 impl TNodeIterator with detach(self : Self) -> Unit {

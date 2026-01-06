@@ -42,7 +42,7 @@ impl TTextTrackList with length(self : Self) -> UInt {
 extern "js" fn text_track_list_get_track_by_id_ffi(
   obj : JsValue,
   id : JsValue,
-) -> JsValue = "(obj, id) => obj.getTrackById(obj, id)"
+) -> JsValue = "(obj, id) => obj.getTrackById(id)"
 
 ///|
 impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack? {

@@ -23,7 +23,7 @@ pub trait TTrustedScriptURL: TJsValue {
 }
 
 ///|
-extern "js" fn trusted_script_url_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON(obj)"
+extern "js" fn trusted_script_url_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON()"
 
 ///|
 impl TTrustedScriptURL with to_json(self : Self) -> String {

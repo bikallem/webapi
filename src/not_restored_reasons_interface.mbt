@@ -77,7 +77,7 @@ impl TNotRestoredReasons with children(self : Self) -> JsValue {
 }
 
 ///|
-extern "js" fn not_restored_reasons_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON(obj)"
+extern "js" fn not_restored_reasons_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 impl TNotRestoredReasons with to_json(self : Self) -> JsValue {

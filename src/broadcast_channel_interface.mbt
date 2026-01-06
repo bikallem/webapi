@@ -51,7 +51,7 @@ impl TBroadcastChannel with name(self : Self) -> String {
 extern "js" fn broadcast_channel_post_message_ffi(
   obj : JsValue,
   message : JsValue,
-) -> Unit = "(obj, message) => obj.postMessage(obj, message)"
+) -> Unit = "(obj, message) => obj.postMessage(message)"
 
 ///|
 impl TBroadcastChannel with post_message(self : Self, message : JsValue) -> Unit {
@@ -62,7 +62,7 @@ impl TBroadcastChannel with post_message(self : Self, message : JsValue) -> Unit
 }
 
 ///|
-extern "js" fn broadcast_channel_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn broadcast_channel_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TBroadcastChannel with close(self : Self) -> Unit {

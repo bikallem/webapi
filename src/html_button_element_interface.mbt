@@ -360,7 +360,7 @@ impl THTMLButtonElement with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn html_button_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn html_button_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl THTMLButtonElement with check_validity(self : Self) -> Bool {
@@ -368,7 +368,7 @@ impl THTMLButtonElement with check_validity(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn html_button_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity(obj)"
+extern "js" fn html_button_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl THTMLButtonElement with report_validity(self : Self) -> Bool {
@@ -379,7 +379,7 @@ impl THTMLButtonElement with report_validity(self : Self) -> Bool {
 extern "js" fn html_button_element_set_custom_validity_ffi(
   obj : JsValue,
   error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(obj, error)"
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 impl THTMLButtonElement with set_custom_validity(self : Self, error : String) -> Unit {

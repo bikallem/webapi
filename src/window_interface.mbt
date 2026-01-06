@@ -522,7 +522,7 @@ impl TWindow with set_status(self : Self, status : String) -> Unit {
 }
 
 ///|
-extern "js" fn window_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close(obj)"
+extern "js" fn window_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 impl TWindow with close(self : Self) -> Unit {
@@ -538,7 +538,7 @@ impl TWindow with closed(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn window_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop(obj)"
+extern "js" fn window_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop()"
 
 ///|
 impl TWindow with stop(self : Self) -> Unit {
@@ -546,7 +546,7 @@ impl TWindow with stop(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_focus_ffi(obj : JsValue) -> Unit = "(obj) => obj.focus(obj)"
+extern "js" fn window_focus_ffi(obj : JsValue) -> Unit = "(obj) => obj.focus()"
 
 ///|
 impl TWindow with focus(self : Self) -> Unit {
@@ -554,7 +554,7 @@ impl TWindow with focus(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur(obj)"
+extern "js" fn window_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur()"
 
 ///|
 impl TWindow with blur(self : Self) -> Unit {
@@ -623,7 +623,7 @@ extern "js" fn window_open_ffi(
   url : JsValue,
   target : JsValue,
   features : JsValue,
-) -> JsValue = "(obj, url, target, features) => obj.open(obj, url, target, features)"
+) -> JsValue = "(obj, url, target, features) => obj.open(url, target, features)"
 
 ///|
 impl TWindow with open(
@@ -670,7 +670,7 @@ impl TWindow with origin_agent_cluster(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn window_alert_ffi(obj : JsValue) -> Unit = "(obj) => obj.alert(obj)"
+extern "js" fn window_alert_ffi(obj : JsValue) -> Unit = "(obj) => obj.alert()"
 
 ///|
 impl TWindow with alert(self : Self) -> Unit {
@@ -678,7 +678,7 @@ impl TWindow with alert(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_alert_2_ffi(obj : JsValue, message : JsValue) -> Unit = "(obj, message) => obj.alert_2(obj, message)"
+extern "js" fn window_alert_2_ffi(obj : JsValue, message : JsValue) -> Unit = "(obj, message) => obj.alert_2(message)"
 
 ///|
 impl TWindow with alert_2(self : Self, message : String) -> Unit {
@@ -686,7 +686,7 @@ impl TWindow with alert_2(self : Self, message : String) -> Unit {
 }
 
 ///|
-extern "js" fn window_confirm_ffi(obj : JsValue, message : JsValue) -> Bool = "(obj, message) => obj.confirm(obj, message)"
+extern "js" fn window_confirm_ffi(obj : JsValue, message : JsValue) -> Bool = "(obj, message) => obj.confirm(message)"
 
 ///|
 impl TWindow with confirm(self : Self, message? : String = "") -> Bool {
@@ -698,7 +698,7 @@ extern "js" fn window_prompt_ffi(
   obj : JsValue,
   message : JsValue,
   default : JsValue,
-) -> JsValue = "(obj, message, default) => obj.prompt(obj, message, default)"
+) -> JsValue = "(obj, message, default) => obj.prompt(message, default)"
 
 ///|
 impl TWindow with prompt(
@@ -719,7 +719,7 @@ impl TWindow with prompt(
 }
 
 ///|
-extern "js" fn window_print_ffi(obj : JsValue) -> Unit = "(obj) => obj.print(obj)"
+extern "js" fn window_print_ffi(obj : JsValue) -> Unit = "(obj) => obj.print()"
 
 ///|
 impl TWindow with print(self : Self) -> Unit {
@@ -732,7 +732,7 @@ extern "js" fn window_post_message_ffi(
   message : JsValue,
   target_origin : JsValue,
   transfer : JsValue,
-) -> Unit = "(obj, message, target_origin, transfer) => obj.postMessage(obj, message, target_origin, transfer)"
+) -> Unit = "(obj, message, target_origin, transfer) => obj.postMessage(message, target_origin, transfer)"
 
 ///|
 impl TWindow with post_message(
@@ -754,7 +754,7 @@ extern "js" fn window_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(obj, message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
 
 ///|
 impl TWindow with post_message_2(
@@ -770,7 +770,7 @@ impl TWindow with post_message_2(
 }
 
 ///|
-extern "js" fn window_capture_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.captureEvents(obj)"
+extern "js" fn window_capture_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.captureEvents()"
 
 ///|
 impl TWindow with capture_events(self : Self) -> Unit {
@@ -778,7 +778,7 @@ impl TWindow with capture_events(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_release_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.releaseEvents(obj)"
+extern "js" fn window_release_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.releaseEvents()"
 
 ///|
 impl TWindow with release_events(self : Self) -> Unit {
@@ -798,7 +798,7 @@ extern "js" fn window_get_computed_style_ffi(
   obj : JsValue,
   elt : JsValue,
   pseudo_elt : JsValue,
-) -> CSSStyleProperties = "(obj, elt, pseudo_elt) => obj.getComputedStyle(obj, elt, pseudo_elt)"
+) -> CSSStyleProperties = "(obj, elt, pseudo_elt) => obj.getComputedStyle(elt, pseudo_elt)"
 
 ///|
 impl TWindow with get_computed_style(
@@ -818,7 +818,7 @@ extern "js" fn window_fetch_later_ffi(
   obj : JsValue,
   input : JsValue,
   init : JsValue,
-) -> FetchLaterResult = "(obj, input, init) => obj.fetchLater(obj, input, init)"
+) -> FetchLaterResult = "(obj, input, init) => obj.fetchLater(input, init)"
 
 ///|
 impl TWindow with fetch_later(
@@ -837,7 +837,7 @@ impl TWindow with fetch_later(
 extern "js" fn window_match_media_ffi(
   obj : JsValue,
   query : JsValue,
-) -> MediaQueryList = "(obj, query) => obj.matchMedia(obj, query)"
+) -> MediaQueryList = "(obj, query) => obj.matchMedia(query)"
 
 ///|
 impl TWindow with match_media(self : Self, query : CSSOMString) -> MediaQueryList {
@@ -865,7 +865,7 @@ extern "js" fn window_move_to_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.moveTo(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
 
 ///|
 impl TWindow with move_to(self : Self, x : Int, y : Int) -> Unit {
@@ -881,7 +881,7 @@ extern "js" fn window_move_by_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.moveBy(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.moveBy(x, y)"
 
 ///|
 impl TWindow with move_by(self : Self, x : Int, y : Int) -> Unit {
@@ -897,7 +897,7 @@ extern "js" fn window_resize_to_ffi(
   obj : JsValue,
   width : JsValue,
   height : JsValue,
-) -> Unit = "(obj, width, height) => obj.resizeTo(obj, width, height)"
+) -> Unit = "(obj, width, height) => obj.resizeTo(width, height)"
 
 ///|
 impl TWindow with resize_to(self : Self, width : Int, height : Int) -> Unit {
@@ -913,7 +913,7 @@ extern "js" fn window_resize_by_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Unit = "(obj, x, y) => obj.resizeBy(obj, x, y)"
+) -> Unit = "(obj, x, y) => obj.resizeBy(x, y)"
 
 ///|
 impl TWindow with resize_by(self : Self, x : Int, y : Int) -> Unit {
@@ -976,7 +976,7 @@ impl TWindow with page_y_offset(self : Self) -> Double {
 extern "js" fn window_scroll_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scroll(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scroll(options)"
 
 ///|
 impl TWindow with scroll(
@@ -991,7 +991,7 @@ extern "js" fn window_scroll_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(x, y)"
 
 ///|
 impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -1008,7 +1008,7 @@ impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
 extern "js" fn window_scroll_to_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(options)"
 
 ///|
 impl TWindow with scroll_to(
@@ -1023,7 +1023,7 @@ extern "js" fn window_scroll_to_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(x, y)"
 
 ///|
 impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -1040,7 +1040,7 @@ impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
 extern "js" fn window_scroll_by_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(obj, options)"
+) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(options)"
 
 ///|
 impl TWindow with scroll_by(
@@ -1055,7 +1055,7 @@ extern "js" fn window_scroll_by_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(obj, x, y)"
+) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(x, y)"
 
 ///|
 impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
@@ -3040,7 +3040,7 @@ impl TWindow with cross_origin_isolated(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn window_report_error_ffi(obj : JsValue, e : JsValue) -> Unit = "(obj, e) => obj.reportError(obj, e)"
+extern "js" fn window_report_error_ffi(obj : JsValue, e : JsValue) -> Unit = "(obj, e) => obj.reportError(e)"
 
 ///|
 impl TWindow with report_error(self : Self, e : JsValue) -> Unit {
@@ -3048,7 +3048,7 @@ impl TWindow with report_error(self : Self, e : JsValue) -> Unit {
 }
 
 ///|
-extern "js" fn window_btoa_ffi(obj : JsValue, data : JsValue) -> String = "(obj, data) => obj.btoa(obj, data)"
+extern "js" fn window_btoa_ffi(obj : JsValue, data : JsValue) -> String = "(obj, data) => obj.btoa(data)"
 
 ///|
 impl TWindow with btoa(self : Self, data : String) -> String {
@@ -3056,7 +3056,7 @@ impl TWindow with btoa(self : Self, data : String) -> String {
 }
 
 ///|
-extern "js" fn window_atob_ffi(obj : JsValue, data : JsValue) -> String = "(obj, data) => obj.atob(obj, data)"
+extern "js" fn window_atob_ffi(obj : JsValue, data : JsValue) -> String = "(obj, data) => obj.atob(data)"
 
 ///|
 impl TWindow with atob(self : Self, data : String) -> String {
@@ -3069,7 +3069,7 @@ extern "js" fn window_set_timeout_ffi(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setTimeout(obj, handler, timeout, arguments)"
+) -> Int = "(obj, handler, timeout, arguments) => obj.setTimeout(handler, timeout, arguments)"
 
 ///|
 impl TWindow with set_timeout(
@@ -3087,7 +3087,7 @@ impl TWindow with set_timeout(
 }
 
 ///|
-extern "js" fn window_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearTimeout(obj, id)"
+extern "js" fn window_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearTimeout(id)"
 
 ///|
 impl TWindow with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
@@ -3100,7 +3100,7 @@ extern "js" fn window_set_interval_ffi(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setInterval(obj, handler, timeout, arguments)"
+) -> Int = "(obj, handler, timeout, arguments) => obj.setInterval(handler, timeout, arguments)"
 
 ///|
 impl TWindow with set_interval(
@@ -3118,7 +3118,7 @@ impl TWindow with set_interval(
 }
 
 ///|
-extern "js" fn window_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearInterval(obj, id)"
+extern "js" fn window_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearInterval(id)"
 
 ///|
 impl TWindow with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
@@ -3129,7 +3129,7 @@ impl TWindow with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
 extern "js" fn window_queue_microtask_ffi(
   obj : JsValue,
   callback : JsValue,
-) -> Unit = "(obj, callback) => obj.queueMicrotask(obj, callback)"
+) -> Unit = "(obj, callback) => obj.queueMicrotask(callback)"
 
 ///|
 impl TWindow with queue_microtask(self : Self, callback : VoidFunction) -> Unit {
@@ -3141,7 +3141,7 @@ extern "js" fn window_create_image_bitmap_ffi(
   obj : JsValue,
   image : JsValue,
   options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(obj, image, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(image, options)"
 
 ///|
 impl TWindow with create_image_bitmap(
@@ -3165,7 +3165,7 @@ extern "js" fn window_create_image_bitmap_2_ffi(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(obj, image, sx, sy, sw, sh, options)"
+) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(image, sx, sy, sw, sh, options)"
 
 ///|
 impl TWindow with create_image_bitmap_2(
@@ -3193,7 +3193,7 @@ extern "js" fn window_structured_clone_ffi(
   obj : JsValue,
   value : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, value, options) => obj.structuredClone(obj, value, options)"
+) -> JsValue = "(obj, value, options) => obj.structuredClone(value, options)"
 
 ///|
 impl TWindow with structured_clone(
@@ -3213,7 +3213,7 @@ extern "js" fn window_fetch_ffi(
   obj : JsValue,
   input : JsValue,
   init : JsValue,
-) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(obj, input, init)"
+) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(input, init)"
 
 ///|
 impl TWindow with fetch(
@@ -3250,7 +3250,7 @@ impl TWindow with trusted_types(self : Self) -> TrustedTypePolicyFactory {
 extern "js" fn window_request_animation_frame_ffi(
   obj : JsValue,
   callback : JsValue,
-) -> UInt = "(obj, callback) => obj.requestAnimationFrame(obj, callback)"
+) -> UInt = "(obj, callback) => obj.requestAnimationFrame(callback)"
 
 ///|
 impl TWindow with request_animation_frame(
@@ -3267,7 +3267,7 @@ impl TWindow with request_animation_frame(
 extern "js" fn window_cancel_animation_frame_ffi(
   obj : JsValue,
   handle : JsValue,
-) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(obj, handle)"
+) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(handle)"
 
 ///|
 impl TWindow with cancel_animation_frame(self : Self, handle : UInt) -> Unit {

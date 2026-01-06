@@ -42,7 +42,7 @@ impl TAudioTrackList with length(self : Self) -> UInt {
 extern "js" fn audio_track_list_get_track_by_id_ffi(
   obj : JsValue,
   id : JsValue,
-) -> JsValue = "(obj, id) => obj.getTrackById(obj, id)"
+) -> JsValue = "(obj, id) => obj.getTrackById(id)"
 
 ///|
 impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrack? {

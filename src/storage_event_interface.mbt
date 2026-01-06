@@ -106,7 +106,7 @@ extern "js" fn storage_event_init_storage_event_ffi(
   new_value : JsValue,
   url : JsValue,
   storage_area : JsValue,
-) -> Unit = "(obj, type_, bubbles, cancelable, key, old_value, new_value, url, storage_area) => obj.initStorageEvent(obj, type_, bubbles, cancelable, key, old_value, new_value, url, storage_area)"
+) -> Unit = "(obj, type_, bubbles, cancelable, key, old_value, new_value, url, storage_area) => obj.initStorageEvent(type_, bubbles, cancelable, key, old_value, new_value, url, storage_area)"
 
 ///|
 impl TStorageEvent with init_storage_event(

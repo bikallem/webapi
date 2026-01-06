@@ -77,7 +77,7 @@ impl TSVGTransform with angle(self : Self) -> Float {
 extern "js" fn svg_transform_set_matrix_ffi(
   obj : JsValue,
   matrix : JsValue,
-) -> Unit = "(obj, matrix) => obj.setMatrix(obj, matrix)"
+) -> Unit = "(obj, matrix) => obj.setMatrix(matrix)"
 
 ///|
 impl TSVGTransform with set_matrix(
@@ -92,7 +92,7 @@ extern "js" fn svg_transform_set_translate_ffi(
   obj : JsValue,
   tx : JsValue,
   ty : JsValue,
-) -> Unit = "(obj, tx, ty) => obj.setTranslate(obj, tx, ty)"
+) -> Unit = "(obj, tx, ty) => obj.setTranslate(tx, ty)"
 
 ///|
 impl TSVGTransform with set_translate(self : Self, tx : Float, ty : Float) -> Unit {
@@ -108,7 +108,7 @@ extern "js" fn svg_transform_set_scale_ffi(
   obj : JsValue,
   sx : JsValue,
   sy : JsValue,
-) -> Unit = "(obj, sx, sy) => obj.setScale(obj, sx, sy)"
+) -> Unit = "(obj, sx, sy) => obj.setScale(sx, sy)"
 
 ///|
 impl TSVGTransform with set_scale(self : Self, sx : Float, sy : Float) -> Unit {
@@ -125,7 +125,7 @@ extern "js" fn svg_transform_set_rotate_ffi(
   angle : JsValue,
   cx : JsValue,
   cy : JsValue,
-) -> Unit = "(obj, angle, cx, cy) => obj.setRotate(obj, angle, cx, cy)"
+) -> Unit = "(obj, angle, cx, cy) => obj.setRotate(angle, cx, cy)"
 
 ///|
 impl TSVGTransform with set_rotate(
@@ -146,7 +146,7 @@ impl TSVGTransform with set_rotate(
 extern "js" fn svg_transform_set_skew_x_ffi(
   obj : JsValue,
   angle : JsValue,
-) -> Unit = "(obj, angle) => obj.setSkewX(obj, angle)"
+) -> Unit = "(obj, angle) => obj.setSkewX(angle)"
 
 ///|
 impl TSVGTransform with set_skew_x(self : Self, angle : Float) -> Unit {
@@ -157,7 +157,7 @@ impl TSVGTransform with set_skew_x(self : Self, angle : Float) -> Unit {
 extern "js" fn svg_transform_set_skew_y_ffi(
   obj : JsValue,
   angle : JsValue,
-) -> Unit = "(obj, angle) => obj.setSkewY(obj, angle)"
+) -> Unit = "(obj, angle) => obj.setSkewY(angle)"
 
 ///|
 impl TSVGTransform with set_skew_y(self : Self, angle : Float) -> Unit {

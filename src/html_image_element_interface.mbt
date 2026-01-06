@@ -407,7 +407,7 @@ impl THTMLImageElement with set_fetch_priority(
 }
 
 ///|
-extern "js" fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[Unit] = "(obj) => obj.decode(obj)"
+extern "js" fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[Unit] = "(obj) => obj.decode()"
 
 ///|
 impl THTMLImageElement with decode(self : Self) -> JsPromise[Unit] {

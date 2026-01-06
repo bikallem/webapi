@@ -288,7 +288,7 @@ impl THTMLSelectElement with set_length(self : Self, length : UInt) -> Unit {
 extern "js" fn html_select_element_named_item_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsValue = "(obj, name) => obj.namedItem(obj, name)"
+) -> JsValue = "(obj, name) => obj.namedItem(name)"
 
 ///|
 impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement? {
@@ -308,7 +308,7 @@ extern "js" fn html_select_element_add_ffi(
   obj : JsValue,
   element : JsValue,
   before : JsValue,
-) -> Unit = "(obj, element, before) => obj.add(obj, element, before)"
+) -> Unit = "(obj, element, before) => obj.add(element, before)"
 
 ///|
 impl THTMLSelectElement with add(
@@ -324,7 +324,7 @@ impl THTMLSelectElement with add(
 }
 
 ///|
-extern "js" fn html_select_element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove(obj)"
+extern "js" fn html_select_element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
 
 ///|
 impl THTMLSelectElement with remove(self : Self) -> Unit {
@@ -335,7 +335,7 @@ impl THTMLSelectElement with remove(self : Self) -> Unit {
 extern "js" fn html_select_element_remove_2_ffi(
   obj : JsValue,
   index : JsValue,
-) -> Unit = "(obj, index) => obj.remove_2(obj, index)"
+) -> Unit = "(obj, index) => obj.remove_2(index)"
 
 ///|
 impl THTMLSelectElement with remove_2(self : Self, index : Int) -> Unit {
@@ -429,7 +429,7 @@ impl THTMLSelectElement with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn html_select_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity(obj)"
+extern "js" fn html_select_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 impl THTMLSelectElement with check_validity(self : Self) -> Bool {
@@ -437,7 +437,7 @@ impl THTMLSelectElement with check_validity(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn html_select_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity(obj)"
+extern "js" fn html_select_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 impl THTMLSelectElement with report_validity(self : Self) -> Bool {
@@ -448,7 +448,7 @@ impl THTMLSelectElement with report_validity(self : Self) -> Bool {
 extern "js" fn html_select_element_set_custom_validity_ffi(
   obj : JsValue,
   error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(obj, error)"
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 impl THTMLSelectElement with set_custom_validity(self : Self, error : String) -> Unit {
@@ -459,7 +459,7 @@ impl THTMLSelectElement with set_custom_validity(self : Self, error : String) ->
 }
 
 ///|
-extern "js" fn html_select_element_show_picker_ffi(obj : JsValue) -> Unit = "(obj) => obj.showPicker(obj)"
+extern "js" fn html_select_element_show_picker_ffi(obj : JsValue) -> Unit = "(obj) => obj.showPicker()"
 
 ///|
 impl THTMLSelectElement with show_picker(self : Self) -> Unit {

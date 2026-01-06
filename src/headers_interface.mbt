@@ -38,7 +38,7 @@ extern "js" fn headers_append_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.append(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.append(name, value)"
 
 ///|
 impl THeaders with append(self : Self, name : String, value : String) -> Unit {
@@ -50,7 +50,7 @@ impl THeaders with append(self : Self, name : String, value : String) -> Unit {
 }
 
 ///|
-extern "js" fn headers_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(obj, name)"
+extern "js" fn headers_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(name)"
 
 ///|
 impl THeaders with delete(self : Self, name : String) -> Unit {
@@ -58,7 +58,7 @@ impl THeaders with delete(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn headers_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(obj, name)"
+extern "js" fn headers_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(name)"
 
 ///|
 impl THeaders with get(self : Self, name : String) -> String? {
@@ -71,7 +71,7 @@ impl THeaders with get(self : Self, name : String) -> String? {
 }
 
 ///|
-extern "js" fn headers_get_set_cookie_ffi(obj : JsValue) -> Array[String] = "(obj) => obj.getSetCookie(obj)"
+extern "js" fn headers_get_set_cookie_ffi(obj : JsValue) -> Array[String] = "(obj) => obj.getSetCookie()"
 
 ///|
 impl THeaders with get_set_cookie(self : Self) -> Array[String] {
@@ -79,7 +79,7 @@ impl THeaders with get_set_cookie(self : Self) -> Array[String] {
 }
 
 ///|
-extern "js" fn headers_has_ffi(obj : JsValue, name : JsValue) -> Bool = "(obj, name) => obj.has(obj, name)"
+extern "js" fn headers_has_ffi(obj : JsValue, name : JsValue) -> Bool = "(obj, name) => obj.has(name)"
 
 ///|
 impl THeaders with has(self : Self, name : String) -> Bool {
@@ -91,7 +91,7 @@ extern "js" fn headers_set_ffi(
   obj : JsValue,
   name : JsValue,
   value : JsValue,
-) -> Unit = "(obj, name, value) => obj.set(obj, name, value)"
+) -> Unit = "(obj, name, value) => obj.set(name, value)"
 
 ///|
 impl THeaders with set(self : Self, name : String, value : String) -> Unit {
