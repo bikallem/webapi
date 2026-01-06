@@ -6,11 +6,15 @@ fn main {
   let mut count = 0
 
   // Create heading
-  let heading : HTMLHeadElement = document.create_element("h1").into()
+  let heading : @webapi.HTMLHeadElement = @webapi.document
+    .create_element("h1")
+    .into()
   heading.set_text_content("Counter")
 
   // Create count display
-  let count_display : HTMLDivElement = document.create_element("div").into()
+  let count_display : @webapi.HTMLDivElement = @webapi.document
+    .create_element("div")
+    .into()
   count_display
   ..set_attribute("id", "count-display")
   ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
@@ -22,7 +26,7 @@ fn main {
   }
 
   // Create decrement button
-  let decrement_btn : HTMLButtonElement = document
+  let decrement_btn : @webapi.HTMLButtonElement = @webapi.document
     .create_element("button")
     .into()
   decrement_btn
@@ -32,14 +36,14 @@ fn main {
   )
   ..add_event_listener(
     "click",
-    event_listener(fn(_event) {
+    @webapi.EventListener::new(fn(_event) {
       count = count - 1
       update_display()
     }),
   )
 
   // Create increment button
-  let increment_btn = document.create_element("button")
+  let increment_btn = @webapi.document.create_element("button")
   increment_btn
   ..set_text_content("+")
   ..set_attribute(
@@ -47,14 +51,14 @@ fn main {
   )
   ..add_event_listener(
     "click",
-    event_listener(fn(_event) {
+    @webapi.EventListener::new(fn(_event) {
       count = count + 1
       update_display()
     }),
   )
 
   // Create reset button
-  let reset_btn = document.create_element("button")
+  let reset_btn = @webapi.document.create_element("button")
   reset_btn
   ..set_text_content("Reset")
   ..set_attribute(
@@ -62,19 +66,21 @@ fn main {
   )
   ..add_event_listener(
     "click",
-    event_listener(fn(_event) {
+    @webapi.EventListener::new(fn(_event) {
       count = 0
       update_display()
     }),
   )
 
   // Build the DOM tree  
-  let app = document.get_element_by_id("app").unwrap()
-  let container : HTMLDivElement = document.create_element("div").into()
+  let app = @webapi.document.get_element_by_id("app").unwrap()
+  let container : @webapi.HTMLDivElement = @webapi.document
+    .create_element("div")
+    .into()
   container
   ..set_attribute("id", "counter-app")
   ..set_attribute("style", "text-align: center; font-family: system-ui;")
-  let children : Array[&TNode] = [
+  let children : Array[&@webapi.TNode] = [
     heading, count_display, decrement_btn, increment_btn, reset_btn,
   ]
   for child in children {

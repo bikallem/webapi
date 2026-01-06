@@ -1,4 +1,7 @@
 ///|
+using @webapi {document, type HTMLCanvasElement, type CanvasRenderingContext2D}
+
+///|
 /// Canvas Drawing Demo - Beautiful Scenery
 /// Demonstrates gradients, shapes, paths, and text using the Canvas 2D API
 fn main {
