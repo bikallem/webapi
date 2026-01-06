@@ -11,7 +11,7 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
-  }
+  }  
   let args = method_args(
     [
       (
@@ -75,7 +75,12 @@ test "InterfaceEmitter generates MoonBit code for interface" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{
+    idl: flattened,
+    type_registry,
+    log_skipped,
+  }
   let (_, emits) = interface_emitter.emit("EventTarget")
   let code = mbt_code_gen(emits)
   inspect(
@@ -160,7 +165,8 @@ test "InterfaceEmitter handles interface with nested union arg types" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let code = mbt_code_gen(emits)
   inspect(
@@ -222,7 +228,8 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let code = mbt_code_gen(emits)
   inspect(
@@ -280,7 +287,8 @@ test "InterfaceEmitter generates MoonBit code for constants" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let code = mbt_code_gen(emits)
   inspect(
@@ -323,7 +331,8 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let code = mbt_code_gen(emits)
   inspect(
@@ -372,7 +381,8 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let code = mbt_code_gen(emits)
   inspect(
@@ -426,7 +436,8 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("ParentInterface")
   let code = mbt_code_gen(emits)
   inspect(
@@ -507,7 +518,8 @@ test "InterfaceEmitter emits static methods" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let code = mbt_code_gen(emits)
   inspect(
@@ -550,7 +562,8 @@ test "InterfaceEmitter emits static attribute getter methods" {
   let type_registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry }
+  fn log_skipped(_msg : String) {}
+  let interface_emitter = InterfaceEmitter::{ idl: flattened, type_registry, log_skipped }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let code = mbt_code_gen(emits)
   inspect(

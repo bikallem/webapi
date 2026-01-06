@@ -208,7 +208,7 @@ fn main {
     let iface_count = emit_and_write(
       output_dir,
       "Interfaces",
-      @emit.InterfaceEmitter::{ idl: flattened, type_registry },
+      @emit.InterfaceEmitter::{ idl: flattened, type_registry, log_skipped },
       flattened.interfaces.keys(),
     )
     let callback_count = emit_and_write(

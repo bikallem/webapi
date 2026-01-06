@@ -2,6 +2,7 @@
 pub(all) struct InterfaceEmitter {
   idl : @flattened_idl.FlattenedIdl
   type_registry : @type_registry.TypeRegistry
+  log_skipped : (String) -> Unit
 }
 
 ///|
@@ -393,9 +394,21 @@ pub impl Emitter for InterfaceEmitter with emit(
       | AsyncIterable(_)
       | Iterable(_)
       | SpecialOperation(_)
-      | Stringifier(Bare),
+      | Stringifier(Bare) as mem,
       .. rest,
-    ] => continue rest
+    ] => {
+      let member_type = match mem {
+        Setlike(_) => "Setlike"
+        Maplike(_) => "Maplike"
+        AsyncIterable(_) => "AsyncIterable"
+        Iterable(_) => "Iterable"
+        SpecialOperation(_) => "SpecialOperation"
+        Stringifier(Bare) => "Stringifier(Bare)"
+        _ => "Unknown"
+      }
+      (self.log_skipped)("Skipped \{member_type} in interface \{interface.name}")
+      continue rest
+    }
   }
   let parent_trait = match interface.inheritance {
     None => "TJsValue"
