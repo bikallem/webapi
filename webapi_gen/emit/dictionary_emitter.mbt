@@ -78,6 +78,7 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|// MoonBit type: CanvasRenderingContext2DSettings
       #|
       #|
+      #|/// [CanvasRenderingContext2DSettings](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DSettings)
       #|#external
       #|pub type CanvasRenderingContext2DSettings
       #|
@@ -105,6 +106,7 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
       #|
       #|pub fn CanvasRenderingContext2DSettings::empty() -> CanvasRenderingContext2DSettings { canvas_rendering_context2d_settings_empty_ffi() }
+
     ),
   )
 }

@@ -70,6 +70,7 @@ test "emit_callback simple EventListener" {
       #|// MoonBit type: EventListener
       #|
       #|
+      #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
       #|#external
       #|pub type EventListener
       #|
@@ -78,6 +79,7 @@ test "emit_callback simple EventListener" {
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+
     ),
   )
 }
@@ -104,6 +106,7 @@ test "emit_callback with interface argument uses trait reference" {
       #|// MoonBit type: EventListener
       #|
       #|
+      #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
       #|#external
       #|pub type EventListener
       #|
@@ -112,6 +115,7 @@ test "emit_callback with interface argument uses trait reference" {
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+
     ),
   )
 }
@@ -137,6 +141,7 @@ test "emit_callback multi-arg MutationCallback" {
       #|// MoonBit type: MutationCallback
       #|
       #|
+      #|/// [MutationCallback](https://developer.mozilla.org/en-US/docs/Web/API/MutationCallback)
       #|#external
       #|pub type MutationCallback
       #|
@@ -145,6 +150,7 @@ test "emit_callback multi-arg MutationCallback" {
       #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
       #|
       #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(f) }
+
     ),
   )
 }
@@ -170,6 +176,7 @@ test "js_code_gen Callback generates correct code" {
       #|// MoonBit type: EventListener
       #|
       #|
+      #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
       #|#external
       #|pub type EventListener
       #|
@@ -178,6 +185,7 @@ test "js_code_gen Callback generates correct code" {
       #|extern "js" fn event_listener_ffi(f : (Event) -> Unit) -> EventListener = "(f) => f"
       #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(f) }
+
     ),
   )
 }
@@ -203,6 +211,7 @@ test "js_code_gen Callback with multiple args" {
       #|// MoonBit type: MutationCallback
       #|
       #|
+      #|/// [MutationCallback](https://developer.mozilla.org/en-US/docs/Web/API/MutationCallback)
       #|#external
       #|pub type MutationCallback
       #|
@@ -211,6 +220,7 @@ test "js_code_gen Callback with multiple args" {
       #|extern "js" fn mutation_callback_ffi(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(f) => f"
       #|
       #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(f) }
+
     ),
   )
 }

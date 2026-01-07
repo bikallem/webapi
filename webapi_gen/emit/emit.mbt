@@ -137,7 +137,9 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
     match emit {
       Emit::External(TypeName(type_name)) => {
         let mdn_url = mdn_interface_url(type_name)
-        buf.write_string("/// [\{type_name}](\{mdn_url})\n#external\npub type \{type_name}")
+        buf.write_string(
+          "/// [\{type_name}](\{mdn_url})\n#external\npub type \{type_name}",
+        )
       }
       Emit::ImplTJsValue(TypeName(type_name)) =>
         buf.write_string(
@@ -174,7 +176,9 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
       Emit::InterfaceDefinition(interface_def) => {
         let mdn_url = mdn_interface_url(interface_def.trait_name)
         buf
-        ..write_string("/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n")
+        ..write_string(
+          "/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n",
+        )
         ..write_string(
           "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
         )

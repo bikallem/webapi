@@ -108,6 +108,7 @@ test "typedef emitter emits union typedef" {
       #|// MoonBit type: MyUnion
       #|
       #|
+      #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
       #|#external
       #|pub type MyUnion
       #|
@@ -124,6 +125,7 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
+
     ),
   )
 }
@@ -148,6 +150,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|// MoonBit type: MyUnion
       #|
       #|
+      #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
       #|#external
       #|pub type MyUnion
       #|
@@ -162,6 +165,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+
     ),
   )
 }
