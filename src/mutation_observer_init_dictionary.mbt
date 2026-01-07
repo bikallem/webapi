@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [MutationObserverInit](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit)
 #external
 pub type MutationObserverInit
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [PageTransitionEvent](https://developer.mozilla.org/en-US/docs/Web/API/PageTransitionEvent)
 #external
 pub type PageTransitionEvent
 
@@ -38,6 +39,7 @@ pub fn PageTransitionEvent::new(
 }
 
 ///|
+/// [PageTransitionEvent](https://developer.mozilla.org/en-US/docs/Web/API/PageTransitionEvent) interface.
 pub trait TPageTransitionEvent: TEvent {
   persisted(self : Self) -> Bool = _
 }
@@ -46,6 +48,7 @@ pub trait TPageTransitionEvent: TEvent {
 extern "js" fn page_transition_event_persisted_ffi(obj : JsValue) -> Bool = "(obj) => obj.persisted"
 
 ///|
+/// [PageTransitionEvent.persisted](https://developer.mozilla.org/en-US/docs/Web/API/PageTransitionEvent/persisted)
 impl TPageTransitionEvent with persisted(self : Self) -> Bool {
   page_transition_event_persisted_ffi(TJsValue::to_js(self))
 }

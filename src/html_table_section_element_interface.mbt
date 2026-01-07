@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTableSectionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement)
 #external
 pub type HTMLTableSectionElement
 
@@ -40,6 +41,7 @@ pub fn HTMLTableSectionElement::new() -> HTMLTableSectionElement {
 }
 
 ///|
+/// [HTMLTableSectionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement) interface.
 pub trait THTMLTableSectionElement: THTMLElement {
   rows(self : Self) -> HTMLCollection = _
   insert_row(self : Self, index? : Int) -> HTMLTableRowElement = _
@@ -60,6 +62,7 @@ extern "js" fn html_table_section_element_rows_ffi(
 ) -> HTMLCollection = "(obj) => obj.rows"
 
 ///|
+/// [HTMLTableSectionElement.rows](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/rows)
 impl THTMLTableSectionElement with rows(self : Self) -> HTMLCollection {
   html_table_section_element_rows_ffi(TJsValue::to_js(self))
 }
@@ -71,6 +74,7 @@ extern "js" fn html_table_section_element_insert_row_ffi(
 ) -> HTMLTableRowElement = "(obj, index) => obj.insertRow(index)"
 
 ///|
+/// [HTMLTableSectionElement.insertRow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/insertRow)
 impl THTMLTableSectionElement with insert_row(
   self : Self,
   index? : Int = (-1 : Int),
@@ -88,6 +92,7 @@ extern "js" fn html_table_section_element_delete_row_ffi(
 ) -> Unit = "(obj, index) => obj.deleteRow(index)"
 
 ///|
+/// [HTMLTableSectionElement.deleteRow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/deleteRow)
 impl THTMLTableSectionElement with delete_row(self : Self, index : Int) -> Unit {
   html_table_section_element_delete_row_ffi(
     TJsValue::to_js(self),
@@ -99,6 +104,7 @@ impl THTMLTableSectionElement with delete_row(self : Self, index : Int) -> Unit 
 extern "js" fn html_table_section_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLTableSectionElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/align)
 impl THTMLTableSectionElement with align(self : Self) -> String {
   html_table_section_element_align_ffi(TJsValue::to_js(self))
 }
@@ -110,6 +116,7 @@ extern "js" fn html_table_section_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLTableSectionElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/align)
 impl THTMLTableSectionElement with set_align(self : Self, align : String) -> Unit {
   html_table_section_element_set_align_ffi(
     TJsValue::to_js(self),
@@ -121,6 +128,7 @@ impl THTMLTableSectionElement with set_align(self : Self, align : String) -> Uni
 extern "js" fn html_table_section_element_ch_ffi(obj : JsValue) -> String = "(obj) => obj.ch"
 
 ///|
+/// [HTMLTableSectionElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/ch)
 impl THTMLTableSectionElement with ch(self : Self) -> String {
   html_table_section_element_ch_ffi(TJsValue::to_js(self))
 }
@@ -132,6 +140,7 @@ extern "js" fn html_table_section_element_set_ch_ffi(
 ) -> Unit = "(obj, ch) => { obj.ch = ch; }"
 
 ///|
+/// [HTMLTableSectionElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/ch)
 impl THTMLTableSectionElement with set_ch(self : Self, ch : String) -> Unit {
   html_table_section_element_set_ch_ffi(
     TJsValue::to_js(self),
@@ -143,6 +152,7 @@ impl THTMLTableSectionElement with set_ch(self : Self, ch : String) -> Unit {
 extern "js" fn html_table_section_element_ch_off_ffi(obj : JsValue) -> String = "(obj) => obj.chOff"
 
 ///|
+/// [HTMLTableSectionElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/chOff)
 impl THTMLTableSectionElement with ch_off(self : Self) -> String {
   html_table_section_element_ch_off_ffi(TJsValue::to_js(self))
 }
@@ -154,6 +164,7 @@ extern "js" fn html_table_section_element_set_ch_off_ffi(
 ) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
 
 ///|
+/// [HTMLTableSectionElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/chOff)
 impl THTMLTableSectionElement with set_ch_off(self : Self, ch_off : String) -> Unit {
   html_table_section_element_set_ch_off_ffi(
     TJsValue::to_js(self),
@@ -165,6 +176,7 @@ impl THTMLTableSectionElement with set_ch_off(self : Self, ch_off : String) -> U
 extern "js" fn html_table_section_element_v_align_ffi(obj : JsValue) -> String = "(obj) => obj.vAlign"
 
 ///|
+/// [HTMLTableSectionElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/vAlign)
 impl THTMLTableSectionElement with v_align(self : Self) -> String {
   html_table_section_element_v_align_ffi(TJsValue::to_js(self))
 }
@@ -176,6 +188,7 @@ extern "js" fn html_table_section_element_set_v_align_ffi(
 ) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
 
 ///|
+/// [HTMLTableSectionElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/vAlign)
 impl THTMLTableSectionElement with set_v_align(self : Self, v_align : String) -> Unit {
   html_table_section_element_set_v_align_ffi(
     TJsValue::to_js(self),

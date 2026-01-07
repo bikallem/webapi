@@ -3,6 +3,7 @@
 // Specifications: xhr.idl
 
 ///|
+/// [ProgressEvent](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent)
 #external
 pub type ProgressEvent
 
@@ -36,6 +37,7 @@ pub fn ProgressEvent::new(
 }
 
 ///|
+/// [ProgressEvent](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent) interface.
 pub trait TProgressEvent: TEvent {
   length_computable(self : Self) -> Bool = _
   loaded(self : Self) -> Double = _
@@ -46,6 +48,7 @@ pub trait TProgressEvent: TEvent {
 extern "js" fn progress_event_length_computable_ffi(obj : JsValue) -> Bool = "(obj) => obj.lengthComputable"
 
 ///|
+/// [ProgressEvent.lengthComputable](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent/lengthComputable)
 impl TProgressEvent with length_computable(self : Self) -> Bool {
   progress_event_length_computable_ffi(TJsValue::to_js(self))
 }
@@ -54,6 +57,7 @@ impl TProgressEvent with length_computable(self : Self) -> Bool {
 extern "js" fn progress_event_loaded_ffi(obj : JsValue) -> Double = "(obj) => obj.loaded"
 
 ///|
+/// [ProgressEvent.loaded](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent/loaded)
 impl TProgressEvent with loaded(self : Self) -> Double {
   progress_event_loaded_ffi(TJsValue::to_js(self))
 }
@@ -62,6 +66,7 @@ impl TProgressEvent with loaded(self : Self) -> Double {
 extern "js" fn progress_event_total_ffi(obj : JsValue) -> Double = "(obj) => obj.total"
 
 ///|
+/// [ProgressEvent.total](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent/total)
 impl TProgressEvent with total(self : Self) -> Double {
   progress_event_total_ffi(TJsValue::to_js(self))
 }

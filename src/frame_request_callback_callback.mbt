@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [FrameRequestCallback](https://developer.mozilla.org/en-US/docs/Web/API/FrameRequestCallback)
 #external
 pub type FrameRequestCallback
 

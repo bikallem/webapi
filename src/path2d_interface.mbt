@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [Path2D](https://developer.mozilla.org/en-US/docs/Web/API/Path2D)
 #external
 pub type Path2D
 
@@ -67,6 +68,7 @@ pub impl TPath2DRoundRectRadii for Array[&TPath2DRoundRectRadii2] with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+/// [Path2D](https://developer.mozilla.org/en-US/docs/Web/API/Path2D) interface.
 pub trait TPath2D: TJsValue {
   add_path(self : Self, path : &TPath2D, transform? : DOMMatrix2DInit) -> Unit = _
   close_path(self : Self) -> Unit = _
@@ -135,6 +137,7 @@ extern "js" fn path2d_add_path_ffi(
 ) -> Unit = "(obj, path, transform) => obj.addPath(path, transform)"
 
 ///|
+/// [Path2D.addPath](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/addPath)
 impl TPath2D with add_path(
   self : Self,
   path : &TPath2D,
@@ -151,6 +154,7 @@ impl TPath2D with add_path(
 extern "js" fn path2d_close_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.closePath()"
 
 ///|
+/// [Path2D.closePath](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/closePath)
 impl TPath2D with close_path(self : Self) -> Unit {
   path2d_close_path_ffi(TJsValue::to_js(self))
 }
@@ -163,6 +167,7 @@ extern "js" fn path2d_move_to_ffi(
 ) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
 
 ///|
+/// [Path2D.moveTo](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/moveTo)
 impl TPath2D with move_to(self : Self, x : Double, y : Double) -> Unit {
   path2d_move_to_ffi(
     TJsValue::to_js(self),
@@ -179,6 +184,7 @@ extern "js" fn path2d_line_to_ffi(
 ) -> Unit = "(obj, x, y) => obj.lineTo(x, y)"
 
 ///|
+/// [Path2D.lineTo](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/lineTo)
 impl TPath2D with line_to(self : Self, x : Double, y : Double) -> Unit {
   path2d_line_to_ffi(
     TJsValue::to_js(self),
@@ -197,6 +203,7 @@ extern "js" fn path2d_quadratic_curve_to_ffi(
 ) -> Unit = "(obj, cpx, cpy, x, y) => obj.quadraticCurveTo(cpx, cpy, x, y)"
 
 ///|
+/// [Path2D.quadraticCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/quadraticCurveTo)
 impl TPath2D with quadratic_curve_to(
   self : Self,
   cpx : Double,
@@ -225,6 +232,7 @@ extern "js" fn path2d_bezier_curve_to_ffi(
 ) -> Unit = "(obj, cp1x, cp1y, cp2x, cp2y, x, y) => obj.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)"
 
 ///|
+/// [Path2D.bezierCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/bezierCurveTo)
 impl TPath2D with bezier_curve_to(
   self : Self,
   cp1x : Double,
@@ -256,6 +264,7 @@ extern "js" fn path2d_arc_to_ffi(
 ) -> Unit = "(obj, x1, y1, x2, y2, radius) => obj.arcTo(x1, y1, x2, y2, radius)"
 
 ///|
+/// [Path2D.arcTo](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/arcTo)
 impl TPath2D with arc_to(
   self : Self,
   x1 : Double,
@@ -284,6 +293,7 @@ extern "js" fn path2d_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.rect(x, y, w, h)"
 
 ///|
+/// [Path2D.rect](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/rect)
 impl TPath2D with rect(
   self : Self,
   x : Double,
@@ -311,6 +321,7 @@ extern "js" fn path2d_round_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h, radii) => obj.roundRect(x, y, w, h, radii)"
 
 ///|
+/// [Path2D.roundRect](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/roundRect)
 impl TPath2D with round_rect(
   self : Self,
   x : Double,
@@ -341,6 +352,7 @@ extern "js" fn path2d_arc_ffi(
 ) -> Unit = "(obj, x, y, radius, start_angle, end_angle, counterclockwise) => obj.arc(x, y, radius, start_angle, end_angle, counterclockwise)"
 
 ///|
+/// [Path2D.arc](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/arc)
 impl TPath2D with arc(
   self : Self,
   x : Double,
@@ -375,6 +387,7 @@ extern "js" fn path2d_ellipse_ffi(
 ) -> Unit = "(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise) => obj.ellipse(x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise)"
 
 ///|
+/// [Path2D.ellipse](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/ellipse)
 impl TPath2D with ellipse(
   self : Self,
   x : Double,

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLOptGroupElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement)
 #external
 pub type HTMLOptGroupElement
 
@@ -38,6 +39,7 @@ pub fn HTMLOptGroupElement::new() -> HTMLOptGroupElement {
 }
 
 ///|
+/// [HTMLOptGroupElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement) interface.
 pub trait THTMLOptGroupElement: THTMLElement {
   disabled(self : Self) -> Bool = _
   set_disabled(self : Self, disabled : Bool) -> Unit = _
@@ -49,6 +51,7 @@ pub trait THTMLOptGroupElement: THTMLElement {
 extern "js" fn html_opt_group_element_disabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.disabled"
 
 ///|
+/// [HTMLOptGroupElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/disabled)
 impl THTMLOptGroupElement with disabled(self : Self) -> Bool {
   html_opt_group_element_disabled_ffi(TJsValue::to_js(self))
 }
@@ -60,6 +63,7 @@ extern "js" fn html_opt_group_element_set_disabled_ffi(
 ) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
+/// [HTMLOptGroupElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/disabled)
 impl THTMLOptGroupElement with set_disabled(self : Self, disabled : Bool) -> Unit {
   html_opt_group_element_set_disabled_ffi(
     TJsValue::to_js(self),
@@ -71,6 +75,7 @@ impl THTMLOptGroupElement with set_disabled(self : Self, disabled : Bool) -> Uni
 extern "js" fn html_opt_group_element_label_ffi(obj : JsValue) -> String = "(obj) => obj.label"
 
 ///|
+/// [HTMLOptGroupElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/label)
 impl THTMLOptGroupElement with label(self : Self) -> String {
   html_opt_group_element_label_ffi(TJsValue::to_js(self))
 }
@@ -82,6 +87,7 @@ extern "js" fn html_opt_group_element_set_label_ffi(
 ) -> Unit = "(obj, label) => { obj.label = label; }"
 
 ///|
+/// [HTMLOptGroupElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/label)
 impl THTMLOptGroupElement with set_label(self : Self, label : String) -> Unit {
   html_opt_group_element_set_label_ffi(
     TJsValue::to_js(self),

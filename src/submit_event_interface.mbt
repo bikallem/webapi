@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [SubmitEvent](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent)
 #external
 pub type SubmitEvent
 
@@ -33,6 +34,7 @@ pub fn SubmitEvent::new(
 }
 
 ///|
+/// [SubmitEvent](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent) interface.
 pub trait TSubmitEvent: TEvent {
   submitter(self : Self) -> HTMLElement = _
 }
@@ -41,6 +43,7 @@ pub trait TSubmitEvent: TEvent {
 extern "js" fn submit_event_submitter_ffi(obj : JsValue) -> HTMLElement = "(obj) => obj.submitter"
 
 ///|
+/// [SubmitEvent.submitter](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter)
 impl TSubmitEvent with submitter(self : Self) -> HTMLElement {
   submit_event_submitter_ffi(TJsValue::to_js(self))
 }

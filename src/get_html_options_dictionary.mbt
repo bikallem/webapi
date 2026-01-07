@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [GetHTMLOptions](https://developer.mozilla.org/en-US/docs/Web/API/GetHTMLOptions)
 #external
 pub type GetHTMLOptions
 

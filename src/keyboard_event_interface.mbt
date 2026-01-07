@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent)
 #external
 pub type KeyboardEvent
 
@@ -51,6 +52,7 @@ pub const KEYBOARD_EVENT_DOM_KEY_LOCATION_RIGHT : UInt = 0x02
 pub const KEYBOARD_EVENT_DOM_KEY_LOCATION_NUMPAD : UInt = 0x03
 
 ///|
+/// [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) interface.
 pub trait TKeyboardEvent: TUIEvent {
   key(self : Self) -> String = _
   code(self : Self) -> String = _
@@ -83,6 +85,7 @@ pub trait TKeyboardEvent: TUIEvent {
 extern "js" fn keyboard_event_key_ffi(obj : JsValue) -> String = "(obj) => obj.key"
 
 ///|
+/// [KeyboardEvent.key](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
 impl TKeyboardEvent with key(self : Self) -> String {
   keyboard_event_key_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +94,7 @@ impl TKeyboardEvent with key(self : Self) -> String {
 extern "js" fn keyboard_event_code_ffi(obj : JsValue) -> String = "(obj) => obj.code"
 
 ///|
+/// [KeyboardEvent.code](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code)
 impl TKeyboardEvent with code(self : Self) -> String {
   keyboard_event_code_ffi(TJsValue::to_js(self))
 }
@@ -99,6 +103,7 @@ impl TKeyboardEvent with code(self : Self) -> String {
 extern "js" fn keyboard_event_location_ffi(obj : JsValue) -> UInt = "(obj) => obj.location"
 
 ///|
+/// [KeyboardEvent.location](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/location)
 impl TKeyboardEvent with location(self : Self) -> UInt {
   keyboard_event_location_ffi(TJsValue::to_js(self))
 }
@@ -107,6 +112,7 @@ impl TKeyboardEvent with location(self : Self) -> UInt {
 extern "js" fn keyboard_event_ctrl_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.ctrlKey"
 
 ///|
+/// [KeyboardEvent.ctrlKey](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/ctrlKey)
 impl TKeyboardEvent with ctrl_key(self : Self) -> Bool {
   keyboard_event_ctrl_key_ffi(TJsValue::to_js(self))
 }
@@ -115,6 +121,7 @@ impl TKeyboardEvent with ctrl_key(self : Self) -> Bool {
 extern "js" fn keyboard_event_shift_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.shiftKey"
 
 ///|
+/// [KeyboardEvent.shiftKey](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/shiftKey)
 impl TKeyboardEvent with shift_key(self : Self) -> Bool {
   keyboard_event_shift_key_ffi(TJsValue::to_js(self))
 }
@@ -123,6 +130,7 @@ impl TKeyboardEvent with shift_key(self : Self) -> Bool {
 extern "js" fn keyboard_event_alt_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.altKey"
 
 ///|
+/// [KeyboardEvent.altKey](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/altKey)
 impl TKeyboardEvent with alt_key(self : Self) -> Bool {
   keyboard_event_alt_key_ffi(TJsValue::to_js(self))
 }
@@ -131,6 +139,7 @@ impl TKeyboardEvent with alt_key(self : Self) -> Bool {
 extern "js" fn keyboard_event_meta_key_ffi(obj : JsValue) -> Bool = "(obj) => obj.metaKey"
 
 ///|
+/// [KeyboardEvent.metaKey](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey)
 impl TKeyboardEvent with meta_key(self : Self) -> Bool {
   keyboard_event_meta_key_ffi(TJsValue::to_js(self))
 }
@@ -139,6 +148,7 @@ impl TKeyboardEvent with meta_key(self : Self) -> Bool {
 extern "js" fn keyboard_event_repeat_ffi(obj : JsValue) -> Bool = "(obj) => obj.repeat"
 
 ///|
+/// [KeyboardEvent.repeat](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/repeat)
 impl TKeyboardEvent with repeat(self : Self) -> Bool {
   keyboard_event_repeat_ffi(TJsValue::to_js(self))
 }
@@ -147,6 +157,7 @@ impl TKeyboardEvent with repeat(self : Self) -> Bool {
 extern "js" fn keyboard_event_is_composing_ffi(obj : JsValue) -> Bool = "(obj) => obj.isComposing"
 
 ///|
+/// [KeyboardEvent.isComposing](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing)
 impl TKeyboardEvent with is_composing(self : Self) -> Bool {
   keyboard_event_is_composing_ffi(TJsValue::to_js(self))
 }
@@ -158,6 +169,7 @@ extern "js" fn keyboard_event_get_modifier_state_ffi(
 ) -> Bool = "(obj, key_arg) => obj.getModifierState(key_arg)"
 
 ///|
+/// [KeyboardEvent.getModifierState](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState)
 impl TKeyboardEvent with get_modifier_state(self : Self, key_arg : String) -> Bool {
   keyboard_event_get_modifier_state_ffi(
     TJsValue::to_js(self),
@@ -181,6 +193,7 @@ extern "js" fn keyboard_event_init_keyboard_event_ffi(
 ) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, key_arg, location_arg, ctrl_key, alt_key, shift_key, meta_key) => obj.initKeyboardEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, key_arg, location_arg, ctrl_key, alt_key, shift_key, meta_key)"
 
 ///|
+/// [KeyboardEvent.initKeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent)
 impl TKeyboardEvent with init_keyboard_event(
   self : Self,
   type_arg : String,
@@ -213,6 +226,7 @@ impl TKeyboardEvent with init_keyboard_event(
 extern "js" fn keyboard_event_char_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.charCode"
 
 ///|
+/// [KeyboardEvent.charCode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode)
 impl TKeyboardEvent with char_code(self : Self) -> UInt {
   keyboard_event_char_code_ffi(TJsValue::to_js(self))
 }
@@ -221,6 +235,7 @@ impl TKeyboardEvent with char_code(self : Self) -> UInt {
 extern "js" fn keyboard_event_key_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.keyCode"
 
 ///|
+/// [KeyboardEvent.keyCode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode)
 impl TKeyboardEvent with key_code(self : Self) -> UInt {
   keyboard_event_key_code_ffi(TJsValue::to_js(self))
 }

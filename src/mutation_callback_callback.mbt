@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [MutationCallback](https://developer.mozilla.org/en-US/docs/Web/API/MutationCallback)
 #external
 pub type MutationCallback
 

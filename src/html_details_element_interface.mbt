@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLDetailsElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement)
 #external
 pub type HTMLDetailsElement
 
@@ -38,6 +39,7 @@ pub fn HTMLDetailsElement::new() -> HTMLDetailsElement {
 }
 
 ///|
+/// [HTMLDetailsElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement) interface.
 pub trait THTMLDetailsElement: THTMLElement {
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
@@ -49,6 +51,7 @@ pub trait THTMLDetailsElement: THTMLElement {
 extern "js" fn html_details_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLDetailsElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/name)
 impl THTMLDetailsElement with name(self : Self) -> String {
   html_details_element_name_ffi(TJsValue::to_js(self))
 }
@@ -60,6 +63,7 @@ extern "js" fn html_details_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLDetailsElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/name)
 impl THTMLDetailsElement with set_name(self : Self, name : String) -> Unit {
   html_details_element_set_name_ffi(
     TJsValue::to_js(self),
@@ -71,6 +75,7 @@ impl THTMLDetailsElement with set_name(self : Self, name : String) -> Unit {
 extern "js" fn html_details_element_open_ffi(obj : JsValue) -> Bool = "(obj) => obj.open"
 
 ///|
+/// [HTMLDetailsElement.open](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/open)
 impl THTMLDetailsElement with open(self : Self) -> Bool {
   html_details_element_open_ffi(TJsValue::to_js(self))
 }
@@ -82,6 +87,7 @@ extern "js" fn html_details_element_set_open_ffi(
 ) -> Unit = "(obj, open) => { obj.open = open; }"
 
 ///|
+/// [HTMLDetailsElement.open](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/open)
 impl THTMLDetailsElement with set_open(self : Self, open : Bool) -> Unit {
   html_details_element_set_open_ffi(
     TJsValue::to_js(self),

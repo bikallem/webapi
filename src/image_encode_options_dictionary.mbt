@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageEncodeOptions](https://developer.mozilla.org/en-US/docs/Web/API/ImageEncodeOptions)
 #external
 pub type ImageEncodeOptions
 

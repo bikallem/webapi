@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [ConvertCoordinateOptions](https://developer.mozilla.org/en-US/docs/Web/API/ConvertCoordinateOptions)
 #external
 pub type ConvertCoordinateOptions
 

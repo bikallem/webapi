@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [PromiseRejectionEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PromiseRejectionEventInit)
 #external
 pub type PromiseRejectionEventInit
 

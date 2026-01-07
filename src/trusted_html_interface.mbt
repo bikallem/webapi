@@ -3,6 +3,7 @@
 // Specifications: trusted-types.idl
 
 ///|
+/// [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML)
 #external
 pub type TrustedHTML
 
@@ -16,6 +17,7 @@ pub fn[T : TTrustedHTML] TrustedHTML::into(self : TrustedHTML) -> T = "%identity
 pub impl TTrustedHTML for TrustedHTML
 
 ///|
+/// [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) interface.
 pub trait TTrustedHTML: TJsValue {
   to_json(self : Self) -> String = _
 }
@@ -24,6 +26,7 @@ pub trait TTrustedHTML: TJsValue {
 extern "js" fn trusted_html_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON()"
 
 ///|
+/// [TrustedHTML.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML/toJSON)
 impl TTrustedHTML with to_json(self : Self) -> String {
   trusted_html_to_json_ffi(TJsValue::to_js(self))
 }

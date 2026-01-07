@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGBoundingBoxOptions](https://developer.mozilla.org/en-US/docs/Web/API/SVGBoundingBoxOptions)
 #external
 pub type SVGBoundingBoxOptions
 

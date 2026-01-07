@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ToggleEvent](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent)
 #external
 pub type ToggleEvent
 
@@ -33,6 +34,7 @@ pub fn ToggleEvent::new(
 }
 
 ///|
+/// [ToggleEvent](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent) interface.
 pub trait TToggleEvent: TEvent {
   old_state(self : Self) -> String = _
   new_state(self : Self) -> String = _
@@ -43,6 +45,7 @@ pub trait TToggleEvent: TEvent {
 extern "js" fn toggle_event_old_state_ffi(obj : JsValue) -> String = "(obj) => obj.oldState"
 
 ///|
+/// [ToggleEvent.oldState](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent/oldState)
 impl TToggleEvent with old_state(self : Self) -> String {
   toggle_event_old_state_ffi(TJsValue::to_js(self))
 }
@@ -51,6 +54,7 @@ impl TToggleEvent with old_state(self : Self) -> String {
 extern "js" fn toggle_event_new_state_ffi(obj : JsValue) -> String = "(obj) => obj.newState"
 
 ///|
+/// [ToggleEvent.newState](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent/newState)
 impl TToggleEvent with new_state(self : Self) -> String {
   toggle_event_new_state_ffi(TJsValue::to_js(self))
 }
@@ -59,6 +63,7 @@ impl TToggleEvent with new_state(self : Self) -> String {
 extern "js" fn toggle_event_source_ffi(obj : JsValue) -> Element = "(obj) => obj.source"
 
 ///|
+/// [ToggleEvent.source](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent/source)
 impl TToggleEvent with source(self : Self) -> Element {
   toggle_event_source_ffi(TJsValue::to_js(self))
 }

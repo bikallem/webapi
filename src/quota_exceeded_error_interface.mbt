@@ -3,6 +3,7 @@
 // Specifications: webidl.idl
 
 ///|
+/// [QuotaExceededError](https://developer.mozilla.org/en-US/docs/Web/API/QuotaExceededError)
 #external
 pub type QuotaExceededError
 
@@ -38,6 +39,7 @@ pub fn QuotaExceededError::new(
 }
 
 ///|
+/// [QuotaExceededError](https://developer.mozilla.org/en-US/docs/Web/API/QuotaExceededError) interface.
 pub trait TQuotaExceededError: TDOMException {
   quota(self : Self) -> Double = _
   requested(self : Self) -> Double = _
@@ -47,6 +49,7 @@ pub trait TQuotaExceededError: TDOMException {
 extern "js" fn quota_exceeded_error_quota_ffi(obj : JsValue) -> Double = "(obj) => obj.quota"
 
 ///|
+/// [QuotaExceededError.quota](https://developer.mozilla.org/en-US/docs/Web/API/QuotaExceededError/quota)
 impl TQuotaExceededError with quota(self : Self) -> Double {
   quota_exceeded_error_quota_ffi(TJsValue::to_js(self))
 }
@@ -55,6 +58,7 @@ impl TQuotaExceededError with quota(self : Self) -> Double {
 extern "js" fn quota_exceeded_error_requested_ffi(obj : JsValue) -> Double = "(obj) => obj.requested"
 
 ///|
+/// [QuotaExceededError.requested](https://developer.mozilla.org/en-US/docs/Web/API/QuotaExceededError/requested)
 impl TQuotaExceededError with requested(self : Self) -> Double {
   quota_exceeded_error_requested_ffi(TJsValue::to_js(self))
 }

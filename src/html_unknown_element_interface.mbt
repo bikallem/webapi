@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLUnknownElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLUnknownElement)
 #external
 pub type HTMLUnknownElement
 
@@ -30,4 +31,5 @@ pub impl TNode for HTMLUnknownElement
 pub impl TEventTarget for HTMLUnknownElement
 
 ///|
+/// [HTMLUnknownElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLUnknownElement) interface.
 pub trait THTMLUnknownElement: THTMLElement {}

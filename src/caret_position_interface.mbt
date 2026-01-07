@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [CaretPosition](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition)
 #external
 pub type CaretPosition
 
@@ -16,6 +17,7 @@ pub fn[T : TCaretPosition] CaretPosition::into(self : CaretPosition) -> T = "%id
 pub impl TCaretPosition for CaretPosition
 
 ///|
+/// [CaretPosition](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition) interface.
 pub trait TCaretPosition: TJsValue {
   offset_node(self : Self) -> Node = _
   offset(self : Self) -> UInt = _
@@ -26,6 +28,7 @@ pub trait TCaretPosition: TJsValue {
 extern "js" fn caret_position_offset_node_ffi(obj : JsValue) -> Node = "(obj) => obj.offsetNode"
 
 ///|
+/// [CaretPosition.offsetNode](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/offsetNode)
 impl TCaretPosition with offset_node(self : Self) -> Node {
   caret_position_offset_node_ffi(TJsValue::to_js(self))
 }
@@ -34,6 +37,7 @@ impl TCaretPosition with offset_node(self : Self) -> Node {
 extern "js" fn caret_position_offset_ffi(obj : JsValue) -> UInt = "(obj) => obj.offset"
 
 ///|
+/// [CaretPosition.offset](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/offset)
 impl TCaretPosition with offset(self : Self) -> UInt {
   caret_position_offset_ffi(TJsValue::to_js(self))
 }
@@ -42,6 +46,7 @@ impl TCaretPosition with offset(self : Self) -> UInt {
 extern "js" fn caret_position_get_client_rect_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getClientRect()"
 
 ///|
+/// [CaretPosition.getClientRect](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/getClientRect)
 impl TCaretPosition with get_client_rect(self : Self) -> DOMRect? {
   let result = caret_position_get_client_rect_ffi(TJsValue::to_js(self))
   if JsValue::is_null(result) {

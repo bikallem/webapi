@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ElementInternals](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals)
 #external
 pub type ElementInternals
 
@@ -50,6 +51,7 @@ pub impl TElementInternalsSetFormValueState for FormData with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+/// [ElementInternals](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals) interface.
 pub trait TElementInternals: TJsValue {
   shadow_root(self : Self) -> ShadowRoot = _
   set_form_value(
@@ -77,6 +79,7 @@ pub trait TElementInternals: TJsValue {
 extern "js" fn element_internals_shadow_root_ffi(obj : JsValue) -> ShadowRoot = "(obj) => obj.shadowRoot"
 
 ///|
+/// [ElementInternals.shadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/shadowRoot)
 impl TElementInternals with shadow_root(self : Self) -> ShadowRoot {
   element_internals_shadow_root_ffi(TJsValue::to_js(self))
 }
@@ -89,6 +92,7 @@ extern "js" fn element_internals_set_form_value_ffi(
 ) -> Unit = "(obj, value, state) => obj.setFormValue(value, state)"
 
 ///|
+/// [ElementInternals.setFormValue](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/setFormValue)
 impl TElementInternals with set_form_value(
   self : Self,
   value : &TElementInternalsSetFormValueValue,
@@ -108,6 +112,7 @@ impl TElementInternals with set_form_value(
 extern "js" fn element_internals_form_ffi(obj : JsValue) -> HTMLFormElement = "(obj) => obj.form"
 
 ///|
+/// [ElementInternals.form](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/form)
 impl TElementInternals with form(self : Self) -> HTMLFormElement {
   element_internals_form_ffi(TJsValue::to_js(self))
 }
@@ -121,6 +126,7 @@ extern "js" fn element_internals_set_validity_ffi(
 ) -> Unit = "(obj, flags, message, anchor) => obj.setValidity(flags, message, anchor)"
 
 ///|
+/// [ElementInternals.setValidity](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/setValidity)
 impl TElementInternals with set_validity(
   self : Self,
   flags? : ValidityStateFlags = ValidityStateFlags::empty(),
@@ -139,6 +145,7 @@ impl TElementInternals with set_validity(
 extern "js" fn element_internals_will_validate_ffi(obj : JsValue) -> Bool = "(obj) => obj.willValidate"
 
 ///|
+/// [ElementInternals.willValidate](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/willValidate)
 impl TElementInternals with will_validate(self : Self) -> Bool {
   element_internals_will_validate_ffi(TJsValue::to_js(self))
 }
@@ -147,6 +154,7 @@ impl TElementInternals with will_validate(self : Self) -> Bool {
 extern "js" fn element_internals_validity_ffi(obj : JsValue) -> ValidityState = "(obj) => obj.validity"
 
 ///|
+/// [ElementInternals.validity](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/validity)
 impl TElementInternals with validity(self : Self) -> ValidityState {
   element_internals_validity_ffi(TJsValue::to_js(self))
 }
@@ -157,6 +165,7 @@ extern "js" fn element_internals_validation_message_ffi(
 ) -> String = "(obj) => obj.validationMessage"
 
 ///|
+/// [ElementInternals.validationMessage](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/validationMessage)
 impl TElementInternals with validation_message(self : Self) -> String {
   element_internals_validation_message_ffi(TJsValue::to_js(self))
 }
@@ -165,6 +174,7 @@ impl TElementInternals with validation_message(self : Self) -> String {
 extern "js" fn element_internals_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
+/// [ElementInternals.checkValidity](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/checkValidity)
 impl TElementInternals with check_validity(self : Self) -> Bool {
   element_internals_check_validity_ffi(TJsValue::to_js(self))
 }
@@ -173,6 +183,7 @@ impl TElementInternals with check_validity(self : Self) -> Bool {
 extern "js" fn element_internals_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
+/// [ElementInternals.reportValidity](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/reportValidity)
 impl TElementInternals with report_validity(self : Self) -> Bool {
   element_internals_report_validity_ffi(TJsValue::to_js(self))
 }
@@ -181,6 +192,7 @@ impl TElementInternals with report_validity(self : Self) -> Bool {
 extern "js" fn element_internals_labels_ffi(obj : JsValue) -> NodeList = "(obj) => obj.labels"
 
 ///|
+/// [ElementInternals.labels](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/labels)
 impl TElementInternals with labels(self : Self) -> NodeList {
   element_internals_labels_ffi(TJsValue::to_js(self))
 }
@@ -189,6 +201,7 @@ impl TElementInternals with labels(self : Self) -> NodeList {
 extern "js" fn element_internals_states_ffi(obj : JsValue) -> CustomStateSet = "(obj) => obj.states"
 
 ///|
+/// [ElementInternals.states](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states)
 impl TElementInternals with states(self : Self) -> CustomStateSet {
   element_internals_states_ffi(TJsValue::to_js(self))
 }

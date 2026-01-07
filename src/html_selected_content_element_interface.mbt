@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLSelectedContentElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectedContentElement)
 #external
 pub type HTMLSelectedContentElement
 
@@ -40,4 +41,5 @@ pub fn HTMLSelectedContentElement::new() -> HTMLSelectedContentElement {
 }
 
 ///|
+/// [HTMLSelectedContentElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectedContentElement) interface.
 pub trait THTMLSelectedContentElement: THTMLElement {}

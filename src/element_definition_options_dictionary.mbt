@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ElementDefinitionOptions](https://developer.mozilla.org/en-US/docs/Web/API/ElementDefinitionOptions)
 #external
 pub type ElementDefinitionOptions
 

@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [NavigationCurrentEntryChangeEventInit](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEventInit)
 #external
 pub type NavigationCurrentEntryChangeEventInit
 

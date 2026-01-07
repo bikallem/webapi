@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLHeadElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadElement)
 #external
 pub type HTMLHeadElement
 
@@ -36,4 +37,5 @@ pub fn HTMLHeadElement::new() -> HTMLHeadElement {
 }
 
 ///|
+/// [HTMLHeadElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadElement) interface.
 pub trait THTMLHeadElement: THTMLElement {}

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLLabelElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement)
 #external
 pub type HTMLLabelElement
 
@@ -38,6 +39,7 @@ pub fn HTMLLabelElement::new() -> HTMLLabelElement {
 }
 
 ///|
+/// [HTMLLabelElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement) interface.
 pub trait THTMLLabelElement: THTMLElement {
   form(self : Self) -> HTMLFormElement = _
   html_for(self : Self) -> String = _
@@ -49,6 +51,7 @@ pub trait THTMLLabelElement: THTMLElement {
 extern "js" fn html_label_element_form_ffi(obj : JsValue) -> HTMLFormElement = "(obj) => obj.form"
 
 ///|
+/// [HTMLLabelElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/form)
 impl THTMLLabelElement with form(self : Self) -> HTMLFormElement {
   html_label_element_form_ffi(TJsValue::to_js(self))
 }
@@ -57,6 +60,7 @@ impl THTMLLabelElement with form(self : Self) -> HTMLFormElement {
 extern "js" fn html_label_element_html_for_ffi(obj : JsValue) -> String = "(obj) => obj.htmlFor"
 
 ///|
+/// [HTMLLabelElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor)
 impl THTMLLabelElement with html_for(self : Self) -> String {
   html_label_element_html_for_ffi(TJsValue::to_js(self))
 }
@@ -68,6 +72,7 @@ extern "js" fn html_label_element_set_html_for_ffi(
 ) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
 
 ///|
+/// [HTMLLabelElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor)
 impl THTMLLabelElement with set_html_for(self : Self, html_for : String) -> Unit {
   html_label_element_set_html_for_ffi(
     TJsValue::to_js(self),
@@ -79,6 +84,7 @@ impl THTMLLabelElement with set_html_for(self : Self, html_for : String) -> Unit
 extern "js" fn html_label_element_control_ffi(obj : JsValue) -> HTMLElement = "(obj) => obj.control"
 
 ///|
+/// [HTMLLabelElement.control](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/control)
 impl THTMLLabelElement with control(self : Self) -> HTMLElement {
   html_label_element_control_ffi(TJsValue::to_js(self))
 }

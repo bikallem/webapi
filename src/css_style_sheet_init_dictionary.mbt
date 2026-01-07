@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSStyleSheetInit](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheetInit)
 #external
 pub type CSSStyleSheetInit
 

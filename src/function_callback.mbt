@@ -3,6 +3,7 @@
 // Specifications: webidl.idl
 
 ///|
+/// [Function](https://developer.mozilla.org/en-US/docs/Web/API/Function)
 #external
 pub type Function
 

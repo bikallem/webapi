@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMMatrix2DInit](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix2DInit)
 #external
 pub type DOMMatrix2DInit
 

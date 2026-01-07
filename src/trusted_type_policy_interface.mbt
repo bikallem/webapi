@@ -3,6 +3,7 @@
 // Specifications: trusted-types.idl
 
 ///|
+/// [TrustedTypePolicy](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy)
 #external
 pub type TrustedTypePolicy
 
@@ -18,6 +19,7 @@ pub fn[T : TTrustedTypePolicy] TrustedTypePolicy::into(
 pub impl TTrustedTypePolicy for TrustedTypePolicy
 
 ///|
+/// [TrustedTypePolicy](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy) interface.
 pub trait TTrustedTypePolicy: TJsValue {
   name(self : Self) -> String = _
   create_html(self : Self, input : String, arguments : JsValue) -> TrustedHTML = _
@@ -29,6 +31,7 @@ pub trait TTrustedTypePolicy: TJsValue {
 extern "js" fn trusted_type_policy_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [TrustedTypePolicy.name](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/name)
 impl TTrustedTypePolicy with name(self : Self) -> String {
   trusted_type_policy_name_ffi(TJsValue::to_js(self))
 }
@@ -41,6 +44,7 @@ extern "js" fn trusted_type_policy_create_html_ffi(
 ) -> TrustedHTML = "(obj, input, arguments) => obj.createHTML(input, arguments)"
 
 ///|
+/// [TrustedTypePolicy.createHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/createHTML)
 impl TTrustedTypePolicy with create_html(
   self : Self,
   input : String,
@@ -61,6 +65,7 @@ extern "js" fn trusted_type_policy_create_script_ffi(
 ) -> TrustedScript = "(obj, input, arguments) => obj.createScript(input, arguments)"
 
 ///|
+/// [TrustedTypePolicy.createScript](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/createScript)
 impl TTrustedTypePolicy with create_script(
   self : Self,
   input : String,
@@ -81,6 +86,7 @@ extern "js" fn trusted_type_policy_create_script_url_ffi(
 ) -> TrustedScriptURL = "(obj, input, arguments) => obj.createScriptURL(input, arguments)"
 
 ///|
+/// [TrustedTypePolicy.createScriptURL](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/createScriptURL)
 impl TTrustedTypePolicy with create_script_url(
   self : Self,
   input : String,

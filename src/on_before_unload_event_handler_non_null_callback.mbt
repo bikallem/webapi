@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [OnBeforeUnloadEventHandlerNonNull](https://developer.mozilla.org/en-US/docs/Web/API/OnBeforeUnloadEventHandlerNonNull)
 #external
 pub type OnBeforeUnloadEventHandlerNonNull
 

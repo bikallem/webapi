@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement)
 #external
 pub type HTMLDivElement
 
@@ -36,6 +37,7 @@ pub fn HTMLDivElement::new() -> HTMLDivElement {
 }
 
 ///|
+/// [HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement) interface.
 pub trait THTMLDivElement: THTMLElement {
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
@@ -45,6 +47,7 @@ pub trait THTMLDivElement: THTMLElement {
 extern "js" fn html_div_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLDivElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement/align)
 impl THTMLDivElement with align(self : Self) -> String {
   html_div_element_align_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ extern "js" fn html_div_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLDivElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement/align)
 impl THTMLDivElement with set_align(self : Self, align : String) -> Unit {
   html_div_element_set_align_ffi(TJsValue::to_js(self), TJsValue::to_js(align))
 }

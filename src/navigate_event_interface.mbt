@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigateEvent](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent)
 #external
 pub type NavigateEvent
 
@@ -36,6 +37,7 @@ pub fn NavigateEvent::new(
 }
 
 ///|
+/// [NavigateEvent](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent) interface.
 pub trait TNavigateEvent: TEvent {
   navigation_type(self : Self) -> NavigationType = _
   destination(self : Self) -> NavigationDestination = _
@@ -58,6 +60,7 @@ extern "js" fn navigate_event_navigation_type_ffi(
 ) -> NavigationType = "(obj) => obj.navigationType"
 
 ///|
+/// [NavigateEvent.navigationType](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/navigationType)
 impl TNavigateEvent with navigation_type(self : Self) -> NavigationType {
   navigate_event_navigation_type_ffi(TJsValue::to_js(self))
 }
@@ -68,6 +71,7 @@ extern "js" fn navigate_event_destination_ffi(
 ) -> NavigationDestination = "(obj) => obj.destination"
 
 ///|
+/// [NavigateEvent.destination](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/destination)
 impl TNavigateEvent with destination(self : Self) -> NavigationDestination {
   navigate_event_destination_ffi(TJsValue::to_js(self))
 }
@@ -76,6 +80,7 @@ impl TNavigateEvent with destination(self : Self) -> NavigationDestination {
 extern "js" fn navigate_event_can_intercept_ffi(obj : JsValue) -> Bool = "(obj) => obj.canIntercept"
 
 ///|
+/// [NavigateEvent.canIntercept](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/canIntercept)
 impl TNavigateEvent with can_intercept(self : Self) -> Bool {
   navigate_event_can_intercept_ffi(TJsValue::to_js(self))
 }
@@ -84,6 +89,7 @@ impl TNavigateEvent with can_intercept(self : Self) -> Bool {
 extern "js" fn navigate_event_user_initiated_ffi(obj : JsValue) -> Bool = "(obj) => obj.userInitiated"
 
 ///|
+/// [NavigateEvent.userInitiated](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/userInitiated)
 impl TNavigateEvent with user_initiated(self : Self) -> Bool {
   navigate_event_user_initiated_ffi(TJsValue::to_js(self))
 }
@@ -92,6 +98,7 @@ impl TNavigateEvent with user_initiated(self : Self) -> Bool {
 extern "js" fn navigate_event_hash_change_ffi(obj : JsValue) -> Bool = "(obj) => obj.hashChange"
 
 ///|
+/// [NavigateEvent.hashChange](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/hashChange)
 impl TNavigateEvent with hash_change(self : Self) -> Bool {
   navigate_event_hash_change_ffi(TJsValue::to_js(self))
 }
@@ -100,6 +107,7 @@ impl TNavigateEvent with hash_change(self : Self) -> Bool {
 extern "js" fn navigate_event_signal_ffi(obj : JsValue) -> AbortSignal = "(obj) => obj.signal"
 
 ///|
+/// [NavigateEvent.signal](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/signal)
 impl TNavigateEvent with signal(self : Self) -> AbortSignal {
   navigate_event_signal_ffi(TJsValue::to_js(self))
 }
@@ -108,6 +116,7 @@ impl TNavigateEvent with signal(self : Self) -> AbortSignal {
 extern "js" fn navigate_event_form_data_ffi(obj : JsValue) -> FormData = "(obj) => obj.formData"
 
 ///|
+/// [NavigateEvent.formData](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/formData)
 impl TNavigateEvent with form_data(self : Self) -> FormData {
   navigate_event_form_data_ffi(TJsValue::to_js(self))
 }
@@ -116,6 +125,7 @@ impl TNavigateEvent with form_data(self : Self) -> FormData {
 extern "js" fn navigate_event_download_request_ffi(obj : JsValue) -> String = "(obj) => obj.downloadRequest"
 
 ///|
+/// [NavigateEvent.downloadRequest](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/downloadRequest)
 impl TNavigateEvent with download_request(self : Self) -> String {
   navigate_event_download_request_ffi(TJsValue::to_js(self))
 }
@@ -124,6 +134,7 @@ impl TNavigateEvent with download_request(self : Self) -> String {
 extern "js" fn navigate_event_info_ffi(obj : JsValue) -> JsValue = "(obj) => obj.info"
 
 ///|
+/// [NavigateEvent.info](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/info)
 impl TNavigateEvent with info(self : Self) -> JsValue {
   navigate_event_info_ffi(TJsValue::to_js(self))
 }
@@ -134,6 +145,7 @@ extern "js" fn navigate_event_has_ua_visual_transition_ffi(
 ) -> Bool = "(obj) => obj.hasUAVisualTransition"
 
 ///|
+/// [NavigateEvent.hasUAVisualTransition](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/hasUAVisualTransition)
 impl TNavigateEvent with has_ua_visual_transition(self : Self) -> Bool {
   navigate_event_has_ua_visual_transition_ffi(TJsValue::to_js(self))
 }
@@ -142,6 +154,7 @@ impl TNavigateEvent with has_ua_visual_transition(self : Self) -> Bool {
 extern "js" fn navigate_event_source_element_ffi(obj : JsValue) -> Element = "(obj) => obj.sourceElement"
 
 ///|
+/// [NavigateEvent.sourceElement](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/sourceElement)
 impl TNavigateEvent with source_element(self : Self) -> Element {
   navigate_event_source_element_ffi(TJsValue::to_js(self))
 }
@@ -153,6 +166,7 @@ extern "js" fn navigate_event_intercept_ffi(
 ) -> Unit = "(obj, options) => obj.intercept(options)"
 
 ///|
+/// [NavigateEvent.intercept](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/intercept)
 impl TNavigateEvent with intercept(
   self : Self,
   options? : NavigationInterceptOptions = NavigationInterceptOptions::empty(),
@@ -164,6 +178,7 @@ impl TNavigateEvent with intercept(
 extern "js" fn navigate_event_scroll_ffi(obj : JsValue) -> Unit = "(obj) => obj.scroll()"
 
 ///|
+/// [NavigateEvent.scroll](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/scroll)
 impl TNavigateEvent with scroll(self : Self) -> Unit {
   navigate_event_scroll_ffi(TJsValue::to_js(self))
 }

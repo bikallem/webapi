@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [Comment](https://developer.mozilla.org/en-US/docs/Web/API/Comment)
 #external
 pub type Comment
 
@@ -33,4 +34,5 @@ pub fn Comment::new(data? : String = "") -> Comment {
 }
 
 ///|
+/// [Comment](https://developer.mozilla.org/en-US/docs/Web/API/Comment) interface.
 pub trait TComment: TCharacterData {}

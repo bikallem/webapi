@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGDescElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGDescElement)
 #external
 pub type SVGDescElement
 
@@ -28,4 +29,5 @@ pub impl TNode for SVGDescElement
 pub impl TEventTarget for SVGDescElement
 
 ///|
+/// [SVGDescElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGDescElement) interface.
 pub trait TSVGDescElement: TSVGElement {}

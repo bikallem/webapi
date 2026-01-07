@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [WorkerOptions](https://developer.mozilla.org/en-US/docs/Web/API/WorkerOptions)
 #external
 pub type WorkerOptions
 

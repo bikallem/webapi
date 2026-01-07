@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [PageTransitionEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PageTransitionEventInit)
 #external
 pub type PageTransitionEventInit
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLMetaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement)
 #external
 pub type HTMLMetaElement
 
@@ -36,6 +37,7 @@ pub fn HTMLMetaElement::new() -> HTMLMetaElement {
 }
 
 ///|
+/// [HTMLMetaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement) interface.
 pub trait THTMLMetaElement: THTMLElement {
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
@@ -53,6 +55,7 @@ pub trait THTMLMetaElement: THTMLElement {
 extern "js" fn html_meta_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLMetaElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/name)
 impl THTMLMetaElement with name(self : Self) -> String {
   html_meta_element_name_ffi(TJsValue::to_js(self))
 }
@@ -64,6 +67,7 @@ extern "js" fn html_meta_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLMetaElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/name)
 impl THTMLMetaElement with set_name(self : Self, name : String) -> Unit {
   html_meta_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -72,6 +76,7 @@ impl THTMLMetaElement with set_name(self : Self, name : String) -> Unit {
 extern "js" fn html_meta_element_http_equiv_ffi(obj : JsValue) -> String = "(obj) => obj.httpEquiv"
 
 ///|
+/// [HTMLMetaElement.httpEquiv](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/httpEquiv)
 impl THTMLMetaElement with http_equiv(self : Self) -> String {
   html_meta_element_http_equiv_ffi(TJsValue::to_js(self))
 }
@@ -83,6 +88,7 @@ extern "js" fn html_meta_element_set_http_equiv_ffi(
 ) -> Unit = "(obj, httpEquiv) => { obj.httpEquiv = httpEquiv; }"
 
 ///|
+/// [HTMLMetaElement.httpEquiv](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/httpEquiv)
 impl THTMLMetaElement with set_http_equiv(self : Self, http_equiv : String) -> Unit {
   html_meta_element_set_http_equiv_ffi(
     TJsValue::to_js(self),
@@ -94,6 +100,7 @@ impl THTMLMetaElement with set_http_equiv(self : Self, http_equiv : String) -> U
 extern "js" fn html_meta_element_content_ffi(obj : JsValue) -> String = "(obj) => obj.content"
 
 ///|
+/// [HTMLMetaElement.content](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/content)
 impl THTMLMetaElement with content(self : Self) -> String {
   html_meta_element_content_ffi(TJsValue::to_js(self))
 }
@@ -105,6 +112,7 @@ extern "js" fn html_meta_element_set_content_ffi(
 ) -> Unit = "(obj, content) => { obj.content = content; }"
 
 ///|
+/// [HTMLMetaElement.content](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/content)
 impl THTMLMetaElement with set_content(self : Self, content : String) -> Unit {
   html_meta_element_set_content_ffi(
     TJsValue::to_js(self),
@@ -116,6 +124,7 @@ impl THTMLMetaElement with set_content(self : Self, content : String) -> Unit {
 extern "js" fn html_meta_element_media_ffi(obj : JsValue) -> String = "(obj) => obj.media"
 
 ///|
+/// [HTMLMetaElement.media](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/media)
 impl THTMLMetaElement with media(self : Self) -> String {
   html_meta_element_media_ffi(TJsValue::to_js(self))
 }
@@ -127,6 +136,7 @@ extern "js" fn html_meta_element_set_media_ffi(
 ) -> Unit = "(obj, media) => { obj.media = media; }"
 
 ///|
+/// [HTMLMetaElement.media](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/media)
 impl THTMLMetaElement with set_media(self : Self, media : String) -> Unit {
   html_meta_element_set_media_ffi(TJsValue::to_js(self), TJsValue::to_js(media))
 }
@@ -135,6 +145,7 @@ impl THTMLMetaElement with set_media(self : Self, media : String) -> Unit {
 extern "js" fn html_meta_element_scheme_ffi(obj : JsValue) -> String = "(obj) => obj.scheme"
 
 ///|
+/// [HTMLMetaElement.scheme](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/scheme)
 impl THTMLMetaElement with scheme(self : Self) -> String {
   html_meta_element_scheme_ffi(TJsValue::to_js(self))
 }
@@ -146,6 +157,7 @@ extern "js" fn html_meta_element_set_scheme_ffi(
 ) -> Unit = "(obj, scheme) => { obj.scheme = scheme; }"
 
 ///|
+/// [HTMLMetaElement.scheme](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement/scheme)
 impl THTMLMetaElement with set_scheme(self : Self, scheme : String) -> Unit {
   html_meta_element_set_scheme_ffi(
     TJsValue::to_js(self),

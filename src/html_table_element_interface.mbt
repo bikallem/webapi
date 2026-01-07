@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTableElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement)
 #external
 pub type HTMLTableElement
 
@@ -38,6 +39,7 @@ pub fn HTMLTableElement::new() -> HTMLTableElement {
 }
 
 ///|
+/// [HTMLTableElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement) interface.
 pub trait THTMLTableElement: THTMLElement {
   caption(self : Self) -> HTMLTableCaptionElement = _
   set_caption(self : Self, caption : &THTMLTableCaptionElement) -> Unit = _
@@ -82,6 +84,7 @@ extern "js" fn html_table_element_caption_ffi(
 ) -> HTMLTableCaptionElement = "(obj) => obj.caption"
 
 ///|
+/// [HTMLTableElement.caption](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/caption)
 impl THTMLTableElement with caption(self : Self) -> HTMLTableCaptionElement {
   html_table_element_caption_ffi(TJsValue::to_js(self))
 }
@@ -93,6 +96,7 @@ extern "js" fn html_table_element_set_caption_ffi(
 ) -> Unit = "(obj, caption) => { obj.caption = caption; }"
 
 ///|
+/// [HTMLTableElement.caption](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/caption)
 impl THTMLTableElement with set_caption(
   self : Self,
   caption : &THTMLTableCaptionElement,
@@ -109,6 +113,7 @@ extern "js" fn html_table_element_create_caption_ffi(
 ) -> HTMLTableCaptionElement = "(obj) => obj.createCaption()"
 
 ///|
+/// [HTMLTableElement.createCaption](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createCaption)
 impl THTMLTableElement with create_caption(self : Self) -> HTMLTableCaptionElement {
   html_table_element_create_caption_ffi(TJsValue::to_js(self))
 }
@@ -117,6 +122,7 @@ impl THTMLTableElement with create_caption(self : Self) -> HTMLTableCaptionEleme
 extern "js" fn html_table_element_delete_caption_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteCaption()"
 
 ///|
+/// [HTMLTableElement.deleteCaption](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteCaption)
 impl THTMLTableElement with delete_caption(self : Self) -> Unit {
   html_table_element_delete_caption_ffi(TJsValue::to_js(self))
 }
@@ -127,6 +133,7 @@ extern "js" fn html_table_element_t_head_ffi(
 ) -> HTMLTableSectionElement = "(obj) => obj.tHead"
 
 ///|
+/// [HTMLTableElement.tHead](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/tHead)
 impl THTMLTableElement with t_head(self : Self) -> HTMLTableSectionElement {
   html_table_element_t_head_ffi(TJsValue::to_js(self))
 }
@@ -138,6 +145,7 @@ extern "js" fn html_table_element_set_t_head_ffi(
 ) -> Unit = "(obj, tHead) => { obj.tHead = tHead; }"
 
 ///|
+/// [HTMLTableElement.tHead](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/tHead)
 impl THTMLTableElement with set_t_head(
   self : Self,
   t_head : &THTMLTableSectionElement,
@@ -154,6 +162,7 @@ extern "js" fn html_table_element_create_t_head_ffi(
 ) -> HTMLTableSectionElement = "(obj) => obj.createTHead()"
 
 ///|
+/// [HTMLTableElement.createTHead](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createTHead)
 impl THTMLTableElement with create_t_head(self : Self) -> HTMLTableSectionElement {
   html_table_element_create_t_head_ffi(TJsValue::to_js(self))
 }
@@ -162,6 +171,7 @@ impl THTMLTableElement with create_t_head(self : Self) -> HTMLTableSectionElemen
 extern "js" fn html_table_element_delete_t_head_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteTHead()"
 
 ///|
+/// [HTMLTableElement.deleteTHead](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteTHead)
 impl THTMLTableElement with delete_t_head(self : Self) -> Unit {
   html_table_element_delete_t_head_ffi(TJsValue::to_js(self))
 }
@@ -172,6 +182,7 @@ extern "js" fn html_table_element_t_foot_ffi(
 ) -> HTMLTableSectionElement = "(obj) => obj.tFoot"
 
 ///|
+/// [HTMLTableElement.tFoot](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/tFoot)
 impl THTMLTableElement with t_foot(self : Self) -> HTMLTableSectionElement {
   html_table_element_t_foot_ffi(TJsValue::to_js(self))
 }
@@ -183,6 +194,7 @@ extern "js" fn html_table_element_set_t_foot_ffi(
 ) -> Unit = "(obj, tFoot) => { obj.tFoot = tFoot; }"
 
 ///|
+/// [HTMLTableElement.tFoot](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/tFoot)
 impl THTMLTableElement with set_t_foot(
   self : Self,
   t_foot : &THTMLTableSectionElement,
@@ -199,6 +211,7 @@ extern "js" fn html_table_element_create_t_foot_ffi(
 ) -> HTMLTableSectionElement = "(obj) => obj.createTFoot()"
 
 ///|
+/// [HTMLTableElement.createTFoot](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createTFoot)
 impl THTMLTableElement with create_t_foot(self : Self) -> HTMLTableSectionElement {
   html_table_element_create_t_foot_ffi(TJsValue::to_js(self))
 }
@@ -207,6 +220,7 @@ impl THTMLTableElement with create_t_foot(self : Self) -> HTMLTableSectionElemen
 extern "js" fn html_table_element_delete_t_foot_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteTFoot()"
 
 ///|
+/// [HTMLTableElement.deleteTFoot](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteTFoot)
 impl THTMLTableElement with delete_t_foot(self : Self) -> Unit {
   html_table_element_delete_t_foot_ffi(TJsValue::to_js(self))
 }
@@ -215,6 +229,7 @@ impl THTMLTableElement with delete_t_foot(self : Self) -> Unit {
 extern "js" fn html_table_element_t_bodies_ffi(obj : JsValue) -> HTMLCollection = "(obj) => obj.tBodies"
 
 ///|
+/// [HTMLTableElement.tBodies](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/tBodies)
 impl THTMLTableElement with t_bodies(self : Self) -> HTMLCollection {
   html_table_element_t_bodies_ffi(TJsValue::to_js(self))
 }
@@ -225,6 +240,7 @@ extern "js" fn html_table_element_create_t_body_ffi(
 ) -> HTMLTableSectionElement = "(obj) => obj.createTBody()"
 
 ///|
+/// [HTMLTableElement.createTBody](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createTBody)
 impl THTMLTableElement with create_t_body(self : Self) -> HTMLTableSectionElement {
   html_table_element_create_t_body_ffi(TJsValue::to_js(self))
 }
@@ -233,6 +249,7 @@ impl THTMLTableElement with create_t_body(self : Self) -> HTMLTableSectionElemen
 extern "js" fn html_table_element_rows_ffi(obj : JsValue) -> HTMLCollection = "(obj) => obj.rows"
 
 ///|
+/// [HTMLTableElement.rows](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/rows)
 impl THTMLTableElement with rows(self : Self) -> HTMLCollection {
   html_table_element_rows_ffi(TJsValue::to_js(self))
 }
@@ -244,6 +261,7 @@ extern "js" fn html_table_element_insert_row_ffi(
 ) -> HTMLTableRowElement = "(obj, index) => obj.insertRow(index)"
 
 ///|
+/// [HTMLTableElement.insertRow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/insertRow)
 impl THTMLTableElement with insert_row(self : Self, index? : Int = (-1 : Int)) -> HTMLTableRowElement {
   html_table_element_insert_row_ffi(
     TJsValue::to_js(self),
@@ -258,6 +276,7 @@ extern "js" fn html_table_element_delete_row_ffi(
 ) -> Unit = "(obj, index) => obj.deleteRow(index)"
 
 ///|
+/// [HTMLTableElement.deleteRow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteRow)
 impl THTMLTableElement with delete_row(self : Self, index : Int) -> Unit {
   html_table_element_delete_row_ffi(
     TJsValue::to_js(self),
@@ -269,6 +288,7 @@ impl THTMLTableElement with delete_row(self : Self, index : Int) -> Unit {
 extern "js" fn html_table_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLTableElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/align)
 impl THTMLTableElement with align(self : Self) -> String {
   html_table_element_align_ffi(TJsValue::to_js(self))
 }
@@ -280,6 +300,7 @@ extern "js" fn html_table_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLTableElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/align)
 impl THTMLTableElement with set_align(self : Self, align : String) -> Unit {
   html_table_element_set_align_ffi(
     TJsValue::to_js(self),
@@ -291,6 +312,7 @@ impl THTMLTableElement with set_align(self : Self, align : String) -> Unit {
 extern "js" fn html_table_element_border_ffi(obj : JsValue) -> String = "(obj) => obj.border"
 
 ///|
+/// [HTMLTableElement.border](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/border)
 impl THTMLTableElement with border(self : Self) -> String {
   html_table_element_border_ffi(TJsValue::to_js(self))
 }
@@ -302,6 +324,7 @@ extern "js" fn html_table_element_set_border_ffi(
 ) -> Unit = "(obj, border) => { obj.border = border; }"
 
 ///|
+/// [HTMLTableElement.border](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/border)
 impl THTMLTableElement with set_border(self : Self, border : String) -> Unit {
   html_table_element_set_border_ffi(
     TJsValue::to_js(self),
@@ -313,6 +336,7 @@ impl THTMLTableElement with set_border(self : Self, border : String) -> Unit {
 extern "js" fn html_table_element_frame_ffi(obj : JsValue) -> String = "(obj) => obj.frame"
 
 ///|
+/// [HTMLTableElement.frame](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/frame)
 impl THTMLTableElement with frame(self : Self) -> String {
   html_table_element_frame_ffi(TJsValue::to_js(self))
 }
@@ -324,6 +348,7 @@ extern "js" fn html_table_element_set_frame_ffi(
 ) -> Unit = "(obj, frame) => { obj.frame = frame; }"
 
 ///|
+/// [HTMLTableElement.frame](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/frame)
 impl THTMLTableElement with set_frame(self : Self, frame : String) -> Unit {
   html_table_element_set_frame_ffi(
     TJsValue::to_js(self),
@@ -335,6 +360,7 @@ impl THTMLTableElement with set_frame(self : Self, frame : String) -> Unit {
 extern "js" fn html_table_element_rules_ffi(obj : JsValue) -> String = "(obj) => obj.rules"
 
 ///|
+/// [HTMLTableElement.rules](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/rules)
 impl THTMLTableElement with rules(self : Self) -> String {
   html_table_element_rules_ffi(TJsValue::to_js(self))
 }
@@ -346,6 +372,7 @@ extern "js" fn html_table_element_set_rules_ffi(
 ) -> Unit = "(obj, rules) => { obj.rules = rules; }"
 
 ///|
+/// [HTMLTableElement.rules](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/rules)
 impl THTMLTableElement with set_rules(self : Self, rules : String) -> Unit {
   html_table_element_set_rules_ffi(
     TJsValue::to_js(self),
@@ -357,6 +384,7 @@ impl THTMLTableElement with set_rules(self : Self, rules : String) -> Unit {
 extern "js" fn html_table_element_summary_ffi(obj : JsValue) -> String = "(obj) => obj.summary"
 
 ///|
+/// [HTMLTableElement.summary](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/summary)
 impl THTMLTableElement with summary(self : Self) -> String {
   html_table_element_summary_ffi(TJsValue::to_js(self))
 }
@@ -368,6 +396,7 @@ extern "js" fn html_table_element_set_summary_ffi(
 ) -> Unit = "(obj, summary) => { obj.summary = summary; }"
 
 ///|
+/// [HTMLTableElement.summary](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/summary)
 impl THTMLTableElement with set_summary(self : Self, summary : String) -> Unit {
   html_table_element_set_summary_ffi(
     TJsValue::to_js(self),
@@ -379,6 +408,7 @@ impl THTMLTableElement with set_summary(self : Self, summary : String) -> Unit {
 extern "js" fn html_table_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
 
 ///|
+/// [HTMLTableElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/width)
 impl THTMLTableElement with width(self : Self) -> String {
   html_table_element_width_ffi(TJsValue::to_js(self))
 }
@@ -390,6 +420,7 @@ extern "js" fn html_table_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLTableElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/width)
 impl THTMLTableElement with set_width(self : Self, width : String) -> Unit {
   html_table_element_set_width_ffi(
     TJsValue::to_js(self),
@@ -401,6 +432,7 @@ impl THTMLTableElement with set_width(self : Self, width : String) -> Unit {
 extern "js" fn html_table_element_bg_color_ffi(obj : JsValue) -> String = "(obj) => obj.bgColor"
 
 ///|
+/// [HTMLTableElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/bgColor)
 impl THTMLTableElement with bg_color(self : Self) -> String {
   html_table_element_bg_color_ffi(TJsValue::to_js(self))
 }
@@ -412,6 +444,7 @@ extern "js" fn html_table_element_set_bg_color_ffi(
 ) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
 
 ///|
+/// [HTMLTableElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/bgColor)
 impl THTMLTableElement with set_bg_color(self : Self, bg_color : String) -> Unit {
   html_table_element_set_bg_color_ffi(
     TJsValue::to_js(self),
@@ -423,6 +456,7 @@ impl THTMLTableElement with set_bg_color(self : Self, bg_color : String) -> Unit
 extern "js" fn html_table_element_cell_padding_ffi(obj : JsValue) -> String = "(obj) => obj.cellPadding"
 
 ///|
+/// [HTMLTableElement.cellPadding](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/cellPadding)
 impl THTMLTableElement with cell_padding(self : Self) -> String {
   html_table_element_cell_padding_ffi(TJsValue::to_js(self))
 }
@@ -434,6 +468,7 @@ extern "js" fn html_table_element_set_cell_padding_ffi(
 ) -> Unit = "(obj, cellPadding) => { obj.cellPadding = cellPadding; }"
 
 ///|
+/// [HTMLTableElement.cellPadding](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/cellPadding)
 impl THTMLTableElement with set_cell_padding(self : Self, cell_padding : String) -> Unit {
   html_table_element_set_cell_padding_ffi(
     TJsValue::to_js(self),
@@ -445,6 +480,7 @@ impl THTMLTableElement with set_cell_padding(self : Self, cell_padding : String)
 extern "js" fn html_table_element_cell_spacing_ffi(obj : JsValue) -> String = "(obj) => obj.cellSpacing"
 
 ///|
+/// [HTMLTableElement.cellSpacing](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/cellSpacing)
 impl THTMLTableElement with cell_spacing(self : Self) -> String {
   html_table_element_cell_spacing_ffi(TJsValue::to_js(self))
 }
@@ -456,6 +492,7 @@ extern "js" fn html_table_element_set_cell_spacing_ffi(
 ) -> Unit = "(obj, cellSpacing) => { obj.cellSpacing = cellSpacing; }"
 
 ///|
+/// [HTMLTableElement.cellSpacing](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/cellSpacing)
 impl THTMLTableElement with set_cell_spacing(self : Self, cell_spacing : String) -> Unit {
   html_table_element_set_cell_spacing_ffi(
     TJsValue::to_js(self),

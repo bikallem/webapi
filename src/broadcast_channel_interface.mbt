@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [BroadcastChannel](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
 #external
 pub type BroadcastChannel
 
@@ -29,6 +30,7 @@ pub fn BroadcastChannel::new(name : String) -> BroadcastChannel {
 }
 
 ///|
+/// [BroadcastChannel](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel) interface.
 pub trait TBroadcastChannel: TEventTarget {
   name(self : Self) -> String = _
   post_message(self : Self, message : JsValue) -> Unit = _
@@ -43,6 +45,7 @@ pub trait TBroadcastChannel: TEventTarget {
 extern "js" fn broadcast_channel_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [BroadcastChannel.name](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/name)
 impl TBroadcastChannel with name(self : Self) -> String {
   broadcast_channel_name_ffi(TJsValue::to_js(self))
 }
@@ -54,6 +57,7 @@ extern "js" fn broadcast_channel_post_message_ffi(
 ) -> Unit = "(obj, message) => obj.postMessage(message)"
 
 ///|
+/// [BroadcastChannel.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/postMessage)
 impl TBroadcastChannel with post_message(self : Self, message : JsValue) -> Unit {
   broadcast_channel_post_message_ffi(
     TJsValue::to_js(self),
@@ -65,6 +69,7 @@ impl TBroadcastChannel with post_message(self : Self, message : JsValue) -> Unit
 extern "js" fn broadcast_channel_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
+/// [BroadcastChannel.close](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/close)
 impl TBroadcastChannel with close(self : Self) -> Unit {
   broadcast_channel_close_ffi(TJsValue::to_js(self))
 }
@@ -73,6 +78,7 @@ impl TBroadcastChannel with close(self : Self) -> Unit {
 extern "js" fn broadcast_channel_onmessage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessage"
 
 ///|
+/// [BroadcastChannel.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/onmessage)
 impl TBroadcastChannel with onmessage(self : Self) -> EventHandler {
   broadcast_channel_onmessage_ffi(TJsValue::to_js(self))
 }
@@ -84,6 +90,7 @@ extern "js" fn broadcast_channel_set_onmessage_ffi(
 ) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
 
 ///|
+/// [BroadcastChannel.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/onmessage)
 impl TBroadcastChannel with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
   broadcast_channel_set_onmessage_ffi(
     TJsValue::to_js(self),
@@ -97,6 +104,7 @@ extern "js" fn broadcast_channel_onmessageerror_ffi(
 ) -> EventHandler = "(obj) => obj.onmessageerror"
 
 ///|
+/// [BroadcastChannel.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/onmessageerror)
 impl TBroadcastChannel with onmessageerror(self : Self) -> EventHandler {
   broadcast_channel_onmessageerror_ffi(TJsValue::to_js(self))
 }
@@ -108,6 +116,7 @@ extern "js" fn broadcast_channel_set_onmessageerror_ffi(
 ) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
 
 ///|
+/// [BroadcastChannel.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/onmessageerror)
 impl TBroadcastChannel with set_onmessageerror(
   self : Self,
   onmessageerror : EventHandler,

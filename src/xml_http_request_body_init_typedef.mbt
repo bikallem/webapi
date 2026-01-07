@@ -3,6 +3,7 @@
 // Specifications: fetch.idl
 
 ///|
+/// [XMLHttpRequestBodyInit](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestBodyInit)
 #external
 pub type XMLHttpRequestBodyInit
 

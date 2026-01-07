@@ -3,6 +3,7 @@
 // Specifications: trusted-types.idl
 
 ///|
+/// [TrustedTypePolicyOptions](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyOptions)
 #external
 pub type TrustedTypePolicyOptions
 

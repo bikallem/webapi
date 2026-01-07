@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGNumber](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumber)
 #external
 pub type SVGNumber
 
@@ -16,6 +17,7 @@ pub fn[T : TSVGNumber] SVGNumber::into(self : SVGNumber) -> T = "%identity"
 pub impl TSVGNumber for SVGNumber
 
 ///|
+/// [SVGNumber](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumber) interface.
 pub trait TSVGNumber: TJsValue {
   value(self : Self) -> Float = _
   set_value(self : Self, value : Float) -> Unit = _
@@ -25,6 +27,7 @@ pub trait TSVGNumber: TJsValue {
 extern "js" fn svg_number_value_ffi(obj : JsValue) -> Float = "(obj) => obj.value"
 
 ///|
+/// [SVGNumber.value](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumber/value)
 impl TSVGNumber with value(self : Self) -> Float {
   svg_number_value_ffi(TJsValue::to_js(self))
 }
@@ -33,6 +36,7 @@ impl TSVGNumber with value(self : Self) -> Float {
 extern "js" fn svg_number_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
+/// [SVGNumber.value](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumber/value)
 impl TSVGNumber with set_value(self : Self, value : Float) -> Unit {
   svg_number_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }

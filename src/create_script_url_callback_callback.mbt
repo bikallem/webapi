@@ -3,6 +3,7 @@
 // Specifications: trusted-types.idl
 
 ///|
+/// [CreateScriptURLCallback](https://developer.mozilla.org/en-US/docs/Web/API/CreateScriptURLCallback)
 #external
 pub type CreateScriptURLCallback
 

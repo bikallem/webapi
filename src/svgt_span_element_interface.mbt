@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGTSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTSpanElement)
 #external
 pub type SVGTSpanElement
 
@@ -37,4 +38,5 @@ pub impl TNode for SVGTSpanElement
 pub impl TEventTarget for SVGTSpanElement
 
 ///|
+/// [SVGTSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTSpanElement) interface.
 pub trait TSVGTSpanElement: TSVGTextPositioningElement {}

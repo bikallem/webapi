@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGAnimatedBoolean](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedBoolean)
 #external
 pub type SVGAnimatedBoolean
 
@@ -18,6 +19,7 @@ pub fn[T : TSVGAnimatedBoolean] SVGAnimatedBoolean::into(
 pub impl TSVGAnimatedBoolean for SVGAnimatedBoolean
 
 ///|
+/// [SVGAnimatedBoolean](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedBoolean) interface.
 pub trait TSVGAnimatedBoolean: TJsValue {
   base_val(self : Self) -> Bool = _
   set_base_val(self : Self, base_val : Bool) -> Unit = _
@@ -28,6 +30,7 @@ pub trait TSVGAnimatedBoolean: TJsValue {
 extern "js" fn svg_animated_boolean_base_val_ffi(obj : JsValue) -> Bool = "(obj) => obj.baseVal"
 
 ///|
+/// [SVGAnimatedBoolean.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedBoolean/baseVal)
 impl TSVGAnimatedBoolean with base_val(self : Self) -> Bool {
   svg_animated_boolean_base_val_ffi(TJsValue::to_js(self))
 }
@@ -39,6 +42,7 @@ extern "js" fn svg_animated_boolean_set_base_val_ffi(
 ) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
 
 ///|
+/// [SVGAnimatedBoolean.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedBoolean/baseVal)
 impl TSVGAnimatedBoolean with set_base_val(self : Self, base_val : Bool) -> Unit {
   svg_animated_boolean_set_base_val_ffi(
     TJsValue::to_js(self),
@@ -50,6 +54,7 @@ impl TSVGAnimatedBoolean with set_base_val(self : Self, base_val : Bool) -> Unit
 extern "js" fn svg_animated_boolean_anim_val_ffi(obj : JsValue) -> Bool = "(obj) => obj.animVal"
 
 ///|
+/// [SVGAnimatedBoolean.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedBoolean/animVal)
 impl TSVGAnimatedBoolean with anim_val(self : Self) -> Bool {
   svg_animated_boolean_anim_val_ffi(TJsValue::to_js(self))
 }

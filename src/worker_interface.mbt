@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [Worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker)
 #external
 pub type Worker
 
@@ -46,6 +47,7 @@ pub fn Worker::new(
 }
 
 ///|
+/// [Worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker) interface.
 pub trait TWorker: TEventTarget {
   terminate(self : Self) -> Unit = _
   post_message(self : Self, message : JsValue, transfer : Array[JsValue]) -> Unit = _
@@ -66,6 +68,7 @@ pub trait TWorker: TEventTarget {
 extern "js" fn worker_terminate_ffi(obj : JsValue) -> Unit = "(obj) => obj.terminate()"
 
 ///|
+/// [Worker.terminate](https://developer.mozilla.org/en-US/docs/Web/API/Worker/terminate)
 impl TWorker with terminate(self : Self) -> Unit {
   worker_terminate_ffi(TJsValue::to_js(self))
 }
@@ -78,6 +81,7 @@ extern "js" fn worker_post_message_ffi(
 ) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
 
 ///|
+/// [Worker.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage)
 impl TWorker with post_message(
   self : Self,
   message : JsValue,
@@ -98,6 +102,7 @@ extern "js" fn worker_post_message_2_ffi(
 ) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
 
 ///|
+/// [Worker.postMessage_2](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage_2)
 impl TWorker with post_message_2(
   self : Self,
   message : JsValue,
@@ -114,6 +119,7 @@ impl TWorker with post_message_2(
 extern "js" fn worker_onerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onerror"
 
 ///|
+/// [Worker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onerror)
 impl TWorker with onerror(self : Self) -> EventHandler {
   worker_onerror_ffi(TJsValue::to_js(self))
 }
@@ -122,6 +128,7 @@ impl TWorker with onerror(self : Self) -> EventHandler {
 extern "js" fn worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
 
 ///|
+/// [Worker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onerror)
 impl TWorker with set_onerror(self : Self, onerror : EventHandler) -> Unit {
   worker_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
@@ -130,6 +137,7 @@ impl TWorker with set_onerror(self : Self, onerror : EventHandler) -> Unit {
 extern "js" fn worker_onmessage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessage"
 
 ///|
+/// [Worker.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessage)
 impl TWorker with onmessage(self : Self) -> EventHandler {
   worker_onmessage_ffi(TJsValue::to_js(self))
 }
@@ -141,6 +149,7 @@ extern "js" fn worker_set_onmessage_ffi(
 ) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
 
 ///|
+/// [Worker.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessage)
 impl TWorker with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
   worker_set_onmessage_ffi(TJsValue::to_js(self), TJsValue::to_js(onmessage))
 }
@@ -149,6 +158,7 @@ impl TWorker with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
 extern "js" fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessageerror"
 
 ///|
+/// [Worker.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessageerror)
 impl TWorker with onmessageerror(self : Self) -> EventHandler {
   worker_onmessageerror_ffi(TJsValue::to_js(self))
 }
@@ -160,6 +170,7 @@ extern "js" fn worker_set_onmessageerror_ffi(
 ) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
 
 ///|
+/// [Worker.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessageerror)
 impl TWorker with set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit {
   worker_set_onmessageerror_ffi(
     TJsValue::to_js(self),

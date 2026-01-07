@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSMarginRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSMarginRule)
 #external
 pub type CSSMarginRule
 
@@ -19,6 +20,7 @@ pub impl TCSSMarginRule for CSSMarginRule
 pub impl TCSSRule for CSSMarginRule
 
 ///|
+/// [CSSMarginRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSMarginRule) interface.
 pub trait TCSSMarginRule: TCSSRule {
   name(self : Self) -> CSSOMString = _
   style(self : Self) -> CSSStyleDeclaration = _
@@ -28,6 +30,7 @@ pub trait TCSSMarginRule: TCSSRule {
 extern "js" fn css_margin_rule_name_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.name"
 
 ///|
+/// [CSSMarginRule.name](https://developer.mozilla.org/en-US/docs/Web/API/CSSMarginRule/name)
 impl TCSSMarginRule with name(self : Self) -> CSSOMString {
   css_margin_rule_name_ffi(TJsValue::to_js(self))
 }
@@ -36,6 +39,7 @@ impl TCSSMarginRule with name(self : Self) -> CSSOMString {
 extern "js" fn css_margin_rule_style_ffi(obj : JsValue) -> CSSStyleDeclaration = "(obj) => obj.style"
 
 ///|
+/// [CSSMarginRule.style](https://developer.mozilla.org/en-US/docs/Web/API/CSSMarginRule/style)
 impl TCSSMarginRule with style(self : Self) -> CSSStyleDeclaration {
   css_margin_rule_style_ffi(TJsValue::to_js(self))
 }

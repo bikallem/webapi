@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageDataSettings](https://developer.mozilla.org/en-US/docs/Web/API/ImageDataSettings)
 #external
 pub type ImageDataSettings
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [FormDataEvent](https://developer.mozilla.org/en-US/docs/Web/API/FormDataEvent)
 #external
 pub type FormDataEvent
 
@@ -36,6 +37,7 @@ pub fn FormDataEvent::new(
 }
 
 ///|
+/// [FormDataEvent](https://developer.mozilla.org/en-US/docs/Web/API/FormDataEvent) interface.
 pub trait TFormDataEvent: TEvent {
   form_data(self : Self) -> FormData = _
 }
@@ -44,6 +46,7 @@ pub trait TFormDataEvent: TEvent {
 extern "js" fn form_data_event_form_data_ffi(obj : JsValue) -> FormData = "(obj) => obj.formData"
 
 ///|
+/// [FormDataEvent.formData](https://developer.mozilla.org/en-US/docs/Web/API/FormDataEvent/formData)
 impl TFormDataEvent with form_data(self : Self) -> FormData {
   form_data_event_form_data_ffi(TJsValue::to_js(self))
 }

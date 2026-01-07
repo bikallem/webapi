@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap)
 #external
 pub type ImageBitmap
 
@@ -16,6 +17,7 @@ pub fn[T : TImageBitmap] ImageBitmap::into(self : ImageBitmap) -> T = "%identity
 pub impl TImageBitmap for ImageBitmap
 
 ///|
+/// [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap) interface.
 pub trait TImageBitmap: TJsValue {
   width(self : Self) -> UInt = _
   height(self : Self) -> UInt = _
@@ -26,6 +28,7 @@ pub trait TImageBitmap: TJsValue {
 extern "js" fn image_bitmap_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
 
 ///|
+/// [ImageBitmap.width](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap/width)
 impl TImageBitmap with width(self : Self) -> UInt {
   image_bitmap_width_ffi(TJsValue::to_js(self))
 }
@@ -34,6 +37,7 @@ impl TImageBitmap with width(self : Self) -> UInt {
 extern "js" fn image_bitmap_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
 
 ///|
+/// [ImageBitmap.height](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap/height)
 impl TImageBitmap with height(self : Self) -> UInt {
   image_bitmap_height_ffi(TJsValue::to_js(self))
 }
@@ -42,6 +46,7 @@ impl TImageBitmap with height(self : Self) -> UInt {
 extern "js" fn image_bitmap_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
+/// [ImageBitmap.close](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap/close)
 impl TImageBitmap with close(self : Self) -> Unit {
   image_bitmap_close_ffi(TJsValue::to_js(self))
 }

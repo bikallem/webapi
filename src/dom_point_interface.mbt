@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint)
 #external
 pub type DOMPoint
 
@@ -42,6 +43,7 @@ pub fn DOMPoint::new(
 }
 
 ///|
+/// [DOMPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint) interface.
 pub trait TDOMPoint: TDOMPointReadOnly {
   x(self : Self) -> Double = _
   set_x(self : Self, x : Double) -> Unit = _
@@ -57,6 +59,7 @@ pub trait TDOMPoint: TDOMPointReadOnly {
 extern "js" fn dom_point_from_point_ffi(other : JsValue) -> DOMPoint = "(other) => DOMPoint.fromPoint(other)"
 
 ///|
+/// [DOMPoint.fromPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/fromPoint)
 pub fn DOMPoint::from_point(
   other? : DOMPointInit = DOMPointInit::empty(),
 ) -> DOMPoint {
@@ -67,6 +70,7 @@ pub fn DOMPoint::from_point(
 extern "js" fn dom_point_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
 
 ///|
+/// [DOMPoint.x](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/x)
 impl TDOMPoint with x(self : Self) -> Double {
   dom_point_x_ffi(TJsValue::to_js(self))
 }
@@ -75,6 +79,7 @@ impl TDOMPoint with x(self : Self) -> Double {
 extern "js" fn dom_point_set_x_ffi(obj : JsValue, x : JsValue) -> Unit = "(obj, x) => { obj.x = x; }"
 
 ///|
+/// [DOMPoint.x](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/x)
 impl TDOMPoint with set_x(self : Self, x : Double) -> Unit {
   dom_point_set_x_ffi(TJsValue::to_js(self), TJsValue::to_js(x))
 }
@@ -83,6 +88,7 @@ impl TDOMPoint with set_x(self : Self, x : Double) -> Unit {
 extern "js" fn dom_point_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
 
 ///|
+/// [DOMPoint.y](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/y)
 impl TDOMPoint with y(self : Self) -> Double {
   dom_point_y_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +97,7 @@ impl TDOMPoint with y(self : Self) -> Double {
 extern "js" fn dom_point_set_y_ffi(obj : JsValue, y : JsValue) -> Unit = "(obj, y) => { obj.y = y; }"
 
 ///|
+/// [DOMPoint.y](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/y)
 impl TDOMPoint with set_y(self : Self, y : Double) -> Unit {
   dom_point_set_y_ffi(TJsValue::to_js(self), TJsValue::to_js(y))
 }
@@ -99,6 +106,7 @@ impl TDOMPoint with set_y(self : Self, y : Double) -> Unit {
 extern "js" fn dom_point_z_ffi(obj : JsValue) -> Double = "(obj) => obj.z"
 
 ///|
+/// [DOMPoint.z](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/z)
 impl TDOMPoint with z(self : Self) -> Double {
   dom_point_z_ffi(TJsValue::to_js(self))
 }
@@ -107,6 +115,7 @@ impl TDOMPoint with z(self : Self) -> Double {
 extern "js" fn dom_point_set_z_ffi(obj : JsValue, z : JsValue) -> Unit = "(obj, z) => { obj.z = z; }"
 
 ///|
+/// [DOMPoint.z](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/z)
 impl TDOMPoint with set_z(self : Self, z : Double) -> Unit {
   dom_point_set_z_ffi(TJsValue::to_js(self), TJsValue::to_js(z))
 }
@@ -115,6 +124,7 @@ impl TDOMPoint with set_z(self : Self, z : Double) -> Unit {
 extern "js" fn dom_point_w_ffi(obj : JsValue) -> Double = "(obj) => obj.w"
 
 ///|
+/// [DOMPoint.w](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/w)
 impl TDOMPoint with w(self : Self) -> Double {
   dom_point_w_ffi(TJsValue::to_js(self))
 }
@@ -123,6 +133,7 @@ impl TDOMPoint with w(self : Self) -> Double {
 extern "js" fn dom_point_set_w_ffi(obj : JsValue, w : JsValue) -> Unit = "(obj, w) => { obj.w = w; }"
 
 ///|
+/// [DOMPoint.w](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/w)
 impl TDOMPoint with set_w(self : Self, w : Double) -> Unit {
   dom_point_set_w_ffi(TJsValue::to_js(self), TJsValue::to_js(w))
 }

@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSStyleProperties](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleProperties)
 #external
 pub type CSSStyleProperties
 
@@ -21,6 +22,7 @@ pub impl TCSSStyleProperties for CSSStyleProperties
 pub impl TCSSStyleDeclaration for CSSStyleProperties
 
 ///|
+/// [CSSStyleProperties](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleProperties) interface.
 pub trait TCSSStyleProperties: TCSSStyleDeclaration {
   css_float(self : Self) -> CSSOMString = _
   set_css_float(self : Self, css_float : CSSOMString) -> Unit = _
@@ -30,6 +32,7 @@ pub trait TCSSStyleProperties: TCSSStyleDeclaration {
 extern "js" fn css_style_properties_css_float_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.cssFloat"
 
 ///|
+/// [CSSStyleProperties.cssFloat](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleProperties/cssFloat)
 impl TCSSStyleProperties with css_float(self : Self) -> CSSOMString {
   css_style_properties_css_float_ffi(TJsValue::to_js(self))
 }
@@ -41,6 +44,7 @@ extern "js" fn css_style_properties_set_css_float_ffi(
 ) -> Unit = "(obj, cssFloat) => { obj.cssFloat = cssFloat; }"
 
 ///|
+/// [CSSStyleProperties.cssFloat](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleProperties/cssFloat)
 impl TCSSStyleProperties with set_css_float(
   self : Self,
   css_float : CSSOMString,

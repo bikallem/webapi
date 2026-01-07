@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [StaticRange](https://developer.mozilla.org/en-US/docs/Web/API/StaticRange)
 #external
 pub type StaticRange
 
@@ -27,4 +28,5 @@ pub fn StaticRange::new(init : StaticRangeInit) -> StaticRange {
 }
 
 ///|
+/// [StaticRange](https://developer.mozilla.org/en-US/docs/Web/API/StaticRange) interface.
 pub trait TStaticRange: TAbstractRange {}

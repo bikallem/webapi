@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSGroupingRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule)
 #external
 pub type CSSGroupingRule
 
@@ -19,6 +20,7 @@ pub impl TCSSGroupingRule for CSSGroupingRule
 pub impl TCSSRule for CSSGroupingRule
 
 ///|
+/// [CSSGroupingRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule) interface.
 pub trait TCSSGroupingRule: TCSSRule {
   css_rules(self : Self) -> CSSRuleList = _
   insert_rule(self : Self, rule : CSSOMString, index? : UInt) -> UInt = _
@@ -29,6 +31,7 @@ pub trait TCSSGroupingRule: TCSSRule {
 extern "js" fn css_grouping_rule_css_rules_ffi(obj : JsValue) -> CSSRuleList = "(obj) => obj.cssRules"
 
 ///|
+/// [CSSGroupingRule.cssRules](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/cssRules)
 impl TCSSGroupingRule with css_rules(self : Self) -> CSSRuleList {
   css_grouping_rule_css_rules_ffi(TJsValue::to_js(self))
 }
@@ -41,6 +44,7 @@ extern "js" fn css_grouping_rule_insert_rule_ffi(
 ) -> UInt = "(obj, rule, index) => obj.insertRule(rule, index)"
 
 ///|
+/// [CSSGroupingRule.insertRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/insertRule)
 impl TCSSGroupingRule with insert_rule(
   self : Self,
   rule : CSSOMString,
@@ -60,6 +64,7 @@ extern "js" fn css_grouping_rule_delete_rule_ffi(
 ) -> Unit = "(obj, index) => obj.deleteRule(index)"
 
 ///|
+/// [CSSGroupingRule.deleteRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/deleteRule)
 impl TCSSGroupingRule with delete_rule(self : Self, index : UInt) -> Unit {
   css_grouping_rule_delete_rule_ffi(
     TJsValue::to_js(self),

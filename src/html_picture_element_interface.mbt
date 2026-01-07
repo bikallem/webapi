@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLPictureElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPictureElement)
 #external
 pub type HTMLPictureElement
 
@@ -38,4 +39,5 @@ pub fn HTMLPictureElement::new() -> HTMLPictureElement {
 }
 
 ///|
+/// [HTMLPictureElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPictureElement) interface.
 pub trait THTMLPictureElement: THTMLElement {}

@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [MouseEventInit](https://developer.mozilla.org/en-US/docs/Web/API/MouseEventInit)
 #external
 pub type MouseEventInit
 

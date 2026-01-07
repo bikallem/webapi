@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect)
 #external
 pub type DOMRect
 
@@ -42,6 +43,7 @@ pub fn DOMRect::new(
 }
 
 ///|
+/// [DOMRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect) interface.
 pub trait TDOMRect: TDOMRectReadOnly {
   x(self : Self) -> Double = _
   set_x(self : Self, x : Double) -> Unit = _
@@ -57,6 +59,7 @@ pub trait TDOMRect: TDOMRectReadOnly {
 extern "js" fn dom_rect_from_rect_ffi(other : JsValue) -> DOMRect = "(other) => DOMRect.fromRect(other)"
 
 ///|
+/// [DOMRect.fromRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/fromRect)
 pub fn DOMRect::from_rect(
   other? : DOMRectInit = DOMRectInit::empty(),
 ) -> DOMRect {
@@ -67,6 +70,7 @@ pub fn DOMRect::from_rect(
 extern "js" fn dom_rect_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
 
 ///|
+/// [DOMRect.x](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/x)
 impl TDOMRect with x(self : Self) -> Double {
   dom_rect_x_ffi(TJsValue::to_js(self))
 }
@@ -75,6 +79,7 @@ impl TDOMRect with x(self : Self) -> Double {
 extern "js" fn dom_rect_set_x_ffi(obj : JsValue, x : JsValue) -> Unit = "(obj, x) => { obj.x = x; }"
 
 ///|
+/// [DOMRect.x](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/x)
 impl TDOMRect with set_x(self : Self, x : Double) -> Unit {
   dom_rect_set_x_ffi(TJsValue::to_js(self), TJsValue::to_js(x))
 }
@@ -83,6 +88,7 @@ impl TDOMRect with set_x(self : Self, x : Double) -> Unit {
 extern "js" fn dom_rect_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
 
 ///|
+/// [DOMRect.y](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/y)
 impl TDOMRect with y(self : Self) -> Double {
   dom_rect_y_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +97,7 @@ impl TDOMRect with y(self : Self) -> Double {
 extern "js" fn dom_rect_set_y_ffi(obj : JsValue, y : JsValue) -> Unit = "(obj, y) => { obj.y = y; }"
 
 ///|
+/// [DOMRect.y](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/y)
 impl TDOMRect with set_y(self : Self, y : Double) -> Unit {
   dom_rect_set_y_ffi(TJsValue::to_js(self), TJsValue::to_js(y))
 }
@@ -99,6 +106,7 @@ impl TDOMRect with set_y(self : Self, y : Double) -> Unit {
 extern "js" fn dom_rect_width_ffi(obj : JsValue) -> Double = "(obj) => obj.width"
 
 ///|
+/// [DOMRect.width](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/width)
 impl TDOMRect with width(self : Self) -> Double {
   dom_rect_width_ffi(TJsValue::to_js(self))
 }
@@ -107,6 +115,7 @@ impl TDOMRect with width(self : Self) -> Double {
 extern "js" fn dom_rect_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [DOMRect.width](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/width)
 impl TDOMRect with set_width(self : Self, width : Double) -> Unit {
   dom_rect_set_width_ffi(TJsValue::to_js(self), TJsValue::to_js(width))
 }
@@ -115,6 +124,7 @@ impl TDOMRect with set_width(self : Self, width : Double) -> Unit {
 extern "js" fn dom_rect_height_ffi(obj : JsValue) -> Double = "(obj) => obj.height"
 
 ///|
+/// [DOMRect.height](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/height)
 impl TDOMRect with height(self : Self) -> Double {
   dom_rect_height_ffi(TJsValue::to_js(self))
 }
@@ -123,6 +133,7 @@ impl TDOMRect with height(self : Self) -> Double {
 extern "js" fn dom_rect_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [DOMRect.height](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/height)
 impl TDOMRect with set_height(self : Self, height : Double) -> Unit {
   dom_rect_set_height_ffi(TJsValue::to_js(self), TJsValue::to_js(height))
 }

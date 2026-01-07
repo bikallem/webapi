@@ -3,6 +3,7 @@
 // Specifications: fetch.idl
 
 ///|
+/// [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
 #external
 pub type Request
 
@@ -27,6 +28,7 @@ pub fn Request::new(
 }
 
 ///|
+/// [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) interface.
 pub trait TRequest: TJsValue {
   method_(self : Self) -> String = _
   url(self : Self) -> String = _
@@ -59,6 +61,7 @@ pub trait TRequest: TJsValue {
 extern "js" fn request_method_ffi(obj : JsValue) -> String = "(obj) => obj.method"
 
 ///|
+/// [Request.method](https://developer.mozilla.org/en-US/docs/Web/API/Request/method)
 impl TRequest with method_(self : Self) -> String {
   request_method_ffi(TJsValue::to_js(self))
 }
@@ -67,6 +70,7 @@ impl TRequest with method_(self : Self) -> String {
 extern "js" fn request_url_ffi(obj : JsValue) -> String = "(obj) => obj.url"
 
 ///|
+/// [Request.url](https://developer.mozilla.org/en-US/docs/Web/API/Request/url)
 impl TRequest with url(self : Self) -> String {
   request_url_ffi(TJsValue::to_js(self))
 }
@@ -75,6 +79,7 @@ impl TRequest with url(self : Self) -> String {
 extern "js" fn request_headers_ffi(obj : JsValue) -> Headers = "(obj) => obj.headers"
 
 ///|
+/// [Request.headers](https://developer.mozilla.org/en-US/docs/Web/API/Request/headers)
 impl TRequest with headers(self : Self) -> Headers {
   request_headers_ffi(TJsValue::to_js(self))
 }
@@ -83,6 +88,7 @@ impl TRequest with headers(self : Self) -> Headers {
 extern "js" fn request_destination_ffi(obj : JsValue) -> RequestDestination = "(obj) => obj.destination"
 
 ///|
+/// [Request.destination](https://developer.mozilla.org/en-US/docs/Web/API/Request/destination)
 impl TRequest with destination(self : Self) -> RequestDestination {
   request_destination_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +97,7 @@ impl TRequest with destination(self : Self) -> RequestDestination {
 extern "js" fn request_referrer_ffi(obj : JsValue) -> String = "(obj) => obj.referrer"
 
 ///|
+/// [Request.referrer](https://developer.mozilla.org/en-US/docs/Web/API/Request/referrer)
 impl TRequest with referrer(self : Self) -> String {
   request_referrer_ffi(TJsValue::to_js(self))
 }
@@ -99,6 +106,7 @@ impl TRequest with referrer(self : Self) -> String {
 extern "js" fn request_referrer_policy_ffi(obj : JsValue) -> ReferrerPolicy = "(obj) => obj.referrerPolicy"
 
 ///|
+/// [Request.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/Request/referrerPolicy)
 impl TRequest with referrer_policy(self : Self) -> ReferrerPolicy {
   request_referrer_policy_ffi(TJsValue::to_js(self))
 }
@@ -107,6 +115,7 @@ impl TRequest with referrer_policy(self : Self) -> ReferrerPolicy {
 extern "js" fn request_mode_ffi(obj : JsValue) -> RequestMode = "(obj) => obj.mode"
 
 ///|
+/// [Request.mode](https://developer.mozilla.org/en-US/docs/Web/API/Request/mode)
 impl TRequest with mode(self : Self) -> RequestMode {
   request_mode_ffi(TJsValue::to_js(self))
 }
@@ -115,6 +124,7 @@ impl TRequest with mode(self : Self) -> RequestMode {
 extern "js" fn request_credentials_ffi(obj : JsValue) -> RequestCredentials = "(obj) => obj.credentials"
 
 ///|
+/// [Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)
 impl TRequest with credentials(self : Self) -> RequestCredentials {
   request_credentials_ffi(TJsValue::to_js(self))
 }
@@ -123,6 +133,7 @@ impl TRequest with credentials(self : Self) -> RequestCredentials {
 extern "js" fn request_cache_ffi(obj : JsValue) -> RequestCache = "(obj) => obj.cache"
 
 ///|
+/// [Request.cache](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache)
 impl TRequest with cache(self : Self) -> RequestCache {
   request_cache_ffi(TJsValue::to_js(self))
 }
@@ -131,6 +142,7 @@ impl TRequest with cache(self : Self) -> RequestCache {
 extern "js" fn request_redirect_ffi(obj : JsValue) -> RequestRedirect = "(obj) => obj.redirect"
 
 ///|
+/// [Request.redirect](https://developer.mozilla.org/en-US/docs/Web/API/Request/redirect)
 impl TRequest with redirect(self : Self) -> RequestRedirect {
   request_redirect_ffi(TJsValue::to_js(self))
 }
@@ -139,6 +151,7 @@ impl TRequest with redirect(self : Self) -> RequestRedirect {
 extern "js" fn request_integrity_ffi(obj : JsValue) -> String = "(obj) => obj.integrity"
 
 ///|
+/// [Request.integrity](https://developer.mozilla.org/en-US/docs/Web/API/Request/integrity)
 impl TRequest with integrity(self : Self) -> String {
   request_integrity_ffi(TJsValue::to_js(self))
 }
@@ -147,6 +160,7 @@ impl TRequest with integrity(self : Self) -> String {
 extern "js" fn request_keepalive_ffi(obj : JsValue) -> Bool = "(obj) => obj.keepalive"
 
 ///|
+/// [Request.keepalive](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive)
 impl TRequest with keepalive(self : Self) -> Bool {
   request_keepalive_ffi(TJsValue::to_js(self))
 }
@@ -155,6 +169,7 @@ impl TRequest with keepalive(self : Self) -> Bool {
 extern "js" fn request_is_reload_navigation_ffi(obj : JsValue) -> Bool = "(obj) => obj.isReloadNavigation"
 
 ///|
+/// [Request.isReloadNavigation](https://developer.mozilla.org/en-US/docs/Web/API/Request/isReloadNavigation)
 impl TRequest with is_reload_navigation(self : Self) -> Bool {
   request_is_reload_navigation_ffi(TJsValue::to_js(self))
 }
@@ -163,6 +178,7 @@ impl TRequest with is_reload_navigation(self : Self) -> Bool {
 extern "js" fn request_is_history_navigation_ffi(obj : JsValue) -> Bool = "(obj) => obj.isHistoryNavigation"
 
 ///|
+/// [Request.isHistoryNavigation](https://developer.mozilla.org/en-US/docs/Web/API/Request/isHistoryNavigation)
 impl TRequest with is_history_navigation(self : Self) -> Bool {
   request_is_history_navigation_ffi(TJsValue::to_js(self))
 }
@@ -171,6 +187,7 @@ impl TRequest with is_history_navigation(self : Self) -> Bool {
 extern "js" fn request_signal_ffi(obj : JsValue) -> AbortSignal = "(obj) => obj.signal"
 
 ///|
+/// [Request.signal](https://developer.mozilla.org/en-US/docs/Web/API/Request/signal)
 impl TRequest with signal(self : Self) -> AbortSignal {
   request_signal_ffi(TJsValue::to_js(self))
 }
@@ -179,6 +196,7 @@ impl TRequest with signal(self : Self) -> AbortSignal {
 extern "js" fn request_duplex_ffi(obj : JsValue) -> RequestDuplex = "(obj) => obj.duplex"
 
 ///|
+/// [Request.duplex](https://developer.mozilla.org/en-US/docs/Web/API/Request/duplex)
 impl TRequest with duplex(self : Self) -> RequestDuplex {
   request_duplex_ffi(TJsValue::to_js(self))
 }
@@ -187,6 +205,7 @@ impl TRequest with duplex(self : Self) -> RequestDuplex {
 extern "js" fn request_clone_ffi(obj : JsValue) -> Request = "(obj) => obj.clone()"
 
 ///|
+/// [Request.clone](https://developer.mozilla.org/en-US/docs/Web/API/Request/clone)
 impl TRequest with clone(self : Self) -> Request {
   request_clone_ffi(TJsValue::to_js(self))
 }
@@ -195,6 +214,7 @@ impl TRequest with clone(self : Self) -> Request {
 extern "js" fn request_body_ffi(obj : JsValue) -> ReadableStream = "(obj) => obj.body"
 
 ///|
+/// [Request.body](https://developer.mozilla.org/en-US/docs/Web/API/Request/body)
 impl TRequest with body(self : Self) -> ReadableStream {
   request_body_ffi(TJsValue::to_js(self))
 }
@@ -203,6 +223,7 @@ impl TRequest with body(self : Self) -> ReadableStream {
 extern "js" fn request_body_used_ffi(obj : JsValue) -> Bool = "(obj) => obj.bodyUsed"
 
 ///|
+/// [Request.bodyUsed](https://developer.mozilla.org/en-US/docs/Web/API/Request/bodyUsed)
 impl TRequest with body_used(self : Self) -> Bool {
   request_body_used_ffi(TJsValue::to_js(self))
 }
@@ -213,6 +234,7 @@ extern "js" fn request_array_buffer_ffi(
 ) -> JsPromise[ArrayBuffer] = "(obj) => obj.arrayBuffer()"
 
 ///|
+/// [Request.arrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/Request/arrayBuffer)
 impl TRequest with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
   request_array_buffer_ffi(TJsValue::to_js(self))
 }
@@ -221,6 +243,7 @@ impl TRequest with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
 extern "js" fn request_blob_ffi(obj : JsValue) -> JsPromise[Blob] = "(obj) => obj.blob()"
 
 ///|
+/// [Request.blob](https://developer.mozilla.org/en-US/docs/Web/API/Request/blob)
 impl TRequest with blob(self : Self) -> JsPromise[Blob] {
   request_blob_ffi(TJsValue::to_js(self))
 }
@@ -229,6 +252,7 @@ impl TRequest with blob(self : Self) -> JsPromise[Blob] {
 extern "js" fn request_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] = "(obj) => obj.bytes()"
 
 ///|
+/// [Request.bytes](https://developer.mozilla.org/en-US/docs/Web/API/Request/bytes)
 impl TRequest with bytes(self : Self) -> JsPromise[Uint8Array] {
   request_bytes_ffi(TJsValue::to_js(self))
 }
@@ -237,6 +261,7 @@ impl TRequest with bytes(self : Self) -> JsPromise[Uint8Array] {
 extern "js" fn request_form_data_ffi(obj : JsValue) -> JsPromise[FormData] = "(obj) => obj.formData()"
 
 ///|
+/// [Request.formData](https://developer.mozilla.org/en-US/docs/Web/API/Request/formData)
 impl TRequest with form_data(self : Self) -> JsPromise[FormData] {
   request_form_data_ffi(TJsValue::to_js(self))
 }
@@ -245,6 +270,7 @@ impl TRequest with form_data(self : Self) -> JsPromise[FormData] {
 extern "js" fn request_json_ffi(obj : JsValue) -> JsPromise[JsValue] = "(obj) => obj.json()"
 
 ///|
+/// [Request.json](https://developer.mozilla.org/en-US/docs/Web/API/Request/json)
 impl TRequest with json(self : Self) -> JsPromise[JsValue] {
   request_json_ffi(TJsValue::to_js(self))
 }
@@ -253,6 +279,7 @@ impl TRequest with json(self : Self) -> JsPromise[JsValue] {
 extern "js" fn request_text_ffi(obj : JsValue) -> JsPromise[String] = "(obj) => obj.text()"
 
 ///|
+/// [Request.text](https://developer.mozilla.org/en-US/docs/Web/API/Request/text)
 impl TRequest with text(self : Self) -> JsPromise[String] {
   request_text_ffi(TJsValue::to_js(self))
 }

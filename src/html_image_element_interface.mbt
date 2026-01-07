@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl, html.idl
 
 ///|
+/// [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 #external
 pub type HTMLImageElement
 
@@ -38,6 +39,7 @@ pub fn HTMLImageElement::new() -> HTMLImageElement {
 }
 
 ///|
+/// [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) interface.
 pub trait THTMLImageElement: THTMLElement {
   alt(self : Self) -> String = _
   set_alt(self : Self, alt : String) -> Unit = _
@@ -92,6 +94,7 @@ pub trait THTMLImageElement: THTMLElement {
 extern "js" fn html_image_element_alt_ffi(obj : JsValue) -> String = "(obj) => obj.alt"
 
 ///|
+/// [HTMLImageElement.alt](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt)
 impl THTMLImageElement with alt(self : Self) -> String {
   html_image_element_alt_ffi(TJsValue::to_js(self))
 }
@@ -103,6 +106,7 @@ extern "js" fn html_image_element_set_alt_ffi(
 ) -> Unit = "(obj, alt) => { obj.alt = alt; }"
 
 ///|
+/// [HTMLImageElement.alt](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt)
 impl THTMLImageElement with set_alt(self : Self, alt : String) -> Unit {
   html_image_element_set_alt_ffi(TJsValue::to_js(self), TJsValue::to_js(alt))
 }
@@ -111,6 +115,7 @@ impl THTMLImageElement with set_alt(self : Self, alt : String) -> Unit {
 extern "js" fn html_image_element_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
 
 ///|
+/// [HTMLImageElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/src)
 impl THTMLImageElement with src(self : Self) -> String {
   html_image_element_src_ffi(TJsValue::to_js(self))
 }
@@ -122,6 +127,7 @@ extern "js" fn html_image_element_set_src_ffi(
 ) -> Unit = "(obj, src) => { obj.src = src; }"
 
 ///|
+/// [HTMLImageElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/src)
 impl THTMLImageElement with set_src(self : Self, src : String) -> Unit {
   html_image_element_set_src_ffi(TJsValue::to_js(self), TJsValue::to_js(src))
 }
@@ -130,6 +136,7 @@ impl THTMLImageElement with set_src(self : Self, src : String) -> Unit {
 extern "js" fn html_image_element_srcset_ffi(obj : JsValue) -> String = "(obj) => obj.srcset"
 
 ///|
+/// [HTMLImageElement.srcset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset)
 impl THTMLImageElement with srcset(self : Self) -> String {
   html_image_element_srcset_ffi(TJsValue::to_js(self))
 }
@@ -141,6 +148,7 @@ extern "js" fn html_image_element_set_srcset_ffi(
 ) -> Unit = "(obj, srcset) => { obj.srcset = srcset; }"
 
 ///|
+/// [HTMLImageElement.srcset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset)
 impl THTMLImageElement with set_srcset(self : Self, srcset : String) -> Unit {
   html_image_element_set_srcset_ffi(
     TJsValue::to_js(self),
@@ -152,6 +160,7 @@ impl THTMLImageElement with set_srcset(self : Self, srcset : String) -> Unit {
 extern "js" fn html_image_element_sizes_ffi(obj : JsValue) -> String = "(obj) => obj.sizes"
 
 ///|
+/// [HTMLImageElement.sizes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes)
 impl THTMLImageElement with sizes(self : Self) -> String {
   html_image_element_sizes_ffi(TJsValue::to_js(self))
 }
@@ -163,6 +172,7 @@ extern "js" fn html_image_element_set_sizes_ffi(
 ) -> Unit = "(obj, sizes) => { obj.sizes = sizes; }"
 
 ///|
+/// [HTMLImageElement.sizes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes)
 impl THTMLImageElement with set_sizes(self : Self, sizes : String) -> Unit {
   html_image_element_set_sizes_ffi(
     TJsValue::to_js(self),
@@ -174,6 +184,7 @@ impl THTMLImageElement with set_sizes(self : Self, sizes : String) -> Unit {
 extern "js" fn html_image_element_cross_origin_ffi(obj : JsValue) -> String = "(obj) => obj.crossOrigin"
 
 ///|
+/// [HTMLImageElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/crossOrigin)
 impl THTMLImageElement with cross_origin(self : Self) -> String {
   html_image_element_cross_origin_ffi(TJsValue::to_js(self))
 }
@@ -185,6 +196,7 @@ extern "js" fn html_image_element_set_cross_origin_ffi(
 ) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
+/// [HTMLImageElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/crossOrigin)
 impl THTMLImageElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {
   html_image_element_set_cross_origin_ffi(
     TJsValue::to_js(self),
@@ -196,6 +208,7 @@ impl THTMLImageElement with set_cross_origin(self : Self, cross_origin : String)
 extern "js" fn html_image_element_use_map_ffi(obj : JsValue) -> String = "(obj) => obj.useMap"
 
 ///|
+/// [HTMLImageElement.useMap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/useMap)
 impl THTMLImageElement with use_map(self : Self) -> String {
   html_image_element_use_map_ffi(TJsValue::to_js(self))
 }
@@ -207,6 +220,7 @@ extern "js" fn html_image_element_set_use_map_ffi(
 ) -> Unit = "(obj, useMap) => { obj.useMap = useMap; }"
 
 ///|
+/// [HTMLImageElement.useMap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/useMap)
 impl THTMLImageElement with set_use_map(self : Self, use_map : String) -> Unit {
   html_image_element_set_use_map_ffi(
     TJsValue::to_js(self),
@@ -218,6 +232,7 @@ impl THTMLImageElement with set_use_map(self : Self, use_map : String) -> Unit {
 extern "js" fn html_image_element_is_map_ffi(obj : JsValue) -> Bool = "(obj) => obj.isMap"
 
 ///|
+/// [HTMLImageElement.isMap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/isMap)
 impl THTMLImageElement with is_map(self : Self) -> Bool {
   html_image_element_is_map_ffi(TJsValue::to_js(self))
 }
@@ -229,6 +244,7 @@ extern "js" fn html_image_element_set_is_map_ffi(
 ) -> Unit = "(obj, isMap) => { obj.isMap = isMap; }"
 
 ///|
+/// [HTMLImageElement.isMap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/isMap)
 impl THTMLImageElement with set_is_map(self : Self, is_map : Bool) -> Unit {
   html_image_element_set_is_map_ffi(
     TJsValue::to_js(self),
@@ -240,6 +256,7 @@ impl THTMLImageElement with set_is_map(self : Self, is_map : Bool) -> Unit {
 extern "js" fn html_image_element_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
 
 ///|
+/// [HTMLImageElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/width)
 impl THTMLImageElement with width(self : Self) -> UInt {
   html_image_element_width_ffi(TJsValue::to_js(self))
 }
@@ -251,6 +268,7 @@ extern "js" fn html_image_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLImageElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/width)
 impl THTMLImageElement with set_width(self : Self, width : UInt) -> Unit {
   html_image_element_set_width_ffi(
     TJsValue::to_js(self),
@@ -262,6 +280,7 @@ impl THTMLImageElement with set_width(self : Self, width : UInt) -> Unit {
 extern "js" fn html_image_element_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
 
 ///|
+/// [HTMLImageElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/height)
 impl THTMLImageElement with height(self : Self) -> UInt {
   html_image_element_height_ffi(TJsValue::to_js(self))
 }
@@ -273,6 +292,7 @@ extern "js" fn html_image_element_set_height_ffi(
 ) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [HTMLImageElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/height)
 impl THTMLImageElement with set_height(self : Self, height : UInt) -> Unit {
   html_image_element_set_height_ffi(
     TJsValue::to_js(self),
@@ -284,6 +304,7 @@ impl THTMLImageElement with set_height(self : Self, height : UInt) -> Unit {
 extern "js" fn html_image_element_natural_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.naturalWidth"
 
 ///|
+/// [HTMLImageElement.naturalWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/naturalWidth)
 impl THTMLImageElement with natural_width(self : Self) -> UInt {
   html_image_element_natural_width_ffi(TJsValue::to_js(self))
 }
@@ -292,6 +313,7 @@ impl THTMLImageElement with natural_width(self : Self) -> UInt {
 extern "js" fn html_image_element_natural_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.naturalHeight"
 
 ///|
+/// [HTMLImageElement.naturalHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/naturalHeight)
 impl THTMLImageElement with natural_height(self : Self) -> UInt {
   html_image_element_natural_height_ffi(TJsValue::to_js(self))
 }
@@ -300,6 +322,7 @@ impl THTMLImageElement with natural_height(self : Self) -> UInt {
 extern "js" fn html_image_element_complete_ffi(obj : JsValue) -> Bool = "(obj) => obj.complete"
 
 ///|
+/// [HTMLImageElement.complete](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/complete)
 impl THTMLImageElement with complete(self : Self) -> Bool {
   html_image_element_complete_ffi(TJsValue::to_js(self))
 }
@@ -308,6 +331,7 @@ impl THTMLImageElement with complete(self : Self) -> Bool {
 extern "js" fn html_image_element_current_src_ffi(obj : JsValue) -> String = "(obj) => obj.currentSrc"
 
 ///|
+/// [HTMLImageElement.currentSrc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/currentSrc)
 impl THTMLImageElement with current_src(self : Self) -> String {
   html_image_element_current_src_ffi(TJsValue::to_js(self))
 }
@@ -316,6 +340,7 @@ impl THTMLImageElement with current_src(self : Self) -> String {
 extern "js" fn html_image_element_referrer_policy_ffi(obj : JsValue) -> String = "(obj) => obj.referrerPolicy"
 
 ///|
+/// [HTMLImageElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/referrerPolicy)
 impl THTMLImageElement with referrer_policy(self : Self) -> String {
   html_image_element_referrer_policy_ffi(TJsValue::to_js(self))
 }
@@ -327,6 +352,7 @@ extern "js" fn html_image_element_set_referrer_policy_ffi(
 ) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
+/// [HTMLImageElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/referrerPolicy)
 impl THTMLImageElement with set_referrer_policy(
   self : Self,
   referrer_policy : String,
@@ -341,6 +367,7 @@ impl THTMLImageElement with set_referrer_policy(
 extern "js" fn html_image_element_decoding_ffi(obj : JsValue) -> String = "(obj) => obj.decoding"
 
 ///|
+/// [HTMLImageElement.decoding](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decoding)
 impl THTMLImageElement with decoding(self : Self) -> String {
   html_image_element_decoding_ffi(TJsValue::to_js(self))
 }
@@ -352,6 +379,7 @@ extern "js" fn html_image_element_set_decoding_ffi(
 ) -> Unit = "(obj, decoding) => { obj.decoding = decoding; }"
 
 ///|
+/// [HTMLImageElement.decoding](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decoding)
 impl THTMLImageElement with set_decoding(self : Self, decoding : String) -> Unit {
   html_image_element_set_decoding_ffi(
     TJsValue::to_js(self),
@@ -363,6 +391,7 @@ impl THTMLImageElement with set_decoding(self : Self, decoding : String) -> Unit
 extern "js" fn html_image_element_loading_ffi(obj : JsValue) -> String = "(obj) => obj.loading"
 
 ///|
+/// [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading)
 impl THTMLImageElement with loading(self : Self) -> String {
   html_image_element_loading_ffi(TJsValue::to_js(self))
 }
@@ -374,6 +403,7 @@ extern "js" fn html_image_element_set_loading_ffi(
 ) -> Unit = "(obj, loading) => { obj.loading = loading; }"
 
 ///|
+/// [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading)
 impl THTMLImageElement with set_loading(self : Self, loading : String) -> Unit {
   html_image_element_set_loading_ffi(
     TJsValue::to_js(self),
@@ -385,6 +415,7 @@ impl THTMLImageElement with set_loading(self : Self, loading : String) -> Unit {
 extern "js" fn html_image_element_fetch_priority_ffi(obj : JsValue) -> String = "(obj) => obj.fetchPriority"
 
 ///|
+/// [HTMLImageElement.fetchPriority](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority)
 impl THTMLImageElement with fetch_priority(self : Self) -> String {
   html_image_element_fetch_priority_ffi(TJsValue::to_js(self))
 }
@@ -396,6 +427,7 @@ extern "js" fn html_image_element_set_fetch_priority_ffi(
 ) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
 
 ///|
+/// [HTMLImageElement.fetchPriority](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority)
 impl THTMLImageElement with set_fetch_priority(
   self : Self,
   fetch_priority : String,
@@ -410,6 +442,7 @@ impl THTMLImageElement with set_fetch_priority(
 extern "js" fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[Unit] = "(obj) => obj.decode()"
 
 ///|
+/// [HTMLImageElement.decode](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode)
 impl THTMLImageElement with decode(self : Self) -> JsPromise[Unit] {
   html_image_element_decode_ffi(TJsValue::to_js(self))
 }
@@ -418,6 +451,7 @@ impl THTMLImageElement with decode(self : Self) -> JsPromise[Unit] {
 extern "js" fn html_image_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLImageElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/name)
 impl THTMLImageElement with name(self : Self) -> String {
   html_image_element_name_ffi(TJsValue::to_js(self))
 }
@@ -429,6 +463,7 @@ extern "js" fn html_image_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLImageElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/name)
 impl THTMLImageElement with set_name(self : Self, name : String) -> Unit {
   html_image_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -437,6 +472,7 @@ impl THTMLImageElement with set_name(self : Self, name : String) -> Unit {
 extern "js" fn html_image_element_lowsrc_ffi(obj : JsValue) -> String = "(obj) => obj.lowsrc"
 
 ///|
+/// [HTMLImageElement.lowsrc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/lowsrc)
 impl THTMLImageElement with lowsrc(self : Self) -> String {
   html_image_element_lowsrc_ffi(TJsValue::to_js(self))
 }
@@ -448,6 +484,7 @@ extern "js" fn html_image_element_set_lowsrc_ffi(
 ) -> Unit = "(obj, lowsrc) => { obj.lowsrc = lowsrc; }"
 
 ///|
+/// [HTMLImageElement.lowsrc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/lowsrc)
 impl THTMLImageElement with set_lowsrc(self : Self, lowsrc : String) -> Unit {
   html_image_element_set_lowsrc_ffi(
     TJsValue::to_js(self),
@@ -459,6 +496,7 @@ impl THTMLImageElement with set_lowsrc(self : Self, lowsrc : String) -> Unit {
 extern "js" fn html_image_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLImageElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/align)
 impl THTMLImageElement with align(self : Self) -> String {
   html_image_element_align_ffi(TJsValue::to_js(self))
 }
@@ -470,6 +508,7 @@ extern "js" fn html_image_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLImageElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/align)
 impl THTMLImageElement with set_align(self : Self, align : String) -> Unit {
   html_image_element_set_align_ffi(
     TJsValue::to_js(self),
@@ -481,6 +520,7 @@ impl THTMLImageElement with set_align(self : Self, align : String) -> Unit {
 extern "js" fn html_image_element_hspace_ffi(obj : JsValue) -> UInt = "(obj) => obj.hspace"
 
 ///|
+/// [HTMLImageElement.hspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/hspace)
 impl THTMLImageElement with hspace(self : Self) -> UInt {
   html_image_element_hspace_ffi(TJsValue::to_js(self))
 }
@@ -492,6 +532,7 @@ extern "js" fn html_image_element_set_hspace_ffi(
 ) -> Unit = "(obj, hspace) => { obj.hspace = hspace; }"
 
 ///|
+/// [HTMLImageElement.hspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/hspace)
 impl THTMLImageElement with set_hspace(self : Self, hspace : UInt) -> Unit {
   html_image_element_set_hspace_ffi(
     TJsValue::to_js(self),
@@ -503,6 +544,7 @@ impl THTMLImageElement with set_hspace(self : Self, hspace : UInt) -> Unit {
 extern "js" fn html_image_element_vspace_ffi(obj : JsValue) -> UInt = "(obj) => obj.vspace"
 
 ///|
+/// [HTMLImageElement.vspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/vspace)
 impl THTMLImageElement with vspace(self : Self) -> UInt {
   html_image_element_vspace_ffi(TJsValue::to_js(self))
 }
@@ -514,6 +556,7 @@ extern "js" fn html_image_element_set_vspace_ffi(
 ) -> Unit = "(obj, vspace) => { obj.vspace = vspace; }"
 
 ///|
+/// [HTMLImageElement.vspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/vspace)
 impl THTMLImageElement with set_vspace(self : Self, vspace : UInt) -> Unit {
   html_image_element_set_vspace_ffi(
     TJsValue::to_js(self),
@@ -525,6 +568,7 @@ impl THTMLImageElement with set_vspace(self : Self, vspace : UInt) -> Unit {
 extern "js" fn html_image_element_long_desc_ffi(obj : JsValue) -> String = "(obj) => obj.longDesc"
 
 ///|
+/// [HTMLImageElement.longDesc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/longDesc)
 impl THTMLImageElement with long_desc(self : Self) -> String {
   html_image_element_long_desc_ffi(TJsValue::to_js(self))
 }
@@ -536,6 +580,7 @@ extern "js" fn html_image_element_set_long_desc_ffi(
 ) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
 
 ///|
+/// [HTMLImageElement.longDesc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/longDesc)
 impl THTMLImageElement with set_long_desc(self : Self, long_desc : String) -> Unit {
   html_image_element_set_long_desc_ffi(
     TJsValue::to_js(self),
@@ -547,6 +592,7 @@ impl THTMLImageElement with set_long_desc(self : Self, long_desc : String) -> Un
 extern "js" fn html_image_element_border_ffi(obj : JsValue) -> String = "(obj) => obj.border"
 
 ///|
+/// [HTMLImageElement.border](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/border)
 impl THTMLImageElement with border(self : Self) -> String {
   html_image_element_border_ffi(TJsValue::to_js(self))
 }
@@ -558,6 +604,7 @@ extern "js" fn html_image_element_set_border_ffi(
 ) -> Unit = "(obj, border) => { obj.border = border; }"
 
 ///|
+/// [HTMLImageElement.border](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/border)
 impl THTMLImageElement with set_border(self : Self, border : String) -> Unit {
   html_image_element_set_border_ffi(
     TJsValue::to_js(self),
@@ -569,6 +616,7 @@ impl THTMLImageElement with set_border(self : Self, border : String) -> Unit {
 extern "js" fn html_image_element_x_ffi(obj : JsValue) -> Int = "(obj) => obj.x"
 
 ///|
+/// [HTMLImageElement.x](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/x)
 impl THTMLImageElement with x(self : Self) -> Int {
   html_image_element_x_ffi(TJsValue::to_js(self))
 }
@@ -577,6 +625,7 @@ impl THTMLImageElement with x(self : Self) -> Int {
 extern "js" fn html_image_element_y_ffi(obj : JsValue) -> Int = "(obj) => obj.y"
 
 ///|
+/// [HTMLImageElement.y](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/y)
 impl THTMLImageElement with y(self : Self) -> Int {
   html_image_element_y_ffi(TJsValue::to_js(self))
 }

@@ -3,6 +3,7 @@
 // Specifications: webidl.idl
 
 ///|
+/// [DOMException](https://developer.mozilla.org/en-US/docs/Web/API/DOMException)
 #external
 pub type DOMException
 
@@ -105,6 +106,7 @@ pub const DOM_EXCEPTION_INVALID_NODE_TYPE_ERR : UInt = 24
 pub const DOM_EXCEPTION_DATA_CLONE_ERR : UInt = 25
 
 ///|
+/// [DOMException](https://developer.mozilla.org/en-US/docs/Web/API/DOMException) interface.
 pub trait TDOMException: TJsValue {
   name(self : Self) -> String = _
   message(self : Self) -> String = _
@@ -115,6 +117,7 @@ pub trait TDOMException: TJsValue {
 extern "js" fn dom_exception_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [DOMException.name](https://developer.mozilla.org/en-US/docs/Web/API/DOMException/name)
 impl TDOMException with name(self : Self) -> String {
   dom_exception_name_ffi(TJsValue::to_js(self))
 }
@@ -123,6 +126,7 @@ impl TDOMException with name(self : Self) -> String {
 extern "js" fn dom_exception_message_ffi(obj : JsValue) -> String = "(obj) => obj.message"
 
 ///|
+/// [DOMException.message](https://developer.mozilla.org/en-US/docs/Web/API/DOMException/message)
 impl TDOMException with message(self : Self) -> String {
   dom_exception_message_ffi(TJsValue::to_js(self))
 }
@@ -131,6 +135,7 @@ impl TDOMException with message(self : Self) -> String {
 extern "js" fn dom_exception_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.code"
 
 ///|
+/// [DOMException.code](https://developer.mozilla.org/en-US/docs/Web/API/DOMException/code)
 impl TDOMException with code(self : Self) -> UInt {
   dom_exception_code_ffi(TJsValue::to_js(self))
 }

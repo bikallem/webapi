@@ -3,6 +3,7 @@
 // Specifications: xhr.idl
 
 ///|
+/// [XMLHttpRequestUpload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestUpload)
 #external
 pub type XMLHttpRequestUpload
 
@@ -26,4 +27,5 @@ pub impl TXMLHttpRequestEventTarget for XMLHttpRequestUpload
 pub impl TEventTarget for XMLHttpRequestUpload
 
 ///|
+/// [XMLHttpRequestUpload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestUpload) interface.
 pub trait TXMLHttpRequestUpload: TXMLHttpRequestEventTarget {}

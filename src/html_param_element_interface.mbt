@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLParamElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement)
 #external
 pub type HTMLParamElement
 
@@ -38,6 +39,7 @@ pub fn HTMLParamElement::new() -> HTMLParamElement {
 }
 
 ///|
+/// [HTMLParamElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement) interface.
 pub trait THTMLParamElement: THTMLElement {
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
@@ -53,6 +55,7 @@ pub trait THTMLParamElement: THTMLElement {
 extern "js" fn html_param_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLParamElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/name)
 impl THTMLParamElement with name(self : Self) -> String {
   html_param_element_name_ffi(TJsValue::to_js(self))
 }
@@ -64,6 +67,7 @@ extern "js" fn html_param_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLParamElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/name)
 impl THTMLParamElement with set_name(self : Self, name : String) -> Unit {
   html_param_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -72,6 +76,7 @@ impl THTMLParamElement with set_name(self : Self, name : String) -> Unit {
 extern "js" fn html_param_element_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
 
 ///|
+/// [HTMLParamElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/value)
 impl THTMLParamElement with value(self : Self) -> String {
   html_param_element_value_ffi(TJsValue::to_js(self))
 }
@@ -83,6 +88,7 @@ extern "js" fn html_param_element_set_value_ffi(
 ) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
+/// [HTMLParamElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/value)
 impl THTMLParamElement with set_value(self : Self, value : String) -> Unit {
   html_param_element_set_value_ffi(
     TJsValue::to_js(self),
@@ -94,6 +100,7 @@ impl THTMLParamElement with set_value(self : Self, value : String) -> Unit {
 extern "js" fn html_param_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [HTMLParamElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/type)
 impl THTMLParamElement with type_(self : Self) -> String {
   html_param_element_type_ffi(TJsValue::to_js(self))
 }
@@ -105,6 +112,7 @@ extern "js" fn html_param_element_set_type_ffi(
 ) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
+/// [HTMLParamElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/type)
 impl THTMLParamElement with set_type_(self : Self, type_ : String) -> Unit {
   html_param_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
@@ -113,6 +121,7 @@ impl THTMLParamElement with set_type_(self : Self, type_ : String) -> Unit {
 extern "js" fn html_param_element_value_type_ffi(obj : JsValue) -> String = "(obj) => obj.valueType"
 
 ///|
+/// [HTMLParamElement.valueType](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/valueType)
 impl THTMLParamElement with value_type(self : Self) -> String {
   html_param_element_value_type_ffi(TJsValue::to_js(self))
 }
@@ -124,6 +133,7 @@ extern "js" fn html_param_element_set_value_type_ffi(
 ) -> Unit = "(obj, valueType) => { obj.valueType = valueType; }"
 
 ///|
+/// [HTMLParamElement.valueType](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/valueType)
 impl THTMLParamElement with set_value_type(self : Self, value_type : String) -> Unit {
   html_param_element_set_value_type_ffi(
     TJsValue::to_js(self),

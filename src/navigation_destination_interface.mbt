@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationDestination](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination)
 #external
 pub type NavigationDestination
 
@@ -20,6 +21,7 @@ pub fn[T : TNavigationDestination] NavigationDestination::into(
 pub impl TNavigationDestination for NavigationDestination
 
 ///|
+/// [NavigationDestination](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination) interface.
 pub trait TNavigationDestination: TJsValue {
   url(self : Self) -> String = _
   key(self : Self) -> String = _
@@ -33,6 +35,7 @@ pub trait TNavigationDestination: TJsValue {
 extern "js" fn navigation_destination_url_ffi(obj : JsValue) -> String = "(obj) => obj.url"
 
 ///|
+/// [NavigationDestination.url](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination/url)
 impl TNavigationDestination with url(self : Self) -> String {
   navigation_destination_url_ffi(TJsValue::to_js(self))
 }
@@ -41,6 +44,7 @@ impl TNavigationDestination with url(self : Self) -> String {
 extern "js" fn navigation_destination_key_ffi(obj : JsValue) -> String = "(obj) => obj.key"
 
 ///|
+/// [NavigationDestination.key](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination/key)
 impl TNavigationDestination with key(self : Self) -> String {
   navigation_destination_key_ffi(TJsValue::to_js(self))
 }
@@ -49,6 +53,7 @@ impl TNavigationDestination with key(self : Self) -> String {
 extern "js" fn navigation_destination_id_ffi(obj : JsValue) -> String = "(obj) => obj.id"
 
 ///|
+/// [NavigationDestination.id](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination/id)
 impl TNavigationDestination with id(self : Self) -> String {
   navigation_destination_id_ffi(TJsValue::to_js(self))
 }
@@ -57,6 +62,7 @@ impl TNavigationDestination with id(self : Self) -> String {
 extern "js" fn navigation_destination_index_ffi(obj : JsValue) -> Int64 = "(obj) => obj.index"
 
 ///|
+/// [NavigationDestination.index](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination/index)
 impl TNavigationDestination with index(self : Self) -> Int64 {
   navigation_destination_index_ffi(TJsValue::to_js(self))
 }
@@ -65,6 +71,7 @@ impl TNavigationDestination with index(self : Self) -> Int64 {
 extern "js" fn navigation_destination_same_document_ffi(obj : JsValue) -> Bool = "(obj) => obj.sameDocument"
 
 ///|
+/// [NavigationDestination.sameDocument](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination/sameDocument)
 impl TNavigationDestination with same_document(self : Self) -> Bool {
   navigation_destination_same_document_ffi(TJsValue::to_js(self))
 }
@@ -73,6 +80,7 @@ impl TNavigationDestination with same_document(self : Self) -> Bool {
 extern "js" fn navigation_destination_get_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getState()"
 
 ///|
+/// [NavigationDestination.getState](https://developer.mozilla.org/en-US/docs/Web/API/NavigationDestination/getState)
 impl TNavigationDestination with get_state(self : Self) -> JsValue {
   navigation_destination_get_state_ffi(TJsValue::to_js(self))
 }

@@ -3,6 +3,7 @@
 // Specifications: url.idl
 
 ///|
+/// [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
 #external
 pub type URLSearchParams
 
@@ -42,6 +43,7 @@ pub fn URLSearchParams::new(
 }
 
 ///|
+/// [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) interface.
 pub trait TURLSearchParams: TJsValue {
   size(self : Self) -> UInt = _
   append(self : Self, name : String, value : String) -> Unit = _
@@ -57,6 +59,7 @@ pub trait TURLSearchParams: TJsValue {
 extern "js" fn url_search_params_size_ffi(obj : JsValue) -> UInt = "(obj) => obj.size"
 
 ///|
+/// [URLSearchParams.size](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/size)
 impl TURLSearchParams with size(self : Self) -> UInt {
   url_search_params_size_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +72,7 @@ extern "js" fn url_search_params_append_ffi(
 ) -> Unit = "(obj, name, value) => obj.append(name, value)"
 
 ///|
+/// [URLSearchParams.append](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/append)
 impl TURLSearchParams with append(self : Self, name : String, value : String) -> Unit {
   url_search_params_append_ffi(
     TJsValue::to_js(self),
@@ -85,6 +89,7 @@ extern "js" fn url_search_params_delete_ffi(
 ) -> Unit = "(obj, name, value) => obj.delete(name, value)"
 
 ///|
+/// [URLSearchParams.delete](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/delete)
 impl TURLSearchParams with delete(self : Self, name : String, value? : String) -> Unit {
   url_search_params_delete_ffi(
     TJsValue::to_js(self),
@@ -100,6 +105,7 @@ extern "js" fn url_search_params_get_ffi(
 ) -> JsValue = "(obj, name) => obj.get(name)"
 
 ///|
+/// [URLSearchParams.get](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/get)
 impl TURLSearchParams with get(self : Self, name : String) -> String? {
   let result = url_search_params_get_ffi(
     TJsValue::to_js(self),
@@ -119,6 +125,7 @@ extern "js" fn url_search_params_get_all_ffi(
 ) -> Array[String] = "(obj, name) => obj.getAll(name)"
 
 ///|
+/// [URLSearchParams.getAll](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/getAll)
 impl TURLSearchParams with get_all(self : Self, name : String) -> Array[String] {
   url_search_params_get_all_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -131,6 +138,7 @@ extern "js" fn url_search_params_has_ffi(
 ) -> Bool = "(obj, name, value) => obj.has(name, value)"
 
 ///|
+/// [URLSearchParams.has](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/has)
 impl TURLSearchParams with has(self : Self, name : String, value? : String) -> Bool {
   url_search_params_has_ffi(
     TJsValue::to_js(self),
@@ -147,6 +155,7 @@ extern "js" fn url_search_params_set_ffi(
 ) -> Unit = "(obj, name, value) => obj.set(name, value)"
 
 ///|
+/// [URLSearchParams.set](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/set)
 impl TURLSearchParams with set(self : Self, name : String, value : String) -> Unit {
   url_search_params_set_ffi(
     TJsValue::to_js(self),
@@ -159,6 +168,7 @@ impl TURLSearchParams with set(self : Self, name : String, value : String) -> Un
 extern "js" fn url_search_params_sort_ffi(obj : JsValue) -> Unit = "(obj) => obj.sort()"
 
 ///|
+/// [URLSearchParams.sort](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/sort)
 impl TURLSearchParams with sort(self : Self) -> Unit {
   url_search_params_sort_ffi(TJsValue::to_js(self))
 }

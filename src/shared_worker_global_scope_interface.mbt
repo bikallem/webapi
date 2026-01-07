@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [SharedWorkerGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope)
 #external
 pub type SharedWorkerGlobalScope
 
@@ -26,6 +27,7 @@ pub impl TWorkerGlobalScope for SharedWorkerGlobalScope
 pub impl TEventTarget for SharedWorkerGlobalScope
 
 ///|
+/// [SharedWorkerGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope) interface.
 pub trait TSharedWorkerGlobalScope: TWorkerGlobalScope {
   name(self : Self) -> String = _
   close(self : Self) -> Unit = _
@@ -37,6 +39,7 @@ pub trait TSharedWorkerGlobalScope: TWorkerGlobalScope {
 extern "js" fn shared_worker_global_scope_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [SharedWorkerGlobalScope.name](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/name)
 impl TSharedWorkerGlobalScope with name(self : Self) -> String {
   shared_worker_global_scope_name_ffi(TJsValue::to_js(self))
 }
@@ -45,6 +48,7 @@ impl TSharedWorkerGlobalScope with name(self : Self) -> String {
 extern "js" fn shared_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
+/// [SharedWorkerGlobalScope.close](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/close)
 impl TSharedWorkerGlobalScope with close(self : Self) -> Unit {
   shared_worker_global_scope_close_ffi(TJsValue::to_js(self))
 }
@@ -55,6 +59,7 @@ extern "js" fn shared_worker_global_scope_onconnect_ffi(
 ) -> EventHandler = "(obj) => obj.onconnect"
 
 ///|
+/// [SharedWorkerGlobalScope.onconnect](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/onconnect)
 impl TSharedWorkerGlobalScope with onconnect(self : Self) -> EventHandler {
   shared_worker_global_scope_onconnect_ffi(TJsValue::to_js(self))
 }
@@ -66,6 +71,7 @@ extern "js" fn shared_worker_global_scope_set_onconnect_ffi(
 ) -> Unit = "(obj, onconnect) => { obj.onconnect = onconnect; }"
 
 ///|
+/// [SharedWorkerGlobalScope.onconnect](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/onconnect)
 impl TSharedWorkerGlobalScope with set_onconnect(
   self : Self,
   onconnect : EventHandler,

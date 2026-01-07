@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList)
 #external
 pub type StyleSheetList
 
@@ -16,6 +17,7 @@ pub fn[T : TStyleSheetList] StyleSheetList::into(self : StyleSheetList) -> T = "
 pub impl TStyleSheetList for StyleSheetList
 
 ///|
+/// [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList) interface.
 pub trait TStyleSheetList: TJsValue {
   length(self : Self) -> UInt = _
 }
@@ -24,6 +26,7 @@ pub trait TStyleSheetList: TJsValue {
 extern "js" fn style_sheet_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
+/// [StyleSheetList.length](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList/length)
 impl TStyleSheetList with length(self : Self) -> UInt {
   style_sheet_list_length_ffi(TJsValue::to_js(self))
 }

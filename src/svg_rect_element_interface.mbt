@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGRectElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement)
 #external
 pub type SVGRectElement
 
@@ -34,6 +35,7 @@ pub impl TNode for SVGRectElement
 pub impl TEventTarget for SVGRectElement
 
 ///|
+/// [SVGRectElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement) interface.
 pub trait TSVGRectElement: TSVGGeometryElement {
   x(self : Self) -> SVGAnimatedLength = _
   y(self : Self) -> SVGAnimatedLength = _
@@ -47,6 +49,7 @@ pub trait TSVGRectElement: TSVGGeometryElement {
 extern "js" fn svg_rect_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.x"
 
 ///|
+/// [SVGRectElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement/x)
 impl TSVGRectElement with x(self : Self) -> SVGAnimatedLength {
   svg_rect_element_x_ffi(TJsValue::to_js(self))
 }
@@ -55,6 +58,7 @@ impl TSVGRectElement with x(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_rect_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.y"
 
 ///|
+/// [SVGRectElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement/y)
 impl TSVGRectElement with y(self : Self) -> SVGAnimatedLength {
   svg_rect_element_y_ffi(TJsValue::to_js(self))
 }
@@ -63,6 +67,7 @@ impl TSVGRectElement with y(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_rect_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.width"
 
 ///|
+/// [SVGRectElement.width](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement/width)
 impl TSVGRectElement with width(self : Self) -> SVGAnimatedLength {
   svg_rect_element_width_ffi(TJsValue::to_js(self))
 }
@@ -71,6 +76,7 @@ impl TSVGRectElement with width(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_rect_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.height"
 
 ///|
+/// [SVGRectElement.height](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement/height)
 impl TSVGRectElement with height(self : Self) -> SVGAnimatedLength {
   svg_rect_element_height_ffi(TJsValue::to_js(self))
 }
@@ -79,6 +85,7 @@ impl TSVGRectElement with height(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_rect_element_rx_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.rx"
 
 ///|
+/// [SVGRectElement.rx](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement/rx)
 impl TSVGRectElement with rx(self : Self) -> SVGAnimatedLength {
   svg_rect_element_rx_ffi(TJsValue::to_js(self))
 }
@@ -87,6 +94,7 @@ impl TSVGRectElement with rx(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_rect_element_ry_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.ry"
 
 ///|
+/// [SVGRectElement.ry](https://developer.mozilla.org/en-US/docs/Web/API/SVGRectElement/ry)
 impl TSVGRectElement with ry(self : Self) -> SVGAnimatedLength {
   svg_rect_element_ry_ffi(TJsValue::to_js(self))
 }

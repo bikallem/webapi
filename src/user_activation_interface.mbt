@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [UserActivation](https://developer.mozilla.org/en-US/docs/Web/API/UserActivation)
 #external
 pub type UserActivation
 
@@ -16,6 +17,7 @@ pub fn[T : TUserActivation] UserActivation::into(self : UserActivation) -> T = "
 pub impl TUserActivation for UserActivation
 
 ///|
+/// [UserActivation](https://developer.mozilla.org/en-US/docs/Web/API/UserActivation) interface.
 pub trait TUserActivation: TJsValue {
   has_been_active(self : Self) -> Bool = _
   is_active(self : Self) -> Bool = _
@@ -25,6 +27,7 @@ pub trait TUserActivation: TJsValue {
 extern "js" fn user_activation_has_been_active_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasBeenActive"
 
 ///|
+/// [UserActivation.hasBeenActive](https://developer.mozilla.org/en-US/docs/Web/API/UserActivation/hasBeenActive)
 impl TUserActivation with has_been_active(self : Self) -> Bool {
   user_activation_has_been_active_ffi(TJsValue::to_js(self))
 }
@@ -33,6 +36,7 @@ impl TUserActivation with has_been_active(self : Self) -> Bool {
 extern "js" fn user_activation_is_active_ffi(obj : JsValue) -> Bool = "(obj) => obj.isActive"
 
 ///|
+/// [UserActivation.isActive](https://developer.mozilla.org/en-US/docs/Web/API/UserActivation/isActive)
 impl TUserActivation with is_active(self : Self) -> Bool {
   user_activation_is_active_ffi(TJsValue::to_js(self))
 }

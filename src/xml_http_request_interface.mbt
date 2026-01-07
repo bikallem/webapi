@@ -3,6 +3,7 @@
 // Specifications: xhr.idl
 
 ///|
+/// [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
 #external
 pub type XMLHttpRequest
 
@@ -58,6 +59,7 @@ pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+/// [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) interface.
 pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
   onreadystatechange(self : Self) -> EventHandler = _
   set_onreadystatechange(self : Self, onreadystatechange : EventHandler) -> Unit = _
@@ -98,6 +100,7 @@ extern "js" fn xml_http_request_onreadystatechange_ffi(
 ) -> EventHandler = "(obj) => obj.onreadystatechange"
 
 ///|
+/// [XMLHttpRequest.onreadystatechange](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange)
 impl TXMLHttpRequest with onreadystatechange(self : Self) -> EventHandler {
   xml_http_request_onreadystatechange_ffi(TJsValue::to_js(self))
 }
@@ -109,6 +112,7 @@ extern "js" fn xml_http_request_set_onreadystatechange_ffi(
 ) -> Unit = "(obj, onreadystatechange) => { obj.onreadystatechange = onreadystatechange; }"
 
 ///|
+/// [XMLHttpRequest.onreadystatechange](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange)
 impl TXMLHttpRequest with set_onreadystatechange(
   self : Self,
   onreadystatechange : EventHandler,
@@ -123,6 +127,7 @@ impl TXMLHttpRequest with set_onreadystatechange(
 extern "js" fn xml_http_request_ready_state_ffi(obj : JsValue) -> UInt = "(obj) => obj.readyState"
 
 ///|
+/// [XMLHttpRequest.readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState)
 impl TXMLHttpRequest with ready_state(self : Self) -> UInt {
   xml_http_request_ready_state_ffi(TJsValue::to_js(self))
 }
@@ -135,6 +140,7 @@ extern "js" fn xml_http_request_open_ffi(
 ) -> Unit = "(obj, method_, url) => obj.open(method_, url)"
 
 ///|
+/// [XMLHttpRequest.open](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open)
 impl TXMLHttpRequest with open(self : Self, method_ : String, url : String) -> Unit {
   xml_http_request_open_ffi(
     TJsValue::to_js(self),
@@ -154,6 +160,7 @@ extern "js" fn xml_http_request_open_2_ffi(
 ) -> Unit = "(obj, method_, url, async_, username, password) => obj.open_2(method_, url, async_, username, password)"
 
 ///|
+/// [XMLHttpRequest.open_2](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open_2)
 impl TXMLHttpRequest with open_2(
   self : Self,
   method_ : String,
@@ -180,6 +187,7 @@ extern "js" fn xml_http_request_set_request_header_ffi(
 ) -> Unit = "(obj, name, value) => obj.setRequestHeader(name, value)"
 
 ///|
+/// [XMLHttpRequest.setRequestHeader](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader)
 impl TXMLHttpRequest with set_request_header(
   self : Self,
   name : String,
@@ -196,6 +204,7 @@ impl TXMLHttpRequest with set_request_header(
 extern "js" fn xml_http_request_timeout_ffi(obj : JsValue) -> UInt = "(obj) => obj.timeout"
 
 ///|
+/// [XMLHttpRequest.timeout](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/timeout)
 impl TXMLHttpRequest with timeout(self : Self) -> UInt {
   xml_http_request_timeout_ffi(TJsValue::to_js(self))
 }
@@ -207,6 +216,7 @@ extern "js" fn xml_http_request_set_timeout_ffi(
 ) -> Unit = "(obj, timeout) => { obj.timeout = timeout; }"
 
 ///|
+/// [XMLHttpRequest.timeout](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/timeout)
 impl TXMLHttpRequest with set_timeout(self : Self, timeout : UInt) -> Unit {
   xml_http_request_set_timeout_ffi(
     TJsValue::to_js(self),
@@ -218,6 +228,7 @@ impl TXMLHttpRequest with set_timeout(self : Self, timeout : UInt) -> Unit {
 extern "js" fn xml_http_request_with_credentials_ffi(obj : JsValue) -> Bool = "(obj) => obj.withCredentials"
 
 ///|
+/// [XMLHttpRequest.withCredentials](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials)
 impl TXMLHttpRequest with with_credentials(self : Self) -> Bool {
   xml_http_request_with_credentials_ffi(TJsValue::to_js(self))
 }
@@ -229,6 +240,7 @@ extern "js" fn xml_http_request_set_with_credentials_ffi(
 ) -> Unit = "(obj, withCredentials) => { obj.withCredentials = withCredentials; }"
 
 ///|
+/// [XMLHttpRequest.withCredentials](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials)
 impl TXMLHttpRequest with set_with_credentials(
   self : Self,
   with_credentials : Bool,
@@ -245,6 +257,7 @@ extern "js" fn xml_http_request_upload_ffi(
 ) -> XMLHttpRequestUpload = "(obj) => obj.upload"
 
 ///|
+/// [XMLHttpRequest.upload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/upload)
 impl TXMLHttpRequest with upload(self : Self) -> XMLHttpRequestUpload {
   xml_http_request_upload_ffi(TJsValue::to_js(self))
 }
@@ -253,6 +266,7 @@ impl TXMLHttpRequest with upload(self : Self) -> XMLHttpRequestUpload {
 extern "js" fn xml_http_request_send_ffi(obj : JsValue, body : JsValue) -> Unit = "(obj, body) => obj.send(body)"
 
 ///|
+/// [XMLHttpRequest.send](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send)
 impl TXMLHttpRequest with send(
   self : Self,
   body? : &TXMLHttpRequestSendBody = JsValue::null(),
@@ -264,6 +278,7 @@ impl TXMLHttpRequest with send(
 extern "js" fn xml_http_request_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort()"
 
 ///|
+/// [XMLHttpRequest.abort](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/abort)
 impl TXMLHttpRequest with abort(self : Self) -> Unit {
   xml_http_request_abort_ffi(TJsValue::to_js(self))
 }
@@ -272,6 +287,7 @@ impl TXMLHttpRequest with abort(self : Self) -> Unit {
 extern "js" fn xml_http_request_response_url_ffi(obj : JsValue) -> String = "(obj) => obj.responseURL"
 
 ///|
+/// [XMLHttpRequest.responseURL](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseURL)
 impl TXMLHttpRequest with response_url(self : Self) -> String {
   xml_http_request_response_url_ffi(TJsValue::to_js(self))
 }
@@ -280,6 +296,7 @@ impl TXMLHttpRequest with response_url(self : Self) -> String {
 extern "js" fn xml_http_request_status_ffi(obj : JsValue) -> UInt = "(obj) => obj.status"
 
 ///|
+/// [XMLHttpRequest.status](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status)
 impl TXMLHttpRequest with status(self : Self) -> UInt {
   xml_http_request_status_ffi(TJsValue::to_js(self))
 }
@@ -288,6 +305,7 @@ impl TXMLHttpRequest with status(self : Self) -> UInt {
 extern "js" fn xml_http_request_status_text_ffi(obj : JsValue) -> String = "(obj) => obj.statusText"
 
 ///|
+/// [XMLHttpRequest.statusText](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/statusText)
 impl TXMLHttpRequest with status_text(self : Self) -> String {
   xml_http_request_status_text_ffi(TJsValue::to_js(self))
 }
@@ -299,6 +317,7 @@ extern "js" fn xml_http_request_get_response_header_ffi(
 ) -> JsValue = "(obj, name) => obj.getResponseHeader(name)"
 
 ///|
+/// [XMLHttpRequest.getResponseHeader](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/getResponseHeader)
 impl TXMLHttpRequest with get_response_header(self : Self, name : String) -> String? {
   let result = xml_http_request_get_response_header_ffi(
     TJsValue::to_js(self),
@@ -317,6 +336,7 @@ extern "js" fn xml_http_request_get_all_response_headers_ffi(
 ) -> String = "(obj) => obj.getAllResponseHeaders()"
 
 ///|
+/// [XMLHttpRequest.getAllResponseHeaders](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/getAllResponseHeaders)
 impl TXMLHttpRequest with get_all_response_headers(self : Self) -> String {
   xml_http_request_get_all_response_headers_ffi(TJsValue::to_js(self))
 }
@@ -328,6 +348,7 @@ extern "js" fn xml_http_request_override_mime_type_ffi(
 ) -> Unit = "(obj, mime) => obj.overrideMimeType(mime)"
 
 ///|
+/// [XMLHttpRequest.overrideMimeType](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/overrideMimeType)
 impl TXMLHttpRequest with override_mime_type(self : Self, mime : String) -> Unit {
   xml_http_request_override_mime_type_ffi(
     TJsValue::to_js(self),
@@ -341,6 +362,7 @@ extern "js" fn xml_http_request_response_type_ffi(
 ) -> XMLHttpRequestResponseType = "(obj) => obj.responseType"
 
 ///|
+/// [XMLHttpRequest.responseType](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)
 impl TXMLHttpRequest with response_type(self : Self) -> XMLHttpRequestResponseType {
   xml_http_request_response_type_ffi(TJsValue::to_js(self))
 }
@@ -352,6 +374,7 @@ extern "js" fn xml_http_request_set_response_type_ffi(
 ) -> Unit = "(obj, responseType) => { obj.responseType = responseType; }"
 
 ///|
+/// [XMLHttpRequest.responseType](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)
 impl TXMLHttpRequest with set_response_type(
   self : Self,
   response_type : XMLHttpRequestResponseType,
@@ -366,6 +389,7 @@ impl TXMLHttpRequest with set_response_type(
 extern "js" fn xml_http_request_response_ffi(obj : JsValue) -> JsValue = "(obj) => obj.response"
 
 ///|
+/// [XMLHttpRequest.response](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response)
 impl TXMLHttpRequest with response(self : Self) -> JsValue {
   xml_http_request_response_ffi(TJsValue::to_js(self))
 }
@@ -374,6 +398,7 @@ impl TXMLHttpRequest with response(self : Self) -> JsValue {
 extern "js" fn xml_http_request_response_text_ffi(obj : JsValue) -> String = "(obj) => obj.responseText"
 
 ///|
+/// [XMLHttpRequest.responseText](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText)
 impl TXMLHttpRequest with response_text(self : Self) -> String {
   xml_http_request_response_text_ffi(TJsValue::to_js(self))
 }
@@ -382,6 +407,7 @@ impl TXMLHttpRequest with response_text(self : Self) -> String {
 extern "js" fn xml_http_request_response_xml_ffi(obj : JsValue) -> Document = "(obj) => obj.responseXML"
 
 ///|
+/// [XMLHttpRequest.responseXML](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseXML)
 impl TXMLHttpRequest with response_xml(self : Self) -> Document {
   xml_http_request_response_xml_ffi(TJsValue::to_js(self))
 }

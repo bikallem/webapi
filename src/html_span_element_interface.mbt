@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement)
 #external
 pub type HTMLSpanElement
 
@@ -36,4 +37,5 @@ pub fn HTMLSpanElement::new() -> HTMLSpanElement {
 }
 
 ///|
+/// [HTMLSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement) interface.
 pub trait THTMLSpanElement: THTMLElement {}

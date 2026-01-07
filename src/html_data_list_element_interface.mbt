@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLDataListElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataListElement)
 #external
 pub type HTMLDataListElement
 
@@ -38,6 +39,7 @@ pub fn HTMLDataListElement::new() -> HTMLDataListElement {
 }
 
 ///|
+/// [HTMLDataListElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataListElement) interface.
 pub trait THTMLDataListElement: THTMLElement {
   options(self : Self) -> HTMLCollection = _
 }
@@ -48,6 +50,7 @@ extern "js" fn html_data_list_element_options_ffi(
 ) -> HTMLCollection = "(obj) => obj.options"
 
 ///|
+/// [HTMLDataListElement.options](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataListElement/options)
 impl THTMLDataListElement with options(self : Self) -> HTMLCollection {
   html_data_list_element_options_ffi(TJsValue::to_js(self))
 }

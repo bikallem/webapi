@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [AddEventListenerOptions](https://developer.mozilla.org/en-US/docs/Web/API/AddEventListenerOptions)
 #external
 pub type AddEventListenerOptions
 

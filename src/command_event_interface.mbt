@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CommandEvent](https://developer.mozilla.org/en-US/docs/Web/API/CommandEvent)
 #external
 pub type CommandEvent
 
@@ -36,6 +37,7 @@ pub fn CommandEvent::new(
 }
 
 ///|
+/// [CommandEvent](https://developer.mozilla.org/en-US/docs/Web/API/CommandEvent) interface.
 pub trait TCommandEvent: TEvent {
   source(self : Self) -> Element = _
   command(self : Self) -> String = _
@@ -45,6 +47,7 @@ pub trait TCommandEvent: TEvent {
 extern "js" fn command_event_source_ffi(obj : JsValue) -> Element = "(obj) => obj.source"
 
 ///|
+/// [CommandEvent.source](https://developer.mozilla.org/en-US/docs/Web/API/CommandEvent/source)
 impl TCommandEvent with source(self : Self) -> Element {
   command_event_source_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +56,7 @@ impl TCommandEvent with source(self : Self) -> Element {
 extern "js" fn command_event_command_ffi(obj : JsValue) -> String = "(obj) => obj.command"
 
 ///|
+/// [CommandEvent.command](https://developer.mozilla.org/en-US/docs/Web/API/CommandEvent/command)
 impl TCommandEvent with command(self : Self) -> String {
   command_event_command_ffi(TJsValue::to_js(self))
 }

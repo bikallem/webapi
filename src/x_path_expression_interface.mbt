@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [XPathExpression](https://developer.mozilla.org/en-US/docs/Web/API/XPathExpression)
 #external
 pub type XPathExpression
 
@@ -16,6 +17,7 @@ pub fn[T : TXPathExpression] XPathExpression::into(self : XPathExpression) -> T 
 pub impl TXPathExpression for XPathExpression
 
 ///|
+/// [XPathExpression](https://developer.mozilla.org/en-US/docs/Web/API/XPathExpression) interface.
 pub trait TXPathExpression: TJsValue {
   evaluate(
     self : Self,
@@ -34,6 +36,7 @@ extern "js" fn x_path_expression_evaluate_ffi(
 ) -> XPathResult = "(obj, context_node, type_, result) => obj.evaluate(context_node, type_, result)"
 
 ///|
+/// [XPathExpression.evaluate](https://developer.mozilla.org/en-US/docs/Web/API/XPathExpression/evaluate)
 impl TXPathExpression with evaluate(
   self : Self,
   context_node : &TNode,

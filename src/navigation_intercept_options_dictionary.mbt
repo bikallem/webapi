@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationInterceptOptions](https://developer.mozilla.org/en-US/docs/Web/API/NavigationInterceptOptions)
 #external
 pub type NavigationInterceptOptions
 

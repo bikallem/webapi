@@ -3,6 +3,7 @@
 // Specifications: fetch.idl
 
 ///|
+/// [HeadersInit](https://developer.mozilla.org/en-US/docs/Web/API/HeadersInit)
 #external
 pub type HeadersInit
 

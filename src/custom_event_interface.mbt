@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)
 #external
 pub type CustomEvent
 
@@ -33,6 +34,7 @@ pub fn CustomEvent::new(
 }
 
 ///|
+/// [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) interface.
 pub trait TCustomEvent: TEvent {
   detail(self : Self) -> JsValue = _
   init_custom_event(
@@ -48,6 +50,7 @@ pub trait TCustomEvent: TEvent {
 extern "js" fn custom_event_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
 
 ///|
+/// [CustomEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail)
 impl TCustomEvent with detail(self : Self) -> JsValue {
   custom_event_detail_ffi(TJsValue::to_js(self))
 }
@@ -62,6 +65,7 @@ extern "js" fn custom_event_init_custom_event_ffi(
 ) -> Unit = "(obj, type_, bubbles, cancelable, detail) => obj.initCustomEvent(type_, bubbles, cancelable, detail)"
 
 ///|
+/// [CustomEvent.initCustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/initCustomEvent)
 impl TCustomEvent with init_custom_event(
   self : Self,
   type_ : String,

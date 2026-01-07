@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [TrackEvent](https://developer.mozilla.org/en-US/docs/Web/API/TrackEvent)
 #external
 pub type TrackEvent
 
@@ -33,6 +34,7 @@ pub fn TrackEvent::new(
 }
 
 ///|
+/// [TrackEventTrack](https://developer.mozilla.org/en-US/docs/Web/API/TrackEventTrack)
 #external
 pub type TrackEventTrack
 
@@ -57,6 +59,7 @@ pub impl TTrackEventTrack for AudioTrack with to_js(self : AudioTrack) -> JsValu
 pub impl TTrackEventTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
 
 ///|
+/// [TrackEvent](https://developer.mozilla.org/en-US/docs/Web/API/TrackEvent) interface.
 pub trait TTrackEvent: TEvent {
   track(self : Self) -> TrackEventTrack = _
 }
@@ -65,6 +68,7 @@ pub trait TTrackEvent: TEvent {
 extern "js" fn track_event_track_ffi(obj : JsValue) -> TrackEventTrack = "(obj) => obj.track"
 
 ///|
+/// [TrackEvent.track](https://developer.mozilla.org/en-US/docs/Web/API/TrackEvent/track)
 impl TTrackEvent with track(self : Self) -> TrackEventTrack {
   track_event_track_ffi(TJsValue::to_js(self))
 }

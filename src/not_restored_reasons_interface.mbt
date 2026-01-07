@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NotRestoredReasons](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons)
 #external
 pub type NotRestoredReasons
 
@@ -18,6 +19,7 @@ pub fn[T : TNotRestoredReasons] NotRestoredReasons::into(
 pub impl TNotRestoredReasons for NotRestoredReasons
 
 ///|
+/// [NotRestoredReasons](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons) interface.
 pub trait TNotRestoredReasons: TJsValue {
   src(self : Self) -> String = _
   id(self : Self) -> String = _
@@ -32,6 +34,7 @@ pub trait TNotRestoredReasons: TJsValue {
 extern "js" fn not_restored_reasons_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
 
 ///|
+/// [NotRestoredReasons.src](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/src)
 impl TNotRestoredReasons with src(self : Self) -> String {
   not_restored_reasons_src_ffi(TJsValue::to_js(self))
 }
@@ -40,6 +43,7 @@ impl TNotRestoredReasons with src(self : Self) -> String {
 extern "js" fn not_restored_reasons_id_ffi(obj : JsValue) -> String = "(obj) => obj.id"
 
 ///|
+/// [NotRestoredReasons.id](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/id)
 impl TNotRestoredReasons with id(self : Self) -> String {
   not_restored_reasons_id_ffi(TJsValue::to_js(self))
 }
@@ -48,6 +52,7 @@ impl TNotRestoredReasons with id(self : Self) -> String {
 extern "js" fn not_restored_reasons_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [NotRestoredReasons.name](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/name)
 impl TNotRestoredReasons with name(self : Self) -> String {
   not_restored_reasons_name_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +61,7 @@ impl TNotRestoredReasons with name(self : Self) -> String {
 extern "js" fn not_restored_reasons_url_ffi(obj : JsValue) -> String = "(obj) => obj.url"
 
 ///|
+/// [NotRestoredReasons.url](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/url)
 impl TNotRestoredReasons with url(self : Self) -> String {
   not_restored_reasons_url_ffi(TJsValue::to_js(self))
 }
@@ -64,6 +70,7 @@ impl TNotRestoredReasons with url(self : Self) -> String {
 extern "js" fn not_restored_reasons_reasons_ffi(obj : JsValue) -> JsValue = "(obj) => obj.reasons"
 
 ///|
+/// [NotRestoredReasons.reasons](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/reasons)
 impl TNotRestoredReasons with reasons(self : Self) -> JsValue {
   not_restored_reasons_reasons_ffi(TJsValue::to_js(self))
 }
@@ -72,6 +79,7 @@ impl TNotRestoredReasons with reasons(self : Self) -> JsValue {
 extern "js" fn not_restored_reasons_children_ffi(obj : JsValue) -> JsValue = "(obj) => obj.children"
 
 ///|
+/// [NotRestoredReasons.children](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/children)
 impl TNotRestoredReasons with children(self : Self) -> JsValue {
   not_restored_reasons_children_ffi(TJsValue::to_js(self))
 }
@@ -80,6 +88,7 @@ impl TNotRestoredReasons with children(self : Self) -> JsValue {
 extern "js" fn not_restored_reasons_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
+/// [NotRestoredReasons.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/toJSON)
 impl TNotRestoredReasons with to_json(self : Self) -> JsValue {
   not_restored_reasons_to_json_ffi(TJsValue::to_js(self))
 }

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CloseWatcherOptions](https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcherOptions)
 #external
 pub type CloseWatcherOptions
 

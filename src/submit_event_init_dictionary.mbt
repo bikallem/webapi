@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [SubmitEventInit](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEventInit)
 #external
 pub type SubmitEventInit
 

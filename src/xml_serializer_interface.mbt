@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [XMLSerializer](https://developer.mozilla.org/en-US/docs/Web/API/XMLSerializer)
 #external
 pub type XMLSerializer
 
@@ -24,6 +25,7 @@ pub fn XMLSerializer::new() -> XMLSerializer {
 }
 
 ///|
+/// [XMLSerializer](https://developer.mozilla.org/en-US/docs/Web/API/XMLSerializer) interface.
 pub trait TXMLSerializer: TJsValue {
   serialize_to_string(self : Self, root : &TNode) -> String = _
 }
@@ -35,6 +37,7 @@ extern "js" fn xml_serializer_serialize_to_string_ffi(
 ) -> String = "(obj, root) => obj.serializeToString(root)"
 
 ///|
+/// [XMLSerializer.serializeToString](https://developer.mozilla.org/en-US/docs/Web/API/XMLSerializer/serializeToString)
 impl TXMLSerializer with serialize_to_string(self : Self, root : &TNode) -> String {
   xml_serializer_serialize_to_string_ffi(
     TJsValue::to_js(self),

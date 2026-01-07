@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageBitmapRenderingContext](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext)
 #external
 pub type ImageBitmapRenderingContext
 
@@ -20,6 +21,7 @@ pub fn[T : TImageBitmapRenderingContext] ImageBitmapRenderingContext::into(
 pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 
 ///|
+/// [ImageBitmapRenderingContextCanvas](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContextCanvas)
 #external
 pub type ImageBitmapRenderingContextCanvas
 
@@ -49,6 +51,7 @@ pub impl TImageBitmapRenderingContextCanvas for OffscreenCanvas with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+/// [ImageBitmapRenderingContext](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext) interface.
 pub trait TImageBitmapRenderingContext: TJsValue {
   canvas(self : Self) -> ImageBitmapRenderingContextCanvas = _
   transfer_from_image_bitmap(self : Self, bitmap : &TImageBitmap) -> Unit = _
@@ -60,6 +63,7 @@ extern "js" fn image_bitmap_rendering_context_canvas_ffi(
 ) -> ImageBitmapRenderingContextCanvas = "(obj) => obj.canvas"
 
 ///|
+/// [ImageBitmapRenderingContext.canvas](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext/canvas)
 impl TImageBitmapRenderingContext with canvas(self : Self) -> ImageBitmapRenderingContextCanvas {
   image_bitmap_rendering_context_canvas_ffi(TJsValue::to_js(self))
 }
@@ -71,6 +75,7 @@ extern "js" fn image_bitmap_rendering_context_transfer_from_image_bitmap_ffi(
 ) -> Unit = "(obj, bitmap) => obj.transferFromImageBitmap(bitmap)"
 
 ///|
+/// [ImageBitmapRenderingContext.transferFromImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext/transferFromImageBitmap)
 impl TImageBitmapRenderingContext with transfer_from_image_bitmap(
   self : Self,
   bitmap : &TImageBitmap,

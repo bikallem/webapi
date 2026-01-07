@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGSymbolElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGSymbolElement)
 #external
 pub type SVGSymbolElement
 
@@ -33,6 +34,7 @@ pub impl TNode for SVGSymbolElement
 pub impl TEventTarget for SVGSymbolElement
 
 ///|
+/// [SVGSymbolElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGSymbolElement) interface.
 pub trait TSVGSymbolElement: TSVGGraphicsElement {
   view_box(self : Self) -> SVGAnimatedRect = _
   preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio = _
@@ -44,6 +46,7 @@ extern "js" fn svg_symbol_element_view_box_ffi(
 ) -> SVGAnimatedRect = "(obj) => obj.viewBox"
 
 ///|
+/// [SVGSymbolElement.viewBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGSymbolElement/viewBox)
 impl TSVGSymbolElement with view_box(self : Self) -> SVGAnimatedRect {
   svg_symbol_element_view_box_ffi(TJsValue::to_js(self))
 }
@@ -54,6 +57,7 @@ extern "js" fn svg_symbol_element_preserve_aspect_ratio_ffi(
 ) -> SVGAnimatedPreserveAspectRatio = "(obj) => obj.preserveAspectRatio"
 
 ///|
+/// [SVGSymbolElement.preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGSymbolElement/preserveAspectRatio)
 impl TSVGSymbolElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio {
   svg_symbol_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self))
 }

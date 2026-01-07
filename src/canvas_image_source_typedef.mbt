@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CanvasImageSource](https://developer.mozilla.org/en-US/docs/Web/API/CanvasImageSource)
 #external
 pub type CanvasImageSource
 

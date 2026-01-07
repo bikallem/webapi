@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLAllCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection)
 #external
 pub type HTMLAllCollection
 
@@ -18,6 +19,7 @@ pub fn[T : THTMLAllCollection] HTMLAllCollection::into(
 pub impl THTMLAllCollection for HTMLAllCollection
 
 ///|
+/// [HTMLAllCollectionItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollectionItem)
 #external
 pub type HTMLAllCollectionItem
 
@@ -45,6 +47,7 @@ pub impl THTMLAllCollectionItem for HTMLCollection with to_js(
 pub impl THTMLAllCollectionItem for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
+/// [HTMLAllCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection) interface.
 pub trait THTMLAllCollection: TJsValue {
   length(self : Self) -> UInt = _
   item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? = _
@@ -54,6 +57,7 @@ pub trait THTMLAllCollection: TJsValue {
 extern "js" fn html_all_collection_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
+/// [HTMLAllCollection.length](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/length)
 impl THTMLAllCollection with length(self : Self) -> UInt {
   html_all_collection_length_ffi(TJsValue::to_js(self))
 }
@@ -65,6 +69,7 @@ extern "js" fn html_all_collection_item_ffi(
 ) -> JsValue = "(obj, name_or_index) => obj.item(name_or_index)"
 
 ///|
+/// [HTMLAllCollection.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/item)
 impl THTMLAllCollection with item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? {
   let result = html_all_collection_item_ffi(
     TJsValue::to_js(self),

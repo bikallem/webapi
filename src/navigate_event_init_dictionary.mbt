@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [NavigateEventInit](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEventInit)
 #external
 pub type NavigateEventInit
 

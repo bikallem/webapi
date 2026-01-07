@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [PageSwapEvent](https://developer.mozilla.org/en-US/docs/Web/API/PageSwapEvent)
 #external
 pub type PageSwapEvent
 
@@ -36,6 +37,7 @@ pub fn PageSwapEvent::new(
 }
 
 ///|
+/// [PageSwapEvent](https://developer.mozilla.org/en-US/docs/Web/API/PageSwapEvent) interface.
 pub trait TPageSwapEvent: TEvent {
   activation(self : Self) -> NavigationActivation = _
   view_transition(self : Self) -> ViewTransition = _
@@ -47,6 +49,7 @@ extern "js" fn page_swap_event_activation_ffi(
 ) -> NavigationActivation = "(obj) => obj.activation"
 
 ///|
+/// [PageSwapEvent.activation](https://developer.mozilla.org/en-US/docs/Web/API/PageSwapEvent/activation)
 impl TPageSwapEvent with activation(self : Self) -> NavigationActivation {
   page_swap_event_activation_ffi(TJsValue::to_js(self))
 }
@@ -57,6 +60,7 @@ extern "js" fn page_swap_event_view_transition_ffi(
 ) -> ViewTransition = "(obj) => obj.viewTransition"
 
 ///|
+/// [PageSwapEvent.viewTransition](https://developer.mozilla.org/en-US/docs/Web/API/PageSwapEvent/viewTransition)
 impl TPageSwapEvent with view_transition(self : Self) -> ViewTransition {
   page_swap_event_view_transition_ffi(TJsValue::to_js(self))
 }

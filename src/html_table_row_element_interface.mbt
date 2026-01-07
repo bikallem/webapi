@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTableRowElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement)
 #external
 pub type HTMLTableRowElement
 
@@ -38,6 +39,7 @@ pub fn HTMLTableRowElement::new() -> HTMLTableRowElement {
 }
 
 ///|
+/// [HTMLTableRowElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement) interface.
 pub trait THTMLTableRowElement: THTMLElement {
   row_index(self : Self) -> Int = _
   section_row_index(self : Self) -> Int = _
@@ -60,6 +62,7 @@ pub trait THTMLTableRowElement: THTMLElement {
 extern "js" fn html_table_row_element_row_index_ffi(obj : JsValue) -> Int = "(obj) => obj.rowIndex"
 
 ///|
+/// [HTMLTableRowElement.rowIndex](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/rowIndex)
 impl THTMLTableRowElement with row_index(self : Self) -> Int {
   html_table_row_element_row_index_ffi(TJsValue::to_js(self))
 }
@@ -70,6 +73,7 @@ extern "js" fn html_table_row_element_section_row_index_ffi(
 ) -> Int = "(obj) => obj.sectionRowIndex"
 
 ///|
+/// [HTMLTableRowElement.sectionRowIndex](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/sectionRowIndex)
 impl THTMLTableRowElement with section_row_index(self : Self) -> Int {
   html_table_row_element_section_row_index_ffi(TJsValue::to_js(self))
 }
@@ -80,6 +84,7 @@ extern "js" fn html_table_row_element_cells_ffi(
 ) -> HTMLCollection = "(obj) => obj.cells"
 
 ///|
+/// [HTMLTableRowElement.cells](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/cells)
 impl THTMLTableRowElement with cells(self : Self) -> HTMLCollection {
   html_table_row_element_cells_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +96,7 @@ extern "js" fn html_table_row_element_insert_cell_ffi(
 ) -> HTMLTableCellElement = "(obj, index) => obj.insertCell(index)"
 
 ///|
+/// [HTMLTableRowElement.insertCell](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/insertCell)
 impl THTMLTableRowElement with insert_cell(
   self : Self,
   index? : Int = (-1 : Int),
@@ -108,6 +114,7 @@ extern "js" fn html_table_row_element_delete_cell_ffi(
 ) -> Unit = "(obj, index) => obj.deleteCell(index)"
 
 ///|
+/// [HTMLTableRowElement.deleteCell](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/deleteCell)
 impl THTMLTableRowElement with delete_cell(self : Self, index : Int) -> Unit {
   html_table_row_element_delete_cell_ffi(
     TJsValue::to_js(self),
@@ -119,6 +126,7 @@ impl THTMLTableRowElement with delete_cell(self : Self, index : Int) -> Unit {
 extern "js" fn html_table_row_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLTableRowElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/align)
 impl THTMLTableRowElement with align(self : Self) -> String {
   html_table_row_element_align_ffi(TJsValue::to_js(self))
 }
@@ -130,6 +138,7 @@ extern "js" fn html_table_row_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLTableRowElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/align)
 impl THTMLTableRowElement with set_align(self : Self, align : String) -> Unit {
   html_table_row_element_set_align_ffi(
     TJsValue::to_js(self),
@@ -141,6 +150,7 @@ impl THTMLTableRowElement with set_align(self : Self, align : String) -> Unit {
 extern "js" fn html_table_row_element_ch_ffi(obj : JsValue) -> String = "(obj) => obj.ch"
 
 ///|
+/// [HTMLTableRowElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/ch)
 impl THTMLTableRowElement with ch(self : Self) -> String {
   html_table_row_element_ch_ffi(TJsValue::to_js(self))
 }
@@ -152,6 +162,7 @@ extern "js" fn html_table_row_element_set_ch_ffi(
 ) -> Unit = "(obj, ch) => { obj.ch = ch; }"
 
 ///|
+/// [HTMLTableRowElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/ch)
 impl THTMLTableRowElement with set_ch(self : Self, ch : String) -> Unit {
   html_table_row_element_set_ch_ffi(TJsValue::to_js(self), TJsValue::to_js(ch))
 }
@@ -160,6 +171,7 @@ impl THTMLTableRowElement with set_ch(self : Self, ch : String) -> Unit {
 extern "js" fn html_table_row_element_ch_off_ffi(obj : JsValue) -> String = "(obj) => obj.chOff"
 
 ///|
+/// [HTMLTableRowElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/chOff)
 impl THTMLTableRowElement with ch_off(self : Self) -> String {
   html_table_row_element_ch_off_ffi(TJsValue::to_js(self))
 }
@@ -171,6 +183,7 @@ extern "js" fn html_table_row_element_set_ch_off_ffi(
 ) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
 
 ///|
+/// [HTMLTableRowElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/chOff)
 impl THTMLTableRowElement with set_ch_off(self : Self, ch_off : String) -> Unit {
   html_table_row_element_set_ch_off_ffi(
     TJsValue::to_js(self),
@@ -182,6 +195,7 @@ impl THTMLTableRowElement with set_ch_off(self : Self, ch_off : String) -> Unit 
 extern "js" fn html_table_row_element_v_align_ffi(obj : JsValue) -> String = "(obj) => obj.vAlign"
 
 ///|
+/// [HTMLTableRowElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/vAlign)
 impl THTMLTableRowElement with v_align(self : Self) -> String {
   html_table_row_element_v_align_ffi(TJsValue::to_js(self))
 }
@@ -193,6 +207,7 @@ extern "js" fn html_table_row_element_set_v_align_ffi(
 ) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
 
 ///|
+/// [HTMLTableRowElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/vAlign)
 impl THTMLTableRowElement with set_v_align(self : Self, v_align : String) -> Unit {
   html_table_row_element_set_v_align_ffi(
     TJsValue::to_js(self),
@@ -204,6 +219,7 @@ impl THTMLTableRowElement with set_v_align(self : Self, v_align : String) -> Uni
 extern "js" fn html_table_row_element_bg_color_ffi(obj : JsValue) -> String = "(obj) => obj.bgColor"
 
 ///|
+/// [HTMLTableRowElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/bgColor)
 impl THTMLTableRowElement with bg_color(self : Self) -> String {
   html_table_row_element_bg_color_ffi(TJsValue::to_js(self))
 }
@@ -215,6 +231,7 @@ extern "js" fn html_table_row_element_set_bg_color_ffi(
 ) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
 
 ///|
+/// [HTMLTableRowElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/bgColor)
 impl THTMLTableRowElement with set_bg_color(self : Self, bg_color : String) -> Unit {
   html_table_row_element_set_bg_color_ffi(
     TJsValue::to_js(self),

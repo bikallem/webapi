@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CanvasRenderingContext2DSettings](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DSettings)
 #external
 pub type CanvasRenderingContext2DSettings
 

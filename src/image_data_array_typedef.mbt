@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageDataArray](https://developer.mozilla.org/en-US/docs/Web/API/ImageDataArray)
 #external
 pub type ImageDataArray
 

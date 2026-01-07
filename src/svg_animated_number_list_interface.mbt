@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGAnimatedNumberList](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedNumberList)
 #external
 pub type SVGAnimatedNumberList
 
@@ -20,6 +21,7 @@ pub fn[T : TSVGAnimatedNumberList] SVGAnimatedNumberList::into(
 pub impl TSVGAnimatedNumberList for SVGAnimatedNumberList
 
 ///|
+/// [SVGAnimatedNumberList](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedNumberList) interface.
 pub trait TSVGAnimatedNumberList: TJsValue {
   base_val(self : Self) -> SVGNumberList = _
   anim_val(self : Self) -> SVGNumberList = _
@@ -31,6 +33,7 @@ extern "js" fn svg_animated_number_list_base_val_ffi(
 ) -> SVGNumberList = "(obj) => obj.baseVal"
 
 ///|
+/// [SVGAnimatedNumberList.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedNumberList/baseVal)
 impl TSVGAnimatedNumberList with base_val(self : Self) -> SVGNumberList {
   svg_animated_number_list_base_val_ffi(TJsValue::to_js(self))
 }
@@ -41,6 +44,7 @@ extern "js" fn svg_animated_number_list_anim_val_ffi(
 ) -> SVGNumberList = "(obj) => obj.animVal"
 
 ///|
+/// [SVGAnimatedNumberList.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedNumberList/animVal)
 impl TSVGAnimatedNumberList with anim_val(self : Self) -> SVGNumberList {
   svg_animated_number_list_anim_val_ffi(TJsValue::to_js(self))
 }

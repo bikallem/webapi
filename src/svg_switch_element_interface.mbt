@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGSwitchElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGSwitchElement)
 #external
 pub type SVGSwitchElement
 
@@ -33,4 +34,5 @@ pub impl TNode for SVGSwitchElement
 pub impl TEventTarget for SVGSwitchElement
 
 ///|
+/// [SVGSwitchElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGSwitchElement) interface.
 pub trait TSVGSwitchElement: TSVGGraphicsElement {}

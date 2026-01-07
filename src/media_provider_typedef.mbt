@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [MediaProvider](https://developer.mozilla.org/en-US/docs/Web/API/MediaProvider)
 #external
 pub type MediaProvider
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [DOMStringList](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList)
 #external
 pub type DOMStringList
 
@@ -16,6 +17,7 @@ pub fn[T : TDOMStringList] DOMStringList::into(self : DOMStringList) -> T = "%id
 pub impl TDOMStringList for DOMStringList
 
 ///|
+/// [DOMStringList](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList) interface.
 pub trait TDOMStringList: TJsValue {
   length(self : Self) -> UInt = _
   contains(self : Self, string : String) -> Bool = _
@@ -25,6 +27,7 @@ pub trait TDOMStringList: TJsValue {
 extern "js" fn dom_string_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
+/// [DOMStringList.length](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/length)
 impl TDOMStringList with length(self : Self) -> UInt {
   dom_string_list_length_ffi(TJsValue::to_js(self))
 }
@@ -36,6 +39,7 @@ extern "js" fn dom_string_list_contains_ffi(
 ) -> Bool = "(obj, string) => obj.contains(string)"
 
 ///|
+/// [DOMStringList.contains](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/contains)
 impl TDOMStringList with contains(self : Self, string : String) -> Bool {
   dom_string_list_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(string))
 }

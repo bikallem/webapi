@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [Worklet](https://developer.mozilla.org/en-US/docs/Web/API/Worklet)
 #external
 pub type Worklet
 
@@ -16,6 +17,7 @@ pub fn[T : TWorklet] Worklet::into(self : Worklet) -> T = "%identity"
 pub impl TWorklet for Worklet
 
 ///|
+/// [Worklet](https://developer.mozilla.org/en-US/docs/Web/API/Worklet) interface.
 pub trait TWorklet: TJsValue {
   add_module(self : Self, module_url : String, options? : WorkletOptions) -> JsPromise[
     Unit,
@@ -30,6 +32,7 @@ extern "js" fn worklet_add_module_ffi(
 ) -> JsPromise[Unit] = "(obj, module_url, options) => obj.addModule(module_url, options)"
 
 ///|
+/// [Worklet.addModule](https://developer.mozilla.org/en-US/docs/Web/API/Worklet/addModule)
 impl TWorklet with add_module(
   self : Self,
   module_url : String,

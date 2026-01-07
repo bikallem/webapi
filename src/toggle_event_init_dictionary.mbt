@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [ToggleEventInit](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEventInit)
 #external
 pub type ToggleEventInit
 

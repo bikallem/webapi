@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLFieldSetElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement)
 #external
 pub type HTMLFieldSetElement
 
@@ -38,6 +39,7 @@ pub fn HTMLFieldSetElement::new() -> HTMLFieldSetElement {
 }
 
 ///|
+/// [HTMLFieldSetElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement) interface.
 pub trait THTMLFieldSetElement: THTMLElement {
   disabled(self : Self) -> Bool = _
   set_disabled(self : Self, disabled : Bool) -> Unit = _
@@ -58,6 +60,7 @@ pub trait THTMLFieldSetElement: THTMLElement {
 extern "js" fn html_field_set_element_disabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.disabled"
 
 ///|
+/// [HTMLFieldSetElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/disabled)
 impl THTMLFieldSetElement with disabled(self : Self) -> Bool {
   html_field_set_element_disabled_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +72,7 @@ extern "js" fn html_field_set_element_set_disabled_ffi(
 ) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
+/// [HTMLFieldSetElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/disabled)
 impl THTMLFieldSetElement with set_disabled(self : Self, disabled : Bool) -> Unit {
   html_field_set_element_set_disabled_ffi(
     TJsValue::to_js(self),
@@ -82,6 +86,7 @@ extern "js" fn html_field_set_element_form_ffi(
 ) -> HTMLFormElement = "(obj) => obj.form"
 
 ///|
+/// [HTMLFieldSetElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/form)
 impl THTMLFieldSetElement with form(self : Self) -> HTMLFormElement {
   html_field_set_element_form_ffi(TJsValue::to_js(self))
 }
@@ -90,6 +95,7 @@ impl THTMLFieldSetElement with form(self : Self) -> HTMLFormElement {
 extern "js" fn html_field_set_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLFieldSetElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/name)
 impl THTMLFieldSetElement with name(self : Self) -> String {
   html_field_set_element_name_ffi(TJsValue::to_js(self))
 }
@@ -101,6 +107,7 @@ extern "js" fn html_field_set_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLFieldSetElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/name)
 impl THTMLFieldSetElement with set_name(self : Self, name : String) -> Unit {
   html_field_set_element_set_name_ffi(
     TJsValue::to_js(self),
@@ -112,6 +119,7 @@ impl THTMLFieldSetElement with set_name(self : Self, name : String) -> Unit {
 extern "js" fn html_field_set_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [HTMLFieldSetElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/type)
 impl THTMLFieldSetElement with type_(self : Self) -> String {
   html_field_set_element_type_ffi(TJsValue::to_js(self))
 }
@@ -122,6 +130,7 @@ extern "js" fn html_field_set_element_elements_ffi(
 ) -> HTMLCollection = "(obj) => obj.elements"
 
 ///|
+/// [HTMLFieldSetElement.elements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/elements)
 impl THTMLFieldSetElement with elements(self : Self) -> HTMLCollection {
   html_field_set_element_elements_ffi(TJsValue::to_js(self))
 }
@@ -130,6 +139,7 @@ impl THTMLFieldSetElement with elements(self : Self) -> HTMLCollection {
 extern "js" fn html_field_set_element_will_validate_ffi(obj : JsValue) -> Bool = "(obj) => obj.willValidate"
 
 ///|
+/// [HTMLFieldSetElement.willValidate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/willValidate)
 impl THTMLFieldSetElement with will_validate(self : Self) -> Bool {
   html_field_set_element_will_validate_ffi(TJsValue::to_js(self))
 }
@@ -140,6 +150,7 @@ extern "js" fn html_field_set_element_validity_ffi(
 ) -> ValidityState = "(obj) => obj.validity"
 
 ///|
+/// [HTMLFieldSetElement.validity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/validity)
 impl THTMLFieldSetElement with validity(self : Self) -> ValidityState {
   html_field_set_element_validity_ffi(TJsValue::to_js(self))
 }
@@ -150,6 +161,7 @@ extern "js" fn html_field_set_element_validation_message_ffi(
 ) -> String = "(obj) => obj.validationMessage"
 
 ///|
+/// [HTMLFieldSetElement.validationMessage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/validationMessage)
 impl THTMLFieldSetElement with validation_message(self : Self) -> String {
   html_field_set_element_validation_message_ffi(TJsValue::to_js(self))
 }
@@ -158,6 +170,7 @@ impl THTMLFieldSetElement with validation_message(self : Self) -> String {
 extern "js" fn html_field_set_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
+/// [HTMLFieldSetElement.checkValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/checkValidity)
 impl THTMLFieldSetElement with check_validity(self : Self) -> Bool {
   html_field_set_element_check_validity_ffi(TJsValue::to_js(self))
 }
@@ -168,6 +181,7 @@ extern "js" fn html_field_set_element_report_validity_ffi(
 ) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
+/// [HTMLFieldSetElement.reportValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/reportValidity)
 impl THTMLFieldSetElement with report_validity(self : Self) -> Bool {
   html_field_set_element_report_validity_ffi(TJsValue::to_js(self))
 }
@@ -179,6 +193,7 @@ extern "js" fn html_field_set_element_set_custom_validity_ffi(
 ) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
+/// [HTMLFieldSetElement.setCustomValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/setCustomValidity)
 impl THTMLFieldSetElement with set_custom_validity(self : Self, error : String) -> Unit {
   html_field_set_element_set_custom_validity_ffi(
     TJsValue::to_js(self),

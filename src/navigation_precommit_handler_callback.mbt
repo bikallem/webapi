@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationPrecommitHandler](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitHandler)
 #external
 pub type NavigationPrecommitHandler
 

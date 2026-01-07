@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSRuleList](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList)
 #external
 pub type CSSRuleList
 
@@ -16,6 +17,7 @@ pub fn[T : TCSSRuleList] CSSRuleList::into(self : CSSRuleList) -> T = "%identity
 pub impl TCSSRuleList for CSSRuleList
 
 ///|
+/// [CSSRuleList](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList) interface.
 pub trait TCSSRuleList: TJsValue {
   length(self : Self) -> UInt = _
 }
@@ -24,6 +26,7 @@ pub trait TCSSRuleList: TJsValue {
 extern "js" fn css_rule_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
+/// [CSSRuleList.length](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList/length)
 impl TCSSRuleList with length(self : Self) -> UInt {
   css_rule_list_length_ffi(TJsValue::to_js(self))
 }

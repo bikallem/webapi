@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage)
 #external
 pub type Storage
 
@@ -16,6 +17,7 @@ pub fn[T : TStorage] Storage::into(self : Storage) -> T = "%identity"
 pub impl TStorage for Storage
 
 ///|
+/// [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage) interface.
 pub trait TStorage: TJsValue {
   length(self : Self) -> UInt = _
   key(self : Self, index : UInt) -> String? = _
@@ -26,6 +28,7 @@ pub trait TStorage: TJsValue {
 extern "js" fn storage_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
+/// [Storage.length](https://developer.mozilla.org/en-US/docs/Web/API/Storage/length)
 impl TStorage with length(self : Self) -> UInt {
   storage_length_ffi(TJsValue::to_js(self))
 }
@@ -34,6 +37,7 @@ impl TStorage with length(self : Self) -> UInt {
 extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.key(index)"
 
 ///|
+/// [Storage.key](https://developer.mozilla.org/en-US/docs/Web/API/Storage/key)
 impl TStorage with key(self : Self, index : UInt) -> String? {
   let result = storage_key_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
   if JsValue::is_null(result) {
@@ -47,6 +51,7 @@ impl TStorage with key(self : Self, index : UInt) -> String? {
 extern "js" fn storage_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
+/// [Storage.clear](https://developer.mozilla.org/en-US/docs/Web/API/Storage/clear)
 impl TStorage with clear(self : Self) -> Unit {
   storage_clear_ffi(TJsValue::to_js(self))
 }

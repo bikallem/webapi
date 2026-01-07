@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGAnimatedString](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedString)
 #external
 pub type SVGAnimatedString
 
@@ -18,6 +19,7 @@ pub fn[T : TSVGAnimatedString] SVGAnimatedString::into(
 pub impl TSVGAnimatedString for SVGAnimatedString
 
 ///|
+/// [SVGAnimatedStringBaseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedStringBaseVal)
 #external
 pub type SVGAnimatedStringBaseVal
 
@@ -45,6 +47,7 @@ pub impl TSVGAnimatedStringBaseVal for TrustedScriptURL with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+/// [SVGAnimatedString](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedString) interface.
 pub trait TSVGAnimatedString: TJsValue {
   base_val(self : Self) -> SVGAnimatedStringBaseVal = _
   set_base_val(self : Self, base_val : &TSVGAnimatedStringBaseVal) -> Unit = _
@@ -57,6 +60,7 @@ extern "js" fn svg_animated_string_base_val_ffi(
 ) -> SVGAnimatedStringBaseVal = "(obj) => obj.baseVal"
 
 ///|
+/// [SVGAnimatedString.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedString/baseVal)
 impl TSVGAnimatedString with base_val(self : Self) -> SVGAnimatedStringBaseVal {
   svg_animated_string_base_val_ffi(TJsValue::to_js(self))
 }
@@ -68,6 +72,7 @@ extern "js" fn svg_animated_string_set_base_val_ffi(
 ) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
 
 ///|
+/// [SVGAnimatedString.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedString/baseVal)
 impl TSVGAnimatedString with set_base_val(
   self : Self,
   base_val : &TSVGAnimatedStringBaseVal,
@@ -79,6 +84,7 @@ impl TSVGAnimatedString with set_base_val(
 extern "js" fn svg_animated_string_anim_val_ffi(obj : JsValue) -> String = "(obj) => obj.animVal"
 
 ///|
+/// [SVGAnimatedString.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedString/animVal)
 impl TSVGAnimatedString with anim_val(self : Self) -> String {
   svg_animated_string_anim_val_ffi(TJsValue::to_js(self))
 }

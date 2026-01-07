@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [BlobCallback](https://developer.mozilla.org/en-US/docs/Web/API/BlobCallback)
 #external
 pub type BlobCallback
 

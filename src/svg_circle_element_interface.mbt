@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGCircleElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGCircleElement)
 #external
 pub type SVGCircleElement
 
@@ -36,6 +37,7 @@ pub impl TNode for SVGCircleElement
 pub impl TEventTarget for SVGCircleElement
 
 ///|
+/// [SVGCircleElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGCircleElement) interface.
 pub trait TSVGCircleElement: TSVGGeometryElement {
   cx(self : Self) -> SVGAnimatedLength = _
   cy(self : Self) -> SVGAnimatedLength = _
@@ -46,6 +48,7 @@ pub trait TSVGCircleElement: TSVGGeometryElement {
 extern "js" fn svg_circle_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cx"
 
 ///|
+/// [SVGCircleElement.cx](https://developer.mozilla.org/en-US/docs/Web/API/SVGCircleElement/cx)
 impl TSVGCircleElement with cx(self : Self) -> SVGAnimatedLength {
   svg_circle_element_cx_ffi(TJsValue::to_js(self))
 }
@@ -54,6 +57,7 @@ impl TSVGCircleElement with cx(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_circle_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cy"
 
 ///|
+/// [SVGCircleElement.cy](https://developer.mozilla.org/en-US/docs/Web/API/SVGCircleElement/cy)
 impl TSVGCircleElement with cy(self : Self) -> SVGAnimatedLength {
   svg_circle_element_cy_ffi(TJsValue::to_js(self))
 }
@@ -62,6 +66,7 @@ impl TSVGCircleElement with cy(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_circle_element_r_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.r"
 
 ///|
+/// [SVGCircleElement.r](https://developer.mozilla.org/en-US/docs/Web/API/SVGCircleElement/r)
 impl TSVGCircleElement with r(self : Self) -> SVGAnimatedLength {
   svg_circle_element_r_ffi(TJsValue::to_js(self))
 }

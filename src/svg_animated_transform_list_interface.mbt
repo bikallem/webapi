@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGAnimatedTransformList](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedTransformList)
 #external
 pub type SVGAnimatedTransformList
 
@@ -20,6 +21,7 @@ pub fn[T : TSVGAnimatedTransformList] SVGAnimatedTransformList::into(
 pub impl TSVGAnimatedTransformList for SVGAnimatedTransformList
 
 ///|
+/// [SVGAnimatedTransformList](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedTransformList) interface.
 pub trait TSVGAnimatedTransformList: TJsValue {
   base_val(self : Self) -> SVGTransformList = _
   anim_val(self : Self) -> SVGTransformList = _
@@ -31,6 +33,7 @@ extern "js" fn svg_animated_transform_list_base_val_ffi(
 ) -> SVGTransformList = "(obj) => obj.baseVal"
 
 ///|
+/// [SVGAnimatedTransformList.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedTransformList/baseVal)
 impl TSVGAnimatedTransformList with base_val(self : Self) -> SVGTransformList {
   svg_animated_transform_list_base_val_ffi(TJsValue::to_js(self))
 }
@@ -41,6 +44,7 @@ extern "js" fn svg_animated_transform_list_anim_val_ffi(
 ) -> SVGTransformList = "(obj) => obj.animVal"
 
 ///|
+/// [SVGAnimatedTransformList.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedTransformList/animVal)
 impl TSVGAnimatedTransformList with anim_val(self : Self) -> SVGTransformList {
   svg_animated_transform_list_anim_val_ffi(TJsValue::to_js(self))
 }

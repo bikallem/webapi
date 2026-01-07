@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [MediaQueryListEvent](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEvent)
 #external
 pub type MediaQueryListEvent
 
@@ -38,6 +39,7 @@ pub fn MediaQueryListEvent::new(
 }
 
 ///|
+/// [MediaQueryListEvent](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEvent) interface.
 pub trait TMediaQueryListEvent: TEvent {
   media(self : Self) -> CSSOMString = _
   matches(self : Self) -> Bool = _
@@ -47,6 +49,7 @@ pub trait TMediaQueryListEvent: TEvent {
 extern "js" fn media_query_list_event_media_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.media"
 
 ///|
+/// [MediaQueryListEvent.media](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEvent/media)
 impl TMediaQueryListEvent with media(self : Self) -> CSSOMString {
   media_query_list_event_media_ffi(TJsValue::to_js(self))
 }
@@ -55,6 +58,7 @@ impl TMediaQueryListEvent with media(self : Self) -> CSSOMString {
 extern "js" fn media_query_list_event_matches_ffi(obj : JsValue) -> Bool = "(obj) => obj.matches"
 
 ///|
+/// [MediaQueryListEvent.matches](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEvent/matches)
 impl TMediaQueryListEvent with matches(self : Self) -> Bool {
   media_query_list_event_matches_ffi(TJsValue::to_js(self))
 }

@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [InputEventInit](https://developer.mozilla.org/en-US/docs/Web/API/InputEventInit)
 #external
 pub type InputEventInit
 

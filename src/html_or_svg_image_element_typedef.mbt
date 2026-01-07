@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLOrSVGImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrSVGImageElement)
 #external
 pub type HTMLOrSVGImageElement
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [WorkletGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/WorkletGlobalScope)
 #external
 pub type WorkletGlobalScope
 
@@ -18,4 +19,5 @@ pub fn[T : TWorkletGlobalScope] WorkletGlobalScope::into(
 pub impl TWorkletGlobalScope for WorkletGlobalScope
 
 ///|
+/// [WorkletGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/WorkletGlobalScope) interface.
 pub trait TWorkletGlobalScope: TJsValue {}

@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
 #external
 pub type MutationObserver
 
@@ -28,6 +29,7 @@ pub fn MutationObserver::new(callback : MutationCallback) -> MutationObserver {
 }
 
 ///|
+/// [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) interface.
 pub trait TMutationObserver: TJsValue {
   observe(self : Self, target : &TNode, options? : MutationObserverInit) -> Unit = _
   disconnect(self : Self) -> Unit = _
@@ -42,6 +44,7 @@ extern "js" fn mutation_observer_observe_ffi(
 ) -> Unit = "(obj, target, options) => obj.observe(target, options)"
 
 ///|
+/// [MutationObserver.observe](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe)
 impl TMutationObserver with observe(
   self : Self,
   target : &TNode,
@@ -58,6 +61,7 @@ impl TMutationObserver with observe(
 extern "js" fn mutation_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
 
 ///|
+/// [MutationObserver.disconnect](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/disconnect)
 impl TMutationObserver with disconnect(self : Self) -> Unit {
   mutation_observer_disconnect_ffi(TJsValue::to_js(self))
 }
@@ -68,6 +72,7 @@ extern "js" fn mutation_observer_take_records_ffi(
 ) -> Array[MutationRecord] = "(obj) => obj.takeRecords()"
 
 ///|
+/// [MutationObserver.takeRecords](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/takeRecords)
 impl TMutationObserver with take_records(self : Self) -> Array[MutationRecord] {
   mutation_observer_take_records_ffi(TJsValue::to_js(self))
 }

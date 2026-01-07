@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [GeometryNode](https://developer.mozilla.org/en-US/docs/Web/API/GeometryNode)
 #external
 pub type GeometryNode
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLMarqueeElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement)
 #external
 pub type HTMLMarqueeElement
 
@@ -38,6 +39,7 @@ pub fn HTMLMarqueeElement::new() -> HTMLMarqueeElement {
 }
 
 ///|
+/// [HTMLMarqueeElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement) interface.
 pub trait THTMLMarqueeElement: THTMLElement {
   behavior(self : Self) -> String = _
   set_behavior(self : Self, behavior : String) -> Unit = _
@@ -69,6 +71,7 @@ pub trait THTMLMarqueeElement: THTMLElement {
 extern "js" fn html_marquee_element_behavior_ffi(obj : JsValue) -> String = "(obj) => obj.behavior"
 
 ///|
+/// [HTMLMarqueeElement.behavior](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/behavior)
 impl THTMLMarqueeElement with behavior(self : Self) -> String {
   html_marquee_element_behavior_ffi(TJsValue::to_js(self))
 }
@@ -80,6 +83,7 @@ extern "js" fn html_marquee_element_set_behavior_ffi(
 ) -> Unit = "(obj, behavior) => { obj.behavior = behavior; }"
 
 ///|
+/// [HTMLMarqueeElement.behavior](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/behavior)
 impl THTMLMarqueeElement with set_behavior(self : Self, behavior : String) -> Unit {
   html_marquee_element_set_behavior_ffi(
     TJsValue::to_js(self),
@@ -91,6 +95,7 @@ impl THTMLMarqueeElement with set_behavior(self : Self, behavior : String) -> Un
 extern "js" fn html_marquee_element_bg_color_ffi(obj : JsValue) -> String = "(obj) => obj.bgColor"
 
 ///|
+/// [HTMLMarqueeElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/bgColor)
 impl THTMLMarqueeElement with bg_color(self : Self) -> String {
   html_marquee_element_bg_color_ffi(TJsValue::to_js(self))
 }
@@ -102,6 +107,7 @@ extern "js" fn html_marquee_element_set_bg_color_ffi(
 ) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
 
 ///|
+/// [HTMLMarqueeElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/bgColor)
 impl THTMLMarqueeElement with set_bg_color(self : Self, bg_color : String) -> Unit {
   html_marquee_element_set_bg_color_ffi(
     TJsValue::to_js(self),
@@ -113,6 +119,7 @@ impl THTMLMarqueeElement with set_bg_color(self : Self, bg_color : String) -> Un
 extern "js" fn html_marquee_element_direction_ffi(obj : JsValue) -> String = "(obj) => obj.direction"
 
 ///|
+/// [HTMLMarqueeElement.direction](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/direction)
 impl THTMLMarqueeElement with direction(self : Self) -> String {
   html_marquee_element_direction_ffi(TJsValue::to_js(self))
 }
@@ -124,6 +131,7 @@ extern "js" fn html_marquee_element_set_direction_ffi(
 ) -> Unit = "(obj, direction) => { obj.direction = direction; }"
 
 ///|
+/// [HTMLMarqueeElement.direction](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/direction)
 impl THTMLMarqueeElement with set_direction(self : Self, direction : String) -> Unit {
   html_marquee_element_set_direction_ffi(
     TJsValue::to_js(self),
@@ -135,6 +143,7 @@ impl THTMLMarqueeElement with set_direction(self : Self, direction : String) -> 
 extern "js" fn html_marquee_element_height_ffi(obj : JsValue) -> String = "(obj) => obj.height"
 
 ///|
+/// [HTMLMarqueeElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/height)
 impl THTMLMarqueeElement with height(self : Self) -> String {
   html_marquee_element_height_ffi(TJsValue::to_js(self))
 }
@@ -146,6 +155,7 @@ extern "js" fn html_marquee_element_set_height_ffi(
 ) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [HTMLMarqueeElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/height)
 impl THTMLMarqueeElement with set_height(self : Self, height : String) -> Unit {
   html_marquee_element_set_height_ffi(
     TJsValue::to_js(self),
@@ -157,6 +167,7 @@ impl THTMLMarqueeElement with set_height(self : Self, height : String) -> Unit {
 extern "js" fn html_marquee_element_hspace_ffi(obj : JsValue) -> UInt = "(obj) => obj.hspace"
 
 ///|
+/// [HTMLMarqueeElement.hspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/hspace)
 impl THTMLMarqueeElement with hspace(self : Self) -> UInt {
   html_marquee_element_hspace_ffi(TJsValue::to_js(self))
 }
@@ -168,6 +179,7 @@ extern "js" fn html_marquee_element_set_hspace_ffi(
 ) -> Unit = "(obj, hspace) => { obj.hspace = hspace; }"
 
 ///|
+/// [HTMLMarqueeElement.hspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/hspace)
 impl THTMLMarqueeElement with set_hspace(self : Self, hspace : UInt) -> Unit {
   html_marquee_element_set_hspace_ffi(
     TJsValue::to_js(self),
@@ -179,6 +191,7 @@ impl THTMLMarqueeElement with set_hspace(self : Self, hspace : UInt) -> Unit {
 extern "js" fn html_marquee_element_loop_ffi(obj : JsValue) -> Int = "(obj) => obj.loop"
 
 ///|
+/// [HTMLMarqueeElement.loop](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/loop)
 impl THTMLMarqueeElement with loop_(self : Self) -> Int {
   html_marquee_element_loop_ffi(TJsValue::to_js(self))
 }
@@ -190,6 +203,7 @@ extern "js" fn html_marquee_element_set_loop_ffi(
 ) -> Unit = "(obj, loop) => { obj.loop = loop; }"
 
 ///|
+/// [HTMLMarqueeElement.loop](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/loop)
 impl THTMLMarqueeElement with set_loop_(self : Self, loop_ : Int) -> Unit {
   html_marquee_element_set_loop_ffi(
     TJsValue::to_js(self),
@@ -201,6 +215,7 @@ impl THTMLMarqueeElement with set_loop_(self : Self, loop_ : Int) -> Unit {
 extern "js" fn html_marquee_element_scroll_amount_ffi(obj : JsValue) -> UInt = "(obj) => obj.scrollAmount"
 
 ///|
+/// [HTMLMarqueeElement.scrollAmount](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/scrollAmount)
 impl THTMLMarqueeElement with scroll_amount(self : Self) -> UInt {
   html_marquee_element_scroll_amount_ffi(TJsValue::to_js(self))
 }
@@ -212,6 +227,7 @@ extern "js" fn html_marquee_element_set_scroll_amount_ffi(
 ) -> Unit = "(obj, scrollAmount) => { obj.scrollAmount = scrollAmount; }"
 
 ///|
+/// [HTMLMarqueeElement.scrollAmount](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/scrollAmount)
 impl THTMLMarqueeElement with set_scroll_amount(
   self : Self,
   scroll_amount : UInt,
@@ -226,6 +242,7 @@ impl THTMLMarqueeElement with set_scroll_amount(
 extern "js" fn html_marquee_element_scroll_delay_ffi(obj : JsValue) -> UInt = "(obj) => obj.scrollDelay"
 
 ///|
+/// [HTMLMarqueeElement.scrollDelay](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/scrollDelay)
 impl THTMLMarqueeElement with scroll_delay(self : Self) -> UInt {
   html_marquee_element_scroll_delay_ffi(TJsValue::to_js(self))
 }
@@ -237,6 +254,7 @@ extern "js" fn html_marquee_element_set_scroll_delay_ffi(
 ) -> Unit = "(obj, scrollDelay) => { obj.scrollDelay = scrollDelay; }"
 
 ///|
+/// [HTMLMarqueeElement.scrollDelay](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/scrollDelay)
 impl THTMLMarqueeElement with set_scroll_delay(self : Self, scroll_delay : UInt) -> Unit {
   html_marquee_element_set_scroll_delay_ffi(
     TJsValue::to_js(self),
@@ -248,6 +266,7 @@ impl THTMLMarqueeElement with set_scroll_delay(self : Self, scroll_delay : UInt)
 extern "js" fn html_marquee_element_true_speed_ffi(obj : JsValue) -> Bool = "(obj) => obj.trueSpeed"
 
 ///|
+/// [HTMLMarqueeElement.trueSpeed](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/trueSpeed)
 impl THTMLMarqueeElement with true_speed(self : Self) -> Bool {
   html_marquee_element_true_speed_ffi(TJsValue::to_js(self))
 }
@@ -259,6 +278,7 @@ extern "js" fn html_marquee_element_set_true_speed_ffi(
 ) -> Unit = "(obj, trueSpeed) => { obj.trueSpeed = trueSpeed; }"
 
 ///|
+/// [HTMLMarqueeElement.trueSpeed](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/trueSpeed)
 impl THTMLMarqueeElement with set_true_speed(self : Self, true_speed : Bool) -> Unit {
   html_marquee_element_set_true_speed_ffi(
     TJsValue::to_js(self),
@@ -270,6 +290,7 @@ impl THTMLMarqueeElement with set_true_speed(self : Self, true_speed : Bool) -> 
 extern "js" fn html_marquee_element_vspace_ffi(obj : JsValue) -> UInt = "(obj) => obj.vspace"
 
 ///|
+/// [HTMLMarqueeElement.vspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/vspace)
 impl THTMLMarqueeElement with vspace(self : Self) -> UInt {
   html_marquee_element_vspace_ffi(TJsValue::to_js(self))
 }
@@ -281,6 +302,7 @@ extern "js" fn html_marquee_element_set_vspace_ffi(
 ) -> Unit = "(obj, vspace) => { obj.vspace = vspace; }"
 
 ///|
+/// [HTMLMarqueeElement.vspace](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/vspace)
 impl THTMLMarqueeElement with set_vspace(self : Self, vspace : UInt) -> Unit {
   html_marquee_element_set_vspace_ffi(
     TJsValue::to_js(self),
@@ -292,6 +314,7 @@ impl THTMLMarqueeElement with set_vspace(self : Self, vspace : UInt) -> Unit {
 extern "js" fn html_marquee_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
 
 ///|
+/// [HTMLMarqueeElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/width)
 impl THTMLMarqueeElement with width(self : Self) -> String {
   html_marquee_element_width_ffi(TJsValue::to_js(self))
 }
@@ -303,6 +326,7 @@ extern "js" fn html_marquee_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLMarqueeElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/width)
 impl THTMLMarqueeElement with set_width(self : Self, width : String) -> Unit {
   html_marquee_element_set_width_ffi(
     TJsValue::to_js(self),
@@ -314,6 +338,7 @@ impl THTMLMarqueeElement with set_width(self : Self, width : String) -> Unit {
 extern "js" fn html_marquee_element_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start()"
 
 ///|
+/// [HTMLMarqueeElement.start](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/start)
 impl THTMLMarqueeElement with start(self : Self) -> Unit {
   html_marquee_element_start_ffi(TJsValue::to_js(self))
 }
@@ -322,6 +347,7 @@ impl THTMLMarqueeElement with start(self : Self) -> Unit {
 extern "js" fn html_marquee_element_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop()"
 
 ///|
+/// [HTMLMarqueeElement.stop](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement/stop)
 impl THTMLMarqueeElement with stop(self : Self) -> Unit {
   html_marquee_element_stop_ffi(TJsValue::to_js(self))
 }

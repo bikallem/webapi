@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [TogglePopoverOptions](https://developer.mozilla.org/en-US/docs/Web/API/TogglePopoverOptions)
 #external
 pub type TogglePopoverOptions
 

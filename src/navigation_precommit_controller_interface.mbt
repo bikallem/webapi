@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationPrecommitController](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController)
 #external
 pub type NavigationPrecommitController
 
@@ -20,6 +21,7 @@ pub fn[T : TNavigationPrecommitController] NavigationPrecommitController::into(
 pub impl TNavigationPrecommitController for NavigationPrecommitController
 
 ///|
+/// [NavigationPrecommitController](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController) interface.
 pub trait TNavigationPrecommitController: TJsValue {
   redirect(self : Self, url : String, options? : NavigationNavigateOptions) -> Unit = _
   add_handler(self : Self, handler : NavigationInterceptHandler) -> Unit = _
@@ -33,6 +35,7 @@ extern "js" fn navigation_precommit_controller_redirect_ffi(
 ) -> Unit = "(obj, url, options) => obj.redirect(url, options)"
 
 ///|
+/// [NavigationPrecommitController.redirect](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/redirect)
 impl TNavigationPrecommitController with redirect(
   self : Self,
   url : String,
@@ -52,6 +55,7 @@ extern "js" fn navigation_precommit_controller_add_handler_ffi(
 ) -> Unit = "(obj, handler) => obj.addHandler(handler)"
 
 ///|
+/// [NavigationPrecommitController.addHandler](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/addHandler)
 impl TNavigationPrecommitController with add_handler(
   self : Self,
   handler : NavigationInterceptHandler,

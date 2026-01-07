@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [CompositionEvent](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent)
 #external
 pub type CompositionEvent
 
@@ -41,6 +42,7 @@ pub fn CompositionEvent::new(
 }
 
 ///|
+/// [CompositionEvent](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent) interface.
 pub trait TCompositionEvent: TUIEvent {
   data(self : Self) -> String = _
   init_composition_event(
@@ -57,6 +59,7 @@ pub trait TCompositionEvent: TUIEvent {
 extern "js" fn composition_event_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
 
 ///|
+/// [CompositionEvent.data](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data)
 impl TCompositionEvent with data(self : Self) -> String {
   composition_event_data_ffi(TJsValue::to_js(self))
 }
@@ -72,6 +75,7 @@ extern "js" fn composition_event_init_composition_event_ffi(
 ) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, data_arg) => obj.initCompositionEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, data_arg)"
 
 ///|
+/// [CompositionEvent.initCompositionEvent](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent)
 impl TCompositionEvent with init_composition_event(
   self : Self,
   type_arg : String,

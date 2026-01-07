@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMMatrixReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly)
 #external
 pub type DOMMatrixReadOnly
 
@@ -48,6 +49,7 @@ pub fn DOMMatrixReadOnly::new(
 }
 
 ///|
+/// [DOMMatrixReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly) interface.
 pub trait TDOMMatrixReadOnly: TJsValue {
   a(self : Self) -> Double = _
   b(self : Self) -> Double = _
@@ -118,6 +120,7 @@ extern "js" fn dom_matrix_read_only_from_matrix_ffi(
 ) -> DOMMatrixReadOnly = "(other) => DOMMatrixReadOnly.fromMatrix(other)"
 
 ///|
+/// [DOMMatrixReadOnly.fromMatrix](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/fromMatrix)
 pub fn DOMMatrixReadOnly::from_matrix(
   other? : DOMMatrixInit = DOMMatrixInit::empty(),
 ) -> DOMMatrixReadOnly {
@@ -130,6 +133,7 @@ extern "js" fn dom_matrix_read_only_from_float32array_ffi(
 ) -> DOMMatrixReadOnly = "(array32) => DOMMatrixReadOnly.fromFloat32Array(array32)"
 
 ///|
+/// [DOMMatrixReadOnly.fromFloat32Array](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/fromFloat32Array)
 pub fn DOMMatrixReadOnly::from_float32array(
   array32 : Float32Array,
 ) -> DOMMatrixReadOnly {
@@ -142,6 +146,7 @@ extern "js" fn dom_matrix_read_only_from_float64array_ffi(
 ) -> DOMMatrixReadOnly = "(array64) => DOMMatrixReadOnly.fromFloat64Array(array64)"
 
 ///|
+/// [DOMMatrixReadOnly.fromFloat64Array](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/fromFloat64Array)
 pub fn DOMMatrixReadOnly::from_float64array(
   array64 : Float64Array,
 ) -> DOMMatrixReadOnly {
@@ -152,6 +157,7 @@ pub fn DOMMatrixReadOnly::from_float64array(
 extern "js" fn dom_matrix_read_only_a_ffi(obj : JsValue) -> Double = "(obj) => obj.a"
 
 ///|
+/// [DOMMatrixReadOnly.a](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/a)
 impl TDOMMatrixReadOnly with a(self : Self) -> Double {
   dom_matrix_read_only_a_ffi(TJsValue::to_js(self))
 }
@@ -160,6 +166,7 @@ impl TDOMMatrixReadOnly with a(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_b_ffi(obj : JsValue) -> Double = "(obj) => obj.b"
 
 ///|
+/// [DOMMatrixReadOnly.b](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/b)
 impl TDOMMatrixReadOnly with b(self : Self) -> Double {
   dom_matrix_read_only_b_ffi(TJsValue::to_js(self))
 }
@@ -168,6 +175,7 @@ impl TDOMMatrixReadOnly with b(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_c_ffi(obj : JsValue) -> Double = "(obj) => obj.c"
 
 ///|
+/// [DOMMatrixReadOnly.c](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/c)
 impl TDOMMatrixReadOnly with c(self : Self) -> Double {
   dom_matrix_read_only_c_ffi(TJsValue::to_js(self))
 }
@@ -176,6 +184,7 @@ impl TDOMMatrixReadOnly with c(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_d_ffi(obj : JsValue) -> Double = "(obj) => obj.d"
 
 ///|
+/// [DOMMatrixReadOnly.d](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/d)
 impl TDOMMatrixReadOnly with d(self : Self) -> Double {
   dom_matrix_read_only_d_ffi(TJsValue::to_js(self))
 }
@@ -184,6 +193,7 @@ impl TDOMMatrixReadOnly with d(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_e_ffi(obj : JsValue) -> Double = "(obj) => obj.e"
 
 ///|
+/// [DOMMatrixReadOnly.e](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/e)
 impl TDOMMatrixReadOnly with e(self : Self) -> Double {
   dom_matrix_read_only_e_ffi(TJsValue::to_js(self))
 }
@@ -192,6 +202,7 @@ impl TDOMMatrixReadOnly with e(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_f_ffi(obj : JsValue) -> Double = "(obj) => obj.f"
 
 ///|
+/// [DOMMatrixReadOnly.f](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/f)
 impl TDOMMatrixReadOnly with f(self : Self) -> Double {
   dom_matrix_read_only_f_ffi(TJsValue::to_js(self))
 }
@@ -200,6 +211,7 @@ impl TDOMMatrixReadOnly with f(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m11_ffi(obj : JsValue) -> Double = "(obj) => obj.m11"
 
 ///|
+/// [DOMMatrixReadOnly.m11](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m11)
 impl TDOMMatrixReadOnly with m11(self : Self) -> Double {
   dom_matrix_read_only_m11_ffi(TJsValue::to_js(self))
 }
@@ -208,6 +220,7 @@ impl TDOMMatrixReadOnly with m11(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m12_ffi(obj : JsValue) -> Double = "(obj) => obj.m12"
 
 ///|
+/// [DOMMatrixReadOnly.m12](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m12)
 impl TDOMMatrixReadOnly with m12(self : Self) -> Double {
   dom_matrix_read_only_m12_ffi(TJsValue::to_js(self))
 }
@@ -216,6 +229,7 @@ impl TDOMMatrixReadOnly with m12(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m13_ffi(obj : JsValue) -> Double = "(obj) => obj.m13"
 
 ///|
+/// [DOMMatrixReadOnly.m13](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m13)
 impl TDOMMatrixReadOnly with m13(self : Self) -> Double {
   dom_matrix_read_only_m13_ffi(TJsValue::to_js(self))
 }
@@ -224,6 +238,7 @@ impl TDOMMatrixReadOnly with m13(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m14_ffi(obj : JsValue) -> Double = "(obj) => obj.m14"
 
 ///|
+/// [DOMMatrixReadOnly.m14](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m14)
 impl TDOMMatrixReadOnly with m14(self : Self) -> Double {
   dom_matrix_read_only_m14_ffi(TJsValue::to_js(self))
 }
@@ -232,6 +247,7 @@ impl TDOMMatrixReadOnly with m14(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m21_ffi(obj : JsValue) -> Double = "(obj) => obj.m21"
 
 ///|
+/// [DOMMatrixReadOnly.m21](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m21)
 impl TDOMMatrixReadOnly with m21(self : Self) -> Double {
   dom_matrix_read_only_m21_ffi(TJsValue::to_js(self))
 }
@@ -240,6 +256,7 @@ impl TDOMMatrixReadOnly with m21(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m22_ffi(obj : JsValue) -> Double = "(obj) => obj.m22"
 
 ///|
+/// [DOMMatrixReadOnly.m22](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m22)
 impl TDOMMatrixReadOnly with m22(self : Self) -> Double {
   dom_matrix_read_only_m22_ffi(TJsValue::to_js(self))
 }
@@ -248,6 +265,7 @@ impl TDOMMatrixReadOnly with m22(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m23_ffi(obj : JsValue) -> Double = "(obj) => obj.m23"
 
 ///|
+/// [DOMMatrixReadOnly.m23](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m23)
 impl TDOMMatrixReadOnly with m23(self : Self) -> Double {
   dom_matrix_read_only_m23_ffi(TJsValue::to_js(self))
 }
@@ -256,6 +274,7 @@ impl TDOMMatrixReadOnly with m23(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m24_ffi(obj : JsValue) -> Double = "(obj) => obj.m24"
 
 ///|
+/// [DOMMatrixReadOnly.m24](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m24)
 impl TDOMMatrixReadOnly with m24(self : Self) -> Double {
   dom_matrix_read_only_m24_ffi(TJsValue::to_js(self))
 }
@@ -264,6 +283,7 @@ impl TDOMMatrixReadOnly with m24(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m31_ffi(obj : JsValue) -> Double = "(obj) => obj.m31"
 
 ///|
+/// [DOMMatrixReadOnly.m31](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m31)
 impl TDOMMatrixReadOnly with m31(self : Self) -> Double {
   dom_matrix_read_only_m31_ffi(TJsValue::to_js(self))
 }
@@ -272,6 +292,7 @@ impl TDOMMatrixReadOnly with m31(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m32_ffi(obj : JsValue) -> Double = "(obj) => obj.m32"
 
 ///|
+/// [DOMMatrixReadOnly.m32](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m32)
 impl TDOMMatrixReadOnly with m32(self : Self) -> Double {
   dom_matrix_read_only_m32_ffi(TJsValue::to_js(self))
 }
@@ -280,6 +301,7 @@ impl TDOMMatrixReadOnly with m32(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m33_ffi(obj : JsValue) -> Double = "(obj) => obj.m33"
 
 ///|
+/// [DOMMatrixReadOnly.m33](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m33)
 impl TDOMMatrixReadOnly with m33(self : Self) -> Double {
   dom_matrix_read_only_m33_ffi(TJsValue::to_js(self))
 }
@@ -288,6 +310,7 @@ impl TDOMMatrixReadOnly with m33(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m34_ffi(obj : JsValue) -> Double = "(obj) => obj.m34"
 
 ///|
+/// [DOMMatrixReadOnly.m34](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m34)
 impl TDOMMatrixReadOnly with m34(self : Self) -> Double {
   dom_matrix_read_only_m34_ffi(TJsValue::to_js(self))
 }
@@ -296,6 +319,7 @@ impl TDOMMatrixReadOnly with m34(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m41_ffi(obj : JsValue) -> Double = "(obj) => obj.m41"
 
 ///|
+/// [DOMMatrixReadOnly.m41](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m41)
 impl TDOMMatrixReadOnly with m41(self : Self) -> Double {
   dom_matrix_read_only_m41_ffi(TJsValue::to_js(self))
 }
@@ -304,6 +328,7 @@ impl TDOMMatrixReadOnly with m41(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m42_ffi(obj : JsValue) -> Double = "(obj) => obj.m42"
 
 ///|
+/// [DOMMatrixReadOnly.m42](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m42)
 impl TDOMMatrixReadOnly with m42(self : Self) -> Double {
   dom_matrix_read_only_m42_ffi(TJsValue::to_js(self))
 }
@@ -312,6 +337,7 @@ impl TDOMMatrixReadOnly with m42(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m43_ffi(obj : JsValue) -> Double = "(obj) => obj.m43"
 
 ///|
+/// [DOMMatrixReadOnly.m43](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m43)
 impl TDOMMatrixReadOnly with m43(self : Self) -> Double {
   dom_matrix_read_only_m43_ffi(TJsValue::to_js(self))
 }
@@ -320,6 +346,7 @@ impl TDOMMatrixReadOnly with m43(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_m44_ffi(obj : JsValue) -> Double = "(obj) => obj.m44"
 
 ///|
+/// [DOMMatrixReadOnly.m44](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/m44)
 impl TDOMMatrixReadOnly with m44(self : Self) -> Double {
   dom_matrix_read_only_m44_ffi(TJsValue::to_js(self))
 }
@@ -328,6 +355,7 @@ impl TDOMMatrixReadOnly with m44(self : Self) -> Double {
 extern "js" fn dom_matrix_read_only_is2d_ffi(obj : JsValue) -> Bool = "(obj) => obj.is2D"
 
 ///|
+/// [DOMMatrixReadOnly.is2D](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/is2D)
 impl TDOMMatrixReadOnly with is2d(self : Self) -> Bool {
   dom_matrix_read_only_is2d_ffi(TJsValue::to_js(self))
 }
@@ -336,6 +364,7 @@ impl TDOMMatrixReadOnly with is2d(self : Self) -> Bool {
 extern "js" fn dom_matrix_read_only_is_identity_ffi(obj : JsValue) -> Bool = "(obj) => obj.isIdentity"
 
 ///|
+/// [DOMMatrixReadOnly.isIdentity](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/isIdentity)
 impl TDOMMatrixReadOnly with is_identity(self : Self) -> Bool {
   dom_matrix_read_only_is_identity_ffi(TJsValue::to_js(self))
 }
@@ -349,6 +378,7 @@ extern "js" fn dom_matrix_read_only_translate_ffi(
 ) -> DOMMatrix = "(obj, tx, ty, tz) => obj.translate(tx, ty, tz)"
 
 ///|
+/// [DOMMatrixReadOnly.translate](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/translate)
 impl TDOMMatrixReadOnly with translate(
   self : Self,
   tx? : Double = (0 : Double),
@@ -375,6 +405,7 @@ extern "js" fn dom_matrix_read_only_scale_ffi(
 ) -> DOMMatrix = "(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z) => obj.scale(scale_x, scale_y, scale_z, origin_x, origin_y, origin_z)"
 
 ///|
+/// [DOMMatrixReadOnly.scale](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/scale)
 impl TDOMMatrixReadOnly with scale(
   self : Self,
   scale_x? : Double = (1 : Double),
@@ -403,6 +434,7 @@ extern "js" fn dom_matrix_read_only_scale_non_uniform_ffi(
 ) -> DOMMatrix = "(obj, scale_x, scale_y) => obj.scaleNonUniform(scale_x, scale_y)"
 
 ///|
+/// [DOMMatrixReadOnly.scaleNonUniform](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/scaleNonUniform)
 impl TDOMMatrixReadOnly with scale_non_uniform(
   self : Self,
   scale_x? : Double = (1 : Double),
@@ -425,6 +457,7 @@ extern "js" fn dom_matrix_read_only_scale3d_ffi(
 ) -> DOMMatrix = "(obj, scale, origin_x, origin_y, origin_z) => obj.scale3d(scale, origin_x, origin_y, origin_z)"
 
 ///|
+/// [DOMMatrixReadOnly.scale3d](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/scale3d)
 impl TDOMMatrixReadOnly with scale3d(
   self : Self,
   scale? : Double = (1 : Double),
@@ -450,6 +483,7 @@ extern "js" fn dom_matrix_read_only_rotate_ffi(
 ) -> DOMMatrix = "(obj, rot_x, rot_y, rot_z) => obj.rotate(rot_x, rot_y, rot_z)"
 
 ///|
+/// [DOMMatrixReadOnly.rotate](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/rotate)
 impl TDOMMatrixReadOnly with rotate(
   self : Self,
   rot_x? : Double = (0 : Double),
@@ -472,6 +506,7 @@ extern "js" fn dom_matrix_read_only_rotate_from_vector_ffi(
 ) -> DOMMatrix = "(obj, x, y) => obj.rotateFromVector(x, y)"
 
 ///|
+/// [DOMMatrixReadOnly.rotateFromVector](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/rotateFromVector)
 impl TDOMMatrixReadOnly with rotate_from_vector(
   self : Self,
   x? : Double = (0 : Double),
@@ -494,6 +529,7 @@ extern "js" fn dom_matrix_read_only_rotate_axis_angle_ffi(
 ) -> DOMMatrix = "(obj, x, y, z, angle) => obj.rotateAxisAngle(x, y, z, angle)"
 
 ///|
+/// [DOMMatrixReadOnly.rotateAxisAngle](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/rotateAxisAngle)
 impl TDOMMatrixReadOnly with rotate_axis_angle(
   self : Self,
   x? : Double = (0 : Double),
@@ -517,6 +553,7 @@ extern "js" fn dom_matrix_read_only_skew_x_ffi(
 ) -> DOMMatrix = "(obj, sx) => obj.skewX(sx)"
 
 ///|
+/// [DOMMatrixReadOnly.skewX](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/skewX)
 impl TDOMMatrixReadOnly with skew_x(self : Self, sx? : Double = (0 : Double)) -> DOMMatrix {
   dom_matrix_read_only_skew_x_ffi(TJsValue::to_js(self), TJsValue::to_js(sx))
 }
@@ -528,6 +565,7 @@ extern "js" fn dom_matrix_read_only_skew_y_ffi(
 ) -> DOMMatrix = "(obj, sy) => obj.skewY(sy)"
 
 ///|
+/// [DOMMatrixReadOnly.skewY](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/skewY)
 impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double = (0 : Double)) -> DOMMatrix {
   dom_matrix_read_only_skew_y_ffi(TJsValue::to_js(self), TJsValue::to_js(sy))
 }
@@ -539,6 +577,7 @@ extern "js" fn dom_matrix_read_only_multiply_ffi(
 ) -> DOMMatrix = "(obj, other) => obj.multiply(other)"
 
 ///|
+/// [DOMMatrixReadOnly.multiply](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/multiply)
 impl TDOMMatrixReadOnly with multiply(
   self : Self,
   other? : DOMMatrixInit = DOMMatrixInit::empty(),
@@ -553,6 +592,7 @@ impl TDOMMatrixReadOnly with multiply(
 extern "js" fn dom_matrix_read_only_flip_x_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.flipX()"
 
 ///|
+/// [DOMMatrixReadOnly.flipX](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/flipX)
 impl TDOMMatrixReadOnly with flip_x(self : Self) -> DOMMatrix {
   dom_matrix_read_only_flip_x_ffi(TJsValue::to_js(self))
 }
@@ -561,6 +601,7 @@ impl TDOMMatrixReadOnly with flip_x(self : Self) -> DOMMatrix {
 extern "js" fn dom_matrix_read_only_flip_y_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.flipY()"
 
 ///|
+/// [DOMMatrixReadOnly.flipY](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/flipY)
 impl TDOMMatrixReadOnly with flip_y(self : Self) -> DOMMatrix {
   dom_matrix_read_only_flip_y_ffi(TJsValue::to_js(self))
 }
@@ -569,6 +610,7 @@ impl TDOMMatrixReadOnly with flip_y(self : Self) -> DOMMatrix {
 extern "js" fn dom_matrix_read_only_inverse_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.inverse()"
 
 ///|
+/// [DOMMatrixReadOnly.inverse](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/inverse)
 impl TDOMMatrixReadOnly with inverse(self : Self) -> DOMMatrix {
   dom_matrix_read_only_inverse_ffi(TJsValue::to_js(self))
 }
@@ -580,6 +622,7 @@ extern "js" fn dom_matrix_read_only_transform_point_ffi(
 ) -> DOMPoint = "(obj, point) => obj.transformPoint(point)"
 
 ///|
+/// [DOMMatrixReadOnly.transformPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/transformPoint)
 impl TDOMMatrixReadOnly with transform_point(
   self : Self,
   point? : DOMPointInit = DOMPointInit::empty(),
@@ -596,6 +639,7 @@ extern "js" fn dom_matrix_read_only_to_float32array_ffi(
 ) -> Float32Array = "(obj) => obj.toFloat32Array()"
 
 ///|
+/// [DOMMatrixReadOnly.toFloat32Array](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/toFloat32Array)
 impl TDOMMatrixReadOnly with to_float32array(self : Self) -> Float32Array {
   dom_matrix_read_only_to_float32array_ffi(TJsValue::to_js(self))
 }
@@ -606,6 +650,7 @@ extern "js" fn dom_matrix_read_only_to_float64array_ffi(
 ) -> Float64Array = "(obj) => obj.toFloat64Array()"
 
 ///|
+/// [DOMMatrixReadOnly.toFloat64Array](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/toFloat64Array)
 impl TDOMMatrixReadOnly with to_float64array(self : Self) -> Float64Array {
   dom_matrix_read_only_to_float64array_ffi(TJsValue::to_js(self))
 }
@@ -614,6 +659,7 @@ impl TDOMMatrixReadOnly with to_float64array(self : Self) -> Float64Array {
 extern "js" fn dom_matrix_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
+/// [DOMMatrixReadOnly.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/toJSON)
 impl TDOMMatrixReadOnly with to_json(self : Self) -> JsValue {
   dom_matrix_read_only_to_json_ffi(TJsValue::to_js(self))
 }

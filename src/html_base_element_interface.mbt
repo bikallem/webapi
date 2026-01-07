@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLBaseElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement)
 #external
 pub type HTMLBaseElement
 
@@ -36,6 +37,7 @@ pub fn HTMLBaseElement::new() -> HTMLBaseElement {
 }
 
 ///|
+/// [HTMLBaseElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement) interface.
 pub trait THTMLBaseElement: THTMLElement {
   href(self : Self) -> String = _
   set_href(self : Self, href : String) -> Unit = _
@@ -47,6 +49,7 @@ pub trait THTMLBaseElement: THTMLElement {
 extern "js" fn html_base_element_href_ffi(obj : JsValue) -> String = "(obj) => obj.href"
 
 ///|
+/// [HTMLBaseElement.href](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/href)
 impl THTMLBaseElement with href(self : Self) -> String {
   html_base_element_href_ffi(TJsValue::to_js(self))
 }
@@ -58,6 +61,7 @@ extern "js" fn html_base_element_set_href_ffi(
 ) -> Unit = "(obj, href) => { obj.href = href; }"
 
 ///|
+/// [HTMLBaseElement.href](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/href)
 impl THTMLBaseElement with set_href(self : Self, href : String) -> Unit {
   html_base_element_set_href_ffi(TJsValue::to_js(self), TJsValue::to_js(href))
 }
@@ -66,6 +70,7 @@ impl THTMLBaseElement with set_href(self : Self, href : String) -> Unit {
 extern "js" fn html_base_element_target_ffi(obj : JsValue) -> String = "(obj) => obj.target"
 
 ///|
+/// [HTMLBaseElement.target](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/target)
 impl THTMLBaseElement with target(self : Self) -> String {
   html_base_element_target_ffi(TJsValue::to_js(self))
 }
@@ -77,6 +82,7 @@ extern "js" fn html_base_element_set_target_ffi(
 ) -> Unit = "(obj, target) => { obj.target = target; }"
 
 ///|
+/// [HTMLBaseElement.target](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/target)
 impl THTMLBaseElement with set_target(self : Self, target : String) -> Unit {
   html_base_element_set_target_ffi(
     TJsValue::to_js(self),

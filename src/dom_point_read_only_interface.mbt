@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMPointReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly)
 #external
 pub type DOMPointReadOnly
 
@@ -41,6 +42,7 @@ pub fn DOMPointReadOnly::new(
 }
 
 ///|
+/// [DOMPointReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly) interface.
 pub trait TDOMPointReadOnly: TJsValue {
   x(self : Self) -> Double = _
   y(self : Self) -> Double = _
@@ -56,6 +58,7 @@ extern "js" fn dom_point_read_only_from_point_ffi(
 ) -> DOMPointReadOnly = "(other) => DOMPointReadOnly.fromPoint(other)"
 
 ///|
+/// [DOMPointReadOnly.fromPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/fromPoint)
 pub fn DOMPointReadOnly::from_point(
   other? : DOMPointInit = DOMPointInit::empty(),
 ) -> DOMPointReadOnly {
@@ -66,6 +69,7 @@ pub fn DOMPointReadOnly::from_point(
 extern "js" fn dom_point_read_only_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
 
 ///|
+/// [DOMPointReadOnly.x](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/x)
 impl TDOMPointReadOnly with x(self : Self) -> Double {
   dom_point_read_only_x_ffi(TJsValue::to_js(self))
 }
@@ -74,6 +78,7 @@ impl TDOMPointReadOnly with x(self : Self) -> Double {
 extern "js" fn dom_point_read_only_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
 
 ///|
+/// [DOMPointReadOnly.y](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/y)
 impl TDOMPointReadOnly with y(self : Self) -> Double {
   dom_point_read_only_y_ffi(TJsValue::to_js(self))
 }
@@ -82,6 +87,7 @@ impl TDOMPointReadOnly with y(self : Self) -> Double {
 extern "js" fn dom_point_read_only_z_ffi(obj : JsValue) -> Double = "(obj) => obj.z"
 
 ///|
+/// [DOMPointReadOnly.z](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/z)
 impl TDOMPointReadOnly with z(self : Self) -> Double {
   dom_point_read_only_z_ffi(TJsValue::to_js(self))
 }
@@ -90,6 +96,7 @@ impl TDOMPointReadOnly with z(self : Self) -> Double {
 extern "js" fn dom_point_read_only_w_ffi(obj : JsValue) -> Double = "(obj) => obj.w"
 
 ///|
+/// [DOMPointReadOnly.w](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/w)
 impl TDOMPointReadOnly with w(self : Self) -> Double {
   dom_point_read_only_w_ffi(TJsValue::to_js(self))
 }
@@ -101,6 +108,7 @@ extern "js" fn dom_point_read_only_matrix_transform_ffi(
 ) -> DOMPoint = "(obj, matrix) => obj.matrixTransform(matrix)"
 
 ///|
+/// [DOMPointReadOnly.matrixTransform](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/matrixTransform)
 impl TDOMPointReadOnly with matrix_transform(
   self : Self,
   matrix? : DOMMatrixInit = DOMMatrixInit::empty(),
@@ -115,6 +123,7 @@ impl TDOMPointReadOnly with matrix_transform(
 extern "js" fn dom_point_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
+/// [DOMPointReadOnly.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/toJSON)
 impl TDOMPointReadOnly with to_json(self : Self) -> JsValue {
   dom_point_read_only_to_json_ffi(TJsValue::to_js(self))
 }

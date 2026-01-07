@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)
 #external
 pub type CustomElementRegistry
 
@@ -28,6 +29,7 @@ pub fn CustomElementRegistry::new() -> CustomElementRegistry {
 }
 
 ///|
+/// [CustomElementRegistryGet](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistryGet)
 #external
 pub type CustomElementRegistryGet
 
@@ -69,6 +71,7 @@ pub impl TCustomElementRegistryGet for JsUndefined with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+/// [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry) interface.
 pub trait TCustomElementRegistry: TJsValue {
   define_(
     self : Self,
@@ -94,6 +97,7 @@ extern "js" fn custom_element_registry_define_ffi(
 ) -> Unit = "(obj, name, constructor_, options) => obj.define(name, constructor_, options)"
 
 ///|
+/// [CustomElementRegistry.define](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define)
 impl TCustomElementRegistry with define_(
   self : Self,
   name : String,
@@ -115,6 +119,7 @@ extern "js" fn custom_element_registry_get_ffi(
 ) -> CustomElementRegistryGet = "(obj, name) => obj.get(name)"
 
 ///|
+/// [CustomElementRegistry.get](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/get)
 impl TCustomElementRegistry with get(self : Self, name : String) -> CustomElementRegistryGet {
   custom_element_registry_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -126,6 +131,7 @@ extern "js" fn custom_element_registry_get_name_ffi(
 ) -> JsValue = "(obj, constructor_) => obj.getName(constructor_)"
 
 ///|
+/// [CustomElementRegistry.getName](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/getName)
 impl TCustomElementRegistry with get_name(
   self : Self,
   constructor_ : CustomElementConstructor,
@@ -148,6 +154,7 @@ extern "js" fn custom_element_registry_when_defined_ffi(
 ) -> JsPromise[CustomElementConstructor] = "(obj, name) => obj.whenDefined(name)"
 
 ///|
+/// [CustomElementRegistry.whenDefined](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined)
 impl TCustomElementRegistry with when_defined(self : Self, name : String) -> JsPromise[
   CustomElementConstructor,
 ] {
@@ -164,6 +171,7 @@ extern "js" fn custom_element_registry_upgrade_ffi(
 ) -> Unit = "(obj, root) => obj.upgrade(root)"
 
 ///|
+/// [CustomElementRegistry.upgrade](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/upgrade)
 impl TCustomElementRegistry with upgrade(self : Self, root : &TNode) -> Unit {
   custom_element_registry_upgrade_ffi(
     TJsValue::to_js(self),
@@ -178,6 +186,7 @@ extern "js" fn custom_element_registry_initialize_ffi(
 ) -> Unit = "(obj, root) => obj.initialize(root)"
 
 ///|
+/// [CustomElementRegistry.initialize](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/initialize)
 impl TCustomElementRegistry with initialize(self : Self, root : &TNode) -> Unit {
   custom_element_registry_initialize_ffi(
     TJsValue::to_js(self),

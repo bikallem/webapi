@@ -3,6 +3,7 @@
 // Specifications: trusted-types.idl
 
 ///|
+/// [TrustedTypePolicyFactory](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory)
 #external
 pub type TrustedTypePolicyFactory
 
@@ -20,6 +21,7 @@ pub fn[T : TTrustedTypePolicyFactory] TrustedTypePolicyFactory::into(
 pub impl TTrustedTypePolicyFactory for TrustedTypePolicyFactory
 
 ///|
+/// [TrustedTypePolicyFactory](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory) interface.
 pub trait TTrustedTypePolicyFactory: TJsValue {
   create_policy(
     self : Self,
@@ -55,6 +57,7 @@ extern "js" fn trusted_type_policy_factory_create_policy_ffi(
 ) -> TrustedTypePolicy = "(obj, policy_name, policy_options) => obj.createPolicy(policy_name, policy_options)"
 
 ///|
+/// [TrustedTypePolicyFactory.createPolicy](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/createPolicy)
 impl TTrustedTypePolicyFactory with create_policy(
   self : Self,
   policy_name : String,
@@ -74,6 +77,7 @@ extern "js" fn trusted_type_policy_factory_is_html_ffi(
 ) -> Bool = "(obj, value) => obj.isHTML(value)"
 
 ///|
+/// [TrustedTypePolicyFactory.isHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/isHTML)
 impl TTrustedTypePolicyFactory with is_html(self : Self, value : JsValue) -> Bool {
   trusted_type_policy_factory_is_html_ffi(
     TJsValue::to_js(self),
@@ -88,6 +92,7 @@ extern "js" fn trusted_type_policy_factory_is_script_ffi(
 ) -> Bool = "(obj, value) => obj.isScript(value)"
 
 ///|
+/// [TrustedTypePolicyFactory.isScript](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/isScript)
 impl TTrustedTypePolicyFactory with is_script(self : Self, value : JsValue) -> Bool {
   trusted_type_policy_factory_is_script_ffi(
     TJsValue::to_js(self),
@@ -102,6 +107,7 @@ extern "js" fn trusted_type_policy_factory_is_script_url_ffi(
 ) -> Bool = "(obj, value) => obj.isScriptURL(value)"
 
 ///|
+/// [TrustedTypePolicyFactory.isScriptURL](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/isScriptURL)
 impl TTrustedTypePolicyFactory with is_script_url(self : Self, value : JsValue) -> Bool {
   trusted_type_policy_factory_is_script_url_ffi(
     TJsValue::to_js(self),
@@ -115,6 +121,7 @@ extern "js" fn trusted_type_policy_factory_empty_html_ffi(
 ) -> TrustedHTML = "(obj) => obj.emptyHTML"
 
 ///|
+/// [TrustedTypePolicyFactory.emptyHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/emptyHTML)
 impl TTrustedTypePolicyFactory with empty_html(self : Self) -> TrustedHTML {
   trusted_type_policy_factory_empty_html_ffi(TJsValue::to_js(self))
 }
@@ -125,6 +132,7 @@ extern "js" fn trusted_type_policy_factory_empty_script_ffi(
 ) -> TrustedScript = "(obj) => obj.emptyScript"
 
 ///|
+/// [TrustedTypePolicyFactory.emptyScript](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/emptyScript)
 impl TTrustedTypePolicyFactory with empty_script(self : Self) -> TrustedScript {
   trusted_type_policy_factory_empty_script_ffi(TJsValue::to_js(self))
 }
@@ -139,6 +147,7 @@ extern "js" fn trusted_type_policy_factory_get_attribute_type_ffi(
 ) -> JsValue = "(obj, tag_name, attribute, element_ns, attr_ns) => obj.getAttributeType(tag_name, attribute, element_ns, attr_ns)"
 
 ///|
+/// [TrustedTypePolicyFactory.getAttributeType](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/getAttributeType)
 impl TTrustedTypePolicyFactory with get_attribute_type(
   self : Self,
   tag_name : String,
@@ -169,6 +178,7 @@ extern "js" fn trusted_type_policy_factory_get_property_type_ffi(
 ) -> JsValue = "(obj, tag_name, property, element_ns) => obj.getPropertyType(tag_name, property, element_ns)"
 
 ///|
+/// [TrustedTypePolicyFactory.getPropertyType](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/getPropertyType)
 impl TTrustedTypePolicyFactory with get_property_type(
   self : Self,
   tag_name : String,
@@ -194,6 +204,7 @@ extern "js" fn trusted_type_policy_factory_default_policy_ffi(
 ) -> TrustedTypePolicy = "(obj) => obj.defaultPolicy"
 
 ///|
+/// [TrustedTypePolicyFactory.defaultPolicy](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicyFactory/defaultPolicy)
 impl TTrustedTypePolicyFactory with default_policy(self : Self) -> TrustedTypePolicy {
   trusted_type_policy_factory_default_policy_ffi(TJsValue::to_js(self))
 }

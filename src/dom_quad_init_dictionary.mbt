@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMQuadInit](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuadInit)
 #external
 pub type DOMQuadInit
 

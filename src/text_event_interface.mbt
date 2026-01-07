@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [TextEvent](https://developer.mozilla.org/en-US/docs/Web/API/TextEvent)
 #external
 pub type TextEvent
 
@@ -22,6 +23,7 @@ pub impl TUIEvent for TextEvent
 pub impl TEvent for TextEvent
 
 ///|
+/// [TextEvent](https://developer.mozilla.org/en-US/docs/Web/API/TextEvent) interface.
 pub trait TTextEvent: TUIEvent {
   data(self : Self) -> String = _
   init_text_event(
@@ -38,6 +40,7 @@ pub trait TTextEvent: TUIEvent {
 extern "js" fn text_event_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
 
 ///|
+/// [TextEvent.data](https://developer.mozilla.org/en-US/docs/Web/API/TextEvent/data)
 impl TTextEvent with data(self : Self) -> String {
   text_event_data_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +56,7 @@ extern "js" fn text_event_init_text_event_ffi(
 ) -> Unit = "(obj, type_, bubbles, cancelable, view, data) => obj.initTextEvent(type_, bubbles, cancelable, view, data)"
 
 ///|
+/// [TextEvent.initTextEvent](https://developer.mozilla.org/en-US/docs/Web/API/TextEvent/initTextEvent)
 impl TTextEvent with init_text_event(
   self : Self,
   type_ : String,

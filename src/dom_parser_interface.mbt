@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [DOMParser](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser)
 #external
 pub type DOMParser
 
@@ -37,6 +38,7 @@ pub impl TDOMParserParseFromStringString for TrustedHTML with to_js(
 pub impl TDOMParserParseFromStringString for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
+/// [DOMParser](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser) interface.
 pub trait TDOMParser: TJsValue {
   parse_from_string(
     self : Self,
@@ -53,6 +55,7 @@ extern "js" fn dom_parser_parse_from_string_ffi(
 ) -> Document = "(obj, string, type_) => obj.parseFromString(string, type_)"
 
 ///|
+/// [DOMParser.parseFromString](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser/parseFromString)
 impl TDOMParser with parse_from_string(
   self : Self,
   string : &TDOMParserParseFromStringString,

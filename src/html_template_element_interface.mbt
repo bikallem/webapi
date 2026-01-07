@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTemplateElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement)
 #external
 pub type HTMLTemplateElement
 
@@ -38,6 +39,7 @@ pub fn HTMLTemplateElement::new() -> HTMLTemplateElement {
 }
 
 ///|
+/// [HTMLTemplateElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement) interface.
 pub trait THTMLTemplateElement: THTMLElement {
   content(self : Self) -> DocumentFragment = _
   shadow_root_mode(self : Self) -> String = _
@@ -64,6 +66,7 @@ extern "js" fn html_template_element_content_ffi(
 ) -> DocumentFragment = "(obj) => obj.content"
 
 ///|
+/// [HTMLTemplateElement.content](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/content)
 impl THTMLTemplateElement with content(self : Self) -> DocumentFragment {
   html_template_element_content_ffi(TJsValue::to_js(self))
 }
@@ -74,6 +77,7 @@ extern "js" fn html_template_element_shadow_root_mode_ffi(
 ) -> String = "(obj) => obj.shadowRootMode"
 
 ///|
+/// [HTMLTemplateElement.shadowRootMode](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootMode)
 impl THTMLTemplateElement with shadow_root_mode(self : Self) -> String {
   html_template_element_shadow_root_mode_ffi(TJsValue::to_js(self))
 }
@@ -85,6 +89,7 @@ extern "js" fn html_template_element_set_shadow_root_mode_ffi(
 ) -> Unit = "(obj, shadowRootMode) => { obj.shadowRootMode = shadowRootMode; }"
 
 ///|
+/// [HTMLTemplateElement.shadowRootMode](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootMode)
 impl THTMLTemplateElement with set_shadow_root_mode(
   self : Self,
   shadow_root_mode : String,
@@ -101,6 +106,7 @@ extern "js" fn html_template_element_shadow_root_delegates_focus_ffi(
 ) -> Bool = "(obj) => obj.shadowRootDelegatesFocus"
 
 ///|
+/// [HTMLTemplateElement.shadowRootDelegatesFocus](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootDelegatesFocus)
 impl THTMLTemplateElement with shadow_root_delegates_focus(self : Self) -> Bool {
   html_template_element_shadow_root_delegates_focus_ffi(TJsValue::to_js(self))
 }
@@ -112,6 +118,7 @@ extern "js" fn html_template_element_set_shadow_root_delegates_focus_ffi(
 ) -> Unit = "(obj, shadowRootDelegatesFocus) => { obj.shadowRootDelegatesFocus = shadowRootDelegatesFocus; }"
 
 ///|
+/// [HTMLTemplateElement.shadowRootDelegatesFocus](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootDelegatesFocus)
 impl THTMLTemplateElement with set_shadow_root_delegates_focus(
   self : Self,
   shadow_root_delegates_focus : Bool,
@@ -128,6 +135,7 @@ extern "js" fn html_template_element_shadow_root_clonable_ffi(
 ) -> Bool = "(obj) => obj.shadowRootClonable"
 
 ///|
+/// [HTMLTemplateElement.shadowRootClonable](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootClonable)
 impl THTMLTemplateElement with shadow_root_clonable(self : Self) -> Bool {
   html_template_element_shadow_root_clonable_ffi(TJsValue::to_js(self))
 }
@@ -139,6 +147,7 @@ extern "js" fn html_template_element_set_shadow_root_clonable_ffi(
 ) -> Unit = "(obj, shadowRootClonable) => { obj.shadowRootClonable = shadowRootClonable; }"
 
 ///|
+/// [HTMLTemplateElement.shadowRootClonable](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootClonable)
 impl THTMLTemplateElement with set_shadow_root_clonable(
   self : Self,
   shadow_root_clonable : Bool,
@@ -155,6 +164,7 @@ extern "js" fn html_template_element_shadow_root_serializable_ffi(
 ) -> Bool = "(obj) => obj.shadowRootSerializable"
 
 ///|
+/// [HTMLTemplateElement.shadowRootSerializable](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootSerializable)
 impl THTMLTemplateElement with shadow_root_serializable(self : Self) -> Bool {
   html_template_element_shadow_root_serializable_ffi(TJsValue::to_js(self))
 }
@@ -166,6 +176,7 @@ extern "js" fn html_template_element_set_shadow_root_serializable_ffi(
 ) -> Unit = "(obj, shadowRootSerializable) => { obj.shadowRootSerializable = shadowRootSerializable; }"
 
 ///|
+/// [HTMLTemplateElement.shadowRootSerializable](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootSerializable)
 impl THTMLTemplateElement with set_shadow_root_serializable(
   self : Self,
   shadow_root_serializable : Bool,
@@ -182,6 +193,7 @@ extern "js" fn html_template_element_shadow_root_custom_element_registry_ffi(
 ) -> String = "(obj) => obj.shadowRootCustomElementRegistry"
 
 ///|
+/// [HTMLTemplateElement.shadowRootCustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootCustomElementRegistry)
 impl THTMLTemplateElement with shadow_root_custom_element_registry(self : Self) -> String {
   html_template_element_shadow_root_custom_element_registry_ffi(
     TJsValue::to_js(self),
@@ -195,6 +207,7 @@ extern "js" fn html_template_element_set_shadow_root_custom_element_registry_ffi
 ) -> Unit = "(obj, shadowRootCustomElementRegistry) => { obj.shadowRootCustomElementRegistry = shadowRootCustomElementRegistry; }"
 
 ///|
+/// [HTMLTemplateElement.shadowRootCustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/shadowRootCustomElementRegistry)
 impl THTMLTemplateElement with set_shadow_root_custom_element_registry(
   self : Self,
   shadow_root_custom_element_registry : String,

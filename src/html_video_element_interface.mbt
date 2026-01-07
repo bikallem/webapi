@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement)
 #external
 pub type HTMLVideoElement
 
@@ -41,6 +42,7 @@ pub fn HTMLVideoElement::new() -> HTMLVideoElement {
 }
 
 ///|
+/// [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement) interface.
 pub trait THTMLVideoElement: THTMLMediaElement {
   width(self : Self) -> UInt = _
   set_width(self : Self, width : UInt) -> Unit = _
@@ -58,6 +60,7 @@ pub trait THTMLVideoElement: THTMLMediaElement {
 extern "js" fn html_video_element_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
 
 ///|
+/// [HTMLVideoElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/width)
 impl THTMLVideoElement with width(self : Self) -> UInt {
   html_video_element_width_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +72,7 @@ extern "js" fn html_video_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLVideoElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/width)
 impl THTMLVideoElement with set_width(self : Self, width : UInt) -> Unit {
   html_video_element_set_width_ffi(
     TJsValue::to_js(self),
@@ -80,6 +84,7 @@ impl THTMLVideoElement with set_width(self : Self, width : UInt) -> Unit {
 extern "js" fn html_video_element_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
 
 ///|
+/// [HTMLVideoElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/height)
 impl THTMLVideoElement with height(self : Self) -> UInt {
   html_video_element_height_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +96,7 @@ extern "js" fn html_video_element_set_height_ffi(
 ) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [HTMLVideoElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/height)
 impl THTMLVideoElement with set_height(self : Self, height : UInt) -> Unit {
   html_video_element_set_height_ffi(
     TJsValue::to_js(self),
@@ -102,6 +108,7 @@ impl THTMLVideoElement with set_height(self : Self, height : UInt) -> Unit {
 extern "js" fn html_video_element_video_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.videoWidth"
 
 ///|
+/// [HTMLVideoElement.videoWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoWidth)
 impl THTMLVideoElement with video_width(self : Self) -> UInt {
   html_video_element_video_width_ffi(TJsValue::to_js(self))
 }
@@ -110,6 +117,7 @@ impl THTMLVideoElement with video_width(self : Self) -> UInt {
 extern "js" fn html_video_element_video_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.videoHeight"
 
 ///|
+/// [HTMLVideoElement.videoHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight)
 impl THTMLVideoElement with video_height(self : Self) -> UInt {
   html_video_element_video_height_ffi(TJsValue::to_js(self))
 }
@@ -118,6 +126,7 @@ impl THTMLVideoElement with video_height(self : Self) -> UInt {
 extern "js" fn html_video_element_poster_ffi(obj : JsValue) -> String = "(obj) => obj.poster"
 
 ///|
+/// [HTMLVideoElement.poster](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/poster)
 impl THTMLVideoElement with poster(self : Self) -> String {
   html_video_element_poster_ffi(TJsValue::to_js(self))
 }
@@ -129,6 +138,7 @@ extern "js" fn html_video_element_set_poster_ffi(
 ) -> Unit = "(obj, poster) => { obj.poster = poster; }"
 
 ///|
+/// [HTMLVideoElement.poster](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/poster)
 impl THTMLVideoElement with set_poster(self : Self, poster : String) -> Unit {
   html_video_element_set_poster_ffi(
     TJsValue::to_js(self),
@@ -140,6 +150,7 @@ impl THTMLVideoElement with set_poster(self : Self, poster : String) -> Unit {
 extern "js" fn html_video_element_plays_inline_ffi(obj : JsValue) -> Bool = "(obj) => obj.playsInline"
 
 ///|
+/// [HTMLVideoElement.playsInline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/playsInline)
 impl THTMLVideoElement with plays_inline(self : Self) -> Bool {
   html_video_element_plays_inline_ffi(TJsValue::to_js(self))
 }
@@ -151,6 +162,7 @@ extern "js" fn html_video_element_set_plays_inline_ffi(
 ) -> Unit = "(obj, playsInline) => { obj.playsInline = playsInline; }"
 
 ///|
+/// [HTMLVideoElement.playsInline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/playsInline)
 impl THTMLVideoElement with set_plays_inline(self : Self, plays_inline : Bool) -> Unit {
   html_video_element_set_plays_inline_ffi(
     TJsValue::to_js(self),

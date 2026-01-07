@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageBitmapOptions](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapOptions)
 #external
 pub type ImageBitmapOptions
 

@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGTextPositioningElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement)
 #external
 pub type SVGTextPositioningElement
 
@@ -38,6 +39,7 @@ pub impl TNode for SVGTextPositioningElement
 pub impl TEventTarget for SVGTextPositioningElement
 
 ///|
+/// [SVGTextPositioningElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement) interface.
 pub trait TSVGTextPositioningElement: TSVGTextContentElement {
   x(self : Self) -> SVGAnimatedLengthList = _
   y(self : Self) -> SVGAnimatedLengthList = _
@@ -52,6 +54,7 @@ extern "js" fn svg_text_positioning_element_x_ffi(
 ) -> SVGAnimatedLengthList = "(obj) => obj.x"
 
 ///|
+/// [SVGTextPositioningElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/x)
 impl TSVGTextPositioningElement with x(self : Self) -> SVGAnimatedLengthList {
   svg_text_positioning_element_x_ffi(TJsValue::to_js(self))
 }
@@ -62,6 +65,7 @@ extern "js" fn svg_text_positioning_element_y_ffi(
 ) -> SVGAnimatedLengthList = "(obj) => obj.y"
 
 ///|
+/// [SVGTextPositioningElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/y)
 impl TSVGTextPositioningElement with y(self : Self) -> SVGAnimatedLengthList {
   svg_text_positioning_element_y_ffi(TJsValue::to_js(self))
 }
@@ -72,6 +76,7 @@ extern "js" fn svg_text_positioning_element_dx_ffi(
 ) -> SVGAnimatedLengthList = "(obj) => obj.dx"
 
 ///|
+/// [SVGTextPositioningElement.dx](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/dx)
 impl TSVGTextPositioningElement with dx(self : Self) -> SVGAnimatedLengthList {
   svg_text_positioning_element_dx_ffi(TJsValue::to_js(self))
 }
@@ -82,6 +87,7 @@ extern "js" fn svg_text_positioning_element_dy_ffi(
 ) -> SVGAnimatedLengthList = "(obj) => obj.dy"
 
 ///|
+/// [SVGTextPositioningElement.dy](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/dy)
 impl TSVGTextPositioningElement with dy(self : Self) -> SVGAnimatedLengthList {
   svg_text_positioning_element_dy_ffi(TJsValue::to_js(self))
 }
@@ -92,6 +98,7 @@ extern "js" fn svg_text_positioning_element_rotate_ffi(
 ) -> SVGAnimatedNumberList = "(obj) => obj.rotate"
 
 ///|
+/// [SVGTextPositioningElement.rotate](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/rotate)
 impl TSVGTextPositioningElement with rotate(self : Self) -> SVGAnimatedNumberList {
   svg_text_positioning_element_rotate_ffi(TJsValue::to_js(self))
 }

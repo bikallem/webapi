@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLLIElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement)
 #external
 pub type HTMLLIElement
 
@@ -36,6 +37,7 @@ pub fn HTMLLIElement::new() -> HTMLLIElement {
 }
 
 ///|
+/// [HTMLLIElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement) interface.
 pub trait THTMLLIElement: THTMLElement {
   value(self : Self) -> Int = _
   set_value(self : Self, value : Int) -> Unit = _
@@ -47,6 +49,7 @@ pub trait THTMLLIElement: THTMLElement {
 extern "js" fn htmlli_element_value_ffi(obj : JsValue) -> Int = "(obj) => obj.value"
 
 ///|
+/// [HTMLLIElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement/value)
 impl THTMLLIElement with value(self : Self) -> Int {
   htmlli_element_value_ffi(TJsValue::to_js(self))
 }
@@ -58,6 +61,7 @@ extern "js" fn htmlli_element_set_value_ffi(
 ) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
+/// [HTMLLIElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement/value)
 impl THTMLLIElement with set_value(self : Self, value : Int) -> Unit {
   htmlli_element_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }
@@ -66,6 +70,7 @@ impl THTMLLIElement with set_value(self : Self, value : Int) -> Unit {
 extern "js" fn htmlli_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [HTMLLIElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement/type)
 impl THTMLLIElement with type_(self : Self) -> String {
   htmlli_element_type_ffi(TJsValue::to_js(self))
 }
@@ -77,6 +82,7 @@ extern "js" fn htmlli_element_set_type_ffi(
 ) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
+/// [HTMLLIElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement/type)
 impl THTMLLIElement with set_type_(self : Self, type_ : String) -> Unit {
   htmlli_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }

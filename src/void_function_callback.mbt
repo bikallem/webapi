@@ -3,6 +3,7 @@
 // Specifications: webidl.idl
 
 ///|
+/// [VoidFunction](https://developer.mozilla.org/en-US/docs/Web/API/VoidFunction)
 #external
 pub type VoidFunction
 

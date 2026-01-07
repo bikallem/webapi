@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMMatrixInit](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixInit)
 #external
 pub type DOMMatrixInit
 

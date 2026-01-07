@@ -3,6 +3,7 @@
 // Specifications: dom.idl, cssom-view.idl
 
 ///|
+/// [MediaQueryListEventInit](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEventInit)
 #external
 pub type MediaQueryListEventInit
 

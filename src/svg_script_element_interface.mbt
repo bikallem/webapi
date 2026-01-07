@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGScriptElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement)
 #external
 pub type SVGScriptElement
 
@@ -30,6 +31,7 @@ pub impl TNode for SVGScriptElement
 pub impl TEventTarget for SVGScriptElement
 
 ///|
+/// [SVGScriptElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement) interface.
 pub trait TSVGScriptElement: TSVGElement {
   type_(self : Self) -> String = _
   set_type_(self : Self, type_ : String) -> Unit = _
@@ -42,6 +44,7 @@ pub trait TSVGScriptElement: TSVGElement {
 extern "js" fn svg_script_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [SVGScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/type)
 impl TSVGScriptElement with type_(self : Self) -> String {
   svg_script_element_type_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +56,7 @@ extern "js" fn svg_script_element_set_type_ffi(
 ) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
+/// [SVGScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/type)
 impl TSVGScriptElement with set_type_(self : Self, type_ : String) -> Unit {
   svg_script_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
@@ -61,6 +65,7 @@ impl TSVGScriptElement with set_type_(self : Self, type_ : String) -> Unit {
 extern "js" fn svg_script_element_cross_origin_ffi(obj : JsValue) -> String = "(obj) => obj.crossOrigin"
 
 ///|
+/// [SVGScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/crossOrigin)
 impl TSVGScriptElement with cross_origin(self : Self) -> String {
   svg_script_element_cross_origin_ffi(TJsValue::to_js(self))
 }
@@ -72,6 +77,7 @@ extern "js" fn svg_script_element_set_cross_origin_ffi(
 ) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
+/// [SVGScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/crossOrigin)
 impl TSVGScriptElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {
   svg_script_element_set_cross_origin_ffi(
     TJsValue::to_js(self),
@@ -83,6 +89,7 @@ impl TSVGScriptElement with set_cross_origin(self : Self, cross_origin : String)
 extern "js" fn svg_script_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.href"
 
 ///|
+/// [SVGScriptElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/href)
 impl TSVGScriptElement with href(self : Self) -> SVGAnimatedString {
   svg_script_element_href_ffi(TJsValue::to_js(self))
 }

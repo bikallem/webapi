@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [CompositionEventInit](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEventInit)
 #external
 pub type CompositionEventInit
 

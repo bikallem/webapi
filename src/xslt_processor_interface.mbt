@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [XSLTProcessor](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor)
 #external
 pub type XSLTProcessor
 
@@ -24,6 +25,7 @@ pub fn XSLTProcessor::new() -> XSLTProcessor {
 }
 
 ///|
+/// [XSLTProcessor](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor) interface.
 pub trait TXSLTProcessor: TJsValue {
   import_stylesheet(self : Self, style : &TNode) -> Unit = _
   transform_to_fragment(self : Self, source : &TNode, output : &TDocument) -> DocumentFragment = _
@@ -47,6 +49,7 @@ extern "js" fn xslt_processor_import_stylesheet_ffi(
 ) -> Unit = "(obj, style) => obj.importStylesheet(style)"
 
 ///|
+/// [XSLTProcessor.importStylesheet](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/importStylesheet)
 impl TXSLTProcessor with import_stylesheet(self : Self, style : &TNode) -> Unit {
   xslt_processor_import_stylesheet_ffi(
     TJsValue::to_js(self),
@@ -62,6 +65,7 @@ extern "js" fn xslt_processor_transform_to_fragment_ffi(
 ) -> DocumentFragment = "(obj, source, output) => obj.transformToFragment(source, output)"
 
 ///|
+/// [XSLTProcessor.transformToFragment](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/transformToFragment)
 impl TXSLTProcessor with transform_to_fragment(
   self : Self,
   source : &TNode,
@@ -81,6 +85,7 @@ extern "js" fn xslt_processor_transform_to_document_ffi(
 ) -> Document = "(obj, source) => obj.transformToDocument(source)"
 
 ///|
+/// [XSLTProcessor.transformToDocument](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/transformToDocument)
 impl TXSLTProcessor with transform_to_document(self : Self, source : &TNode) -> Document {
   xslt_processor_transform_to_document_ffi(
     TJsValue::to_js(self),
@@ -97,6 +102,7 @@ extern "js" fn xslt_processor_set_parameter_ffi(
 ) -> Unit = "(obj, namespace_uri, local_name, value) => obj.setParameter(namespace_uri, local_name, value)"
 
 ///|
+/// [XSLTProcessor.setParameter](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/setParameter)
 impl TXSLTProcessor with set_parameter(
   self : Self,
   namespace_uri : String,
@@ -119,6 +125,7 @@ extern "js" fn xslt_processor_get_parameter_ffi(
 ) -> JsValue = "(obj, namespace_uri, local_name) => obj.getParameter(namespace_uri, local_name)"
 
 ///|
+/// [XSLTProcessor.getParameter](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/getParameter)
 impl TXSLTProcessor with get_parameter(
   self : Self,
   namespace_uri : String,
@@ -139,6 +146,7 @@ extern "js" fn xslt_processor_remove_parameter_ffi(
 ) -> Unit = "(obj, namespace_uri, local_name) => obj.removeParameter(namespace_uri, local_name)"
 
 ///|
+/// [XSLTProcessor.removeParameter](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/removeParameter)
 impl TXSLTProcessor with remove_parameter(
   self : Self,
   namespace_uri : String,
@@ -155,6 +163,7 @@ impl TXSLTProcessor with remove_parameter(
 extern "js" fn xslt_processor_clear_parameters_ffi(obj : JsValue) -> Unit = "(obj) => obj.clearParameters()"
 
 ///|
+/// [XSLTProcessor.clearParameters](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/clearParameters)
 impl TXSLTProcessor with clear_parameters(self : Self) -> Unit {
   xslt_processor_clear_parameters_ffi(TJsValue::to_js(self))
 }
@@ -163,6 +172,7 @@ impl TXSLTProcessor with clear_parameters(self : Self) -> Unit {
 extern "js" fn xslt_processor_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
 
 ///|
+/// [XSLTProcessor.reset](https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor/reset)
 impl TXSLTProcessor with reset(self : Self) -> Unit {
   xslt_processor_reset_ffi(TJsValue::to_js(self))
 }

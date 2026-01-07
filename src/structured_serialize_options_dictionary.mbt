@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [StructuredSerializeOptions](https://developer.mozilla.org/en-US/docs/Web/API/StructuredSerializeOptions)
 #external
 pub type StructuredSerializeOptions
 

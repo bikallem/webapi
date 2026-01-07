@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [OffscreenCanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D)
 #external
 pub type OffscreenCanvasRenderingContext2D
 
@@ -20,6 +21,7 @@ pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
 ///|
+/// [OffscreenCanvasRenderingContext2DStrokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2DStrokeStyle)
 #external
 pub type OffscreenCanvasRenderingContext2DStrokeStyle
 
@@ -54,6 +56,7 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern with to
 ) -> JsValue = "%identity"
 
 ///|
+/// [OffscreenCanvasRenderingContext2DFillStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2DFillStyle)
 #external
 pub type OffscreenCanvasRenderingContext2DFillStyle
 
@@ -123,6 +126,7 @@ pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Array[
 ] with to_js(self : Array[&TOffscreenCanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D) interface.
 pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
   canvas(self : Self) -> OffscreenCanvas = _
   get_context_attributes(self : Self) -> CanvasRenderingContext2DSettings = _
@@ -396,6 +400,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_canvas_ffi(
 ) -> OffscreenCanvas = "(obj) => obj.canvas"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.canvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/canvas)
 impl TOffscreenCanvasRenderingContext2D with canvas(self : Self) -> OffscreenCanvas {
   offscreen_canvas_rendering_context2d_canvas_ffi(TJsValue::to_js(self))
 }
@@ -406,6 +411,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_get_context_attributes_ffi(
 ) -> CanvasRenderingContext2DSettings = "(obj) => obj.getContextAttributes()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.getContextAttributes](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/getContextAttributes)
 impl TOffscreenCanvasRenderingContext2D with get_context_attributes(self : Self) -> CanvasRenderingContext2DSettings {
   offscreen_canvas_rendering_context2d_get_context_attributes_ffi(
     TJsValue::to_js(self),
@@ -418,6 +424,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_save_ffi(
 ) -> Unit = "(obj) => obj.save()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.save](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/save)
 impl TOffscreenCanvasRenderingContext2D with save(self : Self) -> Unit {
   offscreen_canvas_rendering_context2d_save_ffi(TJsValue::to_js(self))
 }
@@ -428,6 +435,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_restore_ffi(
 ) -> Unit = "(obj) => obj.restore()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.restore](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/restore)
 impl TOffscreenCanvasRenderingContext2D with restore(self : Self) -> Unit {
   offscreen_canvas_rendering_context2d_restore_ffi(TJsValue::to_js(self))
 }
@@ -438,6 +446,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_reset_ffi(
 ) -> Unit = "(obj) => obj.reset()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.reset](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/reset)
 impl TOffscreenCanvasRenderingContext2D with reset(self : Self) -> Unit {
   offscreen_canvas_rendering_context2d_reset_ffi(TJsValue::to_js(self))
 }
@@ -448,6 +457,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_is_context_lost_ffi(
 ) -> Bool = "(obj) => obj.isContextLost()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.isContextLost](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isContextLost)
 impl TOffscreenCanvasRenderingContext2D with is_context_lost(self : Self) -> Bool {
   offscreen_canvas_rendering_context2d_is_context_lost_ffi(
     TJsValue::to_js(self),
@@ -462,6 +472,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_scale_ffi(
 ) -> Unit = "(obj, x, y) => obj.scale(x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.scale](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/scale)
 impl TOffscreenCanvasRenderingContext2D with scale(
   self : Self,
   x : Double,
@@ -481,6 +492,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_rotate_ffi(
 ) -> Unit = "(obj, angle) => obj.rotate(angle)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.rotate](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/rotate)
 impl TOffscreenCanvasRenderingContext2D with rotate(self : Self, angle : Double) -> Unit {
   offscreen_canvas_rendering_context2d_rotate_ffi(
     TJsValue::to_js(self),
@@ -496,6 +508,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_translate_ffi(
 ) -> Unit = "(obj, x, y) => obj.translate(x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.translate](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/translate)
 impl TOffscreenCanvasRenderingContext2D with translate(
   self : Self,
   x : Double,
@@ -520,6 +533,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_transform_ffi(
 ) -> Unit = "(obj, a, b, c, d, e, f) => obj.transform(a, b, c, d, e, f)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.transform](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/transform)
 impl TOffscreenCanvasRenderingContext2D with transform(
   self : Self,
   a : Double,
@@ -546,6 +560,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_get_transform_ffi(
 ) -> DOMMatrix = "(obj) => obj.getTransform()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.getTransform](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/getTransform)
 impl TOffscreenCanvasRenderingContext2D with get_transform(self : Self) -> DOMMatrix {
   offscreen_canvas_rendering_context2d_get_transform_ffi(TJsValue::to_js(self))
 }
@@ -562,6 +577,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_transform_ffi(
 ) -> Unit = "(obj, a, b, c, d, e, f) => obj.setTransform(a, b, c, d, e, f)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/setTransform)
 impl TOffscreenCanvasRenderingContext2D with set_transform(
   self : Self,
   a : Double,
@@ -589,6 +605,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_transform_2_ffi(
 ) -> Unit = "(obj, transform) => obj.setTransform_2(transform)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.setTransform_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/setTransform_2)
 impl TOffscreenCanvasRenderingContext2D with set_transform_2(
   self : Self,
   transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
@@ -605,6 +622,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_reset_transform_ffi(
 ) -> Unit = "(obj) => obj.resetTransform()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.resetTransform](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/resetTransform)
 impl TOffscreenCanvasRenderingContext2D with reset_transform(self : Self) -> Unit {
   offscreen_canvas_rendering_context2d_reset_transform_ffi(
     TJsValue::to_js(self),
@@ -617,6 +635,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_global_alpha_ffi(
 ) -> Double = "(obj) => obj.globalAlpha"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.globalAlpha](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/globalAlpha)
 impl TOffscreenCanvasRenderingContext2D with global_alpha(self : Self) -> Double {
   offscreen_canvas_rendering_context2d_global_alpha_ffi(TJsValue::to_js(self))
 }
@@ -628,6 +647,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_global_alpha_ffi(
 ) -> Unit = "(obj, globalAlpha) => { obj.globalAlpha = globalAlpha; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.globalAlpha](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/globalAlpha)
 impl TOffscreenCanvasRenderingContext2D with set_global_alpha(
   self : Self,
   global_alpha : Double,
@@ -644,6 +664,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_global_composite_operation_f
 ) -> String = "(obj) => obj.globalCompositeOperation"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.globalCompositeOperation](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/globalCompositeOperation)
 impl TOffscreenCanvasRenderingContext2D with global_composite_operation(
   self : Self,
 ) -> String {
@@ -659,6 +680,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_global_composite_operati
 ) -> Unit = "(obj, globalCompositeOperation) => { obj.globalCompositeOperation = globalCompositeOperation; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.globalCompositeOperation](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/globalCompositeOperation)
 impl TOffscreenCanvasRenderingContext2D with set_global_composite_operation(
   self : Self,
   global_composite_operation : String,
@@ -675,6 +697,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_image_smoothing_enabled_ffi(
 ) -> Bool = "(obj) => obj.imageSmoothingEnabled"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.imageSmoothingEnabled](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/imageSmoothingEnabled)
 impl TOffscreenCanvasRenderingContext2D with image_smoothing_enabled(
   self : Self,
 ) -> Bool {
@@ -690,6 +713,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_image_smoothing_enabled_
 ) -> Unit = "(obj, imageSmoothingEnabled) => { obj.imageSmoothingEnabled = imageSmoothingEnabled; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.imageSmoothingEnabled](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/imageSmoothingEnabled)
 impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_enabled(
   self : Self,
   image_smoothing_enabled : Bool,
@@ -706,6 +730,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi(
 ) -> ImageSmoothingQuality = "(obj) => obj.imageSmoothingQuality"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.imageSmoothingQuality](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/imageSmoothingQuality)
 impl TOffscreenCanvasRenderingContext2D with image_smoothing_quality(
   self : Self,
 ) -> ImageSmoothingQuality {
@@ -721,6 +746,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_image_smoothing_quality_
 ) -> Unit = "(obj, imageSmoothingQuality) => { obj.imageSmoothingQuality = imageSmoothingQuality; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.imageSmoothingQuality](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/imageSmoothingQuality)
 impl TOffscreenCanvasRenderingContext2D with set_image_smoothing_quality(
   self : Self,
   image_smoothing_quality : ImageSmoothingQuality,
@@ -737,6 +763,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_stroke_style_ffi(
 ) -> OffscreenCanvasRenderingContext2DStrokeStyle = "(obj) => obj.strokeStyle"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.strokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/strokeStyle)
 impl TOffscreenCanvasRenderingContext2D with stroke_style(self : Self) -> OffscreenCanvasRenderingContext2DStrokeStyle {
   offscreen_canvas_rendering_context2d_stroke_style_ffi(TJsValue::to_js(self))
 }
@@ -748,6 +775,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
 ) -> Unit = "(obj, strokeStyle) => { obj.strokeStyle = strokeStyle; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.strokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/strokeStyle)
 impl TOffscreenCanvasRenderingContext2D with set_stroke_style(
   self : Self,
   stroke_style : &TOffscreenCanvasRenderingContext2DStrokeStyle,
@@ -764,6 +792,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_fill_style_ffi(
 ) -> OffscreenCanvasRenderingContext2DFillStyle = "(obj) => obj.fillStyle"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fillStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fillStyle)
 impl TOffscreenCanvasRenderingContext2D with fill_style(self : Self) -> OffscreenCanvasRenderingContext2DFillStyle {
   offscreen_canvas_rendering_context2d_fill_style_ffi(TJsValue::to_js(self))
 }
@@ -775,6 +804,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_fill_style_ffi(
 ) -> Unit = "(obj, fillStyle) => { obj.fillStyle = fillStyle; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fillStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fillStyle)
 impl TOffscreenCanvasRenderingContext2D with set_fill_style(
   self : Self,
   fill_style : &TOffscreenCanvasRenderingContext2DFillStyle,
@@ -795,6 +825,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_create_linear_gradient_ffi(
 ) -> CanvasGradient = "(obj, x0, y0, x1, y1) => obj.createLinearGradient(x0, y0, x1, y1)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.createLinearGradient](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createLinearGradient)
 impl TOffscreenCanvasRenderingContext2D with create_linear_gradient(
   self : Self,
   x0 : Double,
@@ -823,6 +854,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_create_radial_gradient_ffi(
 ) -> CanvasGradient = "(obj, x0, y0, r0, x1, y1, r1) => obj.createRadialGradient(x0, y0, r0, x1, y1, r1)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.createRadialGradient](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createRadialGradient)
 impl TOffscreenCanvasRenderingContext2D with create_radial_gradient(
   self : Self,
   x0 : Double,
@@ -852,6 +884,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_create_conic_gradient_ffi(
 ) -> CanvasGradient = "(obj, start_angle, x, y) => obj.createConicGradient(start_angle, x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.createConicGradient](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createConicGradient)
 impl TOffscreenCanvasRenderingContext2D with create_conic_gradient(
   self : Self,
   start_angle : Double,
@@ -874,6 +907,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_create_pattern_ffi(
 ) -> JsValue = "(obj, image, repetition) => obj.createPattern(image, repetition)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.createPattern](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createPattern)
 impl TOffscreenCanvasRenderingContext2D with create_pattern(
   self : Self,
   image : CanvasImageSource,
@@ -897,6 +931,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_shadow_offset_x_ffi(
 ) -> Double = "(obj) => obj.shadowOffsetX"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowOffsetX](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowOffsetX)
 impl TOffscreenCanvasRenderingContext2D with shadow_offset_x(self : Self) -> Double {
   offscreen_canvas_rendering_context2d_shadow_offset_x_ffi(
     TJsValue::to_js(self),
@@ -910,6 +945,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_offset_x_ffi(
 ) -> Unit = "(obj, shadowOffsetX) => { obj.shadowOffsetX = shadowOffsetX; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowOffsetX](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowOffsetX)
 impl TOffscreenCanvasRenderingContext2D with set_shadow_offset_x(
   self : Self,
   shadow_offset_x : Double,
@@ -926,6 +962,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_shadow_offset_y_ffi(
 ) -> Double = "(obj) => obj.shadowOffsetY"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowOffsetY](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowOffsetY)
 impl TOffscreenCanvasRenderingContext2D with shadow_offset_y(self : Self) -> Double {
   offscreen_canvas_rendering_context2d_shadow_offset_y_ffi(
     TJsValue::to_js(self),
@@ -939,6 +976,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_offset_y_ffi(
 ) -> Unit = "(obj, shadowOffsetY) => { obj.shadowOffsetY = shadowOffsetY; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowOffsetY](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowOffsetY)
 impl TOffscreenCanvasRenderingContext2D with set_shadow_offset_y(
   self : Self,
   shadow_offset_y : Double,
@@ -955,6 +993,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_shadow_blur_ffi(
 ) -> Double = "(obj) => obj.shadowBlur"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowBlur](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowBlur)
 impl TOffscreenCanvasRenderingContext2D with shadow_blur(self : Self) -> Double {
   offscreen_canvas_rendering_context2d_shadow_blur_ffi(TJsValue::to_js(self))
 }
@@ -966,6 +1005,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_blur_ffi(
 ) -> Unit = "(obj, shadowBlur) => { obj.shadowBlur = shadowBlur; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowBlur](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowBlur)
 impl TOffscreenCanvasRenderingContext2D with set_shadow_blur(
   self : Self,
   shadow_blur : Double,
@@ -982,6 +1022,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_shadow_color_ffi(
 ) -> String = "(obj) => obj.shadowColor"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowColor](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowColor)
 impl TOffscreenCanvasRenderingContext2D with shadow_color(self : Self) -> String {
   offscreen_canvas_rendering_context2d_shadow_color_ffi(TJsValue::to_js(self))
 }
@@ -993,6 +1034,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_shadow_color_ffi(
 ) -> Unit = "(obj, shadowColor) => { obj.shadowColor = shadowColor; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.shadowColor](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/shadowColor)
 impl TOffscreenCanvasRenderingContext2D with set_shadow_color(
   self : Self,
   shadow_color : String,
@@ -1009,6 +1051,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_filter_ffi(
 ) -> String = "(obj) => obj.filter"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.filter](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/filter)
 impl TOffscreenCanvasRenderingContext2D with filter(self : Self) -> String {
   offscreen_canvas_rendering_context2d_filter_ffi(TJsValue::to_js(self))
 }
@@ -1020,6 +1063,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_filter_ffi(
 ) -> Unit = "(obj, filter) => { obj.filter = filter; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.filter](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/filter)
 impl TOffscreenCanvasRenderingContext2D with set_filter(
   self : Self,
   filter : String,
@@ -1040,6 +1084,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_clear_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.clearRect(x, y, w, h)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.clearRect](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/clearRect)
 impl TOffscreenCanvasRenderingContext2D with clear_rect(
   self : Self,
   x : Double,
@@ -1066,6 +1111,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_fill_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.fillRect(x, y, w, h)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fillRect](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fillRect)
 impl TOffscreenCanvasRenderingContext2D with fill_rect(
   self : Self,
   x : Double,
@@ -1092,6 +1138,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_stroke_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.strokeRect(x, y, w, h)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.strokeRect](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/strokeRect)
 impl TOffscreenCanvasRenderingContext2D with stroke_rect(
   self : Self,
   x : Double,
@@ -1114,6 +1161,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_begin_path_ffi(
 ) -> Unit = "(obj) => obj.beginPath()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.beginPath](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/beginPath)
 impl TOffscreenCanvasRenderingContext2D with begin_path(self : Self) -> Unit {
   offscreen_canvas_rendering_context2d_begin_path_ffi(TJsValue::to_js(self))
 }
@@ -1125,6 +1173,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_fill_ffi(
 ) -> Unit = "(obj, fill_rule) => obj.fill(fill_rule)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fill](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fill)
 impl TOffscreenCanvasRenderingContext2D with fill(
   self : Self,
   fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
@@ -1143,6 +1192,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_fill_2_ffi(
 ) -> Unit = "(obj, path, fill_rule) => obj.fill_2(path, fill_rule)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fill_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fill_2)
 impl TOffscreenCanvasRenderingContext2D with fill_2(
   self : Self,
   path : &TPath2D,
@@ -1161,6 +1211,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_stroke_ffi(
 ) -> Unit = "(obj) => obj.stroke()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.stroke](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/stroke)
 impl TOffscreenCanvasRenderingContext2D with stroke(self : Self) -> Unit {
   offscreen_canvas_rendering_context2d_stroke_ffi(TJsValue::to_js(self))
 }
@@ -1172,6 +1223,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_stroke_2_ffi(
 ) -> Unit = "(obj, path) => obj.stroke_2(path)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.stroke_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/stroke_2)
 impl TOffscreenCanvasRenderingContext2D with stroke_2(
   self : Self,
   path : &TPath2D,
@@ -1189,6 +1241,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_clip_ffi(
 ) -> Unit = "(obj, fill_rule) => obj.clip(fill_rule)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.clip](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/clip)
 impl TOffscreenCanvasRenderingContext2D with clip(
   self : Self,
   fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
@@ -1207,6 +1260,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_clip_2_ffi(
 ) -> Unit = "(obj, path, fill_rule) => obj.clip_2(path, fill_rule)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.clip_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/clip_2)
 impl TOffscreenCanvasRenderingContext2D with clip_2(
   self : Self,
   path : &TPath2D,
@@ -1228,6 +1282,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_is_point_in_path_ffi(
 ) -> Bool = "(obj, x, y, fill_rule) => obj.isPointInPath(x, y, fill_rule)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.isPointInPath](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInPath)
 impl TOffscreenCanvasRenderingContext2D with is_point_in_path(
   self : Self,
   x : Double,
@@ -1252,6 +1307,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_is_point_in_path_2_ffi(
 ) -> Bool = "(obj, path, x, y, fill_rule) => obj.isPointInPath_2(path, x, y, fill_rule)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.isPointInPath_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInPath_2)
 impl TOffscreenCanvasRenderingContext2D with is_point_in_path_2(
   self : Self,
   path : &TPath2D,
@@ -1276,6 +1332,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_is_point_in_stroke_ffi(
 ) -> Bool = "(obj, x, y) => obj.isPointInStroke(x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.isPointInStroke](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInStroke)
 impl TOffscreenCanvasRenderingContext2D with is_point_in_stroke(
   self : Self,
   x : Double,
@@ -1297,6 +1354,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_is_point_in_stroke_2_ffi(
 ) -> Bool = "(obj, path, x, y) => obj.isPointInStroke_2(path, x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.isPointInStroke_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInStroke_2)
 impl TOffscreenCanvasRenderingContext2D with is_point_in_stroke_2(
   self : Self,
   path : &TPath2D,
@@ -1321,6 +1379,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_fill_text_ffi(
 ) -> Unit = "(obj, text, x, y, max_width) => obj.fillText(text, x, y, max_width)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fillText](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fillText)
 impl TOffscreenCanvasRenderingContext2D with fill_text(
   self : Self,
   text : String,
@@ -1347,6 +1406,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_stroke_text_ffi(
 ) -> Unit = "(obj, text, x, y, max_width) => obj.strokeText(text, x, y, max_width)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.strokeText](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/strokeText)
 impl TOffscreenCanvasRenderingContext2D with stroke_text(
   self : Self,
   text : String,
@@ -1370,6 +1430,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_measure_text_ffi(
 ) -> TextMetrics = "(obj, text) => obj.measureText(text)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.measureText](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/measureText)
 impl TOffscreenCanvasRenderingContext2D with measure_text(
   self : Self,
   text : String,
@@ -1389,6 +1450,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_draw_image_ffi(
 ) -> Unit = "(obj, image, dx, dy) => obj.drawImage(image, dx, dy)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage)
 impl TOffscreenCanvasRenderingContext2D with draw_image(
   self : Self,
   image : CanvasImageSource,
@@ -1414,6 +1476,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_draw_image_2_ffi(
 ) -> Unit = "(obj, image, dx, dy, dw, dh) => obj.drawImage_2(image, dx, dy, dw, dh)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.drawImage_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage_2)
 impl TOffscreenCanvasRenderingContext2D with draw_image_2(
   self : Self,
   image : CanvasImageSource,
@@ -1447,6 +1510,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_draw_image_3_ffi(
 ) -> Unit = "(obj, image, sx, sy, sw, sh, dx, dy, dw, dh) => obj.drawImage_3(image, sx, sy, sw, sh, dx, dy, dw, dh)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.drawImage_3](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage_3)
 impl TOffscreenCanvasRenderingContext2D with draw_image_3(
   self : Self,
   image : CanvasImageSource,
@@ -1482,6 +1546,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_create_image_data_ffi(
 ) -> ImageData = "(obj, sw, sh, settings) => obj.createImageData(sw, sh, settings)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.createImageData](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createImageData)
 impl TOffscreenCanvasRenderingContext2D with create_image_data(
   self : Self,
   sw : Int,
@@ -1503,6 +1568,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_create_image_data_2_ffi(
 ) -> ImageData = "(obj, image_data) => obj.createImageData_2(image_data)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.createImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createImageData_2)
 impl TOffscreenCanvasRenderingContext2D with create_image_data_2(
   self : Self,
   image_data : &TImageData,
@@ -1524,6 +1590,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_get_image_data_ffi(
 ) -> ImageData = "(obj, sx, sy, sw, sh, settings) => obj.getImageData(sx, sy, sw, sh, settings)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.getImageData](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/getImageData)
 impl TOffscreenCanvasRenderingContext2D with get_image_data(
   self : Self,
   sx : Int,
@@ -1551,6 +1618,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_put_image_data_ffi(
 ) -> Unit = "(obj, image_data, dx, dy) => obj.putImageData(image_data, dx, dy)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.putImageData](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/putImageData)
 impl TOffscreenCanvasRenderingContext2D with put_image_data(
   self : Self,
   image_data : &TImageData,
@@ -1578,6 +1646,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_put_image_data_2_ffi(
 ) -> Unit = "(obj, image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height) => obj.putImageData_2(image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.putImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/putImageData_2)
 impl TOffscreenCanvasRenderingContext2D with put_image_data_2(
   self : Self,
   image_data : &TImageData,
@@ -1606,6 +1675,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_line_width_ffi(
 ) -> Double = "(obj) => obj.lineWidth"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineWidth](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineWidth)
 impl TOffscreenCanvasRenderingContext2D with line_width(self : Self) -> Double {
   offscreen_canvas_rendering_context2d_line_width_ffi(TJsValue::to_js(self))
 }
@@ -1617,6 +1687,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_line_width_ffi(
 ) -> Unit = "(obj, lineWidth) => { obj.lineWidth = lineWidth; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineWidth](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineWidth)
 impl TOffscreenCanvasRenderingContext2D with set_line_width(
   self : Self,
   line_width : Double,
@@ -1633,6 +1704,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_line_cap_ffi(
 ) -> CanvasLineCap = "(obj) => obj.lineCap"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineCap](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineCap)
 impl TOffscreenCanvasRenderingContext2D with line_cap(self : Self) -> CanvasLineCap {
   offscreen_canvas_rendering_context2d_line_cap_ffi(TJsValue::to_js(self))
 }
@@ -1644,6 +1716,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_line_cap_ffi(
 ) -> Unit = "(obj, lineCap) => { obj.lineCap = lineCap; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineCap](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineCap)
 impl TOffscreenCanvasRenderingContext2D with set_line_cap(
   self : Self,
   line_cap : CanvasLineCap,
@@ -1660,6 +1733,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_line_join_ffi(
 ) -> CanvasLineJoin = "(obj) => obj.lineJoin"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineJoin](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineJoin)
 impl TOffscreenCanvasRenderingContext2D with line_join(self : Self) -> CanvasLineJoin {
   offscreen_canvas_rendering_context2d_line_join_ffi(TJsValue::to_js(self))
 }
@@ -1671,6 +1745,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_line_join_ffi(
 ) -> Unit = "(obj, lineJoin) => { obj.lineJoin = lineJoin; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineJoin](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineJoin)
 impl TOffscreenCanvasRenderingContext2D with set_line_join(
   self : Self,
   line_join : CanvasLineJoin,
@@ -1687,6 +1762,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_miter_limit_ffi(
 ) -> Double = "(obj) => obj.miterLimit"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.miterLimit](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/miterLimit)
 impl TOffscreenCanvasRenderingContext2D with miter_limit(self : Self) -> Double {
   offscreen_canvas_rendering_context2d_miter_limit_ffi(TJsValue::to_js(self))
 }
@@ -1698,6 +1774,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_miter_limit_ffi(
 ) -> Unit = "(obj, miterLimit) => { obj.miterLimit = miterLimit; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.miterLimit](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/miterLimit)
 impl TOffscreenCanvasRenderingContext2D with set_miter_limit(
   self : Self,
   miter_limit : Double,
@@ -1715,6 +1792,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_line_dash_ffi(
 ) -> Unit = "(obj, segments) => obj.setLineDash(segments)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.setLineDash](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/setLineDash)
 impl TOffscreenCanvasRenderingContext2D with set_line_dash(
   self : Self,
   segments : Array[Double],
@@ -1731,6 +1809,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_get_line_dash_ffi(
 ) -> Array[Double] = "(obj) => obj.getLineDash()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.getLineDash](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/getLineDash)
 impl TOffscreenCanvasRenderingContext2D with get_line_dash(self : Self) -> Array[
   Double,
 ] {
@@ -1743,6 +1822,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_line_dash_offset_ffi(
 ) -> Double = "(obj) => obj.lineDashOffset"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineDashOffset](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineDashOffset)
 impl TOffscreenCanvasRenderingContext2D with line_dash_offset(self : Self) -> Double {
   offscreen_canvas_rendering_context2d_line_dash_offset_ffi(
     TJsValue::to_js(self),
@@ -1756,6 +1836,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_line_dash_offset_ffi(
 ) -> Unit = "(obj, lineDashOffset) => { obj.lineDashOffset = lineDashOffset; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineDashOffset](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineDashOffset)
 impl TOffscreenCanvasRenderingContext2D with set_line_dash_offset(
   self : Self,
   line_dash_offset : Double,
@@ -1772,6 +1853,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_lang_ffi(
 ) -> String = "(obj) => obj.lang"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lang](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lang)
 impl TOffscreenCanvasRenderingContext2D with lang(self : Self) -> String {
   offscreen_canvas_rendering_context2d_lang_ffi(TJsValue::to_js(self))
 }
@@ -1783,6 +1865,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_lang_ffi(
 ) -> Unit = "(obj, lang) => { obj.lang = lang; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lang](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lang)
 impl TOffscreenCanvasRenderingContext2D with set_lang(
   self : Self,
   lang : String,
@@ -1799,6 +1882,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_font_ffi(
 ) -> String = "(obj) => obj.font"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.font](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/font)
 impl TOffscreenCanvasRenderingContext2D with font(self : Self) -> String {
   offscreen_canvas_rendering_context2d_font_ffi(TJsValue::to_js(self))
 }
@@ -1810,6 +1894,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_font_ffi(
 ) -> Unit = "(obj, font) => { obj.font = font; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.font](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/font)
 impl TOffscreenCanvasRenderingContext2D with set_font(
   self : Self,
   font : String,
@@ -1826,6 +1911,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_text_align_ffi(
 ) -> CanvasTextAlign = "(obj) => obj.textAlign"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.textAlign](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/textAlign)
 impl TOffscreenCanvasRenderingContext2D with text_align(self : Self) -> CanvasTextAlign {
   offscreen_canvas_rendering_context2d_text_align_ffi(TJsValue::to_js(self))
 }
@@ -1837,6 +1923,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_text_align_ffi(
 ) -> Unit = "(obj, textAlign) => { obj.textAlign = textAlign; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.textAlign](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/textAlign)
 impl TOffscreenCanvasRenderingContext2D with set_text_align(
   self : Self,
   text_align : CanvasTextAlign,
@@ -1853,6 +1940,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_text_baseline_ffi(
 ) -> CanvasTextBaseline = "(obj) => obj.textBaseline"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.textBaseline](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/textBaseline)
 impl TOffscreenCanvasRenderingContext2D with text_baseline(self : Self) -> CanvasTextBaseline {
   offscreen_canvas_rendering_context2d_text_baseline_ffi(TJsValue::to_js(self))
 }
@@ -1864,6 +1952,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_text_baseline_ffi(
 ) -> Unit = "(obj, textBaseline) => { obj.textBaseline = textBaseline; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.textBaseline](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/textBaseline)
 impl TOffscreenCanvasRenderingContext2D with set_text_baseline(
   self : Self,
   text_baseline : CanvasTextBaseline,
@@ -1880,6 +1969,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_direction_ffi(
 ) -> CanvasDirection = "(obj) => obj.direction"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.direction](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/direction)
 impl TOffscreenCanvasRenderingContext2D with direction(self : Self) -> CanvasDirection {
   offscreen_canvas_rendering_context2d_direction_ffi(TJsValue::to_js(self))
 }
@@ -1891,6 +1981,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_direction_ffi(
 ) -> Unit = "(obj, direction) => { obj.direction = direction; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.direction](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/direction)
 impl TOffscreenCanvasRenderingContext2D with set_direction(
   self : Self,
   direction : CanvasDirection,
@@ -1907,6 +1998,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_letter_spacing_ffi(
 ) -> String = "(obj) => obj.letterSpacing"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.letterSpacing](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/letterSpacing)
 impl TOffscreenCanvasRenderingContext2D with letter_spacing(self : Self) -> String {
   offscreen_canvas_rendering_context2d_letter_spacing_ffi(TJsValue::to_js(self))
 }
@@ -1918,6 +2010,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_letter_spacing_ffi(
 ) -> Unit = "(obj, letterSpacing) => { obj.letterSpacing = letterSpacing; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.letterSpacing](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/letterSpacing)
 impl TOffscreenCanvasRenderingContext2D with set_letter_spacing(
   self : Self,
   letter_spacing : String,
@@ -1934,6 +2027,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_font_kerning_ffi(
 ) -> CanvasFontKerning = "(obj) => obj.fontKerning"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fontKerning](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fontKerning)
 impl TOffscreenCanvasRenderingContext2D with font_kerning(self : Self) -> CanvasFontKerning {
   offscreen_canvas_rendering_context2d_font_kerning_ffi(TJsValue::to_js(self))
 }
@@ -1945,6 +2039,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_font_kerning_ffi(
 ) -> Unit = "(obj, fontKerning) => { obj.fontKerning = fontKerning; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fontKerning](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fontKerning)
 impl TOffscreenCanvasRenderingContext2D with set_font_kerning(
   self : Self,
   font_kerning : CanvasFontKerning,
@@ -1961,6 +2056,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_font_stretch_ffi(
 ) -> CanvasFontStretch = "(obj) => obj.fontStretch"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fontStretch](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fontStretch)
 impl TOffscreenCanvasRenderingContext2D with font_stretch(self : Self) -> CanvasFontStretch {
   offscreen_canvas_rendering_context2d_font_stretch_ffi(TJsValue::to_js(self))
 }
@@ -1972,6 +2068,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_font_stretch_ffi(
 ) -> Unit = "(obj, fontStretch) => { obj.fontStretch = fontStretch; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fontStretch](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fontStretch)
 impl TOffscreenCanvasRenderingContext2D with set_font_stretch(
   self : Self,
   font_stretch : CanvasFontStretch,
@@ -1988,6 +2085,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_font_variant_caps_ffi(
 ) -> CanvasFontVariantCaps = "(obj) => obj.fontVariantCaps"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fontVariantCaps](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fontVariantCaps)
 impl TOffscreenCanvasRenderingContext2D with font_variant_caps(self : Self) -> CanvasFontVariantCaps {
   offscreen_canvas_rendering_context2d_font_variant_caps_ffi(
     TJsValue::to_js(self),
@@ -2001,6 +2099,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_font_variant_caps_ffi(
 ) -> Unit = "(obj, fontVariantCaps) => { obj.fontVariantCaps = fontVariantCaps; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.fontVariantCaps](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fontVariantCaps)
 impl TOffscreenCanvasRenderingContext2D with set_font_variant_caps(
   self : Self,
   font_variant_caps : CanvasFontVariantCaps,
@@ -2017,6 +2116,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_text_rendering_ffi(
 ) -> CanvasTextRendering = "(obj) => obj.textRendering"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.textRendering](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/textRendering)
 impl TOffscreenCanvasRenderingContext2D with text_rendering(self : Self) -> CanvasTextRendering {
   offscreen_canvas_rendering_context2d_text_rendering_ffi(TJsValue::to_js(self))
 }
@@ -2028,6 +2128,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_text_rendering_ffi(
 ) -> Unit = "(obj, textRendering) => { obj.textRendering = textRendering; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.textRendering](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/textRendering)
 impl TOffscreenCanvasRenderingContext2D with set_text_rendering(
   self : Self,
   text_rendering : CanvasTextRendering,
@@ -2044,6 +2145,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_word_spacing_ffi(
 ) -> String = "(obj) => obj.wordSpacing"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.wordSpacing](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/wordSpacing)
 impl TOffscreenCanvasRenderingContext2D with word_spacing(self : Self) -> String {
   offscreen_canvas_rendering_context2d_word_spacing_ffi(TJsValue::to_js(self))
 }
@@ -2055,6 +2157,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_set_word_spacing_ffi(
 ) -> Unit = "(obj, wordSpacing) => { obj.wordSpacing = wordSpacing; }"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.wordSpacing](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/wordSpacing)
 impl TOffscreenCanvasRenderingContext2D with set_word_spacing(
   self : Self,
   word_spacing : String,
@@ -2071,6 +2174,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_close_path_ffi(
 ) -> Unit = "(obj) => obj.closePath()"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.closePath](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/closePath)
 impl TOffscreenCanvasRenderingContext2D with close_path(self : Self) -> Unit {
   offscreen_canvas_rendering_context2d_close_path_ffi(TJsValue::to_js(self))
 }
@@ -2083,6 +2187,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_move_to_ffi(
 ) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.moveTo](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/moveTo)
 impl TOffscreenCanvasRenderingContext2D with move_to(
   self : Self,
   x : Double,
@@ -2103,6 +2208,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_line_to_ffi(
 ) -> Unit = "(obj, x, y) => obj.lineTo(x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.lineTo](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/lineTo)
 impl TOffscreenCanvasRenderingContext2D with line_to(
   self : Self,
   x : Double,
@@ -2125,6 +2231,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_quadratic_curve_to_ffi(
 ) -> Unit = "(obj, cpx, cpy, x, y) => obj.quadraticCurveTo(cpx, cpy, x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.quadraticCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/quadraticCurveTo)
 impl TOffscreenCanvasRenderingContext2D with quadratic_curve_to(
   self : Self,
   cpx : Double,
@@ -2153,6 +2260,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_bezier_curve_to_ffi(
 ) -> Unit = "(obj, cp1x, cp1y, cp2x, cp2y, x, y) => obj.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.bezierCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/bezierCurveTo)
 impl TOffscreenCanvasRenderingContext2D with bezier_curve_to(
   self : Self,
   cp1x : Double,
@@ -2184,6 +2292,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_arc_to_ffi(
 ) -> Unit = "(obj, x1, y1, x2, y2, radius) => obj.arcTo(x1, y1, x2, y2, radius)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.arcTo](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/arcTo)
 impl TOffscreenCanvasRenderingContext2D with arc_to(
   self : Self,
   x1 : Double,
@@ -2212,6 +2321,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.rect(x, y, w, h)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.rect](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/rect)
 impl TOffscreenCanvasRenderingContext2D with rect(
   self : Self,
   x : Double,
@@ -2239,6 +2349,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_round_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h, radii) => obj.roundRect(x, y, w, h, radii)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.roundRect](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/roundRect)
 impl TOffscreenCanvasRenderingContext2D with round_rect(
   self : Self,
   x : Double,
@@ -2269,6 +2380,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_arc_ffi(
 ) -> Unit = "(obj, x, y, radius, start_angle, end_angle, counterclockwise) => obj.arc(x, y, radius, start_angle, end_angle, counterclockwise)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.arc](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/arc)
 impl TOffscreenCanvasRenderingContext2D with arc(
   self : Self,
   x : Double,
@@ -2303,6 +2415,7 @@ extern "js" fn offscreen_canvas_rendering_context2d_ellipse_ffi(
 ) -> Unit = "(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise) => obj.ellipse(x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise)"
 
 ///|
+/// [OffscreenCanvasRenderingContext2D.ellipse](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/ellipse)
 impl TOffscreenCanvasRenderingContext2D with ellipse(
   self : Self,
   x : Double,

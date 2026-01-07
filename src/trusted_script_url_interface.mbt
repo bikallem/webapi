@@ -3,6 +3,7 @@
 // Specifications: trusted-types.idl
 
 ///|
+/// [TrustedScriptURL](https://developer.mozilla.org/en-US/docs/Web/API/TrustedScriptURL)
 #external
 pub type TrustedScriptURL
 
@@ -18,6 +19,7 @@ pub fn[T : TTrustedScriptURL] TrustedScriptURL::into(
 pub impl TTrustedScriptURL for TrustedScriptURL
 
 ///|
+/// [TrustedScriptURL](https://developer.mozilla.org/en-US/docs/Web/API/TrustedScriptURL) interface.
 pub trait TTrustedScriptURL: TJsValue {
   to_json(self : Self) -> String = _
 }
@@ -26,6 +28,7 @@ pub trait TTrustedScriptURL: TJsValue {
 extern "js" fn trusted_script_url_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON()"
 
 ///|
+/// [TrustedScriptURL.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/TrustedScriptURL/toJSON)
 impl TTrustedScriptURL with to_json(self : Self) -> String {
   trusted_script_url_to_json_ffi(TJsValue::to_js(self))
 }

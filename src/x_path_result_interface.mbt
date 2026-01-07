@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [XPathResult](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult)
 #external
 pub type XPathResult
 
@@ -46,6 +47,7 @@ pub const X_PATH_RESULT_ANY_UNORDERED_NODE_TYPE : UInt = 8
 pub const X_PATH_RESULT_FIRST_ORDERED_NODE_TYPE : UInt = 9
 
 ///|
+/// [XPathResult](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult) interface.
 pub trait TXPathResult: TJsValue {
   result_type(self : Self) -> UInt = _
   number_value(self : Self) -> Double = _
@@ -62,6 +64,7 @@ pub trait TXPathResult: TJsValue {
 extern "js" fn x_path_result_result_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.resultType"
 
 ///|
+/// [XPathResult.resultType](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/resultType)
 impl TXPathResult with result_type(self : Self) -> UInt {
   x_path_result_result_type_ffi(TJsValue::to_js(self))
 }
@@ -70,6 +73,7 @@ impl TXPathResult with result_type(self : Self) -> UInt {
 extern "js" fn x_path_result_number_value_ffi(obj : JsValue) -> Double = "(obj) => obj.numberValue"
 
 ///|
+/// [XPathResult.numberValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/numberValue)
 impl TXPathResult with number_value(self : Self) -> Double {
   x_path_result_number_value_ffi(TJsValue::to_js(self))
 }
@@ -78,6 +82,7 @@ impl TXPathResult with number_value(self : Self) -> Double {
 extern "js" fn x_path_result_string_value_ffi(obj : JsValue) -> String = "(obj) => obj.stringValue"
 
 ///|
+/// [XPathResult.stringValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/stringValue)
 impl TXPathResult with string_value(self : Self) -> String {
   x_path_result_string_value_ffi(TJsValue::to_js(self))
 }
@@ -86,6 +91,7 @@ impl TXPathResult with string_value(self : Self) -> String {
 extern "js" fn x_path_result_boolean_value_ffi(obj : JsValue) -> Bool = "(obj) => obj.booleanValue"
 
 ///|
+/// [XPathResult.booleanValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/booleanValue)
 impl TXPathResult with boolean_value(self : Self) -> Bool {
   x_path_result_boolean_value_ffi(TJsValue::to_js(self))
 }
@@ -94,6 +100,7 @@ impl TXPathResult with boolean_value(self : Self) -> Bool {
 extern "js" fn x_path_result_single_node_value_ffi(obj : JsValue) -> Node = "(obj) => obj.singleNodeValue"
 
 ///|
+/// [XPathResult.singleNodeValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/singleNodeValue)
 impl TXPathResult with single_node_value(self : Self) -> Node {
   x_path_result_single_node_value_ffi(TJsValue::to_js(self))
 }
@@ -102,6 +109,7 @@ impl TXPathResult with single_node_value(self : Self) -> Node {
 extern "js" fn x_path_result_invalid_iterator_state_ffi(obj : JsValue) -> Bool = "(obj) => obj.invalidIteratorState"
 
 ///|
+/// [XPathResult.invalidIteratorState](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/invalidIteratorState)
 impl TXPathResult with invalid_iterator_state(self : Self) -> Bool {
   x_path_result_invalid_iterator_state_ffi(TJsValue::to_js(self))
 }
@@ -110,6 +118,7 @@ impl TXPathResult with invalid_iterator_state(self : Self) -> Bool {
 extern "js" fn x_path_result_snapshot_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.snapshotLength"
 
 ///|
+/// [XPathResult.snapshotLength](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/snapshotLength)
 impl TXPathResult with snapshot_length(self : Self) -> UInt {
   x_path_result_snapshot_length_ffi(TJsValue::to_js(self))
 }
@@ -118,6 +127,7 @@ impl TXPathResult with snapshot_length(self : Self) -> UInt {
 extern "js" fn x_path_result_iterate_next_ffi(obj : JsValue) -> JsValue = "(obj) => obj.iterateNext()"
 
 ///|
+/// [XPathResult.iterateNext](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/iterateNext)
 impl TXPathResult with iterate_next(self : Self) -> Node? {
   let result = x_path_result_iterate_next_ffi(TJsValue::to_js(self))
   if JsValue::is_null(result) {
@@ -134,6 +144,7 @@ extern "js" fn x_path_result_snapshot_item_ffi(
 ) -> JsValue = "(obj, index) => obj.snapshotItem(index)"
 
 ///|
+/// [XPathResult.snapshotItem](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/snapshotItem)
 impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node? {
   let result = x_path_result_snapshot_item_ffi(
     TJsValue::to_js(self),

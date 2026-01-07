@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [DOMStringMap](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringMap)
 #external
 pub type DOMStringMap
 
@@ -16,4 +17,5 @@ pub fn[T : TDOMStringMap] DOMStringMap::into(self : DOMStringMap) -> T = "%ident
 pub impl TDOMStringMap for DOMStringMap
 
 ///|
+/// [DOMStringMap](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringMap) interface.
 pub trait TDOMStringMap: TJsValue {}

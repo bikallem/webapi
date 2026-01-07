@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)
 #external
 pub type Node
 
@@ -73,6 +74,7 @@ pub const NODE_DOCUMENT_POSITION_CONTAINED_BY : UInt = 0x10
 pub const NODE_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : UInt = 0x20
 
 ///|
+/// [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) interface.
 pub trait TNode: TEventTarget {
   node_type(self : Self) -> UInt = _
   node_name(self : Self) -> String = _
@@ -111,6 +113,7 @@ pub trait TNode: TEventTarget {
 extern "js" fn node_node_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.nodeType"
 
 ///|
+/// [Node.nodeType](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
 impl TNode with node_type(self : Self) -> UInt {
   node_node_type_ffi(TJsValue::to_js(self))
 }
@@ -119,6 +122,7 @@ impl TNode with node_type(self : Self) -> UInt {
 extern "js" fn node_node_name_ffi(obj : JsValue) -> String = "(obj) => obj.nodeName"
 
 ///|
+/// [Node.nodeName](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName)
 impl TNode with node_name(self : Self) -> String {
   node_node_name_ffi(TJsValue::to_js(self))
 }
@@ -127,6 +131,7 @@ impl TNode with node_name(self : Self) -> String {
 extern "js" fn node_base_uri_ffi(obj : JsValue) -> String = "(obj) => obj.baseURI"
 
 ///|
+/// [Node.baseURI](https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI)
 impl TNode with base_uri(self : Self) -> String {
   node_base_uri_ffi(TJsValue::to_js(self))
 }
@@ -135,6 +140,7 @@ impl TNode with base_uri(self : Self) -> String {
 extern "js" fn node_is_connected_ffi(obj : JsValue) -> Bool = "(obj) => obj.isConnected"
 
 ///|
+/// [Node.isConnected](https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected)
 impl TNode with is_connected(self : Self) -> Bool {
   node_is_connected_ffi(TJsValue::to_js(self))
 }
@@ -143,6 +149,7 @@ impl TNode with is_connected(self : Self) -> Bool {
 extern "js" fn node_owner_document_ffi(obj : JsValue) -> Document = "(obj) => obj.ownerDocument"
 
 ///|
+/// [Node.ownerDocument](https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument)
 impl TNode with owner_document(self : Self) -> Document {
   node_owner_document_ffi(TJsValue::to_js(self))
 }
@@ -151,6 +158,7 @@ impl TNode with owner_document(self : Self) -> Document {
 extern "js" fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> Node = "(obj, options) => obj.getRootNode(options)"
 
 ///|
+/// [Node.getRootNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode)
 impl TNode with get_root_node(
   self : Self,
   options? : GetRootNodeOptions = GetRootNodeOptions::empty(),
@@ -162,6 +170,7 @@ impl TNode with get_root_node(
 extern "js" fn node_parent_node_ffi(obj : JsValue) -> Node = "(obj) => obj.parentNode"
 
 ///|
+/// [Node.parentNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
 impl TNode with parent_node(self : Self) -> Node {
   node_parent_node_ffi(TJsValue::to_js(self))
 }
@@ -170,6 +179,7 @@ impl TNode with parent_node(self : Self) -> Node {
 extern "js" fn node_parent_element_ffi(obj : JsValue) -> Element = "(obj) => obj.parentElement"
 
 ///|
+/// [Node.parentElement](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement)
 impl TNode with parent_element(self : Self) -> Element {
   node_parent_element_ffi(TJsValue::to_js(self))
 }
@@ -178,6 +188,7 @@ impl TNode with parent_element(self : Self) -> Element {
 extern "js" fn node_has_child_nodes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasChildNodes()"
 
 ///|
+/// [Node.hasChildNodes](https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes)
 impl TNode with has_child_nodes(self : Self) -> Bool {
   node_has_child_nodes_ffi(TJsValue::to_js(self))
 }
@@ -186,6 +197,7 @@ impl TNode with has_child_nodes(self : Self) -> Bool {
 extern "js" fn node_child_nodes_ffi(obj : JsValue) -> NodeList = "(obj) => obj.childNodes"
 
 ///|
+/// [Node.childNodes](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes)
 impl TNode with child_nodes(self : Self) -> NodeList {
   node_child_nodes_ffi(TJsValue::to_js(self))
 }
@@ -194,6 +206,7 @@ impl TNode with child_nodes(self : Self) -> NodeList {
 extern "js" fn node_first_child_ffi(obj : JsValue) -> Node = "(obj) => obj.firstChild"
 
 ///|
+/// [Node.firstChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild)
 impl TNode with first_child(self : Self) -> Node {
   node_first_child_ffi(TJsValue::to_js(self))
 }
@@ -202,6 +215,7 @@ impl TNode with first_child(self : Self) -> Node {
 extern "js" fn node_last_child_ffi(obj : JsValue) -> Node = "(obj) => obj.lastChild"
 
 ///|
+/// [Node.lastChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild)
 impl TNode with last_child(self : Self) -> Node {
   node_last_child_ffi(TJsValue::to_js(self))
 }
@@ -210,6 +224,7 @@ impl TNode with last_child(self : Self) -> Node {
 extern "js" fn node_previous_sibling_ffi(obj : JsValue) -> Node = "(obj) => obj.previousSibling"
 
 ///|
+/// [Node.previousSibling](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)
 impl TNode with previous_sibling(self : Self) -> Node {
   node_previous_sibling_ffi(TJsValue::to_js(self))
 }
@@ -218,6 +233,7 @@ impl TNode with previous_sibling(self : Self) -> Node {
 extern "js" fn node_next_sibling_ffi(obj : JsValue) -> Node = "(obj) => obj.nextSibling"
 
 ///|
+/// [Node.nextSibling](https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling)
 impl TNode with next_sibling(self : Self) -> Node {
   node_next_sibling_ffi(TJsValue::to_js(self))
 }
@@ -226,6 +242,7 @@ impl TNode with next_sibling(self : Self) -> Node {
 extern "js" fn node_node_value_ffi(obj : JsValue) -> String = "(obj) => obj.nodeValue"
 
 ///|
+/// [Node.nodeValue](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
 impl TNode with node_value(self : Self) -> String {
   node_node_value_ffi(TJsValue::to_js(self))
 }
@@ -237,6 +254,7 @@ extern "js" fn node_set_node_value_ffi(
 ) -> Unit = "(obj, nodeValue) => { obj.nodeValue = nodeValue; }"
 
 ///|
+/// [Node.nodeValue](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
 impl TNode with set_node_value(self : Self, node_value : String) -> Unit {
   node_set_node_value_ffi(TJsValue::to_js(self), TJsValue::to_js(node_value))
 }
@@ -245,6 +263,7 @@ impl TNode with set_node_value(self : Self, node_value : String) -> Unit {
 extern "js" fn node_text_content_ffi(obj : JsValue) -> String = "(obj) => obj.textContent"
 
 ///|
+/// [Node.textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
 impl TNode with text_content(self : Self) -> String {
   node_text_content_ffi(TJsValue::to_js(self))
 }
@@ -256,6 +275,7 @@ extern "js" fn node_set_text_content_ffi(
 ) -> Unit = "(obj, textContent) => { obj.textContent = textContent; }"
 
 ///|
+/// [Node.textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
 impl TNode with set_text_content(self : Self, text_content : String) -> Unit {
   node_set_text_content_ffi(
     TJsValue::to_js(self),
@@ -267,6 +287,7 @@ impl TNode with set_text_content(self : Self, text_content : String) -> Unit {
 extern "js" fn node_normalize_ffi(obj : JsValue) -> Unit = "(obj) => obj.normalize()"
 
 ///|
+/// [Node.normalize](https://developer.mozilla.org/en-US/docs/Web/API/Node/normalize)
 impl TNode with normalize(self : Self) -> Unit {
   node_normalize_ffi(TJsValue::to_js(self))
 }
@@ -275,6 +296,7 @@ impl TNode with normalize(self : Self) -> Unit {
 extern "js" fn node_clone_node_ffi(obj : JsValue, subtree : JsValue) -> Node = "(obj, subtree) => obj.cloneNode(subtree)"
 
 ///|
+/// [Node.cloneNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode)
 impl TNode with clone_node(self : Self, subtree? : Bool = false) -> Node {
   node_clone_node_ffi(TJsValue::to_js(self), TJsValue::to_js(subtree))
 }
@@ -286,6 +308,7 @@ extern "js" fn node_is_equal_node_ffi(
 ) -> Bool = "(obj, other_node) => obj.isEqualNode(other_node)"
 
 ///|
+/// [Node.isEqualNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/isEqualNode)
 impl TNode with is_equal_node(self : Self, other_node : &TNode) -> Bool {
   node_is_equal_node_ffi(TJsValue::to_js(self), TJsValue::to_js(other_node))
 }
@@ -297,6 +320,7 @@ extern "js" fn node_is_same_node_ffi(
 ) -> Bool = "(obj, other_node) => obj.isSameNode(other_node)"
 
 ///|
+/// [Node.isSameNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/isSameNode)
 impl TNode with is_same_node(self : Self, other_node : &TNode) -> Bool {
   node_is_same_node_ffi(TJsValue::to_js(self), TJsValue::to_js(other_node))
 }
@@ -308,6 +332,7 @@ extern "js" fn node_compare_document_position_ffi(
 ) -> UInt = "(obj, other) => obj.compareDocumentPosition(other)"
 
 ///|
+/// [Node.compareDocumentPosition](https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition)
 impl TNode with compare_document_position(self : Self, other : &TNode) -> UInt {
   node_compare_document_position_ffi(
     TJsValue::to_js(self),
@@ -319,6 +344,7 @@ impl TNode with compare_document_position(self : Self, other : &TNode) -> UInt {
 extern "js" fn node_contains_ffi(obj : JsValue, other : JsValue) -> Bool = "(obj, other) => obj.contains(other)"
 
 ///|
+/// [Node.contains](https://developer.mozilla.org/en-US/docs/Web/API/Node/contains)
 impl TNode with contains(self : Self, other : &TNode) -> Bool {
   node_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(other))
 }
@@ -330,6 +356,7 @@ extern "js" fn node_lookup_prefix_ffi(
 ) -> JsValue = "(obj, namespace_) => obj.lookupPrefix(namespace_)"
 
 ///|
+/// [Node.lookupPrefix](https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupPrefix)
 impl TNode with lookup_prefix(self : Self, namespace_ : String) -> String? {
   let result = node_lookup_prefix_ffi(
     TJsValue::to_js(self),
@@ -349,6 +376,7 @@ extern "js" fn node_lookup_namespace_uri_ffi(
 ) -> JsValue = "(obj, prefix) => obj.lookupNamespaceURI(prefix)"
 
 ///|
+/// [Node.lookupNamespaceURI](https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupNamespaceURI)
 impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String? {
   let result = node_lookup_namespace_uri_ffi(
     TJsValue::to_js(self),
@@ -368,6 +396,7 @@ extern "js" fn node_is_default_namespace_ffi(
 ) -> Bool = "(obj, namespace_) => obj.isDefaultNamespace(namespace_)"
 
 ///|
+/// [Node.isDefaultNamespace](https://developer.mozilla.org/en-US/docs/Web/API/Node/isDefaultNamespace)
 impl TNode with is_default_namespace(self : Self, namespace_ : String) -> Bool {
   node_is_default_namespace_ffi(
     TJsValue::to_js(self),
@@ -383,6 +412,7 @@ extern "js" fn node_insert_before_ffi(
 ) -> Node = "(obj, node, child) => obj.insertBefore(node, child)"
 
 ///|
+/// [Node.insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore)
 impl TNode with insert_before(self : Self, node : &TNode, child : &TNode) -> Node {
   node_insert_before_ffi(
     TJsValue::to_js(self),
@@ -395,6 +425,7 @@ impl TNode with insert_before(self : Self, node : &TNode, child : &TNode) -> Nod
 extern "js" fn node_append_child_ffi(obj : JsValue, node : JsValue) -> Node = "(obj, node) => obj.appendChild(node)"
 
 ///|
+/// [Node.appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)
 impl TNode with append_child(self : Self, node : &TNode) -> Node {
   node_append_child_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
@@ -407,6 +438,7 @@ extern "js" fn node_replace_child_ffi(
 ) -> Node = "(obj, node, child) => obj.replaceChild(node, child)"
 
 ///|
+/// [Node.replaceChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/replaceChild)
 impl TNode with replace_child(self : Self, node : &TNode, child : &TNode) -> Node {
   node_replace_child_ffi(
     TJsValue::to_js(self),
@@ -419,6 +451,7 @@ impl TNode with replace_child(self : Self, node : &TNode, child : &TNode) -> Nod
 extern "js" fn node_remove_child_ffi(obj : JsValue, child : JsValue) -> Node = "(obj, child) => obj.removeChild(child)"
 
 ///|
+/// [Node.removeChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild)
 impl TNode with remove_child(self : Self, child : &TNode) -> Node {
   node_remove_child_ffi(TJsValue::to_js(self), TJsValue::to_js(child))
 }

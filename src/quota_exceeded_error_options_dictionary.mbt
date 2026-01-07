@@ -3,6 +3,7 @@
 // Specifications: webidl.idl
 
 ///|
+/// [QuotaExceededErrorOptions](https://developer.mozilla.org/en-US/docs/Web/API/QuotaExceededErrorOptions)
 #external
 pub type QuotaExceededErrorOptions
 

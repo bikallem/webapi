@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTableCaptionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCaptionElement)
 #external
 pub type HTMLTableCaptionElement
 
@@ -40,6 +41,7 @@ pub fn HTMLTableCaptionElement::new() -> HTMLTableCaptionElement {
 }
 
 ///|
+/// [HTMLTableCaptionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCaptionElement) interface.
 pub trait THTMLTableCaptionElement: THTMLElement {
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
@@ -49,6 +51,7 @@ pub trait THTMLTableCaptionElement: THTMLElement {
 extern "js" fn html_table_caption_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLTableCaptionElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCaptionElement/align)
 impl THTMLTableCaptionElement with align(self : Self) -> String {
   html_table_caption_element_align_ffi(TJsValue::to_js(self))
 }
@@ -60,6 +63,7 @@ extern "js" fn html_table_caption_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLTableCaptionElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCaptionElement/align)
 impl THTMLTableCaptionElement with set_align(self : Self, align : String) -> Unit {
   html_table_caption_element_set_align_ffi(
     TJsValue::to_js(self),

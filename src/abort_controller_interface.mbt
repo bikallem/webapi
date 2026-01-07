@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
 #external
 pub type AbortController
 
@@ -24,6 +25,7 @@ pub fn AbortController::new() -> AbortController {
 }
 
 ///|
+/// [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) interface.
 pub trait TAbortController: TJsValue {
   signal(self : Self) -> AbortSignal = _
   abort(self : Self, reason? : JsValue) -> Unit = _
@@ -33,6 +35,7 @@ pub trait TAbortController: TJsValue {
 extern "js" fn abort_controller_signal_ffi(obj : JsValue) -> AbortSignal = "(obj) => obj.signal"
 
 ///|
+/// [AbortController.signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal)
 impl TAbortController with signal(self : Self) -> AbortSignal {
   abort_controller_signal_ffi(TJsValue::to_js(self))
 }
@@ -44,6 +47,7 @@ extern "js" fn abort_controller_abort_ffi(
 ) -> Unit = "(obj, reason) => obj.abort(reason)"
 
 ///|
+/// [AbortController.abort](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort)
 impl TAbortController with abort(self : Self, reason? : JsValue) -> Unit {
   abort_controller_abort_ffi(TJsValue::to_js(self), opt_to_js(reason))
 }

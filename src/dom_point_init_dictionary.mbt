@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMPointInit](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointInit)
 #external
 pub type DOMPointInit
 

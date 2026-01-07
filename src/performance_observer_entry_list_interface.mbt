@@ -3,6 +3,7 @@
 // Specifications: performance-timeline.idl
 
 ///|
+/// [PerformanceObserverEntryList](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList)
 #external
 pub type PerformanceObserverEntryList
 
@@ -20,6 +21,7 @@ pub fn[T : TPerformanceObserverEntryList] PerformanceObserverEntryList::into(
 pub impl TPerformanceObserverEntryList for PerformanceObserverEntryList
 
 ///|
+/// [PerformanceObserverEntryList](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList) interface.
 pub trait TPerformanceObserverEntryList: TJsValue {
   get_entries(self : Self) -> PerformanceEntryList = _
   get_entries_by_type(self : Self, type_ : String) -> PerformanceEntryList = _
@@ -32,6 +34,7 @@ extern "js" fn performance_observer_entry_list_get_entries_ffi(
 ) -> PerformanceEntryList = "(obj) => obj.getEntries()"
 
 ///|
+/// [PerformanceObserverEntryList.getEntries](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList/getEntries)
 impl TPerformanceObserverEntryList with get_entries(self : Self) -> PerformanceEntryList {
   performance_observer_entry_list_get_entries_ffi(TJsValue::to_js(self))
 }
@@ -43,6 +46,7 @@ extern "js" fn performance_observer_entry_list_get_entries_by_type_ffi(
 ) -> PerformanceEntryList = "(obj, type_) => obj.getEntriesByType(type_)"
 
 ///|
+/// [PerformanceObserverEntryList.getEntriesByType](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList/getEntriesByType)
 impl TPerformanceObserverEntryList with get_entries_by_type(
   self : Self,
   type_ : String,
@@ -61,6 +65,7 @@ extern "js" fn performance_observer_entry_list_get_entries_by_name_ffi(
 ) -> PerformanceEntryList = "(obj, name, type_) => obj.getEntriesByName(name, type_)"
 
 ///|
+/// [PerformanceObserverEntryList.getEntriesByName](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList/getEntriesByName)
 impl TPerformanceObserverEntryList with get_entries_by_name(
   self : Self,
   name : String,

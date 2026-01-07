@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ErrorEvent](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)
 #external
 pub type ErrorEvent
 
@@ -33,6 +34,7 @@ pub fn ErrorEvent::new(
 }
 
 ///|
+/// [ErrorEvent](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) interface.
 pub trait TErrorEvent: TEvent {
   message(self : Self) -> String = _
   filename(self : Self) -> String = _
@@ -45,6 +47,7 @@ pub trait TErrorEvent: TEvent {
 extern "js" fn error_event_message_ffi(obj : JsValue) -> String = "(obj) => obj.message"
 
 ///|
+/// [ErrorEvent.message](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent/message)
 impl TErrorEvent with message(self : Self) -> String {
   error_event_message_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +56,7 @@ impl TErrorEvent with message(self : Self) -> String {
 extern "js" fn error_event_filename_ffi(obj : JsValue) -> String = "(obj) => obj.filename"
 
 ///|
+/// [ErrorEvent.filename](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent/filename)
 impl TErrorEvent with filename(self : Self) -> String {
   error_event_filename_ffi(TJsValue::to_js(self))
 }
@@ -61,6 +65,7 @@ impl TErrorEvent with filename(self : Self) -> String {
 extern "js" fn error_event_lineno_ffi(obj : JsValue) -> UInt = "(obj) => obj.lineno"
 
 ///|
+/// [ErrorEvent.lineno](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent/lineno)
 impl TErrorEvent with lineno(self : Self) -> UInt {
   error_event_lineno_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +74,7 @@ impl TErrorEvent with lineno(self : Self) -> UInt {
 extern "js" fn error_event_colno_ffi(obj : JsValue) -> UInt = "(obj) => obj.colno"
 
 ///|
+/// [ErrorEvent.colno](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent/colno)
 impl TErrorEvent with colno(self : Self) -> UInt {
   error_event_colno_ffi(TJsValue::to_js(self))
 }
@@ -77,6 +83,7 @@ impl TErrorEvent with colno(self : Self) -> UInt {
 extern "js" fn error_event_error_ffi(obj : JsValue) -> JsValue = "(obj) => obj.error"
 
 ///|
+/// [ErrorEvent.error](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent/error)
 impl TErrorEvent with error(self : Self) -> JsValue {
   error_event_error_ffi(TJsValue::to_js(self))
 }

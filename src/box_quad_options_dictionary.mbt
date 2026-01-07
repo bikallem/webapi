@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [BoxQuadOptions](https://developer.mozilla.org/en-US/docs/Web/API/BoxQuadOptions)
 #external
 pub type BoxQuadOptions
 

@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent)
 #external
 pub type UIEvent
 
@@ -33,6 +34,7 @@ pub fn UIEvent::new(
 }
 
 ///|
+/// [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) interface.
 pub trait TUIEvent: TEvent {
   view(self : Self) -> Window = _
   detail(self : Self) -> Int = _
@@ -51,6 +53,7 @@ pub trait TUIEvent: TEvent {
 extern "js" fn ui_event_view_ffi(obj : JsValue) -> Window = "(obj) => obj.view"
 
 ///|
+/// [UIEvent.view](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 impl TUIEvent with view(self : Self) -> Window {
   ui_event_view_ffi(TJsValue::to_js(self))
 }
@@ -59,6 +62,7 @@ impl TUIEvent with view(self : Self) -> Window {
 extern "js" fn ui_event_detail_ffi(obj : JsValue) -> Int = "(obj) => obj.detail"
 
 ///|
+/// [UIEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
 impl TUIEvent with detail(self : Self) -> Int {
   ui_event_detail_ffi(TJsValue::to_js(self))
 }
@@ -74,6 +78,7 @@ extern "js" fn ui_event_init_ui_event_ffi(
 ) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg) => obj.initUIEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg)"
 
 ///|
+/// [UIEvent.initUIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent)
 impl TUIEvent with init_ui_event(
   self : Self,
   type_arg : String,
@@ -96,6 +101,7 @@ impl TUIEvent with init_ui_event(
 extern "js" fn ui_event_which_ffi(obj : JsValue) -> UInt = "(obj) => obj.which"
 
 ///|
+/// [UIEvent.which](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which)
 impl TUIEvent with which(self : Self) -> UInt {
   ui_event_which_ffi(TJsValue::to_js(self))
 }

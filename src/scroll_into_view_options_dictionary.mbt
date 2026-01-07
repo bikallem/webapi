@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [ScrollIntoViewOptions](https://developer.mozilla.org/en-US/docs/Web/API/ScrollIntoViewOptions)
 #external
 pub type ScrollIntoViewOptions
 

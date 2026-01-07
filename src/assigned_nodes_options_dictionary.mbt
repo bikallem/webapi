@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [AssignedNodesOptions](https://developer.mozilla.org/en-US/docs/Web/API/AssignedNodesOptions)
 #external
 pub type AssignedNodesOptions
 

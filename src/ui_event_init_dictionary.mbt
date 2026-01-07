@@ -3,6 +3,7 @@
 // Specifications: uievents.idl, dom.idl
 
 ///|
+/// [UIEventInit](https://developer.mozilla.org/en-US/docs/Web/API/UIEventInit)
 #external
 pub type UIEventInit
 

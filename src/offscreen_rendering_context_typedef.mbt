@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [OffscreenRenderingContext](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenRenderingContext)
 #external
 pub type OffscreenRenderingContext
 

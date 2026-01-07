@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSPageRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageRule)
 #external
 pub type CSSPageRule
 
@@ -22,6 +23,7 @@ pub impl TCSSGroupingRule for CSSPageRule
 pub impl TCSSRule for CSSPageRule
 
 ///|
+/// [CSSPageRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageRule) interface.
 pub trait TCSSPageRule: TCSSGroupingRule {
   selector_text(self : Self) -> CSSOMString = _
   set_selector_text(self : Self, selector_text : CSSOMString) -> Unit = _
@@ -32,6 +34,7 @@ pub trait TCSSPageRule: TCSSGroupingRule {
 extern "js" fn css_page_rule_selector_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.selectorText"
 
 ///|
+/// [CSSPageRule.selectorText](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageRule/selectorText)
 impl TCSSPageRule with selector_text(self : Self) -> CSSOMString {
   css_page_rule_selector_text_ffi(TJsValue::to_js(self))
 }
@@ -43,6 +46,7 @@ extern "js" fn css_page_rule_set_selector_text_ffi(
 ) -> Unit = "(obj, selectorText) => { obj.selectorText = selectorText; }"
 
 ///|
+/// [CSSPageRule.selectorText](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageRule/selectorText)
 impl TCSSPageRule with set_selector_text(
   self : Self,
   selector_text : CSSOMString,
@@ -57,6 +61,7 @@ impl TCSSPageRule with set_selector_text(
 extern "js" fn css_page_rule_style_ffi(obj : JsValue) -> CSSPageDescriptors = "(obj) => obj.style"
 
 ///|
+/// [CSSPageRule.style](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageRule/style)
 impl TCSSPageRule with style(self : Self) -> CSSPageDescriptors {
   css_page_rule_style_ffi(TJsValue::to_js(self))
 }

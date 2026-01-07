@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [DataTransfer](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer)
 #external
 pub type DataTransfer
 
@@ -24,6 +25,7 @@ pub fn DataTransfer::new() -> DataTransfer {
 }
 
 ///|
+/// [DataTransfer](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer) interface.
 pub trait TDataTransfer: TJsValue {
   drop_effect(self : Self) -> String = _
   set_drop_effect(self : Self, drop_effect : String) -> Unit = _
@@ -42,6 +44,7 @@ pub trait TDataTransfer: TJsValue {
 extern "js" fn data_transfer_drop_effect_ffi(obj : JsValue) -> String = "(obj) => obj.dropEffect"
 
 ///|
+/// [DataTransfer.dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect)
 impl TDataTransfer with drop_effect(self : Self) -> String {
   data_transfer_drop_effect_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +56,7 @@ extern "js" fn data_transfer_set_drop_effect_ffi(
 ) -> Unit = "(obj, dropEffect) => { obj.dropEffect = dropEffect; }"
 
 ///|
+/// [DataTransfer.dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect)
 impl TDataTransfer with set_drop_effect(self : Self, drop_effect : String) -> Unit {
   data_transfer_set_drop_effect_ffi(
     TJsValue::to_js(self),
@@ -64,6 +68,7 @@ impl TDataTransfer with set_drop_effect(self : Self, drop_effect : String) -> Un
 extern "js" fn data_transfer_effect_allowed_ffi(obj : JsValue) -> String = "(obj) => obj.effectAllowed"
 
 ///|
+/// [DataTransfer.effectAllowed](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed)
 impl TDataTransfer with effect_allowed(self : Self) -> String {
   data_transfer_effect_allowed_ffi(TJsValue::to_js(self))
 }
@@ -75,6 +80,7 @@ extern "js" fn data_transfer_set_effect_allowed_ffi(
 ) -> Unit = "(obj, effectAllowed) => { obj.effectAllowed = effectAllowed; }"
 
 ///|
+/// [DataTransfer.effectAllowed](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed)
 impl TDataTransfer with set_effect_allowed(self : Self, effect_allowed : String) -> Unit {
   data_transfer_set_effect_allowed_ffi(
     TJsValue::to_js(self),
@@ -86,6 +92,7 @@ impl TDataTransfer with set_effect_allowed(self : Self, effect_allowed : String)
 extern "js" fn data_transfer_items_ffi(obj : JsValue) -> DataTransferItemList = "(obj) => obj.items"
 
 ///|
+/// [DataTransfer.items](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/items)
 impl TDataTransfer with items(self : Self) -> DataTransferItemList {
   data_transfer_items_ffi(TJsValue::to_js(self))
 }
@@ -99,6 +106,7 @@ extern "js" fn data_transfer_set_drag_image_ffi(
 ) -> Unit = "(obj, image, x, y) => obj.setDragImage(image, x, y)"
 
 ///|
+/// [DataTransfer.setDragImage](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setDragImage)
 impl TDataTransfer with set_drag_image(
   self : Self,
   image : &TElement,
@@ -117,6 +125,7 @@ impl TDataTransfer with set_drag_image(
 extern "js" fn data_transfer_types_ffi(obj : JsValue) -> JsValue = "(obj) => obj.types"
 
 ///|
+/// [DataTransfer.types](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/types)
 impl TDataTransfer with types(self : Self) -> JsValue {
   data_transfer_types_ffi(TJsValue::to_js(self))
 }
@@ -128,6 +137,7 @@ extern "js" fn data_transfer_get_data_ffi(
 ) -> String = "(obj, format) => obj.getData(format)"
 
 ///|
+/// [DataTransfer.getData](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData)
 impl TDataTransfer with get_data(self : Self, format : String) -> String {
   data_transfer_get_data_ffi(TJsValue::to_js(self), TJsValue::to_js(format))
 }
@@ -140,6 +150,7 @@ extern "js" fn data_transfer_set_data_ffi(
 ) -> Unit = "(obj, format, data) => obj.setData(format, data)"
 
 ///|
+/// [DataTransfer.setData](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setData)
 impl TDataTransfer with set_data(self : Self, format : String, data : String) -> Unit {
   data_transfer_set_data_ffi(
     TJsValue::to_js(self),
@@ -155,6 +166,7 @@ extern "js" fn data_transfer_clear_data_ffi(
 ) -> Unit = "(obj, format) => obj.clearData(format)"
 
 ///|
+/// [DataTransfer.clearData](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/clearData)
 impl TDataTransfer with clear_data(self : Self, format? : String) -> Unit {
   data_transfer_clear_data_ffi(TJsValue::to_js(self), opt_to_js(format))
 }
@@ -163,6 +175,7 @@ impl TDataTransfer with clear_data(self : Self, format? : String) -> Unit {
 extern "js" fn data_transfer_files_ffi(obj : JsValue) -> FileList = "(obj) => obj.files"
 
 ///|
+/// [DataTransfer.files](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/files)
 impl TDataTransfer with files(self : Self) -> FileList {
   data_transfer_files_ffi(TJsValue::to_js(self))
 }

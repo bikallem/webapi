@@ -3,6 +3,7 @@
 // Specifications: FileAPI.idl
 
 ///|
+/// [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader)
 #external
 pub type FileReader
 
@@ -36,6 +37,7 @@ pub const FILE_READER_LOADING : UInt = 1
 pub const FILE_READER_DONE : UInt = 2
 
 ///|
+/// [FileReaderResult](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderResult)
 #external
 pub type FileReaderResult
 
@@ -61,6 +63,7 @@ pub impl TFileReaderResult for String with to_js(self : String) -> JsValue = "%i
 pub impl TFileReaderResult for ArrayBuffer with to_js(self : ArrayBuffer) -> JsValue = "%identity"
 
 ///|
+/// [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) interface.
 pub trait TFileReader: TEventTarget {
   read_as_array_buffer(self : Self, blob : &TBlob) -> Unit = _
   read_as_binary_string(self : Self, blob : &TBlob) -> Unit = _
@@ -91,6 +94,7 @@ extern "js" fn file_reader_read_as_array_buffer_ffi(
 ) -> Unit = "(obj, blob) => obj.readAsArrayBuffer(blob)"
 
 ///|
+/// [FileReader.readAsArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsArrayBuffer)
 impl TFileReader with read_as_array_buffer(self : Self, blob : &TBlob) -> Unit {
   file_reader_read_as_array_buffer_ffi(
     TJsValue::to_js(self),
@@ -105,6 +109,7 @@ extern "js" fn file_reader_read_as_binary_string_ffi(
 ) -> Unit = "(obj, blob) => obj.readAsBinaryString(blob)"
 
 ///|
+/// [FileReader.readAsBinaryString](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsBinaryString)
 impl TFileReader with read_as_binary_string(self : Self, blob : &TBlob) -> Unit {
   file_reader_read_as_binary_string_ffi(
     TJsValue::to_js(self),
@@ -120,6 +125,7 @@ extern "js" fn file_reader_read_as_text_ffi(
 ) -> Unit = "(obj, blob, encoding) => obj.readAsText(blob, encoding)"
 
 ///|
+/// [FileReader.readAsText](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText)
 impl TFileReader with read_as_text(
   self : Self,
   blob : &TBlob,
@@ -139,6 +145,7 @@ extern "js" fn file_reader_read_as_data_url_ffi(
 ) -> Unit = "(obj, blob) => obj.readAsDataURL(blob)"
 
 ///|
+/// [FileReader.readAsDataURL](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL)
 impl TFileReader with read_as_data_url(self : Self, blob : &TBlob) -> Unit {
   file_reader_read_as_data_url_ffi(TJsValue::to_js(self), TJsValue::to_js(blob))
 }
@@ -147,6 +154,7 @@ impl TFileReader with read_as_data_url(self : Self, blob : &TBlob) -> Unit {
 extern "js" fn file_reader_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort()"
 
 ///|
+/// [FileReader.abort](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/abort)
 impl TFileReader with abort(self : Self) -> Unit {
   file_reader_abort_ffi(TJsValue::to_js(self))
 }
@@ -155,6 +163,7 @@ impl TFileReader with abort(self : Self) -> Unit {
 extern "js" fn file_reader_ready_state_ffi(obj : JsValue) -> UInt = "(obj) => obj.readyState"
 
 ///|
+/// [FileReader.readyState](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readyState)
 impl TFileReader with ready_state(self : Self) -> UInt {
   file_reader_ready_state_ffi(TJsValue::to_js(self))
 }
@@ -163,6 +172,7 @@ impl TFileReader with ready_state(self : Self) -> UInt {
 extern "js" fn file_reader_result_ffi(obj : JsValue) -> FileReaderResult = "(obj) => obj.result"
 
 ///|
+/// [FileReader.result](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/result)
 impl TFileReader with result(self : Self) -> FileReaderResult {
   file_reader_result_ffi(TJsValue::to_js(self))
 }
@@ -171,6 +181,7 @@ impl TFileReader with result(self : Self) -> FileReaderResult {
 extern "js" fn file_reader_error_ffi(obj : JsValue) -> DOMException = "(obj) => obj.error"
 
 ///|
+/// [FileReader.error](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/error)
 impl TFileReader with error(self : Self) -> DOMException {
   file_reader_error_ffi(TJsValue::to_js(self))
 }
@@ -179,6 +190,7 @@ impl TFileReader with error(self : Self) -> DOMException {
 extern "js" fn file_reader_onloadstart_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadstart"
 
 ///|
+/// [FileReader.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadstart)
 impl TFileReader with onloadstart(self : Self) -> EventHandler {
   file_reader_onloadstart_ffi(TJsValue::to_js(self))
 }
@@ -190,6 +202,7 @@ extern "js" fn file_reader_set_onloadstart_ffi(
 ) -> Unit = "(obj, onloadstart) => { obj.onloadstart = onloadstart; }"
 
 ///|
+/// [FileReader.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadstart)
 impl TFileReader with set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit {
   file_reader_set_onloadstart_ffi(
     TJsValue::to_js(self),
@@ -201,6 +214,7 @@ impl TFileReader with set_onloadstart(self : Self, onloadstart : EventHandler) -
 extern "js" fn file_reader_onprogress_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onprogress"
 
 ///|
+/// [FileReader.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onprogress)
 impl TFileReader with onprogress(self : Self) -> EventHandler {
   file_reader_onprogress_ffi(TJsValue::to_js(self))
 }
@@ -212,6 +226,7 @@ extern "js" fn file_reader_set_onprogress_ffi(
 ) -> Unit = "(obj, onprogress) => { obj.onprogress = onprogress; }"
 
 ///|
+/// [FileReader.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onprogress)
 impl TFileReader with set_onprogress(self : Self, onprogress : EventHandler) -> Unit {
   file_reader_set_onprogress_ffi(
     TJsValue::to_js(self),
@@ -223,6 +238,7 @@ impl TFileReader with set_onprogress(self : Self, onprogress : EventHandler) -> 
 extern "js" fn file_reader_onload_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onload"
 
 ///|
+/// [FileReader.onload](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload)
 impl TFileReader with onload(self : Self) -> EventHandler {
   file_reader_onload_ffi(TJsValue::to_js(self))
 }
@@ -234,6 +250,7 @@ extern "js" fn file_reader_set_onload_ffi(
 ) -> Unit = "(obj, onload) => { obj.onload = onload; }"
 
 ///|
+/// [FileReader.onload](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload)
 impl TFileReader with set_onload(self : Self, onload : EventHandler) -> Unit {
   file_reader_set_onload_ffi(TJsValue::to_js(self), TJsValue::to_js(onload))
 }
@@ -242,6 +259,7 @@ impl TFileReader with set_onload(self : Self, onload : EventHandler) -> Unit {
 extern "js" fn file_reader_onabort_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onabort"
 
 ///|
+/// [FileReader.onabort](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onabort)
 impl TFileReader with onabort(self : Self) -> EventHandler {
   file_reader_onabort_ffi(TJsValue::to_js(self))
 }
@@ -253,6 +271,7 @@ extern "js" fn file_reader_set_onabort_ffi(
 ) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
 
 ///|
+/// [FileReader.onabort](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onabort)
 impl TFileReader with set_onabort(self : Self, onabort : EventHandler) -> Unit {
   file_reader_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(onabort))
 }
@@ -261,6 +280,7 @@ impl TFileReader with set_onabort(self : Self, onabort : EventHandler) -> Unit {
 extern "js" fn file_reader_onerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onerror"
 
 ///|
+/// [FileReader.onerror](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onerror)
 impl TFileReader with onerror(self : Self) -> EventHandler {
   file_reader_onerror_ffi(TJsValue::to_js(self))
 }
@@ -272,6 +292,7 @@ extern "js" fn file_reader_set_onerror_ffi(
 ) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
 
 ///|
+/// [FileReader.onerror](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onerror)
 impl TFileReader with set_onerror(self : Self, onerror : EventHandler) -> Unit {
   file_reader_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
@@ -280,6 +301,7 @@ impl TFileReader with set_onerror(self : Self, onerror : EventHandler) -> Unit {
 extern "js" fn file_reader_onloadend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadend"
 
 ///|
+/// [FileReader.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadend)
 impl TFileReader with onloadend(self : Self) -> EventHandler {
   file_reader_onloadend_ffi(TJsValue::to_js(self))
 }
@@ -291,6 +313,7 @@ extern "js" fn file_reader_set_onloadend_ffi(
 ) -> Unit = "(obj, onloadend) => { obj.onloadend = onloadend; }"
 
 ///|
+/// [FileReader.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadend)
 impl TFileReader with set_onloadend(self : Self, onloadend : EventHandler) -> Unit {
   file_reader_set_onloadend_ffi(
     TJsValue::to_js(self),

@@ -3,6 +3,7 @@
 // Specifications: xhr.idl
 
 ///|
+/// [FormDataEntryValue](https://developer.mozilla.org/en-US/docs/Web/API/FormDataEntryValue)
 #external
 pub type FormDataEntryValue
 

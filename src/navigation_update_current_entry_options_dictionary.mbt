@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationUpdateCurrentEntryOptions](https://developer.mozilla.org/en-US/docs/Web/API/NavigationUpdateCurrentEntryOptions)
 #external
 pub type NavigationUpdateCurrentEntryOptions
 

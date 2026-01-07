@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)
 #external
 pub type Navigator
 
@@ -16,6 +17,7 @@ pub fn[T : TNavigator] Navigator::into(self : Navigator) -> T = "%identity"
 pub impl TNavigator for Navigator
 
 ///|
+/// [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) interface.
 pub trait TNavigator: TJsValue {
   user_activation(self : Self) -> UserActivation = _
   app_code_name(self : Self) -> String = _
@@ -46,6 +48,7 @@ pub trait TNavigator: TJsValue {
 extern "js" fn navigator_user_activation_ffi(obj : JsValue) -> UserActivation = "(obj) => obj.userActivation"
 
 ///|
+/// [Navigator.userActivation](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userActivation)
 impl TNavigator with user_activation(self : Self) -> UserActivation {
   navigator_user_activation_ffi(TJsValue::to_js(self))
 }
@@ -54,6 +57,7 @@ impl TNavigator with user_activation(self : Self) -> UserActivation {
 extern "js" fn navigator_app_code_name_ffi(obj : JsValue) -> String = "(obj) => obj.appCodeName"
 
 ///|
+/// [Navigator.appCodeName](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appCodeName)
 impl TNavigator with app_code_name(self : Self) -> String {
   navigator_app_code_name_ffi(TJsValue::to_js(self))
 }
@@ -62,6 +66,7 @@ impl TNavigator with app_code_name(self : Self) -> String {
 extern "js" fn navigator_app_name_ffi(obj : JsValue) -> String = "(obj) => obj.appName"
 
 ///|
+/// [Navigator.appName](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appName)
 impl TNavigator with app_name(self : Self) -> String {
   navigator_app_name_ffi(TJsValue::to_js(self))
 }
@@ -70,6 +75,7 @@ impl TNavigator with app_name(self : Self) -> String {
 extern "js" fn navigator_app_version_ffi(obj : JsValue) -> String = "(obj) => obj.appVersion"
 
 ///|
+/// [Navigator.appVersion](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appVersion)
 impl TNavigator with app_version(self : Self) -> String {
   navigator_app_version_ffi(TJsValue::to_js(self))
 }
@@ -78,6 +84,7 @@ impl TNavigator with app_version(self : Self) -> String {
 extern "js" fn navigator_platform_ffi(obj : JsValue) -> String = "(obj) => obj.platform"
 
 ///|
+/// [Navigator.platform](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/platform)
 impl TNavigator with platform(self : Self) -> String {
   navigator_platform_ffi(TJsValue::to_js(self))
 }
@@ -86,6 +93,7 @@ impl TNavigator with platform(self : Self) -> String {
 extern "js" fn navigator_product_ffi(obj : JsValue) -> String = "(obj) => obj.product"
 
 ///|
+/// [Navigator.product](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/product)
 impl TNavigator with product(self : Self) -> String {
   navigator_product_ffi(TJsValue::to_js(self))
 }
@@ -94,6 +102,7 @@ impl TNavigator with product(self : Self) -> String {
 extern "js" fn navigator_product_sub_ffi(obj : JsValue) -> String = "(obj) => obj.productSub"
 
 ///|
+/// [Navigator.productSub](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/productSub)
 impl TNavigator with product_sub(self : Self) -> String {
   navigator_product_sub_ffi(TJsValue::to_js(self))
 }
@@ -102,6 +111,7 @@ impl TNavigator with product_sub(self : Self) -> String {
 extern "js" fn navigator_user_agent_ffi(obj : JsValue) -> String = "(obj) => obj.userAgent"
 
 ///|
+/// [Navigator.userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent)
 impl TNavigator with user_agent(self : Self) -> String {
   navigator_user_agent_ffi(TJsValue::to_js(self))
 }
@@ -110,6 +120,7 @@ impl TNavigator with user_agent(self : Self) -> String {
 extern "js" fn navigator_vendor_ffi(obj : JsValue) -> String = "(obj) => obj.vendor"
 
 ///|
+/// [Navigator.vendor](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vendor)
 impl TNavigator with vendor(self : Self) -> String {
   navigator_vendor_ffi(TJsValue::to_js(self))
 }
@@ -118,6 +129,7 @@ impl TNavigator with vendor(self : Self) -> String {
 extern "js" fn navigator_vendor_sub_ffi(obj : JsValue) -> String = "(obj) => obj.vendorSub"
 
 ///|
+/// [Navigator.vendorSub](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vendorSub)
 impl TNavigator with vendor_sub(self : Self) -> String {
   navigator_vendor_sub_ffi(TJsValue::to_js(self))
 }
@@ -126,6 +138,7 @@ impl TNavigator with vendor_sub(self : Self) -> String {
 extern "js" fn navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.taintEnabled()"
 
 ///|
+/// [Navigator.taintEnabled](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/taintEnabled)
 impl TNavigator with taint_enabled(self : Self) -> Bool {
   navigator_taint_enabled_ffi(TJsValue::to_js(self))
 }
@@ -134,6 +147,7 @@ impl TNavigator with taint_enabled(self : Self) -> Bool {
 extern "js" fn navigator_oscpu_ffi(obj : JsValue) -> String = "(obj) => obj.oscpu"
 
 ///|
+/// [Navigator.oscpu](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/oscpu)
 impl TNavigator with oscpu(self : Self) -> String {
   navigator_oscpu_ffi(TJsValue::to_js(self))
 }
@@ -142,6 +156,7 @@ impl TNavigator with oscpu(self : Self) -> String {
 extern "js" fn navigator_language_ffi(obj : JsValue) -> String = "(obj) => obj.language"
 
 ///|
+/// [Navigator.language](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language)
 impl TNavigator with language(self : Self) -> String {
   navigator_language_ffi(TJsValue::to_js(self))
 }
@@ -150,6 +165,7 @@ impl TNavigator with language(self : Self) -> String {
 extern "js" fn navigator_languages_ffi(obj : JsValue) -> JsValue = "(obj) => obj.languages"
 
 ///|
+/// [Navigator.languages](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages)
 impl TNavigator with languages(self : Self) -> JsValue {
   navigator_languages_ffi(TJsValue::to_js(self))
 }
@@ -158,6 +174,7 @@ impl TNavigator with languages(self : Self) -> JsValue {
 extern "js" fn navigator_on_line_ffi(obj : JsValue) -> Bool = "(obj) => obj.onLine"
 
 ///|
+/// [Navigator.onLine](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine)
 impl TNavigator with on_line(self : Self) -> Bool {
   navigator_on_line_ffi(TJsValue::to_js(self))
 }
@@ -170,6 +187,7 @@ extern "js" fn navigator_register_protocol_handler_ffi(
 ) -> Unit = "(obj, scheme, url) => obj.registerProtocolHandler(scheme, url)"
 
 ///|
+/// [Navigator.registerProtocolHandler](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler)
 impl TNavigator with register_protocol_handler(
   self : Self,
   scheme : String,
@@ -190,6 +208,7 @@ extern "js" fn navigator_unregister_protocol_handler_ffi(
 ) -> Unit = "(obj, scheme, url) => obj.unregisterProtocolHandler(scheme, url)"
 
 ///|
+/// [Navigator.unregisterProtocolHandler](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/unregisterProtocolHandler)
 impl TNavigator with unregister_protocol_handler(
   self : Self,
   scheme : String,
@@ -206,6 +225,7 @@ impl TNavigator with unregister_protocol_handler(
 extern "js" fn navigator_cookie_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.cookieEnabled"
 
 ///|
+/// [Navigator.cookieEnabled](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/cookieEnabled)
 impl TNavigator with cookie_enabled(self : Self) -> Bool {
   navigator_cookie_enabled_ffi(TJsValue::to_js(self))
 }
@@ -214,6 +234,7 @@ impl TNavigator with cookie_enabled(self : Self) -> Bool {
 extern "js" fn navigator_plugins_ffi(obj : JsValue) -> PluginArray = "(obj) => obj.plugins"
 
 ///|
+/// [Navigator.plugins](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/plugins)
 impl TNavigator with plugins(self : Self) -> PluginArray {
   navigator_plugins_ffi(TJsValue::to_js(self))
 }
@@ -222,6 +243,7 @@ impl TNavigator with plugins(self : Self) -> PluginArray {
 extern "js" fn navigator_mime_types_ffi(obj : JsValue) -> MimeTypeArray = "(obj) => obj.mimeTypes"
 
 ///|
+/// [Navigator.mimeTypes](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mimeTypes)
 impl TNavigator with mime_types(self : Self) -> MimeTypeArray {
   navigator_mime_types_ffi(TJsValue::to_js(self))
 }
@@ -230,6 +252,7 @@ impl TNavigator with mime_types(self : Self) -> MimeTypeArray {
 extern "js" fn navigator_java_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.javaEnabled()"
 
 ///|
+/// [Navigator.javaEnabled](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/javaEnabled)
 impl TNavigator with java_enabled(self : Self) -> Bool {
   navigator_java_enabled_ffi(TJsValue::to_js(self))
 }
@@ -238,6 +261,7 @@ impl TNavigator with java_enabled(self : Self) -> Bool {
 extern "js" fn navigator_pdf_viewer_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.pdfViewerEnabled"
 
 ///|
+/// [Navigator.pdfViewerEnabled](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/pdfViewerEnabled)
 impl TNavigator with pdf_viewer_enabled(self : Self) -> Bool {
   navigator_pdf_viewer_enabled_ffi(TJsValue::to_js(self))
 }
@@ -246,6 +270,7 @@ impl TNavigator with pdf_viewer_enabled(self : Self) -> Bool {
 extern "js" fn navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 = "(obj) => obj.hardwareConcurrency"
 
 ///|
+/// [Navigator.hardwareConcurrency](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hardwareConcurrency)
 impl TNavigator with hardware_concurrency(self : Self) -> UInt64 {
   navigator_hardware_concurrency_ffi(TJsValue::to_js(self))
 }

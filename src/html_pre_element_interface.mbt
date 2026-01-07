@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLPreElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPreElement)
 #external
 pub type HTMLPreElement
 
@@ -36,6 +37,7 @@ pub fn HTMLPreElement::new() -> HTMLPreElement {
 }
 
 ///|
+/// [HTMLPreElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPreElement) interface.
 pub trait THTMLPreElement: THTMLElement {
   width(self : Self) -> Int = _
   set_width(self : Self, width : Int) -> Unit = _
@@ -45,6 +47,7 @@ pub trait THTMLPreElement: THTMLElement {
 extern "js" fn html_pre_element_width_ffi(obj : JsValue) -> Int = "(obj) => obj.width"
 
 ///|
+/// [HTMLPreElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPreElement/width)
 impl THTMLPreElement with width(self : Self) -> Int {
   html_pre_element_width_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ extern "js" fn html_pre_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLPreElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPreElement/width)
 impl THTMLPreElement with set_width(self : Self, width : Int) -> Unit {
   html_pre_element_set_width_ffi(TJsValue::to_js(self), TJsValue::to_js(width))
 }

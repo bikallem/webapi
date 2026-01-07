@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [DragEvent](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent)
 #external
 pub type DragEvent
 
@@ -39,6 +40,7 @@ pub fn DragEvent::new(
 }
 
 ///|
+/// [DragEvent](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent) interface.
 pub trait TDragEvent: TMouseEvent {
   data_transfer(self : Self) -> DataTransfer = _
 }
@@ -47,6 +49,7 @@ pub trait TDragEvent: TMouseEvent {
 extern "js" fn drag_event_data_transfer_ffi(obj : JsValue) -> DataTransfer = "(obj) => obj.dataTransfer"
 
 ///|
+/// [DragEvent.dataTransfer](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer)
 impl TDragEvent with data_transfer(self : Self) -> DataTransfer {
   drag_event_data_transfer_ffi(TJsValue::to_js(self))
 }

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D)
 #external
 pub type CanvasRenderingContext2D
 
@@ -20,6 +21,7 @@ pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 
 ///|
+/// [CanvasRenderingContext2DStrokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DStrokeStyle)
 #external
 pub type CanvasRenderingContext2DStrokeStyle
 
@@ -54,6 +56,7 @@ pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+/// [CanvasRenderingContext2DFillStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DFillStyle)
 #external
 pub type CanvasRenderingContext2DFillStyle
 
@@ -121,6 +124,7 @@ pub impl TCanvasRenderingContext2DRoundRectRadii for Array[
 ] with to_js(self : Array[&TCanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
 
 ///|
+/// [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) interface.
 pub trait TCanvasRenderingContext2D: TJsValue {
   canvas(self : Self) -> HTMLCanvasElement = _
   get_context_attributes(self : Self) -> CanvasRenderingContext2DSettings = _
@@ -393,6 +397,7 @@ extern "js" fn canvas_rendering_context2d_canvas_ffi(
 ) -> HTMLCanvasElement = "(obj) => obj.canvas"
 
 ///|
+/// [CanvasRenderingContext2D.canvas](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/canvas)
 impl TCanvasRenderingContext2D with canvas(self : Self) -> HTMLCanvasElement {
   canvas_rendering_context2d_canvas_ffi(TJsValue::to_js(self))
 }
@@ -403,6 +408,7 @@ extern "js" fn canvas_rendering_context2d_get_context_attributes_ffi(
 ) -> CanvasRenderingContext2DSettings = "(obj) => obj.getContextAttributes()"
 
 ///|
+/// [CanvasRenderingContext2D.getContextAttributes](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getContextAttributes)
 impl TCanvasRenderingContext2D with get_context_attributes(self : Self) -> CanvasRenderingContext2DSettings {
   canvas_rendering_context2d_get_context_attributes_ffi(TJsValue::to_js(self))
 }
@@ -411,6 +417,7 @@ impl TCanvasRenderingContext2D with get_context_attributes(self : Self) -> Canva
 extern "js" fn canvas_rendering_context2d_save_ffi(obj : JsValue) -> Unit = "(obj) => obj.save()"
 
 ///|
+/// [CanvasRenderingContext2D.save](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save)
 impl TCanvasRenderingContext2D with save(self : Self) -> Unit {
   canvas_rendering_context2d_save_ffi(TJsValue::to_js(self))
 }
@@ -419,6 +426,7 @@ impl TCanvasRenderingContext2D with save(self : Self) -> Unit {
 extern "js" fn canvas_rendering_context2d_restore_ffi(obj : JsValue) -> Unit = "(obj) => obj.restore()"
 
 ///|
+/// [CanvasRenderingContext2D.restore](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/restore)
 impl TCanvasRenderingContext2D with restore(self : Self) -> Unit {
   canvas_rendering_context2d_restore_ffi(TJsValue::to_js(self))
 }
@@ -427,6 +435,7 @@ impl TCanvasRenderingContext2D with restore(self : Self) -> Unit {
 extern "js" fn canvas_rendering_context2d_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
 
 ///|
+/// [CanvasRenderingContext2D.reset](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/reset)
 impl TCanvasRenderingContext2D with reset(self : Self) -> Unit {
   canvas_rendering_context2d_reset_ffi(TJsValue::to_js(self))
 }
@@ -437,6 +446,7 @@ extern "js" fn canvas_rendering_context2d_is_context_lost_ffi(
 ) -> Bool = "(obj) => obj.isContextLost()"
 
 ///|
+/// [CanvasRenderingContext2D.isContextLost](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isContextLost)
 impl TCanvasRenderingContext2D with is_context_lost(self : Self) -> Bool {
   canvas_rendering_context2d_is_context_lost_ffi(TJsValue::to_js(self))
 }
@@ -449,6 +459,7 @@ extern "js" fn canvas_rendering_context2d_scale_ffi(
 ) -> Unit = "(obj, x, y) => obj.scale(x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.scale](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale)
 impl TCanvasRenderingContext2D with scale(self : Self, x : Double, y : Double) -> Unit {
   canvas_rendering_context2d_scale_ffi(
     TJsValue::to_js(self),
@@ -464,6 +475,7 @@ extern "js" fn canvas_rendering_context2d_rotate_ffi(
 ) -> Unit = "(obj, angle) => obj.rotate(angle)"
 
 ///|
+/// [CanvasRenderingContext2D.rotate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate)
 impl TCanvasRenderingContext2D with rotate(self : Self, angle : Double) -> Unit {
   canvas_rendering_context2d_rotate_ffi(
     TJsValue::to_js(self),
@@ -479,6 +491,7 @@ extern "js" fn canvas_rendering_context2d_translate_ffi(
 ) -> Unit = "(obj, x, y) => obj.translate(x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.translate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
 impl TCanvasRenderingContext2D with translate(
   self : Self,
   x : Double,
@@ -503,6 +516,7 @@ extern "js" fn canvas_rendering_context2d_transform_ffi(
 ) -> Unit = "(obj, a, b, c, d, e, f) => obj.transform(a, b, c, d, e, f)"
 
 ///|
+/// [CanvasRenderingContext2D.transform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/transform)
 impl TCanvasRenderingContext2D with transform(
   self : Self,
   a : Double,
@@ -529,6 +543,7 @@ extern "js" fn canvas_rendering_context2d_get_transform_ffi(
 ) -> DOMMatrix = "(obj) => obj.getTransform()"
 
 ///|
+/// [CanvasRenderingContext2D.getTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getTransform)
 impl TCanvasRenderingContext2D with get_transform(self : Self) -> DOMMatrix {
   canvas_rendering_context2d_get_transform_ffi(TJsValue::to_js(self))
 }
@@ -545,6 +560,7 @@ extern "js" fn canvas_rendering_context2d_set_transform_ffi(
 ) -> Unit = "(obj, a, b, c, d, e, f) => obj.setTransform(a, b, c, d, e, f)"
 
 ///|
+/// [CanvasRenderingContext2D.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform)
 impl TCanvasRenderingContext2D with set_transform(
   self : Self,
   a : Double,
@@ -572,6 +588,7 @@ extern "js" fn canvas_rendering_context2d_set_transform_2_ffi(
 ) -> Unit = "(obj, transform) => obj.setTransform_2(transform)"
 
 ///|
+/// [CanvasRenderingContext2D.setTransform_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform_2)
 impl TCanvasRenderingContext2D with set_transform_2(
   self : Self,
   transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
@@ -588,6 +605,7 @@ extern "js" fn canvas_rendering_context2d_reset_transform_ffi(
 ) -> Unit = "(obj) => obj.resetTransform()"
 
 ///|
+/// [CanvasRenderingContext2D.resetTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform)
 impl TCanvasRenderingContext2D with reset_transform(self : Self) -> Unit {
   canvas_rendering_context2d_reset_transform_ffi(TJsValue::to_js(self))
 }
@@ -598,6 +616,7 @@ extern "js" fn canvas_rendering_context2d_global_alpha_ffi(
 ) -> Double = "(obj) => obj.globalAlpha"
 
 ///|
+/// [CanvasRenderingContext2D.globalAlpha](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalAlpha)
 impl TCanvasRenderingContext2D with global_alpha(self : Self) -> Double {
   canvas_rendering_context2d_global_alpha_ffi(TJsValue::to_js(self))
 }
@@ -609,6 +628,7 @@ extern "js" fn canvas_rendering_context2d_set_global_alpha_ffi(
 ) -> Unit = "(obj, globalAlpha) => { obj.globalAlpha = globalAlpha; }"
 
 ///|
+/// [CanvasRenderingContext2D.globalAlpha](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalAlpha)
 impl TCanvasRenderingContext2D with set_global_alpha(
   self : Self,
   global_alpha : Double,
@@ -625,6 +645,7 @@ extern "js" fn canvas_rendering_context2d_global_composite_operation_ffi(
 ) -> String = "(obj) => obj.globalCompositeOperation"
 
 ///|
+/// [CanvasRenderingContext2D.globalCompositeOperation](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
 impl TCanvasRenderingContext2D with global_composite_operation(self : Self) -> String {
   canvas_rendering_context2d_global_composite_operation_ffi(
     TJsValue::to_js(self),
@@ -638,6 +659,7 @@ extern "js" fn canvas_rendering_context2d_set_global_composite_operation_ffi(
 ) -> Unit = "(obj, globalCompositeOperation) => { obj.globalCompositeOperation = globalCompositeOperation; }"
 
 ///|
+/// [CanvasRenderingContext2D.globalCompositeOperation](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
 impl TCanvasRenderingContext2D with set_global_composite_operation(
   self : Self,
   global_composite_operation : String,
@@ -654,6 +676,7 @@ extern "js" fn canvas_rendering_context2d_image_smoothing_enabled_ffi(
 ) -> Bool = "(obj) => obj.imageSmoothingEnabled"
 
 ///|
+/// [CanvasRenderingContext2D.imageSmoothingEnabled](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled)
 impl TCanvasRenderingContext2D with image_smoothing_enabled(self : Self) -> Bool {
   canvas_rendering_context2d_image_smoothing_enabled_ffi(TJsValue::to_js(self))
 }
@@ -665,6 +688,7 @@ extern "js" fn canvas_rendering_context2d_set_image_smoothing_enabled_ffi(
 ) -> Unit = "(obj, imageSmoothingEnabled) => { obj.imageSmoothingEnabled = imageSmoothingEnabled; }"
 
 ///|
+/// [CanvasRenderingContext2D.imageSmoothingEnabled](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled)
 impl TCanvasRenderingContext2D with set_image_smoothing_enabled(
   self : Self,
   image_smoothing_enabled : Bool,
@@ -681,6 +705,7 @@ extern "js" fn canvas_rendering_context2d_image_smoothing_quality_ffi(
 ) -> ImageSmoothingQuality = "(obj) => obj.imageSmoothingQuality"
 
 ///|
+/// [CanvasRenderingContext2D.imageSmoothingQuality](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingQuality)
 impl TCanvasRenderingContext2D with image_smoothing_quality(self : Self) -> ImageSmoothingQuality {
   canvas_rendering_context2d_image_smoothing_quality_ffi(TJsValue::to_js(self))
 }
@@ -692,6 +717,7 @@ extern "js" fn canvas_rendering_context2d_set_image_smoothing_quality_ffi(
 ) -> Unit = "(obj, imageSmoothingQuality) => { obj.imageSmoothingQuality = imageSmoothingQuality; }"
 
 ///|
+/// [CanvasRenderingContext2D.imageSmoothingQuality](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingQuality)
 impl TCanvasRenderingContext2D with set_image_smoothing_quality(
   self : Self,
   image_smoothing_quality : ImageSmoothingQuality,
@@ -708,6 +734,7 @@ extern "js" fn canvas_rendering_context2d_stroke_style_ffi(
 ) -> CanvasRenderingContext2DStrokeStyle = "(obj) => obj.strokeStyle"
 
 ///|
+/// [CanvasRenderingContext2D.strokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle)
 impl TCanvasRenderingContext2D with stroke_style(self : Self) -> CanvasRenderingContext2DStrokeStyle {
   canvas_rendering_context2d_stroke_style_ffi(TJsValue::to_js(self))
 }
@@ -719,6 +746,7 @@ extern "js" fn canvas_rendering_context2d_set_stroke_style_ffi(
 ) -> Unit = "(obj, strokeStyle) => { obj.strokeStyle = strokeStyle; }"
 
 ///|
+/// [CanvasRenderingContext2D.strokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle)
 impl TCanvasRenderingContext2D with set_stroke_style(
   self : Self,
   stroke_style : &TCanvasRenderingContext2DStrokeStyle,
@@ -735,6 +763,7 @@ extern "js" fn canvas_rendering_context2d_fill_style_ffi(
 ) -> CanvasRenderingContext2DFillStyle = "(obj) => obj.fillStyle"
 
 ///|
+/// [CanvasRenderingContext2D.fillStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
 impl TCanvasRenderingContext2D with fill_style(self : Self) -> CanvasRenderingContext2DFillStyle {
   canvas_rendering_context2d_fill_style_ffi(TJsValue::to_js(self))
 }
@@ -746,6 +775,7 @@ extern "js" fn canvas_rendering_context2d_set_fill_style_ffi(
 ) -> Unit = "(obj, fillStyle) => { obj.fillStyle = fillStyle; }"
 
 ///|
+/// [CanvasRenderingContext2D.fillStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
 impl TCanvasRenderingContext2D with set_fill_style(
   self : Self,
   fill_style : &TCanvasRenderingContext2DFillStyle,
@@ -766,6 +796,7 @@ extern "js" fn canvas_rendering_context2d_create_linear_gradient_ffi(
 ) -> CanvasGradient = "(obj, x0, y0, x1, y1) => obj.createLinearGradient(x0, y0, x1, y1)"
 
 ///|
+/// [CanvasRenderingContext2D.createLinearGradient](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient)
 impl TCanvasRenderingContext2D with create_linear_gradient(
   self : Self,
   x0 : Double,
@@ -794,6 +825,7 @@ extern "js" fn canvas_rendering_context2d_create_radial_gradient_ffi(
 ) -> CanvasGradient = "(obj, x0, y0, r0, x1, y1, r1) => obj.createRadialGradient(x0, y0, r0, x1, y1, r1)"
 
 ///|
+/// [CanvasRenderingContext2D.createRadialGradient](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient)
 impl TCanvasRenderingContext2D with create_radial_gradient(
   self : Self,
   x0 : Double,
@@ -823,6 +855,7 @@ extern "js" fn canvas_rendering_context2d_create_conic_gradient_ffi(
 ) -> CanvasGradient = "(obj, start_angle, x, y) => obj.createConicGradient(start_angle, x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.createConicGradient](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createConicGradient)
 impl TCanvasRenderingContext2D with create_conic_gradient(
   self : Self,
   start_angle : Double,
@@ -845,6 +878,7 @@ extern "js" fn canvas_rendering_context2d_create_pattern_ffi(
 ) -> JsValue = "(obj, image, repetition) => obj.createPattern(image, repetition)"
 
 ///|
+/// [CanvasRenderingContext2D.createPattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern)
 impl TCanvasRenderingContext2D with create_pattern(
   self : Self,
   image : CanvasImageSource,
@@ -868,6 +902,7 @@ extern "js" fn canvas_rendering_context2d_shadow_offset_x_ffi(
 ) -> Double = "(obj) => obj.shadowOffsetX"
 
 ///|
+/// [CanvasRenderingContext2D.shadowOffsetX](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetX)
 impl TCanvasRenderingContext2D with shadow_offset_x(self : Self) -> Double {
   canvas_rendering_context2d_shadow_offset_x_ffi(TJsValue::to_js(self))
 }
@@ -879,6 +914,7 @@ extern "js" fn canvas_rendering_context2d_set_shadow_offset_x_ffi(
 ) -> Unit = "(obj, shadowOffsetX) => { obj.shadowOffsetX = shadowOffsetX; }"
 
 ///|
+/// [CanvasRenderingContext2D.shadowOffsetX](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetX)
 impl TCanvasRenderingContext2D with set_shadow_offset_x(
   self : Self,
   shadow_offset_x : Double,
@@ -895,6 +931,7 @@ extern "js" fn canvas_rendering_context2d_shadow_offset_y_ffi(
 ) -> Double = "(obj) => obj.shadowOffsetY"
 
 ///|
+/// [CanvasRenderingContext2D.shadowOffsetY](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetY)
 impl TCanvasRenderingContext2D with shadow_offset_y(self : Self) -> Double {
   canvas_rendering_context2d_shadow_offset_y_ffi(TJsValue::to_js(self))
 }
@@ -906,6 +943,7 @@ extern "js" fn canvas_rendering_context2d_set_shadow_offset_y_ffi(
 ) -> Unit = "(obj, shadowOffsetY) => { obj.shadowOffsetY = shadowOffsetY; }"
 
 ///|
+/// [CanvasRenderingContext2D.shadowOffsetY](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetY)
 impl TCanvasRenderingContext2D with set_shadow_offset_y(
   self : Self,
   shadow_offset_y : Double,
@@ -922,6 +960,7 @@ extern "js" fn canvas_rendering_context2d_shadow_blur_ffi(
 ) -> Double = "(obj) => obj.shadowBlur"
 
 ///|
+/// [CanvasRenderingContext2D.shadowBlur](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowBlur)
 impl TCanvasRenderingContext2D with shadow_blur(self : Self) -> Double {
   canvas_rendering_context2d_shadow_blur_ffi(TJsValue::to_js(self))
 }
@@ -933,6 +972,7 @@ extern "js" fn canvas_rendering_context2d_set_shadow_blur_ffi(
 ) -> Unit = "(obj, shadowBlur) => { obj.shadowBlur = shadowBlur; }"
 
 ///|
+/// [CanvasRenderingContext2D.shadowBlur](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowBlur)
 impl TCanvasRenderingContext2D with set_shadow_blur(
   self : Self,
   shadow_blur : Double,
@@ -949,6 +989,7 @@ extern "js" fn canvas_rendering_context2d_shadow_color_ffi(
 ) -> String = "(obj) => obj.shadowColor"
 
 ///|
+/// [CanvasRenderingContext2D.shadowColor](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowColor)
 impl TCanvasRenderingContext2D with shadow_color(self : Self) -> String {
   canvas_rendering_context2d_shadow_color_ffi(TJsValue::to_js(self))
 }
@@ -960,6 +1001,7 @@ extern "js" fn canvas_rendering_context2d_set_shadow_color_ffi(
 ) -> Unit = "(obj, shadowColor) => { obj.shadowColor = shadowColor; }"
 
 ///|
+/// [CanvasRenderingContext2D.shadowColor](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowColor)
 impl TCanvasRenderingContext2D with set_shadow_color(
   self : Self,
   shadow_color : String,
@@ -974,6 +1016,7 @@ impl TCanvasRenderingContext2D with set_shadow_color(
 extern "js" fn canvas_rendering_context2d_filter_ffi(obj : JsValue) -> String = "(obj) => obj.filter"
 
 ///|
+/// [CanvasRenderingContext2D.filter](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter)
 impl TCanvasRenderingContext2D with filter(self : Self) -> String {
   canvas_rendering_context2d_filter_ffi(TJsValue::to_js(self))
 }
@@ -985,6 +1028,7 @@ extern "js" fn canvas_rendering_context2d_set_filter_ffi(
 ) -> Unit = "(obj, filter) => { obj.filter = filter; }"
 
 ///|
+/// [CanvasRenderingContext2D.filter](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter)
 impl TCanvasRenderingContext2D with set_filter(self : Self, filter : String) -> Unit {
   canvas_rendering_context2d_set_filter_ffi(
     TJsValue::to_js(self),
@@ -1002,6 +1046,7 @@ extern "js" fn canvas_rendering_context2d_clear_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.clearRect(x, y, w, h)"
 
 ///|
+/// [CanvasRenderingContext2D.clearRect](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect)
 impl TCanvasRenderingContext2D with clear_rect(
   self : Self,
   x : Double,
@@ -1028,6 +1073,7 @@ extern "js" fn canvas_rendering_context2d_fill_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.fillRect(x, y, w, h)"
 
 ///|
+/// [CanvasRenderingContext2D.fillRect](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect)
 impl TCanvasRenderingContext2D with fill_rect(
   self : Self,
   x : Double,
@@ -1054,6 +1100,7 @@ extern "js" fn canvas_rendering_context2d_stroke_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.strokeRect(x, y, w, h)"
 
 ///|
+/// [CanvasRenderingContext2D.strokeRect](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect)
 impl TCanvasRenderingContext2D with stroke_rect(
   self : Self,
   x : Double,
@@ -1074,6 +1121,7 @@ impl TCanvasRenderingContext2D with stroke_rect(
 extern "js" fn canvas_rendering_context2d_begin_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.beginPath()"
 
 ///|
+/// [CanvasRenderingContext2D.beginPath](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath)
 impl TCanvasRenderingContext2D with begin_path(self : Self) -> Unit {
   canvas_rendering_context2d_begin_path_ffi(TJsValue::to_js(self))
 }
@@ -1085,6 +1133,7 @@ extern "js" fn canvas_rendering_context2d_fill_ffi(
 ) -> Unit = "(obj, fill_rule) => obj.fill(fill_rule)"
 
 ///|
+/// [CanvasRenderingContext2D.fill](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill)
 impl TCanvasRenderingContext2D with fill(
   self : Self,
   fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
@@ -1103,6 +1152,7 @@ extern "js" fn canvas_rendering_context2d_fill_2_ffi(
 ) -> Unit = "(obj, path, fill_rule) => obj.fill_2(path, fill_rule)"
 
 ///|
+/// [CanvasRenderingContext2D.fill_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill_2)
 impl TCanvasRenderingContext2D with fill_2(
   self : Self,
   path : &TPath2D,
@@ -1119,6 +1169,7 @@ impl TCanvasRenderingContext2D with fill_2(
 extern "js" fn canvas_rendering_context2d_stroke_ffi(obj : JsValue) -> Unit = "(obj) => obj.stroke()"
 
 ///|
+/// [CanvasRenderingContext2D.stroke](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke)
 impl TCanvasRenderingContext2D with stroke(self : Self) -> Unit {
   canvas_rendering_context2d_stroke_ffi(TJsValue::to_js(self))
 }
@@ -1130,6 +1181,7 @@ extern "js" fn canvas_rendering_context2d_stroke_2_ffi(
 ) -> Unit = "(obj, path) => obj.stroke_2(path)"
 
 ///|
+/// [CanvasRenderingContext2D.stroke_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke_2)
 impl TCanvasRenderingContext2D with stroke_2(self : Self, path : &TPath2D) -> Unit {
   canvas_rendering_context2d_stroke_2_ffi(
     TJsValue::to_js(self),
@@ -1144,6 +1196,7 @@ extern "js" fn canvas_rendering_context2d_clip_ffi(
 ) -> Unit = "(obj, fill_rule) => obj.clip(fill_rule)"
 
 ///|
+/// [CanvasRenderingContext2D.clip](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
 impl TCanvasRenderingContext2D with clip(
   self : Self,
   fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
@@ -1162,6 +1215,7 @@ extern "js" fn canvas_rendering_context2d_clip_2_ffi(
 ) -> Unit = "(obj, path, fill_rule) => obj.clip_2(path, fill_rule)"
 
 ///|
+/// [CanvasRenderingContext2D.clip_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip_2)
 impl TCanvasRenderingContext2D with clip_2(
   self : Self,
   path : &TPath2D,
@@ -1183,6 +1237,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_path_ffi(
 ) -> Bool = "(obj, x, y, fill_rule) => obj.isPointInPath(x, y, fill_rule)"
 
 ///|
+/// [CanvasRenderingContext2D.isPointInPath](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath)
 impl TCanvasRenderingContext2D with is_point_in_path(
   self : Self,
   x : Double,
@@ -1207,6 +1262,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_path_2_ffi(
 ) -> Bool = "(obj, path, x, y, fill_rule) => obj.isPointInPath_2(path, x, y, fill_rule)"
 
 ///|
+/// [CanvasRenderingContext2D.isPointInPath_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath_2)
 impl TCanvasRenderingContext2D with is_point_in_path_2(
   self : Self,
   path : &TPath2D,
@@ -1231,6 +1287,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_stroke_ffi(
 ) -> Bool = "(obj, x, y) => obj.isPointInStroke(x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.isPointInStroke](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke)
 impl TCanvasRenderingContext2D with is_point_in_stroke(
   self : Self,
   x : Double,
@@ -1252,6 +1309,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_stroke_2_ffi(
 ) -> Bool = "(obj, path, x, y) => obj.isPointInStroke_2(path, x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.isPointInStroke_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke_2)
 impl TCanvasRenderingContext2D with is_point_in_stroke_2(
   self : Self,
   path : &TPath2D,
@@ -1273,6 +1331,7 @@ extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_ffi(
 ) -> Unit = "(obj, element) => obj.drawFocusIfNeeded(element)"
 
 ///|
+/// [CanvasRenderingContext2D.drawFocusIfNeeded](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawFocusIfNeeded)
 impl TCanvasRenderingContext2D with draw_focus_if_needed(
   self : Self,
   element : &TElement,
@@ -1291,6 +1350,7 @@ extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_2_ffi(
 ) -> Unit = "(obj, path, element) => obj.drawFocusIfNeeded_2(path, element)"
 
 ///|
+/// [CanvasRenderingContext2D.drawFocusIfNeeded_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawFocusIfNeeded_2)
 impl TCanvasRenderingContext2D with draw_focus_if_needed_2(
   self : Self,
   path : &TPath2D,
@@ -1313,6 +1373,7 @@ extern "js" fn canvas_rendering_context2d_fill_text_ffi(
 ) -> Unit = "(obj, text, x, y, max_width) => obj.fillText(text, x, y, max_width)"
 
 ///|
+/// [CanvasRenderingContext2D.fillText](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText)
 impl TCanvasRenderingContext2D with fill_text(
   self : Self,
   text : String,
@@ -1339,6 +1400,7 @@ extern "js" fn canvas_rendering_context2d_stroke_text_ffi(
 ) -> Unit = "(obj, text, x, y, max_width) => obj.strokeText(text, x, y, max_width)"
 
 ///|
+/// [CanvasRenderingContext2D.strokeText](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText)
 impl TCanvasRenderingContext2D with stroke_text(
   self : Self,
   text : String,
@@ -1362,6 +1424,7 @@ extern "js" fn canvas_rendering_context2d_measure_text_ffi(
 ) -> TextMetrics = "(obj, text) => obj.measureText(text)"
 
 ///|
+/// [CanvasRenderingContext2D.measureText](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText)
 impl TCanvasRenderingContext2D with measure_text(self : Self, text : String) -> TextMetrics {
   canvas_rendering_context2d_measure_text_ffi(
     TJsValue::to_js(self),
@@ -1378,6 +1441,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_ffi(
 ) -> Unit = "(obj, image, dx, dy) => obj.drawImage(image, dx, dy)"
 
 ///|
+/// [CanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
 impl TCanvasRenderingContext2D with draw_image(
   self : Self,
   image : CanvasImageSource,
@@ -1403,6 +1467,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_2_ffi(
 ) -> Unit = "(obj, image, dx, dy, dw, dh) => obj.drawImage_2(image, dx, dy, dw, dh)"
 
 ///|
+/// [CanvasRenderingContext2D.drawImage_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage_2)
 impl TCanvasRenderingContext2D with draw_image_2(
   self : Self,
   image : CanvasImageSource,
@@ -1436,6 +1501,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_3_ffi(
 ) -> Unit = "(obj, image, sx, sy, sw, sh, dx, dy, dw, dh) => obj.drawImage_3(image, sx, sy, sw, sh, dx, dy, dw, dh)"
 
 ///|
+/// [CanvasRenderingContext2D.drawImage_3](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage_3)
 impl TCanvasRenderingContext2D with draw_image_3(
   self : Self,
   image : CanvasImageSource,
@@ -1471,6 +1537,7 @@ extern "js" fn canvas_rendering_context2d_create_image_data_ffi(
 ) -> ImageData = "(obj, sw, sh, settings) => obj.createImageData(sw, sh, settings)"
 
 ///|
+/// [CanvasRenderingContext2D.createImageData](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData)
 impl TCanvasRenderingContext2D with create_image_data(
   self : Self,
   sw : Int,
@@ -1492,6 +1559,7 @@ extern "js" fn canvas_rendering_context2d_create_image_data_2_ffi(
 ) -> ImageData = "(obj, image_data) => obj.createImageData_2(image_data)"
 
 ///|
+/// [CanvasRenderingContext2D.createImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData_2)
 impl TCanvasRenderingContext2D with create_image_data_2(
   self : Self,
   image_data : &TImageData,
@@ -1513,6 +1581,7 @@ extern "js" fn canvas_rendering_context2d_get_image_data_ffi(
 ) -> ImageData = "(obj, sx, sy, sw, sh, settings) => obj.getImageData(sx, sy, sw, sh, settings)"
 
 ///|
+/// [CanvasRenderingContext2D.getImageData](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData)
 impl TCanvasRenderingContext2D with get_image_data(
   self : Self,
   sx : Int,
@@ -1540,6 +1609,7 @@ extern "js" fn canvas_rendering_context2d_put_image_data_ffi(
 ) -> Unit = "(obj, image_data, dx, dy) => obj.putImageData(image_data, dx, dy)"
 
 ///|
+/// [CanvasRenderingContext2D.putImageData](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData)
 impl TCanvasRenderingContext2D with put_image_data(
   self : Self,
   image_data : &TImageData,
@@ -1567,6 +1637,7 @@ extern "js" fn canvas_rendering_context2d_put_image_data_2_ffi(
 ) -> Unit = "(obj, image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height) => obj.putImageData_2(image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height)"
 
 ///|
+/// [CanvasRenderingContext2D.putImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData_2)
 impl TCanvasRenderingContext2D with put_image_data_2(
   self : Self,
   image_data : &TImageData,
@@ -1595,6 +1666,7 @@ extern "js" fn canvas_rendering_context2d_line_width_ffi(
 ) -> Double = "(obj) => obj.lineWidth"
 
 ///|
+/// [CanvasRenderingContext2D.lineWidth](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth)
 impl TCanvasRenderingContext2D with line_width(self : Self) -> Double {
   canvas_rendering_context2d_line_width_ffi(TJsValue::to_js(self))
 }
@@ -1606,6 +1678,7 @@ extern "js" fn canvas_rendering_context2d_set_line_width_ffi(
 ) -> Unit = "(obj, lineWidth) => { obj.lineWidth = lineWidth; }"
 
 ///|
+/// [CanvasRenderingContext2D.lineWidth](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth)
 impl TCanvasRenderingContext2D with set_line_width(
   self : Self,
   line_width : Double,
@@ -1622,6 +1695,7 @@ extern "js" fn canvas_rendering_context2d_line_cap_ffi(
 ) -> CanvasLineCap = "(obj) => obj.lineCap"
 
 ///|
+/// [CanvasRenderingContext2D.lineCap](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap)
 impl TCanvasRenderingContext2D with line_cap(self : Self) -> CanvasLineCap {
   canvas_rendering_context2d_line_cap_ffi(TJsValue::to_js(self))
 }
@@ -1633,6 +1707,7 @@ extern "js" fn canvas_rendering_context2d_set_line_cap_ffi(
 ) -> Unit = "(obj, lineCap) => { obj.lineCap = lineCap; }"
 
 ///|
+/// [CanvasRenderingContext2D.lineCap](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap)
 impl TCanvasRenderingContext2D with set_line_cap(
   self : Self,
   line_cap : CanvasLineCap,
@@ -1649,6 +1724,7 @@ extern "js" fn canvas_rendering_context2d_line_join_ffi(
 ) -> CanvasLineJoin = "(obj) => obj.lineJoin"
 
 ///|
+/// [CanvasRenderingContext2D.lineJoin](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin)
 impl TCanvasRenderingContext2D with line_join(self : Self) -> CanvasLineJoin {
   canvas_rendering_context2d_line_join_ffi(TJsValue::to_js(self))
 }
@@ -1660,6 +1736,7 @@ extern "js" fn canvas_rendering_context2d_set_line_join_ffi(
 ) -> Unit = "(obj, lineJoin) => { obj.lineJoin = lineJoin; }"
 
 ///|
+/// [CanvasRenderingContext2D.lineJoin](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin)
 impl TCanvasRenderingContext2D with set_line_join(
   self : Self,
   line_join : CanvasLineJoin,
@@ -1676,6 +1753,7 @@ extern "js" fn canvas_rendering_context2d_miter_limit_ffi(
 ) -> Double = "(obj) => obj.miterLimit"
 
 ///|
+/// [CanvasRenderingContext2D.miterLimit](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit)
 impl TCanvasRenderingContext2D with miter_limit(self : Self) -> Double {
   canvas_rendering_context2d_miter_limit_ffi(TJsValue::to_js(self))
 }
@@ -1687,6 +1765,7 @@ extern "js" fn canvas_rendering_context2d_set_miter_limit_ffi(
 ) -> Unit = "(obj, miterLimit) => { obj.miterLimit = miterLimit; }"
 
 ///|
+/// [CanvasRenderingContext2D.miterLimit](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit)
 impl TCanvasRenderingContext2D with set_miter_limit(
   self : Self,
   miter_limit : Double,
@@ -1704,6 +1783,7 @@ extern "js" fn canvas_rendering_context2d_set_line_dash_ffi(
 ) -> Unit = "(obj, segments) => obj.setLineDash(segments)"
 
 ///|
+/// [CanvasRenderingContext2D.setLineDash](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash)
 impl TCanvasRenderingContext2D with set_line_dash(
   self : Self,
   segments : Array[Double],
@@ -1720,6 +1800,7 @@ extern "js" fn canvas_rendering_context2d_get_line_dash_ffi(
 ) -> Array[Double] = "(obj) => obj.getLineDash()"
 
 ///|
+/// [CanvasRenderingContext2D.getLineDash](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash)
 impl TCanvasRenderingContext2D with get_line_dash(self : Self) -> Array[Double] {
   canvas_rendering_context2d_get_line_dash_ffi(TJsValue::to_js(self))
 }
@@ -1730,6 +1811,7 @@ extern "js" fn canvas_rendering_context2d_line_dash_offset_ffi(
 ) -> Double = "(obj) => obj.lineDashOffset"
 
 ///|
+/// [CanvasRenderingContext2D.lineDashOffset](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)
 impl TCanvasRenderingContext2D with line_dash_offset(self : Self) -> Double {
   canvas_rendering_context2d_line_dash_offset_ffi(TJsValue::to_js(self))
 }
@@ -1741,6 +1823,7 @@ extern "js" fn canvas_rendering_context2d_set_line_dash_offset_ffi(
 ) -> Unit = "(obj, lineDashOffset) => { obj.lineDashOffset = lineDashOffset; }"
 
 ///|
+/// [CanvasRenderingContext2D.lineDashOffset](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)
 impl TCanvasRenderingContext2D with set_line_dash_offset(
   self : Self,
   line_dash_offset : Double,
@@ -1755,6 +1838,7 @@ impl TCanvasRenderingContext2D with set_line_dash_offset(
 extern "js" fn canvas_rendering_context2d_lang_ffi(obj : JsValue) -> String = "(obj) => obj.lang"
 
 ///|
+/// [CanvasRenderingContext2D.lang](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lang)
 impl TCanvasRenderingContext2D with lang(self : Self) -> String {
   canvas_rendering_context2d_lang_ffi(TJsValue::to_js(self))
 }
@@ -1766,6 +1850,7 @@ extern "js" fn canvas_rendering_context2d_set_lang_ffi(
 ) -> Unit = "(obj, lang) => { obj.lang = lang; }"
 
 ///|
+/// [CanvasRenderingContext2D.lang](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lang)
 impl TCanvasRenderingContext2D with set_lang(self : Self, lang : String) -> Unit {
   canvas_rendering_context2d_set_lang_ffi(
     TJsValue::to_js(self),
@@ -1777,6 +1862,7 @@ impl TCanvasRenderingContext2D with set_lang(self : Self, lang : String) -> Unit
 extern "js" fn canvas_rendering_context2d_font_ffi(obj : JsValue) -> String = "(obj) => obj.font"
 
 ///|
+/// [CanvasRenderingContext2D.font](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font)
 impl TCanvasRenderingContext2D with font(self : Self) -> String {
   canvas_rendering_context2d_font_ffi(TJsValue::to_js(self))
 }
@@ -1788,6 +1874,7 @@ extern "js" fn canvas_rendering_context2d_set_font_ffi(
 ) -> Unit = "(obj, font) => { obj.font = font; }"
 
 ///|
+/// [CanvasRenderingContext2D.font](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font)
 impl TCanvasRenderingContext2D with set_font(self : Self, font : String) -> Unit {
   canvas_rendering_context2d_set_font_ffi(
     TJsValue::to_js(self),
@@ -1801,6 +1888,7 @@ extern "js" fn canvas_rendering_context2d_text_align_ffi(
 ) -> CanvasTextAlign = "(obj) => obj.textAlign"
 
 ///|
+/// [CanvasRenderingContext2D.textAlign](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textAlign)
 impl TCanvasRenderingContext2D with text_align(self : Self) -> CanvasTextAlign {
   canvas_rendering_context2d_text_align_ffi(TJsValue::to_js(self))
 }
@@ -1812,6 +1900,7 @@ extern "js" fn canvas_rendering_context2d_set_text_align_ffi(
 ) -> Unit = "(obj, textAlign) => { obj.textAlign = textAlign; }"
 
 ///|
+/// [CanvasRenderingContext2D.textAlign](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textAlign)
 impl TCanvasRenderingContext2D with set_text_align(
   self : Self,
   text_align : CanvasTextAlign,
@@ -1828,6 +1917,7 @@ extern "js" fn canvas_rendering_context2d_text_baseline_ffi(
 ) -> CanvasTextBaseline = "(obj) => obj.textBaseline"
 
 ///|
+/// [CanvasRenderingContext2D.textBaseline](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textBaseline)
 impl TCanvasRenderingContext2D with text_baseline(self : Self) -> CanvasTextBaseline {
   canvas_rendering_context2d_text_baseline_ffi(TJsValue::to_js(self))
 }
@@ -1839,6 +1929,7 @@ extern "js" fn canvas_rendering_context2d_set_text_baseline_ffi(
 ) -> Unit = "(obj, textBaseline) => { obj.textBaseline = textBaseline; }"
 
 ///|
+/// [CanvasRenderingContext2D.textBaseline](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textBaseline)
 impl TCanvasRenderingContext2D with set_text_baseline(
   self : Self,
   text_baseline : CanvasTextBaseline,
@@ -1855,6 +1946,7 @@ extern "js" fn canvas_rendering_context2d_direction_ffi(
 ) -> CanvasDirection = "(obj) => obj.direction"
 
 ///|
+/// [CanvasRenderingContext2D.direction](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/direction)
 impl TCanvasRenderingContext2D with direction(self : Self) -> CanvasDirection {
   canvas_rendering_context2d_direction_ffi(TJsValue::to_js(self))
 }
@@ -1866,6 +1958,7 @@ extern "js" fn canvas_rendering_context2d_set_direction_ffi(
 ) -> Unit = "(obj, direction) => { obj.direction = direction; }"
 
 ///|
+/// [CanvasRenderingContext2D.direction](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/direction)
 impl TCanvasRenderingContext2D with set_direction(
   self : Self,
   direction : CanvasDirection,
@@ -1882,6 +1975,7 @@ extern "js" fn canvas_rendering_context2d_letter_spacing_ffi(
 ) -> String = "(obj) => obj.letterSpacing"
 
 ///|
+/// [CanvasRenderingContext2D.letterSpacing](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/letterSpacing)
 impl TCanvasRenderingContext2D with letter_spacing(self : Self) -> String {
   canvas_rendering_context2d_letter_spacing_ffi(TJsValue::to_js(self))
 }
@@ -1893,6 +1987,7 @@ extern "js" fn canvas_rendering_context2d_set_letter_spacing_ffi(
 ) -> Unit = "(obj, letterSpacing) => { obj.letterSpacing = letterSpacing; }"
 
 ///|
+/// [CanvasRenderingContext2D.letterSpacing](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/letterSpacing)
 impl TCanvasRenderingContext2D with set_letter_spacing(
   self : Self,
   letter_spacing : String,
@@ -1909,6 +2004,7 @@ extern "js" fn canvas_rendering_context2d_font_kerning_ffi(
 ) -> CanvasFontKerning = "(obj) => obj.fontKerning"
 
 ///|
+/// [CanvasRenderingContext2D.fontKerning](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fontKerning)
 impl TCanvasRenderingContext2D with font_kerning(self : Self) -> CanvasFontKerning {
   canvas_rendering_context2d_font_kerning_ffi(TJsValue::to_js(self))
 }
@@ -1920,6 +2016,7 @@ extern "js" fn canvas_rendering_context2d_set_font_kerning_ffi(
 ) -> Unit = "(obj, fontKerning) => { obj.fontKerning = fontKerning; }"
 
 ///|
+/// [CanvasRenderingContext2D.fontKerning](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fontKerning)
 impl TCanvasRenderingContext2D with set_font_kerning(
   self : Self,
   font_kerning : CanvasFontKerning,
@@ -1936,6 +2033,7 @@ extern "js" fn canvas_rendering_context2d_font_stretch_ffi(
 ) -> CanvasFontStretch = "(obj) => obj.fontStretch"
 
 ///|
+/// [CanvasRenderingContext2D.fontStretch](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fontStretch)
 impl TCanvasRenderingContext2D with font_stretch(self : Self) -> CanvasFontStretch {
   canvas_rendering_context2d_font_stretch_ffi(TJsValue::to_js(self))
 }
@@ -1947,6 +2045,7 @@ extern "js" fn canvas_rendering_context2d_set_font_stretch_ffi(
 ) -> Unit = "(obj, fontStretch) => { obj.fontStretch = fontStretch; }"
 
 ///|
+/// [CanvasRenderingContext2D.fontStretch](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fontStretch)
 impl TCanvasRenderingContext2D with set_font_stretch(
   self : Self,
   font_stretch : CanvasFontStretch,
@@ -1963,6 +2062,7 @@ extern "js" fn canvas_rendering_context2d_font_variant_caps_ffi(
 ) -> CanvasFontVariantCaps = "(obj) => obj.fontVariantCaps"
 
 ///|
+/// [CanvasRenderingContext2D.fontVariantCaps](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fontVariantCaps)
 impl TCanvasRenderingContext2D with font_variant_caps(self : Self) -> CanvasFontVariantCaps {
   canvas_rendering_context2d_font_variant_caps_ffi(TJsValue::to_js(self))
 }
@@ -1974,6 +2074,7 @@ extern "js" fn canvas_rendering_context2d_set_font_variant_caps_ffi(
 ) -> Unit = "(obj, fontVariantCaps) => { obj.fontVariantCaps = fontVariantCaps; }"
 
 ///|
+/// [CanvasRenderingContext2D.fontVariantCaps](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fontVariantCaps)
 impl TCanvasRenderingContext2D with set_font_variant_caps(
   self : Self,
   font_variant_caps : CanvasFontVariantCaps,
@@ -1990,6 +2091,7 @@ extern "js" fn canvas_rendering_context2d_text_rendering_ffi(
 ) -> CanvasTextRendering = "(obj) => obj.textRendering"
 
 ///|
+/// [CanvasRenderingContext2D.textRendering](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textRendering)
 impl TCanvasRenderingContext2D with text_rendering(self : Self) -> CanvasTextRendering {
   canvas_rendering_context2d_text_rendering_ffi(TJsValue::to_js(self))
 }
@@ -2001,6 +2103,7 @@ extern "js" fn canvas_rendering_context2d_set_text_rendering_ffi(
 ) -> Unit = "(obj, textRendering) => { obj.textRendering = textRendering; }"
 
 ///|
+/// [CanvasRenderingContext2D.textRendering](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textRendering)
 impl TCanvasRenderingContext2D with set_text_rendering(
   self : Self,
   text_rendering : CanvasTextRendering,
@@ -2017,6 +2120,7 @@ extern "js" fn canvas_rendering_context2d_word_spacing_ffi(
 ) -> String = "(obj) => obj.wordSpacing"
 
 ///|
+/// [CanvasRenderingContext2D.wordSpacing](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/wordSpacing)
 impl TCanvasRenderingContext2D with word_spacing(self : Self) -> String {
   canvas_rendering_context2d_word_spacing_ffi(TJsValue::to_js(self))
 }
@@ -2028,6 +2132,7 @@ extern "js" fn canvas_rendering_context2d_set_word_spacing_ffi(
 ) -> Unit = "(obj, wordSpacing) => { obj.wordSpacing = wordSpacing; }"
 
 ///|
+/// [CanvasRenderingContext2D.wordSpacing](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/wordSpacing)
 impl TCanvasRenderingContext2D with set_word_spacing(
   self : Self,
   word_spacing : String,
@@ -2042,6 +2147,7 @@ impl TCanvasRenderingContext2D with set_word_spacing(
 extern "js" fn canvas_rendering_context2d_close_path_ffi(obj : JsValue) -> Unit = "(obj) => obj.closePath()"
 
 ///|
+/// [CanvasRenderingContext2D.closePath](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/closePath)
 impl TCanvasRenderingContext2D with close_path(self : Self) -> Unit {
   canvas_rendering_context2d_close_path_ffi(TJsValue::to_js(self))
 }
@@ -2054,6 +2160,7 @@ extern "js" fn canvas_rendering_context2d_move_to_ffi(
 ) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.moveTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo)
 impl TCanvasRenderingContext2D with move_to(self : Self, x : Double, y : Double) -> Unit {
   canvas_rendering_context2d_move_to_ffi(
     TJsValue::to_js(self),
@@ -2070,6 +2177,7 @@ extern "js" fn canvas_rendering_context2d_line_to_ffi(
 ) -> Unit = "(obj, x, y) => obj.lineTo(x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.lineTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo)
 impl TCanvasRenderingContext2D with line_to(self : Self, x : Double, y : Double) -> Unit {
   canvas_rendering_context2d_line_to_ffi(
     TJsValue::to_js(self),
@@ -2088,6 +2196,7 @@ extern "js" fn canvas_rendering_context2d_quadratic_curve_to_ffi(
 ) -> Unit = "(obj, cpx, cpy, x, y) => obj.quadraticCurveTo(cpx, cpy, x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.quadraticCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo)
 impl TCanvasRenderingContext2D with quadratic_curve_to(
   self : Self,
   cpx : Double,
@@ -2116,6 +2225,7 @@ extern "js" fn canvas_rendering_context2d_bezier_curve_to_ffi(
 ) -> Unit = "(obj, cp1x, cp1y, cp2x, cp2y, x, y) => obj.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)"
 
 ///|
+/// [CanvasRenderingContext2D.bezierCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo)
 impl TCanvasRenderingContext2D with bezier_curve_to(
   self : Self,
   cp1x : Double,
@@ -2147,6 +2257,7 @@ extern "js" fn canvas_rendering_context2d_arc_to_ffi(
 ) -> Unit = "(obj, x1, y1, x2, y2, radius) => obj.arcTo(x1, y1, x2, y2, radius)"
 
 ///|
+/// [CanvasRenderingContext2D.arcTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arcTo)
 impl TCanvasRenderingContext2D with arc_to(
   self : Self,
   x1 : Double,
@@ -2175,6 +2286,7 @@ extern "js" fn canvas_rendering_context2d_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h) => obj.rect(x, y, w, h)"
 
 ///|
+/// [CanvasRenderingContext2D.rect](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rect)
 impl TCanvasRenderingContext2D with rect(
   self : Self,
   x : Double,
@@ -2202,6 +2314,7 @@ extern "js" fn canvas_rendering_context2d_round_rect_ffi(
 ) -> Unit = "(obj, x, y, w, h, radii) => obj.roundRect(x, y, w, h, radii)"
 
 ///|
+/// [CanvasRenderingContext2D.roundRect](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/roundRect)
 impl TCanvasRenderingContext2D with round_rect(
   self : Self,
   x : Double,
@@ -2232,6 +2345,7 @@ extern "js" fn canvas_rendering_context2d_arc_ffi(
 ) -> Unit = "(obj, x, y, radius, start_angle, end_angle, counterclockwise) => obj.arc(x, y, radius, start_angle, end_angle, counterclockwise)"
 
 ///|
+/// [CanvasRenderingContext2D.arc](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc)
 impl TCanvasRenderingContext2D with arc(
   self : Self,
   x : Double,
@@ -2266,6 +2380,7 @@ extern "js" fn canvas_rendering_context2d_ellipse_ffi(
 ) -> Unit = "(obj, x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise) => obj.ellipse(x, y, radius_x, radius_y, rotation, start_angle, end_angle, counterclockwise)"
 
 ///|
+/// [CanvasRenderingContext2D.ellipse](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse)
 impl TCanvasRenderingContext2D with ellipse(
   self : Self,
   x : Double,

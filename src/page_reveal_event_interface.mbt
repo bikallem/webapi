@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [PageRevealEvent](https://developer.mozilla.org/en-US/docs/Web/API/PageRevealEvent)
 #external
 pub type PageRevealEvent
 
@@ -36,6 +37,7 @@ pub fn PageRevealEvent::new(
 }
 
 ///|
+/// [PageRevealEvent](https://developer.mozilla.org/en-US/docs/Web/API/PageRevealEvent) interface.
 pub trait TPageRevealEvent: TEvent {
   view_transition(self : Self) -> ViewTransition = _
 }
@@ -46,6 +48,7 @@ extern "js" fn page_reveal_event_view_transition_ffi(
 ) -> ViewTransition = "(obj) => obj.viewTransition"
 
 ///|
+/// [PageRevealEvent.viewTransition](https://developer.mozilla.org/en-US/docs/Web/API/PageRevealEvent/viewTransition)
 impl TPageRevealEvent with view_transition(self : Self) -> ViewTransition {
   page_reveal_event_view_transition_ffi(TJsValue::to_js(self))
 }

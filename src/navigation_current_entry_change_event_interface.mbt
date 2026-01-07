@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationCurrentEntryChangeEvent](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent)
 #external
 pub type NavigationCurrentEntryChangeEvent
 
@@ -40,6 +41,7 @@ pub fn NavigationCurrentEntryChangeEvent::new(
 }
 
 ///|
+/// [NavigationCurrentEntryChangeEvent](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent) interface.
 pub trait TNavigationCurrentEntryChangeEvent: TEvent {
   navigation_type(self : Self) -> NavigationType = _
   from(self : Self) -> NavigationHistoryEntry = _
@@ -51,6 +53,7 @@ extern "js" fn navigation_current_entry_change_event_navigation_type_ffi(
 ) -> NavigationType = "(obj) => obj.navigationType"
 
 ///|
+/// [NavigationCurrentEntryChangeEvent.navigationType](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent/navigationType)
 impl TNavigationCurrentEntryChangeEvent with navigation_type(self : Self) -> NavigationType {
   navigation_current_entry_change_event_navigation_type_ffi(
     TJsValue::to_js(self),
@@ -63,6 +66,7 @@ extern "js" fn navigation_current_entry_change_event_from_ffi(
 ) -> NavigationHistoryEntry = "(obj) => obj.from"
 
 ///|
+/// [NavigationCurrentEntryChangeEvent.from](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent/from)
 impl TNavigationCurrentEntryChangeEvent with from(self : Self) -> NavigationHistoryEntry {
   navigation_current_entry_change_event_from_ffi(TJsValue::to_js(self))
 }

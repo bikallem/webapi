@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSPageDescriptors](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors)
 #external
 pub type CSSPageDescriptors
 
@@ -21,6 +22,7 @@ pub impl TCSSPageDescriptors for CSSPageDescriptors
 pub impl TCSSStyleDeclaration for CSSPageDescriptors
 
 ///|
+/// [CSSPageDescriptors](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors) interface.
 pub trait TCSSPageDescriptors: TCSSStyleDeclaration {
   margin(self : Self) -> CSSOMString = _
   set_margin(self : Self, margin : CSSOMString) -> Unit = _
@@ -46,6 +48,7 @@ pub trait TCSSPageDescriptors: TCSSStyleDeclaration {
 extern "js" fn css_page_descriptors_margin_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.margin"
 
 ///|
+/// [CSSPageDescriptors.margin](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/margin)
 impl TCSSPageDescriptors with margin(self : Self) -> CSSOMString {
   css_page_descriptors_margin_ffi(TJsValue::to_js(self))
 }
@@ -57,6 +60,7 @@ extern "js" fn css_page_descriptors_set_margin_ffi(
 ) -> Unit = "(obj, margin) => { obj.margin = margin; }"
 
 ///|
+/// [CSSPageDescriptors.margin](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/margin)
 impl TCSSPageDescriptors with set_margin(self : Self, margin : CSSOMString) -> Unit {
   css_page_descriptors_set_margin_ffi(
     TJsValue::to_js(self),
@@ -70,6 +74,7 @@ extern "js" fn css_page_descriptors_margin_top_ffi(
 ) -> CSSOMString = "(obj) => obj.marginTop"
 
 ///|
+/// [CSSPageDescriptors.marginTop](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginTop)
 impl TCSSPageDescriptors with margin_top(self : Self) -> CSSOMString {
   css_page_descriptors_margin_top_ffi(TJsValue::to_js(self))
 }
@@ -81,6 +86,7 @@ extern "js" fn css_page_descriptors_set_margin_top_ffi(
 ) -> Unit = "(obj, marginTop) => { obj.marginTop = marginTop; }"
 
 ///|
+/// [CSSPageDescriptors.marginTop](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginTop)
 impl TCSSPageDescriptors with set_margin_top(
   self : Self,
   margin_top : CSSOMString,
@@ -97,6 +103,7 @@ extern "js" fn css_page_descriptors_margin_right_ffi(
 ) -> CSSOMString = "(obj) => obj.marginRight"
 
 ///|
+/// [CSSPageDescriptors.marginRight](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginRight)
 impl TCSSPageDescriptors with margin_right(self : Self) -> CSSOMString {
   css_page_descriptors_margin_right_ffi(TJsValue::to_js(self))
 }
@@ -108,6 +115,7 @@ extern "js" fn css_page_descriptors_set_margin_right_ffi(
 ) -> Unit = "(obj, marginRight) => { obj.marginRight = marginRight; }"
 
 ///|
+/// [CSSPageDescriptors.marginRight](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginRight)
 impl TCSSPageDescriptors with set_margin_right(
   self : Self,
   margin_right : CSSOMString,
@@ -124,6 +132,7 @@ extern "js" fn css_page_descriptors_margin_bottom_ffi(
 ) -> CSSOMString = "(obj) => obj.marginBottom"
 
 ///|
+/// [CSSPageDescriptors.marginBottom](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginBottom)
 impl TCSSPageDescriptors with margin_bottom(self : Self) -> CSSOMString {
   css_page_descriptors_margin_bottom_ffi(TJsValue::to_js(self))
 }
@@ -135,6 +144,7 @@ extern "js" fn css_page_descriptors_set_margin_bottom_ffi(
 ) -> Unit = "(obj, marginBottom) => { obj.marginBottom = marginBottom; }"
 
 ///|
+/// [CSSPageDescriptors.marginBottom](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginBottom)
 impl TCSSPageDescriptors with set_margin_bottom(
   self : Self,
   margin_bottom : CSSOMString,
@@ -151,6 +161,7 @@ extern "js" fn css_page_descriptors_margin_left_ffi(
 ) -> CSSOMString = "(obj) => obj.marginLeft"
 
 ///|
+/// [CSSPageDescriptors.marginLeft](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginLeft)
 impl TCSSPageDescriptors with margin_left(self : Self) -> CSSOMString {
   css_page_descriptors_margin_left_ffi(TJsValue::to_js(self))
 }
@@ -162,6 +173,7 @@ extern "js" fn css_page_descriptors_set_margin_left_ffi(
 ) -> Unit = "(obj, marginLeft) => { obj.marginLeft = marginLeft; }"
 
 ///|
+/// [CSSPageDescriptors.marginLeft](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marginLeft)
 impl TCSSPageDescriptors with set_margin_left(
   self : Self,
   margin_left : CSSOMString,
@@ -176,6 +188,7 @@ impl TCSSPageDescriptors with set_margin_left(
 extern "js" fn css_page_descriptors_size_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.size"
 
 ///|
+/// [CSSPageDescriptors.size](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/size)
 impl TCSSPageDescriptors with size(self : Self) -> CSSOMString {
   css_page_descriptors_size_ffi(TJsValue::to_js(self))
 }
@@ -187,6 +200,7 @@ extern "js" fn css_page_descriptors_set_size_ffi(
 ) -> Unit = "(obj, size) => { obj.size = size; }"
 
 ///|
+/// [CSSPageDescriptors.size](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/size)
 impl TCSSPageDescriptors with set_size(self : Self, size : CSSOMString) -> Unit {
   css_page_descriptors_set_size_ffi(
     TJsValue::to_js(self),
@@ -200,6 +214,7 @@ extern "js" fn css_page_descriptors_page_orientation_ffi(
 ) -> CSSOMString = "(obj) => obj.pageOrientation"
 
 ///|
+/// [CSSPageDescriptors.pageOrientation](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/pageOrientation)
 impl TCSSPageDescriptors with page_orientation(self : Self) -> CSSOMString {
   css_page_descriptors_page_orientation_ffi(TJsValue::to_js(self))
 }
@@ -211,6 +226,7 @@ extern "js" fn css_page_descriptors_set_page_orientation_ffi(
 ) -> Unit = "(obj, pageOrientation) => { obj.pageOrientation = pageOrientation; }"
 
 ///|
+/// [CSSPageDescriptors.pageOrientation](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/pageOrientation)
 impl TCSSPageDescriptors with set_page_orientation(
   self : Self,
   page_orientation : CSSOMString,
@@ -225,6 +241,7 @@ impl TCSSPageDescriptors with set_page_orientation(
 extern "js" fn css_page_descriptors_marks_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.marks"
 
 ///|
+/// [CSSPageDescriptors.marks](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marks)
 impl TCSSPageDescriptors with marks(self : Self) -> CSSOMString {
   css_page_descriptors_marks_ffi(TJsValue::to_js(self))
 }
@@ -236,6 +253,7 @@ extern "js" fn css_page_descriptors_set_marks_ffi(
 ) -> Unit = "(obj, marks) => { obj.marks = marks; }"
 
 ///|
+/// [CSSPageDescriptors.marks](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/marks)
 impl TCSSPageDescriptors with set_marks(self : Self, marks : CSSOMString) -> Unit {
   css_page_descriptors_set_marks_ffi(
     TJsValue::to_js(self),
@@ -247,6 +265,7 @@ impl TCSSPageDescriptors with set_marks(self : Self, marks : CSSOMString) -> Uni
 extern "js" fn css_page_descriptors_bleed_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.bleed"
 
 ///|
+/// [CSSPageDescriptors.bleed](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/bleed)
 impl TCSSPageDescriptors with bleed(self : Self) -> CSSOMString {
   css_page_descriptors_bleed_ffi(TJsValue::to_js(self))
 }
@@ -258,6 +277,7 @@ extern "js" fn css_page_descriptors_set_bleed_ffi(
 ) -> Unit = "(obj, bleed) => { obj.bleed = bleed; }"
 
 ///|
+/// [CSSPageDescriptors.bleed](https://developer.mozilla.org/en-US/docs/Web/API/CSSPageDescriptors/bleed)
 impl TCSSPageDescriptors with set_bleed(self : Self, bleed : CSSOMString) -> Unit {
   css_page_descriptors_set_bleed_ffi(
     TJsValue::to_js(self),

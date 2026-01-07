@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationNavigateOptions](https://developer.mozilla.org/en-US/docs/Web/API/NavigationNavigateOptions)
 #external
 pub type NavigationNavigateOptions
 

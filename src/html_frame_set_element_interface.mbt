@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLFrameSetElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement)
 #external
 pub type HTMLFrameSetElement
 
@@ -38,6 +39,7 @@ pub fn HTMLFrameSetElement::new() -> HTMLFrameSetElement {
 }
 
 ///|
+/// [HTMLFrameSetElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement) interface.
 pub trait THTMLFrameSetElement: THTMLElement {
   cols(self : Self) -> String = _
   set_cols(self : Self, cols : String) -> Unit = _
@@ -85,6 +87,7 @@ pub trait THTMLFrameSetElement: THTMLElement {
 extern "js" fn html_frame_set_element_cols_ffi(obj : JsValue) -> String = "(obj) => obj.cols"
 
 ///|
+/// [HTMLFrameSetElement.cols](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/cols)
 impl THTMLFrameSetElement with cols(self : Self) -> String {
   html_frame_set_element_cols_ffi(TJsValue::to_js(self))
 }
@@ -96,6 +99,7 @@ extern "js" fn html_frame_set_element_set_cols_ffi(
 ) -> Unit = "(obj, cols) => { obj.cols = cols; }"
 
 ///|
+/// [HTMLFrameSetElement.cols](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/cols)
 impl THTMLFrameSetElement with set_cols(self : Self, cols : String) -> Unit {
   html_frame_set_element_set_cols_ffi(
     TJsValue::to_js(self),
@@ -107,6 +111,7 @@ impl THTMLFrameSetElement with set_cols(self : Self, cols : String) -> Unit {
 extern "js" fn html_frame_set_element_rows_ffi(obj : JsValue) -> String = "(obj) => obj.rows"
 
 ///|
+/// [HTMLFrameSetElement.rows](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/rows)
 impl THTMLFrameSetElement with rows(self : Self) -> String {
   html_frame_set_element_rows_ffi(TJsValue::to_js(self))
 }
@@ -118,6 +123,7 @@ extern "js" fn html_frame_set_element_set_rows_ffi(
 ) -> Unit = "(obj, rows) => { obj.rows = rows; }"
 
 ///|
+/// [HTMLFrameSetElement.rows](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/rows)
 impl THTMLFrameSetElement with set_rows(self : Self, rows : String) -> Unit {
   html_frame_set_element_set_rows_ffi(
     TJsValue::to_js(self),
@@ -131,6 +137,7 @@ extern "js" fn html_frame_set_element_onafterprint_ffi(
 ) -> EventHandler = "(obj) => obj.onafterprint"
 
 ///|
+/// [HTMLFrameSetElement.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onafterprint)
 impl THTMLFrameSetElement with onafterprint(self : Self) -> EventHandler {
   html_frame_set_element_onafterprint_ffi(TJsValue::to_js(self))
 }
@@ -142,6 +149,7 @@ extern "js" fn html_frame_set_element_set_onafterprint_ffi(
 ) -> Unit = "(obj, onafterprint) => { obj.onafterprint = onafterprint; }"
 
 ///|
+/// [HTMLFrameSetElement.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onafterprint)
 impl THTMLFrameSetElement with set_onafterprint(
   self : Self,
   onafterprint : EventHandler,
@@ -158,6 +166,7 @@ extern "js" fn html_frame_set_element_onbeforeprint_ffi(
 ) -> EventHandler = "(obj) => obj.onbeforeprint"
 
 ///|
+/// [HTMLFrameSetElement.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onbeforeprint)
 impl THTMLFrameSetElement with onbeforeprint(self : Self) -> EventHandler {
   html_frame_set_element_onbeforeprint_ffi(TJsValue::to_js(self))
 }
@@ -169,6 +178,7 @@ extern "js" fn html_frame_set_element_set_onbeforeprint_ffi(
 ) -> Unit = "(obj, onbeforeprint) => { obj.onbeforeprint = onbeforeprint; }"
 
 ///|
+/// [HTMLFrameSetElement.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onbeforeprint)
 impl THTMLFrameSetElement with set_onbeforeprint(
   self : Self,
   onbeforeprint : EventHandler,
@@ -185,6 +195,7 @@ extern "js" fn html_frame_set_element_onbeforeunload_ffi(
 ) -> OnBeforeUnloadEventHandler = "(obj) => obj.onbeforeunload"
 
 ///|
+/// [HTMLFrameSetElement.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onbeforeunload)
 impl THTMLFrameSetElement with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler {
   html_frame_set_element_onbeforeunload_ffi(TJsValue::to_js(self))
 }
@@ -196,6 +207,7 @@ extern "js" fn html_frame_set_element_set_onbeforeunload_ffi(
 ) -> Unit = "(obj, onbeforeunload) => { obj.onbeforeunload = onbeforeunload; }"
 
 ///|
+/// [HTMLFrameSetElement.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onbeforeunload)
 impl THTMLFrameSetElement with set_onbeforeunload(
   self : Self,
   onbeforeunload : OnBeforeUnloadEventHandler,
@@ -212,6 +224,7 @@ extern "js" fn html_frame_set_element_onhashchange_ffi(
 ) -> EventHandler = "(obj) => obj.onhashchange"
 
 ///|
+/// [HTMLFrameSetElement.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onhashchange)
 impl THTMLFrameSetElement with onhashchange(self : Self) -> EventHandler {
   html_frame_set_element_onhashchange_ffi(TJsValue::to_js(self))
 }
@@ -223,6 +236,7 @@ extern "js" fn html_frame_set_element_set_onhashchange_ffi(
 ) -> Unit = "(obj, onhashchange) => { obj.onhashchange = onhashchange; }"
 
 ///|
+/// [HTMLFrameSetElement.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onhashchange)
 impl THTMLFrameSetElement with set_onhashchange(
   self : Self,
   onhashchange : EventHandler,
@@ -239,6 +253,7 @@ extern "js" fn html_frame_set_element_onlanguagechange_ffi(
 ) -> EventHandler = "(obj) => obj.onlanguagechange"
 
 ///|
+/// [HTMLFrameSetElement.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onlanguagechange)
 impl THTMLFrameSetElement with onlanguagechange(self : Self) -> EventHandler {
   html_frame_set_element_onlanguagechange_ffi(TJsValue::to_js(self))
 }
@@ -250,6 +265,7 @@ extern "js" fn html_frame_set_element_set_onlanguagechange_ffi(
 ) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
 
 ///|
+/// [HTMLFrameSetElement.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onlanguagechange)
 impl THTMLFrameSetElement with set_onlanguagechange(
   self : Self,
   onlanguagechange : EventHandler,
@@ -266,6 +282,7 @@ extern "js" fn html_frame_set_element_onmessage_ffi(
 ) -> EventHandler = "(obj) => obj.onmessage"
 
 ///|
+/// [HTMLFrameSetElement.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onmessage)
 impl THTMLFrameSetElement with onmessage(self : Self) -> EventHandler {
   html_frame_set_element_onmessage_ffi(TJsValue::to_js(self))
 }
@@ -277,6 +294,7 @@ extern "js" fn html_frame_set_element_set_onmessage_ffi(
 ) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
 
 ///|
+/// [HTMLFrameSetElement.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onmessage)
 impl THTMLFrameSetElement with set_onmessage(
   self : Self,
   onmessage : EventHandler,
@@ -293,6 +311,7 @@ extern "js" fn html_frame_set_element_onmessageerror_ffi(
 ) -> EventHandler = "(obj) => obj.onmessageerror"
 
 ///|
+/// [HTMLFrameSetElement.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onmessageerror)
 impl THTMLFrameSetElement with onmessageerror(self : Self) -> EventHandler {
   html_frame_set_element_onmessageerror_ffi(TJsValue::to_js(self))
 }
@@ -304,6 +323,7 @@ extern "js" fn html_frame_set_element_set_onmessageerror_ffi(
 ) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
 
 ///|
+/// [HTMLFrameSetElement.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onmessageerror)
 impl THTMLFrameSetElement with set_onmessageerror(
   self : Self,
   onmessageerror : EventHandler,
@@ -320,6 +340,7 @@ extern "js" fn html_frame_set_element_onoffline_ffi(
 ) -> EventHandler = "(obj) => obj.onoffline"
 
 ///|
+/// [HTMLFrameSetElement.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onoffline)
 impl THTMLFrameSetElement with onoffline(self : Self) -> EventHandler {
   html_frame_set_element_onoffline_ffi(TJsValue::to_js(self))
 }
@@ -331,6 +352,7 @@ extern "js" fn html_frame_set_element_set_onoffline_ffi(
 ) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
 
 ///|
+/// [HTMLFrameSetElement.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onoffline)
 impl THTMLFrameSetElement with set_onoffline(
   self : Self,
   onoffline : EventHandler,
@@ -347,6 +369,7 @@ extern "js" fn html_frame_set_element_ononline_ffi(
 ) -> EventHandler = "(obj) => obj.ononline"
 
 ///|
+/// [HTMLFrameSetElement.ononline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/ononline)
 impl THTMLFrameSetElement with ononline(self : Self) -> EventHandler {
   html_frame_set_element_ononline_ffi(TJsValue::to_js(self))
 }
@@ -358,6 +381,7 @@ extern "js" fn html_frame_set_element_set_ononline_ffi(
 ) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
 
 ///|
+/// [HTMLFrameSetElement.ononline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/ononline)
 impl THTMLFrameSetElement with set_ononline(
   self : Self,
   ononline : EventHandler,
@@ -374,6 +398,7 @@ extern "js" fn html_frame_set_element_onpagehide_ffi(
 ) -> EventHandler = "(obj) => obj.onpagehide"
 
 ///|
+/// [HTMLFrameSetElement.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpagehide)
 impl THTMLFrameSetElement with onpagehide(self : Self) -> EventHandler {
   html_frame_set_element_onpagehide_ffi(TJsValue::to_js(self))
 }
@@ -385,6 +410,7 @@ extern "js" fn html_frame_set_element_set_onpagehide_ffi(
 ) -> Unit = "(obj, onpagehide) => { obj.onpagehide = onpagehide; }"
 
 ///|
+/// [HTMLFrameSetElement.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpagehide)
 impl THTMLFrameSetElement with set_onpagehide(
   self : Self,
   onpagehide : EventHandler,
@@ -401,6 +427,7 @@ extern "js" fn html_frame_set_element_onpagereveal_ffi(
 ) -> EventHandler = "(obj) => obj.onpagereveal"
 
 ///|
+/// [HTMLFrameSetElement.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpagereveal)
 impl THTMLFrameSetElement with onpagereveal(self : Self) -> EventHandler {
   html_frame_set_element_onpagereveal_ffi(TJsValue::to_js(self))
 }
@@ -412,6 +439,7 @@ extern "js" fn html_frame_set_element_set_onpagereveal_ffi(
 ) -> Unit = "(obj, onpagereveal) => { obj.onpagereveal = onpagereveal; }"
 
 ///|
+/// [HTMLFrameSetElement.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpagereveal)
 impl THTMLFrameSetElement with set_onpagereveal(
   self : Self,
   onpagereveal : EventHandler,
@@ -428,6 +456,7 @@ extern "js" fn html_frame_set_element_onpageshow_ffi(
 ) -> EventHandler = "(obj) => obj.onpageshow"
 
 ///|
+/// [HTMLFrameSetElement.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpageshow)
 impl THTMLFrameSetElement with onpageshow(self : Self) -> EventHandler {
   html_frame_set_element_onpageshow_ffi(TJsValue::to_js(self))
 }
@@ -439,6 +468,7 @@ extern "js" fn html_frame_set_element_set_onpageshow_ffi(
 ) -> Unit = "(obj, onpageshow) => { obj.onpageshow = onpageshow; }"
 
 ///|
+/// [HTMLFrameSetElement.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpageshow)
 impl THTMLFrameSetElement with set_onpageshow(
   self : Self,
   onpageshow : EventHandler,
@@ -455,6 +485,7 @@ extern "js" fn html_frame_set_element_onpageswap_ffi(
 ) -> EventHandler = "(obj) => obj.onpageswap"
 
 ///|
+/// [HTMLFrameSetElement.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpageswap)
 impl THTMLFrameSetElement with onpageswap(self : Self) -> EventHandler {
   html_frame_set_element_onpageswap_ffi(TJsValue::to_js(self))
 }
@@ -466,6 +497,7 @@ extern "js" fn html_frame_set_element_set_onpageswap_ffi(
 ) -> Unit = "(obj, onpageswap) => { obj.onpageswap = onpageswap; }"
 
 ///|
+/// [HTMLFrameSetElement.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpageswap)
 impl THTMLFrameSetElement with set_onpageswap(
   self : Self,
   onpageswap : EventHandler,
@@ -482,6 +514,7 @@ extern "js" fn html_frame_set_element_onpopstate_ffi(
 ) -> EventHandler = "(obj) => obj.onpopstate"
 
 ///|
+/// [HTMLFrameSetElement.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpopstate)
 impl THTMLFrameSetElement with onpopstate(self : Self) -> EventHandler {
   html_frame_set_element_onpopstate_ffi(TJsValue::to_js(self))
 }
@@ -493,6 +526,7 @@ extern "js" fn html_frame_set_element_set_onpopstate_ffi(
 ) -> Unit = "(obj, onpopstate) => { obj.onpopstate = onpopstate; }"
 
 ///|
+/// [HTMLFrameSetElement.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onpopstate)
 impl THTMLFrameSetElement with set_onpopstate(
   self : Self,
   onpopstate : EventHandler,
@@ -509,6 +543,7 @@ extern "js" fn html_frame_set_element_onrejectionhandled_ffi(
 ) -> EventHandler = "(obj) => obj.onrejectionhandled"
 
 ///|
+/// [HTMLFrameSetElement.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onrejectionhandled)
 impl THTMLFrameSetElement with onrejectionhandled(self : Self) -> EventHandler {
   html_frame_set_element_onrejectionhandled_ffi(TJsValue::to_js(self))
 }
@@ -520,6 +555,7 @@ extern "js" fn html_frame_set_element_set_onrejectionhandled_ffi(
 ) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
 
 ///|
+/// [HTMLFrameSetElement.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onrejectionhandled)
 impl THTMLFrameSetElement with set_onrejectionhandled(
   self : Self,
   onrejectionhandled : EventHandler,
@@ -536,6 +572,7 @@ extern "js" fn html_frame_set_element_onstorage_ffi(
 ) -> EventHandler = "(obj) => obj.onstorage"
 
 ///|
+/// [HTMLFrameSetElement.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onstorage)
 impl THTMLFrameSetElement with onstorage(self : Self) -> EventHandler {
   html_frame_set_element_onstorage_ffi(TJsValue::to_js(self))
 }
@@ -547,6 +584,7 @@ extern "js" fn html_frame_set_element_set_onstorage_ffi(
 ) -> Unit = "(obj, onstorage) => { obj.onstorage = onstorage; }"
 
 ///|
+/// [HTMLFrameSetElement.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onstorage)
 impl THTMLFrameSetElement with set_onstorage(
   self : Self,
   onstorage : EventHandler,
@@ -563,6 +601,7 @@ extern "js" fn html_frame_set_element_onunhandledrejection_ffi(
 ) -> EventHandler = "(obj) => obj.onunhandledrejection"
 
 ///|
+/// [HTMLFrameSetElement.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onunhandledrejection)
 impl THTMLFrameSetElement with onunhandledrejection(self : Self) -> EventHandler {
   html_frame_set_element_onunhandledrejection_ffi(TJsValue::to_js(self))
 }
@@ -574,6 +613,7 @@ extern "js" fn html_frame_set_element_set_onunhandledrejection_ffi(
 ) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
 
 ///|
+/// [HTMLFrameSetElement.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onunhandledrejection)
 impl THTMLFrameSetElement with set_onunhandledrejection(
   self : Self,
   onunhandledrejection : EventHandler,
@@ -590,6 +630,7 @@ extern "js" fn html_frame_set_element_onunload_ffi(
 ) -> EventHandler = "(obj) => obj.onunload"
 
 ///|
+/// [HTMLFrameSetElement.onunload](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onunload)
 impl THTMLFrameSetElement with onunload(self : Self) -> EventHandler {
   html_frame_set_element_onunload_ffi(TJsValue::to_js(self))
 }
@@ -601,6 +642,7 @@ extern "js" fn html_frame_set_element_set_onunload_ffi(
 ) -> Unit = "(obj, onunload) => { obj.onunload = onunload; }"
 
 ///|
+/// [HTMLFrameSetElement.onunload](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement/onunload)
 impl THTMLFrameSetElement with set_onunload(
   self : Self,
   onunload : EventHandler,

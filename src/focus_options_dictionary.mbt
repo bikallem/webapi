@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [FocusOptions](https://developer.mozilla.org/en-US/docs/Web/API/FocusOptions)
 #external
 pub type FocusOptions
 

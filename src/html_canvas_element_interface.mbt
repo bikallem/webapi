@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
 #external
 pub type HTMLCanvasElement
 
@@ -38,6 +39,7 @@ pub fn HTMLCanvasElement::new() -> HTMLCanvasElement {
 }
 
 ///|
+/// [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) interface.
 pub trait THTMLCanvasElement: THTMLElement {
   width(self : Self) -> UInt = _
   set_width(self : Self, width : UInt) -> Unit = _
@@ -58,6 +60,7 @@ pub trait THTMLCanvasElement: THTMLElement {
 extern "js" fn html_canvas_element_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
 
 ///|
+/// [HTMLCanvasElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/width)
 impl THTMLCanvasElement with width(self : Self) -> UInt {
   html_canvas_element_width_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +72,7 @@ extern "js" fn html_canvas_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLCanvasElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/width)
 impl THTMLCanvasElement with set_width(self : Self, width : UInt) -> Unit {
   html_canvas_element_set_width_ffi(
     TJsValue::to_js(self),
@@ -80,6 +84,7 @@ impl THTMLCanvasElement with set_width(self : Self, width : UInt) -> Unit {
 extern "js" fn html_canvas_element_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
 
 ///|
+/// [HTMLCanvasElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/height)
 impl THTMLCanvasElement with height(self : Self) -> UInt {
   html_canvas_element_height_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +96,7 @@ extern "js" fn html_canvas_element_set_height_ffi(
 ) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [HTMLCanvasElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/height)
 impl THTMLCanvasElement with set_height(self : Self, height : UInt) -> Unit {
   html_canvas_element_set_height_ffi(
     TJsValue::to_js(self),
@@ -106,6 +112,7 @@ extern "js" fn html_canvas_element_get_context_ffi(
 ) -> JsValue = "(obj, context_id, options) => obj.getContext(context_id, options)"
 
 ///|
+/// [HTMLCanvasElement.getContext](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext)
 impl THTMLCanvasElement with get_context(
   self : Self,
   context_id : String,
@@ -131,6 +138,7 @@ extern "js" fn html_canvas_element_to_data_url_ffi(
 ) -> String = "(obj, type_, quality) => obj.toDataURL(type_, quality)"
 
 ///|
+/// [HTMLCanvasElement.toDataURL](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL)
 impl THTMLCanvasElement with to_data_url(
   self : Self,
   type_? : String = "image/png",
@@ -152,6 +160,7 @@ extern "js" fn html_canvas_element_to_blob_ffi(
 ) -> Unit = "(obj, _callback, type_, quality) => obj.toBlob(_callback, type_, quality)"
 
 ///|
+/// [HTMLCanvasElement.toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob)
 impl THTMLCanvasElement with to_blob(
   self : Self,
   _callback : BlobCallback,
@@ -172,6 +181,7 @@ extern "js" fn html_canvas_element_transfer_control_to_offscreen_ffi(
 ) -> OffscreenCanvas = "(obj) => obj.transferControlToOffscreen()"
 
 ///|
+/// [HTMLCanvasElement.transferControlToOffscreen](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/transferControlToOffscreen)
 impl THTMLCanvasElement with transfer_control_to_offscreen(self : Self) -> OffscreenCanvas {
   html_canvas_element_transfer_control_to_offscreen_ffi(TJsValue::to_js(self))
 }

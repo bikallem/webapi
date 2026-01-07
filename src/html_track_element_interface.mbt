@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTrackElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement)
 #external
 pub type HTMLTrackElement
 
@@ -50,6 +51,7 @@ pub const HTML_TRACK_ELEMENT_LOADED : UInt = 2
 pub const HTML_TRACK_ELEMENT_ERROR : UInt = 3
 
 ///|
+/// [HTMLTrackElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement) interface.
 pub trait THTMLTrackElement: THTMLElement {
   kind(self : Self) -> String = _
   set_kind(self : Self, kind : String) -> Unit = _
@@ -69,6 +71,7 @@ pub trait THTMLTrackElement: THTMLElement {
 extern "js" fn html_track_element_kind_ffi(obj : JsValue) -> String = "(obj) => obj.kind"
 
 ///|
+/// [HTMLTrackElement.kind](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/kind)
 impl THTMLTrackElement with kind(self : Self) -> String {
   html_track_element_kind_ffi(TJsValue::to_js(self))
 }
@@ -80,6 +83,7 @@ extern "js" fn html_track_element_set_kind_ffi(
 ) -> Unit = "(obj, kind) => { obj.kind = kind; }"
 
 ///|
+/// [HTMLTrackElement.kind](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/kind)
 impl THTMLTrackElement with set_kind(self : Self, kind : String) -> Unit {
   html_track_element_set_kind_ffi(TJsValue::to_js(self), TJsValue::to_js(kind))
 }
@@ -88,6 +92,7 @@ impl THTMLTrackElement with set_kind(self : Self, kind : String) -> Unit {
 extern "js" fn html_track_element_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
 
 ///|
+/// [HTMLTrackElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/src)
 impl THTMLTrackElement with src(self : Self) -> String {
   html_track_element_src_ffi(TJsValue::to_js(self))
 }
@@ -99,6 +104,7 @@ extern "js" fn html_track_element_set_src_ffi(
 ) -> Unit = "(obj, src) => { obj.src = src; }"
 
 ///|
+/// [HTMLTrackElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/src)
 impl THTMLTrackElement with set_src(self : Self, src : String) -> Unit {
   html_track_element_set_src_ffi(TJsValue::to_js(self), TJsValue::to_js(src))
 }
@@ -107,6 +113,7 @@ impl THTMLTrackElement with set_src(self : Self, src : String) -> Unit {
 extern "js" fn html_track_element_srclang_ffi(obj : JsValue) -> String = "(obj) => obj.srclang"
 
 ///|
+/// [HTMLTrackElement.srclang](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/srclang)
 impl THTMLTrackElement with srclang(self : Self) -> String {
   html_track_element_srclang_ffi(TJsValue::to_js(self))
 }
@@ -118,6 +125,7 @@ extern "js" fn html_track_element_set_srclang_ffi(
 ) -> Unit = "(obj, srclang) => { obj.srclang = srclang; }"
 
 ///|
+/// [HTMLTrackElement.srclang](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/srclang)
 impl THTMLTrackElement with set_srclang(self : Self, srclang : String) -> Unit {
   html_track_element_set_srclang_ffi(
     TJsValue::to_js(self),
@@ -129,6 +137,7 @@ impl THTMLTrackElement with set_srclang(self : Self, srclang : String) -> Unit {
 extern "js" fn html_track_element_label_ffi(obj : JsValue) -> String = "(obj) => obj.label"
 
 ///|
+/// [HTMLTrackElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/label)
 impl THTMLTrackElement with label(self : Self) -> String {
   html_track_element_label_ffi(TJsValue::to_js(self))
 }
@@ -140,6 +149,7 @@ extern "js" fn html_track_element_set_label_ffi(
 ) -> Unit = "(obj, label) => { obj.label = label; }"
 
 ///|
+/// [HTMLTrackElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/label)
 impl THTMLTrackElement with set_label(self : Self, label : String) -> Unit {
   html_track_element_set_label_ffi(
     TJsValue::to_js(self),
@@ -151,6 +161,7 @@ impl THTMLTrackElement with set_label(self : Self, label : String) -> Unit {
 extern "js" fn html_track_element_default_ffi(obj : JsValue) -> Bool = "(obj) => obj.default"
 
 ///|
+/// [HTMLTrackElement.default](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/default)
 impl THTMLTrackElement with default(self : Self) -> Bool {
   html_track_element_default_ffi(TJsValue::to_js(self))
 }
@@ -162,6 +173,7 @@ extern "js" fn html_track_element_set_default_ffi(
 ) -> Unit = "(obj, default) => { obj.default = default; }"
 
 ///|
+/// [HTMLTrackElement.default](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/default)
 impl THTMLTrackElement with set_default(self : Self, default : Bool) -> Unit {
   html_track_element_set_default_ffi(
     TJsValue::to_js(self),
@@ -173,6 +185,7 @@ impl THTMLTrackElement with set_default(self : Self, default : Bool) -> Unit {
 extern "js" fn html_track_element_ready_state_ffi(obj : JsValue) -> UInt = "(obj) => obj.readyState"
 
 ///|
+/// [HTMLTrackElement.readyState](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/readyState)
 impl THTMLTrackElement with ready_state(self : Self) -> UInt {
   html_track_element_ready_state_ffi(TJsValue::to_js(self))
 }
@@ -181,6 +194,7 @@ impl THTMLTrackElement with ready_state(self : Self) -> UInt {
 extern "js" fn html_track_element_track_ffi(obj : JsValue) -> TextTrack = "(obj) => obj.track"
 
 ///|
+/// [HTMLTrackElement.track](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement/track)
 impl THTMLTrackElement with track(self : Self) -> TextTrack {
   html_track_element_track_ffi(TJsValue::to_js(self))
 }

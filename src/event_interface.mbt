@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event)
 #external
 pub type Event
 
@@ -42,6 +43,7 @@ pub const EVENT_AT_TARGET : UInt = 2
 pub const EVENT_BUBBLING_PHASE : UInt = 3
 
 ///|
+/// [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) interface.
 pub trait TEvent: TJsValue {
   type_(self : Self) -> String = _
   target(self : Self) -> EventTarget = _
@@ -69,6 +71,7 @@ pub trait TEvent: TJsValue {
 extern "js" fn event_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [Event.type](https://developer.mozilla.org/en-US/docs/Web/API/Event/type)
 impl TEvent with type_(self : Self) -> String {
   event_type_ffi(TJsValue::to_js(self))
 }
@@ -77,6 +80,7 @@ impl TEvent with type_(self : Self) -> String {
 extern "js" fn event_target_ffi(obj : JsValue) -> EventTarget = "(obj) => obj.target"
 
 ///|
+/// [Event.target](https://developer.mozilla.org/en-US/docs/Web/API/Event/target)
 impl TEvent with target(self : Self) -> EventTarget {
   event_target_ffi(TJsValue::to_js(self))
 }
@@ -85,6 +89,7 @@ impl TEvent with target(self : Self) -> EventTarget {
 extern "js" fn event_src_element_ffi(obj : JsValue) -> EventTarget = "(obj) => obj.srcElement"
 
 ///|
+/// [Event.srcElement](https://developer.mozilla.org/en-US/docs/Web/API/Event/srcElement)
 impl TEvent with src_element(self : Self) -> EventTarget {
   event_src_element_ffi(TJsValue::to_js(self))
 }
@@ -93,6 +98,7 @@ impl TEvent with src_element(self : Self) -> EventTarget {
 extern "js" fn event_current_target_ffi(obj : JsValue) -> EventTarget = "(obj) => obj.currentTarget"
 
 ///|
+/// [Event.currentTarget](https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget)
 impl TEvent with current_target(self : Self) -> EventTarget {
   event_current_target_ffi(TJsValue::to_js(self))
 }
@@ -101,6 +107,7 @@ impl TEvent with current_target(self : Self) -> EventTarget {
 extern "js" fn event_composed_path_ffi(obj : JsValue) -> Array[EventTarget] = "(obj) => obj.composedPath()"
 
 ///|
+/// [Event.composedPath](https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath)
 impl TEvent with composed_path(self : Self) -> Array[EventTarget] {
   event_composed_path_ffi(TJsValue::to_js(self))
 }
@@ -109,6 +116,7 @@ impl TEvent with composed_path(self : Self) -> Array[EventTarget] {
 extern "js" fn event_event_phase_ffi(obj : JsValue) -> UInt = "(obj) => obj.eventPhase"
 
 ///|
+/// [Event.eventPhase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase)
 impl TEvent with event_phase(self : Self) -> UInt {
   event_event_phase_ffi(TJsValue::to_js(self))
 }
@@ -117,6 +125,7 @@ impl TEvent with event_phase(self : Self) -> UInt {
 extern "js" fn event_stop_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopPropagation()"
 
 ///|
+/// [Event.stopPropagation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation)
 impl TEvent with stop_propagation(self : Self) -> Unit {
   event_stop_propagation_ffi(TJsValue::to_js(self))
 }
@@ -125,6 +134,7 @@ impl TEvent with stop_propagation(self : Self) -> Unit {
 extern "js" fn event_cancel_bubble_ffi(obj : JsValue) -> Bool = "(obj) => obj.cancelBubble"
 
 ///|
+/// [Event.cancelBubble](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble)
 impl TEvent with cancel_bubble(self : Self) -> Bool {
   event_cancel_bubble_ffi(TJsValue::to_js(self))
 }
@@ -136,6 +146,7 @@ extern "js" fn event_set_cancel_bubble_ffi(
 ) -> Unit = "(obj, cancelBubble) => { obj.cancelBubble = cancelBubble; }"
 
 ///|
+/// [Event.cancelBubble](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble)
 impl TEvent with set_cancel_bubble(self : Self, cancel_bubble : Bool) -> Unit {
   event_set_cancel_bubble_ffi(
     TJsValue::to_js(self),
@@ -147,6 +158,7 @@ impl TEvent with set_cancel_bubble(self : Self, cancel_bubble : Bool) -> Unit {
 extern "js" fn event_stop_immediate_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopImmediatePropagation()"
 
 ///|
+/// [Event.stopImmediatePropagation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation)
 impl TEvent with stop_immediate_propagation(self : Self) -> Unit {
   event_stop_immediate_propagation_ffi(TJsValue::to_js(self))
 }
@@ -155,6 +167,7 @@ impl TEvent with stop_immediate_propagation(self : Self) -> Unit {
 extern "js" fn event_bubbles_ffi(obj : JsValue) -> Bool = "(obj) => obj.bubbles"
 
 ///|
+/// [Event.bubbles](https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles)
 impl TEvent with bubbles(self : Self) -> Bool {
   event_bubbles_ffi(TJsValue::to_js(self))
 }
@@ -163,6 +176,7 @@ impl TEvent with bubbles(self : Self) -> Bool {
 extern "js" fn event_cancelable_ffi(obj : JsValue) -> Bool = "(obj) => obj.cancelable"
 
 ///|
+/// [Event.cancelable](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable)
 impl TEvent with cancelable(self : Self) -> Bool {
   event_cancelable_ffi(TJsValue::to_js(self))
 }
@@ -171,6 +185,7 @@ impl TEvent with cancelable(self : Self) -> Bool {
 extern "js" fn event_return_value_ffi(obj : JsValue) -> Bool = "(obj) => obj.returnValue"
 
 ///|
+/// [Event.returnValue](https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue)
 impl TEvent with return_value(self : Self) -> Bool {
   event_return_value_ffi(TJsValue::to_js(self))
 }
@@ -182,6 +197,7 @@ extern "js" fn event_set_return_value_ffi(
 ) -> Unit = "(obj, returnValue) => { obj.returnValue = returnValue; }"
 
 ///|
+/// [Event.returnValue](https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue)
 impl TEvent with set_return_value(self : Self, return_value : Bool) -> Unit {
   event_set_return_value_ffi(
     TJsValue::to_js(self),
@@ -193,6 +209,7 @@ impl TEvent with set_return_value(self : Self, return_value : Bool) -> Unit {
 extern "js" fn event_prevent_default_ffi(obj : JsValue) -> Unit = "(obj) => obj.preventDefault()"
 
 ///|
+/// [Event.preventDefault](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault)
 impl TEvent with prevent_default(self : Self) -> Unit {
   event_prevent_default_ffi(TJsValue::to_js(self))
 }
@@ -201,6 +218,7 @@ impl TEvent with prevent_default(self : Self) -> Unit {
 extern "js" fn event_default_prevented_ffi(obj : JsValue) -> Bool = "(obj) => obj.defaultPrevented"
 
 ///|
+/// [Event.defaultPrevented](https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented)
 impl TEvent with default_prevented(self : Self) -> Bool {
   event_default_prevented_ffi(TJsValue::to_js(self))
 }
@@ -209,6 +227,7 @@ impl TEvent with default_prevented(self : Self) -> Bool {
 extern "js" fn event_composed_ffi(obj : JsValue) -> Bool = "(obj) => obj.composed"
 
 ///|
+/// [Event.composed](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed)
 impl TEvent with composed(self : Self) -> Bool {
   event_composed_ffi(TJsValue::to_js(self))
 }
@@ -217,6 +236,7 @@ impl TEvent with composed(self : Self) -> Bool {
 extern "js" fn event_is_trusted_ffi(obj : JsValue) -> Bool = "(obj) => obj.isTrusted"
 
 ///|
+/// [Event.isTrusted](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted)
 impl TEvent with is_trusted(self : Self) -> Bool {
   event_is_trusted_ffi(TJsValue::to_js(self))
 }
@@ -225,6 +245,7 @@ impl TEvent with is_trusted(self : Self) -> Bool {
 extern "js" fn event_time_stamp_ffi(obj : JsValue) -> DOMHighResTimeStamp = "(obj) => obj.timeStamp"
 
 ///|
+/// [Event.timeStamp](https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp)
 impl TEvent with time_stamp(self : Self) -> DOMHighResTimeStamp {
   event_time_stamp_ffi(TJsValue::to_js(self))
 }
@@ -238,6 +259,7 @@ extern "js" fn event_init_event_ffi(
 ) -> Unit = "(obj, type_, bubbles, cancelable) => obj.initEvent(type_, bubbles, cancelable)"
 
 ///|
+/// [Event.initEvent](https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent)
 impl TEvent with init_event(
   self : Self,
   type_ : String,

@@ -3,6 +3,7 @@
 // Specifications: fetch.idl
 
 ///|
+/// [RequestInfo](https://developer.mozilla.org/en-US/docs/Web/API/RequestInfo)
 #external
 pub type RequestInfo
 

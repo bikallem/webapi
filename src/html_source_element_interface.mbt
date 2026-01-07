@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLSourceElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement)
 #external
 pub type HTMLSourceElement
 
@@ -38,6 +39,7 @@ pub fn HTMLSourceElement::new() -> HTMLSourceElement {
 }
 
 ///|
+/// [HTMLSourceElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement) interface.
 pub trait THTMLSourceElement: THTMLElement {
   src(self : Self) -> String = _
   set_src(self : Self, src : String) -> Unit = _
@@ -59,6 +61,7 @@ pub trait THTMLSourceElement: THTMLElement {
 extern "js" fn html_source_element_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
 
 ///|
+/// [HTMLSourceElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/src)
 impl THTMLSourceElement with src(self : Self) -> String {
   html_source_element_src_ffi(TJsValue::to_js(self))
 }
@@ -70,6 +73,7 @@ extern "js" fn html_source_element_set_src_ffi(
 ) -> Unit = "(obj, src) => { obj.src = src; }"
 
 ///|
+/// [HTMLSourceElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/src)
 impl THTMLSourceElement with set_src(self : Self, src : String) -> Unit {
   html_source_element_set_src_ffi(TJsValue::to_js(self), TJsValue::to_js(src))
 }
@@ -78,6 +82,7 @@ impl THTMLSourceElement with set_src(self : Self, src : String) -> Unit {
 extern "js" fn html_source_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [HTMLSourceElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/type)
 impl THTMLSourceElement with type_(self : Self) -> String {
   html_source_element_type_ffi(TJsValue::to_js(self))
 }
@@ -89,6 +94,7 @@ extern "js" fn html_source_element_set_type_ffi(
 ) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
+/// [HTMLSourceElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/type)
 impl THTMLSourceElement with set_type_(self : Self, type_ : String) -> Unit {
   html_source_element_set_type_ffi(
     TJsValue::to_js(self),
@@ -100,6 +106,7 @@ impl THTMLSourceElement with set_type_(self : Self, type_ : String) -> Unit {
 extern "js" fn html_source_element_srcset_ffi(obj : JsValue) -> String = "(obj) => obj.srcset"
 
 ///|
+/// [HTMLSourceElement.srcset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/srcset)
 impl THTMLSourceElement with srcset(self : Self) -> String {
   html_source_element_srcset_ffi(TJsValue::to_js(self))
 }
@@ -111,6 +118,7 @@ extern "js" fn html_source_element_set_srcset_ffi(
 ) -> Unit = "(obj, srcset) => { obj.srcset = srcset; }"
 
 ///|
+/// [HTMLSourceElement.srcset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/srcset)
 impl THTMLSourceElement with set_srcset(self : Self, srcset : String) -> Unit {
   html_source_element_set_srcset_ffi(
     TJsValue::to_js(self),
@@ -122,6 +130,7 @@ impl THTMLSourceElement with set_srcset(self : Self, srcset : String) -> Unit {
 extern "js" fn html_source_element_sizes_ffi(obj : JsValue) -> String = "(obj) => obj.sizes"
 
 ///|
+/// [HTMLSourceElement.sizes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/sizes)
 impl THTMLSourceElement with sizes(self : Self) -> String {
   html_source_element_sizes_ffi(TJsValue::to_js(self))
 }
@@ -133,6 +142,7 @@ extern "js" fn html_source_element_set_sizes_ffi(
 ) -> Unit = "(obj, sizes) => { obj.sizes = sizes; }"
 
 ///|
+/// [HTMLSourceElement.sizes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/sizes)
 impl THTMLSourceElement with set_sizes(self : Self, sizes : String) -> Unit {
   html_source_element_set_sizes_ffi(
     TJsValue::to_js(self),
@@ -144,6 +154,7 @@ impl THTMLSourceElement with set_sizes(self : Self, sizes : String) -> Unit {
 extern "js" fn html_source_element_media_ffi(obj : JsValue) -> String = "(obj) => obj.media"
 
 ///|
+/// [HTMLSourceElement.media](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/media)
 impl THTMLSourceElement with media(self : Self) -> String {
   html_source_element_media_ffi(TJsValue::to_js(self))
 }
@@ -155,6 +166,7 @@ extern "js" fn html_source_element_set_media_ffi(
 ) -> Unit = "(obj, media) => { obj.media = media; }"
 
 ///|
+/// [HTMLSourceElement.media](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/media)
 impl THTMLSourceElement with set_media(self : Self, media : String) -> Unit {
   html_source_element_set_media_ffi(
     TJsValue::to_js(self),
@@ -166,6 +178,7 @@ impl THTMLSourceElement with set_media(self : Self, media : String) -> Unit {
 extern "js" fn html_source_element_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
 
 ///|
+/// [HTMLSourceElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/width)
 impl THTMLSourceElement with width(self : Self) -> UInt {
   html_source_element_width_ffi(TJsValue::to_js(self))
 }
@@ -177,6 +190,7 @@ extern "js" fn html_source_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLSourceElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/width)
 impl THTMLSourceElement with set_width(self : Self, width : UInt) -> Unit {
   html_source_element_set_width_ffi(
     TJsValue::to_js(self),
@@ -188,6 +202,7 @@ impl THTMLSourceElement with set_width(self : Self, width : UInt) -> Unit {
 extern "js" fn html_source_element_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
 
 ///|
+/// [HTMLSourceElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/height)
 impl THTMLSourceElement with height(self : Self) -> UInt {
   html_source_element_height_ffi(TJsValue::to_js(self))
 }
@@ -199,6 +214,7 @@ extern "js" fn html_source_element_set_height_ffi(
 ) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [HTMLSourceElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement/height)
 impl THTMLSourceElement with set_height(self : Self, height : UInt) -> Unit {
   html_source_element_set_height_ffi(
     TJsValue::to_js(self),

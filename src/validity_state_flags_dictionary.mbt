@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ValidityStateFlags](https://developer.mozilla.org/en-US/docs/Web/API/ValidityStateFlags)
 #external
 pub type ValidityStateFlags
 

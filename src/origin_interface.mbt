@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [Origin](https://developer.mozilla.org/en-US/docs/Web/API/Origin)
 #external
 pub type Origin
 
@@ -24,6 +25,7 @@ pub fn Origin::new() -> Origin {
 }
 
 ///|
+/// [Origin](https://developer.mozilla.org/en-US/docs/Web/API/Origin) interface.
 pub trait TOrigin: TJsValue {
   opaque_(self : Self) -> Bool = _
   is_same_origin(self : Self, other : &TOrigin) -> Bool = _
@@ -34,6 +36,7 @@ pub trait TOrigin: TJsValue {
 extern "js" fn origin_from_ffi(value : JsValue) -> Origin = "(value) => Origin.from(value)"
 
 ///|
+/// [Origin.from](https://developer.mozilla.org/en-US/docs/Web/API/Origin/from)
 pub fn Origin::from(value : JsValue) -> Origin {
   origin_from_ffi(TJsValue::to_js(value))
 }
@@ -42,6 +45,7 @@ pub fn Origin::from(value : JsValue) -> Origin {
 extern "js" fn origin_opaque_ffi(obj : JsValue) -> Bool = "(obj) => obj.opaque"
 
 ///|
+/// [Origin.opaque](https://developer.mozilla.org/en-US/docs/Web/API/Origin/opaque)
 impl TOrigin with opaque_(self : Self) -> Bool {
   origin_opaque_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +57,7 @@ extern "js" fn origin_is_same_origin_ffi(
 ) -> Bool = "(obj, other) => obj.isSameOrigin(other)"
 
 ///|
+/// [Origin.isSameOrigin](https://developer.mozilla.org/en-US/docs/Web/API/Origin/isSameOrigin)
 impl TOrigin with is_same_origin(self : Self, other : &TOrigin) -> Bool {
   origin_is_same_origin_ffi(TJsValue::to_js(self), TJsValue::to_js(other))
 }
@@ -61,6 +66,7 @@ impl TOrigin with is_same_origin(self : Self, other : &TOrigin) -> Bool {
 extern "js" fn origin_is_same_site_ffi(obj : JsValue, other : JsValue) -> Bool = "(obj, other) => obj.isSameSite(other)"
 
 ///|
+/// [Origin.isSameSite](https://developer.mozilla.org/en-US/docs/Web/API/Origin/isSameSite)
 impl TOrigin with is_same_site(self : Self, other : &TOrigin) -> Bool {
   origin_is_same_site_ffi(TJsValue::to_js(self), TJsValue::to_js(other))
 }

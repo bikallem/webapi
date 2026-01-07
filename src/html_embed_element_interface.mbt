@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLEmbedElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement)
 #external
 pub type HTMLEmbedElement
 
@@ -38,6 +39,7 @@ pub fn HTMLEmbedElement::new() -> HTMLEmbedElement {
 }
 
 ///|
+/// [HTMLEmbedElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement) interface.
 pub trait THTMLEmbedElement: THTMLElement {
   src(self : Self) -> String = _
   set_src(self : Self, src : String) -> Unit = _
@@ -58,6 +60,7 @@ pub trait THTMLEmbedElement: THTMLElement {
 extern "js" fn html_embed_element_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
 
 ///|
+/// [HTMLEmbedElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/src)
 impl THTMLEmbedElement with src(self : Self) -> String {
   html_embed_element_src_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +72,7 @@ extern "js" fn html_embed_element_set_src_ffi(
 ) -> Unit = "(obj, src) => { obj.src = src; }"
 
 ///|
+/// [HTMLEmbedElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/src)
 impl THTMLEmbedElement with set_src(self : Self, src : String) -> Unit {
   html_embed_element_set_src_ffi(TJsValue::to_js(self), TJsValue::to_js(src))
 }
@@ -77,6 +81,7 @@ impl THTMLEmbedElement with set_src(self : Self, src : String) -> Unit {
 extern "js" fn html_embed_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [HTMLEmbedElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/type)
 impl THTMLEmbedElement with type_(self : Self) -> String {
   html_embed_element_type_ffi(TJsValue::to_js(self))
 }
@@ -88,6 +93,7 @@ extern "js" fn html_embed_element_set_type_ffi(
 ) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
+/// [HTMLEmbedElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/type)
 impl THTMLEmbedElement with set_type_(self : Self, type_ : String) -> Unit {
   html_embed_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
@@ -96,6 +102,7 @@ impl THTMLEmbedElement with set_type_(self : Self, type_ : String) -> Unit {
 extern "js" fn html_embed_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
 
 ///|
+/// [HTMLEmbedElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/width)
 impl THTMLEmbedElement with width(self : Self) -> String {
   html_embed_element_width_ffi(TJsValue::to_js(self))
 }
@@ -107,6 +114,7 @@ extern "js" fn html_embed_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLEmbedElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/width)
 impl THTMLEmbedElement with set_width(self : Self, width : String) -> Unit {
   html_embed_element_set_width_ffi(
     TJsValue::to_js(self),
@@ -118,6 +126,7 @@ impl THTMLEmbedElement with set_width(self : Self, width : String) -> Unit {
 extern "js" fn html_embed_element_height_ffi(obj : JsValue) -> String = "(obj) => obj.height"
 
 ///|
+/// [HTMLEmbedElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/height)
 impl THTMLEmbedElement with height(self : Self) -> String {
   html_embed_element_height_ffi(TJsValue::to_js(self))
 }
@@ -129,6 +138,7 @@ extern "js" fn html_embed_element_set_height_ffi(
 ) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [HTMLEmbedElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/height)
 impl THTMLEmbedElement with set_height(self : Self, height : String) -> Unit {
   html_embed_element_set_height_ffi(
     TJsValue::to_js(self),
@@ -142,6 +152,7 @@ extern "js" fn html_embed_element_get_svg_document_ffi(
 ) -> JsValue = "(obj) => obj.getSVGDocument()"
 
 ///|
+/// [HTMLEmbedElement.getSVGDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/getSVGDocument)
 impl THTMLEmbedElement with get_svg_document(self : Self) -> Document? {
   let result = html_embed_element_get_svg_document_ffi(TJsValue::to_js(self))
   if JsValue::is_null(result) {
@@ -155,6 +166,7 @@ impl THTMLEmbedElement with get_svg_document(self : Self) -> Document? {
 extern "js" fn html_embed_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLEmbedElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/align)
 impl THTMLEmbedElement with align(self : Self) -> String {
   html_embed_element_align_ffi(TJsValue::to_js(self))
 }
@@ -166,6 +178,7 @@ extern "js" fn html_embed_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLEmbedElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/align)
 impl THTMLEmbedElement with set_align(self : Self, align : String) -> Unit {
   html_embed_element_set_align_ffi(
     TJsValue::to_js(self),
@@ -177,6 +190,7 @@ impl THTMLEmbedElement with set_align(self : Self, align : String) -> Unit {
 extern "js" fn html_embed_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLEmbedElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/name)
 impl THTMLEmbedElement with name(self : Self) -> String {
   html_embed_element_name_ffi(TJsValue::to_js(self))
 }
@@ -188,6 +202,7 @@ extern "js" fn html_embed_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLEmbedElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/name)
 impl THTMLEmbedElement with set_name(self : Self, name : String) -> Unit {
   html_embed_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }

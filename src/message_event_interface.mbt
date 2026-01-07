@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [MessageEvent](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent)
 #external
 pub type MessageEvent
 
@@ -36,6 +37,7 @@ pub fn MessageEvent::new(
 }
 
 ///|
+/// [MessageEvent](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent) interface.
 pub trait TMessageEvent: TEvent {
   data(self : Self) -> JsValue = _
   origin(self : Self) -> String = _
@@ -59,6 +61,7 @@ pub trait TMessageEvent: TEvent {
 extern "js" fn message_event_data_ffi(obj : JsValue) -> JsValue = "(obj) => obj.data"
 
 ///|
+/// [MessageEvent.data](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data)
 impl TMessageEvent with data(self : Self) -> JsValue {
   message_event_data_ffi(TJsValue::to_js(self))
 }
@@ -67,6 +70,7 @@ impl TMessageEvent with data(self : Self) -> JsValue {
 extern "js" fn message_event_origin_ffi(obj : JsValue) -> String = "(obj) => obj.origin"
 
 ///|
+/// [MessageEvent.origin](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/origin)
 impl TMessageEvent with origin(self : Self) -> String {
   message_event_origin_ffi(TJsValue::to_js(self))
 }
@@ -75,6 +79,7 @@ impl TMessageEvent with origin(self : Self) -> String {
 extern "js" fn message_event_last_event_id_ffi(obj : JsValue) -> String = "(obj) => obj.lastEventId"
 
 ///|
+/// [MessageEvent.lastEventId](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/lastEventId)
 impl TMessageEvent with last_event_id(self : Self) -> String {
   message_event_last_event_id_ffi(TJsValue::to_js(self))
 }
@@ -83,6 +88,7 @@ impl TMessageEvent with last_event_id(self : Self) -> String {
 extern "js" fn message_event_source_ffi(obj : JsValue) -> MessageEventSource = "(obj) => obj.source"
 
 ///|
+/// [MessageEvent.source](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/source)
 impl TMessageEvent with source(self : Self) -> MessageEventSource {
   message_event_source_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +97,7 @@ impl TMessageEvent with source(self : Self) -> MessageEventSource {
 extern "js" fn message_event_ports_ffi(obj : JsValue) -> JsValue = "(obj) => obj.ports"
 
 ///|
+/// [MessageEvent.ports](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/ports)
 impl TMessageEvent with ports(self : Self) -> JsValue {
   message_event_ports_ffi(TJsValue::to_js(self))
 }
@@ -109,6 +116,7 @@ extern "js" fn message_event_init_message_event_ffi(
 ) -> Unit = "(obj, type_, bubbles, cancelable, data, origin, last_event_id, source, ports) => obj.initMessageEvent(type_, bubbles, cancelable, data, origin, last_event_id, source, ports)"
 
 ///|
+/// [MessageEvent.initMessageEvent](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/initMessageEvent)
 impl TMessageEvent with init_message_event(
   self : Self,
   type_ : String,

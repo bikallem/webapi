@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CanvasGradient](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient)
 #external
 pub type CanvasGradient
 
@@ -16,6 +17,7 @@ pub fn[T : TCanvasGradient] CanvasGradient::into(self : CanvasGradient) -> T = "
 pub impl TCanvasGradient for CanvasGradient
 
 ///|
+/// [CanvasGradient](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) interface.
 pub trait TCanvasGradient: TJsValue {
   add_color_stop(self : Self, offset : Double, color : String) -> Unit = _
 }
@@ -28,6 +30,7 @@ extern "js" fn canvas_gradient_add_color_stop_ffi(
 ) -> Unit = "(obj, offset, color) => obj.addColorStop(offset, color)"
 
 ///|
+/// [CanvasGradient.addColorStop](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop)
 impl TCanvasGradient with add_color_stop(
   self : Self,
   offset : Double,

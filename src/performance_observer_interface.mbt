@@ -3,6 +3,7 @@
 // Specifications: performance-timeline.idl
 
 ///|
+/// [PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
 #external
 pub type PerformanceObserver
 
@@ -30,6 +31,7 @@ pub fn PerformanceObserver::new(
 }
 
 ///|
+/// [PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) interface.
 pub trait TPerformanceObserver: TJsValue {
   observe(self : Self, options? : PerformanceObserverInit) -> Unit = _
   disconnect(self : Self) -> Unit = _
@@ -43,6 +45,7 @@ extern "js" fn performance_observer_observe_ffi(
 ) -> Unit = "(obj, options) => obj.observe(options)"
 
 ///|
+/// [PerformanceObserver.observe](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/observe)
 impl TPerformanceObserver with observe(
   self : Self,
   options? : PerformanceObserverInit = PerformanceObserverInit::empty(),
@@ -57,6 +60,7 @@ impl TPerformanceObserver with observe(
 extern "js" fn performance_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
 
 ///|
+/// [PerformanceObserver.disconnect](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/disconnect)
 impl TPerformanceObserver with disconnect(self : Self) -> Unit {
   performance_observer_disconnect_ffi(TJsValue::to_js(self))
 }
@@ -67,6 +71,7 @@ extern "js" fn performance_observer_take_records_ffi(
 ) -> PerformanceEntryList = "(obj) => obj.takeRecords()"
 
 ///|
+/// [PerformanceObserver.takeRecords](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/takeRecords)
 impl TPerformanceObserver with take_records(self : Self) -> PerformanceEntryList {
   performance_observer_take_records_ffi(TJsValue::to_js(self))
 }
@@ -75,6 +80,7 @@ impl TPerformanceObserver with take_records(self : Self) -> PerformanceEntryList
 extern "js" fn performance_observer_supported_entry_types_ffi() -> JsValue = "() => PerformanceObserver.supportedEntryTypes"
 
 ///|
+/// [PerformanceObserver.supportedEntryTypes](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/supportedEntryTypes)
 pub fn PerformanceObserver::supported_entry_types() -> JsValue {
   performance_observer_supported_entry_types_ffi()
 }

@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [FocusEventInit](https://developer.mozilla.org/en-US/docs/Web/API/FocusEventInit)
 #external
 pub type FocusEventInit
 

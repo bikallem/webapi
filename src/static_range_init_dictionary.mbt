@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [StaticRangeInit](https://developer.mozilla.org/en-US/docs/Web/API/StaticRangeInit)
 #external
 pub type StaticRangeInit
 

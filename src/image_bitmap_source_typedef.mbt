@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageBitmapSource](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapSource)
 #external
 pub type ImageBitmapSource
 

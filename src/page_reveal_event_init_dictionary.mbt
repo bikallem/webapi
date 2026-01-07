@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [PageRevealEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PageRevealEventInit)
 #external
 pub type PageRevealEventInit
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLOrSVGScriptElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrSVGScriptElement)
 #external
 pub type HTMLOrSVGScriptElement
 

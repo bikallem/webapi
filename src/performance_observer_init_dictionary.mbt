@@ -3,6 +3,7 @@
 // Specifications: performance-timeline.idl
 
 ///|
+/// [PerformanceObserverInit](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverInit)
 #external
 pub type PerformanceObserverInit
 

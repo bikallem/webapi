@@ -3,6 +3,7 @@
 // Specifications: FileAPI.idl
 
 ///|
+/// [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
 #external
 pub type Blob
 
@@ -27,6 +28,7 @@ pub fn Blob::new(
 }
 
 ///|
+/// [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob) interface.
 pub trait TBlob: TJsValue {
   size(self : Self) -> UInt64 = _
   type_(self : Self) -> String = _
@@ -41,6 +43,7 @@ pub trait TBlob: TJsValue {
 extern "js" fn blob_size_ffi(obj : JsValue) -> UInt64 = "(obj) => obj.size"
 
 ///|
+/// [Blob.size](https://developer.mozilla.org/en-US/docs/Web/API/Blob/size)
 impl TBlob with size(self : Self) -> UInt64 {
   blob_size_ffi(TJsValue::to_js(self))
 }
@@ -49,6 +52,7 @@ impl TBlob with size(self : Self) -> UInt64 {
 extern "js" fn blob_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [Blob.type](https://developer.mozilla.org/en-US/docs/Web/API/Blob/type)
 impl TBlob with type_(self : Self) -> String {
   blob_type_ffi(TJsValue::to_js(self))
 }
@@ -62,6 +66,7 @@ extern "js" fn blob_slice_ffi(
 ) -> Blob = "(obj, start, end, content_type) => obj.slice(start, end, content_type)"
 
 ///|
+/// [Blob.slice](https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice)
 impl TBlob with slice(
   self : Self,
   start? : Int64,
@@ -80,6 +85,7 @@ impl TBlob with slice(
 extern "js" fn blob_stream_ffi(obj : JsValue) -> ReadableStream = "(obj) => obj.stream()"
 
 ///|
+/// [Blob.stream](https://developer.mozilla.org/en-US/docs/Web/API/Blob/stream)
 impl TBlob with stream(self : Self) -> ReadableStream {
   blob_stream_ffi(TJsValue::to_js(self))
 }
@@ -88,6 +94,7 @@ impl TBlob with stream(self : Self) -> ReadableStream {
 extern "js" fn blob_text_ffi(obj : JsValue) -> JsPromise[String] = "(obj) => obj.text()"
 
 ///|
+/// [Blob.text](https://developer.mozilla.org/en-US/docs/Web/API/Blob/text)
 impl TBlob with text(self : Self) -> JsPromise[String] {
   blob_text_ffi(TJsValue::to_js(self))
 }
@@ -96,6 +103,7 @@ impl TBlob with text(self : Self) -> JsPromise[String] {
 extern "js" fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] = "(obj) => obj.arrayBuffer()"
 
 ///|
+/// [Blob.arrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/Blob/arrayBuffer)
 impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
   blob_array_buffer_ffi(TJsValue::to_js(self))
 }
@@ -104,6 +112,7 @@ impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
 extern "js" fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] = "(obj) => obj.bytes()"
 
 ///|
+/// [Blob.bytes](https://developer.mozilla.org/en-US/docs/Web/API/Blob/bytes)
 impl TBlob with bytes(self : Self) -> JsPromise[Uint8Array] {
   blob_bytes_ffi(TJsValue::to_js(self))
 }

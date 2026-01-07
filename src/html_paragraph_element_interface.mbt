@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLParagraphElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParagraphElement)
 #external
 pub type HTMLParagraphElement
 
@@ -40,6 +41,7 @@ pub fn HTMLParagraphElement::new() -> HTMLParagraphElement {
 }
 
 ///|
+/// [HTMLParagraphElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParagraphElement) interface.
 pub trait THTMLParagraphElement: THTMLElement {
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
@@ -49,6 +51,7 @@ pub trait THTMLParagraphElement: THTMLElement {
 extern "js" fn html_paragraph_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLParagraphElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParagraphElement/align)
 impl THTMLParagraphElement with align(self : Self) -> String {
   html_paragraph_element_align_ffi(TJsValue::to_js(self))
 }
@@ -60,6 +63,7 @@ extern "js" fn html_paragraph_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLParagraphElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParagraphElement/align)
 impl THTMLParagraphElement with set_align(self : Self, align : String) -> Unit {
   html_paragraph_element_set_align_ffi(
     TJsValue::to_js(self),

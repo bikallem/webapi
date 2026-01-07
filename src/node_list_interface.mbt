@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
 #external
 pub type NodeList
 
@@ -16,6 +17,7 @@ pub fn[T : TNodeList] NodeList::into(self : NodeList) -> T = "%identity"
 pub impl TNodeList for NodeList
 
 ///|
+/// [NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) interface.
 pub trait TNodeList: TJsValue {
   length(self : Self) -> UInt = _
 }
@@ -24,6 +26,7 @@ pub trait TNodeList: TJsValue {
 extern "js" fn node_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
+/// [NodeList.length](https://developer.mozilla.org/en-US/docs/Web/API/NodeList/length)
 impl TNodeList with length(self : Self) -> UInt {
   node_list_length_ffi(TJsValue::to_js(self))
 }

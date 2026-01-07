@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLMenuElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMenuElement)
 #external
 pub type HTMLMenuElement
 
@@ -36,6 +37,7 @@ pub fn HTMLMenuElement::new() -> HTMLMenuElement {
 }
 
 ///|
+/// [HTMLMenuElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMenuElement) interface.
 pub trait THTMLMenuElement: THTMLElement {
   compact(self : Self) -> Bool = _
   set_compact(self : Self, compact : Bool) -> Unit = _
@@ -45,6 +47,7 @@ pub trait THTMLMenuElement: THTMLElement {
 extern "js" fn html_menu_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
 
 ///|
+/// [HTMLMenuElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMenuElement/compact)
 impl THTMLMenuElement with compact(self : Self) -> Bool {
   html_menu_element_compact_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ extern "js" fn html_menu_element_set_compact_ffi(
 ) -> Unit = "(obj, compact) => { obj.compact = compact; }"
 
 ///|
+/// [HTMLMenuElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMenuElement/compact)
 impl THTMLMenuElement with set_compact(self : Self, compact : Bool) -> Unit {
   html_menu_element_set_compact_ffi(
     TJsValue::to_js(self),

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HashChangeEvent](https://developer.mozilla.org/en-US/docs/Web/API/HashChangeEvent)
 #external
 pub type HashChangeEvent
 
@@ -36,6 +37,7 @@ pub fn HashChangeEvent::new(
 }
 
 ///|
+/// [HashChangeEvent](https://developer.mozilla.org/en-US/docs/Web/API/HashChangeEvent) interface.
 pub trait THashChangeEvent: TEvent {
   old_url(self : Self) -> String = _
   new_url(self : Self) -> String = _
@@ -45,6 +47,7 @@ pub trait THashChangeEvent: TEvent {
 extern "js" fn hash_change_event_old_url_ffi(obj : JsValue) -> String = "(obj) => obj.oldURL"
 
 ///|
+/// [HashChangeEvent.oldURL](https://developer.mozilla.org/en-US/docs/Web/API/HashChangeEvent/oldURL)
 impl THashChangeEvent with old_url(self : Self) -> String {
   hash_change_event_old_url_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +56,7 @@ impl THashChangeEvent with old_url(self : Self) -> String {
 extern "js" fn hash_change_event_new_url_ffi(obj : JsValue) -> String = "(obj) => obj.newURL"
 
 ///|
+/// [HashChangeEvent.newURL](https://developer.mozilla.org/en-US/docs/Web/API/HashChangeEvent/newURL)
 impl THashChangeEvent with new_url(self : Self) -> String {
   hash_change_event_new_url_ffi(TJsValue::to_js(self))
 }

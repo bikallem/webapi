@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGUseElementShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElementShadowRoot)
 #external
 pub type SVGUseElementShadowRoot
 
@@ -32,4 +33,5 @@ pub impl TNode for SVGUseElementShadowRoot
 pub impl TEventTarget for SVGUseElementShadowRoot
 
 ///|
+/// [SVGUseElementShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElementShadowRoot) interface.
 pub trait TSVGUseElementShadowRoot: TShadowRoot {}

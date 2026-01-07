@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
 #external
 pub type EventListener
 

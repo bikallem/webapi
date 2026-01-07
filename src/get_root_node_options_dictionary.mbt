@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [GetRootNodeOptions](https://developer.mozilla.org/en-US/docs/Web/API/GetRootNodeOptions)
 #external
 pub type GetRootNodeOptions
 

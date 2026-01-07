@@ -3,6 +3,7 @@
 // Specifications: FileAPI.idl
 
 ///|
+/// [File](https://developer.mozilla.org/en-US/docs/Web/API/File)
 #external
 pub type File
 
@@ -39,6 +40,7 @@ pub fn File::new(
 }
 
 ///|
+/// [File](https://developer.mozilla.org/en-US/docs/Web/API/File) interface.
 pub trait TFile: TBlob {
   name(self : Self) -> String = _
   last_modified(self : Self) -> Int64 = _
@@ -48,6 +50,7 @@ pub trait TFile: TBlob {
 extern "js" fn file_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [File.name](https://developer.mozilla.org/en-US/docs/Web/API/File/name)
 impl TFile with name(self : Self) -> String {
   file_name_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ impl TFile with name(self : Self) -> String {
 extern "js" fn file_last_modified_ffi(obj : JsValue) -> Int64 = "(obj) => obj.lastModified"
 
 ///|
+/// [File.lastModified](https://developer.mozilla.org/en-US/docs/Web/API/File/lastModified)
 impl TFile with last_modified(self : Self) -> Int64 {
   file_last_modified_ffi(TJsValue::to_js(self))
 }

@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGPatternElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement)
 #external
 pub type SVGPatternElement
 
@@ -30,6 +31,7 @@ pub impl TNode for SVGPatternElement
 pub impl TEventTarget for SVGPatternElement
 
 ///|
+/// [SVGPatternElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement) interface.
 pub trait TSVGPatternElement: TSVGElement {
   pattern_units(self : Self) -> SVGAnimatedEnumeration = _
   pattern_content_units(self : Self) -> SVGAnimatedEnumeration = _
@@ -49,6 +51,7 @@ extern "js" fn svg_pattern_element_pattern_units_ffi(
 ) -> SVGAnimatedEnumeration = "(obj) => obj.patternUnits"
 
 ///|
+/// [SVGPatternElement.patternUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/patternUnits)
 impl TSVGPatternElement with pattern_units(self : Self) -> SVGAnimatedEnumeration {
   svg_pattern_element_pattern_units_ffi(TJsValue::to_js(self))
 }
@@ -59,6 +62,7 @@ extern "js" fn svg_pattern_element_pattern_content_units_ffi(
 ) -> SVGAnimatedEnumeration = "(obj) => obj.patternContentUnits"
 
 ///|
+/// [SVGPatternElement.patternContentUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/patternContentUnits)
 impl TSVGPatternElement with pattern_content_units(self : Self) -> SVGAnimatedEnumeration {
   svg_pattern_element_pattern_content_units_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +73,7 @@ extern "js" fn svg_pattern_element_pattern_transform_ffi(
 ) -> SVGAnimatedTransformList = "(obj) => obj.patternTransform"
 
 ///|
+/// [SVGPatternElement.patternTransform](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/patternTransform)
 impl TSVGPatternElement with pattern_transform(self : Self) -> SVGAnimatedTransformList {
   svg_pattern_element_pattern_transform_ffi(TJsValue::to_js(self))
 }
@@ -77,6 +82,7 @@ impl TSVGPatternElement with pattern_transform(self : Self) -> SVGAnimatedTransf
 extern "js" fn svg_pattern_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.x"
 
 ///|
+/// [SVGPatternElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/x)
 impl TSVGPatternElement with x(self : Self) -> SVGAnimatedLength {
   svg_pattern_element_x_ffi(TJsValue::to_js(self))
 }
@@ -85,6 +91,7 @@ impl TSVGPatternElement with x(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_pattern_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.y"
 
 ///|
+/// [SVGPatternElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/y)
 impl TSVGPatternElement with y(self : Self) -> SVGAnimatedLength {
   svg_pattern_element_y_ffi(TJsValue::to_js(self))
 }
@@ -95,6 +102,7 @@ extern "js" fn svg_pattern_element_width_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.width"
 
 ///|
+/// [SVGPatternElement.width](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/width)
 impl TSVGPatternElement with width(self : Self) -> SVGAnimatedLength {
   svg_pattern_element_width_ffi(TJsValue::to_js(self))
 }
@@ -105,6 +113,7 @@ extern "js" fn svg_pattern_element_height_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.height"
 
 ///|
+/// [SVGPatternElement.height](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/height)
 impl TSVGPatternElement with height(self : Self) -> SVGAnimatedLength {
   svg_pattern_element_height_ffi(TJsValue::to_js(self))
 }
@@ -115,6 +124,7 @@ extern "js" fn svg_pattern_element_view_box_ffi(
 ) -> SVGAnimatedRect = "(obj) => obj.viewBox"
 
 ///|
+/// [SVGPatternElement.viewBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/viewBox)
 impl TSVGPatternElement with view_box(self : Self) -> SVGAnimatedRect {
   svg_pattern_element_view_box_ffi(TJsValue::to_js(self))
 }
@@ -125,6 +135,7 @@ extern "js" fn svg_pattern_element_preserve_aspect_ratio_ffi(
 ) -> SVGAnimatedPreserveAspectRatio = "(obj) => obj.preserveAspectRatio"
 
 ///|
+/// [SVGPatternElement.preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/preserveAspectRatio)
 impl TSVGPatternElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio {
   svg_pattern_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self))
 }
@@ -133,6 +144,7 @@ impl TSVGPatternElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPr
 extern "js" fn svg_pattern_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.href"
 
 ///|
+/// [SVGPatternElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement/href)
 impl TSVGPatternElement with href(self : Self) -> SVGAnimatedString {
   svg_pattern_element_href_ffi(TJsValue::to_js(self))
 }

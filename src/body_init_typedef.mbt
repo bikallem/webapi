@@ -3,6 +3,7 @@
 // Specifications: fetch.idl
 
 ///|
+/// [BodyInit](https://developer.mozilla.org/en-US/docs/Web/API/BodyInit)
 #external
 pub type BodyInit
 

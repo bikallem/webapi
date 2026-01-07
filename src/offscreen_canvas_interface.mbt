@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
 #external
 pub type OffscreenCanvas
 
@@ -30,6 +31,7 @@ pub fn OffscreenCanvas::new(width : UInt64, height : UInt64) -> OffscreenCanvas 
 }
 
 ///|
+/// [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) interface.
 pub trait TOffscreenCanvas: TEventTarget {
   width(self : Self) -> UInt64 = _
   set_width(self : Self, width : UInt64) -> Unit = _
@@ -52,6 +54,7 @@ pub trait TOffscreenCanvas: TEventTarget {
 extern "js" fn offscreen_canvas_width_ffi(obj : JsValue) -> UInt64 = "(obj) => obj.width"
 
 ///|
+/// [OffscreenCanvas.width](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/width)
 impl TOffscreenCanvas with width(self : Self) -> UInt64 {
   offscreen_canvas_width_ffi(TJsValue::to_js(self))
 }
@@ -63,6 +66,7 @@ extern "js" fn offscreen_canvas_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [OffscreenCanvas.width](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/width)
 impl TOffscreenCanvas with set_width(self : Self, width : UInt64) -> Unit {
   offscreen_canvas_set_width_ffi(TJsValue::to_js(self), TJsValue::to_js(width))
 }
@@ -71,6 +75,7 @@ impl TOffscreenCanvas with set_width(self : Self, width : UInt64) -> Unit {
 extern "js" fn offscreen_canvas_height_ffi(obj : JsValue) -> UInt64 = "(obj) => obj.height"
 
 ///|
+/// [OffscreenCanvas.height](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/height)
 impl TOffscreenCanvas with height(self : Self) -> UInt64 {
   offscreen_canvas_height_ffi(TJsValue::to_js(self))
 }
@@ -82,6 +87,7 @@ extern "js" fn offscreen_canvas_set_height_ffi(
 ) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
+/// [OffscreenCanvas.height](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/height)
 impl TOffscreenCanvas with set_height(self : Self, height : UInt64) -> Unit {
   offscreen_canvas_set_height_ffi(
     TJsValue::to_js(self),
@@ -97,6 +103,7 @@ extern "js" fn offscreen_canvas_get_context_ffi(
 ) -> JsValue = "(obj, context_id, options) => obj.getContext(context_id, options)"
 
 ///|
+/// [OffscreenCanvas.getContext](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/getContext)
 impl TOffscreenCanvas with get_context(
   self : Self,
   context_id : OffscreenRenderingContextId,
@@ -120,6 +127,7 @@ extern "js" fn offscreen_canvas_transfer_to_image_bitmap_ffi(
 ) -> ImageBitmap = "(obj) => obj.transferToImageBitmap()"
 
 ///|
+/// [OffscreenCanvas.transferToImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/transferToImageBitmap)
 impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> ImageBitmap {
   offscreen_canvas_transfer_to_image_bitmap_ffi(TJsValue::to_js(self))
 }
@@ -131,6 +139,7 @@ extern "js" fn offscreen_canvas_convert_to_blob_ffi(
 ) -> JsPromise[Blob] = "(obj, options) => obj.convertToBlob(options)"
 
 ///|
+/// [OffscreenCanvas.convertToBlob](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/convertToBlob)
 impl TOffscreenCanvas with convert_to_blob(
   self : Self,
   options? : ImageEncodeOptions = ImageEncodeOptions::empty(),
@@ -147,6 +156,7 @@ extern "js" fn offscreen_canvas_oncontextlost_ffi(
 ) -> EventHandler = "(obj) => obj.oncontextlost"
 
 ///|
+/// [OffscreenCanvas.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextlost)
 impl TOffscreenCanvas with oncontextlost(self : Self) -> EventHandler {
   offscreen_canvas_oncontextlost_ffi(TJsValue::to_js(self))
 }
@@ -158,6 +168,7 @@ extern "js" fn offscreen_canvas_set_oncontextlost_ffi(
 ) -> Unit = "(obj, oncontextlost) => { obj.oncontextlost = oncontextlost; }"
 
 ///|
+/// [OffscreenCanvas.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextlost)
 impl TOffscreenCanvas with set_oncontextlost(
   self : Self,
   oncontextlost : EventHandler,
@@ -174,6 +185,7 @@ extern "js" fn offscreen_canvas_oncontextrestored_ffi(
 ) -> EventHandler = "(obj) => obj.oncontextrestored"
 
 ///|
+/// [OffscreenCanvas.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextrestored)
 impl TOffscreenCanvas with oncontextrestored(self : Self) -> EventHandler {
   offscreen_canvas_oncontextrestored_ffi(TJsValue::to_js(self))
 }
@@ -185,6 +197,7 @@ extern "js" fn offscreen_canvas_set_oncontextrestored_ffi(
 ) -> Unit = "(obj, oncontextrestored) => { obj.oncontextrestored = oncontextrestored; }"
 
 ///|
+/// [OffscreenCanvas.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextrestored)
 impl TOffscreenCanvas with set_oncontextrestored(
   self : Self,
   oncontextrestored : EventHandler,

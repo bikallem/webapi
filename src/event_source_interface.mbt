@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 #external
 pub type EventSource
 
@@ -45,6 +46,7 @@ pub const EVENT_SOURCE_OPEN : UInt = 1
 pub const EVENT_SOURCE_CLOSED : UInt = 2
 
 ///|
+/// [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) interface.
 pub trait TEventSource: TEventTarget {
   url(self : Self) -> String = _
   with_credentials(self : Self) -> Bool = _
@@ -62,6 +64,7 @@ pub trait TEventSource: TEventTarget {
 extern "js" fn event_source_url_ffi(obj : JsValue) -> String = "(obj) => obj.url"
 
 ///|
+/// [EventSource.url](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/url)
 impl TEventSource with url(self : Self) -> String {
   event_source_url_ffi(TJsValue::to_js(self))
 }
@@ -70,6 +73,7 @@ impl TEventSource with url(self : Self) -> String {
 extern "js" fn event_source_with_credentials_ffi(obj : JsValue) -> Bool = "(obj) => obj.withCredentials"
 
 ///|
+/// [EventSource.withCredentials](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/withCredentials)
 impl TEventSource with with_credentials(self : Self) -> Bool {
   event_source_with_credentials_ffi(TJsValue::to_js(self))
 }
@@ -78,6 +82,7 @@ impl TEventSource with with_credentials(self : Self) -> Bool {
 extern "js" fn event_source_ready_state_ffi(obj : JsValue) -> UInt = "(obj) => obj.readyState"
 
 ///|
+/// [EventSource.readyState](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/readyState)
 impl TEventSource with ready_state(self : Self) -> UInt {
   event_source_ready_state_ffi(TJsValue::to_js(self))
 }
@@ -86,6 +91,7 @@ impl TEventSource with ready_state(self : Self) -> UInt {
 extern "js" fn event_source_onopen_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onopen"
 
 ///|
+/// [EventSource.onopen](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onopen)
 impl TEventSource with onopen(self : Self) -> EventHandler {
   event_source_onopen_ffi(TJsValue::to_js(self))
 }
@@ -97,6 +103,7 @@ extern "js" fn event_source_set_onopen_ffi(
 ) -> Unit = "(obj, onopen) => { obj.onopen = onopen; }"
 
 ///|
+/// [EventSource.onopen](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onopen)
 impl TEventSource with set_onopen(self : Self, onopen : EventHandler) -> Unit {
   event_source_set_onopen_ffi(TJsValue::to_js(self), TJsValue::to_js(onopen))
 }
@@ -105,6 +112,7 @@ impl TEventSource with set_onopen(self : Self, onopen : EventHandler) -> Unit {
 extern "js" fn event_source_onmessage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessage"
 
 ///|
+/// [EventSource.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onmessage)
 impl TEventSource with onmessage(self : Self) -> EventHandler {
   event_source_onmessage_ffi(TJsValue::to_js(self))
 }
@@ -116,6 +124,7 @@ extern "js" fn event_source_set_onmessage_ffi(
 ) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
 
 ///|
+/// [EventSource.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onmessage)
 impl TEventSource with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
   event_source_set_onmessage_ffi(
     TJsValue::to_js(self),
@@ -127,6 +136,7 @@ impl TEventSource with set_onmessage(self : Self, onmessage : EventHandler) -> U
 extern "js" fn event_source_onerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onerror"
 
 ///|
+/// [EventSource.onerror](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onerror)
 impl TEventSource with onerror(self : Self) -> EventHandler {
   event_source_onerror_ffi(TJsValue::to_js(self))
 }
@@ -138,6 +148,7 @@ extern "js" fn event_source_set_onerror_ffi(
 ) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
 
 ///|
+/// [EventSource.onerror](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onerror)
 impl TEventSource with set_onerror(self : Self, onerror : EventHandler) -> Unit {
   event_source_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
@@ -146,6 +157,7 @@ impl TEventSource with set_onerror(self : Self, onerror : EventHandler) -> Unit 
 extern "js" fn event_source_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
+/// [EventSource.close](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/close)
 impl TEventSource with close(self : Self) -> Unit {
   event_source_close_ffi(TJsValue::to_js(self))
 }

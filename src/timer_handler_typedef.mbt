@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [TimerHandler](https://developer.mozilla.org/en-US/docs/Web/API/TimerHandler)
 #external
 pub type TimerHandler
 

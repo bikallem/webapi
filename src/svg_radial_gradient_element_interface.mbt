@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGRadialGradientElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement)
 #external
 pub type SVGRadialGradientElement
 
@@ -35,6 +36,7 @@ pub impl TNode for SVGRadialGradientElement
 pub impl TEventTarget for SVGRadialGradientElement
 
 ///|
+/// [SVGRadialGradientElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement) interface.
 pub trait TSVGRadialGradientElement: TSVGGradientElement {
   cx(self : Self) -> SVGAnimatedLength = _
   cy(self : Self) -> SVGAnimatedLength = _
@@ -50,6 +52,7 @@ extern "js" fn svg_radial_gradient_element_cx_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.cx"
 
 ///|
+/// [SVGRadialGradientElement.cx](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement/cx)
 impl TSVGRadialGradientElement with cx(self : Self) -> SVGAnimatedLength {
   svg_radial_gradient_element_cx_ffi(TJsValue::to_js(self))
 }
@@ -60,6 +63,7 @@ extern "js" fn svg_radial_gradient_element_cy_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.cy"
 
 ///|
+/// [SVGRadialGradientElement.cy](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement/cy)
 impl TSVGRadialGradientElement with cy(self : Self) -> SVGAnimatedLength {
   svg_radial_gradient_element_cy_ffi(TJsValue::to_js(self))
 }
@@ -70,6 +74,7 @@ extern "js" fn svg_radial_gradient_element_r_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.r"
 
 ///|
+/// [SVGRadialGradientElement.r](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement/r)
 impl TSVGRadialGradientElement with r(self : Self) -> SVGAnimatedLength {
   svg_radial_gradient_element_r_ffi(TJsValue::to_js(self))
 }
@@ -80,6 +85,7 @@ extern "js" fn svg_radial_gradient_element_fx_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.fx"
 
 ///|
+/// [SVGRadialGradientElement.fx](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement/fx)
 impl TSVGRadialGradientElement with fx(self : Self) -> SVGAnimatedLength {
   svg_radial_gradient_element_fx_ffi(TJsValue::to_js(self))
 }
@@ -90,6 +96,7 @@ extern "js" fn svg_radial_gradient_element_fy_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.fy"
 
 ///|
+/// [SVGRadialGradientElement.fy](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement/fy)
 impl TSVGRadialGradientElement with fy(self : Self) -> SVGAnimatedLength {
   svg_radial_gradient_element_fy_ffi(TJsValue::to_js(self))
 }
@@ -100,6 +107,7 @@ extern "js" fn svg_radial_gradient_element_fr_ffi(
 ) -> SVGAnimatedLength = "(obj) => obj.fr"
 
 ///|
+/// [SVGRadialGradientElement.fr](https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement/fr)
 impl TSVGRadialGradientElement with fr(self : Self) -> SVGAnimatedLength {
   svg_radial_gradient_element_fr_ffi(TJsValue::to_js(self))
 }

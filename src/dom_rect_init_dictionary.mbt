@@ -3,6 +3,7 @@
 // Specifications: geometry.idl
 
 ///|
+/// [DOMRectInit](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectInit)
 #external
 pub type DOMRectInit
 

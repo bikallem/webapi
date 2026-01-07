@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGAElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement)
 #external
 pub type SVGAElement
 
@@ -31,6 +32,7 @@ pub impl TNode for SVGAElement
 pub impl TEventTarget for SVGAElement
 
 ///|
+/// [SVGAElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement) interface.
 pub trait TSVGAElement: TSVGGraphicsElement {
   target(self : Self) -> SVGAnimatedString = _
   download(self : Self) -> String = _
@@ -72,6 +74,7 @@ pub trait TSVGAElement: TSVGGraphicsElement {
 extern "js" fn svga_element_target_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.target"
 
 ///|
+/// [SVGAElement.target](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/target)
 impl TSVGAElement with target(self : Self) -> SVGAnimatedString {
   svga_element_target_ffi(TJsValue::to_js(self))
 }
@@ -80,6 +83,7 @@ impl TSVGAElement with target(self : Self) -> SVGAnimatedString {
 extern "js" fn svga_element_download_ffi(obj : JsValue) -> String = "(obj) => obj.download"
 
 ///|
+/// [SVGAElement.download](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/download)
 impl TSVGAElement with download(self : Self) -> String {
   svga_element_download_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +95,7 @@ extern "js" fn svga_element_set_download_ffi(
 ) -> Unit = "(obj, download) => { obj.download = download; }"
 
 ///|
+/// [SVGAElement.download](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/download)
 impl TSVGAElement with set_download(self : Self, download : String) -> Unit {
   svga_element_set_download_ffi(
     TJsValue::to_js(self),
@@ -102,6 +107,7 @@ impl TSVGAElement with set_download(self : Self, download : String) -> Unit {
 extern "js" fn svga_element_ping_ffi(obj : JsValue) -> String = "(obj) => obj.ping"
 
 ///|
+/// [SVGAElement.ping](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/ping)
 impl TSVGAElement with ping(self : Self) -> String {
   svga_element_ping_ffi(TJsValue::to_js(self))
 }
@@ -110,6 +116,7 @@ impl TSVGAElement with ping(self : Self) -> String {
 extern "js" fn svga_element_set_ping_ffi(obj : JsValue, ping : JsValue) -> Unit = "(obj, ping) => { obj.ping = ping; }"
 
 ///|
+/// [SVGAElement.ping](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/ping)
 impl TSVGAElement with set_ping(self : Self, ping : String) -> Unit {
   svga_element_set_ping_ffi(TJsValue::to_js(self), TJsValue::to_js(ping))
 }
@@ -118,6 +125,7 @@ impl TSVGAElement with set_ping(self : Self, ping : String) -> Unit {
 extern "js" fn svga_element_rel_ffi(obj : JsValue) -> String = "(obj) => obj.rel"
 
 ///|
+/// [SVGAElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/rel)
 impl TSVGAElement with rel(self : Self) -> String {
   svga_element_rel_ffi(TJsValue::to_js(self))
 }
@@ -126,6 +134,7 @@ impl TSVGAElement with rel(self : Self) -> String {
 extern "js" fn svga_element_set_rel_ffi(obj : JsValue, rel : JsValue) -> Unit = "(obj, rel) => { obj.rel = rel; }"
 
 ///|
+/// [SVGAElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/rel)
 impl TSVGAElement with set_rel(self : Self, rel : String) -> Unit {
   svga_element_set_rel_ffi(TJsValue::to_js(self), TJsValue::to_js(rel))
 }
@@ -134,6 +143,7 @@ impl TSVGAElement with set_rel(self : Self, rel : String) -> Unit {
 extern "js" fn svga_element_rel_list_ffi(obj : JsValue) -> DOMTokenList = "(obj) => obj.relList"
 
 ///|
+/// [SVGAElement.relList](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/relList)
 impl TSVGAElement with rel_list(self : Self) -> DOMTokenList {
   svga_element_rel_list_ffi(TJsValue::to_js(self))
 }
@@ -142,6 +152,7 @@ impl TSVGAElement with rel_list(self : Self) -> DOMTokenList {
 extern "js" fn svga_element_hreflang_ffi(obj : JsValue) -> String = "(obj) => obj.hreflang"
 
 ///|
+/// [SVGAElement.hreflang](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/hreflang)
 impl TSVGAElement with hreflang(self : Self) -> String {
   svga_element_hreflang_ffi(TJsValue::to_js(self))
 }
@@ -153,6 +164,7 @@ extern "js" fn svga_element_set_hreflang_ffi(
 ) -> Unit = "(obj, hreflang) => { obj.hreflang = hreflang; }"
 
 ///|
+/// [SVGAElement.hreflang](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/hreflang)
 impl TSVGAElement with set_hreflang(self : Self, hreflang : String) -> Unit {
   svga_element_set_hreflang_ffi(
     TJsValue::to_js(self),
@@ -164,6 +176,7 @@ impl TSVGAElement with set_hreflang(self : Self, hreflang : String) -> Unit {
 extern "js" fn svga_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [SVGAElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/type)
 impl TSVGAElement with type_(self : Self) -> String {
   svga_element_type_ffi(TJsValue::to_js(self))
 }
@@ -175,6 +188,7 @@ extern "js" fn svga_element_set_type_ffi(
 ) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
+/// [SVGAElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/type)
 impl TSVGAElement with set_type_(self : Self, type_ : String) -> Unit {
   svga_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
@@ -183,6 +197,7 @@ impl TSVGAElement with set_type_(self : Self, type_ : String) -> Unit {
 extern "js" fn svga_element_referrer_policy_ffi(obj : JsValue) -> String = "(obj) => obj.referrerPolicy"
 
 ///|
+/// [SVGAElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/referrerPolicy)
 impl TSVGAElement with referrer_policy(self : Self) -> String {
   svga_element_referrer_policy_ffi(TJsValue::to_js(self))
 }
@@ -194,6 +209,7 @@ extern "js" fn svga_element_set_referrer_policy_ffi(
 ) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
+/// [SVGAElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/referrerPolicy)
 impl TSVGAElement with set_referrer_policy(
   self : Self,
   referrer_policy : String,
@@ -208,6 +224,7 @@ impl TSVGAElement with set_referrer_policy(
 extern "js" fn svga_element_origin_ffi(obj : JsValue) -> String = "(obj) => obj.origin"
 
 ///|
+/// [SVGAElement.origin](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/origin)
 impl TSVGAElement with origin(self : Self) -> String {
   svga_element_origin_ffi(TJsValue::to_js(self))
 }
@@ -216,6 +233,7 @@ impl TSVGAElement with origin(self : Self) -> String {
 extern "js" fn svga_element_protocol_ffi(obj : JsValue) -> String = "(obj) => obj.protocol"
 
 ///|
+/// [SVGAElement.protocol](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/protocol)
 impl TSVGAElement with protocol(self : Self) -> String {
   svga_element_protocol_ffi(TJsValue::to_js(self))
 }
@@ -227,6 +245,7 @@ extern "js" fn svga_element_set_protocol_ffi(
 ) -> Unit = "(obj, protocol) => { obj.protocol = protocol; }"
 
 ///|
+/// [SVGAElement.protocol](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/protocol)
 impl TSVGAElement with set_protocol(self : Self, protocol : String) -> Unit {
   svga_element_set_protocol_ffi(
     TJsValue::to_js(self),
@@ -238,6 +257,7 @@ impl TSVGAElement with set_protocol(self : Self, protocol : String) -> Unit {
 extern "js" fn svga_element_username_ffi(obj : JsValue) -> String = "(obj) => obj.username"
 
 ///|
+/// [SVGAElement.username](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/username)
 impl TSVGAElement with username(self : Self) -> String {
   svga_element_username_ffi(TJsValue::to_js(self))
 }
@@ -249,6 +269,7 @@ extern "js" fn svga_element_set_username_ffi(
 ) -> Unit = "(obj, username) => { obj.username = username; }"
 
 ///|
+/// [SVGAElement.username](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/username)
 impl TSVGAElement with set_username(self : Self, username : String) -> Unit {
   svga_element_set_username_ffi(
     TJsValue::to_js(self),
@@ -260,6 +281,7 @@ impl TSVGAElement with set_username(self : Self, username : String) -> Unit {
 extern "js" fn svga_element_password_ffi(obj : JsValue) -> String = "(obj) => obj.password"
 
 ///|
+/// [SVGAElement.password](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/password)
 impl TSVGAElement with password(self : Self) -> String {
   svga_element_password_ffi(TJsValue::to_js(self))
 }
@@ -271,6 +293,7 @@ extern "js" fn svga_element_set_password_ffi(
 ) -> Unit = "(obj, password) => { obj.password = password; }"
 
 ///|
+/// [SVGAElement.password](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/password)
 impl TSVGAElement with set_password(self : Self, password : String) -> Unit {
   svga_element_set_password_ffi(
     TJsValue::to_js(self),
@@ -282,6 +305,7 @@ impl TSVGAElement with set_password(self : Self, password : String) -> Unit {
 extern "js" fn svga_element_host_ffi(obj : JsValue) -> String = "(obj) => obj.host"
 
 ///|
+/// [SVGAElement.host](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/host)
 impl TSVGAElement with host(self : Self) -> String {
   svga_element_host_ffi(TJsValue::to_js(self))
 }
@@ -290,6 +314,7 @@ impl TSVGAElement with host(self : Self) -> String {
 extern "js" fn svga_element_set_host_ffi(obj : JsValue, host : JsValue) -> Unit = "(obj, host) => { obj.host = host; }"
 
 ///|
+/// [SVGAElement.host](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/host)
 impl TSVGAElement with set_host(self : Self, host : String) -> Unit {
   svga_element_set_host_ffi(TJsValue::to_js(self), TJsValue::to_js(host))
 }
@@ -298,6 +323,7 @@ impl TSVGAElement with set_host(self : Self, host : String) -> Unit {
 extern "js" fn svga_element_hostname_ffi(obj : JsValue) -> String = "(obj) => obj.hostname"
 
 ///|
+/// [SVGAElement.hostname](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/hostname)
 impl TSVGAElement with hostname(self : Self) -> String {
   svga_element_hostname_ffi(TJsValue::to_js(self))
 }
@@ -309,6 +335,7 @@ extern "js" fn svga_element_set_hostname_ffi(
 ) -> Unit = "(obj, hostname) => { obj.hostname = hostname; }"
 
 ///|
+/// [SVGAElement.hostname](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/hostname)
 impl TSVGAElement with set_hostname(self : Self, hostname : String) -> Unit {
   svga_element_set_hostname_ffi(
     TJsValue::to_js(self),
@@ -320,6 +347,7 @@ impl TSVGAElement with set_hostname(self : Self, hostname : String) -> Unit {
 extern "js" fn svga_element_port_ffi(obj : JsValue) -> String = "(obj) => obj.port"
 
 ///|
+/// [SVGAElement.port](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/port)
 impl TSVGAElement with port(self : Self) -> String {
   svga_element_port_ffi(TJsValue::to_js(self))
 }
@@ -328,6 +356,7 @@ impl TSVGAElement with port(self : Self) -> String {
 extern "js" fn svga_element_set_port_ffi(obj : JsValue, port : JsValue) -> Unit = "(obj, port) => { obj.port = port; }"
 
 ///|
+/// [SVGAElement.port](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/port)
 impl TSVGAElement with set_port(self : Self, port : String) -> Unit {
   svga_element_set_port_ffi(TJsValue::to_js(self), TJsValue::to_js(port))
 }
@@ -336,6 +365,7 @@ impl TSVGAElement with set_port(self : Self, port : String) -> Unit {
 extern "js" fn svga_element_pathname_ffi(obj : JsValue) -> String = "(obj) => obj.pathname"
 
 ///|
+/// [SVGAElement.pathname](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/pathname)
 impl TSVGAElement with pathname(self : Self) -> String {
   svga_element_pathname_ffi(TJsValue::to_js(self))
 }
@@ -347,6 +377,7 @@ extern "js" fn svga_element_set_pathname_ffi(
 ) -> Unit = "(obj, pathname) => { obj.pathname = pathname; }"
 
 ///|
+/// [SVGAElement.pathname](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/pathname)
 impl TSVGAElement with set_pathname(self : Self, pathname : String) -> Unit {
   svga_element_set_pathname_ffi(
     TJsValue::to_js(self),
@@ -358,6 +389,7 @@ impl TSVGAElement with set_pathname(self : Self, pathname : String) -> Unit {
 extern "js" fn svga_element_search_ffi(obj : JsValue) -> String = "(obj) => obj.search"
 
 ///|
+/// [SVGAElement.search](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/search)
 impl TSVGAElement with search(self : Self) -> String {
   svga_element_search_ffi(TJsValue::to_js(self))
 }
@@ -369,6 +401,7 @@ extern "js" fn svga_element_set_search_ffi(
 ) -> Unit = "(obj, search) => { obj.search = search; }"
 
 ///|
+/// [SVGAElement.search](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/search)
 impl TSVGAElement with set_search(self : Self, search : String) -> Unit {
   svga_element_set_search_ffi(TJsValue::to_js(self), TJsValue::to_js(search))
 }
@@ -377,6 +410,7 @@ impl TSVGAElement with set_search(self : Self, search : String) -> Unit {
 extern "js" fn svga_element_hash_ffi(obj : JsValue) -> String = "(obj) => obj.hash"
 
 ///|
+/// [SVGAElement.hash](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/hash)
 impl TSVGAElement with hash(self : Self) -> String {
   svga_element_hash_ffi(TJsValue::to_js(self))
 }
@@ -385,6 +419,7 @@ impl TSVGAElement with hash(self : Self) -> String {
 extern "js" fn svga_element_set_hash_ffi(obj : JsValue, hash : JsValue) -> Unit = "(obj, hash) => { obj.hash = hash; }"
 
 ///|
+/// [SVGAElement.hash](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/hash)
 impl TSVGAElement with set_hash(self : Self, hash : String) -> Unit {
   svga_element_set_hash_ffi(TJsValue::to_js(self), TJsValue::to_js(hash))
 }
@@ -393,6 +428,7 @@ impl TSVGAElement with set_hash(self : Self, hash : String) -> Unit {
 extern "js" fn svga_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.href"
 
 ///|
+/// [SVGAElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement/href)
 impl TSVGAElement with href(self : Self) -> SVGAnimatedString {
   svga_element_href_ffi(TJsValue::to_js(self))
 }

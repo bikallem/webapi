@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CanvasPattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern)
 #external
 pub type CanvasPattern
 
@@ -16,6 +17,7 @@ pub fn[T : TCanvasPattern] CanvasPattern::into(self : CanvasPattern) -> T = "%id
 pub impl TCanvasPattern for CanvasPattern
 
 ///|
+/// [CanvasPattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern) interface.
 pub trait TCanvasPattern: TJsValue {
   set_transform(self : Self, transform? : DOMMatrix2DInit) -> Unit = _
 }
@@ -27,6 +29,7 @@ extern "js" fn canvas_pattern_set_transform_ffi(
 ) -> Unit = "(obj, transform) => obj.setTransform(transform)"
 
 ///|
+/// [CanvasPattern.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern/setTransform)
 impl TCanvasPattern with set_transform(
   self : Self,
   transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),

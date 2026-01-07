@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGEllipseElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement)
 #external
 pub type SVGEllipseElement
 
@@ -36,6 +37,7 @@ pub impl TNode for SVGEllipseElement
 pub impl TEventTarget for SVGEllipseElement
 
 ///|
+/// [SVGEllipseElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement) interface.
 pub trait TSVGEllipseElement: TSVGGeometryElement {
   cx(self : Self) -> SVGAnimatedLength = _
   cy(self : Self) -> SVGAnimatedLength = _
@@ -47,6 +49,7 @@ pub trait TSVGEllipseElement: TSVGGeometryElement {
 extern "js" fn svg_ellipse_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cx"
 
 ///|
+/// [SVGEllipseElement.cx](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/cx)
 impl TSVGEllipseElement with cx(self : Self) -> SVGAnimatedLength {
   svg_ellipse_element_cx_ffi(TJsValue::to_js(self))
 }
@@ -55,6 +58,7 @@ impl TSVGEllipseElement with cx(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_ellipse_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cy"
 
 ///|
+/// [SVGEllipseElement.cy](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/cy)
 impl TSVGEllipseElement with cy(self : Self) -> SVGAnimatedLength {
   svg_ellipse_element_cy_ffi(TJsValue::to_js(self))
 }
@@ -63,6 +67,7 @@ impl TSVGEllipseElement with cy(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_ellipse_element_rx_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.rx"
 
 ///|
+/// [SVGEllipseElement.rx](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/rx)
 impl TSVGEllipseElement with rx(self : Self) -> SVGAnimatedLength {
   svg_ellipse_element_rx_ffi(TJsValue::to_js(self))
 }
@@ -71,6 +76,7 @@ impl TSVGEllipseElement with rx(self : Self) -> SVGAnimatedLength {
 extern "js" fn svg_ellipse_element_ry_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.ry"
 
 ///|
+/// [SVGEllipseElement.ry](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/ry)
 impl TSVGEllipseElement with ry(self : Self) -> SVGAnimatedLength {
   svg_ellipse_element_ry_ffi(TJsValue::to_js(self))
 }

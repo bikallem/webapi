@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGAnimatedInteger](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger)
 #external
 pub type SVGAnimatedInteger
 
@@ -18,6 +19,7 @@ pub fn[T : TSVGAnimatedInteger] SVGAnimatedInteger::into(
 pub impl TSVGAnimatedInteger for SVGAnimatedInteger
 
 ///|
+/// [SVGAnimatedInteger](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger) interface.
 pub trait TSVGAnimatedInteger: TJsValue {
   base_val(self : Self) -> Int = _
   set_base_val(self : Self, base_val : Int) -> Unit = _
@@ -28,6 +30,7 @@ pub trait TSVGAnimatedInteger: TJsValue {
 extern "js" fn svg_animated_integer_base_val_ffi(obj : JsValue) -> Int = "(obj) => obj.baseVal"
 
 ///|
+/// [SVGAnimatedInteger.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger/baseVal)
 impl TSVGAnimatedInteger with base_val(self : Self) -> Int {
   svg_animated_integer_base_val_ffi(TJsValue::to_js(self))
 }
@@ -39,6 +42,7 @@ extern "js" fn svg_animated_integer_set_base_val_ffi(
 ) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
 
 ///|
+/// [SVGAnimatedInteger.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger/baseVal)
 impl TSVGAnimatedInteger with set_base_val(self : Self, base_val : Int) -> Unit {
   svg_animated_integer_set_base_val_ffi(
     TJsValue::to_js(self),
@@ -50,6 +54,7 @@ impl TSVGAnimatedInteger with set_base_val(self : Self, base_val : Int) -> Unit 
 extern "js" fn svg_animated_integer_anim_val_ffi(obj : JsValue) -> Int = "(obj) => obj.animVal"
 
 ///|
+/// [SVGAnimatedInteger.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger/animVal)
 impl TSVGAnimatedInteger with anim_val(self : Self) -> Int {
   svg_animated_integer_anim_val_ffi(TJsValue::to_js(self))
 }

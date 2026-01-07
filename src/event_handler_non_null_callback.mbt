@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [EventHandlerNonNull](https://developer.mozilla.org/en-US/docs/Web/API/EventHandlerNonNull)
 #external
 pub type EventHandlerNonNull
 

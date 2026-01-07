@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData)
 #external
 pub type ImageData
 
@@ -59,6 +60,7 @@ pub fn ImageData::new_2(
 }
 
 ///|
+/// [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) interface.
 pub trait TImageData: TJsValue {
   width(self : Self) -> UInt = _
   height(self : Self) -> UInt = _
@@ -71,6 +73,7 @@ pub trait TImageData: TJsValue {
 extern "js" fn image_data_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
 
 ///|
+/// [ImageData.width](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/width)
 impl TImageData with width(self : Self) -> UInt {
   image_data_width_ffi(TJsValue::to_js(self))
 }
@@ -79,6 +82,7 @@ impl TImageData with width(self : Self) -> UInt {
 extern "js" fn image_data_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
 
 ///|
+/// [ImageData.height](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/height)
 impl TImageData with height(self : Self) -> UInt {
   image_data_height_ffi(TJsValue::to_js(self))
 }
@@ -87,6 +91,7 @@ impl TImageData with height(self : Self) -> UInt {
 extern "js" fn image_data_data_ffi(obj : JsValue) -> ImageDataArray = "(obj) => obj.data"
 
 ///|
+/// [ImageData.data](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/data)
 impl TImageData with data(self : Self) -> ImageDataArray {
   image_data_data_ffi(TJsValue::to_js(self))
 }
@@ -97,6 +102,7 @@ extern "js" fn image_data_pixel_format_ffi(
 ) -> ImageDataPixelFormat = "(obj) => obj.pixelFormat"
 
 ///|
+/// [ImageData.pixelFormat](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/pixelFormat)
 impl TImageData with pixel_format(self : Self) -> ImageDataPixelFormat {
   image_data_pixel_format_ffi(TJsValue::to_js(self))
 }
@@ -107,6 +113,7 @@ extern "js" fn image_data_color_space_ffi(
 ) -> PredefinedColorSpace = "(obj) => obj.colorSpace"
 
 ///|
+/// [ImageData.colorSpace](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/colorSpace)
 impl TImageData with color_space(self : Self) -> PredefinedColorSpace {
   image_data_color_space_ffi(TJsValue::to_js(self))
 }

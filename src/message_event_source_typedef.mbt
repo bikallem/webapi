@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [MessageEventSource](https://developer.mozilla.org/en-US/docs/Web/API/MessageEventSource)
 #external
 pub type MessageEventSource
 

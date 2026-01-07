@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [FocusEvent](https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent)
 #external
 pub type FocusEvent
 
@@ -36,6 +37,7 @@ pub fn FocusEvent::new(
 }
 
 ///|
+/// [FocusEvent](https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent) interface.
 pub trait TFocusEvent: TUIEvent {
   related_target(self : Self) -> EventTarget = _
 }
@@ -44,6 +46,7 @@ pub trait TFocusEvent: TUIEvent {
 extern "js" fn focus_event_related_target_ffi(obj : JsValue) -> EventTarget = "(obj) => obj.relatedTarget"
 
 ///|
+/// [FocusEvent.relatedTarget](https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
 impl TFocusEvent with related_target(self : Self) -> EventTarget {
   focus_event_related_target_ffi(TJsValue::to_js(self))
 }

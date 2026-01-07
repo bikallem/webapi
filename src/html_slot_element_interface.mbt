@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement)
 #external
 pub type HTMLSlotElement
 
@@ -47,6 +48,7 @@ pub impl THTMLSlotElementAssignNodes for Element with to_js(self : Element) -> J
 pub impl THTMLSlotElementAssignNodes for Text with to_js(self : Text) -> JsValue = "%identity"
 
 ///|
+/// [HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement) interface.
 pub trait THTMLSlotElement: THTMLElement {
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
@@ -61,6 +63,7 @@ pub trait THTMLSlotElement: THTMLElement {
 extern "js" fn html_slot_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLSlotElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/name)
 impl THTMLSlotElement with name(self : Self) -> String {
   html_slot_element_name_ffi(TJsValue::to_js(self))
 }
@@ -72,6 +75,7 @@ extern "js" fn html_slot_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLSlotElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/name)
 impl THTMLSlotElement with set_name(self : Self, name : String) -> Unit {
   html_slot_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -83,6 +87,7 @@ extern "js" fn html_slot_element_assigned_nodes_ffi(
 ) -> Array[Node] = "(obj, options) => obj.assignedNodes(options)"
 
 ///|
+/// [HTMLSlotElement.assignedNodes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes)
 impl THTMLSlotElement with assigned_nodes(
   self : Self,
   options? : AssignedNodesOptions = AssignedNodesOptions::empty(),
@@ -100,6 +105,7 @@ extern "js" fn html_slot_element_assigned_elements_ffi(
 ) -> Array[Element] = "(obj, options) => obj.assignedElements(options)"
 
 ///|
+/// [HTMLSlotElement.assignedElements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements)
 impl THTMLSlotElement with assigned_elements(
   self : Self,
   options? : AssignedNodesOptions = AssignedNodesOptions::empty(),
@@ -117,6 +123,7 @@ extern "js" fn html_slot_element_assign_ffi(
 ) -> Unit = "(obj, nodes) => obj.assign(nodes)"
 
 ///|
+/// [HTMLSlotElement.assign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assign)
 impl THTMLSlotElement with assign(
   self : Self,
   nodes : &THTMLSlotElementAssignNodes,

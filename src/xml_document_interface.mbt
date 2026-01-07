@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [XMLDocument](https://developer.mozilla.org/en-US/docs/Web/API/XMLDocument)
 #external
 pub type XMLDocument
 
@@ -25,4 +26,5 @@ pub impl TNode for XMLDocument
 pub impl TEventTarget for XMLDocument
 
 ///|
+/// [XMLDocument](https://developer.mozilla.org/en-US/docs/Web/API/XMLDocument) interface.
 pub trait TXMLDocument: TDocument {}

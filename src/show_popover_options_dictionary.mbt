@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ShowPopoverOptions](https://developer.mozilla.org/en-US/docs/Web/API/ShowPopoverOptions)
 #external
 pub type ShowPopoverOptions
 

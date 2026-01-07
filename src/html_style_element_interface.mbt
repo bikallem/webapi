@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLStyleElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement)
 #external
 pub type HTMLStyleElement
 
@@ -38,6 +39,7 @@ pub fn HTMLStyleElement::new() -> HTMLStyleElement {
 }
 
 ///|
+/// [HTMLStyleElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement) interface.
 pub trait THTMLStyleElement: THTMLElement {
   disabled(self : Self) -> Bool = _
   set_disabled(self : Self, disabled : Bool) -> Unit = _
@@ -53,6 +55,7 @@ pub trait THTMLStyleElement: THTMLElement {
 extern "js" fn html_style_element_disabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.disabled"
 
 ///|
+/// [HTMLStyleElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/disabled)
 impl THTMLStyleElement with disabled(self : Self) -> Bool {
   html_style_element_disabled_ffi(TJsValue::to_js(self))
 }
@@ -64,6 +67,7 @@ extern "js" fn html_style_element_set_disabled_ffi(
 ) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
+/// [HTMLStyleElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/disabled)
 impl THTMLStyleElement with set_disabled(self : Self, disabled : Bool) -> Unit {
   html_style_element_set_disabled_ffi(
     TJsValue::to_js(self),
@@ -75,6 +79,7 @@ impl THTMLStyleElement with set_disabled(self : Self, disabled : Bool) -> Unit {
 extern "js" fn html_style_element_media_ffi(obj : JsValue) -> String = "(obj) => obj.media"
 
 ///|
+/// [HTMLStyleElement.media](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/media)
 impl THTMLStyleElement with media(self : Self) -> String {
   html_style_element_media_ffi(TJsValue::to_js(self))
 }
@@ -86,6 +91,7 @@ extern "js" fn html_style_element_set_media_ffi(
 ) -> Unit = "(obj, media) => { obj.media = media; }"
 
 ///|
+/// [HTMLStyleElement.media](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/media)
 impl THTMLStyleElement with set_media(self : Self, media : String) -> Unit {
   html_style_element_set_media_ffi(
     TJsValue::to_js(self),
@@ -97,6 +103,7 @@ impl THTMLStyleElement with set_media(self : Self, media : String) -> Unit {
 extern "js" fn html_style_element_blocking_ffi(obj : JsValue) -> DOMTokenList = "(obj) => obj.blocking"
 
 ///|
+/// [HTMLStyleElement.blocking](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/blocking)
 impl THTMLStyleElement with blocking(self : Self) -> DOMTokenList {
   html_style_element_blocking_ffi(TJsValue::to_js(self))
 }
@@ -105,6 +112,7 @@ impl THTMLStyleElement with blocking(self : Self) -> DOMTokenList {
 extern "js" fn html_style_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
 
 ///|
+/// [HTMLStyleElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/type)
 impl THTMLStyleElement with type_(self : Self) -> String {
   html_style_element_type_ffi(TJsValue::to_js(self))
 }
@@ -116,6 +124,7 @@ extern "js" fn html_style_element_set_type_ffi(
 ) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
+/// [HTMLStyleElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/type)
 impl THTMLStyleElement with set_type_(self : Self, type_ : String) -> Unit {
   html_style_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
@@ -124,6 +133,7 @@ impl THTMLStyleElement with set_type_(self : Self, type_ : String) -> Unit {
 extern "js" fn html_style_element_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "(obj) => obj.sheet"
 
 ///|
+/// [HTMLStyleElement.sheet](https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement/sheet)
 impl THTMLStyleElement with sheet(self : Self) -> CSSStyleSheet {
   html_style_element_sheet_ffi(TJsValue::to_js(self))
 }

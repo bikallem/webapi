@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [FunctionStringCallback](https://developer.mozilla.org/en-US/docs/Web/API/FunctionStringCallback)
 #external
 pub type FunctionStringCallback
 

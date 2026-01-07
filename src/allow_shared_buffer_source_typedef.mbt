@@ -3,6 +3,7 @@
 // Specifications: webidl.idl
 
 ///|
+/// [AllowSharedBufferSource](https://developer.mozilla.org/en-US/docs/Web/API/AllowSharedBufferSource)
 #external
 pub type AllowSharedBufferSource
 

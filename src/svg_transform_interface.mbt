@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGTransform](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform)
 #external
 pub type SVGTransform
 
@@ -37,6 +38,7 @@ pub const SVG_TRANSFORM_SVG_TRANSFORM_SKEWX : UInt = 5
 pub const SVG_TRANSFORM_SVG_TRANSFORM_SKEWY : UInt = 6
 
 ///|
+/// [SVGTransform](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform) interface.
 pub trait TSVGTransform: TJsValue {
   type_(self : Self) -> UInt = _
   matrix(self : Self) -> DOMMatrix = _
@@ -53,6 +55,7 @@ pub trait TSVGTransform: TJsValue {
 extern "js" fn svg_transform_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.type"
 
 ///|
+/// [SVGTransform.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/type)
 impl TSVGTransform with type_(self : Self) -> UInt {
   svg_transform_type_ffi(TJsValue::to_js(self))
 }
@@ -61,6 +64,7 @@ impl TSVGTransform with type_(self : Self) -> UInt {
 extern "js" fn svg_transform_matrix_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.matrix"
 
 ///|
+/// [SVGTransform.matrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/matrix)
 impl TSVGTransform with matrix(self : Self) -> DOMMatrix {
   svg_transform_matrix_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +73,7 @@ impl TSVGTransform with matrix(self : Self) -> DOMMatrix {
 extern "js" fn svg_transform_angle_ffi(obj : JsValue) -> Float = "(obj) => obj.angle"
 
 ///|
+/// [SVGTransform.angle](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/angle)
 impl TSVGTransform with angle(self : Self) -> Float {
   svg_transform_angle_ffi(TJsValue::to_js(self))
 }
@@ -80,6 +85,7 @@ extern "js" fn svg_transform_set_matrix_ffi(
 ) -> Unit = "(obj, matrix) => obj.setMatrix(matrix)"
 
 ///|
+/// [SVGTransform.setMatrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/setMatrix)
 impl TSVGTransform with set_matrix(
   self : Self,
   matrix? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
@@ -95,6 +101,7 @@ extern "js" fn svg_transform_set_translate_ffi(
 ) -> Unit = "(obj, tx, ty) => obj.setTranslate(tx, ty)"
 
 ///|
+/// [SVGTransform.setTranslate](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/setTranslate)
 impl TSVGTransform with set_translate(self : Self, tx : Float, ty : Float) -> Unit {
   svg_transform_set_translate_ffi(
     TJsValue::to_js(self),
@@ -111,6 +118,7 @@ extern "js" fn svg_transform_set_scale_ffi(
 ) -> Unit = "(obj, sx, sy) => obj.setScale(sx, sy)"
 
 ///|
+/// [SVGTransform.setScale](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/setScale)
 impl TSVGTransform with set_scale(self : Self, sx : Float, sy : Float) -> Unit {
   svg_transform_set_scale_ffi(
     TJsValue::to_js(self),
@@ -128,6 +136,7 @@ extern "js" fn svg_transform_set_rotate_ffi(
 ) -> Unit = "(obj, angle, cx, cy) => obj.setRotate(angle, cx, cy)"
 
 ///|
+/// [SVGTransform.setRotate](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/setRotate)
 impl TSVGTransform with set_rotate(
   self : Self,
   angle : Float,
@@ -149,6 +158,7 @@ extern "js" fn svg_transform_set_skew_x_ffi(
 ) -> Unit = "(obj, angle) => obj.setSkewX(angle)"
 
 ///|
+/// [SVGTransform.setSkewX](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/setSkewX)
 impl TSVGTransform with set_skew_x(self : Self, angle : Float) -> Unit {
   svg_transform_set_skew_x_ffi(TJsValue::to_js(self), TJsValue::to_js(angle))
 }
@@ -160,6 +170,7 @@ extern "js" fn svg_transform_set_skew_y_ffi(
 ) -> Unit = "(obj, angle) => obj.setSkewY(angle)"
 
 ///|
+/// [SVGTransform.setSkewY](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/setSkewY)
 impl TSVGTransform with set_skew_y(self : Self, angle : Float) -> Unit {
   svg_transform_set_skew_y_ffi(TJsValue::to_js(self), TJsValue::to_js(angle))
 }

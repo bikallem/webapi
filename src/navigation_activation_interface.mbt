@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationActivation](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation)
 #external
 pub type NavigationActivation
 
@@ -20,6 +21,7 @@ pub fn[T : TNavigationActivation] NavigationActivation::into(
 pub impl TNavigationActivation for NavigationActivation
 
 ///|
+/// [NavigationActivation](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation) interface.
 pub trait TNavigationActivation: TJsValue {
   from(self : Self) -> NavigationHistoryEntry = _
   entry(self : Self) -> NavigationHistoryEntry = _
@@ -32,6 +34,7 @@ extern "js" fn navigation_activation_from_ffi(
 ) -> NavigationHistoryEntry = "(obj) => obj.from"
 
 ///|
+/// [NavigationActivation.from](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/from)
 impl TNavigationActivation with from(self : Self) -> NavigationHistoryEntry {
   navigation_activation_from_ffi(TJsValue::to_js(self))
 }
@@ -42,6 +45,7 @@ extern "js" fn navigation_activation_entry_ffi(
 ) -> NavigationHistoryEntry = "(obj) => obj.entry"
 
 ///|
+/// [NavigationActivation.entry](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/entry)
 impl TNavigationActivation with entry(self : Self) -> NavigationHistoryEntry {
   navigation_activation_entry_ffi(TJsValue::to_js(self))
 }
@@ -52,6 +56,7 @@ extern "js" fn navigation_activation_navigation_type_ffi(
 ) -> NavigationType = "(obj) => obj.navigationType"
 
 ///|
+/// [NavigationActivation.navigationType](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/navigationType)
 impl TNavigationActivation with navigation_type(self : Self) -> NavigationType {
   navigation_activation_navigation_type_ffi(TJsValue::to_js(self))
 }

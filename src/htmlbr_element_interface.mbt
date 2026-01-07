@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLBRElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBRElement)
 #external
 pub type HTMLBRElement
 
@@ -36,6 +37,7 @@ pub fn HTMLBRElement::new() -> HTMLBRElement {
 }
 
 ///|
+/// [HTMLBRElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBRElement) interface.
 pub trait THTMLBRElement: THTMLElement {
   clear(self : Self) -> String = _
   set_clear(self : Self, clear : String) -> Unit = _
@@ -45,6 +47,7 @@ pub trait THTMLBRElement: THTMLElement {
 extern "js" fn htmlbr_element_clear_ffi(obj : JsValue) -> String = "(obj) => obj.clear"
 
 ///|
+/// [HTMLBRElement.clear](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBRElement/clear)
 impl THTMLBRElement with clear(self : Self) -> String {
   htmlbr_element_clear_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ extern "js" fn htmlbr_element_set_clear_ffi(
 ) -> Unit = "(obj, clear) => { obj.clear = clear; }"
 
 ///|
+/// [HTMLBRElement.clear](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBRElement/clear)
 impl THTMLBRElement with set_clear(self : Self, clear : String) -> Unit {
   htmlbr_element_set_clear_ffi(TJsValue::to_js(self), TJsValue::to_js(clear))
 }

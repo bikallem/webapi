@@ -3,6 +3,7 @@
 // Specifications: performance-timeline.idl
 
 ///|
+/// [PerformanceObserverCallbackOptions](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverCallbackOptions)
 #external
 pub type PerformanceObserverCallbackOptions
 

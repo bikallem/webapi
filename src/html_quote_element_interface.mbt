@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLQuoteElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement)
 #external
 pub type HTMLQuoteElement
 
@@ -38,6 +39,7 @@ pub fn HTMLQuoteElement::new() -> HTMLQuoteElement {
 }
 
 ///|
+/// [HTMLQuoteElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement) interface.
 pub trait THTMLQuoteElement: THTMLElement {
   cite(self : Self) -> String = _
   set_cite(self : Self, cite : String) -> Unit = _
@@ -47,6 +49,7 @@ pub trait THTMLQuoteElement: THTMLElement {
 extern "js" fn html_quote_element_cite_ffi(obj : JsValue) -> String = "(obj) => obj.cite"
 
 ///|
+/// [HTMLQuoteElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement/cite)
 impl THTMLQuoteElement with cite(self : Self) -> String {
   html_quote_element_cite_ffi(TJsValue::to_js(self))
 }
@@ -58,6 +61,7 @@ extern "js" fn html_quote_element_set_cite_ffi(
 ) -> Unit = "(obj, cite) => { obj.cite = cite; }"
 
 ///|
+/// [HTMLQuoteElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement/cite)
 impl THTMLQuoteElement with set_cite(self : Self, cite : String) -> Unit {
   html_quote_element_set_cite_ffi(TJsValue::to_js(self), TJsValue::to_js(cite))
 }

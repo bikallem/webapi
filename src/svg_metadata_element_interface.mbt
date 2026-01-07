@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGMetadataElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGMetadataElement)
 #external
 pub type SVGMetadataElement
 
@@ -30,4 +31,5 @@ pub impl TNode for SVGMetadataElement
 pub impl TEventTarget for SVGMetadataElement
 
 ///|
+/// [SVGMetadataElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGMetadataElement) interface.
 pub trait TSVGMetadataElement: TSVGElement {}

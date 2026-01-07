@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [RenderingContext](https://developer.mozilla.org/en-US/docs/Web/API/RenderingContext)
 #external
 pub type RenderingContext
 

@@ -3,6 +3,7 @@
 // Specifications: fetch.idl
 
 ///|
+/// [DeferredRequestInit](https://developer.mozilla.org/en-US/docs/Web/API/DeferredRequestInit)
 #external
 pub type DeferredRequestInit
 

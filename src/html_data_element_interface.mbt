@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLDataElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataElement)
 #external
 pub type HTMLDataElement
 
@@ -36,6 +37,7 @@ pub fn HTMLDataElement::new() -> HTMLDataElement {
 }
 
 ///|
+/// [HTMLDataElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataElement) interface.
 pub trait THTMLDataElement: THTMLElement {
   value(self : Self) -> String = _
   set_value(self : Self, value : String) -> Unit = _
@@ -45,6 +47,7 @@ pub trait THTMLDataElement: THTMLElement {
 extern "js" fn html_data_element_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
 
 ///|
+/// [HTMLDataElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataElement/value)
 impl THTMLDataElement with value(self : Self) -> String {
   html_data_element_value_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ extern "js" fn html_data_element_set_value_ffi(
 ) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
+/// [HTMLDataElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataElement/value)
 impl THTMLDataElement with set_value(self : Self, value : String) -> Unit {
   html_data_element_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }

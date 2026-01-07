@@ -3,6 +3,7 @@
 // Specifications: trusted-types.idl
 
 ///|
+/// [CreateHTMLCallback](https://developer.mozilla.org/en-US/docs/Web/API/CreateHTMLCallback)
 #external
 pub type CreateHTMLCallback
 

@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLLegendElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLegendElement)
 #external
 pub type HTMLLegendElement
 
@@ -38,6 +39,7 @@ pub fn HTMLLegendElement::new() -> HTMLLegendElement {
 }
 
 ///|
+/// [HTMLLegendElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLegendElement) interface.
 pub trait THTMLLegendElement: THTMLElement {
   form(self : Self) -> HTMLFormElement = _
   align(self : Self) -> String = _
@@ -48,6 +50,7 @@ pub trait THTMLLegendElement: THTMLElement {
 extern "js" fn html_legend_element_form_ffi(obj : JsValue) -> HTMLFormElement = "(obj) => obj.form"
 
 ///|
+/// [HTMLLegendElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLegendElement/form)
 impl THTMLLegendElement with form(self : Self) -> HTMLFormElement {
   html_legend_element_form_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ impl THTMLLegendElement with form(self : Self) -> HTMLFormElement {
 extern "js" fn html_legend_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLLegendElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLegendElement/align)
 impl THTMLLegendElement with align(self : Self) -> String {
   html_legend_element_align_ffi(TJsValue::to_js(self))
 }
@@ -67,6 +71,7 @@ extern "js" fn html_legend_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLLegendElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLegendElement/align)
 impl THTMLLegendElement with set_align(self : Self, align : String) -> Unit {
   html_legend_element_set_align_ffi(
     TJsValue::to_js(self),

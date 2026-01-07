@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGUnitTypes](https://developer.mozilla.org/en-US/docs/Web/API/SVGUnitTypes)
 #external
 pub type SVGUnitTypes
 
@@ -25,4 +26,5 @@ pub const SVG_UNIT_TYPES_SVG_UNIT_TYPE_USERSPACEONUSE : UInt = 1
 pub const SVG_UNIT_TYPES_SVG_UNIT_TYPE_OBJECTBOUNDINGBOX : UInt = 2
 
 ///|
+/// [SVGUnitTypes](https://developer.mozilla.org/en-US/docs/Web/API/SVGUnitTypes) interface.
 pub trait TSVGUnitTypes: TJsValue {}

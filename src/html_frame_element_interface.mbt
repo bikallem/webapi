@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLFrameElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement)
 #external
 pub type HTMLFrameElement
 
@@ -38,6 +39,7 @@ pub fn HTMLFrameElement::new() -> HTMLFrameElement {
 }
 
 ///|
+/// [HTMLFrameElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement) interface.
 pub trait THTMLFrameElement: THTMLElement {
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
@@ -63,6 +65,7 @@ pub trait THTMLFrameElement: THTMLElement {
 extern "js" fn html_frame_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
+/// [HTMLFrameElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/name)
 impl THTMLFrameElement with name(self : Self) -> String {
   html_frame_element_name_ffi(TJsValue::to_js(self))
 }
@@ -74,6 +77,7 @@ extern "js" fn html_frame_element_set_name_ffi(
 ) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
+/// [HTMLFrameElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/name)
 impl THTMLFrameElement with set_name(self : Self, name : String) -> Unit {
   html_frame_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -82,6 +86,7 @@ impl THTMLFrameElement with set_name(self : Self, name : String) -> Unit {
 extern "js" fn html_frame_element_scrolling_ffi(obj : JsValue) -> String = "(obj) => obj.scrolling"
 
 ///|
+/// [HTMLFrameElement.scrolling](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/scrolling)
 impl THTMLFrameElement with scrolling(self : Self) -> String {
   html_frame_element_scrolling_ffi(TJsValue::to_js(self))
 }
@@ -93,6 +98,7 @@ extern "js" fn html_frame_element_set_scrolling_ffi(
 ) -> Unit = "(obj, scrolling) => { obj.scrolling = scrolling; }"
 
 ///|
+/// [HTMLFrameElement.scrolling](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/scrolling)
 impl THTMLFrameElement with set_scrolling(self : Self, scrolling : String) -> Unit {
   html_frame_element_set_scrolling_ffi(
     TJsValue::to_js(self),
@@ -104,6 +110,7 @@ impl THTMLFrameElement with set_scrolling(self : Self, scrolling : String) -> Un
 extern "js" fn html_frame_element_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
 
 ///|
+/// [HTMLFrameElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/src)
 impl THTMLFrameElement with src(self : Self) -> String {
   html_frame_element_src_ffi(TJsValue::to_js(self))
 }
@@ -115,6 +122,7 @@ extern "js" fn html_frame_element_set_src_ffi(
 ) -> Unit = "(obj, src) => { obj.src = src; }"
 
 ///|
+/// [HTMLFrameElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/src)
 impl THTMLFrameElement with set_src(self : Self, src : String) -> Unit {
   html_frame_element_set_src_ffi(TJsValue::to_js(self), TJsValue::to_js(src))
 }
@@ -123,6 +131,7 @@ impl THTMLFrameElement with set_src(self : Self, src : String) -> Unit {
 extern "js" fn html_frame_element_frame_border_ffi(obj : JsValue) -> String = "(obj) => obj.frameBorder"
 
 ///|
+/// [HTMLFrameElement.frameBorder](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/frameBorder)
 impl THTMLFrameElement with frame_border(self : Self) -> String {
   html_frame_element_frame_border_ffi(TJsValue::to_js(self))
 }
@@ -134,6 +143,7 @@ extern "js" fn html_frame_element_set_frame_border_ffi(
 ) -> Unit = "(obj, frameBorder) => { obj.frameBorder = frameBorder; }"
 
 ///|
+/// [HTMLFrameElement.frameBorder](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/frameBorder)
 impl THTMLFrameElement with set_frame_border(self : Self, frame_border : String) -> Unit {
   html_frame_element_set_frame_border_ffi(
     TJsValue::to_js(self),
@@ -145,6 +155,7 @@ impl THTMLFrameElement with set_frame_border(self : Self, frame_border : String)
 extern "js" fn html_frame_element_long_desc_ffi(obj : JsValue) -> String = "(obj) => obj.longDesc"
 
 ///|
+/// [HTMLFrameElement.longDesc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/longDesc)
 impl THTMLFrameElement with long_desc(self : Self) -> String {
   html_frame_element_long_desc_ffi(TJsValue::to_js(self))
 }
@@ -156,6 +167,7 @@ extern "js" fn html_frame_element_set_long_desc_ffi(
 ) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
 
 ///|
+/// [HTMLFrameElement.longDesc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/longDesc)
 impl THTMLFrameElement with set_long_desc(self : Self, long_desc : String) -> Unit {
   html_frame_element_set_long_desc_ffi(
     TJsValue::to_js(self),
@@ -167,6 +179,7 @@ impl THTMLFrameElement with set_long_desc(self : Self, long_desc : String) -> Un
 extern "js" fn html_frame_element_no_resize_ffi(obj : JsValue) -> Bool = "(obj) => obj.noResize"
 
 ///|
+/// [HTMLFrameElement.noResize](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/noResize)
 impl THTMLFrameElement with no_resize(self : Self) -> Bool {
   html_frame_element_no_resize_ffi(TJsValue::to_js(self))
 }
@@ -178,6 +191,7 @@ extern "js" fn html_frame_element_set_no_resize_ffi(
 ) -> Unit = "(obj, noResize) => { obj.noResize = noResize; }"
 
 ///|
+/// [HTMLFrameElement.noResize](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/noResize)
 impl THTMLFrameElement with set_no_resize(self : Self, no_resize : Bool) -> Unit {
   html_frame_element_set_no_resize_ffi(
     TJsValue::to_js(self),
@@ -191,6 +205,7 @@ extern "js" fn html_frame_element_content_document_ffi(
 ) -> Document = "(obj) => obj.contentDocument"
 
 ///|
+/// [HTMLFrameElement.contentDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/contentDocument)
 impl THTMLFrameElement with content_document(self : Self) -> Document {
   html_frame_element_content_document_ffi(TJsValue::to_js(self))
 }
@@ -201,6 +216,7 @@ extern "js" fn html_frame_element_content_window_ffi(
 ) -> WindowProxy = "(obj) => obj.contentWindow"
 
 ///|
+/// [HTMLFrameElement.contentWindow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/contentWindow)
 impl THTMLFrameElement with content_window(self : Self) -> WindowProxy {
   html_frame_element_content_window_ffi(TJsValue::to_js(self))
 }
@@ -209,6 +225,7 @@ impl THTMLFrameElement with content_window(self : Self) -> WindowProxy {
 extern "js" fn html_frame_element_margin_height_ffi(obj : JsValue) -> String = "(obj) => obj.marginHeight"
 
 ///|
+/// [HTMLFrameElement.marginHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/marginHeight)
 impl THTMLFrameElement with margin_height(self : Self) -> String {
   html_frame_element_margin_height_ffi(TJsValue::to_js(self))
 }
@@ -220,6 +237,7 @@ extern "js" fn html_frame_element_set_margin_height_ffi(
 ) -> Unit = "(obj, marginHeight) => { obj.marginHeight = marginHeight; }"
 
 ///|
+/// [HTMLFrameElement.marginHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/marginHeight)
 impl THTMLFrameElement with set_margin_height(
   self : Self,
   margin_height : String,
@@ -234,6 +252,7 @@ impl THTMLFrameElement with set_margin_height(
 extern "js" fn html_frame_element_margin_width_ffi(obj : JsValue) -> String = "(obj) => obj.marginWidth"
 
 ///|
+/// [HTMLFrameElement.marginWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/marginWidth)
 impl THTMLFrameElement with margin_width(self : Self) -> String {
   html_frame_element_margin_width_ffi(TJsValue::to_js(self))
 }
@@ -245,6 +264,7 @@ extern "js" fn html_frame_element_set_margin_width_ffi(
 ) -> Unit = "(obj, marginWidth) => { obj.marginWidth = marginWidth; }"
 
 ///|
+/// [HTMLFrameElement.marginWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameElement/marginWidth)
 impl THTMLFrameElement with set_margin_width(self : Self, margin_width : String) -> Unit {
   html_frame_element_set_margin_width_ffi(
     TJsValue::to_js(self),

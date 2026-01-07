@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLHtmlElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHtmlElement)
 #external
 pub type HTMLHtmlElement
 
@@ -36,6 +37,7 @@ pub fn HTMLHtmlElement::new() -> HTMLHtmlElement {
 }
 
 ///|
+/// [HTMLHtmlElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHtmlElement) interface.
 pub trait THTMLHtmlElement: THTMLElement {
   version(self : Self) -> String = _
   set_version(self : Self, version : String) -> Unit = _
@@ -45,6 +47,7 @@ pub trait THTMLHtmlElement: THTMLElement {
 extern "js" fn html_html_element_version_ffi(obj : JsValue) -> String = "(obj) => obj.version"
 
 ///|
+/// [HTMLHtmlElement.version](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHtmlElement/version)
 impl THTMLHtmlElement with version(self : Self) -> String {
   html_html_element_version_ffi(TJsValue::to_js(self))
 }
@@ -56,6 +59,7 @@ extern "js" fn html_html_element_set_version_ffi(
 ) -> Unit = "(obj, version) => { obj.version = version; }"
 
 ///|
+/// [HTMLHtmlElement.version](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHtmlElement/version)
 impl THTMLHtmlElement with set_version(self : Self, version : String) -> Unit {
   html_html_element_set_version_ffi(
     TJsValue::to_js(self),

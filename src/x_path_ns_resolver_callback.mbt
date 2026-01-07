@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [XPathNSResolver](https://developer.mozilla.org/en-US/docs/Web/API/XPathNSResolver)
 #external
 pub type XPathNSResolver
 

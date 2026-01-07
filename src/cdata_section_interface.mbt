@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [CDATASection](https://developer.mozilla.org/en-US/docs/Web/API/CDATASection)
 #external
 pub type CDATASection
 
@@ -28,4 +29,5 @@ pub impl TNode for CDATASection
 pub impl TEventTarget for CDATASection
 
 ///|
+/// [CDATASection](https://developer.mozilla.org/en-US/docs/Web/API/CDATASection) interface.
 pub trait TCDATASection: TText {}

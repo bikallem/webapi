@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLMeterElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement)
 #external
 pub type HTMLMeterElement
 
@@ -38,6 +39,7 @@ pub fn HTMLMeterElement::new() -> HTMLMeterElement {
 }
 
 ///|
+/// [HTMLMeterElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement) interface.
 pub trait THTMLMeterElement: THTMLElement {
   value(self : Self) -> Double = _
   set_value(self : Self, value : Double) -> Unit = _
@@ -58,6 +60,7 @@ pub trait THTMLMeterElement: THTMLElement {
 extern "js" fn html_meter_element_value_ffi(obj : JsValue) -> Double = "(obj) => obj.value"
 
 ///|
+/// [HTMLMeterElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/value)
 impl THTMLMeterElement with value(self : Self) -> Double {
   html_meter_element_value_ffi(TJsValue::to_js(self))
 }
@@ -69,6 +72,7 @@ extern "js" fn html_meter_element_set_value_ffi(
 ) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
+/// [HTMLMeterElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/value)
 impl THTMLMeterElement with set_value(self : Self, value : Double) -> Unit {
   html_meter_element_set_value_ffi(
     TJsValue::to_js(self),
@@ -80,6 +84,7 @@ impl THTMLMeterElement with set_value(self : Self, value : Double) -> Unit {
 extern "js" fn html_meter_element_min_ffi(obj : JsValue) -> Double = "(obj) => obj.min"
 
 ///|
+/// [HTMLMeterElement.min](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/min)
 impl THTMLMeterElement with min(self : Self) -> Double {
   html_meter_element_min_ffi(TJsValue::to_js(self))
 }
@@ -91,6 +96,7 @@ extern "js" fn html_meter_element_set_min_ffi(
 ) -> Unit = "(obj, min) => { obj.min = min; }"
 
 ///|
+/// [HTMLMeterElement.min](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/min)
 impl THTMLMeterElement with set_min(self : Self, min : Double) -> Unit {
   html_meter_element_set_min_ffi(TJsValue::to_js(self), TJsValue::to_js(min))
 }
@@ -99,6 +105,7 @@ impl THTMLMeterElement with set_min(self : Self, min : Double) -> Unit {
 extern "js" fn html_meter_element_max_ffi(obj : JsValue) -> Double = "(obj) => obj.max"
 
 ///|
+/// [HTMLMeterElement.max](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/max)
 impl THTMLMeterElement with max(self : Self) -> Double {
   html_meter_element_max_ffi(TJsValue::to_js(self))
 }
@@ -110,6 +117,7 @@ extern "js" fn html_meter_element_set_max_ffi(
 ) -> Unit = "(obj, max) => { obj.max = max; }"
 
 ///|
+/// [HTMLMeterElement.max](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/max)
 impl THTMLMeterElement with set_max(self : Self, max : Double) -> Unit {
   html_meter_element_set_max_ffi(TJsValue::to_js(self), TJsValue::to_js(max))
 }
@@ -118,6 +126,7 @@ impl THTMLMeterElement with set_max(self : Self, max : Double) -> Unit {
 extern "js" fn html_meter_element_low_ffi(obj : JsValue) -> Double = "(obj) => obj.low"
 
 ///|
+/// [HTMLMeterElement.low](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/low)
 impl THTMLMeterElement with low(self : Self) -> Double {
   html_meter_element_low_ffi(TJsValue::to_js(self))
 }
@@ -129,6 +138,7 @@ extern "js" fn html_meter_element_set_low_ffi(
 ) -> Unit = "(obj, low) => { obj.low = low; }"
 
 ///|
+/// [HTMLMeterElement.low](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/low)
 impl THTMLMeterElement with set_low(self : Self, low : Double) -> Unit {
   html_meter_element_set_low_ffi(TJsValue::to_js(self), TJsValue::to_js(low))
 }
@@ -137,6 +147,7 @@ impl THTMLMeterElement with set_low(self : Self, low : Double) -> Unit {
 extern "js" fn html_meter_element_high_ffi(obj : JsValue) -> Double = "(obj) => obj.high"
 
 ///|
+/// [HTMLMeterElement.high](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/high)
 impl THTMLMeterElement with high(self : Self) -> Double {
   html_meter_element_high_ffi(TJsValue::to_js(self))
 }
@@ -148,6 +159,7 @@ extern "js" fn html_meter_element_set_high_ffi(
 ) -> Unit = "(obj, high) => { obj.high = high; }"
 
 ///|
+/// [HTMLMeterElement.high](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/high)
 impl THTMLMeterElement with set_high(self : Self, high : Double) -> Unit {
   html_meter_element_set_high_ffi(TJsValue::to_js(self), TJsValue::to_js(high))
 }
@@ -156,6 +168,7 @@ impl THTMLMeterElement with set_high(self : Self, high : Double) -> Unit {
 extern "js" fn html_meter_element_optimum_ffi(obj : JsValue) -> Double = "(obj) => obj.optimum"
 
 ///|
+/// [HTMLMeterElement.optimum](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/optimum)
 impl THTMLMeterElement with optimum(self : Self) -> Double {
   html_meter_element_optimum_ffi(TJsValue::to_js(self))
 }
@@ -167,6 +180,7 @@ extern "js" fn html_meter_element_set_optimum_ffi(
 ) -> Unit = "(obj, optimum) => { obj.optimum = optimum; }"
 
 ///|
+/// [HTMLMeterElement.optimum](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/optimum)
 impl THTMLMeterElement with set_optimum(self : Self, optimum : Double) -> Unit {
   html_meter_element_set_optimum_ffi(
     TJsValue::to_js(self),
@@ -178,6 +192,7 @@ impl THTMLMeterElement with set_optimum(self : Self, optimum : Double) -> Unit {
 extern "js" fn html_meter_element_labels_ffi(obj : JsValue) -> NodeList = "(obj) => obj.labels"
 
 ///|
+/// [HTMLMeterElement.labels](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement/labels)
 impl THTMLMeterElement with labels(self : Self) -> NodeList {
   html_meter_element_labels_ffi(TJsValue::to_js(self))
 }

@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [CheckVisibilityOptions](https://developer.mozilla.org/en-US/docs/Web/API/CheckVisibilityOptions)
 #external
 pub type CheckVisibilityOptions
 

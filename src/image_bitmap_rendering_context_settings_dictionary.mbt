@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [ImageBitmapRenderingContextSettings](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContextSettings)
 #external
 pub type ImageBitmapRenderingContextSettings
 

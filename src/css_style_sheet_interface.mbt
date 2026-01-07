@@ -3,6 +3,7 @@
 // Specifications: cssom.idl
 
 ///|
+/// [CSSStyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)
 #external
 pub type CSSStyleSheet
 
@@ -29,6 +30,7 @@ pub fn CSSStyleSheet::new(
 }
 
 ///|
+/// [CSSStyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet) interface.
 pub trait TCSSStyleSheet: TStyleSheet {
   owner_rule(self : Self) -> CSSRule = _
   css_rules(self : Self) -> CSSRuleList = _
@@ -45,6 +47,7 @@ pub trait TCSSStyleSheet: TStyleSheet {
 extern "js" fn css_style_sheet_owner_rule_ffi(obj : JsValue) -> CSSRule = "(obj) => obj.ownerRule"
 
 ///|
+/// [CSSStyleSheet.ownerRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/ownerRule)
 impl TCSSStyleSheet with owner_rule(self : Self) -> CSSRule {
   css_style_sheet_owner_rule_ffi(TJsValue::to_js(self))
 }
@@ -53,6 +56,7 @@ impl TCSSStyleSheet with owner_rule(self : Self) -> CSSRule {
 extern "js" fn css_style_sheet_css_rules_ffi(obj : JsValue) -> CSSRuleList = "(obj) => obj.cssRules"
 
 ///|
+/// [CSSStyleSheet.cssRules](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/cssRules)
 impl TCSSStyleSheet with css_rules(self : Self) -> CSSRuleList {
   css_style_sheet_css_rules_ffi(TJsValue::to_js(self))
 }
@@ -65,6 +69,7 @@ extern "js" fn css_style_sheet_insert_rule_ffi(
 ) -> UInt = "(obj, rule, index) => obj.insertRule(rule, index)"
 
 ///|
+/// [CSSStyleSheet.insertRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule)
 impl TCSSStyleSheet with insert_rule(
   self : Self,
   rule : CSSOMString,
@@ -84,6 +89,7 @@ extern "js" fn css_style_sheet_delete_rule_ffi(
 ) -> Unit = "(obj, index) => obj.deleteRule(index)"
 
 ///|
+/// [CSSStyleSheet.deleteRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/deleteRule)
 impl TCSSStyleSheet with delete_rule(self : Self, index : UInt) -> Unit {
   css_style_sheet_delete_rule_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
@@ -95,6 +101,7 @@ extern "js" fn css_style_sheet_replace_ffi(
 ) -> JsPromise[CSSStyleSheet] = "(obj, text) => obj.replace(text)"
 
 ///|
+/// [CSSStyleSheet.replace](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/replace)
 impl TCSSStyleSheet with replace(self : Self, text : String) -> JsPromise[
   CSSStyleSheet,
 ] {
@@ -108,6 +115,7 @@ extern "js" fn css_style_sheet_replace_sync_ffi(
 ) -> Unit = "(obj, text) => obj.replaceSync(text)"
 
 ///|
+/// [CSSStyleSheet.replaceSync](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/replaceSync)
 impl TCSSStyleSheet with replace_sync(self : Self, text : String) -> Unit {
   css_style_sheet_replace_sync_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
 }
@@ -116,6 +124,7 @@ impl TCSSStyleSheet with replace_sync(self : Self, text : String) -> Unit {
 extern "js" fn css_style_sheet_rules_ffi(obj : JsValue) -> CSSRuleList = "(obj) => obj.rules"
 
 ///|
+/// [CSSStyleSheet.rules](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/rules)
 impl TCSSStyleSheet with rules(self : Self) -> CSSRuleList {
   css_style_sheet_rules_ffi(TJsValue::to_js(self))
 }
@@ -129,6 +138,7 @@ extern "js" fn css_style_sheet_add_rule_ffi(
 ) -> Int = "(obj, selector, style, index) => obj.addRule(selector, style, index)"
 
 ///|
+/// [CSSStyleSheet.addRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/addRule)
 impl TCSSStyleSheet with add_rule(
   self : Self,
   selector? : String = "undefined",
@@ -150,6 +160,7 @@ extern "js" fn css_style_sheet_remove_rule_ffi(
 ) -> Unit = "(obj, index) => obj.removeRule(index)"
 
 ///|
+/// [CSSStyleSheet.removeRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/removeRule)
 impl TCSSStyleSheet with remove_rule(self : Self, index? : UInt = (0 : UInt)) -> Unit {
   css_style_sheet_remove_rule_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }

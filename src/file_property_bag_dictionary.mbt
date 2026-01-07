@@ -3,6 +3,7 @@
 // Specifications: FileAPI.idl
 
 ///|
+/// [FilePropertyBag](https://developer.mozilla.org/en-US/docs/Web/API/FilePropertyBag)
 #external
 pub type FilePropertyBag
 

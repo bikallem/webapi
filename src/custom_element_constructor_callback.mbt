@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [CustomElementConstructor](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementConstructor)
 #external
 pub type CustomElementConstructor
 

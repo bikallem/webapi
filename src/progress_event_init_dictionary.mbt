@@ -3,6 +3,7 @@
 // Specifications: dom.idl, xhr.idl
 
 ///|
+/// [ProgressEventInit](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEventInit)
 #external
 pub type ProgressEventInit
 

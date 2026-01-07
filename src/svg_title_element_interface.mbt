@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGTitleElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTitleElement)
 #external
 pub type SVGTitleElement
 
@@ -28,4 +29,5 @@ pub impl TNode for SVGTitleElement
 pub impl TEventTarget for SVGTitleElement
 
 ///|
+/// [SVGTitleElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTitleElement) interface.
 pub trait TSVGTitleElement: TSVGElement {}

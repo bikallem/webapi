@@ -33,6 +33,7 @@ moon add bikallem/webapi
 A simple counter application demonstrating DOM manipulation and event handling:
 
 ```moonbit
+///|
 fn main {
   // Create mutable counter state
   let mut count = 0
@@ -75,19 +76,15 @@ fn main {
 Demonstrates the Canvas 2D API with gradients, shapes, and text:
 
 ```moonbit
+///|
 fn main {
   // Create canvas element
   let canvas : @webapi.HTMLCanvasElement = @webapi.document
     .create_element("canvas")
     .into()
-  canvas
-  ..set_width(800)
-  ..set_height(500)
-
-  @webapi.document
-    .get_element_by_id("app")
-    .unwrap()
-    .append_child(canvas) |> ignore
+  canvas..set_width(800)..set_height(500)
+  @webapi.document.get_element_by_id("app").unwrap().append_child(canvas)
+  |> ignore
 
   // Get 2D rendering context
   let ctx : @webapi.CanvasRenderingContext2D = canvas
@@ -97,14 +94,10 @@ fn main {
 
   // Create gradient
   let gradient = ctx.create_linear_gradient(0.0, 0.0, 0.0, 300.0)
-  gradient
-  ..add_color_stop(0.0, "#1e3c72")
-  ..add_color_stop(1.0, "#87CEEB")
+  gradient..add_color_stop(0.0, "#1e3c72")..add_color_stop(1.0, "#87CEEB")
 
   // Draw with gradient
-  ctx
-  ..set_fill_style(gradient)
-  ..fill_rect(0.0, 0.0, 800.0, 300.0)
+  ctx..set_fill_style(gradient)..fill_rect(0.0, 0.0, 800.0, 300.0)
 
   // Draw shapes (arc uses radians: 2π for full circle)
   ctx
@@ -144,11 +137,15 @@ DOM elements are returned as generic `Element` types. Use `into()` to cast to sp
 
 ```moonbit
 // Create an element and cast to specific type
+
+///|
 let canvas : @webapi.HTMLCanvasElement = @webapi.document
   .create_element("canvas")
   .into()
 
 // Cast to access type-specific methods
+
+///|
 let ctx : @webapi.CanvasRenderingContext2D = canvas
   .get_context("2d")
   .unwrap()
@@ -227,10 +224,14 @@ interface Element : Node {
 **Generated MoonBit:**
 ```moonbit
 // External type wrapping JavaScript object
+
+///|
 #external
 pub type Element
 
 // Trait defining interface methods
+
+///|
 pub trait TElement: TNode {
   id(self : Self) -> String = _
   set_id(self : Self, id : String) -> Unit = _
@@ -239,11 +240,19 @@ pub trait TElement: TNode {
 }
 
 // Implementation using FFI
-extern "js" fn element_get_attribute_ffi(obj : JsValue, name : JsValue) -> JsValue = 
-  "(obj, name) => obj.getAttribute(name)"
 
+///|
+extern "js" fn element_get_attribute_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.getAttribute(name)"
+
+///|
 impl TElement with get_attribute(self : Self, name : String) -> String? {
-  let result = element_get_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+  let result = element_get_attribute_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(name),
+  )
   if JsValue::is_null(result) {
     None
   } else {
@@ -263,11 +272,13 @@ enum ShadowRootMode { "open", "closed" };
 
 **Generated MoonBit:**
 ```moonbit
+///|
 pub(all) enum ShadowRootMode {
   Open
   Closed
 } derive(Eq, Show)
 
+///|
 pub impl TJsValue for ShadowRootMode with to_js(self : ShadowRootMode) -> JsValue {
   match self {
     ShadowRootMode::Open => TJsValue::to_js("open")
@@ -275,6 +286,7 @@ pub impl TJsValue for ShadowRootMode with to_js(self : ShadowRootMode) -> JsValu
   }
 }
 
+///|
 pub fn ShadowRootMode::from(value : String) -> ShadowRootMode? {
   match value {
     "open" => Some(ShadowRootMode::Open)
@@ -298,9 +310,11 @@ dictionary EventInit {
 
 **Generated MoonBit:**
 ```moonbit
+///|
 #external
 pub type EventInit
 
+///|
 pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool) -> EventInit {
   event_init_ffi(opt_to_js(bubbles), opt_to_js(cancelable))
 }

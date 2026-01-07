@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGViewElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGViewElement)
 #external
 pub type SVGViewElement
 
@@ -28,6 +29,7 @@ pub impl TNode for SVGViewElement
 pub impl TEventTarget for SVGViewElement
 
 ///|
+/// [SVGViewElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGViewElement) interface.
 pub trait TSVGViewElement: TSVGElement {
   view_box(self : Self) -> SVGAnimatedRect = _
   preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio = _
@@ -37,6 +39,7 @@ pub trait TSVGViewElement: TSVGElement {
 extern "js" fn svg_view_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect = "(obj) => obj.viewBox"
 
 ///|
+/// [SVGViewElement.viewBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGViewElement/viewBox)
 impl TSVGViewElement with view_box(self : Self) -> SVGAnimatedRect {
   svg_view_element_view_box_ffi(TJsValue::to_js(self))
 }
@@ -47,6 +50,7 @@ extern "js" fn svg_view_element_preserve_aspect_ratio_ffi(
 ) -> SVGAnimatedPreserveAspectRatio = "(obj) => obj.preserveAspectRatio"
 
 ///|
+/// [SVGViewElement.preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGViewElement/preserveAspectRatio)
 impl TSVGViewElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio {
   svg_view_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self))
 }

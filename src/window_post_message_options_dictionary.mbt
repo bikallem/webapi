@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [WindowPostMessageOptions](https://developer.mozilla.org/en-US/docs/Web/API/WindowPostMessageOptions)
 #external
 pub type WindowPostMessageOptions
 

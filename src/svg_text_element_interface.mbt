@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGTextElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextElement)
 #external
 pub type SVGTextElement
 
@@ -37,4 +38,5 @@ pub impl TNode for SVGTextElement
 pub impl TEventTarget for SVGTextElement
 
 ///|
+/// [SVGTextElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextElement) interface.
 pub trait TSVGTextElement: TSVGTextPositioningElement {}

@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [ShadowRootInit](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRootInit)
 #external
 pub type ShadowRootInit
 

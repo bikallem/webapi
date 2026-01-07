@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLHRElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement)
 #external
 pub type HTMLHRElement
 
@@ -36,6 +37,7 @@ pub fn HTMLHRElement::new() -> HTMLHRElement {
 }
 
 ///|
+/// [HTMLHRElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement) interface.
 pub trait THTMLHRElement: THTMLElement {
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
@@ -53,6 +55,7 @@ pub trait THTMLHRElement: THTMLElement {
 extern "js" fn htmlhr_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLHRElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/align)
 impl THTMLHRElement with align(self : Self) -> String {
   htmlhr_element_align_ffi(TJsValue::to_js(self))
 }
@@ -64,6 +67,7 @@ extern "js" fn htmlhr_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLHRElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/align)
 impl THTMLHRElement with set_align(self : Self, align : String) -> Unit {
   htmlhr_element_set_align_ffi(TJsValue::to_js(self), TJsValue::to_js(align))
 }
@@ -72,6 +76,7 @@ impl THTMLHRElement with set_align(self : Self, align : String) -> Unit {
 extern "js" fn htmlhr_element_color_ffi(obj : JsValue) -> String = "(obj) => obj.color"
 
 ///|
+/// [HTMLHRElement.color](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/color)
 impl THTMLHRElement with color(self : Self) -> String {
   htmlhr_element_color_ffi(TJsValue::to_js(self))
 }
@@ -83,6 +88,7 @@ extern "js" fn htmlhr_element_set_color_ffi(
 ) -> Unit = "(obj, color) => { obj.color = color; }"
 
 ///|
+/// [HTMLHRElement.color](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/color)
 impl THTMLHRElement with set_color(self : Self, color : String) -> Unit {
   htmlhr_element_set_color_ffi(TJsValue::to_js(self), TJsValue::to_js(color))
 }
@@ -91,6 +97,7 @@ impl THTMLHRElement with set_color(self : Self, color : String) -> Unit {
 extern "js" fn htmlhr_element_no_shade_ffi(obj : JsValue) -> Bool = "(obj) => obj.noShade"
 
 ///|
+/// [HTMLHRElement.noShade](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/noShade)
 impl THTMLHRElement with no_shade(self : Self) -> Bool {
   htmlhr_element_no_shade_ffi(TJsValue::to_js(self))
 }
@@ -102,6 +109,7 @@ extern "js" fn htmlhr_element_set_no_shade_ffi(
 ) -> Unit = "(obj, noShade) => { obj.noShade = noShade; }"
 
 ///|
+/// [HTMLHRElement.noShade](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/noShade)
 impl THTMLHRElement with set_no_shade(self : Self, no_shade : Bool) -> Unit {
   htmlhr_element_set_no_shade_ffi(
     TJsValue::to_js(self),
@@ -113,6 +121,7 @@ impl THTMLHRElement with set_no_shade(self : Self, no_shade : Bool) -> Unit {
 extern "js" fn htmlhr_element_size_ffi(obj : JsValue) -> String = "(obj) => obj.size"
 
 ///|
+/// [HTMLHRElement.size](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/size)
 impl THTMLHRElement with size(self : Self) -> String {
   htmlhr_element_size_ffi(TJsValue::to_js(self))
 }
@@ -124,6 +133,7 @@ extern "js" fn htmlhr_element_set_size_ffi(
 ) -> Unit = "(obj, size) => { obj.size = size; }"
 
 ///|
+/// [HTMLHRElement.size](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/size)
 impl THTMLHRElement with set_size(self : Self, size : String) -> Unit {
   htmlhr_element_set_size_ffi(TJsValue::to_js(self), TJsValue::to_js(size))
 }
@@ -132,6 +142,7 @@ impl THTMLHRElement with set_size(self : Self, size : String) -> Unit {
 extern "js" fn htmlhr_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
 
 ///|
+/// [HTMLHRElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/width)
 impl THTMLHRElement with width(self : Self) -> String {
   htmlhr_element_width_ffi(TJsValue::to_js(self))
 }
@@ -143,6 +154,7 @@ extern "js" fn htmlhr_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLHRElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/width)
 impl THTMLHRElement with set_width(self : Self, width : String) -> Unit {
   htmlhr_element_set_width_ffi(TJsValue::to_js(self), TJsValue::to_js(width))
 }

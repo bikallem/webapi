@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [ImportNodeOptions](https://developer.mozilla.org/en-US/docs/Web/API/ImportNodeOptions)
 #external
 pub type ImportNodeOptions
 

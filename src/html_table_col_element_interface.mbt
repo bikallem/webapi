@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTableColElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement)
 #external
 pub type HTMLTableColElement
 
@@ -38,6 +39,7 @@ pub fn HTMLTableColElement::new() -> HTMLTableColElement {
 }
 
 ///|
+/// [HTMLTableColElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement) interface.
 pub trait THTMLTableColElement: THTMLElement {
   span(self : Self) -> UInt = _
   set_span(self : Self, span : UInt) -> Unit = _
@@ -57,6 +59,7 @@ pub trait THTMLTableColElement: THTMLElement {
 extern "js" fn html_table_col_element_span_ffi(obj : JsValue) -> UInt = "(obj) => obj.span"
 
 ///|
+/// [HTMLTableColElement.span](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/span)
 impl THTMLTableColElement with span(self : Self) -> UInt {
   html_table_col_element_span_ffi(TJsValue::to_js(self))
 }
@@ -68,6 +71,7 @@ extern "js" fn html_table_col_element_set_span_ffi(
 ) -> Unit = "(obj, span) => { obj.span = span; }"
 
 ///|
+/// [HTMLTableColElement.span](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/span)
 impl THTMLTableColElement with set_span(self : Self, span : UInt) -> Unit {
   html_table_col_element_set_span_ffi(
     TJsValue::to_js(self),
@@ -79,6 +83,7 @@ impl THTMLTableColElement with set_span(self : Self, span : UInt) -> Unit {
 extern "js" fn html_table_col_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
 
 ///|
+/// [HTMLTableColElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/align)
 impl THTMLTableColElement with align(self : Self) -> String {
   html_table_col_element_align_ffi(TJsValue::to_js(self))
 }
@@ -90,6 +95,7 @@ extern "js" fn html_table_col_element_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [HTMLTableColElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/align)
 impl THTMLTableColElement with set_align(self : Self, align : String) -> Unit {
   html_table_col_element_set_align_ffi(
     TJsValue::to_js(self),
@@ -101,6 +107,7 @@ impl THTMLTableColElement with set_align(self : Self, align : String) -> Unit {
 extern "js" fn html_table_col_element_ch_ffi(obj : JsValue) -> String = "(obj) => obj.ch"
 
 ///|
+/// [HTMLTableColElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/ch)
 impl THTMLTableColElement with ch(self : Self) -> String {
   html_table_col_element_ch_ffi(TJsValue::to_js(self))
 }
@@ -112,6 +119,7 @@ extern "js" fn html_table_col_element_set_ch_ffi(
 ) -> Unit = "(obj, ch) => { obj.ch = ch; }"
 
 ///|
+/// [HTMLTableColElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/ch)
 impl THTMLTableColElement with set_ch(self : Self, ch : String) -> Unit {
   html_table_col_element_set_ch_ffi(TJsValue::to_js(self), TJsValue::to_js(ch))
 }
@@ -120,6 +128,7 @@ impl THTMLTableColElement with set_ch(self : Self, ch : String) -> Unit {
 extern "js" fn html_table_col_element_ch_off_ffi(obj : JsValue) -> String = "(obj) => obj.chOff"
 
 ///|
+/// [HTMLTableColElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/chOff)
 impl THTMLTableColElement with ch_off(self : Self) -> String {
   html_table_col_element_ch_off_ffi(TJsValue::to_js(self))
 }
@@ -131,6 +140,7 @@ extern "js" fn html_table_col_element_set_ch_off_ffi(
 ) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
 
 ///|
+/// [HTMLTableColElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/chOff)
 impl THTMLTableColElement with set_ch_off(self : Self, ch_off : String) -> Unit {
   html_table_col_element_set_ch_off_ffi(
     TJsValue::to_js(self),
@@ -142,6 +152,7 @@ impl THTMLTableColElement with set_ch_off(self : Self, ch_off : String) -> Unit 
 extern "js" fn html_table_col_element_v_align_ffi(obj : JsValue) -> String = "(obj) => obj.vAlign"
 
 ///|
+/// [HTMLTableColElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/vAlign)
 impl THTMLTableColElement with v_align(self : Self) -> String {
   html_table_col_element_v_align_ffi(TJsValue::to_js(self))
 }
@@ -153,6 +164,7 @@ extern "js" fn html_table_col_element_set_v_align_ffi(
 ) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
 
 ///|
+/// [HTMLTableColElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/vAlign)
 impl THTMLTableColElement with set_v_align(self : Self, v_align : String) -> Unit {
   html_table_col_element_set_v_align_ffi(
     TJsValue::to_js(self),
@@ -164,6 +176,7 @@ impl THTMLTableColElement with set_v_align(self : Self, v_align : String) -> Uni
 extern "js" fn html_table_col_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
 
 ///|
+/// [HTMLTableColElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/width)
 impl THTMLTableColElement with width(self : Self) -> String {
   html_table_col_element_width_ffi(TJsValue::to_js(self))
 }
@@ -175,6 +188,7 @@ extern "js" fn html_table_col_element_set_width_ffi(
 ) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
+/// [HTMLTableColElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableColElement/width)
 impl THTMLTableColElement with set_width(self : Self, width : String) -> Unit {
   html_table_col_element_set_width_ffi(
     TJsValue::to_js(self),

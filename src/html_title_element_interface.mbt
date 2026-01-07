@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLTitleElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTitleElement)
 #external
 pub type HTMLTitleElement
 
@@ -38,6 +39,7 @@ pub fn HTMLTitleElement::new() -> HTMLTitleElement {
 }
 
 ///|
+/// [HTMLTitleElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTitleElement) interface.
 pub trait THTMLTitleElement: THTMLElement {
   text(self : Self) -> String = _
   set_text(self : Self, text : String) -> Unit = _
@@ -47,6 +49,7 @@ pub trait THTMLTitleElement: THTMLElement {
 extern "js" fn html_title_element_text_ffi(obj : JsValue) -> String = "(obj) => obj.text"
 
 ///|
+/// [HTMLTitleElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTitleElement/text)
 impl THTMLTitleElement with text(self : Self) -> String {
   html_title_element_text_ffi(TJsValue::to_js(self))
 }
@@ -58,6 +61,7 @@ extern "js" fn html_title_element_set_text_ffi(
 ) -> Unit = "(obj, text) => { obj.text = text; }"
 
 ///|
+/// [HTMLTitleElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTitleElement/text)
 impl THTMLTitleElement with set_text(self : Self, text : String) -> Unit {
   html_title_element_set_text_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
 }

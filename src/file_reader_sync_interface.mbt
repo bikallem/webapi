@@ -3,6 +3,7 @@
 // Specifications: FileAPI.idl
 
 ///|
+/// [FileReaderSync](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync)
 #external
 pub type FileReaderSync
 
@@ -24,6 +25,7 @@ pub fn FileReaderSync::new() -> FileReaderSync {
 }
 
 ///|
+/// [FileReaderSync](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync) interface.
 pub trait TFileReaderSync: TJsValue {
   read_as_array_buffer(self : Self, blob : &TBlob) -> ArrayBuffer = _
   read_as_binary_string(self : Self, blob : &TBlob) -> String = _
@@ -38,6 +40,7 @@ extern "js" fn file_reader_sync_read_as_array_buffer_ffi(
 ) -> ArrayBuffer = "(obj, blob) => obj.readAsArrayBuffer(blob)"
 
 ///|
+/// [FileReaderSync.readAsArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsArrayBuffer)
 impl TFileReaderSync with read_as_array_buffer(self : Self, blob : &TBlob) -> ArrayBuffer {
   file_reader_sync_read_as_array_buffer_ffi(
     TJsValue::to_js(self),
@@ -52,6 +55,7 @@ extern "js" fn file_reader_sync_read_as_binary_string_ffi(
 ) -> String = "(obj, blob) => obj.readAsBinaryString(blob)"
 
 ///|
+/// [FileReaderSync.readAsBinaryString](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsBinaryString)
 impl TFileReaderSync with read_as_binary_string(self : Self, blob : &TBlob) -> String {
   file_reader_sync_read_as_binary_string_ffi(
     TJsValue::to_js(self),
@@ -67,6 +71,7 @@ extern "js" fn file_reader_sync_read_as_text_ffi(
 ) -> String = "(obj, blob, encoding) => obj.readAsText(blob, encoding)"
 
 ///|
+/// [FileReaderSync.readAsText](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsText)
 impl TFileReaderSync with read_as_text(
   self : Self,
   blob : &TBlob,
@@ -86,6 +91,7 @@ extern "js" fn file_reader_sync_read_as_data_url_ffi(
 ) -> String = "(obj, blob) => obj.readAsDataURL(blob)"
 
 ///|
+/// [FileReaderSync.readAsDataURL](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsDataURL)
 impl TFileReaderSync with read_as_data_url(self : Self, blob : &TBlob) -> String {
   file_reader_sync_read_as_data_url_ffi(
     TJsValue::to_js(self),

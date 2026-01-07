@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [CustomEventInit](https://developer.mozilla.org/en-US/docs/Web/API/CustomEventInit)
 #external
 pub type CustomEventInit
 

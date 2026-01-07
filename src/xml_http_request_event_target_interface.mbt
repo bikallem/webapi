@@ -3,6 +3,7 @@
 // Specifications: xhr.idl
 
 ///|
+/// [XMLHttpRequestEventTarget](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget)
 #external
 pub type XMLHttpRequestEventTarget
 
@@ -23,6 +24,7 @@ pub impl TXMLHttpRequestEventTarget for XMLHttpRequestEventTarget
 pub impl TEventTarget for XMLHttpRequestEventTarget
 
 ///|
+/// [XMLHttpRequestEventTarget](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget) interface.
 pub trait TXMLHttpRequestEventTarget: TEventTarget {
   onloadstart(self : Self) -> EventHandler = _
   set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit = _
@@ -46,6 +48,7 @@ extern "js" fn xml_http_request_event_target_onloadstart_ffi(
 ) -> EventHandler = "(obj) => obj.onloadstart"
 
 ///|
+/// [XMLHttpRequestEventTarget.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadstart)
 impl TXMLHttpRequestEventTarget with onloadstart(self : Self) -> EventHandler {
   xml_http_request_event_target_onloadstart_ffi(TJsValue::to_js(self))
 }
@@ -57,6 +60,7 @@ extern "js" fn xml_http_request_event_target_set_onloadstart_ffi(
 ) -> Unit = "(obj, onloadstart) => { obj.onloadstart = onloadstart; }"
 
 ///|
+/// [XMLHttpRequestEventTarget.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadstart)
 impl TXMLHttpRequestEventTarget with set_onloadstart(
   self : Self,
   onloadstart : EventHandler,
@@ -73,6 +77,7 @@ extern "js" fn xml_http_request_event_target_onprogress_ffi(
 ) -> EventHandler = "(obj) => obj.onprogress"
 
 ///|
+/// [XMLHttpRequestEventTarget.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onprogress)
 impl TXMLHttpRequestEventTarget with onprogress(self : Self) -> EventHandler {
   xml_http_request_event_target_onprogress_ffi(TJsValue::to_js(self))
 }
@@ -84,6 +89,7 @@ extern "js" fn xml_http_request_event_target_set_onprogress_ffi(
 ) -> Unit = "(obj, onprogress) => { obj.onprogress = onprogress; }"
 
 ///|
+/// [XMLHttpRequestEventTarget.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onprogress)
 impl TXMLHttpRequestEventTarget with set_onprogress(
   self : Self,
   onprogress : EventHandler,
@@ -100,6 +106,7 @@ extern "js" fn xml_http_request_event_target_onabort_ffi(
 ) -> EventHandler = "(obj) => obj.onabort"
 
 ///|
+/// [XMLHttpRequestEventTarget.onabort](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onabort)
 impl TXMLHttpRequestEventTarget with onabort(self : Self) -> EventHandler {
   xml_http_request_event_target_onabort_ffi(TJsValue::to_js(self))
 }
@@ -111,6 +118,7 @@ extern "js" fn xml_http_request_event_target_set_onabort_ffi(
 ) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
 
 ///|
+/// [XMLHttpRequestEventTarget.onabort](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onabort)
 impl TXMLHttpRequestEventTarget with set_onabort(
   self : Self,
   onabort : EventHandler,
@@ -127,6 +135,7 @@ extern "js" fn xml_http_request_event_target_onerror_ffi(
 ) -> EventHandler = "(obj) => obj.onerror"
 
 ///|
+/// [XMLHttpRequestEventTarget.onerror](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror)
 impl TXMLHttpRequestEventTarget with onerror(self : Self) -> EventHandler {
   xml_http_request_event_target_onerror_ffi(TJsValue::to_js(self))
 }
@@ -138,6 +147,7 @@ extern "js" fn xml_http_request_event_target_set_onerror_ffi(
 ) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
 
 ///|
+/// [XMLHttpRequestEventTarget.onerror](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror)
 impl TXMLHttpRequestEventTarget with set_onerror(
   self : Self,
   onerror : EventHandler,
@@ -154,6 +164,7 @@ extern "js" fn xml_http_request_event_target_onload_ffi(
 ) -> EventHandler = "(obj) => obj.onload"
 
 ///|
+/// [XMLHttpRequestEventTarget.onload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload)
 impl TXMLHttpRequestEventTarget with onload(self : Self) -> EventHandler {
   xml_http_request_event_target_onload_ffi(TJsValue::to_js(self))
 }
@@ -165,6 +176,7 @@ extern "js" fn xml_http_request_event_target_set_onload_ffi(
 ) -> Unit = "(obj, onload) => { obj.onload = onload; }"
 
 ///|
+/// [XMLHttpRequestEventTarget.onload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload)
 impl TXMLHttpRequestEventTarget with set_onload(
   self : Self,
   onload : EventHandler,
@@ -181,6 +193,7 @@ extern "js" fn xml_http_request_event_target_ontimeout_ffi(
 ) -> EventHandler = "(obj) => obj.ontimeout"
 
 ///|
+/// [XMLHttpRequestEventTarget.ontimeout](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/ontimeout)
 impl TXMLHttpRequestEventTarget with ontimeout(self : Self) -> EventHandler {
   xml_http_request_event_target_ontimeout_ffi(TJsValue::to_js(self))
 }
@@ -192,6 +205,7 @@ extern "js" fn xml_http_request_event_target_set_ontimeout_ffi(
 ) -> Unit = "(obj, ontimeout) => { obj.ontimeout = ontimeout; }"
 
 ///|
+/// [XMLHttpRequestEventTarget.ontimeout](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/ontimeout)
 impl TXMLHttpRequestEventTarget with set_ontimeout(
   self : Self,
   ontimeout : EventHandler,
@@ -208,6 +222,7 @@ extern "js" fn xml_http_request_event_target_onloadend_ffi(
 ) -> EventHandler = "(obj) => obj.onloadend"
 
 ///|
+/// [XMLHttpRequestEventTarget.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadend)
 impl TXMLHttpRequestEventTarget with onloadend(self : Self) -> EventHandler {
   xml_http_request_event_target_onloadend_ffi(TJsValue::to_js(self))
 }
@@ -219,6 +234,7 @@ extern "js" fn xml_http_request_event_target_set_onloadend_ffi(
 ) -> Unit = "(obj, onloadend) => { obj.onloadend = onloadend; }"
 
 ///|
+/// [XMLHttpRequestEventTarget.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadend)
 impl TXMLHttpRequestEventTarget with set_onloadend(
   self : Self,
   onloadend : EventHandler,

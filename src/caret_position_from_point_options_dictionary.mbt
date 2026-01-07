@@ -3,6 +3,7 @@
 // Specifications: cssom-view.idl
 
 ///|
+/// [CaretPositionFromPointOptions](https://developer.mozilla.org/en-US/docs/Web/API/CaretPositionFromPointOptions)
 #external
 pub type CaretPositionFromPointOptions
 

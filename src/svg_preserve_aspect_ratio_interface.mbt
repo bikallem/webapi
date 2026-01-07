@@ -3,6 +3,7 @@
 // Specifications: SVG.idl
 
 ///|
+/// [SVGPreserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio)
 #external
 pub type SVGPreserveAspectRatio
 
@@ -62,6 +63,7 @@ pub const SVG_PRESERVE_ASPECT_RATIO_SVG_MEETORSLICE_MEET : UInt = 1
 pub const SVG_PRESERVE_ASPECT_RATIO_SVG_MEETORSLICE_SLICE : UInt = 2
 
 ///|
+/// [SVGPreserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio) interface.
 pub trait TSVGPreserveAspectRatio: TJsValue {
   align(self : Self) -> UInt = _
   set_align(self : Self, align : UInt) -> Unit = _
@@ -73,6 +75,7 @@ pub trait TSVGPreserveAspectRatio: TJsValue {
 extern "js" fn svg_preserve_aspect_ratio_align_ffi(obj : JsValue) -> UInt = "(obj) => obj.align"
 
 ///|
+/// [SVGPreserveAspectRatio.align](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/align)
 impl TSVGPreserveAspectRatio with align(self : Self) -> UInt {
   svg_preserve_aspect_ratio_align_ffi(TJsValue::to_js(self))
 }
@@ -84,6 +87,7 @@ extern "js" fn svg_preserve_aspect_ratio_set_align_ffi(
 ) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
+/// [SVGPreserveAspectRatio.align](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/align)
 impl TSVGPreserveAspectRatio with set_align(self : Self, align : UInt) -> Unit {
   svg_preserve_aspect_ratio_set_align_ffi(
     TJsValue::to_js(self),
@@ -97,6 +101,7 @@ extern "js" fn svg_preserve_aspect_ratio_meet_or_slice_ffi(
 ) -> UInt = "(obj) => obj.meetOrSlice"
 
 ///|
+/// [SVGPreserveAspectRatio.meetOrSlice](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/meetOrSlice)
 impl TSVGPreserveAspectRatio with meet_or_slice(self : Self) -> UInt {
   svg_preserve_aspect_ratio_meet_or_slice_ffi(TJsValue::to_js(self))
 }
@@ -108,6 +113,7 @@ extern "js" fn svg_preserve_aspect_ratio_set_meet_or_slice_ffi(
 ) -> Unit = "(obj, meetOrSlice) => { obj.meetOrSlice = meetOrSlice; }"
 
 ///|
+/// [SVGPreserveAspectRatio.meetOrSlice](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/meetOrSlice)
 impl TSVGPreserveAspectRatio with set_meet_or_slice(
   self : Self,
   meet_or_slice : UInt,

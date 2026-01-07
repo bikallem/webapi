@@ -3,6 +3,7 @@
 // Specifications: uievents.idl
 
 ///|
+/// [KeyboardEventInit](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEventInit)
 #external
 pub type KeyboardEventInit
 

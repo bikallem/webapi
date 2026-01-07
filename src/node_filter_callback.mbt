@@ -3,6 +3,7 @@
 // Specifications: dom.idl
 
 ///|
+/// [NodeFilter](https://developer.mozilla.org/en-US/docs/Web/API/NodeFilter)
 #external
 pub type NodeFilter
 

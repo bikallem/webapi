@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [WorkletOptions](https://developer.mozilla.org/en-US/docs/Web/API/WorkletOptions)
 #external
 pub type WorkletOptions
 

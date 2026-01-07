@@ -3,6 +3,7 @@
 // Specifications: fetch.idl
 
 ///|
+/// [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit)
 #external
 pub type RequestInit
 

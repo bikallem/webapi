@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [NavigationReloadOptions](https://developer.mozilla.org/en-US/docs/Web/API/NavigationReloadOptions)
 #external
 pub type NavigationReloadOptions
 

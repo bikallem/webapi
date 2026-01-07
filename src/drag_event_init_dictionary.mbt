@@ -3,6 +3,7 @@
 // Specifications: uievents.idl, html.idl
 
 ///|
+/// [DragEventInit](https://developer.mozilla.org/en-US/docs/Web/API/DragEventInit)
 #external
 pub type DragEventInit
 

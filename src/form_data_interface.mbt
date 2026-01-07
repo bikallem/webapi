@@ -3,6 +3,7 @@
 // Specifications: xhr.idl
 
 ///|
+/// [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
 #external
 pub type FormData
 
@@ -30,6 +31,7 @@ pub fn FormData::new(
 }
 
 ///|
+/// [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) interface.
 pub trait TFormData: TJsValue {
   append(self : Self, name : String, value : String) -> Unit = _
   append_2(self : Self, name : String, blob_value : &TBlob, filename? : String) -> Unit = _
@@ -49,6 +51,7 @@ extern "js" fn form_data_append_ffi(
 ) -> Unit = "(obj, name, value) => obj.append(name, value)"
 
 ///|
+/// [FormData.append](https://developer.mozilla.org/en-US/docs/Web/API/FormData/append)
 impl TFormData with append(self : Self, name : String, value : String) -> Unit {
   form_data_append_ffi(
     TJsValue::to_js(self),
@@ -66,6 +69,7 @@ extern "js" fn form_data_append_2_ffi(
 ) -> Unit = "(obj, name, blob_value, filename) => obj.append_2(name, blob_value, filename)"
 
 ///|
+/// [FormData.append_2](https://developer.mozilla.org/en-US/docs/Web/API/FormData/append_2)
 impl TFormData with append_2(
   self : Self,
   name : String,
@@ -84,6 +88,7 @@ impl TFormData with append_2(
 extern "js" fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(name)"
 
 ///|
+/// [FormData.delete](https://developer.mozilla.org/en-US/docs/Web/API/FormData/delete)
 impl TFormData with delete(self : Self, name : String) -> Unit {
   form_data_delete_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -92,6 +97,7 @@ impl TFormData with delete(self : Self, name : String) -> Unit {
 extern "js" fn form_data_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(name)"
 
 ///|
+/// [FormData.get](https://developer.mozilla.org/en-US/docs/Web/API/FormData/get)
 impl TFormData with get(self : Self, name : String) -> FormDataEntryValue? {
   let result = form_data_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
   if JsValue::is_null(result) {
@@ -108,6 +114,7 @@ extern "js" fn form_data_get_all_ffi(
 ) -> Array[FormDataEntryValue] = "(obj, name) => obj.getAll(name)"
 
 ///|
+/// [FormData.getAll](https://developer.mozilla.org/en-US/docs/Web/API/FormData/getAll)
 impl TFormData with get_all(self : Self, name : String) -> Array[
   FormDataEntryValue,
 ] {
@@ -118,6 +125,7 @@ impl TFormData with get_all(self : Self, name : String) -> Array[
 extern "js" fn form_data_has_ffi(obj : JsValue, name : JsValue) -> Bool = "(obj, name) => obj.has(name)"
 
 ///|
+/// [FormData.has](https://developer.mozilla.org/en-US/docs/Web/API/FormData/has)
 impl TFormData with has(self : Self, name : String) -> Bool {
   form_data_has_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
@@ -130,6 +138,7 @@ extern "js" fn form_data_set_ffi(
 ) -> Unit = "(obj, name, value) => obj.set(name, value)"
 
 ///|
+/// [FormData.set](https://developer.mozilla.org/en-US/docs/Web/API/FormData/set)
 impl TFormData with set(self : Self, name : String, value : String) -> Unit {
   form_data_set_ffi(
     TJsValue::to_js(self),
@@ -147,6 +156,7 @@ extern "js" fn form_data_set_2_ffi(
 ) -> Unit = "(obj, name, blob_value, filename) => obj.set_2(name, blob_value, filename)"
 
 ///|
+/// [FormData.set_2](https://developer.mozilla.org/en-US/docs/Web/API/FormData/set_2)
 impl TFormData with set_2(
   self : Self,
   name : String,

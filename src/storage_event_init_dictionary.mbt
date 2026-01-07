@@ -3,6 +3,7 @@
 // Specifications: dom.idl, html.idl
 
 ///|
+/// [StorageEventInit](https://developer.mozilla.org/en-US/docs/Web/API/StorageEventInit)
 #external
 pub type StorageEventInit
 

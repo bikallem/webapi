@@ -3,6 +3,7 @@
 // Specifications: html.idl
 
 ///|
+/// [HTMLAudioElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement)
 #external
 pub type HTMLAudioElement
 
@@ -41,4 +42,5 @@ pub fn HTMLAudioElement::new() -> HTMLAudioElement {
 }
 
 ///|
+/// [HTMLAudioElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement) interface.
 pub trait THTMLAudioElement: THTMLMediaElement {}
