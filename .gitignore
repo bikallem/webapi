@@ -7,9 +7,12 @@ target/
 
 node_modules/
 dist/
+_build
+target
 
 *.map.json
 
 *.prompt.md
 
 webapi_gen/tmp
+.claude
