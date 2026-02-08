@@ -179,29 +179,31 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         ..write_string(
           "/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n",
         )
-        ..write_string(
+        .write_string(
           "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
         )
         // Emit trait method declarations
         let trait_defs = interface_def.methods
-          .filter_map(meth => match meth.decl_emit() {
-            Code("") => None
-            Code(code) => Some(code)
+          .filter_map(meth => {
+            match meth.decl_emit() {
+              Code("") => None
+              Code(code) => Some(code)
+            }
           })
           .join("\n")
-        buf..write_string(trait_defs)..write_string("\n}")..write_string("\n\n")
+        buf..write_string(trait_defs)..write_string("\n}").write_string("\n\n")
 
         // Emit default trait method implementations
         let default_trait_impls = interface_def.methods
           .map(meth => meth.impl_emit().0)
           .join("\n\n")
-        buf..write_string(default_trait_impls)
+        buf.write_string(default_trait_impls)
       }
       Emit::UnionArgTrait(TraitName(trait_name)) =>
         buf
         ..write_string("pub(open) trait \{trait_name} {\n")
         ..write_string("  to_js(self : Self) -> JsValue\n")
-        ..write_string("}")
+        .write_string("}")
       Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) =>
         buf.write_string(
           "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
@@ -220,7 +222,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
           "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \n",
         )
         ..write_string("#|(\{ffi_js_args}) => {\n")
-        ..write_string("#|  const obj = {};\n")
+        .write_string("#|  const obj = {};\n")
         for arg in args {
           buf.write_string(
             "#|  if (\{arg.original_name} !== undefined) obj.\{arg.original_name} = \{arg.original_name};\n",
@@ -229,15 +231,15 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf
         ..write_string("#|  return obj;\n")
         ..write_string("#|}")
-        ..write_string("\n\n")
+        .write_string("\n\n")
 
         // Emit new() method
         let method_args = trait_method_impl_args(args)
-        buf..write_string(
+        buf.write_string(
           "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
         )
         let call_args = func_call_args(args)
-        buf..write_string("  \{ffi_name}(\{call_args})\n")..write_string("}")
+        buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
       }
       Emit::ConstructorMethod(
         ConstructorName(constructor_name),
@@ -254,13 +256,13 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         ..write_string(
           "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
         )
-        ..write_string("\n\n")
+        .write_string("\n\n")
         let method_args = trait_method_impl_args(args)
         buf.write_string(
           "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n",
         )
         let call_args = func_call_args(args)
-        buf..write_string("  \{ffi_name}(\{call_args})\n")..write_string("}")
+        buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
       }
       Emit::Enum(TypeName(name), variants) => {
         // Emit enum type definition        
@@ -276,7 +278,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         ..write_string(
           "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
         )
-        ..write_string("  match self {\n")
+        .write_string("  match self {\n")
         for variant in variants {
           buf.write_string(
             "    \{name}::\{variant.variant_name} => TJsValue::to_js(\"\{variant.original_value}\")\n",
@@ -298,7 +300,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf
         ..write_string("    _ => None\n")
         ..write_string("  }\n")
-        ..write_string("}")
+        .write_string("}")
       }
       Emit::TypedefAlias(TypeName(name), target_type) =>
         buf.write_string("pub type \{name} = \{target_type}")
@@ -316,7 +318,7 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         ..write_string("\n\n")
 
         // Constructor from MoonBit closure
-        ..write_string(
+        .write_string(
           "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
         )
       }

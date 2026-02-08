@@ -38,9 +38,11 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   }
   let trait_name = self.interface_name
   let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
-  let ffi_argnames = self.args.map(arg => match arg.type_ {
-    ArgMbtType::Self => "obj"
-    _ => arg.name
+  let ffi_argnames = self.args.map(arg => {
+    match arg.type_ {
+      ArgMbtType::Self => "obj"
+      _ => arg.name
+    }
   })
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ffi_js_decl_args = ffi_argnames.join(", ")
@@ -50,29 +52,29 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   ..write_string(
     "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_decl_args}) => obj.\{self.original_name}(\{ffi_js_call_args})\"",
   )
-  ..write_string("\n\n")
+  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit default trait method implementation
   let method_args = trait_method_impl_args(self.args)
   let method_name = safe_identifier(self.original_name)
   let call_args = func_call_args(self.args)
-  code..write_string(
+  code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
   if self.return_type.optional {
     code
     ..write_string("  let result = \{ffi_name}(\{call_args})\n")
-    ..write_string(
+    .write_string(
       "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
     )
   } else {
-    code..write_string("  \{ffi_name}(\{call_args})\n")
+    code.write_string("  \{ffi_name}(\{call_args})\n")
   }
-  code..write_string("}")
+  code.write_string("}")
   Code(code.to_string())
 }
 
@@ -113,27 +115,27 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   ..write_string(
     "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_args}) => \{trait_name}.\{self.original_name}(\{ffi_js_args})\"",
   )
-  ..write_string("\n\n")
+  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit static method implementation
   let method_args = trait_method_impl_args(self.args)
   let method_name = safe_identifier(self.original_name)
   let call_args = func_call_args(self.args)
-  code..write_string(
+  code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
   if self.return_type.optional {
     code
     ..write_string("  let result = \{ffi_name}(\{call_args})\n")
-    ..write_string(
+    .write_string(
       "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
     )
   } else {
-    code..write_string("  \{ffi_name}(\{call_args})\n")
+    code.write_string("  \{ffi_name}(\{call_args})\n")
   }
   code.write_string("}")
   Code(code.to_string())
@@ -170,11 +172,11 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
   ..write_string(
     "extern \"js\" fn \{ffi_name}(obj: JsValue) -> \{ret_type_str} = \"(obj) => obj.\{self.original_name}\"",
   )
-  ..write_string("\n\n")
+  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit default trait method implementation
   let method_name = safe_identifier(self.original_name)
@@ -183,7 +185,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
     "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
   )
   ..write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
-  ..write_string("}")
+  .write_string("}")
   Code(code.to_string())
 }
 
@@ -217,11 +219,11 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
   ..write_string(
     "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
   )
-  ..write_string("\n\n")
+  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit default trait method implementation
   let method_name = safe_identifier(self.original_name)
@@ -232,7 +234,7 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
     "impl T\{trait_name} with set_\{method_name}(\{method_args}) -> Unit {\n",
   )
   ..write_string("  \{ffi_name}(\{call_args})\n")
-  ..write_string("}")
+  .write_string("}")
   Code(code.to_string())
 }
 
@@ -265,11 +267,11 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
   ..write_string(
     "extern \"js\" fn \{ffi_name}() -> \{ret_type_str} = \"() => \{trait_name}.\{self.original_name}\"",
   )
-  ..write_string("\n\n")
+  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code..write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit static attribute getter implementation
   let method_name = safe_identifier(self.original_name)
@@ -278,7 +280,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
     "pub fn \{trait_name}::\{method_name}() -> \{ret_type_str} {\n",
   )
   ..write_string("  \{ffi_name}()\n")
-  ..write_string("}")
+  .write_string("}")
   Code(code.to_string())
 }
 

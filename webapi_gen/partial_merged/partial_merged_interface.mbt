@@ -66,7 +66,7 @@ test "MergedInterface::merge() combines members and inheritance" {
     Some("HTMLElement"),
     @hashset.HashSet::from_array(["dom.idl"]),
   )
-  @json.inspect(iface2, content={
+  json_inspect(iface2, content={
     "name": "Element",
     "members": [
       {
@@ -123,7 +123,7 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
     None,
     @hashset.HashSet::from_array(["dom.idl"]),
   )
-  @json.inspect(iface2, content={
+  json_inspect(iface2, content={
     "name": "Element",
     "members": [
       {

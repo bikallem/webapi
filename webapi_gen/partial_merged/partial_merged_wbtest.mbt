@@ -9,7 +9,7 @@ test "PartialMergeVisitor merges interface and partial interface" {
     #|};    
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
-  @json.inspect(partial_merged, content={
+  json_inspect(partial_merged, content={
     "interfaces": {
       "MyInterface": {
         "name": "MyInterface",
@@ -76,7 +76,7 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
   let merged_mixin = partial_merged.mixins["MyMixin"]
-  @json.inspect(merged_mixin, content={
+  json_inspect(merged_mixin, content={
     "name": "MyMixin",
     "members": [
       {
@@ -121,7 +121,7 @@ test "PartialMergeVisitor merges dictionary and partial dictionary" {
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["EventInit"]
-  @json.inspect(merged, content={
+  json_inspect(merged, content={
     "name": "EventInit",
     "members": [
       {
@@ -151,7 +151,7 @@ test "PartialMergeVisitor merges dictionary with inheritance" {
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["UIEventInit"]
-  @json.inspect(merged, content={
+  json_inspect(merged, content={
     "name": "UIEventInit",
     "members": [
       {
@@ -174,7 +174,7 @@ test "PartialMergeVisitor empty_dictionary" {
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
   let merged = partial_merged.dictionaries["EmptyDict"]
-  @json.inspect(merged, content={
+  json_inspect(merged, content={
     "name": "EmptyDict",
     "members": [],
     "specs": [],
@@ -215,7 +215,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
-  @json.inspect(partial_merged, content={
+  json_inspect(partial_merged, content={
     "interfaces": {
       "MyInterface": {
         "name": "MyInterface",

@@ -26,7 +26,7 @@ pub impl Emitter for TypedefEmitter with emit(
       ..push(Emit::External(external_name))
       ..push(Emit::ImplTJsValue(external_name))
       ..push(Emit::UnionArgTrait(trait_name))
-      ..push(Emit::IntoMethod(external_name))
+      .push(Emit::IntoMethod(external_name))
       let seen : @hashset.HashSet[ArgMbtType] = @hashset.new()
       for opt in options {
         let (mbt_type, arg_emits) = arg_mbt_type(
@@ -40,7 +40,7 @@ pub impl Emitter for TypedefEmitter with emit(
           seen.add(mbt_type)
           emits
           ..push_iter(arg_emits.iter())
-          ..push(Emit::UnionArgTraitImpl(TypeName(mbt_type.name()), trait_name))
+          .push(Emit::UnionArgTraitImpl(TypeName(mbt_type.name()), trait_name))
         }
       }
       emits
@@ -71,7 +71,7 @@ test "typedef emiiter emits alias typedef" {
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (filename, emits) = emitter.emit("MyString")
   let code = mbt_code_gen(emits)
-  @json.inspect(filename, content=["Filename", "my_string_typedef.mbt"])
+  json_inspect(filename, content=["Filename", "my_string_typedef.mbt"])
   inspect(
     code,
     content=(
@@ -125,7 +125,6 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
-
     ),
   )
 }
@@ -165,7 +164,6 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
-
     ),
   )
 }

@@ -20,7 +20,7 @@ test "filter_idl with empty config returns all types" {
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
-  @json.inspect(filtered, content=[
+  json_inspect(filtered, content=[
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Node", "members": [] }],
@@ -60,7 +60,7 @@ test "filter_idl filters interfaces by whitelist" {
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
-  @json.inspect(filtered, content=[
+  json_inspect(filtered, content=[
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Document", "members": [] }],
@@ -88,7 +88,7 @@ test "filter_idl excludes callbacks" {
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
-  @json.inspect(filtered, content=[
+  json_inspect(filtered, content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -134,7 +134,7 @@ test "filter_idl excludes typedefs" {
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
-  @json.inspect(filtered, content=[
+  json_inspect(filtered, content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -166,7 +166,7 @@ test "filter_idl excludes dictionaries by prefix" {
     ),
   )
   let filtered = filter_idl(config, defs, ignore)
-  @json.inspect(filtered, content=[
+  json_inspect(filtered, content=[
     {
       "extended_attributes": [],
       "definition": ["Dictionary", { "name": "EventInit", "members": [] }],

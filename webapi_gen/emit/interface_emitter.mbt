@@ -63,12 +63,14 @@ fn mbt_default_value(
         ArgMbtType::Union({ options, .. }) =>
           if options
             .iter()
-            .find_first(it => match it {
-              Primitive("Int")
-              | Primitive("Int64")
-              | Primitive("UInt")
-              | Primitive("UInt64") => true
-              _ => false
+            .find_first(it => {
+              match it {
+                Primitive("Int")
+                | Primitive("Int64")
+                | Primitive("UInt")
+                | Primitive("UInt64") => true
+                _ => false
+              }
             })
             is Some(t) {
             "(\{i}: \{t.name()})"
@@ -91,9 +93,11 @@ fn mbt_default_value(
         ArgMbtType::Union({ options, .. }) =>
           if options
             .iter()
-            .find_first(it => match it {
-              Primitive("Float") | Primitive("Double") => true
-              _ => false
+            .find_first(it => {
+              match it {
+                Primitive("Float") | Primitive("Double") => true
+                _ => false
+              }
             })
             is Some(t) {
             "(\{f}: \{t.name()})"
@@ -109,9 +113,11 @@ fn mbt_default_value(
       if arg_type is Union({ options, .. }) {
         if options
           .iter()
-          .find_first(it => match it {
-            Dictionary(_) => true
-            _ => false
+          .find_first(it => {
+            match it {
+              Dictionary(_) => true
+              _ => false
+            }
           })
           is Some(t) {
           "\{t.name()}::empty()"
@@ -161,7 +167,7 @@ pub impl Emitter for InterfaceEmitter with emit(
   ..push(Emit::External(interface.name))
   ..push(Emit::ImplTJsValue(interface.name))
   ..push(Emit::IntoMethod(interface.name))
-  ..push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
+  .push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
   for ancestor in ancestors {
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
@@ -178,19 +184,16 @@ pub impl Emitter for InterfaceEmitter with emit(
       }
       constructor_count += 1
       let (args, arg_emits) = method_args(
-        ctor.arguments.map(arg => (
-          arg.name,
-          arg.type_.type_,
-          arg.optional,
-          arg.default_value,
-        )),
+        ctor.arguments.map(arg => {
+          (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+        }),
         interface.name,
         method_name,
         self.type_registry,
       )
       emits
       ..push_iter(arg_emits.iter())
-      ..push(
+      .push(
         Emit::ConstructorMethod(
           ConstructorName(method_name),
           TypeName(interface.name),
@@ -214,12 +217,9 @@ pub impl Emitter for InterfaceEmitter with emit(
       }
       // trait method args      
       let (args, arg_emits) = method_args(
-        op.arguments.map(arg => (
-          arg.name,
-          arg.type_.type_,
-          arg.optional,
-          arg.default_value,
-        )),
+        op.arguments.map(arg => {
+          (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+        }),
         interface.name,
         orig_method_name,
         self.type_registry,
@@ -248,7 +248,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         self.type_registry,
       )
       if return_type is ArgMbtType::Union({ name, has_undefined, .. }) {
-        emits..push(Emit::External(name))..push(Emit::IntoMethod(name))
+        emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
         if has_undefined {
           emits.push(Emit::IsUndefinedMethod(name))
         }
@@ -302,7 +302,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         emits.push_iter(attr_emits.iter())
       }
       if attr_type is ArgMbtType::Union({ name, has_undefined, .. }) {
-        emits..push(Emit::External(name))..push(Emit::IntoMethod(name))
+        emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
         if has_undefined {
           emits.push(Emit::IsUndefinedMethod(name))
         }
@@ -379,7 +379,7 @@ pub impl Emitter for InterfaceEmitter with emit(
       )
       emits
       ..push_iter(const_emits.iter())
-      ..push(
+      .push(
         Emit::Const(
           const_name,
           TypeName(mbt_type.name()),

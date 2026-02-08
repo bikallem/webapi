@@ -17,12 +17,9 @@ pub impl Emitter for DictionaryEmitter with emit(
     Emit::ImplTJsValue(dict.name),
   ]
   let (args, arg_emits) = method_args(
-    dict.members.map(mem => (
-      mem.name,
-      mem.type_,
-      !mem.required,
-      mem.default_value,
-    )),
+    dict.members.map(mem => {
+      (mem.name, mem.type_, !mem.required, mem.default_value)
+    }),
     dict.name,
     "new",
     self.type_registry,
@@ -30,7 +27,7 @@ pub impl Emitter for DictionaryEmitter with emit(
   emits
   ..push_iter(arg_emits.iter())
   ..push(Emit::DictionaryCreate(dict.name, args)) // empty constructor
-  ..push(Emit::EmptyMethod(dict.name))
+  .push(Emit::EmptyMethod(dict.name))
   (filename, emits)
 }
 
@@ -106,7 +103,6 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
       #|
       #|pub fn CanvasRenderingContext2DSettings::empty() -> CanvasRenderingContext2DSettings { canvas_rendering_context2d_settings_empty_ffi() }
-
     ),
   )
 }

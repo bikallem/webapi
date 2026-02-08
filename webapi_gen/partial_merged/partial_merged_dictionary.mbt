@@ -56,7 +56,7 @@ test "MergedDictionary::merge() combines members and inheritance" {
     Some("NodeInit"),
     None,
   )
-  @json.inspect(_dict2, content={
+  json_inspect(_dict2, content={
     "name": "ElementInit",
     "members": [
       {

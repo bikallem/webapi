@@ -26,7 +26,7 @@ test "arg_mbt_type identifies union types correctly" {
       #|Union({name: "TestInterfaceTestMethodParam", has_undefined: false, options: [Primitive("String"), Primitive("UInt")]})
     ),
   )
-  @json.inspect(emits, content=[
+  json_inspect(emits, content=[
     ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
     [
       "UnionArgTraitImpl",
@@ -69,7 +69,7 @@ test "arg_mbt_type identifies nested union types correctly" {
       #|Union({name: "TestInterfaceTestMethodParam", has_undefined: false, options: [Primitive("String"), Union({name: "TestInterfaceTestMethodParam2", has_undefined: false, options: [Primitive("UInt"), Primitive("Bool")]})]})
     ),
   )
-  @json.inspect(emits, content=[
+  json_inspect(emits, content=[
     ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
     [
       "UnionArgTraitImpl",
@@ -124,7 +124,7 @@ test "arg_mbt_type identifies nested union within sequence types correctly" {
       #|Union({name: "TestInterfaceTestMethodParam", has_undefined: false, options: [Primitive("String"), Other("Array[&TTestInterfaceTestMethodParam2]")]})
     ),
   )
-  @json.inspect(emits, content=[
+  json_inspect(emits, content=[
     ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
     [
       "UnionArgTraitImpl",
@@ -178,7 +178,7 @@ test "arg_mbt_type identifies union with undefined option correctly" {
       #|Union({name: "TestInterfaceTestMethodParam", has_undefined: true, options: [Primitive("String"), Other("JsUndefined")]})
     ),
   )
-  @json.inspect(emits, content=[
+  json_inspect(emits, content=[
     ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
     [
       "UnionArgTraitImpl",
@@ -221,5 +221,5 @@ test "arg_mbt_type identifies non-union types correctly" {
       #|Primitive("String")
     ),
   )
-  @json.inspect(emits, content=[]) // No emits for non-union type
+  json_inspect(emits, content=[]) // No emits for non-union type
 }

@@ -25,7 +25,7 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
     "testMethod",
     type_registry,
   )
-  @json.inspect(args, content=[
+  json_inspect(args, content=[
     [
       {
         "name": "param",
@@ -159,7 +159,6 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
       #|}
-
     ),
   )
 }
@@ -234,7 +233,6 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|param? : &TTestInterfaceTestMethodParam = "default") -> void {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
       #|}
-
     ),
   )
 }
@@ -304,7 +302,6 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|impl TTestInterface with test_method(self : Self) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self))
       #|}
-
     ),
   )
 }
@@ -420,7 +417,6 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
       #|}
-
     ),
   )
 }
@@ -483,7 +479,6 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|last_name : String) -> Unit {
       #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
-
     ),
   )
 }
@@ -584,7 +579,6 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
-
     ),
   )
 }

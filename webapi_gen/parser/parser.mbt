@@ -9,7 +9,7 @@ pub suberror ParseError {
 } derive(Show)
 
 ///|
-struct Parser {
+priv struct Parser {
   tokens : Array[(Token, Position, Position)]
   mut pos : Int
 }
@@ -1240,7 +1240,7 @@ fn Parser::parse_string_type(self : Parser) -> Type raise ParseError {
 }
 
 ///|
-fn Parser::parse_buffer_type(self : Parser) -> Type raise ParseError {
+fn Parser::parse_buffer_type(self : Parser) -> Type {
   let tok = self.advance()
   match tok.kind() {
     TK_ARRAYBUFFER => Type::ArrayBuffer

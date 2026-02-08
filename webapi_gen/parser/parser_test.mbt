@@ -39,7 +39,7 @@ test "parse interface with inheritance" {
   let idl =
     #|interface Child : Parent {
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -56,7 +56,7 @@ test "parse with union type" {
     #|interface Example {
     #|  attribute (DOMString or long or boolean) exampleAttr;
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -97,7 +97,7 @@ test "parse interface with extended attributes" {
     #|[Exposed=Window]
     #|interface EventTarget {
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [["Ident", "Exposed", "Window"]],
       "definition": ["Interface", { "name": "EventTarget", "members": [] }],
@@ -118,7 +118,7 @@ test "parse dictionary with default values" {
     #|  B b = undefined;
     #|  DOMString name;
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -192,7 +192,7 @@ test "parse dictionary with default values" {
 test "parse enum" {
   let idl =
     #|enum Color { "red", "green", "blue" };
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -207,7 +207,7 @@ test "parse enum" {
 test "parse typedef" {
   let idl =
     #|typedef sequence<DOMString> StringList;
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -222,7 +222,7 @@ test "parse typedef" {
 test "parse callback function" {
   let idl =
     #|callback Handler = undefined (Event ev);
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -255,7 +255,7 @@ test "parse callback interface" {
     #|  undefined handleEvent(Event event);
     #|};
   let result = @parser.parse(idl)
-  @json.inspect(result[0], content={
+  json_inspect(result[0], content={
     "extended_attributes": [],
     "definition": [
       "CallbackInterface",
@@ -297,7 +297,7 @@ test "parse namespace" {
     #|namespace CSS {
     #|  boolean supports(DOMString property, DOMString value);
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -349,7 +349,7 @@ test "parse namespace" {
 test "parse includes statement" {
   let idl =
     #|Window includes GlobalEventHandlers;
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -366,7 +366,7 @@ test "parse interface mixin" {
     #|interface mixin EventHandlers {
     #|  attribute EventHandler? onclick;
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -400,7 +400,7 @@ test "parse partial interface" {
     #|partial interface Document {
     #|  readonly attribute Element? body;
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -434,7 +434,7 @@ test "parse interface with constructor" {
     #|interface URL {
     #|  constructor(DOMString url);
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -475,7 +475,7 @@ test "parse interface with getter" {
     #|interface Collection {
     #|  getter Element? item(unsigned long index);
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -519,7 +519,7 @@ test "parse interface with iterable" {
     #|interface List {
     #|  iterable<DOMString>;
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -544,7 +544,7 @@ test "parse interface with maplike" {
     #|interface Headers {
     #|  readonly maplike<DOMString, DOMString>;
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -576,7 +576,7 @@ test "parse interface with static operation" {
     #|interface URL {
     #|  static boolean canParse(DOMString url);
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -620,7 +620,7 @@ test "parse buffer type" {
     #|interface Blob {
     #|  ArrayBuffer arrayBuffer();
     #|};
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": [
@@ -652,7 +652,7 @@ test "parse single line comment" {
   let idl =
     #|// This is a comment
     #|interface Foo { };
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Foo", "members": [] }],
@@ -666,7 +666,7 @@ test "parse multi line comment" {
     #|/* This is a
     #|   multi-line comment */
     #|interface Foo { };
-  @json.inspect(@parser.parse(idl), content=[
+  json_inspect(@parser.parse(idl), content=[
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Foo", "members": [] }],

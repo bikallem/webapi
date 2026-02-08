@@ -13,7 +13,7 @@ test "flatten merges dictionary inheritance" {
   let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged, ignore)
   let flattened_dict = flattened_idl.dictionaries["ChildDict"]
-  @json.inspect(flattened_dict, content={
+  json_inspect(flattened_dict, content={
     "name": "ChildDict",
     "members": [
       {
@@ -57,7 +57,7 @@ test "flatten handles dictionary without inheritance" {
   let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged, ignore)
   let flattened_dict = flattened_idl.dictionaries["SimpleDict"]
-  @json.inspect(flattened_dict, content={
+  json_inspect(flattened_dict, content={
     "name": "SimpleDict",
     "members": [
       {
@@ -102,7 +102,7 @@ test "flatten merges/includes mixin members into interface" {
   let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged, ignore)
   let iface2 = flattened_idl.interfaces["MyInterface"]
-  @json.inspect(iface2, content={
+  json_inspect(iface2, content={
     "name": "MyInterface",
     "members": [
       {
@@ -227,7 +227,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged, ignore)
-  @json.inspect(flattened_idl, content={
+  json_inspect(flattened_idl, content={
     "interfaces": {
       "Dummy": {
         "name": "Dummy",
@@ -441,5 +441,5 @@ test "get_interface_ancestors returns transitive parent chain" {
   let partial_merged = @partial_merged.merge_partials(defs)
   let flattened_idl = flatten(partial_merged, ignore)
   let ancestors = get_interface_ancestors(flattened_idl, "HTMLElement")
-  @json.inspect(ancestors, content=["Element", "Node", "EventTarget"])
+  json_inspect(ancestors, content=["Element", "Node", "EventTarget"])
 }

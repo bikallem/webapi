@@ -98,7 +98,7 @@ test "load_from_string with valid TOML" {
     #|excluded_dictionary_prefixes = ["ElementCreationOptions"]
     #|
   let cfg = load_config_from_string(valid_toml)
-  @json.inspect(cfg, content={
+  json_inspect(cfg, content={
     "idl_dir": "../node_modules/@webref/idl",
     "output_dir": "../src",
     "templates_dir": "base.mbt",
@@ -123,7 +123,7 @@ test "load_from_string with empty arrays" {
     #|excluded_dictionary_prefixes = []
     #|
   let cfg = load_config_from_string(empty_toml)
-  @json.inspect(cfg, content={
+  json_inspect(cfg, content={
     "idl_dir": "",
     "output_dir": "",
     "templates_dir": "",
