@@ -315,9 +315,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
         "specs": [],
       },
     },
-    "enums": {
-      "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"] },
-    },
+    "enums": { "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"] } },
     "typedefs": {},
     "callback_functions": {
       "MyCallback": {

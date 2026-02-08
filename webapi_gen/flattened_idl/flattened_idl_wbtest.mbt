@@ -392,9 +392,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
         "specs": [],
       },
     },
-    "enums": {
-      "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"] },
-    },
+    "enums": { "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"] } },
     "typedefs": {},
     "callbacks": {
       "MyCallback": {
