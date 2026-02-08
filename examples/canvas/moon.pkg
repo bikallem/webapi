@@ -1,0 +1,9 @@
+import {
+  "bikallem/webapi",
+  "moonbitlang/core/math",
+}
+
+options(
+  "is-main": true,
+  "supported-targets": [ "js", "wasm-gc" ],
+)

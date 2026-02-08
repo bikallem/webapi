@@ -18,7 +18,7 @@ fn main {
   count_display
   ..set_attribute("id", "count-display")
   ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
-  ..set_text_content("0")
+  .set_text_content("0")
 
   // Update display
   let update_display = fn() {
@@ -34,7 +34,7 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  ..add_event_listener(
+  .add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
       count = count - 1
@@ -49,7 +49,7 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  ..add_event_listener(
+  .add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
       count = count + 1
@@ -64,7 +64,7 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  ..add_event_listener(
+  .add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
       count = 0
@@ -79,7 +79,7 @@ fn main {
     .into()
   container
   ..set_attribute("id", "counter-app")
-  ..set_attribute("style", "text-align: center; font-family: system-ui;")
+  .set_attribute("style", "text-align: center; font-family: system-ui;")
   let children : Array[&@webapi.TNode] = [
     heading, count_display, decrement_btn, increment_btn, reset_btn,
   ]
@@ -87,5 +87,4 @@ fn main {
     container.append_child(child) |> ignore
   }
   let _ = app.append_child(container)
-
 }

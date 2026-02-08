@@ -134,7 +134,7 @@ fn draw_tree(
   ..fill()
   ..begin_path()
   ..arc(x + 25.0 * scale, y + 5.0 * scale, 30.0 * scale, 0.0, 6.283185)
-  ..fill()
+  .fill()
 }
 
 ///|
@@ -158,5 +158,5 @@ fn draw_cloud(
   ..fill()
   ..begin_path()
   ..arc(x + 25.0 * scale, y + 10.0 * scale, 20.0 * scale, 0.0, 6.283185)
-  ..fill()
+  .fill()
 }
