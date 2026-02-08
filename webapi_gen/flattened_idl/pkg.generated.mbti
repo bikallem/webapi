@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/webapi_gen/flattened_idl"
 
-import(
-  "bikallem/webapi_gen/parser"
-  "bikallem/webapi_gen/partial_merged"
-  "moonbitlang/core/hashset"
-)
+import {
+  "bikallem/webapi_gen/parser",
+  "bikallem/webapi_gen/partial_merged",
+  "moonbitlang/core/hashset",
+}
 
 // Values
 pub fn flatten(@partial_merged.PartialMerged, (String) -> Unit) -> FlattenedIdl

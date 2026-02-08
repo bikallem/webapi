@@ -1,10 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/webapi_gen/emit"
 
-import(
-  "bikallem/webapi_gen/flattened_idl"
-  "bikallem/webapi_gen/type_registry"
-)
+import {
+  "bikallem/webapi_gen/flattened_idl",
+  "bikallem/webapi_gen/type_registry",
+}
 
 // Values
 pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
@@ -12,6 +12,10 @@ pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
 pub fn mbt_code_gen(Array[Emit]) -> String
+
+pub fn mdn_interface_url(String) -> String
+
+pub fn mdn_member_url(String, String) -> String
 
 // Errors
 
@@ -124,6 +128,7 @@ pub impl ToJson for InterfaceDef
 pub(all) struct InterfaceEmitter {
   idl : @flattened_idl.FlattenedIdl
   type_registry : @type_registry.TypeRegistry
+  log_skipped : (String) -> Unit
 }
 pub impl Emitter for InterfaceEmitter
 

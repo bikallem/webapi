@@ -626,6 +626,7 @@ pub(all) enum TokenKind {
   TK_ELLIPSIS
   TK_STAR
 }
+pub impl Eq for TokenKind
 pub impl Show for TokenKind
 
 pub(all) enum Type {

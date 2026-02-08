@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/webapi_gen/config"
 
-import(
-  "moonbitlang/core/hashset"
-)
+import {
+  "moonbitlang/core/hashset",
+}
 
 // Values
 pub fn load_config_from_string(String) -> Config raise

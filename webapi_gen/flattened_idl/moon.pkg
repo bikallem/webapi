@@ -1,4 +1,5 @@
 import {
   "bikallem/webapi_gen/parser",
   "bikallem/webapi_gen/partial_merged",
+  "moonbitlang/core/hashset",
 }
