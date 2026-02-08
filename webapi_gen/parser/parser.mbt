@@ -457,6 +457,42 @@ fn Parser::parse_interface_members(
 }
 
 ///|
+/// Parses `Type Name ";"` and constructs an AttributeMember.
+/// The caller is responsible for consuming the leading modifiers (static, readonly, inherit, attribute).
+fn Parser::parse_attribute_body(
+  self : Parser,
+  static_ : Bool,
+  is_readonly : Bool,
+  is_inherit : Bool,
+) -> AttributeMember raise ParseError {
+  let type_with_ea = self.parse_type_with_extended_attributes()
+  let name = self.parse_attribute_name()
+  self.skip(TK_SEMICOLON)
+  {
+    type_: type_with_ea.type_,
+    name,
+    is_readonly,
+    static_,
+    is_inherit,
+  }
+}
+
+///|
+/// Parses `Type Name? "(" Args ")" ";"` for getter/setter/deleter.
+fn Parser::parse_special_operation_body(
+  self : Parser,
+  special : Special,
+) -> SpecialOperationMember raise ParseError {
+  let return_type = self.parse_type()
+  let name = self.parse_operation_name()
+  self.skip(TK_LPAREN)
+  let arguments = self.parse_argument_list()
+  self.skip(TK_RPAREN)
+  self.skip(TK_SEMICOLON)
+  { return_type, name, arguments, special }
+}
+
+///|
 fn Parser::parse_interface_member(
   self : Parser,
 ) -> InterfaceMember raise ParseError {
@@ -478,16 +514,7 @@ fn Parser::parse_interface_member(
         // stringifier [readonly] attribute Type name ;
         let is_readonly = self.eat(TK_READONLY)
         self.skip(TK_ATTRIBUTE)
-        let type_with_ea = self.parse_type_with_extended_attributes()
-        let name = self.parse_attribute_name()
-        self.skip(TK_SEMICOLON)
-        Attribute({
-          type_: type_with_ea.type_,
-          name,
-          is_readonly,
-          static_: false,
-          is_inherit: false,
-        })
+        Attribute(self.parse_attribute_body(false, is_readonly, false))
       }
     }
     TK_STATIC => {
@@ -496,29 +523,11 @@ fn Parser::parse_interface_member(
         // static readonly attribute
         self.skip_next() // readonly
         self.skip_next() // attribute
-        let type_with_ea = self.parse_type_with_extended_attributes()
-        let name = self.parse_attribute_name()
-        self.skip(TK_SEMICOLON)
-        Attribute({
-          type_: type_with_ea.type_,
-          name,
-          is_readonly: true,
-          static_: true,
-          is_inherit: false,
-        })
+        Attribute(self.parse_attribute_body(true, true, false))
       } else if self.peek_kind() == TK_ATTRIBUTE {
         // static attribute
         self.skip_next() // attribute
-        let type_with_ea = self.parse_type_with_extended_attributes()
-        let name = self.parse_attribute_name()
-        self.skip(TK_SEMICOLON)
-        Attribute({
-          type_: type_with_ea.type_,
-          name,
-          is_readonly: false,
-          static_: true,
-          is_inherit: false,
-        })
+        Attribute(self.parse_attribute_body(true, false, false))
       } else {
         // static operation
         let op = self.parse_regular_operation_member()
@@ -553,16 +562,7 @@ fn Parser::parse_interface_member(
       match self.peek_kind() {
         TK_ATTRIBUTE => {
           self.skip_next()
-          let type_with_ea = self.parse_type_with_extended_attributes()
-          let name = self.parse_attribute_name()
-          self.skip(TK_SEMICOLON)
-          Attribute({
-            type_: type_with_ea.type_,
-            name,
-            is_readonly: true,
-            static_: false,
-            is_inherit: false,
-          })
+          Attribute(self.parse_attribute_body(false, true, false))
         }
         TK_MAPLIKE => {
           let m = self.parse_maplike_member()
@@ -584,74 +584,23 @@ fn Parser::parse_interface_member(
       self.skip_next()
       let is_readonly = self.eat(TK_READONLY)
       self.skip(TK_ATTRIBUTE)
-      let type_with_ea = self.parse_type_with_extended_attributes()
-      let name = self.parse_attribute_name()
-      self.skip(TK_SEMICOLON)
-      Attribute({
-        type_: type_with_ea.type_,
-        name,
-        is_readonly,
-        static_: false,
-        is_inherit: true,
-      })
+      Attribute(self.parse_attribute_body(false, is_readonly, true))
     }
     TK_ATTRIBUTE => {
       self.skip_next()
-      let type_with_ea = self.parse_type_with_extended_attributes()
-      let name = self.parse_attribute_name()
-      self.skip(TK_SEMICOLON)
-      Attribute({
-        type_: type_with_ea.type_,
-        name,
-        is_readonly: false,
-        static_: false,
-        is_inherit: false,
-      })
+      Attribute(self.parse_attribute_body(false, false, false))
     }
     TK_GETTER => {
       self.skip_next()
-      let return_type = self.parse_type()
-      let name = self.parse_operation_name()
-      self.skip(TK_LPAREN)
-      let arguments = self.parse_argument_list()
-      self.skip(TK_RPAREN)
-      self.skip(TK_SEMICOLON)
-      SpecialOperation({
-        return_type,
-        name,
-        arguments,
-        special: Special::Getter,
-      })
+      SpecialOperation(self.parse_special_operation_body(Special::Getter))
     }
     TK_SETTER => {
       self.skip_next()
-      let return_type = self.parse_type()
-      let name = self.parse_operation_name()
-      self.skip(TK_LPAREN)
-      let arguments = self.parse_argument_list()
-      self.skip(TK_RPAREN)
-      self.skip(TK_SEMICOLON)
-      SpecialOperation({
-        return_type,
-        name,
-        arguments,
-        special: Special::Setter,
-      })
+      SpecialOperation(self.parse_special_operation_body(Special::Setter))
     }
     TK_DELETER => {
       self.skip_next()
-      let return_type = self.parse_type()
-      let name = self.parse_operation_name()
-      self.skip(TK_LPAREN)
-      let arguments = self.parse_argument_list()
-      self.skip(TK_RPAREN)
-      self.skip(TK_SEMICOLON)
-      SpecialOperation({
-        return_type,
-        name,
-        arguments,
-        special: Special::Deleter,
-      })
+      SpecialOperation(self.parse_special_operation_body(Special::Deleter))
     }
     TK_MAPLIKE => Maplike(self.parse_maplike_member())
     TK_SETLIKE => Setlike(self.parse_setlike_member())
