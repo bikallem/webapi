@@ -1,5 +1,5 @@
 ///|
-/// Primitive Type Implementations for TJsValue
+/// Primitive Type Implementations for TJsValue (JS backend)
 
 ///|
 pub impl TJsValue for Bool with to_js(self : Bool) -> JsValue = "%identity"

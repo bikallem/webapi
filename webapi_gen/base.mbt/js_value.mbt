@@ -25,14 +25,7 @@ impl TJsValue with is_null(self : Self) -> Bool {
 }
 
 ///|
-/// Get JavaScript undefined value
-pub extern "js" fn JsValue::undefined() -> JsValue = "() => undefined"
-
-///|
-extern "js" fn js_null_ffi() -> JsValue = "() => null"
-
-///|
-/// Get JavaScript null value  
+/// Get JavaScript null value
 pub fn[T] JsValue::null() -> T {
   js_null_ffi().unsafe_cast()
 }
@@ -42,9 +35,6 @@ pub fn[T] JsValue::null() -> T {
 /// This is used internally for FFI returns that need type conversion.
 /// WARNING: No runtime type checking is performed.
 fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
-
-///|
-pub extern "js" fn JsValue::is_null(self : JsValue) -> Bool = "(v) => v === null"
 
 ///|
 /// Convert an Option[T] to JsValue - returns undefined if None
