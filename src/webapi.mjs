@@ -1289,9 +1289,9 @@ export const wasmImportObject = {
     reportError: (obj, e) => obj.reportError(e),
     btoa: (obj, data) => obj.btoa(data),
     atob: (obj, data) => obj.atob(data),
-    setTimeout: (obj, handler, timeout, arguments) => obj.setTimeout(handler, timeout, arguments),
+    setTimeout: (obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, _arguments),
     clearTimeout: (obj, id) => obj.clearTimeout(id),
-    setInterval: (obj, handler, timeout, arguments) => obj.setInterval(handler, timeout, arguments),
+    setInterval: (obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, _arguments),
     clearInterval: (obj, id) => obj.clearInterval(id),
     queueMicrotask: (obj, callback) => obj.queueMicrotask(callback),
     createImageBitmap: (obj, image, options) => obj.createImageBitmap(image, options),
@@ -4151,9 +4151,9 @@ export const wasmImportObject = {
     reportError: (obj, e) => obj.reportError(e),
     btoa: (obj, data) => obj.btoa(data),
     atob: (obj, data) => obj.atob(data),
-    setTimeout: (obj, handler, timeout, arguments) => obj.setTimeout(handler, timeout, arguments),
+    setTimeout: (obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, _arguments),
     clearTimeout: (obj, id) => obj.clearTimeout(id),
-    setInterval: (obj, handler, timeout, arguments) => obj.setInterval(handler, timeout, arguments),
+    setInterval: (obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, _arguments),
     clearInterval: (obj, id) => obj.clearInterval(id),
     queueMicrotask: (obj, callback) => obj.queueMicrotask(callback),
     createImageBitmap: (obj, image, options) => obj.createImageBitmap(image, options),
@@ -4985,9 +4985,9 @@ export const wasmImportObject = {
 
   webapi_TrustedTypePolicy: {
     get_name: (obj) => obj.name,
-    createHTML: (obj, input, arguments) => obj.createHTML(input, arguments),
-    createScript: (obj, input, arguments) => obj.createScript(input, arguments),
-    createScriptURL: (obj, input, arguments) => obj.createScriptURL(input, arguments)
+    createHTML: (obj, input, _arguments) => obj.createHTML(input, _arguments),
+    createScript: (obj, input, _arguments) => obj.createScript(input, _arguments),
+    createScriptURL: (obj, input, _arguments) => obj.createScriptURL(input, _arguments)
   },
 
   webapi_PerformanceEntry: {

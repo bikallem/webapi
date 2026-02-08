@@ -10,6 +10,8 @@ let js_reserved : @hashset.HashSet[String] = {
     "while", "with", "class", "const", "enum", "export", "extends", "import",
     "super", "implements", "interface", "let", "package", "private", "protected",
     "public", "static", "yield", "await",
+    // Not reserved words, but cannot be used as identifiers in strict mode (ES modules)
+    "arguments", "eval",
   ] {
     s.add(kw)
   }
