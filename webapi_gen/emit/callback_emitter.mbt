@@ -214,3 +214,26 @@ test "js_code_gen Callback with multiple args" {
     ),
   )
 }
+
+///|
+test "CallbackEmitter multi-target separates FFI" {
+  let idl =
+    #|callback EventListener = undefined (Event event);
+  let definitions = @parser.parse(idl)
+  let registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let callback_emitter = CallbackEmitter::{
+    idl: flattened,
+    type_registry: registry,
+  }
+  let (_filename, emits) = callback_emitter.emit("EventListener")
+  let multi = mbt_code_gen_multi(emits)
+  // Shared should have wrapper, no extern "js"
+  inspect(multi.shared.contains("extern \"js\""), content="false")
+  inspect(multi.shared.contains("pub fn EventListener::new("), content="true")
+  // JS FFI should have extern "js"
+  inspect(multi.js_ffi.contains("extern \"js\" fn event_listener_ffi"), content="true")
+  // Wasm FFI should have wasm import
+  inspect(multi.wasm_ffi.contains("\"webapi_EventListener\" \"new\""), content="true")
+}

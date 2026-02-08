@@ -689,3 +689,108 @@ test "InterfaceEmitter emits static attribute getter methods" {
     ),
   )
 }
+
+///|
+test "mbt_code_gen_multi generates separate shared and FFI files for interface" {
+  let idl =
+    #|interface TestInterface {
+    #|  undefined sayHello();
+    #|  readonly attribute DOMString name;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  fn log_skipped(_msg : String) {
+
+  }
+
+  let interface_emitter = InterfaceEmitter::{
+    idl: flattened,
+    type_registry,
+    log_skipped,
+  }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let multi = mbt_code_gen_multi(emits)
+  // Shared code should NOT contain extern "js"
+  inspect(multi.shared.contains("extern \"js\""), content="false")
+  // JS FFI should contain extern "js" declarations
+  inspect(multi.js_ffi.contains("extern \"js\""), content="true")
+  // Wasm FFI should contain module/function import syntax
+  inspect(multi.wasm_ffi.contains("\"webapi_TestInterface\""), content="true")
+  // Shared code should contain trait and impl
+  inspect(multi.shared.contains("pub trait TTestInterface"), content="true")
+  inspect(multi.shared.contains("impl TTestInterface with say_hello"), content="true")
+  inspect(multi.shared.contains("impl TTestInterface with name"), content="true")
+}
+
+///|
+test "mbt_code_gen_multi uses TJsValue::to_js for UnionArgTraitImpl" {
+  let idl =
+    #|interface TestInterface {
+    #|  void testMethod((DOMString or boolean) param);
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  fn log_skipped(_msg : String) {
+
+  }
+
+  let interface_emitter = InterfaceEmitter::{
+    idl: flattened,
+    type_registry,
+    log_skipped,
+  }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let multi = mbt_code_gen_multi(emits)
+  // Multi-target should use TJsValue::to_js(self) instead of %identity
+  inspect(
+    multi.shared.contains("TJsValue::to_js(self)"),
+    content="true",
+  )
+  // Should NOT use %identity for union arg trait impls in multi-target
+  inspect(
+    multi.shared.contains("= \"%identity\""),
+    content="true", // Still has %identity for ImplTJsValue (which is correct)
+  )
+}
+
+///|
+test "mbt_code_gen_multi generates wasm FFI for constructor" {
+  let idl =
+    #|interface TestInterface {
+    #|  constructor(DOMString name);
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  fn log_skipped(_msg : String) {
+
+  }
+
+  let interface_emitter = InterfaceEmitter::{
+    idl: flattened,
+    type_registry,
+    log_skipped,
+  }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let multi = mbt_code_gen_multi(emits)
+  // JS FFI should have extern "js" constructor
+  inspect(
+    multi.js_ffi.contains("extern \"js\" fn test_interface_new_ffi"),
+    content="true",
+  )
+  // Wasm FFI should have wasm import constructor
+  inspect(
+    multi.wasm_ffi.contains("\"webapi_TestInterface\" \"new\""),
+    content="true",
+  )
+  // Shared should have the wrapper function
+  inspect(
+    multi.shared.contains("pub fn TestInterface::new("),
+    content="true",
+  )
+}
