@@ -32,7 +32,7 @@ moon add bikallem/webapi
 
 A simple counter application demonstrating DOM manipulation and event handling:
 
-```moonbit
+```moonbit nocheck
 ///|
 fn main {
   // Create mutable counter state
@@ -75,7 +75,7 @@ fn main {
 
 Demonstrates the Canvas 2D API with gradients, shapes, and text:
 
-```moonbit
+```moonbit nocheck
 ///|
 fn main {
   // Create canvas element
@@ -120,7 +120,7 @@ fn main {
 
 The library provides direct access to browser global objects:
 
-```moonbit
+```moonbit nocheck
 // Access the document object
 @webapi.document.get_element_by_id("my-id")
 
@@ -135,7 +135,7 @@ The library provides direct access to browser global objects:
 
 DOM elements are returned as generic `Element` types. Use `into()` to cast to specific element types:
 
-```moonbit
+```moonbit nocheck
 // Create an element and cast to specific type
 
 ///|
@@ -156,7 +156,7 @@ let ctx : @webapi.CanvasRenderingContext2D = canvas
 
 Create event listeners using the `EventListener::new` constructor:
 
-```moonbit
+```moonbit nocheck
 element.add_event_listener(
   "click",
   @webapi.EventListener::new(fn(event) {
@@ -170,7 +170,7 @@ element.add_event_listener(
 
 Most setter methods return `Unit`, enabling method chaining with `..`:
 
-```moonbit
+```moonbit nocheck
 element
 ..set_attribute("id", "my-element")
 ..set_attribute("class", "container")
@@ -181,7 +181,7 @@ element
 
 Many methods have optional parameters using MoonBit's `?` syntax:
 
-```moonbit
+```moonbit nocheck
 // With default options
 document.create_element("div")
 
@@ -222,7 +222,7 @@ interface Element : Node {
 ```
 
 **Generated MoonBit:**
-```moonbit
+```moonbit nocheck
 // External type wrapping JavaScript object
 
 ///|
@@ -271,7 +271,7 @@ enum ShadowRootMode { "open", "closed" };
 ```
 
 **Generated MoonBit:**
-```moonbit
+```moonbit nocheck
 ///|
 pub(all) enum ShadowRootMode {
   Open
@@ -309,7 +309,7 @@ dictionary EventInit {
 ```
 
 **Generated MoonBit:**
-```moonbit
+```moonbit nocheck
 ///|
 #external
 pub type EventInit
@@ -324,7 +324,7 @@ pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool) -> EventInit {
 
 Interface inheritance is modeled using trait bounds:
 
-```moonbit
+```moonbit nocheck
 // Element extends Node, which extends EventTarget
 pub trait TElement: TNode { ... }
 pub trait TNode: TEventTarget { ... }

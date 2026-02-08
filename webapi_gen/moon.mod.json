@@ -12,6 +12,5 @@
     "webapi",
     "parser"
   ],
-  "description": "WebIDL to Moonbit WebAPI generator. See https://webidl.spec.whatwg.org for more information.",
-  "warn-list": "-0071"
+  "description": "WebIDL to Moonbit WebAPI generator. See https://webidl.spec.whatwg.org for more information."
 }
