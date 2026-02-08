@@ -1,0 +1,6 @@
+///|
+fn worklet_add_module_ffi(
+  obj : JsValue,
+  module_url : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Worklet" "addModule"

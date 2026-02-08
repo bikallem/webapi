@@ -1,0 +1,20 @@
+///|
+fn navigate_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  navigation_type : JsValue,
+  destination : JsValue,
+  can_intercept : JsValue,
+  user_initiated : JsValue,
+  hash_change : JsValue,
+  signal : JsValue,
+  form_data : JsValue,
+  download_request : JsValue,
+  info : JsValue,
+  has_ua_visual_transition : JsValue,
+  source_element : JsValue,
+) -> NavigateEventInit = "webapi_NavigateEventInit" "new"
+
+///|
+fn navigate_event_init_empty_ffi() -> NavigateEventInit = "webapi_Dictionary" "empty"

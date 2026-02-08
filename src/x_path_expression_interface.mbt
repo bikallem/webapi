@@ -28,14 +28,6 @@ pub trait TXPathExpression: TJsValue {
 }
 
 ///|
-extern "js" fn x_path_expression_evaluate_ffi(
-  obj : JsValue,
-  context_node : JsValue,
-  type_ : JsValue,
-  result : JsValue,
-) -> XPathResult = "(obj, context_node, type_, result) => obj.evaluate(context_node, type_, result)"
-
-///|
 /// [XPathExpression.evaluate](https://developer.mozilla.org/en-US/docs/Web/API/XPathExpression/evaluate)
 impl TXPathExpression with evaluate(
   self : Self,
@@ -48,5 +40,5 @@ impl TXPathExpression with evaluate(
     TJsValue::to_js(context_node),
     TJsValue::to_js(type_),
     TJsValue::to_js(result),
-  )
+  ).unsafe_cast()
 }

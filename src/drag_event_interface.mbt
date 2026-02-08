@@ -26,12 +26,6 @@ pub impl TUIEvent for DragEvent
 pub impl TEvent for DragEvent
 
 ///|
-extern "js" fn drag_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> DragEvent = "(type_, event_init_dict) => new DragEvent(type_, event_init_dict)"
-
-///|
 pub fn DragEvent::new(
   type_ : String,
   event_init_dict? : DragEventInit = DragEventInit::empty(),
@@ -46,10 +40,7 @@ pub trait TDragEvent: TMouseEvent {
 }
 
 ///|
-extern "js" fn drag_event_data_transfer_ffi(obj : JsValue) -> DataTransfer = "(obj) => obj.dataTransfer"
-
-///|
 /// [DragEvent.dataTransfer](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer)
 impl TDragEvent with data_transfer(self : Self) -> DataTransfer {
-  drag_event_data_transfer_ffi(TJsValue::to_js(self))
+  drag_event_data_transfer_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

@@ -23,10 +23,7 @@ pub trait TDOMRectList: TJsValue {
 }
 
 ///|
-extern "js" fn dom_rect_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [DOMRectList.length](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectList/length)
 impl TDOMRectList with length(self : Self) -> UInt {
-  dom_rect_list_length_ffi(TJsValue::to_js(self))
+  dom_rect_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

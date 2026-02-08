@@ -27,19 +27,13 @@ pub trait TCSSMarginRule: TCSSRule {
 }
 
 ///|
-extern "js" fn css_margin_rule_name_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.name"
-
-///|
 /// [CSSMarginRule.name](https://developer.mozilla.org/en-US/docs/Web/API/CSSMarginRule/name)
 impl TCSSMarginRule with name(self : Self) -> CSSOMString {
-  css_margin_rule_name_ffi(TJsValue::to_js(self))
+  css_margin_rule_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn css_margin_rule_style_ffi(obj : JsValue) -> CSSStyleDeclaration = "(obj) => obj.style"
 
 ///|
 /// [CSSMarginRule.style](https://developer.mozilla.org/en-US/docs/Web/API/CSSMarginRule/style)
 impl TCSSMarginRule with style(self : Self) -> CSSStyleDeclaration {
-  css_margin_rule_style_ffi(TJsValue::to_js(self))
+  css_margin_rule_style_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

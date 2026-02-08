@@ -28,55 +28,37 @@ pub trait TScreen: TJsValue {
 }
 
 ///|
-extern "js" fn screen_avail_width_ffi(obj : JsValue) -> Int = "(obj) => obj.availWidth"
-
-///|
 /// [Screen.availWidth](https://developer.mozilla.org/en-US/docs/Web/API/Screen/availWidth)
 impl TScreen with avail_width(self : Self) -> Int {
-  screen_avail_width_ffi(TJsValue::to_js(self))
+  screen_avail_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn screen_avail_height_ffi(obj : JsValue) -> Int = "(obj) => obj.availHeight"
 
 ///|
 /// [Screen.availHeight](https://developer.mozilla.org/en-US/docs/Web/API/Screen/availHeight)
 impl TScreen with avail_height(self : Self) -> Int {
-  screen_avail_height_ffi(TJsValue::to_js(self))
+  screen_avail_height_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn screen_width_ffi(obj : JsValue) -> Int = "(obj) => obj.width"
 
 ///|
 /// [Screen.width](https://developer.mozilla.org/en-US/docs/Web/API/Screen/width)
 impl TScreen with width(self : Self) -> Int {
-  screen_width_ffi(TJsValue::to_js(self))
+  screen_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn screen_height_ffi(obj : JsValue) -> Int = "(obj) => obj.height"
 
 ///|
 /// [Screen.height](https://developer.mozilla.org/en-US/docs/Web/API/Screen/height)
 impl TScreen with height(self : Self) -> Int {
-  screen_height_ffi(TJsValue::to_js(self))
+  screen_height_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn screen_color_depth_ffi(obj : JsValue) -> UInt = "(obj) => obj.colorDepth"
 
 ///|
 /// [Screen.colorDepth](https://developer.mozilla.org/en-US/docs/Web/API/Screen/colorDepth)
 impl TScreen with color_depth(self : Self) -> UInt {
-  screen_color_depth_ffi(TJsValue::to_js(self))
+  screen_color_depth_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn screen_pixel_depth_ffi(obj : JsValue) -> UInt = "(obj) => obj.pixelDepth"
 
 ///|
 /// [Screen.pixelDepth](https://developer.mozilla.org/en-US/docs/Web/API/Screen/pixelDepth)
 impl TScreen with pixel_depth(self : Self) -> UInt {
-  screen_pixel_depth_ffi(TJsValue::to_js(self))
+  screen_pixel_depth_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

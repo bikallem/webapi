@@ -1,0 +1,37 @@
+///|
+fn wheel_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view : JsValue,
+  detail : JsValue,
+  which : JsValue,
+  ctrl_key : JsValue,
+  shift_key : JsValue,
+  alt_key : JsValue,
+  meta_key : JsValue,
+  modifier_alt_graph : JsValue,
+  modifier_caps_lock : JsValue,
+  modifier_fn : JsValue,
+  modifier_fn_lock : JsValue,
+  modifier_hyper : JsValue,
+  modifier_num_lock : JsValue,
+  modifier_scroll_lock : JsValue,
+  modifier_super : JsValue,
+  modifier_symbol : JsValue,
+  modifier_symbol_lock : JsValue,
+  screen_x : JsValue,
+  screen_y : JsValue,
+  client_x : JsValue,
+  client_y : JsValue,
+  button : JsValue,
+  buttons : JsValue,
+  related_target : JsValue,
+  delta_x : JsValue,
+  delta_y : JsValue,
+  delta_z : JsValue,
+  delta_mode : JsValue,
+) -> WheelEventInit = "webapi_WheelEventInit" "new"
+
+///|
+fn wheel_event_init_empty_ffi() -> WheelEventInit = "webapi_Dictionary" "empty"

@@ -1,0 +1,2 @@
+///|
+fn mime_type_array_length_ffi(obj : JsValue) -> JsValue = "webapi_MimeTypeArray" "get_length"

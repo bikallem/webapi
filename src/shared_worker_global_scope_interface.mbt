@@ -36,16 +36,10 @@ pub trait TSharedWorkerGlobalScope: TWorkerGlobalScope {
 }
 
 ///|
-extern "js" fn shared_worker_global_scope_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [SharedWorkerGlobalScope.name](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/name)
 impl TSharedWorkerGlobalScope with name(self : Self) -> String {
-  shared_worker_global_scope_name_ffi(TJsValue::to_js(self))
+  shared_worker_global_scope_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn shared_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
 /// [SharedWorkerGlobalScope.close](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/close)
@@ -54,21 +48,10 @@ impl TSharedWorkerGlobalScope with close(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn shared_worker_global_scope_onconnect_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onconnect"
-
-///|
 /// [SharedWorkerGlobalScope.onconnect](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/onconnect)
 impl TSharedWorkerGlobalScope with onconnect(self : Self) -> EventHandler {
-  shared_worker_global_scope_onconnect_ffi(TJsValue::to_js(self))
+  shared_worker_global_scope_onconnect_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn shared_worker_global_scope_set_onconnect_ffi(
-  obj : JsValue,
-  onconnect : JsValue,
-) -> Unit = "(obj, onconnect) => { obj.onconnect = onconnect; }"
 
 ///|
 /// [SharedWorkerGlobalScope.onconnect](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/onconnect)

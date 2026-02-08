@@ -20,12 +20,6 @@ pub impl TPageRevealEvent for PageRevealEvent
 pub impl TEvent for PageRevealEvent
 
 ///|
-extern "js" fn page_reveal_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> PageRevealEvent = "(type_, event_init_dict) => new PageRevealEvent(type_, event_init_dict)"
-
-///|
 pub fn PageRevealEvent::new(
   type_ : String,
   event_init_dict? : PageRevealEventInit = PageRevealEventInit::empty(),
@@ -43,12 +37,7 @@ pub trait TPageRevealEvent: TEvent {
 }
 
 ///|
-extern "js" fn page_reveal_event_view_transition_ffi(
-  obj : JsValue,
-) -> ViewTransition = "(obj) => obj.viewTransition"
-
-///|
 /// [PageRevealEvent.viewTransition](https://developer.mozilla.org/en-US/docs/Web/API/PageRevealEvent/viewTransition)
 impl TPageRevealEvent with view_transition(self : Self) -> ViewTransition {
-  page_reveal_event_view_transition_ffi(TJsValue::to_js(self))
+  page_reveal_event_view_transition_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

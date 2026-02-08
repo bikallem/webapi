@@ -29,9 +29,6 @@ pub impl TNode for HTMLHRElement
 pub impl TEventTarget for HTMLHRElement
 
 ///|
-extern "js" fn htmlhr_element_new_ffi() -> HTMLHRElement = "() => new HTMLHRElement()"
-
-///|
 pub fn HTMLHRElement::new() -> HTMLHRElement {
   htmlhr_element_new_ffi()
 }
@@ -52,19 +49,10 @@ pub trait THTMLHRElement: THTMLElement {
 }
 
 ///|
-extern "js" fn htmlhr_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
-
-///|
 /// [HTMLHRElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/align)
 impl THTMLHRElement with align(self : Self) -> String {
-  htmlhr_element_align_ffi(TJsValue::to_js(self))
+  htmlhr_element_align_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlhr_element_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [HTMLHRElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/align)
@@ -73,19 +61,10 @@ impl THTMLHRElement with set_align(self : Self, align : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmlhr_element_color_ffi(obj : JsValue) -> String = "(obj) => obj.color"
-
-///|
 /// [HTMLHRElement.color](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/color)
 impl THTMLHRElement with color(self : Self) -> String {
-  htmlhr_element_color_ffi(TJsValue::to_js(self))
+  htmlhr_element_color_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlhr_element_set_color_ffi(
-  obj : JsValue,
-  color : JsValue,
-) -> Unit = "(obj, color) => { obj.color = color; }"
 
 ///|
 /// [HTMLHRElement.color](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/color)
@@ -94,19 +73,10 @@ impl THTMLHRElement with set_color(self : Self, color : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmlhr_element_no_shade_ffi(obj : JsValue) -> Bool = "(obj) => obj.noShade"
-
-///|
 /// [HTMLHRElement.noShade](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/noShade)
 impl THTMLHRElement with no_shade(self : Self) -> Bool {
-  htmlhr_element_no_shade_ffi(TJsValue::to_js(self))
+  htmlhr_element_no_shade_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlhr_element_set_no_shade_ffi(
-  obj : JsValue,
-  no_shade : JsValue,
-) -> Unit = "(obj, noShade) => { obj.noShade = noShade; }"
 
 ///|
 /// [HTMLHRElement.noShade](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/noShade)
@@ -118,19 +88,10 @@ impl THTMLHRElement with set_no_shade(self : Self, no_shade : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn htmlhr_element_size_ffi(obj : JsValue) -> String = "(obj) => obj.size"
-
-///|
 /// [HTMLHRElement.size](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/size)
 impl THTMLHRElement with size(self : Self) -> String {
-  htmlhr_element_size_ffi(TJsValue::to_js(self))
+  htmlhr_element_size_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlhr_element_set_size_ffi(
-  obj : JsValue,
-  size : JsValue,
-) -> Unit = "(obj, size) => { obj.size = size; }"
 
 ///|
 /// [HTMLHRElement.size](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/size)
@@ -139,19 +100,10 @@ impl THTMLHRElement with set_size(self : Self, size : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmlhr_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
-
-///|
 /// [HTMLHRElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/width)
 impl THTMLHRElement with width(self : Self) -> String {
-  htmlhr_element_width_ffi(TJsValue::to_js(self))
+  htmlhr_element_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlhr_element_set_width_ffi(
-  obj : JsValue,
-  width : JsValue,
-) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
 /// [HTMLHRElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement/width)

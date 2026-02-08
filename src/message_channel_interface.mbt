@@ -17,9 +17,6 @@ pub fn[T : TMessageChannel] MessageChannel::into(self : MessageChannel) -> T = "
 pub impl TMessageChannel for MessageChannel
 
 ///|
-extern "js" fn message_channel_new_ffi() -> MessageChannel = "() => new MessageChannel()"
-
-///|
 pub fn MessageChannel::new() -> MessageChannel {
   message_channel_new_ffi()
 }
@@ -32,19 +29,13 @@ pub trait TMessageChannel: TJsValue {
 }
 
 ///|
-extern "js" fn message_channel_port1_ffi(obj : JsValue) -> MessagePort = "(obj) => obj.port1"
-
-///|
 /// [MessageChannel.port1](https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel/port1)
 impl TMessageChannel with port1(self : Self) -> MessagePort {
-  message_channel_port1_ffi(TJsValue::to_js(self))
+  message_channel_port1_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn message_channel_port2_ffi(obj : JsValue) -> MessagePort = "(obj) => obj.port2"
 
 ///|
 /// [MessageChannel.port2](https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel/port2)
 impl TMessageChannel with port2(self : Self) -> MessagePort {
-  message_channel_port2_ffi(TJsValue::to_js(self))
+  message_channel_port2_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

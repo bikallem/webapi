@@ -17,12 +17,6 @@ pub fn[T : TDOMException] DOMException::into(self : DOMException) -> T = "%ident
 pub impl TDOMException for DOMException
 
 ///|
-extern "js" fn dom_exception_new_ffi(
-  message : JsValue,
-  name : JsValue,
-) -> DOMException = "(message, name) => new DOMException(message, name)"
-
-///|
 pub fn DOMException::new(
   message? : String = "",
   name? : String = "Error",
@@ -114,28 +108,19 @@ pub trait TDOMException: TJsValue {
 }
 
 ///|
-extern "js" fn dom_exception_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [DOMException.name](https://developer.mozilla.org/en-US/docs/Web/API/DOMException/name)
 impl TDOMException with name(self : Self) -> String {
-  dom_exception_name_ffi(TJsValue::to_js(self))
+  dom_exception_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_exception_message_ffi(obj : JsValue) -> String = "(obj) => obj.message"
 
 ///|
 /// [DOMException.message](https://developer.mozilla.org/en-US/docs/Web/API/DOMException/message)
 impl TDOMException with message(self : Self) -> String {
-  dom_exception_message_ffi(TJsValue::to_js(self))
+  dom_exception_message_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_exception_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.code"
 
 ///|
 /// [DOMException.code](https://developer.mozilla.org/en-US/docs/Web/API/DOMException/code)
 impl TDOMException with code(self : Self) -> UInt {
-  dom_exception_code_ffi(TJsValue::to_js(self))
+  dom_exception_code_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

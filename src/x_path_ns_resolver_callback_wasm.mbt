@@ -1,0 +1,2 @@
+///|
+fn x_path_ns_resolver_ffi(f : JsValue) -> JsValue = "webapi_XPathNSResolver" "new"

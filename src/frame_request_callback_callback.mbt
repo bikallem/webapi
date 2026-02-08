@@ -13,13 +13,8 @@ pub impl TJsValue for FrameRequestCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn frame_request_callback_ffi(
-  f : (DOMHighResTimeStamp) -> Unit,
-) -> FrameRequestCallback = "(f) => f"
-
-///|
 pub fn FrameRequestCallback::new(
   f : (DOMHighResTimeStamp) -> Unit,
 ) -> FrameRequestCallback {
-  frame_request_callback_ffi(f)
+  frame_request_callback_ffi(js_of(f)).unsafe_cast()
 }

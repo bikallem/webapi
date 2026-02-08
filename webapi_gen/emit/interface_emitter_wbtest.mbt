@@ -152,13 +152,14 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
       #|}
       #|
-      #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool = "(obj, event) => obj.dispatchEvent(event)"
+      #|extern "js" fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> JsValue = "(obj, event) => obj.dispatchEvent(event)"
       #|
       #|/// [EventTarget.dispatchEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)
       #|impl TEventTarget with dispatch_event(self : Self, 
       #|event : Event) -> Bool {
-      #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
+      #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event)).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -226,13 +227,14 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|  test_method(self : Self, param? : &TTestInterfaceTestMethodParam) -> void = _
       #|}
       #|
-      #|extern "js" fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void = "(obj, param) => obj.testMethod(param)"
+      #|extern "js" fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> JsValue = "(obj, param) => obj.testMethod(param)"
       #|
       #|/// [TestInterface.testMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/testMethod)
       #|impl TTestInterface with test_method(self : Self, 
       #|param? : &TTestInterfaceTestMethodParam = "default") -> void {
-      #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
+      #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js()).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -296,12 +298,13 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|  test_method(self : Self) -> TestInterfaceTestMethod = _
       #|}
       #|
-      #|extern "js" fn test_interface_test_method_ffi(obj: JsValue) -> TestInterfaceTestMethod = "(obj) => obj.testMethod()"
+      #|extern "js" fn test_interface_test_method_ffi(obj: JsValue) -> JsValue = "(obj) => obj.testMethod()"
       #|
       #|/// [TestInterface.testMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/testMethod)
       #|impl TTestInterface with test_method(self : Self) -> TestInterfaceTestMethod {
-      #|  test_interface_test_method_ffi(TJsValue::to_js(self))
+      #|  test_interface_test_method_ffi(TJsValue::to_js(self)).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -411,12 +414,13 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|  test_interface_say_hello_ffi(TJsValue::to_js(self))
       #|}
       #|
-      #|extern "js" fn test_interface_name_ffi(obj: JsValue) -> String = "(obj) => obj.name"
+      #|extern "js" fn test_interface_name_ffi(obj: JsValue) -> JsValue = "(obj) => obj.name"
       #|
       #|/// [TestInterface.name](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/name)
       #|impl TTestInterface with name(self : Self) -> String {
-      #|  test_interface_name_ffi(TJsValue::to_js(self))
+      #|  test_interface_name_ffi(TJsValue::to_js(self)).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -465,11 +469,11 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|  set_last_name(self : Self, last_name : String) -> Unit = _
       #|}
       #|
-      #|extern "js" fn test_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
+      #|extern "js" fn test_interface_last_name_ffi(obj: JsValue) -> JsValue = "(obj) => obj.lastName"
       #|
       #|/// [TestInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/lastName)
       #|impl TTestInterface with last_name(self : Self) -> String {
-      #|  test_interface_last_name_ffi(TJsValue::to_js(self))
+      #|  test_interface_last_name_ffi(TJsValue::to_js(self)).unsafe_cast()
       #|}
       #|
       #|extern "js" fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
@@ -479,6 +483,7 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|last_name : String) -> Unit {
       #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
+
     ),
   )
 }
@@ -530,12 +535,13 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|  last_name(self : Self) -> String = _
       #|}
       #|
-      #|extern "js" fn parent_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
+      #|extern "js" fn parent_interface_last_name_ffi(obj: JsValue) -> JsValue = "(obj) => obj.lastName"
       #|
       #|/// [ParentInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/ParentInterface/lastName)
       #|impl TParentInterface with last_name(self : Self) -> String {
-      #|  parent_interface_last_name_ffi(TJsValue::to_js(self))
+      #|  parent_interface_last_name_ffi(TJsValue::to_js(self)).unsafe_cast()
       #|}
+
     ),
   )
   let (_, emits) = interface_emitter.emit("ChildInterface")
@@ -565,11 +571,11 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|  set_last_name(self : Self, last_name : String) -> Unit = _
       #|}
       #|
-      #|extern "js" fn child_interface_last_name_ffi(obj: JsValue) -> String = "(obj) => obj.lastName"
+      #|extern "js" fn child_interface_last_name_ffi(obj: JsValue) -> JsValue = "(obj) => obj.lastName"
       #|
       #|/// [ChildInterface.lastName](https://developer.mozilla.org/en-US/docs/Web/API/ChildInterface/lastName)
       #|impl TChildInterface with last_name(self : Self) -> String {
-      #|  child_interface_last_name_ffi(TJsValue::to_js(self))
+      #|  child_interface_last_name_ffi(TJsValue::to_js(self)).unsafe_cast()
       #|}
       #|
       #|extern "js" fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
@@ -579,6 +585,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
+
     ),
   )
 }
@@ -626,13 +633,14 @@ test "InterfaceEmitter emits static methods" {
       #|
       #|}
       #|
-      #|extern "js" fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response = "(url, status) => TestInterface.redirect(url, status)"
+      #|extern "js" fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> JsValue = "(url, status) => TestInterface.redirect(url, status)"
       #|
       #|/// [TestInterface.redirect](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/redirect)
       #|pub fn TestInterface::redirect(url : String, 
       #|status? : UInt = (302: UInt)) -> Response {
-      #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
+      #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status)).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -680,12 +688,13 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|
       #|}
       #|
-      #|extern "js" fn test_interface_app_name_ffi() -> String = "() => TestInterface.appName"
+      #|extern "js" fn test_interface_app_name_ffi() -> JsValue = "() => TestInterface.appName"
       #|
       #|/// [TestInterface.appName](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/appName)
       #|pub fn TestInterface::app_name() -> String {
-      #|  test_interface_app_name_ffi()
+      #|  test_interface_app_name_ffi().unsafe_cast()
       #|}
+
     ),
   )
 }

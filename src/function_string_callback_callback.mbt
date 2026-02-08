@@ -13,13 +13,8 @@ pub impl TJsValue for FunctionStringCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn function_string_callback_ffi(
-  f : (String) -> Unit,
-) -> FunctionStringCallback = "(f) => f"
-
-///|
 pub fn FunctionStringCallback::new(
   f : (String) -> Unit,
 ) -> FunctionStringCallback {
-  function_string_callback_ffi(f)
+  function_string_callback_ffi(js_of(f)).unsafe_cast()
 }

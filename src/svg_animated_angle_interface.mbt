@@ -26,19 +26,13 @@ pub trait TSVGAnimatedAngle: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_angle_base_val_ffi(obj : JsValue) -> SVGAngle = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedAngle.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedAngle/baseVal)
 impl TSVGAnimatedAngle with base_val(self : Self) -> SVGAngle {
-  svg_animated_angle_base_val_ffi(TJsValue::to_js(self))
+  svg_animated_angle_base_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_animated_angle_anim_val_ffi(obj : JsValue) -> SVGAngle = "(obj) => obj.animVal"
 
 ///|
 /// [SVGAnimatedAngle.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedAngle/animVal)
 impl TSVGAnimatedAngle with anim_val(self : Self) -> SVGAngle {
-  svg_animated_angle_anim_val_ffi(TJsValue::to_js(self))
+  svg_animated_angle_anim_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

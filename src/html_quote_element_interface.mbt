@@ -31,9 +31,6 @@ pub impl TNode for HTMLQuoteElement
 pub impl TEventTarget for HTMLQuoteElement
 
 ///|
-extern "js" fn html_quote_element_new_ffi() -> HTMLQuoteElement = "() => new HTMLQuoteElement()"
-
-///|
 pub fn HTMLQuoteElement::new() -> HTMLQuoteElement {
   html_quote_element_new_ffi()
 }
@@ -46,19 +43,10 @@ pub trait THTMLQuoteElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_quote_element_cite_ffi(obj : JsValue) -> String = "(obj) => obj.cite"
-
-///|
 /// [HTMLQuoteElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement/cite)
 impl THTMLQuoteElement with cite(self : Self) -> String {
-  html_quote_element_cite_ffi(TJsValue::to_js(self))
+  html_quote_element_cite_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_quote_element_set_cite_ffi(
-  obj : JsValue,
-  cite : JsValue,
-) -> Unit = "(obj, cite) => { obj.cite = cite; }"
 
 ///|
 /// [HTMLQuoteElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement/cite)

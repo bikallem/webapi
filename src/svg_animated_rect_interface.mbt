@@ -24,19 +24,13 @@ pub trait TSVGAnimatedRect: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_rect_base_val_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedRect.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedRect/baseVal)
 impl TSVGAnimatedRect with base_val(self : Self) -> DOMRect {
-  svg_animated_rect_base_val_ffi(TJsValue::to_js(self))
+  svg_animated_rect_base_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_animated_rect_anim_val_ffi(obj : JsValue) -> DOMRectReadOnly = "(obj) => obj.animVal"
 
 ///|
 /// [SVGAnimatedRect.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedRect/animVal)
 impl TSVGAnimatedRect with anim_val(self : Self) -> DOMRectReadOnly {
-  svg_animated_rect_anim_val_ffi(TJsValue::to_js(self))
+  svg_animated_rect_anim_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

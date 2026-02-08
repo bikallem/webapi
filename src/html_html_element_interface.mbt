@@ -29,9 +29,6 @@ pub impl TNode for HTMLHtmlElement
 pub impl TEventTarget for HTMLHtmlElement
 
 ///|
-extern "js" fn html_html_element_new_ffi() -> HTMLHtmlElement = "() => new HTMLHtmlElement()"
-
-///|
 pub fn HTMLHtmlElement::new() -> HTMLHtmlElement {
   html_html_element_new_ffi()
 }
@@ -44,19 +41,10 @@ pub trait THTMLHtmlElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_html_element_version_ffi(obj : JsValue) -> String = "(obj) => obj.version"
-
-///|
 /// [HTMLHtmlElement.version](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHtmlElement/version)
 impl THTMLHtmlElement with version(self : Self) -> String {
-  html_html_element_version_ffi(TJsValue::to_js(self))
+  html_html_element_version_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_html_element_set_version_ffi(
-  obj : JsValue,
-  version : JsValue,
-) -> Unit = "(obj, version) => { obj.version = version; }"
 
 ///|
 /// [HTMLHtmlElement.version](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHtmlElement/version)

@@ -29,19 +29,10 @@ pub trait TBeforeUnloadEvent: TEvent {
 }
 
 ///|
-extern "js" fn before_unload_event_return_value_ffi(obj : JsValue) -> String = "(obj) => obj.returnValue"
-
-///|
 /// [BeforeUnloadEvent.returnValue](https://developer.mozilla.org/en-US/docs/Web/API/BeforeUnloadEvent/returnValue)
 impl TBeforeUnloadEvent with return_value(self : Self) -> String {
-  before_unload_event_return_value_ffi(TJsValue::to_js(self))
+  before_unload_event_return_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn before_unload_event_set_return_value_ffi(
-  obj : JsValue,
-  return_value : JsValue,
-) -> Unit = "(obj, returnValue) => { obj.returnValue = returnValue; }"
 
 ///|
 /// [BeforeUnloadEvent.returnValue](https://developer.mozilla.org/en-US/docs/Web/API/BeforeUnloadEvent/returnValue)

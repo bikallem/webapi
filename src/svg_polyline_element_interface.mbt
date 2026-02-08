@@ -44,21 +44,13 @@ pub trait TSVGPolylineElement: TSVGGeometryElement {
 }
 
 ///|
-extern "js" fn svg_polyline_element_points_ffi(obj : JsValue) -> SVGPointList = "(obj) => obj.points"
-
-///|
 /// [SVGPolylineElement.points](https://developer.mozilla.org/en-US/docs/Web/API/SVGPolylineElement/points)
 impl TSVGPolylineElement with points(self : Self) -> SVGPointList {
-  svg_polyline_element_points_ffi(TJsValue::to_js(self))
+  svg_polyline_element_points_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_polyline_element_animated_points_ffi(
-  obj : JsValue,
-) -> SVGPointList = "(obj) => obj.animatedPoints"
 
 ///|
 /// [SVGPolylineElement.animatedPoints](https://developer.mozilla.org/en-US/docs/Web/API/SVGPolylineElement/animatedPoints)
 impl TSVGPolylineElement with animated_points(self : Self) -> SVGPointList {
-  svg_polyline_element_animated_points_ffi(TJsValue::to_js(self))
+  svg_polyline_element_animated_points_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

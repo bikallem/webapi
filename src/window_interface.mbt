@@ -28,9 +28,6 @@ pub type WindowEvent
 pub fn[T : TWindowEvent] WindowEvent::into(self : WindowEvent) -> T = "%identity"
 
 ///|
-extern "js" fn window_event_is_undefined_ffi(obj : WindowEvent) -> Bool = "(obj) => obj === undefined"
-
-///|
 pub fn WindowEvent::is_undefined(self : WindowEvent) -> Bool {
   window_event_is_undefined_ffi(self)
 }
@@ -379,52 +376,34 @@ pub trait TWindow: TEventTarget {
 }
 
 ///|
-extern "js" fn window_event_ffi(obj : JsValue) -> WindowEvent = "(obj) => obj.event"
-
-///|
 /// [Window.event](https://developer.mozilla.org/en-US/docs/Web/API/Window/event)
 impl TWindow with event(self : Self) -> WindowEvent {
-  window_event_ffi(TJsValue::to_js(self))
+  window_event_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_window_ffi(obj : JsValue) -> WindowProxy = "(obj) => obj.window"
 
 ///|
 /// [Window.window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window)
 impl TWindow with window(self : Self) -> WindowProxy {
-  window_window_ffi(TJsValue::to_js(self))
+  window_window_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_self_ffi(obj : JsValue) -> WindowProxy = "(obj) => obj.self"
 
 ///|
 /// [Window.self](https://developer.mozilla.org/en-US/docs/Web/API/Window/self)
 impl TWindow with self(self : Self) -> WindowProxy {
-  window_self_ffi(TJsValue::to_js(self))
+  window_self_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_document_ffi(obj : JsValue) -> Document = "(obj) => obj.document"
 
 ///|
 /// [Window.document](https://developer.mozilla.org/en-US/docs/Web/API/Window/document)
 impl TWindow with document(self : Self) -> Document {
-  window_document_ffi(TJsValue::to_js(self))
+  window_document_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
 /// [Window.name](https://developer.mozilla.org/en-US/docs/Web/API/Window/name)
 impl TWindow with name(self : Self) -> String {
-  window_name_ffi(TJsValue::to_js(self))
+  window_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
 /// [Window.name](https://developer.mozilla.org/en-US/docs/Web/API/Window/name)
@@ -433,108 +412,70 @@ impl TWindow with set_name(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn window_location_ffi(obj : JsValue) -> Location = "(obj) => obj.location"
-
-///|
 /// [Window.location](https://developer.mozilla.org/en-US/docs/Web/API/Window/location)
 impl TWindow with location(self : Self) -> Location {
-  window_location_ffi(TJsValue::to_js(self))
+  window_location_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_history_ffi(obj : JsValue) -> History = "(obj) => obj.history"
 
 ///|
 /// [Window.history](https://developer.mozilla.org/en-US/docs/Web/API/Window/history)
 impl TWindow with history(self : Self) -> History {
-  window_history_ffi(TJsValue::to_js(self))
+  window_history_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_navigation_ffi(obj : JsValue) -> Navigation = "(obj) => obj.navigation"
 
 ///|
 /// [Window.navigation](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation)
 impl TWindow with navigation(self : Self) -> Navigation {
-  window_navigation_ffi(TJsValue::to_js(self))
+  window_navigation_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_custom_elements_ffi(
-  obj : JsValue,
-) -> CustomElementRegistry = "(obj) => obj.customElements"
 
 ///|
 /// [Window.customElements](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements)
 impl TWindow with custom_elements(self : Self) -> CustomElementRegistry {
-  window_custom_elements_ffi(TJsValue::to_js(self))
+  window_custom_elements_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_locationbar_ffi(obj : JsValue) -> BarProp = "(obj) => obj.locationbar"
 
 ///|
 /// [Window.locationbar](https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar)
 impl TWindow with locationbar(self : Self) -> BarProp {
-  window_locationbar_ffi(TJsValue::to_js(self))
+  window_locationbar_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_menubar_ffi(obj : JsValue) -> BarProp = "(obj) => obj.menubar"
 
 ///|
 /// [Window.menubar](https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar)
 impl TWindow with menubar(self : Self) -> BarProp {
-  window_menubar_ffi(TJsValue::to_js(self))
+  window_menubar_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_personalbar_ffi(obj : JsValue) -> BarProp = "(obj) => obj.personalbar"
 
 ///|
 /// [Window.personalbar](https://developer.mozilla.org/en-US/docs/Web/API/Window/personalbar)
 impl TWindow with personalbar(self : Self) -> BarProp {
-  window_personalbar_ffi(TJsValue::to_js(self))
+  window_personalbar_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scrollbars_ffi(obj : JsValue) -> BarProp = "(obj) => obj.scrollbars"
 
 ///|
 /// [Window.scrollbars](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollbars)
 impl TWindow with scrollbars(self : Self) -> BarProp {
-  window_scrollbars_ffi(TJsValue::to_js(self))
+  window_scrollbars_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_statusbar_ffi(obj : JsValue) -> BarProp = "(obj) => obj.statusbar"
 
 ///|
 /// [Window.statusbar](https://developer.mozilla.org/en-US/docs/Web/API/Window/statusbar)
 impl TWindow with statusbar(self : Self) -> BarProp {
-  window_statusbar_ffi(TJsValue::to_js(self))
+  window_statusbar_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_toolbar_ffi(obj : JsValue) -> BarProp = "(obj) => obj.toolbar"
 
 ///|
 /// [Window.toolbar](https://developer.mozilla.org/en-US/docs/Web/API/Window/toolbar)
 impl TWindow with toolbar(self : Self) -> BarProp {
-  window_toolbar_ffi(TJsValue::to_js(self))
+  window_toolbar_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_status_ffi(obj : JsValue) -> String = "(obj) => obj.status"
 
 ///|
 /// [Window.status](https://developer.mozilla.org/en-US/docs/Web/API/Window/status)
 impl TWindow with status(self : Self) -> String {
-  window_status_ffi(TJsValue::to_js(self))
+  window_status_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_status_ffi(obj : JsValue, status : JsValue) -> Unit = "(obj, status) => { obj.status = status; }"
 
 ///|
 /// [Window.status](https://developer.mozilla.org/en-US/docs/Web/API/Window/status)
@@ -543,25 +484,16 @@ impl TWindow with set_status(self : Self, status : String) -> Unit {
 }
 
 ///|
-extern "js" fn window_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
-
-///|
 /// [Window.close](https://developer.mozilla.org/en-US/docs/Web/API/Window/close)
 impl TWindow with close(self : Self) -> Unit {
   window_close_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn window_closed_ffi(obj : JsValue) -> Bool = "(obj) => obj.closed"
-
-///|
 /// [Window.closed](https://developer.mozilla.org/en-US/docs/Web/API/Window/closed)
 impl TWindow with closed(self : Self) -> Bool {
-  window_closed_ffi(TJsValue::to_js(self))
+  window_closed_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop()"
 
 ///|
 /// [Window.stop](https://developer.mozilla.org/en-US/docs/Web/API/Window/stop)
@@ -570,16 +502,10 @@ impl TWindow with stop(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_focus_ffi(obj : JsValue) -> Unit = "(obj) => obj.focus()"
-
-///|
 /// [Window.focus](https://developer.mozilla.org/en-US/docs/Web/API/Window/focus)
 impl TWindow with focus(self : Self) -> Unit {
   window_focus_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn window_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur()"
 
 ///|
 /// [Window.blur](https://developer.mozilla.org/en-US/docs/Web/API/Window/blur)
@@ -588,43 +514,28 @@ impl TWindow with blur(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_frames_ffi(obj : JsValue) -> WindowProxy = "(obj) => obj.frames"
-
-///|
 /// [Window.frames](https://developer.mozilla.org/en-US/docs/Web/API/Window/frames)
 impl TWindow with frames(self : Self) -> WindowProxy {
-  window_frames_ffi(TJsValue::to_js(self))
+  window_frames_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
 /// [Window.length](https://developer.mozilla.org/en-US/docs/Web/API/Window/length)
 impl TWindow with length(self : Self) -> UInt {
-  window_length_ffi(TJsValue::to_js(self))
+  window_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_top_ffi(obj : JsValue) -> WindowProxy = "(obj) => obj.top"
 
 ///|
 /// [Window.top](https://developer.mozilla.org/en-US/docs/Web/API/Window/top)
 impl TWindow with top(self : Self) -> WindowProxy {
-  window_top_ffi(TJsValue::to_js(self))
+  window_top_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_opener_ffi(obj : JsValue) -> JsValue = "(obj) => obj.opener"
 
 ///|
 /// [Window.opener](https://developer.mozilla.org/en-US/docs/Web/API/Window/opener)
 impl TWindow with opener(self : Self) -> JsValue {
-  window_opener_ffi(TJsValue::to_js(self))
+  window_opener_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_opener_ffi(obj : JsValue, opener : JsValue) -> Unit = "(obj, opener) => { obj.opener = opener; }"
 
 ///|
 /// [Window.opener](https://developer.mozilla.org/en-US/docs/Web/API/Window/opener)
@@ -633,30 +544,16 @@ impl TWindow with set_opener(self : Self, opener : JsValue) -> Unit {
 }
 
 ///|
-extern "js" fn window_parent_ffi(obj : JsValue) -> WindowProxy = "(obj) => obj.parent"
-
-///|
 /// [Window.parent](https://developer.mozilla.org/en-US/docs/Web/API/Window/parent)
 impl TWindow with parent(self : Self) -> WindowProxy {
-  window_parent_ffi(TJsValue::to_js(self))
+  window_parent_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_frame_element_ffi(obj : JsValue) -> Element = "(obj) => obj.frameElement"
 
 ///|
 /// [Window.frameElement](https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement)
 impl TWindow with frame_element(self : Self) -> Element {
-  window_frame_element_ffi(TJsValue::to_js(self))
+  window_frame_element_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_open_ffi(
-  obj : JsValue,
-  url : JsValue,
-  target : JsValue,
-  features : JsValue,
-) -> JsValue = "(obj, url, target, features) => obj.open(url, target, features)"
 
 ///|
 /// [Window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
@@ -680,34 +577,22 @@ impl TWindow with open(
 }
 
 ///|
-extern "js" fn window_navigator_ffi(obj : JsValue) -> Navigator = "(obj) => obj.navigator"
-
-///|
 /// [Window.navigator](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator)
 impl TWindow with navigator(self : Self) -> Navigator {
-  window_navigator_ffi(TJsValue::to_js(self))
+  window_navigator_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_client_information_ffi(obj : JsValue) -> Navigator = "(obj) => obj.clientInformation"
 
 ///|
 /// [Window.clientInformation](https://developer.mozilla.org/en-US/docs/Web/API/Window/clientInformation)
 impl TWindow with client_information(self : Self) -> Navigator {
-  window_client_information_ffi(TJsValue::to_js(self))
+  window_client_information_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_origin_agent_cluster_ffi(obj : JsValue) -> Bool = "(obj) => obj.originAgentCluster"
 
 ///|
 /// [Window.originAgentCluster](https://developer.mozilla.org/en-US/docs/Web/API/Window/originAgentCluster)
 impl TWindow with origin_agent_cluster(self : Self) -> Bool {
-  window_origin_agent_cluster_ffi(TJsValue::to_js(self))
+  window_origin_agent_cluster_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_alert_ffi(obj : JsValue) -> Unit = "(obj) => obj.alert()"
 
 ///|
 /// [Window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
@@ -716,29 +601,16 @@ impl TWindow with alert(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_alert_2_ffi(obj : JsValue, message : JsValue) -> Unit = "(obj, message) => obj.alert_2(message)"
-
-///|
 /// [Window.alert_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert_2)
 impl TWindow with alert_2(self : Self, message : String) -> Unit {
   window_alert_2_ffi(TJsValue::to_js(self), TJsValue::to_js(message))
 }
 
 ///|
-extern "js" fn window_confirm_ffi(obj : JsValue, message : JsValue) -> Bool = "(obj, message) => obj.confirm(message)"
-
-///|
 /// [Window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
 impl TWindow with confirm(self : Self, message? : String = "") -> Bool {
-  window_confirm_ffi(TJsValue::to_js(self), TJsValue::to_js(message))
+  window_confirm_ffi(TJsValue::to_js(self), TJsValue::to_js(message)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_prompt_ffi(
-  obj : JsValue,
-  message : JsValue,
-  default : JsValue,
-) -> JsValue = "(obj, message, default) => obj.prompt(message, default)"
 
 ///|
 /// [Window.prompt](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
@@ -760,21 +632,10 @@ impl TWindow with prompt(
 }
 
 ///|
-extern "js" fn window_print_ffi(obj : JsValue) -> Unit = "(obj) => obj.print()"
-
-///|
 /// [Window.print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print)
 impl TWindow with print(self : Self) -> Unit {
   window_print_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn window_post_message_ffi(
-  obj : JsValue,
-  message : JsValue,
-  target_origin : JsValue,
-  transfer : JsValue,
-) -> Unit = "(obj, message, target_origin, transfer) => obj.postMessage(message, target_origin, transfer)"
 
 ///|
 /// [Window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)
@@ -793,13 +654,6 @@ impl TWindow with post_message(
 }
 
 ///|
-extern "js" fn window_post_message_2_ffi(
-  obj : JsValue,
-  message : JsValue,
-  options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
-
-///|
 /// [Window.postMessage_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage_2)
 impl TWindow with post_message_2(
   self : Self,
@@ -814,16 +668,10 @@ impl TWindow with post_message_2(
 }
 
 ///|
-extern "js" fn window_capture_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.captureEvents()"
-
-///|
 /// [Window.captureEvents](https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents)
 impl TWindow with capture_events(self : Self) -> Unit {
   window_capture_events_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn window_release_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.releaseEvents()"
 
 ///|
 /// [Window.releaseEvents](https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents)
@@ -832,20 +680,10 @@ impl TWindow with release_events(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn window_external_ffi(obj : JsValue) -> External = "(obj) => obj.external"
-
-///|
 /// [Window.external](https://developer.mozilla.org/en-US/docs/Web/API/Window/external)
 impl TWindow with external(self : Self) -> External {
-  window_external_ffi(TJsValue::to_js(self))
+  window_external_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_get_computed_style_ffi(
-  obj : JsValue,
-  elt : JsValue,
-  pseudo_elt : JsValue,
-) -> CSSStyleProperties = "(obj, elt, pseudo_elt) => obj.getComputedStyle(elt, pseudo_elt)"
 
 ///|
 /// [Window.getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle)
@@ -858,15 +696,8 @@ impl TWindow with get_computed_style(
     TJsValue::to_js(self),
     TJsValue::to_js(elt),
     opt_to_js(pseudo_elt),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_fetch_later_ffi(
-  obj : JsValue,
-  input : JsValue,
-  init : JsValue,
-) -> FetchLaterResult = "(obj, input, init) => obj.fetchLater(input, init)"
 
 ///|
 /// [Window.fetchLater](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater)
@@ -879,45 +710,26 @@ impl TWindow with fetch_later(
     TJsValue::to_js(self),
     TJsValue::to_js(input),
     TJsValue::to_js(init),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_match_media_ffi(
-  obj : JsValue,
-  query : JsValue,
-) -> MediaQueryList = "(obj, query) => obj.matchMedia(query)"
 
 ///|
 /// [Window.matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
 impl TWindow with match_media(self : Self, query : CSSOMString) -> MediaQueryList {
-  window_match_media_ffi(TJsValue::to_js(self), TJsValue::to_js(query))
+  window_match_media_ffi(TJsValue::to_js(self), TJsValue::to_js(query)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_screen_ffi(obj : JsValue) -> Screen = "(obj) => obj.screen"
 
 ///|
 /// [Window.screen](https://developer.mozilla.org/en-US/docs/Web/API/Window/screen)
 impl TWindow with screen(self : Self) -> Screen {
-  window_screen_ffi(TJsValue::to_js(self))
+  window_screen_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_visual_viewport_ffi(obj : JsValue) -> VisualViewport = "(obj) => obj.visualViewport"
 
 ///|
 /// [Window.visualViewport](https://developer.mozilla.org/en-US/docs/Web/API/Window/visualViewport)
 impl TWindow with visual_viewport(self : Self) -> VisualViewport {
-  window_visual_viewport_ffi(TJsValue::to_js(self))
+  window_visual_viewport_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_move_to_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
 
 ///|
 /// [Window.moveTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo)
@@ -930,13 +742,6 @@ impl TWindow with move_to(self : Self, x : Int, y : Int) -> Unit {
 }
 
 ///|
-extern "js" fn window_move_by_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> Unit = "(obj, x, y) => obj.moveBy(x, y)"
-
-///|
 /// [Window.moveBy](https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy)
 impl TWindow with move_by(self : Self, x : Int, y : Int) -> Unit {
   window_move_by_ffi(
@@ -945,13 +750,6 @@ impl TWindow with move_by(self : Self, x : Int, y : Int) -> Unit {
     TJsValue::to_js(y),
   )
 }
-
-///|
-extern "js" fn window_resize_to_ffi(
-  obj : JsValue,
-  width : JsValue,
-  height : JsValue,
-) -> Unit = "(obj, width, height) => obj.resizeTo(width, height)"
 
 ///|
 /// [Window.resizeTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo)
@@ -964,13 +762,6 @@ impl TWindow with resize_to(self : Self, width : Int, height : Int) -> Unit {
 }
 
 ///|
-extern "js" fn window_resize_by_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> Unit = "(obj, x, y) => obj.resizeBy(x, y)"
-
-///|
 /// [Window.resizeBy](https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy)
 impl TWindow with resize_by(self : Self, x : Int, y : Int) -> Unit {
   window_resize_by_ffi(
@@ -981,64 +772,40 @@ impl TWindow with resize_by(self : Self, x : Int, y : Int) -> Unit {
 }
 
 ///|
-extern "js" fn window_inner_width_ffi(obj : JsValue) -> Int = "(obj) => obj.innerWidth"
-
-///|
 /// [Window.innerWidth](https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth)
 impl TWindow with inner_width(self : Self) -> Int {
-  window_inner_width_ffi(TJsValue::to_js(self))
+  window_inner_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_inner_height_ffi(obj : JsValue) -> Int = "(obj) => obj.innerHeight"
 
 ///|
 /// [Window.innerHeight](https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight)
 impl TWindow with inner_height(self : Self) -> Int {
-  window_inner_height_ffi(TJsValue::to_js(self))
+  window_inner_height_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_x_ffi(obj : JsValue) -> Double = "(obj) => obj.scrollX"
 
 ///|
 /// [Window.scrollX](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX)
 impl TWindow with scroll_x(self : Self) -> Double {
-  window_scroll_x_ffi(TJsValue::to_js(self))
+  window_scroll_x_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_page_x_offset_ffi(obj : JsValue) -> Double = "(obj) => obj.pageXOffset"
 
 ///|
 /// [Window.pageXOffset](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset)
 impl TWindow with page_x_offset(self : Self) -> Double {
-  window_page_x_offset_ffi(TJsValue::to_js(self))
+  window_page_x_offset_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_y_ffi(obj : JsValue) -> Double = "(obj) => obj.scrollY"
 
 ///|
 /// [Window.scrollY](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY)
 impl TWindow with scroll_y(self : Self) -> Double {
-  window_scroll_y_ffi(TJsValue::to_js(self))
+  window_scroll_y_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_page_y_offset_ffi(obj : JsValue) -> Double = "(obj) => obj.pageYOffset"
 
 ///|
 /// [Window.pageYOffset](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset)
 impl TWindow with page_y_offset(self : Self) -> Double {
-  window_page_y_offset_ffi(TJsValue::to_js(self))
+  window_page_y_offset_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scroll(options)"
 
 ///|
 /// [Window.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll)
@@ -1046,15 +813,8 @@ impl TWindow with scroll(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
 ) -> JsPromise[Unit] {
-  window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+  window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_2_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(x, y)"
 
 ///|
 /// [Window.scroll_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll_2)
@@ -1065,14 +825,8 @@ impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_to_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(options)"
 
 ///|
 /// [Window.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)
@@ -1080,15 +834,8 @@ impl TWindow with scroll_to(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
 ) -> JsPromise[Unit] {
-  window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+  window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_to_2_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(x, y)"
 
 ///|
 /// [Window.scrollTo_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo_2)
@@ -1099,14 +846,8 @@ impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_by_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(options)"
 
 ///|
 /// [Window.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy)
@@ -1114,15 +855,8 @@ impl TWindow with scroll_by(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
 ) -> JsPromise[Unit] {
-  window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+  window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_scroll_by_2_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(x, y)"
 
 ///|
 /// [Window.scrollBy_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy_2)
@@ -1133,83 +867,56 @@ impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_screen_x_ffi(obj : JsValue) -> Int = "(obj) => obj.screenX"
 
 ///|
 /// [Window.screenX](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenX)
 impl TWindow with screen_x(self : Self) -> Int {
-  window_screen_x_ffi(TJsValue::to_js(self))
+  window_screen_x_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_screen_left_ffi(obj : JsValue) -> Int = "(obj) => obj.screenLeft"
 
 ///|
 /// [Window.screenLeft](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenLeft)
 impl TWindow with screen_left(self : Self) -> Int {
-  window_screen_left_ffi(TJsValue::to_js(self))
+  window_screen_left_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_screen_y_ffi(obj : JsValue) -> Int = "(obj) => obj.screenY"
 
 ///|
 /// [Window.screenY](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenY)
 impl TWindow with screen_y(self : Self) -> Int {
-  window_screen_y_ffi(TJsValue::to_js(self))
+  window_screen_y_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_screen_top_ffi(obj : JsValue) -> Int = "(obj) => obj.screenTop"
 
 ///|
 /// [Window.screenTop](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenTop)
 impl TWindow with screen_top(self : Self) -> Int {
-  window_screen_top_ffi(TJsValue::to_js(self))
+  window_screen_top_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_outer_width_ffi(obj : JsValue) -> Int = "(obj) => obj.outerWidth"
 
 ///|
 /// [Window.outerWidth](https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth)
 impl TWindow with outer_width(self : Self) -> Int {
-  window_outer_width_ffi(TJsValue::to_js(self))
+  window_outer_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_outer_height_ffi(obj : JsValue) -> Int = "(obj) => obj.outerHeight"
 
 ///|
 /// [Window.outerHeight](https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight)
 impl TWindow with outer_height(self : Self) -> Int {
-  window_outer_height_ffi(TJsValue::to_js(self))
+  window_outer_height_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double = "(obj) => obj.devicePixelRatio"
 
 ///|
 /// [Window.devicePixelRatio](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio)
 impl TWindow with device_pixel_ratio(self : Self) -> Double {
-  window_device_pixel_ratio_ffi(TJsValue::to_js(self))
+  window_device_pixel_ratio_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_onabort_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onabort"
 
 ///|
 /// [Window.onabort](https://developer.mozilla.org/en-US/docs/Web/API/Window/onabort)
 impl TWindow with onabort(self : Self) -> EventHandler {
-  window_onabort_ffi(TJsValue::to_js(self))
+  window_onabort_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
 
 ///|
 /// [Window.onabort](https://developer.mozilla.org/en-US/docs/Web/API/Window/onabort)
@@ -1218,19 +925,10 @@ impl TWindow with set_onabort(self : Self, onabort : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onauxclick_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onauxclick"
-
-///|
 /// [Window.onauxclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/onauxclick)
 impl TWindow with onauxclick(self : Self) -> EventHandler {
-  window_onauxclick_ffi(TJsValue::to_js(self))
+  window_onauxclick_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onauxclick_ffi(
-  obj : JsValue,
-  onauxclick : JsValue,
-) -> Unit = "(obj, onauxclick) => { obj.onauxclick = onauxclick; }"
 
 ///|
 /// [Window.onauxclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/onauxclick)
@@ -1239,19 +937,10 @@ impl TWindow with set_onauxclick(self : Self, onauxclick : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onbeforeinput_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforeinput"
-
-///|
 /// [Window.onbeforeinput](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeinput)
 impl TWindow with onbeforeinput(self : Self) -> EventHandler {
-  window_onbeforeinput_ffi(TJsValue::to_js(self))
+  window_onbeforeinput_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onbeforeinput_ffi(
-  obj : JsValue,
-  onbeforeinput : JsValue,
-) -> Unit = "(obj, onbeforeinput) => { obj.onbeforeinput = onbeforeinput; }"
 
 ///|
 /// [Window.onbeforeinput](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeinput)
@@ -1263,19 +952,10 @@ impl TWindow with set_onbeforeinput(self : Self, onbeforeinput : EventHandler) -
 }
 
 ///|
-extern "js" fn window_onbeforematch_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforematch"
-
-///|
 /// [Window.onbeforematch](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforematch)
 impl TWindow with onbeforematch(self : Self) -> EventHandler {
-  window_onbeforematch_ffi(TJsValue::to_js(self))
+  window_onbeforematch_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onbeforematch_ffi(
-  obj : JsValue,
-  onbeforematch : JsValue,
-) -> Unit = "(obj, onbeforematch) => { obj.onbeforematch = onbeforematch; }"
 
 ///|
 /// [Window.onbeforematch](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforematch)
@@ -1287,19 +967,10 @@ impl TWindow with set_onbeforematch(self : Self, onbeforematch : EventHandler) -
 }
 
 ///|
-extern "js" fn window_onbeforetoggle_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforetoggle"
-
-///|
 /// [Window.onbeforetoggle](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforetoggle)
 impl TWindow with onbeforetoggle(self : Self) -> EventHandler {
-  window_onbeforetoggle_ffi(TJsValue::to_js(self))
+  window_onbeforetoggle_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onbeforetoggle_ffi(
-  obj : JsValue,
-  onbeforetoggle : JsValue,
-) -> Unit = "(obj, onbeforetoggle) => { obj.onbeforetoggle = onbeforetoggle; }"
 
 ///|
 /// [Window.onbeforetoggle](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforetoggle)
@@ -1311,16 +982,10 @@ impl TWindow with set_onbeforetoggle(self : Self, onbeforetoggle : EventHandler)
 }
 
 ///|
-extern "js" fn window_onblur_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onblur"
-
-///|
 /// [Window.onblur](https://developer.mozilla.org/en-US/docs/Web/API/Window/onblur)
 impl TWindow with onblur(self : Self) -> EventHandler {
-  window_onblur_ffi(TJsValue::to_js(self))
+  window_onblur_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onblur_ffi(obj : JsValue, onblur : JsValue) -> Unit = "(obj, onblur) => { obj.onblur = onblur; }"
 
 ///|
 /// [Window.onblur](https://developer.mozilla.org/en-US/docs/Web/API/Window/onblur)
@@ -1329,19 +994,10 @@ impl TWindow with set_onblur(self : Self, onblur : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_oncancel_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncancel"
-
-///|
 /// [Window.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncancel)
 impl TWindow with oncancel(self : Self) -> EventHandler {
-  window_oncancel_ffi(TJsValue::to_js(self))
+  window_oncancel_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncancel_ffi(
-  obj : JsValue,
-  oncancel : JsValue,
-) -> Unit = "(obj, oncancel) => { obj.oncancel = oncancel; }"
 
 ///|
 /// [Window.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncancel)
@@ -1350,19 +1006,10 @@ impl TWindow with set_oncancel(self : Self, oncancel : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_oncanplay_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncanplay"
-
-///|
 /// [Window.oncanplay](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncanplay)
 impl TWindow with oncanplay(self : Self) -> EventHandler {
-  window_oncanplay_ffi(TJsValue::to_js(self))
+  window_oncanplay_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncanplay_ffi(
-  obj : JsValue,
-  oncanplay : JsValue,
-) -> Unit = "(obj, oncanplay) => { obj.oncanplay = oncanplay; }"
 
 ///|
 /// [Window.oncanplay](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncanplay)
@@ -1371,19 +1018,10 @@ impl TWindow with set_oncanplay(self : Self, oncanplay : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_oncanplaythrough_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncanplaythrough"
-
-///|
 /// [Window.oncanplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncanplaythrough)
 impl TWindow with oncanplaythrough(self : Self) -> EventHandler {
-  window_oncanplaythrough_ffi(TJsValue::to_js(self))
+  window_oncanplaythrough_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncanplaythrough_ffi(
-  obj : JsValue,
-  oncanplaythrough : JsValue,
-) -> Unit = "(obj, oncanplaythrough) => { obj.oncanplaythrough = oncanplaythrough; }"
 
 ///|
 /// [Window.oncanplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncanplaythrough)
@@ -1398,19 +1036,10 @@ impl TWindow with set_oncanplaythrough(
 }
 
 ///|
-extern "js" fn window_onchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onchange"
-
-///|
 /// [Window.onchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onchange)
 impl TWindow with onchange(self : Self) -> EventHandler {
-  window_onchange_ffi(TJsValue::to_js(self))
+  window_onchange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onchange_ffi(
-  obj : JsValue,
-  onchange : JsValue,
-) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
 
 ///|
 /// [Window.onchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onchange)
@@ -1419,16 +1048,10 @@ impl TWindow with set_onchange(self : Self, onchange : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onclick_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onclick"
-
-///|
 /// [Window.onclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/onclick)
 impl TWindow with onclick(self : Self) -> EventHandler {
-  window_onclick_ffi(TJsValue::to_js(self))
+  window_onclick_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onclick_ffi(obj : JsValue, onclick : JsValue) -> Unit = "(obj, onclick) => { obj.onclick = onclick; }"
 
 ///|
 /// [Window.onclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/onclick)
@@ -1437,16 +1060,10 @@ impl TWindow with set_onclick(self : Self, onclick : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onclose_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onclose"
-
-///|
 /// [Window.onclose](https://developer.mozilla.org/en-US/docs/Web/API/Window/onclose)
 impl TWindow with onclose(self : Self) -> EventHandler {
-  window_onclose_ffi(TJsValue::to_js(self))
+  window_onclose_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
 
 ///|
 /// [Window.onclose](https://developer.mozilla.org/en-US/docs/Web/API/Window/onclose)
@@ -1455,19 +1072,10 @@ impl TWindow with set_onclose(self : Self, onclose : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_oncommand_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncommand"
-
-///|
 /// [Window.oncommand](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncommand)
 impl TWindow with oncommand(self : Self) -> EventHandler {
-  window_oncommand_ffi(TJsValue::to_js(self))
+  window_oncommand_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncommand_ffi(
-  obj : JsValue,
-  oncommand : JsValue,
-) -> Unit = "(obj, oncommand) => { obj.oncommand = oncommand; }"
 
 ///|
 /// [Window.oncommand](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncommand)
@@ -1476,19 +1084,10 @@ impl TWindow with set_oncommand(self : Self, oncommand : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_oncontextlost_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncontextlost"
-
-///|
 /// [Window.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextlost)
 impl TWindow with oncontextlost(self : Self) -> EventHandler {
-  window_oncontextlost_ffi(TJsValue::to_js(self))
+  window_oncontextlost_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncontextlost_ffi(
-  obj : JsValue,
-  oncontextlost : JsValue,
-) -> Unit = "(obj, oncontextlost) => { obj.oncontextlost = oncontextlost; }"
 
 ///|
 /// [Window.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextlost)
@@ -1500,19 +1099,10 @@ impl TWindow with set_oncontextlost(self : Self, oncontextlost : EventHandler) -
 }
 
 ///|
-extern "js" fn window_oncontextmenu_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncontextmenu"
-
-///|
 /// [Window.oncontextmenu](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextmenu)
 impl TWindow with oncontextmenu(self : Self) -> EventHandler {
-  window_oncontextmenu_ffi(TJsValue::to_js(self))
+  window_oncontextmenu_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncontextmenu_ffi(
-  obj : JsValue,
-  oncontextmenu : JsValue,
-) -> Unit = "(obj, oncontextmenu) => { obj.oncontextmenu = oncontextmenu; }"
 
 ///|
 /// [Window.oncontextmenu](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextmenu)
@@ -1524,19 +1114,10 @@ impl TWindow with set_oncontextmenu(self : Self, oncontextmenu : EventHandler) -
 }
 
 ///|
-extern "js" fn window_oncontextrestored_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncontextrestored"
-
-///|
 /// [Window.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextrestored)
 impl TWindow with oncontextrestored(self : Self) -> EventHandler {
-  window_oncontextrestored_ffi(TJsValue::to_js(self))
+  window_oncontextrestored_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncontextrestored_ffi(
-  obj : JsValue,
-  oncontextrestored : JsValue,
-) -> Unit = "(obj, oncontextrestored) => { obj.oncontextrestored = oncontextrestored; }"
 
 ///|
 /// [Window.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextrestored)
@@ -1551,16 +1132,10 @@ impl TWindow with set_oncontextrestored(
 }
 
 ///|
-extern "js" fn window_oncopy_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncopy"
-
-///|
 /// [Window.oncopy](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncopy)
 impl TWindow with oncopy(self : Self) -> EventHandler {
-  window_oncopy_ffi(TJsValue::to_js(self))
+  window_oncopy_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncopy_ffi(obj : JsValue, oncopy : JsValue) -> Unit = "(obj, oncopy) => { obj.oncopy = oncopy; }"
 
 ///|
 /// [Window.oncopy](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncopy)
@@ -1569,19 +1144,10 @@ impl TWindow with set_oncopy(self : Self, oncopy : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_oncuechange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncuechange"
-
-///|
 /// [Window.oncuechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncuechange)
 impl TWindow with oncuechange(self : Self) -> EventHandler {
-  window_oncuechange_ffi(TJsValue::to_js(self))
+  window_oncuechange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncuechange_ffi(
-  obj : JsValue,
-  oncuechange : JsValue,
-) -> Unit = "(obj, oncuechange) => { obj.oncuechange = oncuechange; }"
 
 ///|
 /// [Window.oncuechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncuechange)
@@ -1593,16 +1159,10 @@ impl TWindow with set_oncuechange(self : Self, oncuechange : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_oncut_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oncut"
-
-///|
 /// [Window.oncut](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncut)
 impl TWindow with oncut(self : Self) -> EventHandler {
-  window_oncut_ffi(TJsValue::to_js(self))
+  window_oncut_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oncut_ffi(obj : JsValue, oncut : JsValue) -> Unit = "(obj, oncut) => { obj.oncut = oncut; }"
 
 ///|
 /// [Window.oncut](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncut)
@@ -1611,19 +1171,10 @@ impl TWindow with set_oncut(self : Self, oncut : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_ondblclick_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondblclick"
-
-///|
 /// [Window.ondblclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondblclick)
 impl TWindow with ondblclick(self : Self) -> EventHandler {
-  window_ondblclick_ffi(TJsValue::to_js(self))
+  window_ondblclick_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondblclick_ffi(
-  obj : JsValue,
-  ondblclick : JsValue,
-) -> Unit = "(obj, ondblclick) => { obj.ondblclick = ondblclick; }"
 
 ///|
 /// [Window.ondblclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondblclick)
@@ -1632,16 +1183,10 @@ impl TWindow with set_ondblclick(self : Self, ondblclick : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_ondrag_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondrag"
-
-///|
 /// [Window.ondrag](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondrag)
 impl TWindow with ondrag(self : Self) -> EventHandler {
-  window_ondrag_ffi(TJsValue::to_js(self))
+  window_ondrag_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondrag_ffi(obj : JsValue, ondrag : JsValue) -> Unit = "(obj, ondrag) => { obj.ondrag = ondrag; }"
 
 ///|
 /// [Window.ondrag](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondrag)
@@ -1650,19 +1195,10 @@ impl TWindow with set_ondrag(self : Self, ondrag : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_ondragend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragend"
-
-///|
 /// [Window.ondragend](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragend)
 impl TWindow with ondragend(self : Self) -> EventHandler {
-  window_ondragend_ffi(TJsValue::to_js(self))
+  window_ondragend_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondragend_ffi(
-  obj : JsValue,
-  ondragend : JsValue,
-) -> Unit = "(obj, ondragend) => { obj.ondragend = ondragend; }"
 
 ///|
 /// [Window.ondragend](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragend)
@@ -1671,19 +1207,10 @@ impl TWindow with set_ondragend(self : Self, ondragend : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_ondragenter_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragenter"
-
-///|
 /// [Window.ondragenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragenter)
 impl TWindow with ondragenter(self : Self) -> EventHandler {
-  window_ondragenter_ffi(TJsValue::to_js(self))
+  window_ondragenter_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondragenter_ffi(
-  obj : JsValue,
-  ondragenter : JsValue,
-) -> Unit = "(obj, ondragenter) => { obj.ondragenter = ondragenter; }"
 
 ///|
 /// [Window.ondragenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragenter)
@@ -1695,19 +1222,10 @@ impl TWindow with set_ondragenter(self : Self, ondragenter : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_ondragleave_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragleave"
-
-///|
 /// [Window.ondragleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragleave)
 impl TWindow with ondragleave(self : Self) -> EventHandler {
-  window_ondragleave_ffi(TJsValue::to_js(self))
+  window_ondragleave_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondragleave_ffi(
-  obj : JsValue,
-  ondragleave : JsValue,
-) -> Unit = "(obj, ondragleave) => { obj.ondragleave = ondragleave; }"
 
 ///|
 /// [Window.ondragleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragleave)
@@ -1719,19 +1237,10 @@ impl TWindow with set_ondragleave(self : Self, ondragleave : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_ondragover_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragover"
-
-///|
 /// [Window.ondragover](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragover)
 impl TWindow with ondragover(self : Self) -> EventHandler {
-  window_ondragover_ffi(TJsValue::to_js(self))
+  window_ondragover_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondragover_ffi(
-  obj : JsValue,
-  ondragover : JsValue,
-) -> Unit = "(obj, ondragover) => { obj.ondragover = ondragover; }"
 
 ///|
 /// [Window.ondragover](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragover)
@@ -1740,19 +1249,10 @@ impl TWindow with set_ondragover(self : Self, ondragover : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_ondragstart_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondragstart"
-
-///|
 /// [Window.ondragstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragstart)
 impl TWindow with ondragstart(self : Self) -> EventHandler {
-  window_ondragstart_ffi(TJsValue::to_js(self))
+  window_ondragstart_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondragstart_ffi(
-  obj : JsValue,
-  ondragstart : JsValue,
-) -> Unit = "(obj, ondragstart) => { obj.ondragstart = ondragstart; }"
 
 ///|
 /// [Window.ondragstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragstart)
@@ -1764,16 +1264,10 @@ impl TWindow with set_ondragstart(self : Self, ondragstart : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_ondrop_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondrop"
-
-///|
 /// [Window.ondrop](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondrop)
 impl TWindow with ondrop(self : Self) -> EventHandler {
-  window_ondrop_ffi(TJsValue::to_js(self))
+  window_ondrop_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondrop_ffi(obj : JsValue, ondrop : JsValue) -> Unit = "(obj, ondrop) => { obj.ondrop = ondrop; }"
 
 ///|
 /// [Window.ondrop](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondrop)
@@ -1782,19 +1276,10 @@ impl TWindow with set_ondrop(self : Self, ondrop : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_ondurationchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ondurationchange"
-
-///|
 /// [Window.ondurationchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondurationchange)
 impl TWindow with ondurationchange(self : Self) -> EventHandler {
-  window_ondurationchange_ffi(TJsValue::to_js(self))
+  window_ondurationchange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ondurationchange_ffi(
-  obj : JsValue,
-  ondurationchange : JsValue,
-) -> Unit = "(obj, ondurationchange) => { obj.ondurationchange = ondurationchange; }"
 
 ///|
 /// [Window.ondurationchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondurationchange)
@@ -1809,19 +1294,10 @@ impl TWindow with set_ondurationchange(
 }
 
 ///|
-extern "js" fn window_onemptied_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onemptied"
-
-///|
 /// [Window.onemptied](https://developer.mozilla.org/en-US/docs/Web/API/Window/onemptied)
 impl TWindow with onemptied(self : Self) -> EventHandler {
-  window_onemptied_ffi(TJsValue::to_js(self))
+  window_onemptied_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onemptied_ffi(
-  obj : JsValue,
-  onemptied : JsValue,
-) -> Unit = "(obj, onemptied) => { obj.onemptied = onemptied; }"
 
 ///|
 /// [Window.onemptied](https://developer.mozilla.org/en-US/docs/Web/API/Window/onemptied)
@@ -1830,16 +1306,10 @@ impl TWindow with set_onemptied(self : Self, onemptied : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onended_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onended"
-
-///|
 /// [Window.onended](https://developer.mozilla.org/en-US/docs/Web/API/Window/onended)
 impl TWindow with onended(self : Self) -> EventHandler {
-  window_onended_ffi(TJsValue::to_js(self))
+  window_onended_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onended_ffi(obj : JsValue, onended : JsValue) -> Unit = "(obj, onended) => { obj.onended = onended; }"
 
 ///|
 /// [Window.onended](https://developer.mozilla.org/en-US/docs/Web/API/Window/onended)
@@ -1848,16 +1318,10 @@ impl TWindow with set_onended(self : Self, onended : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onerror_ffi(obj : JsValue) -> OnErrorEventHandler = "(obj) => obj.onerror"
-
-///|
 /// [Window.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Window/onerror)
 impl TWindow with onerror(self : Self) -> OnErrorEventHandler {
-  window_onerror_ffi(TJsValue::to_js(self))
+  window_onerror_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
 
 ///|
 /// [Window.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Window/onerror)
@@ -1866,16 +1330,10 @@ impl TWindow with set_onerror(self : Self, onerror : OnErrorEventHandler) -> Uni
 }
 
 ///|
-extern "js" fn window_onfocus_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onfocus"
-
-///|
 /// [Window.onfocus](https://developer.mozilla.org/en-US/docs/Web/API/Window/onfocus)
 impl TWindow with onfocus(self : Self) -> EventHandler {
-  window_onfocus_ffi(TJsValue::to_js(self))
+  window_onfocus_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onfocus_ffi(obj : JsValue, onfocus : JsValue) -> Unit = "(obj, onfocus) => { obj.onfocus = onfocus; }"
 
 ///|
 /// [Window.onfocus](https://developer.mozilla.org/en-US/docs/Web/API/Window/onfocus)
@@ -1884,19 +1342,10 @@ impl TWindow with set_onfocus(self : Self, onfocus : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onformdata_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onformdata"
-
-///|
 /// [Window.onformdata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onformdata)
 impl TWindow with onformdata(self : Self) -> EventHandler {
-  window_onformdata_ffi(TJsValue::to_js(self))
+  window_onformdata_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onformdata_ffi(
-  obj : JsValue,
-  onformdata : JsValue,
-) -> Unit = "(obj, onformdata) => { obj.onformdata = onformdata; }"
 
 ///|
 /// [Window.onformdata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onformdata)
@@ -1905,16 +1354,10 @@ impl TWindow with set_onformdata(self : Self, onformdata : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_oninput_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oninput"
-
-///|
 /// [Window.oninput](https://developer.mozilla.org/en-US/docs/Web/API/Window/oninput)
 impl TWindow with oninput(self : Self) -> EventHandler {
-  window_oninput_ffi(TJsValue::to_js(self))
+  window_oninput_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oninput_ffi(obj : JsValue, oninput : JsValue) -> Unit = "(obj, oninput) => { obj.oninput = oninput; }"
 
 ///|
 /// [Window.oninput](https://developer.mozilla.org/en-US/docs/Web/API/Window/oninput)
@@ -1923,19 +1366,10 @@ impl TWindow with set_oninput(self : Self, oninput : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_oninvalid_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.oninvalid"
-
-///|
 /// [Window.oninvalid](https://developer.mozilla.org/en-US/docs/Web/API/Window/oninvalid)
 impl TWindow with oninvalid(self : Self) -> EventHandler {
-  window_oninvalid_ffi(TJsValue::to_js(self))
+  window_oninvalid_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_oninvalid_ffi(
-  obj : JsValue,
-  oninvalid : JsValue,
-) -> Unit = "(obj, oninvalid) => { obj.oninvalid = oninvalid; }"
 
 ///|
 /// [Window.oninvalid](https://developer.mozilla.org/en-US/docs/Web/API/Window/oninvalid)
@@ -1944,19 +1378,10 @@ impl TWindow with set_oninvalid(self : Self, oninvalid : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onkeydown_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onkeydown"
-
-///|
 /// [Window.onkeydown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeydown)
 impl TWindow with onkeydown(self : Self) -> EventHandler {
-  window_onkeydown_ffi(TJsValue::to_js(self))
+  window_onkeydown_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onkeydown_ffi(
-  obj : JsValue,
-  onkeydown : JsValue,
-) -> Unit = "(obj, onkeydown) => { obj.onkeydown = onkeydown; }"
 
 ///|
 /// [Window.onkeydown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeydown)
@@ -1965,19 +1390,10 @@ impl TWindow with set_onkeydown(self : Self, onkeydown : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onkeypress_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onkeypress"
-
-///|
 /// [Window.onkeypress](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeypress)
 impl TWindow with onkeypress(self : Self) -> EventHandler {
-  window_onkeypress_ffi(TJsValue::to_js(self))
+  window_onkeypress_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onkeypress_ffi(
-  obj : JsValue,
-  onkeypress : JsValue,
-) -> Unit = "(obj, onkeypress) => { obj.onkeypress = onkeypress; }"
 
 ///|
 /// [Window.onkeypress](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeypress)
@@ -1986,16 +1402,10 @@ impl TWindow with set_onkeypress(self : Self, onkeypress : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onkeyup_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onkeyup"
-
-///|
 /// [Window.onkeyup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeyup)
 impl TWindow with onkeyup(self : Self) -> EventHandler {
-  window_onkeyup_ffi(TJsValue::to_js(self))
+  window_onkeyup_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onkeyup_ffi(obj : JsValue, onkeyup : JsValue) -> Unit = "(obj, onkeyup) => { obj.onkeyup = onkeyup; }"
 
 ///|
 /// [Window.onkeyup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeyup)
@@ -2004,16 +1414,10 @@ impl TWindow with set_onkeyup(self : Self, onkeyup : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onload_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onload"
-
-///|
 /// [Window.onload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onload)
 impl TWindow with onload(self : Self) -> EventHandler {
-  window_onload_ffi(TJsValue::to_js(self))
+  window_onload_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit = "(obj, onload) => { obj.onload = onload; }"
 
 ///|
 /// [Window.onload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onload)
@@ -2022,19 +1426,10 @@ impl TWindow with set_onload(self : Self, onload : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onloadeddata_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadeddata"
-
-///|
 /// [Window.onloadeddata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadeddata)
 impl TWindow with onloadeddata(self : Self) -> EventHandler {
-  window_onloadeddata_ffi(TJsValue::to_js(self))
+  window_onloadeddata_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onloadeddata_ffi(
-  obj : JsValue,
-  onloadeddata : JsValue,
-) -> Unit = "(obj, onloadeddata) => { obj.onloadeddata = onloadeddata; }"
 
 ///|
 /// [Window.onloadeddata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadeddata)
@@ -2046,19 +1441,10 @@ impl TWindow with set_onloadeddata(self : Self, onloadeddata : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onloadedmetadata_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadedmetadata"
-
-///|
 /// [Window.onloadedmetadata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadedmetadata)
 impl TWindow with onloadedmetadata(self : Self) -> EventHandler {
-  window_onloadedmetadata_ffi(TJsValue::to_js(self))
+  window_onloadedmetadata_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onloadedmetadata_ffi(
-  obj : JsValue,
-  onloadedmetadata : JsValue,
-) -> Unit = "(obj, onloadedmetadata) => { obj.onloadedmetadata = onloadedmetadata; }"
 
 ///|
 /// [Window.onloadedmetadata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadedmetadata)
@@ -2073,19 +1459,10 @@ impl TWindow with set_onloadedmetadata(
 }
 
 ///|
-extern "js" fn window_onloadstart_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onloadstart"
-
-///|
 /// [Window.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadstart)
 impl TWindow with onloadstart(self : Self) -> EventHandler {
-  window_onloadstart_ffi(TJsValue::to_js(self))
+  window_onloadstart_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onloadstart_ffi(
-  obj : JsValue,
-  onloadstart : JsValue,
-) -> Unit = "(obj, onloadstart) => { obj.onloadstart = onloadstart; }"
 
 ///|
 /// [Window.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadstart)
@@ -2097,19 +1474,10 @@ impl TWindow with set_onloadstart(self : Self, onloadstart : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_onmousedown_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmousedown"
-
-///|
 /// [Window.onmousedown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmousedown)
 impl TWindow with onmousedown(self : Self) -> EventHandler {
-  window_onmousedown_ffi(TJsValue::to_js(self))
+  window_onmousedown_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmousedown_ffi(
-  obj : JsValue,
-  onmousedown : JsValue,
-) -> Unit = "(obj, onmousedown) => { obj.onmousedown = onmousedown; }"
 
 ///|
 /// [Window.onmousedown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmousedown)
@@ -2121,19 +1489,10 @@ impl TWindow with set_onmousedown(self : Self, onmousedown : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_onmouseenter_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseenter"
-
-///|
 /// [Window.onmouseenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseenter)
 impl TWindow with onmouseenter(self : Self) -> EventHandler {
-  window_onmouseenter_ffi(TJsValue::to_js(self))
+  window_onmouseenter_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmouseenter_ffi(
-  obj : JsValue,
-  onmouseenter : JsValue,
-) -> Unit = "(obj, onmouseenter) => { obj.onmouseenter = onmouseenter; }"
 
 ///|
 /// [Window.onmouseenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseenter)
@@ -2145,19 +1504,10 @@ impl TWindow with set_onmouseenter(self : Self, onmouseenter : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onmouseleave_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseleave"
-
-///|
 /// [Window.onmouseleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseleave)
 impl TWindow with onmouseleave(self : Self) -> EventHandler {
-  window_onmouseleave_ffi(TJsValue::to_js(self))
+  window_onmouseleave_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmouseleave_ffi(
-  obj : JsValue,
-  onmouseleave : JsValue,
-) -> Unit = "(obj, onmouseleave) => { obj.onmouseleave = onmouseleave; }"
 
 ///|
 /// [Window.onmouseleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseleave)
@@ -2169,19 +1519,10 @@ impl TWindow with set_onmouseleave(self : Self, onmouseleave : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onmousemove_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmousemove"
-
-///|
 /// [Window.onmousemove](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmousemove)
 impl TWindow with onmousemove(self : Self) -> EventHandler {
-  window_onmousemove_ffi(TJsValue::to_js(self))
+  window_onmousemove_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmousemove_ffi(
-  obj : JsValue,
-  onmousemove : JsValue,
-) -> Unit = "(obj, onmousemove) => { obj.onmousemove = onmousemove; }"
 
 ///|
 /// [Window.onmousemove](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmousemove)
@@ -2193,19 +1534,10 @@ impl TWindow with set_onmousemove(self : Self, onmousemove : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_onmouseout_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseout"
-
-///|
 /// [Window.onmouseout](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseout)
 impl TWindow with onmouseout(self : Self) -> EventHandler {
-  window_onmouseout_ffi(TJsValue::to_js(self))
+  window_onmouseout_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmouseout_ffi(
-  obj : JsValue,
-  onmouseout : JsValue,
-) -> Unit = "(obj, onmouseout) => { obj.onmouseout = onmouseout; }"
 
 ///|
 /// [Window.onmouseout](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseout)
@@ -2214,19 +1546,10 @@ impl TWindow with set_onmouseout(self : Self, onmouseout : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onmouseover_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseover"
-
-///|
 /// [Window.onmouseover](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseover)
 impl TWindow with onmouseover(self : Self) -> EventHandler {
-  window_onmouseover_ffi(TJsValue::to_js(self))
+  window_onmouseover_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmouseover_ffi(
-  obj : JsValue,
-  onmouseover : JsValue,
-) -> Unit = "(obj, onmouseover) => { obj.onmouseover = onmouseover; }"
 
 ///|
 /// [Window.onmouseover](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseover)
@@ -2238,19 +1561,10 @@ impl TWindow with set_onmouseover(self : Self, onmouseover : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_onmouseup_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmouseup"
-
-///|
 /// [Window.onmouseup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseup)
 impl TWindow with onmouseup(self : Self) -> EventHandler {
-  window_onmouseup_ffi(TJsValue::to_js(self))
+  window_onmouseup_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmouseup_ffi(
-  obj : JsValue,
-  onmouseup : JsValue,
-) -> Unit = "(obj, onmouseup) => { obj.onmouseup = onmouseup; }"
 
 ///|
 /// [Window.onmouseup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseup)
@@ -2259,16 +1573,10 @@ impl TWindow with set_onmouseup(self : Self, onmouseup : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onpaste_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpaste"
-
-///|
 /// [Window.onpaste](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpaste)
 impl TWindow with onpaste(self : Self) -> EventHandler {
-  window_onpaste_ffi(TJsValue::to_js(self))
+  window_onpaste_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onpaste_ffi(obj : JsValue, onpaste : JsValue) -> Unit = "(obj, onpaste) => { obj.onpaste = onpaste; }"
 
 ///|
 /// [Window.onpaste](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpaste)
@@ -2277,16 +1585,10 @@ impl TWindow with set_onpaste(self : Self, onpaste : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onpause_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpause"
-
-///|
 /// [Window.onpause](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpause)
 impl TWindow with onpause(self : Self) -> EventHandler {
-  window_onpause_ffi(TJsValue::to_js(self))
+  window_onpause_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onpause_ffi(obj : JsValue, onpause : JsValue) -> Unit = "(obj, onpause) => { obj.onpause = onpause; }"
 
 ///|
 /// [Window.onpause](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpause)
@@ -2295,16 +1597,10 @@ impl TWindow with set_onpause(self : Self, onpause : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onplay_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onplay"
-
-///|
 /// [Window.onplay](https://developer.mozilla.org/en-US/docs/Web/API/Window/onplay)
 impl TWindow with onplay(self : Self) -> EventHandler {
-  window_onplay_ffi(TJsValue::to_js(self))
+  window_onplay_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onplay_ffi(obj : JsValue, onplay : JsValue) -> Unit = "(obj, onplay) => { obj.onplay = onplay; }"
 
 ///|
 /// [Window.onplay](https://developer.mozilla.org/en-US/docs/Web/API/Window/onplay)
@@ -2313,19 +1609,10 @@ impl TWindow with set_onplay(self : Self, onplay : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onplaying_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onplaying"
-
-///|
 /// [Window.onplaying](https://developer.mozilla.org/en-US/docs/Web/API/Window/onplaying)
 impl TWindow with onplaying(self : Self) -> EventHandler {
-  window_onplaying_ffi(TJsValue::to_js(self))
+  window_onplaying_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onplaying_ffi(
-  obj : JsValue,
-  onplaying : JsValue,
-) -> Unit = "(obj, onplaying) => { obj.onplaying = onplaying; }"
 
 ///|
 /// [Window.onplaying](https://developer.mozilla.org/en-US/docs/Web/API/Window/onplaying)
@@ -2334,19 +1621,10 @@ impl TWindow with set_onplaying(self : Self, onplaying : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onprogress_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onprogress"
-
-///|
 /// [Window.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/Window/onprogress)
 impl TWindow with onprogress(self : Self) -> EventHandler {
-  window_onprogress_ffi(TJsValue::to_js(self))
+  window_onprogress_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onprogress_ffi(
-  obj : JsValue,
-  onprogress : JsValue,
-) -> Unit = "(obj, onprogress) => { obj.onprogress = onprogress; }"
 
 ///|
 /// [Window.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/Window/onprogress)
@@ -2355,19 +1633,10 @@ impl TWindow with set_onprogress(self : Self, onprogress : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onratechange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onratechange"
-
-///|
 /// [Window.onratechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onratechange)
 impl TWindow with onratechange(self : Self) -> EventHandler {
-  window_onratechange_ffi(TJsValue::to_js(self))
+  window_onratechange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onratechange_ffi(
-  obj : JsValue,
-  onratechange : JsValue,
-) -> Unit = "(obj, onratechange) => { obj.onratechange = onratechange; }"
 
 ///|
 /// [Window.onratechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onratechange)
@@ -2379,16 +1648,10 @@ impl TWindow with set_onratechange(self : Self, onratechange : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onreset_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onreset"
-
-///|
 /// [Window.onreset](https://developer.mozilla.org/en-US/docs/Web/API/Window/onreset)
 impl TWindow with onreset(self : Self) -> EventHandler {
-  window_onreset_ffi(TJsValue::to_js(self))
+  window_onreset_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onreset_ffi(obj : JsValue, onreset : JsValue) -> Unit = "(obj, onreset) => { obj.onreset = onreset; }"
 
 ///|
 /// [Window.onreset](https://developer.mozilla.org/en-US/docs/Web/API/Window/onreset)
@@ -2397,19 +1660,10 @@ impl TWindow with set_onreset(self : Self, onreset : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onresize_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onresize"
-
-///|
 /// [Window.onresize](https://developer.mozilla.org/en-US/docs/Web/API/Window/onresize)
 impl TWindow with onresize(self : Self) -> EventHandler {
-  window_onresize_ffi(TJsValue::to_js(self))
+  window_onresize_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onresize_ffi(
-  obj : JsValue,
-  onresize : JsValue,
-) -> Unit = "(obj, onresize) => { obj.onresize = onresize; }"
 
 ///|
 /// [Window.onresize](https://developer.mozilla.org/en-US/docs/Web/API/Window/onresize)
@@ -2418,19 +1672,10 @@ impl TWindow with set_onresize(self : Self, onresize : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onscroll_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onscroll"
-
-///|
 /// [Window.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/onscroll)
 impl TWindow with onscroll(self : Self) -> EventHandler {
-  window_onscroll_ffi(TJsValue::to_js(self))
+  window_onscroll_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onscroll_ffi(
-  obj : JsValue,
-  onscroll : JsValue,
-) -> Unit = "(obj, onscroll) => { obj.onscroll = onscroll; }"
 
 ///|
 /// [Window.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/onscroll)
@@ -2439,19 +1684,10 @@ impl TWindow with set_onscroll(self : Self, onscroll : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onscrollend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onscrollend"
-
-///|
 /// [Window.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onscrollend)
 impl TWindow with onscrollend(self : Self) -> EventHandler {
-  window_onscrollend_ffi(TJsValue::to_js(self))
+  window_onscrollend_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onscrollend_ffi(
-  obj : JsValue,
-  onscrollend : JsValue,
-) -> Unit = "(obj, onscrollend) => { obj.onscrollend = onscrollend; }"
 
 ///|
 /// [Window.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onscrollend)
@@ -2463,21 +1699,10 @@ impl TWindow with set_onscrollend(self : Self, onscrollend : EventHandler) -> Un
 }
 
 ///|
-extern "js" fn window_onsecuritypolicyviolation_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onsecuritypolicyviolation"
-
-///|
 /// [Window.onsecuritypolicyviolation](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsecuritypolicyviolation)
 impl TWindow with onsecuritypolicyviolation(self : Self) -> EventHandler {
-  window_onsecuritypolicyviolation_ffi(TJsValue::to_js(self))
+  window_onsecuritypolicyviolation_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onsecuritypolicyviolation_ffi(
-  obj : JsValue,
-  onsecuritypolicyviolation : JsValue,
-) -> Unit = "(obj, onsecuritypolicyviolation) => { obj.onsecuritypolicyviolation = onsecuritypolicyviolation; }"
 
 ///|
 /// [Window.onsecuritypolicyviolation](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsecuritypolicyviolation)
@@ -2492,19 +1717,10 @@ impl TWindow with set_onsecuritypolicyviolation(
 }
 
 ///|
-extern "js" fn window_onseeked_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onseeked"
-
-///|
 /// [Window.onseeked](https://developer.mozilla.org/en-US/docs/Web/API/Window/onseeked)
 impl TWindow with onseeked(self : Self) -> EventHandler {
-  window_onseeked_ffi(TJsValue::to_js(self))
+  window_onseeked_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onseeked_ffi(
-  obj : JsValue,
-  onseeked : JsValue,
-) -> Unit = "(obj, onseeked) => { obj.onseeked = onseeked; }"
 
 ///|
 /// [Window.onseeked](https://developer.mozilla.org/en-US/docs/Web/API/Window/onseeked)
@@ -2513,19 +1729,10 @@ impl TWindow with set_onseeked(self : Self, onseeked : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onseeking_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onseeking"
-
-///|
 /// [Window.onseeking](https://developer.mozilla.org/en-US/docs/Web/API/Window/onseeking)
 impl TWindow with onseeking(self : Self) -> EventHandler {
-  window_onseeking_ffi(TJsValue::to_js(self))
+  window_onseeking_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onseeking_ffi(
-  obj : JsValue,
-  onseeking : JsValue,
-) -> Unit = "(obj, onseeking) => { obj.onseeking = onseeking; }"
 
 ///|
 /// [Window.onseeking](https://developer.mozilla.org/en-US/docs/Web/API/Window/onseeking)
@@ -2534,19 +1741,10 @@ impl TWindow with set_onseeking(self : Self, onseeking : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onselect_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onselect"
-
-///|
 /// [Window.onselect](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselect)
 impl TWindow with onselect(self : Self) -> EventHandler {
-  window_onselect_ffi(TJsValue::to_js(self))
+  window_onselect_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onselect_ffi(
-  obj : JsValue,
-  onselect : JsValue,
-) -> Unit = "(obj, onselect) => { obj.onselect = onselect; }"
 
 ///|
 /// [Window.onselect](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselect)
@@ -2555,19 +1753,10 @@ impl TWindow with set_onselect(self : Self, onselect : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onslotchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onslotchange"
-
-///|
 /// [Window.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onslotchange)
 impl TWindow with onslotchange(self : Self) -> EventHandler {
-  window_onslotchange_ffi(TJsValue::to_js(self))
+  window_onslotchange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onslotchange_ffi(
-  obj : JsValue,
-  onslotchange : JsValue,
-) -> Unit = "(obj, onslotchange) => { obj.onslotchange = onslotchange; }"
 
 ///|
 /// [Window.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onslotchange)
@@ -2579,19 +1768,10 @@ impl TWindow with set_onslotchange(self : Self, onslotchange : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onstalled_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onstalled"
-
-///|
 /// [Window.onstalled](https://developer.mozilla.org/en-US/docs/Web/API/Window/onstalled)
 impl TWindow with onstalled(self : Self) -> EventHandler {
-  window_onstalled_ffi(TJsValue::to_js(self))
+  window_onstalled_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onstalled_ffi(
-  obj : JsValue,
-  onstalled : JsValue,
-) -> Unit = "(obj, onstalled) => { obj.onstalled = onstalled; }"
 
 ///|
 /// [Window.onstalled](https://developer.mozilla.org/en-US/docs/Web/API/Window/onstalled)
@@ -2600,19 +1780,10 @@ impl TWindow with set_onstalled(self : Self, onstalled : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onsubmit_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onsubmit"
-
-///|
 /// [Window.onsubmit](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsubmit)
 impl TWindow with onsubmit(self : Self) -> EventHandler {
-  window_onsubmit_ffi(TJsValue::to_js(self))
+  window_onsubmit_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onsubmit_ffi(
-  obj : JsValue,
-  onsubmit : JsValue,
-) -> Unit = "(obj, onsubmit) => { obj.onsubmit = onsubmit; }"
 
 ///|
 /// [Window.onsubmit](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsubmit)
@@ -2621,19 +1792,10 @@ impl TWindow with set_onsubmit(self : Self, onsubmit : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onsuspend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onsuspend"
-
-///|
 /// [Window.onsuspend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsuspend)
 impl TWindow with onsuspend(self : Self) -> EventHandler {
-  window_onsuspend_ffi(TJsValue::to_js(self))
+  window_onsuspend_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onsuspend_ffi(
-  obj : JsValue,
-  onsuspend : JsValue,
-) -> Unit = "(obj, onsuspend) => { obj.onsuspend = onsuspend; }"
 
 ///|
 /// [Window.onsuspend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsuspend)
@@ -2642,19 +1804,10 @@ impl TWindow with set_onsuspend(self : Self, onsuspend : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_ontimeupdate_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ontimeupdate"
-
-///|
 /// [Window.ontimeupdate](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontimeupdate)
 impl TWindow with ontimeupdate(self : Self) -> EventHandler {
-  window_ontimeupdate_ffi(TJsValue::to_js(self))
+  window_ontimeupdate_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ontimeupdate_ffi(
-  obj : JsValue,
-  ontimeupdate : JsValue,
-) -> Unit = "(obj, ontimeupdate) => { obj.ontimeupdate = ontimeupdate; }"
 
 ///|
 /// [Window.ontimeupdate](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontimeupdate)
@@ -2666,19 +1819,10 @@ impl TWindow with set_ontimeupdate(self : Self, ontimeupdate : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_ontoggle_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ontoggle"
-
-///|
 /// [Window.ontoggle](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontoggle)
 impl TWindow with ontoggle(self : Self) -> EventHandler {
-  window_ontoggle_ffi(TJsValue::to_js(self))
+  window_ontoggle_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ontoggle_ffi(
-  obj : JsValue,
-  ontoggle : JsValue,
-) -> Unit = "(obj, ontoggle) => { obj.ontoggle = ontoggle; }"
 
 ///|
 /// [Window.ontoggle](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontoggle)
@@ -2687,19 +1831,10 @@ impl TWindow with set_ontoggle(self : Self, ontoggle : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onvolumechange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onvolumechange"
-
-///|
 /// [Window.onvolumechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onvolumechange)
 impl TWindow with onvolumechange(self : Self) -> EventHandler {
-  window_onvolumechange_ffi(TJsValue::to_js(self))
+  window_onvolumechange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onvolumechange_ffi(
-  obj : JsValue,
-  onvolumechange : JsValue,
-) -> Unit = "(obj, onvolumechange) => { obj.onvolumechange = onvolumechange; }"
 
 ///|
 /// [Window.onvolumechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onvolumechange)
@@ -2711,19 +1846,10 @@ impl TWindow with set_onvolumechange(self : Self, onvolumechange : EventHandler)
 }
 
 ///|
-extern "js" fn window_onwaiting_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onwaiting"
-
-///|
 /// [Window.onwaiting](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwaiting)
 impl TWindow with onwaiting(self : Self) -> EventHandler {
-  window_onwaiting_ffi(TJsValue::to_js(self))
+  window_onwaiting_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onwaiting_ffi(
-  obj : JsValue,
-  onwaiting : JsValue,
-) -> Unit = "(obj, onwaiting) => { obj.onwaiting = onwaiting; }"
 
 ///|
 /// [Window.onwaiting](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwaiting)
@@ -2732,19 +1858,10 @@ impl TWindow with set_onwaiting(self : Self, onwaiting : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onwebkitanimationend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onwebkitanimationend"
-
-///|
 /// [Window.onwebkitanimationend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationend)
 impl TWindow with onwebkitanimationend(self : Self) -> EventHandler {
-  window_onwebkitanimationend_ffi(TJsValue::to_js(self))
+  window_onwebkitanimationend_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onwebkitanimationend_ffi(
-  obj : JsValue,
-  onwebkitanimationend : JsValue,
-) -> Unit = "(obj, onwebkitanimationend) => { obj.onwebkitanimationend = onwebkitanimationend; }"
 
 ///|
 /// [Window.onwebkitanimationend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationend)
@@ -2759,21 +1876,10 @@ impl TWindow with set_onwebkitanimationend(
 }
 
 ///|
-extern "js" fn window_onwebkitanimationiteration_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onwebkitanimationiteration"
-
-///|
 /// [Window.onwebkitanimationiteration](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationiteration)
 impl TWindow with onwebkitanimationiteration(self : Self) -> EventHandler {
-  window_onwebkitanimationiteration_ffi(TJsValue::to_js(self))
+  window_onwebkitanimationiteration_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onwebkitanimationiteration_ffi(
-  obj : JsValue,
-  onwebkitanimationiteration : JsValue,
-) -> Unit = "(obj, onwebkitanimationiteration) => { obj.onwebkitanimationiteration = onwebkitanimationiteration; }"
 
 ///|
 /// [Window.onwebkitanimationiteration](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationiteration)
@@ -2788,19 +1894,10 @@ impl TWindow with set_onwebkitanimationiteration(
 }
 
 ///|
-extern "js" fn window_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onwebkitanimationstart"
-
-///|
 /// [Window.onwebkitanimationstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationstart)
 impl TWindow with onwebkitanimationstart(self : Self) -> EventHandler {
-  window_onwebkitanimationstart_ffi(TJsValue::to_js(self))
+  window_onwebkitanimationstart_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onwebkitanimationstart_ffi(
-  obj : JsValue,
-  onwebkitanimationstart : JsValue,
-) -> Unit = "(obj, onwebkitanimationstart) => { obj.onwebkitanimationstart = onwebkitanimationstart; }"
 
 ///|
 /// [Window.onwebkitanimationstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationstart)
@@ -2815,19 +1912,10 @@ impl TWindow with set_onwebkitanimationstart(
 }
 
 ///|
-extern "js" fn window_onwebkittransitionend_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onwebkittransitionend"
-
-///|
 /// [Window.onwebkittransitionend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkittransitionend)
 impl TWindow with onwebkittransitionend(self : Self) -> EventHandler {
-  window_onwebkittransitionend_ffi(TJsValue::to_js(self))
+  window_onwebkittransitionend_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onwebkittransitionend_ffi(
-  obj : JsValue,
-  onwebkittransitionend : JsValue,
-) -> Unit = "(obj, onwebkittransitionend) => { obj.onwebkittransitionend = onwebkittransitionend; }"
 
 ///|
 /// [Window.onwebkittransitionend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkittransitionend)
@@ -2842,16 +1930,10 @@ impl TWindow with set_onwebkittransitionend(
 }
 
 ///|
-extern "js" fn window_onwheel_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onwheel"
-
-///|
 /// [Window.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwheel)
 impl TWindow with onwheel(self : Self) -> EventHandler {
-  window_onwheel_ffi(TJsValue::to_js(self))
+  window_onwheel_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
 
 ///|
 /// [Window.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwheel)
@@ -2860,19 +1942,10 @@ impl TWindow with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onafterprint_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onafterprint"
-
-///|
 /// [Window.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/Window/onafterprint)
 impl TWindow with onafterprint(self : Self) -> EventHandler {
-  window_onafterprint_ffi(TJsValue::to_js(self))
+  window_onafterprint_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onafterprint_ffi(
-  obj : JsValue,
-  onafterprint : JsValue,
-) -> Unit = "(obj, onafterprint) => { obj.onafterprint = onafterprint; }"
 
 ///|
 /// [Window.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/Window/onafterprint)
@@ -2884,19 +1957,10 @@ impl TWindow with set_onafterprint(self : Self, onafterprint : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onbeforeprint_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforeprint"
-
-///|
 /// [Window.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeprint)
 impl TWindow with onbeforeprint(self : Self) -> EventHandler {
-  window_onbeforeprint_ffi(TJsValue::to_js(self))
+  window_onbeforeprint_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onbeforeprint_ffi(
-  obj : JsValue,
-  onbeforeprint : JsValue,
-) -> Unit = "(obj, onbeforeprint) => { obj.onbeforeprint = onbeforeprint; }"
 
 ///|
 /// [Window.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeprint)
@@ -2908,21 +1972,10 @@ impl TWindow with set_onbeforeprint(self : Self, onbeforeprint : EventHandler) -
 }
 
 ///|
-extern "js" fn window_onbeforeunload_ffi(
-  obj : JsValue,
-) -> OnBeforeUnloadEventHandler = "(obj) => obj.onbeforeunload"
-
-///|
 /// [Window.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeunload)
 impl TWindow with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler {
-  window_onbeforeunload_ffi(TJsValue::to_js(self))
+  window_onbeforeunload_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onbeforeunload_ffi(
-  obj : JsValue,
-  onbeforeunload : JsValue,
-) -> Unit = "(obj, onbeforeunload) => { obj.onbeforeunload = onbeforeunload; }"
 
 ///|
 /// [Window.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeunload)
@@ -2937,19 +1990,10 @@ impl TWindow with set_onbeforeunload(
 }
 
 ///|
-extern "js" fn window_onhashchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onhashchange"
-
-///|
 /// [Window.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onhashchange)
 impl TWindow with onhashchange(self : Self) -> EventHandler {
-  window_onhashchange_ffi(TJsValue::to_js(self))
+  window_onhashchange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onhashchange_ffi(
-  obj : JsValue,
-  onhashchange : JsValue,
-) -> Unit = "(obj, onhashchange) => { obj.onhashchange = onhashchange; }"
 
 ///|
 /// [Window.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onhashchange)
@@ -2961,19 +2005,10 @@ impl TWindow with set_onhashchange(self : Self, onhashchange : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onlanguagechange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onlanguagechange"
-
-///|
 /// [Window.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onlanguagechange)
 impl TWindow with onlanguagechange(self : Self) -> EventHandler {
-  window_onlanguagechange_ffi(TJsValue::to_js(self))
+  window_onlanguagechange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onlanguagechange_ffi(
-  obj : JsValue,
-  onlanguagechange : JsValue,
-) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
 
 ///|
 /// [Window.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onlanguagechange)
@@ -2988,19 +2023,10 @@ impl TWindow with set_onlanguagechange(
 }
 
 ///|
-extern "js" fn window_onmessage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessage"
-
-///|
 /// [Window.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmessage)
 impl TWindow with onmessage(self : Self) -> EventHandler {
-  window_onmessage_ffi(TJsValue::to_js(self))
+  window_onmessage_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmessage_ffi(
-  obj : JsValue,
-  onmessage : JsValue,
-) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
 
 ///|
 /// [Window.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmessage)
@@ -3009,19 +2035,10 @@ impl TWindow with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onmessageerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessageerror"
-
-///|
 /// [Window.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmessageerror)
 impl TWindow with onmessageerror(self : Self) -> EventHandler {
-  window_onmessageerror_ffi(TJsValue::to_js(self))
+  window_onmessageerror_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onmessageerror_ffi(
-  obj : JsValue,
-  onmessageerror : JsValue,
-) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
 
 ///|
 /// [Window.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmessageerror)
@@ -3033,19 +2050,10 @@ impl TWindow with set_onmessageerror(self : Self, onmessageerror : EventHandler)
 }
 
 ///|
-extern "js" fn window_onoffline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onoffline"
-
-///|
 /// [Window.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/Window/onoffline)
 impl TWindow with onoffline(self : Self) -> EventHandler {
-  window_onoffline_ffi(TJsValue::to_js(self))
+  window_onoffline_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onoffline_ffi(
-  obj : JsValue,
-  onoffline : JsValue,
-) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
 
 ///|
 /// [Window.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/Window/onoffline)
@@ -3054,19 +2062,10 @@ impl TWindow with set_onoffline(self : Self, onoffline : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_ononline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ononline"
-
-///|
 /// [Window.ononline](https://developer.mozilla.org/en-US/docs/Web/API/Window/ononline)
 impl TWindow with ononline(self : Self) -> EventHandler {
-  window_ononline_ffi(TJsValue::to_js(self))
+  window_ononline_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_ononline_ffi(
-  obj : JsValue,
-  ononline : JsValue,
-) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
 
 ///|
 /// [Window.ononline](https://developer.mozilla.org/en-US/docs/Web/API/Window/ononline)
@@ -3075,19 +2074,10 @@ impl TWindow with set_ononline(self : Self, ononline : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onpagehide_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpagehide"
-
-///|
 /// [Window.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpagehide)
 impl TWindow with onpagehide(self : Self) -> EventHandler {
-  window_onpagehide_ffi(TJsValue::to_js(self))
+  window_onpagehide_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onpagehide_ffi(
-  obj : JsValue,
-  onpagehide : JsValue,
-) -> Unit = "(obj, onpagehide) => { obj.onpagehide = onpagehide; }"
 
 ///|
 /// [Window.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpagehide)
@@ -3096,19 +2086,10 @@ impl TWindow with set_onpagehide(self : Self, onpagehide : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onpagereveal_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpagereveal"
-
-///|
 /// [Window.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpagereveal)
 impl TWindow with onpagereveal(self : Self) -> EventHandler {
-  window_onpagereveal_ffi(TJsValue::to_js(self))
+  window_onpagereveal_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onpagereveal_ffi(
-  obj : JsValue,
-  onpagereveal : JsValue,
-) -> Unit = "(obj, onpagereveal) => { obj.onpagereveal = onpagereveal; }"
 
 ///|
 /// [Window.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpagereveal)
@@ -3120,19 +2101,10 @@ impl TWindow with set_onpagereveal(self : Self, onpagereveal : EventHandler) -> 
 }
 
 ///|
-extern "js" fn window_onpageshow_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpageshow"
-
-///|
 /// [Window.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpageshow)
 impl TWindow with onpageshow(self : Self) -> EventHandler {
-  window_onpageshow_ffi(TJsValue::to_js(self))
+  window_onpageshow_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onpageshow_ffi(
-  obj : JsValue,
-  onpageshow : JsValue,
-) -> Unit = "(obj, onpageshow) => { obj.onpageshow = onpageshow; }"
 
 ///|
 /// [Window.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpageshow)
@@ -3141,19 +2113,10 @@ impl TWindow with set_onpageshow(self : Self, onpageshow : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onpageswap_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpageswap"
-
-///|
 /// [Window.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpageswap)
 impl TWindow with onpageswap(self : Self) -> EventHandler {
-  window_onpageswap_ffi(TJsValue::to_js(self))
+  window_onpageswap_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onpageswap_ffi(
-  obj : JsValue,
-  onpageswap : JsValue,
-) -> Unit = "(obj, onpageswap) => { obj.onpageswap = onpageswap; }"
 
 ///|
 /// [Window.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpageswap)
@@ -3162,19 +2125,10 @@ impl TWindow with set_onpageswap(self : Self, onpageswap : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onpopstate_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpopstate"
-
-///|
 /// [Window.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpopstate)
 impl TWindow with onpopstate(self : Self) -> EventHandler {
-  window_onpopstate_ffi(TJsValue::to_js(self))
+  window_onpopstate_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onpopstate_ffi(
-  obj : JsValue,
-  onpopstate : JsValue,
-) -> Unit = "(obj, onpopstate) => { obj.onpopstate = onpopstate; }"
 
 ///|
 /// [Window.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpopstate)
@@ -3183,19 +2137,10 @@ impl TWindow with set_onpopstate(self : Self, onpopstate : EventHandler) -> Unit
 }
 
 ///|
-extern "js" fn window_onrejectionhandled_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onrejectionhandled"
-
-///|
 /// [Window.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/Window/onrejectionhandled)
 impl TWindow with onrejectionhandled(self : Self) -> EventHandler {
-  window_onrejectionhandled_ffi(TJsValue::to_js(self))
+  window_onrejectionhandled_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onrejectionhandled_ffi(
-  obj : JsValue,
-  onrejectionhandled : JsValue,
-) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
 
 ///|
 /// [Window.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/Window/onrejectionhandled)
@@ -3210,19 +2155,10 @@ impl TWindow with set_onrejectionhandled(
 }
 
 ///|
-extern "js" fn window_onstorage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onstorage"
-
-///|
 /// [Window.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/onstorage)
 impl TWindow with onstorage(self : Self) -> EventHandler {
-  window_onstorage_ffi(TJsValue::to_js(self))
+  window_onstorage_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onstorage_ffi(
-  obj : JsValue,
-  onstorage : JsValue,
-) -> Unit = "(obj, onstorage) => { obj.onstorage = onstorage; }"
 
 ///|
 /// [Window.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/onstorage)
@@ -3231,19 +2167,10 @@ impl TWindow with set_onstorage(self : Self, onstorage : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_onunhandledrejection_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onunhandledrejection"
-
-///|
 /// [Window.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/Window/onunhandledrejection)
 impl TWindow with onunhandledrejection(self : Self) -> EventHandler {
-  window_onunhandledrejection_ffi(TJsValue::to_js(self))
+  window_onunhandledrejection_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onunhandledrejection_ffi(
-  obj : JsValue,
-  onunhandledrejection : JsValue,
-) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
 
 ///|
 /// [Window.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/Window/onunhandledrejection)
@@ -3258,19 +2185,10 @@ impl TWindow with set_onunhandledrejection(
 }
 
 ///|
-extern "js" fn window_onunload_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onunload"
-
-///|
 /// [Window.onunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onunload)
 impl TWindow with onunload(self : Self) -> EventHandler {
-  window_onunload_ffi(TJsValue::to_js(self))
+  window_onunload_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_onunload_ffi(
-  obj : JsValue,
-  onunload : JsValue,
-) -> Unit = "(obj, onunload) => { obj.onunload = onunload; }"
 
 ///|
 /// [Window.onunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onunload)
@@ -3279,34 +2197,22 @@ impl TWindow with set_onunload(self : Self, onunload : EventHandler) -> Unit {
 }
 
 ///|
-extern "js" fn window_origin_ffi(obj : JsValue) -> String = "(obj) => obj.origin"
-
-///|
 /// [Window.origin](https://developer.mozilla.org/en-US/docs/Web/API/Window/origin)
 impl TWindow with origin(self : Self) -> String {
-  window_origin_ffi(TJsValue::to_js(self))
+  window_origin_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_is_secure_context_ffi(obj : JsValue) -> Bool = "(obj) => obj.isSecureContext"
 
 ///|
 /// [Window.isSecureContext](https://developer.mozilla.org/en-US/docs/Web/API/Window/isSecureContext)
 impl TWindow with is_secure_context(self : Self) -> Bool {
-  window_is_secure_context_ffi(TJsValue::to_js(self))
+  window_is_secure_context_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_cross_origin_isolated_ffi(obj : JsValue) -> Bool = "(obj) => obj.crossOriginIsolated"
 
 ///|
 /// [Window.crossOriginIsolated](https://developer.mozilla.org/en-US/docs/Web/API/Window/crossOriginIsolated)
 impl TWindow with cross_origin_isolated(self : Self) -> Bool {
-  window_cross_origin_isolated_ffi(TJsValue::to_js(self))
+  window_cross_origin_isolated_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_report_error_ffi(obj : JsValue, e : JsValue) -> Unit = "(obj, e) => obj.reportError(e)"
 
 ///|
 /// [Window.reportError](https://developer.mozilla.org/en-US/docs/Web/API/Window/reportError)
@@ -3315,30 +2221,16 @@ impl TWindow with report_error(self : Self, e : JsValue) -> Unit {
 }
 
 ///|
-extern "js" fn window_btoa_ffi(obj : JsValue, data : JsValue) -> String = "(obj, data) => obj.btoa(data)"
-
-///|
 /// [Window.btoa](https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa)
 impl TWindow with btoa(self : Self, data : String) -> String {
-  window_btoa_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
+  window_btoa_ffi(TJsValue::to_js(self), TJsValue::to_js(data)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_atob_ffi(obj : JsValue, data : JsValue) -> String = "(obj, data) => obj.atob(data)"
 
 ///|
 /// [Window.atob](https://developer.mozilla.org/en-US/docs/Web/API/Window/atob)
 impl TWindow with atob(self : Self, data : String) -> String {
-  window_atob_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
+  window_atob_ffi(TJsValue::to_js(self), TJsValue::to_js(data)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_set_timeout_ffi(
-  obj : JsValue,
-  handler : JsValue,
-  timeout : JsValue,
-  arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setTimeout(handler, timeout, arguments)"
 
 ///|
 /// [Window.setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout)
@@ -3353,25 +2245,14 @@ impl TWindow with set_timeout(
     TJsValue::to_js(handler),
     TJsValue::to_js(timeout),
     TJsValue::to_js(arguments),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearTimeout(id)"
 
 ///|
 /// [Window.clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout)
 impl TWindow with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
   window_clear_timeout_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
 }
-
-///|
-extern "js" fn window_set_interval_ffi(
-  obj : JsValue,
-  handler : JsValue,
-  timeout : JsValue,
-  arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setInterval(handler, timeout, arguments)"
 
 ///|
 /// [Window.setInterval](https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval)
@@ -3386,11 +2267,8 @@ impl TWindow with set_interval(
     TJsValue::to_js(handler),
     TJsValue::to_js(timeout),
     TJsValue::to_js(arguments),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearInterval(id)"
 
 ///|
 /// [Window.clearInterval](https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval)
@@ -3399,23 +2277,10 @@ impl TWindow with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
 }
 
 ///|
-extern "js" fn window_queue_microtask_ffi(
-  obj : JsValue,
-  callback : JsValue,
-) -> Unit = "(obj, callback) => obj.queueMicrotask(callback)"
-
-///|
 /// [Window.queueMicrotask](https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask)
 impl TWindow with queue_microtask(self : Self, callback : VoidFunction) -> Unit {
   window_queue_microtask_ffi(TJsValue::to_js(self), TJsValue::to_js(callback))
 }
-
-///|
-extern "js" fn window_create_image_bitmap_ffi(
-  obj : JsValue,
-  image : JsValue,
-  options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(image, options)"
 
 ///|
 /// [Window.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap)
@@ -3428,19 +2293,8 @@ impl TWindow with create_image_bitmap(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
     TJsValue::to_js(options),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_create_image_bitmap_2_ffi(
-  obj : JsValue,
-  image : JsValue,
-  sx : JsValue,
-  sy : JsValue,
-  sw : JsValue,
-  sh : JsValue,
-  options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(image, sx, sy, sw, sh, options)"
 
 ///|
 /// [Window.createImageBitmap_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap_2)
@@ -3461,15 +2315,8 @@ impl TWindow with create_image_bitmap_2(
     TJsValue::to_js(sw),
     TJsValue::to_js(sh),
     TJsValue::to_js(options),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_structured_clone_ffi(
-  obj : JsValue,
-  value : JsValue,
-  options : JsValue,
-) -> JsValue = "(obj, value, options) => obj.structuredClone(value, options)"
 
 ///|
 /// [Window.structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone)
@@ -3482,15 +2329,8 @@ impl TWindow with structured_clone(
     TJsValue::to_js(self),
     TJsValue::to_js(value),
     TJsValue::to_js(options),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_fetch_ffi(
-  obj : JsValue,
-  input : JsValue,
-  init : JsValue,
-) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(input, init)"
 
 ///|
 /// [Window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
@@ -3503,34 +2343,20 @@ impl TWindow with fetch(
     TJsValue::to_js(self),
     TJsValue::to_js(input),
     TJsValue::to_js(init),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_performance_ffi(obj : JsValue) -> Performance = "(obj) => obj.performance"
 
 ///|
 /// [Window.performance](https://developer.mozilla.org/en-US/docs/Web/API/Window/performance)
 impl TWindow with performance(self : Self) -> Performance {
-  window_performance_ffi(TJsValue::to_js(self))
+  window_performance_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_trusted_types_ffi(
-  obj : JsValue,
-) -> TrustedTypePolicyFactory = "(obj) => obj.trustedTypes"
 
 ///|
 /// [Window.trustedTypes](https://developer.mozilla.org/en-US/docs/Web/API/Window/trustedTypes)
 impl TWindow with trusted_types(self : Self) -> TrustedTypePolicyFactory {
-  window_trusted_types_ffi(TJsValue::to_js(self))
+  window_trusted_types_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_request_animation_frame_ffi(
-  obj : JsValue,
-  callback : JsValue,
-) -> UInt = "(obj, callback) => obj.requestAnimationFrame(callback)"
 
 ///|
 /// [Window.requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame)
@@ -3541,14 +2367,8 @@ impl TWindow with request_animation_frame(
   window_request_animation_frame_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(callback),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn window_cancel_animation_frame_ffi(
-  obj : JsValue,
-  handle : JsValue,
-) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(handle)"
 
 ///|
 /// [Window.cancelAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame)
@@ -3560,19 +2380,13 @@ impl TWindow with cancel_animation_frame(self : Self, handle : UInt) -> Unit {
 }
 
 ///|
-extern "js" fn window_session_storage_ffi(obj : JsValue) -> Storage = "(obj) => obj.sessionStorage"
-
-///|
 /// [Window.sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)
 impl TWindow with session_storage(self : Self) -> Storage {
-  window_session_storage_ffi(TJsValue::to_js(self))
+  window_session_storage_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn window_local_storage_ffi(obj : JsValue) -> Storage = "(obj) => obj.localStorage"
 
 ///|
 /// [Window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 impl TWindow with local_storage(self : Self) -> Storage {
-  window_local_storage_ffi(TJsValue::to_js(self))
+  window_local_storage_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

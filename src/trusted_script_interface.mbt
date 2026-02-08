@@ -23,10 +23,7 @@ pub trait TTrustedScript: TJsValue {
 }
 
 ///|
-extern "js" fn trusted_script_to_json_ffi(obj : JsValue) -> String = "(obj) => obj.toJSON()"
-
-///|
 /// [TrustedScript.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/TrustedScript/toJSON)
 impl TTrustedScript with to_json(self : Self) -> String {
-  trusted_script_to_json_ffi(TJsValue::to_js(self))
+  trusted_script_to_json_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

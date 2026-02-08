@@ -46,37 +46,25 @@ pub trait TSVGEllipseElement: TSVGGeometryElement {
 }
 
 ///|
-extern "js" fn svg_ellipse_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cx"
-
-///|
 /// [SVGEllipseElement.cx](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/cx)
 impl TSVGEllipseElement with cx(self : Self) -> SVGAnimatedLength {
-  svg_ellipse_element_cx_ffi(TJsValue::to_js(self))
+  svg_ellipse_element_cx_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_ellipse_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.cy"
 
 ///|
 /// [SVGEllipseElement.cy](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/cy)
 impl TSVGEllipseElement with cy(self : Self) -> SVGAnimatedLength {
-  svg_ellipse_element_cy_ffi(TJsValue::to_js(self))
+  svg_ellipse_element_cy_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_ellipse_element_rx_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.rx"
 
 ///|
 /// [SVGEllipseElement.rx](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/rx)
 impl TSVGEllipseElement with rx(self : Self) -> SVGAnimatedLength {
-  svg_ellipse_element_rx_ffi(TJsValue::to_js(self))
+  svg_ellipse_element_rx_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_ellipse_element_ry_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.ry"
 
 ///|
 /// [SVGEllipseElement.ry](https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement/ry)
 impl TSVGEllipseElement with ry(self : Self) -> SVGAnimatedLength {
-  svg_ellipse_element_ry_ffi(TJsValue::to_js(self))
+  svg_ellipse_element_ry_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

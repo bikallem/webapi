@@ -31,9 +31,6 @@ pub impl TNode for HTMLDetailsElement
 pub impl TEventTarget for HTMLDetailsElement
 
 ///|
-extern "js" fn html_details_element_new_ffi() -> HTMLDetailsElement = "() => new HTMLDetailsElement()"
-
-///|
 pub fn HTMLDetailsElement::new() -> HTMLDetailsElement {
   html_details_element_new_ffi()
 }
@@ -48,19 +45,10 @@ pub trait THTMLDetailsElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_details_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [HTMLDetailsElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/name)
 impl THTMLDetailsElement with name(self : Self) -> String {
-  html_details_element_name_ffi(TJsValue::to_js(self))
+  html_details_element_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_details_element_set_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
 /// [HTMLDetailsElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/name)
@@ -72,19 +60,10 @@ impl THTMLDetailsElement with set_name(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_details_element_open_ffi(obj : JsValue) -> Bool = "(obj) => obj.open"
-
-///|
 /// [HTMLDetailsElement.open](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/open)
 impl THTMLDetailsElement with open(self : Self) -> Bool {
-  html_details_element_open_ffi(TJsValue::to_js(self))
+  html_details_element_open_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_details_element_set_open_ffi(
-  obj : JsValue,
-  open : JsValue,
-) -> Unit = "(obj, open) => { obj.open = open; }"
 
 ///|
 /// [HTMLDetailsElement.open](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement/open)

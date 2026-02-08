@@ -61,70 +61,46 @@ pub trait TXPathResult: TJsValue {
 }
 
 ///|
-extern "js" fn x_path_result_result_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.resultType"
-
-///|
 /// [XPathResult.resultType](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/resultType)
 impl TXPathResult with result_type(self : Self) -> UInt {
-  x_path_result_result_type_ffi(TJsValue::to_js(self))
+  x_path_result_result_type_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn x_path_result_number_value_ffi(obj : JsValue) -> Double = "(obj) => obj.numberValue"
 
 ///|
 /// [XPathResult.numberValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/numberValue)
 impl TXPathResult with number_value(self : Self) -> Double {
-  x_path_result_number_value_ffi(TJsValue::to_js(self))
+  x_path_result_number_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn x_path_result_string_value_ffi(obj : JsValue) -> String = "(obj) => obj.stringValue"
 
 ///|
 /// [XPathResult.stringValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/stringValue)
 impl TXPathResult with string_value(self : Self) -> String {
-  x_path_result_string_value_ffi(TJsValue::to_js(self))
+  x_path_result_string_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn x_path_result_boolean_value_ffi(obj : JsValue) -> Bool = "(obj) => obj.booleanValue"
 
 ///|
 /// [XPathResult.booleanValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/booleanValue)
 impl TXPathResult with boolean_value(self : Self) -> Bool {
-  x_path_result_boolean_value_ffi(TJsValue::to_js(self))
+  x_path_result_boolean_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn x_path_result_single_node_value_ffi(obj : JsValue) -> Node = "(obj) => obj.singleNodeValue"
 
 ///|
 /// [XPathResult.singleNodeValue](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/singleNodeValue)
 impl TXPathResult with single_node_value(self : Self) -> Node {
-  x_path_result_single_node_value_ffi(TJsValue::to_js(self))
+  x_path_result_single_node_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn x_path_result_invalid_iterator_state_ffi(obj : JsValue) -> Bool = "(obj) => obj.invalidIteratorState"
 
 ///|
 /// [XPathResult.invalidIteratorState](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/invalidIteratorState)
 impl TXPathResult with invalid_iterator_state(self : Self) -> Bool {
-  x_path_result_invalid_iterator_state_ffi(TJsValue::to_js(self))
+  x_path_result_invalid_iterator_state_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn x_path_result_snapshot_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.snapshotLength"
 
 ///|
 /// [XPathResult.snapshotLength](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/snapshotLength)
 impl TXPathResult with snapshot_length(self : Self) -> UInt {
-  x_path_result_snapshot_length_ffi(TJsValue::to_js(self))
+  x_path_result_snapshot_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn x_path_result_iterate_next_ffi(obj : JsValue) -> JsValue = "(obj) => obj.iterateNext()"
 
 ///|
 /// [XPathResult.iterateNext](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/iterateNext)
@@ -136,12 +112,6 @@ impl TXPathResult with iterate_next(self : Self) -> Node? {
     Some(result.unsafe_cast())
   }
 }
-
-///|
-extern "js" fn x_path_result_snapshot_item_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> JsValue = "(obj, index) => obj.snapshotItem(index)"
 
 ///|
 /// [XPathResult.snapshotItem](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/snapshotItem)

@@ -33,9 +33,6 @@ pub impl TNode for HTMLTableCellElement
 pub impl TEventTarget for HTMLTableCellElement
 
 ///|
-extern "js" fn html_table_cell_element_new_ffi() -> HTMLTableCellElement = "() => new HTMLTableCellElement()"
-
-///|
 pub fn HTMLTableCellElement::new() -> HTMLTableCellElement {
   html_table_cell_element_new_ffi()
 }
@@ -75,19 +72,10 @@ pub trait THTMLTableCellElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_table_cell_element_col_span_ffi(obj : JsValue) -> UInt = "(obj) => obj.colSpan"
-
-///|
 /// [HTMLTableCellElement.colSpan](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/colSpan)
 impl THTMLTableCellElement with col_span(self : Self) -> UInt {
-  html_table_cell_element_col_span_ffi(TJsValue::to_js(self))
+  html_table_cell_element_col_span_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_col_span_ffi(
-  obj : JsValue,
-  col_span : JsValue,
-) -> Unit = "(obj, colSpan) => { obj.colSpan = colSpan; }"
 
 ///|
 /// [HTMLTableCellElement.colSpan](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/colSpan)
@@ -99,19 +87,10 @@ impl THTMLTableCellElement with set_col_span(self : Self, col_span : UInt) -> Un
 }
 
 ///|
-extern "js" fn html_table_cell_element_row_span_ffi(obj : JsValue) -> UInt = "(obj) => obj.rowSpan"
-
-///|
 /// [HTMLTableCellElement.rowSpan](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/rowSpan)
 impl THTMLTableCellElement with row_span(self : Self) -> UInt {
-  html_table_cell_element_row_span_ffi(TJsValue::to_js(self))
+  html_table_cell_element_row_span_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_row_span_ffi(
-  obj : JsValue,
-  row_span : JsValue,
-) -> Unit = "(obj, rowSpan) => { obj.rowSpan = rowSpan; }"
 
 ///|
 /// [HTMLTableCellElement.rowSpan](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/rowSpan)
@@ -123,19 +102,10 @@ impl THTMLTableCellElement with set_row_span(self : Self, row_span : UInt) -> Un
 }
 
 ///|
-extern "js" fn html_table_cell_element_headers_ffi(obj : JsValue) -> String = "(obj) => obj.headers"
-
-///|
 /// [HTMLTableCellElement.headers](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/headers)
 impl THTMLTableCellElement with headers(self : Self) -> String {
-  html_table_cell_element_headers_ffi(TJsValue::to_js(self))
+  html_table_cell_element_headers_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_headers_ffi(
-  obj : JsValue,
-  headers : JsValue,
-) -> Unit = "(obj, headers) => { obj.headers = headers; }"
 
 ///|
 /// [HTMLTableCellElement.headers](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/headers)
@@ -147,28 +117,16 @@ impl THTMLTableCellElement with set_headers(self : Self, headers : String) -> Un
 }
 
 ///|
-extern "js" fn html_table_cell_element_cell_index_ffi(obj : JsValue) -> Int = "(obj) => obj.cellIndex"
-
-///|
 /// [HTMLTableCellElement.cellIndex](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/cellIndex)
 impl THTMLTableCellElement with cell_index(self : Self) -> Int {
-  html_table_cell_element_cell_index_ffi(TJsValue::to_js(self))
+  html_table_cell_element_cell_index_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_scope_ffi(obj : JsValue) -> String = "(obj) => obj.scope"
 
 ///|
 /// [HTMLTableCellElement.scope](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/scope)
 impl THTMLTableCellElement with scope(self : Self) -> String {
-  html_table_cell_element_scope_ffi(TJsValue::to_js(self))
+  html_table_cell_element_scope_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_scope_ffi(
-  obj : JsValue,
-  scope : JsValue,
-) -> Unit = "(obj, scope) => { obj.scope = scope; }"
 
 ///|
 /// [HTMLTableCellElement.scope](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/scope)
@@ -180,19 +138,10 @@ impl THTMLTableCellElement with set_scope(self : Self, scope : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_table_cell_element_abbr_ffi(obj : JsValue) -> String = "(obj) => obj.abbr"
-
-///|
 /// [HTMLTableCellElement.abbr](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/abbr)
 impl THTMLTableCellElement with abbr(self : Self) -> String {
-  html_table_cell_element_abbr_ffi(TJsValue::to_js(self))
+  html_table_cell_element_abbr_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_abbr_ffi(
-  obj : JsValue,
-  abbr : JsValue,
-) -> Unit = "(obj, abbr) => { obj.abbr = abbr; }"
 
 ///|
 /// [HTMLTableCellElement.abbr](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/abbr)
@@ -204,19 +153,10 @@ impl THTMLTableCellElement with set_abbr(self : Self, abbr : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_table_cell_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
-
-///|
 /// [HTMLTableCellElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/align)
 impl THTMLTableCellElement with align(self : Self) -> String {
-  html_table_cell_element_align_ffi(TJsValue::to_js(self))
+  html_table_cell_element_align_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [HTMLTableCellElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/align)
@@ -228,19 +168,10 @@ impl THTMLTableCellElement with set_align(self : Self, align : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_table_cell_element_axis_ffi(obj : JsValue) -> String = "(obj) => obj.axis"
-
-///|
 /// [HTMLTableCellElement.axis](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/axis)
 impl THTMLTableCellElement with axis(self : Self) -> String {
-  html_table_cell_element_axis_ffi(TJsValue::to_js(self))
+  html_table_cell_element_axis_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_axis_ffi(
-  obj : JsValue,
-  axis : JsValue,
-) -> Unit = "(obj, axis) => { obj.axis = axis; }"
 
 ///|
 /// [HTMLTableCellElement.axis](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/axis)
@@ -252,19 +183,10 @@ impl THTMLTableCellElement with set_axis(self : Self, axis : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_table_cell_element_height_ffi(obj : JsValue) -> String = "(obj) => obj.height"
-
-///|
 /// [HTMLTableCellElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/height)
 impl THTMLTableCellElement with height(self : Self) -> String {
-  html_table_cell_element_height_ffi(TJsValue::to_js(self))
+  html_table_cell_element_height_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_height_ffi(
-  obj : JsValue,
-  height : JsValue,
-) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
 /// [HTMLTableCellElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/height)
@@ -276,19 +198,10 @@ impl THTMLTableCellElement with set_height(self : Self, height : String) -> Unit
 }
 
 ///|
-extern "js" fn html_table_cell_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
-
-///|
 /// [HTMLTableCellElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/width)
 impl THTMLTableCellElement with width(self : Self) -> String {
-  html_table_cell_element_width_ffi(TJsValue::to_js(self))
+  html_table_cell_element_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_width_ffi(
-  obj : JsValue,
-  width : JsValue,
-) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
 /// [HTMLTableCellElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/width)
@@ -300,19 +213,10 @@ impl THTMLTableCellElement with set_width(self : Self, width : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_table_cell_element_ch_ffi(obj : JsValue) -> String = "(obj) => obj.ch"
-
-///|
 /// [HTMLTableCellElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/ch)
 impl THTMLTableCellElement with ch(self : Self) -> String {
-  html_table_cell_element_ch_ffi(TJsValue::to_js(self))
+  html_table_cell_element_ch_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_ch_ffi(
-  obj : JsValue,
-  ch : JsValue,
-) -> Unit = "(obj, ch) => { obj.ch = ch; }"
 
 ///|
 /// [HTMLTableCellElement.ch](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/ch)
@@ -321,19 +225,10 @@ impl THTMLTableCellElement with set_ch(self : Self, ch : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_table_cell_element_ch_off_ffi(obj : JsValue) -> String = "(obj) => obj.chOff"
-
-///|
 /// [HTMLTableCellElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/chOff)
 impl THTMLTableCellElement with ch_off(self : Self) -> String {
-  html_table_cell_element_ch_off_ffi(TJsValue::to_js(self))
+  html_table_cell_element_ch_off_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_ch_off_ffi(
-  obj : JsValue,
-  ch_off : JsValue,
-) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
 
 ///|
 /// [HTMLTableCellElement.chOff](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/chOff)
@@ -345,19 +240,10 @@ impl THTMLTableCellElement with set_ch_off(self : Self, ch_off : String) -> Unit
 }
 
 ///|
-extern "js" fn html_table_cell_element_no_wrap_ffi(obj : JsValue) -> Bool = "(obj) => obj.noWrap"
-
-///|
 /// [HTMLTableCellElement.noWrap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/noWrap)
 impl THTMLTableCellElement with no_wrap(self : Self) -> Bool {
-  html_table_cell_element_no_wrap_ffi(TJsValue::to_js(self))
+  html_table_cell_element_no_wrap_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_no_wrap_ffi(
-  obj : JsValue,
-  no_wrap : JsValue,
-) -> Unit = "(obj, noWrap) => { obj.noWrap = noWrap; }"
 
 ///|
 /// [HTMLTableCellElement.noWrap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/noWrap)
@@ -369,19 +255,10 @@ impl THTMLTableCellElement with set_no_wrap(self : Self, no_wrap : Bool) -> Unit
 }
 
 ///|
-extern "js" fn html_table_cell_element_v_align_ffi(obj : JsValue) -> String = "(obj) => obj.vAlign"
-
-///|
 /// [HTMLTableCellElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/vAlign)
 impl THTMLTableCellElement with v_align(self : Self) -> String {
-  html_table_cell_element_v_align_ffi(TJsValue::to_js(self))
+  html_table_cell_element_v_align_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_v_align_ffi(
-  obj : JsValue,
-  v_align : JsValue,
-) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
 
 ///|
 /// [HTMLTableCellElement.vAlign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/vAlign)
@@ -393,19 +270,10 @@ impl THTMLTableCellElement with set_v_align(self : Self, v_align : String) -> Un
 }
 
 ///|
-extern "js" fn html_table_cell_element_bg_color_ffi(obj : JsValue) -> String = "(obj) => obj.bgColor"
-
-///|
 /// [HTMLTableCellElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/bgColor)
 impl THTMLTableCellElement with bg_color(self : Self) -> String {
-  html_table_cell_element_bg_color_ffi(TJsValue::to_js(self))
+  html_table_cell_element_bg_color_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_table_cell_element_set_bg_color_ffi(
-  obj : JsValue,
-  bg_color : JsValue,
-) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
 
 ///|
 /// [HTMLTableCellElement.bgColor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/bgColor)

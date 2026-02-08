@@ -280,8 +280,9 @@ fn render_callback_wrapper(
   let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
   let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  // Use js_of() to convert closure to JsValue, unsafe_cast result back to callback type
   buf.write_string(
-    "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
+    "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(js_of(f)).unsafe_cast() }",
   )
 }
 
@@ -289,14 +290,13 @@ fn render_callback_wrapper(
 fn render_callback_ffi_js(
   buf : StringBuilder,
   name : String,
-  args : Array[CallbackArgEmit],
-  return_type : String,
+  _args : Array[CallbackArgEmit],
+  _return_type : String,
 ) -> Unit {
-  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
-  let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  // Takes JsValue (closure converted via js_of), returns JsValue
   buf.write_string(
-    "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
+    "extern \"js\" fn \{ffi_name}(f : JsValue) -> JsValue = \"(f) => f\"",
   )
 }
 
@@ -304,14 +304,13 @@ fn render_callback_ffi_js(
 fn render_callback_ffi_wasm(
   buf : StringBuilder,
   name : String,
-  args : Array[CallbackArgEmit],
-  return_type : String,
+  _args : Array[CallbackArgEmit],
+  _return_type : String,
 ) -> Unit {
-  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
-  let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  // Takes JsValue (closure converted via js_of), returns JsValue
   buf.write_string(
-    "fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"webapi_\{name}\" \"new\"",
+    "fn \{ffi_name}(f : JsValue) -> JsValue = \"webapi_\{name}\" \"new\"",
   )
 }
 
@@ -628,9 +627,10 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         append_shared(b.to_string())
       }
       Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) =>
-        // Use { TJsValue::to_js(self) } instead of %identity for cross-target compatibility
+        // Use %identity for externref types (safe on both JS and wasm-gc).
+        // All #external types, String, JsValue etc. are externref on both targets.
         append_shared(
-          "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue {\n  TJsValue::to_js(self)\n}",
+          "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
         )
       Emit::Enum(TypeName(name), variants) => {
         let b = StringBuilder::new()

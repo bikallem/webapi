@@ -1,0 +1,2 @@
+///|
+fn html_selected_content_element_new_ffi() -> HTMLSelectedContentElement = "webapi_HTMLSelectedContentElement" "new"

@@ -31,20 +31,10 @@ pub trait TDataTransferItemList: TJsValue {
 }
 
 ///|
-extern "js" fn data_transfer_item_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [DataTransferItemList.length](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/length)
 impl TDataTransferItemList with length(self : Self) -> UInt {
-  data_transfer_item_list_length_ffi(TJsValue::to_js(self))
+  data_transfer_item_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn data_transfer_item_list_add_ffi(
-  obj : JsValue,
-  data : JsValue,
-  type_ : JsValue,
-) -> JsValue = "(obj, data, type_) => obj.add(data, type_)"
 
 ///|
 /// [DataTransferItemList.add](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add)
@@ -62,12 +52,6 @@ impl TDataTransferItemList with add(self : Self, data : String, type_ : String) 
 }
 
 ///|
-extern "js" fn data_transfer_item_list_add_2_ffi(
-  obj : JsValue,
-  data : JsValue,
-) -> JsValue = "(obj, data) => obj.add_2(data)"
-
-///|
 /// [DataTransferItemList.add_2](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add_2)
 impl TDataTransferItemList with add_2(self : Self, data : &TFile) -> DataTransferItem? {
   let result = data_transfer_item_list_add_2_ffi(
@@ -82,12 +66,6 @@ impl TDataTransferItemList with add_2(self : Self, data : &TFile) -> DataTransfe
 }
 
 ///|
-extern "js" fn data_transfer_item_list_remove_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> Unit = "(obj, index) => obj.remove(index)"
-
-///|
 /// [DataTransferItemList.remove](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/remove)
 impl TDataTransferItemList with remove(self : Self, index : UInt) -> Unit {
   data_transfer_item_list_remove_ffi(
@@ -95,9 +73,6 @@ impl TDataTransferItemList with remove(self : Self, index : UInt) -> Unit {
     TJsValue::to_js(index),
   )
 }
-
-///|
-extern "js" fn data_transfer_item_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 /// [DataTransferItemList.clear](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/clear)

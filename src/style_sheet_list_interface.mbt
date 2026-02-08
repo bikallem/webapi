@@ -23,10 +23,7 @@ pub trait TStyleSheetList: TJsValue {
 }
 
 ///|
-extern "js" fn style_sheet_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [StyleSheetList.length](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList/length)
 impl TStyleSheetList with length(self : Self) -> UInt {
-  style_sheet_list_length_ffi(TJsValue::to_js(self))
+  style_sheet_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

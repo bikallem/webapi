@@ -13,13 +13,8 @@ pub impl TJsValue for CreateScriptURLCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn create_script_url_callback_ffi(
-  f : (String, JsValue) -> String,
-) -> CreateScriptURLCallback = "(f) => f"
-
-///|
 pub fn CreateScriptURLCallback::new(
   f : (String, JsValue) -> String,
 ) -> CreateScriptURLCallback {
-  create_script_url_callback_ffi(f)
+  create_script_url_callback_ffi(js_of(f)).unsafe_cast()
 }

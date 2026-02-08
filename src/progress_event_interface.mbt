@@ -20,12 +20,6 @@ pub impl TProgressEvent for ProgressEvent
 pub impl TEvent for ProgressEvent
 
 ///|
-extern "js" fn progress_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> ProgressEvent = "(type_, event_init_dict) => new ProgressEvent(type_, event_init_dict)"
-
-///|
 pub fn ProgressEvent::new(
   type_ : String,
   event_init_dict? : ProgressEventInit = ProgressEventInit::empty(),
@@ -45,28 +39,19 @@ pub trait TProgressEvent: TEvent {
 }
 
 ///|
-extern "js" fn progress_event_length_computable_ffi(obj : JsValue) -> Bool = "(obj) => obj.lengthComputable"
-
-///|
 /// [ProgressEvent.lengthComputable](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent/lengthComputable)
 impl TProgressEvent with length_computable(self : Self) -> Bool {
-  progress_event_length_computable_ffi(TJsValue::to_js(self))
+  progress_event_length_computable_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn progress_event_loaded_ffi(obj : JsValue) -> Double = "(obj) => obj.loaded"
 
 ///|
 /// [ProgressEvent.loaded](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent/loaded)
 impl TProgressEvent with loaded(self : Self) -> Double {
-  progress_event_loaded_ffi(TJsValue::to_js(self))
+  progress_event_loaded_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn progress_event_total_ffi(obj : JsValue) -> Double = "(obj) => obj.total"
 
 ///|
 /// [ProgressEvent.total](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent/total)
 impl TProgressEvent with total(self : Self) -> Double {
-  progress_event_total_ffi(TJsValue::to_js(self))
+  progress_event_total_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

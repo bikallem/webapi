@@ -31,9 +31,6 @@ pub impl TNode for HTMLOptionElement
 pub impl TEventTarget for HTMLOptionElement
 
 ///|
-extern "js" fn html_option_element_new_ffi() -> HTMLOptionElement = "() => new HTMLOptionElement()"
-
-///|
 pub fn HTMLOptionElement::new() -> HTMLOptionElement {
   html_option_element_new_ffi()
 }
@@ -58,19 +55,10 @@ pub trait THTMLOptionElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_option_element_disabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.disabled"
-
-///|
 /// [HTMLOptionElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/disabled)
 impl THTMLOptionElement with disabled(self : Self) -> Bool {
-  html_option_element_disabled_ffi(TJsValue::to_js(self))
+  html_option_element_disabled_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_option_element_set_disabled_ffi(
-  obj : JsValue,
-  disabled : JsValue,
-) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
 /// [HTMLOptionElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/disabled)
@@ -82,28 +70,16 @@ impl THTMLOptionElement with set_disabled(self : Self, disabled : Bool) -> Unit 
 }
 
 ///|
-extern "js" fn html_option_element_form_ffi(obj : JsValue) -> HTMLFormElement = "(obj) => obj.form"
-
-///|
 /// [HTMLOptionElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/form)
 impl THTMLOptionElement with form(self : Self) -> HTMLFormElement {
-  html_option_element_form_ffi(TJsValue::to_js(self))
+  html_option_element_form_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_option_element_label_ffi(obj : JsValue) -> String = "(obj) => obj.label"
 
 ///|
 /// [HTMLOptionElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/label)
 impl THTMLOptionElement with label(self : Self) -> String {
-  html_option_element_label_ffi(TJsValue::to_js(self))
+  html_option_element_label_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_option_element_set_label_ffi(
-  obj : JsValue,
-  label : JsValue,
-) -> Unit = "(obj, label) => { obj.label = label; }"
 
 ///|
 /// [HTMLOptionElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/label)
@@ -115,19 +91,10 @@ impl THTMLOptionElement with set_label(self : Self, label : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_option_element_default_selected_ffi(obj : JsValue) -> Bool = "(obj) => obj.defaultSelected"
-
-///|
 /// [HTMLOptionElement.defaultSelected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/defaultSelected)
 impl THTMLOptionElement with default_selected(self : Self) -> Bool {
-  html_option_element_default_selected_ffi(TJsValue::to_js(self))
+  html_option_element_default_selected_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_option_element_set_default_selected_ffi(
-  obj : JsValue,
-  default_selected : JsValue,
-) -> Unit = "(obj, defaultSelected) => { obj.defaultSelected = defaultSelected; }"
 
 ///|
 /// [HTMLOptionElement.defaultSelected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/defaultSelected)
@@ -142,19 +109,10 @@ impl THTMLOptionElement with set_default_selected(
 }
 
 ///|
-extern "js" fn html_option_element_selected_ffi(obj : JsValue) -> Bool = "(obj) => obj.selected"
-
-///|
 /// [HTMLOptionElement.selected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/selected)
 impl THTMLOptionElement with selected(self : Self) -> Bool {
-  html_option_element_selected_ffi(TJsValue::to_js(self))
+  html_option_element_selected_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_option_element_set_selected_ffi(
-  obj : JsValue,
-  selected : JsValue,
-) -> Unit = "(obj, selected) => { obj.selected = selected; }"
 
 ///|
 /// [HTMLOptionElement.selected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/selected)
@@ -166,19 +124,10 @@ impl THTMLOptionElement with set_selected(self : Self, selected : Bool) -> Unit 
 }
 
 ///|
-extern "js" fn html_option_element_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
-
-///|
 /// [HTMLOptionElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/value)
 impl THTMLOptionElement with value(self : Self) -> String {
-  html_option_element_value_ffi(TJsValue::to_js(self))
+  html_option_element_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_option_element_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [HTMLOptionElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/value)
@@ -190,19 +139,10 @@ impl THTMLOptionElement with set_value(self : Self, value : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_option_element_text_ffi(obj : JsValue) -> String = "(obj) => obj.text"
-
-///|
 /// [HTMLOptionElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/text)
 impl THTMLOptionElement with text(self : Self) -> String {
-  html_option_element_text_ffi(TJsValue::to_js(self))
+  html_option_element_text_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_option_element_set_text_ffi(
-  obj : JsValue,
-  text : JsValue,
-) -> Unit = "(obj, text) => { obj.text = text; }"
 
 ///|
 /// [HTMLOptionElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/text)
@@ -211,10 +151,7 @@ impl THTMLOptionElement with set_text(self : Self, text : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_option_element_index_ffi(obj : JsValue) -> Int = "(obj) => obj.index"
-
-///|
 /// [HTMLOptionElement.index](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/index)
 impl THTMLOptionElement with index(self : Self) -> Int {
-  html_option_element_index_ffi(TJsValue::to_js(self))
+  html_option_element_index_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

@@ -31,9 +31,6 @@ pub impl TNode for HTMLHeadingElement
 pub impl TEventTarget for HTMLHeadingElement
 
 ///|
-extern "js" fn html_heading_element_new_ffi() -> HTMLHeadingElement = "() => new HTMLHeadingElement()"
-
-///|
 pub fn HTMLHeadingElement::new() -> HTMLHeadingElement {
   html_heading_element_new_ffi()
 }
@@ -46,19 +43,10 @@ pub trait THTMLHeadingElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_heading_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
-
-///|
 /// [HTMLHeadingElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadingElement/align)
 impl THTMLHeadingElement with align(self : Self) -> String {
-  html_heading_element_align_ffi(TJsValue::to_js(self))
+  html_heading_element_align_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_heading_element_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [HTMLHeadingElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadingElement/align)

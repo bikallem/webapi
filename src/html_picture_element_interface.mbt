@@ -31,9 +31,6 @@ pub impl TNode for HTMLPictureElement
 pub impl TEventTarget for HTMLPictureElement
 
 ///|
-extern "js" fn html_picture_element_new_ffi() -> HTMLPictureElement = "() => new HTMLPictureElement()"
-
-///|
 pub fn HTMLPictureElement::new() -> HTMLPictureElement {
   html_picture_element_new_ffi()
 }

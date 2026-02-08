@@ -1,0 +1,2 @@
+///|
+fn mutation_callback_ffi(f : JsValue) -> JsValue = "webapi_MutationCallback" "new"

@@ -30,25 +30,16 @@ pub trait TSVGPointList: TJsValue {
 }
 
 ///|
-extern "js" fn svg_point_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [SVGPointList.length](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/length)
 impl TSVGPointList with length(self : Self) -> UInt {
-  svg_point_list_length_ffi(TJsValue::to_js(self))
+  svg_point_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_point_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
 
 ///|
 /// [SVGPointList.numberOfItems](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/numberOfItems)
 impl TSVGPointList with number_of_items(self : Self) -> UInt {
-  svg_point_list_number_of_items_ffi(TJsValue::to_js(self))
+  svg_point_list_number_of_items_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_point_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 /// [SVGPointList.clear](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/clear)
@@ -57,26 +48,13 @@ impl TSVGPointList with clear(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn svg_point_list_initialize_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> DOMPoint = "(obj, new_item) => obj.initialize(new_item)"
-
-///|
 /// [SVGPointList.initialize](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/initialize)
 impl TSVGPointList with initialize(self : Self, new_item : &TDOMPoint) -> DOMPoint {
   svg_point_list_initialize_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_point_list_insert_item_before_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> DOMPoint = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
 
 ///|
 /// [SVGPointList.insertItemBefore](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/insertItemBefore)
@@ -89,15 +67,8 @@ impl TSVGPointList with insert_item_before(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
     TJsValue::to_js(index),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_point_list_replace_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> DOMPoint = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
 
 ///|
 /// [SVGPointList.replaceItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/replaceItem)
@@ -110,26 +81,14 @@ impl TSVGPointList with replace_item(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
     TJsValue::to_js(index),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_point_list_remove_item_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> DOMPoint = "(obj, index) => obj.removeItem(index)"
 
 ///|
 /// [SVGPointList.removeItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/removeItem)
 impl TSVGPointList with remove_item(self : Self, index : UInt) -> DOMPoint {
-  svg_point_list_remove_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+  svg_point_list_remove_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_point_list_append_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> DOMPoint = "(obj, new_item) => obj.appendItem(new_item)"
 
 ///|
 /// [SVGPointList.appendItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/appendItem)
@@ -137,5 +96,5 @@ impl TSVGPointList with append_item(self : Self, new_item : &TDOMPoint) -> DOMPo
   svg_point_list_append_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
-  )
+  ).unsafe_cast()
 }

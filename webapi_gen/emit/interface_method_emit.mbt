@@ -14,6 +14,7 @@ fn emit_method_body(
   ffi_name : String,
   call_args : String,
   optional_return : Bool,
+  void_return~ : Bool = false,
 ) -> Unit {
   if optional_return {
     code
@@ -21,8 +22,10 @@ fn emit_method_body(
     .write_string(
       "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
     )
-  } else {
+  } else if void_return {
     code.write_string("  \{ffi_name}(\{call_args})\n")
+  } else {
+    code.write_string("  \{ffi_name}(\{call_args}).unsafe_cast()\n")
   }
   code.write_string("}")
 }
@@ -55,10 +58,14 @@ fn RegularMethodEmit::ffi_name(self : RegularMethodEmit) -> String {
 
 ///|
 fn RegularMethodEmit::ffi_ret_type(self : RegularMethodEmit) -> String {
-  if self.return_type.optional {
-    "JsValue"
+  // Always return JsValue for non-void returns.
+  // This ensures wasm-gc compatibility (Array[T], function types etc. aren't valid stub types).
+  // The shared wrapper uses .unsafe_cast() to convert back to the actual type.
+  let type_name = self.return_type.type_.name()
+  if type_name == "Unit" {
+    "Unit"
   } else {
-    self.return_type.type_name()
+    "JsValue"
   }
 }
 
@@ -120,7 +127,13 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
+  emit_method_body(
+    code,
+    ffi_name,
+    call_args,
+    self.return_type.optional,
+    void_return=self.return_type.type_.name() == "Unit",
+  )
   Code(code.to_string())
 }
 
@@ -148,10 +161,11 @@ fn StaticMethodEmit::ffi_name(self : StaticMethodEmit) -> String {
 
 ///|
 fn StaticMethodEmit::ffi_ret_type(self : StaticMethodEmit) -> String {
-  if self.return_type.optional {
-    "JsValue"
+  let type_name = self.return_type.type_.name()
+  if type_name == "Unit" {
+    "Unit"
   } else {
-    self.return_type.type_name()
+    "JsValue"
   }
 }
 
@@ -203,7 +217,13 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
+  emit_method_body(
+    code,
+    ffi_name,
+    call_args,
+    self.return_type.optional,
+    void_return=self.return_type.type_.name() == "Unit",
+  )
   Code(code.to_string())
 }
 
@@ -234,10 +254,9 @@ fn AttributeGetMethodEmit::ffi_name(self : AttributeGetMethodEmit) -> String {
 impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_js(
   self : AttributeGetMethodEmit,
 ) -> Code {
-  let ret_type_str = self.return_type
   let ffi_name = self.ffi_name()
   Code(
-    "extern \"js\" fn \{ffi_name}(obj: JsValue) -> \{ret_type_str} = \"(obj) => obj.\{self.original_name}\"",
+    "extern \"js\" fn \{ffi_name}(obj: JsValue) -> JsValue = \"(obj) => obj.\{self.original_name}\"",
   )
 }
 
@@ -246,10 +265,9 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_wasm(
   self : AttributeGetMethodEmit,
   module_name : String,
 ) -> Code {
-  let ret_type_str = self.return_type
   let ffi_name = self.ffi_name()
   Code(
-    "fn \{ffi_name}(obj: JsValue) -> \{ret_type_str} = \"\{module_name}\" \"get_\{self.original_name}\"",
+    "fn \{ffi_name}(obj: JsValue) -> JsValue = \"\{module_name}\" \"get_\{self.original_name}\"",
   )
 }
 
@@ -272,7 +290,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
   ..write_string(
     "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
   )
-  ..write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
+  ..write_string("  \{ffi_name}(TJsValue::to_js(self)).unsafe_cast()\n")
   .write_string("}")
   Code(code.to_string())
 }
@@ -376,11 +394,10 @@ fn StaticAttributeGetMethodEmit::ffi_name(
 impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_js(
   self : StaticAttributeGetMethodEmit,
 ) -> Code {
-  let ret_type_str = self.return_type
   let trait_name = self.interface_name
   let ffi_name = self.ffi_name()
   Code(
-    "extern \"js\" fn \{ffi_name}() -> \{ret_type_str} = \"() => \{trait_name}.\{self.original_name}\"",
+    "extern \"js\" fn \{ffi_name}() -> JsValue = \"() => \{trait_name}.\{self.original_name}\"",
   )
 }
 
@@ -389,10 +406,9 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_wasm(
   self : StaticAttributeGetMethodEmit,
   module_name : String,
 ) -> Code {
-  let ret_type_str = self.return_type
   let ffi_name = self.ffi_name()
   Code(
-    "fn \{ffi_name}() -> \{ret_type_str} = \"\{module_name}\" \"get_\{self.original_name}\"",
+    "fn \{ffi_name}() -> JsValue = \"\{module_name}\" \"get_\{self.original_name}\"",
   )
 }
 
@@ -415,7 +431,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
   ..write_string(
     "pub fn \{trait_name}::\{method_name}() -> \{ret_type_str} {\n",
   )
-  ..write_string("  \{ffi_name}()\n")
+  ..write_string("  \{ffi_name}().unsafe_cast()\n")
   .write_string("}")
   Code(code.to_string())
 }

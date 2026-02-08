@@ -68,25 +68,16 @@ pub trait TSVGLength: TJsValue {
 }
 
 ///|
-extern "js" fn svg_length_unit_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.unitType"
-
-///|
 /// [SVGLength.unitType](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/unitType)
 impl TSVGLength with unit_type(self : Self) -> UInt {
-  svg_length_unit_type_ffi(TJsValue::to_js(self))
+  svg_length_unit_type_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_length_value_ffi(obj : JsValue) -> Float = "(obj) => obj.value"
 
 ///|
 /// [SVGLength.value](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/value)
 impl TSVGLength with value(self : Self) -> Float {
-  svg_length_value_ffi(TJsValue::to_js(self))
+  svg_length_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_length_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [SVGLength.value](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/value)
@@ -95,19 +86,10 @@ impl TSVGLength with set_value(self : Self, value : Float) -> Unit {
 }
 
 ///|
-extern "js" fn svg_length_value_in_specified_units_ffi(obj : JsValue) -> Float = "(obj) => obj.valueInSpecifiedUnits"
-
-///|
 /// [SVGLength.valueInSpecifiedUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/valueInSpecifiedUnits)
 impl TSVGLength with value_in_specified_units(self : Self) -> Float {
-  svg_length_value_in_specified_units_ffi(TJsValue::to_js(self))
+  svg_length_value_in_specified_units_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_length_set_value_in_specified_units_ffi(
-  obj : JsValue,
-  value_in_specified_units : JsValue,
-) -> Unit = "(obj, valueInSpecifiedUnits) => { obj.valueInSpecifiedUnits = valueInSpecifiedUnits; }"
 
 ///|
 /// [SVGLength.valueInSpecifiedUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/valueInSpecifiedUnits)
@@ -122,19 +104,10 @@ impl TSVGLength with set_value_in_specified_units(
 }
 
 ///|
-extern "js" fn svg_length_value_as_string_ffi(obj : JsValue) -> String = "(obj) => obj.valueAsString"
-
-///|
 /// [SVGLength.valueAsString](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/valueAsString)
 impl TSVGLength with value_as_string(self : Self) -> String {
-  svg_length_value_as_string_ffi(TJsValue::to_js(self))
+  svg_length_value_as_string_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_length_set_value_as_string_ffi(
-  obj : JsValue,
-  value_as_string : JsValue,
-) -> Unit = "(obj, valueAsString) => { obj.valueAsString = valueAsString; }"
 
 ///|
 /// [SVGLength.valueAsString](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/valueAsString)
@@ -144,13 +117,6 @@ impl TSVGLength with set_value_as_string(self : Self, value_as_string : String) 
     TJsValue::to_js(value_as_string),
   )
 }
-
-///|
-extern "js" fn svg_length_new_value_specified_units_ffi(
-  obj : JsValue,
-  unit_type : JsValue,
-  value_in_specified_units : JsValue,
-) -> Unit = "(obj, unit_type, value_in_specified_units) => obj.newValueSpecifiedUnits(unit_type, value_in_specified_units)"
 
 ///|
 /// [SVGLength.newValueSpecifiedUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/newValueSpecifiedUnits)
@@ -165,12 +131,6 @@ impl TSVGLength with new_value_specified_units(
     TJsValue::to_js(value_in_specified_units),
   )
 }
-
-///|
-extern "js" fn svg_length_convert_to_specified_units_ffi(
-  obj : JsValue,
-  unit_type : JsValue,
-) -> Unit = "(obj, unit_type) => obj.convertToSpecifiedUnits(unit_type)"
 
 ///|
 /// [SVGLength.convertToSpecifiedUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGLength/convertToSpecifiedUnits)

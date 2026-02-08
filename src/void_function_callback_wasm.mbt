@@ -1,0 +1,2 @@
+///|
+fn void_function_ffi(f : JsValue) -> JsValue = "webapi_VoidFunction" "new"

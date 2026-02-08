@@ -29,19 +29,10 @@ pub trait TCSSStyleProperties: TCSSStyleDeclaration {
 }
 
 ///|
-extern "js" fn css_style_properties_css_float_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.cssFloat"
-
-///|
 /// [CSSStyleProperties.cssFloat](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleProperties/cssFloat)
 impl TCSSStyleProperties with css_float(self : Self) -> CSSOMString {
-  css_style_properties_css_float_ffi(TJsValue::to_js(self))
+  css_style_properties_css_float_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn css_style_properties_set_css_float_ffi(
-  obj : JsValue,
-  css_float : JsValue,
-) -> Unit = "(obj, cssFloat) => { obj.cssFloat = cssFloat; }"
 
 ///|
 /// [CSSStyleProperties.cssFloat](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleProperties/cssFloat)

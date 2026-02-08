@@ -45,45 +45,25 @@ pub trait TSVGLinearGradientElement: TSVGGradientElement {
 }
 
 ///|
-extern "js" fn svg_linear_gradient_element_x1_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.x1"
-
-///|
 /// [SVGLinearGradientElement.x1](https://developer.mozilla.org/en-US/docs/Web/API/SVGLinearGradientElement/x1)
 impl TSVGLinearGradientElement with x1(self : Self) -> SVGAnimatedLength {
-  svg_linear_gradient_element_x1_ffi(TJsValue::to_js(self))
+  svg_linear_gradient_element_x1_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_linear_gradient_element_y1_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.y1"
 
 ///|
 /// [SVGLinearGradientElement.y1](https://developer.mozilla.org/en-US/docs/Web/API/SVGLinearGradientElement/y1)
 impl TSVGLinearGradientElement with y1(self : Self) -> SVGAnimatedLength {
-  svg_linear_gradient_element_y1_ffi(TJsValue::to_js(self))
+  svg_linear_gradient_element_y1_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_linear_gradient_element_x2_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.x2"
 
 ///|
 /// [SVGLinearGradientElement.x2](https://developer.mozilla.org/en-US/docs/Web/API/SVGLinearGradientElement/x2)
 impl TSVGLinearGradientElement with x2(self : Self) -> SVGAnimatedLength {
-  svg_linear_gradient_element_x2_ffi(TJsValue::to_js(self))
+  svg_linear_gradient_element_x2_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_linear_gradient_element_y2_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.y2"
 
 ///|
 /// [SVGLinearGradientElement.y2](https://developer.mozilla.org/en-US/docs/Web/API/SVGLinearGradientElement/y2)
 impl TSVGLinearGradientElement with y2(self : Self) -> SVGAnimatedLength {
-  svg_linear_gradient_element_y2_ffi(TJsValue::to_js(self))
+  svg_linear_gradient_element_y2_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

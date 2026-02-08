@@ -29,9 +29,6 @@ pub impl TNode for HTMLBaseElement
 pub impl TEventTarget for HTMLBaseElement
 
 ///|
-extern "js" fn html_base_element_new_ffi() -> HTMLBaseElement = "() => new HTMLBaseElement()"
-
-///|
 pub fn HTMLBaseElement::new() -> HTMLBaseElement {
   html_base_element_new_ffi()
 }
@@ -46,19 +43,10 @@ pub trait THTMLBaseElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_base_element_href_ffi(obj : JsValue) -> String = "(obj) => obj.href"
-
-///|
 /// [HTMLBaseElement.href](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/href)
 impl THTMLBaseElement with href(self : Self) -> String {
-  html_base_element_href_ffi(TJsValue::to_js(self))
+  html_base_element_href_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_base_element_set_href_ffi(
-  obj : JsValue,
-  href : JsValue,
-) -> Unit = "(obj, href) => { obj.href = href; }"
 
 ///|
 /// [HTMLBaseElement.href](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/href)
@@ -67,19 +55,10 @@ impl THTMLBaseElement with set_href(self : Self, href : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_base_element_target_ffi(obj : JsValue) -> String = "(obj) => obj.target"
-
-///|
 /// [HTMLBaseElement.target](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/target)
 impl THTMLBaseElement with target(self : Self) -> String {
-  html_base_element_target_ffi(TJsValue::to_js(self))
+  html_base_element_target_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_base_element_set_target_ffi(
-  obj : JsValue,
-  target : JsValue,
-) -> Unit = "(obj, target) => { obj.target = target; }"
 
 ///|
 /// [HTMLBaseElement.target](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBaseElement/target)

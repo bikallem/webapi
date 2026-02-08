@@ -75,19 +75,10 @@ pub trait TCharacterData: TNode {
 }
 
 ///|
-extern "js" fn character_data_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
-
-///|
 /// [CharacterData.data](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/data)
 impl TCharacterData with data(self : Self) -> String {
-  character_data_data_ffi(TJsValue::to_js(self))
+  character_data_data_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn character_data_set_data_ffi(
-  obj : JsValue,
-  data : JsValue,
-) -> Unit = "(obj, data) => { obj.data = data; }"
 
 ///|
 /// [CharacterData.data](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/data)
@@ -96,20 +87,10 @@ impl TCharacterData with set_data(self : Self, data : String) -> Unit {
 }
 
 ///|
-extern "js" fn character_data_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [CharacterData.length](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/length)
 impl TCharacterData with length(self : Self) -> UInt {
-  character_data_length_ffi(TJsValue::to_js(self))
+  character_data_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn character_data_substring_data_ffi(
-  obj : JsValue,
-  offset : JsValue,
-  count : JsValue,
-) -> String = "(obj, offset, count) => obj.substringData(offset, count)"
 
 ///|
 /// [CharacterData.substringData](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/substringData)
@@ -122,27 +103,14 @@ impl TCharacterData with substring_data(
     TJsValue::to_js(self),
     TJsValue::to_js(offset),
     TJsValue::to_js(count),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn character_data_append_data_ffi(
-  obj : JsValue,
-  data : JsValue,
-) -> Unit = "(obj, data) => obj.appendData(data)"
 
 ///|
 /// [CharacterData.appendData](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/appendData)
 impl TCharacterData with append_data(self : Self, data : String) -> Unit {
   character_data_append_data_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
 }
-
-///|
-extern "js" fn character_data_insert_data_ffi(
-  obj : JsValue,
-  offset : JsValue,
-  data : JsValue,
-) -> Unit = "(obj, offset, data) => obj.insertData(offset, data)"
 
 ///|
 /// [CharacterData.insertData](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/insertData)
@@ -155,13 +123,6 @@ impl TCharacterData with insert_data(self : Self, offset : UInt, data : String) 
 }
 
 ///|
-extern "js" fn character_data_delete_data_ffi(
-  obj : JsValue,
-  offset : JsValue,
-  count : JsValue,
-) -> Unit = "(obj, offset, count) => obj.deleteData(offset, count)"
-
-///|
 /// [CharacterData.deleteData](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/deleteData)
 impl TCharacterData with delete_data(self : Self, offset : UInt, count : UInt) -> Unit {
   character_data_delete_data_ffi(
@@ -170,14 +131,6 @@ impl TCharacterData with delete_data(self : Self, offset : UInt, count : UInt) -
     TJsValue::to_js(count),
   )
 }
-
-///|
-extern "js" fn character_data_replace_data_ffi(
-  obj : JsValue,
-  offset : JsValue,
-  count : JsValue,
-  data : JsValue,
-) -> Unit = "(obj, offset, count, data) => obj.replaceData(offset, count, data)"
 
 ///|
 /// [CharacterData.replaceData](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/replaceData)
@@ -196,32 +149,16 @@ impl TCharacterData with replace_data(
 }
 
 ///|
-extern "js" fn character_data_previous_element_sibling_ffi(
-  obj : JsValue,
-) -> Element = "(obj) => obj.previousElementSibling"
-
-///|
 /// [CharacterData.previousElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/previousElementSibling)
 impl TCharacterData with previous_element_sibling(self : Self) -> Element {
-  character_data_previous_element_sibling_ffi(TJsValue::to_js(self))
+  character_data_previous_element_sibling_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn character_data_next_element_sibling_ffi(
-  obj : JsValue,
-) -> Element = "(obj) => obj.nextElementSibling"
 
 ///|
 /// [CharacterData.nextElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/nextElementSibling)
 impl TCharacterData with next_element_sibling(self : Self) -> Element {
-  character_data_next_element_sibling_ffi(TJsValue::to_js(self))
+  character_data_next_element_sibling_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn character_data_before_ffi(
-  obj : JsValue,
-  nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.before(nodes)"
 
 ///|
 /// [CharacterData.before](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/before)
@@ -230,19 +167,10 @@ impl TCharacterData with before(self : Self, nodes : &TCharacterDataBeforeNodes)
 }
 
 ///|
-extern "js" fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(nodes)"
-
-///|
 /// [CharacterData.after](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/after)
 impl TCharacterData with after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit {
   character_data_after_ffi(TJsValue::to_js(self), nodes.to_js())
 }
-
-///|
-extern "js" fn character_data_replace_with_ffi(
-  obj : JsValue,
-  nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceWith(nodes)"
 
 ///|
 /// [CharacterData.replaceWith](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/replaceWith)
@@ -252,9 +180,6 @@ impl TCharacterData with replace_with(
 ) -> Unit {
   character_data_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
 }
-
-///|
-extern "js" fn character_data_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
 
 ///|
 /// [CharacterData.remove](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/remove)

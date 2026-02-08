@@ -13,22 +13,6 @@ pub impl TJsValue for ScrollIntoViewOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn scroll_into_view_options_ffi(
-  behavior : JsValue,
-  block : JsValue,
-  inline : JsValue,
-  container : JsValue,
-) -> ScrollIntoViewOptions =
-  #|(behavior, block, inline, container) => {
-  #|  const obj = {};
-  #|  if (behavior !== undefined) obj.behavior = behavior;
-  #|  if (block !== undefined) obj.block = block;
-  #|  if (inline !== undefined) obj.inline = inline;
-  #|  if (container !== undefined) obj.container = container;
-  #|  return obj;
-  #|}
-
-///|
 pub fn ScrollIntoViewOptions::new(
   behavior? : ScrollBehavior = ScrollBehavior::Auto,
   block? : ScrollLogicalPosition = ScrollLogicalPosition::Start,
@@ -42,9 +26,6 @@ pub fn ScrollIntoViewOptions::new(
     TJsValue::to_js(container),
   )
 }
-
-///|
-extern "js" fn scroll_into_view_options_empty_ffi() -> ScrollIntoViewOptions = "() => {}"
 
 ///|
 pub fn ScrollIntoViewOptions::empty() -> ScrollIntoViewOptions {

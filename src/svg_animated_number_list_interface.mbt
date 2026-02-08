@@ -28,23 +28,13 @@ pub trait TSVGAnimatedNumberList: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_number_list_base_val_ffi(
-  obj : JsValue,
-) -> SVGNumberList = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedNumberList.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedNumberList/baseVal)
 impl TSVGAnimatedNumberList with base_val(self : Self) -> SVGNumberList {
-  svg_animated_number_list_base_val_ffi(TJsValue::to_js(self))
+  svg_animated_number_list_base_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_animated_number_list_anim_val_ffi(
-  obj : JsValue,
-) -> SVGNumberList = "(obj) => obj.animVal"
 
 ///|
 /// [SVGAnimatedNumberList.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedNumberList/animVal)
 impl TSVGAnimatedNumberList with anim_val(self : Self) -> SVGNumberList {
-  svg_animated_number_list_anim_val_ffi(TJsValue::to_js(self))
+  svg_animated_number_list_anim_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

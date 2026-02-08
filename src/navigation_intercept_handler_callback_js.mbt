@@ -1,0 +1,2 @@
+///|
+extern "js" fn navigation_intercept_handler_ffi(f : JsValue) -> JsValue = "(f) => f"

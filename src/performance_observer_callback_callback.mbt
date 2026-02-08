@@ -13,15 +13,6 @@ pub impl TJsValue for PerformanceObserverCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn performance_observer_callback_ffi(
-  f : (
-    PerformanceObserverEntryList,
-    PerformanceObserver,
-    PerformanceObserverCallbackOptions,
-  ) -> Unit,
-) -> PerformanceObserverCallback = "(f) => f"
-
-///|
 pub fn PerformanceObserverCallback::new(
   f : (
     PerformanceObserverEntryList,
@@ -29,5 +20,5 @@ pub fn PerformanceObserverCallback::new(
     PerformanceObserverCallbackOptions,
   ) -> Unit,
 ) -> PerformanceObserverCallback {
-  performance_observer_callback_ffi(f)
+  performance_observer_callback_ffi(js_of(f)).unsafe_cast()
 }

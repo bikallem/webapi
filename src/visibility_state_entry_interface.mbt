@@ -33,39 +33,25 @@ pub trait TVisibilityStateEntry: TPerformanceEntry {
 }
 
 ///|
-extern "js" fn visibility_state_entry_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [VisibilityStateEntry.name](https://developer.mozilla.org/en-US/docs/Web/API/VisibilityStateEntry/name)
 impl TVisibilityStateEntry with name(self : Self) -> String {
-  visibility_state_entry_name_ffi(TJsValue::to_js(self))
+  visibility_state_entry_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn visibility_state_entry_entry_type_ffi(obj : JsValue) -> String = "(obj) => obj.entryType"
 
 ///|
 /// [VisibilityStateEntry.entryType](https://developer.mozilla.org/en-US/docs/Web/API/VisibilityStateEntry/entryType)
 impl TVisibilityStateEntry with entry_type(self : Self) -> String {
-  visibility_state_entry_entry_type_ffi(TJsValue::to_js(self))
+  visibility_state_entry_entry_type_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn visibility_state_entry_start_time_ffi(
-  obj : JsValue,
-) -> DOMHighResTimeStamp = "(obj) => obj.startTime"
 
 ///|
 /// [VisibilityStateEntry.startTime](https://developer.mozilla.org/en-US/docs/Web/API/VisibilityStateEntry/startTime)
 impl TVisibilityStateEntry with start_time(self : Self) -> DOMHighResTimeStamp {
-  visibility_state_entry_start_time_ffi(TJsValue::to_js(self))
+  visibility_state_entry_start_time_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn visibility_state_entry_duration_ffi(obj : JsValue) -> UInt = "(obj) => obj.duration"
 
 ///|
 /// [VisibilityStateEntry.duration](https://developer.mozilla.org/en-US/docs/Web/API/VisibilityStateEntry/duration)
 impl TVisibilityStateEntry with duration(self : Self) -> UInt {
-  visibility_state_entry_duration_ffi(TJsValue::to_js(self))
+  visibility_state_entry_duration_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

@@ -20,12 +20,6 @@ pub impl TTrackEvent for TrackEvent
 pub impl TEvent for TrackEvent
 
 ///|
-extern "js" fn track_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> TrackEvent = "(type_, event_init_dict) => new TrackEvent(type_, event_init_dict)"
-
-///|
 pub fn TrackEvent::new(
   type_ : String,
   event_init_dict? : TrackEventInit = TrackEventInit::empty(),
@@ -65,10 +59,7 @@ pub trait TTrackEvent: TEvent {
 }
 
 ///|
-extern "js" fn track_event_track_ffi(obj : JsValue) -> TrackEventTrack = "(obj) => obj.track"
-
-///|
 /// [TrackEvent.track](https://developer.mozilla.org/en-US/docs/Web/API/TrackEvent/track)
 impl TTrackEvent with track(self : Self) -> TrackEventTrack {
-  track_event_track_ffi(TJsValue::to_js(self))
+  track_event_track_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

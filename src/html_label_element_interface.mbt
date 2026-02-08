@@ -31,9 +31,6 @@ pub impl TNode for HTMLLabelElement
 pub impl TEventTarget for HTMLLabelElement
 
 ///|
-extern "js" fn html_label_element_new_ffi() -> HTMLLabelElement = "() => new HTMLLabelElement()"
-
-///|
 pub fn HTMLLabelElement::new() -> HTMLLabelElement {
   html_label_element_new_ffi()
 }
@@ -48,28 +45,16 @@ pub trait THTMLLabelElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_label_element_form_ffi(obj : JsValue) -> HTMLFormElement = "(obj) => obj.form"
-
-///|
 /// [HTMLLabelElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/form)
 impl THTMLLabelElement with form(self : Self) -> HTMLFormElement {
-  html_label_element_form_ffi(TJsValue::to_js(self))
+  html_label_element_form_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_label_element_html_for_ffi(obj : JsValue) -> String = "(obj) => obj.htmlFor"
 
 ///|
 /// [HTMLLabelElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor)
 impl THTMLLabelElement with html_for(self : Self) -> String {
-  html_label_element_html_for_ffi(TJsValue::to_js(self))
+  html_label_element_html_for_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_label_element_set_html_for_ffi(
-  obj : JsValue,
-  html_for : JsValue,
-) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
 
 ///|
 /// [HTMLLabelElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor)
@@ -81,10 +66,7 @@ impl THTMLLabelElement with set_html_for(self : Self, html_for : String) -> Unit
 }
 
 ///|
-extern "js" fn html_label_element_control_ffi(obj : JsValue) -> HTMLElement = "(obj) => obj.control"
-
-///|
 /// [HTMLLabelElement.control](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/control)
 impl THTMLLabelElement with control(self : Self) -> HTMLElement {
-  html_label_element_control_ffi(TJsValue::to_js(self))
+  html_label_element_control_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

@@ -20,12 +20,6 @@ pub impl THashChangeEvent for HashChangeEvent
 pub impl TEvent for HashChangeEvent
 
 ///|
-extern "js" fn hash_change_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> HashChangeEvent = "(type_, event_init_dict) => new HashChangeEvent(type_, event_init_dict)"
-
-///|
 pub fn HashChangeEvent::new(
   type_ : String,
   event_init_dict? : HashChangeEventInit = HashChangeEventInit::empty(),
@@ -44,19 +38,13 @@ pub trait THashChangeEvent: TEvent {
 }
 
 ///|
-extern "js" fn hash_change_event_old_url_ffi(obj : JsValue) -> String = "(obj) => obj.oldURL"
-
-///|
 /// [HashChangeEvent.oldURL](https://developer.mozilla.org/en-US/docs/Web/API/HashChangeEvent/oldURL)
 impl THashChangeEvent with old_url(self : Self) -> String {
-  hash_change_event_old_url_ffi(TJsValue::to_js(self))
+  hash_change_event_old_url_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn hash_change_event_new_url_ffi(obj : JsValue) -> String = "(obj) => obj.newURL"
 
 ///|
 /// [HashChangeEvent.newURL](https://developer.mozilla.org/en-US/docs/Web/API/HashChangeEvent/newURL)
 impl THashChangeEvent with new_url(self : Self) -> String {
-  hash_change_event_new_url_ffi(TJsValue::to_js(self))
+  hash_change_event_new_url_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

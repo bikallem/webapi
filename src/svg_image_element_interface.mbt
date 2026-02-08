@@ -45,66 +45,40 @@ pub trait TSVGImageElement: TSVGGraphicsElement {
 }
 
 ///|
-extern "js" fn svg_image_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.x"
-
-///|
 /// [SVGImageElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/x)
 impl TSVGImageElement with x(self : Self) -> SVGAnimatedLength {
-  svg_image_element_x_ffi(TJsValue::to_js(self))
+  svg_image_element_x_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_image_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.y"
 
 ///|
 /// [SVGImageElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/y)
 impl TSVGImageElement with y(self : Self) -> SVGAnimatedLength {
-  svg_image_element_y_ffi(TJsValue::to_js(self))
+  svg_image_element_y_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_image_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.width"
 
 ///|
 /// [SVGImageElement.width](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/width)
 impl TSVGImageElement with width(self : Self) -> SVGAnimatedLength {
-  svg_image_element_width_ffi(TJsValue::to_js(self))
+  svg_image_element_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_image_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.height"
 
 ///|
 /// [SVGImageElement.height](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/height)
 impl TSVGImageElement with height(self : Self) -> SVGAnimatedLength {
-  svg_image_element_height_ffi(TJsValue::to_js(self))
+  svg_image_element_height_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_image_element_preserve_aspect_ratio_ffi(
-  obj : JsValue,
-) -> SVGAnimatedPreserveAspectRatio = "(obj) => obj.preserveAspectRatio"
 
 ///|
 /// [SVGImageElement.preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/preserveAspectRatio)
 impl TSVGImageElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio {
-  svg_image_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self))
+  svg_image_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_image_element_cross_origin_ffi(obj : JsValue) -> String = "(obj) => obj.crossOrigin"
 
 ///|
 /// [SVGImageElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/crossOrigin)
 impl TSVGImageElement with cross_origin(self : Self) -> String {
-  svg_image_element_cross_origin_ffi(TJsValue::to_js(self))
+  svg_image_element_cross_origin_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_image_element_set_cross_origin_ffi(
-  obj : JsValue,
-  cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
 /// [SVGImageElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/crossOrigin)
@@ -116,10 +90,7 @@ impl TSVGImageElement with set_cross_origin(self : Self, cross_origin : String) 
 }
 
 ///|
-extern "js" fn svg_image_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.href"
-
-///|
 /// [SVGImageElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement/href)
 impl TSVGImageElement with href(self : Self) -> SVGAnimatedString {
-  svg_image_element_href_ffi(TJsValue::to_js(self))
+  svg_image_element_href_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

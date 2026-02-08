@@ -31,9 +31,6 @@ pub impl TNode for HTMLOListElement
 pub impl TEventTarget for HTMLOListElement
 
 ///|
-extern "js" fn htmlo_list_element_new_ffi() -> HTMLOListElement = "() => new HTMLOListElement()"
-
-///|
 pub fn HTMLOListElement::new() -> HTMLOListElement {
   htmlo_list_element_new_ffi()
 }
@@ -52,19 +49,10 @@ pub trait THTMLOListElement: THTMLElement {
 }
 
 ///|
-extern "js" fn htmlo_list_element_reversed_ffi(obj : JsValue) -> Bool = "(obj) => obj.reversed"
-
-///|
 /// [HTMLOListElement.reversed](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/reversed)
 impl THTMLOListElement with reversed(self : Self) -> Bool {
-  htmlo_list_element_reversed_ffi(TJsValue::to_js(self))
+  htmlo_list_element_reversed_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlo_list_element_set_reversed_ffi(
-  obj : JsValue,
-  reversed : JsValue,
-) -> Unit = "(obj, reversed) => { obj.reversed = reversed; }"
 
 ///|
 /// [HTMLOListElement.reversed](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/reversed)
@@ -76,19 +64,10 @@ impl THTMLOListElement with set_reversed(self : Self, reversed : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn htmlo_list_element_start_ffi(obj : JsValue) -> Int = "(obj) => obj.start"
-
-///|
 /// [HTMLOListElement.start](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/start)
 impl THTMLOListElement with start(self : Self) -> Int {
-  htmlo_list_element_start_ffi(TJsValue::to_js(self))
+  htmlo_list_element_start_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlo_list_element_set_start_ffi(
-  obj : JsValue,
-  start : JsValue,
-) -> Unit = "(obj, start) => { obj.start = start; }"
 
 ///|
 /// [HTMLOListElement.start](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/start)
@@ -100,19 +79,10 @@ impl THTMLOListElement with set_start(self : Self, start : Int) -> Unit {
 }
 
 ///|
-extern "js" fn htmlo_list_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
-
-///|
 /// [HTMLOListElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/type)
 impl THTMLOListElement with type_(self : Self) -> String {
-  htmlo_list_element_type_ffi(TJsValue::to_js(self))
+  htmlo_list_element_type_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlo_list_element_set_type_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 /// [HTMLOListElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/type)
@@ -121,19 +91,10 @@ impl THTMLOListElement with set_type_(self : Self, type_ : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmlo_list_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
-
-///|
 /// [HTMLOListElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/compact)
 impl THTMLOListElement with compact(self : Self) -> Bool {
-  htmlo_list_element_compact_ffi(TJsValue::to_js(self))
+  htmlo_list_element_compact_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn htmlo_list_element_set_compact_ffi(
-  obj : JsValue,
-  compact : JsValue,
-) -> Unit = "(obj, compact) => { obj.compact = compact; }"
 
 ///|
 /// [HTMLOListElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOListElement/compact)

@@ -51,19 +51,10 @@ pub trait TCSSRule: TJsValue {
 }
 
 ///|
-extern "js" fn css_rule_css_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.cssText"
-
-///|
 /// [CSSRule.cssText](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText)
 impl TCSSRule with css_text(self : Self) -> CSSOMString {
-  css_rule_css_text_ffi(TJsValue::to_js(self))
+  css_rule_css_text_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn css_rule_set_css_text_ffi(
-  obj : JsValue,
-  css_text : JsValue,
-) -> Unit = "(obj, cssText) => { obj.cssText = cssText; }"
 
 ///|
 /// [CSSRule.cssText](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText)
@@ -72,28 +63,19 @@ impl TCSSRule with set_css_text(self : Self, css_text : CSSOMString) -> Unit {
 }
 
 ///|
-extern "js" fn css_rule_parent_rule_ffi(obj : JsValue) -> CSSRule = "(obj) => obj.parentRule"
-
-///|
 /// [CSSRule.parentRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentRule)
 impl TCSSRule with parent_rule(self : Self) -> CSSRule {
-  css_rule_parent_rule_ffi(TJsValue::to_js(self))
+  css_rule_parent_rule_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn css_rule_parent_style_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "(obj) => obj.parentStyleSheet"
 
 ///|
 /// [CSSRule.parentStyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentStyleSheet)
 impl TCSSRule with parent_style_sheet(self : Self) -> CSSStyleSheet {
-  css_rule_parent_style_sheet_ffi(TJsValue::to_js(self))
+  css_rule_parent_style_sheet_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn css_rule_type_ffi(obj : JsValue) -> UInt = "(obj) => obj.type"
 
 ///|
 /// [CSSRule.type](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/type)
 impl TCSSRule with type_(self : Self) -> UInt {
-  css_rule_type_ffi(TJsValue::to_js(self))
+  css_rule_type_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

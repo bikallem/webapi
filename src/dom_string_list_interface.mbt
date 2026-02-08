@@ -24,22 +24,13 @@ pub trait TDOMStringList: TJsValue {
 }
 
 ///|
-extern "js" fn dom_string_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [DOMStringList.length](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/length)
 impl TDOMStringList with length(self : Self) -> UInt {
-  dom_string_list_length_ffi(TJsValue::to_js(self))
+  dom_string_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_string_list_contains_ffi(
-  obj : JsValue,
-  string : JsValue,
-) -> Bool = "(obj, string) => obj.contains(string)"
 
 ///|
 /// [DOMStringList.contains](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/contains)
 impl TDOMStringList with contains(self : Self, string : String) -> Bool {
-  dom_string_list_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(string))
+  dom_string_list_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(string)).unsafe_cast()
 }

@@ -31,9 +31,6 @@ pub impl TNode for HTMLOptGroupElement
 pub impl TEventTarget for HTMLOptGroupElement
 
 ///|
-extern "js" fn html_opt_group_element_new_ffi() -> HTMLOptGroupElement = "() => new HTMLOptGroupElement()"
-
-///|
 pub fn HTMLOptGroupElement::new() -> HTMLOptGroupElement {
   html_opt_group_element_new_ffi()
 }
@@ -48,19 +45,10 @@ pub trait THTMLOptGroupElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_opt_group_element_disabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.disabled"
-
-///|
 /// [HTMLOptGroupElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/disabled)
 impl THTMLOptGroupElement with disabled(self : Self) -> Bool {
-  html_opt_group_element_disabled_ffi(TJsValue::to_js(self))
+  html_opt_group_element_disabled_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_opt_group_element_set_disabled_ffi(
-  obj : JsValue,
-  disabled : JsValue,
-) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
 /// [HTMLOptGroupElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/disabled)
@@ -72,19 +60,10 @@ impl THTMLOptGroupElement with set_disabled(self : Self, disabled : Bool) -> Uni
 }
 
 ///|
-extern "js" fn html_opt_group_element_label_ffi(obj : JsValue) -> String = "(obj) => obj.label"
-
-///|
 /// [HTMLOptGroupElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/label)
 impl THTMLOptGroupElement with label(self : Self) -> String {
-  html_opt_group_element_label_ffi(TJsValue::to_js(self))
+  html_opt_group_element_label_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_opt_group_element_set_label_ffi(
-  obj : JsValue,
-  label : JsValue,
-) -> Unit = "(obj, label) => { obj.label = label; }"
 
 ///|
 /// [HTMLOptGroupElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/label)

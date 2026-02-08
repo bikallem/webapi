@@ -54,19 +54,10 @@ pub trait THTMLAllCollection: TJsValue {
 }
 
 ///|
-extern "js" fn html_all_collection_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [HTMLAllCollection.length](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/length)
 impl THTMLAllCollection with length(self : Self) -> UInt {
-  html_all_collection_length_ffi(TJsValue::to_js(self))
+  html_all_collection_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_all_collection_item_ffi(
-  obj : JsValue,
-  name_or_index : JsValue,
-) -> JsValue = "(obj, name_or_index) => obj.item(name_or_index)"
 
 ///|
 /// [HTMLAllCollection.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/item)

@@ -31,9 +31,6 @@ pub impl TNode for HTMLProgressElement
 pub impl TEventTarget for HTMLProgressElement
 
 ///|
-extern "js" fn html_progress_element_new_ffi() -> HTMLProgressElement = "() => new HTMLProgressElement()"
-
-///|
 pub fn HTMLProgressElement::new() -> HTMLProgressElement {
   html_progress_element_new_ffi()
 }
@@ -50,19 +47,10 @@ pub trait THTMLProgressElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_progress_element_value_ffi(obj : JsValue) -> Double = "(obj) => obj.value"
-
-///|
 /// [HTMLProgressElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLProgressElement/value)
 impl THTMLProgressElement with value(self : Self) -> Double {
-  html_progress_element_value_ffi(TJsValue::to_js(self))
+  html_progress_element_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_progress_element_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [HTMLProgressElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLProgressElement/value)
@@ -74,19 +62,10 @@ impl THTMLProgressElement with set_value(self : Self, value : Double) -> Unit {
 }
 
 ///|
-extern "js" fn html_progress_element_max_ffi(obj : JsValue) -> Double = "(obj) => obj.max"
-
-///|
 /// [HTMLProgressElement.max](https://developer.mozilla.org/en-US/docs/Web/API/HTMLProgressElement/max)
 impl THTMLProgressElement with max(self : Self) -> Double {
-  html_progress_element_max_ffi(TJsValue::to_js(self))
+  html_progress_element_max_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_progress_element_set_max_ffi(
-  obj : JsValue,
-  max : JsValue,
-) -> Unit = "(obj, max) => { obj.max = max; }"
 
 ///|
 /// [HTMLProgressElement.max](https://developer.mozilla.org/en-US/docs/Web/API/HTMLProgressElement/max)
@@ -95,19 +74,13 @@ impl THTMLProgressElement with set_max(self : Self, max : Double) -> Unit {
 }
 
 ///|
-extern "js" fn html_progress_element_position_ffi(obj : JsValue) -> Double = "(obj) => obj.position"
-
-///|
 /// [HTMLProgressElement.position](https://developer.mozilla.org/en-US/docs/Web/API/HTMLProgressElement/position)
 impl THTMLProgressElement with position(self : Self) -> Double {
-  html_progress_element_position_ffi(TJsValue::to_js(self))
+  html_progress_element_position_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_progress_element_labels_ffi(obj : JsValue) -> NodeList = "(obj) => obj.labels"
 
 ///|
 /// [HTMLProgressElement.labels](https://developer.mozilla.org/en-US/docs/Web/API/HTMLProgressElement/labels)
 impl THTMLProgressElement with labels(self : Self) -> NodeList {
-  html_progress_element_labels_ffi(TJsValue::to_js(self))
+  html_progress_element_labels_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

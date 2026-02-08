@@ -30,25 +30,16 @@ pub trait TSVGStringList: TJsValue {
 }
 
 ///|
-extern "js" fn svg_string_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [SVGStringList.length](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/length)
 impl TSVGStringList with length(self : Self) -> UInt {
-  svg_string_list_length_ffi(TJsValue::to_js(self))
+  svg_string_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_string_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
 
 ///|
 /// [SVGStringList.numberOfItems](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/numberOfItems)
 impl TSVGStringList with number_of_items(self : Self) -> UInt {
-  svg_string_list_number_of_items_ffi(TJsValue::to_js(self))
+  svg_string_list_number_of_items_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_string_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 /// [SVGStringList.clear](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/clear)
@@ -57,26 +48,13 @@ impl TSVGStringList with clear(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn svg_string_list_initialize_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> String = "(obj, new_item) => obj.initialize(new_item)"
-
-///|
 /// [SVGStringList.initialize](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/initialize)
 impl TSVGStringList with initialize(self : Self, new_item : String) -> String {
   svg_string_list_initialize_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_string_list_insert_item_before_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> String = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
 
 ///|
 /// [SVGStringList.insertItemBefore](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/insertItemBefore)
@@ -89,15 +67,8 @@ impl TSVGStringList with insert_item_before(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
     TJsValue::to_js(index),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_string_list_replace_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> String = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
 
 ///|
 /// [SVGStringList.replaceItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/replaceItem)
@@ -110,26 +81,14 @@ impl TSVGStringList with replace_item(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
     TJsValue::to_js(index),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_string_list_remove_item_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> String = "(obj, index) => obj.removeItem(index)"
 
 ///|
 /// [SVGStringList.removeItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/removeItem)
 impl TSVGStringList with remove_item(self : Self, index : UInt) -> String {
-  svg_string_list_remove_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+  svg_string_list_remove_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_string_list_append_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> String = "(obj, new_item) => obj.appendItem(new_item)"
 
 ///|
 /// [SVGStringList.appendItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/appendItem)
@@ -137,5 +96,5 @@ impl TSVGStringList with append_item(self : Self, new_item : String) -> String {
   svg_string_list_append_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
-  )
+  ).unsafe_cast()
 }

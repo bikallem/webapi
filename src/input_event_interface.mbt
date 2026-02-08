@@ -23,12 +23,6 @@ pub impl TUIEvent for InputEvent
 pub impl TEvent for InputEvent
 
 ///|
-extern "js" fn input_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> InputEvent = "(type_, event_init_dict) => new InputEvent(type_, event_init_dict)"
-
-///|
 pub fn InputEvent::new(
   type_ : String,
   event_init_dict? : InputEventInit = InputEventInit::empty(),
@@ -45,28 +39,19 @@ pub trait TInputEvent: TUIEvent {
 }
 
 ///|
-extern "js" fn input_event_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
-
-///|
 /// [InputEvent.data](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data)
 impl TInputEvent with data(self : Self) -> String {
-  input_event_data_ffi(TJsValue::to_js(self))
+  input_event_data_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn input_event_is_composing_ffi(obj : JsValue) -> Bool = "(obj) => obj.isComposing"
 
 ///|
 /// [InputEvent.isComposing](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing)
 impl TInputEvent with is_composing(self : Self) -> Bool {
-  input_event_is_composing_ffi(TJsValue::to_js(self))
+  input_event_is_composing_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn input_event_input_type_ffi(obj : JsValue) -> String = "(obj) => obj.inputType"
 
 ///|
 /// [InputEvent.inputType](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType)
 impl TInputEvent with input_type(self : Self) -> String {
-  input_event_input_type_ffi(TJsValue::to_js(self))
+  input_event_input_type_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

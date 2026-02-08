@@ -142,27 +142,27 @@ fn filter_idl(
 }
 
 ///|
-/// Generate moon.pkg.json content with conditional compilation targets
-fn generate_moon_pkg_json(
+/// Generate moon.pkg content with conditional compilation targets
+fn generate_moon_pkg(
   js_files : Array[String],
   wasm_files : Array[String],
 ) -> String {
   let buf = StringBuilder::new()
-  buf.write_string("{\n")
-  buf.write_string("  \"targets\": {\n")
+  buf.write_string("options(\n")
+  buf.write_string("  targets: {")
   let entries : Array[String] = []
   // Sort for deterministic output
   js_files.sort()
   wasm_files.sort()
   for f in js_files {
-    entries.push("    \"\{f}\": [\"js\"]")
+    entries.push(" \"\{f}\": [\"js\"]")
   }
   for f in wasm_files {
-    entries.push("    \"\{f}\": [\"wasm-gc\"]")
+    entries.push(" \"\{f}\": [\"wasm-gc\"]")
   }
-  buf.write_string(entries.join(",\n"))
-  buf.write_string("\n  }\n")
-  buf.write_string("}\n")
+  buf.write_string(entries.join(","))
+  buf.write_string(" },\n")
+  buf.write_string(")\n")
   buf.to_string()
 }
 
@@ -298,13 +298,21 @@ fn main {
       e => fail("failed to write JS runtime: \{e}")
     }
 
-    // Generate moon.pkg.json with conditional compilation targets
-    println("=== Generating moon.pkg.json ===")
-    let moon_pkg_content = generate_moon_pkg_json(js_files, wasm_files)
-    let moon_pkg_path = "\{output_dir}/moon.pkg.json"
+    // Generate moon.pkg with conditional compilation targets
+    // Remove old moon.pkg.json if it exists (moon.pkg takes precedence)
+    let old_moon_pkg_json = "\{output_dir}/moon.pkg.json"
+    if @fs.path_exists(old_moon_pkg_json) {
+      println("  Removing old \{old_moon_pkg_json}...")
+      @fs.remove_file(old_moon_pkg_json) catch {
+        e => println("Warning: failed to remove old moon.pkg.json: \{e}")
+      }
+    }
+    println("=== Generating moon.pkg ===")
+    let moon_pkg_content = generate_moon_pkg(js_files, wasm_files)
+    let moon_pkg_path = "\{output_dir}/moon.pkg"
     println("  Writing \{moon_pkg_path}...")
     @fs.write_string_to_file(moon_pkg_path, moon_pkg_content) catch {
-      e => fail("failed to write moon.pkg.json: \{e}")
+      e => fail("failed to write moon.pkg: \{e}")
     }
     println("\n=== Generation complete! ===")
     println(

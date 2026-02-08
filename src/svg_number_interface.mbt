@@ -24,16 +24,10 @@ pub trait TSVGNumber: TJsValue {
 }
 
 ///|
-extern "js" fn svg_number_value_ffi(obj : JsValue) -> Float = "(obj) => obj.value"
-
-///|
 /// [SVGNumber.value](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumber/value)
 impl TSVGNumber with value(self : Self) -> Float {
-  svg_number_value_ffi(TJsValue::to_js(self))
+  svg_number_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_number_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [SVGNumber.value](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumber/value)

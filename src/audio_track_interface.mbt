@@ -28,55 +28,34 @@ pub trait TAudioTrack: TJsValue {
 }
 
 ///|
-extern "js" fn audio_track_id_ffi(obj : JsValue) -> String = "(obj) => obj.id"
-
-///|
 /// [AudioTrack.id](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrack/id)
 impl TAudioTrack with id(self : Self) -> String {
-  audio_track_id_ffi(TJsValue::to_js(self))
+  audio_track_id_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn audio_track_kind_ffi(obj : JsValue) -> String = "(obj) => obj.kind"
 
 ///|
 /// [AudioTrack.kind](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrack/kind)
 impl TAudioTrack with kind(self : Self) -> String {
-  audio_track_kind_ffi(TJsValue::to_js(self))
+  audio_track_kind_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn audio_track_label_ffi(obj : JsValue) -> String = "(obj) => obj.label"
 
 ///|
 /// [AudioTrack.label](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrack/label)
 impl TAudioTrack with label(self : Self) -> String {
-  audio_track_label_ffi(TJsValue::to_js(self))
+  audio_track_label_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn audio_track_language_ffi(obj : JsValue) -> String = "(obj) => obj.language"
 
 ///|
 /// [AudioTrack.language](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrack/language)
 impl TAudioTrack with language(self : Self) -> String {
-  audio_track_language_ffi(TJsValue::to_js(self))
+  audio_track_language_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn audio_track_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.enabled"
 
 ///|
 /// [AudioTrack.enabled](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrack/enabled)
 impl TAudioTrack with enabled(self : Self) -> Bool {
-  audio_track_enabled_ffi(TJsValue::to_js(self))
+  audio_track_enabled_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn audio_track_set_enabled_ffi(
-  obj : JsValue,
-  enabled : JsValue,
-) -> Unit = "(obj, enabled) => { obj.enabled = enabled; }"
 
 ///|
 /// [AudioTrack.enabled](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrack/enabled)

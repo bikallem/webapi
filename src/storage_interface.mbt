@@ -25,16 +25,10 @@ pub trait TStorage: TJsValue {
 }
 
 ///|
-extern "js" fn storage_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [Storage.length](https://developer.mozilla.org/en-US/docs/Web/API/Storage/length)
 impl TStorage with length(self : Self) -> UInt {
-  storage_length_ffi(TJsValue::to_js(self))
+  storage_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.key(index)"
 
 ///|
 /// [Storage.key](https://developer.mozilla.org/en-US/docs/Web/API/Storage/key)
@@ -46,9 +40,6 @@ impl TStorage with key(self : Self, index : UInt) -> String? {
     Some(result.unsafe_cast())
   }
 }
-
-///|
-extern "js" fn storage_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
 
 ///|
 /// [Storage.clear](https://developer.mozilla.org/en-US/docs/Web/API/Storage/clear)

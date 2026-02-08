@@ -29,9 +29,6 @@ pub impl TNode for HTMLFormElement
 pub impl TEventTarget for HTMLFormElement
 
 ///|
-extern "js" fn html_form_element_new_ffi() -> HTMLFormElement = "() => new HTMLFormElement()"
-
-///|
 pub fn HTMLFormElement::new() -> HTMLFormElement {
   html_form_element_new_ffi()
 }
@@ -70,19 +67,10 @@ pub trait THTMLFormElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_form_element_accept_charset_ffi(obj : JsValue) -> String = "(obj) => obj.acceptCharset"
-
-///|
 /// [HTMLFormElement.acceptCharset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/acceptCharset)
 impl THTMLFormElement with accept_charset(self : Self) -> String {
-  html_form_element_accept_charset_ffi(TJsValue::to_js(self))
+  html_form_element_accept_charset_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_accept_charset_ffi(
-  obj : JsValue,
-  accept_charset : JsValue,
-) -> Unit = "(obj, acceptCharset) => { obj.acceptCharset = acceptCharset; }"
 
 ///|
 /// [HTMLFormElement.acceptCharset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/acceptCharset)
@@ -97,19 +85,10 @@ impl THTMLFormElement with set_accept_charset(
 }
 
 ///|
-extern "js" fn html_form_element_action_ffi(obj : JsValue) -> String = "(obj) => obj.action"
-
-///|
 /// [HTMLFormElement.action](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/action)
 impl THTMLFormElement with action(self : Self) -> String {
-  html_form_element_action_ffi(TJsValue::to_js(self))
+  html_form_element_action_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_action_ffi(
-  obj : JsValue,
-  action : JsValue,
-) -> Unit = "(obj, action) => { obj.action = action; }"
 
 ///|
 /// [HTMLFormElement.action](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/action)
@@ -121,19 +100,10 @@ impl THTMLFormElement with set_action(self : Self, action : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_form_element_autocomplete_ffi(obj : JsValue) -> String = "(obj) => obj.autocomplete"
-
-///|
 /// [HTMLFormElement.autocomplete](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/autocomplete)
 impl THTMLFormElement with autocomplete(self : Self) -> String {
-  html_form_element_autocomplete_ffi(TJsValue::to_js(self))
+  html_form_element_autocomplete_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_autocomplete_ffi(
-  obj : JsValue,
-  autocomplete : JsValue,
-) -> Unit = "(obj, autocomplete) => { obj.autocomplete = autocomplete; }"
 
 ///|
 /// [HTMLFormElement.autocomplete](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/autocomplete)
@@ -145,19 +115,10 @@ impl THTMLFormElement with set_autocomplete(self : Self, autocomplete : String) 
 }
 
 ///|
-extern "js" fn html_form_element_enctype_ffi(obj : JsValue) -> String = "(obj) => obj.enctype"
-
-///|
 /// [HTMLFormElement.enctype](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/enctype)
 impl THTMLFormElement with enctype(self : Self) -> String {
-  html_form_element_enctype_ffi(TJsValue::to_js(self))
+  html_form_element_enctype_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_enctype_ffi(
-  obj : JsValue,
-  enctype : JsValue,
-) -> Unit = "(obj, enctype) => { obj.enctype = enctype; }"
 
 ///|
 /// [HTMLFormElement.enctype](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/enctype)
@@ -169,19 +130,10 @@ impl THTMLFormElement with set_enctype(self : Self, enctype : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_form_element_encoding_ffi(obj : JsValue) -> String = "(obj) => obj.encoding"
-
-///|
 /// [HTMLFormElement.encoding](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/encoding)
 impl THTMLFormElement with encoding(self : Self) -> String {
-  html_form_element_encoding_ffi(TJsValue::to_js(self))
+  html_form_element_encoding_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_encoding_ffi(
-  obj : JsValue,
-  encoding : JsValue,
-) -> Unit = "(obj, encoding) => { obj.encoding = encoding; }"
 
 ///|
 /// [HTMLFormElement.encoding](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/encoding)
@@ -193,19 +145,10 @@ impl THTMLFormElement with set_encoding(self : Self, encoding : String) -> Unit 
 }
 
 ///|
-extern "js" fn html_form_element_method_ffi(obj : JsValue) -> String = "(obj) => obj.method"
-
-///|
 /// [HTMLFormElement.method](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/method)
 impl THTMLFormElement with method_(self : Self) -> String {
-  html_form_element_method_ffi(TJsValue::to_js(self))
+  html_form_element_method_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_method_ffi(
-  obj : JsValue,
-  method_ : JsValue,
-) -> Unit = "(obj, method) => { obj.method = method; }"
 
 ///|
 /// [HTMLFormElement.method](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/method)
@@ -217,19 +160,10 @@ impl THTMLFormElement with set_method_(self : Self, method_ : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_form_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [HTMLFormElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/name)
 impl THTMLFormElement with name(self : Self) -> String {
-  html_form_element_name_ffi(TJsValue::to_js(self))
+  html_form_element_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
 /// [HTMLFormElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/name)
@@ -238,19 +172,10 @@ impl THTMLFormElement with set_name(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_form_element_no_validate_ffi(obj : JsValue) -> Bool = "(obj) => obj.noValidate"
-
-///|
 /// [HTMLFormElement.noValidate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/noValidate)
 impl THTMLFormElement with no_validate(self : Self) -> Bool {
-  html_form_element_no_validate_ffi(TJsValue::to_js(self))
+  html_form_element_no_validate_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_no_validate_ffi(
-  obj : JsValue,
-  no_validate : JsValue,
-) -> Unit = "(obj, noValidate) => { obj.noValidate = noValidate; }"
 
 ///|
 /// [HTMLFormElement.noValidate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/noValidate)
@@ -262,19 +187,10 @@ impl THTMLFormElement with set_no_validate(self : Self, no_validate : Bool) -> U
 }
 
 ///|
-extern "js" fn html_form_element_target_ffi(obj : JsValue) -> String = "(obj) => obj.target"
-
-///|
 /// [HTMLFormElement.target](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/target)
 impl THTMLFormElement with target(self : Self) -> String {
-  html_form_element_target_ffi(TJsValue::to_js(self))
+  html_form_element_target_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_target_ffi(
-  obj : JsValue,
-  target : JsValue,
-) -> Unit = "(obj, target) => { obj.target = target; }"
 
 ///|
 /// [HTMLFormElement.target](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/target)
@@ -286,19 +202,10 @@ impl THTMLFormElement with set_target(self : Self, target : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_form_element_rel_ffi(obj : JsValue) -> String = "(obj) => obj.rel"
-
-///|
 /// [HTMLFormElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/rel)
 impl THTMLFormElement with rel(self : Self) -> String {
-  html_form_element_rel_ffi(TJsValue::to_js(self))
+  html_form_element_rel_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_set_rel_ffi(
-  obj : JsValue,
-  rel : JsValue,
-) -> Unit = "(obj, rel) => { obj.rel = rel; }"
 
 ///|
 /// [HTMLFormElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/rel)
@@ -307,48 +214,28 @@ impl THTMLFormElement with set_rel(self : Self, rel : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_form_element_rel_list_ffi(obj : JsValue) -> DOMTokenList = "(obj) => obj.relList"
-
-///|
 /// [HTMLFormElement.relList](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/relList)
 impl THTMLFormElement with rel_list(self : Self) -> DOMTokenList {
-  html_form_element_rel_list_ffi(TJsValue::to_js(self))
+  html_form_element_rel_list_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_elements_ffi(
-  obj : JsValue,
-) -> HTMLFormControlsCollection = "(obj) => obj.elements"
 
 ///|
 /// [HTMLFormElement.elements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements)
 impl THTMLFormElement with elements(self : Self) -> HTMLFormControlsCollection {
-  html_form_element_elements_ffi(TJsValue::to_js(self))
+  html_form_element_elements_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
 /// [HTMLFormElement.length](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/length)
 impl THTMLFormElement with length(self : Self) -> UInt {
-  html_form_element_length_ffi(TJsValue::to_js(self))
+  html_form_element_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_submit_ffi(obj : JsValue) -> Unit = "(obj) => obj.submit()"
 
 ///|
 /// [HTMLFormElement.submit](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit)
 impl THTMLFormElement with submit(self : Self) -> Unit {
   html_form_element_submit_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_form_element_request_submit_ffi(
-  obj : JsValue,
-  submitter : JsValue,
-) -> Unit = "(obj, submitter) => obj.requestSubmit(submitter)"
 
 ///|
 /// [HTMLFormElement.requestSubmit](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit)
@@ -363,28 +250,19 @@ impl THTMLFormElement with request_submit(
 }
 
 ///|
-extern "js" fn html_form_element_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
-
-///|
 /// [HTMLFormElement.reset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/reset)
 impl THTMLFormElement with reset(self : Self) -> Unit {
   html_form_element_reset_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_form_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
-
-///|
 /// [HTMLFormElement.checkValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/checkValidity)
 impl THTMLFormElement with check_validity(self : Self) -> Bool {
-  html_form_element_check_validity_ffi(TJsValue::to_js(self))
+  html_form_element_check_validity_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_form_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
 
 ///|
 /// [HTMLFormElement.reportValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/reportValidity)
 impl THTMLFormElement with report_validity(self : Self) -> Bool {
-  html_form_element_report_validity_ffi(TJsValue::to_js(self))
+  html_form_element_report_validity_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

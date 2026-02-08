@@ -28,23 +28,13 @@ pub trait TSVGAnimatedPreserveAspectRatio: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_preserve_aspect_ratio_base_val_ffi(
-  obj : JsValue,
-) -> SVGPreserveAspectRatio = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedPreserveAspectRatio.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedPreserveAspectRatio/baseVal)
 impl TSVGAnimatedPreserveAspectRatio with base_val(self : Self) -> SVGPreserveAspectRatio {
-  svg_animated_preserve_aspect_ratio_base_val_ffi(TJsValue::to_js(self))
+  svg_animated_preserve_aspect_ratio_base_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_animated_preserve_aspect_ratio_anim_val_ffi(
-  obj : JsValue,
-) -> SVGPreserveAspectRatio = "(obj) => obj.animVal"
 
 ///|
 /// [SVGAnimatedPreserveAspectRatio.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedPreserveAspectRatio/animVal)
 impl TSVGAnimatedPreserveAspectRatio with anim_val(self : Self) -> SVGPreserveAspectRatio {
-  svg_animated_preserve_aspect_ratio_anim_val_ffi(TJsValue::to_js(self))
+  svg_animated_preserve_aspect_ratio_anim_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

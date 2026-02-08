@@ -34,9 +34,6 @@ pub impl TNode for HTMLAudioElement
 pub impl TEventTarget for HTMLAudioElement
 
 ///|
-extern "js" fn html_audio_element_new_ffi() -> HTMLAudioElement = "() => new HTMLAudioElement()"
-
-///|
 pub fn HTMLAudioElement::new() -> HTMLAudioElement {
   html_audio_element_new_ffi()
 }

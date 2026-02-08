@@ -29,9 +29,6 @@ pub impl TNode for HTMLDivElement
 pub impl TEventTarget for HTMLDivElement
 
 ///|
-extern "js" fn html_div_element_new_ffi() -> HTMLDivElement = "() => new HTMLDivElement()"
-
-///|
 pub fn HTMLDivElement::new() -> HTMLDivElement {
   html_div_element_new_ffi()
 }
@@ -44,19 +41,10 @@ pub trait THTMLDivElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_div_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
-
-///|
 /// [HTMLDivElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement/align)
 impl THTMLDivElement with align(self : Self) -> String {
-  html_div_element_align_ffi(TJsValue::to_js(self))
+  html_div_element_align_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_div_element_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [HTMLDivElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement/align)

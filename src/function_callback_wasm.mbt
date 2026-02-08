@@ -1,0 +1,2 @@
+///|
+fn function_ffi(f : JsValue) -> JsValue = "webapi_Function" "new"

@@ -31,19 +31,10 @@ pub trait TCSSStyleRule: TCSSGroupingRule {
 }
 
 ///|
-extern "js" fn css_style_rule_selector_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.selectorText"
-
-///|
 /// [CSSStyleRule.selectorText](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/selectorText)
 impl TCSSStyleRule with selector_text(self : Self) -> CSSOMString {
-  css_style_rule_selector_text_ffi(TJsValue::to_js(self))
+  css_style_rule_selector_text_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn css_style_rule_set_selector_text_ffi(
-  obj : JsValue,
-  selector_text : JsValue,
-) -> Unit = "(obj, selectorText) => { obj.selectorText = selectorText; }"
 
 ///|
 /// [CSSStyleRule.selectorText](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/selectorText)
@@ -58,10 +49,7 @@ impl TCSSStyleRule with set_selector_text(
 }
 
 ///|
-extern "js" fn css_style_rule_style_ffi(obj : JsValue) -> CSSStyleProperties = "(obj) => obj.style"
-
-///|
 /// [CSSStyleRule.style](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/style)
 impl TCSSStyleRule with style(self : Self) -> CSSStyleProperties {
-  css_style_rule_style_ffi(TJsValue::to_js(self))
+  css_style_rule_style_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

@@ -29,9 +29,6 @@ pub impl TNode for HTMLMenuElement
 pub impl TEventTarget for HTMLMenuElement
 
 ///|
-extern "js" fn html_menu_element_new_ffi() -> HTMLMenuElement = "() => new HTMLMenuElement()"
-
-///|
 pub fn HTMLMenuElement::new() -> HTMLMenuElement {
   html_menu_element_new_ffi()
 }
@@ -44,19 +41,10 @@ pub trait THTMLMenuElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_menu_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
-
-///|
 /// [HTMLMenuElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMenuElement/compact)
 impl THTMLMenuElement with compact(self : Self) -> Bool {
-  html_menu_element_compact_ffi(TJsValue::to_js(self))
+  html_menu_element_compact_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_menu_element_set_compact_ffi(
-  obj : JsValue,
-  compact : JsValue,
-) -> Unit = "(obj, compact) => { obj.compact = compact; }"
 
 ///|
 /// [HTMLMenuElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMenuElement/compact)

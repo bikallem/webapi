@@ -1,0 +1,2 @@
+///|
+extern "js" fn html_collection_length_ffi(obj : JsValue) -> JsValue = "(obj) => obj.length"

@@ -29,19 +29,10 @@ pub trait TSVGAnimatedEnumeration: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_enumeration_base_val_ffi(obj : JsValue) -> UInt = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedEnumeration.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedEnumeration/baseVal)
 impl TSVGAnimatedEnumeration with base_val(self : Self) -> UInt {
-  svg_animated_enumeration_base_val_ffi(TJsValue::to_js(self))
+  svg_animated_enumeration_base_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_animated_enumeration_set_base_val_ffi(
-  obj : JsValue,
-  base_val : JsValue,
-) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
 
 ///|
 /// [SVGAnimatedEnumeration.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedEnumeration/baseVal)
@@ -53,10 +44,7 @@ impl TSVGAnimatedEnumeration with set_base_val(self : Self, base_val : UInt) -> 
 }
 
 ///|
-extern "js" fn svg_animated_enumeration_anim_val_ffi(obj : JsValue) -> UInt = "(obj) => obj.animVal"
-
-///|
 /// [SVGAnimatedEnumeration.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedEnumeration/animVal)
 impl TSVGAnimatedEnumeration with anim_val(self : Self) -> UInt {
-  svg_animated_enumeration_anim_val_ffi(TJsValue::to_js(self))
+  svg_animated_enumeration_anim_val_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

@@ -28,20 +28,10 @@ pub trait TCSSGroupingRule: TCSSRule {
 }
 
 ///|
-extern "js" fn css_grouping_rule_css_rules_ffi(obj : JsValue) -> CSSRuleList = "(obj) => obj.cssRules"
-
-///|
 /// [CSSGroupingRule.cssRules](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/cssRules)
 impl TCSSGroupingRule with css_rules(self : Self) -> CSSRuleList {
-  css_grouping_rule_css_rules_ffi(TJsValue::to_js(self))
+  css_grouping_rule_css_rules_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn css_grouping_rule_insert_rule_ffi(
-  obj : JsValue,
-  rule : JsValue,
-  index : JsValue,
-) -> UInt = "(obj, rule, index) => obj.insertRule(rule, index)"
 
 ///|
 /// [CSSGroupingRule.insertRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/insertRule)
@@ -54,14 +44,8 @@ impl TCSSGroupingRule with insert_rule(
     TJsValue::to_js(self),
     TJsValue::to_js(rule),
     TJsValue::to_js(index),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn css_grouping_rule_delete_rule_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> Unit = "(obj, index) => obj.deleteRule(index)"
 
 ///|
 /// [CSSGroupingRule.deleteRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/deleteRule)

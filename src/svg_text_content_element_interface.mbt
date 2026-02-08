@@ -61,55 +61,28 @@ pub trait TSVGTextContentElement: TSVGGraphicsElement {
 }
 
 ///|
-extern "js" fn svg_text_content_element_text_length_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.textLength"
-
-///|
 /// [SVGTextContentElement.textLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/textLength)
 impl TSVGTextContentElement with text_length(self : Self) -> SVGAnimatedLength {
-  svg_text_content_element_text_length_ffi(TJsValue::to_js(self))
+  svg_text_content_element_text_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_length_adjust_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "(obj) => obj.lengthAdjust"
 
 ///|
 /// [SVGTextContentElement.lengthAdjust](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/lengthAdjust)
 impl TSVGTextContentElement with length_adjust(self : Self) -> SVGAnimatedEnumeration {
-  svg_text_content_element_length_adjust_ffi(TJsValue::to_js(self))
+  svg_text_content_element_length_adjust_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_number_of_chars_ffi(
-  obj : JsValue,
-) -> Int = "(obj) => obj.getNumberOfChars()"
 
 ///|
 /// [SVGTextContentElement.getNumberOfChars](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getNumberOfChars)
 impl TSVGTextContentElement with get_number_of_chars(self : Self) -> Int {
-  svg_text_content_element_get_number_of_chars_ffi(TJsValue::to_js(self))
+  svg_text_content_element_get_number_of_chars_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_computed_text_length_ffi(
-  obj : JsValue,
-) -> Float = "(obj) => obj.getComputedTextLength()"
 
 ///|
 /// [SVGTextContentElement.getComputedTextLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getComputedTextLength)
 impl TSVGTextContentElement with get_computed_text_length(self : Self) -> Float {
-  svg_text_content_element_get_computed_text_length_ffi(TJsValue::to_js(self))
+  svg_text_content_element_get_computed_text_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_sub_string_length_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-  nchars : JsValue,
-) -> Float = "(obj, charnum, nchars) => obj.getSubStringLength(charnum, nchars)"
 
 ///|
 /// [SVGTextContentElement.getSubStringLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getSubStringLength)
@@ -122,14 +95,8 @@ impl TSVGTextContentElement with get_sub_string_length(
     TJsValue::to_js(self),
     TJsValue::to_js(charnum),
     TJsValue::to_js(nchars),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_start_position_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMPoint = "(obj, charnum) => obj.getStartPositionOfChar(charnum)"
 
 ///|
 /// [SVGTextContentElement.getStartPositionOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getStartPositionOfChar)
@@ -140,14 +107,8 @@ impl TSVGTextContentElement with get_start_position_of_char(
   svg_text_content_element_get_start_position_of_char_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(charnum),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_end_position_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMPoint = "(obj, charnum) => obj.getEndPositionOfChar(charnum)"
 
 ///|
 /// [SVGTextContentElement.getEndPositionOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getEndPositionOfChar)
@@ -158,14 +119,8 @@ impl TSVGTextContentElement with get_end_position_of_char(
   svg_text_content_element_get_end_position_of_char_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(charnum),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_extent_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMRect = "(obj, charnum) => obj.getExtentOfChar(charnum)"
 
 ///|
 /// [SVGTextContentElement.getExtentOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getExtentOfChar)
@@ -173,14 +128,8 @@ impl TSVGTextContentElement with get_extent_of_char(self : Self, charnum : UInt)
   svg_text_content_element_get_extent_of_char_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(charnum),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_rotation_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> Float = "(obj, charnum) => obj.getRotationOfChar(charnum)"
 
 ///|
 /// [SVGTextContentElement.getRotationOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getRotationOfChar)
@@ -191,14 +140,8 @@ impl TSVGTextContentElement with get_rotation_of_char(
   svg_text_content_element_get_rotation_of_char_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(charnum),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_get_char_num_at_position_ffi(
-  obj : JsValue,
-  point : JsValue,
-) -> Int = "(obj, point) => obj.getCharNumAtPosition(point)"
 
 ///|
 /// [SVGTextContentElement.getCharNumAtPosition](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getCharNumAtPosition)
@@ -209,15 +152,8 @@ impl TSVGTextContentElement with get_char_num_at_position(
   svg_text_content_element_get_char_num_at_position_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(point),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_text_content_element_select_sub_string_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-  nchars : JsValue,
-) -> Unit = "(obj, charnum, nchars) => obj.selectSubString(charnum, nchars)"
 
 ///|
 /// [SVGTextContentElement.selectSubString](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/selectSubString)

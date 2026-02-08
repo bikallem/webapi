@@ -72,19 +72,10 @@ pub trait TSVGPreserveAspectRatio: TJsValue {
 }
 
 ///|
-extern "js" fn svg_preserve_aspect_ratio_align_ffi(obj : JsValue) -> UInt = "(obj) => obj.align"
-
-///|
 /// [SVGPreserveAspectRatio.align](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/align)
 impl TSVGPreserveAspectRatio with align(self : Self) -> UInt {
-  svg_preserve_aspect_ratio_align_ffi(TJsValue::to_js(self))
+  svg_preserve_aspect_ratio_align_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_preserve_aspect_ratio_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [SVGPreserveAspectRatio.align](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/align)
@@ -96,21 +87,10 @@ impl TSVGPreserveAspectRatio with set_align(self : Self, align : UInt) -> Unit {
 }
 
 ///|
-extern "js" fn svg_preserve_aspect_ratio_meet_or_slice_ffi(
-  obj : JsValue,
-) -> UInt = "(obj) => obj.meetOrSlice"
-
-///|
 /// [SVGPreserveAspectRatio.meetOrSlice](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/meetOrSlice)
 impl TSVGPreserveAspectRatio with meet_or_slice(self : Self) -> UInt {
-  svg_preserve_aspect_ratio_meet_or_slice_ffi(TJsValue::to_js(self))
+  svg_preserve_aspect_ratio_meet_or_slice_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svg_preserve_aspect_ratio_set_meet_or_slice_ffi(
-  obj : JsValue,
-  meet_or_slice : JsValue,
-) -> Unit = "(obj, meetOrSlice) => { obj.meetOrSlice = meetOrSlice; }"
 
 ///|
 /// [SVGPreserveAspectRatio.meetOrSlice](https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio/meetOrSlice)

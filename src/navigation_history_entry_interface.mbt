@@ -37,77 +37,46 @@ pub trait TNavigationHistoryEntry: TEventTarget {
 }
 
 ///|
-extern "js" fn navigation_history_entry_url_ffi(obj : JsValue) -> String = "(obj) => obj.url"
-
-///|
 /// [NavigationHistoryEntry.url](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/url)
 impl TNavigationHistoryEntry with url(self : Self) -> String {
-  navigation_history_entry_url_ffi(TJsValue::to_js(self))
+  navigation_history_entry_url_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_history_entry_key_ffi(obj : JsValue) -> String = "(obj) => obj.key"
 
 ///|
 /// [NavigationHistoryEntry.key](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/key)
 impl TNavigationHistoryEntry with key(self : Self) -> String {
-  navigation_history_entry_key_ffi(TJsValue::to_js(self))
+  navigation_history_entry_key_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_history_entry_id_ffi(obj : JsValue) -> String = "(obj) => obj.id"
 
 ///|
 /// [NavigationHistoryEntry.id](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/id)
 impl TNavigationHistoryEntry with id(self : Self) -> String {
-  navigation_history_entry_id_ffi(TJsValue::to_js(self))
+  navigation_history_entry_id_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_history_entry_index_ffi(obj : JsValue) -> Int64 = "(obj) => obj.index"
 
 ///|
 /// [NavigationHistoryEntry.index](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/index)
 impl TNavigationHistoryEntry with index(self : Self) -> Int64 {
-  navigation_history_entry_index_ffi(TJsValue::to_js(self))
+  navigation_history_entry_index_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_history_entry_same_document_ffi(
-  obj : JsValue,
-) -> Bool = "(obj) => obj.sameDocument"
 
 ///|
 /// [NavigationHistoryEntry.sameDocument](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/sameDocument)
 impl TNavigationHistoryEntry with same_document(self : Self) -> Bool {
-  navigation_history_entry_same_document_ffi(TJsValue::to_js(self))
+  navigation_history_entry_same_document_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_history_entry_get_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getState()"
 
 ///|
 /// [NavigationHistoryEntry.getState](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/getState)
 impl TNavigationHistoryEntry with get_state(self : Self) -> JsValue {
-  navigation_history_entry_get_state_ffi(TJsValue::to_js(self))
+  navigation_history_entry_get_state_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_history_entry_ondispose_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.ondispose"
 
 ///|
 /// [NavigationHistoryEntry.ondispose](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/ondispose)
 impl TNavigationHistoryEntry with ondispose(self : Self) -> EventHandler {
-  navigation_history_entry_ondispose_ffi(TJsValue::to_js(self))
+  navigation_history_entry_ondispose_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_history_entry_set_ondispose_ffi(
-  obj : JsValue,
-  ondispose : JsValue,
-) -> Unit = "(obj, ondispose) => { obj.ondispose = ondispose; }"
 
 ///|
 /// [NavigationHistoryEntry.ondispose](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/ondispose)

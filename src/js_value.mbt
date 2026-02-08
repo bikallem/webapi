@@ -25,14 +25,7 @@ impl TJsValue with is_null(self : Self) -> Bool {
 }
 
 ///|
-/// Get JavaScript undefined value
-pub extern "js" fn JsValue::undefined() -> JsValue = "() => undefined"
-
-///|
-extern "js" fn js_null_ffi() -> JsValue = "() => null"
-
-///|
-/// Get JavaScript null value  
+/// Get JavaScript null value
 pub fn[T] JsValue::null() -> T {
   js_null_ffi().unsafe_cast()
 }
@@ -44,7 +37,9 @@ pub fn[T] JsValue::null() -> T {
 fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
 
 ///|
-pub extern "js" fn JsValue::is_null(self : JsValue) -> Bool = "(v) => v === null"
+/// Convert any value to JsValue via %identity.
+/// Used for passing closures and other non-externref types to FFI.
+fn[T] js_of(x : T) -> JsValue = "%identity"
 
 ///|
 /// Convert an Option[T] to JsValue - returns undefined if None

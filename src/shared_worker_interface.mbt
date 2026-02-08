@@ -46,12 +46,6 @@ pub impl TSharedWorkerNewOptions for WorkerOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn shared_worker_new_ffi(
-  script_url : JsValue,
-  options : JsValue,
-) -> SharedWorker = "(script_url, options) => new SharedWorker(script_url, options)"
-
-///|
 pub fn SharedWorker::new(
   script_url : &TSharedWorkerNewScriptURL,
   options? : &TSharedWorkerNewOptions = WorkerOptions::empty(),
@@ -68,28 +62,16 @@ pub trait TSharedWorker: TEventTarget {
 }
 
 ///|
-extern "js" fn shared_worker_port_ffi(obj : JsValue) -> MessagePort = "(obj) => obj.port"
-
-///|
 /// [SharedWorker.port](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/port)
 impl TSharedWorker with port(self : Self) -> MessagePort {
-  shared_worker_port_ffi(TJsValue::to_js(self))
+  shared_worker_port_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn shared_worker_onerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onerror"
 
 ///|
 /// [SharedWorker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/onerror)
 impl TSharedWorker with onerror(self : Self) -> EventHandler {
-  shared_worker_onerror_ffi(TJsValue::to_js(self))
+  shared_worker_onerror_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn shared_worker_set_onerror_ffi(
-  obj : JsValue,
-  onerror : JsValue,
-) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
 
 ///|
 /// [SharedWorker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/onerror)

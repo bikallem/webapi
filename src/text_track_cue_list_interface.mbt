@@ -26,19 +26,10 @@ pub trait TTextTrackCueList: TJsValue {
 }
 
 ///|
-extern "js" fn text_track_cue_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [TextTrackCueList.length](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCueList/length)
 impl TTextTrackCueList with length(self : Self) -> UInt {
-  text_track_cue_list_length_ffi(TJsValue::to_js(self))
+  text_track_cue_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn text_track_cue_list_get_cue_by_id_ffi(
-  obj : JsValue,
-  id : JsValue,
-) -> JsValue = "(obj, id) => obj.getCueById(id)"
 
 ///|
 /// [TextTrackCueList.getCueById](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCueList/getCueById)

@@ -37,6 +37,11 @@ pub fn[T] JsValue::null() -> T {
 fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
 
 ///|
+/// Convert any value to JsValue via %identity.
+/// Used for passing closures and other non-externref types to FFI.
+fn[T] js_of(x : T) -> JsValue = "%identity"
+
+///|
 /// Convert an Option[T] to JsValue - returns undefined if None
 fn[T : TJsValue] opt_to_js(opt : T?) -> JsValue {
   match opt {

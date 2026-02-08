@@ -1,0 +1,2 @@
+///|
+extern "js" fn performance_observer_callback_ffi(f : JsValue) -> JsValue = "(f) => f"

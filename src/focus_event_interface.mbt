@@ -23,12 +23,6 @@ pub impl TUIEvent for FocusEvent
 pub impl TEvent for FocusEvent
 
 ///|
-extern "js" fn focus_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> FocusEvent = "(type_, event_init_dict) => new FocusEvent(type_, event_init_dict)"
-
-///|
 pub fn FocusEvent::new(
   type_ : String,
   event_init_dict? : FocusEventInit = FocusEventInit::empty(),
@@ -43,10 +37,7 @@ pub trait TFocusEvent: TUIEvent {
 }
 
 ///|
-extern "js" fn focus_event_related_target_ffi(obj : JsValue) -> EventTarget = "(obj) => obj.relatedTarget"
-
-///|
 /// [FocusEvent.relatedTarget](https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
 impl TFocusEvent with related_target(self : Self) -> EventTarget {
-  focus_event_related_target_ffi(TJsValue::to_js(self))
+  focus_event_related_target_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

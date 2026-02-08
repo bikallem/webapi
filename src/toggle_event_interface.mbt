@@ -20,12 +20,6 @@ pub impl TToggleEvent for ToggleEvent
 pub impl TEvent for ToggleEvent
 
 ///|
-extern "js" fn toggle_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> ToggleEvent = "(type_, event_init_dict) => new ToggleEvent(type_, event_init_dict)"
-
-///|
 pub fn ToggleEvent::new(
   type_ : String,
   event_init_dict? : ToggleEventInit = ToggleEventInit::empty(),
@@ -42,28 +36,19 @@ pub trait TToggleEvent: TEvent {
 }
 
 ///|
-extern "js" fn toggle_event_old_state_ffi(obj : JsValue) -> String = "(obj) => obj.oldState"
-
-///|
 /// [ToggleEvent.oldState](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent/oldState)
 impl TToggleEvent with old_state(self : Self) -> String {
-  toggle_event_old_state_ffi(TJsValue::to_js(self))
+  toggle_event_old_state_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn toggle_event_new_state_ffi(obj : JsValue) -> String = "(obj) => obj.newState"
 
 ///|
 /// [ToggleEvent.newState](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent/newState)
 impl TToggleEvent with new_state(self : Self) -> String {
-  toggle_event_new_state_ffi(TJsValue::to_js(self))
+  toggle_event_new_state_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn toggle_event_source_ffi(obj : JsValue) -> Element = "(obj) => obj.source"
 
 ///|
 /// [ToggleEvent.source](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent/source)
 impl TToggleEvent with source(self : Self) -> Element {
-  toggle_event_source_ffi(TJsValue::to_js(self))
+  toggle_event_source_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

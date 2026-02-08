@@ -20,12 +20,6 @@ pub impl TCommandEvent for CommandEvent
 pub impl TEvent for CommandEvent
 
 ///|
-extern "js" fn command_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> CommandEvent = "(type_, event_init_dict) => new CommandEvent(type_, event_init_dict)"
-
-///|
 pub fn CommandEvent::new(
   type_ : String,
   event_init_dict? : CommandEventInit = CommandEventInit::empty(),
@@ -44,19 +38,13 @@ pub trait TCommandEvent: TEvent {
 }
 
 ///|
-extern "js" fn command_event_source_ffi(obj : JsValue) -> Element = "(obj) => obj.source"
-
-///|
 /// [CommandEvent.source](https://developer.mozilla.org/en-US/docs/Web/API/CommandEvent/source)
 impl TCommandEvent with source(self : Self) -> Element {
-  command_event_source_ffi(TJsValue::to_js(self))
+  command_event_source_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn command_event_command_ffi(obj : JsValue) -> String = "(obj) => obj.command"
 
 ///|
 /// [CommandEvent.command](https://developer.mozilla.org/en-US/docs/Web/API/CommandEvent/command)
 impl TCommandEvent with command(self : Self) -> String {
-  command_event_command_ffi(TJsValue::to_js(self))
+  command_event_command_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

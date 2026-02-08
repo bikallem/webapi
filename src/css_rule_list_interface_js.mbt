@@ -1,0 +1,2 @@
+///|
+extern "js" fn css_rule_list_length_ffi(obj : JsValue) -> JsValue = "(obj) => obj.length"

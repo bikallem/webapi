@@ -29,34 +29,19 @@ pub trait TNavigationActivation: TJsValue {
 }
 
 ///|
-extern "js" fn navigation_activation_from_ffi(
-  obj : JsValue,
-) -> NavigationHistoryEntry = "(obj) => obj.from"
-
-///|
 /// [NavigationActivation.from](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/from)
 impl TNavigationActivation with from(self : Self) -> NavigationHistoryEntry {
-  navigation_activation_from_ffi(TJsValue::to_js(self))
+  navigation_activation_from_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_activation_entry_ffi(
-  obj : JsValue,
-) -> NavigationHistoryEntry = "(obj) => obj.entry"
 
 ///|
 /// [NavigationActivation.entry](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/entry)
 impl TNavigationActivation with entry(self : Self) -> NavigationHistoryEntry {
-  navigation_activation_entry_ffi(TJsValue::to_js(self))
+  navigation_activation_entry_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn navigation_activation_navigation_type_ffi(
-  obj : JsValue,
-) -> NavigationType = "(obj) => obj.navigationType"
 
 ///|
 /// [NavigationActivation.navigationType](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/navigationType)
 impl TNavigationActivation with navigation_type(self : Self) -> NavigationType {
-  navigation_activation_navigation_type_ffi(TJsValue::to_js(self))
+  navigation_activation_navigation_type_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

@@ -29,21 +29,10 @@ pub trait TPerformanceObserverEntryList: TJsValue {
 }
 
 ///|
-extern "js" fn performance_observer_entry_list_get_entries_ffi(
-  obj : JsValue,
-) -> PerformanceEntryList = "(obj) => obj.getEntries()"
-
-///|
 /// [PerformanceObserverEntryList.getEntries](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList/getEntries)
 impl TPerformanceObserverEntryList with get_entries(self : Self) -> PerformanceEntryList {
-  performance_observer_entry_list_get_entries_ffi(TJsValue::to_js(self))
+  performance_observer_entry_list_get_entries_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn performance_observer_entry_list_get_entries_by_type_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-) -> PerformanceEntryList = "(obj, type_) => obj.getEntriesByType(type_)"
 
 ///|
 /// [PerformanceObserverEntryList.getEntriesByType](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList/getEntriesByType)
@@ -54,15 +43,8 @@ impl TPerformanceObserverEntryList with get_entries_by_type(
   performance_observer_entry_list_get_entries_by_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn performance_observer_entry_list_get_entries_by_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-  type_ : JsValue,
-) -> PerformanceEntryList = "(obj, name, type_) => obj.getEntriesByName(name, type_)"
 
 ///|
 /// [PerformanceObserverEntryList.getEntriesByName](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList/getEntriesByName)
@@ -75,5 +57,5 @@ impl TPerformanceObserverEntryList with get_entries_by_name(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
     opt_to_js(type_),
-  )
+  ).unsafe_cast()
 }

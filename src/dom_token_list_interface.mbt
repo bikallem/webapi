@@ -31,28 +31,16 @@ pub trait TDOMTokenList: TJsValue {
 }
 
 ///|
-extern "js" fn dom_token_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [DOMTokenList.length](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/length)
 impl TDOMTokenList with length(self : Self) -> UInt {
-  dom_token_list_length_ffi(TJsValue::to_js(self))
+  dom_token_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_token_list_contains_ffi(
-  obj : JsValue,
-  token : JsValue,
-) -> Bool = "(obj, token) => obj.contains(token)"
 
 ///|
 /// [DOMTokenList.contains](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains)
 impl TDOMTokenList with contains(self : Self, token : String) -> Bool {
-  dom_token_list_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(token))
+  dom_token_list_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(token)).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_token_list_add_ffi(obj : JsValue, tokens : JsValue) -> Unit = "(obj, tokens) => obj.add(tokens)"
 
 ///|
 /// [DOMTokenList.add](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add)
@@ -61,23 +49,10 @@ impl TDOMTokenList with add(self : Self, tokens : String) -> Unit {
 }
 
 ///|
-extern "js" fn dom_token_list_remove_ffi(
-  obj : JsValue,
-  tokens : JsValue,
-) -> Unit = "(obj, tokens) => obj.remove(tokens)"
-
-///|
 /// [DOMTokenList.remove](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove)
 impl TDOMTokenList with remove(self : Self, tokens : String) -> Unit {
   dom_token_list_remove_ffi(TJsValue::to_js(self), TJsValue::to_js(tokens))
 }
-
-///|
-extern "js" fn dom_token_list_toggle_ffi(
-  obj : JsValue,
-  token : JsValue,
-  force : JsValue,
-) -> Bool = "(obj, token, force) => obj.toggle(token, force)"
 
 ///|
 /// [DOMTokenList.toggle](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle)
@@ -86,15 +61,8 @@ impl TDOMTokenList with toggle(self : Self, token : String, force? : Bool) -> Bo
     TJsValue::to_js(self),
     TJsValue::to_js(token),
     opt_to_js(force),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_token_list_replace_ffi(
-  obj : JsValue,
-  token : JsValue,
-  new_token : JsValue,
-) -> Bool = "(obj, token, new_token) => obj.replace(token, new_token)"
 
 ///|
 /// [DOMTokenList.replace](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/replace)
@@ -103,35 +71,20 @@ impl TDOMTokenList with replace(self : Self, token : String, new_token : String)
     TJsValue::to_js(self),
     TJsValue::to_js(token),
     TJsValue::to_js(new_token),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_token_list_supports_ffi(
-  obj : JsValue,
-  token : JsValue,
-) -> Bool = "(obj, token) => obj.supports(token)"
 
 ///|
 /// [DOMTokenList.supports](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/supports)
 impl TDOMTokenList with supports(self : Self, token : String) -> Bool {
-  dom_token_list_supports_ffi(TJsValue::to_js(self), TJsValue::to_js(token))
+  dom_token_list_supports_ffi(TJsValue::to_js(self), TJsValue::to_js(token)).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_token_list_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
 
 ///|
 /// [DOMTokenList.value](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/value)
 impl TDOMTokenList with value(self : Self) -> String {
-  dom_token_list_value_ffi(TJsValue::to_js(self))
+  dom_token_list_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn dom_token_list_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [DOMTokenList.value](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/value)

@@ -112,55 +112,34 @@ pub trait TSVGSVGElement: TSVGGraphicsElement {
 }
 
 ///|
-extern "js" fn svgsvg_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.x"
-
-///|
 /// [SVGSVGElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/x)
 impl TSVGSVGElement with x(self : Self) -> SVGAnimatedLength {
-  svgsvg_element_x_ffi(TJsValue::to_js(self))
+  svgsvg_element_x_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.y"
 
 ///|
 /// [SVGSVGElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/y)
 impl TSVGSVGElement with y(self : Self) -> SVGAnimatedLength {
-  svgsvg_element_y_ffi(TJsValue::to_js(self))
+  svgsvg_element_y_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.width"
 
 ///|
 /// [SVGSVGElement.width](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/width)
 impl TSVGSVGElement with width(self : Self) -> SVGAnimatedLength {
-  svgsvg_element_width_ffi(TJsValue::to_js(self))
+  svgsvg_element_width_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.height"
 
 ///|
 /// [SVGSVGElement.height](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/height)
 impl TSVGSVGElement with height(self : Self) -> SVGAnimatedLength {
-  svgsvg_element_height_ffi(TJsValue::to_js(self))
+  svgsvg_element_height_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_current_scale_ffi(obj : JsValue) -> Float = "(obj) => obj.currentScale"
 
 ///|
 /// [SVGSVGElement.currentScale](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/currentScale)
 impl TSVGSVGElement with current_scale(self : Self) -> Float {
-  svgsvg_element_current_scale_ffi(TJsValue::to_js(self))
+  svgsvg_element_current_scale_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_current_scale_ffi(
-  obj : JsValue,
-  current_scale : JsValue,
-) -> Unit = "(obj, currentScale) => { obj.currentScale = currentScale; }"
 
 ///|
 /// [SVGSVGElement.currentScale](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/currentScale)
@@ -172,22 +151,10 @@ impl TSVGSVGElement with set_current_scale(self : Self, current_scale : Float) -
 }
 
 ///|
-extern "js" fn svgsvg_element_current_translate_ffi(
-  obj : JsValue,
-) -> DOMPointReadOnly = "(obj) => obj.currentTranslate"
-
-///|
 /// [SVGSVGElement.currentTranslate](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/currentTranslate)
 impl TSVGSVGElement with current_translate(self : Self) -> DOMPointReadOnly {
-  svgsvg_element_current_translate_ffi(TJsValue::to_js(self))
+  svgsvg_element_current_translate_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_get_intersection_list_ffi(
-  obj : JsValue,
-  rect : JsValue,
-  reference_element : JsValue,
-) -> NodeList = "(obj, rect, reference_element) => obj.getIntersectionList(rect, reference_element)"
 
 ///|
 /// [SVGSVGElement.getIntersectionList](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/getIntersectionList)
@@ -200,15 +167,8 @@ impl TSVGSVGElement with get_intersection_list(
     TJsValue::to_js(self),
     TJsValue::to_js(rect),
     TJsValue::to_js(reference_element),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_get_enclosure_list_ffi(
-  obj : JsValue,
-  rect : JsValue,
-  reference_element : JsValue,
-) -> NodeList = "(obj, rect, reference_element) => obj.getEnclosureList(rect, reference_element)"
 
 ///|
 /// [SVGSVGElement.getEnclosureList](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/getEnclosureList)
@@ -221,15 +181,8 @@ impl TSVGSVGElement with get_enclosure_list(
     TJsValue::to_js(self),
     TJsValue::to_js(rect),
     TJsValue::to_js(reference_element),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_check_intersection_ffi(
-  obj : JsValue,
-  element : JsValue,
-  rect : JsValue,
-) -> Bool = "(obj, element, rect) => obj.checkIntersection(element, rect)"
 
 ///|
 /// [SVGSVGElement.checkIntersection](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/checkIntersection)
@@ -242,15 +195,8 @@ impl TSVGSVGElement with check_intersection(
     TJsValue::to_js(self),
     TJsValue::to_js(element),
     TJsValue::to_js(rect),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_check_enclosure_ffi(
-  obj : JsValue,
-  element : JsValue,
-  rect : JsValue,
-) -> Bool = "(obj, element, rect) => obj.checkEnclosure(element, rect)"
 
 ///|
 /// [SVGSVGElement.checkEnclosure](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/checkEnclosure)
@@ -263,11 +209,8 @@ impl TSVGSVGElement with check_enclosure(
     TJsValue::to_js(self),
     TJsValue::to_js(element),
     TJsValue::to_js(rect),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_deselect_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.deselectAll()"
 
 ///|
 /// [SVGSVGElement.deselectAll](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/deselectAll)
@@ -276,75 +219,46 @@ impl TSVGSVGElement with deselect_all(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn svgsvg_element_create_svg_number_ffi(obj : JsValue) -> SVGNumber = "(obj) => obj.createSVGNumber()"
-
-///|
 /// [SVGSVGElement.createSVGNumber](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGNumber)
 impl TSVGSVGElement with create_svg_number(self : Self) -> SVGNumber {
-  svgsvg_element_create_svg_number_ffi(TJsValue::to_js(self))
+  svgsvg_element_create_svg_number_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_create_svg_length_ffi(obj : JsValue) -> SVGLength = "(obj) => obj.createSVGLength()"
 
 ///|
 /// [SVGSVGElement.createSVGLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGLength)
 impl TSVGSVGElement with create_svg_length(self : Self) -> SVGLength {
-  svgsvg_element_create_svg_length_ffi(TJsValue::to_js(self))
+  svgsvg_element_create_svg_length_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_create_svg_angle_ffi(obj : JsValue) -> SVGAngle = "(obj) => obj.createSVGAngle()"
 
 ///|
 /// [SVGSVGElement.createSVGAngle](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGAngle)
 impl TSVGSVGElement with create_svg_angle(self : Self) -> SVGAngle {
-  svgsvg_element_create_svg_angle_ffi(TJsValue::to_js(self))
+  svgsvg_element_create_svg_angle_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_create_svg_point_ffi(obj : JsValue) -> DOMPoint = "(obj) => obj.createSVGPoint()"
 
 ///|
 /// [SVGSVGElement.createSVGPoint](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGPoint)
 impl TSVGSVGElement with create_svg_point(self : Self) -> DOMPoint {
-  svgsvg_element_create_svg_point_ffi(TJsValue::to_js(self))
+  svgsvg_element_create_svg_point_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_create_svg_matrix_ffi(obj : JsValue) -> DOMMatrix = "(obj) => obj.createSVGMatrix()"
 
 ///|
 /// [SVGSVGElement.createSVGMatrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGMatrix)
 impl TSVGSVGElement with create_svg_matrix(self : Self) -> DOMMatrix {
-  svgsvg_element_create_svg_matrix_ffi(TJsValue::to_js(self))
+  svgsvg_element_create_svg_matrix_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_create_svg_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.createSVGRect()"
 
 ///|
 /// [SVGSVGElement.createSVGRect](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGRect)
 impl TSVGSVGElement with create_svg_rect(self : Self) -> DOMRect {
-  svgsvg_element_create_svg_rect_ffi(TJsValue::to_js(self))
+  svgsvg_element_create_svg_rect_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_create_svg_transform_ffi(
-  obj : JsValue,
-) -> SVGTransform = "(obj) => obj.createSVGTransform()"
 
 ///|
 /// [SVGSVGElement.createSVGTransform](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGTransform)
 impl TSVGSVGElement with create_svg_transform(self : Self) -> SVGTransform {
-  svgsvg_element_create_svg_transform_ffi(TJsValue::to_js(self))
+  svgsvg_element_create_svg_transform_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_create_svg_transform_from_matrix_ffi(
-  obj : JsValue,
-  matrix : JsValue,
-) -> SVGTransform = "(obj, matrix) => obj.createSVGTransformFromMatrix(matrix)"
 
 ///|
 /// [SVGSVGElement.createSVGTransformFromMatrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGTransformFromMatrix)
@@ -355,14 +269,8 @@ impl TSVGSVGElement with create_svg_transform_from_matrix(
   svgsvg_element_create_svg_transform_from_matrix_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(matrix),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_get_element_by_id_ffi(
-  obj : JsValue,
-  element_id : JsValue,
-) -> JsValue = "(obj, element_id) => obj.getElementById(element_id)"
 
 ///|
 /// [SVGSVGElement.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/getElementById)
@@ -379,12 +287,6 @@ impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> 
 }
 
 ///|
-extern "js" fn svgsvg_element_suspend_redraw_ffi(
-  obj : JsValue,
-  max_wait_milliseconds : JsValue,
-) -> UInt = "(obj, max_wait_milliseconds) => obj.suspendRedraw(max_wait_milliseconds)"
-
-///|
 /// [SVGSVGElement.suspendRedraw](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/suspendRedraw)
 impl TSVGSVGElement with suspend_redraw(
   self : Self,
@@ -393,14 +295,8 @@ impl TSVGSVGElement with suspend_redraw(
   svgsvg_element_suspend_redraw_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(max_wait_milliseconds),
-  )
+  ).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_unsuspend_redraw_ffi(
-  obj : JsValue,
-  suspend_handle_id : JsValue,
-) -> Unit = "(obj, suspend_handle_id) => obj.unsuspendRedraw(suspend_handle_id)"
 
 ///|
 /// [SVGSVGElement.unsuspendRedraw](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/unsuspendRedraw)
@@ -412,16 +308,10 @@ impl TSVGSVGElement with unsuspend_redraw(self : Self, suspend_handle_id : UInt)
 }
 
 ///|
-extern "js" fn svgsvg_element_unsuspend_redraw_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.unsuspendRedrawAll()"
-
-///|
 /// [SVGSVGElement.unsuspendRedrawAll](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/unsuspendRedrawAll)
 impl TSVGSVGElement with unsuspend_redraw_all(self : Self) -> Unit {
   svgsvg_element_unsuspend_redraw_all_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svgsvg_element_force_redraw_ffi(obj : JsValue) -> Unit = "(obj) => obj.forceRedraw()"
 
 ///|
 /// [SVGSVGElement.forceRedraw](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/forceRedraw)
@@ -430,39 +320,22 @@ impl TSVGSVGElement with force_redraw(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn svgsvg_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect = "(obj) => obj.viewBox"
-
-///|
 /// [SVGSVGElement.viewBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/viewBox)
 impl TSVGSVGElement with view_box(self : Self) -> SVGAnimatedRect {
-  svgsvg_element_view_box_ffi(TJsValue::to_js(self))
+  svgsvg_element_view_box_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_preserve_aspect_ratio_ffi(
-  obj : JsValue,
-) -> SVGAnimatedPreserveAspectRatio = "(obj) => obj.preserveAspectRatio"
 
 ///|
 /// [SVGSVGElement.preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/preserveAspectRatio)
 impl TSVGSVGElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio {
-  svgsvg_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self))
+  svgsvg_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_onafterprint_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onafterprint"
 
 ///|
 /// [SVGSVGElement.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onafterprint)
 impl TSVGSVGElement with onafterprint(self : Self) -> EventHandler {
-  svgsvg_element_onafterprint_ffi(TJsValue::to_js(self))
+  svgsvg_element_onafterprint_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onafterprint_ffi(
-  obj : JsValue,
-  onafterprint : JsValue,
-) -> Unit = "(obj, onafterprint) => { obj.onafterprint = onafterprint; }"
 
 ///|
 /// [SVGSVGElement.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onafterprint)
@@ -477,19 +350,10 @@ impl TSVGSVGElement with set_onafterprint(
 }
 
 ///|
-extern "js" fn svgsvg_element_onbeforeprint_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onbeforeprint"
-
-///|
 /// [SVGSVGElement.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onbeforeprint)
 impl TSVGSVGElement with onbeforeprint(self : Self) -> EventHandler {
-  svgsvg_element_onbeforeprint_ffi(TJsValue::to_js(self))
+  svgsvg_element_onbeforeprint_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onbeforeprint_ffi(
-  obj : JsValue,
-  onbeforeprint : JsValue,
-) -> Unit = "(obj, onbeforeprint) => { obj.onbeforeprint = onbeforeprint; }"
 
 ///|
 /// [SVGSVGElement.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onbeforeprint)
@@ -504,21 +368,10 @@ impl TSVGSVGElement with set_onbeforeprint(
 }
 
 ///|
-extern "js" fn svgsvg_element_onbeforeunload_ffi(
-  obj : JsValue,
-) -> OnBeforeUnloadEventHandler = "(obj) => obj.onbeforeunload"
-
-///|
 /// [SVGSVGElement.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onbeforeunload)
 impl TSVGSVGElement with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler {
-  svgsvg_element_onbeforeunload_ffi(TJsValue::to_js(self))
+  svgsvg_element_onbeforeunload_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onbeforeunload_ffi(
-  obj : JsValue,
-  onbeforeunload : JsValue,
-) -> Unit = "(obj, onbeforeunload) => { obj.onbeforeunload = onbeforeunload; }"
 
 ///|
 /// [SVGSVGElement.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onbeforeunload)
@@ -533,19 +386,10 @@ impl TSVGSVGElement with set_onbeforeunload(
 }
 
 ///|
-extern "js" fn svgsvg_element_onhashchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onhashchange"
-
-///|
 /// [SVGSVGElement.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onhashchange)
 impl TSVGSVGElement with onhashchange(self : Self) -> EventHandler {
-  svgsvg_element_onhashchange_ffi(TJsValue::to_js(self))
+  svgsvg_element_onhashchange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onhashchange_ffi(
-  obj : JsValue,
-  onhashchange : JsValue,
-) -> Unit = "(obj, onhashchange) => { obj.onhashchange = onhashchange; }"
 
 ///|
 /// [SVGSVGElement.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onhashchange)
@@ -560,21 +404,10 @@ impl TSVGSVGElement with set_onhashchange(
 }
 
 ///|
-extern "js" fn svgsvg_element_onlanguagechange_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onlanguagechange"
-
-///|
 /// [SVGSVGElement.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onlanguagechange)
 impl TSVGSVGElement with onlanguagechange(self : Self) -> EventHandler {
-  svgsvg_element_onlanguagechange_ffi(TJsValue::to_js(self))
+  svgsvg_element_onlanguagechange_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onlanguagechange_ffi(
-  obj : JsValue,
-  onlanguagechange : JsValue,
-) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
 
 ///|
 /// [SVGSVGElement.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onlanguagechange)
@@ -589,19 +422,10 @@ impl TSVGSVGElement with set_onlanguagechange(
 }
 
 ///|
-extern "js" fn svgsvg_element_onmessage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessage"
-
-///|
 /// [SVGSVGElement.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onmessage)
 impl TSVGSVGElement with onmessage(self : Self) -> EventHandler {
-  svgsvg_element_onmessage_ffi(TJsValue::to_js(self))
+  svgsvg_element_onmessage_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onmessage_ffi(
-  obj : JsValue,
-  onmessage : JsValue,
-) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
 
 ///|
 /// [SVGSVGElement.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onmessage)
@@ -613,19 +437,10 @@ impl TSVGSVGElement with set_onmessage(self : Self, onmessage : EventHandler) ->
 }
 
 ///|
-extern "js" fn svgsvg_element_onmessageerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onmessageerror"
-
-///|
 /// [SVGSVGElement.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onmessageerror)
 impl TSVGSVGElement with onmessageerror(self : Self) -> EventHandler {
-  svgsvg_element_onmessageerror_ffi(TJsValue::to_js(self))
+  svgsvg_element_onmessageerror_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onmessageerror_ffi(
-  obj : JsValue,
-  onmessageerror : JsValue,
-) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
 
 ///|
 /// [SVGSVGElement.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onmessageerror)
@@ -640,19 +455,10 @@ impl TSVGSVGElement with set_onmessageerror(
 }
 
 ///|
-extern "js" fn svgsvg_element_onoffline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onoffline"
-
-///|
 /// [SVGSVGElement.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onoffline)
 impl TSVGSVGElement with onoffline(self : Self) -> EventHandler {
-  svgsvg_element_onoffline_ffi(TJsValue::to_js(self))
+  svgsvg_element_onoffline_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onoffline_ffi(
-  obj : JsValue,
-  onoffline : JsValue,
-) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
 
 ///|
 /// [SVGSVGElement.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onoffline)
@@ -664,19 +470,10 @@ impl TSVGSVGElement with set_onoffline(self : Self, onoffline : EventHandler) ->
 }
 
 ///|
-extern "js" fn svgsvg_element_ononline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ononline"
-
-///|
 /// [SVGSVGElement.ononline](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/ononline)
 impl TSVGSVGElement with ononline(self : Self) -> EventHandler {
-  svgsvg_element_ononline_ffi(TJsValue::to_js(self))
+  svgsvg_element_ononline_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_ononline_ffi(
-  obj : JsValue,
-  ononline : JsValue,
-) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
 
 ///|
 /// [SVGSVGElement.ononline](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/ononline)
@@ -688,19 +485,10 @@ impl TSVGSVGElement with set_ononline(self : Self, ononline : EventHandler) -> U
 }
 
 ///|
-extern "js" fn svgsvg_element_onpagehide_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpagehide"
-
-///|
 /// [SVGSVGElement.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpagehide)
 impl TSVGSVGElement with onpagehide(self : Self) -> EventHandler {
-  svgsvg_element_onpagehide_ffi(TJsValue::to_js(self))
+  svgsvg_element_onpagehide_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onpagehide_ffi(
-  obj : JsValue,
-  onpagehide : JsValue,
-) -> Unit = "(obj, onpagehide) => { obj.onpagehide = onpagehide; }"
 
 ///|
 /// [SVGSVGElement.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpagehide)
@@ -712,19 +500,10 @@ impl TSVGSVGElement with set_onpagehide(self : Self, onpagehide : EventHandler) 
 }
 
 ///|
-extern "js" fn svgsvg_element_onpagereveal_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpagereveal"
-
-///|
 /// [SVGSVGElement.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpagereveal)
 impl TSVGSVGElement with onpagereveal(self : Self) -> EventHandler {
-  svgsvg_element_onpagereveal_ffi(TJsValue::to_js(self))
+  svgsvg_element_onpagereveal_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onpagereveal_ffi(
-  obj : JsValue,
-  onpagereveal : JsValue,
-) -> Unit = "(obj, onpagereveal) => { obj.onpagereveal = onpagereveal; }"
 
 ///|
 /// [SVGSVGElement.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpagereveal)
@@ -739,19 +518,10 @@ impl TSVGSVGElement with set_onpagereveal(
 }
 
 ///|
-extern "js" fn svgsvg_element_onpageshow_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpageshow"
-
-///|
 /// [SVGSVGElement.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpageshow)
 impl TSVGSVGElement with onpageshow(self : Self) -> EventHandler {
-  svgsvg_element_onpageshow_ffi(TJsValue::to_js(self))
+  svgsvg_element_onpageshow_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onpageshow_ffi(
-  obj : JsValue,
-  onpageshow : JsValue,
-) -> Unit = "(obj, onpageshow) => { obj.onpageshow = onpageshow; }"
 
 ///|
 /// [SVGSVGElement.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpageshow)
@@ -763,19 +533,10 @@ impl TSVGSVGElement with set_onpageshow(self : Self, onpageshow : EventHandler) 
 }
 
 ///|
-extern "js" fn svgsvg_element_onpageswap_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpageswap"
-
-///|
 /// [SVGSVGElement.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpageswap)
 impl TSVGSVGElement with onpageswap(self : Self) -> EventHandler {
-  svgsvg_element_onpageswap_ffi(TJsValue::to_js(self))
+  svgsvg_element_onpageswap_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onpageswap_ffi(
-  obj : JsValue,
-  onpageswap : JsValue,
-) -> Unit = "(obj, onpageswap) => { obj.onpageswap = onpageswap; }"
 
 ///|
 /// [SVGSVGElement.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpageswap)
@@ -787,19 +548,10 @@ impl TSVGSVGElement with set_onpageswap(self : Self, onpageswap : EventHandler) 
 }
 
 ///|
-extern "js" fn svgsvg_element_onpopstate_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onpopstate"
-
-///|
 /// [SVGSVGElement.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpopstate)
 impl TSVGSVGElement with onpopstate(self : Self) -> EventHandler {
-  svgsvg_element_onpopstate_ffi(TJsValue::to_js(self))
+  svgsvg_element_onpopstate_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onpopstate_ffi(
-  obj : JsValue,
-  onpopstate : JsValue,
-) -> Unit = "(obj, onpopstate) => { obj.onpopstate = onpopstate; }"
 
 ///|
 /// [SVGSVGElement.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpopstate)
@@ -811,21 +563,10 @@ impl TSVGSVGElement with set_onpopstate(self : Self, onpopstate : EventHandler) 
 }
 
 ///|
-extern "js" fn svgsvg_element_onrejectionhandled_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onrejectionhandled"
-
-///|
 /// [SVGSVGElement.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onrejectionhandled)
 impl TSVGSVGElement with onrejectionhandled(self : Self) -> EventHandler {
-  svgsvg_element_onrejectionhandled_ffi(TJsValue::to_js(self))
+  svgsvg_element_onrejectionhandled_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onrejectionhandled_ffi(
-  obj : JsValue,
-  onrejectionhandled : JsValue,
-) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
 
 ///|
 /// [SVGSVGElement.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onrejectionhandled)
@@ -840,19 +581,10 @@ impl TSVGSVGElement with set_onrejectionhandled(
 }
 
 ///|
-extern "js" fn svgsvg_element_onstorage_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onstorage"
-
-///|
 /// [SVGSVGElement.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onstorage)
 impl TSVGSVGElement with onstorage(self : Self) -> EventHandler {
-  svgsvg_element_onstorage_ffi(TJsValue::to_js(self))
+  svgsvg_element_onstorage_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onstorage_ffi(
-  obj : JsValue,
-  onstorage : JsValue,
-) -> Unit = "(obj, onstorage) => { obj.onstorage = onstorage; }"
 
 ///|
 /// [SVGSVGElement.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onstorage)
@@ -864,21 +596,10 @@ impl TSVGSVGElement with set_onstorage(self : Self, onstorage : EventHandler) ->
 }
 
 ///|
-extern "js" fn svgsvg_element_onunhandledrejection_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onunhandledrejection"
-
-///|
 /// [SVGSVGElement.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onunhandledrejection)
 impl TSVGSVGElement with onunhandledrejection(self : Self) -> EventHandler {
-  svgsvg_element_onunhandledrejection_ffi(TJsValue::to_js(self))
+  svgsvg_element_onunhandledrejection_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onunhandledrejection_ffi(
-  obj : JsValue,
-  onunhandledrejection : JsValue,
-) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
 
 ///|
 /// [SVGSVGElement.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onunhandledrejection)
@@ -893,19 +614,10 @@ impl TSVGSVGElement with set_onunhandledrejection(
 }
 
 ///|
-extern "js" fn svgsvg_element_onunload_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onunload"
-
-///|
 /// [SVGSVGElement.onunload](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onunload)
 impl TSVGSVGElement with onunload(self : Self) -> EventHandler {
-  svgsvg_element_onunload_ffi(TJsValue::to_js(self))
+  svgsvg_element_onunload_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn svgsvg_element_set_onunload_ffi(
-  obj : JsValue,
-  onunload : JsValue,
-) -> Unit = "(obj, onunload) => { obj.onunload = onunload; }"
 
 ///|
 /// [SVGSVGElement.onunload](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onunload)

@@ -30,52 +30,34 @@ pub trait TAbortSignal: TEventTarget {
 }
 
 ///|
-extern "js" fn abort_signal_abort_ffi(reason : JsValue) -> AbortSignal = "(reason) => AbortSignal.abort(reason)"
-
-///|
 /// [AbortSignal.abort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/abort)
 pub fn AbortSignal::abort(reason? : JsValue) -> AbortSignal {
-  abort_signal_abort_ffi(opt_to_js(reason))
+  abort_signal_abort_ffi(opt_to_js(reason)).unsafe_cast()
 }
-
-///|
-extern "js" fn abort_signal_timeout_ffi(milliseconds : JsValue) -> AbortSignal = "(milliseconds) => AbortSignal.timeout(milliseconds)"
 
 ///|
 /// [AbortSignal.timeout](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)
 pub fn AbortSignal::timeout(milliseconds : UInt64) -> AbortSignal {
-  abort_signal_timeout_ffi(TJsValue::to_js(milliseconds))
+  abort_signal_timeout_ffi(TJsValue::to_js(milliseconds)).unsafe_cast()
 }
-
-///|
-extern "js" fn abort_signal_any_ffi(signals : JsValue) -> AbortSignal = "(signals) => AbortSignal.any(signals)"
 
 ///|
 /// [AbortSignal.any](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/any)
 pub fn AbortSignal::any(signals : Array[AbortSignal]) -> AbortSignal {
-  abort_signal_any_ffi(TJsValue::to_js(signals))
+  abort_signal_any_ffi(TJsValue::to_js(signals)).unsafe_cast()
 }
-
-///|
-extern "js" fn abort_signal_aborted_ffi(obj : JsValue) -> Bool = "(obj) => obj.aborted"
 
 ///|
 /// [AbortSignal.aborted](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/aborted)
 impl TAbortSignal with aborted(self : Self) -> Bool {
-  abort_signal_aborted_ffi(TJsValue::to_js(self))
+  abort_signal_aborted_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn abort_signal_reason_ffi(obj : JsValue) -> JsValue = "(obj) => obj.reason"
 
 ///|
 /// [AbortSignal.reason](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/reason)
 impl TAbortSignal with reason(self : Self) -> JsValue {
-  abort_signal_reason_ffi(TJsValue::to_js(self))
+  abort_signal_reason_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "(obj) => obj.throwIfAborted()"
 
 ///|
 /// [AbortSignal.throwIfAborted](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/throwIfAborted)
@@ -84,19 +66,10 @@ impl TAbortSignal with throw_if_aborted(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onabort"
-
-///|
 /// [AbortSignal.onabort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)
 impl TAbortSignal with onabort(self : Self) -> EventHandler {
-  abort_signal_onabort_ffi(TJsValue::to_js(self))
+  abort_signal_onabort_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn abort_signal_set_onabort_ffi(
-  obj : JsValue,
-  onabort : JsValue,
-) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
 
 ///|
 /// [AbortSignal.onabort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)

@@ -33,9 +33,6 @@ pub impl TNode for HTMLDirectoryElement
 pub impl TEventTarget for HTMLDirectoryElement
 
 ///|
-extern "js" fn html_directory_element_new_ffi() -> HTMLDirectoryElement = "() => new HTMLDirectoryElement()"
-
-///|
 pub fn HTMLDirectoryElement::new() -> HTMLDirectoryElement {
   html_directory_element_new_ffi()
 }
@@ -48,19 +45,10 @@ pub trait THTMLDirectoryElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_directory_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
-
-///|
 /// [HTMLDirectoryElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDirectoryElement/compact)
 impl THTMLDirectoryElement with compact(self : Self) -> Bool {
-  html_directory_element_compact_ffi(TJsValue::to_js(self))
+  html_directory_element_compact_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn html_directory_element_set_compact_ffi(
-  obj : JsValue,
-  compact : JsValue,
-) -> Unit = "(obj, compact) => { obj.compact = compact; }"
 
 ///|
 /// [HTMLDirectoryElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDirectoryElement/compact)

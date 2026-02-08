@@ -1,0 +1,2 @@
+///|
+fn event_listener_ffi(f : JsValue) -> JsValue = "webapi_EventListener" "new"

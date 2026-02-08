@@ -13,20 +13,6 @@ pub impl TJsValue for TrustedTypePolicyOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn trusted_type_policy_options_ffi(
-  create_html : JsValue,
-  create_script : JsValue,
-  create_script_url : JsValue,
-) -> TrustedTypePolicyOptions =
-  #|(createHTML, createScript, createScriptURL) => {
-  #|  const obj = {};
-  #|  if (createHTML !== undefined) obj.createHTML = createHTML;
-  #|  if (createScript !== undefined) obj.createScript = createScript;
-  #|  if (createScriptURL !== undefined) obj.createScriptURL = createScriptURL;
-  #|  return obj;
-  #|}
-
-///|
 pub fn TrustedTypePolicyOptions::new(
   create_html? : CreateHTMLCallback,
   create_script? : CreateScriptCallback,
@@ -38,9 +24,6 @@ pub fn TrustedTypePolicyOptions::new(
     opt_to_js(create_script_url),
   )
 }
-
-///|
-extern "js" fn trusted_type_policy_options_empty_ffi() -> TrustedTypePolicyOptions = "() => {}"
 
 ///|
 pub fn TrustedTypePolicyOptions::empty() -> TrustedTypePolicyOptions {

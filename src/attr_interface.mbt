@@ -36,52 +36,34 @@ pub trait TAttr: TNode {
 }
 
 ///|
-extern "js" fn attr_namespace_uri_ffi(obj : JsValue) -> String = "(obj) => obj.namespaceURI"
-
-///|
 /// [Attr.namespaceURI](https://developer.mozilla.org/en-US/docs/Web/API/Attr/namespaceURI)
 impl TAttr with namespace_uri(self : Self) -> String {
-  attr_namespace_uri_ffi(TJsValue::to_js(self))
+  attr_namespace_uri_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn attr_prefix_ffi(obj : JsValue) -> String = "(obj) => obj.prefix"
 
 ///|
 /// [Attr.prefix](https://developer.mozilla.org/en-US/docs/Web/API/Attr/prefix)
 impl TAttr with prefix(self : Self) -> String {
-  attr_prefix_ffi(TJsValue::to_js(self))
+  attr_prefix_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn attr_local_name_ffi(obj : JsValue) -> String = "(obj) => obj.localName"
 
 ///|
 /// [Attr.localName](https://developer.mozilla.org/en-US/docs/Web/API/Attr/localName)
 impl TAttr with local_name(self : Self) -> String {
-  attr_local_name_ffi(TJsValue::to_js(self))
+  attr_local_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn attr_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
 
 ///|
 /// [Attr.name](https://developer.mozilla.org/en-US/docs/Web/API/Attr/name)
 impl TAttr with name(self : Self) -> String {
-  attr_name_ffi(TJsValue::to_js(self))
+  attr_name_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn attr_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
 
 ///|
 /// [Attr.value](https://developer.mozilla.org/en-US/docs/Web/API/Attr/value)
 impl TAttr with value(self : Self) -> String {
-  attr_value_ffi(TJsValue::to_js(self))
+  attr_value_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn attr_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [Attr.value](https://developer.mozilla.org/en-US/docs/Web/API/Attr/value)
@@ -90,19 +72,13 @@ impl TAttr with set_value(self : Self, value : String) -> Unit {
 }
 
 ///|
-extern "js" fn attr_owner_element_ffi(obj : JsValue) -> Element = "(obj) => obj.ownerElement"
-
-///|
 /// [Attr.ownerElement](https://developer.mozilla.org/en-US/docs/Web/API/Attr/ownerElement)
 impl TAttr with owner_element(self : Self) -> Element {
-  attr_owner_element_ffi(TJsValue::to_js(self))
+  attr_owner_element_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
-
-///|
-extern "js" fn attr_specified_ffi(obj : JsValue) -> Bool = "(obj) => obj.specified"
 
 ///|
 /// [Attr.specified](https://developer.mozilla.org/en-US/docs/Web/API/Attr/specified)
 impl TAttr with specified(self : Self) -> Bool {
-  attr_specified_ffi(TJsValue::to_js(self))
+  attr_specified_ffi(TJsValue::to_js(self)).unsafe_cast()
 }

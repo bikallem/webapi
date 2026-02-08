@@ -1,0 +1,2 @@
+///|
+fn performance_observer_callback_ffi(f : JsValue) -> JsValue = "webapi_PerformanceObserverCallback" "new"
