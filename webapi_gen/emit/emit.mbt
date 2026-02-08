@@ -112,36 +112,211 @@ fn arg_mbt_type(
   (mbt_type, emits)
 }
 
-//============================ Render helpers ===========================
+//============================ Shared render helpers ===========================
 
 ///|
-fn render_is_undefined_method(buf : StringBuilder, type_name : String) -> Unit {
+fn render_is_undefined_wrapper(buf : StringBuilder, type_name : String) -> Unit {
   let ffi_name = "\{@type_mapping.snake_case(type_name)}_is_undefined_ffi"
-  buf
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(obj : \{type_name}) -> Bool = \"(obj) => obj === undefined\"",
-  )
-  ..write_string("\n\n")
-  .write_string(
+  buf.write_string(
     "pub fn \{type_name}::is_undefined(self : \{type_name}) -> Bool { \{ffi_name}(self) }",
   )
 }
 
 ///|
-fn render_empty_method(buf : StringBuilder, type_name : String) -> Unit {
-  let ffi_name = "\{@type_mapping.snake_case(type_name)}_empty_ffi"
-  buf
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
+fn render_is_undefined_ffi_js(buf : StringBuilder, type_name : String) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_is_undefined_ffi"
+  buf.write_string(
+    "extern \"js\" fn \{ffi_name}(obj : \{type_name}) -> Bool = \"(obj) => obj === undefined\"",
   )
-  ..write_string("\n\n")
-  .write_string(
+}
+
+///|
+fn render_is_undefined_ffi_wasm(
+  buf : StringBuilder,
+  type_name : String,
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_is_undefined_ffi"
+  buf.write_string(
+    "fn \{ffi_name}(obj : \{type_name}) -> Bool = \"JsValue\" \"isNull\"",
+  )
+}
+
+///|
+fn render_empty_wrapper(buf : StringBuilder, type_name : String) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_empty_ffi"
+  buf.write_string(
     "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }",
   )
 }
 
 ///|
-fn render_interface_definition(
+fn render_empty_ffi_js(buf : StringBuilder, type_name : String) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_empty_ffi"
+  buf.write_string(
+    "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
+  )
+}
+
+///|
+fn render_empty_ffi_wasm(buf : StringBuilder, type_name : String) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_empty_ffi"
+  buf.write_string(
+    "fn \{ffi_name}() -> \{type_name} = \"webapi_Dictionary\" \"empty\"",
+  )
+}
+
+///|
+fn render_dictionary_wrapper(
+  buf : StringBuilder,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_ffi"
+  let method_args = trait_method_impl_args(args)
+  buf.write_string(
+    "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
+  )
+  let call_args = func_call_args(args)
+  buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
+}
+
+///|
+fn render_dictionary_ffi_js(
+  buf : StringBuilder,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_ffi"
+  let ffi_args = args
+    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
+    .join(", ")
+  let ffi_js_args = args.map(arg => arg.original_name).join(", ")
+  buf
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \n",
+  )
+  ..write_string("#|(\{ffi_js_args}) => {\n")
+  .write_string("#|  const obj = {};\n")
+  for arg in args {
+    buf.write_string(
+      "#|  if (\{arg.original_name} !== undefined) obj.\{arg.original_name} = \{arg.original_name};\n",
+    )
+  }
+  buf..write_string("#|  return obj;\n").write_string("#|}")
+}
+
+///|
+fn render_dictionary_ffi_wasm(
+  buf : StringBuilder,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_ffi"
+  let ffi_args = args
+    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
+    .join(", ")
+  buf.write_string(
+    "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"webapi_\{type_name}\" \"new\"",
+  )
+}
+
+///|
+fn render_constructor_wrapper(
+  buf : StringBuilder,
+  constructor_name : String,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_\{@type_mapping.snake_case(constructor_name)}_ffi"
+  let method_args = trait_method_impl_args(args)
+  buf.write_string(
+    "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n",
+  )
+  let call_args = func_call_args(args)
+  buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
+}
+
+///|
+fn render_constructor_ffi_js(
+  buf : StringBuilder,
+  constructor_name : String,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_\{@type_mapping.snake_case(constructor_name)}_ffi"
+  let ffi_args = args
+    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
+    .join(", ")
+  let ffi_js_args = args.map(arg => arg.name).join(", ")
+  buf.write_string(
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
+  )
+}
+
+///|
+fn render_constructor_ffi_wasm(
+  buf : StringBuilder,
+  constructor_name : String,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_\{@type_mapping.snake_case(constructor_name)}_ffi"
+  let ffi_args = args
+    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
+    .join(", ")
+  let module_name = "webapi_\{type_name}"
+  buf.write_string(
+    "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"\{module_name}\" \"new\"",
+  )
+}
+
+///|
+fn render_callback_wrapper(
+  buf : StringBuilder,
+  name : String,
+  args : Array[CallbackArgEmit],
+  return_type : String,
+) -> Unit {
+  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
+  let closure_type = "(\{arg_types}) -> \{return_type}"
+  let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  buf.write_string(
+    "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
+  )
+}
+
+///|
+fn render_callback_ffi_js(
+  buf : StringBuilder,
+  name : String,
+  args : Array[CallbackArgEmit],
+  return_type : String,
+) -> Unit {
+  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
+  let closure_type = "(\{arg_types}) -> \{return_type}"
+  let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  buf.write_string(
+    "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
+  )
+}
+
+///|
+fn render_callback_ffi_wasm(
+  buf : StringBuilder,
+  name : String,
+  args : Array[CallbackArgEmit],
+  return_type : String,
+) -> Unit {
+  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
+  let closure_type = "(\{arg_types}) -> \{return_type}"
+  let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  buf.write_string(
+    "fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"webapi_\{name}\" \"new\"",
+  )
+}
+
+///|
+fn render_interface_definition_shared(
   buf : StringBuilder,
   interface_def : InterfaceDef,
 ) -> Unit {
@@ -167,37 +342,84 @@ fn render_interface_definition(
 }
 
 ///|
+fn render_interface_definition_js_ffi(
+  buf : StringBuilder,
+  interface_def : InterfaceDef,
+) -> Unit {
+  let ffi_decls = interface_def.methods
+    .map(meth => meth.ffi_emit_js().0)
+    .join("\n\n")
+  buf.write_string(ffi_decls)
+}
+
+///|
+fn render_interface_definition_wasm_ffi(
+  buf : StringBuilder,
+  interface_def : InterfaceDef,
+) -> Unit {
+  let module_name = "webapi_\{interface_def.trait_name}"
+  let ffi_decls = interface_def.methods
+    .map(meth => meth.ffi_emit_wasm(module_name).0)
+    .join("\n\n")
+  buf.write_string(ffi_decls)
+}
+
+//============================ Legacy combined render helpers (for mbt_code_gen) ===
+
+///|
+fn render_is_undefined_method(buf : StringBuilder, type_name : String) -> Unit {
+  render_is_undefined_ffi_js(buf, type_name)
+  buf.write_string("\n\n")
+  render_is_undefined_wrapper(buf, type_name)
+}
+
+///|
+fn render_empty_method(buf : StringBuilder, type_name : String) -> Unit {
+  render_empty_ffi_js(buf, type_name)
+  buf.write_string("\n\n")
+  render_empty_wrapper(buf, type_name)
+}
+
+///|
+fn render_interface_definition(
+  buf : StringBuilder,
+  interface_def : InterfaceDef,
+) -> Unit {
+  let mdn_url = mdn_interface_url(interface_def.trait_name)
+  buf
+  ..write_string("/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n")
+  .write_string(
+    "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
+  )
+  let trait_defs = interface_def.methods
+    .filter_map(meth => {
+      match meth.decl_emit() {
+        Code("") => None
+        Code(code) => Some(code)
+      }
+    })
+    .join("\n")
+  buf..write_string(trait_defs)..write_string("\n}").write_string("\n\n")
+  // Emit FFI + impl interleaved (legacy: FFI before impl for each method)
+  let method_outputs = interface_def.methods
+    .map(meth => {
+      let ffi = meth.ffi_emit_js().0
+      let impl_ = meth.impl_emit().0
+      "\{ffi}\n\n\{impl_}"
+    })
+    .join("\n\n")
+  buf.write_string(method_outputs)
+}
+
+///|
 fn render_dictionary_create(
   buf : StringBuilder,
   type_name : String,
   args : Array[@type_mapping.MethodArg],
 ) -> Unit {
-  let ffi_name = "\{@type_mapping.snake_case(type_name)}_ffi"
-  let ffi_args = args
-    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
-    .join(", ")
-  let ffi_js_args = args.map(arg => arg.original_name).join(", ")
-  buf
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \n",
-  )
-  ..write_string("#|(\{ffi_js_args}) => {\n")
-  .write_string("#|  const obj = {};\n")
-  for arg in args {
-    buf.write_string(
-      "#|  if (\{arg.original_name} !== undefined) obj.\{arg.original_name} = \{arg.original_name};\n",
-    )
-  }
-  buf
-  ..write_string("#|  return obj;\n")
-  ..write_string("#|}")
-  .write_string("\n\n")
-  let method_args = trait_method_impl_args(args)
-  buf.write_string(
-    "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
-  )
-  let call_args = func_call_args(args)
-  buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
+  render_dictionary_ffi_js(buf, type_name, args)
+  buf.write_string("\n\n")
+  render_dictionary_wrapper(buf, type_name, args)
 }
 
 ///|
@@ -207,22 +429,21 @@ fn render_constructor_method(
   type_name : String,
   args : Array[@type_mapping.MethodArg],
 ) -> Unit {
-  let ffi_name = "\{@type_mapping.snake_case(type_name)}_\{@type_mapping.snake_case(constructor_name)}_ffi"
-  let ffi_args = args
-    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
-    .join(", ")
-  let ffi_js_args = args.map(arg => arg.name).join(", ")
-  buf
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
-  )
-  .write_string("\n\n")
-  let method_args = trait_method_impl_args(args)
-  buf.write_string(
-    "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n",
-  )
-  let call_args = func_call_args(args)
-  buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
+  render_constructor_ffi_js(buf, constructor_name, type_name, args)
+  buf.write_string("\n\n")
+  render_constructor_wrapper(buf, constructor_name, type_name, args)
+}
+
+///|
+fn render_callback(
+  buf : StringBuilder,
+  name : String,
+  args : Array[CallbackArgEmit],
+  return_type : String,
+) -> Unit {
+  render_callback_ffi_js(buf, name, args, return_type)
+  buf.write_string("\n\n")
+  render_callback_wrapper(buf, name, args, return_type)
 }
 
 ///|
@@ -262,26 +483,6 @@ fn render_enum(
 }
 
 ///|
-fn render_callback(
-  buf : StringBuilder,
-  name : String,
-  args : Array[CallbackArgEmit],
-  return_type : String,
-) -> Unit {
-  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
-  let closure_type = "(\{arg_types}) -> \{return_type}"
-  let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  buf
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
-  )
-  ..write_string("\n\n")
-  .write_string(
-    "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
-  )
-}
-
-///|
 fn render_file_header(
   buf : StringBuilder,
   type_name : String,
@@ -298,7 +499,7 @@ fn render_file_header(
 //============================ Code generator ===========================
 
 ///|
-/// Generate MoonBit code from Emit array for js backend
+/// Generate MoonBit code from Emit array for js backend (legacy, combined output)
 pub fn mbt_code_gen(emits : Array[Emit]) -> String {
   let buf = StringBuilder::new()
   for i, emit in emits {
@@ -356,4 +557,172 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
     }
   }
   buf.to_string()
+}
+
+//============================ Multi-target code generator ===========================
+
+///|
+pub(all) struct MultiTargetCode {
+  shared : String
+  js_ffi : String
+  wasm_ffi : String
+}
+
+///|
+/// Generate multi-target MoonBit code from Emit array
+pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
+  let shared_buf = StringBuilder::new()
+  let js_buf = StringBuilder::new()
+  let wasm_buf = StringBuilder::new()
+  let mut shared_first = true
+  let mut js_first = true
+  let mut wasm_first = true
+  fn append_shared(s : String) {
+    if !shared_first {
+      shared_buf.write_string("\n\n")
+    }
+    shared_buf.write_string(s)
+    shared_first = false
+  }
+
+  fn append_js(s : String) {
+    if !js_first {
+      js_buf.write_string("\n\n")
+    }
+    js_buf.write_string(s)
+    js_first = false
+  }
+
+  fn append_wasm(s : String) {
+    if !wasm_first {
+      wasm_buf.write_string("\n\n")
+    }
+    wasm_buf.write_string(s)
+    wasm_first = false
+  }
+
+  for emit in emits {
+    match emit {
+      Emit::External(TypeName(type_name)) => {
+        let mdn_url = mdn_interface_url(type_name)
+        append_shared(
+          "/// [\{type_name}](\{mdn_url})\n#external\npub type \{type_name}",
+        )
+      }
+      Emit::ImplTJsValue(TypeName(type_name)) =>
+        append_shared(
+          "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",
+        )
+      Emit::IntoMethod(TypeName(type_name)) =>
+        append_shared(
+          "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
+        )
+      Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
+        append_shared("pub impl \{trait_name} for \{type_name}")
+      Emit::UnionArgTrait(TraitName(trait_name)) => {
+        let b = StringBuilder::new()
+        b
+        ..write_string("pub(open) trait \{trait_name} {\n")
+        ..write_string("  to_js(self : Self) -> JsValue\n")
+        .write_string("}")
+        append_shared(b.to_string())
+      }
+      Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) =>
+        // Use { TJsValue::to_js(self) } instead of %identity for cross-target compatibility
+        append_shared(
+          "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue {\n  TJsValue::to_js(self)\n}",
+        )
+      Emit::Enum(TypeName(name), variants) => {
+        let b = StringBuilder::new()
+        render_enum(b, name, variants)
+        append_shared(b.to_string())
+      }
+      Emit::TypedefAlias(TypeName(name), target_type) =>
+        append_shared("pub type \{name} = \{target_type}")
+      Emit::Const(ConstName(const_name), TypeName(type_name), value) =>
+        append_shared(
+          "pub const \{const_name}: \{type_name} = \{value}",
+        )
+      Emit::FileHeader(TypeName(type_name), Specs(specs)) => {
+        let b = StringBuilder::new()
+        render_file_header(b, type_name, specs)
+        append_shared(b.to_string())
+      }
+      Emit::IsUndefinedMethod(TypeName(type_name)) => {
+        let sb = StringBuilder::new()
+        render_is_undefined_wrapper(sb, type_name)
+        append_shared(sb.to_string())
+        let jb = StringBuilder::new()
+        render_is_undefined_ffi_js(jb, type_name)
+        append_js(jb.to_string())
+        let wb = StringBuilder::new()
+        render_is_undefined_ffi_wasm(wb, type_name)
+        append_wasm(wb.to_string())
+      }
+      Emit::EmptyMethod(TypeName(type_name)) => {
+        let sb = StringBuilder::new()
+        render_empty_wrapper(sb, type_name)
+        append_shared(sb.to_string())
+        let jb = StringBuilder::new()
+        render_empty_ffi_js(jb, type_name)
+        append_js(jb.to_string())
+        let wb = StringBuilder::new()
+        render_empty_ffi_wasm(wb, type_name)
+        append_wasm(wb.to_string())
+      }
+      Emit::InterfaceDefinition(interface_def) => {
+        let sb = StringBuilder::new()
+        render_interface_definition_shared(sb, interface_def)
+        append_shared(sb.to_string())
+        let jb = StringBuilder::new()
+        render_interface_definition_js_ffi(jb, interface_def)
+        append_js(jb.to_string())
+        let wb = StringBuilder::new()
+        render_interface_definition_wasm_ffi(wb, interface_def)
+        append_wasm(wb.to_string())
+      }
+      Emit::DictionaryCreate(TypeName(type_name), args) => {
+        let sb = StringBuilder::new()
+        render_dictionary_wrapper(sb, type_name, args)
+        append_shared(sb.to_string())
+        let jb = StringBuilder::new()
+        render_dictionary_ffi_js(jb, type_name, args)
+        append_js(jb.to_string())
+        let wb = StringBuilder::new()
+        render_dictionary_ffi_wasm(wb, type_name, args)
+        append_wasm(wb.to_string())
+      }
+      Emit::ConstructorMethod(
+        ConstructorName(constructor_name),
+        TypeName(type_name),
+        args
+      ) => {
+        let sb = StringBuilder::new()
+        render_constructor_wrapper(sb, constructor_name, type_name, args)
+        append_shared(sb.to_string())
+        let jb = StringBuilder::new()
+        render_constructor_ffi_js(jb, constructor_name, type_name, args)
+        append_js(jb.to_string())
+        let wb = StringBuilder::new()
+        render_constructor_ffi_wasm(wb, constructor_name, type_name, args)
+        append_wasm(wb.to_string())
+      }
+      Emit::Callback(TypeName(name), args, TypeName(return_type)) => {
+        let sb = StringBuilder::new()
+        render_callback_wrapper(sb, name, args, return_type)
+        append_shared(sb.to_string())
+        let jb = StringBuilder::new()
+        render_callback_ffi_js(jb, name, args, return_type)
+        append_js(jb.to_string())
+        let wb = StringBuilder::new()
+        render_callback_ffi_wasm(wb, name, args, return_type)
+        append_wasm(wb.to_string())
+      }
+    }
+  }
+  MultiTargetCode::{
+    shared: shared_buf.to_string(),
+    js_ffi: js_buf.to_string(),
+    wasm_ffi: wasm_buf.to_string(),
+  }
 }
