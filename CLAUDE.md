@@ -114,6 +114,12 @@ impl TElement for Element with get_attribute(self, name) {
 4. Run `moon fmt` to format
 5. Run `moon info --target js` to update `.mbti` interface files
 
+## Release Checklist
+
+- Update `README.mbt.md` (install version, code examples, any new APIs)
+- Update `CHANGELOG.md`
+- Bump version in `moon.mod.json`
+
 ## Important Notes
 
 - **Target**: This library targets the JS backend only (`--target js`)
