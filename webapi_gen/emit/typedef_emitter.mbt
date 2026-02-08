@@ -11,7 +11,12 @@ pub impl Emitter for TypedefEmitter with emit(
 ) -> (Filename, Array[Emit]) {
   let filename = Filename("\{snake_case(name)}_typedef.mbt")
   let typedef_def = self.idl.typedefs[name]
-  let emits = [Emit::FileHeader(TypeName(typedef_def.name), specs_from_optional(typedef_def.spec))]
+  let emits = [
+    Emit::FileHeader(
+      TypeName(typedef_def.name),
+      specs_from_optional(typedef_def.spec),
+    ),
+  ]
   let typedef_emits = match typedef_def.type_ {
     Union(options) => {
       let emits = []

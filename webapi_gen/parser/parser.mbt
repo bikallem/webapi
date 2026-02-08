@@ -468,13 +468,7 @@ fn Parser::parse_attribute_body(
   let type_with_ea = self.parse_type_with_extended_attributes()
   let name = self.parse_attribute_name()
   self.skip(TK_SEMICOLON)
-  {
-    type_: type_with_ea.type_,
-    name,
-    is_readonly,
-    static_,
-    is_inherit,
-  }
+  { type_: type_with_ea.type_, name, is_readonly, static_, is_inherit }
 }
 
 ///|

@@ -78,7 +78,7 @@ fn PartialMerged::merge_dictionary(
 /// Merges partial definitions from filtered IDL definitions
 pub fn merge_partials(
   filtered : Array[@parser.DefinitionExtendedAttributes],
-  logger~ : (String) -> Unit = ignore,
+  logger? : (String) -> Unit = ignore,
 ) -> PartialMerged {
   let partial_merged = PartialMerged::{
     interfaces: Map::new(),
@@ -126,7 +126,12 @@ pub fn merge_partials(
         partial_merged.merge_mixin(pmxn.name, pmxn.members, def.spec)
       Mixin(mxn) => partial_merged.merge_mixin(mxn.name, mxn.members, def.spec)
       PartialInterface(piface) =>
-        partial_merged.merge_interface(piface.name, piface.members, None, hashset_from_optional(def.spec))
+        partial_merged.merge_interface(
+          piface.name,
+          piface.members,
+          None,
+          hashset_from_optional(def.spec),
+        )
       Interface(iface) =>
         partial_merged.merge_interface(
           iface.name,

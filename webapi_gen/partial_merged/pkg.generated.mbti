@@ -7,7 +7,7 @@ import {
 }
 
 // Values
-pub fn merge_partials(Array[@parser.DefinitionExtendedAttributes]) -> PartialMerged
+pub fn merge_partials(Array[@parser.DefinitionExtendedAttributes], logger? : (String) -> Unit) -> PartialMerged
 
 // Errors
 
