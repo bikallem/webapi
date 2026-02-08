@@ -7,5 +7,3 @@
 pub type NavigationPrecommitHandler
 
 pub impl TJsValue for NavigationPrecommitHandler with to_js(self: NavigationPrecommitHandler) -> JsValue = "%identity"
-
-pub fn NavigationPrecommitHandler::new(f : (NavigationPrecommitController) -> JsPromise[Unit]) -> NavigationPrecommitHandler { navigation_precommit_handler_ffi(js_of(f)).unsafe_cast() }

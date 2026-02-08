@@ -7,5 +7,3 @@
 pub type XPathNSResolver
 
 pub impl TJsValue for XPathNSResolver with to_js(self: XPathNSResolver) -> JsValue = "%identity"
-
-pub fn XPathNSResolver::new(f : (String) -> String) -> XPathNSResolver { x_path_ns_resolver_ffi(js_of(f)).unsafe_cast() }

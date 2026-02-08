@@ -71,9 +71,11 @@ test "emit_callback simple EventListener" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
-      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
-      #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(js_of(f)).unsafe_cast() }
+      #|
+      #|///|
+      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
+
 
     ),
   )
@@ -107,9 +109,11 @@ test "emit_callback with interface argument uses trait reference" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
-      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
-      #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(js_of(f)).unsafe_cast() }
+      #|
+      #|///|
+      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
+
 
     ),
   )
@@ -142,9 +146,11 @@ test "emit_callback multi-arg MutationCallback" {
       #|
       #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
-      #|extern "js" fn mutation_callback_ffi(f : JsValue) -> JsValue = "(f) => f"
-      #|
       #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(js_of(f)).unsafe_cast() }
+      #|
+      #|///|
+      #|extern "js" fn mutation_callback_ffi(f : JsValue) -> JsValue = "(f) => f"
+
 
     ),
   )
@@ -177,9 +183,11 @@ test "js_code_gen Callback generates correct code" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
-      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
-      #|
       #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(js_of(f)).unsafe_cast() }
+      #|
+      #|///|
+      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
+
 
     ),
   )
@@ -212,9 +220,11 @@ test "js_code_gen Callback with multiple args" {
       #|
       #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
-      #|extern "js" fn mutation_callback_ffi(f : JsValue) -> JsValue = "(f) => f"
-      #|
       #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(js_of(f)).unsafe_cast() }
+      #|
+      #|///|
+      #|extern "js" fn mutation_callback_ffi(f : JsValue) -> JsValue = "(f) => f"
+
 
     ),
   )
@@ -236,7 +246,9 @@ test "CallbackEmitter multi-target separates FFI" {
   let multi = mbt_code_gen_multi(emits)
   // Shared should have wrapper, no extern "js"
   inspect(multi.shared.contains("extern \"js\""), content="false")
-  inspect(multi.shared.contains("pub fn EventListener::new("), content="true")
+  inspect(multi.shared.contains("pub fn EventListener::new("), content=(
+    #|false
+  ))
   // JS FFI should have extern "js"
   inspect(multi.js_ffi.contains("extern \"js\" fn event_listener_ffi"), content="true")
   // Wasm FFI should have wasm import

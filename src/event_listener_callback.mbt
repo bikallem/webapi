@@ -7,5 +7,3 @@
 pub type EventListener
 
 pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
-
-pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(js_of(f)).unsafe_cast() }

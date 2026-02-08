@@ -7,5 +7,3 @@
 pub type PerformanceObserverCallback
 
 pub impl TJsValue for PerformanceObserverCallback with to_js(self: PerformanceObserverCallback) -> JsValue = "%identity"
-
-pub fn PerformanceObserverCallback::new(f : (PerformanceObserverEntryList, PerformanceObserver, PerformanceObserverCallbackOptions) -> Unit) -> PerformanceObserverCallback { performance_observer_callback_ffi(js_of(f)).unsafe_cast() }

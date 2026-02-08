@@ -271,7 +271,9 @@ fn render_constructor_ffi_wasm(
 }
 
 ///|
-fn render_callback_wrapper(
+/// Render callback wrapper + FFI for the JS target.
+/// Uses js_of() to convert the closure to JsValue via %identity (works on JS backend).
+fn render_callback_js(
   buf : StringBuilder,
   name : String,
   args : Array[CallbackArgEmit],
@@ -280,37 +282,61 @@ fn render_callback_wrapper(
   let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
   let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  // Use js_of() to convert closure to JsValue, unsafe_cast result back to callback type
   buf.write_string(
     "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(js_of(f)).unsafe_cast() }",
   )
-}
-
-///|
-fn render_callback_ffi_js(
-  buf : StringBuilder,
-  name : String,
-  _args : Array[CallbackArgEmit],
-  _return_type : String,
-) -> Unit {
-  let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  // Takes JsValue (closure converted via js_of), returns JsValue
+  buf.write_string("\n\n///|\n")
   buf.write_string(
     "extern \"js\" fn \{ffi_name}(f : JsValue) -> JsValue = \"(f) => f\"",
   )
 }
 
 ///|
-fn render_callback_ffi_wasm(
+/// Render callback wrapper + FFI for the wasm-gc target.
+/// Wraps the user's closure in a JsValue-only closure so MoonBit's make_closure
+/// mechanism handles the closure-to-JS-function conversion properly.
+fn render_callback_wasm(
   buf : StringBuilder,
   name : String,
-  _args : Array[CallbackArgEmit],
-  _return_type : String,
+  args : Array[CallbackArgEmit],
+  return_type : String,
 ) -> Unit {
+  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
+  let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  // Takes JsValue (closure converted via js_of), returns JsValue
+  let n = args.length()
+  // Build wrapper closure: (JsValue, ...) -> JsValue/Unit
+  // that calls the original function with unsafe_cast on each arg
+  let wasm_params : Array[String] = []
+  let cast_args : Array[String] = []
+  for i in 0..<n {
+    let p = "a\{i}"
+    wasm_params.push("\{p} : JsValue")
+    cast_args.push("\{p}.unsafe_cast()")
+  }
+  let wasm_params_str = wasm_params.join(", ")
+  let wasm_types_str = Array::make(n, "JsValue").join(", ")
+  let cast_args_str = cast_args.join(", ")
+  let void_return = return_type == "Unit"
+  let wasm_ret = if void_return { "Unit" } else { "JsValue" }
+  let wasm_closure_type = "(\{wasm_types_str}) -> \{wasm_ret}"
+  // Wrapper function
+  buf.write_string("pub fn \{name}::new(f : \{closure_type}) -> \{name} {\n")
+  if void_return {
+    buf.write_string(
+      "  let w : \{wasm_closure_type} = fn(\{wasm_params_str}) { f(\{cast_args_str}) }\n",
+    )
+  } else {
+    buf.write_string(
+      "  let w : \{wasm_closure_type} = fn(\{wasm_params_str}) { TJsValue::to_js(f(\{cast_args_str})) }\n",
+    )
+  }
+  buf.write_string("  \{ffi_name}(w).unsafe_cast()\n")
+  buf.write_string("}")
+  // FFI declaration
+  buf.write_string("\n\n///|\n")
   buf.write_string(
-    "fn \{ffi_name}(f : JsValue) -> JsValue = \"webapi_\{name}\" \"new\"",
+    "fn \{ffi_name}(f : \{wasm_closure_type}) -> JsValue = \"webapi_\{name}\" \"new\"",
   )
 }
 
@@ -440,9 +466,7 @@ fn render_callback(
   args : Array[CallbackArgEmit],
   return_type : String,
 ) -> Unit {
-  render_callback_ffi_js(buf, name, args, return_type)
-  buf.write_string("\n\n")
-  render_callback_wrapper(buf, name, args, return_type)
+  render_callback_js(buf, name, args, return_type)
 }
 
 ///|
@@ -708,14 +732,13 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         append_wasm(wb.to_string())
       }
       Emit::Callback(TypeName(name), args, TypeName(return_type)) => {
-        let sb = StringBuilder::new()
-        render_callback_wrapper(sb, name, args, return_type)
-        append_shared(sb.to_string())
+        // Callback wrapper + FFI are target-specific because wasm-gc needs
+        // closure wrapping (can't use %identity to convert closures to externref)
         let jb = StringBuilder::new()
-        render_callback_ffi_js(jb, name, args, return_type)
+        render_callback_js(jb, name, args, return_type)
         append_js(jb.to_string())
         let wb = StringBuilder::new()
-        render_callback_ffi_wasm(wb, name, args, return_type)
+        render_callback_wasm(wb, name, args, return_type)
         append_wasm(wb.to_string())
       }
     }

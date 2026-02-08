@@ -7,5 +7,3 @@
 pub type FrameRequestCallback
 
 pub impl TJsValue for FrameRequestCallback with to_js(self: FrameRequestCallback) -> JsValue = "%identity"
-
-pub fn FrameRequestCallback::new(f : (DOMHighResTimeStamp) -> Unit) -> FrameRequestCallback { frame_request_callback_ffi(js_of(f)).unsafe_cast() }

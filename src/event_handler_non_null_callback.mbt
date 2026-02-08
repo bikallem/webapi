@@ -7,5 +7,3 @@
 pub type EventHandlerNonNull
 
 pub impl TJsValue for EventHandlerNonNull with to_js(self: EventHandlerNonNull) -> JsValue = "%identity"
-
-pub fn EventHandlerNonNull::new(f : (Event) -> JsValue) -> EventHandlerNonNull { event_handler_non_null_ffi(js_of(f)).unsafe_cast() }
