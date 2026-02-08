@@ -39,6 +39,22 @@ fn emit_js_preamble() -> String {
     #|    empty: () => ({})
     #|  },
     #|
+    #|  webapi_Primitives: {
+    #|    boolToJs: (v) => v !== 0,
+    #|    intToJs: (v) => v,
+    #|    uintToJs: (v) => v >>> 0,
+    #|    int64ToJs: (v) => Number(v),
+    #|    uint64ToJs: (v) => Number(v),
+    #|    floatToJs: (v) => v,
+    #|    doubleToJs: (v) => v
+    #|  },
+    #|
+    #|  webapi_Global: {
+    #|    document: () => document,
+    #|    window: () => window,
+    #|    navigator: () => navigator
+    #|  },
+    #|
   preamble
 }
 
@@ -147,6 +163,48 @@ fn emit_js_interface_module(
 }
 
 ///|
+/// Emit a JS module for a dictionary
+fn emit_js_dictionary_module(
+  dict : @flattened_idl.MergedDictionaryIR,
+) -> String {
+  let buf = StringBuilder::new()
+  buf.write_string("  webapi_\{dict.name}: {\n")
+  let entries : Array[String] = []
+
+  // Dictionary constructor: new(arg1, arg2, ...) => { const obj = {}; if (arg1 !== undefined) obj.field1 = arg1; ... return obj; }
+  let arg_names : Array[String] = []
+  for mem in dict.members {
+    arg_names.push(mem.name)
+  }
+  let params = arg_names.join(", ")
+  let ctor_buf = StringBuilder::new()
+  ctor_buf.write_string("    new: (\{params}) => {\n")
+  ctor_buf.write_string("      const obj = {};\n")
+  for mem in dict.members {
+    ctor_buf.write_string(
+      "      if (\{mem.name} !== undefined) obj.\{mem.name} = \{mem.name};\n",
+    )
+  }
+  ctor_buf.write_string("      return obj;\n")
+  ctor_buf.write_string("    }")
+  entries.push(ctor_buf.to_string())
+  buf.write_string(entries.join(",\n"))
+  if entries.length() > 0 {
+    buf.write_string("\n")
+  }
+  buf.write_string("  }")
+  buf.to_string()
+}
+
+///|
+/// Emit a JS module for a callback
+fn emit_js_callback_module(
+  cb : @parser.CallbackFunctionDefinition,
+) -> String {
+  "  webapi_\{cb.name}: {\n    new: (f) => f\n  }"
+}
+
+///|
 /// Emit the complete JS runtime from FlattenedIdl
 pub fn emit_js_runtime(flattened : @flattened_idl.FlattenedIdl) -> String {
   let buf = StringBuilder::new()
@@ -159,6 +217,16 @@ pub fn emit_js_runtime(flattened : @flattened_idl.FlattenedIdl) -> String {
   // Interfaces
   for _name, iface in flattened.interfaces {
     modules.push(emit_js_interface_module(iface))
+  }
+
+  // Dictionaries
+  for _name, dict in flattened.dictionaries {
+    modules.push(emit_js_dictionary_module(dict))
+  }
+
+  // Callbacks
+  for _name, cb in flattened.callbacks {
+    modules.push(emit_js_callback_module(cb))
   }
   buf.write_string(modules.join(",\n\n"))
   buf.write_string("\n};\n")
