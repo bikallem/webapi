@@ -35,13 +35,8 @@ pub impl Emitter for CallbackEmitter with emit(
     self.type_registry,
   )
   emits.push_iter(return_emits.iter())
-  let specs = @hashset.HashSet::new()
-  match cb_def.spec {
-    Some(s) => specs.add(s)
-    None => ()
-  }
   let emits = [
-    Emit::FileHeader(TypeName(name), Specs(specs)),
+    Emit::FileHeader(TypeName(name), specs_from_optional(cb_def.spec)),
     Emit::External(cb_def.name),
     Emit::ImplTJsValue(cb_def.name),
     Emit::Callback(cb_def.name, args, TypeName(return_type.name())),

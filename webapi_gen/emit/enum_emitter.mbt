@@ -20,15 +20,10 @@ pub impl Emitter for EnumEmitter with emit(self : EnumEmitter, name : String) ->
     }
     variants.push(EnumVariantEmit::{ variant_name, original_value })
   }
-  let specs = @hashset.HashSet::new()
-  match enum_.spec {
-    Some(s) => specs.add(s)
-    None => ()
-  }
   (
     filename,
     [
-      Emit::FileHeader(TypeName(enum_.name), Specs(specs)),
+      Emit::FileHeader(TypeName(enum_.name), specs_from_optional(enum_.spec)),
       Emit::Enum(TypeName(enum_.name), variants),
     ],
   )

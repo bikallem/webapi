@@ -20,6 +20,16 @@ struct ConstName(String) derive(Show, ToJson)
 struct Specs(@hashset.HashSet[String]) derive(Show, ToJson)
 
 ///|
+fn specs_from_optional(spec : String?) -> Specs {
+  let specs = @hashset.HashSet::new()
+  match spec {
+    Some(s) => specs.add(s)
+    None => ()
+  }
+  Specs(specs)
+}
+
+///|
 /// MDN documentation URL base
 let mdn_base_url : String = "https://developer.mozilla.org/en-US/docs/Web/API"
 

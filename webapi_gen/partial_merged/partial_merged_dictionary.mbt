@@ -14,12 +14,7 @@ fn PartialMergedDictionary::new(
   inheritance : String?,
   spec : String?,
 ) -> PartialMergedDictionary {
-  let specs = @hashset.HashSet::new()
-  match spec {
-    Some(s) => specs.add(s)
-    None => ()
-  }
-  { name, inheritance, members, specs }
+  { name, inheritance, members, specs: hashset_from_optional(spec) }
 }
 
 ///|

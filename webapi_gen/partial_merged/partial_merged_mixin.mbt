@@ -12,12 +12,7 @@ fn PartialMergedMixin::new(
   members : Array[@parser.InterfaceMemberExtendedAttributes],
   spec : String?,
 ) -> PartialMergedMixin {
-  let specs = @hashset.HashSet::new()
-  match spec {
-    Some(s) => specs.add(s)
-    None => ()
-  }
-  { name, members, specs }
+  { name, members, specs: hashset_from_optional(spec) }
 }
 
 ///|

@@ -1,4 +1,14 @@
 ///|
+fn hashset_from_optional(spec : String?) -> @hashset.HashSet[String] {
+  let specs = @hashset.HashSet::new()
+  match spec {
+    Some(s) => specs.add(s)
+    None => ()
+  }
+  specs
+}
+
+///|
 /// Visitor that merges partial interfaces, mixins, and dictionaries into their
 /// primary definitions.
 pub struct PartialMerged {
@@ -114,27 +124,15 @@ pub fn merge_partials(
       PartialMixin(pmxn) =>
         partial_merged.merge_mixin(pmxn.name, pmxn.members, def.spec)
       Mixin(mxn) => partial_merged.merge_mixin(mxn.name, mxn.members, def.spec)
-      PartialInterface(piface) => {
-        let specs = @hashset.HashSet::new()
-        match def.spec {
-          Some(s) => specs.add(s)
-          None => ()
-        }
-        partial_merged.merge_interface(piface.name, piface.members, None, specs)
-      }
-      Interface(iface) => {
-        let specs = @hashset.HashSet::new()
-        match def.spec {
-          Some(s) => specs.add(s)
-          None => ()
-        }
+      PartialInterface(piface) =>
+        partial_merged.merge_interface(piface.name, piface.members, None, hashset_from_optional(def.spec))
+      Interface(iface) =>
         partial_merged.merge_interface(
           iface.name,
           iface.members,
           iface.inheritance,
-          specs,
+          hashset_from_optional(def.spec),
         )
-      }
       Includes(inc) => partial_merged.include_statements.push(inc)
       PartialNamespace(_) => println("Partial namespace not supported")
       Namespace(_) => println("Namespace not supported")
