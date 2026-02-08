@@ -23,7 +23,7 @@ All bindings are automatically generated from official WebIDL specifications, en
 Add this package to your MoonBit project:
 
 ```bash
-moon add bikallem/webapi
+moon add bikallem/webapi@0.3.0
 ```
 
 ## Quick Start
@@ -45,7 +45,7 @@ fn main {
   count_display
   ..set_attribute("id", "count-display")
   ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
-  ..set_text_content("0")
+  .set_text_content("0")
 
   // Update display function
   let update_display = fn() {
@@ -56,7 +56,7 @@ fn main {
   let increment_btn = @webapi.document.create_element("button")
   increment_btn
   ..set_text_content("+")
-  ..add_event_listener(
+  .add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
       count = count + 1
@@ -94,23 +94,23 @@ fn main {
 
   // Create gradient
   let gradient = ctx.create_linear_gradient(0.0, 0.0, 0.0, 300.0)
-  gradient..add_color_stop(0.0, "#1e3c72")..add_color_stop(1.0, "#87CEEB")
+  gradient..add_color_stop(0.0, "#1e3c72").add_color_stop(1.0, "#87CEEB")
 
   // Draw with gradient
-  ctx..set_fill_style(gradient)..fill_rect(0.0, 0.0, 800.0, 300.0)
+  ctx..set_fill_style(gradient).fill_rect(0.0, 0.0, 800.0, 300.0)
 
   // Draw shapes (arc uses radians: 2π for full circle)
   ctx
   ..set_fill_style("#228B22")
   ..begin_path()
   ..arc(400.0, 250.0, 50.0, 0.0, @math.pi * 2.0)
-  ..fill()
+  .fill()
 
   // Draw text
   ctx
   ..set_font("bold 24px sans-serif")
   ..set_fill_style("#FFFFFF")
-  ..fill_text("Hello, MoonBit!", 320.0, 400.0)
+  .fill_text("Hello, MoonBit!", 320.0, 400.0)
 }
 ```
 
@@ -168,13 +168,13 @@ element.add_event_listener(
 
 ### Method Chaining
 
-Most setter methods return `Unit`, enabling method chaining with `..`:
+Most setter methods return `Unit`, enabling method chaining with `..` (use `.` for the last call in the chain):
 
 ```moonbit nocheck
 element
 ..set_attribute("id", "my-element")
 ..set_attribute("class", "container")
-..set_text_content("Hello!")
+.set_text_content("Hello!")
 ```
 
 ### Optional Parameters
@@ -350,7 +350,7 @@ pub impl TEventTarget for Element
 npm install
 
 # Generate bindings from WebIDL
-cd webapi_gen && moon run main
+cd webapi_gen && moon run cmd/main
 
 # Type-check generated code
 moon check --target js
