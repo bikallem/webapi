@@ -2,21 +2,16 @@
 // MoonBit type: TreeWalker
 // Specifications: dom.idl
 
-///|
 /// [TreeWalker](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker)
 #external
 pub type TreeWalker
 
-///|
-pub impl TJsValue for TreeWalker with to_js(self : TreeWalker) -> JsValue = "%identity"
+pub impl TJsValue for TreeWalker with to_js(self: TreeWalker) -> JsValue = "%identity"
 
-///|
-pub fn[T : TTreeWalker] TreeWalker::into(self : TreeWalker) -> T = "%identity"
+pub fn[T: TTreeWalker] TreeWalker::into(self : TreeWalker) -> T = "%identity"
 
-///|
 pub impl TTreeWalker for TreeWalker
 
-///|
 /// [TreeWalker](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker) interface.
 pub trait TTreeWalker: TJsValue {
   root(self : Self) -> Node = _
@@ -33,40 +28,32 @@ pub trait TTreeWalker: TJsValue {
   next_node(self : Self) -> Node? = _
 }
 
-///|
 /// [TreeWalker.root](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/root)
 impl TTreeWalker with root(self : Self) -> Node {
   tree_walker_root_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [TreeWalker.whatToShow](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/whatToShow)
 impl TTreeWalker with what_to_show(self : Self) -> UInt {
   tree_walker_what_to_show_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [TreeWalker.filter](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/filter)
 impl TTreeWalker with filter(self : Self) -> NodeFilter {
   tree_walker_filter_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [TreeWalker.currentNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/currentNode)
 impl TTreeWalker with current_node(self : Self) -> Node {
   tree_walker_current_node_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [TreeWalker.currentNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/currentNode)
-impl TTreeWalker with set_current_node(self : Self, current_node : &TNode) -> Unit {
-  tree_walker_set_current_node_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(current_node),
-  )
+impl TTreeWalker with set_current_node(self : Self, 
+current_node : &TNode) -> Unit {
+  tree_walker_set_current_node_ffi(TJsValue::to_js(self), TJsValue::to_js(current_node))
 }
 
-///|
 /// [TreeWalker.parentNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/parentNode)
 impl TTreeWalker with parent_node(self : Self) -> Node? {
   let result = tree_walker_parent_node_ffi(TJsValue::to_js(self))
@@ -77,7 +64,6 @@ impl TTreeWalker with parent_node(self : Self) -> Node? {
   }
 }
 
-///|
 /// [TreeWalker.firstChild](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/firstChild)
 impl TTreeWalker with first_child(self : Self) -> Node? {
   let result = tree_walker_first_child_ffi(TJsValue::to_js(self))
@@ -88,7 +74,6 @@ impl TTreeWalker with first_child(self : Self) -> Node? {
   }
 }
 
-///|
 /// [TreeWalker.lastChild](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/lastChild)
 impl TTreeWalker with last_child(self : Self) -> Node? {
   let result = tree_walker_last_child_ffi(TJsValue::to_js(self))
@@ -99,7 +84,6 @@ impl TTreeWalker with last_child(self : Self) -> Node? {
   }
 }
 
-///|
 /// [TreeWalker.previousSibling](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/previousSibling)
 impl TTreeWalker with previous_sibling(self : Self) -> Node? {
   let result = tree_walker_previous_sibling_ffi(TJsValue::to_js(self))
@@ -110,7 +94,6 @@ impl TTreeWalker with previous_sibling(self : Self) -> Node? {
   }
 }
 
-///|
 /// [TreeWalker.nextSibling](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/nextSibling)
 impl TTreeWalker with next_sibling(self : Self) -> Node? {
   let result = tree_walker_next_sibling_ffi(TJsValue::to_js(self))
@@ -121,7 +104,6 @@ impl TTreeWalker with next_sibling(self : Self) -> Node? {
   }
 }
 
-///|
 /// [TreeWalker.previousNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/previousNode)
 impl TTreeWalker with previous_node(self : Self) -> Node? {
   let result = tree_walker_previous_node_ffi(TJsValue::to_js(self))
@@ -132,7 +114,6 @@ impl TTreeWalker with previous_node(self : Self) -> Node? {
   }
 }
 
-///|
 /// [TreeWalker.nextNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/nextNode)
 impl TTreeWalker with next_node(self : Self) -> Node? {
   let result = tree_walker_next_node_ffi(TJsValue::to_js(self))

@@ -1,2 +1,1 @@
-///|
 fn custom_element_constructor_ffi(f : JsValue) -> JsValue = "webapi_CustomElementConstructor" "new"

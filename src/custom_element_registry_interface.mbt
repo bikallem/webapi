@@ -2,116 +2,66 @@
 // MoonBit type: CustomElementRegistry
 // Specifications: html.idl
 
-///|
 /// [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)
 #external
 pub type CustomElementRegistry
 
-///|
-pub impl TJsValue for CustomElementRegistry with to_js(
-  self : CustomElementRegistry,
-) -> JsValue = "%identity"
+pub impl TJsValue for CustomElementRegistry with to_js(self: CustomElementRegistry) -> JsValue = "%identity"
 
-///|
-pub fn[T : TCustomElementRegistry] CustomElementRegistry::into(
-  self : CustomElementRegistry,
-) -> T = "%identity"
+pub fn[T: TCustomElementRegistry] CustomElementRegistry::into(self : CustomElementRegistry) -> T = "%identity"
 
-///|
 pub impl TCustomElementRegistry for CustomElementRegistry
 
-///|
 pub fn CustomElementRegistry::new() -> CustomElementRegistry {
   custom_element_registry_new_ffi()
 }
 
-///|
 /// [CustomElementRegistryGet](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistryGet)
 #external
 pub type CustomElementRegistryGet
 
-///|
-pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::into(
-  self : CustomElementRegistryGet,
-) -> T = "%identity"
+pub fn[T: TCustomElementRegistryGet] CustomElementRegistryGet::into(self : CustomElementRegistryGet) -> T = "%identity"
 
-///|
-pub fn CustomElementRegistryGet::is_undefined(
-  self : CustomElementRegistryGet,
-) -> Bool {
-  custom_element_registry_get_is_undefined_ffi(self)
-}
+pub fn CustomElementRegistryGet::is_undefined(self : CustomElementRegistryGet) -> Bool { custom_element_registry_get_is_undefined_ffi(self) }
 
-///|
-pub impl TCustomElementRegistryGet for CustomElementRegistryGet with to_js(
-  self : CustomElementRegistryGet,
-) -> JsValue = "%identity"
+pub impl TCustomElementRegistryGet for CustomElementRegistryGet with to_js(self : CustomElementRegistryGet) -> JsValue = "%identity"
 
-///|
 pub(open) trait TCustomElementRegistryGet {
   to_js(self : Self) -> JsValue
 }
 
-///|
-pub impl TCustomElementRegistryGet for CustomElementConstructor with to_js(
-  self : CustomElementConstructor,
-) -> JsValue = "%identity"
+pub impl TCustomElementRegistryGet for CustomElementConstructor with to_js(self : CustomElementConstructor) -> JsValue = "%identity"
 
-///|
-pub impl TCustomElementRegistryGet for JsUndefined with to_js(
-  self : JsUndefined,
-) -> JsValue = "%identity"
+pub impl TCustomElementRegistryGet for JsUndefined with to_js(self : JsUndefined) -> JsValue = "%identity"
 
-///|
 /// [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry) interface.
 pub trait TCustomElementRegistry: TJsValue {
-  define_(
-    self : Self,
-    name : String,
-    constructor_ : CustomElementConstructor,
-    options? : ElementDefinitionOptions,
-  ) -> Unit = _
+  define_(self : Self, name : String, constructor_ : CustomElementConstructor, options? : ElementDefinitionOptions) -> Unit = _
   get(self : Self, name : String) -> CustomElementRegistryGet = _
   get_name(self : Self, constructor_ : CustomElementConstructor) -> String? = _
-  when_defined(self : Self, name : String) -> JsPromise[
-    CustomElementConstructor,
-  ] = _
+  when_defined(self : Self, name : String) -> JsPromise[CustomElementConstructor] = _
   upgrade(self : Self, root : &TNode) -> Unit = _
   initialize(self : Self, root : &TNode) -> Unit = _
 }
 
-///|
 /// [CustomElementRegistry.define](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define)
-impl TCustomElementRegistry with define_(
-  self : Self,
-  name : String,
-  constructor_ : CustomElementConstructor,
-  options? : ElementDefinitionOptions = ElementDefinitionOptions::empty(),
-) -> Unit {
-  custom_element_registry_define_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(name),
-    TJsValue::to_js(constructor_),
-    TJsValue::to_js(options),
-  )
+impl TCustomElementRegistry with define_(self : Self, 
+name : String, 
+constructor_ : CustomElementConstructor, 
+options? : ElementDefinitionOptions = ElementDefinitionOptions::empty()) -> Unit {
+  custom_element_registry_define_ffi(TJsValue::to_js(self), TJsValue::to_js(name), TJsValue::to_js(constructor_), TJsValue::to_js(options))
 }
 
-///|
 /// [CustomElementRegistry.get](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/get)
-impl TCustomElementRegistry with get(self : Self, name : String) -> CustomElementRegistryGet {
+impl TCustomElementRegistry with get(self : Self, 
+name : String) -> CustomElementRegistryGet {
   custom_element_registry_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).unsafe_cast()
 }
 
-///|
 /// [CustomElementRegistry.getName](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/getName)
-impl TCustomElementRegistry with get_name(
-  self : Self,
-  constructor_ : CustomElementConstructor,
-) -> String? {
-  let result = custom_element_registry_get_name_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(constructor_),
-  )
+impl TCustomElementRegistry with get_name(self : Self, 
+constructor_ : CustomElementConstructor) -> String? {
+  let result = custom_element_registry_get_name_ffi(TJsValue::to_js(self), TJsValue::to_js(constructor_))
   if JsValue::is_null(result) {
     None
   } else {
@@ -119,31 +69,20 @@ impl TCustomElementRegistry with get_name(
   }
 }
 
-///|
 /// [CustomElementRegistry.whenDefined](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined)
-impl TCustomElementRegistry with when_defined(self : Self, name : String) -> JsPromise[
-  CustomElementConstructor,
-] {
-  custom_element_registry_when_defined_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(name),
-  ).unsafe_cast()
+impl TCustomElementRegistry with when_defined(self : Self, 
+name : String) -> JsPromise[CustomElementConstructor] {
+  custom_element_registry_when_defined_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).unsafe_cast()
 }
 
-///|
 /// [CustomElementRegistry.upgrade](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/upgrade)
-impl TCustomElementRegistry with upgrade(self : Self, root : &TNode) -> Unit {
-  custom_element_registry_upgrade_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(root),
-  )
+impl TCustomElementRegistry with upgrade(self : Self, 
+root : &TNode) -> Unit {
+  custom_element_registry_upgrade_ffi(TJsValue::to_js(self), TJsValue::to_js(root))
 }
 
-///|
 /// [CustomElementRegistry.initialize](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/initialize)
-impl TCustomElementRegistry with initialize(self : Self, root : &TNode) -> Unit {
-  custom_element_registry_initialize_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(root),
-  )
+impl TCustomElementRegistry with initialize(self : Self, 
+root : &TNode) -> Unit {
+  custom_element_registry_initialize_ffi(TJsValue::to_js(self), TJsValue::to_js(root))
 }

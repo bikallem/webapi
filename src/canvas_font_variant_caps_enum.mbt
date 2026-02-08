@@ -2,7 +2,6 @@
 // MoonBit type: CanvasFontVariantCaps
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasFontVariantCaps {
   Normal
   SmallCaps
@@ -11,12 +10,9 @@ pub(all) enum CanvasFontVariantCaps {
   AllPetiteCaps
   Unicase
   TitlingCaps
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for CanvasFontVariantCaps with to_js(
-  self : CanvasFontVariantCaps,
-) -> JsValue {
+pub impl TJsValue for CanvasFontVariantCaps with to_js(self: CanvasFontVariantCaps) -> JsValue {
   match self {
     CanvasFontVariantCaps::Normal => TJsValue::to_js("normal")
     CanvasFontVariantCaps::SmallCaps => TJsValue::to_js("small-caps")
@@ -28,8 +24,7 @@ pub impl TJsValue for CanvasFontVariantCaps with to_js(
   }
 }
 
-///|
-pub fn CanvasFontVariantCaps::from(value : String) -> CanvasFontVariantCaps? {
+pub fn CanvasFontVariantCaps::from(value: String) -> CanvasFontVariantCaps? {
   match value {
     "normal" => Some(CanvasFontVariantCaps::Normal)
     "small-caps" => Some(CanvasFontVariantCaps::SmallCaps)

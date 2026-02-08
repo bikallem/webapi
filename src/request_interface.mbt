@@ -2,29 +2,21 @@
 // MoonBit type: Request
 // Specifications: fetch.idl
 
-///|
 /// [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
 #external
 pub type Request
 
-///|
-pub impl TJsValue for Request with to_js(self : Request) -> JsValue = "%identity"
+pub impl TJsValue for Request with to_js(self: Request) -> JsValue = "%identity"
 
-///|
-pub fn[T : TRequest] Request::into(self : Request) -> T = "%identity"
+pub fn[T: TRequest] Request::into(self : Request) -> T = "%identity"
 
-///|
 pub impl TRequest for Request
 
-///|
-pub fn Request::new(
-  input : RequestInfo,
-  init? : RequestInit = RequestInit::empty(),
-) -> Request {
+pub fn Request::new(input : RequestInfo, 
+init? : RequestInit = RequestInit::empty()) -> Request {
   request_new_ffi(TJsValue::to_js(input), TJsValue::to_js(init))
 }
 
-///|
 /// [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) interface.
 pub trait TRequest: TJsValue {
   method_(self : Self) -> String = _
@@ -54,151 +46,126 @@ pub trait TRequest: TJsValue {
   text(self : Self) -> JsPromise[String] = _
 }
 
-///|
 /// [Request.method](https://developer.mozilla.org/en-US/docs/Web/API/Request/method)
 impl TRequest with method_(self : Self) -> String {
   request_method_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.url](https://developer.mozilla.org/en-US/docs/Web/API/Request/url)
 impl TRequest with url(self : Self) -> String {
   request_url_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.headers](https://developer.mozilla.org/en-US/docs/Web/API/Request/headers)
 impl TRequest with headers(self : Self) -> Headers {
   request_headers_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.destination](https://developer.mozilla.org/en-US/docs/Web/API/Request/destination)
 impl TRequest with destination(self : Self) -> RequestDestination {
   request_destination_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.referrer](https://developer.mozilla.org/en-US/docs/Web/API/Request/referrer)
 impl TRequest with referrer(self : Self) -> String {
   request_referrer_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/Request/referrerPolicy)
 impl TRequest with referrer_policy(self : Self) -> ReferrerPolicy {
   request_referrer_policy_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.mode](https://developer.mozilla.org/en-US/docs/Web/API/Request/mode)
 impl TRequest with mode(self : Self) -> RequestMode {
   request_mode_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)
 impl TRequest with credentials(self : Self) -> RequestCredentials {
   request_credentials_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.cache](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache)
 impl TRequest with cache(self : Self) -> RequestCache {
   request_cache_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.redirect](https://developer.mozilla.org/en-US/docs/Web/API/Request/redirect)
 impl TRequest with redirect(self : Self) -> RequestRedirect {
   request_redirect_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.integrity](https://developer.mozilla.org/en-US/docs/Web/API/Request/integrity)
 impl TRequest with integrity(self : Self) -> String {
   request_integrity_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.keepalive](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive)
 impl TRequest with keepalive(self : Self) -> Bool {
   request_keepalive_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.isReloadNavigation](https://developer.mozilla.org/en-US/docs/Web/API/Request/isReloadNavigation)
 impl TRequest with is_reload_navigation(self : Self) -> Bool {
   request_is_reload_navigation_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.isHistoryNavigation](https://developer.mozilla.org/en-US/docs/Web/API/Request/isHistoryNavigation)
 impl TRequest with is_history_navigation(self : Self) -> Bool {
   request_is_history_navigation_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.signal](https://developer.mozilla.org/en-US/docs/Web/API/Request/signal)
 impl TRequest with signal(self : Self) -> AbortSignal {
   request_signal_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.duplex](https://developer.mozilla.org/en-US/docs/Web/API/Request/duplex)
 impl TRequest with duplex(self : Self) -> RequestDuplex {
   request_duplex_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.clone](https://developer.mozilla.org/en-US/docs/Web/API/Request/clone)
 impl TRequest with clone(self : Self) -> Request {
   request_clone_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.body](https://developer.mozilla.org/en-US/docs/Web/API/Request/body)
 impl TRequest with body(self : Self) -> ReadableStream {
   request_body_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.bodyUsed](https://developer.mozilla.org/en-US/docs/Web/API/Request/bodyUsed)
 impl TRequest with body_used(self : Self) -> Bool {
   request_body_used_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.arrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/Request/arrayBuffer)
 impl TRequest with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
   request_array_buffer_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.blob](https://developer.mozilla.org/en-US/docs/Web/API/Request/blob)
 impl TRequest with blob(self : Self) -> JsPromise[Blob] {
   request_blob_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.bytes](https://developer.mozilla.org/en-US/docs/Web/API/Request/bytes)
 impl TRequest with bytes(self : Self) -> JsPromise[Uint8Array] {
   request_bytes_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.formData](https://developer.mozilla.org/en-US/docs/Web/API/Request/formData)
 impl TRequest with form_data(self : Self) -> JsPromise[FormData] {
   request_form_data_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.json](https://developer.mozilla.org/en-US/docs/Web/API/Request/json)
 impl TRequest with json(self : Self) -> JsPromise[JsValue] {
   request_json_ffi(TJsValue::to_js(self)).unsafe_cast()
 }
 
-///|
 /// [Request.text](https://developer.mozilla.org/en-US/docs/Web/API/Request/text)
 impl TRequest with text(self : Self) -> JsPromise[String] {
   request_text_ffi(TJsValue::to_js(self)).unsafe_cast()

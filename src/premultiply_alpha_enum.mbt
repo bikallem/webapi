@@ -2,15 +2,13 @@
 // MoonBit type: PremultiplyAlpha
 // Specifications: html.idl
 
-///|
 pub(all) enum PremultiplyAlpha {
   None
   Premultiply
   Default
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for PremultiplyAlpha with to_js(self : PremultiplyAlpha) -> JsValue {
+pub impl TJsValue for PremultiplyAlpha with to_js(self: PremultiplyAlpha) -> JsValue {
   match self {
     PremultiplyAlpha::None => TJsValue::to_js("none")
     PremultiplyAlpha::Premultiply => TJsValue::to_js("premultiply")
@@ -18,8 +16,7 @@ pub impl TJsValue for PremultiplyAlpha with to_js(self : PremultiplyAlpha) -> Js
   }
 }
 
-///|
-pub fn PremultiplyAlpha::from(value : String) -> PremultiplyAlpha? {
+pub fn PremultiplyAlpha::from(value: String) -> PremultiplyAlpha? {
   match value {
     "none" => Some(PremultiplyAlpha::None)
     "premultiply" => Some(PremultiplyAlpha::Premultiply)

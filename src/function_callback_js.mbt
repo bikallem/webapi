@@ -1,2 +1,1 @@
-///|
 extern "js" fn function_ffi(f : JsValue) -> JsValue = "(f) => f"

@@ -2,7 +2,6 @@
 // MoonBit type: RequestDestination
 // Specifications: fetch.idl
 
-///|
 pub(all) enum RequestDestination {
   Empty
   Audio
@@ -25,10 +24,9 @@ pub(all) enum RequestDestination {
   Video
   Worker
   Xslt
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for RequestDestination with to_js(self : RequestDestination) -> JsValue {
+pub impl TJsValue for RequestDestination with to_js(self: RequestDestination) -> JsValue {
   match self {
     RequestDestination::Empty => TJsValue::to_js("")
     RequestDestination::Audio => TJsValue::to_js("audio")
@@ -54,8 +52,7 @@ pub impl TJsValue for RequestDestination with to_js(self : RequestDestination) -
   }
 }
 
-///|
-pub fn RequestDestination::from(value : String) -> RequestDestination? {
+pub fn RequestDestination::from(value: String) -> RequestDestination? {
   match value {
     "" => Some(RequestDestination::Empty)
     "audio" => Some(RequestDestination::Audio)

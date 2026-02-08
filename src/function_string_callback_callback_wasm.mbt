@@ -1,2 +1,1 @@
-///|
 fn function_string_callback_ffi(f : JsValue) -> JsValue = "webapi_FunctionStringCallback" "new"

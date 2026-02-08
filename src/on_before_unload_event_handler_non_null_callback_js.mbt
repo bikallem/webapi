@@ -1,4 +1,1 @@
-///|
-extern "js" fn on_before_unload_event_handler_non_null_ffi(
-  f : JsValue,
-) -> JsValue = "(f) => f"
+extern "js" fn on_before_unload_event_handler_non_null_ffi(f : JsValue) -> JsValue = "(f) => f"

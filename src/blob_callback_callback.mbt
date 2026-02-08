@@ -2,15 +2,10 @@
 // MoonBit type: BlobCallback
 // Specifications: html.idl
 
-///|
 /// [BlobCallback](https://developer.mozilla.org/en-US/docs/Web/API/BlobCallback)
 #external
 pub type BlobCallback
 
-///|
-pub impl TJsValue for BlobCallback with to_js(self : BlobCallback) -> JsValue = "%identity"
+pub impl TJsValue for BlobCallback with to_js(self: BlobCallback) -> JsValue = "%identity"
 
-///|
-pub fn BlobCallback::new(f : (Blob) -> Unit) -> BlobCallback {
-  blob_callback_ffi(js_of(f)).unsafe_cast()
-}
+pub fn BlobCallback::new(f : (Blob) -> Unit) -> BlobCallback { blob_callback_ffi(js_of(f)).unsafe_cast() }

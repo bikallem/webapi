@@ -1,64 +1,29 @@
-///|
 extern "js" fn html_option_element_new_ffi() -> HTMLOptionElement = "() => new HTMLOptionElement()"
 
-///|
-extern "js" fn html_option_element_disabled_ffi(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+extern "js" fn html_option_element_disabled_ffi(obj: JsValue) -> JsValue = "(obj) => obj.disabled"
 
-///|
-extern "js" fn html_option_element_set_disabled_ffi(
-  obj : JsValue,
-  disabled : JsValue,
-) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+extern "js" fn html_option_element_set_disabled_ffi(obj: JsValue, disabled: JsValue) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
-///|
-extern "js" fn html_option_element_form_ffi(obj : JsValue) -> JsValue = "(obj) => obj.form"
+extern "js" fn html_option_element_form_ffi(obj: JsValue) -> JsValue = "(obj) => obj.form"
 
-///|
-extern "js" fn html_option_element_label_ffi(obj : JsValue) -> JsValue = "(obj) => obj.label"
+extern "js" fn html_option_element_label_ffi(obj: JsValue) -> JsValue = "(obj) => obj.label"
 
-///|
-extern "js" fn html_option_element_set_label_ffi(
-  obj : JsValue,
-  label : JsValue,
-) -> Unit = "(obj, label) => { obj.label = label; }"
+extern "js" fn html_option_element_set_label_ffi(obj: JsValue, label: JsValue) -> Unit = "(obj, label) => { obj.label = label; }"
 
-///|
-extern "js" fn html_option_element_default_selected_ffi(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.defaultSelected"
+extern "js" fn html_option_element_default_selected_ffi(obj: JsValue) -> JsValue = "(obj) => obj.defaultSelected"
 
-///|
-extern "js" fn html_option_element_set_default_selected_ffi(
-  obj : JsValue,
-  default_selected : JsValue,
-) -> Unit = "(obj, defaultSelected) => { obj.defaultSelected = defaultSelected; }"
+extern "js" fn html_option_element_set_default_selected_ffi(obj: JsValue, default_selected: JsValue) -> Unit = "(obj, defaultSelected) => { obj.defaultSelected = defaultSelected; }"
 
-///|
-extern "js" fn html_option_element_selected_ffi(obj : JsValue) -> JsValue = "(obj) => obj.selected"
+extern "js" fn html_option_element_selected_ffi(obj: JsValue) -> JsValue = "(obj) => obj.selected"
 
-///|
-extern "js" fn html_option_element_set_selected_ffi(
-  obj : JsValue,
-  selected : JsValue,
-) -> Unit = "(obj, selected) => { obj.selected = selected; }"
+extern "js" fn html_option_element_set_selected_ffi(obj: JsValue, selected: JsValue) -> Unit = "(obj, selected) => { obj.selected = selected; }"
 
-///|
-extern "js" fn html_option_element_value_ffi(obj : JsValue) -> JsValue = "(obj) => obj.value"
+extern "js" fn html_option_element_value_ffi(obj: JsValue) -> JsValue = "(obj) => obj.value"
 
-///|
-extern "js" fn html_option_element_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
+extern "js" fn html_option_element_set_value_ffi(obj: JsValue, value: JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
 
-///|
-extern "js" fn html_option_element_text_ffi(obj : JsValue) -> JsValue = "(obj) => obj.text"
+extern "js" fn html_option_element_text_ffi(obj: JsValue) -> JsValue = "(obj) => obj.text"
 
-///|
-extern "js" fn html_option_element_set_text_ffi(
-  obj : JsValue,
-  text : JsValue,
-) -> Unit = "(obj, text) => { obj.text = text; }"
+extern "js" fn html_option_element_set_text_ffi(obj: JsValue, text: JsValue) -> Unit = "(obj, text) => { obj.text = text; }"
 
-///|
-extern "js" fn html_option_element_index_ffi(obj : JsValue) -> JsValue = "(obj) => obj.index"
+extern "js" fn html_option_element_index_ffi(obj: JsValue) -> JsValue = "(obj) => obj.index"

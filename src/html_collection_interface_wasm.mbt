@@ -1,2 +1,1 @@
-///|
-fn html_collection_length_ffi(obj : JsValue) -> JsValue = "webapi_HTMLCollection" "get_length"
+fn html_collection_length_ffi(obj: JsValue) -> JsValue = "webapi_HTMLCollection" "get_length"

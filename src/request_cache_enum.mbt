@@ -2,7 +2,6 @@
 // MoonBit type: RequestCache
 // Specifications: fetch.idl
 
-///|
 pub(all) enum RequestCache {
   Default
   NoStore
@@ -10,10 +9,9 @@ pub(all) enum RequestCache {
   NoCache
   ForceCache
   OnlyIfCached
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for RequestCache with to_js(self : RequestCache) -> JsValue {
+pub impl TJsValue for RequestCache with to_js(self: RequestCache) -> JsValue {
   match self {
     RequestCache::Default => TJsValue::to_js("default")
     RequestCache::NoStore => TJsValue::to_js("no-store")
@@ -24,8 +22,7 @@ pub impl TJsValue for RequestCache with to_js(self : RequestCache) -> JsValue {
   }
 }
 
-///|
-pub fn RequestCache::from(value : String) -> RequestCache? {
+pub fn RequestCache::from(value: String) -> RequestCache? {
   match value {
     "default" => Some(RequestCache::Default)
     "no-store" => Some(RequestCache::NoStore)

@@ -1,7 +1,1 @@
-///|
-extern "js" fn x_path_expression_evaluate_ffi(
-  obj : JsValue,
-  context_node : JsValue,
-  type_ : JsValue,
-  result : JsValue,
-) -> JsValue = "(obj, context_node, type_, result) => obj.evaluate(context_node, type_, result)"
+extern "js" fn x_path_expression_evaluate_ffi(obj: JsValue, context_node: JsValue, type_: JsValue, result: JsValue) -> JsValue = "(obj, context_node, type_, result) => obj.evaluate(context_node, type_, result)"

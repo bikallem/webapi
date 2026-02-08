@@ -1,2 +1,1 @@
-///|
 extern "js" fn mutation_callback_ffi(f : JsValue) -> JsValue = "(f) => f"

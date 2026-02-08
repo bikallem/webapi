@@ -1,6 +1,1 @@
-///|
-extern "js" fn worklet_add_module_ffi(
-  obj : JsValue,
-  module_url : JsValue,
-  options : JsValue,
-) -> JsValue = "(obj, module_url, options) => obj.addModule(module_url, options)"
+extern "js" fn worklet_add_module_ffi(obj: JsValue, module_url: JsValue, options: JsValue) -> JsValue = "(obj, module_url, options) => obj.addModule(module_url, options)"

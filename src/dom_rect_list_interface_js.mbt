@@ -1,2 +1,1 @@
-///|
-extern "js" fn dom_rect_list_length_ffi(obj : JsValue) -> JsValue = "(obj) => obj.length"
+extern "js" fn dom_rect_list_length_ffi(obj: JsValue) -> JsValue = "(obj) => obj.length"

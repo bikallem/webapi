@@ -2,7 +2,6 @@
 // MoonBit type: CanvasTextBaseline
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasTextBaseline {
   Top
   Hanging
@@ -10,10 +9,9 @@ pub(all) enum CanvasTextBaseline {
   Alphabetic
   Ideographic
   Bottom
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for CanvasTextBaseline with to_js(self : CanvasTextBaseline) -> JsValue {
+pub impl TJsValue for CanvasTextBaseline with to_js(self: CanvasTextBaseline) -> JsValue {
   match self {
     CanvasTextBaseline::Top => TJsValue::to_js("top")
     CanvasTextBaseline::Hanging => TJsValue::to_js("hanging")
@@ -24,8 +22,7 @@ pub impl TJsValue for CanvasTextBaseline with to_js(self : CanvasTextBaseline) -
   }
 }
 
-///|
-pub fn CanvasTextBaseline::from(value : String) -> CanvasTextBaseline? {
+pub fn CanvasTextBaseline::from(value: String) -> CanvasTextBaseline? {
   match value {
     "top" => Some(CanvasTextBaseline::Top)
     "hanging" => Some(CanvasTextBaseline::Hanging)

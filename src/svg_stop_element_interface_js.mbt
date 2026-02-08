@@ -1,2 +1,1 @@
-///|
-extern "js" fn svg_stop_element_offset_ffi(obj : JsValue) -> JsValue = "(obj) => obj.offset"
+extern "js" fn svg_stop_element_offset_ffi(obj: JsValue) -> JsValue = "(obj) => obj.offset"

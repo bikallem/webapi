@@ -1,2 +1,1 @@
-///|
-fn trusted_html_to_json_ffi(obj : JsValue) -> JsValue = "webapi_TrustedHTML" "toJSON"
+fn trusted_html_to_json_ffi(obj: JsValue) -> JsValue = "webapi_TrustedHTML" "toJSON"

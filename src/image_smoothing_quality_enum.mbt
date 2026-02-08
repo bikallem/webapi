@@ -2,17 +2,13 @@
 // MoonBit type: ImageSmoothingQuality
 // Specifications: html.idl
 
-///|
 pub(all) enum ImageSmoothingQuality {
   Low
   Medium
   High
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for ImageSmoothingQuality with to_js(
-  self : ImageSmoothingQuality,
-) -> JsValue {
+pub impl TJsValue for ImageSmoothingQuality with to_js(self: ImageSmoothingQuality) -> JsValue {
   match self {
     ImageSmoothingQuality::Low => TJsValue::to_js("low")
     ImageSmoothingQuality::Medium => TJsValue::to_js("medium")
@@ -20,8 +16,7 @@ pub impl TJsValue for ImageSmoothingQuality with to_js(
   }
 }
 
-///|
-pub fn ImageSmoothingQuality::from(value : String) -> ImageSmoothingQuality? {
+pub fn ImageSmoothingQuality::from(value: String) -> ImageSmoothingQuality? {
   match value {
     "low" => Some(ImageSmoothingQuality::Low)
     "medium" => Some(ImageSmoothingQuality::Medium)

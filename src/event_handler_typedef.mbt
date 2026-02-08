@@ -2,5 +2,4 @@
 // MoonBit type: EventHandler
 // Specifications: html.idl
 
-///|
 pub type EventHandler = EventHandlerNonNull

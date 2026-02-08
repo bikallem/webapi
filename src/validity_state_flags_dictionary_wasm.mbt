@@ -1,16 +1,3 @@
-///|
-fn validity_state_flags_ffi(
-  value_missing : JsValue,
-  type_mismatch : JsValue,
-  pattern_mismatch : JsValue,
-  too_long : JsValue,
-  too_short : JsValue,
-  range_underflow : JsValue,
-  range_overflow : JsValue,
-  step_mismatch : JsValue,
-  bad_input : JsValue,
-  custom_error : JsValue,
-) -> ValidityStateFlags = "webapi_ValidityStateFlags" "new"
+fn validity_state_flags_ffi(value_missing: JsValue, type_mismatch: JsValue, pattern_mismatch: JsValue, too_long: JsValue, too_short: JsValue, range_underflow: JsValue, range_overflow: JsValue, step_mismatch: JsValue, bad_input: JsValue, custom_error: JsValue) -> ValidityStateFlags = "webapi_ValidityStateFlags" "new"
 
-///|
 fn validity_state_flags_empty_ffi() -> ValidityStateFlags = "webapi_Dictionary" "empty"

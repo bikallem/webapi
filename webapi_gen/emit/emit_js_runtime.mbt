@@ -1,6 +1,32 @@
 // JS Runtime emitter - generates webapi.mjs JavaScript FFI module
 
 ///|
+let js_reserved : @hashset.HashSet[String] = {
+  let s = @hashset.HashSet::new()
+  for kw in [
+    "break", "case", "catch", "continue", "debugger", "default", "delete", "do",
+    "else", "finally", "for", "function", "if", "in", "instanceof", "new",
+    "return", "switch", "this", "throw", "try", "typeof", "var", "void",
+    "while", "with", "class", "const", "enum", "export", "extends", "import",
+    "super", "implements", "interface", "let", "package", "private", "protected",
+    "public", "static", "yield", "await",
+  ] {
+    s.add(kw)
+  }
+  s
+}
+
+///|
+/// Escape JS reserved keywords by prefixing with underscore.
+fn js_safe(name : String) -> String {
+  if js_reserved.contains(name) {
+    "_\{name}"
+  } else {
+    name
+  }
+}
+
+///|
 /// Emit the static preamble for the JS runtime
 fn emit_js_preamble() -> String {
   let preamble =
@@ -80,7 +106,7 @@ fn emit_js_method(
   // Build argument names list
   let arg_names : Array[String] = []
   for arg in args {
-    arg_names.push(@type_mapping.safe_identifier(arg.name))
+    arg_names.push(js_safe(@type_mapping.safe_identifier(arg.name)))
   }
   let comma_sep = ", "
   if is_static {
@@ -105,7 +131,7 @@ fn emit_js_constructor(
 ) -> String {
   let arg_names : Array[String] = []
   for arg in args {
-    arg_names.push(@type_mapping.safe_identifier(arg.name))
+    arg_names.push(js_safe(@type_mapping.safe_identifier(arg.name)))
   }
   let comma_sep = ", "
   let params = arg_names.join(comma_sep)
@@ -174,15 +200,16 @@ fn emit_js_dictionary_module(
   // Dictionary constructor: new(arg1, arg2, ...) => { const obj = {}; if (arg1 !== undefined) obj.field1 = arg1; ... return obj; }
   let arg_names : Array[String] = []
   for mem in dict.members {
-    arg_names.push(mem.name)
+    arg_names.push(js_safe(mem.name))
   }
   let params = arg_names.join(", ")
   let ctor_buf = StringBuilder::new()
   ctor_buf.write_string("    new: (\{params}) => {\n")
   ctor_buf.write_string("      const obj = {};\n")
-  for mem in dict.members {
+  for i, mem in dict.members {
+    let safe_name = arg_names[i]
     ctor_buf.write_string(
-      "      if (\{mem.name} !== undefined) obj.\{mem.name} = \{mem.name};\n",
+      "      if (\{safe_name} !== undefined) obj.\{mem.name} = \{safe_name};\n",
     )
   }
   ctor_buf.write_string("      return obj;\n")

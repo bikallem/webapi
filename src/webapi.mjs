@@ -589,7 +589,7 @@ export const wasmImportObject = {
     adoptNode: (obj, node) => obj.adoptNode(node),
     createAttribute: (obj, local_name) => obj.createAttribute(local_name),
     createAttributeNS: (obj, namespace_, qualified_name) => obj.createAttributeNS(namespace_, qualified_name),
-    createEvent: (obj, interface) => obj.createEvent(interface),
+    createEvent: (obj, _interface) => obj.createEvent(_interface),
     createRange: (obj) => obj.createRange(),
     createNodeIterator: (obj, root, what_to_show, filter) => obj.createNodeIterator(root, what_to_show, filter),
     createTreeWalker: (obj, root, what_to_show, filter) => obj.createTreeWalker(root, what_to_show, filter),
@@ -1267,7 +1267,7 @@ export const wasmImportObject = {
     alert: (obj) => obj.alert(),
     alert: (obj, message) => obj.alert(message),
     confirm: (obj, message) => obj.confirm(message),
-    prompt: (obj, message, default) => obj.prompt(message, default),
+    prompt: (obj, message, _default) => obj.prompt(message, _default),
     print: (obj) => obj.print(),
     postMessage: (obj, message, target_origin, transfer) => obj.postMessage(message, target_origin, transfer),
     postMessage: (obj, message, options) => obj.postMessage(message, options),
@@ -5230,9 +5230,9 @@ export const wasmImportObject = {
   },
 
   webapi_ElementDefinitionOptions: {
-    new: (extends) => {
+    new: (_extends) => {
       const obj = {};
-      if (extends !== undefined) obj.extends = extends;
+      if (_extends !== undefined) obj.extends = _extends;
       return obj;
     }
   },
