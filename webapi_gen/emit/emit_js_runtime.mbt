@@ -64,7 +64,7 @@ fn emit_js_method(
   // Build argument names list
   let arg_names : Array[String] = []
   for arg in args {
-    arg_names.push(safe_identifier(arg.name))
+    arg_names.push(@type_mapping.safe_identifier(arg.name))
   }
   let comma_sep = ", "
   if is_static {
@@ -89,7 +89,7 @@ fn emit_js_constructor(
 ) -> String {
   let arg_names : Array[String] = []
   for arg in args {
-    arg_names.push(safe_identifier(arg.name))
+    arg_names.push(@type_mapping.safe_identifier(arg.name))
   }
   let comma_sep = ", "
   let params = arg_names.join(comma_sep)
@@ -100,7 +100,7 @@ fn emit_js_constructor(
 ///|
 /// Emit a complete JS module for an interface
 fn emit_js_interface_module(
-  iface : @partial_merged.PartialMergedInterface,
+  iface : @flattened_idl.FlattenedInterface,
 ) -> String {
   let buf = StringBuilder::new()
   buf.write_string("  webapi_\{iface.name}: {\n")

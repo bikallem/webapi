@@ -1,8 +1,17 @@
 ///|
-/// Flattened IDL after flattening mixins, flattening dictionaries inheritance 
+/// Flattened interface with mixins merged in, decoupled from PartialMergedInterface.
+pub(all) struct FlattenedInterface {
+  name : String
+  members : Array[@parser.InterfaceMemberExtendedAttributes]
+  inheritance : String?
+  specs : @hashset.HashSet[String]
+} derive(Show, ToJson)
+
+///|
+/// Flattened IDL after flattening mixins, flattening dictionaries inheritance
 /// hierarchy and flattening callback interfaces to callback functions.
 pub struct FlattenedIdl {
-  interfaces : Map[String, @partial_merged.PartialMergedInterface]
+  interfaces : Map[String, FlattenedInterface]
   dictionaries : Map[String, MergedDictionaryIR]
   enums : Map[String, @parser.EnumDefinition]
   typedefs : Map[String, @parser.TypedefDefinition]
@@ -27,7 +36,46 @@ fn MergedDictionaryIR::new(
 }
 
 ///|
-/// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces 
+/// Walks the full inheritance chain for a dictionary, collecting ancestor members
+/// from most-distant ancestor to self. Uses a visited set for cycle detection.
+fn flatten_dictionary_members(
+  dictionaries : Map[String, @partial_merged.PartialMergedDictionary],
+  name : String,
+) -> (Array[@parser.DictionaryMember], @hashset.HashSet[String]) {
+  let visited : @hashset.HashSet[String] = @hashset.new()
+  // Collect the chain from self to root
+  let chain : Array[String] = []
+  let mut current = name
+  while true {
+    if visited.contains(current) {
+      break // cycle detected
+    }
+    visited.add(current)
+    chain.push(current)
+    match dictionaries.get(current) {
+      Some(dict) =>
+        match dict.inheritance {
+          Some(parent) => current = parent
+          None => break
+        }
+      None => abort("Dictionary '\{current}' not found in chain from '\{name}'")
+    }
+  }
+  // Reverse to get root-first order, then collect members and specs
+  let members : Array[@parser.DictionaryMember] = []
+  let specs : @hashset.HashSet[String] = @hashset.new()
+  for i = chain.length() - 1; i >= 0; i = i - 1 {
+    let dict = dictionaries[chain[i]]
+    members.push_iter(dict.members.iter())
+    for s in dict.specs {
+      specs.add(s)
+    }
+  }
+  (members, specs)
+}
+
+///|
+/// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces
 /// and converting callback interfaces to callback functions.
 pub fn flatten(
   partial_merged : @partial_merged.PartialMerged,
@@ -36,32 +84,13 @@ pub fn flatten(
   // Merge dictionaries by combining members from parent dictionaries
   let dictionaries = partial_merged.dictionaries
     .iter()
-    .map(it => {
-      let (dict_name, dict) : (String, @partial_merged.PartialMergedDictionary) = it
-      match dict.inheritance {
-        None => // No inheritance, just copy members to MergedDictionaryIR
-          (
-            dict_name,
-            MergedDictionaryIR::new(dict.name, dict.members, dict.specs),
-          )
-        Some(parent_name) => // Merge parent members
-          match partial_merged.dictionaries.get(parent_name) {
-            Some(parent_dict) => {
-              let merged_members = parent_dict.members + dict.members
-              let merged_specs = parent_dict.specs.union(dict.specs)
-              let merged_dict = MergedDictionaryIR::new(
-                dict.name,
-                merged_members,
-                merged_specs,
-              )
-              (dict_name, merged_dict)
-            }
-            None =>
-              abort(
-                "Parent dictionary '\{parent_name}' for '\{dict_name}' not found",
-              )
-          }
-      }
+    .map(fn(it) {
+      let (dict_name, dict) = it
+      let (members, specs) = flatten_dictionary_members(
+        partial_merged.dictionaries,
+        dict_name,
+      )
+      (dict_name, MergedDictionaryIR::new(dict.name, members, specs))
     })
     |> Map::from_iter
 
@@ -88,8 +117,18 @@ pub fn flatten(
         )
     }
   }
+  // Build FlattenedInterface map, breaking the alias to partial_merged.interfaces
+  let interfaces : Map[String, FlattenedInterface] = Map::new()
+  for name, iface in partial_merged.interfaces {
+    interfaces[name] = FlattenedInterface::{
+      name: iface.name,
+      members: iface.members,
+      inheritance: iface.inheritance,
+      specs: iface.specs,
+    }
+  }
   let merged_idl = FlattenedIdl::{
-    interfaces: partial_merged.interfaces,
+    interfaces,
     dictionaries,
     enums: partial_merged.enums,
     typedefs: partial_merged.typedefs,

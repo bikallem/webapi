@@ -13,7 +13,7 @@ fn method_args(
   interface_name : String,
   method_name : String,
   type_registry : @type_registry.TypeRegistry,
-) -> (Array[MethodArg], Array[Emit]) {
+) -> (Array[@type_mapping.MethodArg], Array[Emit]) {
   let emits = []
   let mbt_args = []
   for arg in args {
@@ -25,15 +25,16 @@ fn method_args(
     emits.push_iter(arg_emits.iter())
     let default_value = default_value.map(dv => mbt_default_value(dv, mbt_type))
     let mbt_type = match mbt_type {
-      ArgMbtType::Interface(name) => ArgMbtType::Interface("&T\{name}")
-      ArgMbtType::Union(union_type) => {
+      @type_mapping.ArgMbtType::Interface(name) =>
+        @type_mapping.ArgMbtType::Interface("&T\{name}")
+      @type_mapping.ArgMbtType::Union(union_type) => {
         let union_type = { ..union_type, name: "&T\{union_type.name}" }
-        ArgMbtType::Union(union_type)
+        @type_mapping.ArgMbtType::Union(union_type)
       }
       _ => mbt_type
     }
-    mbt_args.push(MethodArg::{
-      name: safe_identifier(arg_name),
+    mbt_args.push(@type_mapping.MethodArg::{
+      name: @type_mapping.safe_identifier(arg_name),
       original_name: arg_name,
       type_: mbt_type,
       optional,
@@ -46,7 +47,7 @@ fn method_args(
 ///|
 fn mbt_default_value(
   default_value : @parser.DefaultValue,
-  arg_type : ArgMbtType,
+  arg_type : @type_mapping.ArgMbtType,
 ) -> String {
   match default_value {
     String(s) =>
@@ -60,7 +61,7 @@ fn mbt_default_value(
     ConstValue(Boolean(b)) => b
     ConstValue(Integer(i)) =>
       match arg_type {
-        ArgMbtType::Union({ options, .. }) =>
+        @type_mapping.ArgMbtType::Union({ options, .. }) =>
           if options
             .iter()
             .find_first(it => {
@@ -76,11 +77,11 @@ fn mbt_default_value(
             "(\{i}: \{t.name()})"
           } else if options
             .iter()
-            .any(it => it is ArgMbtType::Primitive("Double")) {
+            .any(it => it is @type_mapping.ArgMbtType::Primitive("Double")) {
             "(\{i} : Double)"
           } else if options
             .iter()
-            .any(it => it is ArgMbtType::Primitive("Float")) {
+            .any(it => it is @type_mapping.ArgMbtType::Primitive("Float")) {
             "(\{i} : Float)"
           } else {
             i
@@ -88,9 +89,9 @@ fn mbt_default_value(
         _ => "(\{i}: \{arg_type.name()})"
       }
     ConstValue(Float(_) as f) => {
-      let f = const_value(f)
+      let f = @type_mapping.const_value(f)
       match arg_type {
-        ArgMbtType::Union({ options, .. }) =>
+        @type_mapping.ArgMbtType::Union({ options, .. }) =>
           if options
             .iter()
             .find_first(it => {
@@ -158,7 +159,7 @@ pub impl Emitter for InterfaceEmitter with emit(
   self : InterfaceEmitter,
   name : String,
 ) -> (Filename, Array[Emit]) {
-  let filename = Filename("\{snake_case(name)}_interface.mbt")
+  let filename = Filename("\{@type_mapping.snake_case(name)}_interface.mbt")
   let interface = self.idl.interfaces[name]
   let ancestors = @flattened_idl.get_interface_ancestors(self.idl, name)
   let emits = []
@@ -228,10 +229,10 @@ pub impl Emitter for InterfaceEmitter with emit(
         args
       } else {
         // Add 'self' argument 
-        let self_arg = MethodArg::{
+        let self_arg = @type_mapping.MethodArg::{
           name: "self",
           original_name: "self",
-          type_: ArgMbtType::Self,
+          type_: @type_mapping.ArgMbtType::Self,
           optional: false,
           default_value: None,
         }
@@ -247,7 +248,8 @@ pub impl Emitter for InterfaceEmitter with emit(
         "",
         self.type_registry,
       )
-      if return_type is ArgMbtType::Union({ name, has_undefined, .. }) {
+      if return_type
+        is @type_mapping.ArgMbtType::Union({ name, has_undefined, .. }) {
         emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
         if has_undefined {
           emits.push(Emit::IsUndefinedMethod(name))
@@ -257,7 +259,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         )
       }
       emits.push_iter(return_emits.iter())
-      let return_type = MethodReturn::{
+      let return_type = @type_mapping.MethodReturn::{
         type_: return_type,
         optional: op.return_type is Nullable(_),
       }
@@ -301,7 +303,8 @@ pub impl Emitter for InterfaceEmitter with emit(
       if attr.static_ {
         emits.push_iter(attr_emits.iter())
       }
-      if attr_type is ArgMbtType::Union({ name, has_undefined, .. }) {
+      if attr_type
+        is @type_mapping.ArgMbtType::Union({ name, has_undefined, .. }) {
         emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
         if has_undefined {
           emits.push(Emit::IsUndefinedMethod(name))
@@ -331,25 +334,26 @@ pub impl Emitter for InterfaceEmitter with emit(
         // Set Attribute method if specified (only for non-static)
         if !attr.is_readonly || attr.is_inherit {
           let attr_type = match attr_type {
-            ArgMbtType::Interface(name) => ArgMbtType::Interface("&T\{name}")
-            ArgMbtType::Union(union_type) => {
+            @type_mapping.ArgMbtType::Interface(name) =>
+              @type_mapping.ArgMbtType::Interface("&T\{name}")
+            @type_mapping.ArgMbtType::Union(union_type) => {
               let union_type = { ..union_type, name: "&T\{union_type.name}" }
-              ArgMbtType::Union(union_type)
+              @type_mapping.ArgMbtType::Union(union_type)
             }
             _ => attr_type
           }
           let args = [
             // Add 'self' argument
-            MethodArg::{
+            @type_mapping.MethodArg::{
               name: "self",
               original_name: "self",
-              type_: ArgMbtType::Self,
+              type_: @type_mapping.ArgMbtType::Self,
               optional: false,
               default_value: None,
             },
             // Attribute value argument
-            MethodArg::{
-              name: safe_identifier(attr.name),
+            @type_mapping.MethodArg::{
+              name: @type_mapping.safe_identifier(attr.name),
               original_name: attr.name,
               type_: attr_type,
               optional: false,
@@ -368,7 +372,7 @@ pub impl Emitter for InterfaceEmitter with emit(
     }
     [Const(const_val), .. rest] => {
       let const_name = ConstName(
-        "\{snake_case(interface.name).to_upper()}_\{snake_case(const_val.name).to_upper()}",
+        "\{@type_mapping.snake_case(interface.name).to_upper()}_\{@type_mapping.snake_case(const_val.name).to_upper()}",
       )
       let (mbt_type, const_emits) = arg_mbt_type(
         const_val.type_,
@@ -383,7 +387,7 @@ pub impl Emitter for InterfaceEmitter with emit(
         Emit::Const(
           const_name,
           TypeName(mbt_type.name()),
-          const_value(const_val.value),
+          @type_mapping.const_value(const_val.value),
         ),
       )
       continue rest

@@ -83,6 +83,85 @@ test "panic: flatten aborts when parent dictionary is missing" {
 }
 
 ///|
+test "flatten merges 3-level dictionary inheritance chain" {
+  let widl : String =
+    #|dictionary A {
+    #|  DOMString aProp;
+    #|};
+    #|dictionary B : A {
+    #|  boolean bProp = false;
+    #|};
+    #|dictionary C : B {
+    #|  long cProp;
+    #|};
+  let defs = @parser.parse(widl)
+  let partial_merged = @partial_merged.merge_partials(defs)
+  let flattened_idl = flatten(partial_merged, ignore)
+  let flattened_c = flattened_idl.dictionaries["C"]
+  // C should have members from A, B, then C (ancestor-first order)
+  json_inspect(flattened_c, content={
+    "name": "C",
+    "members": [
+      {
+        "extended_attributes": [],
+        "type_": "DOMString",
+        "name": "aProp",
+        "required": false,
+      },
+      {
+        "extended_attributes": [],
+        "type_": "Boolean",
+        "name": "bProp",
+        "required": false,
+        "default_value": ["ConstValue", ["Boolean", "false"]],
+      },
+      {
+        "extended_attributes": [],
+        "type_": "Long",
+        "name": "cProp",
+        "required": false,
+      },
+    ],
+    "specs": [],
+  })
+  // B should have members from A then B
+  let flattened_b = flattened_idl.dictionaries["B"]
+  json_inspect(flattened_b, content={
+    "name": "B",
+    "members": [
+      {
+        "extended_attributes": [],
+        "type_": "DOMString",
+        "name": "aProp",
+        "required": false,
+      },
+      {
+        "extended_attributes": [],
+        "type_": "Boolean",
+        "name": "bProp",
+        "required": false,
+        "default_value": ["ConstValue", ["Boolean", "false"]],
+      },
+    ],
+    "specs": [],
+  })
+  // A should only have its own members
+  let flattened_a = flattened_idl.dictionaries["A"]
+  json_inspect(flattened_a, content={
+    "name": "A",
+    "members": [
+      {
+        "extended_attributes": [],
+        "type_": "DOMString",
+        "name": "aProp",
+        "required": false,
+      },
+    ],
+    "specs": [],
+  })
+}
+
+///|
 test "flatten merges/includes mixin members into interface" {
   let widl : String =
     #|interface MyInterface {

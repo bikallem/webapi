@@ -9,7 +9,7 @@ pub impl Emitter for CallbackEmitter with emit(
   self : CallbackEmitter,
   name : String,
 ) -> (Filename, Array[Emit]) {
-  let filename = Filename("\{snake_case(name)}_callback.mbt")
+  let filename = Filename("\{@type_mapping.snake_case(name)}_callback.mbt")
   let cb_def = self.idl.callbacks[name]
   let args : Array[CallbackArgEmit] = []
   let emits = []
@@ -23,7 +23,7 @@ pub impl Emitter for CallbackEmitter with emit(
     )
     emits.push_iter(arg_emits.iter())
     args.push(CallbackArgEmit::{
-      name: safe_identifier(arg.name),
+      name: @type_mapping.safe_identifier(arg.name),
       mbt_type: mbt_type.name(),
     })
   }

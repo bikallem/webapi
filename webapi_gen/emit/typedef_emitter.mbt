@@ -9,7 +9,7 @@ pub impl Emitter for TypedefEmitter with emit(
   self : TypedefEmitter,
   name : String,
 ) -> (Filename, Array[Emit]) {
-  let filename = Filename("\{snake_case(name)}_typedef.mbt")
+  let filename = Filename("\{@type_mapping.snake_case(name)}_typedef.mbt")
   let typedef_def = self.idl.typedefs[name]
   let emits = [
     Emit::FileHeader(
@@ -27,7 +27,7 @@ pub impl Emitter for TypedefEmitter with emit(
       ..push(Emit::ImplTJsValue(external_name))
       ..push(Emit::UnionArgTrait(trait_name))
       .push(Emit::IntoMethod(external_name))
-      let seen : @hashset.HashSet[ArgMbtType] = @hashset.new()
+      let seen : @hashset.HashSet[@type_mapping.ArgMbtType] = @hashset.new()
       for opt in options {
         let (mbt_type, arg_emits) = arg_mbt_type(
           opt.type_,

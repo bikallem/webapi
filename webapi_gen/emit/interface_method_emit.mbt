@@ -32,8 +32,8 @@ fn emit_method_body(
 struct RegularMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original method name from IDL, eg "getElementById"
-  return_type : MethodReturn
-  args : Array[MethodArg]
+  return_type : @type_mapping.MethodReturn
+  args : Array[@type_mapping.MethodArg]
 } derive(Show, ToJson)
 
 ///|
@@ -42,7 +42,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with decl_emit(
 ) -> Code {
   let args = trait_method_decl_args(self.args)
   Code(
-    "  \{safe_identifier(self.original_name)}(\{args}) -> \{self.return_type.type_name()} = _",
+    "  \{@type_mapping.safe_identifier(self.original_name)}(\{args}) -> \{self.return_type.type_name()} = _",
   )
 }
 
@@ -57,10 +57,10 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
     self.return_type.type_name()
   }
   let trait_name = self.interface_name
-  let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
+  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
   let ffi_argnames = self.args.map(arg => {
     match arg.type_ {
-      ArgMbtType::Self => "obj"
+      @type_mapping.ArgMbtType::Self => "obj"
       _ => arg.name
     }
   })
@@ -80,7 +80,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
 
   // Emit default trait method implementation
   let method_args = trait_method_impl_args(self.args)
-  let method_name = safe_identifier(self.original_name)
+  let method_name = @type_mapping.safe_identifier(self.original_name)
   let call_args = func_call_args(self.args)
   code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
@@ -95,8 +95,8 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
 struct StaticMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original method name from IDL, eg "createElement"
-  return_type : MethodReturn
-  args : Array[MethodArg]
+  return_type : @type_mapping.MethodReturn
+  args : Array[@type_mapping.MethodArg]
 } derive(Show, ToJson)
 
 ///|
@@ -117,7 +117,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
     self.return_type.type_name()
   }
   let trait_name = self.interface_name
-  let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
+  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
   let ffi_argnames = self.args.map(arg => arg.name)
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ffi_js_args = ffi_argnames.join(", ")
@@ -134,7 +134,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
 
   // Emit static method implementation
   let method_args = trait_method_impl_args(self.args)
-  let method_name = safe_identifier(self.original_name)
+  let method_name = @type_mapping.safe_identifier(self.original_name)
   let call_args = func_call_args(self.args)
   code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
@@ -157,7 +157,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with decl_emit(
   self : AttributeGetMethodEmit,
 ) -> Code {
   Code(
-    "  \{safe_identifier(self.original_name)}(self : Self) -> \{self.return_type} = _",
+    "  \{@type_mapping.safe_identifier(self.original_name)}(self : Self) -> \{self.return_type} = _",
   )
 }
 
@@ -168,7 +168,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
   // Emit FFI function
   let ret_type_str = self.return_type
   let trait_name = self.interface_name
-  let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
+  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
   let code = StringBuilder::new()
   code
   ..write_string(
@@ -181,7 +181,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
   code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit default trait method implementation
-  let method_name = safe_identifier(self.original_name)
+  let method_name = @type_mapping.safe_identifier(self.original_name)
   code
   ..write_string(
     "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
@@ -197,7 +197,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
 struct AttributeSetMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original attribute name from IDL, eg "title"
-  args : Array[MethodArg]
+  args : Array[@type_mapping.MethodArg]
 } derive(Show, ToJson)
 
 ///|
@@ -205,7 +205,9 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with decl_emit(
   self : AttributeSetMethodEmit,
 ) -> Code {
   let args = trait_method_decl_args(self.args)
-  Code("  set_\{safe_identifier(self.original_name)}(\{args}) -> Unit = _")
+  Code(
+    "  set_\{@type_mapping.safe_identifier(self.original_name)}(\{args}) -> Unit = _",
+  )
 }
 
 ///|
@@ -214,8 +216,8 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
 ) -> Code {
   // Emit FFI function
   let trait_name = self.interface_name
-  let ffi_name = "\{snake_case(trait_name)}_set_\{snake_case(self.original_name)}_ffi"
-  let arg_name = safe_identifier(self.original_name)
+  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_set_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  let arg_name = @type_mapping.safe_identifier(self.original_name)
   let code = StringBuilder::new()
   code
   ..write_string(
@@ -228,7 +230,7 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
   code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit default trait method implementation
-  let method_name = safe_identifier(self.original_name)
+  let method_name = @type_mapping.safe_identifier(self.original_name)
   let method_args = trait_method_impl_args(self.args)
   let call_args = func_call_args(self.args)
   code
@@ -263,7 +265,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
   // Emit FFI function
   let ret_type_str = self.return_type
   let trait_name = self.interface_name
-  let ffi_name = "\{snake_case(trait_name)}_\{snake_case(self.original_name)}_ffi"
+  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
   let code = StringBuilder::new()
   code
   ..write_string(
@@ -276,7 +278,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
   code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
 
   // Emit static attribute getter implementation
-  let method_name = safe_identifier(self.original_name)
+  let method_name = @type_mapping.safe_identifier(self.original_name)
   code
   ..write_string(
     "pub fn \{trait_name}::\{method_name}() -> \{ret_type_str} {\n",
@@ -290,7 +292,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
 
 ///|
 /// Generate method declaration arguments string for trait method.
-fn trait_method_decl_args(args : Array[MethodArg]) -> String {
+fn trait_method_decl_args(args : Array[@type_mapping.MethodArg]) -> String {
   args
   .map(arg => {
     let arg_name = if arg.optional { "\{arg.name}?" } else { arg.name }
@@ -301,10 +303,10 @@ fn trait_method_decl_args(args : Array[MethodArg]) -> String {
 }
 
 ///|
-fn trait_method_impl_args(args : Array[MethodArg]) -> String {
+fn trait_method_impl_args(args : Array[@type_mapping.MethodArg]) -> String {
   args
   .map(arg => {
-    let arg_name = safe_identifier(arg.name)
+    let arg_name = @type_mapping.safe_identifier(arg.name)
     let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
     let arg_decl = "\{arg_name} : \{arg.type_.name()}"
     match arg.default_value {
@@ -316,14 +318,20 @@ fn trait_method_impl_args(args : Array[MethodArg]) -> String {
 }
 
 ///|
-fn func_call_args(args : Array[MethodArg]) -> String {
+fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
   args
   .map(arg => {
-    let arg_name = safe_identifier(arg.name)
-    if (arg.type_ is Union(_) && arg.optional && arg.default_value is Some(_)) ||
-      (arg.type_ is Union(_) && !arg.optional) {
+    let arg_name = @type_mapping.safe_identifier(arg.name)
+    if (
+        arg.type_ is @type_mapping.Union(_) &&
+        arg.optional &&
+        arg.default_value is Some(_)
+      ) ||
+      (arg.type_ is @type_mapping.Union(_) && !arg.optional) {
       "\{arg_name}.to_js()"
-    } else if arg.type_ is Union(_) && arg.optional && arg.default_value is None {
+    } else if arg.type_ is @type_mapping.Union(_) &&
+      arg.optional &&
+      arg.default_value is None {
       "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n},"
     } else if arg.optional && arg.default_value is None {
       "opt_to_js(\{arg_name})"
