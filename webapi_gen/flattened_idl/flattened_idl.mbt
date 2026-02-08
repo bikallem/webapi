@@ -96,7 +96,7 @@ pub fn flatten(
     callbacks: partial_merged.callback_functions,
   }
 
-  // Transform CallbackInterfaceDefinitions to CallbackFunctionDefinitions  
+  // Transform CallbackInterfaceDefinitions to CallbackFunctionDefinitions
   for name, cbi in partial_merged.callback_interfaces {
     // CallbackInterface::members only holds one operation member
     let op = loop cbi.members.map(m => m.callback_interface_member)[:] {
@@ -104,11 +104,12 @@ pub fn flatten(
         logger(
           "CallbackInterface '\{name}' has no operation member to convert to CallbackFunction",
         )
-        panic()
+        break None
       }
-      [Operation(op), ..] => break op
+      [Operation(op), ..] => break Some(op)
       [_, .. rest] => continue rest
     }
+    guard op is Some(op) else { continue }
     let cbf : @parser.CallbackFunctionDefinition = {
       name: cbi.name,
       return_type: op.return_type,

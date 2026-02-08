@@ -78,6 +78,7 @@ fn PartialMerged::merge_dictionary(
 /// Merges partial definitions from filtered IDL definitions
 pub fn merge_partials(
   filtered : Array[@parser.DefinitionExtendedAttributes],
+  logger~ : (String) -> Unit = ignore,
 ) -> PartialMerged {
   let partial_merged = PartialMerged::{
     interfaces: Map::new(),
@@ -134,8 +135,8 @@ pub fn merge_partials(
           hashset_from_optional(def.spec),
         )
       Includes(inc) => partial_merged.include_statements.push(inc)
-      PartialNamespace(_) => println("Partial namespace not supported")
-      Namespace(_) => println("Namespace not supported")
+      PartialNamespace(_) => logger("Partial namespace not supported")
+      Namespace(_) => logger("Namespace not supported")
     }
   }
   partial_merged
