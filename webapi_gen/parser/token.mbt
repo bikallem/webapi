@@ -1,3 +1,4 @@
+///|
 pub(all) enum Token {
   EOF
   INTEGER(String)
@@ -91,6 +92,7 @@ pub(all) enum Token {
   STAR
 } derive(Show, ToJson)
 
+///|
 pub fn Token::kind(self : Token) -> TokenKind {
   match self {
     EOF => TK_EOF
@@ -186,6 +188,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
   }
 }
 
+///|
 pub(all) enum TokenKind {
   TK_EOF
   TK_INTEGER
@@ -277,8 +280,9 @@ pub(all) enum TokenKind {
   TK_QUESTION
   TK_ELLIPSIS
   TK_STAR
-}
+} derive(Eq)
 
+///|
 pub impl Show for TokenKind with output(self, logger) {
   logger.write_string(
     match self {
@@ -372,7 +376,6 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_QUESTION => "\"?\""
       TK_ELLIPSIS => "\"...\""
       TK_STAR => "\"*\""
-    }
+    },
   )
 }
-

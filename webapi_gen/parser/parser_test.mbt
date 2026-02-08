@@ -6,20 +6,32 @@ test "parse empty input" {
 }
 
 ///|
-test "parse simple interface" (t : @test.Test) {
+test "parse simple interface" {
   let idl =
     #|interface Foo {
     #|  constructor(optional sequence<BlobPart> blobParts, optional BlobPropertyBag options = {});
     #|  attribute DOMString bar;
-    #|  
+    #|
     #|  // slice Blob into byte-ranged chunks
     #|  Blob slice(optional [Clamp] long long start,
     #|        optional [Clamp] long long end,
     #|        optional DOMString contentType);
     #|};
   let result = @parser.parse(idl)
-  t.write(result.to_json().stringify(indent=2))
-  t.snapshot(filename="parse simple interface.json")
+  assert_eq(result.length(), 1)
+  let def = result[0].definition
+  guard def is Definition::Interface(iface) else { fail("expected Interface") }
+  assert_eq(iface.name, "Foo")
+  assert_eq(iface.members.length(), 3)
+  assert_true(
+    iface.members[0].interface_member is InterfaceMember::Constructor(_),
+  )
+  assert_true(
+    iface.members[1].interface_member is InterfaceMember::Attribute(_),
+  )
+  assert_true(
+    iface.members[2].interface_member is InterfaceMember::RegularOperation(_),
+  )
 }
 
 ///|
@@ -716,7 +728,7 @@ test "position file is set" {
 }
 
 ///|
-test "comprehensive integration test" (t : @test.Test) {
+test "comprehensive integration test" {
   let idl =
     #|// Test WebIDL Parser - Comprehensive Test
     #|/* This tests all supported WebIDL constructs:
@@ -831,6 +843,36 @@ test "comprehensive integration test" (t : @test.Test) {
     #|  readonly attribute unsigned long width;
     #|};
   let defs = @parser.parse(idl)
-  t.write(defs.to_json().stringify(indent=2))
-  t.snapshot(filename="comprehensive integration test.json")
+  // 19 top-level definitions
+  assert_eq(defs.length(), 19)
+  // Verify each definition type in order
+  assert_true(defs[0].definition is Definition::Interface(_)) // EventTarget
+  assert_true(defs[1].definition is Definition::CallbackInterface(_)) // EventListener
+  assert_true(defs[2].definition is Definition::PartialInterface(_)) // Document
+  assert_true(defs[3].definition is Definition::Mixin(_)) // WindowEventHandlers
+  assert_true(defs[4].definition is Definition::PartialMixin(_)) // GlobalEventHandlers
+  assert_true(defs[5].definition is Definition::Namespace(_)) // CSS
+  assert_true(defs[6].definition is Definition::PartialNamespace(_)) // CSS
+  assert_true(defs[7].definition is Definition::Dictionary(_)) // AddEventListenerOptions
+  assert_true(defs[8].definition is Definition::Dictionary(_)) // EventListenerOptions
+  assert_true(defs[9].definition is Definition::PartialDictionary(_)) // RequestInit
+  assert_true(defs[10].definition is Definition::Enum(_)) // ScrollBehavior
+  assert_true(defs[11].definition is Definition::Typedef(_)) // DOMStringList
+  assert_true(defs[12].definition is Definition::CallbackFunction(_)) // EventHandler
+  assert_true(defs[13].definition is Definition::Includes(_)) // Window includes
+  assert_true(defs[14].definition is Definition::Interface(_)) // HTMLCollection
+  assert_true(defs[15].definition is Definition::Interface(_)) // Headers
+  assert_true(defs[16].definition is Definition::Interface(_)) // DOMTokenList
+  assert_true(defs[17].definition is Definition::Interface(_)) // URL
+  assert_true(defs[18].definition is Definition::Interface(_)) // HTMLImageElement
+  // Verify extended attributes on first def
+  assert_eq(defs[0].extended_attributes.length(), 1)
+  // Verify NamedArgList extended attribute on last def
+  assert_eq(defs[18].extended_attributes.length(), 2)
+  guard defs[18].extended_attributes[1]
+    is ExtendedAttribute::NamedArgList(name, value, _) else {
+    fail("expected NamedArgList")
+  }
+  assert_eq(name, "LegacyFactoryFunction")
+  assert_eq(value, "Image")
 }

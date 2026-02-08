@@ -2,17 +2,5 @@
     "import": [
         "moonbitlang/x/fs",
         "moonbitlang/x/path"
-    ],
-    "pre-build": [
-        {
-            "command": "node $mod_dir/../../moonyacc/target/js/release/build/main/main.js --mode only-tokens $input -o $output",
-            "input": "parser.mbty",
-            "output": "token.mbt"
-        },
-        {
-            "command": "node $mod_dir/../../moonyacc/target/js/release/build/main/main.js --no-comments --external-tokens $input -o $output",
-            "input": "parser.mbty",
-            "output": "parser.mbt"
-        }
     ]
 }
