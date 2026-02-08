@@ -89,6 +89,16 @@ fn Parser::expect(self : Parser, kind : TokenKind) -> Token raise ParseError {
 }
 
 ///|
+fn Parser::skip(self : Parser, kind : TokenKind) -> Unit raise ParseError {
+  let _ = self.expect(kind)
+}
+
+///|
+fn Parser::skip_next(self : Parser) -> Unit {
+  let _ = self.advance()
+}
+
+///|
 fn Parser::eat(self : Parser, kind : TokenKind) -> Bool {
   if self.peek_kind() == kind {
     self.pos += 1
@@ -224,13 +234,13 @@ fn Parser::parse_definition(self : Parser) -> Definition raise ParseError {
 fn Parser::parse_interface_def(
   self : Parser,
 ) -> InterfaceDefinition raise ParseError {
-  let _ = self.expect(TK_INTERFACE)
+  self.skip(TK_INTERFACE)
   let name = self.expect_identifier()
   let inheritance = self.parse_inheritance()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_interface_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, inheritance, members }
 }
 
@@ -238,25 +248,25 @@ fn Parser::parse_interface_def(
 fn Parser::parse_partial_interface_def(
   self : Parser,
 ) -> PartialInterfaceDefinition raise ParseError {
-  let _ = self.expect(TK_PARTIAL)
-  let _ = self.expect(TK_INTERFACE)
+  self.skip(TK_PARTIAL)
+  self.skip(TK_INTERFACE)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_interface_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, members }
 }
 
 ///|
 fn Parser::parse_mixin_def(self : Parser) -> MixinDefinition raise ParseError {
-  let _ = self.expect(TK_INTERFACE)
-  let _ = self.expect(TK_MIXIN)
+  self.skip(TK_INTERFACE)
+  self.skip(TK_MIXIN)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_interface_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, members }
 }
 
@@ -264,14 +274,14 @@ fn Parser::parse_mixin_def(self : Parser) -> MixinDefinition raise ParseError {
 fn Parser::parse_partial_mixin_def(
   self : Parser,
 ) -> PartialMixinDefinition raise ParseError {
-  let _ = self.expect(TK_PARTIAL)
-  let _ = self.expect(TK_INTERFACE)
-  let _ = self.expect(TK_MIXIN)
+  self.skip(TK_PARTIAL)
+  self.skip(TK_INTERFACE)
+  self.skip(TK_MIXIN)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_interface_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, members }
 }
 
@@ -279,12 +289,12 @@ fn Parser::parse_partial_mixin_def(
 fn Parser::parse_namespace_def(
   self : Parser,
 ) -> NamespaceDefinition raise ParseError {
-  let _ = self.expect(TK_NAMESPACE)
+  self.skip(TK_NAMESPACE)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_namespace_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, members }
 }
 
@@ -292,13 +302,13 @@ fn Parser::parse_namespace_def(
 fn Parser::parse_partial_namespace_def(
   self : Parser,
 ) -> PartialNamespaceDefinition raise ParseError {
-  let _ = self.expect(TK_PARTIAL)
-  let _ = self.expect(TK_NAMESPACE)
+  self.skip(TK_PARTIAL)
+  self.skip(TK_NAMESPACE)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_namespace_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, members }
 }
 
@@ -306,13 +316,13 @@ fn Parser::parse_partial_namespace_def(
 fn Parser::parse_dictionary_def(
   self : Parser,
 ) -> DictionaryDefinition raise ParseError {
-  let _ = self.expect(TK_DICTIONARY)
+  self.skip(TK_DICTIONARY)
   let name = self.expect_identifier()
   let inheritance = self.parse_inheritance()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_dictionary_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, inheritance, members }
 }
 
@@ -320,24 +330,24 @@ fn Parser::parse_dictionary_def(
 fn Parser::parse_partial_dictionary_def(
   self : Parser,
 ) -> PartialDictionaryDefinition raise ParseError {
-  let _ = self.expect(TK_PARTIAL)
-  let _ = self.expect(TK_DICTIONARY)
+  self.skip(TK_PARTIAL)
+  self.skip(TK_DICTIONARY)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_dictionary_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, members }
 }
 
 ///|
 fn Parser::parse_enum_def(self : Parser) -> EnumDefinition raise ParseError {
-  let _ = self.expect(TK_ENUM)
+  self.skip(TK_ENUM)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let values = self.parse_enum_value_list()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, values, spec: None }
 }
 
@@ -345,10 +355,10 @@ fn Parser::parse_enum_def(self : Parser) -> EnumDefinition raise ParseError {
 fn Parser::parse_typedef_def(
   self : Parser,
 ) -> TypedefDefinition raise ParseError {
-  let _ = self.expect(TK_TYPEDEF)
+  self.skip(TK_TYPEDEF)
   let type_ = self.parse_type()
   let name = self.expect_identifier()
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_SEMICOLON)
   { type_, name, spec: None }
 }
 
@@ -356,14 +366,14 @@ fn Parser::parse_typedef_def(
 fn Parser::parse_callback_def(
   self : Parser,
 ) -> CallbackFunctionDefinition raise ParseError {
-  let _ = self.expect(TK_CALLBACK)
+  self.skip(TK_CALLBACK)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_EQUALS)
+  self.skip(TK_EQUALS)
   let return_type = self.parse_type()
-  let _ = self.expect(TK_LPAREN)
+  self.skip(TK_LPAREN)
   let arguments = self.parse_argument_list()
-  let _ = self.expect(TK_RPAREN)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RPAREN)
+  self.skip(TK_SEMICOLON)
   { name, return_type, arguments, spec: None }
 }
 
@@ -371,13 +381,13 @@ fn Parser::parse_callback_def(
 fn Parser::parse_callback_interface_def(
   self : Parser,
 ) -> CallbackInterfaceDefinition raise ParseError {
-  let _ = self.expect(TK_CALLBACK)
-  let _ = self.expect(TK_INTERFACE)
+  self.skip(TK_CALLBACK)
+  self.skip(TK_INTERFACE)
   let name = self.expect_identifier()
-  let _ = self.expect(TK_LBRACE)
+  self.skip(TK_LBRACE)
   let members = self.parse_callback_interface_members()
-  let _ = self.expect(TK_RBRACE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RBRACE)
+  self.skip(TK_SEMICOLON)
   { name, members, spec: None }
 }
 
@@ -386,9 +396,9 @@ fn Parser::parse_includes_statement(
   self : Parser,
 ) -> IncludesStatement raise ParseError {
   let interface_name = self.expect_identifier()
-  let _ = self.expect(TK_INCLUDES)
+  self.skip(TK_INCLUDES)
   let mixin_name = self.expect_identifier()
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_SEMICOLON)
   { interface_name, mixin_name }
 }
 
@@ -453,24 +463,24 @@ fn Parser::parse_interface_member(
   match self.peek_kind() {
     TK_CONST => Const(self.parse_const_member())
     TK_CONSTRUCTOR => {
-      let _ = self.advance()
-      let _ = self.expect(TK_LPAREN)
+      self.skip_next()
+      self.skip(TK_LPAREN)
       let arguments = self.parse_argument_list()
-      let _ = self.expect(TK_RPAREN)
-      let _ = self.expect(TK_SEMICOLON)
+      self.skip(TK_RPAREN)
+      self.skip(TK_SEMICOLON)
       Constructor({ arguments, })
     }
     TK_STRINGIFIER => {
-      let _ = self.advance()
+      self.skip_next()
       if self.eat(TK_SEMICOLON) {
         Stringifier(StringifierMember::Bare)
       } else {
         // stringifier [readonly] attribute Type name ;
         let is_readonly = self.eat(TK_READONLY)
-        let _ = self.expect(TK_ATTRIBUTE)
+        self.skip(TK_ATTRIBUTE)
         let type_with_ea = self.parse_type_with_extended_attributes()
         let name = self.parse_attribute_name()
-        let _ = self.expect(TK_SEMICOLON)
+        self.skip(TK_SEMICOLON)
         Attribute({
           type_: type_with_ea.type_,
           name,
@@ -481,14 +491,14 @@ fn Parser::parse_interface_member(
       }
     }
     TK_STATIC => {
-      let _ = self.advance()
+      self.skip_next()
       if self.peek_kind() == TK_READONLY && self.peek2_kind() == TK_ATTRIBUTE {
         // static readonly attribute
-        let _ = self.advance() // readonly
-        let _ = self.advance() // attribute
+        self.skip_next() // readonly
+        self.skip_next() // attribute
         let type_with_ea = self.parse_type_with_extended_attributes()
         let name = self.parse_attribute_name()
-        let _ = self.expect(TK_SEMICOLON)
+        self.skip(TK_SEMICOLON)
         Attribute({
           type_: type_with_ea.type_,
           name,
@@ -498,10 +508,10 @@ fn Parser::parse_interface_member(
         })
       } else if self.peek_kind() == TK_ATTRIBUTE {
         // static attribute
-        let _ = self.advance() // attribute
+        self.skip_next() // attribute
         let type_with_ea = self.parse_type_with_extended_attributes()
         let name = self.parse_attribute_name()
-        let _ = self.expect(TK_SEMICOLON)
+        self.skip(TK_SEMICOLON)
         Attribute({
           type_: type_with_ea.type_,
           name,
@@ -520,32 +530,32 @@ fn Parser::parse_interface_member(
       Iterable(iterable)
     }
     TK_ASYNC_ITERABLE => {
-      let _ = self.advance()
-      let _ = self.expect(TK_LANGLE)
+      self.skip_next()
+      self.skip(TK_LANGLE)
       let first_type = self.parse_type()
       if self.eat(TK_COMMA) {
         let second_type = self.parse_type()
-        let _ = self.expect(TK_RANGLE)
-        let _ = self.expect(TK_SEMICOLON)
+        self.skip(TK_RANGLE)
+        self.skip(TK_SEMICOLON)
         AsyncIterable({
           key_type: Some(first_type),
           value_type: second_type,
           arguments: [],
         })
       } else {
-        let _ = self.expect(TK_RANGLE)
-        let _ = self.expect(TK_SEMICOLON)
+        self.skip(TK_RANGLE)
+        self.skip(TK_SEMICOLON)
         AsyncIterable({ key_type: None, value_type: first_type, arguments: [] })
       }
     }
     TK_READONLY => {
-      let _ = self.advance()
+      self.skip_next()
       match self.peek_kind() {
         TK_ATTRIBUTE => {
-          let _ = self.advance()
+          self.skip_next()
           let type_with_ea = self.parse_type_with_extended_attributes()
           let name = self.parse_attribute_name()
-          let _ = self.expect(TK_SEMICOLON)
+          self.skip(TK_SEMICOLON)
           Attribute({
             type_: type_with_ea.type_,
             name,
@@ -571,12 +581,12 @@ fn Parser::parse_interface_member(
       }
     }
     TK_INHERIT => {
-      let _ = self.advance()
+      self.skip_next()
       let is_readonly = self.eat(TK_READONLY)
-      let _ = self.expect(TK_ATTRIBUTE)
+      self.skip(TK_ATTRIBUTE)
       let type_with_ea = self.parse_type_with_extended_attributes()
       let name = self.parse_attribute_name()
-      let _ = self.expect(TK_SEMICOLON)
+      self.skip(TK_SEMICOLON)
       Attribute({
         type_: type_with_ea.type_,
         name,
@@ -586,10 +596,10 @@ fn Parser::parse_interface_member(
       })
     }
     TK_ATTRIBUTE => {
-      let _ = self.advance()
+      self.skip_next()
       let type_with_ea = self.parse_type_with_extended_attributes()
       let name = self.parse_attribute_name()
-      let _ = self.expect(TK_SEMICOLON)
+      self.skip(TK_SEMICOLON)
       Attribute({
         type_: type_with_ea.type_,
         name,
@@ -599,13 +609,13 @@ fn Parser::parse_interface_member(
       })
     }
     TK_GETTER => {
-      let _ = self.advance()
+      self.skip_next()
       let return_type = self.parse_type()
       let name = self.parse_operation_name()
-      let _ = self.expect(TK_LPAREN)
+      self.skip(TK_LPAREN)
       let arguments = self.parse_argument_list()
-      let _ = self.expect(TK_RPAREN)
-      let _ = self.expect(TK_SEMICOLON)
+      self.skip(TK_RPAREN)
+      self.skip(TK_SEMICOLON)
       SpecialOperation({
         return_type,
         name,
@@ -614,13 +624,13 @@ fn Parser::parse_interface_member(
       })
     }
     TK_SETTER => {
-      let _ = self.advance()
+      self.skip_next()
       let return_type = self.parse_type()
       let name = self.parse_operation_name()
-      let _ = self.expect(TK_LPAREN)
+      self.skip(TK_LPAREN)
       let arguments = self.parse_argument_list()
-      let _ = self.expect(TK_RPAREN)
-      let _ = self.expect(TK_SEMICOLON)
+      self.skip(TK_RPAREN)
+      self.skip(TK_SEMICOLON)
       SpecialOperation({
         return_type,
         name,
@@ -629,13 +639,13 @@ fn Parser::parse_interface_member(
       })
     }
     TK_DELETER => {
-      let _ = self.advance()
+      self.skip_next()
       let return_type = self.parse_type()
       let name = self.parse_operation_name()
-      let _ = self.expect(TK_LPAREN)
+      self.skip(TK_LPAREN)
       let arguments = self.parse_argument_list()
-      let _ = self.expect(TK_RPAREN)
-      let _ = self.expect(TK_SEMICOLON)
+      self.skip(TK_RPAREN)
+      self.skip(TK_SEMICOLON)
       SpecialOperation({
         return_type,
         name,
@@ -658,21 +668,21 @@ fn Parser::parse_regular_operation_member(
   let return_type = self.parse_type()
   let name_tok = self.expect_identifier()
   let name = name_tok.trim(chars="_").to_string()
-  let _ = self.expect(TK_LPAREN)
+  self.skip(TK_LPAREN)
   let arguments = self.parse_argument_list()
-  let _ = self.expect(TK_RPAREN)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RPAREN)
+  self.skip(TK_SEMICOLON)
   { return_type, name, arguments, static_: false }
 }
 
 ///|
 fn Parser::parse_const_member(self : Parser) -> ConstMember raise ParseError {
-  let _ = self.expect(TK_CONST)
+  self.skip(TK_CONST)
   let type_ = self.parse_type()
   let name = self.expect_identifier()
-  let _ = self.expect(TK_EQUALS)
+  self.skip(TK_EQUALS)
   let value = self.parse_const_value()
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_SEMICOLON)
   { type_, name, value }
 }
 
@@ -689,17 +699,17 @@ fn Parser::parse_operation_name(self : Parser) -> String? raise ParseError {
 fn Parser::parse_iterable_member(
   self : Parser,
 ) -> IterableMember raise ParseError {
-  let _ = self.expect(TK_ITERABLE)
-  let _ = self.expect(TK_LANGLE)
+  self.skip(TK_ITERABLE)
+  self.skip(TK_LANGLE)
   let first_type = self.parse_type()
   if self.eat(TK_COMMA) {
     let second_type = self.parse_type()
-    let _ = self.expect(TK_RANGLE)
-    let _ = self.expect(TK_SEMICOLON)
+    self.skip(TK_RANGLE)
+    self.skip(TK_SEMICOLON)
     { key_type: Some(first_type), value_type: second_type }
   } else {
-    let _ = self.expect(TK_RANGLE)
-    let _ = self.expect(TK_SEMICOLON)
+    self.skip(TK_RANGLE)
+    self.skip(TK_SEMICOLON)
     { key_type: None, value_type: first_type }
   }
 }
@@ -708,13 +718,13 @@ fn Parser::parse_iterable_member(
 fn Parser::parse_maplike_member(
   self : Parser,
 ) -> MaplikeMember raise ParseError {
-  let _ = self.expect(TK_MAPLIKE)
-  let _ = self.expect(TK_LANGLE)
+  self.skip(TK_MAPLIKE)
+  self.skip(TK_LANGLE)
   let key_type = self.parse_type()
-  let _ = self.expect(TK_COMMA)
+  self.skip(TK_COMMA)
   let value_type = self.parse_type()
-  let _ = self.expect(TK_RANGLE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RANGLE)
+  self.skip(TK_SEMICOLON)
   { key_type, value_type, is_readonly: false }
 }
 
@@ -722,11 +732,11 @@ fn Parser::parse_maplike_member(
 fn Parser::parse_setlike_member(
   self : Parser,
 ) -> SetlikeMember raise ParseError {
-  let _ = self.expect(TK_SETLIKE)
-  let _ = self.expect(TK_LANGLE)
+  self.skip(TK_SETLIKE)
+  self.skip(TK_LANGLE)
   let value_type = self.parse_type()
-  let _ = self.expect(TK_RANGLE)
-  let _ = self.expect(TK_SEMICOLON)
+  self.skip(TK_RANGLE)
+  self.skip(TK_SEMICOLON)
   { value_type, is_readonly: false }
 }
 
@@ -752,11 +762,11 @@ fn Parser::parse_namespace_member(
   self : Parser,
 ) -> NamespaceMember raise ParseError {
   if self.peek_kind() == TK_READONLY {
-    let _ = self.advance()
-    let _ = self.expect(TK_ATTRIBUTE)
+    self.skip_next()
+    self.skip(TK_ATTRIBUTE)
     let type_ = self.parse_type()
     let name = self.expect_identifier()
-    let _ = self.expect(TK_SEMICOLON)
+    self.skip(TK_SEMICOLON)
     NamespaceMember::Attribute({
       type_,
       name,
@@ -795,7 +805,7 @@ fn Parser::parse_dictionary_member(
   if self.eat(TK_REQUIRED) {
     let type_ = self.parse_type()
     let name = self.expect_identifier()
-    let _ = self.expect(TK_SEMICOLON)
+    self.skip(TK_SEMICOLON)
     {
       extended_attributes: [],
       type_,
@@ -807,7 +817,7 @@ fn Parser::parse_dictionary_member(
     let type_ = self.parse_type()
     let name = self.expect_identifier()
     let default_value = self.parse_default_value_opt()
-    let _ = self.expect(TK_SEMICOLON)
+    self.skip(TK_SEMICOLON)
     { extended_attributes: [], type_, name, required: false, default_value }
   }
 }
@@ -979,14 +989,14 @@ fn Parser::parse_type_with_extended_attributes(
 ///|
 fn Parser::parse_single_type(self : Parser) -> Type raise ParseError {
   if self.peek_kind() == TK_ANY {
-    let _ = self.advance()
+    self.skip_next()
     return Type::Any
   }
   if self.peek_kind() == TK_PROMISE {
-    let _ = self.advance()
-    let _ = self.expect(TK_LANGLE)
+    self.skip_next()
+    self.skip(TK_LANGLE)
     let inner = self.parse_type()
-    let _ = self.expect(TK_RANGLE)
+    self.skip(TK_RANGLE)
     return Type::Promise(inner)
   }
   let type_ = self.parse_distinguishable_type()
@@ -999,15 +1009,15 @@ fn Parser::parse_single_type(self : Parser) -> Type raise ParseError {
 
 ///|
 fn Parser::parse_union_type(self : Parser) -> Type raise ParseError {
-  let _ = self.expect(TK_LPAREN)
+  self.skip(TK_LPAREN)
   let members : Array[TypeWithExtendedAttributes] = []
   members.push(self.parse_union_member_type())
-  let _ = self.expect(TK_OR)
+  self.skip(TK_OR)
   members.push(self.parse_union_member_type())
   while self.eat(TK_OR) {
     members.push(self.parse_union_member_type())
   }
-  let _ = self.expect(TK_RPAREN)
+  self.skip(TK_RPAREN)
   Type::Union(members)
 }
 
@@ -1067,53 +1077,53 @@ fn Parser::parse_distinguishable_type(self : Parser) -> Type raise ParseError {
     }
     // Parameterized types
     TK_SEQUENCE => {
-      let _ = self.advance()
-      let _ = self.expect(TK_LANGLE)
+      self.skip_next()
+      self.skip(TK_LANGLE)
       let inner = self.parse_type()
-      let _ = self.expect(TK_RANGLE)
+      self.skip(TK_RANGLE)
       Type::Sequence(inner)
     }
     TK_ASYNC_SEQUENCE => {
-      let _ = self.advance()
-      let _ = self.expect(TK_LANGLE)
+      self.skip_next()
+      self.skip(TK_LANGLE)
       let inner = self.parse_type_with_extended_attributes()
-      let _ = self.expect(TK_RANGLE)
+      self.skip(TK_RANGLE)
       Type::AsyncSequence(inner)
     }
     TK_FROZENARRAY => {
-      let _ = self.advance()
-      let _ = self.expect(TK_LANGLE)
+      self.skip_next()
+      self.skip(TK_LANGLE)
       let inner = self.parse_type_with_extended_attributes()
-      let _ = self.expect(TK_RANGLE)
+      self.skip(TK_RANGLE)
       Type::FrozenArray(inner)
     }
     TK_OBSERVABLEARRAY => {
-      let _ = self.advance()
-      let _ = self.expect(TK_LANGLE)
+      self.skip_next()
+      self.skip(TK_LANGLE)
       let inner = self.parse_type_with_extended_attributes()
-      let _ = self.expect(TK_RANGLE)
+      self.skip(TK_RANGLE)
       Type::ObservableArray(inner)
     }
     TK_RECORD => {
-      let _ = self.advance()
-      let _ = self.expect(TK_LANGLE)
+      self.skip_next()
+      self.skip(TK_LANGLE)
       let st = self.parse_string_type()
-      let _ = self.expect(TK_COMMA)
+      self.skip(TK_COMMA)
       let vt = self.parse_type_with_extended_attributes()
-      let _ = self.expect(TK_RANGLE)
+      self.skip(TK_RANGLE)
       Type::Record(type_to_string_type(st), vt)
     }
     // Special types
     TK_OBJECT => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Object
     }
     TK_SYMBOL => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Symbol
     }
     TK_UNDEFINED => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Undefined
     }
     _ =>
@@ -1129,14 +1139,14 @@ fn Parser::parse_distinguishable_type(self : Parser) -> Type raise ParseError {
 fn Parser::parse_primitive_type(self : Parser) -> Type raise ParseError {
   match self.peek_kind() {
     TK_UNSIGNED => {
-      let _ = self.advance()
+      self.skip_next()
       match self.peek_kind() {
         TK_SHORT => {
-          let _ = self.advance()
+          self.skip_next()
           Type::UnsignedShort
         }
         TK_LONG => {
-          let _ = self.advance()
+          self.skip_next()
           if self.eat(TK_LONG) {
             Type::UnsignedLongLong
           } else {
@@ -1152,11 +1162,11 @@ fn Parser::parse_primitive_type(self : Parser) -> Type raise ParseError {
       }
     }
     TK_SHORT => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Short
     }
     TK_LONG => {
-      let _ = self.advance()
+      self.skip_next()
       if self.eat(TK_LONG) {
         Type::LongLong
       } else {
@@ -1164,14 +1174,14 @@ fn Parser::parse_primitive_type(self : Parser) -> Type raise ParseError {
       }
     }
     TK_UNRESTRICTED => {
-      let _ = self.advance()
+      self.skip_next()
       match self.peek_kind() {
         TK_FLOAT_KW => {
-          let _ = self.advance()
+          self.skip_next()
           Type::UnrestrictedFloat
         }
         TK_DOUBLE => {
-          let _ = self.advance()
+          self.skip_next()
           Type::UnrestrictedDouble
         }
         _ =>
@@ -1183,27 +1193,27 @@ fn Parser::parse_primitive_type(self : Parser) -> Type raise ParseError {
       }
     }
     TK_FLOAT_KW => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Float
     }
     TK_DOUBLE => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Double
     }
     TK_BOOLEAN => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Boolean
     }
     TK_BYTE => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Byte
     }
     TK_OCTET => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Octet
     }
     TK_BIGINT => {
-      let _ = self.advance()
+      self.skip_next()
       Type::Bigint
     }
     _ =>
@@ -1219,15 +1229,15 @@ fn Parser::parse_primitive_type(self : Parser) -> Type raise ParseError {
 fn Parser::parse_string_type(self : Parser) -> Type raise ParseError {
   match self.peek_kind() {
     TK_DOMSTRING => {
-      let _ = self.advance()
+      self.skip_next()
       Type::DOMString
     }
     TK_BYTESTRING => {
-      let _ = self.advance()
+      self.skip_next()
       Type::ByteString
     }
     TK_USVSTRING => {
-      let _ = self.advance()
+      self.skip_next()
       Type::USVString
     }
     _ =>
@@ -1270,11 +1280,11 @@ fn Parser::parse_buffer_type(self : Parser) -> Type {
 fn Parser::parse_const_value(self : Parser) -> Const raise ParseError {
   match self.peek_kind() {
     TK_TRUE => {
-      let _ = self.advance()
+      self.skip_next()
       Const::Boolean("true")
     }
     TK_FALSE => {
-      let _ = self.advance()
+      self.skip_next()
       Const::Boolean("false")
     }
     TK_INTEGER => {
@@ -1287,15 +1297,15 @@ fn Parser::parse_const_value(self : Parser) -> Const raise ParseError {
         _ => abort("unreachable")
       }
     TK_INFINITY => {
-      let _ = self.advance()
+      self.skip_next()
       Const::Float(FloatLiteral::Infinity)
     }
     TK_NEG_INFINITY => {
-      let _ = self.advance()
+      self.skip_next()
       Const::Float(FloatLiteral::NegInfinity)
     }
     TK_NAN => {
-      let _ = self.advance()
+      self.skip_next()
       Const::Float(FloatLiteral::NaN)
     }
     _ =>
@@ -1326,21 +1336,21 @@ fn Parser::parse_default_value(self : Parser) -> DefaultValue raise ParseError {
       DefaultValue::String(s)
     }
     TK_LBRACKET => {
-      let _ = self.advance()
-      let _ = self.expect(TK_RBRACKET)
+      self.skip_next()
+      self.skip(TK_RBRACKET)
       DefaultValue::EmptySequence
     }
     TK_LBRACE => {
-      let _ = self.advance()
-      let _ = self.expect(TK_RBRACE)
+      self.skip_next()
+      self.skip(TK_RBRACE)
       DefaultValue::EmptyObject
     }
     TK_NULL => {
-      let _ = self.advance()
+      self.skip_next()
       DefaultValue::Null
     }
     TK_UNDEFINED => {
-      let _ = self.advance()
+      self.skip_next()
       DefaultValue::Undefined
     }
     _ => DefaultValue::ConstValue(self.parse_const_value())
@@ -1358,13 +1368,13 @@ fn Parser::parse_extended_attribute_list(
   if self.peek_kind() != TK_LBRACKET {
     return []
   }
-  let _ = self.advance() // consume [
+  self.skip_next() // consume [
   let attrs : Array[ExtendedAttribute] = []
   attrs.push(self.parse_extended_attribute())
   while self.eat(TK_COMMA) {
     attrs.push(self.parse_extended_attribute())
   }
-  let _ = self.expect(TK_RBRACKET)
+  self.skip(TK_RBRACKET)
   attrs
 }
 
@@ -1378,17 +1388,17 @@ fn Parser::parse_extended_attribute(
     match self.peek_kind() {
       TK_LPAREN => {
         // name = ( ... )
-        let _ = self.advance()
+        self.skip_next()
         // Check if it's IntPair: name = (INT, INT) or IdentList: name = (id, id, ...)
         if self.peek_kind() == TK_INTEGER {
           let i1 = self.expect_integer()
-          let _ = self.expect(TK_COMMA)
+          self.skip(TK_COMMA)
           let i2 = self.expect_integer()
-          let _ = self.expect(TK_RPAREN)
+          self.skip(TK_RPAREN)
           ExtendedAttribute::IntPair(name, i1, i2)
         } else {
           let idents = self.parse_identifier_list()
-          let _ = self.expect(TK_RPAREN)
+          self.skip(TK_RPAREN)
           ExtendedAttribute::IdentList(name, idents)
         }
       }
@@ -1396,9 +1406,9 @@ fn Parser::parse_extended_attribute(
         let value = self.expect_identifier()
         if self.peek_kind() == TK_LPAREN {
           // NamedArgList: name = value(args)
-          let _ = self.advance()
+          self.skip_next()
           let args = self.parse_argument_list()
-          let _ = self.expect(TK_RPAREN)
+          self.skip(TK_RPAREN)
           ExtendedAttribute::NamedArgList(name, value, args)
         } else {
           ExtendedAttribute::Ident(name, value)
@@ -1418,7 +1428,7 @@ fn Parser::parse_extended_attribute(
         ExtendedAttribute::Ident(name, s)
       }
       TK_STAR => {
-        let _ = self.advance()
+        self.skip_next()
         ExtendedAttribute::Wildcard(name)
       }
       _ =>
@@ -1430,9 +1440,9 @@ fn Parser::parse_extended_attribute(
     }
   } else if self.peek_kind() == TK_LPAREN {
     // ArgList: name(args)
-    let _ = self.advance()
+    self.skip_next()
     let args = self.parse_argument_list()
-    let _ = self.expect(TK_RPAREN)
+    self.skip(TK_RPAREN)
     ExtendedAttribute::ArgList(name, args)
   } else {
     // NoArgs: name
