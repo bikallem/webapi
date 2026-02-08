@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: EventModifierInit
-// Specifications: uievents.idl
+// Specifications: uievents.idl, dom.idl
 
 ///|
 /// [EventModifierInit](https://developer.mozilla.org/en-US/docs/Web/API/EventModifierInit)
@@ -12,6 +12,9 @@ pub impl TJsValue for EventModifierInit with to_js(self : EventModifierInit) -> 
 
 ///|
 extern "js" fn event_modifier_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
   view : JsValue,
   detail : JsValue,
   which : JsValue,
@@ -30,8 +33,11 @@ extern "js" fn event_modifier_init_ffi(
   modifier_symbol : JsValue,
   modifier_symbol_lock : JsValue,
 ) -> EventModifierInit =
-  #|(view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock) => {
+  #|(bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock) => {
   #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
   #|  if (view !== undefined) obj.view = view;
   #|  if (detail !== undefined) obj.detail = detail;
   #|  if (which !== undefined) obj.which = which;
@@ -54,6 +60,9 @@ extern "js" fn event_modifier_init_ffi(
 
 ///|
 pub fn EventModifierInit::new(
+  bubbles? : Bool = false,
+  cancelable? : Bool = false,
+  composed? : Bool = false,
   view? : &TWindow = JsValue::null(),
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
@@ -73,6 +82,9 @@ pub fn EventModifierInit::new(
   modifier_symbol_lock? : Bool = false,
 ) -> EventModifierInit {
   event_modifier_init_ffi(
+    TJsValue::to_js(bubbles),
+    TJsValue::to_js(cancelable),
+    TJsValue::to_js(composed),
     TJsValue::to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),

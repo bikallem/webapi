@@ -880,7 +880,7 @@ pub impl TUIEvent for CompositionEvent
 #external
 pub type CompositionEventInit
 pub fn CompositionEventInit::empty() -> Self
-pub fn CompositionEventInit::new(view? : &TWindow, detail? : Int, which? : UInt, data? : String) -> Self
+pub fn CompositionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, data? : String) -> Self
 pub impl TJsValue for CompositionEventInit
 
 #external
@@ -1198,7 +1198,7 @@ pub impl TUIEvent for DragEvent
 #external
 pub type DragEventInit
 pub fn DragEventInit::empty() -> Self
-pub fn DragEventInit::new(screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, data_transfer? : &TDataTransfer) -> Self
+pub fn DragEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, data_transfer? : &TDataTransfer) -> Self
 pub impl TJsValue for DragEventInit
 
 #external
@@ -1301,7 +1301,7 @@ pub impl TJsValue for EventListenerOptions
 #external
 pub type EventModifierInit
 pub fn EventModifierInit::empty() -> Self
-pub fn EventModifierInit::new(view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool) -> Self
+pub fn EventModifierInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool) -> Self
 pub impl TJsValue for EventModifierInit
 
 #external
@@ -1408,7 +1408,7 @@ pub impl TUIEvent for FocusEvent
 #external
 pub type FocusEventInit
 pub fn FocusEventInit::empty() -> Self
-pub fn FocusEventInit::new(view? : &TWindow, detail? : Int, which? : UInt, related_target? : &TEventTarget) -> Self
+pub fn FocusEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, related_target? : &TEventTarget) -> Self
 pub impl TJsValue for FocusEventInit
 
 #external
@@ -2483,7 +2483,7 @@ pub impl TUIEvent for InputEvent
 #external
 pub type InputEventInit
 pub fn InputEventInit::empty() -> Self
-pub fn InputEventInit::new(view? : &TWindow, detail? : Int, which? : UInt, data? : String, is_composing? : Bool, input_type? : String) -> Self
+pub fn InputEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, data? : String, is_composing? : Bool, input_type? : String) -> Self
 pub impl TJsValue for InputEventInit
 
 #external
@@ -2541,7 +2541,7 @@ pub impl TUIEvent for KeyboardEvent
 #external
 pub type KeyboardEventInit
 pub fn KeyboardEventInit::empty() -> Self
-pub fn KeyboardEventInit::new(ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, key? : String, code? : String, location? : UInt, repeat? : Bool, is_composing? : Bool, char_code? : UInt, key_code? : UInt) -> Self
+pub fn KeyboardEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, key? : String, code? : String, location? : UInt, repeat? : Bool, is_composing? : Bool, char_code? : UInt, key_code? : UInt) -> Self
 pub impl TJsValue for KeyboardEventInit
 
 #external
@@ -2658,7 +2658,7 @@ pub impl TUIEvent for MouseEvent
 #external
 pub type MouseEventInit
 pub fn MouseEventInit::empty() -> Self
-pub fn MouseEventInit::new(ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget) -> Self
+pub fn MouseEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget) -> Self
 pub impl TJsValue for MouseEventInit
 
 #external
@@ -4451,7 +4451,7 @@ pub impl TWheelEvent for WheelEvent
 #external
 pub type WheelEventInit
 pub fn WheelEventInit::empty() -> Self
-pub fn WheelEventInit::new(screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : UInt) -> Self
+pub fn WheelEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : UInt) -> Self
 pub impl TJsValue for WheelEventInit
 
 #alias(WindowProxy)

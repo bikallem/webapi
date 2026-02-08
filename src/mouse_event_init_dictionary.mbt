@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: MouseEventInit
-// Specifications: uievents.idl
+// Specifications: uievents.idl, dom.idl
 
 ///|
 /// [MouseEventInit](https://developer.mozilla.org/en-US/docs/Web/API/MouseEventInit)
@@ -12,6 +12,12 @@ pub impl TJsValue for MouseEventInit with to_js(self : MouseEventInit) -> JsValu
 
 ///|
 extern "js" fn mouse_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view : JsValue,
+  detail : JsValue,
+  which : JsValue,
   ctrl_key : JsValue,
   shift_key : JsValue,
   alt_key : JsValue,
@@ -34,8 +40,14 @@ extern "js" fn mouse_event_init_ffi(
   buttons : JsValue,
   related_target : JsValue,
 ) -> MouseEventInit =
-  #|(ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget) => {
+  #|(bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget) => {
   #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (view !== undefined) obj.view = view;
+  #|  if (detail !== undefined) obj.detail = detail;
+  #|  if (which !== undefined) obj.which = which;
   #|  if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
   #|  if (shiftKey !== undefined) obj.shiftKey = shiftKey;
   #|  if (altKey !== undefined) obj.altKey = altKey;
@@ -62,6 +74,12 @@ extern "js" fn mouse_event_init_ffi(
 
 ///|
 pub fn MouseEventInit::new(
+  bubbles? : Bool = false,
+  cancelable? : Bool = false,
+  composed? : Bool = false,
+  view? : &TWindow = JsValue::null(),
+  detail? : Int = (0 : Int),
+  which? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
   shift_key? : Bool = false,
   alt_key? : Bool = false,
@@ -85,6 +103,12 @@ pub fn MouseEventInit::new(
   related_target? : &TEventTarget = JsValue::null(),
 ) -> MouseEventInit {
   mouse_event_init_ffi(
+    TJsValue::to_js(bubbles),
+    TJsValue::to_js(cancelable),
+    TJsValue::to_js(composed),
+    TJsValue::to_js(view),
+    TJsValue::to_js(detail),
+    TJsValue::to_js(which),
     TJsValue::to_js(ctrl_key),
     TJsValue::to_js(shift_key),
     TJsValue::to_js(alt_key),
