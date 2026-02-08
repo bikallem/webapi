@@ -87,15 +87,31 @@ fn emit_js_preamble() -> String {
 }
 
 ///|
+/// Check if a name needs quoting in JS (contains characters invalid in identifiers)
+fn needs_js_quoting(name : String) -> Bool {
+  name.contains("-")
+}
+
+///|
 /// Emit JS getter for an attribute
 fn emit_js_getter(attr_name : String) -> String {
-  "    get_\{attr_name}: (obj) => obj.\{attr_name}"
+  if needs_js_quoting(attr_name) {
+    let q = "\""
+    "    \{q}get_\{attr_name}\{q}: (obj) => obj[\{q}\{attr_name}\{q}]"
+  } else {
+    "    get_\{attr_name}: (obj) => obj.\{attr_name}"
+  }
 }
 
 ///|
 /// Emit JS setter for an attribute
 fn emit_js_setter(attr_name : String) -> String {
-  "    set_\{attr_name}: (obj, value) => { obj.\{attr_name} = value; }"
+  if needs_js_quoting(attr_name) {
+    let q = "\""
+    "    \{q}set_\{attr_name}\{q}: (obj, value) => { obj[\{q}\{attr_name}\{q}] = value; }"
+  } else {
+    "    set_\{attr_name}: (obj, value) => { obj.\{attr_name} = value; }"
+  }
 }
 
 ///|
