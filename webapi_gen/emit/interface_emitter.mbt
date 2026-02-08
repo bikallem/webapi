@@ -155,6 +155,222 @@ test "has_hyphen identifies names with hyphens correctly" {
 }
 
 ///|
+/// Emit a constructor member, returning emits and the new constructor count.
+fn emit_constructor(
+  ctor : @parser.ConstructorMember,
+  interface_name : String,
+  constructor_count : Int,
+  type_registry : @type_registry.TypeRegistry,
+) -> (Array[Emit], Int) {
+  let method_name = if constructor_count == 0 {
+    "new"
+  } else {
+    "new_\{constructor_count+1}"
+  }
+  let (args, arg_emits) = method_args(
+    ctor.arguments.map(arg => {
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+    }),
+    interface_name,
+    method_name,
+    type_registry,
+  )
+  let emits = []
+  emits
+  ..push_iter(arg_emits.iter())
+  .push(
+    Emit::ConstructorMethod(
+      ConstructorName(method_name),
+      TypeName(interface_name),
+      args,
+    ),
+  )
+  (emits, constructor_count + 1)
+}
+
+///|
+/// Emit union return type support (External, IntoMethod, IsUndefinedMethod, UnionArgTraitImpl).
+fn emit_union_return_type(
+  return_type : @type_mapping.ArgMbtType,
+  emits : Array[Emit],
+) -> Unit {
+  if return_type is @type_mapping.ArgMbtType::Union({ name, has_undefined, .. }) {
+    emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
+    if has_undefined {
+      emits.push(Emit::IsUndefinedMethod(name))
+    }
+    emits.push(Emit::UnionArgTraitImpl(TypeName(name), TraitName("T\{name}")))
+  }
+}
+
+///|
+/// Emit a regular operation member, returning emits and the interface method.
+fn emit_regular_operation(
+  op : @parser.RegularOperationMember,
+  interface_name : String,
+  orig_method_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> (Array[Emit], &InterfaceMethodEmit) {
+  let emits = []
+  let (args, arg_emits) = method_args(
+    op.arguments.map(arg => {
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+    }),
+    interface_name,
+    orig_method_name,
+    type_registry,
+  )
+  let args = if op.static_ {
+    args
+  } else {
+    let self_arg = @type_mapping.MethodArg::{
+      name: "self",
+      original_name: "self",
+      type_: @type_mapping.ArgMbtType::Self,
+      optional: false,
+      default_value: None,
+    }
+    [self_arg, ..args]
+  }
+  emits.push_iter(arg_emits.iter())
+  let (return_type, return_emits) = arg_mbt_type(
+    op.return_type,
+    interface_name,
+    orig_method_name,
+    "",
+    type_registry,
+  )
+  emit_union_return_type(return_type, emits)
+  emits.push_iter(return_emits.iter())
+  let return_type = @type_mapping.MethodReturn::{
+    type_: return_type,
+    optional: op.return_type is Nullable(_),
+  }
+  if op.static_ {
+    let meth : &InterfaceMethodEmit = StaticMethodEmit::{
+      interface_name,
+      original_name: orig_method_name,
+      return_type,
+      args,
+    }
+    (emits, meth)
+  } else {
+    let meth : &InterfaceMethodEmit = RegularMethodEmit::{
+      interface_name,
+      original_name: orig_method_name,
+      return_type,
+      args,
+    }
+    (emits, meth)
+  }
+}
+
+///|
+/// Emit an attribute member, returning emits and interface methods (getter + optional setter).
+fn emit_attribute(
+  attr : @parser.AttributeMember,
+  interface_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> (Array[Emit], Array[&InterfaceMethodEmit]) {
+  let emits = []
+  let methods : Array[&InterfaceMethodEmit] = []
+  let (attr_type, attr_emits) = arg_mbt_type(
+    attr.type_,
+    interface_name,
+    attr.name,
+    "",
+    type_registry,
+  )
+
+  // For static attributes, push attr_emits before union handling
+  if attr.static_ {
+    emits.push_iter(attr_emits.iter())
+  }
+  emit_union_return_type(attr_type, emits)
+  emits.push_iter(attr_emits.iter())
+
+  // Getter method (static or regular)
+  if attr.static_ {
+    methods.push(StaticAttributeGetMethodEmit::{
+      interface_name,
+      original_name: attr.name,
+      return_type: attr_type.name(),
+    })
+  } else {
+    methods.push(AttributeGetMethodEmit::{
+      interface_name,
+      original_name: attr.name,
+      return_type: attr_type.name(),
+    })
+
+    // Set Attribute method if specified (only for non-static)
+    if !attr.is_readonly || attr.is_inherit {
+      let attr_type = match attr_type {
+        @type_mapping.ArgMbtType::Interface(name) =>
+          @type_mapping.ArgMbtType::Interface("&T\{name}")
+        @type_mapping.ArgMbtType::Union(union_type) => {
+          let union_type = { ..union_type, name: "&T\{union_type.name}" }
+          @type_mapping.ArgMbtType::Union(union_type)
+        }
+        _ => attr_type
+      }
+      let args = [
+        @type_mapping.MethodArg::{
+          name: "self",
+          original_name: "self",
+          type_: @type_mapping.ArgMbtType::Self,
+          optional: false,
+          default_value: None,
+        },
+        @type_mapping.MethodArg::{
+          name: @type_mapping.safe_identifier(attr.name),
+          original_name: attr.name,
+          type_: attr_type,
+          optional: false,
+          default_value: None,
+        },
+      ]
+      methods.push(AttributeSetMethodEmit::{
+        interface_name,
+        original_name: attr.name,
+        args,
+      })
+    }
+  }
+  (emits, methods)
+}
+
+///|
+/// Emit a const member, returning emits.
+fn emit_const_member(
+  const_val : @parser.ConstMember,
+  interface_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> Array[Emit] {
+  let const_name = ConstName(
+    "\{@type_mapping.snake_case(interface_name).to_upper()}_\{@type_mapping.snake_case(const_val.name).to_upper()}",
+  )
+  let (mbt_type, const_emits) = arg_mbt_type(
+    const_val.type_,
+    interface_name,
+    "",
+    const_val.name,
+    type_registry,
+  )
+  let emits = []
+  emits
+  ..push_iter(const_emits.iter())
+  .push(
+    Emit::Const(
+      const_name,
+      TypeName(mbt_type.name()),
+      @type_mapping.const_value(const_val.value),
+    ),
+  )
+  emits
+}
+
+///|
 pub impl Emitter for InterfaceEmitter with emit(
   self : InterfaceEmitter,
   name : String,
@@ -173,38 +389,23 @@ pub impl Emitter for InterfaceEmitter with emit(
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
   let interface_methods : Array[&InterfaceMethodEmit] = []
-  let method_counter : Map[String, Int] = {} // to handle overloaded methods
-  let mut constructor_count = 0 // to handle overloaded constructors
+  let method_counter : Map[String, Int] = {}
+  let mut constructor_count = 0
   loop interface.members.map(mem => mem.interface_member)[:] {
     [] => break
     [Constructor(ctor), .. rest] => {
-      let method_name = if constructor_count == 0 {
-        "new"
-      } else {
-        "new_\{constructor_count+1}"
-      }
-      constructor_count += 1
-      let (args, arg_emits) = method_args(
-        ctor.arguments.map(arg => {
-          (arg.name, arg.type_.type_, arg.optional, arg.default_value)
-        }),
+      let (ctor_emits, new_count) = emit_constructor(
+        ctor,
         interface.name,
-        method_name,
+        constructor_count,
         self.type_registry,
       )
-      emits
-      ..push_iter(arg_emits.iter())
-      .push(
-        Emit::ConstructorMethod(
-          ConstructorName(method_name),
-          TypeName(interface.name),
-          args,
-        ),
-      )
+      constructor_count = new_count
+      emits.push_iter(ctor_emits.iter())
       continue rest
     }
-    [RegularOperation(op), .. rest] if has_hyphen(op.name) => continue rest // skip methods with hyphens
-    [Attribute(attr), .. rest] if has_hyphen(attr.name) => continue rest // skip attributes with hyphens
+    [RegularOperation(op), .. rest] if has_hyphen(op.name) => continue rest
+    [Attribute(attr), .. rest] if has_hyphen(attr.name) => continue rest
     [RegularOperation(op), .. rest] => {
       let orig_method_name = match method_counter.get(op.name) {
         None => {
@@ -216,180 +417,36 @@ pub impl Emitter for InterfaceEmitter with emit(
           "\{op.name}_\{count+1}"
         }
       }
-      // trait method args      
-      let (args, arg_emits) = method_args(
-        op.arguments.map(arg => {
-          (arg.name, arg.type_.type_, arg.optional, arg.default_value)
-        }),
+      let (op_emits, meth) = emit_regular_operation(
+        op,
         interface.name,
         orig_method_name,
         self.type_registry,
       )
-      let args = if op.static_ {
-        args
-      } else {
-        // Add 'self' argument 
-        let self_arg = @type_mapping.MethodArg::{
-          name: "self",
-          original_name: "self",
-          type_: @type_mapping.ArgMbtType::Self,
-          optional: false,
-          default_value: None,
-        }
-        [self_arg, ..args]
-      }
-      emits.push_iter(arg_emits.iter())
-
-      // return type
-      let (return_type, return_emits) = arg_mbt_type(
-        op.return_type,
-        interface.name,
-        orig_method_name,
-        "",
-        self.type_registry,
-      )
-      if return_type
-        is @type_mapping.ArgMbtType::Union({ name, has_undefined, .. }) {
-        emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
-        if has_undefined {
-          emits.push(Emit::IsUndefinedMethod(name))
-        }
-        emits.push(
-          Emit::UnionArgTraitImpl(TypeName(name), TraitName("T\{name}")),
-        )
-      }
-      emits.push_iter(return_emits.iter())
-      let return_type = @type_mapping.MethodReturn::{
-        type_: return_type,
-        optional: op.return_type is Nullable(_),
-      }
-      if op.static_ {
-        // static method
-        let meth_ = StaticMethodEmit::{
-          interface_name: interface.name,
-          original_name: orig_method_name,
-          return_type,
-          args,
-        }
-        interface_methods.push(meth_)
-      } else {
-
-        // trait method
-        let meth_ = RegularMethodEmit::{
-          interface_name: interface.name,
-          original_name: orig_method_name,
-          return_type,
-          args,
-        }
-        interface_methods.push(meth_)
-      }
+      emits.push_iter(op_emits.iter())
+      interface_methods.push(meth)
       continue rest
     }
     [Attribute(attr), .. rest] => {
-      // For static attributes, only readonly or inherited ones are supported
       if attr.static_ && !attr.is_readonly && !attr.is_inherit {
-        // TODO: log this
         continue rest
       }
-      let (attr_type, attr_emits) = arg_mbt_type(
-        attr.type_,
+      let (attr_emits, attr_methods) = emit_attribute(
+        attr,
         interface.name,
-        attr.name,
-        "",
         self.type_registry,
       )
-
-      // For static attributes, push attr_emits before union handling
-      if attr.static_ {
-        emits.push_iter(attr_emits.iter())
-      }
-      if attr_type
-        is @type_mapping.ArgMbtType::Union({ name, has_undefined, .. }) {
-        emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
-        if has_undefined {
-          emits.push(Emit::IsUndefinedMethod(name))
-        }
-        emits.push(
-          Emit::UnionArgTraitImpl(TypeName(name), TraitName("T\{name}")),
-        )
-      }
       emits.push_iter(attr_emits.iter())
-
-      // Getter method (static or regular)
-      if attr.static_ {
-        let static_attr_getter_method = StaticAttributeGetMethodEmit::{
-          interface_name: interface.name,
-          original_name: attr.name,
-          return_type: attr_type.name(),
-        }
-        interface_methods.push(static_attr_getter_method)
-      } else {
-        let attr_getter_method = AttributeGetMethodEmit::{
-          interface_name: interface.name,
-          original_name: attr.name,
-          return_type: attr_type.name(),
-        }
-        interface_methods.push(attr_getter_method)
-
-        // Set Attribute method if specified (only for non-static)
-        if !attr.is_readonly || attr.is_inherit {
-          let attr_type = match attr_type {
-            @type_mapping.ArgMbtType::Interface(name) =>
-              @type_mapping.ArgMbtType::Interface("&T\{name}")
-            @type_mapping.ArgMbtType::Union(union_type) => {
-              let union_type = { ..union_type, name: "&T\{union_type.name}" }
-              @type_mapping.ArgMbtType::Union(union_type)
-            }
-            _ => attr_type
-          }
-          let args = [
-            // Add 'self' argument
-            @type_mapping.MethodArg::{
-              name: "self",
-              original_name: "self",
-              type_: @type_mapping.ArgMbtType::Self,
-              optional: false,
-              default_value: None,
-            },
-            // Attribute value argument
-            @type_mapping.MethodArg::{
-              name: @type_mapping.safe_identifier(attr.name),
-              original_name: attr.name,
-              type_: attr_type,
-              optional: false,
-              default_value: None,
-            },
-          ]
-          let attr_setter_method = AttributeSetMethodEmit::{
-            interface_name: interface.name,
-            original_name: attr.name,
-            args,
-          }
-          interface_methods.push(attr_setter_method)
-        }
-      }
+      interface_methods.push_iter(attr_methods.iter())
       continue rest
     }
     [Const(const_val), .. rest] => {
-      let const_name = ConstName(
-        "\{@type_mapping.snake_case(interface.name).to_upper()}_\{@type_mapping.snake_case(const_val.name).to_upper()}",
-      )
-      let (mbt_type, const_emits) = arg_mbt_type(
-        const_val.type_,
+      let const_emits = emit_const_member(
+        const_val,
         interface.name,
-        "",
-        const_val.name,
         self.type_registry,
       )
-      emits
-      ..push_iter(const_emits.iter())
-      .push(
-        Emit::Const(
-          const_name,
-          TypeName(mbt_type.name()),
-          @type_mapping.const_value(const_val.value),
-        ),
-      )
+      emits.push_iter(const_emits.iter())
       continue rest
     }
     [

@@ -112,6 +112,189 @@ fn arg_mbt_type(
   (mbt_type, emits)
 }
 
+//============================ Render helpers ===========================
+
+///|
+fn render_is_undefined_method(buf : StringBuilder, type_name : String) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_is_undefined_ffi"
+  buf
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(obj : \{type_name}) -> Bool = \"(obj) => obj === undefined\"",
+  )
+  ..write_string("\n\n")
+  .write_string(
+    "pub fn \{type_name}::is_undefined(self : \{type_name}) -> Bool { \{ffi_name}(self) }",
+  )
+}
+
+///|
+fn render_empty_method(buf : StringBuilder, type_name : String) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_empty_ffi"
+  buf
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
+  )
+  ..write_string("\n\n")
+  .write_string(
+    "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }",
+  )
+}
+
+///|
+fn render_interface_definition(
+  buf : StringBuilder,
+  interface_def : InterfaceDef,
+) -> Unit {
+  let mdn_url = mdn_interface_url(interface_def.trait_name)
+  buf
+  ..write_string("/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n")
+  .write_string(
+    "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
+  )
+  let trait_defs = interface_def.methods
+    .filter_map(meth => {
+      match meth.decl_emit() {
+        Code("") => None
+        Code(code) => Some(code)
+      }
+    })
+    .join("\n")
+  buf..write_string(trait_defs)..write_string("\n}").write_string("\n\n")
+  let default_trait_impls = interface_def.methods
+    .map(meth => meth.impl_emit().0)
+    .join("\n\n")
+  buf.write_string(default_trait_impls)
+}
+
+///|
+fn render_dictionary_create(
+  buf : StringBuilder,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_ffi"
+  let ffi_args = args
+    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
+    .join(", ")
+  let ffi_js_args = args.map(arg => arg.original_name).join(", ")
+  buf
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \n",
+  )
+  ..write_string("#|(\{ffi_js_args}) => {\n")
+  .write_string("#|  const obj = {};\n")
+  for arg in args {
+    buf.write_string(
+      "#|  if (\{arg.original_name} !== undefined) obj.\{arg.original_name} = \{arg.original_name};\n",
+    )
+  }
+  buf
+  ..write_string("#|  return obj;\n")
+  ..write_string("#|}")
+  .write_string("\n\n")
+  let method_args = trait_method_impl_args(args)
+  buf.write_string(
+    "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
+  )
+  let call_args = func_call_args(args)
+  buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
+}
+
+///|
+fn render_constructor_method(
+  buf : StringBuilder,
+  constructor_name : String,
+  type_name : String,
+  args : Array[@type_mapping.MethodArg],
+) -> Unit {
+  let ffi_name = "\{@type_mapping.snake_case(type_name)}_\{@type_mapping.snake_case(constructor_name)}_ffi"
+  let ffi_args = args
+    .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
+    .join(", ")
+  let ffi_js_args = args.map(arg => arg.name).join(", ")
+  buf
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
+  )
+  .write_string("\n\n")
+  let method_args = trait_method_impl_args(args)
+  buf.write_string(
+    "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n",
+  )
+  let call_args = func_call_args(args)
+  buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
+}
+
+///|
+fn render_enum(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+) -> Unit {
+  buf.write_string("pub(all) enum \{name} {\n")
+  for variant in variants {
+    buf.write_string("  \{variant.variant_name}\n")
+  }
+  buf
+  ..write_string("} derive(Eq,Show)")
+  ..write_string("\n\n")
+  ..write_string(
+    "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
+  )
+  .write_string("  match self {\n")
+  for variant in variants {
+    buf.write_string(
+      "    \{name}::\{variant.variant_name} => TJsValue::to_js(\"\{variant.original_value}\")\n",
+    )
+  }
+  buf
+  ..write_string("  }\n")
+  ..write_string("}")
+  ..write_string("\n\n")
+  ..write_string("pub fn \{name}::from(value: String) -> \{name}? {\n")
+  .write_string("  match value {\n")
+  for variant in variants {
+    buf.write_string(
+      "    \"\{variant.original_value}\" => Some(\{name}::\{variant.variant_name})\n",
+    )
+  }
+  buf..write_string("    _ => None\n")..write_string("  }\n").write_string("}")
+}
+
+///|
+fn render_callback(
+  buf : StringBuilder,
+  name : String,
+  args : Array[CallbackArgEmit],
+  return_type : String,
+) -> Unit {
+  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
+  let closure_type = "(\{arg_types}) -> \{return_type}"
+  let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  buf
+  ..write_string(
+    "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
+  )
+  ..write_string("\n\n")
+  .write_string(
+    "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
+  )
+}
+
+///|
+fn render_file_header(
+  buf : StringBuilder,
+  type_name : String,
+  specs : @hashset.HashSet[String],
+) -> Unit {
+  buf.write_string("// Do not edit. This file is generated.\n")
+  buf.write_string("// MoonBit type: \{type_name}\n")
+  if !specs.is_empty() {
+    let specs_list = specs.to_array().join(", ")
+    buf.write_string("// Specifications: \{specs_list}")
+  }
+}
+
 //============================ Code generator ===========================
 
 ///|
@@ -134,56 +317,14 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string(
           "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
         )
-      Emit::IsUndefinedMethod(TypeName(type_name)) => {
-        let ffi_name = "\{@type_mapping.snake_case(type_name)}_is_undefined_ffi"
-        buf
-        ..write_string(
-          "extern \"js\" fn \{ffi_name}(obj : \{type_name}) -> Bool = \"(obj) => obj === undefined\"",
-        )
-        ..write_string("\n\n")
-        .write_string(
-          "pub fn \{type_name}::is_undefined(self : \{type_name}) -> Bool { \{ffi_name}(self) }",
-        )
-      }
-      Emit::EmptyMethod(TypeName(type_name)) => {
-        let ffi_name = "\{@type_mapping.snake_case(type_name)}_empty_ffi"
-        buf
-        ..write_string(
-          "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
-        )
-        ..write_string("\n\n")
-        .write_string(
-          "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }",
-        )
-      }
+      Emit::IsUndefinedMethod(TypeName(type_name)) =>
+        render_is_undefined_method(buf, type_name)
+      Emit::EmptyMethod(TypeName(type_name)) =>
+        render_empty_method(buf, type_name)
       Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
         buf.write_string("pub impl \{trait_name} for \{type_name}")
-      Emit::InterfaceDefinition(interface_def) => {
-        let mdn_url = mdn_interface_url(interface_def.trait_name)
-        buf
-        ..write_string(
-          "/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n",
-        )
-        .write_string(
-          "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
-        )
-        // Emit trait method declarations
-        let trait_defs = interface_def.methods
-          .filter_map(meth => {
-            match meth.decl_emit() {
-              Code("") => None
-              Code(code) => Some(code)
-            }
-          })
-          .join("\n")
-        buf..write_string(trait_defs)..write_string("\n}").write_string("\n\n")
-
-        // Emit default trait method implementations
-        let default_trait_impls = interface_def.methods
-          .map(meth => meth.impl_emit().0)
-          .join("\n\n")
-        buf.write_string(default_trait_impls)
-      }
+      Emit::InterfaceDefinition(interface_def) =>
+        render_interface_definition(buf, interface_def)
       Emit::UnionArgTrait(TraitName(trait_name)) =>
         buf
         ..write_string("pub(open) trait \{trait_name} {\n")
@@ -193,130 +334,22 @@ pub fn mbt_code_gen(emits : Array[Emit]) -> String {
         buf.write_string(
           "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
         )
-      Emit::DictionaryCreate(TypeName(type_name), args) => {
-        // Emit FFI function
-        let ffi_name = "\{@type_mapping.snake_case(type_name)}_ffi"
-        let ffi_args = args
-          .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
-          .join(", ")
-        let ffi_js_args = args.map(arg => arg.original_name).join(", ")
-
-        // FFI function body
-        buf
-        ..write_string(
-          "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \n",
-        )
-        ..write_string("#|(\{ffi_js_args}) => {\n")
-        .write_string("#|  const obj = {};\n")
-        for arg in args {
-          buf.write_string(
-            "#|  if (\{arg.original_name} !== undefined) obj.\{arg.original_name} = \{arg.original_name};\n",
-          )
-        }
-        buf
-        ..write_string("#|  return obj;\n")
-        ..write_string("#|}")
-        .write_string("\n\n")
-
-        // Emit new() method
-        let method_args = trait_method_impl_args(args)
-        buf.write_string(
-          "pub fn \{type_name}::new(\{method_args}) -> \{type_name} {\n",
-        )
-        let call_args = func_call_args(args)
-        buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
-      }
+      Emit::DictionaryCreate(TypeName(type_name), args) =>
+        render_dictionary_create(buf, type_name, args)
       Emit::ConstructorMethod(
         ConstructorName(constructor_name),
         TypeName(type_name),
         args
-      ) => {
-        // Emit FFI function
-        let ffi_name = "\{@type_mapping.snake_case(type_name)}_\{@type_mapping.snake_case(constructor_name)}_ffi"
-        let ffi_args = args
-          .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
-          .join(", ")
-        let ffi_js_args = args.map(arg => arg.name).join(", ")
-        buf
-        ..write_string(
-          "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
-        )
-        .write_string("\n\n")
-        let method_args = trait_method_impl_args(args)
-        buf.write_string(
-          "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n",
-        )
-        let call_args = func_call_args(args)
-        buf..write_string("  \{ffi_name}(\{call_args})\n").write_string("}")
-      }
-      Emit::Enum(TypeName(name), variants) => {
-        // Emit enum type definition
-        buf.write_string("pub(all) enum \{name} {\n")
-        for variant in variants {
-          buf.write_string("  \{variant.variant_name}\n")
-        }
-        buf
-        ..write_string("} derive(Eq,Show)")
-        ..write_string("\n\n")
-
-        // Emit TJsValue impl
-        ..write_string(
-          "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
-        )
-        .write_string("  match self {\n")
-        for variant in variants {
-          buf.write_string(
-            "    \{name}::\{variant.variant_name} => TJsValue::to_js(\"\{variant.original_value}\")\n",
-          )
-        }
-        buf
-        ..write_string("  }\n")
-        ..write_string("}")
-        ..write_string("\n\n")
-
-        // Emit from method
-        ..write_string("pub fn \{name}::from(value: String) -> \{name}? {\n")
-        .write_string("  match value {\n")
-        for variant in variants {
-          buf.write_string(
-            "    \"\{variant.original_value}\" => Some(\{name}::\{variant.variant_name})\n",
-          )
-        }
-        buf
-        ..write_string("    _ => None\n")
-        ..write_string("  }\n")
-        .write_string("}")
-      }
+      ) => render_constructor_method(buf, constructor_name, type_name, args)
+      Emit::Enum(TypeName(name), variants) => render_enum(buf, name, variants)
       Emit::TypedefAlias(TypeName(name), target_type) =>
         buf.write_string("pub type \{name} = \{target_type}")
-      Emit::Callback(TypeName(name), args, TypeName(return_type)) => {
-        // Build closure type signature: (ArgType1, ArgType2) -> ReturnType
-        let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
-        let closure_type = "(\{arg_types}) -> \{return_type}"
-        let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-
-        // FFI function - callbacks just pass the function through
-        buf
-        ..write_string(
-          "extern \"js\" fn \{ffi_name}(f : \{closure_type}) -> \{name} = \"(f) => f\"",
-        )
-        ..write_string("\n\n")
-
-        // Constructor from MoonBit closure
-        .write_string(
-          "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(f) }",
-        )
-      }
+      Emit::Callback(TypeName(name), args, TypeName(return_type)) =>
+        render_callback(buf, name, args, return_type)
       Emit::Const(ConstName(const_name), TypeName(type_name), value) =>
         buf.write_string("pub const \{const_name}: \{type_name} = \{value}")
-      Emit::FileHeader(TypeName(type_name), Specs(specs)) => {
-        buf.write_string("// Do not edit. This file is generated.\n")
-        buf.write_string("// MoonBit type: \{type_name}\n")
-        if !specs.is_empty() {
-          let specs_list = specs.to_array().join(", ")
-          buf.write_string("// Specifications: \{specs_list}")
-        }
-      }
+      Emit::FileHeader(TypeName(type_name), Specs(specs)) =>
+        render_file_header(buf, type_name, specs)
     }
     if i < emits.length() - 1 {
       buf.write_string("\n\n")
