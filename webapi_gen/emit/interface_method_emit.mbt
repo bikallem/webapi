@@ -5,6 +5,26 @@ trait InterfaceMethodEmit: ToJson + Show {
   impl_emit(self : Self) -> Code // Generate method implementation code
 }
 
+///|
+/// Emits the method body: either a direct FFI call or a null-checking wrapper.
+fn emit_method_body(
+  code : StringBuilder,
+  ffi_name : String,
+  call_args : String,
+  optional_return : Bool,
+) -> Unit {
+  if optional_return {
+    code
+    ..write_string("  let result = \{ffi_name}(\{call_args})\n")
+    .write_string(
+      "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
+    )
+  } else {
+    code.write_string("  \{ffi_name}(\{call_args})\n")
+  }
+  code.write_string("}")
+}
+
 //============================ Regular Method Emit ============================
 
 ///|
@@ -65,16 +85,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  if self.return_type.optional {
-    code
-    ..write_string("  let result = \{ffi_name}(\{call_args})\n")
-    .write_string(
-      "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
-    )
-  } else {
-    code.write_string("  \{ffi_name}(\{call_args})\n")
-  }
-  code.write_string("}")
+  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
   Code(code.to_string())
 }
 
@@ -128,16 +139,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  if self.return_type.optional {
-    code
-    ..write_string("  let result = \{ffi_name}(\{call_args})\n")
-    .write_string(
-      "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
-    )
-  } else {
-    code.write_string("  \{ffi_name}(\{call_args})\n")
-  }
-  code.write_string("}")
+  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
   Code(code.to_string())
 }
 
