@@ -288,9 +288,7 @@ test "mbt_code_gen_multi generates dictionary create across targets" {
 
 ///|
 test "mbt_code_gen_multi generates callback across targets" {
-  let args : Array[CallbackArgEmit] = [
-    { name: "event", mbt_type: "Event" },
-  ]
+  let args : Array[CallbackArgEmit] = [{ name: "event", mbt_type: "Event" }]
   let emits : Array[Emit] = [
     Emit::Callback(TypeName("EventListener"), args, TypeName("Unit")),
   ]

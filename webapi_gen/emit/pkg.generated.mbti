@@ -139,6 +139,10 @@ type RegularMethodEmit
 pub impl Show for RegularMethodEmit
 pub impl ToJson for RegularMethodEmit
 
+type SpecialOperationMethodEmit
+pub impl Show for SpecialOperationMethodEmit
+pub impl ToJson for SpecialOperationMethodEmit
+
 type Specs
 pub impl Show for Specs
 pub impl ToJson for Specs

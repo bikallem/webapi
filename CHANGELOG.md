@@ -4,6 +4,7 @@
 
 ### New Features
 
+- **Generate special operations (getter/setter/deleter)** - WebIDL special operations are now emitted instead of being skipped. Named operations (e.g. `Storage.getItem`, `NodeList.item`, `HTMLCollection.namedItem`) emit as regular method calls. Unnamed operations (e.g. `DOMStringMap` bracket access) emit using bracket notation (`obj[key]`, `obj[key] = value`, `delete obj[key]`) with synthetic method names (`get`, `set`, `delete_`). Unnamed getters always return `Option` to handle undefined. This adds ~31 new methods across Storage, NodeList, HTMLCollection, DOMStringMap, DOMTokenList, and many other interfaces.
 - **Replace `JsPromise[T]` with `@js_async.Promise[T]`** - Promise-returning WebAPI methods (like `fetch`, `response.text()`, `blob.arrayBuffer()`) now return `@js_async.Promise[T]` from the `moonbitlang/async` package instead of the custom `JsPromise[T]` type. This lets users directly `await` promises using MoonBit's async syntax (`promise.wait()`), with full coroutine-based scheduling and cancellation support via `AbortController`.
 - **Add wasm-gc target support** - The library now compiles for both `--target js` and `--target wasm-gc`. Each generated interface produces three files: shared code, JS FFI (`_js.mbt`), and wasm-gc FFI (`_wasm.mbt`), wired together via MoonBit conditional compilation (`targets` in `moon.pkg`).
 - **Generate `webapi.mjs` JS runtime** - A JavaScript module is generated that provides the wasm import object for all interfaces, dictionaries, callbacks, primitives, and globals. Used to instantiate the wasm module at runtime.
@@ -24,9 +25,9 @@
 
 - **Add fetch example** - JS-only async/await demo using `@js_async.Promise::wait()` to fetch from user-entered URLs, with status, headers, and body display.
 - **Add timers example** - Dual-target (JS + wasm-gc) demo of `setInterval`, `clearInterval`, and `setTimeout` using `Function::new` callbacks and `TimerHandler`.
-- **Add storage example** - JS-only demo of `localStorage` with `setItem`, `getItem`, `removeItem`, and `clear`. Uses manual `extern "js"` FFI for the missing special operation methods.
+- **Add storage example** - Dual-target (JS + wasm-gc) demo of `localStorage` with `setItem`, `getItem`, `removeItem`, and `clear` using generated bindings.
 - **Add 6 new examples** - dom, events, url, classlist, element-ops, and forms examples, each with both JS and wasm-gc HTML entry points.
-- **Add Playwright integration tests** - 83 tests covering all 11 examples (canvas, counter, fetch, timers, storage, + 6 others) across JS and wasm-gc targets.
+- **Add Playwright integration tests** - 89 tests covering all 11 examples (canvas, counter, fetch, timers, storage, + 6 others) across JS and wasm-gc targets.
 - **Add CI workflow** - GitHub Actions workflow with type checking (js + wasm-gc), unit tests, example builds, and Playwright tests.
 - **Update GitHub Pages deployment** - Deploy all 11 examples instead of just canvas and counter.
 
@@ -36,6 +37,7 @@
 
 ### Code Generator Improvements
 
+- **Add `SpecialOperationMethodEmit`** - New emit struct for unnamed special operations that generates bracket-notation JS (`obj[key]`, `obj[key] = value`, `delete obj[key]`). Named special operations reuse `RegularMethodEmit`.
 - **Three-file split architecture** - `InterfaceMethodEmit` trait gains `ffi_emit_js()` and `ffi_emit_wasm()` methods. `mbt_code_gen_multi()` routes emit variants to shared/JS/wasm buffers.
 - **Split base template files** - `js_value.mbt`, `primitives.mbt`, and `global.mbt` are each split into shared + JS + wasm-gc variants.
 - **Extract `emit_wasm_ffi_with_return()` helper** - Centralizes the four-way wasm return-type dispatch (void/optional, String, valid stub, JsValue wrapper).

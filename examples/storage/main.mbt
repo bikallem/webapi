@@ -18,8 +18,7 @@ fn main {
   ..set_attribute("type", "text")
   ..set_attribute("placeholder", "Key")
   .set_attribute(
-    "style",
-    "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
+    "style", "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
   )
 
   // Value input
@@ -29,8 +28,7 @@ fn main {
   ..set_attribute("type", "text")
   ..set_attribute("placeholder", "Value")
   .set_attribute(
-    "style",
-    "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
+    "style", "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
   )
 
   // Storage contents display
@@ -38,8 +36,7 @@ fn main {
   contents_el
   ..set_attribute("id", "contents")
   .set_attribute(
-    "style",
-    "background: #f5f5f5; padding: 1em; margin: 0.5em 0; min-height: 2em; font-family: monospace;",
+    "style", "background: #f5f5f5; padding: 1em; margin: 0.5em 0; min-height: 2em; font-family: monospace;",
   )
 
   // Status display
@@ -69,12 +66,12 @@ fn main {
   }
 
   // Set button
-  let set_btn : @webapi.HTMLButtonElement = doc
-    .create_element("button")
-    .into()
+  let set_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   set_btn
   ..set_attribute("id", "set-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;",
+  )
   .set_text_content("Set")
 
   set_btn.add_event_listener(
@@ -90,12 +87,12 @@ fn main {
   )
 
   // Get button
-  let get_btn : @webapi.HTMLButtonElement = doc
-    .create_element("button")
-    .into()
+  let get_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   get_btn
   ..set_attribute("id", "get-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;",
+  )
   .set_text_content("Get")
 
   get_btn.add_event_listener(
@@ -115,7 +112,9 @@ fn main {
     .into()
   remove_btn
   ..set_attribute("id", "remove-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;",
+  )
   .set_text_content("Remove")
 
   remove_btn.add_event_listener(
@@ -135,7 +134,9 @@ fn main {
     .into()
   clear_btn
   ..set_attribute("id", "clear-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;",
+  )
   .set_text_content("Clear All")
 
   clear_btn.add_event_listener(
@@ -150,12 +151,11 @@ fn main {
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
-    "style",
-    "font-family: system-ui; max-width: 600px; margin: 2em auto;",
+    "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
   let children : Array[&@webapi.TNode] = [
-    heading, key_input, val_input, set_btn, get_btn, remove_btn, clear_btn,
-    status_el, contents_el,
+    heading, key_input, val_input, set_btn, get_btn, remove_btn, clear_btn, status_el,
+    contents_el,
   ]
   for child in children {
     container.append_child(child) |> ignore

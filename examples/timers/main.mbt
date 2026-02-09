@@ -23,7 +23,9 @@ fn main {
   let counter_label = doc.create_element("div")
   counter_label
   ..set_attribute("id", "counter")
-  ..set_attribute("style", "font-size: 2em; font-family: monospace; margin: 0.5em 0;")
+  ..set_attribute(
+    "style", "font-size: 2em; font-family: monospace; margin: 0.5em 0;",
+  )
   .set_text_content("Counter: 0")
 
   let update_counter = fn() {
@@ -32,17 +34,23 @@ fn main {
   }
 
   // Start button
-  let start_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let start_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .into()
   start_btn
   ..set_attribute("id", "start-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em; font-size: 1em;")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; margin: 0 0.25em; font-size: 1em;",
+  )
   .set_text_content("Start")
 
   // Stop button
   let stop_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   stop_btn
   ..set_attribute("id", "stop-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em; font-size: 1em;")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; margin: 0 0.25em; font-size: 1em;",
+  )
   .set_text_content("Stop")
 
   // Interval status
@@ -90,7 +98,9 @@ fn main {
   let timeout_heading = doc.create_element("h2")
   timeout_heading.set_text_content("Delayed Message")
 
-  let delay_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let delay_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .into()
   delay_btn
   ..set_attribute("id", "delay-btn")
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em;")
@@ -125,18 +135,11 @@ fn main {
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
-    "style",
-    "font-family: system-ui; max-width: 600px; margin: 2em auto;",
+    "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
   let children : Array[&@webapi.TNode] = [
-    heading,
-    counter_label,
-    start_btn,
-    stop_btn,
-    interval_status,
-    timeout_heading,
-    delay_btn,
-    delay_msg,
+    heading, counter_label, start_btn, stop_btn, interval_status, timeout_heading,
+    delay_btn, delay_msg,
   ]
   for child in children {
     container.append_child(child) |> ignore

@@ -332,9 +332,7 @@ fn render_interface_definition_js_ffi(interface_def : InterfaceDef) -> String {
 }
 
 ///|
-fn render_interface_definition_wasm_ffi(
-  interface_def : InterfaceDef,
-) -> String {
+fn render_interface_definition_wasm_ffi(interface_def : InterfaceDef) -> String {
   let module_name = "webapi_\{interface_def.trait_name}"
   interface_def.methods
   .map(meth => meth.ffi_emit_wasm(module_name).0)
@@ -522,9 +520,13 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         TypeName(type_name),
         args
       ) => {
-        append_shared(render_constructor_wrapper(constructor_name, type_name, args))
+        append_shared(
+          render_constructor_wrapper(constructor_name, type_name, args),
+        )
         append_js(render_constructor_ffi_js(constructor_name, type_name, args))
-        append_wasm(render_constructor_ffi_wasm(constructor_name, type_name, args))
+        append_wasm(
+          render_constructor_ffi_wasm(constructor_name, type_name, args),
+        )
       }
       Emit::Callback(TypeName(name), args, TypeName(return_type)) => {
         // Callback wrapper + FFI are target-specific because wasm-gc needs
