@@ -260,7 +260,7 @@ extern "js" fn window_prompt_ffi(
   obj : JsValue,
   message : JsValue,
   default : JsValue,
-) -> JsValue = "(obj, message, default) => obj.prompt(message, default)"
+) -> JsValue = "(obj, message, _default) => obj.prompt(message, _default)"
 
 ///|
 extern "js" fn window_print_ffi(obj : JsValue) -> Unit = "(obj) => obj.print()"
@@ -1887,7 +1887,7 @@ extern "js" fn window_set_timeout_ffi_js(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> JsValue = "(obj, handler, timeout, arguments) => obj.setTimeout(handler, timeout, arguments)"
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, _arguments)"
 
 ///|
 fn window_set_timeout_ffi(
@@ -1908,7 +1908,7 @@ extern "js" fn window_set_interval_ffi_js(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> JsValue = "(obj, handler, timeout, arguments) => obj.setInterval(handler, timeout, arguments)"
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, _arguments)"
 
 ///|
 fn window_set_interval_ffi(

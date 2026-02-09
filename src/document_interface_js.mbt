@@ -287,7 +287,7 @@ fn document_create_attribute_ns_ffi(
 extern "js" fn document_create_event_ffi_js(
   obj : JsValue,
   interface : JsValue,
-) -> JsValue = "(obj, interface) => obj.createEvent(interface)"
+) -> JsValue = "(obj, _interface) => obj.createEvent(_interface)"
 
 ///|
 fn document_create_event_ffi(obj : JsValue, interface : JsValue) -> Event {

@@ -105,7 +105,7 @@ fn emit_js_ffi_with_return(
   is_void~ : Bool,
   js_expr : String,
 ) -> Code {
-  let ffi_js_decl_args = ffi_argnames.join(", ")
+  let ffi_js_decl_args = ffi_argnames.map(js_safe).join(", ")
   let needs_wrapper = not(is_optional) && not(is_void)
   if needs_wrapper {
     let raw_name = ffi_name + "_js"
@@ -192,7 +192,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_call_args = ffi_argnames[1:].join(", ")
+  let ffi_js_call_args = ffi_argnames[1:].map(js_safe).join(", ")
   let ret_name = self.return_type.type_.name()
   emit_js_ffi_with_return(
     ffi_name,
@@ -288,7 +288,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.args.map(arg => arg.name)
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_args = ffi_argnames.join(", ")
+  let ffi_js_args = ffi_argnames.map(js_safe).join(", ")
   let ret_name = self.return_type.type_.name()
   emit_js_ffi_with_return(
     ffi_name,
@@ -471,8 +471,9 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with ffi_emit_js(
 ) -> Code {
   let ffi_name = self.ffi_name()
   let arg_name = @type_mapping.safe_identifier(self.original_name)
+  let js_arg_name = js_safe(self.original_name)
   Code(
-    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
+    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{js_arg_name}) => { obj.\{self.original_name} = \{js_arg_name}; }\"",
   )
 }
 

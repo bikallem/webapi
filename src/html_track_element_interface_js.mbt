@@ -69,7 +69,7 @@ fn html_track_element_default_ffi(obj : JsValue) -> Bool {
 extern "js" fn html_track_element_set_default_ffi(
   obj : JsValue,
   default : JsValue,
-) -> Unit = "(obj, default) => { obj.default = default; }"
+) -> Unit = "(obj, _default) => { obj.default = _default; }"
 
 ///|
 extern "js" fn html_track_element_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"

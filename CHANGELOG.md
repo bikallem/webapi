@@ -15,6 +15,7 @@
 - **Fix String return type on wasm-gc** - String is `(ref extern)` (non-nullable) on wasm-gc but imports return `externref` (nullable). String-returning methods now go through `String?` + `.unwrap()` to emit `ref.as_non_null`.
 - **Fix primitive `%identity` on wasm-gc** - `Bool`, `Int`, `Double` etc. are value types (`i32`/`f64`) on wasm-gc, not `externref`. Union arg trait impls for primitives now delegate to `TJsValue::to_js` instead of using `%identity`.
 - **Escape JS reserved words in generated runtime** - Parameter names like `default`, `class`, `arguments`, `eval` are now prefixed with underscore in `webapi.mjs`.
+- **Escape JS reserved words in `extern "js"` FFI declarations** - The same reserved word escaping (`arguments` → `_arguments`) is now also applied to JS parameter names in generated `extern "js"` FFI functions. Previously, `arguments` in strict mode (ES modules) caused runtime errors.
 - **Quote hyphenated CSS property names** - CSS properties like `background-color` are now bracket-accessed (`obj["background-color"]`) instead of dot-accessed in the JS runtime.
 - **Disambiguate overloaded methods in JS runtime** - Overloaded WebIDL methods (e.g., `fill` with different arities) now use suffixed import names (`fill`, `fill_2`) to avoid silent JS object key collisions.
 - **Fix `is_undefined` using correct JS check** - Uses `value === undefined` instead of the null check.
@@ -22,10 +23,12 @@
 ### Examples & Testing
 
 - **Add fetch example** - JS-only async/await demo using `@js_async.Promise::wait()` to fetch from user-entered URLs, with status, headers, and body display.
+- **Add timers example** - Dual-target (JS + wasm-gc) demo of `setInterval`, `clearInterval`, and `setTimeout` using `Function::new` callbacks and `TimerHandler`.
+- **Add storage example** - JS-only demo of `localStorage` with `setItem`, `getItem`, `removeItem`, and `clear`. Uses manual `extern "js"` FFI for the missing special operation methods.
 - **Add 6 new examples** - dom, events, url, classlist, element-ops, and forms examples, each with both JS and wasm-gc HTML entry points.
-- **Add Playwright integration tests** - 69 tests covering all 9 examples (canvas, counter, fetch, + 6 new) across JS and wasm-gc targets.
+- **Add Playwright integration tests** - 83 tests covering all 11 examples (canvas, counter, fetch, timers, storage, + 6 others) across JS and wasm-gc targets.
 - **Add CI workflow** - GitHub Actions workflow with type checking (js + wasm-gc), unit tests, example builds, and Playwright tests.
-- **Update GitHub Pages deployment** - Deploy all 8 examples instead of just canvas and counter.
+- **Update GitHub Pages deployment** - Deploy all 11 examples instead of just canvas and counter.
 
 ### Known Issues
 
