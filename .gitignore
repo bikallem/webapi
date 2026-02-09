@@ -14,5 +14,9 @@ target
 
 *.prompt.md
 
+# Playwright
+test-results/
+playwright-report/
+
 webapi_gen/tmp
 .claude
