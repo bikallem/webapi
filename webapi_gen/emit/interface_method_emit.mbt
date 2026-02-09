@@ -92,6 +92,36 @@ fn emit_wasm_ffi_with_return(
 }
 
 ///|
+/// Emit JS FFI declaration with return-type dispatch.
+/// For non-optional, non-void returns: creates a `_js` raw extern + wrapper with unsafe_cast.
+/// For optional returns: returns JsValue for null-checking.
+/// For void returns: returns Unit.
+fn emit_js_ffi_with_return(
+  ffi_name : String,
+  ffi_args : String,
+  ffi_argnames : Array[String],
+  return_type_name : String,
+  is_optional~ : Bool,
+  is_void~ : Bool,
+  js_expr : String,
+) -> Code {
+  let ffi_js_decl_args = ffi_argnames.join(", ")
+  let needs_wrapper = not(is_optional) && not(is_void)
+  if needs_wrapper {
+    let raw_name = ffi_name + "_js"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "extern \"js\" fn \{raw_name}(\{ffi_args}) -> JsValue = \"(\{ffi_js_decl_args}) => \{js_expr}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
+    )
+  } else {
+    let ffi_ret_type = if is_void { "Unit" } else { "JsValue" }
+    Code(
+      "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_decl_args}) => \{js_expr}\"",
+    )
+  }
+}
+
+///|
 /// Emits the method body: either a direct FFI call or a null-checking wrapper.
 /// The FFI function is responsible for returning the correct type.
 /// For optional returns, FFI returns JsValue for null checking.
@@ -162,23 +192,17 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_decl_args = ffi_argnames.join(", ")
   let ffi_js_call_args = ffi_argnames[1:].join(", ")
   let ret_name = self.return_type.type_.name()
-  let needs_wrapper = not(self.return_type.optional) && ret_name != "Unit"
-  if needs_wrapper {
-    let raw_name = ffi_name + "_js"
-    let call_fwd = ffi_argnames.join(", ")
-    let ret_type = self.return_type.type_name()
-    Code(
-      "extern \"js\" fn \{raw_name}(\{ffi_args}) -> JsValue = \"(\{ffi_js_decl_args}) => obj.\{self.original_name}(\{ffi_js_call_args})\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{ret_type} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
-    )
-  } else {
-    let ffi_ret_type = if ret_name == "Unit" { "Unit" } else { "JsValue" }
-    Code(
-      "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_decl_args}) => obj.\{self.original_name}(\{ffi_js_call_args})\"",
-    )
-  }
+  emit_js_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    "obj.\{self.original_name}(\{ffi_js_call_args})",
+  )
 }
 
 ///|
@@ -266,20 +290,15 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ffi_js_args = ffi_argnames.join(", ")
   let ret_name = self.return_type.type_.name()
-  let needs_wrapper = not(self.return_type.optional) && ret_name != "Unit"
-  if needs_wrapper {
-    let raw_name = ffi_name + "_js"
-    let call_fwd = ffi_argnames.join(", ")
-    let ret_type = self.return_type.type_name()
-    Code(
-      "extern \"js\" fn \{raw_name}(\{ffi_args}) -> JsValue = \"(\{ffi_js_args}) => \{trait_name}.\{self.original_name}(\{ffi_js_args})\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{ret_type} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
-    )
-  } else {
-    let ffi_ret_type = if ret_name == "Unit" { "Unit" } else { "JsValue" }
-    Code(
-      "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_args}) => \{trait_name}.\{self.original_name}(\{ffi_js_args})\"",
-    )
-  }
+  emit_js_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    "\{trait_name}.\{self.original_name}(\{ffi_js_args})",
+  )
 }
 
 ///|
@@ -362,19 +381,15 @@ fn AttributeGetMethodEmit::ffi_name(self : AttributeGetMethodEmit) -> String {
 impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_js(
   self : AttributeGetMethodEmit,
 ) -> Code {
-  let ffi_name = self.ffi_name()
-  if self.return_type.has_suffix("?") {
-    // Optional: return JsValue directly for null-checking via unsafe_cast
-    Code(
-      "extern \"js\" fn \{ffi_name}(obj: JsValue) -> JsValue = \"(obj) => obj.\{self.original_name}\"",
-    )
-  } else {
-    // Non-optional: wrapper converts JsValue to actual type
-    let raw_name = ffi_name + "_js"
-    Code(
-      "extern \"js\" fn \{raw_name}(obj: JsValue) -> JsValue = \"(obj) => obj.\{self.original_name}\"\n\n///|\nfn \{ffi_name}(obj: JsValue) -> \{self.return_type} {\n  \{raw_name}(obj).unsafe_cast()\n}",
-    )
-  }
+  emit_js_ffi_with_return(
+    self.ffi_name(),
+    "obj: JsValue",
+    ["obj"],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    "obj.\{self.original_name}",
+  )
 }
 
 ///|
@@ -526,17 +541,15 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_js(
   self : StaticAttributeGetMethodEmit,
 ) -> Code {
   let trait_name = self.interface_name
-  let ffi_name = self.ffi_name()
-  if self.return_type.has_suffix("?") {
-    Code(
-      "extern \"js\" fn \{ffi_name}() -> JsValue = \"() => \{trait_name}.\{self.original_name}\"",
-    )
-  } else {
-    let raw_name = ffi_name + "_js"
-    Code(
-      "extern \"js\" fn \{raw_name}() -> JsValue = \"() => \{trait_name}.\{self.original_name}\"\n\n///|\nfn \{ffi_name}() -> \{self.return_type} {\n  \{raw_name}().unsafe_cast()\n}",
-    )
-  }
+  emit_js_ffi_with_return(
+    self.ffi_name(),
+    "",
+    [],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    "\{trait_name}.\{self.original_name}",
+  )
 }
 
 ///|

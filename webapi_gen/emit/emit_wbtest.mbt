@@ -223,3 +223,90 @@ test "arg_mbt_type identifies non-union types correctly" {
   )
   json_inspect(emits, content=[]) // No emits for non-union type
 }
+
+///|
+test "mbt_code_gen_multi generates is_undefined across targets" {
+  let emits : Array[Emit] = [Emit::IsUndefinedMethod(TypeName("MyType"))]
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared,
+    content="pub fn MyType::is_undefined(self : MyType) -> Bool { my_type_is_undefined_ffi(self) }",
+  )
+  inspect(
+    multi.js_ffi,
+    content="extern \"js\" fn my_type_is_undefined_ffi(obj : MyType) -> Bool = \"(obj) => obj === undefined\"",
+  )
+  inspect(
+    multi.wasm_ffi,
+    content="fn my_type_is_undefined_ffi(obj : MyType) -> Bool = \"JsValue\" \"isUndefined\"",
+  )
+}
+
+///|
+test "mbt_code_gen_multi generates empty method across targets" {
+  let emits : Array[Emit] = [Emit::EmptyMethod(TypeName("MyDict"))]
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared,
+    content="pub fn MyDict::empty() -> MyDict { my_dict_empty_ffi() }",
+  )
+  inspect(
+    multi.js_ffi,
+    content="extern \"js\" fn my_dict_empty_ffi() -> MyDict = \"() => {}\"",
+  )
+  inspect(
+    multi.wasm_ffi,
+    content="fn my_dict_empty_ffi() -> MyDict = \"webapi_Dictionary\" \"empty\"",
+  )
+}
+
+///|
+test "mbt_code_gen_multi generates dictionary create across targets" {
+  let args : Array[@type_mapping.MethodArg] = [
+    {
+      name: "title",
+      original_name: "title",
+      type_: @type_mapping.ArgMbtType::Primitive("String"),
+      optional: true,
+      default_value: None,
+    },
+  ]
+  let emits : Array[Emit] = [
+    Emit::DictionaryCreate(TypeName("MyOptions"), args),
+  ]
+  let multi = mbt_code_gen_multi(emits)
+  inspect(multi.shared.contains("pub fn MyOptions::new("), content="true")
+  inspect(
+    multi.js_ffi.contains("extern \"js\" fn my_options_ffi("),
+    content="true",
+  )
+  inspect(
+    multi.wasm_ffi,
+    content="fn my_options_ffi(title: JsValue) -> MyOptions = \"webapi_MyOptions\" \"new\"",
+  )
+}
+
+///|
+test "mbt_code_gen_multi generates callback across targets" {
+  let args : Array[CallbackArgEmit] = [
+    { name: "event", mbt_type: "Event" },
+  ]
+  let emits : Array[Emit] = [
+    Emit::Callback(TypeName("EventListener"), args, TypeName("Unit")),
+  ]
+  let multi = mbt_code_gen_multi(emits)
+  // Shared should be empty (callbacks are entirely target-specific)
+  inspect(multi.shared, content="")
+  // JS callback uses js_of
+  inspect(multi.js_ffi.contains("js_of(f)"), content="true")
+  inspect(
+    multi.js_ffi.contains("extern \"js\" fn event_listener_ffi"),
+    content="true",
+  )
+  // Wasm callback wraps closure with JsValue params
+  inspect(multi.wasm_ffi.contains("a0 : JsValue"), content="true")
+  inspect(
+    multi.wasm_ffi.contains("\"webapi_EventListener\" \"new\""),
+    content="true",
+  )
+}
