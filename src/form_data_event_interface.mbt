@@ -20,12 +20,6 @@ pub impl TFormDataEvent for FormDataEvent
 pub impl TEvent for FormDataEvent
 
 ///|
-extern "js" fn form_data_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> FormDataEvent = "(type_, event_init_dict) => new FormDataEvent(type_, event_init_dict)"
-
-///|
 pub fn FormDataEvent::new(
   type_ : String,
   event_init_dict : FormDataEventInit,
@@ -41,9 +35,6 @@ pub fn FormDataEvent::new(
 pub trait TFormDataEvent: TEvent {
   form_data(self : Self) -> FormData = _
 }
-
-///|
-extern "js" fn form_data_event_form_data_ffi(obj : JsValue) -> FormData = "(obj) => obj.formData"
 
 ///|
 /// [FormDataEvent.formData](https://developer.mozilla.org/en-US/docs/Web/API/FormDataEvent/formData)

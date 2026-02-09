@@ -25,25 +25,16 @@ pub trait TCaretPosition: TJsValue {
 }
 
 ///|
-extern "js" fn caret_position_offset_node_ffi(obj : JsValue) -> Node = "(obj) => obj.offsetNode"
-
-///|
 /// [CaretPosition.offsetNode](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/offsetNode)
 impl TCaretPosition with offset_node(self : Self) -> Node {
   caret_position_offset_node_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn caret_position_offset_ffi(obj : JsValue) -> UInt = "(obj) => obj.offset"
-
-///|
 /// [CaretPosition.offset](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/offset)
 impl TCaretPosition with offset(self : Self) -> UInt {
   caret_position_offset_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn caret_position_get_client_rect_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getClientRect()"
 
 ///|
 /// [CaretPosition.getClientRect](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/getClientRect)

@@ -31,9 +31,6 @@ pub impl TNode for HTMLButtonElement
 pub impl TEventTarget for HTMLButtonElement
 
 ///|
-extern "js" fn html_button_element_new_ffi() -> HTMLButtonElement = "() => new HTMLButtonElement()"
-
-///|
 pub fn HTMLButtonElement::new() -> HTMLButtonElement {
   html_button_element_new_ffi()
 }
@@ -78,19 +75,10 @@ pub trait THTMLButtonElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_button_element_command_ffi(obj : JsValue) -> String = "(obj) => obj.command"
-
-///|
 /// [HTMLButtonElement.command](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/command)
 impl THTMLButtonElement with command(self : Self) -> String {
   html_button_element_command_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_command_ffi(
-  obj : JsValue,
-  command : JsValue,
-) -> Unit = "(obj, command) => { obj.command = command; }"
 
 ///|
 /// [HTMLButtonElement.command](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/command)
@@ -102,21 +90,10 @@ impl THTMLButtonElement with set_command(self : Self, command : String) -> Unit 
 }
 
 ///|
-extern "js" fn html_button_element_command_for_element_ffi(
-  obj : JsValue,
-) -> Element = "(obj) => obj.commandForElement"
-
-///|
 /// [HTMLButtonElement.commandForElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/commandForElement)
 impl THTMLButtonElement with command_for_element(self : Self) -> Element {
   html_button_element_command_for_element_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_command_for_element_ffi(
-  obj : JsValue,
-  command_for_element : JsValue,
-) -> Unit = "(obj, commandForElement) => { obj.commandForElement = commandForElement; }"
 
 ///|
 /// [HTMLButtonElement.commandForElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/commandForElement)
@@ -131,19 +108,10 @@ impl THTMLButtonElement with set_command_for_element(
 }
 
 ///|
-extern "js" fn html_button_element_disabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.disabled"
-
-///|
 /// [HTMLButtonElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/disabled)
 impl THTMLButtonElement with disabled(self : Self) -> Bool {
   html_button_element_disabled_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_disabled_ffi(
-  obj : JsValue,
-  disabled : JsValue,
-) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
 /// [HTMLButtonElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/disabled)
@@ -155,28 +123,16 @@ impl THTMLButtonElement with set_disabled(self : Self, disabled : Bool) -> Unit 
 }
 
 ///|
-extern "js" fn html_button_element_form_ffi(obj : JsValue) -> HTMLFormElement = "(obj) => obj.form"
-
-///|
 /// [HTMLButtonElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/form)
 impl THTMLButtonElement with form(self : Self) -> HTMLFormElement {
   html_button_element_form_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_button_element_form_action_ffi(obj : JsValue) -> String = "(obj) => obj.formAction"
-
-///|
 /// [HTMLButtonElement.formAction](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formAction)
 impl THTMLButtonElement with form_action(self : Self) -> String {
   html_button_element_form_action_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_form_action_ffi(
-  obj : JsValue,
-  form_action : JsValue,
-) -> Unit = "(obj, formAction) => { obj.formAction = formAction; }"
 
 ///|
 /// [HTMLButtonElement.formAction](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formAction)
@@ -188,19 +144,10 @@ impl THTMLButtonElement with set_form_action(self : Self, form_action : String) 
 }
 
 ///|
-extern "js" fn html_button_element_form_enctype_ffi(obj : JsValue) -> String = "(obj) => obj.formEnctype"
-
-///|
 /// [HTMLButtonElement.formEnctype](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formEnctype)
 impl THTMLButtonElement with form_enctype(self : Self) -> String {
   html_button_element_form_enctype_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_form_enctype_ffi(
-  obj : JsValue,
-  form_enctype : JsValue,
-) -> Unit = "(obj, formEnctype) => { obj.formEnctype = formEnctype; }"
 
 ///|
 /// [HTMLButtonElement.formEnctype](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formEnctype)
@@ -215,19 +162,10 @@ impl THTMLButtonElement with set_form_enctype(
 }
 
 ///|
-extern "js" fn html_button_element_form_method_ffi(obj : JsValue) -> String = "(obj) => obj.formMethod"
-
-///|
 /// [HTMLButtonElement.formMethod](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formMethod)
 impl THTMLButtonElement with form_method(self : Self) -> String {
   html_button_element_form_method_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_form_method_ffi(
-  obj : JsValue,
-  form_method : JsValue,
-) -> Unit = "(obj, formMethod) => { obj.formMethod = formMethod; }"
 
 ///|
 /// [HTMLButtonElement.formMethod](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formMethod)
@@ -239,19 +177,10 @@ impl THTMLButtonElement with set_form_method(self : Self, form_method : String) 
 }
 
 ///|
-extern "js" fn html_button_element_form_no_validate_ffi(obj : JsValue) -> Bool = "(obj) => obj.formNoValidate"
-
-///|
 /// [HTMLButtonElement.formNoValidate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formNoValidate)
 impl THTMLButtonElement with form_no_validate(self : Self) -> Bool {
   html_button_element_form_no_validate_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_form_no_validate_ffi(
-  obj : JsValue,
-  form_no_validate : JsValue,
-) -> Unit = "(obj, formNoValidate) => { obj.formNoValidate = formNoValidate; }"
 
 ///|
 /// [HTMLButtonElement.formNoValidate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formNoValidate)
@@ -266,19 +195,10 @@ impl THTMLButtonElement with set_form_no_validate(
 }
 
 ///|
-extern "js" fn html_button_element_form_target_ffi(obj : JsValue) -> String = "(obj) => obj.formTarget"
-
-///|
 /// [HTMLButtonElement.formTarget](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formTarget)
 impl THTMLButtonElement with form_target(self : Self) -> String {
   html_button_element_form_target_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_form_target_ffi(
-  obj : JsValue,
-  form_target : JsValue,
-) -> Unit = "(obj, formTarget) => { obj.formTarget = formTarget; }"
 
 ///|
 /// [HTMLButtonElement.formTarget](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/formTarget)
@@ -290,19 +210,10 @@ impl THTMLButtonElement with set_form_target(self : Self, form_target : String) 
 }
 
 ///|
-extern "js" fn html_button_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [HTMLButtonElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/name)
 impl THTMLButtonElement with name(self : Self) -> String {
   html_button_element_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
 /// [HTMLButtonElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/name)
@@ -311,19 +222,10 @@ impl THTMLButtonElement with set_name(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_button_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
-
-///|
 /// [HTMLButtonElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/type)
 impl THTMLButtonElement with type_(self : Self) -> String {
   html_button_element_type_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_type_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 /// [HTMLButtonElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/type)
@@ -335,19 +237,10 @@ impl THTMLButtonElement with set_type_(self : Self, type_ : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_button_element_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
-
-///|
 /// [HTMLButtonElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/value)
 impl THTMLButtonElement with value(self : Self) -> String {
   html_button_element_value_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [HTMLButtonElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/value)
@@ -359,16 +252,10 @@ impl THTMLButtonElement with set_value(self : Self, value : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_button_element_will_validate_ffi(obj : JsValue) -> Bool = "(obj) => obj.willValidate"
-
-///|
 /// [HTMLButtonElement.willValidate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/willValidate)
 impl THTMLButtonElement with will_validate(self : Self) -> Bool {
   html_button_element_will_validate_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_validity_ffi(obj : JsValue) -> ValidityState = "(obj) => obj.validity"
 
 ///|
 /// [HTMLButtonElement.validity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/validity)
@@ -377,18 +264,10 @@ impl THTMLButtonElement with validity(self : Self) -> ValidityState {
 }
 
 ///|
-extern "js" fn html_button_element_validation_message_ffi(
-  obj : JsValue,
-) -> String = "(obj) => obj.validationMessage"
-
-///|
 /// [HTMLButtonElement.validationMessage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/validationMessage)
 impl THTMLButtonElement with validation_message(self : Self) -> String {
   html_button_element_validation_message_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
 
 ///|
 /// [HTMLButtonElement.checkValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/checkValidity)
@@ -397,19 +276,10 @@ impl THTMLButtonElement with check_validity(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn html_button_element_report_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.reportValidity()"
-
-///|
 /// [HTMLButtonElement.reportValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/reportValidity)
 impl THTMLButtonElement with report_validity(self : Self) -> Bool {
   html_button_element_report_validity_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_custom_validity_ffi(
-  obj : JsValue,
-  error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 /// [HTMLButtonElement.setCustomValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/setCustomValidity)
@@ -421,30 +291,16 @@ impl THTMLButtonElement with set_custom_validity(self : Self, error : String) ->
 }
 
 ///|
-extern "js" fn html_button_element_labels_ffi(obj : JsValue) -> NodeList = "(obj) => obj.labels"
-
-///|
 /// [HTMLButtonElement.labels](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/labels)
 impl THTMLButtonElement with labels(self : Self) -> NodeList {
   html_button_element_labels_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_button_element_popover_target_element_ffi(
-  obj : JsValue,
-) -> Element = "(obj) => obj.popoverTargetElement"
-
-///|
 /// [HTMLButtonElement.popoverTargetElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/popoverTargetElement)
 impl THTMLButtonElement with popover_target_element(self : Self) -> Element {
   html_button_element_popover_target_element_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_popover_target_element_ffi(
-  obj : JsValue,
-  popover_target_element : JsValue,
-) -> Unit = "(obj, popoverTargetElement) => { obj.popoverTargetElement = popoverTargetElement; }"
 
 ///|
 /// [HTMLButtonElement.popoverTargetElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/popoverTargetElement)
@@ -459,21 +315,10 @@ impl THTMLButtonElement with set_popover_target_element(
 }
 
 ///|
-extern "js" fn html_button_element_popover_target_action_ffi(
-  obj : JsValue,
-) -> String = "(obj) => obj.popoverTargetAction"
-
-///|
 /// [HTMLButtonElement.popoverTargetAction](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/popoverTargetAction)
 impl THTMLButtonElement with popover_target_action(self : Self) -> String {
   html_button_element_popover_target_action_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_button_element_set_popover_target_action_ffi(
-  obj : JsValue,
-  popover_target_action : JsValue,
-) -> Unit = "(obj, popoverTargetAction) => { obj.popoverTargetAction = popoverTargetAction; }"
 
 ///|
 /// [HTMLButtonElement.popoverTargetAction](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/popoverTargetAction)

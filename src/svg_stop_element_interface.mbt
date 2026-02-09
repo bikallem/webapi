@@ -35,9 +35,6 @@ pub trait TSVGStopElement: TSVGElement {
 }
 
 ///|
-extern "js" fn svg_stop_element_offset_ffi(obj : JsValue) -> SVGAnimatedNumber = "(obj) => obj.offset"
-
-///|
 /// [SVGStopElement.offset](https://developer.mozilla.org/en-US/docs/Web/API/SVGStopElement/offset)
 impl TSVGStopElement with offset(self : Self) -> SVGAnimatedNumber {
   svg_stop_element_offset_ffi(TJsValue::to_js(self))

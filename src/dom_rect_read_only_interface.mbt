@@ -17,14 +17,6 @@ pub fn[T : TDOMRectReadOnly] DOMRectReadOnly::into(self : DOMRectReadOnly) -> T 
 pub impl TDOMRectReadOnly for DOMRectReadOnly
 
 ///|
-extern "js" fn dom_rect_read_only_new_ffi(
-  x : JsValue,
-  y : JsValue,
-  width : JsValue,
-  height : JsValue,
-) -> DOMRectReadOnly = "(x, y, width, height) => new DOMRectReadOnly(x, y, width, height)"
-
-///|
 pub fn DOMRectReadOnly::new(
   x? : Double = (0 : Double),
   y? : Double = (0 : Double),
@@ -54,11 +46,6 @@ pub trait TDOMRectReadOnly: TJsValue {
 }
 
 ///|
-extern "js" fn dom_rect_read_only_from_rect_ffi(
-  other : JsValue,
-) -> DOMRectReadOnly = "(other) => DOMRectReadOnly.fromRect(other)"
-
-///|
 /// [DOMRectReadOnly.fromRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/fromRect)
 pub fn DOMRectReadOnly::from_rect(
   other? : DOMRectInit = DOMRectInit::empty(),
@@ -67,16 +54,10 @@ pub fn DOMRectReadOnly::from_rect(
 }
 
 ///|
-extern "js" fn dom_rect_read_only_x_ffi(obj : JsValue) -> Double = "(obj) => obj.x"
-
-///|
 /// [DOMRectReadOnly.x](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/x)
 impl TDOMRectReadOnly with x(self : Self) -> Double {
   dom_rect_read_only_x_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn dom_rect_read_only_y_ffi(obj : JsValue) -> Double = "(obj) => obj.y"
 
 ///|
 /// [DOMRectReadOnly.y](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/y)
@@ -85,16 +66,10 @@ impl TDOMRectReadOnly with y(self : Self) -> Double {
 }
 
 ///|
-extern "js" fn dom_rect_read_only_width_ffi(obj : JsValue) -> Double = "(obj) => obj.width"
-
-///|
 /// [DOMRectReadOnly.width](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/width)
 impl TDOMRectReadOnly with width(self : Self) -> Double {
   dom_rect_read_only_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn dom_rect_read_only_height_ffi(obj : JsValue) -> Double = "(obj) => obj.height"
 
 ///|
 /// [DOMRectReadOnly.height](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/height)
@@ -103,16 +78,10 @@ impl TDOMRectReadOnly with height(self : Self) -> Double {
 }
 
 ///|
-extern "js" fn dom_rect_read_only_top_ffi(obj : JsValue) -> Double = "(obj) => obj.top"
-
-///|
 /// [DOMRectReadOnly.top](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/top)
 impl TDOMRectReadOnly with top(self : Self) -> Double {
   dom_rect_read_only_top_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn dom_rect_read_only_right_ffi(obj : JsValue) -> Double = "(obj) => obj.right"
 
 ///|
 /// [DOMRectReadOnly.right](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/right)
@@ -121,25 +90,16 @@ impl TDOMRectReadOnly with right(self : Self) -> Double {
 }
 
 ///|
-extern "js" fn dom_rect_read_only_bottom_ffi(obj : JsValue) -> Double = "(obj) => obj.bottom"
-
-///|
 /// [DOMRectReadOnly.bottom](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/bottom)
 impl TDOMRectReadOnly with bottom(self : Self) -> Double {
   dom_rect_read_only_bottom_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn dom_rect_read_only_left_ffi(obj : JsValue) -> Double = "(obj) => obj.left"
-
-///|
 /// [DOMRectReadOnly.left](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/left)
 impl TDOMRectReadOnly with left(self : Self) -> Double {
   dom_rect_read_only_left_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn dom_rect_read_only_to_json_ffi(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 /// [DOMRectReadOnly.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/toJSON)

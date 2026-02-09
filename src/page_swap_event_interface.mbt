@@ -20,12 +20,6 @@ pub impl TPageSwapEvent for PageSwapEvent
 pub impl TEvent for PageSwapEvent
 
 ///|
-extern "js" fn page_swap_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> PageSwapEvent = "(type_, event_init_dict) => new PageSwapEvent(type_, event_init_dict)"
-
-///|
 pub fn PageSwapEvent::new(
   type_ : String,
   event_init_dict? : PageSwapEventInit = PageSwapEventInit::empty(),
@@ -44,20 +38,10 @@ pub trait TPageSwapEvent: TEvent {
 }
 
 ///|
-extern "js" fn page_swap_event_activation_ffi(
-  obj : JsValue,
-) -> NavigationActivation = "(obj) => obj.activation"
-
-///|
 /// [PageSwapEvent.activation](https://developer.mozilla.org/en-US/docs/Web/API/PageSwapEvent/activation)
 impl TPageSwapEvent with activation(self : Self) -> NavigationActivation {
   page_swap_event_activation_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn page_swap_event_view_transition_ffi(
-  obj : JsValue,
-) -> ViewTransition = "(obj) => obj.viewTransition"
 
 ///|
 /// [PageSwapEvent.viewTransition](https://developer.mozilla.org/en-US/docs/Web/API/PageSwapEvent/viewTransition)

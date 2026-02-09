@@ -103,18 +103,10 @@ pub trait TWorkerGlobalScope: TEventTarget {
 }
 
 ///|
-extern "js" fn worker_global_scope_self_ffi(obj : JsValue) -> WorkerGlobalScope = "(obj) => obj.self"
-
-///|
 /// [WorkerGlobalScope.self](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/self)
 impl TWorkerGlobalScope with self(self : Self) -> WorkerGlobalScope {
   worker_global_scope_self_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_location_ffi(
-  obj : JsValue,
-) -> WorkerLocation = "(obj) => obj.location"
 
 ///|
 /// [WorkerGlobalScope.location](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/location)
@@ -123,21 +115,10 @@ impl TWorkerGlobalScope with location(self : Self) -> WorkerLocation {
 }
 
 ///|
-extern "js" fn worker_global_scope_navigator_ffi(
-  obj : JsValue,
-) -> WorkerNavigator = "(obj) => obj.navigator"
-
-///|
 /// [WorkerGlobalScope.navigator](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/navigator)
 impl TWorkerGlobalScope with navigator(self : Self) -> WorkerNavigator {
   worker_global_scope_navigator_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_import_scripts_ffi(
-  obj : JsValue,
-  urls : JsValue,
-) -> Unit = "(obj, urls) => obj.importScripts(urls)"
 
 ///|
 /// [WorkerGlobalScope.importScripts](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts)
@@ -149,21 +130,10 @@ impl TWorkerGlobalScope with import_scripts(
 }
 
 ///|
-extern "js" fn worker_global_scope_onerror_ffi(
-  obj : JsValue,
-) -> OnErrorEventHandler = "(obj) => obj.onerror"
-
-///|
 /// [WorkerGlobalScope.onerror](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onerror)
 impl TWorkerGlobalScope with onerror(self : Self) -> OnErrorEventHandler {
   worker_global_scope_onerror_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_set_onerror_ffi(
-  obj : JsValue,
-  onerror : JsValue,
-) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
 
 ///|
 /// [WorkerGlobalScope.onerror](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onerror)
@@ -178,21 +148,10 @@ impl TWorkerGlobalScope with set_onerror(
 }
 
 ///|
-extern "js" fn worker_global_scope_onlanguagechange_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onlanguagechange"
-
-///|
 /// [WorkerGlobalScope.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onlanguagechange)
 impl TWorkerGlobalScope with onlanguagechange(self : Self) -> EventHandler {
   worker_global_scope_onlanguagechange_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_set_onlanguagechange_ffi(
-  obj : JsValue,
-  onlanguagechange : JsValue,
-) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
 
 ///|
 /// [WorkerGlobalScope.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onlanguagechange)
@@ -207,19 +166,10 @@ impl TWorkerGlobalScope with set_onlanguagechange(
 }
 
 ///|
-extern "js" fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onoffline"
-
-///|
 /// [WorkerGlobalScope.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onoffline)
 impl TWorkerGlobalScope with onoffline(self : Self) -> EventHandler {
   worker_global_scope_onoffline_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_set_onoffline_ffi(
-  obj : JsValue,
-  onoffline : JsValue,
-) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
 
 ///|
 /// [WorkerGlobalScope.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onoffline)
@@ -234,19 +184,10 @@ impl TWorkerGlobalScope with set_onoffline(
 }
 
 ///|
-extern "js" fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.ononline"
-
-///|
 /// [WorkerGlobalScope.ononline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/ononline)
 impl TWorkerGlobalScope with ononline(self : Self) -> EventHandler {
   worker_global_scope_ononline_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_set_ononline_ffi(
-  obj : JsValue,
-  ononline : JsValue,
-) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
 
 ///|
 /// [WorkerGlobalScope.ononline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/ononline)
@@ -258,21 +199,10 @@ impl TWorkerGlobalScope with set_ononline(self : Self, ononline : EventHandler) 
 }
 
 ///|
-extern "js" fn worker_global_scope_onrejectionhandled_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onrejectionhandled"
-
-///|
 /// [WorkerGlobalScope.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onrejectionhandled)
 impl TWorkerGlobalScope with onrejectionhandled(self : Self) -> EventHandler {
   worker_global_scope_onrejectionhandled_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_set_onrejectionhandled_ffi(
-  obj : JsValue,
-  onrejectionhandled : JsValue,
-) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
 
 ///|
 /// [WorkerGlobalScope.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onrejectionhandled)
@@ -287,21 +217,10 @@ impl TWorkerGlobalScope with set_onrejectionhandled(
 }
 
 ///|
-extern "js" fn worker_global_scope_onunhandledrejection_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onunhandledrejection"
-
-///|
 /// [WorkerGlobalScope.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onunhandledrejection)
 impl TWorkerGlobalScope with onunhandledrejection(self : Self) -> EventHandler {
   worker_global_scope_onunhandledrejection_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_set_onunhandledrejection_ffi(
-  obj : JsValue,
-  onunhandledrejection : JsValue,
-) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
 
 ///|
 /// [WorkerGlobalScope.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onunhandledrejection)
@@ -316,16 +235,10 @@ impl TWorkerGlobalScope with set_onunhandledrejection(
 }
 
 ///|
-extern "js" fn worker_global_scope_origin_ffi(obj : JsValue) -> String = "(obj) => obj.origin"
-
-///|
 /// [WorkerGlobalScope.origin](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/origin)
 impl TWorkerGlobalScope with origin(self : Self) -> String {
   worker_global_scope_origin_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_is_secure_context_ffi(obj : JsValue) -> Bool = "(obj) => obj.isSecureContext"
 
 ///|
 /// [WorkerGlobalScope.isSecureContext](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/isSecureContext)
@@ -334,21 +247,10 @@ impl TWorkerGlobalScope with is_secure_context(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn worker_global_scope_cross_origin_isolated_ffi(
-  obj : JsValue,
-) -> Bool = "(obj) => obj.crossOriginIsolated"
-
-///|
 /// [WorkerGlobalScope.crossOriginIsolated](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/crossOriginIsolated)
 impl TWorkerGlobalScope with cross_origin_isolated(self : Self) -> Bool {
   worker_global_scope_cross_origin_isolated_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_report_error_ffi(
-  obj : JsValue,
-  e : JsValue,
-) -> Unit = "(obj, e) => obj.reportError(e)"
 
 ///|
 /// [WorkerGlobalScope.reportError](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/reportError)
@@ -360,36 +262,16 @@ impl TWorkerGlobalScope with report_error(self : Self, e : JsValue) -> Unit {
 }
 
 ///|
-extern "js" fn worker_global_scope_btoa_ffi(
-  obj : JsValue,
-  data : JsValue,
-) -> String = "(obj, data) => obj.btoa(data)"
-
-///|
 /// [WorkerGlobalScope.btoa](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/btoa)
 impl TWorkerGlobalScope with btoa(self : Self, data : String) -> String {
   worker_global_scope_btoa_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
 }
 
 ///|
-extern "js" fn worker_global_scope_atob_ffi(
-  obj : JsValue,
-  data : JsValue,
-) -> String = "(obj, data) => obj.atob(data)"
-
-///|
 /// [WorkerGlobalScope.atob](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/atob)
 impl TWorkerGlobalScope with atob(self : Self, data : String) -> String {
   worker_global_scope_atob_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
 }
-
-///|
-extern "js" fn worker_global_scope_set_timeout_ffi(
-  obj : JsValue,
-  handler : JsValue,
-  timeout : JsValue,
-  arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setTimeout(handler, timeout, arguments)"
 
 ///|
 /// [WorkerGlobalScope.setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setTimeout)
@@ -408,12 +290,6 @@ impl TWorkerGlobalScope with set_timeout(
 }
 
 ///|
-extern "js" fn worker_global_scope_clear_timeout_ffi(
-  obj : JsValue,
-  id : JsValue,
-) -> Unit = "(obj, id) => obj.clearTimeout(id)"
-
-///|
 /// [WorkerGlobalScope.clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/clearTimeout)
 impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
   worker_global_scope_clear_timeout_ffi(
@@ -421,14 +297,6 @@ impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = (0 : Int)) -
     TJsValue::to_js(id),
   )
 }
-
-///|
-extern "js" fn worker_global_scope_set_interval_ffi(
-  obj : JsValue,
-  handler : JsValue,
-  timeout : JsValue,
-  arguments : JsValue,
-) -> Int = "(obj, handler, timeout, arguments) => obj.setInterval(handler, timeout, arguments)"
 
 ///|
 /// [WorkerGlobalScope.setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setInterval)
@@ -447,12 +315,6 @@ impl TWorkerGlobalScope with set_interval(
 }
 
 ///|
-extern "js" fn worker_global_scope_clear_interval_ffi(
-  obj : JsValue,
-  id : JsValue,
-) -> Unit = "(obj, id) => obj.clearInterval(id)"
-
-///|
 /// [WorkerGlobalScope.clearInterval](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/clearInterval)
 impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
   worker_global_scope_clear_interval_ffi(
@@ -460,12 +322,6 @@ impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = (0 : Int)) 
     TJsValue::to_js(id),
   )
 }
-
-///|
-extern "js" fn worker_global_scope_queue_microtask_ffi(
-  obj : JsValue,
-  callback : JsValue,
-) -> Unit = "(obj, callback) => obj.queueMicrotask(callback)"
 
 ///|
 /// [WorkerGlobalScope.queueMicrotask](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/queueMicrotask)
@@ -480,13 +336,6 @@ impl TWorkerGlobalScope with queue_microtask(
 }
 
 ///|
-extern "js" fn worker_global_scope_create_image_bitmap_ffi(
-  obj : JsValue,
-  image : JsValue,
-  options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, options) => obj.createImageBitmap(image, options)"
-
-///|
 /// [WorkerGlobalScope.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/createImageBitmap)
 impl TWorkerGlobalScope with create_image_bitmap(
   self : Self,
@@ -499,17 +348,6 @@ impl TWorkerGlobalScope with create_image_bitmap(
     TJsValue::to_js(options),
   )
 }
-
-///|
-extern "js" fn worker_global_scope_create_image_bitmap_2_ffi(
-  obj : JsValue,
-  image : JsValue,
-  sx : JsValue,
-  sy : JsValue,
-  sw : JsValue,
-  sh : JsValue,
-  options : JsValue,
-) -> JsPromise[ImageBitmap] = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(image, sx, sy, sw, sh, options)"
 
 ///|
 /// [WorkerGlobalScope.createImageBitmap_2](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/createImageBitmap_2)
@@ -534,13 +372,6 @@ impl TWorkerGlobalScope with create_image_bitmap_2(
 }
 
 ///|
-extern "js" fn worker_global_scope_structured_clone_ffi(
-  obj : JsValue,
-  value : JsValue,
-  options : JsValue,
-) -> JsValue = "(obj, value, options) => obj.structuredClone(value, options)"
-
-///|
 /// [WorkerGlobalScope.structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/structuredClone)
 impl TWorkerGlobalScope with structured_clone(
   self : Self,
@@ -553,13 +384,6 @@ impl TWorkerGlobalScope with structured_clone(
     TJsValue::to_js(options),
   )
 }
-
-///|
-extern "js" fn worker_global_scope_fetch_ffi(
-  obj : JsValue,
-  input : JsValue,
-  init : JsValue,
-) -> JsPromise[Response] = "(obj, input, init) => obj.fetch(input, init)"
 
 ///|
 /// [WorkerGlobalScope.fetch](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/fetch)
@@ -576,20 +400,10 @@ impl TWorkerGlobalScope with fetch(
 }
 
 ///|
-extern "js" fn worker_global_scope_performance_ffi(
-  obj : JsValue,
-) -> Performance = "(obj) => obj.performance"
-
-///|
 /// [WorkerGlobalScope.performance](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/performance)
 impl TWorkerGlobalScope with performance(self : Self) -> Performance {
   worker_global_scope_performance_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_global_scope_trusted_types_ffi(
-  obj : JsValue,
-) -> TrustedTypePolicyFactory = "(obj) => obj.trustedTypes"
 
 ///|
 /// [WorkerGlobalScope.trustedTypes](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/trustedTypes)

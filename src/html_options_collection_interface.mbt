@@ -49,7 +49,9 @@ pub impl THTMLOptionsCollectionAddBefore for HTMLElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl THTMLOptionsCollectionAddBefore for Int with to_js(self : Int) -> JsValue = "%identity"
+pub impl THTMLOptionsCollectionAddBefore for Int with to_js(self : Int) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 /// [HTMLOptionsCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection) interface.
@@ -67,19 +69,10 @@ pub trait THTMLOptionsCollection: THTMLCollection {
 }
 
 ///|
-extern "js" fn html_options_collection_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [HTMLOptionsCollection.length](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/length)
 impl THTMLOptionsCollection with length(self : Self) -> UInt {
   html_options_collection_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_options_collection_set_length_ffi(
-  obj : JsValue,
-  length : JsValue,
-) -> Unit = "(obj, length) => { obj.length = length; }"
 
 ///|
 /// [HTMLOptionsCollection.length](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/length)
@@ -89,13 +82,6 @@ impl THTMLOptionsCollection with set_length(self : Self, length : UInt) -> Unit 
     TJsValue::to_js(length),
   )
 }
-
-///|
-extern "js" fn html_options_collection_add_ffi(
-  obj : JsValue,
-  element : JsValue,
-  before : JsValue,
-) -> Unit = "(obj, element, before) => obj.add(element, before)"
 
 ///|
 /// [HTMLOptionsCollection.add](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/add)
@@ -112,12 +98,6 @@ impl THTMLOptionsCollection with add(
 }
 
 ///|
-extern "js" fn html_options_collection_remove_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> Unit = "(obj, index) => obj.remove(index)"
-
-///|
 /// [HTMLOptionsCollection.remove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/remove)
 impl THTMLOptionsCollection with remove(self : Self, index : Int) -> Unit {
   html_options_collection_remove_ffi(
@@ -127,19 +107,10 @@ impl THTMLOptionsCollection with remove(self : Self, index : Int) -> Unit {
 }
 
 ///|
-extern "js" fn html_options_collection_selected_index_ffi(obj : JsValue) -> Int = "(obj) => obj.selectedIndex"
-
-///|
 /// [HTMLOptionsCollection.selectedIndex](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/selectedIndex)
 impl THTMLOptionsCollection with selected_index(self : Self) -> Int {
   html_options_collection_selected_index_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_options_collection_set_selected_index_ffi(
-  obj : JsValue,
-  selected_index : JsValue,
-) -> Unit = "(obj, selectedIndex) => { obj.selectedIndex = selectedIndex; }"
 
 ///|
 /// [HTMLOptionsCollection.selectedIndex](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/selectedIndex)

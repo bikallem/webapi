@@ -29,9 +29,6 @@ pub impl TNode for HTMLSlotElement
 pub impl TEventTarget for HTMLSlotElement
 
 ///|
-extern "js" fn html_slot_element_new_ffi() -> HTMLSlotElement = "() => new HTMLSlotElement()"
-
-///|
 pub fn HTMLSlotElement::new() -> HTMLSlotElement {
   html_slot_element_new_ffi()
 }
@@ -60,31 +57,16 @@ pub trait THTMLSlotElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_slot_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [HTMLSlotElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/name)
 impl THTMLSlotElement with name(self : Self) -> String {
   html_slot_element_name_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_slot_element_set_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> Unit = "(obj, name) => { obj.name = name; }"
-
-///|
 /// [HTMLSlotElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/name)
 impl THTMLSlotElement with set_name(self : Self, name : String) -> Unit {
   html_slot_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
-
-///|
-extern "js" fn html_slot_element_assigned_nodes_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> Array[Node] = "(obj, options) => obj.assignedNodes(options)"
 
 ///|
 /// [HTMLSlotElement.assignedNodes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes)
@@ -99,12 +81,6 @@ impl THTMLSlotElement with assigned_nodes(
 }
 
 ///|
-extern "js" fn html_slot_element_assigned_elements_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> Array[Element] = "(obj, options) => obj.assignedElements(options)"
-
-///|
 /// [HTMLSlotElement.assignedElements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements)
 impl THTMLSlotElement with assigned_elements(
   self : Self,
@@ -115,12 +91,6 @@ impl THTMLSlotElement with assigned_elements(
     TJsValue::to_js(options),
   )
 }
-
-///|
-extern "js" fn html_slot_element_assign_ffi(
-  obj : JsValue,
-  nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.assign(nodes)"
 
 ///|
 /// [HTMLSlotElement.assign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assign)

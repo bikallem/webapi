@@ -87,16 +87,10 @@ pub trait TShadowRoot: TDocumentFragment {
 }
 
 ///|
-extern "js" fn shadow_root_mode_ffi(obj : JsValue) -> ShadowRootMode = "(obj) => obj.mode"
-
-///|
 /// [ShadowRoot.mode](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/mode)
 impl TShadowRoot with mode(self : Self) -> ShadowRootMode {
   shadow_root_mode_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn shadow_root_delegates_focus_ffi(obj : JsValue) -> Bool = "(obj) => obj.delegatesFocus"
 
 ///|
 /// [ShadowRoot.delegatesFocus](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/delegatesFocus)
@@ -105,18 +99,10 @@ impl TShadowRoot with delegates_focus(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn shadow_root_slot_assignment_ffi(
-  obj : JsValue,
-) -> SlotAssignmentMode = "(obj) => obj.slotAssignment"
-
-///|
 /// [ShadowRoot.slotAssignment](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/slotAssignment)
 impl TShadowRoot with slot_assignment(self : Self) -> SlotAssignmentMode {
   shadow_root_slot_assignment_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn shadow_root_clonable_ffi(obj : JsValue) -> Bool = "(obj) => obj.clonable"
 
 ///|
 /// [ShadowRoot.clonable](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/clonable)
@@ -125,16 +111,10 @@ impl TShadowRoot with clonable(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn shadow_root_serializable_ffi(obj : JsValue) -> Bool = "(obj) => obj.serializable"
-
-///|
 /// [ShadowRoot.serializable](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/serializable)
 impl TShadowRoot with serializable(self : Self) -> Bool {
   shadow_root_serializable_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn shadow_root_host_ffi(obj : JsValue) -> Element = "(obj) => obj.host"
 
 ///|
 /// [ShadowRoot.host](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host)
@@ -143,19 +123,10 @@ impl TShadowRoot with host(self : Self) -> Element {
 }
 
 ///|
-extern "js" fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onslotchange"
-
-///|
 /// [ShadowRoot.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/onslotchange)
 impl TShadowRoot with onslotchange(self : Self) -> EventHandler {
   shadow_root_onslotchange_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn shadow_root_set_onslotchange_ffi(
-  obj : JsValue,
-  onslotchange : JsValue,
-) -> Unit = "(obj, onslotchange) => { obj.onslotchange = onslotchange; }"
 
 ///|
 /// [ShadowRoot.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/onslotchange)
@@ -167,12 +138,6 @@ impl TShadowRoot with set_onslotchange(self : Self, onslotchange : EventHandler)
 }
 
 ///|
-extern "js" fn shadow_root_set_html_unsafe_ffi(
-  obj : JsValue,
-  html : JsValue,
-) -> Unit = "(obj, html) => obj.setHTMLUnsafe(html)"
-
-///|
 /// [ShadowRoot.setHTMLUnsafe](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/setHTMLUnsafe)
 impl TShadowRoot with set_html_unsafe(
   self : Self,
@@ -180,12 +145,6 @@ impl TShadowRoot with set_html_unsafe(
 ) -> Unit {
   shadow_root_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }
-
-///|
-extern "js" fn shadow_root_get_html_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> String = "(obj, options) => obj.getHTML(options)"
 
 ///|
 /// [ShadowRoot.getHTML](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/getHTML)
@@ -197,19 +156,10 @@ impl TShadowRoot with get_html(
 }
 
 ///|
-extern "js" fn shadow_root_inner_html_ffi(obj : JsValue) -> ShadowRootInnerHTML = "(obj) => obj.innerHTML"
-
-///|
 /// [ShadowRoot.innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/innerHTML)
 impl TShadowRoot with inner_html(self : Self) -> ShadowRootInnerHTML {
   shadow_root_inner_html_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn shadow_root_set_inner_html_ffi(
-  obj : JsValue,
-  inner_html : JsValue,
-) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
 
 ///|
 /// [ShadowRoot.innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/innerHTML)
@@ -221,18 +171,10 @@ impl TShadowRoot with set_inner_html(
 }
 
 ///|
-extern "js" fn shadow_root_custom_element_registry_ffi(
-  obj : JsValue,
-) -> CustomElementRegistry = "(obj) => obj.customElementRegistry"
-
-///|
 /// [ShadowRoot.customElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/customElementRegistry)
 impl TShadowRoot with custom_element_registry(self : Self) -> CustomElementRegistry {
   shadow_root_custom_element_registry_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn shadow_root_active_element_ffi(obj : JsValue) -> Element = "(obj) => obj.activeElement"
 
 ///|
 /// [ShadowRoot.activeElement](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/activeElement)
@@ -241,28 +183,16 @@ impl TShadowRoot with active_element(self : Self) -> Element {
 }
 
 ///|
-extern "js" fn shadow_root_style_sheets_ffi(obj : JsValue) -> StyleSheetList = "(obj) => obj.styleSheets"
-
-///|
 /// [ShadowRoot.styleSheets](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/styleSheets)
 impl TShadowRoot with style_sheets(self : Self) -> StyleSheetList {
   shadow_root_style_sheets_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn shadow_root_adopted_style_sheets_ffi(obj : JsValue) -> JsValue = "(obj) => obj.adoptedStyleSheets"
-
-///|
 /// [ShadowRoot.adoptedStyleSheets](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/adoptedStyleSheets)
 impl TShadowRoot with adopted_style_sheets(self : Self) -> JsValue {
   shadow_root_adopted_style_sheets_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn shadow_root_set_adopted_style_sheets_ffi(
-  obj : JsValue,
-  adopted_style_sheets : JsValue,
-) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adoptedStyleSheets; }"
 
 ///|
 /// [ShadowRoot.adoptedStyleSheets](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/adoptedStyleSheets)

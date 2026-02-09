@@ -17,9 +17,6 @@ pub fn[T : TDOMParser] DOMParser::into(self : DOMParser) -> T = "%identity"
 pub impl TDOMParser for DOMParser
 
 ///|
-extern "js" fn dom_parser_new_ffi() -> DOMParser = "() => new DOMParser()"
-
-///|
 pub fn DOMParser::new() -> DOMParser {
   dom_parser_new_ffi()
 }
@@ -46,13 +43,6 @@ pub trait TDOMParser: TJsValue {
     type_ : DOMParserSupportedType,
   ) -> Document = _
 }
-
-///|
-extern "js" fn dom_parser_parse_from_string_ffi(
-  obj : JsValue,
-  string : JsValue,
-  type_ : JsValue,
-) -> Document = "(obj, string, type_) => obj.parseFromString(string, type_)"
 
 ///|
 /// [DOMParser.parseFromString](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser/parseFromString)

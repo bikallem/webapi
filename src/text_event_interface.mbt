@@ -37,23 +37,10 @@ pub trait TTextEvent: TUIEvent {
 }
 
 ///|
-extern "js" fn text_event_data_ffi(obj : JsValue) -> String = "(obj) => obj.data"
-
-///|
 /// [TextEvent.data](https://developer.mozilla.org/en-US/docs/Web/API/TextEvent/data)
 impl TTextEvent with data(self : Self) -> String {
   text_event_data_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn text_event_init_text_event_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-  bubbles : JsValue,
-  cancelable : JsValue,
-  view : JsValue,
-  data : JsValue,
-) -> Unit = "(obj, type_, bubbles, cancelable, view, data) => obj.initTextEvent(type_, bubbles, cancelable, view, data)"
 
 ///|
 /// [TextEvent.initTextEvent](https://developer.mozilla.org/en-US/docs/Web/API/TextEvent/initTextEvent)

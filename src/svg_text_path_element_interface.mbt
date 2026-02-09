@@ -64,20 +64,10 @@ pub trait TSVGTextPathElement: TSVGTextContentElement {
 }
 
 ///|
-extern "js" fn svg_text_path_element_start_offset_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.startOffset"
-
-///|
 /// [SVGTextPathElement.startOffset](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPathElement/startOffset)
 impl TSVGTextPathElement with start_offset(self : Self) -> SVGAnimatedLength {
   svg_text_path_element_start_offset_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_text_path_element_method_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "(obj) => obj.method"
 
 ///|
 /// [SVGTextPathElement.method](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPathElement/method)
@@ -86,20 +76,10 @@ impl TSVGTextPathElement with method_(self : Self) -> SVGAnimatedEnumeration {
 }
 
 ///|
-extern "js" fn svg_text_path_element_spacing_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "(obj) => obj.spacing"
-
-///|
 /// [SVGTextPathElement.spacing](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPathElement/spacing)
 impl TSVGTextPathElement with spacing(self : Self) -> SVGAnimatedEnumeration {
   svg_text_path_element_spacing_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_text_path_element_href_ffi(
-  obj : JsValue,
-) -> SVGAnimatedString = "(obj) => obj.href"
 
 ///|
 /// [SVGTextPathElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPathElement/href)

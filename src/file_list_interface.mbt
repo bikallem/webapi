@@ -23,9 +23,6 @@ pub trait TFileList: TJsValue {
 }
 
 ///|
-extern "js" fn file_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [FileList.length](https://developer.mozilla.org/en-US/docs/Web/API/FileList/length)
 impl TFileList with length(self : Self) -> UInt {
   file_list_length_ffi(TJsValue::to_js(self))

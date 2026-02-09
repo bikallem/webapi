@@ -23,9 +23,6 @@ pub trait TNodeList: TJsValue {
 }
 
 ///|
-extern "js" fn node_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [NodeList.length](https://developer.mozilla.org/en-US/docs/Web/API/NodeList/length)
 impl TNodeList with length(self : Self) -> UInt {
   node_list_length_ffi(TJsValue::to_js(self))

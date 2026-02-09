@@ -31,9 +31,6 @@ pub impl TNode for HTMLScriptElement
 pub impl TEventTarget for HTMLScriptElement
 
 ///|
-extern "js" fn html_script_element_new_ffi() -> HTMLScriptElement = "() => new HTMLScriptElement()"
-
-///|
 pub fn HTMLScriptElement::new() -> HTMLScriptElement {
   html_script_element_new_ffi()
 }
@@ -71,19 +68,10 @@ pub trait THTMLScriptElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_script_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
-
-///|
 /// [HTMLScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/type)
 impl THTMLScriptElement with type_(self : Self) -> String {
   html_script_element_type_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_type_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 /// [HTMLScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/type)
@@ -95,19 +83,10 @@ impl THTMLScriptElement with set_type_(self : Self, type_ : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_script_element_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
-
-///|
 /// [HTMLScriptElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/src)
 impl THTMLScriptElement with src(self : Self) -> String {
   html_script_element_src_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_src_ffi(
-  obj : JsValue,
-  src : JsValue,
-) -> Unit = "(obj, src) => { obj.src = src; }"
 
 ///|
 /// [HTMLScriptElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/src)
@@ -116,19 +95,10 @@ impl THTMLScriptElement with set_src(self : Self, src : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_script_element_no_module_ffi(obj : JsValue) -> Bool = "(obj) => obj.noModule"
-
-///|
 /// [HTMLScriptElement.noModule](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/noModule)
 impl THTMLScriptElement with no_module(self : Self) -> Bool {
   html_script_element_no_module_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_no_module_ffi(
-  obj : JsValue,
-  no_module : JsValue,
-) -> Unit = "(obj, noModule) => { obj.noModule = noModule; }"
 
 ///|
 /// [HTMLScriptElement.noModule](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/noModule)
@@ -140,19 +110,10 @@ impl THTMLScriptElement with set_no_module(self : Self, no_module : Bool) -> Uni
 }
 
 ///|
-extern "js" fn html_script_element_async_ffi(obj : JsValue) -> Bool = "(obj) => obj.async"
-
-///|
 /// [HTMLScriptElement.async](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/async)
 impl THTMLScriptElement with async_(self : Self) -> Bool {
   html_script_element_async_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_async_ffi(
-  obj : JsValue,
-  async_ : JsValue,
-) -> Unit = "(obj, async) => { obj.async = async; }"
 
 ///|
 /// [HTMLScriptElement.async](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/async)
@@ -164,19 +125,10 @@ impl THTMLScriptElement with set_async_(self : Self, async_ : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn html_script_element_defer_ffi(obj : JsValue) -> Bool = "(obj) => obj.defer"
-
-///|
 /// [HTMLScriptElement.defer](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/defer)
 impl THTMLScriptElement with defer_(self : Self) -> Bool {
   html_script_element_defer_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_defer_ffi(
-  obj : JsValue,
-  defer_ : JsValue,
-) -> Unit = "(obj, defer) => { obj.defer = defer; }"
 
 ///|
 /// [HTMLScriptElement.defer](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/defer)
@@ -188,28 +140,16 @@ impl THTMLScriptElement with set_defer_(self : Self, defer_ : Bool) -> Unit {
 }
 
 ///|
-extern "js" fn html_script_element_blocking_ffi(obj : JsValue) -> DOMTokenList = "(obj) => obj.blocking"
-
-///|
 /// [HTMLScriptElement.blocking](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/blocking)
 impl THTMLScriptElement with blocking(self : Self) -> DOMTokenList {
   html_script_element_blocking_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_script_element_cross_origin_ffi(obj : JsValue) -> String = "(obj) => obj.crossOrigin"
-
-///|
 /// [HTMLScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/crossOrigin)
 impl THTMLScriptElement with cross_origin(self : Self) -> String {
   html_script_element_cross_origin_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_cross_origin_ffi(
-  obj : JsValue,
-  cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
 /// [HTMLScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/crossOrigin)
@@ -224,19 +164,10 @@ impl THTMLScriptElement with set_cross_origin(
 }
 
 ///|
-extern "js" fn html_script_element_referrer_policy_ffi(obj : JsValue) -> String = "(obj) => obj.referrerPolicy"
-
-///|
 /// [HTMLScriptElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/referrerPolicy)
 impl THTMLScriptElement with referrer_policy(self : Self) -> String {
   html_script_element_referrer_policy_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_referrer_policy_ffi(
-  obj : JsValue,
-  referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
 /// [HTMLScriptElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/referrerPolicy)
@@ -251,19 +182,10 @@ impl THTMLScriptElement with set_referrer_policy(
 }
 
 ///|
-extern "js" fn html_script_element_integrity_ffi(obj : JsValue) -> String = "(obj) => obj.integrity"
-
-///|
 /// [HTMLScriptElement.integrity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/integrity)
 impl THTMLScriptElement with integrity(self : Self) -> String {
   html_script_element_integrity_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_integrity_ffi(
-  obj : JsValue,
-  integrity : JsValue,
-) -> Unit = "(obj, integrity) => { obj.integrity = integrity; }"
 
 ///|
 /// [HTMLScriptElement.integrity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/integrity)
@@ -275,19 +197,10 @@ impl THTMLScriptElement with set_integrity(self : Self, integrity : String) -> U
 }
 
 ///|
-extern "js" fn html_script_element_fetch_priority_ffi(obj : JsValue) -> String = "(obj) => obj.fetchPriority"
-
-///|
 /// [HTMLScriptElement.fetchPriority](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/fetchPriority)
 impl THTMLScriptElement with fetch_priority(self : Self) -> String {
   html_script_element_fetch_priority_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_fetch_priority_ffi(
-  obj : JsValue,
-  fetch_priority : JsValue,
-) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
 
 ///|
 /// [HTMLScriptElement.fetchPriority](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/fetchPriority)
@@ -302,19 +215,10 @@ impl THTMLScriptElement with set_fetch_priority(
 }
 
 ///|
-extern "js" fn html_script_element_text_ffi(obj : JsValue) -> String = "(obj) => obj.text"
-
-///|
 /// [HTMLScriptElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/text)
 impl THTMLScriptElement with text(self : Self) -> String {
   html_script_element_text_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_text_ffi(
-  obj : JsValue,
-  text : JsValue,
-) -> Unit = "(obj, text) => { obj.text = text; }"
 
 ///|
 /// [HTMLScriptElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/text)
@@ -323,28 +227,16 @@ impl THTMLScriptElement with set_text(self : Self, text : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_script_element_supports_ffi(type_ : JsValue) -> Bool = "(type_) => HTMLScriptElement.supports(type_)"
-
-///|
 /// [HTMLScriptElement.supports](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/supports)
 pub fn HTMLScriptElement::supports(type_ : String) -> Bool {
   html_script_element_supports_ffi(TJsValue::to_js(type_))
 }
 
 ///|
-extern "js" fn html_script_element_charset_ffi(obj : JsValue) -> String = "(obj) => obj.charset"
-
-///|
 /// [HTMLScriptElement.charset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/charset)
 impl THTMLScriptElement with charset(self : Self) -> String {
   html_script_element_charset_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_charset_ffi(
-  obj : JsValue,
-  charset : JsValue,
-) -> Unit = "(obj, charset) => { obj.charset = charset; }"
 
 ///|
 /// [HTMLScriptElement.charset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/charset)
@@ -356,19 +248,10 @@ impl THTMLScriptElement with set_charset(self : Self, charset : String) -> Unit 
 }
 
 ///|
-extern "js" fn html_script_element_event_ffi(obj : JsValue) -> String = "(obj) => obj.event"
-
-///|
 /// [HTMLScriptElement.event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/event)
 impl THTMLScriptElement with event(self : Self) -> String {
   html_script_element_event_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_event_ffi(
-  obj : JsValue,
-  event : JsValue,
-) -> Unit = "(obj, event) => { obj.event = event; }"
 
 ///|
 /// [HTMLScriptElement.event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/event)
@@ -380,19 +263,10 @@ impl THTMLScriptElement with set_event(self : Self, event : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_script_element_html_for_ffi(obj : JsValue) -> String = "(obj) => obj.htmlFor"
-
-///|
 /// [HTMLScriptElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/htmlFor)
 impl THTMLScriptElement with html_for(self : Self) -> String {
   html_script_element_html_for_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_script_element_set_html_for_ffi(
-  obj : JsValue,
-  html_for : JsValue,
-) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
 
 ///|
 /// [HTMLScriptElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/htmlFor)

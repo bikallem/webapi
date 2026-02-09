@@ -29,9 +29,6 @@ pub impl TNode for HTMLPreElement
 pub impl TEventTarget for HTMLPreElement
 
 ///|
-extern "js" fn html_pre_element_new_ffi() -> HTMLPreElement = "() => new HTMLPreElement()"
-
-///|
 pub fn HTMLPreElement::new() -> HTMLPreElement {
   html_pre_element_new_ffi()
 }
@@ -44,19 +41,10 @@ pub trait THTMLPreElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_pre_element_width_ffi(obj : JsValue) -> Int = "(obj) => obj.width"
-
-///|
 /// [HTMLPreElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPreElement/width)
 impl THTMLPreElement with width(self : Self) -> Int {
   html_pre_element_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_pre_element_set_width_ffi(
-  obj : JsValue,
-  width : JsValue,
-) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
 /// [HTMLPreElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPreElement/width)

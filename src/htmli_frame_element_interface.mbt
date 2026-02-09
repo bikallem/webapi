@@ -31,9 +31,6 @@ pub impl TNode for HTMLIFrameElement
 pub impl TEventTarget for HTMLIFrameElement
 
 ///|
-extern "js" fn htmli_frame_element_new_ffi() -> HTMLIFrameElement = "() => new HTMLIFrameElement()"
-
-///|
 pub fn HTMLIFrameElement::new() -> HTMLIFrameElement {
   htmli_frame_element_new_ffi()
 }
@@ -104,19 +101,10 @@ pub trait THTMLIFrameElement: THTMLElement {
 }
 
 ///|
-extern "js" fn htmli_frame_element_src_ffi(obj : JsValue) -> String = "(obj) => obj.src"
-
-///|
 /// [HTMLIFrameElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/src)
 impl THTMLIFrameElement with src(self : Self) -> String {
   htmli_frame_element_src_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_src_ffi(
-  obj : JsValue,
-  src : JsValue,
-) -> Unit = "(obj, src) => { obj.src = src; }"
 
 ///|
 /// [HTMLIFrameElement.src](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/src)
@@ -125,21 +113,10 @@ impl THTMLIFrameElement with set_src(self : Self, src : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmli_frame_element_srcdoc_ffi(
-  obj : JsValue,
-) -> HTMLIFrameElementSrcdoc = "(obj) => obj.srcdoc"
-
-///|
 /// [HTMLIFrameElement.srcdoc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/srcdoc)
 impl THTMLIFrameElement with srcdoc(self : Self) -> HTMLIFrameElementSrcdoc {
   htmli_frame_element_srcdoc_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_srcdoc_ffi(
-  obj : JsValue,
-  srcdoc : JsValue,
-) -> Unit = "(obj, srcdoc) => { obj.srcdoc = srcdoc; }"
 
 ///|
 /// [HTMLIFrameElement.srcdoc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/srcdoc)
@@ -151,19 +128,10 @@ impl THTMLIFrameElement with set_srcdoc(
 }
 
 ///|
-extern "js" fn htmli_frame_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [HTMLIFrameElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/name)
 impl THTMLIFrameElement with name(self : Self) -> String {
   htmli_frame_element_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
 /// [HTMLIFrameElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/name)
@@ -172,28 +140,16 @@ impl THTMLIFrameElement with set_name(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmli_frame_element_sandbox_ffi(obj : JsValue) -> DOMTokenList = "(obj) => obj.sandbox"
-
-///|
 /// [HTMLIFrameElement.sandbox](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/sandbox)
 impl THTMLIFrameElement with sandbox(self : Self) -> DOMTokenList {
   htmli_frame_element_sandbox_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn htmli_frame_element_allow_ffi(obj : JsValue) -> String = "(obj) => obj.allow"
-
-///|
 /// [HTMLIFrameElement.allow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/allow)
 impl THTMLIFrameElement with allow(self : Self) -> String {
   htmli_frame_element_allow_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_allow_ffi(
-  obj : JsValue,
-  allow : JsValue,
-) -> Unit = "(obj, allow) => { obj.allow = allow; }"
 
 ///|
 /// [HTMLIFrameElement.allow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/allow)
@@ -205,19 +161,10 @@ impl THTMLIFrameElement with set_allow(self : Self, allow : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmli_frame_element_allow_fullscreen_ffi(obj : JsValue) -> Bool = "(obj) => obj.allowFullscreen"
-
-///|
 /// [HTMLIFrameElement.allowFullscreen](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/allowFullscreen)
 impl THTMLIFrameElement with allow_fullscreen(self : Self) -> Bool {
   htmli_frame_element_allow_fullscreen_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_allow_fullscreen_ffi(
-  obj : JsValue,
-  allow_fullscreen : JsValue,
-) -> Unit = "(obj, allowFullscreen) => { obj.allowFullscreen = allowFullscreen; }"
 
 ///|
 /// [HTMLIFrameElement.allowFullscreen](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/allowFullscreen)
@@ -232,19 +179,10 @@ impl THTMLIFrameElement with set_allow_fullscreen(
 }
 
 ///|
-extern "js" fn htmli_frame_element_width_ffi(obj : JsValue) -> String = "(obj) => obj.width"
-
-///|
 /// [HTMLIFrameElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/width)
 impl THTMLIFrameElement with width(self : Self) -> String {
   htmli_frame_element_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_width_ffi(
-  obj : JsValue,
-  width : JsValue,
-) -> Unit = "(obj, width) => { obj.width = width; }"
 
 ///|
 /// [HTMLIFrameElement.width](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/width)
@@ -256,19 +194,10 @@ impl THTMLIFrameElement with set_width(self : Self, width : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmli_frame_element_height_ffi(obj : JsValue) -> String = "(obj) => obj.height"
-
-///|
 /// [HTMLIFrameElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/height)
 impl THTMLIFrameElement with height(self : Self) -> String {
   htmli_frame_element_height_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_height_ffi(
-  obj : JsValue,
-  height : JsValue,
-) -> Unit = "(obj, height) => { obj.height = height; }"
 
 ///|
 /// [HTMLIFrameElement.height](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/height)
@@ -280,19 +209,10 @@ impl THTMLIFrameElement with set_height(self : Self, height : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmli_frame_element_referrer_policy_ffi(obj : JsValue) -> String = "(obj) => obj.referrerPolicy"
-
-///|
 /// [HTMLIFrameElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/referrerPolicy)
 impl THTMLIFrameElement with referrer_policy(self : Self) -> String {
   htmli_frame_element_referrer_policy_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_referrer_policy_ffi(
-  obj : JsValue,
-  referrer_policy : JsValue,
-) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
 
 ///|
 /// [HTMLIFrameElement.referrerPolicy](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/referrerPolicy)
@@ -307,19 +227,10 @@ impl THTMLIFrameElement with set_referrer_policy(
 }
 
 ///|
-extern "js" fn htmli_frame_element_loading_ffi(obj : JsValue) -> String = "(obj) => obj.loading"
-
-///|
 /// [HTMLIFrameElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/loading)
 impl THTMLIFrameElement with loading(self : Self) -> String {
   htmli_frame_element_loading_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_loading_ffi(
-  obj : JsValue,
-  loading : JsValue,
-) -> Unit = "(obj, loading) => { obj.loading = loading; }"
 
 ///|
 /// [HTMLIFrameElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/loading)
@@ -331,31 +242,16 @@ impl THTMLIFrameElement with set_loading(self : Self, loading : String) -> Unit 
 }
 
 ///|
-extern "js" fn htmli_frame_element_content_document_ffi(
-  obj : JsValue,
-) -> Document = "(obj) => obj.contentDocument"
-
-///|
 /// [HTMLIFrameElement.contentDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentDocument)
 impl THTMLIFrameElement with content_document(self : Self) -> Document {
   htmli_frame_element_content_document_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn htmli_frame_element_content_window_ffi(
-  obj : JsValue,
-) -> WindowProxy = "(obj) => obj.contentWindow"
-
-///|
 /// [HTMLIFrameElement.contentWindow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow)
 impl THTMLIFrameElement with content_window(self : Self) -> WindowProxy {
   htmli_frame_element_content_window_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_get_svg_document_ffi(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.getSVGDocument()"
 
 ///|
 /// [HTMLIFrameElement.getSVGDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/getSVGDocument)
@@ -369,19 +265,10 @@ impl THTMLIFrameElement with get_svg_document(self : Self) -> Document? {
 }
 
 ///|
-extern "js" fn htmli_frame_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
-
-///|
 /// [HTMLIFrameElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/align)
 impl THTMLIFrameElement with align(self : Self) -> String {
   htmli_frame_element_align_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [HTMLIFrameElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/align)
@@ -393,19 +280,10 @@ impl THTMLIFrameElement with set_align(self : Self, align : String) -> Unit {
 }
 
 ///|
-extern "js" fn htmli_frame_element_scrolling_ffi(obj : JsValue) -> String = "(obj) => obj.scrolling"
-
-///|
 /// [HTMLIFrameElement.scrolling](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/scrolling)
 impl THTMLIFrameElement with scrolling(self : Self) -> String {
   htmli_frame_element_scrolling_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_scrolling_ffi(
-  obj : JsValue,
-  scrolling : JsValue,
-) -> Unit = "(obj, scrolling) => { obj.scrolling = scrolling; }"
 
 ///|
 /// [HTMLIFrameElement.scrolling](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/scrolling)
@@ -417,19 +295,10 @@ impl THTMLIFrameElement with set_scrolling(self : Self, scrolling : String) -> U
 }
 
 ///|
-extern "js" fn htmli_frame_element_frame_border_ffi(obj : JsValue) -> String = "(obj) => obj.frameBorder"
-
-///|
 /// [HTMLIFrameElement.frameBorder](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/frameBorder)
 impl THTMLIFrameElement with frame_border(self : Self) -> String {
   htmli_frame_element_frame_border_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_frame_border_ffi(
-  obj : JsValue,
-  frame_border : JsValue,
-) -> Unit = "(obj, frameBorder) => { obj.frameBorder = frameBorder; }"
 
 ///|
 /// [HTMLIFrameElement.frameBorder](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/frameBorder)
@@ -444,19 +313,10 @@ impl THTMLIFrameElement with set_frame_border(
 }
 
 ///|
-extern "js" fn htmli_frame_element_long_desc_ffi(obj : JsValue) -> String = "(obj) => obj.longDesc"
-
-///|
 /// [HTMLIFrameElement.longDesc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/longDesc)
 impl THTMLIFrameElement with long_desc(self : Self) -> String {
   htmli_frame_element_long_desc_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_long_desc_ffi(
-  obj : JsValue,
-  long_desc : JsValue,
-) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
 
 ///|
 /// [HTMLIFrameElement.longDesc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/longDesc)
@@ -468,19 +328,10 @@ impl THTMLIFrameElement with set_long_desc(self : Self, long_desc : String) -> U
 }
 
 ///|
-extern "js" fn htmli_frame_element_margin_height_ffi(obj : JsValue) -> String = "(obj) => obj.marginHeight"
-
-///|
 /// [HTMLIFrameElement.marginHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/marginHeight)
 impl THTMLIFrameElement with margin_height(self : Self) -> String {
   htmli_frame_element_margin_height_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_margin_height_ffi(
-  obj : JsValue,
-  margin_height : JsValue,
-) -> Unit = "(obj, marginHeight) => { obj.marginHeight = marginHeight; }"
 
 ///|
 /// [HTMLIFrameElement.marginHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/marginHeight)
@@ -495,19 +346,10 @@ impl THTMLIFrameElement with set_margin_height(
 }
 
 ///|
-extern "js" fn htmli_frame_element_margin_width_ffi(obj : JsValue) -> String = "(obj) => obj.marginWidth"
-
-///|
 /// [HTMLIFrameElement.marginWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/marginWidth)
 impl THTMLIFrameElement with margin_width(self : Self) -> String {
   htmli_frame_element_margin_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmli_frame_element_set_margin_width_ffi(
-  obj : JsValue,
-  margin_width : JsValue,
-) -> Unit = "(obj, marginWidth) => { obj.marginWidth = marginWidth; }"
 
 ///|
 /// [HTMLIFrameElement.marginWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/marginWidth)

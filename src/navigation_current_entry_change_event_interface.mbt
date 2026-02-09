@@ -24,12 +24,6 @@ pub impl TNavigationCurrentEntryChangeEvent for NavigationCurrentEntryChangeEven
 pub impl TEvent for NavigationCurrentEntryChangeEvent
 
 ///|
-extern "js" fn navigation_current_entry_change_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> NavigationCurrentEntryChangeEvent = "(type_, event_init_dict) => new NavigationCurrentEntryChangeEvent(type_, event_init_dict)"
-
-///|
 pub fn NavigationCurrentEntryChangeEvent::new(
   type_ : String,
   event_init_dict : NavigationCurrentEntryChangeEventInit,
@@ -48,22 +42,12 @@ pub trait TNavigationCurrentEntryChangeEvent: TEvent {
 }
 
 ///|
-extern "js" fn navigation_current_entry_change_event_navigation_type_ffi(
-  obj : JsValue,
-) -> NavigationType = "(obj) => obj.navigationType"
-
-///|
 /// [NavigationCurrentEntryChangeEvent.navigationType](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent/navigationType)
 impl TNavigationCurrentEntryChangeEvent with navigation_type(self : Self) -> NavigationType {
   navigation_current_entry_change_event_navigation_type_ffi(
     TJsValue::to_js(self),
   )
 }
-
-///|
-extern "js" fn navigation_current_entry_change_event_from_ffi(
-  obj : JsValue,
-) -> NavigationHistoryEntry = "(obj) => obj.from"
 
 ///|
 /// [NavigationCurrentEntryChangeEvent.from](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent/from)

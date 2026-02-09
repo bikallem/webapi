@@ -20,12 +20,6 @@ pub impl TPopStateEvent for PopStateEvent
 pub impl TEvent for PopStateEvent
 
 ///|
-extern "js" fn pop_state_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> PopStateEvent = "(type_, event_init_dict) => new PopStateEvent(type_, event_init_dict)"
-
-///|
 pub fn PopStateEvent::new(
   type_ : String,
   event_init_dict? : PopStateEventInit = PopStateEventInit::empty(),
@@ -44,18 +38,10 @@ pub trait TPopStateEvent: TEvent {
 }
 
 ///|
-extern "js" fn pop_state_event_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.state"
-
-///|
 /// [PopStateEvent.state](https://developer.mozilla.org/en-US/docs/Web/API/PopStateEvent/state)
 impl TPopStateEvent with state(self : Self) -> JsValue {
   pop_state_event_state_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn pop_state_event_has_ua_visual_transition_ffi(
-  obj : JsValue,
-) -> Bool = "(obj) => obj.hasUAVisualTransition"
 
 ///|
 /// [PopStateEvent.hasUAVisualTransition](https://developer.mozilla.org/en-US/docs/Web/API/PopStateEvent/hasUAVisualTransition)

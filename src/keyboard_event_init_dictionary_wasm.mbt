@@ -1,0 +1,33 @@
+///|
+fn keyboard_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view : JsValue,
+  detail : JsValue,
+  which : JsValue,
+  ctrl_key : JsValue,
+  shift_key : JsValue,
+  alt_key : JsValue,
+  meta_key : JsValue,
+  modifier_alt_graph : JsValue,
+  modifier_caps_lock : JsValue,
+  modifier_fn : JsValue,
+  modifier_fn_lock : JsValue,
+  modifier_hyper : JsValue,
+  modifier_num_lock : JsValue,
+  modifier_scroll_lock : JsValue,
+  modifier_super : JsValue,
+  modifier_symbol : JsValue,
+  modifier_symbol_lock : JsValue,
+  key : JsValue,
+  code : JsValue,
+  location : JsValue,
+  repeat : JsValue,
+  is_composing : JsValue,
+  char_code : JsValue,
+  key_code : JsValue,
+) -> KeyboardEventInit = "webapi_KeyboardEventInit" "new"
+
+///|
+fn keyboard_event_init_empty_ffi() -> KeyboardEventInit = "webapi_Dictionary" "empty"

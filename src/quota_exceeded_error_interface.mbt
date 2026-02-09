@@ -22,12 +22,6 @@ pub impl TQuotaExceededError for QuotaExceededError
 pub impl TDOMException for QuotaExceededError
 
 ///|
-extern "js" fn quota_exceeded_error_new_ffi(
-  message : JsValue,
-  options : JsValue,
-) -> QuotaExceededError = "(message, options) => new QuotaExceededError(message, options)"
-
-///|
 pub fn QuotaExceededError::new(
   message? : String = "",
   options? : QuotaExceededErrorOptions = QuotaExceededErrorOptions::empty(),
@@ -46,16 +40,10 @@ pub trait TQuotaExceededError: TDOMException {
 }
 
 ///|
-extern "js" fn quota_exceeded_error_quota_ffi(obj : JsValue) -> Double = "(obj) => obj.quota"
-
-///|
 /// [QuotaExceededError.quota](https://developer.mozilla.org/en-US/docs/Web/API/QuotaExceededError/quota)
 impl TQuotaExceededError with quota(self : Self) -> Double {
   quota_exceeded_error_quota_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn quota_exceeded_error_requested_ffi(obj : JsValue) -> Double = "(obj) => obj.requested"
 
 ///|
 /// [QuotaExceededError.requested](https://developer.mozilla.org/en-US/docs/Web/API/QuotaExceededError/requested)

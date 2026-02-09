@@ -1,0 +1,21 @@
+///|
+fn request_init_ffi(
+  method_ : JsValue,
+  headers : JsValue,
+  body : JsValue,
+  referrer : JsValue,
+  referrer_policy : JsValue,
+  mode : JsValue,
+  credentials : JsValue,
+  cache : JsValue,
+  redirect : JsValue,
+  integrity : JsValue,
+  keepalive : JsValue,
+  signal : JsValue,
+  duplex : JsValue,
+  priority : JsValue,
+  window : JsValue,
+) -> RequestInit = "webapi_RequestInit" "new"
+
+///|
+fn request_init_empty_ffi() -> RequestInit = "webapi_Dictionary" "empty"

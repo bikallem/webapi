@@ -33,9 +33,6 @@ pub impl TNode for HTMLTableCaptionElement
 pub impl TEventTarget for HTMLTableCaptionElement
 
 ///|
-extern "js" fn html_table_caption_element_new_ffi() -> HTMLTableCaptionElement = "() => new HTMLTableCaptionElement()"
-
-///|
 pub fn HTMLTableCaptionElement::new() -> HTMLTableCaptionElement {
   html_table_caption_element_new_ffi()
 }
@@ -48,19 +45,10 @@ pub trait THTMLTableCaptionElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_table_caption_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
-
-///|
 /// [HTMLTableCaptionElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCaptionElement/align)
 impl THTMLTableCaptionElement with align(self : Self) -> String {
   html_table_caption_element_align_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_table_caption_element_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [HTMLTableCaptionElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCaptionElement/align)

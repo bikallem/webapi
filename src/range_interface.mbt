@@ -20,9 +20,6 @@ pub impl TRange for Range
 pub impl TAbstractRange for Range
 
 ///|
-extern "js" fn range_new_ffi() -> Range = "() => new Range()"
-
-///|
 pub fn Range::new() -> Range {
   range_new_ffi()
 }
@@ -87,20 +84,10 @@ pub trait TRange: TAbstractRange {
 }
 
 ///|
-extern "js" fn range_common_ancestor_container_ffi(obj : JsValue) -> Node = "(obj) => obj.commonAncestorContainer"
-
-///|
 /// [Range.commonAncestorContainer](https://developer.mozilla.org/en-US/docs/Web/API/Range/commonAncestorContainer)
 impl TRange with common_ancestor_container(self : Self) -> Node {
   range_common_ancestor_container_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn range_set_start_ffi(
-  obj : JsValue,
-  node : JsValue,
-  offset : JsValue,
-) -> Unit = "(obj, node, offset) => obj.setStart(node, offset)"
 
 ///|
 /// [Range.setStart](https://developer.mozilla.org/en-US/docs/Web/API/Range/setStart)
@@ -113,13 +100,6 @@ impl TRange with set_start(self : Self, node : &TNode, offset : UInt) -> Unit {
 }
 
 ///|
-extern "js" fn range_set_end_ffi(
-  obj : JsValue,
-  node : JsValue,
-  offset : JsValue,
-) -> Unit = "(obj, node, offset) => obj.setEnd(node, offset)"
-
-///|
 /// [Range.setEnd](https://developer.mozilla.org/en-US/docs/Web/API/Range/setEnd)
 impl TRange with set_end(self : Self, node : &TNode, offset : UInt) -> Unit {
   range_set_end_ffi(
@@ -130,19 +110,10 @@ impl TRange with set_end(self : Self, node : &TNode, offset : UInt) -> Unit {
 }
 
 ///|
-extern "js" fn range_set_start_before_ffi(
-  obj : JsValue,
-  node : JsValue,
-) -> Unit = "(obj, node) => obj.setStartBefore(node)"
-
-///|
 /// [Range.setStartBefore](https://developer.mozilla.org/en-US/docs/Web/API/Range/setStartBefore)
 impl TRange with set_start_before(self : Self, node : &TNode) -> Unit {
   range_set_start_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
-
-///|
-extern "js" fn range_set_start_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setStartAfter(node)"
 
 ///|
 /// [Range.setStartAfter](https://developer.mozilla.org/en-US/docs/Web/API/Range/setStartAfter)
@@ -151,16 +122,10 @@ impl TRange with set_start_after(self : Self, node : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_set_end_before_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndBefore(node)"
-
-///|
 /// [Range.setEndBefore](https://developer.mozilla.org/en-US/docs/Web/API/Range/setEndBefore)
 impl TRange with set_end_before(self : Self, node : &TNode) -> Unit {
   range_set_end_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
-
-///|
-extern "js" fn range_set_end_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndAfter(node)"
 
 ///|
 /// [Range.setEndAfter](https://developer.mozilla.org/en-US/docs/Web/API/Range/setEndAfter)
@@ -169,16 +134,10 @@ impl TRange with set_end_after(self : Self, node : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_collapse_ffi(obj : JsValue, to_start : JsValue) -> Unit = "(obj, to_start) => obj.collapse(to_start)"
-
-///|
 /// [Range.collapse](https://developer.mozilla.org/en-US/docs/Web/API/Range/collapse)
 impl TRange with collapse(self : Self, to_start? : Bool = false) -> Unit {
   range_collapse_ffi(TJsValue::to_js(self), TJsValue::to_js(to_start))
 }
-
-///|
-extern "js" fn range_select_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.selectNode(node)"
 
 ///|
 /// [Range.selectNode](https://developer.mozilla.org/en-US/docs/Web/API/Range/selectNode)
@@ -187,23 +146,10 @@ impl TRange with select_node(self : Self, node : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_select_node_contents_ffi(
-  obj : JsValue,
-  node : JsValue,
-) -> Unit = "(obj, node) => obj.selectNodeContents(node)"
-
-///|
 /// [Range.selectNodeContents](https://developer.mozilla.org/en-US/docs/Web/API/Range/selectNodeContents)
 impl TRange with select_node_contents(self : Self, node : &TNode) -> Unit {
   range_select_node_contents_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
-
-///|
-extern "js" fn range_compare_boundary_points_ffi(
-  obj : JsValue,
-  how : JsValue,
-  source_range : JsValue,
-) -> Int = "(obj, how, source_range) => obj.compareBoundaryPoints(how, source_range)"
 
 ///|
 /// [Range.compareBoundaryPoints](https://developer.mozilla.org/en-US/docs/Web/API/Range/compareBoundaryPoints)
@@ -220,16 +166,10 @@ impl TRange with compare_boundary_points(
 }
 
 ///|
-extern "js" fn range_delete_contents_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteContents()"
-
-///|
 /// [Range.deleteContents](https://developer.mozilla.org/en-US/docs/Web/API/Range/deleteContents)
 impl TRange with delete_contents(self : Self) -> Unit {
   range_delete_contents_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn range_extract_contents_ffi(obj : JsValue) -> DocumentFragment = "(obj) => obj.extractContents()"
 
 ///|
 /// [Range.extractContents](https://developer.mozilla.org/en-US/docs/Web/API/Range/extractContents)
@@ -238,28 +178,16 @@ impl TRange with extract_contents(self : Self) -> DocumentFragment {
 }
 
 ///|
-extern "js" fn range_clone_contents_ffi(obj : JsValue) -> DocumentFragment = "(obj) => obj.cloneContents()"
-
-///|
 /// [Range.cloneContents](https://developer.mozilla.org/en-US/docs/Web/API/Range/cloneContents)
 impl TRange with clone_contents(self : Self) -> DocumentFragment {
   range_clone_contents_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn range_insert_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.insertNode(node)"
-
-///|
 /// [Range.insertNode](https://developer.mozilla.org/en-US/docs/Web/API/Range/insertNode)
 impl TRange with insert_node(self : Self, node : &TNode) -> Unit {
   range_insert_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
-
-///|
-extern "js" fn range_surround_contents_ffi(
-  obj : JsValue,
-  new_parent : JsValue,
-) -> Unit = "(obj, new_parent) => obj.surroundContents(new_parent)"
 
 ///|
 /// [Range.surroundContents](https://developer.mozilla.org/en-US/docs/Web/API/Range/surroundContents)
@@ -271,29 +199,16 @@ impl TRange with surround_contents(self : Self, new_parent : &TNode) -> Unit {
 }
 
 ///|
-extern "js" fn range_clone_range_ffi(obj : JsValue) -> Range = "(obj) => obj.cloneRange()"
-
-///|
 /// [Range.cloneRange](https://developer.mozilla.org/en-US/docs/Web/API/Range/cloneRange)
 impl TRange with clone_range(self : Self) -> Range {
   range_clone_range_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn range_detach_ffi(obj : JsValue) -> Unit = "(obj) => obj.detach()"
-
-///|
 /// [Range.detach](https://developer.mozilla.org/en-US/docs/Web/API/Range/detach)
 impl TRange with detach(self : Self) -> Unit {
   range_detach_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn range_is_point_in_range_ffi(
-  obj : JsValue,
-  node : JsValue,
-  offset : JsValue,
-) -> Bool = "(obj, node, offset) => obj.isPointInRange(node, offset)"
 
 ///|
 /// [Range.isPointInRange](https://developer.mozilla.org/en-US/docs/Web/API/Range/isPointInRange)
@@ -306,13 +221,6 @@ impl TRange with is_point_in_range(self : Self, node : &TNode, offset : UInt) ->
 }
 
 ///|
-extern "js" fn range_compare_point_ffi(
-  obj : JsValue,
-  node : JsValue,
-  offset : JsValue,
-) -> Int = "(obj, node, offset) => obj.comparePoint(node, offset)"
-
-///|
 /// [Range.comparePoint](https://developer.mozilla.org/en-US/docs/Web/API/Range/comparePoint)
 impl TRange with compare_point(self : Self, node : &TNode, offset : UInt) -> Int {
   range_compare_point_ffi(
@@ -323,19 +231,10 @@ impl TRange with compare_point(self : Self, node : &TNode, offset : UInt) -> Int
 }
 
 ///|
-extern "js" fn range_intersects_node_ffi(obj : JsValue, node : JsValue) -> Bool = "(obj, node) => obj.intersectsNode(node)"
-
-///|
 /// [Range.intersectsNode](https://developer.mozilla.org/en-US/docs/Web/API/Range/intersectsNode)
 impl TRange with intersects_node(self : Self, node : &TNode) -> Bool {
   range_intersects_node_ffi(TJsValue::to_js(self), TJsValue::to_js(node))
 }
-
-///|
-extern "js" fn range_create_contextual_fragment_ffi(
-  obj : JsValue,
-  string : JsValue,
-) -> DocumentFragment = "(obj, string) => obj.createContextualFragment(string)"
 
 ///|
 /// [Range.createContextualFragment](https://developer.mozilla.org/en-US/docs/Web/API/Range/createContextualFragment)
@@ -347,16 +246,10 @@ impl TRange with create_contextual_fragment(
 }
 
 ///|
-extern "js" fn range_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "(obj) => obj.getClientRects()"
-
-///|
 /// [Range.getClientRects](https://developer.mozilla.org/en-US/docs/Web/API/Range/getClientRects)
 impl TRange with get_client_rects(self : Self) -> DOMRectList {
   range_get_client_rects_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn range_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBoundingClientRect()"
 
 ///|
 /// [Range.getBoundingClientRect](https://developer.mozilla.org/en-US/docs/Web/API/Range/getBoundingClientRect)

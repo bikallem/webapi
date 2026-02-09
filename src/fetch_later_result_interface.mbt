@@ -25,9 +25,6 @@ pub trait TFetchLaterResult: TJsValue {
 }
 
 ///|
-extern "js" fn fetch_later_result_activated_ffi(obj : JsValue) -> Bool = "(obj) => obj.activated"
-
-///|
 /// [FetchLaterResult.activated](https://developer.mozilla.org/en-US/docs/Web/API/FetchLaterResult/activated)
 impl TFetchLaterResult with activated(self : Self) -> Bool {
   fetch_later_result_activated_ffi(TJsValue::to_js(self))

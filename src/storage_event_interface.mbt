@@ -20,12 +20,6 @@ pub impl TStorageEvent for StorageEvent
 pub impl TEvent for StorageEvent
 
 ///|
-extern "js" fn storage_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> StorageEvent = "(type_, event_init_dict) => new StorageEvent(type_, event_init_dict)"
-
-///|
 pub fn StorageEvent::new(
   type_ : String,
   event_init_dict? : StorageEventInit = StorageEventInit::empty(),
@@ -58,16 +52,10 @@ pub trait TStorageEvent: TEvent {
 }
 
 ///|
-extern "js" fn storage_event_key_ffi(obj : JsValue) -> String = "(obj) => obj.key"
-
-///|
 /// [StorageEvent.key](https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent/key)
 impl TStorageEvent with key(self : Self) -> String {
   storage_event_key_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn storage_event_old_value_ffi(obj : JsValue) -> String = "(obj) => obj.oldValue"
 
 ///|
 /// [StorageEvent.oldValue](https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent/oldValue)
@@ -76,16 +64,10 @@ impl TStorageEvent with old_value(self : Self) -> String {
 }
 
 ///|
-extern "js" fn storage_event_new_value_ffi(obj : JsValue) -> String = "(obj) => obj.newValue"
-
-///|
 /// [StorageEvent.newValue](https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent/newValue)
 impl TStorageEvent with new_value(self : Self) -> String {
   storage_event_new_value_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn storage_event_url_ffi(obj : JsValue) -> String = "(obj) => obj.url"
 
 ///|
 /// [StorageEvent.url](https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent/url)
@@ -94,26 +76,10 @@ impl TStorageEvent with url(self : Self) -> String {
 }
 
 ///|
-extern "js" fn storage_event_storage_area_ffi(obj : JsValue) -> Storage = "(obj) => obj.storageArea"
-
-///|
 /// [StorageEvent.storageArea](https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent/storageArea)
 impl TStorageEvent with storage_area(self : Self) -> Storage {
   storage_event_storage_area_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn storage_event_init_storage_event_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-  bubbles : JsValue,
-  cancelable : JsValue,
-  key : JsValue,
-  old_value : JsValue,
-  new_value : JsValue,
-  url : JsValue,
-  storage_area : JsValue,
-) -> Unit = "(obj, type_, bubbles, cancelable, key, old_value, new_value, url, storage_area) => obj.initStorageEvent(type_, bubbles, cancelable, key, old_value, new_value, url, storage_area)"
 
 ///|
 /// [StorageEvent.initStorageEvent](https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent/initStorageEvent)

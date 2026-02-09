@@ -25,22 +25,6 @@ pub impl TTrackEventInitNewTrack for AudioTrack with to_js(self : AudioTrack) ->
 pub impl TTrackEventInitNewTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
 
 ///|
-extern "js" fn track_event_init_ffi(
-  bubbles : JsValue,
-  cancelable : JsValue,
-  composed : JsValue,
-  track : JsValue,
-) -> TrackEventInit =
-  #|(bubbles, cancelable, composed, track) => {
-  #|  const obj = {};
-  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
-  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
-  #|  if (composed !== undefined) obj.composed = composed;
-  #|  if (track !== undefined) obj.track = track;
-  #|  return obj;
-  #|}
-
-///|
 pub fn TrackEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
@@ -54,9 +38,6 @@ pub fn TrackEventInit::new(
     track.to_js(),
   )
 }
-
-///|
-extern "js" fn track_event_init_empty_ffi() -> TrackEventInit = "() => {}"
 
 ///|
 pub fn TrackEventInit::empty() -> TrackEventInit {

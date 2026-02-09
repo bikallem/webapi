@@ -26,16 +26,10 @@ pub trait TMimeType: TJsValue {
 }
 
 ///|
-extern "js" fn mime_type_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
-
-///|
 /// [MimeType.type](https://developer.mozilla.org/en-US/docs/Web/API/MimeType/type)
 impl TMimeType with type_(self : Self) -> String {
   mime_type_type_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn mime_type_description_ffi(obj : JsValue) -> String = "(obj) => obj.description"
 
 ///|
 /// [MimeType.description](https://developer.mozilla.org/en-US/docs/Web/API/MimeType/description)
@@ -44,16 +38,10 @@ impl TMimeType with description(self : Self) -> String {
 }
 
 ///|
-extern "js" fn mime_type_suffixes_ffi(obj : JsValue) -> String = "(obj) => obj.suffixes"
-
-///|
 /// [MimeType.suffixes](https://developer.mozilla.org/en-US/docs/Web/API/MimeType/suffixes)
 impl TMimeType with suffixes(self : Self) -> String {
   mime_type_suffixes_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn mime_type_enabled_plugin_ffi(obj : JsValue) -> Plugin = "(obj) => obj.enabledPlugin"
 
 ///|
 /// [MimeType.enabledPlugin](https://developer.mozilla.org/en-US/docs/Web/API/MimeType/enabledPlugin)

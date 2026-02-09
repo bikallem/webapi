@@ -22,20 +22,6 @@ pub impl TCSSStyleSheetInitNewMedia for MediaList with to_js(self : MediaList) -
 pub impl TCSSStyleSheetInitNewMedia for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-extern "js" fn css_style_sheet_init_ffi(
-  base_url : JsValue,
-  media : JsValue,
-  disabled : JsValue,
-) -> CSSStyleSheetInit =
-  #|(baseURL, media, disabled) => {
-  #|  const obj = {};
-  #|  if (baseURL !== undefined) obj.baseURL = baseURL;
-  #|  if (media !== undefined) obj.media = media;
-  #|  if (disabled !== undefined) obj.disabled = disabled;
-  #|  return obj;
-  #|}
-
-///|
 pub fn CSSStyleSheetInit::new(
   base_url? : String = JsValue::null(),
   media? : &TCSSStyleSheetInitNewMedia = "",
@@ -47,9 +33,6 @@ pub fn CSSStyleSheetInit::new(
     TJsValue::to_js(disabled),
   )
 }
-
-///|
-extern "js" fn css_style_sheet_init_empty_ffi() -> CSSStyleSheetInit = "() => {}"
 
 ///|
 pub fn CSSStyleSheetInit::empty() -> CSSStyleSheetInit {

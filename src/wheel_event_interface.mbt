@@ -26,12 +26,6 @@ pub impl TUIEvent for WheelEvent
 pub impl TEvent for WheelEvent
 
 ///|
-extern "js" fn wheel_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> WheelEvent = "(type_, event_init_dict) => new WheelEvent(type_, event_init_dict)"
-
-///|
 pub fn WheelEvent::new(
   type_ : String,
   event_init_dict? : WheelEventInit = WheelEventInit::empty(),
@@ -58,16 +52,10 @@ pub trait TWheelEvent: TMouseEvent {
 }
 
 ///|
-extern "js" fn wheel_event_delta_x_ffi(obj : JsValue) -> Double = "(obj) => obj.deltaX"
-
-///|
 /// [WheelEvent.deltaX](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaX)
 impl TWheelEvent with delta_x(self : Self) -> Double {
   wheel_event_delta_x_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn wheel_event_delta_y_ffi(obj : JsValue) -> Double = "(obj) => obj.deltaY"
 
 ///|
 /// [WheelEvent.deltaY](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaY)
@@ -76,16 +64,10 @@ impl TWheelEvent with delta_y(self : Self) -> Double {
 }
 
 ///|
-extern "js" fn wheel_event_delta_z_ffi(obj : JsValue) -> Double = "(obj) => obj.deltaZ"
-
-///|
 /// [WheelEvent.deltaZ](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaZ)
 impl TWheelEvent with delta_z(self : Self) -> Double {
   wheel_event_delta_z_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn wheel_event_delta_mode_ffi(obj : JsValue) -> UInt = "(obj) => obj.deltaMode"
 
 ///|
 /// [WheelEvent.deltaMode](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaMode)

@@ -24,12 +24,6 @@ pub impl TPromiseRejectionEvent for PromiseRejectionEvent
 pub impl TEvent for PromiseRejectionEvent
 
 ///|
-extern "js" fn promise_rejection_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> PromiseRejectionEvent = "(type_, event_init_dict) => new PromiseRejectionEvent(type_, event_init_dict)"
-
-///|
 pub fn PromiseRejectionEvent::new(
   type_ : String,
   event_init_dict : PromiseRejectionEventInit,
@@ -48,16 +42,10 @@ pub trait TPromiseRejectionEvent: TEvent {
 }
 
 ///|
-extern "js" fn promise_rejection_event_promise_ffi(obj : JsValue) -> JsValue = "(obj) => obj.promise"
-
-///|
 /// [PromiseRejectionEvent.promise](https://developer.mozilla.org/en-US/docs/Web/API/PromiseRejectionEvent/promise)
 impl TPromiseRejectionEvent with promise(self : Self) -> JsValue {
   promise_rejection_event_promise_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn promise_rejection_event_reason_ffi(obj : JsValue) -> JsValue = "(obj) => obj.reason"
 
 ///|
 /// [PromiseRejectionEvent.reason](https://developer.mozilla.org/en-US/docs/Web/API/PromiseRejectionEvent/reason)

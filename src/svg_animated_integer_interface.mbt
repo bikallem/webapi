@@ -27,19 +27,10 @@ pub trait TSVGAnimatedInteger: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_integer_base_val_ffi(obj : JsValue) -> Int = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedInteger.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger/baseVal)
 impl TSVGAnimatedInteger with base_val(self : Self) -> Int {
   svg_animated_integer_base_val_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_animated_integer_set_base_val_ffi(
-  obj : JsValue,
-  base_val : JsValue,
-) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
 
 ///|
 /// [SVGAnimatedInteger.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger/baseVal)
@@ -49,9 +40,6 @@ impl TSVGAnimatedInteger with set_base_val(self : Self, base_val : Int) -> Unit 
     TJsValue::to_js(base_val),
   )
 }
-
-///|
-extern "js" fn svg_animated_integer_anim_val_ffi(obj : JsValue) -> Int = "(obj) => obj.animVal"
 
 ///|
 /// [SVGAnimatedInteger.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedInteger/animVal)

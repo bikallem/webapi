@@ -70,16 +70,10 @@ pub trait TSVGMarkerElement: TSVGElement {
 }
 
 ///|
-extern "js" fn svg_marker_element_ref_x_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.refX"
-
-///|
 /// [SVGMarkerElement.refX](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/refX)
 impl TSVGMarkerElement with ref_x(self : Self) -> SVGAnimatedLength {
   svg_marker_element_ref_x_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_marker_element_ref_y_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.refY"
 
 ///|
 /// [SVGMarkerElement.refY](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/refY)
@@ -88,20 +82,10 @@ impl TSVGMarkerElement with ref_y(self : Self) -> SVGAnimatedLength {
 }
 
 ///|
-extern "js" fn svg_marker_element_marker_units_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "(obj) => obj.markerUnits"
-
-///|
 /// [SVGMarkerElement.markerUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/markerUnits)
 impl TSVGMarkerElement with marker_units(self : Self) -> SVGAnimatedEnumeration {
   svg_marker_element_marker_units_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_marker_element_marker_width_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.markerWidth"
 
 ///|
 /// [SVGMarkerElement.markerWidth](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/markerWidth)
@@ -110,20 +94,10 @@ impl TSVGMarkerElement with marker_width(self : Self) -> SVGAnimatedLength {
 }
 
 ///|
-extern "js" fn svg_marker_element_marker_height_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.markerHeight"
-
-///|
 /// [SVGMarkerElement.markerHeight](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/markerHeight)
 impl TSVGMarkerElement with marker_height(self : Self) -> SVGAnimatedLength {
   svg_marker_element_marker_height_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_marker_element_orient_type_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "(obj) => obj.orientType"
 
 ///|
 /// [SVGMarkerElement.orientType](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/orientType)
@@ -132,30 +106,16 @@ impl TSVGMarkerElement with orient_type(self : Self) -> SVGAnimatedEnumeration {
 }
 
 ///|
-extern "js" fn svg_marker_element_orient_angle_ffi(
-  obj : JsValue,
-) -> SVGAnimatedAngle = "(obj) => obj.orientAngle"
-
-///|
 /// [SVGMarkerElement.orientAngle](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/orientAngle)
 impl TSVGMarkerElement with orient_angle(self : Self) -> SVGAnimatedAngle {
   svg_marker_element_orient_angle_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn svg_marker_element_orient_ffi(obj : JsValue) -> String = "(obj) => obj.orient"
-
-///|
 /// [SVGMarkerElement.orient](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/orient)
 impl TSVGMarkerElement with orient(self : Self) -> String {
   svg_marker_element_orient_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_marker_element_set_orient_ffi(
-  obj : JsValue,
-  orient : JsValue,
-) -> Unit = "(obj, orient) => { obj.orient = orient; }"
 
 ///|
 /// [SVGMarkerElement.orient](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/orient)
@@ -167,19 +127,10 @@ impl TSVGMarkerElement with set_orient(self : Self, orient : String) -> Unit {
 }
 
 ///|
-extern "js" fn svg_marker_element_set_orient_to_auto_ffi(obj : JsValue) -> Unit = "(obj) => obj.setOrientToAuto()"
-
-///|
 /// [SVGMarkerElement.setOrientToAuto](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/setOrientToAuto)
 impl TSVGMarkerElement with set_orient_to_auto(self : Self) -> Unit {
   svg_marker_element_set_orient_to_auto_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_marker_element_set_orient_to_angle_ffi(
-  obj : JsValue,
-  angle : JsValue,
-) -> Unit = "(obj, angle) => obj.setOrientToAngle(angle)"
 
 ///|
 /// [SVGMarkerElement.setOrientToAngle](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/setOrientToAngle)
@@ -191,20 +142,10 @@ impl TSVGMarkerElement with set_orient_to_angle(self : Self, angle : &TSVGAngle)
 }
 
 ///|
-extern "js" fn svg_marker_element_view_box_ffi(
-  obj : JsValue,
-) -> SVGAnimatedRect = "(obj) => obj.viewBox"
-
-///|
 /// [SVGMarkerElement.viewBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/viewBox)
 impl TSVGMarkerElement with view_box(self : Self) -> SVGAnimatedRect {
   svg_marker_element_view_box_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_marker_element_preserve_aspect_ratio_ffi(
-  obj : JsValue,
-) -> SVGAnimatedPreserveAspectRatio = "(obj) => obj.preserveAspectRatio"
 
 ///|
 /// [SVGMarkerElement.preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement/preserveAspectRatio)

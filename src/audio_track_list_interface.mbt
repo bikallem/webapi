@@ -33,19 +33,10 @@ pub trait TAudioTrackList: TEventTarget {
 }
 
 ///|
-extern "js" fn audio_track_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [AudioTrackList.length](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/length)
 impl TAudioTrackList with length(self : Self) -> UInt {
   audio_track_list_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn audio_track_list_get_track_by_id_ffi(
-  obj : JsValue,
-  id : JsValue,
-) -> JsValue = "(obj, id) => obj.getTrackById(id)"
 
 ///|
 /// [AudioTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/getTrackById)
@@ -62,19 +53,10 @@ impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrac
 }
 
 ///|
-extern "js" fn audio_track_list_onchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onchange"
-
-///|
 /// [AudioTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onchange)
 impl TAudioTrackList with onchange(self : Self) -> EventHandler {
   audio_track_list_onchange_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn audio_track_list_set_onchange_ffi(
-  obj : JsValue,
-  onchange : JsValue,
-) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
 
 ///|
 /// [AudioTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onchange)
@@ -86,19 +68,10 @@ impl TAudioTrackList with set_onchange(self : Self, onchange : EventHandler) -> 
 }
 
 ///|
-extern "js" fn audio_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onaddtrack"
-
-///|
 /// [AudioTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onaddtrack)
 impl TAudioTrackList with onaddtrack(self : Self) -> EventHandler {
   audio_track_list_onaddtrack_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn audio_track_list_set_onaddtrack_ffi(
-  obj : JsValue,
-  onaddtrack : JsValue,
-) -> Unit = "(obj, onaddtrack) => { obj.onaddtrack = onaddtrack; }"
 
 ///|
 /// [AudioTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onaddtrack)
@@ -110,21 +83,10 @@ impl TAudioTrackList with set_onaddtrack(self : Self, onaddtrack : EventHandler)
 }
 
 ///|
-extern "js" fn audio_track_list_onremovetrack_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.onremovetrack"
-
-///|
 /// [AudioTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onremovetrack)
 impl TAudioTrackList with onremovetrack(self : Self) -> EventHandler {
   audio_track_list_onremovetrack_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn audio_track_list_set_onremovetrack_ffi(
-  obj : JsValue,
-  onremovetrack : JsValue,
-) -> Unit = "(obj, onremovetrack) => { obj.onremovetrack = onremovetrack; }"
 
 ///|
 /// [AudioTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onremovetrack)

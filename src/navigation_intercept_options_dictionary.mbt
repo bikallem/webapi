@@ -13,22 +13,6 @@ pub impl TJsValue for NavigationInterceptOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn navigation_intercept_options_ffi(
-  precommit_handler : JsValue,
-  handler : JsValue,
-  focus_reset : JsValue,
-  scroll : JsValue,
-) -> NavigationInterceptOptions =
-  #|(precommitHandler, handler, focusReset, scroll) => {
-  #|  const obj = {};
-  #|  if (precommitHandler !== undefined) obj.precommitHandler = precommitHandler;
-  #|  if (handler !== undefined) obj.handler = handler;
-  #|  if (focusReset !== undefined) obj.focusReset = focusReset;
-  #|  if (scroll !== undefined) obj.scroll = scroll;
-  #|  return obj;
-  #|}
-
-///|
 pub fn NavigationInterceptOptions::new(
   precommit_handler? : NavigationPrecommitHandler,
   handler? : NavigationInterceptHandler,
@@ -42,9 +26,6 @@ pub fn NavigationInterceptOptions::new(
     opt_to_js(scroll),
   )
 }
-
-///|
-extern "js" fn navigation_intercept_options_empty_ffi() -> NavigationInterceptOptions = "() => {}"
 
 ///|
 pub fn NavigationInterceptOptions::empty() -> NavigationInterceptOptions {

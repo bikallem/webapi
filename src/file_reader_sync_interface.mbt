@@ -17,9 +17,6 @@ pub fn[T : TFileReaderSync] FileReaderSync::into(self : FileReaderSync) -> T = "
 pub impl TFileReaderSync for FileReaderSync
 
 ///|
-extern "js" fn file_reader_sync_new_ffi() -> FileReaderSync = "() => new FileReaderSync()"
-
-///|
 pub fn FileReaderSync::new() -> FileReaderSync {
   file_reader_sync_new_ffi()
 }
@@ -34,12 +31,6 @@ pub trait TFileReaderSync: TJsValue {
 }
 
 ///|
-extern "js" fn file_reader_sync_read_as_array_buffer_ffi(
-  obj : JsValue,
-  blob : JsValue,
-) -> ArrayBuffer = "(obj, blob) => obj.readAsArrayBuffer(blob)"
-
-///|
 /// [FileReaderSync.readAsArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsArrayBuffer)
 impl TFileReaderSync with read_as_array_buffer(self : Self, blob : &TBlob) -> ArrayBuffer {
   file_reader_sync_read_as_array_buffer_ffi(
@@ -49,12 +40,6 @@ impl TFileReaderSync with read_as_array_buffer(self : Self, blob : &TBlob) -> Ar
 }
 
 ///|
-extern "js" fn file_reader_sync_read_as_binary_string_ffi(
-  obj : JsValue,
-  blob : JsValue,
-) -> String = "(obj, blob) => obj.readAsBinaryString(blob)"
-
-///|
 /// [FileReaderSync.readAsBinaryString](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsBinaryString)
 impl TFileReaderSync with read_as_binary_string(self : Self, blob : &TBlob) -> String {
   file_reader_sync_read_as_binary_string_ffi(
@@ -62,13 +47,6 @@ impl TFileReaderSync with read_as_binary_string(self : Self, blob : &TBlob) -> S
     TJsValue::to_js(blob),
   )
 }
-
-///|
-extern "js" fn file_reader_sync_read_as_text_ffi(
-  obj : JsValue,
-  blob : JsValue,
-  encoding : JsValue,
-) -> String = "(obj, blob, encoding) => obj.readAsText(blob, encoding)"
 
 ///|
 /// [FileReaderSync.readAsText](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsText)
@@ -83,12 +61,6 @@ impl TFileReaderSync with read_as_text(
     opt_to_js(encoding),
   )
 }
-
-///|
-extern "js" fn file_reader_sync_read_as_data_url_ffi(
-  obj : JsValue,
-  blob : JsValue,
-) -> String = "(obj, blob) => obj.readAsDataURL(blob)"
 
 ///|
 /// [FileReaderSync.readAsDataURL](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsDataURL)

@@ -17,9 +17,6 @@ pub fn[T : TOrigin] Origin::into(self : Origin) -> T = "%identity"
 pub impl TOrigin for Origin
 
 ///|
-extern "js" fn origin_new_ffi() -> Origin = "() => new Origin()"
-
-///|
 pub fn Origin::new() -> Origin {
   origin_new_ffi()
 }
@@ -33,16 +30,10 @@ pub trait TOrigin: TJsValue {
 }
 
 ///|
-extern "js" fn origin_from_ffi(value : JsValue) -> Origin = "(value) => Origin.from(value)"
-
-///|
 /// [Origin.from](https://developer.mozilla.org/en-US/docs/Web/API/Origin/from)
 pub fn Origin::from(value : JsValue) -> Origin {
   origin_from_ffi(TJsValue::to_js(value))
 }
-
-///|
-extern "js" fn origin_opaque_ffi(obj : JsValue) -> Bool = "(obj) => obj.opaque"
 
 ///|
 /// [Origin.opaque](https://developer.mozilla.org/en-US/docs/Web/API/Origin/opaque)
@@ -51,19 +42,10 @@ impl TOrigin with opaque_(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn origin_is_same_origin_ffi(
-  obj : JsValue,
-  other : JsValue,
-) -> Bool = "(obj, other) => obj.isSameOrigin(other)"
-
-///|
 /// [Origin.isSameOrigin](https://developer.mozilla.org/en-US/docs/Web/API/Origin/isSameOrigin)
 impl TOrigin with is_same_origin(self : Self, other : &TOrigin) -> Bool {
   origin_is_same_origin_ffi(TJsValue::to_js(self), TJsValue::to_js(other))
 }
-
-///|
-extern "js" fn origin_is_same_site_ffi(obj : JsValue, other : JsValue) -> Bool = "(obj, other) => obj.isSameSite(other)"
 
 ///|
 /// [Origin.isSameSite](https://developer.mozilla.org/en-US/docs/Web/API/Origin/isSameSite)

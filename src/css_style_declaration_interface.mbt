@@ -37,19 +37,10 @@ pub trait TCSSStyleDeclaration: TJsValue {
 }
 
 ///|
-extern "js" fn css_style_declaration_css_text_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.cssText"
-
-///|
 /// [CSSStyleDeclaration.cssText](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/cssText)
 impl TCSSStyleDeclaration with css_text(self : Self) -> CSSOMString {
   css_style_declaration_css_text_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn css_style_declaration_set_css_text_ffi(
-  obj : JsValue,
-  css_text : JsValue,
-) -> Unit = "(obj, cssText) => { obj.cssText = cssText; }"
 
 ///|
 /// [CSSStyleDeclaration.cssText](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/cssText)
@@ -61,19 +52,10 @@ impl TCSSStyleDeclaration with set_css_text(self : Self, css_text : CSSOMString)
 }
 
 ///|
-extern "js" fn css_style_declaration_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [CSSStyleDeclaration.length](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/length)
 impl TCSSStyleDeclaration with length(self : Self) -> UInt {
   css_style_declaration_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn css_style_declaration_get_property_value_ffi(
-  obj : JsValue,
-  property : JsValue,
-) -> CSSOMString = "(obj, property) => obj.getPropertyValue(property)"
 
 ///|
 /// [CSSStyleDeclaration.getPropertyValue](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue)
@@ -88,12 +70,6 @@ impl TCSSStyleDeclaration with get_property_value(
 }
 
 ///|
-extern "js" fn css_style_declaration_get_property_priority_ffi(
-  obj : JsValue,
-  property : JsValue,
-) -> CSSOMString = "(obj, property) => obj.getPropertyPriority(property)"
-
-///|
 /// [CSSStyleDeclaration.getPropertyPriority](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyPriority)
 impl TCSSStyleDeclaration with get_property_priority(
   self : Self,
@@ -104,14 +80,6 @@ impl TCSSStyleDeclaration with get_property_priority(
     TJsValue::to_js(property),
   )
 }
-
-///|
-extern "js" fn css_style_declaration_set_property_ffi(
-  obj : JsValue,
-  property : JsValue,
-  value : JsValue,
-  priority : JsValue,
-) -> Unit = "(obj, property, value, priority) => obj.setProperty(property, value, priority)"
 
 ///|
 /// [CSSStyleDeclaration.setProperty](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty)
@@ -130,12 +98,6 @@ impl TCSSStyleDeclaration with set_property(
 }
 
 ///|
-extern "js" fn css_style_declaration_remove_property_ffi(
-  obj : JsValue,
-  property : JsValue,
-) -> CSSOMString = "(obj, property) => obj.removeProperty(property)"
-
-///|
 /// [CSSStyleDeclaration.removeProperty](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/removeProperty)
 impl TCSSStyleDeclaration with remove_property(
   self : Self,
@@ -146,9 +108,6 @@ impl TCSSStyleDeclaration with remove_property(
     TJsValue::to_js(property),
   )
 }
-
-///|
-extern "js" fn css_style_declaration_parent_rule_ffi(obj : JsValue) -> CSSRule = "(obj) => obj.parentRule"
 
 ///|
 /// [CSSStyleDeclaration.parentRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/parentRule)

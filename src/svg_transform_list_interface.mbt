@@ -34,16 +34,10 @@ pub trait TSVGTransformList: TJsValue {
 }
 
 ///|
-extern "js" fn svg_transform_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [SVGTransformList.length](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/length)
 impl TSVGTransformList with length(self : Self) -> UInt {
   svg_transform_list_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_transform_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
 
 ///|
 /// [SVGTransformList.numberOfItems](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/numberOfItems)
@@ -52,19 +46,10 @@ impl TSVGTransformList with number_of_items(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn svg_transform_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
-
-///|
 /// [SVGTransformList.clear](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/clear)
 impl TSVGTransformList with clear(self : Self) -> Unit {
   svg_transform_list_clear_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_transform_list_initialize_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> SVGTransform = "(obj, new_item) => obj.initialize(new_item)"
 
 ///|
 /// [SVGTransformList.initialize](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/initialize)
@@ -74,13 +59,6 @@ impl TSVGTransformList with initialize(self : Self, new_item : &TSVGTransform) -
     TJsValue::to_js(new_item),
   )
 }
-
-///|
-extern "js" fn svg_transform_list_insert_item_before_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> SVGTransform = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
 
 ///|
 /// [SVGTransformList.insertItemBefore](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/insertItemBefore)
@@ -97,13 +75,6 @@ impl TSVGTransformList with insert_item_before(
 }
 
 ///|
-extern "js" fn svg_transform_list_replace_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> SVGTransform = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
-
-///|
 /// [SVGTransformList.replaceItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/replaceItem)
 impl TSVGTransformList with replace_item(
   self : Self,
@@ -118,12 +89,6 @@ impl TSVGTransformList with replace_item(
 }
 
 ///|
-extern "js" fn svg_transform_list_remove_item_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> SVGTransform = "(obj, index) => obj.removeItem(index)"
-
-///|
 /// [SVGTransformList.removeItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/removeItem)
 impl TSVGTransformList with remove_item(self : Self, index : UInt) -> SVGTransform {
   svg_transform_list_remove_item_ffi(
@@ -133,12 +98,6 @@ impl TSVGTransformList with remove_item(self : Self, index : UInt) -> SVGTransfo
 }
 
 ///|
-extern "js" fn svg_transform_list_append_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> SVGTransform = "(obj, new_item) => obj.appendItem(new_item)"
-
-///|
 /// [SVGTransformList.appendItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/appendItem)
 impl TSVGTransformList with append_item(self : Self, new_item : &TSVGTransform) -> SVGTransform {
   svg_transform_list_append_item_ffi(
@@ -146,12 +105,6 @@ impl TSVGTransformList with append_item(self : Self, new_item : &TSVGTransform) 
     TJsValue::to_js(new_item),
   )
 }
-
-///|
-extern "js" fn svg_transform_list_create_svg_transform_from_matrix_ffi(
-  obj : JsValue,
-  matrix : JsValue,
-) -> SVGTransform = "(obj, matrix) => obj.createSVGTransformFromMatrix(matrix)"
 
 ///|
 /// [SVGTransformList.createSVGTransformFromMatrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/createSVGTransformFromMatrix)
@@ -164,9 +117,6 @@ impl TSVGTransformList with create_svg_transform_from_matrix(
     TJsValue::to_js(matrix),
   )
 }
-
-///|
-extern "js" fn svg_transform_list_consolidate_ffi(obj : JsValue) -> JsValue = "(obj) => obj.consolidate()"
 
 ///|
 /// [SVGTransformList.consolidate](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/consolidate)

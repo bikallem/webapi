@@ -31,9 +31,6 @@ pub impl TNode for HTMLDListElement
 pub impl TEventTarget for HTMLDListElement
 
 ///|
-extern "js" fn htmld_list_element_new_ffi() -> HTMLDListElement = "() => new HTMLDListElement()"
-
-///|
 pub fn HTMLDListElement::new() -> HTMLDListElement {
   htmld_list_element_new_ffi()
 }
@@ -46,19 +43,10 @@ pub trait THTMLDListElement: THTMLElement {
 }
 
 ///|
-extern "js" fn htmld_list_element_compact_ffi(obj : JsValue) -> Bool = "(obj) => obj.compact"
-
-///|
 /// [HTMLDListElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDListElement/compact)
 impl THTMLDListElement with compact(self : Self) -> Bool {
   htmld_list_element_compact_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmld_list_element_set_compact_ffi(
-  obj : JsValue,
-  compact : JsValue,
-) -> Unit = "(obj, compact) => { obj.compact = compact; }"
 
 ///|
 /// [HTMLDListElement.compact](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDListElement/compact)

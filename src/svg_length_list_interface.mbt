@@ -30,16 +30,10 @@ pub trait TSVGLengthList: TJsValue {
 }
 
 ///|
-extern "js" fn svg_length_list_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [SVGLengthList.length](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/length)
 impl TSVGLengthList with length(self : Self) -> UInt {
   svg_length_list_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_length_list_number_of_items_ffi(obj : JsValue) -> UInt = "(obj) => obj.numberOfItems"
 
 ///|
 /// [SVGLengthList.numberOfItems](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/numberOfItems)
@@ -48,19 +42,10 @@ impl TSVGLengthList with number_of_items(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn svg_length_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
-
-///|
 /// [SVGLengthList.clear](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/clear)
 impl TSVGLengthList with clear(self : Self) -> Unit {
   svg_length_list_clear_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_length_list_initialize_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> SVGLength = "(obj, new_item) => obj.initialize(new_item)"
 
 ///|
 /// [SVGLengthList.initialize](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/initialize)
@@ -70,13 +55,6 @@ impl TSVGLengthList with initialize(self : Self, new_item : &TSVGLength) -> SVGL
     TJsValue::to_js(new_item),
   )
 }
-
-///|
-extern "js" fn svg_length_list_insert_item_before_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> SVGLength = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
 
 ///|
 /// [SVGLengthList.insertItemBefore](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/insertItemBefore)
@@ -93,13 +71,6 @@ impl TSVGLengthList with insert_item_before(
 }
 
 ///|
-extern "js" fn svg_length_list_replace_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-  index : JsValue,
-) -> SVGLength = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
-
-///|
 /// [SVGLengthList.replaceItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/replaceItem)
 impl TSVGLengthList with replace_item(
   self : Self,
@@ -114,22 +85,10 @@ impl TSVGLengthList with replace_item(
 }
 
 ///|
-extern "js" fn svg_length_list_remove_item_ffi(
-  obj : JsValue,
-  index : JsValue,
-) -> SVGLength = "(obj, index) => obj.removeItem(index)"
-
-///|
 /// [SVGLengthList.removeItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/removeItem)
 impl TSVGLengthList with remove_item(self : Self, index : UInt) -> SVGLength {
   svg_length_list_remove_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
-
-///|
-extern "js" fn svg_length_list_append_item_ffi(
-  obj : JsValue,
-  new_item : JsValue,
-) -> SVGLength = "(obj, new_item) => obj.appendItem(new_item)"
 
 ///|
 /// [SVGLengthList.appendItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/appendItem)

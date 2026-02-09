@@ -49,20 +49,10 @@ pub trait TSVGTextPositioningElement: TSVGTextContentElement {
 }
 
 ///|
-extern "js" fn svg_text_positioning_element_x_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLengthList = "(obj) => obj.x"
-
-///|
 /// [SVGTextPositioningElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/x)
 impl TSVGTextPositioningElement with x(self : Self) -> SVGAnimatedLengthList {
   svg_text_positioning_element_x_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_text_positioning_element_y_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLengthList = "(obj) => obj.y"
 
 ///|
 /// [SVGTextPositioningElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/y)
@@ -71,31 +61,16 @@ impl TSVGTextPositioningElement with y(self : Self) -> SVGAnimatedLengthList {
 }
 
 ///|
-extern "js" fn svg_text_positioning_element_dx_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLengthList = "(obj) => obj.dx"
-
-///|
 /// [SVGTextPositioningElement.dx](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/dx)
 impl TSVGTextPositioningElement with dx(self : Self) -> SVGAnimatedLengthList {
   svg_text_positioning_element_dx_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn svg_text_positioning_element_dy_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLengthList = "(obj) => obj.dy"
-
-///|
 /// [SVGTextPositioningElement.dy](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/dy)
 impl TSVGTextPositioningElement with dy(self : Self) -> SVGAnimatedLengthList {
   svg_text_positioning_element_dy_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_text_positioning_element_rotate_ffi(
-  obj : JsValue,
-) -> SVGAnimatedNumberList = "(obj) => obj.rotate"
 
 ///|
 /// [SVGTextPositioningElement.rotate](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPositioningElement/rotate)

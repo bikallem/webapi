@@ -31,9 +31,6 @@ pub impl TNode for HTMLTextAreaElement
 pub impl TEventTarget for HTMLTextAreaElement
 
 ///|
-extern "js" fn html_text_area_element_new_ffi() -> HTMLTextAreaElement = "() => new HTMLTextAreaElement()"
-
-///|
 pub fn HTMLTextAreaElement::new() -> HTMLTextAreaElement {
   html_text_area_element_new_ffi()
 }
@@ -103,19 +100,10 @@ pub trait THTMLTextAreaElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_text_area_element_autocomplete_ffi(obj : JsValue) -> String = "(obj) => obj.autocomplete"
-
-///|
 /// [HTMLTextAreaElement.autocomplete](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/autocomplete)
 impl THTMLTextAreaElement with autocomplete(self : Self) -> String {
   html_text_area_element_autocomplete_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_autocomplete_ffi(
-  obj : JsValue,
-  autocomplete : JsValue,
-) -> Unit = "(obj, autocomplete) => { obj.autocomplete = autocomplete; }"
 
 ///|
 /// [HTMLTextAreaElement.autocomplete](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/autocomplete)
@@ -130,19 +118,10 @@ impl THTMLTextAreaElement with set_autocomplete(
 }
 
 ///|
-extern "js" fn html_text_area_element_cols_ffi(obj : JsValue) -> UInt = "(obj) => obj.cols"
-
-///|
 /// [HTMLTextAreaElement.cols](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/cols)
 impl THTMLTextAreaElement with cols(self : Self) -> UInt {
   html_text_area_element_cols_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_cols_ffi(
-  obj : JsValue,
-  cols : JsValue,
-) -> Unit = "(obj, cols) => { obj.cols = cols; }"
 
 ///|
 /// [HTMLTextAreaElement.cols](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/cols)
@@ -154,19 +133,10 @@ impl THTMLTextAreaElement with set_cols(self : Self, cols : UInt) -> Unit {
 }
 
 ///|
-extern "js" fn html_text_area_element_dir_name_ffi(obj : JsValue) -> String = "(obj) => obj.dirName"
-
-///|
 /// [HTMLTextAreaElement.dirName](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/dirName)
 impl THTMLTextAreaElement with dir_name(self : Self) -> String {
   html_text_area_element_dir_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_dir_name_ffi(
-  obj : JsValue,
-  dir_name : JsValue,
-) -> Unit = "(obj, dirName) => { obj.dirName = dirName; }"
 
 ///|
 /// [HTMLTextAreaElement.dirName](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/dirName)
@@ -178,19 +148,10 @@ impl THTMLTextAreaElement with set_dir_name(self : Self, dir_name : String) -> U
 }
 
 ///|
-extern "js" fn html_text_area_element_disabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.disabled"
-
-///|
 /// [HTMLTextAreaElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/disabled)
 impl THTMLTextAreaElement with disabled(self : Self) -> Bool {
   html_text_area_element_disabled_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_disabled_ffi(
-  obj : JsValue,
-  disabled : JsValue,
-) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
 /// [HTMLTextAreaElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/disabled)
@@ -202,30 +163,16 @@ impl THTMLTextAreaElement with set_disabled(self : Self, disabled : Bool) -> Uni
 }
 
 ///|
-extern "js" fn html_text_area_element_form_ffi(
-  obj : JsValue,
-) -> HTMLFormElement = "(obj) => obj.form"
-
-///|
 /// [HTMLTextAreaElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/form)
 impl THTMLTextAreaElement with form(self : Self) -> HTMLFormElement {
   html_text_area_element_form_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_text_area_element_max_length_ffi(obj : JsValue) -> Int = "(obj) => obj.maxLength"
-
-///|
 /// [HTMLTextAreaElement.maxLength](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/maxLength)
 impl THTMLTextAreaElement with max_length(self : Self) -> Int {
   html_text_area_element_max_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_max_length_ffi(
-  obj : JsValue,
-  max_length : JsValue,
-) -> Unit = "(obj, maxLength) => { obj.maxLength = maxLength; }"
 
 ///|
 /// [HTMLTextAreaElement.maxLength](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/maxLength)
@@ -237,19 +184,10 @@ impl THTMLTextAreaElement with set_max_length(self : Self, max_length : Int) -> 
 }
 
 ///|
-extern "js" fn html_text_area_element_min_length_ffi(obj : JsValue) -> Int = "(obj) => obj.minLength"
-
-///|
 /// [HTMLTextAreaElement.minLength](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/minLength)
 impl THTMLTextAreaElement with min_length(self : Self) -> Int {
   html_text_area_element_min_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_min_length_ffi(
-  obj : JsValue,
-  min_length : JsValue,
-) -> Unit = "(obj, minLength) => { obj.minLength = minLength; }"
 
 ///|
 /// [HTMLTextAreaElement.minLength](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/minLength)
@@ -261,19 +199,10 @@ impl THTMLTextAreaElement with set_min_length(self : Self, min_length : Int) -> 
 }
 
 ///|
-extern "js" fn html_text_area_element_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [HTMLTextAreaElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/name)
 impl THTMLTextAreaElement with name(self : Self) -> String {
   html_text_area_element_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> Unit = "(obj, name) => { obj.name = name; }"
 
 ///|
 /// [HTMLTextAreaElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/name)
@@ -285,19 +214,10 @@ impl THTMLTextAreaElement with set_name(self : Self, name : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_text_area_element_placeholder_ffi(obj : JsValue) -> String = "(obj) => obj.placeholder"
-
-///|
 /// [HTMLTextAreaElement.placeholder](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/placeholder)
 impl THTMLTextAreaElement with placeholder(self : Self) -> String {
   html_text_area_element_placeholder_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_placeholder_ffi(
-  obj : JsValue,
-  placeholder : JsValue,
-) -> Unit = "(obj, placeholder) => { obj.placeholder = placeholder; }"
 
 ///|
 /// [HTMLTextAreaElement.placeholder](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/placeholder)
@@ -312,19 +232,10 @@ impl THTMLTextAreaElement with set_placeholder(
 }
 
 ///|
-extern "js" fn html_text_area_element_read_only_ffi(obj : JsValue) -> Bool = "(obj) => obj.readOnly"
-
-///|
 /// [HTMLTextAreaElement.readOnly](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/readOnly)
 impl THTMLTextAreaElement with read_only(self : Self) -> Bool {
   html_text_area_element_read_only_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_read_only_ffi(
-  obj : JsValue,
-  read_only : JsValue,
-) -> Unit = "(obj, readOnly) => { obj.readOnly = readOnly; }"
 
 ///|
 /// [HTMLTextAreaElement.readOnly](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/readOnly)
@@ -336,19 +247,10 @@ impl THTMLTextAreaElement with set_read_only(self : Self, read_only : Bool) -> U
 }
 
 ///|
-extern "js" fn html_text_area_element_required_ffi(obj : JsValue) -> Bool = "(obj) => obj.required"
-
-///|
 /// [HTMLTextAreaElement.required](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/required)
 impl THTMLTextAreaElement with required(self : Self) -> Bool {
   html_text_area_element_required_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_required_ffi(
-  obj : JsValue,
-  required : JsValue,
-) -> Unit = "(obj, required) => { obj.required = required; }"
 
 ///|
 /// [HTMLTextAreaElement.required](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/required)
@@ -360,19 +262,10 @@ impl THTMLTextAreaElement with set_required(self : Self, required : Bool) -> Uni
 }
 
 ///|
-extern "js" fn html_text_area_element_rows_ffi(obj : JsValue) -> UInt = "(obj) => obj.rows"
-
-///|
 /// [HTMLTextAreaElement.rows](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/rows)
 impl THTMLTextAreaElement with rows(self : Self) -> UInt {
   html_text_area_element_rows_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_rows_ffi(
-  obj : JsValue,
-  rows : JsValue,
-) -> Unit = "(obj, rows) => { obj.rows = rows; }"
 
 ///|
 /// [HTMLTextAreaElement.rows](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/rows)
@@ -384,19 +277,10 @@ impl THTMLTextAreaElement with set_rows(self : Self, rows : UInt) -> Unit {
 }
 
 ///|
-extern "js" fn html_text_area_element_wrap_ffi(obj : JsValue) -> String = "(obj) => obj.wrap"
-
-///|
 /// [HTMLTextAreaElement.wrap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/wrap)
 impl THTMLTextAreaElement with wrap(self : Self) -> String {
   html_text_area_element_wrap_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_wrap_ffi(
-  obj : JsValue,
-  wrap : JsValue,
-) -> Unit = "(obj, wrap) => { obj.wrap = wrap; }"
 
 ///|
 /// [HTMLTextAreaElement.wrap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/wrap)
@@ -408,30 +292,16 @@ impl THTMLTextAreaElement with set_wrap(self : Self, wrap : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_text_area_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
-
-///|
 /// [HTMLTextAreaElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/type)
 impl THTMLTextAreaElement with type_(self : Self) -> String {
   html_text_area_element_type_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_text_area_element_default_value_ffi(
-  obj : JsValue,
-) -> String = "(obj) => obj.defaultValue"
-
-///|
 /// [HTMLTextAreaElement.defaultValue](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/defaultValue)
 impl THTMLTextAreaElement with default_value(self : Self) -> String {
   html_text_area_element_default_value_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_default_value_ffi(
-  obj : JsValue,
-  default_value : JsValue,
-) -> Unit = "(obj, defaultValue) => { obj.defaultValue = defaultValue; }"
 
 ///|
 /// [HTMLTextAreaElement.defaultValue](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/defaultValue)
@@ -446,19 +316,10 @@ impl THTMLTextAreaElement with set_default_value(
 }
 
 ///|
-extern "js" fn html_text_area_element_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
-
-///|
 /// [HTMLTextAreaElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/value)
 impl THTMLTextAreaElement with value(self : Self) -> String {
   html_text_area_element_value_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [HTMLTextAreaElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/value)
@@ -470,16 +331,10 @@ impl THTMLTextAreaElement with set_value(self : Self, value : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_text_area_element_text_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.textLength"
-
-///|
 /// [HTMLTextAreaElement.textLength](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/textLength)
 impl THTMLTextAreaElement with text_length(self : Self) -> UInt {
   html_text_area_element_text_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_will_validate_ffi(obj : JsValue) -> Bool = "(obj) => obj.willValidate"
 
 ///|
 /// [HTMLTextAreaElement.willValidate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/willValidate)
@@ -488,20 +343,10 @@ impl THTMLTextAreaElement with will_validate(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn html_text_area_element_validity_ffi(
-  obj : JsValue,
-) -> ValidityState = "(obj) => obj.validity"
-
-///|
 /// [HTMLTextAreaElement.validity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/validity)
 impl THTMLTextAreaElement with validity(self : Self) -> ValidityState {
   html_text_area_element_validity_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_validation_message_ffi(
-  obj : JsValue,
-) -> String = "(obj) => obj.validationMessage"
 
 ///|
 /// [HTMLTextAreaElement.validationMessage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/validationMessage)
@@ -510,30 +355,16 @@ impl THTMLTextAreaElement with validation_message(self : Self) -> String {
 }
 
 ///|
-extern "js" fn html_text_area_element_check_validity_ffi(obj : JsValue) -> Bool = "(obj) => obj.checkValidity()"
-
-///|
 /// [HTMLTextAreaElement.checkValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/checkValidity)
 impl THTMLTextAreaElement with check_validity(self : Self) -> Bool {
   html_text_area_element_check_validity_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn html_text_area_element_report_validity_ffi(
-  obj : JsValue,
-) -> Bool = "(obj) => obj.reportValidity()"
-
-///|
 /// [HTMLTextAreaElement.reportValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/reportValidity)
 impl THTMLTextAreaElement with report_validity(self : Self) -> Bool {
   html_text_area_element_report_validity_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_custom_validity_ffi(
-  obj : JsValue,
-  error : JsValue,
-) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
 
 ///|
 /// [HTMLTextAreaElement.setCustomValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setCustomValidity)
@@ -545,16 +376,10 @@ impl THTMLTextAreaElement with set_custom_validity(self : Self, error : String) 
 }
 
 ///|
-extern "js" fn html_text_area_element_labels_ffi(obj : JsValue) -> NodeList = "(obj) => obj.labels"
-
-///|
 /// [HTMLTextAreaElement.labels](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/labels)
 impl THTMLTextAreaElement with labels(self : Self) -> NodeList {
   html_text_area_element_labels_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_select_ffi(obj : JsValue) -> Unit = "(obj) => obj.select()"
 
 ///|
 /// [HTMLTextAreaElement.select](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/select)
@@ -563,21 +388,10 @@ impl THTMLTextAreaElement with select(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn html_text_area_element_selection_start_ffi(
-  obj : JsValue,
-) -> UInt = "(obj) => obj.selectionStart"
-
-///|
 /// [HTMLTextAreaElement.selectionStart](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/selectionStart)
 impl THTMLTextAreaElement with selection_start(self : Self) -> UInt {
   html_text_area_element_selection_start_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_selection_start_ffi(
-  obj : JsValue,
-  selection_start : JsValue,
-) -> Unit = "(obj, selectionStart) => { obj.selectionStart = selectionStart; }"
 
 ///|
 /// [HTMLTextAreaElement.selectionStart](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/selectionStart)
@@ -592,19 +406,10 @@ impl THTMLTextAreaElement with set_selection_start(
 }
 
 ///|
-extern "js" fn html_text_area_element_selection_end_ffi(obj : JsValue) -> UInt = "(obj) => obj.selectionEnd"
-
-///|
 /// [HTMLTextAreaElement.selectionEnd](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/selectionEnd)
 impl THTMLTextAreaElement with selection_end(self : Self) -> UInt {
   html_text_area_element_selection_end_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_selection_end_ffi(
-  obj : JsValue,
-  selection_end : JsValue,
-) -> Unit = "(obj, selectionEnd) => { obj.selectionEnd = selectionEnd; }"
 
 ///|
 /// [HTMLTextAreaElement.selectionEnd](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/selectionEnd)
@@ -619,21 +424,10 @@ impl THTMLTextAreaElement with set_selection_end(
 }
 
 ///|
-extern "js" fn html_text_area_element_selection_direction_ffi(
-  obj : JsValue,
-) -> String = "(obj) => obj.selectionDirection"
-
-///|
 /// [HTMLTextAreaElement.selectionDirection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/selectionDirection)
 impl THTMLTextAreaElement with selection_direction(self : Self) -> String {
   html_text_area_element_selection_direction_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_text_area_element_set_selection_direction_ffi(
-  obj : JsValue,
-  selection_direction : JsValue,
-) -> Unit = "(obj, selectionDirection) => { obj.selectionDirection = selectionDirection; }"
 
 ///|
 /// [HTMLTextAreaElement.selectionDirection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/selectionDirection)
@@ -648,12 +442,6 @@ impl THTMLTextAreaElement with set_selection_direction(
 }
 
 ///|
-extern "js" fn html_text_area_element_set_range_text_ffi(
-  obj : JsValue,
-  replacement : JsValue,
-) -> Unit = "(obj, replacement) => obj.setRangeText(replacement)"
-
-///|
 /// [HTMLTextAreaElement.setRangeText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setRangeText)
 impl THTMLTextAreaElement with set_range_text(self : Self, replacement : String) -> Unit {
   html_text_area_element_set_range_text_ffi(
@@ -661,15 +449,6 @@ impl THTMLTextAreaElement with set_range_text(self : Self, replacement : String)
     TJsValue::to_js(replacement),
   )
 }
-
-///|
-extern "js" fn html_text_area_element_set_range_text_2_ffi(
-  obj : JsValue,
-  replacement : JsValue,
-  start : JsValue,
-  end : JsValue,
-  selection_mode : JsValue,
-) -> Unit = "(obj, replacement, start, end, selection_mode) => obj.setRangeText_2(replacement, start, end, selection_mode)"
 
 ///|
 /// [HTMLTextAreaElement.setRangeText_2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setRangeText_2)
@@ -688,14 +467,6 @@ impl THTMLTextAreaElement with set_range_text_2(
     TJsValue::to_js(selection_mode),
   )
 }
-
-///|
-extern "js" fn html_text_area_element_set_selection_range_ffi(
-  obj : JsValue,
-  start : JsValue,
-  end : JsValue,
-  direction : JsValue,
-) -> Unit = "(obj, start, end, direction) => obj.setSelectionRange(start, end, direction)"
 
 ///|
 /// [HTMLTextAreaElement.setSelectionRange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setSelectionRange)

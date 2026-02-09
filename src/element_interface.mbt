@@ -132,7 +132,9 @@ pub(open) trait TElementScrollIntoViewArg {
 }
 
 ///|
-pub impl TElementScrollIntoViewArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TElementScrollIntoViewArg for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TElementScrollIntoViewArg for ScrollIntoViewOptions with to_js(
@@ -333,16 +335,10 @@ pub trait TElement: TNode {
 }
 
 ///|
-extern "js" fn element_namespace_uri_ffi(obj : JsValue) -> String = "(obj) => obj.namespaceURI"
-
-///|
 /// [Element.namespaceURI](https://developer.mozilla.org/en-US/docs/Web/API/Element/namespaceURI)
 impl TElement with namespace_uri(self : Self) -> String {
   element_namespace_uri_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_prefix_ffi(obj : JsValue) -> String = "(obj) => obj.prefix"
 
 ///|
 /// [Element.prefix](https://developer.mozilla.org/en-US/docs/Web/API/Element/prefix)
@@ -351,16 +347,10 @@ impl TElement with prefix(self : Self) -> String {
 }
 
 ///|
-extern "js" fn element_local_name_ffi(obj : JsValue) -> String = "(obj) => obj.localName"
-
-///|
 /// [Element.localName](https://developer.mozilla.org/en-US/docs/Web/API/Element/localName)
 impl TElement with local_name(self : Self) -> String {
   element_local_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_tag_name_ffi(obj : JsValue) -> String = "(obj) => obj.tagName"
 
 ///|
 /// [Element.tagName](https://developer.mozilla.org/en-US/docs/Web/API/Element/tagName)
@@ -369,16 +359,10 @@ impl TElement with tag_name(self : Self) -> String {
 }
 
 ///|
-extern "js" fn element_id_ffi(obj : JsValue) -> String = "(obj) => obj.id"
-
-///|
 /// [Element.id](https://developer.mozilla.org/en-US/docs/Web/API/Element/id)
 impl TElement with id(self : Self) -> String {
   element_id_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => { obj.id = id; }"
 
 ///|
 /// [Element.id](https://developer.mozilla.org/en-US/docs/Web/API/Element/id)
@@ -387,19 +371,10 @@ impl TElement with set_id(self : Self, id : String) -> Unit {
 }
 
 ///|
-extern "js" fn element_class_name_ffi(obj : JsValue) -> String = "(obj) => obj.className"
-
-///|
 /// [Element.className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className)
 impl TElement with class_name(self : Self) -> String {
   element_class_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_set_class_name_ffi(
-  obj : JsValue,
-  class_name : JsValue,
-) -> Unit = "(obj, className) => { obj.className = className; }"
 
 ///|
 /// [Element.className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className)
@@ -408,16 +383,10 @@ impl TElement with set_class_name(self : Self, class_name : String) -> Unit {
 }
 
 ///|
-extern "js" fn element_class_list_ffi(obj : JsValue) -> DOMTokenList = "(obj) => obj.classList"
-
-///|
 /// [Element.classList](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList)
 impl TElement with class_list(self : Self) -> DOMTokenList {
   element_class_list_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_slot_ffi(obj : JsValue) -> String = "(obj) => obj.slot"
 
 ///|
 /// [Element.slot](https://developer.mozilla.org/en-US/docs/Web/API/Element/slot)
@@ -426,16 +395,10 @@ impl TElement with slot(self : Self) -> String {
 }
 
 ///|
-extern "js" fn element_set_slot_ffi(obj : JsValue, slot : JsValue) -> Unit = "(obj, slot) => { obj.slot = slot; }"
-
-///|
 /// [Element.slot](https://developer.mozilla.org/en-US/docs/Web/API/Element/slot)
 impl TElement with set_slot(self : Self, slot : String) -> Unit {
   element_set_slot_ffi(TJsValue::to_js(self), TJsValue::to_js(slot))
 }
-
-///|
-extern "js" fn element_has_attributes_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasAttributes()"
 
 ///|
 /// [Element.hasAttributes](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttributes)
@@ -444,28 +407,16 @@ impl TElement with has_attributes(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn element_attributes_ffi(obj : JsValue) -> NamedNodeMap = "(obj) => obj.attributes"
-
-///|
 /// [Element.attributes](https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes)
 impl TElement with attributes(self : Self) -> NamedNodeMap {
   element_attributes_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] = "(obj) => obj.getAttributeNames()"
-
-///|
 /// [Element.getAttributeNames](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNames)
 impl TElement with get_attribute_names(self : Self) -> Array[String] {
   element_get_attribute_names_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_get_attribute_ffi(
-  obj : JsValue,
-  qualified_name : JsValue,
-) -> JsValue = "(obj, qualified_name) => obj.getAttribute(qualified_name)"
 
 ///|
 /// [Element.getAttribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute)
@@ -480,13 +431,6 @@ impl TElement with get_attribute(self : Self, qualified_name : String) -> String
     Some(result.unsafe_cast())
   }
 }
-
-///|
-extern "js" fn element_get_attribute_ns_ffi(
-  obj : JsValue,
-  namespace_ : JsValue,
-  local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNS(namespace_, local_name)"
 
 ///|
 /// [Element.getAttributeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNS)
@@ -508,13 +452,6 @@ impl TElement with get_attribute_ns(
 }
 
 ///|
-extern "js" fn element_set_attribute_ffi(
-  obj : JsValue,
-  qualified_name : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, qualified_name, value) => obj.setAttribute(qualified_name, value)"
-
-///|
 /// [Element.setAttribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)
 impl TElement with set_attribute(
   self : Self,
@@ -527,14 +464,6 @@ impl TElement with set_attribute(
     value.to_js(),
   )
 }
-
-///|
-extern "js" fn element_set_attribute_ns_ffi(
-  obj : JsValue,
-  namespace_ : JsValue,
-  qualified_name : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, namespace_, qualified_name, value) => obj.setAttributeNS(namespace_, qualified_name, value)"
 
 ///|
 /// [Element.setAttributeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNS)
@@ -553,12 +482,6 @@ impl TElement with set_attribute_ns(
 }
 
 ///|
-extern "js" fn element_remove_attribute_ffi(
-  obj : JsValue,
-  qualified_name : JsValue,
-) -> Unit = "(obj, qualified_name) => obj.removeAttribute(qualified_name)"
-
-///|
 /// [Element.removeAttribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute)
 impl TElement with remove_attribute(self : Self, qualified_name : String) -> Unit {
   element_remove_attribute_ffi(
@@ -566,13 +489,6 @@ impl TElement with remove_attribute(self : Self, qualified_name : String) -> Uni
     TJsValue::to_js(qualified_name),
   )
 }
-
-///|
-extern "js" fn element_remove_attribute_ns_ffi(
-  obj : JsValue,
-  namespace_ : JsValue,
-  local_name : JsValue,
-) -> Unit = "(obj, namespace_, local_name) => obj.removeAttributeNS(namespace_, local_name)"
 
 ///|
 /// [Element.removeAttributeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttributeNS)
@@ -589,13 +505,6 @@ impl TElement with remove_attribute_ns(
 }
 
 ///|
-extern "js" fn element_toggle_attribute_ffi(
-  obj : JsValue,
-  qualified_name : JsValue,
-  force : JsValue,
-) -> Bool = "(obj, qualified_name, force) => obj.toggleAttribute(qualified_name, force)"
-
-///|
 /// [Element.toggleAttribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute)
 impl TElement with toggle_attribute(
   self : Self,
@@ -610,12 +519,6 @@ impl TElement with toggle_attribute(
 }
 
 ///|
-extern "js" fn element_has_attribute_ffi(
-  obj : JsValue,
-  qualified_name : JsValue,
-) -> Bool = "(obj, qualified_name) => obj.hasAttribute(qualified_name)"
-
-///|
 /// [Element.hasAttribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute)
 impl TElement with has_attribute(self : Self, qualified_name : String) -> Bool {
   element_has_attribute_ffi(
@@ -623,13 +526,6 @@ impl TElement with has_attribute(self : Self, qualified_name : String) -> Bool {
     TJsValue::to_js(qualified_name),
   )
 }
-
-///|
-extern "js" fn element_has_attribute_ns_ffi(
-  obj : JsValue,
-  namespace_ : JsValue,
-  local_name : JsValue,
-) -> Bool = "(obj, namespace_, local_name) => obj.hasAttributeNS(namespace_, local_name)"
 
 ///|
 /// [Element.hasAttributeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttributeNS)
@@ -646,12 +542,6 @@ impl TElement with has_attribute_ns(
 }
 
 ///|
-extern "js" fn element_get_attribute_node_ffi(
-  obj : JsValue,
-  qualified_name : JsValue,
-) -> JsValue = "(obj, qualified_name) => obj.getAttributeNode(qualified_name)"
-
-///|
 /// [Element.getAttributeNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNode)
 impl TElement with get_attribute_node(self : Self, qualified_name : String) -> Attr? {
   let result = element_get_attribute_node_ffi(
@@ -664,13 +554,6 @@ impl TElement with get_attribute_node(self : Self, qualified_name : String) -> A
     Some(result.unsafe_cast())
   }
 }
-
-///|
-extern "js" fn element_get_attribute_node_ns_ffi(
-  obj : JsValue,
-  namespace_ : JsValue,
-  local_name : JsValue,
-) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNodeNS(namespace_, local_name)"
 
 ///|
 /// [Element.getAttributeNodeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNodeNS)
@@ -692,12 +575,6 @@ impl TElement with get_attribute_node_ns(
 }
 
 ///|
-extern "js" fn element_set_attribute_node_ffi(
-  obj : JsValue,
-  attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setAttributeNode(attr)"
-
-///|
 /// [Element.setAttributeNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNode)
 impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr? {
   let result = element_set_attribute_node_ffi(
@@ -710,12 +587,6 @@ impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr? {
     Some(result.unsafe_cast())
   }
 }
-
-///|
-extern "js" fn element_set_attribute_node_ns_ffi(
-  obj : JsValue,
-  attr : JsValue,
-) -> JsValue = "(obj, attr) => obj.setAttributeNodeNS(attr)"
 
 ///|
 /// [Element.setAttributeNodeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNodeNS)
@@ -732,12 +603,6 @@ impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? {
 }
 
 ///|
-extern "js" fn element_remove_attribute_node_ffi(
-  obj : JsValue,
-  attr : JsValue,
-) -> Attr = "(obj, attr) => obj.removeAttributeNode(attr)"
-
-///|
 /// [Element.removeAttributeNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttributeNode)
 impl TElement with remove_attribute_node(self : Self, attr : &TAttr) -> Attr {
   element_remove_attribute_node_ffi(
@@ -747,19 +612,10 @@ impl TElement with remove_attribute_node(self : Self, attr : &TAttr) -> Attr {
 }
 
 ///|
-extern "js" fn element_attach_shadow_ffi(
-  obj : JsValue,
-  init : JsValue,
-) -> ShadowRoot = "(obj, init) => obj.attachShadow(init)"
-
-///|
 /// [Element.attachShadow](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow)
 impl TElement with attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRoot {
   element_attach_shadow_ffi(TJsValue::to_js(self), TJsValue::to_js(init))
 }
-
-///|
-extern "js" fn element_shadow_root_ffi(obj : JsValue) -> ShadowRoot = "(obj) => obj.shadowRoot"
 
 ///|
 /// [Element.shadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/Element/shadowRoot)
@@ -768,21 +624,10 @@ impl TElement with shadow_root(self : Self) -> ShadowRoot {
 }
 
 ///|
-extern "js" fn element_custom_element_registry_ffi(
-  obj : JsValue,
-) -> CustomElementRegistry = "(obj) => obj.customElementRegistry"
-
-///|
 /// [Element.customElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/Element/customElementRegistry)
 impl TElement with custom_element_registry(self : Self) -> CustomElementRegistry {
   element_custom_element_registry_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_closest_ffi(
-  obj : JsValue,
-  selectors : JsValue,
-) -> JsValue = "(obj, selectors) => obj.closest(selectors)"
 
 ///|
 /// [Element.closest](https://developer.mozilla.org/en-US/docs/Web/API/Element/closest)
@@ -799,19 +644,10 @@ impl TElement with closest(self : Self, selectors : String) -> Element? {
 }
 
 ///|
-extern "js" fn element_matches_ffi(obj : JsValue, selectors : JsValue) -> Bool = "(obj, selectors) => obj.matches(selectors)"
-
-///|
 /// [Element.matches](https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
 impl TElement with matches(self : Self, selectors : String) -> Bool {
   element_matches_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
 }
-
-///|
-extern "js" fn element_webkit_matches_selector_ffi(
-  obj : JsValue,
-  selectors : JsValue,
-) -> Bool = "(obj, selectors) => obj.webkitMatchesSelector(selectors)"
 
 ///|
 /// [Element.webkitMatchesSelector](https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitMatchesSelector)
@@ -821,12 +657,6 @@ impl TElement with webkit_matches_selector(self : Self, selectors : String) -> B
     TJsValue::to_js(selectors),
   )
 }
-
-///|
-extern "js" fn element_get_elements_by_tag_name_ffi(
-  obj : JsValue,
-  qualified_name : JsValue,
-) -> HTMLCollection = "(obj, qualified_name) => obj.getElementsByTagName(qualified_name)"
 
 ///|
 /// [Element.getElementsByTagName](https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName)
@@ -839,13 +669,6 @@ impl TElement with get_elements_by_tag_name(
     TJsValue::to_js(qualified_name),
   )
 }
-
-///|
-extern "js" fn element_get_elements_by_tag_name_ns_ffi(
-  obj : JsValue,
-  namespace_ : JsValue,
-  local_name : JsValue,
-) -> HTMLCollection = "(obj, namespace_, local_name) => obj.getElementsByTagNameNS(namespace_, local_name)"
 
 ///|
 /// [Element.getElementsByTagNameNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagNameNS)
@@ -862,12 +685,6 @@ impl TElement with get_elements_by_tag_name_ns(
 }
 
 ///|
-extern "js" fn element_get_elements_by_class_name_ffi(
-  obj : JsValue,
-  class_names : JsValue,
-) -> HTMLCollection = "(obj, class_names) => obj.getElementsByClassName(class_names)"
-
-///|
 /// [Element.getElementsByClassName](https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByClassName)
 impl TElement with get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection {
   element_get_elements_by_class_name_ffi(
@@ -875,13 +692,6 @@ impl TElement with get_elements_by_class_name(self : Self, class_names : String)
     TJsValue::to_js(class_names),
   )
 }
-
-///|
-extern "js" fn element_insert_adjacent_element_ffi(
-  obj : JsValue,
-  where_ : JsValue,
-  element : JsValue,
-) -> JsValue = "(obj, where_, element) => obj.insertAdjacentElement(where_, element)"
 
 ///|
 /// [Element.insertAdjacentElement](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement)
@@ -903,13 +713,6 @@ impl TElement with insert_adjacent_element(
 }
 
 ///|
-extern "js" fn element_insert_adjacent_text_ffi(
-  obj : JsValue,
-  where_ : JsValue,
-  data : JsValue,
-) -> Unit = "(obj, where_, data) => obj.insertAdjacentText(where_, data)"
-
-///|
 /// [Element.insertAdjacentText](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentText)
 impl TElement with insert_adjacent_text(
   self : Self,
@@ -924,12 +727,6 @@ impl TElement with insert_adjacent_text(
 }
 
 ///|
-extern "js" fn element_set_html_unsafe_ffi(
-  obj : JsValue,
-  html : JsValue,
-) -> Unit = "(obj, html) => obj.setHTMLUnsafe(html)"
-
-///|
 /// [Element.setHTMLUnsafe](https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTMLUnsafe)
 impl TElement with set_html_unsafe(
   self : Self,
@@ -937,9 +734,6 @@ impl TElement with set_html_unsafe(
 ) -> Unit {
   element_set_html_unsafe_ffi(TJsValue::to_js(self), html.to_js())
 }
-
-///|
-extern "js" fn element_get_html_ffi(obj : JsValue, options : JsValue) -> String = "(obj, options) => obj.getHTML(options)"
 
 ///|
 /// [Element.getHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/getHTML)
@@ -951,19 +745,10 @@ impl TElement with get_html(
 }
 
 ///|
-extern "js" fn element_inner_html_ffi(obj : JsValue) -> ElementInnerHTML = "(obj) => obj.innerHTML"
-
-///|
 /// [Element.innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML)
 impl TElement with inner_html(self : Self) -> ElementInnerHTML {
   element_inner_html_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_set_inner_html_ffi(
-  obj : JsValue,
-  inner_html : JsValue,
-) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
 
 ///|
 /// [Element.innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML)
@@ -972,32 +757,16 @@ impl TElement with set_inner_html(self : Self, inner_html : &TElementInnerHTML) 
 }
 
 ///|
-extern "js" fn element_outer_html_ffi(obj : JsValue) -> ElementOuterHTML = "(obj) => obj.outerHTML"
-
-///|
 /// [Element.outerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML)
 impl TElement with outer_html(self : Self) -> ElementOuterHTML {
   element_outer_html_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn element_set_outer_html_ffi(
-  obj : JsValue,
-  outer_html : JsValue,
-) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outerHTML; }"
-
-///|
 /// [Element.outerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML)
 impl TElement with set_outer_html(self : Self, outer_html : &TElementOuterHTML) -> Unit {
   element_set_outer_html_ffi(TJsValue::to_js(self), outer_html.to_js())
 }
-
-///|
-extern "js" fn element_insert_adjacent_html_ffi(
-  obj : JsValue,
-  position : JsValue,
-  string : JsValue,
-) -> Unit = "(obj, position, string) => obj.insertAdjacentHTML(position, string)"
 
 ///|
 /// [Element.insertAdjacentHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML)
@@ -1014,28 +783,16 @@ impl TElement with insert_adjacent_html(
 }
 
 ///|
-extern "js" fn element_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "(obj) => obj.getClientRects()"
-
-///|
 /// [Element.getClientRects](https://developer.mozilla.org/en-US/docs/Web/API/Element/getClientRects)
 impl TElement with get_client_rects(self : Self) -> DOMRectList {
   element_get_client_rects_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn element_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "(obj) => obj.getBoundingClientRect()"
-
-///|
 /// [Element.getBoundingClientRect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
 impl TElement with get_bounding_client_rect(self : Self) -> DOMRect {
   element_get_bounding_client_rect_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_check_visibility_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> Bool = "(obj, options) => obj.checkVisibility(options)"
 
 ///|
 /// [Element.checkVisibility](https://developer.mozilla.org/en-US/docs/Web/API/Element/checkVisibility)
@@ -1047,12 +804,6 @@ impl TElement with check_visibility(
 }
 
 ///|
-extern "js" fn element_scroll_into_view_ffi(
-  obj : JsValue,
-  arg : JsValue,
-) -> JsPromise[Unit] = "(obj, arg) => obj.scrollIntoView(arg)"
-
-///|
 /// [Element.scrollIntoView](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
 impl TElement with scroll_into_view(
   self : Self,
@@ -1062,12 +813,6 @@ impl TElement with scroll_into_view(
 }
 
 ///|
-extern "js" fn element_scroll_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scroll(options)"
-
-///|
 /// [Element.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll)
 impl TElement with scroll(
   self : Self,
@@ -1075,13 +820,6 @@ impl TElement with scroll(
 ) -> JsPromise[Unit] {
   element_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
-
-///|
-extern "js" fn element_scroll_2_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scroll_2(x, y)"
 
 ///|
 /// [Element.scroll_2](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_2)
@@ -1096,12 +834,6 @@ impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
 }
 
 ///|
-extern "js" fn element_scroll_to_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollTo(options)"
-
-///|
 /// [Element.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo)
 impl TElement with scroll_to(
   self : Self,
@@ -1109,13 +841,6 @@ impl TElement with scroll_to(
 ) -> JsPromise[Unit] {
   element_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
-
-///|
-extern "js" fn element_scroll_to_2_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollTo_2(x, y)"
 
 ///|
 /// [Element.scrollTo_2](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo_2)
@@ -1130,12 +855,6 @@ impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise
 }
 
 ///|
-extern "js" fn element_scroll_by_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> JsPromise[Unit] = "(obj, options) => obj.scrollBy(options)"
-
-///|
 /// [Element.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy)
 impl TElement with scroll_by(
   self : Self,
@@ -1143,13 +862,6 @@ impl TElement with scroll_by(
 ) -> JsPromise[Unit] {
   element_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
-
-///|
-extern "js" fn element_scroll_by_2_ffi(
-  obj : JsValue,
-  x : JsValue,
-  y : JsValue,
-) -> JsPromise[Unit] = "(obj, x, y) => obj.scrollBy_2(x, y)"
 
 ///|
 /// [Element.scrollBy_2](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy_2)
@@ -1164,19 +876,10 @@ impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise
 }
 
 ///|
-extern "js" fn element_scroll_top_ffi(obj : JsValue) -> Double = "(obj) => obj.scrollTop"
-
-///|
 /// [Element.scrollTop](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
 impl TElement with scroll_top(self : Self) -> Double {
   element_scroll_top_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_set_scroll_top_ffi(
-  obj : JsValue,
-  scroll_top : JsValue,
-) -> Unit = "(obj, scrollTop) => { obj.scrollTop = scrollTop; }"
 
 ///|
 /// [Element.scrollTop](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
@@ -1185,19 +888,10 @@ impl TElement with set_scroll_top(self : Self, scroll_top : Double) -> Unit {
 }
 
 ///|
-extern "js" fn element_scroll_left_ffi(obj : JsValue) -> Double = "(obj) => obj.scrollLeft"
-
-///|
 /// [Element.scrollLeft](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft)
 impl TElement with scroll_left(self : Self) -> Double {
   element_scroll_left_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_set_scroll_left_ffi(
-  obj : JsValue,
-  scroll_left : JsValue,
-) -> Unit = "(obj, scrollLeft) => { obj.scrollLeft = scrollLeft; }"
 
 ///|
 /// [Element.scrollLeft](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft)
@@ -1209,16 +903,10 @@ impl TElement with set_scroll_left(self : Self, scroll_left : Double) -> Unit {
 }
 
 ///|
-extern "js" fn element_scroll_width_ffi(obj : JsValue) -> Int = "(obj) => obj.scrollWidth"
-
-///|
 /// [Element.scrollWidth](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollWidth)
 impl TElement with scroll_width(self : Self) -> Int {
   element_scroll_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_scroll_height_ffi(obj : JsValue) -> Int = "(obj) => obj.scrollHeight"
 
 ///|
 /// [Element.scrollHeight](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight)
@@ -1227,16 +915,10 @@ impl TElement with scroll_height(self : Self) -> Int {
 }
 
 ///|
-extern "js" fn element_client_top_ffi(obj : JsValue) -> Int = "(obj) => obj.clientTop"
-
-///|
 /// [Element.clientTop](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientTop)
 impl TElement with client_top(self : Self) -> Int {
   element_client_top_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_client_left_ffi(obj : JsValue) -> Int = "(obj) => obj.clientLeft"
 
 ///|
 /// [Element.clientLeft](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientLeft)
@@ -1245,16 +927,10 @@ impl TElement with client_left(self : Self) -> Int {
 }
 
 ///|
-extern "js" fn element_client_width_ffi(obj : JsValue) -> Int = "(obj) => obj.clientWidth"
-
-///|
 /// [Element.clientWidth](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth)
 impl TElement with client_width(self : Self) -> Int {
   element_client_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_client_height_ffi(obj : JsValue) -> Int = "(obj) => obj.clientHeight"
 
 ///|
 /// [Element.clientHeight](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight)
@@ -1263,16 +939,10 @@ impl TElement with client_height(self : Self) -> Int {
 }
 
 ///|
-extern "js" fn element_current_css_zoom_ffi(obj : JsValue) -> Double = "(obj) => obj.currentCSSZoom"
-
-///|
 /// [Element.currentCSSZoom](https://developer.mozilla.org/en-US/docs/Web/API/Element/currentCSSZoom)
 impl TElement with current_css_zoom(self : Self) -> Double {
   element_current_css_zoom_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_children_ffi(obj : JsValue) -> HTMLCollection = "(obj) => obj.children"
 
 ///|
 /// [Element.children](https://developer.mozilla.org/en-US/docs/Web/API/Element/children)
@@ -1281,16 +951,10 @@ impl TElement with children(self : Self) -> HTMLCollection {
 }
 
 ///|
-extern "js" fn element_first_element_child_ffi(obj : JsValue) -> Element = "(obj) => obj.firstElementChild"
-
-///|
 /// [Element.firstElementChild](https://developer.mozilla.org/en-US/docs/Web/API/Element/firstElementChild)
 impl TElement with first_element_child(self : Self) -> Element {
   element_first_element_child_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_last_element_child_ffi(obj : JsValue) -> Element = "(obj) => obj.lastElementChild"
 
 ///|
 /// [Element.lastElementChild](https://developer.mozilla.org/en-US/docs/Web/API/Element/lastElementChild)
@@ -1299,16 +963,10 @@ impl TElement with last_element_child(self : Self) -> Element {
 }
 
 ///|
-extern "js" fn element_child_element_count_ffi(obj : JsValue) -> UInt = "(obj) => obj.childElementCount"
-
-///|
 /// [Element.childElementCount](https://developer.mozilla.org/en-US/docs/Web/API/Element/childElementCount)
 impl TElement with child_element_count(self : Self) -> UInt {
   element_child_element_count_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(nodes)"
 
 ///|
 /// [Element.prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend)
@@ -1317,19 +975,10 @@ impl TElement with prepend(self : Self, nodes : &TElementPrependNodes) -> Unit {
 }
 
 ///|
-extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(nodes)"
-
-///|
 /// [Element.append](https://developer.mozilla.org/en-US/docs/Web/API/Element/append)
 impl TElement with append(self : Self, nodes : &TElementAppendNodes) -> Unit {
   element_append_ffi(TJsValue::to_js(self), nodes.to_js())
 }
-
-///|
-extern "js" fn element_replace_children_ffi(
-  obj : JsValue,
-  nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceChildren(nodes)"
 
 ///|
 /// [Element.replaceChildren](https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceChildren)
@@ -1341,13 +990,6 @@ impl TElement with replace_children(
 }
 
 ///|
-extern "js" fn element_move_before_ffi(
-  obj : JsValue,
-  node : JsValue,
-  child : JsValue,
-) -> Unit = "(obj, node, child) => obj.moveBefore(node, child)"
-
-///|
 /// [Element.moveBefore](https://developer.mozilla.org/en-US/docs/Web/API/Element/moveBefore)
 impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Unit {
   element_move_before_ffi(
@@ -1356,12 +998,6 @@ impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Un
     TJsValue::to_js(child),
   )
 }
-
-///|
-extern "js" fn element_query_selector_ffi(
-  obj : JsValue,
-  selectors : JsValue,
-) -> JsValue = "(obj, selectors) => obj.querySelector(selectors)"
 
 ///|
 /// [Element.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector)
@@ -1378,12 +1014,6 @@ impl TElement with query_selector(self : Self, selectors : String) -> Element? {
 }
 
 ///|
-extern "js" fn element_query_selector_all_ffi(
-  obj : JsValue,
-  selectors : JsValue,
-) -> NodeList = "(obj, selectors) => obj.querySelectorAll(selectors)"
-
-///|
 /// [Element.querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll)
 impl TElement with query_selector_all(self : Self, selectors : String) -> NodeList {
   element_query_selector_all_ffi(
@@ -1393,16 +1023,10 @@ impl TElement with query_selector_all(self : Self, selectors : String) -> NodeLi
 }
 
 ///|
-extern "js" fn element_previous_element_sibling_ffi(obj : JsValue) -> Element = "(obj) => obj.previousElementSibling"
-
-///|
 /// [Element.previousElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling)
 impl TElement with previous_element_sibling(self : Self) -> Element {
   element_previous_element_sibling_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_next_element_sibling_ffi(obj : JsValue) -> Element = "(obj) => obj.nextElementSibling"
 
 ///|
 /// [Element.nextElementSibling](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling)
@@ -1411,16 +1035,10 @@ impl TElement with next_element_sibling(self : Self) -> Element {
 }
 
 ///|
-extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(nodes)"
-
-///|
 /// [Element.before](https://developer.mozilla.org/en-US/docs/Web/API/Element/before)
 impl TElement with before(self : Self, nodes : &TElementBeforeNodes) -> Unit {
   element_before_ffi(TJsValue::to_js(self), nodes.to_js())
 }
-
-///|
-extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(nodes)"
 
 ///|
 /// [Element.after](https://developer.mozilla.org/en-US/docs/Web/API/Element/after)
@@ -1429,16 +1047,10 @@ impl TElement with after(self : Self, nodes : &TElementAfterNodes) -> Unit {
 }
 
 ///|
-extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(nodes)"
-
-///|
 /// [Element.replaceWith](https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceWith)
 impl TElement with replace_with(self : Self, nodes : &TElementReplaceWithNodes) -> Unit {
   element_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
 }
-
-///|
-extern "js" fn element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
 
 ///|
 /// [Element.remove](https://developer.mozilla.org/en-US/docs/Web/API/Element/remove)
@@ -1447,19 +1059,10 @@ impl TElement with remove(self : Self) -> Unit {
 }
 
 ///|
-extern "js" fn element_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement = "(obj) => obj.assignedSlot"
-
-///|
 /// [Element.assignedSlot](https://developer.mozilla.org/en-US/docs/Web/API/Element/assignedSlot)
 impl TElement with assigned_slot(self : Self) -> HTMLSlotElement {
   element_assigned_slot_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn element_get_box_quads_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(options)"
 
 ///|
 /// [Element.getBoxQuads](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoxQuads)
@@ -1469,14 +1072,6 @@ impl TElement with get_box_quads(
 ) -> Array[DOMQuad] {
   element_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
-
-///|
-extern "js" fn element_convert_quad_from_node_ffi(
-  obj : JsValue,
-  quad : JsValue,
-  from : JsValue,
-  options : JsValue,
-) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(quad, from, options)"
 
 ///|
 /// [Element.convertQuadFromNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/convertQuadFromNode)
@@ -1495,14 +1090,6 @@ impl TElement with convert_quad_from_node(
 }
 
 ///|
-extern "js" fn element_convert_rect_from_node_ffi(
-  obj : JsValue,
-  rect : JsValue,
-  from : JsValue,
-  options : JsValue,
-) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(rect, from, options)"
-
-///|
 /// [Element.convertRectFromNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/convertRectFromNode)
 impl TElement with convert_rect_from_node(
   self : Self,
@@ -1517,14 +1104,6 @@ impl TElement with convert_rect_from_node(
     TJsValue::to_js(options),
   )
 }
-
-///|
-extern "js" fn element_convert_point_from_node_ffi(
-  obj : JsValue,
-  point : JsValue,
-  from : JsValue,
-  options : JsValue,
-) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(point, from, options)"
 
 ///|
 /// [Element.convertPointFromNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/convertPointFromNode)

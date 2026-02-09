@@ -17,9 +17,6 @@ pub fn[T : TAbortController] AbortController::into(self : AbortController) -> T 
 pub impl TAbortController for AbortController
 
 ///|
-extern "js" fn abort_controller_new_ffi() -> AbortController = "() => new AbortController()"
-
-///|
 pub fn AbortController::new() -> AbortController {
   abort_controller_new_ffi()
 }
@@ -32,19 +29,10 @@ pub trait TAbortController: TJsValue {
 }
 
 ///|
-extern "js" fn abort_controller_signal_ffi(obj : JsValue) -> AbortSignal = "(obj) => obj.signal"
-
-///|
 /// [AbortController.signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal)
 impl TAbortController with signal(self : Self) -> AbortSignal {
   abort_controller_signal_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn abort_controller_abort_ffi(
-  obj : JsValue,
-  reason : JsValue,
-) -> Unit = "(obj, reason) => obj.abort(reason)"
 
 ///|
 /// [AbortController.abort](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort)

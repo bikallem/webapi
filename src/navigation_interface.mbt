@@ -48,32 +48,16 @@ pub trait TNavigation: TEventTarget {
 }
 
 ///|
-extern "js" fn navigation_entries_ffi(
-  obj : JsValue,
-) -> Array[NavigationHistoryEntry] = "(obj) => obj.entries()"
-
-///|
 /// [Navigation.entries](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/entries)
 impl TNavigation with entries(self : Self) -> Array[NavigationHistoryEntry] {
   navigation_entries_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn navigation_current_entry_ffi(
-  obj : JsValue,
-) -> NavigationHistoryEntry = "(obj) => obj.currentEntry"
-
-///|
 /// [Navigation.currentEntry](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/currentEntry)
 impl TNavigation with current_entry(self : Self) -> NavigationHistoryEntry {
   navigation_current_entry_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn navigation_update_current_entry_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> Unit = "(obj, options) => obj.updateCurrentEntry(options)"
 
 ///|
 /// [Navigation.updateCurrentEntry](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/updateCurrentEntry)
@@ -88,16 +72,10 @@ impl TNavigation with update_current_entry(
 }
 
 ///|
-extern "js" fn navigation_transition_ffi(obj : JsValue) -> NavigationTransition = "(obj) => obj.transition"
-
-///|
 /// [Navigation.transition](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/transition)
 impl TNavigation with transition(self : Self) -> NavigationTransition {
   navigation_transition_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn navigation_activation_ffi(obj : JsValue) -> NavigationActivation = "(obj) => obj.activation"
 
 ///|
 /// [Navigation.activation](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/activation)
@@ -106,29 +84,16 @@ impl TNavigation with activation(self : Self) -> NavigationActivation {
 }
 
 ///|
-extern "js" fn navigation_can_go_back_ffi(obj : JsValue) -> Bool = "(obj) => obj.canGoBack"
-
-///|
 /// [Navigation.canGoBack](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/canGoBack)
 impl TNavigation with can_go_back(self : Self) -> Bool {
   navigation_can_go_back_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn navigation_can_go_forward_ffi(obj : JsValue) -> Bool = "(obj) => obj.canGoForward"
-
-///|
 /// [Navigation.canGoForward](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/canGoForward)
 impl TNavigation with can_go_forward(self : Self) -> Bool {
   navigation_can_go_forward_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn navigation_navigate_ffi(
-  obj : JsValue,
-  url : JsValue,
-  options : JsValue,
-) -> NavigationResult = "(obj, url, options) => obj.navigate(url, options)"
 
 ///|
 /// [Navigation.navigate](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/navigate)
@@ -145,12 +110,6 @@ impl TNavigation with navigate(
 }
 
 ///|
-extern "js" fn navigation_reload_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> NavigationResult = "(obj, options) => obj.reload(options)"
-
-///|
 /// [Navigation.reload](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/reload)
 impl TNavigation with reload(
   self : Self,
@@ -158,13 +117,6 @@ impl TNavigation with reload(
 ) -> NavigationResult {
   navigation_reload_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
-
-///|
-extern "js" fn navigation_traverse_to_ffi(
-  obj : JsValue,
-  key : JsValue,
-  options : JsValue,
-) -> NavigationResult = "(obj, key, options) => obj.traverseTo(key, options)"
 
 ///|
 /// [Navigation.traverseTo](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/traverseTo)
@@ -181,12 +133,6 @@ impl TNavigation with traverse_to(
 }
 
 ///|
-extern "js" fn navigation_back_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> NavigationResult = "(obj, options) => obj.back(options)"
-
-///|
 /// [Navigation.back](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/back)
 impl TNavigation with back(
   self : Self,
@@ -194,12 +140,6 @@ impl TNavigation with back(
 ) -> NavigationResult {
   navigation_back_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
-
-///|
-extern "js" fn navigation_forward_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> NavigationResult = "(obj, options) => obj.forward(options)"
 
 ///|
 /// [Navigation.forward](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/forward)
@@ -211,19 +151,10 @@ impl TNavigation with forward(
 }
 
 ///|
-extern "js" fn navigation_onnavigate_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onnavigate"
-
-///|
 /// [Navigation.onnavigate](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigate)
 impl TNavigation with onnavigate(self : Self) -> EventHandler {
   navigation_onnavigate_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn navigation_set_onnavigate_ffi(
-  obj : JsValue,
-  onnavigate : JsValue,
-) -> Unit = "(obj, onnavigate) => { obj.onnavigate = onnavigate; }"
 
 ///|
 /// [Navigation.onnavigate](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigate)
@@ -235,19 +166,10 @@ impl TNavigation with set_onnavigate(self : Self, onnavigate : EventHandler) -> 
 }
 
 ///|
-extern "js" fn navigation_onnavigatesuccess_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onnavigatesuccess"
-
-///|
 /// [Navigation.onnavigatesuccess](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigatesuccess)
 impl TNavigation with onnavigatesuccess(self : Self) -> EventHandler {
   navigation_onnavigatesuccess_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn navigation_set_onnavigatesuccess_ffi(
-  obj : JsValue,
-  onnavigatesuccess : JsValue,
-) -> Unit = "(obj, onnavigatesuccess) => { obj.onnavigatesuccess = onnavigatesuccess; }"
 
 ///|
 /// [Navigation.onnavigatesuccess](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigatesuccess)
@@ -262,19 +184,10 @@ impl TNavigation with set_onnavigatesuccess(
 }
 
 ///|
-extern "js" fn navigation_onnavigateerror_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onnavigateerror"
-
-///|
 /// [Navigation.onnavigateerror](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigateerror)
 impl TNavigation with onnavigateerror(self : Self) -> EventHandler {
   navigation_onnavigateerror_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn navigation_set_onnavigateerror_ffi(
-  obj : JsValue,
-  onnavigateerror : JsValue,
-) -> Unit = "(obj, onnavigateerror) => { obj.onnavigateerror = onnavigateerror; }"
 
 ///|
 /// [Navigation.onnavigateerror](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigateerror)
@@ -289,21 +202,10 @@ impl TNavigation with set_onnavigateerror(
 }
 
 ///|
-extern "js" fn navigation_oncurrententrychange_ffi(
-  obj : JsValue,
-) -> EventHandler = "(obj) => obj.oncurrententrychange"
-
-///|
 /// [Navigation.oncurrententrychange](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/oncurrententrychange)
 impl TNavigation with oncurrententrychange(self : Self) -> EventHandler {
   navigation_oncurrententrychange_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn navigation_set_oncurrententrychange_ffi(
-  obj : JsValue,
-  oncurrententrychange : JsValue,
-) -> Unit = "(obj, oncurrententrychange) => { obj.oncurrententrychange = oncurrententrychange; }"
 
 ///|
 /// [Navigation.oncurrententrychange](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/oncurrententrychange)

@@ -11,46 +11,6 @@ pub type DeferredRequestInit
 pub impl TJsValue for DeferredRequestInit with to_js(self : DeferredRequestInit) -> JsValue = "%identity"
 
 ///|
-extern "js" fn deferred_request_init_ffi(
-  method_ : JsValue,
-  headers : JsValue,
-  body : JsValue,
-  referrer : JsValue,
-  referrer_policy : JsValue,
-  mode : JsValue,
-  credentials : JsValue,
-  cache : JsValue,
-  redirect : JsValue,
-  integrity : JsValue,
-  keepalive : JsValue,
-  signal : JsValue,
-  duplex : JsValue,
-  priority : JsValue,
-  window : JsValue,
-  activate_after : JsValue,
-) -> DeferredRequestInit =
-  #|(method, headers, body, referrer, referrerPolicy, mode, credentials, cache, redirect, integrity, keepalive, signal, duplex, priority, window, activateAfter) => {
-  #|  const obj = {};
-  #|  if (method !== undefined) obj.method = method;
-  #|  if (headers !== undefined) obj.headers = headers;
-  #|  if (body !== undefined) obj.body = body;
-  #|  if (referrer !== undefined) obj.referrer = referrer;
-  #|  if (referrerPolicy !== undefined) obj.referrerPolicy = referrerPolicy;
-  #|  if (mode !== undefined) obj.mode = mode;
-  #|  if (credentials !== undefined) obj.credentials = credentials;
-  #|  if (cache !== undefined) obj.cache = cache;
-  #|  if (redirect !== undefined) obj.redirect = redirect;
-  #|  if (integrity !== undefined) obj.integrity = integrity;
-  #|  if (keepalive !== undefined) obj.keepalive = keepalive;
-  #|  if (signal !== undefined) obj.signal = signal;
-  #|  if (duplex !== undefined) obj.duplex = duplex;
-  #|  if (priority !== undefined) obj.priority = priority;
-  #|  if (window !== undefined) obj.window = window;
-  #|  if (activateAfter !== undefined) obj.activateAfter = activateAfter;
-  #|  return obj;
-  #|}
-
-///|
 pub fn DeferredRequestInit::new(
   method_? : String,
   headers? : HeadersInit,
@@ -88,9 +48,6 @@ pub fn DeferredRequestInit::new(
     opt_to_js(activate_after),
   )
 }
-
-///|
-extern "js" fn deferred_request_init_empty_ffi() -> DeferredRequestInit = "() => {}"
 
 ///|
 pub fn DeferredRequestInit::empty() -> DeferredRequestInit {

@@ -25,13 +25,6 @@ pub trait TWorklet: TJsValue {
 }
 
 ///|
-extern "js" fn worklet_add_module_ffi(
-  obj : JsValue,
-  module_url : JsValue,
-  options : JsValue,
-) -> JsPromise[Unit] = "(obj, module_url, options) => obj.addModule(module_url, options)"
-
-///|
 /// [Worklet.addModule](https://developer.mozilla.org/en-US/docs/Web/API/Worklet/addModule)
 impl TWorklet with add_module(
   self : Self,

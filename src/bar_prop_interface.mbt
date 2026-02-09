@@ -23,9 +23,6 @@ pub trait TBarProp: TJsValue {
 }
 
 ///|
-extern "js" fn bar_prop_visible_ffi(obj : JsValue) -> Bool = "(obj) => obj.visible"
-
-///|
 /// [BarProp.visible](https://developer.mozilla.org/en-US/docs/Web/API/BarProp/visible)
 impl TBarProp with visible(self : Self) -> Bool {
   bar_prop_visible_ffi(TJsValue::to_js(self))

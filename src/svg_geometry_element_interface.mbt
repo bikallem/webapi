@@ -44,21 +44,10 @@ pub trait TSVGGeometryElement: TSVGGraphicsElement {
 }
 
 ///|
-extern "js" fn svg_geometry_element_path_length_ffi(
-  obj : JsValue,
-) -> SVGAnimatedNumber = "(obj) => obj.pathLength"
-
-///|
 /// [SVGGeometryElement.pathLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement/pathLength)
 impl TSVGGeometryElement with path_length(self : Self) -> SVGAnimatedNumber {
   svg_geometry_element_path_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_geometry_element_is_point_in_fill_ffi(
-  obj : JsValue,
-  point : JsValue,
-) -> Bool = "(obj, point) => obj.isPointInFill(point)"
 
 ///|
 /// [SVGGeometryElement.isPointInFill](https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement/isPointInFill)
@@ -73,12 +62,6 @@ impl TSVGGeometryElement with is_point_in_fill(
 }
 
 ///|
-extern "js" fn svg_geometry_element_is_point_in_stroke_ffi(
-  obj : JsValue,
-  point : JsValue,
-) -> Bool = "(obj, point) => obj.isPointInStroke(point)"
-
-///|
 /// [SVGGeometryElement.isPointInStroke](https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement/isPointInStroke)
 impl TSVGGeometryElement with is_point_in_stroke(
   self : Self,
@@ -91,21 +74,10 @@ impl TSVGGeometryElement with is_point_in_stroke(
 }
 
 ///|
-extern "js" fn svg_geometry_element_get_total_length_ffi(
-  obj : JsValue,
-) -> Float = "(obj) => obj.getTotalLength()"
-
-///|
 /// [SVGGeometryElement.getTotalLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement/getTotalLength)
 impl TSVGGeometryElement with get_total_length(self : Self) -> Float {
   svg_geometry_element_get_total_length_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_geometry_element_get_point_at_length_ffi(
-  obj : JsValue,
-  distance : JsValue,
-) -> DOMPoint = "(obj, distance) => obj.getPointAtLength(distance)"
 
 ///|
 /// [SVGGeometryElement.getPointAtLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement/getPointAtLength)

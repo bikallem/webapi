@@ -27,19 +27,10 @@ pub trait TRadioNodeList: TNodeList {
 }
 
 ///|
-extern "js" fn radio_node_list_value_ffi(obj : JsValue) -> String = "(obj) => obj.value"
-
-///|
 /// [RadioNodeList.value](https://developer.mozilla.org/en-US/docs/Web/API/RadioNodeList/value)
 impl TRadioNodeList with value(self : Self) -> String {
   radio_node_list_value_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn radio_node_list_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
 
 ///|
 /// [RadioNodeList.value](https://developer.mozilla.org/en-US/docs/Web/API/RadioNodeList/value)

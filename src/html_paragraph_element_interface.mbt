@@ -33,9 +33,6 @@ pub impl TNode for HTMLParagraphElement
 pub impl TEventTarget for HTMLParagraphElement
 
 ///|
-extern "js" fn html_paragraph_element_new_ffi() -> HTMLParagraphElement = "() => new HTMLParagraphElement()"
-
-///|
 pub fn HTMLParagraphElement::new() -> HTMLParagraphElement {
   html_paragraph_element_new_ffi()
 }
@@ -48,19 +45,10 @@ pub trait THTMLParagraphElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_paragraph_element_align_ffi(obj : JsValue) -> String = "(obj) => obj.align"
-
-///|
 /// [HTMLParagraphElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParagraphElement/align)
 impl THTMLParagraphElement with align(self : Self) -> String {
   html_paragraph_element_align_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_paragraph_element_set_align_ffi(
-  obj : JsValue,
-  align : JsValue,
-) -> Unit = "(obj, align) => { obj.align = align; }"
 
 ///|
 /// [HTMLParagraphElement.align](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParagraphElement/align)

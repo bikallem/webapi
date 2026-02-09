@@ -44,18 +44,10 @@ pub trait TSVGPolygonElement: TSVGGeometryElement {
 }
 
 ///|
-extern "js" fn svg_polygon_element_points_ffi(obj : JsValue) -> SVGPointList = "(obj) => obj.points"
-
-///|
 /// [SVGPolygonElement.points](https://developer.mozilla.org/en-US/docs/Web/API/SVGPolygonElement/points)
 impl TSVGPolygonElement with points(self : Self) -> SVGPointList {
   svg_polygon_element_points_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_polygon_element_animated_points_ffi(
-  obj : JsValue,
-) -> SVGPointList = "(obj) => obj.animatedPoints"
 
 ///|
 /// [SVGPolygonElement.animatedPoints](https://developer.mozilla.org/en-US/docs/Web/API/SVGPolygonElement/animatedPoints)

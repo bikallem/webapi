@@ -24,16 +24,10 @@ pub trait TUserActivation: TJsValue {
 }
 
 ///|
-extern "js" fn user_activation_has_been_active_ffi(obj : JsValue) -> Bool = "(obj) => obj.hasBeenActive"
-
-///|
 /// [UserActivation.hasBeenActive](https://developer.mozilla.org/en-US/docs/Web/API/UserActivation/hasBeenActive)
 impl TUserActivation with has_been_active(self : Self) -> Bool {
   user_activation_has_been_active_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn user_activation_is_active_ffi(obj : JsValue) -> Bool = "(obj) => obj.isActive"
 
 ///|
 /// [UserActivation.isActive](https://developer.mozilla.org/en-US/docs/Web/API/UserActivation/isActive)

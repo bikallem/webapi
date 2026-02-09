@@ -41,19 +41,10 @@ pub trait TSVGScriptElement: TSVGElement {
 }
 
 ///|
-extern "js" fn svg_script_element_type_ffi(obj : JsValue) -> String = "(obj) => obj.type"
-
-///|
 /// [SVGScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/type)
 impl TSVGScriptElement with type_(self : Self) -> String {
   svg_script_element_type_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_script_element_set_type_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 /// [SVGScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/type)
@@ -62,19 +53,10 @@ impl TSVGScriptElement with set_type_(self : Self, type_ : String) -> Unit {
 }
 
 ///|
-extern "js" fn svg_script_element_cross_origin_ffi(obj : JsValue) -> String = "(obj) => obj.crossOrigin"
-
-///|
 /// [SVGScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/crossOrigin)
 impl TSVGScriptElement with cross_origin(self : Self) -> String {
   svg_script_element_cross_origin_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_script_element_set_cross_origin_ffi(
-  obj : JsValue,
-  cross_origin : JsValue,
-) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
 /// [SVGScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/crossOrigin)
@@ -84,9 +66,6 @@ impl TSVGScriptElement with set_cross_origin(self : Self, cross_origin : String)
     TJsValue::to_js(cross_origin),
   )
 }
-
-///|
-extern "js" fn svg_script_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.href"
 
 ///|
 /// [SVGScriptElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/href)

@@ -29,9 +29,6 @@ pub impl TNode for HTMLModElement
 pub impl TEventTarget for HTMLModElement
 
 ///|
-extern "js" fn html_mod_element_new_ffi() -> HTMLModElement = "() => new HTMLModElement()"
-
-///|
 pub fn HTMLModElement::new() -> HTMLModElement {
   html_mod_element_new_ffi()
 }
@@ -46,19 +43,10 @@ pub trait THTMLModElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_mod_element_cite_ffi(obj : JsValue) -> String = "(obj) => obj.cite"
-
-///|
 /// [HTMLModElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLModElement/cite)
 impl THTMLModElement with cite(self : Self) -> String {
   html_mod_element_cite_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_mod_element_set_cite_ffi(
-  obj : JsValue,
-  cite : JsValue,
-) -> Unit = "(obj, cite) => { obj.cite = cite; }"
 
 ///|
 /// [HTMLModElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLModElement/cite)
@@ -67,19 +55,10 @@ impl THTMLModElement with set_cite(self : Self, cite : String) -> Unit {
 }
 
 ///|
-extern "js" fn html_mod_element_date_time_ffi(obj : JsValue) -> String = "(obj) => obj.dateTime"
-
-///|
 /// [HTMLModElement.dateTime](https://developer.mozilla.org/en-US/docs/Web/API/HTMLModElement/dateTime)
 impl THTMLModElement with date_time(self : Self) -> String {
   html_mod_element_date_time_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_mod_element_set_date_time_ffi(
-  obj : JsValue,
-  date_time : JsValue,
-) -> Unit = "(obj, dateTime) => { obj.dateTime = dateTime; }"
 
 ///|
 /// [HTMLModElement.dateTime](https://developer.mozilla.org/en-US/docs/Web/API/HTMLModElement/dateTime)

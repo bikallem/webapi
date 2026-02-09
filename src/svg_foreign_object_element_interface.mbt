@@ -45,20 +45,10 @@ pub trait TSVGForeignObjectElement: TSVGGraphicsElement {
 }
 
 ///|
-extern "js" fn svg_foreign_object_element_x_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.x"
-
-///|
 /// [SVGForeignObjectElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGForeignObjectElement/x)
 impl TSVGForeignObjectElement with x(self : Self) -> SVGAnimatedLength {
   svg_foreign_object_element_x_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_foreign_object_element_y_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.y"
 
 ///|
 /// [SVGForeignObjectElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGForeignObjectElement/y)
@@ -67,20 +57,10 @@ impl TSVGForeignObjectElement with y(self : Self) -> SVGAnimatedLength {
 }
 
 ///|
-extern "js" fn svg_foreign_object_element_width_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.width"
-
-///|
 /// [SVGForeignObjectElement.width](https://developer.mozilla.org/en-US/docs/Web/API/SVGForeignObjectElement/width)
 impl TSVGForeignObjectElement with width(self : Self) -> SVGAnimatedLength {
   svg_foreign_object_element_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_foreign_object_element_height_ffi(
-  obj : JsValue,
-) -> SVGAnimatedLength = "(obj) => obj.height"
 
 ///|
 /// [SVGForeignObjectElement.height](https://developer.mozilla.org/en-US/docs/Web/API/SVGForeignObjectElement/height)

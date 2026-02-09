@@ -28,20 +28,10 @@ pub trait TTrustedTypePolicy: TJsValue {
 }
 
 ///|
-extern "js" fn trusted_type_policy_name_ffi(obj : JsValue) -> String = "(obj) => obj.name"
-
-///|
 /// [TrustedTypePolicy.name](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/name)
 impl TTrustedTypePolicy with name(self : Self) -> String {
   trusted_type_policy_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn trusted_type_policy_create_html_ffi(
-  obj : JsValue,
-  input : JsValue,
-  arguments : JsValue,
-) -> TrustedHTML = "(obj, input, arguments) => obj.createHTML(input, arguments)"
 
 ///|
 /// [TrustedTypePolicy.createHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/createHTML)
@@ -58,13 +48,6 @@ impl TTrustedTypePolicy with create_html(
 }
 
 ///|
-extern "js" fn trusted_type_policy_create_script_ffi(
-  obj : JsValue,
-  input : JsValue,
-  arguments : JsValue,
-) -> TrustedScript = "(obj, input, arguments) => obj.createScript(input, arguments)"
-
-///|
 /// [TrustedTypePolicy.createScript](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/createScript)
 impl TTrustedTypePolicy with create_script(
   self : Self,
@@ -77,13 +60,6 @@ impl TTrustedTypePolicy with create_script(
     TJsValue::to_js(arguments),
   )
 }
-
-///|
-extern "js" fn trusted_type_policy_create_script_url_ffi(
-  obj : JsValue,
-  input : JsValue,
-  arguments : JsValue,
-) -> TrustedScriptURL = "(obj, input, arguments) => obj.createScriptURL(input, arguments)"
 
 ///|
 /// [TrustedTypePolicy.createScriptURL](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy/createScriptURL)

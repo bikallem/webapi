@@ -37,16 +37,10 @@ pub trait TProcessingInstruction: TCharacterData {
 }
 
 ///|
-extern "js" fn processing_instruction_target_ffi(obj : JsValue) -> String = "(obj) => obj.target"
-
-///|
 /// [ProcessingInstruction.target](https://developer.mozilla.org/en-US/docs/Web/API/ProcessingInstruction/target)
 impl TProcessingInstruction with target(self : Self) -> String {
   processing_instruction_target_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn processing_instruction_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "(obj) => obj.sheet"
 
 ///|
 /// [ProcessingInstruction.sheet](https://developer.mozilla.org/en-US/docs/Web/API/ProcessingInstruction/sheet)

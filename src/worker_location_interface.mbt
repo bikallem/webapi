@@ -31,16 +31,10 @@ pub trait TWorkerLocation: TJsValue {
 }
 
 ///|
-extern "js" fn worker_location_href_ffi(obj : JsValue) -> String = "(obj) => obj.href"
-
-///|
 /// [WorkerLocation.href](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/href)
 impl TWorkerLocation with href(self : Self) -> String {
   worker_location_href_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_location_origin_ffi(obj : JsValue) -> String = "(obj) => obj.origin"
 
 ///|
 /// [WorkerLocation.origin](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/origin)
@@ -49,16 +43,10 @@ impl TWorkerLocation with origin(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_location_protocol_ffi(obj : JsValue) -> String = "(obj) => obj.protocol"
-
-///|
 /// [WorkerLocation.protocol](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/protocol)
 impl TWorkerLocation with protocol(self : Self) -> String {
   worker_location_protocol_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_location_host_ffi(obj : JsValue) -> String = "(obj) => obj.host"
 
 ///|
 /// [WorkerLocation.host](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/host)
@@ -67,16 +55,10 @@ impl TWorkerLocation with host(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_location_hostname_ffi(obj : JsValue) -> String = "(obj) => obj.hostname"
-
-///|
 /// [WorkerLocation.hostname](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/hostname)
 impl TWorkerLocation with hostname(self : Self) -> String {
   worker_location_hostname_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_location_port_ffi(obj : JsValue) -> String = "(obj) => obj.port"
 
 ///|
 /// [WorkerLocation.port](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/port)
@@ -85,25 +67,16 @@ impl TWorkerLocation with port(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_location_pathname_ffi(obj : JsValue) -> String = "(obj) => obj.pathname"
-
-///|
 /// [WorkerLocation.pathname](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/pathname)
 impl TWorkerLocation with pathname(self : Self) -> String {
   worker_location_pathname_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn worker_location_search_ffi(obj : JsValue) -> String = "(obj) => obj.search"
-
-///|
 /// [WorkerLocation.search](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/search)
 impl TWorkerLocation with search(self : Self) -> String {
   worker_location_search_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_location_hash_ffi(obj : JsValue) -> String = "(obj) => obj.hash"
 
 ///|
 /// [WorkerLocation.hash](https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation/hash)

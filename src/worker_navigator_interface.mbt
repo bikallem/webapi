@@ -37,16 +37,10 @@ pub trait TWorkerNavigator: TJsValue {
 }
 
 ///|
-extern "js" fn worker_navigator_app_code_name_ffi(obj : JsValue) -> String = "(obj) => obj.appCodeName"
-
-///|
 /// [WorkerNavigator.appCodeName](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/appCodeName)
 impl TWorkerNavigator with app_code_name(self : Self) -> String {
   worker_navigator_app_code_name_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_navigator_app_name_ffi(obj : JsValue) -> String = "(obj) => obj.appName"
 
 ///|
 /// [WorkerNavigator.appName](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/appName)
@@ -55,16 +49,10 @@ impl TWorkerNavigator with app_name(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_navigator_app_version_ffi(obj : JsValue) -> String = "(obj) => obj.appVersion"
-
-///|
 /// [WorkerNavigator.appVersion](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/appVersion)
 impl TWorkerNavigator with app_version(self : Self) -> String {
   worker_navigator_app_version_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_navigator_platform_ffi(obj : JsValue) -> String = "(obj) => obj.platform"
 
 ///|
 /// [WorkerNavigator.platform](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/platform)
@@ -73,16 +61,10 @@ impl TWorkerNavigator with platform(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_navigator_product_ffi(obj : JsValue) -> String = "(obj) => obj.product"
-
-///|
 /// [WorkerNavigator.product](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/product)
 impl TWorkerNavigator with product(self : Self) -> String {
   worker_navigator_product_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_navigator_product_sub_ffi(obj : JsValue) -> String = "(obj) => obj.productSub"
 
 ///|
 /// [WorkerNavigator.productSub](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/productSub)
@@ -91,16 +73,10 @@ impl TWorkerNavigator with product_sub(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_navigator_user_agent_ffi(obj : JsValue) -> String = "(obj) => obj.userAgent"
-
-///|
 /// [WorkerNavigator.userAgent](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/userAgent)
 impl TWorkerNavigator with user_agent(self : Self) -> String {
   worker_navigator_user_agent_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_navigator_vendor_ffi(obj : JsValue) -> String = "(obj) => obj.vendor"
 
 ///|
 /// [WorkerNavigator.vendor](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/vendor)
@@ -109,16 +85,10 @@ impl TWorkerNavigator with vendor(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_navigator_vendor_sub_ffi(obj : JsValue) -> String = "(obj) => obj.vendorSub"
-
-///|
 /// [WorkerNavigator.vendorSub](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/vendorSub)
 impl TWorkerNavigator with vendor_sub(self : Self) -> String {
   worker_navigator_vendor_sub_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "(obj) => obj.taintEnabled()"
 
 ///|
 /// [WorkerNavigator.taintEnabled](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/taintEnabled)
@@ -127,16 +97,10 @@ impl TWorkerNavigator with taint_enabled(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn worker_navigator_oscpu_ffi(obj : JsValue) -> String = "(obj) => obj.oscpu"
-
-///|
 /// [WorkerNavigator.oscpu](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/oscpu)
 impl TWorkerNavigator with oscpu(self : Self) -> String {
   worker_navigator_oscpu_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_navigator_language_ffi(obj : JsValue) -> String = "(obj) => obj.language"
 
 ///|
 /// [WorkerNavigator.language](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/language)
@@ -145,27 +109,16 @@ impl TWorkerNavigator with language(self : Self) -> String {
 }
 
 ///|
-extern "js" fn worker_navigator_languages_ffi(obj : JsValue) -> JsValue = "(obj) => obj.languages"
-
-///|
 /// [WorkerNavigator.languages](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/languages)
 impl TWorkerNavigator with languages(self : Self) -> JsValue {
   worker_navigator_languages_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn worker_navigator_on_line_ffi(obj : JsValue) -> Bool = "(obj) => obj.onLine"
-
-///|
 /// [WorkerNavigator.onLine](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/onLine)
 impl TWorkerNavigator with on_line(self : Self) -> Bool {
   worker_navigator_on_line_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn worker_navigator_hardware_concurrency_ffi(
-  obj : JsValue,
-) -> UInt64 = "(obj) => obj.hardwareConcurrency"
 
 ///|
 /// [WorkerNavigator.hardwareConcurrency](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/hardwareConcurrency)

@@ -31,28 +31,16 @@ pub trait TMediaQueryList: TEventTarget {
 }
 
 ///|
-extern "js" fn media_query_list_media_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.media"
-
-///|
 /// [MediaQueryList.media](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/media)
 impl TMediaQueryList with media(self : Self) -> CSSOMString {
   media_query_list_media_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn media_query_list_matches_ffi(obj : JsValue) -> Bool = "(obj) => obj.matches"
-
-///|
 /// [MediaQueryList.matches](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/matches)
 impl TMediaQueryList with matches(self : Self) -> Bool {
   media_query_list_matches_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn media_query_list_add_listener_ffi(
-  obj : JsValue,
-  callback : JsValue,
-) -> Unit = "(obj, callback) => obj.addListener(callback)"
 
 ///|
 /// [MediaQueryList.addListener](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/addListener)
@@ -64,12 +52,6 @@ impl TMediaQueryList with add_listener(self : Self, callback : EventListener) ->
 }
 
 ///|
-extern "js" fn media_query_list_remove_listener_ffi(
-  obj : JsValue,
-  callback : JsValue,
-) -> Unit = "(obj, callback) => obj.removeListener(callback)"
-
-///|
 /// [MediaQueryList.removeListener](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/removeListener)
 impl TMediaQueryList with remove_listener(self : Self, callback : EventListener) -> Unit {
   media_query_list_remove_listener_ffi(
@@ -79,19 +61,10 @@ impl TMediaQueryList with remove_listener(self : Self, callback : EventListener)
 }
 
 ///|
-extern "js" fn media_query_list_onchange_ffi(obj : JsValue) -> EventHandler = "(obj) => obj.onchange"
-
-///|
 /// [MediaQueryList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/onchange)
 impl TMediaQueryList with onchange(self : Self) -> EventHandler {
   media_query_list_onchange_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn media_query_list_set_onchange_ffi(
-  obj : JsValue,
-  onchange : JsValue,
-) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
 
 ///|
 /// [MediaQueryList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/onchange)

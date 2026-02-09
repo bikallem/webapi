@@ -26,9 +26,6 @@ pub impl TNode for Text
 pub impl TEventTarget for Text
 
 ///|
-extern "js" fn text_new_ffi(data : JsValue) -> Text = "(data) => new Text(data)"
-
-///|
 pub fn Text::new(data? : String = "") -> Text {
   text_new_ffi(TJsValue::to_js(data))
 }
@@ -61,16 +58,10 @@ pub trait TText: TCharacterData {
 }
 
 ///|
-extern "js" fn text_split_text_ffi(obj : JsValue, offset : JsValue) -> Text = "(obj, offset) => obj.splitText(offset)"
-
-///|
 /// [Text.splitText](https://developer.mozilla.org/en-US/docs/Web/API/Text/splitText)
 impl TText with split_text(self : Self, offset : UInt) -> Text {
   text_split_text_ffi(TJsValue::to_js(self), TJsValue::to_js(offset))
 }
-
-///|
-extern "js" fn text_whole_text_ffi(obj : JsValue) -> String = "(obj) => obj.wholeText"
 
 ///|
 /// [Text.wholeText](https://developer.mozilla.org/en-US/docs/Web/API/Text/wholeText)
@@ -79,19 +70,10 @@ impl TText with whole_text(self : Self) -> String {
 }
 
 ///|
-extern "js" fn text_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement = "(obj) => obj.assignedSlot"
-
-///|
 /// [Text.assignedSlot](https://developer.mozilla.org/en-US/docs/Web/API/Text/assignedSlot)
 impl TText with assigned_slot(self : Self) -> HTMLSlotElement {
   text_assigned_slot_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn text_get_box_quads_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> Array[DOMQuad] = "(obj, options) => obj.getBoxQuads(options)"
 
 ///|
 /// [Text.getBoxQuads](https://developer.mozilla.org/en-US/docs/Web/API/Text/getBoxQuads)
@@ -101,14 +83,6 @@ impl TText with get_box_quads(
 ) -> Array[DOMQuad] {
   text_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
-
-///|
-extern "js" fn text_convert_quad_from_node_ffi(
-  obj : JsValue,
-  quad : JsValue,
-  from : JsValue,
-  options : JsValue,
-) -> DOMQuad = "(obj, quad, from, options) => obj.convertQuadFromNode(quad, from, options)"
 
 ///|
 /// [Text.convertQuadFromNode](https://developer.mozilla.org/en-US/docs/Web/API/Text/convertQuadFromNode)
@@ -127,14 +101,6 @@ impl TText with convert_quad_from_node(
 }
 
 ///|
-extern "js" fn text_convert_rect_from_node_ffi(
-  obj : JsValue,
-  rect : JsValue,
-  from : JsValue,
-  options : JsValue,
-) -> DOMQuad = "(obj, rect, from, options) => obj.convertRectFromNode(rect, from, options)"
-
-///|
 /// [Text.convertRectFromNode](https://developer.mozilla.org/en-US/docs/Web/API/Text/convertRectFromNode)
 impl TText with convert_rect_from_node(
   self : Self,
@@ -149,14 +115,6 @@ impl TText with convert_rect_from_node(
     TJsValue::to_js(options),
   )
 }
-
-///|
-extern "js" fn text_convert_point_from_node_ffi(
-  obj : JsValue,
-  point : JsValue,
-  from : JsValue,
-  options : JsValue,
-) -> DOMPoint = "(obj, point, from, options) => obj.convertPointFromNode(point, from, options)"
 
 ///|
 /// [Text.convertPointFromNode](https://developer.mozilla.org/en-US/docs/Web/API/Text/convertPointFromNode)

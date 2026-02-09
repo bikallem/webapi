@@ -24,16 +24,10 @@ pub trait TPluginArray: TJsValue {
 }
 
 ///|
-extern "js" fn plugin_array_refresh_ffi(obj : JsValue) -> Unit = "(obj) => obj.refresh()"
-
-///|
 /// [PluginArray.refresh](https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/refresh)
 impl TPluginArray with refresh(self : Self) -> Unit {
   plugin_array_refresh_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn plugin_array_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
 
 ///|
 /// [PluginArray.length](https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/length)

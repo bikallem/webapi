@@ -29,9 +29,6 @@ pub impl TNode for HTMLBRElement
 pub impl TEventTarget for HTMLBRElement
 
 ///|
-extern "js" fn htmlbr_element_new_ffi() -> HTMLBRElement = "() => new HTMLBRElement()"
-
-///|
 pub fn HTMLBRElement::new() -> HTMLBRElement {
   htmlbr_element_new_ffi()
 }
@@ -44,19 +41,10 @@ pub trait THTMLBRElement: THTMLElement {
 }
 
 ///|
-extern "js" fn htmlbr_element_clear_ffi(obj : JsValue) -> String = "(obj) => obj.clear"
-
-///|
 /// [HTMLBRElement.clear](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBRElement/clear)
 impl THTMLBRElement with clear(self : Self) -> String {
   htmlbr_element_clear_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn htmlbr_element_set_clear_ffi(
-  obj : JsValue,
-  clear : JsValue,
-) -> Unit = "(obj, clear) => { obj.clear = clear; }"
 
 ///|
 /// [HTMLBRElement.clear](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBRElement/clear)

@@ -25,25 +25,16 @@ pub trait TTimeRanges: TJsValue {
 }
 
 ///|
-extern "js" fn time_ranges_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [TimeRanges.length](https://developer.mozilla.org/en-US/docs/Web/API/TimeRanges/length)
 impl TTimeRanges with length(self : Self) -> UInt {
   time_ranges_length_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn time_ranges_start_ffi(obj : JsValue, index : JsValue) -> Double = "(obj, index) => obj.start(index)"
-
-///|
 /// [TimeRanges.start](https://developer.mozilla.org/en-US/docs/Web/API/TimeRanges/start)
 impl TTimeRanges with start(self : Self, index : UInt) -> Double {
   time_ranges_start_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
-
-///|
-extern "js" fn time_ranges_end_ffi(obj : JsValue, index : JsValue) -> Double = "(obj, index) => obj.end(index)"
 
 ///|
 /// [TimeRanges.end](https://developer.mozilla.org/en-US/docs/Web/API/TimeRanges/end)

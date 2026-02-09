@@ -28,13 +28,6 @@ pub trait TNavigationPrecommitController: TJsValue {
 }
 
 ///|
-extern "js" fn navigation_precommit_controller_redirect_ffi(
-  obj : JsValue,
-  url : JsValue,
-  options : JsValue,
-) -> Unit = "(obj, url, options) => obj.redirect(url, options)"
-
-///|
 /// [NavigationPrecommitController.redirect](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/redirect)
 impl TNavigationPrecommitController with redirect(
   self : Self,
@@ -47,12 +40,6 @@ impl TNavigationPrecommitController with redirect(
     TJsValue::to_js(options),
   )
 }
-
-///|
-extern "js" fn navigation_precommit_controller_add_handler_ffi(
-  obj : JsValue,
-  handler : JsValue,
-) -> Unit = "(obj, handler) => obj.addHandler(handler)"
 
 ///|
 /// [NavigationPrecommitController.addHandler](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/addHandler)

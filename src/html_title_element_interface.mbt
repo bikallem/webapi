@@ -31,9 +31,6 @@ pub impl TNode for HTMLTitleElement
 pub impl TEventTarget for HTMLTitleElement
 
 ///|
-extern "js" fn html_title_element_new_ffi() -> HTMLTitleElement = "() => new HTMLTitleElement()"
-
-///|
 pub fn HTMLTitleElement::new() -> HTMLTitleElement {
   html_title_element_new_ffi()
 }
@@ -46,19 +43,10 @@ pub trait THTMLTitleElement: THTMLElement {
 }
 
 ///|
-extern "js" fn html_title_element_text_ffi(obj : JsValue) -> String = "(obj) => obj.text"
-
-///|
 /// [HTMLTitleElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTitleElement/text)
 impl THTMLTitleElement with text(self : Self) -> String {
   html_title_element_text_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn html_title_element_set_text_ffi(
-  obj : JsValue,
-  text : JsValue,
-) -> Unit = "(obj, text) => { obj.text = text; }"
 
 ///|
 /// [HTMLTitleElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTitleElement/text)

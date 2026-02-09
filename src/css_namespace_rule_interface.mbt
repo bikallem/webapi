@@ -29,18 +29,10 @@ pub trait TCSSNamespaceRule: TCSSRule {
 }
 
 ///|
-extern "js" fn css_namespace_rule_namespace_uri_ffi(
-  obj : JsValue,
-) -> CSSOMString = "(obj) => obj.namespaceURI"
-
-///|
 /// [CSSNamespaceRule.namespaceURI](https://developer.mozilla.org/en-US/docs/Web/API/CSSNamespaceRule/namespaceURI)
 impl TCSSNamespaceRule with namespace_uri(self : Self) -> CSSOMString {
   css_namespace_rule_namespace_uri_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn css_namespace_rule_prefix_ffi(obj : JsValue) -> CSSOMString = "(obj) => obj.prefix"
 
 ///|
 /// [CSSNamespaceRule.prefix](https://developer.mozilla.org/en-US/docs/Web/API/CSSNamespaceRule/prefix)

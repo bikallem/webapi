@@ -1,25 +1,149 @@
 ///|
 /// Trait for emitting interface methods.
 trait InterfaceMethodEmit: ToJson + Show {
-  decl_emit(self : Self) -> Code // Generate method declaration code  
-  impl_emit(self : Self) -> Code // Generate method implementation code
+  decl_emit(self : Self) -> Code // Generate method declaration code
+  impl_emit(self : Self) -> Code // Generate method implementation code (no FFI)
+  ffi_emit_js(self : Self) -> Code // Generate JS FFI declaration
+  ffi_emit_wasm(self : Self, module_name : String) -> Code // Generate wasm-gc FFI declaration
+}
+
+///|
+/// Other types that are valid as wasm-gc import return types.
+/// These are all externref (#external) types or Unit.
+let wasm_valid_other_types : Array[String] = [
+  "JsValue", "Unit", "JsUndefined",
+  // Typed arrays — all #external types
+   "Uint8Array", "Uint8ClampedArray", "Int8Array", "Uint16Array", "Int16Array", "Uint32Array",
+  "Int32Array", "Float16Array", "Float32Array", "Float64Array", "BigInt64Array",
+  "BigUint64Array",
+  // Buffer types — #external
+   "DataView", "ArrayBuffer", "SharedArrayBuffer",
+]
+
+///|
+/// Check if an ArgMbtType is valid as a wasm-gc import return type.
+/// Primitives, #external interfaces, enums, dictionaries, and Self are valid.
+/// Parameterized non-external types (Array[T]) and typedefs that resolve to them are not.
+/// Note: String is excluded because on wasm-gc with js-string builtins,
+/// String is (ref extern) (non-nullable) while wasm imports return externref (nullable).
+fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
+  match type_ {
+    Primitive(name) => name != "String"
+    Interface(_) | Enum(_) | Dictionary(_) | Self => true
+    Other(name) =>
+      // JsValue, Unit, JsUndefined are valid externref types.
+      // Typed arrays, DataView, ArrayBuffer, SharedArrayBuffer are #external types.
+      wasm_valid_other_types.contains(name)
+    Union(_) => false // Union types resolve to trait names, not valid as stubs
+  }
+}
+
+///|
+/// Check if a return type is String (needs special handling on wasm-gc).
+/// On wasm-gc with js-string builtins, String is (ref extern) (non-nullable)
+/// while wasm imports return externref (nullable). We use jsvalue_to_string()
+/// which goes through String? + unwrap to emit ref.as_non_null.
+fn is_string_return(type_ : @type_mapping.ArgMbtType) -> Bool {
+  type_ is Primitive("String")
+}
+
+///|
+/// Emit wasm-gc FFI declaration with return-type dispatch.
+/// Handles the four cases: void/optional, String, valid stub type, or JsValue wrapper.
+fn emit_wasm_ffi_with_return(
+  ffi_name : String,
+  ffi_args : String,
+  ffi_argnames : Array[String],
+  return_type_name : String,
+  is_optional~ : Bool,
+  is_void~ : Bool,
+  is_string~ : Bool,
+  is_valid_stub~ : Bool,
+  module_name : String,
+  import_name : String,
+) -> Code {
+  if is_void || is_optional {
+    // Void or optional: use JsValue/Unit directly as wasm import return
+    let ffi_ret = if is_void { "Unit" } else { "JsValue" }
+    Code(
+      "fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret} = \"\{module_name}\" \"\{import_name}\"",
+    )
+  } else if is_string {
+    // String: wasm imports return externref (nullable), but String is (ref extern) (non-nullable).
+    // Use jsvalue_to_string wrapper: externref → String? → unwrap → String.
+    let raw_name = ffi_name + "_wasm"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> String {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
+    )
+  } else if is_valid_stub {
+    // Valid stub type: declare import with actual MoonBit type directly
+    Code(
+      "fn \{ffi_name}(\{ffi_args}) -> \{return_type_name} = \"\{module_name}\" \"\{import_name}\"",
+    )
+  } else {
+    // Invalid stub type (Array[T], typedefs, etc.): import as JsValue + unsafe_cast wrapper
+    let raw_name = ffi_name + "_wasm"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
+    )
+  }
+}
+
+///|
+/// Emit JS FFI declaration with return-type dispatch.
+/// For non-optional, non-void returns: creates a `_js` raw extern + wrapper with unsafe_cast.
+/// For optional returns: returns JsValue for null-checking.
+/// For void returns: returns Unit.
+fn emit_js_ffi_with_return(
+  ffi_name : String,
+  ffi_args : String,
+  ffi_argnames : Array[String],
+  return_type_name : String,
+  is_optional~ : Bool,
+  is_void~ : Bool,
+  js_expr : String,
+) -> Code {
+  let ffi_js_decl_args = ffi_argnames.join(", ")
+  let needs_wrapper = not(is_optional) && not(is_void)
+  if needs_wrapper {
+    let raw_name = ffi_name + "_js"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "extern \"js\" fn \{raw_name}(\{ffi_args}) -> JsValue = \"(\{ffi_js_decl_args}) => \{js_expr}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
+    )
+  } else {
+    let ffi_ret_type = if is_void { "Unit" } else { "JsValue" }
+    Code(
+      "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_decl_args}) => \{js_expr}\"",
+    )
+  }
 }
 
 ///|
 /// Emits the method body: either a direct FFI call or a null-checking wrapper.
+/// The FFI function is responsible for returning the correct type.
+/// For optional returns, FFI returns JsValue for null checking.
+/// For non-optional non-void returns, FFI returns the actual type directly.
 fn emit_method_body(
   code : StringBuilder,
   ffi_name : String,
   call_args : String,
   optional_return : Bool,
+  void_return? : Bool = false,
 ) -> Unit {
   if optional_return {
+    // Optional: FFI returns JsValue so we can check for null
     code
     ..write_string("  let result = \{ffi_name}(\{call_args})\n")
     .write_string(
       "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
     )
+  } else if void_return {
+    code.write_string("  \{ffi_name}(\{call_args})\n")
   } else {
+    // Non-optional: FFI wrapper returns the actual type
     code.write_string("  \{ffi_name}(\{call_args})\n")
   }
   code.write_string("}")
@@ -47,32 +171,70 @@ impl InterfaceMethodEmit for RegularMethodEmit with decl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
-  self : RegularMethodEmit,
-) -> Code {
-  // Emit FFI function
-  let ffi_ret_type = if self.return_type.optional {
-    "JsValue"
-  } else {
-    self.return_type.type_name()
-  }
-  let trait_name = self.interface_name
-  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
-  let ffi_argnames = self.args.map(arg => {
+fn RegularMethodEmit::ffi_name(self : RegularMethodEmit) -> String {
+  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+}
+
+///|
+fn RegularMethodEmit::ffi_argnames(self : RegularMethodEmit) -> Array[String] {
+  self.args.map(arg => {
     match arg.type_ {
       @type_mapping.ArgMbtType::Self => "obj"
       _ => arg.name
     }
   })
+}
+
+///|
+impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
+  self : RegularMethodEmit,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  let ffi_argnames = self.ffi_argnames()
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_decl_args = ffi_argnames.join(", ")
   let ffi_js_call_args = ffi_argnames[1:].join(", ")
-  let code = StringBuilder::new()
-  code
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_decl_args}) => obj.\{self.original_name}(\{ffi_js_call_args})\"",
+  let ret_name = self.return_type.type_.name()
+  emit_js_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    "obj.\{self.original_name}(\{ffi_js_call_args})",
   )
-  .write_string("\n\n")
+}
+
+///|
+impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
+  self : RegularMethodEmit,
+  module_name : String,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  let ffi_argnames = self.ffi_argnames()
+  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ret_name = self.return_type.type_.name()
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    is_string=is_string_return(self.return_type.type_),
+    is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
+    module_name,
+    self.original_name,
+  )
+}
+
+///|
+impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
+  self : RegularMethodEmit,
+) -> Code {
+  let trait_name = self.interface_name
+  let ffi_name = self.ffi_name()
+  let code = StringBuilder::new()
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
@@ -85,7 +247,14 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
+  let ret_name = self.return_type.type_.name()
+  emit_method_body(
+    code,
+    ffi_name,
+    call_args,
+    self.return_type.optional,
+    void_return=ret_name == "Unit",
+  )
   Code(code.to_string())
 }
 
@@ -107,26 +276,61 @@ impl InterfaceMethodEmit for StaticMethodEmit with decl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
+fn StaticMethodEmit::ffi_name(self : StaticMethodEmit) -> String {
+  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+}
+
+///|
+impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
   self : StaticMethodEmit,
 ) -> Code {
-  // Emit FFI function
-  let ffi_ret_type = if self.return_type.optional {
-    "JsValue"
-  } else {
-    self.return_type.type_name()
-  }
   let trait_name = self.interface_name
-  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  let ffi_name = self.ffi_name()
   let ffi_argnames = self.args.map(arg => arg.name)
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ffi_js_args = ffi_argnames.join(", ")
-  let code = StringBuilder::new()
-  code
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret_type} = \"(\{ffi_js_args}) => \{trait_name}.\{self.original_name}(\{ffi_js_args})\"",
+  let ret_name = self.return_type.type_.name()
+  emit_js_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    "\{trait_name}.\{self.original_name}(\{ffi_js_args})",
   )
-  .write_string("\n\n")
+}
+
+///|
+impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
+  self : StaticMethodEmit,
+  module_name : String,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  let ffi_argnames = self.args.map(arg => arg.name)
+  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ret_name = self.return_type.type_.name()
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    is_string=is_string_return(self.return_type.type_),
+    is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
+    module_name,
+    self.original_name,
+  )
+}
+
+///|
+impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
+  self : StaticMethodEmit,
+) -> Code {
+  let trait_name = self.interface_name
+  let ffi_name = self.ffi_name()
+  let code = StringBuilder::new()
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
@@ -139,7 +343,14 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
+  let ret_name = self.return_type.type_.name()
+  emit_method_body(
+    code,
+    ffi_name,
+    call_args,
+    self.return_type.optional,
+    void_return=ret_name == "Unit",
+  )
   Code(code.to_string())
 }
 
@@ -162,19 +373,53 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with decl_emit(
 }
 
 ///|
+fn AttributeGetMethodEmit::ffi_name(self : AttributeGetMethodEmit) -> String {
+  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+}
+
+///|
+impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_js(
+  self : AttributeGetMethodEmit,
+) -> Code {
+  emit_js_ffi_with_return(
+    self.ffi_name(),
+    "obj: JsValue",
+    ["obj"],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    "obj.\{self.original_name}",
+  )
+}
+
+///|
+impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_wasm(
+  self : AttributeGetMethodEmit,
+  module_name : String,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    "obj: JsValue",
+    ["obj"],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    is_string=self.return_type == "String",
+    is_valid_stub=true, // Attribute getters always return valid types (non-parameterized)
+    module_name,
+    "get_\{self.original_name}",
+  )
+}
+
+///|
 impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
   self : AttributeGetMethodEmit,
 ) -> Code {
-  // Emit FFI function
   let ret_type_str = self.return_type
   let trait_name = self.interface_name
-  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  let ffi_name = self.ffi_name()
   let code = StringBuilder::new()
-  code
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(obj: JsValue) -> \{ret_type_str} = \"(obj) => obj.\{self.original_name}\"",
-  )
-  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
@@ -182,12 +427,17 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
 
   // Emit default trait method implementation
   let method_name = @type_mapping.safe_identifier(self.original_name)
-  code
-  ..write_string(
+  code.write_string(
     "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
   )
-  ..write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
-  .write_string("}")
+  if ret_type_str.has_suffix("?") {
+    // Optional: FFI returns JsValue, use unsafe_cast to convert to Option type
+    code.write_string("  \{ffi_name}(TJsValue::to_js(self)).unsafe_cast()\n")
+  } else {
+    // Non-optional: FFI wrapper returns the correct type directly
+    code.write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
+  }
+  code.write_string("}")
   Code(code.to_string())
 }
 
@@ -211,19 +461,40 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with decl_emit(
 }
 
 ///|
+fn AttributeSetMethodEmit::ffi_name(self : AttributeSetMethodEmit) -> String {
+  "\{@type_mapping.snake_case(self.interface_name)}_set_\{@type_mapping.snake_case(self.original_name)}_ffi"
+}
+
+///|
+impl InterfaceMethodEmit for AttributeSetMethodEmit with ffi_emit_js(
+  self : AttributeSetMethodEmit,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  let arg_name = @type_mapping.safe_identifier(self.original_name)
+  Code(
+    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
+  )
+}
+
+///|
+impl InterfaceMethodEmit for AttributeSetMethodEmit with ffi_emit_wasm(
+  self : AttributeSetMethodEmit,
+  module_name : String,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  let arg_name = @type_mapping.safe_identifier(self.original_name)
+  Code(
+    "fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"\{module_name}\" \"set_\{self.original_name}\"",
+  )
+}
+
+///|
 impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
   self : AttributeSetMethodEmit,
 ) -> Code {
-  // Emit FFI function
   let trait_name = self.interface_name
-  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_set_\{@type_mapping.snake_case(self.original_name)}_ffi"
-  let arg_name = @type_mapping.safe_identifier(self.original_name)
+  let ffi_name = self.ffi_name()
   let code = StringBuilder::new()
-  code
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}(obj: JsValue, \{arg_name}: JsValue) -> Unit = \"(obj, \{self.original_name}) => { obj.\{self.original_name} = \{self.original_name}; }\"",
-  )
-  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
@@ -259,19 +530,56 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with decl_emit(
 }
 
 ///|
+fn StaticAttributeGetMethodEmit::ffi_name(
+  self : StaticAttributeGetMethodEmit,
+) -> String {
+  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+}
+
+///|
+impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_js(
+  self : StaticAttributeGetMethodEmit,
+) -> Code {
+  let trait_name = self.interface_name
+  emit_js_ffi_with_return(
+    self.ffi_name(),
+    "",
+    [],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    "\{trait_name}.\{self.original_name}",
+  )
+}
+
+///|
+impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_wasm(
+  self : StaticAttributeGetMethodEmit,
+  module_name : String,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    "",
+    [],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    is_string=self.return_type == "String",
+    is_valid_stub=true, // Static attribute getters always return valid types
+    module_name,
+    "get_\{self.original_name}",
+  )
+}
+
+///|
 impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
   self : StaticAttributeGetMethodEmit,
 ) -> Code {
-  // Emit FFI function
   let ret_type_str = self.return_type
   let trait_name = self.interface_name
-  let ffi_name = "\{@type_mapping.snake_case(trait_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  let ffi_name = self.ffi_name()
   let code = StringBuilder::new()
-  code
-  ..write_string(
-    "extern \"js\" fn \{ffi_name}() -> \{ret_type_str} = \"() => \{trait_name}.\{self.original_name}\"",
-  )
-  .write_string("\n\n")
 
   // Emit MDN documentation comment
   let mdn_url = mdn_member_url(trait_name, self.original_name)
@@ -279,12 +587,15 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
 
   // Emit static attribute getter implementation
   let method_name = @type_mapping.safe_identifier(self.original_name)
-  code
-  ..write_string(
+  code.write_string(
     "pub fn \{trait_name}::\{method_name}() -> \{ret_type_str} {\n",
   )
-  ..write_string("  \{ffi_name}()\n")
-  .write_string("}")
+  if ret_type_str.has_suffix("?") {
+    code.write_string("  \{ffi_name}().unsafe_cast()\n")
+  } else {
+    code.write_string("  \{ffi_name}()\n")
+  }
+  code.write_string("}")
   Code(code.to_string())
 }
 

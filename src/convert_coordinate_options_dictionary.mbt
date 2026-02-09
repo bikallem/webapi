@@ -13,18 +13,6 @@ pub impl TJsValue for ConvertCoordinateOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn convert_coordinate_options_ffi(
-  from_box : JsValue,
-  to_box : JsValue,
-) -> ConvertCoordinateOptions =
-  #|(fromBox, toBox) => {
-  #|  const obj = {};
-  #|  if (fromBox !== undefined) obj.fromBox = fromBox;
-  #|  if (toBox !== undefined) obj.toBox = toBox;
-  #|  return obj;
-  #|}
-
-///|
 pub fn ConvertCoordinateOptions::new(
   from_box? : CSSBoxType = CSSBoxType::Border,
   to_box? : CSSBoxType = CSSBoxType::Border,
@@ -34,9 +22,6 @@ pub fn ConvertCoordinateOptions::new(
     TJsValue::to_js(to_box),
   )
 }
-
-///|
-extern "js" fn convert_coordinate_options_empty_ffi() -> ConvertCoordinateOptions = "() => {}"
 
 ///|
 pub fn ConvertCoordinateOptions::empty() -> ConvertCoordinateOptions {

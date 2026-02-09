@@ -13,24 +13,11 @@ pub impl TJsValue for StructuredSerializeOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-extern "js" fn structured_serialize_options_ffi(
-  transfer : JsValue,
-) -> StructuredSerializeOptions =
-  #|(transfer) => {
-  #|  const obj = {};
-  #|  if (transfer !== undefined) obj.transfer = transfer;
-  #|  return obj;
-  #|}
-
-///|
 pub fn StructuredSerializeOptions::new(
   transfer? : Array[JsValue] = [],
 ) -> StructuredSerializeOptions {
   structured_serialize_options_ffi(TJsValue::to_js(transfer))
 }
-
-///|
-extern "js" fn structured_serialize_options_empty_ffi() -> StructuredSerializeOptions = "() => {}"
 
 ///|
 pub fn StructuredSerializeOptions::empty() -> StructuredSerializeOptions {

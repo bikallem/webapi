@@ -31,9 +31,6 @@ pub impl TNode for HTMLDataListElement
 pub impl TEventTarget for HTMLDataListElement
 
 ///|
-extern "js" fn html_data_list_element_new_ffi() -> HTMLDataListElement = "() => new HTMLDataListElement()"
-
-///|
 pub fn HTMLDataListElement::new() -> HTMLDataListElement {
   html_data_list_element_new_ffi()
 }
@@ -43,11 +40,6 @@ pub fn HTMLDataListElement::new() -> HTMLDataListElement {
 pub trait THTMLDataListElement: THTMLElement {
   options(self : Self) -> HTMLCollection = _
 }
-
-///|
-extern "js" fn html_data_list_element_options_ffi(
-  obj : JsValue,
-) -> HTMLCollection = "(obj) => obj.options"
 
 ///|
 /// [HTMLDataListElement.options](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataListElement/options)

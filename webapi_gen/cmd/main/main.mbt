@@ -16,12 +16,18 @@ fn is_core_spec(
 }
 
 ///|
-/// Copy all .mbt template files from templates_dir to output_dir
-fn copy_templates(templates_dir : String, output_dir : String) -> Unit raise {
+/// Copy all .mbt template files from templates_dir to output_dir.
+/// Returns arrays of JS-only and wasm-only filenames for conditional compilation.
+fn copy_templates(
+  templates_dir : String,
+  output_dir : String,
+) -> (Array[String], Array[String]) raise {
   println("=== Copying Template Files ===")
   let template_files = @fs.read_dir(templates_dir) catch {
     e => fail("failed to read templates directory \{templates_dir}: \{e}")
   }
+  let js_files : Array[String] = []
+  let wasm_files : Array[String] = []
   for filename in template_files {
     // Only copy .mbt files (skip non-.mbt files like README.md)
     if filename.has_suffix(".mbt") {
@@ -34,27 +40,57 @@ fn copy_templates(templates_dir : String, output_dir : String) -> Unit raise {
       @fs.write_string_to_file(dst_path, content) catch {
         e => fail("failed to write template \{dst_path}: \{e}")
       }
+      // Track target-specific files
+      if filename.has_suffix("_js.mbt") {
+        js_files.push(filename)
+      } else if filename.has_suffix("_wasm.mbt") {
+        wasm_files.push(filename)
+      }
     }
   }
+  (js_files, wasm_files)
 }
 
 ///|
-/// Emit and write files of a specific type
-fn[E : @emit.Emitter] emit_and_write(
+/// Emit and write multi-target files of a specific type.
+/// Returns the count of types processed, and appends target-specific
+/// filenames to the provided arrays.
+fn[E : @emit.Emitter] emit_and_write_multi(
   output_dir : String,
   type_name : String,
   emitter : E,
   keys : Iter[String],
+  js_files : Array[String],
+  wasm_files : Array[String],
 ) -> Int raise {
   println("=== Generating \{type_name} ===")
-  let files = @emit.emit_all(emitter, keys)
-  let count = files.length()
-  for filename, code in files {
+  let multi = @emit.emit_all_multi(emitter, keys)
+  let count = multi.shared.length()
+  // Write shared files
+  for filename, code in multi.shared {
     let filepath = "\{output_dir}/\{filename.0}"
     println("  Writing \{filepath}...")
     @fs.write_string_to_file(filepath, code.0) catch {
       e => fail("failed to write file: \{e}")
     }
+  }
+  // Write JS FFI files
+  for filename, code in multi.js_ffi {
+    let filepath = "\{output_dir}/\{filename.0}"
+    println("  Writing \{filepath}...")
+    @fs.write_string_to_file(filepath, code.0) catch {
+      e => fail("failed to write file: \{e}")
+    }
+    js_files.push(filename.0)
+  }
+  // Write wasm FFI files
+  for filename, code in multi.wasm_ffi {
+    let filepath = "\{output_dir}/\{filename.0}"
+    println("  Writing \{filepath}...")
+    @fs.write_string_to_file(filepath, code.0) catch {
+      e => fail("failed to write file: \{e}")
+    }
+    wasm_files.push(filename.0)
   }
   count
 }
@@ -103,6 +139,31 @@ fn filter_idl(
     }
   }
   filtered_defns
+}
+
+///|
+/// Generate moon.pkg content with conditional compilation targets
+fn generate_moon_pkg(
+  js_files : Array[String],
+  wasm_files : Array[String],
+) -> String {
+  let buf = StringBuilder::new()
+  buf.write_string("options(\n")
+  buf.write_string("  targets: {")
+  let entries : Array[String] = []
+  // Sort for deterministic output
+  js_files.sort()
+  wasm_files.sort()
+  for f in js_files {
+    entries.push(" \"\{f}\": [\"js\"]")
+  }
+  for f in wasm_files {
+    entries.push(" \"\{f}\": [\"wasm-gc\"]")
+  }
+  buf.write_string(entries.join(","))
+  buf.write_string(" },\n")
+  buf.write_string(")\n")
+  buf.to_string()
 }
 
 ///|
@@ -173,8 +234,8 @@ fn main {
       }
     }
 
-    // Copy base template files
-    copy_templates(templates_dir, output_dir)
+    // Copy base template files (returns target-specific filenames)
+    let (js_files, wasm_files) = copy_templates(templates_dir, output_dir)
 
     // Write skipped log
     if skipped_logs.length() > 0 {
@@ -186,47 +247,73 @@ fn main {
       }
     }
 
-    // Generate and write generated code files
-    let enum_count = emit_and_write(
+    // Generate and write generated code files (multi-target)
+    let enum_count = emit_and_write_multi(
       output_dir,
       "Enums",
       @emit.EnumEmitter::{ idl: flattened, type_registry },
       flattened.enums.keys(),
+      js_files,
+      wasm_files,
     )
-    let typedef_count = emit_and_write(
+    let typedef_count = emit_and_write_multi(
       output_dir,
       "Typedefs",
       @emit.TypedefEmitter::{ idl: flattened, type_registry },
       flattened.typedefs.keys(),
+      js_files,
+      wasm_files,
     )
-    let dict_count = emit_and_write(
+    let dict_count = emit_and_write_multi(
       output_dir,
       "Dictionaries",
       @emit.DictionaryEmitter::{ idl: flattened, type_registry },
       flattened.dictionaries.keys(),
+      js_files,
+      wasm_files,
     )
-    let iface_count = emit_and_write(
+    let iface_count = emit_and_write_multi(
       output_dir,
       "Interfaces",
       @emit.InterfaceEmitter::{ idl: flattened, type_registry, log_skipped },
       flattened.interfaces.keys(),
+      js_files,
+      wasm_files,
     )
-    let callback_count = emit_and_write(
+    let callback_count = emit_and_write_multi(
       output_dir,
       "Callbacks",
       @emit.CallbackEmitter::{ idl: flattened, type_registry },
       flattened.callbacks.keys(),
+      js_files,
+      wasm_files,
     )
 
-    // XXX: Disabled for now since we only need JS bindings
-    // Generate and write JS runtime
-    // println("=== Generating JS Runtime ===")
-    // let js_runtime = @emit.emit_js_runtime(flattened)
-    // let js_runtime_path = "\{output_dir}/webapi.mjs"
-    // println("  Writing \{js_runtime_path}...")
-    // @fs.write_string_to_file(js_runtime_path, js_runtime) catch {
-    //   e => fail("failed to write JS runtime: \{e}")
-    // }
+    // Generate and write JS runtime for wasm-gc
+    println("=== Generating JS Runtime ===")
+    let js_runtime = @emit.emit_js_runtime(flattened)
+    let js_runtime_path = "\{output_dir}/webapi.mjs"
+    println("  Writing \{js_runtime_path}...")
+    @fs.write_string_to_file(js_runtime_path, js_runtime) catch {
+      e => fail("failed to write JS runtime: \{e}")
+    }
+
+    // Generate moon.pkg with conditional compilation targets
+    // Remove old moon.pkg.json if it exists (moon.pkg takes precedence)
+    let old_moon_pkg_json = "\{output_dir}/moon.pkg.json"
+    if @fs.path_exists(old_moon_pkg_json) {
+      println("  Removing old \{old_moon_pkg_json}...")
+      @fs.remove_file(old_moon_pkg_json) catch {
+        e => println("Warning: failed to remove old moon.pkg.json: \{e}")
+      }
+    }
+    println("=== Generating moon.pkg ===")
+    let moon_pkg_content = generate_moon_pkg(js_files, wasm_files)
+    let moon_pkg_path = "\{output_dir}/moon.pkg"
+    println("  Writing \{moon_pkg_path}...")
+    @fs.write_string_to_file(moon_pkg_path, moon_pkg_content) catch {
+      e => fail("failed to write moon.pkg: \{e}")
+    }
     println("\n=== Generation complete! ===")
     println(
       "Generated \{enum_count} enums, \{typedef_count} typedefs, \{dict_count} dictionaries, \{iface_count} interfaces, \{callback_count} callbacks",

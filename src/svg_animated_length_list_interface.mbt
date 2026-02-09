@@ -28,20 +28,10 @@ pub trait TSVGAnimatedLengthList: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_length_list_base_val_ffi(
-  obj : JsValue,
-) -> SVGLengthList = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedLengthList.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedLengthList/baseVal)
 impl TSVGAnimatedLengthList with base_val(self : Self) -> SVGLengthList {
   svg_animated_length_list_base_val_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_animated_length_list_anim_val_ffi(
-  obj : JsValue,
-) -> SVGLengthList = "(obj) => obj.animVal"
 
 ///|
 /// [SVGAnimatedLengthList.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedLengthList/animVal)

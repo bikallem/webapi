@@ -17,9 +17,6 @@ pub fn[T : TXPathEvaluator] XPathEvaluator::into(self : XPathEvaluator) -> T = "
 pub impl TXPathEvaluator for XPathEvaluator
 
 ///|
-extern "js" fn x_path_evaluator_new_ffi() -> XPathEvaluator = "() => new XPathEvaluator()"
-
-///|
 pub fn XPathEvaluator::new() -> XPathEvaluator {
   x_path_evaluator_new_ffi()
 }
@@ -44,13 +41,6 @@ pub trait TXPathEvaluator: TJsValue {
 }
 
 ///|
-extern "js" fn x_path_evaluator_create_expression_ffi(
-  obj : JsValue,
-  expression : JsValue,
-  resolver : JsValue,
-) -> XPathExpression = "(obj, expression, resolver) => obj.createExpression(expression, resolver)"
-
-///|
 /// [XPathEvaluator.createExpression](https://developer.mozilla.org/en-US/docs/Web/API/XPathEvaluator/createExpression)
 impl TXPathEvaluator with create_expression(
   self : Self,
@@ -65,12 +55,6 @@ impl TXPathEvaluator with create_expression(
 }
 
 ///|
-extern "js" fn x_path_evaluator_create_ns_resolver_ffi(
-  obj : JsValue,
-  node_resolver : JsValue,
-) -> Node = "(obj, node_resolver) => obj.createNSResolver(node_resolver)"
-
-///|
 /// [XPathEvaluator.createNSResolver](https://developer.mozilla.org/en-US/docs/Web/API/XPathEvaluator/createNSResolver)
 impl TXPathEvaluator with create_ns_resolver(
   self : Self,
@@ -81,16 +65,6 @@ impl TXPathEvaluator with create_ns_resolver(
     TJsValue::to_js(node_resolver),
   )
 }
-
-///|
-extern "js" fn x_path_evaluator_evaluate_ffi(
-  obj : JsValue,
-  expression : JsValue,
-  context_node : JsValue,
-  resolver : JsValue,
-  type_ : JsValue,
-  result : JsValue,
-) -> XPathResult = "(obj, expression, context_node, resolver, type_, result) => obj.evaluate(expression, context_node, resolver, type_, result)"
 
 ///|
 /// [XPathEvaluator.evaluate](https://developer.mozilla.org/en-US/docs/Web/API/XPathEvaluator/evaluate)

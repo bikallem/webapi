@@ -23,9 +23,6 @@ pub trait THTMLCollection: TJsValue {
 }
 
 ///|
-extern "js" fn html_collection_length_ffi(obj : JsValue) -> UInt = "(obj) => obj.length"
-
-///|
 /// [HTMLCollection.length](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection/length)
 impl THTMLCollection with length(self : Self) -> UInt {
   html_collection_length_ffi(TJsValue::to_js(self))

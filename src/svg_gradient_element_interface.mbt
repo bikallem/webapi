@@ -52,20 +52,10 @@ pub trait TSVGGradientElement: TSVGElement {
 }
 
 ///|
-extern "js" fn svg_gradient_element_gradient_units_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "(obj) => obj.gradientUnits"
-
-///|
 /// [SVGGradientElement.gradientUnits](https://developer.mozilla.org/en-US/docs/Web/API/SVGGradientElement/gradientUnits)
 impl TSVGGradientElement with gradient_units(self : Self) -> SVGAnimatedEnumeration {
   svg_gradient_element_gradient_units_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_gradient_element_gradient_transform_ffi(
-  obj : JsValue,
-) -> SVGAnimatedTransformList = "(obj) => obj.gradientTransform"
 
 ///|
 /// [SVGGradientElement.gradientTransform](https://developer.mozilla.org/en-US/docs/Web/API/SVGGradientElement/gradientTransform)
@@ -74,20 +64,10 @@ impl TSVGGradientElement with gradient_transform(self : Self) -> SVGAnimatedTran
 }
 
 ///|
-extern "js" fn svg_gradient_element_spread_method_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "(obj) => obj.spreadMethod"
-
-///|
 /// [SVGGradientElement.spreadMethod](https://developer.mozilla.org/en-US/docs/Web/API/SVGGradientElement/spreadMethod)
 impl TSVGGradientElement with spread_method(self : Self) -> SVGAnimatedEnumeration {
   svg_gradient_element_spread_method_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_gradient_element_href_ffi(
-  obj : JsValue,
-) -> SVGAnimatedString = "(obj) => obj.href"
 
 ///|
 /// [SVGGradientElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGGradientElement/href)

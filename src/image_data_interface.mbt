@@ -17,13 +17,6 @@ pub fn[T : TImageData] ImageData::into(self : ImageData) -> T = "%identity"
 pub impl TImageData for ImageData
 
 ///|
-extern "js" fn image_data_new_ffi(
-  sw : JsValue,
-  sh : JsValue,
-  settings : JsValue,
-) -> ImageData = "(sw, sh, settings) => new ImageData(sw, sh, settings)"
-
-///|
 pub fn ImageData::new(
   sw : UInt,
   sh : UInt,
@@ -35,14 +28,6 @@ pub fn ImageData::new(
     TJsValue::to_js(settings),
   )
 }
-
-///|
-extern "js" fn image_data_new_2_ffi(
-  data : JsValue,
-  sw : JsValue,
-  sh : JsValue,
-  settings : JsValue,
-) -> ImageData = "(data, sw, sh, settings) => new ImageData(data, sw, sh, settings)"
 
 ///|
 pub fn ImageData::new_2(
@@ -70,16 +55,10 @@ pub trait TImageData: TJsValue {
 }
 
 ///|
-extern "js" fn image_data_width_ffi(obj : JsValue) -> UInt = "(obj) => obj.width"
-
-///|
 /// [ImageData.width](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/width)
 impl TImageData with width(self : Self) -> UInt {
   image_data_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn image_data_height_ffi(obj : JsValue) -> UInt = "(obj) => obj.height"
 
 ///|
 /// [ImageData.height](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/height)
@@ -88,29 +67,16 @@ impl TImageData with height(self : Self) -> UInt {
 }
 
 ///|
-extern "js" fn image_data_data_ffi(obj : JsValue) -> ImageDataArray = "(obj) => obj.data"
-
-///|
 /// [ImageData.data](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/data)
 impl TImageData with data(self : Self) -> ImageDataArray {
   image_data_data_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn image_data_pixel_format_ffi(
-  obj : JsValue,
-) -> ImageDataPixelFormat = "(obj) => obj.pixelFormat"
-
-///|
 /// [ImageData.pixelFormat](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/pixelFormat)
 impl TImageData with pixel_format(self : Self) -> ImageDataPixelFormat {
   image_data_pixel_format_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn image_data_color_space_ffi(
-  obj : JsValue,
-) -> PredefinedColorSpace = "(obj) => obj.colorSpace"
 
 ///|
 /// [ImageData.colorSpace](https://developer.mozilla.org/en-US/docs/Web/API/ImageData/colorSpace)

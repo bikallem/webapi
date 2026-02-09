@@ -28,20 +28,10 @@ pub trait TSVGAnimatedTransformList: TJsValue {
 }
 
 ///|
-extern "js" fn svg_animated_transform_list_base_val_ffi(
-  obj : JsValue,
-) -> SVGTransformList = "(obj) => obj.baseVal"
-
-///|
 /// [SVGAnimatedTransformList.baseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedTransformList/baseVal)
 impl TSVGAnimatedTransformList with base_val(self : Self) -> SVGTransformList {
   svg_animated_transform_list_base_val_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_animated_transform_list_anim_val_ffi(
-  obj : JsValue,
-) -> SVGTransformList = "(obj) => obj.animVal"
 
 ///|
 /// [SVGAnimatedTransformList.animVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedTransformList/animVal)

@@ -1,0 +1,2 @@
+///|
+fn svg_stop_element_offset_ffi(obj : JsValue) -> SVGAnimatedNumber = "webapi_SVGStopElement" "get_offset"

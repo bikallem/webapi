@@ -1,0 +1,2 @@
+///|
+fn html_head_element_new_ffi() -> HTMLHeadElement = "webapi_HTMLHeadElement" "new"

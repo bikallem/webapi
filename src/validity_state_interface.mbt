@@ -33,16 +33,10 @@ pub trait TValidityState: TJsValue {
 }
 
 ///|
-extern "js" fn validity_state_value_missing_ffi(obj : JsValue) -> Bool = "(obj) => obj.valueMissing"
-
-///|
 /// [ValidityState.valueMissing](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/valueMissing)
 impl TValidityState with value_missing(self : Self) -> Bool {
   validity_state_value_missing_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn validity_state_type_mismatch_ffi(obj : JsValue) -> Bool = "(obj) => obj.typeMismatch"
 
 ///|
 /// [ValidityState.typeMismatch](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/typeMismatch)
@@ -51,16 +45,10 @@ impl TValidityState with type_mismatch(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn validity_state_pattern_mismatch_ffi(obj : JsValue) -> Bool = "(obj) => obj.patternMismatch"
-
-///|
 /// [ValidityState.patternMismatch](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/patternMismatch)
 impl TValidityState with pattern_mismatch(self : Self) -> Bool {
   validity_state_pattern_mismatch_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn validity_state_too_long_ffi(obj : JsValue) -> Bool = "(obj) => obj.tooLong"
 
 ///|
 /// [ValidityState.tooLong](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/tooLong)
@@ -69,16 +57,10 @@ impl TValidityState with too_long(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn validity_state_too_short_ffi(obj : JsValue) -> Bool = "(obj) => obj.tooShort"
-
-///|
 /// [ValidityState.tooShort](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/tooShort)
 impl TValidityState with too_short(self : Self) -> Bool {
   validity_state_too_short_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn validity_state_range_underflow_ffi(obj : JsValue) -> Bool = "(obj) => obj.rangeUnderflow"
 
 ///|
 /// [ValidityState.rangeUnderflow](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/rangeUnderflow)
@@ -87,16 +69,10 @@ impl TValidityState with range_underflow(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn validity_state_range_overflow_ffi(obj : JsValue) -> Bool = "(obj) => obj.rangeOverflow"
-
-///|
 /// [ValidityState.rangeOverflow](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/rangeOverflow)
 impl TValidityState with range_overflow(self : Self) -> Bool {
   validity_state_range_overflow_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn validity_state_step_mismatch_ffi(obj : JsValue) -> Bool = "(obj) => obj.stepMismatch"
 
 ///|
 /// [ValidityState.stepMismatch](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/stepMismatch)
@@ -105,25 +81,16 @@ impl TValidityState with step_mismatch(self : Self) -> Bool {
 }
 
 ///|
-extern "js" fn validity_state_bad_input_ffi(obj : JsValue) -> Bool = "(obj) => obj.badInput"
-
-///|
 /// [ValidityState.badInput](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/badInput)
 impl TValidityState with bad_input(self : Self) -> Bool {
   validity_state_bad_input_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn validity_state_custom_error_ffi(obj : JsValue) -> Bool = "(obj) => obj.customError"
-
-///|
 /// [ValidityState.customError](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/customError)
 impl TValidityState with custom_error(self : Self) -> Bool {
   validity_state_custom_error_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn validity_state_valid_ffi(obj : JsValue) -> Bool = "(obj) => obj.valid"
 
 ///|
 /// [ValidityState.valid](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/valid)

@@ -17,9 +17,6 @@ pub fn[T : TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity
 pub impl TEventTarget for EventTarget
 
 ///|
-extern "js" fn event_target_new_ffi() -> EventTarget = "() => new EventTarget()"
-
-///|
 pub fn EventTarget::new() -> EventTarget {
   event_target_new_ffi()
 }
@@ -35,7 +32,9 @@ pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions with to
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TEventTargetAddEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TEventTargetAddEventListenerOptions for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub(open) trait TEventTargetRemoveEventListenerOptions {
@@ -48,7 +47,9 @@ pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions with to
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 /// [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
@@ -69,14 +70,6 @@ pub trait TEventTarget: TJsValue {
 }
 
 ///|
-extern "js" fn event_target_add_event_listener_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-  callback : JsValue,
-  options : JsValue,
-) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(type_, callback, options)"
-
-///|
 /// [EventTarget.addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
 impl TEventTarget with add_event_listener(
   self : Self,
@@ -93,14 +86,6 @@ impl TEventTarget with add_event_listener(
 }
 
 ///|
-extern "js" fn event_target_remove_event_listener_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-  callback : JsValue,
-  options : JsValue,
-) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(type_, callback, options)"
-
-///|
 /// [EventTarget.removeEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)
 impl TEventTarget with remove_event_listener(
   self : Self,
@@ -115,12 +100,6 @@ impl TEventTarget with remove_event_listener(
     options.to_js(),
   )
 }
-
-///|
-extern "js" fn event_target_dispatch_event_ffi(
-  obj : JsValue,
-  event : JsValue,
-) -> Bool = "(obj, event) => obj.dispatchEvent(event)"
 
 ///|
 /// [EventTarget.dispatchEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)

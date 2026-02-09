@@ -1,0 +1,2 @@
+///|
+fn fetch_later_result_activated_ffi(obj : JsValue) -> Bool = "webapi_FetchLaterResult" "get_activated"

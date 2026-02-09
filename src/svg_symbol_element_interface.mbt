@@ -41,20 +41,10 @@ pub trait TSVGSymbolElement: TSVGGraphicsElement {
 }
 
 ///|
-extern "js" fn svg_symbol_element_view_box_ffi(
-  obj : JsValue,
-) -> SVGAnimatedRect = "(obj) => obj.viewBox"
-
-///|
 /// [SVGSymbolElement.viewBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGSymbolElement/viewBox)
 impl TSVGSymbolElement with view_box(self : Self) -> SVGAnimatedRect {
   svg_symbol_element_view_box_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_symbol_element_preserve_aspect_ratio_ffi(
-  obj : JsValue,
-) -> SVGAnimatedPreserveAspectRatio = "(obj) => obj.preserveAspectRatio"
 
 ///|
 /// [SVGSymbolElement.preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/API/SVGSymbolElement/preserveAspectRatio)

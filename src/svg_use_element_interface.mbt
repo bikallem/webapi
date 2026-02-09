@@ -44,16 +44,10 @@ pub trait TSVGUseElement: TSVGGraphicsElement {
 }
 
 ///|
-extern "js" fn svg_use_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.x"
-
-///|
 /// [SVGUseElement.x](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement/x)
 impl TSVGUseElement with x(self : Self) -> SVGAnimatedLength {
   svg_use_element_x_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_use_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.y"
 
 ///|
 /// [SVGUseElement.y](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement/y)
@@ -62,16 +56,10 @@ impl TSVGUseElement with y(self : Self) -> SVGAnimatedLength {
 }
 
 ///|
-extern "js" fn svg_use_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.width"
-
-///|
 /// [SVGUseElement.width](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement/width)
 impl TSVGUseElement with width(self : Self) -> SVGAnimatedLength {
   svg_use_element_width_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_use_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "(obj) => obj.height"
 
 ///|
 /// [SVGUseElement.height](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement/height)
@@ -80,27 +68,16 @@ impl TSVGUseElement with height(self : Self) -> SVGAnimatedLength {
 }
 
 ///|
-extern "js" fn svg_use_element_instance_root_ffi(obj : JsValue) -> SVGElement = "(obj) => obj.instanceRoot"
-
-///|
 /// [SVGUseElement.instanceRoot](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement/instanceRoot)
 impl TSVGUseElement with instance_root(self : Self) -> SVGElement {
   svg_use_element_instance_root_ffi(TJsValue::to_js(self))
 }
 
 ///|
-extern "js" fn svg_use_element_animated_instance_root_ffi(
-  obj : JsValue,
-) -> SVGElement = "(obj) => obj.animatedInstanceRoot"
-
-///|
 /// [SVGUseElement.animatedInstanceRoot](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement/animatedInstanceRoot)
 impl TSVGUseElement with animated_instance_root(self : Self) -> SVGElement {
   svg_use_element_animated_instance_root_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn svg_use_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "(obj) => obj.href"
 
 ///|
 /// [SVGUseElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement/href)

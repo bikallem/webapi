@@ -22,12 +22,6 @@ pub impl TPageTransitionEvent for PageTransitionEvent
 pub impl TEvent for PageTransitionEvent
 
 ///|
-extern "js" fn page_transition_event_new_ffi(
-  type_ : JsValue,
-  event_init_dict : JsValue,
-) -> PageTransitionEvent = "(type_, event_init_dict) => new PageTransitionEvent(type_, event_init_dict)"
-
-///|
 pub fn PageTransitionEvent::new(
   type_ : String,
   event_init_dict? : PageTransitionEventInit = PageTransitionEventInit::empty(),
@@ -43,9 +37,6 @@ pub fn PageTransitionEvent::new(
 pub trait TPageTransitionEvent: TEvent {
   persisted(self : Self) -> Bool = _
 }
-
-///|
-extern "js" fn page_transition_event_persisted_ffi(obj : JsValue) -> Bool = "(obj) => obj.persisted"
 
 ///|
 /// [PageTransitionEvent.persisted](https://developer.mozilla.org/en-US/docs/Web/API/PageTransitionEvent/persisted)

@@ -23,12 +23,6 @@ pub trait TCanvasPattern: TJsValue {
 }
 
 ///|
-extern "js" fn canvas_pattern_set_transform_ffi(
-  obj : JsValue,
-  transform : JsValue,
-) -> Unit = "(obj, transform) => obj.setTransform(transform)"
-
-///|
 /// [CanvasPattern.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern/setTransform)
 impl TCanvasPattern with set_transform(
   self : Self,

@@ -28,18 +28,10 @@ pub trait TNotRestoredReasonDetails: TJsValue {
 }
 
 ///|
-extern "js" fn not_restored_reason_details_reason_ffi(obj : JsValue) -> String = "(obj) => obj.reason"
-
-///|
 /// [NotRestoredReasonDetails.reason](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasonDetails/reason)
 impl TNotRestoredReasonDetails with reason(self : Self) -> String {
   not_restored_reason_details_reason_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn not_restored_reason_details_to_json_ffi(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.toJSON()"
 
 ///|
 /// [NotRestoredReasonDetails.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasonDetails/toJSON)

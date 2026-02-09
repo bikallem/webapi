@@ -36,16 +36,10 @@ pub trait TMediaError: TJsValue {
 }
 
 ///|
-extern "js" fn media_error_code_ffi(obj : JsValue) -> UInt = "(obj) => obj.code"
-
-///|
 /// [MediaError.code](https://developer.mozilla.org/en-US/docs/Web/API/MediaError/code)
 impl TMediaError with code(self : Self) -> UInt {
   media_error_code_ffi(TJsValue::to_js(self))
 }
-
-///|
-extern "js" fn media_error_message_ffi(obj : JsValue) -> String = "(obj) => obj.message"
 
 ///|
 /// [MediaError.message](https://developer.mozilla.org/en-US/docs/Web/API/MediaError/message)
