@@ -2,14 +2,20 @@
 // MoonBit type: ShowPopoverOptions
 // Specifications: html.idl
 
+///|
 /// [ShowPopoverOptions](https://developer.mozilla.org/en-US/docs/Web/API/ShowPopoverOptions)
 #external
 pub type ShowPopoverOptions
 
-pub impl TJsValue for ShowPopoverOptions with to_js(self: ShowPopoverOptions) -> JsValue = "%identity"
+///|
+pub impl TJsValue for ShowPopoverOptions with to_js(self : ShowPopoverOptions) -> JsValue = "%identity"
 
+///|
 pub fn ShowPopoverOptions::new(source? : &THTMLElement) -> ShowPopoverOptions {
   show_popover_options_ffi(opt_to_js(source))
 }
 
-pub fn ShowPopoverOptions::empty() -> ShowPopoverOptions { show_popover_options_empty_ffi() }
+///|
+pub fn ShowPopoverOptions::empty() -> ShowPopoverOptions {
+  show_popover_options_empty_ffi()
+}

@@ -1,3 +1,29 @@
-fn dom_matrix_init_ffi(a: JsValue, b: JsValue, c: JsValue, d: JsValue, e: JsValue, f: JsValue, m11: JsValue, m12: JsValue, m21: JsValue, m22: JsValue, m41: JsValue, m42: JsValue, m13: JsValue, m14: JsValue, m23: JsValue, m24: JsValue, m31: JsValue, m32: JsValue, m33: JsValue, m34: JsValue, m43: JsValue, m44: JsValue, is2d: JsValue) -> DOMMatrixInit = "webapi_DOMMatrixInit" "new"
+///|
+fn dom_matrix_init_ffi(
+  a : JsValue,
+  b : JsValue,
+  c : JsValue,
+  d : JsValue,
+  e : JsValue,
+  f : JsValue,
+  m11 : JsValue,
+  m12 : JsValue,
+  m21 : JsValue,
+  m22 : JsValue,
+  m41 : JsValue,
+  m42 : JsValue,
+  m13 : JsValue,
+  m14 : JsValue,
+  m23 : JsValue,
+  m24 : JsValue,
+  m31 : JsValue,
+  m32 : JsValue,
+  m33 : JsValue,
+  m34 : JsValue,
+  m43 : JsValue,
+  m44 : JsValue,
+  is2d : JsValue,
+) -> DOMMatrixInit = "webapi_DOMMatrixInit" "new"
 
+///|
 fn dom_matrix_init_empty_ffi() -> DOMMatrixInit = "webapi_Dictionary" "empty"

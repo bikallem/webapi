@@ -2,13 +2,15 @@
 // MoonBit type: DocumentReadyState
 // Specifications: html.idl
 
+///|
 pub(all) enum DocumentReadyState {
   Loading
   Interactive
   Complete
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for DocumentReadyState with to_js(self: DocumentReadyState) -> JsValue {
+///|
+pub impl TJsValue for DocumentReadyState with to_js(self : DocumentReadyState) -> JsValue {
   match self {
     DocumentReadyState::Loading => TJsValue::to_js("loading")
     DocumentReadyState::Interactive => TJsValue::to_js("interactive")
@@ -16,7 +18,8 @@ pub impl TJsValue for DocumentReadyState with to_js(self: DocumentReadyState) ->
   }
 }
 
-pub fn DocumentReadyState::from(value: String) -> DocumentReadyState? {
+///|
+pub fn DocumentReadyState::from(value : String) -> DocumentReadyState? {
   match value {
     "loading" => Some(DocumentReadyState::Loading)
     "interactive" => Some(DocumentReadyState::Interactive)

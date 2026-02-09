@@ -2,14 +2,18 @@
 // MoonBit type: ScrollLogicalPosition
 // Specifications: cssom-view.idl
 
+///|
 pub(all) enum ScrollLogicalPosition {
   Start
   Center
   End
   Nearest
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for ScrollLogicalPosition with to_js(self: ScrollLogicalPosition) -> JsValue {
+///|
+pub impl TJsValue for ScrollLogicalPosition with to_js(
+  self : ScrollLogicalPosition,
+) -> JsValue {
   match self {
     ScrollLogicalPosition::Start => TJsValue::to_js("start")
     ScrollLogicalPosition::Center => TJsValue::to_js("center")
@@ -18,7 +22,8 @@ pub impl TJsValue for ScrollLogicalPosition with to_js(self: ScrollLogicalPositi
   }
 }
 
-pub fn ScrollLogicalPosition::from(value: String) -> ScrollLogicalPosition? {
+///|
+pub fn ScrollLogicalPosition::from(value : String) -> ScrollLogicalPosition? {
   match value {
     "start" => Some(ScrollLogicalPosition::Start)
     "center" => Some(ScrollLogicalPosition::Center)

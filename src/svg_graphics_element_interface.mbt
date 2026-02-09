@@ -2,24 +2,35 @@
 // MoonBit type: SVGGraphicsElement
 // Specifications: SVG.idl
 
+///|
 /// [SVGGraphicsElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement)
 #external
 pub type SVGGraphicsElement
 
-pub impl TJsValue for SVGGraphicsElement with to_js(self: SVGGraphicsElement) -> JsValue = "%identity"
+///|
+pub impl TJsValue for SVGGraphicsElement with to_js(self : SVGGraphicsElement) -> JsValue = "%identity"
 
-pub fn[T: TSVGGraphicsElement] SVGGraphicsElement::into(self : SVGGraphicsElement) -> T = "%identity"
+///|
+pub fn[T : TSVGGraphicsElement] SVGGraphicsElement::into(
+  self : SVGGraphicsElement,
+) -> T = "%identity"
 
+///|
 pub impl TSVGGraphicsElement for SVGGraphicsElement
 
+///|
 pub impl TSVGElement for SVGGraphicsElement
 
+///|
 pub impl TElement for SVGGraphicsElement
 
+///|
 pub impl TNode for SVGGraphicsElement
 
+///|
 pub impl TEventTarget for SVGGraphicsElement
 
+///|
 /// [SVGGraphicsElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement) interface.
 pub trait TSVGGraphicsElement: TSVGElement {
   transform(self : Self) -> SVGAnimatedTransformList = _
@@ -30,17 +41,25 @@ pub trait TSVGGraphicsElement: TSVGElement {
   system_language(self : Self) -> SVGStringList = _
 }
 
+///|
 /// [SVGGraphicsElement.transform](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/transform)
 impl TSVGGraphicsElement with transform(self : Self) -> SVGAnimatedTransformList {
-  svg_graphics_element_transform_ffi(TJsValue::to_js(self)).unsafe_cast()
+  svg_graphics_element_transform_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [SVGGraphicsElement.getBBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox)
-impl TSVGGraphicsElement with get_b_box(self : Self, 
-options? : SVGBoundingBoxOptions = SVGBoundingBoxOptions::empty()) -> DOMRect {
-  svg_graphics_element_get_b_box_ffi(TJsValue::to_js(self), TJsValue::to_js(options)).unsafe_cast()
+impl TSVGGraphicsElement with get_b_box(
+  self : Self,
+  options? : SVGBoundingBoxOptions = SVGBoundingBoxOptions::empty(),
+) -> DOMRect {
+  svg_graphics_element_get_b_box_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(options),
+  )
 }
 
+///|
 /// [SVGGraphicsElement.getCTM](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getCTM)
 impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix? {
   let result = svg_graphics_element_get_ctm_ffi(TJsValue::to_js(self))
@@ -51,6 +70,7 @@ impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix? {
   }
 }
 
+///|
 /// [SVGGraphicsElement.getScreenCTM](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getScreenCTM)
 impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix? {
   let result = svg_graphics_element_get_screen_ctm_ffi(TJsValue::to_js(self))
@@ -61,12 +81,14 @@ impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix? {
   }
 }
 
+///|
 /// [SVGGraphicsElement.requiredExtensions](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/requiredExtensions)
 impl TSVGGraphicsElement with required_extensions(self : Self) -> SVGStringList {
-  svg_graphics_element_required_extensions_ffi(TJsValue::to_js(self)).unsafe_cast()
+  svg_graphics_element_required_extensions_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [SVGGraphicsElement.systemLanguage](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/systemLanguage)
 impl TSVGGraphicsElement with system_language(self : Self) -> SVGStringList {
-  svg_graphics_element_system_language_ffi(TJsValue::to_js(self)).unsafe_cast()
+  svg_graphics_element_system_language_ffi(TJsValue::to_js(self))
 }

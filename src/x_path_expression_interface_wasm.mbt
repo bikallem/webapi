@@ -1,1 +1,7 @@
-fn x_path_expression_evaluate_ffi(obj: JsValue, context_node: JsValue, type_: JsValue, result: JsValue) -> JsValue = "webapi_XPathExpression" "evaluate"
+///|
+fn x_path_expression_evaluate_ffi(
+  obj : JsValue,
+  context_node : JsValue,
+  type_ : JsValue,
+  result : JsValue,
+) -> XPathResult = "webapi_XPathExpression" "evaluate"

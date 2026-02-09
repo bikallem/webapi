@@ -1,1 +1,7 @@
-extern "js" fn dom_rect_list_length_ffi(obj: JsValue) -> JsValue = "(obj) => obj.length"
+///|
+extern "js" fn dom_rect_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+fn dom_rect_list_length_ffi(obj : JsValue) -> UInt {
+  dom_rect_list_length_ffi_js(obj).unsafe_cast()
+}

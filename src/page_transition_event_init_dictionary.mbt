@@ -2,17 +2,32 @@
 // MoonBit type: PageTransitionEventInit
 // Specifications: dom.idl, html.idl
 
+///|
 /// [PageTransitionEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PageTransitionEventInit)
 #external
 pub type PageTransitionEventInit
 
-pub impl TJsValue for PageTransitionEventInit with to_js(self: PageTransitionEventInit) -> JsValue = "%identity"
+///|
+pub impl TJsValue for PageTransitionEventInit with to_js(
+  self : PageTransitionEventInit,
+) -> JsValue = "%identity"
 
-pub fn PageTransitionEventInit::new(bubbles? : Bool = false, 
-cancelable? : Bool = false, 
-composed? : Bool = false, 
-persisted? : Bool = false) -> PageTransitionEventInit {
-  page_transition_event_init_ffi(TJsValue::to_js(bubbles), TJsValue::to_js(cancelable), TJsValue::to_js(composed), TJsValue::to_js(persisted))
+///|
+pub fn PageTransitionEventInit::new(
+  bubbles? : Bool = false,
+  cancelable? : Bool = false,
+  composed? : Bool = false,
+  persisted? : Bool = false,
+) -> PageTransitionEventInit {
+  page_transition_event_init_ffi(
+    TJsValue::to_js(bubbles),
+    TJsValue::to_js(cancelable),
+    TJsValue::to_js(composed),
+    TJsValue::to_js(persisted),
+  )
 }
 
-pub fn PageTransitionEventInit::empty() -> PageTransitionEventInit { page_transition_event_init_empty_ffi() }
+///|
+pub fn PageTransitionEventInit::empty() -> PageTransitionEventInit {
+  page_transition_event_init_empty_ffi()
+}

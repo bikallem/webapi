@@ -2,23 +2,38 @@
 // MoonBit type: DOMPointReadOnly
 // Specifications: geometry.idl
 
+///|
 /// [DOMPointReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly)
 #external
 pub type DOMPointReadOnly
 
-pub impl TJsValue for DOMPointReadOnly with to_js(self: DOMPointReadOnly) -> JsValue = "%identity"
+///|
+pub impl TJsValue for DOMPointReadOnly with to_js(self : DOMPointReadOnly) -> JsValue = "%identity"
 
-pub fn[T: TDOMPointReadOnly] DOMPointReadOnly::into(self : DOMPointReadOnly) -> T = "%identity"
+///|
+pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(
+  self : DOMPointReadOnly,
+) -> T = "%identity"
 
+///|
 pub impl TDOMPointReadOnly for DOMPointReadOnly
 
-pub fn DOMPointReadOnly::new(x? : Double = (0: Double), 
-y? : Double = (0: Double), 
-z? : Double = (0: Double), 
-w? : Double = (1: Double)) -> DOMPointReadOnly {
-  dom_point_read_only_new_ffi(TJsValue::to_js(x), TJsValue::to_js(y), TJsValue::to_js(z), TJsValue::to_js(w))
+///|
+pub fn DOMPointReadOnly::new(
+  x? : Double = (0 : Double),
+  y? : Double = (0 : Double),
+  z? : Double = (0 : Double),
+  w? : Double = (1 : Double),
+) -> DOMPointReadOnly {
+  dom_point_read_only_new_ffi(
+    TJsValue::to_js(x),
+    TJsValue::to_js(y),
+    TJsValue::to_js(z),
+    TJsValue::to_js(w),
+  )
 }
 
+///|
 /// [DOMPointReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly) interface.
 pub trait TDOMPointReadOnly: TJsValue {
   x(self : Self) -> Double = _
@@ -29,38 +44,52 @@ pub trait TDOMPointReadOnly: TJsValue {
   to_json(self : Self) -> JsValue = _
 }
 
+///|
 /// [DOMPointReadOnly.fromPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/fromPoint)
-pub fn DOMPointReadOnly::from_point(other? : DOMPointInit = DOMPointInit::empty()) -> DOMPointReadOnly {
-  dom_point_read_only_from_point_ffi(TJsValue::to_js(other)).unsafe_cast()
+pub fn DOMPointReadOnly::from_point(
+  other? : DOMPointInit = DOMPointInit::empty(),
+) -> DOMPointReadOnly {
+  dom_point_read_only_from_point_ffi(TJsValue::to_js(other))
 }
 
+///|
 /// [DOMPointReadOnly.x](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/x)
 impl TDOMPointReadOnly with x(self : Self) -> Double {
-  dom_point_read_only_x_ffi(TJsValue::to_js(self)).unsafe_cast()
+  dom_point_read_only_x_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DOMPointReadOnly.y](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/y)
 impl TDOMPointReadOnly with y(self : Self) -> Double {
-  dom_point_read_only_y_ffi(TJsValue::to_js(self)).unsafe_cast()
+  dom_point_read_only_y_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DOMPointReadOnly.z](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/z)
 impl TDOMPointReadOnly with z(self : Self) -> Double {
-  dom_point_read_only_z_ffi(TJsValue::to_js(self)).unsafe_cast()
+  dom_point_read_only_z_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DOMPointReadOnly.w](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/w)
 impl TDOMPointReadOnly with w(self : Self) -> Double {
-  dom_point_read_only_w_ffi(TJsValue::to_js(self)).unsafe_cast()
+  dom_point_read_only_w_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DOMPointReadOnly.matrixTransform](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/matrixTransform)
-impl TDOMPointReadOnly with matrix_transform(self : Self, 
-matrix? : DOMMatrixInit = DOMMatrixInit::empty()) -> DOMPoint {
-  dom_point_read_only_matrix_transform_ffi(TJsValue::to_js(self), TJsValue::to_js(matrix)).unsafe_cast()
+impl TDOMPointReadOnly with matrix_transform(
+  self : Self,
+  matrix? : DOMMatrixInit = DOMMatrixInit::empty(),
+) -> DOMPoint {
+  dom_point_read_only_matrix_transform_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(matrix),
+  )
 }
 
+///|
 /// [DOMPointReadOnly.toJSON](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/toJSON)
 impl TDOMPointReadOnly with to_json(self : Self) -> JsValue {
-  dom_point_read_only_to_json_ffi(TJsValue::to_js(self)).unsafe_cast()
+  dom_point_read_only_to_json_ffi(TJsValue::to_js(self))
 }

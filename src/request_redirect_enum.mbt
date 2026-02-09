@@ -2,13 +2,15 @@
 // MoonBit type: RequestRedirect
 // Specifications: fetch.idl
 
+///|
 pub(all) enum RequestRedirect {
   Follow
   Error
   Manual
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for RequestRedirect with to_js(self: RequestRedirect) -> JsValue {
+///|
+pub impl TJsValue for RequestRedirect with to_js(self : RequestRedirect) -> JsValue {
   match self {
     RequestRedirect::Follow => TJsValue::to_js("follow")
     RequestRedirect::Error => TJsValue::to_js("error")
@@ -16,7 +18,8 @@ pub impl TJsValue for RequestRedirect with to_js(self: RequestRedirect) -> JsVal
   }
 }
 
-pub fn RequestRedirect::from(value: String) -> RequestRedirect? {
+///|
+pub fn RequestRedirect::from(value : String) -> RequestRedirect? {
   match value {
     "follow" => Some(RequestRedirect::Follow)
     "error" => Some(RequestRedirect::Error)

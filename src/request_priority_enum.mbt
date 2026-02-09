@@ -2,13 +2,15 @@
 // MoonBit type: RequestPriority
 // Specifications: fetch.idl
 
+///|
 pub(all) enum RequestPriority {
   High
   Low
   Auto
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for RequestPriority with to_js(self: RequestPriority) -> JsValue {
+///|
+pub impl TJsValue for RequestPriority with to_js(self : RequestPriority) -> JsValue {
   match self {
     RequestPriority::High => TJsValue::to_js("high")
     RequestPriority::Low => TJsValue::to_js("low")
@@ -16,7 +18,8 @@ pub impl TJsValue for RequestPriority with to_js(self: RequestPriority) -> JsVal
   }
 }
 
-pub fn RequestPriority::from(value: String) -> RequestPriority? {
+///|
+pub fn RequestPriority::from(value : String) -> RequestPriority? {
   match value {
     "high" => Some(RequestPriority::High)
     "low" => Some(RequestPriority::Low)

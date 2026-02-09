@@ -1,1 +1,2 @@
-fn file_list_length_ffi(obj: JsValue) -> JsValue = "webapi_FileList" "get_length"
+///|
+fn file_list_length_ffi(obj : JsValue) -> UInt = "webapi_FileList" "get_length"

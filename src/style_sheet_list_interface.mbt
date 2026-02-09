@@ -2,22 +2,28 @@
 // MoonBit type: StyleSheetList
 // Specifications: cssom.idl
 
+///|
 /// [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList)
 #external
 pub type StyleSheetList
 
-pub impl TJsValue for StyleSheetList with to_js(self: StyleSheetList) -> JsValue = "%identity"
+///|
+pub impl TJsValue for StyleSheetList with to_js(self : StyleSheetList) -> JsValue = "%identity"
 
-pub fn[T: TStyleSheetList] StyleSheetList::into(self : StyleSheetList) -> T = "%identity"
+///|
+pub fn[T : TStyleSheetList] StyleSheetList::into(self : StyleSheetList) -> T = "%identity"
 
+///|
 pub impl TStyleSheetList for StyleSheetList
 
+///|
 /// [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList) interface.
 pub trait TStyleSheetList: TJsValue {
   length(self : Self) -> UInt = _
 }
 
+///|
 /// [StyleSheetList.length](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList/length)
 impl TStyleSheetList with length(self : Self) -> UInt {
-  style_sheet_list_length_ffi(TJsValue::to_js(self)).unsafe_cast()
+  style_sheet_list_length_ffi(TJsValue::to_js(self))
 }

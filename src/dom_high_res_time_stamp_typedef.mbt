@@ -2,4 +2,5 @@
 // MoonBit type: DOMHighResTimeStamp
 // Specifications: hr-time.idl
 
+///|
 pub type DOMHighResTimeStamp = Double
