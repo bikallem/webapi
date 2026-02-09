@@ -9,12 +9,21 @@ fn hashset_from_optional(spec : String?) -> @hashset.HashSet[String] {
 }
 
 ///|
+/// Merged namespace with members from all partial namespace definitions.
+pub(all) struct PartialMergedNamespace {
+  name : String
+  members : Array[@parser.NamespaceMemberExtendedAttributes]
+  specs : @hashset.HashSet[String]
+} derive(Show, ToJson)
+
+///|
 /// Visitor that merges partial interfaces, mixins, and dictionaries into their
 /// primary definitions.
 pub struct PartialMerged {
   interfaces : Map[String, PartialMergedInterface]
   mixins : Map[String, PartialMergedMixin]
   dictionaries : Map[String, PartialMergedDictionary]
+  namespaces : Map[String, PartialMergedNamespace]
   enums : Map[String, @parser.EnumDefinition]
   typedefs : Map[String, @parser.TypedefDefinition]
   callback_functions : Map[String, @parser.CallbackFunctionDefinition]
@@ -75,6 +84,26 @@ fn PartialMerged::merge_dictionary(
 }
 
 ///|
+/// Merges namespace members
+fn PartialMerged::merge_namespace(
+  self : PartialMerged,
+  name : String,
+  members : Array[@parser.NamespaceMemberExtendedAttributes],
+  specs : @hashset.HashSet[String],
+) -> Unit {
+  match self.namespaces.get(name) {
+    Some(current) => {
+      current.members.push_iter(members.iter())
+      for s in specs {
+        current.specs.add(s)
+      }
+    }
+    None =>
+      self.namespaces[name] = PartialMergedNamespace::{ name, members, specs }
+  }
+}
+
+///|
 /// Merges partial definitions from filtered IDL definitions
 pub fn merge_partials(
   filtered : Array[@parser.DefinitionExtendedAttributes],
@@ -84,6 +113,7 @@ pub fn merge_partials(
     interfaces: Map::new(),
     mixins: Map::new(),
     dictionaries: Map::new(),
+    namespaces: Map::new(),
     enums: Map::new(),
     typedefs: Map::new(),
     callback_functions: Map::new(),
@@ -140,8 +170,18 @@ pub fn merge_partials(
           hashset_from_optional(def.spec),
         )
       Includes(inc) => partial_merged.include_statements.push(inc)
-      PartialNamespace(_) => logger("Partial namespace not supported")
-      Namespace(_) => logger("Namespace not supported")
+      PartialNamespace(pns) =>
+        partial_merged.merge_namespace(
+          pns.name,
+          pns.members,
+          hashset_from_optional(def.spec),
+        )
+      Namespace(ns) =>
+        partial_merged.merge_namespace(
+          ns.name,
+          ns.members,
+          hashset_from_optional(def.spec),
+        )
     }
   }
   partial_merged

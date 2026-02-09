@@ -122,8 +122,7 @@ fn filter_idl(
         filtered_defns.push(def)
       PartialMixin(pmxn) if !core_interfaces.contains(pmxn.name) =>
         filtered_defns.push(def)
-      Namespace(ns) => logger("Skipped namespace: \{ns.name}")
-      PartialNamespace(pns) => logger("Skipped partial namespace: \{pns.name}")
+      Namespace(_) | PartialNamespace(_) => filtered_defns.push(def)
       Dictionary(dict) if !is_dictionary_prefix_excluded(dict.name) =>
         filtered_defns.push(def)
       PartialDictionary(pdict) if !is_dictionary_prefix_excluded(pdict.name) =>
@@ -292,6 +291,14 @@ fn main {
       js_files,
       wasm_files,
     )
+    let namespace_count = emit_and_write_multi(
+      output_dir,
+      "Namespaces",
+      @emit.NamespaceEmitter::{ idl: flattened, type_registry },
+      flattened.namespaces.keys(),
+      js_files,
+      wasm_files,
+    )
 
     // Generate and write JS runtime for wasm-gc
     println("=== Generating JS Runtime ===")
@@ -320,7 +327,7 @@ fn main {
     }
     println("\n=== Generation complete! ===")
     println(
-      "Generated \{enum_count} enums, \{typedef_count} typedefs, \{dict_count} dictionaries, \{iface_count} interfaces, \{callback_count} callbacks",
+      "Generated \{enum_count} enums, \{typedef_count} typedefs, \{dict_count} dictionaries, \{iface_count} interfaces, \{callback_count} callbacks, \{namespace_count} namespaces",
     )
     println("Output directory: \{output_dir}")
   } catch {

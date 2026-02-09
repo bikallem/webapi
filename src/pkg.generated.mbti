@@ -510,6 +510,11 @@ pub impl TJsValue for CDATASection
 pub impl TNode for CDATASection
 pub impl TText for CDATASection
 
+#external
+pub type CSS
+pub fn CSS::escape(String) -> String
+pub impl TJsValue for CSS
+
 pub(all) enum CSSBoxType {
   Margin
   Border

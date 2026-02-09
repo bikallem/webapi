@@ -6200,5 +6200,9 @@ export const wasmImportObject = {
 
   webapi_XPathNSResolver: {
     new: (f) => f
+  },
+
+  webapi_CSS: {
+    escape: (ident) => CSS.escape(ident)
   }
 };

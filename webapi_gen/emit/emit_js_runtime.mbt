@@ -334,6 +334,71 @@ fn emit_js_callback_module(cb : @parser.CallbackFunctionDefinition) -> String {
 }
 
 ///|
+/// Emit JS method for a namespace (static call with namespace prefix).
+fn emit_js_namespace_method(
+  import_name : String,
+  namespace_name : String,
+  method_name : String,
+  args : Array[@parser.Argument],
+) -> String {
+  let arg_names : Array[String] = []
+  for arg in args {
+    arg_names.push(js_safe(@type_mapping.safe_identifier(arg.name)))
+  }
+  let comma_sep = ", "
+  let params = arg_names.join(comma_sep)
+  let call_args = arg_names.join(comma_sep)
+  "    \{import_name}: (\{params}) => \{namespace_name}.\{method_name}(\{call_args})"
+}
+
+///|
+/// Emit JS getter for a namespace attribute.
+fn emit_js_namespace_getter(
+  namespace_name : String,
+  attr_name : String,
+) -> String {
+  "    get_\{attr_name}: () => \{namespace_name}.\{attr_name}"
+}
+
+///|
+/// Emit a complete JS module for a namespace
+fn emit_js_namespace_module(
+  ns : @partial_merged.PartialMergedNamespace,
+) -> String {
+  let buf = StringBuilder::new()
+  buf.write_string("  webapi_\{ns.name}: {\n")
+  let entries : Array[String] = []
+  let method_counter : Map[String, Int] = {}
+  for m in ns.members {
+    match m.namespace_member {
+      Operation(op) => {
+        let import_name = match method_counter.get(op.name) {
+          None => {
+            method_counter[op.name] = 1
+            op.name
+          }
+          Some(count) => {
+            method_counter[op.name] = count + 1
+            "\{op.name}_\{count + 1}"
+          }
+        }
+        entries.push(
+          emit_js_namespace_method(import_name, ns.name, op.name, op.arguments),
+        )
+      }
+      Attribute(attr) => entries.push(emit_js_namespace_getter(ns.name, attr.name))
+      Const(_) => continue // Constants don't need JS runtime entries
+    }
+  }
+  buf.write_string(entries.join(",\n"))
+  if entries.length() > 0 {
+    buf.write_string("\n")
+  }
+  buf.write_string("  }")
+  buf.to_string()
+}
+
+///|
 /// Emit the complete JS runtime from FlattenedIdl
 pub fn emit_js_runtime(flattened : @flattened_idl.FlattenedIdl) -> String {
   let buf = StringBuilder::new()
@@ -356,6 +421,11 @@ pub fn emit_js_runtime(flattened : @flattened_idl.FlattenedIdl) -> String {
   // Callbacks
   for _name, cb in flattened.callbacks {
     modules.push(emit_js_callback_module(cb))
+  }
+
+  // Namespaces
+  for _name, ns in flattened.namespaces {
+    modules.push(emit_js_namespace_module(ns))
   }
   buf.write_string(modules.join(",\n\n"))
   buf.write_string("\n};\n")

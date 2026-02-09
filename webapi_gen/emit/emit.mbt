@@ -53,6 +53,12 @@ pub struct InterfaceDef {
 } derive(Show, ToJson)
 
 ///|
+pub struct NamespaceDef {
+  name : String
+  methods : Array[&InterfaceMethodEmit]
+} derive(Show, ToJson)
+
+///|
 pub struct EnumVariantEmit {
   variant_name : String
   original_value : String
@@ -74,6 +80,7 @@ pub enum Emit {
   EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
   InterfaceDefinition(InterfaceDef) // eg. trait TEventTarget { ... }
+  NamespaceDefinition(NamespaceDef) // eg. pub fn CSS::escape(ident : String) -> String { ... }
   UnionArgTrait(TraitName) // eg. trait TEventTargetArg { ... }
   UnionArgTraitImpl(TypeName, TraitName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[@type_mapping.MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
@@ -302,6 +309,26 @@ fn render_callback_wasm(
 }
 
 ///|
+fn render_namespace_definition_shared(ns_def : NamespaceDef) -> String {
+  ns_def.methods
+  .map(meth => meth.impl_emit().0)
+  .join("\n\n")
+}
+
+///|
+fn render_namespace_definition_js_ffi(ns_def : NamespaceDef) -> String {
+  ns_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n")
+}
+
+///|
+fn render_namespace_definition_wasm_ffi(ns_def : NamespaceDef) -> String {
+  let module_name = "webapi_\{ns_def.name}"
+  ns_def.methods
+  .map(meth => meth.ffi_emit_wasm(module_name).0)
+  .join("\n\n")
+}
+
+///|
 fn render_interface_definition_shared(interface_def : InterfaceDef) -> String {
   let buf = StringBuilder::new()
   let mdn_url = mdn_interface_url(interface_def.trait_name)
@@ -509,6 +536,11 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         append_shared(render_interface_definition_shared(interface_def))
         append_js(render_interface_definition_js_ffi(interface_def))
         append_wasm(render_interface_definition_wasm_ffi(interface_def))
+      }
+      Emit::NamespaceDefinition(ns_def) => {
+        append_shared(render_namespace_definition_shared(ns_def))
+        append_js(render_namespace_definition_js_ffi(ns_def))
+        append_wasm(render_namespace_definition_wasm_ffi(ns_def))
       }
       Emit::DictionaryCreate(TypeName(type_name), args) => {
         append_shared(render_dictionary_wrapper(type_name, args))

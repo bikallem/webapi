@@ -13,6 +13,7 @@ pub(all) struct FlattenedInterface {
 pub struct FlattenedIdl {
   interfaces : Map[String, FlattenedInterface]
   dictionaries : Map[String, MergedDictionaryIR]
+  namespaces : Map[String, @partial_merged.PartialMergedNamespace]
   enums : Map[String, @parser.EnumDefinition]
   typedefs : Map[String, @parser.TypedefDefinition]
   callbacks : Map[String, @parser.CallbackFunctionDefinition]
@@ -130,6 +131,7 @@ pub fn flatten(
   let merged_idl = FlattenedIdl::{
     interfaces,
     dictionaries,
+    namespaces: partial_merged.namespaces,
     enums: partial_merged.enums,
     typedefs: partial_merged.typedefs,
     callbacks: partial_merged.callback_functions,
