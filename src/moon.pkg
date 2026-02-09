@@ -3,6 +3,7 @@ import {
 }
 
 options(
+  "supported-targets": [ "js", "wasm-gc" ],
   targets: {
     "abort_controller_interface_js.mbt": [ "js" ],
     "abort_controller_interface_wasm.mbt": [ "wasm-gc" ],
