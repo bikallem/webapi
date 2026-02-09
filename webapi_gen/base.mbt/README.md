@@ -13,10 +13,9 @@ Core type representing any JavaScript value. Includes:
 - `opt_to_js()` - Convert `Option[T]` to JsValue
 - `fn_to_js()` - Convert MoonBit functions to JS callbacks
 
-### `js_promise.mbt`
-Promise support for async operations:
-- `JsPromise[T]` - Opaque type for JS Promises
-- `JsPromise::wait()` - Await a promise
+### `async_promise.mbt`
+Promise support via `moonbitlang/async`:
+- `TJsValue` implementation for `@js_async.Promise[T]`
 
 ### `js_array.mbt`
 Array interop:
@@ -39,6 +38,6 @@ The `EventListener` callback interface:
 These types are manually defined rather than auto-generated because:
 
 1. **Foundation types** - `JsValue` and `TJsValue` are the foundation that all generated code depends on
-2. **Special semantics** - Types like `JsPromise` and `JsArray` require special handling
+2. **Special semantics** - Types like `JsArray` require special handling
 3. **Callback interface** - `EventListener` is defined as a "callback interface" in WebIDL, requiring manual implementation for proper function wrapping
 4. **Stability** - These core APIs rarely change and benefit from careful manual design

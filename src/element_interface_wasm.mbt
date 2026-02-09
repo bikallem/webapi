@@ -260,7 +260,7 @@ fn element_scroll_into_view_ffi_wasm(obj : JsValue, arg : JsValue) -> JsValue = 
 fn element_scroll_into_view_ffi(
   obj : JsValue,
   arg : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_into_view_ffi_wasm(obj, arg).unsafe_cast()
 }
 
@@ -268,7 +268,10 @@ fn element_scroll_into_view_ffi(
 fn element_scroll_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scroll"
 
 ///|
-fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
   element_scroll_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -284,7 +287,7 @@ fn element_scroll_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_2_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -292,7 +295,10 @@ fn element_scroll_2_ffi(
 fn element_scroll_to_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollTo"
 
 ///|
-fn element_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_to_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
   element_scroll_to_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -308,7 +314,7 @@ fn element_scroll_to_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_to_2_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -316,7 +322,10 @@ fn element_scroll_to_2_ffi(
 fn element_scroll_by_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollBy"
 
 ///|
-fn element_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_by_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
   element_scroll_by_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -332,7 +341,7 @@ fn element_scroll_by_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_by_2_ffi_wasm(obj, x, y).unsafe_cast()
 }
 

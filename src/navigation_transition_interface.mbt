@@ -26,8 +26,8 @@ pub trait TNavigationTransition: TJsValue {
   navigation_type(self : Self) -> NavigationType = _
   from(self : Self) -> NavigationHistoryEntry = _
   to(self : Self) -> NavigationDestination = _
-  committed(self : Self) -> JsPromise[Unit] = _
-  finished(self : Self) -> JsPromise[Unit] = _
+  committed(self : Self) -> @js_async.Promise[Unit] = _
+  finished(self : Self) -> @js_async.Promise[Unit] = _
 }
 
 ///|
@@ -50,12 +50,14 @@ impl TNavigationTransition with to(self : Self) -> NavigationDestination {
 
 ///|
 /// [NavigationTransition.committed](https://developer.mozilla.org/en-US/docs/Web/API/NavigationTransition/committed)
-impl TNavigationTransition with committed(self : Self) -> JsPromise[Unit] {
+impl TNavigationTransition with committed(self : Self) -> @js_async.Promise[
+  Unit,
+] {
   navigation_transition_committed_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [NavigationTransition.finished](https://developer.mozilla.org/en-US/docs/Web/API/NavigationTransition/finished)
-impl TNavigationTransition with finished(self : Self) -> JsPromise[Unit] {
+impl TNavigationTransition with finished(self : Self) -> @js_async.Promise[Unit] {
   navigation_transition_finished_ffi(TJsValue::to_js(self))
 }

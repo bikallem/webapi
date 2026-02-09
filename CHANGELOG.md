@@ -4,6 +4,7 @@
 
 ### New Features
 
+- **Replace `JsPromise[T]` with `@js_async.Promise[T]`** - Promise-returning WebAPI methods (like `fetch`, `response.text()`, `blob.arrayBuffer()`) now return `@js_async.Promise[T]` from the `moonbitlang/async` package instead of the custom `JsPromise[T]` type. This lets users directly `await` promises using MoonBit's async syntax (`promise.wait()`), with full coroutine-based scheduling and cancellation support via `AbortController`.
 - **Add wasm-gc target support** - The library now compiles for both `--target js` and `--target wasm-gc`. Each generated interface produces three files: shared code, JS FFI (`_js.mbt`), and wasm-gc FFI (`_wasm.mbt`), wired together via MoonBit conditional compilation (`targets` in `moon.pkg`).
 - **Generate `webapi.mjs` JS runtime** - A JavaScript module is generated that provides the wasm import object for all interfaces, dictionaries, callbacks, primitives, and globals. Used to instantiate the wasm module at runtime.
 - **Add wasm-gc canvas example** - A working example (`examples/counter/counter.wasm.html`) demonstrating wasm-gc compilation with the generated bindings.
@@ -20,8 +21,9 @@
 
 ### Examples & Testing
 
+- **Add fetch example** - JS-only async/await demo using `@js_async.Promise::wait()` to fetch from user-entered URLs, with status, headers, and body display.
 - **Add 6 new examples** - dom, events, url, classlist, element-ops, and forms examples, each with both JS and wasm-gc HTML entry points.
-- **Add Playwright integration tests** - 66 tests covering all 8 examples (canvas, counter, + 6 new) across both JS and wasm-gc targets.
+- **Add Playwright integration tests** - 69 tests covering all 9 examples (canvas, counter, fetch, + 6 new) across JS and wasm-gc targets.
 - **Add CI workflow** - GitHub Actions workflow with type checking (js + wasm-gc), unit tests, example builds, and Playwright tests.
 - **Update GitHub Pages deployment** - Deploy all 8 examples instead of just canvas and counter.
 

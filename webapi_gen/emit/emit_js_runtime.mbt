@@ -59,12 +59,6 @@ fn emit_js_preamble() -> String {
     #|    push: (arr, value) => arr.push(value)
     #|  },
     #|
-    #|  JsPromise: {
-    #|    await: (promise) => promise,
-    #|    resolve: (value) => Promise.resolve(value),
-    #|    reject: (error) => Promise.reject(error)
-    #|  },
-    #|
     #|  webapi_Dictionary: {
     #|    empty: () => ({})
     #|  },

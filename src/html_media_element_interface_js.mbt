@@ -271,7 +271,7 @@ extern "js" fn html_media_element_set_loop_ffi(
 extern "js" fn html_media_element_play_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.play()"
 
 ///|
-fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[Unit] {
+fn html_media_element_play_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
   html_media_element_play_ffi_js(obj).unsafe_cast()
 }
 

@@ -32,7 +32,7 @@ fn blob_stream_ffi(obj : JsValue) -> ReadableStream {
 fn blob_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "text"
 
 ///|
-fn blob_text_ffi(obj : JsValue) -> JsPromise[String] {
+fn blob_text_ffi(obj : JsValue) -> @js_async.Promise[String] {
   blob_text_ffi_wasm(obj).unsafe_cast()
 }
 
@@ -40,7 +40,7 @@ fn blob_text_ffi(obj : JsValue) -> JsPromise[String] {
 fn blob_array_buffer_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "arrayBuffer"
 
 ///|
-fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+fn blob_array_buffer_ffi(obj : JsValue) -> @js_async.Promise[ArrayBuffer] {
   blob_array_buffer_ffi_wasm(obj).unsafe_cast()
 }
 
@@ -48,6 +48,6 @@ fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
 fn blob_bytes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "bytes"
 
 ///|
-fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+fn blob_bytes_ffi(obj : JsValue) -> @js_async.Promise[Uint8Array] {
   blob_bytes_ffi_wasm(obj).unsafe_cast()
 }

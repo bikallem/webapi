@@ -82,7 +82,7 @@ fn request_body_used_ffi(obj : JsValue) -> Bool = "webapi_Request" "get_bodyUsed
 fn request_array_buffer_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "arrayBuffer"
 
 ///|
-fn request_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+fn request_array_buffer_ffi(obj : JsValue) -> @js_async.Promise[ArrayBuffer] {
   request_array_buffer_ffi_wasm(obj).unsafe_cast()
 }
 
@@ -90,7 +90,7 @@ fn request_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
 fn request_blob_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "blob"
 
 ///|
-fn request_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
+fn request_blob_ffi(obj : JsValue) -> @js_async.Promise[Blob] {
   request_blob_ffi_wasm(obj).unsafe_cast()
 }
 
@@ -98,7 +98,7 @@ fn request_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
 fn request_bytes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "bytes"
 
 ///|
-fn request_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+fn request_bytes_ffi(obj : JsValue) -> @js_async.Promise[Uint8Array] {
   request_bytes_ffi_wasm(obj).unsafe_cast()
 }
 
@@ -106,7 +106,7 @@ fn request_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
 fn request_form_data_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "formData"
 
 ///|
-fn request_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
+fn request_form_data_ffi(obj : JsValue) -> @js_async.Promise[FormData] {
   request_form_data_ffi_wasm(obj).unsafe_cast()
 }
 
@@ -114,7 +114,7 @@ fn request_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
 fn request_json_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "json"
 
 ///|
-fn request_json_ffi(obj : JsValue) -> JsPromise[JsValue] {
+fn request_json_ffi(obj : JsValue) -> @js_async.Promise[JsValue] {
   request_json_ffi_wasm(obj).unsafe_cast()
 }
 
@@ -122,6 +122,6 @@ fn request_json_ffi(obj : JsValue) -> JsPromise[JsValue] {
 fn request_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "text"
 
 ///|
-fn request_text_ffi(obj : JsValue) -> JsPromise[String] {
+fn request_text_ffi(obj : JsValue) -> @js_async.Promise[String] {
   request_text_ffi_wasm(obj).unsafe_cast()
 }

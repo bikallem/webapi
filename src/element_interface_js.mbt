@@ -425,7 +425,7 @@ extern "js" fn element_scroll_into_view_ffi_js(
 fn element_scroll_into_view_ffi(
   obj : JsValue,
   arg : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_into_view_ffi_js(obj, arg).unsafe_cast()
 }
 
@@ -436,7 +436,10 @@ extern "js" fn element_scroll_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scroll(options)"
 
 ///|
-fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
   element_scroll_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -452,7 +455,7 @@ fn element_scroll_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_2_ffi_js(obj, x, y).unsafe_cast()
 }
 
@@ -463,7 +466,10 @@ extern "js" fn element_scroll_to_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scrollTo(options)"
 
 ///|
-fn element_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_to_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
   element_scroll_to_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -479,7 +485,7 @@ fn element_scroll_to_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_to_2_ffi_js(obj, x, y).unsafe_cast()
 }
 
@@ -490,7 +496,10 @@ extern "js" fn element_scroll_by_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scrollBy(options)"
 
 ///|
-fn element_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_by_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
   element_scroll_by_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -506,7 +515,7 @@ fn element_scroll_by_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   element_scroll_by_2_ffi_js(obj, x, y).unsafe_cast()
 }
 

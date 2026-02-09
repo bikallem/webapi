@@ -1,6 +1,6 @@
 ///|
 pub fn NavigationInterceptHandler::new(
-  f : () -> JsPromise[Unit],
+  f : () -> @js_async.Promise[Unit],
 ) -> NavigationInterceptHandler {
   navigation_intercept_handler_ffi(js_of(f)).unsafe_cast()
 }

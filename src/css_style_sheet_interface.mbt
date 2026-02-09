@@ -33,7 +33,7 @@ pub trait TCSSStyleSheet: TStyleSheet {
   css_rules(self : Self) -> CSSRuleList = _
   insert_rule(self : Self, rule : CSSOMString, index? : UInt) -> UInt = _
   delete_rule(self : Self, index : UInt) -> Unit = _
-  replace(self : Self, text : String) -> JsPromise[CSSStyleSheet] = _
+  replace(self : Self, text : String) -> @js_async.Promise[CSSStyleSheet] = _
   replace_sync(self : Self, text : String) -> Unit = _
   rules(self : Self) -> CSSRuleList = _
   add_rule(self : Self, selector? : String, style? : String, index? : UInt) -> Int = _
@@ -74,7 +74,7 @@ impl TCSSStyleSheet with delete_rule(self : Self, index : UInt) -> Unit {
 
 ///|
 /// [CSSStyleSheet.replace](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/replace)
-impl TCSSStyleSheet with replace(self : Self, text : String) -> JsPromise[
+impl TCSSStyleSheet with replace(self : Self, text : String) -> @js_async.Promise[
   CSSStyleSheet,
 ] {
   css_style_sheet_replace_ffi(TJsValue::to_js(self), TJsValue::to_js(text))

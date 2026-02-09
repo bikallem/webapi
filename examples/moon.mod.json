@@ -9,7 +9,8 @@
     "deps": {
         "bikallem/webapi": {
             "path": "../"
-        }
+        },
+        "moonbitlang/async": "0.16.5"
     },
     "preferred-target": "js"
 }

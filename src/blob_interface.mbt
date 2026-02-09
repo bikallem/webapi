@@ -31,9 +31,9 @@ pub trait TBlob: TJsValue {
   type_(self : Self) -> String = _
   slice(self : Self, start? : Int64, end? : Int64, content_type? : String) -> Blob = _
   stream(self : Self) -> ReadableStream = _
-  text(self : Self) -> JsPromise[String] = _
-  array_buffer(self : Self) -> JsPromise[ArrayBuffer] = _
-  bytes(self : Self) -> JsPromise[Uint8Array] = _
+  text(self : Self) -> @js_async.Promise[String] = _
+  array_buffer(self : Self) -> @js_async.Promise[ArrayBuffer] = _
+  bytes(self : Self) -> @js_async.Promise[Uint8Array] = _
 }
 
 ///|
@@ -72,18 +72,18 @@ impl TBlob with stream(self : Self) -> ReadableStream {
 
 ///|
 /// [Blob.text](https://developer.mozilla.org/en-US/docs/Web/API/Blob/text)
-impl TBlob with text(self : Self) -> JsPromise[String] {
+impl TBlob with text(self : Self) -> @js_async.Promise[String] {
   blob_text_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Blob.arrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/Blob/arrayBuffer)
-impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
+impl TBlob with array_buffer(self : Self) -> @js_async.Promise[ArrayBuffer] {
   blob_array_buffer_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Blob.bytes](https://developer.mozilla.org/en-US/docs/Web/API/Blob/bytes)
-impl TBlob with bytes(self : Self) -> JsPromise[Uint8Array] {
+impl TBlob with bytes(self : Self) -> @js_async.Promise[Uint8Array] {
   blob_bytes_ffi(TJsValue::to_js(self))
 }

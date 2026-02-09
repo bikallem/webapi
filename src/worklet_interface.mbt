@@ -19,7 +19,7 @@ pub impl TWorklet for Worklet
 ///|
 /// [Worklet](https://developer.mozilla.org/en-US/docs/Web/API/Worklet) interface.
 pub trait TWorklet: TJsValue {
-  add_module(self : Self, module_url : String, options? : WorkletOptions) -> JsPromise[
+  add_module(self : Self, module_url : String, options? : WorkletOptions) -> @js_async.Promise[
     Unit,
   ] = _
 }
@@ -30,7 +30,7 @@ impl TWorklet with add_module(
   self : Self,
   module_url : String,
   options? : WorkletOptions = WorkletOptions::empty(),
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   worklet_add_module_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(module_url),

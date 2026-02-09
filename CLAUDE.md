@@ -50,7 +50,7 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 - `partial_merged/` - Merges partial interfaces/dictionaries/mixins
 - `type_registry/` - Tracks type relationships and mappings
 - `emit/` - Code emitters (interfaces, enums, methods, JS runtime)
-- `base.mbt/` - Core FFI types (`JsValue`, `JsPromise`, etc.) copied to output
+- `base.mbt/` - Core FFI types (`JsValue`, etc.) copied to output
 - `config/` - Configuration from `config.toml`
 
 **src/** - Generated bindings (DO NOT EDIT DIRECTLY):
@@ -63,7 +63,6 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 
 - `JsValue` - Opaque type for any JavaScript value
 - `TJsValue` - Trait all JS-interop types must implement
-- `JsPromise[T]` - Promise wrapper for async operations
 - `JsArray` - JavaScript array interop
 - `EventListener` - Callback interface for event handlers
 
@@ -78,7 +77,7 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 | `double`, `float` | `Double`, `Float` |
 | `any`, `object` | `JsValue` |
 | `sequence<T>` | `Array[T]` |
-| `Promise<T>` | `JsPromise[T]` |
+| `Promise<T>` | `@js_async.Promise[T]` |
 | Nullable `T?` | `T?` (Option) |
 
 ## FFI Pattern

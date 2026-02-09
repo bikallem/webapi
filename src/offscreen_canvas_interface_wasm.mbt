@@ -36,7 +36,7 @@ fn offscreen_canvas_convert_to_blob_ffi_wasm(
 fn offscreen_canvas_convert_to_blob_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Blob] {
+) -> @js_async.Promise[Blob] {
   offscreen_canvas_convert_to_blob_ffi_wasm(obj, options).unsafe_cast()
 }
 

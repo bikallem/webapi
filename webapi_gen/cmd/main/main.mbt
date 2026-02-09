@@ -148,6 +148,9 @@ fn generate_moon_pkg(
   wasm_files : Array[String],
 ) -> String {
   let buf = StringBuilder::new()
+  buf.write_string("import {\n")
+  buf.write_string("  \"moonbitlang/async/js_async\",\n")
+  buf.write_string("}\n\n")
   buf.write_string("options(\n")
   buf.write_string("  targets: {")
   let entries : Array[String] = []

@@ -10,6 +10,6 @@ fn worklet_add_module_ffi(
   obj : JsValue,
   module_url : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] {
+) -> @js_async.Promise[Unit] {
   worklet_add_module_ffi_wasm(obj, module_url, options).unsafe_cast()
 }

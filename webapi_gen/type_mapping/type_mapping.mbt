@@ -279,7 +279,7 @@ pub fn arg_mbt_type(
           type_.name()
         }
         emits.push_iter(emits_.iter())
-        ArgMbtType::Other("JsPromise[\{type_name}]")
+        ArgMbtType::Other("@js_async.Promise[\{type_name}]")
       }
 
       // Union type

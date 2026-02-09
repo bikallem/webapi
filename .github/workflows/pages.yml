@@ -41,7 +41,7 @@ jobs:
       - name: Prepare deployment directory
         run: |
           mkdir -p _site
-          EXAMPLES="canvas classlist counter dom element-ops events forms url"
+          EXAMPLES="canvas classlist counter dom element-ops events fetch forms url"
           for ex in $EXAMPLES; do
             mkdir -p "_site/$ex"
             # Copy JS build output
@@ -82,6 +82,7 @@ jobs:
                   <li><a href="dom/">DOM</a></li>
                   <li><a href="element-ops/">Element Operations</a></li>
                   <li><a href="events/">Events</a></li>
+                  <li><a href="fetch/">Fetch</a></li>
                   <li><a href="forms/">Forms</a></li>
                   <li><a href="url/">URL</a></li>
               </ul>

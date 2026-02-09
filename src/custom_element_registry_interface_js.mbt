@@ -44,7 +44,7 @@ extern "js" fn custom_element_registry_when_defined_ffi_js(
 fn custom_element_registry_when_defined_ffi(
   obj : JsValue,
   name : JsValue,
-) -> JsPromise[CustomElementConstructor] {
+) -> @js_async.Promise[CustomElementConstructor] {
   custom_element_registry_when_defined_ffi_js(obj, name).unsafe_cast()
 }
 

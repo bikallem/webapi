@@ -3,15 +3,20 @@ package "bikallem/webapi_gen/emit"
 
 import {
   "bikallem/webapi_gen/flattened_idl",
+  "bikallem/webapi_gen/type_mapping",
   "bikallem/webapi_gen/type_registry",
 }
 
 // Values
 pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
 
+pub fn[E : Emitter] emit_all_multi(E, Iter[String]) -> MultiTargetFiles
+
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
 pub fn mbt_code_gen(Array[Emit]) -> String
+
+pub fn mbt_code_gen_multi(Array[Emit]) -> MultiTargetCode
 
 pub fn mdn_interface_url(String) -> String
 
@@ -20,20 +25,6 @@ pub fn mdn_member_url(String, String) -> String
 // Errors
 
 // Types and methods
-pub enum ArgMbtType {
-  Self
-  Other(String)
-  Primitive(String)
-  Union(UnionType)
-  Interface(String)
-  Enum(String)
-  Dictionary(String)
-}
-pub impl Eq for ArgMbtType
-pub impl Hash for ArgMbtType
-pub impl Show for ArgMbtType
-pub impl ToJson for ArgMbtType
-
 type AttributeGetMethodEmit
 pub impl Show for AttributeGetMethodEmit
 pub impl ToJson for AttributeGetMethodEmit
@@ -85,8 +76,8 @@ pub enum Emit {
   InterfaceDefinition(InterfaceDef)
   UnionArgTrait(TraitName)
   UnionArgTraitImpl(TypeName, TraitName)
-  DictionaryCreate(TypeName, Array[MethodArg])
-  ConstructorMethod(ConstructorName, TypeName, Array[MethodArg])
+  DictionaryCreate(TypeName, Array[@type_mapping.MethodArg])
+  ConstructorMethod(ConstructorName, TypeName, Array[@type_mapping.MethodArg])
   Enum(TypeName, Array[EnumVariantEmit])
   TypedefAlias(TypeName, String)
   Callback(TypeName, Array[CallbackArgEmit], TypeName)
@@ -132,22 +123,17 @@ pub(all) struct InterfaceEmitter {
 }
 pub impl Emitter for InterfaceEmitter
 
-pub struct MethodArg {
-  name : String
-  original_name : String
-  type_ : ArgMbtType
-  optional : Bool
-  default_value : String?
+pub(all) struct MultiTargetCode {
+  shared : String
+  js_ffi : String
+  wasm_ffi : String
 }
-pub impl Show for MethodArg
-pub impl ToJson for MethodArg
 
-pub struct MethodReturn {
-  type_ : ArgMbtType
-  optional : Bool
+pub(all) struct MultiTargetFiles {
+  shared : Map[Filename, Code]
+  js_ffi : Map[Filename, Code]
+  wasm_ffi : Map[Filename, Code]
 }
-pub impl Show for MethodReturn
-pub impl ToJson for MethodReturn
 
 type RegularMethodEmit
 pub impl Show for RegularMethodEmit
@@ -178,16 +164,6 @@ pub(all) struct TypedefEmitter {
   type_registry : @type_registry.TypeRegistry
 }
 pub impl Emitter for TypedefEmitter
-
-pub struct UnionType {
-  name : String
-  has_undefined : Bool
-  options : Array[ArgMbtType]
-}
-pub impl Eq for UnionType
-pub impl Hash for UnionType
-pub impl Show for UnionType
-pub impl ToJson for UnionType
 
 // Type aliases
 

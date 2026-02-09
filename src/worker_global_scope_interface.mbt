@@ -80,7 +80,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     self : Self,
     image : ImageBitmapSource,
     options? : ImageBitmapOptions,
-  ) -> JsPromise[ImageBitmap] = _
+  ) -> @js_async.Promise[ImageBitmap] = _
   create_image_bitmap_2(
     self : Self,
     image : ImageBitmapSource,
@@ -89,13 +89,13 @@ pub trait TWorkerGlobalScope: TEventTarget {
     sw : Int,
     sh : Int,
     options? : ImageBitmapOptions,
-  ) -> JsPromise[ImageBitmap] = _
+  ) -> @js_async.Promise[ImageBitmap] = _
   structured_clone(
     self : Self,
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
-  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> JsPromise[
+  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> @js_async.Promise[
     Response,
   ] = _
   performance(self : Self) -> Performance = _
@@ -341,7 +341,7 @@ impl TWorkerGlobalScope with create_image_bitmap(
   self : Self,
   image : ImageBitmapSource,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsPromise[ImageBitmap] {
+) -> @js_async.Promise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
@@ -359,7 +359,7 @@ impl TWorkerGlobalScope with create_image_bitmap_2(
   sw : Int,
   sh : Int,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> JsPromise[ImageBitmap] {
+) -> @js_async.Promise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
@@ -391,7 +391,7 @@ impl TWorkerGlobalScope with fetch(
   self : Self,
   input : RequestInfo,
   init? : RequestInit = RequestInit::empty(),
-) -> JsPromise[Response] {
+) -> @js_async.Promise[Response] {
   worker_global_scope_fetch_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(input),
