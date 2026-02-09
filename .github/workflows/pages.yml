@@ -36,21 +36,25 @@ jobs:
 
       - name: Build examples
         working-directory: examples
-        run: moon build --target js
+        run: moon build --target js --release
 
       - name: Prepare deployment directory
         run: |
           mkdir -p _site
-
-          # Copy canvas example
-          mkdir -p _site/canvas
-          cp examples/canvas/canvas.html _site/canvas/index.html
-          cp examples/target/js/release/build/canvas/canvas.js _site/canvas/
-
-          # Copy counter example
-          mkdir -p _site/counter
-          cp examples/counter/counter.js.html _site/counter/index.html
-          cp examples/target/js/release/build/counter/counter.js _site/counter/
+          EXAMPLES="canvas classlist counter dom element-ops events forms url"
+          for ex in $EXAMPLES; do
+            mkdir -p "_site/$ex"
+            # Copy JS build output
+            cp "examples/target/js/release/build/$ex/$ex.js" "_site/$ex/"
+            # Copy JS HTML file, fixing the script path
+            if [ -f "examples/$ex/$ex.js.html" ]; then
+              sed "s|../target/js/release/build/$ex/$ex.js|$ex.js|g" \
+                "examples/$ex/$ex.js.html" > "_site/$ex/index.html"
+            elif [ -f "examples/$ex/canvas.html" ]; then
+              sed "s|../target/js/release/build/$ex/$ex.js|$ex.js|g" \
+                "examples/$ex/canvas.html" > "_site/$ex/index.html"
+            fi
+          done
 
           # Create index page
           cat > _site/index.html << 'EOF'
@@ -61,53 +65,29 @@ jobs:
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <title>MoonBit WebAPI Examples</title>
               <style>
-                  body {
-                      font-family: system-ui, -apple-system, sans-serif;
-                      max-width: 800px;
-                      margin: 0 auto;
-                      padding: 2rem;
-                      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-                      min-height: 100vh;
-                      color: #fff;
-                  }
-                  h1 {
-                      font-weight: 300;
-                      letter-spacing: 2px;
-                  }
-                  ul {
-                      list-style: none;
-                      padding: 0;
-                  }
-                  li {
-                      margin: 1rem 0;
-                  }
-                  a {
-                      color: #64b5f6;
-                      text-decoration: none;
-                      font-size: 1.2rem;
-                  }
-                  a:hover {
-                      text-decoration: underline;
-                  }
+                  body { font-family: system-ui; max-width: 800px; margin: 0 auto; padding: 2rem; }
+                  h1 { font-weight: 300; letter-spacing: 2px; }
+                  ul { list-style: none; padding: 0; }
+                  li { margin: 1rem 0; }
+                  a { color: #4a90d9; text-decoration: none; font-size: 1.1rem; }
+                  a:hover { text-decoration: underline; }
               </style>
           </head>
           <body>
-              <h1>🌙 MoonBit WebAPI Examples</h1>
+              <h1>MoonBit WebAPI Examples</h1>
               <ul>
-                  <li><a href="canvas/">🎨 Canvas Demo</a></li>
-                  <li><a href="counter/">🔢 Counter Demo</a></li>
+                  <li><a href="canvas/">Canvas</a></li>
+                  <li><a href="classlist/">ClassList</a></li>
+                  <li><a href="counter/">Counter</a></li>
+                  <li><a href="dom/">DOM</a></li>
+                  <li><a href="element-ops/">Element Operations</a></li>
+                  <li><a href="events/">Events</a></li>
+                  <li><a href="forms/">Forms</a></li>
+                  <li><a href="url/">URL</a></li>
               </ul>
           </body>
           </html>
           EOF
-
-      - name: Fix script paths in HTML
-        run: |
-          # Update canvas HTML to use local path
-          sed -i 's|../target/js/release/build/canvas/canvas.js|canvas.js|g' _site/canvas/index.html
-
-          # Update counter HTML to use local path
-          sed -i 's|../target/js/release/build/counter/counter.js|counter.js|g' _site/counter/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

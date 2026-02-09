@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <title>URL Example (wasm-gc)</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { wasmImportObject } from "../../src/webapi.mjs";
+        const { instance } = await WebAssembly.instantiateStreaming(
+            fetch("../target/wasm-gc/release/build/url/url.wasm"),
+            wasmImportObject,
+            { builtins: ["js-string"], importedStringConstants: "_" }
+        );
+        instance.exports._start();
+    </script>
+</body>
+</html>

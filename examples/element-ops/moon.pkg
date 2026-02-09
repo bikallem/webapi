@@ -1,0 +1,14 @@
+import {
+  "bikallem/webapi",
+}
+
+options(
+  "is-main": true,
+  link: {
+    "wasm-gc": {
+      "imported-string-constants": "_",
+      "use-js-builtin-string": true,
+    },
+  },
+  "supported-targets": [ "js", "wasm-gc" ],
+)
