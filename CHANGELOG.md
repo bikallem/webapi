@@ -18,6 +18,17 @@
 - **Disambiguate overloaded methods in JS runtime** - Overloaded WebIDL methods (e.g., `fill` with different arities) now use suffixed import names (`fill`, `fill_2`) to avoid silent JS object key collisions.
 - **Fix `is_undefined` using correct JS check** - Uses `value === undefined` instead of the null check.
 
+### Examples & Testing
+
+- **Add 6 new examples** - dom, events, url, classlist, element-ops, and forms examples, each with both JS and wasm-gc HTML entry points.
+- **Add Playwright integration tests** - 66 tests covering all 8 examples (canvas, counter, + 6 new) across both JS and wasm-gc targets.
+- **Add CI workflow** - GitHub Actions workflow with type checking (js + wasm-gc), unit tests, example builds, and Playwright tests.
+- **Update GitHub Pages deployment** - Deploy all 8 examples instead of just canvas and counter.
+
+### Known Issues
+
+- **`dispatch_event` with trait objects on wasm-gc** - Passing an `#external` type as a trait object (`&TEvent`) produces invalid wasm-gc code (`type error in fallthru[0] (expected (ref N), got externref)`). This is a MoonBit compiler bug ([moonbitlang/moonbit-docs#1123](https://github.com/moonbitlang/moonbit-docs/issues/1123)). Workaround: avoid `dispatch_event` on wasm-gc target.
+
 ### Code Generator Improvements
 
 - **Three-file split architecture** - `InterfaceMethodEmit` trait gains `ffi_emit_js()` and `ffi_emit_wasm()` methods. `mbt_code_gen_multi()` routes emit variants to shared/JS/wasm buffers.
