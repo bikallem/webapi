@@ -265,10 +265,12 @@ export const wasmImportObject = {
     get_numberOfItems: (obj) => obj.numberOfItems,
     clear: (obj) => obj.clear(),
     initialize: (obj, new_item) => obj.initialize(new_item),
+    getItem: (obj, index) => obj.getItem(index),
     insertItemBefore: (obj, new_item, index) => obj.insertItemBefore(new_item, index),
     replaceItem: (obj, new_item, index) => obj.replaceItem(new_item, index),
     removeItem: (obj, index) => obj.removeItem(index),
-    appendItem: (obj, new_item) => obj.appendItem(new_item)
+    appendItem: (obj, new_item) => obj.appendItem(new_item),
+    set: (obj, index, new_item) => { obj[index] = new_item; }
   },
 
   webapi_SVGLengthList: {
@@ -276,10 +278,12 @@ export const wasmImportObject = {
     get_numberOfItems: (obj) => obj.numberOfItems,
     clear: (obj) => obj.clear(),
     initialize: (obj, new_item) => obj.initialize(new_item),
+    getItem: (obj, index) => obj.getItem(index),
     insertItemBefore: (obj, new_item, index) => obj.insertItemBefore(new_item, index),
     replaceItem: (obj, new_item, index) => obj.replaceItem(new_item, index),
     removeItem: (obj, index) => obj.removeItem(index),
-    appendItem: (obj, new_item) => obj.appendItem(new_item)
+    appendItem: (obj, new_item) => obj.appendItem(new_item),
+    set: (obj, index, new_item) => { obj[index] = new_item; }
   },
 
   webapi_SVGStringList: {
@@ -287,10 +291,12 @@ export const wasmImportObject = {
     get_numberOfItems: (obj) => obj.numberOfItems,
     clear: (obj) => obj.clear(),
     initialize: (obj, new_item) => obj.initialize(new_item),
+    getItem: (obj, index) => obj.getItem(index),
     insertItemBefore: (obj, new_item, index) => obj.insertItemBefore(new_item, index),
     replaceItem: (obj, new_item, index) => obj.replaceItem(new_item, index),
     removeItem: (obj, index) => obj.removeItem(index),
-    appendItem: (obj, new_item) => obj.appendItem(new_item)
+    appendItem: (obj, new_item) => obj.appendItem(new_item),
+    set: (obj, index, new_item) => { obj[index] = new_item; }
   },
 
   webapi_SVGAnimatedBoolean: {
@@ -589,6 +595,7 @@ export const wasmImportObject = {
     createNodeIterator: (obj, root, what_to_show, filter) => obj.createNodeIterator(root, what_to_show, filter),
     createTreeWalker: (obj, root, what_to_show, filter) => obj.createTreeWalker(root, what_to_show, filter),
     parseHTMLUnsafe: (html) => parseHTMLUnsafe(html),
+    get: (obj, name) => obj[name],
     getElementsByName: (obj, element_name) => obj.getElementsByName(element_name),
     open: (obj, unused1, unused2) => obj.open(unused1, unused2),
     open_2: (obj, url, name, features) => obj.open(url, name, features),
@@ -755,10 +762,12 @@ export const wasmImportObject = {
     get_numberOfItems: (obj) => obj.numberOfItems,
     clear: (obj) => obj.clear(),
     initialize: (obj, new_item) => obj.initialize(new_item),
+    getItem: (obj, index) => obj.getItem(index),
     insertItemBefore: (obj, new_item, index) => obj.insertItemBefore(new_item, index),
     replaceItem: (obj, new_item, index) => obj.replaceItem(new_item, index),
     removeItem: (obj, index) => obj.removeItem(index),
     appendItem: (obj, new_item) => obj.appendItem(new_item),
+    set: (obj, index, new_item) => { obj[index] = new_item; },
     createSVGTransformFromMatrix: (obj, matrix) => obj.createSVGTransformFromMatrix(matrix),
     consolidate: (obj) => obj.consolidate()
   },
@@ -814,10 +823,12 @@ export const wasmImportObject = {
     get_numberOfItems: (obj) => obj.numberOfItems,
     clear: (obj) => obj.clear(),
     initialize: (obj, new_item) => obj.initialize(new_item),
+    getItem: (obj, index) => obj.getItem(index),
     insertItemBefore: (obj, new_item, index) => obj.insertItemBefore(new_item, index),
     replaceItem: (obj, new_item, index) => obj.replaceItem(new_item, index),
     removeItem: (obj, index) => obj.removeItem(index),
-    appendItem: (obj, new_item) => obj.appendItem(new_item)
+    appendItem: (obj, new_item) => obj.appendItem(new_item),
+    set: (obj, index, new_item) => { obj[index] = new_item; }
   },
 
   webapi_SVGPolylineElement: {
@@ -1259,6 +1270,7 @@ export const wasmImportObject = {
     focus: (obj) => obj.focus(),
     blur: (obj) => obj.blur(),
     open: (obj, url, target, features) => obj.open(url, target, features),
+    get: (obj, name) => obj[name],
     alert: (obj) => obj.alert(),
     alert_2: (obj, message) => obj.alert(message),
     confirm: (obj, message) => obj.confirm(message),
@@ -1328,11 +1340,14 @@ export const wasmImportObject = {
   },
 
   webapi_NodeList: {
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index)
   },
 
   webapi_HTMLCollection: {
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index),
+    namedItem: (obj, name) => obj.namedItem(name)
   },
 
   webapi_MutationObserver: {
@@ -1536,6 +1551,8 @@ export const wasmImportObject = {
 
   webapi_NamedNodeMap: {
     get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index),
+    getNamedItem: (obj, qualified_name) => obj.getNamedItem(qualified_name),
     getNamedItemNS: (obj, namespace_, local_name) => obj.getNamedItemNS(namespace_, local_name),
     setNamedItem: (obj, attr) => obj.setNamedItem(attr),
     setNamedItemNS: (obj, attr) => obj.setNamedItemNS(attr),
@@ -1664,6 +1681,7 @@ export const wasmImportObject = {
     get_length: (obj) => obj.length,
     get_value: (obj) => obj.value,
     set_value: (obj, value) => { obj.value = value; },
+    item: (obj, index) => obj.item(index),
     contains: (obj, token) => obj.contains(token),
     add: (obj, tokens) => obj.add(tokens),
     remove: (obj, tokens) => obj.remove(tokens),
@@ -1819,10 +1837,13 @@ export const wasmImportObject = {
 
   webapi_HTMLAllCollection: {
     get_length: (obj) => obj.length,
+    get: (obj, index) => obj[index],
+    namedItem: (obj, name) => obj.namedItem(name),
     item: (obj, name_or_index) => obj.item(name_or_index)
   },
 
   webapi_HTMLFormControlsCollection: {
+    namedItem: (obj, name) => obj.namedItem(name)
   },
 
   webapi_RadioNodeList: {
@@ -1835,12 +1856,14 @@ export const wasmImportObject = {
     set_length: (obj, value) => { obj.length = value; },
     get_selectedIndex: (obj) => obj.selectedIndex,
     set_selectedIndex: (obj, value) => { obj.selectedIndex = value; },
+    set: (obj, index, option) => { obj[index] = option; },
     add: (obj, element, before) => obj.add(element, before),
     remove: (obj, index) => obj.remove(index)
   },
 
   webapi_DOMStringList: {
     get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index),
     contains: (obj, string) => obj.contains(string)
   },
 
@@ -2067,6 +2090,9 @@ export const wasmImportObject = {
   },
 
   webapi_DOMStringMap: {
+    get: (obj, name) => obj[name],
+    set: (obj, name, value) => { obj[name] = value; },
+    delete_: (obj, name) => { delete obj[name]; }
   },
 
   webapi_HTMLHtmlElement: {
@@ -2650,6 +2676,7 @@ export const wasmImportObject = {
     set_onaddtrack: (obj, value) => { obj.onaddtrack = value; },
     get_onremovetrack: (obj) => obj.onremovetrack,
     set_onremovetrack: (obj, value) => { obj.onremovetrack = value; },
+    get: (obj, index) => obj[index],
     getTrackById: (obj, id) => obj.getTrackById(id)
   },
 
@@ -2671,6 +2698,7 @@ export const wasmImportObject = {
     set_onaddtrack: (obj, value) => { obj.onaddtrack = value; },
     get_onremovetrack: (obj) => obj.onremovetrack,
     set_onremovetrack: (obj, value) => { obj.onremovetrack = value; },
+    get: (obj, index) => obj[index],
     getTrackById: (obj, id) => obj.getTrackById(id)
   },
 
@@ -2691,6 +2719,7 @@ export const wasmImportObject = {
     set_onaddtrack: (obj, value) => { obj.onaddtrack = value; },
     get_onremovetrack: (obj) => obj.onremovetrack,
     set_onremovetrack: (obj, value) => { obj.onremovetrack = value; },
+    get: (obj, index) => obj[index],
     getTrackById: (obj, id) => obj.getTrackById(id)
   },
 
@@ -2712,6 +2741,7 @@ export const wasmImportObject = {
 
   webapi_TextTrackCueList: {
     get_length: (obj) => obj.length,
+    get: (obj, index) => obj[index],
     getCueById: (obj, id) => obj.getCueById(id)
   },
 
@@ -2946,6 +2976,8 @@ export const wasmImportObject = {
     get_relList: (obj) => obj.relList,
     get_elements: (obj) => obj.elements,
     get_length: (obj) => obj.length,
+    get: (obj, index) => obj[index],
+    get_2: (obj, name) => obj[name],
     submit: (obj) => obj.submit(),
     requestSubmit: (obj, submitter) => obj.requestSubmit(submitter),
     reset: (obj) => obj.reset(),
@@ -3133,10 +3165,12 @@ export const wasmImportObject = {
     get_validity: (obj) => obj.validity,
     get_validationMessage: (obj) => obj.validationMessage,
     get_labels: (obj) => obj.labels,
+    item: (obj, index) => obj.item(index),
     namedItem: (obj, name) => obj.namedItem(name),
     add: (obj, element, before) => obj.add(element, before),
     remove: (obj) => obj.remove(),
     remove_2: (obj, index) => obj.remove(index),
+    set: (obj, index, option) => { obj[index] = option; },
     checkValidity: (obj) => obj.checkValidity(),
     reportValidity: (obj) => obj.reportValidity(),
     setCustomValidity: (obj, error) => obj.setCustomValidity(error),
@@ -3805,6 +3839,7 @@ export const wasmImportObject = {
 
   webapi_DataTransferItemList: {
     get_length: (obj) => obj.length,
+    get: (obj, index) => obj[index],
     add: (obj, data, type_) => obj.add(data, type_),
     add_2: (obj, data) => obj.add(data),
     remove: (obj, index) => obj.remove(index),
@@ -4031,18 +4066,24 @@ export const wasmImportObject = {
 
   webapi_PluginArray: {
     get_length: (obj) => obj.length,
-    refresh: (obj) => obj.refresh()
+    refresh: (obj) => obj.refresh(),
+    item: (obj, index) => obj.item(index),
+    namedItem: (obj, name) => obj.namedItem(name)
   },
 
   webapi_MimeTypeArray: {
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index),
+    namedItem: (obj, name) => obj.namedItem(name)
   },
 
   webapi_Plugin: {
     get_name: (obj) => obj.name,
     get_description: (obj) => obj.description,
     get_filename: (obj) => obj.filename,
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index),
+    namedItem: (obj, name) => obj.namedItem(name)
   },
 
   webapi_MimeType: {
@@ -4238,6 +4279,9 @@ export const wasmImportObject = {
   webapi_Storage: {
     get_length: (obj) => obj.length,
     key: (obj, index) => obj.key(index),
+    getItem: (obj, key) => obj.getItem(key),
+    setItem: (obj, key, value) => obj.setItem(key, value),
+    removeItem: (obj, key) => obj.removeItem(key),
     clear: (obj) => obj.clear()
   },
 
@@ -4382,6 +4426,7 @@ export const wasmImportObject = {
     get_mediaText: (obj) => obj.mediaText,
     set_mediaText: (obj, value) => { obj.mediaText = value; },
     get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index),
     appendMedium: (obj, medium) => obj.appendMedium(medium),
     deleteMedium: (obj, medium) => obj.deleteMedium(medium)
   },
@@ -4411,11 +4456,13 @@ export const wasmImportObject = {
   },
 
   webapi_StyleSheetList: {
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index)
   },
 
   webapi_CSSRuleList: {
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index)
   },
 
   webapi_CSSRule: {
@@ -4498,6 +4545,7 @@ export const wasmImportObject = {
     set_cssText: (obj, value) => { obj.cssText = value; },
     get_length: (obj) => obj.length,
     get_parentRule: (obj) => obj.parentRule,
+    item: (obj, index) => obj.item(index),
     getPropertyValue: (obj, property) => obj.getPropertyValue(property),
     getPropertyPriority: (obj, property) => obj.getPropertyPriority(property),
     setProperty: (obj, property, value, priority) => obj.setProperty(property, value, priority),
@@ -4606,7 +4654,8 @@ export const wasmImportObject = {
   },
 
   webapi_FileList: {
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index)
   },
 
   webapi_FileReader: {
@@ -4702,7 +4751,8 @@ export const wasmImportObject = {
   },
 
   webapi_DOMRectList: {
-    get_length: (obj) => obj.length
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index)
   },
 
   webapi_DOMQuad: {

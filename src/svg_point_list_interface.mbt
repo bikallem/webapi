@@ -23,10 +23,12 @@ pub trait TSVGPointList: TJsValue {
   number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : &TDOMPoint) -> DOMPoint = _
+  get_item(self : Self, index : UInt) -> DOMPoint = _
   insert_item_before(self : Self, new_item : &TDOMPoint, index : UInt) -> DOMPoint = _
   replace_item(self : Self, new_item : &TDOMPoint, index : UInt) -> DOMPoint = _
   remove_item(self : Self, index : UInt) -> DOMPoint = _
   append_item(self : Self, new_item : &TDOMPoint) -> DOMPoint = _
+  set(self : Self, index : UInt, new_item : &TDOMPoint) -> Unit = _
 }
 
 ///|
@@ -54,6 +56,12 @@ impl TSVGPointList with initialize(self : Self, new_item : &TDOMPoint) -> DOMPoi
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
   )
+}
+
+///|
+/// [SVGPointList.getItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/getItem)
+impl TSVGPointList with get_item(self : Self, index : UInt) -> DOMPoint {
+  svg_point_list_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
 
 ///|
@@ -95,6 +103,16 @@ impl TSVGPointList with remove_item(self : Self, index : UInt) -> DOMPoint {
 impl TSVGPointList with append_item(self : Self, new_item : &TDOMPoint) -> DOMPoint {
   svg_point_list_append_item_ffi(
     TJsValue::to_js(self),
+    TJsValue::to_js(new_item),
+  )
+}
+
+///|
+/// [SVGPointList.set](https://developer.mozilla.org/en-US/docs/Web/API/SVGPointList/set)
+impl TSVGPointList with set(self : Self, index : UInt, new_item : &TDOMPoint) -> Unit {
+  svg_point_list_set_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
     TJsValue::to_js(new_item),
   )
 }

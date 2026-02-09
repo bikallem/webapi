@@ -401,6 +401,9 @@ fn document_ready_state_ffi(obj : JsValue) -> DocumentReadyState {
 }
 
 ///|
+extern "js" fn document_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj[name]"
+
+///|
 extern "js" fn document_title_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.title"
 
 ///|

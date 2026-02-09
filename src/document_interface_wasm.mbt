@@ -215,6 +215,9 @@ fn document_last_modified_ffi(obj : JsValue) -> String {
 fn document_ready_state_ffi(obj : JsValue) -> DocumentReadyState = "webapi_Document" "get_readyState"
 
 ///|
+fn document_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_Document" "get"
+
+///|
 fn document_title_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Document" "get_title"
 
 ///|

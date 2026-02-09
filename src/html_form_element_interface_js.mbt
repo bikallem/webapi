@@ -168,6 +168,18 @@ fn html_form_element_length_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
+extern "js" fn html_form_element_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
+extern "js" fn html_form_element_get_2_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj[name]"
+
+///|
 extern "js" fn html_form_element_submit_ffi(obj : JsValue) -> Unit = "(obj) => obj.submit()"
 
 ///|

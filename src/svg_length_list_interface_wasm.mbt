@@ -14,6 +14,9 @@ fn svg_length_list_initialize_ffi(
 ) -> SVGLength = "webapi_SVGLengthList" "initialize"
 
 ///|
+fn svg_length_list_get_item_ffi(obj : JsValue, index : JsValue) -> SVGLength = "webapi_SVGLengthList" "getItem"
+
+///|
 fn svg_length_list_insert_item_before_ffi(
   obj : JsValue,
   new_item : JsValue,
@@ -35,3 +38,10 @@ fn svg_length_list_append_item_ffi(
   obj : JsValue,
   new_item : JsValue,
 ) -> SVGLength = "webapi_SVGLengthList" "appendItem"
+
+///|
+fn svg_length_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "webapi_SVGLengthList" "set"

@@ -161,6 +161,33 @@ fn emit_js_constructor(
 }
 
 ///|
+/// Emit JS bracket-notation entry for an unnamed special operation.
+fn emit_js_special_operation(
+  import_name : String,
+  op : @parser.SpecialOperationMember,
+) -> String {
+  let arg_names : Array[String] = []
+  for arg in op.arguments {
+    arg_names.push(js_safe(@type_mapping.safe_identifier(arg.name)))
+  }
+  match op.special {
+    Getter => {
+      let key = arg_names[0]
+      "    \{import_name}: (obj, \{key}) => obj[\{key}]"
+    }
+    Setter => {
+      let key = arg_names[0]
+      let value = arg_names[1]
+      "    \{import_name}: (obj, \{key}, \{value}) => { obj[\{key}] = \{value}; }"
+    }
+    Deleter => {
+      let key = arg_names[0]
+      "    \{import_name}: (obj, \{key}) => { delete obj[\{key}]; }"
+    }
+  }
+}
+
+///|
 /// Emit a complete JS module for an interface
 fn emit_js_interface_module(
   iface : @flattened_idl.FlattenedInterface,
@@ -201,7 +228,7 @@ fn emit_js_interface_module(
     }
   }
 
-  // Operations (methods) - disambiguate overloaded names
+  // Operations (methods + special operations) - disambiguate overloaded names
   let method_counter : Map[String, Int] = {}
   for m in iface.members {
     match m.interface_member {
@@ -219,6 +246,40 @@ fn emit_js_interface_module(
         entries.push(
           emit_js_method(import_name, op.name, op.arguments, op.static_),
         )
+      }
+      SpecialOperation(op) if op.name is Some(_) => {
+        // Named special operation → emit as regular method call
+        let name = op.name.unwrap()
+        let import_name = match method_counter.get(name) {
+          None => {
+            method_counter[name] = 1
+            name
+          }
+          Some(count) => {
+            method_counter[name] = count + 1
+            "\{name}_\{count + 1}"
+          }
+        }
+        entries.push(emit_js_method(import_name, name, op.arguments, false))
+      }
+      SpecialOperation(op) => {
+        // Unnamed special operation → bracket notation
+        let base_name = match op.special {
+          Getter => "get"
+          Setter => "set"
+          Deleter => "delete_"
+        }
+        let import_name = match method_counter.get(base_name) {
+          None => {
+            method_counter[base_name] = 1
+            base_name
+          }
+          Some(count) => {
+            method_counter[base_name] = count + 1
+            "\{base_name}_\{count + 1}"
+          }
+        }
+        entries.push(emit_js_special_operation(import_name, op))
       }
       _ => continue
     }

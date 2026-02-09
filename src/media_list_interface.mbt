@@ -22,6 +22,7 @@ pub trait TMediaList: TJsValue {
   media_text(self : Self) -> CSSOMString = _
   set_media_text(self : Self, media_text : CSSOMString) -> Unit = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> CSSOMString? = _
   append_medium(self : Self, medium : CSSOMString) -> Unit = _
   delete_medium(self : Self, medium : CSSOMString) -> Unit = _
 }
@@ -45,6 +46,20 @@ impl TMediaList with set_media_text(self : Self, media_text : CSSOMString) -> Un
 /// [MediaList.length](https://developer.mozilla.org/en-US/docs/Web/API/MediaList/length)
 impl TMediaList with length(self : Self) -> UInt {
   media_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [MediaList.item](https://developer.mozilla.org/en-US/docs/Web/API/MediaList/item)
+impl TMediaList with item(self : Self, index : UInt) -> CSSOMString? {
+  let result = media_list_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

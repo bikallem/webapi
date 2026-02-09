@@ -215,6 +215,9 @@ extern "js" fn window_open_ffi(
 ) -> JsValue = "(obj, url, target, features) => obj.open(url, target, features)"
 
 ///|
+extern "js" fn window_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj[name]"
+
+///|
 extern "js" fn window_navigator_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.navigator"
 
 ///|

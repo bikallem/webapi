@@ -203,6 +203,7 @@ pub trait TDocument: TNode {
   set_cookie(self : Self, cookie : String) -> Unit = _
   last_modified(self : Self) -> String = _
   ready_state(self : Self) -> DocumentReadyState = _
+  get(self : Self, name : String) -> JsValue? = _
   title(self : Self) -> String = _
   set_title(self : Self, title : String) -> Unit = _
   dir(self : Self) -> String = _
@@ -794,6 +795,17 @@ impl TDocument with last_modified(self : Self) -> String {
 /// [Document.readyState](https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState)
 impl TDocument with ready_state(self : Self) -> DocumentReadyState {
   document_ready_state_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.get](https://developer.mozilla.org/en-US/docs/Web/API/Document/get)
+impl TDocument with get(self : Self, name : String) -> JsValue? {
+  let result = document_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

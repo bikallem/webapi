@@ -14,6 +14,9 @@ fn svg_number_list_initialize_ffi(
 ) -> SVGNumber = "webapi_SVGNumberList" "initialize"
 
 ///|
+fn svg_number_list_get_item_ffi(obj : JsValue, index : JsValue) -> SVGNumber = "webapi_SVGNumberList" "getItem"
+
+///|
 fn svg_number_list_insert_item_before_ffi(
   obj : JsValue,
   new_item : JsValue,
@@ -35,3 +38,10 @@ fn svg_number_list_append_item_ffi(
   obj : JsValue,
   new_item : JsValue,
 ) -> SVGNumber = "webapi_SVGNumberList" "appendItem"
+
+///|
+fn svg_number_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "webapi_SVGNumberList" "set"

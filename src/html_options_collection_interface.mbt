@@ -58,6 +58,7 @@ pub impl THTMLOptionsCollectionAddBefore for Int with to_js(self : Int) -> JsVal
 pub trait THTMLOptionsCollection: THTMLCollection {
   length(self : Self) -> UInt = _
   set_length(self : Self, length : UInt) -> Unit = _
+  set(self : Self, index : UInt, option : &THTMLOptionElement) -> Unit = _
   add(
     self : Self,
     element : &THTMLOptionsCollectionAddElement,
@@ -80,6 +81,20 @@ impl THTMLOptionsCollection with set_length(self : Self, length : UInt) -> Unit 
   html_options_collection_set_length_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(length),
+  )
+}
+
+///|
+/// [HTMLOptionsCollection.set](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/set)
+impl THTMLOptionsCollection with set(
+  self : Self,
+  index : UInt,
+  option : &THTMLOptionElement,
+) -> Unit {
+  html_options_collection_set_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+    TJsValue::to_js(option),
   )
 }
 

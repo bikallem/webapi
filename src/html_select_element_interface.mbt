@@ -85,6 +85,7 @@ pub trait THTMLSelectElement: THTMLElement {
   options(self : Self) -> HTMLOptionsCollection = _
   length(self : Self) -> UInt = _
   set_length(self : Self, length : UInt) -> Unit = _
+  item(self : Self, index : UInt) -> HTMLOptionElement? = _
   named_item(self : Self, name : String) -> HTMLOptionElement? = _
   add(
     self : Self,
@@ -93,6 +94,7 @@ pub trait THTMLSelectElement: THTMLElement {
   ) -> Unit = _
   remove(self : Self) -> Unit = _
   remove_2(self : Self, index : Int) -> Unit = _
+  set(self : Self, index : UInt, option : &THTMLOptionElement) -> Unit = _
   selected_options(self : Self) -> HTMLCollection = _
   selected_index(self : Self) -> Int = _
   set_selected_index(self : Self, selected_index : Int) -> Unit = _
@@ -229,6 +231,20 @@ impl THTMLSelectElement with set_length(self : Self, length : UInt) -> Unit {
 }
 
 ///|
+/// [HTMLSelectElement.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/item)
+impl THTMLSelectElement with item(self : Self, index : UInt) -> HTMLOptionElement? {
+  let result = html_select_element_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
 /// [HTMLSelectElement.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/namedItem)
 impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement? {
   let result = html_select_element_named_item_ffi(
@@ -268,6 +284,20 @@ impl THTMLSelectElement with remove_2(self : Self, index : Int) -> Unit {
   html_select_element_remove_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(index),
+  )
+}
+
+///|
+/// [HTMLSelectElement.set](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/set)
+impl THTMLSelectElement with set(
+  self : Self,
+  index : UInt,
+  option : &THTMLOptionElement,
+) -> Unit {
+  html_select_element_set_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+    TJsValue::to_js(option),
   )
 }
 

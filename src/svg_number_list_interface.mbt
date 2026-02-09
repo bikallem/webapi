@@ -23,10 +23,12 @@ pub trait TSVGNumberList: TJsValue {
   number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : &TSVGNumber) -> SVGNumber = _
+  get_item(self : Self, index : UInt) -> SVGNumber = _
   insert_item_before(self : Self, new_item : &TSVGNumber, index : UInt) -> SVGNumber = _
   replace_item(self : Self, new_item : &TSVGNumber, index : UInt) -> SVGNumber = _
   remove_item(self : Self, index : UInt) -> SVGNumber = _
   append_item(self : Self, new_item : &TSVGNumber) -> SVGNumber = _
+  set(self : Self, index : UInt, new_item : &TSVGNumber) -> Unit = _
 }
 
 ///|
@@ -54,6 +56,12 @@ impl TSVGNumberList with initialize(self : Self, new_item : &TSVGNumber) -> SVGN
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
   )
+}
+
+///|
+/// [SVGNumberList.getItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumberList/getItem)
+impl TSVGNumberList with get_item(self : Self, index : UInt) -> SVGNumber {
+  svg_number_list_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
 
 ///|
@@ -95,6 +103,16 @@ impl TSVGNumberList with remove_item(self : Self, index : UInt) -> SVGNumber {
 impl TSVGNumberList with append_item(self : Self, new_item : &TSVGNumber) -> SVGNumber {
   svg_number_list_append_item_ffi(
     TJsValue::to_js(self),
+    TJsValue::to_js(new_item),
+  )
+}
+
+///|
+/// [SVGNumberList.set](https://developer.mozilla.org/en-US/docs/Web/API/SVGNumberList/set)
+impl TSVGNumberList with set(self : Self, index : UInt, new_item : &TSVGNumber) -> Unit {
+  svg_number_list_set_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
     TJsValue::to_js(new_item),
   )
 }

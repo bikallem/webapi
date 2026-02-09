@@ -24,6 +24,7 @@ pub trait TCSSStyleDeclaration: TJsValue {
   css_text(self : Self) -> CSSOMString = _
   set_css_text(self : Self, css_text : CSSOMString) -> Unit = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> CSSOMString = _
   get_property_value(self : Self, property : CSSOMString) -> CSSOMString = _
   get_property_priority(self : Self, property : CSSOMString) -> CSSOMString = _
   set_property(
@@ -55,6 +56,12 @@ impl TCSSStyleDeclaration with set_css_text(self : Self, css_text : CSSOMString)
 /// [CSSStyleDeclaration.length](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/length)
 impl TCSSStyleDeclaration with length(self : Self) -> UInt {
   css_style_declaration_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [CSSStyleDeclaration.item](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/item)
+impl TCSSStyleDeclaration with item(self : Self, index : UInt) -> CSSOMString {
+  css_style_declaration_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
 
 ///|

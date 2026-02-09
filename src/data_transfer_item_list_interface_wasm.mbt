@@ -2,6 +2,9 @@
 fn data_transfer_item_list_length_ffi(obj : JsValue) -> UInt = "webapi_DataTransferItemList" "get_length"
 
 ///|
+fn data_transfer_item_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DataTransferItemList" "get"
+
+///|
 fn data_transfer_item_list_add_ffi(
   obj : JsValue,
   data : JsValue,

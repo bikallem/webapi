@@ -24,6 +24,7 @@ pub impl TDataTransferItemList for DataTransferItemList
 /// [DataTransferItemList](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList) interface.
 pub trait TDataTransferItemList: TJsValue {
   length(self : Self) -> UInt = _
+  get(self : Self, index : UInt) -> DataTransferItem? = _
   add(self : Self, data : String, type_ : String) -> DataTransferItem? = _
   add_2(self : Self, data : &TFile) -> DataTransferItem? = _
   remove(self : Self, index : UInt) -> Unit = _
@@ -34,6 +35,20 @@ pub trait TDataTransferItemList: TJsValue {
 /// [DataTransferItemList.length](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/length)
 impl TDataTransferItemList with length(self : Self) -> UInt {
   data_transfer_item_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [DataTransferItemList.get](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/get)
+impl TDataTransferItemList with get(self : Self, index : UInt) -> DataTransferItem? {
+  let result = data_transfer_item_list_get_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

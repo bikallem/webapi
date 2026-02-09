@@ -20,6 +20,8 @@ pub impl TNamedNodeMap for NamedNodeMap
 /// [NamedNodeMap](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap) interface.
 pub trait TNamedNodeMap: TJsValue {
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> Attr? = _
+  get_named_item(self : Self, qualified_name : String) -> Attr? = _
   get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr? = _
   set_named_item(self : Self, attr : &TAttr) -> Attr? = _
   set_named_item_ns(self : Self, attr : &TAttr) -> Attr? = _
@@ -31,6 +33,34 @@ pub trait TNamedNodeMap: TJsValue {
 /// [NamedNodeMap.length](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/length)
 impl TNamedNodeMap with length(self : Self) -> UInt {
   named_node_map_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [NamedNodeMap.item](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/item)
+impl TNamedNodeMap with item(self : Self, index : UInt) -> Attr? {
+  let result = named_node_map_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+/// [NamedNodeMap.getNamedItem](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/getNamedItem)
+impl TNamedNodeMap with get_named_item(self : Self, qualified_name : String) -> Attr? {
+  let result = named_node_map_get_named_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(qualified_name),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

@@ -29,6 +29,17 @@ fn svg_string_list_initialize_ffi(obj : JsValue, new_item : JsValue) -> String {
 }
 
 ///|
+extern "js" fn svg_string_list_get_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.getItem(index)"
+
+///|
+fn svg_string_list_get_item_ffi(obj : JsValue, index : JsValue) -> String {
+  svg_string_list_get_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
 extern "js" fn svg_string_list_insert_item_before_ffi_js(
   obj : JsValue,
   new_item : JsValue,
@@ -81,3 +92,10 @@ extern "js" fn svg_string_list_append_item_ffi_js(
 fn svg_string_list_append_item_ffi(obj : JsValue, new_item : JsValue) -> String {
   svg_string_list_append_item_ffi_js(obj, new_item).unsafe_cast()
 }
+
+///|
+extern "js" fn svg_string_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "(obj, index, new_item) => { obj[index] = new_item; }"

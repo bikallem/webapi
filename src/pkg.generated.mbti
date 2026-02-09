@@ -1212,6 +1212,9 @@ pub impl TElement for Element
 pub impl TEventTarget for Element
 pub impl TGeometryNode for Element
 pub impl THTMLAllCollectionItem for Element
+pub impl THTMLAllCollectionNamedItem for Element
+pub impl THTMLFormControlsCollectionNamedItem for Element
+pub impl THTMLFormElementGet2 for Element
 pub impl THTMLSlotElementAssignNodes for Element
 pub impl TJsValue for Element
 pub impl TNode for Element
@@ -1501,6 +1504,11 @@ pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::into(Self) -> T
 pub impl THTMLAllCollectionItem for HTMLAllCollectionItem
 
 #external
+pub type HTMLAllCollectionNamedItem
+pub fn[T : THTMLAllCollectionNamedItem] HTMLAllCollectionNamedItem::into(Self) -> T
+pub impl THTMLAllCollectionNamedItem for HTMLAllCollectionNamedItem
+
+#external
 pub type HTMLAnchorElement
 pub fn[T : THTMLAnchorElement] HTMLAnchorElement::into(Self) -> T
 pub fn HTMLAnchorElement::new() -> Self
@@ -1595,6 +1603,7 @@ pub impl TNode for HTMLCanvasElement
 pub type HTMLCollection
 pub fn[T : THTMLCollection] HTMLCollection::into(Self) -> T
 pub impl THTMLAllCollectionItem for HTMLCollection
+pub impl THTMLAllCollectionNamedItem for HTMLCollection
 pub impl THTMLCollection for HTMLCollection
 pub impl TJsValue for HTMLCollection
 
@@ -1733,6 +1742,11 @@ pub impl THTMLFormControlsCollection for HTMLFormControlsCollection
 pub impl TJsValue for HTMLFormControlsCollection
 
 #external
+pub type HTMLFormControlsCollectionNamedItem
+pub fn[T : THTMLFormControlsCollectionNamedItem] HTMLFormControlsCollectionNamedItem::into(Self) -> T
+pub impl THTMLFormControlsCollectionNamedItem for HTMLFormControlsCollectionNamedItem
+
+#external
 pub type HTMLFormElement
 pub fn[T : THTMLFormElement] HTMLFormElement::into(Self) -> T
 pub fn HTMLFormElement::new() -> Self
@@ -1742,6 +1756,11 @@ pub impl THTMLElement for HTMLFormElement
 pub impl THTMLFormElement for HTMLFormElement
 pub impl TJsValue for HTMLFormElement
 pub impl TNode for HTMLFormElement
+
+#external
+pub type HTMLFormElementGet2
+pub fn[T : THTMLFormElementGet2] HTMLFormElementGet2::into(Self) -> T
+pub impl THTMLFormElementGet2 for HTMLFormElementGet2
 
 #external
 pub type HTMLFrameElement
@@ -3165,6 +3184,8 @@ pub impl TJsValue for QuotaExceededErrorOptions
 #external
 pub type RadioNodeList
 pub fn[T : TRadioNodeList] RadioNodeList::into(Self) -> T
+pub impl THTMLFormControlsCollectionNamedItem for RadioNodeList
+pub impl THTMLFormElementGet2 for RadioNodeList
 pub impl TJsValue for RadioNodeList
 pub impl TNodeList for RadioNodeList
 pub impl TRadioNodeList for RadioNodeList
@@ -4687,6 +4708,7 @@ pub trait TAudioTrack : TJsValue {
 
 pub trait TAudioTrackList : TEventTarget {
   length(Self) -> UInt
+  get(Self, UInt) -> AudioTrack?
   get_track_by_id(Self, String) -> AudioTrack?
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, EventHandlerNonNull) -> Unit
@@ -4801,6 +4823,7 @@ pub trait TCSSRule : TJsValue {
 }
 
 pub trait TCSSRuleList : TJsValue {
+  item(Self, UInt) -> CSSRule?
   length(Self) -> UInt
 }
 
@@ -4808,6 +4831,7 @@ pub trait TCSSStyleDeclaration : TJsValue {
   css_text(Self) -> String
   set_css_text(Self, String) -> Unit
   length(Self) -> UInt
+  item(Self, UInt) -> String
   get_property_value(Self, String) -> String
   get_property_priority(Self, String) -> String
   set_property(Self, String, String, priority? : String) -> Unit
@@ -5251,6 +5275,7 @@ pub trait TDOMRect : TDOMRectReadOnly {
 
 pub trait TDOMRectList : TJsValue {
   length(Self) -> UInt
+  item(Self, UInt) -> DOMRect?
 }
 
 pub trait TDOMRectReadOnly : TJsValue {
@@ -5267,14 +5292,19 @@ pub trait TDOMRectReadOnly : TJsValue {
 
 pub trait TDOMStringList : TJsValue {
   length(Self) -> UInt
+  item(Self, UInt) -> String?
   contains(Self, String) -> Bool
 }
 
 pub trait TDOMStringMap : TJsValue {
+  get(Self, String) -> String?
+  set(Self, String, String) -> Unit
+  delete_(Self, String) -> Unit
 }
 
 pub trait TDOMTokenList : TJsValue {
   length(Self) -> UInt
+  item(Self, UInt) -> String?
   contains(Self, String) -> Bool
   add(Self, String) -> Unit
   remove(Self, String) -> Unit
@@ -5308,6 +5338,7 @@ pub trait TDataTransferItem : TJsValue {
 
 pub trait TDataTransferItemList : TJsValue {
   length(Self) -> UInt
+  get(Self, UInt) -> DataTransferItem?
   add(Self, String, String) -> DataTransferItem?
   add_2(Self, &TFile) -> DataTransferItem?
   remove(Self, UInt) -> Unit
@@ -5365,6 +5396,7 @@ pub trait TDocument : TNode {
   set_cookie(Self, String) -> Unit
   last_modified(Self) -> String
   ready_state(Self) -> DocumentReadyState
+  get(Self, String) -> JsValue?
   title(Self) -> String
   set_title(Self, String) -> Unit
   dir(Self) -> String
@@ -5956,6 +5988,7 @@ pub trait TFile : TBlob {
 }
 
 pub trait TFileList : TJsValue {
+  item(Self, UInt) -> File?
   length(Self) -> UInt
 }
 
@@ -6024,10 +6057,16 @@ pub(open) trait TGeometryNode {
 
 pub trait THTMLAllCollection : TJsValue {
   length(Self) -> UInt
+  get(Self, UInt) -> Element?
+  named_item(Self, String) -> HTMLAllCollectionNamedItem?
   item(Self, name_or_index? : String) -> HTMLAllCollectionItem?
 }
 
 pub(open) trait THTMLAllCollectionItem {
+  to_js(Self) -> JsValue
+}
+
+pub(open) trait THTMLAllCollectionNamedItem {
   to_js(Self) -> JsValue
 }
 
@@ -6241,6 +6280,8 @@ pub trait THTMLCanvasElement : THTMLElement {
 
 pub trait THTMLCollection : TJsValue {
   length(Self) -> UInt
+  item(Self, UInt) -> Element?
+  named_item(Self, String) -> Element?
 }
 
 pub trait THTMLDListElement : THTMLElement {
@@ -6559,6 +6600,11 @@ pub trait THTMLFontElement : THTMLElement {
 }
 
 pub trait THTMLFormControlsCollection : THTMLCollection {
+  named_item(Self, String) -> HTMLFormControlsCollectionNamedItem?
+}
+
+pub(open) trait THTMLFormControlsCollectionNamedItem {
+  to_js(Self) -> JsValue
 }
 
 pub trait THTMLFormElement : THTMLElement {
@@ -6585,11 +6631,17 @@ pub trait THTMLFormElement : THTMLElement {
   rel_list(Self) -> DOMTokenList
   elements(Self) -> HTMLFormControlsCollection
   length(Self) -> UInt
+  get(Self, UInt) -> Element?
+  get_2(Self, String) -> HTMLFormElementGet2?
   submit(Self) -> Unit
   request_submit(Self, submitter? : &THTMLElement) -> Unit
   reset(Self) -> Unit
   check_validity(Self) -> Bool
   report_validity(Self) -> Bool
+}
+
+pub(open) trait THTMLFormElementGet2 {
+  to_js(Self) -> JsValue
 }
 
 pub trait THTMLFrameElement : THTMLElement {
@@ -7147,6 +7199,7 @@ pub trait THTMLOptionElement : THTMLElement {
 pub trait THTMLOptionsCollection : THTMLCollection {
   length(Self) -> UInt
   set_length(Self, UInt) -> Unit
+  set(Self, UInt, &THTMLOptionElement) -> Unit
   add(Self, &THTMLOptionsCollectionAddElement, before? : &THTMLOptionsCollectionAddBefore) -> Unit
   remove(Self, Int) -> Unit
   selected_index(Self) -> Int
@@ -7275,10 +7328,12 @@ pub trait THTMLSelectElement : THTMLElement {
   options(Self) -> HTMLOptionsCollection
   length(Self) -> UInt
   set_length(Self, UInt) -> Unit
+  item(Self, UInt) -> HTMLOptionElement?
   named_item(Self, String) -> HTMLOptionElement?
   add(Self, &THTMLSelectElementAddElement, before? : &THTMLSelectElementAddBefore) -> Unit
   remove(Self) -> Unit
   remove_2(Self, Int) -> Unit
+  set(Self, UInt, &THTMLOptionElement) -> Unit
   selected_options(Self) -> HTMLCollection
   selected_index(Self) -> Int
   set_selected_index(Self, Int) -> Unit
@@ -7717,6 +7772,7 @@ pub trait TMediaList : TJsValue {
   media_text(Self) -> String
   set_media_text(Self, String) -> Unit
   length(Self) -> UInt
+  item(Self, UInt) -> String?
   append_medium(Self, String) -> Unit
   delete_medium(Self, String) -> Unit
 }
@@ -7779,6 +7835,8 @@ pub trait TMimeType : TJsValue {
 
 pub trait TMimeTypeArray : TJsValue {
   length(Self) -> UInt
+  item(Self, UInt) -> MimeType?
+  named_item(Self, String) -> MimeType?
 }
 
 pub trait TMouseEvent : TUIEvent {
@@ -7825,6 +7883,8 @@ pub trait TMutationRecord : TJsValue {
 
 pub trait TNamedNodeMap : TJsValue {
   length(Self) -> UInt
+  item(Self, UInt) -> Attr?
+  get_named_item(Self, String) -> Attr?
   get_named_item_ns(Self, String, String) -> Attr?
   set_named_item(Self, &TAttr) -> Attr?
   set_named_item_ns(Self, &TAttr) -> Attr?
@@ -7987,6 +8047,7 @@ pub trait TNodeIterator : TJsValue {
 }
 
 pub trait TNodeList : TJsValue {
+  item(Self, UInt) -> Node?
   length(Self) -> UInt
 }
 
@@ -8241,11 +8302,15 @@ pub trait TPlugin : TJsValue {
   description(Self) -> String
   filename(Self) -> String
   length(Self) -> UInt
+  item(Self, UInt) -> MimeType?
+  named_item(Self, String) -> MimeType?
 }
 
 pub trait TPluginArray : TJsValue {
   refresh(Self) -> Unit
   length(Self) -> UInt
+  item(Self, UInt) -> Plugin?
+  named_item(Self, String) -> Plugin?
 }
 
 pub trait TPopStateEvent : TEvent {
@@ -8737,10 +8802,12 @@ pub trait TSVGLengthList : TJsValue {
   number_of_items(Self) -> UInt
   clear(Self) -> Unit
   initialize(Self, &TSVGLength) -> SVGLength
+  get_item(Self, UInt) -> SVGLength
   insert_item_before(Self, &TSVGLength, UInt) -> SVGLength
   replace_item(Self, &TSVGLength, UInt) -> SVGLength
   remove_item(Self, UInt) -> SVGLength
   append_item(Self, &TSVGLength) -> SVGLength
+  set(Self, UInt, &TSVGLength) -> Unit
 }
 
 pub trait TSVGLineElement : TSVGGeometryElement {
@@ -8786,10 +8853,12 @@ pub trait TSVGNumberList : TJsValue {
   number_of_items(Self) -> UInt
   clear(Self) -> Unit
   initialize(Self, &TSVGNumber) -> SVGNumber
+  get_item(Self, UInt) -> SVGNumber
   insert_item_before(Self, &TSVGNumber, UInt) -> SVGNumber
   replace_item(Self, &TSVGNumber, UInt) -> SVGNumber
   remove_item(Self, UInt) -> SVGNumber
   append_item(Self, &TSVGNumber) -> SVGNumber
+  set(Self, UInt, &TSVGNumber) -> Unit
 }
 
 pub trait TSVGPatternElement : TSVGElement {
@@ -8810,10 +8879,12 @@ pub trait TSVGPointList : TJsValue {
   number_of_items(Self) -> UInt
   clear(Self) -> Unit
   initialize(Self, &TDOMPoint) -> DOMPoint
+  get_item(Self, UInt) -> DOMPoint
   insert_item_before(Self, &TDOMPoint, UInt) -> DOMPoint
   replace_item(Self, &TDOMPoint, UInt) -> DOMPoint
   remove_item(Self, UInt) -> DOMPoint
   append_item(Self, &TDOMPoint) -> DOMPoint
+  set(Self, UInt, &TDOMPoint) -> Unit
 }
 
 pub trait TSVGPolygonElement : TSVGGeometryElement {
@@ -8934,10 +9005,12 @@ pub trait TSVGStringList : TJsValue {
   number_of_items(Self) -> UInt
   clear(Self) -> Unit
   initialize(Self, String) -> String
+  get_item(Self, UInt) -> String
   insert_item_before(Self, String, UInt) -> String
   replace_item(Self, String, UInt) -> String
   remove_item(Self, UInt) -> String
   append_item(Self, String) -> String
+  set(Self, UInt, String) -> Unit
 }
 
 pub trait TSVGStyleElement : TSVGElement {
@@ -9015,10 +9088,12 @@ pub trait TSVGTransformList : TJsValue {
   number_of_items(Self) -> UInt
   clear(Self) -> Unit
   initialize(Self, &TSVGTransform) -> SVGTransform
+  get_item(Self, UInt) -> SVGTransform
   insert_item_before(Self, &TSVGTransform, UInt) -> SVGTransform
   replace_item(Self, &TSVGTransform, UInt) -> SVGTransform
   remove_item(Self, UInt) -> SVGTransform
   append_item(Self, &TSVGTransform) -> SVGTransform
+  set(Self, UInt, &TSVGTransform) -> Unit
   create_svg_transform_from_matrix(Self, matrix? : DOMMatrix2DInit) -> SVGTransform
   consolidate(Self) -> SVGTransform?
 }
@@ -9112,6 +9187,9 @@ pub trait TStaticRange : TAbstractRange {
 pub trait TStorage : TJsValue {
   length(Self) -> UInt
   key(Self, UInt) -> String?
+  get_item(Self, String) -> String?
+  set_item(Self, String, String) -> Unit
+  remove_item(Self, String) -> Unit
   clear(Self) -> Unit
 }
 
@@ -9136,6 +9214,7 @@ pub trait TStyleSheet : TJsValue {
 }
 
 pub trait TStyleSheetList : TJsValue {
+  item(Self, UInt) -> CSSStyleSheet?
   length(Self) -> UInt
 }
 
@@ -9211,11 +9290,13 @@ pub trait TTextTrackCue : TEventTarget {
 
 pub trait TTextTrackCueList : TJsValue {
   length(Self) -> UInt
+  get(Self, UInt) -> TextTrackCue?
   get_cue_by_id(Self, String) -> TextTrackCue?
 }
 
 pub trait TTextTrackList : TEventTarget {
   length(Self) -> UInt
+  get(Self, UInt) -> TextTrack?
   get_track_by_id(Self, String) -> TextTrack?
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, EventHandlerNonNull) -> Unit
@@ -9388,6 +9469,7 @@ pub trait TVideoTrack : TJsValue {
 
 pub trait TVideoTrackList : TEventTarget {
   length(Self) -> UInt
+  get(Self, UInt) -> VideoTrack?
   get_track_by_id(Self, String) -> VideoTrack?
   selected_index(Self) -> Int
   onchange(Self) -> EventHandlerNonNull
@@ -9460,6 +9542,7 @@ pub trait TWindow : TEventTarget {
   parent(Self) -> Window
   frame_element(Self) -> Element
   open(Self, url? : String, target? : String, features? : String) -> Window?
+  get(Self, String) -> JsValue?
   navigator(Self) -> Navigator
   client_information(Self) -> Navigator
   origin_agent_cluster(Self) -> Bool

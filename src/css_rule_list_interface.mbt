@@ -19,7 +19,22 @@ pub impl TCSSRuleList for CSSRuleList
 ///|
 /// [CSSRuleList](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList) interface.
 pub trait TCSSRuleList: TJsValue {
+  item(self : Self, index : UInt) -> CSSRule? = _
   length(self : Self) -> UInt = _
+}
+
+///|
+/// [CSSRuleList.item](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList/item)
+impl TCSSRuleList with item(self : Self, index : UInt) -> CSSRule? {
+  let result = css_rule_list_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

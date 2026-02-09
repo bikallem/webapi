@@ -2,6 +2,9 @@
 fn dom_token_list_length_ffi(obj : JsValue) -> UInt = "webapi_DOMTokenList" "get_length"
 
 ///|
+fn dom_token_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DOMTokenList" "item"
+
+///|
 fn dom_token_list_contains_ffi(obj : JsValue, token : JsValue) -> Bool = "webapi_DOMTokenList" "contains"
 
 ///|

@@ -19,6 +19,14 @@ fn svg_string_list_initialize_ffi(obj : JsValue, new_item : JsValue) -> String {
 }
 
 ///|
+fn svg_string_list_get_item_ffi_wasm(obj : JsValue, index : JsValue) -> JsValue = "webapi_SVGStringList" "getItem"
+
+///|
+fn svg_string_list_get_item_ffi(obj : JsValue, index : JsValue) -> String {
+  jsvalue_to_string(svg_string_list_get_item_ffi_wasm(obj, index))
+}
+
+///|
 fn svg_string_list_insert_item_before_ffi_wasm(
   obj : JsValue,
   new_item : JsValue,
@@ -73,3 +81,10 @@ fn svg_string_list_append_item_ffi_wasm(
 fn svg_string_list_append_item_ffi(obj : JsValue, new_item : JsValue) -> String {
   jsvalue_to_string(svg_string_list_append_item_ffi_wasm(obj, new_item))
 }
+
+///|
+fn svg_string_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "webapi_SVGStringList" "set"

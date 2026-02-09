@@ -20,6 +20,7 @@ pub impl TDOMTokenList for DOMTokenList
 /// [DOMTokenList](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList) interface.
 pub trait TDOMTokenList: TJsValue {
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> String? = _
   contains(self : Self, token : String) -> Bool = _
   add(self : Self, tokens : String) -> Unit = _
   remove(self : Self, tokens : String) -> Unit = _
@@ -34,6 +35,20 @@ pub trait TDOMTokenList: TJsValue {
 /// [DOMTokenList.length](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/length)
 impl TDOMTokenList with length(self : Self) -> UInt {
   dom_token_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [DOMTokenList.item](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/item)
+impl TDOMTokenList with item(self : Self, index : UInt) -> String? {
+  let result = dom_token_list_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

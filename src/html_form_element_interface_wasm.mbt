@@ -128,6 +128,12 @@ fn html_form_element_elements_ffi(obj : JsValue) -> HTMLFormControlsCollection =
 fn html_form_element_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLFormElement" "get_length"
 
 ///|
+fn html_form_element_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_HTMLFormElement" "get"
+
+///|
+fn html_form_element_get_2_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_2"
+
+///|
 fn html_form_element_submit_ffi(obj : JsValue) -> Unit = "webapi_HTMLFormElement" "submit"
 
 ///|

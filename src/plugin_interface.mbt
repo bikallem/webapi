@@ -23,6 +23,8 @@ pub trait TPlugin: TJsValue {
   description(self : Self) -> String = _
   filename(self : Self) -> String = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> MimeType? = _
+  named_item(self : Self, name : String) -> MimeType? = _
 }
 
 ///|
@@ -47,4 +49,29 @@ impl TPlugin with filename(self : Self) -> String {
 /// [Plugin.length](https://developer.mozilla.org/en-US/docs/Web/API/Plugin/length)
 impl TPlugin with length(self : Self) -> UInt {
   plugin_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Plugin.item](https://developer.mozilla.org/en-US/docs/Web/API/Plugin/item)
+impl TPlugin with item(self : Self, index : UInt) -> MimeType? {
+  let result = plugin_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+/// [Plugin.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/Plugin/namedItem)
+impl TPlugin with named_item(self : Self, name : String) -> MimeType? {
+  let result = plugin_named_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(name),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }

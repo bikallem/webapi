@@ -126,6 +126,12 @@ extern "js" fn html_select_element_set_length_ffi(
 ) -> Unit = "(obj, length) => { obj.length = length; }"
 
 ///|
+extern "js" fn html_select_element_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
 extern "js" fn html_select_element_named_item_ffi(
   obj : JsValue,
   name : JsValue,
@@ -146,6 +152,13 @@ extern "js" fn html_select_element_remove_2_ffi(
   obj : JsValue,
   index : JsValue,
 ) -> Unit = "(obj, index) => obj.remove_2(index)"
+
+///|
+extern "js" fn html_select_element_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  option : JsValue,
+) -> Unit = "(obj, index, option) => { obj[index] = option; }"
 
 ///|
 extern "js" fn html_select_element_selected_options_ffi_js(

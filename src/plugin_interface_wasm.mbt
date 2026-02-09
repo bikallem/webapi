@@ -24,3 +24,9 @@ fn plugin_filename_ffi(obj : JsValue) -> String {
 
 ///|
 fn plugin_length_ffi(obj : JsValue) -> UInt = "webapi_Plugin" "get_length"
+
+///|
+fn plugin_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_Plugin" "item"
+
+///|
+fn plugin_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_Plugin" "namedItem"

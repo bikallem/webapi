@@ -110,6 +110,9 @@ fn window_open_ffi(
 ) -> JsValue = "webapi_Window" "open"
 
 ///|
+fn window_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_Window" "get"
+
+///|
 fn window_navigator_ffi(obj : JsValue) -> Navigator = "webapi_Window" "get_navigator"
 
 ///|

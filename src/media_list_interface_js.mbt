@@ -21,6 +21,9 @@ fn media_list_length_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
+extern "js" fn media_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
 extern "js" fn media_list_append_medium_ffi(
   obj : JsValue,
   medium : JsValue,

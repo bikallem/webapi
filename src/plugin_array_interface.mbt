@@ -21,6 +21,8 @@ pub impl TPluginArray for PluginArray
 pub trait TPluginArray: TJsValue {
   refresh(self : Self) -> Unit = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> Plugin? = _
+  named_item(self : Self, name : String) -> Plugin? = _
 }
 
 ///|
@@ -33,4 +35,32 @@ impl TPluginArray with refresh(self : Self) -> Unit {
 /// [PluginArray.length](https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/length)
 impl TPluginArray with length(self : Self) -> UInt {
   plugin_array_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [PluginArray.item](https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/item)
+impl TPluginArray with item(self : Self, index : UInt) -> Plugin? {
+  let result = plugin_array_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+/// [PluginArray.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/namedItem)
+impl TPluginArray with named_item(self : Self, name : String) -> Plugin? {
+  let result = plugin_array_named_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(name),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }

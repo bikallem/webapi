@@ -19,7 +19,19 @@ pub impl TFileList for FileList
 ///|
 /// [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) interface.
 pub trait TFileList: TJsValue {
+  item(self : Self, index : UInt) -> File? = _
   length(self : Self) -> UInt = _
+}
+
+///|
+/// [FileList.item](https://developer.mozilla.org/en-US/docs/Web/API/FileList/item)
+impl TFileList with item(self : Self, index : UInt) -> File? {
+  let result = file_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

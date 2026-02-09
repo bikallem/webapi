@@ -23,6 +23,7 @@ pub impl TEventTarget for AudioTrackList
 /// [AudioTrackList](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList) interface.
 pub trait TAudioTrackList: TEventTarget {
   length(self : Self) -> UInt = _
+  get(self : Self, index : UInt) -> AudioTrack? = _
   get_track_by_id(self : Self, id : String) -> AudioTrack? = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : EventHandler) -> Unit = _
@@ -36,6 +37,20 @@ pub trait TAudioTrackList: TEventTarget {
 /// [AudioTrackList.length](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/length)
 impl TAudioTrackList with length(self : Self) -> UInt {
   audio_track_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [AudioTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/get)
+impl TAudioTrackList with get(self : Self, index : UInt) -> AudioTrack? {
+  let result = audio_track_list_get_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

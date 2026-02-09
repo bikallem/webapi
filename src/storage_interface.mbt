@@ -21,6 +21,9 @@ pub impl TStorage for Storage
 pub trait TStorage: TJsValue {
   length(self : Self) -> UInt = _
   key(self : Self, index : UInt) -> String? = _
+  get_item(self : Self, key : String) -> String? = _
+  set_item(self : Self, key : String, value : String) -> Unit = _
+  remove_item(self : Self, key : String) -> Unit = _
   clear(self : Self) -> Unit = _
 }
 
@@ -39,6 +42,33 @@ impl TStorage with key(self : Self, index : UInt) -> String? {
   } else {
     Some(result.unsafe_cast())
   }
+}
+
+///|
+/// [Storage.getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem)
+impl TStorage with get_item(self : Self, key : String) -> String? {
+  let result = storage_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+/// [Storage.setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem)
+impl TStorage with set_item(self : Self, key : String, value : String) -> Unit {
+  storage_set_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(key),
+    TJsValue::to_js(value),
+  )
+}
+
+///|
+/// [Storage.removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem)
+impl TStorage with remove_item(self : Self, key : String) -> Unit {
+  storage_remove_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key))
 }
 
 ///|

@@ -7,6 +7,12 @@ fn data_transfer_item_list_length_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
+extern "js" fn data_transfer_item_list_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
 extern "js" fn data_transfer_item_list_add_ffi(
   obj : JsValue,
   data : JsValue,

@@ -7,6 +7,12 @@ fn dom_string_list_length_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
+extern "js" fn dom_string_list_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
 extern "js" fn dom_string_list_contains_ffi_js(
   obj : JsValue,
   string : JsValue,

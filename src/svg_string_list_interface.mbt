@@ -23,10 +23,12 @@ pub trait TSVGStringList: TJsValue {
   number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : String) -> String = _
+  get_item(self : Self, index : UInt) -> String = _
   insert_item_before(self : Self, new_item : String, index : UInt) -> String = _
   replace_item(self : Self, new_item : String, index : UInt) -> String = _
   remove_item(self : Self, index : UInt) -> String = _
   append_item(self : Self, new_item : String) -> String = _
+  set(self : Self, index : UInt, new_item : String) -> Unit = _
 }
 
 ///|
@@ -54,6 +56,12 @@ impl TSVGStringList with initialize(self : Self, new_item : String) -> String {
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
   )
+}
+
+///|
+/// [SVGStringList.getItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/getItem)
+impl TSVGStringList with get_item(self : Self, index : UInt) -> String {
+  svg_string_list_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
 
 ///|
@@ -95,6 +103,16 @@ impl TSVGStringList with remove_item(self : Self, index : UInt) -> String {
 impl TSVGStringList with append_item(self : Self, new_item : String) -> String {
   svg_string_list_append_item_ffi(
     TJsValue::to_js(self),
+    TJsValue::to_js(new_item),
+  )
+}
+
+///|
+/// [SVGStringList.set](https://developer.mozilla.org/en-US/docs/Web/API/SVGStringList/set)
+impl TSVGStringList with set(self : Self, index : UInt, new_item : String) -> Unit {
+  svg_string_list_set_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
     TJsValue::to_js(new_item),
   )
 }

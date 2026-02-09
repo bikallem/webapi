@@ -29,6 +29,17 @@ fn svg_point_list_initialize_ffi(obj : JsValue, new_item : JsValue) -> DOMPoint 
 }
 
 ///|
+extern "js" fn svg_point_list_get_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.getItem(index)"
+
+///|
+fn svg_point_list_get_item_ffi(obj : JsValue, index : JsValue) -> DOMPoint {
+  svg_point_list_get_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
 extern "js" fn svg_point_list_insert_item_before_ffi_js(
   obj : JsValue,
   new_item : JsValue,
@@ -84,3 +95,10 @@ fn svg_point_list_append_item_ffi(
 ) -> DOMPoint {
   svg_point_list_append_item_ffi_js(obj, new_item).unsafe_cast()
 }
+
+///|
+extern "js" fn svg_point_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "(obj, index, new_item) => { obj[index] = new_item; }"

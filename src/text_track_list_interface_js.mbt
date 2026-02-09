@@ -7,6 +7,12 @@ fn text_track_list_length_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
+extern "js" fn text_track_list_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
 extern "js" fn text_track_list_get_track_by_id_ffi(
   obj : JsValue,
   id : JsValue,

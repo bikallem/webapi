@@ -20,6 +20,7 @@ pub impl TDOMStringList for DOMStringList
 /// [DOMStringList](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList) interface.
 pub trait TDOMStringList: TJsValue {
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> String? = _
   contains(self : Self, string : String) -> Bool = _
 }
 
@@ -27,6 +28,20 @@ pub trait TDOMStringList: TJsValue {
 /// [DOMStringList.length](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/length)
 impl TDOMStringList with length(self : Self) -> UInt {
   dom_string_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [DOMStringList.item](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/item)
+impl TDOMStringList with item(self : Self, index : UInt) -> String? {
+  let result = dom_string_list_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

@@ -8,6 +8,13 @@ fn html_options_collection_set_length_ffi(
 ) -> Unit = "webapi_HTMLOptionsCollection" "set_length"
 
 ///|
+fn html_options_collection_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  option : JsValue,
+) -> Unit = "webapi_HTMLOptionsCollection" "set"
+
+///|
 fn html_options_collection_add_ffi(
   obj : JsValue,
   element : JsValue,

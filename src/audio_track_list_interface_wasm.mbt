@@ -2,6 +2,9 @@
 fn audio_track_list_length_ffi(obj : JsValue) -> UInt = "webapi_AudioTrackList" "get_length"
 
 ///|
+fn audio_track_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_AudioTrackList" "get"
+
+///|
 fn audio_track_list_get_track_by_id_ffi(obj : JsValue, id : JsValue) -> JsValue = "webapi_AudioTrackList" "getTrackById"
 
 ///|

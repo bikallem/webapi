@@ -32,6 +32,17 @@ fn svg_number_list_initialize_ffi(
 }
 
 ///|
+extern "js" fn svg_number_list_get_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.getItem(index)"
+
+///|
+fn svg_number_list_get_item_ffi(obj : JsValue, index : JsValue) -> SVGNumber {
+  svg_number_list_get_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
 extern "js" fn svg_number_list_insert_item_before_ffi_js(
   obj : JsValue,
   new_item : JsValue,
@@ -87,3 +98,10 @@ fn svg_number_list_append_item_ffi(
 ) -> SVGNumber {
   svg_number_list_append_item_ffi_js(obj, new_item).unsafe_cast()
 }
+
+///|
+extern "js" fn svg_number_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "(obj, index, new_item) => { obj[index] = new_item; }"

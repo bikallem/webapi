@@ -371,6 +371,107 @@ fn emit_const_member(
 }
 
 ///|
+/// Emit a named special operation member (has explicit method name).
+/// Reuses RegularMethodEmit since named special ops are structurally identical to regular methods.
+fn emit_special_operation(
+  op : @parser.SpecialOperationMember,
+  interface_name : String,
+  orig_method_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> (Array[Emit], &InterfaceMethodEmit) {
+  let emits = []
+  let (args, arg_emits) = method_args(
+    op.arguments.map(arg => {
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+    }),
+    interface_name,
+    orig_method_name,
+    type_registry,
+  )
+  let self_arg = @type_mapping.MethodArg::{
+    name: "self",
+    original_name: "self",
+    type_: @type_mapping.ArgMbtType::Self,
+    optional: false,
+    default_value: None,
+  }
+  let args = [self_arg, ..args]
+  emits.push_iter(arg_emits.iter())
+  let (return_type, return_emits) = arg_mbt_type(
+    op.return_type,
+    interface_name,
+    orig_method_name,
+    "",
+    type_registry,
+  )
+  emit_union_return_type(return_type, emits)
+  emits.push_iter(return_emits.iter())
+  let return_type = @type_mapping.MethodReturn::{
+    type_: return_type,
+    optional: op.return_type is Nullable(_),
+  }
+  let meth : &InterfaceMethodEmit = RegularMethodEmit::{
+    interface_name,
+    original_name: orig_method_name,
+    return_type,
+    args,
+  }
+  (emits, meth)
+}
+
+///|
+/// Emit an unnamed special operation member (no method name, uses bracket notation).
+/// Creates SpecialOperationMethodEmit for bracket-notation JS.
+fn emit_unnamed_special_operation(
+  op : @parser.SpecialOperationMember,
+  interface_name : String,
+  orig_method_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> (Array[Emit], &InterfaceMethodEmit) {
+  let emits = []
+  let (args, arg_emits) = method_args(
+    op.arguments.map(arg => {
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+    }),
+    interface_name,
+    orig_method_name,
+    type_registry,
+  )
+  let self_arg = @type_mapping.MethodArg::{
+    name: "self",
+    original_name: "self",
+    type_: @type_mapping.ArgMbtType::Self,
+    optional: false,
+    default_value: None,
+  }
+  let args = [self_arg, ..args]
+  emits.push_iter(arg_emits.iter())
+  let (return_type, return_emits) = arg_mbt_type(
+    op.return_type,
+    interface_name,
+    orig_method_name,
+    "",
+    type_registry,
+  )
+  emit_union_return_type(return_type, emits)
+  emits.push_iter(return_emits.iter())
+  // Unnamed getters always return Option — bracket access can yield undefined
+  let is_optional = op.special is Getter || op.return_type is Nullable(_)
+  let return_type = @type_mapping.MethodReturn::{
+    type_: return_type,
+    optional: is_optional,
+  }
+  let meth : &InterfaceMethodEmit = SpecialOperationMethodEmit::{
+    interface_name,
+    original_name: orig_method_name,
+    return_type,
+    args,
+    special: op.special,
+  }
+  (emits, meth)
+}
+
+///|
 pub impl Emitter for InterfaceEmitter with emit(
   self : InterfaceEmitter,
   name : String,
@@ -449,12 +550,61 @@ pub impl Emitter for InterfaceEmitter with emit(
       emits.push_iter(const_emits.iter())
       continue rest
     }
+    // Named special operations → treat as regular methods
+    [SpecialOperation(op), .. rest] if op.name is Some(_) => {
+      let name = op.name.unwrap()
+      let orig_method_name = match method_counter.get(name) {
+        None => {
+          method_counter[name] = 1
+          name
+        }
+        Some(count) => {
+          method_counter[name] += 1
+          "\{name}_\{count + 1}"
+        }
+      }
+      let (op_emits, meth) = emit_special_operation(
+        op,
+        interface.name,
+        orig_method_name,
+        self.type_registry,
+      )
+      emits.push_iter(op_emits.iter())
+      interface_methods.push(meth)
+      continue rest
+    }
+    // Unnamed special operations → bracket notation with synthetic names
+    [SpecialOperation(op), .. rest] => {
+      let base_name = match op.special {
+        Getter => "get"
+        Setter => "set"
+        Deleter => "delete_"
+      }
+      let orig_method_name = match method_counter.get(base_name) {
+        None => {
+          method_counter[base_name] = 1
+          base_name
+        }
+        Some(count) => {
+          method_counter[base_name] += 1
+          "\{base_name}_\{count + 1}"
+        }
+      }
+      let (op_emits, meth) = emit_unnamed_special_operation(
+        op,
+        interface.name,
+        orig_method_name,
+        self.type_registry,
+      )
+      emits.push_iter(op_emits.iter())
+      interface_methods.push(meth)
+      continue rest
+    }
     [
       Setlike(_)
       | Maplike(_)
       | AsyncIterable(_)
       | Iterable(_)
-      | SpecialOperation(_)
       | Stringifier(Bare) as mem,
       .. rest,
     ] => {
@@ -463,7 +613,6 @@ pub impl Emitter for InterfaceEmitter with emit(
         Maplike(_) => "Maplike"
         AsyncIterable(_) => "AsyncIterable"
         Iterable(_) => "Iterable"
-        SpecialOperation(_) => "SpecialOperation"
         Stringifier(Bare) => "Stringifier(Bare)"
         _ => "Unknown"
       }

@@ -21,6 +21,20 @@ fn css_style_declaration_length_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
+extern "js" fn css_style_declaration_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+fn css_style_declaration_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> CSSOMString {
+  css_style_declaration_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
 extern "js" fn css_style_declaration_get_property_value_ffi_js(
   obj : JsValue,
   property : JsValue,

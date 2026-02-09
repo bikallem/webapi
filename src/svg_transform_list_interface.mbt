@@ -25,10 +25,12 @@ pub trait TSVGTransformList: TJsValue {
   number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : &TSVGTransform) -> SVGTransform = _
+  get_item(self : Self, index : UInt) -> SVGTransform = _
   insert_item_before(self : Self, new_item : &TSVGTransform, index : UInt) -> SVGTransform = _
   replace_item(self : Self, new_item : &TSVGTransform, index : UInt) -> SVGTransform = _
   remove_item(self : Self, index : UInt) -> SVGTransform = _
   append_item(self : Self, new_item : &TSVGTransform) -> SVGTransform = _
+  set(self : Self, index : UInt, new_item : &TSVGTransform) -> Unit = _
   create_svg_transform_from_matrix(self : Self, matrix? : DOMMatrix2DInit) -> SVGTransform = _
   consolidate(self : Self) -> SVGTransform? = _
 }
@@ -58,6 +60,12 @@ impl TSVGTransformList with initialize(self : Self, new_item : &TSVGTransform) -
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
   )
+}
+
+///|
+/// [SVGTransformList.getItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/getItem)
+impl TSVGTransformList with get_item(self : Self, index : UInt) -> SVGTransform {
+  svg_transform_list_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
 
 ///|
@@ -102,6 +110,20 @@ impl TSVGTransformList with remove_item(self : Self, index : UInt) -> SVGTransfo
 impl TSVGTransformList with append_item(self : Self, new_item : &TSVGTransform) -> SVGTransform {
   svg_transform_list_append_item_ffi(
     TJsValue::to_js(self),
+    TJsValue::to_js(new_item),
+  )
+}
+
+///|
+/// [SVGTransformList.set](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/set)
+impl TSVGTransformList with set(
+  self : Self,
+  index : UInt,
+  new_item : &TSVGTransform,
+) -> Unit {
+  svg_transform_list_set_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
     TJsValue::to_js(new_item),
   )
 }

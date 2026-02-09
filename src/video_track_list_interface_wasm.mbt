@@ -2,6 +2,9 @@
 fn video_track_list_length_ffi(obj : JsValue) -> UInt = "webapi_VideoTrackList" "get_length"
 
 ///|
+fn video_track_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_VideoTrackList" "get"
+
+///|
 fn video_track_list_get_track_by_id_ffi(obj : JsValue, id : JsValue) -> JsValue = "webapi_VideoTrackList" "getTrackById"
 
 ///|

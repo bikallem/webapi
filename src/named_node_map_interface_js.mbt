@@ -7,6 +7,18 @@ fn named_node_map_length_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
+extern "js" fn named_node_map_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+extern "js" fn named_node_map_get_named_item_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "(obj, qualified_name) => obj.getNamedItem(qualified_name)"
+
+///|
 extern "js" fn named_node_map_get_named_item_ns_ffi(
   obj : JsValue,
   namespace_ : JsValue,

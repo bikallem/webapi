@@ -23,6 +23,7 @@ pub impl TEventTarget for TextTrackList
 /// [TextTrackList](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList) interface.
 pub trait TTextTrackList: TEventTarget {
   length(self : Self) -> UInt = _
+  get(self : Self, index : UInt) -> TextTrack? = _
   get_track_by_id(self : Self, id : String) -> TextTrack? = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : EventHandler) -> Unit = _
@@ -36,6 +37,20 @@ pub trait TTextTrackList: TEventTarget {
 /// [TextTrackList.length](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/length)
 impl TTextTrackList with length(self : Self) -> UInt {
   text_track_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [TextTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/get)
+impl TTextTrackList with get(self : Self, index : UInt) -> TextTrack? {
+  let result = text_track_list_get_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

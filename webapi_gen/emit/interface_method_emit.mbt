@@ -600,6 +600,126 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
   Code(code.to_string())
 }
 
+//============================ Special Operation Method Emit ====================
+
+///|
+/// Unnamed special operation (getter/setter/deleter) using bracket notation.
+/// Named special operations reuse RegularMethodEmit since they're structurally identical.
+struct SpecialOperationMethodEmit {
+  interface_name : String
+  original_name : String // synthetic: "get", "set", "delete_"
+  return_type : @type_mapping.MethodReturn
+  args : Array[@type_mapping.MethodArg]
+  special : @parser.Special // Getter, Setter, Deleter
+} derive(Show, ToJson)
+
+///|
+impl InterfaceMethodEmit for SpecialOperationMethodEmit with decl_emit(
+  self : SpecialOperationMethodEmit,
+) -> Code {
+  let args = trait_method_decl_args(self.args)
+  Code(
+    "  \{@type_mapping.safe_identifier(self.original_name)}(\{args}) -> \{self.return_type.type_name()} = _",
+  )
+}
+
+///|
+fn SpecialOperationMethodEmit::ffi_name(
+  self : SpecialOperationMethodEmit,
+) -> String {
+  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+}
+
+///|
+fn SpecialOperationMethodEmit::ffi_argnames(
+  self : SpecialOperationMethodEmit,
+) -> Array[String] {
+  self.args.map(arg => {
+    match arg.type_ {
+      @type_mapping.ArgMbtType::Self => "obj"
+      _ => arg.name
+    }
+  })
+}
+
+///|
+impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_js(
+  self : SpecialOperationMethodEmit,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  let ffi_argnames = self.ffi_argnames()
+  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ret_name = self.return_type.type_.name()
+  // Build bracket-notation JS expression
+  let js_expr = match self.special {
+    Getter => "obj[\{ffi_argnames[1]}]"
+    Setter => "{ obj[\{ffi_argnames[1]}] = \{ffi_argnames[2]}; }"
+    Deleter => "{ delete obj[\{ffi_argnames[1]}]; }"
+  }
+  emit_js_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    js_expr,
+  )
+}
+
+///|
+impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
+  self : SpecialOperationMethodEmit,
+  module_name : String,
+) -> Code {
+  let ffi_name = self.ffi_name()
+  let ffi_argnames = self.ffi_argnames()
+  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ret_name = self.return_type.type_.name()
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    is_string=is_string_return(self.return_type.type_),
+    is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
+    module_name,
+    self.original_name,
+  )
+}
+
+///|
+impl InterfaceMethodEmit for SpecialOperationMethodEmit with impl_emit(
+  self : SpecialOperationMethodEmit,
+) -> Code {
+  let trait_name = self.interface_name
+  let ffi_name = self.ffi_name()
+  let code = StringBuilder::new()
+
+  // Emit MDN documentation comment
+  let mdn_url = mdn_member_url(trait_name, self.original_name)
+  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+
+  // Emit default trait method implementation
+  let method_args = trait_method_impl_args(self.args)
+  let method_name = @type_mapping.safe_identifier(self.original_name)
+  let call_args = func_call_args(self.args)
+  code.write_string(
+    "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
+  )
+  let ret_name = self.return_type.type_.name()
+  emit_method_body(
+    code,
+    ffi_name,
+    call_args,
+    self.return_type.optional,
+    void_return=ret_name == "Unit",
+  )
+  Code(code.to_string())
+}
+
 //============================ Method Emit Helpers ============================
 
 ///|

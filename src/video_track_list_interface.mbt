@@ -23,6 +23,7 @@ pub impl TEventTarget for VideoTrackList
 /// [VideoTrackList](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList) interface.
 pub trait TVideoTrackList: TEventTarget {
   length(self : Self) -> UInt = _
+  get(self : Self, index : UInt) -> VideoTrack? = _
   get_track_by_id(self : Self, id : String) -> VideoTrack? = _
   selected_index(self : Self) -> Int = _
   onchange(self : Self) -> EventHandler = _
@@ -37,6 +38,20 @@ pub trait TVideoTrackList: TEventTarget {
 /// [VideoTrackList.length](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/length)
 impl TVideoTrackList with length(self : Self) -> UInt {
   video_track_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [VideoTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/get)
+impl TVideoTrackList with get(self : Self, index : UInt) -> VideoTrack? {
+  let result = video_track_list_get_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

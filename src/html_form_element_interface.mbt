@@ -34,6 +34,32 @@ pub fn HTMLFormElement::new() -> HTMLFormElement {
 }
 
 ///|
+/// [HTMLFormElementGet2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElementGet2)
+#external
+pub type HTMLFormElementGet2
+
+///|
+pub fn[T : THTMLFormElementGet2] HTMLFormElementGet2::into(
+  self : HTMLFormElementGet2,
+) -> T = "%identity"
+
+///|
+pub impl THTMLFormElementGet2 for HTMLFormElementGet2 with to_js(
+  self : HTMLFormElementGet2,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait THTMLFormElementGet2 {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl THTMLFormElementGet2 for RadioNodeList with to_js(self : RadioNodeList) -> JsValue = "%identity"
+
+///|
+pub impl THTMLFormElementGet2 for Element with to_js(self : Element) -> JsValue = "%identity"
+
+///|
 /// [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) interface.
 pub trait THTMLFormElement: THTMLElement {
   accept_charset(self : Self) -> String = _
@@ -59,6 +85,8 @@ pub trait THTMLFormElement: THTMLElement {
   rel_list(self : Self) -> DOMTokenList = _
   elements(self : Self) -> HTMLFormControlsCollection = _
   length(self : Self) -> UInt = _
+  get(self : Self, index : UInt) -> Element? = _
+  get_2(self : Self, name : String) -> HTMLFormElementGet2? = _
   submit(self : Self) -> Unit = _
   request_submit(self : Self, submitter? : &THTMLElement) -> Unit = _
   reset(self : Self) -> Unit = _
@@ -229,6 +257,34 @@ impl THTMLFormElement with elements(self : Self) -> HTMLFormControlsCollection {
 /// [HTMLFormElement.length](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/length)
 impl THTMLFormElement with length(self : Self) -> UInt {
   html_form_element_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLFormElement.get](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/get)
+impl THTMLFormElement with get(self : Self, index : UInt) -> Element? {
+  let result = html_form_element_get_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+/// [HTMLFormElement.get_2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/get_2)
+impl THTMLFormElement with get_2(self : Self, name : String) -> HTMLFormElementGet2? {
+  let result = html_form_element_get_2_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(name),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

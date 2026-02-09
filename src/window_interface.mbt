@@ -80,6 +80,7 @@ pub trait TWindow: TEventTarget {
   parent(self : Self) -> WindowProxy = _
   frame_element(self : Self) -> Element = _
   open(self : Self, url? : String, target? : String, features? : String) -> WindowProxy? = _
+  get(self : Self, name : String) -> JsValue? = _
   navigator(self : Self) -> Navigator = _
   client_information(self : Self) -> Navigator = _
   origin_agent_cluster(self : Self) -> Bool = _
@@ -569,6 +570,17 @@ impl TWindow with open(
     TJsValue::to_js(target),
     TJsValue::to_js(features),
   )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+/// [Window.get](https://developer.mozilla.org/en-US/docs/Web/API/Window/get)
+impl TWindow with get(self : Self, name : String) -> JsValue? {
+  let result = window_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
   if JsValue::is_null(result) {
     None
   } else {

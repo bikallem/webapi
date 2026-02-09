@@ -19,7 +19,22 @@ pub impl TStyleSheetList for StyleSheetList
 ///|
 /// [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList) interface.
 pub trait TStyleSheetList: TJsValue {
+  item(self : Self, index : UInt) -> CSSStyleSheet? = _
   length(self : Self) -> UInt = _
+}
+
+///|
+/// [StyleSheetList.item](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList/item)
+impl TStyleSheetList with item(self : Self, index : UInt) -> CSSStyleSheet? {
+  let result = style_sheet_list_item_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|

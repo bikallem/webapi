@@ -23,10 +23,12 @@ pub trait TSVGLengthList: TJsValue {
   number_of_items(self : Self) -> UInt = _
   clear(self : Self) -> Unit = _
   initialize(self : Self, new_item : &TSVGLength) -> SVGLength = _
+  get_item(self : Self, index : UInt) -> SVGLength = _
   insert_item_before(self : Self, new_item : &TSVGLength, index : UInt) -> SVGLength = _
   replace_item(self : Self, new_item : &TSVGLength, index : UInt) -> SVGLength = _
   remove_item(self : Self, index : UInt) -> SVGLength = _
   append_item(self : Self, new_item : &TSVGLength) -> SVGLength = _
+  set(self : Self, index : UInt, new_item : &TSVGLength) -> Unit = _
 }
 
 ///|
@@ -54,6 +56,12 @@ impl TSVGLengthList with initialize(self : Self, new_item : &TSVGLength) -> SVGL
     TJsValue::to_js(self),
     TJsValue::to_js(new_item),
   )
+}
+
+///|
+/// [SVGLengthList.getItem](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/getItem)
+impl TSVGLengthList with get_item(self : Self, index : UInt) -> SVGLength {
+  svg_length_list_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
 
 ///|
@@ -95,6 +103,16 @@ impl TSVGLengthList with remove_item(self : Self, index : UInt) -> SVGLength {
 impl TSVGLengthList with append_item(self : Self, new_item : &TSVGLength) -> SVGLength {
   svg_length_list_append_item_ffi(
     TJsValue::to_js(self),
+    TJsValue::to_js(new_item),
+  )
+}
+
+///|
+/// [SVGLengthList.set](https://developer.mozilla.org/en-US/docs/Web/API/SVGLengthList/set)
+impl TSVGLengthList with set(self : Self, index : UInt, new_item : &TSVGLength) -> Unit {
+  svg_length_list_set_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(index),
     TJsValue::to_js(new_item),
   )
 }

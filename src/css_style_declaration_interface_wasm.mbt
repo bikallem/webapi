@@ -11,6 +11,20 @@ fn css_style_declaration_set_css_text_ffi(
 fn css_style_declaration_length_ffi(obj : JsValue) -> UInt = "webapi_CSSStyleDeclaration" "get_length"
 
 ///|
+fn css_style_declaration_item_ffi_wasm(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "webapi_CSSStyleDeclaration" "item"
+
+///|
+fn css_style_declaration_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> CSSOMString {
+  css_style_declaration_item_ffi_wasm(obj, index).unsafe_cast()
+}
+
+///|
 fn css_style_declaration_get_property_value_ffi_wasm(
   obj : JsValue,
   property : JsValue,

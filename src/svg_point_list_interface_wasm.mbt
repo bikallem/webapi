@@ -11,6 +11,9 @@ fn svg_point_list_clear_ffi(obj : JsValue) -> Unit = "webapi_SVGPointList" "clea
 fn svg_point_list_initialize_ffi(obj : JsValue, new_item : JsValue) -> DOMPoint = "webapi_SVGPointList" "initialize"
 
 ///|
+fn svg_point_list_get_item_ffi(obj : JsValue, index : JsValue) -> DOMPoint = "webapi_SVGPointList" "getItem"
+
+///|
 fn svg_point_list_insert_item_before_ffi(
   obj : JsValue,
   new_item : JsValue,
@@ -32,3 +35,10 @@ fn svg_point_list_append_item_ffi(
   obj : JsValue,
   new_item : JsValue,
 ) -> DOMPoint = "webapi_SVGPointList" "appendItem"
+
+///|
+fn svg_point_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "webapi_SVGPointList" "set"

@@ -80,6 +80,9 @@ fn html_select_element_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLSelectEle
 fn html_select_element_set_length_ffi(obj : JsValue, length : JsValue) -> Unit = "webapi_HTMLSelectElement" "set_length"
 
 ///|
+fn html_select_element_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_HTMLSelectElement" "item"
+
+///|
 fn html_select_element_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_HTMLSelectElement" "namedItem"
 
 ///|
@@ -94,6 +97,13 @@ fn html_select_element_remove_ffi(obj : JsValue) -> Unit = "webapi_HTMLSelectEle
 
 ///|
 fn html_select_element_remove_2_ffi(obj : JsValue, index : JsValue) -> Unit = "webapi_HTMLSelectElement" "remove_2"
+
+///|
+fn html_select_element_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  option : JsValue,
+) -> Unit = "webapi_HTMLSelectElement" "set"
 
 ///|
 fn html_select_element_selected_options_ffi(obj : JsValue) -> HTMLCollection = "webapi_HTMLSelectElement" "get_selectedOptions"

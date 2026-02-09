@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// Storage example is JS-only (uses manual extern "js" FFI)
-const TARGETS = ['js'] as const;
+const TARGETS = ['js', 'wasm'] as const;
 
 for (const target of TARGETS) {
   test.describe(`storage (${target})`, () => {

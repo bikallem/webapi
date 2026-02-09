@@ -1,30 +1,6 @@
 ///|
 /// Storage example demonstrating localStorage setItem, getItem, removeItem,
-/// clear, length, and key. Uses manual extern "js" FFI for getItem/setItem/
-/// removeItem since these are WebIDL special operations not yet generated.
-
-// Manual FFI for missing Storage special operations
-///|
-extern "js" fn storage_get_item(
-  storage : @webapi.Storage,
-  key : String
-) -> String? =
-  #| (s, k) => { const v = s.getItem(k); return v === null ? undefined : v; }
-
-///|
-extern "js" fn storage_set_item(
-  storage : @webapi.Storage,
-  key : String,
-  value : String
-) -> Unit =
-  #| (s, k, v) => s.setItem(k, v)
-
-///|
-extern "js" fn storage_remove_item(
-  storage : @webapi.Storage,
-  key : String
-) -> Unit =
-  #| (s, k) => s.removeItem(k)
+/// clear, length, and key using generated bindings.
 
 ///|
 fn main {
@@ -79,7 +55,7 @@ fn main {
     for i in 0U..<len {
       match storage.key(i) {
         Some(k) => {
-          let val = storage_get_item(storage, k).unwrap_or("")
+          let val = storage.get_item(k).unwrap_or("")
           text = text + k + " = " + val + "\n"
         }
         None => ()
@@ -107,7 +83,7 @@ fn main {
       let key = key_input.value()
       let val = val_input.value()
       if key != "" {
-        storage_set_item(storage, key, val)
+        storage.set_item(key, val)
         refresh()
       }
     }),
@@ -126,7 +102,7 @@ fn main {
     "click",
     @webapi.EventListener::new(fn(_event) {
       let key = key_input.value()
-      match storage_get_item(storage, key) {
+      match storage.get_item(key) {
         Some(val) => val_input.set_value(val)
         None => val_input.set_value("(not found)")
       }
@@ -147,7 +123,7 @@ fn main {
     @webapi.EventListener::new(fn(_event) {
       let key = key_input.value()
       if key != "" {
-        storage_remove_item(storage, key)
+        storage.remove_item(key)
         refresh()
       }
     }),
