@@ -115,9 +115,12 @@ fn emit_js_setter(attr_name : String) -> String {
 }
 
 ///|
-/// Emit JS method - generates appropriate argument list and call
+/// Emit JS method - generates appropriate argument list and call.
+/// `import_name` is the wasm import key (disambiguated, e.g. "fill_2"),
+/// `original_name` is the actual JS method name (e.g. "fill").
 fn emit_js_method(
-  method_name : String,
+  import_name : String,
+  original_name : String,
   args : Array[@parser.Argument],
   is_static : Bool,
 ) -> String {
@@ -131,19 +134,21 @@ fn emit_js_method(
     // Static method: no obj parameter
     let params = arg_names.join(comma_sep)
     let call_args = arg_names.join(comma_sep)
-    "    \{method_name}: (\{params}) => \{method_name}(\{call_args})"
+    "    \{import_name}: (\{params}) => \{original_name}(\{call_args})"
   } else {
     // Instance method: obj is first parameter
     let args_str = arg_names.join(comma_sep)
     let params = if arg_names.length() > 0 { "obj, \{args_str}" } else { "obj" }
     let call_args = arg_names.join(comma_sep)
-    "    \{method_name}: (\{params}) => obj.\{method_name}(\{call_args})"
+    "    \{import_name}: (\{params}) => obj.\{original_name}(\{call_args})"
   }
 }
 
 ///|
-/// Emit JS constructor for an interface
+/// Emit JS constructor for an interface.
+/// `import_name` is the wasm import key (e.g. "new" or "new_2").
 fn emit_js_constructor(
+  import_name : String,
   interface_name : String,
   args : Array[@parser.Argument],
 ) -> String {
@@ -154,7 +159,7 @@ fn emit_js_constructor(
   let comma_sep = ", "
   let params = arg_names.join(comma_sep)
   let call_args = arg_names.join(comma_sep)
-  "    new: (\{params}) => new \{interface_name}(\{call_args})"
+  "    \{import_name}: (\{params}) => new \{interface_name}(\{call_args})"
 }
 
 ///|
@@ -166,12 +171,18 @@ fn emit_js_interface_module(
   buf.write_string("  webapi_\{iface.name}: {\n")
   let entries : Array[String] = []
 
-  // Constructor if present
+  // Constructor(s)
+  let mut constructor_count = 0
   for m in iface.members {
     match m.interface_member {
       Constructor(ctor) => {
-        entries.push(emit_js_constructor(iface.name, ctor.arguments))
-        break // Only emit first constructor
+        constructor_count += 1
+        let import_name = if constructor_count == 1 {
+          "new"
+        } else {
+          "new_\{constructor_count}"
+        }
+        entries.push(emit_js_constructor(import_name, iface.name, ctor.arguments))
       }
       _ => continue
     }
@@ -190,11 +201,23 @@ fn emit_js_interface_module(
     }
   }
 
-  // Operations (methods)
+  // Operations (methods) - disambiguate overloaded names
+  let method_counter : Map[String, Int] = {}
   for m in iface.members {
     match m.interface_member {
-      RegularOperation(op) =>
-        entries.push(emit_js_method(op.name, op.arguments, op.static_))
+      RegularOperation(op) => {
+        let import_name = match method_counter.get(op.name) {
+          None => {
+            method_counter[op.name] = 1
+            op.name
+          }
+          Some(count) => {
+            method_counter[op.name] = count + 1
+            "\{op.name}_\{count + 1}"
+          }
+        }
+        entries.push(emit_js_method(import_name, op.name, op.arguments, op.static_))
+      }
       _ => continue
     }
   }
