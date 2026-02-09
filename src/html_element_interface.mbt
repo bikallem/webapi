@@ -51,10 +51,14 @@ pub(open) trait THTMLElementHidden {
 }
 
 ///|
-pub impl THTMLElementHidden for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl THTMLElementHidden for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
-pub impl THTMLElementHidden for Double with to_js(self : Double) -> JsValue = "%identity"
+pub impl THTMLElementHidden for Double with to_js(self : Double) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl THTMLElementHidden for String with to_js(self : String) -> JsValue = "%identity"
@@ -70,7 +74,9 @@ pub impl THTMLElementTogglePopoverOptions for TogglePopoverOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl THTMLElementTogglePopoverOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl THTMLElementTogglePopoverOptions for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 /// [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) interface.

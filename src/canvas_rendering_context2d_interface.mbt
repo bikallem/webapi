@@ -96,7 +96,9 @@ pub(open) trait TCanvasRenderingContext2DRoundRectRadii {
 ///|
 pub impl TCanvasRenderingContext2DRoundRectRadii for Double with to_js(
   self : Double,
-) -> JsValue = "%identity"
+) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TCanvasRenderingContext2DRoundRectRadii for DOMPointInit with to_js(
@@ -111,7 +113,9 @@ pub(open) trait TCanvasRenderingContext2DRoundRectRadii2 {
 ///|
 pub impl TCanvasRenderingContext2DRoundRectRadii2 for Double with to_js(
   self : Double,
-) -> JsValue = "%identity"
+) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit with to_js(

@@ -112,6 +112,20 @@ fn arg_mbt_type(
   (mbt_type, emits)
 }
 
+///|
+/// Wasm-gc value types that are NOT externref (i32, f64, etc.).
+/// %identity cannot convert between these and JsValue (externref).
+/// Must use TJsValue::to_js delegation instead.
+let wasm_value_types : Array[String] = [
+  "Bool", "Int", "UInt", "Int64", "UInt64", "Float", "Double",
+]
+
+///|
+/// Check if a type name is a wasm-gc value type (i32/f64, not externref).
+fn is_wasm_value_type(type_name : String) -> Bool {
+  wasm_value_types.contains(type_name)
+}
+
 //============================ Shared render helpers ===========================
 
 ///|
@@ -137,7 +151,7 @@ fn render_is_undefined_ffi_wasm(
 ) -> Unit {
   let ffi_name = "\{@type_mapping.snake_case(type_name)}_is_undefined_ffi"
   buf.write_string(
-    "fn \{ffi_name}(obj : \{type_name}) -> Bool = \"JsValue\" \"isNull\"",
+    "fn \{ffi_name}(obj : \{type_name}) -> Bool = \"JsValue\" \"isUndefined\"",
   )
 }
 
@@ -389,86 +403,6 @@ fn render_interface_definition_wasm_ffi(
   buf.write_string(ffi_decls)
 }
 
-//============================ Legacy combined render helpers (for mbt_code_gen) ===
-
-///|
-fn render_is_undefined_method(buf : StringBuilder, type_name : String) -> Unit {
-  render_is_undefined_ffi_js(buf, type_name)
-  buf.write_string("\n\n")
-  render_is_undefined_wrapper(buf, type_name)
-}
-
-///|
-fn render_empty_method(buf : StringBuilder, type_name : String) -> Unit {
-  render_empty_ffi_js(buf, type_name)
-  buf.write_string("\n\n")
-  render_empty_wrapper(buf, type_name)
-}
-
-///|
-fn render_interface_definition(
-  buf : StringBuilder,
-  interface_def : InterfaceDef,
-) -> Unit {
-  let mdn_url = mdn_interface_url(interface_def.trait_name)
-  buf
-  ..write_string("/// [\{interface_def.trait_name}](\{mdn_url}) interface.\n")
-  .write_string(
-    "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
-  )
-  let trait_defs = interface_def.methods
-    .filter_map(meth => {
-      match meth.decl_emit() {
-        Code("") => None
-        Code(code) => Some(code)
-      }
-    })
-    .join("\n")
-  buf..write_string(trait_defs)..write_string("\n}").write_string("\n\n")
-  // Emit FFI + impl interleaved (legacy: FFI before impl for each method)
-  let method_outputs = interface_def.methods
-    .map(meth => {
-      let ffi = meth.ffi_emit_js().0
-      let impl_ = meth.impl_emit().0
-      "\{ffi}\n\n\{impl_}"
-    })
-    .join("\n\n")
-  buf.write_string(method_outputs)
-}
-
-///|
-fn render_dictionary_create(
-  buf : StringBuilder,
-  type_name : String,
-  args : Array[@type_mapping.MethodArg],
-) -> Unit {
-  render_dictionary_ffi_js(buf, type_name, args)
-  buf.write_string("\n\n")
-  render_dictionary_wrapper(buf, type_name, args)
-}
-
-///|
-fn render_constructor_method(
-  buf : StringBuilder,
-  constructor_name : String,
-  type_name : String,
-  args : Array[@type_mapping.MethodArg],
-) -> Unit {
-  render_constructor_ffi_js(buf, constructor_name, type_name, args)
-  buf.write_string("\n\n")
-  render_constructor_wrapper(buf, constructor_name, type_name, args)
-}
-
-///|
-fn render_callback(
-  buf : StringBuilder,
-  name : String,
-  args : Array[CallbackArgEmit],
-  return_type : String,
-) -> Unit {
-  render_callback_js(buf, name, args, return_type)
-}
-
 ///|
 fn render_enum(
   buf : StringBuilder,
@@ -522,62 +456,15 @@ fn render_file_header(
 //============================ Code generator ===========================
 
 ///|
-/// Generate MoonBit code from Emit array for js backend (legacy, combined output)
+/// Generate MoonBit code from Emit array for JS backend (combined output).
+/// Delegates to mbt_code_gen_multi and concatenates shared + JS FFI.
 pub fn mbt_code_gen(emits : Array[Emit]) -> String {
+  let multi = mbt_code_gen_multi(emits)
   let buf = StringBuilder::new()
-  for i, emit in emits {
-    match emit {
-      Emit::External(TypeName(type_name)) => {
-        let mdn_url = mdn_interface_url(type_name)
-        buf.write_string(
-          "/// [\{type_name}](\{mdn_url})\n#external\npub type \{type_name}",
-        )
-      }
-      Emit::ImplTJsValue(TypeName(type_name)) =>
-        buf.write_string(
-          "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",
-        )
-      Emit::IntoMethod(TypeName(type_name)) =>
-        buf.write_string(
-          "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
-        )
-      Emit::IsUndefinedMethod(TypeName(type_name)) =>
-        render_is_undefined_method(buf, type_name)
-      Emit::EmptyMethod(TypeName(type_name)) =>
-        render_empty_method(buf, type_name)
-      Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
-        buf.write_string("pub impl \{trait_name} for \{type_name}")
-      Emit::InterfaceDefinition(interface_def) =>
-        render_interface_definition(buf, interface_def)
-      Emit::UnionArgTrait(TraitName(trait_name)) =>
-        buf
-        ..write_string("pub(open) trait \{trait_name} {\n")
-        ..write_string("  to_js(self : Self) -> JsValue\n")
-        .write_string("}")
-      Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) =>
-        buf.write_string(
-          "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
-        )
-      Emit::DictionaryCreate(TypeName(type_name), args) =>
-        render_dictionary_create(buf, type_name, args)
-      Emit::ConstructorMethod(
-        ConstructorName(constructor_name),
-        TypeName(type_name),
-        args
-      ) => render_constructor_method(buf, constructor_name, type_name, args)
-      Emit::Enum(TypeName(name), variants) => render_enum(buf, name, variants)
-      Emit::TypedefAlias(TypeName(name), target_type) =>
-        buf.write_string("pub type \{name} = \{target_type}")
-      Emit::Callback(TypeName(name), args, TypeName(return_type)) =>
-        render_callback(buf, name, args, return_type)
-      Emit::Const(ConstName(const_name), TypeName(type_name), value) =>
-        buf.write_string("pub const \{const_name}: \{type_name} = \{value}")
-      Emit::FileHeader(TypeName(type_name), Specs(specs)) =>
-        render_file_header(buf, type_name, specs)
-    }
-    if i < emits.length() - 1 {
-      buf.write_string("\n\n")
-    }
+  buf.write_string(multi.shared)
+  if multi.js_ffi.length() > 0 {
+    buf.write_string("\n\n")
+    buf.write_string(multi.js_ffi)
   }
   buf.to_string()
 }
@@ -651,11 +538,20 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         append_shared(b.to_string())
       }
       Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) =>
-        // Use %identity for externref types (safe on both JS and wasm-gc).
-        // All #external types, String, JsValue etc. are externref on both targets.
-        append_shared(
-          "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
-        )
+        if is_wasm_value_type(mbt_type) {
+          // Value types (Bool, Int, Double, etc.) are i32/f64 on wasm-gc, not externref.
+          // %identity cannot convert between value types and externref.
+          // Delegate to TJsValue::to_js which has backend-specific implementations.
+          append_shared(
+            "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue { TJsValue::to_js(self) }",
+          )
+        } else {
+          // Externref types (#external, String, JsValue, etc.) can use %identity
+          // since they share the same wasm representation on both targets.
+          append_shared(
+            "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
+          )
+        }
       Emit::Enum(TypeName(name), variants) => {
         let b = StringBuilder::new()
         render_enum(b, name, variants)
@@ -664,9 +560,7 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
       Emit::TypedefAlias(TypeName(name), target_type) =>
         append_shared("pub type \{name} = \{target_type}")
       Emit::Const(ConstName(const_name), TypeName(type_name), value) =>
-        append_shared(
-          "pub const \{const_name}: \{type_name} = \{value}",
-        )
+        append_shared("pub const \{const_name}: \{type_name} = \{value}")
       Emit::FileHeader(TypeName(type_name), Specs(specs)) => {
         let b = StringBuilder::new()
         render_file_header(b, type_name, specs)

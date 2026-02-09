@@ -4,7 +4,7 @@ fn custom_element_registry_new_ffi() -> CustomElementRegistry = "webapi_CustomEl
 ///|
 fn custom_element_registry_get_is_undefined_ffi(
   obj : CustomElementRegistryGet,
-) -> Bool = "JsValue" "isNull"
+) -> Bool = "JsValue" "isUndefined"
 
 ///|
 fn custom_element_registry_define_ffi(

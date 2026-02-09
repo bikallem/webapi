@@ -1,5 +1,5 @@
 ///|
-fn window_event_is_undefined_ffi(obj : WindowEvent) -> Bool = "JsValue" "isNull"
+fn window_event_is_undefined_ffi(obj : WindowEvent) -> Bool = "JsValue" "isUndefined"
 
 ///|
 fn window_event_ffi(obj : JsValue) -> WindowEvent = "webapi_Window" "get_event"

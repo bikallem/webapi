@@ -61,7 +61,9 @@ pub impl THTMLSelectElementAddBefore for HTMLElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl THTMLSelectElementAddBefore for Int with to_js(self : Int) -> JsValue = "%identity"
+pub impl THTMLSelectElementAddBefore for Int with to_js(self : Int) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 /// [HTMLSelectElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement) interface.

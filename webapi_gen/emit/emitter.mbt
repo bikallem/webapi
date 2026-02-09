@@ -51,12 +51,18 @@ pub fn[E : Emitter] emit_all_multi(
     shared[Filename(base_filename)] = Code(multi.shared)
     // JS/wasm FFI files only if there's FFI content
     if multi.js_ffi.length() > 0 {
-      let js_filename = base_filename.strip_suffix(".mbt").unwrap_or("").to_string() +
+      let js_filename = base_filename
+        .strip_suffix(".mbt")
+        .unwrap_or("")
+        .to_string() +
         "_js.mbt"
       js_ffi[Filename(js_filename)] = Code(multi.js_ffi)
     }
     if multi.wasm_ffi.length() > 0 {
-      let wasm_filename = base_filename.strip_suffix(".mbt").unwrap_or("").to_string() +
+      let wasm_filename = base_filename
+        .strip_suffix(".mbt")
+        .unwrap_or("")
+        .to_string() +
         "_wasm.mbt"
       wasm_ffi[Filename(wasm_filename)] = Code(multi.wasm_ffi)
     }

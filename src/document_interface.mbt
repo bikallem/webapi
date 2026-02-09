@@ -59,7 +59,9 @@ pub(open) trait TDocumentImportNodeOptions {
 }
 
 ///|
-pub impl TDocumentImportNodeOptions for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TDocumentImportNodeOptions for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TDocumentImportNodeOptions for ImportNodeOptions with to_js(

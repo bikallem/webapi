@@ -98,7 +98,9 @@ pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii {
 ///|
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Double with to_js(
   self : Double,
-) -> JsValue = "%identity"
+) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for DOMPointInit with to_js(
@@ -113,7 +115,9 @@ pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii2 {
 ///|
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for Double with to_js(
   self : Double,
-) -> JsValue = "%identity"
+) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit with to_js(

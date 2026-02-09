@@ -43,7 +43,9 @@ pub(open) trait TPath2DRoundRectRadii {
 }
 
 ///|
-pub impl TPath2DRoundRectRadii for Double with to_js(self : Double) -> JsValue = "%identity"
+pub impl TPath2DRoundRectRadii for Double with to_js(self : Double) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TPath2DRoundRectRadii for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
@@ -54,7 +56,9 @@ pub(open) trait TPath2DRoundRectRadii2 {
 }
 
 ///|
-pub impl TPath2DRoundRectRadii2 for Double with to_js(self : Double) -> JsValue = "%identity"
+pub impl TPath2DRoundRectRadii2 for Double with to_js(self : Double) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TPath2DRoundRectRadii2 for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"

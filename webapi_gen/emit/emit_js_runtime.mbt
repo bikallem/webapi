@@ -3,16 +3,17 @@
 ///|
 let js_reserved : @hashset.HashSet[String] = {
   let s = @hashset.HashSet::new()
-  for kw in [
-    "break", "case", "catch", "continue", "debugger", "default", "delete", "do",
-    "else", "finally", "for", "function", "if", "in", "instanceof", "new",
-    "return", "switch", "this", "throw", "try", "typeof", "var", "void",
-    "while", "with", "class", "const", "enum", "export", "extends", "import",
-    "super", "implements", "interface", "let", "package", "private", "protected",
-    "public", "static", "yield", "await",
-    // Not reserved words, but cannot be used as identifiers in strict mode (ES modules)
-    "arguments", "eval",
-  ] {
+  for
+    kw in [
+      "break", "case", "catch", "continue", "debugger", "default", "delete", "do",
+      "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return",
+      "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with",
+      "class", "const", "enum", "export", "extends", "import", "super", "implements",
+      "interface", "let", "package", "private", "protected", "public", "static",
+      "yield", "await",
+      // Not reserved words, but cannot be used as identifiers in strict mode (ES modules)
+       "arguments", "eval",
+    ] {
     s.add(kw)
   }
   s
@@ -45,7 +46,8 @@ fn emit_js_preamble() -> String {
     #|  JsValue: {
     #|    undefined: () => undefined,
     #|    null: () => null,
-    #|    isNull: (value) => value === null || value === undefined
+    #|    isNull: (value) => value === null || value === undefined,
+    #|    isUndefined: (value) => value === undefined
     #|  },
     #|
     #|  JsNull: {
@@ -87,7 +89,9 @@ fn emit_js_preamble() -> String {
 }
 
 ///|
-/// Check if a name needs quoting in JS (contains characters invalid in identifiers)
+/// Check if a name needs quoting in JS (contains characters invalid in identifiers).
+/// In WebIDL, only CSS property names contain hyphens (e.g. "background-color").
+/// Other special characters (dots, spaces, leading digits) don't appear in WebIDL names.
 fn needs_js_quoting(name : String) -> Bool {
   name.contains("-")
 }
@@ -182,7 +186,9 @@ fn emit_js_interface_module(
         } else {
           "new_\{constructor_count}"
         }
-        entries.push(emit_js_constructor(import_name, iface.name, ctor.arguments))
+        entries.push(
+          emit_js_constructor(import_name, iface.name, ctor.arguments),
+        )
       }
       _ => continue
     }
@@ -216,7 +222,9 @@ fn emit_js_interface_module(
             "\{op.name}_\{count + 1}"
           }
         }
-        entries.push(emit_js_method(import_name, op.name, op.arguments, op.static_))
+        entries.push(
+          emit_js_method(import_name, op.name, op.arguments, op.static_),
+        )
       }
       _ => continue
     }
@@ -266,9 +274,7 @@ fn emit_js_dictionary_module(
 
 ///|
 /// Emit a JS module for a callback
-fn emit_js_callback_module(
-  cb : @parser.CallbackFunctionDefinition,
-) -> String {
+fn emit_js_callback_module(cb : @parser.CallbackFunctionDefinition) -> String {
   "  webapi_\{cb.name}: {\n    new: (f) => f\n  }"
 }
 

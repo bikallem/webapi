@@ -97,7 +97,7 @@ On the JS backend, FFI is embedded as inline JavaScript strings. On wasm-gc, Jav
 ```javascript
 // webapi.mjs (generated)
 export const wasmImportObject = {
-  JsValue: { undefined, null, isNull },
+  JsValue: { undefined, null, isNull, isUndefined },
   webapi_Primitives: { boolToJs, intToJs, ... },
   webapi_Global: { document, window, navigator },
 

@@ -132,7 +132,9 @@ pub(open) trait TElementScrollIntoViewArg {
 }
 
 ///|
-pub impl TElementScrollIntoViewArg for Bool with to_js(self : Bool) -> JsValue = "%identity"
+pub impl TElementScrollIntoViewArg for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
 
 ///|
 pub impl TElementScrollIntoViewArg for ScrollIntoViewOptions with to_js(

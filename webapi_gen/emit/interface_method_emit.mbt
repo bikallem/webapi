@@ -8,6 +8,19 @@ trait InterfaceMethodEmit: ToJson + Show {
 }
 
 ///|
+/// Other types that are valid as wasm-gc import return types.
+/// These are all externref (#external) types or Unit.
+let wasm_valid_other_types : Array[String] = [
+  "JsValue", "Unit", "JsUndefined",
+  // Typed arrays — all #external types
+   "Uint8Array", "Uint8ClampedArray", "Int8Array", "Uint16Array", "Int16Array", "Uint32Array",
+  "Int32Array", "Float16Array", "Float32Array", "Float64Array", "BigInt64Array",
+  "BigUint64Array",
+  // Buffer types — #external
+   "DataView", "ArrayBuffer", "SharedArrayBuffer",
+]
+
+///|
 /// Check if an ArgMbtType is valid as a wasm-gc import return type.
 /// Primitives, #external interfaces, enums, dictionaries, and Self are valid.
 /// Parameterized non-external types (Array[T]) and typedefs that resolve to them are not.
@@ -19,10 +32,8 @@ fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
     Interface(_) | Enum(_) | Dictionary(_) | Self => true
     Other(name) =>
       // JsValue, Unit, JsUndefined are valid externref types.
-      // Typed arrays (Uint8Array, etc.), DataView, ArrayBuffer are #external types.
-      name == "JsValue" || name == "Unit" || name == "JsUndefined" ||
-      name.has_suffix("Array") || name == "DataView" || name == "ArrayBuffer" ||
-      name == "SharedArrayBuffer"
+      // Typed arrays, DataView, ArrayBuffer, SharedArrayBuffer are #external types.
+      wasm_valid_other_types.contains(name)
     Union(_) => false // Union types resolve to trait names, not valid as stubs
   }
 }
@@ -37,19 +48,47 @@ fn is_string_return(type_ : @type_mapping.ArgMbtType) -> Bool {
 }
 
 ///|
-/// Emit wasm-gc FFI wrapper for String returns using jsvalue_to_string.
-fn emit_wasm_string_wrapper(
+/// Emit wasm-gc FFI declaration with return-type dispatch.
+/// Handles the four cases: void/optional, String, valid stub type, or JsValue wrapper.
+fn emit_wasm_ffi_with_return(
   ffi_name : String,
   ffi_args : String,
   ffi_argnames : Array[String],
+  return_type_name : String,
+  is_optional~ : Bool,
+  is_void~ : Bool,
+  is_string~ : Bool,
+  is_valid_stub~ : Bool,
   module_name : String,
   import_name : String,
 ) -> Code {
-  let raw_name = ffi_name + "_wasm"
-  let call_fwd = ffi_argnames.join(", ")
-  Code(
-    "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> String {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
-  )
+  if is_void || is_optional {
+    // Void or optional: use JsValue/Unit directly as wasm import return
+    let ffi_ret = if is_void { "Unit" } else { "JsValue" }
+    Code(
+      "fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret} = \"\{module_name}\" \"\{import_name}\"",
+    )
+  } else if is_string {
+    // String: wasm imports return externref (nullable), but String is (ref extern) (non-nullable).
+    // Use jsvalue_to_string wrapper: externref → String? → unwrap → String.
+    let raw_name = ffi_name + "_wasm"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> String {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
+    )
+  } else if is_valid_stub {
+    // Valid stub type: declare import with actual MoonBit type directly
+    Code(
+      "fn \{ffi_name}(\{ffi_args}) -> \{return_type_name} = \"\{module_name}\" \"\{import_name}\"",
+    )
+  } else {
+    // Invalid stub type (Array[T], typedefs, etc.): import as JsValue + unsafe_cast wrapper
+    let raw_name = ffi_name + "_wasm"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
+    )
+  }
 }
 
 ///|
@@ -62,7 +101,7 @@ fn emit_method_body(
   ffi_name : String,
   call_args : String,
   optional_return : Bool,
-  void_return~ : Bool = false,
+  void_return? : Bool = false,
 ) -> Unit {
   if optional_return {
     // Optional: FFI returns JsValue so we can check for null
@@ -151,33 +190,18 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ret_name = self.return_type.type_.name()
-  if ret_name == "Unit" || self.return_type.optional {
-    // Void or optional: use JsValue/Unit directly
-    let ffi_ret = if ret_name == "Unit" { "Unit" } else { "JsValue" }
-    Code(
-      "fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret} = \"\{module_name}\" \"\{self.original_name}\"",
-    )
-  } else if is_string_return(self.return_type.type_) {
-    // String: use jsvalue_to_string wrapper (externref → String via String? + unwrap)
-    emit_wasm_string_wrapper(
-      ffi_name, ffi_args, ffi_argnames, module_name, self.original_name,
-    )
-  } else if is_wasm_valid_stub_type(self.return_type.type_) {
-    // Valid stub type: declare import with actual type directly.
-    // This avoids the externref→(ref extern) nullable mismatch for #external types,
-    // and uses proper i32/f64 for primitives.
-    Code(
-      "fn \{ffi_name}(\{ffi_args}) -> \{self.return_type.type_name()} = \"\{module_name}\" \"\{self.original_name}\"",
-    )
-  } else {
-    // Invalid stub type (Array[T], typedefs, etc.): use JsValue + wrapper
-    let raw_name = ffi_name + "_wasm"
-    let call_fwd = ffi_argnames.join(", ")
-    let ret_type = self.return_type.type_name()
-    Code(
-      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{self.original_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{ret_type} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
-    )
-  }
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    is_string=is_string_return(self.return_type.type_),
+    is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
+    module_name,
+    self.original_name,
+  )
 }
 
 ///|
@@ -267,27 +291,18 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
   let ffi_argnames = self.args.map(arg => arg.name)
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ret_name = self.return_type.type_.name()
-  if ret_name == "Unit" || self.return_type.optional {
-    let ffi_ret = if ret_name == "Unit" { "Unit" } else { "JsValue" }
-    Code(
-      "fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret} = \"\{module_name}\" \"\{self.original_name}\"",
-    )
-  } else if is_string_return(self.return_type.type_) {
-    emit_wasm_string_wrapper(
-      ffi_name, ffi_args, ffi_argnames, module_name, self.original_name,
-    )
-  } else if is_wasm_valid_stub_type(self.return_type.type_) {
-    Code(
-      "fn \{ffi_name}(\{ffi_args}) -> \{self.return_type.type_name()} = \"\{module_name}\" \"\{self.original_name}\"",
-    )
-  } else {
-    let raw_name = ffi_name + "_wasm"
-    let call_fwd = ffi_argnames.join(", ")
-    let ret_type = self.return_type.type_name()
-    Code(
-      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{self.original_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{ret_type} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
-    )
-  }
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    ffi_args,
+    ffi_argnames,
+    self.return_type.type_name(),
+    is_optional=self.return_type.optional,
+    is_void=ret_name == "Unit",
+    is_string=is_string_return(self.return_type.type_),
+    is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
+    module_name,
+    self.original_name,
+  )
 }
 
 ///|
@@ -368,26 +383,18 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_wasm(
   module_name : String,
 ) -> Code {
   let ffi_name = self.ffi_name()
-  if self.return_type.has_suffix("?") {
-    // Optional: return JsValue for null-checking
-    Code(
-      "fn \{ffi_name}(obj: JsValue) -> JsValue = \"\{module_name}\" \"get_\{self.original_name}\"",
-    )
-  } else if self.return_type == "String" {
-    // String: use jsvalue_to_string wrapper (externref → String via String? + unwrap)
-    emit_wasm_string_wrapper(
-      ffi_name,
-      "obj: JsValue",
-      ["obj"],
-      module_name,
-      "get_\{self.original_name}",
-    )
-  } else {
-    // Other non-optional: declare import with actual type directly
-    Code(
-      "fn \{ffi_name}(obj: JsValue) -> \{self.return_type} = \"\{module_name}\" \"get_\{self.original_name}\"",
-    )
-  }
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    "obj: JsValue",
+    ["obj"],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    is_string=self.return_type == "String",
+    is_valid_stub=true, // Attribute getters always return valid types (non-parameterized)
+    module_name,
+    "get_\{self.original_name}",
+  )
 }
 
 ///|
@@ -538,20 +545,18 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_wasm(
   module_name : String,
 ) -> Code {
   let ffi_name = self.ffi_name()
-  if self.return_type.has_suffix("?") {
-    Code(
-      "fn \{ffi_name}() -> JsValue = \"\{module_name}\" \"get_\{self.original_name}\"",
-    )
-  } else if self.return_type == "String" {
-    let raw_name = ffi_name + "_wasm"
-    Code(
-      "fn \{raw_name}() -> JsValue = \"\{module_name}\" \"get_\{self.original_name}\"\n\n///|\nfn \{ffi_name}() -> String {\n  jsvalue_to_string(\{raw_name}())\n}",
-    )
-  } else {
-    Code(
-      "fn \{ffi_name}() -> \{self.return_type} = \"\{module_name}\" \"get_\{self.original_name}\"",
-    )
-  }
+  emit_wasm_ffi_with_return(
+    ffi_name,
+    "",
+    [],
+    self.return_type,
+    is_optional=self.return_type.has_suffix("?"),
+    is_void=false,
+    is_string=self.return_type == "String",
+    is_valid_stub=true, // Static attribute getters always return valid types
+    module_name,
+    "get_\{self.original_name}",
+  )
 }
 
 ///|
