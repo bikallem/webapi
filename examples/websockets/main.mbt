@@ -1,5 +1,9 @@
 ///|
-/// WebSocket Demo - connect, send messages, show connection state
+extern "js" fn jsvalue_to_string(v : @webapi.JsValue) -> String =
+  #| (v) => String(v)
+
+///|
+/// WebSocket Demo - uses generated WebSocket bindings to connect, send, and receive
 fn main {
   let doc = @webapi.document
 
@@ -10,94 +14,140 @@ fn main {
   let status = doc.create_element("div")
   status
   ..set_attribute("id", "ws-status")
-  ..set_attribute("style", "font-family: monospace; font-size: 1.2em; margin: 0.5em 0; padding: 0.5em; background: #f5f5f5; border-radius: 4px;")
+  ..set_attribute(
+    "style",
+    "font-family: monospace; font-size: 1.2em; margin: 0.5em 0; padding: 0.5em; background: #f5f5f5; border-radius: 4px;",
+  )
   .set_text_content("Status: Disconnected")
-
-  // Connect button
-  let connect_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
-  connect_btn
-  ..set_attribute("id", "connect-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0.25em 0.5em 0;")
-  .set_text_content("Connect")
-
-  // Disconnect button
-  let disconnect_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
-  disconnect_btn
-  ..set_attribute("id", "disconnect-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0.25em;")
-  .set_text_content("Disconnect")
 
   // Messages log
   let messages = doc.create_element("div")
   messages
   ..set_attribute("id", "messages")
-  ..set_attribute("style", "font-family: monospace; padding: 1em; background: #f9f9f9; margin: 1em 0; border-radius: 4px; min-height: 100px; white-space: pre-line; border: 1px solid #ddd;")
+  ..set_attribute(
+    "style",
+    "font-family: monospace; padding: 1em; background: #f9f9f9; margin: 1em 0; border-radius: 4px; min-height: 100px; white-space: pre-line; border: 1px solid #ddd;",
+  )
   .set_text_content("Messages will appear here...")
 
-  // Connect handler - try connecting to echo.websocket.org (or just show state changes)
+  // Mutable WebSocket reference
+  let ws : Ref[@webapi.WebSocket?] = { val: None }
+
+  let update_status = fn(text : String) { status.set_text_content(text) }
+
+  let log_message = fn(text : String) {
+    let current = messages.text_content()
+    if current == "Messages will appear here..." {
+      messages.set_text_content(text)
+    } else {
+      messages.set_text_content(current + "\n" + text)
+    }
+  }
+
+  // Connect button
+  let connect_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .into()
+  connect_btn
+  ..set_attribute("id", "connect-btn")
+  ..set_attribute(
+    "style",
+    "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0.25em 0.5em 0;",
+  )
+  .set_text_content("Connect")
+
+  // Disconnect button
+  let disconnect_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .into()
+  disconnect_btn
+  ..set_attribute("id", "disconnect-btn")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0.25em;",
+  )
+  .set_text_content("Disconnect")
+
+  // Connect handler
   connect_btn.add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
-      ws_connect(status, messages)
+      match ws.val {
+        Some(s) =>
+          if s.ready_state() < @webapi.WEB_SOCKET_CLOSING {
+            return
+          }
+        _ => ()
+      }
+      update_status("Status: Connecting...")
+      let socket = @webapi.WebSocket::new("wss://echo.websocket.org")
+      ws.val = Some(socket)
+      socket.set_onopen(
+        @webapi.EventHandlerNonNull::new(fn(_e) {
+          update_status(
+            "Status: Connected (readyState=" +
+            socket.ready_state().to_string() +
+            ")",
+          )
+          log_message("Connected! Sending test message...")
+          socket.send("Hello from MoonBit!")
+          @webapi.JsValue::undefined()
+        }),
+      )
+      socket.set_onmessage(
+        @webapi.EventHandlerNonNull::new(fn(e) {
+          let msg_event : @webapi.MessageEvent = e.into()
+          log_message("Received: " + jsvalue_to_string(msg_event.data()))
+          @webapi.JsValue::undefined()
+        }),
+      )
+      socket.set_onclose(
+        @webapi.EventHandlerNonNull::new(fn(e) {
+          let close_event : @webapi.CloseEvent = e.into()
+          update_status(
+            "Status: Closed (code=" + close_event.code().to_string() + ")",
+          )
+          log_message("Connection closed")
+          @webapi.JsValue::undefined()
+        }),
+      )
+      socket.set_onerror(
+        @webapi.EventHandlerNonNull::new(fn(_e) {
+          update_status("Status: Error")
+          log_message("Connection error")
+          @webapi.JsValue::undefined()
+        }),
+      )
     }),
   )
 
+  // Disconnect handler
   disconnect_btn.add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
-      ws_disconnect(status, messages)
+      match ws.val {
+        Some(s) =>
+          if s.ready_state() < @webapi.WEB_SOCKET_CLOSING {
+            s.close()
+            update_status("Status: Closing...")
+          } else {
+            log_message("No active connection")
+          }
+        _ => log_message("No active connection")
+      }
     }),
   )
 
+  // Build DOM
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
-  let children : Array[&@webapi.TNode] = [heading, status, connect_btn, disconnect_btn, messages]
+  let children : Array[&@webapi.TNode] = [
+    heading, status, connect_btn, disconnect_btn, messages,
+  ]
   for child in children {
     container.append_child(child) |> ignore
   }
   app.append_child(container) |> ignore
 }
-
-///|
-extern "js" fn ws_connect(status_el : @webapi.Element, msg_el : @webapi.Element) =
-  #| (statusEl, msgEl) => {
-  #|   if (window._ws && window._ws.readyState < 2) { return; }
-  #|   statusEl.textContent = 'Status: Connecting...';
-  #|   try {
-  #|     const ws = new WebSocket('wss://echo.websocket.org');
-  #|     window._ws = ws;
-  #|     ws.onopen = () => {
-  #|       statusEl.textContent = 'Status: Connected (readyState=' + ws.readyState + ')';
-  #|       msgEl.textContent = 'Connected! Sending test message...';
-  #|       ws.send('Hello from MoonBit!');
-  #|     };
-  #|     ws.onmessage = (e) => {
-  #|       msgEl.textContent += '\nReceived: ' + e.data;
-  #|     };
-  #|     ws.onclose = (e) => {
-  #|       statusEl.textContent = 'Status: Closed (code=' + e.code + ')';
-  #|       msgEl.textContent += '\nConnection closed';
-  #|     };
-  #|     ws.onerror = () => {
-  #|       statusEl.textContent = 'Status: Error';
-  #|       msgEl.textContent += '\nConnection error';
-  #|     };
-  #|   } catch(e) {
-  #|     statusEl.textContent = 'Status: Failed to connect';
-  #|     msgEl.textContent = 'Error: ' + e.message;
-  #|   }
-  #| }
-
-///|
-extern "js" fn ws_disconnect(status_el : @webapi.Element, msg_el : @webapi.Element) =
-  #| (statusEl, msgEl) => {
-  #|   if (window._ws && window._ws.readyState < 2) {
-  #|     window._ws.close();
-  #|     statusEl.textContent = 'Status: Closing...';
-  #|   } else {
-  #|     msgEl.textContent += '\nNo active connection';
-  #|   }
-  #| }
