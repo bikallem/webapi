@@ -1484,6 +1484,22 @@ pub type FrameRequestCallback
 pub fn FrameRequestCallback::new((Double) -> Unit) -> Self
 pub impl TJsValue for FrameRequestCallback
 
+pub(all) enum FullscreenNavigationUI {
+  Auto
+  Show
+  Hide
+}
+pub fn FullscreenNavigationUI::from(String) -> Self?
+pub impl TJsValue for FullscreenNavigationUI
+pub impl Eq for FullscreenNavigationUI
+pub impl Show for FullscreenNavigationUI
+
+#external
+pub type FullscreenOptions
+pub fn FullscreenOptions::empty() -> Self
+pub fn FullscreenOptions::new(navigation_ui? : FullscreenNavigationUI) -> Self
+pub impl TJsValue for FullscreenOptions
+
 #external
 pub type Function
 pub fn Function::new((JsValue) -> JsValue) -> Self
@@ -5490,12 +5506,20 @@ pub trait TDocument : TNode {
   elements_from_point(Self, Double, Double) -> Array[Element]
   caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> CaretPosition?
   scrolling_element(Self) -> Element
+  fullscreen_enabled(Self) -> Bool
+  fullscreen(Self) -> Bool
+  exit_fullscreen(Self) -> @js_async.Promise[Unit]
+  onfullscreenchange(Self) -> EventHandlerNonNull
+  set_onfullscreenchange(Self, EventHandlerNonNull) -> Unit
+  onfullscreenerror(Self) -> EventHandlerNonNull
+  set_onfullscreenerror(Self, EventHandlerNonNull) -> Unit
   get_element_by_id(Self, String) -> Element?
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
   style_sheets(Self) -> StyleSheetList
   adopted_style_sheets(Self) -> JsValue
   set_adopted_style_sheets(Self, JsValue) -> Unit
+  fullscreen_element(Self) -> Element
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
@@ -5838,6 +5862,11 @@ pub trait TElement : TNode {
   client_width(Self) -> Int
   client_height(Self) -> Int
   current_css_zoom(Self) -> Double
+  request_fullscreen(Self, options? : FullscreenOptions) -> @js_async.Promise[Unit]
+  onfullscreenchange(Self) -> EventHandlerNonNull
+  set_onfullscreenchange(Self, EventHandlerNonNull) -> Unit
+  onfullscreenerror(Self) -> EventHandlerNonNull
+  set_onfullscreenerror(Self, EventHandlerNonNull) -> Unit
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
@@ -9188,6 +9217,7 @@ pub trait TShadowRoot : TDocumentFragment {
   style_sheets(Self) -> StyleSheetList
   adopted_style_sheets(Self) -> JsValue
   set_adopted_style_sheets(Self, JsValue) -> Unit
+  fullscreen_element(Self) -> Element
 }
 
 pub(open) trait TShadowRootInnerHTML {

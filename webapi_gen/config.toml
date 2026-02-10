@@ -24,6 +24,7 @@ core_specs = [
     "xhr",
     "requestidlecallback",
     "fullscreen",
+    "screen-orientation",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]
