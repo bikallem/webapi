@@ -119,6 +119,59 @@ impl TElement for Element with get_attribute(self, name) {
 - Update `CHANGELOG.md`
 - Bump version in `moon.mod.json`
 
+## WebIDL Spec Roadmap
+
+Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add a spec, append its filename (without `.idl`) and regenerate.
+
+### Currently included
+
+`console`, `cssom`, `cssom-view`, `dom`, `fetch`, `html`, `hr-time`, `geometry`, `FileAPI`, `performance-timeline`, `referrer-policy`, `SVG`, `trusted-types`, `uievents`, `url`, `webidl`, `xhr`
+
+### Candidates for inclusion
+
+#### High value (commonly used in web apps)
+
+| Spec | Key APIs | Notes |
+|------|----------|-------|
+| `encoding` | TextEncoder, TextDecoder | Essential for binary/string conversion |
+| `streams` | ReadableStream, WritableStream, TransformStream | Used by fetch body, file APIs |
+| `intersection-observer` | IntersectionObserver | Lazy loading, infinite scroll |
+| `resize-observer` | ResizeObserver | Responsive layout changes |
+| `selection-api` | Selection, Range | Text selection and editing |
+| `clipboard-apis` | Clipboard | Copy/paste |
+| `fullscreen` | Fullscreen API | |
+| `pointerevents` | PointerEvent | Unified mouse/touch/pen input |
+| `touch-events` | TouchEvent | Mobile touch handling |
+| `web-animations` | Animation, KeyframeEffect | Programmatic animations |
+| `storage` | StorageManager | Storage quota and persistence |
+| `screen-orientation` | ScreenOrientation | Orientation lock/detection |
+| `notifications` | Notification | Push notifications UI |
+| `IndexedDB` | IDBDatabase, IDBObjectStore | Client-side structured storage |
+| `websockets` | WebSocket | Real-time communication |
+| `requestidlecallback` | requestIdleCallback | Background task scheduling |
+
+#### Moderate value (more specialized)
+
+| Spec | Key APIs | Notes |
+|------|----------|-------|
+| `webcodecs` | VideoEncoder, VideoDecoder, AudioEncoder | Video/audio encoding/decoding |
+| `webaudio` | AudioContext, AudioNode | Web Audio API |
+| `webgl1` / `webgl2` | WebGLRenderingContext | WebGL (large surface area) |
+| `mediacapture-streams` | MediaStream, getUserMedia | Camera/mic access |
+| `service-workers` | ServiceWorker, Cache | Offline support |
+| `push-api` | PushManager, PushSubscription | Push notifications backend |
+| `permissions` | Permissions | Query/request permissions |
+| `screen-wake-lock` | WakeLock | Prevent screen sleep |
+| `serial` | SerialPort | Serial port access |
+| `webhid` | HID | Human interface devices |
+| `webusb` | USB | USB device access |
+| `webrtc` | RTCPeerConnection | Peer-to-peer communication |
+| `entries-api` | FileSystemEntry | File drag-and-drop |
+| `file-system-access` | FileSystemFileHandle | Native file picker |
+| `mediastream-recording` | MediaRecorder | Audio/video recording |
+| `image-capture` | ImageCapture | Camera still photos |
+| `gamepad` | Gamepad | Game controller input |
+
 ## Important Notes
 
 - **Target**: This library targets the JS backend only (`--target js`)
