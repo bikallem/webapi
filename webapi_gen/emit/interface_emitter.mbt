@@ -9,7 +9,7 @@ pub(all) struct InterfaceEmitter {
 /// Convert method arguments from IDL to MBT types, collecting any additional emits needed
 /// for complex types (e.g., union arg traits).
 fn method_args(
-  args : Array[(String, @parser.Type, Bool, @parser.DefaultValue?)],
+  args : Array[(String, @parser.Type, Bool, @parser.DefaultValue?, Bool)],
   interface_name : String,
   method_name : String,
   type_registry : @type_registry.TypeRegistry,
@@ -17,7 +17,7 @@ fn method_args(
   let emits = []
   let mbt_args = []
   for arg in args {
-    let (arg_name, type_, optional, default_value) = arg
+    let (arg_name, type_, optional, default_value, variadic) = arg
     let (mbt_type, arg_emits) = arg_mbt_type(
       type_, interface_name, method_name, arg_name, type_registry,
     )
@@ -33,11 +33,22 @@ fn method_args(
       }
       _ => mbt_type
     }
+    let mbt_type = if variadic {
+      let inner = if mbt_type.name() == "JsValue" {
+        "&TJsValue"
+      } else {
+        mbt_type.name()
+      }
+      @type_mapping.ArgMbtType::Other("Array[\{inner}]")
+    } else {
+      mbt_type
+    }
     mbt_args.push(@type_mapping.MethodArg::{
       name: @type_mapping.safe_identifier(arg_name),
       original_name: arg_name,
       type_: mbt_type,
       optional,
+      variadic,
       default_value,
     })
   }
@@ -169,7 +180,7 @@ fn emit_constructor(
   }
   let (args, arg_emits) = method_args(
     ctor.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
     }),
     interface_name,
     method_name,
@@ -214,7 +225,7 @@ fn emit_regular_operation(
   let emits = []
   let (args, arg_emits) = method_args(
     op.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
     }),
     interface_name,
     orig_method_name,
@@ -228,6 +239,7 @@ fn emit_regular_operation(
       original_name: "self",
       type_: @type_mapping.ArgMbtType::Self,
       optional: false,
+      variadic: false,
       default_value: None,
     }
     [self_arg, ..args]
@@ -320,6 +332,7 @@ fn emit_attribute(
           original_name: "self",
           type_: @type_mapping.ArgMbtType::Self,
           optional: false,
+          variadic: false,
           default_value: None,
         },
         @type_mapping.MethodArg::{
@@ -327,6 +340,7 @@ fn emit_attribute(
           original_name: attr.name,
           type_: attr_type,
           optional: false,
+          variadic: false,
           default_value: None,
         },
       ]
@@ -382,7 +396,7 @@ fn emit_special_operation(
   let emits = []
   let (args, arg_emits) = method_args(
     op.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
     }),
     interface_name,
     orig_method_name,
@@ -393,6 +407,7 @@ fn emit_special_operation(
     original_name: "self",
     type_: @type_mapping.ArgMbtType::Self,
     optional: false,
+    variadic: false,
     default_value: None,
   }
   let args = [self_arg, ..args]
@@ -431,7 +446,7 @@ fn emit_unnamed_special_operation(
   let emits = []
   let (args, arg_emits) = method_args(
     op.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value)
+      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
     }),
     interface_name,
     orig_method_name,
@@ -442,6 +457,7 @@ fn emit_unnamed_special_operation(
     original_name: "self",
     type_: @type_mapping.ArgMbtType::Self,
     optional: false,
+    variadic: false,
     default_value: None,
   }
   let args = [self_arg, ..args]

@@ -5028,9 +5028,9 @@ pub trait TCharacterData : TNode {
   replace_data(Self, UInt, UInt, String) -> Unit
   previous_element_sibling(Self) -> Element
   next_element_sibling(Self) -> Element
-  before(Self, &TCharacterDataBeforeNodes) -> Unit
-  after(Self, &TCharacterDataAfterNodes) -> Unit
-  replace_with(Self, &TCharacterDataReplaceWithNodes) -> Unit
+  before(Self, Array[&TCharacterDataBeforeNodes]) -> Unit
+  after(Self, Array[&TCharacterDataAfterNodes]) -> Unit
+  replace_with(Self, Array[&TCharacterDataReplaceWithNodes]) -> Unit
   remove(Self) -> Unit
 }
 
@@ -5303,8 +5303,8 @@ pub trait TDOMTokenList : TJsValue {
   length(Self) -> UInt
   item(Self, UInt) -> String?
   contains(Self, String) -> Bool
-  add(Self, String) -> Unit
-  remove(Self, String) -> Unit
+  add(Self, Array[String]) -> Unit
+  remove(Self, Array[String]) -> Unit
   toggle(Self, String, force? : Bool) -> Bool
   replace(Self, String, String) -> Bool
   supports(Self, String) -> Bool
@@ -5412,8 +5412,8 @@ pub trait TDocument : TNode {
   open(Self, unused1? : String, unused2? : String) -> Document
   open_2(Self, String, String, String) -> Window?
   close(Self) -> Unit
-  write(Self, &TDocumentWriteText) -> Unit
-  writeln(Self, &TDocumentWritelnText) -> Unit
+  write(Self, Array[&TDocumentWriteText]) -> Unit
+  writeln(Self, Array[&TDocumentWritelnText]) -> Unit
   default_view(Self) -> Window
   has_focus(Self) -> Bool
   design_mode(Self) -> String
@@ -5460,9 +5460,9 @@ pub trait TDocument : TNode {
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
   child_element_count(Self) -> UInt
-  prepend(Self, &TDocumentPrependNodes) -> Unit
-  append(Self, &TDocumentAppendNodes) -> Unit
-  replace_children(Self, &TDocumentReplaceChildrenNodes) -> Unit
+  prepend(Self, Array[&TDocumentPrependNodes]) -> Unit
+  append(Self, Array[&TDocumentAppendNodes]) -> Unit
+  replace_children(Self, Array[&TDocumentReplaceChildrenNodes]) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
   query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
@@ -5648,9 +5648,9 @@ pub trait TDocumentFragment : TNode {
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
   child_element_count(Self) -> UInt
-  prepend(Self, &TDocumentFragmentPrependNodes) -> Unit
-  append(Self, &TDocumentFragmentAppendNodes) -> Unit
-  replace_children(Self, &TDocumentFragmentReplaceChildrenNodes) -> Unit
+  prepend(Self, Array[&TDocumentFragmentPrependNodes]) -> Unit
+  append(Self, Array[&TDocumentFragmentAppendNodes]) -> Unit
+  replace_children(Self, Array[&TDocumentFragmentReplaceChildrenNodes]) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
   query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
@@ -5695,9 +5695,9 @@ pub trait TDocumentType : TNode {
   name(Self) -> String
   public_id(Self) -> String
   system_id(Self) -> String
-  before(Self, &TDocumentTypeBeforeNodes) -> Unit
-  after(Self, &TDocumentTypeAfterNodes) -> Unit
-  replace_with(Self, &TDocumentTypeReplaceWithNodes) -> Unit
+  before(Self, Array[&TDocumentTypeBeforeNodes]) -> Unit
+  after(Self, Array[&TDocumentTypeAfterNodes]) -> Unit
+  replace_with(Self, Array[&TDocumentTypeReplaceWithNodes]) -> Unit
   remove(Self) -> Unit
 }
 
@@ -5802,17 +5802,17 @@ pub trait TElement : TNode {
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
   child_element_count(Self) -> UInt
-  prepend(Self, &TElementPrependNodes) -> Unit
-  append(Self, &TElementAppendNodes) -> Unit
-  replace_children(Self, &TElementReplaceChildrenNodes) -> Unit
+  prepend(Self, Array[&TElementPrependNodes]) -> Unit
+  append(Self, Array[&TElementAppendNodes]) -> Unit
+  replace_children(Self, Array[&TElementReplaceChildrenNodes]) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
   query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   previous_element_sibling(Self) -> Element
   next_element_sibling(Self) -> Element
-  before(Self, &TElementBeforeNodes) -> Unit
-  after(Self, &TElementAfterNodes) -> Unit
-  replace_with(Self, &TElementReplaceWithNodes) -> Unit
+  before(Self, Array[&TElementBeforeNodes]) -> Unit
+  after(Self, Array[&TElementAfterNodes]) -> Unit
+  replace_with(Self, Array[&TElementReplaceWithNodes]) -> Unit
   remove(Self) -> Unit
   assigned_slot(Self) -> HTMLSlotElement
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[DOMQuad]
@@ -7363,7 +7363,7 @@ pub trait THTMLSlotElement : THTMLElement {
   set_name(Self, String) -> Unit
   assigned_nodes(Self, options? : AssignedNodesOptions) -> Array[Node]
   assigned_elements(Self, options? : AssignedNodesOptions) -> Array[Element]
-  assign(Self, &THTMLSlotElementAssignNodes) -> Unit
+  assign(Self, Array[&THTMLSlotElementAssignNodes]) -> Unit
 }
 
 pub(open) trait THTMLSlotElementAssignNodes {
@@ -9365,9 +9365,9 @@ pub(open) trait TTrustedType {
 
 pub trait TTrustedTypePolicy : TJsValue {
   name(Self) -> String
-  create_html(Self, String, JsValue) -> TrustedHTML
-  create_script(Self, String, JsValue) -> TrustedScript
-  create_script_url(Self, String, JsValue) -> TrustedScriptURL
+  create_html(Self, String, Array[&TJsValue]) -> TrustedHTML
+  create_script(Self, String, Array[&TJsValue]) -> TrustedScript
+  create_script_url(Self, String, Array[&TJsValue]) -> TrustedScriptURL
 }
 
 pub trait TTrustedTypePolicyFactory : TJsValue {
@@ -9775,9 +9775,9 @@ pub trait TWindow : TEventTarget {
   report_error(Self, JsValue) -> Unit
   btoa(Self, String) -> String
   atob(Self, String) -> String
-  set_timeout(Self, TimerHandler, timeout? : Int, JsValue) -> Int
+  set_timeout(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_timeout(Self, id? : Int) -> Unit
-  set_interval(Self, TimerHandler, timeout? : Int, JsValue) -> Int
+  set_interval(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
   create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> @js_async.Promise[ImageBitmap]
@@ -9812,7 +9812,7 @@ pub trait TWorkerGlobalScope : TEventTarget {
   self(Self) -> WorkerGlobalScope
   location(Self) -> WorkerLocation
   navigator(Self) -> WorkerNavigator
-  import_scripts(Self, &TWorkerGlobalScopeImportScriptsUrls) -> Unit
+  import_scripts(Self, Array[&TWorkerGlobalScopeImportScriptsUrls]) -> Unit
   onerror(Self) -> OnErrorEventHandlerNonNull
   set_onerror(Self, OnErrorEventHandlerNonNull) -> Unit
   onlanguagechange(Self) -> EventHandlerNonNull
@@ -9831,9 +9831,9 @@ pub trait TWorkerGlobalScope : TEventTarget {
   report_error(Self, JsValue) -> Unit
   btoa(Self, String) -> String
   atob(Self, String) -> String
-  set_timeout(Self, TimerHandler, timeout? : Int, JsValue) -> Int
+  set_timeout(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_timeout(Self, id? : Int) -> Unit
-  set_interval(Self, TimerHandler, timeout? : Int, JsValue) -> Int
+  set_interval(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
   create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> @js_async.Promise[ImageBitmap]

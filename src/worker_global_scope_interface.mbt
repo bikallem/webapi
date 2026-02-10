@@ -42,7 +42,10 @@ pub trait TWorkerGlobalScope: TEventTarget {
   self(self : Self) -> WorkerGlobalScope = _
   location(self : Self) -> WorkerLocation = _
   navigator(self : Self) -> WorkerNavigator = _
-  import_scripts(self : Self, urls : &TWorkerGlobalScopeImportScriptsUrls) -> Unit = _
+  import_scripts(
+    self : Self,
+    urls : Array[&TWorkerGlobalScopeImportScriptsUrls],
+  ) -> Unit = _
   onerror(self : Self) -> OnErrorEventHandler = _
   set_onerror(self : Self, onerror : OnErrorEventHandler) -> Unit = _
   onlanguagechange(self : Self) -> EventHandler = _
@@ -65,14 +68,14 @@ pub trait TWorkerGlobalScope: TEventTarget {
     self : Self,
     handler : TimerHandler,
     timeout? : Int,
-    arguments : JsValue,
+    arguments : Array[&TJsValue],
   ) -> Int = _
   clear_timeout(self : Self, id? : Int) -> Unit = _
   set_interval(
     self : Self,
     handler : TimerHandler,
     timeout? : Int,
-    arguments : JsValue,
+    arguments : Array[&TJsValue],
   ) -> Int = _
   clear_interval(self : Self, id? : Int) -> Unit = _
   queue_microtask(self : Self, callback : VoidFunction) -> Unit = _
@@ -124,9 +127,16 @@ impl TWorkerGlobalScope with navigator(self : Self) -> WorkerNavigator {
 /// [WorkerGlobalScope.importScripts](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts)
 impl TWorkerGlobalScope with import_scripts(
   self : Self,
-  urls : &TWorkerGlobalScopeImportScriptsUrls,
+  urls : Array[&TWorkerGlobalScopeImportScriptsUrls],
 ) -> Unit {
-  worker_global_scope_import_scripts_ffi(TJsValue::to_js(self), urls.to_js())
+  worker_global_scope_import_scripts_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      urls.map(fn(v : &TWorkerGlobalScopeImportScriptsUrls) -> JsValue {
+        v.to_js()
+      }),
+    ),
+  )
 }
 
 ///|
@@ -279,13 +289,13 @@ impl TWorkerGlobalScope with set_timeout(
   self : Self,
   handler : TimerHandler,
   timeout? : Int = (0 : Int),
-  arguments : JsValue,
+  arguments : Array[&TJsValue],
 ) -> Int {
   worker_global_scope_set_timeout_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(handler),
     TJsValue::to_js(timeout),
-    TJsValue::to_js(arguments),
+    TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
@@ -304,13 +314,13 @@ impl TWorkerGlobalScope with set_interval(
   self : Self,
   handler : TimerHandler,
   timeout? : Int = (0 : Int),
-  arguments : JsValue,
+  arguments : Array[&TJsValue],
 ) -> Int {
   worker_global_scope_set_interval_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(handler),
     TJsValue::to_js(timeout),
-    TJsValue::to_js(arguments),
+    TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 

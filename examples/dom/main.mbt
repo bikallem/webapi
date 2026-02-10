@@ -24,7 +24,7 @@ fn main {
     let li : @webapi.HTMLLIElement = @webapi.document
       .create_element("li")
       .into()
-    li.class_list().add("item")
+    li.class_list().add(["item"])
     li.set_text_content(text)
     li
   }

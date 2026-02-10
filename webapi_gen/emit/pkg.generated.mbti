@@ -74,6 +74,7 @@ pub enum Emit {
   EmptyMethod(TypeName)
   ImplTrait(TypeName, TraitName)
   InterfaceDefinition(InterfaceDef)
+  NamespaceDefinition(NamespaceDef)
   UnionArgTrait(TraitName)
   UnionArgTraitImpl(TypeName, TraitName)
   DictionaryCreate(TypeName, Array[@type_mapping.MethodArg])
@@ -134,6 +135,19 @@ pub(all) struct MultiTargetFiles {
   js_ffi : Map[Filename, Code]
   wasm_ffi : Map[Filename, Code]
 }
+
+pub struct NamespaceDef {
+  name : String
+  methods : Array[&InterfaceMethodEmit]
+}
+pub impl Show for NamespaceDef
+pub impl ToJson for NamespaceDef
+
+pub(all) struct NamespaceEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for NamespaceEmitter
 
 type RegularMethodEmit
 pub impl Show for RegularMethodEmit

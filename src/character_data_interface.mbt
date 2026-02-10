@@ -68,9 +68,9 @@ pub trait TCharacterData: TNode {
   replace_data(self : Self, offset : UInt, count : UInt, data : String) -> Unit = _
   previous_element_sibling(self : Self) -> Element = _
   next_element_sibling(self : Self) -> Element = _
-  before(self : Self, nodes : &TCharacterDataBeforeNodes) -> Unit = _
-  after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit = _
-  replace_with(self : Self, nodes : &TCharacterDataReplaceWithNodes) -> Unit = _
+  before(self : Self, nodes : Array[&TCharacterDataBeforeNodes]) -> Unit = _
+  after(self : Self, nodes : Array[&TCharacterDataAfterNodes]) -> Unit = _
+  replace_with(self : Self, nodes : Array[&TCharacterDataReplaceWithNodes]) -> Unit = _
   remove(self : Self) -> Unit = _
 }
 
@@ -162,23 +162,44 @@ impl TCharacterData with next_element_sibling(self : Self) -> Element {
 
 ///|
 /// [CharacterData.before](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/before)
-impl TCharacterData with before(self : Self, nodes : &TCharacterDataBeforeNodes) -> Unit {
-  character_data_before_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TCharacterData with before(
+  self : Self,
+  nodes : Array[&TCharacterDataBeforeNodes],
+) -> Unit {
+  character_data_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TCharacterDataBeforeNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [CharacterData.after](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/after)
-impl TCharacterData with after(self : Self, nodes : &TCharacterDataAfterNodes) -> Unit {
-  character_data_after_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TCharacterData with after(
+  self : Self,
+  nodes : Array[&TCharacterDataAfterNodes],
+) -> Unit {
+  character_data_after_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TCharacterDataAfterNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [CharacterData.replaceWith](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/replaceWith)
 impl TCharacterData with replace_with(
   self : Self,
-  nodes : &TCharacterDataReplaceWithNodes,
+  nodes : Array[&TCharacterDataReplaceWithNodes],
 ) -> Unit {
-  character_data_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+  character_data_replace_with_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TCharacterDataReplaceWithNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|

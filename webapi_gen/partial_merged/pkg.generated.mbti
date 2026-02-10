@@ -7,7 +7,7 @@ import {
 }
 
 // Values
-pub fn merge_partials(Array[@parser.DefinitionExtendedAttributes], logger? : (String) -> Unit) -> PartialMerged
+pub fn merge_partials(Array[@parser.DefinitionExtendedAttributes]) -> PartialMerged
 
 // Errors
 
@@ -16,6 +16,7 @@ pub struct PartialMerged {
   interfaces : Map[String, PartialMergedInterface]
   mixins : Map[String, PartialMergedMixin]
   dictionaries : Map[String, PartialMergedDictionary]
+  namespaces : Map[String, PartialMergedNamespace]
   enums : Map[String, @parser.EnumDefinition]
   typedefs : Map[String, @parser.TypedefDefinition]
   callback_functions : Map[String, @parser.CallbackFunctionDefinition]
@@ -51,6 +52,14 @@ pub struct PartialMergedMixin {
 }
 pub impl Show for PartialMergedMixin
 pub impl ToJson for PartialMergedMixin
+
+pub(all) struct PartialMergedNamespace {
+  name : String
+  members : Array[@parser.NamespaceMemberExtendedAttributes]
+  specs : @hashset.HashSet[String]
+}
+pub impl Show for PartialMergedNamespace
+pub impl ToJson for PartialMergedNamespace
 
 // Type aliases
 

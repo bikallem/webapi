@@ -300,17 +300,17 @@ pub trait TElement: TNode {
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
   child_element_count(self : Self) -> UInt = _
-  prepend(self : Self, nodes : &TElementPrependNodes) -> Unit = _
-  append(self : Self, nodes : &TElementAppendNodes) -> Unit = _
-  replace_children(self : Self, nodes : &TElementReplaceChildrenNodes) -> Unit = _
+  prepend(self : Self, nodes : Array[&TElementPrependNodes]) -> Unit = _
+  append(self : Self, nodes : Array[&TElementAppendNodes]) -> Unit = _
+  replace_children(self : Self, nodes : Array[&TElementReplaceChildrenNodes]) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   previous_element_sibling(self : Self) -> Element = _
   next_element_sibling(self : Self) -> Element = _
-  before(self : Self, nodes : &TElementBeforeNodes) -> Unit = _
-  after(self : Self, nodes : &TElementAfterNodes) -> Unit = _
-  replace_with(self : Self, nodes : &TElementReplaceWithNodes) -> Unit = _
+  before(self : Self, nodes : Array[&TElementBeforeNodes]) -> Unit = _
+  after(self : Self, nodes : Array[&TElementAfterNodes]) -> Unit = _
+  replace_with(self : Self, nodes : Array[&TElementReplaceWithNodes]) -> Unit = _
   remove(self : Self) -> Unit = _
   assigned_slot(self : Self) -> HTMLSlotElement = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[DOMQuad] = _
@@ -970,23 +970,38 @@ impl TElement with child_element_count(self : Self) -> UInt {
 
 ///|
 /// [Element.prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend)
-impl TElement with prepend(self : Self, nodes : &TElementPrependNodes) -> Unit {
-  element_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TElement with prepend(self : Self, nodes : Array[&TElementPrependNodes]) -> Unit {
+  element_prepend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TElementPrependNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [Element.append](https://developer.mozilla.org/en-US/docs/Web/API/Element/append)
-impl TElement with append(self : Self, nodes : &TElementAppendNodes) -> Unit {
-  element_append_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TElement with append(self : Self, nodes : Array[&TElementAppendNodes]) -> Unit {
+  element_append_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TElementAppendNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [Element.replaceChildren](https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceChildren)
 impl TElement with replace_children(
   self : Self,
-  nodes : &TElementReplaceChildrenNodes,
+  nodes : Array[&TElementReplaceChildrenNodes],
 ) -> Unit {
-  element_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+  element_replace_children_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TElementReplaceChildrenNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
@@ -1036,20 +1051,38 @@ impl TElement with next_element_sibling(self : Self) -> Element {
 
 ///|
 /// [Element.before](https://developer.mozilla.org/en-US/docs/Web/API/Element/before)
-impl TElement with before(self : Self, nodes : &TElementBeforeNodes) -> Unit {
-  element_before_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TElement with before(self : Self, nodes : Array[&TElementBeforeNodes]) -> Unit {
+  element_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TElementBeforeNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [Element.after](https://developer.mozilla.org/en-US/docs/Web/API/Element/after)
-impl TElement with after(self : Self, nodes : &TElementAfterNodes) -> Unit {
-  element_after_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TElement with after(self : Self, nodes : Array[&TElementAfterNodes]) -> Unit {
+  element_after_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TElementAfterNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [Element.replaceWith](https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceWith)
-impl TElement with replace_with(self : Self, nodes : &TElementReplaceWithNodes) -> Unit {
-  element_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TElement with replace_with(
+  self : Self,
+  nodes : Array[&TElementReplaceWithNodes],
+) -> Unit {
+  element_replace_with_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TElementReplaceWithNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|

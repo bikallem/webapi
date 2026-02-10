@@ -88,16 +88,16 @@ fn character_data_next_element_sibling_ffi(obj : JsValue) -> Element {
 extern "js" fn character_data_before_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.before(nodes)"
+) -> Unit = "(obj, nodes) => obj.before(...nodes)"
 
 ///|
-extern "js" fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(nodes)"
+extern "js" fn character_data_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(...nodes)"
 
 ///|
 extern "js" fn character_data_replace_with_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceWith(nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceWith(...nodes)"
 
 ///|
 extern "js" fn character_data_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"

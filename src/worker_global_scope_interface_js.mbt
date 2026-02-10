@@ -26,7 +26,7 @@ fn worker_global_scope_navigator_ffi(obj : JsValue) -> WorkerNavigator {
 extern "js" fn worker_global_scope_import_scripts_ffi(
   obj : JsValue,
   urls : JsValue,
-) -> Unit = "(obj, urls) => obj.importScripts(urls)"
+) -> Unit = "(obj, urls) => obj.importScripts(...urls)"
 
 ///|
 extern "js" fn worker_global_scope_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
@@ -180,7 +180,7 @@ extern "js" fn worker_global_scope_set_timeout_ffi_js(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, _arguments)"
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, ..._arguments)"
 
 ///|
 fn worker_global_scope_set_timeout_ffi(
@@ -204,7 +204,7 @@ extern "js" fn worker_global_scope_set_interval_ffi_js(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, _arguments)"
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, ..._arguments)"
 
 ///|
 fn worker_global_scope_set_interval_ffi(

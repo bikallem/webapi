@@ -61,9 +61,9 @@ pub trait TDocumentType: TNode {
   name(self : Self) -> String = _
   public_id(self : Self) -> String = _
   system_id(self : Self) -> String = _
-  before(self : Self, nodes : &TDocumentTypeBeforeNodes) -> Unit = _
-  after(self : Self, nodes : &TDocumentTypeAfterNodes) -> Unit = _
-  replace_with(self : Self, nodes : &TDocumentTypeReplaceWithNodes) -> Unit = _
+  before(self : Self, nodes : Array[&TDocumentTypeBeforeNodes]) -> Unit = _
+  after(self : Self, nodes : Array[&TDocumentTypeAfterNodes]) -> Unit = _
+  replace_with(self : Self, nodes : Array[&TDocumentTypeReplaceWithNodes]) -> Unit = _
   remove(self : Self) -> Unit = _
 }
 
@@ -87,23 +87,44 @@ impl TDocumentType with system_id(self : Self) -> String {
 
 ///|
 /// [DocumentType.before](https://developer.mozilla.org/en-US/docs/Web/API/DocumentType/before)
-impl TDocumentType with before(self : Self, nodes : &TDocumentTypeBeforeNodes) -> Unit {
-  document_type_before_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TDocumentType with before(
+  self : Self,
+  nodes : Array[&TDocumentTypeBeforeNodes],
+) -> Unit {
+  document_type_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentTypeBeforeNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [DocumentType.after](https://developer.mozilla.org/en-US/docs/Web/API/DocumentType/after)
-impl TDocumentType with after(self : Self, nodes : &TDocumentTypeAfterNodes) -> Unit {
-  document_type_after_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TDocumentType with after(
+  self : Self,
+  nodes : Array[&TDocumentTypeAfterNodes],
+) -> Unit {
+  document_type_after_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentTypeAfterNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [DocumentType.replaceWith](https://developer.mozilla.org/en-US/docs/Web/API/DocumentType/replaceWith)
 impl TDocumentType with replace_with(
   self : Self,
-  nodes : &TDocumentTypeReplaceWithNodes,
+  nodes : Array[&TDocumentTypeReplaceWithNodes],
 ) -> Unit {
-  document_type_replace_with_ffi(TJsValue::to_js(self), nodes.to_js())
+  document_type_replace_with_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentTypeReplaceWithNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|

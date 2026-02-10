@@ -222,8 +222,8 @@ pub trait TDocument: TNode {
   open(self : Self, unused1? : String, unused2? : String) -> Document = _
   open_2(self : Self, url : String, name : String, features : String) -> WindowProxy? = _
   close(self : Self) -> Unit = _
-  write(self : Self, text : &TDocumentWriteText) -> Unit = _
-  writeln(self : Self, text : &TDocumentWritelnText) -> Unit = _
+  write(self : Self, text : Array[&TDocumentWriteText]) -> Unit = _
+  writeln(self : Self, text : Array[&TDocumentWritelnText]) -> Unit = _
   default_view(self : Self) -> WindowProxy = _
   has_focus(self : Self) -> Bool = _
   design_mode(self : Self) -> String = _
@@ -280,9 +280,9 @@ pub trait TDocument: TNode {
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
   child_element_count(self : Self) -> UInt = _
-  prepend(self : Self, nodes : &TDocumentPrependNodes) -> Unit = _
-  append(self : Self, nodes : &TDocumentAppendNodes) -> Unit = _
-  replace_children(self : Self, nodes : &TDocumentReplaceChildrenNodes) -> Unit = _
+  prepend(self : Self, nodes : Array[&TDocumentPrependNodes]) -> Unit = _
+  append(self : Self, nodes : Array[&TDocumentAppendNodes]) -> Unit = _
+  replace_children(self : Self, nodes : Array[&TDocumentReplaceChildrenNodes]) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
@@ -940,14 +940,24 @@ impl TDocument with close(self : Self) -> Unit {
 
 ///|
 /// [Document.write](https://developer.mozilla.org/en-US/docs/Web/API/Document/write)
-impl TDocument with write(self : Self, text : &TDocumentWriteText) -> Unit {
-  document_write_ffi(TJsValue::to_js(self), text.to_js())
+impl TDocument with write(self : Self, text : Array[&TDocumentWriteText]) -> Unit {
+  document_write_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      text.map(fn(v : &TDocumentWriteText) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [Document.writeln](https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln)
-impl TDocument with writeln(self : Self, text : &TDocumentWritelnText) -> Unit {
-  document_writeln_ffi(TJsValue::to_js(self), text.to_js())
+impl TDocument with writeln(self : Self, text : Array[&TDocumentWritelnText]) -> Unit {
+  document_writeln_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      text.map(fn(v : &TDocumentWritelnText) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
@@ -1321,23 +1331,38 @@ impl TDocument with child_element_count(self : Self) -> UInt {
 
 ///|
 /// [Document.prepend](https://developer.mozilla.org/en-US/docs/Web/API/Document/prepend)
-impl TDocument with prepend(self : Self, nodes : &TDocumentPrependNodes) -> Unit {
-  document_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TDocument with prepend(self : Self, nodes : Array[&TDocumentPrependNodes]) -> Unit {
+  document_prepend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentPrependNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [Document.append](https://developer.mozilla.org/en-US/docs/Web/API/Document/append)
-impl TDocument with append(self : Self, nodes : &TDocumentAppendNodes) -> Unit {
-  document_append_ffi(TJsValue::to_js(self), nodes.to_js())
+impl TDocument with append(self : Self, nodes : Array[&TDocumentAppendNodes]) -> Unit {
+  document_append_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentAppendNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [Document.replaceChildren](https://developer.mozilla.org/en-US/docs/Web/API/Document/replaceChildren)
 impl TDocument with replace_children(
   self : Self,
-  nodes : &TDocumentReplaceChildrenNodes,
+  nodes : Array[&TDocumentReplaceChildrenNodes],
 ) -> Unit {
-  document_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+  document_replace_children_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentReplaceChildrenNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|

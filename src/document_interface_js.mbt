@@ -542,10 +542,10 @@ extern "js" fn document_open_2_ffi(
 extern "js" fn document_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
 ///|
-extern "js" fn document_write_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.write(text)"
+extern "js" fn document_write_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.write(...text)"
 
 ///|
-extern "js" fn document_writeln_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.writeln(text)"
+extern "js" fn document_writeln_ffi(obj : JsValue, text : JsValue) -> Unit = "(obj, text) => obj.writeln(...text)"
 
 ///|
 extern "js" fn document_default_view_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.defaultView"
@@ -930,16 +930,16 @@ fn document_child_element_count_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
-extern "js" fn document_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(nodes)"
+extern "js" fn document_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(...nodes)"
 
 ///|
-extern "js" fn document_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(nodes)"
+extern "js" fn document_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(...nodes)"
 
 ///|
 extern "js" fn document_replace_children_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceChildren(nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceChildren(...nodes)"
 
 ///|
 extern "js" fn document_move_before_ffi(

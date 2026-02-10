@@ -18,6 +18,7 @@ pub fn get_interface_ancestors(FlattenedIdl, String) -> Array[String]
 pub struct FlattenedIdl {
   interfaces : Map[String, FlattenedInterface]
   dictionaries : Map[String, MergedDictionaryIR]
+  namespaces : Map[String, @partial_merged.PartialMergedNamespace]
   enums : Map[String, @parser.EnumDefinition]
   typedefs : Map[String, @parser.TypedefDefinition]
   callbacks : Map[String, @parser.CallbackFunctionDefinition]

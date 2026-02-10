@@ -268,6 +268,7 @@ test "mbt_code_gen_multi generates dictionary create across targets" {
       original_name: "title",
       type_: @type_mapping.ArgMbtType::Primitive("String"),
       optional: true,
+      variadic: false,
       default_value: None,
     },
   ]

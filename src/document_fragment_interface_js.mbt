@@ -49,19 +49,19 @@ fn document_fragment_child_element_count_ffi(obj : JsValue) -> UInt {
 extern "js" fn document_fragment_prepend_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.prepend(nodes)"
+) -> Unit = "(obj, nodes) => obj.prepend(...nodes)"
 
 ///|
 extern "js" fn document_fragment_append_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.append(nodes)"
+) -> Unit = "(obj, nodes) => obj.append(...nodes)"
 
 ///|
 extern "js" fn document_fragment_replace_children_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceChildren(nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceChildren(...nodes)"
 
 ///|
 extern "js" fn document_fragment_move_before_ffi(

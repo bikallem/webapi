@@ -636,16 +636,16 @@ fn element_child_element_count_ffi(obj : JsValue) -> UInt {
 }
 
 ///|
-extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(nodes)"
+extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(...nodes)"
 
 ///|
-extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(nodes)"
+extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(...nodes)"
 
 ///|
 extern "js" fn element_replace_children_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.replaceChildren(nodes)"
+) -> Unit = "(obj, nodes) => obj.replaceChildren(...nodes)"
 
 ///|
 extern "js" fn element_move_before_ffi(
@@ -693,13 +693,13 @@ fn element_next_element_sibling_ffi(obj : JsValue) -> Element {
 }
 
 ///|
-extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(nodes)"
+extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(...nodes)"
 
 ///|
-extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(nodes)"
+extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(...nodes)"
 
 ///|
-extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(nodes)"
+extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(...nodes)"
 
 ///|
 extern "js" fn element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"

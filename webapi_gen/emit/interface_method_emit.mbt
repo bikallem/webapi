@@ -192,7 +192,16 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_call_args = ffi_argnames[1:].map(js_safe).join(", ")
+  let ffi_js_call_args = self.args[1:]
+    .map(fn(arg) {
+      let name = js_safe(arg.name)
+      if arg.variadic {
+        "...\{name}"
+      } else {
+        name
+      }
+    })
+    .join(", ")
   let ret_name = self.return_type.type_.name()
   emit_js_ffi_with_return(
     ffi_name,
@@ -288,7 +297,16 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.args.map(arg => arg.name)
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_args = ffi_argnames.map(js_safe).join(", ")
+  let ffi_js_args = self.args
+    .map(fn(arg) {
+      let name = js_safe(arg.name)
+      if arg.variadic {
+        "...\{name}"
+      } else {
+        name
+      }
+    })
+    .join(", ")
   let ret_name = self.return_type.type_.name()
   emit_js_ffi_with_return(
     ffi_name,
@@ -754,7 +772,20 @@ fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
   args
   .map(arg => {
     let arg_name = @type_mapping.safe_identifier(arg.name)
-    if (
+    if arg.variadic {
+      // Extract inner type from "Array[X]" -> "X"
+      let type_name = arg.type_.name()
+      let chars = type_name.to_array()
+      let inner_chars = chars[6:chars.length() - 1]
+      let inner_type = String::from_array(inner_chars)
+      if inner_type.has_prefix("&T") {
+        // Union trait type: call the union trait's to_js method
+        "TJsValue::to_js(\{arg_name}.map(fn(v : \{inner_type}) -> JsValue { v.to_js() }))"
+      } else {
+        // Non-union type: use TJsValue::to_js directly (avoids ambiguity)
+        "TJsValue::to_js(\{arg_name}.map(fn(v) { TJsValue::to_js(v) }))"
+      }
+    } else if (
         arg.type_ is @type_mapping.Union(_) &&
         arg.optional &&
         arg.default_value is Some(_)

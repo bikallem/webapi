@@ -335,14 +335,14 @@ pub trait TWindow: TEventTarget {
     self : Self,
     handler : TimerHandler,
     timeout? : Int,
-    arguments : JsValue,
+    arguments : Array[&TJsValue],
   ) -> Int = _
   clear_timeout(self : Self, id? : Int) -> Unit = _
   set_interval(
     self : Self,
     handler : TimerHandler,
     timeout? : Int,
-    arguments : JsValue,
+    arguments : Array[&TJsValue],
   ) -> Int = _
   clear_interval(self : Self, id? : Int) -> Unit = _
   queue_microtask(self : Self, callback : VoidFunction) -> Unit = _
@@ -2250,13 +2250,13 @@ impl TWindow with set_timeout(
   self : Self,
   handler : TimerHandler,
   timeout? : Int = (0 : Int),
-  arguments : JsValue,
+  arguments : Array[&TJsValue],
 ) -> Int {
   window_set_timeout_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(handler),
     TJsValue::to_js(timeout),
-    TJsValue::to_js(arguments),
+    TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
@@ -2272,13 +2272,13 @@ impl TWindow with set_interval(
   self : Self,
   handler : TimerHandler,
   timeout? : Int = (0 : Int),
-  arguments : JsValue,
+  arguments : Array[&TJsValue],
 ) -> Int {
   window_set_interval_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(handler),
     TJsValue::to_js(timeout),
-    TJsValue::to_js(arguments),
+    TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 

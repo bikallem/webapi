@@ -18,7 +18,7 @@ pub impl Emitter for DictionaryEmitter with emit(
   ]
   let (args, arg_emits) = method_args(
     dict.members.map(mem => {
-      (mem.name, mem.type_, !mem.required, mem.default_value)
+      (mem.name, mem.type_, !mem.required, mem.default_value, false)
     }),
     dict.name,
     "new",

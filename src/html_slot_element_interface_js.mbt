@@ -47,4 +47,4 @@ fn html_slot_element_assigned_elements_ffi(
 extern "js" fn html_slot_element_assign_ffi(
   obj : JsValue,
   nodes : JsValue,
-) -> Unit = "(obj, nodes) => obj.assign(nodes)"
+) -> Unit = "(obj, nodes) => obj.assign(...nodes)"

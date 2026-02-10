@@ -1890,7 +1890,7 @@ extern "js" fn window_set_timeout_ffi_js(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, _arguments)"
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, ..._arguments)"
 
 ///|
 fn window_set_timeout_ffi(
@@ -1911,7 +1911,7 @@ extern "js" fn window_set_interval_ffi_js(
   handler : JsValue,
   timeout : JsValue,
   arguments : JsValue,
-) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, _arguments)"
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, ..._arguments)"
 
 ///|
 fn window_set_interval_ffi(

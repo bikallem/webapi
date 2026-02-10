@@ -142,7 +142,7 @@ fn main {
     @webapi.EventListener::new(fn(_event) {
       let new_elem = document.create_element("div")
       new_elem.set_text_content("Inserted")
-      new_elem.class_list().add("inserted")
+      new_elem.class_list().add(["inserted"])
       new_elem.set_attribute(
         "style", "padding: 0.5em; margin: 0.5em 0; background: #d1fae5; border: 1px solid #10b981; border-radius: 4px;",
       )

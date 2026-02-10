@@ -53,7 +53,7 @@ pub trait THTMLSlotElement: THTMLElement {
   assigned_elements(self : Self, options? : AssignedNodesOptions) -> Array[
     Element,
   ] = _
-  assign(self : Self, nodes : &THTMLSlotElementAssignNodes) -> Unit = _
+  assign(self : Self, nodes : Array[&THTMLSlotElementAssignNodes]) -> Unit = _
 }
 
 ///|
@@ -96,7 +96,12 @@ impl THTMLSlotElement with assigned_elements(
 /// [HTMLSlotElement.assign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assign)
 impl THTMLSlotElement with assign(
   self : Self,
-  nodes : &THTMLSlotElementAssignNodes,
+  nodes : Array[&THTMLSlotElementAssignNodes],
 ) -> Unit {
-  html_slot_element_assign_ffi(TJsValue::to_js(self), nodes.to_js())
+  html_slot_element_assign_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &THTMLSlotElementAssignNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }

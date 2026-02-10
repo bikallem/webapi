@@ -22,9 +22,9 @@ pub impl TTrustedTypePolicy for TrustedTypePolicy
 /// [TrustedTypePolicy](https://developer.mozilla.org/en-US/docs/Web/API/TrustedTypePolicy) interface.
 pub trait TTrustedTypePolicy: TJsValue {
   name(self : Self) -> String = _
-  create_html(self : Self, input : String, arguments : JsValue) -> TrustedHTML = _
-  create_script(self : Self, input : String, arguments : JsValue) -> TrustedScript = _
-  create_script_url(self : Self, input : String, arguments : JsValue) -> TrustedScriptURL = _
+  create_html(self : Self, input : String, arguments : Array[&TJsValue]) -> TrustedHTML = _
+  create_script(self : Self, input : String, arguments : Array[&TJsValue]) -> TrustedScript = _
+  create_script_url(self : Self, input : String, arguments : Array[&TJsValue]) -> TrustedScriptURL = _
 }
 
 ///|
@@ -38,12 +38,12 @@ impl TTrustedTypePolicy with name(self : Self) -> String {
 impl TTrustedTypePolicy with create_html(
   self : Self,
   input : String,
-  arguments : JsValue,
+  arguments : Array[&TJsValue],
 ) -> TrustedHTML {
   trusted_type_policy_create_html_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(input),
-    TJsValue::to_js(arguments),
+    TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
@@ -52,12 +52,12 @@ impl TTrustedTypePolicy with create_html(
 impl TTrustedTypePolicy with create_script(
   self : Self,
   input : String,
-  arguments : JsValue,
+  arguments : Array[&TJsValue],
 ) -> TrustedScript {
   trusted_type_policy_create_script_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(input),
-    TJsValue::to_js(arguments),
+    TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
@@ -66,11 +66,11 @@ impl TTrustedTypePolicy with create_script(
 impl TTrustedTypePolicy with create_script_url(
   self : Self,
   input : String,
-  arguments : JsValue,
+  arguments : Array[&TJsValue],
 ) -> TrustedScriptURL {
   trusted_type_policy_create_script_url_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(input),
-    TJsValue::to_js(arguments),
+    TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }

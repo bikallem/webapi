@@ -72,9 +72,12 @@ pub trait TDocumentFragment: TNode {
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
   child_element_count(self : Self) -> UInt = _
-  prepend(self : Self, nodes : &TDocumentFragmentPrependNodes) -> Unit = _
-  append(self : Self, nodes : &TDocumentFragmentAppendNodes) -> Unit = _
-  replace_children(self : Self, nodes : &TDocumentFragmentReplaceChildrenNodes) -> Unit = _
+  prepend(self : Self, nodes : Array[&TDocumentFragmentPrependNodes]) -> Unit = _
+  append(self : Self, nodes : Array[&TDocumentFragmentAppendNodes]) -> Unit = _
+  replace_children(
+    self : Self,
+    nodes : Array[&TDocumentFragmentReplaceChildrenNodes],
+  ) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
@@ -122,27 +125,44 @@ impl TDocumentFragment with child_element_count(self : Self) -> UInt {
 /// [DocumentFragment.prepend](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/prepend)
 impl TDocumentFragment with prepend(
   self : Self,
-  nodes : &TDocumentFragmentPrependNodes,
+  nodes : Array[&TDocumentFragmentPrependNodes],
 ) -> Unit {
-  document_fragment_prepend_ffi(TJsValue::to_js(self), nodes.to_js())
+  document_fragment_prepend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentFragmentPrependNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [DocumentFragment.append](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/append)
 impl TDocumentFragment with append(
   self : Self,
-  nodes : &TDocumentFragmentAppendNodes,
+  nodes : Array[&TDocumentFragmentAppendNodes],
 ) -> Unit {
-  document_fragment_append_ffi(TJsValue::to_js(self), nodes.to_js())
+  document_fragment_append_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentFragmentAppendNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
 ///|
 /// [DocumentFragment.replaceChildren](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/replaceChildren)
 impl TDocumentFragment with replace_children(
   self : Self,
-  nodes : &TDocumentFragmentReplaceChildrenNodes,
+  nodes : Array[&TDocumentFragmentReplaceChildrenNodes],
 ) -> Unit {
-  document_fragment_replace_children_ffi(TJsValue::to_js(self), nodes.to_js())
+  document_fragment_replace_children_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentFragmentReplaceChildrenNodes) -> JsValue {
+        v.to_js()
+      }),
+    ),
+  )
 }
 
 ///|

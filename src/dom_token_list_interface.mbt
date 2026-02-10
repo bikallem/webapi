@@ -22,8 +22,8 @@ pub trait TDOMTokenList: TJsValue {
   length(self : Self) -> UInt = _
   item(self : Self, index : UInt) -> String? = _
   contains(self : Self, token : String) -> Bool = _
-  add(self : Self, tokens : String) -> Unit = _
-  remove(self : Self, tokens : String) -> Unit = _
+  add(self : Self, tokens : Array[String]) -> Unit = _
+  remove(self : Self, tokens : Array[String]) -> Unit = _
   toggle(self : Self, token : String, force? : Bool) -> Bool = _
   replace(self : Self, token : String, new_token : String) -> Bool = _
   supports(self : Self, token : String) -> Bool = _
@@ -59,14 +59,20 @@ impl TDOMTokenList with contains(self : Self, token : String) -> Bool {
 
 ///|
 /// [DOMTokenList.add](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add)
-impl TDOMTokenList with add(self : Self, tokens : String) -> Unit {
-  dom_token_list_add_ffi(TJsValue::to_js(self), TJsValue::to_js(tokens))
+impl TDOMTokenList with add(self : Self, tokens : Array[String]) -> Unit {
+  dom_token_list_add_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(tokens.map(fn(v) { TJsValue::to_js(v) })),
+  )
 }
 
 ///|
 /// [DOMTokenList.remove](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove)
-impl TDOMTokenList with remove(self : Self, tokens : String) -> Unit {
-  dom_token_list_remove_ffi(TJsValue::to_js(self), TJsValue::to_js(tokens))
+impl TDOMTokenList with remove(self : Self, tokens : Array[String]) -> Unit {
+  dom_token_list_remove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(tokens.map(fn(v) { TJsValue::to_js(v) })),
+  )
 }
 
 ///|

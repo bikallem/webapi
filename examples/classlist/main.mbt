@@ -72,7 +72,7 @@ fn main {
     "click",
     EventListener::new(fn(_event) {
       let cl = target.class_list()
-      cl.add("highlight")
+      cl.add(["highlight"])
       update_status(cl, status)
     }),
   )
@@ -88,7 +88,7 @@ fn main {
     "click",
     EventListener::new(fn(_event) {
       let cl = target.class_list()
-      cl.remove("highlight")
+      cl.remove(["highlight"])
       update_status(cl, status)
     }),
   )

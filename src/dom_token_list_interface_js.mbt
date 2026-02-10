@@ -24,13 +24,13 @@ fn dom_token_list_contains_ffi(obj : JsValue, token : JsValue) -> Bool {
 }
 
 ///|
-extern "js" fn dom_token_list_add_ffi(obj : JsValue, tokens : JsValue) -> Unit = "(obj, tokens) => obj.add(tokens)"
+extern "js" fn dom_token_list_add_ffi(obj : JsValue, tokens : JsValue) -> Unit = "(obj, tokens) => obj.add(...tokens)"
 
 ///|
 extern "js" fn dom_token_list_remove_ffi(
   obj : JsValue,
   tokens : JsValue,
-) -> Unit = "(obj, tokens) => obj.remove(tokens)"
+) -> Unit = "(obj, tokens) => obj.remove(...tokens)"
 
 ///|
 extern "js" fn dom_token_list_toggle_ffi_js(

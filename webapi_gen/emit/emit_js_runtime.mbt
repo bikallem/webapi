@@ -119,22 +119,29 @@ fn emit_js_method(
   args : Array[@parser.Argument],
   is_static : Bool,
 ) -> String {
-  // Build argument names list
+  // Build argument names list (params without spread, call_args with spread for variadic)
   let arg_names : Array[String] = []
+  let call_parts : Array[String] = []
   for arg in args {
-    arg_names.push(js_safe(@type_mapping.safe_identifier(arg.name)))
+    let name = js_safe(@type_mapping.safe_identifier(arg.name))
+    arg_names.push(name)
+    if arg.variadic {
+      call_parts.push("...\{name}")
+    } else {
+      call_parts.push(name)
+    }
   }
   let comma_sep = ", "
   if is_static {
     // Static method: no obj parameter
     let params = arg_names.join(comma_sep)
-    let call_args = arg_names.join(comma_sep)
+    let call_args = call_parts.join(comma_sep)
     "    \{import_name}: (\{params}) => \{original_name}(\{call_args})"
   } else {
     // Instance method: obj is first parameter
     let args_str = arg_names.join(comma_sep)
     let params = if arg_names.length() > 0 { "obj, \{args_str}" } else { "obj" }
-    let call_args = arg_names.join(comma_sep)
+    let call_args = call_parts.join(comma_sep)
     "    \{import_name}: (\{params}) => obj.\{original_name}(\{call_args})"
   }
 }
@@ -148,12 +155,19 @@ fn emit_js_constructor(
   args : Array[@parser.Argument],
 ) -> String {
   let arg_names : Array[String] = []
+  let call_parts : Array[String] = []
   for arg in args {
-    arg_names.push(js_safe(@type_mapping.safe_identifier(arg.name)))
+    let name = js_safe(@type_mapping.safe_identifier(arg.name))
+    arg_names.push(name)
+    if arg.variadic {
+      call_parts.push("...\{name}")
+    } else {
+      call_parts.push(name)
+    }
   }
   let comma_sep = ", "
   let params = arg_names.join(comma_sep)
-  let call_args = arg_names.join(comma_sep)
+  let call_args = call_parts.join(comma_sep)
   "    \{import_name}: (\{params}) => new \{interface_name}(\{call_args})"
 }
 
@@ -339,12 +353,19 @@ fn emit_js_namespace_method(
   args : Array[@parser.Argument],
 ) -> String {
   let arg_names : Array[String] = []
+  let call_parts : Array[String] = []
   for arg in args {
-    arg_names.push(js_safe(@type_mapping.safe_identifier(arg.name)))
+    let name = js_safe(@type_mapping.safe_identifier(arg.name))
+    arg_names.push(name)
+    if arg.variadic {
+      call_parts.push("...\{name}")
+    } else {
+      call_parts.push(name)
+    }
   }
   let comma_sep = ", "
   let params = arg_names.join(comma_sep)
-  let call_args = arg_names.join(comma_sep)
+  let call_args = call_parts.join(comma_sep)
   "    \{import_name}: (\{params}) => \{namespace_name}.\{method_name}(\{call_args})"
 }
 
