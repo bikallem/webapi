@@ -4,6 +4,7 @@ const TARGETS = ['js'] as const;
 
 for (const target of TARGETS) {
   test.describe(`touch-events (${target})`, () => {
+    test.use({ hasTouch: true });
     test.beforeEach(async ({ page }) => {
       await page.goto(`touch-events/touch-events.${target}.html`);
       await page.waitForSelector('#touch-area');
