@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <title>externref bug repro (wasm-gc)</title>
+</head>
+<body>
+    <div id="app">
+        <p>Open DevTools console. If you see a <code>WebAssembly.instantiate()</code>
+        error about <code>fallthru</code> / <code>externref</code>, the bug is confirmed.</p>
+    </div>
+    <script type="module">
+        import { wasmImportObject } from "../../src/webapi.mjs";
+        try {
+            const { instance } = await WebAssembly.instantiateStreaming(
+                fetch("../_build/wasm-gc/release/build/externref-bug/externref-bug.wasm"),
+                wasmImportObject,
+                { builtins: ["js-string"], importedStringConstants: "_" }
+            );
+            instance.exports._start();
+        } catch (e) {
+            document.getElementById("app").innerHTML +=
+                `<pre style="color:red;white-space:pre-wrap">ERROR: ${e.message}</pre>`;
+            console.error(e);
+        }
+    </script>
+</body>
+</html>
