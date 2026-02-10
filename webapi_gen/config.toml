@@ -31,12 +31,13 @@ core_specs = [
     "intersection-observer",
     "pointerevents",
     "touch-events",
+    "clipboard-apis",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]
 
 excluded_callbacks = []
 
-excluded_typedefs = []
+excluded_typedefs = ["ClipboardItemData"]
 
-excluded_dictionary_prefixes = []
+excluded_dictionary_prefixes = ["ClipboardPermission"]

@@ -5,6 +5,9 @@ fn navigator_user_activation_ffi(obj : JsValue) -> UserActivation = "webapi_Navi
 fn navigator_max_touch_points_ffi(obj : JsValue) -> Int = "webapi_Navigator" "get_maxTouchPoints"
 
 ///|
+fn navigator_clipboard_ffi(obj : JsValue) -> Clipboard = "webapi_Navigator" "get_clipboard"
+
+///|
 fn navigator_app_code_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_appCodeName"
 
 ///|

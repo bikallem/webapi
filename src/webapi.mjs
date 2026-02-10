@@ -3929,6 +3929,7 @@ export const wasmImportObject = {
   webapi_Navigator: {
     get_userActivation: (obj) => obj.userActivation,
     get_maxTouchPoints: (obj) => obj.maxTouchPoints,
+    get_clipboard: (obj) => obj.clipboard,
     get_appCodeName: (obj) => obj.appCodeName,
     get_appName: (obj) => obj.appName,
     get_appVersion: (obj) => obj.appVersion,
@@ -5282,6 +5283,32 @@ export const wasmImportObject = {
     createScriptURL: (obj, input, _arguments) => obj.createScriptURL(input, ..._arguments)
   },
 
+  webapi_ClipboardEvent: {
+    new: (type_, event_init_dict) => new ClipboardEvent(type_, event_init_dict),
+    get_clipboardData: (obj) => obj.clipboardData
+  },
+
+  webapi_ClipboardChangeEvent: {
+    new: (type_, event_init_dict) => new ClipboardChangeEvent(type_, event_init_dict),
+    get_types: (obj) => obj.types,
+    get_changeId: (obj) => obj.changeId
+  },
+
+  webapi_ClipboardItem: {
+    new: (items, options) => new ClipboardItem(items, options),
+    get_presentationStyle: (obj) => obj.presentationStyle,
+    get_types: (obj) => obj.types,
+    getType: (obj, type_) => obj.getType(type_),
+    supports: (type_) => supports(type_)
+  },
+
+  webapi_Clipboard: {
+    read: (obj, formats) => obj.read(formats),
+    readText: (obj) => obj.readText(),
+    write: (obj, data) => obj.write(data),
+    writeText: (obj, data) => obj.writeText(data)
+  },
+
   webapi_ResizeObserver: {
     new: (callback) => new ResizeObserver(callback),
     observe: (obj, target, options) => obj.observe(target, options),
@@ -6536,6 +6563,45 @@ export const wasmImportObject = {
       if (createHTML !== undefined) obj.createHTML = createHTML;
       if (createScript !== undefined) obj.createScript = createScript;
       if (createScriptURL !== undefined) obj.createScriptURL = createScriptURL;
+      return obj;
+    }
+  },
+
+  webapi_ClipboardEventInit: {
+    new: (bubbles, cancelable, composed, clipboardData) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (clipboardData !== undefined) obj.clipboardData = clipboardData;
+      return obj;
+    }
+  },
+
+  webapi_ClipboardChangeEventInit: {
+    new: (bubbles, cancelable, composed, types, changeId) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (types !== undefined) obj.types = types;
+      if (changeId !== undefined) obj.changeId = changeId;
+      return obj;
+    }
+  },
+
+  webapi_ClipboardItemOptions: {
+    new: (presentationStyle) => {
+      const obj = {};
+      if (presentationStyle !== undefined) obj.presentationStyle = presentationStyle;
+      return obj;
+    }
+  },
+
+  webapi_ClipboardUnsanitizedFormats: {
+    new: (unsanitized) => {
+      const obj = {};
+      if (unsanitized !== undefined) obj.unsanitized = unsanitized;
       return obj;
     }
   },

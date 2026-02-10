@@ -15,6 +15,14 @@ fn navigator_max_touch_points_ffi(obj : JsValue) -> Int {
 }
 
 ///|
+extern "js" fn navigator_clipboard_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clipboard"
+
+///|
+fn navigator_clipboard_ffi(obj : JsValue) -> Clipboard {
+  navigator_clipboard_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn navigator_app_code_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appCodeName"
 
 ///|
