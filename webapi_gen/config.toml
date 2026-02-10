@@ -32,6 +32,7 @@ core_specs = [
     "pointerevents",
     "touch-events",
     "clipboard-apis",
+    "websockets",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]
