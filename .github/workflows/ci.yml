@@ -24,6 +24,7 @@ jobs:
           node-version: 22
 
       - name: Install npm dependencies
+        working-directory: webapi_gen
         run: npm ci
 
       - name: Install MoonBit dependencies

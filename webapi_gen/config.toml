@@ -1,6 +1,6 @@
 # WebAPI Generator Configuration
 
-idl_dir = "../node_modules/@webref/idl"
+idl_dir = "node_modules/@webref/idl"
 output_dir = "../src"
 templates_dir = "base.mbt"
 

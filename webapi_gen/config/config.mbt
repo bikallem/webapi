@@ -88,7 +88,7 @@ test "load_from_string with invalid TOML raises" {
 ///|
 test "load_from_string with valid TOML" {
   let valid_toml =
-    #|idl_dir = "../node_modules/@webref/idl"
+    #|idl_dir = "node_modules/@webref/idl"
     #|output_dir = "../src"
     #|templates_dir = "base.mbt"
     #|core_specs = ["dom", "html"]
@@ -99,7 +99,7 @@ test "load_from_string with valid TOML" {
     #|
   let cfg = load_config_from_string(valid_toml)
   json_inspect(cfg, content={
-    "idl_dir": "../node_modules/@webref/idl",
+    "idl_dir": "node_modules/@webref/idl",
     "output_dir": "../src",
     "templates_dir": "base.mbt",
     "core_specs": ["dom", "html"],

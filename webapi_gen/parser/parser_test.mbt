@@ -927,12 +927,12 @@ test "parse dictionary with null default" {
 
 ///|
 test "parse cssom.idl file" {
-  let result = @parser.parse_file("../node_modules/@webref/idl/cssom.idl")
+  let result = @parser.parse_file("node_modules/@webref/idl/cssom.idl")
   inspect(result.length() > 0, content="true")
 }
 
 ///|
 test "parse cssom-view.idl file" {
-  let result = @parser.parse_file("../node_modules/@webref/idl/cssom-view.idl")
+  let result = @parser.parse_file("node_modules/@webref/idl/cssom-view.idl")
   inspect(result.length() > 0, content="true")
 }

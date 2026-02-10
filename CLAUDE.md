@@ -30,8 +30,8 @@ moon test --update
 # Generate bindings (from webapi_gen directory)
 cd webapi_gen && moon run cmd/main
 
-# Install npm dependencies (WebIDL specs)
-npm install
+# Install npm dependencies (WebIDL specs, from webapi_gen directory)
+cd webapi_gen && npm install
 ```
 
 ## Architecture
