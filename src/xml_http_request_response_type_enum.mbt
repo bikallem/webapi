@@ -2,6 +2,7 @@
 // MoonBit type: XMLHttpRequestResponseType
 // Specifications: xhr.idl
 
+///|
 pub(all) enum XMLHttpRequestResponseType {
   Empty
   Arraybuffer
@@ -9,9 +10,12 @@ pub(all) enum XMLHttpRequestResponseType {
   Document
   Json
   Text
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for XMLHttpRequestResponseType with to_js(self: XMLHttpRequestResponseType) -> JsValue {
+///|
+pub impl TJsValue for XMLHttpRequestResponseType with to_js(
+  self : XMLHttpRequestResponseType,
+) -> JsValue {
   match self {
     XMLHttpRequestResponseType::Empty => TJsValue::to_js("")
     XMLHttpRequestResponseType::Arraybuffer => TJsValue::to_js("arraybuffer")
@@ -22,7 +26,10 @@ pub impl TJsValue for XMLHttpRequestResponseType with to_js(self: XMLHttpRequest
   }
 }
 
-pub fn XMLHttpRequestResponseType::from(value: String) -> XMLHttpRequestResponseType? {
+///|
+pub fn XMLHttpRequestResponseType::from(
+  value : String,
+) -> XMLHttpRequestResponseType? {
   match value {
     "" => Some(XMLHttpRequestResponseType::Empty)
     "arraybuffer" => Some(XMLHttpRequestResponseType::Arraybuffer)

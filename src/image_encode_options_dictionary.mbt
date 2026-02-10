@@ -2,15 +2,23 @@
 // MoonBit type: ImageEncodeOptions
 // Specifications: html.idl
 
+///|
 /// [ImageEncodeOptions](https://developer.mozilla.org/en-US/docs/Web/API/ImageEncodeOptions)
 #external
 pub type ImageEncodeOptions
 
-pub impl TJsValue for ImageEncodeOptions with to_js(self: ImageEncodeOptions) -> JsValue = "%identity"
+///|
+pub impl TJsValue for ImageEncodeOptions with to_js(self : ImageEncodeOptions) -> JsValue = "%identity"
 
-pub fn ImageEncodeOptions::new(type_? : String = "image/png", 
-quality? : Double) -> ImageEncodeOptions {
+///|
+pub fn ImageEncodeOptions::new(
+  type_? : String = "image/png",
+  quality? : Double,
+) -> ImageEncodeOptions {
   image_encode_options_ffi(TJsValue::to_js(type_), opt_to_js(quality))
 }
 
-pub fn ImageEncodeOptions::empty() -> ImageEncodeOptions { image_encode_options_empty_ffi() }
+///|
+pub fn ImageEncodeOptions::empty() -> ImageEncodeOptions {
+  image_encode_options_empty_ffi()
+}

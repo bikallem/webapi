@@ -2,13 +2,17 @@
 // MoonBit type: NotificationPermission
 // Specifications: notifications.idl
 
+///|
 pub(all) enum NotificationPermission {
   Default
   Denied
   Granted
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for NotificationPermission with to_js(self: NotificationPermission) -> JsValue {
+///|
+pub impl TJsValue for NotificationPermission with to_js(
+  self : NotificationPermission,
+) -> JsValue {
   match self {
     NotificationPermission::Default => TJsValue::to_js("default")
     NotificationPermission::Denied => TJsValue::to_js("denied")
@@ -16,7 +20,8 @@ pub impl TJsValue for NotificationPermission with to_js(self: NotificationPermis
   }
 }
 
-pub fn NotificationPermission::from(value: String) -> NotificationPermission? {
+///|
+pub fn NotificationPermission::from(value : String) -> NotificationPermission? {
   match value {
     "default" => Some(NotificationPermission::Default)
     "denied" => Some(NotificationPermission::Denied)

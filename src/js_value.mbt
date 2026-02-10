@@ -31,6 +31,9 @@ pub fn[T] JsValue::null() -> T {
 }
 
 ///|
+pub fn[T] JsValue::into(self : JsValue) -> T = "%identity"
+
+///|
 /// Unsafe cast from JsValue to any type.
 /// This is used internally for FFI returns that need type conversion.
 /// WARNING: No runtime type checking is performed.

@@ -2,13 +2,15 @@
 // MoonBit type: CanvasLineCap
 // Specifications: html.idl
 
+///|
 pub(all) enum CanvasLineCap {
   Butt
   Round
   Square
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for CanvasLineCap with to_js(self: CanvasLineCap) -> JsValue {
+///|
+pub impl TJsValue for CanvasLineCap with to_js(self : CanvasLineCap) -> JsValue {
   match self {
     CanvasLineCap::Butt => TJsValue::to_js("butt")
     CanvasLineCap::Round => TJsValue::to_js("round")
@@ -16,7 +18,8 @@ pub impl TJsValue for CanvasLineCap with to_js(self: CanvasLineCap) -> JsValue {
   }
 }
 
-pub fn CanvasLineCap::from(value: String) -> CanvasLineCap? {
+///|
+pub fn CanvasLineCap::from(value : String) -> CanvasLineCap? {
   match value {
     "butt" => Some(CanvasLineCap::Butt)
     "round" => Some(CanvasLineCap::Round)

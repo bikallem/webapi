@@ -2,14 +2,24 @@
 // MoonBit type: NavigationUpdateCurrentEntryOptions
 // Specifications: html.idl
 
+///|
 /// [NavigationUpdateCurrentEntryOptions](https://developer.mozilla.org/en-US/docs/Web/API/NavigationUpdateCurrentEntryOptions)
 #external
 pub type NavigationUpdateCurrentEntryOptions
 
-pub impl TJsValue for NavigationUpdateCurrentEntryOptions with to_js(self: NavigationUpdateCurrentEntryOptions) -> JsValue = "%identity"
+///|
+pub impl TJsValue for NavigationUpdateCurrentEntryOptions with to_js(
+  self : NavigationUpdateCurrentEntryOptions,
+) -> JsValue = "%identity"
 
-pub fn NavigationUpdateCurrentEntryOptions::new(state : JsValue) -> NavigationUpdateCurrentEntryOptions {
+///|
+pub fn NavigationUpdateCurrentEntryOptions::new(
+  state : JsValue,
+) -> NavigationUpdateCurrentEntryOptions {
   navigation_update_current_entry_options_ffi(TJsValue::to_js(state))
 }
 
-pub fn NavigationUpdateCurrentEntryOptions::empty() -> NavigationUpdateCurrentEntryOptions { navigation_update_current_entry_options_empty_ffi() }
+///|
+pub fn NavigationUpdateCurrentEntryOptions::empty() -> NavigationUpdateCurrentEntryOptions {
+  navigation_update_current_entry_options_empty_ffi()
+}

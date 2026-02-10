@@ -1,4 +1,7 @@
-pub fn FunctionStringCallback::new(f : (String) -> Unit) -> FunctionStringCallback {
+///|
+pub fn FunctionStringCallback::new(
+  f : (String) -> Unit,
+) -> FunctionStringCallback {
   let w : (JsValue) -> Unit = fn(a0 : JsValue) { f(a0.unsafe_cast()) }
   function_string_callback_ffi(w).unsafe_cast()
 }

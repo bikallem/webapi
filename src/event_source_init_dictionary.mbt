@@ -2,14 +2,22 @@
 // MoonBit type: EventSourceInit
 // Specifications: html.idl
 
+///|
 /// [EventSourceInit](https://developer.mozilla.org/en-US/docs/Web/API/EventSourceInit)
 #external
 pub type EventSourceInit
 
-pub impl TJsValue for EventSourceInit with to_js(self: EventSourceInit) -> JsValue = "%identity"
+///|
+pub impl TJsValue for EventSourceInit with to_js(self : EventSourceInit) -> JsValue = "%identity"
 
-pub fn EventSourceInit::new(with_credentials? : Bool = false) -> EventSourceInit {
+///|
+pub fn EventSourceInit::new(
+  with_credentials? : Bool = false,
+) -> EventSourceInit {
   event_source_init_ffi(TJsValue::to_js(with_credentials))
 }
 
-pub fn EventSourceInit::empty() -> EventSourceInit { event_source_init_empty_ffi() }
+///|
+pub fn EventSourceInit::empty() -> EventSourceInit {
+  event_source_init_empty_ffi()
+}

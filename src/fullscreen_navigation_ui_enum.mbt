@@ -2,13 +2,17 @@
 // MoonBit type: FullscreenNavigationUI
 // Specifications: fullscreen.idl
 
+///|
 pub(all) enum FullscreenNavigationUI {
   Auto
   Show
   Hide
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for FullscreenNavigationUI with to_js(self: FullscreenNavigationUI) -> JsValue {
+///|
+pub impl TJsValue for FullscreenNavigationUI with to_js(
+  self : FullscreenNavigationUI,
+) -> JsValue {
   match self {
     FullscreenNavigationUI::Auto => TJsValue::to_js("auto")
     FullscreenNavigationUI::Show => TJsValue::to_js("show")
@@ -16,7 +20,8 @@ pub impl TJsValue for FullscreenNavigationUI with to_js(self: FullscreenNavigati
   }
 }
 
-pub fn FullscreenNavigationUI::from(value: String) -> FullscreenNavigationUI? {
+///|
+pub fn FullscreenNavigationUI::from(value : String) -> FullscreenNavigationUI? {
   match value {
     "auto" => Some(FullscreenNavigationUI::Auto)
     "show" => Some(FullscreenNavigationUI::Show)

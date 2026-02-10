@@ -2727,6 +2727,7 @@ pub impl TWindowEvent for JsUndefined
 
 #external
 pub type JsValue
+pub fn[T] JsValue::into(Self) -> T
 pub fn JsValue::is_null(Self) -> Bool
 pub fn[T] JsValue::null() -> T
 pub fn JsValue::undefined() -> Self

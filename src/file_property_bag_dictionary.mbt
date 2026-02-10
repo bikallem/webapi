@@ -2,16 +2,28 @@
 // MoonBit type: FilePropertyBag
 // Specifications: FileAPI.idl
 
+///|
 /// [FilePropertyBag](https://developer.mozilla.org/en-US/docs/Web/API/FilePropertyBag)
 #external
 pub type FilePropertyBag
 
-pub impl TJsValue for FilePropertyBag with to_js(self: FilePropertyBag) -> JsValue = "%identity"
+///|
+pub impl TJsValue for FilePropertyBag with to_js(self : FilePropertyBag) -> JsValue = "%identity"
 
-pub fn FilePropertyBag::new(type_? : String = "", 
-endings? : EndingType = EndingType::Transparent, 
-last_modified? : Int64) -> FilePropertyBag {
-  file_property_bag_ffi(TJsValue::to_js(type_), TJsValue::to_js(endings), opt_to_js(last_modified))
+///|
+pub fn FilePropertyBag::new(
+  type_? : String = "",
+  endings? : EndingType = EndingType::Transparent,
+  last_modified? : Int64,
+) -> FilePropertyBag {
+  file_property_bag_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(endings),
+    opt_to_js(last_modified),
+  )
 }
 
-pub fn FilePropertyBag::empty() -> FilePropertyBag { file_property_bag_empty_ffi() }
+///|
+pub fn FilePropertyBag::empty() -> FilePropertyBag {
+  file_property_bag_empty_ffi()
+}

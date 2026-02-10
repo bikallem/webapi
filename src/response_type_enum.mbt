@@ -2,6 +2,7 @@
 // MoonBit type: ResponseType
 // Specifications: fetch.idl
 
+///|
 pub(all) enum ResponseType {
   Basic
   Cors
@@ -9,9 +10,10 @@ pub(all) enum ResponseType {
   Error
   Opaque
   Opaqueredirect
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for ResponseType with to_js(self: ResponseType) -> JsValue {
+///|
+pub impl TJsValue for ResponseType with to_js(self : ResponseType) -> JsValue {
   match self {
     ResponseType::Basic => TJsValue::to_js("basic")
     ResponseType::Cors => TJsValue::to_js("cors")
@@ -22,7 +24,8 @@ pub impl TJsValue for ResponseType with to_js(self: ResponseType) -> JsValue {
   }
 }
 
-pub fn ResponseType::from(value: String) -> ResponseType? {
+///|
+pub fn ResponseType::from(value : String) -> ResponseType? {
   match value {
     "basic" => Some(ResponseType::Basic)
     "cors" => Some(ResponseType::Cors)

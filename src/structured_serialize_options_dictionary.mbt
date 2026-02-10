@@ -2,14 +2,24 @@
 // MoonBit type: StructuredSerializeOptions
 // Specifications: html.idl
 
+///|
 /// [StructuredSerializeOptions](https://developer.mozilla.org/en-US/docs/Web/API/StructuredSerializeOptions)
 #external
 pub type StructuredSerializeOptions
 
-pub impl TJsValue for StructuredSerializeOptions with to_js(self: StructuredSerializeOptions) -> JsValue = "%identity"
+///|
+pub impl TJsValue for StructuredSerializeOptions with to_js(
+  self : StructuredSerializeOptions,
+) -> JsValue = "%identity"
 
-pub fn StructuredSerializeOptions::new(transfer? : Array[JsValue] = []) -> StructuredSerializeOptions {
+///|
+pub fn StructuredSerializeOptions::new(
+  transfer? : Array[JsValue] = [],
+) -> StructuredSerializeOptions {
   structured_serialize_options_ffi(TJsValue::to_js(transfer))
 }
 
-pub fn StructuredSerializeOptions::empty() -> StructuredSerializeOptions { structured_serialize_options_empty_ffi() }
+///|
+pub fn StructuredSerializeOptions::empty() -> StructuredSerializeOptions {
+  structured_serialize_options_empty_ffi()
+}

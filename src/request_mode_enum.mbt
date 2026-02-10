@@ -2,14 +2,16 @@
 // MoonBit type: RequestMode
 // Specifications: fetch.idl
 
+///|
 pub(all) enum RequestMode {
   Navigate
   SameOrigin
   NoCors
   Cors
-} derive(Eq,Show)
+} derive(Eq, Show)
 
-pub impl TJsValue for RequestMode with to_js(self: RequestMode) -> JsValue {
+///|
+pub impl TJsValue for RequestMode with to_js(self : RequestMode) -> JsValue {
   match self {
     RequestMode::Navigate => TJsValue::to_js("navigate")
     RequestMode::SameOrigin => TJsValue::to_js("same-origin")
@@ -18,7 +20,8 @@ pub impl TJsValue for RequestMode with to_js(self: RequestMode) -> JsValue {
   }
 }
 
-pub fn RequestMode::from(value: String) -> RequestMode? {
+///|
+pub fn RequestMode::from(value : String) -> RequestMode? {
   match value {
     "navigate" => Some(RequestMode::Navigate)
     "same-origin" => Some(RequestMode::SameOrigin)
