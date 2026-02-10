@@ -5058,6 +5058,26 @@ export const wasmImportObject = {
     createScriptURL: (obj, input, _arguments) => obj.createScriptURL(input, ..._arguments)
   },
 
+  webapi_ResizeObserver: {
+    new: (callback) => new ResizeObserver(callback),
+    observe: (obj, target, options) => obj.observe(target, options),
+    unobserve: (obj, target) => obj.unobserve(target),
+    disconnect: (obj) => obj.disconnect()
+  },
+
+  webapi_ResizeObserverEntry: {
+    get_target: (obj) => obj.target,
+    get_contentRect: (obj) => obj.contentRect,
+    get_borderBoxSize: (obj) => obj.borderBoxSize,
+    get_contentBoxSize: (obj) => obj.contentBoxSize,
+    get_devicePixelContentBoxSize: (obj) => obj.devicePixelContentBoxSize
+  },
+
+  webapi_ResizeObserverSize: {
+    get_inlineSize: (obj) => obj.inlineSize,
+    get_blockSize: (obj) => obj.blockSize
+  },
+
   webapi_ScreenOrientation: {
     get_type: (obj) => obj.type,
     get_angle: (obj) => obj.angle,
@@ -6161,6 +6181,14 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_ResizeObserverOptions: {
+    new: (box) => {
+      const obj = {};
+      if (box !== undefined) obj.box = box;
+      return obj;
+    }
+  },
+
   webapi_IdleRequestOptions: {
     new: (timeout) => {
       const obj = {};
@@ -6244,6 +6272,10 @@ export const wasmImportObject = {
   },
 
   webapi_CreateScriptURLCallback: {
+    new: (f) => f
+  },
+
+  webapi_ResizeObserverCallback: {
     new: (f) => f
   },
 

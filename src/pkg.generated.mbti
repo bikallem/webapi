@@ -3033,6 +3033,32 @@ pub impl TJsValue for OnErrorEventHandlerNonNull
 pub type OnErrorEventHandlerNonNullEvent
 pub impl TJsValue for OnErrorEventHandlerNonNullEvent
 
+pub(all) enum OrientationLockType {
+  Any
+  Natural
+  Landscape
+  Portrait
+  PortraitPrimary
+  PortraitSecondary
+  LandscapePrimary
+  LandscapeSecondary
+}
+pub fn OrientationLockType::from(String) -> Self?
+pub impl TJsValue for OrientationLockType
+pub impl Eq for OrientationLockType
+pub impl Show for OrientationLockType
+
+pub(all) enum OrientationType {
+  PortraitPrimary
+  PortraitSecondary
+  LandscapePrimary
+  LandscapeSecondary
+}
+pub fn OrientationType::from(String) -> Self?
+pub impl TJsValue for OrientationType
+pub impl Eq for OrientationType
+pub impl Show for OrientationType
+
 #external
 pub type Origin
 pub fn Origin::from(JsValue) -> Self
@@ -3385,6 +3411,46 @@ pub fn RequestRedirect::from(String) -> Self?
 pub impl TJsValue for RequestRedirect
 pub impl Eq for RequestRedirect
 pub impl Show for RequestRedirect
+
+#external
+pub type ResizeObserver
+pub fn[T : TResizeObserver] ResizeObserver::into(Self) -> T
+pub fn ResizeObserver::new(ResizeObserverCallback) -> Self
+pub impl TJsValue for ResizeObserver
+pub impl TResizeObserver for ResizeObserver
+
+pub(all) enum ResizeObserverBoxOptions {
+  BorderBox
+  ContentBox
+  DevicePixelContentBox
+}
+pub fn ResizeObserverBoxOptions::from(String) -> Self?
+pub impl TJsValue for ResizeObserverBoxOptions
+pub impl Eq for ResizeObserverBoxOptions
+pub impl Show for ResizeObserverBoxOptions
+
+#external
+pub type ResizeObserverCallback
+pub fn ResizeObserverCallback::new((Array[ResizeObserverEntry], ResizeObserver) -> Unit) -> Self
+pub impl TJsValue for ResizeObserverCallback
+
+#external
+pub type ResizeObserverEntry
+pub fn[T : TResizeObserverEntry] ResizeObserverEntry::into(Self) -> T
+pub impl TJsValue for ResizeObserverEntry
+pub impl TResizeObserverEntry for ResizeObserverEntry
+
+#external
+pub type ResizeObserverOptions
+pub fn ResizeObserverOptions::empty() -> Self
+pub fn ResizeObserverOptions::new(box? : ResizeObserverBoxOptions) -> Self
+pub impl TJsValue for ResizeObserverOptions
+
+#external
+pub type ResizeObserverSize
+pub fn[T : TResizeObserverSize] ResizeObserverSize::into(Self) -> T
+pub impl TJsValue for ResizeObserverSize
+pub impl TResizeObserverSize for ResizeObserverSize
 
 pub(all) enum ResizeQuality {
   Pixelated
@@ -3977,6 +4043,13 @@ pub fn[T : TScreen] Screen::into(Self) -> T
 pub impl TJsValue for Screen
 pub impl TScreen for Screen
 
+#external
+pub type ScreenOrientation
+pub fn[T : TScreenOrientation] ScreenOrientation::into(Self) -> T
+pub impl TEventTarget for ScreenOrientation
+pub impl TJsValue for ScreenOrientation
+pub impl TScreenOrientation for ScreenOrientation
+
 pub(all) enum ScrollBehavior {
   Auto
   Instant
@@ -4137,6 +4210,12 @@ pub impl TJsValue for Storage
 pub impl TStorage for Storage
 
 #external
+pub type StorageEstimate
+pub fn StorageEstimate::empty() -> Self
+pub fn StorageEstimate::new(usage? : UInt64, quota? : UInt64) -> Self
+pub impl TJsValue for StorageEstimate
+
+#external
 pub type StorageEvent
 pub fn[T : TStorageEvent] StorageEvent::into(Self) -> T
 pub fn StorageEvent::new(String, event_init_dict? : StorageEventInit) -> Self
@@ -4149,6 +4228,12 @@ pub type StorageEventInit
 pub fn StorageEventInit::empty() -> Self
 pub fn StorageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, key? : String, old_value? : String, new_value? : String, url? : String, storage_area? : &TStorage) -> Self
 pub impl TJsValue for StorageEventInit
+
+#external
+pub type StorageManager
+pub fn[T : TStorageManager] StorageManager::into(Self) -> T
+pub impl TJsValue for StorageManager
+pub impl TStorageManager for StorageManager
 
 #external
 pub type StructuredSerializeOptions
@@ -8070,6 +8155,7 @@ pub trait TNavigator : TJsValue {
   java_enabled(Self) -> Bool
   pdf_viewer_enabled(Self) -> Bool
   hardware_concurrency(Self) -> UInt64
+  storage(Self) -> StorageManager
 }
 
 pub trait TNode : TEventTarget {
@@ -8483,6 +8569,25 @@ pub(open) trait TRequestInfo {
   to_js(Self) -> JsValue
 }
 pub impl TRequestInfo for String
+
+pub trait TResizeObserver : TJsValue {
+  observe(Self, &TElement, options? : ResizeObserverOptions) -> Unit
+  unobserve(Self, &TElement) -> Unit
+  disconnect(Self) -> Unit
+}
+
+pub trait TResizeObserverEntry : TJsValue {
+  target(Self) -> Element
+  content_rect(Self) -> DOMRectReadOnly
+  border_box_size(Self) -> JsValue
+  content_box_size(Self) -> JsValue
+  device_pixel_content_box_size(Self) -> JsValue
+}
+
+pub trait TResizeObserverSize : TJsValue {
+  inline_size(Self) -> Double
+  block_size(Self) -> Double
+}
 
 pub trait TResponse : TJsValue {
   type_(Self) -> ResponseType
@@ -9197,6 +9302,16 @@ pub trait TScreen : TJsValue {
   height(Self) -> Int
   color_depth(Self) -> UInt
   pixel_depth(Self) -> UInt
+  orientation(Self) -> ScreenOrientation
+}
+
+pub trait TScreenOrientation : TEventTarget {
+  lock(Self, OrientationLockType) -> @js_async.Promise[Unit]
+  unlock(Self) -> Unit
+  type_(Self) -> OrientationType
+  angle(Self) -> UInt
+  onchange(Self) -> EventHandlerNonNull
+  set_onchange(Self, EventHandlerNonNull) -> Unit
 }
 
 pub trait TShadowRoot : TDocumentFragment {
@@ -9272,6 +9387,12 @@ pub trait TStorageEvent : TEvent {
   url(Self) -> String
   storage_area(Self) -> Storage
   init_storage_event(Self, String, bubbles? : Bool, cancelable? : Bool, key? : String, old_value? : String, new_value? : String, url? : String, storage_area? : &TStorage) -> Unit
+}
+
+pub trait TStorageManager : TJsValue {
+  persisted(Self) -> @js_async.Promise[Bool]
+  persist(Self) -> @js_async.Promise[Bool]
+  estimate(Self) -> @js_async.Promise[StorageEstimate]
 }
 
 pub trait TStyleSheet : TJsValue {
@@ -9954,6 +10075,7 @@ pub trait TWorkerNavigator : TJsValue {
   languages(Self) -> JsValue
   on_line(Self) -> Bool
   hardware_concurrency(Self) -> UInt64
+  storage(Self) -> StorageManager
 }
 
 pub(open) trait TWorkerNewScriptURL {

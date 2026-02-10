@@ -26,6 +26,7 @@ core_specs = [
     "fullscreen",
     "screen-orientation",
     "storage",
+    "resize-observer",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]
