@@ -904,6 +904,9 @@ extern "js" fn document_set_onfullscreenerror_ffi(
 ) -> Unit = "(obj, onfullscreenerror) => { obj.onfullscreenerror = onfullscreenerror; }"
 
 ///|
+extern "js" fn document_get_selection_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getSelection()"
+
+///|
 extern "js" fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
@@ -2128,6 +2131,34 @@ extern "js" fn document_set_onwheel_ffi(
   obj : JsValue,
   onwheel : JsValue,
 ) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
+
+///|
+extern "js" fn document_onselectstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectstart"
+
+///|
+fn document_onselectstart_ffi(obj : JsValue) -> EventHandler {
+  document_onselectstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "(obj, onselectstart) => { obj.onselectstart = onselectstart; }"
+
+///|
+extern "js" fn document_onselectionchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectionchange"
+
+///|
+fn document_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+  document_onselectionchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "(obj, onselectionchange) => { obj.onselectionchange = onselectionchange; }"
 
 ///|
 extern "js" fn document_get_box_quads_ffi_js(

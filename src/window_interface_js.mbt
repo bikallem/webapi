@@ -579,6 +579,9 @@ fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double {
 }
 
 ///|
+extern "js" fn window_get_selection_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getSelection()"
+
+///|
 extern "js" fn window_request_idle_callback_ffi_js(
   obj : JsValue,
   callback : JsValue,
@@ -1610,6 +1613,34 @@ fn window_onwheel_ffi(obj : JsValue) -> EventHandler {
 
 ///|
 extern "js" fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
+
+///|
+extern "js" fn window_onselectstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectstart"
+
+///|
+fn window_onselectstart_ffi(obj : JsValue) -> EventHandler {
+  window_onselectstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn window_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "(obj, onselectstart) => { obj.onselectstart = onselectstart; }"
+
+///|
+extern "js" fn window_onselectionchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectionchange"
+
+///|
+fn window_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+  window_onselectionchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn window_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "(obj, onselectionchange) => { obj.onselectionchange = onselectionchange; }"
 
 ///|
 extern "js" fn window_onafterprint_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onafterprint"

@@ -526,6 +526,9 @@ fn document_set_onfullscreenerror_ffi(
 ) -> Unit = "webapi_Document" "set_onfullscreenerror"
 
 ///|
+fn document_get_selection_ffi(obj : JsValue) -> JsValue = "webapi_Document" "getSelection"
+
+///|
 fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
@@ -1112,6 +1115,24 @@ fn document_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_
 
 ///|
 fn document_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Document" "set_onwheel"
+
+///|
+fn document_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onselectstart"
+
+///|
+fn document_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "webapi_Document" "set_onselectstart"
+
+///|
+fn document_onselectionchange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onselectionchange"
+
+///|
+fn document_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "webapi_Document" "set_onselectionchange"
 
 ///|
 fn document_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Document" "getBoxQuads"

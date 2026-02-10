@@ -1523,6 +1523,12 @@ pub fn[T : TGeometryNode] GeometryNode::into(Self) -> T
 pub impl TJsValue for GeometryNode
 
 #external
+pub type GetComposedRangesOptions
+pub fn GetComposedRangesOptions::empty() -> Self
+pub fn GetComposedRangesOptions::new(shadow_roots? : Array[ShadowRoot]) -> Self
+pub impl TJsValue for GetComposedRangesOptions
+
+#external
 pub type GetHTMLOptions
 pub fn GetHTMLOptions::empty() -> Self
 pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[ShadowRoot]) -> Self
@@ -4108,6 +4114,12 @@ pub fn ScrollToOptions::empty() -> Self
 pub fn ScrollToOptions::new(behavior? : ScrollBehavior, left? : Double, top? : Double) -> Self
 pub impl TJsValue for ScrollToOptions
 
+#external
+pub type Selection
+pub fn[T : TSelection] Selection::into(Self) -> T
+pub impl TJsValue for Selection
+pub impl TSelection for Selection
+
 pub(all) enum SelectionMode {
   Select
   Start
@@ -5598,6 +5610,7 @@ pub trait TDocument : TNode {
   set_onfullscreenchange(Self, EventHandlerNonNull) -> Unit
   onfullscreenerror(Self) -> EventHandlerNonNull
   set_onfullscreenerror(Self, EventHandlerNonNull) -> Unit
+  get_selection(Self) -> Selection?
   get_element_by_id(Self, String) -> Element?
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
@@ -5770,6 +5783,10 @@ pub trait TDocument : TNode {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  onselectstart(Self) -> EventHandlerNonNull
+  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  onselectionchange(Self) -> EventHandlerNonNull
+  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[DOMQuad]
   convert_quad_from_node(Self, DOMQuadInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
   convert_rect_from_node(Self, &TDOMRectReadOnly, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
@@ -6678,6 +6695,10 @@ pub trait THTMLElement : TElement {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  onselectstart(Self) -> EventHandlerNonNull
+  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  onselectionchange(Self) -> EventHandlerNonNull
+  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
   content_editable(Self) -> String
   set_content_editable(Self, String) -> Unit
   enter_key_hint(Self) -> String
@@ -8895,6 +8916,10 @@ pub trait TSVGElement : TElement {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  onselectstart(Self) -> EventHandlerNonNull
+  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  onselectionchange(Self) -> EventHandlerNonNull
+  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
   corresponding_element(Self) -> SVGElement
   corresponding_use_element(Self) -> SVGUseElement
   dataset(Self) -> DOMStringMap
@@ -9312,6 +9337,33 @@ pub trait TScreenOrientation : TEventTarget {
   angle(Self) -> UInt
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, EventHandlerNonNull) -> Unit
+}
+
+pub trait TSelection : TJsValue {
+  anchor_node(Self) -> Node
+  anchor_offset(Self) -> UInt
+  focus_node(Self) -> Node
+  focus_offset(Self) -> UInt
+  is_collapsed(Self) -> Bool
+  range_count(Self) -> UInt
+  type_(Self) -> String
+  direction(Self) -> String
+  get_range_at(Self, UInt) -> Range
+  add_range(Self, &TRange) -> Unit
+  remove_range(Self, &TRange) -> Unit
+  remove_all_ranges(Self) -> Unit
+  empty(Self) -> Unit
+  get_composed_ranges(Self, options? : GetComposedRangesOptions) -> Array[StaticRange]
+  collapse(Self, &TNode, offset? : UInt) -> Unit
+  set_position(Self, &TNode, offset? : UInt) -> Unit
+  collapse_to_start(Self) -> Unit
+  collapse_to_end(Self) -> Unit
+  extend(Self, &TNode, offset? : UInt) -> Unit
+  set_base_and_extent(Self, &TNode, UInt, &TNode, UInt) -> Unit
+  select_all_children(Self, &TNode) -> Unit
+  modify(Self, alter? : String, direction? : String, granularity? : String) -> Unit
+  delete_from_document(Self) -> Unit
+  contains_node(Self, &TNode, allow_partial_containment? : Bool) -> Bool
 }
 
 pub trait TShadowRoot : TDocumentFragment {
@@ -9777,6 +9829,7 @@ pub trait TWindow : TEventTarget {
   outer_width(Self) -> Int
   outer_height(Self) -> Int
   device_pixel_ratio(Self) -> Double
+  get_selection(Self) -> Selection?
   request_idle_callback(Self, IdleRequestCallback, options? : IdleRequestOptions) -> UInt
   cancel_idle_callback(Self, UInt) -> Unit
   onabort(Self) -> EventHandlerNonNull
@@ -9931,6 +9984,10 @@ pub trait TWindow : TEventTarget {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  onselectstart(Self) -> EventHandlerNonNull
+  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  onselectionchange(Self) -> EventHandlerNonNull
+  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
   onafterprint(Self) -> EventHandlerNonNull
   set_onafterprint(Self, EventHandlerNonNull) -> Unit
   onbeforeprint(Self) -> EventHandlerNonNull

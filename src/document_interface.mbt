@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Document
-// Specifications: html.idl, SVG.idl, fullscreen.idl, dom.idl, cssom-view.idl
+// Specifications: selection-api.idl, dom.idl, cssom-view.idl, SVG.idl, fullscreen.idl, html.idl
 
 ///|
 /// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)
@@ -277,6 +277,7 @@ pub trait TDocument: TNode {
   set_onfullscreenchange(self : Self, onfullscreenchange : EventHandler) -> Unit = _
   onfullscreenerror(self : Self) -> EventHandler = _
   set_onfullscreenerror(self : Self, onfullscreenerror : EventHandler) -> Unit = _
+  get_selection(self : Self) -> Selection? = _
   get_element_by_id(self : Self, element_id : String) -> Element? = _
   custom_element_registry(self : Self) -> CustomElementRegistry = _
   active_element(self : Self) -> Element = _
@@ -466,6 +467,10 @@ pub trait TDocument: TNode {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  onselectstart(self : Self) -> EventHandler = _
+  set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit = _
+  onselectionchange(self : Self) -> EventHandler = _
+  set_onselectionchange(self : Self, onselectionchange : EventHandler) -> Unit = _
   get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[DOMQuad] = _
   convert_quad_from_node(
     self : Self,
@@ -1315,6 +1320,17 @@ impl TDocument with set_onfullscreenerror(
     TJsValue::to_js(self),
     TJsValue::to_js(onfullscreenerror),
   )
+}
+
+///|
+/// [Document.getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Document/getSelection)
+impl TDocument with get_selection(self : Self) -> Selection? {
+  let result = document_get_selection_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -2563,6 +2579,39 @@ impl TDocument with onwheel(self : Self) -> EventHandler {
 /// [Document.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/Document/onwheel)
 impl TDocument with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   document_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [Document.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/Document/onselectstart)
+impl TDocument with onselectstart(self : Self) -> EventHandler {
+  document_onselectstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/Document/onselectstart)
+impl TDocument with set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit {
+  document_set_onselectstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectstart),
+  )
+}
+
+///|
+/// [Document.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/Document/onselectionchange)
+impl TDocument with onselectionchange(self : Self) -> EventHandler {
+  document_onselectionchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/Document/onselectionchange)
+impl TDocument with set_onselectionchange(
+  self : Self,
+  onselectionchange : EventHandler,
+) -> Unit {
+  document_set_onselectionchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectionchange),
+  )
 }
 
 ///|

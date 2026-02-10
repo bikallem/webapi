@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Window
-// Specifications: cssom.idl, dom.idl, requestidlecallback.idl, cssom-view.idl, fetch.idl, html.idl
+// Specifications: cssom.idl, selection-api.idl, dom.idl, requestidlecallback.idl, cssom-view.idl, fetch.idl, html.idl
 
 ///|
 /// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)
@@ -131,6 +131,7 @@ pub trait TWindow: TEventTarget {
   outer_width(self : Self) -> Int = _
   outer_height(self : Self) -> Int = _
   device_pixel_ratio(self : Self) -> Double = _
+  get_selection(self : Self) -> Selection? = _
   request_idle_callback(
     self : Self,
     callback : IdleRequestCallback,
@@ -295,6 +296,10 @@ pub trait TWindow: TEventTarget {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  onselectstart(self : Self) -> EventHandler = _
+  set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit = _
+  onselectionchange(self : Self) -> EventHandler = _
+  set_onselectionchange(self : Self, onselectionchange : EventHandler) -> Unit = _
   onafterprint(self : Self) -> EventHandler = _
   set_onafterprint(self : Self, onafterprint : EventHandler) -> Unit = _
   onbeforeprint(self : Self) -> EventHandler = _
@@ -928,6 +933,17 @@ impl TWindow with outer_height(self : Self) -> Int {
 /// [Window.devicePixelRatio](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio)
 impl TWindow with device_pixel_ratio(self : Self) -> Double {
   window_device_pixel_ratio_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection)
+impl TWindow with get_selection(self : Self) -> Selection? {
+  let result = window_get_selection_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
 }
 
 ///|
@@ -1980,6 +1996,39 @@ impl TWindow with onwheel(self : Self) -> EventHandler {
 /// [Window.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwheel)
 impl TWindow with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   window_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [Window.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselectstart)
+impl TWindow with onselectstart(self : Self) -> EventHandler {
+  window_onselectstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselectstart)
+impl TWindow with set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit {
+  window_set_onselectstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectstart),
+  )
+}
+
+///|
+/// [Window.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselectionchange)
+impl TWindow with onselectionchange(self : Self) -> EventHandler {
+  window_onselectionchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselectionchange)
+impl TWindow with set_onselectionchange(
+  self : Self,
+  onselectionchange : EventHandler,
+) -> Unit {
+  window_set_onselectionchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectionchange),
+  )
 }
 
 ///|

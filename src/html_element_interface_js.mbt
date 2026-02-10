@@ -1397,6 +1397,34 @@ extern "js" fn html_element_set_onwheel_ffi(
 ) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
 
 ///|
+extern "js" fn html_element_onselectstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectstart"
+
+///|
+fn html_element_onselectstart_ffi(obj : JsValue) -> EventHandler {
+  html_element_onselectstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn html_element_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "(obj, onselectstart) => { obj.onselectstart = onselectstart; }"
+
+///|
+extern "js" fn html_element_onselectionchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectionchange"
+
+///|
+fn html_element_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+  html_element_onselectionchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn html_element_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "(obj, onselectionchange) => { obj.onselectionchange = onselectionchange; }"
+
+///|
 extern "js" fn html_element_content_editable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.contentEditable"
 
 ///|

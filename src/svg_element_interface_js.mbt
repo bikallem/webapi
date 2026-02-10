@@ -1097,6 +1097,34 @@ extern "js" fn svg_element_set_onwheel_ffi(
 ) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
 
 ///|
+extern "js" fn svg_element_onselectstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectstart"
+
+///|
+fn svg_element_onselectstart_ffi(obj : JsValue) -> EventHandler {
+  svg_element_onselectstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn svg_element_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "(obj, onselectstart) => { obj.onselectstart = onselectstart; }"
+
+///|
+extern "js" fn svg_element_onselectionchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectionchange"
+
+///|
+fn svg_element_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+  svg_element_onselectionchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn svg_element_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "(obj, onselectionchange) => { obj.onselectionchange = onselectionchange; }"
+
+///|
 extern "js" fn svg_element_corresponding_element_ffi_js(
   obj : JsValue,
 ) -> JsValue = "(obj) => obj.correspondingElement"

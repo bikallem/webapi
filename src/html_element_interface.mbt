@@ -285,6 +285,10 @@ pub trait THTMLElement: TElement {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  onselectstart(self : Self) -> EventHandler = _
+  set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit = _
+  onselectionchange(self : Self) -> EventHandler = _
+  set_onselectionchange(self : Self, onselectionchange : EventHandler) -> Unit = _
   content_editable(self : Self) -> String = _
   set_content_editable(self : Self, content_editable : String) -> Unit = _
   enter_key_hint(self : Self) -> String = _
@@ -1766,6 +1770,42 @@ impl THTMLElement with onwheel(self : Self) -> EventHandler {
 /// [HTMLElement.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onwheel)
 impl THTMLElement with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   html_element_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [HTMLElement.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onselectstart)
+impl THTMLElement with onselectstart(self : Self) -> EventHandler {
+  html_element_onselectstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onselectstart)
+impl THTMLElement with set_onselectstart(
+  self : Self,
+  onselectstart : EventHandler,
+) -> Unit {
+  html_element_set_onselectstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectstart),
+  )
+}
+
+///|
+/// [HTMLElement.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onselectionchange)
+impl THTMLElement with onselectionchange(self : Self) -> EventHandler {
+  html_element_onselectionchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onselectionchange)
+impl THTMLElement with set_onselectionchange(
+  self : Self,
+  onselectionchange : EventHandler,
+) -> Unit {
+  html_element_set_onselectionchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectionchange),
+  )
 }
 
 ///|

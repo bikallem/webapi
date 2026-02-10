@@ -189,6 +189,10 @@ pub trait TSVGElement: TElement {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  onselectstart(self : Self) -> EventHandler = _
+  set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit = _
+  onselectionchange(self : Self) -> EventHandler = _
+  set_onselectionchange(self : Self, onselectionchange : EventHandler) -> Unit = _
   corresponding_element(self : Self) -> SVGElement = _
   corresponding_use_element(self : Self) -> SVGUseElement = _
   dataset(self : Self) -> DOMStringMap = _
@@ -1323,6 +1327,42 @@ impl TSVGElement with onwheel(self : Self) -> EventHandler {
 /// [SVGElement.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwheel)
 impl TSVGElement with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   svg_element_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [SVGElement.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectstart)
+impl TSVGElement with onselectstart(self : Self) -> EventHandler {
+  svg_element_onselectstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [SVGElement.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectstart)
+impl TSVGElement with set_onselectstart(
+  self : Self,
+  onselectstart : EventHandler,
+) -> Unit {
+  svg_element_set_onselectstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectstart),
+  )
+}
+
+///|
+/// [SVGElement.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectionchange)
+impl TSVGElement with onselectionchange(self : Self) -> EventHandler {
+  svg_element_onselectionchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [SVGElement.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectionchange)
+impl TSVGElement with set_onselectionchange(
+  self : Self,
+  onselectionchange : EventHandler,
+) -> Unit {
+  svg_element_set_onselectionchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onselectionchange),
+  )
 }
 
 ///|

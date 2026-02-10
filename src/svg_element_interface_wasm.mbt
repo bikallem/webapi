@@ -554,6 +554,24 @@ fn svg_element_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" 
 fn svg_element_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_SVGElement" "set_onwheel"
 
 ///|
+fn svg_element_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onselectstart"
+
+///|
+fn svg_element_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onselectstart"
+
+///|
+fn svg_element_onselectionchange_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onselectionchange"
+
+///|
+fn svg_element_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onselectionchange"
+
+///|
 fn svg_element_corresponding_element_ffi(obj : JsValue) -> SVGElement = "webapi_SVGElement" "get_correspondingElement"
 
 ///|

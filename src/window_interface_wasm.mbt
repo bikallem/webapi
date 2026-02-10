@@ -320,6 +320,9 @@ fn window_outer_height_ffi(obj : JsValue) -> Int = "webapi_Window" "get_outerHei
 fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double = "webapi_Window" "get_devicePixelRatio"
 
 ///|
+fn window_get_selection_ffi(obj : JsValue) -> JsValue = "webapi_Window" "getSelection"
+
+///|
 fn window_request_idle_callback_ffi(
   obj : JsValue,
   callback : JsValue,
@@ -817,6 +820,21 @@ fn window_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwh
 
 ///|
 fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Window" "set_onwheel"
+
+///|
+fn window_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onselectstart"
+
+///|
+fn window_set_onselectstart_ffi(obj : JsValue, onselectstart : JsValue) -> Unit = "webapi_Window" "set_onselectstart"
+
+///|
+fn window_onselectionchange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onselectionchange"
+
+///|
+fn window_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "webapi_Window" "set_onselectionchange"
 
 ///|
 fn window_onafterprint_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onafterprint"

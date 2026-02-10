@@ -197,6 +197,10 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onselectstart: (obj) => obj.onselectstart,
+    set_onselectstart: (obj, value) => { obj.onselectstart = value; },
+    get_onselectionchange: (obj) => obj.onselectionchange,
+    set_onselectionchange: (obj, value) => { obj.onselectionchange = value; },
     get_correspondingElement: (obj) => obj.correspondingElement,
     get_correspondingUseElement: (obj) => obj.correspondingUseElement,
     get_dataset: (obj) => obj.dataset,
@@ -580,6 +584,10 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onselectstart: (obj) => obj.onselectstart,
+    set_onselectstart: (obj, value) => { obj.onselectstart = value; },
+    get_onselectionchange: (obj) => obj.onselectionchange,
+    set_onselectionchange: (obj, value) => { obj.onselectionchange = value; },
     getElementsByTagName: (obj, qualified_name) => obj.getElementsByTagName(qualified_name),
     getElementsByTagNameNS: (obj, namespace_, local_name) => obj.getElementsByTagNameNS(namespace_, local_name),
     getElementsByClassName: (obj, class_names) => obj.getElementsByClassName(class_names),
@@ -620,6 +628,7 @@ export const wasmImportObject = {
     elementsFromPoint: (obj, x, y) => obj.elementsFromPoint(x, y),
     caretPositionFromPoint: (obj, x, y, options) => obj.caretPositionFromPoint(x, y, options),
     exitFullscreen: (obj) => obj.exitFullscreen(),
+    getSelection: (obj) => obj.getSelection(),
     getElementById: (obj, element_id) => obj.getElementById(element_id),
     prepend: (obj, nodes) => obj.prepend(...nodes),
     append: (obj, nodes) => obj.append(...nodes),
@@ -1227,6 +1236,10 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onselectstart: (obj) => obj.onselectstart,
+    set_onselectstart: (obj, value) => { obj.onselectstart = value; },
+    get_onselectionchange: (obj) => obj.onselectionchange,
+    set_onselectionchange: (obj, value) => { obj.onselectionchange = value; },
     get_onafterprint: (obj) => obj.onafterprint,
     set_onafterprint: (obj, value) => { obj.onafterprint = value; },
     get_onbeforeprint: (obj) => obj.onbeforeprint,
@@ -1298,6 +1311,7 @@ export const wasmImportObject = {
     scrollTo_2: (obj, x, y) => obj.scrollTo(x, y),
     scrollBy: (obj, options) => obj.scrollBy(options),
     scrollBy_2: (obj, x, y) => obj.scrollBy(x, y),
+    getSelection: (obj) => obj.getSelection(),
     requestIdleCallback: (obj, callback, options) => obj.requestIdleCallback(callback, options),
     cancelIdleCallback: (obj, handle) => obj.cancelIdleCallback(handle),
     reportError: (obj, e) => obj.reportError(e),
@@ -2075,6 +2089,10 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onselectstart: (obj) => obj.onselectstart,
+    set_onselectstart: (obj, value) => { obj.onselectstart = value; },
+    get_onselectionchange: (obj) => obj.onselectionchange,
+    set_onselectionchange: (obj, value) => { obj.onselectionchange = value; },
     get_contentEditable: (obj) => obj.contentEditable,
     set_contentEditable: (obj, value) => { obj.contentEditable = value; },
     get_enterKeyHint: (obj) => obj.enterKeyHint,
@@ -5027,6 +5045,33 @@ export const wasmImportObject = {
     set_onscrollend: (obj, value) => { obj.onscrollend = value; }
   },
 
+  webapi_Selection: {
+    get_anchorNode: (obj) => obj.anchorNode,
+    get_anchorOffset: (obj) => obj.anchorOffset,
+    get_focusNode: (obj) => obj.focusNode,
+    get_focusOffset: (obj) => obj.focusOffset,
+    get_isCollapsed: (obj) => obj.isCollapsed,
+    get_rangeCount: (obj) => obj.rangeCount,
+    get_type: (obj) => obj.type,
+    get_direction: (obj) => obj.direction,
+    getRangeAt: (obj, index) => obj.getRangeAt(index),
+    addRange: (obj, range) => obj.addRange(range),
+    removeRange: (obj, range) => obj.removeRange(range),
+    removeAllRanges: (obj) => obj.removeAllRanges(),
+    empty: (obj) => obj.empty(),
+    getComposedRanges: (obj, options) => obj.getComposedRanges(options),
+    collapse: (obj, node, offset) => obj.collapse(node, offset),
+    setPosition: (obj, node, offset) => obj.setPosition(node, offset),
+    collapseToStart: (obj) => obj.collapseToStart(),
+    collapseToEnd: (obj) => obj.collapseToEnd(),
+    extend: (obj, node, offset) => obj.extend(node, offset),
+    setBaseAndExtent: (obj, anchor_node, anchor_offset, focus_node, focus_offset) => obj.setBaseAndExtent(anchor_node, anchor_offset, focus_node, focus_offset),
+    selectAllChildren: (obj, node) => obj.selectAllChildren(node),
+    modify: (obj, alter, direction, granularity) => obj.modify(alter, direction, granularity),
+    deleteFromDocument: (obj) => obj.deleteFromDocument(),
+    containsNode: (obj, node, allow_partial_containment) => obj.containsNode(node, allow_partial_containment)
+  },
+
   webapi_TrustedHTML: {
     toJSON: (obj) => obj.toJSON()
   },
@@ -6167,6 +6212,14 @@ export const wasmImportObject = {
     new: (navigationUI) => {
       const obj = {};
       if (navigationUI !== undefined) obj.navigationUI = navigationUI;
+      return obj;
+    }
+  },
+
+  webapi_GetComposedRangesOptions: {
+    new: (shadowRoots) => {
+      const obj = {};
+      if (shadowRoots !== undefined) obj.shadowRoots = shadowRoots;
       return obj;
     }
   },

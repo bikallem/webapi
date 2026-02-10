@@ -751,6 +751,24 @@ fn html_element_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement
 fn html_element_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_HTMLElement" "set_onwheel"
 
 ///|
+fn html_element_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onselectstart"
+
+///|
+fn html_element_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onselectstart"
+
+///|
+fn html_element_onselectionchange_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onselectionchange"
+
+///|
+fn html_element_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onselectionchange"
+
+///|
 fn html_element_content_editable_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLElement" "get_contentEditable"
 
 ///|
