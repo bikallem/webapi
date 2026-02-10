@@ -5161,6 +5161,32 @@ export const wasmImportObject = {
     getEntriesByName: (obj, name, type_) => obj.getEntriesByName(name, type_)
   },
 
+  webapi_IntersectionObserver: {
+    new: (callback, options) => new IntersectionObserver(callback, options),
+    get_root: (obj) => obj.root,
+    get_rootMargin: (obj) => obj.rootMargin,
+    get_scrollMargin: (obj) => obj.scrollMargin,
+    get_thresholds: (obj) => obj.thresholds,
+    get_delay: (obj) => obj.delay,
+    get_trackVisibility: (obj) => obj.trackVisibility,
+    observe: (obj, target) => obj.observe(target),
+    unobserve: (obj, target) => obj.unobserve(target),
+    disconnect: (obj) => obj.disconnect(),
+    takeRecords: (obj) => obj.takeRecords()
+  },
+
+  webapi_IntersectionObserverEntry: {
+    new: (intersection_observer_entry_init) => new IntersectionObserverEntry(intersection_observer_entry_init),
+    get_time: (obj) => obj.time,
+    get_rootBounds: (obj) => obj.rootBounds,
+    get_boundingClientRect: (obj) => obj.boundingClientRect,
+    get_intersectionRect: (obj) => obj.intersectionRect,
+    get_isIntersecting: (obj) => obj.isIntersecting,
+    get_isVisible: (obj) => obj.isVisible,
+    get_intersectionRatio: (obj) => obj.intersectionRatio,
+    get_target: (obj) => obj.target
+  },
+
   webapi_SVGBoundingBoxOptions: {
     new: (fill, stroke, markers, clipped) => {
       const obj = {};
@@ -6268,6 +6294,34 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_IntersectionObserverEntryInit: {
+    new: (time, rootBounds, boundingClientRect, intersectionRect, isIntersecting, isVisible, intersectionRatio, target) => {
+      const obj = {};
+      if (time !== undefined) obj.time = time;
+      if (rootBounds !== undefined) obj.rootBounds = rootBounds;
+      if (boundingClientRect !== undefined) obj.boundingClientRect = boundingClientRect;
+      if (intersectionRect !== undefined) obj.intersectionRect = intersectionRect;
+      if (isIntersecting !== undefined) obj.isIntersecting = isIntersecting;
+      if (isVisible !== undefined) obj.isVisible = isVisible;
+      if (intersectionRatio !== undefined) obj.intersectionRatio = intersectionRatio;
+      if (target !== undefined) obj.target = target;
+      return obj;
+    }
+  },
+
+  webapi_IntersectionObserverInit: {
+    new: (root, rootMargin, scrollMargin, threshold, delay, trackVisibility) => {
+      const obj = {};
+      if (root !== undefined) obj.root = root;
+      if (rootMargin !== undefined) obj.rootMargin = rootMargin;
+      if (scrollMargin !== undefined) obj.scrollMargin = scrollMargin;
+      if (threshold !== undefined) obj.threshold = threshold;
+      if (delay !== undefined) obj.delay = delay;
+      if (trackVisibility !== undefined) obj.trackVisibility = trackVisibility;
+      return obj;
+    }
+  },
+
   webapi_MutationCallback: {
     new: (f) => f
   },
@@ -6337,6 +6391,10 @@ export const wasmImportObject = {
   },
 
   webapi_PerformanceObserverCallback: {
+    new: (f) => f
+  },
+
+  webapi_IntersectionObserverCallback: {
     new: (f) => f
   },
 

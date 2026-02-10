@@ -1175,6 +1175,8 @@ pub fn Document::parse_html_unsafe(&TDocumentParseHTMLUnsafeHtml) -> Self
 pub impl TDocument for Document
 pub impl TEventTarget for Document
 pub impl TGeometryNode for Document
+pub impl TIntersectionObserverInitNewRoot for Document
+pub impl TIntersectionObserverRoot for Document
 pub impl TJsValue for Document
 pub impl TNode for Document
 pub impl TXMLHttpRequestSendBody for Document
@@ -1242,6 +1244,8 @@ pub impl THTMLAllCollectionNamedItem for Element
 pub impl THTMLFormControlsCollectionNamedItem for Element
 pub impl THTMLFormElementGet2 for Element
 pub impl THTMLSlotElementAssignNodes for Element
+pub impl TIntersectionObserverInitNewRoot for Element
+pub impl TIntersectionObserverRoot for Element
 pub impl TJsValue for Element
 pub impl TNode for Element
 pub impl TStyleSheetOwnerNode for Element
@@ -2588,6 +2592,42 @@ pub impl TJsValue for Int32Array
 pub type Int8Array
 pub impl TArrayBufferView for Int8Array
 pub impl TJsValue for Int8Array
+
+#external
+pub type IntersectionObserver
+pub fn[T : TIntersectionObserver] IntersectionObserver::into(Self) -> T
+pub fn IntersectionObserver::new(IntersectionObserverCallback, options? : IntersectionObserverInit) -> Self
+pub impl TIntersectionObserver for IntersectionObserver
+pub impl TJsValue for IntersectionObserver
+
+#external
+pub type IntersectionObserverCallback
+pub fn IntersectionObserverCallback::new((Array[IntersectionObserverEntry], IntersectionObserver) -> Unit) -> Self
+pub impl TJsValue for IntersectionObserverCallback
+
+#external
+pub type IntersectionObserverEntry
+pub fn[T : TIntersectionObserverEntry] IntersectionObserverEntry::into(Self) -> T
+pub fn IntersectionObserverEntry::new(IntersectionObserverEntryInit) -> Self
+pub impl TIntersectionObserverEntry for IntersectionObserverEntry
+pub impl TJsValue for IntersectionObserverEntry
+
+#external
+pub type IntersectionObserverEntryInit
+pub fn IntersectionObserverEntryInit::empty() -> Self
+pub fn IntersectionObserverEntryInit::new(Double, DOMRectInit, DOMRectInit, DOMRectInit, Bool, Bool, Double, &TElement) -> Self
+pub impl TJsValue for IntersectionObserverEntryInit
+
+#external
+pub type IntersectionObserverInit
+pub fn IntersectionObserverInit::empty() -> Self
+pub fn IntersectionObserverInit::new(root? : &TIntersectionObserverInitNewRoot, root_margin? : String, scroll_margin? : String, threshold? : &TIntersectionObserverInitNewThreshold, delay? : Int, track_visibility? : Bool) -> Self
+pub impl TJsValue for IntersectionObserverInit
+
+#external
+pub type IntersectionObserverRoot
+pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::into(Self) -> T
+pub impl TIntersectionObserverRoot for IntersectionObserverRoot
 
 #external
 pub type JsUndefined
@@ -7882,6 +7922,44 @@ pub trait TInputEvent : TUIEvent {
   data(Self) -> String
   is_composing(Self) -> Bool
   input_type(Self) -> String
+}
+
+pub trait TIntersectionObserver : TJsValue {
+  root(Self) -> IntersectionObserverRoot
+  root_margin(Self) -> String
+  scroll_margin(Self) -> String
+  thresholds(Self) -> JsValue
+  delay(Self) -> Int
+  track_visibility(Self) -> Bool
+  observe(Self, &TElement) -> Unit
+  unobserve(Self, &TElement) -> Unit
+  disconnect(Self) -> Unit
+  take_records(Self) -> Array[IntersectionObserverEntry]
+}
+
+pub trait TIntersectionObserverEntry : TJsValue {
+  time(Self) -> Double
+  root_bounds(Self) -> DOMRectReadOnly
+  bounding_client_rect(Self) -> DOMRectReadOnly
+  intersection_rect(Self) -> DOMRectReadOnly
+  is_intersecting(Self) -> Bool
+  is_visible(Self) -> Bool
+  intersection_ratio(Self) -> Double
+  target(Self) -> Element
+}
+
+pub(open) trait TIntersectionObserverInitNewRoot {
+  to_js(Self) -> JsValue
+}
+
+pub(open) trait TIntersectionObserverInitNewThreshold {
+  to_js(Self) -> JsValue
+}
+pub impl TIntersectionObserverInitNewThreshold for Double
+pub impl TIntersectionObserverInitNewThreshold for Array[Double]
+
+pub(open) trait TIntersectionObserverRoot {
+  to_js(Self) -> JsValue
 }
 
 pub(open) trait TJsValue {
