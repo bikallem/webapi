@@ -38,67 +38,13 @@ jobs:
         working-directory: examples
         run: moon build --target js --release
 
-      - name: Prepare deployment directory
-        run: |
-          mkdir -p _site
-          EXAMPLES="canvas classlist counter dom element-ops events fetch forms storage timers url"
-          for ex in $EXAMPLES; do
-            mkdir -p "_site/$ex"
-            # Copy JS build output
-            cp "examples/target/js/release/build/$ex/$ex.js" "_site/$ex/"
-            # Copy JS HTML file, fixing the script path
-            if [ -f "examples/$ex/$ex.js.html" ]; then
-              sed "s|../target/js/release/build/$ex/$ex.js|$ex.js|g" \
-                "examples/$ex/$ex.js.html" > "_site/$ex/index.html"
-            elif [ -f "examples/$ex/canvas.html" ]; then
-              sed "s|../target/js/release/build/$ex/$ex.js|$ex.js|g" \
-                "examples/$ex/canvas.html" > "_site/$ex/index.html"
-            fi
-          done
-
-          # Create index page
-          cat > _site/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>MoonBit WebAPI Examples</title>
-              <style>
-                  body { font-family: system-ui; max-width: 800px; margin: 0 auto; padding: 2rem; }
-                  h1 { font-weight: 300; letter-spacing: 2px; }
-                  ul { list-style: none; padding: 0; }
-                  li { margin: 1rem 0; }
-                  a { color: #4a90d9; text-decoration: none; font-size: 1.1rem; }
-                  a:hover { text-decoration: underline; }
-              </style>
-          </head>
-          <body>
-              <h1>MoonBit WebAPI Examples</h1>
-              <ul>
-                  <li><a href="canvas/">Canvas</a></li>
-                  <li><a href="classlist/">ClassList</a></li>
-                  <li><a href="counter/">Counter</a></li>
-                  <li><a href="dom/">DOM</a></li>
-                  <li><a href="element-ops/">Element Operations</a></li>
-                  <li><a href="events/">Events</a></li>
-                  <li><a href="fetch/">Fetch</a></li>
-                  <li><a href="forms/">Forms</a></li>
-                  <li><a href="storage/">Storage</a></li>
-                  <li><a href="timers/">Timers</a></li>
-                  <li><a href="url/">URL</a></li>
-              </ul>
-          </body>
-          </html>
-          EOF
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
+          path: 'examples'
 
   deploy:
     environment:
