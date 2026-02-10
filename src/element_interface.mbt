@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Element
-// Specifications: cssom-view.idl, fullscreen.idl, dom.idl, html.idl
+// Specifications: html.idl, pointerevents.idl, fullscreen.idl, dom.idl, cssom-view.idl
 
 ///|
 /// [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)
@@ -303,6 +303,9 @@ pub trait TElement: TNode {
   set_onfullscreenchange(self : Self, onfullscreenchange : EventHandler) -> Unit = _
   onfullscreenerror(self : Self) -> EventHandler = _
   set_onfullscreenerror(self : Self, onfullscreenerror : EventHandler) -> Unit = _
+  set_pointer_capture(self : Self, pointer_id : Int) -> Unit = _
+  release_pointer_capture(self : Self, pointer_id : Int) -> Unit = _
+  has_pointer_capture(self : Self, pointer_id : Int) -> Bool = _
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
@@ -996,6 +999,33 @@ impl TElement with set_onfullscreenerror(
   element_set_onfullscreenerror_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onfullscreenerror),
+  )
+}
+
+///|
+/// [Element.setPointerCapture](https://developer.mozilla.org/en-US/docs/Web/API/Element/setPointerCapture)
+impl TElement with set_pointer_capture(self : Self, pointer_id : Int) -> Unit {
+  element_set_pointer_capture_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(pointer_id),
+  )
+}
+
+///|
+/// [Element.releasePointerCapture](https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture)
+impl TElement with release_pointer_capture(self : Self, pointer_id : Int) -> Unit {
+  element_release_pointer_capture_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(pointer_id),
+  )
+}
+
+///|
+/// [Element.hasPointerCapture](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasPointerCapture)
+impl TElement with has_pointer_capture(self : Self, pointer_id : Int) -> Bool {
+  element_has_pointer_capture_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(pointer_id),
   )
 }
 

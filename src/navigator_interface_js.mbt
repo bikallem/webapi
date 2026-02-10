@@ -7,6 +7,14 @@ fn navigator_user_activation_ffi(obj : JsValue) -> UserActivation {
 }
 
 ///|
+extern "js" fn navigator_max_touch_points_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.maxTouchPoints"
+
+///|
+fn navigator_max_touch_points_ffi(obj : JsValue) -> Int {
+  navigator_max_touch_points_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn navigator_app_code_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appCodeName"
 
 ///|

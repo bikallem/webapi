@@ -411,6 +411,18 @@ fn element_set_onfullscreenerror_ffi(
 ) -> Unit = "webapi_Element" "set_onfullscreenerror"
 
 ///|
+fn element_set_pointer_capture_ffi(obj : JsValue, pointer_id : JsValue) -> Unit = "webapi_Element" "setPointerCapture"
+
+///|
+fn element_release_pointer_capture_ffi(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> Unit = "webapi_Element" "releasePointerCapture"
+
+///|
+fn element_has_pointer_capture_ffi(obj : JsValue, pointer_id : JsValue) -> Bool = "webapi_Element" "hasPointerCapture"
+
+///|
 fn element_children_ffi(obj : JsValue) -> HTMLCollection = "webapi_Element" "get_children"
 
 ///|

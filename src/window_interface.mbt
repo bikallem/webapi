@@ -296,6 +296,28 @@ pub trait TWindow: TEventTarget {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  onpointerover(self : Self) -> EventHandler = _
+  set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit = _
+  onpointerenter(self : Self) -> EventHandler = _
+  set_onpointerenter(self : Self, onpointerenter : EventHandler) -> Unit = _
+  onpointerdown(self : Self) -> EventHandler = _
+  set_onpointerdown(self : Self, onpointerdown : EventHandler) -> Unit = _
+  onpointermove(self : Self) -> EventHandler = _
+  set_onpointermove(self : Self, onpointermove : EventHandler) -> Unit = _
+  onpointerrawupdate(self : Self) -> EventHandler = _
+  set_onpointerrawupdate(self : Self, onpointerrawupdate : EventHandler) -> Unit = _
+  onpointerup(self : Self) -> EventHandler = _
+  set_onpointerup(self : Self, onpointerup : EventHandler) -> Unit = _
+  onpointercancel(self : Self) -> EventHandler = _
+  set_onpointercancel(self : Self, onpointercancel : EventHandler) -> Unit = _
+  onpointerout(self : Self) -> EventHandler = _
+  set_onpointerout(self : Self, onpointerout : EventHandler) -> Unit = _
+  onpointerleave(self : Self) -> EventHandler = _
+  set_onpointerleave(self : Self, onpointerleave : EventHandler) -> Unit = _
+  ongotpointercapture(self : Self) -> EventHandler = _
+  set_ongotpointercapture(self : Self, ongotpointercapture : EventHandler) -> Unit = _
+  onlostpointercapture(self : Self) -> EventHandler = _
+  set_onlostpointercapture(self : Self, onlostpointercapture : EventHandler) -> Unit = _
   onselectstart(self : Self) -> EventHandler = _
   set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit = _
   onselectionchange(self : Self) -> EventHandler = _
@@ -1996,6 +2018,183 @@ impl TWindow with onwheel(self : Self) -> EventHandler {
 /// [Window.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwheel)
 impl TWindow with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   window_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [Window.onpointerover](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerover)
+impl TWindow with onpointerover(self : Self) -> EventHandler {
+  window_onpointerover_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointerover](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerover)
+impl TWindow with set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit {
+  window_set_onpointerover_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerover),
+  )
+}
+
+///|
+/// [Window.onpointerenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerenter)
+impl TWindow with onpointerenter(self : Self) -> EventHandler {
+  window_onpointerenter_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointerenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerenter)
+impl TWindow with set_onpointerenter(self : Self, onpointerenter : EventHandler) -> Unit {
+  window_set_onpointerenter_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerenter),
+  )
+}
+
+///|
+/// [Window.onpointerdown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerdown)
+impl TWindow with onpointerdown(self : Self) -> EventHandler {
+  window_onpointerdown_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointerdown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerdown)
+impl TWindow with set_onpointerdown(self : Self, onpointerdown : EventHandler) -> Unit {
+  window_set_onpointerdown_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerdown),
+  )
+}
+
+///|
+/// [Window.onpointermove](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointermove)
+impl TWindow with onpointermove(self : Self) -> EventHandler {
+  window_onpointermove_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointermove](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointermove)
+impl TWindow with set_onpointermove(self : Self, onpointermove : EventHandler) -> Unit {
+  window_set_onpointermove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointermove),
+  )
+}
+
+///|
+/// [Window.onpointerrawupdate](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerrawupdate)
+impl TWindow with onpointerrawupdate(self : Self) -> EventHandler {
+  window_onpointerrawupdate_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointerrawupdate](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerrawupdate)
+impl TWindow with set_onpointerrawupdate(
+  self : Self,
+  onpointerrawupdate : EventHandler,
+) -> Unit {
+  window_set_onpointerrawupdate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerrawupdate),
+  )
+}
+
+///|
+/// [Window.onpointerup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerup)
+impl TWindow with onpointerup(self : Self) -> EventHandler {
+  window_onpointerup_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointerup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerup)
+impl TWindow with set_onpointerup(self : Self, onpointerup : EventHandler) -> Unit {
+  window_set_onpointerup_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerup),
+  )
+}
+
+///|
+/// [Window.onpointercancel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointercancel)
+impl TWindow with onpointercancel(self : Self) -> EventHandler {
+  window_onpointercancel_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointercancel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointercancel)
+impl TWindow with set_onpointercancel(
+  self : Self,
+  onpointercancel : EventHandler,
+) -> Unit {
+  window_set_onpointercancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointercancel),
+  )
+}
+
+///|
+/// [Window.onpointerout](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerout)
+impl TWindow with onpointerout(self : Self) -> EventHandler {
+  window_onpointerout_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointerout](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerout)
+impl TWindow with set_onpointerout(self : Self, onpointerout : EventHandler) -> Unit {
+  window_set_onpointerout_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerout),
+  )
+}
+
+///|
+/// [Window.onpointerleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerleave)
+impl TWindow with onpointerleave(self : Self) -> EventHandler {
+  window_onpointerleave_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onpointerleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerleave)
+impl TWindow with set_onpointerleave(self : Self, onpointerleave : EventHandler) -> Unit {
+  window_set_onpointerleave_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerleave),
+  )
+}
+
+///|
+/// [Window.ongotpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/Window/ongotpointercapture)
+impl TWindow with ongotpointercapture(self : Self) -> EventHandler {
+  window_ongotpointercapture_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.ongotpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/Window/ongotpointercapture)
+impl TWindow with set_ongotpointercapture(
+  self : Self,
+  ongotpointercapture : EventHandler,
+) -> Unit {
+  window_set_ongotpointercapture_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ongotpointercapture),
+  )
+}
+
+///|
+/// [Window.onlostpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/Window/onlostpointercapture)
+impl TWindow with onlostpointercapture(self : Self) -> EventHandler {
+  window_onlostpointercapture_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.onlostpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/Window/onlostpointercapture)
+impl TWindow with set_onlostpointercapture(
+  self : Self,
+  onlostpointercapture : EventHandler,
+) -> Unit {
+  window_set_onlostpointercapture_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onlostpointercapture),
+  )
 }
 
 ///|

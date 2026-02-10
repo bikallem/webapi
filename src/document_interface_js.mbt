@@ -2133,6 +2133,160 @@ extern "js" fn document_set_onwheel_ffi(
 ) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
 
 ///|
+extern "js" fn document_onpointerover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerover"
+
+///|
+fn document_onpointerover_ffi(obj : JsValue) -> EventHandler {
+  document_onpointerover_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointerover_ffi(
+  obj : JsValue,
+  onpointerover : JsValue,
+) -> Unit = "(obj, onpointerover) => { obj.onpointerover = onpointerover; }"
+
+///|
+extern "js" fn document_onpointerenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerenter"
+
+///|
+fn document_onpointerenter_ffi(obj : JsValue) -> EventHandler {
+  document_onpointerenter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointerenter_ffi(
+  obj : JsValue,
+  onpointerenter : JsValue,
+) -> Unit = "(obj, onpointerenter) => { obj.onpointerenter = onpointerenter; }"
+
+///|
+extern "js" fn document_onpointerdown_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerdown"
+
+///|
+fn document_onpointerdown_ffi(obj : JsValue) -> EventHandler {
+  document_onpointerdown_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointerdown_ffi(
+  obj : JsValue,
+  onpointerdown : JsValue,
+) -> Unit = "(obj, onpointerdown) => { obj.onpointerdown = onpointerdown; }"
+
+///|
+extern "js" fn document_onpointermove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointermove"
+
+///|
+fn document_onpointermove_ffi(obj : JsValue) -> EventHandler {
+  document_onpointermove_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointermove_ffi(
+  obj : JsValue,
+  onpointermove : JsValue,
+) -> Unit = "(obj, onpointermove) => { obj.onpointermove = onpointermove; }"
+
+///|
+extern "js" fn document_onpointerrawupdate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerrawupdate"
+
+///|
+fn document_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler {
+  document_onpointerrawupdate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointerrawupdate_ffi(
+  obj : JsValue,
+  onpointerrawupdate : JsValue,
+) -> Unit = "(obj, onpointerrawupdate) => { obj.onpointerrawupdate = onpointerrawupdate; }"
+
+///|
+extern "js" fn document_onpointerup_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerup"
+
+///|
+fn document_onpointerup_ffi(obj : JsValue) -> EventHandler {
+  document_onpointerup_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointerup_ffi(
+  obj : JsValue,
+  onpointerup : JsValue,
+) -> Unit = "(obj, onpointerup) => { obj.onpointerup = onpointerup; }"
+
+///|
+extern "js" fn document_onpointercancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointercancel"
+
+///|
+fn document_onpointercancel_ffi(obj : JsValue) -> EventHandler {
+  document_onpointercancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointercancel_ffi(
+  obj : JsValue,
+  onpointercancel : JsValue,
+) -> Unit = "(obj, onpointercancel) => { obj.onpointercancel = onpointercancel; }"
+
+///|
+extern "js" fn document_onpointerout_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerout"
+
+///|
+fn document_onpointerout_ffi(obj : JsValue) -> EventHandler {
+  document_onpointerout_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointerout_ffi(
+  obj : JsValue,
+  onpointerout : JsValue,
+) -> Unit = "(obj, onpointerout) => { obj.onpointerout = onpointerout; }"
+
+///|
+extern "js" fn document_onpointerleave_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerleave"
+
+///|
+fn document_onpointerleave_ffi(obj : JsValue) -> EventHandler {
+  document_onpointerleave_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onpointerleave_ffi(
+  obj : JsValue,
+  onpointerleave : JsValue,
+) -> Unit = "(obj, onpointerleave) => { obj.onpointerleave = onpointerleave; }"
+
+///|
+extern "js" fn document_ongotpointercapture_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ongotpointercapture"
+
+///|
+fn document_ongotpointercapture_ffi(obj : JsValue) -> EventHandler {
+  document_ongotpointercapture_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_ongotpointercapture_ffi(
+  obj : JsValue,
+  ongotpointercapture : JsValue,
+) -> Unit = "(obj, ongotpointercapture) => { obj.ongotpointercapture = ongotpointercapture; }"
+
+///|
+extern "js" fn document_onlostpointercapture_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onlostpointercapture"
+
+///|
+fn document_onlostpointercapture_ffi(obj : JsValue) -> EventHandler {
+  document_onlostpointercapture_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onlostpointercapture_ffi(
+  obj : JsValue,
+  onlostpointercapture : JsValue,
+) -> Unit = "(obj, onlostpointercapture) => { obj.onlostpointercapture = onlostpointercapture; }"
+
+///|
 extern "js" fn document_onselectstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectstart"
 
 ///|

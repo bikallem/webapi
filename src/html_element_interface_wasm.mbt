@@ -751,6 +751,105 @@ fn html_element_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement
 fn html_element_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_HTMLElement" "set_onwheel"
 
 ///|
+fn html_element_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerover"
+
+///|
+fn html_element_set_onpointerover_ffi(
+  obj : JsValue,
+  onpointerover : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointerover"
+
+///|
+fn html_element_onpointerenter_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerenter"
+
+///|
+fn html_element_set_onpointerenter_ffi(
+  obj : JsValue,
+  onpointerenter : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointerenter"
+
+///|
+fn html_element_onpointerdown_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerdown"
+
+///|
+fn html_element_set_onpointerdown_ffi(
+  obj : JsValue,
+  onpointerdown : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointerdown"
+
+///|
+fn html_element_onpointermove_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointermove"
+
+///|
+fn html_element_set_onpointermove_ffi(
+  obj : JsValue,
+  onpointermove : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointermove"
+
+///|
+fn html_element_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerrawupdate"
+
+///|
+fn html_element_set_onpointerrawupdate_ffi(
+  obj : JsValue,
+  onpointerrawupdate : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointerrawupdate"
+
+///|
+fn html_element_onpointerup_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerup"
+
+///|
+fn html_element_set_onpointerup_ffi(
+  obj : JsValue,
+  onpointerup : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointerup"
+
+///|
+fn html_element_onpointercancel_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointercancel"
+
+///|
+fn html_element_set_onpointercancel_ffi(
+  obj : JsValue,
+  onpointercancel : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointercancel"
+
+///|
+fn html_element_onpointerout_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerout"
+
+///|
+fn html_element_set_onpointerout_ffi(
+  obj : JsValue,
+  onpointerout : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointerout"
+
+///|
+fn html_element_onpointerleave_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerleave"
+
+///|
+fn html_element_set_onpointerleave_ffi(
+  obj : JsValue,
+  onpointerleave : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onpointerleave"
+
+///|
+fn html_element_ongotpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_ongotpointercapture"
+
+///|
+fn html_element_set_ongotpointercapture_ffi(
+  obj : JsValue,
+  ongotpointercapture : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_ongotpointercapture"
+
+///|
+fn html_element_onlostpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onlostpointercapture"
+
+///|
+fn html_element_set_onlostpointercapture_ffi(
+  obj : JsValue,
+  onlostpointercapture : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_onlostpointercapture"
+
+///|
 fn html_element_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onselectstart"
 
 ///|

@@ -646,6 +646,29 @@ extern "js" fn element_set_onfullscreenerror_ffi(
 ) -> Unit = "(obj, onfullscreenerror) => { obj.onfullscreenerror = onfullscreenerror; }"
 
 ///|
+extern "js" fn element_set_pointer_capture_ffi(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> Unit = "(obj, pointer_id) => obj.setPointerCapture(pointer_id)"
+
+///|
+extern "js" fn element_release_pointer_capture_ffi(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> Unit = "(obj, pointer_id) => obj.releasePointerCapture(pointer_id)"
+
+///|
+extern "js" fn element_has_pointer_capture_ffi_js(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> JsValue = "(obj, pointer_id) => obj.hasPointerCapture(pointer_id)"
+
+///|
+fn element_has_pointer_capture_ffi(obj : JsValue, pointer_id : JsValue) -> Bool {
+  element_has_pointer_capture_ffi_js(obj, pointer_id).unsafe_cast()
+}
+
+///|
 extern "js" fn element_children_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.children"
 
 ///|

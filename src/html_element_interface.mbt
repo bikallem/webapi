@@ -285,6 +285,28 @@ pub trait THTMLElement: TElement {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  onpointerover(self : Self) -> EventHandler = _
+  set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit = _
+  onpointerenter(self : Self) -> EventHandler = _
+  set_onpointerenter(self : Self, onpointerenter : EventHandler) -> Unit = _
+  onpointerdown(self : Self) -> EventHandler = _
+  set_onpointerdown(self : Self, onpointerdown : EventHandler) -> Unit = _
+  onpointermove(self : Self) -> EventHandler = _
+  set_onpointermove(self : Self, onpointermove : EventHandler) -> Unit = _
+  onpointerrawupdate(self : Self) -> EventHandler = _
+  set_onpointerrawupdate(self : Self, onpointerrawupdate : EventHandler) -> Unit = _
+  onpointerup(self : Self) -> EventHandler = _
+  set_onpointerup(self : Self, onpointerup : EventHandler) -> Unit = _
+  onpointercancel(self : Self) -> EventHandler = _
+  set_onpointercancel(self : Self, onpointercancel : EventHandler) -> Unit = _
+  onpointerout(self : Self) -> EventHandler = _
+  set_onpointerout(self : Self, onpointerout : EventHandler) -> Unit = _
+  onpointerleave(self : Self) -> EventHandler = _
+  set_onpointerleave(self : Self, onpointerleave : EventHandler) -> Unit = _
+  ongotpointercapture(self : Self) -> EventHandler = _
+  set_ongotpointercapture(self : Self, ongotpointercapture : EventHandler) -> Unit = _
+  onlostpointercapture(self : Self) -> EventHandler = _
+  set_onlostpointercapture(self : Self, onlostpointercapture : EventHandler) -> Unit = _
   onselectstart(self : Self) -> EventHandler = _
   set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit = _
   onselectionchange(self : Self) -> EventHandler = _
@@ -1770,6 +1792,201 @@ impl THTMLElement with onwheel(self : Self) -> EventHandler {
 /// [HTMLElement.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onwheel)
 impl THTMLElement with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   html_element_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [HTMLElement.onpointerover](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerover)
+impl THTMLElement with onpointerover(self : Self) -> EventHandler {
+  html_element_onpointerover_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointerover](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerover)
+impl THTMLElement with set_onpointerover(
+  self : Self,
+  onpointerover : EventHandler,
+) -> Unit {
+  html_element_set_onpointerover_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerover),
+  )
+}
+
+///|
+/// [HTMLElement.onpointerenter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerenter)
+impl THTMLElement with onpointerenter(self : Self) -> EventHandler {
+  html_element_onpointerenter_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointerenter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerenter)
+impl THTMLElement with set_onpointerenter(
+  self : Self,
+  onpointerenter : EventHandler,
+) -> Unit {
+  html_element_set_onpointerenter_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerenter),
+  )
+}
+
+///|
+/// [HTMLElement.onpointerdown](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerdown)
+impl THTMLElement with onpointerdown(self : Self) -> EventHandler {
+  html_element_onpointerdown_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointerdown](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerdown)
+impl THTMLElement with set_onpointerdown(
+  self : Self,
+  onpointerdown : EventHandler,
+) -> Unit {
+  html_element_set_onpointerdown_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerdown),
+  )
+}
+
+///|
+/// [HTMLElement.onpointermove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointermove)
+impl THTMLElement with onpointermove(self : Self) -> EventHandler {
+  html_element_onpointermove_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointermove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointermove)
+impl THTMLElement with set_onpointermove(
+  self : Self,
+  onpointermove : EventHandler,
+) -> Unit {
+  html_element_set_onpointermove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointermove),
+  )
+}
+
+///|
+/// [HTMLElement.onpointerrawupdate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerrawupdate)
+impl THTMLElement with onpointerrawupdate(self : Self) -> EventHandler {
+  html_element_onpointerrawupdate_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointerrawupdate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerrawupdate)
+impl THTMLElement with set_onpointerrawupdate(
+  self : Self,
+  onpointerrawupdate : EventHandler,
+) -> Unit {
+  html_element_set_onpointerrawupdate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerrawupdate),
+  )
+}
+
+///|
+/// [HTMLElement.onpointerup](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerup)
+impl THTMLElement with onpointerup(self : Self) -> EventHandler {
+  html_element_onpointerup_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointerup](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerup)
+impl THTMLElement with set_onpointerup(self : Self, onpointerup : EventHandler) -> Unit {
+  html_element_set_onpointerup_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerup),
+  )
+}
+
+///|
+/// [HTMLElement.onpointercancel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointercancel)
+impl THTMLElement with onpointercancel(self : Self) -> EventHandler {
+  html_element_onpointercancel_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointercancel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointercancel)
+impl THTMLElement with set_onpointercancel(
+  self : Self,
+  onpointercancel : EventHandler,
+) -> Unit {
+  html_element_set_onpointercancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointercancel),
+  )
+}
+
+///|
+/// [HTMLElement.onpointerout](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerout)
+impl THTMLElement with onpointerout(self : Self) -> EventHandler {
+  html_element_onpointerout_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointerout](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerout)
+impl THTMLElement with set_onpointerout(
+  self : Self,
+  onpointerout : EventHandler,
+) -> Unit {
+  html_element_set_onpointerout_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerout),
+  )
+}
+
+///|
+/// [HTMLElement.onpointerleave](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerleave)
+impl THTMLElement with onpointerleave(self : Self) -> EventHandler {
+  html_element_onpointerleave_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onpointerleave](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpointerleave)
+impl THTMLElement with set_onpointerleave(
+  self : Self,
+  onpointerleave : EventHandler,
+) -> Unit {
+  html_element_set_onpointerleave_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onpointerleave),
+  )
+}
+
+///|
+/// [HTMLElement.ongotpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ongotpointercapture)
+impl THTMLElement with ongotpointercapture(self : Self) -> EventHandler {
+  html_element_ongotpointercapture_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.ongotpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ongotpointercapture)
+impl THTMLElement with set_ongotpointercapture(
+  self : Self,
+  ongotpointercapture : EventHandler,
+) -> Unit {
+  html_element_set_ongotpointercapture_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ongotpointercapture),
+  )
+}
+
+///|
+/// [HTMLElement.onlostpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onlostpointercapture)
+impl THTMLElement with onlostpointercapture(self : Self) -> EventHandler {
+  html_element_onlostpointercapture_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.onlostpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onlostpointercapture)
+impl THTMLElement with set_onlostpointercapture(
+  self : Self,
+  onlostpointercapture : EventHandler,
+) -> Unit {
+  html_element_set_onlostpointercapture_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onlostpointercapture),
+  )
 }
 
 ///|

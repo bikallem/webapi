@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Navigator
-// Specifications: html.idl
+// Specifications: pointerevents.idl, html.idl
 
 ///|
 /// [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)
@@ -20,6 +20,7 @@ pub impl TNavigator for Navigator
 /// [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) interface.
 pub trait TNavigator: TJsValue {
   user_activation(self : Self) -> UserActivation = _
+  max_touch_points(self : Self) -> Int = _
   app_code_name(self : Self) -> String = _
   app_name(self : Self) -> String = _
   app_version(self : Self) -> String = _
@@ -49,6 +50,12 @@ pub trait TNavigator: TJsValue {
 /// [Navigator.userActivation](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userActivation)
 impl TNavigator with user_activation(self : Self) -> UserActivation {
   navigator_user_activation_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Navigator.maxTouchPoints](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/maxTouchPoints)
+impl TNavigator with max_touch_points(self : Self) -> Int {
+  navigator_max_touch_points_ffi(TJsValue::to_js(self))
 }
 
 ///|

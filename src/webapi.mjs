@@ -197,6 +197,28 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onpointerover: (obj) => obj.onpointerover,
+    set_onpointerover: (obj, value) => { obj.onpointerover = value; },
+    get_onpointerenter: (obj) => obj.onpointerenter,
+    set_onpointerenter: (obj, value) => { obj.onpointerenter = value; },
+    get_onpointerdown: (obj) => obj.onpointerdown,
+    set_onpointerdown: (obj, value) => { obj.onpointerdown = value; },
+    get_onpointermove: (obj) => obj.onpointermove,
+    set_onpointermove: (obj, value) => { obj.onpointermove = value; },
+    get_onpointerrawupdate: (obj) => obj.onpointerrawupdate,
+    set_onpointerrawupdate: (obj, value) => { obj.onpointerrawupdate = value; },
+    get_onpointerup: (obj) => obj.onpointerup,
+    set_onpointerup: (obj, value) => { obj.onpointerup = value; },
+    get_onpointercancel: (obj) => obj.onpointercancel,
+    set_onpointercancel: (obj, value) => { obj.onpointercancel = value; },
+    get_onpointerout: (obj) => obj.onpointerout,
+    set_onpointerout: (obj, value) => { obj.onpointerout = value; },
+    get_onpointerleave: (obj) => obj.onpointerleave,
+    set_onpointerleave: (obj, value) => { obj.onpointerleave = value; },
+    get_ongotpointercapture: (obj) => obj.ongotpointercapture,
+    set_ongotpointercapture: (obj, value) => { obj.ongotpointercapture = value; },
+    get_onlostpointercapture: (obj) => obj.onlostpointercapture,
+    set_onlostpointercapture: (obj, value) => { obj.onlostpointercapture = value; },
     get_onselectstart: (obj) => obj.onselectstart,
     set_onselectstart: (obj, value) => { obj.onselectstart = value; },
     get_onselectionchange: (obj) => obj.onselectionchange,
@@ -584,6 +606,28 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onpointerover: (obj) => obj.onpointerover,
+    set_onpointerover: (obj, value) => { obj.onpointerover = value; },
+    get_onpointerenter: (obj) => obj.onpointerenter,
+    set_onpointerenter: (obj, value) => { obj.onpointerenter = value; },
+    get_onpointerdown: (obj) => obj.onpointerdown,
+    set_onpointerdown: (obj, value) => { obj.onpointerdown = value; },
+    get_onpointermove: (obj) => obj.onpointermove,
+    set_onpointermove: (obj, value) => { obj.onpointermove = value; },
+    get_onpointerrawupdate: (obj) => obj.onpointerrawupdate,
+    set_onpointerrawupdate: (obj, value) => { obj.onpointerrawupdate = value; },
+    get_onpointerup: (obj) => obj.onpointerup,
+    set_onpointerup: (obj, value) => { obj.onpointerup = value; },
+    get_onpointercancel: (obj) => obj.onpointercancel,
+    set_onpointercancel: (obj, value) => { obj.onpointercancel = value; },
+    get_onpointerout: (obj) => obj.onpointerout,
+    set_onpointerout: (obj, value) => { obj.onpointerout = value; },
+    get_onpointerleave: (obj) => obj.onpointerleave,
+    set_onpointerleave: (obj, value) => { obj.onpointerleave = value; },
+    get_ongotpointercapture: (obj) => obj.ongotpointercapture,
+    set_ongotpointercapture: (obj, value) => { obj.ongotpointercapture = value; },
+    get_onlostpointercapture: (obj) => obj.onlostpointercapture,
+    set_onlostpointercapture: (obj, value) => { obj.onlostpointercapture = value; },
     get_onselectstart: (obj) => obj.onselectstart,
     set_onselectstart: (obj, value) => { obj.onselectstart = value; },
     get_onselectionchange: (obj) => obj.onselectionchange,
@@ -1236,6 +1280,28 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onpointerover: (obj) => obj.onpointerover,
+    set_onpointerover: (obj, value) => { obj.onpointerover = value; },
+    get_onpointerenter: (obj) => obj.onpointerenter,
+    set_onpointerenter: (obj, value) => { obj.onpointerenter = value; },
+    get_onpointerdown: (obj) => obj.onpointerdown,
+    set_onpointerdown: (obj, value) => { obj.onpointerdown = value; },
+    get_onpointermove: (obj) => obj.onpointermove,
+    set_onpointermove: (obj, value) => { obj.onpointermove = value; },
+    get_onpointerrawupdate: (obj) => obj.onpointerrawupdate,
+    set_onpointerrawupdate: (obj, value) => { obj.onpointerrawupdate = value; },
+    get_onpointerup: (obj) => obj.onpointerup,
+    set_onpointerup: (obj, value) => { obj.onpointerup = value; },
+    get_onpointercancel: (obj) => obj.onpointercancel,
+    set_onpointercancel: (obj, value) => { obj.onpointercancel = value; },
+    get_onpointerout: (obj) => obj.onpointerout,
+    set_onpointerout: (obj, value) => { obj.onpointerout = value; },
+    get_onpointerleave: (obj) => obj.onpointerleave,
+    set_onpointerleave: (obj, value) => { obj.onpointerleave = value; },
+    get_ongotpointercapture: (obj) => obj.ongotpointercapture,
+    set_ongotpointercapture: (obj, value) => { obj.ongotpointercapture = value; },
+    get_onlostpointercapture: (obj) => obj.onlostpointercapture,
+    set_onlostpointercapture: (obj, value) => { obj.onlostpointercapture = value; },
     get_onselectstart: (obj) => obj.onselectstart,
     set_onselectstart: (obj, value) => { obj.onselectstart = value; },
     get_onselectionchange: (obj) => obj.onselectionchange,
@@ -1560,6 +1626,9 @@ export const wasmImportObject = {
     scrollBy: (obj, options) => obj.scrollBy(options),
     scrollBy_2: (obj, x, y) => obj.scrollBy(x, y),
     requestFullscreen: (obj, options) => obj.requestFullscreen(options),
+    setPointerCapture: (obj, pointer_id) => obj.setPointerCapture(pointer_id),
+    releasePointerCapture: (obj, pointer_id) => obj.releasePointerCapture(pointer_id),
+    hasPointerCapture: (obj, pointer_id) => obj.hasPointerCapture(pointer_id),
     prepend: (obj, nodes) => obj.prepend(...nodes),
     append: (obj, nodes) => obj.append(...nodes),
     replaceChildren: (obj, nodes) => obj.replaceChildren(...nodes),
@@ -2089,6 +2158,28 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_onpointerover: (obj) => obj.onpointerover,
+    set_onpointerover: (obj, value) => { obj.onpointerover = value; },
+    get_onpointerenter: (obj) => obj.onpointerenter,
+    set_onpointerenter: (obj, value) => { obj.onpointerenter = value; },
+    get_onpointerdown: (obj) => obj.onpointerdown,
+    set_onpointerdown: (obj, value) => { obj.onpointerdown = value; },
+    get_onpointermove: (obj) => obj.onpointermove,
+    set_onpointermove: (obj, value) => { obj.onpointermove = value; },
+    get_onpointerrawupdate: (obj) => obj.onpointerrawupdate,
+    set_onpointerrawupdate: (obj, value) => { obj.onpointerrawupdate = value; },
+    get_onpointerup: (obj) => obj.onpointerup,
+    set_onpointerup: (obj, value) => { obj.onpointerup = value; },
+    get_onpointercancel: (obj) => obj.onpointercancel,
+    set_onpointercancel: (obj, value) => { obj.onpointercancel = value; },
+    get_onpointerout: (obj) => obj.onpointerout,
+    set_onpointerout: (obj, value) => { obj.onpointerout = value; },
+    get_onpointerleave: (obj) => obj.onpointerleave,
+    set_onpointerleave: (obj, value) => { obj.onpointerleave = value; },
+    get_ongotpointercapture: (obj) => obj.ongotpointercapture,
+    set_ongotpointercapture: (obj, value) => { obj.ongotpointercapture = value; },
+    get_onlostpointercapture: (obj) => obj.onlostpointercapture,
+    set_onlostpointercapture: (obj, value) => { obj.onlostpointercapture = value; },
     get_onselectstart: (obj) => obj.onselectstart,
     set_onselectstart: (obj, value) => { obj.onselectstart = value; },
     get_onselectionchange: (obj) => obj.onselectionchange,
@@ -3805,6 +3896,7 @@ export const wasmImportObject = {
 
   webapi_Navigator: {
     get_userActivation: (obj) => obj.userActivation,
+    get_maxTouchPoints: (obj) => obj.maxTouchPoints,
     get_appCodeName: (obj) => obj.appCodeName,
     get_appName: (obj) => obj.appName,
     get_appVersion: (obj) => obj.appVersion,
@@ -5045,6 +5137,25 @@ export const wasmImportObject = {
     set_onscrollend: (obj, value) => { obj.onscrollend = value; }
   },
 
+  webapi_PointerEvent: {
+    new: (type_, event_init_dict) => new PointerEvent(type_, event_init_dict),
+    get_pointerId: (obj) => obj.pointerId,
+    get_width: (obj) => obj.width,
+    get_height: (obj) => obj.height,
+    get_pressure: (obj) => obj.pressure,
+    get_tangentialPressure: (obj) => obj.tangentialPressure,
+    get_tiltX: (obj) => obj.tiltX,
+    get_tiltY: (obj) => obj.tiltY,
+    get_twist: (obj) => obj.twist,
+    get_altitudeAngle: (obj) => obj.altitudeAngle,
+    get_azimuthAngle: (obj) => obj.azimuthAngle,
+    get_pointerType: (obj) => obj.pointerType,
+    get_isPrimary: (obj) => obj.isPrimary,
+    get_persistentDeviceId: (obj) => obj.persistentDeviceId,
+    getCoalescedEvents: (obj) => obj.getCoalescedEvents(),
+    getPredictedEvents: (obj) => obj.getPredictedEvents()
+  },
+
   webapi_Selection: {
     get_anchorNode: (obj) => obj.anchorNode,
     get_anchorOffset: (obj) => obj.anchorOffset,
@@ -6238,6 +6349,55 @@ export const wasmImportObject = {
     new: (navigationUI) => {
       const obj = {};
       if (navigationUI !== undefined) obj.navigationUI = navigationUI;
+      return obj;
+    }
+  },
+
+  webapi_PointerEventInit: {
+    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget, pointerId, width, height, pressure, tangentialPressure, tiltX, tiltY, twist, altitudeAngle, azimuthAngle, pointerType, isPrimary, persistentDeviceId, coalescedEvents, predictedEvents) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (view !== undefined) obj.view = view;
+      if (detail !== undefined) obj.detail = detail;
+      if (which !== undefined) obj.which = which;
+      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
+      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
+      if (altKey !== undefined) obj.altKey = altKey;
+      if (metaKey !== undefined) obj.metaKey = metaKey;
+      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
+      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
+      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
+      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
+      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
+      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
+      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
+      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
+      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
+      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
+      if (screenX !== undefined) obj.screenX = screenX;
+      if (screenY !== undefined) obj.screenY = screenY;
+      if (clientX !== undefined) obj.clientX = clientX;
+      if (clientY !== undefined) obj.clientY = clientY;
+      if (button !== undefined) obj.button = button;
+      if (buttons !== undefined) obj.buttons = buttons;
+      if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
+      if (pointerId !== undefined) obj.pointerId = pointerId;
+      if (width !== undefined) obj.width = width;
+      if (height !== undefined) obj.height = height;
+      if (pressure !== undefined) obj.pressure = pressure;
+      if (tangentialPressure !== undefined) obj.tangentialPressure = tangentialPressure;
+      if (tiltX !== undefined) obj.tiltX = tiltX;
+      if (tiltY !== undefined) obj.tiltY = tiltY;
+      if (twist !== undefined) obj.twist = twist;
+      if (altitudeAngle !== undefined) obj.altitudeAngle = altitudeAngle;
+      if (azimuthAngle !== undefined) obj.azimuthAngle = azimuthAngle;
+      if (pointerType !== undefined) obj.pointerType = pointerType;
+      if (isPrimary !== undefined) obj.isPrimary = isPrimary;
+      if (persistentDeviceId !== undefined) obj.persistentDeviceId = persistentDeviceId;
+      if (coalescedEvents !== undefined) obj.coalescedEvents = coalescedEvents;
+      if (predictedEvents !== undefined) obj.predictedEvents = predictedEvents;
       return obj;
     }
   },

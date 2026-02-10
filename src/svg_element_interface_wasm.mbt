@@ -554,6 +554,105 @@ fn svg_element_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" 
 fn svg_element_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_SVGElement" "set_onwheel"
 
 ///|
+fn svg_element_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerover"
+
+///|
+fn svg_element_set_onpointerover_ffi(
+  obj : JsValue,
+  onpointerover : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointerover"
+
+///|
+fn svg_element_onpointerenter_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerenter"
+
+///|
+fn svg_element_set_onpointerenter_ffi(
+  obj : JsValue,
+  onpointerenter : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointerenter"
+
+///|
+fn svg_element_onpointerdown_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerdown"
+
+///|
+fn svg_element_set_onpointerdown_ffi(
+  obj : JsValue,
+  onpointerdown : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointerdown"
+
+///|
+fn svg_element_onpointermove_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointermove"
+
+///|
+fn svg_element_set_onpointermove_ffi(
+  obj : JsValue,
+  onpointermove : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointermove"
+
+///|
+fn svg_element_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerrawupdate"
+
+///|
+fn svg_element_set_onpointerrawupdate_ffi(
+  obj : JsValue,
+  onpointerrawupdate : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointerrawupdate"
+
+///|
+fn svg_element_onpointerup_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerup"
+
+///|
+fn svg_element_set_onpointerup_ffi(
+  obj : JsValue,
+  onpointerup : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointerup"
+
+///|
+fn svg_element_onpointercancel_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointercancel"
+
+///|
+fn svg_element_set_onpointercancel_ffi(
+  obj : JsValue,
+  onpointercancel : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointercancel"
+
+///|
+fn svg_element_onpointerout_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerout"
+
+///|
+fn svg_element_set_onpointerout_ffi(
+  obj : JsValue,
+  onpointerout : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointerout"
+
+///|
+fn svg_element_onpointerleave_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerleave"
+
+///|
+fn svg_element_set_onpointerleave_ffi(
+  obj : JsValue,
+  onpointerleave : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onpointerleave"
+
+///|
+fn svg_element_ongotpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_ongotpointercapture"
+
+///|
+fn svg_element_set_ongotpointercapture_ffi(
+  obj : JsValue,
+  ongotpointercapture : JsValue,
+) -> Unit = "webapi_SVGElement" "set_ongotpointercapture"
+
+///|
+fn svg_element_onlostpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onlostpointercapture"
+
+///|
+fn svg_element_set_onlostpointercapture_ffi(
+  obj : JsValue,
+  onlostpointercapture : JsValue,
+) -> Unit = "webapi_SVGElement" "set_onlostpointercapture"
+
+///|
 fn svg_element_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onselectstart"
 
 ///|

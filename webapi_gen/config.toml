@@ -29,6 +29,7 @@ core_specs = [
     "resize-observer",
     "selection-api",
     "intersection-observer",
+    "pointerevents",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]

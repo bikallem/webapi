@@ -822,6 +822,90 @@ fn window_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwh
 fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Window" "set_onwheel"
 
 ///|
+fn window_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerover"
+
+///|
+fn window_set_onpointerover_ffi(obj : JsValue, onpointerover : JsValue) -> Unit = "webapi_Window" "set_onpointerover"
+
+///|
+fn window_onpointerenter_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerenter"
+
+///|
+fn window_set_onpointerenter_ffi(
+  obj : JsValue,
+  onpointerenter : JsValue,
+) -> Unit = "webapi_Window" "set_onpointerenter"
+
+///|
+fn window_onpointerdown_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerdown"
+
+///|
+fn window_set_onpointerdown_ffi(obj : JsValue, onpointerdown : JsValue) -> Unit = "webapi_Window" "set_onpointerdown"
+
+///|
+fn window_onpointermove_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointermove"
+
+///|
+fn window_set_onpointermove_ffi(obj : JsValue, onpointermove : JsValue) -> Unit = "webapi_Window" "set_onpointermove"
+
+///|
+fn window_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerrawupdate"
+
+///|
+fn window_set_onpointerrawupdate_ffi(
+  obj : JsValue,
+  onpointerrawupdate : JsValue,
+) -> Unit = "webapi_Window" "set_onpointerrawupdate"
+
+///|
+fn window_onpointerup_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerup"
+
+///|
+fn window_set_onpointerup_ffi(obj : JsValue, onpointerup : JsValue) -> Unit = "webapi_Window" "set_onpointerup"
+
+///|
+fn window_onpointercancel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointercancel"
+
+///|
+fn window_set_onpointercancel_ffi(
+  obj : JsValue,
+  onpointercancel : JsValue,
+) -> Unit = "webapi_Window" "set_onpointercancel"
+
+///|
+fn window_onpointerout_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerout"
+
+///|
+fn window_set_onpointerout_ffi(obj : JsValue, onpointerout : JsValue) -> Unit = "webapi_Window" "set_onpointerout"
+
+///|
+fn window_onpointerleave_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerleave"
+
+///|
+fn window_set_onpointerleave_ffi(
+  obj : JsValue,
+  onpointerleave : JsValue,
+) -> Unit = "webapi_Window" "set_onpointerleave"
+
+///|
+fn window_ongotpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ongotpointercapture"
+
+///|
+fn window_set_ongotpointercapture_ffi(
+  obj : JsValue,
+  ongotpointercapture : JsValue,
+) -> Unit = "webapi_Window" "set_ongotpointercapture"
+
+///|
+fn window_onlostpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onlostpointercapture"
+
+///|
+fn window_set_onlostpointercapture_ffi(
+  obj : JsValue,
+  onlostpointercapture : JsValue,
+) -> Unit = "webapi_Window" "set_onlostpointercapture"
+
+///|
 fn window_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onselectstart"
 
 ///|
