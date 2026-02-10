@@ -32,10 +32,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
+          cache-dependency-path: |
+            webapi_gen/package-lock.json
+            tests/package-lock.json
 
       - name: Install npm dependencies
         working-directory: webapi_gen
         run: npm ci
+
+      - name: Cache MoonBit packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            .mooncakes
+            webapi_gen/.mooncakes
+            examples/.mooncakes
+          key: mooncakes-${{ runner.os }}-${{ hashFiles('moon.mod.json', 'webapi_gen/moon.mod.json', 'examples/moon.mod.json') }}
 
       - name: Install MoonBit dependencies
         run: |
@@ -60,11 +73,18 @@ jobs:
         working-directory: examples
         run: moon build --target wasm-gc --release
 
+      - name: Cache Playwright browsers
+        id: cache-playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('tests/package-lock.json') }}
+
       - name: Install Playwright dependencies
         working-directory: tests
         run: |
           npm ci
-          npx playwright install chromium
+          npx playwright install chromium --with-deps
 
       - name: Run Playwright tests
         working-directory: tests
