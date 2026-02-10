@@ -71,11 +71,11 @@ jobs:
         run: moon build --target wasm-gc --release
 
       - name: Install Playwright dependencies
-        working-directory: examples/tests
+        working-directory: tests
         run: |
           npm ci
           npx playwright install chromium
 
       - name: Run Playwright tests
-        working-directory: examples/tests
+        working-directory: tests
         run: npx playwright test --workers 2
