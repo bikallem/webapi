@@ -10,7 +10,7 @@
     <script type="module">
         import { wasmImportObject } from "../../src/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
-            fetch("../target/wasm-gc/release/build/element-ops/element-ops.wasm"),
+            fetch("../_build/wasm-gc/release/build/element-ops/element-ops.wasm"),
             wasmImportObject,
             { builtins: ["js-string"], importedStringConstants: "_" }
         );

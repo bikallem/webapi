@@ -54,7 +54,7 @@
     <script type="module">
         import { wasmImportObject } from "../../src/webapi.mjs";
 
-        const wasmPath = "../target/wasm-gc/release/build/canvas/canvas.wasm";
+        const wasmPath = "../_build/wasm-gc/release/build/canvas/canvas.wasm";
         const { instance } = await WebAssembly.instantiateStreaming(
             fetch(wasmPath),
             wasmImportObject,
