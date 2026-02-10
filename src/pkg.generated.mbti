@@ -334,8 +334,6 @@ pub const X_PATH_RESULT_UNORDERED_NODE_ITERATOR_TYPE : UInt = 4
 
 pub const X_PATH_RESULT_UNORDERED_NODE_SNAPSHOT_TYPE : UInt = 6
 
-pub fn[T : TJsValue] array_to_js(Array[T]) -> JsValue
-
 pub let document : Document
 
 pub let navigator : Navigator
@@ -2528,12 +2526,6 @@ pub impl TJsValue for Int32Array
 pub type Int8Array
 pub impl TArrayBufferView for Int8Array
 pub impl TJsValue for Int8Array
-
-#external
-pub type JsArray
-pub fn JsArray::empty() -> Self
-pub fn JsArray::push(Self, JsValue) -> Unit
-pub impl TJsValue for JsArray
 
 #external
 pub type JsUndefined

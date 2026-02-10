@@ -19,11 +19,6 @@ export const wasmImportObject = {
     null: () => null
   },
 
-  JsArray: {
-    empty: () => [],
-    push: (arr, value) => arr.push(value)
-  },
-
   webapi_Dictionary: {
     empty: () => ({})
   },
@@ -35,7 +30,9 @@ export const wasmImportObject = {
     int64ToJs: (v) => Number(v),
     uint64ToJs: (v) => Number(v),
     floatToJs: (v) => v,
-    doubleToJs: (v) => v
+    doubleToJs: (v) => v,
+    arrayEmpty: () => [],
+    arrayPush: (arr, value) => arr.push(value)
   },
 
   webapi_Global: {
