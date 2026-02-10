@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <title>Selection API (wasm-gc)</title>
+    <style>
+        body {
+            font-family: system-ui;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { wasmImportObject } from "../../src/webapi.mjs";
+
+        const wasmPath = "../_build/wasm-gc/release/build/selection-api/selection-api.wasm";
+        const { instance } = await WebAssembly.instantiateStreaming(
+            fetch(wasmPath),
+            wasmImportObject,
+            {
+                builtins: ["js-string"],
+                importedStringConstants: "_",
+            }
+        );
+        instance.exports._start();
+    </script>
+</body>
+
+</html>

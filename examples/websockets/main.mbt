@@ -11,8 +11,7 @@ fn main {
   status
   ..set_attribute("id", "ws-status")
   ..set_attribute(
-    "style",
-    "font-family: monospace; font-size: 1.2em; margin: 0.5em 0; padding: 0.5em; background: #f5f5f5; border-radius: 4px;",
+    "style", "font-family: monospace; font-size: 1.2em; margin: 0.5em 0; padding: 0.5em; background: #f5f5f5; border-radius: 4px;",
   )
   .set_text_content("Status: Disconnected")
 
@@ -21,8 +20,7 @@ fn main {
   messages
   ..set_attribute("id", "messages")
   ..set_attribute(
-    "style",
-    "font-family: monospace; padding: 1em; background: #f9f9f9; margin: 1em 0; border-radius: 4px; min-height: 100px; white-space: pre-line; border: 1px solid #ddd;",
+    "style", "font-family: monospace; padding: 1em; background: #f9f9f9; margin: 1em 0; border-radius: 4px; min-height: 100px; white-space: pre-line; border: 1px solid #ddd;",
   )
   .set_text_content("Messages will appear here...")
 
@@ -47,8 +45,7 @@ fn main {
   connect_btn
   ..set_attribute("id", "connect-btn")
   ..set_attribute(
-    "style",
-    "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0.25em 0.5em 0;",
+    "style", "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0.25em 0.5em 0;",
   )
   .set_text_content("Connect")
 
@@ -68,10 +65,7 @@ fn main {
     "click",
     @webapi.EventListener::new(fn(_event) {
       match ws.val {
-        Some(s) =>
-          if s.ready_state() < @webapi.WEB_SOCKET_CLOSING {
-            return
-          }
+        Some(s) => if s.ready_state() < @webapi.WEB_SOCKET_CLOSING { return }
         _ => ()
       }
       update_status("Status: Connecting...")

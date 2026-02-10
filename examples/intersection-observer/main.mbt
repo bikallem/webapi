@@ -7,13 +7,17 @@ fn main {
   heading.set_text_content("Intersection Observer Demo")
 
   let info = doc.create_element("p")
-  info.set_text_content("Scroll the container to see boxes enter and leave the viewport:")
+  info.set_text_content(
+    "Scroll the container to see boxes enter and leave the viewport:",
+  )
 
   // Log display
   let log = doc.create_element("div")
   log
   ..set_attribute("id", "intersection-log")
-  ..set_attribute("style", "font-family: monospace; padding: 1em; background: #f5f5f5; margin: 1em 0; min-height: 3em; border-radius: 4px;")
+  ..set_attribute(
+    "style", "font-family: monospace; padding: 1em; background: #f5f5f5; margin: 1em 0; min-height: 3em; border-radius: 4px;",
+  )
   .set_text_content("Scroll to see intersections...")
 
   // Scrollable container
@@ -30,16 +34,17 @@ fn main {
   spacer_top.set_attribute("style", "height: 100px;")
   container.append_child(spacer_top) |> ignore
 
-  let box_ids : Array[String] = []
   for i, color in colors {
     let box = doc.create_element("div")
     let box_id = "box-" + i.to_string()
-    box_ids.push(box_id)
     box
     ..set_attribute("id", box_id)
     ..set_attribute("class", "box")
     ..set_attribute(
-      "style", "height: 80px; margin: 20px 0; background: " + color + "; border-radius: 8px; display: grid; place-items: center; color: white; font-weight: bold; font-size: 1.2em;",
+      "style",
+      "height: 80px; margin: 20px 0; background: " +
+      color +
+      "; border-radius: 8px; display: grid; place-items: center; color: white; font-weight: bold; font-size: 1.2em;",
     )
     .set_text_content("Box " + (i + 1).to_string())
     container.append_child(box) |> ignore
@@ -50,7 +55,35 @@ fn main {
   container.append_child(spacer_bottom) |> ignore
 
   // Set up IntersectionObserver
-  setup_observer(container, log)
+  let callback = @webapi.IntersectionObserverCallback::new(fn(
+    entries,
+    _observer,
+  ) {
+    let visible : Array[String] = []
+    for entry in entries {
+      if entry.is_intersecting() {
+        visible.push(entry.target().text_content())
+      }
+    }
+    if visible.length() > 0 {
+      log.set_text_content("Visible: " + visible.join(", "))
+    }
+  })
+  let root : @webapi.Element = @webapi.TJsValue::to_js(container).into()
+  let options = @webapi.IntersectionObserverInit::new(root~, threshold=0.5)
+  let observer = @webapi.IntersectionObserver::new(callback, options~)
+
+  // Observe all boxes
+  let boxes = container.query_selector_all(".box")
+  for i = 0U; i < boxes.length(); i = i + 1 {
+    match boxes.item(i) {
+      Some(node) => {
+        let el : @webapi.Element = @webapi.TJsValue::to_js(node).into()
+        observer.observe(el)
+      }
+      None => ()
+    }
+  }
 
   let app = doc.get_element_by_id("app").unwrap()
   let outer : @webapi.HTMLDivElement = doc.create_element("div").into()
@@ -63,15 +96,3 @@ fn main {
   }
   app.append_child(outer) |> ignore
 }
-
-///|
-extern "js" fn setup_observer(container : @webapi.HTMLDivElement, log_el : @webapi.Element) =
-  #| (container, logEl) => {
-  #|   const observer = new IntersectionObserver((entries) => {
-  #|     const visible = entries.filter(e => e.isIntersecting).map(e => e.target.textContent);
-  #|     if (visible.length > 0) {
-  #|       logEl.textContent = 'Visible: ' + visible.join(', ');
-  #|     }
-  #|   }, { root: container, threshold: 0.5 });
-  #|   container.querySelectorAll('.box').forEach(box => observer.observe(box));
-  #| }

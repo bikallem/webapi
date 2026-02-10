@@ -19,13 +19,50 @@ fn main {
   let touch_info = doc.create_element("div")
   touch_info
   ..set_attribute("id", "touch-info")
-  ..set_attribute("style", "font-family: monospace; padding: 1em; background: #f5f5f5; margin: 1em 0; border-radius: 4px; white-space: pre-line;")
+  ..set_attribute(
+    "style", "font-family: monospace; padding: 1em; background: #f5f5f5; margin: 1em 0; border-radius: 4px; white-space: pre-line;",
+  )
   .set_text_content("Touch info: touch the area above (on a touch device)")
 
-  // Set up touch event listeners
-  setup_touch_listeners(touch_area, fn(event_type, count, x, y) {
-    touch_info.set_text_content("Event: " + event_type + "\nTouches: " + count.to_string() + "\nPosition: (" + x.to_string() + ", " + y.to_string() + ")")
-  })
+  let handle_touch = fn(event : @webapi.Event) {
+    event.prevent_default()
+    let te : @webapi.TouchEvent = event.into()
+    let event_type = te.type_()
+    let touches = te.touches()
+    let count = touches.length()
+    // Use changedTouches for touchend (touches list is empty)
+    let touch = if count > 0 {
+      touches.item(0U)
+    } else {
+      te.changed_touches().item(0U)
+    }
+    match touch {
+      Some(t) => {
+        let x = t.client_x().to_int()
+        let y = t.client_y().to_int()
+        touch_info.set_text_content(
+          "Event: " +
+          event_type +
+          "\nTouches: " +
+          count.to_string() +
+          "\nPosition: (" +
+          x.to_string() +
+          ", " +
+          y.to_string() +
+          ")",
+        )
+      }
+      None => ()
+    }
+  }
+
+  let types = ["touchstart", "touchmove", "touchend"]
+  for event_type in types {
+    touch_area.add_event_listener(
+      event_type,
+      @webapi.EventListener::new(fn(event) { handle_touch(event) }),
+    )
+  }
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
@@ -38,18 +75,3 @@ fn main {
   }
   app.append_child(container) |> ignore
 }
-
-///|
-extern "js" fn setup_touch_listeners(
-  el : @webapi.HTMLDivElement,
-  callback : (String, Int, Int, Int) -> Unit
-) =
-  #| (el, cb) => {
-  #|   for (const type of ['touchstart', 'touchmove', 'touchend']) {
-  #|     el.addEventListener(type, (e) => {
-  #|       e.preventDefault();
-  #|       const t = e.touches[0] || e.changedTouches[0];
-  #|       cb(e.type, e.touches.length, Math.round(t ? t.clientX : 0), Math.round(t ? t.clientY : 0));
-  #|     });
-  #|   }
-  #| }

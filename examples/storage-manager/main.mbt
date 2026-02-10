@@ -9,16 +9,22 @@ fn main {
   let usage_div = doc.create_element("div")
   usage_div
   ..set_attribute("id", "usage")
-  ..set_attribute("style", "font-size: 1.2em; margin: 0.5em 0; font-family: monospace;")
+  ..set_attribute(
+    "style", "font-size: 1.2em; margin: 0.5em 0; font-family: monospace;",
+  )
   .set_text_content("Usage: --")
 
   let quota_div = doc.create_element("div")
   quota_div
   ..set_attribute("id", "quota")
-  ..set_attribute("style", "font-size: 1.2em; margin: 0.5em 0; font-family: monospace;")
+  ..set_attribute(
+    "style", "font-size: 1.2em; margin: 0.5em 0; font-family: monospace;",
+  )
   .set_text_content("Quota: --")
 
-  let estimate_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let estimate_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .into()
   estimate_btn
   ..set_attribute("id", "estimate-btn")
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 1em 0;")
@@ -36,7 +42,9 @@ fn main {
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
-  let children : Array[&@webapi.TNode] = [heading, usage_div, quota_div, estimate_btn]
+  let children : Array[&@webapi.TNode] = [
+    heading, usage_div, quota_div, estimate_btn,
+  ]
   for child in children {
     container.append_child(child) |> ignore
   }
@@ -83,8 +91,6 @@ async fn do_estimate() -> Unit {
     usage_div.set_text_content("Usage: " + format_bytes(usage))
     quota_div.set_text_content("Quota: " + format_bytes(quota))
   } catch {
-    err => {
-      usage_div.set_text_content("Error: " + err.to_string())
-    }
+    err => usage_div.set_text_content("Error: " + err.to_string())
   }
 }

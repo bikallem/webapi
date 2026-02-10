@@ -4,5 +4,11 @@ import {
 
 options(
   "is-main": true,
-  targets: { "main.mbt": [ "js" ], "main_wasm.mbt": [ "wasm-gc" ] },
+  link: {
+    "wasm-gc": {
+      "imported-string-constants": "_",
+      "use-js-builtin-string": true,
+    },
+  },
+  "supported-targets": [ "js" ],
 )

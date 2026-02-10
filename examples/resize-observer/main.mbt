@@ -10,25 +10,38 @@ fn main {
   info.set_text_content("Drag the corner of the textarea to resize it:")
 
   // Resizable textarea
-  let textarea : @webapi.HTMLTextAreaElement = doc.create_element("textarea").into()
+  let textarea : @webapi.HTMLTextAreaElement = doc
+    .create_element("textarea")
+    .into()
   textarea
   ..set_attribute("id", "resizable")
-  ..set_attribute("style", "width: 300px; height: 150px; resize: both; overflow: auto; padding: 0.5em; font-size: 1em; display: block;")
+  ..set_attribute(
+    "style", "width: 300px; height: 150px; resize: both; overflow: auto; padding: 0.5em; font-size: 1em; display: block;",
+  )
   .set_value("Resize me!")
 
   // Dimensions display
   let dimensions = doc.create_element("div")
   dimensions
   ..set_attribute("id", "dimensions")
-  ..set_attribute("style", "font-size: 1.2em; margin: 1em 0; font-family: monospace;")
+  ..set_attribute(
+    "style", "font-size: 1.2em; margin: 1em 0; font-family: monospace;",
+  )
   .set_text_content("Dimensions: --")
 
-  // Set up ResizeObserver via FFI
-  observe_resize(textarea, fn(width, height) {
-    dimensions.set_text_content(
-      "Dimensions: " + width.to_string() + " x " + height.to_string()
-    )
+  // Set up ResizeObserver
+  let callback = @webapi.ResizeObserverCallback::new(fn(entries, _observer) {
+    for entry in entries {
+      let rect = entry.content_rect()
+      let w = rect.width().to_int()
+      let h = rect.height().to_int()
+      dimensions.set_text_content(
+        "Dimensions: " + w.to_string() + " x " + h.to_string(),
+      )
+    }
   })
+  let observer = @webapi.ResizeObserver::new(callback)
+  observer.observe(textarea)
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
@@ -41,7 +54,3 @@ fn main {
   }
   app.append_child(container) |> ignore
 }
-
-///|
-extern "js" fn observe_resize(target : @webapi.HTMLTextAreaElement, callback : (Int, Int) -> Unit) =
-  #| (target, cb) => { const ro = new ResizeObserver((entries) => { for (const e of entries) { cb(Math.round(e.contentRect.width), Math.round(e.contentRect.height)); } }); ro.observe(target); }

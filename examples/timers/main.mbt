@@ -73,11 +73,7 @@ fn main {
             @webapi.JsValue::undefined()
           }),
         )
-        interval_id = @webapi.window.set_interval(
-          handler,
-          timeout=500,
-          [],
-        )
+        interval_id = @webapi.window.set_interval(handler, timeout=500, [])
       }
     }),
   )
@@ -122,12 +118,7 @@ fn main {
           @webapi.JsValue::undefined()
         }),
       )
-      @webapi.window.set_timeout(
-        handler,
-        timeout=1000,
-        [],
-      )
-      |> ignore
+      @webapi.window.set_timeout(handler, timeout=1000, []) |> ignore
     }),
   )
 

@@ -2,21 +2,31 @@
 /// Screen Orientation Demo - display current orientation type and angle
 fn main {
   let doc = @webapi.document
+  let orientation = @webapi.window.screen().orientation()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Screen Orientation Demo")
 
+  let type_str = fn() -> String {
+    let s : String = orientation.type_().to_js().into()
+    s
+  }
+
   let type_div = doc.create_element("div")
   type_div
   ..set_attribute("id", "orientation-type")
-  ..set_attribute("style", "font-size: 1.5em; margin: 0.5em 0; font-family: monospace;")
-  .set_text_content("Type: " + get_orientation_type())
+  ..set_attribute(
+    "style", "font-size: 1.5em; margin: 0.5em 0; font-family: monospace;",
+  )
+  .set_text_content("Type: " + type_str())
 
   let angle_div = doc.create_element("div")
   angle_div
   ..set_attribute("id", "orientation-angle")
-  ..set_attribute("style", "font-size: 1.5em; margin: 0.5em 0; font-family: monospace;")
-  .set_text_content("Angle: " + get_orientation_angle().to_string() + "\u00b0")
+  ..set_attribute(
+    "style", "font-size: 1.5em; margin: 0.5em 0; font-family: monospace;",
+  )
+  .set_text_content("Angle: " + orientation.angle().to_string() + "\u00b0")
 
   let info = doc.create_element("p")
   info
@@ -24,10 +34,15 @@ fn main {
   .set_text_content("Rotate your device to see changes.")
 
   // Listen for orientation change
-  add_orientation_change_listener(fn() {
-    type_div.set_text_content("Type: " + get_orientation_type())
-    angle_div.set_text_content("Angle: " + get_orientation_angle().to_string() + "\u00b0")
-  })
+  orientation.add_event_listener(
+    "change",
+    @webapi.EventListener::new(fn(_event) {
+      type_div.set_text_content("Type: " + type_str())
+      angle_div.set_text_content(
+        "Angle: " + orientation.angle().to_string() + "\u00b0",
+      )
+    }),
+  )
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
@@ -40,15 +55,3 @@ fn main {
   }
   app.append_child(container) |> ignore
 }
-
-///|
-extern "js" fn get_orientation_type() -> String =
-  #| () => screen.orientation.type
-
-///|
-extern "js" fn get_orientation_angle() -> Int =
-  #| () => screen.orientation.angle
-
-///|
-extern "js" fn add_orientation_change_listener(callback : () -> Unit) =
-  #| (cb) => screen.orientation.addEventListener('change', () => cb())

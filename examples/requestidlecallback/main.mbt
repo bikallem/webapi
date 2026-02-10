@@ -1,19 +1,5 @@
 ///|
 /// RequestIdleCallback Demo - schedules work during browser idle periods
-
-///|
-extern "js" fn request_idle_callback(callback : @webapi.Function) -> Int =
-  "(cb) => window.requestIdleCallback((deadline) => cb(deadline))"
-
-///|
-extern "js" fn get_time_remaining(deadline : @webapi.JsValue) -> Double =
-  "(d) => d.timeRemaining()"
-
-///|
-extern "js" fn get_did_timeout(deadline : @webapi.JsValue) -> Bool =
-  "(d) => d.didTimeout"
-
-///|
 fn main {
   let doc = @webapi.document
 
@@ -26,8 +12,7 @@ fn main {
   status_div
   ..set_attribute("id", "idle-status")
   ..set_attribute(
-    "style",
-    "font-size: 1.5em; margin: 0.5em 0; font-family: monospace;",
+    "style", "font-size: 1.5em; margin: 0.5em 0; font-family: monospace;",
   )
   .set_text_content("Ready")
 
@@ -56,14 +41,15 @@ fn main {
     @webapi.EventListener::new(fn(_event) {
       status_div.set_text_content("Scheduled...")
       time_div.set_text_content("")
-      let callback = @webapi.Function::new(fn(deadline) {
-        let remaining = get_time_remaining(deadline)
-        let did_timeout = get_did_timeout(deadline)
+      let callback = @webapi.IdleRequestCallback::new(fn(deadline) {
+        let remaining = deadline.time_remaining()
+        let did_timeout = deadline.did_timeout()
         status_div.set_text_content("Callback fired!")
-        time_div.set_text_content("timeRemaining: \{remaining}ms | didTimeout: \{did_timeout}")
-        @webapi.JsValue::undefined()
+        time_div.set_text_content(
+          "timeRemaining: \{remaining}ms | didTimeout: \{did_timeout}",
+        )
       })
-      request_idle_callback(callback) |> ignore
+      @webapi.window.request_idle_callback(callback) |> ignore
     }),
   )
 

@@ -16,13 +16,9 @@ fn make_button(label : String, on_click : () -> Unit) -> HTMLButtonElement {
   btn
   ..set_text_content(label)
   ..set_attribute(
-    "style",
-    "padding: 0.5em 1.2em; margin: 0.3em; font-size: 0.95em; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 4px;",
+    "style", "padding: 0.5em 1.2em; margin: 0.3em; font-size: 0.95em; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 4px;",
   )
-  .add_event_listener(
-    "click",
-    EventListener::new(fn(_event) { on_click() }),
-  )
+  .add_event_listener("click", EventListener::new(fn(_event) { on_click() }))
   btn
 }
 
@@ -31,8 +27,7 @@ fn main {
   let app = document.get_element_by_id("app").unwrap()
   let container : HTMLDivElement = document.create_element("div").into()
   container.set_attribute(
-    "style",
-    "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
+    "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
   )
 
   // Title
@@ -45,7 +40,9 @@ fn main {
   // Subtitle
   let subtitle = document.create_element("p")
   subtitle
-  ..set_text_content("Open DevTools (F12) to see console output, then click the buttons below.")
+  ..set_text_content(
+    "Open DevTools (F12) to see console output, then click the buttons below.",
+  )
   .set_attribute("style", "color: #666; margin-bottom: 1.5em;")
   container.append_child(subtitle) |> ignore
 
@@ -54,8 +51,7 @@ fn main {
   section1
   ..set_text_content("Log Levels")
   .set_attribute(
-    "style",
-    "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
+    "style", "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
   )
   container.append_child(section1) |> ignore
 
@@ -85,25 +81,20 @@ fn main {
   section2
   ..set_text_content("Assertions")
   .set_attribute(
-    "style",
-    "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
+    "style", "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
   )
   container.append_child(section2) |> ignore
 
   container.append_child(
-    make_button(
-      "assert (pass)",
-      fn() { Console::assert_(condition=true, ["This should NOT appear"]) },
-    ),
+    make_button("assert (pass)", fn() {
+      Console::assert_(condition=true, ["This should NOT appear"])
+    }),
   )
   |> ignore
   container.append_child(
-    make_button(
-      "assert (fail)",
-      fn() {
-        Console::assert_(condition=false, ["Assertion failed: expected true"])
-      },
-    ),
+    make_button("assert (fail)", fn() {
+      Console::assert_(condition=false, ["Assertion failed: expected true"])
+    }),
   )
   |> ignore
 
@@ -112,32 +103,25 @@ fn main {
   section3
   ..set_text_content("Grouping")
   .set_attribute(
-    "style",
-    "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
+    "style", "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
   )
   container.append_child(section3) |> ignore
 
   container.append_child(
-    make_button(
-      "group",
-      fn() {
-        Console::group(["MoonBit Group"])
-        Console::log(["Inside the group"])
-        Console::warn(["Still inside"])
-        Console::group_end()
-      },
-    ),
+    make_button("group", fn() {
+      Console::group(["MoonBit Group"])
+      Console::log(["Inside the group"])
+      Console::warn(["Still inside"])
+      Console::group_end()
+    }),
   )
   |> ignore
   container.append_child(
-    make_button(
-      "group (collapsed)",
-      fn() {
-        Console::group_collapsed(["Collapsed Group"])
-        Console::log(["Hidden by default"])
-        Console::group_end()
-      },
-    ),
+    make_button("group (collapsed)", fn() {
+      Console::group_collapsed(["Collapsed Group"])
+      Console::log(["Hidden by default"])
+      Console::group_end()
+    }),
   )
   |> ignore
 
@@ -146,8 +130,7 @@ fn main {
   section4
   ..set_text_content("Counting")
   .set_attribute(
-    "style",
-    "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
+    "style", "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
   )
   container.append_child(section4) |> ignore
 
@@ -165,8 +148,7 @@ fn main {
   section5
   ..set_text_content("Timing")
   .set_attribute(
-    "style",
-    "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
+    "style", "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
   )
   container.append_child(section5) |> ignore
 
@@ -175,10 +157,9 @@ fn main {
   )
   |> ignore
   container.append_child(
-    make_button(
-      "time log",
-      fn() { Console::time_log(label="timer", ["checkpoint"]) },
-    ),
+    make_button("time log", fn() {
+      Console::time_log(label="timer", ["checkpoint"])
+    }),
   )
   |> ignore
   container.append_child(
@@ -191,8 +172,7 @@ fn main {
   section6
   ..set_text_content("Other")
   .set_attribute(
-    "style",
-    "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
+    "style", "font-size: 1.1em; margin: 1em 0 0.4em; border-bottom: 2px solid #4a90d9; padding-bottom: 0.2em; color: #2c3e50;",
   )
   container.append_child(section6) |> ignore
 
