@@ -6201,5 +6201,27 @@ export const wasmImportObject = {
 
   webapi_CSS: {
     escape: (ident) => CSS.escape(ident)
+  },
+
+  webapi_console: {
+    assert: (condition, data) => console.assert(condition, ...data),
+    clear: () => console.clear(),
+    debug: (data) => console.debug(...data),
+    error: (data) => console.error(...data),
+    info: (data) => console.info(...data),
+    log: (data) => console.log(...data),
+    table: (tabular_data, properties) => console.table(tabular_data, properties),
+    trace: (data) => console.trace(...data),
+    warn: (data) => console.warn(...data),
+    dir: (item, options) => console.dir(item, options),
+    dirxml: (data) => console.dirxml(...data),
+    count: (label) => console.count(label),
+    countReset: (label) => console.countReset(label),
+    group: (data) => console.group(...data),
+    groupCollapsed: (data) => console.groupCollapsed(...data),
+    groupEnd: () => console.groupEnd(),
+    time: (label) => console.time(label),
+    timeLog: (label, data) => console.timeLog(label, ...data),
+    timeEnd: (label) => console.timeEnd(label)
   }
 };

@@ -58,6 +58,7 @@ pub let keywords : @hashset.HashSet[String] = [
     "return", "struct", "enum", "type", "trait", "impl", "pub", "priv", "true", "false",
     "as", "is", "in", "loop", "test", "raise", "try", "catch", "namespace", "using",
     "where", "method", "async", "constructor", "define", "defer", "declare", "opaque",
+    "assert",
   ]
   |> @hashset.from_array
 

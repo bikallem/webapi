@@ -11,11 +11,13 @@ pub impl Emitter for NamespaceEmitter with emit(
 ) -> (Filename, Array[Emit]) {
   let filename = Filename("\{@type_mapping.snake_case(name)}_namespace.mbt")
   let ns = self.idl.namespaces[name]
+  // MoonBit requires uppercase type names; capitalize if needed (e.g. "console" → "Console")
+  let mbt_name = @type_mapping.pascal_case(ns.name)
   let emits = []
   emits
-  ..push(Emit::FileHeader(TypeName(ns.name), Specs(ns.specs)))
-  ..push(Emit::External(ns.name))
-  .push(Emit::ImplTJsValue(ns.name))
+  ..push(Emit::FileHeader(TypeName(mbt_name), Specs(ns.specs)))
+  ..push(Emit::External(mbt_name))
+  .push(Emit::ImplTJsValue(mbt_name))
   let namespace_methods : Array[&InterfaceMethodEmit] = []
   let method_counter : Map[String, Int] = {}
   for m in ns.members {
@@ -43,9 +45,10 @@ pub impl Emitter for NamespaceEmitter with emit(
         }
         let (op_emits, meth) = emit_regular_operation(
           static_op,
-          ns.name,
+          mbt_name,
           orig_method_name,
           self.type_registry,
+          js_name=ns.name,
         )
         emits.push_iter(op_emits.iter())
         namespace_methods.push(meth)
@@ -64,8 +67,9 @@ pub impl Emitter for NamespaceEmitter with emit(
         }
         let (attr_emits, attr_methods) = emit_attribute(
           static_attr,
-          ns.name,
+          mbt_name,
           self.type_registry,
+          js_name=ns.name,
         )
         emits.push_iter(attr_emits.iter())
         namespace_methods.push_iter(attr_methods.iter())
@@ -73,7 +77,7 @@ pub impl Emitter for NamespaceEmitter with emit(
       Const(const_val) => {
         let const_emits = emit_const_member(
           const_val,
-          ns.name,
+          mbt_name,
           self.type_registry,
         )
         emits.push_iter(const_emits.iter())
@@ -82,7 +86,7 @@ pub impl Emitter for NamespaceEmitter with emit(
   }
   emits.push(
     Emit::NamespaceDefinition(NamespaceDef::{
-      name: ns.name,
+      name: mbt_name,
       methods: namespace_methods,
     }),
   )

@@ -221,6 +221,7 @@ fn emit_regular_operation(
   interface_name : String,
   orig_method_name : String,
   type_registry : @type_registry.TypeRegistry,
+  js_name~ : String = interface_name,
 ) -> (Array[Emit], &InterfaceMethodEmit) {
   let emits = []
   let (args, arg_emits) = method_args(
@@ -261,6 +262,7 @@ fn emit_regular_operation(
   if op.static_ {
     let meth : &InterfaceMethodEmit = StaticMethodEmit::{
       interface_name,
+      js_name,
       original_name: orig_method_name,
       return_type,
       args,
@@ -283,6 +285,7 @@ fn emit_attribute(
   attr : @parser.AttributeMember,
   interface_name : String,
   type_registry : @type_registry.TypeRegistry,
+  js_name~ : String = interface_name,
 ) -> (Array[Emit], Array[&InterfaceMethodEmit]) {
   let emits = []
   let methods : Array[&InterfaceMethodEmit] = []
@@ -305,6 +308,7 @@ fn emit_attribute(
   if attr.static_ {
     methods.push(StaticAttributeGetMethodEmit::{
       interface_name,
+      js_name,
       original_name: attr.name,
       return_type: attr_type.name(),
     })

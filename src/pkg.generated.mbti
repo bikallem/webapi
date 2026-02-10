@@ -891,6 +891,29 @@ pub fn CompositionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? 
 pub impl TJsValue for CompositionEventInit
 
 #external
+pub type Console
+pub fn Console::assert_(condition? : Bool, Array[&TJsValue]) -> Unit
+pub fn Console::clear() -> Unit
+pub fn Console::count(label? : String) -> Unit
+pub fn Console::count_reset(label? : String) -> Unit
+pub fn Console::debug(Array[&TJsValue]) -> Unit
+pub fn Console::dir(item? : JsValue, options? : JsValue) -> Unit
+pub fn Console::dirxml(Array[&TJsValue]) -> Unit
+pub fn Console::error(Array[&TJsValue]) -> Unit
+pub fn Console::group(Array[&TJsValue]) -> Unit
+pub fn Console::group_collapsed(Array[&TJsValue]) -> Unit
+pub fn Console::group_end() -> Unit
+pub fn Console::info(Array[&TJsValue]) -> Unit
+pub fn Console::log(Array[&TJsValue]) -> Unit
+pub fn Console::table(tabular_data? : JsValue, properties? : Array[String]) -> Unit
+pub fn Console::time(label? : String) -> Unit
+pub fn Console::time_end(label? : String) -> Unit
+pub fn Console::time_log(label? : String, Array[&TJsValue]) -> Unit
+pub fn Console::trace(Array[&TJsValue]) -> Unit
+pub fn Console::warn(Array[&TJsValue]) -> Unit
+pub impl TJsValue for Console
+
+#external
 pub type ConvertCoordinateOptions
 pub fn ConvertCoordinateOptions::empty() -> Self
 pub fn ConvertCoordinateOptions::new(from_box? : CSSBoxType, to_box? : CSSBoxType) -> Self

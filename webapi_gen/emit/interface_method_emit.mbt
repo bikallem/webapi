@@ -272,6 +272,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
 ///|
 struct StaticMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
+  js_name : String // Name used in JS FFI bodies, eg. "console" (may differ from interface_name)
   original_name : String // Original method name from IDL, eg "createElement"
   return_type : @type_mapping.MethodReturn
   args : Array[@type_mapping.MethodArg]
@@ -293,7 +294,6 @@ fn StaticMethodEmit::ffi_name(self : StaticMethodEmit) -> String {
 impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
   self : StaticMethodEmit,
 ) -> Code {
-  let trait_name = self.interface_name
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.args.map(arg => arg.name)
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
@@ -315,7 +315,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    "\{trait_name}.\{self.original_name}(\{ffi_js_args})",
+    "\{self.js_name}.\{self.original_name}(\{ffi_js_args})",
   )
 }
 
@@ -537,6 +537,7 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
 ///|
 struct StaticAttributeGetMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
+  js_name : String // Name used in JS FFI bodies, eg. "console" (may differ from interface_name)
   original_name : String // Original attribute name from IDL, eg "title"
   return_type : String
 } derive(Show, ToJson)
@@ -559,7 +560,6 @@ fn StaticAttributeGetMethodEmit::ffi_name(
 impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_js(
   self : StaticAttributeGetMethodEmit,
 ) -> Code {
-  let trait_name = self.interface_name
   emit_js_ffi_with_return(
     self.ffi_name(),
     "",
@@ -567,7 +567,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_js(
     self.return_type,
     is_optional=self.return_type.has_suffix("?"),
     is_void=false,
-    "\{trait_name}.\{self.original_name}",
+    "\{self.js_name}.\{self.original_name}",
   )
 }
 

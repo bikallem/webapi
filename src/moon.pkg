@@ -65,6 +65,8 @@ options(
     "composition_event_init_dictionary_wasm.mbt": [ "wasm-gc" ],
     "composition_event_interface_js.mbt": [ "js" ],
     "composition_event_interface_wasm.mbt": [ "wasm-gc" ],
+    "console_namespace_js.mbt": [ "js" ],
+    "console_namespace_wasm.mbt": [ "wasm-gc" ],
     "convert_coordinate_options_dictionary_js.mbt": [ "js" ],
     "convert_coordinate_options_dictionary_wasm.mbt": [ "wasm-gc" ],
     "create_html_callback_callback_js.mbt": [ "js" ],
