@@ -141,7 +141,21 @@ fn mbt_default_value(
       } else {
         "\{arg_type.name()}::empty()"
       }
-    EmptySequence => "[]"
+    EmptySequence =>
+      match arg_type {
+        @type_mapping.ArgMbtType::Union({ options, .. }) =>
+          if options
+            .iter()
+            .find_first(fn(it) {
+              it.name().has_prefix("Array[")
+            })
+            is Some(t) {
+            "([] : \{t.name()})"
+          } else {
+            "[]"
+          }
+        _ => "[]"
+      }
     Undefined => "JsUndefined::undefined()"
   }
 }

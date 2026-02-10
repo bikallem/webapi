@@ -298,6 +298,14 @@ pub const SVG_UNIT_TYPES_SVG_UNIT_TYPE_UNKNOWN : UInt = 0
 
 pub const SVG_UNIT_TYPES_SVG_UNIT_TYPE_USERSPACEONUSE : UInt = 1
 
+pub const WEB_SOCKET_CLOSED : UInt = 3
+
+pub const WEB_SOCKET_CLOSING : UInt = 2
+
+pub const WEB_SOCKET_CONNECTING : UInt = 0
+
+pub const WEB_SOCKET_OPEN : UInt = 1
+
 pub const WHEEL_EVENT_DOM_DELTA_LINE : UInt = 0x01
 
 pub const WHEEL_EVENT_DOM_DELTA_PAGE : UInt = 0x02
@@ -444,6 +452,15 @@ pub type BigUint64Array
 pub impl TArrayBufferView for BigUint64Array
 pub impl TJsValue for BigUint64Array
 
+pub(all) enum BinaryType {
+  Blob
+  Arraybuffer
+}
+pub fn BinaryType::from(String) -> Self?
+pub impl TJsValue for BinaryType
+pub impl Eq for BinaryType
+pub impl Show for BinaryType
+
 #external
 pub type Blob
 pub fn[T : TBlob] Blob::into(Self) -> T
@@ -454,6 +471,7 @@ pub impl TImageBitmapSource for Blob
 pub impl TJsValue for Blob
 pub impl TMediaProvider for Blob
 pub impl TURLCreateObjectURLObj for Blob
+pub impl TWebSocketSendData for Blob
 pub impl TXMLHttpRequestBodyInit for Blob
 
 #external
@@ -496,6 +514,7 @@ pub type BufferSource
 pub fn[T : TBufferSource] BufferSource::into(Self) -> T
 pub impl TBlobPart for BufferSource
 pub impl TJsValue for BufferSource
+pub impl TWebSocketSendData for BufferSource
 pub impl TXMLHttpRequestBodyInit for BufferSource
 
 #external
@@ -827,6 +846,75 @@ pub type CheckVisibilityOptions
 pub fn CheckVisibilityOptions::empty() -> Self
 pub fn CheckVisibilityOptions::new(check_opacity? : Bool, check_visibility_css? : Bool, content_visibility_auto? : Bool, opacity_property? : Bool, visibility_property? : Bool) -> Self
 pub impl TJsValue for CheckVisibilityOptions
+
+#external
+pub type Clipboard
+pub fn[T : TClipboard] Clipboard::into(Self) -> T
+pub impl TClipboard for Clipboard
+pub impl TEventTarget for Clipboard
+pub impl TJsValue for Clipboard
+
+#external
+pub type ClipboardChangeEvent
+pub fn[T : TClipboardChangeEvent] ClipboardChangeEvent::into(Self) -> T
+pub fn ClipboardChangeEvent::new(String, event_init_dict? : ClipboardChangeEventInit) -> Self
+pub impl TClipboardChangeEvent for ClipboardChangeEvent
+pub impl TEvent for ClipboardChangeEvent
+pub impl TJsValue for ClipboardChangeEvent
+
+#external
+pub type ClipboardChangeEventInit
+pub fn ClipboardChangeEventInit::empty() -> Self
+pub fn ClipboardChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, types? : Array[String], change_id? : Int64) -> Self
+pub impl TJsValue for ClipboardChangeEventInit
+
+#external
+pub type ClipboardEvent
+pub fn[T : TClipboardEvent] ClipboardEvent::into(Self) -> T
+pub fn ClipboardEvent::new(String, event_init_dict? : ClipboardEventInit) -> Self
+pub impl TClipboardEvent for ClipboardEvent
+pub impl TEvent for ClipboardEvent
+pub impl TJsValue for ClipboardEvent
+
+#external
+pub type ClipboardEventInit
+pub fn ClipboardEventInit::empty() -> Self
+pub fn ClipboardEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, clipboard_data? : &TDataTransfer) -> Self
+pub impl TJsValue for ClipboardEventInit
+
+#external
+pub type ClipboardItem
+pub fn[T : TClipboardItem] ClipboardItem::into(Self) -> T
+pub fn ClipboardItem::new(JsValue, options? : ClipboardItemOptions) -> Self
+pub fn ClipboardItem::supports(String) -> Bool
+pub impl TClipboardItem for ClipboardItem
+pub impl TJsValue for ClipboardItem
+
+#external
+pub type ClipboardItemOptions
+pub fn ClipboardItemOptions::empty() -> Self
+pub fn ClipboardItemOptions::new(presentation_style? : PresentationStyle) -> Self
+pub impl TJsValue for ClipboardItemOptions
+
+#external
+pub type ClipboardUnsanitizedFormats
+pub fn ClipboardUnsanitizedFormats::empty() -> Self
+pub fn ClipboardUnsanitizedFormats::new(unsanitized? : Array[String]) -> Self
+pub impl TJsValue for ClipboardUnsanitizedFormats
+
+#external
+pub type CloseEvent
+pub fn[T : TCloseEvent] CloseEvent::into(Self) -> T
+pub fn CloseEvent::new(String, event_init_dict? : CloseEventInit) -> Self
+pub impl TCloseEvent for CloseEvent
+pub impl TEvent for CloseEvent
+pub impl TJsValue for CloseEvent
+
+#external
+pub type CloseEventInit
+pub fn CloseEventInit::empty() -> Self
+pub fn CloseEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, was_clean? : Bool, code? : UInt, reason? : String) -> Self
+pub impl TJsValue for CloseEventInit
 
 #external
 pub type CloseWatcher
@@ -3020,6 +3108,54 @@ pub impl TJsValue for NotRestoredReasons
 pub impl TNotRestoredReasons for NotRestoredReasons
 
 #external
+pub type Notification
+pub fn[T : TNotification] Notification::into(Self) -> T
+pub fn Notification::max_actions() -> UInt
+pub fn Notification::new(String, options? : NotificationOptions) -> Self
+pub fn Notification::permission() -> NotificationPermission
+pub fn Notification::request_permission(deprecated_callback? : NotificationPermissionCallback) -> @js_async.Promise[NotificationPermission]
+pub impl TEventTarget for Notification
+pub impl TJsValue for Notification
+pub impl TNotification for Notification
+
+#external
+pub type NotificationAction
+pub fn NotificationAction::empty() -> Self
+pub fn NotificationAction::new(String, String, navigate? : String, icon? : String) -> Self
+pub impl TJsValue for NotificationAction
+
+pub(all) enum NotificationDirection {
+  Auto
+  Ltr
+  Rtl
+}
+pub fn NotificationDirection::from(String) -> Self?
+pub impl TJsValue for NotificationDirection
+pub impl Eq for NotificationDirection
+pub impl Show for NotificationDirection
+
+#external
+pub type NotificationOptions
+pub fn NotificationOptions::empty() -> Self
+pub fn NotificationOptions::new(dir? : NotificationDirection, lang? : String, body? : String, navigate? : String, tag? : String, image? : String, icon? : String, badge? : String, vibrate? : VibratePattern, timestamp? : UInt64, renotify? : Bool, silent? : Bool, require_interaction? : Bool, data? : JsValue, actions? : Array[NotificationAction]) -> Self
+pub impl TJsValue for NotificationOptions
+
+pub(all) enum NotificationPermission {
+  Default
+  Denied
+  Granted
+}
+pub fn NotificationPermission::from(String) -> Self?
+pub impl TJsValue for NotificationPermission
+pub impl Eq for NotificationPermission
+pub impl Show for NotificationPermission
+
+#external
+pub type NotificationPermissionCallback
+pub fn NotificationPermissionCallback::new((NotificationPermission) -> Unit) -> Self
+pub impl TJsValue for NotificationPermissionCallback
+
+#external
 pub type OffscreenCanvas
 pub fn[T : TOffscreenCanvas] OffscreenCanvas::into(Self) -> T
 pub fn OffscreenCanvas::new(UInt64, UInt64) -> Self
@@ -3269,6 +3405,16 @@ pub fn PremultiplyAlpha::from(String) -> Self?
 pub impl TJsValue for PremultiplyAlpha
 pub impl Eq for PremultiplyAlpha
 pub impl Show for PremultiplyAlpha
+
+pub(all) enum PresentationStyle {
+  Unspecified
+  Inline
+  Attachment
+}
+pub fn PresentationStyle::from(String) -> Self?
+pub impl TJsValue for PresentationStyle
+pub impl Eq for PresentationStyle
+pub impl Show for PresentationStyle
 
 #external
 pub type ProcessingInstruction
@@ -4353,6 +4499,52 @@ pub impl TNode for Text
 pub impl TText for Text
 
 #external
+pub type TextDecodeOptions
+pub fn TextDecodeOptions::empty() -> Self
+pub fn TextDecodeOptions::new(stream? : Bool) -> Self
+pub impl TJsValue for TextDecodeOptions
+
+#external
+pub type TextDecoder
+pub fn[T : TTextDecoder] TextDecoder::into(Self) -> T
+pub fn TextDecoder::new(label? : String, options? : TextDecoderOptions) -> Self
+pub impl TJsValue for TextDecoder
+pub impl TTextDecoder for TextDecoder
+
+#external
+pub type TextDecoderOptions
+pub fn TextDecoderOptions::empty() -> Self
+pub fn TextDecoderOptions::new(fatal? : Bool, ignore_bom? : Bool) -> Self
+pub impl TJsValue for TextDecoderOptions
+
+#external
+pub type TextDecoderStream
+pub fn[T : TTextDecoderStream] TextDecoderStream::into(Self) -> T
+pub fn TextDecoderStream::new(label? : String, options? : TextDecoderOptions) -> Self
+pub impl TJsValue for TextDecoderStream
+pub impl TTextDecoderStream for TextDecoderStream
+
+#external
+pub type TextEncoder
+pub fn[T : TTextEncoder] TextEncoder::into(Self) -> T
+pub fn TextEncoder::new() -> Self
+pub impl TJsValue for TextEncoder
+pub impl TTextEncoder for TextEncoder
+
+#external
+pub type TextEncoderEncodeIntoResult
+pub fn TextEncoderEncodeIntoResult::empty() -> Self
+pub fn TextEncoderEncodeIntoResult::new(read? : UInt64, written? : UInt64) -> Self
+pub impl TJsValue for TextEncoderEncodeIntoResult
+
+#external
+pub type TextEncoderStream
+pub fn[T : TTextEncoderStream] TextEncoderStream::into(Self) -> T
+pub fn TextEncoderStream::new() -> Self
+pub impl TJsValue for TextEncoderStream
+pub impl TTextEncoderStream for TextEncoderStream
+
+#external
 pub type TextEvent
 pub fn[T : TTextEvent] TextEvent::into(Self) -> T
 pub impl TEvent for TextEvent
@@ -4653,6 +4845,11 @@ pub fn ValidityStateFlags::new(value_missing? : Bool, type_mismatch? : Bool, pat
 pub impl TJsValue for ValidityStateFlags
 
 #external
+pub type VibratePattern
+pub fn[T : TVibratePattern] VibratePattern::into(Self) -> T
+pub impl TJsValue for VibratePattern
+
+#external
 pub type VideoFrame
 pub impl TCanvasImageSource for VideoFrame
 pub impl TJsValue for VideoFrame
@@ -4706,6 +4903,14 @@ pub type WebGLRenderingContext
 pub impl TJsValue for WebGLRenderingContext
 pub impl TOffscreenRenderingContext for WebGLRenderingContext
 pub impl TRenderingContext for WebGLRenderingContext
+
+#external
+pub type WebSocket
+pub fn[T : TWebSocket] WebSocket::into(Self) -> T
+pub fn WebSocket::new(String, protocols? : &TWebSocketNewProtocols) -> Self
+pub impl TEventTarget for WebSocket
+pub impl TJsValue for WebSocket
+pub impl TWebSocket for WebSocket
 
 #external
 pub type WheelEvent
@@ -4898,6 +5103,8 @@ pub impl TXSLTProcessor for XSLTProcessor
 
 // Type aliases
 pub type CSSOMString = String
+
+pub type ClipboardItems = Array[ClipboardItem]
 
 pub type DOMHighResTimeStamp = Double
 
@@ -5300,6 +5507,34 @@ pub(open) trait TCharacterDataReplaceWithNodes {
   to_js(Self) -> JsValue
 }
 pub impl TCharacterDataReplaceWithNodes for String
+
+pub trait TClipboard : TEventTarget {
+  read(Self, formats? : ClipboardUnsanitizedFormats) -> @js_async.Promise[Array[ClipboardItem]]
+  read_text(Self) -> @js_async.Promise[String]
+  write(Self, Array[ClipboardItem]) -> @js_async.Promise[Unit]
+  write_text(Self, String) -> @js_async.Promise[Unit]
+}
+
+pub trait TClipboardChangeEvent : TEvent {
+  types(Self) -> JsValue
+  change_id(Self) -> Int64
+}
+
+pub trait TClipboardEvent : TEvent {
+  clipboard_data(Self) -> DataTransfer
+}
+
+pub trait TClipboardItem : TJsValue {
+  presentation_style(Self) -> PresentationStyle
+  types(Self) -> JsValue
+  get_type(Self, String) -> @js_async.Promise[Blob]
+}
+
+pub trait TCloseEvent : TEvent {
+  was_clean(Self) -> Bool
+  code(Self) -> UInt
+  reason(Self) -> String
+}
 
 pub trait TCloseWatcher : TEventTarget {
   request_close(Self) -> Unit
@@ -8354,7 +8589,9 @@ pub trait TNavigationTransition : TJsValue {
 
 pub trait TNavigator : TJsValue {
   user_activation(Self) -> UserActivation
+  vibrate(Self, VibratePattern) -> Bool
   max_touch_points(Self) -> Int
+  clipboard(Self) -> Clipboard
   app_code_name(Self) -> String
   app_name(Self) -> String
   app_version(Self) -> String
@@ -8443,6 +8680,34 @@ pub trait TNotRestoredReasons : TJsValue {
   reasons(Self) -> JsValue
   children(Self) -> JsValue
   to_json(Self) -> JsValue
+}
+
+pub trait TNotification : TEventTarget {
+  onclick(Self) -> EventHandlerNonNull
+  set_onclick(Self, EventHandlerNonNull) -> Unit
+  onshow(Self) -> EventHandlerNonNull
+  set_onshow(Self, EventHandlerNonNull) -> Unit
+  onerror(Self) -> EventHandlerNonNull
+  set_onerror(Self, EventHandlerNonNull) -> Unit
+  onclose(Self) -> EventHandlerNonNull
+  set_onclose(Self, EventHandlerNonNull) -> Unit
+  title(Self) -> String
+  dir(Self) -> NotificationDirection
+  lang(Self) -> String
+  body(Self) -> String
+  navigate(Self) -> String
+  tag(Self) -> String
+  image(Self) -> String
+  icon(Self) -> String
+  badge(Self) -> String
+  vibrate(Self) -> JsValue
+  timestamp(Self) -> UInt64
+  renotify(Self) -> Bool
+  silent(Self) -> Bool
+  require_interaction(Self) -> Bool
+  data(Self) -> JsValue
+  actions(Self) -> JsValue
+  close(Self) -> Unit
 }
 
 pub trait TOffscreenCanvas : TEventTarget {
@@ -9730,6 +9995,29 @@ pub trait TText : TCharacterData {
   convert_point_from_node(Self, DOMPointInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
 }
 
+pub trait TTextDecoder : TJsValue {
+  decode(Self, input? : AllowSharedBufferSource, options? : TextDecodeOptions) -> String
+  encoding(Self) -> String
+  fatal(Self) -> Bool
+  ignore_bom(Self) -> Bool
+}
+
+pub trait TTextDecoderStream : TJsValue {
+  encoding(Self) -> String
+  fatal(Self) -> Bool
+  ignore_bom(Self) -> Bool
+}
+
+pub trait TTextEncoder : TJsValue {
+  encode(Self, input? : String) -> Uint8Array
+  encode_into(Self, String, Uint8Array) -> TextEncoderEncodeIntoResult
+  encoding(Self) -> String
+}
+
+pub trait TTextEncoderStream : TJsValue {
+  encoding(Self) -> String
+}
+
 pub trait TTextEvent : TUIEvent {
   data(Self) -> String
   init_text_event(Self, String, bubbles? : Bool, cancelable? : Bool, view? : &TWindow, data? : String) -> Unit
@@ -9986,6 +10274,12 @@ pub trait TValidityState : TJsValue {
   valid(Self) -> Bool
 }
 
+pub(open) trait TVibratePattern {
+  to_js(Self) -> JsValue
+}
+pub impl TVibratePattern for UInt
+pub impl TVibratePattern for Array[UInt]
+
 pub trait TVideoTrack : TJsValue {
   id(Self) -> String
   kind(Self) -> String
@@ -10030,6 +10324,37 @@ pub trait TVisualViewport : TEventTarget {
   onscrollend(Self) -> EventHandlerNonNull
   set_onscrollend(Self, EventHandlerNonNull) -> Unit
 }
+
+pub trait TWebSocket : TEventTarget {
+  url(Self) -> String
+  ready_state(Self) -> UInt
+  buffered_amount(Self) -> UInt64
+  onopen(Self) -> EventHandlerNonNull
+  set_onopen(Self, EventHandlerNonNull) -> Unit
+  onerror(Self) -> EventHandlerNonNull
+  set_onerror(Self, EventHandlerNonNull) -> Unit
+  onclose(Self) -> EventHandlerNonNull
+  set_onclose(Self, EventHandlerNonNull) -> Unit
+  extensions(Self) -> String
+  protocol(Self) -> String
+  close(Self, code? : UInt, reason? : String) -> Unit
+  onmessage(Self) -> EventHandlerNonNull
+  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  binary_type(Self) -> BinaryType
+  set_binary_type(Self, BinaryType) -> Unit
+  send(Self, &TWebSocketSendData) -> Unit
+}
+
+pub(open) trait TWebSocketNewProtocols {
+  to_js(Self) -> JsValue
+}
+pub impl TWebSocketNewProtocols for String
+pub impl TWebSocketNewProtocols for Array[String]
+
+pub(open) trait TWebSocketSendData {
+  to_js(Self) -> JsValue
+}
+pub impl TWebSocketSendData for String
 
 pub trait TWheelEvent : TMouseEvent {
   delta_x(Self) -> Double
