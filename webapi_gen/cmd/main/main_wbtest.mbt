@@ -19,7 +19,7 @@ test "filter_idl with empty config returns all types" {
       #|
     ),
   )
-  let filtered = filter_idl(config, defs, ignore)
+  let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -59,7 +59,7 @@ test "filter_idl filters interfaces by whitelist" {
       #|
     ),
   )
-  let filtered = filter_idl(config, defs, ignore)
+  let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -87,7 +87,7 @@ test "filter_idl excludes callbacks" {
       #|
     ),
   )
-  let filtered = filter_idl(config, defs, ignore)
+  let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -133,7 +133,7 @@ test "filter_idl excludes typedefs" {
       #|
     ),
   )
-  let filtered = filter_idl(config, defs, ignore)
+  let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
     {
       "extended_attributes": [],
@@ -165,7 +165,7 @@ test "filter_idl excludes dictionaries by prefix" {
       #|
     ),
   )
-  let filtered = filter_idl(config, defs, ignore)
+  let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
     {
       "extended_attributes": [],

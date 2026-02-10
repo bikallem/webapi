@@ -107,7 +107,6 @@ fn PartialMerged::merge_namespace(
 /// Merges partial definitions from filtered IDL definitions
 pub fn merge_partials(
   filtered : Array[@parser.DefinitionExtendedAttributes],
-  logger? : (String) -> Unit = ignore,
 ) -> PartialMerged {
   let partial_merged = PartialMerged::{
     interfaces: Map::new(),

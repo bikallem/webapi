@@ -310,9 +310,7 @@ fn render_callback_wasm(
 
 ///|
 fn render_namespace_definition_shared(ns_def : NamespaceDef) -> String {
-  ns_def.methods
-  .map(meth => meth.impl_emit().0)
-  .join("\n\n")
+  ns_def.methods.map(meth => meth.impl_emit().0).join("\n\n")
 }
 
 ///|
@@ -323,9 +321,7 @@ fn render_namespace_definition_js_ffi(ns_def : NamespaceDef) -> String {
 ///|
 fn render_namespace_definition_wasm_ffi(ns_def : NamespaceDef) -> String {
   let module_name = "webapi_\{ns_def.name}"
-  ns_def.methods
-  .map(meth => meth.ffi_emit_wasm(module_name).0)
-  .join("\n\n")
+  ns_def.methods.map(meth => meth.ffi_emit_wasm(module_name).0).join("\n\n")
 }
 
 ///|

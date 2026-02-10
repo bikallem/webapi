@@ -9,7 +9,60 @@ test "PartialMergeVisitor merges interface and partial interface" {
     #|};    
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
-  json_inspect(partial_merged, content=({"interfaces":{"MyInterface":{"name":"MyInterface","members":[{"extended_attributes":[],"interface_member":["Attribute",{"type_":["Nullable","DOMString"],"name":"textContent","is_readonly":false,"static_":false,"is_inherit":false}]},{"extended_attributes":[],"interface_member":["RegularOperation",{"return_type":["Identifier","Node"],"name":"appendChild","arguments":[{"extended_attributes":[],"type_":{"extended_attributes":[],"type_":["Identifier","Element"]},"name":"newChild","optional":false,"variadic":false}],"static_":false}]}],"specs":[]}},"mixins":{},"dictionaries":{},"namespaces":{},"enums":{},"typedefs":{},"callback_functions":{},"callback_interfaces":{},"include_statements":[]}))
+  json_inspect(partial_merged, content={
+    "interfaces": {
+      "MyInterface": {
+        "name": "MyInterface",
+        "members": [
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": ["Nullable", "DOMString"],
+                "name": "textContent",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false,
+              },
+            ],
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "RegularOperation",
+              {
+                "return_type": ["Identifier", "Node"],
+                "name": "appendChild",
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": ["Identifier", "Element"],
+                    },
+                    "name": "newChild",
+                    "optional": false,
+                    "variadic": false,
+                  },
+                ],
+                "static_": false,
+              },
+            ],
+          },
+        ],
+        "specs": [],
+      },
+    },
+    "mixins": {},
+    "dictionaries": {},
+    "namespaces": {},
+    "enums": {},
+    "typedefs": {},
+    "callback_functions": {},
+    "callback_interfaces": {},
+    "include_statements": [],
+  })
 }
 
 ///|
@@ -163,5 +216,156 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
     #|MyInterface includes MyMixin;
   let defs = @parser.parse(widl)
   let partial_merged = merge_partials(defs)
-  json_inspect(partial_merged, content=({"interfaces":{"MyInterface":{"name":"MyInterface","members":[{"extended_attributes":[],"interface_member":["Attribute",{"type_":["Nullable","DOMString"],"name":"textContent","is_readonly":false,"static_":false,"is_inherit":false}]},{"extended_attributes":[],"interface_member":["RegularOperation",{"return_type":["Identifier","Node"],"name":"appendChild","arguments":[{"extended_attributes":[],"type_":{"extended_attributes":[],"type_":["Identifier","Element"]},"name":"newChild","optional":false,"variadic":false}],"static_":false}]}],"specs":[]}},"mixins":{"MyMixin":{"name":"MyMixin","members":[{"extended_attributes":[],"interface_member":["Attribute",{"type_":["Nullable","DOMString"],"name":"textContent2","is_readonly":false,"static_":false,"is_inherit":false}]},{"extended_attributes":[],"interface_member":["RegularOperation",{"return_type":"Undefined","name":"doSomething","arguments":[],"static_":false}]}],"specs":[]}},"dictionaries":{"EventInit":{"name":"EventInit","members":[{"extended_attributes":[],"type_":"DOMString","name":"type","required":true},{"extended_attributes":[],"type_":"Boolean","name":"bubbles","required":false,"default_value":["ConstValue",["Boolean","false"]]}],"inheritance":"Event","specs":[]}},"namespaces":{},"enums":{"MyEnum":{"name":"MyEnum","values":["value1","value2"]}},"typedefs":{},"callback_functions":{"MyCallback":{"name":"MyCallback","return_type":"Undefined","arguments":[{"extended_attributes":[],"type_":{"extended_attributes":[],"type_":"DOMString"},"name":"arg","optional":false,"variadic":false}]}},"callback_interfaces":{"MyCallbackInterface":{"name":"MyCallbackInterface","members":[{"extended_attributes":[],"callback_interface_member":["Operation",{"return_type":"Undefined","name":"onEvent","arguments":[{"extended_attributes":[],"type_":{"extended_attributes":[],"type_":["Identifier","Event"]},"name":"e","optional":false,"variadic":false}],"static_":false}]}]}},"include_statements":[{"interface_name":"MyInterface","mixin_name":"MyMixin"}]}))
+  json_inspect(partial_merged, content={
+    "interfaces": {
+      "MyInterface": {
+        "name": "MyInterface",
+        "members": [
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": ["Nullable", "DOMString"],
+                "name": "textContent",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false,
+              },
+            ],
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "RegularOperation",
+              {
+                "return_type": ["Identifier", "Node"],
+                "name": "appendChild",
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": ["Identifier", "Element"],
+                    },
+                    "name": "newChild",
+                    "optional": false,
+                    "variadic": false,
+                  },
+                ],
+                "static_": false,
+              },
+            ],
+          },
+        ],
+        "specs": [],
+      },
+    },
+    "mixins": {
+      "MyMixin": {
+        "name": "MyMixin",
+        "members": [
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "Attribute",
+              {
+                "type_": ["Nullable", "DOMString"],
+                "name": "textContent2",
+                "is_readonly": false,
+                "static_": false,
+                "is_inherit": false,
+              },
+            ],
+          },
+          {
+            "extended_attributes": [],
+            "interface_member": [
+              "RegularOperation",
+              {
+                "return_type": "Undefined",
+                "name": "doSomething",
+                "arguments": [],
+                "static_": false,
+              },
+            ],
+          },
+        ],
+        "specs": [],
+      },
+    },
+    "dictionaries": {
+      "EventInit": {
+        "name": "EventInit",
+        "members": [
+          {
+            "extended_attributes": [],
+            "type_": "DOMString",
+            "name": "type",
+            "required": true,
+          },
+          {
+            "extended_attributes": [],
+            "type_": "Boolean",
+            "name": "bubbles",
+            "required": false,
+            "default_value": ["ConstValue", ["Boolean", "false"]],
+          },
+        ],
+        "inheritance": "Event",
+        "specs": [],
+      },
+    },
+    "namespaces": {},
+    "enums": { "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"] } },
+    "typedefs": {},
+    "callback_functions": {
+      "MyCallback": {
+        "name": "MyCallback",
+        "return_type": "Undefined",
+        "arguments": [
+          {
+            "extended_attributes": [],
+            "type_": { "extended_attributes": [], "type_": "DOMString" },
+            "name": "arg",
+            "optional": false,
+            "variadic": false,
+          },
+        ],
+      },
+    },
+    "callback_interfaces": {
+      "MyCallbackInterface": {
+        "name": "MyCallbackInterface",
+        "members": [
+          {
+            "extended_attributes": [],
+            "callback_interface_member": [
+              "Operation",
+              {
+                "return_type": "Undefined",
+                "name": "onEvent",
+                "arguments": [
+                  {
+                    "extended_attributes": [],
+                    "type_": {
+                      "extended_attributes": [],
+                      "type_": ["Identifier", "Event"],
+                    },
+                    "name": "e",
+                    "optional": false,
+                    "variadic": false,
+                  },
+                ],
+                "static_": false,
+              },
+            ],
+          },
+        ],
+      },
+    },
+    "include_statements": [
+      { "interface_name": "MyInterface", "mixin_name": "MyMixin" },
+    ],
+  })
 }

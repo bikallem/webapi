@@ -80,9 +80,11 @@ pub impl Emitter for NamespaceEmitter with emit(
       }
     }
   }
-  emits.push(Emit::NamespaceDefinition(NamespaceDef::{
-    name: ns.name,
-    methods: namespace_methods,
-  }))
+  emits.push(
+    Emit::NamespaceDefinition(NamespaceDef::{
+      name: ns.name,
+      methods: namespace_methods,
+    }),
+  )
   (filename, emits)
 }

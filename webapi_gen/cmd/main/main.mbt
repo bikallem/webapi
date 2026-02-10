@@ -100,7 +100,6 @@ fn[E : @emit.Emitter] emit_and_write_multi(
 fn filter_idl(
   config : @config.Config,
   defns : Array[@parser.DefinitionExtendedAttributes],
-  logger : (String) -> Unit,
 ) -> Array[@parser.DefinitionExtendedAttributes] {
   let core_interfaces = config.excluded_interfaces
   let excluded_callbacks = config.excluded_callbacks
@@ -218,7 +217,7 @@ fn main {
     for idl_path in idl_paths {
       println("  Parsing \{idl_path}...")
       let definitions = @parser.parse_file(idl_path)
-      let definitions = filter_idl(config, definitions, log_skipped)
+      let definitions = filter_idl(config, definitions)
       println("    Parsed \{definitions.length()} definitions")
       all_definitions.append(definitions)
     }

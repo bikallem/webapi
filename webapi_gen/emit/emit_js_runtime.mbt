@@ -386,7 +386,8 @@ fn emit_js_namespace_module(
           emit_js_namespace_method(import_name, ns.name, op.name, op.arguments),
         )
       }
-      Attribute(attr) => entries.push(emit_js_namespace_getter(ns.name, attr.name))
+      Attribute(attr) =>
+        entries.push(emit_js_namespace_getter(ns.name, attr.name))
       Const(_) => continue // Constants don't need JS runtime entries
     }
   }
