@@ -9,6 +9,6 @@
   "source": "src",
   "preferred-target": "js",
   "deps": {
-    "moonbitlang/async": "0.16.6"
+    "moonbitlang/async": "0.16.5"
   }
 }
