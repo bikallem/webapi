@@ -61,3 +61,6 @@ fn shadow_root_set_adopted_style_sheets_ffi(
   obj : JsValue,
   adopted_style_sheets : JsValue,
 ) -> Unit = "webapi_ShadowRoot" "set_adoptedStyleSheets"
+
+///|
+fn shadow_root_fullscreen_element_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot" "get_fullscreenElement"

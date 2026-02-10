@@ -1,6 +1,5 @@
 ///|
-/// RequestIdleCallback Demo - schedules work during browser idle periods,
-/// displays timeRemaining() and didTimeout from IdleDeadline.
+/// RequestIdleCallback Demo - schedules work during browser idle periods
 
 ///|
 extern "js" fn request_idle_callback(callback : @webapi.Function) -> Int =
@@ -61,12 +60,7 @@ fn main {
         let remaining = get_time_remaining(deadline)
         let did_timeout = get_did_timeout(deadline)
         status_div.set_text_content("Callback fired!")
-        time_div.set_text_content(
-          "timeRemaining: "
-          + remaining.to_string()
-          + "ms | didTimeout: "
-          + did_timeout.to_string(),
-        )
+        time_div.set_text_content("timeRemaining: \{remaining}ms | didTimeout: \{did_timeout}")
         @webapi.JsValue::undefined()
       })
       request_idle_callback(callback) |> ignore

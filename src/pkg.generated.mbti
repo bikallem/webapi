@@ -2423,6 +2423,23 @@ pub impl THistory for History
 pub impl TJsValue for History
 
 #external
+pub type IdleDeadline
+pub fn[T : TIdleDeadline] IdleDeadline::into(Self) -> T
+pub impl TIdleDeadline for IdleDeadline
+pub impl TJsValue for IdleDeadline
+
+#external
+pub type IdleRequestCallback
+pub fn IdleRequestCallback::new((IdleDeadline) -> Unit) -> Self
+pub impl TJsValue for IdleRequestCallback
+
+#external
+pub type IdleRequestOptions
+pub fn IdleRequestOptions::empty() -> Self
+pub fn IdleRequestOptions::new(timeout? : UInt) -> Self
+pub impl TJsValue for IdleRequestOptions
+
+#external
 pub type ImageBitmap
 pub fn[T : TImageBitmap] ImageBitmap::into(Self) -> T
 pub impl TCanvasImageSource for ImageBitmap
@@ -7690,6 +7707,11 @@ pub trait THistory : TJsValue {
   replace_state(Self, JsValue, String, url? : String) -> Unit
 }
 
+pub trait TIdleDeadline : TJsValue {
+  time_remaining(Self) -> Double
+  did_timeout(Self) -> Bool
+}
+
 pub trait TImageBitmap : TJsValue {
   width(Self) -> UInt
   height(Self) -> UInt
@@ -9604,6 +9626,8 @@ pub trait TWindow : TEventTarget {
   outer_width(Self) -> Int
   outer_height(Self) -> Int
   device_pixel_ratio(Self) -> Double
+  request_idle_callback(Self, IdleRequestCallback, options? : IdleRequestOptions) -> UInt
+  cancel_idle_callback(Self, UInt) -> Unit
   onabort(Self) -> EventHandlerNonNull
   set_onabort(Self, EventHandlerNonNull) -> Unit
   onauxclick(Self) -> EventHandlerNonNull

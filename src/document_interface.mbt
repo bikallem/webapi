@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Document
-// Specifications: cssom-view.idl, SVG.idl, dom.idl, html.idl
+// Specifications: html.idl, SVG.idl, fullscreen.idl, dom.idl, cssom-view.idl
 
 ///|
 /// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)
@@ -270,12 +270,20 @@ pub trait TDocument: TNode {
     options? : CaretPositionFromPointOptions,
   ) -> CaretPosition? = _
   scrolling_element(self : Self) -> Element = _
+  fullscreen_enabled(self : Self) -> Bool = _
+  fullscreen(self : Self) -> Bool = _
+  exit_fullscreen(self : Self) -> @js_async.Promise[Unit] = _
+  onfullscreenchange(self : Self) -> EventHandler = _
+  set_onfullscreenchange(self : Self, onfullscreenchange : EventHandler) -> Unit = _
+  onfullscreenerror(self : Self) -> EventHandler = _
+  set_onfullscreenerror(self : Self, onfullscreenerror : EventHandler) -> Unit = _
   get_element_by_id(self : Self, element_id : String) -> Element? = _
   custom_element_registry(self : Self) -> CustomElementRegistry = _
   active_element(self : Self) -> Element = _
   style_sheets(self : Self) -> StyleSheetList = _
   adopted_style_sheets(self : Self) -> JsValue = _
   set_adopted_style_sheets(self : Self, adopted_style_sheets : JsValue) -> Unit = _
+  fullscreen_element(self : Self) -> Element = _
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
@@ -1256,6 +1264,60 @@ impl TDocument with scrolling_element(self : Self) -> Element {
 }
 
 ///|
+/// [Document.fullscreenEnabled](https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenEnabled)
+impl TDocument with fullscreen_enabled(self : Self) -> Bool {
+  document_fullscreen_enabled_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.fullscreen](https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreen)
+impl TDocument with fullscreen(self : Self) -> Bool {
+  document_fullscreen_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.exitFullscreen](https://developer.mozilla.org/en-US/docs/Web/API/Document/exitFullscreen)
+impl TDocument with exit_fullscreen(self : Self) -> @js_async.Promise[Unit] {
+  document_exit_fullscreen_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.onfullscreenchange](https://developer.mozilla.org/en-US/docs/Web/API/Document/onfullscreenchange)
+impl TDocument with onfullscreenchange(self : Self) -> EventHandler {
+  document_onfullscreenchange_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.onfullscreenchange](https://developer.mozilla.org/en-US/docs/Web/API/Document/onfullscreenchange)
+impl TDocument with set_onfullscreenchange(
+  self : Self,
+  onfullscreenchange : EventHandler,
+) -> Unit {
+  document_set_onfullscreenchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onfullscreenchange),
+  )
+}
+
+///|
+/// [Document.onfullscreenerror](https://developer.mozilla.org/en-US/docs/Web/API/Document/onfullscreenerror)
+impl TDocument with onfullscreenerror(self : Self) -> EventHandler {
+  document_onfullscreenerror_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.onfullscreenerror](https://developer.mozilla.org/en-US/docs/Web/API/Document/onfullscreenerror)
+impl TDocument with set_onfullscreenerror(
+  self : Self,
+  onfullscreenerror : EventHandler,
+) -> Unit {
+  document_set_onfullscreenerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(onfullscreenerror),
+  )
+}
+
+///|
 /// [Document.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)
 impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
   let result = document_get_element_by_id_ffi(
@@ -1303,6 +1365,12 @@ impl TDocument with set_adopted_style_sheets(
     TJsValue::to_js(self),
     TJsValue::to_js(adopted_style_sheets),
   )
+}
+
+///|
+/// [Document.fullscreenElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement)
+impl TDocument with fullscreen_element(self : Self) -> Element {
+  document_fullscreen_element_ffi(TJsValue::to_js(self))
 }
 
 ///|

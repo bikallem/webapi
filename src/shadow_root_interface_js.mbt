@@ -134,3 +134,11 @@ extern "js" fn shadow_root_set_adopted_style_sheets_ffi(
   obj : JsValue,
   adopted_style_sheets : JsValue,
 ) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adoptedStyleSheets; }"
+
+///|
+extern "js" fn shadow_root_fullscreen_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fullscreenElement"
+
+///|
+fn shadow_root_fullscreen_element_ffi(obj : JsValue) -> Element {
+  shadow_root_fullscreen_element_ffi_js(obj).unsafe_cast()
+}

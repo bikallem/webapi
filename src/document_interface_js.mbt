@@ -852,6 +852,58 @@ fn document_scrolling_element_ffi(obj : JsValue) -> Element {
 }
 
 ///|
+extern "js" fn document_fullscreen_enabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fullscreenEnabled"
+
+///|
+fn document_fullscreen_enabled_ffi(obj : JsValue) -> Bool {
+  document_fullscreen_enabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_fullscreen_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fullscreen"
+
+///|
+fn document_fullscreen_ffi(obj : JsValue) -> Bool {
+  document_fullscreen_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_exit_fullscreen_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.exitFullscreen()"
+
+///|
+fn document_exit_fullscreen_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
+  document_exit_fullscreen_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_onfullscreenchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenchange"
+
+///|
+fn document_onfullscreenchange_ffi(obj : JsValue) -> EventHandler {
+  document_onfullscreenchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onfullscreenchange_ffi(
+  obj : JsValue,
+  onfullscreenchange : JsValue,
+) -> Unit = "(obj, onfullscreenchange) => { obj.onfullscreenchange = onfullscreenchange; }"
+
+///|
+extern "js" fn document_onfullscreenerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenerror"
+
+///|
+fn document_onfullscreenerror_ffi(obj : JsValue) -> EventHandler {
+  document_onfullscreenerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_onfullscreenerror_ffi(
+  obj : JsValue,
+  onfullscreenerror : JsValue,
+) -> Unit = "(obj, onfullscreenerror) => { obj.onfullscreenerror = onfullscreenerror; }"
+
+///|
 extern "js" fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
@@ -896,6 +948,14 @@ extern "js" fn document_set_adopted_style_sheets_ffi(
   obj : JsValue,
   adopted_style_sheets : JsValue,
 ) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adoptedStyleSheets; }"
+
+///|
+extern "js" fn document_fullscreen_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fullscreenElement"
+
+///|
+fn document_fullscreen_element_ffi(obj : JsValue) -> Element {
+  document_fullscreen_element_ffi_js(obj).unsafe_cast()
+}
 
 ///|
 extern "js" fn document_children_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.children"

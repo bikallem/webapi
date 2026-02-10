@@ -379,6 +379,38 @@ fn element_client_height_ffi(obj : JsValue) -> Int = "webapi_Element" "get_clien
 fn element_current_css_zoom_ffi(obj : JsValue) -> Double = "webapi_Element" "get_currentCSSZoom"
 
 ///|
+fn element_request_fullscreen_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "requestFullscreen"
+
+///|
+fn element_request_fullscreen_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
+  element_request_fullscreen_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler = "webapi_Element" "get_onfullscreenchange"
+
+///|
+fn element_set_onfullscreenchange_ffi(
+  obj : JsValue,
+  onfullscreenchange : JsValue,
+) -> Unit = "webapi_Element" "set_onfullscreenchange"
+
+///|
+fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler = "webapi_Element" "get_onfullscreenerror"
+
+///|
+fn element_set_onfullscreenerror_ffi(
+  obj : JsValue,
+  onfullscreenerror : JsValue,
+) -> Unit = "webapi_Element" "set_onfullscreenerror"
+
+///|
 fn element_children_ffi(obj : JsValue) -> HTMLCollection = "webapi_Element" "get_children"
 
 ///|

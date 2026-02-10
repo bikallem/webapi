@@ -23,6 +23,7 @@ core_specs = [
     "webidl",
     "xhr",
     "requestidlecallback",
+    "fullscreen",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]

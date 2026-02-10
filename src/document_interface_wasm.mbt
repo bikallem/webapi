@@ -494,6 +494,38 @@ fn document_caret_position_from_point_ffi(
 fn document_scrolling_element_ffi(obj : JsValue) -> Element = "webapi_Document" "get_scrollingElement"
 
 ///|
+fn document_fullscreen_enabled_ffi(obj : JsValue) -> Bool = "webapi_Document" "get_fullscreenEnabled"
+
+///|
+fn document_fullscreen_ffi(obj : JsValue) -> Bool = "webapi_Document" "get_fullscreen"
+
+///|
+fn document_exit_fullscreen_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Document" "exitFullscreen"
+
+///|
+fn document_exit_fullscreen_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
+  document_exit_fullscreen_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+fn document_onfullscreenchange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onfullscreenchange"
+
+///|
+fn document_set_onfullscreenchange_ffi(
+  obj : JsValue,
+  onfullscreenchange : JsValue,
+) -> Unit = "webapi_Document" "set_onfullscreenchange"
+
+///|
+fn document_onfullscreenerror_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onfullscreenerror"
+
+///|
+fn document_set_onfullscreenerror_ffi(
+  obj : JsValue,
+  onfullscreenerror : JsValue,
+) -> Unit = "webapi_Document" "set_onfullscreenerror"
+
+///|
 fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
@@ -516,6 +548,9 @@ fn document_set_adopted_style_sheets_ffi(
   obj : JsValue,
   adopted_style_sheets : JsValue,
 ) -> Unit = "webapi_Document" "set_adoptedStyleSheets"
+
+///|
+fn document_fullscreen_element_ffi(obj : JsValue) -> Element = "webapi_Document" "get_fullscreenElement"
 
 ///|
 fn document_children_ffi(obj : JsValue) -> HTMLCollection = "webapi_Document" "get_children"

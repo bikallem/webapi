@@ -84,6 +84,7 @@ pub trait TShadowRoot: TDocumentFragment {
   style_sheets(self : Self) -> StyleSheetList = _
   adopted_style_sheets(self : Self) -> JsValue = _
   set_adopted_style_sheets(self : Self, adopted_style_sheets : JsValue) -> Unit = _
+  fullscreen_element(self : Self) -> Element = _
 }
 
 ///|
@@ -204,4 +205,10 @@ impl TShadowRoot with set_adopted_style_sheets(
     TJsValue::to_js(self),
     TJsValue::to_js(adopted_style_sheets),
   )
+}
+
+///|
+/// [ShadowRoot.fullscreenElement](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/fullscreenElement)
+impl TShadowRoot with fullscreen_element(self : Self) -> Element {
+  shadow_root_fullscreen_element_ffi(TJsValue::to_js(self))
 }

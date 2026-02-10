@@ -604,6 +604,48 @@ fn element_current_css_zoom_ffi(obj : JsValue) -> Double {
 }
 
 ///|
+extern "js" fn element_request_fullscreen_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.requestFullscreen(options)"
+
+///|
+fn element_request_fullscreen_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> @js_async.Promise[Unit] {
+  element_request_fullscreen_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+extern "js" fn element_onfullscreenchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenchange"
+
+///|
+fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn element_set_onfullscreenchange_ffi(
+  obj : JsValue,
+  onfullscreenchange : JsValue,
+) -> Unit = "(obj, onfullscreenchange) => { obj.onfullscreenchange = onfullscreenchange; }"
+
+///|
+extern "js" fn element_onfullscreenerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenerror"
+
+///|
+fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn element_set_onfullscreenerror_ffi(
+  obj : JsValue,
+  onfullscreenerror : JsValue,
+) -> Unit = "(obj, onfullscreenerror) => { obj.onfullscreenerror = onfullscreenerror; }"
+
+///|
 extern "js" fn element_children_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.children"
 
 ///|

@@ -227,6 +227,8 @@ options(
     "form_data_interface_wasm.mbt": [ "wasm-gc" ],
     "frame_request_callback_callback_js.mbt": [ "js" ],
     "frame_request_callback_callback_wasm.mbt": [ "wasm-gc" ],
+    "fullscreen_options_dictionary_js.mbt": [ "js" ],
+    "fullscreen_options_dictionary_wasm.mbt": [ "wasm-gc" ],
     "function_callback_js.mbt": [ "js" ],
     "function_callback_wasm.mbt": [ "wasm-gc" ],
     "function_string_callback_callback_js.mbt": [ "js" ],

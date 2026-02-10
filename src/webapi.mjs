@@ -412,11 +412,18 @@ export const wasmImportObject = {
     get_applets: (obj) => obj.applets,
     get_all: (obj) => obj.all,
     get_scrollingElement: (obj) => obj.scrollingElement,
+    get_fullscreenEnabled: (obj) => obj.fullscreenEnabled,
+    get_fullscreen: (obj) => obj.fullscreen,
+    get_onfullscreenchange: (obj) => obj.onfullscreenchange,
+    set_onfullscreenchange: (obj, value) => { obj.onfullscreenchange = value; },
+    get_onfullscreenerror: (obj) => obj.onfullscreenerror,
+    set_onfullscreenerror: (obj, value) => { obj.onfullscreenerror = value; },
     get_customElementRegistry: (obj) => obj.customElementRegistry,
     get_activeElement: (obj) => obj.activeElement,
     get_styleSheets: (obj) => obj.styleSheets,
     get_adoptedStyleSheets: (obj) => obj.adoptedStyleSheets,
     set_adoptedStyleSheets: (obj, value) => { obj.adoptedStyleSheets = value; },
+    get_fullscreenElement: (obj) => obj.fullscreenElement,
     get_children: (obj) => obj.children,
     get_firstElementChild: (obj) => obj.firstElementChild,
     get_lastElementChild: (obj) => obj.lastElementChild,
@@ -612,6 +619,7 @@ export const wasmImportObject = {
     elementFromPoint: (obj, x, y) => obj.elementFromPoint(x, y),
     elementsFromPoint: (obj, x, y) => obj.elementsFromPoint(x, y),
     caretPositionFromPoint: (obj, x, y, options) => obj.caretPositionFromPoint(x, y, options),
+    exitFullscreen: (obj) => obj.exitFullscreen(),
     getElementById: (obj, element_id) => obj.getElementById(element_id),
     prepend: (obj, nodes) => obj.prepend(...nodes),
     append: (obj, nodes) => obj.append(...nodes),
@@ -1453,6 +1461,7 @@ export const wasmImportObject = {
     get_styleSheets: (obj) => obj.styleSheets,
     get_adoptedStyleSheets: (obj) => obj.adoptedStyleSheets,
     set_adoptedStyleSheets: (obj, value) => { obj.adoptedStyleSheets = value; },
+    get_fullscreenElement: (obj) => obj.fullscreenElement,
     setHTMLUnsafe: (obj, html) => obj.setHTMLUnsafe(html),
     getHTML: (obj, options) => obj.getHTML(options)
   },
@@ -1487,6 +1496,10 @@ export const wasmImportObject = {
     get_clientWidth: (obj) => obj.clientWidth,
     get_clientHeight: (obj) => obj.clientHeight,
     get_currentCSSZoom: (obj) => obj.currentCSSZoom,
+    get_onfullscreenchange: (obj) => obj.onfullscreenchange,
+    set_onfullscreenchange: (obj, value) => { obj.onfullscreenchange = value; },
+    get_onfullscreenerror: (obj) => obj.onfullscreenerror,
+    set_onfullscreenerror: (obj, value) => { obj.onfullscreenerror = value; },
     get_children: (obj) => obj.children,
     get_firstElementChild: (obj) => obj.firstElementChild,
     get_lastElementChild: (obj) => obj.lastElementChild,
@@ -1532,6 +1545,7 @@ export const wasmImportObject = {
     scrollTo_2: (obj, x, y) => obj.scrollTo(x, y),
     scrollBy: (obj, options) => obj.scrollBy(options),
     scrollBy_2: (obj, x, y) => obj.scrollBy(x, y),
+    requestFullscreen: (obj, options) => obj.requestFullscreen(options),
     prepend: (obj, nodes) => obj.prepend(...nodes),
     append: (obj, nodes) => obj.append(...nodes),
     replaceChildren: (obj, nodes) => obj.replaceChildren(...nodes),
@@ -6098,6 +6112,14 @@ export const wasmImportObject = {
       const obj = {};
       if (fromBox !== undefined) obj.fromBox = fromBox;
       if (toBox !== undefined) obj.toBox = toBox;
+      return obj;
+    }
+  },
+
+  webapi_FullscreenOptions: {
+    new: (navigationUI) => {
+      const obj = {};
+      if (navigationUI !== undefined) obj.navigationUI = navigationUI;
       return obj;
     }
   },
