@@ -1117,6 +1117,33 @@ fn document_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_
 fn document_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Document" "set_onwheel"
 
 ///|
+fn document_ontouchstart_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchstart"
+
+///|
+fn document_set_ontouchstart_ffi(obj : JsValue, ontouchstart : JsValue) -> Unit = "webapi_Document" "set_ontouchstart"
+
+///|
+fn document_ontouchend_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchend"
+
+///|
+fn document_set_ontouchend_ffi(obj : JsValue, ontouchend : JsValue) -> Unit = "webapi_Document" "set_ontouchend"
+
+///|
+fn document_ontouchmove_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchmove"
+
+///|
+fn document_set_ontouchmove_ffi(obj : JsValue, ontouchmove : JsValue) -> Unit = "webapi_Document" "set_ontouchmove"
+
+///|
+fn document_ontouchcancel_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchcancel"
+
+///|
+fn document_set_ontouchcancel_ffi(
+  obj : JsValue,
+  ontouchcancel : JsValue,
+) -> Unit = "webapi_Document" "set_ontouchcancel"
+
+///|
 fn document_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerover"
 
 ///|

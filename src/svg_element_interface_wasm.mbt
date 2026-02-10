@@ -554,6 +554,39 @@ fn svg_element_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" 
 fn svg_element_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_SVGElement" "set_onwheel"
 
 ///|
+fn svg_element_ontouchstart_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_ontouchstart"
+
+///|
+fn svg_element_set_ontouchstart_ffi(
+  obj : JsValue,
+  ontouchstart : JsValue,
+) -> Unit = "webapi_SVGElement" "set_ontouchstart"
+
+///|
+fn svg_element_ontouchend_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_ontouchend"
+
+///|
+fn svg_element_set_ontouchend_ffi(obj : JsValue, ontouchend : JsValue) -> Unit = "webapi_SVGElement" "set_ontouchend"
+
+///|
+fn svg_element_ontouchmove_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_ontouchmove"
+
+///|
+fn svg_element_set_ontouchmove_ffi(
+  obj : JsValue,
+  ontouchmove : JsValue,
+) -> Unit = "webapi_SVGElement" "set_ontouchmove"
+
+///|
+fn svg_element_ontouchcancel_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_ontouchcancel"
+
+///|
+fn svg_element_set_ontouchcancel_ffi(
+  obj : JsValue,
+  ontouchcancel : JsValue,
+) -> Unit = "webapi_SVGElement" "set_ontouchcancel"
+
+///|
 fn svg_element_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_SVGElement" "get_onpointerover"
 
 ///|

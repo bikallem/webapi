@@ -285,6 +285,14 @@ pub trait THTMLElement: TElement {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  ontouchstart(self : Self) -> EventHandler = _
+  set_ontouchstart(self : Self, ontouchstart : EventHandler) -> Unit = _
+  ontouchend(self : Self) -> EventHandler = _
+  set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit = _
+  ontouchmove(self : Self) -> EventHandler = _
+  set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit = _
+  ontouchcancel(self : Self) -> EventHandler = _
+  set_ontouchcancel(self : Self, ontouchcancel : EventHandler) -> Unit = _
   onpointerover(self : Self) -> EventHandler = _
   set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit = _
   onpointerenter(self : Self) -> EventHandler = _
@@ -1792,6 +1800,72 @@ impl THTMLElement with onwheel(self : Self) -> EventHandler {
 /// [HTMLElement.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onwheel)
 impl THTMLElement with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   html_element_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [HTMLElement.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchstart)
+impl THTMLElement with ontouchstart(self : Self) -> EventHandler {
+  html_element_ontouchstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchstart)
+impl THTMLElement with set_ontouchstart(
+  self : Self,
+  ontouchstart : EventHandler,
+) -> Unit {
+  html_element_set_ontouchstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchstart),
+  )
+}
+
+///|
+/// [HTMLElement.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchend)
+impl THTMLElement with ontouchend(self : Self) -> EventHandler {
+  html_element_ontouchend_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchend)
+impl THTMLElement with set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit {
+  html_element_set_ontouchend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchend),
+  )
+}
+
+///|
+/// [HTMLElement.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchmove)
+impl THTMLElement with ontouchmove(self : Self) -> EventHandler {
+  html_element_ontouchmove_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchmove)
+impl THTMLElement with set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit {
+  html_element_set_ontouchmove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchmove),
+  )
+}
+
+///|
+/// [HTMLElement.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchcancel)
+impl THTMLElement with ontouchcancel(self : Self) -> EventHandler {
+  html_element_ontouchcancel_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [HTMLElement.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/ontouchcancel)
+impl THTMLElement with set_ontouchcancel(
+  self : Self,
+  ontouchcancel : EventHandler,
+) -> Unit {
+  html_element_set_ontouchcancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchcancel),
+  )
 }
 
 ///|

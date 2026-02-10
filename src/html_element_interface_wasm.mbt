@@ -751,6 +751,39 @@ fn html_element_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement
 fn html_element_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_HTMLElement" "set_onwheel"
 
 ///|
+fn html_element_ontouchstart_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_ontouchstart"
+
+///|
+fn html_element_set_ontouchstart_ffi(
+  obj : JsValue,
+  ontouchstart : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_ontouchstart"
+
+///|
+fn html_element_ontouchend_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_ontouchend"
+
+///|
+fn html_element_set_ontouchend_ffi(obj : JsValue, ontouchend : JsValue) -> Unit = "webapi_HTMLElement" "set_ontouchend"
+
+///|
+fn html_element_ontouchmove_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_ontouchmove"
+
+///|
+fn html_element_set_ontouchmove_ffi(
+  obj : JsValue,
+  ontouchmove : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_ontouchmove"
+
+///|
+fn html_element_ontouchcancel_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_ontouchcancel"
+
+///|
+fn html_element_set_ontouchcancel_ffi(
+  obj : JsValue,
+  ontouchcancel : JsValue,
+) -> Unit = "webapi_HTMLElement" "set_ontouchcancel"
+
+///|
 fn html_element_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLElement" "get_onpointerover"
 
 ///|

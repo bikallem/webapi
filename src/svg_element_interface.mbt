@@ -189,6 +189,14 @@ pub trait TSVGElement: TElement {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  ontouchstart(self : Self) -> EventHandler = _
+  set_ontouchstart(self : Self, ontouchstart : EventHandler) -> Unit = _
+  ontouchend(self : Self) -> EventHandler = _
+  set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit = _
+  ontouchmove(self : Self) -> EventHandler = _
+  set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit = _
+  ontouchcancel(self : Self) -> EventHandler = _
+  set_ontouchcancel(self : Self, ontouchcancel : EventHandler) -> Unit = _
   onpointerover(self : Self) -> EventHandler = _
   set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit = _
   onpointerenter(self : Self) -> EventHandler = _
@@ -1349,6 +1357,69 @@ impl TSVGElement with onwheel(self : Self) -> EventHandler {
 /// [SVGElement.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwheel)
 impl TSVGElement with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   svg_element_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [SVGElement.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchstart)
+impl TSVGElement with ontouchstart(self : Self) -> EventHandler {
+  svg_element_ontouchstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [SVGElement.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchstart)
+impl TSVGElement with set_ontouchstart(self : Self, ontouchstart : EventHandler) -> Unit {
+  svg_element_set_ontouchstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchstart),
+  )
+}
+
+///|
+/// [SVGElement.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchend)
+impl TSVGElement with ontouchend(self : Self) -> EventHandler {
+  svg_element_ontouchend_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [SVGElement.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchend)
+impl TSVGElement with set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit {
+  svg_element_set_ontouchend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchend),
+  )
+}
+
+///|
+/// [SVGElement.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchmove)
+impl TSVGElement with ontouchmove(self : Self) -> EventHandler {
+  svg_element_ontouchmove_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [SVGElement.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchmove)
+impl TSVGElement with set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit {
+  svg_element_set_ontouchmove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchmove),
+  )
+}
+
+///|
+/// [SVGElement.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchcancel)
+impl TSVGElement with ontouchcancel(self : Self) -> EventHandler {
+  svg_element_ontouchcancel_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [SVGElement.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchcancel)
+impl TSVGElement with set_ontouchcancel(
+  self : Self,
+  ontouchcancel : EventHandler,
+) -> Unit {
+  svg_element_set_ontouchcancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchcancel),
+  )
 }
 
 ///|

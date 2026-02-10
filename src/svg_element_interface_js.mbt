@@ -1097,6 +1097,62 @@ extern "js" fn svg_element_set_onwheel_ffi(
 ) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
 
 ///|
+extern "js" fn svg_element_ontouchstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchstart"
+
+///|
+fn svg_element_ontouchstart_ffi(obj : JsValue) -> EventHandler {
+  svg_element_ontouchstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn svg_element_set_ontouchstart_ffi(
+  obj : JsValue,
+  ontouchstart : JsValue,
+) -> Unit = "(obj, ontouchstart) => { obj.ontouchstart = ontouchstart; }"
+
+///|
+extern "js" fn svg_element_ontouchend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchend"
+
+///|
+fn svg_element_ontouchend_ffi(obj : JsValue) -> EventHandler {
+  svg_element_ontouchend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn svg_element_set_ontouchend_ffi(
+  obj : JsValue,
+  ontouchend : JsValue,
+) -> Unit = "(obj, ontouchend) => { obj.ontouchend = ontouchend; }"
+
+///|
+extern "js" fn svg_element_ontouchmove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchmove"
+
+///|
+fn svg_element_ontouchmove_ffi(obj : JsValue) -> EventHandler {
+  svg_element_ontouchmove_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn svg_element_set_ontouchmove_ffi(
+  obj : JsValue,
+  ontouchmove : JsValue,
+) -> Unit = "(obj, ontouchmove) => { obj.ontouchmove = ontouchmove; }"
+
+///|
+extern "js" fn svg_element_ontouchcancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchcancel"
+
+///|
+fn svg_element_ontouchcancel_ffi(obj : JsValue) -> EventHandler {
+  svg_element_ontouchcancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn svg_element_set_ontouchcancel_ffi(
+  obj : JsValue,
+  ontouchcancel : JsValue,
+) -> Unit = "(obj, ontouchcancel) => { obj.ontouchcancel = ontouchcancel; }"
+
+///|
 extern "js" fn svg_element_onpointerover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerover"
 
 ///|

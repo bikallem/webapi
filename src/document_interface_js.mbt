@@ -2133,6 +2133,62 @@ extern "js" fn document_set_onwheel_ffi(
 ) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
 
 ///|
+extern "js" fn document_ontouchstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchstart"
+
+///|
+fn document_ontouchstart_ffi(obj : JsValue) -> EventHandler {
+  document_ontouchstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_ontouchstart_ffi(
+  obj : JsValue,
+  ontouchstart : JsValue,
+) -> Unit = "(obj, ontouchstart) => { obj.ontouchstart = ontouchstart; }"
+
+///|
+extern "js" fn document_ontouchend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchend"
+
+///|
+fn document_ontouchend_ffi(obj : JsValue) -> EventHandler {
+  document_ontouchend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_ontouchend_ffi(
+  obj : JsValue,
+  ontouchend : JsValue,
+) -> Unit = "(obj, ontouchend) => { obj.ontouchend = ontouchend; }"
+
+///|
+extern "js" fn document_ontouchmove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchmove"
+
+///|
+fn document_ontouchmove_ffi(obj : JsValue) -> EventHandler {
+  document_ontouchmove_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_ontouchmove_ffi(
+  obj : JsValue,
+  ontouchmove : JsValue,
+) -> Unit = "(obj, ontouchmove) => { obj.ontouchmove = ontouchmove; }"
+
+///|
+extern "js" fn document_ontouchcancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchcancel"
+
+///|
+fn document_ontouchcancel_ffi(obj : JsValue) -> EventHandler {
+  document_ontouchcancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_set_ontouchcancel_ffi(
+  obj : JsValue,
+  ontouchcancel : JsValue,
+) -> Unit = "(obj, ontouchcancel) => { obj.ontouchcancel = ontouchcancel; }"
+
+///|
 extern "js" fn document_onpointerover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerover"
 
 ///|

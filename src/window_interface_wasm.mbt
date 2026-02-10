@@ -822,6 +822,30 @@ fn window_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwh
 fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Window" "set_onwheel"
 
 ///|
+fn window_ontouchstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchstart"
+
+///|
+fn window_set_ontouchstart_ffi(obj : JsValue, ontouchstart : JsValue) -> Unit = "webapi_Window" "set_ontouchstart"
+
+///|
+fn window_ontouchend_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchend"
+
+///|
+fn window_set_ontouchend_ffi(obj : JsValue, ontouchend : JsValue) -> Unit = "webapi_Window" "set_ontouchend"
+
+///|
+fn window_ontouchmove_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchmove"
+
+///|
+fn window_set_ontouchmove_ffi(obj : JsValue, ontouchmove : JsValue) -> Unit = "webapi_Window" "set_ontouchmove"
+
+///|
+fn window_ontouchcancel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchcancel"
+
+///|
+fn window_set_ontouchcancel_ffi(obj : JsValue, ontouchcancel : JsValue) -> Unit = "webapi_Window" "set_ontouchcancel"
+
+///|
 fn window_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerover"
 
 ///|

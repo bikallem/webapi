@@ -197,6 +197,14 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_ontouchstart: (obj) => obj.ontouchstart,
+    set_ontouchstart: (obj, value) => { obj.ontouchstart = value; },
+    get_ontouchend: (obj) => obj.ontouchend,
+    set_ontouchend: (obj, value) => { obj.ontouchend = value; },
+    get_ontouchmove: (obj) => obj.ontouchmove,
+    set_ontouchmove: (obj, value) => { obj.ontouchmove = value; },
+    get_ontouchcancel: (obj) => obj.ontouchcancel,
+    set_ontouchcancel: (obj, value) => { obj.ontouchcancel = value; },
     get_onpointerover: (obj) => obj.onpointerover,
     set_onpointerover: (obj, value) => { obj.onpointerover = value; },
     get_onpointerenter: (obj) => obj.onpointerenter,
@@ -606,6 +614,14 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_ontouchstart: (obj) => obj.ontouchstart,
+    set_ontouchstart: (obj, value) => { obj.ontouchstart = value; },
+    get_ontouchend: (obj) => obj.ontouchend,
+    set_ontouchend: (obj, value) => { obj.ontouchend = value; },
+    get_ontouchmove: (obj) => obj.ontouchmove,
+    set_ontouchmove: (obj, value) => { obj.ontouchmove = value; },
+    get_ontouchcancel: (obj) => obj.ontouchcancel,
+    set_ontouchcancel: (obj, value) => { obj.ontouchcancel = value; },
     get_onpointerover: (obj) => obj.onpointerover,
     set_onpointerover: (obj, value) => { obj.onpointerover = value; },
     get_onpointerenter: (obj) => obj.onpointerenter,
@@ -1280,6 +1296,14 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_ontouchstart: (obj) => obj.ontouchstart,
+    set_ontouchstart: (obj, value) => { obj.ontouchstart = value; },
+    get_ontouchend: (obj) => obj.ontouchend,
+    set_ontouchend: (obj, value) => { obj.ontouchend = value; },
+    get_ontouchmove: (obj) => obj.ontouchmove,
+    set_ontouchmove: (obj, value) => { obj.ontouchmove = value; },
+    get_ontouchcancel: (obj) => obj.ontouchcancel,
+    set_ontouchcancel: (obj, value) => { obj.ontouchcancel = value; },
     get_onpointerover: (obj) => obj.onpointerover,
     set_onpointerover: (obj, value) => { obj.onpointerover = value; },
     get_onpointerenter: (obj) => obj.onpointerenter,
@@ -2158,6 +2182,14 @@ export const wasmImportObject = {
     set_onwebkittransitionend: (obj, value) => { obj.onwebkittransitionend = value; },
     get_onwheel: (obj) => obj.onwheel,
     set_onwheel: (obj, value) => { obj.onwheel = value; },
+    get_ontouchstart: (obj) => obj.ontouchstart,
+    set_ontouchstart: (obj, value) => { obj.ontouchstart = value; },
+    get_ontouchend: (obj) => obj.ontouchend,
+    set_ontouchend: (obj, value) => { obj.ontouchend = value; },
+    get_ontouchmove: (obj) => obj.ontouchmove,
+    set_ontouchmove: (obj, value) => { obj.ontouchmove = value; },
+    get_ontouchcancel: (obj) => obj.ontouchcancel,
+    set_ontouchcancel: (obj, value) => { obj.ontouchcancel = value; },
     get_onpointerover: (obj) => obj.onpointerover,
     set_onpointerover: (obj, value) => { obj.onpointerover = value; },
     get_onpointerenter: (obj) => obj.onpointerenter,
@@ -5137,6 +5169,42 @@ export const wasmImportObject = {
     set_onscrollend: (obj, value) => { obj.onscrollend = value; }
   },
 
+  webapi_Touch: {
+    new: (touch_init_dict) => new Touch(touch_init_dict),
+    get_identifier: (obj) => obj.identifier,
+    get_target: (obj) => obj.target,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_pageX: (obj) => obj.pageX,
+    get_pageY: (obj) => obj.pageY,
+    get_radiusX: (obj) => obj.radiusX,
+    get_radiusY: (obj) => obj.radiusY,
+    get_rotationAngle: (obj) => obj.rotationAngle,
+    get_force: (obj) => obj.force,
+    get_altitudeAngle: (obj) => obj.altitudeAngle,
+    get_azimuthAngle: (obj) => obj.azimuthAngle,
+    get_touchType: (obj) => obj.touchType
+  },
+
+  webapi_TouchList: {
+    get_length: (obj) => obj.length,
+    item: (obj, index) => obj.item(index)
+  },
+
+  webapi_TouchEvent: {
+    new: (type_, event_init_dict) => new TouchEvent(type_, event_init_dict),
+    get_touches: (obj) => obj.touches,
+    get_targetTouches: (obj) => obj.targetTouches,
+    get_changedTouches: (obj) => obj.changedTouches,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    getModifierState: (obj, key_arg) => obj.getModifierState(key_arg)
+  },
+
   webapi_PointerEvent: {
     new: (type_, event_init_dict) => new PointerEvent(type_, event_init_dict),
     get_pointerId: (obj) => obj.pointerId,
@@ -6349,6 +6417,58 @@ export const wasmImportObject = {
     new: (navigationUI) => {
       const obj = {};
       if (navigationUI !== undefined) obj.navigationUI = navigationUI;
+      return obj;
+    }
+  },
+
+  webapi_TouchInit: {
+    new: (identifier, target, clientX, clientY, screenX, screenY, pageX, pageY, radiusX, radiusY, rotationAngle, force, altitudeAngle, azimuthAngle, touchType) => {
+      const obj = {};
+      if (identifier !== undefined) obj.identifier = identifier;
+      if (target !== undefined) obj.target = target;
+      if (clientX !== undefined) obj.clientX = clientX;
+      if (clientY !== undefined) obj.clientY = clientY;
+      if (screenX !== undefined) obj.screenX = screenX;
+      if (screenY !== undefined) obj.screenY = screenY;
+      if (pageX !== undefined) obj.pageX = pageX;
+      if (pageY !== undefined) obj.pageY = pageY;
+      if (radiusX !== undefined) obj.radiusX = radiusX;
+      if (radiusY !== undefined) obj.radiusY = radiusY;
+      if (rotationAngle !== undefined) obj.rotationAngle = rotationAngle;
+      if (force !== undefined) obj.force = force;
+      if (altitudeAngle !== undefined) obj.altitudeAngle = altitudeAngle;
+      if (azimuthAngle !== undefined) obj.azimuthAngle = azimuthAngle;
+      if (touchType !== undefined) obj.touchType = touchType;
+      return obj;
+    }
+  },
+
+  webapi_TouchEventInit: {
+    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, touches, targetTouches, changedTouches) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (view !== undefined) obj.view = view;
+      if (detail !== undefined) obj.detail = detail;
+      if (which !== undefined) obj.which = which;
+      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
+      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
+      if (altKey !== undefined) obj.altKey = altKey;
+      if (metaKey !== undefined) obj.metaKey = metaKey;
+      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
+      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
+      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
+      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
+      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
+      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
+      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
+      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
+      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
+      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
+      if (touches !== undefined) obj.touches = touches;
+      if (targetTouches !== undefined) obj.targetTouches = targetTouches;
+      if (changedTouches !== undefined) obj.changedTouches = changedTouches;
       return obj;
     }
   },

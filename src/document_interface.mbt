@@ -467,6 +467,14 @@ pub trait TDocument: TNode {
   set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  ontouchstart(self : Self) -> EventHandler = _
+  set_ontouchstart(self : Self, ontouchstart : EventHandler) -> Unit = _
+  ontouchend(self : Self) -> EventHandler = _
+  set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit = _
+  ontouchmove(self : Self) -> EventHandler = _
+  set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit = _
+  ontouchcancel(self : Self) -> EventHandler = _
+  set_ontouchcancel(self : Self, ontouchcancel : EventHandler) -> Unit = _
   onpointerover(self : Self) -> EventHandler = _
   set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit = _
   onpointerenter(self : Self) -> EventHandler = _
@@ -2601,6 +2609,66 @@ impl TDocument with onwheel(self : Self) -> EventHandler {
 /// [Document.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/Document/onwheel)
 impl TDocument with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
   document_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+}
+
+///|
+/// [Document.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchstart)
+impl TDocument with ontouchstart(self : Self) -> EventHandler {
+  document_ontouchstart_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchstart)
+impl TDocument with set_ontouchstart(self : Self, ontouchstart : EventHandler) -> Unit {
+  document_set_ontouchstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchstart),
+  )
+}
+
+///|
+/// [Document.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchend)
+impl TDocument with ontouchend(self : Self) -> EventHandler {
+  document_ontouchend_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchend)
+impl TDocument with set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit {
+  document_set_ontouchend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchend),
+  )
+}
+
+///|
+/// [Document.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchmove)
+impl TDocument with ontouchmove(self : Self) -> EventHandler {
+  document_ontouchmove_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchmove)
+impl TDocument with set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit {
+  document_set_ontouchmove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchmove),
+  )
+}
+
+///|
+/// [Document.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchcancel)
+impl TDocument with ontouchcancel(self : Self) -> EventHandler {
+  document_ontouchcancel_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/Document/ontouchcancel)
+impl TDocument with set_ontouchcancel(self : Self, ontouchcancel : EventHandler) -> Unit {
+  document_set_ontouchcancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(ontouchcancel),
+  )
 }
 
 ///|

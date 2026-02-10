@@ -30,6 +30,7 @@ core_specs = [
     "selection-api",
     "intersection-observer",
     "pointerevents",
+    "touch-events",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]

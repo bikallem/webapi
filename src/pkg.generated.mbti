@@ -4450,6 +4450,49 @@ pub impl THTMLElementTogglePopoverOptions for TogglePopoverOptions
 pub impl TJsValue for TogglePopoverOptions
 
 #external
+pub type Touch
+pub fn[T : TTouch] Touch::into(Self) -> T
+pub fn Touch::new(TouchInit) -> Self
+pub impl TJsValue for Touch
+pub impl TTouch for Touch
+
+#external
+pub type TouchEvent
+pub fn[T : TTouchEvent] TouchEvent::into(Self) -> T
+pub fn TouchEvent::new(String, event_init_dict? : TouchEventInit) -> Self
+pub impl TEvent for TouchEvent
+pub impl TJsValue for TouchEvent
+pub impl TTouchEvent for TouchEvent
+pub impl TUIEvent for TouchEvent
+
+#external
+pub type TouchEventInit
+pub fn TouchEventInit::empty() -> Self
+pub fn TouchEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, touches? : Array[Touch], target_touches? : Array[Touch], changed_touches? : Array[Touch]) -> Self
+pub impl TJsValue for TouchEventInit
+
+#external
+pub type TouchInit
+pub fn TouchInit::empty() -> Self
+pub fn TouchInit::new(Int, &TEventTarget, client_x? : Double, client_y? : Double, screen_x? : Double, screen_y? : Double, page_x? : Double, page_y? : Double, radius_x? : Float, radius_y? : Float, rotation_angle? : Float, force? : Float, altitude_angle? : Double, azimuth_angle? : Double, touch_type? : TouchType) -> Self
+pub impl TJsValue for TouchInit
+
+#external
+pub type TouchList
+pub fn[T : TTouchList] TouchList::into(Self) -> T
+pub impl TJsValue for TouchList
+pub impl TTouchList for TouchList
+
+pub(all) enum TouchType {
+  Direct
+  Stylus
+}
+pub fn TouchType::from(String) -> Self?
+pub impl TJsValue for TouchType
+pub impl Eq for TouchType
+pub impl Show for TouchType
+
+#external
 pub type TrackEvent
 pub fn[T : TTrackEvent] TrackEvent::into(Self) -> T
 pub fn TrackEvent::new(String, event_init_dict? : TrackEventInit) -> Self
@@ -5839,6 +5882,14 @@ pub trait TDocument : TNode {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  ontouchstart(Self) -> EventHandlerNonNull
+  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  ontouchend(Self) -> EventHandlerNonNull
+  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  ontouchmove(Self) -> EventHandlerNonNull
+  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  ontouchcancel(Self) -> EventHandlerNonNull
+  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
   set_onpointerover(Self, EventHandlerNonNull) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
@@ -6776,6 +6827,14 @@ pub trait THTMLElement : TElement {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  ontouchstart(Self) -> EventHandlerNonNull
+  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  ontouchend(Self) -> EventHandlerNonNull
+  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  ontouchmove(Self) -> EventHandlerNonNull
+  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  ontouchcancel(Self) -> EventHandlerNonNull
+  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
   set_onpointerover(Self, EventHandlerNonNull) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
@@ -9076,6 +9135,14 @@ pub trait TSVGElement : TElement {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  ontouchstart(Self) -> EventHandlerNonNull
+  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  ontouchend(Self) -> EventHandlerNonNull
+  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  ontouchmove(Self) -> EventHandlerNonNull
+  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  ontouchcancel(Self) -> EventHandlerNonNull
+  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
   set_onpointerover(Self, EventHandlerNonNull) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
@@ -9750,6 +9817,40 @@ pub trait TToggleEvent : TEvent {
   source(Self) -> Element
 }
 
+pub trait TTouch : TJsValue {
+  identifier(Self) -> Int
+  target(Self) -> EventTarget
+  screen_x(Self) -> Double
+  screen_y(Self) -> Double
+  client_x(Self) -> Double
+  client_y(Self) -> Double
+  page_x(Self) -> Double
+  page_y(Self) -> Double
+  radius_x(Self) -> Float
+  radius_y(Self) -> Float
+  rotation_angle(Self) -> Float
+  force(Self) -> Float
+  altitude_angle(Self) -> Float
+  azimuth_angle(Self) -> Float
+  touch_type(Self) -> TouchType
+}
+
+pub trait TTouchEvent : TUIEvent {
+  touches(Self) -> TouchList
+  target_touches(Self) -> TouchList
+  changed_touches(Self) -> TouchList
+  alt_key(Self) -> Bool
+  meta_key(Self) -> Bool
+  ctrl_key(Self) -> Bool
+  shift_key(Self) -> Bool
+  get_modifier_state(Self, String) -> Bool
+}
+
+pub trait TTouchList : TJsValue {
+  length(Self) -> UInt
+  item(Self, UInt) -> Touch?
+}
+
 pub trait TTrackEvent : TEvent {
   track(Self) -> TrackEventTrack
 }
@@ -10166,6 +10267,14 @@ pub trait TWindow : TEventTarget {
   set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
   onwheel(Self) -> EventHandlerNonNull
   set_onwheel(Self, EventHandlerNonNull) -> Unit
+  ontouchstart(Self) -> EventHandlerNonNull
+  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  ontouchend(Self) -> EventHandlerNonNull
+  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  ontouchmove(Self) -> EventHandlerNonNull
+  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  ontouchcancel(Self) -> EventHandlerNonNull
+  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
   set_onpointerover(Self, EventHandlerNonNull) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
