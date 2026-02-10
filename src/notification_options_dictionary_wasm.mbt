@@ -1,0 +1,3 @@
+fn notification_options_ffi(dir: JsValue, lang: JsValue, body: JsValue, navigate: JsValue, tag: JsValue, image: JsValue, icon: JsValue, badge: JsValue, vibrate: JsValue, timestamp: JsValue, renotify: JsValue, silent: JsValue, require_interaction: JsValue, data: JsValue, actions: JsValue) -> NotificationOptions = "webapi_NotificationOptions" "new"
+
+fn notification_options_empty_ffi() -> NotificationOptions = "webapi_Dictionary" "empty"

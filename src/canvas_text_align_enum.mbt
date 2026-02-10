@@ -2,17 +2,15 @@
 // MoonBit type: CanvasTextAlign
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasTextAlign {
   Start
   End
   Left
   Right
   Center
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for CanvasTextAlign with to_js(self : CanvasTextAlign) -> JsValue {
+pub impl TJsValue for CanvasTextAlign with to_js(self: CanvasTextAlign) -> JsValue {
   match self {
     CanvasTextAlign::Start => TJsValue::to_js("start")
     CanvasTextAlign::End => TJsValue::to_js("end")
@@ -22,8 +20,7 @@ pub impl TJsValue for CanvasTextAlign with to_js(self : CanvasTextAlign) -> JsVa
   }
 }
 
-///|
-pub fn CanvasTextAlign::from(value : String) -> CanvasTextAlign? {
+pub fn CanvasTextAlign::from(value: String) -> CanvasTextAlign? {
   match value {
     "start" => Some(CanvasTextAlign::Start)
     "end" => Some(CanvasTextAlign::End)

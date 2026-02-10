@@ -22,8 +22,8 @@ pub impl TWebSocketNewProtocols for String with to_js(self : String) -> JsValue 
 
 pub impl TWebSocketNewProtocols for Array[String] with to_js(self : Array[String]) -> JsValue = "%identity"
 
-pub fn WebSocket::new(url : String, 
-protocols? : &TWebSocketNewProtocols = []) -> WebSocket {
+pub fn WebSocket::new(url : String,
+protocols? : &TWebSocketNewProtocols = ([] : Array[String])) -> WebSocket {
   web_socket_new_ffi(TJsValue::to_js(url), protocols.to_js())
 }
 

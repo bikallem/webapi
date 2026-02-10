@@ -1,2 +1,2 @@
-///|
-fn comment_new_ffi(data : JsValue) -> Comment = "webapi_Comment" "new"
+fn comment_new_ffi(data: JsValue) -> Comment = "webapi_Comment" "new"
+

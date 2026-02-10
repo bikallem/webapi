@@ -2,15 +2,13 @@
 // MoonBit type: PresentationStyle
 // Specifications: clipboard-apis.idl
 
-///|
 pub(all) enum PresentationStyle {
   Unspecified
   Inline
   Attachment
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for PresentationStyle with to_js(self : PresentationStyle) -> JsValue {
+pub impl TJsValue for PresentationStyle with to_js(self: PresentationStyle) -> JsValue {
   match self {
     PresentationStyle::Unspecified => TJsValue::to_js("unspecified")
     PresentationStyle::Inline => TJsValue::to_js("inline")
@@ -18,8 +16,7 @@ pub impl TJsValue for PresentationStyle with to_js(self : PresentationStyle) -> 
   }
 }
 
-///|
-pub fn PresentationStyle::from(value : String) -> PresentationStyle? {
+pub fn PresentationStyle::from(value: String) -> PresentationStyle? {
   match value {
     "unspecified" => Some(PresentationStyle::Unspecified)
     "inline" => Some(PresentationStyle::Inline)

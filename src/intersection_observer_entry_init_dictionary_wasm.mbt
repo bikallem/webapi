@@ -1,14 +1,3 @@
-///|
-fn intersection_observer_entry_init_ffi(
-  time : JsValue,
-  root_bounds : JsValue,
-  bounding_client_rect : JsValue,
-  intersection_rect : JsValue,
-  is_intersecting : JsValue,
-  is_visible : JsValue,
-  intersection_ratio : JsValue,
-  target : JsValue,
-) -> IntersectionObserverEntryInit = "webapi_IntersectionObserverEntryInit" "new"
+fn intersection_observer_entry_init_ffi(time: JsValue, root_bounds: JsValue, bounding_client_rect: JsValue, intersection_rect: JsValue, is_intersecting: JsValue, is_visible: JsValue, intersection_ratio: JsValue, target: JsValue) -> IntersectionObserverEntryInit = "webapi_IntersectionObserverEntryInit" "new"
 
-///|
 fn intersection_observer_entry_init_empty_ffi() -> IntersectionObserverEntryInit = "webapi_Dictionary" "empty"

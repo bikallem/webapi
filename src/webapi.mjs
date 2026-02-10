@@ -3949,6 +3949,7 @@ export const wasmImportObject = {
     get_pdfViewerEnabled: (obj) => obj.pdfViewerEnabled,
     get_hardwareConcurrency: (obj) => obj.hardwareConcurrency,
     get_storage: (obj) => obj.storage,
+    vibrate: (obj, pattern) => obj.vibrate(pattern),
     taintEnabled: (obj) => obj.taintEnabled(),
     registerProtocolHandler: (obj, scheme, url) => obj.registerProtocolHandler(scheme, url),
     unregisterProtocolHandler: (obj, scheme, url) => obj.unregisterProtocolHandler(scheme, url),
@@ -4863,6 +4864,33 @@ export const wasmImportObject = {
     estimate: (obj) => obj.estimate()
   },
 
+  webapi_TextDecoder: {
+    new: (label, options) => new TextDecoder(label, options),
+    get_encoding: (obj) => obj.encoding,
+    get_fatal: (obj) => obj.fatal,
+    get_ignoreBOM: (obj) => obj.ignoreBOM,
+    decode: (obj, input, options) => obj.decode(input, options)
+  },
+
+  webapi_TextEncoder: {
+    new: () => new TextEncoder(),
+    get_encoding: (obj) => obj.encoding,
+    encode: (obj, input) => obj.encode(input),
+    encodeInto: (obj, source, destination) => obj.encodeInto(source, destination)
+  },
+
+  webapi_TextDecoderStream: {
+    new: (label, options) => new TextDecoderStream(label, options),
+    get_encoding: (obj) => obj.encoding,
+    get_fatal: (obj) => obj.fatal,
+    get_ignoreBOM: (obj) => obj.ignoreBOM
+  },
+
+  webapi_TextEncoderStream: {
+    new: () => new TextEncoderStream(),
+    get_encoding: (obj) => obj.encoding
+  },
+
   webapi_DOMPointReadOnly: {
     new: (x, y, z, w) => new DOMPointReadOnly(x, y, z, w),
     get_x: (obj) => obj.x,
@@ -5170,6 +5198,34 @@ export const wasmImportObject = {
     set_onscrollend: (obj, value) => { obj.onscrollend = value; }
   },
 
+  webapi_WebSocket: {
+    new: (url, protocols) => new WebSocket(url, protocols),
+    get_url: (obj) => obj.url,
+    get_readyState: (obj) => obj.readyState,
+    get_bufferedAmount: (obj) => obj.bufferedAmount,
+    get_onopen: (obj) => obj.onopen,
+    set_onopen: (obj, value) => { obj.onopen = value; },
+    get_onerror: (obj) => obj.onerror,
+    set_onerror: (obj, value) => { obj.onerror = value; },
+    get_onclose: (obj) => obj.onclose,
+    set_onclose: (obj, value) => { obj.onclose = value; },
+    get_extensions: (obj) => obj.extensions,
+    get_protocol: (obj) => obj.protocol,
+    get_onmessage: (obj) => obj.onmessage,
+    set_onmessage: (obj, value) => { obj.onmessage = value; },
+    get_binaryType: (obj) => obj.binaryType,
+    set_binaryType: (obj, value) => { obj.binaryType = value; },
+    close: (obj, code, reason) => obj.close(code, reason),
+    send: (obj, data) => obj.send(data)
+  },
+
+  webapi_CloseEvent: {
+    new: (type_, event_init_dict) => new CloseEvent(type_, event_init_dict),
+    get_wasClean: (obj) => obj.wasClean,
+    get_code: (obj) => obj.code,
+    get_reason: (obj) => obj.reason
+  },
+
   webapi_Touch: {
     new: (touch_init_dict) => new Touch(touch_init_dict),
     get_identifier: (obj) => obj.identifier,
@@ -5204,6 +5260,38 @@ export const wasmImportObject = {
     get_ctrlKey: (obj) => obj.ctrlKey,
     get_shiftKey: (obj) => obj.shiftKey,
     getModifierState: (obj, key_arg) => obj.getModifierState(key_arg)
+  },
+
+  webapi_Notification: {
+    new: (title, options) => new Notification(title, options),
+    get_permission: (obj) => obj.permission,
+    get_maxActions: (obj) => obj.maxActions,
+    get_onclick: (obj) => obj.onclick,
+    set_onclick: (obj, value) => { obj.onclick = value; },
+    get_onshow: (obj) => obj.onshow,
+    set_onshow: (obj, value) => { obj.onshow = value; },
+    get_onerror: (obj) => obj.onerror,
+    set_onerror: (obj, value) => { obj.onerror = value; },
+    get_onclose: (obj) => obj.onclose,
+    set_onclose: (obj, value) => { obj.onclose = value; },
+    get_title: (obj) => obj.title,
+    get_dir: (obj) => obj.dir,
+    get_lang: (obj) => obj.lang,
+    get_body: (obj) => obj.body,
+    get_navigate: (obj) => obj.navigate,
+    get_tag: (obj) => obj.tag,
+    get_image: (obj) => obj.image,
+    get_icon: (obj) => obj.icon,
+    get_badge: (obj) => obj.badge,
+    get_vibrate: (obj) => obj.vibrate,
+    get_timestamp: (obj) => obj.timestamp,
+    get_renotify: (obj) => obj.renotify,
+    get_silent: (obj) => obj.silent,
+    get_requireInteraction: (obj) => obj.requireInteraction,
+    get_data: (obj) => obj.data,
+    get_actions: (obj) => obj.actions,
+    requestPermission: (deprecated_callback) => requestPermission(deprecated_callback),
+    close: (obj) => obj.close()
   },
 
   webapi_PointerEvent: {
@@ -6089,6 +6177,32 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_TextDecoderOptions: {
+    new: (fatal, ignoreBOM) => {
+      const obj = {};
+      if (fatal !== undefined) obj.fatal = fatal;
+      if (ignoreBOM !== undefined) obj.ignoreBOM = ignoreBOM;
+      return obj;
+    }
+  },
+
+  webapi_TextDecodeOptions: {
+    new: (stream) => {
+      const obj = {};
+      if (stream !== undefined) obj.stream = stream;
+      return obj;
+    }
+  },
+
+  webapi_TextEncoderEncodeIntoResult: {
+    new: (read, written) => {
+      const obj = {};
+      if (read !== undefined) obj.read = read;
+      if (written !== undefined) obj.written = written;
+      return obj;
+    }
+  },
+
   webapi_DOMPointInit: {
     new: (x, y, z, w) => {
       const obj = {};
@@ -6448,6 +6562,19 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_CloseEventInit: {
+    new: (bubbles, cancelable, composed, wasClean, code, reason) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (wasClean !== undefined) obj.wasClean = wasClean;
+      if (code !== undefined) obj.code = code;
+      if (reason !== undefined) obj.reason = reason;
+      return obj;
+    }
+  },
+
   webapi_TouchInit: {
     new: (identifier, target, clientX, clientY, screenX, screenY, pageX, pageY, radiusX, radiusY, rotationAngle, force, altitudeAngle, azimuthAngle, touchType) => {
       const obj = {};
@@ -6496,6 +6623,39 @@ export const wasmImportObject = {
       if (touches !== undefined) obj.touches = touches;
       if (targetTouches !== undefined) obj.targetTouches = targetTouches;
       if (changedTouches !== undefined) obj.changedTouches = changedTouches;
+      return obj;
+    }
+  },
+
+  webapi_NotificationOptions: {
+    new: (dir, lang, body, navigate, tag, image, icon, badge, vibrate, timestamp, renotify, silent, requireInteraction, data, actions) => {
+      const obj = {};
+      if (dir !== undefined) obj.dir = dir;
+      if (lang !== undefined) obj.lang = lang;
+      if (body !== undefined) obj.body = body;
+      if (navigate !== undefined) obj.navigate = navigate;
+      if (tag !== undefined) obj.tag = tag;
+      if (image !== undefined) obj.image = image;
+      if (icon !== undefined) obj.icon = icon;
+      if (badge !== undefined) obj.badge = badge;
+      if (vibrate !== undefined) obj.vibrate = vibrate;
+      if (timestamp !== undefined) obj.timestamp = timestamp;
+      if (renotify !== undefined) obj.renotify = renotify;
+      if (silent !== undefined) obj.silent = silent;
+      if (requireInteraction !== undefined) obj.requireInteraction = requireInteraction;
+      if (data !== undefined) obj.data = data;
+      if (actions !== undefined) obj.actions = actions;
+      return obj;
+    }
+  },
+
+  webapi_NotificationAction: {
+    new: (action, title, navigate, icon) => {
+      const obj = {};
+      if (action !== undefined) obj.action = action;
+      if (title !== undefined) obj.title = title;
+      if (navigate !== undefined) obj.navigate = navigate;
+      if (icon !== undefined) obj.icon = icon;
       return obj;
     }
   },
@@ -6713,6 +6873,10 @@ export const wasmImportObject = {
   },
 
   webapi_VoidFunction: {
+    new: (f) => f
+  },
+
+  webapi_NotificationPermissionCallback: {
     new: (f) => f
   },
 

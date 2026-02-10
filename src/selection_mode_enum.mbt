@@ -2,16 +2,14 @@
 // MoonBit type: SelectionMode
 // Specifications: html.idl
 
-///|
 pub(all) enum SelectionMode {
   Select
   Start
   End
   Preserve
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for SelectionMode with to_js(self : SelectionMode) -> JsValue {
+pub impl TJsValue for SelectionMode with to_js(self: SelectionMode) -> JsValue {
   match self {
     SelectionMode::Select => TJsValue::to_js("select")
     SelectionMode::Start => TJsValue::to_js("start")
@@ -20,8 +18,7 @@ pub impl TJsValue for SelectionMode with to_js(self : SelectionMode) -> JsValue 
   }
 }
 
-///|
-pub fn SelectionMode::from(value : String) -> SelectionMode? {
+pub fn SelectionMode::from(value: String) -> SelectionMode? {
   match value {
     "select" => Some(SelectionMode::Select)
     "start" => Some(SelectionMode::Start)

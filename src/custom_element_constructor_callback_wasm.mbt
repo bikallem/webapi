@@ -1,7 +1,4 @@
-///|
-pub fn CustomElementConstructor::new(
-  f : () -> HTMLElement,
-) -> CustomElementConstructor {
+pub fn CustomElementConstructor::new(f : () -> HTMLElement) -> CustomElementConstructor {
   let w : () -> JsValue = fn() { TJsValue::to_js(f()) }
   custom_element_constructor_ffi(w).unsafe_cast()
 }

@@ -2,7 +2,6 @@
 // MoonBit type: CanvasFontStretch
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasFontStretch {
   UltraCondensed
   ExtraCondensed
@@ -13,10 +12,9 @@ pub(all) enum CanvasFontStretch {
   Expanded
   ExtraExpanded
   UltraExpanded
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for CanvasFontStretch with to_js(self : CanvasFontStretch) -> JsValue {
+pub impl TJsValue for CanvasFontStretch with to_js(self: CanvasFontStretch) -> JsValue {
   match self {
     CanvasFontStretch::UltraCondensed => TJsValue::to_js("ultra-condensed")
     CanvasFontStretch::ExtraCondensed => TJsValue::to_js("extra-condensed")
@@ -30,8 +28,7 @@ pub impl TJsValue for CanvasFontStretch with to_js(self : CanvasFontStretch) -> 
   }
 }
 
-///|
-pub fn CanvasFontStretch::from(value : String) -> CanvasFontStretch? {
+pub fn CanvasFontStretch::from(value: String) -> CanvasFontStretch? {
   match value {
     "ultra-condensed" => Some(CanvasFontStretch::UltraCondensed)
     "extra-condensed" => Some(CanvasFontStretch::ExtraCondensed)

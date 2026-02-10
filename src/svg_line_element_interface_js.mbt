@@ -1,31 +1,27 @@
-///|
-extern "js" fn svg_line_element_x1_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x1"
+extern "js" fn svg_line_element_x1_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.x1"
 
 ///|
-fn svg_line_element_x1_ffi(obj : JsValue) -> SVGAnimatedLength {
+fn svg_line_element_x1_ffi(obj: JsValue) -> SVGAnimatedLength {
   svg_line_element_x1_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn svg_line_element_y1_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y1"
+extern "js" fn svg_line_element_y1_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.y1"
 
 ///|
-fn svg_line_element_y1_ffi(obj : JsValue) -> SVGAnimatedLength {
+fn svg_line_element_y1_ffi(obj: JsValue) -> SVGAnimatedLength {
   svg_line_element_y1_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn svg_line_element_x2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x2"
+extern "js" fn svg_line_element_x2_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.x2"
 
 ///|
-fn svg_line_element_x2_ffi(obj : JsValue) -> SVGAnimatedLength {
+fn svg_line_element_x2_ffi(obj: JsValue) -> SVGAnimatedLength {
   svg_line_element_x2_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn svg_line_element_y2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y2"
+extern "js" fn svg_line_element_y2_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.y2"
 
 ///|
-fn svg_line_element_y2_ffi(obj : JsValue) -> SVGAnimatedLength {
+fn svg_line_element_y2_ffi(obj: JsValue) -> SVGAnimatedLength {
   svg_line_element_y2_ffi_js(obj).unsafe_cast()
 }

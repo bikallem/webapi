@@ -2,17 +2,13 @@
 // MoonBit type: NavigationHistoryBehavior
 // Specifications: html.idl
 
-///|
 pub(all) enum NavigationHistoryBehavior {
   Auto
   Push
   Replace
-} derive(Eq, Show)
+} derive(Eq,Show)
 
-///|
-pub impl TJsValue for NavigationHistoryBehavior with to_js(
-  self : NavigationHistoryBehavior,
-) -> JsValue {
+pub impl TJsValue for NavigationHistoryBehavior with to_js(self: NavigationHistoryBehavior) -> JsValue {
   match self {
     NavigationHistoryBehavior::Auto => TJsValue::to_js("auto")
     NavigationHistoryBehavior::Push => TJsValue::to_js("push")
@@ -20,10 +16,7 @@ pub impl TJsValue for NavigationHistoryBehavior with to_js(
   }
 }
 
-///|
-pub fn NavigationHistoryBehavior::from(
-  value : String,
-) -> NavigationHistoryBehavior? {
+pub fn NavigationHistoryBehavior::from(value: String) -> NavigationHistoryBehavior? {
   match value {
     "auto" => Some(NavigationHistoryBehavior::Auto)
     "push" => Some(NavigationHistoryBehavior::Push)

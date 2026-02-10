@@ -1,34 +1,3 @@
-///|
-fn drag_event_init_ffi(
-  bubbles : JsValue,
-  cancelable : JsValue,
-  composed : JsValue,
-  view : JsValue,
-  detail : JsValue,
-  which : JsValue,
-  ctrl_key : JsValue,
-  shift_key : JsValue,
-  alt_key : JsValue,
-  meta_key : JsValue,
-  modifier_alt_graph : JsValue,
-  modifier_caps_lock : JsValue,
-  modifier_fn : JsValue,
-  modifier_fn_lock : JsValue,
-  modifier_hyper : JsValue,
-  modifier_num_lock : JsValue,
-  modifier_scroll_lock : JsValue,
-  modifier_super : JsValue,
-  modifier_symbol : JsValue,
-  modifier_symbol_lock : JsValue,
-  screen_x : JsValue,
-  screen_y : JsValue,
-  client_x : JsValue,
-  client_y : JsValue,
-  button : JsValue,
-  buttons : JsValue,
-  related_target : JsValue,
-  data_transfer : JsValue,
-) -> DragEventInit = "webapi_DragEventInit" "new"
+fn drag_event_init_ffi(bubbles: JsValue, cancelable: JsValue, composed: JsValue, view: JsValue, detail: JsValue, which: JsValue, ctrl_key: JsValue, shift_key: JsValue, alt_key: JsValue, meta_key: JsValue, modifier_alt_graph: JsValue, modifier_caps_lock: JsValue, modifier_fn: JsValue, modifier_fn_lock: JsValue, modifier_hyper: JsValue, modifier_num_lock: JsValue, modifier_scroll_lock: JsValue, modifier_super: JsValue, modifier_symbol: JsValue, modifier_symbol_lock: JsValue, screen_x: JsValue, screen_y: JsValue, client_x: JsValue, client_y: JsValue, button: JsValue, buttons: JsValue, related_target: JsValue, data_transfer: JsValue) -> DragEventInit = "webapi_DragEventInit" "new"
 
-///|
 fn drag_event_init_empty_ffi() -> DragEventInit = "webapi_Dictionary" "empty"

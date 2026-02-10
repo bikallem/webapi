@@ -1,0 +1,8 @@
+import {
+  "bikallem/webapi",
+}
+
+options(
+  "is-main": true,
+  targets: { "main.mbt": [ "js" ], "main_wasm.mbt": [ "wasm-gc" ] },
+)

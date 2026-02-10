@@ -1,21 +1,3 @@
-///|
-fn touch_init_ffi(
-  identifier : JsValue,
-  target : JsValue,
-  client_x : JsValue,
-  client_y : JsValue,
-  screen_x : JsValue,
-  screen_y : JsValue,
-  page_x : JsValue,
-  page_y : JsValue,
-  radius_x : JsValue,
-  radius_y : JsValue,
-  rotation_angle : JsValue,
-  force : JsValue,
-  altitude_angle : JsValue,
-  azimuth_angle : JsValue,
-  touch_type : JsValue,
-) -> TouchInit = "webapi_TouchInit" "new"
+fn touch_init_ffi(identifier: JsValue, target: JsValue, client_x: JsValue, client_y: JsValue, screen_x: JsValue, screen_y: JsValue, page_x: JsValue, page_y: JsValue, radius_x: JsValue, radius_y: JsValue, rotation_angle: JsValue, force: JsValue, altitude_angle: JsValue, azimuth_angle: JsValue, touch_type: JsValue) -> TouchInit = "webapi_TouchInit" "new"
 
-///|
 fn touch_init_empty_ffi() -> TouchInit = "webapi_Dictionary" "empty"

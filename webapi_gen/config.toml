@@ -33,12 +33,15 @@ core_specs = [
     "touch-events",
     "clipboard-apis",
     "websockets",
+    "encoding",
+    "notifications",
+    "vibration",
 ]
 
-excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]
+excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext", "NotificationEvent", "ServiceWorkerRegistration", "ServiceWorkerGlobalScope"]
 
 excluded_callbacks = []
 
 excluded_typedefs = ["ClipboardItemData"]
 
-excluded_dictionary_prefixes = ["ClipboardPermission"]
+excluded_dictionary_prefixes = ["ClipboardPermission", "NotificationEvent", "GetNotificationOptions"]

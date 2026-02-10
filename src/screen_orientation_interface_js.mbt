@@ -1,46 +1,31 @@
-///|
-extern "js" fn screen_orientation_lock_ffi_js(
-  obj : JsValue,
-  orientation : JsValue,
-) -> JsValue = "(obj, orientation) => obj.lock(orientation)"
+extern "js" fn screen_orientation_lock_ffi_js(obj: JsValue, orientation: JsValue) -> JsValue = "(obj, orientation) => obj.lock(orientation)"
 
 ///|
-fn screen_orientation_lock_ffi(
-  obj : JsValue,
-  orientation : JsValue,
-) -> @js_async.Promise[Unit] {
+fn screen_orientation_lock_ffi(obj: JsValue, orientation: JsValue) -> @js_async.Promise[Unit] {
   screen_orientation_lock_ffi_js(obj, orientation).unsafe_cast()
 }
 
-///|
-extern "js" fn screen_orientation_unlock_ffi(obj : JsValue) -> Unit = "(obj) => obj.unlock()"
+extern "js" fn screen_orientation_unlock_ffi(obj: JsValue) -> Unit = "(obj) => obj.unlock()"
+
+extern "js" fn screen_orientation_type_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.type"
 
 ///|
-extern "js" fn screen_orientation_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
-
-///|
-fn screen_orientation_type_ffi(obj : JsValue) -> OrientationType {
+fn screen_orientation_type_ffi(obj: JsValue) -> OrientationType {
   screen_orientation_type_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn screen_orientation_angle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.angle"
+extern "js" fn screen_orientation_angle_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.angle"
 
 ///|
-fn screen_orientation_angle_ffi(obj : JsValue) -> UInt {
+fn screen_orientation_angle_ffi(obj: JsValue) -> UInt {
   screen_orientation_angle_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn screen_orientation_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
+extern "js" fn screen_orientation_onchange_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.onchange"
 
 ///|
-fn screen_orientation_onchange_ffi(obj : JsValue) -> EventHandler {
+fn screen_orientation_onchange_ffi(obj: JsValue) -> EventHandler {
   screen_orientation_onchange_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn screen_orientation_set_onchange_ffi(
-  obj : JsValue,
-  onchange : JsValue,
-) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+extern "js" fn screen_orientation_set_onchange_ffi(obj: JsValue, onchange: JsValue) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
