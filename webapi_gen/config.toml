@@ -22,6 +22,7 @@ core_specs = [
     "url",
     "webidl",
     "xhr",
+    "requestidlecallback",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext"]

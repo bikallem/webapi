@@ -579,6 +579,28 @@ fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double {
 }
 
 ///|
+extern "js" fn window_request_idle_callback_ffi_js(
+  obj : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, callback, options) => obj.requestIdleCallback(callback, options)"
+
+///|
+fn window_request_idle_callback_ffi(
+  obj : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> UInt {
+  window_request_idle_callback_ffi_js(obj, callback, options).unsafe_cast()
+}
+
+///|
+extern "js" fn window_cancel_idle_callback_ffi(
+  obj : JsValue,
+  handle : JsValue,
+) -> Unit = "(obj, handle) => obj.cancelIdleCallback(handle)"
+
+///|
 extern "js" fn window_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
 
 ///|

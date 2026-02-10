@@ -1290,6 +1290,8 @@ export const wasmImportObject = {
     scrollTo_2: (obj, x, y) => obj.scrollTo(x, y),
     scrollBy: (obj, options) => obj.scrollBy(options),
     scrollBy_2: (obj, x, y) => obj.scrollBy(x, y),
+    requestIdleCallback: (obj, callback, options) => obj.requestIdleCallback(callback, options),
+    cancelIdleCallback: (obj, handle) => obj.cancelIdleCallback(handle),
     reportError: (obj, e) => obj.reportError(e),
     btoa: (obj, data) => obj.btoa(data),
     atob: (obj, data) => obj.atob(data),
@@ -5033,6 +5035,11 @@ export const wasmImportObject = {
     createScriptURL: (obj, input, _arguments) => obj.createScriptURL(input, ..._arguments)
   },
 
+  webapi_IdleDeadline: {
+    get_didTimeout: (obj) => obj.didTimeout,
+    timeRemaining: (obj) => obj.timeRemaining()
+  },
+
   webapi_PerformanceEntry: {
     get_id: (obj) => obj.id,
     get_name: (obj) => obj.name,
@@ -6105,6 +6112,14 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_IdleRequestOptions: {
+    new: (timeout) => {
+      const obj = {};
+      if (timeout !== undefined) obj.timeout = timeout;
+      return obj;
+    }
+  },
+
   webapi_PerformanceObserverCallbackOptions: {
     new: (droppedEntriesCount) => {
       const obj = {};
@@ -6180,6 +6195,10 @@ export const wasmImportObject = {
   },
 
   webapi_CreateScriptURLCallback: {
+    new: (f) => f
+  },
+
+  webapi_IdleRequestCallback: {
     new: (f) => f
   },
 

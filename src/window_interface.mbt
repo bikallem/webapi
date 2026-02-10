@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Window
-// Specifications: cssom-view.idl, cssom.idl, fetch.idl, dom.idl, html.idl
+// Specifications: cssom.idl, dom.idl, requestidlecallback.idl, cssom-view.idl, fetch.idl, html.idl
 
 ///|
 /// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)
@@ -131,6 +131,12 @@ pub trait TWindow: TEventTarget {
   outer_width(self : Self) -> Int = _
   outer_height(self : Self) -> Int = _
   device_pixel_ratio(self : Self) -> Double = _
+  request_idle_callback(
+    self : Self,
+    callback : IdleRequestCallback,
+    options? : IdleRequestOptions,
+  ) -> UInt = _
+  cancel_idle_callback(self : Self, handle : UInt) -> Unit = _
   onabort(self : Self) -> EventHandler = _
   set_onabort(self : Self, onabort : EventHandler) -> Unit = _
   onauxclick(self : Self) -> EventHandler = _
@@ -922,6 +928,29 @@ impl TWindow with outer_height(self : Self) -> Int {
 /// [Window.devicePixelRatio](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio)
 impl TWindow with device_pixel_ratio(self : Self) -> Double {
   window_device_pixel_ratio_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.requestIdleCallback](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback)
+impl TWindow with request_idle_callback(
+  self : Self,
+  callback : IdleRequestCallback,
+  options? : IdleRequestOptions = IdleRequestOptions::empty(),
+) -> UInt {
+  window_request_idle_callback_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(callback),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+/// [Window.cancelIdleCallback](https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback)
+impl TWindow with cancel_idle_callback(self : Self, handle : UInt) -> Unit {
+  window_cancel_idle_callback_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(handle),
+  )
 }
 
 ///|

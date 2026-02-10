@@ -320,6 +320,16 @@ fn window_outer_height_ffi(obj : JsValue) -> Int = "webapi_Window" "get_outerHei
 fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double = "webapi_Window" "get_devicePixelRatio"
 
 ///|
+fn window_request_idle_callback_ffi(
+  obj : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> UInt = "webapi_Window" "requestIdleCallback"
+
+///|
+fn window_cancel_idle_callback_ffi(obj : JsValue, handle : JsValue) -> Unit = "webapi_Window" "cancelIdleCallback"
+
+///|
 fn window_onabort_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onabort"
 
 ///|
