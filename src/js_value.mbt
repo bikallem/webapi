@@ -31,7 +31,7 @@ pub fn[T] JsValue::null() -> T {
 }
 
 ///|
-pub fn[T] JsValue::into(self : JsValue) -> T = "%identity"
+pub fn[T : TJsValue] JsValue::into(self : JsValue) -> T = "%identity"
 
 ///|
 /// Unsafe cast from JsValue to any type.

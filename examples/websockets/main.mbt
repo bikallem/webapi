@@ -1,8 +1,4 @@
 ///|
-extern "js" fn jsvalue_to_string(v : @webapi.JsValue) -> String =
-  #| (v) => String(v)
-
-///|
 /// WebSocket Demo - uses generated WebSocket bindings to connect, send, and receive
 fn main {
   let doc = @webapi.document
@@ -96,7 +92,8 @@ fn main {
       socket.set_onmessage(
         @webapi.EventHandlerNonNull::new(fn(e) {
           let msg_event : @webapi.MessageEvent = e.into()
-          log_message("Received: " + jsvalue_to_string(msg_event.data()))
+          let data : String = msg_event.data().into()
+          log_message("Received: " + data)
           @webapi.JsValue::undefined()
         }),
       )
