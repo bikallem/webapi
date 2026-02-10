@@ -34,9 +34,21 @@ jobs:
           moon version --all
           moon update
 
-      - name: Build examples
+      - name: Build examples (JS)
         working-directory: examples
         run: moon build --target js --release
+
+      - name: Build examples (wasm-gc)
+        working-directory: examples
+        run: moon build --target wasm-gc --release
+
+      - name: Prepare site
+        run: |
+          mkdir -p _site/src
+          cp -rL examples _site/examples
+          rm -rf _site/examples/.mooncakes _site/examples/_build
+          cp src/webapi.mjs _site/src/
+          echo '<meta http-equiv="refresh" content="0; url=examples/">' > _site/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -44,7 +56,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'examples'
+          path: '_site'
 
   deploy:
     environment:
