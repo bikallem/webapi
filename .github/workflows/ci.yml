@@ -86,6 +86,26 @@ jobs:
           npm ci
           npx playwright install chromium --with-deps
 
+      - name: Debug serve
+        working-directory: tests
+        run: |
+          npx serve .. -l 3000 --no-clipboard --no-request-logging --symlinks &
+          sleep 3
+          echo "=== symlink check ==="
+          ls -la ../examples/target
+          echo "=== curl JS ==="
+          curl -s -o /dev/null -w "status: %{http_code}, type: %{content_type}\n" http://localhost:3000/examples/target/js/release/build/canvas/canvas.js
+          echo "=== curl HTML ==="
+          curl -s -o /dev/null -w "status: %{http_code}, type: %{content_type}\n" http://localhost:3000/examples/canvas/canvas.js.html
+          echo "=== curl JS first 200 chars ==="
+          curl -s http://localhost:3000/examples/target/js/release/build/canvas/canvas.js | head -c 200
+          echo ""
+          echo "=== curl wasm ==="
+          curl -s -o /dev/null -w "status: %{http_code}, type: %{content_type}\n" http://localhost:3000/examples/target/wasm-gc/release/build/canvas/canvas.wasm
+          echo "=== curl webapi.mjs ==="
+          curl -s -o /dev/null -w "status: %{http_code}, type: %{content_type}\n" http://localhost:3000/src/webapi.mjs
+          kill %1 2>/dev/null
+
       - name: Run Playwright tests
         working-directory: tests
         run: npx playwright test
