@@ -29,7 +29,10 @@
 - **Add timers example** - Dual-target (JS + wasm-gc) demo of `setInterval`, `clearInterval`, and `setTimeout` using `Function::new` callbacks and `TimerHandler`.
 - **Add storage example** - Dual-target (JS + wasm-gc) demo of `localStorage` with `setItem`, `getItem`, `removeItem`, and `clear` using generated bindings.
 - **Add 6 new examples** - dom, events, url, classlist, element-ops, and forms examples, each with both JS and wasm-gc HTML entry points.
-- **Add Playwright integration tests** - 89 tests covering all 11 examples (canvas, counter, fetch, timers, storage, + 6 others) across JS and wasm-gc targets.
+- **Add 13 new API examples** - websockets, encoding, requestidlecallback, fullscreen, screen-orientation, resize-observer, selection-api, intersection-observer, pointerevents, touch-events, clipboard-apis, notifications, and storage-manager. All rewritten to use generated bindings instead of `extern "js"` FFI.
+- **Add wasm-gc support for 5 examples** - encoding, fullscreen, pointerevents, selection-api, and touch-events now have wasm-gc HTML entry points and tests. The remaining 6 (websockets, notifications, requestidlecallback, resize-observer, screen-orientation, intersection-observer) are JS-only due to a MoonBit compiler bug with externref trait objects ([moonbitlang/moonbit-docs#1123](https://github.com/moonbitlang/moonbit-docs/issues/1123)).
+- **Add WebSocket echo server for testing** - Local echo server (`tests/ws-echo-server.mjs`) replaces the defunct `echo.websocket.org`. The websockets demo now has a URL input field. `make serve` starts both the echo server and static file server.
+- **Add Playwright integration tests** - 130 tests covering all examples across JS and wasm-gc targets, including WebSocket connect/disconnect/reconnect tests.
 - **Add CI workflow** - GitHub Actions workflow with type checking (js + wasm-gc), unit tests, example builds, and Playwright tests.
 - **Update GitHub Pages deployment** - Deploy all 11 examples instead of just canvas and counter.
 
