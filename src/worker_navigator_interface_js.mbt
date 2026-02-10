@@ -119,3 +119,11 @@ extern "js" fn worker_navigator_hardware_concurrency_ffi_js(
 fn worker_navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 {
   worker_navigator_hardware_concurrency_ffi_js(obj).unsafe_cast()
 }
+
+///|
+extern "js" fn worker_navigator_storage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.storage"
+
+///|
+fn worker_navigator_storage_ffi(obj : JsValue) -> StorageManager {
+  worker_navigator_storage_ffi_js(obj).unsafe_cast()
+}

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Screen
-// Specifications: cssom-view.idl
+// Specifications: screen-orientation.idl, cssom-view.idl
 
 ///|
 /// [Screen](https://developer.mozilla.org/en-US/docs/Web/API/Screen)
@@ -25,6 +25,7 @@ pub trait TScreen: TJsValue {
   height(self : Self) -> Int = _
   color_depth(self : Self) -> UInt = _
   pixel_depth(self : Self) -> UInt = _
+  orientation(self : Self) -> ScreenOrientation = _
 }
 
 ///|
@@ -61,4 +62,10 @@ impl TScreen with color_depth(self : Self) -> UInt {
 /// [Screen.pixelDepth](https://developer.mozilla.org/en-US/docs/Web/API/Screen/pixelDepth)
 impl TScreen with pixel_depth(self : Self) -> UInt {
   screen_pixel_depth_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Screen.orientation](https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientation)
+impl TScreen with orientation(self : Self) -> ScreenOrientation {
+  screen_orientation_ffi(TJsValue::to_js(self))
 }

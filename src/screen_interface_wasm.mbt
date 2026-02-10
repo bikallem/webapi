@@ -15,3 +15,6 @@ fn screen_color_depth_ffi(obj : JsValue) -> UInt = "webapi_Screen" "get_colorDep
 
 ///|
 fn screen_pixel_depth_ffi(obj : JsValue) -> UInt = "webapi_Screen" "get_pixelDepth"
+
+///|
+fn screen_orientation_ffi(obj : JsValue) -> ScreenOrientation = "webapi_Screen" "get_orientation"

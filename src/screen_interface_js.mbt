@@ -45,3 +45,11 @@ extern "js" fn screen_pixel_depth_ffi_js(obj : JsValue) -> JsValue = "(obj) => o
 fn screen_pixel_depth_ffi(obj : JsValue) -> UInt {
   screen_pixel_depth_ffi_js(obj).unsafe_cast()
 }
+
+///|
+extern "js" fn screen_orientation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.orientation"
+
+///|
+fn screen_orientation_ffi(obj : JsValue) -> ScreenOrientation {
+  screen_orientation_ffi_js(obj).unsafe_cast()
+}

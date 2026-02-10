@@ -34,6 +34,7 @@ pub trait TWorkerNavigator: TJsValue {
   languages(self : Self) -> JsValue = _
   on_line(self : Self) -> Bool = _
   hardware_concurrency(self : Self) -> UInt64 = _
+  storage(self : Self) -> StorageManager = _
 }
 
 ///|
@@ -124,4 +125,10 @@ impl TWorkerNavigator with on_line(self : Self) -> Bool {
 /// [WorkerNavigator.hardwareConcurrency](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/hardwareConcurrency)
 impl TWorkerNavigator with hardware_concurrency(self : Self) -> UInt64 {
   worker_navigator_hardware_concurrency_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [WorkerNavigator.storage](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/storage)
+impl TWorkerNavigator with storage(self : Self) -> StorageManager {
+  worker_navigator_storage_ffi(TJsValue::to_js(self))
 }

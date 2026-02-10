@@ -97,3 +97,6 @@ fn worker_navigator_on_line_ffi(obj : JsValue) -> Bool = "webapi_WorkerNavigator
 
 ///|
 fn worker_navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 = "webapi_WorkerNavigator" "get_hardwareConcurrency"
+
+///|
+fn worker_navigator_storage_ffi(obj : JsValue) -> StorageManager = "webapi_WorkerNavigator" "get_storage"

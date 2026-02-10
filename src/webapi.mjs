@@ -3805,6 +3805,7 @@ export const wasmImportObject = {
     get_mimeTypes: (obj) => obj.mimeTypes,
     get_pdfViewerEnabled: (obj) => obj.pdfViewerEnabled,
     get_hardwareConcurrency: (obj) => obj.hardwareConcurrency,
+    get_storage: (obj) => obj.storage,
     taintEnabled: (obj) => obj.taintEnabled(),
     registerProtocolHandler: (obj, scheme, url) => obj.registerProtocolHandler(scheme, url),
     unregisterProtocolHandler: (obj, scheme, url) => obj.unregisterProtocolHandler(scheme, url),
@@ -4267,6 +4268,7 @@ export const wasmImportObject = {
     get_languages: (obj) => obj.languages,
     get_onLine: (obj) => obj.onLine,
     get_hardwareConcurrency: (obj) => obj.hardwareConcurrency,
+    get_storage: (obj) => obj.storage,
     taintEnabled: (obj) => obj.taintEnabled()
   },
 
@@ -4712,6 +4714,12 @@ export const wasmImportObject = {
     getEntriesByName: (obj, name, type_) => obj.getEntriesByName(name, type_)
   },
 
+  webapi_StorageManager: {
+    persisted: (obj) => obj.persisted(),
+    persist: (obj) => obj.persist(),
+    estimate: (obj) => obj.estimate()
+  },
+
   webapi_DOMPointReadOnly: {
     new: (x, y, z, w) => new DOMPointReadOnly(x, y, z, w),
     get_x: (obj) => obj.x,
@@ -4993,7 +5001,8 @@ export const wasmImportObject = {
     get_width: (obj) => obj.width,
     get_height: (obj) => obj.height,
     get_colorDepth: (obj) => obj.colorDepth,
-    get_pixelDepth: (obj) => obj.pixelDepth
+    get_pixelDepth: (obj) => obj.pixelDepth,
+    get_orientation: (obj) => obj.orientation
   },
 
   webapi_CaretPosition: {
@@ -5047,6 +5056,15 @@ export const wasmImportObject = {
     createHTML: (obj, input, _arguments) => obj.createHTML(input, ..._arguments),
     createScript: (obj, input, _arguments) => obj.createScript(input, ..._arguments),
     createScriptURL: (obj, input, _arguments) => obj.createScriptURL(input, ..._arguments)
+  },
+
+  webapi_ScreenOrientation: {
+    get_type: (obj) => obj.type,
+    get_angle: (obj) => obj.angle,
+    get_onchange: (obj) => obj.onchange,
+    set_onchange: (obj, value) => { obj.onchange = value; },
+    lock: (obj, orientation) => obj.lock(orientation),
+    unlock: (obj) => obj.unlock()
   },
 
   webapi_IdleDeadline: {
@@ -5761,6 +5779,15 @@ export const wasmImportObject = {
       if (type !== undefined) obj.type = type;
       if (endings !== undefined) obj.endings = endings;
       if (lastModified !== undefined) obj.lastModified = lastModified;
+      return obj;
+    }
+  },
+
+  webapi_StorageEstimate: {
+    new: (usage, quota) => {
+      const obj = {};
+      if (usage !== undefined) obj.usage = usage;
+      if (quota !== undefined) obj.quota = quota;
       return obj;
     }
   },

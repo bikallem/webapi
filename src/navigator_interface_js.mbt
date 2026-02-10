@@ -179,3 +179,11 @@ extern "js" fn navigator_hardware_concurrency_ffi_js(obj : JsValue) -> JsValue =
 fn navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 {
   navigator_hardware_concurrency_ffi_js(obj).unsafe_cast()
 }
+
+///|
+extern "js" fn navigator_storage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.storage"
+
+///|
+fn navigator_storage_ffi(obj : JsValue) -> StorageManager {
+  navigator_storage_ffi_js(obj).unsafe_cast()
+}

@@ -42,6 +42,7 @@ pub trait TNavigator: TJsValue {
   java_enabled(self : Self) -> Bool = _
   pdf_viewer_enabled(self : Self) -> Bool = _
   hardware_concurrency(self : Self) -> UInt64 = _
+  storage(self : Self) -> StorageManager = _
 }
 
 ///|
@@ -196,4 +197,10 @@ impl TNavigator with pdf_viewer_enabled(self : Self) -> Bool {
 /// [Navigator.hardwareConcurrency](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hardwareConcurrency)
 impl TNavigator with hardware_concurrency(self : Self) -> UInt64 {
   navigator_hardware_concurrency_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Navigator.storage](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/storage)
+impl TNavigator with storage(self : Self) -> StorageManager {
+  navigator_storage_ffi(TJsValue::to_js(self))
 }

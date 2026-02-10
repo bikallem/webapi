@@ -129,3 +129,6 @@ fn navigator_pdf_viewer_enabled_ffi(obj : JsValue) -> Bool = "webapi_Navigator" 
 
 ///|
 fn navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 = "webapi_Navigator" "get_hardwareConcurrency"
+
+///|
+fn navigator_storage_ffi(obj : JsValue) -> StorageManager = "webapi_Navigator" "get_storage"
