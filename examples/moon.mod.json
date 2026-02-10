@@ -10,7 +10,7 @@
         "bikallem/webapi": {
             "path": "../"
         },
-        "moonbitlang/async": "0.16.5"
+        "moonbitlang/async": "0.16.6"
     },
     "preferred-target": "js"
 }
