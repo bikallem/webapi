@@ -6,6 +6,16 @@ fn main {
   let heading = doc.create_element("h1")
   heading.set_text_content("WebSocket Demo")
 
+  // URL input
+  let url_input : @webapi.HTMLInputElement = doc.create_element("input").into()
+  url_input
+  ..set_attribute("id", "ws-url")
+  ..set_attribute("type", "text")
+  ..set_attribute(
+    "style", "width: 100%; padding: 0.5em; font-size: 1em; box-sizing: border-box; margin: 0.5em 0;",
+  )
+  .set_value("ws://localhost:8765")
+
   // Status display
   let status = doc.create_element("div")
   status
@@ -65,11 +75,16 @@ fn main {
     "click",
     @webapi.EventListener::new(fn(_event) {
       match ws.val {
-        Some(s) => if s.ready_state() < @webapi.WEB_SOCKET_CLOSING { return }
+        Some(s) =>
+          if s.ready_state() == @webapi.WEB_SOCKET_CONNECTING ||
+            s.ready_state() == @webapi.WEB_SOCKET_OPEN {
+            return
+          }
         _ => ()
       }
+      let url = url_input.value()
       update_status("Status: Connecting...")
-      let socket = @webapi.WebSocket::new("wss://echo.websocket.org")
+      let socket = @webapi.WebSocket::new(url)
       ws.val = Some(socket)
       socket.set_onopen(
         @webapi.EventHandlerNonNull::new(fn(_e) {
@@ -95,9 +110,10 @@ fn main {
         @webapi.EventHandlerNonNull::new(fn(e) {
           let close_event : @webapi.CloseEvent = e.into()
           update_status(
-            "Status: Closed (code=" + close_event.code().to_string() + ")",
+            "Status: Disconnected (code=" + close_event.code().to_string() + ")",
           )
           log_message("Connection closed")
+          ws.val = None
           @webapi.JsValue::undefined()
         }),
       )
@@ -117,7 +133,8 @@ fn main {
     @webapi.EventListener::new(fn(_event) {
       match ws.val {
         Some(s) =>
-          if s.ready_state() < @webapi.WEB_SOCKET_CLOSING {
+          if s.ready_state() == @webapi.WEB_SOCKET_CONNECTING ||
+            s.ready_state() == @webapi.WEB_SOCKET_OPEN {
             s.close()
             update_status("Status: Closing...")
           } else {
@@ -135,7 +152,7 @@ fn main {
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
   let children : Array[&@webapi.TNode] = [
-    heading, status, connect_btn, disconnect_btn, messages,
+    heading, url_input, status, connect_btn, disconnect_btn, messages,
   ]
   for child in children {
     container.append_child(child) |> ignore

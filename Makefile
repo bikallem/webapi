@@ -34,7 +34,7 @@ test-playwright:
 
 # Serve examples locally at http://localhost:3000/examples/
 serve:
-	npx serve . -l 3000 --no-clipboard --symlinks
+	node tests/ws-echo-server.mjs & npx serve . -l 3000 --no-clipboard --symlinks
 
 # Remove build artifacts
 clean:
