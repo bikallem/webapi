@@ -33,7 +33,7 @@ test-playwright:
 	cd tests && npx playwright test
 
 # Serve examples locally at http://localhost:3000/examples/
-serve: gen build-examples
+serve: build-examples
 	npx serve . -l 3000 --no-clipboard --symlinks
 
 # Remove build artifacts
