@@ -295,17 +295,23 @@ test "mbt_code_gen_multi generates callback across targets" {
   ]
   let multi = mbt_code_gen_multi(emits)
   // Shared should be empty (callbacks are entirely target-specific)
-  inspect(multi.shared, content="")
-  // JS callback uses js_of
-  inspect(multi.js_ffi.contains("js_of(f)"), content="true")
+  inspect(
+    multi.shared,
+    content=(
+      #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
+    ),
+  )
+  // JS callback passes typed closure directly
+  inspect(multi.js_ffi.contains("(Event) -> Unit"), content="true")
   inspect(
     multi.js_ffi.contains("extern \"js\" fn event_listener_ffi"),
     content="true",
   )
-  // Wasm callback wraps closure with JsValue params
-  inspect(multi.wasm_ffi.contains("a0 : JsValue"), content="true")
+  // Wasm callback wraps in JsValue closure
   inspect(
-    multi.wasm_ffi.contains("\"webapi_EventListener\" \"new\""),
-    content="true",
+    multi.wasm_ffi,
+    content=(
+      #|fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "webapi_EventListener" "new"
+    ),
   )
 }

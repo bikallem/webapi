@@ -11,3 +11,10 @@ pub type NavigationInterceptHandler
 pub impl TJsValue for NavigationInterceptHandler with to_js(
   self : NavigationInterceptHandler,
 ) -> JsValue = "%identity"
+
+///|
+pub fn NavigationInterceptHandler::new(
+  callback : () -> @js_async.Promise[Unit],
+) -> NavigationInterceptHandler {
+  navigation_intercept_handler_ffi(callback)
+}

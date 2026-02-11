@@ -36,6 +36,7 @@ pub impl ToJson for AttributeSetMethodEmit
 pub(all) struct CallbackArgEmit {
   name : String
   mbt_type : String
+  wasm_externref : Bool
 }
 pub impl Show for CallbackArgEmit
 pub impl ToJson for CallbackArgEmit

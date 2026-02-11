@@ -9,3 +9,8 @@ pub type BlobCallback
 
 ///|
 pub impl TJsValue for BlobCallback with to_js(self : BlobCallback) -> JsValue = "%identity"
+
+///|
+pub fn BlobCallback::new(callback : (Blob) -> Unit) -> BlobCallback {
+  blob_callback_ffi(callback)
+}

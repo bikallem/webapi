@@ -11,3 +11,10 @@ pub type ResizeObserverCallback
 pub impl TJsValue for ResizeObserverCallback with to_js(
   self : ResizeObserverCallback,
 ) -> JsValue = "%identity"
+
+///|
+pub fn ResizeObserverCallback::new(
+  callback : (Array[ResizeObserverEntry], ResizeObserver) -> Unit,
+) -> ResizeObserverCallback {
+  resize_observer_callback_ffi(callback)
+}

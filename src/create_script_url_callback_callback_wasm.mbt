@@ -1,12 +1,4 @@
 ///|
-pub fn CreateScriptURLCallback::new(
-  f : (String, JsValue) -> String,
-) -> CreateScriptURLCallback {
-  let w : (JsValue, JsValue) -> JsValue = fn(a0 : JsValue, a1 : JsValue) {
-    TJsValue::to_js(f(a0.unsafe_cast(), a1.unsafe_cast()))
-  }
-  create_script_url_callback_ffi(w).unsafe_cast()
-}
-
-///|
-fn create_script_url_callback_ffi(f : (JsValue, JsValue) -> JsValue) -> JsValue = "webapi_CreateScriptURLCallback" "new"
+fn create_script_url_callback_ffi(
+  callback : (String, JsValue) -> String,
+) -> CreateScriptURLCallback = "webapi_CreateScriptURLCallback" "new"

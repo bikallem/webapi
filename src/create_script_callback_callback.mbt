@@ -11,3 +11,10 @@ pub type CreateScriptCallback
 pub impl TJsValue for CreateScriptCallback with to_js(
   self : CreateScriptCallback,
 ) -> JsValue = "%identity"
+
+///|
+pub fn CreateScriptCallback::new(
+  callback : (String, JsValue) -> String,
+) -> CreateScriptCallback {
+  create_script_callback_ffi(callback)
+}

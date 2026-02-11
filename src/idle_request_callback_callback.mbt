@@ -9,3 +9,10 @@ pub type IdleRequestCallback
 
 ///|
 pub impl TJsValue for IdleRequestCallback with to_js(self : IdleRequestCallback) -> JsValue = "%identity"
+
+///|
+pub fn IdleRequestCallback::new(
+  callback : (IdleDeadline) -> Unit,
+) -> IdleRequestCallback {
+  idle_request_callback_ffi(callback)
+}

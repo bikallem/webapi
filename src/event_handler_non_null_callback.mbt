@@ -9,3 +9,10 @@ pub type EventHandlerNonNull
 
 ///|
 pub impl TJsValue for EventHandlerNonNull with to_js(self : EventHandlerNonNull) -> JsValue = "%identity"
+
+///|
+pub fn EventHandlerNonNull::new(
+  callback : (Event) -> JsValue,
+) -> EventHandlerNonNull {
+  event_handler_non_null_ffi(callback)
+}

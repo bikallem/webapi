@@ -9,3 +9,8 @@ pub type EventListener
 
 ///|
 pub impl TJsValue for EventListener with to_js(self : EventListener) -> JsValue = "%identity"
+
+///|
+pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener {
+  event_listener_ffi(callback)
+}

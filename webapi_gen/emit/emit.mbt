@@ -261,9 +261,8 @@ fn render_constructor_ffi_wasm(
 }
 
 ///|
-/// Render callback wrapper + FFI for the JS target.
-/// Uses js_of() to convert the closure to JsValue via %identity (works on JS backend).
-fn render_callback_js(
+/// Render shared callback wrapper (target-independent).
+fn render_callback_shared(
   name : String,
   args : Array[CallbackArgEmit],
   return_type : String,
@@ -271,14 +270,12 @@ fn render_callback_js(
   let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
   let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  "pub fn \{name}::new(f : \{closure_type}) -> \{name} { \{ffi_name}(js_of(f)).unsafe_cast() }\n\n///|\nextern \"js\" fn \{ffi_name}(f : JsValue) -> JsValue = \"(f) => f\""
+  "pub fn \{name}::new(callback : \{closure_type}) -> \{name} { \{ffi_name}(callback) }"
 }
 
 ///|
-/// Render callback wrapper + FFI for the wasm-gc target.
-/// Wraps the user's closure in a JsValue-only closure so MoonBit's make_closure
-/// mechanism handles the closure-to-JS-function conversion properly.
-fn render_callback_wasm(
+/// Render callback FFI for the JS target.
+fn render_callback_js_ffi(
   name : String,
   args : Array[CallbackArgEmit],
   return_type : String,
@@ -286,26 +283,21 @@ fn render_callback_wasm(
   let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
   let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  let n = args.length()
-  let wasm_params : Array[String] = []
-  let cast_args : Array[String] = []
-  for i in 0..<n {
-    let p = "a\{i}"
-    wasm_params.push("\{p} : JsValue")
-    cast_args.push("\{p}.unsafe_cast()")
-  }
-  let wasm_params_str = wasm_params.join(", ")
-  let wasm_types_str = Array::make(n, "JsValue").join(", ")
-  let cast_args_str = cast_args.join(", ")
-  let void_return = return_type == "Unit"
-  let wasm_ret = if void_return { "Unit" } else { "JsValue" }
-  let wasm_closure_type = "(\{wasm_types_str}) -> \{wasm_ret}"
-  let wrapper_body = if void_return {
-    "  let w : \{wasm_closure_type} = fn(\{wasm_params_str}) { f(\{cast_args_str}) }\n"
-  } else {
-    "  let w : \{wasm_closure_type} = fn(\{wasm_params_str}) { TJsValue::to_js(f(\{cast_args_str})) }\n"
-  }
-  "pub fn \{name}::new(f : \{closure_type}) -> \{name} {\n\{wrapper_body}  \{ffi_name}(w).unsafe_cast()\n}\n\n///|\nfn \{ffi_name}(f : \{wasm_closure_type}) -> JsValue = \"webapi_\{name}\" \"new\""
+  "extern \"js\" fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"(callback) => callback\""
+}
+
+///|
+/// Render callback FFI for the wasm-gc target.
+/// Closures are externref on wasm-gc, so we always use a direct import.
+fn render_callback_wasm_ffi(
+  name : String,
+  args : Array[CallbackArgEmit],
+  return_type : String,
+) -> String {
+  let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
+  let closure_type = "(\{arg_types}) -> \{return_type}"
+  let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+  "fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"webapi_\{name}\" \"new\""
 }
 
 ///|
@@ -557,10 +549,9 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         )
       }
       Emit::Callback(TypeName(name), args, TypeName(return_type)) => {
-        // Callback wrapper + FFI are target-specific because wasm-gc needs
-        // closure wrapping (can't use %identity to convert closures to externref)
-        append_js(render_callback_js(name, args, return_type))
-        append_wasm(render_callback_wasm(name, args, return_type))
+        append_shared(render_callback_shared(name, args, return_type))
+        append_js(render_callback_js_ffi(name, args, return_type))
+        append_wasm(render_callback_wasm_ffi(name, args, return_type))
       }
     }
   }

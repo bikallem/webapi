@@ -146,9 +146,7 @@ fn mbt_default_value(
         @type_mapping.ArgMbtType::Union({ options, .. }) =>
           if options
             .iter()
-            .find_first(fn(it) {
-              it.name().has_prefix("Array[")
-            })
+            .find_first(fn(it) { it.name().has_prefix("Array[") })
             is Some(t) {
             "([] : \{t.name()})"
           } else {
@@ -235,7 +233,7 @@ fn emit_regular_operation(
   interface_name : String,
   orig_method_name : String,
   type_registry : @type_registry.TypeRegistry,
-  js_name~ : String = interface_name,
+  js_name? : String = interface_name,
 ) -> (Array[Emit], &InterfaceMethodEmit) {
   let emits = []
   let (args, arg_emits) = method_args(
@@ -299,7 +297,7 @@ fn emit_attribute(
   attr : @parser.AttributeMember,
   interface_name : String,
   type_registry : @type_registry.TypeRegistry,
-  js_name~ : String = interface_name,
+  js_name? : String = interface_name,
 ) -> (Array[Emit], Array[&InterfaceMethodEmit]) {
   let emits = []
   let methods : Array[&InterfaceMethodEmit] = []

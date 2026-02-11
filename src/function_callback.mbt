@@ -9,3 +9,8 @@ pub type Function
 
 ///|
 pub impl TJsValue for Function with to_js(self : Function) -> JsValue = "%identity"
+
+///|
+pub fn Function::new(callback : (JsValue) -> JsValue) -> Function {
+  function_ffi(callback)
+}

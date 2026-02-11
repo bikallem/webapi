@@ -11,3 +11,10 @@ pub type NotificationPermissionCallback
 pub impl TJsValue for NotificationPermissionCallback with to_js(
   self : NotificationPermissionCallback,
 ) -> JsValue = "%identity"
+
+///|
+pub fn NotificationPermissionCallback::new(
+  callback : (NotificationPermission) -> Unit,
+) -> NotificationPermissionCallback {
+  notification_permission_callback_ffi(callback)
+}

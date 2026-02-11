@@ -9,3 +9,10 @@ pub type CreateHTMLCallback
 
 ///|
 pub impl TJsValue for CreateHTMLCallback with to_js(self : CreateHTMLCallback) -> JsValue = "%identity"
+
+///|
+pub fn CreateHTMLCallback::new(
+  callback : (String, JsValue) -> String,
+) -> CreateHTMLCallback {
+  create_html_callback_ffi(callback)
+}

@@ -11,3 +11,10 @@ pub type FunctionStringCallback
 pub impl TJsValue for FunctionStringCallback with to_js(
   self : FunctionStringCallback,
 ) -> JsValue = "%identity"
+
+///|
+pub fn FunctionStringCallback::new(
+  callback : (String) -> Unit,
+) -> FunctionStringCallback {
+  function_string_callback_ffi(callback)
+}

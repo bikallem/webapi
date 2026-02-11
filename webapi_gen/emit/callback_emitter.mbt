@@ -71,10 +71,9 @@ test "emit_callback simple EventListener" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
-      #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(js_of(f)).unsafe_cast() }
+      #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
-      #|///|
-      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
+      #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
     ),
   )
 }
@@ -107,10 +106,9 @@ test "emit_callback with interface argument uses trait reference" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
-      #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(js_of(f)).unsafe_cast() }
+      #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
-      #|///|
-      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
+      #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
     ),
   )
 }
@@ -142,10 +140,9 @@ test "emit_callback multi-arg MutationCallback" {
       #|
       #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
-      #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(js_of(f)).unsafe_cast() }
+      #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
       #|
-      #|///|
-      #|extern "js" fn mutation_callback_ffi(f : JsValue) -> JsValue = "(f) => f"
+      #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
     ),
   )
 }
@@ -177,10 +174,9 @@ test "js_code_gen Callback generates correct code" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
-      #|pub fn EventListener::new(f : (Event) -> Unit) -> EventListener { event_listener_ffi(js_of(f)).unsafe_cast() }
+      #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
-      #|///|
-      #|extern "js" fn event_listener_ffi(f : JsValue) -> JsValue = "(f) => f"
+      #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
     ),
   )
 }
@@ -212,10 +208,9 @@ test "js_code_gen Callback with multiple args" {
       #|
       #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
-      #|pub fn MutationCallback::new(f : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(js_of(f)).unsafe_cast() }
+      #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
       #|
-      #|///|
-      #|extern "js" fn mutation_callback_ffi(f : JsValue) -> JsValue = "(f) => f"
+      #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
     ),
   )
 }
@@ -239,7 +234,7 @@ test "CallbackEmitter multi-target separates FFI" {
   inspect(
     multi.shared.contains("pub fn EventListener::new("),
     content=(
-      #|false
+      #|true
     ),
   )
   // JS FFI should have extern "js"
@@ -251,5 +246,32 @@ test "CallbackEmitter multi-target separates FFI" {
   inspect(
     multi.wasm_ffi.contains("\"webapi_EventListener\" \"new\""),
     content="true",
+  )
+}
+
+///|
+test "CallbackEmitter wasm always uses direct import" {
+  let idl =
+    #|enum NotificationPermission { "default", "denied", "granted" };
+    #|callback NotificationPermissionCallback = undefined (NotificationPermission permission);
+  let definitions = @parser.parse(idl)
+  let registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let callback_emitter = CallbackEmitter::{
+    idl: flattened,
+    type_registry: registry,
+  }
+  let (_filename, emits) = callback_emitter.emit(
+    "NotificationPermissionCallback",
+  )
+  let multi = mbt_code_gen_multi(emits)
+  // Wasm FFI should be a direct import — closures are externref on wasm-gc
+  inspect(multi.wasm_ffi.contains("_ffi_raw"), content="false")
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn notification_permission_callback_ffi(callback : (NotificationPermission) -> Unit) -> NotificationPermissionCallback = "webapi_NotificationPermissionCallback" "new"
+    ),
   )
 }

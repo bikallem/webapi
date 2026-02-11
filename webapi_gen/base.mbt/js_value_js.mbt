@@ -1,9 +1,4 @@
 ///|
-/// Convert any value to JsValue via %identity.
-/// Used on JS backend for passing closures to FFI.
-fn[T] js_of(x : T) -> JsValue = "%identity"
-
-///|
 /// Get JavaScript undefined value
 pub extern "js" fn JsValue::undefined() -> JsValue = "() => undefined"
 
