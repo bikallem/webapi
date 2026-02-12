@@ -112,7 +112,7 @@ fn response_body_used_ffi(obj : JsValue) -> Bool {
 extern "js" fn response_array_buffer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.arrayBuffer()"
 
 ///|
-fn response_array_buffer_ffi(obj : JsValue) -> @js_async.Promise[ArrayBuffer] {
+fn response_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
   response_array_buffer_ffi_js(obj).unsafe_cast()
 }
 
@@ -120,7 +120,7 @@ fn response_array_buffer_ffi(obj : JsValue) -> @js_async.Promise[ArrayBuffer] {
 extern "js" fn response_blob_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blob()"
 
 ///|
-fn response_blob_ffi(obj : JsValue) -> @js_async.Promise[Blob] {
+fn response_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
   response_blob_ffi_js(obj).unsafe_cast()
 }
 
@@ -128,7 +128,7 @@ fn response_blob_ffi(obj : JsValue) -> @js_async.Promise[Blob] {
 extern "js" fn response_bytes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bytes()"
 
 ///|
-fn response_bytes_ffi(obj : JsValue) -> @js_async.Promise[Uint8Array] {
+fn response_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
   response_bytes_ffi_js(obj).unsafe_cast()
 }
 
@@ -136,7 +136,7 @@ fn response_bytes_ffi(obj : JsValue) -> @js_async.Promise[Uint8Array] {
 extern "js" fn response_form_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formData()"
 
 ///|
-fn response_form_data_ffi(obj : JsValue) -> @js_async.Promise[FormData] {
+fn response_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
   response_form_data_ffi_js(obj).unsafe_cast()
 }
 
@@ -144,7 +144,7 @@ fn response_form_data_ffi(obj : JsValue) -> @js_async.Promise[FormData] {
 extern "js" fn response_json_2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json_2()"
 
 ///|
-fn response_json_2_ffi(obj : JsValue) -> @js_async.Promise[JsValue] {
+fn response_json_2_ffi(obj : JsValue) -> JsPromise[JsValue] {
   response_json_2_ffi_js(obj).unsafe_cast()
 }
 
@@ -152,6 +152,6 @@ fn response_json_2_ffi(obj : JsValue) -> @js_async.Promise[JsValue] {
 extern "js" fn response_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text()"
 
 ///|
-fn response_text_ffi(obj : JsValue) -> @js_async.Promise[String] {
+fn response_text_ffi(obj : JsValue) -> JsPromise[String] {
   response_text_ffi_js(obj).unsafe_cast()
 }

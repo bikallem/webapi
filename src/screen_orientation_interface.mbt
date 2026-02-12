@@ -24,9 +24,7 @@ pub impl TEventTarget for ScreenOrientation
 ///|
 /// [ScreenOrientation](https://developer.mozilla.org/en-US/docs/Web/API/ScreenOrientation) interface.
 pub trait TScreenOrientation: TEventTarget {
-  lock(self : Self, orientation : OrientationLockType) -> @js_async.Promise[
-    Unit,
-  ] = _
+  lock(self : Self, orientation : OrientationLockType) -> JsPromise[Unit] = _
   unlock(self : Self) -> Unit = _
   type_(self : Self) -> OrientationType = _
   angle(self : Self) -> UInt = _
@@ -39,7 +37,7 @@ pub trait TScreenOrientation: TEventTarget {
 impl TScreenOrientation with lock(
   self : Self,
   orientation : OrientationLockType,
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   screen_orientation_lock_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(orientation),

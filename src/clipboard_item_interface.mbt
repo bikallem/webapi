@@ -29,7 +29,7 @@ pub fn ClipboardItem::new(
 pub trait TClipboardItem: TJsValue {
   presentation_style(self : Self) -> PresentationStyle = _
   types(self : Self) -> JsValue = _
-  get_type(self : Self, type_ : String) -> @js_async.Promise[Blob] = _
+  get_type(self : Self, type_ : String) -> JsPromise[Blob] = _
 }
 
 ///|
@@ -46,7 +46,7 @@ impl TClipboardItem with types(self : Self) -> JsValue {
 
 ///|
 /// [ClipboardItem.getType](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardItem/getType)
-impl TClipboardItem with get_type(self : Self, type_ : String) -> @js_async.Promise[
+impl TClipboardItem with get_type(self : Self, type_ : String) -> JsPromise[
   Blob,
 ] {
   clipboard_item_get_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))

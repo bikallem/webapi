@@ -8,7 +8,7 @@ fn screen_orientation_lock_ffi_wasm(
 fn screen_orientation_lock_ffi(
   obj : JsValue,
   orientation : JsValue,
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   screen_orientation_lock_ffi_wasm(obj, orientation).unsafe_cast()
 }
 

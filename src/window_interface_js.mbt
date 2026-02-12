@@ -439,10 +439,7 @@ extern "js" fn window_scroll_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scroll(options)"
 
 ///|
-fn window_scroll_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> @js_async.Promise[Unit] {
+fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
   window_scroll_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -458,7 +455,7 @@ fn window_scroll_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   window_scroll_2_ffi_js(obj, x, y).unsafe_cast()
 }
 
@@ -469,10 +466,7 @@ extern "js" fn window_scroll_to_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scrollTo(options)"
 
 ///|
-fn window_scroll_to_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> @js_async.Promise[Unit] {
+fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
   window_scroll_to_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -488,7 +482,7 @@ fn window_scroll_to_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   window_scroll_to_2_ffi_js(obj, x, y).unsafe_cast()
 }
 
@@ -499,10 +493,7 @@ extern "js" fn window_scroll_by_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scrollBy(options)"
 
 ///|
-fn window_scroll_by_ffi(
-  obj : JsValue,
-  options : JsValue,
-) -> @js_async.Promise[Unit] {
+fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
   window_scroll_by_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -518,7 +509,7 @@ fn window_scroll_by_2_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   window_scroll_by_2_ffi_js(obj, x, y).unsafe_cast()
 }
 
@@ -2207,7 +2198,7 @@ fn window_create_image_bitmap_ffi(
   obj : JsValue,
   image : JsValue,
   options : JsValue,
-) -> @js_async.Promise[ImageBitmap] {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_ffi_js(obj, image, options).unsafe_cast()
 }
 
@@ -2231,7 +2222,7 @@ fn window_create_image_bitmap_2_ffi(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> @js_async.Promise[ImageBitmap] {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_2_ffi_js(obj, image, sx, sy, sw, sh, options).unsafe_cast()
 }
 
@@ -2263,7 +2254,7 @@ fn window_fetch_ffi(
   obj : JsValue,
   input : JsValue,
   init : JsValue,
-) -> @js_async.Promise[Response] {
+) -> JsPromise[Response] {
   window_fetch_ffi_js(obj, input, init).unsafe_cast()
 }
 

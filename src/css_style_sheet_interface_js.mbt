@@ -49,7 +49,7 @@ extern "js" fn css_style_sheet_replace_ffi_js(
 fn css_style_sheet_replace_ffi(
   obj : JsValue,
   text : JsValue,
-) -> @js_async.Promise[CSSStyleSheet] {
+) -> JsPromise[CSSStyleSheet] {
   css_style_sheet_replace_ffi_js(obj, text).unsafe_cast()
 }
 

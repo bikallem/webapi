@@ -24,7 +24,7 @@ fn css_style_sheet_replace_ffi_wasm(obj : JsValue, text : JsValue) -> JsValue = 
 fn css_style_sheet_replace_ffi(
   obj : JsValue,
   text : JsValue,
-) -> @js_async.Promise[CSSStyleSheet] {
+) -> JsPromise[CSSStyleSheet] {
   css_style_sheet_replace_ffi_wasm(obj, text).unsafe_cast()
 }
 

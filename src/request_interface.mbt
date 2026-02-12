@@ -46,12 +46,12 @@ pub trait TRequest: TJsValue {
   clone(self : Self) -> Request = _
   body(self : Self) -> ReadableStream = _
   body_used(self : Self) -> Bool = _
-  array_buffer(self : Self) -> @js_async.Promise[ArrayBuffer] = _
-  blob(self : Self) -> @js_async.Promise[Blob] = _
-  bytes(self : Self) -> @js_async.Promise[Uint8Array] = _
-  form_data(self : Self) -> @js_async.Promise[FormData] = _
-  json(self : Self) -> @js_async.Promise[JsValue] = _
-  text(self : Self) -> @js_async.Promise[String] = _
+  array_buffer(self : Self) -> JsPromise[ArrayBuffer] = _
+  blob(self : Self) -> JsPromise[Blob] = _
+  bytes(self : Self) -> JsPromise[Uint8Array] = _
+  form_data(self : Self) -> JsPromise[FormData] = _
+  json(self : Self) -> JsPromise[JsValue] = _
+  text(self : Self) -> JsPromise[String] = _
 }
 
 ///|
@@ -170,36 +170,36 @@ impl TRequest with body_used(self : Self) -> Bool {
 
 ///|
 /// [Request.arrayBuffer](https://developer.mozilla.org/en-US/docs/Web/API/Request/arrayBuffer)
-impl TRequest with array_buffer(self : Self) -> @js_async.Promise[ArrayBuffer] {
+impl TRequest with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
   request_array_buffer_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Request.blob](https://developer.mozilla.org/en-US/docs/Web/API/Request/blob)
-impl TRequest with blob(self : Self) -> @js_async.Promise[Blob] {
+impl TRequest with blob(self : Self) -> JsPromise[Blob] {
   request_blob_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Request.bytes](https://developer.mozilla.org/en-US/docs/Web/API/Request/bytes)
-impl TRequest with bytes(self : Self) -> @js_async.Promise[Uint8Array] {
+impl TRequest with bytes(self : Self) -> JsPromise[Uint8Array] {
   request_bytes_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Request.formData](https://developer.mozilla.org/en-US/docs/Web/API/Request/formData)
-impl TRequest with form_data(self : Self) -> @js_async.Promise[FormData] {
+impl TRequest with form_data(self : Self) -> JsPromise[FormData] {
   request_form_data_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Request.json](https://developer.mozilla.org/en-US/docs/Web/API/Request/json)
-impl TRequest with json(self : Self) -> @js_async.Promise[JsValue] {
+impl TRequest with json(self : Self) -> JsPromise[JsValue] {
   request_json_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Request.text](https://developer.mozilla.org/en-US/docs/Web/API/Request/text)
-impl TRequest with text(self : Self) -> @js_async.Promise[String] {
+impl TRequest with text(self : Self) -> JsPromise[String] {
   request_text_ffi(TJsValue::to_js(self))
 }

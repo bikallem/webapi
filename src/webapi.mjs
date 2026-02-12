@@ -41,6 +41,13 @@ export const wasmImportObject = {
     navigator: () => navigator
   },
 
+  webapi_JsPromise: {
+    resolve: (value) => Promise.resolve(value),
+    reject: (reason) => Promise.reject(reason),
+    then: (p, f) => p.then(f),
+    catch: (p, f) => p.catch(f),
+    finally: (p, f) => p.finally(f)
+  },
   webapi_SVGElement: {
     get_className: (obj) => obj.className,
     get_ownerSVGElement: (obj) => obj.ownerSVGElement,

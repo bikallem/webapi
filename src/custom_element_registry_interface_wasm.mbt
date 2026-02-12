@@ -44,7 +44,7 @@ fn custom_element_registry_when_defined_ffi_wasm(
 fn custom_element_registry_when_defined_ffi(
   obj : JsValue,
   name : JsValue,
-) -> @js_async.Promise[CustomElementConstructor] {
+) -> JsPromise[CustomElementConstructor] {
   custom_element_registry_when_defined_ffi_wasm(obj, name).unsafe_cast()
 }
 

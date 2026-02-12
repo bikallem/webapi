@@ -162,7 +162,7 @@ fn html_image_element_set_fetch_priority_ffi(
 fn html_image_element_decode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "decode"
 
 ///|
-fn html_image_element_decode_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
+fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[Unit] {
   html_image_element_decode_ffi_wasm(obj).unsafe_cast()
 }
 

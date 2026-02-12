@@ -68,7 +68,7 @@ pub trait THTMLImageElement: THTMLElement {
   set_loading(self : Self, loading : String) -> Unit = _
   fetch_priority(self : Self) -> String = _
   set_fetch_priority(self : Self, fetch_priority : String) -> Unit = _
-  decode(self : Self) -> @js_async.Promise[Unit] = _
+  decode(self : Self) -> JsPromise[Unit] = _
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
   lowsrc(self : Self) -> String = _
@@ -308,7 +308,7 @@ impl THTMLImageElement with set_fetch_priority(
 
 ///|
 /// [HTMLImageElement.decode](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode)
-impl THTMLImageElement with decode(self : Self) -> @js_async.Promise[Unit] {
+impl THTMLImageElement with decode(self : Self) -> JsPromise[Unit] {
   html_image_element_decode_ffi(TJsValue::to_js(self))
 }
 

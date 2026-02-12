@@ -46,9 +46,7 @@ pub fn[T] JsPromise::catch_(
   self : JsPromise[T],
   on_rejected : (JsValue) -> T,
 ) -> JsPromise[T] {
-  let f : (JsValue) -> JsValue = fn(reason) {
-    any_to_js(on_rejected(reason))
-  }
+  let f : (JsValue) -> JsValue = fn(reason) { any_to_js(on_rejected(reason)) }
   js_promise_catch_ffi(TJsValue::to_js(self), f).unsafe_cast()
 }
 

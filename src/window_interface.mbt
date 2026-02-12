@@ -118,12 +118,12 @@ pub trait TWindow: TEventTarget {
   page_x_offset(self : Self) -> Double = _
   scroll_y(self : Self) -> Double = _
   page_y_offset(self : Self) -> Double = _
-  scroll(self : Self, options? : ScrollToOptions) -> @js_async.Promise[Unit] = _
-  scroll_2(self : Self, x : Double, y : Double) -> @js_async.Promise[Unit] = _
-  scroll_to(self : Self, options? : ScrollToOptions) -> @js_async.Promise[Unit] = _
-  scroll_to_2(self : Self, x : Double, y : Double) -> @js_async.Promise[Unit] = _
-  scroll_by(self : Self, options? : ScrollToOptions) -> @js_async.Promise[Unit] = _
-  scroll_by_2(self : Self, x : Double, y : Double) -> @js_async.Promise[Unit] = _
+  scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
+  scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   screen_x(self : Self) -> Int = _
   screen_left(self : Self) -> Int = _
   screen_y(self : Self) -> Int = _
@@ -391,7 +391,7 @@ pub trait TWindow: TEventTarget {
     self : Self,
     image : ImageBitmapSource,
     options? : ImageBitmapOptions,
-  ) -> @js_async.Promise[ImageBitmap] = _
+  ) -> JsPromise[ImageBitmap] = _
   create_image_bitmap_2(
     self : Self,
     image : ImageBitmapSource,
@@ -400,13 +400,13 @@ pub trait TWindow: TEventTarget {
     sw : Int,
     sh : Int,
     options? : ImageBitmapOptions,
-  ) -> @js_async.Promise[ImageBitmap] = _
+  ) -> JsPromise[ImageBitmap] = _
   structured_clone(
     self : Self,
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
-  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> @js_async.Promise[
+  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> JsPromise[
     Response,
   ] = _
   performance(self : Self) -> Performance = _
@@ -865,13 +865,13 @@ impl TWindow with page_y_offset(self : Self) -> Double {
 impl TWindow with scroll(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Window.scroll_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll_2)
-impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> @js_async.Promise[
+impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
   window_scroll_2_ffi(
@@ -886,13 +886,13 @@ impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> @js_async.Pro
 impl TWindow with scroll_to(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Window.scrollTo_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo_2)
-impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> @js_async.Promise[
+impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
   window_scroll_to_2_ffi(
@@ -907,13 +907,13 @@ impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> @js_async.
 impl TWindow with scroll_by(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> @js_async.Promise[Unit] {
+) -> JsPromise[Unit] {
   window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Window.scrollBy_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy_2)
-impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> @js_async.Promise[
+impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
   window_scroll_by_2_ffi(
@@ -2642,7 +2642,7 @@ impl TWindow with create_image_bitmap(
   self : Self,
   image : ImageBitmapSource,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> @js_async.Promise[ImageBitmap] {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
@@ -2660,7 +2660,7 @@ impl TWindow with create_image_bitmap_2(
   sw : Int,
   sh : Int,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
-) -> @js_async.Promise[ImageBitmap] {
+) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_2_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image),
@@ -2692,7 +2692,7 @@ impl TWindow with fetch(
   self : Self,
   input : RequestInfo,
   init? : RequestInit = RequestInit::empty(),
-) -> @js_async.Promise[Response] {
+) -> JsPromise[Response] {
   window_fetch_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(input),

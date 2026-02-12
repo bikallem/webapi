@@ -14,7 +14,7 @@ fn clipboard_item_get_type_ffi_wasm(obj : JsValue, type_ : JsValue) -> JsValue =
 fn clipboard_item_get_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> @js_async.Promise[Blob] {
+) -> JsPromise[Blob] {
   clipboard_item_get_type_ffi_wasm(obj, type_).unsafe_cast()
 }
 

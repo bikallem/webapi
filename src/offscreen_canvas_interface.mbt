@@ -37,9 +37,7 @@ pub trait TOffscreenCanvas: TEventTarget {
     options? : JsValue,
   ) -> OffscreenRenderingContext? = _
   transfer_to_image_bitmap(self : Self) -> ImageBitmap = _
-  convert_to_blob(self : Self, options? : ImageEncodeOptions) -> @js_async.Promise[
-    Blob,
-  ] = _
+  convert_to_blob(self : Self, options? : ImageEncodeOptions) -> JsPromise[Blob] = _
   oncontextlost(self : Self) -> EventHandler = _
   set_oncontextlost(self : Self, oncontextlost : EventHandler) -> Unit = _
   oncontextrestored(self : Self) -> EventHandler = _
@@ -103,7 +101,7 @@ impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> ImageBitmap 
 impl TOffscreenCanvas with convert_to_blob(
   self : Self,
   options? : ImageEncodeOptions = ImageEncodeOptions::empty(),
-) -> @js_async.Promise[Blob] {
+) -> JsPromise[Blob] {
   offscreen_canvas_convert_to_blob_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(options),

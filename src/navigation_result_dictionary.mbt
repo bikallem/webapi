@@ -12,8 +12,8 @@ pub impl TJsValue for NavigationResult with to_js(self : NavigationResult) -> Js
 
 ///|
 pub fn NavigationResult::new(
-  committed? : @js_async.Promise[NavigationHistoryEntry],
-  finished? : @js_async.Promise[NavigationHistoryEntry],
+  committed? : JsPromise[NavigationHistoryEntry],
+  finished? : JsPromise[NavigationHistoryEntry],
 ) -> NavigationResult {
   navigation_result_ffi(opt_to_js(committed), opt_to_js(finished))
 }

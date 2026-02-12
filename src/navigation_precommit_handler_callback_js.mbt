@@ -1,4 +1,4 @@
 ///|
 extern "js" fn navigation_precommit_handler_ffi(
-  callback : (NavigationPrecommitController) -> @js_async.Promise[Unit],
+  callback : (NavigationPrecommitController) -> JsPromise[Unit],
 ) -> NavigationPrecommitHandler = "(callback) => callback"

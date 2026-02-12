@@ -140,7 +140,7 @@ fn worker_global_scope_create_image_bitmap_ffi(
   obj : JsValue,
   image : JsValue,
   options : JsValue,
-) -> @js_async.Promise[ImageBitmap] {
+) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_ffi_wasm(obj, image, options).unsafe_cast()
 }
 
@@ -164,7 +164,7 @@ fn worker_global_scope_create_image_bitmap_2_ffi(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> @js_async.Promise[ImageBitmap] {
+) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_2_ffi_wasm(
     obj, image, sx, sy, sw, sh, options,
   ).unsafe_cast()
@@ -189,7 +189,7 @@ fn worker_global_scope_fetch_ffi(
   obj : JsValue,
   input : JsValue,
   init : JsValue,
-) -> @js_async.Promise[Response] {
+) -> JsPromise[Response] {
   worker_global_scope_fetch_ffi_wasm(obj, input, init).unsafe_cast()
 }
 

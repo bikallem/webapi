@@ -272,7 +272,7 @@ pub trait TDocument: TNode {
   scrolling_element(self : Self) -> Element = _
   fullscreen_enabled(self : Self) -> Bool = _
   fullscreen(self : Self) -> Bool = _
-  exit_fullscreen(self : Self) -> @js_async.Promise[Unit] = _
+  exit_fullscreen(self : Self) -> JsPromise[Unit] = _
   onfullscreenchange(self : Self) -> EventHandler = _
   set_onfullscreenchange(self : Self, onfullscreenchange : EventHandler) -> Unit = _
   onfullscreenerror(self : Self) -> EventHandler = _
@@ -1312,7 +1312,7 @@ impl TDocument with fullscreen(self : Self) -> Bool {
 
 ///|
 /// [Document.exitFullscreen](https://developer.mozilla.org/en-US/docs/Web/API/Document/exitFullscreen)
-impl TDocument with exit_fullscreen(self : Self) -> @js_async.Promise[Unit] {
+impl TDocument with exit_fullscreen(self : Self) -> JsPromise[Unit] {
   document_exit_fullscreen_ffi(TJsValue::to_js(self))
 }
 
