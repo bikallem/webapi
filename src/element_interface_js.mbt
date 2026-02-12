@@ -445,7 +445,7 @@ extern "js" fn element_scroll_2_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scroll_2(x, y)"
+) -> JsValue = "(obj, x, y) => obj.scroll(x, y)"
 
 ///|
 fn element_scroll_2_ffi(
@@ -472,7 +472,7 @@ extern "js" fn element_scroll_to_2_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollTo_2(x, y)"
+) -> JsValue = "(obj, x, y) => obj.scrollTo(x, y)"
 
 ///|
 fn element_scroll_to_2_ffi(
@@ -499,7 +499,7 @@ extern "js" fn element_scroll_by_2_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollBy_2(x, y)"
+) -> JsValue = "(obj, x, y) => obj.scrollBy(x, y)"
 
 ///|
 fn element_scroll_by_2_ffi(

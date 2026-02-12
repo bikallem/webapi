@@ -820,7 +820,7 @@ impl THTMLInputElement with set_range_text(self : Self, replacement : String) ->
 }
 
 ///|
-/// [HTMLInputElement.setRangeText_2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setRangeText_2)
+/// [HTMLInputElement.setRangeText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setRangeText)
 impl THTMLInputElement with set_range_text_2(
   self : Self,
   replacement : String,

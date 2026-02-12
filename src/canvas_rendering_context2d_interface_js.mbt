@@ -95,7 +95,7 @@ extern "js" fn canvas_rendering_context2d_set_transform_ffi(
 extern "js" fn canvas_rendering_context2d_set_transform_2_ffi(
   obj : JsValue,
   transform : JsValue,
-) -> Unit = "(obj, transform) => obj.setTransform_2(transform)"
+) -> Unit = "(obj, transform) => obj.setTransform(transform)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_reset_transform_ffi(
@@ -402,7 +402,7 @@ extern "js" fn canvas_rendering_context2d_fill_2_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "(obj, path, fill_rule) => obj.fill_2(path, fill_rule)"
+) -> Unit = "(obj, path, fill_rule) => obj.fill(path, fill_rule)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_stroke_ffi(obj : JsValue) -> Unit = "(obj) => obj.stroke()"
@@ -411,7 +411,7 @@ extern "js" fn canvas_rendering_context2d_stroke_ffi(obj : JsValue) -> Unit = "(
 extern "js" fn canvas_rendering_context2d_stroke_2_ffi(
   obj : JsValue,
   path : JsValue,
-) -> Unit = "(obj, path) => obj.stroke_2(path)"
+) -> Unit = "(obj, path) => obj.stroke(path)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_clip_ffi(
@@ -424,7 +424,7 @@ extern "js" fn canvas_rendering_context2d_clip_2_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "(obj, path, fill_rule) => obj.clip_2(path, fill_rule)"
+) -> Unit = "(obj, path, fill_rule) => obj.clip(path, fill_rule)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_is_point_in_path_ffi_js(
@@ -451,7 +451,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_path_2_ffi_js(
   x : JsValue,
   y : JsValue,
   fill_rule : JsValue,
-) -> JsValue = "(obj, path, x, y, fill_rule) => obj.isPointInPath_2(path, x, y, fill_rule)"
+) -> JsValue = "(obj, path, x, y, fill_rule) => obj.isPointInPath(path, x, y, fill_rule)"
 
 ///|
 fn canvas_rendering_context2d_is_point_in_path_2_ffi(
@@ -488,7 +488,7 @@ extern "js" fn canvas_rendering_context2d_is_point_in_stroke_2_ffi_js(
   path : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, path, x, y) => obj.isPointInStroke_2(path, x, y)"
+) -> JsValue = "(obj, path, x, y) => obj.isPointInStroke(path, x, y)"
 
 ///|
 fn canvas_rendering_context2d_is_point_in_stroke_2_ffi(
@@ -511,7 +511,7 @@ extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_2_ffi(
   obj : JsValue,
   path : JsValue,
   element : JsValue,
-) -> Unit = "(obj, path, element) => obj.drawFocusIfNeeded_2(path, element)"
+) -> Unit = "(obj, path, element) => obj.drawFocusIfNeeded(path, element)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_fill_text_ffi(
@@ -561,7 +561,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_2_ffi(
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "(obj, image, dx, dy, dw, dh) => obj.drawImage_2(image, dx, dy, dw, dh)"
+) -> Unit = "(obj, image, dx, dy, dw, dh) => obj.drawImage(image, dx, dy, dw, dh)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_draw_image_3_ffi(
@@ -575,7 +575,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_3_ffi(
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "(obj, image, sx, sy, sw, sh, dx, dy, dw, dh) => obj.drawImage_3(image, sx, sy, sw, sh, dx, dy, dw, dh)"
+) -> Unit = "(obj, image, sx, sy, sw, sh, dx, dy, dw, dh) => obj.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_create_image_data_ffi_js(
@@ -599,7 +599,7 @@ fn canvas_rendering_context2d_create_image_data_ffi(
 extern "js" fn canvas_rendering_context2d_create_image_data_2_ffi_js(
   obj : JsValue,
   image_data : JsValue,
-) -> JsValue = "(obj, image_data) => obj.createImageData_2(image_data)"
+) -> JsValue = "(obj, image_data) => obj.createImageData(image_data)"
 
 ///|
 fn canvas_rendering_context2d_create_image_data_2_ffi(
@@ -651,7 +651,7 @@ extern "js" fn canvas_rendering_context2d_put_image_data_2_ffi(
   dirty_y : JsValue,
   dirty_width : JsValue,
   dirty_height : JsValue,
-) -> Unit = "(obj, image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height) => obj.putImageData_2(image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height)"
+) -> Unit = "(obj, image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height) => obj.putImageData(image_data, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height)"
 
 ///|
 extern "js" fn canvas_rendering_context2d_line_width_ffi_js(

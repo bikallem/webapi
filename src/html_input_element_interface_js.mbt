@@ -671,7 +671,7 @@ extern "js" fn html_input_element_set_range_text_2_ffi(
   start : JsValue,
   end : JsValue,
   selection_mode : JsValue,
-) -> Unit = "(obj, replacement, start, end, selection_mode) => obj.setRangeText_2(replacement, start, end, selection_mode)"
+) -> Unit = "(obj, replacement, start, end, selection_mode) => obj.setRangeText(replacement, start, end, selection_mode)"
 
 ///|
 extern "js" fn html_input_element_set_selection_range_ffi(

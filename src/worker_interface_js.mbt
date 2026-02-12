@@ -19,7 +19,7 @@ extern "js" fn worker_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
 
 ///|
 extern "js" fn worker_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"

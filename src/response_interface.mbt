@@ -154,7 +154,7 @@ impl TResponse with form_data(self : Self) -> JsPromise[FormData] {
 }
 
 ///|
-/// [Response.json_2](https://developer.mozilla.org/en-US/docs/Web/API/Response/json_2)
+/// [Response.json](https://developer.mozilla.org/en-US/docs/Web/API/Response/json)
 impl TResponse with json_2(self : Self) -> JsPromise[JsValue] {
   response_json_2_ffi(TJsValue::to_js(self))
 }

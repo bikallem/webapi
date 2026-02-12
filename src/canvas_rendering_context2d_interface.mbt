@@ -515,7 +515,7 @@ impl TCanvasRenderingContext2D with set_transform(
 }
 
 ///|
-/// [CanvasRenderingContext2D.setTransform_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform_2)
+/// [CanvasRenderingContext2D.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform)
 impl TCanvasRenderingContext2D with set_transform_2(
   self : Self,
   transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
@@ -877,7 +877,7 @@ impl TCanvasRenderingContext2D with fill(
 }
 
 ///|
-/// [CanvasRenderingContext2D.fill_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill_2)
+/// [CanvasRenderingContext2D.fill](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill)
 impl TCanvasRenderingContext2D with fill_2(
   self : Self,
   path : &TPath2D,
@@ -897,7 +897,7 @@ impl TCanvasRenderingContext2D with stroke(self : Self) -> Unit {
 }
 
 ///|
-/// [CanvasRenderingContext2D.stroke_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke_2)
+/// [CanvasRenderingContext2D.stroke](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke)
 impl TCanvasRenderingContext2D with stroke_2(self : Self, path : &TPath2D) -> Unit {
   canvas_rendering_context2d_stroke_2_ffi(
     TJsValue::to_js(self),
@@ -918,7 +918,7 @@ impl TCanvasRenderingContext2D with clip(
 }
 
 ///|
-/// [CanvasRenderingContext2D.clip_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip_2)
+/// [CanvasRenderingContext2D.clip](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
 impl TCanvasRenderingContext2D with clip_2(
   self : Self,
   path : &TPath2D,
@@ -948,7 +948,7 @@ impl TCanvasRenderingContext2D with is_point_in_path(
 }
 
 ///|
-/// [CanvasRenderingContext2D.isPointInPath_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath_2)
+/// [CanvasRenderingContext2D.isPointInPath](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath)
 impl TCanvasRenderingContext2D with is_point_in_path_2(
   self : Self,
   path : &TPath2D,
@@ -980,7 +980,7 @@ impl TCanvasRenderingContext2D with is_point_in_stroke(
 }
 
 ///|
-/// [CanvasRenderingContext2D.isPointInStroke_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke_2)
+/// [CanvasRenderingContext2D.isPointInStroke](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke)
 impl TCanvasRenderingContext2D with is_point_in_stroke_2(
   self : Self,
   path : &TPath2D,
@@ -1008,7 +1008,7 @@ impl TCanvasRenderingContext2D with draw_focus_if_needed(
 }
 
 ///|
-/// [CanvasRenderingContext2D.drawFocusIfNeeded_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawFocusIfNeeded_2)
+/// [CanvasRenderingContext2D.drawFocusIfNeeded](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawFocusIfNeeded)
 impl TCanvasRenderingContext2D with draw_focus_if_needed_2(
   self : Self,
   path : &TPath2D,
@@ -1083,7 +1083,7 @@ impl TCanvasRenderingContext2D with draw_image(
 }
 
 ///|
-/// [CanvasRenderingContext2D.drawImage_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage_2)
+/// [CanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
 impl TCanvasRenderingContext2D with draw_image_2(
   self : Self,
   image : &TCanvasImageSource,
@@ -1103,7 +1103,7 @@ impl TCanvasRenderingContext2D with draw_image_2(
 }
 
 ///|
-/// [CanvasRenderingContext2D.drawImage_3](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage_3)
+/// [CanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
 impl TCanvasRenderingContext2D with draw_image_3(
   self : Self,
   image : &TCanvasImageSource,
@@ -1147,7 +1147,7 @@ impl TCanvasRenderingContext2D with create_image_data(
 }
 
 ///|
-/// [CanvasRenderingContext2D.createImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData_2)
+/// [CanvasRenderingContext2D.createImageData](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData)
 impl TCanvasRenderingContext2D with create_image_data_2(
   self : Self,
   image_data : &TImageData,
@@ -1195,7 +1195,7 @@ impl TCanvasRenderingContext2D with put_image_data(
 }
 
 ///|
-/// [CanvasRenderingContext2D.putImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData_2)
+/// [CanvasRenderingContext2D.putImageData](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData)
 impl TCanvasRenderingContext2D with put_image_data_2(
   self : Self,
   image_data : &TImageData,

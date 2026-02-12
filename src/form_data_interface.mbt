@@ -48,7 +48,7 @@ impl TFormData with append(self : Self, name : String, value : String) -> Unit {
 }
 
 ///|
-/// [FormData.append_2](https://developer.mozilla.org/en-US/docs/Web/API/FormData/append_2)
+/// [FormData.append](https://developer.mozilla.org/en-US/docs/Web/API/FormData/append)
 impl TFormData with append_2(
   self : Self,
   name : String,
@@ -105,7 +105,7 @@ impl TFormData with set(self : Self, name : String, value : String) -> Unit {
 }
 
 ///|
-/// [FormData.set_2](https://developer.mozilla.org/en-US/docs/Web/API/FormData/set_2)
+/// [FormData.set](https://developer.mozilla.org/en-US/docs/Web/API/FormData/set)
 impl TFormData with set_2(
   self : Self,
   name : String,

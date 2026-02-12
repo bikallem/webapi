@@ -949,6 +949,49 @@ test "mbt_code_gen_multi wasm FFI snapshot for constructor" {
 }
 
 ///|
+test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
+  let idl =
+    #|interface TestInterface {
+    #|  undefined fill(DOMString fillRule);
+    #|  undefined fill(DOMString path, DOMString fillRule);
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  fn log_skipped(_msg : String) {
+
+  }
+
+  let interface_emitter = InterfaceEmitter::{
+    idl: flattened,
+    type_registry,
+    log_skipped,
+  }
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared.contains(
+      "/// [TestInterface.fill](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/fill)",
+    ),
+    content="true",
+  )
+  inspect(multi.shared.contains("TestInterface/fill_2"), content="false")
+  inspect(
+    multi.js_ffi.contains(
+      "(obj, path, fill_rule) => obj.fill(path, fill_rule)",
+    ),
+    content="true",
+  )
+  inspect(
+    multi.js_ffi.contains(
+      "(obj, path, fill_rule) => obj.fill_2(path, fill_rule)",
+    ),
+    content="false",
+  )
+}
+
+///|
 test "mbt_code_gen_multi wasm FFI snapshot for overloaded methods" {
   let idl =
     #|interface TestInterface {

@@ -17,7 +17,7 @@ extern "js" fn form_data_append_2_ffi(
   name : JsValue,
   blob_value : JsValue,
   filename : JsValue,
-) -> Unit = "(obj, name, blob_value, filename) => obj.append_2(name, blob_value, filename)"
+) -> Unit = "(obj, name, blob_value, filename) => obj.append(name, blob_value, filename)"
 
 ///|
 extern "js" fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(name)"
@@ -60,4 +60,4 @@ extern "js" fn form_data_set_2_ffi(
   name : JsValue,
   blob_value : JsValue,
   filename : JsValue,
-) -> Unit = "(obj, name, blob_value, filename) => obj.set_2(name, blob_value, filename)"
+) -> Unit = "(obj, name, blob_value, filename) => obj.set(name, blob_value, filename)"

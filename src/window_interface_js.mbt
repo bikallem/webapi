@@ -245,7 +245,7 @@ fn window_origin_agent_cluster_ffi(obj : JsValue) -> Bool {
 extern "js" fn window_alert_ffi(obj : JsValue) -> Unit = "(obj) => obj.alert()"
 
 ///|
-extern "js" fn window_alert_2_ffi(obj : JsValue, message : JsValue) -> Unit = "(obj, message) => obj.alert_2(message)"
+extern "js" fn window_alert_2_ffi(obj : JsValue, message : JsValue) -> Unit = "(obj, message) => obj.alert(message)"
 
 ///|
 extern "js" fn window_confirm_ffi_js(
@@ -281,7 +281,7 @@ extern "js" fn window_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
 
 ///|
 extern "js" fn window_capture_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.captureEvents()"
@@ -448,7 +448,7 @@ extern "js" fn window_scroll_2_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scroll_2(x, y)"
+) -> JsValue = "(obj, x, y) => obj.scroll(x, y)"
 
 ///|
 fn window_scroll_2_ffi(
@@ -475,7 +475,7 @@ extern "js" fn window_scroll_to_2_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollTo_2(x, y)"
+) -> JsValue = "(obj, x, y) => obj.scrollTo(x, y)"
 
 ///|
 fn window_scroll_to_2_ffi(
@@ -502,7 +502,7 @@ extern "js" fn window_scroll_by_2_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "(obj, x, y) => obj.scrollBy_2(x, y)"
+) -> JsValue = "(obj, x, y) => obj.scrollBy(x, y)"
 
 ///|
 fn window_scroll_by_2_ffi(
@@ -2211,7 +2211,7 @@ extern "js" fn window_create_image_bitmap_2_ffi_js(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(image, sx, sy, sw, sh, options)"
+) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap(image, sx, sy, sw, sh, options)"
 
 ///|
 fn window_create_image_bitmap_2_ffi(

@@ -360,7 +360,7 @@ impl TWorkerGlobalScope with create_image_bitmap(
 }
 
 ///|
-/// [WorkerGlobalScope.createImageBitmap_2](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/createImageBitmap_2)
+/// [WorkerGlobalScope.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/createImageBitmap)
 impl TWorkerGlobalScope with create_image_bitmap_2(
   self : Self,
   image : &TImageBitmapSource,

@@ -13,7 +13,8 @@ trait InterfaceMethodEmit: ToJson + Show {
 /// Regular trait method emission.
 struct RegularMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
-  original_name : String // Original method name from IDL, eg "getElementById"
+  method_name : String // Emitted MoonBit method name, eg "fill_2" for overloads
+  webidl_name : String // Original WebIDL method name, eg "fill"
   return_type : @type_mapping.MethodReturn
   args : Array[@type_mapping.MethodArg]
 } derive(Show, ToJson)
@@ -24,13 +25,13 @@ impl InterfaceMethodEmit for RegularMethodEmit with decl_emit(
 ) -> Code {
   let args = trait_method_decl_args(self.args)
   Code(
-    "  \{@type_mapping.safe_identifier(self.original_name)}(\{args}) -> \{self.return_type.type_name()} = _",
+    "  \{@type_mapping.safe_identifier(self.method_name)}(\{args}) -> \{self.return_type.type_name()} = _",
   )
 }
 
 ///|
 fn RegularMethodEmit::ffi_name(self : RegularMethodEmit) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.method_name)}_ffi"
 }
 
 ///|
@@ -68,7 +69,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    "obj.\{self.original_name}(\{ffi_js_call_args})",
+    "obj.\{self.webidl_name}(\{ffi_js_call_args})",
   )
 }
 
@@ -91,7 +92,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
     is_string=is_string_return(self.return_type.type_),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
-    self.original_name,
+    self.method_name,
   )
 }
 
@@ -104,12 +105,12 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   let code = StringBuilder::new()
 
   // Emit MDN documentation comment
-  let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+  let mdn_url = mdn_member_url(trait_name, self.webidl_name)
+  code.write_string("/// [\{trait_name}.\{self.webidl_name}](\{mdn_url})\n")
 
   // Emit default trait method implementation
   let method_args = trait_method_impl_args(self.args)
-  let method_name = @type_mapping.safe_identifier(self.original_name)
+  let method_name = @type_mapping.safe_identifier(self.method_name)
   let call_args = func_call_args(self.args)
   code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
@@ -131,7 +132,8 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
 struct StaticMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   js_name : String // Name used in JS FFI bodies, eg. "console" (may differ from interface_name)
-  original_name : String // Original method name from IDL, eg "createElement"
+  method_name : String // Emitted MoonBit method name, eg "fill_2" for overloads
+  webidl_name : String // Original WebIDL method name, eg "fill"
   return_type : @type_mapping.MethodReturn
   args : Array[@type_mapping.MethodArg]
 } derive(Show, ToJson)
@@ -145,7 +147,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with decl_emit(
 
 ///|
 fn StaticMethodEmit::ffi_name(self : StaticMethodEmit) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.method_name)}_ffi"
 }
 
 ///|
@@ -173,7 +175,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    "\{self.js_name}.\{self.original_name}(\{ffi_js_args})",
+    "\{self.js_name}.\{self.webidl_name}(\{ffi_js_args})",
   )
 }
 
@@ -196,7 +198,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
     is_string=is_string_return(self.return_type.type_),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
-    self.original_name,
+    self.method_name,
   )
 }
 
@@ -209,12 +211,12 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   let code = StringBuilder::new()
 
   // Emit MDN documentation comment
-  let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
+  let mdn_url = mdn_member_url(trait_name, self.webidl_name)
+  code.write_string("/// [\{trait_name}.\{self.webidl_name}](\{mdn_url})\n")
 
   // Emit static method implementation
   let method_args = trait_method_impl_args(self.args)
-  let method_name = @type_mapping.safe_identifier(self.original_name)
+  let method_name = @type_mapping.safe_identifier(self.method_name)
   let call_args = func_call_args(self.args)
   code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",

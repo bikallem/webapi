@@ -40,7 +40,7 @@ extern "js" fn xml_http_request_open_2_ffi(
   async_ : JsValue,
   username : JsValue,
   password : JsValue,
-) -> Unit = "(obj, method_, url, async_, username, password) => obj.open_2(method_, url, async_, username, password)"
+) -> Unit = "(obj, method_, url, async_, username, password) => obj.open(method_, url, async_, username, password)"
 
 ///|
 extern "js" fn xml_http_request_set_request_header_ffi(

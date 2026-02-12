@@ -654,7 +654,7 @@ impl TWindow with alert(self : Self) -> Unit {
 }
 
 ///|
-/// [Window.alert_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert_2)
+/// [Window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
 impl TWindow with alert_2(self : Self, message : String) -> Unit {
   window_alert_2_ffi(TJsValue::to_js(self), TJsValue::to_js(message))
 }
@@ -707,7 +707,7 @@ impl TWindow with post_message(
 }
 
 ///|
-/// [Window.postMessage_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage_2)
+/// [Window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)
 impl TWindow with post_message_2(
   self : Self,
   message : JsValue,
@@ -870,7 +870,7 @@ impl TWindow with scroll(
 }
 
 ///|
-/// [Window.scroll_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll_2)
+/// [Window.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll)
 impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
@@ -891,7 +891,7 @@ impl TWindow with scroll_to(
 }
 
 ///|
-/// [Window.scrollTo_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo_2)
+/// [Window.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)
 impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
@@ -912,7 +912,7 @@ impl TWindow with scroll_by(
 }
 
 ///|
-/// [Window.scrollBy_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy_2)
+/// [Window.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy)
 impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
@@ -2651,7 +2651,7 @@ impl TWindow with create_image_bitmap(
 }
 
 ///|
-/// [Window.createImageBitmap_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap_2)
+/// [Window.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap)
 impl TWindow with create_image_bitmap_2(
   self : Self,
   image : &TImageBitmapSource,

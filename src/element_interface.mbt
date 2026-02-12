@@ -832,7 +832,7 @@ impl TElement with scroll(
 }
 
 ///|
-/// [Element.scroll_2](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_2)
+/// [Element.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll)
 impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
@@ -853,7 +853,7 @@ impl TElement with scroll_to(
 }
 
 ///|
-/// [Element.scrollTo_2](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo_2)
+/// [Element.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo)
 impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
@@ -874,7 +874,7 @@ impl TElement with scroll_by(
 }
 
 ///|
-/// [Element.scrollBy_2](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy_2)
+/// [Element.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy)
 impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {

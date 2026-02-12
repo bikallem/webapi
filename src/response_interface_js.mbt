@@ -141,7 +141,7 @@ fn response_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
 }
 
 ///|
-extern "js" fn response_json_2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json_2()"
+extern "js" fn response_json_2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json()"
 
 ///|
 fn response_json_2_ffi(obj : JsValue) -> JsPromise[JsValue] {

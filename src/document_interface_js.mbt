@@ -536,7 +536,7 @@ extern "js" fn document_open_2_ffi(
   url : JsValue,
   name : JsValue,
   features : JsValue,
-) -> JsValue = "(obj, url, name, features) => obj.open_2(url, name, features)"
+) -> JsValue = "(obj, url, name, features) => obj.open(url, name, features)"
 
 ///|
 extern "js" fn document_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"

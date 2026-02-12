@@ -10,7 +10,7 @@ extern "js" fn message_port_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
 
 ///|
 extern "js" fn message_port_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start()"

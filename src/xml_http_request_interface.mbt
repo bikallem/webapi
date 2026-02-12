@@ -126,7 +126,7 @@ impl TXMLHttpRequest with open(self : Self, method_ : String, url : String) -> U
 }
 
 ///|
-/// [XMLHttpRequest.open_2](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open_2)
+/// [XMLHttpRequest.open](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open)
 impl TXMLHttpRequest with open_2(
   self : Self,
   method_ : String,

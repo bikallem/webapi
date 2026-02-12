@@ -302,7 +302,8 @@ fn emit_regular_operation(
     let meth : &InterfaceMethodEmit = StaticMethodEmit::{
       interface_name,
       js_name,
-      original_name: orig_method_name,
+      method_name: orig_method_name,
+      webidl_name: op.name,
       return_type,
       args,
     }
@@ -310,7 +311,8 @@ fn emit_regular_operation(
   } else {
     let meth : &InterfaceMethodEmit = RegularMethodEmit::{
       interface_name,
-      original_name: orig_method_name,
+      method_name: orig_method_name,
+      webidl_name: op.name,
       return_type,
       args,
     }
@@ -477,7 +479,8 @@ fn emit_special_operation(
   }
   let meth : &InterfaceMethodEmit = RegularMethodEmit::{
     interface_name,
-    original_name: orig_method_name,
+    method_name: orig_method_name,
+    webidl_name: op.name.unwrap(),
     return_type,
     args,
   }

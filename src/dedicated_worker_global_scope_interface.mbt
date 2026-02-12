@@ -66,7 +66,7 @@ impl TDedicatedWorkerGlobalScope with post_message(
 }
 
 ///|
-/// [DedicatedWorkerGlobalScope.postMessage_2](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/postMessage_2)
+/// [DedicatedWorkerGlobalScope.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/postMessage)
 impl TDedicatedWorkerGlobalScope with post_message_2(
   self : Self,
   message : JsValue,

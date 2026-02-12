@@ -20,7 +20,7 @@ extern "js" fn dedicated_worker_global_scope_post_message_2_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "(obj, message, options) => obj.postMessage_2(message, options)"
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
 
 ///|
 extern "js" fn dedicated_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"

@@ -955,7 +955,7 @@ impl TDocument with open(self : Self, unused1? : String, unused2? : String) -> D
 }
 
 ///|
-/// [Document.open_2](https://developer.mozilla.org/en-US/docs/Web/API/Document/open_2)
+/// [Document.open](https://developer.mozilla.org/en-US/docs/Web/API/Document/open)
 impl TDocument with open_2(
   self : Self,
   url : String,

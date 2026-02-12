@@ -67,7 +67,7 @@ impl TDataTransferItemList with add(self : Self, data : String, type_ : String) 
 }
 
 ///|
-/// [DataTransferItemList.add_2](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add_2)
+/// [DataTransferItemList.add](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add)
 impl TDataTransferItemList with add_2(self : Self, data : &TFile) -> DataTransferItem? {
   let result = data_transfer_item_list_add_2_ffi(
     TJsValue::to_js(self),

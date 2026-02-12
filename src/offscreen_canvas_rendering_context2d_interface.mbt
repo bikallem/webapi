@@ -526,7 +526,7 @@ impl TOffscreenCanvasRenderingContext2D with set_transform(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.setTransform_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/setTransform_2)
+/// [OffscreenCanvasRenderingContext2D.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/setTransform)
 impl TOffscreenCanvasRenderingContext2D with set_transform_2(
   self : Self,
   transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
@@ -907,7 +907,7 @@ impl TOffscreenCanvasRenderingContext2D with fill(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.fill_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fill_2)
+/// [OffscreenCanvasRenderingContext2D.fill](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fill)
 impl TOffscreenCanvasRenderingContext2D with fill_2(
   self : Self,
   path : &TPath2D,
@@ -927,7 +927,7 @@ impl TOffscreenCanvasRenderingContext2D with stroke(self : Self) -> Unit {
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.stroke_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/stroke_2)
+/// [OffscreenCanvasRenderingContext2D.stroke](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/stroke)
 impl TOffscreenCanvasRenderingContext2D with stroke_2(
   self : Self,
   path : &TPath2D,
@@ -951,7 +951,7 @@ impl TOffscreenCanvasRenderingContext2D with clip(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.clip_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/clip_2)
+/// [OffscreenCanvasRenderingContext2D.clip](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/clip)
 impl TOffscreenCanvasRenderingContext2D with clip_2(
   self : Self,
   path : &TPath2D,
@@ -981,7 +981,7 @@ impl TOffscreenCanvasRenderingContext2D with is_point_in_path(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.isPointInPath_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInPath_2)
+/// [OffscreenCanvasRenderingContext2D.isPointInPath](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInPath)
 impl TOffscreenCanvasRenderingContext2D with is_point_in_path_2(
   self : Self,
   path : &TPath2D,
@@ -1013,7 +1013,7 @@ impl TOffscreenCanvasRenderingContext2D with is_point_in_stroke(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.isPointInStroke_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInStroke_2)
+/// [OffscreenCanvasRenderingContext2D.isPointInStroke](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/isPointInStroke)
 impl TOffscreenCanvasRenderingContext2D with is_point_in_stroke_2(
   self : Self,
   path : &TPath2D,
@@ -1093,7 +1093,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.drawImage_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage_2)
+/// [OffscreenCanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage)
 impl TOffscreenCanvasRenderingContext2D with draw_image_2(
   self : Self,
   image : &TCanvasImageSource,
@@ -1113,7 +1113,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image_2(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.drawImage_3](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage_3)
+/// [OffscreenCanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage)
 impl TOffscreenCanvasRenderingContext2D with draw_image_3(
   self : Self,
   image : &TCanvasImageSource,
@@ -1157,7 +1157,7 @@ impl TOffscreenCanvasRenderingContext2D with create_image_data(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.createImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createImageData_2)
+/// [OffscreenCanvasRenderingContext2D.createImageData](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createImageData)
 impl TOffscreenCanvasRenderingContext2D with create_image_data_2(
   self : Self,
   image_data : &TImageData,
@@ -1205,7 +1205,7 @@ impl TOffscreenCanvasRenderingContext2D with put_image_data(
 }
 
 ///|
-/// [OffscreenCanvasRenderingContext2D.putImageData_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/putImageData_2)
+/// [OffscreenCanvasRenderingContext2D.putImageData](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/putImageData)
 impl TOffscreenCanvasRenderingContext2D with put_image_data_2(
   self : Self,
   image_data : &TImageData,

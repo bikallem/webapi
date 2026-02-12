@@ -279,7 +279,7 @@ impl THTMLSelectElement with remove(self : Self) -> Unit {
 }
 
 ///|
-/// [HTMLSelectElement.remove_2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/remove_2)
+/// [HTMLSelectElement.remove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/remove)
 impl THTMLSelectElement with remove_2(self : Self, index : Int) -> Unit {
   html_select_element_remove_2_ffi(
     TJsValue::to_js(self),

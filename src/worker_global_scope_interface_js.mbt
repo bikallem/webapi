@@ -253,7 +253,7 @@ extern "js" fn worker_global_scope_create_image_bitmap_2_ffi_js(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap_2(image, sx, sy, sw, sh, options)"
+) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap(image, sx, sy, sw, sh, options)"
 
 ///|
 fn worker_global_scope_create_image_bitmap_2_ffi(

@@ -79,7 +79,7 @@ impl TWorker with post_message(
 }
 
 ///|
-/// [Worker.postMessage_2](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage_2)
+/// [Worker.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage)
 impl TWorker with post_message_2(
   self : Self,
   message : JsValue,

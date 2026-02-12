@@ -451,7 +451,7 @@ impl THTMLTextAreaElement with set_range_text(self : Self, replacement : String)
 }
 
 ///|
-/// [HTMLTextAreaElement.setRangeText_2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setRangeText_2)
+/// [HTMLTextAreaElement.setRangeText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setRangeText)
 impl THTMLTextAreaElement with set_range_text_2(
   self : Self,
   replacement : String,

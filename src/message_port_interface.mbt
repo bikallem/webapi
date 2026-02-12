@@ -53,7 +53,7 @@ impl TMessagePort with post_message(
 }
 
 ///|
-/// [MessagePort.postMessage_2](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/postMessage_2)
+/// [MessagePort.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/postMessage)
 impl TMessagePort with post_message_2(
   self : Self,
   message : JsValue,
