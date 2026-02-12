@@ -63,34 +63,56 @@ fn[E : @emit.Emitter] emit_and_write_multi(
   js_files : Array[String],
   wasm_files : Array[String],
 ) -> Int raise {
+  fn sorted_names(keys : Iter[String]) -> Array[String] {
+    let names : Array[String] = []
+    for name in keys {
+      names.push(name)
+    }
+    names.sort()
+    names
+  }
+
+  fn sorted_output_filenames(
+    files : Map[@emit.Filename, @emit.Code],
+  ) -> Array[String] {
+    let names : Array[String] = []
+    for file, _code in files {
+      match file {
+        @emit.Filename(filename) => names.push(filename)
+      }
+    }
+    names.sort()
+    names
+  }
+
   println("=== Generating \{type_name} ===")
-  let multi = @emit.emit_all_multi(emitter, keys)
+  let multi = @emit.emit_all_multi(emitter, sorted_names(keys).iter())
   let count = multi.shared.length()
   // Write shared files
-  for filename, code in multi.shared {
-    let filepath = "\{output_dir}/\{filename.0}"
+  for filename in sorted_output_filenames(multi.shared) {
+    let filepath = "\{output_dir}/\{filename}"
     println("  Writing \{filepath}...")
-    @fs.write_string_to_file(filepath, code.0) catch {
+    @fs.write_string_to_file(filepath, multi.shared[@emit.Filename(filename)].0) catch {
       e => fail("failed to write file: \{e}")
     }
   }
   // Write JS FFI files
-  for filename, code in multi.js_ffi {
-    let filepath = "\{output_dir}/\{filename.0}"
+  for filename in sorted_output_filenames(multi.js_ffi) {
+    let filepath = "\{output_dir}/\{filename}"
     println("  Writing \{filepath}...")
-    @fs.write_string_to_file(filepath, code.0) catch {
+    @fs.write_string_to_file(filepath, multi.js_ffi[@emit.Filename(filename)].0) catch {
       e => fail("failed to write file: \{e}")
     }
-    js_files.push(filename.0)
+    js_files.push(filename)
   }
   // Write wasm FFI files
-  for filename, code in multi.wasm_ffi {
-    let filepath = "\{output_dir}/\{filename.0}"
+  for filename in sorted_output_filenames(multi.wasm_ffi) {
+    let filepath = "\{output_dir}/\{filename}"
     println("  Writing \{filepath}...")
-    @fs.write_string_to_file(filepath, code.0) catch {
+    @fs.write_string_to_file(filepath, multi.wasm_ffi[@emit.Filename(filename)].0) catch {
       e => fail("failed to write file: \{e}")
     }
-    wasm_files.push(filename.0)
+    wasm_files.push(filename)
   }
   count
 }
