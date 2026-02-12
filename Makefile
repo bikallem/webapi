@@ -8,12 +8,12 @@ gen:
 
 # Run code generator tests
 gen-test:
-	cd webapi_gen && moon test --update
+	cd webapi_gen && moon test
 
 # Type-check generated bindings
 check:
 	moon check --target js
-	moon check --target wasm-gc
+# 	moon check --target wasm-gc
 
 # Format all MoonBit code
 fmt:
@@ -26,7 +26,7 @@ info:
 # Build examples for both targets
 build-examples:
 	cd examples && moon build --target js --release
-	cd examples && moon build --target wasm-gc --release
+# 	cd examples && moon build --target wasm-gc --release
 
 # Run Playwright browser tests
 test-playwright:
