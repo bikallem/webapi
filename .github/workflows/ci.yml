@@ -52,9 +52,6 @@ jobs:
       - name: Check (JS target)
         run: moon check --target js
 
-      - name: Check (wasm-gc target)
-        run: moon check --target wasm-gc
-
       - name: Run tests
         working-directory: webapi_gen
         run: moon test
@@ -62,10 +59,6 @@ jobs:
       - name: Build examples (JS)
         working-directory: examples
         run: moon build --target js --release
-
-      - name: Build examples (wasm-gc)
-        working-directory: examples
-        run: moon build --target wasm-gc --release
 
       - name: Cache Playwright browsers
         id: cache-playwright
@@ -90,9 +83,8 @@ jobs:
           mkdir -p _site/src
           cp -r examples _site/examples
           rm -rf _site/examples/.mooncakes _site/examples/_build _site/examples/_build
-          mkdir -p _site/examples/_build/js/release _site/examples/_build/wasm-gc/release
+          mkdir -p _site/examples/_build/js/release
           cp -rL examples/_build/js/release/build _site/examples/_build/js/release/
-          cp -rL examples/_build/wasm-gc/release/build _site/examples/_build/wasm-gc/release/
           cp src/webapi.mjs _site/src/
           echo '<meta http-equiv="refresh" content="0; url=examples/">' > _site/index.html
 
