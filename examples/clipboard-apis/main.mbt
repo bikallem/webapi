@@ -83,18 +83,20 @@ fn main {
 ///|
 extern "js" fn clipboard_write_text(
   text : String,
-) -> @js_async.Promise[@webapi.JsValue] =
+) -> @webapi.JsPromise[@webapi.JsValue] =
   #| (text) => navigator.clipboard.writeText(text)
 
 ///|
-extern "js" fn clipboard_read_text() -> @js_async.Promise[String] =
+extern "js" fn clipboard_read_text() -> @webapi.JsPromise[String] =
   #| () => navigator.clipboard.readText()
 
 ///|
 async fn do_copy(text : String) -> Unit {
   let result = @webapi.document.get_element_by_id("paste-result").unwrap()
   try {
-    let _ : @webapi.JsValue = clipboard_write_text(text).wait()
+    let _ : @webapi.JsValue = @js_promise.to_async_promise(
+      clipboard_write_text(text),
+    ).wait()
     result.set_text_content("Copied: \"" + text + "\"")
   } catch {
     err => result.set_text_content("Copy failed: " + err.to_string())
@@ -105,7 +107,7 @@ async fn do_copy(text : String) -> Unit {
 async fn do_paste() -> Unit {
   let result = @webapi.document.get_element_by_id("paste-result").unwrap()
   try {
-    let text : String = clipboard_read_text().wait()
+    let text : String = @js_promise.to_async_promise(clipboard_read_text()).wait()
     result.set_text_content("Pasted: \"" + text + "\"")
   } catch {
     err => result.set_text_content("Paste failed: " + err.to_string())

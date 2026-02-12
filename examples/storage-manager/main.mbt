@@ -52,7 +52,7 @@ fn main {
 }
 
 ///|
-extern "js" fn get_storage_estimate() -> @js_async.Promise[@webapi.JsValue] =
+extern "js" fn get_storage_estimate() -> @webapi.JsPromise[@webapi.JsValue] =
   #| () => navigator.storage.estimate()
 
 ///|
@@ -85,7 +85,9 @@ async fn do_estimate() -> Unit {
   let usage_div = doc.get_element_by_id("usage").unwrap()
   let quota_div = doc.get_element_by_id("quota").unwrap()
   try {
-    let estimate : @webapi.JsValue = get_storage_estimate().wait()
+    let estimate : @webapi.JsValue = @js_promise.to_async_promise(
+      get_storage_estimate(),
+    ).wait()
     let usage = get_estimate_usage(estimate)
     let quota = get_estimate_quota(estimate)
     usage_div.set_text_content("Usage: " + format_bytes(usage))
