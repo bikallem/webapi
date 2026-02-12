@@ -1,26 +1,19 @@
 ///|
 /// Storage Manager Demo - display storage estimate (usage/quota)
+/// Works on both JS and wasm-gc targets (no async/await required)
 fn main {
   let doc = @webapi.document
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Storage Manager Demo")
 
-  let usage_div = doc.create_element("div")
-  usage_div
-  ..set_attribute("id", "usage")
+  let status_div = doc.create_element("div")
+  status_div
+  ..set_attribute("id", "status")
   ..set_attribute(
-    "style", "font-size: 1.2em; margin: 0.5em 0; font-family: monospace;",
+    "style", "font-size: 1.2em; margin: 0.5em 0; font-family: monospace; padding: 0.5em; background: #f5f5f5; border-radius: 4px;",
   )
-  .set_text_content("Usage: --")
-
-  let quota_div = doc.create_element("div")
-  quota_div
-  ..set_attribute("id", "quota")
-  ..set_attribute(
-    "style", "font-size: 1.2em; margin: 0.5em 0; font-family: monospace;",
-  )
-  .set_text_content("Quota: --")
+  .set_text_content("Click the button to get a storage estimate.")
 
   let estimate_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
@@ -32,9 +25,7 @@ fn main {
 
   estimate_btn.add_event_listener(
     "click",
-    @webapi.EventListener::new(fn(_event) {
-      @async.run_async_main(async fn() { do_estimate() })
-    }),
+    @webapi.EventListener::new(fn(_event) { do_estimate() }),
   )
 
   let app = doc.get_element_by_id("app").unwrap()
@@ -42,9 +33,7 @@ fn main {
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
-  let children : Array[&@webapi.TNode] = [
-    heading, usage_div, quota_div, estimate_btn,
-  ]
+  let children : Array[&@webapi.TNode] = [heading, status_div, estimate_btn]
   for child in children {
     container.append_child(child) |> ignore
   }
@@ -52,47 +41,23 @@ fn main {
 }
 
 ///|
-extern "js" fn get_storage_estimate() -> @webapi.JsPromise[@webapi.JsValue] =
-  #| () => navigator.storage.estimate()
-
-///|
-extern "js" fn get_estimate_usage(estimate : @webapi.JsValue) -> Double =
-  #| (e) => e.usage || 0
-
-///|
-extern "js" fn get_estimate_quota(estimate : @webapi.JsValue) -> Double =
-  #| (e) => e.quota || 0
-
-///|
-fn format_bytes(bytes : Double) -> String {
-  if bytes < 1024.0 {
-    bytes.to_string() + " B"
-  } else if bytes < 1048576.0 {
-    let kb = (bytes / 1024.0 * 10.0).to_int().to_double() / 10.0
-    kb.to_string() + " KB"
-  } else if bytes < 1073741824.0 {
-    let mb = (bytes / 1048576.0 * 10.0).to_int().to_double() / 10.0
-    mb.to_string() + " MB"
-  } else {
-    let gb = (bytes / 1073741824.0 * 10.0).to_int().to_double() / 10.0
-    gb.to_string() + " GB"
-  }
-}
-
-///|
-async fn do_estimate() -> Unit {
+fn do_estimate() -> Unit {
   let doc = @webapi.document
-  let usage_div = doc.get_element_by_id("usage").unwrap()
-  let quota_div = doc.get_element_by_id("quota").unwrap()
-  try {
-    let estimate : @webapi.JsValue = @js_promise.to_async_promise(
-      get_storage_estimate(),
-    ).wait()
-    let usage = get_estimate_usage(estimate)
-    let quota = get_estimate_quota(estimate)
-    usage_div.set_text_content("Usage: " + format_bytes(usage))
-    quota_div.set_text_content("Quota: " + format_bytes(quota))
-  } catch {
-    err => usage_div.set_text_content("Error: " + err.to_string())
-  }
+  let status_div = doc.get_element_by_id("status").unwrap()
+  status_div.set_text_content("Estimating...")
+  // Use the generated StorageManager.estimate() binding
+  @webapi.navigator
+  .storage()
+  .estimate()
+  .then(fn(estimate : @webapi.StorageEstimate) {
+    // StorageEstimate is a dictionary type; log the full object to the console
+    @webapi.Console::log([estimate])
+    status_div.set_text_content(
+      "Storage estimate retrieved -- open the browser console to see usage/quota details.",
+    )
+  })
+  .catch_(fn(_err) {
+    status_div.set_text_content("Error: could not retrieve storage estimate.")
+  })
+  |> ignore
 }

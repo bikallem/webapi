@@ -1,10 +1,8 @@
 import {
   "bikallem/webapi",
-  "bikallem/webapi/js_promise",
-  "moonbitlang/async",
 }
 
 options(
   "is-main": true,
-  targets: { "main.mbt": [ "js" ], "main_wasm.mbt": [ "wasm-gc" ] },
+  "supported-targets": [ "js", "wasm-gc" ],
 )
