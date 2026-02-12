@@ -79,7 +79,7 @@ test "emit_callback simple EventListener" {
 }
 
 ///|
-test "emit_callback with interface argument uses trait reference" {
+test "emit_callback keeps interface argument as concrete callback type" {
   let idl =
     #|interface Event {};
     #|callback EventListener = undefined (Event event);
