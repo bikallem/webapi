@@ -1,6 +1,6 @@
 ///|
-/// Fetch API example demonstrating async/await with @webapi
-/// Uses @js_async.Promise::wait() to await fetch responses
+/// Fetch API example demonstrating JsPromise::then/catch_ with @webapi
+/// Works on both JS and wasm-gc targets (no async/await required)
 fn main {
   let doc = @webapi.document
 
@@ -14,7 +14,8 @@ fn main {
   ..set_attribute("id", "url-input")
   ..set_attribute("type", "text")
   ..set_attribute(
-    "style", "width: 100%; padding: 0.5em; font-size: 1em; box-sizing: border-box; font-family: monospace;",
+    "style",
+    "width: 100%; padding: 0.5em; font-size: 1em; box-sizing: border-box; font-family: monospace;",
   )
   .set_value("https://jsonplaceholder.typicode.com/todos/1")
 
@@ -25,7 +26,8 @@ fn main {
   fetch_btn
   ..set_attribute("id", "fetch-btn")
   ..set_attribute(
-    "style", "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0;",
+    "style",
+    "padding: 0.5em 1em; font-size: 1em; margin: 0.5em 0;",
   )
   .set_text_content("Fetch")
 
@@ -34,7 +36,8 @@ fn main {
   status_el
   ..set_attribute("id", "status")
   ..set_attribute(
-    "style", "margin: 1em 0 0.5em; font-weight: bold; font-family: monospace;",
+    "style",
+    "margin: 1em 0 0.5em; font-weight: bold; font-family: monospace;",
   )
   .set_text_content("Ready")
 
@@ -43,7 +46,8 @@ fn main {
   headers_el
   ..set_attribute("id", "headers")
   .set_attribute(
-    "style", "background: #f5f5f5; padding: 1em; margin: 0.5em 0; white-space: pre-wrap; min-height: 2em;",
+    "style",
+    "background: #f5f5f5; padding: 1em; margin: 0.5em 0; white-space: pre-wrap; min-height: 2em;",
   )
 
   // Body display
@@ -51,14 +55,16 @@ fn main {
   body_el
   ..set_attribute("id", "body")
   .set_attribute(
-    "style", "background: #eef; padding: 1em; margin: 0.5em 0; white-space: pre-wrap; min-height: 2em;",
+    "style",
+    "background: #eef; padding: 1em; margin: 0.5em 0; white-space: pre-wrap; min-height: 2em;",
   )
 
   // Build DOM
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
-    "style", "max-width: 600px; margin: 2em auto; font-family: system-ui;",
+    "style",
+    "max-width: 600px; margin: 2em auto; font-family: system-ui;",
   )
   let children : Array[&@webapi.TNode] = [
     heading, url_input, fetch_btn, status_el, headers_el, body_el,
@@ -68,12 +74,12 @@ fn main {
   }
   app.append_child(container) |> ignore
 
-  // Fetch button handler - reads URL from the input
+  // Fetch button handler
   fetch_btn.add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
       let url = url_input.value()
-      @async.run_async_main(async fn() { do_fetch(url) })
+      do_fetch(url)
     }),
   )
 }
@@ -83,7 +89,7 @@ extern "js" fn string_to_request_info(s : String) -> @webapi.RequestInfo =
   #| (s) => s
 
 ///|
-async fn do_fetch(url : String) -> Unit {
+fn do_fetch(url : String) -> Unit {
   let doc = @webapi.document
   let status_el = doc.get_element_by_id("status").unwrap()
   let headers_el = doc.get_element_by_id("headers").unwrap()
@@ -91,23 +97,25 @@ async fn do_fetch(url : String) -> Unit {
   status_el.set_text_content("Fetching...")
   headers_el.set_text_content("")
   body_el.set_text_content("")
-  try {
-    let response : @webapi.Response = @webapi.window
-      .fetch(string_to_request_info(url))
-      .wait()
-    let status = response.status()
-    let ok = response.ok()
-    let status_text = if ok { "OK" } else { "Error" }
-    status_el.set_text_content("Status: \{status} \{status_text}")
-    let content_type = response.headers().get("content-type").unwrap_or("")
-    headers_el.set_text_content("Content-Type: \{content_type}")
-    let text : String = response.text().wait()
-    body_el.set_text_content(text)
-  } catch {
-    err => {
+  @webapi.window
+    .fetch(string_to_request_info(url))
+    .then(fn(response : @webapi.Response) {
+      let status = response.status()
+      let ok = response.ok()
+      let status_text = if ok { "OK" } else { "Error" }
+      status_el.set_text_content("Status: \{status} \{status_text}")
+      let content_type = response.headers().get("content-type").unwrap_or("")
+      headers_el.set_text_content("Content-Type: \{content_type}")
+      response.text().then(fn(text : String) {
+        body_el.set_text_content(text)
+      })
+      |> ignore
+    })
+    .catch_(fn(err) {
       status_el.set_text_content("Error: \{err}")
       headers_el.set_text_content("")
       body_el.set_text_content("")
-    }
-  }
+      err
+    })
+  |> ignore
 }
