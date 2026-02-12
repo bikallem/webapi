@@ -1,12 +1,13 @@
 ///|
-/// Fetch API example demonstrating JsPromise::then/catch_ with @webapi
-/// Works on both JS and wasm-gc targets (no async/await required)
+/// Fetch API example demonstrating async/await via js_promise bridge
+/// Uses @js_promise.to_async_promise() to convert JsPromise to @js_async.Promise
+/// then .wait() for async/await. JS target only.
 fn main {
   let doc = @webapi.document
 
   // Create heading
   let heading = doc.create_element("h1")
-  heading.set_text_content("Fetch API Demo")
+  heading.set_text_content("Fetch API Demo (async/await)")
 
   // URL input
   let url_input : @webapi.HTMLInputElement = doc.create_element("input").into()
@@ -68,12 +69,12 @@ fn main {
   }
   app.append_child(container) |> ignore
 
-  // Fetch button handler
+  // Fetch button handler - reads URL from the input
   fetch_btn.add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
       let url = url_input.value()
-      do_fetch(url)
+      @async.run_async_main(async fn() { do_fetch(url) })
     }),
   )
 }
@@ -83,7 +84,7 @@ extern "js" fn string_to_request_info(s : String) -> @webapi.RequestInfo =
   #| (s) => s
 
 ///|
-fn do_fetch(url : String) -> Unit {
+async fn do_fetch(url : String) -> Unit {
   let doc = @webapi.document
   let status_el = doc.get_element_by_id("status").unwrap()
   let headers_el = doc.get_element_by_id("headers").unwrap()
@@ -91,22 +92,23 @@ fn do_fetch(url : String) -> Unit {
   status_el.set_text_content("Fetching...")
   headers_el.set_text_content("")
   body_el.set_text_content("")
-  @webapi.window
-  .fetch(string_to_request_info(url))
-  .then(fn(response : @webapi.Response) {
+  try {
+    let response : @webapi.Response = @js_promise.to_async_promise(
+      @webapi.window.fetch(string_to_request_info(url)),
+    ).wait()
     let status = response.status()
     let ok = response.ok()
     let status_text = if ok { "OK" } else { "Error" }
     status_el.set_text_content("Status: \{status} \{status_text}")
     let content_type = response.headers().get("content-type").unwrap_or("")
     headers_el.set_text_content("Content-Type: \{content_type}")
-    response.text().then(fn(text : String) { body_el.set_text_content(text) })
-    |> ignore
-  })
-  .catch_(fn(_err) {
-    status_el.set_text_content("Error: fetch failed")
-    headers_el.set_text_content("")
-    body_el.set_text_content("")
-  })
-  |> ignore
+    let text : String = @js_promise.to_async_promise(response.text()).wait()
+    body_el.set_text_content(text)
+  } catch {
+    err => {
+      status_el.set_text_content("Error: \{err}")
+      headers_el.set_text_content("")
+      body_el.set_text_content("")
+    }
+  }
 }
