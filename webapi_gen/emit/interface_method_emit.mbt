@@ -762,6 +762,36 @@ fn is_trait_ref_type(type_ : @type_mapping.ArgMbtType) -> Bool {
 }
 
 ///|
+fn variadic_inner_type(type_ : @type_mapping.ArgMbtType) -> String? {
+  let type_name = type_.name()
+  if !(type_name.has_prefix("Array[") && type_name.has_suffix("]")) {
+    None
+  } else {
+    let chars = type_name.to_array()
+    if chars.length() <= 7 {
+      None
+    } else {
+      Some(String::from_array(chars[6:chars.length() - 1]))
+    }
+  }
+}
+
+///|
+fn variadic_call_arg(arg_name : String, type_ : @type_mapping.ArgMbtType) -> String {
+  match variadic_inner_type(type_) {
+    Some(inner_type) if inner_type.has_prefix("&T") =>
+      // Trait-ref element: call trait method directly.
+      "TJsValue::to_js(\{arg_name}.map(fn(v : \{inner_type}) -> JsValue { v.to_js() }))"
+    Some(_) =>
+      // Non-trait element: map with TJsValue::to_js to avoid overload ambiguity.
+      "TJsValue::to_js(\{arg_name}.map(fn(v) { TJsValue::to_js(v) }))"
+    None =>
+      // Defensive fallback for malformed/non-array variadic type strings.
+      "TJsValue::to_js(\{arg_name})"
+  }
+}
+
+///|
 fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
   args
   .map(arg => {
@@ -769,18 +799,7 @@ fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
     let is_union_or_trait = arg.type_ is @type_mapping.Union(_) ||
       is_trait_ref_type(arg.type_)
     if arg.variadic {
-      // Extract inner type from "Array[X]" -> "X"
-      let type_name = arg.type_.name()
-      let chars = type_name.to_array()
-      let inner_chars = chars[6:chars.length() - 1]
-      let inner_type = String::from_array(inner_chars)
-      if inner_type.has_prefix("&T") {
-        // Union trait type: call the union trait's to_js method
-        "TJsValue::to_js(\{arg_name}.map(fn(v : \{inner_type}) -> JsValue { v.to_js() }))"
-      } else {
-        // Non-union type: use TJsValue::to_js directly (avoids ambiguity)
-        "TJsValue::to_js(\{arg_name}.map(fn(v) { TJsValue::to_js(v) }))"
-      }
+      variadic_call_arg(arg_name, arg.type_)
     } else if (
         is_union_or_trait && arg.optional && arg.default_value is Some(_)
       ) ||
