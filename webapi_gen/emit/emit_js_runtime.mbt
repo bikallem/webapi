@@ -76,6 +76,13 @@ fn emit_js_preamble() -> String {
     #|    navigator: () => navigator
     #|  },
     #|
+    #|  webapi_JsPromise: {
+    #|    resolve: (value) => Promise.resolve(value),
+    #|    reject: (reason) => Promise.reject(reason),
+    #|    then: (p, f) => p.then(f),
+    #|    catch: (p, f) => p.catch(f),
+    #|    finally: (p, f) => p.finally(f)
+    #|  },
   preamble
 }
 
