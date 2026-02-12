@@ -7,8 +7,5 @@
   "keywords": [],
   "description": "Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more",
   "source": "src",
-  "preferred-target": "js",
-  "deps": {
-    "moonbitlang/async": "0.16.6"
-  }
+  "preferred-target": "js"
 }
