@@ -1,5 +1,6 @@
 //============================ Interface Method Helpers =========================
 
+///|
 /// Check if an ArgMbtType is valid as a wasm-gc import return type.
 /// Primitives, #external interfaces, enums, dictionaries, and Self are valid.
 /// Parameterized non-external types (Array[T]) and typedefs that resolve to them are not.
@@ -179,7 +180,10 @@ fn variadic_inner_type(type_ : @type_mapping.ArgMbtType) -> String? {
 }
 
 ///|
-fn variadic_call_arg(arg_name : String, type_ : @type_mapping.ArgMbtType) -> String {
+fn variadic_call_arg(
+  arg_name : String,
+  type_ : @type_mapping.ArgMbtType,
+) -> String {
   match variadic_inner_type(type_) {
     Some(inner_type) if inner_type.has_prefix("&T") =>
       // Trait-ref element: call trait method directly.

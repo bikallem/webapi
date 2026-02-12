@@ -109,7 +109,10 @@ fn[E : @emit.Emitter] emit_and_write_multi(
   for filename in sorted_output_filenames(multi.wasm_ffi) {
     let filepath = "\{output_dir}/\{filename}"
     println("  Writing \{filepath}...")
-    @fs.write_string_to_file(filepath, multi.wasm_ffi[@emit.Filename(filename)].0) catch {
+    @fs.write_string_to_file(
+      filepath,
+      multi.wasm_ffi[@emit.Filename(filename)].0,
+    ) catch {
       e => fail("failed to write file: \{e}")
     }
     wasm_files.push(filename)

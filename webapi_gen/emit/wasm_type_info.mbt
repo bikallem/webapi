@@ -12,11 +12,11 @@ let wasm_value_types : Array[String] = [
 let wasm_valid_stub_other_types : Array[String] = [
   "JsValue", "Unit", "JsUndefined",
   // Typed arrays — all #external types
-  "Uint8Array", "Uint8ClampedArray", "Int8Array", "Uint16Array", "Int16Array",
-  "Uint32Array", "Int32Array", "Float16Array", "Float32Array", "Float64Array",
-  "BigInt64Array", "BigUint64Array",
+   "Uint8Array", "Uint8ClampedArray", "Int8Array", "Uint16Array", "Int16Array", "Uint32Array",
+  "Int32Array", "Float16Array", "Float32Array", "Float64Array", "BigInt64Array",
+  "BigUint64Array",
   // Buffer types — #external
-  "DataView", "ArrayBuffer", "SharedArrayBuffer",
+   "DataView", "ArrayBuffer", "SharedArrayBuffer",
 ]
 
 ///|

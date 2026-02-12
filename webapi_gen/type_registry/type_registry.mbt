@@ -142,13 +142,22 @@ test "TypeRegistry::contains checks all type categories" {
   inspect(reg.is_typedef("DOMString"), content="true")
   inspect(reg.is_callback("EventListener"), content="true")
   inspect(reg.is_union_typedef("HeadersInit"), content="true")
-  inspect(reg.named_type_kind("Element") is NamedTypeKind::Interface, content="true")
+  inspect(
+    reg.named_type_kind("Element") is NamedTypeKind::Interface,
+    content="true",
+  )
   inspect(
     reg.named_type_kind("EventInit") is NamedTypeKind::Dictionary,
     content="true",
   )
-  inspect(reg.named_type_kind("ScrollBehaviour") is NamedTypeKind::Enum, content="true")
-  inspect(reg.named_type_kind("DOMString") is NamedTypeKind::Typedef, content="true")
+  inspect(
+    reg.named_type_kind("ScrollBehaviour") is NamedTypeKind::Enum,
+    content="true",
+  )
+  inspect(
+    reg.named_type_kind("DOMString") is NamedTypeKind::Typedef,
+    content="true",
+  )
   inspect(
     reg.named_type_kind("HeadersInit") is NamedTypeKind::UnionTypedef,
     content="true",
@@ -157,5 +166,8 @@ test "TypeRegistry::contains checks all type categories" {
     reg.named_type_kind("EventListener") is NamedTypeKind::Callback,
     content="true",
   )
-  inspect(reg.named_type_kind("Unknown") is NamedTypeKind::Unknown, content="true")
+  inspect(
+    reg.named_type_kind("Unknown") is NamedTypeKind::Unknown,
+    content="true",
+  )
 }

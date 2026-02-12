@@ -1,31 +1,33 @@
 ///|
 test "func_call_args emits variadic trait-ref conversion" {
-  let args = [@type_mapping.MethodArg::{
+  let args = [
+    @type_mapping.MethodArg::{
       name: "parts",
       original_name: "parts",
       type_: @type_mapping.ArgMbtType::Other("Array[&TRequestInfo]"),
       optional: false,
       variadic: true,
       default_value: None,
-    }]
+    },
+  ]
   inspect(
     func_call_args(args),
-    content=(
-      "TJsValue::to_js(parts.map(fn(v : &TRequestInfo) -> JsValue { v.to_js() }))"
-    ),
+    content="TJsValue::to_js(parts.map(fn(v : &TRequestInfo) -> JsValue { v.to_js() }))",
   )
 }
 
 ///|
 test "func_call_args emits variadic non-trait conversion" {
-  let args = [@type_mapping.MethodArg::{
+  let args = [
+    @type_mapping.MethodArg::{
       name: "names",
       original_name: "names",
       type_: @type_mapping.ArgMbtType::Other("Array[String]"),
       optional: false,
       variadic: true,
       default_value: None,
-    }]
+    },
+  ]
   inspect(
     func_call_args(args),
     content="TJsValue::to_js(names.map(fn(v) { TJsValue::to_js(v) }))",
@@ -34,14 +36,16 @@ test "func_call_args emits variadic non-trait conversion" {
 
 ///|
 test "func_call_args falls back for malformed variadic type" {
-  let args = [@type_mapping.MethodArg::{
+  let args = [
+    @type_mapping.MethodArg::{
       name: "names",
       original_name: "names",
       type_: @type_mapping.ArgMbtType::Primitive("String"),
       optional: false,
       variadic: true,
       default_value: None,
-    }]
+    },
+  ]
   inspect(func_call_args(args), content="TJsValue::to_js(names)")
 }
 
