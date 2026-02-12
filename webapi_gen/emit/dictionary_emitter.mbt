@@ -22,7 +22,6 @@ pub impl Emitter for DictionaryEmitter with emit(
     }),
     dict.name,
     "new",
-    self.idl,
     self.type_registry,
   )
   emits

@@ -24,7 +24,6 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
     ],
     "TestInterface",
     "testMethod",
-    flattened,
     type_registry,
   )
   json_inspect(args, content=[

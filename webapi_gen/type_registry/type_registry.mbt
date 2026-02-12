@@ -5,6 +5,7 @@ pub struct TypeRegistry {
   dictionary_names : @hashset.HashSet[String]
   enum_names : @hashset.HashSet[String]
   typedef_names : @hashset.HashSet[String]
+  union_typedef_names : @hashset.HashSet[String]
   callback_names : @hashset.HashSet[String]
 } derive(Show, ToJson)
 
@@ -17,13 +18,19 @@ pub fn TypeRegistry::new(
     dictionary_names: @hashset.new(),
     enum_names: @hashset.new(),
     typedef_names: @hashset.new(),
+    union_typedef_names: @hashset.new(),
     callback_names: @hashset.new(),
   }
   for def in definitions {
     match def.definition {
       CallbackInterface(cbi) => registry.callback_names.add(cbi.name)
       CallbackFunction(cbf) => registry.callback_names.add(cbf.name)
-      Typedef(td) => registry.typedef_names.add(td.name)
+      Typedef(td) => {
+        registry.typedef_names.add(td.name)
+        if td.type_ is Union(_) {
+          registry.union_typedef_names.add(td.name)
+        }
+      }
       Enum(e) => registry.enum_names.add(e.name)
       PartialDictionary(_) => ()
       Dictionary(dict) => registry.dictionary_names.add(dict.name)
@@ -70,6 +77,14 @@ pub fn TypeRegistry::is_typedef(self : TypeRegistry, name : String) -> Bool {
 }
 
 ///|
+pub fn TypeRegistry::is_union_typedef(
+  self : TypeRegistry,
+  name : String,
+) -> Bool {
+  self.union_typedef_names.contains(name)
+}
+
+///|
 pub fn TypeRegistry::is_callback(self : TypeRegistry, name : String) -> Bool {
   self.callback_names.contains(name)
 }
@@ -81,6 +96,7 @@ test "TypeRegistry::contains checks all type categories" {
     dictionary_names: @hashset.from_array(["EventInit"]),
     enum_names: @hashset.from_array(["ScrollBehaviour"]),
     typedef_names: @hashset.from_array(["DOMString"]),
+    union_typedef_names: @hashset.from_array(["HeadersInit"]),
     callback_names: @hashset.from_array(["EventListener"]),
   }
   inspect(reg.contains("Element"), content="true")
@@ -90,4 +106,5 @@ test "TypeRegistry::contains checks all type categories" {
   inspect(reg.is_interface("Element"), content="true")
   inspect(reg.is_dictionary("EventInit"), content="true")
   inspect(reg.is_enum("ScrollBehaviour"), content="true")
+  inspect(reg.is_union_typedef("HeadersInit"), content="true")
 }

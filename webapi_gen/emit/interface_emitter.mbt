@@ -17,15 +17,10 @@ fn typedef_identifier(type_ : @parser.Type) -> String? {
 ///|
 fn is_union_typedef_arg(
   type_ : @parser.Type,
-  idl : @flattened_idl.FlattenedIdl,
   type_registry : @type_registry.TypeRegistry,
 ) -> Bool {
   match typedef_identifier(type_) {
-    Some(name) if type_registry.is_typedef(name) =>
-      match idl.typedefs.get(name) {
-        Some(td) => td.type_ is Union(_)
-        None => false
-      }
+    Some(name) => type_registry.is_union_typedef(name)
     _ => false
   }
 }
@@ -37,7 +32,6 @@ fn method_args(
   args : Array[(String, @parser.Type, Bool, @parser.DefaultValue?, Bool)],
   interface_name : String,
   method_name : String,
-  idl : @flattened_idl.FlattenedIdl,
   type_registry : @type_registry.TypeRegistry,
 ) -> (Array[@type_mapping.MethodArg], Array[Emit]) {
   let emits = []
@@ -50,7 +44,7 @@ fn method_args(
     // Push any additional emits needed for the arg type, e.g. union arg traits
     emits.push_iter(arg_emits.iter())
     let default_value = default_value.map(dv => mbt_default_value(dv, mbt_type))
-    let union_typedef_arg = is_union_typedef_arg(type_, idl, type_registry)
+    let union_typedef_arg = is_union_typedef_arg(type_, type_registry)
     let mbt_type = match mbt_type {
       @type_mapping.ArgMbtType::Interface(name) =>
         @type_mapping.ArgMbtType::Interface("&T\{name}")
@@ -216,7 +210,6 @@ fn emit_constructor(
   ctor : @parser.ConstructorMember,
   interface_name : String,
   constructor_count : Int,
-  idl : @flattened_idl.FlattenedIdl,
   type_registry : @type_registry.TypeRegistry,
 ) -> (Array[Emit], Int) {
   let method_name = if constructor_count == 0 {
@@ -230,7 +223,6 @@ fn emit_constructor(
     }),
     interface_name,
     method_name,
-    idl,
     type_registry,
   )
   let emits = []
@@ -267,7 +259,6 @@ fn emit_regular_operation(
   op : @parser.RegularOperationMember,
   interface_name : String,
   orig_method_name : String,
-  idl : @flattened_idl.FlattenedIdl,
   type_registry : @type_registry.TypeRegistry,
   js_name? : String = interface_name,
 ) -> (Array[Emit], &InterfaceMethodEmit) {
@@ -278,7 +269,6 @@ fn emit_regular_operation(
     }),
     interface_name,
     orig_method_name,
-    idl,
     type_registry,
   )
   let args = if op.static_ {
@@ -333,7 +323,6 @@ fn emit_regular_operation(
 fn emit_attribute(
   attr : @parser.AttributeMember,
   interface_name : String,
-  idl : @flattened_idl.FlattenedIdl,
   type_registry : @type_registry.TypeRegistry,
   js_name? : String = interface_name,
 ) -> (Array[Emit], Array[&InterfaceMethodEmit]) {
@@ -371,11 +360,7 @@ fn emit_attribute(
 
     // Set Attribute method if specified (only for non-static)
     if !attr.is_readonly || attr.is_inherit {
-      let union_typedef_attr = is_union_typedef_arg(
-        attr.type_,
-        idl,
-        type_registry,
-      )
+      let union_typedef_attr = is_union_typedef_arg(attr.type_, type_registry)
       let attr_type = match attr_type {
         @type_mapping.ArgMbtType::Interface(name) =>
           @type_mapping.ArgMbtType::Interface("&T\{name}")
@@ -456,7 +441,6 @@ fn emit_special_operation(
   op : @parser.SpecialOperationMember,
   interface_name : String,
   orig_method_name : String,
-  idl : @flattened_idl.FlattenedIdl,
   type_registry : @type_registry.TypeRegistry,
 ) -> (Array[Emit], &InterfaceMethodEmit) {
   let emits = []
@@ -466,7 +450,6 @@ fn emit_special_operation(
     }),
     interface_name,
     orig_method_name,
-    idl,
     type_registry,
   )
   let self_arg = @type_mapping.MethodArg::{
@@ -508,7 +491,6 @@ fn emit_unnamed_special_operation(
   op : @parser.SpecialOperationMember,
   interface_name : String,
   orig_method_name : String,
-  idl : @flattened_idl.FlattenedIdl,
   type_registry : @type_registry.TypeRegistry,
 ) -> (Array[Emit], &InterfaceMethodEmit) {
   let emits = []
@@ -518,7 +500,6 @@ fn emit_unnamed_special_operation(
     }),
     interface_name,
     orig_method_name,
-    idl,
     type_registry,
   )
   let self_arg = @type_mapping.MethodArg::{
@@ -584,7 +565,6 @@ pub impl Emitter for InterfaceEmitter with emit(
         ctor,
         interface.name,
         constructor_count,
-        self.idl,
         self.type_registry,
       )
       constructor_count = new_count
@@ -608,7 +588,6 @@ pub impl Emitter for InterfaceEmitter with emit(
         op,
         interface.name,
         orig_method_name,
-        self.idl,
         self.type_registry,
       )
       emits.push_iter(op_emits.iter())
@@ -622,7 +601,6 @@ pub impl Emitter for InterfaceEmitter with emit(
       let (attr_emits, attr_methods) = emit_attribute(
         attr,
         interface.name,
-        self.idl,
         self.type_registry,
       )
       emits.push_iter(attr_emits.iter())
@@ -655,7 +633,6 @@ pub impl Emitter for InterfaceEmitter with emit(
         op,
         interface.name,
         orig_method_name,
-        self.idl,
         self.type_registry,
       )
       emits.push_iter(op_emits.iter())
@@ -683,7 +660,6 @@ pub impl Emitter for InterfaceEmitter with emit(
         op,
         interface.name,
         orig_method_name,
-        self.idl,
         self.type_registry,
       )
       emits.push_iter(op_emits.iter())
