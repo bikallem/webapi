@@ -1,0 +1,19 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi/js_promise"
+
+import {
+  "bikallem/webapi",
+  "moonbitlang/async/js_async",
+}
+
+// Values
+pub fn[T] to_async_promise(@webapi.JsPromise[T]) -> @js_async.Promise[T]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
