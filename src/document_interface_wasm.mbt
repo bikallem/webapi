@@ -503,7 +503,7 @@ fn document_fullscreen_ffi(obj : JsValue) -> Bool = "webapi_Document" "get_fulls
 fn document_exit_fullscreen_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Document" "exitFullscreen"
 
 ///|
-fn document_exit_fullscreen_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
+fn document_exit_fullscreen_ffi(obj : JsValue) -> JsPromise[Unit] {
   document_exit_fullscreen_ffi_wasm(obj).unsafe_cast()
 }
 

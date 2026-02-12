@@ -19,6 +19,12 @@ export const wasmImportObject = {
     null: () => null
   },
 
+  JsPromise: {
+    await: (promise) => promise,
+    resolve: (value) => Promise.resolve(value),
+    reject: (error) => Promise.reject(error)
+  },
+
   webapi_Dictionary: {
     empty: () => ({})
   },

@@ -47,7 +47,7 @@ fn blob_stream_ffi(obj : JsValue) -> ReadableStream {
 extern "js" fn blob_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text()"
 
 ///|
-fn blob_text_ffi(obj : JsValue) -> @js_async.Promise[String] {
+fn blob_text_ffi(obj : JsValue) -> JsPromise[String] {
   blob_text_ffi_js(obj).unsafe_cast()
 }
 
@@ -55,7 +55,7 @@ fn blob_text_ffi(obj : JsValue) -> @js_async.Promise[String] {
 extern "js" fn blob_array_buffer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.arrayBuffer()"
 
 ///|
-fn blob_array_buffer_ffi(obj : JsValue) -> @js_async.Promise[ArrayBuffer] {
+fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
   blob_array_buffer_ffi_js(obj).unsafe_cast()
 }
 
@@ -63,6 +63,6 @@ fn blob_array_buffer_ffi(obj : JsValue) -> @js_async.Promise[ArrayBuffer] {
 extern "js" fn blob_bytes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bytes()"
 
 ///|
-fn blob_bytes_ffi(obj : JsValue) -> @js_async.Promise[Uint8Array] {
+fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
   blob_bytes_ffi_js(obj).unsafe_cast()
 }

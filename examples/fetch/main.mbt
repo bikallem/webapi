@@ -1,6 +1,5 @@
 ///|
-/// Fetch API example demonstrating async/await with @webapi
-/// Uses @js_async.Promise::wait() to await fetch responses
+/// Fetch API example using generated DOM bindings and a JS fetch helper.
 fn main {
   let doc = @webapi.document
 
@@ -73,41 +72,32 @@ fn main {
     "click",
     @webapi.EventListener::new(fn(_event) {
       let url = url_input.value()
-      @async.run_async_main(async fn() { do_fetch(url) })
+      do_fetch(url, status_el, headers_el, body_el)
     }),
   )
 }
 
 ///|
-extern "js" fn string_to_request_info(s : String) -> @webapi.RequestInfo =
-  #| (s) => s
-
-///|
-async fn do_fetch(url : String) -> Unit {
-  let doc = @webapi.document
-  let status_el = doc.get_element_by_id("status").unwrap()
-  let headers_el = doc.get_element_by_id("headers").unwrap()
-  let body_el = doc.get_element_by_id("body").unwrap()
-  status_el.set_text_content("Fetching...")
-  headers_el.set_text_content("")
-  body_el.set_text_content("")
-  try {
-    let response : @webapi.Response = @webapi.window
-      .fetch(string_to_request_info(url))
-      .wait()
-    let status = response.status()
-    let ok = response.ok()
-    let status_text = if ok { "OK" } else { "Error" }
-    status_el.set_text_content("Status: \{status} \{status_text}")
-    let content_type = response.headers().get("content-type").unwrap_or("")
-    headers_el.set_text_content("Content-Type: \{content_type}")
-    let text : String = response.text().wait()
-    body_el.set_text_content(text)
-  } catch {
-    err => {
-      status_el.set_text_content("Error: \{err}")
-      headers_el.set_text_content("")
-      body_el.set_text_content("")
-    }
-  }
-}
+extern "js" fn do_fetch(
+  url : String,
+  status_el : @webapi.Element,
+  headers_el : @webapi.Element,
+  body_el : @webapi.Element,
+) -> Unit =
+  #| async (url, statusEl, headersEl, bodyEl) => {
+  #|   statusEl.textContent = 'Fetching...';
+  #|   headersEl.textContent = '';
+  #|   bodyEl.textContent = '';
+  #|   try {
+  #|     const response = await fetch(url);
+  #|     const statusText = response.ok ? 'OK' : 'Error';
+  #|     statusEl.textContent = `Status: ${response.status} ${statusText}`;
+  #|     const contentType = response.headers.get('content-type') || '';
+  #|     headersEl.textContent = `Content-Type: ${contentType}`;
+  #|     bodyEl.textContent = await response.text();
+  #|   } catch (err) {
+  #|     statusEl.textContent = `Error: ${err}`;
+  #|     headersEl.textContent = '';
+  #|     bodyEl.textContent = '';
+  #|   }
+  #| }

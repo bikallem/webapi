@@ -13,9 +13,11 @@ Core type representing any JavaScript value. Includes:
 - `opt_to_js()` - Convert `Option[T]` to JsValue
 - `fn_to_js()` - Convert MoonBit functions to JS callbacks
 
-### `async_promise.mbt`
-Promise support via `moonbitlang/async`:
-- `TJsValue` implementation for `@js_async.Promise[T]`
+### `js_promise.mbt`
+Promise interop:
+- `JsPromise[T]` - Opaque type for JS Promises
+- `JsPromise::wait()` - Await a promise
+- `TJsValue` implementation for `JsPromise[T]`
 
 ### `js_array.mbt`
 Array interop:

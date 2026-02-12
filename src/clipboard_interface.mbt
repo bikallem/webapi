@@ -22,12 +22,12 @@ pub impl TEventTarget for Clipboard
 ///|
 /// [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard) interface.
 pub trait TClipboard: TEventTarget {
-  read(self : Self, formats? : ClipboardUnsanitizedFormats) -> @js_async.Promise[
+  read(self : Self, formats? : ClipboardUnsanitizedFormats) -> JsPromise[
     ClipboardItems,
   ] = _
-  read_text(self : Self) -> @js_async.Promise[String] = _
-  write(self : Self, data : ClipboardItems) -> @js_async.Promise[Unit] = _
-  write_text(self : Self, data : String) -> @js_async.Promise[Unit] = _
+  read_text(self : Self) -> JsPromise[String] = _
+  write(self : Self, data : ClipboardItems) -> JsPromise[Unit] = _
+  write_text(self : Self, data : String) -> JsPromise[Unit] = _
 }
 
 ///|
@@ -35,19 +35,19 @@ pub trait TClipboard: TEventTarget {
 impl TClipboard with read(
   self : Self,
   formats? : ClipboardUnsanitizedFormats = ClipboardUnsanitizedFormats::empty(),
-) -> @js_async.Promise[ClipboardItems] {
+) -> JsPromise[ClipboardItems] {
   clipboard_read_ffi(TJsValue::to_js(self), TJsValue::to_js(formats))
 }
 
 ///|
 /// [Clipboard.readText](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/readText)
-impl TClipboard with read_text(self : Self) -> @js_async.Promise[String] {
+impl TClipboard with read_text(self : Self) -> JsPromise[String] {
   clipboard_read_text_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Clipboard.write](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/write)
-impl TClipboard with write(self : Self, data : ClipboardItems) -> @js_async.Promise[
+impl TClipboard with write(self : Self, data : ClipboardItems) -> JsPromise[
   Unit,
 ] {
   clipboard_write_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
@@ -55,8 +55,6 @@ impl TClipboard with write(self : Self, data : ClipboardItems) -> @js_async.Prom
 
 ///|
 /// [Clipboard.writeText](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText)
-impl TClipboard with write_text(self : Self, data : String) -> @js_async.Promise[
-  Unit,
-] {
+impl TClipboard with write_text(self : Self, data : String) -> JsPromise[Unit] {
   clipboard_write_text_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
 }

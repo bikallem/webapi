@@ -33,7 +33,7 @@ fn main {
   estimate_btn.add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
-      @async.run_async_main(async fn() { do_estimate() })
+      do_estimate(usage_div, quota_div)
     }),
   )
 
@@ -52,45 +52,24 @@ fn main {
 }
 
 ///|
-extern "js" fn get_storage_estimate() -> @js_async.Promise[@webapi.JsValue] =
-  #| () => navigator.storage.estimate()
-
-///|
-extern "js" fn get_estimate_usage(estimate : @webapi.JsValue) -> Double =
-  #| (e) => e.usage || 0
-
-///|
-extern "js" fn get_estimate_quota(estimate : @webapi.JsValue) -> Double =
-  #| (e) => e.quota || 0
-
-///|
-fn format_bytes(bytes : Double) -> String {
-  if bytes < 1024.0 {
-    bytes.to_string() + " B"
-  } else if bytes < 1048576.0 {
-    let kb = (bytes / 1024.0 * 10.0).to_int().to_double() / 10.0
-    kb.to_string() + " KB"
-  } else if bytes < 1073741824.0 {
-    let mb = (bytes / 1048576.0 * 10.0).to_int().to_double() / 10.0
-    mb.to_string() + " MB"
-  } else {
-    let gb = (bytes / 1073741824.0 * 10.0).to_int().to_double() / 10.0
-    gb.to_string() + " GB"
-  }
-}
-
-///|
-async fn do_estimate() -> Unit {
-  let doc = @webapi.document
-  let usage_div = doc.get_element_by_id("usage").unwrap()
-  let quota_div = doc.get_element_by_id("quota").unwrap()
-  try {
-    let estimate : @webapi.JsValue = get_storage_estimate().wait()
-    let usage = get_estimate_usage(estimate)
-    let quota = get_estimate_quota(estimate)
-    usage_div.set_text_content("Usage: " + format_bytes(usage))
-    quota_div.set_text_content("Quota: " + format_bytes(quota))
-  } catch {
-    err => usage_div.set_text_content("Error: " + err.to_string())
-  }
-}
+extern "js" fn do_estimate(
+  usage_div : @webapi.Element,
+  quota_div : @webapi.Element,
+) -> Unit =
+  #| async (usageDiv, quotaDiv) => {
+  #|   const formatBytes = (bytes) => {
+  #|     if (bytes < 1024) return `${bytes} B`;
+  #|     if (bytes < 1048576) return `${Math.floor((bytes / 1024) * 10) / 10} KB`;
+  #|     if (bytes < 1073741824) return `${Math.floor((bytes / 1048576) * 10) / 10} MB`;
+  #|     return `${Math.floor((bytes / 1073741824) * 10) / 10} GB`;
+  #|   };
+  #|   try {
+  #|     const estimate = await navigator.storage.estimate();
+  #|     const usage = estimate.usage || 0;
+  #|     const quota = estimate.quota || 0;
+  #|     usageDiv.textContent = `Usage: ${formatBytes(usage)}`;
+  #|     quotaDiv.textContent = `Quota: ${formatBytes(quota)}`;
+  #|   } catch (err) {
+  #|     usageDiv.textContent = `Error: ${String(err)}`;
+  #|   }
+  #| }

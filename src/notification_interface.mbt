@@ -67,7 +67,7 @@ pub fn Notification::permission() -> NotificationPermission {
 /// [Notification.requestPermission](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission)
 pub fn Notification::request_permission(
   deprecated_callback? : NotificationPermissionCallback,
-) -> @js_async.Promise[NotificationPermission] {
+) -> JsPromise[NotificationPermission] {
   notification_request_permission_ffi(opt_to_js(deprecated_callback))
 }
 

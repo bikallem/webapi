@@ -1,10 +1,6 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/webapi"
 
-import {
-  "moonbitlang/async/js_async",
-}
-
 // Values
 pub const CSS_RULE_CHARSET_RULE : UInt = 2
 
@@ -2718,6 +2714,11 @@ pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::into(Self) -> T
 pub impl TIntersectionObserverRoot for IntersectionObserverRoot
 
 #external
+pub type JsPromise[T]
+pub async fn[T] JsPromise::wait(Self[T]) -> T
+pub impl[T] TJsValue for JsPromise[T]
+
+#external
 pub type JsUndefined
 #as_free_fn
 pub fn JsUndefined::undefined() -> Self
@@ -2972,7 +2973,7 @@ pub impl TNavigationHistoryEntry for NavigationHistoryEntry
 
 #external
 pub type NavigationInterceptHandler
-pub fn NavigationInterceptHandler::new(() -> @js_async.Promise[Unit]) -> Self
+pub fn NavigationInterceptHandler::new(() -> JsPromise[Unit]) -> Self
 pub impl TJsValue for NavigationInterceptHandler
 
 #external
@@ -3001,7 +3002,7 @@ pub impl TNavigationPrecommitController for NavigationPrecommitController
 
 #external
 pub type NavigationPrecommitHandler
-pub fn NavigationPrecommitHandler::new((NavigationPrecommitController) -> @js_async.Promise[Unit]) -> Self
+pub fn NavigationPrecommitHandler::new((NavigationPrecommitController) -> JsPromise[Unit]) -> Self
 pub impl TJsValue for NavigationPrecommitHandler
 
 #external
@@ -3013,7 +3014,7 @@ pub impl TJsValue for NavigationReloadOptions
 #external
 pub type NavigationResult
 pub fn NavigationResult::empty() -> Self
-pub fn NavigationResult::new(committed? : @js_async.Promise[NavigationHistoryEntry], finished? : @js_async.Promise[NavigationHistoryEntry]) -> Self
+pub fn NavigationResult::new(committed? : JsPromise[NavigationHistoryEntry], finished? : JsPromise[NavigationHistoryEntry]) -> Self
 pub impl TJsValue for NavigationResult
 
 pub(all) enum NavigationScrollBehavior {
@@ -3114,7 +3115,7 @@ pub fn[T : TNotification] Notification::into(Self) -> T
 pub fn Notification::max_actions() -> UInt
 pub fn Notification::new(String, options? : NotificationOptions) -> Self
 pub fn Notification::permission() -> NotificationPermission
-pub fn Notification::request_permission(deprecated_callback? : NotificationPermissionCallback) -> @js_async.Promise[NotificationPermission]
+pub fn Notification::request_permission(deprecated_callback? : NotificationPermissionCallback) -> JsPromise[NotificationPermission]
 pub impl TEventTarget for Notification
 pub impl TJsValue for Notification
 pub impl TNotification for Notification
@@ -5189,9 +5190,9 @@ pub trait TBlob : TJsValue {
   type_(Self) -> String
   slice(Self, start? : Int64, end? : Int64, content_type? : String) -> Blob
   stream(Self) -> ReadableStream
-  text(Self) -> @js_async.Promise[String]
-  array_buffer(Self) -> @js_async.Promise[ArrayBuffer]
-  bytes(Self) -> @js_async.Promise[Uint8Array]
+  text(Self) -> JsPromise[String]
+  array_buffer(Self) -> JsPromise[ArrayBuffer]
+  bytes(Self) -> JsPromise[Uint8Array]
 }
 
 pub(open) trait TBlobPart {
@@ -5312,7 +5313,7 @@ pub trait TCSSStyleSheet : TStyleSheet {
   css_rules(Self) -> CSSRuleList
   insert_rule(Self, String, index? : UInt) -> UInt
   delete_rule(Self, UInt) -> Unit
-  replace(Self, String) -> @js_async.Promise[CSSStyleSheet]
+  replace(Self, String) -> JsPromise[CSSStyleSheet]
   replace_sync(Self, String) -> Unit
   rules(Self) -> CSSRuleList
   add_rule(Self, selector? : String, style? : String, index? : UInt) -> Int
@@ -5510,10 +5511,10 @@ pub(open) trait TCharacterDataReplaceWithNodes {
 pub impl TCharacterDataReplaceWithNodes for String
 
 pub trait TClipboard : TEventTarget {
-  read(Self, formats? : ClipboardUnsanitizedFormats) -> @js_async.Promise[Array[ClipboardItem]]
-  read_text(Self) -> @js_async.Promise[String]
-  write(Self, Array[ClipboardItem]) -> @js_async.Promise[Unit]
-  write_text(Self, String) -> @js_async.Promise[Unit]
+  read(Self, formats? : ClipboardUnsanitizedFormats) -> JsPromise[Array[ClipboardItem]]
+  read_text(Self) -> JsPromise[String]
+  write(Self, Array[ClipboardItem]) -> JsPromise[Unit]
+  write_text(Self, String) -> JsPromise[Unit]
 }
 
 pub trait TClipboardChangeEvent : TEvent {
@@ -5528,7 +5529,7 @@ pub trait TClipboardEvent : TEvent {
 pub trait TClipboardItem : TJsValue {
   presentation_style(Self) -> PresentationStyle
   types(Self) -> JsValue
-  get_type(Self, String) -> @js_async.Promise[Blob]
+  get_type(Self, String) -> JsPromise[Blob]
 }
 
 pub trait TCloseEvent : TEvent {
@@ -5564,7 +5565,7 @@ pub trait TCustomElementRegistry : TJsValue {
   define_(Self, String, CustomElementConstructor, options? : ElementDefinitionOptions) -> Unit
   get(Self, String) -> CustomElementRegistryGet
   get_name(Self, CustomElementConstructor) -> String?
-  when_defined(Self, String) -> @js_async.Promise[CustomElementConstructor]
+  when_defined(Self, String) -> JsPromise[CustomElementConstructor]
   upgrade(Self, &TNode) -> Unit
   initialize(Self, &TNode) -> Unit
 }
@@ -5940,7 +5941,7 @@ pub trait TDocument : TNode {
   scrolling_element(Self) -> Element
   fullscreen_enabled(Self) -> Bool
   fullscreen(Self) -> Bool
-  exit_fullscreen(Self) -> @js_async.Promise[Unit]
+  exit_fullscreen(Self) -> JsPromise[Unit]
   onfullscreenchange(Self) -> EventHandlerNonNull
   set_onfullscreenchange(Self, EventHandlerNonNull) -> Unit
   onfullscreenerror(Self) -> EventHandlerNonNull
@@ -6311,13 +6312,13 @@ pub trait TElement : TNode {
   get_client_rects(Self) -> DOMRectList
   get_bounding_client_rect(Self) -> DOMRect
   check_visibility(Self, options? : CheckVisibilityOptions) -> Bool
-  scroll_into_view(Self, arg? : &TElementScrollIntoViewArg) -> @js_async.Promise[Unit]
-  scroll(Self, options? : ScrollToOptions) -> @js_async.Promise[Unit]
-  scroll_2(Self, Double, Double) -> @js_async.Promise[Unit]
-  scroll_to(Self, options? : ScrollToOptions) -> @js_async.Promise[Unit]
-  scroll_to_2(Self, Double, Double) -> @js_async.Promise[Unit]
-  scroll_by(Self, options? : ScrollToOptions) -> @js_async.Promise[Unit]
-  scroll_by_2(Self, Double, Double) -> @js_async.Promise[Unit]
+  scroll_into_view(Self, arg? : &TElementScrollIntoViewArg) -> JsPromise[Unit]
+  scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_to_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_by_2(Self, Double, Double) -> JsPromise[Unit]
   scroll_top(Self) -> Double
   set_scroll_top(Self, Double) -> Unit
   scroll_left(Self) -> Double
@@ -6329,7 +6330,7 @@ pub trait TElement : TNode {
   client_width(Self) -> Int
   client_height(Self) -> Int
   current_css_zoom(Self) -> Double
-  request_fullscreen(Self, options? : FullscreenOptions) -> @js_async.Promise[Unit]
+  request_fullscreen(Self, options? : FullscreenOptions) -> JsPromise[Unit]
   onfullscreenchange(Self) -> EventHandlerNonNull
   set_onfullscreenchange(Self, EventHandlerNonNull) -> Unit
   onfullscreenerror(Self) -> EventHandlerNonNull
@@ -7377,7 +7378,7 @@ pub trait THTMLImageElement : THTMLElement {
   set_loading(Self, String) -> Unit
   fetch_priority(Self) -> String
   set_fetch_priority(Self, String) -> Unit
-  decode(Self) -> @js_async.Promise[Unit]
+  decode(Self) -> JsPromise[Unit]
   name(Self) -> String
   set_name(Self, String) -> Unit
   lowsrc(Self) -> String
@@ -7629,7 +7630,7 @@ pub trait THTMLMediaElement : THTMLElement {
   set_autoplay(Self, Bool) -> Unit
   loop_(Self) -> Bool
   set_loop_(Self, Bool) -> Unit
-  play(Self) -> @js_async.Promise[Unit]
+  play(Self) -> JsPromise[Unit]
   pause(Self) -> Unit
   controls(Self) -> Bool
   set_controls(Self, Bool) -> Unit
@@ -8333,7 +8334,6 @@ pub impl TJsValue for UInt64
 pub impl TJsValue for Float
 pub impl TJsValue for Double
 pub impl TJsValue for String
-pub impl[T] TJsValue for @js_async.Promise[T]
 pub impl[T : TJsValue] TJsValue for Array[T]
 
 pub trait TKeyboardEvent : TUIEvent {
@@ -8584,8 +8584,8 @@ pub trait TNavigationTransition : TJsValue {
   navigation_type(Self) -> NavigationType
   from(Self) -> NavigationHistoryEntry
   to(Self) -> NavigationDestination
-  committed(Self) -> @js_async.Promise[Unit]
-  finished(Self) -> @js_async.Promise[Unit]
+  committed(Self) -> JsPromise[Unit]
+  finished(Self) -> JsPromise[Unit]
 }
 
 pub trait TNavigator : TJsValue {
@@ -8718,7 +8718,7 @@ pub trait TOffscreenCanvas : TEventTarget {
   set_height(Self, UInt64) -> Unit
   get_context(Self, OffscreenRenderingContextId, options? : JsValue) -> OffscreenRenderingContext?
   transfer_to_image_bitmap(Self) -> ImageBitmap
-  convert_to_blob(Self, options? : ImageEncodeOptions) -> @js_async.Promise[Blob]
+  convert_to_blob(Self, options? : ImageEncodeOptions) -> JsPromise[Blob]
   oncontextlost(Self) -> EventHandlerNonNull
   set_oncontextlost(Self, EventHandlerNonNull) -> Unit
   oncontextrestored(Self) -> EventHandlerNonNull
@@ -9063,12 +9063,12 @@ pub trait TRequest : TJsValue {
   clone(Self) -> Request
   body(Self) -> ReadableStream
   body_used(Self) -> Bool
-  array_buffer(Self) -> @js_async.Promise[ArrayBuffer]
-  blob(Self) -> @js_async.Promise[Blob]
-  bytes(Self) -> @js_async.Promise[Uint8Array]
-  form_data(Self) -> @js_async.Promise[FormData]
-  json(Self) -> @js_async.Promise[JsValue]
-  text(Self) -> @js_async.Promise[String]
+  array_buffer(Self) -> JsPromise[ArrayBuffer]
+  blob(Self) -> JsPromise[Blob]
+  bytes(Self) -> JsPromise[Uint8Array]
+  form_data(Self) -> JsPromise[FormData]
+  json(Self) -> JsPromise[JsValue]
+  text(Self) -> JsPromise[String]
 }
 
 pub(open) trait TRequestInfo {
@@ -9106,12 +9106,12 @@ pub trait TResponse : TJsValue {
   clone(Self) -> Response
   body(Self) -> ReadableStream
   body_used(Self) -> Bool
-  array_buffer(Self) -> @js_async.Promise[ArrayBuffer]
-  blob(Self) -> @js_async.Promise[Blob]
-  bytes(Self) -> @js_async.Promise[Uint8Array]
-  form_data(Self) -> @js_async.Promise[FormData]
-  json_2(Self) -> @js_async.Promise[JsValue]
-  text(Self) -> @js_async.Promise[String]
+  array_buffer(Self) -> JsPromise[ArrayBuffer]
+  blob(Self) -> JsPromise[Blob]
+  bytes(Self) -> JsPromise[Uint8Array]
+  form_data(Self) -> JsPromise[FormData]
+  json_2(Self) -> JsPromise[JsValue]
+  text(Self) -> JsPromise[String]
 }
 
 pub trait TSVGAElement : TSVGGraphicsElement {
@@ -9846,7 +9846,7 @@ pub trait TScreen : TJsValue {
 }
 
 pub trait TScreenOrientation : TEventTarget {
-  lock(Self, OrientationLockType) -> @js_async.Promise[Unit]
+  lock(Self, OrientationLockType) -> JsPromise[Unit]
   unlock(Self) -> Unit
   type_(Self) -> OrientationType
   angle(Self) -> UInt
@@ -9957,9 +9957,9 @@ pub trait TStorageEvent : TEvent {
 }
 
 pub trait TStorageManager : TJsValue {
-  persisted(Self) -> @js_async.Promise[Bool]
-  persist(Self) -> @js_async.Promise[Bool]
-  estimate(Self) -> @js_async.Promise[StorageEstimate]
+  persisted(Self) -> JsPromise[Bool]
+  persist(Self) -> JsPromise[Bool]
+  estimate(Self) -> JsPromise[StorageEstimate]
 }
 
 pub trait TStyleSheet : TJsValue {
@@ -10425,12 +10425,12 @@ pub trait TWindow : TEventTarget {
   page_x_offset(Self) -> Double
   scroll_y(Self) -> Double
   page_y_offset(Self) -> Double
-  scroll(Self, options? : ScrollToOptions) -> @js_async.Promise[Unit]
-  scroll_2(Self, Double, Double) -> @js_async.Promise[Unit]
-  scroll_to(Self, options? : ScrollToOptions) -> @js_async.Promise[Unit]
-  scroll_to_2(Self, Double, Double) -> @js_async.Promise[Unit]
-  scroll_by(Self, options? : ScrollToOptions) -> @js_async.Promise[Unit]
-  scroll_by_2(Self, Double, Double) -> @js_async.Promise[Unit]
+  scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_to_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
+  scroll_by_2(Self, Double, Double) -> JsPromise[Unit]
   screen_x(Self) -> Int
   screen_left(Self) -> Int
   screen_y(Self) -> Int
@@ -10674,10 +10674,10 @@ pub trait TWindow : TEventTarget {
   set_interval(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
-  create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> @js_async.Promise[ImageBitmap]
-  create_image_bitmap_2(Self, ImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> @js_async.Promise[ImageBitmap]
+  create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap_2(Self, ImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
-  fetch(Self, RequestInfo, init? : RequestInit) -> @js_async.Promise[Response]
+  fetch(Self, RequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
   trusted_types(Self) -> TrustedTypePolicyFactory
   request_animation_frame(Self, FrameRequestCallback) -> UInt
@@ -10730,10 +10730,10 @@ pub trait TWorkerGlobalScope : TEventTarget {
   set_interval(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
-  create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> @js_async.Promise[ImageBitmap]
-  create_image_bitmap_2(Self, ImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> @js_async.Promise[ImageBitmap]
+  create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap_2(Self, ImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
-  fetch(Self, RequestInfo, init? : RequestInit) -> @js_async.Promise[Response]
+  fetch(Self, RequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
   trusted_types(Self) -> TrustedTypePolicyFactory
 }
@@ -10780,7 +10780,7 @@ pub(open) trait TWorkerNewScriptURL {
 pub impl TWorkerNewScriptURL for String
 
 pub trait TWorklet : TJsValue {
-  add_module(Self, String, options? : WorkletOptions) -> @js_async.Promise[Unit]
+  add_module(Self, String, options? : WorkletOptions) -> JsPromise[Unit]
 }
 
 pub trait TWorkletGlobalScope : TJsValue {

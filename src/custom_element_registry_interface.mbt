@@ -73,7 +73,7 @@ pub trait TCustomElementRegistry: TJsValue {
   ) -> Unit = _
   get(self : Self, name : String) -> CustomElementRegistryGet = _
   get_name(self : Self, constructor_ : CustomElementConstructor) -> String? = _
-  when_defined(self : Self, name : String) -> @js_async.Promise[
+  when_defined(self : Self, name : String) -> JsPromise[
     CustomElementConstructor,
   ] = _
   upgrade(self : Self, root : &TNode) -> Unit = _
@@ -121,7 +121,7 @@ impl TCustomElementRegistry with get_name(
 
 ///|
 /// [CustomElementRegistry.whenDefined](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined)
-impl TCustomElementRegistry with when_defined(self : Self, name : String) -> @js_async.Promise[
+impl TCustomElementRegistry with when_defined(self : Self, name : String) -> JsPromise[
   CustomElementConstructor,
 ] {
   custom_element_registry_when_defined_ffi(

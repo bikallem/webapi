@@ -55,14 +55,14 @@ fn main {
     "click",
     @webapi.EventListener::new(fn(_event) {
       let text = input.value()
-      @async.run_async_main(async fn() { do_copy(text) })
+      do_copy(text, paste_result)
     }),
   )
 
   paste_btn.add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
-      @async.run_async_main(async fn() { do_paste() })
+      do_paste(paste_result)
     }),
   )
 
@@ -81,33 +81,26 @@ fn main {
 }
 
 ///|
-extern "js" fn clipboard_write_text(
+extern "js" fn do_copy(
   text : String,
-) -> @js_async.Promise[@webapi.JsValue] =
-  #| (text) => navigator.clipboard.writeText(text)
+  result_el : @webapi.Element,
+) -> Unit =
+  #| async (text, resultEl) => {
+  #|   try {
+  #|     await navigator.clipboard.writeText(text);
+  #|     resultEl.textContent = `Copied: "${text}"`;
+  #|   } catch (err) {
+  #|     resultEl.textContent = `Copy failed: ${String(err)}`;
+  #|   }
+  #| }
 
 ///|
-extern "js" fn clipboard_read_text() -> @js_async.Promise[String] =
-  #| () => navigator.clipboard.readText()
-
-///|
-async fn do_copy(text : String) -> Unit {
-  let result = @webapi.document.get_element_by_id("paste-result").unwrap()
-  try {
-    let _ : @webapi.JsValue = clipboard_write_text(text).wait()
-    result.set_text_content("Copied: \"" + text + "\"")
-  } catch {
-    err => result.set_text_content("Copy failed: " + err.to_string())
-  }
-}
-
-///|
-async fn do_paste() -> Unit {
-  let result = @webapi.document.get_element_by_id("paste-result").unwrap()
-  try {
-    let text : String = clipboard_read_text().wait()
-    result.set_text_content("Pasted: \"" + text + "\"")
-  } catch {
-    err => result.set_text_content("Paste failed: " + err.to_string())
-  }
-}
+extern "js" fn do_paste(result_el : @webapi.Element) -> Unit =
+  #| async (resultEl) => {
+  #|   try {
+  #|     const text = await navigator.clipboard.readText();
+  #|     resultEl.textContent = `Pasted: "${text}"`;
+  #|   } catch (err) {
+  #|     resultEl.textContent = `Paste failed: ${String(err)}`;
+  #|   }
+  #| }

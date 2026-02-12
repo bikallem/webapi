@@ -12,7 +12,7 @@ fn notification_request_permission_ffi_wasm(
 ///|
 fn notification_request_permission_ffi(
   deprecated_callback : JsValue,
-) -> @js_async.Promise[NotificationPermission] {
+) -> JsPromise[NotificationPermission] {
   notification_request_permission_ffi_wasm(deprecated_callback).unsafe_cast()
 }
 

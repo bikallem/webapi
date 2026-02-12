@@ -95,7 +95,7 @@ pub trait THTMLMediaElement: THTMLElement {
   set_autoplay(self : Self, autoplay : Bool) -> Unit = _
   loop_(self : Self) -> Bool = _
   set_loop_(self : Self, loop_ : Bool) -> Unit = _
-  play(self : Self) -> @js_async.Promise[Unit] = _
+  play(self : Self) -> JsPromise[Unit] = _
   pause(self : Self) -> Unit = _
   controls(self : Self) -> Bool = _
   set_controls(self : Self, controls : Bool) -> Unit = _
@@ -367,7 +367,7 @@ impl THTMLMediaElement with set_loop_(self : Self, loop_ : Bool) -> Unit {
 
 ///|
 /// [HTMLMediaElement.play](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play)
-impl THTMLMediaElement with play(self : Self) -> @js_async.Promise[Unit] {
+impl THTMLMediaElement with play(self : Self) -> JsPromise[Unit] {
   html_media_element_play_ffi(TJsValue::to_js(self))
 }
 

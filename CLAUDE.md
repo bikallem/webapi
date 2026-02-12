@@ -77,7 +77,7 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 | `double`, `float` | `Double`, `Float` |
 | `any`, `object` | `JsValue` |
 | `sequence<T>` | `Array[T]` |
-| `Promise<T>` | `@js_async.Promise[T]` |
+| `Promise<T>` | `JsPromise[T]` |
 | Nullable `T?` | `T?` (Option) |
 
 ## FFI Pattern

@@ -28,9 +28,7 @@ fn navigation_transition_to_ffi(obj : JsValue) -> NavigationDestination {
 extern "js" fn navigation_transition_committed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.committed"
 
 ///|
-fn navigation_transition_committed_ffi(
-  obj : JsValue,
-) -> @js_async.Promise[Unit] {
+fn navigation_transition_committed_ffi(obj : JsValue) -> JsPromise[Unit] {
   navigation_transition_committed_ffi_js(obj).unsafe_cast()
 }
 
@@ -38,6 +36,6 @@ fn navigation_transition_committed_ffi(
 extern "js" fn navigation_transition_finished_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.finished"
 
 ///|
-fn navigation_transition_finished_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
+fn navigation_transition_finished_ffi(obj : JsValue) -> JsPromise[Unit] {
   navigation_transition_finished_ffi_js(obj).unsafe_cast()
 }

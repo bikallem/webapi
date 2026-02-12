@@ -151,7 +151,7 @@ fn html_media_element_set_loop_ffi(obj : JsValue, loop_ : JsValue) -> Unit = "we
 fn html_media_element_play_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "play"
 
 ///|
-fn html_media_element_play_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
+fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[Unit] {
   html_media_element_play_ffi_wasm(obj).unsafe_cast()
 }
 

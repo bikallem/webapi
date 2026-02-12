@@ -205,7 +205,7 @@ This library is automatically generated from WebIDL specifications using a custo
 | `double`, `float` | `Double`, `Float` |
 | `any`, `object` | `JsValue` |
 | `sequence<T>` | `Array[T]` |
-| `Promise<T>` | `@js_async.Promise[T]` |
+| `Promise<T>` | `JsPromise[T]` |
 | `T?` (nullable) | `T?` (Option) |
 
 ### Interface Generation
