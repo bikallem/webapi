@@ -79,8 +79,7 @@ fn main {
 }
 
 ///|
-extern "js" fn string_to_request_info(s : String) -> @webapi.RequestInfo =
-  #| (s) => s
+fn string_to_request_info(s : String) -> @webapi.RequestInfo = "%identity"
 
 ///|
 fn do_fetch(url : String) -> Unit {
