@@ -215,16 +215,17 @@ fn emit_js_interface_module(
   let entries : Array[String] = []
 
   // Constructor(s)
-  let mut constructor_count = 0
+  let constructor_counter : Map[String, Int] = {}
+  let used_constructor_names = @hashset.new()
   for m in iface.members {
     match m.interface_member {
       Constructor(ctor) => {
-        constructor_count += 1
-        let import_name = if constructor_count == 1 {
-          "new"
-        } else {
-          "new_\{constructor_count}"
-        }
+        let import_name = next_overload_name(
+          "new",
+          ctor.arguments,
+          constructor_counter,
+          used_constructor_names,
+        )
         entries.push(
           emit_js_constructor(import_name, iface.name, ctor.arguments),
         )
@@ -248,19 +249,16 @@ fn emit_js_interface_module(
 
   // Operations (methods + special operations) - disambiguate overloaded names
   let method_counter : Map[String, Int] = {}
+  let used_method_names = @hashset.new()
   for m in iface.members {
     match m.interface_member {
       RegularOperation(op) => {
-        let import_name = match method_counter.get(op.name) {
-          None => {
-            method_counter[op.name] = 1
-            op.name
-          }
-          Some(count) => {
-            method_counter[op.name] = count + 1
-            "\{op.name}_\{count + 1}"
-          }
-        }
+        let import_name = next_overload_name(
+          op.name,
+          op.arguments,
+          method_counter,
+          used_method_names,
+        )
         entries.push(
           emit_js_method(import_name, op.name, op.arguments, op.static_),
         )
@@ -268,16 +266,12 @@ fn emit_js_interface_module(
       SpecialOperation(op) if op.name is Some(_) => {
         // Named special operation → emit as regular method call
         let name = op.name.unwrap()
-        let import_name = match method_counter.get(name) {
-          None => {
-            method_counter[name] = 1
-            name
-          }
-          Some(count) => {
-            method_counter[name] = count + 1
-            "\{name}_\{count + 1}"
-          }
-        }
+        let import_name = next_overload_name(
+          name,
+          op.arguments,
+          method_counter,
+          used_method_names,
+        )
         entries.push(emit_js_method(import_name, name, op.arguments, false))
       }
       SpecialOperation(op) => {
@@ -287,16 +281,12 @@ fn emit_js_interface_module(
           Setter => "set"
           Deleter => "delete_"
         }
-        let import_name = match method_counter.get(base_name) {
-          None => {
-            method_counter[base_name] = 1
-            base_name
-          }
-          Some(count) => {
-            method_counter[base_name] = count + 1
-            "\{base_name}_\{count + 1}"
-          }
-        }
+        let import_name = next_overload_name(
+          base_name,
+          op.arguments,
+          method_counter,
+          used_method_names,
+        )
         entries.push(emit_js_special_operation(import_name, op))
       }
       _ => continue
@@ -394,19 +384,16 @@ fn emit_js_namespace_module(
   buf.write_string("  webapi_\{ns.name}: {\n")
   let entries : Array[String] = []
   let method_counter : Map[String, Int] = {}
+  let used_method_names = @hashset.new()
   for m in ns.members {
     match m.namespace_member {
       Operation(op) => {
-        let import_name = match method_counter.get(op.name) {
-          None => {
-            method_counter[op.name] = 1
-            op.name
-          }
-          Some(count) => {
-            method_counter[op.name] = count + 1
-            "\{op.name}_\{count + 1}"
-          }
-        }
+        let import_name = next_overload_name(
+          op.name,
+          op.arguments,
+          method_counter,
+          used_method_names,
+        )
         entries.push(
           emit_js_namespace_method(import_name, ns.name, op.name, op.arguments),
         )

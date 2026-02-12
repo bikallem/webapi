@@ -84,7 +84,7 @@ pub trait THTMLTextAreaElement: THTMLElement {
   selection_direction(self : Self) -> String = _
   set_selection_direction(self : Self, selection_direction : String) -> Unit = _
   set_range_text(self : Self, replacement : String) -> Unit = _
-  set_range_text_2(
+  set_range_text_in_range(
     self : Self,
     replacement : String,
     start : UInt,
@@ -452,14 +452,14 @@ impl THTMLTextAreaElement with set_range_text(self : Self, replacement : String)
 
 ///|
 /// [HTMLTextAreaElement.setRangeText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/setRangeText)
-impl THTMLTextAreaElement with set_range_text_2(
+impl THTMLTextAreaElement with set_range_text_in_range(
   self : Self,
   replacement : String,
   start : UInt,
   end : UInt,
   selection_mode? : SelectionMode = SelectionMode::Preserve,
 ) -> Unit {
-  html_text_area_element_set_range_text_2_ffi(
+  html_text_area_element_set_range_text_in_range_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(replacement),
     TJsValue::to_js(start),

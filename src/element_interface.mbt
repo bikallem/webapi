@@ -280,11 +280,11 @@ pub trait TElement: TNode {
     Unit,
   ] = _
   scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_top(self : Self) -> Double = _
   set_scroll_top(self : Self, scroll_top : Double) -> Unit = _
   scroll_left(self : Self) -> Double = _
@@ -833,10 +833,10 @@ impl TElement with scroll(
 
 ///|
 /// [Element.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll)
-impl TElement with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
+impl TElement with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
-  element_scroll_2_ffi(
+  element_scroll_xy_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
@@ -854,10 +854,10 @@ impl TElement with scroll_to(
 
 ///|
 /// [Element.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo)
-impl TElement with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
+impl TElement with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
-  element_scroll_to_2_ffi(
+  element_scroll_to_xy_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
@@ -875,10 +875,10 @@ impl TElement with scroll_by(
 
 ///|
 /// [Element.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy)
-impl TElement with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
+impl TElement with scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
-  element_scroll_by_2_ffi(
+  element_scroll_by_xy_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),

@@ -15,7 +15,7 @@ extern "js" fn worker_post_message_ffi(
 ) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
 
 ///|
-extern "js" fn worker_post_message_2_ffi(
+extern "js" fn worker_post_message_with_options_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,

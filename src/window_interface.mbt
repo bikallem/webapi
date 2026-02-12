@@ -85,7 +85,7 @@ pub trait TWindow: TEventTarget {
   client_information(self : Self) -> Navigator = _
   origin_agent_cluster(self : Self) -> Bool = _
   alert(self : Self) -> Unit = _
-  alert_2(self : Self, message : String) -> Unit = _
+  alert_with_message(self : Self, message : String) -> Unit = _
   confirm(self : Self, message? : String) -> Bool = _
   prompt(self : Self, message? : String, default? : String) -> String? = _
   print(self : Self) -> Unit = _
@@ -95,7 +95,7 @@ pub trait TWindow: TEventTarget {
     target_origin : String,
     transfer? : Array[JsValue],
   ) -> Unit = _
-  post_message_2(
+  post_message_with_options(
     self : Self,
     message : JsValue,
     options? : WindowPostMessageOptions,
@@ -119,11 +119,11 @@ pub trait TWindow: TEventTarget {
   scroll_y(self : Self) -> Double = _
   page_y_offset(self : Self) -> Double = _
   scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
   screen_x(self : Self) -> Int = _
   screen_left(self : Self) -> Int = _
   screen_y(self : Self) -> Int = _
@@ -392,7 +392,7 @@ pub trait TWindow: TEventTarget {
     image : &TImageBitmapSource,
     options? : ImageBitmapOptions,
   ) -> JsPromise[ImageBitmap] = _
-  create_image_bitmap_2(
+  create_image_bitmap_cropped(
     self : Self,
     image : &TImageBitmapSource,
     sx : Int,
@@ -655,8 +655,8 @@ impl TWindow with alert(self : Self) -> Unit {
 
 ///|
 /// [Window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
-impl TWindow with alert_2(self : Self, message : String) -> Unit {
-  window_alert_2_ffi(TJsValue::to_js(self), TJsValue::to_js(message))
+impl TWindow with alert_with_message(self : Self, message : String) -> Unit {
+  window_alert_with_message_ffi(TJsValue::to_js(self), TJsValue::to_js(message))
 }
 
 ///|
@@ -708,12 +708,12 @@ impl TWindow with post_message(
 
 ///|
 /// [Window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)
-impl TWindow with post_message_2(
+impl TWindow with post_message_with_options(
   self : Self,
   message : JsValue,
   options? : WindowPostMessageOptions = WindowPostMessageOptions::empty(),
 ) -> Unit {
-  window_post_message_2_ffi(
+  window_post_message_with_options_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(options),
@@ -871,10 +871,10 @@ impl TWindow with scroll(
 
 ///|
 /// [Window.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll)
-impl TWindow with scroll_2(self : Self, x : Double, y : Double) -> JsPromise[
+impl TWindow with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
-  window_scroll_2_ffi(
+  window_scroll_xy_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
@@ -892,10 +892,10 @@ impl TWindow with scroll_to(
 
 ///|
 /// [Window.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)
-impl TWindow with scroll_to_2(self : Self, x : Double, y : Double) -> JsPromise[
+impl TWindow with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
-  window_scroll_to_2_ffi(
+  window_scroll_to_xy_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
@@ -913,10 +913,10 @@ impl TWindow with scroll_by(
 
 ///|
 /// [Window.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy)
-impl TWindow with scroll_by_2(self : Self, x : Double, y : Double) -> JsPromise[
+impl TWindow with scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[
   Unit,
 ] {
-  window_scroll_by_2_ffi(
+  window_scroll_by_xy_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
@@ -2652,7 +2652,7 @@ impl TWindow with create_image_bitmap(
 
 ///|
 /// [Window.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap)
-impl TWindow with create_image_bitmap_2(
+impl TWindow with create_image_bitmap_cropped(
   self : Self,
   image : &TImageBitmapSource,
   sx : Int,
@@ -2661,7 +2661,7 @@ impl TWindow with create_image_bitmap_2(
   sh : Int,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
 ) -> JsPromise[ImageBitmap] {
-  window_create_image_bitmap_2_ffi(
+  window_create_image_bitmap_cropped_ffi(
     TJsValue::to_js(self),
     image.to_js(),
     TJsValue::to_js(sx),

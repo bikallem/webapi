@@ -14,11 +14,11 @@ fn dedicated_worker_global_scope_post_message_ffi(
 ) -> Unit = "webapi_DedicatedWorkerGlobalScope" "postMessage"
 
 ///|
-fn dedicated_worker_global_scope_post_message_2_ffi(
+fn dedicated_worker_global_scope_post_message_with_options_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "webapi_DedicatedWorkerGlobalScope" "postMessage_2"
+) -> Unit = "webapi_DedicatedWorkerGlobalScope" "post_message_with_options"
 
 ///|
 fn dedicated_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "close"

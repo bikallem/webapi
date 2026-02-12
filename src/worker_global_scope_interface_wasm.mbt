@@ -145,7 +145,7 @@ fn worker_global_scope_create_image_bitmap_ffi(
 }
 
 ///|
-fn worker_global_scope_create_image_bitmap_2_ffi_wasm(
+fn worker_global_scope_create_image_bitmap_cropped_ffi_wasm(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -153,10 +153,10 @@ fn worker_global_scope_create_image_bitmap_2_ffi_wasm(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsValue = "webapi_WorkerGlobalScope" "createImageBitmap_2"
+) -> JsValue = "webapi_WorkerGlobalScope" "create_image_bitmap_cropped"
 
 ///|
-fn worker_global_scope_create_image_bitmap_2_ffi(
+fn worker_global_scope_create_image_bitmap_cropped_ffi(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -165,7 +165,7 @@ fn worker_global_scope_create_image_bitmap_2_ffi(
   sh : JsValue,
   options : JsValue,
 ) -> JsPromise[ImageBitmap] {
-  worker_global_scope_create_image_bitmap_2_ffi_wasm(
+  worker_global_scope_create_image_bitmap_cropped_ffi_wasm(
     obj, image, sx, sy, sw, sh, options,
   ).unsafe_cast()
 }

@@ -245,7 +245,7 @@ fn worker_global_scope_create_image_bitmap_ffi(
 }
 
 ///|
-extern "js" fn worker_global_scope_create_image_bitmap_2_ffi_js(
+extern "js" fn worker_global_scope_create_image_bitmap_cropped_ffi_js(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -256,7 +256,7 @@ extern "js" fn worker_global_scope_create_image_bitmap_2_ffi_js(
 ) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap(image, sx, sy, sw, sh, options)"
 
 ///|
-fn worker_global_scope_create_image_bitmap_2_ffi(
+fn worker_global_scope_create_image_bitmap_cropped_ffi(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -265,7 +265,7 @@ fn worker_global_scope_create_image_bitmap_2_ffi(
   sh : JsValue,
   options : JsValue,
 ) -> JsPromise[ImageBitmap] {
-  worker_global_scope_create_image_bitmap_2_ffi_js(
+  worker_global_scope_create_image_bitmap_cropped_ffi_js(
     obj, image, sx, sy, sw, sh, options,
   ).unsafe_cast()
 }

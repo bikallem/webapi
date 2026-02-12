@@ -28,13 +28,18 @@ pub fn FormData::new(
 /// [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) interface.
 pub trait TFormData: TJsValue {
   append(self : Self, name : String, value : String) -> Unit = _
-  append_2(self : Self, name : String, blob_value : &TBlob, filename? : String) -> Unit = _
+  append_blob(
+    self : Self,
+    name : String,
+    blob_value : &TBlob,
+    filename? : String,
+  ) -> Unit = _
   delete(self : Self, name : String) -> Unit = _
   get(self : Self, name : String) -> FormDataEntryValue? = _
   get_all(self : Self, name : String) -> Array[FormDataEntryValue] = _
   has(self : Self, name : String) -> Bool = _
   set(self : Self, name : String, value : String) -> Unit = _
-  set_2(self : Self, name : String, blob_value : &TBlob, filename? : String) -> Unit = _
+  set_blob(self : Self, name : String, blob_value : &TBlob, filename? : String) -> Unit = _
 }
 
 ///|
@@ -49,13 +54,13 @@ impl TFormData with append(self : Self, name : String, value : String) -> Unit {
 
 ///|
 /// [FormData.append](https://developer.mozilla.org/en-US/docs/Web/API/FormData/append)
-impl TFormData with append_2(
+impl TFormData with append_blob(
   self : Self,
   name : String,
   blob_value : &TBlob,
   filename? : String,
 ) -> Unit {
-  form_data_append_2_ffi(
+  form_data_append_blob_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
     TJsValue::to_js(blob_value),
@@ -106,13 +111,13 @@ impl TFormData with set(self : Self, name : String, value : String) -> Unit {
 
 ///|
 /// [FormData.set](https://developer.mozilla.org/en-US/docs/Web/API/FormData/set)
-impl TFormData with set_2(
+impl TFormData with set_blob(
   self : Self,
   name : String,
   blob_value : &TBlob,
   filename? : String,
 ) -> Unit {
-  form_data_set_2_ffi(
+  form_data_set_blob_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
     TJsValue::to_js(blob_value),

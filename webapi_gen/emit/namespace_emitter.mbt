@@ -20,22 +20,19 @@ pub impl Emitter for NamespaceEmitter with emit(
   .push(Emit::ImplTJsValue(mbt_name))
   let namespace_methods : Array[&InterfaceMethodEmit] = []
   let method_counter : Map[String, Int] = {}
+  let used_method_names = @hashset.new()
   for m in ns.members {
     match m.namespace_member {
       Operation(op) => {
         if has_hyphen(op.name) {
           continue
         }
-        let orig_method_name = match method_counter.get(op.name) {
-          None => {
-            method_counter[op.name] = 1
-            op.name
-          }
-          Some(count) => {
-            method_counter[op.name] += 1
-            "\{op.name}_\{count + 1}"
-          }
-        }
+        let orig_method_name = next_overload_name(
+          op.name,
+          op.arguments,
+          method_counter,
+          used_method_names,
+        )
         // All namespace operations are implicitly static
         let static_op : @parser.RegularOperationMember = {
           name: op.name,

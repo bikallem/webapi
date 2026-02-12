@@ -21,14 +21,14 @@ fn xml_http_request_open_ffi(
 ) -> Unit = "webapi_XMLHttpRequest" "open"
 
 ///|
-fn xml_http_request_open_2_ffi(
+fn xml_http_request_open_with_credentials_ffi(
   obj : JsValue,
   method_ : JsValue,
   url : JsValue,
   async_ : JsValue,
   username : JsValue,
   password : JsValue,
-) -> Unit = "webapi_XMLHttpRequest" "open_2"
+) -> Unit = "webapi_XMLHttpRequest" "open_with_credentials"
 
 ///|
 fn xml_http_request_set_request_header_ffi(

@@ -12,7 +12,7 @@ extern "js" fn form_data_append_ffi(
 ) -> Unit = "(obj, name, value) => obj.append(name, value)"
 
 ///|
-extern "js" fn form_data_append_2_ffi(
+extern "js" fn form_data_append_blob_ffi(
   obj : JsValue,
   name : JsValue,
   blob_value : JsValue,
@@ -55,7 +55,7 @@ extern "js" fn form_data_set_ffi(
 ) -> Unit = "(obj, name, value) => obj.set(name, value)"
 
 ///|
-extern "js" fn form_data_set_2_ffi(
+extern "js" fn form_data_set_blob_ffi(
   obj : JsValue,
   name : JsValue,
   blob_value : JsValue,

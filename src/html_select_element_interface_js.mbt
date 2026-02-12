@@ -148,7 +148,7 @@ extern "js" fn html_select_element_add_ffi(
 extern "js" fn html_select_element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
 
 ///|
-extern "js" fn html_select_element_remove_2_ffi(
+extern "js" fn html_select_element_remove_at_ffi(
   obj : JsValue,
   index : JsValue,
 ) -> Unit = "(obj, index) => obj.remove(index)"

@@ -125,7 +125,7 @@ fn window_origin_agent_cluster_ffi(obj : JsValue) -> Bool = "webapi_Window" "get
 fn window_alert_ffi(obj : JsValue) -> Unit = "webapi_Window" "alert"
 
 ///|
-fn window_alert_2_ffi(obj : JsValue, message : JsValue) -> Unit = "webapi_Window" "alert_2"
+fn window_alert_with_message_ffi(obj : JsValue, message : JsValue) -> Unit = "webapi_Window" "alert_with_message"
 
 ///|
 fn window_confirm_ffi(obj : JsValue, message : JsValue) -> Bool = "webapi_Window" "confirm"
@@ -149,11 +149,11 @@ fn window_post_message_ffi(
 ) -> Unit = "webapi_Window" "postMessage"
 
 ///|
-fn window_post_message_2_ffi(
+fn window_post_message_with_options_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "webapi_Window" "postMessage_2"
+) -> Unit = "webapi_Window" "post_message_with_options"
 
 ///|
 fn window_capture_events_ffi(obj : JsValue) -> Unit = "webapi_Window" "captureEvents"
@@ -230,15 +230,19 @@ fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-fn window_scroll_2_ffi_wasm(obj : JsValue, x : JsValue, y : JsValue) -> JsValue = "webapi_Window" "scroll_2"
+fn window_scroll_xy_ffi_wasm(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Window" "scroll_xy"
 
 ///|
-fn window_scroll_2_ffi(
+fn window_scroll_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  window_scroll_2_ffi_wasm(obj, x, y).unsafe_cast()
+  window_scroll_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -250,19 +254,19 @@ fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-fn window_scroll_to_2_ffi_wasm(
+fn window_scroll_to_xy_ffi_wasm(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "webapi_Window" "scrollTo_2"
+) -> JsValue = "webapi_Window" "scroll_to_xy"
 
 ///|
-fn window_scroll_to_2_ffi(
+fn window_scroll_to_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  window_scroll_to_2_ffi_wasm(obj, x, y).unsafe_cast()
+  window_scroll_to_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -274,19 +278,19 @@ fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-fn window_scroll_by_2_ffi_wasm(
+fn window_scroll_by_xy_ffi_wasm(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "webapi_Window" "scrollBy_2"
+) -> JsValue = "webapi_Window" "scroll_by_xy"
 
 ///|
-fn window_scroll_by_2_ffi(
+fn window_scroll_by_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  window_scroll_by_2_ffi_wasm(obj, x, y).unsafe_cast()
+  window_scroll_by_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -1133,7 +1137,7 @@ fn window_create_image_bitmap_ffi(
 }
 
 ///|
-fn window_create_image_bitmap_2_ffi_wasm(
+fn window_create_image_bitmap_cropped_ffi_wasm(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -1141,10 +1145,10 @@ fn window_create_image_bitmap_2_ffi_wasm(
   sw : JsValue,
   sh : JsValue,
   options : JsValue,
-) -> JsValue = "webapi_Window" "createImageBitmap_2"
+) -> JsValue = "webapi_Window" "create_image_bitmap_cropped"
 
 ///|
-fn window_create_image_bitmap_2_ffi(
+fn window_create_image_bitmap_cropped_ffi(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -1153,7 +1157,9 @@ fn window_create_image_bitmap_2_ffi(
   sh : JsValue,
   options : JsValue,
 ) -> JsPromise[ImageBitmap] {
-  window_create_image_bitmap_2_ffi_wasm(obj, image, sx, sy, sw, sh, options).unsafe_cast()
+  window_create_image_bitmap_cropped_ffi_wasm(
+    obj, image, sx, sy, sw, sh, options,
+  ).unsafe_cast()
 }
 
 ///|

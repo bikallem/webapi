@@ -531,7 +531,7 @@ fn document_open_ffi(
 }
 
 ///|
-extern "js" fn document_open_2_ffi(
+extern "js" fn document_open_window_ffi(
   obj : JsValue,
   url : JsValue,
   name : JsValue,

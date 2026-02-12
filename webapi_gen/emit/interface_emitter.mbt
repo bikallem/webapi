@@ -209,14 +209,9 @@ test "has_hyphen identifies names with hyphens correctly" {
 fn emit_constructor(
   ctor : @parser.ConstructorMember,
   interface_name : String,
-  constructor_count : Int,
+  method_name : String,
   type_registry : @type_registry.TypeRegistry,
-) -> (Array[Emit], Int) {
-  let method_name = if constructor_count == 0 {
-    "new"
-  } else {
-    "new_\{constructor_count+1}"
-  }
+) -> Array[Emit] {
   let (args, arg_emits) = method_args(
     ctor.arguments.map(arg => {
       (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
@@ -235,7 +230,7 @@ fn emit_constructor(
       args,
     ),
   )
-  (emits, constructor_count + 1)
+  emits
 }
 
 ///|
@@ -559,34 +554,37 @@ pub impl Emitter for InterfaceEmitter with emit(
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
   let interface_methods : Array[&InterfaceMethodEmit] = []
+  let constructor_counter : Map[String, Int] = {}
+  let used_constructor_names = @hashset.new()
   let method_counter : Map[String, Int] = {}
-  let mut constructor_count = 0
+  let used_method_names = @hashset.new()
   loop interface.members.map(mem => mem.interface_member)[:] {
     [] => break
     [Constructor(ctor), .. rest] => {
-      let (ctor_emits, new_count) = emit_constructor(
+      let method_name = next_overload_name(
+        "new",
+        ctor.arguments,
+        constructor_counter,
+        used_constructor_names,
+      )
+      let ctor_emits = emit_constructor(
         ctor,
         interface.name,
-        constructor_count,
+        method_name,
         self.type_registry,
       )
-      constructor_count = new_count
       emits.push_iter(ctor_emits.iter())
       continue rest
     }
     [RegularOperation(op), .. rest] if has_hyphen(op.name) => continue rest
     [Attribute(attr), .. rest] if has_hyphen(attr.name) => continue rest
     [RegularOperation(op), .. rest] => {
-      let orig_method_name = match method_counter.get(op.name) {
-        None => {
-          method_counter[op.name] = 1
-          op.name
-        }
-        Some(count) => {
-          method_counter[op.name] += 1
-          "\{op.name}_\{count+1}"
-        }
-      }
+      let orig_method_name = next_overload_name(
+        op.name,
+        op.arguments,
+        method_counter,
+        used_method_names,
+      )
       let (op_emits, meth) = emit_regular_operation(
         op,
         interface.name,
@@ -622,16 +620,12 @@ pub impl Emitter for InterfaceEmitter with emit(
     // Named special operations → treat as regular methods
     [SpecialOperation(op), .. rest] if op.name is Some(_) => {
       let name = op.name.unwrap()
-      let orig_method_name = match method_counter.get(name) {
-        None => {
-          method_counter[name] = 1
-          name
-        }
-        Some(count) => {
-          method_counter[name] += 1
-          "\{name}_\{count + 1}"
-        }
-      }
+      let orig_method_name = next_overload_name(
+        name,
+        op.arguments,
+        method_counter,
+        used_method_names,
+      )
       let (op_emits, meth) = emit_special_operation(
         op,
         interface.name,
@@ -649,16 +643,12 @@ pub impl Emitter for InterfaceEmitter with emit(
         Setter => "set"
         Deleter => "delete_"
       }
-      let orig_method_name = match method_counter.get(base_name) {
-        None => {
-          method_counter[base_name] = 1
-          base_name
-        }
-        Some(count) => {
-          method_counter[base_name] += 1
-          "\{base_name}_\{count + 1}"
-        }
-      }
+      let orig_method_name = next_overload_name(
+        base_name,
+        op.arguments,
+        method_counter,
+        used_method_names,
+      )
       let (op_emits, meth) = emit_unnamed_special_operation(
         op,
         interface.name,

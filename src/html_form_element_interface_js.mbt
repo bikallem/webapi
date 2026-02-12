@@ -174,7 +174,7 @@ extern "js" fn html_form_element_get_ffi(
 ) -> JsValue = "(obj, index) => obj[index]"
 
 ///|
-extern "js" fn html_form_element_get_2_ffi(
+extern "js" fn html_form_element_get_by_name_ffi(
   obj : JsValue,
   name : JsValue,
 ) -> JsValue = "(obj, name) => obj[name]"

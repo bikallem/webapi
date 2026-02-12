@@ -455,13 +455,13 @@ fn html_input_element_set_range_text_ffi(
 ) -> Unit = "webapi_HTMLInputElement" "setRangeText"
 
 ///|
-fn html_input_element_set_range_text_2_ffi(
+fn html_input_element_set_range_text_in_range_ffi(
   obj : JsValue,
   replacement : JsValue,
   start : JsValue,
   end : JsValue,
   selection_mode : JsValue,
-) -> Unit = "webapi_HTMLInputElement" "setRangeText_2"
+) -> Unit = "webapi_HTMLInputElement" "set_range_text_in_range"
 
 ///|
 fn html_input_element_set_selection_range_ffi(

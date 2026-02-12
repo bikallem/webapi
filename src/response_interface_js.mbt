@@ -141,11 +141,11 @@ fn response_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
 }
 
 ///|
-extern "js" fn response_json_2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json()"
+extern "js" fn response_json_body_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json()"
 
 ///|
-fn response_json_2_ffi(obj : JsValue) -> JsPromise[JsValue] {
-  response_json_2_ffi_js(obj).unsafe_cast()
+fn response_json_body_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  response_json_body_ffi_js(obj).unsafe_cast()
 }
 
 ///|

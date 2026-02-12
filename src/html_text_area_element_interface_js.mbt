@@ -355,7 +355,7 @@ extern "js" fn html_text_area_element_set_range_text_ffi(
 ) -> Unit = "(obj, replacement) => obj.setRangeText(replacement)"
 
 ///|
-extern "js" fn html_text_area_element_set_range_text_2_ffi(
+extern "js" fn html_text_area_element_set_range_text_in_range_ffi(
   obj : JsValue,
   replacement : JsValue,
   start : JsValue,

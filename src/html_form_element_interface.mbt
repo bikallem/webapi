@@ -34,30 +34,32 @@ pub fn HTMLFormElement::new() -> HTMLFormElement {
 }
 
 ///|
-/// [HTMLFormElementGet2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElementGet2)
+/// [HTMLFormElementGetByName](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElementGetByName)
 #external
-pub type HTMLFormElementGet2
+pub type HTMLFormElementGetByName
 
 ///|
-pub fn[T : THTMLFormElementGet2] HTMLFormElementGet2::into(
-  self : HTMLFormElementGet2,
+pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::into(
+  self : HTMLFormElementGetByName,
 ) -> T = "%identity"
 
 ///|
-pub impl THTMLFormElementGet2 for HTMLFormElementGet2 with to_js(
-  self : HTMLFormElementGet2,
+pub impl THTMLFormElementGetByName for HTMLFormElementGetByName with to_js(
+  self : HTMLFormElementGetByName,
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait THTMLFormElementGet2 {
+pub(open) trait THTMLFormElementGetByName {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl THTMLFormElementGet2 for RadioNodeList with to_js(self : RadioNodeList) -> JsValue = "%identity"
+pub impl THTMLFormElementGetByName for RadioNodeList with to_js(
+  self : RadioNodeList,
+) -> JsValue = "%identity"
 
 ///|
-pub impl THTMLFormElementGet2 for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl THTMLFormElementGetByName for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
 /// [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) interface.
@@ -86,7 +88,7 @@ pub trait THTMLFormElement: THTMLElement {
   elements(self : Self) -> HTMLFormControlsCollection = _
   length(self : Self) -> UInt = _
   get(self : Self, index : UInt) -> Element? = _
-  get_2(self : Self, name : String) -> HTMLFormElementGet2? = _
+  get_by_name(self : Self, name : String) -> HTMLFormElementGetByName? = _
   submit(self : Self) -> Unit = _
   request_submit(self : Self, submitter? : &THTMLElement) -> Unit = _
   reset(self : Self) -> Unit = _
@@ -274,9 +276,9 @@ impl THTMLFormElement with get(self : Self, index : UInt) -> Element? {
 }
 
 ///|
-/// [HTMLFormElement.get_2](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/get_2)
-impl THTMLFormElement with get_2(self : Self, name : String) -> HTMLFormElementGet2? {
-  let result = html_form_element_get_2_ffi(
+/// [HTMLFormElement.get_by_name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/get_by_name)
+impl THTMLFormElement with get_by_name(self : Self, name : String) -> HTMLFormElementGetByName? {
+  let result = html_form_element_get_by_name_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
   )

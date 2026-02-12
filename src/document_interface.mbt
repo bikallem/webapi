@@ -220,7 +220,7 @@ pub trait TDocument: TNode {
   get_elements_by_name(self : Self, element_name : String) -> NodeList = _
   current_script(self : Self) -> HTMLOrSVGScriptElement = _
   open(self : Self, unused1? : String, unused2? : String) -> Document = _
-  open_2(self : Self, url : String, name : String, features : String) -> WindowProxy? = _
+  open_window(self : Self, url : String, name : String, features : String) -> WindowProxy? = _
   close(self : Self) -> Unit = _
   write(self : Self, text : Array[&TDocumentWriteText]) -> Unit = _
   writeln(self : Self, text : Array[&TDocumentWritelnText]) -> Unit = _
@@ -956,13 +956,13 @@ impl TDocument with open(self : Self, unused1? : String, unused2? : String) -> D
 
 ///|
 /// [Document.open](https://developer.mozilla.org/en-US/docs/Web/API/Document/open)
-impl TDocument with open_2(
+impl TDocument with open_window(
   self : Self,
   url : String,
   name : String,
   features : String,
 ) -> WindowProxy? {
-  let result = document_open_2_ffi(
+  let result = document_open_window_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
     TJsValue::to_js(name),

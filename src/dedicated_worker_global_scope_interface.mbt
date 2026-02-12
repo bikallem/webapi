@@ -31,7 +31,7 @@ pub impl TEventTarget for DedicatedWorkerGlobalScope
 pub trait TDedicatedWorkerGlobalScope: TWorkerGlobalScope {
   name(self : Self) -> String = _
   post_message(self : Self, message : JsValue, transfer : Array[JsValue]) -> Unit = _
-  post_message_2(
+  post_message_with_options(
     self : Self,
     message : JsValue,
     options? : StructuredSerializeOptions,
@@ -67,12 +67,12 @@ impl TDedicatedWorkerGlobalScope with post_message(
 
 ///|
 /// [DedicatedWorkerGlobalScope.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/postMessage)
-impl TDedicatedWorkerGlobalScope with post_message_2(
+impl TDedicatedWorkerGlobalScope with post_message_with_options(
   self : Self,
   message : JsValue,
   options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
 ) -> Unit {
-  dedicated_worker_global_scope_post_message_2_ffi(
+  dedicated_worker_global_scope_post_message_with_options_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(options),

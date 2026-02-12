@@ -1332,7 +1332,7 @@ pub impl TGeometryNode for Element
 pub impl THTMLAllCollectionItem for Element
 pub impl THTMLAllCollectionNamedItem for Element
 pub impl THTMLFormControlsCollectionNamedItem for Element
-pub impl THTMLFormElementGet2 for Element
+pub impl THTMLFormElementGetByName for Element
 pub impl THTMLSlotElementAssignNodes for Element
 pub impl TIntersectionObserverInitNewRoot for Element
 pub impl TIntersectionObserverRoot for Element
@@ -1902,9 +1902,9 @@ pub impl TJsValue for HTMLFormElement
 pub impl TNode for HTMLFormElement
 
 #external
-pub type HTMLFormElementGet2
-pub fn[T : THTMLFormElementGet2] HTMLFormElementGet2::into(Self) -> T
-pub impl THTMLFormElementGet2 for HTMLFormElementGet2
+pub type HTMLFormElementGetByName
+pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::into(Self) -> T
+pub impl THTMLFormElementGetByName for HTMLFormElementGetByName
 
 #external
 pub type HTMLFrameElement
@@ -2602,7 +2602,7 @@ pub impl TJsValue for ImageBitmapSource
 pub type ImageData
 pub fn[T : TImageData] ImageData::into(Self) -> T
 pub fn ImageData::new(UInt, UInt, settings? : ImageDataSettings) -> Self
-pub fn ImageData::new_2(&TImageDataArray, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
+pub fn ImageData::new_from_array(&TImageDataArray, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
 pub impl TImageBitmapSource for ImageData
 pub impl TImageData for ImageData
 pub impl TJsValue for ImageData
@@ -3494,7 +3494,7 @@ pub impl TJsValue for QuotaExceededErrorOptions
 pub type RadioNodeList
 pub fn[T : TRadioNodeList] RadioNodeList::into(Self) -> T
 pub impl THTMLFormControlsCollectionNamedItem for RadioNodeList
-pub impl THTMLFormElementGet2 for RadioNodeList
+pub impl THTMLFormElementGetByName for RadioNodeList
 pub impl TJsValue for RadioNodeList
 pub impl TNodeList for RadioNodeList
 pub impl TRadioNodeList for RadioNodeList
@@ -5376,7 +5376,7 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
   get_transform(Self) -> DOMMatrix
   set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
-  set_transform_2(Self, transform? : DOMMatrix2DInit) -> Unit
+  set_transform_matrix(Self, transform? : DOMMatrix2DInit) -> Unit
   reset_transform(Self) -> Unit
   global_alpha(Self) -> Double
   set_global_alpha(Self, Double) -> Unit
@@ -5409,28 +5409,28 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   stroke_rect(Self, Double, Double, Double, Double) -> Unit
   begin_path(Self) -> Unit
   fill(Self, fill_rule? : CanvasFillRule) -> Unit
-  fill_2(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
+  fill_path(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
   stroke(Self) -> Unit
-  stroke_2(Self, &TPath2D) -> Unit
+  stroke_path(Self, &TPath2D) -> Unit
   clip(Self, fill_rule? : CanvasFillRule) -> Unit
-  clip_2(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
+  clip_path(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
   is_point_in_path(Self, Double, Double, fill_rule? : CanvasFillRule) -> Bool
-  is_point_in_path_2(Self, &TPath2D, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_path_with_path(Self, &TPath2D, Double, Double, fill_rule? : CanvasFillRule) -> Bool
   is_point_in_stroke(Self, Double, Double) -> Bool
-  is_point_in_stroke_2(Self, &TPath2D, Double, Double) -> Bool
+  is_point_in_stroke_with_path(Self, &TPath2D, Double, Double) -> Bool
   draw_focus_if_needed(Self, &TElement) -> Unit
-  draw_focus_if_needed_2(Self, &TPath2D, &TElement) -> Unit
+  draw_focus_if_needed_path(Self, &TPath2D, &TElement) -> Unit
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> TextMetrics
   draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
-  draw_image_2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
-  draw_image_3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  draw_image_scaled(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image_cropped(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
   create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
-  create_image_data_2(Self, &TImageData) -> ImageData
+  create_image_data_from(Self, &TImageData) -> ImageData
   get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
   put_image_data(Self, &TImageData, Int, Int) -> Unit
-  put_image_data_2(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
+  put_image_data_dirty_rect(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
   line_width(Self) -> Double
   set_line_width(Self, Double) -> Unit
   line_cap(Self) -> CanvasLineCap
@@ -5852,7 +5852,7 @@ pub trait TDataTransferItemList : TJsValue {
   length(Self) -> UInt
   get(Self, UInt) -> DataTransferItem?
   add(Self, String, String) -> DataTransferItem?
-  add_2(Self, &TFile) -> DataTransferItem?
+  add_file(Self, &TFile) -> DataTransferItem?
   remove(Self, UInt) -> Unit
   clear(Self) -> Unit
 }
@@ -5860,7 +5860,7 @@ pub trait TDataTransferItemList : TJsValue {
 pub trait TDedicatedWorkerGlobalScope : TWorkerGlobalScope {
   name(Self) -> String
   post_message(Self, JsValue, Array[JsValue]) -> Unit
-  post_message_2(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
+  post_message_with_options(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
   close(Self) -> Unit
   request_animation_frame(Self, FrameRequestCallback) -> UInt
   cancel_animation_frame(Self, UInt) -> Unit
@@ -5925,7 +5925,7 @@ pub trait TDocument : TNode {
   get_elements_by_name(Self, String) -> NodeList
   current_script(Self) -> HTMLOrSVGScriptElement
   open(Self, unused1? : String, unused2? : String) -> Document
-  open_2(Self, String, String, String) -> Window?
+  open_window(Self, String, String, String) -> Window?
   close(Self) -> Unit
   write(Self, Array[&TDocumentWriteText]) -> Unit
   writeln(Self, Array[&TDocumentWritelnText]) -> Unit
@@ -6340,11 +6340,11 @@ pub trait TElement : TNode {
   check_visibility(Self, options? : CheckVisibilityOptions) -> Bool
   scroll_into_view(Self, arg? : &TElementScrollIntoViewArg) -> JsPromise[Unit]
   scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
-  scroll_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_xy(Self, Double, Double) -> JsPromise[Unit]
   scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
-  scroll_to_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to_xy(Self, Double, Double) -> JsPromise[Unit]
   scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
-  scroll_by_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by_xy(Self, Double, Double) -> JsPromise[Unit]
   scroll_top(Self) -> Double
   set_scroll_top(Self, Double) -> Unit
   scroll_left(Self) -> Double
@@ -6596,13 +6596,13 @@ pub trait TFocusEvent : TUIEvent {
 
 pub trait TFormData : TJsValue {
   append(Self, String, String) -> Unit
-  append_2(Self, String, &TBlob, filename? : String) -> Unit
+  append_blob(Self, String, &TBlob, filename? : String) -> Unit
   delete(Self, String) -> Unit
   get(Self, String) -> FormDataEntryValue?
   get_all(Self, String) -> Array[FormDataEntryValue]
   has(Self, String) -> Bool
   set(Self, String, String) -> Unit
-  set_2(Self, String, &TBlob, filename? : String) -> Unit
+  set_blob(Self, String, &TBlob, filename? : String) -> Unit
 }
 
 pub(open) trait TFormDataEntryValue {
@@ -7229,7 +7229,7 @@ pub trait THTMLFormElement : THTMLElement {
   elements(Self) -> HTMLFormControlsCollection
   length(Self) -> UInt
   get(Self, UInt) -> Element?
-  get_2(Self, String) -> HTMLFormElementGet2?
+  get_by_name(Self, String) -> HTMLFormElementGetByName?
   submit(Self) -> Unit
   request_submit(Self, submitter? : &THTMLElement) -> Unit
   reset(Self) -> Unit
@@ -7237,7 +7237,7 @@ pub trait THTMLFormElement : THTMLElement {
   report_validity(Self) -> Bool
 }
 
-pub(open) trait THTMLFormElementGet2 {
+pub(open) trait THTMLFormElementGetByName {
   to_js(Self) -> JsValue
 }
 
@@ -7515,7 +7515,7 @@ pub trait THTMLInputElement : THTMLElement {
   selection_direction(Self) -> String
   set_selection_direction(Self, String) -> Unit
   set_range_text(Self, String) -> Unit
-  set_range_text_2(Self, String, UInt, UInt, selection_mode? : SelectionMode) -> Unit
+  set_range_text_in_range(Self, String, UInt, UInt, selection_mode? : SelectionMode) -> Unit
   set_selection_range(Self, UInt, UInt, direction? : String) -> Unit
   show_picker(Self) -> Unit
   align(Self) -> String
@@ -7929,7 +7929,7 @@ pub trait THTMLSelectElement : THTMLElement {
   named_item(Self, String) -> HTMLOptionElement?
   add(Self, &THTMLSelectElementAddElement, before? : &THTMLSelectElementAddBefore) -> Unit
   remove(Self) -> Unit
-  remove_2(Self, Int) -> Unit
+  remove_at(Self, Int) -> Unit
   set(Self, UInt, &THTMLOptionElement) -> Unit
   selected_options(Self) -> HTMLCollection
   selected_index(Self) -> Int
@@ -8184,7 +8184,7 @@ pub trait THTMLTextAreaElement : THTMLElement {
   selection_direction(Self) -> String
   set_selection_direction(Self, String) -> Unit
   set_range_text(Self, String) -> Unit
-  set_range_text_2(Self, String, UInt, UInt, selection_mode? : SelectionMode) -> Unit
+  set_range_text_in_range(Self, String, UInt, UInt, selection_mode? : SelectionMode) -> Unit
   set_selection_range(Self, UInt, UInt, direction? : String) -> Unit
 }
 
@@ -8454,7 +8454,7 @@ pub(open) trait TMessageEventSource {
 
 pub trait TMessagePort : TEventTarget {
   post_message(Self, JsValue, Array[JsValue]) -> Unit
-  post_message_2(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
+  post_message_with_options(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
   start(Self) -> Unit
   close(Self) -> Unit
   onclose(Self) -> EventHandlerNonNull
@@ -8764,7 +8764,7 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
   get_transform(Self) -> DOMMatrix
   set_transform(Self, Double, Double, Double, Double, Double, Double) -> Unit
-  set_transform_2(Self, transform? : DOMMatrix2DInit) -> Unit
+  set_transform_matrix(Self, transform? : DOMMatrix2DInit) -> Unit
   reset_transform(Self) -> Unit
   global_alpha(Self) -> Double
   set_global_alpha(Self, Double) -> Unit
@@ -8797,26 +8797,26 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   stroke_rect(Self, Double, Double, Double, Double) -> Unit
   begin_path(Self) -> Unit
   fill(Self, fill_rule? : CanvasFillRule) -> Unit
-  fill_2(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
+  fill_path(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
   stroke(Self) -> Unit
-  stroke_2(Self, &TPath2D) -> Unit
+  stroke_path(Self, &TPath2D) -> Unit
   clip(Self, fill_rule? : CanvasFillRule) -> Unit
-  clip_2(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
+  clip_path(Self, &TPath2D, fill_rule? : CanvasFillRule) -> Unit
   is_point_in_path(Self, Double, Double, fill_rule? : CanvasFillRule) -> Bool
-  is_point_in_path_2(Self, &TPath2D, Double, Double, fill_rule? : CanvasFillRule) -> Bool
+  is_point_in_path_with_path(Self, &TPath2D, Double, Double, fill_rule? : CanvasFillRule) -> Bool
   is_point_in_stroke(Self, Double, Double) -> Bool
-  is_point_in_stroke_2(Self, &TPath2D, Double, Double) -> Bool
+  is_point_in_stroke_with_path(Self, &TPath2D, Double, Double) -> Bool
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> TextMetrics
   draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
-  draw_image_2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
-  draw_image_3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  draw_image_scaled(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image_cropped(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
   create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
-  create_image_data_2(Self, &TImageData) -> ImageData
+  create_image_data_from(Self, &TImageData) -> ImageData
   get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
   put_image_data(Self, &TImageData, Int, Int) -> Unit
-  put_image_data_2(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
+  put_image_data_dirty_rect(Self, &TImageData, Int, Int, Int, Int, Int, Int) -> Unit
   line_width(Self) -> Double
   set_line_width(Self, Double) -> Unit
   line_cap(Self) -> CanvasLineCap
@@ -9136,7 +9136,7 @@ pub trait TResponse : TJsValue {
   blob(Self) -> JsPromise[Blob]
   bytes(Self) -> JsPromise[Uint8Array]
   form_data(Self) -> JsPromise[FormData]
-  json_2(Self) -> JsPromise[JsValue]
+  json_body(Self) -> JsPromise[JsValue]
   text(Self) -> JsPromise[String]
 }
 
@@ -10427,12 +10427,12 @@ pub trait TWindow : TEventTarget {
   client_information(Self) -> Navigator
   origin_agent_cluster(Self) -> Bool
   alert(Self) -> Unit
-  alert_2(Self, String) -> Unit
+  alert_with_message(Self, String) -> Unit
   confirm(Self, message? : String) -> Bool
   prompt(Self, message? : String, default? : String) -> String?
   print(Self) -> Unit
   post_message(Self, JsValue, String, transfer? : Array[JsValue]) -> Unit
-  post_message_2(Self, JsValue, options? : WindowPostMessageOptions) -> Unit
+  post_message_with_options(Self, JsValue, options? : WindowPostMessageOptions) -> Unit
   capture_events(Self) -> Unit
   release_events(Self) -> Unit
   external(Self) -> External
@@ -10452,11 +10452,11 @@ pub trait TWindow : TEventTarget {
   scroll_y(Self) -> Double
   page_y_offset(Self) -> Double
   scroll(Self, options? : ScrollToOptions) -> JsPromise[Unit]
-  scroll_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_xy(Self, Double, Double) -> JsPromise[Unit]
   scroll_to(Self, options? : ScrollToOptions) -> JsPromise[Unit]
-  scroll_to_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_to_xy(Self, Double, Double) -> JsPromise[Unit]
   scroll_by(Self, options? : ScrollToOptions) -> JsPromise[Unit]
-  scroll_by_2(Self, Double, Double) -> JsPromise[Unit]
+  scroll_by_xy(Self, Double, Double) -> JsPromise[Unit]
   screen_x(Self) -> Int
   screen_left(Self) -> Int
   screen_y(Self) -> Int
@@ -10701,7 +10701,7 @@ pub trait TWindow : TEventTarget {
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
   create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
-  create_image_bitmap_2(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap_cropped(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
   fetch(Self, &TRequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
@@ -10719,7 +10719,7 @@ pub(open) trait TWindowEvent {
 pub trait TWorker : TEventTarget {
   terminate(Self) -> Unit
   post_message(Self, JsValue, Array[JsValue]) -> Unit
-  post_message_2(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
+  post_message_with_options(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
   onerror(Self) -> EventHandlerNonNull
   set_onerror(Self, EventHandlerNonNull) -> Unit
   onmessage(Self) -> EventHandlerNonNull
@@ -10757,7 +10757,7 @@ pub trait TWorkerGlobalScope : TEventTarget {
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
   create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
-  create_image_bitmap_2(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap_cropped(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
   fetch(Self, &TRequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
@@ -10820,7 +10820,7 @@ pub trait TXMLHttpRequest : TXMLHttpRequestEventTarget {
   set_onreadystatechange(Self, EventHandlerNonNull) -> Unit
   ready_state(Self) -> UInt
   open(Self, String, String) -> Unit
-  open_2(Self, String, String, Bool, username? : String, password? : String) -> Unit
+  open_with_credentials(Self, String, String, Bool, username? : String, password? : String) -> Unit
   set_request_header(Self, String, String) -> Unit
   timeout(Self) -> UInt
   set_timeout(Self, UInt) -> Unit

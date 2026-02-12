@@ -62,7 +62,7 @@ pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
   set_onreadystatechange(self : Self, onreadystatechange : EventHandler) -> Unit = _
   ready_state(self : Self) -> UInt = _
   open(self : Self, method_ : String, url : String) -> Unit = _
-  open_2(
+  open_with_credentials(
     self : Self,
     method_ : String,
     url : String,
@@ -127,7 +127,7 @@ impl TXMLHttpRequest with open(self : Self, method_ : String, url : String) -> U
 
 ///|
 /// [XMLHttpRequest.open](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open)
-impl TXMLHttpRequest with open_2(
+impl TXMLHttpRequest with open_with_credentials(
   self : Self,
   method_ : String,
   url : String,
@@ -135,7 +135,7 @@ impl TXMLHttpRequest with open_2(
   username? : String = JsValue::null(),
   password? : String = JsValue::null(),
 ) -> Unit {
-  xml_http_request_open_2_ffi(
+  xml_http_request_open_with_credentials_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(method_),
     TJsValue::to_js(url),

@@ -96,7 +96,7 @@ fn html_select_element_add_ffi(
 fn html_select_element_remove_ffi(obj : JsValue) -> Unit = "webapi_HTMLSelectElement" "remove"
 
 ///|
-fn html_select_element_remove_2_ffi(obj : JsValue, index : JsValue) -> Unit = "webapi_HTMLSelectElement" "remove_2"
+fn html_select_element_remove_at_ffi(obj : JsValue, index : JsValue) -> Unit = "webapi_HTMLSelectElement" "remove_at"
 
 ///|
 fn html_select_element_set_ffi(

@@ -20,7 +20,7 @@ extern "js" fn data_transfer_item_list_add_ffi(
 ) -> JsValue = "(obj, data, type_) => obj.add(data, type_)"
 
 ///|
-extern "js" fn data_transfer_item_list_add_2_ffi(
+extern "js" fn data_transfer_item_list_add_file_ffi(
   obj : JsValue,
   data : JsValue,
 ) -> JsValue = "(obj, data) => obj.add(data)"

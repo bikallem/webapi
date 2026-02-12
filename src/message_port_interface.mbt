@@ -23,7 +23,7 @@ pub impl TEventTarget for MessagePort
 /// [MessagePort](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort) interface.
 pub trait TMessagePort: TEventTarget {
   post_message(self : Self, message : JsValue, transfer : Array[JsValue]) -> Unit = _
-  post_message_2(
+  post_message_with_options(
     self : Self,
     message : JsValue,
     options? : StructuredSerializeOptions,
@@ -54,12 +54,12 @@ impl TMessagePort with post_message(
 
 ///|
 /// [MessagePort.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/postMessage)
-impl TMessagePort with post_message_2(
+impl TMessagePort with post_message_with_options(
   self : Self,
   message : JsValue,
   options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
 ) -> Unit {
-  message_port_post_message_2_ffi(
+  message_port_post_message_with_options_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(options),

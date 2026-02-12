@@ -33,7 +33,7 @@ extern "js" fn xml_http_request_open_ffi(
 ) -> Unit = "(obj, method_, url) => obj.open(method_, url)"
 
 ///|
-extern "js" fn xml_http_request_open_2_ffi(
+extern "js" fn xml_http_request_open_with_credentials_ffi(
   obj : JsValue,
   method_ : JsValue,
   url : JsValue,

@@ -92,7 +92,7 @@ extern "js" fn canvas_rendering_context2d_set_transform_ffi(
 ) -> Unit = "(obj, a, b, c, d, e, f) => obj.setTransform(a, b, c, d, e, f)"
 
 ///|
-extern "js" fn canvas_rendering_context2d_set_transform_2_ffi(
+extern "js" fn canvas_rendering_context2d_set_transform_matrix_ffi(
   obj : JsValue,
   transform : JsValue,
 ) -> Unit = "(obj, transform) => obj.setTransform(transform)"
@@ -398,7 +398,7 @@ extern "js" fn canvas_rendering_context2d_fill_ffi(
 ) -> Unit = "(obj, fill_rule) => obj.fill(fill_rule)"
 
 ///|
-extern "js" fn canvas_rendering_context2d_fill_2_ffi(
+extern "js" fn canvas_rendering_context2d_fill_path_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
@@ -408,7 +408,7 @@ extern "js" fn canvas_rendering_context2d_fill_2_ffi(
 extern "js" fn canvas_rendering_context2d_stroke_ffi(obj : JsValue) -> Unit = "(obj) => obj.stroke()"
 
 ///|
-extern "js" fn canvas_rendering_context2d_stroke_2_ffi(
+extern "js" fn canvas_rendering_context2d_stroke_path_ffi(
   obj : JsValue,
   path : JsValue,
 ) -> Unit = "(obj, path) => obj.stroke(path)"
@@ -420,7 +420,7 @@ extern "js" fn canvas_rendering_context2d_clip_ffi(
 ) -> Unit = "(obj, fill_rule) => obj.clip(fill_rule)"
 
 ///|
-extern "js" fn canvas_rendering_context2d_clip_2_ffi(
+extern "js" fn canvas_rendering_context2d_clip_path_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
@@ -445,7 +445,7 @@ fn canvas_rendering_context2d_is_point_in_path_ffi(
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_is_point_in_path_2_ffi_js(
+extern "js" fn canvas_rendering_context2d_is_point_in_path_with_path_ffi_js(
   obj : JsValue,
   path : JsValue,
   x : JsValue,
@@ -454,14 +454,14 @@ extern "js" fn canvas_rendering_context2d_is_point_in_path_2_ffi_js(
 ) -> JsValue = "(obj, path, x, y, fill_rule) => obj.isPointInPath(path, x, y, fill_rule)"
 
 ///|
-fn canvas_rendering_context2d_is_point_in_path_2_ffi(
+fn canvas_rendering_context2d_is_point_in_path_with_path_ffi(
   obj : JsValue,
   path : JsValue,
   x : JsValue,
   y : JsValue,
   fill_rule : JsValue,
 ) -> Bool {
-  canvas_rendering_context2d_is_point_in_path_2_ffi_js(
+  canvas_rendering_context2d_is_point_in_path_with_path_ffi_js(
     obj, path, x, y, fill_rule,
   ).unsafe_cast()
 }
@@ -483,7 +483,7 @@ fn canvas_rendering_context2d_is_point_in_stroke_ffi(
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_is_point_in_stroke_2_ffi_js(
+extern "js" fn canvas_rendering_context2d_is_point_in_stroke_with_path_ffi_js(
   obj : JsValue,
   path : JsValue,
   x : JsValue,
@@ -491,13 +491,15 @@ extern "js" fn canvas_rendering_context2d_is_point_in_stroke_2_ffi_js(
 ) -> JsValue = "(obj, path, x, y) => obj.isPointInStroke(path, x, y)"
 
 ///|
-fn canvas_rendering_context2d_is_point_in_stroke_2_ffi(
+fn canvas_rendering_context2d_is_point_in_stroke_with_path_ffi(
   obj : JsValue,
   path : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> Bool {
-  canvas_rendering_context2d_is_point_in_stroke_2_ffi_js(obj, path, x, y).unsafe_cast()
+  canvas_rendering_context2d_is_point_in_stroke_with_path_ffi_js(
+    obj, path, x, y,
+  ).unsafe_cast()
 }
 
 ///|
@@ -507,7 +509,7 @@ extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_ffi(
 ) -> Unit = "(obj, element) => obj.drawFocusIfNeeded(element)"
 
 ///|
-extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_2_ffi(
+extern "js" fn canvas_rendering_context2d_draw_focus_if_needed_path_ffi(
   obj : JsValue,
   path : JsValue,
   element : JsValue,
@@ -554,7 +556,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_ffi(
 ) -> Unit = "(obj, image, dx, dy) => obj.drawImage(image, dx, dy)"
 
 ///|
-extern "js" fn canvas_rendering_context2d_draw_image_2_ffi(
+extern "js" fn canvas_rendering_context2d_draw_image_scaled_ffi(
   obj : JsValue,
   image : JsValue,
   dx : JsValue,
@@ -564,7 +566,7 @@ extern "js" fn canvas_rendering_context2d_draw_image_2_ffi(
 ) -> Unit = "(obj, image, dx, dy, dw, dh) => obj.drawImage(image, dx, dy, dw, dh)"
 
 ///|
-extern "js" fn canvas_rendering_context2d_draw_image_3_ffi(
+extern "js" fn canvas_rendering_context2d_draw_image_cropped_ffi(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -596,17 +598,17 @@ fn canvas_rendering_context2d_create_image_data_ffi(
 }
 
 ///|
-extern "js" fn canvas_rendering_context2d_create_image_data_2_ffi_js(
+extern "js" fn canvas_rendering_context2d_create_image_data_from_ffi_js(
   obj : JsValue,
   image_data : JsValue,
 ) -> JsValue = "(obj, image_data) => obj.createImageData(image_data)"
 
 ///|
-fn canvas_rendering_context2d_create_image_data_2_ffi(
+fn canvas_rendering_context2d_create_image_data_from_ffi(
   obj : JsValue,
   image_data : JsValue,
 ) -> ImageData {
-  canvas_rendering_context2d_create_image_data_2_ffi_js(obj, image_data).unsafe_cast()
+  canvas_rendering_context2d_create_image_data_from_ffi_js(obj, image_data).unsafe_cast()
 }
 
 ///|
@@ -642,7 +644,7 @@ extern "js" fn canvas_rendering_context2d_put_image_data_ffi(
 ) -> Unit = "(obj, image_data, dx, dy) => obj.putImageData(image_data, dx, dy)"
 
 ///|
-extern "js" fn canvas_rendering_context2d_put_image_data_2_ffi(
+extern "js" fn canvas_rendering_context2d_put_image_data_dirty_rect_ffi(
   obj : JsValue,
   image_data : JsValue,
   dx : JsValue,

@@ -84,7 +84,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     image : &TImageBitmapSource,
     options? : ImageBitmapOptions,
   ) -> JsPromise[ImageBitmap] = _
-  create_image_bitmap_2(
+  create_image_bitmap_cropped(
     self : Self,
     image : &TImageBitmapSource,
     sx : Int,
@@ -361,7 +361,7 @@ impl TWorkerGlobalScope with create_image_bitmap(
 
 ///|
 /// [WorkerGlobalScope.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/createImageBitmap)
-impl TWorkerGlobalScope with create_image_bitmap_2(
+impl TWorkerGlobalScope with create_image_bitmap_cropped(
   self : Self,
   image : &TImageBitmapSource,
   sx : Int,
@@ -370,7 +370,7 @@ impl TWorkerGlobalScope with create_image_bitmap_2(
   sh : Int,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
 ) -> JsPromise[ImageBitmap] {
-  worker_global_scope_create_image_bitmap_2_ffi(
+  worker_global_scope_create_image_bitmap_cropped_ffi(
     TJsValue::to_js(self),
     image.to_js(),
     TJsValue::to_js(sx),

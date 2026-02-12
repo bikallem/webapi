@@ -12,11 +12,11 @@ fn worker_post_message_ffi(
 ) -> Unit = "webapi_Worker" "postMessage"
 
 ///|
-fn worker_post_message_2_ffi(
+fn worker_post_message_with_options_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "webapi_Worker" "postMessage_2"
+) -> Unit = "webapi_Worker" "post_message_with_options"
 
 ///|
 fn worker_onerror_ffi(obj : JsValue) -> EventHandler = "webapi_Worker" "get_onerror"

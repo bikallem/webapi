@@ -6,7 +6,7 @@ fn image_data_new_ffi(
 ) -> ImageData = "webapi_ImageData" "new"
 
 ///|
-fn image_data_new_2_ffi(
+fn image_data_new_from_array_ffi(
   data : JsValue,
   sw : JsValue,
   sh : JsValue,

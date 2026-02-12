@@ -45,7 +45,7 @@ pub fn Worker::new(
 pub trait TWorker: TEventTarget {
   terminate(self : Self) -> Unit = _
   post_message(self : Self, message : JsValue, transfer : Array[JsValue]) -> Unit = _
-  post_message_2(
+  post_message_with_options(
     self : Self,
     message : JsValue,
     options? : StructuredSerializeOptions,
@@ -80,12 +80,12 @@ impl TWorker with post_message(
 
 ///|
 /// [Worker.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage)
-impl TWorker with post_message_2(
+impl TWorker with post_message_with_options(
   self : Self,
   message : JsValue,
   options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
 ) -> Unit {
-  worker_post_message_2_ffi(
+  worker_post_message_with_options_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(options),

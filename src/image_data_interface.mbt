@@ -30,13 +30,13 @@ pub fn ImageData::new(
 }
 
 ///|
-pub fn ImageData::new_2(
+pub fn ImageData::new_from_array(
   data : &TImageDataArray,
   sw : UInt,
   sh? : UInt,
   settings? : ImageDataSettings = ImageDataSettings::empty(),
 ) -> ImageData {
-  image_data_new_2_ffi(
+  image_data_new_from_array_ffi(
     data.to_js(),
     TJsValue::to_js(sw),
     opt_to_js(sh),

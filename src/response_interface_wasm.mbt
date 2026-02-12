@@ -83,11 +83,11 @@ fn response_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
 }
 
 ///|
-fn response_json_2_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "json_2"
+fn response_json_body_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "json_body"
 
 ///|
-fn response_json_2_ffi(obj : JsValue) -> JsPromise[JsValue] {
-  response_json_2_ffi_wasm(obj).unsafe_cast()
+fn response_json_body_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  response_json_body_ffi_wasm(obj).unsafe_cast()
 }
 
 ///|

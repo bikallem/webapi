@@ -234,13 +234,13 @@ fn html_text_area_element_set_range_text_ffi(
 ) -> Unit = "webapi_HTMLTextAreaElement" "setRangeText"
 
 ///|
-fn html_text_area_element_set_range_text_2_ffi(
+fn html_text_area_element_set_range_text_in_range_ffi(
   obj : JsValue,
   replacement : JsValue,
   start : JsValue,
   end : JsValue,
   selection_mode : JsValue,
-) -> Unit = "webapi_HTMLTextAreaElement" "setRangeText_2"
+) -> Unit = "webapi_HTMLTextAreaElement" "set_range_text_in_range"
 
 ///|
 fn html_text_area_element_set_selection_range_ffi(

@@ -273,19 +273,19 @@ fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-fn element_scroll_2_ffi_wasm(
+fn element_scroll_xy_ffi_wasm(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "webapi_Element" "scroll_2"
+) -> JsValue = "webapi_Element" "scroll_xy"
 
 ///|
-fn element_scroll_2_ffi(
+fn element_scroll_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  element_scroll_2_ffi_wasm(obj, x, y).unsafe_cast()
+  element_scroll_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -297,19 +297,19 @@ fn element_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-fn element_scroll_to_2_ffi_wasm(
+fn element_scroll_to_xy_ffi_wasm(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "webapi_Element" "scrollTo_2"
+) -> JsValue = "webapi_Element" "scroll_to_xy"
 
 ///|
-fn element_scroll_to_2_ffi(
+fn element_scroll_to_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  element_scroll_to_2_ffi_wasm(obj, x, y).unsafe_cast()
+  element_scroll_to_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -321,19 +321,19 @@ fn element_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-fn element_scroll_by_2_ffi_wasm(
+fn element_scroll_by_xy_ffi_wasm(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "webapi_Element" "scrollBy_2"
+) -> JsValue = "webapi_Element" "scroll_by_xy"
 
 ///|
-fn element_scroll_by_2_ffi(
+fn element_scroll_by_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  element_scroll_by_2_ffi_wasm(obj, x, y).unsafe_cast()
+  element_scroll_by_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
 ///|

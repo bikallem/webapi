@@ -441,19 +441,19 @@ fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-extern "js" fn element_scroll_2_ffi_js(
+extern "js" fn element_scroll_xy_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsValue = "(obj, x, y) => obj.scroll(x, y)"
 
 ///|
-fn element_scroll_2_ffi(
+fn element_scroll_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  element_scroll_2_ffi_js(obj, x, y).unsafe_cast()
+  element_scroll_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -468,19 +468,19 @@ fn element_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-extern "js" fn element_scroll_to_2_ffi_js(
+extern "js" fn element_scroll_to_xy_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsValue = "(obj, x, y) => obj.scrollTo(x, y)"
 
 ///|
-fn element_scroll_to_2_ffi(
+fn element_scroll_to_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  element_scroll_to_2_ffi_js(obj, x, y).unsafe_cast()
+  element_scroll_to_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -495,19 +495,19 @@ fn element_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-extern "js" fn element_scroll_by_2_ffi_js(
+extern "js" fn element_scroll_by_xy_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsValue = "(obj, x, y) => obj.scrollBy(x, y)"
 
 ///|
-fn element_scroll_by_2_ffi(
+fn element_scroll_by_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  element_scroll_by_2_ffi_js(obj, x, y).unsafe_cast()
+  element_scroll_by_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
 ///|

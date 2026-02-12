@@ -6,7 +6,7 @@ extern "js" fn image_data_new_ffi(
 ) -> ImageData = "(sw, sh, settings) => new ImageData(sw, sh, settings)"
 
 ///|
-extern "js" fn image_data_new_2_ffi(
+extern "js" fn image_data_new_from_array_ffi(
   data : JsValue,
   sw : JsValue,
   sh : JsValue,

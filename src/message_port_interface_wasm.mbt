@@ -6,11 +6,11 @@ fn message_port_post_message_ffi(
 ) -> Unit = "webapi_MessagePort" "postMessage"
 
 ///|
-fn message_port_post_message_2_ffi(
+fn message_port_post_message_with_options_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
-) -> Unit = "webapi_MessagePort" "postMessage_2"
+) -> Unit = "webapi_MessagePort" "post_message_with_options"
 
 ///|
 fn message_port_start_ffi(obj : JsValue) -> Unit = "webapi_MessagePort" "start"

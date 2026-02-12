@@ -158,7 +158,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     e : Double,
     f : Double,
   ) -> Unit = _
-  set_transform_2(self : Self, transform? : DOMMatrix2DInit) -> Unit = _
+  set_transform_matrix(self : Self, transform? : DOMMatrix2DInit) -> Unit = _
   reset_transform(self : Self) -> Unit = _
   global_alpha(self : Self) -> Double = _
   set_global_alpha(self : Self, global_alpha : Double) -> Unit = _
@@ -219,18 +219,18 @@ pub trait TCanvasRenderingContext2D: TJsValue {
   stroke_rect(self : Self, x : Double, y : Double, w : Double, h : Double) -> Unit = _
   begin_path(self : Self) -> Unit = _
   fill(self : Self, fill_rule? : CanvasFillRule) -> Unit = _
-  fill_2(self : Self, path : &TPath2D, fill_rule? : CanvasFillRule) -> Unit = _
+  fill_path(self : Self, path : &TPath2D, fill_rule? : CanvasFillRule) -> Unit = _
   stroke(self : Self) -> Unit = _
-  stroke_2(self : Self, path : &TPath2D) -> Unit = _
+  stroke_path(self : Self, path : &TPath2D) -> Unit = _
   clip(self : Self, fill_rule? : CanvasFillRule) -> Unit = _
-  clip_2(self : Self, path : &TPath2D, fill_rule? : CanvasFillRule) -> Unit = _
+  clip_path(self : Self, path : &TPath2D, fill_rule? : CanvasFillRule) -> Unit = _
   is_point_in_path(
     self : Self,
     x : Double,
     y : Double,
     fill_rule? : CanvasFillRule,
   ) -> Bool = _
-  is_point_in_path_2(
+  is_point_in_path_with_path(
     self : Self,
     path : &TPath2D,
     x : Double,
@@ -238,9 +238,14 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     fill_rule? : CanvasFillRule,
   ) -> Bool = _
   is_point_in_stroke(self : Self, x : Double, y : Double) -> Bool = _
-  is_point_in_stroke_2(self : Self, path : &TPath2D, x : Double, y : Double) -> Bool = _
+  is_point_in_stroke_with_path(
+    self : Self,
+    path : &TPath2D,
+    x : Double,
+    y : Double,
+  ) -> Bool = _
   draw_focus_if_needed(self : Self, element : &TElement) -> Unit = _
-  draw_focus_if_needed_2(self : Self, path : &TPath2D, element : &TElement) -> Unit = _
+  draw_focus_if_needed_path(self : Self, path : &TPath2D, element : &TElement) -> Unit = _
   fill_text(
     self : Self,
     text : String,
@@ -257,7 +262,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
   ) -> Unit = _
   measure_text(self : Self, text : String) -> TextMetrics = _
   draw_image(self : Self, image : &TCanvasImageSource, dx : Double, dy : Double) -> Unit = _
-  draw_image_2(
+  draw_image_scaled(
     self : Self,
     image : &TCanvasImageSource,
     dx : Double,
@@ -265,7 +270,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     dw : Double,
     dh : Double,
   ) -> Unit = _
-  draw_image_3(
+  draw_image_cropped(
     self : Self,
     image : &TCanvasImageSource,
     sx : Double,
@@ -283,7 +288,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     sh : Int,
     settings? : ImageDataSettings,
   ) -> ImageData = _
-  create_image_data_2(self : Self, image_data : &TImageData) -> ImageData = _
+  create_image_data_from(self : Self, image_data : &TImageData) -> ImageData = _
   get_image_data(
     self : Self,
     sx : Int,
@@ -293,7 +298,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     settings? : ImageDataSettings,
   ) -> ImageData = _
   put_image_data(self : Self, image_data : &TImageData, dx : Int, dy : Int) -> Unit = _
-  put_image_data_2(
+  put_image_data_dirty_rect(
     self : Self,
     image_data : &TImageData,
     dx : Int,
@@ -516,11 +521,11 @@ impl TCanvasRenderingContext2D with set_transform(
 
 ///|
 /// [CanvasRenderingContext2D.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform)
-impl TCanvasRenderingContext2D with set_transform_2(
+impl TCanvasRenderingContext2D with set_transform_matrix(
   self : Self,
   transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
 ) -> Unit {
-  canvas_rendering_context2d_set_transform_2_ffi(
+  canvas_rendering_context2d_set_transform_matrix_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(transform),
   )
@@ -878,12 +883,12 @@ impl TCanvasRenderingContext2D with fill(
 
 ///|
 /// [CanvasRenderingContext2D.fill](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill)
-impl TCanvasRenderingContext2D with fill_2(
+impl TCanvasRenderingContext2D with fill_path(
   self : Self,
   path : &TPath2D,
   fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
 ) -> Unit {
-  canvas_rendering_context2d_fill_2_ffi(
+  canvas_rendering_context2d_fill_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
     TJsValue::to_js(fill_rule),
@@ -898,8 +903,8 @@ impl TCanvasRenderingContext2D with stroke(self : Self) -> Unit {
 
 ///|
 /// [CanvasRenderingContext2D.stroke](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke)
-impl TCanvasRenderingContext2D with stroke_2(self : Self, path : &TPath2D) -> Unit {
-  canvas_rendering_context2d_stroke_2_ffi(
+impl TCanvasRenderingContext2D with stroke_path(self : Self, path : &TPath2D) -> Unit {
+  canvas_rendering_context2d_stroke_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
   )
@@ -919,12 +924,12 @@ impl TCanvasRenderingContext2D with clip(
 
 ///|
 /// [CanvasRenderingContext2D.clip](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
-impl TCanvasRenderingContext2D with clip_2(
+impl TCanvasRenderingContext2D with clip_path(
   self : Self,
   path : &TPath2D,
   fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
 ) -> Unit {
-  canvas_rendering_context2d_clip_2_ffi(
+  canvas_rendering_context2d_clip_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
     TJsValue::to_js(fill_rule),
@@ -949,14 +954,14 @@ impl TCanvasRenderingContext2D with is_point_in_path(
 
 ///|
 /// [CanvasRenderingContext2D.isPointInPath](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath)
-impl TCanvasRenderingContext2D with is_point_in_path_2(
+impl TCanvasRenderingContext2D with is_point_in_path_with_path(
   self : Self,
   path : &TPath2D,
   x : Double,
   y : Double,
   fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
 ) -> Bool {
-  canvas_rendering_context2d_is_point_in_path_2_ffi(
+  canvas_rendering_context2d_is_point_in_path_with_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
     TJsValue::to_js(x),
@@ -981,13 +986,13 @@ impl TCanvasRenderingContext2D with is_point_in_stroke(
 
 ///|
 /// [CanvasRenderingContext2D.isPointInStroke](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke)
-impl TCanvasRenderingContext2D with is_point_in_stroke_2(
+impl TCanvasRenderingContext2D with is_point_in_stroke_with_path(
   self : Self,
   path : &TPath2D,
   x : Double,
   y : Double,
 ) -> Bool {
-  canvas_rendering_context2d_is_point_in_stroke_2_ffi(
+  canvas_rendering_context2d_is_point_in_stroke_with_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
     TJsValue::to_js(x),
@@ -1009,12 +1014,12 @@ impl TCanvasRenderingContext2D with draw_focus_if_needed(
 
 ///|
 /// [CanvasRenderingContext2D.drawFocusIfNeeded](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawFocusIfNeeded)
-impl TCanvasRenderingContext2D with draw_focus_if_needed_2(
+impl TCanvasRenderingContext2D with draw_focus_if_needed_path(
   self : Self,
   path : &TPath2D,
   element : &TElement,
 ) -> Unit {
-  canvas_rendering_context2d_draw_focus_if_needed_2_ffi(
+  canvas_rendering_context2d_draw_focus_if_needed_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
     TJsValue::to_js(element),
@@ -1084,7 +1089,7 @@ impl TCanvasRenderingContext2D with draw_image(
 
 ///|
 /// [CanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
-impl TCanvasRenderingContext2D with draw_image_2(
+impl TCanvasRenderingContext2D with draw_image_scaled(
   self : Self,
   image : &TCanvasImageSource,
   dx : Double,
@@ -1092,7 +1097,7 @@ impl TCanvasRenderingContext2D with draw_image_2(
   dw : Double,
   dh : Double,
 ) -> Unit {
-  canvas_rendering_context2d_draw_image_2_ffi(
+  canvas_rendering_context2d_draw_image_scaled_ffi(
     TJsValue::to_js(self),
     image.to_js(),
     TJsValue::to_js(dx),
@@ -1104,7 +1109,7 @@ impl TCanvasRenderingContext2D with draw_image_2(
 
 ///|
 /// [CanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
-impl TCanvasRenderingContext2D with draw_image_3(
+impl TCanvasRenderingContext2D with draw_image_cropped(
   self : Self,
   image : &TCanvasImageSource,
   sx : Double,
@@ -1116,7 +1121,7 @@ impl TCanvasRenderingContext2D with draw_image_3(
   dw : Double,
   dh : Double,
 ) -> Unit {
-  canvas_rendering_context2d_draw_image_3_ffi(
+  canvas_rendering_context2d_draw_image_cropped_ffi(
     TJsValue::to_js(self),
     image.to_js(),
     TJsValue::to_js(sx),
@@ -1148,11 +1153,11 @@ impl TCanvasRenderingContext2D with create_image_data(
 
 ///|
 /// [CanvasRenderingContext2D.createImageData](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData)
-impl TCanvasRenderingContext2D with create_image_data_2(
+impl TCanvasRenderingContext2D with create_image_data_from(
   self : Self,
   image_data : &TImageData,
 ) -> ImageData {
-  canvas_rendering_context2d_create_image_data_2_ffi(
+  canvas_rendering_context2d_create_image_data_from_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image_data),
   )
@@ -1196,7 +1201,7 @@ impl TCanvasRenderingContext2D with put_image_data(
 
 ///|
 /// [CanvasRenderingContext2D.putImageData](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData)
-impl TCanvasRenderingContext2D with put_image_data_2(
+impl TCanvasRenderingContext2D with put_image_data_dirty_rect(
   self : Self,
   image_data : &TImageData,
   dx : Int,
@@ -1206,7 +1211,7 @@ impl TCanvasRenderingContext2D with put_image_data_2(
   dirty_width : Int,
   dirty_height : Int,
 ) -> Unit {
-  canvas_rendering_context2d_put_image_data_2_ffi(
+  canvas_rendering_context2d_put_image_data_dirty_rect_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(image_data),
     TJsValue::to_js(dx),

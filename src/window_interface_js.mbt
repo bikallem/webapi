@@ -245,7 +245,10 @@ fn window_origin_agent_cluster_ffi(obj : JsValue) -> Bool {
 extern "js" fn window_alert_ffi(obj : JsValue) -> Unit = "(obj) => obj.alert()"
 
 ///|
-extern "js" fn window_alert_2_ffi(obj : JsValue, message : JsValue) -> Unit = "(obj, message) => obj.alert(message)"
+extern "js" fn window_alert_with_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+) -> Unit = "(obj, message) => obj.alert(message)"
 
 ///|
 extern "js" fn window_confirm_ffi_js(
@@ -277,7 +280,7 @@ extern "js" fn window_post_message_ffi(
 ) -> Unit = "(obj, message, target_origin, transfer) => obj.postMessage(message, target_origin, transfer)"
 
 ///|
-extern "js" fn window_post_message_2_ffi(
+extern "js" fn window_post_message_with_options_ffi(
   obj : JsValue,
   message : JsValue,
   options : JsValue,
@@ -444,19 +447,19 @@ fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-extern "js" fn window_scroll_2_ffi_js(
+extern "js" fn window_scroll_xy_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsValue = "(obj, x, y) => obj.scroll(x, y)"
 
 ///|
-fn window_scroll_2_ffi(
+fn window_scroll_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  window_scroll_2_ffi_js(obj, x, y).unsafe_cast()
+  window_scroll_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -471,19 +474,19 @@ fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-extern "js" fn window_scroll_to_2_ffi_js(
+extern "js" fn window_scroll_to_xy_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsValue = "(obj, x, y) => obj.scrollTo(x, y)"
 
 ///|
-fn window_scroll_to_2_ffi(
+fn window_scroll_to_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  window_scroll_to_2_ffi_js(obj, x, y).unsafe_cast()
+  window_scroll_to_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -498,19 +501,19 @@ fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
 }
 
 ///|
-extern "js" fn window_scroll_by_2_ffi_js(
+extern "js" fn window_scroll_by_xy_ffi_js(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsValue = "(obj, x, y) => obj.scrollBy(x, y)"
 
 ///|
-fn window_scroll_by_2_ffi(
+fn window_scroll_by_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
 ) -> JsPromise[Unit] {
-  window_scroll_by_2_ffi_js(obj, x, y).unsafe_cast()
+  window_scroll_by_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
 ///|
@@ -2203,7 +2206,7 @@ fn window_create_image_bitmap_ffi(
 }
 
 ///|
-extern "js" fn window_create_image_bitmap_2_ffi_js(
+extern "js" fn window_create_image_bitmap_cropped_ffi_js(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -2214,7 +2217,7 @@ extern "js" fn window_create_image_bitmap_2_ffi_js(
 ) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap(image, sx, sy, sw, sh, options)"
 
 ///|
-fn window_create_image_bitmap_2_ffi(
+fn window_create_image_bitmap_cropped_ffi(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -2223,7 +2226,7 @@ fn window_create_image_bitmap_2_ffi(
   sh : JsValue,
   options : JsValue,
 ) -> JsPromise[ImageBitmap] {
-  window_create_image_bitmap_2_ffi_js(obj, image, sx, sy, sw, sh, options).unsafe_cast()
+  window_create_image_bitmap_cropped_ffi_js(obj, image, sx, sy, sw, sh, options).unsafe_cast()
 }
 
 ///|

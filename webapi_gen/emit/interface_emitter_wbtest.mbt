@@ -977,6 +977,7 @@ test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
     content="true",
   )
   inspect(multi.shared.contains("TestInterface/fill_2"), content="false")
+  inspect(multi.shared.contains("with fill_path("), content="true")
   inspect(
     multi.js_ffi.contains(
       "(obj, path, fill_rule) => obj.fill(path, fill_rule)",
@@ -1018,7 +1019,7 @@ test "mbt_code_gen_multi wasm FFI snapshot for overloaded methods" {
     content=(
       #|fn test_interface_fill_ffi(obj: JsValue, fill_rule: JsValue) -> Unit = "webapi_TestInterface" "fill"
       #|
-      #|fn test_interface_fill_2_ffi(obj: JsValue, path: JsValue, fill_rule: JsValue) -> Unit = "webapi_TestInterface" "fill_2"
+      #|fn test_interface_fill_path_ffi(obj: JsValue, path: JsValue, fill_rule: JsValue) -> Unit = "webapi_TestInterface" "fill_path"
     ),
   )
 }

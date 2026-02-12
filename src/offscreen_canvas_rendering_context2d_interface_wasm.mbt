@@ -70,10 +70,10 @@ fn offscreen_canvas_rendering_context2d_set_transform_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "setTransform"
 
 ///|
-fn offscreen_canvas_rendering_context2d_set_transform_2_ffi(
+fn offscreen_canvas_rendering_context2d_set_transform_matrix_ffi(
   obj : JsValue,
   transform : JsValue,
-) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "setTransform_2"
+) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_transform_matrix"
 
 ///|
 fn offscreen_canvas_rendering_context2d_reset_transform_ffi(
@@ -298,20 +298,20 @@ fn offscreen_canvas_rendering_context2d_fill_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "fill"
 
 ///|
-fn offscreen_canvas_rendering_context2d_fill_2_ffi(
+fn offscreen_canvas_rendering_context2d_fill_path_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "fill_2"
+) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "fill_path"
 
 ///|
 fn offscreen_canvas_rendering_context2d_stroke_ffi(obj : JsValue) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "stroke"
 
 ///|
-fn offscreen_canvas_rendering_context2d_stroke_2_ffi(
+fn offscreen_canvas_rendering_context2d_stroke_path_ffi(
   obj : JsValue,
   path : JsValue,
-) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "stroke_2"
+) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "stroke_path"
 
 ///|
 fn offscreen_canvas_rendering_context2d_clip_ffi(
@@ -320,11 +320,11 @@ fn offscreen_canvas_rendering_context2d_clip_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "clip"
 
 ///|
-fn offscreen_canvas_rendering_context2d_clip_2_ffi(
+fn offscreen_canvas_rendering_context2d_clip_path_ffi(
   obj : JsValue,
   path : JsValue,
   fill_rule : JsValue,
-) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "clip_2"
+) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "clip_path"
 
 ///|
 fn offscreen_canvas_rendering_context2d_is_point_in_path_ffi(
@@ -335,13 +335,13 @@ fn offscreen_canvas_rendering_context2d_is_point_in_path_ffi(
 ) -> Bool = "webapi_OffscreenCanvasRenderingContext2D" "isPointInPath"
 
 ///|
-fn offscreen_canvas_rendering_context2d_is_point_in_path_2_ffi(
+fn offscreen_canvas_rendering_context2d_is_point_in_path_with_path_ffi(
   obj : JsValue,
   path : JsValue,
   x : JsValue,
   y : JsValue,
   fill_rule : JsValue,
-) -> Bool = "webapi_OffscreenCanvasRenderingContext2D" "isPointInPath_2"
+) -> Bool = "webapi_OffscreenCanvasRenderingContext2D" "is_point_in_path_with_path"
 
 ///|
 fn offscreen_canvas_rendering_context2d_is_point_in_stroke_ffi(
@@ -351,12 +351,12 @@ fn offscreen_canvas_rendering_context2d_is_point_in_stroke_ffi(
 ) -> Bool = "webapi_OffscreenCanvasRenderingContext2D" "isPointInStroke"
 
 ///|
-fn offscreen_canvas_rendering_context2d_is_point_in_stroke_2_ffi(
+fn offscreen_canvas_rendering_context2d_is_point_in_stroke_with_path_ffi(
   obj : JsValue,
   path : JsValue,
   x : JsValue,
   y : JsValue,
-) -> Bool = "webapi_OffscreenCanvasRenderingContext2D" "isPointInStroke_2"
+) -> Bool = "webapi_OffscreenCanvasRenderingContext2D" "is_point_in_stroke_with_path"
 
 ///|
 fn offscreen_canvas_rendering_context2d_fill_text_ffi(
@@ -391,17 +391,17 @@ fn offscreen_canvas_rendering_context2d_draw_image_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "drawImage"
 
 ///|
-fn offscreen_canvas_rendering_context2d_draw_image_2_ffi(
+fn offscreen_canvas_rendering_context2d_draw_image_scaled_ffi(
   obj : JsValue,
   image : JsValue,
   dx : JsValue,
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "drawImage_2"
+) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "draw_image_scaled"
 
 ///|
-fn offscreen_canvas_rendering_context2d_draw_image_3_ffi(
+fn offscreen_canvas_rendering_context2d_draw_image_cropped_ffi(
   obj : JsValue,
   image : JsValue,
   sx : JsValue,
@@ -412,7 +412,7 @@ fn offscreen_canvas_rendering_context2d_draw_image_3_ffi(
   dy : JsValue,
   dw : JsValue,
   dh : JsValue,
-) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "drawImage_3"
+) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "draw_image_cropped"
 
 ///|
 fn offscreen_canvas_rendering_context2d_create_image_data_ffi(
@@ -423,10 +423,10 @@ fn offscreen_canvas_rendering_context2d_create_image_data_ffi(
 ) -> ImageData = "webapi_OffscreenCanvasRenderingContext2D" "createImageData"
 
 ///|
-fn offscreen_canvas_rendering_context2d_create_image_data_2_ffi(
+fn offscreen_canvas_rendering_context2d_create_image_data_from_ffi(
   obj : JsValue,
   image_data : JsValue,
-) -> ImageData = "webapi_OffscreenCanvasRenderingContext2D" "createImageData_2"
+) -> ImageData = "webapi_OffscreenCanvasRenderingContext2D" "create_image_data_from"
 
 ///|
 fn offscreen_canvas_rendering_context2d_get_image_data_ffi(
@@ -447,7 +447,7 @@ fn offscreen_canvas_rendering_context2d_put_image_data_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "putImageData"
 
 ///|
-fn offscreen_canvas_rendering_context2d_put_image_data_2_ffi(
+fn offscreen_canvas_rendering_context2d_put_image_data_dirty_rect_ffi(
   obj : JsValue,
   image_data : JsValue,
   dx : JsValue,
@@ -456,7 +456,7 @@ fn offscreen_canvas_rendering_context2d_put_image_data_2_ffi(
   dirty_y : JsValue,
   dirty_width : JsValue,
   dirty_height : JsValue,
-) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "putImageData_2"
+) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "put_image_data_dirty_rect"
 
 ///|
 fn offscreen_canvas_rendering_context2d_line_width_ffi(obj : JsValue) -> Double = "webapi_OffscreenCanvasRenderingContext2D" "get_lineWidth"

@@ -5,12 +5,12 @@ fn form_data_new_ffi(form : JsValue, submitter : JsValue) -> FormData = "webapi_
 fn form_data_append_ffi(obj : JsValue, name : JsValue, value : JsValue) -> Unit = "webapi_FormData" "append"
 
 ///|
-fn form_data_append_2_ffi(
+fn form_data_append_blob_ffi(
   obj : JsValue,
   name : JsValue,
   blob_value : JsValue,
   filename : JsValue,
-) -> Unit = "webapi_FormData" "append_2"
+) -> Unit = "webapi_FormData" "append_blob"
 
 ///|
 fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_FormData" "delete"
@@ -36,9 +36,9 @@ fn form_data_has_ffi(obj : JsValue, name : JsValue) -> Bool = "webapi_FormData" 
 fn form_data_set_ffi(obj : JsValue, name : JsValue, value : JsValue) -> Unit = "webapi_FormData" "set"
 
 ///|
-fn form_data_set_2_ffi(
+fn form_data_set_blob_ffi(
   obj : JsValue,
   name : JsValue,
   blob_value : JsValue,
   filename : JsValue,
-) -> Unit = "webapi_FormData" "set_2"
+) -> Unit = "webapi_FormData" "set_blob"

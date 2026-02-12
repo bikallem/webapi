@@ -41,7 +41,7 @@ pub trait TResponse: TJsValue {
   blob(self : Self) -> JsPromise[Blob] = _
   bytes(self : Self) -> JsPromise[Uint8Array] = _
   form_data(self : Self) -> JsPromise[FormData] = _
-  json_2(self : Self) -> JsPromise[JsValue] = _
+  json_body(self : Self) -> JsPromise[JsValue] = _
   text(self : Self) -> JsPromise[String] = _
 }
 
@@ -155,8 +155,8 @@ impl TResponse with form_data(self : Self) -> JsPromise[FormData] {
 
 ///|
 /// [Response.json](https://developer.mozilla.org/en-US/docs/Web/API/Response/json)
-impl TResponse with json_2(self : Self) -> JsPromise[JsValue] {
-  response_json_2_ffi(TJsValue::to_js(self))
+impl TResponse with json_body(self : Self) -> JsPromise[JsValue] {
+  response_json_body_ffi(TJsValue::to_js(self))
 }
 
 ///|

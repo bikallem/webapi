@@ -93,7 +93,7 @@ pub trait THTMLSelectElement: THTMLElement {
     before? : &THTMLSelectElementAddBefore,
   ) -> Unit = _
   remove(self : Self) -> Unit = _
-  remove_2(self : Self, index : Int) -> Unit = _
+  remove_at(self : Self, index : Int) -> Unit = _
   set(self : Self, index : UInt, option : &THTMLOptionElement) -> Unit = _
   selected_options(self : Self) -> HTMLCollection = _
   selected_index(self : Self) -> Int = _
@@ -280,8 +280,8 @@ impl THTMLSelectElement with remove(self : Self) -> Unit {
 
 ///|
 /// [HTMLSelectElement.remove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/remove)
-impl THTMLSelectElement with remove_2(self : Self, index : Int) -> Unit {
-  html_select_element_remove_2_ffi(
+impl THTMLSelectElement with remove_at(self : Self, index : Int) -> Unit {
+  html_select_element_remove_at_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(index),
   )

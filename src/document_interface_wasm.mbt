@@ -283,12 +283,12 @@ fn document_open_ffi(
 ) -> Document = "webapi_Document" "open"
 
 ///|
-fn document_open_2_ffi(
+fn document_open_window_ffi(
   obj : JsValue,
   url : JsValue,
   name : JsValue,
   features : JsValue,
-) -> JsValue = "webapi_Document" "open_2"
+) -> JsValue = "webapi_Document" "open_window"
 
 ///|
 fn document_close_ffi(obj : JsValue) -> Unit = "webapi_Document" "close"
