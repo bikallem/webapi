@@ -19,6 +19,8 @@ Treat `src/` as generated output. For API shape or codegen behavior changes, edi
 - `make info`: refresh `.mbti` interface snapshots (`moon info --target js`).
 - `make all`: full pipeline (`gen`, `check`, `fmt`, `info`, examples, Playwright).
 
+Always run `moon fmt` and `moon info --target js` before finalizing or committing.
+
 ## Coding Style & Naming Conventions
 - Language: MoonBit (`.mbt`), formatted with `moon fmt`.
 - Naming: functions/variables in `snake_case`; generated overloads use suffixes like `_2`.
@@ -33,6 +35,19 @@ Treat `src/` as generated output. For API shape or codegen behavior changes, edi
   2. `make gen`
   3. `make check`
   4. `make test-playwright` (for behavioral/user-facing changes)
+  5. `make fmt && make info`
+
+Regression tests to keep:
+- overload dispatch and docs: `webapi_gen/emit/interface_emitter_wbtest.mbt`
+- argument rendering edge cases: `webapi_gen/emit/interface_method_emit_wbtest.mbt`
+- async fetch example behavior: `tests/fetch-async.spec.ts`
+
+## Recent Engineering Learnings
+- Overload safety: keep emitted MoonBit name separate from WebIDL member name. Use generated disambiguated names (e.g. `fill_2`) only for MoonBit symbols/import names, but use the original WebIDL name for JS property access and MDN links. This prevents invalid JS like `obj.scroll_2(...)`.
+- Named type resolution should go through `TypeRegistry::named_type_kind` (not ad-hoc chained checks). This keeps interface/dictionary/enum handling explicit and typedef/callback behavior consistent.
+- Union typedef args/attrs must be detected via `TypeRegistry` (see `is_union_typedef`) so emitters do not depend on flattened IDL internals.
+- Generated output should stay deterministic (sorted file/emission order) to keep diffs stable and reviewable.
+- For generator behavior changes, commit generator logic, tests, and regenerated `src/` together so CI and downstream users get a coherent state.
 
 ## Commit & Pull Request Guidelines
 - Follow existing commit style: `feat:`, `fix:`, `refactor:`, `test:`, `chore:` (imperative, concise).
