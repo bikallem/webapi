@@ -6,6 +6,7 @@ pub struct TypeRegistry {
   enum_names : @hashset.HashSet[String]
   typedef_names : @hashset.HashSet[String]
   callback_names : @hashset.HashSet[String]
+  typedef_targets : Map[String, @parser.Type]
 } derive(Show, ToJson)
 
 ///|
@@ -18,12 +19,16 @@ pub fn TypeRegistry::new(
     enum_names: @hashset.new(),
     typedef_names: @hashset.new(),
     callback_names: @hashset.new(),
+    typedef_targets: {},
   }
   for def in definitions {
     match def.definition {
       CallbackInterface(cbi) => registry.callback_names.add(cbi.name)
       CallbackFunction(cbf) => registry.callback_names.add(cbf.name)
-      Typedef(td) => registry.typedef_names.add(td.name)
+      Typedef(td) => {
+        registry.typedef_names.add(td.name)
+        registry.typedef_targets[td.name] = td.type_
+      }
       Enum(e) => registry.enum_names.add(e.name)
       PartialDictionary(_) => ()
       Dictionary(dict) => registry.dictionary_names.add(dict.name)
@@ -75,6 +80,14 @@ pub fn TypeRegistry::is_callback(self : TypeRegistry, name : String) -> Bool {
 }
 
 ///|
+pub fn TypeRegistry::resolve_typedef(
+  self : TypeRegistry,
+  name : String,
+) -> @parser.Type? {
+  self.typedef_targets.get(name)
+}
+
+///|
 test "TypeRegistry::contains checks all type categories" {
   let reg : TypeRegistry = {
     interface_names: @hashset.from_array(["Element"]),
@@ -82,6 +95,7 @@ test "TypeRegistry::contains checks all type categories" {
     enum_names: @hashset.from_array(["ScrollBehaviour"]),
     typedef_names: @hashset.from_array(["DOMString"]),
     callback_names: @hashset.from_array(["EventListener"]),
+    typedef_targets: {},
   }
   inspect(reg.contains("Element"), content="true")
   inspect(reg.contains("EventInit"), content="true")

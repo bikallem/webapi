@@ -288,7 +288,8 @@ fn render_callback_js_ffi(
 
 ///|
 /// Render callback FFI for the wasm-gc target.
-/// Closures are externref on wasm-gc, so we always use a direct import.
+/// If any arg is Array[T] or String, we need a wrapper closure that
+/// converts JsValue args before calling the user closure.
 fn render_callback_wasm_ffi(
   name : String,
   args : Array[CallbackArgEmit],
@@ -297,7 +298,50 @@ fn render_callback_wasm_ffi(
   let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
   let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  "fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"webapi_\{name}\" \"new\""
+  // Check if any arg needs conversion (Array[T] or String)
+  let needs_wrapper = args.iter().any(fn(a) {
+    is_array_return(a.mbt_type) || a.mbt_type == "String"
+  })
+  if not(needs_wrapper) {
+    "fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"webapi_\{name}\" \"new\""
+  } else {
+    // Generate wrapper: raw import takes JsValue-arg closure, then wrap user closure
+    let wasm_arg_types = args.map(fn(_a) { "JsValue" }).join(", ")
+    let wasm_closure_type = "(\{wasm_arg_types}) -> \{return_type}"
+    let raw_name = ffi_name + "_wasm"
+    let buf = StringBuilder::new()
+    buf.write_string(
+      "fn \{raw_name}(callback : \{wasm_closure_type}) -> \{name} = \"webapi_\{name}\" \"new\"\n\n",
+    )
+    // Build wrapper closure params and converted args
+    let wasm_params : Array[String] = []
+    let cast_args : Array[String] = []
+    for i, arg in args {
+      let p = "a\{i}"
+      wasm_params.push(p)
+      if is_array_return(arg.mbt_type) {
+        let elem = array_element_type(arg.mbt_type)
+        cast_args.push(
+          "jsvalue_to_array(\{p}, \{array_element_convert(elem)})",
+        )
+      } else if arg.mbt_type == "String" {
+        cast_args.push("jsvalue_to_string(\{p})")
+      } else {
+        cast_args.push("\{p}.unsafe_cast()")
+      }
+    }
+    let wasm_params_str = wasm_params.join(", ")
+    let cast_args_str = cast_args.join(", ")
+    buf.write_string("///|\n")
+    buf.write_string(
+      "fn \{ffi_name}(callback : \{closure_type}) -> \{name} {\n",
+    )
+    buf.write_string(
+      "  \{raw_name}(fn(\{wasm_params_str}) { callback(\{cast_args_str}) })\n",
+    )
+    buf.write_string("}")
+    buf.to_string()
+  }
 }
 
 ///|

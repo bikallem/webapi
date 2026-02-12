@@ -237,6 +237,21 @@ pub fn arg_mbt_type(
           ArgMbtType::Enum(name)
         } else if type_registry.is_dictionary(name) {
           ArgMbtType::Dictionary(name)
+        } else if type_registry.is_typedef(name) {
+          match type_registry.resolve_typedef(name) {
+            Some(Union(_)) =>
+              // Union typedefs have dedicated emitters; keep as Other
+              ArgMbtType::Other(name)
+            Some(target_type) => {
+              let (resolved, resolved_emits) = go(
+                target_type, type_name, method_name, arg_name, type_registry,
+                call_depth,
+              )
+              emits.push_iter(resolved_emits.iter())
+              resolved
+            }
+            None => ArgMbtType::Other(name)
+          }
         } else {
           ArgMbtType::Other(name)
         }

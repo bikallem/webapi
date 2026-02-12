@@ -48,6 +48,27 @@ fn is_string_return(type_ : @type_mapping.ArgMbtType) -> Bool {
 }
 
 ///|
+fn is_array_return(type_name : String) -> Bool {
+  type_name.has_prefix("Array[")
+}
+
+///|
+fn array_element_type(type_name : String) -> String {
+  String::from_array(type_name.to_array()[6:type_name.length() - 1])
+}
+
+///|
+/// Determine the conversion expression for array element type on wasm-gc.
+/// externref types use unsafe_cast, String uses jsvalue_to_string.
+fn array_element_convert(elem_type : String) -> String {
+  if elem_type == "String" {
+    "jsvalue_to_string"
+  } else {
+    "JsValue::unsafe_cast"
+  }
+}
+
+///|
 /// Emit wasm-gc FFI declaration with return-type dispatch.
 /// Handles the four cases: void/optional, String, valid stub type, or JsValue wrapper.
 fn emit_wasm_ffi_with_return(
@@ -58,6 +79,8 @@ fn emit_wasm_ffi_with_return(
   is_optional~ : Bool,
   is_void~ : Bool,
   is_string~ : Bool,
+  is_array~ : Bool = false,
+  array_elem_convert~ : String = "",
   is_valid_stub~ : Bool,
   module_name : String,
   import_name : String,
@@ -76,13 +99,20 @@ fn emit_wasm_ffi_with_return(
     Code(
       "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> String {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
     )
+  } else if is_array {
+    // Array[T]: import as JsValue, iterate JS array to build MoonBit Array
+    let raw_name = ffi_name + "_wasm"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  jsvalue_to_array(\{raw_name}(\{call_fwd}), \{array_elem_convert})\n}",
+    )
   } else if is_valid_stub {
     // Valid stub type: declare import with actual MoonBit type directly
     Code(
       "fn \{ffi_name}(\{ffi_args}) -> \{return_type_name} = \"\{module_name}\" \"\{import_name}\"",
     )
   } else {
-    // Invalid stub type (Array[T], typedefs, etc.): import as JsValue + unsafe_cast wrapper
+    // Invalid stub type: import as JsValue + unsafe_cast wrapper
     let raw_name = ffi_name + "_wasm"
     let call_fwd = ffi_argnames.join(", ")
     Code(
@@ -132,13 +162,21 @@ fn emit_method_body(
   call_args : String,
   optional_return : Bool,
   void_return? : Bool = false,
+  return_type_name~ : String = "",
 ) -> Unit {
   if optional_return {
     // Optional: FFI returns JsValue so we can check for null
-    code
-    ..write_string("  let result = \{ffi_name}(\{call_args})\n")
-    .write_string(
-      "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
+    code.write_string("  let result = \{ffi_name}(\{call_args})\n")
+    let convert = if is_array_return(return_type_name) {
+      let elem = array_element_type(return_type_name)
+      "jsvalue_to_array(result, \{array_element_convert(elem)})"
+    } else if return_type_name == "String" {
+      "jsvalue_to_string(result)"
+    } else {
+      "result.unsafe_cast()"
+    }
+    code.write_string(
+      "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(\{convert})\n  }\n",
     )
   } else if void_return {
     code.write_string("  \{ffi_name}(\{call_args})\n")
@@ -223,6 +261,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ret_name = self.return_type.type_.name()
+  let is_arr = is_array_return(ret_name)
   emit_wasm_ffi_with_return(
     ffi_name,
     ffi_args,
@@ -231,6 +270,12 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
     is_string=is_string_return(self.return_type.type_),
+    is_array=is_arr,
+    array_elem_convert=if is_arr {
+      array_element_convert(array_element_type(ret_name))
+    } else {
+      ""
+    },
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.original_name,
@@ -263,6 +308,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
     call_args,
     self.return_type.optional,
     void_return=ret_name == "Unit",
+    return_type_name=ret_name,
   )
   Code(code.to_string())
 }
@@ -328,6 +374,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
   let ffi_argnames = self.args.map(arg => arg.name)
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ret_name = self.return_type.type_.name()
+  let is_arr = is_array_return(ret_name)
   emit_wasm_ffi_with_return(
     ffi_name,
     ffi_args,
@@ -336,6 +383,12 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
     is_string=is_string_return(self.return_type.type_),
+    is_array=is_arr,
+    array_elem_convert=if is_arr {
+      array_element_convert(array_element_type(ret_name))
+    } else {
+      ""
+    },
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.original_name,
@@ -368,6 +421,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
     call_args,
     self.return_type.optional,
     void_return=ret_name == "Unit",
+    return_type_name=ret_name,
   )
   Code(code.to_string())
 }
@@ -416,6 +470,12 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_wasm(
   module_name : String,
 ) -> Code {
   let ffi_name = self.ffi_name()
+  let ret_type = if self.return_type.has_suffix("?") {
+    String::from_array(self.return_type.to_array()[:self.return_type.length() - 1])
+  } else {
+    self.return_type
+  }
+  let is_arr = is_array_return(ret_type)
   emit_wasm_ffi_with_return(
     ffi_name,
     "obj: JsValue",
@@ -424,7 +484,13 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.has_suffix("?"),
     is_void=false,
     is_string=self.return_type == "String",
-    is_valid_stub=true, // Attribute getters always return valid types (non-parameterized)
+    is_array=is_arr,
+    array_elem_convert=if is_arr {
+      array_element_convert(array_element_type(ret_type))
+    } else {
+      ""
+    },
+    is_valid_stub=not(is_arr),
     module_name,
     "get_\{self.original_name}",
   )
@@ -449,8 +515,22 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
     "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
   )
   if ret_type_str.has_suffix("?") {
-    // Optional: FFI returns JsValue, use unsafe_cast to convert to Option type
-    code.write_string("  \{ffi_name}(TJsValue::to_js(self)).unsafe_cast()\n")
+    // Optional: FFI returns JsValue, need type-appropriate conversion
+    let inner_type = String::from_array(ret_type_str.to_array()[:ret_type_str.length() - 1])
+    if is_array_return(inner_type) {
+      let elem = array_element_type(inner_type)
+      code.write_string("  let result = \{ffi_name}(TJsValue::to_js(self))\n")
+      code.write_string(
+        "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(jsvalue_to_array(result, \{array_element_convert(elem)}))\n  }\n",
+      )
+    } else if inner_type == "String" {
+      code.write_string("  let result = \{ffi_name}(TJsValue::to_js(self))\n")
+      code.write_string(
+        "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(jsvalue_to_string(result))\n  }\n",
+      )
+    } else {
+      code.write_string("  \{ffi_name}(TJsValue::to_js(self)).unsafe_cast()\n")
+    }
   } else {
     // Non-optional: FFI wrapper returns the correct type directly
     code.write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
@@ -577,6 +657,12 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_wasm(
   module_name : String,
 ) -> Code {
   let ffi_name = self.ffi_name()
+  let ret_type = if self.return_type.has_suffix("?") {
+    String::from_array(self.return_type.to_array()[:self.return_type.length() - 1])
+  } else {
+    self.return_type
+  }
+  let is_arr = is_array_return(ret_type)
   emit_wasm_ffi_with_return(
     ffi_name,
     "",
@@ -585,7 +671,13 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.has_suffix("?"),
     is_void=false,
     is_string=self.return_type == "String",
-    is_valid_stub=true, // Static attribute getters always return valid types
+    is_array=is_arr,
+    array_elem_convert=if is_arr {
+      array_element_convert(array_element_type(ret_type))
+    } else {
+      ""
+    },
+    is_valid_stub=not(is_arr),
     module_name,
     "get_\{self.original_name}",
   )
@@ -610,7 +702,21 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
     "pub fn \{trait_name}::\{method_name}() -> \{ret_type_str} {\n",
   )
   if ret_type_str.has_suffix("?") {
-    code.write_string("  \{ffi_name}().unsafe_cast()\n")
+    let inner_type = String::from_array(ret_type_str.to_array()[:ret_type_str.length() - 1])
+    if is_array_return(inner_type) {
+      let elem = array_element_type(inner_type)
+      code.write_string("  let result = \{ffi_name}()\n")
+      code.write_string(
+        "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(jsvalue_to_array(result, \{array_element_convert(elem)}))\n  }\n",
+      )
+    } else if inner_type == "String" {
+      code.write_string("  let result = \{ffi_name}()\n")
+      code.write_string(
+        "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(jsvalue_to_string(result))\n  }\n",
+      )
+    } else {
+      code.write_string("  \{ffi_name}().unsafe_cast()\n")
+    }
   } else {
     code.write_string("  \{ffi_name}()\n")
   }
@@ -694,6 +800,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
   let ret_name = self.return_type.type_.name()
+  let is_arr = is_array_return(ret_name)
   emit_wasm_ffi_with_return(
     ffi_name,
     ffi_args,
@@ -702,6 +809,12 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
     is_string=is_string_return(self.return_type.type_),
+    is_array=is_arr,
+    array_elem_convert=if is_arr {
+      array_element_convert(array_element_type(ret_name))
+    } else {
+      ""
+    },
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.original_name,
@@ -734,6 +847,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with impl_emit(
     call_args,
     self.return_type.optional,
     void_return=ret_name == "Unit",
+    return_type_name=ret_name,
   )
   Code(code.to_string())
 }
