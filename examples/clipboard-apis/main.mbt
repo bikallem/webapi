@@ -1,5 +1,6 @@
 ///|
 /// Clipboard API Demo - copy and paste text using navigator.clipboard
+/// Works on both JS and wasm-gc targets (no async/await required)
 fn main {
   let doc = @webapi.document
 
@@ -55,15 +56,13 @@ fn main {
     "click",
     @webapi.EventListener::new(fn(_event) {
       let text = input.value()
-      @async.run_async_main(async fn() { do_copy(text) })
+      do_copy(text)
     }),
   )
 
   paste_btn.add_event_listener(
     "click",
-    @webapi.EventListener::new(fn(_event) {
-      @async.run_async_main(async fn() { do_paste() })
-    }),
+    @webapi.EventListener::new(fn(_event) { do_paste() }),
   )
 
   let app = doc.get_element_by_id("app").unwrap()
@@ -81,35 +80,23 @@ fn main {
 }
 
 ///|
-extern "js" fn clipboard_write_text(
-  text : String,
-) -> @webapi.JsPromise[@webapi.JsValue] =
-  #| (text) => navigator.clipboard.writeText(text)
-
-///|
-extern "js" fn clipboard_read_text() -> @webapi.JsPromise[String] =
-  #| () => navigator.clipboard.readText()
-
-///|
-async fn do_copy(text : String) -> Unit {
+fn do_copy(text : String) -> Unit {
   let result = @webapi.document.get_element_by_id("paste-result").unwrap()
-  try {
-    let _ : @webapi.JsValue = @js_promise.to_async_promise(
-      clipboard_write_text(text),
-    ).wait()
-    result.set_text_content("Copied: \"" + text + "\"")
-  } catch {
-    err => result.set_text_content("Copy failed: " + err.to_string())
-  }
+  @webapi.navigator
+  .clipboard()
+  .write_text(text)
+  .then(fn(_unit) { result.set_text_content("Copied: \"\{text}\"") })
+  .catch_(fn(_err) { result.set_text_content("Copy failed") })
+  |> ignore
 }
 
 ///|
-async fn do_paste() -> Unit {
+fn do_paste() -> Unit {
   let result = @webapi.document.get_element_by_id("paste-result").unwrap()
-  try {
-    let text : String = @js_promise.to_async_promise(clipboard_read_text()).wait()
-    result.set_text_content("Pasted: \"" + text + "\"")
-  } catch {
-    err => result.set_text_content("Paste failed: " + err.to_string())
-  }
+  @webapi.navigator
+  .clipboard()
+  .read_text()
+  .then(fn(text : String) { result.set_text_content("Pasted: \"\{text}\"") })
+  .catch_(fn(_err) { result.set_text_content("Paste failed") })
+  |> ignore
 }
