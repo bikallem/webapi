@@ -7,7 +7,9 @@ extern "js" fn xml_http_request_onreadystatechange_ffi_js(
 ) -> JsValue = "(obj) => obj.onreadystatechange"
 
 ///|
-fn xml_http_request_onreadystatechange_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_onreadystatechange_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_onreadystatechange_ffi_js(obj).unsafe_cast()
 }
 

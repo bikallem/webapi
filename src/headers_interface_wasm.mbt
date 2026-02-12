@@ -15,7 +15,7 @@ fn headers_get_set_cookie_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Headers" 
 
 ///|
 fn headers_get_set_cookie_ffi(obj : JsValue) -> Array[String] {
-  headers_get_set_cookie_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(headers_get_set_cookie_ffi_wasm(obj), jsvalue_to_string)
 }
 
 ///|

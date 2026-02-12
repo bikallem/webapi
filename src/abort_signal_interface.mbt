@@ -25,8 +25,8 @@ pub trait TAbortSignal: TEventTarget {
   aborted(self : Self) -> Bool = _
   reason(self : Self) -> JsValue = _
   throw_if_aborted(self : Self) -> Unit = _
-  onabort(self : Self) -> EventHandler = _
-  set_onabort(self : Self, onabort : EventHandler) -> Unit = _
+  onabort(self : Self) -> EventHandlerNonNull = _
+  set_onabort(self : Self, onabort : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -67,12 +67,12 @@ impl TAbortSignal with throw_if_aborted(self : Self) -> Unit {
 
 ///|
 /// [AbortSignal.onabort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)
-impl TAbortSignal with onabort(self : Self) -> EventHandler {
+impl TAbortSignal with onabort(self : Self) -> EventHandlerNonNull {
   abort_signal_onabort_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [AbortSignal.onabort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)
-impl TAbortSignal with set_onabort(self : Self, onabort : EventHandler) -> Unit {
+impl TAbortSignal with set_onabort(self : Self, onabort : EventHandlerNonNull) -> Unit {
   abort_signal_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(onabort))
 }

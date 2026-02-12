@@ -30,7 +30,7 @@ fn file_reader_result_ffi(obj : JsValue) -> FileReaderResult = "webapi_FileReade
 fn file_reader_error_ffi(obj : JsValue) -> DOMException = "webapi_FileReader" "get_error"
 
 ///|
-fn file_reader_onloadstart_ffi(obj : JsValue) -> EventHandler = "webapi_FileReader" "get_onloadstart"
+fn file_reader_onloadstart_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_FileReader" "get_onloadstart"
 
 ///|
 fn file_reader_set_onloadstart_ffi(
@@ -39,31 +39,31 @@ fn file_reader_set_onloadstart_ffi(
 ) -> Unit = "webapi_FileReader" "set_onloadstart"
 
 ///|
-fn file_reader_onprogress_ffi(obj : JsValue) -> EventHandler = "webapi_FileReader" "get_onprogress"
+fn file_reader_onprogress_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_FileReader" "get_onprogress"
 
 ///|
 fn file_reader_set_onprogress_ffi(obj : JsValue, onprogress : JsValue) -> Unit = "webapi_FileReader" "set_onprogress"
 
 ///|
-fn file_reader_onload_ffi(obj : JsValue) -> EventHandler = "webapi_FileReader" "get_onload"
+fn file_reader_onload_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_FileReader" "get_onload"
 
 ///|
 fn file_reader_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit = "webapi_FileReader" "set_onload"
 
 ///|
-fn file_reader_onabort_ffi(obj : JsValue) -> EventHandler = "webapi_FileReader" "get_onabort"
+fn file_reader_onabort_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_FileReader" "get_onabort"
 
 ///|
 fn file_reader_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_FileReader" "set_onabort"
 
 ///|
-fn file_reader_onerror_ffi(obj : JsValue) -> EventHandler = "webapi_FileReader" "get_onerror"
+fn file_reader_onerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_FileReader" "get_onerror"
 
 ///|
 fn file_reader_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_FileReader" "set_onerror"
 
 ///|
-fn file_reader_onloadend_ffi(obj : JsValue) -> EventHandler = "webapi_FileReader" "get_onloadend"
+fn file_reader_onloadend_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_FileReader" "get_onloadend"
 
 ///|
 fn file_reader_set_onloadend_ffi(obj : JsValue, onloadend : JsValue) -> Unit = "webapi_FileReader" "set_onloadend"

@@ -19,19 +19,19 @@ fn worker_post_message_2_ffi(
 ) -> Unit = "webapi_Worker" "postMessage_2"
 
 ///|
-fn worker_onerror_ffi(obj : JsValue) -> EventHandler = "webapi_Worker" "get_onerror"
+fn worker_onerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Worker" "get_onerror"
 
 ///|
 fn worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_Worker" "set_onerror"
 
 ///|
-fn worker_onmessage_ffi(obj : JsValue) -> EventHandler = "webapi_Worker" "get_onmessage"
+fn worker_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Worker" "get_onmessage"
 
 ///|
 fn worker_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_Worker" "set_onmessage"
 
 ///|
-fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandler = "webapi_Worker" "get_onmessageerror"
+fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Worker" "get_onmessageerror"
 
 ///|
 fn worker_set_onmessageerror_ffi(

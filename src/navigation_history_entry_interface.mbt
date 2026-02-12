@@ -32,8 +32,8 @@ pub trait TNavigationHistoryEntry: TEventTarget {
   index(self : Self) -> Int64 = _
   same_document(self : Self) -> Bool = _
   get_state(self : Self) -> JsValue = _
-  ondispose(self : Self) -> EventHandler = _
-  set_ondispose(self : Self, ondispose : EventHandler) -> Unit = _
+  ondispose(self : Self) -> EventHandlerNonNull = _
+  set_ondispose(self : Self, ondispose : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -74,7 +74,7 @@ impl TNavigationHistoryEntry with get_state(self : Self) -> JsValue {
 
 ///|
 /// [NavigationHistoryEntry.ondispose](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/ondispose)
-impl TNavigationHistoryEntry with ondispose(self : Self) -> EventHandler {
+impl TNavigationHistoryEntry with ondispose(self : Self) -> EventHandlerNonNull {
   navigation_history_entry_ondispose_ffi(TJsValue::to_js(self))
 }
 
@@ -82,7 +82,7 @@ impl TNavigationHistoryEntry with ondispose(self : Self) -> EventHandler {
 /// [NavigationHistoryEntry.ondispose](https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry/ondispose)
 impl TNavigationHistoryEntry with set_ondispose(
   self : Self,
-  ondispose : EventHandler,
+  ondispose : EventHandlerNonNull,
 ) -> Unit {
   navigation_history_entry_set_ondispose_ffi(
     TJsValue::to_js(self),

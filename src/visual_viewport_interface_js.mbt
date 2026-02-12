@@ -58,7 +58,7 @@ fn visual_viewport_scale_ffi(obj : JsValue) -> Double {
 extern "js" fn visual_viewport_onresize_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onresize"
 
 ///|
-fn visual_viewport_onresize_ffi(obj : JsValue) -> EventHandler {
+fn visual_viewport_onresize_ffi(obj : JsValue) -> EventHandlerNonNull {
   visual_viewport_onresize_ffi_js(obj).unsafe_cast()
 }
 
@@ -72,7 +72,7 @@ extern "js" fn visual_viewport_set_onresize_ffi(
 extern "js" fn visual_viewport_onscroll_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscroll"
 
 ///|
-fn visual_viewport_onscroll_ffi(obj : JsValue) -> EventHandler {
+fn visual_viewport_onscroll_ffi(obj : JsValue) -> EventHandlerNonNull {
   visual_viewport_onscroll_ffi_js(obj).unsafe_cast()
 }
 
@@ -86,7 +86,7 @@ extern "js" fn visual_viewport_set_onscroll_ffi(
 extern "js" fn visual_viewport_onscrollend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscrollend"
 
 ///|
-fn visual_viewport_onscrollend_ffi(obj : JsValue) -> EventHandler {
+fn visual_viewport_onscrollend_ffi(obj : JsValue) -> EventHandlerNonNull {
   visual_viewport_onscrollend_ffi_js(obj).unsafe_cast()
 }
 

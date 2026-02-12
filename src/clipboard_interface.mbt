@@ -23,10 +23,10 @@ pub impl TEventTarget for Clipboard
 /// [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard) interface.
 pub trait TClipboard: TEventTarget {
   read(self : Self, formats? : ClipboardUnsanitizedFormats) -> @js_async.Promise[
-    ClipboardItems,
+    Array[ClipboardItem],
   ] = _
   read_text(self : Self) -> @js_async.Promise[String] = _
-  write(self : Self, data : ClipboardItems) -> @js_async.Promise[Unit] = _
+  write(self : Self, data : Array[ClipboardItem]) -> @js_async.Promise[Unit] = _
   write_text(self : Self, data : String) -> @js_async.Promise[Unit] = _
 }
 
@@ -35,7 +35,7 @@ pub trait TClipboard: TEventTarget {
 impl TClipboard with read(
   self : Self,
   formats? : ClipboardUnsanitizedFormats = ClipboardUnsanitizedFormats::empty(),
-) -> @js_async.Promise[ClipboardItems] {
+) -> @js_async.Promise[Array[ClipboardItem]] {
   clipboard_read_ffi(TJsValue::to_js(self), TJsValue::to_js(formats))
 }
 
@@ -47,7 +47,7 @@ impl TClipboard with read_text(self : Self) -> @js_async.Promise[String] {
 
 ///|
 /// [Clipboard.write](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/write)
-impl TClipboard with write(self : Self, data : ClipboardItems) -> @js_async.Promise[
+impl TClipboard with write(self : Self, data : Array[ClipboardItem]) -> @js_async.Promise[
   Unit,
 ] {
   clipboard_write_ffi(TJsValue::to_js(self), TJsValue::to_js(data))

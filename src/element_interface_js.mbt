@@ -621,7 +621,7 @@ fn element_request_fullscreen_ffi(
 extern "js" fn element_onfullscreenchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenchange"
 
 ///|
-fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler {
+fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   element_onfullscreenchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -635,7 +635,7 @@ extern "js" fn element_set_onfullscreenchange_ffi(
 extern "js" fn element_onfullscreenerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenerror"
 
 ///|
-fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler {
+fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   element_onfullscreenerror_ffi_js(obj).unsafe_cast()
 }
 

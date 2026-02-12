@@ -45,7 +45,7 @@ extern "js" fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "(obj)
 extern "js" fn abort_signal_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
 
 ///|
-fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler {
+fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandlerNonNull {
   abort_signal_onabort_ffi_js(obj).unsafe_cast()
 }
 

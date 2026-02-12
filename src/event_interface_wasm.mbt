@@ -23,7 +23,7 @@ fn event_composed_path_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Event" "comp
 
 ///|
 fn event_composed_path_ffi(obj : JsValue) -> Array[EventTarget] {
-  event_composed_path_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(event_composed_path_ffi_wasm(obj), JsValue::unsafe_cast)
 }
 
 ///|
@@ -66,7 +66,7 @@ fn event_composed_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_composed"
 fn event_is_trusted_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_isTrusted"
 
 ///|
-fn event_time_stamp_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_Event" "get_timeStamp"
+fn event_time_stamp_ffi(obj : JsValue) -> Double = "webapi_Event" "get_timeStamp"
 
 ///|
 fn event_init_event_ffi(

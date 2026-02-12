@@ -50,12 +50,12 @@ pub trait TWorker: TEventTarget {
     message : JsValue,
     options? : StructuredSerializeOptions,
   ) -> Unit = _
-  onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
-  onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
-  onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  onerror(self : Self) -> EventHandlerNonNull = _
+  set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit = _
+  onmessage(self : Self) -> EventHandlerNonNull = _
+  set_onmessage(self : Self, onmessage : EventHandlerNonNull) -> Unit = _
+  onmessageerror(self : Self) -> EventHandlerNonNull = _
+  set_onmessageerror(self : Self, onmessageerror : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -94,37 +94,40 @@ impl TWorker with post_message_2(
 
 ///|
 /// [Worker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onerror)
-impl TWorker with onerror(self : Self) -> EventHandler {
+impl TWorker with onerror(self : Self) -> EventHandlerNonNull {
   worker_onerror_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Worker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onerror)
-impl TWorker with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+impl TWorker with set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit {
   worker_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
 
 ///|
 /// [Worker.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessage)
-impl TWorker with onmessage(self : Self) -> EventHandler {
+impl TWorker with onmessage(self : Self) -> EventHandlerNonNull {
   worker_onmessage_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Worker.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessage)
-impl TWorker with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TWorker with set_onmessage(self : Self, onmessage : EventHandlerNonNull) -> Unit {
   worker_set_onmessage_ffi(TJsValue::to_js(self), TJsValue::to_js(onmessage))
 }
 
 ///|
 /// [Worker.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessageerror)
-impl TWorker with onmessageerror(self : Self) -> EventHandler {
+impl TWorker with onmessageerror(self : Self) -> EventHandlerNonNull {
   worker_onmessageerror_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Worker.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onmessageerror)
-impl TWorker with set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit {
+impl TWorker with set_onmessageerror(
+  self : Self,
+  onmessageerror : EventHandlerNonNull,
+) -> Unit {
   worker_set_onmessageerror_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onmessageerror),

@@ -22,7 +22,7 @@ extern "js" fn visibility_state_entry_start_time_ffi_js(
 ) -> JsValue = "(obj) => obj.startTime"
 
 ///|
-fn visibility_state_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+fn visibility_state_entry_start_time_ffi(obj : JsValue) -> Double {
   visibility_state_entry_start_time_ffi_js(obj).unsafe_cast()
 }
 

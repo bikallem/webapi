@@ -16,5 +16,8 @@ fn mutation_observer_take_records_ffi_wasm(obj : JsValue) -> JsValue = "webapi_M
 
 ///|
 fn mutation_observer_take_records_ffi(obj : JsValue) -> Array[MutationRecord] {
-  mutation_observer_take_records_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(
+    mutation_observer_take_records_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }

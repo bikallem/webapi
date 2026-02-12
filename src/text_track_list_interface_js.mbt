@@ -22,7 +22,7 @@ extern "js" fn text_track_list_get_track_by_id_ffi(
 extern "js" fn text_track_list_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
 
 ///|
-fn text_track_list_onchange_ffi(obj : JsValue) -> EventHandler {
+fn text_track_list_onchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   text_track_list_onchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -36,7 +36,7 @@ extern "js" fn text_track_list_set_onchange_ffi(
 extern "js" fn text_track_list_onaddtrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onaddtrack"
 
 ///|
-fn text_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler {
+fn text_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandlerNonNull {
   text_track_list_onaddtrack_ffi_js(obj).unsafe_cast()
 }
 
@@ -50,7 +50,7 @@ extern "js" fn text_track_list_set_onaddtrack_ffi(
 extern "js" fn text_track_list_onremovetrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onremovetrack"
 
 ///|
-fn text_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandler {
+fn text_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandlerNonNull {
   text_track_list_onremovetrack_ffi_js(obj).unsafe_cast()
 }
 

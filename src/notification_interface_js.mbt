@@ -36,7 +36,7 @@ fn notification_max_actions_ffi() -> UInt {
 extern "js" fn notification_onclick_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclick"
 
 ///|
-fn notification_onclick_ffi(obj : JsValue) -> EventHandler {
+fn notification_onclick_ffi(obj : JsValue) -> EventHandlerNonNull {
   notification_onclick_ffi_js(obj).unsafe_cast()
 }
 
@@ -50,7 +50,7 @@ extern "js" fn notification_set_onclick_ffi(
 extern "js" fn notification_onshow_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onshow"
 
 ///|
-fn notification_onshow_ffi(obj : JsValue) -> EventHandler {
+fn notification_onshow_ffi(obj : JsValue) -> EventHandlerNonNull {
   notification_onshow_ffi_js(obj).unsafe_cast()
 }
 
@@ -64,7 +64,7 @@ extern "js" fn notification_set_onshow_ffi(
 extern "js" fn notification_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn notification_onerror_ffi(obj : JsValue) -> EventHandler {
+fn notification_onerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   notification_onerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -78,7 +78,7 @@ extern "js" fn notification_set_onerror_ffi(
 extern "js" fn notification_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
 
 ///|
-fn notification_onclose_ffi(obj : JsValue) -> EventHandler {
+fn notification_onclose_ffi(obj : JsValue) -> EventHandlerNonNull {
   notification_onclose_ffi_js(obj).unsafe_cast()
 }
 
@@ -172,7 +172,7 @@ fn notification_vibrate_ffi(obj : JsValue) -> JsValue {
 extern "js" fn notification_timestamp_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.timestamp"
 
 ///|
-fn notification_timestamp_ffi(obj : JsValue) -> EpochTimeStamp {
+fn notification_timestamp_ffi(obj : JsValue) -> UInt64 {
   notification_timestamp_ffi_js(obj).unsafe_cast()
 }
 

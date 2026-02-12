@@ -30,8 +30,8 @@ pub trait TScreenOrientation: TEventTarget {
   unlock(self : Self) -> Unit = _
   type_(self : Self) -> OrientationType = _
   angle(self : Self) -> UInt = _
-  onchange(self : Self) -> EventHandler = _
-  set_onchange(self : Self, onchange : EventHandler) -> Unit = _
+  onchange(self : Self) -> EventHandlerNonNull = _
+  set_onchange(self : Self, onchange : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -66,13 +66,16 @@ impl TScreenOrientation with angle(self : Self) -> UInt {
 
 ///|
 /// [ScreenOrientation.onchange](https://developer.mozilla.org/en-US/docs/Web/API/ScreenOrientation/onchange)
-impl TScreenOrientation with onchange(self : Self) -> EventHandler {
+impl TScreenOrientation with onchange(self : Self) -> EventHandlerNonNull {
   screen_orientation_onchange_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [ScreenOrientation.onchange](https://developer.mozilla.org/en-US/docs/Web/API/ScreenOrientation/onchange)
-impl TScreenOrientation with set_onchange(self : Self, onchange : EventHandler) -> Unit {
+impl TScreenOrientation with set_onchange(
+  self : Self,
+  onchange : EventHandlerNonNull,
+) -> Unit {
   screen_orientation_set_onchange_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onchange),

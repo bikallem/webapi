@@ -121,7 +121,7 @@ impl TTrustedTypePolicyFactory with get_attribute_type(
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 
@@ -142,7 +142,7 @@ impl TTrustedTypePolicyFactory with get_property_type(
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 

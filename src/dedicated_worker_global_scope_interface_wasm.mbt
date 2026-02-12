@@ -36,7 +36,9 @@ fn dedicated_worker_global_scope_cancel_animation_frame_ffi(
 ) -> Unit = "webapi_DedicatedWorkerGlobalScope" "cancelAnimationFrame"
 
 ///|
-fn dedicated_worker_global_scope_onmessage_ffi(obj : JsValue) -> EventHandler = "webapi_DedicatedWorkerGlobalScope" "get_onmessage"
+fn dedicated_worker_global_scope_onmessage_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_DedicatedWorkerGlobalScope" "get_onmessage"
 
 ///|
 fn dedicated_worker_global_scope_set_onmessage_ffi(
@@ -47,7 +49,7 @@ fn dedicated_worker_global_scope_set_onmessage_ffi(
 ///|
 fn dedicated_worker_global_scope_onmessageerror_ffi(
   obj : JsValue,
-) -> EventHandler = "webapi_DedicatedWorkerGlobalScope" "get_onmessageerror"
+) -> EventHandlerNonNull = "webapi_DedicatedWorkerGlobalScope" "get_onmessageerror"
 
 ///|
 fn dedicated_worker_global_scope_set_onmessageerror_ffi(

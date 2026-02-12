@@ -16,7 +16,7 @@ fn broadcast_channel_post_message_ffi(obj : JsValue, message : JsValue) -> Unit 
 fn broadcast_channel_close_ffi(obj : JsValue) -> Unit = "webapi_BroadcastChannel" "close"
 
 ///|
-fn broadcast_channel_onmessage_ffi(obj : JsValue) -> EventHandler = "webapi_BroadcastChannel" "get_onmessage"
+fn broadcast_channel_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_BroadcastChannel" "get_onmessage"
 
 ///|
 fn broadcast_channel_set_onmessage_ffi(
@@ -25,7 +25,7 @@ fn broadcast_channel_set_onmessage_ffi(
 ) -> Unit = "webapi_BroadcastChannel" "set_onmessage"
 
 ///|
-fn broadcast_channel_onmessageerror_ffi(obj : JsValue) -> EventHandler = "webapi_BroadcastChannel" "get_onmessageerror"
+fn broadcast_channel_onmessageerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_BroadcastChannel" "get_onmessageerror"
 
 ///|
 fn broadcast_channel_set_onmessageerror_ffi(

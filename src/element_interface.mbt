@@ -299,10 +299,10 @@ pub trait TElement: TNode {
   request_fullscreen(self : Self, options? : FullscreenOptions) -> @js_async.Promise[
     Unit,
   ] = _
-  onfullscreenchange(self : Self) -> EventHandler = _
-  set_onfullscreenchange(self : Self, onfullscreenchange : EventHandler) -> Unit = _
-  onfullscreenerror(self : Self) -> EventHandler = _
-  set_onfullscreenerror(self : Self, onfullscreenerror : EventHandler) -> Unit = _
+  onfullscreenchange(self : Self) -> EventHandlerNonNull = _
+  set_onfullscreenchange(self : Self, onfullscreenchange : EventHandlerNonNull) -> Unit = _
+  onfullscreenerror(self : Self) -> EventHandlerNonNull = _
+  set_onfullscreenerror(self : Self, onfullscreenerror : EventHandlerNonNull) -> Unit = _
   set_pointer_capture(self : Self, pointer_id : Int) -> Unit = _
   release_pointer_capture(self : Self, pointer_id : Int) -> Unit = _
   has_pointer_capture(self : Self, pointer_id : Int) -> Bool = _
@@ -438,7 +438,7 @@ impl TElement with get_attribute(self : Self, qualified_name : String) -> String
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 
@@ -457,7 +457,7 @@ impl TElement with get_attribute_ns(
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 
@@ -968,7 +968,7 @@ impl TElement with request_fullscreen(
 
 ///|
 /// [Element.onfullscreenchange](https://developer.mozilla.org/en-US/docs/Web/API/Element/onfullscreenchange)
-impl TElement with onfullscreenchange(self : Self) -> EventHandler {
+impl TElement with onfullscreenchange(self : Self) -> EventHandlerNonNull {
   element_onfullscreenchange_ffi(TJsValue::to_js(self))
 }
 
@@ -976,7 +976,7 @@ impl TElement with onfullscreenchange(self : Self) -> EventHandler {
 /// [Element.onfullscreenchange](https://developer.mozilla.org/en-US/docs/Web/API/Element/onfullscreenchange)
 impl TElement with set_onfullscreenchange(
   self : Self,
-  onfullscreenchange : EventHandler,
+  onfullscreenchange : EventHandlerNonNull,
 ) -> Unit {
   element_set_onfullscreenchange_ffi(
     TJsValue::to_js(self),
@@ -986,7 +986,7 @@ impl TElement with set_onfullscreenchange(
 
 ///|
 /// [Element.onfullscreenerror](https://developer.mozilla.org/en-US/docs/Web/API/Element/onfullscreenerror)
-impl TElement with onfullscreenerror(self : Self) -> EventHandler {
+impl TElement with onfullscreenerror(self : Self) -> EventHandlerNonNull {
   element_onfullscreenerror_ffi(TJsValue::to_js(self))
 }
 
@@ -994,7 +994,7 @@ impl TElement with onfullscreenerror(self : Self) -> EventHandler {
 /// [Element.onfullscreenerror](https://developer.mozilla.org/en-US/docs/Web/API/Element/onfullscreenerror)
 impl TElement with set_onfullscreenerror(
   self : Self,
-  onfullscreenerror : EventHandler,
+  onfullscreenerror : EventHandlerNonNull,
 ) -> Unit {
   element_set_onfullscreenerror_ffi(
     TJsValue::to_js(self),

@@ -37,14 +37,17 @@ pub trait TNavigation: TEventTarget {
   traverse_to(self : Self, key : String, options? : NavigationOptions) -> NavigationResult = _
   back(self : Self, options? : NavigationOptions) -> NavigationResult = _
   forward(self : Self, options? : NavigationOptions) -> NavigationResult = _
-  onnavigate(self : Self) -> EventHandler = _
-  set_onnavigate(self : Self, onnavigate : EventHandler) -> Unit = _
-  onnavigatesuccess(self : Self) -> EventHandler = _
-  set_onnavigatesuccess(self : Self, onnavigatesuccess : EventHandler) -> Unit = _
-  onnavigateerror(self : Self) -> EventHandler = _
-  set_onnavigateerror(self : Self, onnavigateerror : EventHandler) -> Unit = _
-  oncurrententrychange(self : Self) -> EventHandler = _
-  set_oncurrententrychange(self : Self, oncurrententrychange : EventHandler) -> Unit = _
+  onnavigate(self : Self) -> EventHandlerNonNull = _
+  set_onnavigate(self : Self, onnavigate : EventHandlerNonNull) -> Unit = _
+  onnavigatesuccess(self : Self) -> EventHandlerNonNull = _
+  set_onnavigatesuccess(self : Self, onnavigatesuccess : EventHandlerNonNull) -> Unit = _
+  onnavigateerror(self : Self) -> EventHandlerNonNull = _
+  set_onnavigateerror(self : Self, onnavigateerror : EventHandlerNonNull) -> Unit = _
+  oncurrententrychange(self : Self) -> EventHandlerNonNull = _
+  set_oncurrententrychange(
+    self : Self,
+    oncurrententrychange : EventHandlerNonNull,
+  ) -> Unit = _
 }
 
 ///|
@@ -152,13 +155,16 @@ impl TNavigation with forward(
 
 ///|
 /// [Navigation.onnavigate](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigate)
-impl TNavigation with onnavigate(self : Self) -> EventHandler {
+impl TNavigation with onnavigate(self : Self) -> EventHandlerNonNull {
   navigation_onnavigate_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Navigation.onnavigate](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigate)
-impl TNavigation with set_onnavigate(self : Self, onnavigate : EventHandler) -> Unit {
+impl TNavigation with set_onnavigate(
+  self : Self,
+  onnavigate : EventHandlerNonNull,
+) -> Unit {
   navigation_set_onnavigate_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onnavigate),
@@ -167,7 +173,7 @@ impl TNavigation with set_onnavigate(self : Self, onnavigate : EventHandler) -> 
 
 ///|
 /// [Navigation.onnavigatesuccess](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigatesuccess)
-impl TNavigation with onnavigatesuccess(self : Self) -> EventHandler {
+impl TNavigation with onnavigatesuccess(self : Self) -> EventHandlerNonNull {
   navigation_onnavigatesuccess_ffi(TJsValue::to_js(self))
 }
 
@@ -175,7 +181,7 @@ impl TNavigation with onnavigatesuccess(self : Self) -> EventHandler {
 /// [Navigation.onnavigatesuccess](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigatesuccess)
 impl TNavigation with set_onnavigatesuccess(
   self : Self,
-  onnavigatesuccess : EventHandler,
+  onnavigatesuccess : EventHandlerNonNull,
 ) -> Unit {
   navigation_set_onnavigatesuccess_ffi(
     TJsValue::to_js(self),
@@ -185,7 +191,7 @@ impl TNavigation with set_onnavigatesuccess(
 
 ///|
 /// [Navigation.onnavigateerror](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigateerror)
-impl TNavigation with onnavigateerror(self : Self) -> EventHandler {
+impl TNavigation with onnavigateerror(self : Self) -> EventHandlerNonNull {
   navigation_onnavigateerror_ffi(TJsValue::to_js(self))
 }
 
@@ -193,7 +199,7 @@ impl TNavigation with onnavigateerror(self : Self) -> EventHandler {
 /// [Navigation.onnavigateerror](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/onnavigateerror)
 impl TNavigation with set_onnavigateerror(
   self : Self,
-  onnavigateerror : EventHandler,
+  onnavigateerror : EventHandlerNonNull,
 ) -> Unit {
   navigation_set_onnavigateerror_ffi(
     TJsValue::to_js(self),
@@ -203,7 +209,7 @@ impl TNavigation with set_onnavigateerror(
 
 ///|
 /// [Navigation.oncurrententrychange](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/oncurrententrychange)
-impl TNavigation with oncurrententrychange(self : Self) -> EventHandler {
+impl TNavigation with oncurrententrychange(self : Self) -> EventHandlerNonNull {
   navigation_oncurrententrychange_ffi(TJsValue::to_js(self))
 }
 
@@ -211,7 +217,7 @@ impl TNavigation with oncurrententrychange(self : Self) -> EventHandler {
 /// [Navigation.oncurrententrychange](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/oncurrententrychange)
 impl TNavigation with set_oncurrententrychange(
   self : Self,
-  oncurrententrychange : EventHandler,
+  oncurrententrychange : EventHandlerNonNull,
 ) -> Unit {
   navigation_set_oncurrententrychange_ffi(
     TJsValue::to_js(self),

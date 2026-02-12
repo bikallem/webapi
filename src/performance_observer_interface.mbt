@@ -30,7 +30,7 @@ pub fn PerformanceObserver::new(
 pub trait TPerformanceObserver: TJsValue {
   observe(self : Self, options? : PerformanceObserverInit) -> Unit = _
   disconnect(self : Self) -> Unit = _
-  take_records(self : Self) -> PerformanceEntryList = _
+  take_records(self : Self) -> Array[PerformanceEntry] = _
 }
 
 ///|
@@ -53,7 +53,9 @@ impl TPerformanceObserver with disconnect(self : Self) -> Unit {
 
 ///|
 /// [PerformanceObserver.takeRecords](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/takeRecords)
-impl TPerformanceObserver with take_records(self : Self) -> PerformanceEntryList {
+impl TPerformanceObserver with take_records(self : Self) -> Array[
+  PerformanceEntry,
+] {
   performance_observer_take_records_ffi(TJsValue::to_js(self))
 }
 

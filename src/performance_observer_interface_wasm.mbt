@@ -11,8 +11,13 @@ fn performance_observer_disconnect_ffi(obj : JsValue) -> Unit = "webapi_Performa
 fn performance_observer_take_records_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PerformanceObserver" "takeRecords"
 
 ///|
-fn performance_observer_take_records_ffi(obj : JsValue) -> PerformanceEntryList {
-  performance_observer_take_records_ffi_wasm(obj).unsafe_cast()
+fn performance_observer_take_records_ffi(
+  obj : JsValue,
+) -> Array[PerformanceEntry] {
+  jsvalue_to_array(
+    performance_observer_take_records_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

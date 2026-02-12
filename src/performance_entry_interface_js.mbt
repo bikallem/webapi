@@ -26,7 +26,7 @@ fn performance_entry_entry_type_ffi(obj : JsValue) -> String {
 extern "js" fn performance_entry_start_time_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.startTime"
 
 ///|
-fn performance_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+fn performance_entry_start_time_ffi(obj : JsValue) -> Double {
   performance_entry_start_time_ffi_js(obj).unsafe_cast()
 }
 
@@ -34,7 +34,7 @@ fn performance_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp {
 extern "js" fn performance_entry_duration_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.duration"
 
 ///|
-fn performance_entry_duration_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+fn performance_entry_duration_ffi(obj : JsValue) -> Double {
   performance_entry_duration_ffi_js(obj).unsafe_cast()
 }
 

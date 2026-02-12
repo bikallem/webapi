@@ -26,7 +26,7 @@ fn form_data_get_all_ffi(
   obj : JsValue,
   name : JsValue,
 ) -> Array[FormDataEntryValue] {
-  form_data_get_all_ffi_wasm(obj, name).unsafe_cast()
+  jsvalue_to_array(form_data_get_all_ffi_wasm(obj, name), JsValue::unsafe_cast)
 }
 
 ///|

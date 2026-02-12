@@ -25,12 +25,12 @@ pub trait TAudioTrackList: TEventTarget {
   length(self : Self) -> UInt = _
   get(self : Self, index : UInt) -> AudioTrack? = _
   get_track_by_id(self : Self, id : String) -> AudioTrack? = _
-  onchange(self : Self) -> EventHandler = _
-  set_onchange(self : Self, onchange : EventHandler) -> Unit = _
-  onaddtrack(self : Self) -> EventHandler = _
-  set_onaddtrack(self : Self, onaddtrack : EventHandler) -> Unit = _
-  onremovetrack(self : Self) -> EventHandler = _
-  set_onremovetrack(self : Self, onremovetrack : EventHandler) -> Unit = _
+  onchange(self : Self) -> EventHandlerNonNull = _
+  set_onchange(self : Self, onchange : EventHandlerNonNull) -> Unit = _
+  onaddtrack(self : Self) -> EventHandlerNonNull = _
+  set_onaddtrack(self : Self, onaddtrack : EventHandlerNonNull) -> Unit = _
+  onremovetrack(self : Self) -> EventHandlerNonNull = _
+  set_onremovetrack(self : Self, onremovetrack : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -69,13 +69,16 @@ impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrac
 
 ///|
 /// [AudioTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onchange)
-impl TAudioTrackList with onchange(self : Self) -> EventHandler {
+impl TAudioTrackList with onchange(self : Self) -> EventHandlerNonNull {
   audio_track_list_onchange_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [AudioTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onchange)
-impl TAudioTrackList with set_onchange(self : Self, onchange : EventHandler) -> Unit {
+impl TAudioTrackList with set_onchange(
+  self : Self,
+  onchange : EventHandlerNonNull,
+) -> Unit {
   audio_track_list_set_onchange_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onchange),
@@ -84,13 +87,16 @@ impl TAudioTrackList with set_onchange(self : Self, onchange : EventHandler) -> 
 
 ///|
 /// [AudioTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onaddtrack)
-impl TAudioTrackList with onaddtrack(self : Self) -> EventHandler {
+impl TAudioTrackList with onaddtrack(self : Self) -> EventHandlerNonNull {
   audio_track_list_onaddtrack_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [AudioTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onaddtrack)
-impl TAudioTrackList with set_onaddtrack(self : Self, onaddtrack : EventHandler) -> Unit {
+impl TAudioTrackList with set_onaddtrack(
+  self : Self,
+  onaddtrack : EventHandlerNonNull,
+) -> Unit {
   audio_track_list_set_onaddtrack_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onaddtrack),
@@ -99,7 +105,7 @@ impl TAudioTrackList with set_onaddtrack(self : Self, onaddtrack : EventHandler)
 
 ///|
 /// [AudioTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onremovetrack)
-impl TAudioTrackList with onremovetrack(self : Self) -> EventHandler {
+impl TAudioTrackList with onremovetrack(self : Self) -> EventHandlerNonNull {
   audio_track_list_onremovetrack_ffi(TJsValue::to_js(self))
 }
 
@@ -107,7 +113,7 @@ impl TAudioTrackList with onremovetrack(self : Self) -> EventHandler {
 /// [AudioTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/onremovetrack)
 impl TAudioTrackList with set_onremovetrack(
   self : Self,
-  onremovetrack : EventHandler,
+  onremovetrack : EventHandlerNonNull,
 ) -> Unit {
   audio_track_list_set_onremovetrack_ffi(
     TJsValue::to_js(self),

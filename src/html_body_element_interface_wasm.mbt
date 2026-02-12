@@ -74,7 +74,7 @@ fn html_body_element_set_background_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_background"
 
 ///|
-fn html_body_element_onafterprint_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onafterprint"
+fn html_body_element_onafterprint_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onafterprint"
 
 ///|
 fn html_body_element_set_onafterprint_ffi(
@@ -83,7 +83,7 @@ fn html_body_element_set_onafterprint_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onafterprint"
 
 ///|
-fn html_body_element_onbeforeprint_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onbeforeprint"
+fn html_body_element_onbeforeprint_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onbeforeprint"
 
 ///|
 fn html_body_element_set_onbeforeprint_ffi(
@@ -94,7 +94,7 @@ fn html_body_element_set_onbeforeprint_ffi(
 ///|
 fn html_body_element_onbeforeunload_ffi(
   obj : JsValue,
-) -> OnBeforeUnloadEventHandler = "webapi_HTMLBodyElement" "get_onbeforeunload"
+) -> OnBeforeUnloadEventHandlerNonNull = "webapi_HTMLBodyElement" "get_onbeforeunload"
 
 ///|
 fn html_body_element_set_onbeforeunload_ffi(
@@ -103,7 +103,7 @@ fn html_body_element_set_onbeforeunload_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onbeforeunload"
 
 ///|
-fn html_body_element_onhashchange_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onhashchange"
+fn html_body_element_onhashchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onhashchange"
 
 ///|
 fn html_body_element_set_onhashchange_ffi(
@@ -112,7 +112,7 @@ fn html_body_element_set_onhashchange_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onhashchange"
 
 ///|
-fn html_body_element_onlanguagechange_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onlanguagechange"
+fn html_body_element_onlanguagechange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onlanguagechange"
 
 ///|
 fn html_body_element_set_onlanguagechange_ffi(
@@ -121,7 +121,7 @@ fn html_body_element_set_onlanguagechange_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onlanguagechange"
 
 ///|
-fn html_body_element_onmessage_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onmessage"
+fn html_body_element_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onmessage"
 
 ///|
 fn html_body_element_set_onmessage_ffi(
@@ -130,7 +130,7 @@ fn html_body_element_set_onmessage_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onmessage"
 
 ///|
-fn html_body_element_onmessageerror_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onmessageerror"
+fn html_body_element_onmessageerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onmessageerror"
 
 ///|
 fn html_body_element_set_onmessageerror_ffi(
@@ -139,7 +139,7 @@ fn html_body_element_set_onmessageerror_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onmessageerror"
 
 ///|
-fn html_body_element_onoffline_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onoffline"
+fn html_body_element_onoffline_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onoffline"
 
 ///|
 fn html_body_element_set_onoffline_ffi(
@@ -148,7 +148,7 @@ fn html_body_element_set_onoffline_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onoffline"
 
 ///|
-fn html_body_element_ononline_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_ononline"
+fn html_body_element_ononline_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_ononline"
 
 ///|
 fn html_body_element_set_ononline_ffi(
@@ -157,7 +157,7 @@ fn html_body_element_set_ononline_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_ononline"
 
 ///|
-fn html_body_element_onpagehide_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onpagehide"
+fn html_body_element_onpagehide_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onpagehide"
 
 ///|
 fn html_body_element_set_onpagehide_ffi(
@@ -166,7 +166,7 @@ fn html_body_element_set_onpagehide_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onpagehide"
 
 ///|
-fn html_body_element_onpagereveal_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onpagereveal"
+fn html_body_element_onpagereveal_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onpagereveal"
 
 ///|
 fn html_body_element_set_onpagereveal_ffi(
@@ -175,7 +175,7 @@ fn html_body_element_set_onpagereveal_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onpagereveal"
 
 ///|
-fn html_body_element_onpageshow_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onpageshow"
+fn html_body_element_onpageshow_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onpageshow"
 
 ///|
 fn html_body_element_set_onpageshow_ffi(
@@ -184,7 +184,7 @@ fn html_body_element_set_onpageshow_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onpageshow"
 
 ///|
-fn html_body_element_onpageswap_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onpageswap"
+fn html_body_element_onpageswap_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onpageswap"
 
 ///|
 fn html_body_element_set_onpageswap_ffi(
@@ -193,7 +193,7 @@ fn html_body_element_set_onpageswap_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onpageswap"
 
 ///|
-fn html_body_element_onpopstate_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onpopstate"
+fn html_body_element_onpopstate_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onpopstate"
 
 ///|
 fn html_body_element_set_onpopstate_ffi(
@@ -202,7 +202,9 @@ fn html_body_element_set_onpopstate_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onpopstate"
 
 ///|
-fn html_body_element_onrejectionhandled_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onrejectionhandled"
+fn html_body_element_onrejectionhandled_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onrejectionhandled"
 
 ///|
 fn html_body_element_set_onrejectionhandled_ffi(
@@ -211,7 +213,7 @@ fn html_body_element_set_onrejectionhandled_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onrejectionhandled"
 
 ///|
-fn html_body_element_onstorage_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onstorage"
+fn html_body_element_onstorage_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onstorage"
 
 ///|
 fn html_body_element_set_onstorage_ffi(
@@ -220,7 +222,9 @@ fn html_body_element_set_onstorage_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onstorage"
 
 ///|
-fn html_body_element_onunhandledrejection_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onunhandledrejection"
+fn html_body_element_onunhandledrejection_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onunhandledrejection"
 
 ///|
 fn html_body_element_set_onunhandledrejection_ffi(
@@ -229,7 +233,7 @@ fn html_body_element_set_onunhandledrejection_ffi(
 ) -> Unit = "webapi_HTMLBodyElement" "set_onunhandledrejection"
 
 ///|
-fn html_body_element_onunload_ffi(obj : JsValue) -> EventHandler = "webapi_HTMLBodyElement" "get_onunload"
+fn html_body_element_onunload_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_HTMLBodyElement" "get_onunload"
 
 ///|
 fn html_body_element_set_onunload_ffi(

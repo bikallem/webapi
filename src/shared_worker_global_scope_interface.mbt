@@ -31,8 +31,8 @@ pub impl TEventTarget for SharedWorkerGlobalScope
 pub trait TSharedWorkerGlobalScope: TWorkerGlobalScope {
   name(self : Self) -> String = _
   close(self : Self) -> Unit = _
-  onconnect(self : Self) -> EventHandler = _
-  set_onconnect(self : Self, onconnect : EventHandler) -> Unit = _
+  onconnect(self : Self) -> EventHandlerNonNull = _
+  set_onconnect(self : Self, onconnect : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -49,7 +49,7 @@ impl TSharedWorkerGlobalScope with close(self : Self) -> Unit {
 
 ///|
 /// [SharedWorkerGlobalScope.onconnect](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/onconnect)
-impl TSharedWorkerGlobalScope with onconnect(self : Self) -> EventHandler {
+impl TSharedWorkerGlobalScope with onconnect(self : Self) -> EventHandlerNonNull {
   shared_worker_global_scope_onconnect_ffi(TJsValue::to_js(self))
 }
 
@@ -57,7 +57,7 @@ impl TSharedWorkerGlobalScope with onconnect(self : Self) -> EventHandler {
 /// [SharedWorkerGlobalScope.onconnect](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/onconnect)
 impl TSharedWorkerGlobalScope with set_onconnect(
   self : Self,
-  onconnect : EventHandler,
+  onconnect : EventHandlerNonNull,
 ) -> Unit {
   shared_worker_global_scope_set_onconnect_ffi(
     TJsValue::to_js(self),

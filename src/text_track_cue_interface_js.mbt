@@ -63,7 +63,7 @@ extern "js" fn text_track_cue_set_pause_on_exit_ffi(
 extern "js" fn text_track_cue_onenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onenter"
 
 ///|
-fn text_track_cue_onenter_ffi(obj : JsValue) -> EventHandler {
+fn text_track_cue_onenter_ffi(obj : JsValue) -> EventHandlerNonNull {
   text_track_cue_onenter_ffi_js(obj).unsafe_cast()
 }
 
@@ -77,7 +77,7 @@ extern "js" fn text_track_cue_set_onenter_ffi(
 extern "js" fn text_track_cue_onexit_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onexit"
 
 ///|
-fn text_track_cue_onexit_ffi(obj : JsValue) -> EventHandler {
+fn text_track_cue_onexit_ffi(obj : JsValue) -> EventHandlerNonNull {
   text_track_cue_onexit_ffi_js(obj).unsafe_cast()
 }
 

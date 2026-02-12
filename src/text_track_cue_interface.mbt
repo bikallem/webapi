@@ -31,10 +31,10 @@ pub trait TTextTrackCue: TEventTarget {
   set_end_time(self : Self, end_time : Double) -> Unit = _
   pause_on_exit(self : Self) -> Bool = _
   set_pause_on_exit(self : Self, pause_on_exit : Bool) -> Unit = _
-  onenter(self : Self) -> EventHandler = _
-  set_onenter(self : Self, onenter : EventHandler) -> Unit = _
-  onexit(self : Self) -> EventHandler = _
-  set_onexit(self : Self, onexit : EventHandler) -> Unit = _
+  onenter(self : Self) -> EventHandlerNonNull = _
+  set_onenter(self : Self, onenter : EventHandlerNonNull) -> Unit = _
+  onexit(self : Self) -> EventHandlerNonNull = _
+  set_onexit(self : Self, onexit : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -102,13 +102,13 @@ impl TTextTrackCue with set_pause_on_exit(self : Self, pause_on_exit : Bool) -> 
 
 ///|
 /// [TextTrackCue.onenter](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue/onenter)
-impl TTextTrackCue with onenter(self : Self) -> EventHandler {
+impl TTextTrackCue with onenter(self : Self) -> EventHandlerNonNull {
   text_track_cue_onenter_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [TextTrackCue.onenter](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue/onenter)
-impl TTextTrackCue with set_onenter(self : Self, onenter : EventHandler) -> Unit {
+impl TTextTrackCue with set_onenter(self : Self, onenter : EventHandlerNonNull) -> Unit {
   text_track_cue_set_onenter_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onenter),
@@ -117,12 +117,12 @@ impl TTextTrackCue with set_onenter(self : Self, onenter : EventHandler) -> Unit
 
 ///|
 /// [TextTrackCue.onexit](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue/onexit)
-impl TTextTrackCue with onexit(self : Self) -> EventHandler {
+impl TTextTrackCue with onexit(self : Self) -> EventHandlerNonNull {
   text_track_cue_onexit_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [TextTrackCue.onexit](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue/onexit)
-impl TTextTrackCue with set_onexit(self : Self, onexit : EventHandler) -> Unit {
+impl TTextTrackCue with set_onexit(self : Self, onexit : EventHandlerNonNull) -> Unit {
   text_track_cue_set_onexit_ffi(TJsValue::to_js(self), TJsValue::to_js(onexit))
 }

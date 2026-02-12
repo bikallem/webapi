@@ -15,7 +15,9 @@ extern "js" fn shared_worker_global_scope_onconnect_ffi_js(
 ) -> JsValue = "(obj) => obj.onconnect"
 
 ///|
-fn shared_worker_global_scope_onconnect_ffi(obj : JsValue) -> EventHandler {
+fn shared_worker_global_scope_onconnect_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   shared_worker_global_scope_onconnect_ffi_js(obj).unsafe_cast()
 }
 

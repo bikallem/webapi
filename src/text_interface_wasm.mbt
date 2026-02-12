@@ -20,7 +20,10 @@ fn text_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "w
 
 ///|
 fn text_get_box_quads_ffi(obj : JsValue, options : JsValue) -> Array[DOMQuad] {
-  text_get_box_quads_ffi_wasm(obj, options).unsafe_cast()
+  jsvalue_to_array(
+    text_get_box_quads_ffi_wasm(obj, options),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

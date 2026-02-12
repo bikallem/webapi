@@ -18,10 +18,10 @@ fn performance_entry_entry_type_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn performance_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_PerformanceEntry" "get_startTime"
+fn performance_entry_start_time_ffi(obj : JsValue) -> Double = "webapi_PerformanceEntry" "get_startTime"
 
 ///|
-fn performance_entry_duration_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_PerformanceEntry" "get_duration"
+fn performance_entry_duration_ffi(obj : JsValue) -> Double = "webapi_PerformanceEntry" "get_duration"
 
 ///|
 fn performance_entry_navigation_id_ffi(obj : JsValue) -> UInt64 = "webapi_PerformanceEntry" "get_navigationId"

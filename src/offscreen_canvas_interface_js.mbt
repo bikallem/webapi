@@ -67,7 +67,7 @@ fn offscreen_canvas_convert_to_blob_ffi(
 extern "js" fn offscreen_canvas_oncontextlost_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextlost"
 
 ///|
-fn offscreen_canvas_oncontextlost_ffi(obj : JsValue) -> EventHandler {
+fn offscreen_canvas_oncontextlost_ffi(obj : JsValue) -> EventHandlerNonNull {
   offscreen_canvas_oncontextlost_ffi_js(obj).unsafe_cast()
 }
 
@@ -83,7 +83,7 @@ extern "js" fn offscreen_canvas_oncontextrestored_ffi_js(
 ) -> JsValue = "(obj) => obj.oncontextrestored"
 
 ///|
-fn offscreen_canvas_oncontextrestored_ffi(obj : JsValue) -> EventHandler {
+fn offscreen_canvas_oncontextrestored_ffi(obj : JsValue) -> EventHandlerNonNull {
   offscreen_canvas_oncontextrestored_ffi_js(obj).unsafe_cast()
 }
 

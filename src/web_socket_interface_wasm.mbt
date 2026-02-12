@@ -16,19 +16,19 @@ fn web_socket_ready_state_ffi(obj : JsValue) -> UInt = "webapi_WebSocket" "get_r
 fn web_socket_buffered_amount_ffi(obj : JsValue) -> UInt64 = "webapi_WebSocket" "get_bufferedAmount"
 
 ///|
-fn web_socket_onopen_ffi(obj : JsValue) -> EventHandler = "webapi_WebSocket" "get_onopen"
+fn web_socket_onopen_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_WebSocket" "get_onopen"
 
 ///|
 fn web_socket_set_onopen_ffi(obj : JsValue, onopen : JsValue) -> Unit = "webapi_WebSocket" "set_onopen"
 
 ///|
-fn web_socket_onerror_ffi(obj : JsValue) -> EventHandler = "webapi_WebSocket" "get_onerror"
+fn web_socket_onerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_WebSocket" "get_onerror"
 
 ///|
 fn web_socket_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_WebSocket" "set_onerror"
 
 ///|
-fn web_socket_onclose_ffi(obj : JsValue) -> EventHandler = "webapi_WebSocket" "get_onclose"
+fn web_socket_onclose_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_WebSocket" "get_onclose"
 
 ///|
 fn web_socket_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_WebSocket" "set_onclose"
@@ -57,7 +57,7 @@ fn web_socket_close_ffi(
 ) -> Unit = "webapi_WebSocket" "close"
 
 ///|
-fn web_socket_onmessage_ffi(obj : JsValue) -> EventHandler = "webapi_WebSocket" "get_onmessage"
+fn web_socket_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_WebSocket" "get_onmessage"
 
 ///|
 fn web_socket_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_WebSocket" "set_onmessage"

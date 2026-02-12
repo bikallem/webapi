@@ -24,8 +24,8 @@ pub trait TPerformanceEntry: TJsValue {
   id(self : Self) -> UInt64 = _
   name(self : Self) -> String = _
   entry_type(self : Self) -> String = _
-  start_time(self : Self) -> DOMHighResTimeStamp = _
-  duration(self : Self) -> DOMHighResTimeStamp = _
+  start_time(self : Self) -> Double = _
+  duration(self : Self) -> Double = _
   navigation_id(self : Self) -> UInt64 = _
   to_json(self : Self) -> JsValue = _
 }
@@ -50,13 +50,13 @@ impl TPerformanceEntry with entry_type(self : Self) -> String {
 
 ///|
 /// [PerformanceEntry.startTime](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/startTime)
-impl TPerformanceEntry with start_time(self : Self) -> DOMHighResTimeStamp {
+impl TPerformanceEntry with start_time(self : Self) -> Double {
   performance_entry_start_time_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [PerformanceEntry.duration](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/duration)
-impl TPerformanceEntry with duration(self : Self) -> DOMHighResTimeStamp {
+impl TPerformanceEntry with duration(self : Self) -> Double {
   performance_entry_duration_ffi(TJsValue::to_js(self))
 }
 

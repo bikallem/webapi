@@ -23,14 +23,18 @@ pub impl TPerformanceObserverEntryList for PerformanceObserverEntryList
 ///|
 /// [PerformanceObserverEntryList](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList) interface.
 pub trait TPerformanceObserverEntryList: TJsValue {
-  get_entries(self : Self) -> PerformanceEntryList = _
-  get_entries_by_type(self : Self, type_ : String) -> PerformanceEntryList = _
-  get_entries_by_name(self : Self, name : String, type_? : String) -> PerformanceEntryList = _
+  get_entries(self : Self) -> Array[PerformanceEntry] = _
+  get_entries_by_type(self : Self, type_ : String) -> Array[PerformanceEntry] = _
+  get_entries_by_name(self : Self, name : String, type_? : String) -> Array[
+    PerformanceEntry,
+  ] = _
 }
 
 ///|
 /// [PerformanceObserverEntryList.getEntries](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList/getEntries)
-impl TPerformanceObserverEntryList with get_entries(self : Self) -> PerformanceEntryList {
+impl TPerformanceObserverEntryList with get_entries(self : Self) -> Array[
+  PerformanceEntry,
+] {
   performance_observer_entry_list_get_entries_ffi(TJsValue::to_js(self))
 }
 
@@ -39,7 +43,7 @@ impl TPerformanceObserverEntryList with get_entries(self : Self) -> PerformanceE
 impl TPerformanceObserverEntryList with get_entries_by_type(
   self : Self,
   type_ : String,
-) -> PerformanceEntryList {
+) -> Array[PerformanceEntry] {
   performance_observer_entry_list_get_entries_by_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
@@ -52,7 +56,7 @@ impl TPerformanceObserverEntryList with get_entries_by_name(
   self : Self,
   name : String,
   type_? : String,
-) -> PerformanceEntryList {
+) -> Array[PerformanceEntry] {
   performance_observer_entry_list_get_entries_by_name_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),

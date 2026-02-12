@@ -32,7 +32,7 @@ pub fn IntersectionObserverEntry::new(
 ///|
 /// [IntersectionObserverEntry](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) interface.
 pub trait TIntersectionObserverEntry: TJsValue {
-  time(self : Self) -> DOMHighResTimeStamp = _
+  time(self : Self) -> Double = _
   root_bounds(self : Self) -> DOMRectReadOnly = _
   bounding_client_rect(self : Self) -> DOMRectReadOnly = _
   intersection_rect(self : Self) -> DOMRectReadOnly = _
@@ -44,7 +44,7 @@ pub trait TIntersectionObserverEntry: TJsValue {
 
 ///|
 /// [IntersectionObserverEntry.time](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/time)
-impl TIntersectionObserverEntry with time(self : Self) -> DOMHighResTimeStamp {
+impl TIntersectionObserverEntry with time(self : Self) -> Double {
   intersection_observer_entry_time_ffi(TJsValue::to_js(self))
 }
 

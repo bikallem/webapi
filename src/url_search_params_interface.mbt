@@ -88,7 +88,7 @@ impl TURLSearchParams with get(self : Self, name : String) -> String? {
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 

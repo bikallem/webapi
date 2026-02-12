@@ -27,7 +27,7 @@ pub fn DeferredRequestInit::new(
   duplex? : RequestDuplex,
   priority? : RequestPriority,
   window? : JsValue,
-  activate_after? : DOMHighResTimeStamp,
+  activate_after? : Double,
 ) -> DeferredRequestInit {
   deferred_request_init_ffi(
     opt_to_js(method_),

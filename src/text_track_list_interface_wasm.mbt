@@ -8,13 +8,13 @@ fn text_track_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_
 fn text_track_list_get_track_by_id_ffi(obj : JsValue, id : JsValue) -> JsValue = "webapi_TextTrackList" "getTrackById"
 
 ///|
-fn text_track_list_onchange_ffi(obj : JsValue) -> EventHandler = "webapi_TextTrackList" "get_onchange"
+fn text_track_list_onchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_TextTrackList" "get_onchange"
 
 ///|
 fn text_track_list_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_TextTrackList" "set_onchange"
 
 ///|
-fn text_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler = "webapi_TextTrackList" "get_onaddtrack"
+fn text_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_TextTrackList" "get_onaddtrack"
 
 ///|
 fn text_track_list_set_onaddtrack_ffi(
@@ -23,7 +23,7 @@ fn text_track_list_set_onaddtrack_ffi(
 ) -> Unit = "webapi_TextTrackList" "set_onaddtrack"
 
 ///|
-fn text_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandler = "webapi_TextTrackList" "get_onremovetrack"
+fn text_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_TextTrackList" "get_onremovetrack"
 
 ///|
 fn text_track_list_set_onremovetrack_ffi(

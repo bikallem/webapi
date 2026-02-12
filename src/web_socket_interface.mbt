@@ -72,17 +72,17 @@ pub trait TWebSocket: TEventTarget {
   url(self : Self) -> String = _
   ready_state(self : Self) -> UInt = _
   buffered_amount(self : Self) -> UInt64 = _
-  onopen(self : Self) -> EventHandler = _
-  set_onopen(self : Self, onopen : EventHandler) -> Unit = _
-  onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
-  onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  onopen(self : Self) -> EventHandlerNonNull = _
+  set_onopen(self : Self, onopen : EventHandlerNonNull) -> Unit = _
+  onerror(self : Self) -> EventHandlerNonNull = _
+  set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit = _
+  onclose(self : Self) -> EventHandlerNonNull = _
+  set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit = _
   extensions(self : Self) -> String = _
   protocol(self : Self) -> String = _
   close(self : Self, code? : UInt, reason? : String) -> Unit = _
-  onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  onmessage(self : Self) -> EventHandlerNonNull = _
+  set_onmessage(self : Self, onmessage : EventHandlerNonNull) -> Unit = _
   binary_type(self : Self) -> BinaryType = _
   set_binary_type(self : Self, binary_type : BinaryType) -> Unit = _
   send(self : Self, data : &TWebSocketSendData) -> Unit = _
@@ -108,37 +108,37 @@ impl TWebSocket with buffered_amount(self : Self) -> UInt64 {
 
 ///|
 /// [WebSocket.onopen](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onopen)
-impl TWebSocket with onopen(self : Self) -> EventHandler {
+impl TWebSocket with onopen(self : Self) -> EventHandlerNonNull {
   web_socket_onopen_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [WebSocket.onopen](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onopen)
-impl TWebSocket with set_onopen(self : Self, onopen : EventHandler) -> Unit {
+impl TWebSocket with set_onopen(self : Self, onopen : EventHandlerNonNull) -> Unit {
   web_socket_set_onopen_ffi(TJsValue::to_js(self), TJsValue::to_js(onopen))
 }
 
 ///|
 /// [WebSocket.onerror](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onerror)
-impl TWebSocket with onerror(self : Self) -> EventHandler {
+impl TWebSocket with onerror(self : Self) -> EventHandlerNonNull {
   web_socket_onerror_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [WebSocket.onerror](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onerror)
-impl TWebSocket with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+impl TWebSocket with set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit {
   web_socket_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
 
 ///|
 /// [WebSocket.onclose](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onclose)
-impl TWebSocket with onclose(self : Self) -> EventHandler {
+impl TWebSocket with onclose(self : Self) -> EventHandlerNonNull {
   web_socket_onclose_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [WebSocket.onclose](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onclose)
-impl TWebSocket with set_onclose(self : Self, onclose : EventHandler) -> Unit {
+impl TWebSocket with set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit {
   web_socket_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
 }
 
@@ -166,13 +166,13 @@ impl TWebSocket with close(self : Self, code? : UInt, reason? : String) -> Unit 
 
 ///|
 /// [WebSocket.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onmessage)
-impl TWebSocket with onmessage(self : Self) -> EventHandler {
+impl TWebSocket with onmessage(self : Self) -> EventHandlerNonNull {
   web_socket_onmessage_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [WebSocket.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/onmessage)
-impl TWebSocket with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TWebSocket with set_onmessage(self : Self, onmessage : EventHandlerNonNull) -> Unit {
   web_socket_set_onmessage_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onmessage),

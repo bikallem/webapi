@@ -3,7 +3,7 @@ fn navigation_entries_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigation" "
 
 ///|
 fn navigation_entries_ffi(obj : JsValue) -> Array[NavigationHistoryEntry] {
-  navigation_entries_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(navigation_entries_ffi_wasm(obj), JsValue::unsafe_cast)
 }
 
 ///|
@@ -51,13 +51,13 @@ fn navigation_back_ffi(obj : JsValue, options : JsValue) -> NavigationResult = "
 fn navigation_forward_ffi(obj : JsValue, options : JsValue) -> NavigationResult = "webapi_Navigation" "forward"
 
 ///|
-fn navigation_onnavigate_ffi(obj : JsValue) -> EventHandler = "webapi_Navigation" "get_onnavigate"
+fn navigation_onnavigate_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Navigation" "get_onnavigate"
 
 ///|
 fn navigation_set_onnavigate_ffi(obj : JsValue, onnavigate : JsValue) -> Unit = "webapi_Navigation" "set_onnavigate"
 
 ///|
-fn navigation_onnavigatesuccess_ffi(obj : JsValue) -> EventHandler = "webapi_Navigation" "get_onnavigatesuccess"
+fn navigation_onnavigatesuccess_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Navigation" "get_onnavigatesuccess"
 
 ///|
 fn navigation_set_onnavigatesuccess_ffi(
@@ -66,7 +66,7 @@ fn navigation_set_onnavigatesuccess_ffi(
 ) -> Unit = "webapi_Navigation" "set_onnavigatesuccess"
 
 ///|
-fn navigation_onnavigateerror_ffi(obj : JsValue) -> EventHandler = "webapi_Navigation" "get_onnavigateerror"
+fn navigation_onnavigateerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Navigation" "get_onnavigateerror"
 
 ///|
 fn navigation_set_onnavigateerror_ffi(
@@ -75,7 +75,7 @@ fn navigation_set_onnavigateerror_ffi(
 ) -> Unit = "webapi_Navigation" "set_onnavigateerror"
 
 ///|
-fn navigation_oncurrententrychange_ffi(obj : JsValue) -> EventHandler = "webapi_Navigation" "get_oncurrententrychange"
+fn navigation_oncurrententrychange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Navigation" "get_oncurrententrychange"
 
 ///|
 fn navigation_set_oncurrententrychange_ffi(

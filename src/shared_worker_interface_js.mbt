@@ -16,7 +16,7 @@ fn shared_worker_port_ffi(obj : JsValue) -> MessagePort {
 extern "js" fn shared_worker_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn shared_worker_onerror_ffi(obj : JsValue) -> EventHandler {
+fn shared_worker_onerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   shared_worker_onerror_ffi_js(obj).unsafe_cast()
 }
 

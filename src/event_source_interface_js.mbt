@@ -32,7 +32,7 @@ fn event_source_ready_state_ffi(obj : JsValue) -> UInt {
 extern "js" fn event_source_onopen_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onopen"
 
 ///|
-fn event_source_onopen_ffi(obj : JsValue) -> EventHandler {
+fn event_source_onopen_ffi(obj : JsValue) -> EventHandlerNonNull {
   event_source_onopen_ffi_js(obj).unsafe_cast()
 }
 
@@ -46,7 +46,7 @@ extern "js" fn event_source_set_onopen_ffi(
 extern "js" fn event_source_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
 
 ///|
-fn event_source_onmessage_ffi(obj : JsValue) -> EventHandler {
+fn event_source_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull {
   event_source_onmessage_ffi_js(obj).unsafe_cast()
 }
 
@@ -60,7 +60,7 @@ extern "js" fn event_source_set_onmessage_ffi(
 extern "js" fn event_source_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn event_source_onerror_ffi(obj : JsValue) -> EventHandler {
+fn event_source_onerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   event_source_onerror_ffi_js(obj).unsafe_cast()
 }
 

@@ -22,7 +22,7 @@ extern "js" fn broadcast_channel_close_ffi(obj : JsValue) -> Unit = "(obj) => ob
 extern "js" fn broadcast_channel_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
 
 ///|
-fn broadcast_channel_onmessage_ffi(obj : JsValue) -> EventHandler {
+fn broadcast_channel_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull {
   broadcast_channel_onmessage_ffi_js(obj).unsafe_cast()
 }
 
@@ -38,7 +38,7 @@ extern "js" fn broadcast_channel_onmessageerror_ffi_js(
 ) -> JsValue = "(obj) => obj.onmessageerror"
 
 ///|
-fn broadcast_channel_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+fn broadcast_channel_onmessageerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   broadcast_channel_onmessageerror_ffi_js(obj).unsafe_cast()
 }
 

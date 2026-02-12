@@ -14,7 +14,7 @@ pub impl TJsValue for IntersectionObserverEntryInit with to_js(
 
 ///|
 pub fn IntersectionObserverEntryInit::new(
-  time : DOMHighResTimeStamp,
+  time : Double,
   root_bounds : DOMRectInit,
   bounding_client_rect : DOMRectInit,
   intersection_rect : DOMRectInit,

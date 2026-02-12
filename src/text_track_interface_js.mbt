@@ -77,7 +77,7 @@ extern "js" fn text_track_remove_cue_ffi(obj : JsValue, cue : JsValue) -> Unit =
 extern "js" fn text_track_oncuechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncuechange"
 
 ///|
-fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandler {
+fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandlerNonNull {
   text_track_oncuechange_ffi_js(obj).unsafe_cast()
 }
 

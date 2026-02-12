@@ -25,12 +25,12 @@ pub trait TTextTrackList: TEventTarget {
   length(self : Self) -> UInt = _
   get(self : Self, index : UInt) -> TextTrack? = _
   get_track_by_id(self : Self, id : String) -> TextTrack? = _
-  onchange(self : Self) -> EventHandler = _
-  set_onchange(self : Self, onchange : EventHandler) -> Unit = _
-  onaddtrack(self : Self) -> EventHandler = _
-  set_onaddtrack(self : Self, onaddtrack : EventHandler) -> Unit = _
-  onremovetrack(self : Self) -> EventHandler = _
-  set_onremovetrack(self : Self, onremovetrack : EventHandler) -> Unit = _
+  onchange(self : Self) -> EventHandlerNonNull = _
+  set_onchange(self : Self, onchange : EventHandlerNonNull) -> Unit = _
+  onaddtrack(self : Self) -> EventHandlerNonNull = _
+  set_onaddtrack(self : Self, onaddtrack : EventHandlerNonNull) -> Unit = _
+  onremovetrack(self : Self) -> EventHandlerNonNull = _
+  set_onremovetrack(self : Self, onremovetrack : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -69,13 +69,16 @@ impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack?
 
 ///|
 /// [TextTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onchange)
-impl TTextTrackList with onchange(self : Self) -> EventHandler {
+impl TTextTrackList with onchange(self : Self) -> EventHandlerNonNull {
   text_track_list_onchange_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [TextTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onchange)
-impl TTextTrackList with set_onchange(self : Self, onchange : EventHandler) -> Unit {
+impl TTextTrackList with set_onchange(
+  self : Self,
+  onchange : EventHandlerNonNull,
+) -> Unit {
   text_track_list_set_onchange_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onchange),
@@ -84,13 +87,16 @@ impl TTextTrackList with set_onchange(self : Self, onchange : EventHandler) -> U
 
 ///|
 /// [TextTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onaddtrack)
-impl TTextTrackList with onaddtrack(self : Self) -> EventHandler {
+impl TTextTrackList with onaddtrack(self : Self) -> EventHandlerNonNull {
   text_track_list_onaddtrack_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [TextTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onaddtrack)
-impl TTextTrackList with set_onaddtrack(self : Self, onaddtrack : EventHandler) -> Unit {
+impl TTextTrackList with set_onaddtrack(
+  self : Self,
+  onaddtrack : EventHandlerNonNull,
+) -> Unit {
   text_track_list_set_onaddtrack_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onaddtrack),
@@ -99,7 +105,7 @@ impl TTextTrackList with set_onaddtrack(self : Self, onaddtrack : EventHandler) 
 
 ///|
 /// [TextTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onremovetrack)
-impl TTextTrackList with onremovetrack(self : Self) -> EventHandler {
+impl TTextTrackList with onremovetrack(self : Self) -> EventHandlerNonNull {
   text_track_list_onremovetrack_ffi(TJsValue::to_js(self))
 }
 
@@ -107,7 +113,7 @@ impl TTextTrackList with onremovetrack(self : Self) -> EventHandler {
 /// [TextTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onremovetrack)
 impl TTextTrackList with set_onremovetrack(
   self : Self,
-  onremovetrack : EventHandler,
+  onremovetrack : EventHandlerNonNull,
 ) -> Unit {
   text_track_list_set_onremovetrack_ffi(
     TJsValue::to_js(self),

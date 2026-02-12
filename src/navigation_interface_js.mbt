@@ -121,7 +121,7 @@ fn navigation_forward_ffi(obj : JsValue, options : JsValue) -> NavigationResult 
 extern "js" fn navigation_onnavigate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onnavigate"
 
 ///|
-fn navigation_onnavigate_ffi(obj : JsValue) -> EventHandler {
+fn navigation_onnavigate_ffi(obj : JsValue) -> EventHandlerNonNull {
   navigation_onnavigate_ffi_js(obj).unsafe_cast()
 }
 
@@ -135,7 +135,7 @@ extern "js" fn navigation_set_onnavigate_ffi(
 extern "js" fn navigation_onnavigatesuccess_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onnavigatesuccess"
 
 ///|
-fn navigation_onnavigatesuccess_ffi(obj : JsValue) -> EventHandler {
+fn navigation_onnavigatesuccess_ffi(obj : JsValue) -> EventHandlerNonNull {
   navigation_onnavigatesuccess_ffi_js(obj).unsafe_cast()
 }
 
@@ -149,7 +149,7 @@ extern "js" fn navigation_set_onnavigatesuccess_ffi(
 extern "js" fn navigation_onnavigateerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onnavigateerror"
 
 ///|
-fn navigation_onnavigateerror_ffi(obj : JsValue) -> EventHandler {
+fn navigation_onnavigateerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   navigation_onnavigateerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -163,7 +163,7 @@ extern "js" fn navigation_set_onnavigateerror_ffi(
 extern "js" fn navigation_oncurrententrychange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncurrententrychange"
 
 ///|
-fn navigation_oncurrententrychange_ffi(obj : JsValue) -> EventHandler {
+fn navigation_oncurrententrychange_ffi(obj : JsValue) -> EventHandlerNonNull {
   navigation_oncurrententrychange_ffi_js(obj).unsafe_cast()
 }
 

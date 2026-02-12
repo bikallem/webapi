@@ -40,7 +40,7 @@ impl TStorage with key(self : Self, index : UInt) -> String? {
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 
@@ -51,7 +51,7 @@ impl TStorage with get_item(self : Self, key : String) -> String? {
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 

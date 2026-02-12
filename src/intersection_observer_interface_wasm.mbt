@@ -48,5 +48,8 @@ fn intersection_observer_take_records_ffi_wasm(obj : JsValue) -> JsValue = "weba
 fn intersection_observer_take_records_ffi(
   obj : JsValue,
 ) -> Array[IntersectionObserverEntry] {
-  intersection_observer_take_records_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(
+    intersection_observer_take_records_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }

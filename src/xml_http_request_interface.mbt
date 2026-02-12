@@ -58,8 +58,8 @@ pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit with to_js(
 ///|
 /// [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) interface.
 pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
-  onreadystatechange(self : Self) -> EventHandler = _
-  set_onreadystatechange(self : Self, onreadystatechange : EventHandler) -> Unit = _
+  onreadystatechange(self : Self) -> EventHandlerNonNull = _
+  set_onreadystatechange(self : Self, onreadystatechange : EventHandlerNonNull) -> Unit = _
   ready_state(self : Self) -> UInt = _
   open(self : Self, method_ : String, url : String) -> Unit = _
   open_2(
@@ -93,7 +93,7 @@ pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
 
 ///|
 /// [XMLHttpRequest.onreadystatechange](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange)
-impl TXMLHttpRequest with onreadystatechange(self : Self) -> EventHandler {
+impl TXMLHttpRequest with onreadystatechange(self : Self) -> EventHandlerNonNull {
   xml_http_request_onreadystatechange_ffi(TJsValue::to_js(self))
 }
 
@@ -101,7 +101,7 @@ impl TXMLHttpRequest with onreadystatechange(self : Self) -> EventHandler {
 /// [XMLHttpRequest.onreadystatechange](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange)
 impl TXMLHttpRequest with set_onreadystatechange(
   self : Self,
-  onreadystatechange : EventHandler,
+  onreadystatechange : EventHandlerNonNull,
 ) -> Unit {
   xml_http_request_set_onreadystatechange_ffi(
     TJsValue::to_js(self),
@@ -241,7 +241,7 @@ impl TXMLHttpRequest with get_response_header(self : Self, name : String) -> Str
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 

@@ -30,3 +30,9 @@ pub impl TJsValue for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub impl[T : TJsValue] TJsValue for Array[T] with to_js(self : Array[T]) -> JsValue = "%identity"
+
+///|
+fn jsvalue_to_string(v : JsValue) -> String = "%identity"
+
+///|
+fn[T] jsvalue_to_array(v : JsValue, _convert : (JsValue) -> T) -> Array[T] = "%identity"

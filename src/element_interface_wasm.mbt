@@ -77,7 +77,7 @@ fn element_get_attribute_names_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Elem
 
 ///|
 fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] {
-  element_get_attribute_names_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(element_get_attribute_names_ffi_wasm(obj), jsvalue_to_string)
 }
 
 ///|
@@ -393,7 +393,7 @@ fn element_request_fullscreen_ffi(
 }
 
 ///|
-fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler = "webapi_Element" "get_onfullscreenchange"
+fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Element" "get_onfullscreenchange"
 
 ///|
 fn element_set_onfullscreenchange_ffi(
@@ -402,7 +402,7 @@ fn element_set_onfullscreenchange_ffi(
 ) -> Unit = "webapi_Element" "set_onfullscreenchange"
 
 ///|
-fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler = "webapi_Element" "get_onfullscreenerror"
+fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Element" "get_onfullscreenerror"
 
 ///|
 fn element_set_onfullscreenerror_ffi(
@@ -488,7 +488,10 @@ fn element_get_box_quads_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[DOMQuad] {
-  element_get_box_quads_ffi_wasm(obj, options).unsafe_cast()
+  jsvalue_to_array(
+    element_get_box_quads_ffi_wasm(obj, options),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

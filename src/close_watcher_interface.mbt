@@ -32,10 +32,10 @@ pub trait TCloseWatcher: TEventTarget {
   request_close(self : Self) -> Unit = _
   close(self : Self) -> Unit = _
   destroy(self : Self) -> Unit = _
-  oncancel(self : Self) -> EventHandler = _
-  set_oncancel(self : Self, oncancel : EventHandler) -> Unit = _
-  onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  oncancel(self : Self) -> EventHandlerNonNull = _
+  set_oncancel(self : Self, oncancel : EventHandlerNonNull) -> Unit = _
+  onclose(self : Self) -> EventHandlerNonNull = _
+  set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -58,13 +58,16 @@ impl TCloseWatcher with destroy(self : Self) -> Unit {
 
 ///|
 /// [CloseWatcher.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher/oncancel)
-impl TCloseWatcher with oncancel(self : Self) -> EventHandler {
+impl TCloseWatcher with oncancel(self : Self) -> EventHandlerNonNull {
   close_watcher_oncancel_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [CloseWatcher.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher/oncancel)
-impl TCloseWatcher with set_oncancel(self : Self, oncancel : EventHandler) -> Unit {
+impl TCloseWatcher with set_oncancel(
+  self : Self,
+  oncancel : EventHandlerNonNull,
+) -> Unit {
   close_watcher_set_oncancel_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(oncancel),
@@ -73,12 +76,12 @@ impl TCloseWatcher with set_oncancel(self : Self, oncancel : EventHandler) -> Un
 
 ///|
 /// [CloseWatcher.onclose](https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher/onclose)
-impl TCloseWatcher with onclose(self : Self) -> EventHandler {
+impl TCloseWatcher with onclose(self : Self) -> EventHandlerNonNull {
   close_watcher_onclose_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [CloseWatcher.onclose](https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher/onclose)
-impl TCloseWatcher with set_onclose(self : Self, onclose : EventHandler) -> Unit {
+impl TCloseWatcher with set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit {
   close_watcher_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
 }

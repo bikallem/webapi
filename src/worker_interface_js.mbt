@@ -25,7 +25,7 @@ extern "js" fn worker_post_message_2_ffi(
 extern "js" fn worker_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn worker_onerror_ffi(obj : JsValue) -> EventHandler {
+fn worker_onerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   worker_onerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -36,7 +36,7 @@ extern "js" fn worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit 
 extern "js" fn worker_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
 
 ///|
-fn worker_onmessage_ffi(obj : JsValue) -> EventHandler {
+fn worker_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull {
   worker_onmessage_ffi_js(obj).unsafe_cast()
 }
 
@@ -50,7 +50,7 @@ extern "js" fn worker_set_onmessage_ffi(
 extern "js" fn worker_onmessageerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessageerror"
 
 ///|
-fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   worker_onmessageerror_ffi_js(obj).unsafe_cast()
 }
 

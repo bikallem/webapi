@@ -4,7 +4,9 @@ extern "js" fn xml_http_request_event_target_onloadstart_ffi_js(
 ) -> JsValue = "(obj) => obj.onloadstart"
 
 ///|
-fn xml_http_request_event_target_onloadstart_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_event_target_onloadstart_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_event_target_onloadstart_ffi_js(obj).unsafe_cast()
 }
 
@@ -20,7 +22,9 @@ extern "js" fn xml_http_request_event_target_onprogress_ffi_js(
 ) -> JsValue = "(obj) => obj.onprogress"
 
 ///|
-fn xml_http_request_event_target_onprogress_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_event_target_onprogress_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_event_target_onprogress_ffi_js(obj).unsafe_cast()
 }
 
@@ -36,7 +40,9 @@ extern "js" fn xml_http_request_event_target_onabort_ffi_js(
 ) -> JsValue = "(obj) => obj.onabort"
 
 ///|
-fn xml_http_request_event_target_onabort_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_event_target_onabort_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_event_target_onabort_ffi_js(obj).unsafe_cast()
 }
 
@@ -52,7 +58,9 @@ extern "js" fn xml_http_request_event_target_onerror_ffi_js(
 ) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn xml_http_request_event_target_onerror_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_event_target_onerror_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_event_target_onerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -68,7 +76,9 @@ extern "js" fn xml_http_request_event_target_onload_ffi_js(
 ) -> JsValue = "(obj) => obj.onload"
 
 ///|
-fn xml_http_request_event_target_onload_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_event_target_onload_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_event_target_onload_ffi_js(obj).unsafe_cast()
 }
 
@@ -84,7 +94,9 @@ extern "js" fn xml_http_request_event_target_ontimeout_ffi_js(
 ) -> JsValue = "(obj) => obj.ontimeout"
 
 ///|
-fn xml_http_request_event_target_ontimeout_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_event_target_ontimeout_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_event_target_ontimeout_ffi_js(obj).unsafe_cast()
 }
 
@@ -100,7 +112,9 @@ extern "js" fn xml_http_request_event_target_onloadend_ffi_js(
 ) -> JsValue = "(obj) => obj.onloadend"
 
 ///|
-fn xml_http_request_event_target_onloadend_ffi(obj : JsValue) -> EventHandler {
+fn xml_http_request_event_target_onloadend_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   xml_http_request_event_target_onloadend_ffi_js(obj).unsafe_cast()
 }
 

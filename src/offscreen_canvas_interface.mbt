@@ -40,10 +40,10 @@ pub trait TOffscreenCanvas: TEventTarget {
   convert_to_blob(self : Self, options? : ImageEncodeOptions) -> @js_async.Promise[
     Blob,
   ] = _
-  oncontextlost(self : Self) -> EventHandler = _
-  set_oncontextlost(self : Self, oncontextlost : EventHandler) -> Unit = _
-  oncontextrestored(self : Self) -> EventHandler = _
-  set_oncontextrestored(self : Self, oncontextrestored : EventHandler) -> Unit = _
+  oncontextlost(self : Self) -> EventHandlerNonNull = _
+  set_oncontextlost(self : Self, oncontextlost : EventHandlerNonNull) -> Unit = _
+  oncontextrestored(self : Self) -> EventHandlerNonNull = _
+  set_oncontextrestored(self : Self, oncontextrestored : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -112,7 +112,7 @@ impl TOffscreenCanvas with convert_to_blob(
 
 ///|
 /// [OffscreenCanvas.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextlost)
-impl TOffscreenCanvas with oncontextlost(self : Self) -> EventHandler {
+impl TOffscreenCanvas with oncontextlost(self : Self) -> EventHandlerNonNull {
   offscreen_canvas_oncontextlost_ffi(TJsValue::to_js(self))
 }
 
@@ -120,7 +120,7 @@ impl TOffscreenCanvas with oncontextlost(self : Self) -> EventHandler {
 /// [OffscreenCanvas.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextlost)
 impl TOffscreenCanvas with set_oncontextlost(
   self : Self,
-  oncontextlost : EventHandler,
+  oncontextlost : EventHandlerNonNull,
 ) -> Unit {
   offscreen_canvas_set_oncontextlost_ffi(
     TJsValue::to_js(self),
@@ -130,7 +130,7 @@ impl TOffscreenCanvas with set_oncontextlost(
 
 ///|
 /// [OffscreenCanvas.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextrestored)
-impl TOffscreenCanvas with oncontextrestored(self : Self) -> EventHandler {
+impl TOffscreenCanvas with oncontextrestored(self : Self) -> EventHandlerNonNull {
   offscreen_canvas_oncontextrestored_ffi(TJsValue::to_js(self))
 }
 
@@ -138,7 +138,7 @@ impl TOffscreenCanvas with oncontextrestored(self : Self) -> EventHandler {
 /// [OffscreenCanvas.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/oncontextrestored)
 impl TOffscreenCanvas with set_oncontextrestored(
   self : Self,
-  oncontextrestored : EventHandler,
+  oncontextrestored : EventHandlerNonNull,
 ) -> Unit {
   offscreen_canvas_set_oncontextrestored_ffi(
     TJsValue::to_js(self),

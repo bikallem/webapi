@@ -57,7 +57,7 @@ fn file_reader_error_ffi(obj : JsValue) -> DOMException {
 extern "js" fn file_reader_onloadstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadstart"
 
 ///|
-fn file_reader_onloadstart_ffi(obj : JsValue) -> EventHandler {
+fn file_reader_onloadstart_ffi(obj : JsValue) -> EventHandlerNonNull {
   file_reader_onloadstart_ffi_js(obj).unsafe_cast()
 }
 
@@ -71,7 +71,7 @@ extern "js" fn file_reader_set_onloadstart_ffi(
 extern "js" fn file_reader_onprogress_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onprogress"
 
 ///|
-fn file_reader_onprogress_ffi(obj : JsValue) -> EventHandler {
+fn file_reader_onprogress_ffi(obj : JsValue) -> EventHandlerNonNull {
   file_reader_onprogress_ffi_js(obj).unsafe_cast()
 }
 
@@ -85,7 +85,7 @@ extern "js" fn file_reader_set_onprogress_ffi(
 extern "js" fn file_reader_onload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onload"
 
 ///|
-fn file_reader_onload_ffi(obj : JsValue) -> EventHandler {
+fn file_reader_onload_ffi(obj : JsValue) -> EventHandlerNonNull {
   file_reader_onload_ffi_js(obj).unsafe_cast()
 }
 
@@ -99,7 +99,7 @@ extern "js" fn file_reader_set_onload_ffi(
 extern "js" fn file_reader_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
 
 ///|
-fn file_reader_onabort_ffi(obj : JsValue) -> EventHandler {
+fn file_reader_onabort_ffi(obj : JsValue) -> EventHandlerNonNull {
   file_reader_onabort_ffi_js(obj).unsafe_cast()
 }
 
@@ -113,7 +113,7 @@ extern "js" fn file_reader_set_onabort_ffi(
 extern "js" fn file_reader_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn file_reader_onerror_ffi(obj : JsValue) -> EventHandler {
+fn file_reader_onerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   file_reader_onerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -127,7 +127,7 @@ extern "js" fn file_reader_set_onerror_ffi(
 extern "js" fn file_reader_onloadend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadend"
 
 ///|
-fn file_reader_onloadend_ffi(obj : JsValue) -> EventHandler {
+fn file_reader_onloadend_ffi(obj : JsValue) -> EventHandlerNonNull {
   file_reader_onloadend_ffi_js(obj).unsafe_cast()
 }
 

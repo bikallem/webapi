@@ -6,8 +6,11 @@ fn performance_observer_entry_list_get_entries_ffi_wasm(
 ///|
 fn performance_observer_entry_list_get_entries_ffi(
   obj : JsValue,
-) -> PerformanceEntryList {
-  performance_observer_entry_list_get_entries_ffi_wasm(obj).unsafe_cast()
+) -> Array[PerformanceEntry] {
+  jsvalue_to_array(
+    performance_observer_entry_list_get_entries_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|
@@ -20,8 +23,11 @@ fn performance_observer_entry_list_get_entries_by_type_ffi_wasm(
 fn performance_observer_entry_list_get_entries_by_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList {
-  performance_observer_entry_list_get_entries_by_type_ffi_wasm(obj, type_).unsafe_cast()
+) -> Array[PerformanceEntry] {
+  jsvalue_to_array(
+    performance_observer_entry_list_get_entries_by_type_ffi_wasm(obj, type_),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|
@@ -36,6 +42,11 @@ fn performance_observer_entry_list_get_entries_by_name_ffi(
   obj : JsValue,
   name : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList {
-  performance_observer_entry_list_get_entries_by_name_ffi_wasm(obj, name, type_).unsafe_cast()
+) -> Array[PerformanceEntry] {
+  jsvalue_to_array(
+    performance_observer_entry_list_get_entries_by_name_ffi_wasm(
+      obj, name, type_,
+    ),
+    JsValue::unsafe_cast,
+  )
 }

@@ -5,7 +5,7 @@ fn clipboard_read_ffi_wasm(obj : JsValue, formats : JsValue) -> JsValue = "webap
 fn clipboard_read_ffi(
   obj : JsValue,
   formats : JsValue,
-) -> @js_async.Promise[ClipboardItems] {
+) -> @js_async.Promise[Array[ClipboardItem]] {
   clipboard_read_ffi_wasm(obj, formats).unsafe_cast()
 }
 

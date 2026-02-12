@@ -20,25 +20,25 @@ fn notification_request_permission_ffi(
 fn notification_max_actions_ffi() -> UInt = "webapi_Notification" "get_maxActions"
 
 ///|
-fn notification_onclick_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onclick"
+fn notification_onclick_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Notification" "get_onclick"
 
 ///|
 fn notification_set_onclick_ffi(obj : JsValue, onclick : JsValue) -> Unit = "webapi_Notification" "set_onclick"
 
 ///|
-fn notification_onshow_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onshow"
+fn notification_onshow_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Notification" "get_onshow"
 
 ///|
 fn notification_set_onshow_ffi(obj : JsValue, onshow : JsValue) -> Unit = "webapi_Notification" "set_onshow"
 
 ///|
-fn notification_onerror_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onerror"
+fn notification_onerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Notification" "get_onerror"
 
 ///|
 fn notification_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_Notification" "set_onerror"
 
 ///|
-fn notification_onclose_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onclose"
+fn notification_onclose_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Notification" "get_onclose"
 
 ///|
 fn notification_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_Notification" "set_onclose"
@@ -114,7 +114,7 @@ fn notification_badge_ffi(obj : JsValue) -> String {
 fn notification_vibrate_ffi(obj : JsValue) -> JsValue = "webapi_Notification" "get_vibrate"
 
 ///|
-fn notification_timestamp_ffi(obj : JsValue) -> EpochTimeStamp = "webapi_Notification" "get_timestamp"
+fn notification_timestamp_ffi(obj : JsValue) -> UInt64 = "webapi_Notification" "get_timestamp"
 
 ///|
 fn notification_renotify_ffi(obj : JsValue) -> Bool = "webapi_Notification" "get_renotify"

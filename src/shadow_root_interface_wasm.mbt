@@ -17,7 +17,7 @@ fn shadow_root_serializable_ffi(obj : JsValue) -> Bool = "webapi_ShadowRoot" "ge
 fn shadow_root_host_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot" "get_host"
 
 ///|
-fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandler = "webapi_ShadowRoot" "get_onslotchange"
+fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_ShadowRoot" "get_onslotchange"
 
 ///|
 fn shadow_root_set_onslotchange_ffi(

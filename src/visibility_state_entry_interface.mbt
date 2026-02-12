@@ -28,7 +28,7 @@ pub impl TPerformanceEntry for VisibilityStateEntry
 pub trait TVisibilityStateEntry: TPerformanceEntry {
   name(self : Self) -> String = _
   entry_type(self : Self) -> String = _
-  start_time(self : Self) -> DOMHighResTimeStamp = _
+  start_time(self : Self) -> Double = _
   duration(self : Self) -> UInt = _
 }
 
@@ -46,7 +46,7 @@ impl TVisibilityStateEntry with entry_type(self : Self) -> String {
 
 ///|
 /// [VisibilityStateEntry.startTime](https://developer.mozilla.org/en-US/docs/Web/API/VisibilityStateEntry/startTime)
-impl TVisibilityStateEntry with start_time(self : Self) -> DOMHighResTimeStamp {
+impl TVisibilityStateEntry with start_time(self : Self) -> Double {
   visibility_state_entry_start_time_ffi(TJsValue::to_js(self))
 }
 

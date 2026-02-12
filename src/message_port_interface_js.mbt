@@ -22,7 +22,7 @@ extern "js" fn message_port_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.clo
 extern "js" fn message_port_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
 
 ///|
-fn message_port_onclose_ffi(obj : JsValue) -> EventHandler {
+fn message_port_onclose_ffi(obj : JsValue) -> EventHandlerNonNull {
   message_port_onclose_ffi_js(obj).unsafe_cast()
 }
 
@@ -36,7 +36,7 @@ extern "js" fn message_port_set_onclose_ffi(
 extern "js" fn message_port_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
 
 ///|
-fn message_port_onmessage_ffi(obj : JsValue) -> EventHandler {
+fn message_port_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull {
   message_port_onmessage_ffi_js(obj).unsafe_cast()
 }
 
@@ -50,7 +50,7 @@ extern "js" fn message_port_set_onmessage_ffi(
 extern "js" fn message_port_onmessageerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessageerror"
 
 ///|
-fn message_port_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+fn message_port_onmessageerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   message_port_onmessageerror_ffi_js(obj).unsafe_cast()
 }
 

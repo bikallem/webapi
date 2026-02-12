@@ -29,12 +29,12 @@ pub trait TVisualViewport: TEventTarget {
   width(self : Self) -> Double = _
   height(self : Self) -> Double = _
   scale(self : Self) -> Double = _
-  onresize(self : Self) -> EventHandler = _
-  set_onresize(self : Self, onresize : EventHandler) -> Unit = _
-  onscroll(self : Self) -> EventHandler = _
-  set_onscroll(self : Self, onscroll : EventHandler) -> Unit = _
-  onscrollend(self : Self) -> EventHandler = _
-  set_onscrollend(self : Self, onscrollend : EventHandler) -> Unit = _
+  onresize(self : Self) -> EventHandlerNonNull = _
+  set_onresize(self : Self, onresize : EventHandlerNonNull) -> Unit = _
+  onscroll(self : Self) -> EventHandlerNonNull = _
+  set_onscroll(self : Self, onscroll : EventHandlerNonNull) -> Unit = _
+  onscrollend(self : Self) -> EventHandlerNonNull = _
+  set_onscrollend(self : Self, onscrollend : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -81,13 +81,16 @@ impl TVisualViewport with scale(self : Self) -> Double {
 
 ///|
 /// [VisualViewport.onresize](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onresize)
-impl TVisualViewport with onresize(self : Self) -> EventHandler {
+impl TVisualViewport with onresize(self : Self) -> EventHandlerNonNull {
   visual_viewport_onresize_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [VisualViewport.onresize](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onresize)
-impl TVisualViewport with set_onresize(self : Self, onresize : EventHandler) -> Unit {
+impl TVisualViewport with set_onresize(
+  self : Self,
+  onresize : EventHandlerNonNull,
+) -> Unit {
   visual_viewport_set_onresize_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onresize),
@@ -96,13 +99,16 @@ impl TVisualViewport with set_onresize(self : Self, onresize : EventHandler) -> 
 
 ///|
 /// [VisualViewport.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onscroll)
-impl TVisualViewport with onscroll(self : Self) -> EventHandler {
+impl TVisualViewport with onscroll(self : Self) -> EventHandlerNonNull {
   visual_viewport_onscroll_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [VisualViewport.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onscroll)
-impl TVisualViewport with set_onscroll(self : Self, onscroll : EventHandler) -> Unit {
+impl TVisualViewport with set_onscroll(
+  self : Self,
+  onscroll : EventHandlerNonNull,
+) -> Unit {
   visual_viewport_set_onscroll_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onscroll),
@@ -111,7 +117,7 @@ impl TVisualViewport with set_onscroll(self : Self, onscroll : EventHandler) -> 
 
 ///|
 /// [VisualViewport.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onscrollend)
-impl TVisualViewport with onscrollend(self : Self) -> EventHandler {
+impl TVisualViewport with onscrollend(self : Self) -> EventHandlerNonNull {
   visual_viewport_onscrollend_ffi(TJsValue::to_js(self))
 }
 
@@ -119,7 +125,7 @@ impl TVisualViewport with onscrollend(self : Self) -> EventHandler {
 /// [VisualViewport.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onscrollend)
 impl TVisualViewport with set_onscrollend(
   self : Self,
-  onscrollend : EventHandler,
+  onscrollend : EventHandlerNonNull,
 ) -> Unit {
   visual_viewport_set_onscrollend_ffi(
     TJsValue::to_js(self),

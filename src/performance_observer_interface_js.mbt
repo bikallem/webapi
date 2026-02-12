@@ -18,7 +18,9 @@ extern "js" fn performance_observer_take_records_ffi_js(
 ) -> JsValue = "(obj) => obj.takeRecords()"
 
 ///|
-fn performance_observer_take_records_ffi(obj : JsValue) -> PerformanceEntryList {
+fn performance_observer_take_records_ffi(
+  obj : JsValue,
+) -> Array[PerformanceEntry] {
   performance_observer_take_records_ffi_js(obj).unsafe_cast()
 }
 

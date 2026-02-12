@@ -4,7 +4,7 @@ fn intersection_observer_entry_new_ffi(
 ) -> IntersectionObserverEntry = "webapi_IntersectionObserverEntry" "new"
 
 ///|
-fn intersection_observer_entry_time_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_IntersectionObserverEntry" "get_time"
+fn intersection_observer_entry_time_ffi(obj : JsValue) -> Double = "webapi_IntersectionObserverEntry" "get_time"
 
 ///|
 fn intersection_observer_entry_root_bounds_ffi(

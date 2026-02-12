@@ -685,7 +685,7 @@ fn document_visibility_state_ffi(obj : JsValue) -> DocumentVisibilityState {
 extern "js" fn document_onreadystatechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onreadystatechange"
 
 ///|
-fn document_onreadystatechange_ffi(obj : JsValue) -> EventHandler {
+fn document_onreadystatechange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onreadystatechange_ffi_js(obj).unsafe_cast()
 }
 
@@ -699,7 +699,7 @@ extern "js" fn document_set_onreadystatechange_ffi(
 extern "js" fn document_onvisibilitychange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onvisibilitychange"
 
 ///|
-fn document_onvisibilitychange_ffi(obj : JsValue) -> EventHandler {
+fn document_onvisibilitychange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onvisibilitychange_ffi_js(obj).unsafe_cast()
 }
 
@@ -879,7 +879,7 @@ fn document_exit_fullscreen_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
 extern "js" fn document_onfullscreenchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenchange"
 
 ///|
-fn document_onfullscreenchange_ffi(obj : JsValue) -> EventHandler {
+fn document_onfullscreenchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onfullscreenchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -893,7 +893,7 @@ extern "js" fn document_set_onfullscreenchange_ffi(
 extern "js" fn document_onfullscreenerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenerror"
 
 ///|
-fn document_onfullscreenerror_ffi(obj : JsValue) -> EventHandler {
+fn document_onfullscreenerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onfullscreenerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -1089,7 +1089,7 @@ fn document_evaluate_ffi(
 extern "js" fn document_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
 
 ///|
-fn document_onabort_ffi(obj : JsValue) -> EventHandler {
+fn document_onabort_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onabort_ffi_js(obj).unsafe_cast()
 }
 
@@ -1103,7 +1103,7 @@ extern "js" fn document_set_onabort_ffi(
 extern "js" fn document_onauxclick_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onauxclick"
 
 ///|
-fn document_onauxclick_ffi(obj : JsValue) -> EventHandler {
+fn document_onauxclick_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onauxclick_ffi_js(obj).unsafe_cast()
 }
 
@@ -1117,7 +1117,7 @@ extern "js" fn document_set_onauxclick_ffi(
 extern "js" fn document_onbeforeinput_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforeinput"
 
 ///|
-fn document_onbeforeinput_ffi(obj : JsValue) -> EventHandler {
+fn document_onbeforeinput_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onbeforeinput_ffi_js(obj).unsafe_cast()
 }
 
@@ -1131,7 +1131,7 @@ extern "js" fn document_set_onbeforeinput_ffi(
 extern "js" fn document_onbeforematch_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforematch"
 
 ///|
-fn document_onbeforematch_ffi(obj : JsValue) -> EventHandler {
+fn document_onbeforematch_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onbeforematch_ffi_js(obj).unsafe_cast()
 }
 
@@ -1145,7 +1145,7 @@ extern "js" fn document_set_onbeforematch_ffi(
 extern "js" fn document_onbeforetoggle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforetoggle"
 
 ///|
-fn document_onbeforetoggle_ffi(obj : JsValue) -> EventHandler {
+fn document_onbeforetoggle_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onbeforetoggle_ffi_js(obj).unsafe_cast()
 }
 
@@ -1159,7 +1159,7 @@ extern "js" fn document_set_onbeforetoggle_ffi(
 extern "js" fn document_onblur_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onblur"
 
 ///|
-fn document_onblur_ffi(obj : JsValue) -> EventHandler {
+fn document_onblur_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onblur_ffi_js(obj).unsafe_cast()
 }
 
@@ -1170,7 +1170,7 @@ extern "js" fn document_set_onblur_ffi(obj : JsValue, onblur : JsValue) -> Unit 
 extern "js" fn document_oncancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncancel"
 
 ///|
-fn document_oncancel_ffi(obj : JsValue) -> EventHandler {
+fn document_oncancel_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncancel_ffi_js(obj).unsafe_cast()
 }
 
@@ -1184,7 +1184,7 @@ extern "js" fn document_set_oncancel_ffi(
 extern "js" fn document_oncanplay_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncanplay"
 
 ///|
-fn document_oncanplay_ffi(obj : JsValue) -> EventHandler {
+fn document_oncanplay_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncanplay_ffi_js(obj).unsafe_cast()
 }
 
@@ -1198,7 +1198,7 @@ extern "js" fn document_set_oncanplay_ffi(
 extern "js" fn document_oncanplaythrough_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncanplaythrough"
 
 ///|
-fn document_oncanplaythrough_ffi(obj : JsValue) -> EventHandler {
+fn document_oncanplaythrough_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncanplaythrough_ffi_js(obj).unsafe_cast()
 }
 
@@ -1212,7 +1212,7 @@ extern "js" fn document_set_oncanplaythrough_ffi(
 extern "js" fn document_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
 
 ///|
-fn document_onchange_ffi(obj : JsValue) -> EventHandler {
+fn document_onchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -1226,7 +1226,7 @@ extern "js" fn document_set_onchange_ffi(
 extern "js" fn document_onclick_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclick"
 
 ///|
-fn document_onclick_ffi(obj : JsValue) -> EventHandler {
+fn document_onclick_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onclick_ffi_js(obj).unsafe_cast()
 }
 
@@ -1240,7 +1240,7 @@ extern "js" fn document_set_onclick_ffi(
 extern "js" fn document_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
 
 ///|
-fn document_onclose_ffi(obj : JsValue) -> EventHandler {
+fn document_onclose_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onclose_ffi_js(obj).unsafe_cast()
 }
 
@@ -1254,7 +1254,7 @@ extern "js" fn document_set_onclose_ffi(
 extern "js" fn document_oncommand_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncommand"
 
 ///|
-fn document_oncommand_ffi(obj : JsValue) -> EventHandler {
+fn document_oncommand_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncommand_ffi_js(obj).unsafe_cast()
 }
 
@@ -1268,7 +1268,7 @@ extern "js" fn document_set_oncommand_ffi(
 extern "js" fn document_oncontextlost_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextlost"
 
 ///|
-fn document_oncontextlost_ffi(obj : JsValue) -> EventHandler {
+fn document_oncontextlost_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncontextlost_ffi_js(obj).unsafe_cast()
 }
 
@@ -1282,7 +1282,7 @@ extern "js" fn document_set_oncontextlost_ffi(
 extern "js" fn document_oncontextmenu_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextmenu"
 
 ///|
-fn document_oncontextmenu_ffi(obj : JsValue) -> EventHandler {
+fn document_oncontextmenu_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncontextmenu_ffi_js(obj).unsafe_cast()
 }
 
@@ -1296,7 +1296,7 @@ extern "js" fn document_set_oncontextmenu_ffi(
 extern "js" fn document_oncontextrestored_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextrestored"
 
 ///|
-fn document_oncontextrestored_ffi(obj : JsValue) -> EventHandler {
+fn document_oncontextrestored_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncontextrestored_ffi_js(obj).unsafe_cast()
 }
 
@@ -1310,7 +1310,7 @@ extern "js" fn document_set_oncontextrestored_ffi(
 extern "js" fn document_oncopy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncopy"
 
 ///|
-fn document_oncopy_ffi(obj : JsValue) -> EventHandler {
+fn document_oncopy_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncopy_ffi_js(obj).unsafe_cast()
 }
 
@@ -1321,7 +1321,7 @@ extern "js" fn document_set_oncopy_ffi(obj : JsValue, oncopy : JsValue) -> Unit 
 extern "js" fn document_oncuechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncuechange"
 
 ///|
-fn document_oncuechange_ffi(obj : JsValue) -> EventHandler {
+fn document_oncuechange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncuechange_ffi_js(obj).unsafe_cast()
 }
 
@@ -1335,7 +1335,7 @@ extern "js" fn document_set_oncuechange_ffi(
 extern "js" fn document_oncut_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncut"
 
 ///|
-fn document_oncut_ffi(obj : JsValue) -> EventHandler {
+fn document_oncut_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oncut_ffi_js(obj).unsafe_cast()
 }
 
@@ -1346,7 +1346,7 @@ extern "js" fn document_set_oncut_ffi(obj : JsValue, oncut : JsValue) -> Unit = 
 extern "js" fn document_ondblclick_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondblclick"
 
 ///|
-fn document_ondblclick_ffi(obj : JsValue) -> EventHandler {
+fn document_ondblclick_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondblclick_ffi_js(obj).unsafe_cast()
 }
 
@@ -1360,7 +1360,7 @@ extern "js" fn document_set_ondblclick_ffi(
 extern "js" fn document_ondrag_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondrag"
 
 ///|
-fn document_ondrag_ffi(obj : JsValue) -> EventHandler {
+fn document_ondrag_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondrag_ffi_js(obj).unsafe_cast()
 }
 
@@ -1371,7 +1371,7 @@ extern "js" fn document_set_ondrag_ffi(obj : JsValue, ondrag : JsValue) -> Unit 
 extern "js" fn document_ondragend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragend"
 
 ///|
-fn document_ondragend_ffi(obj : JsValue) -> EventHandler {
+fn document_ondragend_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondragend_ffi_js(obj).unsafe_cast()
 }
 
@@ -1385,7 +1385,7 @@ extern "js" fn document_set_ondragend_ffi(
 extern "js" fn document_ondragenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragenter"
 
 ///|
-fn document_ondragenter_ffi(obj : JsValue) -> EventHandler {
+fn document_ondragenter_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondragenter_ffi_js(obj).unsafe_cast()
 }
 
@@ -1399,7 +1399,7 @@ extern "js" fn document_set_ondragenter_ffi(
 extern "js" fn document_ondragleave_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragleave"
 
 ///|
-fn document_ondragleave_ffi(obj : JsValue) -> EventHandler {
+fn document_ondragleave_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondragleave_ffi_js(obj).unsafe_cast()
 }
 
@@ -1413,7 +1413,7 @@ extern "js" fn document_set_ondragleave_ffi(
 extern "js" fn document_ondragover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragover"
 
 ///|
-fn document_ondragover_ffi(obj : JsValue) -> EventHandler {
+fn document_ondragover_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondragover_ffi_js(obj).unsafe_cast()
 }
 
@@ -1427,7 +1427,7 @@ extern "js" fn document_set_ondragover_ffi(
 extern "js" fn document_ondragstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragstart"
 
 ///|
-fn document_ondragstart_ffi(obj : JsValue) -> EventHandler {
+fn document_ondragstart_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondragstart_ffi_js(obj).unsafe_cast()
 }
 
@@ -1441,7 +1441,7 @@ extern "js" fn document_set_ondragstart_ffi(
 extern "js" fn document_ondrop_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondrop"
 
 ///|
-fn document_ondrop_ffi(obj : JsValue) -> EventHandler {
+fn document_ondrop_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondrop_ffi_js(obj).unsafe_cast()
 }
 
@@ -1452,7 +1452,7 @@ extern "js" fn document_set_ondrop_ffi(obj : JsValue, ondrop : JsValue) -> Unit 
 extern "js" fn document_ondurationchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondurationchange"
 
 ///|
-fn document_ondurationchange_ffi(obj : JsValue) -> EventHandler {
+fn document_ondurationchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ondurationchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -1466,7 +1466,7 @@ extern "js" fn document_set_ondurationchange_ffi(
 extern "js" fn document_onemptied_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onemptied"
 
 ///|
-fn document_onemptied_ffi(obj : JsValue) -> EventHandler {
+fn document_onemptied_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onemptied_ffi_js(obj).unsafe_cast()
 }
 
@@ -1480,7 +1480,7 @@ extern "js" fn document_set_onemptied_ffi(
 extern "js" fn document_onended_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onended"
 
 ///|
-fn document_onended_ffi(obj : JsValue) -> EventHandler {
+fn document_onended_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onended_ffi_js(obj).unsafe_cast()
 }
 
@@ -1494,7 +1494,7 @@ extern "js" fn document_set_onended_ffi(
 extern "js" fn document_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn document_onerror_ffi(obj : JsValue) -> OnErrorEventHandler {
+fn document_onerror_ffi(obj : JsValue) -> OnErrorEventHandlerNonNull {
   document_onerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -1508,7 +1508,7 @@ extern "js" fn document_set_onerror_ffi(
 extern "js" fn document_onfocus_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfocus"
 
 ///|
-fn document_onfocus_ffi(obj : JsValue) -> EventHandler {
+fn document_onfocus_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onfocus_ffi_js(obj).unsafe_cast()
 }
 
@@ -1522,7 +1522,7 @@ extern "js" fn document_set_onfocus_ffi(
 extern "js" fn document_onformdata_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onformdata"
 
 ///|
-fn document_onformdata_ffi(obj : JsValue) -> EventHandler {
+fn document_onformdata_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onformdata_ffi_js(obj).unsafe_cast()
 }
 
@@ -1536,7 +1536,7 @@ extern "js" fn document_set_onformdata_ffi(
 extern "js" fn document_oninput_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oninput"
 
 ///|
-fn document_oninput_ffi(obj : JsValue) -> EventHandler {
+fn document_oninput_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oninput_ffi_js(obj).unsafe_cast()
 }
 
@@ -1550,7 +1550,7 @@ extern "js" fn document_set_oninput_ffi(
 extern "js" fn document_oninvalid_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oninvalid"
 
 ///|
-fn document_oninvalid_ffi(obj : JsValue) -> EventHandler {
+fn document_oninvalid_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_oninvalid_ffi_js(obj).unsafe_cast()
 }
 
@@ -1564,7 +1564,7 @@ extern "js" fn document_set_oninvalid_ffi(
 extern "js" fn document_onkeydown_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onkeydown"
 
 ///|
-fn document_onkeydown_ffi(obj : JsValue) -> EventHandler {
+fn document_onkeydown_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onkeydown_ffi_js(obj).unsafe_cast()
 }
 
@@ -1578,7 +1578,7 @@ extern "js" fn document_set_onkeydown_ffi(
 extern "js" fn document_onkeypress_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onkeypress"
 
 ///|
-fn document_onkeypress_ffi(obj : JsValue) -> EventHandler {
+fn document_onkeypress_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onkeypress_ffi_js(obj).unsafe_cast()
 }
 
@@ -1592,7 +1592,7 @@ extern "js" fn document_set_onkeypress_ffi(
 extern "js" fn document_onkeyup_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onkeyup"
 
 ///|
-fn document_onkeyup_ffi(obj : JsValue) -> EventHandler {
+fn document_onkeyup_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onkeyup_ffi_js(obj).unsafe_cast()
 }
 
@@ -1606,7 +1606,7 @@ extern "js" fn document_set_onkeyup_ffi(
 extern "js" fn document_onload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onload"
 
 ///|
-fn document_onload_ffi(obj : JsValue) -> EventHandler {
+fn document_onload_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onload_ffi_js(obj).unsafe_cast()
 }
 
@@ -1617,7 +1617,7 @@ extern "js" fn document_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit 
 extern "js" fn document_onloadeddata_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadeddata"
 
 ///|
-fn document_onloadeddata_ffi(obj : JsValue) -> EventHandler {
+fn document_onloadeddata_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onloadeddata_ffi_js(obj).unsafe_cast()
 }
 
@@ -1631,7 +1631,7 @@ extern "js" fn document_set_onloadeddata_ffi(
 extern "js" fn document_onloadedmetadata_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadedmetadata"
 
 ///|
-fn document_onloadedmetadata_ffi(obj : JsValue) -> EventHandler {
+fn document_onloadedmetadata_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onloadedmetadata_ffi_js(obj).unsafe_cast()
 }
 
@@ -1645,7 +1645,7 @@ extern "js" fn document_set_onloadedmetadata_ffi(
 extern "js" fn document_onloadstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadstart"
 
 ///|
-fn document_onloadstart_ffi(obj : JsValue) -> EventHandler {
+fn document_onloadstart_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onloadstart_ffi_js(obj).unsafe_cast()
 }
 
@@ -1659,7 +1659,7 @@ extern "js" fn document_set_onloadstart_ffi(
 extern "js" fn document_onmousedown_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmousedown"
 
 ///|
-fn document_onmousedown_ffi(obj : JsValue) -> EventHandler {
+fn document_onmousedown_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onmousedown_ffi_js(obj).unsafe_cast()
 }
 
@@ -1673,7 +1673,7 @@ extern "js" fn document_set_onmousedown_ffi(
 extern "js" fn document_onmouseenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseenter"
 
 ///|
-fn document_onmouseenter_ffi(obj : JsValue) -> EventHandler {
+fn document_onmouseenter_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onmouseenter_ffi_js(obj).unsafe_cast()
 }
 
@@ -1687,7 +1687,7 @@ extern "js" fn document_set_onmouseenter_ffi(
 extern "js" fn document_onmouseleave_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseleave"
 
 ///|
-fn document_onmouseleave_ffi(obj : JsValue) -> EventHandler {
+fn document_onmouseleave_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onmouseleave_ffi_js(obj).unsafe_cast()
 }
 
@@ -1701,7 +1701,7 @@ extern "js" fn document_set_onmouseleave_ffi(
 extern "js" fn document_onmousemove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmousemove"
 
 ///|
-fn document_onmousemove_ffi(obj : JsValue) -> EventHandler {
+fn document_onmousemove_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onmousemove_ffi_js(obj).unsafe_cast()
 }
 
@@ -1715,7 +1715,7 @@ extern "js" fn document_set_onmousemove_ffi(
 extern "js" fn document_onmouseout_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseout"
 
 ///|
-fn document_onmouseout_ffi(obj : JsValue) -> EventHandler {
+fn document_onmouseout_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onmouseout_ffi_js(obj).unsafe_cast()
 }
 
@@ -1729,7 +1729,7 @@ extern "js" fn document_set_onmouseout_ffi(
 extern "js" fn document_onmouseover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseover"
 
 ///|
-fn document_onmouseover_ffi(obj : JsValue) -> EventHandler {
+fn document_onmouseover_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onmouseover_ffi_js(obj).unsafe_cast()
 }
 
@@ -1743,7 +1743,7 @@ extern "js" fn document_set_onmouseover_ffi(
 extern "js" fn document_onmouseup_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseup"
 
 ///|
-fn document_onmouseup_ffi(obj : JsValue) -> EventHandler {
+fn document_onmouseup_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onmouseup_ffi_js(obj).unsafe_cast()
 }
 
@@ -1757,7 +1757,7 @@ extern "js" fn document_set_onmouseup_ffi(
 extern "js" fn document_onpaste_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpaste"
 
 ///|
-fn document_onpaste_ffi(obj : JsValue) -> EventHandler {
+fn document_onpaste_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpaste_ffi_js(obj).unsafe_cast()
 }
 
@@ -1771,7 +1771,7 @@ extern "js" fn document_set_onpaste_ffi(
 extern "js" fn document_onpause_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpause"
 
 ///|
-fn document_onpause_ffi(obj : JsValue) -> EventHandler {
+fn document_onpause_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpause_ffi_js(obj).unsafe_cast()
 }
 
@@ -1785,7 +1785,7 @@ extern "js" fn document_set_onpause_ffi(
 extern "js" fn document_onplay_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onplay"
 
 ///|
-fn document_onplay_ffi(obj : JsValue) -> EventHandler {
+fn document_onplay_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onplay_ffi_js(obj).unsafe_cast()
 }
 
@@ -1796,7 +1796,7 @@ extern "js" fn document_set_onplay_ffi(obj : JsValue, onplay : JsValue) -> Unit 
 extern "js" fn document_onplaying_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onplaying"
 
 ///|
-fn document_onplaying_ffi(obj : JsValue) -> EventHandler {
+fn document_onplaying_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onplaying_ffi_js(obj).unsafe_cast()
 }
 
@@ -1810,7 +1810,7 @@ extern "js" fn document_set_onplaying_ffi(
 extern "js" fn document_onprogress_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onprogress"
 
 ///|
-fn document_onprogress_ffi(obj : JsValue) -> EventHandler {
+fn document_onprogress_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onprogress_ffi_js(obj).unsafe_cast()
 }
 
@@ -1824,7 +1824,7 @@ extern "js" fn document_set_onprogress_ffi(
 extern "js" fn document_onratechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onratechange"
 
 ///|
-fn document_onratechange_ffi(obj : JsValue) -> EventHandler {
+fn document_onratechange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onratechange_ffi_js(obj).unsafe_cast()
 }
 
@@ -1838,7 +1838,7 @@ extern "js" fn document_set_onratechange_ffi(
 extern "js" fn document_onreset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onreset"
 
 ///|
-fn document_onreset_ffi(obj : JsValue) -> EventHandler {
+fn document_onreset_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onreset_ffi_js(obj).unsafe_cast()
 }
 
@@ -1852,7 +1852,7 @@ extern "js" fn document_set_onreset_ffi(
 extern "js" fn document_onresize_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onresize"
 
 ///|
-fn document_onresize_ffi(obj : JsValue) -> EventHandler {
+fn document_onresize_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onresize_ffi_js(obj).unsafe_cast()
 }
 
@@ -1866,7 +1866,7 @@ extern "js" fn document_set_onresize_ffi(
 extern "js" fn document_onscroll_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscroll"
 
 ///|
-fn document_onscroll_ffi(obj : JsValue) -> EventHandler {
+fn document_onscroll_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onscroll_ffi_js(obj).unsafe_cast()
 }
 
@@ -1880,7 +1880,7 @@ extern "js" fn document_set_onscroll_ffi(
 extern "js" fn document_onscrollend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscrollend"
 
 ///|
-fn document_onscrollend_ffi(obj : JsValue) -> EventHandler {
+fn document_onscrollend_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onscrollend_ffi_js(obj).unsafe_cast()
 }
 
@@ -1896,7 +1896,7 @@ extern "js" fn document_onsecuritypolicyviolation_ffi_js(
 ) -> JsValue = "(obj) => obj.onsecuritypolicyviolation"
 
 ///|
-fn document_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandler {
+fn document_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onsecuritypolicyviolation_ffi_js(obj).unsafe_cast()
 }
 
@@ -1910,7 +1910,7 @@ extern "js" fn document_set_onsecuritypolicyviolation_ffi(
 extern "js" fn document_onseeked_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onseeked"
 
 ///|
-fn document_onseeked_ffi(obj : JsValue) -> EventHandler {
+fn document_onseeked_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onseeked_ffi_js(obj).unsafe_cast()
 }
 
@@ -1924,7 +1924,7 @@ extern "js" fn document_set_onseeked_ffi(
 extern "js" fn document_onseeking_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onseeking"
 
 ///|
-fn document_onseeking_ffi(obj : JsValue) -> EventHandler {
+fn document_onseeking_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onseeking_ffi_js(obj).unsafe_cast()
 }
 
@@ -1938,7 +1938,7 @@ extern "js" fn document_set_onseeking_ffi(
 extern "js" fn document_onselect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselect"
 
 ///|
-fn document_onselect_ffi(obj : JsValue) -> EventHandler {
+fn document_onselect_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onselect_ffi_js(obj).unsafe_cast()
 }
 
@@ -1952,7 +1952,7 @@ extern "js" fn document_set_onselect_ffi(
 extern "js" fn document_onslotchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onslotchange"
 
 ///|
-fn document_onslotchange_ffi(obj : JsValue) -> EventHandler {
+fn document_onslotchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onslotchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -1966,7 +1966,7 @@ extern "js" fn document_set_onslotchange_ffi(
 extern "js" fn document_onstalled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onstalled"
 
 ///|
-fn document_onstalled_ffi(obj : JsValue) -> EventHandler {
+fn document_onstalled_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onstalled_ffi_js(obj).unsafe_cast()
 }
 
@@ -1980,7 +1980,7 @@ extern "js" fn document_set_onstalled_ffi(
 extern "js" fn document_onsubmit_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onsubmit"
 
 ///|
-fn document_onsubmit_ffi(obj : JsValue) -> EventHandler {
+fn document_onsubmit_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onsubmit_ffi_js(obj).unsafe_cast()
 }
 
@@ -1994,7 +1994,7 @@ extern "js" fn document_set_onsubmit_ffi(
 extern "js" fn document_onsuspend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onsuspend"
 
 ///|
-fn document_onsuspend_ffi(obj : JsValue) -> EventHandler {
+fn document_onsuspend_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onsuspend_ffi_js(obj).unsafe_cast()
 }
 
@@ -2008,7 +2008,7 @@ extern "js" fn document_set_onsuspend_ffi(
 extern "js" fn document_ontimeupdate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontimeupdate"
 
 ///|
-fn document_ontimeupdate_ffi(obj : JsValue) -> EventHandler {
+fn document_ontimeupdate_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ontimeupdate_ffi_js(obj).unsafe_cast()
 }
 
@@ -2022,7 +2022,7 @@ extern "js" fn document_set_ontimeupdate_ffi(
 extern "js" fn document_ontoggle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontoggle"
 
 ///|
-fn document_ontoggle_ffi(obj : JsValue) -> EventHandler {
+fn document_ontoggle_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ontoggle_ffi_js(obj).unsafe_cast()
 }
 
@@ -2036,7 +2036,7 @@ extern "js" fn document_set_ontoggle_ffi(
 extern "js" fn document_onvolumechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onvolumechange"
 
 ///|
-fn document_onvolumechange_ffi(obj : JsValue) -> EventHandler {
+fn document_onvolumechange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onvolumechange_ffi_js(obj).unsafe_cast()
 }
 
@@ -2050,7 +2050,7 @@ extern "js" fn document_set_onvolumechange_ffi(
 extern "js" fn document_onwaiting_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwaiting"
 
 ///|
-fn document_onwaiting_ffi(obj : JsValue) -> EventHandler {
+fn document_onwaiting_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onwaiting_ffi_js(obj).unsafe_cast()
 }
 
@@ -2064,7 +2064,7 @@ extern "js" fn document_set_onwaiting_ffi(
 extern "js" fn document_onwebkitanimationend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwebkitanimationend"
 
 ///|
-fn document_onwebkitanimationend_ffi(obj : JsValue) -> EventHandler {
+fn document_onwebkitanimationend_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onwebkitanimationend_ffi_js(obj).unsafe_cast()
 }
 
@@ -2080,7 +2080,9 @@ extern "js" fn document_onwebkitanimationiteration_ffi_js(
 ) -> JsValue = "(obj) => obj.onwebkitanimationiteration"
 
 ///|
-fn document_onwebkitanimationiteration_ffi(obj : JsValue) -> EventHandler {
+fn document_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   document_onwebkitanimationiteration_ffi_js(obj).unsafe_cast()
 }
 
@@ -2094,7 +2096,7 @@ extern "js" fn document_set_onwebkitanimationiteration_ffi(
 extern "js" fn document_onwebkitanimationstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwebkitanimationstart"
 
 ///|
-fn document_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandler {
+fn document_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onwebkitanimationstart_ffi_js(obj).unsafe_cast()
 }
 
@@ -2108,7 +2110,7 @@ extern "js" fn document_set_onwebkitanimationstart_ffi(
 extern "js" fn document_onwebkittransitionend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwebkittransitionend"
 
 ///|
-fn document_onwebkittransitionend_ffi(obj : JsValue) -> EventHandler {
+fn document_onwebkittransitionend_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onwebkittransitionend_ffi_js(obj).unsafe_cast()
 }
 
@@ -2122,7 +2124,7 @@ extern "js" fn document_set_onwebkittransitionend_ffi(
 extern "js" fn document_onwheel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwheel"
 
 ///|
-fn document_onwheel_ffi(obj : JsValue) -> EventHandler {
+fn document_onwheel_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onwheel_ffi_js(obj).unsafe_cast()
 }
 
@@ -2136,7 +2138,7 @@ extern "js" fn document_set_onwheel_ffi(
 extern "js" fn document_ontouchstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchstart"
 
 ///|
-fn document_ontouchstart_ffi(obj : JsValue) -> EventHandler {
+fn document_ontouchstart_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ontouchstart_ffi_js(obj).unsafe_cast()
 }
 
@@ -2150,7 +2152,7 @@ extern "js" fn document_set_ontouchstart_ffi(
 extern "js" fn document_ontouchend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchend"
 
 ///|
-fn document_ontouchend_ffi(obj : JsValue) -> EventHandler {
+fn document_ontouchend_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ontouchend_ffi_js(obj).unsafe_cast()
 }
 
@@ -2164,7 +2166,7 @@ extern "js" fn document_set_ontouchend_ffi(
 extern "js" fn document_ontouchmove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchmove"
 
 ///|
-fn document_ontouchmove_ffi(obj : JsValue) -> EventHandler {
+fn document_ontouchmove_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ontouchmove_ffi_js(obj).unsafe_cast()
 }
 
@@ -2178,7 +2180,7 @@ extern "js" fn document_set_ontouchmove_ffi(
 extern "js" fn document_ontouchcancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchcancel"
 
 ///|
-fn document_ontouchcancel_ffi(obj : JsValue) -> EventHandler {
+fn document_ontouchcancel_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ontouchcancel_ffi_js(obj).unsafe_cast()
 }
 
@@ -2192,7 +2194,7 @@ extern "js" fn document_set_ontouchcancel_ffi(
 extern "js" fn document_onpointerover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerover"
 
 ///|
-fn document_onpointerover_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointerover_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointerover_ffi_js(obj).unsafe_cast()
 }
 
@@ -2206,7 +2208,7 @@ extern "js" fn document_set_onpointerover_ffi(
 extern "js" fn document_onpointerenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerenter"
 
 ///|
-fn document_onpointerenter_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointerenter_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointerenter_ffi_js(obj).unsafe_cast()
 }
 
@@ -2220,7 +2222,7 @@ extern "js" fn document_set_onpointerenter_ffi(
 extern "js" fn document_onpointerdown_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerdown"
 
 ///|
-fn document_onpointerdown_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointerdown_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointerdown_ffi_js(obj).unsafe_cast()
 }
 
@@ -2234,7 +2236,7 @@ extern "js" fn document_set_onpointerdown_ffi(
 extern "js" fn document_onpointermove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointermove"
 
 ///|
-fn document_onpointermove_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointermove_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointermove_ffi_js(obj).unsafe_cast()
 }
 
@@ -2248,7 +2250,7 @@ extern "js" fn document_set_onpointermove_ffi(
 extern "js" fn document_onpointerrawupdate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerrawupdate"
 
 ///|
-fn document_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointerrawupdate_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointerrawupdate_ffi_js(obj).unsafe_cast()
 }
 
@@ -2262,7 +2264,7 @@ extern "js" fn document_set_onpointerrawupdate_ffi(
 extern "js" fn document_onpointerup_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerup"
 
 ///|
-fn document_onpointerup_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointerup_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointerup_ffi_js(obj).unsafe_cast()
 }
 
@@ -2276,7 +2278,7 @@ extern "js" fn document_set_onpointerup_ffi(
 extern "js" fn document_onpointercancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointercancel"
 
 ///|
-fn document_onpointercancel_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointercancel_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointercancel_ffi_js(obj).unsafe_cast()
 }
 
@@ -2290,7 +2292,7 @@ extern "js" fn document_set_onpointercancel_ffi(
 extern "js" fn document_onpointerout_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerout"
 
 ///|
-fn document_onpointerout_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointerout_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointerout_ffi_js(obj).unsafe_cast()
 }
 
@@ -2304,7 +2306,7 @@ extern "js" fn document_set_onpointerout_ffi(
 extern "js" fn document_onpointerleave_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerleave"
 
 ///|
-fn document_onpointerleave_ffi(obj : JsValue) -> EventHandler {
+fn document_onpointerleave_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onpointerleave_ffi_js(obj).unsafe_cast()
 }
 
@@ -2318,7 +2320,7 @@ extern "js" fn document_set_onpointerleave_ffi(
 extern "js" fn document_ongotpointercapture_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ongotpointercapture"
 
 ///|
-fn document_ongotpointercapture_ffi(obj : JsValue) -> EventHandler {
+fn document_ongotpointercapture_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_ongotpointercapture_ffi_js(obj).unsafe_cast()
 }
 
@@ -2332,7 +2334,7 @@ extern "js" fn document_set_ongotpointercapture_ffi(
 extern "js" fn document_onlostpointercapture_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onlostpointercapture"
 
 ///|
-fn document_onlostpointercapture_ffi(obj : JsValue) -> EventHandler {
+fn document_onlostpointercapture_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onlostpointercapture_ffi_js(obj).unsafe_cast()
 }
 
@@ -2346,7 +2348,7 @@ extern "js" fn document_set_onlostpointercapture_ffi(
 extern "js" fn document_onselectstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectstart"
 
 ///|
-fn document_onselectstart_ffi(obj : JsValue) -> EventHandler {
+fn document_onselectstart_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onselectstart_ffi_js(obj).unsafe_cast()
 }
 
@@ -2360,7 +2362,7 @@ extern "js" fn document_set_onselectstart_ffi(
 extern "js" fn document_onselectionchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectionchange"
 
 ///|
-fn document_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+fn document_onselectionchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   document_onselectionchange_ffi_js(obj).unsafe_cast()
 }
 

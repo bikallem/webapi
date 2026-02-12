@@ -10,7 +10,9 @@ fn shared_worker_global_scope_name_ffi(obj : JsValue) -> String {
 fn shared_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "webapi_SharedWorkerGlobalScope" "close"
 
 ///|
-fn shared_worker_global_scope_onconnect_ffi(obj : JsValue) -> EventHandler = "webapi_SharedWorkerGlobalScope" "get_onconnect"
+fn shared_worker_global_scope_onconnect_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_SharedWorkerGlobalScope" "get_onconnect"
 
 ///|
 fn shared_worker_global_scope_set_onconnect_ffi(

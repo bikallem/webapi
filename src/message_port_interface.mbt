@@ -30,12 +30,12 @@ pub trait TMessagePort: TEventTarget {
   ) -> Unit = _
   start(self : Self) -> Unit = _
   close(self : Self) -> Unit = _
-  onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
-  onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
-  onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  onclose(self : Self) -> EventHandlerNonNull = _
+  set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit = _
+  onmessage(self : Self) -> EventHandlerNonNull = _
+  set_onmessage(self : Self, onmessage : EventHandlerNonNull) -> Unit = _
+  onmessageerror(self : Self) -> EventHandlerNonNull = _
+  set_onmessageerror(self : Self, onmessageerror : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -80,25 +80,28 @@ impl TMessagePort with close(self : Self) -> Unit {
 
 ///|
 /// [MessagePort.onclose](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onclose)
-impl TMessagePort with onclose(self : Self) -> EventHandler {
+impl TMessagePort with onclose(self : Self) -> EventHandlerNonNull {
   message_port_onclose_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [MessagePort.onclose](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onclose)
-impl TMessagePort with set_onclose(self : Self, onclose : EventHandler) -> Unit {
+impl TMessagePort with set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit {
   message_port_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
 }
 
 ///|
 /// [MessagePort.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onmessage)
-impl TMessagePort with onmessage(self : Self) -> EventHandler {
+impl TMessagePort with onmessage(self : Self) -> EventHandlerNonNull {
   message_port_onmessage_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [MessagePort.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onmessage)
-impl TMessagePort with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TMessagePort with set_onmessage(
+  self : Self,
+  onmessage : EventHandlerNonNull,
+) -> Unit {
   message_port_set_onmessage_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onmessage),
@@ -107,7 +110,7 @@ impl TMessagePort with set_onmessage(self : Self, onmessage : EventHandler) -> U
 
 ///|
 /// [MessagePort.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onmessageerror)
-impl TMessagePort with onmessageerror(self : Self) -> EventHandler {
+impl TMessagePort with onmessageerror(self : Self) -> EventHandlerNonNull {
   message_port_onmessageerror_ffi(TJsValue::to_js(self))
 }
 
@@ -115,7 +118,7 @@ impl TMessagePort with onmessageerror(self : Self) -> EventHandler {
 /// [MessagePort.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onmessageerror)
 impl TMessagePort with set_onmessageerror(
   self : Self,
-  onmessageerror : EventHandler,
+  onmessageerror : EventHandlerNonNull,
 ) -> Unit {
   message_port_set_onmessageerror_ffi(
     TJsValue::to_js(self),

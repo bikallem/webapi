@@ -2,7 +2,9 @@
 fn xml_http_request_new_ffi() -> XMLHttpRequest = "webapi_XMLHttpRequest" "new"
 
 ///|
-fn xml_http_request_onreadystatechange_ffi(obj : JsValue) -> EventHandler = "webapi_XMLHttpRequest" "get_onreadystatechange"
+fn xml_http_request_onreadystatechange_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_XMLHttpRequest" "get_onreadystatechange"
 
 ///|
 fn xml_http_request_set_onreadystatechange_ffi(

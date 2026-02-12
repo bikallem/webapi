@@ -8,7 +8,7 @@ fn shared_worker_new_ffi(
 fn shared_worker_port_ffi(obj : JsValue) -> MessagePort = "webapi_SharedWorker" "get_port"
 
 ///|
-fn shared_worker_onerror_ffi(obj : JsValue) -> EventHandler = "webapi_SharedWorker" "get_onerror"
+fn shared_worker_onerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_SharedWorker" "get_onerror"
 
 ///|
 fn shared_worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_SharedWorker" "set_onerror"

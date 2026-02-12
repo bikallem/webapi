@@ -46,18 +46,21 @@ pub trait TWorkerGlobalScope: TEventTarget {
     self : Self,
     urls : Array[&TWorkerGlobalScopeImportScriptsUrls],
   ) -> Unit = _
-  onerror(self : Self) -> OnErrorEventHandler = _
-  set_onerror(self : Self, onerror : OnErrorEventHandler) -> Unit = _
-  onlanguagechange(self : Self) -> EventHandler = _
-  set_onlanguagechange(self : Self, onlanguagechange : EventHandler) -> Unit = _
-  onoffline(self : Self) -> EventHandler = _
-  set_onoffline(self : Self, onoffline : EventHandler) -> Unit = _
-  ononline(self : Self) -> EventHandler = _
-  set_ononline(self : Self, ononline : EventHandler) -> Unit = _
-  onrejectionhandled(self : Self) -> EventHandler = _
-  set_onrejectionhandled(self : Self, onrejectionhandled : EventHandler) -> Unit = _
-  onunhandledrejection(self : Self) -> EventHandler = _
-  set_onunhandledrejection(self : Self, onunhandledrejection : EventHandler) -> Unit = _
+  onerror(self : Self) -> OnErrorEventHandlerNonNull = _
+  set_onerror(self : Self, onerror : OnErrorEventHandlerNonNull) -> Unit = _
+  onlanguagechange(self : Self) -> EventHandlerNonNull = _
+  set_onlanguagechange(self : Self, onlanguagechange : EventHandlerNonNull) -> Unit = _
+  onoffline(self : Self) -> EventHandlerNonNull = _
+  set_onoffline(self : Self, onoffline : EventHandlerNonNull) -> Unit = _
+  ononline(self : Self) -> EventHandlerNonNull = _
+  set_ononline(self : Self, ononline : EventHandlerNonNull) -> Unit = _
+  onrejectionhandled(self : Self) -> EventHandlerNonNull = _
+  set_onrejectionhandled(self : Self, onrejectionhandled : EventHandlerNonNull) -> Unit = _
+  onunhandledrejection(self : Self) -> EventHandlerNonNull = _
+  set_onunhandledrejection(
+    self : Self,
+    onunhandledrejection : EventHandlerNonNull,
+  ) -> Unit = _
   origin(self : Self) -> String = _
   is_secure_context(self : Self) -> Bool = _
   cross_origin_isolated(self : Self) -> Bool = _
@@ -141,7 +144,7 @@ impl TWorkerGlobalScope with import_scripts(
 
 ///|
 /// [WorkerGlobalScope.onerror](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onerror)
-impl TWorkerGlobalScope with onerror(self : Self) -> OnErrorEventHandler {
+impl TWorkerGlobalScope with onerror(self : Self) -> OnErrorEventHandlerNonNull {
   worker_global_scope_onerror_ffi(TJsValue::to_js(self))
 }
 
@@ -149,7 +152,7 @@ impl TWorkerGlobalScope with onerror(self : Self) -> OnErrorEventHandler {
 /// [WorkerGlobalScope.onerror](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onerror)
 impl TWorkerGlobalScope with set_onerror(
   self : Self,
-  onerror : OnErrorEventHandler,
+  onerror : OnErrorEventHandlerNonNull,
 ) -> Unit {
   worker_global_scope_set_onerror_ffi(
     TJsValue::to_js(self),
@@ -159,7 +162,7 @@ impl TWorkerGlobalScope with set_onerror(
 
 ///|
 /// [WorkerGlobalScope.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onlanguagechange)
-impl TWorkerGlobalScope with onlanguagechange(self : Self) -> EventHandler {
+impl TWorkerGlobalScope with onlanguagechange(self : Self) -> EventHandlerNonNull {
   worker_global_scope_onlanguagechange_ffi(TJsValue::to_js(self))
 }
 
@@ -167,7 +170,7 @@ impl TWorkerGlobalScope with onlanguagechange(self : Self) -> EventHandler {
 /// [WorkerGlobalScope.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onlanguagechange)
 impl TWorkerGlobalScope with set_onlanguagechange(
   self : Self,
-  onlanguagechange : EventHandler,
+  onlanguagechange : EventHandlerNonNull,
 ) -> Unit {
   worker_global_scope_set_onlanguagechange_ffi(
     TJsValue::to_js(self),
@@ -177,7 +180,7 @@ impl TWorkerGlobalScope with set_onlanguagechange(
 
 ///|
 /// [WorkerGlobalScope.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onoffline)
-impl TWorkerGlobalScope with onoffline(self : Self) -> EventHandler {
+impl TWorkerGlobalScope with onoffline(self : Self) -> EventHandlerNonNull {
   worker_global_scope_onoffline_ffi(TJsValue::to_js(self))
 }
 
@@ -185,7 +188,7 @@ impl TWorkerGlobalScope with onoffline(self : Self) -> EventHandler {
 /// [WorkerGlobalScope.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onoffline)
 impl TWorkerGlobalScope with set_onoffline(
   self : Self,
-  onoffline : EventHandler,
+  onoffline : EventHandlerNonNull,
 ) -> Unit {
   worker_global_scope_set_onoffline_ffi(
     TJsValue::to_js(self),
@@ -195,13 +198,16 @@ impl TWorkerGlobalScope with set_onoffline(
 
 ///|
 /// [WorkerGlobalScope.ononline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/ononline)
-impl TWorkerGlobalScope with ononline(self : Self) -> EventHandler {
+impl TWorkerGlobalScope with ononline(self : Self) -> EventHandlerNonNull {
   worker_global_scope_ononline_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [WorkerGlobalScope.ononline](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/ononline)
-impl TWorkerGlobalScope with set_ononline(self : Self, ononline : EventHandler) -> Unit {
+impl TWorkerGlobalScope with set_ononline(
+  self : Self,
+  ononline : EventHandlerNonNull,
+) -> Unit {
   worker_global_scope_set_ononline_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(ononline),
@@ -210,7 +216,7 @@ impl TWorkerGlobalScope with set_ononline(self : Self, ononline : EventHandler) 
 
 ///|
 /// [WorkerGlobalScope.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onrejectionhandled)
-impl TWorkerGlobalScope with onrejectionhandled(self : Self) -> EventHandler {
+impl TWorkerGlobalScope with onrejectionhandled(self : Self) -> EventHandlerNonNull {
   worker_global_scope_onrejectionhandled_ffi(TJsValue::to_js(self))
 }
 
@@ -218,7 +224,7 @@ impl TWorkerGlobalScope with onrejectionhandled(self : Self) -> EventHandler {
 /// [WorkerGlobalScope.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onrejectionhandled)
 impl TWorkerGlobalScope with set_onrejectionhandled(
   self : Self,
-  onrejectionhandled : EventHandler,
+  onrejectionhandled : EventHandlerNonNull,
 ) -> Unit {
   worker_global_scope_set_onrejectionhandled_ffi(
     TJsValue::to_js(self),
@@ -228,7 +234,7 @@ impl TWorkerGlobalScope with set_onrejectionhandled(
 
 ///|
 /// [WorkerGlobalScope.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onunhandledrejection)
-impl TWorkerGlobalScope with onunhandledrejection(self : Self) -> EventHandler {
+impl TWorkerGlobalScope with onunhandledrejection(self : Self) -> EventHandlerNonNull {
   worker_global_scope_onunhandledrejection_ffi(TJsValue::to_js(self))
 }
 
@@ -236,7 +242,7 @@ impl TWorkerGlobalScope with onunhandledrejection(self : Self) -> EventHandler {
 /// [WorkerGlobalScope.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onunhandledrejection)
 impl TWorkerGlobalScope with set_onunhandledrejection(
   self : Self,
-  onunhandledrejection : EventHandler,
+  onunhandledrejection : EventHandlerNonNull,
 ) -> Unit {
   worker_global_scope_set_onunhandledrejection_ffi(
     TJsValue::to_js(self),

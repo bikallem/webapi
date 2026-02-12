@@ -515,7 +515,10 @@ fn offscreen_canvas_rendering_context2d_get_line_dash_ffi_wasm(
 fn offscreen_canvas_rendering_context2d_get_line_dash_ffi(
   obj : JsValue,
 ) -> Array[Double] {
-  offscreen_canvas_rendering_context2d_get_line_dash_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(
+    offscreen_canvas_rendering_context2d_get_line_dash_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

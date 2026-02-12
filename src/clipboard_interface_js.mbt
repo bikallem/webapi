@@ -8,7 +8,7 @@ extern "js" fn clipboard_read_ffi_js(
 fn clipboard_read_ffi(
   obj : JsValue,
   formats : JsValue,
-) -> @js_async.Promise[ClipboardItems] {
+) -> @js_async.Promise[Array[ClipboardItem]] {
   clipboard_read_ffi_js(obj, formats).unsafe_cast()
 }
 

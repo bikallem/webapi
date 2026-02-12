@@ -58,7 +58,10 @@ fn selection_get_composed_ranges_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[StaticRange] {
-  selection_get_composed_ranges_ffi_wasm(obj, options).unsafe_cast()
+  jsvalue_to_array(
+    selection_get_composed_ranges_ffi_wasm(obj, options),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

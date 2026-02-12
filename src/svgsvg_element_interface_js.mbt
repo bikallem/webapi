@@ -255,7 +255,7 @@ fn svgsvg_element_preserve_aspect_ratio_ffi(
 extern "js" fn svgsvg_element_onafterprint_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onafterprint"
 
 ///|
-fn svgsvg_element_onafterprint_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onafterprint_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onafterprint_ffi_js(obj).unsafe_cast()
 }
 
@@ -269,7 +269,7 @@ extern "js" fn svgsvg_element_set_onafterprint_ffi(
 extern "js" fn svgsvg_element_onbeforeprint_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforeprint"
 
 ///|
-fn svgsvg_element_onbeforeprint_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onbeforeprint_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onbeforeprint_ffi_js(obj).unsafe_cast()
 }
 
@@ -285,7 +285,7 @@ extern "js" fn svgsvg_element_onbeforeunload_ffi_js(obj : JsValue) -> JsValue = 
 ///|
 fn svgsvg_element_onbeforeunload_ffi(
   obj : JsValue,
-) -> OnBeforeUnloadEventHandler {
+) -> OnBeforeUnloadEventHandlerNonNull {
   svgsvg_element_onbeforeunload_ffi_js(obj).unsafe_cast()
 }
 
@@ -299,7 +299,7 @@ extern "js" fn svgsvg_element_set_onbeforeunload_ffi(
 extern "js" fn svgsvg_element_onhashchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onhashchange"
 
 ///|
-fn svgsvg_element_onhashchange_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onhashchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onhashchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -313,7 +313,7 @@ extern "js" fn svgsvg_element_set_onhashchange_ffi(
 extern "js" fn svgsvg_element_onlanguagechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onlanguagechange"
 
 ///|
-fn svgsvg_element_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onlanguagechange_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onlanguagechange_ffi_js(obj).unsafe_cast()
 }
 
@@ -327,7 +327,7 @@ extern "js" fn svgsvg_element_set_onlanguagechange_ffi(
 extern "js" fn svgsvg_element_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
 
 ///|
-fn svgsvg_element_onmessage_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onmessage_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onmessage_ffi_js(obj).unsafe_cast()
 }
 
@@ -341,7 +341,7 @@ extern "js" fn svgsvg_element_set_onmessage_ffi(
 extern "js" fn svgsvg_element_onmessageerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessageerror"
 
 ///|
-fn svgsvg_element_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onmessageerror_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onmessageerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -355,7 +355,7 @@ extern "js" fn svgsvg_element_set_onmessageerror_ffi(
 extern "js" fn svgsvg_element_onoffline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onoffline"
 
 ///|
-fn svgsvg_element_onoffline_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onoffline_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onoffline_ffi_js(obj).unsafe_cast()
 }
 
@@ -369,7 +369,7 @@ extern "js" fn svgsvg_element_set_onoffline_ffi(
 extern "js" fn svgsvg_element_ononline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ononline"
 
 ///|
-fn svgsvg_element_ononline_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_ononline_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_ononline_ffi_js(obj).unsafe_cast()
 }
 
@@ -383,7 +383,7 @@ extern "js" fn svgsvg_element_set_ononline_ffi(
 extern "js" fn svgsvg_element_onpagehide_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpagehide"
 
 ///|
-fn svgsvg_element_onpagehide_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onpagehide_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onpagehide_ffi_js(obj).unsafe_cast()
 }
 
@@ -397,7 +397,7 @@ extern "js" fn svgsvg_element_set_onpagehide_ffi(
 extern "js" fn svgsvg_element_onpagereveal_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpagereveal"
 
 ///|
-fn svgsvg_element_onpagereveal_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onpagereveal_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onpagereveal_ffi_js(obj).unsafe_cast()
 }
 
@@ -411,7 +411,7 @@ extern "js" fn svgsvg_element_set_onpagereveal_ffi(
 extern "js" fn svgsvg_element_onpageshow_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpageshow"
 
 ///|
-fn svgsvg_element_onpageshow_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onpageshow_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onpageshow_ffi_js(obj).unsafe_cast()
 }
 
@@ -425,7 +425,7 @@ extern "js" fn svgsvg_element_set_onpageshow_ffi(
 extern "js" fn svgsvg_element_onpageswap_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpageswap"
 
 ///|
-fn svgsvg_element_onpageswap_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onpageswap_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onpageswap_ffi_js(obj).unsafe_cast()
 }
 
@@ -439,7 +439,7 @@ extern "js" fn svgsvg_element_set_onpageswap_ffi(
 extern "js" fn svgsvg_element_onpopstate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpopstate"
 
 ///|
-fn svgsvg_element_onpopstate_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onpopstate_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onpopstate_ffi_js(obj).unsafe_cast()
 }
 
@@ -455,7 +455,7 @@ extern "js" fn svgsvg_element_onrejectionhandled_ffi_js(
 ) -> JsValue = "(obj) => obj.onrejectionhandled"
 
 ///|
-fn svgsvg_element_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onrejectionhandled_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onrejectionhandled_ffi_js(obj).unsafe_cast()
 }
 
@@ -469,7 +469,7 @@ extern "js" fn svgsvg_element_set_onrejectionhandled_ffi(
 extern "js" fn svgsvg_element_onstorage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onstorage"
 
 ///|
-fn svgsvg_element_onstorage_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onstorage_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onstorage_ffi_js(obj).unsafe_cast()
 }
 
@@ -485,7 +485,9 @@ extern "js" fn svgsvg_element_onunhandledrejection_ffi_js(
 ) -> JsValue = "(obj) => obj.onunhandledrejection"
 
 ///|
-fn svgsvg_element_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onunhandledrejection_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   svgsvg_element_onunhandledrejection_ffi_js(obj).unsafe_cast()
 }
 
@@ -499,7 +501,7 @@ extern "js" fn svgsvg_element_set_onunhandledrejection_ffi(
 extern "js" fn svgsvg_element_onunload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onunload"
 
 ///|
-fn svgsvg_element_onunload_ffi(obj : JsValue) -> EventHandler {
+fn svgsvg_element_onunload_ffi(obj : JsValue) -> EventHandlerNonNull {
   svgsvg_element_onunload_ffi_js(obj).unsafe_cast()
 }
 

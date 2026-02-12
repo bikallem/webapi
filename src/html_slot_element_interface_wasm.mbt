@@ -23,7 +23,10 @@ fn html_slot_element_assigned_nodes_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[Node] {
-  html_slot_element_assigned_nodes_ffi_wasm(obj, options).unsafe_cast()
+  jsvalue_to_array(
+    html_slot_element_assigned_nodes_ffi_wasm(obj, options),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|
@@ -37,7 +40,10 @@ fn html_slot_element_assigned_elements_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[Element] {
-  html_slot_element_assigned_elements_ffi_wasm(obj, options).unsafe_cast()
+  jsvalue_to_array(
+    html_slot_element_assigned_elements_ffi_wasm(obj, options),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

@@ -6,7 +6,7 @@ extern "js" fn performance_observer_entry_list_get_entries_ffi_js(
 ///|
 fn performance_observer_entry_list_get_entries_ffi(
   obj : JsValue,
-) -> PerformanceEntryList {
+) -> Array[PerformanceEntry] {
   performance_observer_entry_list_get_entries_ffi_js(obj).unsafe_cast()
 }
 
@@ -20,7 +20,7 @@ extern "js" fn performance_observer_entry_list_get_entries_by_type_ffi_js(
 fn performance_observer_entry_list_get_entries_by_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList {
+) -> Array[PerformanceEntry] {
   performance_observer_entry_list_get_entries_by_type_ffi_js(obj, type_).unsafe_cast()
 }
 
@@ -36,6 +36,6 @@ fn performance_observer_entry_list_get_entries_by_name_ffi(
   obj : JsValue,
   name : JsValue,
   type_ : JsValue,
-) -> PerformanceEntryList {
+) -> Array[PerformanceEntry] {
   performance_observer_entry_list_get_entries_by_name_ffi_js(obj, name, type_).unsafe_cast()
 }

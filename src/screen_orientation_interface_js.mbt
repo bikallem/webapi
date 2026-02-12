@@ -35,7 +35,7 @@ fn screen_orientation_angle_ffi(obj : JsValue) -> UInt {
 extern "js" fn screen_orientation_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
 
 ///|
-fn screen_orientation_onchange_ffi(obj : JsValue) -> EventHandler {
+fn screen_orientation_onchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   screen_orientation_onchange_ffi_js(obj).unsafe_cast()
 }
 

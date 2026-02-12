@@ -56,7 +56,7 @@ fn text_track_add_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "webapi_TextTr
 fn text_track_remove_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "webapi_TextTrack" "removeCue"
 
 ///|
-fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandler = "webapi_TextTrack" "get_oncuechange"
+fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_TextTrack" "get_oncuechange"
 
 ///|
 fn text_track_set_oncuechange_ffi(obj : JsValue, oncuechange : JsValue) -> Unit = "webapi_TextTrack" "set_oncuechange"

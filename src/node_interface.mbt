@@ -272,7 +272,7 @@ impl TNode with lookup_prefix(self : Self, namespace_ : String) -> String? {
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 
@@ -286,7 +286,7 @@ impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String? {
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 

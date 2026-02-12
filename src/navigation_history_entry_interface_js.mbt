@@ -56,7 +56,7 @@ extern "js" fn navigation_history_entry_ondispose_ffi_js(
 ) -> JsValue = "(obj) => obj.ondispose"
 
 ///|
-fn navigation_history_entry_ondispose_ffi(obj : JsValue) -> EventHandler {
+fn navigation_history_entry_ondispose_ffi(obj : JsValue) -> EventHandlerNonNull {
   navigation_history_entry_ondispose_ffi_js(obj).unsafe_cast()
 }
 

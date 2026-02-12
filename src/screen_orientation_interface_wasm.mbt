@@ -22,7 +22,7 @@ fn screen_orientation_type_ffi(obj : JsValue) -> OrientationType = "webapi_Scree
 fn screen_orientation_angle_ffi(obj : JsValue) -> UInt = "webapi_ScreenOrientation" "get_angle"
 
 ///|
-fn screen_orientation_onchange_ffi(obj : JsValue) -> EventHandler = "webapi_ScreenOrientation" "get_onchange"
+fn screen_orientation_onchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_ScreenOrientation" "get_onchange"
 
 ///|
 fn screen_orientation_set_onchange_ffi(

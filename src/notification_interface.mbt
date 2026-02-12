@@ -30,14 +30,14 @@ pub fn Notification::new(
 ///|
 /// [Notification](https://developer.mozilla.org/en-US/docs/Web/API/Notification) interface.
 pub trait TNotification: TEventTarget {
-  onclick(self : Self) -> EventHandler = _
-  set_onclick(self : Self, onclick : EventHandler) -> Unit = _
-  onshow(self : Self) -> EventHandler = _
-  set_onshow(self : Self, onshow : EventHandler) -> Unit = _
-  onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
-  onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  onclick(self : Self) -> EventHandlerNonNull = _
+  set_onclick(self : Self, onclick : EventHandlerNonNull) -> Unit = _
+  onshow(self : Self) -> EventHandlerNonNull = _
+  set_onshow(self : Self, onshow : EventHandlerNonNull) -> Unit = _
+  onerror(self : Self) -> EventHandlerNonNull = _
+  set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit = _
+  onclose(self : Self) -> EventHandlerNonNull = _
+  set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit = _
   title(self : Self) -> String = _
   dir(self : Self) -> NotificationDirection = _
   lang(self : Self) -> String = _
@@ -48,7 +48,7 @@ pub trait TNotification: TEventTarget {
   icon(self : Self) -> String = _
   badge(self : Self) -> String = _
   vibrate(self : Self) -> JsValue = _
-  timestamp(self : Self) -> EpochTimeStamp = _
+  timestamp(self : Self) -> UInt64 = _
   renotify(self : Self) -> Bool = _
   silent(self : Self) -> Bool = _
   require_interaction(self : Self) -> Bool = _
@@ -79,49 +79,49 @@ pub fn Notification::max_actions() -> UInt {
 
 ///|
 /// [Notification.onclick](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onclick)
-impl TNotification with onclick(self : Self) -> EventHandler {
+impl TNotification with onclick(self : Self) -> EventHandlerNonNull {
   notification_onclick_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Notification.onclick](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onclick)
-impl TNotification with set_onclick(self : Self, onclick : EventHandler) -> Unit {
+impl TNotification with set_onclick(self : Self, onclick : EventHandlerNonNull) -> Unit {
   notification_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(onclick))
 }
 
 ///|
 /// [Notification.onshow](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onshow)
-impl TNotification with onshow(self : Self) -> EventHandler {
+impl TNotification with onshow(self : Self) -> EventHandlerNonNull {
   notification_onshow_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Notification.onshow](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onshow)
-impl TNotification with set_onshow(self : Self, onshow : EventHandler) -> Unit {
+impl TNotification with set_onshow(self : Self, onshow : EventHandlerNonNull) -> Unit {
   notification_set_onshow_ffi(TJsValue::to_js(self), TJsValue::to_js(onshow))
 }
 
 ///|
 /// [Notification.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onerror)
-impl TNotification with onerror(self : Self) -> EventHandler {
+impl TNotification with onerror(self : Self) -> EventHandlerNonNull {
   notification_onerror_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Notification.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onerror)
-impl TNotification with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+impl TNotification with set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit {
   notification_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
 
 ///|
 /// [Notification.onclose](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onclose)
-impl TNotification with onclose(self : Self) -> EventHandler {
+impl TNotification with onclose(self : Self) -> EventHandlerNonNull {
   notification_onclose_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Notification.onclose](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onclose)
-impl TNotification with set_onclose(self : Self, onclose : EventHandler) -> Unit {
+impl TNotification with set_onclose(self : Self, onclose : EventHandlerNonNull) -> Unit {
   notification_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
 }
 
@@ -187,7 +187,7 @@ impl TNotification with vibrate(self : Self) -> JsValue {
 
 ///|
 /// [Notification.timestamp](https://developer.mozilla.org/en-US/docs/Web/API/Notification/timestamp)
-impl TNotification with timestamp(self : Self) -> EpochTimeStamp {
+impl TNotification with timestamp(self : Self) -> UInt64 {
   notification_timestamp_ffi(TJsValue::to_js(self))
 }
 

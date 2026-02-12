@@ -492,7 +492,10 @@ fn canvas_rendering_context2d_get_line_dash_ffi_wasm(obj : JsValue) -> JsValue =
 
 ///|
 fn canvas_rendering_context2d_get_line_dash_ffi(obj : JsValue) -> Array[Double] {
-  canvas_rendering_context2d_get_line_dash_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(
+    canvas_rendering_context2d_get_line_dash_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

@@ -53,7 +53,10 @@ fn pointer_event_get_coalesced_events_ffi_wasm(obj : JsValue) -> JsValue = "weba
 
 ///|
 fn pointer_event_get_coalesced_events_ffi(obj : JsValue) -> Array[PointerEvent] {
-  pointer_event_get_coalesced_events_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(
+    pointer_event_get_coalesced_events_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|
@@ -61,5 +64,8 @@ fn pointer_event_get_predicted_events_ffi_wasm(obj : JsValue) -> JsValue = "weba
 
 ///|
 fn pointer_event_get_predicted_events_ffi(obj : JsValue) -> Array[PointerEvent] {
-  pointer_event_get_predicted_events_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_array(
+    pointer_event_get_predicted_events_ffi_wasm(obj),
+    JsValue::unsafe_cast,
+  )
 }

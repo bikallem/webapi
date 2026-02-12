@@ -39,10 +39,10 @@ pub trait TDedicatedWorkerGlobalScope: TWorkerGlobalScope {
   close(self : Self) -> Unit = _
   request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
-  onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
-  onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  onmessage(self : Self) -> EventHandlerNonNull = _
+  set_onmessage(self : Self, onmessage : EventHandlerNonNull) -> Unit = _
+  onmessageerror(self : Self) -> EventHandlerNonNull = _
+  set_onmessageerror(self : Self, onmessageerror : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -111,7 +111,7 @@ impl TDedicatedWorkerGlobalScope with cancel_animation_frame(
 
 ///|
 /// [DedicatedWorkerGlobalScope.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessage)
-impl TDedicatedWorkerGlobalScope with onmessage(self : Self) -> EventHandler {
+impl TDedicatedWorkerGlobalScope with onmessage(self : Self) -> EventHandlerNonNull {
   dedicated_worker_global_scope_onmessage_ffi(TJsValue::to_js(self))
 }
 
@@ -119,7 +119,7 @@ impl TDedicatedWorkerGlobalScope with onmessage(self : Self) -> EventHandler {
 /// [DedicatedWorkerGlobalScope.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessage)
 impl TDedicatedWorkerGlobalScope with set_onmessage(
   self : Self,
-  onmessage : EventHandler,
+  onmessage : EventHandlerNonNull,
 ) -> Unit {
   dedicated_worker_global_scope_set_onmessage_ffi(
     TJsValue::to_js(self),
@@ -129,7 +129,7 @@ impl TDedicatedWorkerGlobalScope with set_onmessage(
 
 ///|
 /// [DedicatedWorkerGlobalScope.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessageerror)
-impl TDedicatedWorkerGlobalScope with onmessageerror(self : Self) -> EventHandler {
+impl TDedicatedWorkerGlobalScope with onmessageerror(self : Self) -> EventHandlerNonNull {
   dedicated_worker_global_scope_onmessageerror_ffi(TJsValue::to_js(self))
 }
 
@@ -137,7 +137,7 @@ impl TDedicatedWorkerGlobalScope with onmessageerror(self : Self) -> EventHandle
 /// [DedicatedWorkerGlobalScope.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessageerror)
 impl TDedicatedWorkerGlobalScope with set_onmessageerror(
   self : Self,
-  onmessageerror : EventHandler,
+  onmessageerror : EventHandlerNonNull,
 ) -> Unit {
   dedicated_worker_global_scope_set_onmessageerror_ffi(
     TJsValue::to_js(self),

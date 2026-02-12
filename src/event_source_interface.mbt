@@ -45,12 +45,12 @@ pub trait TEventSource: TEventTarget {
   url(self : Self) -> String = _
   with_credentials(self : Self) -> Bool = _
   ready_state(self : Self) -> UInt = _
-  onopen(self : Self) -> EventHandler = _
-  set_onopen(self : Self, onopen : EventHandler) -> Unit = _
-  onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
-  onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  onopen(self : Self) -> EventHandlerNonNull = _
+  set_onopen(self : Self, onopen : EventHandlerNonNull) -> Unit = _
+  onmessage(self : Self) -> EventHandlerNonNull = _
+  set_onmessage(self : Self, onmessage : EventHandlerNonNull) -> Unit = _
+  onerror(self : Self) -> EventHandlerNonNull = _
+  set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit = _
   close(self : Self) -> Unit = _
 }
 
@@ -74,25 +74,28 @@ impl TEventSource with ready_state(self : Self) -> UInt {
 
 ///|
 /// [EventSource.onopen](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onopen)
-impl TEventSource with onopen(self : Self) -> EventHandler {
+impl TEventSource with onopen(self : Self) -> EventHandlerNonNull {
   event_source_onopen_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [EventSource.onopen](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onopen)
-impl TEventSource with set_onopen(self : Self, onopen : EventHandler) -> Unit {
+impl TEventSource with set_onopen(self : Self, onopen : EventHandlerNonNull) -> Unit {
   event_source_set_onopen_ffi(TJsValue::to_js(self), TJsValue::to_js(onopen))
 }
 
 ///|
 /// [EventSource.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onmessage)
-impl TEventSource with onmessage(self : Self) -> EventHandler {
+impl TEventSource with onmessage(self : Self) -> EventHandlerNonNull {
   event_source_onmessage_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [EventSource.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onmessage)
-impl TEventSource with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TEventSource with set_onmessage(
+  self : Self,
+  onmessage : EventHandlerNonNull,
+) -> Unit {
   event_source_set_onmessage_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onmessage),
@@ -101,13 +104,13 @@ impl TEventSource with set_onmessage(self : Self, onmessage : EventHandler) -> U
 
 ///|
 /// [EventSource.onerror](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onerror)
-impl TEventSource with onerror(self : Self) -> EventHandler {
+impl TEventSource with onerror(self : Self) -> EventHandlerNonNull {
   event_source_onerror_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [EventSource.onerror](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onerror)
-impl TEventSource with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+impl TEventSource with set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit {
   event_source_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
 

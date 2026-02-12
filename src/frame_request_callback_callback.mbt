@@ -14,7 +14,7 @@ pub impl TJsValue for FrameRequestCallback with to_js(
 
 ///|
 pub fn FrameRequestCallback::new(
-  callback : (DOMHighResTimeStamp) -> Unit,
+  callback : (Double) -> Unit,
 ) -> FrameRequestCallback {
   frame_request_callback_ffi(callback)
 }

@@ -19,13 +19,13 @@ pub impl TIdleDeadline for IdleDeadline
 ///|
 /// [IdleDeadline](https://developer.mozilla.org/en-US/docs/Web/API/IdleDeadline) interface.
 pub trait TIdleDeadline: TJsValue {
-  time_remaining(self : Self) -> DOMHighResTimeStamp = _
+  time_remaining(self : Self) -> Double = _
   did_timeout(self : Self) -> Bool = _
 }
 
 ///|
 /// [IdleDeadline.timeRemaining](https://developer.mozilla.org/en-US/docs/Web/API/IdleDeadline/timeRemaining)
-impl TIdleDeadline with time_remaining(self : Self) -> DOMHighResTimeStamp {
+impl TIdleDeadline with time_remaining(self : Self) -> Double {
   idle_deadline_time_remaining_ffi(TJsValue::to_js(self))
 }
 

@@ -40,7 +40,7 @@ impl TDOMStringList with item(self : Self, index : UInt) -> String? {
   if JsValue::is_null(result) {
     None
   } else {
-    Some(result.unsafe_cast())
+    Some(jsvalue_to_string(result))
   }
 }
 

@@ -57,7 +57,7 @@ pub trait TEvent: TJsValue {
   default_prevented(self : Self) -> Bool = _
   composed(self : Self) -> Bool = _
   is_trusted(self : Self) -> Bool = _
-  time_stamp(self : Self) -> DOMHighResTimeStamp = _
+  time_stamp(self : Self) -> Double = _
   init_event(self : Self, type_ : String, bubbles? : Bool, cancelable? : Bool) -> Unit = _
 }
 
@@ -177,7 +177,7 @@ impl TEvent with is_trusted(self : Self) -> Bool {
 
 ///|
 /// [Event.timeStamp](https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp)
-impl TEvent with time_stamp(self : Self) -> DOMHighResTimeStamp {
+impl TEvent with time_stamp(self : Self) -> Double {
   event_time_stamp_ffi(TJsValue::to_js(self))
 }
 

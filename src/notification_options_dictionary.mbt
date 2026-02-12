@@ -21,7 +21,7 @@ pub fn NotificationOptions::new(
   icon? : String,
   badge? : String,
   vibrate? : VibratePattern,
-  timestamp? : EpochTimeStamp,
+  timestamp? : UInt64,
   renotify? : Bool = false,
   silent? : Bool = JsValue::null(),
   require_interaction? : Bool = false,

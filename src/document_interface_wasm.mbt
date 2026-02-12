@@ -369,7 +369,7 @@ fn document_hidden_ffi(obj : JsValue) -> Bool = "webapi_Document" "get_hidden"
 fn document_visibility_state_ffi(obj : JsValue) -> DocumentVisibilityState = "webapi_Document" "get_visibilityState"
 
 ///|
-fn document_onreadystatechange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onreadystatechange"
+fn document_onreadystatechange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onreadystatechange"
 
 ///|
 fn document_set_onreadystatechange_ffi(
@@ -378,7 +378,7 @@ fn document_set_onreadystatechange_ffi(
 ) -> Unit = "webapi_Document" "set_onreadystatechange"
 
 ///|
-fn document_onvisibilitychange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onvisibilitychange"
+fn document_onvisibilitychange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onvisibilitychange"
 
 ///|
 fn document_set_onvisibilitychange_ffi(
@@ -479,7 +479,10 @@ fn document_elements_from_point_ffi(
   x : JsValue,
   y : JsValue,
 ) -> Array[Element] {
-  document_elements_from_point_ffi_wasm(obj, x, y).unsafe_cast()
+  jsvalue_to_array(
+    document_elements_from_point_ffi_wasm(obj, x, y),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|
@@ -508,7 +511,7 @@ fn document_exit_fullscreen_ffi(obj : JsValue) -> @js_async.Promise[Unit] {
 }
 
 ///|
-fn document_onfullscreenchange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onfullscreenchange"
+fn document_onfullscreenchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onfullscreenchange"
 
 ///|
 fn document_set_onfullscreenchange_ffi(
@@ -517,7 +520,7 @@ fn document_set_onfullscreenchange_ffi(
 ) -> Unit = "webapi_Document" "set_onfullscreenchange"
 
 ///|
-fn document_onfullscreenerror_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onfullscreenerror"
+fn document_onfullscreenerror_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onfullscreenerror"
 
 ///|
 fn document_set_onfullscreenerror_ffi(
@@ -616,19 +619,19 @@ fn document_evaluate_ffi(
 ) -> XPathResult = "webapi_Document" "evaluate"
 
 ///|
-fn document_onabort_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onabort"
+fn document_onabort_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onabort"
 
 ///|
 fn document_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_Document" "set_onabort"
 
 ///|
-fn document_onauxclick_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onauxclick"
+fn document_onauxclick_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onauxclick"
 
 ///|
 fn document_set_onauxclick_ffi(obj : JsValue, onauxclick : JsValue) -> Unit = "webapi_Document" "set_onauxclick"
 
 ///|
-fn document_onbeforeinput_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onbeforeinput"
+fn document_onbeforeinput_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onbeforeinput"
 
 ///|
 fn document_set_onbeforeinput_ffi(
@@ -637,7 +640,7 @@ fn document_set_onbeforeinput_ffi(
 ) -> Unit = "webapi_Document" "set_onbeforeinput"
 
 ///|
-fn document_onbeforematch_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onbeforematch"
+fn document_onbeforematch_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onbeforematch"
 
 ///|
 fn document_set_onbeforematch_ffi(
@@ -646,7 +649,7 @@ fn document_set_onbeforematch_ffi(
 ) -> Unit = "webapi_Document" "set_onbeforematch"
 
 ///|
-fn document_onbeforetoggle_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onbeforetoggle"
+fn document_onbeforetoggle_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onbeforetoggle"
 
 ///|
 fn document_set_onbeforetoggle_ffi(
@@ -655,25 +658,25 @@ fn document_set_onbeforetoggle_ffi(
 ) -> Unit = "webapi_Document" "set_onbeforetoggle"
 
 ///|
-fn document_onblur_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onblur"
+fn document_onblur_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onblur"
 
 ///|
 fn document_set_onblur_ffi(obj : JsValue, onblur : JsValue) -> Unit = "webapi_Document" "set_onblur"
 
 ///|
-fn document_oncancel_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncancel"
+fn document_oncancel_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncancel"
 
 ///|
 fn document_set_oncancel_ffi(obj : JsValue, oncancel : JsValue) -> Unit = "webapi_Document" "set_oncancel"
 
 ///|
-fn document_oncanplay_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncanplay"
+fn document_oncanplay_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncanplay"
 
 ///|
 fn document_set_oncanplay_ffi(obj : JsValue, oncanplay : JsValue) -> Unit = "webapi_Document" "set_oncanplay"
 
 ///|
-fn document_oncanplaythrough_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncanplaythrough"
+fn document_oncanplaythrough_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncanplaythrough"
 
 ///|
 fn document_set_oncanplaythrough_ffi(
@@ -682,31 +685,31 @@ fn document_set_oncanplaythrough_ffi(
 ) -> Unit = "webapi_Document" "set_oncanplaythrough"
 
 ///|
-fn document_onchange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onchange"
+fn document_onchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onchange"
 
 ///|
 fn document_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_Document" "set_onchange"
 
 ///|
-fn document_onclick_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onclick"
+fn document_onclick_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onclick"
 
 ///|
 fn document_set_onclick_ffi(obj : JsValue, onclick : JsValue) -> Unit = "webapi_Document" "set_onclick"
 
 ///|
-fn document_onclose_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onclose"
+fn document_onclose_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onclose"
 
 ///|
 fn document_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_Document" "set_onclose"
 
 ///|
-fn document_oncommand_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncommand"
+fn document_oncommand_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncommand"
 
 ///|
 fn document_set_oncommand_ffi(obj : JsValue, oncommand : JsValue) -> Unit = "webapi_Document" "set_oncommand"
 
 ///|
-fn document_oncontextlost_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncontextlost"
+fn document_oncontextlost_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncontextlost"
 
 ///|
 fn document_set_oncontextlost_ffi(
@@ -715,7 +718,7 @@ fn document_set_oncontextlost_ffi(
 ) -> Unit = "webapi_Document" "set_oncontextlost"
 
 ///|
-fn document_oncontextmenu_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncontextmenu"
+fn document_oncontextmenu_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncontextmenu"
 
 ///|
 fn document_set_oncontextmenu_ffi(
@@ -724,7 +727,7 @@ fn document_set_oncontextmenu_ffi(
 ) -> Unit = "webapi_Document" "set_oncontextmenu"
 
 ///|
-fn document_oncontextrestored_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncontextrestored"
+fn document_oncontextrestored_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncontextrestored"
 
 ///|
 fn document_set_oncontextrestored_ffi(
@@ -733,73 +736,73 @@ fn document_set_oncontextrestored_ffi(
 ) -> Unit = "webapi_Document" "set_oncontextrestored"
 
 ///|
-fn document_oncopy_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncopy"
+fn document_oncopy_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncopy"
 
 ///|
 fn document_set_oncopy_ffi(obj : JsValue, oncopy : JsValue) -> Unit = "webapi_Document" "set_oncopy"
 
 ///|
-fn document_oncuechange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncuechange"
+fn document_oncuechange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncuechange"
 
 ///|
 fn document_set_oncuechange_ffi(obj : JsValue, oncuechange : JsValue) -> Unit = "webapi_Document" "set_oncuechange"
 
 ///|
-fn document_oncut_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oncut"
+fn document_oncut_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oncut"
 
 ///|
 fn document_set_oncut_ffi(obj : JsValue, oncut : JsValue) -> Unit = "webapi_Document" "set_oncut"
 
 ///|
-fn document_ondblclick_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondblclick"
+fn document_ondblclick_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondblclick"
 
 ///|
 fn document_set_ondblclick_ffi(obj : JsValue, ondblclick : JsValue) -> Unit = "webapi_Document" "set_ondblclick"
 
 ///|
-fn document_ondrag_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondrag"
+fn document_ondrag_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondrag"
 
 ///|
 fn document_set_ondrag_ffi(obj : JsValue, ondrag : JsValue) -> Unit = "webapi_Document" "set_ondrag"
 
 ///|
-fn document_ondragend_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondragend"
+fn document_ondragend_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondragend"
 
 ///|
 fn document_set_ondragend_ffi(obj : JsValue, ondragend : JsValue) -> Unit = "webapi_Document" "set_ondragend"
 
 ///|
-fn document_ondragenter_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondragenter"
+fn document_ondragenter_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondragenter"
 
 ///|
 fn document_set_ondragenter_ffi(obj : JsValue, ondragenter : JsValue) -> Unit = "webapi_Document" "set_ondragenter"
 
 ///|
-fn document_ondragleave_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondragleave"
+fn document_ondragleave_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondragleave"
 
 ///|
 fn document_set_ondragleave_ffi(obj : JsValue, ondragleave : JsValue) -> Unit = "webapi_Document" "set_ondragleave"
 
 ///|
-fn document_ondragover_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondragover"
+fn document_ondragover_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondragover"
 
 ///|
 fn document_set_ondragover_ffi(obj : JsValue, ondragover : JsValue) -> Unit = "webapi_Document" "set_ondragover"
 
 ///|
-fn document_ondragstart_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondragstart"
+fn document_ondragstart_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondragstart"
 
 ///|
 fn document_set_ondragstart_ffi(obj : JsValue, ondragstart : JsValue) -> Unit = "webapi_Document" "set_ondragstart"
 
 ///|
-fn document_ondrop_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondrop"
+fn document_ondrop_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondrop"
 
 ///|
 fn document_set_ondrop_ffi(obj : JsValue, ondrop : JsValue) -> Unit = "webapi_Document" "set_ondrop"
 
 ///|
-fn document_ondurationchange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ondurationchange"
+fn document_ondurationchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ondurationchange"
 
 ///|
 fn document_set_ondurationchange_ffi(
@@ -808,79 +811,79 @@ fn document_set_ondurationchange_ffi(
 ) -> Unit = "webapi_Document" "set_ondurationchange"
 
 ///|
-fn document_onemptied_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onemptied"
+fn document_onemptied_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onemptied"
 
 ///|
 fn document_set_onemptied_ffi(obj : JsValue, onemptied : JsValue) -> Unit = "webapi_Document" "set_onemptied"
 
 ///|
-fn document_onended_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onended"
+fn document_onended_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onended"
 
 ///|
 fn document_set_onended_ffi(obj : JsValue, onended : JsValue) -> Unit = "webapi_Document" "set_onended"
 
 ///|
-fn document_onerror_ffi(obj : JsValue) -> OnErrorEventHandler = "webapi_Document" "get_onerror"
+fn document_onerror_ffi(obj : JsValue) -> OnErrorEventHandlerNonNull = "webapi_Document" "get_onerror"
 
 ///|
 fn document_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_Document" "set_onerror"
 
 ///|
-fn document_onfocus_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onfocus"
+fn document_onfocus_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onfocus"
 
 ///|
 fn document_set_onfocus_ffi(obj : JsValue, onfocus : JsValue) -> Unit = "webapi_Document" "set_onfocus"
 
 ///|
-fn document_onformdata_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onformdata"
+fn document_onformdata_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onformdata"
 
 ///|
 fn document_set_onformdata_ffi(obj : JsValue, onformdata : JsValue) -> Unit = "webapi_Document" "set_onformdata"
 
 ///|
-fn document_oninput_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oninput"
+fn document_oninput_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oninput"
 
 ///|
 fn document_set_oninput_ffi(obj : JsValue, oninput : JsValue) -> Unit = "webapi_Document" "set_oninput"
 
 ///|
-fn document_oninvalid_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_oninvalid"
+fn document_oninvalid_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_oninvalid"
 
 ///|
 fn document_set_oninvalid_ffi(obj : JsValue, oninvalid : JsValue) -> Unit = "webapi_Document" "set_oninvalid"
 
 ///|
-fn document_onkeydown_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onkeydown"
+fn document_onkeydown_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onkeydown"
 
 ///|
 fn document_set_onkeydown_ffi(obj : JsValue, onkeydown : JsValue) -> Unit = "webapi_Document" "set_onkeydown"
 
 ///|
-fn document_onkeypress_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onkeypress"
+fn document_onkeypress_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onkeypress"
 
 ///|
 fn document_set_onkeypress_ffi(obj : JsValue, onkeypress : JsValue) -> Unit = "webapi_Document" "set_onkeypress"
 
 ///|
-fn document_onkeyup_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onkeyup"
+fn document_onkeyup_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onkeyup"
 
 ///|
 fn document_set_onkeyup_ffi(obj : JsValue, onkeyup : JsValue) -> Unit = "webapi_Document" "set_onkeyup"
 
 ///|
-fn document_onload_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onload"
+fn document_onload_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onload"
 
 ///|
 fn document_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit = "webapi_Document" "set_onload"
 
 ///|
-fn document_onloadeddata_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onloadeddata"
+fn document_onloadeddata_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onloadeddata"
 
 ///|
 fn document_set_onloadeddata_ffi(obj : JsValue, onloadeddata : JsValue) -> Unit = "webapi_Document" "set_onloadeddata"
 
 ///|
-fn document_onloadedmetadata_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onloadedmetadata"
+fn document_onloadedmetadata_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onloadedmetadata"
 
 ///|
 fn document_set_onloadedmetadata_ffi(
@@ -889,115 +892,115 @@ fn document_set_onloadedmetadata_ffi(
 ) -> Unit = "webapi_Document" "set_onloadedmetadata"
 
 ///|
-fn document_onloadstart_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onloadstart"
+fn document_onloadstart_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onloadstart"
 
 ///|
 fn document_set_onloadstart_ffi(obj : JsValue, onloadstart : JsValue) -> Unit = "webapi_Document" "set_onloadstart"
 
 ///|
-fn document_onmousedown_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onmousedown"
+fn document_onmousedown_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onmousedown"
 
 ///|
 fn document_set_onmousedown_ffi(obj : JsValue, onmousedown : JsValue) -> Unit = "webapi_Document" "set_onmousedown"
 
 ///|
-fn document_onmouseenter_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onmouseenter"
+fn document_onmouseenter_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onmouseenter"
 
 ///|
 fn document_set_onmouseenter_ffi(obj : JsValue, onmouseenter : JsValue) -> Unit = "webapi_Document" "set_onmouseenter"
 
 ///|
-fn document_onmouseleave_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onmouseleave"
+fn document_onmouseleave_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onmouseleave"
 
 ///|
 fn document_set_onmouseleave_ffi(obj : JsValue, onmouseleave : JsValue) -> Unit = "webapi_Document" "set_onmouseleave"
 
 ///|
-fn document_onmousemove_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onmousemove"
+fn document_onmousemove_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onmousemove"
 
 ///|
 fn document_set_onmousemove_ffi(obj : JsValue, onmousemove : JsValue) -> Unit = "webapi_Document" "set_onmousemove"
 
 ///|
-fn document_onmouseout_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onmouseout"
+fn document_onmouseout_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onmouseout"
 
 ///|
 fn document_set_onmouseout_ffi(obj : JsValue, onmouseout : JsValue) -> Unit = "webapi_Document" "set_onmouseout"
 
 ///|
-fn document_onmouseover_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onmouseover"
+fn document_onmouseover_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onmouseover"
 
 ///|
 fn document_set_onmouseover_ffi(obj : JsValue, onmouseover : JsValue) -> Unit = "webapi_Document" "set_onmouseover"
 
 ///|
-fn document_onmouseup_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onmouseup"
+fn document_onmouseup_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onmouseup"
 
 ///|
 fn document_set_onmouseup_ffi(obj : JsValue, onmouseup : JsValue) -> Unit = "webapi_Document" "set_onmouseup"
 
 ///|
-fn document_onpaste_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpaste"
+fn document_onpaste_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpaste"
 
 ///|
 fn document_set_onpaste_ffi(obj : JsValue, onpaste : JsValue) -> Unit = "webapi_Document" "set_onpaste"
 
 ///|
-fn document_onpause_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpause"
+fn document_onpause_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpause"
 
 ///|
 fn document_set_onpause_ffi(obj : JsValue, onpause : JsValue) -> Unit = "webapi_Document" "set_onpause"
 
 ///|
-fn document_onplay_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onplay"
+fn document_onplay_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onplay"
 
 ///|
 fn document_set_onplay_ffi(obj : JsValue, onplay : JsValue) -> Unit = "webapi_Document" "set_onplay"
 
 ///|
-fn document_onplaying_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onplaying"
+fn document_onplaying_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onplaying"
 
 ///|
 fn document_set_onplaying_ffi(obj : JsValue, onplaying : JsValue) -> Unit = "webapi_Document" "set_onplaying"
 
 ///|
-fn document_onprogress_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onprogress"
+fn document_onprogress_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onprogress"
 
 ///|
 fn document_set_onprogress_ffi(obj : JsValue, onprogress : JsValue) -> Unit = "webapi_Document" "set_onprogress"
 
 ///|
-fn document_onratechange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onratechange"
+fn document_onratechange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onratechange"
 
 ///|
 fn document_set_onratechange_ffi(obj : JsValue, onratechange : JsValue) -> Unit = "webapi_Document" "set_onratechange"
 
 ///|
-fn document_onreset_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onreset"
+fn document_onreset_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onreset"
 
 ///|
 fn document_set_onreset_ffi(obj : JsValue, onreset : JsValue) -> Unit = "webapi_Document" "set_onreset"
 
 ///|
-fn document_onresize_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onresize"
+fn document_onresize_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onresize"
 
 ///|
 fn document_set_onresize_ffi(obj : JsValue, onresize : JsValue) -> Unit = "webapi_Document" "set_onresize"
 
 ///|
-fn document_onscroll_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onscroll"
+fn document_onscroll_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onscroll"
 
 ///|
 fn document_set_onscroll_ffi(obj : JsValue, onscroll : JsValue) -> Unit = "webapi_Document" "set_onscroll"
 
 ///|
-fn document_onscrollend_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onscrollend"
+fn document_onscrollend_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onscrollend"
 
 ///|
 fn document_set_onscrollend_ffi(obj : JsValue, onscrollend : JsValue) -> Unit = "webapi_Document" "set_onscrollend"
 
 ///|
-fn document_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onsecuritypolicyviolation"
+fn document_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onsecuritypolicyviolation"
 
 ///|
 fn document_set_onsecuritypolicyviolation_ffi(
@@ -1006,61 +1009,61 @@ fn document_set_onsecuritypolicyviolation_ffi(
 ) -> Unit = "webapi_Document" "set_onsecuritypolicyviolation"
 
 ///|
-fn document_onseeked_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onseeked"
+fn document_onseeked_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onseeked"
 
 ///|
 fn document_set_onseeked_ffi(obj : JsValue, onseeked : JsValue) -> Unit = "webapi_Document" "set_onseeked"
 
 ///|
-fn document_onseeking_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onseeking"
+fn document_onseeking_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onseeking"
 
 ///|
 fn document_set_onseeking_ffi(obj : JsValue, onseeking : JsValue) -> Unit = "webapi_Document" "set_onseeking"
 
 ///|
-fn document_onselect_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onselect"
+fn document_onselect_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onselect"
 
 ///|
 fn document_set_onselect_ffi(obj : JsValue, onselect : JsValue) -> Unit = "webapi_Document" "set_onselect"
 
 ///|
-fn document_onslotchange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onslotchange"
+fn document_onslotchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onslotchange"
 
 ///|
 fn document_set_onslotchange_ffi(obj : JsValue, onslotchange : JsValue) -> Unit = "webapi_Document" "set_onslotchange"
 
 ///|
-fn document_onstalled_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onstalled"
+fn document_onstalled_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onstalled"
 
 ///|
 fn document_set_onstalled_ffi(obj : JsValue, onstalled : JsValue) -> Unit = "webapi_Document" "set_onstalled"
 
 ///|
-fn document_onsubmit_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onsubmit"
+fn document_onsubmit_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onsubmit"
 
 ///|
 fn document_set_onsubmit_ffi(obj : JsValue, onsubmit : JsValue) -> Unit = "webapi_Document" "set_onsubmit"
 
 ///|
-fn document_onsuspend_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onsuspend"
+fn document_onsuspend_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onsuspend"
 
 ///|
 fn document_set_onsuspend_ffi(obj : JsValue, onsuspend : JsValue) -> Unit = "webapi_Document" "set_onsuspend"
 
 ///|
-fn document_ontimeupdate_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontimeupdate"
+fn document_ontimeupdate_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ontimeupdate"
 
 ///|
 fn document_set_ontimeupdate_ffi(obj : JsValue, ontimeupdate : JsValue) -> Unit = "webapi_Document" "set_ontimeupdate"
 
 ///|
-fn document_ontoggle_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontoggle"
+fn document_ontoggle_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ontoggle"
 
 ///|
 fn document_set_ontoggle_ffi(obj : JsValue, ontoggle : JsValue) -> Unit = "webapi_Document" "set_ontoggle"
 
 ///|
-fn document_onvolumechange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onvolumechange"
+fn document_onvolumechange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onvolumechange"
 
 ///|
 fn document_set_onvolumechange_ffi(
@@ -1069,13 +1072,13 @@ fn document_set_onvolumechange_ffi(
 ) -> Unit = "webapi_Document" "set_onvolumechange"
 
 ///|
-fn document_onwaiting_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onwaiting"
+fn document_onwaiting_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onwaiting"
 
 ///|
 fn document_set_onwaiting_ffi(obj : JsValue, onwaiting : JsValue) -> Unit = "webapi_Document" "set_onwaiting"
 
 ///|
-fn document_onwebkitanimationend_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onwebkitanimationend"
+fn document_onwebkitanimationend_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onwebkitanimationend"
 
 ///|
 fn document_set_onwebkitanimationend_ffi(
@@ -1084,7 +1087,9 @@ fn document_set_onwebkitanimationend_ffi(
 ) -> Unit = "webapi_Document" "set_onwebkitanimationend"
 
 ///|
-fn document_onwebkitanimationiteration_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onwebkitanimationiteration"
+fn document_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_Document" "get_onwebkitanimationiteration"
 
 ///|
 fn document_set_onwebkitanimationiteration_ffi(
@@ -1093,7 +1098,7 @@ fn document_set_onwebkitanimationiteration_ffi(
 ) -> Unit = "webapi_Document" "set_onwebkitanimationiteration"
 
 ///|
-fn document_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onwebkitanimationstart"
+fn document_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onwebkitanimationstart"
 
 ///|
 fn document_set_onwebkitanimationstart_ffi(
@@ -1102,7 +1107,7 @@ fn document_set_onwebkitanimationstart_ffi(
 ) -> Unit = "webapi_Document" "set_onwebkitanimationstart"
 
 ///|
-fn document_onwebkittransitionend_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onwebkittransitionend"
+fn document_onwebkittransitionend_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onwebkittransitionend"
 
 ///|
 fn document_set_onwebkittransitionend_ffi(
@@ -1111,31 +1116,31 @@ fn document_set_onwebkittransitionend_ffi(
 ) -> Unit = "webapi_Document" "set_onwebkittransitionend"
 
 ///|
-fn document_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onwheel"
+fn document_onwheel_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onwheel"
 
 ///|
 fn document_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Document" "set_onwheel"
 
 ///|
-fn document_ontouchstart_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchstart"
+fn document_ontouchstart_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ontouchstart"
 
 ///|
 fn document_set_ontouchstart_ffi(obj : JsValue, ontouchstart : JsValue) -> Unit = "webapi_Document" "set_ontouchstart"
 
 ///|
-fn document_ontouchend_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchend"
+fn document_ontouchend_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ontouchend"
 
 ///|
 fn document_set_ontouchend_ffi(obj : JsValue, ontouchend : JsValue) -> Unit = "webapi_Document" "set_ontouchend"
 
 ///|
-fn document_ontouchmove_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchmove"
+fn document_ontouchmove_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ontouchmove"
 
 ///|
 fn document_set_ontouchmove_ffi(obj : JsValue, ontouchmove : JsValue) -> Unit = "webapi_Document" "set_ontouchmove"
 
 ///|
-fn document_ontouchcancel_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ontouchcancel"
+fn document_ontouchcancel_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ontouchcancel"
 
 ///|
 fn document_set_ontouchcancel_ffi(
@@ -1144,7 +1149,7 @@ fn document_set_ontouchcancel_ffi(
 ) -> Unit = "webapi_Document" "set_ontouchcancel"
 
 ///|
-fn document_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerover"
+fn document_onpointerover_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointerover"
 
 ///|
 fn document_set_onpointerover_ffi(
@@ -1153,7 +1158,7 @@ fn document_set_onpointerover_ffi(
 ) -> Unit = "webapi_Document" "set_onpointerover"
 
 ///|
-fn document_onpointerenter_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerenter"
+fn document_onpointerenter_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointerenter"
 
 ///|
 fn document_set_onpointerenter_ffi(
@@ -1162,7 +1167,7 @@ fn document_set_onpointerenter_ffi(
 ) -> Unit = "webapi_Document" "set_onpointerenter"
 
 ///|
-fn document_onpointerdown_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerdown"
+fn document_onpointerdown_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointerdown"
 
 ///|
 fn document_set_onpointerdown_ffi(
@@ -1171,7 +1176,7 @@ fn document_set_onpointerdown_ffi(
 ) -> Unit = "webapi_Document" "set_onpointerdown"
 
 ///|
-fn document_onpointermove_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointermove"
+fn document_onpointermove_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointermove"
 
 ///|
 fn document_set_onpointermove_ffi(
@@ -1180,7 +1185,7 @@ fn document_set_onpointermove_ffi(
 ) -> Unit = "webapi_Document" "set_onpointermove"
 
 ///|
-fn document_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerrawupdate"
+fn document_onpointerrawupdate_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointerrawupdate"
 
 ///|
 fn document_set_onpointerrawupdate_ffi(
@@ -1189,13 +1194,13 @@ fn document_set_onpointerrawupdate_ffi(
 ) -> Unit = "webapi_Document" "set_onpointerrawupdate"
 
 ///|
-fn document_onpointerup_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerup"
+fn document_onpointerup_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointerup"
 
 ///|
 fn document_set_onpointerup_ffi(obj : JsValue, onpointerup : JsValue) -> Unit = "webapi_Document" "set_onpointerup"
 
 ///|
-fn document_onpointercancel_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointercancel"
+fn document_onpointercancel_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointercancel"
 
 ///|
 fn document_set_onpointercancel_ffi(
@@ -1204,13 +1209,13 @@ fn document_set_onpointercancel_ffi(
 ) -> Unit = "webapi_Document" "set_onpointercancel"
 
 ///|
-fn document_onpointerout_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerout"
+fn document_onpointerout_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointerout"
 
 ///|
 fn document_set_onpointerout_ffi(obj : JsValue, onpointerout : JsValue) -> Unit = "webapi_Document" "set_onpointerout"
 
 ///|
-fn document_onpointerleave_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onpointerleave"
+fn document_onpointerleave_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onpointerleave"
 
 ///|
 fn document_set_onpointerleave_ffi(
@@ -1219,7 +1224,7 @@ fn document_set_onpointerleave_ffi(
 ) -> Unit = "webapi_Document" "set_onpointerleave"
 
 ///|
-fn document_ongotpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_ongotpointercapture"
+fn document_ongotpointercapture_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_ongotpointercapture"
 
 ///|
 fn document_set_ongotpointercapture_ffi(
@@ -1228,7 +1233,7 @@ fn document_set_ongotpointercapture_ffi(
 ) -> Unit = "webapi_Document" "set_ongotpointercapture"
 
 ///|
-fn document_onlostpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onlostpointercapture"
+fn document_onlostpointercapture_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onlostpointercapture"
 
 ///|
 fn document_set_onlostpointercapture_ffi(
@@ -1237,7 +1242,7 @@ fn document_set_onlostpointercapture_ffi(
 ) -> Unit = "webapi_Document" "set_onlostpointercapture"
 
 ///|
-fn document_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onselectstart"
+fn document_onselectstart_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onselectstart"
 
 ///|
 fn document_set_onselectstart_ffi(
@@ -1246,7 +1251,7 @@ fn document_set_onselectstart_ffi(
 ) -> Unit = "webapi_Document" "set_onselectstart"
 
 ///|
-fn document_onselectionchange_ffi(obj : JsValue) -> EventHandler = "webapi_Document" "get_onselectionchange"
+fn document_onselectionchange_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_Document" "get_onselectionchange"
 
 ///|
 fn document_set_onselectionchange_ffi(
@@ -1262,7 +1267,10 @@ fn document_get_box_quads_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[DOMQuad] {
-  document_get_box_quads_ffi_wasm(obj, options).unsafe_cast()
+  jsvalue_to_array(
+    document_get_box_quads_ffi_wasm(obj, options),
+    JsValue::unsafe_cast,
+  )
 }
 
 ///|

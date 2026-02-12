@@ -32,7 +32,7 @@ extern "js" fn worker_global_scope_import_scripts_ffi(
 extern "js" fn worker_global_scope_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
 
 ///|
-fn worker_global_scope_onerror_ffi(obj : JsValue) -> OnErrorEventHandler {
+fn worker_global_scope_onerror_ffi(obj : JsValue) -> OnErrorEventHandlerNonNull {
   worker_global_scope_onerror_ffi_js(obj).unsafe_cast()
 }
 
@@ -48,7 +48,9 @@ extern "js" fn worker_global_scope_onlanguagechange_ffi_js(
 ) -> JsValue = "(obj) => obj.onlanguagechange"
 
 ///|
-fn worker_global_scope_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+fn worker_global_scope_onlanguagechange_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   worker_global_scope_onlanguagechange_ffi_js(obj).unsafe_cast()
 }
 
@@ -62,7 +64,7 @@ extern "js" fn worker_global_scope_set_onlanguagechange_ffi(
 extern "js" fn worker_global_scope_onoffline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onoffline"
 
 ///|
-fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandler {
+fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandlerNonNull {
   worker_global_scope_onoffline_ffi_js(obj).unsafe_cast()
 }
 
@@ -76,7 +78,7 @@ extern "js" fn worker_global_scope_set_onoffline_ffi(
 extern "js" fn worker_global_scope_ononline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ononline"
 
 ///|
-fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandler {
+fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandlerNonNull {
   worker_global_scope_ononline_ffi_js(obj).unsafe_cast()
 }
 
@@ -92,7 +94,9 @@ extern "js" fn worker_global_scope_onrejectionhandled_ffi_js(
 ) -> JsValue = "(obj) => obj.onrejectionhandled"
 
 ///|
-fn worker_global_scope_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+fn worker_global_scope_onrejectionhandled_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   worker_global_scope_onrejectionhandled_ffi_js(obj).unsafe_cast()
 }
 
@@ -108,7 +112,9 @@ extern "js" fn worker_global_scope_onunhandledrejection_ffi_js(
 ) -> JsValue = "(obj) => obj.onunhandledrejection"
 
 ///|
-fn worker_global_scope_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+fn worker_global_scope_onunhandledrejection_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   worker_global_scope_onunhandledrejection_ffi_js(obj).unsafe_cast()
 }
 

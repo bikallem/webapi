@@ -22,23 +22,25 @@ pub impl TEventTarget for Performance
 ///|
 /// [Performance](https://developer.mozilla.org/en-US/docs/Web/API/Performance) interface.
 pub trait TPerformance: TEventTarget {
-  now(self : Self) -> DOMHighResTimeStamp = _
-  time_origin(self : Self) -> DOMHighResTimeStamp = _
+  now(self : Self) -> Double = _
+  time_origin(self : Self) -> Double = _
   to_json(self : Self) -> JsValue = _
-  get_entries(self : Self) -> PerformanceEntryList = _
-  get_entries_by_type(self : Self, type_ : String) -> PerformanceEntryList = _
-  get_entries_by_name(self : Self, name : String, type_? : String) -> PerformanceEntryList = _
+  get_entries(self : Self) -> Array[PerformanceEntry] = _
+  get_entries_by_type(self : Self, type_ : String) -> Array[PerformanceEntry] = _
+  get_entries_by_name(self : Self, name : String, type_? : String) -> Array[
+    PerformanceEntry,
+  ] = _
 }
 
 ///|
 /// [Performance.now](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
-impl TPerformance with now(self : Self) -> DOMHighResTimeStamp {
+impl TPerformance with now(self : Self) -> Double {
   performance_now_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Performance.timeOrigin](https://developer.mozilla.org/en-US/docs/Web/API/Performance/timeOrigin)
-impl TPerformance with time_origin(self : Self) -> DOMHighResTimeStamp {
+impl TPerformance with time_origin(self : Self) -> Double {
   performance_time_origin_ffi(TJsValue::to_js(self))
 }
 
@@ -50,13 +52,15 @@ impl TPerformance with to_json(self : Self) -> JsValue {
 
 ///|
 /// [Performance.getEntries](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntries)
-impl TPerformance with get_entries(self : Self) -> PerformanceEntryList {
+impl TPerformance with get_entries(self : Self) -> Array[PerformanceEntry] {
   performance_get_entries_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [Performance.getEntriesByType](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntriesByType)
-impl TPerformance with get_entries_by_type(self : Self, type_ : String) -> PerformanceEntryList {
+impl TPerformance with get_entries_by_type(self : Self, type_ : String) -> Array[
+  PerformanceEntry,
+] {
   performance_get_entries_by_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
@@ -69,7 +73,7 @@ impl TPerformance with get_entries_by_name(
   self : Self,
   name : String,
   type_? : String,
-) -> PerformanceEntryList {
+) -> Array[PerformanceEntry] {
   performance_get_entries_by_name_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),

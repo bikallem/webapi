@@ -86,3 +86,19 @@ pub impl[T : TJsValue] TJsValue for Array[T] with to_js(self : Array[T]) -> JsVa
   }
   arr
 }
+
+///|
+fn js_array_length(arr : JsValue) -> Int = "webapi_Primitives" "arrayLength"
+
+///|
+fn js_array_get(arr : JsValue, idx : Int) -> JsValue = "webapi_Primitives" "arrayGet"
+
+///|
+fn[T] jsvalue_to_array(v : JsValue, convert : (JsValue) -> T) -> Array[T] {
+  let len = js_array_length(v)
+  let result : Array[T] = Array::new(capacity=len)
+  for i in 0..<len {
+    result.push(convert(js_array_get(v, i)))
+  }
+  result
+}

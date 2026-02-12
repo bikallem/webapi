@@ -133,7 +133,7 @@ fn event_is_trusted_ffi(obj : JsValue) -> Bool {
 extern "js" fn event_time_stamp_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.timeStamp"
 
 ///|
-fn event_time_stamp_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+fn event_time_stamp_ffi(obj : JsValue) -> Double {
   event_time_stamp_ffi_js(obj).unsafe_cast()
 }
 

@@ -30,7 +30,7 @@ fn video_track_list_selected_index_ffi(obj : JsValue) -> Int {
 extern "js" fn video_track_list_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
 
 ///|
-fn video_track_list_onchange_ffi(obj : JsValue) -> EventHandler {
+fn video_track_list_onchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   video_track_list_onchange_ffi_js(obj).unsafe_cast()
 }
 
@@ -44,7 +44,7 @@ extern "js" fn video_track_list_set_onchange_ffi(
 extern "js" fn video_track_list_onaddtrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onaddtrack"
 
 ///|
-fn video_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler {
+fn video_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandlerNonNull {
   video_track_list_onaddtrack_ffi_js(obj).unsafe_cast()
 }
 
@@ -58,7 +58,7 @@ extern "js" fn video_track_list_set_onaddtrack_ffi(
 extern "js" fn video_track_list_onremovetrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onremovetrack"
 
 ///|
-fn video_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandler {
+fn video_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandlerNonNull {
   video_track_list_onremovetrack_ffi_js(obj).unsafe_cast()
 }
 

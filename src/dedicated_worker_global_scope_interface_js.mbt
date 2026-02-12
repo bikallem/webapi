@@ -51,7 +51,9 @@ extern "js" fn dedicated_worker_global_scope_onmessage_ffi_js(
 ) -> JsValue = "(obj) => obj.onmessage"
 
 ///|
-fn dedicated_worker_global_scope_onmessage_ffi(obj : JsValue) -> EventHandler {
+fn dedicated_worker_global_scope_onmessage_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull {
   dedicated_worker_global_scope_onmessage_ffi_js(obj).unsafe_cast()
 }
 
@@ -69,7 +71,7 @@ extern "js" fn dedicated_worker_global_scope_onmessageerror_ffi_js(
 ///|
 fn dedicated_worker_global_scope_onmessageerror_ffi(
   obj : JsValue,
-) -> EventHandler {
+) -> EventHandlerNonNull {
   dedicated_worker_global_scope_onmessageerror_ffi_js(obj).unsafe_cast()
 }
 

@@ -57,8 +57,8 @@ pub fn SharedWorker::new(
 /// [SharedWorker](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) interface.
 pub trait TSharedWorker: TEventTarget {
   port(self : Self) -> MessagePort = _
-  onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  onerror(self : Self) -> EventHandlerNonNull = _
+  set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -69,12 +69,12 @@ impl TSharedWorker with port(self : Self) -> MessagePort {
 
 ///|
 /// [SharedWorker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/onerror)
-impl TSharedWorker with onerror(self : Self) -> EventHandler {
+impl TSharedWorker with onerror(self : Self) -> EventHandlerNonNull {
   shared_worker_onerror_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [SharedWorker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/onerror)
-impl TSharedWorker with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+impl TSharedWorker with set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit {
   shared_worker_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }

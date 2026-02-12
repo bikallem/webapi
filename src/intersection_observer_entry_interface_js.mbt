@@ -9,7 +9,7 @@ extern "js" fn intersection_observer_entry_time_ffi_js(
 ) -> JsValue = "(obj) => obj.time"
 
 ///|
-fn intersection_observer_entry_time_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+fn intersection_observer_entry_time_ffi(obj : JsValue) -> Double {
   intersection_observer_entry_time_ffi_js(obj).unsafe_cast()
 }
 

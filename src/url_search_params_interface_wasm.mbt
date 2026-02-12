@@ -29,7 +29,10 @@ fn url_search_params_get_all_ffi(
   obj : JsValue,
   name : JsValue,
 ) -> Array[String] {
-  url_search_params_get_all_ffi_wasm(obj, name).unsafe_cast()
+  jsvalue_to_array(
+    url_search_params_get_all_ffi_wasm(obj, name),
+    jsvalue_to_string,
+  )
 }
 
 ///|

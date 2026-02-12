@@ -70,18 +70,18 @@ pub trait TFileReader: TEventTarget {
   ready_state(self : Self) -> UInt = _
   result(self : Self) -> FileReaderResult = _
   error(self : Self) -> DOMException = _
-  onloadstart(self : Self) -> EventHandler = _
-  set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit = _
-  onprogress(self : Self) -> EventHandler = _
-  set_onprogress(self : Self, onprogress : EventHandler) -> Unit = _
-  onload(self : Self) -> EventHandler = _
-  set_onload(self : Self, onload : EventHandler) -> Unit = _
-  onabort(self : Self) -> EventHandler = _
-  set_onabort(self : Self, onabort : EventHandler) -> Unit = _
-  onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
-  onloadend(self : Self) -> EventHandler = _
-  set_onloadend(self : Self, onloadend : EventHandler) -> Unit = _
+  onloadstart(self : Self) -> EventHandlerNonNull = _
+  set_onloadstart(self : Self, onloadstart : EventHandlerNonNull) -> Unit = _
+  onprogress(self : Self) -> EventHandlerNonNull = _
+  set_onprogress(self : Self, onprogress : EventHandlerNonNull) -> Unit = _
+  onload(self : Self) -> EventHandlerNonNull = _
+  set_onload(self : Self, onload : EventHandlerNonNull) -> Unit = _
+  onabort(self : Self) -> EventHandlerNonNull = _
+  set_onabort(self : Self, onabort : EventHandlerNonNull) -> Unit = _
+  onerror(self : Self) -> EventHandlerNonNull = _
+  set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit = _
+  onloadend(self : Self) -> EventHandlerNonNull = _
+  set_onloadend(self : Self, onloadend : EventHandlerNonNull) -> Unit = _
 }
 
 ///|
@@ -148,13 +148,16 @@ impl TFileReader with error(self : Self) -> DOMException {
 
 ///|
 /// [FileReader.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadstart)
-impl TFileReader with onloadstart(self : Self) -> EventHandler {
+impl TFileReader with onloadstart(self : Self) -> EventHandlerNonNull {
   file_reader_onloadstart_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [FileReader.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadstart)
-impl TFileReader with set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit {
+impl TFileReader with set_onloadstart(
+  self : Self,
+  onloadstart : EventHandlerNonNull,
+) -> Unit {
   file_reader_set_onloadstart_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onloadstart),
@@ -163,13 +166,16 @@ impl TFileReader with set_onloadstart(self : Self, onloadstart : EventHandler) -
 
 ///|
 /// [FileReader.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onprogress)
-impl TFileReader with onprogress(self : Self) -> EventHandler {
+impl TFileReader with onprogress(self : Self) -> EventHandlerNonNull {
   file_reader_onprogress_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [FileReader.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onprogress)
-impl TFileReader with set_onprogress(self : Self, onprogress : EventHandler) -> Unit {
+impl TFileReader with set_onprogress(
+  self : Self,
+  onprogress : EventHandlerNonNull,
+) -> Unit {
   file_reader_set_onprogress_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onprogress),
@@ -178,49 +184,52 @@ impl TFileReader with set_onprogress(self : Self, onprogress : EventHandler) -> 
 
 ///|
 /// [FileReader.onload](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload)
-impl TFileReader with onload(self : Self) -> EventHandler {
+impl TFileReader with onload(self : Self) -> EventHandlerNonNull {
   file_reader_onload_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [FileReader.onload](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload)
-impl TFileReader with set_onload(self : Self, onload : EventHandler) -> Unit {
+impl TFileReader with set_onload(self : Self, onload : EventHandlerNonNull) -> Unit {
   file_reader_set_onload_ffi(TJsValue::to_js(self), TJsValue::to_js(onload))
 }
 
 ///|
 /// [FileReader.onabort](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onabort)
-impl TFileReader with onabort(self : Self) -> EventHandler {
+impl TFileReader with onabort(self : Self) -> EventHandlerNonNull {
   file_reader_onabort_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [FileReader.onabort](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onabort)
-impl TFileReader with set_onabort(self : Self, onabort : EventHandler) -> Unit {
+impl TFileReader with set_onabort(self : Self, onabort : EventHandlerNonNull) -> Unit {
   file_reader_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(onabort))
 }
 
 ///|
 /// [FileReader.onerror](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onerror)
-impl TFileReader with onerror(self : Self) -> EventHandler {
+impl TFileReader with onerror(self : Self) -> EventHandlerNonNull {
   file_reader_onerror_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [FileReader.onerror](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onerror)
-impl TFileReader with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+impl TFileReader with set_onerror(self : Self, onerror : EventHandlerNonNull) -> Unit {
   file_reader_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
 }
 
 ///|
 /// [FileReader.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadend)
-impl TFileReader with onloadend(self : Self) -> EventHandler {
+impl TFileReader with onloadend(self : Self) -> EventHandlerNonNull {
   file_reader_onloadend_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [FileReader.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onloadend)
-impl TFileReader with set_onloadend(self : Self, onloadend : EventHandler) -> Unit {
+impl TFileReader with set_onloadend(
+  self : Self,
+  onloadend : EventHandlerNonNull,
+) -> Unit {
   file_reader_set_onloadend_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(onloadend),

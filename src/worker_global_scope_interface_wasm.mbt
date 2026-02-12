@@ -14,7 +14,7 @@ fn worker_global_scope_import_scripts_ffi(
 ) -> Unit = "webapi_WorkerGlobalScope" "importScripts"
 
 ///|
-fn worker_global_scope_onerror_ffi(obj : JsValue) -> OnErrorEventHandler = "webapi_WorkerGlobalScope" "get_onerror"
+fn worker_global_scope_onerror_ffi(obj : JsValue) -> OnErrorEventHandlerNonNull = "webapi_WorkerGlobalScope" "get_onerror"
 
 ///|
 fn worker_global_scope_set_onerror_ffi(
@@ -23,7 +23,9 @@ fn worker_global_scope_set_onerror_ffi(
 ) -> Unit = "webapi_WorkerGlobalScope" "set_onerror"
 
 ///|
-fn worker_global_scope_onlanguagechange_ffi(obj : JsValue) -> EventHandler = "webapi_WorkerGlobalScope" "get_onlanguagechange"
+fn worker_global_scope_onlanguagechange_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_WorkerGlobalScope" "get_onlanguagechange"
 
 ///|
 fn worker_global_scope_set_onlanguagechange_ffi(
@@ -32,7 +34,7 @@ fn worker_global_scope_set_onlanguagechange_ffi(
 ) -> Unit = "webapi_WorkerGlobalScope" "set_onlanguagechange"
 
 ///|
-fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandler = "webapi_WorkerGlobalScope" "get_onoffline"
+fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_WorkerGlobalScope" "get_onoffline"
 
 ///|
 fn worker_global_scope_set_onoffline_ffi(
@@ -41,7 +43,7 @@ fn worker_global_scope_set_onoffline_ffi(
 ) -> Unit = "webapi_WorkerGlobalScope" "set_onoffline"
 
 ///|
-fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandler = "webapi_WorkerGlobalScope" "get_ononline"
+fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_WorkerGlobalScope" "get_ononline"
 
 ///|
 fn worker_global_scope_set_ononline_ffi(
@@ -50,7 +52,9 @@ fn worker_global_scope_set_ononline_ffi(
 ) -> Unit = "webapi_WorkerGlobalScope" "set_ononline"
 
 ///|
-fn worker_global_scope_onrejectionhandled_ffi(obj : JsValue) -> EventHandler = "webapi_WorkerGlobalScope" "get_onrejectionhandled"
+fn worker_global_scope_onrejectionhandled_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_WorkerGlobalScope" "get_onrejectionhandled"
 
 ///|
 fn worker_global_scope_set_onrejectionhandled_ffi(
@@ -59,7 +63,9 @@ fn worker_global_scope_set_onrejectionhandled_ffi(
 ) -> Unit = "webapi_WorkerGlobalScope" "set_onrejectionhandled"
 
 ///|
-fn worker_global_scope_onunhandledrejection_ffi(obj : JsValue) -> EventHandler = "webapi_WorkerGlobalScope" "get_onunhandledrejection"
+fn worker_global_scope_onunhandledrejection_ffi(
+  obj : JsValue,
+) -> EventHandlerNonNull = "webapi_WorkerGlobalScope" "get_onunhandledrejection"
 
 ///|
 fn worker_global_scope_set_onunhandledrejection_ffi(

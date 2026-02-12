@@ -41,7 +41,7 @@ fn offscreen_canvas_convert_to_blob_ffi(
 }
 
 ///|
-fn offscreen_canvas_oncontextlost_ffi(obj : JsValue) -> EventHandler = "webapi_OffscreenCanvas" "get_oncontextlost"
+fn offscreen_canvas_oncontextlost_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_OffscreenCanvas" "get_oncontextlost"
 
 ///|
 fn offscreen_canvas_set_oncontextlost_ffi(
@@ -50,7 +50,7 @@ fn offscreen_canvas_set_oncontextlost_ffi(
 ) -> Unit = "webapi_OffscreenCanvas" "set_oncontextlost"
 
 ///|
-fn offscreen_canvas_oncontextrestored_ffi(obj : JsValue) -> EventHandler = "webapi_OffscreenCanvas" "get_oncontextrestored"
+fn offscreen_canvas_oncontextrestored_ffi(obj : JsValue) -> EventHandlerNonNull = "webapi_OffscreenCanvas" "get_oncontextrestored"
 
 ///|
 fn offscreen_canvas_set_oncontextrestored_ffi(

@@ -14,7 +14,7 @@ extern "js" fn close_watcher_destroy_ffi(obj : JsValue) -> Unit = "(obj) => obj.
 extern "js" fn close_watcher_oncancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncancel"
 
 ///|
-fn close_watcher_oncancel_ffi(obj : JsValue) -> EventHandler {
+fn close_watcher_oncancel_ffi(obj : JsValue) -> EventHandlerNonNull {
   close_watcher_oncancel_ffi_js(obj).unsafe_cast()
 }
 
@@ -28,7 +28,7 @@ extern "js" fn close_watcher_set_oncancel_ffi(
 extern "js" fn close_watcher_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
 
 ///|
-fn close_watcher_onclose_ffi(obj : JsValue) -> EventHandler {
+fn close_watcher_onclose_ffi(obj : JsValue) -> EventHandlerNonNull {
   close_watcher_onclose_ffi_js(obj).unsafe_cast()
 }
 

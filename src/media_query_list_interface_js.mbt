@@ -30,7 +30,7 @@ extern "js" fn media_query_list_remove_listener_ffi(
 extern "js" fn media_query_list_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
 
 ///|
-fn media_query_list_onchange_ffi(obj : JsValue) -> EventHandler {
+fn media_query_list_onchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   media_query_list_onchange_ffi_js(obj).unsafe_cast()
 }
 

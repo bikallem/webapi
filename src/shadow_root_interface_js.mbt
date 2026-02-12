@@ -50,7 +50,7 @@ fn shadow_root_host_ffi(obj : JsValue) -> Element {
 extern "js" fn shadow_root_onslotchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onslotchange"
 
 ///|
-fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandler {
+fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandlerNonNull {
   shadow_root_onslotchange_ffi_js(obj).unsafe_cast()
 }
 
