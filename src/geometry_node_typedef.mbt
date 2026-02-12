@@ -19,6 +19,9 @@ pub(open) trait TGeometryNode {
 pub fn[T : TGeometryNode] GeometryNode::into(self : GeometryNode) -> T = "%identity"
 
 ///|
+pub impl TGeometryNode for GeometryNode with to_js(self : GeometryNode) -> JsValue = "%identity"
+
+///|
 pub impl TGeometryNode for Text with to_js(self : Text) -> JsValue = "%identity"
 
 ///|

@@ -13,8 +13,8 @@ pub impl TJsValue for RequestInit with to_js(self : RequestInit) -> JsValue = "%
 ///|
 pub fn RequestInit::new(
   method_? : String,
-  headers? : HeadersInit,
-  body? : BodyInit,
+  headers? : &THeadersInit,
+  body? : &TBodyInit,
   referrer? : String,
   referrer_policy? : ReferrerPolicy,
   mode? : RequestMode,
@@ -30,8 +30,14 @@ pub fn RequestInit::new(
 ) -> RequestInit {
   request_init_ffi(
     opt_to_js(method_),
-    opt_to_js(headers),
-    opt_to_js(body),
+    match headers {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+    match body {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     opt_to_js(referrer),
     opt_to_js(referrer_policy),
     opt_to_js(mode),

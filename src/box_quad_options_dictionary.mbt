@@ -13,9 +13,15 @@ pub impl TJsValue for BoxQuadOptions with to_js(self : BoxQuadOptions) -> JsValu
 ///|
 pub fn BoxQuadOptions::new(
   box? : CSSBoxType = CSSBoxType::Border,
-  relative_to? : GeometryNode,
+  relative_to? : &TGeometryNode,
 ) -> BoxQuadOptions {
-  box_quad_options_ffi(TJsValue::to_js(box), opt_to_js(relative_to))
+  box_quad_options_ffi(
+    TJsValue::to_js(box),
+    match relative_to {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

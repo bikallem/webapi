@@ -22,6 +22,7 @@ pub impl Emitter for DictionaryEmitter with emit(
     }),
     dict.name,
     "new",
+    self.idl,
     self.type_registry,
   )
   emits
@@ -135,4 +136,21 @@ test "DictionaryEmitter multi-target separates FFI" {
     multi.wasm_ffi.contains("\"webapi_Dictionary\" \"empty\""),
     content="true",
   )
+}
+
+///|
+test "DictionaryEmitter does not emit duplicate commas for optional union args" {
+  let idl =
+    #|dictionary TestDict {
+    #|  (DOMString or long) headers;
+    #|  DOMString method;
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let dictionary_emitter = DictionaryEmitter::{ idl: flattened, type_registry }
+  let (_, emits) = dictionary_emitter.emit("TestDict")
+  let code = mbt_code_gen(emits)
+  inspect(code.contains("},,"), content="false")
 }

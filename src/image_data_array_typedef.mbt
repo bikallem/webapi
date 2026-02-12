@@ -19,6 +19,9 @@ pub(open) trait TImageDataArray {
 pub fn[T : TImageDataArray] ImageDataArray::into(self : ImageDataArray) -> T = "%identity"
 
 ///|
+pub impl TImageDataArray for ImageDataArray with to_js(self : ImageDataArray) -> JsValue = "%identity"
+
+///|
 pub impl TImageDataArray for Uint8ClampedArray with to_js(
   self : Uint8ClampedArray,
 ) -> JsValue = "%identity"

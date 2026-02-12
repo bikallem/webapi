@@ -17,8 +17,13 @@ pub fn[T : THeaders] Headers::into(self : Headers) -> T = "%identity"
 pub impl THeaders for Headers
 
 ///|
-pub fn Headers::new(init? : HeadersInit) -> Headers {
-  headers_new_ffi(opt_to_js(init))
+pub fn Headers::new(init? : &THeadersInit) -> Headers {
+  headers_new_ffi(
+    match init {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

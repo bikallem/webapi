@@ -64,7 +64,7 @@ pub trait THTMLMediaElement: THTMLElement {
   src(self : Self) -> String = _
   set_src(self : Self, src : String) -> Unit = _
   src_object(self : Self) -> MediaProvider = _
-  set_src_object(self : Self, src_object : MediaProvider) -> Unit = _
+  set_src_object(self : Self, src_object : &TMediaProvider) -> Unit = _
   current_src(self : Self) -> String = _
   cross_origin(self : Self) -> String = _
   set_cross_origin(self : Self, cross_origin : String) -> Unit = _
@@ -144,11 +144,11 @@ impl THTMLMediaElement with src_object(self : Self) -> MediaProvider {
 /// [HTMLMediaElement.srcObject](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/srcObject)
 impl THTMLMediaElement with set_src_object(
   self : Self,
-  src_object : MediaProvider,
+  src_object : &TMediaProvider,
 ) -> Unit {
   html_media_element_set_src_object_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(src_object),
+    src_object.to_js(),
   )
 }
 

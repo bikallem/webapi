@@ -19,6 +19,9 @@ pub(open) trait TBlobPart {
 pub fn[T : TBlobPart] BlobPart::into(self : BlobPart) -> T = "%identity"
 
 ///|
+pub impl TBlobPart for BlobPart with to_js(self : BlobPart) -> JsValue = "%identity"
+
+///|
 pub impl TBlobPart for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
 
 ///|

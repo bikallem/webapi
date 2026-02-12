@@ -21,6 +21,11 @@ pub fn[T : TImageBitmapSource] ImageBitmapSource::into(
 ) -> T = "%identity"
 
 ///|
+pub impl TImageBitmapSource for ImageBitmapSource with to_js(
+  self : ImageBitmapSource,
+) -> JsValue = "%identity"
+
+///|
 pub impl TImageBitmapSource for CanvasImageSource with to_js(
   self : CanvasImageSource,
 ) -> JsValue = "%identity"

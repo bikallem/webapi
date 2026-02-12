@@ -46,7 +46,7 @@ pub trait TMessageEvent: TEvent {
     data? : JsValue,
     origin? : String,
     last_event_id? : String,
-    source? : MessageEventSource,
+    source? : &TMessageEventSource,
     ports? : Array[MessagePort],
   ) -> Unit = _
 }
@@ -91,7 +91,7 @@ impl TMessageEvent with init_message_event(
   data? : JsValue = JsValue::null(),
   origin? : String = "",
   last_event_id? : String = "",
-  source? : MessageEventSource = JsValue::null(),
+  source? : &TMessageEventSource = JsValue::null(),
   ports? : Array[MessagePort] = [],
 ) -> Unit {
   message_event_init_message_event_ffi(
@@ -102,7 +102,7 @@ impl TMessageEvent with init_message_event(
     TJsValue::to_js(data),
     TJsValue::to_js(origin),
     TJsValue::to_js(last_event_id),
-    TJsValue::to_js(source),
+    source.to_js(),
     TJsValue::to_js(ports),
   )
 }

@@ -21,6 +21,11 @@ pub fn[T : TMessageEventSource] MessageEventSource::into(
 ) -> T = "%identity"
 
 ///|
+pub impl TMessageEventSource for MessageEventSource with to_js(
+  self : MessageEventSource,
+) -> JsValue = "%identity"
+
+///|
 pub impl TMessageEventSource for WindowProxy with to_js(self : WindowProxy) -> JsValue = "%identity"
 
 ///|

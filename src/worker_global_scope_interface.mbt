@@ -66,14 +66,14 @@ pub trait TWorkerGlobalScope: TEventTarget {
   atob(self : Self, data : String) -> String = _
   set_timeout(
     self : Self,
-    handler : TimerHandler,
+    handler : &TTimerHandler,
     timeout? : Int,
     arguments : Array[&TJsValue],
   ) -> Int = _
   clear_timeout(self : Self, id? : Int) -> Unit = _
   set_interval(
     self : Self,
-    handler : TimerHandler,
+    handler : &TTimerHandler,
     timeout? : Int,
     arguments : Array[&TJsValue],
   ) -> Int = _
@@ -81,12 +81,12 @@ pub trait TWorkerGlobalScope: TEventTarget {
   queue_microtask(self : Self, callback : VoidFunction) -> Unit = _
   create_image_bitmap(
     self : Self,
-    image : ImageBitmapSource,
+    image : &TImageBitmapSource,
     options? : ImageBitmapOptions,
   ) -> JsPromise[ImageBitmap] = _
   create_image_bitmap_2(
     self : Self,
-    image : ImageBitmapSource,
+    image : &TImageBitmapSource,
     sx : Int,
     sy : Int,
     sw : Int,
@@ -98,7 +98,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
-  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> JsPromise[
+  fetch(self : Self, input : &TRequestInfo, init? : RequestInit) -> JsPromise[
     Response,
   ] = _
   performance(self : Self) -> Performance = _
@@ -287,13 +287,13 @@ impl TWorkerGlobalScope with atob(self : Self, data : String) -> String {
 /// [WorkerGlobalScope.setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setTimeout)
 impl TWorkerGlobalScope with set_timeout(
   self : Self,
-  handler : TimerHandler,
+  handler : &TTimerHandler,
   timeout? : Int = (0 : Int),
   arguments : Array[&TJsValue],
 ) -> Int {
   worker_global_scope_set_timeout_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(handler),
+    handler.to_js(),
     TJsValue::to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
@@ -312,13 +312,13 @@ impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = (0 : Int)) -
 /// [WorkerGlobalScope.setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setInterval)
 impl TWorkerGlobalScope with set_interval(
   self : Self,
-  handler : TimerHandler,
+  handler : &TTimerHandler,
   timeout? : Int = (0 : Int),
   arguments : Array[&TJsValue],
 ) -> Int {
   worker_global_scope_set_interval_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(handler),
+    handler.to_js(),
     TJsValue::to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
@@ -349,12 +349,12 @@ impl TWorkerGlobalScope with queue_microtask(
 /// [WorkerGlobalScope.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/createImageBitmap)
 impl TWorkerGlobalScope with create_image_bitmap(
   self : Self,
-  image : ImageBitmapSource,
+  image : &TImageBitmapSource,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
 ) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(options),
   )
 }
@@ -363,7 +363,7 @@ impl TWorkerGlobalScope with create_image_bitmap(
 /// [WorkerGlobalScope.createImageBitmap_2](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/createImageBitmap_2)
 impl TWorkerGlobalScope with create_image_bitmap_2(
   self : Self,
-  image : ImageBitmapSource,
+  image : &TImageBitmapSource,
   sx : Int,
   sy : Int,
   sw : Int,
@@ -372,7 +372,7 @@ impl TWorkerGlobalScope with create_image_bitmap_2(
 ) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_2_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(sx),
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),
@@ -399,12 +399,12 @@ impl TWorkerGlobalScope with structured_clone(
 /// [WorkerGlobalScope.fetch](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/fetch)
 impl TWorkerGlobalScope with fetch(
   self : Self,
-  input : RequestInfo,
+  input : &TRequestInfo,
   init? : RequestInit = RequestInit::empty(),
 ) -> JsPromise[Response] {
   worker_global_scope_fetch_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(input),
+    input.to_js(),
     TJsValue::to_js(init),
   )
 }

@@ -21,6 +21,11 @@ pub fn[T : TCanvasImageSource] CanvasImageSource::into(
 ) -> T = "%identity"
 
 ///|
+pub impl TCanvasImageSource for CanvasImageSource with to_js(
+  self : CanvasImageSource,
+) -> JsValue = "%identity"
+
+///|
 pub impl TCanvasImageSource for HTMLOrSVGImageElement with to_js(
   self : HTMLOrSVGImageElement,
 ) -> JsValue = "%identity"

@@ -23,6 +23,11 @@ pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::into(
 ) -> T = "%identity"
 
 ///|
+pub impl TAllowSharedBufferSource for AllowSharedBufferSource with to_js(
+  self : AllowSharedBufferSource,
+) -> JsValue = "%identity"
+
+///|
 pub impl TAllowSharedBufferSource for ArrayBuffer with to_js(self : ArrayBuffer) -> JsValue = "%identity"
 
 ///|

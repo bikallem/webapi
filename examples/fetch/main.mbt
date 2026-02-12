@@ -79,9 +79,6 @@ fn main {
 }
 
 ///|
-fn string_to_request_info(s : String) -> @webapi.RequestInfo = "%identity"
-
-///|
 fn do_fetch(url : String) -> Unit {
   let doc = @webapi.document
   let status_el = doc.get_element_by_id("status").unwrap()
@@ -91,7 +88,7 @@ fn do_fetch(url : String) -> Unit {
   headers_el.set_text_content("")
   body_el.set_text_content("")
   @webapi.window
-  .fetch(string_to_request_info(url))
+  .fetch(url)
   .then(fn(response : @webapi.Response) {
     let status = response.status()
     let ok = response.ok()

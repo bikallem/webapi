@@ -19,6 +19,9 @@ pub(open) trait TVibratePattern {
 pub fn[T : TVibratePattern] VibratePattern::into(self : VibratePattern) -> T = "%identity"
 
 ///|
+pub impl TVibratePattern for VibratePattern with to_js(self : VibratePattern) -> JsValue = "%identity"
+
+///|
 pub impl TVibratePattern for UInt with to_js(self : UInt) -> JsValue {
   TJsValue::to_js(self)
 }

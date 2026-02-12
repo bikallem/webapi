@@ -20,7 +20,7 @@ pub impl TNavigator for Navigator
 /// [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) interface.
 pub trait TNavigator: TJsValue {
   user_activation(self : Self) -> UserActivation = _
-  vibrate(self : Self, pattern : VibratePattern) -> Bool = _
+  vibrate(self : Self, pattern : &TVibratePattern) -> Bool = _
   max_touch_points(self : Self) -> Int = _
   clipboard(self : Self) -> Clipboard = _
   app_code_name(self : Self) -> String = _
@@ -56,8 +56,8 @@ impl TNavigator with user_activation(self : Self) -> UserActivation {
 
 ///|
 /// [Navigator.vibrate](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vibrate)
-impl TNavigator with vibrate(self : Self, pattern : VibratePattern) -> Bool {
-  navigator_vibrate_ffi(TJsValue::to_js(self), TJsValue::to_js(pattern))
+impl TNavigator with vibrate(self : Self, pattern : &TVibratePattern) -> Bool {
+  navigator_vibrate_ffi(TJsValue::to_js(self), pattern.to_js())
 }
 
 ///|

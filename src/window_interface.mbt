@@ -104,7 +104,7 @@ pub trait TWindow: TEventTarget {
   release_events(self : Self) -> Unit = _
   external(self : Self) -> External = _
   get_computed_style(self : Self, elt : &TElement, pseudo_elt? : CSSOMString) -> CSSStyleProperties = _
-  fetch_later(self : Self, input : RequestInfo, init? : DeferredRequestInit) -> FetchLaterResult = _
+  fetch_later(self : Self, input : &TRequestInfo, init? : DeferredRequestInit) -> FetchLaterResult = _
   match_media(self : Self, query : CSSOMString) -> MediaQueryList = _
   screen(self : Self) -> Screen = _
   visual_viewport(self : Self) -> VisualViewport = _
@@ -374,14 +374,14 @@ pub trait TWindow: TEventTarget {
   atob(self : Self, data : String) -> String = _
   set_timeout(
     self : Self,
-    handler : TimerHandler,
+    handler : &TTimerHandler,
     timeout? : Int,
     arguments : Array[&TJsValue],
   ) -> Int = _
   clear_timeout(self : Self, id? : Int) -> Unit = _
   set_interval(
     self : Self,
-    handler : TimerHandler,
+    handler : &TTimerHandler,
     timeout? : Int,
     arguments : Array[&TJsValue],
   ) -> Int = _
@@ -389,12 +389,12 @@ pub trait TWindow: TEventTarget {
   queue_microtask(self : Self, callback : VoidFunction) -> Unit = _
   create_image_bitmap(
     self : Self,
-    image : ImageBitmapSource,
+    image : &TImageBitmapSource,
     options? : ImageBitmapOptions,
   ) -> JsPromise[ImageBitmap] = _
   create_image_bitmap_2(
     self : Self,
-    image : ImageBitmapSource,
+    image : &TImageBitmapSource,
     sx : Int,
     sy : Int,
     sw : Int,
@@ -406,7 +406,7 @@ pub trait TWindow: TEventTarget {
     value : JsValue,
     options? : StructuredSerializeOptions,
   ) -> JsValue = _
-  fetch(self : Self, input : RequestInfo, init? : RequestInit) -> JsPromise[
+  fetch(self : Self, input : &TRequestInfo, init? : RequestInit) -> JsPromise[
     Response,
   ] = _
   performance(self : Self) -> Performance = _
@@ -756,12 +756,12 @@ impl TWindow with get_computed_style(
 /// [Window.fetchLater](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater)
 impl TWindow with fetch_later(
   self : Self,
-  input : RequestInfo,
+  input : &TRequestInfo,
   init? : DeferredRequestInit = DeferredRequestInit::empty(),
 ) -> FetchLaterResult {
   window_fetch_later_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(input),
+    input.to_js(),
     TJsValue::to_js(init),
   )
 }
@@ -2590,13 +2590,13 @@ impl TWindow with atob(self : Self, data : String) -> String {
 /// [Window.setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout)
 impl TWindow with set_timeout(
   self : Self,
-  handler : TimerHandler,
+  handler : &TTimerHandler,
   timeout? : Int = (0 : Int),
   arguments : Array[&TJsValue],
 ) -> Int {
   window_set_timeout_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(handler),
+    handler.to_js(),
     TJsValue::to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
@@ -2612,13 +2612,13 @@ impl TWindow with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
 /// [Window.setInterval](https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval)
 impl TWindow with set_interval(
   self : Self,
-  handler : TimerHandler,
+  handler : &TTimerHandler,
   timeout? : Int = (0 : Int),
   arguments : Array[&TJsValue],
 ) -> Int {
   window_set_interval_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(handler),
+    handler.to_js(),
     TJsValue::to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
@@ -2640,12 +2640,12 @@ impl TWindow with queue_microtask(self : Self, callback : VoidFunction) -> Unit 
 /// [Window.createImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap)
 impl TWindow with create_image_bitmap(
   self : Self,
-  image : ImageBitmapSource,
+  image : &TImageBitmapSource,
   options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
 ) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(options),
   )
 }
@@ -2654,7 +2654,7 @@ impl TWindow with create_image_bitmap(
 /// [Window.createImageBitmap_2](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap_2)
 impl TWindow with create_image_bitmap_2(
   self : Self,
-  image : ImageBitmapSource,
+  image : &TImageBitmapSource,
   sx : Int,
   sy : Int,
   sw : Int,
@@ -2663,7 +2663,7 @@ impl TWindow with create_image_bitmap_2(
 ) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_2_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(sx),
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),
@@ -2690,14 +2690,10 @@ impl TWindow with structured_clone(
 /// [Window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
 impl TWindow with fetch(
   self : Self,
-  input : RequestInfo,
+  input : &TRequestInfo,
   init? : RequestInit = RequestInit::empty(),
 ) -> JsPromise[Response] {
-  window_fetch_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(input),
-    TJsValue::to_js(init),
-  )
+  window_fetch_ffi(TJsValue::to_js(self), input.to_js(), TJsValue::to_js(init))
 }
 
 ///|

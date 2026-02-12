@@ -47,6 +47,7 @@ pub impl Emitter for NamespaceEmitter with emit(
           static_op,
           mbt_name,
           orig_method_name,
+          self.idl,
           self.type_registry,
           js_name=ns.name,
         )
@@ -68,6 +69,7 @@ pub impl Emitter for NamespaceEmitter with emit(
         let (attr_emits, attr_methods) = emit_attribute(
           static_attr,
           mbt_name,
+          self.idl,
           self.type_registry,
           js_name=ns.name,
         )

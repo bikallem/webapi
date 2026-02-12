@@ -203,7 +203,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     x : Double,
     y : Double,
   ) -> CanvasGradient = _
-  create_pattern(self : Self, image : CanvasImageSource, repetition : String) -> CanvasPattern? = _
+  create_pattern(self : Self, image : &TCanvasImageSource, repetition : String) -> CanvasPattern? = _
   shadow_offset_x(self : Self) -> Double = _
   set_shadow_offset_x(self : Self, shadow_offset_x : Double) -> Unit = _
   shadow_offset_y(self : Self) -> Double = _
@@ -256,10 +256,10 @@ pub trait TCanvasRenderingContext2D: TJsValue {
     max_width? : Double,
   ) -> Unit = _
   measure_text(self : Self, text : String) -> TextMetrics = _
-  draw_image(self : Self, image : CanvasImageSource, dx : Double, dy : Double) -> Unit = _
+  draw_image(self : Self, image : &TCanvasImageSource, dx : Double, dy : Double) -> Unit = _
   draw_image_2(
     self : Self,
-    image : CanvasImageSource,
+    image : &TCanvasImageSource,
     dx : Double,
     dy : Double,
     dw : Double,
@@ -267,7 +267,7 @@ pub trait TCanvasRenderingContext2D: TJsValue {
   ) -> Unit = _
   draw_image_3(
     self : Self,
-    image : CanvasImageSource,
+    image : &TCanvasImageSource,
     sx : Double,
     sy : Double,
     sw : Double,
@@ -702,12 +702,12 @@ impl TCanvasRenderingContext2D with create_conic_gradient(
 /// [CanvasRenderingContext2D.createPattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern)
 impl TCanvasRenderingContext2D with create_pattern(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   repetition : String,
 ) -> CanvasPattern? {
   let result = canvas_rendering_context2d_create_pattern_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(repetition),
   )
   if JsValue::is_null(result) {
@@ -1070,13 +1070,13 @@ impl TCanvasRenderingContext2D with measure_text(self : Self, text : String) -> 
 /// [CanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
 impl TCanvasRenderingContext2D with draw_image(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   dx : Double,
   dy : Double,
 ) -> Unit {
   canvas_rendering_context2d_draw_image_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
   )
@@ -1086,7 +1086,7 @@ impl TCanvasRenderingContext2D with draw_image(
 /// [CanvasRenderingContext2D.drawImage_2](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage_2)
 impl TCanvasRenderingContext2D with draw_image_2(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   dx : Double,
   dy : Double,
   dw : Double,
@@ -1094,7 +1094,7 @@ impl TCanvasRenderingContext2D with draw_image_2(
 ) -> Unit {
   canvas_rendering_context2d_draw_image_2_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
     TJsValue::to_js(dw),
@@ -1106,7 +1106,7 @@ impl TCanvasRenderingContext2D with draw_image_2(
 /// [CanvasRenderingContext2D.drawImage_3](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage_3)
 impl TCanvasRenderingContext2D with draw_image_3(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   sx : Double,
   sy : Double,
   sw : Double,
@@ -1118,7 +1118,7 @@ impl TCanvasRenderingContext2D with draw_image_3(
 ) -> Unit {
   canvas_rendering_context2d_draw_image_3_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(sx),
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),

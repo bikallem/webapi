@@ -19,6 +19,9 @@ pub(open) trait TTimerHandler {
 pub fn[T : TTimerHandler] TimerHandler::into(self : TimerHandler) -> T = "%identity"
 
 ///|
+pub impl TTimerHandler for TimerHandler with to_js(self : TimerHandler) -> JsValue = "%identity"
+
+///|
 pub impl TTimerHandler for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|

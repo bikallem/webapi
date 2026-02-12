@@ -14,12 +14,15 @@ pub impl TJsValue for ResponseInit with to_js(self : ResponseInit) -> JsValue = 
 pub fn ResponseInit::new(
   status? : UInt = (200 : UInt),
   status_text? : String = "",
-  headers? : HeadersInit,
+  headers? : &THeadersInit,
 ) -> ResponseInit {
   response_init_ffi(
     TJsValue::to_js(status),
     TJsValue::to_js(status_text),
-    opt_to_js(headers),
+    match headers {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

@@ -19,6 +19,9 @@ pub(open) trait THeadersInit {
 pub fn[T : THeadersInit] HeadersInit::into(self : HeadersInit) -> T = "%identity"
 
 ///|
+pub impl THeadersInit for HeadersInit with to_js(self : HeadersInit) -> JsValue = "%identity"
+
+///|
 pub impl THeadersInit for Array[Array[String]] with to_js(
   self : Array[Array[String]],
 ) -> JsValue = "%identity"

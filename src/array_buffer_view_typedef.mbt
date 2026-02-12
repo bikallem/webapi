@@ -19,6 +19,9 @@ pub(open) trait TArrayBufferView {
 pub fn[T : TArrayBufferView] ArrayBufferView::into(self : ArrayBufferView) -> T = "%identity"
 
 ///|
+pub impl TArrayBufferView for ArrayBufferView with to_js(self : ArrayBufferView) -> JsValue = "%identity"
+
+///|
 pub impl TArrayBufferView for Int8Array with to_js(self : Int8Array) -> JsValue = "%identity"
 
 ///|

@@ -18,10 +18,10 @@ pub impl TRequest for Request
 
 ///|
 pub fn Request::new(
-  input : RequestInfo,
+  input : &TRequestInfo,
   init? : RequestInit = RequestInit::empty(),
 ) -> Request {
-  request_new_ffi(TJsValue::to_js(input), TJsValue::to_js(init))
+  request_new_ffi(input.to_js(), TJsValue::to_js(init))
 }
 
 ///|

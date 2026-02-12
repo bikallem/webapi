@@ -208,7 +208,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     x : Double,
     y : Double,
   ) -> CanvasGradient = _
-  create_pattern(self : Self, image : CanvasImageSource, repetition : String) -> CanvasPattern? = _
+  create_pattern(self : Self, image : &TCanvasImageSource, repetition : String) -> CanvasPattern? = _
   shadow_offset_x(self : Self) -> Double = _
   set_shadow_offset_x(self : Self, shadow_offset_x : Double) -> Unit = _
   shadow_offset_y(self : Self) -> Double = _
@@ -259,10 +259,10 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     max_width? : Double,
   ) -> Unit = _
   measure_text(self : Self, text : String) -> TextMetrics = _
-  draw_image(self : Self, image : CanvasImageSource, dx : Double, dy : Double) -> Unit = _
+  draw_image(self : Self, image : &TCanvasImageSource, dx : Double, dy : Double) -> Unit = _
   draw_image_2(
     self : Self,
-    image : CanvasImageSource,
+    image : &TCanvasImageSource,
     dx : Double,
     dy : Double,
     dw : Double,
@@ -270,7 +270,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
   ) -> Unit = _
   draw_image_3(
     self : Self,
-    image : CanvasImageSource,
+    image : &TCanvasImageSource,
     sx : Double,
     sy : Double,
     sw : Double,
@@ -725,12 +725,12 @@ impl TOffscreenCanvasRenderingContext2D with create_conic_gradient(
 /// [OffscreenCanvasRenderingContext2D.createPattern](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createPattern)
 impl TOffscreenCanvasRenderingContext2D with create_pattern(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   repetition : String,
 ) -> CanvasPattern? {
   let result = offscreen_canvas_rendering_context2d_create_pattern_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(repetition),
   )
   if JsValue::is_null(result) {
@@ -1080,13 +1080,13 @@ impl TOffscreenCanvasRenderingContext2D with measure_text(
 /// [OffscreenCanvasRenderingContext2D.drawImage](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage)
 impl TOffscreenCanvasRenderingContext2D with draw_image(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   dx : Double,
   dy : Double,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_draw_image_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
   )
@@ -1096,7 +1096,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image(
 /// [OffscreenCanvasRenderingContext2D.drawImage_2](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage_2)
 impl TOffscreenCanvasRenderingContext2D with draw_image_2(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   dx : Double,
   dy : Double,
   dw : Double,
@@ -1104,7 +1104,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image_2(
 ) -> Unit {
   offscreen_canvas_rendering_context2d_draw_image_2_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(dx),
     TJsValue::to_js(dy),
     TJsValue::to_js(dw),
@@ -1116,7 +1116,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image_2(
 /// [OffscreenCanvasRenderingContext2D.drawImage_3](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/drawImage_3)
 impl TOffscreenCanvasRenderingContext2D with draw_image_3(
   self : Self,
-  image : CanvasImageSource,
+  image : &TCanvasImageSource,
   sx : Double,
   sy : Double,
   sw : Double,
@@ -1128,7 +1128,7 @@ impl TOffscreenCanvasRenderingContext2D with draw_image_3(
 ) -> Unit {
   offscreen_canvas_rendering_context2d_draw_image_3_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(image),
+    image.to_js(),
     TJsValue::to_js(sx),
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),

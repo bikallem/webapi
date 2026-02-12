@@ -18,7 +18,7 @@ pub fn MessageEventInit::new(
   data? : JsValue = JsValue::null(),
   origin? : String = "",
   last_event_id? : String = "",
-  source? : MessageEventSource = JsValue::null(),
+  source? : &TMessageEventSource = JsValue::null(),
   ports? : Array[MessagePort] = [],
 ) -> MessageEventInit {
   message_event_init_ffi(
@@ -28,7 +28,7 @@ pub fn MessageEventInit::new(
     TJsValue::to_js(data),
     TJsValue::to_js(origin),
     TJsValue::to_js(last_event_id),
-    TJsValue::to_js(source),
+    source.to_js(),
     TJsValue::to_js(ports),
   )
 }

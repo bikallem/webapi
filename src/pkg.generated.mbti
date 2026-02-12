@@ -380,6 +380,7 @@ pub impl TJsValue for AddEventListenerOptions
 #external
 pub type AllowSharedBufferSource
 pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::into(Self) -> T
+pub impl TAllowSharedBufferSource for AllowSharedBufferSource
 pub impl TJsValue for AllowSharedBufferSource
 
 #external
@@ -393,6 +394,7 @@ pub impl TJsValue for ArrayBuffer
 pub type ArrayBufferView
 pub fn[T : TArrayBufferView] ArrayBufferView::into(Self) -> T
 pub impl TAllowSharedBufferSource for ArrayBufferView
+pub impl TArrayBufferView for ArrayBufferView
 pub impl TBufferSource for ArrayBufferView
 pub impl TJsValue for ArrayBufferView
 
@@ -478,6 +480,7 @@ pub impl TJsValue for BlobCallback
 #external
 pub type BlobPart
 pub fn[T : TBlobPart] BlobPart::into(Self) -> T
+pub impl TBlobPart for BlobPart
 pub impl TJsValue for BlobPart
 
 #external
@@ -489,12 +492,13 @@ pub impl TJsValue for BlobPropertyBag
 #external
 pub type BodyInit
 pub fn[T : TBodyInit] BodyInit::into(Self) -> T
+pub impl TBodyInit for BodyInit
 pub impl TJsValue for BodyInit
 
 #external
 pub type BoxQuadOptions
 pub fn BoxQuadOptions::empty() -> Self
-pub fn BoxQuadOptions::new(box? : CSSBoxType, relative_to? : GeometryNode) -> Self
+pub fn BoxQuadOptions::new(box? : CSSBoxType, relative_to? : &TGeometryNode) -> Self
 pub impl TJsValue for BoxQuadOptions
 
 #external
@@ -509,6 +513,7 @@ pub impl TJsValue for BroadcastChannel
 pub type BufferSource
 pub fn[T : TBufferSource] BufferSource::into(Self) -> T
 pub impl TBlobPart for BufferSource
+pub impl TBufferSource for BufferSource
 pub impl TJsValue for BufferSource
 pub impl TWebSocketSendData for BufferSource
 pub impl TXMLHttpRequestBodyInit for BufferSource
@@ -725,6 +730,7 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient
 #external
 pub type CanvasImageSource
 pub fn[T : TCanvasImageSource] CanvasImageSource::into(Self) -> T
+pub impl TCanvasImageSource for CanvasImageSource
 pub impl TImageBitmapSource for CanvasImageSource
 pub impl TJsValue for CanvasImageSource
 
@@ -1248,7 +1254,7 @@ pub impl TWorkerGlobalScope for DedicatedWorkerGlobalScope
 #external
 pub type DeferredRequestInit
 pub fn DeferredRequestInit::empty() -> Self
-pub fn DeferredRequestInit::new(method_? : String, headers? : HeadersInit, body? : BodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue, activate_after? : Double) -> Self
+pub fn DeferredRequestInit::new(method_? : String, headers? : &THeadersInit, body? : &TBodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue, activate_after? : Double) -> Self
 pub impl TJsValue for DeferredRequestInit
 
 #external
@@ -1551,6 +1557,7 @@ pub impl TXMLHttpRequestBodyInit for FormData
 #external
 pub type FormDataEntryValue
 pub fn[T : TFormDataEntryValue] FormDataEntryValue::into(Self) -> T
+pub impl TFormDataEntryValue for FormDataEntryValue
 pub impl TJsValue for FormDataEntryValue
 
 #external
@@ -1608,6 +1615,7 @@ pub impl TRenderingContext for GPUCanvasContext
 #external
 pub type GeometryNode
 pub fn[T : TGeometryNode] GeometryNode::into(Self) -> T
+pub impl TGeometryNode for GeometryNode
 pub impl TJsValue for GeometryNode
 
 #external
@@ -2182,11 +2190,13 @@ pub impl TJsValue for HTMLOptionsCollection
 pub type HTMLOrSVGImageElement
 pub fn[T : THTMLOrSVGImageElement] HTMLOrSVGImageElement::into(Self) -> T
 pub impl TCanvasImageSource for HTMLOrSVGImageElement
+pub impl THTMLOrSVGImageElement for HTMLOrSVGImageElement
 pub impl TJsValue for HTMLOrSVGImageElement
 
 #external
 pub type HTMLOrSVGScriptElement
 pub fn[T : THTMLOrSVGScriptElement] HTMLOrSVGScriptElement::into(Self) -> T
+pub impl THTMLOrSVGScriptElement for HTMLOrSVGScriptElement
 pub impl TJsValue for HTMLOrSVGScriptElement
 
 #external
@@ -2517,13 +2527,14 @@ pub impl TJsValue for HashChangeEventInit
 #external
 pub type Headers
 pub fn[T : THeaders] Headers::into(Self) -> T
-pub fn Headers::new(init? : HeadersInit) -> Self
+pub fn Headers::new(init? : &THeadersInit) -> Self
 pub impl THeaders for Headers
 pub impl TJsValue for Headers
 
 #external
 pub type HeadersInit
 pub fn[T : THeadersInit] HeadersInit::into(Self) -> T
+pub impl THeadersInit for HeadersInit
 pub impl TJsValue for HeadersInit
 
 #external
@@ -2584,13 +2595,14 @@ pub impl TJsValue for ImageBitmapRenderingContextSettings
 #external
 pub type ImageBitmapSource
 pub fn[T : TImageBitmapSource] ImageBitmapSource::into(Self) -> T
+pub impl TImageBitmapSource for ImageBitmapSource
 pub impl TJsValue for ImageBitmapSource
 
 #external
 pub type ImageData
 pub fn[T : TImageData] ImageData::into(Self) -> T
 pub fn ImageData::new(UInt, UInt, settings? : ImageDataSettings) -> Self
-pub fn ImageData::new_2(ImageDataArray, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
+pub fn ImageData::new_2(&TImageDataArray, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
 pub impl TImageBitmapSource for ImageData
 pub impl TImageData for ImageData
 pub impl TJsValue for ImageData
@@ -2598,6 +2610,7 @@ pub impl TJsValue for ImageData
 #external
 pub type ImageDataArray
 pub fn[T : TImageDataArray] ImageDataArray::into(Self) -> T
+pub impl TImageDataArray for ImageDataArray
 pub impl TJsValue for ImageDataArray
 
 pub(all) enum ImageDataPixelFormat {
@@ -2778,6 +2791,7 @@ pub impl TMediaList for MediaList
 pub type MediaProvider
 pub fn[T : TMediaProvider] MediaProvider::into(Self) -> T
 pub impl TJsValue for MediaProvider
+pub impl TMediaProvider for MediaProvider
 
 #external
 pub type MediaQueryList
@@ -2829,13 +2843,14 @@ pub impl TMessageEvent for MessageEvent
 #external
 pub type MessageEventInit
 pub fn MessageEventInit::empty() -> Self
-pub fn MessageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : MessageEventSource, ports? : Array[MessagePort]) -> Self
+pub fn MessageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : &TMessageEventSource, ports? : Array[MessagePort]) -> Self
 pub impl TJsValue for MessageEventInit
 
 #external
 pub type MessageEventSource
 pub fn[T : TMessageEventSource] MessageEventSource::into(Self) -> T
 pub impl TJsValue for MessageEventSource
+pub impl TMessageEventSource for MessageEventSource
 
 #external
 pub type MessagePort
@@ -3143,7 +3158,7 @@ pub impl Show for NotificationDirection
 #external
 pub type NotificationOptions
 pub fn NotificationOptions::empty() -> Self
-pub fn NotificationOptions::new(dir? : NotificationDirection, lang? : String, body? : String, navigate? : String, tag? : String, image? : String, icon? : String, badge? : String, vibrate? : VibratePattern, timestamp? : UInt64, renotify? : Bool, silent? : Bool, require_interaction? : Bool, data? : JsValue, actions? : Array[NotificationAction]) -> Self
+pub fn NotificationOptions::new(dir? : NotificationDirection, lang? : String, body? : String, navigate? : String, tag? : String, image? : String, icon? : String, badge? : String, vibrate? : &TVibratePattern, timestamp? : UInt64, renotify? : Bool, silent? : Bool, require_interaction? : Bool, data? : JsValue, actions? : Array[NotificationAction]) -> Self
 pub impl TJsValue for NotificationOptions
 
 pub(all) enum NotificationPermission {
@@ -3192,6 +3207,7 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRender
 pub type OffscreenRenderingContext
 pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::into(Self) -> T
 pub impl TJsValue for OffscreenRenderingContext
+pub impl TOffscreenRenderingContext for OffscreenRenderingContext
 
 pub(all) enum OffscreenRenderingContextId {
   V2d
@@ -3516,11 +3532,12 @@ pub impl Show for ReferrerPolicy
 pub type RenderingContext
 pub fn[T : TRenderingContext] RenderingContext::into(Self) -> T
 pub impl TJsValue for RenderingContext
+pub impl TRenderingContext for RenderingContext
 
 #external
 pub type Request
 pub fn[T : TRequest] Request::into(Self) -> T
-pub fn Request::new(RequestInfo, init? : RequestInit) -> Self
+pub fn Request::new(&TRequestInfo, init? : RequestInit) -> Self
 pub impl TJsValue for Request
 pub impl TRequest for Request
 pub impl TRequestInfo for Request
@@ -3588,11 +3605,12 @@ pub impl Show for RequestDuplex
 pub type RequestInfo
 pub fn[T : TRequestInfo] RequestInfo::into(Self) -> T
 pub impl TJsValue for RequestInfo
+pub impl TRequestInfo for RequestInfo
 
 #external
 pub type RequestInit
 pub fn RequestInit::empty() -> Self
-pub fn RequestInit::new(method_? : String, headers? : HeadersInit, body? : BodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue) -> Self
+pub fn RequestInit::new(method_? : String, headers? : &THeadersInit, body? : &TBodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue) -> Self
 pub impl TJsValue for RequestInit
 
 pub(all) enum RequestMode {
@@ -3682,7 +3700,7 @@ pub type Response
 pub fn Response::error() -> Self
 pub fn[T : TResponse] Response::into(Self) -> T
 pub fn Response::json(JsValue, init? : ResponseInit) -> Self
-pub fn Response::new(body? : BodyInit, init? : ResponseInit) -> Self
+pub fn Response::new(body? : &TBodyInit, init? : ResponseInit) -> Self
 pub fn Response::redirect(String, status? : UInt) -> Self
 pub impl TJsValue for Response
 pub impl TResponse for Response
@@ -3690,7 +3708,7 @@ pub impl TResponse for Response
 #external
 pub type ResponseInit
 pub fn ResponseInit::empty() -> Self
-pub fn ResponseInit::new(status? : UInt, status_text? : String, headers? : HeadersInit) -> Self
+pub fn ResponseInit::new(status? : UInt, status_text? : String, headers? : &THeadersInit) -> Self
 pub impl TJsValue for ResponseInit
 
 pub(all) enum ResponseType {
@@ -4625,6 +4643,7 @@ pub impl TTimeRanges for TimeRanges
 pub type TimerHandler
 pub fn[T : TTimerHandler] TimerHandler::into(Self) -> T
 pub impl TJsValue for TimerHandler
+pub impl TTimerHandler for TimerHandler
 
 #external
 pub type ToggleEvent
@@ -4759,6 +4778,7 @@ pub fn[T : TTrustedType] TrustedType::into(Self) -> T
 pub impl TElementSetAttributeNSValue for TrustedType
 pub impl TElementSetAttributeValue for TrustedType
 pub impl TJsValue for TrustedType
+pub impl TTrustedType for TrustedType
 
 #external
 pub type TrustedTypePolicy
@@ -4854,6 +4874,7 @@ pub impl TJsValue for ValidityStateFlags
 pub type VibratePattern
 pub fn[T : TVibratePattern] VibratePattern::into(Self) -> T
 pub impl TJsValue for VibratePattern
+pub impl TVibratePattern for VibratePattern
 
 #external
 pub type VideoFrame
@@ -5039,6 +5060,7 @@ pub type XMLHttpRequestBodyInit
 pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::into(Self) -> T
 pub impl TBodyInit for XMLHttpRequestBodyInit
 pub impl TJsValue for XMLHttpRequestBodyInit
+pub impl TXMLHttpRequestBodyInit for XMLHttpRequestBodyInit
 pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit
 
 #external
@@ -5371,7 +5393,7 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, CanvasImageSource, String) -> CanvasPattern?
+  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -5401,9 +5423,9 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> TextMetrics
-  draw_image(Self, CanvasImageSource, Double, Double) -> Unit
-  draw_image_2(Self, CanvasImageSource, Double, Double, Double, Double) -> Unit
-  draw_image_3(Self, CanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
+  draw_image_2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image_3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
   create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
   create_image_data_2(Self, &TImageData) -> ImageData
   get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
@@ -6158,9 +6180,9 @@ pub trait TDocument : TNode {
   onselectionchange(Self) -> EventHandlerNonNull
   set_onselectionchange(Self, EventHandlerNonNull) -> Unit
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[DOMQuad]
-  convert_quad_from_node(Self, DOMQuadInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
-  convert_rect_from_node(Self, &TDOMRectReadOnly, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
-  convert_point_from_node(Self, DOMPointInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
+  convert_quad_from_node(Self, DOMQuadInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
+  convert_rect_from_node(Self, &TDOMRectReadOnly, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
+  convert_point_from_node(Self, DOMPointInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
 }
 
 pub(open) trait TDocumentAppendNodes {
@@ -6360,9 +6382,9 @@ pub trait TElement : TNode {
   remove(Self) -> Unit
   assigned_slot(Self) -> HTMLSlotElement
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[DOMQuad]
-  convert_quad_from_node(Self, DOMQuadInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
-  convert_rect_from_node(Self, &TDOMRectReadOnly, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
-  convert_point_from_node(Self, DOMPointInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
+  convert_quad_from_node(Self, DOMQuadInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
+  convert_rect_from_node(Self, &TDOMRectReadOnly, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
+  convert_point_from_node(Self, DOMPointInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
 }
 
 pub(open) trait TElementAfterNodes {
@@ -7603,7 +7625,7 @@ pub trait THTMLMediaElement : THTMLElement {
   src(Self) -> String
   set_src(Self, String) -> Unit
   src_object(Self) -> MediaProvider
-  set_src_object(Self, MediaProvider) -> Unit
+  set_src_object(Self, &TMediaProvider) -> Unit
   current_src(Self) -> String
   cross_origin(Self) -> String
   set_cross_origin(Self, String) -> Unit
@@ -8423,7 +8445,7 @@ pub trait TMessageEvent : TEvent {
   last_event_id(Self) -> String
   source(Self) -> MessageEventSource
   ports(Self) -> JsValue
-  init_message_event(Self, String, bubbles? : Bool, cancelable? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : MessageEventSource, ports? : Array[MessagePort]) -> Unit
+  init_message_event(Self, String, bubbles? : Bool, cancelable? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : &TMessageEventSource, ports? : Array[MessagePort]) -> Unit
 }
 
 pub(open) trait TMessageEventSource {
@@ -8594,7 +8616,7 @@ pub trait TNavigationTransition : TJsValue {
 
 pub trait TNavigator : TJsValue {
   user_activation(Self) -> UserActivation
-  vibrate(Self, VibratePattern) -> Bool
+  vibrate(Self, &TVibratePattern) -> Bool
   max_touch_points(Self) -> Int
   clipboard(Self) -> Clipboard
   app_code_name(Self) -> String
@@ -8759,7 +8781,7 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, CanvasImageSource, String) -> CanvasPattern?
+  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -8787,9 +8809,9 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   fill_text(Self, String, Double, Double, max_width? : Double) -> Unit
   stroke_text(Self, String, Double, Double, max_width? : Double) -> Unit
   measure_text(Self, String) -> TextMetrics
-  draw_image(Self, CanvasImageSource, Double, Double) -> Unit
-  draw_image_2(Self, CanvasImageSource, Double, Double, Double, Double) -> Unit
-  draw_image_3(Self, CanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+  draw_image(Self, &TCanvasImageSource, Double, Double) -> Unit
+  draw_image_2(Self, &TCanvasImageSource, Double, Double, Double, Double) -> Unit
+  draw_image_3(Self, &TCanvasImageSource, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
   create_image_data(Self, Int, Int, settings? : ImageDataSettings) -> ImageData
   create_image_data_2(Self, &TImageData) -> ImageData
   get_image_data(Self, Int, Int, Int, Int, settings? : ImageDataSettings) -> ImageData
@@ -9995,13 +10017,13 @@ pub trait TText : TCharacterData {
   whole_text(Self) -> String
   assigned_slot(Self) -> HTMLSlotElement
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[DOMQuad]
-  convert_quad_from_node(Self, DOMQuadInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
-  convert_rect_from_node(Self, &TDOMRectReadOnly, GeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
-  convert_point_from_node(Self, DOMPointInit, GeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
+  convert_quad_from_node(Self, DOMQuadInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
+  convert_rect_from_node(Self, &TDOMRectReadOnly, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
+  convert_point_from_node(Self, DOMPointInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
 }
 
 pub trait TTextDecoder : TJsValue {
-  decode(Self, input? : AllowSharedBufferSource, options? : TextDecodeOptions) -> String
+  decode(Self, input? : &TAllowSharedBufferSource, options? : TextDecodeOptions) -> String
   encoding(Self) -> String
   fatal(Self) -> Bool
   ignore_bom(Self) -> Bool
@@ -10415,7 +10437,7 @@ pub trait TWindow : TEventTarget {
   release_events(Self) -> Unit
   external(Self) -> External
   get_computed_style(Self, &TElement, pseudo_elt? : String) -> CSSStyleProperties
-  fetch_later(Self, RequestInfo, init? : DeferredRequestInit) -> FetchLaterResult
+  fetch_later(Self, &TRequestInfo, init? : DeferredRequestInit) -> FetchLaterResult
   match_media(Self, String) -> MediaQueryList
   screen(Self) -> Screen
   visual_viewport(Self) -> VisualViewport
@@ -10673,15 +10695,15 @@ pub trait TWindow : TEventTarget {
   report_error(Self, JsValue) -> Unit
   btoa(Self, String) -> String
   atob(Self, String) -> String
-  set_timeout(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
+  set_timeout(Self, &TTimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_timeout(Self, id? : Int) -> Unit
-  set_interval(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
+  set_interval(Self, &TTimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
-  create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
-  create_image_bitmap_2(Self, ImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap_2(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
-  fetch(Self, RequestInfo, init? : RequestInit) -> JsPromise[Response]
+  fetch(Self, &TRequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
   trusted_types(Self) -> TrustedTypePolicyFactory
   request_animation_frame(Self, FrameRequestCallback) -> UInt
@@ -10729,15 +10751,15 @@ pub trait TWorkerGlobalScope : TEventTarget {
   report_error(Self, JsValue) -> Unit
   btoa(Self, String) -> String
   atob(Self, String) -> String
-  set_timeout(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
+  set_timeout(Self, &TTimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_timeout(Self, id? : Int) -> Unit
-  set_interval(Self, TimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
+  set_interval(Self, &TTimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
   queue_microtask(Self, VoidFunction) -> Unit
-  create_image_bitmap(Self, ImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
-  create_image_bitmap_2(Self, ImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
+  create_image_bitmap_2(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
-  fetch(Self, RequestInfo, init? : RequestInit) -> JsPromise[Response]
+  fetch(Self, &TRequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
   trusted_types(Self) -> TrustedTypePolicyFactory
 }

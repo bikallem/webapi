@@ -20,7 +20,7 @@ pub fn NotificationOptions::new(
   image? : String,
   icon? : String,
   badge? : String,
-  vibrate? : VibratePattern,
+  vibrate? : &TVibratePattern,
   timestamp? : EpochTimeStamp,
   renotify? : Bool = false,
   silent? : Bool = JsValue::null(),
@@ -37,7 +37,10 @@ pub fn NotificationOptions::new(
     opt_to_js(image),
     opt_to_js(icon),
     opt_to_js(badge),
-    opt_to_js(vibrate),
+    match vibrate {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     opt_to_js(timestamp),
     TJsValue::to_js(renotify),
     TJsValue::to_js(silent),

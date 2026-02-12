@@ -19,6 +19,9 @@ pub(open) trait TMediaProvider {
 pub fn[T : TMediaProvider] MediaProvider::into(self : MediaProvider) -> T = "%identity"
 
 ///|
+pub impl TMediaProvider for MediaProvider with to_js(self : MediaProvider) -> JsValue = "%identity"
+
+///|
 pub impl TMediaProvider for MediaStream with to_js(self : MediaStream) -> JsValue = "%identity"
 
 ///|

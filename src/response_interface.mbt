@@ -18,10 +18,10 @@ pub impl TResponse for Response
 
 ///|
 pub fn Response::new(
-  body? : BodyInit = JsValue::null(),
+  body? : &TBodyInit = JsValue::null(),
   init? : ResponseInit = ResponseInit::empty(),
 ) -> Response {
-  response_new_ffi(TJsValue::to_js(body), TJsValue::to_js(init))
+  response_new_ffi(body.to_js(), TJsValue::to_js(init))
 }
 
 ///|

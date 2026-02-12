@@ -19,6 +19,9 @@ pub(open) trait TBodyInit {
 pub fn[T : TBodyInit] BodyInit::into(self : BodyInit) -> T = "%identity"
 
 ///|
+pub impl TBodyInit for BodyInit with to_js(self : BodyInit) -> JsValue = "%identity"
+
+///|
 pub impl TBodyInit for ReadableStream with to_js(self : ReadableStream) -> JsValue = "%identity"
 
 ///|

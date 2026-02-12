@@ -327,19 +327,19 @@ pub trait TElement: TNode {
   convert_quad_from_node(
     self : Self,
     quad : DOMQuadInit,
-    from : GeometryNode,
+    from : &TGeometryNode,
     options? : ConvertCoordinateOptions,
   ) -> DOMQuad = _
   convert_rect_from_node(
     self : Self,
     rect : &TDOMRectReadOnly,
-    from : GeometryNode,
+    from : &TGeometryNode,
     options? : ConvertCoordinateOptions,
   ) -> DOMQuad = _
   convert_point_from_node(
     self : Self,
     point : DOMPointInit,
-    from : GeometryNode,
+    from : &TGeometryNode,
     options? : ConvertCoordinateOptions,
   ) -> DOMPoint = _
 }
@@ -1196,13 +1196,13 @@ impl TElement with get_box_quads(
 impl TElement with convert_quad_from_node(
   self : Self,
   quad : DOMQuadInit,
-  from : GeometryNode,
+  from : &TGeometryNode,
   options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
 ) -> DOMQuad {
   element_convert_quad_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(quad),
-    TJsValue::to_js(from),
+    from.to_js(),
     TJsValue::to_js(options),
   )
 }
@@ -1212,13 +1212,13 @@ impl TElement with convert_quad_from_node(
 impl TElement with convert_rect_from_node(
   self : Self,
   rect : &TDOMRectReadOnly,
-  from : GeometryNode,
+  from : &TGeometryNode,
   options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
 ) -> DOMQuad {
   element_convert_rect_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(rect),
-    TJsValue::to_js(from),
+    from.to_js(),
     TJsValue::to_js(options),
   )
 }
@@ -1228,13 +1228,13 @@ impl TElement with convert_rect_from_node(
 impl TElement with convert_point_from_node(
   self : Self,
   point : DOMPointInit,
-  from : GeometryNode,
+  from : &TGeometryNode,
   options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
 ) -> DOMPoint {
   element_convert_point_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(point),
-    TJsValue::to_js(from),
+    from.to_js(),
     TJsValue::to_js(options),
   )
 }

@@ -768,10 +768,20 @@ fn trait_method_impl_args(args : Array[@type_mapping.MethodArg]) -> String {
 }
 
 ///|
+fn is_trait_ref_type(type_ : @type_mapping.ArgMbtType) -> Bool {
+  match type_ {
+    @type_mapping.ArgMbtType::Other(name) => name.has_prefix("&T")
+    _ => false
+  }
+}
+
+///|
 fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
   args
   .map(arg => {
     let arg_name = @type_mapping.safe_identifier(arg.name)
+    let is_union_or_trait = arg.type_ is @type_mapping.Union(_) ||
+      is_trait_ref_type(arg.type_)
     if arg.variadic {
       // Extract inner type from "Array[X]" -> "X"
       let type_name = arg.type_.name()
@@ -786,16 +796,12 @@ fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
         "TJsValue::to_js(\{arg_name}.map(fn(v) { TJsValue::to_js(v) }))"
       }
     } else if (
-        arg.type_ is @type_mapping.Union(_) &&
-        arg.optional &&
-        arg.default_value is Some(_)
+        is_union_or_trait && arg.optional && arg.default_value is Some(_)
       ) ||
-      (arg.type_ is @type_mapping.Union(_) && !arg.optional) {
+      (is_union_or_trait && !arg.optional) {
       "\{arg_name}.to_js()"
-    } else if arg.type_ is @type_mapping.Union(_) &&
-      arg.optional &&
-      arg.default_value is None {
-      "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n},"
+    } else if is_union_or_trait && arg.optional && arg.default_value is None {
+      "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n}"
     } else if arg.optional && arg.default_value is None {
       "opt_to_js(\{arg_name})"
     } else {

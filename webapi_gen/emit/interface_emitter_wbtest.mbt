@@ -24,6 +24,7 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
     ],
     "TestInterface",
     "testMethod",
+    flattened,
     type_registry,
   )
   json_inspect(args, content=[
@@ -58,6 +59,39 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
       ],
     ],
   ])
+}
+
+///|
+test "InterfaceEmitter emits union typedef args as trait refs" {
+  let idl =
+    #|interface Request {};
+    #|typedef (Request or DOMString) RequestInfo;
+    #|interface Window {
+    #|  undefined fetch(RequestInfo input);
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  fn log_skipped(_msg : String) {
+
+  }
+  let interface_emitter = InterfaceEmitter::{
+    idl: flattened,
+    type_registry,
+    log_skipped,
+  }
+  let (_, emits) = interface_emitter.emit("Window")
+  let code = mbt_code_gen(emits)
+  inspect(
+    code.contains("fetch(self : Self, input : &TRequestInfo)"),
+    content="true",
+  )
+  inspect(
+    code.contains("window_fetch_ffi(TJsValue::to_js(self), input.to_js())"),
+    content="true",
+  )
+  inspect(code.contains("TJsValue::to_js(input)"), content="false")
 }
 
 ///|

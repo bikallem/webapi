@@ -19,6 +19,9 @@ pub(open) trait TTrustedType {
 pub fn[T : TTrustedType] TrustedType::into(self : TrustedType) -> T = "%identity"
 
 ///|
+pub impl TTrustedType for TrustedType with to_js(self : TrustedType) -> JsValue = "%identity"
+
+///|
 pub impl TTrustedType for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
 
 ///|

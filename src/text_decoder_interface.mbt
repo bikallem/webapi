@@ -29,7 +29,7 @@ pub fn TextDecoder::new(
 pub trait TTextDecoder: TJsValue {
   decode(
     self : Self,
-    input? : AllowSharedBufferSource,
+    input? : &TAllowSharedBufferSource,
     options? : TextDecodeOptions,
   ) -> String = _
   encoding(self : Self) -> String = _
@@ -41,12 +41,15 @@ pub trait TTextDecoder: TJsValue {
 /// [TextDecoder.decode](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder/decode)
 impl TTextDecoder with decode(
   self : Self,
-  input? : AllowSharedBufferSource,
+  input? : &TAllowSharedBufferSource,
   options? : TextDecodeOptions = TextDecodeOptions::empty(),
 ) -> String {
   text_decoder_decode_ffi(
     TJsValue::to_js(self),
-    opt_to_js(input),
+    match input {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     TJsValue::to_js(options),
   )
 }

@@ -31,13 +31,13 @@ pub fn ImageData::new(
 
 ///|
 pub fn ImageData::new_2(
-  data : ImageDataArray,
+  data : &TImageDataArray,
   sw : UInt,
   sh? : UInt,
   settings? : ImageDataSettings = ImageDataSettings::empty(),
 ) -> ImageData {
   image_data_new_2_ffi(
-    TJsValue::to_js(data),
+    data.to_js(),
     TJsValue::to_js(sw),
     opt_to_js(sh),
     TJsValue::to_js(settings),

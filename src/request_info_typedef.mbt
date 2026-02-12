@@ -19,6 +19,9 @@ pub(open) trait TRequestInfo {
 pub fn[T : TRequestInfo] RequestInfo::into(self : RequestInfo) -> T = "%identity"
 
 ///|
+pub impl TRequestInfo for RequestInfo with to_js(self : RequestInfo) -> JsValue = "%identity"
+
+///|
 pub impl TRequestInfo for Request with to_js(self : Request) -> JsValue = "%identity"
 
 ///|

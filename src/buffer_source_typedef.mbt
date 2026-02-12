@@ -19,6 +19,9 @@ pub(open) trait TBufferSource {
 pub fn[T : TBufferSource] BufferSource::into(self : BufferSource) -> T = "%identity"
 
 ///|
+pub impl TBufferSource for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
+
+///|
 pub impl TBufferSource for ArrayBufferView with to_js(self : ArrayBufferView) -> JsValue = "%identity"
 
 ///|

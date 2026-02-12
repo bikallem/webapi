@@ -23,6 +23,11 @@ pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::into(
 ) -> T = "%identity"
 
 ///|
+pub impl TXMLHttpRequestBodyInit for XMLHttpRequestBodyInit with to_js(
+  self : XMLHttpRequestBodyInit,
+) -> JsValue = "%identity"
+
+///|
 pub impl TXMLHttpRequestBodyInit for Blob with to_js(self : Blob) -> JsValue = "%identity"
 
 ///|

@@ -21,6 +21,11 @@ pub fn[T : TFormDataEntryValue] FormDataEntryValue::into(
 ) -> T = "%identity"
 
 ///|
+pub impl TFormDataEntryValue for FormDataEntryValue with to_js(
+  self : FormDataEntryValue,
+) -> JsValue = "%identity"
+
+///|
 pub impl TFormDataEntryValue for File with to_js(self : File) -> JsValue = "%identity"
 
 ///|

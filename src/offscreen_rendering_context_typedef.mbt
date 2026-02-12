@@ -23,6 +23,11 @@ pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::into(
 ) -> T = "%identity"
 
 ///|
+pub impl TOffscreenRenderingContext for OffscreenRenderingContext with to_js(
+  self : OffscreenRenderingContext,
+) -> JsValue = "%identity"
+
+///|
 pub impl TOffscreenRenderingContext for OffscreenCanvasRenderingContext2D with to_js(
   self : OffscreenCanvasRenderingContext2D,
 ) -> JsValue = "%identity"

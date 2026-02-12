@@ -80,10 +80,6 @@ fn main {
 }
 
 ///|
-extern "js" fn string_to_request_info(s : String) -> @webapi.RequestInfo =
-  #| (s) => s
-
-///|
 async fn do_fetch(url : String) -> Unit {
   let doc = @webapi.document
   let status_el = doc.get_element_by_id("status").unwrap()
@@ -94,7 +90,7 @@ async fn do_fetch(url : String) -> Unit {
   body_el.set_text_content("")
   try {
     let response : @webapi.Response = @js_promise.to_async_promise(
-      @webapi.window.fetch(string_to_request_info(url)),
+      @webapi.window.fetch(url),
     ).wait()
     let status = response.status()
     let ok = response.ok()
