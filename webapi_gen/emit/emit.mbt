@@ -119,20 +119,6 @@ fn arg_mbt_type(
   (mbt_type, emits)
 }
 
-///|
-/// Wasm-gc value types that are NOT externref (i32, f64, etc.).
-/// %identity cannot convert between these and JsValue (externref).
-/// Must use TJsValue::to_js delegation instead.
-let wasm_value_types : Array[String] = [
-  "Bool", "Int", "UInt", "Int64", "UInt64", "Float", "Double",
-]
-
-///|
-/// Check if a type name is a wasm-gc value type (i32/f64, not externref).
-fn is_wasm_value_type(type_name : String) -> Bool {
-  wasm_value_types.contains(type_name)
-}
-
 //============================ Shared render helpers ===========================
 
 ///|

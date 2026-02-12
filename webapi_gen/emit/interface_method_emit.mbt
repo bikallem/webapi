@@ -7,20 +7,6 @@ trait InterfaceMethodEmit: ToJson + Show {
   ffi_emit_wasm(self : Self, module_name : String) -> Code // Generate wasm-gc FFI declaration
 }
 
-///|
-/// Other types that are valid as wasm-gc import return types.
-/// These are all externref (#external) types or Unit.
-let wasm_valid_other_types : Array[String] = [
-  "JsValue", "Unit", "JsUndefined",
-  // Typed arrays — all #external types
-   "Uint8Array", "Uint8ClampedArray", "Int8Array", "Uint16Array", "Int16Array", "Uint32Array",
-  "Int32Array", "Float16Array", "Float32Array", "Float64Array", "BigInt64Array",
-  "BigUint64Array",
-  // Buffer types — #external
-   "DataView", "ArrayBuffer", "SharedArrayBuffer",
-]
-
-///|
 /// Check if an ArgMbtType is valid as a wasm-gc import return type.
 /// Primitives, #external interfaces, enums, dictionaries, and Self are valid.
 /// Parameterized non-external types (Array[T]) and typedefs that resolve to them are not.
@@ -33,7 +19,7 @@ fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
     Other(name) =>
       // JsValue, Unit, JsUndefined are valid externref types.
       // Typed arrays, DataView, ArrayBuffer, SharedArrayBuffer are #external types.
-      wasm_valid_other_types.contains(name)
+      is_wasm_valid_stub_other_type(name)
     Union(_) => false // Union types resolve to trait names, not valid as stubs
   }
 }
