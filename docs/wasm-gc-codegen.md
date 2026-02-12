@@ -321,7 +321,9 @@ Without disambiguation, duplicate JS object keys cause the last one to silently 
 
 Files that needed no splitting (already cross-target compatible):
 - `js_array.mbt` — uses `= "JsArray" "empty"` syntax
-- `async_promise.mbt` — `TJsValue` impl for `@js_async.Promise[T]` (uses `%identity`)
+- `js_promise.mbt` — `JsPromise[T]` type with `then`/`catch_`/`finally_` methods
+- `js_promise_js.mbt` — JS FFI for JsPromise methods
+- `js_promise_wasm.mbt` — wasm-gc FFI for JsPromise methods
 - `alias.mbt`, `typed_arrays.mbt`, `js_undefined.mbt` — only `%identity` between externref types
 
 ## Key Learnings

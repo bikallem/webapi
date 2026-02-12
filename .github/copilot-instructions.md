@@ -114,7 +114,7 @@ fn element_get_attribute_ffi(obj : JsValue, name : String) -> JsValue =
 | `double`, `float` | `Double`, `Float` |
 | `any`, `object` | `JsValue` |
 | `sequence<T>` | `Array[T]` |
-| `Promise<T>` | `@js_async.Promise[T]` |
+| `Promise<T>` | `JsPromise[T]` |
 | Nullable types | `Option[T]` (e.g., `T?`) |
 | Union types | External type + trait |
 | Enum types | MoonBit `enum` with `from(String)` method |

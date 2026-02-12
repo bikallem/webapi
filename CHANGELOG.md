@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- **Replace `@js_async.Promise[T]` with `JsPromise[T]`** - Promise-returning WebAPI methods now return `JsPromise[T]` with `then()`/`catch_()`/`finally_()` methods that work on both JS and wasm-gc targets. Users wanting async/await can use the `bikallem/webapi/js_promise` bridge package to convert to `@js_async.Promise[T]` (JS target only).
+
 ## unreleased
 
 ### New Features
