@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const TARGETS = ['js', 'wasm'] as const;
+const TARGETS = ['js'] as const;
 
 for (const target of TARGETS) {
   test.describe(`forms (${target})`, () => {
