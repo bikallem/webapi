@@ -1,4 +1,15 @@
 ///|
+pub enum NamedTypeKind {
+  Interface
+  Dictionary
+  Enum
+  Typedef
+  UnionTypedef
+  Callback
+  Unknown
+} derive(Show, ToJson)
+
+///|
 /// Registry of known types for filtering and type resolution
 pub struct TypeRegistry {
   interface_names : @hashset.HashSet[String]
@@ -57,6 +68,28 @@ pub fn TypeRegistry::contains(self : TypeRegistry, name : String) -> Bool {
 }
 
 ///|
+pub fn TypeRegistry::named_type_kind(
+  self : TypeRegistry,
+  name : String,
+) -> NamedTypeKind {
+  if self.interface_names.contains(name) {
+    NamedTypeKind::Interface
+  } else if self.dictionary_names.contains(name) {
+    NamedTypeKind::Dictionary
+  } else if self.enum_names.contains(name) {
+    NamedTypeKind::Enum
+  } else if self.union_typedef_names.contains(name) {
+    NamedTypeKind::UnionTypedef
+  } else if self.typedef_names.contains(name) {
+    NamedTypeKind::Typedef
+  } else if self.callback_names.contains(name) {
+    NamedTypeKind::Callback
+  } else {
+    NamedTypeKind::Unknown
+  }
+}
+
+///|
 pub fn TypeRegistry::is_interface(self : TypeRegistry, name : String) -> Bool {
   self.interface_names.contains(name)
 }
@@ -106,5 +139,23 @@ test "TypeRegistry::contains checks all type categories" {
   inspect(reg.is_interface("Element"), content="true")
   inspect(reg.is_dictionary("EventInit"), content="true")
   inspect(reg.is_enum("ScrollBehaviour"), content="true")
+  inspect(reg.is_typedef("DOMString"), content="true")
+  inspect(reg.is_callback("EventListener"), content="true")
   inspect(reg.is_union_typedef("HeadersInit"), content="true")
+  inspect(reg.named_type_kind("Element") is NamedTypeKind::Interface, content="true")
+  inspect(
+    reg.named_type_kind("EventInit") is NamedTypeKind::Dictionary,
+    content="true",
+  )
+  inspect(reg.named_type_kind("ScrollBehaviour") is NamedTypeKind::Enum, content="true")
+  inspect(reg.named_type_kind("DOMString") is NamedTypeKind::Typedef, content="true")
+  inspect(
+    reg.named_type_kind("HeadersInit") is NamedTypeKind::UnionTypedef,
+    content="true",
+  )
+  inspect(
+    reg.named_type_kind("EventListener") is NamedTypeKind::Callback,
+    content="true",
+  )
+  inspect(reg.named_type_kind("Unknown") is NamedTypeKind::Unknown, content="true")
 }

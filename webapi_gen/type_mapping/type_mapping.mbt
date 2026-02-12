@@ -229,16 +229,17 @@ pub fn arg_mbt_type(
       Object => ArgMbtType::Other("JsValue")
       Any => ArgMbtType::Other("JsValue")
 
-      // Named types (interfaces, dictionaries, enums, typedefs, union options)
+      // Named types (interfaces/dictionaries/enums keep explicit kinds).
+      // Typedefs/callbacks/unknown identifiers stay as concrete names via Other.
       Identifier(name) =>
-        if type_registry.is_interface(name) {
-          ArgMbtType::Interface(name)
-        } else if type_registry.is_enum(name) {
-          ArgMbtType::Enum(name)
-        } else if type_registry.is_dictionary(name) {
-          ArgMbtType::Dictionary(name)
-        } else {
-          ArgMbtType::Other(name)
+        match type_registry.named_type_kind(name) {
+          @type_registry.NamedTypeKind::Interface => ArgMbtType::Interface(name)
+          @type_registry.NamedTypeKind::Enum => ArgMbtType::Enum(name)
+          @type_registry.NamedTypeKind::Dictionary => ArgMbtType::Dictionary(name)
+          @type_registry.NamedTypeKind::UnionTypedef |
+          @type_registry.NamedTypeKind::Typedef |
+          @type_registry.NamedTypeKind::Callback |
+          @type_registry.NamedTypeKind::Unknown => ArgMbtType::Other(name)
         }
 
       // Nullable

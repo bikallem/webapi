@@ -225,6 +225,52 @@ test "arg_mbt_type identifies non-union types correctly" {
 }
 
 ///|
+test "arg_mbt_type keeps typedef and callback identifiers as concrete names" {
+  let idl =
+    #|typedef DOMString Alias;
+    #|callback MyCb = undefined ();
+    #|interface EventTarget {};
+    #|interface TestInterface {
+    #|  void testMethod(Alias alias, MyCb callback, EventTarget target);
+    #|};
+  let definitions = @parser.parse(idl)
+  let type_registry = @type_registry.TypeRegistry::new(definitions)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let iface = flattened.interfaces["TestInterface"]
+  guard iface.members[0].interface_member is RegularOperation(op) else {
+    abort("Expected first member to be RegularOperation")
+  }
+  let (alias_type, alias_emits) = arg_mbt_type(
+    op.arguments[0].type_.type_,
+    "TestInterface",
+    "testMethod",
+    op.arguments[0].name,
+    type_registry,
+  )
+  let (callback_type, callback_emits) = arg_mbt_type(
+    op.arguments[1].type_.type_,
+    "TestInterface",
+    "testMethod",
+    op.arguments[1].name,
+    type_registry,
+  )
+  let (target_type, target_emits) = arg_mbt_type(
+    op.arguments[2].type_.type_,
+    "TestInterface",
+    "testMethod",
+    op.arguments[2].name,
+    type_registry,
+  )
+  inspect(alias_type, content="Other(\"Alias\")")
+  inspect(callback_type, content="Other(\"MyCb\")")
+  inspect(target_type, content="Interface(\"EventTarget\")")
+  json_inspect(alias_emits, content=[])
+  json_inspect(callback_emits, content=[])
+  json_inspect(target_emits, content=[])
+}
+
+///|
 test "mbt_code_gen_multi generates is_undefined across targets" {
   let emits : Array[Emit] = [Emit::IsUndefinedMethod(TypeName("MyType"))]
   let multi = mbt_code_gen_multi(emits)
