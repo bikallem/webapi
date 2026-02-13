@@ -7,61 +7,127 @@
     <title>MoonBit WebAPI Examples</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui; display: flex; height: 100vh; overflow: hidden; }
+        body { font-family: system-ui, -apple-system, sans-serif; display: flex; height: 100vh; overflow: hidden; background: #fff; color: #333; }
+
         .sidebar {
-            width: 220px; min-width: 220px;
-            background: #f5f5f5; border-right: 1px solid #ddd;
+            width: 280px; min-width: 280px;
+            background: #f7f8fa;
+            border-right: 1px solid #e2e5ea;
             display: flex; flex-direction: column;
             overflow-y: auto;
         }
-        .sidebar h1 {
-            font-weight: 300; letter-spacing: 2px; font-size: 1.1rem;
-            padding: 1.2rem 1rem 0.8rem;
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+
+        .brand {
+            padding: 1.4rem 1.2rem 1rem;
+            border-bottom: 1px solid #e2e5ea;
         }
-        .sidebar ul { list-style: none; }
-        .sidebar li { padding: 0.4rem 1rem; }
-        .name { font-size: 0.95rem; display: block; color: #333; }
-        .targets { font-size: 0.85rem; }
+        .brand h1 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: #999;
+        }
+        .brand .title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #222;
+            margin-top: 0.2rem;
+        }
+
+        .sidebar ul { list-style: none; padding: 0.4rem 0; }
+        .sidebar li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.45rem 1.2rem;
+            transition: background 0.15s;
+        }
+        .sidebar li:hover { background: #eef0f4; }
+
+        .name {
+            font-size: 0.88rem;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .targets {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+            margin-left: 0.75rem;
+        }
         .targets a {
-            color: #4a90d9; text-decoration: none; cursor: pointer;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            padding: 2px 7px;
+            border-radius: 3px;
+            transition: all 0.15s;
+            cursor: pointer;
         }
-        .targets a:hover { text-decoration: underline; }
-        .targets a.active { color: #fff; background: #4a90d9; border-radius: 3px; padding: 0 4px; }
-        .sep { color: #999; }
-        .content { flex: 1; }
+        .targets a.t-js {
+            color: #8a7a00;
+            background: #fdf6d8;
+            border: 1px solid #ede4a6;
+        }
+        .targets a.t-js:hover, .targets a.t-js.active {
+            background: #f5ea9e;
+            border-color: #d4c85a;
+        }
+        .targets a.t-wasm {
+            color: #4a3ab5;
+            background: #eeebfc;
+            border: 1px solid #d6d0f5;
+        }
+        .targets a.t-wasm:hover, .targets a.t-wasm.active {
+            background: #dad4f7;
+            border-color: #a89ae8;
+        }
+
+        .content { flex: 1; background: #fff; }
         .content iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
     <nav class="sidebar">
-        <h1>WebAPI Examples</h1>
+        <div class="brand">
+            <h1>MoonBit</h1>
+            <div class="title">WebAPI Examples</div>
+        </div>
         <ul>
-            <li><span class="name">Canvas</span><span class="targets">[<a href="canvas/canvas.js.html">js</a>]</span></li>
-            <li><span class="name">Console</span><span class="targets">[<a href="console/console.js.html">js</a>]</span></li>
-            <li><span class="name">ClassList</span><span class="targets">[<a href="classlist/classlist.js.html">js</a>]</span></li>
-            <li><span class="name">Counter</span><span class="targets">[<a href="counter/counter.js.html">js</a>]</span></li>
-            <li><span class="name">DOM</span><span class="targets">[<a href="dom/dom.js.html">js</a>]</span></li>
-            <li><span class="name">Element Operations</span><span class="targets">[<a href="element-ops/element-ops.js.html">js</a>]</span></li>
-            <li><span class="name">Events</span><span class="targets">[<a href="events/events.js.html">js</a>]</span></li>
-            <li><span class="name">Fetch</span><span class="targets">[<a href="fetch/fetch.js.html">js</a> <span class="sep">|</span> <a href="fetch/fetch.wasm.html">wasm</a>]</span></li>
-            <li><span class="name">Forms</span><span class="targets">[<a href="forms/forms.js.html">js</a>]</span></li>
-            <li><span class="name">Storage</span><span class="targets">[<a href="storage/storage.js.html">js</a>]</span></li>
-            <li><span class="name">Timers</span><span class="targets">[<a href="timers/timers.js.html">js</a>]</span></li>
-            <li><span class="name">URL</span><span class="targets">[<a href="url/url.js.html">js</a>]</span></li>
-            <li><span class="name">RequestIdleCallback</span><span class="targets">[<a href="requestidlecallback/requestidlecallback.js.html">js</a>]</span></li>
-            <li><span class="name">Fullscreen</span><span class="targets">[<a href="fullscreen/fullscreen.js.html">js</a>]</span></li>
-            <li><span class="name">Screen Orientation</span><span class="targets">[<a href="screen-orientation/screen-orientation.js.html">js</a>]</span></li>
-            <li><span class="name">Storage Manager</span><span class="targets">[<a href="storage-manager/storage-manager.js.html">js</a>]</span></li>
-            <li><span class="name">Resize Observer</span><span class="targets">[<a href="resize-observer/resize-observer.js.html">js</a>]</span></li>
-            <li><span class="name">JsArray Callback Bridge</span><span class="targets">[<a href="jsarray-callback/jsarray-callback.js.html">js</a>]</span></li>
-            <li><span class="name">Selection API</span><span class="targets">[<a href="selection-api/selection-api.js.html">js</a>]</span></li>
-            <li><span class="name">Intersection Observer</span><span class="targets">[<a href="intersection-observer/intersection-observer.js.html">js</a>]</span></li>
-            <li><span class="name">Pointer Events</span><span class="targets">[<a href="pointerevents/pointerevents.js.html">js</a>]</span></li>
-            <li><span class="name">Touch Events</span><span class="targets">[<a href="touch-events/touch-events.js.html">js</a>]</span></li>
-            <li><span class="name">Clipboard</span><span class="targets">[<a href="clipboard-apis/clipboard-apis.js.html">js</a>]</span></li>
-            <li><span class="name">WebSocket</span><span class="targets">[<a href="websockets/websockets.js.html">js</a>]</span></li>
-            <li><span class="name">Encoding</span><span class="targets">[<a href="encoding/encoding.js.html">js</a>]</span></li>
-            <li><span class="name">Notifications</span><span class="targets">[<a href="notifications/notifications.js.html">js</a>]</span></li>
+            <li><span class="name">Canvas</span><span class="targets"><a class="t-js" href="canvas/canvas.js.html">js</a><a class="t-wasm" href="canvas/canvas.wasm.html">wasm</a></span></li>
+            <li><span class="name">ClassList</span><span class="targets"><a class="t-js" href="classlist/classlist.js.html">js</a><a class="t-wasm" href="classlist/classlist.wasm.html">wasm</a></span></li>
+            <li><span class="name">Clipboard APIs</span><span class="targets"><a class="t-js" href="clipboard-apis/clipboard-apis.js.html">js</a><a class="t-wasm" href="clipboard-apis/clipboard-apis.wasm.html">wasm</a></span></li>
+            <li><span class="name">Console</span><span class="targets"><a class="t-js" href="console/console.js.html">js</a><a class="t-wasm" href="console/console.wasm.html">wasm</a></span></li>
+            <li><span class="name">Counter</span><span class="targets"><a class="t-js" href="counter/counter.js.html">js</a><a class="t-wasm" href="counter/counter.wasm.html">wasm</a></span></li>
+            <li><span class="name">DOM</span><span class="targets"><a class="t-js" href="dom/dom.js.html">js</a><a class="t-wasm" href="dom/dom.wasm.html">wasm</a></span></li>
+            <li><span class="name">Element Operations</span><span class="targets"><a class="t-js" href="element-ops/element-ops.js.html">js</a><a class="t-wasm" href="element-ops/element-ops.wasm.html">wasm</a></span></li>
+            <li><span class="name">Encoding</span><span class="targets"><a class="t-js" href="encoding/encoding.js.html">js</a><a class="t-wasm" href="encoding/encoding.wasm.html">wasm</a></span></li>
+            <li><span class="name">Events</span><span class="targets"><a class="t-js" href="events/events.js.html">js</a><a class="t-wasm" href="events/events.wasm.html">wasm</a></span></li>
+            <li><span class="name">Fetch</span><span class="targets"><a class="t-js" href="fetch/fetch.js.html">js</a><a class="t-wasm" href="fetch/fetch.wasm.html">wasm</a></span></li>
+            <li><span class="name">Fetch (async)</span><span class="targets"><a class="t-js" href="fetch-async/fetch-async.js.html">js</a></span></li>
+            <li><span class="name">Forms</span><span class="targets"><a class="t-js" href="forms/forms.js.html">js</a><a class="t-wasm" href="forms/forms.wasm.html">wasm</a></span></li>
+            <li><span class="name">Fullscreen</span><span class="targets"><a class="t-js" href="fullscreen/fullscreen.js.html">js</a><a class="t-wasm" href="fullscreen/fullscreen.wasm.html">wasm</a></span></li>
+            <li><span class="name">Intersection Observer</span><span class="targets"><a class="t-js" href="intersection-observer/intersection-observer.js.html">js</a><a class="t-wasm" href="intersection-observer/intersection-observer.wasm.html">wasm</a></span></li>
+            <li><span class="name">JsArray Callback</span><span class="targets"><a class="t-js" href="jsarray-callback/jsarray-callback.js.html">js</a><a class="t-wasm" href="jsarray-callback/jsarray-callback.wasm.html">wasm</a></span></li>
+            <li><span class="name">Notifications</span><span class="targets"><a class="t-js" href="notifications/notifications.js.html">js</a><a class="t-wasm" href="notifications/notifications.wasm.html">wasm</a></span></li>
+            <li><span class="name">Pointer Events</span><span class="targets"><a class="t-js" href="pointerevents/pointerevents.js.html">js</a><a class="t-wasm" href="pointerevents/pointerevents.wasm.html">wasm</a></span></li>
+            <li><span class="name">Request Idle Callback</span><span class="targets"><a class="t-js" href="requestidlecallback/requestidlecallback.js.html">js</a><a class="t-wasm" href="requestidlecallback/requestidlecallback.wasm.html">wasm</a></span></li>
+            <li><span class="name">Resize Observer</span><span class="targets"><a class="t-js" href="resize-observer/resize-observer.js.html">js</a><a class="t-wasm" href="resize-observer/resize-observer.wasm.html">wasm</a></span></li>
+            <li><span class="name">Screen Orientation</span><span class="targets"><a class="t-js" href="screen-orientation/screen-orientation.js.html">js</a><a class="t-wasm" href="screen-orientation/screen-orientation.wasm.html">wasm</a></span></li>
+            <li><span class="name">Selection API</span><span class="targets"><a class="t-js" href="selection-api/selection-api.js.html">js</a><a class="t-wasm" href="selection-api/selection-api.wasm.html">wasm</a></span></li>
+            <li><span class="name">Storage</span><span class="targets"><a class="t-js" href="storage/storage.js.html">js</a><a class="t-wasm" href="storage/storage.wasm.html">wasm</a></span></li>
+            <li><span class="name">Storage Manager</span><span class="targets"><a class="t-js" href="storage-manager/storage-manager.js.html">js</a><a class="t-wasm" href="storage-manager/storage-manager.wasm.html">wasm</a></span></li>
+            <li><span class="name">Timers</span><span class="targets"><a class="t-js" href="timers/timers.js.html">js</a><a class="t-wasm" href="timers/timers.wasm.html">wasm</a></span></li>
+            <li><span class="name">Touch Events</span><span class="targets"><a class="t-js" href="touch-events/touch-events.js.html">js</a><a class="t-wasm" href="touch-events/touch-events.wasm.html">wasm</a></span></li>
+            <li><span class="name">URL</span><span class="targets"><a class="t-js" href="url/url.js.html">js</a><a class="t-wasm" href="url/url.wasm.html">wasm</a></span></li>
+            <li><span class="name">WebSockets</span><span class="targets"><a class="t-js" href="websockets/websockets.js.html">js</a><a class="t-wasm" href="websockets/websockets.wasm.html">wasm</a></span></li>
         </ul>
     </nav>
     <main class="content">
@@ -81,7 +147,6 @@
                 setActive(link);
             });
         });
-        // Highlight the first JS link (Canvas) by default
         setActive(links[0]);
     </script>
 </body>
