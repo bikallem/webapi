@@ -26,7 +26,7 @@ info:
 # Build examples for both targets
 build-examples:
 	cd examples && moon build --target js --release
-# 	cd examples && moon build --target wasm-gc --release
+	cd examples && moon build --target wasm-gc --release
 
 # Run Playwright browser tests
 test-playwright:

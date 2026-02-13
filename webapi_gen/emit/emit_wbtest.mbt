@@ -353,11 +353,55 @@ test "mbt_code_gen_multi generates callback across targets" {
     multi.js_ffi.contains("extern \"js\" fn event_listener_ffi"),
     content="true",
   )
-  // Wasm callback wraps in JsValue closure
+  // Wasm callback keeps direct import when no stub adaptation is needed
   inspect(
     multi.wasm_ffi,
     content=(
       #|fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "webapi_EventListener" "new"
     ),
+  )
+}
+
+///|
+test "mbt_code_gen_multi adapts wasm callback Array args with JsArray" {
+  let args : Array[CallbackArgEmit] = [
+    { name: "mutations", mbt_type: "Array[MutationRecord]" },
+    { name: "observer", mbt_type: "MutationObserver" },
+  ]
+  let emits : Array[Emit] = [
+    Emit::Callback(TypeName("MutationCallback"), args, TypeName("Unit")),
+  ]
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.wasm_ffi.contains(
+      "fn mutation_callback_ffi_raw(callback : (JsArray, MutationObserver) -> Unit) -> MutationCallback = \"webapi_MutationCallback\" \"new\"",
+    ),
+    content="true",
+  )
+  inspect(
+    multi.wasm_ffi.contains("callback(mutations.to_array(), observer)"),
+    content="true",
+  )
+}
+
+///|
+test "mbt_code_gen_multi adapts wasm callback Array return with JsArray" {
+  let emits : Array[Emit] = [
+    Emit::Callback(
+      TypeName("ArrayReturningCallback"),
+      [{ name: "value", mbt_type: "Int" }],
+      TypeName("Array[Double]"),
+    ),
+  ]
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.wasm_ffi.contains(
+      "fn array_returning_callback_ffi_raw(callback : (Int) -> JsArray) -> ArrayReturningCallback = \"webapi_ArrayReturningCallback\" \"new\"",
+    ),
+    content="true",
+  )
+  inspect(
+    multi.wasm_ffi.contains("JsArray::from_array(callback(value))"),
+    content="true",
   )
 }

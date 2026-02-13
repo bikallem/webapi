@@ -66,8 +66,11 @@ fn emit_js_preamble() -> String {
     #|    uint64ToJs: (v) => Number(v),
     #|    floatToJs: (v) => v,
     #|    doubleToJs: (v) => v,
+    #|    arrayToJs: (arr) => arr,
     #|    arrayEmpty: () => [],
-    #|    arrayPush: (arr, value) => arr.push(value)
+    #|    arrayPush: (arr, value) => arr.push(value),
+    #|    arrayLength: (arr) => arr.length,
+    #|    arrayGet: (arr, index) => arr[index]
     #|  },
     #|
     #|  webapi_Global: {

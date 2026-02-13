@@ -10,7 +10,7 @@ let wasm_value_types : Array[String] = [
 /// Other non-primitive types that are valid as wasm-gc import return types.
 /// These are all externref (#external) types or Unit.
 let wasm_valid_stub_other_types : Array[String] = [
-  "JsValue", "Unit", "JsUndefined",
+  "JsValue", "Unit", "JsUndefined", "JsArray",
   // Typed arrays — all #external types
    "Uint8Array", "Uint8ClampedArray", "Int8Array", "Uint16Array", "Int16Array", "Uint32Array",
   "Int32Array", "Float16Array", "Float32Array", "Float64Array", "BigInt64Array",

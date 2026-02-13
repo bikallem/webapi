@@ -19,14 +19,14 @@ fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_FormDat
 fn form_data_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_FormData" "get"
 
 ///|
-fn form_data_get_all_ffi_wasm(obj : JsValue, name : JsValue) -> JsValue = "webapi_FormData" "getAll"
+fn form_data_get_all_ffi_wasm(obj : JsValue, name : JsValue) -> JsArray = "webapi_FormData" "getAll"
 
 ///|
 fn form_data_get_all_ffi(
   obj : JsValue,
   name : JsValue,
 ) -> Array[FormDataEntryValue] {
-  form_data_get_all_ffi_wasm(obj, name).unsafe_cast()
+  form_data_get_all_ffi_wasm(obj, name).to_array()
 }
 
 ///|

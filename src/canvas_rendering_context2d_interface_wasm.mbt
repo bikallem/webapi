@@ -488,11 +488,11 @@ fn canvas_rendering_context2d_set_line_dash_ffi(
 ) -> Unit = "webapi_CanvasRenderingContext2D" "setLineDash"
 
 ///|
-fn canvas_rendering_context2d_get_line_dash_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CanvasRenderingContext2D" "getLineDash"
+fn canvas_rendering_context2d_get_line_dash_ffi_wasm(obj : JsValue) -> JsArray = "webapi_CanvasRenderingContext2D" "getLineDash"
 
 ///|
 fn canvas_rendering_context2d_get_line_dash_ffi(obj : JsValue) -> Array[Double] {
-  canvas_rendering_context2d_get_line_dash_ffi_wasm(obj).unsafe_cast()
+  canvas_rendering_context2d_get_line_dash_ffi_wasm(obj).to_array()
 }
 
 ///|

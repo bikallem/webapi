@@ -451,6 +451,8 @@ options(
     "intersection_observer_init_dictionary_wasm.mbt": [ "wasm-gc" ],
     "intersection_observer_interface_js.mbt": [ "js" ],
     "intersection_observer_interface_wasm.mbt": [ "wasm-gc" ],
+    "js_array_js.mbt": [ "js" ],
+    "js_array_wasm.mbt": [ "wasm-gc" ],
     "js_promise_js.mbt": [ "js" ],
     "js_promise_wasm.mbt": [ "wasm-gc" ],
     "js_value_js.mbt": [ "js" ],

@@ -16,11 +16,11 @@ fn text_whole_text_ffi(obj : JsValue) -> String {
 fn text_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement = "webapi_Text" "get_assignedSlot"
 
 ///|
-fn text_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Text" "getBoxQuads"
+fn text_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = "webapi_Text" "getBoxQuads"
 
 ///|
 fn text_get_box_quads_ffi(obj : JsValue, options : JsValue) -> Array[DOMQuad] {
-  text_get_box_quads_ffi_wasm(obj, options).unsafe_cast()
+  text_get_box_quads_ffi_wasm(obj, options).to_array()
 }
 
 ///|

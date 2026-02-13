@@ -8,7 +8,7 @@ export default defineConfig({
   },
   webServer: [
     {
-      command: 'npx serve .. -l 3000 --no-clipboard --no-request-logging --symlinks',
+      command: 'python3 -m http.server 3000 --directory ..',
       port: 3000,
       reuseExistingServer: !process.env.CI,
     },

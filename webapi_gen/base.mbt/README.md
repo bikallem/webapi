@@ -20,9 +20,9 @@ Promise support via `moonbitlang/async`:
 ### `js_array.mbt`
 Array interop:
 - `JsArray` - Opaque type for JS arrays
-- `JsArray::empty()`, `JsArray::push()` - Array operations
-- `array_to_js()` - Convert MoonBit arrays to JS arrays
-- `TJsValue` implementation for `Array[T]`
+- `js_array_js.mbt` - JS backend identity conversions
+- `js_array_wasm.mbt` - wasm-gc explicit host-array conversion helpers
+- `JsArray::from_array()` / `JsArray::to_array()` conversions
 
 ### `primitives.mbt`
 `TJsValue` implementations for primitive types:

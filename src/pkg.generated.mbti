@@ -2727,6 +2727,12 @@ pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::into(Self) -> T
 pub impl TIntersectionObserverRoot for IntersectionObserverRoot
 
 #external
+pub type JsArray
+pub fn[T : TJsValue] JsArray::from_array(Array[T]) -> Self
+pub fn[T] JsArray::to_array(Self) -> Array[T]
+pub impl TJsValue for JsArray
+
+#external
 pub type JsPromise[T]
 pub fn[T] JsPromise::catch_(Self[T], (JsValue) -> T) -> Self[T]
 pub fn[T] JsPromise::finally_(Self[T], () -> Unit) -> Self[T]

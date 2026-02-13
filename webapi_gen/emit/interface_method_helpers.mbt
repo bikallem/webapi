@@ -28,8 +28,18 @@ fn is_string_return(type_ : @type_mapping.ArgMbtType) -> Bool {
 }
 
 ///|
+fn is_array_return(type_name : String) -> Bool {
+  type_name.has_prefix("Array[") && type_name.has_suffix("]")
+}
+
+///|
+fn is_string_array_return(type_name : String) -> Bool {
+  type_name == "Array[String]"
+}
+
+///|
 /// Emit wasm-gc FFI declaration with return-type dispatch.
-/// Handles the four cases: void/optional, String, valid stub type, or JsValue wrapper.
+/// Handles the five cases: void/optional, String, Array[T] bridge, valid stub type, or JsValue wrapper.
 fn emit_wasm_ffi_with_return(
   ffi_name : String,
   ffi_args : String,
@@ -55,6 +65,19 @@ fn emit_wasm_ffi_with_return(
     let call_fwd = ffi_argnames.join(", ")
     Code(
       "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> String {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
+    )
+  } else if is_array_return(return_type_name) {
+    // Array[T]: use JsArray as raw import type and copy into MoonBit Array[T].
+    // This avoids wasm-gc externref -> typed ref fallthrough mismatches.
+    let raw_name = ffi_name + "_wasm"
+    let call_fwd = ffi_argnames.join(", ")
+    let array_convert = if is_string_array_return(return_type_name) {
+      "to_string_array"
+    } else {
+      "to_array"
+    }
+    Code(
+      "fn \{raw_name}(\{ffi_args}) -> JsArray = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{raw_name}(\{call_fwd}).\{array_convert}()\n}",
     )
   } else if is_valid_stub {
     // Valid stub type: declare import with actual MoonBit type directly

@@ -84,3 +84,57 @@ test "func_call_args keeps separators stable for optional trait args" {
   inspect(rendered.contains("TJsValue::to_js(mode)"), content="true")
   inspect(rendered.contains(",,"), content="false")
 }
+
+///|
+test "emit_wasm_ffi_with_return bridges Array return through JsArray" {
+  let Code(rendered) = emit_wasm_ffi_with_return(
+    "element_get_box_quads_ffi",
+    "obj : JsValue, options : JsValue",
+    ["obj", "options"],
+    "Array[DOMQuad]",
+    is_optional=false,
+    is_void=false,
+    is_string=false,
+    is_valid_stub=false,
+    "webapi_Element",
+    "getBoxQuads",
+  )
+  inspect(
+    rendered.contains(
+      "fn element_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = \"webapi_Element\" \"getBoxQuads\"",
+    ),
+    content="true",
+  )
+  inspect(
+    rendered.contains("element_get_box_quads_ffi_wasm(obj, options).to_array()"),
+    content="true",
+  )
+  inspect(rendered.contains(".unsafe_cast()"), content="false")
+}
+
+///|
+test "emit_wasm_ffi_with_return uses string array bridge for Array[String]" {
+  let Code(rendered) = emit_wasm_ffi_with_return(
+    "element_get_attribute_names_ffi",
+    "obj : JsValue",
+    ["obj"],
+    "Array[String]",
+    is_optional=false,
+    is_void=false,
+    is_string=false,
+    is_valid_stub=false,
+    "webapi_Element",
+    "getAttributeNames",
+  )
+  inspect(
+    rendered.contains(
+      "fn element_get_attribute_names_ffi_wasm(obj : JsValue) -> JsArray = \"webapi_Element\" \"getAttributeNames\"",
+    ),
+    content="true",
+  )
+  inspect(
+    rendered.contains("element_get_attribute_names_ffi_wasm(obj).to_string_array()"),
+    content="true",
+  )
+  inspect(rendered.contains(".unsafe_cast()"), content="false")
+}

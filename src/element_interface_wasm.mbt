@@ -73,11 +73,11 @@ fn element_has_attributes_ffi(obj : JsValue) -> Bool = "webapi_Element" "hasAttr
 fn element_attributes_ffi(obj : JsValue) -> NamedNodeMap = "webapi_Element" "get_attributes"
 
 ///|
-fn element_get_attribute_names_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "getAttributeNames"
+fn element_get_attribute_names_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Element" "getAttributeNames"
 
 ///|
 fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] {
-  element_get_attribute_names_ffi_wasm(obj).unsafe_cast()
+  element_get_attribute_names_ffi_wasm(obj).to_string_array()
 }
 
 ///|
@@ -472,14 +472,14 @@ fn element_remove_ffi(obj : JsValue) -> Unit = "webapi_Element" "remove"
 fn element_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement = "webapi_Element" "get_assignedSlot"
 
 ///|
-fn element_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "getBoxQuads"
+fn element_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = "webapi_Element" "getBoxQuads"
 
 ///|
 fn element_get_box_quads_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[DOMQuad] {
-  element_get_box_quads_ffi_wasm(obj, options).unsafe_cast()
+  element_get_box_quads_ffi_wasm(obj, options).to_array()
 }
 
 ///|

@@ -22,14 +22,14 @@ fn url_search_params_delete_ffi(
 fn url_search_params_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_URLSearchParams" "get"
 
 ///|
-fn url_search_params_get_all_ffi_wasm(obj : JsValue, name : JsValue) -> JsValue = "webapi_URLSearchParams" "getAll"
+fn url_search_params_get_all_ffi_wasm(obj : JsValue, name : JsValue) -> JsArray = "webapi_URLSearchParams" "getAll"
 
 ///|
 fn url_search_params_get_all_ffi(
   obj : JsValue,
   name : JsValue,
 ) -> Array[String] {
-  url_search_params_get_all_ffi_wasm(obj, name).unsafe_cast()
+  url_search_params_get_all_ffi_wasm(obj, name).to_string_array()
 }
 
 ///|

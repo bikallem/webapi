@@ -42,11 +42,11 @@ fn intersection_observer_unobserve_ffi(obj : JsValue, target : JsValue) -> Unit 
 fn intersection_observer_disconnect_ffi(obj : JsValue) -> Unit = "webapi_IntersectionObserver" "disconnect"
 
 ///|
-fn intersection_observer_take_records_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IntersectionObserver" "takeRecords"
+fn intersection_observer_take_records_ffi_wasm(obj : JsValue) -> JsArray = "webapi_IntersectionObserver" "takeRecords"
 
 ///|
 fn intersection_observer_take_records_ffi(
   obj : JsValue,
 ) -> Array[IntersectionObserverEntry] {
-  intersection_observer_take_records_ffi_wasm(obj).unsafe_cast()
+  intersection_observer_take_records_ffi_wasm(obj).to_array()
 }

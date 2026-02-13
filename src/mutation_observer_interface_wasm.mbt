@@ -12,9 +12,9 @@ fn mutation_observer_observe_ffi(
 fn mutation_observer_disconnect_ffi(obj : JsValue) -> Unit = "webapi_MutationObserver" "disconnect"
 
 ///|
-fn mutation_observer_take_records_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationObserver" "takeRecords"
+fn mutation_observer_take_records_ffi_wasm(obj : JsValue) -> JsArray = "webapi_MutationObserver" "takeRecords"
 
 ///|
 fn mutation_observer_take_records_ffi(obj : JsValue) -> Array[MutationRecord] {
-  mutation_observer_take_records_ffi_wasm(obj).unsafe_cast()
+  mutation_observer_take_records_ffi_wasm(obj).to_array()
 }

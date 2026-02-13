@@ -11,11 +11,11 @@ fn headers_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_Headers" 
 fn headers_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_Headers" "get"
 
 ///|
-fn headers_get_set_cookie_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Headers" "getSetCookie"
+fn headers_get_set_cookie_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Headers" "getSetCookie"
 
 ///|
 fn headers_get_set_cookie_ffi(obj : JsValue) -> Array[String] {
-  headers_get_set_cookie_ffi_wasm(obj).unsafe_cast()
+  headers_get_set_cookie_ffi_wasm(obj).to_string_array()
 }
 
 ///|

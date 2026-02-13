@@ -19,11 +19,11 @@ fn event_src_element_ffi(obj : JsValue) -> EventTarget = "webapi_Event" "get_src
 fn event_current_target_ffi(obj : JsValue) -> EventTarget = "webapi_Event" "get_currentTarget"
 
 ///|
-fn event_composed_path_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Event" "composedPath"
+fn event_composed_path_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Event" "composedPath"
 
 ///|
 fn event_composed_path_ffi(obj : JsValue) -> Array[EventTarget] {
-  event_composed_path_ffi_wasm(obj).unsafe_cast()
+  event_composed_path_ffi_wasm(obj).to_array()
 }
 
 ///|

@@ -471,7 +471,7 @@ fn document_elements_from_point_ffi_wasm(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsValue = "webapi_Document" "elementsFromPoint"
+) -> JsArray = "webapi_Document" "elementsFromPoint"
 
 ///|
 fn document_elements_from_point_ffi(
@@ -479,7 +479,7 @@ fn document_elements_from_point_ffi(
   x : JsValue,
   y : JsValue,
 ) -> Array[Element] {
-  document_elements_from_point_ffi_wasm(obj, x, y).unsafe_cast()
+  document_elements_from_point_ffi_wasm(obj, x, y).to_array()
 }
 
 ///|
@@ -1255,14 +1255,14 @@ fn document_set_onselectionchange_ffi(
 ) -> Unit = "webapi_Document" "set_onselectionchange"
 
 ///|
-fn document_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Document" "getBoxQuads"
+fn document_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = "webapi_Document" "getBoxQuads"
 
 ///|
 fn document_get_box_quads_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[DOMQuad] {
-  document_get_box_quads_ffi_wasm(obj, options).unsafe_cast()
+  document_get_box_quads_ffi_wasm(obj, options).to_array()
 }
 
 ///|

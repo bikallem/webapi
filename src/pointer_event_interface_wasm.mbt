@@ -49,17 +49,17 @@ fn pointer_event_is_primary_ffi(obj : JsValue) -> Bool = "webapi_PointerEvent" "
 fn pointer_event_persistent_device_id_ffi(obj : JsValue) -> Int = "webapi_PointerEvent" "get_persistentDeviceId"
 
 ///|
-fn pointer_event_get_coalesced_events_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PointerEvent" "getCoalescedEvents"
+fn pointer_event_get_coalesced_events_ffi_wasm(obj : JsValue) -> JsArray = "webapi_PointerEvent" "getCoalescedEvents"
 
 ///|
 fn pointer_event_get_coalesced_events_ffi(obj : JsValue) -> Array[PointerEvent] {
-  pointer_event_get_coalesced_events_ffi_wasm(obj).unsafe_cast()
+  pointer_event_get_coalesced_events_ffi_wasm(obj).to_array()
 }
 
 ///|
-fn pointer_event_get_predicted_events_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PointerEvent" "getPredictedEvents"
+fn pointer_event_get_predicted_events_ffi_wasm(obj : JsValue) -> JsArray = "webapi_PointerEvent" "getPredictedEvents"
 
 ///|
 fn pointer_event_get_predicted_events_ffi(obj : JsValue) -> Array[PointerEvent] {
-  pointer_event_get_predicted_events_ffi_wasm(obj).unsafe_cast()
+  pointer_event_get_predicted_events_ffi_wasm(obj).to_array()
 }

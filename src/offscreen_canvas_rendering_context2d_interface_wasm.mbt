@@ -509,13 +509,13 @@ fn offscreen_canvas_rendering_context2d_set_line_dash_ffi(
 ///|
 fn offscreen_canvas_rendering_context2d_get_line_dash_ffi_wasm(
   obj : JsValue,
-) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "getLineDash"
+) -> JsArray = "webapi_OffscreenCanvasRenderingContext2D" "getLineDash"
 
 ///|
 fn offscreen_canvas_rendering_context2d_get_line_dash_ffi(
   obj : JsValue,
 ) -> Array[Double] {
-  offscreen_canvas_rendering_context2d_get_line_dash_ffi_wasm(obj).unsafe_cast()
+  offscreen_canvas_rendering_context2d_get_line_dash_ffi_wasm(obj).to_array()
 }
 
 ///|

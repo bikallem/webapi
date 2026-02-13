@@ -273,8 +273,48 @@ fn render_callback_js_ffi(
 }
 
 ///|
+fn callback_array_inner_type(type_name : String) -> String? {
+  if !(type_name.has_prefix("Array[") && type_name.has_suffix("]")) {
+    None
+  } else {
+    let chars = type_name.to_array()
+    if chars.length() <= 7 {
+      None
+    } else {
+      Some(String::from_array(chars[6:chars.length() - 1]))
+    }
+  }
+}
+
+///|
+fn callback_wasm_stub_type(type_name : String) -> String {
+  match callback_array_inner_type(type_name) {
+    Some(_) => "JsArray"
+    None => type_name
+  }
+}
+
+///|
+fn callback_wasm_arg_expr(arg_name : String, arg_type : String) -> String {
+  match callback_array_inner_type(arg_type) {
+    Some(_) => "\{arg_name}.to_array()"
+    None => arg_name
+  }
+}
+
+///|
+fn callback_wasm_return_expr(call_expr : String, return_type : String) -> String {
+  match callback_array_inner_type(return_type) {
+    Some(_) => "JsArray::from_array(\{call_expr})"
+    None => call_expr
+  }
+}
+
+///|
 /// Render callback FFI for the wasm-gc target.
-/// Closures are externref on wasm-gc, so we always use a direct import.
+/// Closures are externref on wasm-gc, so callback objects are imported directly.
+/// If callback signatures include Array[T], emit a raw stub-safe signature using
+/// JsArray and a wrapper that performs Array <-> JsArray conversion.
 fn render_callback_wasm_ffi(
   name : String,
   args : Array[CallbackArgEmit],
@@ -282,8 +322,29 @@ fn render_callback_wasm_ffi(
 ) -> String {
   let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
   let closure_type = "(\{arg_types}) -> \{return_type}"
+  let stub_arg_types = args.map(fn(a) { callback_wasm_stub_type(a.mbt_type) })
+  let stub_arg_types_join = stub_arg_types.join(", ")
+  let stub_return_type = callback_wasm_stub_type(return_type)
+  let stub_closure_type = "(\{stub_arg_types_join}) -> \{stub_return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  "fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"webapi_\{name}\" \"new\""
+  if closure_type == stub_closure_type {
+    "fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"webapi_\{name}\" \"new\""
+  } else {
+    let raw_name = ffi_name + "_raw"
+    let wrapper_args : Array[String] = []
+    let callback_args : Array[String] = []
+    for i = 0; i < args.length(); i = i + 1 {
+      let arg = args[i]
+      let stub_type = stub_arg_types[i]
+      wrapper_args.push("\{arg.name} : \{stub_type}")
+      callback_args.push(callback_wasm_arg_expr(arg.name, arg.mbt_type))
+    }
+    let callback_args_join = callback_args.join(", ")
+    let wrapper_args_join = wrapper_args.join(", ")
+    let callback_call = "callback(\{callback_args_join})"
+    let callback_result = callback_wasm_return_expr(callback_call, return_type)
+    "fn \{raw_name}(callback : \{stub_closure_type}) -> \{name} = \"webapi_\{name}\" \"new\"\n\n///|\nfn \{ffi_name}(callback : \{closure_type}) -> \{name} {\n  \{raw_name}(\n    fn(\{wrapper_args_join}) -> \{stub_return_type} {\n      \{callback_result}\n    },\n  )\n}"
+  }
 }
 
 ///|

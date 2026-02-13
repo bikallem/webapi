@@ -16,28 +16,28 @@ fn html_slot_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "weba
 fn html_slot_element_assigned_nodes_ffi_wasm(
   obj : JsValue,
   options : JsValue,
-) -> JsValue = "webapi_HTMLSlotElement" "assignedNodes"
+) -> JsArray = "webapi_HTMLSlotElement" "assignedNodes"
 
 ///|
 fn html_slot_element_assigned_nodes_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[Node] {
-  html_slot_element_assigned_nodes_ffi_wasm(obj, options).unsafe_cast()
+  html_slot_element_assigned_nodes_ffi_wasm(obj, options).to_array()
 }
 
 ///|
 fn html_slot_element_assigned_elements_ffi_wasm(
   obj : JsValue,
   options : JsValue,
-) -> JsValue = "webapi_HTMLSlotElement" "assignedElements"
+) -> JsArray = "webapi_HTMLSlotElement" "assignedElements"
 
 ///|
 fn html_slot_element_assigned_elements_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[Element] {
-  html_slot_element_assigned_elements_ffi_wasm(obj, options).unsafe_cast()
+  html_slot_element_assigned_elements_ffi_wasm(obj, options).to_array()
 }
 
 ///|

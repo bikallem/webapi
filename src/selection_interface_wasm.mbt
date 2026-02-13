@@ -51,14 +51,14 @@ fn selection_empty_ffi(obj : JsValue) -> Unit = "webapi_Selection" "empty"
 fn selection_get_composed_ranges_ffi_wasm(
   obj : JsValue,
   options : JsValue,
-) -> JsValue = "webapi_Selection" "getComposedRanges"
+) -> JsArray = "webapi_Selection" "getComposedRanges"
 
 ///|
 fn selection_get_composed_ranges_ffi(
   obj : JsValue,
   options : JsValue,
 ) -> Array[StaticRange] {
-  selection_get_composed_ranges_ffi_wasm(obj, options).unsafe_cast()
+  selection_get_composed_ranges_ffi_wasm(obj, options).to_array()
 }
 
 ///|

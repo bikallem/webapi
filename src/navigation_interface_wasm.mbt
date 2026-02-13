@@ -1,9 +1,9 @@
 ///|
-fn navigation_entries_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigation" "entries"
+fn navigation_entries_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Navigation" "entries"
 
 ///|
 fn navigation_entries_ffi(obj : JsValue) -> Array[NavigationHistoryEntry] {
-  navigation_entries_ffi_wasm(obj).unsafe_cast()
+  navigation_entries_ffi_wasm(obj).to_array()
 }
 
 ///|
