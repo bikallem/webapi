@@ -13,7 +13,7 @@ gen-test:
 # Type-check generated bindings
 check:
 	moon check --target js
-# 	moon check --target wasm-gc
+ 	moon check --target wasm-gc
 
 # Format all MoonBit code
 fmt:
