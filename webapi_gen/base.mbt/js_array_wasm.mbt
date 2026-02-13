@@ -41,7 +41,7 @@ pub fn[T] JsArray::to_array(self : JsArray) -> Array[T] {
 
 ///|
 /// wasm-gc backend: convert host JS array items to non-nullable String.
-pub fn JsArray::to_string_array(self : JsArray) -> Array[String] {
+fn JsArray::to_string_array(self : JsArray) -> Array[String] {
   let len = js_array_length_ffi(self)
   let out : Array[String] = []
   for i in 0..<len {

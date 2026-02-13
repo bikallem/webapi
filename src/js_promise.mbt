@@ -8,7 +8,7 @@
 /// it compatible with all #external types via %identity cast, working
 /// around a MoonBit compiler limitation where JsValue (externref) in
 /// closure funcref params doesn't match (ref extern) expected by call_ref.
-priv type JsAny = String
+type JsAny = String
 
 ///|
 /// Opaque type representing a JavaScript Promise
