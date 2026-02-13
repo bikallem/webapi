@@ -36,22 +36,14 @@ for (const target of TARGETS) {
     test('fetches default URL', async ({ page }) => {
       await page.locator('#fetch-btn').click();
       await expect(page.locator('#status')).toContainText('200');
-      if (target === 'js') {
-        await expect(page.locator('#body')).toContainText('delectus aut autem');
-      } else {
-        await expect(page.locator('#body')).toContainText('/todos/1');
-      }
+      await expect(page.locator('#body')).toContainText('delectus aut autem');
     });
 
     test('fetches user-entered URL', async ({ page }) => {
       await page.locator('#url-input').fill('https://jsonplaceholder.typicode.com/posts/1');
       await page.locator('#fetch-btn').click();
       await expect(page.locator('#status')).toContainText('200');
-      if (target === 'js') {
-        await expect(page.locator('#body')).toContainText('sunt aut facere');
-      } else {
-        await expect(page.locator('#body')).toContainText('/posts/1');
-      }
+      await expect(page.locator('#body')).toContainText('sunt aut facere');
     });
   });
 }

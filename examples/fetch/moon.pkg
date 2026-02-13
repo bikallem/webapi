@@ -10,5 +10,5 @@ options(
       "use-js-builtin-string": true,
     },
   },
-  targets: { "main.mbt": [ "js" ], "main_wasm.mbt": [ "wasm-gc" ] },
+  "supported-targets": [ "js", "wasm-gc" ],
 )

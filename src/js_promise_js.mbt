@@ -7,13 +7,13 @@ extern "js" fn js_promise_reject_ffi(reason : JsValue) -> JsValue = "(reason) =>
 ///|
 extern "js" fn js_promise_then_ffi(
   promise : JsValue,
-  on_fulfilled : (JsValue) -> JsValue,
+  on_fulfilled : (JsAny) -> JsValue,
 ) -> JsValue = "(p, f) => p.then(f)"
 
 ///|
 extern "js" fn js_promise_catch_ffi(
   promise : JsValue,
-  on_rejected : (JsValue) -> JsValue,
+  on_rejected : (JsAny) -> JsValue,
 ) -> JsValue = "(p, f) => p.catch(f)"
 
 ///|

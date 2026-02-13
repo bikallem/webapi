@@ -29,4 +29,7 @@ pub impl TJsValue for Double with to_js(self : Double) -> JsValue = "%identity"
 pub impl TJsValue for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
+pub impl TJsValue for Unit with to_js(_self : Unit) -> JsValue = "%identity"
+
+///|
 pub impl[T : TJsValue] TJsValue for Array[T] with to_js(self : Array[T]) -> JsValue = "%identity"

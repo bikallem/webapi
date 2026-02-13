@@ -2734,11 +2734,11 @@ pub impl TJsValue for JsArray
 
 #external
 pub type JsPromise[T]
-pub fn[T] JsPromise::catch_(Self[T], (JsValue) -> T) -> Self[T]
+pub fn[T : TJsValue] JsPromise::catch_(Self[T], (JsValue) -> T) -> Self[T]
 pub fn[T] JsPromise::finally_(Self[T], () -> Unit) -> Self[T]
 pub fn[T] JsPromise::reject(JsValue) -> Self[T]
 pub fn[T : TJsValue] JsPromise::resolve(T) -> Self[T]
-pub fn[T, U] JsPromise::then(Self[T], (T) -> U) -> Self[U]
+pub fn[T, U : TJsValue] JsPromise::then(Self[T], (T) -> U) -> Self[U]
 pub impl[T] TJsValue for JsPromise[T]
 
 #external
@@ -8357,6 +8357,7 @@ pub(open) trait TJsValue {
   to_js(Self) -> JsValue
   is_null(Self) -> Bool = _
 }
+pub impl TJsValue for Unit
 pub impl TJsValue for Bool
 pub impl TJsValue for Byte
 pub impl TJsValue for Int

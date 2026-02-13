@@ -79,6 +79,11 @@ fn js_array_empty() -> JsValue = "webapi_Primitives" "arrayEmpty"
 fn js_array_push(arr : JsValue, value : JsValue) -> Unit = "webapi_Primitives" "arrayPush"
 
 ///|
+pub impl TJsValue for Unit with to_js(_self) -> JsValue {
+  JsValue::undefined()
+}
+
+///|
 pub impl[T : TJsValue] TJsValue for Array[T] with to_js(self : Array[T]) -> JsValue {
   let arr = js_array_empty()
   for item in self {
