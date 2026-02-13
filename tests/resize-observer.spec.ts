@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const TARGETS = ['js'] as const;
+const TARGETS = ['js', 'wasm'] as const;
 
 for (const target of TARGETS) {
   test.describe(`resize-observer (${target})`, () => {
