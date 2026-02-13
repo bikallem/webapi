@@ -6934,7 +6934,7 @@ export const wasmImportObject = {
     escape: (ident) => CSS.escape(ident)
   },
 
-  webapi_console: {
+  webapi_Console: {
     assert: (condition, data) => console.assert(condition, ...data),
     clear: () => console.clear(),
     debug: (data) => console.debug(...data),

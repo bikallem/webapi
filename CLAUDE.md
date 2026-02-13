@@ -178,3 +178,18 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 - **Generated files**: Never edit files in `src/` directly; modify the generator instead
 - **MoonBit reference**: See `AGENTS.md` for comprehensive MoonBit language guide
 - **Pre-commit hooks**: Configure with `git config core.hooksPath .githooks`
+
+## wasm-gc Known Issues
+
+The following examples are js-only due to wasm-gc compile errors unrelated to callbacks:
+
+| Example | Error | Root Cause |
+|---------|-------|------------|
+| `clipboard-apis` | `call_ref[1] expected type i32, found (ref extern)` | `JsPromise.then` with `Unit` resolved value — Unit is i32 on wasm-gc but JsAny is (ref extern) |
+| `intersection-observer` | `expected (ref 5), got externref` | Array GC type vs externref mismatch in callback conversion |
+| `notifications` | `expected (ref extern), got externref` | Enum-to-GC-type conversion — MoonBit enums are GC types, not externref |
+| `requestidlecallback` | `expected f64, got externref` | `JsPromise`/callback with `Double` (f64) resolved value |
+| `screen-orientation` | `expected (ref extern), got externref` | Interface method return type (ref extern) vs externref |
+| `websockets` | `expected (ref extern), found externref` | EventHandlerNonNull externref return mismatch |
+
+These are all variants of the same underlying issue: the MoonBit wasm-gc backend uses different reference types (`externref`, `(ref extern)`, GC types) for `#external` types, `String`, and MoonBit enums, and `%identity` casts cannot convert between them.

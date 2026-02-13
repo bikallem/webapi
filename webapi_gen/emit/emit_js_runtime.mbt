@@ -384,7 +384,8 @@ fn emit_js_namespace_module(
   ns : @partial_merged.PartialMergedNamespace,
 ) -> String {
   let buf = StringBuilder::new()
-  buf.write_string("  webapi_\{ns.name}: {\n")
+  let module_name = @type_mapping.pascal_case(ns.name)
+  buf.write_string("  webapi_\{module_name}: {\n")
   let entries : Array[String] = []
   let method_counter : Map[String, Int] = {}
   let used_method_names = @hashset.new()

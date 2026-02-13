@@ -48,6 +48,9 @@ Regression tests to keep:
 - Union typedef args/attrs must be detected via `TypeRegistry` (see `is_union_typedef`) so emitters do not depend on flattened IDL internals.
 - Generated output should stay deterministic (sorted file/emission order) to keep diffs stable and reviewable.
 - For generator behavior changes, commit generator logic, tests, and regenerated `src/` together so CI and downstream users get a coherent state.
+- JS runtime namespace module keys must use PascalCase (`webapi_Console`, not `webapi_console`) to match wasm import module names. The namespace emitter PascalCases WebIDL names for MoonBit types; the JS runtime must do the same for its module keys. The method bodies keep the original WebIDL name for JS API calls (e.g., `console.log()`).
+- wasm-gc callback externref: the MoonBit compiler currently handles `externref` vs `(ref extern)` correctly for callback funcref parameters. The `JsAny` workaround in `JsPromise` callbacks was needed for a specific compiler version; don't assume all `#external` types in callback params need the same treatment without verifying the failure first.
+- wasm-gc examples that remain js-only (`clipboard-apis`, `intersection-observer`, `notifications`, `requestidlecallback`, `screen-orientation`, `websockets`) fail for reasons unrelated to callbacks: JsPromise with Unit/Double resolved values, enum-to-GC-type conversions, and interface method return type mismatches. These are separate issues from callback funcref parameter types.
 
 ## Commit & Pull Request Guidelines
 - Follow existing commit style: `feat:`, `fix:`, `refactor:`, `test:`, `chore:` (imperative, concise).
