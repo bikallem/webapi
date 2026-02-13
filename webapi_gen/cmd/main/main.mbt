@@ -193,7 +193,7 @@ fn generate_moon_pkg(
 ///|
 fn main {
   let args = @sys.get_cli_args()
-  // Parse optional command line argument for config file
+  // Parse config file path from optional command-line args
   let config_file = if args.length() > 1 {
     args[1]
   } else {
