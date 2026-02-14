@@ -264,3 +264,9 @@ The branch `remove-default-value` removes redundant MoonBit-side default values 
 **Blocked by moonc ICE** ([#1133](https://github.com/moonbitlang/moonbit-docs/issues/1133)): Removing `= []` from optional `Array[T]` parameters (e.g., `actions? : Array[NotificationAction] = []` to `actions? : Array[NotificationAction]`) triggers `Moonc.Basic_hashf.Make(Key).Key_not_found(_)` during `link-core` on the JS target. wasm-gc is unaffected. Type-checking passes — only the linker crashes.
 
 **Action**: Once the moonc bug is fixed, merge `remove-default-value` back into main and verify with `make clean all`.
+
+## Pending: rework file-api JS helpers (blocked by moonc ICE #1133)
+
+The file-api example uses target-specific helpers (`helpers_js.mbt` / `helpers_wasm.mbt`) because `Union::from()` (e.g., `BlobPart::from(text)`) triggers the same `Moonc.Basic_hashf.Make(Key).Key_not_found(_)` ICE on the JS target. The wasm-gc helper already uses `BlobPart::from()` directly, but the JS helper falls back to `extern "js"` for blob/file construction.
+
+**Action**: Once the moonc bug is fixed, replace `helpers_js.mbt` with a shared `main.mbt` that uses `BlobPart::from()` on both targets, delete the target-specific helpers, and remove the `targets` config from `moon.pkg`.
