@@ -85,7 +85,8 @@ pub(all) struct DictionaryGetterArg {
 
 ///|
 pub enum Emit {
-  External(TypeName) // External type, eg. #external EventTarget
+  External(TypeName) // External type with MDN doc, eg. #external EventTarget
+  InlineExternal(TypeName) // Synthetic inline union type (no MDN doc), eg. #external EffectTimingGetDuration
   ImplTJsValue(TypeName) // eg. pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
   ImplFromJsAny(TypeName) // eg. pub impl FromJsAny for EventTarget with from_js_any(value : JsAny) -> EventTarget = "%identity"
   IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
@@ -115,7 +116,7 @@ fn emit_aux_to_emit(aux : @type_mapping.EmitAux) -> Emit {
     UnionArgTrait(name) => Emit::UnionArgTrait(TraitName(name))
     UnionArgTraitImpl(type_name, trait_name) =>
       Emit::UnionArgTraitImpl(TypeName(type_name), TraitName(trait_name))
-    External(name) => Emit::External(TypeName(name))
+    InlineExternal(name) => Emit::InlineExternal(TypeName(name))
   }
 }
 
@@ -539,15 +540,11 @@ fn render_enum_value(
   name : String,
   variants : Array[EnumVariantEmit],
 ) -> Unit {
-  // value() returns the IDL string value for each variant.
-  // Uses StringBuilder to avoid wasm-gc compiler bug with match returning String.
-  buf.write_string(
-    "pub fn \{name}::value(self: \{name}) -> String {\n  let buf = StringBuilder::new()\n",
-  )
+  buf.write_string("pub fn \{name}::value(self: \{name}) -> String {\n")
   enum_match_self(buf, name, variants, fn(n, v) {
-    "\{n}::\{v.variant_name} => buf.write_string(\"\{v.original_value}\")"
+    "\{n}::\{v.variant_name} => \"\{v.original_value}\""
   })
-  buf.write_string("  buf.to_string()\n}")
+  buf.write_string("}")
 }
 
 ///|
@@ -647,6 +644,8 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
           "/// [\{type_name}](\{mdn_url})\n#external\npub type \{type_name}",
         )
       }
+      Emit::InlineExternal(TypeName(type_name)) =>
+        append_shared("#external\npub type \{type_name}")
       Emit::ImplTJsValue(TypeName(type_name)) =>
         append_shared(
           "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",

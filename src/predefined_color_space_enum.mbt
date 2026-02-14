@@ -61,15 +61,12 @@ fn PredefinedColorSpace::from_unchecked(value : String) -> PredefinedColorSpace 
 
 ///|
 pub fn PredefinedColorSpace::value(self : PredefinedColorSpace) -> String {
-  let buf = StringBuilder::new()
   match self {
-    PredefinedColorSpace::Srgb => buf.write_string("srgb")
-    PredefinedColorSpace::SrgbLinear => buf.write_string("srgb-linear")
-    PredefinedColorSpace::DisplayP3 => buf.write_string("display-p3")
-    PredefinedColorSpace::DisplayP3Linear =>
-      buf.write_string("display-p3-linear")
+    PredefinedColorSpace::Srgb => "srgb"
+    PredefinedColorSpace::SrgbLinear => "srgb-linear"
+    PredefinedColorSpace::DisplayP3 => "display-p3"
+    PredefinedColorSpace::DisplayP3Linear => "display-p3-linear"
   }
-  buf.to_string()
 }
 
 ///|

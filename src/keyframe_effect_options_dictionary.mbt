@@ -77,7 +77,6 @@ pub impl TKeyframeEffectOptionsGetDuration for Double with to_js(self : Double) 
 pub impl TKeyframeEffectOptionsGetDuration for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [KeyframeEffectOptionsGetDuration](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffectOptionsGetDuration)
 #external
 pub type KeyframeEffectOptionsGetDuration
 

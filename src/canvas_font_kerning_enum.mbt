@@ -52,13 +52,11 @@ fn CanvasFontKerning::from_unchecked(value : String) -> CanvasFontKerning {
 
 ///|
 pub fn CanvasFontKerning::value(self : CanvasFontKerning) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasFontKerning::Auto => buf.write_string("auto")
-    CanvasFontKerning::Normal => buf.write_string("normal")
-    CanvasFontKerning::None => buf.write_string("none")
+    CanvasFontKerning::Auto => "auto"
+    CanvasFontKerning::Normal => "normal"
+    CanvasFontKerning::None => "none"
   }
-  buf.to_string()
 }
 
 ///|

@@ -57,13 +57,10 @@ fn NavigationScrollBehavior::from_unchecked(
 pub fn NavigationScrollBehavior::value(
   self : NavigationScrollBehavior,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    NavigationScrollBehavior::AfterTransition =>
-      buf.write_string("after-transition")
-    NavigationScrollBehavior::Manual => buf.write_string("manual")
+    NavigationScrollBehavior::AfterTransition => "after-transition"
+    NavigationScrollBehavior::Manual => "manual"
   }
-  buf.to_string()
 }
 
 ///|

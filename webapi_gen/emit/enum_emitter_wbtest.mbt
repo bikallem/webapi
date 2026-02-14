@@ -88,13 +88,11 @@ test "EnumEmitter emits enum with multiple values" {
       #|}
       #|
       #|pub fn ScrollBehavior::value(self: ScrollBehavior) -> String {
-      #|  let buf = StringBuilder::new()
       #|  match self {
-      #|    ScrollBehavior::Auto => buf.write_string("auto")
-      #|    ScrollBehavior::Instant => buf.write_string("instant")
-      #|    ScrollBehavior::Smooth => buf.write_string("smooth")
+      #|    ScrollBehavior::Auto => "auto"
+      #|    ScrollBehavior::Instant => "instant"
+      #|    ScrollBehavior::Smooth => "smooth"
       #|  }
-      #|  buf.to_string()
       #|}
       #|
       #|pub impl FromJsAny for ScrollBehavior with from_js_any(value : JsAny) -> ScrollBehavior {
@@ -170,14 +168,12 @@ test "EnumEmitter emits enum with empty string value" {
       #|}
       #|
       #|pub fn SelectionDirection::value(self: SelectionDirection) -> String {
-      #|  let buf = StringBuilder::new()
       #|  match self {
-      #|    SelectionDirection::Forward => buf.write_string("forward")
-      #|    SelectionDirection::Backward => buf.write_string("backward")
-      #|    SelectionDirection::None => buf.write_string("none")
-      #|    SelectionDirection::Empty => buf.write_string("")
+      #|    SelectionDirection::Forward => "forward"
+      #|    SelectionDirection::Backward => "backward"
+      #|    SelectionDirection::None => "none"
+      #|    SelectionDirection::Empty => ""
       #|  }
-      #|  buf.to_string()
       #|}
       #|
       #|pub impl FromJsAny for SelectionDirection with from_js_any(value : JsAny) -> SelectionDirection {
@@ -246,13 +242,11 @@ test "EnumEmitter emits enum with dash-separated values" {
       #|}
       #|
       #|pub fn ReferrerPolicy::value(self: ReferrerPolicy) -> String {
-      #|  let buf = StringBuilder::new()
       #|  match self {
-      #|    ReferrerPolicy::NoReferrer => buf.write_string("no-referrer")
-      #|    ReferrerPolicy::NoReferrerWhenDowngrade => buf.write_string("no-referrer-when-downgrade")
-      #|    ReferrerPolicy::Origin => buf.write_string("origin")
+      #|    ReferrerPolicy::NoReferrer => "no-referrer"
+      #|    ReferrerPolicy::NoReferrerWhenDowngrade => "no-referrer-when-downgrade"
+      #|    ReferrerPolicy::Origin => "origin"
       #|  }
-      #|  buf.to_string()
       #|}
       #|
       #|pub impl FromJsAny for ReferrerPolicy with from_js_any(value : JsAny) -> ReferrerPolicy {

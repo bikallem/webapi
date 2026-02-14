@@ -52,13 +52,11 @@ fn CanvasLineCap::from_unchecked(value : String) -> CanvasLineCap {
 
 ///|
 pub fn CanvasLineCap::value(self : CanvasLineCap) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasLineCap::Butt => buf.write_string("butt")
-    CanvasLineCap::Round => buf.write_string("round")
-    CanvasLineCap::Square => buf.write_string("square")
+    CanvasLineCap::Butt => "butt"
+    CanvasLineCap::Round => "round"
+    CanvasLineCap::Square => "square"
   }
-  buf.to_string()
 }
 
 ///|

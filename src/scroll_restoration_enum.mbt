@@ -47,12 +47,10 @@ fn ScrollRestoration::from_unchecked(value : String) -> ScrollRestoration {
 
 ///|
 pub fn ScrollRestoration::value(self : ScrollRestoration) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ScrollRestoration::Auto => buf.write_string("auto")
-    ScrollRestoration::Manual => buf.write_string("manual")
+    ScrollRestoration::Auto => "auto"
+    ScrollRestoration::Manual => "manual"
   }
-  buf.to_string()
 }
 
 ///|

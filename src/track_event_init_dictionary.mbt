@@ -65,7 +65,6 @@ pub impl TTrackEventInitGetTrack for AudioTrack with to_js(self : AudioTrack) ->
 pub impl TTrackEventInitGetTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
 
 ///|
-/// [TrackEventInitGetTrack](https://developer.mozilla.org/en-US/docs/Web/API/TrackEventInitGetTrack)
 #external
 pub type TrackEventInitGetTrack
 

@@ -58,14 +58,12 @@ fn PlaybackDirection::from_unchecked(value : String) -> PlaybackDirection {
 
 ///|
 pub fn PlaybackDirection::value(self : PlaybackDirection) -> String {
-  let buf = StringBuilder::new()
   match self {
-    PlaybackDirection::Normal => buf.write_string("normal")
-    PlaybackDirection::Reverse => buf.write_string("reverse")
-    PlaybackDirection::Alternate => buf.write_string("alternate")
-    PlaybackDirection::AlternateReverse => buf.write_string("alternate-reverse")
+    PlaybackDirection::Normal => "normal"
+    PlaybackDirection::Reverse => "reverse"
+    PlaybackDirection::Alternate => "alternate"
+    PlaybackDirection::AlternateReverse => "alternate-reverse"
   }
-  buf.to_string()
 }
 
 ///|

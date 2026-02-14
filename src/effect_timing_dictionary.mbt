@@ -71,7 +71,6 @@ pub impl TEffectTimingGetDuration for Double with to_js(self : Double) -> JsValu
 pub impl TEffectTimingGetDuration for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [EffectTimingGetDuration](https://developer.mozilla.org/en-US/docs/Web/API/EffectTimingGetDuration)
 #external
 pub type EffectTimingGetDuration
 

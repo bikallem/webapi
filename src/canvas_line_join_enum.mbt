@@ -52,13 +52,11 @@ fn CanvasLineJoin::from_unchecked(value : String) -> CanvasLineJoin {
 
 ///|
 pub fn CanvasLineJoin::value(self : CanvasLineJoin) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasLineJoin::Round => buf.write_string("round")
-    CanvasLineJoin::Bevel => buf.write_string("bevel")
-    CanvasLineJoin::Miter => buf.write_string("miter")
+    CanvasLineJoin::Round => "round"
+    CanvasLineJoin::Bevel => "bevel"
+    CanvasLineJoin::Miter => "miter"
   }
-  buf.to_string()
 }
 
 ///|

@@ -1,3 +1,5 @@
+// Do not edit. This file is generated.
+
 ///|
 pub type WindowProxy = Window
 

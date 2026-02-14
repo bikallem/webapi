@@ -142,31 +142,29 @@ fn RequestDestination::from_unchecked(value : String) -> RequestDestination {
 
 ///|
 pub fn RequestDestination::value(self : RequestDestination) -> String {
-  let buf = StringBuilder::new()
   match self {
-    RequestDestination::Empty => buf.write_string("")
-    RequestDestination::Audio => buf.write_string("audio")
-    RequestDestination::Audioworklet => buf.write_string("audioworklet")
-    RequestDestination::Document => buf.write_string("document")
-    RequestDestination::Embed => buf.write_string("embed")
-    RequestDestination::Font => buf.write_string("font")
-    RequestDestination::Frame => buf.write_string("frame")
-    RequestDestination::Iframe => buf.write_string("iframe")
-    RequestDestination::Image => buf.write_string("image")
-    RequestDestination::Json => buf.write_string("json")
-    RequestDestination::Manifest => buf.write_string("manifest")
-    RequestDestination::Object => buf.write_string("object")
-    RequestDestination::Paintworklet => buf.write_string("paintworklet")
-    RequestDestination::Report => buf.write_string("report")
-    RequestDestination::Script => buf.write_string("script")
-    RequestDestination::Sharedworker => buf.write_string("sharedworker")
-    RequestDestination::Style => buf.write_string("style")
-    RequestDestination::Track => buf.write_string("track")
-    RequestDestination::Video => buf.write_string("video")
-    RequestDestination::Worker => buf.write_string("worker")
-    RequestDestination::Xslt => buf.write_string("xslt")
+    RequestDestination::Empty => ""
+    RequestDestination::Audio => "audio"
+    RequestDestination::Audioworklet => "audioworklet"
+    RequestDestination::Document => "document"
+    RequestDestination::Embed => "embed"
+    RequestDestination::Font => "font"
+    RequestDestination::Frame => "frame"
+    RequestDestination::Iframe => "iframe"
+    RequestDestination::Image => "image"
+    RequestDestination::Json => "json"
+    RequestDestination::Manifest => "manifest"
+    RequestDestination::Object => "object"
+    RequestDestination::Paintworklet => "paintworklet"
+    RequestDestination::Report => "report"
+    RequestDestination::Script => "script"
+    RequestDestination::Sharedworker => "sharedworker"
+    RequestDestination::Style => "style"
+    RequestDestination::Track => "track"
+    RequestDestination::Video => "video"
+    RequestDestination::Worker => "worker"
+    RequestDestination::Xslt => "xslt"
   }
-  buf.to_string()
 }
 
 ///|

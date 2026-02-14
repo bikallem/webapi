@@ -60,13 +60,11 @@ fn NavigationHistoryBehavior::from_unchecked(
 pub fn NavigationHistoryBehavior::value(
   self : NavigationHistoryBehavior,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    NavigationHistoryBehavior::Auto => buf.write_string("auto")
-    NavigationHistoryBehavior::Push => buf.write_string("push")
-    NavigationHistoryBehavior::Replace => buf.write_string("replace")
+    NavigationHistoryBehavior::Auto => "auto"
+    NavigationHistoryBehavior::Push => "push"
+    NavigationHistoryBehavior::Replace => "replace"
   }
-  buf.to_string()
 }
 
 ///|

@@ -52,13 +52,11 @@ fn IDBTransactionMode::from_unchecked(value : String) -> IDBTransactionMode {
 
 ///|
 pub fn IDBTransactionMode::value(self : IDBTransactionMode) -> String {
-  let buf = StringBuilder::new()
   match self {
-    IDBTransactionMode::Readonly => buf.write_string("readonly")
-    IDBTransactionMode::Readwrite => buf.write_string("readwrite")
-    IDBTransactionMode::Versionchange => buf.write_string("versionchange")
+    IDBTransactionMode::Readonly => "readonly"
+    IDBTransactionMode::Readwrite => "readwrite"
+    IDBTransactionMode::Versionchange => "versionchange"
   }
-  buf.to_string()
 }
 
 ///|

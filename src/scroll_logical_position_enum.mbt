@@ -61,14 +61,12 @@ fn ScrollLogicalPosition::from_unchecked(
 
 ///|
 pub fn ScrollLogicalPosition::value(self : ScrollLogicalPosition) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ScrollLogicalPosition::Start => buf.write_string("start")
-    ScrollLogicalPosition::Center => buf.write_string("center")
-    ScrollLogicalPosition::End => buf.write_string("end")
-    ScrollLogicalPosition::Nearest => buf.write_string("nearest")
+    ScrollLogicalPosition::Start => "start"
+    ScrollLogicalPosition::Center => "center"
+    ScrollLogicalPosition::End => "end"
+    ScrollLogicalPosition::Nearest => "nearest"
   }
-  buf.to_string()
 }
 
 ///|

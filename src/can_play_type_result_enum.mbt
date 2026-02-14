@@ -52,13 +52,11 @@ fn CanPlayTypeResult::from_unchecked(value : String) -> CanPlayTypeResult {
 
 ///|
 pub fn CanPlayTypeResult::value(self : CanPlayTypeResult) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanPlayTypeResult::Empty => buf.write_string("")
-    CanPlayTypeResult::Maybe => buf.write_string("maybe")
-    CanPlayTypeResult::Probably => buf.write_string("probably")
+    CanPlayTypeResult::Empty => ""
+    CanPlayTypeResult::Maybe => "maybe"
+    CanPlayTypeResult::Probably => "probably"
   }
-  buf.to_string()
 }
 
 ///|

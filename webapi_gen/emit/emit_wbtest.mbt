@@ -70,7 +70,7 @@ test "arg_mbt_type identifies nested union types correctly" {
       ["TypeName", "String"],
       ["TraitName", "TTestInterfaceTestMethodParam"],
     ],
-    ["External", ["TypeName", "TestInterfaceTestMethodParam2"]],
+    ["InlineExternal", ["TypeName", "TestInterfaceTestMethodParam2"]],
     ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam2"]],
     [
       "UnionArgTraitImpl",

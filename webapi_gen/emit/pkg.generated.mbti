@@ -76,6 +76,7 @@ pub impl ToJson for DictionaryGetterArg
 
 pub enum Emit {
   External(TypeName)
+  InlineExternal(TypeName)
   ImplTJsValue(TypeName)
   ImplFromJsAny(TypeName)
   IntoMethod(TypeName)

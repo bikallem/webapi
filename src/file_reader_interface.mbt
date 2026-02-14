@@ -37,7 +37,6 @@ pub const FILE_READER_LOADING : UInt = 1
 pub const FILE_READER_DONE : UInt = 2
 
 ///|
-/// [FileReaderResult](https://developer.mozilla.org/en-US/docs/Web/API/FileReaderResult)
 #external
 pub type FileReaderResult
 

@@ -50,13 +50,10 @@ fn NavigationFocusReset::from_unchecked(value : String) -> NavigationFocusReset 
 
 ///|
 pub fn NavigationFocusReset::value(self : NavigationFocusReset) -> String {
-  let buf = StringBuilder::new()
   match self {
-    NavigationFocusReset::AfterTransition =>
-      buf.write_string("after-transition")
-    NavigationFocusReset::Manual => buf.write_string("manual")
+    NavigationFocusReset::AfterTransition => "after-transition"
+    NavigationFocusReset::Manual => "manual"
   }
-  buf.to_string()
 }
 
 ///|

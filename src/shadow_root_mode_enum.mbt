@@ -47,12 +47,10 @@ fn ShadowRootMode::from_unchecked(value : String) -> ShadowRootMode {
 
 ///|
 pub fn ShadowRootMode::value(self : ShadowRootMode) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ShadowRootMode::Open => buf.write_string("open")
-    ShadowRootMode::Closed => buf.write_string("closed")
+    ShadowRootMode::Open => "open"
+    ShadowRootMode::Closed => "closed"
   }
-  buf.to_string()
 }
 
 ///|

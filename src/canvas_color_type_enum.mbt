@@ -47,12 +47,10 @@ fn CanvasColorType::from_unchecked(value : String) -> CanvasColorType {
 
 ///|
 pub fn CanvasColorType::value(self : CanvasColorType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasColorType::Unorm8 => buf.write_string("unorm8")
-    CanvasColorType::Float16 => buf.write_string("float16")
+    CanvasColorType::Unorm8 => "unorm8"
+    CanvasColorType::Float16 => "float16"
   }
-  buf.to_string()
 }
 
 ///|

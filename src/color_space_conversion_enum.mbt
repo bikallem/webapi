@@ -49,12 +49,10 @@ fn ColorSpaceConversion::from_unchecked(value : String) -> ColorSpaceConversion 
 
 ///|
 pub fn ColorSpaceConversion::value(self : ColorSpaceConversion) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ColorSpaceConversion::None => buf.write_string("none")
-    ColorSpaceConversion::Default => buf.write_string("default")
+    ColorSpaceConversion::None => "none"
+    ColorSpaceConversion::Default => "default"
   }
-  buf.to_string()
 }
 
 ///|

@@ -65,7 +65,6 @@ pub impl TElementSetHTMLUnsafeHtml for TrustedHTML with to_js(
 pub impl TElementSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [ElementInnerHTML](https://developer.mozilla.org/en-US/docs/Web/API/ElementInnerHTML)
 #external
 pub type ElementInnerHTML
 
@@ -104,7 +103,6 @@ pub impl TElementInnerHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsV
 pub impl TElementInnerHTML for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [ElementOuterHTML](https://developer.mozilla.org/en-US/docs/Web/API/ElementOuterHTML)
 #external
 pub type ElementOuterHTML
 

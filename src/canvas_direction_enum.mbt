@@ -52,13 +52,11 @@ fn CanvasDirection::from_unchecked(value : String) -> CanvasDirection {
 
 ///|
 pub fn CanvasDirection::value(self : CanvasDirection) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasDirection::Ltr => buf.write_string("ltr")
-    CanvasDirection::Rtl => buf.write_string("rtl")
-    CanvasDirection::Inherit => buf.write_string("inherit")
+    CanvasDirection::Ltr => "ltr"
+    CanvasDirection::Rtl => "rtl"
+    CanvasDirection::Inherit => "inherit"
   }
-  buf.to_string()
 }
 
 ///|

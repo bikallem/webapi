@@ -47,12 +47,10 @@ fn SlotAssignmentMode::from_unchecked(value : String) -> SlotAssignmentMode {
 
 ///|
 pub fn SlotAssignmentMode::value(self : SlotAssignmentMode) -> String {
-  let buf = StringBuilder::new()
   match self {
-    SlotAssignmentMode::Manual => buf.write_string("manual")
-    SlotAssignmentMode::Named => buf.write_string("named")
+    SlotAssignmentMode::Manual => "manual"
+    SlotAssignmentMode::Named => "named"
   }
-  buf.to_string()
 }
 
 ///|

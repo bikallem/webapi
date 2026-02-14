@@ -53,12 +53,10 @@ fn ScrollIntoViewContainer::from_unchecked(
 
 ///|
 pub fn ScrollIntoViewContainer::value(self : ScrollIntoViewContainer) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ScrollIntoViewContainer::All => buf.write_string("all")
-    ScrollIntoViewContainer::Nearest => buf.write_string("nearest")
+    ScrollIntoViewContainer::All => "all"
+    ScrollIntoViewContainer::Nearest => "nearest"
   }
-  buf.to_string()
 }
 
 ///|

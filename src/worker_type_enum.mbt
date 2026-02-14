@@ -44,12 +44,10 @@ fn WorkerType::from_unchecked(value : String) -> WorkerType {
 
 ///|
 pub fn WorkerType::value(self : WorkerType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    WorkerType::Classic => buf.write_string("classic")
-    WorkerType::Module => buf.write_string("module")
+    WorkerType::Classic => "classic"
+    WorkerType::Module => "module"
   }
-  buf.to_string()
 }
 
 ///|

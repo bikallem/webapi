@@ -42,7 +42,6 @@ pub impl TShadowRootSetHTMLUnsafeHtml for TrustedHTML with to_js(
 pub impl TShadowRootSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [ShadowRootInnerHTML](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRootInnerHTML)
 #external
 pub type ShadowRootInnerHTML
 

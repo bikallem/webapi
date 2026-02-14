@@ -44,12 +44,10 @@ fn BinaryType::from_unchecked(value : String) -> BinaryType {
 
 ///|
 pub fn BinaryType::value(self : BinaryType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    BinaryType::Blob => buf.write_string("blob")
-    BinaryType::Arraybuffer => buf.write_string("arraybuffer")
+    BinaryType::Blob => "blob"
+    BinaryType::Arraybuffer => "arraybuffer"
   }
-  buf.to_string()
 }
 
 ///|

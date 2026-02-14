@@ -42,11 +42,9 @@ fn ReadableStreamType::from_unchecked(value : String) -> ReadableStreamType {
 
 ///|
 pub fn ReadableStreamType::value(self : ReadableStreamType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ReadableStreamType::Bytes => buf.write_string("bytes")
+    ReadableStreamType::Bytes => "bytes"
   }
-  buf.to_string()
 }
 
 ///|

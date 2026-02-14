@@ -77,7 +77,6 @@ pub impl TComputedEffectTimingGetDuration for Double with to_js(self : Double) -
 pub impl TComputedEffectTimingGetDuration for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [ComputedEffectTimingGetDuration](https://developer.mozilla.org/en-US/docs/Web/API/ComputedEffectTimingGetDuration)
 #external
 pub type ComputedEffectTimingGetDuration
 

@@ -76,17 +76,15 @@ fn CanvasFontVariantCaps::from_unchecked(
 
 ///|
 pub fn CanvasFontVariantCaps::value(self : CanvasFontVariantCaps) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasFontVariantCaps::Normal => buf.write_string("normal")
-    CanvasFontVariantCaps::SmallCaps => buf.write_string("small-caps")
-    CanvasFontVariantCaps::AllSmallCaps => buf.write_string("all-small-caps")
-    CanvasFontVariantCaps::PetiteCaps => buf.write_string("petite-caps")
-    CanvasFontVariantCaps::AllPetiteCaps => buf.write_string("all-petite-caps")
-    CanvasFontVariantCaps::Unicase => buf.write_string("unicase")
-    CanvasFontVariantCaps::TitlingCaps => buf.write_string("titling-caps")
+    CanvasFontVariantCaps::Normal => "normal"
+    CanvasFontVariantCaps::SmallCaps => "small-caps"
+    CanvasFontVariantCaps::AllSmallCaps => "all-small-caps"
+    CanvasFontVariantCaps::PetiteCaps => "petite-caps"
+    CanvasFontVariantCaps::AllPetiteCaps => "all-petite-caps"
+    CanvasFontVariantCaps::Unicase => "unicase"
+    CanvasFontVariantCaps::TitlingCaps => "titling-caps"
   }
-  buf.to_string()
 }
 
 ///|

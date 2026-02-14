@@ -49,12 +49,10 @@ fn ImageDataPixelFormat::from_unchecked(value : String) -> ImageDataPixelFormat 
 
 ///|
 pub fn ImageDataPixelFormat::value(self : ImageDataPixelFormat) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ImageDataPixelFormat::RgbaUnorm8 => buf.write_string("rgba-unorm8")
-    ImageDataPixelFormat::RgbaFloat16 => buf.write_string("rgba-float16")
+    ImageDataPixelFormat::RgbaUnorm8 => "rgba-unorm8"
+    ImageDataPixelFormat::RgbaFloat16 => "rgba-float16"
   }
-  buf.to_string()
 }
 
 ///|

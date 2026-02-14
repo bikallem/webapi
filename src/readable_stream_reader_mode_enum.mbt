@@ -50,11 +50,9 @@ fn ReadableStreamReaderMode::from_unchecked(
 pub fn ReadableStreamReaderMode::value(
   self : ReadableStreamReaderMode,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ReadableStreamReaderMode::Byob => buf.write_string("byob")
+    ReadableStreamReaderMode::Byob => "byob"
   }
-  buf.to_string()
 }
 
 ///|

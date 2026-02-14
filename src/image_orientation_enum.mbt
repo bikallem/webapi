@@ -47,12 +47,10 @@ fn ImageOrientation::from_unchecked(value : String) -> ImageOrientation {
 
 ///|
 pub fn ImageOrientation::value(self : ImageOrientation) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ImageOrientation::FromImage => buf.write_string("from-image")
-    ImageOrientation::FlipY => buf.write_string("flipY")
+    ImageOrientation::FromImage => "from-image"
+    ImageOrientation::FlipY => "flipY"
   }
-  buf.to_string()
 }
 
 ///|

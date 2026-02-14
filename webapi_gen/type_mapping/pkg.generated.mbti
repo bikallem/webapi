@@ -41,7 +41,7 @@ pub impl ToJson for ArgMbtType
 pub enum EmitAux {
   UnionArgTrait(String)
   UnionArgTraitImpl(String, String)
-  External(String)
+  InlineExternal(String)
 }
 pub impl Show for EmitAux
 pub impl ToJson for EmitAux

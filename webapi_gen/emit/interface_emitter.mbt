@@ -261,7 +261,7 @@ fn emit_union_return_type(
 ) -> Unit {
   if return_type is @type_mapping.ArgMbtType::Union({ name, has_undefined, .. }) {
     emits
-    ..push(Emit::External(name))
+    ..push(Emit::InlineExternal(name))
     ..push(Emit::ImplTJsValue(name))
     ..push(Emit::ImplFromJsAny(name))
     ..push(Emit::UnionIntoMethod(name))

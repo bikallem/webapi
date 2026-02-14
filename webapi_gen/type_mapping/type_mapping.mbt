@@ -320,7 +320,7 @@ pub fn arg_mbt_type(
           call_depth=call_depth + 1,
         )
         if mbt_type is ArgMbtType::Union(_) {
-          emits.push(EmitAux::External(mbt_type.name()))
+          emits.push(EmitAux::InlineExternal(mbt_type.name()))
         }
         let mbt_type = if is_undefined {
           // Map 'undefined' type to 'JsUndefined' for union option
@@ -379,5 +379,5 @@ pub fn arg_mbt_type(
 pub enum EmitAux {
   UnionArgTrait(String) // trait name
   UnionArgTraitImpl(String, String) // (type_name, trait_name)
-  External(String) // type name
+  InlineExternal(String) // synthetic inline union type (no MDN doc)
 } derive(Show, ToJson)

@@ -23,7 +23,6 @@ pub impl TWindow for Window
 pub impl TEventTarget for Window
 
 ///|
-/// [WindowEvent](https://developer.mozilla.org/en-US/docs/Web/API/WindowEvent)
 #external
 pub type WindowEvent
 

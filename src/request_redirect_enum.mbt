@@ -52,13 +52,11 @@ fn RequestRedirect::from_unchecked(value : String) -> RequestRedirect {
 
 ///|
 pub fn RequestRedirect::value(self : RequestRedirect) -> String {
-  let buf = StringBuilder::new()
   match self {
-    RequestRedirect::Follow => buf.write_string("follow")
-    RequestRedirect::Error => buf.write_string("error")
-    RequestRedirect::Manual => buf.write_string("manual")
+    RequestRedirect::Follow => "follow"
+    RequestRedirect::Error => "error"
+    RequestRedirect::Manual => "manual"
   }
-  buf.to_string()
 }
 
 ///|

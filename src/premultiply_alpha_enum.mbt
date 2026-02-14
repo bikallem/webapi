@@ -52,13 +52,11 @@ fn PremultiplyAlpha::from_unchecked(value : String) -> PremultiplyAlpha {
 
 ///|
 pub fn PremultiplyAlpha::value(self : PremultiplyAlpha) -> String {
-  let buf = StringBuilder::new()
   match self {
-    PremultiplyAlpha::None => buf.write_string("none")
-    PremultiplyAlpha::Premultiply => buf.write_string("premultiply")
-    PremultiplyAlpha::Default => buf.write_string("default")
+    PremultiplyAlpha::None => "none"
+    PremultiplyAlpha::Premultiply => "premultiply"
+    PremultiplyAlpha::Default => "default"
   }
-  buf.to_string()
 }
 
 ///|

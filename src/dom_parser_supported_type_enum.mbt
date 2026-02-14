@@ -69,17 +69,13 @@ fn DOMParserSupportedType::from_unchecked(
 
 ///|
 pub fn DOMParserSupportedType::value(self : DOMParserSupportedType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    DOMParserSupportedType::TextHtml => buf.write_string("text/html")
-    DOMParserSupportedType::TextXml => buf.write_string("text/xml")
-    DOMParserSupportedType::ApplicationXml =>
-      buf.write_string("application/xml")
-    DOMParserSupportedType::ApplicationXhtmlXml =>
-      buf.write_string("application/xhtml+xml")
-    DOMParserSupportedType::ImageSvgXml => buf.write_string("image/svg+xml")
+    DOMParserSupportedType::TextHtml => "text/html"
+    DOMParserSupportedType::TextXml => "text/xml"
+    DOMParserSupportedType::ApplicationXml => "application/xml"
+    DOMParserSupportedType::ApplicationXhtmlXml => "application/xhtml+xml"
+    DOMParserSupportedType::ImageSvgXml => "image/svg+xml"
   }
-  buf.to_string()
 }
 
 ///|

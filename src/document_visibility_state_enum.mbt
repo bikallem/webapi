@@ -53,12 +53,10 @@ fn DocumentVisibilityState::from_unchecked(
 
 ///|
 pub fn DocumentVisibilityState::value(self : DocumentVisibilityState) -> String {
-  let buf = StringBuilder::new()
   match self {
-    DocumentVisibilityState::Visible => buf.write_string("visible")
-    DocumentVisibilityState::Hidden => buf.write_string("hidden")
+    DocumentVisibilityState::Visible => "visible"
+    DocumentVisibilityState::Hidden => "hidden"
   }
-  buf.to_string()
 }
 
 ///|

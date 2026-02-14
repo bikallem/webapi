@@ -60,13 +60,11 @@ fn IDBTransactionDurability::from_unchecked(
 pub fn IDBTransactionDurability::value(
   self : IDBTransactionDurability,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    IDBTransactionDurability::Default => buf.write_string("default")
-    IDBTransactionDurability::Strict => buf.write_string("strict")
-    IDBTransactionDurability::Relaxed => buf.write_string("relaxed")
+    IDBTransactionDurability::Default => "default"
+    IDBTransactionDurability::Strict => "strict"
+    IDBTransactionDurability::Relaxed => "relaxed"
   }
-  buf.to_string()
 }
 
 ///|

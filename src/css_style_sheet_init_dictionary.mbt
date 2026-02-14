@@ -57,7 +57,6 @@ pub impl TCSSStyleSheetInitGetMedia for MediaList with to_js(self : MediaList) -
 pub impl TCSSStyleSheetInitGetMedia for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [CSSStyleSheetInitGetMedia](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheetInitGetMedia)
 #external
 pub type CSSStyleSheetInitGetMedia
 

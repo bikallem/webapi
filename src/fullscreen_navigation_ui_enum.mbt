@@ -56,13 +56,11 @@ fn FullscreenNavigationUI::from_unchecked(
 
 ///|
 pub fn FullscreenNavigationUI::value(self : FullscreenNavigationUI) -> String {
-  let buf = StringBuilder::new()
   match self {
-    FullscreenNavigationUI::Auto => buf.write_string("auto")
-    FullscreenNavigationUI::Show => buf.write_string("show")
-    FullscreenNavigationUI::Hide => buf.write_string("hide")
+    FullscreenNavigationUI::Auto => "auto"
+    FullscreenNavigationUI::Show => "show"
+    FullscreenNavigationUI::Hide => "hide"
   }
-  buf.to_string()
 }
 
 ///|

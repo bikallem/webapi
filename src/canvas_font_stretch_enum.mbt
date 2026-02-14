@@ -82,19 +82,17 @@ fn CanvasFontStretch::from_unchecked(value : String) -> CanvasFontStretch {
 
 ///|
 pub fn CanvasFontStretch::value(self : CanvasFontStretch) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasFontStretch::UltraCondensed => buf.write_string("ultra-condensed")
-    CanvasFontStretch::ExtraCondensed => buf.write_string("extra-condensed")
-    CanvasFontStretch::Condensed => buf.write_string("condensed")
-    CanvasFontStretch::SemiCondensed => buf.write_string("semi-condensed")
-    CanvasFontStretch::Normal => buf.write_string("normal")
-    CanvasFontStretch::SemiExpanded => buf.write_string("semi-expanded")
-    CanvasFontStretch::Expanded => buf.write_string("expanded")
-    CanvasFontStretch::ExtraExpanded => buf.write_string("extra-expanded")
-    CanvasFontStretch::UltraExpanded => buf.write_string("ultra-expanded")
+    CanvasFontStretch::UltraCondensed => "ultra-condensed"
+    CanvasFontStretch::ExtraCondensed => "extra-condensed"
+    CanvasFontStretch::Condensed => "condensed"
+    CanvasFontStretch::SemiCondensed => "semi-condensed"
+    CanvasFontStretch::Normal => "normal"
+    CanvasFontStretch::SemiExpanded => "semi-expanded"
+    CanvasFontStretch::Expanded => "expanded"
+    CanvasFontStretch::ExtraExpanded => "extra-expanded"
+    CanvasFontStretch::UltraExpanded => "ultra-expanded"
   }
-  buf.to_string()
 }
 
 ///|

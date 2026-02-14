@@ -72,16 +72,13 @@ fn OffscreenRenderingContextId::from_unchecked(
 pub fn OffscreenRenderingContextId::value(
   self : OffscreenRenderingContextId,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    OffscreenRenderingContextId::V2d => buf.write_string("2d")
-    OffscreenRenderingContextId::Bitmaprenderer =>
-      buf.write_string("bitmaprenderer")
-    OffscreenRenderingContextId::Webgl => buf.write_string("webgl")
-    OffscreenRenderingContextId::Webgl2 => buf.write_string("webgl2")
-    OffscreenRenderingContextId::Webgpu => buf.write_string("webgpu")
+    OffscreenRenderingContextId::V2d => "2d"
+    OffscreenRenderingContextId::Bitmaprenderer => "bitmaprenderer"
+    OffscreenRenderingContextId::Webgl => "webgl"
+    OffscreenRenderingContextId::Webgl2 => "webgl2"
+    OffscreenRenderingContextId::Webgpu => "webgpu"
   }
-  buf.to_string()
 }
 
 ///|

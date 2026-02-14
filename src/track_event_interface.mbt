@@ -31,7 +31,6 @@ pub fn TrackEvent::new(
 }
 
 ///|
-/// [TrackEventTrack](https://developer.mozilla.org/en-US/docs/Web/API/TrackEventTrack)
 #external
 pub type TrackEventTrack
 

@@ -26,7 +26,6 @@ pub fn[T : TImageBitmapRenderingContext] ImageBitmapRenderingContext::into(
 pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 
 ///|
-/// [ImageBitmapRenderingContextCanvas](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContextCanvas)
 #external
 pub type ImageBitmapRenderingContextCanvas
 

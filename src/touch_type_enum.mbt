@@ -44,12 +44,10 @@ fn TouchType::from_unchecked(value : String) -> TouchType {
 
 ///|
 pub fn TouchType::value(self : TouchType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    TouchType::Direct => buf.write_string("direct")
-    TouchType::Stylus => buf.write_string("stylus")
+    TouchType::Direct => "direct"
+    TouchType::Stylus => "stylus"
   }
-  buf.to_string()
 }
 
 ///|

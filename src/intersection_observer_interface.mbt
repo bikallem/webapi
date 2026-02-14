@@ -35,7 +35,6 @@ pub fn IntersectionObserver::new(
 }
 
 ///|
-/// [IntersectionObserverRoot](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverRoot)
 #external
 pub type IntersectionObserverRoot
 

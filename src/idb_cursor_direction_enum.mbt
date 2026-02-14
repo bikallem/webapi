@@ -57,14 +57,12 @@ fn IDBCursorDirection::from_unchecked(value : String) -> IDBCursorDirection {
 
 ///|
 pub fn IDBCursorDirection::value(self : IDBCursorDirection) -> String {
-  let buf = StringBuilder::new()
   match self {
-    IDBCursorDirection::Next => buf.write_string("next")
-    IDBCursorDirection::Nextunique => buf.write_string("nextunique")
-    IDBCursorDirection::Prev => buf.write_string("prev")
-    IDBCursorDirection::Prevunique => buf.write_string("prevunique")
+    IDBCursorDirection::Next => "next"
+    IDBCursorDirection::Nextunique => "nextunique"
+    IDBCursorDirection::Prev => "prev"
+    IDBCursorDirection::Prevunique => "prevunique"
   }
-  buf.to_string()
 }
 
 ///|

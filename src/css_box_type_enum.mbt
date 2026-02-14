@@ -54,14 +54,12 @@ fn CSSBoxType::from_unchecked(value : String) -> CSSBoxType {
 
 ///|
 pub fn CSSBoxType::value(self : CSSBoxType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CSSBoxType::Margin => buf.write_string("margin")
-    CSSBoxType::Border => buf.write_string("border")
-    CSSBoxType::Padding => buf.write_string("padding")
-    CSSBoxType::Content => buf.write_string("content")
+    CSSBoxType::Margin => "margin"
+    CSSBoxType::Border => "border"
+    CSSBoxType::Padding => "padding"
+    CSSBoxType::Content => "content"
   }
-  buf.to_string()
 }
 
 ///|

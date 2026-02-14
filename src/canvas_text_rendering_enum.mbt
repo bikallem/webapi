@@ -61,16 +61,12 @@ fn CanvasTextRendering::from_unchecked(value : String) -> CanvasTextRendering {
 
 ///|
 pub fn CanvasTextRendering::value(self : CanvasTextRendering) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasTextRendering::Auto => buf.write_string("auto")
-    CanvasTextRendering::OptimizeSpeed => buf.write_string("optimizeSpeed")
-    CanvasTextRendering::OptimizeLegibility =>
-      buf.write_string("optimizeLegibility")
-    CanvasTextRendering::GeometricPrecision =>
-      buf.write_string("geometricPrecision")
+    CanvasTextRendering::Auto => "auto"
+    CanvasTextRendering::OptimizeSpeed => "optimizeSpeed"
+    CanvasTextRendering::OptimizeLegibility => "optimizeLegibility"
+    CanvasTextRendering::GeometricPrecision => "geometricPrecision"
   }
-  buf.to_string()
 }
 
 ///|

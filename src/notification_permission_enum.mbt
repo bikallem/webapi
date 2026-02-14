@@ -56,13 +56,11 @@ fn NotificationPermission::from_unchecked(
 
 ///|
 pub fn NotificationPermission::value(self : NotificationPermission) -> String {
-  let buf = StringBuilder::new()
   match self {
-    NotificationPermission::Default => buf.write_string("default")
-    NotificationPermission::Denied => buf.write_string("denied")
-    NotificationPermission::Granted => buf.write_string("granted")
+    NotificationPermission::Default => "default"
+    NotificationPermission::Denied => "denied"
+    NotificationPermission::Granted => "granted"
   }
-  buf.to_string()
 }
 
 ///|

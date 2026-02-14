@@ -67,16 +67,14 @@ fn ResponseType::from_unchecked(value : String) -> ResponseType {
 
 ///|
 pub fn ResponseType::value(self : ResponseType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ResponseType::Basic => buf.write_string("basic")
-    ResponseType::Cors => buf.write_string("cors")
-    ResponseType::Default => buf.write_string("default")
-    ResponseType::Error => buf.write_string("error")
-    ResponseType::Opaque => buf.write_string("opaque")
-    ResponseType::Opaqueredirect => buf.write_string("opaqueredirect")
+    ResponseType::Basic => "basic"
+    ResponseType::Cors => "cors"
+    ResponseType::Default => "default"
+    ResponseType::Error => "error"
+    ResponseType::Opaque => "opaque"
+    ResponseType::Opaqueredirect => "opaqueredirect"
   }
-  buf.to_string()
 }
 
 ///|

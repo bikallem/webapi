@@ -84,21 +84,16 @@ fn OrientationLockType::from_unchecked(value : String) -> OrientationLockType {
 
 ///|
 pub fn OrientationLockType::value(self : OrientationLockType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    OrientationLockType::Any => buf.write_string("any")
-    OrientationLockType::Natural => buf.write_string("natural")
-    OrientationLockType::Landscape => buf.write_string("landscape")
-    OrientationLockType::Portrait => buf.write_string("portrait")
-    OrientationLockType::PortraitPrimary => buf.write_string("portrait-primary")
-    OrientationLockType::PortraitSecondary =>
-      buf.write_string("portrait-secondary")
-    OrientationLockType::LandscapePrimary =>
-      buf.write_string("landscape-primary")
-    OrientationLockType::LandscapeSecondary =>
-      buf.write_string("landscape-secondary")
+    OrientationLockType::Any => "any"
+    OrientationLockType::Natural => "natural"
+    OrientationLockType::Landscape => "landscape"
+    OrientationLockType::Portrait => "portrait"
+    OrientationLockType::PortraitPrimary => "portrait-primary"
+    OrientationLockType::PortraitSecondary => "portrait-secondary"
+    OrientationLockType::LandscapePrimary => "landscape-primary"
+    OrientationLockType::LandscapeSecondary => "landscape-secondary"
   }
-  buf.to_string()
 }
 
 ///|

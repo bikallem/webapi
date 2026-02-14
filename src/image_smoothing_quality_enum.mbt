@@ -56,13 +56,11 @@ fn ImageSmoothingQuality::from_unchecked(
 
 ///|
 pub fn ImageSmoothingQuality::value(self : ImageSmoothingQuality) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ImageSmoothingQuality::Low => buf.write_string("low")
-    ImageSmoothingQuality::Medium => buf.write_string("medium")
-    ImageSmoothingQuality::High => buf.write_string("high")
+    ImageSmoothingQuality::Low => "low"
+    ImageSmoothingQuality::Medium => "medium"
+    ImageSmoothingQuality::High => "high"
   }
-  buf.to_string()
 }
 
 ///|

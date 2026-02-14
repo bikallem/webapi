@@ -57,14 +57,12 @@ fn SelectionMode::from_unchecked(value : String) -> SelectionMode {
 
 ///|
 pub fn SelectionMode::value(self : SelectionMode) -> String {
-  let buf = StringBuilder::new()
   match self {
-    SelectionMode::Select => buf.write_string("select")
-    SelectionMode::Start => buf.write_string("start")
-    SelectionMode::End => buf.write_string("end")
-    SelectionMode::Preserve => buf.write_string("preserve")
+    SelectionMode::Select => "select"
+    SelectionMode::Start => "start"
+    SelectionMode::End => "end"
+    SelectionMode::Preserve => "preserve"
   }
-  buf.to_string()
 }
 
 ///|

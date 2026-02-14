@@ -52,13 +52,11 @@ fn TextTrackMode::from_unchecked(value : String) -> TextTrackMode {
 
 ///|
 pub fn TextTrackMode::value(self : TextTrackMode) -> String {
-  let buf = StringBuilder::new()
   match self {
-    TextTrackMode::Disabled => buf.write_string("disabled")
-    TextTrackMode::Hidden => buf.write_string("hidden")
-    TextTrackMode::Showing => buf.write_string("showing")
+    TextTrackMode::Disabled => "disabled"
+    TextTrackMode::Hidden => "hidden"
+    TextTrackMode::Showing => "showing"
   }
-  buf.to_string()
 }
 
 ///|

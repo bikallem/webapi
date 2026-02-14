@@ -65,7 +65,6 @@ pub impl TIDBObjectStoreParametersGetKeyPath for Array[String] with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-/// [IDBObjectStoreParametersGetKeyPath](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStoreParametersGetKeyPath)
 #external
 pub type IDBObjectStoreParametersGetKeyPath
 

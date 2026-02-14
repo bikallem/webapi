@@ -42,11 +42,9 @@ fn RequestDuplex::from_unchecked(value : String) -> RequestDuplex {
 
 ///|
 pub fn RequestDuplex::value(self : RequestDuplex) -> String {
-  let buf = StringBuilder::new()
   match self {
-    RequestDuplex::Half => buf.write_string("half")
+    RequestDuplex::Half => "half"
   }
-  buf.to_string()
 }
 
 ///|

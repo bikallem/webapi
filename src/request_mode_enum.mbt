@@ -54,14 +54,12 @@ fn RequestMode::from_unchecked(value : String) -> RequestMode {
 
 ///|
 pub fn RequestMode::value(self : RequestMode) -> String {
-  let buf = StringBuilder::new()
   match self {
-    RequestMode::Navigate => buf.write_string("navigate")
-    RequestMode::SameOrigin => buf.write_string("same-origin")
-    RequestMode::NoCors => buf.write_string("no-cors")
-    RequestMode::Cors => buf.write_string("cors")
+    RequestMode::Navigate => "navigate"
+    RequestMode::SameOrigin => "same-origin"
+    RequestMode::NoCors => "no-cors"
+    RequestMode::Cors => "cors"
   }
-  buf.to_string()
 }
 
 ///|

@@ -64,14 +64,12 @@ fn ResizeObserverBoxOptions::from_unchecked(
 pub fn ResizeObserverBoxOptions::value(
   self : ResizeObserverBoxOptions,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ResizeObserverBoxOptions::BorderBox => buf.write_string("border-box")
-    ResizeObserverBoxOptions::ContentBox => buf.write_string("content-box")
+    ResizeObserverBoxOptions::BorderBox => "border-box"
+    ResizeObserverBoxOptions::ContentBox => "content-box"
     ResizeObserverBoxOptions::DevicePixelContentBox =>
-      buf.write_string("device-pixel-content-box")
+      "device-pixel-content-box"
   }
-  buf.to_string()
 }
 
 ///|

@@ -65,14 +65,12 @@ fn CompositeOperationOrAuto::from_unchecked(
 pub fn CompositeOperationOrAuto::value(
   self : CompositeOperationOrAuto,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CompositeOperationOrAuto::Replace => buf.write_string("replace")
-    CompositeOperationOrAuto::Add => buf.write_string("add")
-    CompositeOperationOrAuto::Accumulate => buf.write_string("accumulate")
-    CompositeOperationOrAuto::Auto => buf.write_string("auto")
+    CompositeOperationOrAuto::Replace => "replace"
+    CompositeOperationOrAuto::Add => "add"
+    CompositeOperationOrAuto::Accumulate => "accumulate"
+    CompositeOperationOrAuto::Auto => "auto"
   }
-  buf.to_string()
 }
 
 ///|

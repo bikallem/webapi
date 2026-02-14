@@ -91,22 +91,18 @@ fn ReferrerPolicy::from_unchecked(value : String) -> ReferrerPolicy {
 
 ///|
 pub fn ReferrerPolicy::value(self : ReferrerPolicy) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ReferrerPolicy::Empty => buf.write_string("")
-    ReferrerPolicy::NoReferrer => buf.write_string("no-referrer")
-    ReferrerPolicy::NoReferrerWhenDowngrade =>
-      buf.write_string("no-referrer-when-downgrade")
-    ReferrerPolicy::SameOrigin => buf.write_string("same-origin")
-    ReferrerPolicy::Origin => buf.write_string("origin")
-    ReferrerPolicy::StrictOrigin => buf.write_string("strict-origin")
-    ReferrerPolicy::OriginWhenCrossOrigin =>
-      buf.write_string("origin-when-cross-origin")
+    ReferrerPolicy::Empty => ""
+    ReferrerPolicy::NoReferrer => "no-referrer"
+    ReferrerPolicy::NoReferrerWhenDowngrade => "no-referrer-when-downgrade"
+    ReferrerPolicy::SameOrigin => "same-origin"
+    ReferrerPolicy::Origin => "origin"
+    ReferrerPolicy::StrictOrigin => "strict-origin"
+    ReferrerPolicy::OriginWhenCrossOrigin => "origin-when-cross-origin"
     ReferrerPolicy::StrictOriginWhenCrossOrigin =>
-      buf.write_string("strict-origin-when-cross-origin")
-    ReferrerPolicy::UnsafeUrl => buf.write_string("unsafe-url")
+      "strict-origin-when-cross-origin"
+    ReferrerPolicy::UnsafeUrl => "unsafe-url"
   }
-  buf.to_string()
 }
 
 ///|

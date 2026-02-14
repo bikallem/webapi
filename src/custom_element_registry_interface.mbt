@@ -29,7 +29,6 @@ pub fn CustomElementRegistry::new() -> CustomElementRegistry {
 }
 
 ///|
-/// [CustomElementRegistryGet](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistryGet)
 #external
 pub type CustomElementRegistryGet
 

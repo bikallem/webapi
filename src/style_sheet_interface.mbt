@@ -20,7 +20,6 @@ pub fn[T : TStyleSheet] StyleSheet::into(self : StyleSheet) -> T = "%identity"
 pub impl TStyleSheet for StyleSheet
 
 ///|
-/// [StyleSheetOwnerNode](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetOwnerNode)
 #external
 pub type StyleSheetOwnerNode
 

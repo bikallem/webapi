@@ -52,13 +52,11 @@ fn ScrollBehavior::from_unchecked(value : String) -> ScrollBehavior {
 
 ///|
 pub fn ScrollBehavior::value(self : ScrollBehavior) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ScrollBehavior::Auto => buf.write_string("auto")
-    ScrollBehavior::Instant => buf.write_string("instant")
-    ScrollBehavior::Smooth => buf.write_string("smooth")
+    ScrollBehavior::Auto => "auto"
+    ScrollBehavior::Instant => "instant"
+    ScrollBehavior::Smooth => "smooth"
   }
-  buf.to_string()
 }
 
 ///|

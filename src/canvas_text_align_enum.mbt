@@ -62,15 +62,13 @@ fn CanvasTextAlign::from_unchecked(value : String) -> CanvasTextAlign {
 
 ///|
 pub fn CanvasTextAlign::value(self : CanvasTextAlign) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasTextAlign::Start => buf.write_string("start")
-    CanvasTextAlign::End => buf.write_string("end")
-    CanvasTextAlign::Left => buf.write_string("left")
-    CanvasTextAlign::Right => buf.write_string("right")
-    CanvasTextAlign::Center => buf.write_string("center")
+    CanvasTextAlign::Start => "start"
+    CanvasTextAlign::End => "end"
+    CanvasTextAlign::Left => "left"
+    CanvasTextAlign::Right => "right"
+    CanvasTextAlign::Center => "center"
   }
-  buf.to_string()
 }
 
 ///|

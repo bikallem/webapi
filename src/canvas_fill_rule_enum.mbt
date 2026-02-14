@@ -47,12 +47,10 @@ fn CanvasFillRule::from_unchecked(value : String) -> CanvasFillRule {
 
 ///|
 pub fn CanvasFillRule::value(self : CanvasFillRule) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasFillRule::Nonzero => buf.write_string("nonzero")
-    CanvasFillRule::Evenodd => buf.write_string("evenodd")
+    CanvasFillRule::Nonzero => "nonzero"
+    CanvasFillRule::Evenodd => "evenodd"
   }
-  buf.to_string()
 }
 
 ///|

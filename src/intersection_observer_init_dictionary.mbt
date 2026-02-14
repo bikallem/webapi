@@ -89,7 +89,6 @@ pub impl TIntersectionObserverInitGetRoot for Document with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-/// [IntersectionObserverInitGetRoot](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverInitGetRoot)
 #external
 pub type IntersectionObserverInitGetRoot
 
@@ -138,7 +137,6 @@ pub impl TIntersectionObserverInitGetThreshold for Array[Double] with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-/// [IntersectionObserverInitGetThreshold](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverInitGetThreshold)
 #external
 pub type IntersectionObserverInitGetThreshold
 

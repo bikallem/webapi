@@ -23,7 +23,6 @@ pub impl TIDBRequest for IDBRequest
 pub impl TEventTarget for IDBRequest
 
 ///|
-/// [IDBRequestSource](https://developer.mozilla.org/en-US/docs/Web/API/IDBRequestSource)
 #external
 pub type IDBRequestSource
 

@@ -57,14 +57,12 @@ fn ResizeQuality::from_unchecked(value : String) -> ResizeQuality {
 
 ///|
 pub fn ResizeQuality::value(self : ResizeQuality) -> String {
-  let buf = StringBuilder::new()
   match self {
-    ResizeQuality::Pixelated => buf.write_string("pixelated")
-    ResizeQuality::Low => buf.write_string("low")
-    ResizeQuality::Medium => buf.write_string("medium")
-    ResizeQuality::High => buf.write_string("high")
+    ResizeQuality::Pixelated => "pixelated"
+    ResizeQuality::Low => "low"
+    ResizeQuality::Medium => "medium"
+    ResizeQuality::High => "high"
   }
-  buf.to_string()
 }
 
 ///|

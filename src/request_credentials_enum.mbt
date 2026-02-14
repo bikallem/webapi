@@ -52,13 +52,11 @@ fn RequestCredentials::from_unchecked(value : String) -> RequestCredentials {
 
 ///|
 pub fn RequestCredentials::value(self : RequestCredentials) -> String {
-  let buf = StringBuilder::new()
   match self {
-    RequestCredentials::Omit => buf.write_string("omit")
-    RequestCredentials::SameOrigin => buf.write_string("same-origin")
-    RequestCredentials::Include => buf.write_string("include")
+    RequestCredentials::Omit => "omit"
+    RequestCredentials::SameOrigin => "same-origin"
+    RequestCredentials::Include => "include"
   }
-  buf.to_string()
 }
 
 ///|

@@ -49,12 +49,10 @@ fn IDBRequestReadyState::from_unchecked(value : String) -> IDBRequestReadyState 
 
 ///|
 pub fn IDBRequestReadyState::value(self : IDBRequestReadyState) -> String {
-  let buf = StringBuilder::new()
   match self {
-    IDBRequestReadyState::Pending => buf.write_string("pending")
-    IDBRequestReadyState::Done => buf.write_string("done")
+    IDBRequestReadyState::Pending => "pending"
+    IDBRequestReadyState::Done => "done"
   }
-  buf.to_string()
 }
 
 ///|

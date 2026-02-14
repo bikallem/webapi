@@ -76,16 +76,14 @@ fn XMLHttpRequestResponseType::from_unchecked(
 pub fn XMLHttpRequestResponseType::value(
   self : XMLHttpRequestResponseType,
 ) -> String {
-  let buf = StringBuilder::new()
   match self {
-    XMLHttpRequestResponseType::Empty => buf.write_string("")
-    XMLHttpRequestResponseType::Arraybuffer => buf.write_string("arraybuffer")
-    XMLHttpRequestResponseType::Blob => buf.write_string("blob")
-    XMLHttpRequestResponseType::Document => buf.write_string("document")
-    XMLHttpRequestResponseType::Json => buf.write_string("json")
-    XMLHttpRequestResponseType::Text => buf.write_string("text")
+    XMLHttpRequestResponseType::Empty => ""
+    XMLHttpRequestResponseType::Arraybuffer => "arraybuffer"
+    XMLHttpRequestResponseType::Blob => "blob"
+    XMLHttpRequestResponseType::Document => "document"
+    XMLHttpRequestResponseType::Json => "json"
+    XMLHttpRequestResponseType::Text => "text"
   }
-  buf.to_string()
 }
 
 ///|

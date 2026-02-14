@@ -337,7 +337,6 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
       #|
       #|pub impl TTestDictGetHeaders for Int with to_js(self : Int) -> JsValue { TJsValue::to_js(self) }
       #|
-      #|/// [TestDictGetHeaders](https://developer.mozilla.org/en-US/docs/Web/API/TestDictGetHeaders)
       #|#external
       #|pub type TestDictGetHeaders
       #|

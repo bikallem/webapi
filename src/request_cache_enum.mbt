@@ -67,16 +67,14 @@ fn RequestCache::from_unchecked(value : String) -> RequestCache {
 
 ///|
 pub fn RequestCache::value(self : RequestCache) -> String {
-  let buf = StringBuilder::new()
   match self {
-    RequestCache::Default => buf.write_string("default")
-    RequestCache::NoStore => buf.write_string("no-store")
-    RequestCache::Reload => buf.write_string("reload")
-    RequestCache::NoCache => buf.write_string("no-cache")
-    RequestCache::ForceCache => buf.write_string("force-cache")
-    RequestCache::OnlyIfCached => buf.write_string("only-if-cached")
+    RequestCache::Default => "default"
+    RequestCache::NoStore => "no-store"
+    RequestCache::Reload => "reload"
+    RequestCache::NoCache => "no-cache"
+    RequestCache::ForceCache => "force-cache"
+    RequestCache::OnlyIfCached => "only-if-cached"
   }
-  buf.to_string()
 }
 
 ///|

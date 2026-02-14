@@ -26,7 +26,6 @@ pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
 ///|
-/// [OffscreenCanvasRenderingContext2DStrokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2DStrokeStyle)
 #external
 pub type OffscreenCanvasRenderingContext2DStrokeStyle
 
@@ -78,7 +77,6 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern with to
 ) -> JsValue = "%identity"
 
 ///|
-/// [OffscreenCanvasRenderingContext2DFillStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2DFillStyle)
 #external
 pub type OffscreenCanvasRenderingContext2DFillStyle
 

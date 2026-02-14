@@ -52,13 +52,11 @@ fn DocumentReadyState::from_unchecked(value : String) -> DocumentReadyState {
 
 ///|
 pub fn DocumentReadyState::value(self : DocumentReadyState) -> String {
-  let buf = StringBuilder::new()
   match self {
-    DocumentReadyState::Loading => buf.write_string("loading")
-    DocumentReadyState::Interactive => buf.write_string("interactive")
-    DocumentReadyState::Complete => buf.write_string("complete")
+    DocumentReadyState::Loading => "loading"
+    DocumentReadyState::Interactive => "interactive"
+    DocumentReadyState::Complete => "complete"
   }
-  buf.to_string()
 }
 
 ///|

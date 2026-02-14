@@ -60,15 +60,12 @@ fn OrientationType::from_unchecked(value : String) -> OrientationType {
 
 ///|
 pub fn OrientationType::value(self : OrientationType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    OrientationType::PortraitPrimary => buf.write_string("portrait-primary")
-    OrientationType::PortraitSecondary => buf.write_string("portrait-secondary")
-    OrientationType::LandscapePrimary => buf.write_string("landscape-primary")
-    OrientationType::LandscapeSecondary =>
-      buf.write_string("landscape-secondary")
+    OrientationType::PortraitPrimary => "portrait-primary"
+    OrientationType::PortraitSecondary => "portrait-secondary"
+    OrientationType::LandscapePrimary => "landscape-primary"
+    OrientationType::LandscapeSecondary => "landscape-secondary"
   }
-  buf.to_string()
 }
 
 ///|

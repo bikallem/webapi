@@ -52,13 +52,11 @@ fn CompositeOperation::from_unchecked(value : String) -> CompositeOperation {
 
 ///|
 pub fn CompositeOperation::value(self : CompositeOperation) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CompositeOperation::Replace => buf.write_string("replace")
-    CompositeOperation::Add => buf.write_string("add")
-    CompositeOperation::Accumulate => buf.write_string("accumulate")
+    CompositeOperation::Replace => "replace"
+    CompositeOperation::Add => "add"
+    CompositeOperation::Accumulate => "accumulate"
   }
-  buf.to_string()
 }
 
 ///|

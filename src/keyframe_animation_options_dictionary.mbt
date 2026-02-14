@@ -89,7 +89,6 @@ pub impl TKeyframeAnimationOptionsGetDuration for String with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-/// [KeyframeAnimationOptionsGetDuration](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeAnimationOptionsGetDuration)
 #external
 pub type KeyframeAnimationOptionsGetDuration
 

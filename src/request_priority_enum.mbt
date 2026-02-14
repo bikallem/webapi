@@ -52,13 +52,11 @@ fn RequestPriority::from_unchecked(value : String) -> RequestPriority {
 
 ///|
 pub fn RequestPriority::value(self : RequestPriority) -> String {
-  let buf = StringBuilder::new()
   match self {
-    RequestPriority::High => buf.write_string("high")
-    RequestPriority::Low => buf.write_string("low")
-    RequestPriority::Auto => buf.write_string("auto")
+    RequestPriority::High => "high"
+    RequestPriority::Low => "low"
+    RequestPriority::Auto => "auto"
   }
-  buf.to_string()
 }
 
 ///|

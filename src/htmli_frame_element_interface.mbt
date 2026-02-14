@@ -39,7 +39,6 @@ pub fn HTMLIFrameElement::new() -> HTMLIFrameElement {
 }
 
 ///|
-/// [HTMLIFrameElementSrcdoc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElementSrcdoc)
 #external
 pub type HTMLIFrameElementSrcdoc
 

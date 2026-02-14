@@ -29,7 +29,6 @@ pub impl THTMLFormControlsCollection for HTMLFormControlsCollection
 pub impl THTMLCollection for HTMLFormControlsCollection
 
 ///|
-/// [HTMLFormControlsCollectionNamedItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollectionNamedItem)
 #external
 pub type HTMLFormControlsCollectionNamedItem
 

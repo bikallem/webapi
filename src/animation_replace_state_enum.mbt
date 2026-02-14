@@ -56,13 +56,11 @@ fn AnimationReplaceState::from_unchecked(
 
 ///|
 pub fn AnimationReplaceState::value(self : AnimationReplaceState) -> String {
-  let buf = StringBuilder::new()
   match self {
-    AnimationReplaceState::Active => buf.write_string("active")
-    AnimationReplaceState::Removed => buf.write_string("removed")
-    AnimationReplaceState::Persisted => buf.write_string("persisted")
+    AnimationReplaceState::Active => "active"
+    AnimationReplaceState::Removed => "removed"
+    AnimationReplaceState::Persisted => "persisted"
   }
-  buf.to_string()
 }
 
 ///|

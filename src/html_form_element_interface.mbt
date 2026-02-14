@@ -37,7 +37,6 @@ pub fn HTMLFormElement::new() -> HTMLFormElement {
 }
 
 ///|
-/// [HTMLFormElementGetByName](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElementGetByName)
 #external
 pub type HTMLFormElementGetByName
 

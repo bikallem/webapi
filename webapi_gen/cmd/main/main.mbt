@@ -171,6 +171,7 @@ fn generate_moon_pkg(
   wasm_files : Array[String],
 ) -> String {
   let buf = StringBuilder::new()
+  buf.write_string("warnings = \"-53\"\n\n")
   buf.write_string("options(\n")
   buf.write_string("  targets: {")
   let entries : Array[String] = []

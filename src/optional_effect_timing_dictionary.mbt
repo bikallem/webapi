@@ -73,7 +73,6 @@ pub impl TOptionalEffectTimingGetDuration for Double with to_js(self : Double) -
 pub impl TOptionalEffectTimingGetDuration for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-/// [OptionalEffectTimingGetDuration](https://developer.mozilla.org/en-US/docs/Web/API/OptionalEffectTimingGetDuration)
 #external
 pub type OptionalEffectTimingGetDuration
 

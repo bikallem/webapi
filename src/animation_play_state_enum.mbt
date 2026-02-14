@@ -57,14 +57,12 @@ fn AnimationPlayState::from_unchecked(value : String) -> AnimationPlayState {
 
 ///|
 pub fn AnimationPlayState::value(self : AnimationPlayState) -> String {
-  let buf = StringBuilder::new()
   match self {
-    AnimationPlayState::Idle => buf.write_string("idle")
-    AnimationPlayState::Running => buf.write_string("running")
-    AnimationPlayState::Paused => buf.write_string("paused")
-    AnimationPlayState::Finished => buf.write_string("finished")
+    AnimationPlayState::Idle => "idle"
+    AnimationPlayState::Running => "running"
+    AnimationPlayState::Paused => "paused"
+    AnimationPlayState::Finished => "finished"
   }
-  buf.to_string()
 }
 
 ///|

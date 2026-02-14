@@ -57,14 +57,12 @@ fn NavigationType::from_unchecked(value : String) -> NavigationType {
 
 ///|
 pub fn NavigationType::value(self : NavigationType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    NavigationType::Push => buf.write_string("push")
-    NavigationType::Replace => buf.write_string("replace")
-    NavigationType::Reload => buf.write_string("reload")
-    NavigationType::Traverse => buf.write_string("traverse")
+    NavigationType::Push => "push"
+    NavigationType::Replace => "replace"
+    NavigationType::Reload => "reload"
+    NavigationType::Traverse => "traverse"
   }
-  buf.to_string()
 }
 
 ///|

@@ -34,7 +34,6 @@ pub fn HTMLElement::new() -> HTMLElement {
 }
 
 ///|
-/// [HTMLElementHidden](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElementHidden)
 #external
 pub type HTMLElementHidden
 

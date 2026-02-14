@@ -44,12 +44,10 @@ fn EndingType::from_unchecked(value : String) -> EndingType {
 
 ///|
 pub fn EndingType::value(self : EndingType) -> String {
-  let buf = StringBuilder::new()
   match self {
-    EndingType::Transparent => buf.write_string("transparent")
-    EndingType::Native => buf.write_string("native")
+    EndingType::Transparent => "transparent"
+    EndingType::Native => "native"
   }
-  buf.to_string()
 }
 
 ///|

@@ -1,3 +1,5 @@
+warnings = "-53"
+
 options(
   "supported-targets": [ "js", "wasm-gc" ],
   targets: {

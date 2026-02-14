@@ -59,15 +59,13 @@ fn FillMode::from_unchecked(value : String) -> FillMode {
 
 ///|
 pub fn FillMode::value(self : FillMode) -> String {
-  let buf = StringBuilder::new()
   match self {
-    FillMode::None => buf.write_string("none")
-    FillMode::Forwards => buf.write_string("forwards")
-    FillMode::Backwards => buf.write_string("backwards")
-    FillMode::Both => buf.write_string("both")
-    FillMode::Auto => buf.write_string("auto")
+    FillMode::None => "none"
+    FillMode::Forwards => "forwards"
+    FillMode::Backwards => "backwards"
+    FillMode::Both => "both"
+    FillMode::Auto => "auto"
   }
-  buf.to_string()
 }
 
 ///|

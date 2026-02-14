@@ -62,15 +62,13 @@ fn TextTrackKind::from_unchecked(value : String) -> TextTrackKind {
 
 ///|
 pub fn TextTrackKind::value(self : TextTrackKind) -> String {
-  let buf = StringBuilder::new()
   match self {
-    TextTrackKind::Subtitles => buf.write_string("subtitles")
-    TextTrackKind::Captions => buf.write_string("captions")
-    TextTrackKind::Descriptions => buf.write_string("descriptions")
-    TextTrackKind::Chapters => buf.write_string("chapters")
-    TextTrackKind::Metadata => buf.write_string("metadata")
+    TextTrackKind::Subtitles => "subtitles"
+    TextTrackKind::Captions => "captions"
+    TextTrackKind::Descriptions => "descriptions"
+    TextTrackKind::Chapters => "chapters"
+    TextTrackKind::Metadata => "metadata"
   }
-  buf.to_string()
 }
 
 ///|

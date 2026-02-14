@@ -56,13 +56,11 @@ fn NotificationDirection::from_unchecked(
 
 ///|
 pub fn NotificationDirection::value(self : NotificationDirection) -> String {
-  let buf = StringBuilder::new()
   match self {
-    NotificationDirection::Auto => buf.write_string("auto")
-    NotificationDirection::Ltr => buf.write_string("ltr")
-    NotificationDirection::Rtl => buf.write_string("rtl")
+    NotificationDirection::Auto => "auto"
+    NotificationDirection::Ltr => "ltr"
+    NotificationDirection::Rtl => "rtl"
   }
-  buf.to_string()
 }
 
 ///|

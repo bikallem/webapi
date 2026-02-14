@@ -22,7 +22,6 @@ pub fn[T : TSVGAnimatedString] SVGAnimatedString::into(
 pub impl TSVGAnimatedString for SVGAnimatedString
 
 ///|
-/// [SVGAnimatedStringBaseVal](https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedStringBaseVal)
 #external
 pub type SVGAnimatedStringBaseVal
 

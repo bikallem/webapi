@@ -67,16 +67,14 @@ fn CanvasTextBaseline::from_unchecked(value : String) -> CanvasTextBaseline {
 
 ///|
 pub fn CanvasTextBaseline::value(self : CanvasTextBaseline) -> String {
-  let buf = StringBuilder::new()
   match self {
-    CanvasTextBaseline::Top => buf.write_string("top")
-    CanvasTextBaseline::Hanging => buf.write_string("hanging")
-    CanvasTextBaseline::Middle => buf.write_string("middle")
-    CanvasTextBaseline::Alphabetic => buf.write_string("alphabetic")
-    CanvasTextBaseline::Ideographic => buf.write_string("ideographic")
-    CanvasTextBaseline::Bottom => buf.write_string("bottom")
+    CanvasTextBaseline::Top => "top"
+    CanvasTextBaseline::Hanging => "hanging"
+    CanvasTextBaseline::Middle => "middle"
+    CanvasTextBaseline::Alphabetic => "alphabetic"
+    CanvasTextBaseline::Ideographic => "ideographic"
+    CanvasTextBaseline::Bottom => "bottom"
   }
-  buf.to_string()
 }
 
 ///|

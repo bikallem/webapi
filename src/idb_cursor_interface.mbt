@@ -20,7 +20,6 @@ pub fn[T : TIDBCursor] IDBCursor::into(self : IDBCursor) -> T = "%identity"
 pub impl TIDBCursor for IDBCursor
 
 ///|
-/// [IDBCursorSource](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursorSource)
 #external
 pub type IDBCursorSource
 

@@ -52,13 +52,11 @@ fn PresentationStyle::from_unchecked(value : String) -> PresentationStyle {
 
 ///|
 pub fn PresentationStyle::value(self : PresentationStyle) -> String {
-  let buf = StringBuilder::new()
   match self {
-    PresentationStyle::Unspecified => buf.write_string("unspecified")
-    PresentationStyle::Inline => buf.write_string("inline")
-    PresentationStyle::Attachment => buf.write_string("attachment")
+    PresentationStyle::Unspecified => "unspecified"
+    PresentationStyle::Inline => "inline"
+    PresentationStyle::Attachment => "attachment"
   }
-  buf.to_string()
 }
 
 ///|

@@ -268,7 +268,6 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|pub impl TTestInterfaceTestMethodParam for String with to_js(self : String) -> JsValue = "%identity"
       #|
-      #|/// [TestInterfaceTestMethodParam2](https://developer.mozilla.org/en-US/docs/Web/API/TestInterfaceTestMethodParam2)
       #|#external
       #|pub type TestInterfaceTestMethodParam2
       #|
@@ -349,7 +348,6 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
-      #|/// [TestInterfaceTestMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterfaceTestMethod)
       #|#external
       #|pub type TestInterfaceTestMethod
       #|

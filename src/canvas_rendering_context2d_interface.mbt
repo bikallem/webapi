@@ -24,7 +24,6 @@ pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 
 ///|
-/// [CanvasRenderingContext2DStrokeStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DStrokeStyle)
 #external
 pub type CanvasRenderingContext2DStrokeStyle
 
@@ -76,7 +75,6 @@ pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-/// [CanvasRenderingContext2DFillStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DFillStyle)
 #external
 pub type CanvasRenderingContext2DFillStyle
 
