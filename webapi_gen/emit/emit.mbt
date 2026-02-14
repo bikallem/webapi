@@ -627,19 +627,6 @@ fn render_file_header(
 //============================ Code generator ===========================
 
 ///|
-/// Generate MoonBit code from Emit array for JS backend (combined output).
-/// Delegates to mbt_code_gen_multi and concatenates shared + JS FFI.
-pub fn mbt_code_gen(emits : Array[Emit]) -> String {
-  let multi = mbt_code_gen_multi(emits)
-  let buf = StringBuilder::new()
-  buf.write_string(multi.shared)
-  if multi.js_ffi.length() > 0 {
-    buf.write_string("\n\n")
-    buf.write_string(multi.js_ffi)
-  }
-  buf.to_string()
-}
-
 //============================ Multi-target code generator ===========================
 
 ///|

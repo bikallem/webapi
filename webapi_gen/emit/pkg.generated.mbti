@@ -8,13 +8,9 @@ import {
 }
 
 // Values
-pub fn[E : Emitter] emit_all(E, Iter[String]) -> Map[Filename, Code]
-
 pub fn[E : Emitter] emit_all_multi(E, Iter[String]) -> MultiTargetFiles
 
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
-
-pub fn mbt_code_gen(Array[Emit]) -> String
 
 pub fn mbt_code_gen_multi(Array[Emit]) -> MultiTargetCode
 

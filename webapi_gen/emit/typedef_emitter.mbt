@@ -72,18 +72,18 @@ test "typedef emiiter emits alias typedef" {
     |> @flattened_idl.flatten(ignore)
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (filename, emits) = emitter.emit("MyString")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   json_inspect(filename, content=["Filename", "my_string_typedef.mbt"])
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: MyString
-      #|
-      #|
-      #|pub type MyString = String
-    ),
-  )
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: MyString
+    #|
+    #|
+    #|pub type MyString = String
+  ))
+  inspect(multi.js_ffi)
+  inspect(multi.wasm_ffi)
 }
 
 ///|
@@ -96,43 +96,40 @@ test "typedef emitter emits union typedef" {
     |> @flattened_idl.flatten(ignore)
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (filename, emits) = emitter.emit("MyUnion")
-  let code = mbt_code_gen(emits)
-  inspect(
-    filename,
-    content=(
-      #|Filename("my_union_typedef.mbt")
-    ),
-  )
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: MyUnion
-      #|
-      #|
-      #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
-      #|#external
-      #|pub type MyUnion
-      #|
-      #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
-      #|
-      #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
-      #|
-      #|pub(open) trait TMyUnion {
-      #|  to_js(self : Self) -> JsValue
-      #|}
-      #|
-      #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
-      #|
-      #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
-      #|
-      #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
-      #|
-      #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
-      #|
-      #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
-    ),
-  )
+  let multi = mbt_code_gen_multi(emits)
+  inspect(filename, content=(
+    #|Filename("my_union_typedef.mbt")
+  ))
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: MyUnion
+    #|
+    #|
+    #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
+    #|#external
+    #|pub type MyUnion
+    #|
+    #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
+    #|
+    #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
+    #|
+    #|pub(open) trait TMyUnion {
+    #|  to_js(self : Self) -> JsValue
+    #|}
+    #|
+    #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
+    #|
+    #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
+    #|
+    #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+    #|
+    #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
+    #|
+    #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
+  ))
+  inspect(multi.js_ffi)
+  inspect(multi.wasm_ffi)
 }
 
 ///|
@@ -147,35 +144,35 @@ test "typedef emitter emit interface types as trait references in union typedef"
     |> @flattened_idl.flatten(ignore)
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (_filename, emits) = emitter.emit("MyUnion")
-  let code = mbt_code_gen(emits)
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: MyUnion
-      #|
-      #|
-      #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
-      #|#external
-      #|pub type MyUnion
-      #|
-      #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
-      #|
-      #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
-      #|
-      #|pub(open) trait TMyUnion {
-      #|  to_js(self : Self) -> JsValue
-      #|}
-      #|
-      #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
-      #|
-      #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
-      #|
-      #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
-      #|
-      #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
-    ),
-  )
+  let multi = mbt_code_gen_multi(emits)
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: MyUnion
+    #|
+    #|
+    #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
+    #|#external
+    #|pub type MyUnion
+    #|
+    #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
+    #|
+    #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
+    #|
+    #|pub(open) trait TMyUnion {
+    #|  to_js(self : Self) -> JsValue
+    #|}
+    #|
+    #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
+    #|
+    #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
+    #|
+    #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
+    #|
+    #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+  ))
+  inspect(multi.js_ffi)
+  inspect(multi.wasm_ffi)
 }
 
 ///|
@@ -190,15 +187,15 @@ test "typedef emitter emits alias of nullable interface" {
     |> @flattened_idl.flatten(ignore)
   let emitter = TypedefEmitter::{ idl: flattened, type_registry: registry }
   let (_filename, emits) = emitter.emit("MyNullableInterface")
-  let code = mbt_code_gen(emits)
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: MyNullableInterface
-      #|
-      #|
-      #|pub type MyNullableInterface = MyInterface
-    ),
-  )
+  let multi = mbt_code_gen_multi(emits)
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: MyNullableInterface
+    #|
+    #|
+    #|pub type MyNullableInterface = MyInterface
+  ))
+  inspect(multi.js_ffi)
+  inspect(multi.wasm_ffi)
 }

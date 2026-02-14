@@ -58,27 +58,29 @@ test "emit_callback simple EventListener" {
     type_registry: registry,
   }
   let (_filename, emits) = callback_emitter.emit("EventListener")
-  let code = mbt_code_gen(emits)
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: EventListener
-      #|
-      #|
-      #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
-      #|#external
-      #|pub type EventListener
-      #|
-      #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
-      #|
-      #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
-      #|
-      #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
-      #|
-      #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
-    ),
-  )
+  let multi = mbt_code_gen_multi(emits)
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: EventListener
+    #|
+    #|
+    #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
+    #|#external
+    #|pub type EventListener
+    #|
+    #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
+    #|
+    #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
+    #|
+    #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
+  ))
+  inspect(multi.js_ffi, content=(
+    #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
+  ))
+  inspect(multi.wasm_ffi, content=(
+    #|fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "webapi_EventListener" "new"
+  ))
 }
 
 ///|
@@ -95,27 +97,29 @@ test "emit_callback keeps interface argument as concrete callback type" {
     type_registry: registry,
   }
   let (_filename, emits) = callback_emitter.emit("EventListener")
-  let code = mbt_code_gen(emits)
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: EventListener
-      #|
-      #|
-      #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
-      #|#external
-      #|pub type EventListener
-      #|
-      #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
-      #|
-      #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
-      #|
-      #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
-      #|
-      #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
-    ),
-  )
+  let multi = mbt_code_gen_multi(emits)
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: EventListener
+    #|
+    #|
+    #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
+    #|#external
+    #|pub type EventListener
+    #|
+    #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
+    #|
+    #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
+    #|
+    #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
+  ))
+  inspect(multi.js_ffi, content=(
+    #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
+  ))
+  inspect(multi.wasm_ffi, content=(
+    #|fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "webapi_EventListener" "new"
+  ))
 }
 
 ///|
@@ -131,99 +135,39 @@ test "emit_callback multi-arg MutationCallback" {
     type_registry: registry,
   }
   let (_filename, emits) = callback_emitter.emit("MutationCallback")
-  let code = mbt_code_gen(emits)
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: MutationCallback
-      #|
-      #|
-      #|/// [MutationCallback](https://developer.mozilla.org/en-US/docs/Web/API/MutationCallback)
-      #|#external
-      #|pub type MutationCallback
-      #|
-      #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
-      #|
-      #|pub impl FromJsAny for MutationCallback with from_js_any(value : JsAny) -> MutationCallback = "%identity"
-      #|
-      #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
-      #|
-      #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
-    ),
-  )
-}
-
-///|
-test "js_code_gen Callback generates correct code" {
-  let idl =
-    #|callback EventListener = undefined (Event event);
-  let definitions = @parser.parse(idl)
-  let registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  let callback_emitter = CallbackEmitter::{
-    idl: flattened,
-    type_registry: registry,
-  }
-  let (_filename, emits) = callback_emitter.emit("EventListener")
-  let code = mbt_code_gen(emits)
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: EventListener
-      #|
-      #|
-      #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
-      #|#external
-      #|pub type EventListener
-      #|
-      #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
-      #|
-      #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
-      #|
-      #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
-      #|
-      #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
-    ),
-  )
-}
-
-///|
-test "js_code_gen Callback with multiple args" {
-  let idl =
-    #|callback MutationCallback = undefined (sequence<MutationRecord> mutations, MutationObserver observer);
-  let definitions = @parser.parse(idl)
-  let registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  let callback_emitter = CallbackEmitter::{
-    idl: flattened,
-    type_registry: registry,
-  }
-  let (_filename, emits) = callback_emitter.emit("MutationCallback")
-  let code = mbt_code_gen(emits)
-  inspect(
-    code,
-    content=(
-      #|// Do not edit. This file is generated.
-      #|// MoonBit type: MutationCallback
-      #|
-      #|
-      #|/// [MutationCallback](https://developer.mozilla.org/en-US/docs/Web/API/MutationCallback)
-      #|#external
-      #|pub type MutationCallback
-      #|
-      #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
-      #|
-      #|pub impl FromJsAny for MutationCallback with from_js_any(value : JsAny) -> MutationCallback = "%identity"
-      #|
-      #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
-      #|
-      #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
-    ),
-  )
+  let multi = mbt_code_gen_multi(emits)
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: MutationCallback
+    #|
+    #|
+    #|/// [MutationCallback](https://developer.mozilla.org/en-US/docs/Web/API/MutationCallback)
+    #|#external
+    #|pub type MutationCallback
+    #|
+    #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
+    #|
+    #|pub impl FromJsAny for MutationCallback with from_js_any(value : JsAny) -> MutationCallback = "%identity"
+    #|
+    #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
+  ))
+  inspect(multi.js_ffi, content=(
+    #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
+  ))
+  inspect(multi.wasm_ffi, content=(
+    
+    #|fn mutation_callback_ffi_raw(callback : (JsArray, MutationObserver) -> Unit) -> MutationCallback = "webapi_MutationCallback" "new"
+    #|
+    #|///|
+    #|fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback {
+    #|  mutation_callback_ffi_raw(
+    #|    fn(mutations : JsArray, observer : MutationObserver) -> Unit {
+    #|      callback(mutations.to_array(), observer)
+    #|    },
+    #|  )
+    #|}
+  ))
 }
 
 ///|
@@ -240,24 +184,28 @@ test "CallbackEmitter multi-target separates FFI" {
   }
   let (_filename, emits) = callback_emitter.emit("EventListener")
   let multi = mbt_code_gen_multi(emits)
-  // Shared should have wrapper, no extern "js"
-  inspect(multi.shared.contains("extern \"js\""), content="false")
-  inspect(
-    multi.shared.contains("pub fn EventListener::new("),
-    content=(
-      #|true
-    ),
-  )
-  // JS FFI should have extern "js"
-  inspect(
-    multi.js_ffi.contains("extern \"js\" fn event_listener_ffi"),
-    content="true",
-  )
-  // Wasm FFI should have wasm import
-  inspect(
-    multi.wasm_ffi.contains("\"webapi_EventListener\" \"new\""),
-    content="true",
-  )
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: EventListener
+    #|
+    #|
+    #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
+    #|#external
+    #|pub type EventListener
+    #|
+    #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
+    #|
+    #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
+    #|
+    #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
+  ))
+  inspect(multi.js_ffi, content=(
+    #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
+  ))
+  inspect(multi.wasm_ffi, content=(
+    #|fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "webapi_EventListener" "new"
+  ))
 }
 
 ///|
@@ -277,12 +225,26 @@ test "CallbackEmitter wasm always uses direct import" {
     "NotificationPermissionCallback",
   )
   let multi = mbt_code_gen_multi(emits)
-  // Wasm FFI should be a direct import — closures are externref on wasm-gc
-  inspect(multi.wasm_ffi.contains("_ffi_raw"), content="false")
-  inspect(
-    multi.wasm_ffi,
-    content=(
-      #|fn notification_permission_callback_ffi(callback : (NotificationPermission) -> Unit) -> NotificationPermissionCallback = "webapi_NotificationPermissionCallback" "new"
-    ),
-  )
+  inspect(multi.shared, content=(
+    
+    #|// Do not edit. This file is generated.
+    #|// MoonBit type: NotificationPermissionCallback
+    #|
+    #|
+    #|/// [NotificationPermissionCallback](https://developer.mozilla.org/en-US/docs/Web/API/NotificationPermissionCallback)
+    #|#external
+    #|pub type NotificationPermissionCallback
+    #|
+    #|pub impl TJsValue for NotificationPermissionCallback with to_js(self: NotificationPermissionCallback) -> JsValue = "%identity"
+    #|
+    #|pub impl FromJsAny for NotificationPermissionCallback with from_js_any(value : JsAny) -> NotificationPermissionCallback = "%identity"
+    #|
+    #|pub fn NotificationPermissionCallback::new(callback : (NotificationPermission) -> Unit) -> NotificationPermissionCallback { notification_permission_callback_ffi(callback) }
+  ))
+  inspect(multi.js_ffi, content=(
+    #|extern "js" fn notification_permission_callback_ffi(callback : (NotificationPermission) -> Unit) -> NotificationPermissionCallback = "(callback) => callback"
+  ))
+  inspect(multi.wasm_ffi, content=(
+    #|fn notification_permission_callback_ffi(callback : (NotificationPermission) -> Unit) -> NotificationPermissionCallback = "webapi_NotificationPermissionCallback" "new"
+  ))
 }
