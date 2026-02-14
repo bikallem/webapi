@@ -90,7 +90,12 @@ fn worker_navigator_language_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn worker_navigator_languages_ffi(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_languages"
+fn worker_navigator_languages_ffi_wasm(obj : JsValue) -> JsArray = "webapi_WorkerNavigator" "get_languages"
+
+///|
+fn worker_navigator_languages_ffi(obj : JsValue) -> Array[String] {
+  worker_navigator_languages_ffi_wasm(obj).to_string_array()
+}
 
 ///|
 fn worker_navigator_on_line_ffi(obj : JsValue) -> Bool = "webapi_WorkerNavigator" "get_onLine"

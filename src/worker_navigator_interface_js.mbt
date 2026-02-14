@@ -98,7 +98,7 @@ fn worker_navigator_language_ffi(obj : JsValue) -> String {
 extern "js" fn worker_navigator_languages_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.languages"
 
 ///|
-fn worker_navigator_languages_ffi(obj : JsValue) -> JsValue {
+fn worker_navigator_languages_ffi(obj : JsValue) -> Array[String] {
   worker_navigator_languages_ffi_js(obj).unsafe_cast()
 }
 

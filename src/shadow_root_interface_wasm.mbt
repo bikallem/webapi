@@ -78,7 +78,12 @@ fn shadow_root_active_element_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot
 fn shadow_root_style_sheets_ffi(obj : JsValue) -> StyleSheetList = "webapi_ShadowRoot" "get_styleSheets"
 
 ///|
-fn shadow_root_adopted_style_sheets_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_adoptedStyleSheets"
+fn shadow_root_adopted_style_sheets_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ShadowRoot" "get_adoptedStyleSheets"
+
+///|
+fn shadow_root_adopted_style_sheets_ffi(obj : JsValue) -> Array[CSSStyleSheet] {
+  shadow_root_adopted_style_sheets_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn shadow_root_set_adopted_style_sheets_ffi(

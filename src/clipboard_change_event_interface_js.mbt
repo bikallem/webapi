@@ -8,7 +8,7 @@ extern "js" fn clipboard_change_event_new_ffi(
 extern "js" fn clipboard_change_event_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.types"
 
 ///|
-fn clipboard_change_event_types_ffi(obj : JsValue) -> JsValue {
+fn clipboard_change_event_types_ffi(obj : JsValue) -> Array[String] {
   clipboard_change_event_types_ffi_js(obj).unsafe_cast()
 }
 

@@ -31,7 +31,7 @@ pub fn ClipboardItem::new(
 /// [ClipboardItem](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardItem) interface.
 pub trait TClipboardItem: TJsValue {
   presentation_style(self : Self) -> PresentationStyle = _
-  types(self : Self) -> JsValue = _
+  types(self : Self) -> Array[String] = _
   get_type(self : Self, type_ : String) -> JsPromise[Blob] = _
 }
 
@@ -43,7 +43,7 @@ impl TClipboardItem with presentation_style(self : Self) -> PresentationStyle {
 
 ///|
 /// [ClipboardItem.types](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardItem/types)
-impl TClipboardItem with types(self : Self) -> JsValue {
+impl TClipboardItem with types(self : Self) -> Array[String] {
   clipboard_item_types_ffi(TJsValue::to_js(self))
 }
 

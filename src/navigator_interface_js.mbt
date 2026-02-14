@@ -133,7 +133,7 @@ fn navigator_language_ffi(obj : JsValue) -> String {
 extern "js" fn navigator_languages_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.languages"
 
 ///|
-fn navigator_languages_ffi(obj : JsValue) -> JsValue {
+fn navigator_languages_ffi(obj : JsValue) -> Array[String] {
   navigator_languages_ffi_js(obj).unsafe_cast()
 }
 

@@ -50,13 +50,13 @@ pub trait TNotification: TEventTarget {
   image(self : Self) -> String = _
   icon(self : Self) -> String = _
   badge(self : Self) -> String = _
-  vibrate(self : Self) -> JsValue = _
+  vibrate(self : Self) -> Array[UInt] = _
   timestamp(self : Self) -> EpochTimeStamp = _
   renotify(self : Self) -> Bool = _
   silent(self : Self) -> Bool = _
   require_interaction(self : Self) -> Bool = _
   data(self : Self) -> JsValue = _
-  actions(self : Self) -> JsValue = _
+  actions(self : Self) -> Array[NotificationAction] = _
   close(self : Self) -> Unit = _
 }
 
@@ -184,7 +184,7 @@ impl TNotification with badge(self : Self) -> String {
 
 ///|
 /// [Notification.vibrate](https://developer.mozilla.org/en-US/docs/Web/API/Notification/vibrate)
-impl TNotification with vibrate(self : Self) -> JsValue {
+impl TNotification with vibrate(self : Self) -> Array[UInt] {
   notification_vibrate_ffi(TJsValue::to_js(self))
 }
 
@@ -220,7 +220,7 @@ impl TNotification with data(self : Self) -> JsValue {
 
 ///|
 /// [Notification.actions](https://developer.mozilla.org/en-US/docs/Web/API/Notification/actions)
-impl TNotification with actions(self : Self) -> JsValue {
+impl TNotification with actions(self : Self) -> Array[NotificationAction] {
   notification_actions_ffi(TJsValue::to_js(self))
 }
 

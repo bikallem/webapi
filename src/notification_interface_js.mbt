@@ -168,7 +168,7 @@ fn notification_badge_ffi(obj : JsValue) -> String {
 extern "js" fn notification_vibrate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vibrate"
 
 ///|
-fn notification_vibrate_ffi(obj : JsValue) -> JsValue {
+fn notification_vibrate_ffi(obj : JsValue) -> Array[UInt] {
   notification_vibrate_ffi_js(obj).unsafe_cast()
 }
 
@@ -218,7 +218,7 @@ fn notification_data_ffi(obj : JsValue) -> JsValue {
 extern "js" fn notification_actions_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.actions"
 
 ///|
-fn notification_actions_ffi(obj : JsValue) -> JsValue {
+fn notification_actions_ffi(obj : JsValue) -> Array[NotificationAction] {
   notification_actions_ffi_js(obj).unsafe_cast()
 }
 

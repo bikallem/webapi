@@ -4667,7 +4667,7 @@ pub impl TPerformanceEntry for PerformanceEntry
 pub type PerformanceObserver
 pub fn[T : TPerformanceObserver] PerformanceObserver::into(Self) -> T
 pub fn PerformanceObserver::new(PerformanceObserverCallback) -> Self
-pub fn PerformanceObserver::supported_entry_types() -> JsValue
+pub fn PerformanceObserver::supported_entry_types() -> Array[String]
 pub impl FromJsAny for PerformanceObserver
 pub impl TJsValue for PerformanceObserver
 pub impl TPerformanceObserver for PerformanceObserver
@@ -7766,7 +7766,7 @@ pub trait TClipboard : TEventTarget {
 }
 
 pub trait TClipboardChangeEvent : TEvent {
-  types(Self) -> JsValue
+  types(Self) -> Array[String]
   change_id(Self) -> Int64
 }
 
@@ -7776,7 +7776,7 @@ pub trait TClipboardEvent : TEvent {
 
 pub trait TClipboardItem : TJsValue {
   presentation_style(Self) -> PresentationStyle
-  types(Self) -> JsValue
+  types(Self) -> Array[String]
   get_type(Self, String) -> JsPromise[Blob]
 }
 
@@ -8073,7 +8073,7 @@ pub trait TDataTransfer : TJsValue {
   set_effect_allowed(Self, String) -> Unit
   items(Self) -> DataTransferItemList
   set_drag_image(Self, &TElement, Int, Int) -> Unit
-  types(Self) -> JsValue
+  types(Self) -> Array[String]
   get_data(Self, String) -> String
   set_data(Self, String, String) -> Unit
   clear_data(Self, format? : String) -> Unit
@@ -8217,8 +8217,8 @@ pub trait TDocument : TNode {
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
   style_sheets(Self) -> StyleSheetList
-  adopted_style_sheets(Self) -> JsValue
-  set_adopted_style_sheets(Self, JsValue) -> Unit
+  adopted_style_sheets(Self) -> Array[CSSStyleSheet]
+  set_adopted_style_sheets(Self, Array[CSSStyleSheet]) -> Unit
   fullscreen_element(Self) -> Element
   get_animations(Self) -> Array[Animation]
   children(Self) -> HTMLCollection
@@ -10746,7 +10746,7 @@ pub trait TIntersectionObserver : TJsValue {
   root(Self) -> IntersectionObserverRoot
   root_margin(Self) -> String
   scroll_margin(Self) -> String
-  thresholds(Self) -> JsValue
+  thresholds(Self) -> Array[Double]
   delay(Self) -> Int
   track_visibility(Self) -> Bool
   observe(Self, &TElement) -> Unit
@@ -10928,7 +10928,7 @@ pub trait TMessageEvent : TEvent {
   origin(Self) -> String
   last_event_id(Self) -> String
   source(Self) -> MessageEventSource
-  ports(Self) -> JsValue
+  ports(Self) -> Array[MessagePort]
   init_message_event(Self, String, bubbles? : Bool, cancelable? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : &TMessageEventSource, ports? : Array[MessagePort]) -> Unit
 }
 
@@ -11115,7 +11115,7 @@ pub trait TNavigator : TJsValue {
   taint_enabled(Self) -> Bool
   oscpu(Self) -> String
   language(Self) -> String
-  languages(Self) -> JsValue
+  languages(Self) -> Array[String]
   on_line(Self) -> Bool
   register_protocol_handler(Self, String, String) -> Unit
   unregister_protocol_handler(Self, String, String) -> Unit
@@ -11188,8 +11188,8 @@ pub trait TNotRestoredReasons : TJsValue {
   id(Self) -> String
   name(Self) -> String
   url(Self) -> String
-  reasons(Self) -> JsValue
-  children(Self) -> JsValue
+  reasons(Self) -> Array[NotRestoredReasonDetails]
+  children(Self) -> Array[NotRestoredReasons]
   to_json(Self) -> JsValue
 }
 
@@ -11211,13 +11211,13 @@ pub trait TNotification : TEventTarget {
   image(Self) -> String
   icon(Self) -> String
   badge(Self) -> String
-  vibrate(Self) -> JsValue
+  vibrate(Self) -> Array[UInt]
   timestamp(Self) -> UInt64
   renotify(Self) -> Bool
   silent(Self) -> Bool
   require_interaction(Self) -> Bool
   data(Self) -> JsValue
-  actions(Self) -> JsValue
+  actions(Self) -> Array[NotificationAction]
   close(Self) -> Unit
 }
 
@@ -11659,9 +11659,9 @@ pub trait TResizeObserver : TJsValue {
 pub trait TResizeObserverEntry : TJsValue {
   target(Self) -> Element
   content_rect(Self) -> DOMRectReadOnly
-  border_box_size(Self) -> JsValue
-  content_box_size(Self) -> JsValue
-  device_pixel_content_box_size(Self) -> JsValue
+  border_box_size(Self) -> Array[ResizeObserverSize]
+  content_box_size(Self) -> Array[ResizeObserverSize]
+  device_pixel_content_box_size(Self) -> Array[ResizeObserverSize]
 }
 
 pub trait TResizeObserverSize : TJsValue {
@@ -12471,8 +12471,8 @@ pub trait TShadowRoot : TDocumentFragment {
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
   style_sheets(Self) -> StyleSheetList
-  adopted_style_sheets(Self) -> JsValue
-  set_adopted_style_sheets(Self, JsValue) -> Unit
+  adopted_style_sheets(Self) -> Array[CSSStyleSheet]
+  set_adopted_style_sheets(Self, Array[CSSStyleSheet]) -> Unit
   fullscreen_element(Self) -> Element
   get_animations(Self) -> Array[Animation]
 }
@@ -13365,7 +13365,7 @@ pub trait TWorkerNavigator : TJsValue {
   taint_enabled(Self) -> Bool
   oscpu(Self) -> String
   language(Self) -> String
-  languages(Self) -> JsValue
+  languages(Self) -> Array[String]
   on_line(Self) -> Bool
   hardware_concurrency(Self) -> UInt64
   storage(Self) -> StorageManager

@@ -28,8 +28,8 @@ pub trait TNotRestoredReasons: TJsValue {
   id(self : Self) -> String = _
   name(self : Self) -> String = _
   url(self : Self) -> String = _
-  reasons(self : Self) -> JsValue = _
-  children(self : Self) -> JsValue = _
+  reasons(self : Self) -> Array[NotRestoredReasonDetails] = _
+  children(self : Self) -> Array[NotRestoredReasons] = _
   to_json(self : Self) -> JsValue = _
 }
 
@@ -59,13 +59,15 @@ impl TNotRestoredReasons with url(self : Self) -> String {
 
 ///|
 /// [NotRestoredReasons.reasons](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/reasons)
-impl TNotRestoredReasons with reasons(self : Self) -> JsValue {
+impl TNotRestoredReasons with reasons(self : Self) -> Array[
+  NotRestoredReasonDetails,
+] {
   not_restored_reasons_reasons_ffi(TJsValue::to_js(self))
 }
 
 ///|
 /// [NotRestoredReasons.children](https://developer.mozilla.org/en-US/docs/Web/API/NotRestoredReasons/children)
-impl TNotRestoredReasons with children(self : Self) -> JsValue {
+impl TNotRestoredReasons with children(self : Self) -> Array[NotRestoredReasons] {
   not_restored_reasons_children_ffi(TJsValue::to_js(self))
 }
 

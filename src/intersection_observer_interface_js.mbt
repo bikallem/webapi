@@ -38,7 +38,7 @@ extern "js" fn intersection_observer_thresholds_ffi_js(
 ) -> JsValue = "(obj) => obj.thresholds"
 
 ///|
-fn intersection_observer_thresholds_ffi(obj : JsValue) -> JsValue {
+fn intersection_observer_thresholds_ffi(obj : JsValue) -> Array[Double] {
   intersection_observer_thresholds_ffi_js(obj).unsafe_cast()
 }
 

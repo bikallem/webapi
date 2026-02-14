@@ -41,7 +41,12 @@ fn data_transfer_set_drag_image_ffi(
 ) -> Unit = "webapi_DataTransfer" "setDragImage"
 
 ///|
-fn data_transfer_types_ffi(obj : JsValue) -> JsValue = "webapi_DataTransfer" "get_types"
+fn data_transfer_types_ffi_wasm(obj : JsValue) -> JsArray = "webapi_DataTransfer" "get_types"
+
+///|
+fn data_transfer_types_ffi(obj : JsValue) -> Array[String] {
+  data_transfer_types_ffi_wasm(obj).to_string_array()
+}
 
 ///|
 fn data_transfer_get_data_ffi_wasm(obj : JsValue, format : JsValue) -> JsValue = "webapi_DataTransfer" "getData"

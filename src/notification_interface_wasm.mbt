@@ -145,7 +145,12 @@ fn notification_badge_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn notification_vibrate_ffi(obj : JsValue) -> JsValue = "webapi_Notification" "get_vibrate"
+fn notification_vibrate_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Notification" "get_vibrate"
+
+///|
+fn notification_vibrate_ffi(obj : JsValue) -> Array[UInt] {
+  notification_vibrate_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn notification_timestamp_ffi(obj : JsValue) -> EpochTimeStamp = "webapi_Notification" "get_timestamp"
@@ -163,7 +168,12 @@ fn notification_require_interaction_ffi(obj : JsValue) -> Bool = "webapi_Notific
 fn notification_data_ffi(obj : JsValue) -> JsValue = "webapi_Notification" "get_data"
 
 ///|
-fn notification_actions_ffi(obj : JsValue) -> JsValue = "webapi_Notification" "get_actions"
+fn notification_actions_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Notification" "get_actions"
+
+///|
+fn notification_actions_ffi(obj : JsValue) -> Array[NotificationAction] {
+  notification_actions_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn notification_close_ffi(obj : JsValue) -> Unit = "webapi_Notification" "close"

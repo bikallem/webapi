@@ -38,7 +38,7 @@ pub trait TNavigator: TJsValue {
   taint_enabled(self : Self) -> Bool = _
   oscpu(self : Self) -> String = _
   language(self : Self) -> String = _
-  languages(self : Self) -> JsValue = _
+  languages(self : Self) -> Array[String] = _
   on_line(self : Self) -> Bool = _
   register_protocol_handler(self : Self, scheme : String, url : String) -> Unit = _
   unregister_protocol_handler(self : Self, scheme : String, url : String) -> Unit = _
@@ -149,7 +149,7 @@ impl TNavigator with language(self : Self) -> String {
 
 ///|
 /// [Navigator.languages](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages)
-impl TNavigator with languages(self : Self) -> JsValue {
+impl TNavigator with languages(self : Self) -> Array[String] {
   navigator_languages_ffi(TJsValue::to_js(self))
 }
 

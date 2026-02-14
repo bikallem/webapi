@@ -127,7 +127,7 @@ extern "js" fn shadow_root_adopted_style_sheets_ffi_js(
 ) -> JsValue = "(obj) => obj.adoptedStyleSheets"
 
 ///|
-fn shadow_root_adopted_style_sheets_ffi(obj : JsValue) -> JsValue {
+fn shadow_root_adopted_style_sheets_ffi(obj : JsValue) -> Array[CSSStyleSheet] {
   shadow_root_adopted_style_sheets_ffi_js(obj).unsafe_cast()
 }
 

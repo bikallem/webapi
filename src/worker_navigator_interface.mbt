@@ -34,7 +34,7 @@ pub trait TWorkerNavigator: TJsValue {
   taint_enabled(self : Self) -> Bool = _
   oscpu(self : Self) -> String = _
   language(self : Self) -> String = _
-  languages(self : Self) -> JsValue = _
+  languages(self : Self) -> Array[String] = _
   on_line(self : Self) -> Bool = _
   hardware_concurrency(self : Self) -> UInt64 = _
   storage(self : Self) -> StorageManager = _
@@ -114,7 +114,7 @@ impl TWorkerNavigator with language(self : Self) -> String {
 
 ///|
 /// [WorkerNavigator.languages](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/languages)
-impl TWorkerNavigator with languages(self : Self) -> JsValue {
+impl TWorkerNavigator with languages(self : Self) -> Array[String] {
   worker_navigator_languages_ffi(TJsValue::to_js(self))
 }
 

@@ -102,7 +102,12 @@ fn navigator_language_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn navigator_languages_ffi(obj : JsValue) -> JsValue = "webapi_Navigator" "get_languages"
+fn navigator_languages_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Navigator" "get_languages"
+
+///|
+fn navigator_languages_ffi(obj : JsValue) -> Array[String] {
+  navigator_languages_ffi_wasm(obj).to_string_array()
+}
 
 ///|
 fn navigator_on_line_ffi(obj : JsValue) -> Bool = "webapi_Navigator" "get_onLine"

@@ -29,7 +29,12 @@ fn intersection_observer_scroll_margin_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn intersection_observer_thresholds_ffi(obj : JsValue) -> JsValue = "webapi_IntersectionObserver" "get_thresholds"
+fn intersection_observer_thresholds_ffi_wasm(obj : JsValue) -> JsArray = "webapi_IntersectionObserver" "get_thresholds"
+
+///|
+fn intersection_observer_thresholds_ffi(obj : JsValue) -> Array[Double] {
+  intersection_observer_thresholds_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn intersection_observer_delay_ffi(obj : JsValue) -> Int = "webapi_IntersectionObserver" "get_delay"

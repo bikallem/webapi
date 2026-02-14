@@ -591,7 +591,12 @@ fn document_active_element_ffi(obj : JsValue) -> Element = "webapi_Document" "ge
 fn document_style_sheets_ffi(obj : JsValue) -> StyleSheetList = "webapi_Document" "get_styleSheets"
 
 ///|
-fn document_adopted_style_sheets_ffi(obj : JsValue) -> JsValue = "webapi_Document" "get_adoptedStyleSheets"
+fn document_adopted_style_sheets_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Document" "get_adoptedStyleSheets"
+
+///|
+fn document_adopted_style_sheets_ffi(obj : JsValue) -> Array[CSSStyleSheet] {
+  document_adopted_style_sheets_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn document_set_adopted_style_sheets_ffi(

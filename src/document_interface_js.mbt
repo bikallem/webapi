@@ -954,7 +954,7 @@ fn document_style_sheets_ffi(obj : JsValue) -> StyleSheetList {
 extern "js" fn document_adopted_style_sheets_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.adoptedStyleSheets"
 
 ///|
-fn document_adopted_style_sheets_ffi(obj : JsValue) -> JsValue {
+fn document_adopted_style_sheets_ffi(obj : JsValue) -> Array[CSSStyleSheet] {
   document_adopted_style_sheets_ffi_js(obj).unsafe_cast()
 }
 

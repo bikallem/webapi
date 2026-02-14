@@ -40,7 +40,7 @@ fn message_event_source_ffi(obj : JsValue) -> MessageEventSource {
 extern "js" fn message_event_ports_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ports"
 
 ///|
-fn message_event_ports_ffi(obj : JsValue) -> JsValue {
+fn message_event_ports_ffi(obj : JsValue) -> Array[MessagePort] {
   message_event_ports_ffi_js(obj).unsafe_cast()
 }
 

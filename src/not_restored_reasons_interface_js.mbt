@@ -34,7 +34,9 @@ fn not_restored_reasons_url_ffi(obj : JsValue) -> String {
 extern "js" fn not_restored_reasons_reasons_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.reasons"
 
 ///|
-fn not_restored_reasons_reasons_ffi(obj : JsValue) -> JsValue {
+fn not_restored_reasons_reasons_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasonDetails] {
   not_restored_reasons_reasons_ffi_js(obj).unsafe_cast()
 }
 
@@ -42,7 +44,9 @@ fn not_restored_reasons_reasons_ffi(obj : JsValue) -> JsValue {
 extern "js" fn not_restored_reasons_children_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.children"
 
 ///|
-fn not_restored_reasons_children_ffi(obj : JsValue) -> JsValue {
+fn not_restored_reasons_children_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasons] {
   not_restored_reasons_children_ffi_js(obj).unsafe_cast()
 }
 

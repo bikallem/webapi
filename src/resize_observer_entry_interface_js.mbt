@@ -22,7 +22,9 @@ extern "js" fn resize_observer_entry_border_box_size_ffi_js(
 ) -> JsValue = "(obj) => obj.borderBoxSize"
 
 ///|
-fn resize_observer_entry_border_box_size_ffi(obj : JsValue) -> JsValue {
+fn resize_observer_entry_border_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_border_box_size_ffi_js(obj).unsafe_cast()
 }
 
@@ -32,7 +34,9 @@ extern "js" fn resize_observer_entry_content_box_size_ffi_js(
 ) -> JsValue = "(obj) => obj.contentBoxSize"
 
 ///|
-fn resize_observer_entry_content_box_size_ffi(obj : JsValue) -> JsValue {
+fn resize_observer_entry_content_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_content_box_size_ffi_js(obj).unsafe_cast()
 }
 
@@ -44,6 +48,6 @@ extern "js" fn resize_observer_entry_device_pixel_content_box_size_ffi_js(
 ///|
 fn resize_observer_entry_device_pixel_content_box_size_ffi(
   obj : JsValue,
-) -> JsValue {
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_device_pixel_content_box_size_ffi_js(obj).unsafe_cast()
 }

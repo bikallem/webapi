@@ -12,7 +12,12 @@ fn clipboard_item_presentation_style_ffi(obj : JsValue) -> PresentationStyle {
 }
 
 ///|
-fn clipboard_item_types_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardItem" "get_types"
+fn clipboard_item_types_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ClipboardItem" "get_types"
+
+///|
+fn clipboard_item_types_ffi(obj : JsValue) -> Array[String] {
+  clipboard_item_types_ffi_wasm(obj).to_string_array()
+}
 
 ///|
 fn clipboard_item_get_type_ffi_wasm(obj : JsValue, type_ : JsValue) -> JsValue = "webapi_ClipboardItem" "getType"

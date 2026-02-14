@@ -32,7 +32,12 @@ fn message_event_source_ffi(obj : JsValue) -> MessageEventSource {
 }
 
 ///|
-fn message_event_ports_ffi(obj : JsValue) -> JsValue = "webapi_MessageEvent" "get_ports"
+fn message_event_ports_ffi_wasm(obj : JsValue) -> JsArray = "webapi_MessageEvent" "get_ports"
+
+///|
+fn message_event_ports_ffi(obj : JsValue) -> Array[MessagePort] {
+  message_event_ports_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn message_event_init_message_event_ffi(

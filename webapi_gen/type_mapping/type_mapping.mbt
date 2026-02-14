@@ -339,10 +339,27 @@ pub fn arg_mbt_type(
         ArgMbtType::Union(union_type)
       }
 
-      // TODO: rethink these mappings (Parameterized types)
-      Record(_, _) => ArgMbtType::Other("JsValue") // Fallback to JsValue for unsupported types
-      ObservableArray(_) => ArgMbtType::Other("JsValue")
-      FrozenArray(_) => ArgMbtType::Other("JsValue")
+      // Immutable/observable arrays → Array[T] (same as Sequence)
+      FrozenArray(t) | ObservableArray(t) => {
+        let (type_, emits_) = go(
+          t.type_,
+          type_name,
+          method_name,
+          arg_name,
+          type_registry,
+          call_depth,
+        )
+        emits.push_iter(emits_.iter())
+        let type_name = if type_ is ArgMbtType::Union(_) {
+          "&T\{type_.name()}"
+        } else {
+          type_.name()
+        }
+        ArgMbtType::Other("Array[\{type_name}]")
+      }
+
+      // No MoonBit equivalent for these parameterized types
+      Record(_, _) => ArgMbtType::Other("JsValue")
       AsyncSequence(_) => ArgMbtType::Other("JsValue")
       Symbol => ArgMbtType::Other("JsValue") // WebIDL Symbol is not used in practice as yet c2025
     }

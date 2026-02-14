@@ -33,7 +33,7 @@ pub trait TDataTransfer: TJsValue {
   set_effect_allowed(self : Self, effect_allowed : String) -> Unit = _
   items(self : Self) -> DataTransferItemList = _
   set_drag_image(self : Self, image : &TElement, x : Int, y : Int) -> Unit = _
-  types(self : Self) -> JsValue = _
+  types(self : Self) -> Array[String] = _
   get_data(self : Self, format : String) -> String = _
   set_data(self : Self, format : String, data : String) -> Unit = _
   clear_data(self : Self, format? : String) -> Unit = _
@@ -94,7 +94,7 @@ impl TDataTransfer with set_drag_image(
 
 ///|
 /// [DataTransfer.types](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/types)
-impl TDataTransfer with types(self : Self) -> JsValue {
+impl TDataTransfer with types(self : Self) -> Array[String] {
   data_transfer_types_ffi(TJsValue::to_js(self))
 }
 

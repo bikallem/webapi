@@ -62,6 +62,6 @@ impl TPerformanceObserver with take_records(self : Self) -> PerformanceEntryList
 
 ///|
 /// [PerformanceObserver.supportedEntryTypes](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/supportedEntryTypes)
-pub fn PerformanceObserver::supported_entry_types() -> JsValue {
+pub fn PerformanceObserver::supported_entry_types() -> Array[String] {
   performance_observer_supported_entry_types_ffi()
 }

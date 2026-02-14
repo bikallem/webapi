@@ -40,7 +40,7 @@ pub trait TMessageEvent: TEvent {
   origin(self : Self) -> String = _
   last_event_id(self : Self) -> String = _
   source(self : Self) -> MessageEventSource = _
-  ports(self : Self) -> JsValue = _
+  ports(self : Self) -> Array[MessagePort] = _
   init_message_event(
     self : Self,
     type_ : String,
@@ -80,7 +80,7 @@ impl TMessageEvent with source(self : Self) -> MessageEventSource {
 
 ///|
 /// [MessageEvent.ports](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/ports)
-impl TMessageEvent with ports(self : Self) -> JsValue {
+impl TMessageEvent with ports(self : Self) -> Array[MessagePort] {
   message_event_ports_ffi(TJsValue::to_js(self))
 }
 

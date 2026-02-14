@@ -20,7 +20,7 @@ fn clipboard_item_presentation_style_ffi(obj : JsValue) -> PresentationStyle {
 extern "js" fn clipboard_item_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.types"
 
 ///|
-fn clipboard_item_types_ffi(obj : JsValue) -> JsValue {
+fn clipboard_item_types_ffi(obj : JsValue) -> Array[String] {
   clipboard_item_types_ffi_js(obj).unsafe_cast()
 }
 

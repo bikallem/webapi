@@ -26,6 +26,6 @@ fn performance_observer_take_records_ffi(obj : JsValue) -> PerformanceEntryList 
 extern "js" fn performance_observer_supported_entry_types_ffi_js() -> JsValue = "() => PerformanceObserver.supportedEntryTypes"
 
 ///|
-fn performance_observer_supported_entry_types_ffi() -> JsValue {
+fn performance_observer_supported_entry_types_ffi() -> Array[String] {
   performance_observer_supported_entry_types_ffi_js().unsafe_cast()
 }

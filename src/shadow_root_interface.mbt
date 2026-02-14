@@ -85,8 +85,11 @@ pub trait TShadowRoot: TDocumentFragment {
   custom_element_registry(self : Self) -> CustomElementRegistry = _
   active_element(self : Self) -> Element = _
   style_sheets(self : Self) -> StyleSheetList = _
-  adopted_style_sheets(self : Self) -> JsValue = _
-  set_adopted_style_sheets(self : Self, adopted_style_sheets : JsValue) -> Unit = _
+  adopted_style_sheets(self : Self) -> Array[CSSStyleSheet] = _
+  set_adopted_style_sheets(
+    self : Self,
+    adopted_style_sheets : Array[CSSStyleSheet],
+  ) -> Unit = _
   fullscreen_element(self : Self) -> Element = _
   get_animations(self : Self) -> Array[Animation] = _
 }
@@ -195,7 +198,7 @@ impl TShadowRoot with style_sheets(self : Self) -> StyleSheetList {
 
 ///|
 /// [ShadowRoot.adoptedStyleSheets](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/adoptedStyleSheets)
-impl TShadowRoot with adopted_style_sheets(self : Self) -> JsValue {
+impl TShadowRoot with adopted_style_sheets(self : Self) -> Array[CSSStyleSheet] {
   shadow_root_adopted_style_sheets_ffi(TJsValue::to_js(self))
 }
 
@@ -203,7 +206,7 @@ impl TShadowRoot with adopted_style_sheets(self : Self) -> JsValue {
 /// [ShadowRoot.adoptedStyleSheets](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/adoptedStyleSheets)
 impl TShadowRoot with set_adopted_style_sheets(
   self : Self,
-  adopted_style_sheets : JsValue,
+  adopted_style_sheets : Array[CSSStyleSheet],
 ) -> Unit {
   shadow_root_set_adopted_style_sheets_ffi(
     TJsValue::to_js(self),

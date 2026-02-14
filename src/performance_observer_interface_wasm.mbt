@@ -16,4 +16,9 @@ fn performance_observer_take_records_ffi(obj : JsValue) -> PerformanceEntryList 
 }
 
 ///|
-fn performance_observer_supported_entry_types_ffi() -> JsValue = "webapi_PerformanceObserver" "get_supportedEntryTypes"
+fn performance_observer_supported_entry_types_ffi_wasm() -> JsArray = "webapi_PerformanceObserver" "get_supportedEntryTypes"
+
+///|
+fn performance_observer_supported_entry_types_ffi() -> Array[String] {
+  performance_observer_supported_entry_types_ffi_wasm().to_string_array()
+}

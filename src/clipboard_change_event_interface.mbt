@@ -40,13 +40,13 @@ pub fn ClipboardChangeEvent::new(
 ///|
 /// [ClipboardChangeEvent](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardChangeEvent) interface.
 pub trait TClipboardChangeEvent: TEvent {
-  types(self : Self) -> JsValue = _
+  types(self : Self) -> Array[String] = _
   change_id(self : Self) -> Int64 = _
 }
 
 ///|
 /// [ClipboardChangeEvent.types](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardChangeEvent/types)
-impl TClipboardChangeEvent with types(self : Self) -> JsValue {
+impl TClipboardChangeEvent with types(self : Self) -> Array[String] {
   clipboard_change_event_types_ffi(TJsValue::to_js(self))
 }
 

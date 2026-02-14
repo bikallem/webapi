@@ -66,7 +66,7 @@ pub trait TIntersectionObserver: TJsValue {
   root(self : Self) -> IntersectionObserverRoot = _
   root_margin(self : Self) -> String = _
   scroll_margin(self : Self) -> String = _
-  thresholds(self : Self) -> JsValue = _
+  thresholds(self : Self) -> Array[Double] = _
   delay(self : Self) -> Int = _
   track_visibility(self : Self) -> Bool = _
   observe(self : Self, target : &TElement) -> Unit = _
@@ -95,7 +95,7 @@ impl TIntersectionObserver with scroll_margin(self : Self) -> String {
 
 ///|
 /// [IntersectionObserver.thresholds](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/thresholds)
-impl TIntersectionObserver with thresholds(self : Self) -> JsValue {
+impl TIntersectionObserver with thresholds(self : Self) -> Array[Double] {
   intersection_observer_thresholds_ffi(TJsValue::to_js(self))
 }
 

@@ -49,7 +49,7 @@ extern "js" fn data_transfer_set_drag_image_ffi(
 extern "js" fn data_transfer_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.types"
 
 ///|
-fn data_transfer_types_ffi(obj : JsValue) -> JsValue {
+fn data_transfer_types_ffi(obj : JsValue) -> Array[String] {
   data_transfer_types_ffi_js(obj).unsafe_cast()
 }
 

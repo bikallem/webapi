@@ -31,10 +31,24 @@ fn not_restored_reasons_url_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn not_restored_reasons_reasons_ffi(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "get_reasons"
+fn not_restored_reasons_reasons_ffi_wasm(obj : JsValue) -> JsArray = "webapi_NotRestoredReasons" "get_reasons"
 
 ///|
-fn not_restored_reasons_children_ffi(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "get_children"
+fn not_restored_reasons_reasons_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasonDetails] {
+  not_restored_reasons_reasons_ffi_wasm(obj).to_array()
+}
+
+///|
+fn not_restored_reasons_children_ffi_wasm(obj : JsValue) -> JsArray = "webapi_NotRestoredReasons" "get_children"
+
+///|
+fn not_restored_reasons_children_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasons] {
+  not_restored_reasons_children_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn not_restored_reasons_to_json_ffi(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "toJSON"
