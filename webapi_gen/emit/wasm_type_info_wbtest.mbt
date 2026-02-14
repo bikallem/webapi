@@ -77,16 +77,14 @@ test "is_wasm_valid_stub_type rejects Enum and Union" {
   )
   inspect(
     is_wasm_valid_stub_type(
-      @type_mapping.ArgMbtType::Union(
-        @type_mapping.UnionType::{
-          name: "StringOrInt",
-          has_undefined: false,
-          options: [
-            @type_mapping.ArgMbtType::Primitive("String"),
-            @type_mapping.ArgMbtType::Primitive("Int"),
-          ],
-        },
-      ),
+      @type_mapping.ArgMbtType::Union(@type_mapping.UnionType::{
+        name: "StringOrInt",
+        has_undefined: false,
+        options: [
+          @type_mapping.ArgMbtType::Primitive("String"),
+          @type_mapping.ArgMbtType::Primitive("Int"),
+        ],
+      }),
     ),
     content="false",
   )

@@ -34,9 +34,12 @@ test "make_ffi_argnames replaces Self with obj" {
       default_value: None,
     },
   ]
-  inspect(make_ffi_argnames(args), content=(
-    #|["obj", "name"]
-  ))
+  inspect(
+    make_ffi_argnames(args),
+    content=(
+      #|["obj", "name"]
+    ),
+  )
 }
 
 ///|
@@ -51,9 +54,12 @@ test "make_ffi_argnames with no Self args" {
       default_value: None,
     },
   ]
-  inspect(make_ffi_argnames(args), content=(
-    #|["url"]
-  ))
+  inspect(
+    make_ffi_argnames(args),
+    content=(
+      #|["url"]
+    ),
+  )
 }
 
 ///|
@@ -180,16 +186,19 @@ test "emit_method_body optional return" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> Element? {\n")
   emit_method_body(code, "test_ffi", "obj", true)
-  inspect(code.to_string(), content=(
-    #|pub fn test() -> Element? {
-    #|  let result = test_ffi(obj)
-    #|  if JsValue::is_null(result) {
-    #|    None
-    #|  } else {
-    #|    Some(result.unsafe_cast())
-    #|  }
-    #|}
-  ))
+  inspect(
+    code.to_string(),
+    content=(
+      #|pub fn test() -> Element? {
+      #|  let result = test_ffi(obj)
+      #|  if JsValue::is_null(result) {
+      #|    None
+      #|  } else {
+      #|    Some(result.unsafe_cast())
+      #|  }
+      #|}
+    ),
+  )
 }
 
 ///|
@@ -197,11 +206,14 @@ test "emit_method_body void return" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> Unit {\n")
   emit_method_body(code, "test_ffi", "obj", false, void_return=true)
-  inspect(code.to_string(), content=(
-    #|pub fn test() -> Unit {
-    #|  test_ffi(obj)
-    #|}
-  ))
+  inspect(
+    code.to_string(),
+    content=(
+      #|pub fn test() -> Unit {
+      #|  test_ffi(obj)
+      #|}
+    ),
+  )
 }
 
 ///|
@@ -209,9 +221,12 @@ test "emit_method_body direct return" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> Element {\n")
   emit_method_body(code, "test_ffi", "obj", false)
-  inspect(code.to_string(), content=(
-    #|pub fn test() -> Element {
-    #|  test_ffi(obj)
-    #|}
-  ))
+  inspect(
+    code.to_string(),
+    content=(
+      #|pub fn test() -> Element {
+      #|  test_ffi(obj)
+      #|}
+    ),
+  )
 }

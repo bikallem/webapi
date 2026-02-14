@@ -383,7 +383,9 @@ fn render_callback_wasm_ffi(
 }
 
 ///|
-fn render_namespace_definition(ns_def : NamespaceDef) -> (String, String, String) {
+fn render_namespace_definition(
+  ns_def : NamespaceDef,
+) -> (String, String, String) {
   let shared = ns_def.methods.map(meth => meth.impl_emit().0).join("\n\n")
   let js = ns_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n")
   let module_name = "webapi_\{ns_def.name}"
@@ -420,9 +422,7 @@ fn render_interface_definition(
   buf.write_string(default_trait_impls)
   let shared = buf.to_string()
   // JS FFI
-  let js = interface_def.methods
-    .map(meth => meth.ffi_emit_js().0)
-    .join("\n\n")
+  let js = interface_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n")
   // Wasm FFI
   let module_name = "webapi_\{interface_def.trait_name}"
   let wasm = interface_def.methods
@@ -478,29 +478,45 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
   enum_match_self(buf, name, variants, fn(n, v) {
     "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")"
   })
-  buf.write_string("}\n\npub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n")
+  buf.write_string(
+    "}\n\npub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
+  )
   enum_match_self(buf, name, variants, fn(n, v) {
     "\{n}::\{v.variant_name} => TJsValue::to_js(\"\{v.original_value}\")"
   })
   buf.write_string("}\n\npub fn \{name}::from(value: String) -> \{name}? {\n")
-  enum_match_value(buf, name, variants, fn(n, v) {
-    "\"\{v.original_value}\" => Some(\{n}::\{v.variant_name})"
-  }, "_ => None")
+  enum_match_value(
+    buf,
+    name,
+    variants,
+    fn(n, v) { "\"\{v.original_value}\" => Some(\{n}::\{v.variant_name})" },
+    "_ => None",
+  )
   // from_unchecked() converts a string to the enum, aborting on unknown values.
   // Used by wasm-gc FFI to avoid Option[Enum] which triggers a compiler bug
   // (None uses externref null but Option[Enum] expects i32 representation).
-  buf.write_string("}\n\nfn \{name}::from_unchecked(value: String) -> \{name} {\n")
-  enum_match_value(buf, name, variants, fn(n, v) {
-    "\"\{v.original_value}\" => \{n}::\{v.variant_name}"
-  }, "_ => abort(\"unknown enum value\")")
+  buf.write_string(
+    "}\n\nfn \{name}::from_unchecked(value: String) -> \{name} {\n",
+  )
+  enum_match_value(
+    buf,
+    name,
+    variants,
+    fn(n, v) { "\"\{v.original_value}\" => \{n}::\{v.variant_name}" },
+    "_ => abort(\"unknown enum value\")",
+  )
   // value() returns the IDL string value for each variant.
   // Uses StringBuilder to avoid wasm-gc compiler bug with match returning String.
-  buf.write_string("}\n\npub fn \{name}::value(self: \{name}) -> String {\n  let buf = StringBuilder::new()\n")
+  buf.write_string(
+    "}\n\npub fn \{name}::value(self: \{name}) -> String {\n  let buf = StringBuilder::new()\n",
+  )
   enum_match_self(buf, name, variants, fn(n, v) {
     "\{n}::\{v.variant_name} => buf.write_string(\"\{v.original_value}\")"
   })
   buf.write_string("  buf.to_string()\n}")
-  buf.write_string("\n\npub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n  \{name}::from_unchecked(value)\n}")
+  buf.write_string(
+    "\n\npub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n  \{name}::from_unchecked(value)\n}",
+  )
   buf.to_string()
 }
 

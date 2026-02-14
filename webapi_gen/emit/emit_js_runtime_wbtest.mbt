@@ -2,8 +2,8 @@
 fn make_arg(
   name : String,
   type_ : @parser.Type,
-  optional~ : Bool = false,
-  variadic~ : Bool = false,
+  optional? : Bool = false,
+  variadic? : Bool = false,
 ) -> @parser.Argument {
   {
     extended_attributes: [],

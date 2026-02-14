@@ -269,7 +269,10 @@ fn collect_js_constructors(
     match m.interface_member {
       Constructor(ctor) => {
         let import_name = next_overload_name(
-          "new", ctor.arguments, counter, used_names,
+          "new",
+          ctor.arguments,
+          counter,
+          used_names,
         )
         entries.push(
           emit_js_constructor(import_name, iface.name, ctor.arguments),
@@ -326,7 +329,10 @@ fn collect_js_operations(
     match m.interface_member {
       RegularOperation(op) => {
         let import_name = next_overload_name(
-          op.name, op.arguments, counter, used_names,
+          op.name,
+          op.arguments,
+          counter,
+          used_names,
         )
         entries.push(
           emit_js_method(
@@ -342,11 +348,17 @@ fn collect_js_operations(
       SpecialOperation(op) if op.name is Some(_) => {
         let name = op.name.unwrap()
         let import_name = next_overload_name(
-          name, op.arguments, counter, used_names,
+          name,
+          op.arguments,
+          counter,
+          used_names,
         )
         entries.push(
           emit_js_method(
-            import_name, name, op.arguments, false,
+            import_name,
+            name,
+            op.arguments,
+            false,
             is_bigint=is_bigint_type(op.return_type),
           ),
         )
@@ -358,7 +370,10 @@ fn collect_js_operations(
           Deleter => "delete_"
         }
         let import_name = next_overload_name(
-          base_name, op.arguments, counter, used_names,
+          base_name,
+          op.arguments,
+          counter,
+          used_names,
         )
         entries.push(emit_js_special_operation(import_name, op))
       }
