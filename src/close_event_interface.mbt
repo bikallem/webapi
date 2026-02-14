@@ -25,9 +25,9 @@ pub impl TEvent for CloseEvent
 ///|
 pub fn CloseEvent::new(
   type_ : String,
-  event_init_dict? : CloseEventInit = CloseEventInit::empty(),
+  event_init_dict? : CloseEventInit,
 ) -> CloseEvent {
-  close_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  close_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

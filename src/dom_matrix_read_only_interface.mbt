@@ -115,9 +115,9 @@ pub trait TDOMMatrixReadOnly: TJsValue {
 ///|
 /// [DOMMatrixReadOnly.fromMatrix](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/fromMatrix)
 pub fn DOMMatrixReadOnly::from_matrix(
-  other? : DOMMatrixInit = DOMMatrixInit::empty(),
+  other? : DOMMatrixInit,
 ) -> DOMMatrixReadOnly {
-  dom_matrix_read_only_from_matrix_ffi(TJsValue::to_js(other))
+  dom_matrix_read_only_from_matrix_ffi(opt_to_js(other))
 }
 
 ///|
@@ -284,15 +284,15 @@ impl TDOMMatrixReadOnly with is_identity(self : Self) -> Bool {
 /// [DOMMatrixReadOnly.translate](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/translate)
 impl TDOMMatrixReadOnly with translate(
   self : Self,
-  tx? : Double = (0 : Double),
-  ty? : Double = (0 : Double),
-  tz? : Double = (0 : Double),
+  tx? : Double,
+  ty? : Double,
+  tz? : Double,
 ) -> DOMMatrix {
   dom_matrix_read_only_translate_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(tx),
-    TJsValue::to_js(ty),
-    TJsValue::to_js(tz),
+    opt_to_js(tx),
+    opt_to_js(ty),
+    opt_to_js(tz),
   )
 }
 
@@ -300,21 +300,21 @@ impl TDOMMatrixReadOnly with translate(
 /// [DOMMatrixReadOnly.scale](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/scale)
 impl TDOMMatrixReadOnly with scale(
   self : Self,
-  scale_x? : Double = (1 : Double),
+  scale_x? : Double,
   scale_y? : Double,
-  scale_z? : Double = (1 : Double),
-  origin_x? : Double = (0 : Double),
-  origin_y? : Double = (0 : Double),
-  origin_z? : Double = (0 : Double),
+  scale_z? : Double,
+  origin_x? : Double,
+  origin_y? : Double,
+  origin_z? : Double,
 ) -> DOMMatrix {
   dom_matrix_read_only_scale_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(scale_x),
+    opt_to_js(scale_x),
     opt_to_js(scale_y),
-    TJsValue::to_js(scale_z),
-    TJsValue::to_js(origin_x),
-    TJsValue::to_js(origin_y),
-    TJsValue::to_js(origin_z),
+    opt_to_js(scale_z),
+    opt_to_js(origin_x),
+    opt_to_js(origin_y),
+    opt_to_js(origin_z),
   )
 }
 
@@ -322,13 +322,13 @@ impl TDOMMatrixReadOnly with scale(
 /// [DOMMatrixReadOnly.scaleNonUniform](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/scaleNonUniform)
 impl TDOMMatrixReadOnly with scale_non_uniform(
   self : Self,
-  scale_x? : Double = (1 : Double),
-  scale_y? : Double = (1 : Double),
+  scale_x? : Double,
+  scale_y? : Double,
 ) -> DOMMatrix {
   dom_matrix_read_only_scale_non_uniform_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(scale_x),
-    TJsValue::to_js(scale_y),
+    opt_to_js(scale_x),
+    opt_to_js(scale_y),
   )
 }
 
@@ -336,17 +336,17 @@ impl TDOMMatrixReadOnly with scale_non_uniform(
 /// [DOMMatrixReadOnly.scale3d](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/scale3d)
 impl TDOMMatrixReadOnly with scale3d(
   self : Self,
-  scale? : Double = (1 : Double),
-  origin_x? : Double = (0 : Double),
-  origin_y? : Double = (0 : Double),
-  origin_z? : Double = (0 : Double),
+  scale? : Double,
+  origin_x? : Double,
+  origin_y? : Double,
+  origin_z? : Double,
 ) -> DOMMatrix {
   dom_matrix_read_only_scale3d_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(scale),
-    TJsValue::to_js(origin_x),
-    TJsValue::to_js(origin_y),
-    TJsValue::to_js(origin_z),
+    opt_to_js(scale),
+    opt_to_js(origin_x),
+    opt_to_js(origin_y),
+    opt_to_js(origin_z),
   )
 }
 
@@ -354,13 +354,13 @@ impl TDOMMatrixReadOnly with scale3d(
 /// [DOMMatrixReadOnly.rotate](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/rotate)
 impl TDOMMatrixReadOnly with rotate(
   self : Self,
-  rot_x? : Double = (0 : Double),
+  rot_x? : Double,
   rot_y? : Double,
   rot_z? : Double,
 ) -> DOMMatrix {
   dom_matrix_read_only_rotate_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(rot_x),
+    opt_to_js(rot_x),
     opt_to_js(rot_y),
     opt_to_js(rot_z),
   )
@@ -370,13 +370,13 @@ impl TDOMMatrixReadOnly with rotate(
 /// [DOMMatrixReadOnly.rotateFromVector](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/rotateFromVector)
 impl TDOMMatrixReadOnly with rotate_from_vector(
   self : Self,
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
+  x? : Double,
+  y? : Double,
 ) -> DOMMatrix {
   dom_matrix_read_only_rotate_from_vector_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
+    opt_to_js(x),
+    opt_to_js(y),
   )
 }
 
@@ -384,42 +384,36 @@ impl TDOMMatrixReadOnly with rotate_from_vector(
 /// [DOMMatrixReadOnly.rotateAxisAngle](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/rotateAxisAngle)
 impl TDOMMatrixReadOnly with rotate_axis_angle(
   self : Self,
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  z? : Double = (0 : Double),
-  angle? : Double = (0 : Double),
+  x? : Double,
+  y? : Double,
+  z? : Double,
+  angle? : Double,
 ) -> DOMMatrix {
   dom_matrix_read_only_rotate_axis_angle_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(z),
-    TJsValue::to_js(angle),
+    opt_to_js(x),
+    opt_to_js(y),
+    opt_to_js(z),
+    opt_to_js(angle),
   )
 }
 
 ///|
 /// [DOMMatrixReadOnly.skewX](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/skewX)
-impl TDOMMatrixReadOnly with skew_x(self : Self, sx? : Double = (0 : Double)) -> DOMMatrix {
-  dom_matrix_read_only_skew_x_ffi(TJsValue::to_js(self), TJsValue::to_js(sx))
+impl TDOMMatrixReadOnly with skew_x(self : Self, sx? : Double) -> DOMMatrix {
+  dom_matrix_read_only_skew_x_ffi(TJsValue::to_js(self), opt_to_js(sx))
 }
 
 ///|
 /// [DOMMatrixReadOnly.skewY](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/skewY)
-impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double = (0 : Double)) -> DOMMatrix {
-  dom_matrix_read_only_skew_y_ffi(TJsValue::to_js(self), TJsValue::to_js(sy))
+impl TDOMMatrixReadOnly with skew_y(self : Self, sy? : Double) -> DOMMatrix {
+  dom_matrix_read_only_skew_y_ffi(TJsValue::to_js(self), opt_to_js(sy))
 }
 
 ///|
 /// [DOMMatrixReadOnly.multiply](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/multiply)
-impl TDOMMatrixReadOnly with multiply(
-  self : Self,
-  other? : DOMMatrixInit = DOMMatrixInit::empty(),
-) -> DOMMatrix {
-  dom_matrix_read_only_multiply_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(other),
-  )
+impl TDOMMatrixReadOnly with multiply(self : Self, other? : DOMMatrixInit) -> DOMMatrix {
+  dom_matrix_read_only_multiply_ffi(TJsValue::to_js(self), opt_to_js(other))
 }
 
 ///|
@@ -442,13 +436,10 @@ impl TDOMMatrixReadOnly with inverse(self : Self) -> DOMMatrix {
 
 ///|
 /// [DOMMatrixReadOnly.transformPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly/transformPoint)
-impl TDOMMatrixReadOnly with transform_point(
-  self : Self,
-  point? : DOMPointInit = DOMPointInit::empty(),
-) -> DOMPoint {
+impl TDOMMatrixReadOnly with transform_point(self : Self, point? : DOMPointInit) -> DOMPoint {
   dom_matrix_read_only_transform_point_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(point),
+    opt_to_js(point),
   )
 }
 

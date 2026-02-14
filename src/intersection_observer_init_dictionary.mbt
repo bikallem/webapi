@@ -48,25 +48,25 @@ pub impl TIntersectionObserverInitNewThreshold for Array[Double] with to_js(
 ///|
 pub fn IntersectionObserverInit::new(
   root? : &TIntersectionObserverInitNewRoot,
-  root_margin? : String = "0px",
-  scroll_margin? : String = "0px",
+  root_margin? : String,
+  scroll_margin? : String,
   threshold? : &TIntersectionObserverInitNewThreshold,
-  delay? : Int = (0 : Int),
-  track_visibility? : Bool = false,
+  delay? : Int,
+  track_visibility? : Bool,
 ) -> IntersectionObserverInit {
   intersection_observer_init_ffi(
     match root {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(root_margin),
-    TJsValue::to_js(scroll_margin),
+    opt_to_js(root_margin),
+    opt_to_js(scroll_margin),
     match threshold {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(delay),
-    TJsValue::to_js(track_visibility),
+    opt_to_js(delay),
+    opt_to_js(track_visibility),
   )
 }
 

@@ -28,12 +28,9 @@ pub impl TEvent for KeyboardEvent
 ///|
 pub fn KeyboardEvent::new(
   type_ : String,
-  event_init_dict? : KeyboardEventInit = KeyboardEventInit::empty(),
+  event_init_dict? : KeyboardEventInit,
 ) -> KeyboardEvent {
-  keyboard_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  keyboard_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -146,28 +143,28 @@ impl TKeyboardEvent with get_modifier_state(self : Self, key_arg : String) -> Bo
 impl TKeyboardEvent with init_keyboard_event(
   self : Self,
   type_arg : String,
-  bubbles_arg? : Bool = false,
-  cancelable_arg? : Bool = false,
+  bubbles_arg? : Bool,
+  cancelable_arg? : Bool,
   view_arg? : &TWindow,
-  key_arg? : String = "",
-  location_arg? : UInt = (0 : UInt),
-  ctrl_key? : Bool = false,
-  alt_key? : Bool = false,
-  shift_key? : Bool = false,
-  meta_key? : Bool = false,
+  key_arg? : String,
+  location_arg? : UInt,
+  ctrl_key? : Bool,
+  alt_key? : Bool,
+  shift_key? : Bool,
+  meta_key? : Bool,
 ) -> Unit {
   keyboard_event_init_keyboard_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
-    TJsValue::to_js(bubbles_arg),
-    TJsValue::to_js(cancelable_arg),
+    opt_to_js(bubbles_arg),
+    opt_to_js(cancelable_arg),
     opt_to_js(view_arg),
-    TJsValue::to_js(key_arg),
-    TJsValue::to_js(location_arg),
-    TJsValue::to_js(ctrl_key),
-    TJsValue::to_js(alt_key),
-    TJsValue::to_js(shift_key),
-    TJsValue::to_js(meta_key),
+    opt_to_js(key_arg),
+    opt_to_js(location_arg),
+    opt_to_js(ctrl_key),
+    opt_to_js(alt_key),
+    opt_to_js(shift_key),
+    opt_to_js(meta_key),
   )
 }
 

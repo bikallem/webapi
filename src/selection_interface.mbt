@@ -143,39 +143,28 @@ impl TSelection with empty(self : Self) -> Unit {
 /// [Selection.getComposedRanges](https://developer.mozilla.org/en-US/docs/Web/API/Selection/getComposedRanges)
 impl TSelection with get_composed_ranges(
   self : Self,
-  options? : GetComposedRangesOptions = GetComposedRangesOptions::empty(),
+  options? : GetComposedRangesOptions,
 ) -> Array[StaticRange] {
-  selection_get_composed_ranges_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(options),
-  )
+  selection_get_composed_ranges_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
 /// [Selection.collapse](https://developer.mozilla.org/en-US/docs/Web/API/Selection/collapse)
-impl TSelection with collapse(
-  self : Self,
-  node : &TNode,
-  offset? : UInt = (0 : UInt),
-) -> Unit {
+impl TSelection with collapse(self : Self, node : &TNode, offset? : UInt) -> Unit {
   selection_collapse_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
-    TJsValue::to_js(offset),
+    opt_to_js(offset),
   )
 }
 
 ///|
 /// [Selection.setPosition](https://developer.mozilla.org/en-US/docs/Web/API/Selection/setPosition)
-impl TSelection with set_position(
-  self : Self,
-  node : &TNode,
-  offset? : UInt = (0 : UInt),
-) -> Unit {
+impl TSelection with set_position(self : Self, node : &TNode, offset? : UInt) -> Unit {
   selection_set_position_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
-    TJsValue::to_js(offset),
+    opt_to_js(offset),
   )
 }
 
@@ -193,15 +182,11 @@ impl TSelection with collapse_to_end(self : Self) -> Unit {
 
 ///|
 /// [Selection.extend](https://developer.mozilla.org/en-US/docs/Web/API/Selection/extend)
-impl TSelection with extend(
-  self : Self,
-  node : &TNode,
-  offset? : UInt = (0 : UInt),
-) -> Unit {
+impl TSelection with extend(self : Self, node : &TNode, offset? : UInt) -> Unit {
   selection_extend_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
-    TJsValue::to_js(offset),
+    opt_to_js(offset),
   )
 }
 
@@ -259,11 +244,11 @@ impl TSelection with delete_from_document(self : Self) -> Unit {
 impl TSelection with contains_node(
   self : Self,
   node : &TNode,
-  allow_partial_containment? : Bool = false,
+  allow_partial_containment? : Bool,
 ) -> Bool {
   selection_contains_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
-    TJsValue::to_js(allow_partial_containment),
+    opt_to_js(allow_partial_containment),
   )
 }

@@ -15,20 +15,20 @@ pub impl FromJsAny for UIEventInit with from_js_any(value : JsAny) -> UIEventIni
 
 ///|
 pub fn UIEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   view? : &TWindow,
-  detail? : Int = (0 : Int),
-  which? : UInt = (0 : UInt),
+  detail? : Int,
+  which? : UInt,
 ) -> UIEventInit {
   ui_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(view),
-    TJsValue::to_js(detail),
-    TJsValue::to_js(which),
+    opt_to_js(detail),
+    opt_to_js(which),
   )
 }
 

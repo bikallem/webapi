@@ -605,15 +605,15 @@ impl TWindow with frame_element(self : Self) -> Element {
 /// [Window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
 impl TWindow with open(
   self : Self,
-  url? : String = "",
-  target? : String = "_blank",
-  features? : String = "",
+  url? : String,
+  target? : String,
+  features? : String,
 ) -> WindowProxy? {
   let result = window_open_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(url),
-    TJsValue::to_js(target),
-    TJsValue::to_js(features),
+    opt_to_js(url),
+    opt_to_js(target),
+    opt_to_js(features),
   )
   if JsValue::is_null(result) {
     None
@@ -665,21 +665,17 @@ impl TWindow with alert_with_message(self : Self, message : String) -> Unit {
 
 ///|
 /// [Window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
-impl TWindow with confirm(self : Self, message? : String = "") -> Bool {
-  window_confirm_ffi(TJsValue::to_js(self), TJsValue::to_js(message))
+impl TWindow with confirm(self : Self, message? : String) -> Bool {
+  window_confirm_ffi(TJsValue::to_js(self), opt_to_js(message))
 }
 
 ///|
 /// [Window.prompt](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
-impl TWindow with prompt(
-  self : Self,
-  message? : String = "",
-  default? : String = "",
-) -> String? {
+impl TWindow with prompt(self : Self, message? : String, default? : String) -> String? {
   let result = window_prompt_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(message),
-    TJsValue::to_js(default),
+    opt_to_js(message),
+    opt_to_js(default),
   )
   if JsValue::is_null(result) {
     None
@@ -700,13 +696,13 @@ impl TWindow with post_message(
   self : Self,
   message : JsValue,
   target_origin : String,
-  transfer? : Array[JsValue] = [],
+  transfer? : Array[JsValue],
 ) -> Unit {
   window_post_message_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(target_origin),
-    TJsValue::to_js(transfer),
+    opt_to_js(transfer),
   )
 }
 
@@ -715,12 +711,12 @@ impl TWindow with post_message(
 impl TWindow with post_message_with_options(
   self : Self,
   message : JsValue,
-  options? : WindowPostMessageOptions = WindowPostMessageOptions::empty(),
+  options? : WindowPostMessageOptions,
 ) -> Unit {
   window_post_message_with_options_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -761,13 +757,9 @@ impl TWindow with get_computed_style(
 impl TWindow with fetch_later(
   self : Self,
   input : &TRequestInfo,
-  init? : DeferredRequestInit = DeferredRequestInit::empty(),
+  init? : DeferredRequestInit,
 ) -> FetchLaterResult {
-  window_fetch_later_ffi(
-    TJsValue::to_js(self),
-    input.to_js(),
-    TJsValue::to_js(init),
-  )
+  window_fetch_later_ffi(TJsValue::to_js(self), input.to_js(), opt_to_js(init))
 }
 
 ///|
@@ -866,11 +858,10 @@ impl TWindow with page_y_offset(self : Self) -> Double {
 
 ///|
 /// [Window.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll)
-impl TWindow with scroll(
-  self : Self,
-  options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[JsValue] {
-  window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TWindow with scroll(self : Self, options? : ScrollToOptions) -> JsPromise[
+  JsValue,
+] {
+  window_scroll_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -887,11 +878,10 @@ impl TWindow with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
 
 ///|
 /// [Window.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)
-impl TWindow with scroll_to(
-  self : Self,
-  options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[JsValue] {
-  window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TWindow with scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[
+  JsValue,
+] {
+  window_scroll_to_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -908,11 +898,10 @@ impl TWindow with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise
 
 ///|
 /// [Window.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy)
-impl TWindow with scroll_by(
-  self : Self,
-  options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[JsValue] {
-  window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TWindow with scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[
+  JsValue,
+] {
+  window_scroll_by_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -985,12 +974,12 @@ impl TWindow with get_selection(self : Self) -> Selection? {
 impl TWindow with request_idle_callback(
   self : Self,
   callback : IdleRequestCallback,
-  options? : IdleRequestOptions = IdleRequestOptions::empty(),
+  options? : IdleRequestOptions,
 ) -> UInt {
   window_request_idle_callback_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(callback),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -2595,21 +2584,21 @@ impl TWindow with atob(self : Self, data : String) -> String {
 impl TWindow with set_timeout(
   self : Self,
   handler : &TTimerHandler,
-  timeout? : Int = (0 : Int),
+  timeout? : Int,
   arguments : Array[&TJsValue],
 ) -> Int {
   window_set_timeout_ffi(
     TJsValue::to_js(self),
     handler.to_js(),
-    TJsValue::to_js(timeout),
+    opt_to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
 ///|
 /// [Window.clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout)
-impl TWindow with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
-  window_clear_timeout_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
+impl TWindow with clear_timeout(self : Self, id? : Int) -> Unit {
+  window_clear_timeout_ffi(TJsValue::to_js(self), opt_to_js(id))
 }
 
 ///|
@@ -2617,21 +2606,21 @@ impl TWindow with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
 impl TWindow with set_interval(
   self : Self,
   handler : &TTimerHandler,
-  timeout? : Int = (0 : Int),
+  timeout? : Int,
   arguments : Array[&TJsValue],
 ) -> Int {
   window_set_interval_ffi(
     TJsValue::to_js(self),
     handler.to_js(),
-    TJsValue::to_js(timeout),
+    opt_to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
 ///|
 /// [Window.clearInterval](https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval)
-impl TWindow with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
-  window_clear_interval_ffi(TJsValue::to_js(self), TJsValue::to_js(id))
+impl TWindow with clear_interval(self : Self, id? : Int) -> Unit {
+  window_clear_interval_ffi(TJsValue::to_js(self), opt_to_js(id))
 }
 
 ///|
@@ -2645,12 +2634,12 @@ impl TWindow with queue_microtask(self : Self, callback : VoidFunction) -> Unit 
 impl TWindow with create_image_bitmap(
   self : Self,
   image : &TImageBitmapSource,
-  options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
+  options? : ImageBitmapOptions,
 ) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_ffi(
     TJsValue::to_js(self),
     image.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -2663,7 +2652,7 @@ impl TWindow with create_image_bitmap_cropped(
   sy : Int,
   sw : Int,
   sh : Int,
-  options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
+  options? : ImageBitmapOptions,
 ) -> JsPromise[ImageBitmap] {
   window_create_image_bitmap_cropped_ffi(
     TJsValue::to_js(self),
@@ -2672,7 +2661,7 @@ impl TWindow with create_image_bitmap_cropped(
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),
     TJsValue::to_js(sh),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -2681,23 +2670,21 @@ impl TWindow with create_image_bitmap_cropped(
 impl TWindow with structured_clone(
   self : Self,
   value : JsValue,
-  options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
+  options? : StructuredSerializeOptions,
 ) -> JsValue {
   window_structured_clone_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(value),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
 ///|
 /// [Window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
-impl TWindow with fetch(
-  self : Self,
-  input : &TRequestInfo,
-  init? : RequestInit = RequestInit::empty(),
-) -> JsPromise[Response] {
-  window_fetch_ffi(TJsValue::to_js(self), input.to_js(), TJsValue::to_js(init))
+impl TWindow with fetch(self : Self, input : &TRequestInfo, init? : RequestInit) -> JsPromise[
+  Response,
+] {
+  window_fetch_ffi(TJsValue::to_js(self), input.to_js(), opt_to_js(init))
 }
 
 ///|

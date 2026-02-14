@@ -19,18 +19,18 @@ pub impl FromJsAny for CanvasRenderingContext2DSettings with from_js_any(
 
 ///|
 pub fn CanvasRenderingContext2DSettings::new(
-  alpha? : Bool = true,
-  desynchronized? : Bool = false,
-  color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb,
-  color_type? : CanvasColorType = CanvasColorType::Unorm8,
-  will_read_frequently? : Bool = false,
+  alpha? : Bool,
+  desynchronized? : Bool,
+  color_space? : PredefinedColorSpace,
+  color_type? : CanvasColorType,
+  will_read_frequently? : Bool,
 ) -> CanvasRenderingContext2DSettings {
   canvas_rendering_context2d_settings_ffi(
-    TJsValue::to_js(alpha),
-    TJsValue::to_js(desynchronized),
-    TJsValue::to_js(color_space),
-    TJsValue::to_js(color_type),
-    TJsValue::to_js(will_read_frequently),
+    opt_to_js(alpha),
+    opt_to_js(desynchronized),
+    opt_to_js(color_space),
+    opt_to_js(color_type),
+    opt_to_js(will_read_frequently),
   )
 }
 

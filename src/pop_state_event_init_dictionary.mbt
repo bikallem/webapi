@@ -15,18 +15,18 @@ pub impl FromJsAny for PopStateEventInit with from_js_any(value : JsAny) -> PopS
 
 ///|
 pub fn PopStateEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   state? : JsValue,
-  has_ua_visual_transition? : Bool = false,
+  has_ua_visual_transition? : Bool,
 ) -> PopStateEventInit {
   pop_state_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(state),
-    TJsValue::to_js(has_ua_visual_transition),
+    opt_to_js(has_ua_visual_transition),
   )
 }
 

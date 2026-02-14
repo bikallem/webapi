@@ -32,8 +32,8 @@ info:
 
 # Build examples for both targets
 build-examples:
-	cd examples && moon build --target js --release
-	cd examples && moon build --target wasm-gc --release
+	moon -C examples build --target js --release
+	moon -C examples build --target wasm-gc --release
 
 # Validate all wasm-gc example binaries with wasm-tools
 validate-wasm:

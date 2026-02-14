@@ -15,11 +15,11 @@ pub impl FromJsAny for BoxQuadOptions with from_js_any(value : JsAny) -> BoxQuad
 
 ///|
 pub fn BoxQuadOptions::new(
-  box? : CSSBoxType = CSSBoxType::Border,
+  box? : CSSBoxType,
   relative_to? : &TGeometryNode,
 ) -> BoxQuadOptions {
   box_quad_options_ffi(
-    TJsValue::to_js(box),
+    opt_to_js(box),
     match relative_to {
       Some(v) => v.to_js()
       None => JsValue::undefined()

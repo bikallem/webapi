@@ -25,12 +25,9 @@ pub impl TEventTarget for EventSource
 ///|
 pub fn EventSource::new(
   url : String,
-  event_source_init_dict? : EventSourceInit = EventSourceInit::empty(),
+  event_source_init_dict? : EventSourceInit,
 ) -> EventSource {
-  event_source_new_ffi(
-    TJsValue::to_js(url),
-    TJsValue::to_js(event_source_init_dict),
-  )
+  event_source_new_ffi(TJsValue::to_js(url), opt_to_js(event_source_init_dict))
 }
 
 ///|

@@ -15,15 +15,11 @@ pub impl FromJsAny for EventInit with from_js_any(value : JsAny) -> EventInit = 
 
 ///|
 pub fn EventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
 ) -> EventInit {
-  event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-  )
+  event_init_ffi(opt_to_js(bubbles), opt_to_js(cancelable), opt_to_js(composed))
 }
 
 ///|

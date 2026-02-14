@@ -17,15 +17,15 @@ pub impl FromJsAny for AddEventListenerOptions with from_js_any(value : JsAny) -
 
 ///|
 pub fn AddEventListenerOptions::new(
-  capture? : Bool = false,
+  capture? : Bool,
   passive? : Bool,
-  once? : Bool = false,
+  once? : Bool,
   signal? : &TAbortSignal,
 ) -> AddEventListenerOptions {
   add_event_listener_options_ffi(
-    TJsValue::to_js(capture),
+    opt_to_js(capture),
     opt_to_js(passive),
-    TJsValue::to_js(once),
+    opt_to_js(once),
     opt_to_js(signal),
   )
 }

@@ -15,13 +15,13 @@ pub impl FromJsAny for FilePropertyBag with from_js_any(value : JsAny) -> FilePr
 
 ///|
 pub fn FilePropertyBag::new(
-  type_? : String = "",
-  endings? : EndingType = EndingType::Transparent,
+  type_? : String,
+  endings? : EndingType,
   last_modified? : Int64,
 ) -> FilePropertyBag {
   file_property_bag_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(endings),
+    opt_to_js(type_),
+    opt_to_js(endings),
     opt_to_js(last_modified),
   )
 }

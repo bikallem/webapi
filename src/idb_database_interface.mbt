@@ -87,14 +87,14 @@ impl TIDBDatabase with object_store_names(self : Self) -> DOMStringList {
 impl TIDBDatabase with transaction(
   self : Self,
   store_names : &TIDBDatabaseTransactionStoreNames,
-  mode? : IDBTransactionMode = IDBTransactionMode::Readonly,
-  options? : IDBTransactionOptions = IDBTransactionOptions::empty(),
+  mode? : IDBTransactionMode,
+  options? : IDBTransactionOptions,
 ) -> IDBTransaction {
   idb_database_transaction_ffi(
     TJsValue::to_js(self),
     store_names.to_js(),
-    TJsValue::to_js(mode),
-    TJsValue::to_js(options),
+    opt_to_js(mode),
+    opt_to_js(options),
   )
 }
 
@@ -109,12 +109,12 @@ impl TIDBDatabase with close(self : Self) -> Unit {
 impl TIDBDatabase with create_object_store(
   self : Self,
   name : String,
-  options? : IDBObjectStoreParameters = IDBObjectStoreParameters::empty(),
+  options? : IDBObjectStoreParameters,
 ) -> IDBObjectStore {
   idb_database_create_object_store_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

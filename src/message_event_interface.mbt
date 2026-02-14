@@ -25,12 +25,9 @@ pub impl TEvent for MessageEvent
 ///|
 pub fn MessageEvent::new(
   type_ : String,
-  event_init_dict? : MessageEventInit = MessageEventInit::empty(),
+  event_init_dict? : MessageEventInit,
 ) -> MessageEvent {
-  message_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  message_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -89,26 +86,26 @@ impl TMessageEvent with ports(self : Self) -> Array[MessagePort] {
 impl TMessageEvent with init_message_event(
   self : Self,
   type_ : String,
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
   data? : JsValue,
-  origin? : String = "",
-  last_event_id? : String = "",
+  origin? : String,
+  last_event_id? : String,
   source? : &TMessageEventSource,
-  ports? : Array[MessagePort] = [],
+  ports? : Array[MessagePort],
 ) -> Unit {
   message_event_init_message_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
     opt_to_js(data),
-    TJsValue::to_js(origin),
-    TJsValue::to_js(last_event_id),
+    opt_to_js(origin),
+    opt_to_js(last_event_id),
     match source {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(ports),
+    opt_to_js(ports),
   )
 }

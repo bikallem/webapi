@@ -22,9 +22,9 @@ pub impl TClipboardItem for ClipboardItem
 ///|
 pub fn ClipboardItem::new(
   items : JsValue,
-  options? : ClipboardItemOptions = ClipboardItemOptions::empty(),
+  options? : ClipboardItemOptions,
 ) -> ClipboardItem {
-  clipboard_item_new_ffi(TJsValue::to_js(items), TJsValue::to_js(options))
+  clipboard_item_new_ffi(TJsValue::to_js(items), opt_to_js(options))
 }
 
 ///|

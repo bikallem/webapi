@@ -76,7 +76,7 @@ impl TXPathEvaluator with evaluate(
   expression : String,
   context_node : &TNode,
   resolver? : XPathNSResolver,
-  type_? : UInt = (0 : UInt),
+  type_? : UInt,
   result? : &TXPathResult,
 ) -> XPathResult {
   x_path_evaluator_evaluate_ffi(
@@ -84,7 +84,7 @@ impl TXPathEvaluator with evaluate(
     TJsValue::to_js(expression),
     TJsValue::to_js(context_node),
     opt_to_js(resolver),
-    TJsValue::to_js(type_),
+    opt_to_js(type_),
     opt_to_js(result),
   )
 }

@@ -769,11 +769,8 @@ impl TElement with set_html_unsafe(
 
 ///|
 /// [Element.getHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/getHTML)
-impl TElement with get_html(
-  self : Self,
-  options? : GetHTMLOptions = GetHTMLOptions::empty(),
-) -> String {
-  element_get_html_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TElement with get_html(self : Self, options? : GetHTMLOptions) -> String {
+  element_get_html_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -830,9 +827,9 @@ impl TElement with get_bounding_client_rect(self : Self) -> DOMRect {
 /// [Element.checkVisibility](https://developer.mozilla.org/en-US/docs/Web/API/Element/checkVisibility)
 impl TElement with check_visibility(
   self : Self,
-  options? : CheckVisibilityOptions = CheckVisibilityOptions::empty(),
+  options? : CheckVisibilityOptions,
 ) -> Bool {
-  element_check_visibility_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+  element_check_visibility_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -852,11 +849,10 @@ impl TElement with scroll_into_view(
 
 ///|
 /// [Element.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll)
-impl TElement with scroll(
-  self : Self,
-  options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[JsValue] {
-  element_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TElement with scroll(self : Self, options? : ScrollToOptions) -> JsPromise[
+  JsValue,
+] {
+  element_scroll_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -873,11 +869,10 @@ impl TElement with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
 
 ///|
 /// [Element.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo)
-impl TElement with scroll_to(
-  self : Self,
-  options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[JsValue] {
-  element_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TElement with scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[
+  JsValue,
+] {
+  element_scroll_to_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -894,11 +889,10 @@ impl TElement with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromis
 
 ///|
 /// [Element.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy)
-impl TElement with scroll_by(
-  self : Self,
-  options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[JsValue] {
-  element_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TElement with scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[
+  JsValue,
+] {
+  element_scroll_by_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -984,14 +978,10 @@ impl TElement with current_css_zoom(self : Self) -> Double {
 
 ///|
 /// [Element.requestFullscreen](https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen)
-impl TElement with request_fullscreen(
-  self : Self,
-  options? : FullscreenOptions = FullscreenOptions::empty(),
-) -> JsPromise[JsValue] {
-  element_request_fullscreen_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(options),
-  )
+impl TElement with request_fullscreen(self : Self, options? : FullscreenOptions) -> JsPromise[
+  JsValue,
+] {
+  element_request_fullscreen_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -1212,11 +1202,10 @@ impl TElement with assigned_slot(self : Self) -> HTMLSlotElement {
 
 ///|
 /// [Element.getBoxQuads](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoxQuads)
-impl TElement with get_box_quads(
-  self : Self,
-  options? : BoxQuadOptions = BoxQuadOptions::empty(),
-) -> Array[DOMQuad] {
-  element_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TElement with get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[
+  DOMQuad,
+] {
+  element_get_box_quads_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -1225,13 +1214,13 @@ impl TElement with convert_quad_from_node(
   self : Self,
   quad : DOMQuadInit,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMQuad {
   element_convert_quad_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(quad),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -1241,13 +1230,13 @@ impl TElement with convert_rect_from_node(
   self : Self,
   rect : &TDOMRectReadOnly,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMQuad {
   element_convert_rect_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(rect),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -1257,13 +1246,13 @@ impl TElement with convert_point_from_node(
   self : Self,
   point : DOMPointInit,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMPoint {
   element_convert_point_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(point),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -1286,9 +1275,8 @@ impl TElement with animate(
 
 ///|
 /// [Element.getAnimations](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations)
-impl TElement with get_animations(
-  self : Self,
-  options? : GetAnimationsOptions = GetAnimationsOptions::empty(),
-) -> Array[Animation] {
-  element_get_animations_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TElement with get_animations(self : Self, options? : GetAnimationsOptions) -> Array[
+  Animation,
+] {
+  element_get_animations_ffi(TJsValue::to_js(self), opt_to_js(options))
 }

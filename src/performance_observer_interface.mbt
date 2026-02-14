@@ -40,12 +40,9 @@ pub trait TPerformanceObserver: TJsValue {
 /// [PerformanceObserver.observe](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/observe)
 impl TPerformanceObserver with observe(
   self : Self,
-  options? : PerformanceObserverInit = PerformanceObserverInit::empty(),
+  options? : PerformanceObserverInit,
 ) -> Unit {
-  performance_observer_observe_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(options),
-  )
+  performance_observer_observe_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

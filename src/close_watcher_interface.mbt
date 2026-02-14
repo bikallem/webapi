@@ -23,10 +23,8 @@ pub impl TCloseWatcher for CloseWatcher
 pub impl TEventTarget for CloseWatcher
 
 ///|
-pub fn CloseWatcher::new(
-  options? : CloseWatcherOptions = CloseWatcherOptions::empty(),
-) -> CloseWatcher {
-  close_watcher_new_ffi(TJsValue::to_js(options))
+pub fn CloseWatcher::new(options? : CloseWatcherOptions) -> CloseWatcher {
+  close_watcher_new_ffi(opt_to_js(options))
 }
 
 ///|

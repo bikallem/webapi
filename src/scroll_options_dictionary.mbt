@@ -14,10 +14,8 @@ pub impl TJsValue for ScrollOptions with to_js(self : ScrollOptions) -> JsValue 
 pub impl FromJsAny for ScrollOptions with from_js_any(value : JsAny) -> ScrollOptions = "%identity"
 
 ///|
-pub fn ScrollOptions::new(
-  behavior? : ScrollBehavior = ScrollBehavior::Auto,
-) -> ScrollOptions {
-  scroll_options_ffi(TJsValue::to_js(behavior))
+pub fn ScrollOptions::new(behavior? : ScrollBehavior) -> ScrollOptions {
+  scroll_options_ffi(opt_to_js(behavior))
 }
 
 ///|

@@ -292,24 +292,21 @@ impl TWorkerGlobalScope with atob(self : Self, data : String) -> String {
 impl TWorkerGlobalScope with set_timeout(
   self : Self,
   handler : &TTimerHandler,
-  timeout? : Int = (0 : Int),
+  timeout? : Int,
   arguments : Array[&TJsValue],
 ) -> Int {
   worker_global_scope_set_timeout_ffi(
     TJsValue::to_js(self),
     handler.to_js(),
-    TJsValue::to_js(timeout),
+    opt_to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
 ///|
 /// [WorkerGlobalScope.clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/clearTimeout)
-impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = (0 : Int)) -> Unit {
-  worker_global_scope_clear_timeout_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(id),
-  )
+impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int) -> Unit {
+  worker_global_scope_clear_timeout_ffi(TJsValue::to_js(self), opt_to_js(id))
 }
 
 ///|
@@ -317,24 +314,21 @@ impl TWorkerGlobalScope with clear_timeout(self : Self, id? : Int = (0 : Int)) -
 impl TWorkerGlobalScope with set_interval(
   self : Self,
   handler : &TTimerHandler,
-  timeout? : Int = (0 : Int),
+  timeout? : Int,
   arguments : Array[&TJsValue],
 ) -> Int {
   worker_global_scope_set_interval_ffi(
     TJsValue::to_js(self),
     handler.to_js(),
-    TJsValue::to_js(timeout),
+    opt_to_js(timeout),
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
 ///|
 /// [WorkerGlobalScope.clearInterval](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/clearInterval)
-impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
-  worker_global_scope_clear_interval_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(id),
-  )
+impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int) -> Unit {
+  worker_global_scope_clear_interval_ffi(TJsValue::to_js(self), opt_to_js(id))
 }
 
 ///|
@@ -354,12 +348,12 @@ impl TWorkerGlobalScope with queue_microtask(
 impl TWorkerGlobalScope with create_image_bitmap(
   self : Self,
   image : &TImageBitmapSource,
-  options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
+  options? : ImageBitmapOptions,
 ) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_ffi(
     TJsValue::to_js(self),
     image.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -372,7 +366,7 @@ impl TWorkerGlobalScope with create_image_bitmap_cropped(
   sy : Int,
   sw : Int,
   sh : Int,
-  options? : ImageBitmapOptions = ImageBitmapOptions::empty(),
+  options? : ImageBitmapOptions,
 ) -> JsPromise[ImageBitmap] {
   worker_global_scope_create_image_bitmap_cropped_ffi(
     TJsValue::to_js(self),
@@ -381,7 +375,7 @@ impl TWorkerGlobalScope with create_image_bitmap_cropped(
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),
     TJsValue::to_js(sh),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -390,12 +384,12 @@ impl TWorkerGlobalScope with create_image_bitmap_cropped(
 impl TWorkerGlobalScope with structured_clone(
   self : Self,
   value : JsValue,
-  options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
+  options? : StructuredSerializeOptions,
 ) -> JsValue {
   worker_global_scope_structured_clone_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(value),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -404,12 +398,12 @@ impl TWorkerGlobalScope with structured_clone(
 impl TWorkerGlobalScope with fetch(
   self : Self,
   input : &TRequestInfo,
-  init? : RequestInit = RequestInit::empty(),
+  init? : RequestInit,
 ) -> JsPromise[Response] {
   worker_global_scope_fetch_ffi(
     TJsValue::to_js(self),
     input.to_js(),
-    TJsValue::to_js(init),
+    opt_to_js(init),
   )
 }
 

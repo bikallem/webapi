@@ -33,14 +33,14 @@ pub impl TIDBObjectStoreParametersNewKeyPath for Array[String] with to_js(
 ///|
 pub fn IDBObjectStoreParameters::new(
   key_path? : &TIDBObjectStoreParametersNewKeyPath,
-  auto_increment? : Bool = false,
+  auto_increment? : Bool,
 ) -> IDBObjectStoreParameters {
   idb_object_store_parameters_ffi(
     match key_path {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(auto_increment),
+    opt_to_js(auto_increment),
   )
 }
 

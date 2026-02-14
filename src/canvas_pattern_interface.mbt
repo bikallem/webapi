@@ -29,10 +29,7 @@ pub trait TCanvasPattern: TJsValue {
 /// [CanvasPattern.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern/setTransform)
 impl TCanvasPattern with set_transform(
   self : Self,
-  transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
+  transform? : DOMMatrix2DInit,
 ) -> Unit {
-  canvas_pattern_set_transform_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(transform),
-  )
+  canvas_pattern_set_transform_ffi(TJsValue::to_js(self), opt_to_js(transform))
 }

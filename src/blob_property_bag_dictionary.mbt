@@ -15,10 +15,10 @@ pub impl FromJsAny for BlobPropertyBag with from_js_any(value : JsAny) -> BlobPr
 
 ///|
 pub fn BlobPropertyBag::new(
-  type_? : String = "",
-  endings? : EndingType = EndingType::Transparent,
+  type_? : String,
+  endings? : EndingType,
 ) -> BlobPropertyBag {
-  blob_property_bag_ffi(TJsValue::to_js(type_), TJsValue::to_js(endings))
+  blob_property_bag_ffi(opt_to_js(type_), opt_to_js(endings))
 }
 
 ///|

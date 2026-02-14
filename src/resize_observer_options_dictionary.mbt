@@ -17,9 +17,9 @@ pub impl FromJsAny for ResizeObserverOptions with from_js_any(value : JsAny) -> 
 
 ///|
 pub fn ResizeObserverOptions::new(
-  box? : ResizeObserverBoxOptions = ResizeObserverBoxOptions::ContentBox,
+  box? : ResizeObserverBoxOptions,
 ) -> ResizeObserverOptions {
-  resize_observer_options_ffi(TJsValue::to_js(box))
+  resize_observer_options_ffi(opt_to_js(box))
 }
 
 ///|

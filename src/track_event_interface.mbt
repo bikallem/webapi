@@ -25,9 +25,9 @@ pub impl TEvent for TrackEvent
 ///|
 pub fn TrackEvent::new(
   type_ : String,
-  event_init_dict? : TrackEventInit = TrackEventInit::empty(),
+  event_init_dict? : TrackEventInit,
 ) -> TrackEvent {
-  track_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  track_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

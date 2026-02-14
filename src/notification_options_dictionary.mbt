@@ -15,28 +15,28 @@ pub impl FromJsAny for NotificationOptions with from_js_any(value : JsAny) -> No
 
 ///|
 pub fn NotificationOptions::new(
-  dir? : NotificationDirection = NotificationDirection::Auto,
-  lang? : String = "",
-  body? : String = "",
+  dir? : NotificationDirection,
+  lang? : String,
+  body? : String,
   navigate? : String,
-  tag? : String = "",
+  tag? : String,
   image? : String,
   icon? : String,
   badge? : String,
   vibrate? : &TVibratePattern,
   timestamp? : EpochTimeStamp,
-  renotify? : Bool = false,
+  renotify? : Bool,
   silent? : Bool,
-  require_interaction? : Bool = false,
+  require_interaction? : Bool,
   data? : JsValue,
-  actions? : Array[NotificationAction] = [],
+  actions? : Array[NotificationAction],
 ) -> NotificationOptions {
   notification_options_ffi(
-    TJsValue::to_js(dir),
-    TJsValue::to_js(lang),
-    TJsValue::to_js(body),
+    opt_to_js(dir),
+    opt_to_js(lang),
+    opt_to_js(body),
     opt_to_js(navigate),
-    TJsValue::to_js(tag),
+    opt_to_js(tag),
     opt_to_js(image),
     opt_to_js(icon),
     opt_to_js(badge),
@@ -45,11 +45,11 @@ pub fn NotificationOptions::new(
       None => JsValue::undefined()
     },
     opt_to_js(timestamp),
-    TJsValue::to_js(renotify),
+    opt_to_js(renotify),
     opt_to_js(silent),
-    TJsValue::to_js(require_interaction),
+    opt_to_js(require_interaction),
     opt_to_js(data),
-    TJsValue::to_js(actions),
+    opt_to_js(actions),
   )
 }
 

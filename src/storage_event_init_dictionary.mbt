@@ -15,23 +15,23 @@ pub impl FromJsAny for StorageEventInit with from_js_any(value : JsAny) -> Stora
 
 ///|
 pub fn StorageEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   key? : String,
   old_value? : String,
   new_value? : String,
-  url? : String = "",
+  url? : String,
   storage_area? : &TStorage,
 ) -> StorageEventInit {
   storage_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(key),
     opt_to_js(old_value),
     opt_to_js(new_value),
-    TJsValue::to_js(url),
+    opt_to_js(url),
     opt_to_js(storage_area),
   )
 }

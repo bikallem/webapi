@@ -29,8 +29,8 @@ pub impl TNode for Comment
 pub impl TEventTarget for Comment
 
 ///|
-pub fn Comment::new(data? : String = "") -> Comment {
-  comment_new_ffi(TJsValue::to_js(data))
+pub fn Comment::new(data? : String) -> Comment {
+  comment_new_ffi(opt_to_js(data))
 }
 
 ///|

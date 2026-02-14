@@ -25,9 +25,9 @@ pub impl TEvent for ErrorEvent
 ///|
 pub fn ErrorEvent::new(
   type_ : String,
-  event_init_dict? : ErrorEventInit = ErrorEventInit::empty(),
+  event_init_dict? : ErrorEventInit,
 ) -> ErrorEvent {
-  error_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  error_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

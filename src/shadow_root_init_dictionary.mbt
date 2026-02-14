@@ -16,18 +16,18 @@ pub impl FromJsAny for ShadowRootInit with from_js_any(value : JsAny) -> ShadowR
 ///|
 pub fn ShadowRootInit::new(
   mode : ShadowRootMode,
-  delegates_focus? : Bool = false,
-  slot_assignment? : SlotAssignmentMode = SlotAssignmentMode::Named,
-  clonable? : Bool = false,
-  serializable? : Bool = false,
+  delegates_focus? : Bool,
+  slot_assignment? : SlotAssignmentMode,
+  clonable? : Bool,
+  serializable? : Bool,
   custom_element_registry? : &TCustomElementRegistry,
 ) -> ShadowRootInit {
   shadow_root_init_ffi(
     TJsValue::to_js(mode),
-    TJsValue::to_js(delegates_focus),
-    TJsValue::to_js(slot_assignment),
-    TJsValue::to_js(clonable),
-    TJsValue::to_js(serializable),
+    opt_to_js(delegates_focus),
+    opt_to_js(slot_assignment),
+    opt_to_js(clonable),
+    opt_to_js(serializable),
     opt_to_js(custom_element_registry),
   )
 }

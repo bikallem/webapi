@@ -14,8 +14,8 @@ pub impl TJsValue for TextDecodeOptions with to_js(self : TextDecodeOptions) -> 
 pub impl FromJsAny for TextDecodeOptions with from_js_any(value : JsAny) -> TextDecodeOptions = "%identity"
 
 ///|
-pub fn TextDecodeOptions::new(stream? : Bool = false) -> TextDecodeOptions {
-  text_decode_options_ffi(TJsValue::to_js(stream))
+pub fn TextDecodeOptions::new(stream? : Bool) -> TextDecodeOptions {
+  text_decode_options_ffi(opt_to_js(stream))
 }
 
 ///|

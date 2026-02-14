@@ -111,13 +111,13 @@ impl TElementInternals with form(self : Self) -> HTMLFormElement {
 /// [ElementInternals.setValidity](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/setValidity)
 impl TElementInternals with set_validity(
   self : Self,
-  flags? : ValidityStateFlags = ValidityStateFlags::empty(),
+  flags? : ValidityStateFlags,
   message? : String,
   anchor? : &THTMLElement,
 ) -> Unit {
   element_internals_set_validity_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(flags),
+    opt_to_js(flags),
     opt_to_js(message),
     opt_to_js(anchor),
   )

@@ -56,11 +56,11 @@ impl TSVGGeometryElement with path_length(self : Self) -> SVGAnimatedNumber {
 /// [SVGGeometryElement.isPointInFill](https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement/isPointInFill)
 impl TSVGGeometryElement with is_point_in_fill(
   self : Self,
-  point? : DOMPointInit = DOMPointInit::empty(),
+  point? : DOMPointInit,
 ) -> Bool {
   svg_geometry_element_is_point_in_fill_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(point),
+    opt_to_js(point),
   )
 }
 
@@ -68,11 +68,11 @@ impl TSVGGeometryElement with is_point_in_fill(
 /// [SVGGeometryElement.isPointInStroke](https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement/isPointInStroke)
 impl TSVGGeometryElement with is_point_in_stroke(
   self : Self,
-  point? : DOMPointInit = DOMPointInit::empty(),
+  point? : DOMPointInit,
 ) -> Bool {
   svg_geometry_element_is_point_in_stroke_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(point),
+    opt_to_js(point),
   )
 }
 

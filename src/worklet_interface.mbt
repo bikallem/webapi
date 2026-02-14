@@ -32,11 +32,11 @@ pub trait TWorklet: TJsValue {
 impl TWorklet with add_module(
   self : Self,
   module_url : String,
-  options? : WorkletOptions = WorkletOptions::empty(),
+  options? : WorkletOptions,
 ) -> JsPromise[JsValue] {
   worklet_add_module_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(module_url),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }

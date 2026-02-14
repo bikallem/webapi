@@ -15,23 +15,23 @@ pub impl FromJsAny for ErrorEventInit with from_js_any(value : JsAny) -> ErrorEv
 
 ///|
 pub fn ErrorEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  message? : String = "",
-  filename? : String = "",
-  lineno? : UInt = (0 : UInt),
-  colno? : UInt = (0 : UInt),
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  message? : String,
+  filename? : String,
+  lineno? : UInt,
+  colno? : UInt,
   error? : JsValue,
 ) -> ErrorEventInit {
   error_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(message),
-    TJsValue::to_js(filename),
-    TJsValue::to_js(lineno),
-    TJsValue::to_js(colno),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(message),
+    opt_to_js(filename),
+    opt_to_js(lineno),
+    opt_to_js(colno),
     opt_to_js(error),
   )
 }

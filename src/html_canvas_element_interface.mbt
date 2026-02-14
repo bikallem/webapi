@@ -109,12 +109,12 @@ impl THTMLCanvasElement with get_context(
 /// [HTMLCanvasElement.toDataURL](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL)
 impl THTMLCanvasElement with to_data_url(
   self : Self,
-  type_? : String = "image/png",
+  type_? : String,
   quality? : JsValue,
 ) -> String {
   html_canvas_element_to_data_url_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(type_),
+    opt_to_js(type_),
     opt_to_js(quality),
   )
 }
@@ -124,13 +124,13 @@ impl THTMLCanvasElement with to_data_url(
 impl THTMLCanvasElement with to_blob(
   self : Self,
   _callback : BlobCallback,
-  type_? : String = "image/png",
+  type_? : String,
   quality? : JsValue,
 ) -> Unit {
   html_canvas_element_to_blob_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(_callback),
-    TJsValue::to_js(type_),
+    opt_to_js(type_),
     opt_to_js(quality),
   )
 }

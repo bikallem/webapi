@@ -19,9 +19,9 @@ pub impl FromJsAny for ReadableStreamBYOBReaderReadOptions with from_js_any(
 
 ///|
 pub fn ReadableStreamBYOBReaderReadOptions::new(
-  min? : UInt64 = (1 : UInt64),
+  min? : UInt64,
 ) -> ReadableStreamBYOBReaderReadOptions {
-  readable_stream_byob_reader_read_options_ffi(TJsValue::to_js(min))
+  readable_stream_byob_reader_read_options_ffi(opt_to_js(min))
 }
 
 ///|

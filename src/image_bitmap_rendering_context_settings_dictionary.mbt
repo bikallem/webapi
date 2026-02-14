@@ -19,9 +19,9 @@ pub impl FromJsAny for ImageBitmapRenderingContextSettings with from_js_any(
 
 ///|
 pub fn ImageBitmapRenderingContextSettings::new(
-  alpha? : Bool = true,
+  alpha? : Bool,
 ) -> ImageBitmapRenderingContextSettings {
-  image_bitmap_rendering_context_settings_ffi(TJsValue::to_js(alpha))
+  image_bitmap_rendering_context_settings_ffi(opt_to_js(alpha))
 }
 
 ///|

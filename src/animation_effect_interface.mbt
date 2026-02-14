@@ -43,10 +43,7 @@ impl TAnimationEffect with get_computed_timing(self : Self) -> ComputedEffectTim
 /// [AnimationEffect.updateTiming](https://developer.mozilla.org/en-US/docs/Web/API/AnimationEffect/updateTiming)
 impl TAnimationEffect with update_timing(
   self : Self,
-  timing? : OptionalEffectTiming = OptionalEffectTiming::empty(),
+  timing? : OptionalEffectTiming,
 ) -> Unit {
-  animation_effect_update_timing_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(timing),
-  )
+  animation_effect_update_timing_ffi(TJsValue::to_js(self), opt_to_js(timing))
 }

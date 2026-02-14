@@ -89,13 +89,13 @@ impl TCustomElementRegistry with define_(
   self : Self,
   name : String,
   constructor_ : CustomElementConstructor,
-  options? : ElementDefinitionOptions = ElementDefinitionOptions::empty(),
+  options? : ElementDefinitionOptions,
 ) -> Unit {
   custom_element_registry_define_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
     TJsValue::to_js(constructor_),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

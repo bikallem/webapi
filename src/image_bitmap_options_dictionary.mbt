@@ -15,20 +15,20 @@ pub impl FromJsAny for ImageBitmapOptions with from_js_any(value : JsAny) -> Ima
 
 ///|
 pub fn ImageBitmapOptions::new(
-  image_orientation? : ImageOrientation = ImageOrientation::FromImage,
-  premultiply_alpha? : PremultiplyAlpha = PremultiplyAlpha::Default,
-  color_space_conversion? : ColorSpaceConversion = ColorSpaceConversion::Default,
+  image_orientation? : ImageOrientation,
+  premultiply_alpha? : PremultiplyAlpha,
+  color_space_conversion? : ColorSpaceConversion,
   resize_width? : UInt,
   resize_height? : UInt,
-  resize_quality? : ResizeQuality = ResizeQuality::Low,
+  resize_quality? : ResizeQuality,
 ) -> ImageBitmapOptions {
   image_bitmap_options_ffi(
-    TJsValue::to_js(image_orientation),
-    TJsValue::to_js(premultiply_alpha),
-    TJsValue::to_js(color_space_conversion),
+    opt_to_js(image_orientation),
+    opt_to_js(premultiply_alpha),
+    opt_to_js(color_space_conversion),
     opt_to_js(resize_width),
     opt_to_js(resize_height),
-    TJsValue::to_js(resize_quality),
+    opt_to_js(resize_quality),
   )
 }
 

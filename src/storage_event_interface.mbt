@@ -25,12 +25,9 @@ pub impl TEvent for StorageEvent
 ///|
 pub fn StorageEvent::new(
   type_ : String,
-  event_init_dict? : StorageEventInit = StorageEventInit::empty(),
+  event_init_dict? : StorageEventInit,
 ) -> StorageEvent {
-  storage_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  storage_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -89,23 +86,23 @@ impl TStorageEvent with storage_area(self : Self) -> Storage {
 impl TStorageEvent with init_storage_event(
   self : Self,
   type_ : String,
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
   key? : String,
   old_value? : String,
   new_value? : String,
-  url? : String = "",
+  url? : String,
   storage_area? : &TStorage,
 ) -> Unit {
   storage_event_init_storage_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
     opt_to_js(key),
     opt_to_js(old_value),
     opt_to_js(new_value),
-    TJsValue::to_js(url),
+    opt_to_js(url),
     opt_to_js(storage_area),
   )
 }

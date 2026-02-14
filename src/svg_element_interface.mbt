@@ -1715,11 +1715,8 @@ impl TSVGElement with set_tab_index(self : Self, tab_index : Int) -> Unit {
 
 ///|
 /// [SVGElement.focus](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/focus)
-impl TSVGElement with focus(
-  self : Self,
-  options? : FocusOptions = FocusOptions::empty(),
-) -> Unit {
-  svg_element_focus_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TSVGElement with focus(self : Self, options? : FocusOptions) -> Unit {
+  svg_element_focus_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

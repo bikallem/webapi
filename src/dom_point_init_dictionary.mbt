@@ -15,17 +15,12 @@ pub impl FromJsAny for DOMPointInit with from_js_any(value : JsAny) -> DOMPointI
 
 ///|
 pub fn DOMPointInit::new(
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  z? : Double = (0 : Double),
-  w? : Double = (1 : Double),
+  x? : Double,
+  y? : Double,
+  z? : Double,
+  w? : Double,
 ) -> DOMPointInit {
-  dom_point_init_ffi(
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(z),
-    TJsValue::to_js(w),
-  )
+  dom_point_init_ffi(opt_to_js(x), opt_to_js(y), opt_to_js(z), opt_to_js(w))
 }
 
 ///|

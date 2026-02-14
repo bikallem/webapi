@@ -463,13 +463,13 @@ impl THTMLMediaElement with text_tracks(self : Self) -> TextTrackList {
 impl THTMLMediaElement with add_text_track(
   self : Self,
   kind : TextTrackKind,
-  label? : String = "",
-  language? : String = "",
+  label? : String,
+  language? : String,
 ) -> TextTrack {
   html_media_element_add_text_track_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(kind),
-    TJsValue::to_js(label),
-    TJsValue::to_js(language),
+    opt_to_js(label),
+    opt_to_js(language),
   )
 }

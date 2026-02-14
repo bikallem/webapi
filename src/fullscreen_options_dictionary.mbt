@@ -15,9 +15,9 @@ pub impl FromJsAny for FullscreenOptions with from_js_any(value : JsAny) -> Full
 
 ///|
 pub fn FullscreenOptions::new(
-  navigation_ui? : FullscreenNavigationUI = FullscreenNavigationUI::Auto,
+  navigation_ui? : FullscreenNavigationUI,
 ) -> FullscreenOptions {
-  fullscreen_options_ffi(TJsValue::to_js(navigation_ui))
+  fullscreen_options_ffi(opt_to_js(navigation_ui))
 }
 
 ///|

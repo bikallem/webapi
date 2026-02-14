@@ -14,10 +14,8 @@ pub impl TJsValue for WorkletOptions with to_js(self : WorkletOptions) -> JsValu
 pub impl FromJsAny for WorkletOptions with from_js_any(value : JsAny) -> WorkletOptions = "%identity"
 
 ///|
-pub fn WorkletOptions::new(
-  credentials? : RequestCredentials = RequestCredentials::SameOrigin,
-) -> WorkletOptions {
-  worklet_options_ffi(TJsValue::to_js(credentials))
+pub fn WorkletOptions::new(credentials? : RequestCredentials) -> WorkletOptions {
+  worklet_options_ffi(opt_to_js(credentials))
 }
 
 ///|

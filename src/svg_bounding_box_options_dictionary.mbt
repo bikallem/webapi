@@ -17,16 +17,16 @@ pub impl FromJsAny for SVGBoundingBoxOptions with from_js_any(value : JsAny) -> 
 
 ///|
 pub fn SVGBoundingBoxOptions::new(
-  fill? : Bool = true,
-  stroke? : Bool = false,
-  markers? : Bool = false,
-  clipped? : Bool = false,
+  fill? : Bool,
+  stroke? : Bool,
+  markers? : Bool,
+  clipped? : Bool,
 ) -> SVGBoundingBoxOptions {
   svg_bounding_box_options_ffi(
-    TJsValue::to_js(fill),
-    TJsValue::to_js(stroke),
-    TJsValue::to_js(markers),
-    TJsValue::to_js(clipped),
+    opt_to_js(fill),
+    opt_to_js(stroke),
+    opt_to_js(markers),
+    opt_to_js(clipped),
   )
 }
 

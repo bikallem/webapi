@@ -16,14 +16,10 @@ pub impl FromJsAny for BaseKeyframe with from_js_any(value : JsAny) -> BaseKeyfr
 ///|
 pub fn BaseKeyframe::new(
   offset? : Double,
-  easing? : String = "linear",
-  composite? : CompositeOperationOrAuto = CompositeOperationOrAuto::Auto,
+  easing? : String,
+  composite? : CompositeOperationOrAuto,
 ) -> BaseKeyframe {
-  base_keyframe_ffi(
-    opt_to_js(offset),
-    TJsValue::to_js(easing),
-    TJsValue::to_js(composite),
-  )
+  base_keyframe_ffi(opt_to_js(offset), opt_to_js(easing), opt_to_js(composite))
 }
 
 ///|

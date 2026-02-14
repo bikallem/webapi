@@ -16,9 +16,9 @@ pub impl FromJsAny for ImageDataSettings with from_js_any(value : JsAny) -> Imag
 ///|
 pub fn ImageDataSettings::new(
   color_space? : PredefinedColorSpace,
-  pixel_format? : ImageDataPixelFormat = ImageDataPixelFormat::RgbaUnorm8,
+  pixel_format? : ImageDataPixelFormat,
 ) -> ImageDataSettings {
-  image_data_settings_ffi(opt_to_js(color_space), TJsValue::to_js(pixel_format))
+  image_data_settings_ffi(opt_to_js(color_space), opt_to_js(pixel_format))
 }
 
 ///|

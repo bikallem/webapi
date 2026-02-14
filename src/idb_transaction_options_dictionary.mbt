@@ -17,9 +17,9 @@ pub impl FromJsAny for IDBTransactionOptions with from_js_any(value : JsAny) -> 
 
 ///|
 pub fn IDBTransactionOptions::new(
-  durability? : IDBTransactionDurability = IDBTransactionDurability::Default,
+  durability? : IDBTransactionDurability,
 ) -> IDBTransactionOptions {
-  idb_transaction_options_ffi(TJsValue::to_js(durability))
+  idb_transaction_options_ffi(opt_to_js(durability))
 }
 
 ///|

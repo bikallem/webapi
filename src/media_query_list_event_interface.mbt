@@ -27,11 +27,11 @@ pub impl TEvent for MediaQueryListEvent
 ///|
 pub fn MediaQueryListEvent::new(
   type_ : CSSOMString,
-  event_init_dict? : MediaQueryListEventInit = MediaQueryListEventInit::empty(),
+  event_init_dict? : MediaQueryListEventInit,
 ) -> MediaQueryListEvent {
   media_query_list_event_new_ffi(
     TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
+    opt_to_js(event_init_dict),
   )
 }
 

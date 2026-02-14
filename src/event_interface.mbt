@@ -20,11 +20,8 @@ pub fn[T : TEvent] Event::into(self : Event) -> T = "%identity"
 pub impl TEvent for Event
 
 ///|
-pub fn Event::new(
-  type_ : String,
-  event_init_dict? : EventInit = EventInit::empty(),
-) -> Event {
-  event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+pub fn Event::new(type_ : String, event_init_dict? : EventInit) -> Event {
+  event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -189,13 +186,13 @@ impl TEvent with time_stamp(self : Self) -> DOMHighResTimeStamp {
 impl TEvent with init_event(
   self : Self,
   type_ : String,
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
 ) -> Unit {
   event_init_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
   )
 }

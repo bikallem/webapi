@@ -14,10 +14,8 @@ pub impl TJsValue for EventSourceInit with to_js(self : EventSourceInit) -> JsVa
 pub impl FromJsAny for EventSourceInit with from_js_any(value : JsAny) -> EventSourceInit = "%identity"
 
 ///|
-pub fn EventSourceInit::new(
-  with_credentials? : Bool = false,
-) -> EventSourceInit {
-  event_source_init_ffi(TJsValue::to_js(with_credentials))
+pub fn EventSourceInit::new(with_credentials? : Bool) -> EventSourceInit {
+  event_source_init_ffi(opt_to_js(with_credentials))
 }
 
 ///|

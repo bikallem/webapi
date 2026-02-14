@@ -15,12 +15,9 @@ pub impl FromJsAny for Console with from_js_any(value : JsAny) -> Console = "%id
 
 ///|
 /// [Console.assert](https://developer.mozilla.org/en-US/docs/Web/API/Console/assert)
-pub fn Console::assert_(
-  condition? : Bool = false,
-  data : Array[&TJsValue],
-) -> Unit {
+pub fn Console::assert_(condition? : Bool, data : Array[&TJsValue]) -> Unit {
   console_assert_ffi(
-    TJsValue::to_js(condition),
+    opt_to_js(condition),
     TJsValue::to_js(data.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
@@ -104,14 +101,14 @@ pub fn Console::dirxml(data : Array[&TJsValue]) -> Unit {
 
 ///|
 /// [Console.count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
-pub fn Console::count(label? : String = "default") -> Unit {
-  console_count_ffi(TJsValue::to_js(label))
+pub fn Console::count(label? : String) -> Unit {
+  console_count_ffi(opt_to_js(label))
 }
 
 ///|
 /// [Console.countReset](https://developer.mozilla.org/en-US/docs/Web/API/Console/countReset)
-pub fn Console::count_reset(label? : String = "default") -> Unit {
-  console_count_reset_ffi(TJsValue::to_js(label))
+pub fn Console::count_reset(label? : String) -> Unit {
+  console_count_reset_ffi(opt_to_js(label))
 }
 
 ///|
@@ -138,24 +135,21 @@ pub fn Console::group_end() -> Unit {
 
 ///|
 /// [Console.time](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)
-pub fn Console::time(label? : String = "default") -> Unit {
-  console_time_ffi(TJsValue::to_js(label))
+pub fn Console::time(label? : String) -> Unit {
+  console_time_ffi(opt_to_js(label))
 }
 
 ///|
 /// [Console.timeLog](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeLog)
-pub fn Console::time_log(
-  label? : String = "default",
-  data : Array[&TJsValue],
-) -> Unit {
+pub fn Console::time_log(label? : String, data : Array[&TJsValue]) -> Unit {
   console_time_log_ffi(
-    TJsValue::to_js(label),
+    opt_to_js(label),
     TJsValue::to_js(data.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
 
 ///|
 /// [Console.timeEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)
-pub fn Console::time_end(label? : String = "default") -> Unit {
-  console_time_end_ffi(TJsValue::to_js(label))
+pub fn Console::time_end(label? : String) -> Unit {
+  console_time_end_ffi(opt_to_js(label))
 }

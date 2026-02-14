@@ -26,12 +26,9 @@ pub impl TIntersectionObserver for IntersectionObserver
 ///|
 pub fn IntersectionObserver::new(
   callback : IntersectionObserverCallback,
-  options? : IntersectionObserverInit = IntersectionObserverInit::empty(),
+  options? : IntersectionObserverInit,
 ) -> IntersectionObserver {
-  intersection_observer_new_ffi(
-    TJsValue::to_js(callback),
-    TJsValue::to_js(options),
-  )
+  intersection_observer_new_ffi(TJsValue::to_js(callback), opt_to_js(options))
 }
 
 ///|

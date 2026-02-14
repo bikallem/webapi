@@ -19,16 +19,16 @@ pub impl FromJsAny for NavigationCurrentEntryChangeEventInit with from_js_any(
 
 ///|
 pub fn NavigationCurrentEntryChangeEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   navigation_type? : NavigationType,
   from : &TNavigationHistoryEntry,
 ) -> NavigationCurrentEntryChangeEventInit {
   navigation_current_entry_change_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(navigation_type),
     TJsValue::to_js(from),
   )

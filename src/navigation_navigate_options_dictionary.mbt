@@ -19,12 +19,12 @@ pub impl FromJsAny for NavigationNavigateOptions with from_js_any(value : JsAny)
 pub fn NavigationNavigateOptions::new(
   info? : JsValue,
   state? : JsValue,
-  history? : NavigationHistoryBehavior = NavigationHistoryBehavior::Auto,
+  history? : NavigationHistoryBehavior,
 ) -> NavigationNavigateOptions {
   navigation_navigate_options_ffi(
     opt_to_js(info),
     opt_to_js(state),
-    TJsValue::to_js(history),
+    opt_to_js(history),
   )
 }
 

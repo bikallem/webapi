@@ -15,15 +15,15 @@ pub impl FromJsAny for FormDataEventInit with from_js_any(value : JsAny) -> Form
 
 ///|
 pub fn FormDataEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   form_data : &TFormData,
 ) -> FormDataEventInit {
   form_data_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     TJsValue::to_js(form_data),
   )
 }

@@ -28,9 +28,9 @@ pub impl TEvent for FocusEvent
 ///|
 pub fn FocusEvent::new(
   type_ : String,
-  event_init_dict? : FocusEventInit = FocusEventInit::empty(),
+  event_init_dict? : FocusEventInit,
 ) -> FocusEvent {
-  focus_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  focus_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

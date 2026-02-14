@@ -17,18 +17,18 @@ pub impl FromJsAny for CheckVisibilityOptions with from_js_any(value : JsAny) ->
 
 ///|
 pub fn CheckVisibilityOptions::new(
-  check_opacity? : Bool = false,
-  check_visibility_css? : Bool = false,
-  content_visibility_auto? : Bool = false,
-  opacity_property? : Bool = false,
-  visibility_property? : Bool = false,
+  check_opacity? : Bool,
+  check_visibility_css? : Bool,
+  content_visibility_auto? : Bool,
+  opacity_property? : Bool,
+  visibility_property? : Bool,
 ) -> CheckVisibilityOptions {
   check_visibility_options_ffi(
-    TJsValue::to_js(check_opacity),
-    TJsValue::to_js(check_visibility_css),
-    TJsValue::to_js(content_visibility_auto),
-    TJsValue::to_js(opacity_property),
-    TJsValue::to_js(visibility_property),
+    opt_to_js(check_opacity),
+    opt_to_js(check_visibility_css),
+    opt_to_js(content_visibility_auto),
+    opt_to_js(opacity_property),
+    opt_to_js(visibility_property),
   )
 }
 

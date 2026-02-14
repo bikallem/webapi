@@ -23,11 +23,8 @@ pub impl TUIEvent for UIEvent
 pub impl TEvent for UIEvent
 
 ///|
-pub fn UIEvent::new(
-  type_ : String,
-  event_init_dict? : UIEventInit = UIEventInit::empty(),
-) -> UIEvent {
-  ui_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+pub fn UIEvent::new(type_ : String, event_init_dict? : UIEventInit) -> UIEvent {
+  ui_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -63,18 +60,18 @@ impl TUIEvent with detail(self : Self) -> Int {
 impl TUIEvent with init_ui_event(
   self : Self,
   type_arg : String,
-  bubbles_arg? : Bool = false,
-  cancelable_arg? : Bool = false,
+  bubbles_arg? : Bool,
+  cancelable_arg? : Bool,
   view_arg? : &TWindow,
-  detail_arg? : Int = (0 : Int),
+  detail_arg? : Int,
 ) -> Unit {
   ui_event_init_ui_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
-    TJsValue::to_js(bubbles_arg),
-    TJsValue::to_js(cancelable_arg),
+    opt_to_js(bubbles_arg),
+    opt_to_js(cancelable_arg),
     opt_to_js(view_arg),
-    TJsValue::to_js(detail_arg),
+    opt_to_js(detail_arg),
   )
 }
 

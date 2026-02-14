@@ -15,15 +15,15 @@ pub impl FromJsAny for StreamPipeOptions with from_js_any(value : JsAny) -> Stre
 
 ///|
 pub fn StreamPipeOptions::new(
-  prevent_close? : Bool = false,
-  prevent_abort? : Bool = false,
-  prevent_cancel? : Bool = false,
+  prevent_close? : Bool,
+  prevent_abort? : Bool,
+  prevent_cancel? : Bool,
   signal? : &TAbortSignal,
 ) -> StreamPipeOptions {
   stream_pipe_options_ffi(
-    TJsValue::to_js(prevent_close),
-    TJsValue::to_js(prevent_abort),
-    TJsValue::to_js(prevent_cancel),
+    opt_to_js(prevent_close),
+    opt_to_js(prevent_abort),
+    opt_to_js(prevent_cancel),
     opt_to_js(signal),
   )
 }

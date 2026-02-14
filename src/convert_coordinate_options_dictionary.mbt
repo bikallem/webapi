@@ -17,13 +17,10 @@ pub impl FromJsAny for ConvertCoordinateOptions with from_js_any(value : JsAny) 
 
 ///|
 pub fn ConvertCoordinateOptions::new(
-  from_box? : CSSBoxType = CSSBoxType::Border,
-  to_box? : CSSBoxType = CSSBoxType::Border,
+  from_box? : CSSBoxType,
+  to_box? : CSSBoxType,
 ) -> ConvertCoordinateOptions {
-  convert_coordinate_options_ffi(
-    TJsValue::to_js(from_box),
-    TJsValue::to_js(to_box),
-  )
+  convert_coordinate_options_ffi(opt_to_js(from_box), opt_to_js(to_box))
 }
 
 ///|

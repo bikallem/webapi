@@ -15,28 +15,28 @@ pub impl FromJsAny for ValidityStateFlags with from_js_any(value : JsAny) -> Val
 
 ///|
 pub fn ValidityStateFlags::new(
-  value_missing? : Bool = false,
-  type_mismatch? : Bool = false,
-  pattern_mismatch? : Bool = false,
-  too_long? : Bool = false,
-  too_short? : Bool = false,
-  range_underflow? : Bool = false,
-  range_overflow? : Bool = false,
-  step_mismatch? : Bool = false,
-  bad_input? : Bool = false,
-  custom_error? : Bool = false,
+  value_missing? : Bool,
+  type_mismatch? : Bool,
+  pattern_mismatch? : Bool,
+  too_long? : Bool,
+  too_short? : Bool,
+  range_underflow? : Bool,
+  range_overflow? : Bool,
+  step_mismatch? : Bool,
+  bad_input? : Bool,
+  custom_error? : Bool,
 ) -> ValidityStateFlags {
   validity_state_flags_ffi(
-    TJsValue::to_js(value_missing),
-    TJsValue::to_js(type_mismatch),
-    TJsValue::to_js(pattern_mismatch),
-    TJsValue::to_js(too_long),
-    TJsValue::to_js(too_short),
-    TJsValue::to_js(range_underflow),
-    TJsValue::to_js(range_overflow),
-    TJsValue::to_js(step_mismatch),
-    TJsValue::to_js(bad_input),
-    TJsValue::to_js(custom_error),
+    opt_to_js(value_missing),
+    opt_to_js(type_mismatch),
+    opt_to_js(pattern_mismatch),
+    opt_to_js(too_long),
+    opt_to_js(too_short),
+    opt_to_js(range_underflow),
+    opt_to_js(range_overflow),
+    opt_to_js(step_mismatch),
+    opt_to_js(bad_input),
+    opt_to_js(custom_error),
   )
 }
 

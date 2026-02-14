@@ -19,9 +19,9 @@ pub impl FromJsAny for CaretPositionFromPointOptions with from_js_any(
 
 ///|
 pub fn CaretPositionFromPointOptions::new(
-  shadow_roots? : Array[ShadowRoot] = [],
+  shadow_roots? : Array[ShadowRoot],
 ) -> CaretPositionFromPointOptions {
-  caret_position_from_point_options_ffi(TJsValue::to_js(shadow_roots))
+  caret_position_from_point_options_ffi(opt_to_js(shadow_roots))
 }
 
 ///|
