@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <title>Streams Example (wasm-gc)</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { wasmImportObject } from "../../src/webapi.mjs";
+        wasmImportObject.streams_helpers = {
+            createCountingStream: () => {
+                let i = 0;
+                return new ReadableStream({
+                    pull(controller) {
+                        if (i < 4) {
+                            controller.enqueue("Chunk " + (++i));
+                        } else {
+                            controller.close();
+                        }
+                    }
+                });
+            },
+            readResultDone: (r) => r.done,
+            readResultValue: (r) => '' + r.value
+        };
+        const { instance } = await WebAssembly.instantiateStreaming(
+            fetch("../_build/wasm-gc/release/build/streams/streams.wasm"),
+            wasmImportObject,
+            { builtins: ["js-string"], importedStringConstants: "_" }
+        );
+        instance.exports._start();
+    </script>
+</body>
+</html>

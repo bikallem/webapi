@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <title>Web Animations Example (wasm-gc)</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { wasmImportObject } from "../../src/webapi.mjs";
+        wasmImportObject.webanimations_helpers = {
+            createKeyframes: () => [
+                { transform: 'translateX(0px) rotate(0deg)', backgroundColor: '#3b82f6' },
+                { transform: 'translateX(250px) rotate(180deg)', backgroundColor: '#ef4444' },
+                { transform: 'translateX(0px) rotate(360deg)', backgroundColor: '#3b82f6' }
+            ],
+            createAnimationOptions: () => ({ duration: 2000, iterations: Infinity }),
+            animateElement: (el, kf, opts) => el.animate(kf, opts)
+        };
+        const { instance } = await WebAssembly.instantiateStreaming(
+            fetch("../_build/wasm-gc/release/build/web-animations/web-animations.wasm"),
+            wasmImportObject,
+            { builtins: ["js-string"], importedStringConstants: "_" }
+        );
+        instance.exports._start();
+    </script>
+</body>
+</html>

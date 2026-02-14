@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <title>IndexedDB Example (wasm-gc)</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { wasmImportObject } from "../../src/webapi.mjs";
+        wasmImportObject.indexeddb_helpers = {
+            jsValueToString: (v) => '' + v,
+            isNullOrUndefined: (v) => v == null
+        };
+        const { instance } = await WebAssembly.instantiateStreaming(
+            fetch("../_build/wasm-gc/release/build/indexeddb/indexeddb.wasm"),
+            wasmImportObject,
+            { builtins: ["js-string"], importedStringConstants: "_" }
+        );
+        instance.exports._start();
+    </script>
+</body>
+</html>
