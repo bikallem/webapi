@@ -254,7 +254,7 @@ fn emit_constructor(
 }
 
 ///|
-/// Emit union return type support (External, ImplTJsValue, ImplFromJsAny, IntoMethod, IsUndefinedMethod, UnionArgTraitImpl).
+/// Emit union return type support (External, ImplTJsValue, ImplFromJsAny, UnionIntoMethod, FromMethod, IsUndefinedMethod, UnionArgTraitImpl).
 fn emit_union_return_type(
   return_type : @type_mapping.ArgMbtType,
   emits : Array[Emit],
