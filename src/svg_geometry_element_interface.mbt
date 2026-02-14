@@ -11,6 +11,9 @@ pub type SVGGeometryElement
 pub impl TJsValue for SVGGeometryElement with to_js(self : SVGGeometryElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGGeometryElement with from_js_any(value : JsAny) -> SVGGeometryElement = "%identity"
+
+///|
 pub fn[T : TSVGGeometryElement] SVGGeometryElement::into(
   self : SVGGeometryElement,
 ) -> T = "%identity"

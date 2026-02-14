@@ -51,3 +51,8 @@ pub fn WorkerType::value(self : WorkerType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for WorkerType with from_js_any(value : JsAny) -> WorkerType {
+  WorkerType::from_unchecked(value)
+}

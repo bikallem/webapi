@@ -11,6 +11,9 @@ pub type WorkletOptions
 pub impl TJsValue for WorkletOptions with to_js(self : WorkletOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WorkletOptions with from_js_any(value : JsAny) -> WorkletOptions = "%identity"
+
+///|
 pub fn WorkletOptions::new(
   credentials? : RequestCredentials = RequestCredentials::SameOrigin,
 ) -> WorkletOptions {

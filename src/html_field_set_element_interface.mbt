@@ -11,6 +11,9 @@ pub type HTMLFieldSetElement
 pub impl TJsValue for HTMLFieldSetElement with to_js(self : HTMLFieldSetElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLFieldSetElement with from_js_any(value : JsAny) -> HTMLFieldSetElement = "%identity"
+
+///|
 pub fn[T : THTMLFieldSetElement] HTMLFieldSetElement::into(
   self : HTMLFieldSetElement,
 ) -> T = "%identity"

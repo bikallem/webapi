@@ -11,6 +11,9 @@ pub type FilePropertyBag
 pub impl TJsValue for FilePropertyBag with to_js(self : FilePropertyBag) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FilePropertyBag with from_js_any(value : JsAny) -> FilePropertyBag = "%identity"
+
+///|
 pub fn FilePropertyBag::new(
   type_? : String = "",
   endings? : EndingType = EndingType::Transparent,

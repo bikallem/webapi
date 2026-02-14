@@ -11,6 +11,9 @@ pub type EventInit
 pub impl TJsValue for EventInit with to_js(self : EventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for EventInit with from_js_any(value : JsAny) -> EventInit = "%identity"
+
+///|
 pub fn EventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

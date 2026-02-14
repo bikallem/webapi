@@ -11,6 +11,9 @@ pub type HTMLLIElement
 pub impl TJsValue for HTMLLIElement with to_js(self : HTMLLIElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLLIElement with from_js_any(value : JsAny) -> HTMLLIElement = "%identity"
+
+///|
 pub fn[T : THTMLLIElement] HTMLLIElement::into(self : HTMLLIElement) -> T = "%identity"
 
 ///|

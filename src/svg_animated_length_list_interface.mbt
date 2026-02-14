@@ -13,6 +13,9 @@ pub impl TJsValue for SVGAnimatedLengthList with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedLengthList with from_js_any(value : JsAny) -> SVGAnimatedLengthList = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedLengthList] SVGAnimatedLengthList::into(
   self : SVGAnimatedLengthList,
 ) -> T = "%identity"

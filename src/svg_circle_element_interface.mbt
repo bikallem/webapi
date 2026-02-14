@@ -11,6 +11,9 @@ pub type SVGCircleElement
 pub impl TJsValue for SVGCircleElement with to_js(self : SVGCircleElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGCircleElement with from_js_any(value : JsAny) -> SVGCircleElement = "%identity"
+
+///|
 pub fn[T : TSVGCircleElement] SVGCircleElement::into(
   self : SVGCircleElement,
 ) -> T = "%identity"

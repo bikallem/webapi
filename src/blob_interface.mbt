@@ -11,6 +11,9 @@ pub type Blob
 pub impl TJsValue for Blob with to_js(self : Blob) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Blob with from_js_any(value : JsAny) -> Blob = "%identity"
+
+///|
 pub fn[T : TBlob] Blob::into(self : Blob) -> T = "%identity"
 
 ///|

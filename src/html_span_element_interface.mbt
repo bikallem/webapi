@@ -11,6 +11,9 @@ pub type HTMLSpanElement
 pub impl TJsValue for HTMLSpanElement with to_js(self : HTMLSpanElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLSpanElement with from_js_any(value : JsAny) -> HTMLSpanElement = "%identity"
+
+///|
 pub fn[T : THTMLSpanElement] HTMLSpanElement::into(self : HTMLSpanElement) -> T = "%identity"
 
 ///|

@@ -11,11 +11,14 @@ pub type DragEventInit
 pub impl TJsValue for DragEventInit with to_js(self : DragEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DragEventInit with from_js_any(value : JsAny) -> DragEventInit = "%identity"
+
+///|
 pub fn DragEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  view? : &TWindow = JsValue::null(),
+  view? : &TWindow,
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
@@ -38,14 +41,14 @@ pub fn DragEventInit::new(
   client_y? : Int = (0 : Int),
   button? : Int = (0 : Int),
   buttons? : UInt = (0 : UInt),
-  related_target? : &TEventTarget = JsValue::null(),
-  data_transfer? : &TDataTransfer = JsValue::null(),
+  related_target? : &TEventTarget,
+  data_transfer? : &TDataTransfer,
 ) -> DragEventInit {
   drag_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(view),
+    opt_to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),
     TJsValue::to_js(ctrl_key),
@@ -68,8 +71,8 @@ pub fn DragEventInit::new(
     TJsValue::to_js(client_y),
     TJsValue::to_js(button),
     TJsValue::to_js(buttons),
-    TJsValue::to_js(related_target),
-    TJsValue::to_js(data_transfer),
+    opt_to_js(related_target),
+    opt_to_js(data_transfer),
   )
 }
 

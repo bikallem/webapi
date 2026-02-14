@@ -11,6 +11,9 @@ pub type BeforeUnloadEvent
 pub impl TJsValue for BeforeUnloadEvent with to_js(self : BeforeUnloadEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BeforeUnloadEvent with from_js_any(value : JsAny) -> BeforeUnloadEvent = "%identity"
+
+///|
 pub fn[T : TBeforeUnloadEvent] BeforeUnloadEvent::into(
   self : BeforeUnloadEvent,
 ) -> T = "%identity"

@@ -11,13 +11,16 @@ pub type ToggleEventInit
 pub impl TJsValue for ToggleEventInit with to_js(self : ToggleEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ToggleEventInit with from_js_any(value : JsAny) -> ToggleEventInit = "%identity"
+
+///|
 pub fn ToggleEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
   old_state? : String = "",
   new_state? : String = "",
-  source? : &TElement = JsValue::null(),
+  source? : &TElement,
 ) -> ToggleEventInit {
   toggle_event_init_ffi(
     TJsValue::to_js(bubbles),
@@ -25,7 +28,7 @@ pub fn ToggleEventInit::new(
     TJsValue::to_js(composed),
     TJsValue::to_js(old_state),
     TJsValue::to_js(new_state),
-    TJsValue::to_js(source),
+    opt_to_js(source),
   )
 }
 

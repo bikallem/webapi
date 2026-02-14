@@ -11,6 +11,9 @@ pub type AudioTrack
 pub impl TJsValue for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for AudioTrack with from_js_any(value : JsAny) -> AudioTrack = "%identity"
+
+///|
 pub fn[T : TAudioTrack] AudioTrack::into(self : AudioTrack) -> T = "%identity"
 
 ///|

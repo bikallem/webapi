@@ -11,6 +11,9 @@ pub type AudioTrackList
 pub impl TJsValue for AudioTrackList with to_js(self : AudioTrackList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for AudioTrackList with from_js_any(value : JsAny) -> AudioTrackList = "%identity"
+
+///|
 pub fn[T : TAudioTrackList] AudioTrackList::into(self : AudioTrackList) -> T = "%identity"
 
 ///|

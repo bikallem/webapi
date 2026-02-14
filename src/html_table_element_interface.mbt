@@ -11,6 +11,9 @@ pub type HTMLTableElement
 pub impl TJsValue for HTMLTableElement with to_js(self : HTMLTableElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTableElement with from_js_any(value : JsAny) -> HTMLTableElement = "%identity"
+
+///|
 pub fn[T : THTMLTableElement] HTMLTableElement::into(
   self : HTMLTableElement,
 ) -> T = "%identity"

@@ -11,6 +11,9 @@ pub type ImageData
 pub impl TJsValue for ImageData with to_js(self : ImageData) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageData with from_js_any(value : JsAny) -> ImageData = "%identity"
+
+///|
 pub fn[T : TImageData] ImageData::into(self : ImageData) -> T = "%identity"
 
 ///|

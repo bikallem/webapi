@@ -13,6 +13,9 @@ pub impl TJsValue for CreateScriptURLCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CreateScriptURLCallback with from_js_any(value : JsAny) -> CreateScriptURLCallback = "%identity"
+
+///|
 pub fn CreateScriptURLCallback::new(
   callback : (String, JsValue) -> String,
 ) -> CreateScriptURLCallback {

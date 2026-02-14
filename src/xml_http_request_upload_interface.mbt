@@ -13,6 +13,9 @@ pub impl TJsValue for XMLHttpRequestUpload with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XMLHttpRequestUpload with from_js_any(value : JsAny) -> XMLHttpRequestUpload = "%identity"
+
+///|
 pub fn[T : TXMLHttpRequestUpload] XMLHttpRequestUpload::into(
   self : XMLHttpRequestUpload,
 ) -> T = "%identity"

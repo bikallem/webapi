@@ -11,6 +11,9 @@ pub type PageTransitionEvent
 pub impl TJsValue for PageTransitionEvent with to_js(self : PageTransitionEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PageTransitionEvent with from_js_any(value : JsAny) -> PageTransitionEvent = "%identity"
+
+///|
 pub fn[T : TPageTransitionEvent] PageTransitionEvent::into(
   self : PageTransitionEvent,
 ) -> T = "%identity"

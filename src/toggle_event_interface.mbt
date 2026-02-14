@@ -11,6 +11,9 @@ pub type ToggleEvent
 pub impl TJsValue for ToggleEvent with to_js(self : ToggleEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ToggleEvent with from_js_any(value : JsAny) -> ToggleEvent = "%identity"
+
+///|
 pub fn[T : TToggleEvent] ToggleEvent::into(self : ToggleEvent) -> T = "%identity"
 
 ///|

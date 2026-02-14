@@ -13,6 +13,11 @@ pub impl TJsValue for IntersectionObserverCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for IntersectionObserverCallback with from_js_any(
+  value : JsAny,
+) -> IntersectionObserverCallback = "%identity"
+
+///|
 pub fn IntersectionObserverCallback::new(
   callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit,
 ) -> IntersectionObserverCallback {

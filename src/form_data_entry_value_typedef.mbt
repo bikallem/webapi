@@ -11,6 +11,9 @@ pub type FormDataEntryValue
 pub impl TJsValue for FormDataEntryValue with to_js(self : FormDataEntryValue) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FormDataEntryValue with from_js_any(value : JsAny) -> FormDataEntryValue = "%identity"
+
+///|
 pub(open) trait TFormDataEntryValue {
   to_js(self : Self) -> JsValue
 }

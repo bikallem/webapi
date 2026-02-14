@@ -11,6 +11,9 @@ pub type HTMLTimeElement
 pub impl TJsValue for HTMLTimeElement with to_js(self : HTMLTimeElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTimeElement with from_js_any(value : JsAny) -> HTMLTimeElement = "%identity"
+
+///|
 pub fn[T : THTMLTimeElement] HTMLTimeElement::into(self : HTMLTimeElement) -> T = "%identity"
 
 ///|

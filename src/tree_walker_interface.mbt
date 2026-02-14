@@ -11,6 +11,9 @@ pub type TreeWalker
 pub impl TJsValue for TreeWalker with to_js(self : TreeWalker) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TreeWalker with from_js_any(value : JsAny) -> TreeWalker = "%identity"
+
+///|
 pub fn[T : TTreeWalker] TreeWalker::into(self : TreeWalker) -> T = "%identity"
 
 ///|

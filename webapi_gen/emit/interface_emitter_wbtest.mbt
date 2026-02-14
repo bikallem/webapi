@@ -103,6 +103,8 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|pub impl TJsValue for EventTarget with to_js(self: EventTarget) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for EventTarget with from_js_any(value : JsAny) -> EventTarget = "%identity"
+      #|
       #|pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
       #|
       #|pub impl TEventTarget for EventTarget
@@ -175,6 +177,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|  event_target_dispatch_event_ffi_js(obj, event).unsafe_cast()
       #|}
 
+
     ),
   )
 }
@@ -212,6 +215,8 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|pub type TestInterface
       #|
       #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
       #|
@@ -258,6 +263,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|  test_interface_test_method_ffi_js(obj, param).unsafe_cast()
       #|}
 
+
     ),
   )
 }
@@ -296,6 +302,8 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
       #|
       #|pub impl TTestInterface for TestInterface
@@ -332,6 +340,7 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|fn test_interface_test_method_ffi(obj: JsValue) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi_js(obj).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -371,6 +380,8 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|
       #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
       #|
       #|pub impl TTestInterface for TestInterface
@@ -385,6 +396,7 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|}
       #|
       #|
+
     ),
   )
 }
@@ -424,6 +436,8 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|
       #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
       #|
       #|pub impl TTestInterface for TestInterface
@@ -452,6 +466,7 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|fn test_interface_name_ffi(obj: JsValue) -> String {
       #|  test_interface_name_ffi_js(obj).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -490,6 +505,8 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|
       #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
       #|
       #|pub impl TTestInterface for TestInterface
@@ -519,6 +536,7 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|}
       #|
       #|extern "js" fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+
     ),
   )
 }
@@ -561,6 +579,8 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|
       #|pub impl TJsValue for ParentInterface with to_js(self: ParentInterface) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for ParentInterface with from_js_any(value : JsAny) -> ParentInterface = "%identity"
+      #|
       #|pub fn[T: TParentInterface] ParentInterface::into(self : ParentInterface) -> T = "%identity"
       #|
       #|pub impl TParentInterface for ParentInterface
@@ -581,6 +601,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|fn parent_interface_last_name_ffi(obj: JsValue) -> String {
       #|  parent_interface_last_name_ffi_js(obj).unsafe_cast()
       #|}
+
     ),
   )
   let (_, emits) = interface_emitter.emit("ChildInterface")
@@ -597,6 +618,8 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|pub type ChildInterface
       #|
       #|pub impl TJsValue for ChildInterface with to_js(self: ChildInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for ChildInterface with from_js_any(value : JsAny) -> ChildInterface = "%identity"
       #|
       #|pub fn[T: TChildInterface] ChildInterface::into(self : ChildInterface) -> T = "%identity"
       #|
@@ -629,6 +652,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|}
       #|
       #|extern "js" fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+
     ),
   )
 }
@@ -667,6 +691,8 @@ test "InterfaceEmitter emits static methods" {
       #|
       #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
       #|
       #|pub impl TTestInterface for TestInterface
@@ -688,6 +714,7 @@ test "InterfaceEmitter emits static methods" {
       #|fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response {
       #|  test_interface_redirect_ffi_js(url, status).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -726,6 +753,8 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|
       #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
       #|
       #|pub impl TTestInterface for TestInterface
@@ -746,6 +775,7 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|fn test_interface_app_name_ffi() -> String {
       #|  test_interface_app_name_ffi_js().unsafe_cast()
       #|}
+
     ),
   )
 }

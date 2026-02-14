@@ -11,6 +11,9 @@ pub type DOMImplementation
 pub impl TJsValue for DOMImplementation with to_js(self : DOMImplementation) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMImplementation with from_js_any(value : JsAny) -> DOMImplementation = "%identity"
+
+///|
 pub fn[T : TDOMImplementation] DOMImplementation::into(
   self : DOMImplementation,
 ) -> T = "%identity"
@@ -59,13 +62,13 @@ impl TDOMImplementation with create_document(
   self : Self,
   namespace_ : String,
   qualified_name : String,
-  doctype? : &TDocumentType = JsValue::null(),
+  doctype? : &TDocumentType,
 ) -> XMLDocument {
   dom_implementation_create_document_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
     TJsValue::to_js(qualified_name),
-    TJsValue::to_js(doctype),
+    opt_to_js(doctype),
   )
 }
 

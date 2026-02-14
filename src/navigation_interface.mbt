@@ -11,6 +11,9 @@ pub type Navigation
 pub impl TJsValue for Navigation with to_js(self : Navigation) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Navigation with from_js_any(value : JsAny) -> Navigation = "%identity"
+
+///|
 pub fn[T : TNavigation] Navigation::into(self : Navigation) -> T = "%identity"
 
 ///|

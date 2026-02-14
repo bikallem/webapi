@@ -11,6 +11,9 @@ pub type HTMLOptionElement
 pub impl TJsValue for HTMLOptionElement with to_js(self : HTMLOptionElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLOptionElement with from_js_any(value : JsAny) -> HTMLOptionElement = "%identity"
+
+///|
 pub fn[T : THTMLOptionElement] HTMLOptionElement::into(
   self : HTMLOptionElement,
 ) -> T = "%identity"

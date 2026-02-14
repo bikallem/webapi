@@ -11,6 +11,9 @@ pub type NodeIterator
 pub impl TJsValue for NodeIterator with to_js(self : NodeIterator) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NodeIterator with from_js_any(value : JsAny) -> NodeIterator = "%identity"
+
+///|
 pub fn[T : TNodeIterator] NodeIterator::into(self : NodeIterator) -> T = "%identity"
 
 ///|

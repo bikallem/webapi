@@ -11,6 +11,9 @@ pub type SVGAnimatedInteger
 pub impl TJsValue for SVGAnimatedInteger with to_js(self : SVGAnimatedInteger) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedInteger with from_js_any(value : JsAny) -> SVGAnimatedInteger = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedInteger] SVGAnimatedInteger::into(
   self : SVGAnimatedInteger,
 ) -> T = "%identity"

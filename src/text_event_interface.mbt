@@ -11,6 +11,9 @@ pub type TextEvent
 pub impl TJsValue for TextEvent with to_js(self : TextEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextEvent with from_js_any(value : JsAny) -> TextEvent = "%identity"
+
+///|
 pub fn[T : TTextEvent] TextEvent::into(self : TextEvent) -> T = "%identity"
 
 ///|
@@ -49,7 +52,7 @@ impl TTextEvent with init_text_event(
   type_ : String,
   bubbles? : Bool = false,
   cancelable? : Bool = false,
-  view? : &TWindow = JsValue::null(),
+  view? : &TWindow,
   data? : String = "undefined",
 ) -> Unit {
   text_event_init_text_event_ffi(
@@ -57,7 +60,7 @@ impl TTextEvent with init_text_event(
     TJsValue::to_js(type_),
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
-    TJsValue::to_js(view),
+    opt_to_js(view),
     TJsValue::to_js(data),
   )
 }

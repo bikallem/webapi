@@ -5,3 +5,6 @@
 ///|
 #external
 pub type JsArray
+
+///|
+pub impl FromJsAny for JsArray with from_js_any(value : JsAny) -> JsArray = "%identity"

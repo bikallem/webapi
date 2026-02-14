@@ -11,6 +11,9 @@ pub type HTMLBodyElement
 pub impl TJsValue for HTMLBodyElement with to_js(self : HTMLBodyElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLBodyElement with from_js_any(value : JsAny) -> HTMLBodyElement = "%identity"
+
+///|
 pub fn[T : THTMLBodyElement] HTMLBodyElement::into(self : HTMLBodyElement) -> T = "%identity"
 
 ///|

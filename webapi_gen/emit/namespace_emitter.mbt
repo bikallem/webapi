@@ -17,7 +17,8 @@ pub impl Emitter for NamespaceEmitter with emit(
   emits
   ..push(Emit::FileHeader(TypeName(mbt_name), Specs(ns.specs)))
   ..push(Emit::External(mbt_name))
-  .push(Emit::ImplTJsValue(mbt_name))
+  ..push(Emit::ImplTJsValue(mbt_name))
+  .push(Emit::ImplFromJsAny(mbt_name))
   let namespace_methods : Array[&InterfaceMethodEmit] = []
   let method_counter : Map[String, Int] = {}
   let used_method_names = @hashset.new()

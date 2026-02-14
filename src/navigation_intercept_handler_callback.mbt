@@ -13,6 +13,11 @@ pub impl TJsValue for NavigationInterceptHandler with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationInterceptHandler with from_js_any(
+  value : JsAny,
+) -> NavigationInterceptHandler = "%identity"
+
+///|
 pub fn NavigationInterceptHandler::new(
   callback : () -> JsPromise[JsValue],
 ) -> NavigationInterceptHandler {

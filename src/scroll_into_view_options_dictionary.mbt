@@ -13,6 +13,9 @@ pub impl TJsValue for ScrollIntoViewOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ScrollIntoViewOptions with from_js_any(value : JsAny) -> ScrollIntoViewOptions = "%identity"
+
+///|
 pub fn ScrollIntoViewOptions::new(
   behavior? : ScrollBehavior = ScrollBehavior::Auto,
   block? : ScrollLogicalPosition = ScrollLogicalPosition::Start,

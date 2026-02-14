@@ -11,6 +11,9 @@ pub type Performance
 pub impl TJsValue for Performance with to_js(self : Performance) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Performance with from_js_any(value : JsAny) -> Performance = "%identity"
+
+///|
 pub fn[T : TPerformance] Performance::into(self : Performance) -> T = "%identity"
 
 ///|

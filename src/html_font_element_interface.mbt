@@ -11,6 +11,9 @@ pub type HTMLFontElement
 pub impl TJsValue for HTMLFontElement with to_js(self : HTMLFontElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLFontElement with from_js_any(value : JsAny) -> HTMLFontElement = "%identity"
+
+///|
 pub fn[T : THTMLFontElement] HTMLFontElement::into(self : HTMLFontElement) -> T = "%identity"
 
 ///|

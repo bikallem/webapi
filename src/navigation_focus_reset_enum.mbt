@@ -58,3 +58,8 @@ pub fn NavigationFocusReset::value(self : NavigationFocusReset) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for NavigationFocusReset with from_js_any(value : JsAny) -> NavigationFocusReset {
+  NavigationFocusReset::from_unchecked(value)
+}

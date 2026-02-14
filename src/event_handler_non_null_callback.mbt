@@ -11,6 +11,9 @@ pub type EventHandlerNonNull
 pub impl TJsValue for EventHandlerNonNull with to_js(self : EventHandlerNonNull) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for EventHandlerNonNull with from_js_any(value : JsAny) -> EventHandlerNonNull = "%identity"
+
+///|
 pub fn EventHandlerNonNull::new(
   callback : (Event) -> JsValue,
 ) -> EventHandlerNonNull {

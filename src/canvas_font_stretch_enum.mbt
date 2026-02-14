@@ -96,3 +96,8 @@ pub fn CanvasFontStretch::value(self : CanvasFontStretch) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasFontStretch with from_js_any(value : JsAny) -> CanvasFontStretch {
+  CanvasFontStretch::from_unchecked(value)
+}

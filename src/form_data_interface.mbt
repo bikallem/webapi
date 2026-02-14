@@ -11,6 +11,9 @@ pub type FormData
 pub impl TJsValue for FormData with to_js(self : FormData) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FormData with from_js_any(value : JsAny) -> FormData = "%identity"
+
+///|
 pub fn[T : TFormData] FormData::into(self : FormData) -> T = "%identity"
 
 ///|
@@ -19,9 +22,9 @@ pub impl TFormData for FormData
 ///|
 pub fn FormData::new(
   form? : &THTMLFormElement,
-  submitter? : &THTMLElement = JsValue::null(),
+  submitter? : &THTMLElement,
 ) -> FormData {
-  form_data_new_ffi(opt_to_js(form), TJsValue::to_js(submitter))
+  form_data_new_ffi(opt_to_js(form), opt_to_js(submitter))
 }
 
 ///|

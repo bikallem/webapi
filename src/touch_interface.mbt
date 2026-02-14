@@ -11,6 +11,9 @@ pub type Touch
 pub impl TJsValue for Touch with to_js(self : Touch) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Touch with from_js_any(value : JsAny) -> Touch = "%identity"
+
+///|
 pub fn[T : TTouch] Touch::into(self : Touch) -> T = "%identity"
 
 ///|

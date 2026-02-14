@@ -11,6 +11,9 @@ pub type EventSourceInit
 pub impl TJsValue for EventSourceInit with to_js(self : EventSourceInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for EventSourceInit with from_js_any(value : JsAny) -> EventSourceInit = "%identity"
+
+///|
 pub fn EventSourceInit::new(
   with_credentials? : Bool = false,
 ) -> EventSourceInit {

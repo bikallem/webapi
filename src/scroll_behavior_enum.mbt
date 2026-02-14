@@ -60,3 +60,8 @@ pub fn ScrollBehavior::value(self : ScrollBehavior) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ScrollBehavior with from_js_any(value : JsAny) -> ScrollBehavior {
+  ScrollBehavior::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type DOMRectReadOnly
 pub impl TJsValue for DOMRectReadOnly with to_js(self : DOMRectReadOnly) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMRectReadOnly with from_js_any(value : JsAny) -> DOMRectReadOnly = "%identity"
+
+///|
 pub fn[T : TDOMRectReadOnly] DOMRectReadOnly::into(self : DOMRectReadOnly) -> T = "%identity"
 
 ///|

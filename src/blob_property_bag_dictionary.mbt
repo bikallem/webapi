@@ -11,6 +11,9 @@ pub type BlobPropertyBag
 pub impl TJsValue for BlobPropertyBag with to_js(self : BlobPropertyBag) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BlobPropertyBag with from_js_any(value : JsAny) -> BlobPropertyBag = "%identity"
+
+///|
 pub fn BlobPropertyBag::new(
   type_? : String = "",
   endings? : EndingType = EndingType::Transparent,

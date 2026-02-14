@@ -11,6 +11,9 @@ pub type TextEncoderStream
 pub impl TJsValue for TextEncoderStream with to_js(self : TextEncoderStream) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextEncoderStream with from_js_any(value : JsAny) -> TextEncoderStream = "%identity"
+
+///|
 pub fn[T : TTextEncoderStream] TextEncoderStream::into(
   self : TextEncoderStream,
 ) -> T = "%identity"

@@ -13,6 +13,9 @@ pub impl TJsValue for PerformanceObserverInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PerformanceObserverInit with from_js_any(value : JsAny) -> PerformanceObserverInit = "%identity"
+
+///|
 pub fn PerformanceObserverInit::new(
   entry_types? : Array[String],
   type_? : String,

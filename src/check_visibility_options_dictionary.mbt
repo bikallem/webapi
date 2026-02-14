@@ -13,6 +13,9 @@ pub impl TJsValue for CheckVisibilityOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CheckVisibilityOptions with from_js_any(value : JsAny) -> CheckVisibilityOptions = "%identity"
+
+///|
 pub fn CheckVisibilityOptions::new(
   check_opacity? : Bool = false,
   check_visibility_css? : Bool = false,

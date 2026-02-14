@@ -60,3 +60,8 @@ pub fn RequestPriority::value(self : RequestPriority) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for RequestPriority with from_js_any(value : JsAny) -> RequestPriority {
+  RequestPriority::from_unchecked(value)
+}

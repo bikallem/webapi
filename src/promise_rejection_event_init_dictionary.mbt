@@ -13,6 +13,9 @@ pub impl TJsValue for PromiseRejectionEventInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PromiseRejectionEventInit with from_js_any(value : JsAny) -> PromiseRejectionEventInit = "%identity"
+
+///|
 pub fn PromiseRejectionEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

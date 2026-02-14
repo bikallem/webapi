@@ -11,6 +11,9 @@ pub type CharacterData
 pub impl TJsValue for CharacterData with to_js(self : CharacterData) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CharacterData with from_js_any(value : JsAny) -> CharacterData = "%identity"
+
+///|
 pub fn[T : TCharacterData] CharacterData::into(self : CharacterData) -> T = "%identity"
 
 ///|

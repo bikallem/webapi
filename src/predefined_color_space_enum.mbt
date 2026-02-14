@@ -71,3 +71,8 @@ pub fn PredefinedColorSpace::value(self : PredefinedColorSpace) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for PredefinedColorSpace with from_js_any(value : JsAny) -> PredefinedColorSpace {
+  PredefinedColorSpace::from_unchecked(value)
+}

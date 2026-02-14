@@ -13,6 +13,9 @@ pub impl TJsValue for TrustedTypePolicyFactory with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TrustedTypePolicyFactory with from_js_any(value : JsAny) -> TrustedTypePolicyFactory = "%identity"
+
+///|
 pub fn[T : TTrustedTypePolicyFactory] TrustedTypePolicyFactory::into(
   self : TrustedTypePolicyFactory,
 ) -> T = "%identity"

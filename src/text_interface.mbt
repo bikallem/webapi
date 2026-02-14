@@ -11,6 +11,9 @@ pub type Text
 pub impl TJsValue for Text with to_js(self : Text) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Text with from_js_any(value : JsAny) -> Text = "%identity"
+
+///|
 pub fn[T : TText] Text::into(self : Text) -> T = "%identity"
 
 ///|

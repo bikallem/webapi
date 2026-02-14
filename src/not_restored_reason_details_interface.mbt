@@ -13,6 +13,9 @@ pub impl TJsValue for NotRestoredReasonDetails with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NotRestoredReasonDetails with from_js_any(value : JsAny) -> NotRestoredReasonDetails = "%identity"
+
+///|
 pub fn[T : TNotRestoredReasonDetails] NotRestoredReasonDetails::into(
   self : NotRestoredReasonDetails,
 ) -> T = "%identity"

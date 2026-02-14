@@ -11,6 +11,9 @@ pub type WebSocket
 pub impl TJsValue for WebSocket with to_js(self : WebSocket) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WebSocket with from_js_any(value : JsAny) -> WebSocket = "%identity"
+
+///|
 pub fn[T : TWebSocket] WebSocket::into(self : WebSocket) -> T = "%identity"
 
 ///|

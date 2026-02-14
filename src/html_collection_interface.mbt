@@ -11,6 +11,9 @@ pub type HTMLCollection
 pub impl TJsValue for HTMLCollection with to_js(self : HTMLCollection) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLCollection with from_js_any(value : JsAny) -> HTMLCollection = "%identity"
+
+///|
 pub fn[T : THTMLCollection] HTMLCollection::into(self : HTMLCollection) -> T = "%identity"
 
 ///|

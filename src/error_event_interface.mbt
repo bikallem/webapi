@@ -11,6 +11,9 @@ pub type ErrorEvent
 pub impl TJsValue for ErrorEvent with to_js(self : ErrorEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ErrorEvent with from_js_any(value : JsAny) -> ErrorEvent = "%identity"
+
+///|
 pub fn[T : TErrorEvent] ErrorEvent::into(self : ErrorEvent) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type HTMLBaseElement
 pub impl TJsValue for HTMLBaseElement with to_js(self : HTMLBaseElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLBaseElement with from_js_any(value : JsAny) -> HTMLBaseElement = "%identity"
+
+///|
 pub fn[T : THTMLBaseElement] HTMLBaseElement::into(self : HTMLBaseElement) -> T = "%identity"
 
 ///|

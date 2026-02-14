@@ -13,6 +13,11 @@ pub impl TJsValue for OnErrorEventHandlerNonNull with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for OnErrorEventHandlerNonNull with from_js_any(
+  value : JsAny,
+) -> OnErrorEventHandlerNonNull = "%identity"
+
+///|
 pub fn OnErrorEventHandlerNonNull::new(
   callback : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
 ) -> OnErrorEventHandlerNonNull {

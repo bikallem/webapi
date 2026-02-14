@@ -13,6 +13,11 @@ pub impl TJsValue for TextEncoderEncodeIntoResult with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextEncoderEncodeIntoResult with from_js_any(
+  value : JsAny,
+) -> TextEncoderEncodeIntoResult = "%identity"
+
+///|
 pub fn TextEncoderEncodeIntoResult::new(
   read? : UInt64,
   written? : UInt64,

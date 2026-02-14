@@ -11,6 +11,9 @@ pub type MutationRecord
 pub impl TJsValue for MutationRecord with to_js(self : MutationRecord) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MutationRecord with from_js_any(value : JsAny) -> MutationRecord = "%identity"
+
+///|
 pub fn[T : TMutationRecord] MutationRecord::into(self : MutationRecord) -> T = "%identity"
 
 ///|

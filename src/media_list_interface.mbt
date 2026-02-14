@@ -11,6 +11,9 @@ pub type MediaList
 pub impl TJsValue for MediaList with to_js(self : MediaList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MediaList with from_js_any(value : JsAny) -> MediaList = "%identity"
+
+///|
 pub fn[T : TMediaList] MediaList::into(self : MediaList) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type HTMLBRElement
 pub impl TJsValue for HTMLBRElement with to_js(self : HTMLBRElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLBRElement with from_js_any(value : JsAny) -> HTMLBRElement = "%identity"
+
+///|
 pub fn[T : THTMLBRElement] HTMLBRElement::into(self : HTMLBRElement) -> T = "%identity"
 
 ///|

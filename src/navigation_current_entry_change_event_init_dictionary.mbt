@@ -13,6 +13,11 @@ pub impl TJsValue for NavigationCurrentEntryChangeEventInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationCurrentEntryChangeEventInit with from_js_any(
+  value : JsAny,
+) -> NavigationCurrentEntryChangeEventInit = "%identity"
+
+///|
 pub fn NavigationCurrentEntryChangeEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

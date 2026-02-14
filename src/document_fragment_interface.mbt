@@ -11,6 +11,9 @@ pub type DocumentFragment
 pub impl TJsValue for DocumentFragment with to_js(self : DocumentFragment) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DocumentFragment with from_js_any(value : JsAny) -> DocumentFragment = "%identity"
+
+///|
 pub fn[T : TDocumentFragment] DocumentFragment::into(
   self : DocumentFragment,
 ) -> T = "%identity"

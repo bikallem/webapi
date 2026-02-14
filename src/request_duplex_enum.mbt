@@ -48,3 +48,8 @@ pub fn RequestDuplex::value(self : RequestDuplex) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for RequestDuplex with from_js_any(value : JsAny) -> RequestDuplex {
+  RequestDuplex::from_unchecked(value)
+}

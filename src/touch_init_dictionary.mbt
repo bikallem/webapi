@@ -11,6 +11,9 @@ pub type TouchInit
 pub impl TJsValue for TouchInit with to_js(self : TouchInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TouchInit with from_js_any(value : JsAny) -> TouchInit = "%identity"
+
+///|
 pub fn TouchInit::new(
   identifier : Int,
   target : &TEventTarget,

@@ -11,6 +11,9 @@ pub type Attr
 pub impl TJsValue for Attr with to_js(self : Attr) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Attr with from_js_any(value : JsAny) -> Attr = "%identity"
+
+///|
 pub fn[T : TAttr] Attr::into(self : Attr) -> T = "%identity"
 
 ///|

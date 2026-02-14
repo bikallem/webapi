@@ -13,6 +13,9 @@ pub impl TJsValue for SVGUseElementShadowRoot with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGUseElementShadowRoot with from_js_any(value : JsAny) -> SVGUseElementShadowRoot = "%identity"
+
+///|
 pub fn[T : TSVGUseElementShadowRoot] SVGUseElementShadowRoot::into(
   self : SVGUseElementShadowRoot,
 ) -> T = "%identity"

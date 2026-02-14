@@ -11,6 +11,9 @@ pub type SVGDescElement
 pub impl TJsValue for SVGDescElement with to_js(self : SVGDescElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGDescElement with from_js_any(value : JsAny) -> SVGDescElement = "%identity"
+
+///|
 pub fn[T : TSVGDescElement] SVGDescElement::into(self : SVGDescElement) -> T = "%identity"
 
 ///|

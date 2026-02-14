@@ -11,6 +11,9 @@ pub type FormDataEventInit
 pub impl TJsValue for FormDataEventInit with to_js(self : FormDataEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FormDataEventInit with from_js_any(value : JsAny) -> FormDataEventInit = "%identity"
+
+///|
 pub fn FormDataEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

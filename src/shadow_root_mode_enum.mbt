@@ -54,3 +54,8 @@ pub fn ShadowRootMode::value(self : ShadowRootMode) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ShadowRootMode with from_js_any(value : JsAny) -> ShadowRootMode {
+  ShadowRootMode::from_unchecked(value)
+}

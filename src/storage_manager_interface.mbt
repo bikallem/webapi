@@ -11,6 +11,9 @@ pub type StorageManager
 pub impl TJsValue for StorageManager with to_js(self : StorageManager) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for StorageManager with from_js_any(value : JsAny) -> StorageManager = "%identity"
+
+///|
 pub fn[T : TStorageManager] StorageManager::into(self : StorageManager) -> T = "%identity"
 
 ///|

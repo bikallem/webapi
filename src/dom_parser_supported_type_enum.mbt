@@ -81,3 +81,8 @@ pub fn DOMParserSupportedType::value(self : DOMParserSupportedType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for DOMParserSupportedType with from_js_any(value : JsAny) -> DOMParserSupportedType {
+  DOMParserSupportedType::from_unchecked(value)
+}

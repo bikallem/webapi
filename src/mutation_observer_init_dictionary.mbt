@@ -13,6 +13,9 @@ pub impl TJsValue for MutationObserverInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MutationObserverInit with from_js_any(value : JsAny) -> MutationObserverInit = "%identity"
+
+///|
 pub fn MutationObserverInit::new(
   child_list? : Bool = false,
   attributes? : Bool,

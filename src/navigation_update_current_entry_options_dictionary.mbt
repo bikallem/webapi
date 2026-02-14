@@ -13,6 +13,11 @@ pub impl TJsValue for NavigationUpdateCurrentEntryOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationUpdateCurrentEntryOptions with from_js_any(
+  value : JsAny,
+) -> NavigationUpdateCurrentEntryOptions = "%identity"
+
+///|
 pub fn NavigationUpdateCurrentEntryOptions::new(
   state : JsValue,
 ) -> NavigationUpdateCurrentEntryOptions {

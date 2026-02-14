@@ -11,6 +11,9 @@ pub type EventSource
 pub impl TJsValue for EventSource with to_js(self : EventSource) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for EventSource with from_js_any(value : JsAny) -> EventSource = "%identity"
+
+///|
 pub fn[T : TEventSource] EventSource::into(self : EventSource) -> T = "%identity"
 
 ///|

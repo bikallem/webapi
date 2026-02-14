@@ -11,6 +11,9 @@ pub type HTMLMarqueeElement
 pub impl TJsValue for HTMLMarqueeElement with to_js(self : HTMLMarqueeElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLMarqueeElement with from_js_any(value : JsAny) -> HTMLMarqueeElement = "%identity"
+
+///|
 pub fn[T : THTMLMarqueeElement] HTMLMarqueeElement::into(
   self : HTMLMarqueeElement,
 ) -> T = "%identity"

@@ -11,6 +11,9 @@ pub type CDATASection
 pub impl TJsValue for CDATASection with to_js(self : CDATASection) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CDATASection with from_js_any(value : JsAny) -> CDATASection = "%identity"
+
+///|
 pub fn[T : TCDATASection] CDATASection::into(self : CDATASection) -> T = "%identity"
 
 ///|

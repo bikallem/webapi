@@ -11,6 +11,9 @@ pub type SVGPolygonElement
 pub impl TJsValue for SVGPolygonElement with to_js(self : SVGPolygonElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGPolygonElement with from_js_any(value : JsAny) -> SVGPolygonElement = "%identity"
+
+///|
 pub fn[T : TSVGPolygonElement] SVGPolygonElement::into(
   self : SVGPolygonElement,
 ) -> T = "%identity"

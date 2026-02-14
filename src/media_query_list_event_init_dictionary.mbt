@@ -13,6 +13,9 @@ pub impl TJsValue for MediaQueryListEventInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MediaQueryListEventInit with from_js_any(value : JsAny) -> MediaQueryListEventInit = "%identity"
+
+///|
 pub fn MediaQueryListEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

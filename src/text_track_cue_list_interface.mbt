@@ -11,6 +11,9 @@ pub type TextTrackCueList
 pub impl TJsValue for TextTrackCueList with to_js(self : TextTrackCueList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextTrackCueList with from_js_any(value : JsAny) -> TextTrackCueList = "%identity"
+
+///|
 pub fn[T : TTextTrackCueList] TextTrackCueList::into(
   self : TextTrackCueList,
 ) -> T = "%identity"

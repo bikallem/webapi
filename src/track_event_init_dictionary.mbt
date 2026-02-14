@@ -11,6 +11,9 @@ pub type TrackEventInit
 pub impl TJsValue for TrackEventInit with to_js(self : TrackEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TrackEventInit with from_js_any(value : JsAny) -> TrackEventInit = "%identity"
+
+///|
 pub(open) trait TTrackEventInitNewTrack {
   to_js(self : Self) -> JsValue
 }

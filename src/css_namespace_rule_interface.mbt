@@ -11,6 +11,9 @@ pub type CSSNamespaceRule
 pub impl TJsValue for CSSNamespaceRule with to_js(self : CSSNamespaceRule) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSNamespaceRule with from_js_any(value : JsAny) -> CSSNamespaceRule = "%identity"
+
+///|
 pub fn[T : TCSSNamespaceRule] CSSNamespaceRule::into(
   self : CSSNamespaceRule,
 ) -> T = "%identity"

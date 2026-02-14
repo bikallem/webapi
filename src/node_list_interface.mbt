@@ -11,6 +11,9 @@ pub type NodeList
 pub impl TJsValue for NodeList with to_js(self : NodeList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NodeList with from_js_any(value : JsAny) -> NodeList = "%identity"
+
+///|
 pub fn[T : TNodeList] NodeList::into(self : NodeList) -> T = "%identity"
 
 ///|

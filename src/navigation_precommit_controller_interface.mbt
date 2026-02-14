@@ -13,6 +13,11 @@ pub impl TJsValue for NavigationPrecommitController with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationPrecommitController with from_js_any(
+  value : JsAny,
+) -> NavigationPrecommitController = "%identity"
+
+///|
 pub fn[T : TNavigationPrecommitController] NavigationPrecommitController::into(
   self : NavigationPrecommitController,
 ) -> T = "%identity"

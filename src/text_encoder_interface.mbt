@@ -11,6 +11,9 @@ pub type TextEncoder
 pub impl TJsValue for TextEncoder with to_js(self : TextEncoder) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextEncoder with from_js_any(value : JsAny) -> TextEncoder = "%identity"
+
+///|
 pub fn[T : TTextEncoder] TextEncoder::into(self : TextEncoder) -> T = "%identity"
 
 ///|

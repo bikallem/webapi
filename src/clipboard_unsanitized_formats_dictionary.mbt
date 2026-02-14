@@ -13,6 +13,11 @@ pub impl TJsValue for ClipboardUnsanitizedFormats with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ClipboardUnsanitizedFormats with from_js_any(
+  value : JsAny,
+) -> ClipboardUnsanitizedFormats = "%identity"
+
+///|
 pub fn ClipboardUnsanitizedFormats::new(
   unsanitized? : Array[String],
 ) -> ClipboardUnsanitizedFormats {

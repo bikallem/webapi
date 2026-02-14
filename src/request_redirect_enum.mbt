@@ -60,3 +60,8 @@ pub fn RequestRedirect::value(self : RequestRedirect) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for RequestRedirect with from_js_any(value : JsAny) -> RequestRedirect {
+  RequestRedirect::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type ResizeObserver
 pub impl TJsValue for ResizeObserver with to_js(self : ResizeObserver) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ResizeObserver with from_js_any(value : JsAny) -> ResizeObserver = "%identity"
+
+///|
 pub fn[T : TResizeObserver] ResizeObserver::into(self : ResizeObserver) -> T = "%identity"
 
 ///|

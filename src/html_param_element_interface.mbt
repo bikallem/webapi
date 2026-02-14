@@ -11,6 +11,9 @@ pub type HTMLParamElement
 pub impl TJsValue for HTMLParamElement with to_js(self : HTMLParamElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLParamElement with from_js_any(value : JsAny) -> HTMLParamElement = "%identity"
+
+///|
 pub fn[T : THTMLParamElement] HTMLParamElement::into(
   self : HTMLParamElement,
 ) -> T = "%identity"

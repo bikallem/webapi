@@ -13,6 +13,9 @@ pub impl TJsValue for GetComposedRangesOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for GetComposedRangesOptions with from_js_any(value : JsAny) -> GetComposedRangesOptions = "%identity"
+
+///|
 pub fn GetComposedRangesOptions::new(
   shadow_roots? : Array[ShadowRoot] = [],
 ) -> GetComposedRangesOptions {

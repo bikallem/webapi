@@ -11,6 +11,9 @@ pub type BufferSource
 pub impl TJsValue for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BufferSource with from_js_any(value : JsAny) -> BufferSource = "%identity"
+
+///|
 pub(open) trait TBufferSource {
   to_js(self : Self) -> JsValue
 }

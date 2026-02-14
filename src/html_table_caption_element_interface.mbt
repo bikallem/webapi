@@ -13,6 +13,9 @@ pub impl TJsValue for HTMLTableCaptionElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTableCaptionElement with from_js_any(value : JsAny) -> HTMLTableCaptionElement = "%identity"
+
+///|
 pub fn[T : THTMLTableCaptionElement] HTMLTableCaptionElement::into(
   self : HTMLTableCaptionElement,
 ) -> T = "%identity"

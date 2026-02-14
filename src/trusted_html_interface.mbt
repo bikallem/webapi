@@ -11,6 +11,9 @@ pub type TrustedHTML
 pub impl TJsValue for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TrustedHTML with from_js_any(value : JsAny) -> TrustedHTML = "%identity"
+
+///|
 pub fn[T : TTrustedHTML] TrustedHTML::into(self : TrustedHTML) -> T = "%identity"
 
 ///|

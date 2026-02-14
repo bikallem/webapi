@@ -11,6 +11,9 @@ pub type Window
 pub impl TJsValue for Window with to_js(self : Window) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Window with from_js_any(value : JsAny) -> Window = "%identity"
+
+///|
 pub fn[T : TWindow] Window::into(self : Window) -> T = "%identity"
 
 ///|

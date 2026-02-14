@@ -72,3 +72,8 @@ pub fn CanvasTextRendering::value(self : CanvasTextRendering) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasTextRendering with from_js_any(value : JsAny) -> CanvasTextRendering {
+  CanvasTextRendering::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type DataTransfer
 pub impl TJsValue for DataTransfer with to_js(self : DataTransfer) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DataTransfer with from_js_any(value : JsAny) -> DataTransfer = "%identity"
+
+///|
 pub fn[T : TDataTransfer] DataTransfer::into(self : DataTransfer) -> T = "%identity"
 
 ///|

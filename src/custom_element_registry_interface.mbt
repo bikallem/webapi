@@ -13,6 +13,9 @@ pub impl TJsValue for CustomElementRegistry with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CustomElementRegistry with from_js_any(value : JsAny) -> CustomElementRegistry = "%identity"
+
+///|
 pub fn[T : TCustomElementRegistry] CustomElementRegistry::into(
   self : CustomElementRegistry,
 ) -> T = "%identity"

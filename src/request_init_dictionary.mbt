@@ -11,6 +11,9 @@ pub type RequestInit
 pub impl TJsValue for RequestInit with to_js(self : RequestInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for RequestInit with from_js_any(value : JsAny) -> RequestInit = "%identity"
+
+///|
 pub fn RequestInit::new(
   method_? : String,
   headers? : &THeadersInit,

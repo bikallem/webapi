@@ -11,6 +11,9 @@ pub type MessageEventSource
 pub impl TJsValue for MessageEventSource with to_js(self : MessageEventSource) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MessageEventSource with from_js_any(value : JsAny) -> MessageEventSource = "%identity"
+
+///|
 pub(open) trait TMessageEventSource {
   to_js(self : Self) -> JsValue
 }

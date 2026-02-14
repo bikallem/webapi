@@ -13,6 +13,9 @@ pub impl TJsValue for HTMLOptionsCollection with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLOptionsCollection with from_js_any(value : JsAny) -> HTMLOptionsCollection = "%identity"
+
+///|
 pub fn[T : THTMLOptionsCollection] HTMLOptionsCollection::into(
   self : HTMLOptionsCollection,
 ) -> T = "%identity"

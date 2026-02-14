@@ -11,6 +11,9 @@ pub type CanvasGradient
 pub impl TJsValue for CanvasGradient with to_js(self : CanvasGradient) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CanvasGradient with from_js_any(value : JsAny) -> CanvasGradient = "%identity"
+
+///|
 pub fn[T : TCanvasGradient] CanvasGradient::into(self : CanvasGradient) -> T = "%identity"
 
 ///|

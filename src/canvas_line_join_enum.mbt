@@ -60,3 +60,8 @@ pub fn CanvasLineJoin::value(self : CanvasLineJoin) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasLineJoin with from_js_any(value : JsAny) -> CanvasLineJoin {
+  CanvasLineJoin::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type TextDecoderOptions
 pub impl TJsValue for TextDecoderOptions with to_js(self : TextDecoderOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextDecoderOptions with from_js_any(value : JsAny) -> TextDecoderOptions = "%identity"
+
+///|
 pub fn TextDecoderOptions::new(
   fatal? : Bool = false,
   ignore_bom? : Bool = false,

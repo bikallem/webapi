@@ -11,6 +11,9 @@ pub type AbortController
 pub impl TJsValue for AbortController with to_js(self : AbortController) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for AbortController with from_js_any(value : JsAny) -> AbortController = "%identity"
+
+///|
 pub fn[T : TAbortController] AbortController::into(self : AbortController) -> T = "%identity"
 
 ///|

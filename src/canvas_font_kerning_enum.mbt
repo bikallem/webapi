@@ -60,3 +60,8 @@ pub fn CanvasFontKerning::value(self : CanvasFontKerning) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasFontKerning with from_js_any(value : JsAny) -> CanvasFontKerning {
+  CanvasFontKerning::from_unchecked(value)
+}

@@ -54,3 +54,8 @@ pub fn CanvasFillRule::value(self : CanvasFillRule) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasFillRule with from_js_any(value : JsAny) -> CanvasFillRule {
+  CanvasFillRule::from_unchecked(value)
+}

@@ -13,6 +13,9 @@ pub impl TJsValue for ClipboardChangeEvent with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ClipboardChangeEvent with from_js_any(value : JsAny) -> ClipboardChangeEvent = "%identity"
+
+///|
 pub fn[T : TClipboardChangeEvent] ClipboardChangeEvent::into(
   self : ClipboardChangeEvent,
 ) -> T = "%identity"

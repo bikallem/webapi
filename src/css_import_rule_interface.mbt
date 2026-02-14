@@ -11,6 +11,9 @@ pub type CSSImportRule
 pub impl TJsValue for CSSImportRule with to_js(self : CSSImportRule) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSImportRule with from_js_any(value : JsAny) -> CSSImportRule = "%identity"
+
+///|
 pub fn[T : TCSSImportRule] CSSImportRule::into(self : CSSImportRule) -> T = "%identity"
 
 ///|

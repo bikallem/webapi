@@ -13,6 +13,9 @@ pub impl TJsValue for TrustedTypePolicyOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TrustedTypePolicyOptions with from_js_any(value : JsAny) -> TrustedTypePolicyOptions = "%identity"
+
+///|
 pub fn TrustedTypePolicyOptions::new(
   create_html? : CreateHTMLCallback,
   create_script? : CreateScriptCallback,

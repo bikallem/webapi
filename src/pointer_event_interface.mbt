@@ -11,6 +11,9 @@ pub type PointerEvent
 pub impl TJsValue for PointerEvent with to_js(self : PointerEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PointerEvent with from_js_any(value : JsAny) -> PointerEvent = "%identity"
+
+///|
 pub fn[T : TPointerEvent] PointerEvent::into(self : PointerEvent) -> T = "%identity"
 
 ///|

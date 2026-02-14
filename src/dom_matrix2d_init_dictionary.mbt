@@ -11,6 +11,9 @@ pub type DOMMatrix2DInit
 pub impl TJsValue for DOMMatrix2DInit with to_js(self : DOMMatrix2DInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMMatrix2DInit with from_js_any(value : JsAny) -> DOMMatrix2DInit = "%identity"
+
+///|
 pub fn DOMMatrix2DInit::new(
   a? : Double,
   b? : Double,

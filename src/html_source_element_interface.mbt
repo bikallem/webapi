@@ -11,6 +11,9 @@ pub type HTMLSourceElement
 pub impl TJsValue for HTMLSourceElement with to_js(self : HTMLSourceElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLSourceElement with from_js_any(value : JsAny) -> HTMLSourceElement = "%identity"
+
+///|
 pub fn[T : THTMLSourceElement] HTMLSourceElement::into(
   self : HTMLSourceElement,
 ) -> T = "%identity"

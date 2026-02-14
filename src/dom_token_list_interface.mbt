@@ -11,6 +11,9 @@ pub type DOMTokenList
 pub impl TJsValue for DOMTokenList with to_js(self : DOMTokenList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMTokenList with from_js_any(value : JsAny) -> DOMTokenList = "%identity"
+
+///|
 pub fn[T : TDOMTokenList] DOMTokenList::into(self : DOMTokenList) -> T = "%identity"
 
 ///|

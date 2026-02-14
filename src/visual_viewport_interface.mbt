@@ -11,6 +11,9 @@ pub type VisualViewport
 pub impl TJsValue for VisualViewport with to_js(self : VisualViewport) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for VisualViewport with from_js_any(value : JsAny) -> VisualViewport = "%identity"
+
+///|
 pub fn[T : TVisualViewport] VisualViewport::into(self : VisualViewport) -> T = "%identity"
 
 ///|

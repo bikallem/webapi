@@ -13,6 +13,11 @@ pub impl TJsValue for CaretPositionFromPointOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CaretPositionFromPointOptions with from_js_any(
+  value : JsAny,
+) -> CaretPositionFromPointOptions = "%identity"
+
+///|
 pub fn CaretPositionFromPointOptions::new(
   shadow_roots? : Array[ShadowRoot] = [],
 ) -> CaretPositionFromPointOptions {

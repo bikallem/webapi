@@ -11,6 +11,9 @@ pub type NotRestoredReasons
 pub impl TJsValue for NotRestoredReasons with to_js(self : NotRestoredReasons) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NotRestoredReasons with from_js_any(value : JsAny) -> NotRestoredReasons = "%identity"
+
+///|
 pub fn[T : TNotRestoredReasons] NotRestoredReasons::into(
   self : NotRestoredReasons,
 ) -> T = "%identity"

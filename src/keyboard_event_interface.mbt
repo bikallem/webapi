@@ -11,6 +11,9 @@ pub type KeyboardEvent
 pub impl TJsValue for KeyboardEvent with to_js(self : KeyboardEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for KeyboardEvent with from_js_any(value : JsAny) -> KeyboardEvent = "%identity"
+
+///|
 pub fn[T : TKeyboardEvent] KeyboardEvent::into(self : KeyboardEvent) -> T = "%identity"
 
 ///|
@@ -145,7 +148,7 @@ impl TKeyboardEvent with init_keyboard_event(
   type_arg : String,
   bubbles_arg? : Bool = false,
   cancelable_arg? : Bool = false,
-  view_arg? : &TWindow = JsValue::null(),
+  view_arg? : &TWindow,
   key_arg? : String = "",
   location_arg? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
@@ -158,7 +161,7 @@ impl TKeyboardEvent with init_keyboard_event(
     TJsValue::to_js(type_arg),
     TJsValue::to_js(bubbles_arg),
     TJsValue::to_js(cancelable_arg),
-    TJsValue::to_js(view_arg),
+    opt_to_js(view_arg),
     TJsValue::to_js(key_arg),
     TJsValue::to_js(location_arg),
     TJsValue::to_js(ctrl_key),

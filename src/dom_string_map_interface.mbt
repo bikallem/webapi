@@ -11,6 +11,9 @@ pub type DOMStringMap
 pub impl TJsValue for DOMStringMap with to_js(self : DOMStringMap) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMStringMap with from_js_any(value : JsAny) -> DOMStringMap = "%identity"
+
+///|
 pub fn[T : TDOMStringMap] DOMStringMap::into(self : DOMStringMap) -> T = "%identity"
 
 ///|

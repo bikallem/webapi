@@ -51,3 +51,8 @@ pub fn TouchType::value(self : TouchType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for TouchType with from_js_any(value : JsAny) -> TouchType {
+  TouchType::from_unchecked(value)
+}

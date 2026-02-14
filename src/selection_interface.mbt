@@ -11,6 +11,9 @@ pub type Selection
 pub impl TJsValue for Selection with to_js(self : Selection) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Selection with from_js_any(value : JsAny) -> Selection = "%identity"
+
+///|
 pub fn[T : TSelection] Selection::into(self : Selection) -> T = "%identity"
 
 ///|

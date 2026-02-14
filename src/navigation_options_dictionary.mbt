@@ -11,6 +11,9 @@ pub type NavigationOptions
 pub impl TJsValue for NavigationOptions with to_js(self : NavigationOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationOptions with from_js_any(value : JsAny) -> NavigationOptions = "%identity"
+
+///|
 pub fn NavigationOptions::new(info? : JsValue) -> NavigationOptions {
   navigation_options_ffi(opt_to_js(info))
 }

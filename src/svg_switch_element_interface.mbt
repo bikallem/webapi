@@ -11,6 +11,9 @@ pub type SVGSwitchElement
 pub impl TJsValue for SVGSwitchElement with to_js(self : SVGSwitchElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGSwitchElement with from_js_any(value : JsAny) -> SVGSwitchElement = "%identity"
+
+///|
 pub fn[T : TSVGSwitchElement] SVGSwitchElement::into(
   self : SVGSwitchElement,
 ) -> T = "%identity"

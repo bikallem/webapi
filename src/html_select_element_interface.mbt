@@ -11,6 +11,9 @@ pub type HTMLSelectElement
 pub impl TJsValue for HTMLSelectElement with to_js(self : HTMLSelectElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLSelectElement with from_js_any(value : JsAny) -> HTMLSelectElement = "%identity"
+
+///|
 pub fn[T : THTMLSelectElement] HTMLSelectElement::into(
   self : HTMLSelectElement,
 ) -> T = "%identity"

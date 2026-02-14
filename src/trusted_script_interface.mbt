@@ -11,6 +11,9 @@ pub type TrustedScript
 pub impl TJsValue for TrustedScript with to_js(self : TrustedScript) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TrustedScript with from_js_any(value : JsAny) -> TrustedScript = "%identity"
+
+///|
 pub fn[T : TTrustedScript] TrustedScript::into(self : TrustedScript) -> T = "%identity"
 
 ///|

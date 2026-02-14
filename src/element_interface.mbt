@@ -11,6 +11,9 @@ pub type Element
 pub impl TJsValue for Element with to_js(self : Element) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Element with from_js_any(value : JsAny) -> Element = "%identity"
+
+///|
 pub fn[T : TElement] Element::into(self : Element) -> T = "%identity"
 
 ///|

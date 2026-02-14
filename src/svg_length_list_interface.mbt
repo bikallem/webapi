@@ -11,6 +11,9 @@ pub type SVGLengthList
 pub impl TJsValue for SVGLengthList with to_js(self : SVGLengthList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGLengthList with from_js_any(value : JsAny) -> SVGLengthList = "%identity"
+
+///|
 pub fn[T : TSVGLengthList] SVGLengthList::into(self : SVGLengthList) -> T = "%identity"
 
 ///|

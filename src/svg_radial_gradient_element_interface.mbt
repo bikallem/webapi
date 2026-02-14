@@ -13,6 +13,9 @@ pub impl TJsValue for SVGRadialGradientElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGRadialGradientElement with from_js_any(value : JsAny) -> SVGRadialGradientElement = "%identity"
+
+///|
 pub fn[T : TSVGRadialGradientElement] SVGRadialGradientElement::into(
   self : SVGRadialGradientElement,
 ) -> T = "%identity"

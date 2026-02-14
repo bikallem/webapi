@@ -11,6 +11,9 @@ pub type SVGPointList
 pub impl TJsValue for SVGPointList with to_js(self : SVGPointList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGPointList with from_js_any(value : JsAny) -> SVGPointList = "%identity"
+
+///|
 pub fn[T : TSVGPointList] SVGPointList::into(self : SVGPointList) -> T = "%identity"
 
 ///|

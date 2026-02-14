@@ -13,6 +13,9 @@ pub impl TJsValue for CanvasRenderingContext2D with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CanvasRenderingContext2D with from_js_any(value : JsAny) -> CanvasRenderingContext2D = "%identity"
+
+///|
 pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(
   self : CanvasRenderingContext2D,
 ) -> T = "%identity"

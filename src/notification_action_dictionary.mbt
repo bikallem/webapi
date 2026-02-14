@@ -11,6 +11,9 @@ pub type NotificationAction
 pub impl TJsValue for NotificationAction with to_js(self : NotificationAction) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NotificationAction with from_js_any(value : JsAny) -> NotificationAction = "%identity"
+
+///|
 pub fn NotificationAction::new(
   action : String,
   title : String,

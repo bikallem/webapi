@@ -73,3 +73,8 @@ pub fn ResizeObserverBoxOptions::value(
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ResizeObserverBoxOptions with from_js_any(value : JsAny) -> ResizeObserverBoxOptions {
+  ResizeObserverBoxOptions::from_unchecked(value)
+}

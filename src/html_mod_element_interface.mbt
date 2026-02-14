@@ -11,6 +11,9 @@ pub type HTMLModElement
 pub impl TJsValue for HTMLModElement with to_js(self : HTMLModElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLModElement with from_js_any(value : JsAny) -> HTMLModElement = "%identity"
+
+///|
 pub fn[T : THTMLModElement] HTMLModElement::into(self : HTMLModElement) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type BroadcastChannel
 pub impl TJsValue for BroadcastChannel with to_js(self : BroadcastChannel) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BroadcastChannel with from_js_any(value : JsAny) -> BroadcastChannel = "%identity"
+
+///|
 pub fn[T : TBroadcastChannel] BroadcastChannel::into(
   self : BroadcastChannel,
 ) -> T = "%identity"

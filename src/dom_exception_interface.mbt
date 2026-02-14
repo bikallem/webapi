@@ -11,6 +11,9 @@ pub type DOMException
 pub impl TJsValue for DOMException with to_js(self : DOMException) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMException with from_js_any(value : JsAny) -> DOMException = "%identity"
+
+///|
 pub fn[T : TDOMException] DOMException::into(self : DOMException) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type DOMPointInit
 pub impl TJsValue for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMPointInit with from_js_any(value : JsAny) -> DOMPointInit = "%identity"
+
+///|
 pub fn DOMPointInit::new(
   x? : Double = (0 : Double),
   y? : Double = (0 : Double),

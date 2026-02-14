@@ -351,6 +351,7 @@ pub let window : Window
 pub type AbortController
 pub fn[T : TAbortController] AbortController::into(Self) -> T
 pub fn AbortController::new() -> Self
+pub impl FromJsAny for AbortController
 pub impl TAbortController for AbortController
 pub impl TJsValue for AbortController
 
@@ -360,6 +361,7 @@ pub fn AbortSignal::abort(reason? : JsValue) -> Self
 pub fn AbortSignal::any(Array[Self]) -> Self
 pub fn[T : TAbortSignal] AbortSignal::into(Self) -> T
 pub fn AbortSignal::timeout(UInt64) -> Self
+pub impl FromJsAny for AbortSignal
 pub impl TAbortSignal for AbortSignal
 pub impl TEventTarget for AbortSignal
 pub impl TJsValue for AbortSignal
@@ -367,6 +369,7 @@ pub impl TJsValue for AbortSignal
 #external
 pub type AbstractRange
 pub fn[T : TAbstractRange] AbstractRange::into(Self) -> T
+pub impl FromJsAny for AbstractRange
 pub impl TAbstractRange for AbstractRange
 pub impl TJsValue for AbstractRange
 
@@ -374,17 +377,20 @@ pub impl TJsValue for AbstractRange
 pub type AddEventListenerOptions
 pub fn AddEventListenerOptions::empty() -> Self
 pub fn AddEventListenerOptions::new(capture? : Bool, passive? : Bool, once? : Bool, signal? : &TAbortSignal) -> Self
+pub impl FromJsAny for AddEventListenerOptions
 pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions
 pub impl TJsValue for AddEventListenerOptions
 
 #external
 pub type AllowSharedBufferSource
 pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::into(Self) -> T
+pub impl FromJsAny for AllowSharedBufferSource
 pub impl TAllowSharedBufferSource for AllowSharedBufferSource
 pub impl TJsValue for AllowSharedBufferSource
 
 #external
 pub type ArrayBuffer
+pub impl FromJsAny for ArrayBuffer
 pub impl TAllowSharedBufferSource for ArrayBuffer
 pub impl TBufferSource for ArrayBuffer
 pub impl TFileReaderResult for ArrayBuffer
@@ -393,6 +399,7 @@ pub impl TJsValue for ArrayBuffer
 #external
 pub type ArrayBufferView
 pub fn[T : TArrayBufferView] ArrayBufferView::into(Self) -> T
+pub impl FromJsAny for ArrayBufferView
 pub impl TAllowSharedBufferSource for ArrayBufferView
 pub impl TArrayBufferView for ArrayBufferView
 pub impl TBufferSource for ArrayBufferView
@@ -402,11 +409,13 @@ pub impl TJsValue for ArrayBufferView
 pub type AssignedNodesOptions
 pub fn AssignedNodesOptions::empty() -> Self
 pub fn AssignedNodesOptions::new(flatten? : Bool) -> Self
+pub impl FromJsAny for AssignedNodesOptions
 pub impl TJsValue for AssignedNodesOptions
 
 #external
 pub type Attr
 pub fn[T : TAttr] Attr::into(Self) -> T
+pub impl FromJsAny for Attr
 pub impl TAttr for Attr
 pub impl TEventTarget for Attr
 pub impl TJsValue for Attr
@@ -415,6 +424,7 @@ pub impl TNode for Attr
 #external
 pub type AudioTrack
 pub fn[T : TAudioTrack] AudioTrack::into(Self) -> T
+pub impl FromJsAny for AudioTrack
 pub impl TAudioTrack for AudioTrack
 pub impl TJsValue for AudioTrack
 pub impl TTrackEventInitNewTrack for AudioTrack
@@ -423,6 +433,7 @@ pub impl TTrackEventTrack for AudioTrack
 #external
 pub type AudioTrackList
 pub fn[T : TAudioTrackList] AudioTrackList::into(Self) -> T
+pub impl FromJsAny for AudioTrackList
 pub impl TAudioTrackList for AudioTrackList
 pub impl TEventTarget for AudioTrackList
 pub impl TJsValue for AudioTrackList
@@ -430,23 +441,27 @@ pub impl TJsValue for AudioTrackList
 #external
 pub type BarProp
 pub fn[T : TBarProp] BarProp::into(Self) -> T
+pub impl FromJsAny for BarProp
 pub impl TBarProp for BarProp
 pub impl TJsValue for BarProp
 
 #external
 pub type BeforeUnloadEvent
 pub fn[T : TBeforeUnloadEvent] BeforeUnloadEvent::into(Self) -> T
+pub impl FromJsAny for BeforeUnloadEvent
 pub impl TBeforeUnloadEvent for BeforeUnloadEvent
 pub impl TEvent for BeforeUnloadEvent
 pub impl TJsValue for BeforeUnloadEvent
 
 #external
 pub type BigInt64Array
+pub impl FromJsAny for BigInt64Array
 pub impl TArrayBufferView for BigInt64Array
 pub impl TJsValue for BigInt64Array
 
 #external
 pub type BigUint64Array
+pub impl FromJsAny for BigUint64Array
 pub impl TArrayBufferView for BigUint64Array
 pub impl TJsValue for BigUint64Array
 
@@ -456,6 +471,7 @@ pub(all) enum BinaryType {
 }
 pub fn BinaryType::from(String) -> Self?
 pub fn BinaryType::value(Self) -> String
+pub impl FromJsAny for BinaryType
 pub impl TJsValue for BinaryType
 pub impl Eq for BinaryType
 pub impl Show for BinaryType
@@ -464,6 +480,7 @@ pub impl Show for BinaryType
 pub type Blob
 pub fn[T : TBlob] Blob::into(Self) -> T
 pub fn Blob::new(blob_parts? : Array[BlobPart], options? : BlobPropertyBag) -> Self
+pub impl FromJsAny for Blob
 pub impl TBlob for Blob
 pub impl TBlobPart for Blob
 pub impl TImageBitmapSource for Blob
@@ -476,11 +493,13 @@ pub impl TXMLHttpRequestBodyInit for Blob
 #external
 pub type BlobCallback
 pub fn BlobCallback::new((Blob) -> Unit) -> Self
+pub impl FromJsAny for BlobCallback
 pub impl TJsValue for BlobCallback
 
 #external
 pub type BlobPart
 pub fn[T : TBlobPart] BlobPart::into(Self) -> T
+pub impl FromJsAny for BlobPart
 pub impl TBlobPart for BlobPart
 pub impl TJsValue for BlobPart
 
@@ -488,11 +507,13 @@ pub impl TJsValue for BlobPart
 pub type BlobPropertyBag
 pub fn BlobPropertyBag::empty() -> Self
 pub fn BlobPropertyBag::new(type_? : String, endings? : EndingType) -> Self
+pub impl FromJsAny for BlobPropertyBag
 pub impl TJsValue for BlobPropertyBag
 
 #external
 pub type BodyInit
 pub fn[T : TBodyInit] BodyInit::into(Self) -> T
+pub impl FromJsAny for BodyInit
 pub impl TBodyInit for BodyInit
 pub impl TJsValue for BodyInit
 
@@ -500,12 +521,14 @@ pub impl TJsValue for BodyInit
 pub type BoxQuadOptions
 pub fn BoxQuadOptions::empty() -> Self
 pub fn BoxQuadOptions::new(box? : CSSBoxType, relative_to? : &TGeometryNode) -> Self
+pub impl FromJsAny for BoxQuadOptions
 pub impl TJsValue for BoxQuadOptions
 
 #external
 pub type BroadcastChannel
 pub fn[T : TBroadcastChannel] BroadcastChannel::into(Self) -> T
 pub fn BroadcastChannel::new(String) -> Self
+pub impl FromJsAny for BroadcastChannel
 pub impl TBroadcastChannel for BroadcastChannel
 pub impl TEventTarget for BroadcastChannel
 pub impl TJsValue for BroadcastChannel
@@ -513,6 +536,7 @@ pub impl TJsValue for BroadcastChannel
 #external
 pub type BufferSource
 pub fn[T : TBufferSource] BufferSource::into(Self) -> T
+pub impl FromJsAny for BufferSource
 pub impl TBlobPart for BufferSource
 pub impl TBufferSource for BufferSource
 pub impl TJsValue for BufferSource
@@ -522,6 +546,7 @@ pub impl TXMLHttpRequestBodyInit for BufferSource
 #external
 pub type CDATASection
 pub fn[T : TCDATASection] CDATASection::into(Self) -> T
+pub impl FromJsAny for CDATASection
 pub impl TCDATASection for CDATASection
 pub impl TCharacterData for CDATASection
 pub impl TEventTarget for CDATASection
@@ -532,6 +557,7 @@ pub impl TText for CDATASection
 #external
 pub type CSS
 pub fn CSS::escape(String) -> String
+pub impl FromJsAny for CSS
 pub impl TJsValue for CSS
 
 pub(all) enum CSSBoxType {
@@ -542,6 +568,7 @@ pub(all) enum CSSBoxType {
 }
 pub fn CSSBoxType::from(String) -> Self?
 pub fn CSSBoxType::value(Self) -> String
+pub impl FromJsAny for CSSBoxType
 pub impl TJsValue for CSSBoxType
 pub impl Eq for CSSBoxType
 pub impl Show for CSSBoxType
@@ -549,6 +576,7 @@ pub impl Show for CSSBoxType
 #external
 pub type CSSGroupingRule
 pub fn[T : TCSSGroupingRule] CSSGroupingRule::into(Self) -> T
+pub impl FromJsAny for CSSGroupingRule
 pub impl TCSSGroupingRule for CSSGroupingRule
 pub impl TCSSRule for CSSGroupingRule
 pub impl TJsValue for CSSGroupingRule
@@ -556,6 +584,7 @@ pub impl TJsValue for CSSGroupingRule
 #external
 pub type CSSImportRule
 pub fn[T : TCSSImportRule] CSSImportRule::into(Self) -> T
+pub impl FromJsAny for CSSImportRule
 pub impl TCSSImportRule for CSSImportRule
 pub impl TCSSRule for CSSImportRule
 pub impl TJsValue for CSSImportRule
@@ -563,6 +592,7 @@ pub impl TJsValue for CSSImportRule
 #external
 pub type CSSMarginRule
 pub fn[T : TCSSMarginRule] CSSMarginRule::into(Self) -> T
+pub impl FromJsAny for CSSMarginRule
 pub impl TCSSMarginRule for CSSMarginRule
 pub impl TCSSRule for CSSMarginRule
 pub impl TJsValue for CSSMarginRule
@@ -570,6 +600,7 @@ pub impl TJsValue for CSSMarginRule
 #external
 pub type CSSNamespaceRule
 pub fn[T : TCSSNamespaceRule] CSSNamespaceRule::into(Self) -> T
+pub impl FromJsAny for CSSNamespaceRule
 pub impl TCSSNamespaceRule for CSSNamespaceRule
 pub impl TCSSRule for CSSNamespaceRule
 pub impl TJsValue for CSSNamespaceRule
@@ -577,6 +608,7 @@ pub impl TJsValue for CSSNamespaceRule
 #external
 pub type CSSPageDescriptors
 pub fn[T : TCSSPageDescriptors] CSSPageDescriptors::into(Self) -> T
+pub impl FromJsAny for CSSPageDescriptors
 pub impl TCSSPageDescriptors for CSSPageDescriptors
 pub impl TCSSStyleDeclaration for CSSPageDescriptors
 pub impl TJsValue for CSSPageDescriptors
@@ -584,6 +616,7 @@ pub impl TJsValue for CSSPageDescriptors
 #external
 pub type CSSPageRule
 pub fn[T : TCSSPageRule] CSSPageRule::into(Self) -> T
+pub impl FromJsAny for CSSPageRule
 pub impl TCSSGroupingRule for CSSPageRule
 pub impl TCSSPageRule for CSSPageRule
 pub impl TCSSRule for CSSPageRule
@@ -591,30 +624,35 @@ pub impl TJsValue for CSSPageRule
 
 #external
 pub type CSSPseudoElement
+pub impl FromJsAny for CSSPseudoElement
 pub impl TGeometryNode for CSSPseudoElement
 pub impl TJsValue for CSSPseudoElement
 
 #external
 pub type CSSRule
 pub fn[T : TCSSRule] CSSRule::into(Self) -> T
+pub impl FromJsAny for CSSRule
 pub impl TCSSRule for CSSRule
 pub impl TJsValue for CSSRule
 
 #external
 pub type CSSRuleList
 pub fn[T : TCSSRuleList] CSSRuleList::into(Self) -> T
+pub impl FromJsAny for CSSRuleList
 pub impl TCSSRuleList for CSSRuleList
 pub impl TJsValue for CSSRuleList
 
 #external
 pub type CSSStyleDeclaration
 pub fn[T : TCSSStyleDeclaration] CSSStyleDeclaration::into(Self) -> T
+pub impl FromJsAny for CSSStyleDeclaration
 pub impl TCSSStyleDeclaration for CSSStyleDeclaration
 pub impl TJsValue for CSSStyleDeclaration
 
 #external
 pub type CSSStyleProperties
 pub fn[T : TCSSStyleProperties] CSSStyleProperties::into(Self) -> T
+pub impl FromJsAny for CSSStyleProperties
 pub impl TCSSStyleDeclaration for CSSStyleProperties
 pub impl TCSSStyleProperties for CSSStyleProperties
 pub impl TJsValue for CSSStyleProperties
@@ -622,6 +660,7 @@ pub impl TJsValue for CSSStyleProperties
 #external
 pub type CSSStyleRule
 pub fn[T : TCSSStyleRule] CSSStyleRule::into(Self) -> T
+pub impl FromJsAny for CSSStyleRule
 pub impl TCSSGroupingRule for CSSStyleRule
 pub impl TCSSRule for CSSStyleRule
 pub impl TCSSStyleRule for CSSStyleRule
@@ -631,6 +670,7 @@ pub impl TJsValue for CSSStyleRule
 pub type CSSStyleSheet
 pub fn[T : TCSSStyleSheet] CSSStyleSheet::into(Self) -> T
 pub fn CSSStyleSheet::new(options? : CSSStyleSheetInit) -> Self
+pub impl FromJsAny for CSSStyleSheet
 pub impl TCSSStyleSheet for CSSStyleSheet
 pub impl TJsValue for CSSStyleSheet
 pub impl TStyleSheet for CSSStyleSheet
@@ -639,6 +679,7 @@ pub impl TStyleSheet for CSSStyleSheet
 pub type CSSStyleSheetInit
 pub fn CSSStyleSheetInit::empty() -> Self
 pub fn CSSStyleSheetInit::new(base_url? : String, media? : &TCSSStyleSheetInitNewMedia, disabled? : Bool) -> Self
+pub impl FromJsAny for CSSStyleSheetInit
 pub impl TJsValue for CSSStyleSheetInit
 
 pub(all) enum CanPlayTypeResult {
@@ -648,6 +689,7 @@ pub(all) enum CanPlayTypeResult {
 }
 pub fn CanPlayTypeResult::from(String) -> Self?
 pub fn CanPlayTypeResult::value(Self) -> String
+pub impl FromJsAny for CanPlayTypeResult
 pub impl TJsValue for CanPlayTypeResult
 pub impl Eq for CanPlayTypeResult
 pub impl Show for CanPlayTypeResult
@@ -658,6 +700,7 @@ pub(all) enum CanvasColorType {
 }
 pub fn CanvasColorType::from(String) -> Self?
 pub fn CanvasColorType::value(Self) -> String
+pub impl FromJsAny for CanvasColorType
 pub impl TJsValue for CanvasColorType
 pub impl Eq for CanvasColorType
 pub impl Show for CanvasColorType
@@ -669,6 +712,7 @@ pub(all) enum CanvasDirection {
 }
 pub fn CanvasDirection::from(String) -> Self?
 pub fn CanvasDirection::value(Self) -> String
+pub impl FromJsAny for CanvasDirection
 pub impl TJsValue for CanvasDirection
 pub impl Eq for CanvasDirection
 pub impl Show for CanvasDirection
@@ -679,6 +723,7 @@ pub(all) enum CanvasFillRule {
 }
 pub fn CanvasFillRule::from(String) -> Self?
 pub fn CanvasFillRule::value(Self) -> String
+pub impl FromJsAny for CanvasFillRule
 pub impl TJsValue for CanvasFillRule
 pub impl Eq for CanvasFillRule
 pub impl Show for CanvasFillRule
@@ -690,6 +735,7 @@ pub(all) enum CanvasFontKerning {
 }
 pub fn CanvasFontKerning::from(String) -> Self?
 pub fn CanvasFontKerning::value(Self) -> String
+pub impl FromJsAny for CanvasFontKerning
 pub impl TJsValue for CanvasFontKerning
 pub impl Eq for CanvasFontKerning
 pub impl Show for CanvasFontKerning
@@ -707,6 +753,7 @@ pub(all) enum CanvasFontStretch {
 }
 pub fn CanvasFontStretch::from(String) -> Self?
 pub fn CanvasFontStretch::value(Self) -> String
+pub impl FromJsAny for CanvasFontStretch
 pub impl TJsValue for CanvasFontStretch
 pub impl Eq for CanvasFontStretch
 pub impl Show for CanvasFontStretch
@@ -722,6 +769,7 @@ pub(all) enum CanvasFontVariantCaps {
 }
 pub fn CanvasFontVariantCaps::from(String) -> Self?
 pub fn CanvasFontVariantCaps::value(Self) -> String
+pub impl FromJsAny for CanvasFontVariantCaps
 pub impl TJsValue for CanvasFontVariantCaps
 pub impl Eq for CanvasFontVariantCaps
 pub impl Show for CanvasFontVariantCaps
@@ -729,6 +777,7 @@ pub impl Show for CanvasFontVariantCaps
 #external
 pub type CanvasGradient
 pub fn[T : TCanvasGradient] CanvasGradient::into(Self) -> T
+pub impl FromJsAny for CanvasGradient
 pub impl TCanvasGradient for CanvasGradient
 pub impl TCanvasRenderingContext2DFillStyle for CanvasGradient
 pub impl TCanvasRenderingContext2DStrokeStyle for CanvasGradient
@@ -739,6 +788,7 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient
 #external
 pub type CanvasImageSource
 pub fn[T : TCanvasImageSource] CanvasImageSource::into(Self) -> T
+pub impl FromJsAny for CanvasImageSource
 pub impl TCanvasImageSource for CanvasImageSource
 pub impl TImageBitmapSource for CanvasImageSource
 pub impl TJsValue for CanvasImageSource
@@ -750,6 +800,7 @@ pub(all) enum CanvasLineCap {
 }
 pub fn CanvasLineCap::from(String) -> Self?
 pub fn CanvasLineCap::value(Self) -> String
+pub impl FromJsAny for CanvasLineCap
 pub impl TJsValue for CanvasLineCap
 pub impl Eq for CanvasLineCap
 pub impl Show for CanvasLineCap
@@ -761,6 +812,7 @@ pub(all) enum CanvasLineJoin {
 }
 pub fn CanvasLineJoin::from(String) -> Self?
 pub fn CanvasLineJoin::value(Self) -> String
+pub impl FromJsAny for CanvasLineJoin
 pub impl TJsValue for CanvasLineJoin
 pub impl Eq for CanvasLineJoin
 pub impl Show for CanvasLineJoin
@@ -768,6 +820,7 @@ pub impl Show for CanvasLineJoin
 #external
 pub type CanvasPattern
 pub fn[T : TCanvasPattern] CanvasPattern::into(Self) -> T
+pub impl FromJsAny for CanvasPattern
 pub impl TCanvasPattern for CanvasPattern
 pub impl TCanvasRenderingContext2DFillStyle for CanvasPattern
 pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern
@@ -778,6 +831,7 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern
 #external
 pub type CanvasRenderingContext2D
 pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(Self) -> T
+pub impl FromJsAny for CanvasRenderingContext2D
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 pub impl TJsValue for CanvasRenderingContext2D
 pub impl TRenderingContext for CanvasRenderingContext2D
@@ -791,6 +845,7 @@ pub impl TCanvasRenderingContext2DFillStyle for CanvasRenderingContext2DFillStyl
 pub type CanvasRenderingContext2DSettings
 pub fn CanvasRenderingContext2DSettings::empty() -> Self
 pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : PredefinedColorSpace, color_type? : CanvasColorType, will_read_frequently? : Bool) -> Self
+pub impl FromJsAny for CanvasRenderingContext2DSettings
 pub impl TJsValue for CanvasRenderingContext2DSettings
 
 #external
@@ -807,6 +862,7 @@ pub(all) enum CanvasTextAlign {
 }
 pub fn CanvasTextAlign::from(String) -> Self?
 pub fn CanvasTextAlign::value(Self) -> String
+pub impl FromJsAny for CanvasTextAlign
 pub impl TJsValue for CanvasTextAlign
 pub impl Eq for CanvasTextAlign
 pub impl Show for CanvasTextAlign
@@ -821,6 +877,7 @@ pub(all) enum CanvasTextBaseline {
 }
 pub fn CanvasTextBaseline::from(String) -> Self?
 pub fn CanvasTextBaseline::value(Self) -> String
+pub impl FromJsAny for CanvasTextBaseline
 pub impl TJsValue for CanvasTextBaseline
 pub impl Eq for CanvasTextBaseline
 pub impl Show for CanvasTextBaseline
@@ -833,6 +890,7 @@ pub(all) enum CanvasTextRendering {
 }
 pub fn CanvasTextRendering::from(String) -> Self?
 pub fn CanvasTextRendering::value(Self) -> String
+pub impl FromJsAny for CanvasTextRendering
 pub impl TJsValue for CanvasTextRendering
 pub impl Eq for CanvasTextRendering
 pub impl Show for CanvasTextRendering
@@ -840,6 +898,7 @@ pub impl Show for CanvasTextRendering
 #external
 pub type CaretPosition
 pub fn[T : TCaretPosition] CaretPosition::into(Self) -> T
+pub impl FromJsAny for CaretPosition
 pub impl TCaretPosition for CaretPosition
 pub impl TJsValue for CaretPosition
 
@@ -847,11 +906,13 @@ pub impl TJsValue for CaretPosition
 pub type CaretPositionFromPointOptions
 pub fn CaretPositionFromPointOptions::empty() -> Self
 pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[ShadowRoot]) -> Self
+pub impl FromJsAny for CaretPositionFromPointOptions
 pub impl TJsValue for CaretPositionFromPointOptions
 
 #external
 pub type CharacterData
 pub fn[T : TCharacterData] CharacterData::into(Self) -> T
+pub impl FromJsAny for CharacterData
 pub impl TCharacterData for CharacterData
 pub impl TEventTarget for CharacterData
 pub impl TJsValue for CharacterData
@@ -861,11 +922,13 @@ pub impl TNode for CharacterData
 pub type CheckVisibilityOptions
 pub fn CheckVisibilityOptions::empty() -> Self
 pub fn CheckVisibilityOptions::new(check_opacity? : Bool, check_visibility_css? : Bool, content_visibility_auto? : Bool, opacity_property? : Bool, visibility_property? : Bool) -> Self
+pub impl FromJsAny for CheckVisibilityOptions
 pub impl TJsValue for CheckVisibilityOptions
 
 #external
 pub type Clipboard
 pub fn[T : TClipboard] Clipboard::into(Self) -> T
+pub impl FromJsAny for Clipboard
 pub impl TClipboard for Clipboard
 pub impl TEventTarget for Clipboard
 pub impl TJsValue for Clipboard
@@ -874,6 +937,7 @@ pub impl TJsValue for Clipboard
 pub type ClipboardChangeEvent
 pub fn[T : TClipboardChangeEvent] ClipboardChangeEvent::into(Self) -> T
 pub fn ClipboardChangeEvent::new(String, event_init_dict? : ClipboardChangeEventInit) -> Self
+pub impl FromJsAny for ClipboardChangeEvent
 pub impl TClipboardChangeEvent for ClipboardChangeEvent
 pub impl TEvent for ClipboardChangeEvent
 pub impl TJsValue for ClipboardChangeEvent
@@ -882,12 +946,14 @@ pub impl TJsValue for ClipboardChangeEvent
 pub type ClipboardChangeEventInit
 pub fn ClipboardChangeEventInit::empty() -> Self
 pub fn ClipboardChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, types? : Array[String], change_id? : Int64) -> Self
+pub impl FromJsAny for ClipboardChangeEventInit
 pub impl TJsValue for ClipboardChangeEventInit
 
 #external
 pub type ClipboardEvent
 pub fn[T : TClipboardEvent] ClipboardEvent::into(Self) -> T
 pub fn ClipboardEvent::new(String, event_init_dict? : ClipboardEventInit) -> Self
+pub impl FromJsAny for ClipboardEvent
 pub impl TClipboardEvent for ClipboardEvent
 pub impl TEvent for ClipboardEvent
 pub impl TJsValue for ClipboardEvent
@@ -896,6 +962,7 @@ pub impl TJsValue for ClipboardEvent
 pub type ClipboardEventInit
 pub fn ClipboardEventInit::empty() -> Self
 pub fn ClipboardEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, clipboard_data? : &TDataTransfer) -> Self
+pub impl FromJsAny for ClipboardEventInit
 pub impl TJsValue for ClipboardEventInit
 
 #external
@@ -903,6 +970,7 @@ pub type ClipboardItem
 pub fn[T : TClipboardItem] ClipboardItem::into(Self) -> T
 pub fn ClipboardItem::new(JsValue, options? : ClipboardItemOptions) -> Self
 pub fn ClipboardItem::supports(String) -> Bool
+pub impl FromJsAny for ClipboardItem
 pub impl TClipboardItem for ClipboardItem
 pub impl TJsValue for ClipboardItem
 
@@ -910,18 +978,21 @@ pub impl TJsValue for ClipboardItem
 pub type ClipboardItemOptions
 pub fn ClipboardItemOptions::empty() -> Self
 pub fn ClipboardItemOptions::new(presentation_style? : PresentationStyle) -> Self
+pub impl FromJsAny for ClipboardItemOptions
 pub impl TJsValue for ClipboardItemOptions
 
 #external
 pub type ClipboardUnsanitizedFormats
 pub fn ClipboardUnsanitizedFormats::empty() -> Self
 pub fn ClipboardUnsanitizedFormats::new(unsanitized? : Array[String]) -> Self
+pub impl FromJsAny for ClipboardUnsanitizedFormats
 pub impl TJsValue for ClipboardUnsanitizedFormats
 
 #external
 pub type CloseEvent
 pub fn[T : TCloseEvent] CloseEvent::into(Self) -> T
 pub fn CloseEvent::new(String, event_init_dict? : CloseEventInit) -> Self
+pub impl FromJsAny for CloseEvent
 pub impl TCloseEvent for CloseEvent
 pub impl TEvent for CloseEvent
 pub impl TJsValue for CloseEvent
@@ -930,12 +1001,14 @@ pub impl TJsValue for CloseEvent
 pub type CloseEventInit
 pub fn CloseEventInit::empty() -> Self
 pub fn CloseEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, was_clean? : Bool, code? : UInt, reason? : String) -> Self
+pub impl FromJsAny for CloseEventInit
 pub impl TJsValue for CloseEventInit
 
 #external
 pub type CloseWatcher
 pub fn[T : TCloseWatcher] CloseWatcher::into(Self) -> T
 pub fn CloseWatcher::new(options? : CloseWatcherOptions) -> Self
+pub impl FromJsAny for CloseWatcher
 pub impl TCloseWatcher for CloseWatcher
 pub impl TEventTarget for CloseWatcher
 pub impl TJsValue for CloseWatcher
@@ -944,6 +1017,7 @@ pub impl TJsValue for CloseWatcher
 pub type CloseWatcherOptions
 pub fn CloseWatcherOptions::empty() -> Self
 pub fn CloseWatcherOptions::new(signal? : &TAbortSignal) -> Self
+pub impl FromJsAny for CloseWatcherOptions
 pub impl TJsValue for CloseWatcherOptions
 
 pub(all) enum ColorSpaceConversion {
@@ -952,6 +1026,7 @@ pub(all) enum ColorSpaceConversion {
 }
 pub fn ColorSpaceConversion::from(String) -> Self?
 pub fn ColorSpaceConversion::value(Self) -> String
+pub impl FromJsAny for ColorSpaceConversion
 pub impl TJsValue for ColorSpaceConversion
 pub impl Eq for ColorSpaceConversion
 pub impl Show for ColorSpaceConversion
@@ -960,6 +1035,7 @@ pub impl Show for ColorSpaceConversion
 pub type CommandEvent
 pub fn[T : TCommandEvent] CommandEvent::into(Self) -> T
 pub fn CommandEvent::new(String, event_init_dict? : CommandEventInit) -> Self
+pub impl FromJsAny for CommandEvent
 pub impl TCommandEvent for CommandEvent
 pub impl TEvent for CommandEvent
 pub impl TJsValue for CommandEvent
@@ -968,12 +1044,14 @@ pub impl TJsValue for CommandEvent
 pub type CommandEventInit
 pub fn CommandEventInit::empty() -> Self
 pub fn CommandEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, source? : &TElement, command? : String) -> Self
+pub impl FromJsAny for CommandEventInit
 pub impl TJsValue for CommandEventInit
 
 #external
 pub type Comment
 pub fn[T : TComment] Comment::into(Self) -> T
 pub fn Comment::new(data? : String) -> Self
+pub impl FromJsAny for Comment
 pub impl TCharacterData for Comment
 pub impl TComment for Comment
 pub impl TEventTarget for Comment
@@ -984,6 +1062,7 @@ pub impl TNode for Comment
 pub type CompositionEvent
 pub fn[T : TCompositionEvent] CompositionEvent::into(Self) -> T
 pub fn CompositionEvent::new(String, event_init_dict? : CompositionEventInit) -> Self
+pub impl FromJsAny for CompositionEvent
 pub impl TCompositionEvent for CompositionEvent
 pub impl TEvent for CompositionEvent
 pub impl TJsValue for CompositionEvent
@@ -993,6 +1072,7 @@ pub impl TUIEvent for CompositionEvent
 pub type CompositionEventInit
 pub fn CompositionEventInit::empty() -> Self
 pub fn CompositionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, data? : String) -> Self
+pub impl FromJsAny for CompositionEventInit
 pub impl TJsValue for CompositionEventInit
 
 #external
@@ -1016,32 +1096,38 @@ pub fn Console::time_end(label? : String) -> Unit
 pub fn Console::time_log(label? : String, Array[&TJsValue]) -> Unit
 pub fn Console::trace(Array[&TJsValue]) -> Unit
 pub fn Console::warn(Array[&TJsValue]) -> Unit
+pub impl FromJsAny for Console
 pub impl TJsValue for Console
 
 #external
 pub type ConvertCoordinateOptions
 pub fn ConvertCoordinateOptions::empty() -> Self
 pub fn ConvertCoordinateOptions::new(from_box? : CSSBoxType, to_box? : CSSBoxType) -> Self
+pub impl FromJsAny for ConvertCoordinateOptions
 pub impl TJsValue for ConvertCoordinateOptions
 
 #external
 pub type CreateHTMLCallback
 pub fn CreateHTMLCallback::new((String, JsValue) -> String) -> Self
+pub impl FromJsAny for CreateHTMLCallback
 pub impl TJsValue for CreateHTMLCallback
 
 #external
 pub type CreateScriptCallback
 pub fn CreateScriptCallback::new((String, JsValue) -> String) -> Self
+pub impl FromJsAny for CreateScriptCallback
 pub impl TJsValue for CreateScriptCallback
 
 #external
 pub type CreateScriptURLCallback
 pub fn CreateScriptURLCallback::new((String, JsValue) -> String) -> Self
+pub impl FromJsAny for CreateScriptURLCallback
 pub impl TJsValue for CreateScriptURLCallback
 
 #external
 pub type CustomElementConstructor
 pub fn CustomElementConstructor::new(() -> HTMLElement) -> Self
+pub impl FromJsAny for CustomElementConstructor
 pub impl TCustomElementRegistryGet for CustomElementConstructor
 pub impl TJsValue for CustomElementConstructor
 
@@ -1049,6 +1135,7 @@ pub impl TJsValue for CustomElementConstructor
 pub type CustomElementRegistry
 pub fn[T : TCustomElementRegistry] CustomElementRegistry::into(Self) -> T
 pub fn CustomElementRegistry::new() -> Self
+pub impl FromJsAny for CustomElementRegistry
 pub impl TCustomElementRegistry for CustomElementRegistry
 pub impl TJsValue for CustomElementRegistry
 
@@ -1062,6 +1149,7 @@ pub impl TCustomElementRegistryGet for CustomElementRegistryGet
 pub type CustomEvent
 pub fn[T : TCustomEvent] CustomEvent::into(Self) -> T
 pub fn CustomEvent::new(String, event_init_dict? : CustomEventInit) -> Self
+pub impl FromJsAny for CustomEvent
 pub impl TCustomEvent for CustomEvent
 pub impl TEvent for CustomEvent
 pub impl TJsValue for CustomEvent
@@ -1070,11 +1158,13 @@ pub impl TJsValue for CustomEvent
 pub type CustomEventInit
 pub fn CustomEventInit::empty() -> Self
 pub fn CustomEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, detail? : JsValue) -> Self
+pub impl FromJsAny for CustomEventInit
 pub impl TJsValue for CustomEventInit
 
 #external
 pub type CustomStateSet
 pub fn[T : TCustomStateSet] CustomStateSet::into(Self) -> T
+pub impl FromJsAny for CustomStateSet
 pub impl TCustomStateSet for CustomStateSet
 pub impl TJsValue for CustomStateSet
 
@@ -1082,12 +1172,14 @@ pub impl TJsValue for CustomStateSet
 pub type DOMException
 pub fn[T : TDOMException] DOMException::into(Self) -> T
 pub fn DOMException::new(message? : String, name? : String) -> Self
+pub impl FromJsAny for DOMException
 pub impl TDOMException for DOMException
 pub impl TJsValue for DOMException
 
 #external
 pub type DOMImplementation
 pub fn[T : TDOMImplementation] DOMImplementation::into(Self) -> T
+pub impl FromJsAny for DOMImplementation
 pub impl TDOMImplementation for DOMImplementation
 pub impl TJsValue for DOMImplementation
 
@@ -1098,6 +1190,7 @@ pub fn DOMMatrix::from_float64array(Float64Array) -> Self
 pub fn DOMMatrix::from_matrix(other? : DOMMatrixInit) -> Self
 pub fn[T : TDOMMatrix] DOMMatrix::into(Self) -> T
 pub fn DOMMatrix::new(init? : &TDOMMatrixNewInit) -> Self
+pub impl FromJsAny for DOMMatrix
 pub impl TDOMMatrix for DOMMatrix
 pub impl TDOMMatrixReadOnly for DOMMatrix
 pub impl TJsValue for DOMMatrix
@@ -1106,12 +1199,14 @@ pub impl TJsValue for DOMMatrix
 pub type DOMMatrix2DInit
 pub fn DOMMatrix2DInit::empty() -> Self
 pub fn DOMMatrix2DInit::new(a? : Double, b? : Double, c? : Double, d? : Double, e? : Double, f? : Double, m11? : Double, m12? : Double, m21? : Double, m22? : Double, m41? : Double, m42? : Double) -> Self
+pub impl FromJsAny for DOMMatrix2DInit
 pub impl TJsValue for DOMMatrix2DInit
 
 #external
 pub type DOMMatrixInit
 pub fn DOMMatrixInit::empty() -> Self
 pub fn DOMMatrixInit::new(a? : Double, b? : Double, c? : Double, d? : Double, e? : Double, f? : Double, m11? : Double, m12? : Double, m21? : Double, m22? : Double, m41? : Double, m42? : Double, m13? : Double, m14? : Double, m23? : Double, m24? : Double, m31? : Double, m32? : Double, m33? : Double, m34? : Double, m43? : Double, m44? : Double, is2d? : Bool) -> Self
+pub impl FromJsAny for DOMMatrixInit
 pub impl TJsValue for DOMMatrixInit
 
 #external
@@ -1121,6 +1216,7 @@ pub fn DOMMatrixReadOnly::from_float64array(Float64Array) -> Self
 pub fn DOMMatrixReadOnly::from_matrix(other? : DOMMatrixInit) -> Self
 pub fn[T : TDOMMatrixReadOnly] DOMMatrixReadOnly::into(Self) -> T
 pub fn DOMMatrixReadOnly::new(init? : &TDOMMatrixReadOnlyNewInit) -> Self
+pub impl FromJsAny for DOMMatrixReadOnly
 pub impl TDOMMatrixReadOnly for DOMMatrixReadOnly
 pub impl TJsValue for DOMMatrixReadOnly
 
@@ -1128,6 +1224,7 @@ pub impl TJsValue for DOMMatrixReadOnly
 pub type DOMParser
 pub fn[T : TDOMParser] DOMParser::into(Self) -> T
 pub fn DOMParser::new() -> Self
+pub impl FromJsAny for DOMParser
 pub impl TDOMParser for DOMParser
 pub impl TJsValue for DOMParser
 
@@ -1140,6 +1237,7 @@ pub(all) enum DOMParserSupportedType {
 }
 pub fn DOMParserSupportedType::from(String) -> Self?
 pub fn DOMParserSupportedType::value(Self) -> String
+pub impl FromJsAny for DOMParserSupportedType
 pub impl TJsValue for DOMParserSupportedType
 pub impl Eq for DOMParserSupportedType
 pub impl Show for DOMParserSupportedType
@@ -1149,6 +1247,7 @@ pub type DOMPoint
 pub fn DOMPoint::from_point(other? : DOMPointInit) -> Self
 pub fn[T : TDOMPoint] DOMPoint::into(Self) -> T
 pub fn DOMPoint::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub impl FromJsAny for DOMPoint
 pub impl TDOMPoint for DOMPoint
 pub impl TDOMPointReadOnly for DOMPoint
 pub impl TJsValue for DOMPoint
@@ -1157,6 +1256,7 @@ pub impl TJsValue for DOMPoint
 pub type DOMPointInit
 pub fn DOMPointInit::empty() -> Self
 pub fn DOMPointInit::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub impl FromJsAny for DOMPointInit
 pub impl TCanvasRenderingContext2DRoundRectRadii for DOMPointInit
 pub impl TCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit
 pub impl TJsValue for DOMPointInit
@@ -1170,6 +1270,7 @@ pub type DOMPointReadOnly
 pub fn DOMPointReadOnly::from_point(other? : DOMPointInit) -> Self
 pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(Self) -> T
 pub fn DOMPointReadOnly::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub impl FromJsAny for DOMPointReadOnly
 pub impl TDOMPointReadOnly for DOMPointReadOnly
 pub impl TJsValue for DOMPointReadOnly
 
@@ -1179,6 +1280,7 @@ pub fn DOMQuad::from_quad(other? : DOMQuadInit) -> Self
 pub fn DOMQuad::from_rect(other? : DOMRectInit) -> Self
 pub fn[T : TDOMQuad] DOMQuad::into(Self) -> T
 pub fn DOMQuad::new(p1? : DOMPointInit, p2? : DOMPointInit, p3? : DOMPointInit, p4? : DOMPointInit) -> Self
+pub impl FromJsAny for DOMQuad
 pub impl TDOMQuad for DOMQuad
 pub impl TJsValue for DOMQuad
 
@@ -1186,6 +1288,7 @@ pub impl TJsValue for DOMQuad
 pub type DOMQuadInit
 pub fn DOMQuadInit::empty() -> Self
 pub fn DOMQuadInit::new(p1? : DOMPointInit, p2? : DOMPointInit, p3? : DOMPointInit, p4? : DOMPointInit) -> Self
+pub impl FromJsAny for DOMQuadInit
 pub impl TJsValue for DOMQuadInit
 
 #external
@@ -1193,6 +1296,7 @@ pub type DOMRect
 pub fn DOMRect::from_rect(other? : DOMRectInit) -> Self
 pub fn[T : TDOMRect] DOMRect::into(Self) -> T
 pub fn DOMRect::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub impl FromJsAny for DOMRect
 pub impl TDOMRect for DOMRect
 pub impl TDOMRectReadOnly for DOMRect
 pub impl TJsValue for DOMRect
@@ -1201,11 +1305,13 @@ pub impl TJsValue for DOMRect
 pub type DOMRectInit
 pub fn DOMRectInit::empty() -> Self
 pub fn DOMRectInit::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub impl FromJsAny for DOMRectInit
 pub impl TJsValue for DOMRectInit
 
 #external
 pub type DOMRectList
 pub fn[T : TDOMRectList] DOMRectList::into(Self) -> T
+pub impl FromJsAny for DOMRectList
 pub impl TDOMRectList for DOMRectList
 pub impl TJsValue for DOMRectList
 
@@ -1214,24 +1320,28 @@ pub type DOMRectReadOnly
 pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit) -> Self
 pub fn[T : TDOMRectReadOnly] DOMRectReadOnly::into(Self) -> T
 pub fn DOMRectReadOnly::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub impl FromJsAny for DOMRectReadOnly
 pub impl TDOMRectReadOnly for DOMRectReadOnly
 pub impl TJsValue for DOMRectReadOnly
 
 #external
 pub type DOMStringList
 pub fn[T : TDOMStringList] DOMStringList::into(Self) -> T
+pub impl FromJsAny for DOMStringList
 pub impl TDOMStringList for DOMStringList
 pub impl TJsValue for DOMStringList
 
 #external
 pub type DOMStringMap
 pub fn[T : TDOMStringMap] DOMStringMap::into(Self) -> T
+pub impl FromJsAny for DOMStringMap
 pub impl TDOMStringMap for DOMStringMap
 pub impl TJsValue for DOMStringMap
 
 #external
 pub type DOMTokenList
 pub fn[T : TDOMTokenList] DOMTokenList::into(Self) -> T
+pub impl FromJsAny for DOMTokenList
 pub impl TDOMTokenList for DOMTokenList
 pub impl TJsValue for DOMTokenList
 
@@ -1239,29 +1349,34 @@ pub impl TJsValue for DOMTokenList
 pub type DataTransfer
 pub fn[T : TDataTransfer] DataTransfer::into(Self) -> T
 pub fn DataTransfer::new() -> Self
+pub impl FromJsAny for DataTransfer
 pub impl TDataTransfer for DataTransfer
 pub impl TJsValue for DataTransfer
 
 #external
 pub type DataTransferItem
 pub fn[T : TDataTransferItem] DataTransferItem::into(Self) -> T
+pub impl FromJsAny for DataTransferItem
 pub impl TDataTransferItem for DataTransferItem
 pub impl TJsValue for DataTransferItem
 
 #external
 pub type DataTransferItemList
 pub fn[T : TDataTransferItemList] DataTransferItemList::into(Self) -> T
+pub impl FromJsAny for DataTransferItemList
 pub impl TDataTransferItemList for DataTransferItemList
 pub impl TJsValue for DataTransferItemList
 
 #external
 pub type DataView
+pub impl FromJsAny for DataView
 pub impl TArrayBufferView for DataView
 pub impl TJsValue for DataView
 
 #external
 pub type DedicatedWorkerGlobalScope
 pub fn[T : TDedicatedWorkerGlobalScope] DedicatedWorkerGlobalScope::into(Self) -> T
+pub impl FromJsAny for DedicatedWorkerGlobalScope
 pub impl TDedicatedWorkerGlobalScope for DedicatedWorkerGlobalScope
 pub impl TEventTarget for DedicatedWorkerGlobalScope
 pub impl TJsValue for DedicatedWorkerGlobalScope
@@ -1271,6 +1386,7 @@ pub impl TWorkerGlobalScope for DedicatedWorkerGlobalScope
 pub type DeferredRequestInit
 pub fn DeferredRequestInit::empty() -> Self
 pub fn DeferredRequestInit::new(method_? : String, headers? : &THeadersInit, body? : &TBodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue, activate_after? : Double) -> Self
+pub impl FromJsAny for DeferredRequestInit
 pub impl TJsValue for DeferredRequestInit
 
 #external
@@ -1278,6 +1394,7 @@ pub type Document
 pub fn[T : TDocument] Document::into(Self) -> T
 pub fn Document::new() -> Self
 pub fn Document::parse_html_unsafe(&TDocumentParseHTMLUnsafeHtml) -> Self
+pub impl FromJsAny for Document
 pub impl TDocument for Document
 pub impl TEventTarget for Document
 pub impl TGeometryNode for Document
@@ -1291,6 +1408,7 @@ pub impl TXMLHttpRequestSendBody for Document
 pub type DocumentFragment
 pub fn[T : TDocumentFragment] DocumentFragment::into(Self) -> T
 pub fn DocumentFragment::new() -> Self
+pub impl FromJsAny for DocumentFragment
 pub impl TDocumentFragment for DocumentFragment
 pub impl TEventTarget for DocumentFragment
 pub impl TJsValue for DocumentFragment
@@ -1303,6 +1421,7 @@ pub(all) enum DocumentReadyState {
 }
 pub fn DocumentReadyState::from(String) -> Self?
 pub fn DocumentReadyState::value(Self) -> String
+pub impl FromJsAny for DocumentReadyState
 pub impl TJsValue for DocumentReadyState
 pub impl Eq for DocumentReadyState
 pub impl Show for DocumentReadyState
@@ -1310,6 +1429,7 @@ pub impl Show for DocumentReadyState
 #external
 pub type DocumentType
 pub fn[T : TDocumentType] DocumentType::into(Self) -> T
+pub impl FromJsAny for DocumentType
 pub impl TDocumentType for DocumentType
 pub impl TEventTarget for DocumentType
 pub impl TJsValue for DocumentType
@@ -1321,6 +1441,7 @@ pub(all) enum DocumentVisibilityState {
 }
 pub fn DocumentVisibilityState::from(String) -> Self?
 pub fn DocumentVisibilityState::value(Self) -> String
+pub impl FromJsAny for DocumentVisibilityState
 pub impl TJsValue for DocumentVisibilityState
 pub impl Eq for DocumentVisibilityState
 pub impl Show for DocumentVisibilityState
@@ -1329,6 +1450,7 @@ pub impl Show for DocumentVisibilityState
 pub type DragEvent
 pub fn[T : TDragEvent] DragEvent::into(Self) -> T
 pub fn DragEvent::new(String, event_init_dict? : DragEventInit) -> Self
+pub impl FromJsAny for DragEvent
 pub impl TDragEvent for DragEvent
 pub impl TEvent for DragEvent
 pub impl TJsValue for DragEvent
@@ -1339,11 +1461,13 @@ pub impl TUIEvent for DragEvent
 pub type DragEventInit
 pub fn DragEventInit::empty() -> Self
 pub fn DragEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, data_transfer? : &TDataTransfer) -> Self
+pub impl FromJsAny for DragEventInit
 pub impl TJsValue for DragEventInit
 
 #external
 pub type Element
 pub fn[T : TElement] Element::into(Self) -> T
+pub impl FromJsAny for Element
 pub impl TElement for Element
 pub impl TEventTarget for Element
 pub impl TGeometryNode for Element
@@ -1362,6 +1486,7 @@ pub impl TStyleSheetOwnerNode for Element
 pub type ElementCreationOptions
 pub fn ElementCreationOptions::empty() -> Self
 pub fn ElementCreationOptions::new(custom_element_registry? : &TCustomElementRegistry, is_? : String) -> Self
+pub impl FromJsAny for ElementCreationOptions
 pub impl TDocumentCreateElementNSOptions for ElementCreationOptions
 pub impl TDocumentCreateElementOptions for ElementCreationOptions
 pub impl TJsValue for ElementCreationOptions
@@ -1370,6 +1495,7 @@ pub impl TJsValue for ElementCreationOptions
 pub type ElementDefinitionOptions
 pub fn ElementDefinitionOptions::empty() -> Self
 pub fn ElementDefinitionOptions::new(extends? : String) -> Self
+pub impl FromJsAny for ElementDefinitionOptions
 pub impl TJsValue for ElementDefinitionOptions
 
 #external
@@ -1380,6 +1506,7 @@ pub impl TElementInnerHTML for ElementInnerHTML
 #external
 pub type ElementInternals
 pub fn[T : TElementInternals] ElementInternals::into(Self) -> T
+pub impl FromJsAny for ElementInternals
 pub impl TElementInternals for ElementInternals
 pub impl TJsValue for ElementInternals
 
@@ -1394,6 +1521,7 @@ pub(all) enum EndingType {
 }
 pub fn EndingType::from(String) -> Self?
 pub fn EndingType::value(Self) -> String
+pub impl FromJsAny for EndingType
 pub impl TJsValue for EndingType
 pub impl Eq for EndingType
 pub impl Show for EndingType
@@ -1402,6 +1530,7 @@ pub impl Show for EndingType
 pub type ErrorEvent
 pub fn[T : TErrorEvent] ErrorEvent::into(Self) -> T
 pub fn ErrorEvent::new(String, event_init_dict? : ErrorEventInit) -> Self
+pub impl FromJsAny for ErrorEvent
 pub impl TErrorEvent for ErrorEvent
 pub impl TEvent for ErrorEvent
 pub impl TJsValue for ErrorEvent
@@ -1410,12 +1539,14 @@ pub impl TJsValue for ErrorEvent
 pub type ErrorEventInit
 pub fn ErrorEventInit::empty() -> Self
 pub fn ErrorEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, message? : String, filename? : String, lineno? : UInt, colno? : UInt, error? : JsValue) -> Self
+pub impl FromJsAny for ErrorEventInit
 pub impl TJsValue for ErrorEventInit
 
 #external
 pub type Event
 pub fn[T : TEvent] Event::into(Self) -> T
 pub fn Event::new(String, event_init_dict? : EventInit) -> Self
+pub impl FromJsAny for Event
 pub impl TEvent for Event
 pub impl TJsValue for Event
 pub impl TWindowEvent for Event
@@ -1424,23 +1555,27 @@ pub impl TWindowEvent for Event
 #external
 pub type EventHandlerNonNull
 pub fn EventHandlerNonNull::new((Event) -> JsValue) -> Self
+pub impl FromJsAny for EventHandlerNonNull
 pub impl TJsValue for EventHandlerNonNull
 
 #external
 pub type EventInit
 pub fn EventInit::empty() -> Self
 pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool) -> Self
+pub impl FromJsAny for EventInit
 pub impl TJsValue for EventInit
 
 #external
 pub type EventListener
 pub fn EventListener::new((Event) -> Unit) -> Self
+pub impl FromJsAny for EventListener
 pub impl TJsValue for EventListener
 
 #external
 pub type EventListenerOptions
 pub fn EventListenerOptions::empty() -> Self
 pub fn EventListenerOptions::new(capture? : Bool) -> Self
+pub impl FromJsAny for EventListenerOptions
 pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions
 pub impl TJsValue for EventListenerOptions
 
@@ -1448,12 +1583,14 @@ pub impl TJsValue for EventListenerOptions
 pub type EventModifierInit
 pub fn EventModifierInit::empty() -> Self
 pub fn EventModifierInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool) -> Self
+pub impl FromJsAny for EventModifierInit
 pub impl TJsValue for EventModifierInit
 
 #external
 pub type EventSource
 pub fn[T : TEventSource] EventSource::into(Self) -> T
 pub fn EventSource::new(String, event_source_init_dict? : EventSourceInit) -> Self
+pub impl FromJsAny for EventSource
 pub impl TEventSource for EventSource
 pub impl TEventTarget for EventSource
 pub impl TJsValue for EventSource
@@ -1462,24 +1599,28 @@ pub impl TJsValue for EventSource
 pub type EventSourceInit
 pub fn EventSourceInit::empty() -> Self
 pub fn EventSourceInit::new(with_credentials? : Bool) -> Self
+pub impl FromJsAny for EventSourceInit
 pub impl TJsValue for EventSourceInit
 
 #external
 pub type EventTarget
 pub fn[T : TEventTarget] EventTarget::into(Self) -> T
 pub fn EventTarget::new() -> Self
+pub impl FromJsAny for EventTarget
 pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget
 
 #external
 pub type External
 pub fn[T : TExternal] External::into(Self) -> T
+pub impl FromJsAny for External
 pub impl TExternal for External
 pub impl TJsValue for External
 
 #external
 pub type FetchLaterResult
 pub fn[T : TFetchLaterResult] FetchLaterResult::into(Self) -> T
+pub impl FromJsAny for FetchLaterResult
 pub impl TFetchLaterResult for FetchLaterResult
 pub impl TJsValue for FetchLaterResult
 
@@ -1487,6 +1628,7 @@ pub impl TJsValue for FetchLaterResult
 pub type File
 pub fn[T : TFile] File::into(Self) -> T
 pub fn File::new(Array[BlobPart], String, options? : FilePropertyBag) -> Self
+pub impl FromJsAny for File
 pub impl TBlob for File
 pub impl TElementInternalsSetFormValueState for File
 pub impl TElementInternalsSetFormValueValue for File
@@ -1497,6 +1639,7 @@ pub impl TJsValue for File
 #external
 pub type FileList
 pub fn[T : TFileList] FileList::into(Self) -> T
+pub impl FromJsAny for FileList
 pub impl TFileList for FileList
 pub impl TJsValue for FileList
 
@@ -1504,12 +1647,14 @@ pub impl TJsValue for FileList
 pub type FilePropertyBag
 pub fn FilePropertyBag::empty() -> Self
 pub fn FilePropertyBag::new(type_? : String, endings? : EndingType, last_modified? : Int64) -> Self
+pub impl FromJsAny for FilePropertyBag
 pub impl TJsValue for FilePropertyBag
 
 #external
 pub type FileReader
 pub fn[T : TFileReader] FileReader::into(Self) -> T
 pub fn FileReader::new() -> Self
+pub impl FromJsAny for FileReader
 pub impl TEventTarget for FileReader
 pub impl TFileReader for FileReader
 pub impl TJsValue for FileReader
@@ -1523,22 +1668,26 @@ pub impl TFileReaderResult for FileReaderResult
 pub type FileReaderSync
 pub fn[T : TFileReaderSync] FileReaderSync::into(Self) -> T
 pub fn FileReaderSync::new() -> Self
+pub impl FromJsAny for FileReaderSync
 pub impl TFileReaderSync for FileReaderSync
 pub impl TJsValue for FileReaderSync
 
 #external
 pub type Float16Array
+pub impl FromJsAny for Float16Array
 pub impl TArrayBufferView for Float16Array
 pub impl TImageDataArray for Float16Array
 pub impl TJsValue for Float16Array
 
 #external
 pub type Float32Array
+pub impl FromJsAny for Float32Array
 pub impl TArrayBufferView for Float32Array
 pub impl TJsValue for Float32Array
 
 #external
 pub type Float64Array
+pub impl FromJsAny for Float64Array
 pub impl TArrayBufferView for Float64Array
 pub impl TJsValue for Float64Array
 
@@ -1546,6 +1695,7 @@ pub impl TJsValue for Float64Array
 pub type FocusEvent
 pub fn[T : TFocusEvent] FocusEvent::into(Self) -> T
 pub fn FocusEvent::new(String, event_init_dict? : FocusEventInit) -> Self
+pub impl FromJsAny for FocusEvent
 pub impl TEvent for FocusEvent
 pub impl TFocusEvent for FocusEvent
 pub impl TJsValue for FocusEvent
@@ -1555,18 +1705,21 @@ pub impl TUIEvent for FocusEvent
 pub type FocusEventInit
 pub fn FocusEventInit::empty() -> Self
 pub fn FocusEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, related_target? : &TEventTarget) -> Self
+pub impl FromJsAny for FocusEventInit
 pub impl TJsValue for FocusEventInit
 
 #external
 pub type FocusOptions
 pub fn FocusOptions::empty() -> Self
 pub fn FocusOptions::new(prevent_scroll? : Bool, focus_visible? : Bool) -> Self
+pub impl FromJsAny for FocusOptions
 pub impl TJsValue for FocusOptions
 
 #external
 pub type FormData
 pub fn[T : TFormData] FormData::into(Self) -> T
 pub fn FormData::new(form? : &THTMLFormElement, submitter? : &THTMLElement) -> Self
+pub impl FromJsAny for FormData
 pub impl TElementInternalsSetFormValueState for FormData
 pub impl TElementInternalsSetFormValueValue for FormData
 pub impl TFormData for FormData
@@ -1576,6 +1729,7 @@ pub impl TXMLHttpRequestBodyInit for FormData
 #external
 pub type FormDataEntryValue
 pub fn[T : TFormDataEntryValue] FormDataEntryValue::into(Self) -> T
+pub impl FromJsAny for FormDataEntryValue
 pub impl TFormDataEntryValue for FormDataEntryValue
 pub impl TJsValue for FormDataEntryValue
 
@@ -1583,6 +1737,7 @@ pub impl TJsValue for FormDataEntryValue
 pub type FormDataEvent
 pub fn[T : TFormDataEvent] FormDataEvent::into(Self) -> T
 pub fn FormDataEvent::new(String, FormDataEventInit) -> Self
+pub impl FromJsAny for FormDataEvent
 pub impl TEvent for FormDataEvent
 pub impl TFormDataEvent for FormDataEvent
 pub impl TJsValue for FormDataEvent
@@ -1591,11 +1746,13 @@ pub impl TJsValue for FormDataEvent
 pub type FormDataEventInit
 pub fn FormDataEventInit::empty() -> Self
 pub fn FormDataEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, &TFormData) -> Self
+pub impl FromJsAny for FormDataEventInit
 pub impl TJsValue for FormDataEventInit
 
 #external
 pub type FrameRequestCallback
 pub fn FrameRequestCallback::new((Double) -> Unit) -> Self
+pub impl FromJsAny for FrameRequestCallback
 pub impl TJsValue for FrameRequestCallback
 
 pub(all) enum FullscreenNavigationUI {
@@ -1605,6 +1762,7 @@ pub(all) enum FullscreenNavigationUI {
 }
 pub fn FullscreenNavigationUI::from(String) -> Self?
 pub fn FullscreenNavigationUI::value(Self) -> String
+pub impl FromJsAny for FullscreenNavigationUI
 pub impl TJsValue for FullscreenNavigationUI
 pub impl Eq for FullscreenNavigationUI
 pub impl Show for FullscreenNavigationUI
@@ -1613,21 +1771,25 @@ pub impl Show for FullscreenNavigationUI
 pub type FullscreenOptions
 pub fn FullscreenOptions::empty() -> Self
 pub fn FullscreenOptions::new(navigation_ui? : FullscreenNavigationUI) -> Self
+pub impl FromJsAny for FullscreenOptions
 pub impl TJsValue for FullscreenOptions
 
 #external
 pub type Function
 pub fn Function::new((JsValue) -> JsValue) -> Self
+pub impl FromJsAny for Function
 pub impl TJsValue for Function
 pub impl TTimerHandler for Function
 
 #external
 pub type FunctionStringCallback
 pub fn FunctionStringCallback::new((String) -> Unit) -> Self
+pub impl FromJsAny for FunctionStringCallback
 pub impl TJsValue for FunctionStringCallback
 
 #external
 pub type GPUCanvasContext
+pub impl FromJsAny for GPUCanvasContext
 pub impl TJsValue for GPUCanvasContext
 pub impl TOffscreenRenderingContext for GPUCanvasContext
 pub impl TRenderingContext for GPUCanvasContext
@@ -1635,6 +1797,7 @@ pub impl TRenderingContext for GPUCanvasContext
 #external
 pub type GeometryNode
 pub fn[T : TGeometryNode] GeometryNode::into(Self) -> T
+pub impl FromJsAny for GeometryNode
 pub impl TGeometryNode for GeometryNode
 pub impl TJsValue for GeometryNode
 
@@ -1642,23 +1805,27 @@ pub impl TJsValue for GeometryNode
 pub type GetComposedRangesOptions
 pub fn GetComposedRangesOptions::empty() -> Self
 pub fn GetComposedRangesOptions::new(shadow_roots? : Array[ShadowRoot]) -> Self
+pub impl FromJsAny for GetComposedRangesOptions
 pub impl TJsValue for GetComposedRangesOptions
 
 #external
 pub type GetHTMLOptions
 pub fn GetHTMLOptions::empty() -> Self
 pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[ShadowRoot]) -> Self
+pub impl FromJsAny for GetHTMLOptions
 pub impl TJsValue for GetHTMLOptions
 
 #external
 pub type GetRootNodeOptions
 pub fn GetRootNodeOptions::empty() -> Self
 pub fn GetRootNodeOptions::new(composed? : Bool) -> Self
+pub impl FromJsAny for GetRootNodeOptions
 pub impl TJsValue for GetRootNodeOptions
 
 #external
 pub type HTMLAllCollection
 pub fn[T : THTMLAllCollection] HTMLAllCollection::into(Self) -> T
+pub impl FromJsAny for HTMLAllCollection
 pub impl THTMLAllCollection for HTMLAllCollection
 pub impl TJsValue for HTMLAllCollection
 
@@ -1676,6 +1843,7 @@ pub impl THTMLAllCollectionNamedItem for HTMLAllCollectionNamedItem
 pub type HTMLAnchorElement
 pub fn[T : THTMLAnchorElement] HTMLAnchorElement::into(Self) -> T
 pub fn HTMLAnchorElement::new() -> Self
+pub impl FromJsAny for HTMLAnchorElement
 pub impl TElement for HTMLAnchorElement
 pub impl TEventTarget for HTMLAnchorElement
 pub impl THTMLAnchorElement for HTMLAnchorElement
@@ -1687,6 +1855,7 @@ pub impl TNode for HTMLAnchorElement
 pub type HTMLAreaElement
 pub fn[T : THTMLAreaElement] HTMLAreaElement::into(Self) -> T
 pub fn HTMLAreaElement::new() -> Self
+pub impl FromJsAny for HTMLAreaElement
 pub impl TElement for HTMLAreaElement
 pub impl TEventTarget for HTMLAreaElement
 pub impl THTMLAreaElement for HTMLAreaElement
@@ -1698,6 +1867,7 @@ pub impl TNode for HTMLAreaElement
 pub type HTMLAudioElement
 pub fn[T : THTMLAudioElement] HTMLAudioElement::into(Self) -> T
 pub fn HTMLAudioElement::new() -> Self
+pub impl FromJsAny for HTMLAudioElement
 pub impl TElement for HTMLAudioElement
 pub impl TEventTarget for HTMLAudioElement
 pub impl THTMLAudioElement for HTMLAudioElement
@@ -1710,6 +1880,7 @@ pub impl TNode for HTMLAudioElement
 pub type HTMLBRElement
 pub fn[T : THTMLBRElement] HTMLBRElement::into(Self) -> T
 pub fn HTMLBRElement::new() -> Self
+pub impl FromJsAny for HTMLBRElement
 pub impl TElement for HTMLBRElement
 pub impl TEventTarget for HTMLBRElement
 pub impl THTMLBRElement for HTMLBRElement
@@ -1721,6 +1892,7 @@ pub impl TNode for HTMLBRElement
 pub type HTMLBaseElement
 pub fn[T : THTMLBaseElement] HTMLBaseElement::into(Self) -> T
 pub fn HTMLBaseElement::new() -> Self
+pub impl FromJsAny for HTMLBaseElement
 pub impl TElement for HTMLBaseElement
 pub impl TEventTarget for HTMLBaseElement
 pub impl THTMLBaseElement for HTMLBaseElement
@@ -1732,6 +1904,7 @@ pub impl TNode for HTMLBaseElement
 pub type HTMLBodyElement
 pub fn[T : THTMLBodyElement] HTMLBodyElement::into(Self) -> T
 pub fn HTMLBodyElement::new() -> Self
+pub impl FromJsAny for HTMLBodyElement
 pub impl TElement for HTMLBodyElement
 pub impl TEventTarget for HTMLBodyElement
 pub impl THTMLBodyElement for HTMLBodyElement
@@ -1743,6 +1916,7 @@ pub impl TNode for HTMLBodyElement
 pub type HTMLButtonElement
 pub fn[T : THTMLButtonElement] HTMLButtonElement::into(Self) -> T
 pub fn HTMLButtonElement::new() -> Self
+pub impl FromJsAny for HTMLButtonElement
 pub impl TElement for HTMLButtonElement
 pub impl TEventTarget for HTMLButtonElement
 pub impl THTMLButtonElement for HTMLButtonElement
@@ -1754,6 +1928,7 @@ pub impl TNode for HTMLButtonElement
 pub type HTMLCanvasElement
 pub fn[T : THTMLCanvasElement] HTMLCanvasElement::into(Self) -> T
 pub fn HTMLCanvasElement::new() -> Self
+pub impl FromJsAny for HTMLCanvasElement
 pub impl TCanvasImageSource for HTMLCanvasElement
 pub impl TElement for HTMLCanvasElement
 pub impl TEventTarget for HTMLCanvasElement
@@ -1766,6 +1941,7 @@ pub impl TNode for HTMLCanvasElement
 #external
 pub type HTMLCollection
 pub fn[T : THTMLCollection] HTMLCollection::into(Self) -> T
+pub impl FromJsAny for HTMLCollection
 pub impl THTMLAllCollectionItem for HTMLCollection
 pub impl THTMLAllCollectionNamedItem for HTMLCollection
 pub impl THTMLCollection for HTMLCollection
@@ -1775,6 +1951,7 @@ pub impl TJsValue for HTMLCollection
 pub type HTMLDListElement
 pub fn[T : THTMLDListElement] HTMLDListElement::into(Self) -> T
 pub fn HTMLDListElement::new() -> Self
+pub impl FromJsAny for HTMLDListElement
 pub impl TElement for HTMLDListElement
 pub impl TEventTarget for HTMLDListElement
 pub impl THTMLDListElement for HTMLDListElement
@@ -1786,6 +1963,7 @@ pub impl TNode for HTMLDListElement
 pub type HTMLDataElement
 pub fn[T : THTMLDataElement] HTMLDataElement::into(Self) -> T
 pub fn HTMLDataElement::new() -> Self
+pub impl FromJsAny for HTMLDataElement
 pub impl TElement for HTMLDataElement
 pub impl TEventTarget for HTMLDataElement
 pub impl THTMLDataElement for HTMLDataElement
@@ -1797,6 +1975,7 @@ pub impl TNode for HTMLDataElement
 pub type HTMLDataListElement
 pub fn[T : THTMLDataListElement] HTMLDataListElement::into(Self) -> T
 pub fn HTMLDataListElement::new() -> Self
+pub impl FromJsAny for HTMLDataListElement
 pub impl TElement for HTMLDataListElement
 pub impl TEventTarget for HTMLDataListElement
 pub impl THTMLDataListElement for HTMLDataListElement
@@ -1808,6 +1987,7 @@ pub impl TNode for HTMLDataListElement
 pub type HTMLDetailsElement
 pub fn[T : THTMLDetailsElement] HTMLDetailsElement::into(Self) -> T
 pub fn HTMLDetailsElement::new() -> Self
+pub impl FromJsAny for HTMLDetailsElement
 pub impl TElement for HTMLDetailsElement
 pub impl TEventTarget for HTMLDetailsElement
 pub impl THTMLDetailsElement for HTMLDetailsElement
@@ -1819,6 +1999,7 @@ pub impl TNode for HTMLDetailsElement
 pub type HTMLDialogElement
 pub fn[T : THTMLDialogElement] HTMLDialogElement::into(Self) -> T
 pub fn HTMLDialogElement::new() -> Self
+pub impl FromJsAny for HTMLDialogElement
 pub impl TElement for HTMLDialogElement
 pub impl TEventTarget for HTMLDialogElement
 pub impl THTMLDialogElement for HTMLDialogElement
@@ -1830,6 +2011,7 @@ pub impl TNode for HTMLDialogElement
 pub type HTMLDirectoryElement
 pub fn[T : THTMLDirectoryElement] HTMLDirectoryElement::into(Self) -> T
 pub fn HTMLDirectoryElement::new() -> Self
+pub impl FromJsAny for HTMLDirectoryElement
 pub impl TElement for HTMLDirectoryElement
 pub impl TEventTarget for HTMLDirectoryElement
 pub impl THTMLDirectoryElement for HTMLDirectoryElement
@@ -1841,6 +2023,7 @@ pub impl TNode for HTMLDirectoryElement
 pub type HTMLDivElement
 pub fn[T : THTMLDivElement] HTMLDivElement::into(Self) -> T
 pub fn HTMLDivElement::new() -> Self
+pub impl FromJsAny for HTMLDivElement
 pub impl TElement for HTMLDivElement
 pub impl TEventTarget for HTMLDivElement
 pub impl THTMLDivElement for HTMLDivElement
@@ -1852,6 +2035,7 @@ pub impl TNode for HTMLDivElement
 pub type HTMLElement
 pub fn[T : THTMLElement] HTMLElement::into(Self) -> T
 pub fn HTMLElement::new() -> Self
+pub impl FromJsAny for HTMLElement
 pub impl TElement for HTMLElement
 pub impl TEventTarget for HTMLElement
 pub impl THTMLElement for HTMLElement
@@ -1869,6 +2053,7 @@ pub impl THTMLElementHidden for HTMLElementHidden
 pub type HTMLEmbedElement
 pub fn[T : THTMLEmbedElement] HTMLEmbedElement::into(Self) -> T
 pub fn HTMLEmbedElement::new() -> Self
+pub impl FromJsAny for HTMLEmbedElement
 pub impl TElement for HTMLEmbedElement
 pub impl TEventTarget for HTMLEmbedElement
 pub impl THTMLElement for HTMLEmbedElement
@@ -1880,6 +2065,7 @@ pub impl TNode for HTMLEmbedElement
 pub type HTMLFieldSetElement
 pub fn[T : THTMLFieldSetElement] HTMLFieldSetElement::into(Self) -> T
 pub fn HTMLFieldSetElement::new() -> Self
+pub impl FromJsAny for HTMLFieldSetElement
 pub impl TElement for HTMLFieldSetElement
 pub impl TEventTarget for HTMLFieldSetElement
 pub impl THTMLElement for HTMLFieldSetElement
@@ -1891,6 +2077,7 @@ pub impl TNode for HTMLFieldSetElement
 pub type HTMLFontElement
 pub fn[T : THTMLFontElement] HTMLFontElement::into(Self) -> T
 pub fn HTMLFontElement::new() -> Self
+pub impl FromJsAny for HTMLFontElement
 pub impl TElement for HTMLFontElement
 pub impl TEventTarget for HTMLFontElement
 pub impl THTMLElement for HTMLFontElement
@@ -1901,6 +2088,7 @@ pub impl TNode for HTMLFontElement
 #external
 pub type HTMLFormControlsCollection
 pub fn[T : THTMLFormControlsCollection] HTMLFormControlsCollection::into(Self) -> T
+pub impl FromJsAny for HTMLFormControlsCollection
 pub impl THTMLCollection for HTMLFormControlsCollection
 pub impl THTMLFormControlsCollection for HTMLFormControlsCollection
 pub impl TJsValue for HTMLFormControlsCollection
@@ -1914,6 +2102,7 @@ pub impl THTMLFormControlsCollectionNamedItem for HTMLFormControlsCollectionName
 pub type HTMLFormElement
 pub fn[T : THTMLFormElement] HTMLFormElement::into(Self) -> T
 pub fn HTMLFormElement::new() -> Self
+pub impl FromJsAny for HTMLFormElement
 pub impl TElement for HTMLFormElement
 pub impl TEventTarget for HTMLFormElement
 pub impl THTMLElement for HTMLFormElement
@@ -1930,6 +2119,7 @@ pub impl THTMLFormElementGetByName for HTMLFormElementGetByName
 pub type HTMLFrameElement
 pub fn[T : THTMLFrameElement] HTMLFrameElement::into(Self) -> T
 pub fn HTMLFrameElement::new() -> Self
+pub impl FromJsAny for HTMLFrameElement
 pub impl TElement for HTMLFrameElement
 pub impl TEventTarget for HTMLFrameElement
 pub impl THTMLElement for HTMLFrameElement
@@ -1941,6 +2131,7 @@ pub impl TNode for HTMLFrameElement
 pub type HTMLFrameSetElement
 pub fn[T : THTMLFrameSetElement] HTMLFrameSetElement::into(Self) -> T
 pub fn HTMLFrameSetElement::new() -> Self
+pub impl FromJsAny for HTMLFrameSetElement
 pub impl TElement for HTMLFrameSetElement
 pub impl TEventTarget for HTMLFrameSetElement
 pub impl THTMLElement for HTMLFrameSetElement
@@ -1952,6 +2143,7 @@ pub impl TNode for HTMLFrameSetElement
 pub type HTMLHRElement
 pub fn[T : THTMLHRElement] HTMLHRElement::into(Self) -> T
 pub fn HTMLHRElement::new() -> Self
+pub impl FromJsAny for HTMLHRElement
 pub impl TElement for HTMLHRElement
 pub impl TEventTarget for HTMLHRElement
 pub impl THTMLElement for HTMLHRElement
@@ -1963,6 +2155,7 @@ pub impl TNode for HTMLHRElement
 pub type HTMLHeadElement
 pub fn[T : THTMLHeadElement] HTMLHeadElement::into(Self) -> T
 pub fn HTMLHeadElement::new() -> Self
+pub impl FromJsAny for HTMLHeadElement
 pub impl TElement for HTMLHeadElement
 pub impl TEventTarget for HTMLHeadElement
 pub impl THTMLElement for HTMLHeadElement
@@ -1974,6 +2167,7 @@ pub impl TNode for HTMLHeadElement
 pub type HTMLHeadingElement
 pub fn[T : THTMLHeadingElement] HTMLHeadingElement::into(Self) -> T
 pub fn HTMLHeadingElement::new() -> Self
+pub impl FromJsAny for HTMLHeadingElement
 pub impl TElement for HTMLHeadingElement
 pub impl TEventTarget for HTMLHeadingElement
 pub impl THTMLElement for HTMLHeadingElement
@@ -1985,6 +2179,7 @@ pub impl TNode for HTMLHeadingElement
 pub type HTMLHtmlElement
 pub fn[T : THTMLHtmlElement] HTMLHtmlElement::into(Self) -> T
 pub fn HTMLHtmlElement::new() -> Self
+pub impl FromJsAny for HTMLHtmlElement
 pub impl TElement for HTMLHtmlElement
 pub impl TEventTarget for HTMLHtmlElement
 pub impl THTMLElement for HTMLHtmlElement
@@ -1996,6 +2191,7 @@ pub impl TNode for HTMLHtmlElement
 pub type HTMLIFrameElement
 pub fn[T : THTMLIFrameElement] HTMLIFrameElement::into(Self) -> T
 pub fn HTMLIFrameElement::new() -> Self
+pub impl FromJsAny for HTMLIFrameElement
 pub impl TElement for HTMLIFrameElement
 pub impl TEventTarget for HTMLIFrameElement
 pub impl THTMLElement for HTMLIFrameElement
@@ -2012,6 +2208,7 @@ pub impl THTMLIFrameElementSrcdoc for HTMLIFrameElementSrcdoc
 pub type HTMLImageElement
 pub fn[T : THTMLImageElement] HTMLImageElement::into(Self) -> T
 pub fn HTMLImageElement::new() -> Self
+pub impl FromJsAny for HTMLImageElement
 pub impl TElement for HTMLImageElement
 pub impl TEventTarget for HTMLImageElement
 pub impl THTMLElement for HTMLImageElement
@@ -2024,6 +2221,7 @@ pub impl TNode for HTMLImageElement
 pub type HTMLInputElement
 pub fn[T : THTMLInputElement] HTMLInputElement::into(Self) -> T
 pub fn HTMLInputElement::new() -> Self
+pub impl FromJsAny for HTMLInputElement
 pub impl TElement for HTMLInputElement
 pub impl TEventTarget for HTMLInputElement
 pub impl THTMLElement for HTMLInputElement
@@ -2035,6 +2233,7 @@ pub impl TNode for HTMLInputElement
 pub type HTMLLIElement
 pub fn[T : THTMLLIElement] HTMLLIElement::into(Self) -> T
 pub fn HTMLLIElement::new() -> Self
+pub impl FromJsAny for HTMLLIElement
 pub impl TElement for HTMLLIElement
 pub impl TEventTarget for HTMLLIElement
 pub impl THTMLElement for HTMLLIElement
@@ -2046,6 +2245,7 @@ pub impl TNode for HTMLLIElement
 pub type HTMLLabelElement
 pub fn[T : THTMLLabelElement] HTMLLabelElement::into(Self) -> T
 pub fn HTMLLabelElement::new() -> Self
+pub impl FromJsAny for HTMLLabelElement
 pub impl TElement for HTMLLabelElement
 pub impl TEventTarget for HTMLLabelElement
 pub impl THTMLElement for HTMLLabelElement
@@ -2057,6 +2257,7 @@ pub impl TNode for HTMLLabelElement
 pub type HTMLLegendElement
 pub fn[T : THTMLLegendElement] HTMLLegendElement::into(Self) -> T
 pub fn HTMLLegendElement::new() -> Self
+pub impl FromJsAny for HTMLLegendElement
 pub impl TElement for HTMLLegendElement
 pub impl TEventTarget for HTMLLegendElement
 pub impl THTMLElement for HTMLLegendElement
@@ -2068,6 +2269,7 @@ pub impl TNode for HTMLLegendElement
 pub type HTMLLinkElement
 pub fn[T : THTMLLinkElement] HTMLLinkElement::into(Self) -> T
 pub fn HTMLLinkElement::new() -> Self
+pub impl FromJsAny for HTMLLinkElement
 pub impl TElement for HTMLLinkElement
 pub impl TEventTarget for HTMLLinkElement
 pub impl THTMLElement for HTMLLinkElement
@@ -2079,6 +2281,7 @@ pub impl TNode for HTMLLinkElement
 pub type HTMLMapElement
 pub fn[T : THTMLMapElement] HTMLMapElement::into(Self) -> T
 pub fn HTMLMapElement::new() -> Self
+pub impl FromJsAny for HTMLMapElement
 pub impl TElement for HTMLMapElement
 pub impl TEventTarget for HTMLMapElement
 pub impl THTMLElement for HTMLMapElement
@@ -2090,6 +2293,7 @@ pub impl TNode for HTMLMapElement
 pub type HTMLMarqueeElement
 pub fn[T : THTMLMarqueeElement] HTMLMarqueeElement::into(Self) -> T
 pub fn HTMLMarqueeElement::new() -> Self
+pub impl FromJsAny for HTMLMarqueeElement
 pub impl TElement for HTMLMarqueeElement
 pub impl TEventTarget for HTMLMarqueeElement
 pub impl THTMLElement for HTMLMarqueeElement
@@ -2100,6 +2304,7 @@ pub impl TNode for HTMLMarqueeElement
 #external
 pub type HTMLMediaElement
 pub fn[T : THTMLMediaElement] HTMLMediaElement::into(Self) -> T
+pub impl FromJsAny for HTMLMediaElement
 pub impl TElement for HTMLMediaElement
 pub impl TEventTarget for HTMLMediaElement
 pub impl THTMLElement for HTMLMediaElement
@@ -2111,6 +2316,7 @@ pub impl TNode for HTMLMediaElement
 pub type HTMLMenuElement
 pub fn[T : THTMLMenuElement] HTMLMenuElement::into(Self) -> T
 pub fn HTMLMenuElement::new() -> Self
+pub impl FromJsAny for HTMLMenuElement
 pub impl TElement for HTMLMenuElement
 pub impl TEventTarget for HTMLMenuElement
 pub impl THTMLElement for HTMLMenuElement
@@ -2122,6 +2328,7 @@ pub impl TNode for HTMLMenuElement
 pub type HTMLMetaElement
 pub fn[T : THTMLMetaElement] HTMLMetaElement::into(Self) -> T
 pub fn HTMLMetaElement::new() -> Self
+pub impl FromJsAny for HTMLMetaElement
 pub impl TElement for HTMLMetaElement
 pub impl TEventTarget for HTMLMetaElement
 pub impl THTMLElement for HTMLMetaElement
@@ -2133,6 +2340,7 @@ pub impl TNode for HTMLMetaElement
 pub type HTMLMeterElement
 pub fn[T : THTMLMeterElement] HTMLMeterElement::into(Self) -> T
 pub fn HTMLMeterElement::new() -> Self
+pub impl FromJsAny for HTMLMeterElement
 pub impl TElement for HTMLMeterElement
 pub impl TEventTarget for HTMLMeterElement
 pub impl THTMLElement for HTMLMeterElement
@@ -2144,6 +2352,7 @@ pub impl TNode for HTMLMeterElement
 pub type HTMLModElement
 pub fn[T : THTMLModElement] HTMLModElement::into(Self) -> T
 pub fn HTMLModElement::new() -> Self
+pub impl FromJsAny for HTMLModElement
 pub impl TElement for HTMLModElement
 pub impl TEventTarget for HTMLModElement
 pub impl THTMLElement for HTMLModElement
@@ -2155,6 +2364,7 @@ pub impl TNode for HTMLModElement
 pub type HTMLOListElement
 pub fn[T : THTMLOListElement] HTMLOListElement::into(Self) -> T
 pub fn HTMLOListElement::new() -> Self
+pub impl FromJsAny for HTMLOListElement
 pub impl TElement for HTMLOListElement
 pub impl TEventTarget for HTMLOListElement
 pub impl THTMLElement for HTMLOListElement
@@ -2166,6 +2376,7 @@ pub impl TNode for HTMLOListElement
 pub type HTMLObjectElement
 pub fn[T : THTMLObjectElement] HTMLObjectElement::into(Self) -> T
 pub fn HTMLObjectElement::new() -> Self
+pub impl FromJsAny for HTMLObjectElement
 pub impl TElement for HTMLObjectElement
 pub impl TEventTarget for HTMLObjectElement
 pub impl THTMLElement for HTMLObjectElement
@@ -2177,6 +2388,7 @@ pub impl TNode for HTMLObjectElement
 pub type HTMLOptGroupElement
 pub fn[T : THTMLOptGroupElement] HTMLOptGroupElement::into(Self) -> T
 pub fn HTMLOptGroupElement::new() -> Self
+pub impl FromJsAny for HTMLOptGroupElement
 pub impl TElement for HTMLOptGroupElement
 pub impl TEventTarget for HTMLOptGroupElement
 pub impl THTMLElement for HTMLOptGroupElement
@@ -2190,6 +2402,7 @@ pub impl TNode for HTMLOptGroupElement
 pub type HTMLOptionElement
 pub fn[T : THTMLOptionElement] HTMLOptionElement::into(Self) -> T
 pub fn HTMLOptionElement::new() -> Self
+pub impl FromJsAny for HTMLOptionElement
 pub impl TElement for HTMLOptionElement
 pub impl TEventTarget for HTMLOptionElement
 pub impl THTMLElement for HTMLOptionElement
@@ -2202,6 +2415,7 @@ pub impl TNode for HTMLOptionElement
 #external
 pub type HTMLOptionsCollection
 pub fn[T : THTMLOptionsCollection] HTMLOptionsCollection::into(Self) -> T
+pub impl FromJsAny for HTMLOptionsCollection
 pub impl THTMLCollection for HTMLOptionsCollection
 pub impl THTMLOptionsCollection for HTMLOptionsCollection
 pub impl TJsValue for HTMLOptionsCollection
@@ -2209,6 +2423,7 @@ pub impl TJsValue for HTMLOptionsCollection
 #external
 pub type HTMLOrSVGImageElement
 pub fn[T : THTMLOrSVGImageElement] HTMLOrSVGImageElement::into(Self) -> T
+pub impl FromJsAny for HTMLOrSVGImageElement
 pub impl TCanvasImageSource for HTMLOrSVGImageElement
 pub impl THTMLOrSVGImageElement for HTMLOrSVGImageElement
 pub impl TJsValue for HTMLOrSVGImageElement
@@ -2216,6 +2431,7 @@ pub impl TJsValue for HTMLOrSVGImageElement
 #external
 pub type HTMLOrSVGScriptElement
 pub fn[T : THTMLOrSVGScriptElement] HTMLOrSVGScriptElement::into(Self) -> T
+pub impl FromJsAny for HTMLOrSVGScriptElement
 pub impl THTMLOrSVGScriptElement for HTMLOrSVGScriptElement
 pub impl TJsValue for HTMLOrSVGScriptElement
 
@@ -2223,6 +2439,7 @@ pub impl TJsValue for HTMLOrSVGScriptElement
 pub type HTMLOutputElement
 pub fn[T : THTMLOutputElement] HTMLOutputElement::into(Self) -> T
 pub fn HTMLOutputElement::new() -> Self
+pub impl FromJsAny for HTMLOutputElement
 pub impl TElement for HTMLOutputElement
 pub impl TEventTarget for HTMLOutputElement
 pub impl THTMLElement for HTMLOutputElement
@@ -2234,6 +2451,7 @@ pub impl TNode for HTMLOutputElement
 pub type HTMLParagraphElement
 pub fn[T : THTMLParagraphElement] HTMLParagraphElement::into(Self) -> T
 pub fn HTMLParagraphElement::new() -> Self
+pub impl FromJsAny for HTMLParagraphElement
 pub impl TElement for HTMLParagraphElement
 pub impl TEventTarget for HTMLParagraphElement
 pub impl THTMLElement for HTMLParagraphElement
@@ -2245,6 +2463,7 @@ pub impl TNode for HTMLParagraphElement
 pub type HTMLParamElement
 pub fn[T : THTMLParamElement] HTMLParamElement::into(Self) -> T
 pub fn HTMLParamElement::new() -> Self
+pub impl FromJsAny for HTMLParamElement
 pub impl TElement for HTMLParamElement
 pub impl TEventTarget for HTMLParamElement
 pub impl THTMLElement for HTMLParamElement
@@ -2256,6 +2475,7 @@ pub impl TNode for HTMLParamElement
 pub type HTMLPictureElement
 pub fn[T : THTMLPictureElement] HTMLPictureElement::into(Self) -> T
 pub fn HTMLPictureElement::new() -> Self
+pub impl FromJsAny for HTMLPictureElement
 pub impl TElement for HTMLPictureElement
 pub impl TEventTarget for HTMLPictureElement
 pub impl THTMLElement for HTMLPictureElement
@@ -2267,6 +2487,7 @@ pub impl TNode for HTMLPictureElement
 pub type HTMLPreElement
 pub fn[T : THTMLPreElement] HTMLPreElement::into(Self) -> T
 pub fn HTMLPreElement::new() -> Self
+pub impl FromJsAny for HTMLPreElement
 pub impl TElement for HTMLPreElement
 pub impl TEventTarget for HTMLPreElement
 pub impl THTMLElement for HTMLPreElement
@@ -2278,6 +2499,7 @@ pub impl TNode for HTMLPreElement
 pub type HTMLProgressElement
 pub fn[T : THTMLProgressElement] HTMLProgressElement::into(Self) -> T
 pub fn HTMLProgressElement::new() -> Self
+pub impl FromJsAny for HTMLProgressElement
 pub impl TElement for HTMLProgressElement
 pub impl TEventTarget for HTMLProgressElement
 pub impl THTMLElement for HTMLProgressElement
@@ -2289,6 +2511,7 @@ pub impl TNode for HTMLProgressElement
 pub type HTMLQuoteElement
 pub fn[T : THTMLQuoteElement] HTMLQuoteElement::into(Self) -> T
 pub fn HTMLQuoteElement::new() -> Self
+pub impl FromJsAny for HTMLQuoteElement
 pub impl TElement for HTMLQuoteElement
 pub impl TEventTarget for HTMLQuoteElement
 pub impl THTMLElement for HTMLQuoteElement
@@ -2301,6 +2524,7 @@ pub type HTMLScriptElement
 pub fn[T : THTMLScriptElement] HTMLScriptElement::into(Self) -> T
 pub fn HTMLScriptElement::new() -> Self
 pub fn HTMLScriptElement::supports(String) -> Bool
+pub impl FromJsAny for HTMLScriptElement
 pub impl TElement for HTMLScriptElement
 pub impl TEventTarget for HTMLScriptElement
 pub impl THTMLElement for HTMLScriptElement
@@ -2313,6 +2537,7 @@ pub impl TNode for HTMLScriptElement
 pub type HTMLSelectElement
 pub fn[T : THTMLSelectElement] HTMLSelectElement::into(Self) -> T
 pub fn HTMLSelectElement::new() -> Self
+pub impl FromJsAny for HTMLSelectElement
 pub impl TElement for HTMLSelectElement
 pub impl TEventTarget for HTMLSelectElement
 pub impl THTMLElement for HTMLSelectElement
@@ -2324,6 +2549,7 @@ pub impl TNode for HTMLSelectElement
 pub type HTMLSelectedContentElement
 pub fn[T : THTMLSelectedContentElement] HTMLSelectedContentElement::into(Self) -> T
 pub fn HTMLSelectedContentElement::new() -> Self
+pub impl FromJsAny for HTMLSelectedContentElement
 pub impl TElement for HTMLSelectedContentElement
 pub impl TEventTarget for HTMLSelectedContentElement
 pub impl THTMLElement for HTMLSelectedContentElement
@@ -2335,6 +2561,7 @@ pub impl TNode for HTMLSelectedContentElement
 pub type HTMLSlotElement
 pub fn[T : THTMLSlotElement] HTMLSlotElement::into(Self) -> T
 pub fn HTMLSlotElement::new() -> Self
+pub impl FromJsAny for HTMLSlotElement
 pub impl TElement for HTMLSlotElement
 pub impl TEventTarget for HTMLSlotElement
 pub impl THTMLElement for HTMLSlotElement
@@ -2346,6 +2573,7 @@ pub impl TNode for HTMLSlotElement
 pub type HTMLSourceElement
 pub fn[T : THTMLSourceElement] HTMLSourceElement::into(Self) -> T
 pub fn HTMLSourceElement::new() -> Self
+pub impl FromJsAny for HTMLSourceElement
 pub impl TElement for HTMLSourceElement
 pub impl TEventTarget for HTMLSourceElement
 pub impl THTMLElement for HTMLSourceElement
@@ -2357,6 +2585,7 @@ pub impl TNode for HTMLSourceElement
 pub type HTMLSpanElement
 pub fn[T : THTMLSpanElement] HTMLSpanElement::into(Self) -> T
 pub fn HTMLSpanElement::new() -> Self
+pub impl FromJsAny for HTMLSpanElement
 pub impl TElement for HTMLSpanElement
 pub impl TEventTarget for HTMLSpanElement
 pub impl THTMLElement for HTMLSpanElement
@@ -2368,6 +2597,7 @@ pub impl TNode for HTMLSpanElement
 pub type HTMLStyleElement
 pub fn[T : THTMLStyleElement] HTMLStyleElement::into(Self) -> T
 pub fn HTMLStyleElement::new() -> Self
+pub impl FromJsAny for HTMLStyleElement
 pub impl TElement for HTMLStyleElement
 pub impl TEventTarget for HTMLStyleElement
 pub impl THTMLElement for HTMLStyleElement
@@ -2379,6 +2609,7 @@ pub impl TNode for HTMLStyleElement
 pub type HTMLTableCaptionElement
 pub fn[T : THTMLTableCaptionElement] HTMLTableCaptionElement::into(Self) -> T
 pub fn HTMLTableCaptionElement::new() -> Self
+pub impl FromJsAny for HTMLTableCaptionElement
 pub impl TElement for HTMLTableCaptionElement
 pub impl TEventTarget for HTMLTableCaptionElement
 pub impl THTMLElement for HTMLTableCaptionElement
@@ -2390,6 +2621,7 @@ pub impl TNode for HTMLTableCaptionElement
 pub type HTMLTableCellElement
 pub fn[T : THTMLTableCellElement] HTMLTableCellElement::into(Self) -> T
 pub fn HTMLTableCellElement::new() -> Self
+pub impl FromJsAny for HTMLTableCellElement
 pub impl TElement for HTMLTableCellElement
 pub impl TEventTarget for HTMLTableCellElement
 pub impl THTMLElement for HTMLTableCellElement
@@ -2401,6 +2633,7 @@ pub impl TNode for HTMLTableCellElement
 pub type HTMLTableColElement
 pub fn[T : THTMLTableColElement] HTMLTableColElement::into(Self) -> T
 pub fn HTMLTableColElement::new() -> Self
+pub impl FromJsAny for HTMLTableColElement
 pub impl TElement for HTMLTableColElement
 pub impl TEventTarget for HTMLTableColElement
 pub impl THTMLElement for HTMLTableColElement
@@ -2412,6 +2645,7 @@ pub impl TNode for HTMLTableColElement
 pub type HTMLTableElement
 pub fn[T : THTMLTableElement] HTMLTableElement::into(Self) -> T
 pub fn HTMLTableElement::new() -> Self
+pub impl FromJsAny for HTMLTableElement
 pub impl TElement for HTMLTableElement
 pub impl TEventTarget for HTMLTableElement
 pub impl THTMLElement for HTMLTableElement
@@ -2423,6 +2657,7 @@ pub impl TNode for HTMLTableElement
 pub type HTMLTableRowElement
 pub fn[T : THTMLTableRowElement] HTMLTableRowElement::into(Self) -> T
 pub fn HTMLTableRowElement::new() -> Self
+pub impl FromJsAny for HTMLTableRowElement
 pub impl TElement for HTMLTableRowElement
 pub impl TEventTarget for HTMLTableRowElement
 pub impl THTMLElement for HTMLTableRowElement
@@ -2434,6 +2669,7 @@ pub impl TNode for HTMLTableRowElement
 pub type HTMLTableSectionElement
 pub fn[T : THTMLTableSectionElement] HTMLTableSectionElement::into(Self) -> T
 pub fn HTMLTableSectionElement::new() -> Self
+pub impl FromJsAny for HTMLTableSectionElement
 pub impl TElement for HTMLTableSectionElement
 pub impl TEventTarget for HTMLTableSectionElement
 pub impl THTMLElement for HTMLTableSectionElement
@@ -2445,6 +2681,7 @@ pub impl TNode for HTMLTableSectionElement
 pub type HTMLTemplateElement
 pub fn[T : THTMLTemplateElement] HTMLTemplateElement::into(Self) -> T
 pub fn HTMLTemplateElement::new() -> Self
+pub impl FromJsAny for HTMLTemplateElement
 pub impl TElement for HTMLTemplateElement
 pub impl TEventTarget for HTMLTemplateElement
 pub impl THTMLElement for HTMLTemplateElement
@@ -2456,6 +2693,7 @@ pub impl TNode for HTMLTemplateElement
 pub type HTMLTextAreaElement
 pub fn[T : THTMLTextAreaElement] HTMLTextAreaElement::into(Self) -> T
 pub fn HTMLTextAreaElement::new() -> Self
+pub impl FromJsAny for HTMLTextAreaElement
 pub impl TElement for HTMLTextAreaElement
 pub impl TEventTarget for HTMLTextAreaElement
 pub impl THTMLElement for HTMLTextAreaElement
@@ -2467,6 +2705,7 @@ pub impl TNode for HTMLTextAreaElement
 pub type HTMLTimeElement
 pub fn[T : THTMLTimeElement] HTMLTimeElement::into(Self) -> T
 pub fn HTMLTimeElement::new() -> Self
+pub impl FromJsAny for HTMLTimeElement
 pub impl TElement for HTMLTimeElement
 pub impl TEventTarget for HTMLTimeElement
 pub impl THTMLElement for HTMLTimeElement
@@ -2478,6 +2717,7 @@ pub impl TNode for HTMLTimeElement
 pub type HTMLTitleElement
 pub fn[T : THTMLTitleElement] HTMLTitleElement::into(Self) -> T
 pub fn HTMLTitleElement::new() -> Self
+pub impl FromJsAny for HTMLTitleElement
 pub impl TElement for HTMLTitleElement
 pub impl TEventTarget for HTMLTitleElement
 pub impl THTMLElement for HTMLTitleElement
@@ -2489,6 +2729,7 @@ pub impl TNode for HTMLTitleElement
 pub type HTMLTrackElement
 pub fn[T : THTMLTrackElement] HTMLTrackElement::into(Self) -> T
 pub fn HTMLTrackElement::new() -> Self
+pub impl FromJsAny for HTMLTrackElement
 pub impl TElement for HTMLTrackElement
 pub impl TEventTarget for HTMLTrackElement
 pub impl THTMLElement for HTMLTrackElement
@@ -2500,6 +2741,7 @@ pub impl TNode for HTMLTrackElement
 pub type HTMLUListElement
 pub fn[T : THTMLUListElement] HTMLUListElement::into(Self) -> T
 pub fn HTMLUListElement::new() -> Self
+pub impl FromJsAny for HTMLUListElement
 pub impl TElement for HTMLUListElement
 pub impl TEventTarget for HTMLUListElement
 pub impl THTMLElement for HTMLUListElement
@@ -2510,6 +2752,7 @@ pub impl TNode for HTMLUListElement
 #external
 pub type HTMLUnknownElement
 pub fn[T : THTMLUnknownElement] HTMLUnknownElement::into(Self) -> T
+pub impl FromJsAny for HTMLUnknownElement
 pub impl TElement for HTMLUnknownElement
 pub impl TEventTarget for HTMLUnknownElement
 pub impl THTMLElement for HTMLUnknownElement
@@ -2521,6 +2764,7 @@ pub impl TNode for HTMLUnknownElement
 pub type HTMLVideoElement
 pub fn[T : THTMLVideoElement] HTMLVideoElement::into(Self) -> T
 pub fn HTMLVideoElement::new() -> Self
+pub impl FromJsAny for HTMLVideoElement
 pub impl TCanvasImageSource for HTMLVideoElement
 pub impl TElement for HTMLVideoElement
 pub impl TEventTarget for HTMLVideoElement
@@ -2534,6 +2778,7 @@ pub impl TNode for HTMLVideoElement
 pub type HashChangeEvent
 pub fn[T : THashChangeEvent] HashChangeEvent::into(Self) -> T
 pub fn HashChangeEvent::new(String, event_init_dict? : HashChangeEventInit) -> Self
+pub impl FromJsAny for HashChangeEvent
 pub impl TEvent for HashChangeEvent
 pub impl THashChangeEvent for HashChangeEvent
 pub impl TJsValue for HashChangeEvent
@@ -2542,47 +2787,55 @@ pub impl TJsValue for HashChangeEvent
 pub type HashChangeEventInit
 pub fn HashChangeEventInit::empty() -> Self
 pub fn HashChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, old_url? : String, new_url? : String) -> Self
+pub impl FromJsAny for HashChangeEventInit
 pub impl TJsValue for HashChangeEventInit
 
 #external
 pub type Headers
 pub fn[T : THeaders] Headers::into(Self) -> T
 pub fn Headers::new(init? : &THeadersInit) -> Self
+pub impl FromJsAny for Headers
 pub impl THeaders for Headers
 pub impl TJsValue for Headers
 
 #external
 pub type HeadersInit
 pub fn[T : THeadersInit] HeadersInit::into(Self) -> T
+pub impl FromJsAny for HeadersInit
 pub impl THeadersInit for HeadersInit
 pub impl TJsValue for HeadersInit
 
 #external
 pub type History
 pub fn[T : THistory] History::into(Self) -> T
+pub impl FromJsAny for History
 pub impl THistory for History
 pub impl TJsValue for History
 
 #external
 pub type IdleDeadline
 pub fn[T : TIdleDeadline] IdleDeadline::into(Self) -> T
+pub impl FromJsAny for IdleDeadline
 pub impl TIdleDeadline for IdleDeadline
 pub impl TJsValue for IdleDeadline
 
 #external
 pub type IdleRequestCallback
 pub fn IdleRequestCallback::new((IdleDeadline) -> Unit) -> Self
+pub impl FromJsAny for IdleRequestCallback
 pub impl TJsValue for IdleRequestCallback
 
 #external
 pub type IdleRequestOptions
 pub fn IdleRequestOptions::empty() -> Self
 pub fn IdleRequestOptions::new(timeout? : UInt) -> Self
+pub impl FromJsAny for IdleRequestOptions
 pub impl TJsValue for IdleRequestOptions
 
 #external
 pub type ImageBitmap
 pub fn[T : TImageBitmap] ImageBitmap::into(Self) -> T
+pub impl FromJsAny for ImageBitmap
 pub impl TCanvasImageSource for ImageBitmap
 pub impl TImageBitmap for ImageBitmap
 pub impl TJsValue for ImageBitmap
@@ -2591,11 +2844,13 @@ pub impl TJsValue for ImageBitmap
 pub type ImageBitmapOptions
 pub fn ImageBitmapOptions::empty() -> Self
 pub fn ImageBitmapOptions::new(image_orientation? : ImageOrientation, premultiply_alpha? : PremultiplyAlpha, color_space_conversion? : ColorSpaceConversion, resize_width? : UInt, resize_height? : UInt, resize_quality? : ResizeQuality) -> Self
+pub impl FromJsAny for ImageBitmapOptions
 pub impl TJsValue for ImageBitmapOptions
 
 #external
 pub type ImageBitmapRenderingContext
 pub fn[T : TImageBitmapRenderingContext] ImageBitmapRenderingContext::into(Self) -> T
+pub impl FromJsAny for ImageBitmapRenderingContext
 pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 pub impl TJsValue for ImageBitmapRenderingContext
 pub impl TOffscreenRenderingContext for ImageBitmapRenderingContext
@@ -2610,11 +2865,13 @@ pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanva
 pub type ImageBitmapRenderingContextSettings
 pub fn ImageBitmapRenderingContextSettings::empty() -> Self
 pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
+pub impl FromJsAny for ImageBitmapRenderingContextSettings
 pub impl TJsValue for ImageBitmapRenderingContextSettings
 
 #external
 pub type ImageBitmapSource
 pub fn[T : TImageBitmapSource] ImageBitmapSource::into(Self) -> T
+pub impl FromJsAny for ImageBitmapSource
 pub impl TImageBitmapSource for ImageBitmapSource
 pub impl TJsValue for ImageBitmapSource
 
@@ -2623,6 +2880,7 @@ pub type ImageData
 pub fn[T : TImageData] ImageData::into(Self) -> T
 pub fn ImageData::new(UInt, UInt, settings? : ImageDataSettings) -> Self
 pub fn ImageData::new_from_array(&TImageDataArray, UInt, sh? : UInt, settings? : ImageDataSettings) -> Self
+pub impl FromJsAny for ImageData
 pub impl TImageBitmapSource for ImageData
 pub impl TImageData for ImageData
 pub impl TJsValue for ImageData
@@ -2630,6 +2888,7 @@ pub impl TJsValue for ImageData
 #external
 pub type ImageDataArray
 pub fn[T : TImageDataArray] ImageDataArray::into(Self) -> T
+pub impl FromJsAny for ImageDataArray
 pub impl TImageDataArray for ImageDataArray
 pub impl TJsValue for ImageDataArray
 
@@ -2639,6 +2898,7 @@ pub(all) enum ImageDataPixelFormat {
 }
 pub fn ImageDataPixelFormat::from(String) -> Self?
 pub fn ImageDataPixelFormat::value(Self) -> String
+pub impl FromJsAny for ImageDataPixelFormat
 pub impl TJsValue for ImageDataPixelFormat
 pub impl Eq for ImageDataPixelFormat
 pub impl Show for ImageDataPixelFormat
@@ -2647,12 +2907,14 @@ pub impl Show for ImageDataPixelFormat
 pub type ImageDataSettings
 pub fn ImageDataSettings::empty() -> Self
 pub fn ImageDataSettings::new(color_space? : PredefinedColorSpace, pixel_format? : ImageDataPixelFormat) -> Self
+pub impl FromJsAny for ImageDataSettings
 pub impl TJsValue for ImageDataSettings
 
 #external
 pub type ImageEncodeOptions
 pub fn ImageEncodeOptions::empty() -> Self
 pub fn ImageEncodeOptions::new(type_? : String, quality? : Double) -> Self
+pub impl FromJsAny for ImageEncodeOptions
 pub impl TJsValue for ImageEncodeOptions
 
 pub(all) enum ImageOrientation {
@@ -2661,6 +2923,7 @@ pub(all) enum ImageOrientation {
 }
 pub fn ImageOrientation::from(String) -> Self?
 pub fn ImageOrientation::value(Self) -> String
+pub impl FromJsAny for ImageOrientation
 pub impl TJsValue for ImageOrientation
 pub impl Eq for ImageOrientation
 pub impl Show for ImageOrientation
@@ -2672,6 +2935,7 @@ pub(all) enum ImageSmoothingQuality {
 }
 pub fn ImageSmoothingQuality::from(String) -> Self?
 pub fn ImageSmoothingQuality::value(Self) -> String
+pub impl FromJsAny for ImageSmoothingQuality
 pub impl TJsValue for ImageSmoothingQuality
 pub impl Eq for ImageSmoothingQuality
 pub impl Show for ImageSmoothingQuality
@@ -2680,6 +2944,7 @@ pub impl Show for ImageSmoothingQuality
 pub type ImportNodeOptions
 pub fn ImportNodeOptions::empty() -> Self
 pub fn ImportNodeOptions::new(custom_element_registry? : &TCustomElementRegistry, self_only? : Bool) -> Self
+pub impl FromJsAny for ImportNodeOptions
 pub impl TDocumentImportNodeOptions for ImportNodeOptions
 pub impl TJsValue for ImportNodeOptions
 
@@ -2687,6 +2952,7 @@ pub impl TJsValue for ImportNodeOptions
 pub type InputEvent
 pub fn[T : TInputEvent] InputEvent::into(Self) -> T
 pub fn InputEvent::new(String, event_init_dict? : InputEventInit) -> Self
+pub impl FromJsAny for InputEvent
 pub impl TEvent for InputEvent
 pub impl TInputEvent for InputEvent
 pub impl TJsValue for InputEvent
@@ -2696,20 +2962,24 @@ pub impl TUIEvent for InputEvent
 pub type InputEventInit
 pub fn InputEventInit::empty() -> Self
 pub fn InputEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, data? : String, is_composing? : Bool, input_type? : String) -> Self
+pub impl FromJsAny for InputEventInit
 pub impl TJsValue for InputEventInit
 
 #external
 pub type Int16Array
+pub impl FromJsAny for Int16Array
 pub impl TArrayBufferView for Int16Array
 pub impl TJsValue for Int16Array
 
 #external
 pub type Int32Array
+pub impl FromJsAny for Int32Array
 pub impl TArrayBufferView for Int32Array
 pub impl TJsValue for Int32Array
 
 #external
 pub type Int8Array
+pub impl FromJsAny for Int8Array
 pub impl TArrayBufferView for Int8Array
 pub impl TJsValue for Int8Array
 
@@ -2717,18 +2987,21 @@ pub impl TJsValue for Int8Array
 pub type IntersectionObserver
 pub fn[T : TIntersectionObserver] IntersectionObserver::into(Self) -> T
 pub fn IntersectionObserver::new(IntersectionObserverCallback, options? : IntersectionObserverInit) -> Self
+pub impl FromJsAny for IntersectionObserver
 pub impl TIntersectionObserver for IntersectionObserver
 pub impl TJsValue for IntersectionObserver
 
 #external
 pub type IntersectionObserverCallback
 pub fn IntersectionObserverCallback::new((Array[IntersectionObserverEntry], IntersectionObserver) -> Unit) -> Self
+pub impl FromJsAny for IntersectionObserverCallback
 pub impl TJsValue for IntersectionObserverCallback
 
 #external
 pub type IntersectionObserverEntry
 pub fn[T : TIntersectionObserverEntry] IntersectionObserverEntry::into(Self) -> T
 pub fn IntersectionObserverEntry::new(IntersectionObserverEntryInit) -> Self
+pub impl FromJsAny for IntersectionObserverEntry
 pub impl TIntersectionObserverEntry for IntersectionObserverEntry
 pub impl TJsValue for IntersectionObserverEntry
 
@@ -2736,12 +3009,14 @@ pub impl TJsValue for IntersectionObserverEntry
 pub type IntersectionObserverEntryInit
 pub fn IntersectionObserverEntryInit::empty() -> Self
 pub fn IntersectionObserverEntryInit::new(Double, DOMRectInit, DOMRectInit, DOMRectInit, Bool, Bool, Double, &TElement) -> Self
+pub impl FromJsAny for IntersectionObserverEntryInit
 pub impl TJsValue for IntersectionObserverEntryInit
 
 #external
 pub type IntersectionObserverInit
 pub fn IntersectionObserverInit::empty() -> Self
 pub fn IntersectionObserverInit::new(root? : &TIntersectionObserverInitNewRoot, root_margin? : String, scroll_margin? : String, threshold? : &TIntersectionObserverInitNewThreshold, delay? : Int, track_visibility? : Bool) -> Self
+pub impl FromJsAny for IntersectionObserverInit
 pub impl TJsValue for IntersectionObserverInit
 
 #external
@@ -2753,6 +3028,7 @@ pub impl TIntersectionObserverRoot for IntersectionObserverRoot
 pub type JsArray
 pub fn[T : TJsValue] JsArray::from_array(Array[T]) -> Self
 pub fn[T] JsArray::to_array(Self) -> Array[T]
+pub impl FromJsAny for JsArray
 pub impl TJsValue for JsArray
 
 #external
@@ -2761,13 +3037,15 @@ pub fn[T : TJsValue] JsPromise::catch_(Self[T], (JsValue) -> T) -> Self[T]
 pub fn[T] JsPromise::finally_(Self[T], () -> Unit) -> Self[T]
 pub fn[T] JsPromise::reject(JsValue) -> Self[T]
 pub fn[T : TJsValue] JsPromise::resolve(T) -> Self[T]
-pub fn[T, U : TJsValue] JsPromise::then(Self[T], (T) -> U) -> Self[U]
+pub fn[T : FromJsAny, U : TJsValue] JsPromise::then(Self[T], (T) -> U) -> Self[U]
+pub impl[T] FromJsAny for JsPromise[T]
 pub impl[T] TJsValue for JsPromise[T]
 
 #external
 pub type JsUndefined
 #as_free_fn
 pub fn JsUndefined::undefined() -> Self
+pub impl FromJsAny for JsUndefined
 pub impl TCustomElementRegistryGet for JsUndefined
 pub impl TJsValue for JsUndefined
 pub impl TWindowEvent for JsUndefined
@@ -2779,6 +3057,7 @@ pub fn[T : TJsValue] JsValue::into(Self) -> T
 pub fn JsValue::is_null(Self) -> Bool
 pub fn[T] JsValue::null() -> T
 pub fn JsValue::undefined() -> Self
+pub impl FromJsAny for JsValue
 pub impl THeadersInit for JsValue
 pub impl TJsValue for JsValue
 pub impl TURLSearchParamsNewInit for JsValue
@@ -2787,6 +3066,7 @@ pub impl TURLSearchParamsNewInit for JsValue
 pub type KeyboardEvent
 pub fn[T : TKeyboardEvent] KeyboardEvent::into(Self) -> T
 pub fn KeyboardEvent::new(String, event_init_dict? : KeyboardEventInit) -> Self
+pub impl FromJsAny for KeyboardEvent
 pub impl TEvent for KeyboardEvent
 pub impl TJsValue for KeyboardEvent
 pub impl TKeyboardEvent for KeyboardEvent
@@ -2796,23 +3076,27 @@ pub impl TUIEvent for KeyboardEvent
 pub type KeyboardEventInit
 pub fn KeyboardEventInit::empty() -> Self
 pub fn KeyboardEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, key? : String, code? : String, location? : UInt, repeat? : Bool, is_composing? : Bool, char_code? : UInt, key_code? : UInt) -> Self
+pub impl FromJsAny for KeyboardEventInit
 pub impl TJsValue for KeyboardEventInit
 
 #external
 pub type Location
 pub fn[T : TLocation] Location::into(Self) -> T
+pub impl FromJsAny for Location
 pub impl TJsValue for Location
 pub impl TLocation for Location
 
 #external
 pub type MediaError
 pub fn[T : TMediaError] MediaError::into(Self) -> T
+pub impl FromJsAny for MediaError
 pub impl TJsValue for MediaError
 pub impl TMediaError for MediaError
 
 #external
 pub type MediaList
 pub fn[T : TMediaList] MediaList::into(Self) -> T
+pub impl FromJsAny for MediaList
 pub impl TCSSStyleSheetInitNewMedia for MediaList
 pub impl TJsValue for MediaList
 pub impl TMediaList for MediaList
@@ -2820,12 +3104,14 @@ pub impl TMediaList for MediaList
 #external
 pub type MediaProvider
 pub fn[T : TMediaProvider] MediaProvider::into(Self) -> T
+pub impl FromJsAny for MediaProvider
 pub impl TJsValue for MediaProvider
 pub impl TMediaProvider for MediaProvider
 
 #external
 pub type MediaQueryList
 pub fn[T : TMediaQueryList] MediaQueryList::into(Self) -> T
+pub impl FromJsAny for MediaQueryList
 pub impl TEventTarget for MediaQueryList
 pub impl TJsValue for MediaQueryList
 pub impl TMediaQueryList for MediaQueryList
@@ -2834,6 +3120,7 @@ pub impl TMediaQueryList for MediaQueryList
 pub type MediaQueryListEvent
 pub fn[T : TMediaQueryListEvent] MediaQueryListEvent::into(Self) -> T
 pub fn MediaQueryListEvent::new(String, event_init_dict? : MediaQueryListEventInit) -> Self
+pub impl FromJsAny for MediaQueryListEvent
 pub impl TEvent for MediaQueryListEvent
 pub impl TJsValue for MediaQueryListEvent
 pub impl TMediaQueryListEvent for MediaQueryListEvent
@@ -2842,16 +3129,19 @@ pub impl TMediaQueryListEvent for MediaQueryListEvent
 pub type MediaQueryListEventInit
 pub fn MediaQueryListEventInit::empty() -> Self
 pub fn MediaQueryListEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, media? : String, matches? : Bool) -> Self
+pub impl FromJsAny for MediaQueryListEventInit
 pub impl TJsValue for MediaQueryListEventInit
 
 #external
 pub type MediaSource
+pub impl FromJsAny for MediaSource
 pub impl TJsValue for MediaSource
 pub impl TMediaProvider for MediaSource
 pub impl TURLCreateObjectURLObj for MediaSource
 
 #external
 pub type MediaStream
+pub impl FromJsAny for MediaStream
 pub impl TJsValue for MediaStream
 pub impl TMediaProvider for MediaStream
 
@@ -2859,6 +3149,7 @@ pub impl TMediaProvider for MediaStream
 pub type MessageChannel
 pub fn[T : TMessageChannel] MessageChannel::into(Self) -> T
 pub fn MessageChannel::new() -> Self
+pub impl FromJsAny for MessageChannel
 pub impl TJsValue for MessageChannel
 pub impl TMessageChannel for MessageChannel
 
@@ -2866,6 +3157,7 @@ pub impl TMessageChannel for MessageChannel
 pub type MessageEvent
 pub fn[T : TMessageEvent] MessageEvent::into(Self) -> T
 pub fn MessageEvent::new(String, event_init_dict? : MessageEventInit) -> Self
+pub impl FromJsAny for MessageEvent
 pub impl TEvent for MessageEvent
 pub impl TJsValue for MessageEvent
 pub impl TMessageEvent for MessageEvent
@@ -2874,17 +3166,20 @@ pub impl TMessageEvent for MessageEvent
 pub type MessageEventInit
 pub fn MessageEventInit::empty() -> Self
 pub fn MessageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : &TMessageEventSource, ports? : Array[MessagePort]) -> Self
+pub impl FromJsAny for MessageEventInit
 pub impl TJsValue for MessageEventInit
 
 #external
 pub type MessageEventSource
 pub fn[T : TMessageEventSource] MessageEventSource::into(Self) -> T
+pub impl FromJsAny for MessageEventSource
 pub impl TJsValue for MessageEventSource
 pub impl TMessageEventSource for MessageEventSource
 
 #external
 pub type MessagePort
 pub fn[T : TMessagePort] MessagePort::into(Self) -> T
+pub impl FromJsAny for MessagePort
 pub impl TEventTarget for MessagePort
 pub impl TJsValue for MessagePort
 pub impl TMessageEventSource for MessagePort
@@ -2893,12 +3188,14 @@ pub impl TMessagePort for MessagePort
 #external
 pub type MimeType
 pub fn[T : TMimeType] MimeType::into(Self) -> T
+pub impl FromJsAny for MimeType
 pub impl TJsValue for MimeType
 pub impl TMimeType for MimeType
 
 #external
 pub type MimeTypeArray
 pub fn[T : TMimeTypeArray] MimeTypeArray::into(Self) -> T
+pub impl FromJsAny for MimeTypeArray
 pub impl TJsValue for MimeTypeArray
 pub impl TMimeTypeArray for MimeTypeArray
 
@@ -2906,6 +3203,7 @@ pub impl TMimeTypeArray for MimeTypeArray
 pub type MouseEvent
 pub fn[T : TMouseEvent] MouseEvent::into(Self) -> T
 pub fn MouseEvent::new(String, event_init_dict? : MouseEventInit) -> Self
+pub impl FromJsAny for MouseEvent
 pub impl TEvent for MouseEvent
 pub impl TJsValue for MouseEvent
 pub impl TMouseEvent for MouseEvent
@@ -2915,17 +3213,20 @@ pub impl TUIEvent for MouseEvent
 pub type MouseEventInit
 pub fn MouseEventInit::empty() -> Self
 pub fn MouseEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget) -> Self
+pub impl FromJsAny for MouseEventInit
 pub impl TJsValue for MouseEventInit
 
 #external
 pub type MutationCallback
 pub fn MutationCallback::new((Array[MutationRecord], MutationObserver) -> Unit) -> Self
+pub impl FromJsAny for MutationCallback
 pub impl TJsValue for MutationCallback
 
 #external
 pub type MutationObserver
 pub fn[T : TMutationObserver] MutationObserver::into(Self) -> T
 pub fn MutationObserver::new(MutationCallback) -> Self
+pub impl FromJsAny for MutationObserver
 pub impl TJsValue for MutationObserver
 pub impl TMutationObserver for MutationObserver
 
@@ -2933,17 +3234,20 @@ pub impl TMutationObserver for MutationObserver
 pub type MutationObserverInit
 pub fn MutationObserverInit::empty() -> Self
 pub fn MutationObserverInit::new(child_list? : Bool, attributes? : Bool, character_data? : Bool, subtree? : Bool, attribute_old_value? : Bool, character_data_old_value? : Bool, attribute_filter? : Array[String]) -> Self
+pub impl FromJsAny for MutationObserverInit
 pub impl TJsValue for MutationObserverInit
 
 #external
 pub type MutationRecord
 pub fn[T : TMutationRecord] MutationRecord::into(Self) -> T
+pub impl FromJsAny for MutationRecord
 pub impl TJsValue for MutationRecord
 pub impl TMutationRecord for MutationRecord
 
 #external
 pub type NamedNodeMap
 pub fn[T : TNamedNodeMap] NamedNodeMap::into(Self) -> T
+pub impl FromJsAny for NamedNodeMap
 pub impl TJsValue for NamedNodeMap
 pub impl TNamedNodeMap for NamedNodeMap
 
@@ -2951,6 +3255,7 @@ pub impl TNamedNodeMap for NamedNodeMap
 pub type NavigateEvent
 pub fn[T : TNavigateEvent] NavigateEvent::into(Self) -> T
 pub fn NavigateEvent::new(String, NavigateEventInit) -> Self
+pub impl FromJsAny for NavigateEvent
 pub impl TEvent for NavigateEvent
 pub impl TJsValue for NavigateEvent
 pub impl TNavigateEvent for NavigateEvent
@@ -2959,11 +3264,13 @@ pub impl TNavigateEvent for NavigateEvent
 pub type NavigateEventInit
 pub fn NavigateEventInit::empty() -> Self
 pub fn NavigateEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, navigation_type? : NavigationType, &TNavigationDestination, can_intercept? : Bool, user_initiated? : Bool, hash_change? : Bool, &TAbortSignal, form_data? : &TFormData, download_request? : String, info? : JsValue, has_ua_visual_transition? : Bool, source_element? : &TElement) -> Self
+pub impl FromJsAny for NavigateEventInit
 pub impl TJsValue for NavigateEventInit
 
 #external
 pub type Navigation
 pub fn[T : TNavigation] Navigation::into(Self) -> T
+pub impl FromJsAny for Navigation
 pub impl TEventTarget for Navigation
 pub impl TJsValue for Navigation
 pub impl TNavigation for Navigation
@@ -2971,6 +3278,7 @@ pub impl TNavigation for Navigation
 #external
 pub type NavigationActivation
 pub fn[T : TNavigationActivation] NavigationActivation::into(Self) -> T
+pub impl FromJsAny for NavigationActivation
 pub impl TJsValue for NavigationActivation
 pub impl TNavigationActivation for NavigationActivation
 
@@ -2978,6 +3286,7 @@ pub impl TNavigationActivation for NavigationActivation
 pub type NavigationCurrentEntryChangeEvent
 pub fn[T : TNavigationCurrentEntryChangeEvent] NavigationCurrentEntryChangeEvent::into(Self) -> T
 pub fn NavigationCurrentEntryChangeEvent::new(String, NavigationCurrentEntryChangeEventInit) -> Self
+pub impl FromJsAny for NavigationCurrentEntryChangeEvent
 pub impl TEvent for NavigationCurrentEntryChangeEvent
 pub impl TJsValue for NavigationCurrentEntryChangeEvent
 pub impl TNavigationCurrentEntryChangeEvent for NavigationCurrentEntryChangeEvent
@@ -2986,11 +3295,13 @@ pub impl TNavigationCurrentEntryChangeEvent for NavigationCurrentEntryChangeEven
 pub type NavigationCurrentEntryChangeEventInit
 pub fn NavigationCurrentEntryChangeEventInit::empty() -> Self
 pub fn NavigationCurrentEntryChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, navigation_type? : NavigationType, &TNavigationHistoryEntry) -> Self
+pub impl FromJsAny for NavigationCurrentEntryChangeEventInit
 pub impl TJsValue for NavigationCurrentEntryChangeEventInit
 
 #external
 pub type NavigationDestination
 pub fn[T : TNavigationDestination] NavigationDestination::into(Self) -> T
+pub impl FromJsAny for NavigationDestination
 pub impl TJsValue for NavigationDestination
 pub impl TNavigationDestination for NavigationDestination
 
@@ -3000,6 +3311,7 @@ pub(all) enum NavigationFocusReset {
 }
 pub fn NavigationFocusReset::from(String) -> Self?
 pub fn NavigationFocusReset::value(Self) -> String
+pub impl FromJsAny for NavigationFocusReset
 pub impl TJsValue for NavigationFocusReset
 pub impl Eq for NavigationFocusReset
 pub impl Show for NavigationFocusReset
@@ -3011,6 +3323,7 @@ pub(all) enum NavigationHistoryBehavior {
 }
 pub fn NavigationHistoryBehavior::from(String) -> Self?
 pub fn NavigationHistoryBehavior::value(Self) -> String
+pub impl FromJsAny for NavigationHistoryBehavior
 pub impl TJsValue for NavigationHistoryBehavior
 pub impl Eq for NavigationHistoryBehavior
 pub impl Show for NavigationHistoryBehavior
@@ -3018,6 +3331,7 @@ pub impl Show for NavigationHistoryBehavior
 #external
 pub type NavigationHistoryEntry
 pub fn[T : TNavigationHistoryEntry] NavigationHistoryEntry::into(Self) -> T
+pub impl FromJsAny for NavigationHistoryEntry
 pub impl TEventTarget for NavigationHistoryEntry
 pub impl TJsValue for NavigationHistoryEntry
 pub impl TNavigationHistoryEntry for NavigationHistoryEntry
@@ -3025,47 +3339,55 @@ pub impl TNavigationHistoryEntry for NavigationHistoryEntry
 #external
 pub type NavigationInterceptHandler
 pub fn NavigationInterceptHandler::new(() -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for NavigationInterceptHandler
 pub impl TJsValue for NavigationInterceptHandler
 
 #external
 pub type NavigationInterceptOptions
 pub fn NavigationInterceptOptions::empty() -> Self
 pub fn NavigationInterceptOptions::new(precommit_handler? : NavigationPrecommitHandler, handler? : NavigationInterceptHandler, focus_reset? : NavigationFocusReset, scroll? : NavigationScrollBehavior) -> Self
+pub impl FromJsAny for NavigationInterceptOptions
 pub impl TJsValue for NavigationInterceptOptions
 
 #external
 pub type NavigationNavigateOptions
 pub fn NavigationNavigateOptions::empty() -> Self
 pub fn NavigationNavigateOptions::new(info? : JsValue, state? : JsValue, history? : NavigationHistoryBehavior) -> Self
+pub impl FromJsAny for NavigationNavigateOptions
 pub impl TJsValue for NavigationNavigateOptions
 
 #external
 pub type NavigationOptions
 pub fn NavigationOptions::empty() -> Self
 pub fn NavigationOptions::new(info? : JsValue) -> Self
+pub impl FromJsAny for NavigationOptions
 pub impl TJsValue for NavigationOptions
 
 #external
 pub type NavigationPrecommitController
 pub fn[T : TNavigationPrecommitController] NavigationPrecommitController::into(Self) -> T
+pub impl FromJsAny for NavigationPrecommitController
 pub impl TJsValue for NavigationPrecommitController
 pub impl TNavigationPrecommitController for NavigationPrecommitController
 
 #external
 pub type NavigationPrecommitHandler
 pub fn NavigationPrecommitHandler::new((NavigationPrecommitController) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for NavigationPrecommitHandler
 pub impl TJsValue for NavigationPrecommitHandler
 
 #external
 pub type NavigationReloadOptions
 pub fn NavigationReloadOptions::empty() -> Self
 pub fn NavigationReloadOptions::new(info? : JsValue, state? : JsValue) -> Self
+pub impl FromJsAny for NavigationReloadOptions
 pub impl TJsValue for NavigationReloadOptions
 
 #external
 pub type NavigationResult
 pub fn NavigationResult::empty() -> Self
 pub fn NavigationResult::new(committed? : JsPromise[NavigationHistoryEntry], finished? : JsPromise[NavigationHistoryEntry]) -> Self
+pub impl FromJsAny for NavigationResult
 pub impl TJsValue for NavigationResult
 
 pub(all) enum NavigationScrollBehavior {
@@ -3074,6 +3396,7 @@ pub(all) enum NavigationScrollBehavior {
 }
 pub fn NavigationScrollBehavior::from(String) -> Self?
 pub fn NavigationScrollBehavior::value(Self) -> String
+pub impl FromJsAny for NavigationScrollBehavior
 pub impl TJsValue for NavigationScrollBehavior
 pub impl Eq for NavigationScrollBehavior
 pub impl Show for NavigationScrollBehavior
@@ -3081,6 +3404,7 @@ pub impl Show for NavigationScrollBehavior
 #external
 pub type NavigationTransition
 pub fn[T : TNavigationTransition] NavigationTransition::into(Self) -> T
+pub impl FromJsAny for NavigationTransition
 pub impl TJsValue for NavigationTransition
 pub impl TNavigationTransition for NavigationTransition
 
@@ -3092,6 +3416,7 @@ pub(all) enum NavigationType {
 }
 pub fn NavigationType::from(String) -> Self?
 pub fn NavigationType::value(Self) -> String
+pub impl FromJsAny for NavigationType
 pub impl TJsValue for NavigationType
 pub impl Eq for NavigationType
 pub impl Show for NavigationType
@@ -3100,17 +3425,20 @@ pub impl Show for NavigationType
 pub type NavigationUpdateCurrentEntryOptions
 pub fn NavigationUpdateCurrentEntryOptions::empty() -> Self
 pub fn NavigationUpdateCurrentEntryOptions::new(JsValue) -> Self
+pub impl FromJsAny for NavigationUpdateCurrentEntryOptions
 pub impl TJsValue for NavigationUpdateCurrentEntryOptions
 
 #external
 pub type Navigator
 pub fn[T : TNavigator] Navigator::into(Self) -> T
+pub impl FromJsAny for Navigator
 pub impl TJsValue for Navigator
 pub impl TNavigator for Navigator
 
 #external
 pub type Node
 pub fn[T : TNode] Node::into(Self) -> T
+pub impl FromJsAny for Node
 pub impl TCharacterDataAfterNodes for Node
 pub impl TCharacterDataBeforeNodes for Node
 pub impl TCharacterDataReplaceWithNodes for Node
@@ -3136,29 +3464,34 @@ pub impl TNode for Node
 #external
 pub type NodeFilter
 pub fn NodeFilter::new((Node) -> UInt) -> Self
+pub impl FromJsAny for NodeFilter
 pub impl TJsValue for NodeFilter
 
 #external
 pub type NodeIterator
 pub fn[T : TNodeIterator] NodeIterator::into(Self) -> T
+pub impl FromJsAny for NodeIterator
 pub impl TJsValue for NodeIterator
 pub impl TNodeIterator for NodeIterator
 
 #external
 pub type NodeList
 pub fn[T : TNodeList] NodeList::into(Self) -> T
+pub impl FromJsAny for NodeList
 pub impl TJsValue for NodeList
 pub impl TNodeList for NodeList
 
 #external
 pub type NotRestoredReasonDetails
 pub fn[T : TNotRestoredReasonDetails] NotRestoredReasonDetails::into(Self) -> T
+pub impl FromJsAny for NotRestoredReasonDetails
 pub impl TJsValue for NotRestoredReasonDetails
 pub impl TNotRestoredReasonDetails for NotRestoredReasonDetails
 
 #external
 pub type NotRestoredReasons
 pub fn[T : TNotRestoredReasons] NotRestoredReasons::into(Self) -> T
+pub impl FromJsAny for NotRestoredReasons
 pub impl TJsValue for NotRestoredReasons
 pub impl TNotRestoredReasons for NotRestoredReasons
 
@@ -3169,6 +3502,7 @@ pub fn Notification::max_actions() -> UInt
 pub fn Notification::new(String, options? : NotificationOptions) -> Self
 pub fn Notification::permission() -> NotificationPermission
 pub fn Notification::request_permission(deprecated_callback? : NotificationPermissionCallback) -> JsPromise[NotificationPermission]
+pub impl FromJsAny for Notification
 pub impl TEventTarget for Notification
 pub impl TJsValue for Notification
 pub impl TNotification for Notification
@@ -3177,6 +3511,7 @@ pub impl TNotification for Notification
 pub type NotificationAction
 pub fn NotificationAction::empty() -> Self
 pub fn NotificationAction::new(String, String, navigate? : String, icon? : String) -> Self
+pub impl FromJsAny for NotificationAction
 pub impl TJsValue for NotificationAction
 
 pub(all) enum NotificationDirection {
@@ -3186,6 +3521,7 @@ pub(all) enum NotificationDirection {
 }
 pub fn NotificationDirection::from(String) -> Self?
 pub fn NotificationDirection::value(Self) -> String
+pub impl FromJsAny for NotificationDirection
 pub impl TJsValue for NotificationDirection
 pub impl Eq for NotificationDirection
 pub impl Show for NotificationDirection
@@ -3194,6 +3530,7 @@ pub impl Show for NotificationDirection
 pub type NotificationOptions
 pub fn NotificationOptions::empty() -> Self
 pub fn NotificationOptions::new(dir? : NotificationDirection, lang? : String, body? : String, navigate? : String, tag? : String, image? : String, icon? : String, badge? : String, vibrate? : &TVibratePattern, timestamp? : UInt64, renotify? : Bool, silent? : Bool, require_interaction? : Bool, data? : JsValue, actions? : Array[NotificationAction]) -> Self
+pub impl FromJsAny for NotificationOptions
 pub impl TJsValue for NotificationOptions
 
 pub(all) enum NotificationPermission {
@@ -3203,6 +3540,7 @@ pub(all) enum NotificationPermission {
 }
 pub fn NotificationPermission::from(String) -> Self?
 pub fn NotificationPermission::value(Self) -> String
+pub impl FromJsAny for NotificationPermission
 pub impl TJsValue for NotificationPermission
 pub impl Eq for NotificationPermission
 pub impl Show for NotificationPermission
@@ -3210,12 +3548,14 @@ pub impl Show for NotificationPermission
 #external
 pub type NotificationPermissionCallback
 pub fn NotificationPermissionCallback::new((NotificationPermission) -> Unit) -> Self
+pub impl FromJsAny for NotificationPermissionCallback
 pub impl TJsValue for NotificationPermissionCallback
 
 #external
 pub type OffscreenCanvas
 pub fn[T : TOffscreenCanvas] OffscreenCanvas::into(Self) -> T
 pub fn OffscreenCanvas::new(UInt64, UInt64) -> Self
+pub impl FromJsAny for OffscreenCanvas
 pub impl TCanvasImageSource for OffscreenCanvas
 pub impl TEventTarget for OffscreenCanvas
 pub impl TImageBitmapRenderingContextCanvas for OffscreenCanvas
@@ -3225,6 +3565,7 @@ pub impl TOffscreenCanvas for OffscreenCanvas
 #external
 pub type OffscreenCanvasRenderingContext2D
 pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D::into(Self) -> T
+pub impl FromJsAny for OffscreenCanvasRenderingContext2D
 pub impl TJsValue for OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 pub impl TOffscreenRenderingContext for OffscreenCanvasRenderingContext2D
@@ -3242,6 +3583,7 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRender
 #external
 pub type OffscreenRenderingContext
 pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::into(Self) -> T
+pub impl FromJsAny for OffscreenRenderingContext
 pub impl TJsValue for OffscreenRenderingContext
 pub impl TOffscreenRenderingContext for OffscreenRenderingContext
 
@@ -3254,6 +3596,7 @@ pub(all) enum OffscreenRenderingContextId {
 }
 pub fn OffscreenRenderingContextId::from(String) -> Self?
 pub fn OffscreenRenderingContextId::value(Self) -> String
+pub impl FromJsAny for OffscreenRenderingContextId
 pub impl TJsValue for OffscreenRenderingContextId
 pub impl Eq for OffscreenRenderingContextId
 pub impl Show for OffscreenRenderingContextId
@@ -3262,16 +3605,19 @@ pub impl Show for OffscreenRenderingContextId
 #external
 pub type OnBeforeUnloadEventHandlerNonNull
 pub fn OnBeforeUnloadEventHandlerNonNull::new((Event) -> String) -> Self
+pub impl FromJsAny for OnBeforeUnloadEventHandlerNonNull
 pub impl TJsValue for OnBeforeUnloadEventHandlerNonNull
 
 #alias(OnErrorEventHandler)
 #external
 pub type OnErrorEventHandlerNonNull
 pub fn OnErrorEventHandlerNonNull::new((OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Self
+pub impl FromJsAny for OnErrorEventHandlerNonNull
 pub impl TJsValue for OnErrorEventHandlerNonNull
 
 #external
 pub type OnErrorEventHandlerNonNullEvent
+pub impl FromJsAny for OnErrorEventHandlerNonNullEvent
 pub impl TJsValue for OnErrorEventHandlerNonNullEvent
 
 pub(all) enum OrientationLockType {
@@ -3286,6 +3632,7 @@ pub(all) enum OrientationLockType {
 }
 pub fn OrientationLockType::from(String) -> Self?
 pub fn OrientationLockType::value(Self) -> String
+pub impl FromJsAny for OrientationLockType
 pub impl TJsValue for OrientationLockType
 pub impl Eq for OrientationLockType
 pub impl Show for OrientationLockType
@@ -3298,6 +3645,7 @@ pub(all) enum OrientationType {
 }
 pub fn OrientationType::from(String) -> Self?
 pub fn OrientationType::value(Self) -> String
+pub impl FromJsAny for OrientationType
 pub impl TJsValue for OrientationType
 pub impl Eq for OrientationType
 pub impl Show for OrientationType
@@ -3307,6 +3655,7 @@ pub type Origin
 pub fn Origin::from(JsValue) -> Self
 pub fn[T : TOrigin] Origin::into(Self) -> T
 pub fn Origin::new() -> Self
+pub impl FromJsAny for Origin
 pub impl TJsValue for Origin
 pub impl TOrigin for Origin
 
@@ -3314,6 +3663,7 @@ pub impl TOrigin for Origin
 pub type PageRevealEvent
 pub fn[T : TPageRevealEvent] PageRevealEvent::into(Self) -> T
 pub fn PageRevealEvent::new(String, event_init_dict? : PageRevealEventInit) -> Self
+pub impl FromJsAny for PageRevealEvent
 pub impl TEvent for PageRevealEvent
 pub impl TJsValue for PageRevealEvent
 pub impl TPageRevealEvent for PageRevealEvent
@@ -3322,12 +3672,14 @@ pub impl TPageRevealEvent for PageRevealEvent
 pub type PageRevealEventInit
 pub fn PageRevealEventInit::empty() -> Self
 pub fn PageRevealEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view_transition? : ViewTransition) -> Self
+pub impl FromJsAny for PageRevealEventInit
 pub impl TJsValue for PageRevealEventInit
 
 #external
 pub type PageSwapEvent
 pub fn[T : TPageSwapEvent] PageSwapEvent::into(Self) -> T
 pub fn PageSwapEvent::new(String, event_init_dict? : PageSwapEventInit) -> Self
+pub impl FromJsAny for PageSwapEvent
 pub impl TEvent for PageSwapEvent
 pub impl TJsValue for PageSwapEvent
 pub impl TPageSwapEvent for PageSwapEvent
@@ -3336,12 +3688,14 @@ pub impl TPageSwapEvent for PageSwapEvent
 pub type PageSwapEventInit
 pub fn PageSwapEventInit::empty() -> Self
 pub fn PageSwapEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, activation? : &TNavigationActivation, view_transition? : ViewTransition) -> Self
+pub impl FromJsAny for PageSwapEventInit
 pub impl TJsValue for PageSwapEventInit
 
 #external
 pub type PageTransitionEvent
 pub fn[T : TPageTransitionEvent] PageTransitionEvent::into(Self) -> T
 pub fn PageTransitionEvent::new(String, event_init_dict? : PageTransitionEventInit) -> Self
+pub impl FromJsAny for PageTransitionEvent
 pub impl TEvent for PageTransitionEvent
 pub impl TJsValue for PageTransitionEvent
 pub impl TPageTransitionEvent for PageTransitionEvent
@@ -3350,12 +3704,14 @@ pub impl TPageTransitionEvent for PageTransitionEvent
 pub type PageTransitionEventInit
 pub fn PageTransitionEventInit::empty() -> Self
 pub fn PageTransitionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, persisted? : Bool) -> Self
+pub impl FromJsAny for PageTransitionEventInit
 pub impl TJsValue for PageTransitionEventInit
 
 #external
 pub type Path2D
 pub fn[T : TPath2D] Path2D::into(Self) -> T
 pub fn Path2D::new(path? : &TPath2DNewPath) -> Self
+pub impl FromJsAny for Path2D
 pub impl TJsValue for Path2D
 pub impl TPath2D for Path2D
 pub impl TPath2DNewPath for Path2D
@@ -3363,6 +3719,7 @@ pub impl TPath2DNewPath for Path2D
 #external
 pub type Performance
 pub fn[T : TPerformance] Performance::into(Self) -> T
+pub impl FromJsAny for Performance
 pub impl TEventTarget for Performance
 pub impl TJsValue for Performance
 pub impl TPerformance for Performance
@@ -3370,6 +3727,7 @@ pub impl TPerformance for Performance
 #external
 pub type PerformanceEntry
 pub fn[T : TPerformanceEntry] PerformanceEntry::into(Self) -> T
+pub impl FromJsAny for PerformanceEntry
 pub impl TJsValue for PerformanceEntry
 pub impl TPerformanceEntry for PerformanceEntry
 
@@ -3378,23 +3736,27 @@ pub type PerformanceObserver
 pub fn[T : TPerformanceObserver] PerformanceObserver::into(Self) -> T
 pub fn PerformanceObserver::new(PerformanceObserverCallback) -> Self
 pub fn PerformanceObserver::supported_entry_types() -> JsValue
+pub impl FromJsAny for PerformanceObserver
 pub impl TJsValue for PerformanceObserver
 pub impl TPerformanceObserver for PerformanceObserver
 
 #external
 pub type PerformanceObserverCallback
 pub fn PerformanceObserverCallback::new((PerformanceObserverEntryList, PerformanceObserver, PerformanceObserverCallbackOptions) -> Unit) -> Self
+pub impl FromJsAny for PerformanceObserverCallback
 pub impl TJsValue for PerformanceObserverCallback
 
 #external
 pub type PerformanceObserverCallbackOptions
 pub fn PerformanceObserverCallbackOptions::empty() -> Self
 pub fn PerformanceObserverCallbackOptions::new(dropped_entries_count? : UInt64) -> Self
+pub impl FromJsAny for PerformanceObserverCallbackOptions
 pub impl TJsValue for PerformanceObserverCallbackOptions
 
 #external
 pub type PerformanceObserverEntryList
 pub fn[T : TPerformanceObserverEntryList] PerformanceObserverEntryList::into(Self) -> T
+pub impl FromJsAny for PerformanceObserverEntryList
 pub impl TJsValue for PerformanceObserverEntryList
 pub impl TPerformanceObserverEntryList for PerformanceObserverEntryList
 
@@ -3402,17 +3764,20 @@ pub impl TPerformanceObserverEntryList for PerformanceObserverEntryList
 pub type PerformanceObserverInit
 pub fn PerformanceObserverInit::empty() -> Self
 pub fn PerformanceObserverInit::new(entry_types? : Array[String], type_? : String, buffered? : Bool) -> Self
+pub impl FromJsAny for PerformanceObserverInit
 pub impl TJsValue for PerformanceObserverInit
 
 #external
 pub type Plugin
 pub fn[T : TPlugin] Plugin::into(Self) -> T
+pub impl FromJsAny for Plugin
 pub impl TJsValue for Plugin
 pub impl TPlugin for Plugin
 
 #external
 pub type PluginArray
 pub fn[T : TPluginArray] PluginArray::into(Self) -> T
+pub impl FromJsAny for PluginArray
 pub impl TJsValue for PluginArray
 pub impl TPluginArray for PluginArray
 
@@ -3420,6 +3785,7 @@ pub impl TPluginArray for PluginArray
 pub type PointerEvent
 pub fn[T : TPointerEvent] PointerEvent::into(Self) -> T
 pub fn PointerEvent::new(String, event_init_dict? : PointerEventInit) -> Self
+pub impl FromJsAny for PointerEvent
 pub impl TEvent for PointerEvent
 pub impl TJsValue for PointerEvent
 pub impl TMouseEvent for PointerEvent
@@ -3430,12 +3796,14 @@ pub impl TUIEvent for PointerEvent
 pub type PointerEventInit
 pub fn PointerEventInit::empty() -> Self
 pub fn PointerEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, pointer_id? : Int, width? : Double, height? : Double, pressure? : Float, tangential_pressure? : Float, tilt_x? : Int, tilt_y? : Int, twist? : Int, altitude_angle? : Double, azimuth_angle? : Double, pointer_type? : String, is_primary? : Bool, persistent_device_id? : Int, coalesced_events? : Array[PointerEvent], predicted_events? : Array[PointerEvent]) -> Self
+pub impl FromJsAny for PointerEventInit
 pub impl TJsValue for PointerEventInit
 
 #external
 pub type PopStateEvent
 pub fn[T : TPopStateEvent] PopStateEvent::into(Self) -> T
 pub fn PopStateEvent::new(String, event_init_dict? : PopStateEventInit) -> Self
+pub impl FromJsAny for PopStateEvent
 pub impl TEvent for PopStateEvent
 pub impl TJsValue for PopStateEvent
 pub impl TPopStateEvent for PopStateEvent
@@ -3444,6 +3812,7 @@ pub impl TPopStateEvent for PopStateEvent
 pub type PopStateEventInit
 pub fn PopStateEventInit::empty() -> Self
 pub fn PopStateEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, state? : JsValue, has_ua_visual_transition? : Bool) -> Self
+pub impl FromJsAny for PopStateEventInit
 pub impl TJsValue for PopStateEventInit
 
 pub(all) enum PredefinedColorSpace {
@@ -3454,6 +3823,7 @@ pub(all) enum PredefinedColorSpace {
 }
 pub fn PredefinedColorSpace::from(String) -> Self?
 pub fn PredefinedColorSpace::value(Self) -> String
+pub impl FromJsAny for PredefinedColorSpace
 pub impl TJsValue for PredefinedColorSpace
 pub impl Eq for PredefinedColorSpace
 pub impl Show for PredefinedColorSpace
@@ -3465,6 +3835,7 @@ pub(all) enum PremultiplyAlpha {
 }
 pub fn PremultiplyAlpha::from(String) -> Self?
 pub fn PremultiplyAlpha::value(Self) -> String
+pub impl FromJsAny for PremultiplyAlpha
 pub impl TJsValue for PremultiplyAlpha
 pub impl Eq for PremultiplyAlpha
 pub impl Show for PremultiplyAlpha
@@ -3476,6 +3847,7 @@ pub(all) enum PresentationStyle {
 }
 pub fn PresentationStyle::from(String) -> Self?
 pub fn PresentationStyle::value(Self) -> String
+pub impl FromJsAny for PresentationStyle
 pub impl TJsValue for PresentationStyle
 pub impl Eq for PresentationStyle
 pub impl Show for PresentationStyle
@@ -3483,6 +3855,7 @@ pub impl Show for PresentationStyle
 #external
 pub type ProcessingInstruction
 pub fn[T : TProcessingInstruction] ProcessingInstruction::into(Self) -> T
+pub impl FromJsAny for ProcessingInstruction
 pub impl TCharacterData for ProcessingInstruction
 pub impl TEventTarget for ProcessingInstruction
 pub impl TJsValue for ProcessingInstruction
@@ -3494,6 +3867,7 @@ pub impl TStyleSheetOwnerNode for ProcessingInstruction
 pub type ProgressEvent
 pub fn[T : TProgressEvent] ProgressEvent::into(Self) -> T
 pub fn ProgressEvent::new(String, event_init_dict? : ProgressEventInit) -> Self
+pub impl FromJsAny for ProgressEvent
 pub impl TEvent for ProgressEvent
 pub impl TJsValue for ProgressEvent
 pub impl TProgressEvent for ProgressEvent
@@ -3502,12 +3876,14 @@ pub impl TProgressEvent for ProgressEvent
 pub type ProgressEventInit
 pub fn ProgressEventInit::empty() -> Self
 pub fn ProgressEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, length_computable? : Bool, loaded? : Double, total? : Double) -> Self
+pub impl FromJsAny for ProgressEventInit
 pub impl TJsValue for ProgressEventInit
 
 #external
 pub type PromiseRejectionEvent
 pub fn[T : TPromiseRejectionEvent] PromiseRejectionEvent::into(Self) -> T
 pub fn PromiseRejectionEvent::new(String, PromiseRejectionEventInit) -> Self
+pub impl FromJsAny for PromiseRejectionEvent
 pub impl TEvent for PromiseRejectionEvent
 pub impl TJsValue for PromiseRejectionEvent
 pub impl TPromiseRejectionEvent for PromiseRejectionEvent
@@ -3516,12 +3892,14 @@ pub impl TPromiseRejectionEvent for PromiseRejectionEvent
 pub type PromiseRejectionEventInit
 pub fn PromiseRejectionEventInit::empty() -> Self
 pub fn PromiseRejectionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, JsValue, reason? : JsValue) -> Self
+pub impl FromJsAny for PromiseRejectionEventInit
 pub impl TJsValue for PromiseRejectionEventInit
 
 #external
 pub type QuotaExceededError
 pub fn[T : TQuotaExceededError] QuotaExceededError::into(Self) -> T
 pub fn QuotaExceededError::new(message? : String, options? : QuotaExceededErrorOptions) -> Self
+pub impl FromJsAny for QuotaExceededError
 pub impl TDOMException for QuotaExceededError
 pub impl TJsValue for QuotaExceededError
 pub impl TQuotaExceededError for QuotaExceededError
@@ -3530,11 +3908,13 @@ pub impl TQuotaExceededError for QuotaExceededError
 pub type QuotaExceededErrorOptions
 pub fn QuotaExceededErrorOptions::empty() -> Self
 pub fn QuotaExceededErrorOptions::new(quota? : Double, requested? : Double) -> Self
+pub impl FromJsAny for QuotaExceededErrorOptions
 pub impl TJsValue for QuotaExceededErrorOptions
 
 #external
 pub type RadioNodeList
 pub fn[T : TRadioNodeList] RadioNodeList::into(Self) -> T
+pub impl FromJsAny for RadioNodeList
 pub impl THTMLFormControlsCollectionNamedItem for RadioNodeList
 pub impl THTMLFormElementGetByName for RadioNodeList
 pub impl TJsValue for RadioNodeList
@@ -3545,12 +3925,14 @@ pub impl TRadioNodeList for RadioNodeList
 pub type Range
 pub fn[T : TRange] Range::into(Self) -> T
 pub fn Range::new() -> Self
+pub impl FromJsAny for Range
 pub impl TAbstractRange for Range
 pub impl TJsValue for Range
 pub impl TRange for Range
 
 #external
 pub type ReadableStream
+pub impl FromJsAny for ReadableStream
 pub impl TBodyInit for ReadableStream
 pub impl TJsValue for ReadableStream
 
@@ -3567,6 +3949,7 @@ pub(all) enum ReferrerPolicy {
 }
 pub fn ReferrerPolicy::from(String) -> Self?
 pub fn ReferrerPolicy::value(Self) -> String
+pub impl FromJsAny for ReferrerPolicy
 pub impl TJsValue for ReferrerPolicy
 pub impl Eq for ReferrerPolicy
 pub impl Show for ReferrerPolicy
@@ -3574,6 +3957,7 @@ pub impl Show for ReferrerPolicy
 #external
 pub type RenderingContext
 pub fn[T : TRenderingContext] RenderingContext::into(Self) -> T
+pub impl FromJsAny for RenderingContext
 pub impl TJsValue for RenderingContext
 pub impl TRenderingContext for RenderingContext
 
@@ -3581,6 +3965,7 @@ pub impl TRenderingContext for RenderingContext
 pub type Request
 pub fn[T : TRequest] Request::into(Self) -> T
 pub fn Request::new(&TRequestInfo, init? : RequestInit) -> Self
+pub impl FromJsAny for Request
 pub impl TJsValue for Request
 pub impl TRequest for Request
 pub impl TRequestInfo for Request
@@ -3595,6 +3980,7 @@ pub(all) enum RequestCache {
 }
 pub fn RequestCache::from(String) -> Self?
 pub fn RequestCache::value(Self) -> String
+pub impl FromJsAny for RequestCache
 pub impl TJsValue for RequestCache
 pub impl Eq for RequestCache
 pub impl Show for RequestCache
@@ -3606,6 +3992,7 @@ pub(all) enum RequestCredentials {
 }
 pub fn RequestCredentials::from(String) -> Self?
 pub fn RequestCredentials::value(Self) -> String
+pub impl FromJsAny for RequestCredentials
 pub impl TJsValue for RequestCredentials
 pub impl Eq for RequestCredentials
 pub impl Show for RequestCredentials
@@ -3635,6 +4022,7 @@ pub(all) enum RequestDestination {
 }
 pub fn RequestDestination::from(String) -> Self?
 pub fn RequestDestination::value(Self) -> String
+pub impl FromJsAny for RequestDestination
 pub impl TJsValue for RequestDestination
 pub impl Eq for RequestDestination
 pub impl Show for RequestDestination
@@ -3644,6 +4032,7 @@ pub(all) enum RequestDuplex {
 }
 pub fn RequestDuplex::from(String) -> Self?
 pub fn RequestDuplex::value(Self) -> String
+pub impl FromJsAny for RequestDuplex
 pub impl TJsValue for RequestDuplex
 pub impl Eq for RequestDuplex
 pub impl Show for RequestDuplex
@@ -3651,6 +4040,7 @@ pub impl Show for RequestDuplex
 #external
 pub type RequestInfo
 pub fn[T : TRequestInfo] RequestInfo::into(Self) -> T
+pub impl FromJsAny for RequestInfo
 pub impl TJsValue for RequestInfo
 pub impl TRequestInfo for RequestInfo
 
@@ -3658,6 +4048,7 @@ pub impl TRequestInfo for RequestInfo
 pub type RequestInit
 pub fn RequestInit::empty() -> Self
 pub fn RequestInit::new(method_? : String, headers? : &THeadersInit, body? : &TBodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue) -> Self
+pub impl FromJsAny for RequestInit
 pub impl TJsValue for RequestInit
 
 pub(all) enum RequestMode {
@@ -3668,6 +4059,7 @@ pub(all) enum RequestMode {
 }
 pub fn RequestMode::from(String) -> Self?
 pub fn RequestMode::value(Self) -> String
+pub impl FromJsAny for RequestMode
 pub impl TJsValue for RequestMode
 pub impl Eq for RequestMode
 pub impl Show for RequestMode
@@ -3679,6 +4071,7 @@ pub(all) enum RequestPriority {
 }
 pub fn RequestPriority::from(String) -> Self?
 pub fn RequestPriority::value(Self) -> String
+pub impl FromJsAny for RequestPriority
 pub impl TJsValue for RequestPriority
 pub impl Eq for RequestPriority
 pub impl Show for RequestPriority
@@ -3690,6 +4083,7 @@ pub(all) enum RequestRedirect {
 }
 pub fn RequestRedirect::from(String) -> Self?
 pub fn RequestRedirect::value(Self) -> String
+pub impl FromJsAny for RequestRedirect
 pub impl TJsValue for RequestRedirect
 pub impl Eq for RequestRedirect
 pub impl Show for RequestRedirect
@@ -3698,6 +4092,7 @@ pub impl Show for RequestRedirect
 pub type ResizeObserver
 pub fn[T : TResizeObserver] ResizeObserver::into(Self) -> T
 pub fn ResizeObserver::new(ResizeObserverCallback) -> Self
+pub impl FromJsAny for ResizeObserver
 pub impl TJsValue for ResizeObserver
 pub impl TResizeObserver for ResizeObserver
 
@@ -3708,6 +4103,7 @@ pub(all) enum ResizeObserverBoxOptions {
 }
 pub fn ResizeObserverBoxOptions::from(String) -> Self?
 pub fn ResizeObserverBoxOptions::value(Self) -> String
+pub impl FromJsAny for ResizeObserverBoxOptions
 pub impl TJsValue for ResizeObserverBoxOptions
 pub impl Eq for ResizeObserverBoxOptions
 pub impl Show for ResizeObserverBoxOptions
@@ -3715,11 +4111,13 @@ pub impl Show for ResizeObserverBoxOptions
 #external
 pub type ResizeObserverCallback
 pub fn ResizeObserverCallback::new((Array[ResizeObserverEntry], ResizeObserver) -> Unit) -> Self
+pub impl FromJsAny for ResizeObserverCallback
 pub impl TJsValue for ResizeObserverCallback
 
 #external
 pub type ResizeObserverEntry
 pub fn[T : TResizeObserverEntry] ResizeObserverEntry::into(Self) -> T
+pub impl FromJsAny for ResizeObserverEntry
 pub impl TJsValue for ResizeObserverEntry
 pub impl TResizeObserverEntry for ResizeObserverEntry
 
@@ -3727,11 +4125,13 @@ pub impl TResizeObserverEntry for ResizeObserverEntry
 pub type ResizeObserverOptions
 pub fn ResizeObserverOptions::empty() -> Self
 pub fn ResizeObserverOptions::new(box? : ResizeObserverBoxOptions) -> Self
+pub impl FromJsAny for ResizeObserverOptions
 pub impl TJsValue for ResizeObserverOptions
 
 #external
 pub type ResizeObserverSize
 pub fn[T : TResizeObserverSize] ResizeObserverSize::into(Self) -> T
+pub impl FromJsAny for ResizeObserverSize
 pub impl TJsValue for ResizeObserverSize
 pub impl TResizeObserverSize for ResizeObserverSize
 
@@ -3743,6 +4143,7 @@ pub(all) enum ResizeQuality {
 }
 pub fn ResizeQuality::from(String) -> Self?
 pub fn ResizeQuality::value(Self) -> String
+pub impl FromJsAny for ResizeQuality
 pub impl TJsValue for ResizeQuality
 pub impl Eq for ResizeQuality
 pub impl Show for ResizeQuality
@@ -3754,6 +4155,7 @@ pub fn[T : TResponse] Response::into(Self) -> T
 pub fn Response::json(JsValue, init? : ResponseInit) -> Self
 pub fn Response::new(body? : &TBodyInit, init? : ResponseInit) -> Self
 pub fn Response::redirect(String, status? : UInt) -> Self
+pub impl FromJsAny for Response
 pub impl TJsValue for Response
 pub impl TResponse for Response
 
@@ -3761,6 +4163,7 @@ pub impl TResponse for Response
 pub type ResponseInit
 pub fn ResponseInit::empty() -> Self
 pub fn ResponseInit::new(status? : UInt, status_text? : String, headers? : &THeadersInit) -> Self
+pub impl FromJsAny for ResponseInit
 pub impl TJsValue for ResponseInit
 
 pub(all) enum ResponseType {
@@ -3773,6 +4176,7 @@ pub(all) enum ResponseType {
 }
 pub fn ResponseType::from(String) -> Self?
 pub fn ResponseType::value(Self) -> String
+pub impl FromJsAny for ResponseType
 pub impl TJsValue for ResponseType
 pub impl Eq for ResponseType
 pub impl Show for ResponseType
@@ -3780,6 +4184,7 @@ pub impl Show for ResponseType
 #external
 pub type SVGAElement
 pub fn[T : TSVGAElement] SVGAElement::into(Self) -> T
+pub impl FromJsAny for SVGAElement
 pub impl TElement for SVGAElement
 pub impl TEventTarget for SVGAElement
 pub impl TJsValue for SVGAElement
@@ -3791,72 +4196,84 @@ pub impl TSVGGraphicsElement for SVGAElement
 #external
 pub type SVGAngle
 pub fn[T : TSVGAngle] SVGAngle::into(Self) -> T
+pub impl FromJsAny for SVGAngle
 pub impl TJsValue for SVGAngle
 pub impl TSVGAngle for SVGAngle
 
 #external
 pub type SVGAnimatedAngle
 pub fn[T : TSVGAnimatedAngle] SVGAnimatedAngle::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedAngle
 pub impl TJsValue for SVGAnimatedAngle
 pub impl TSVGAnimatedAngle for SVGAnimatedAngle
 
 #external
 pub type SVGAnimatedBoolean
 pub fn[T : TSVGAnimatedBoolean] SVGAnimatedBoolean::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedBoolean
 pub impl TJsValue for SVGAnimatedBoolean
 pub impl TSVGAnimatedBoolean for SVGAnimatedBoolean
 
 #external
 pub type SVGAnimatedEnumeration
 pub fn[T : TSVGAnimatedEnumeration] SVGAnimatedEnumeration::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedEnumeration
 pub impl TJsValue for SVGAnimatedEnumeration
 pub impl TSVGAnimatedEnumeration for SVGAnimatedEnumeration
 
 #external
 pub type SVGAnimatedInteger
 pub fn[T : TSVGAnimatedInteger] SVGAnimatedInteger::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedInteger
 pub impl TJsValue for SVGAnimatedInteger
 pub impl TSVGAnimatedInteger for SVGAnimatedInteger
 
 #external
 pub type SVGAnimatedLength
 pub fn[T : TSVGAnimatedLength] SVGAnimatedLength::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedLength
 pub impl TJsValue for SVGAnimatedLength
 pub impl TSVGAnimatedLength for SVGAnimatedLength
 
 #external
 pub type SVGAnimatedLengthList
 pub fn[T : TSVGAnimatedLengthList] SVGAnimatedLengthList::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedLengthList
 pub impl TJsValue for SVGAnimatedLengthList
 pub impl TSVGAnimatedLengthList for SVGAnimatedLengthList
 
 #external
 pub type SVGAnimatedNumber
 pub fn[T : TSVGAnimatedNumber] SVGAnimatedNumber::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedNumber
 pub impl TJsValue for SVGAnimatedNumber
 pub impl TSVGAnimatedNumber for SVGAnimatedNumber
 
 #external
 pub type SVGAnimatedNumberList
 pub fn[T : TSVGAnimatedNumberList] SVGAnimatedNumberList::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedNumberList
 pub impl TJsValue for SVGAnimatedNumberList
 pub impl TSVGAnimatedNumberList for SVGAnimatedNumberList
 
 #external
 pub type SVGAnimatedPreserveAspectRatio
 pub fn[T : TSVGAnimatedPreserveAspectRatio] SVGAnimatedPreserveAspectRatio::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedPreserveAspectRatio
 pub impl TJsValue for SVGAnimatedPreserveAspectRatio
 pub impl TSVGAnimatedPreserveAspectRatio for SVGAnimatedPreserveAspectRatio
 
 #external
 pub type SVGAnimatedRect
 pub fn[T : TSVGAnimatedRect] SVGAnimatedRect::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedRect
 pub impl TJsValue for SVGAnimatedRect
 pub impl TSVGAnimatedRect for SVGAnimatedRect
 
 #external
 pub type SVGAnimatedString
 pub fn[T : TSVGAnimatedString] SVGAnimatedString::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedString
 pub impl TJsValue for SVGAnimatedString
 pub impl TSVGAnimatedString for SVGAnimatedString
 
@@ -3868,6 +4285,7 @@ pub impl TSVGAnimatedStringBaseVal for SVGAnimatedStringBaseVal
 #external
 pub type SVGAnimatedTransformList
 pub fn[T : TSVGAnimatedTransformList] SVGAnimatedTransformList::into(Self) -> T
+pub impl FromJsAny for SVGAnimatedTransformList
 pub impl TJsValue for SVGAnimatedTransformList
 pub impl TSVGAnimatedTransformList for SVGAnimatedTransformList
 
@@ -3875,11 +4293,13 @@ pub impl TSVGAnimatedTransformList for SVGAnimatedTransformList
 pub type SVGBoundingBoxOptions
 pub fn SVGBoundingBoxOptions::empty() -> Self
 pub fn SVGBoundingBoxOptions::new(fill? : Bool, stroke? : Bool, markers? : Bool, clipped? : Bool) -> Self
+pub impl FromJsAny for SVGBoundingBoxOptions
 pub impl TJsValue for SVGBoundingBoxOptions
 
 #external
 pub type SVGCircleElement
 pub fn[T : TSVGCircleElement] SVGCircleElement::into(Self) -> T
+pub impl FromJsAny for SVGCircleElement
 pub impl TElement for SVGCircleElement
 pub impl TEventTarget for SVGCircleElement
 pub impl TJsValue for SVGCircleElement
@@ -3892,6 +4312,7 @@ pub impl TSVGGraphicsElement for SVGCircleElement
 #external
 pub type SVGDefsElement
 pub fn[T : TSVGDefsElement] SVGDefsElement::into(Self) -> T
+pub impl FromJsAny for SVGDefsElement
 pub impl TElement for SVGDefsElement
 pub impl TEventTarget for SVGDefsElement
 pub impl TJsValue for SVGDefsElement
@@ -3903,6 +4324,7 @@ pub impl TSVGGraphicsElement for SVGDefsElement
 #external
 pub type SVGDescElement
 pub fn[T : TSVGDescElement] SVGDescElement::into(Self) -> T
+pub impl FromJsAny for SVGDescElement
 pub impl TElement for SVGDescElement
 pub impl TEventTarget for SVGDescElement
 pub impl TJsValue for SVGDescElement
@@ -3913,6 +4335,7 @@ pub impl TSVGElement for SVGDescElement
 #external
 pub type SVGElement
 pub fn[T : TSVGElement] SVGElement::into(Self) -> T
+pub impl FromJsAny for SVGElement
 pub impl TElement for SVGElement
 pub impl TEventTarget for SVGElement
 pub impl TJsValue for SVGElement
@@ -3922,6 +4345,7 @@ pub impl TSVGElement for SVGElement
 #external
 pub type SVGEllipseElement
 pub fn[T : TSVGEllipseElement] SVGEllipseElement::into(Self) -> T
+pub impl FromJsAny for SVGEllipseElement
 pub impl TElement for SVGEllipseElement
 pub impl TEventTarget for SVGEllipseElement
 pub impl TJsValue for SVGEllipseElement
@@ -3934,6 +4358,7 @@ pub impl TSVGGraphicsElement for SVGEllipseElement
 #external
 pub type SVGForeignObjectElement
 pub fn[T : TSVGForeignObjectElement] SVGForeignObjectElement::into(Self) -> T
+pub impl FromJsAny for SVGForeignObjectElement
 pub impl TElement for SVGForeignObjectElement
 pub impl TEventTarget for SVGForeignObjectElement
 pub impl TJsValue for SVGForeignObjectElement
@@ -3945,6 +4370,7 @@ pub impl TSVGGraphicsElement for SVGForeignObjectElement
 #external
 pub type SVGGElement
 pub fn[T : TSVGGElement] SVGGElement::into(Self) -> T
+pub impl FromJsAny for SVGGElement
 pub impl TElement for SVGGElement
 pub impl TEventTarget for SVGGElement
 pub impl TJsValue for SVGGElement
@@ -3956,6 +4382,7 @@ pub impl TSVGGraphicsElement for SVGGElement
 #external
 pub type SVGGeometryElement
 pub fn[T : TSVGGeometryElement] SVGGeometryElement::into(Self) -> T
+pub impl FromJsAny for SVGGeometryElement
 pub impl TElement for SVGGeometryElement
 pub impl TEventTarget for SVGGeometryElement
 pub impl TJsValue for SVGGeometryElement
@@ -3967,6 +4394,7 @@ pub impl TSVGGraphicsElement for SVGGeometryElement
 #external
 pub type SVGGradientElement
 pub fn[T : TSVGGradientElement] SVGGradientElement::into(Self) -> T
+pub impl FromJsAny for SVGGradientElement
 pub impl TElement for SVGGradientElement
 pub impl TEventTarget for SVGGradientElement
 pub impl TJsValue for SVGGradientElement
@@ -3977,6 +4405,7 @@ pub impl TSVGGradientElement for SVGGradientElement
 #external
 pub type SVGGraphicsElement
 pub fn[T : TSVGGraphicsElement] SVGGraphicsElement::into(Self) -> T
+pub impl FromJsAny for SVGGraphicsElement
 pub impl TElement for SVGGraphicsElement
 pub impl TEventTarget for SVGGraphicsElement
 pub impl TJsValue for SVGGraphicsElement
@@ -3987,6 +4416,7 @@ pub impl TSVGGraphicsElement for SVGGraphicsElement
 #external
 pub type SVGImageElement
 pub fn[T : TSVGImageElement] SVGImageElement::into(Self) -> T
+pub impl FromJsAny for SVGImageElement
 pub impl TElement for SVGImageElement
 pub impl TEventTarget for SVGImageElement
 pub impl THTMLOrSVGImageElement for SVGImageElement
@@ -3999,18 +4429,21 @@ pub impl TSVGImageElement for SVGImageElement
 #external
 pub type SVGLength
 pub fn[T : TSVGLength] SVGLength::into(Self) -> T
+pub impl FromJsAny for SVGLength
 pub impl TJsValue for SVGLength
 pub impl TSVGLength for SVGLength
 
 #external
 pub type SVGLengthList
 pub fn[T : TSVGLengthList] SVGLengthList::into(Self) -> T
+pub impl FromJsAny for SVGLengthList
 pub impl TJsValue for SVGLengthList
 pub impl TSVGLengthList for SVGLengthList
 
 #external
 pub type SVGLineElement
 pub fn[T : TSVGLineElement] SVGLineElement::into(Self) -> T
+pub impl FromJsAny for SVGLineElement
 pub impl TElement for SVGLineElement
 pub impl TEventTarget for SVGLineElement
 pub impl TJsValue for SVGLineElement
@@ -4023,6 +4456,7 @@ pub impl TSVGLineElement for SVGLineElement
 #external
 pub type SVGLinearGradientElement
 pub fn[T : TSVGLinearGradientElement] SVGLinearGradientElement::into(Self) -> T
+pub impl FromJsAny for SVGLinearGradientElement
 pub impl TElement for SVGLinearGradientElement
 pub impl TEventTarget for SVGLinearGradientElement
 pub impl TJsValue for SVGLinearGradientElement
@@ -4034,6 +4468,7 @@ pub impl TSVGLinearGradientElement for SVGLinearGradientElement
 #external
 pub type SVGMarkerElement
 pub fn[T : TSVGMarkerElement] SVGMarkerElement::into(Self) -> T
+pub impl FromJsAny for SVGMarkerElement
 pub impl TElement for SVGMarkerElement
 pub impl TEventTarget for SVGMarkerElement
 pub impl TJsValue for SVGMarkerElement
@@ -4044,6 +4479,7 @@ pub impl TSVGMarkerElement for SVGMarkerElement
 #external
 pub type SVGMetadataElement
 pub fn[T : TSVGMetadataElement] SVGMetadataElement::into(Self) -> T
+pub impl FromJsAny for SVGMetadataElement
 pub impl TElement for SVGMetadataElement
 pub impl TEventTarget for SVGMetadataElement
 pub impl TJsValue for SVGMetadataElement
@@ -4054,18 +4490,21 @@ pub impl TSVGMetadataElement for SVGMetadataElement
 #external
 pub type SVGNumber
 pub fn[T : TSVGNumber] SVGNumber::into(Self) -> T
+pub impl FromJsAny for SVGNumber
 pub impl TJsValue for SVGNumber
 pub impl TSVGNumber for SVGNumber
 
 #external
 pub type SVGNumberList
 pub fn[T : TSVGNumberList] SVGNumberList::into(Self) -> T
+pub impl FromJsAny for SVGNumberList
 pub impl TJsValue for SVGNumberList
 pub impl TSVGNumberList for SVGNumberList
 
 #external
 pub type SVGPatternElement
 pub fn[T : TSVGPatternElement] SVGPatternElement::into(Self) -> T
+pub impl FromJsAny for SVGPatternElement
 pub impl TElement for SVGPatternElement
 pub impl TEventTarget for SVGPatternElement
 pub impl TJsValue for SVGPatternElement
@@ -4076,12 +4515,14 @@ pub impl TSVGPatternElement for SVGPatternElement
 #external
 pub type SVGPointList
 pub fn[T : TSVGPointList] SVGPointList::into(Self) -> T
+pub impl FromJsAny for SVGPointList
 pub impl TJsValue for SVGPointList
 pub impl TSVGPointList for SVGPointList
 
 #external
 pub type SVGPolygonElement
 pub fn[T : TSVGPolygonElement] SVGPolygonElement::into(Self) -> T
+pub impl FromJsAny for SVGPolygonElement
 pub impl TElement for SVGPolygonElement
 pub impl TEventTarget for SVGPolygonElement
 pub impl TJsValue for SVGPolygonElement
@@ -4094,6 +4535,7 @@ pub impl TSVGPolygonElement for SVGPolygonElement
 #external
 pub type SVGPolylineElement
 pub fn[T : TSVGPolylineElement] SVGPolylineElement::into(Self) -> T
+pub impl FromJsAny for SVGPolylineElement
 pub impl TElement for SVGPolylineElement
 pub impl TEventTarget for SVGPolylineElement
 pub impl TJsValue for SVGPolylineElement
@@ -4106,12 +4548,14 @@ pub impl TSVGPolylineElement for SVGPolylineElement
 #external
 pub type SVGPreserveAspectRatio
 pub fn[T : TSVGPreserveAspectRatio] SVGPreserveAspectRatio::into(Self) -> T
+pub impl FromJsAny for SVGPreserveAspectRatio
 pub impl TJsValue for SVGPreserveAspectRatio
 pub impl TSVGPreserveAspectRatio for SVGPreserveAspectRatio
 
 #external
 pub type SVGRadialGradientElement
 pub fn[T : TSVGRadialGradientElement] SVGRadialGradientElement::into(Self) -> T
+pub impl FromJsAny for SVGRadialGradientElement
 pub impl TElement for SVGRadialGradientElement
 pub impl TEventTarget for SVGRadialGradientElement
 pub impl TJsValue for SVGRadialGradientElement
@@ -4123,6 +4567,7 @@ pub impl TSVGRadialGradientElement for SVGRadialGradientElement
 #external
 pub type SVGRectElement
 pub fn[T : TSVGRectElement] SVGRectElement::into(Self) -> T
+pub impl FromJsAny for SVGRectElement
 pub impl TElement for SVGRectElement
 pub impl TEventTarget for SVGRectElement
 pub impl TJsValue for SVGRectElement
@@ -4135,6 +4580,7 @@ pub impl TSVGRectElement for SVGRectElement
 #external
 pub type SVGSVGElement
 pub fn[T : TSVGSVGElement] SVGSVGElement::into(Self) -> T
+pub impl FromJsAny for SVGSVGElement
 pub impl TElement for SVGSVGElement
 pub impl TEventTarget for SVGSVGElement
 pub impl TJsValue for SVGSVGElement
@@ -4146,6 +4592,7 @@ pub impl TSVGSVGElement for SVGSVGElement
 #external
 pub type SVGScriptElement
 pub fn[T : TSVGScriptElement] SVGScriptElement::into(Self) -> T
+pub impl FromJsAny for SVGScriptElement
 pub impl TElement for SVGScriptElement
 pub impl TEventTarget for SVGScriptElement
 pub impl THTMLOrSVGScriptElement for SVGScriptElement
@@ -4157,6 +4604,7 @@ pub impl TSVGScriptElement for SVGScriptElement
 #external
 pub type SVGStopElement
 pub fn[T : TSVGStopElement] SVGStopElement::into(Self) -> T
+pub impl FromJsAny for SVGStopElement
 pub impl TElement for SVGStopElement
 pub impl TEventTarget for SVGStopElement
 pub impl TJsValue for SVGStopElement
@@ -4167,12 +4615,14 @@ pub impl TSVGStopElement for SVGStopElement
 #external
 pub type SVGStringList
 pub fn[T : TSVGStringList] SVGStringList::into(Self) -> T
+pub impl FromJsAny for SVGStringList
 pub impl TJsValue for SVGStringList
 pub impl TSVGStringList for SVGStringList
 
 #external
 pub type SVGStyleElement
 pub fn[T : TSVGStyleElement] SVGStyleElement::into(Self) -> T
+pub impl FromJsAny for SVGStyleElement
 pub impl TElement for SVGStyleElement
 pub impl TEventTarget for SVGStyleElement
 pub impl TJsValue for SVGStyleElement
@@ -4183,6 +4633,7 @@ pub impl TSVGStyleElement for SVGStyleElement
 #external
 pub type SVGSwitchElement
 pub fn[T : TSVGSwitchElement] SVGSwitchElement::into(Self) -> T
+pub impl FromJsAny for SVGSwitchElement
 pub impl TElement for SVGSwitchElement
 pub impl TEventTarget for SVGSwitchElement
 pub impl TJsValue for SVGSwitchElement
@@ -4194,6 +4645,7 @@ pub impl TSVGSwitchElement for SVGSwitchElement
 #external
 pub type SVGSymbolElement
 pub fn[T : TSVGSymbolElement] SVGSymbolElement::into(Self) -> T
+pub impl FromJsAny for SVGSymbolElement
 pub impl TElement for SVGSymbolElement
 pub impl TEventTarget for SVGSymbolElement
 pub impl TJsValue for SVGSymbolElement
@@ -4205,6 +4657,7 @@ pub impl TSVGSymbolElement for SVGSymbolElement
 #external
 pub type SVGTSpanElement
 pub fn[T : TSVGTSpanElement] SVGTSpanElement::into(Self) -> T
+pub impl FromJsAny for SVGTSpanElement
 pub impl TElement for SVGTSpanElement
 pub impl TEventTarget for SVGTSpanElement
 pub impl TJsValue for SVGTSpanElement
@@ -4218,6 +4671,7 @@ pub impl TSVGTextPositioningElement for SVGTSpanElement
 #external
 pub type SVGTextContentElement
 pub fn[T : TSVGTextContentElement] SVGTextContentElement::into(Self) -> T
+pub impl FromJsAny for SVGTextContentElement
 pub impl TElement for SVGTextContentElement
 pub impl TEventTarget for SVGTextContentElement
 pub impl TJsValue for SVGTextContentElement
@@ -4229,6 +4683,7 @@ pub impl TSVGTextContentElement for SVGTextContentElement
 #external
 pub type SVGTextElement
 pub fn[T : TSVGTextElement] SVGTextElement::into(Self) -> T
+pub impl FromJsAny for SVGTextElement
 pub impl TElement for SVGTextElement
 pub impl TEventTarget for SVGTextElement
 pub impl TJsValue for SVGTextElement
@@ -4242,6 +4697,7 @@ pub impl TSVGTextPositioningElement for SVGTextElement
 #external
 pub type SVGTextPathElement
 pub fn[T : TSVGTextPathElement] SVGTextPathElement::into(Self) -> T
+pub impl FromJsAny for SVGTextPathElement
 pub impl TElement for SVGTextPathElement
 pub impl TEventTarget for SVGTextPathElement
 pub impl TJsValue for SVGTextPathElement
@@ -4254,6 +4710,7 @@ pub impl TSVGTextPathElement for SVGTextPathElement
 #external
 pub type SVGTextPositioningElement
 pub fn[T : TSVGTextPositioningElement] SVGTextPositioningElement::into(Self) -> T
+pub impl FromJsAny for SVGTextPositioningElement
 pub impl TElement for SVGTextPositioningElement
 pub impl TEventTarget for SVGTextPositioningElement
 pub impl TJsValue for SVGTextPositioningElement
@@ -4266,6 +4723,7 @@ pub impl TSVGTextPositioningElement for SVGTextPositioningElement
 #external
 pub type SVGTitleElement
 pub fn[T : TSVGTitleElement] SVGTitleElement::into(Self) -> T
+pub impl FromJsAny for SVGTitleElement
 pub impl TElement for SVGTitleElement
 pub impl TEventTarget for SVGTitleElement
 pub impl TJsValue for SVGTitleElement
@@ -4276,24 +4734,28 @@ pub impl TSVGTitleElement for SVGTitleElement
 #external
 pub type SVGTransform
 pub fn[T : TSVGTransform] SVGTransform::into(Self) -> T
+pub impl FromJsAny for SVGTransform
 pub impl TJsValue for SVGTransform
 pub impl TSVGTransform for SVGTransform
 
 #external
 pub type SVGTransformList
 pub fn[T : TSVGTransformList] SVGTransformList::into(Self) -> T
+pub impl FromJsAny for SVGTransformList
 pub impl TJsValue for SVGTransformList
 pub impl TSVGTransformList for SVGTransformList
 
 #external
 pub type SVGUnitTypes
 pub fn[T : TSVGUnitTypes] SVGUnitTypes::into(Self) -> T
+pub impl FromJsAny for SVGUnitTypes
 pub impl TJsValue for SVGUnitTypes
 pub impl TSVGUnitTypes for SVGUnitTypes
 
 #external
 pub type SVGUseElement
 pub fn[T : TSVGUseElement] SVGUseElement::into(Self) -> T
+pub impl FromJsAny for SVGUseElement
 pub impl TElement for SVGUseElement
 pub impl TEventTarget for SVGUseElement
 pub impl TJsValue for SVGUseElement
@@ -4305,6 +4767,7 @@ pub impl TSVGUseElement for SVGUseElement
 #external
 pub type SVGUseElementShadowRoot
 pub fn[T : TSVGUseElementShadowRoot] SVGUseElementShadowRoot::into(Self) -> T
+pub impl FromJsAny for SVGUseElementShadowRoot
 pub impl TDocumentFragment for SVGUseElementShadowRoot
 pub impl TEventTarget for SVGUseElementShadowRoot
 pub impl TJsValue for SVGUseElementShadowRoot
@@ -4315,6 +4778,7 @@ pub impl TShadowRoot for SVGUseElementShadowRoot
 #external
 pub type SVGViewElement
 pub fn[T : TSVGViewElement] SVGViewElement::into(Self) -> T
+pub impl FromJsAny for SVGViewElement
 pub impl TElement for SVGViewElement
 pub impl TEventTarget for SVGViewElement
 pub impl TJsValue for SVGViewElement
@@ -4325,12 +4789,14 @@ pub impl TSVGViewElement for SVGViewElement
 #external
 pub type Screen
 pub fn[T : TScreen] Screen::into(Self) -> T
+pub impl FromJsAny for Screen
 pub impl TJsValue for Screen
 pub impl TScreen for Screen
 
 #external
 pub type ScreenOrientation
 pub fn[T : TScreenOrientation] ScreenOrientation::into(Self) -> T
+pub impl FromJsAny for ScreenOrientation
 pub impl TEventTarget for ScreenOrientation
 pub impl TJsValue for ScreenOrientation
 pub impl TScreenOrientation for ScreenOrientation
@@ -4342,6 +4808,7 @@ pub(all) enum ScrollBehavior {
 }
 pub fn ScrollBehavior::from(String) -> Self?
 pub fn ScrollBehavior::value(Self) -> String
+pub impl FromJsAny for ScrollBehavior
 pub impl TJsValue for ScrollBehavior
 pub impl Eq for ScrollBehavior
 pub impl Show for ScrollBehavior
@@ -4352,6 +4819,7 @@ pub(all) enum ScrollIntoViewContainer {
 }
 pub fn ScrollIntoViewContainer::from(String) -> Self?
 pub fn ScrollIntoViewContainer::value(Self) -> String
+pub impl FromJsAny for ScrollIntoViewContainer
 pub impl TJsValue for ScrollIntoViewContainer
 pub impl Eq for ScrollIntoViewContainer
 pub impl Show for ScrollIntoViewContainer
@@ -4360,6 +4828,7 @@ pub impl Show for ScrollIntoViewContainer
 pub type ScrollIntoViewOptions
 pub fn ScrollIntoViewOptions::empty() -> Self
 pub fn ScrollIntoViewOptions::new(behavior? : ScrollBehavior, block? : ScrollLogicalPosition, inline? : ScrollLogicalPosition, container? : ScrollIntoViewContainer) -> Self
+pub impl FromJsAny for ScrollIntoViewOptions
 pub impl TElementScrollIntoViewArg for ScrollIntoViewOptions
 pub impl TJsValue for ScrollIntoViewOptions
 
@@ -4371,6 +4840,7 @@ pub(all) enum ScrollLogicalPosition {
 }
 pub fn ScrollLogicalPosition::from(String) -> Self?
 pub fn ScrollLogicalPosition::value(Self) -> String
+pub impl FromJsAny for ScrollLogicalPosition
 pub impl TJsValue for ScrollLogicalPosition
 pub impl Eq for ScrollLogicalPosition
 pub impl Show for ScrollLogicalPosition
@@ -4379,6 +4849,7 @@ pub impl Show for ScrollLogicalPosition
 pub type ScrollOptions
 pub fn ScrollOptions::empty() -> Self
 pub fn ScrollOptions::new(behavior? : ScrollBehavior) -> Self
+pub impl FromJsAny for ScrollOptions
 pub impl TJsValue for ScrollOptions
 
 pub(all) enum ScrollRestoration {
@@ -4387,6 +4858,7 @@ pub(all) enum ScrollRestoration {
 }
 pub fn ScrollRestoration::from(String) -> Self?
 pub fn ScrollRestoration::value(Self) -> String
+pub impl FromJsAny for ScrollRestoration
 pub impl TJsValue for ScrollRestoration
 pub impl Eq for ScrollRestoration
 pub impl Show for ScrollRestoration
@@ -4395,11 +4867,13 @@ pub impl Show for ScrollRestoration
 pub type ScrollToOptions
 pub fn ScrollToOptions::empty() -> Self
 pub fn ScrollToOptions::new(behavior? : ScrollBehavior, left? : Double, top? : Double) -> Self
+pub impl FromJsAny for ScrollToOptions
 pub impl TJsValue for ScrollToOptions
 
 #external
 pub type Selection
 pub fn[T : TSelection] Selection::into(Self) -> T
+pub impl FromJsAny for Selection
 pub impl TJsValue for Selection
 pub impl TSelection for Selection
 
@@ -4411,18 +4885,21 @@ pub(all) enum SelectionMode {
 }
 pub fn SelectionMode::from(String) -> Self?
 pub fn SelectionMode::value(Self) -> String
+pub impl FromJsAny for SelectionMode
 pub impl TJsValue for SelectionMode
 pub impl Eq for SelectionMode
 pub impl Show for SelectionMode
 
 #external
 pub type ServiceWorker
+pub impl FromJsAny for ServiceWorker
 pub impl TJsValue for ServiceWorker
 pub impl TMessageEventSource for ServiceWorker
 
 #external
 pub type ShadowRoot
 pub fn[T : TShadowRoot] ShadowRoot::into(Self) -> T
+pub impl FromJsAny for ShadowRoot
 pub impl TDocumentFragment for ShadowRoot
 pub impl TEventTarget for ShadowRoot
 pub impl TJsValue for ShadowRoot
@@ -4433,6 +4910,7 @@ pub impl TShadowRoot for ShadowRoot
 pub type ShadowRootInit
 pub fn ShadowRootInit::empty() -> Self
 pub fn ShadowRootInit::new(ShadowRootMode, delegates_focus? : Bool, slot_assignment? : SlotAssignmentMode, clonable? : Bool, serializable? : Bool, custom_element_registry? : &TCustomElementRegistry) -> Self
+pub impl FromJsAny for ShadowRootInit
 pub impl TJsValue for ShadowRootInit
 
 #external
@@ -4446,12 +4924,14 @@ pub(all) enum ShadowRootMode {
 }
 pub fn ShadowRootMode::from(String) -> Self?
 pub fn ShadowRootMode::value(Self) -> String
+pub impl FromJsAny for ShadowRootMode
 pub impl TJsValue for ShadowRootMode
 pub impl Eq for ShadowRootMode
 pub impl Show for ShadowRootMode
 
 #external
 pub type SharedArrayBuffer
+pub impl FromJsAny for SharedArrayBuffer
 pub impl TAllowSharedBufferSource for SharedArrayBuffer
 pub impl TJsValue for SharedArrayBuffer
 
@@ -4459,6 +4939,7 @@ pub impl TJsValue for SharedArrayBuffer
 pub type SharedWorker
 pub fn[T : TSharedWorker] SharedWorker::into(Self) -> T
 pub fn SharedWorker::new(&TSharedWorkerNewScriptURL, options? : &TSharedWorkerNewOptions) -> Self
+pub impl FromJsAny for SharedWorker
 pub impl TEventTarget for SharedWorker
 pub impl TJsValue for SharedWorker
 pub impl TSharedWorker for SharedWorker
@@ -4466,6 +4947,7 @@ pub impl TSharedWorker for SharedWorker
 #external
 pub type SharedWorkerGlobalScope
 pub fn[T : TSharedWorkerGlobalScope] SharedWorkerGlobalScope::into(Self) -> T
+pub impl FromJsAny for SharedWorkerGlobalScope
 pub impl TEventTarget for SharedWorkerGlobalScope
 pub impl TJsValue for SharedWorkerGlobalScope
 pub impl TSharedWorkerGlobalScope for SharedWorkerGlobalScope
@@ -4475,6 +4957,7 @@ pub impl TWorkerGlobalScope for SharedWorkerGlobalScope
 pub type ShowPopoverOptions
 pub fn ShowPopoverOptions::empty() -> Self
 pub fn ShowPopoverOptions::new(source? : &THTMLElement) -> Self
+pub impl FromJsAny for ShowPopoverOptions
 pub impl TJsValue for ShowPopoverOptions
 
 pub(all) enum SlotAssignmentMode {
@@ -4483,6 +4966,7 @@ pub(all) enum SlotAssignmentMode {
 }
 pub fn SlotAssignmentMode::from(String) -> Self?
 pub fn SlotAssignmentMode::value(Self) -> String
+pub impl FromJsAny for SlotAssignmentMode
 pub impl TJsValue for SlotAssignmentMode
 pub impl Eq for SlotAssignmentMode
 pub impl Show for SlotAssignmentMode
@@ -4491,6 +4975,7 @@ pub impl Show for SlotAssignmentMode
 pub type StaticRange
 pub fn[T : TStaticRange] StaticRange::into(Self) -> T
 pub fn StaticRange::new(StaticRangeInit) -> Self
+pub impl FromJsAny for StaticRange
 pub impl TAbstractRange for StaticRange
 pub impl TJsValue for StaticRange
 pub impl TStaticRange for StaticRange
@@ -4499,11 +4984,13 @@ pub impl TStaticRange for StaticRange
 pub type StaticRangeInit
 pub fn StaticRangeInit::empty() -> Self
 pub fn StaticRangeInit::new(&TNode, UInt, &TNode, UInt) -> Self
+pub impl FromJsAny for StaticRangeInit
 pub impl TJsValue for StaticRangeInit
 
 #external
 pub type Storage
 pub fn[T : TStorage] Storage::into(Self) -> T
+pub impl FromJsAny for Storage
 pub impl TJsValue for Storage
 pub impl TStorage for Storage
 
@@ -4511,12 +4998,14 @@ pub impl TStorage for Storage
 pub type StorageEstimate
 pub fn StorageEstimate::empty() -> Self
 pub fn StorageEstimate::new(usage? : UInt64, quota? : UInt64) -> Self
+pub impl FromJsAny for StorageEstimate
 pub impl TJsValue for StorageEstimate
 
 #external
 pub type StorageEvent
 pub fn[T : TStorageEvent] StorageEvent::into(Self) -> T
 pub fn StorageEvent::new(String, event_init_dict? : StorageEventInit) -> Self
+pub impl FromJsAny for StorageEvent
 pub impl TEvent for StorageEvent
 pub impl TJsValue for StorageEvent
 pub impl TStorageEvent for StorageEvent
@@ -4525,11 +5014,13 @@ pub impl TStorageEvent for StorageEvent
 pub type StorageEventInit
 pub fn StorageEventInit::empty() -> Self
 pub fn StorageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, key? : String, old_value? : String, new_value? : String, url? : String, storage_area? : &TStorage) -> Self
+pub impl FromJsAny for StorageEventInit
 pub impl TJsValue for StorageEventInit
 
 #external
 pub type StorageManager
 pub fn[T : TStorageManager] StorageManager::into(Self) -> T
+pub impl FromJsAny for StorageManager
 pub impl TJsValue for StorageManager
 pub impl TStorageManager for StorageManager
 
@@ -4537,17 +5028,20 @@ pub impl TStorageManager for StorageManager
 pub type StructuredSerializeOptions
 pub fn StructuredSerializeOptions::empty() -> Self
 pub fn StructuredSerializeOptions::new(transfer? : Array[JsValue]) -> Self
+pub impl FromJsAny for StructuredSerializeOptions
 pub impl TJsValue for StructuredSerializeOptions
 
 #external
 pub type StyleSheet
 pub fn[T : TStyleSheet] StyleSheet::into(Self) -> T
+pub impl FromJsAny for StyleSheet
 pub impl TJsValue for StyleSheet
 pub impl TStyleSheet for StyleSheet
 
 #external
 pub type StyleSheetList
 pub fn[T : TStyleSheetList] StyleSheetList::into(Self) -> T
+pub impl FromJsAny for StyleSheetList
 pub impl TJsValue for StyleSheetList
 pub impl TStyleSheetList for StyleSheetList
 
@@ -4560,6 +5054,7 @@ pub impl TStyleSheetOwnerNode for StyleSheetOwnerNode
 pub type SubmitEvent
 pub fn[T : TSubmitEvent] SubmitEvent::into(Self) -> T
 pub fn SubmitEvent::new(String, event_init_dict? : SubmitEventInit) -> Self
+pub impl FromJsAny for SubmitEvent
 pub impl TEvent for SubmitEvent
 pub impl TJsValue for SubmitEvent
 pub impl TSubmitEvent for SubmitEvent
@@ -4568,12 +5063,14 @@ pub impl TSubmitEvent for SubmitEvent
 pub type SubmitEventInit
 pub fn SubmitEventInit::empty() -> Self
 pub fn SubmitEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, submitter? : &THTMLElement) -> Self
+pub impl FromJsAny for SubmitEventInit
 pub impl TJsValue for SubmitEventInit
 
 #external
 pub type Text
 pub fn[T : TText] Text::into(Self) -> T
 pub fn Text::new(data? : String) -> Self
+pub impl FromJsAny for Text
 pub impl TCharacterData for Text
 pub impl TEventTarget for Text
 pub impl TGeometryNode for Text
@@ -4586,12 +5083,14 @@ pub impl TText for Text
 pub type TextDecodeOptions
 pub fn TextDecodeOptions::empty() -> Self
 pub fn TextDecodeOptions::new(stream? : Bool) -> Self
+pub impl FromJsAny for TextDecodeOptions
 pub impl TJsValue for TextDecodeOptions
 
 #external
 pub type TextDecoder
 pub fn[T : TTextDecoder] TextDecoder::into(Self) -> T
 pub fn TextDecoder::new(label? : String, options? : TextDecoderOptions) -> Self
+pub impl FromJsAny for TextDecoder
 pub impl TJsValue for TextDecoder
 pub impl TTextDecoder for TextDecoder
 
@@ -4599,12 +5098,14 @@ pub impl TTextDecoder for TextDecoder
 pub type TextDecoderOptions
 pub fn TextDecoderOptions::empty() -> Self
 pub fn TextDecoderOptions::new(fatal? : Bool, ignore_bom? : Bool) -> Self
+pub impl FromJsAny for TextDecoderOptions
 pub impl TJsValue for TextDecoderOptions
 
 #external
 pub type TextDecoderStream
 pub fn[T : TTextDecoderStream] TextDecoderStream::into(Self) -> T
 pub fn TextDecoderStream::new(label? : String, options? : TextDecoderOptions) -> Self
+pub impl FromJsAny for TextDecoderStream
 pub impl TJsValue for TextDecoderStream
 pub impl TTextDecoderStream for TextDecoderStream
 
@@ -4612,6 +5113,7 @@ pub impl TTextDecoderStream for TextDecoderStream
 pub type TextEncoder
 pub fn[T : TTextEncoder] TextEncoder::into(Self) -> T
 pub fn TextEncoder::new() -> Self
+pub impl FromJsAny for TextEncoder
 pub impl TJsValue for TextEncoder
 pub impl TTextEncoder for TextEncoder
 
@@ -4619,18 +5121,21 @@ pub impl TTextEncoder for TextEncoder
 pub type TextEncoderEncodeIntoResult
 pub fn TextEncoderEncodeIntoResult::empty() -> Self
 pub fn TextEncoderEncodeIntoResult::new(read? : UInt64, written? : UInt64) -> Self
+pub impl FromJsAny for TextEncoderEncodeIntoResult
 pub impl TJsValue for TextEncoderEncodeIntoResult
 
 #external
 pub type TextEncoderStream
 pub fn[T : TTextEncoderStream] TextEncoderStream::into(Self) -> T
 pub fn TextEncoderStream::new() -> Self
+pub impl FromJsAny for TextEncoderStream
 pub impl TJsValue for TextEncoderStream
 pub impl TTextEncoderStream for TextEncoderStream
 
 #external
 pub type TextEvent
 pub fn[T : TTextEvent] TextEvent::into(Self) -> T
+pub impl FromJsAny for TextEvent
 pub impl TEvent for TextEvent
 pub impl TJsValue for TextEvent
 pub impl TTextEvent for TextEvent
@@ -4639,12 +5144,14 @@ pub impl TUIEvent for TextEvent
 #external
 pub type TextMetrics
 pub fn[T : TTextMetrics] TextMetrics::into(Self) -> T
+pub impl FromJsAny for TextMetrics
 pub impl TJsValue for TextMetrics
 pub impl TTextMetrics for TextMetrics
 
 #external
 pub type TextTrack
 pub fn[T : TTextTrack] TextTrack::into(Self) -> T
+pub impl FromJsAny for TextTrack
 pub impl TEventTarget for TextTrack
 pub impl TJsValue for TextTrack
 pub impl TTextTrack for TextTrack
@@ -4654,6 +5161,7 @@ pub impl TTrackEventTrack for TextTrack
 #external
 pub type TextTrackCue
 pub fn[T : TTextTrackCue] TextTrackCue::into(Self) -> T
+pub impl FromJsAny for TextTrackCue
 pub impl TEventTarget for TextTrackCue
 pub impl TJsValue for TextTrackCue
 pub impl TTextTrackCue for TextTrackCue
@@ -4661,6 +5169,7 @@ pub impl TTextTrackCue for TextTrackCue
 #external
 pub type TextTrackCueList
 pub fn[T : TTextTrackCueList] TextTrackCueList::into(Self) -> T
+pub impl FromJsAny for TextTrackCueList
 pub impl TJsValue for TextTrackCueList
 pub impl TTextTrackCueList for TextTrackCueList
 
@@ -4673,6 +5182,7 @@ pub(all) enum TextTrackKind {
 }
 pub fn TextTrackKind::from(String) -> Self?
 pub fn TextTrackKind::value(Self) -> String
+pub impl FromJsAny for TextTrackKind
 pub impl TJsValue for TextTrackKind
 pub impl Eq for TextTrackKind
 pub impl Show for TextTrackKind
@@ -4680,6 +5190,7 @@ pub impl Show for TextTrackKind
 #external
 pub type TextTrackList
 pub fn[T : TTextTrackList] TextTrackList::into(Self) -> T
+pub impl FromJsAny for TextTrackList
 pub impl TEventTarget for TextTrackList
 pub impl TJsValue for TextTrackList
 pub impl TTextTrackList for TextTrackList
@@ -4691,6 +5202,7 @@ pub(all) enum TextTrackMode {
 }
 pub fn TextTrackMode::from(String) -> Self?
 pub fn TextTrackMode::value(Self) -> String
+pub impl FromJsAny for TextTrackMode
 pub impl TJsValue for TextTrackMode
 pub impl Eq for TextTrackMode
 pub impl Show for TextTrackMode
@@ -4698,12 +5210,14 @@ pub impl Show for TextTrackMode
 #external
 pub type TimeRanges
 pub fn[T : TTimeRanges] TimeRanges::into(Self) -> T
+pub impl FromJsAny for TimeRanges
 pub impl TJsValue for TimeRanges
 pub impl TTimeRanges for TimeRanges
 
 #external
 pub type TimerHandler
 pub fn[T : TTimerHandler] TimerHandler::into(Self) -> T
+pub impl FromJsAny for TimerHandler
 pub impl TJsValue for TimerHandler
 pub impl TTimerHandler for TimerHandler
 
@@ -4711,6 +5225,7 @@ pub impl TTimerHandler for TimerHandler
 pub type ToggleEvent
 pub fn[T : TToggleEvent] ToggleEvent::into(Self) -> T
 pub fn ToggleEvent::new(String, event_init_dict? : ToggleEventInit) -> Self
+pub impl FromJsAny for ToggleEvent
 pub impl TEvent for ToggleEvent
 pub impl TJsValue for ToggleEvent
 pub impl TToggleEvent for ToggleEvent
@@ -4719,12 +5234,14 @@ pub impl TToggleEvent for ToggleEvent
 pub type ToggleEventInit
 pub fn ToggleEventInit::empty() -> Self
 pub fn ToggleEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, old_state? : String, new_state? : String, source? : &TElement) -> Self
+pub impl FromJsAny for ToggleEventInit
 pub impl TJsValue for ToggleEventInit
 
 #external
 pub type TogglePopoverOptions
 pub fn TogglePopoverOptions::empty() -> Self
 pub fn TogglePopoverOptions::new(source? : &THTMLElement, force? : Bool) -> Self
+pub impl FromJsAny for TogglePopoverOptions
 pub impl THTMLElementTogglePopoverOptions for TogglePopoverOptions
 pub impl TJsValue for TogglePopoverOptions
 
@@ -4732,6 +5249,7 @@ pub impl TJsValue for TogglePopoverOptions
 pub type Touch
 pub fn[T : TTouch] Touch::into(Self) -> T
 pub fn Touch::new(TouchInit) -> Self
+pub impl FromJsAny for Touch
 pub impl TJsValue for Touch
 pub impl TTouch for Touch
 
@@ -4739,6 +5257,7 @@ pub impl TTouch for Touch
 pub type TouchEvent
 pub fn[T : TTouchEvent] TouchEvent::into(Self) -> T
 pub fn TouchEvent::new(String, event_init_dict? : TouchEventInit) -> Self
+pub impl FromJsAny for TouchEvent
 pub impl TEvent for TouchEvent
 pub impl TJsValue for TouchEvent
 pub impl TTouchEvent for TouchEvent
@@ -4748,17 +5267,20 @@ pub impl TUIEvent for TouchEvent
 pub type TouchEventInit
 pub fn TouchEventInit::empty() -> Self
 pub fn TouchEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, touches? : Array[Touch], target_touches? : Array[Touch], changed_touches? : Array[Touch]) -> Self
+pub impl FromJsAny for TouchEventInit
 pub impl TJsValue for TouchEventInit
 
 #external
 pub type TouchInit
 pub fn TouchInit::empty() -> Self
 pub fn TouchInit::new(Int, &TEventTarget, client_x? : Double, client_y? : Double, screen_x? : Double, screen_y? : Double, page_x? : Double, page_y? : Double, radius_x? : Float, radius_y? : Float, rotation_angle? : Float, force? : Float, altitude_angle? : Double, azimuth_angle? : Double, touch_type? : TouchType) -> Self
+pub impl FromJsAny for TouchInit
 pub impl TJsValue for TouchInit
 
 #external
 pub type TouchList
 pub fn[T : TTouchList] TouchList::into(Self) -> T
+pub impl FromJsAny for TouchList
 pub impl TJsValue for TouchList
 pub impl TTouchList for TouchList
 
@@ -4768,6 +5290,7 @@ pub(all) enum TouchType {
 }
 pub fn TouchType::from(String) -> Self?
 pub fn TouchType::value(Self) -> String
+pub impl FromJsAny for TouchType
 pub impl TJsValue for TouchType
 pub impl Eq for TouchType
 pub impl Show for TouchType
@@ -4776,6 +5299,7 @@ pub impl Show for TouchType
 pub type TrackEvent
 pub fn[T : TTrackEvent] TrackEvent::into(Self) -> T
 pub fn TrackEvent::new(String, event_init_dict? : TrackEventInit) -> Self
+pub impl FromJsAny for TrackEvent
 pub impl TEvent for TrackEvent
 pub impl TJsValue for TrackEvent
 pub impl TTrackEvent for TrackEvent
@@ -4784,6 +5308,7 @@ pub impl TTrackEvent for TrackEvent
 pub type TrackEventInit
 pub fn TrackEventInit::empty() -> Self
 pub fn TrackEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, track? : &TTrackEventInitNewTrack) -> Self
+pub impl FromJsAny for TrackEventInit
 pub impl TJsValue for TrackEventInit
 
 #external
@@ -4794,12 +5319,14 @@ pub impl TTrackEventTrack for TrackEventTrack
 #external
 pub type TreeWalker
 pub fn[T : TTreeWalker] TreeWalker::into(Self) -> T
+pub impl FromJsAny for TreeWalker
 pub impl TJsValue for TreeWalker
 pub impl TTreeWalker for TreeWalker
 
 #external
 pub type TrustedHTML
 pub fn[T : TTrustedHTML] TrustedHTML::into(Self) -> T
+pub impl FromJsAny for TrustedHTML
 pub impl TDOMParserParseFromStringString for TrustedHTML
 pub impl TDocumentParseHTMLUnsafeHtml for TrustedHTML
 pub impl TDocumentWriteText for TrustedHTML
@@ -4819,6 +5346,7 @@ pub impl TTrustedType for TrustedHTML
 #external
 pub type TrustedScript
 pub fn[T : TTrustedScript] TrustedScript::into(Self) -> T
+pub impl FromJsAny for TrustedScript
 pub impl TJsValue for TrustedScript
 pub impl TTimerHandler for TrustedScript
 pub impl TTrustedScript for TrustedScript
@@ -4827,6 +5355,7 @@ pub impl TTrustedType for TrustedScript
 #external
 pub type TrustedScriptURL
 pub fn[T : TTrustedScriptURL] TrustedScriptURL::into(Self) -> T
+pub impl FromJsAny for TrustedScriptURL
 pub impl TJsValue for TrustedScriptURL
 pub impl TSVGAnimatedStringBaseVal for TrustedScriptURL
 pub impl TSharedWorkerNewScriptURL for TrustedScriptURL
@@ -4838,6 +5367,7 @@ pub impl TWorkerNewScriptURL for TrustedScriptURL
 #external
 pub type TrustedType
 pub fn[T : TTrustedType] TrustedType::into(Self) -> T
+pub impl FromJsAny for TrustedType
 pub impl TElementSetAttributeNSValue for TrustedType
 pub impl TElementSetAttributeValue for TrustedType
 pub impl TJsValue for TrustedType
@@ -4846,12 +5376,14 @@ pub impl TTrustedType for TrustedType
 #external
 pub type TrustedTypePolicy
 pub fn[T : TTrustedTypePolicy] TrustedTypePolicy::into(Self) -> T
+pub impl FromJsAny for TrustedTypePolicy
 pub impl TJsValue for TrustedTypePolicy
 pub impl TTrustedTypePolicy for TrustedTypePolicy
 
 #external
 pub type TrustedTypePolicyFactory
 pub fn[T : TTrustedTypePolicyFactory] TrustedTypePolicyFactory::into(Self) -> T
+pub impl FromJsAny for TrustedTypePolicyFactory
 pub impl TJsValue for TrustedTypePolicyFactory
 pub impl TTrustedTypePolicyFactory for TrustedTypePolicyFactory
 
@@ -4859,12 +5391,14 @@ pub impl TTrustedTypePolicyFactory for TrustedTypePolicyFactory
 pub type TrustedTypePolicyOptions
 pub fn TrustedTypePolicyOptions::empty() -> Self
 pub fn TrustedTypePolicyOptions::new(create_html? : CreateHTMLCallback, create_script? : CreateScriptCallback, create_script_url? : CreateScriptURLCallback) -> Self
+pub impl FromJsAny for TrustedTypePolicyOptions
 pub impl TJsValue for TrustedTypePolicyOptions
 
 #external
 pub type UIEvent
 pub fn[T : TUIEvent] UIEvent::into(Self) -> T
 pub fn UIEvent::new(String, event_init_dict? : UIEventInit) -> Self
+pub impl FromJsAny for UIEvent
 pub impl TEvent for UIEvent
 pub impl TJsValue for UIEvent
 pub impl TUIEvent for UIEvent
@@ -4873,6 +5407,7 @@ pub impl TUIEvent for UIEvent
 pub type UIEventInit
 pub fn UIEventInit::empty() -> Self
 pub fn UIEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt) -> Self
+pub impl FromJsAny for UIEventInit
 pub impl TJsValue for UIEventInit
 
 #external
@@ -4883,6 +5418,7 @@ pub fn[T : TURL] URL::into(Self) -> T
 pub fn URL::new(String, base? : String) -> Self
 pub fn URL::parse(String, base? : String) -> Self?
 pub fn URL::revoke_object_url(String) -> Unit
+pub impl FromJsAny for URL
 pub impl TJsValue for URL
 pub impl TURL for URL
 
@@ -4890,27 +5426,32 @@ pub impl TURL for URL
 pub type URLSearchParams
 pub fn[T : TURLSearchParams] URLSearchParams::into(Self) -> T
 pub fn URLSearchParams::new(init? : &TURLSearchParamsNewInit) -> Self
+pub impl FromJsAny for URLSearchParams
 pub impl TJsValue for URLSearchParams
 pub impl TURLSearchParams for URLSearchParams
 pub impl TXMLHttpRequestBodyInit for URLSearchParams
 
 #external
 pub type Uint16Array
+pub impl FromJsAny for Uint16Array
 pub impl TArrayBufferView for Uint16Array
 pub impl TJsValue for Uint16Array
 
 #external
 pub type Uint32Array
+pub impl FromJsAny for Uint32Array
 pub impl TArrayBufferView for Uint32Array
 pub impl TJsValue for Uint32Array
 
 #external
 pub type Uint8Array
+pub impl FromJsAny for Uint8Array
 pub impl TArrayBufferView for Uint8Array
 pub impl TJsValue for Uint8Array
 
 #external
 pub type Uint8ClampedArray
+pub impl FromJsAny for Uint8ClampedArray
 pub impl TArrayBufferView for Uint8ClampedArray
 pub impl TImageDataArray for Uint8ClampedArray
 pub impl TJsValue for Uint8ClampedArray
@@ -4918,12 +5459,14 @@ pub impl TJsValue for Uint8ClampedArray
 #external
 pub type UserActivation
 pub fn[T : TUserActivation] UserActivation::into(Self) -> T
+pub impl FromJsAny for UserActivation
 pub impl TJsValue for UserActivation
 pub impl TUserActivation for UserActivation
 
 #external
 pub type ValidityState
 pub fn[T : TValidityState] ValidityState::into(Self) -> T
+pub impl FromJsAny for ValidityState
 pub impl TJsValue for ValidityState
 pub impl TValidityState for ValidityState
 
@@ -4931,22 +5474,26 @@ pub impl TValidityState for ValidityState
 pub type ValidityStateFlags
 pub fn ValidityStateFlags::empty() -> Self
 pub fn ValidityStateFlags::new(value_missing? : Bool, type_mismatch? : Bool, pattern_mismatch? : Bool, too_long? : Bool, too_short? : Bool, range_underflow? : Bool, range_overflow? : Bool, step_mismatch? : Bool, bad_input? : Bool, custom_error? : Bool) -> Self
+pub impl FromJsAny for ValidityStateFlags
 pub impl TJsValue for ValidityStateFlags
 
 #external
 pub type VibratePattern
 pub fn[T : TVibratePattern] VibratePattern::into(Self) -> T
+pub impl FromJsAny for VibratePattern
 pub impl TJsValue for VibratePattern
 pub impl TVibratePattern for VibratePattern
 
 #external
 pub type VideoFrame
+pub impl FromJsAny for VideoFrame
 pub impl TCanvasImageSource for VideoFrame
 pub impl TJsValue for VideoFrame
 
 #external
 pub type VideoTrack
 pub fn[T : TVideoTrack] VideoTrack::into(Self) -> T
+pub impl FromJsAny for VideoTrack
 pub impl TJsValue for VideoTrack
 pub impl TTrackEventInitNewTrack for VideoTrack
 pub impl TTrackEventTrack for VideoTrack
@@ -4955,17 +5502,20 @@ pub impl TVideoTrack for VideoTrack
 #external
 pub type VideoTrackList
 pub fn[T : TVideoTrackList] VideoTrackList::into(Self) -> T
+pub impl FromJsAny for VideoTrackList
 pub impl TEventTarget for VideoTrackList
 pub impl TJsValue for VideoTrackList
 pub impl TVideoTrackList for VideoTrackList
 
 #external
 pub type ViewTransition
+pub impl FromJsAny for ViewTransition
 pub impl TJsValue for ViewTransition
 
 #external
 pub type VisibilityStateEntry
 pub fn[T : TVisibilityStateEntry] VisibilityStateEntry::into(Self) -> T
+pub impl FromJsAny for VisibilityStateEntry
 pub impl TJsValue for VisibilityStateEntry
 pub impl TPerformanceEntry for VisibilityStateEntry
 pub impl TVisibilityStateEntry for VisibilityStateEntry
@@ -4973,6 +5523,7 @@ pub impl TVisibilityStateEntry for VisibilityStateEntry
 #external
 pub type VisualViewport
 pub fn[T : TVisualViewport] VisualViewport::into(Self) -> T
+pub impl FromJsAny for VisualViewport
 pub impl TEventTarget for VisualViewport
 pub impl TJsValue for VisualViewport
 pub impl TVisualViewport for VisualViewport
@@ -4980,16 +5531,19 @@ pub impl TVisualViewport for VisualViewport
 #external
 pub type VoidFunction
 pub fn VoidFunction::new(() -> Unit) -> Self
+pub impl FromJsAny for VoidFunction
 pub impl TJsValue for VoidFunction
 
 #external
 pub type WebGL2RenderingContext
+pub impl FromJsAny for WebGL2RenderingContext
 pub impl TJsValue for WebGL2RenderingContext
 pub impl TOffscreenRenderingContext for WebGL2RenderingContext
 pub impl TRenderingContext for WebGL2RenderingContext
 
 #external
 pub type WebGLRenderingContext
+pub impl FromJsAny for WebGLRenderingContext
 pub impl TJsValue for WebGLRenderingContext
 pub impl TOffscreenRenderingContext for WebGLRenderingContext
 pub impl TRenderingContext for WebGLRenderingContext
@@ -4998,6 +5552,7 @@ pub impl TRenderingContext for WebGLRenderingContext
 pub type WebSocket
 pub fn[T : TWebSocket] WebSocket::into(Self) -> T
 pub fn WebSocket::new(String, protocols? : &TWebSocketNewProtocols) -> Self
+pub impl FromJsAny for WebSocket
 pub impl TEventTarget for WebSocket
 pub impl TJsValue for WebSocket
 pub impl TWebSocket for WebSocket
@@ -5006,6 +5561,7 @@ pub impl TWebSocket for WebSocket
 pub type WheelEvent
 pub fn[T : TWheelEvent] WheelEvent::into(Self) -> T
 pub fn WheelEvent::new(String, event_init_dict? : WheelEventInit) -> Self
+pub impl FromJsAny for WheelEvent
 pub impl TEvent for WheelEvent
 pub impl TJsValue for WheelEvent
 pub impl TMouseEvent for WheelEvent
@@ -5016,12 +5572,14 @@ pub impl TWheelEvent for WheelEvent
 pub type WheelEventInit
 pub fn WheelEventInit::empty() -> Self
 pub fn WheelEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : UInt) -> Self
+pub impl FromJsAny for WheelEventInit
 pub impl TJsValue for WheelEventInit
 
 #alias(WindowProxy)
 #external
 pub type Window
 pub fn[T : TWindow] Window::into(Self) -> T
+pub impl FromJsAny for Window
 pub impl TEventTarget for Window
 pub impl TJsValue for Window
 pub impl TMessageEventSource for Window
@@ -5037,12 +5595,14 @@ pub impl TWindowEvent for WindowEvent
 pub type WindowPostMessageOptions
 pub fn WindowPostMessageOptions::empty() -> Self
 pub fn WindowPostMessageOptions::new(transfer? : Array[JsValue], target_origin? : String) -> Self
+pub impl FromJsAny for WindowPostMessageOptions
 pub impl TJsValue for WindowPostMessageOptions
 
 #external
 pub type Worker
 pub fn[T : TWorker] Worker::into(Self) -> T
 pub fn Worker::new(&TWorkerNewScriptURL, options? : WorkerOptions) -> Self
+pub impl FromJsAny for Worker
 pub impl TEventTarget for Worker
 pub impl TJsValue for Worker
 pub impl TWorker for Worker
@@ -5050,6 +5610,7 @@ pub impl TWorker for Worker
 #external
 pub type WorkerGlobalScope
 pub fn[T : TWorkerGlobalScope] WorkerGlobalScope::into(Self) -> T
+pub impl FromJsAny for WorkerGlobalScope
 pub impl TEventTarget for WorkerGlobalScope
 pub impl TJsValue for WorkerGlobalScope
 pub impl TWorkerGlobalScope for WorkerGlobalScope
@@ -5057,12 +5618,14 @@ pub impl TWorkerGlobalScope for WorkerGlobalScope
 #external
 pub type WorkerLocation
 pub fn[T : TWorkerLocation] WorkerLocation::into(Self) -> T
+pub impl FromJsAny for WorkerLocation
 pub impl TJsValue for WorkerLocation
 pub impl TWorkerLocation for WorkerLocation
 
 #external
 pub type WorkerNavigator
 pub fn[T : TWorkerNavigator] WorkerNavigator::into(Self) -> T
+pub impl FromJsAny for WorkerNavigator
 pub impl TJsValue for WorkerNavigator
 pub impl TWorkerNavigator for WorkerNavigator
 
@@ -5070,6 +5633,7 @@ pub impl TWorkerNavigator for WorkerNavigator
 pub type WorkerOptions
 pub fn WorkerOptions::empty() -> Self
 pub fn WorkerOptions::new(name? : String, type_? : WorkerType, credentials? : RequestCredentials) -> Self
+pub impl FromJsAny for WorkerOptions
 pub impl TJsValue for WorkerOptions
 pub impl TSharedWorkerNewOptions for WorkerOptions
 
@@ -5079,6 +5643,7 @@ pub(all) enum WorkerType {
 }
 pub fn WorkerType::from(String) -> Self?
 pub fn WorkerType::value(Self) -> String
+pub impl FromJsAny for WorkerType
 pub impl TJsValue for WorkerType
 pub impl Eq for WorkerType
 pub impl Show for WorkerType
@@ -5086,12 +5651,14 @@ pub impl Show for WorkerType
 #external
 pub type Worklet
 pub fn[T : TWorklet] Worklet::into(Self) -> T
+pub impl FromJsAny for Worklet
 pub impl TJsValue for Worklet
 pub impl TWorklet for Worklet
 
 #external
 pub type WorkletGlobalScope
 pub fn[T : TWorkletGlobalScope] WorkletGlobalScope::into(Self) -> T
+pub impl FromJsAny for WorkletGlobalScope
 pub impl TJsValue for WorkletGlobalScope
 pub impl TWorkletGlobalScope for WorkletGlobalScope
 
@@ -5099,11 +5666,13 @@ pub impl TWorkletGlobalScope for WorkletGlobalScope
 pub type WorkletOptions
 pub fn WorkletOptions::empty() -> Self
 pub fn WorkletOptions::new(credentials? : RequestCredentials) -> Self
+pub impl FromJsAny for WorkletOptions
 pub impl TJsValue for WorkletOptions
 
 #external
 pub type XMLDocument
 pub fn[T : TXMLDocument] XMLDocument::into(Self) -> T
+pub impl FromJsAny for XMLDocument
 pub impl TDocument for XMLDocument
 pub impl TEventTarget for XMLDocument
 pub impl TJsValue for XMLDocument
@@ -5114,6 +5683,7 @@ pub impl TXMLDocument for XMLDocument
 pub type XMLHttpRequest
 pub fn[T : TXMLHttpRequest] XMLHttpRequest::into(Self) -> T
 pub fn XMLHttpRequest::new() -> Self
+pub impl FromJsAny for XMLHttpRequest
 pub impl TEventTarget for XMLHttpRequest
 pub impl TJsValue for XMLHttpRequest
 pub impl TXMLHttpRequest for XMLHttpRequest
@@ -5122,6 +5692,7 @@ pub impl TXMLHttpRequestEventTarget for XMLHttpRequest
 #external
 pub type XMLHttpRequestBodyInit
 pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::into(Self) -> T
+pub impl FromJsAny for XMLHttpRequestBodyInit
 pub impl TBodyInit for XMLHttpRequestBodyInit
 pub impl TJsValue for XMLHttpRequestBodyInit
 pub impl TXMLHttpRequestBodyInit for XMLHttpRequestBodyInit
@@ -5130,6 +5701,7 @@ pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit
 #external
 pub type XMLHttpRequestEventTarget
 pub fn[T : TXMLHttpRequestEventTarget] XMLHttpRequestEventTarget::into(Self) -> T
+pub impl FromJsAny for XMLHttpRequestEventTarget
 pub impl TEventTarget for XMLHttpRequestEventTarget
 pub impl TJsValue for XMLHttpRequestEventTarget
 pub impl TXMLHttpRequestEventTarget for XMLHttpRequestEventTarget
@@ -5144,6 +5716,7 @@ pub(all) enum XMLHttpRequestResponseType {
 }
 pub fn XMLHttpRequestResponseType::from(String) -> Self?
 pub fn XMLHttpRequestResponseType::value(Self) -> String
+pub impl FromJsAny for XMLHttpRequestResponseType
 pub impl TJsValue for XMLHttpRequestResponseType
 pub impl Eq for XMLHttpRequestResponseType
 pub impl Show for XMLHttpRequestResponseType
@@ -5151,6 +5724,7 @@ pub impl Show for XMLHttpRequestResponseType
 #external
 pub type XMLHttpRequestUpload
 pub fn[T : TXMLHttpRequestUpload] XMLHttpRequestUpload::into(Self) -> T
+pub impl FromJsAny for XMLHttpRequestUpload
 pub impl TEventTarget for XMLHttpRequestUpload
 pub impl TJsValue for XMLHttpRequestUpload
 pub impl TXMLHttpRequestEventTarget for XMLHttpRequestUpload
@@ -5160,6 +5734,7 @@ pub impl TXMLHttpRequestUpload for XMLHttpRequestUpload
 pub type XMLSerializer
 pub fn[T : TXMLSerializer] XMLSerializer::into(Self) -> T
 pub fn XMLSerializer::new() -> Self
+pub impl FromJsAny for XMLSerializer
 pub impl TJsValue for XMLSerializer
 pub impl TXMLSerializer for XMLSerializer
 
@@ -5167,23 +5742,27 @@ pub impl TXMLSerializer for XMLSerializer
 pub type XPathEvaluator
 pub fn[T : TXPathEvaluator] XPathEvaluator::into(Self) -> T
 pub fn XPathEvaluator::new() -> Self
+pub impl FromJsAny for XPathEvaluator
 pub impl TJsValue for XPathEvaluator
 pub impl TXPathEvaluator for XPathEvaluator
 
 #external
 pub type XPathExpression
 pub fn[T : TXPathExpression] XPathExpression::into(Self) -> T
+pub impl FromJsAny for XPathExpression
 pub impl TJsValue for XPathExpression
 pub impl TXPathExpression for XPathExpression
 
 #external
 pub type XPathNSResolver
 pub fn XPathNSResolver::new((String) -> String) -> Self
+pub impl FromJsAny for XPathNSResolver
 pub impl TJsValue for XPathNSResolver
 
 #external
 pub type XPathResult
 pub fn[T : TXPathResult] XPathResult::into(Self) -> T
+pub impl FromJsAny for XPathResult
 pub impl TJsValue for XPathResult
 pub impl TXPathResult for XPathResult
 
@@ -5191,6 +5770,7 @@ pub impl TXPathResult for XPathResult
 pub type XSLTProcessor
 pub fn[T : TXSLTProcessor] XSLTProcessor::into(Self) -> T
 pub fn XSLTProcessor::new() -> Self
+pub impl FromJsAny for XSLTProcessor
 pub impl TJsValue for XSLTProcessor
 pub impl TXSLTProcessor for XSLTProcessor
 
@@ -5206,6 +5786,19 @@ pub type EpochTimeStamp = UInt64
 pub type PerformanceEntryList = Array[PerformanceEntry]
 
 // Traits
+pub(open) trait FromJsAny {
+  from_js_any(String) -> Self
+}
+pub impl FromJsAny for Unit
+pub impl FromJsAny for Bool
+pub impl FromJsAny for Int
+pub impl FromJsAny for Int64
+pub impl FromJsAny for UInt
+pub impl FromJsAny for UInt64
+pub impl FromJsAny for Float
+pub impl FromJsAny for Double
+pub impl FromJsAny for String
+
 pub trait TAbortController : TJsValue {
   signal(Self) -> AbortSignal
   abort(Self, reason? : JsValue) -> Unit

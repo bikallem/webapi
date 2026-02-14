@@ -72,3 +72,8 @@ pub fn CanvasTextAlign::value(self : CanvasTextAlign) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasTextAlign with from_js_any(value : JsAny) -> CanvasTextAlign {
+  CanvasTextAlign::from_unchecked(value)
+}

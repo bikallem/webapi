@@ -11,6 +11,9 @@ pub type XMLSerializer
 pub impl TJsValue for XMLSerializer with to_js(self : XMLSerializer) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XMLSerializer with from_js_any(value : JsAny) -> XMLSerializer = "%identity"
+
+///|
 pub fn[T : TXMLSerializer] XMLSerializer::into(self : XMLSerializer) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type External
 pub impl TJsValue for External with to_js(self : External) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for External with from_js_any(value : JsAny) -> External = "%identity"
+
+///|
 pub fn[T : TExternal] External::into(self : External) -> T = "%identity"
 
 ///|

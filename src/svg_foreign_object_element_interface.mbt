@@ -13,6 +13,9 @@ pub impl TJsValue for SVGForeignObjectElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGForeignObjectElement with from_js_any(value : JsAny) -> SVGForeignObjectElement = "%identity"
+
+///|
 pub fn[T : TSVGForeignObjectElement] SVGForeignObjectElement::into(
   self : SVGForeignObjectElement,
 ) -> T = "%identity"

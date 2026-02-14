@@ -13,6 +13,9 @@ pub impl TJsValue for ConvertCoordinateOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ConvertCoordinateOptions with from_js_any(value : JsAny) -> ConvertCoordinateOptions = "%identity"
+
+///|
 pub fn ConvertCoordinateOptions::new(
   from_box? : CSSBoxType = CSSBoxType::Border,
   to_box? : CSSBoxType = CSSBoxType::Border,

@@ -13,6 +13,9 @@ pub impl TJsValue for NavigationReloadOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationReloadOptions with from_js_any(value : JsAny) -> NavigationReloadOptions = "%identity"
+
+///|
 pub fn NavigationReloadOptions::new(
   info? : JsValue,
   state? : JsValue,

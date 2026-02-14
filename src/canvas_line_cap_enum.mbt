@@ -60,3 +60,8 @@ pub fn CanvasLineCap::value(self : CanvasLineCap) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasLineCap with from_js_any(value : JsAny) -> CanvasLineCap {
+  CanvasLineCap::from_unchecked(value)
+}

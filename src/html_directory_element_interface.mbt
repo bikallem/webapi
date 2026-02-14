@@ -13,6 +13,9 @@ pub impl TJsValue for HTMLDirectoryElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLDirectoryElement with from_js_any(value : JsAny) -> HTMLDirectoryElement = "%identity"
+
+///|
 pub fn[T : THTMLDirectoryElement] HTMLDirectoryElement::into(
   self : HTMLDirectoryElement,
 ) -> T = "%identity"

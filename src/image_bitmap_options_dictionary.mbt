@@ -11,6 +11,9 @@ pub type ImageBitmapOptions
 pub impl TJsValue for ImageBitmapOptions with to_js(self : ImageBitmapOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageBitmapOptions with from_js_any(value : JsAny) -> ImageBitmapOptions = "%identity"
+
+///|
 pub fn ImageBitmapOptions::new(
   image_orientation? : ImageOrientation = ImageOrientation::FromImage,
   premultiply_alpha? : PremultiplyAlpha = PremultiplyAlpha::Default,

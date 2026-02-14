@@ -11,6 +11,9 @@ pub type UIEvent
 pub impl TJsValue for UIEvent with to_js(self : UIEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for UIEvent with from_js_any(value : JsAny) -> UIEvent = "%identity"
+
+///|
 pub fn[T : TUIEvent] UIEvent::into(self : UIEvent) -> T = "%identity"
 
 ///|
@@ -62,7 +65,7 @@ impl TUIEvent with init_ui_event(
   type_arg : String,
   bubbles_arg? : Bool = false,
   cancelable_arg? : Bool = false,
-  view_arg? : &TWindow = JsValue::null(),
+  view_arg? : &TWindow,
   detail_arg? : Int = (0 : Int),
 ) -> Unit {
   ui_event_init_ui_event_ffi(
@@ -70,7 +73,7 @@ impl TUIEvent with init_ui_event(
     TJsValue::to_js(type_arg),
     TJsValue::to_js(bubbles_arg),
     TJsValue::to_js(cancelable_arg),
-    TJsValue::to_js(view_arg),
+    opt_to_js(view_arg),
     TJsValue::to_js(detail_arg),
   )
 }

@@ -78,3 +78,8 @@ pub fn CanvasTextBaseline::value(self : CanvasTextBaseline) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasTextBaseline with from_js_any(value : JsAny) -> CanvasTextBaseline {
+  CanvasTextBaseline::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type HTMLEmbedElement
 pub impl TJsValue for HTMLEmbedElement with to_js(self : HTMLEmbedElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLEmbedElement with from_js_any(value : JsAny) -> HTMLEmbedElement = "%identity"
+
+///|
 pub fn[T : THTMLEmbedElement] HTMLEmbedElement::into(
   self : HTMLEmbedElement,
 ) -> T = "%identity"

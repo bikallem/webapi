@@ -11,6 +11,9 @@ pub type HTMLLegendElement
 pub impl TJsValue for HTMLLegendElement with to_js(self : HTMLLegendElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLLegendElement with from_js_any(value : JsAny) -> HTMLLegendElement = "%identity"
+
+///|
 pub fn[T : THTMLLegendElement] HTMLLegendElement::into(
   self : HTMLLegendElement,
 ) -> T = "%identity"

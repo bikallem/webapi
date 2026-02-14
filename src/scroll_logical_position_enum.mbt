@@ -70,3 +70,8 @@ pub fn ScrollLogicalPosition::value(self : ScrollLogicalPosition) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ScrollLogicalPosition with from_js_any(value : JsAny) -> ScrollLogicalPosition {
+  ScrollLogicalPosition::from_unchecked(value)
+}

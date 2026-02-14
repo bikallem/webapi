@@ -11,6 +11,9 @@ pub type SharedWorker
 pub impl TJsValue for SharedWorker with to_js(self : SharedWorker) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SharedWorker with from_js_any(value : JsAny) -> SharedWorker = "%identity"
+
+///|
 pub fn[T : TSharedWorker] SharedWorker::into(self : SharedWorker) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type SVGTSpanElement
 pub impl TJsValue for SVGTSpanElement with to_js(self : SVGTSpanElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGTSpanElement with from_js_any(value : JsAny) -> SVGTSpanElement = "%identity"
+
+///|
 pub fn[T : TSVGTSpanElement] SVGTSpanElement::into(self : SVGTSpanElement) -> T = "%identity"
 
 ///|

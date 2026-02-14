@@ -11,17 +11,20 @@ pub type ClipboardEventInit
 pub impl TJsValue for ClipboardEventInit with to_js(self : ClipboardEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ClipboardEventInit with from_js_any(value : JsAny) -> ClipboardEventInit = "%identity"
+
+///|
 pub fn ClipboardEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  clipboard_data? : &TDataTransfer = JsValue::null(),
+  clipboard_data? : &TDataTransfer,
 ) -> ClipboardEventInit {
   clipboard_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(clipboard_data),
+    opt_to_js(clipboard_data),
   )
 }
 

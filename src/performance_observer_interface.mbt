@@ -11,6 +11,9 @@ pub type PerformanceObserver
 pub impl TJsValue for PerformanceObserver with to_js(self : PerformanceObserver) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PerformanceObserver with from_js_any(value : JsAny) -> PerformanceObserver = "%identity"
+
+///|
 pub fn[T : TPerformanceObserver] PerformanceObserver::into(
   self : PerformanceObserver,
 ) -> T = "%identity"

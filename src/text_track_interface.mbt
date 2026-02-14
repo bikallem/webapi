@@ -11,6 +11,9 @@ pub type TextTrack
 pub impl TJsValue for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextTrack with from_js_any(value : JsAny) -> TextTrack = "%identity"
+
+///|
 pub fn[T : TTextTrack] TextTrack::into(self : TextTrack) -> T = "%identity"
 
 ///|

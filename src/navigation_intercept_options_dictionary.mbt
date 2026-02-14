@@ -13,6 +13,11 @@ pub impl TJsValue for NavigationInterceptOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationInterceptOptions with from_js_any(
+  value : JsAny,
+) -> NavigationInterceptOptions = "%identity"
+
+///|
 pub fn NavigationInterceptOptions::new(
   precommit_handler? : NavigationPrecommitHandler,
   handler? : NavigationInterceptHandler,

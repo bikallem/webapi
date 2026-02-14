@@ -60,3 +60,8 @@ pub fn TextTrackMode::value(self : TextTrackMode) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for TextTrackMode with from_js_any(value : JsAny) -> TextTrackMode {
+  TextTrackMode::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type IdleRequestOptions
 pub impl TJsValue for IdleRequestOptions with to_js(self : IdleRequestOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for IdleRequestOptions with from_js_any(value : JsAny) -> IdleRequestOptions = "%identity"
+
+///|
 pub fn IdleRequestOptions::new(timeout? : UInt) -> IdleRequestOptions {
   idle_request_options_ffi(opt_to_js(timeout))
 }

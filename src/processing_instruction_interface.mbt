@@ -13,6 +13,9 @@ pub impl TJsValue for ProcessingInstruction with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ProcessingInstruction with from_js_any(value : JsAny) -> ProcessingInstruction = "%identity"
+
+///|
 pub fn[T : TProcessingInstruction] ProcessingInstruction::into(
   self : ProcessingInstruction,
 ) -> T = "%identity"

@@ -13,6 +13,11 @@ pub impl TJsValue for PerformanceObserverCallbackOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PerformanceObserverCallbackOptions with from_js_any(
+  value : JsAny,
+) -> PerformanceObserverCallbackOptions = "%identity"
+
+///|
 pub fn PerformanceObserverCallbackOptions::new(
   dropped_entries_count? : UInt64,
 ) -> PerformanceObserverCallbackOptions {

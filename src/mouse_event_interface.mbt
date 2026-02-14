@@ -11,6 +11,9 @@ pub type MouseEvent
 pub impl TJsValue for MouseEvent with to_js(self : MouseEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MouseEvent with from_js_any(value : JsAny) -> MouseEvent = "%identity"
+
+///|
 pub fn[T : TMouseEvent] MouseEvent::into(self : MouseEvent) -> T = "%identity"
 
 ///|
@@ -167,7 +170,7 @@ impl TMouseEvent with init_mouse_event(
   type_arg : String,
   bubbles_arg? : Bool = false,
   cancelable_arg? : Bool = false,
-  view_arg? : &TWindow = JsValue::null(),
+  view_arg? : &TWindow,
   detail_arg? : Int = (0 : Int),
   screen_x_arg? : Int = (0 : Int),
   screen_y_arg? : Int = (0 : Int),
@@ -178,14 +181,14 @@ impl TMouseEvent with init_mouse_event(
   shift_key_arg? : Bool = false,
   meta_key_arg? : Bool = false,
   button_arg? : Int = (0 : Int),
-  related_target_arg? : &TEventTarget = JsValue::null(),
+  related_target_arg? : &TEventTarget,
 ) -> Unit {
   mouse_event_init_mouse_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
     TJsValue::to_js(bubbles_arg),
     TJsValue::to_js(cancelable_arg),
-    TJsValue::to_js(view_arg),
+    opt_to_js(view_arg),
     TJsValue::to_js(detail_arg),
     TJsValue::to_js(screen_x_arg),
     TJsValue::to_js(screen_y_arg),
@@ -196,7 +199,7 @@ impl TMouseEvent with init_mouse_event(
     TJsValue::to_js(shift_key_arg),
     TJsValue::to_js(meta_key_arg),
     TJsValue::to_js(button_arg),
-    TJsValue::to_js(related_target_arg),
+    opt_to_js(related_target_arg),
   )
 }
 

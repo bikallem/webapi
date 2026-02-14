@@ -11,6 +11,9 @@ pub type IdleDeadline
 pub impl TJsValue for IdleDeadline with to_js(self : IdleDeadline) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for IdleDeadline with from_js_any(value : JsAny) -> IdleDeadline = "%identity"
+
+///|
 pub fn[T : TIdleDeadline] IdleDeadline::into(self : IdleDeadline) -> T = "%identity"
 
 ///|

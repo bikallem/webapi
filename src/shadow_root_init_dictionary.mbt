@@ -11,6 +11,9 @@ pub type ShadowRootInit
 pub impl TJsValue for ShadowRootInit with to_js(self : ShadowRootInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ShadowRootInit with from_js_any(value : JsAny) -> ShadowRootInit = "%identity"
+
+///|
 pub fn ShadowRootInit::new(
   mode : ShadowRootMode,
   delegates_focus? : Bool = false,

@@ -11,6 +11,9 @@ pub type CSSPageDescriptors
 pub impl TJsValue for CSSPageDescriptors with to_js(self : CSSPageDescriptors) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSPageDescriptors with from_js_any(value : JsAny) -> CSSPageDescriptors = "%identity"
+
+///|
 pub fn[T : TCSSPageDescriptors] CSSPageDescriptors::into(
   self : CSSPageDescriptors,
 ) -> T = "%identity"

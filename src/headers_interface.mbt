@@ -11,6 +11,9 @@ pub type Headers
 pub impl TJsValue for Headers with to_js(self : Headers) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Headers with from_js_any(value : JsAny) -> Headers = "%identity"
+
+///|
 pub fn[T : THeaders] Headers::into(self : Headers) -> T = "%identity"
 
 ///|

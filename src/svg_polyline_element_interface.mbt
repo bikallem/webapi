@@ -11,6 +11,9 @@ pub type SVGPolylineElement
 pub impl TJsValue for SVGPolylineElement with to_js(self : SVGPolylineElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGPolylineElement with from_js_any(value : JsAny) -> SVGPolylineElement = "%identity"
+
+///|
 pub fn[T : TSVGPolylineElement] SVGPolylineElement::into(
   self : SVGPolylineElement,
 ) -> T = "%identity"

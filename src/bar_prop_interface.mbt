@@ -11,6 +11,9 @@ pub type BarProp
 pub impl TJsValue for BarProp with to_js(self : BarProp) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BarProp with from_js_any(value : JsAny) -> BarProp = "%identity"
+
+///|
 pub fn[T : TBarProp] BarProp::into(self : BarProp) -> T = "%identity"
 
 ///|

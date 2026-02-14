@@ -11,6 +11,9 @@ pub type CloseWatcher
 pub impl TJsValue for CloseWatcher with to_js(self : CloseWatcher) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CloseWatcher with from_js_any(value : JsAny) -> CloseWatcher = "%identity"
+
+///|
 pub fn[T : TCloseWatcher] CloseWatcher::into(self : CloseWatcher) -> T = "%identity"
 
 ///|

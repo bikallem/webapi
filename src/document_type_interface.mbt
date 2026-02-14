@@ -11,6 +11,9 @@ pub type DocumentType
 pub impl TJsValue for DocumentType with to_js(self : DocumentType) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DocumentType with from_js_any(value : JsAny) -> DocumentType = "%identity"
+
+///|
 pub fn[T : TDocumentType] DocumentType::into(self : DocumentType) -> T = "%identity"
 
 ///|

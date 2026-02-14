@@ -87,3 +87,10 @@ pub fn XMLHttpRequestResponseType::value(
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for XMLHttpRequestResponseType with from_js_any(
+  value : JsAny,
+) -> XMLHttpRequestResponseType {
+  XMLHttpRequestResponseType::from_unchecked(value)
+}

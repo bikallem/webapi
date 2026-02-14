@@ -13,6 +13,11 @@ pub impl TJsValue for NotificationPermissionCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NotificationPermissionCallback with from_js_any(
+  value : JsAny,
+) -> NotificationPermissionCallback = "%identity"
+
+///|
 pub fn NotificationPermissionCallback::new(
   callback : (NotificationPermission) -> Unit,
 ) -> NotificationPermissionCallback {

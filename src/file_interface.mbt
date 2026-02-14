@@ -11,6 +11,9 @@ pub type File
 pub impl TJsValue for File with to_js(self : File) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for File with from_js_any(value : JsAny) -> File = "%identity"
+
+///|
 pub fn[T : TFile] File::into(self : File) -> T = "%identity"
 
 ///|

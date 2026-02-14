@@ -11,6 +11,9 @@ pub type HTMLCanvasElement
 pub impl TJsValue for HTMLCanvasElement with to_js(self : HTMLCanvasElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLCanvasElement with from_js_any(value : JsAny) -> HTMLCanvasElement = "%identity"
+
+///|
 pub fn[T : THTMLCanvasElement] HTMLCanvasElement::into(
   self : HTMLCanvasElement,
 ) -> T = "%identity"

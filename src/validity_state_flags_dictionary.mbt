@@ -11,6 +11,9 @@ pub type ValidityStateFlags
 pub impl TJsValue for ValidityStateFlags with to_js(self : ValidityStateFlags) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ValidityStateFlags with from_js_any(value : JsAny) -> ValidityStateFlags = "%identity"
+
+///|
 pub fn ValidityStateFlags::new(
   value_missing? : Bool = false,
   type_mismatch? : Bool = false,

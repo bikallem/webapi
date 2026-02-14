@@ -11,6 +11,9 @@ pub type WorkerOptions
 pub impl TJsValue for WorkerOptions with to_js(self : WorkerOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WorkerOptions with from_js_any(value : JsAny) -> WorkerOptions = "%identity"
+
+///|
 pub fn WorkerOptions::new(
   name? : String = "",
   type_? : WorkerType = WorkerType::Classic,

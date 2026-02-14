@@ -11,6 +11,9 @@ pub type TimeRanges
 pub impl TJsValue for TimeRanges with to_js(self : TimeRanges) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TimeRanges with from_js_any(value : JsAny) -> TimeRanges = "%identity"
+
+///|
 pub fn[T : TTimeRanges] TimeRanges::into(self : TimeRanges) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type DragEvent
 pub impl TJsValue for DragEvent with to_js(self : DragEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DragEvent with from_js_any(value : JsAny) -> DragEvent = "%identity"
+
+///|
 pub fn[T : TDragEvent] DragEvent::into(self : DragEvent) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type SVGRectElement
 pub impl TJsValue for SVGRectElement with to_js(self : SVGRectElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGRectElement with from_js_any(value : JsAny) -> SVGRectElement = "%identity"
+
+///|
 pub fn[T : TSVGRectElement] SVGRectElement::into(self : SVGRectElement) -> T = "%identity"
 
 ///|

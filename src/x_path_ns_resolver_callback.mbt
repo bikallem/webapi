@@ -11,6 +11,9 @@ pub type XPathNSResolver
 pub impl TJsValue for XPathNSResolver with to_js(self : XPathNSResolver) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XPathNSResolver with from_js_any(value : JsAny) -> XPathNSResolver = "%identity"
+
+///|
 pub fn XPathNSResolver::new(callback : (String) -> String) -> XPathNSResolver {
   x_path_ns_resolver_ffi(callback)
 }

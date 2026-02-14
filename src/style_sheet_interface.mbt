@@ -11,6 +11,9 @@ pub type StyleSheet
 pub impl TJsValue for StyleSheet with to_js(self : StyleSheet) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for StyleSheet with from_js_any(value : JsAny) -> StyleSheet = "%identity"
+
+///|
 pub fn[T : TStyleSheet] StyleSheet::into(self : StyleSheet) -> T = "%identity"
 
 ///|

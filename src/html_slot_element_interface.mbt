@@ -11,6 +11,9 @@ pub type HTMLSlotElement
 pub impl TJsValue for HTMLSlotElement with to_js(self : HTMLSlotElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLSlotElement with from_js_any(value : JsAny) -> HTMLSlotElement = "%identity"
+
+///|
 pub fn[T : THTMLSlotElement] HTMLSlotElement::into(self : HTMLSlotElement) -> T = "%identity"
 
 ///|

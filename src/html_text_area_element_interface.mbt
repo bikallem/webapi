@@ -11,6 +11,9 @@ pub type HTMLTextAreaElement
 pub impl TJsValue for HTMLTextAreaElement with to_js(self : HTMLTextAreaElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTextAreaElement with from_js_any(value : JsAny) -> HTMLTextAreaElement = "%identity"
+
+///|
 pub fn[T : THTMLTextAreaElement] HTMLTextAreaElement::into(
   self : HTMLTextAreaElement,
 ) -> T = "%identity"

@@ -11,18 +11,21 @@ pub type PageSwapEventInit
 pub impl TJsValue for PageSwapEventInit with to_js(self : PageSwapEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PageSwapEventInit with from_js_any(value : JsAny) -> PageSwapEventInit = "%identity"
+
+///|
 pub fn PageSwapEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  activation? : &TNavigationActivation = JsValue::null(),
+  activation? : &TNavigationActivation,
   view_transition? : ViewTransition = JsValue::null(),
 ) -> PageSwapEventInit {
   page_swap_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(activation),
+    opt_to_js(activation),
     TJsValue::to_js(view_transition),
   )
 }

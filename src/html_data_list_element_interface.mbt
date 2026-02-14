@@ -11,6 +11,9 @@ pub type HTMLDataListElement
 pub impl TJsValue for HTMLDataListElement with to_js(self : HTMLDataListElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLDataListElement with from_js_any(value : JsAny) -> HTMLDataListElement = "%identity"
+
+///|
 pub fn[T : THTMLDataListElement] HTMLDataListElement::into(
   self : HTMLDataListElement,
 ) -> T = "%identity"

@@ -11,6 +11,9 @@ pub type Event
 pub impl TJsValue for Event with to_js(self : Event) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Event with from_js_any(value : JsAny) -> Event = "%identity"
+
+///|
 pub fn[T : TEvent] Event::into(self : Event) -> T = "%identity"
 
 ///|

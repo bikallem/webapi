@@ -11,6 +11,9 @@ pub type ImageDataSettings
 pub impl TJsValue for ImageDataSettings with to_js(self : ImageDataSettings) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageDataSettings with from_js_any(value : JsAny) -> ImageDataSettings = "%identity"
+
+///|
 pub fn ImageDataSettings::new(
   color_space? : PredefinedColorSpace,
   pixel_format? : ImageDataPixelFormat = ImageDataPixelFormat::RgbaUnorm8,

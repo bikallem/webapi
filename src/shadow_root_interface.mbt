@@ -11,6 +11,9 @@ pub type ShadowRoot
 pub impl TJsValue for ShadowRoot with to_js(self : ShadowRoot) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ShadowRoot with from_js_any(value : JsAny) -> ShadowRoot = "%identity"
+
+///|
 pub fn[T : TShadowRoot] ShadowRoot::into(self : ShadowRoot) -> T = "%identity"
 
 ///|

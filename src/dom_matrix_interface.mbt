@@ -11,6 +11,9 @@ pub type DOMMatrix
 pub impl TJsValue for DOMMatrix with to_js(self : DOMMatrix) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMMatrix with from_js_any(value : JsAny) -> DOMMatrix = "%identity"
+
+///|
 pub fn[T : TDOMMatrix] DOMMatrix::into(self : DOMMatrix) -> T = "%identity"
 
 ///|

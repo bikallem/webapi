@@ -11,6 +11,9 @@ pub type ProgressEvent
 pub impl TJsValue for ProgressEvent with to_js(self : ProgressEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ProgressEvent with from_js_any(value : JsAny) -> ProgressEvent = "%identity"
+
+///|
 pub fn[T : TProgressEvent] ProgressEvent::into(self : ProgressEvent) -> T = "%identity"
 
 ///|

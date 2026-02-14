@@ -13,6 +13,9 @@ pub impl TJsValue for TogglePopoverOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TogglePopoverOptions with from_js_any(value : JsAny) -> TogglePopoverOptions = "%identity"
+
+///|
 pub fn TogglePopoverOptions::new(
   source? : &THTMLElement,
   force? : Bool,

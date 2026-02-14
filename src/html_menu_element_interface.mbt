@@ -11,6 +11,9 @@ pub type HTMLMenuElement
 pub impl TJsValue for HTMLMenuElement with to_js(self : HTMLMenuElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLMenuElement with from_js_any(value : JsAny) -> HTMLMenuElement = "%identity"
+
+///|
 pub fn[T : THTMLMenuElement] HTMLMenuElement::into(self : HTMLMenuElement) -> T = "%identity"
 
 ///|

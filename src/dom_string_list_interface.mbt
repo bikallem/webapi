@@ -11,6 +11,9 @@ pub type DOMStringList
 pub impl TJsValue for DOMStringList with to_js(self : DOMStringList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMStringList with from_js_any(value : JsAny) -> DOMStringList = "%identity"
+
+///|
 pub fn[T : TDOMStringList] DOMStringList::into(self : DOMStringList) -> T = "%identity"
 
 ///|

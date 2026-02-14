@@ -54,3 +54,8 @@ pub fn SlotAssignmentMode::value(self : SlotAssignmentMode) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for SlotAssignmentMode with from_js_any(value : JsAny) -> SlotAssignmentMode {
+  SlotAssignmentMode::from_unchecked(value)
+}

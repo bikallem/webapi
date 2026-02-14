@@ -11,6 +11,9 @@ pub type HashChangeEventInit
 pub impl TJsValue for HashChangeEventInit with to_js(self : HashChangeEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HashChangeEventInit with from_js_any(value : JsAny) -> HashChangeEventInit = "%identity"
+
+///|
 pub fn HashChangeEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

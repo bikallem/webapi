@@ -60,3 +60,8 @@ pub fn ScrollIntoViewContainer::value(self : ScrollIntoViewContainer) -> String 
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ScrollIntoViewContainer with from_js_any(value : JsAny) -> ScrollIntoViewContainer {
+  ScrollIntoViewContainer::from_unchecked(value)
+}

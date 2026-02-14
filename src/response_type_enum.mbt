@@ -78,3 +78,8 @@ pub fn ResponseType::value(self : ResponseType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ResponseType with from_js_any(value : JsAny) -> ResponseType {
+  ResponseType::from_unchecked(value)
+}

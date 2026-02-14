@@ -11,6 +11,9 @@ pub type HTMLTitleElement
 pub impl TJsValue for HTMLTitleElement with to_js(self : HTMLTitleElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTitleElement with from_js_any(value : JsAny) -> HTMLTitleElement = "%identity"
+
+///|
 pub fn[T : THTMLTitleElement] HTMLTitleElement::into(
   self : HTMLTitleElement,
 ) -> T = "%identity"

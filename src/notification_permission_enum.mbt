@@ -64,3 +64,8 @@ pub fn NotificationPermission::value(self : NotificationPermission) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for NotificationPermission with from_js_any(value : JsAny) -> NotificationPermission {
+  NotificationPermission::from_unchecked(value)
+}

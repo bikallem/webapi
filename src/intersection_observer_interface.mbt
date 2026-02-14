@@ -13,6 +13,9 @@ pub impl TJsValue for IntersectionObserver with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for IntersectionObserver with from_js_any(value : JsAny) -> IntersectionObserver = "%identity"
+
+///|
 pub fn[T : TIntersectionObserver] IntersectionObserver::into(
   self : IntersectionObserver,
 ) -> T = "%identity"

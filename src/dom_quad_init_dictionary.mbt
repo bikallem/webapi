@@ -11,6 +11,9 @@ pub type DOMQuadInit
 pub impl TJsValue for DOMQuadInit with to_js(self : DOMQuadInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMQuadInit with from_js_any(value : JsAny) -> DOMQuadInit = "%identity"
+
+///|
 pub fn DOMQuadInit::new(
   p1? : DOMPointInit,
   p2? : DOMPointInit,

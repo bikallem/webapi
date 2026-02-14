@@ -11,6 +11,9 @@ pub type XPathResult
 pub impl TJsValue for XPathResult with to_js(self : XPathResult) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XPathResult with from_js_any(value : JsAny) -> XPathResult = "%identity"
+
+///|
 pub fn[T : TXPathResult] XPathResult::into(self : XPathResult) -> T = "%identity"
 
 ///|

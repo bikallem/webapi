@@ -11,6 +11,9 @@ pub type ArrayBufferView
 pub impl TJsValue for ArrayBufferView with to_js(self : ArrayBufferView) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ArrayBufferView with from_js_any(value : JsAny) -> ArrayBufferView = "%identity"
+
+///|
 pub(open) trait TArrayBufferView {
   to_js(self : Self) -> JsValue
 }

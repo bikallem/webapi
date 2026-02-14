@@ -66,3 +66,8 @@ pub fn NavigationType::value(self : NavigationType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for NavigationType with from_js_any(value : JsAny) -> NavigationType {
+  NavigationType::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type Origin
 pub impl TJsValue for Origin with to_js(self : Origin) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Origin with from_js_any(value : JsAny) -> Origin = "%identity"
+
+///|
 pub fn[T : TOrigin] Origin::into(self : Origin) -> T = "%identity"
 
 ///|

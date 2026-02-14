@@ -11,6 +11,9 @@ pub type ErrorEventInit
 pub impl TJsValue for ErrorEventInit with to_js(self : ErrorEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ErrorEventInit with from_js_any(value : JsAny) -> ErrorEventInit = "%identity"
+
+///|
 pub fn ErrorEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

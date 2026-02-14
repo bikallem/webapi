@@ -11,6 +11,9 @@ pub type HTMLOListElement
 pub impl TJsValue for HTMLOListElement with to_js(self : HTMLOListElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLOListElement with from_js_any(value : JsAny) -> HTMLOListElement = "%identity"
+
+///|
 pub fn[T : THTMLOListElement] HTMLOListElement::into(
   self : HTMLOListElement,
 ) -> T = "%identity"

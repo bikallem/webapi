@@ -108,3 +108,8 @@ pub fn ReferrerPolicy::value(self : ReferrerPolicy) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ReferrerPolicy with from_js_any(value : JsAny) -> ReferrerPolicy {
+  ReferrerPolicy::from_unchecked(value)
+}

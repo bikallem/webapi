@@ -11,6 +11,9 @@ pub type PopStateEventInit
 pub impl TJsValue for PopStateEventInit with to_js(self : PopStateEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PopStateEventInit with from_js_any(value : JsAny) -> PopStateEventInit = "%identity"
+
+///|
 pub fn PopStateEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

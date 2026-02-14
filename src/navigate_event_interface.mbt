@@ -11,6 +11,9 @@ pub type NavigateEvent
 pub impl TJsValue for NavigateEvent with to_js(self : NavigateEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigateEvent with from_js_any(value : JsAny) -> NavigateEvent = "%identity"
+
+///|
 pub fn[T : TNavigateEvent] NavigateEvent::into(self : NavigateEvent) -> T = "%identity"
 
 ///|

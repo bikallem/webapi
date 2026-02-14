@@ -11,6 +11,9 @@ pub type NavigationResult
 pub impl TJsValue for NavigationResult with to_js(self : NavigationResult) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationResult with from_js_any(value : JsAny) -> NavigationResult = "%identity"
+
+///|
 pub fn NavigationResult::new(
   committed? : JsPromise[NavigationHistoryEntry],
   finished? : JsPromise[NavigationHistoryEntry],

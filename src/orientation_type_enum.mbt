@@ -70,3 +70,8 @@ pub fn OrientationType::value(self : OrientationType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for OrientationType with from_js_any(value : JsAny) -> OrientationType {
+  OrientationType::from_unchecked(value)
+}

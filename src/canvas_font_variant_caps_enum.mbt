@@ -88,3 +88,8 @@ pub fn CanvasFontVariantCaps::value(self : CanvasFontVariantCaps) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasFontVariantCaps with from_js_any(value : JsAny) -> CanvasFontVariantCaps {
+  CanvasFontVariantCaps::from_unchecked(value)
+}

@@ -13,6 +13,9 @@ pub impl TJsValue for HTMLParagraphElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLParagraphElement with from_js_any(value : JsAny) -> HTMLParagraphElement = "%identity"
+
+///|
 pub fn[T : THTMLParagraphElement] HTMLParagraphElement::into(
   self : HTMLParagraphElement,
 ) -> T = "%identity"

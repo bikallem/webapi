@@ -11,6 +11,9 @@ pub type BodyInit
 pub impl TJsValue for BodyInit with to_js(self : BodyInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BodyInit with from_js_any(value : JsAny) -> BodyInit = "%identity"
+
+///|
 pub(open) trait TBodyInit {
   to_js(self : Self) -> JsValue
 }

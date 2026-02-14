@@ -56,3 +56,8 @@ pub fn ImageDataPixelFormat::value(self : ImageDataPixelFormat) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ImageDataPixelFormat with from_js_any(value : JsAny) -> ImageDataPixelFormat {
+  ImageDataPixelFormat::from_unchecked(value)
+}

@@ -13,6 +13,11 @@ pub impl TJsValue for ImageBitmapRenderingContext with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageBitmapRenderingContext with from_js_any(
+  value : JsAny,
+) -> ImageBitmapRenderingContext = "%identity"
+
+///|
 pub fn[T : TImageBitmapRenderingContext] ImageBitmapRenderingContext::into(
   self : ImageBitmapRenderingContext,
 ) -> T = "%identity"

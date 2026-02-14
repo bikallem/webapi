@@ -11,6 +11,9 @@ pub type Navigator
 pub impl TJsValue for Navigator with to_js(self : Navigator) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Navigator with from_js_any(value : JsAny) -> Navigator = "%identity"
+
+///|
 pub fn[T : TNavigator] Navigator::into(self : Navigator) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type SVGTitleElement
 pub impl TJsValue for SVGTitleElement with to_js(self : SVGTitleElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGTitleElement with from_js_any(value : JsAny) -> SVGTitleElement = "%identity"
+
+///|
 pub fn[T : TSVGTitleElement] SVGTitleElement::into(self : SVGTitleElement) -> T = "%identity"
 
 ///|

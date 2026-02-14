@@ -11,6 +11,9 @@ pub type DOMPointReadOnly
 pub impl TJsValue for DOMPointReadOnly with to_js(self : DOMPointReadOnly) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMPointReadOnly with from_js_any(value : JsAny) -> DOMPointReadOnly = "%identity"
+
+///|
 pub fn[T : TDOMPointReadOnly] DOMPointReadOnly::into(
   self : DOMPointReadOnly,
 ) -> T = "%identity"

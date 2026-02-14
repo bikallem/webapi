@@ -11,6 +11,9 @@ pub type DOMMatrixReadOnly
 pub impl TJsValue for DOMMatrixReadOnly with to_js(self : DOMMatrixReadOnly) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMMatrixReadOnly with from_js_any(value : JsAny) -> DOMMatrixReadOnly = "%identity"
+
+///|
 pub fn[T : TDOMMatrixReadOnly] DOMMatrixReadOnly::into(
   self : DOMMatrixReadOnly,
 ) -> T = "%identity"

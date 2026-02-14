@@ -54,3 +54,8 @@ pub fn CanvasColorType::value(self : CanvasColorType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasColorType with from_js_any(value : JsAny) -> CanvasColorType {
+  CanvasColorType::from_unchecked(value)
+}

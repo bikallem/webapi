@@ -11,6 +11,9 @@ pub type XSLTProcessor
 pub impl TJsValue for XSLTProcessor with to_js(self : XSLTProcessor) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XSLTProcessor with from_js_any(value : JsAny) -> XSLTProcessor = "%identity"
+
+///|
 pub fn[T : TXSLTProcessor] XSLTProcessor::into(self : XSLTProcessor) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type CanvasImageSource
 pub impl TJsValue for CanvasImageSource with to_js(self : CanvasImageSource) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CanvasImageSource with from_js_any(value : JsAny) -> CanvasImageSource = "%identity"
+
+///|
 pub(open) trait TCanvasImageSource {
   to_js(self : Self) -> JsValue
 }

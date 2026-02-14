@@ -11,6 +11,9 @@ pub type Storage
 pub impl TJsValue for Storage with to_js(self : Storage) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Storage with from_js_any(value : JsAny) -> Storage = "%identity"
+
+///|
 pub fn[T : TStorage] Storage::into(self : Storage) -> T = "%identity"
 
 ///|

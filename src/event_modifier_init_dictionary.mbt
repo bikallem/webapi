@@ -11,11 +11,14 @@ pub type EventModifierInit
 pub impl TJsValue for EventModifierInit with to_js(self : EventModifierInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for EventModifierInit with from_js_any(value : JsAny) -> EventModifierInit = "%identity"
+
+///|
 pub fn EventModifierInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  view? : &TWindow = JsValue::null(),
+  view? : &TWindow,
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
@@ -37,7 +40,7 @@ pub fn EventModifierInit::new(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(view),
+    opt_to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),
     TJsValue::to_js(ctrl_key),

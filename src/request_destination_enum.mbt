@@ -168,3 +168,8 @@ pub fn RequestDestination::value(self : RequestDestination) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for RequestDestination with from_js_any(value : JsAny) -> RequestDestination {
+  RequestDestination::from_unchecked(value)
+}

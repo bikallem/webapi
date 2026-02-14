@@ -13,6 +13,11 @@ pub impl TJsValue for PerformanceObserverEntryList with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PerformanceObserverEntryList with from_js_any(
+  value : JsAny,
+) -> PerformanceObserverEntryList = "%identity"
+
+///|
 pub fn[T : TPerformanceObserverEntryList] PerformanceObserverEntryList::into(
   self : PerformanceObserverEntryList,
 ) -> T = "%identity"

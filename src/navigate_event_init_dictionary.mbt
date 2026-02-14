@@ -11,6 +11,9 @@ pub type NavigateEventInit
 pub impl TJsValue for NavigateEventInit with to_js(self : NavigateEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigateEventInit with from_js_any(value : JsAny) -> NavigateEventInit = "%identity"
+
+///|
 pub fn NavigateEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
@@ -21,11 +24,11 @@ pub fn NavigateEventInit::new(
   user_initiated? : Bool = false,
   hash_change? : Bool = false,
   signal : &TAbortSignal,
-  form_data? : &TFormData = JsValue::null(),
+  form_data? : &TFormData,
   download_request? : String,
   info? : JsValue,
   has_ua_visual_transition? : Bool = false,
-  source_element? : &TElement = JsValue::null(),
+  source_element? : &TElement,
 ) -> NavigateEventInit {
   navigate_event_init_ffi(
     TJsValue::to_js(bubbles),
@@ -37,11 +40,11 @@ pub fn NavigateEventInit::new(
     TJsValue::to_js(user_initiated),
     TJsValue::to_js(hash_change),
     TJsValue::to_js(signal),
-    TJsValue::to_js(form_data),
+    opt_to_js(form_data),
     opt_to_js(download_request),
     opt_to_js(info),
     TJsValue::to_js(has_ua_visual_transition),
-    TJsValue::to_js(source_element),
+    opt_to_js(source_element),
   )
 }
 

@@ -13,6 +13,11 @@ pub impl TJsValue for IntersectionObserverEntryInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for IntersectionObserverEntryInit with from_js_any(
+  value : JsAny,
+) -> IntersectionObserverEntryInit = "%identity"
+
+///|
 pub fn IntersectionObserverEntryInit::new(
   time : DOMHighResTimeStamp,
   root_bounds : DOMRectInit,

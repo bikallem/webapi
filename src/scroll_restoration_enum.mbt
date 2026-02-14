@@ -54,3 +54,8 @@ pub fn ScrollRestoration::value(self : ScrollRestoration) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ScrollRestoration with from_js_any(value : JsAny) -> ScrollRestoration {
+  ScrollRestoration::from_unchecked(value)
+}

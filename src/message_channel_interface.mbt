@@ -11,6 +11,9 @@ pub type MessageChannel
 pub impl TJsValue for MessageChannel with to_js(self : MessageChannel) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MessageChannel with from_js_any(value : JsAny) -> MessageChannel = "%identity"
+
+///|
 pub fn[T : TMessageChannel] MessageChannel::into(self : MessageChannel) -> T = "%identity"
 
 ///|

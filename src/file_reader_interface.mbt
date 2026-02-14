@@ -11,6 +11,9 @@ pub type FileReader
 pub impl TJsValue for FileReader with to_js(self : FileReader) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FileReader with from_js_any(value : JsAny) -> FileReader = "%identity"
+
+///|
 pub fn[T : TFileReader] FileReader::into(self : FileReader) -> T = "%identity"
 
 ///|

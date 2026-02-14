@@ -11,17 +11,20 @@ pub type SubmitEventInit
 pub impl TJsValue for SubmitEventInit with to_js(self : SubmitEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SubmitEventInit with from_js_any(value : JsAny) -> SubmitEventInit = "%identity"
+
+///|
 pub fn SubmitEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  submitter? : &THTMLElement = JsValue::null(),
+  submitter? : &THTMLElement,
 ) -> SubmitEventInit {
   submit_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(submitter),
+    opt_to_js(submitter),
   )
 }
 

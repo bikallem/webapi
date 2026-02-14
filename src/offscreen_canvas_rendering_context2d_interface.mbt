@@ -13,6 +13,11 @@ pub impl TJsValue for OffscreenCanvasRenderingContext2D with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for OffscreenCanvasRenderingContext2D with from_js_any(
+  value : JsAny,
+) -> OffscreenCanvasRenderingContext2D = "%identity"
+
+///|
 pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D::into(
   self : OffscreenCanvasRenderingContext2D,
 ) -> T = "%identity"

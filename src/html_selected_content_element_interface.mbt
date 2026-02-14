@@ -13,6 +13,11 @@ pub impl TJsValue for HTMLSelectedContentElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLSelectedContentElement with from_js_any(
+  value : JsAny,
+) -> HTMLSelectedContentElement = "%identity"
+
+///|
 pub fn[T : THTMLSelectedContentElement] HTMLSelectedContentElement::into(
   self : HTMLSelectedContentElement,
 ) -> T = "%identity"

@@ -11,6 +11,9 @@ pub type CSSMarginRule
 pub impl TJsValue for CSSMarginRule with to_js(self : CSSMarginRule) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSMarginRule with from_js_any(value : JsAny) -> CSSMarginRule = "%identity"
+
+///|
 pub fn[T : TCSSMarginRule] CSSMarginRule::into(self : CSSMarginRule) -> T = "%identity"
 
 ///|

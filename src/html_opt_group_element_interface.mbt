@@ -11,6 +11,9 @@ pub type HTMLOptGroupElement
 pub impl TJsValue for HTMLOptGroupElement with to_js(self : HTMLOptGroupElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLOptGroupElement with from_js_any(value : JsAny) -> HTMLOptGroupElement = "%identity"
+
+///|
 pub fn[T : THTMLOptGroupElement] HTMLOptGroupElement::into(
   self : HTMLOptGroupElement,
 ) -> T = "%identity"

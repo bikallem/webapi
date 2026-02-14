@@ -13,6 +13,9 @@ pub impl TJsValue for PromiseRejectionEvent with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PromiseRejectionEvent with from_js_any(value : JsAny) -> PromiseRejectionEvent = "%identity"
+
+///|
 pub fn[T : TPromiseRejectionEvent] PromiseRejectionEvent::into(
   self : PromiseRejectionEvent,
 ) -> T = "%identity"

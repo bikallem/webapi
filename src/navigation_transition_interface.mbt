@@ -13,6 +13,9 @@ pub impl TJsValue for NavigationTransition with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationTransition with from_js_any(value : JsAny) -> NavigationTransition = "%identity"
+
+///|
 pub fn[T : TNavigationTransition] NavigationTransition::into(
   self : NavigationTransition,
 ) -> T = "%identity"

@@ -54,3 +54,8 @@ pub fn ImageOrientation::value(self : ImageOrientation) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ImageOrientation with from_js_any(value : JsAny) -> ImageOrientation {
+  ImageOrientation::from_unchecked(value)
+}

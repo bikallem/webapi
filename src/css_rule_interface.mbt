@@ -11,6 +11,9 @@ pub type CSSRule
 pub impl TJsValue for CSSRule with to_js(self : CSSRule) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSRule with from_js_any(value : JsAny) -> CSSRule = "%identity"
+
+///|
 pub fn[T : TCSSRule] CSSRule::into(self : CSSRule) -> T = "%identity"
 
 ///|

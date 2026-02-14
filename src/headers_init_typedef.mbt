@@ -11,6 +11,9 @@ pub type HeadersInit
 pub impl TJsValue for HeadersInit with to_js(self : HeadersInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HeadersInit with from_js_any(value : JsAny) -> HeadersInit = "%identity"
+
+///|
 pub(open) trait THeadersInit {
   to_js(self : Self) -> JsValue
 }

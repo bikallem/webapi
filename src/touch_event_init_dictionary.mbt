@@ -11,11 +11,14 @@ pub type TouchEventInit
 pub impl TJsValue for TouchEventInit with to_js(self : TouchEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TouchEventInit with from_js_any(value : JsAny) -> TouchEventInit = "%identity"
+
+///|
 pub fn TouchEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  view? : &TWindow = JsValue::null(),
+  view? : &TWindow,
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
@@ -40,7 +43,7 @@ pub fn TouchEventInit::new(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(view),
+    opt_to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),
     TJsValue::to_js(ctrl_key),

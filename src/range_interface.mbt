@@ -11,6 +11,9 @@ pub type Range
 pub impl TJsValue for Range with to_js(self : Range) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Range with from_js_any(value : JsAny) -> Range = "%identity"
+
+///|
 pub fn[T : TRange] Range::into(self : Range) -> T = "%identity"
 
 ///|

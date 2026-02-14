@@ -11,6 +11,9 @@ pub type VideoTrackList
 pub impl TJsValue for VideoTrackList with to_js(self : VideoTrackList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for VideoTrackList with from_js_any(value : JsAny) -> VideoTrackList = "%identity"
+
+///|
 pub fn[T : TVideoTrackList] VideoTrackList::into(self : VideoTrackList) -> T = "%identity"
 
 ///|

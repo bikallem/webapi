@@ -13,6 +13,9 @@ pub impl TJsValue for AllowSharedBufferSource with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for AllowSharedBufferSource with from_js_any(value : JsAny) -> AllowSharedBufferSource = "%identity"
+
+///|
 pub(open) trait TAllowSharedBufferSource {
   to_js(self : Self) -> JsValue
 }

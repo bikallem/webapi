@@ -13,6 +13,9 @@ pub impl TJsValue for OffscreenRenderingContext with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for OffscreenRenderingContext with from_js_any(value : JsAny) -> OffscreenRenderingContext = "%identity"
+
+///|
 pub(open) trait TOffscreenRenderingContext {
   to_js(self : Self) -> JsValue
 }

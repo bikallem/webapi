@@ -13,6 +13,9 @@ pub impl TJsValue for NavigationNavigateOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationNavigateOptions with from_js_any(value : JsAny) -> NavigationNavigateOptions = "%identity"
+
+///|
 pub fn NavigationNavigateOptions::new(
   info? : JsValue,
   state? : JsValue,

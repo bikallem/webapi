@@ -11,6 +11,9 @@ pub type StorageEstimate
 pub impl TJsValue for StorageEstimate with to_js(self : StorageEstimate) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for StorageEstimate with from_js_any(value : JsAny) -> StorageEstimate = "%identity"
+
+///|
 pub fn StorageEstimate::new(
   usage? : UInt64,
   quota? : UInt64,

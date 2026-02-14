@@ -11,6 +11,9 @@ pub type SVGAnimatedRect
 pub impl TJsValue for SVGAnimatedRect with to_js(self : SVGAnimatedRect) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedRect with from_js_any(value : JsAny) -> SVGAnimatedRect = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedRect] SVGAnimatedRect::into(self : SVGAnimatedRect) -> T = "%identity"
 
 ///|

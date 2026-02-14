@@ -13,6 +13,9 @@ pub impl TJsValue for IntersectionObserverInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for IntersectionObserverInit with from_js_any(value : JsAny) -> IntersectionObserverInit = "%identity"
+
+///|
 pub(open) trait TIntersectionObserverInitNewRoot {
   to_js(self : Self) -> JsValue
 }

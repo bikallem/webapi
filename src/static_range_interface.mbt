@@ -11,6 +11,9 @@ pub type StaticRange
 pub impl TJsValue for StaticRange with to_js(self : StaticRange) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for StaticRange with from_js_any(value : JsAny) -> StaticRange = "%identity"
+
+///|
 pub fn[T : TStaticRange] StaticRange::into(self : StaticRange) -> T = "%identity"
 
 ///|

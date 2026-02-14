@@ -11,6 +11,9 @@ pub type RequestInfo
 pub impl TJsValue for RequestInfo with to_js(self : RequestInfo) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for RequestInfo with from_js_any(value : JsAny) -> RequestInfo = "%identity"
+
+///|
 pub(open) trait TRequestInfo {
   to_js(self : Self) -> JsValue
 }

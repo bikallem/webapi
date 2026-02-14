@@ -13,6 +13,9 @@ pub impl TJsValue for XMLHttpRequestEventTarget with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XMLHttpRequestEventTarget with from_js_any(value : JsAny) -> XMLHttpRequestEventTarget = "%identity"
+
+///|
 pub fn[T : TXMLHttpRequestEventTarget] XMLHttpRequestEventTarget::into(
   self : XMLHttpRequestEventTarget,
 ) -> T = "%identity"

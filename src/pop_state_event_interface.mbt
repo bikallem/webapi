@@ -11,6 +11,9 @@ pub type PopStateEvent
 pub impl TJsValue for PopStateEvent with to_js(self : PopStateEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PopStateEvent with from_js_any(value : JsAny) -> PopStateEvent = "%identity"
+
+///|
 pub fn[T : TPopStateEvent] PopStateEvent::into(self : PopStateEvent) -> T = "%identity"
 
 ///|

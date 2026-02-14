@@ -11,6 +11,9 @@ pub type XMLDocument
 pub impl TJsValue for XMLDocument with to_js(self : XMLDocument) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XMLDocument with from_js_any(value : JsAny) -> XMLDocument = "%identity"
+
+///|
 pub fn[T : TXMLDocument] XMLDocument::into(self : XMLDocument) -> T = "%identity"
 
 ///|

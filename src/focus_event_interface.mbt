@@ -11,6 +11,9 @@ pub type FocusEvent
 pub impl TJsValue for FocusEvent with to_js(self : FocusEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FocusEvent with from_js_any(value : JsAny) -> FocusEvent = "%identity"
+
+///|
 pub fn[T : TFocusEvent] FocusEvent::into(self : FocusEvent) -> T = "%identity"
 
 ///|

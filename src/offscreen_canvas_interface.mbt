@@ -11,6 +11,9 @@ pub type OffscreenCanvas
 pub impl TJsValue for OffscreenCanvas with to_js(self : OffscreenCanvas) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for OffscreenCanvas with from_js_any(value : JsAny) -> OffscreenCanvas = "%identity"
+
+///|
 pub fn[T : TOffscreenCanvas] OffscreenCanvas::into(self : OffscreenCanvas) -> T = "%identity"
 
 ///|

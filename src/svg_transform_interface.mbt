@@ -11,6 +11,9 @@ pub type SVGTransform
 pub impl TJsValue for SVGTransform with to_js(self : SVGTransform) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGTransform with from_js_any(value : JsAny) -> SVGTransform = "%identity"
+
+///|
 pub fn[T : TSVGTransform] SVGTransform::into(self : SVGTransform) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type HTMLHeadingElement
 pub impl TJsValue for HTMLHeadingElement with to_js(self : HTMLHeadingElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLHeadingElement with from_js_any(value : JsAny) -> HTMLHeadingElement = "%identity"
+
+///|
 pub fn[T : THTMLHeadingElement] HTMLHeadingElement::into(
   self : HTMLHeadingElement,
 ) -> T = "%identity"

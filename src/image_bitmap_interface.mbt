@@ -11,6 +11,9 @@ pub type ImageBitmap
 pub impl TJsValue for ImageBitmap with to_js(self : ImageBitmap) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageBitmap with from_js_any(value : JsAny) -> ImageBitmap = "%identity"
+
+///|
 pub fn[T : TImageBitmap] ImageBitmap::into(self : ImageBitmap) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type MessageEvent
 pub impl TJsValue for MessageEvent with to_js(self : MessageEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MessageEvent with from_js_any(value : JsAny) -> MessageEvent = "%identity"
+
+///|
 pub fn[T : TMessageEvent] MessageEvent::into(self : MessageEvent) -> T = "%identity"
 
 ///|

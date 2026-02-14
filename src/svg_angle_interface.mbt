@@ -11,6 +11,9 @@ pub type SVGAngle
 pub impl TJsValue for SVGAngle with to_js(self : SVGAngle) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAngle with from_js_any(value : JsAny) -> SVGAngle = "%identity"
+
+///|
 pub fn[T : TSVGAngle] SVGAngle::into(self : SVGAngle) -> T = "%identity"
 
 ///|

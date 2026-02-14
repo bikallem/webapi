@@ -60,3 +60,8 @@ pub fn PremultiplyAlpha::value(self : PremultiplyAlpha) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for PremultiplyAlpha with from_js_any(value : JsAny) -> PremultiplyAlpha {
+  PremultiplyAlpha::from_unchecked(value)
+}

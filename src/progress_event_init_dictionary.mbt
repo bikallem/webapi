@@ -11,6 +11,9 @@ pub type ProgressEventInit
 pub impl TJsValue for ProgressEventInit with to_js(self : ProgressEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ProgressEventInit with from_js_any(value : JsAny) -> ProgressEventInit = "%identity"
+
+///|
 pub fn ProgressEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

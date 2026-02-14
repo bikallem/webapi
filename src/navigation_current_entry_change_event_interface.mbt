@@ -13,6 +13,11 @@ pub impl TJsValue for NavigationCurrentEntryChangeEvent with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationCurrentEntryChangeEvent with from_js_any(
+  value : JsAny,
+) -> NavigationCurrentEntryChangeEvent = "%identity"
+
+///|
 pub fn[T : TNavigationCurrentEntryChangeEvent] NavigationCurrentEntryChangeEvent::into(
   self : NavigationCurrentEntryChangeEvent,
 ) -> T = "%identity"

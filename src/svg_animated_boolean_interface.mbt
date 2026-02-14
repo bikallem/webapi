@@ -11,6 +11,9 @@ pub type SVGAnimatedBoolean
 pub impl TJsValue for SVGAnimatedBoolean with to_js(self : SVGAnimatedBoolean) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedBoolean with from_js_any(value : JsAny) -> SVGAnimatedBoolean = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedBoolean] SVGAnimatedBoolean::into(
   self : SVGAnimatedBoolean,
 ) -> T = "%identity"

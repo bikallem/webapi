@@ -39,6 +39,7 @@ pub impl Emitter for CallbackEmitter with emit(
     Emit::FileHeader(TypeName(name), specs_from_optional(cb_def.spec)),
     Emit::External(cb_def.name),
     Emit::ImplTJsValue(cb_def.name),
+    Emit::ImplFromJsAny(cb_def.name),
     Emit::Callback(cb_def.name, args, TypeName(return_type.name())),
   ]
   (filename, emits)
@@ -71,9 +72,12 @@ test "emit_callback simple EventListener" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
+      #|
       #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
       #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
+
     ),
   )
 }
@@ -106,9 +110,12 @@ test "emit_callback keeps interface argument as concrete callback type" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
+      #|
       #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
       #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
+
     ),
   )
 }
@@ -140,9 +147,12 @@ test "emit_callback multi-arg MutationCallback" {
       #|
       #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for MutationCallback with from_js_any(value : JsAny) -> MutationCallback = "%identity"
+      #|
       #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
       #|
       #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
+
     ),
   )
 }
@@ -174,9 +184,12 @@ test "js_code_gen Callback generates correct code" {
       #|
       #|pub impl TJsValue for EventListener with to_js(self: EventListener) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for EventListener with from_js_any(value : JsAny) -> EventListener = "%identity"
+      #|
       #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
       #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
+
     ),
   )
 }
@@ -208,9 +221,12 @@ test "js_code_gen Callback with multiple args" {
       #|
       #|pub impl TJsValue for MutationCallback with to_js(self: MutationCallback) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for MutationCallback with from_js_any(value : JsAny) -> MutationCallback = "%identity"
+      #|
       #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
       #|
       #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
+
     ),
   )
 }

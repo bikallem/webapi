@@ -11,6 +11,9 @@ pub type HTMLPreElement
 pub impl TJsValue for HTMLPreElement with to_js(self : HTMLPreElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLPreElement with from_js_any(value : JsAny) -> HTMLPreElement = "%identity"
+
+///|
 pub fn[T : THTMLPreElement] HTMLPreElement::into(self : HTMLPreElement) -> T = "%identity"
 
 ///|

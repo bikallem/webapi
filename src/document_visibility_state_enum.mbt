@@ -60,3 +60,8 @@ pub fn DocumentVisibilityState::value(self : DocumentVisibilityState) -> String 
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for DocumentVisibilityState with from_js_any(value : JsAny) -> DocumentVisibilityState {
+  DocumentVisibilityState::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type PageSwapEvent
 pub impl TJsValue for PageSwapEvent with to_js(self : PageSwapEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PageSwapEvent with from_js_any(value : JsAny) -> PageSwapEvent = "%identity"
+
+///|
 pub fn[T : TPageSwapEvent] PageSwapEvent::into(self : PageSwapEvent) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type SVGEllipseElement
 pub impl TJsValue for SVGEllipseElement with to_js(self : SVGEllipseElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGEllipseElement with from_js_any(value : JsAny) -> SVGEllipseElement = "%identity"
+
+///|
 pub fn[T : TSVGEllipseElement] SVGEllipseElement::into(
   self : SVGEllipseElement,
 ) -> T = "%identity"

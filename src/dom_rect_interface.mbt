@@ -11,6 +11,9 @@ pub type DOMRect
 pub impl TJsValue for DOMRect with to_js(self : DOMRect) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMRect with from_js_any(value : JsAny) -> DOMRect = "%identity"
+
+///|
 pub fn[T : TDOMRect] DOMRect::into(self : DOMRect) -> T = "%identity"
 
 ///|

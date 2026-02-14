@@ -13,6 +13,9 @@ pub impl TJsValue for NavigationHistoryEntry with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationHistoryEntry with from_js_any(value : JsAny) -> NavigationHistoryEntry = "%identity"
+
+///|
 pub fn[T : TNavigationHistoryEntry] NavigationHistoryEntry::into(
   self : NavigationHistoryEntry,
 ) -> T = "%identity"

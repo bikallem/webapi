@@ -11,6 +11,9 @@ pub type ShowPopoverOptions
 pub impl TJsValue for ShowPopoverOptions with to_js(self : ShowPopoverOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ShowPopoverOptions with from_js_any(value : JsAny) -> ShowPopoverOptions = "%identity"
+
+///|
 pub fn ShowPopoverOptions::new(source? : &THTMLElement) -> ShowPopoverOptions {
   show_popover_options_ffi(opt_to_js(source))
 }

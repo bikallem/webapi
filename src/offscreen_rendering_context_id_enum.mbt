@@ -83,3 +83,10 @@ pub fn OffscreenRenderingContextId::value(
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for OffscreenRenderingContextId with from_js_any(
+  value : JsAny,
+) -> OffscreenRenderingContextId {
+  OffscreenRenderingContextId::from_unchecked(value)
+}

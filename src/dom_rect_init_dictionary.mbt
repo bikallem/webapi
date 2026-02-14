@@ -11,6 +11,9 @@ pub type DOMRectInit
 pub impl TJsValue for DOMRectInit with to_js(self : DOMRectInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMRectInit with from_js_any(value : JsAny) -> DOMRectInit = "%identity"
+
+///|
 pub fn DOMRectInit::new(
   x? : Double = (0 : Double),
   y? : Double = (0 : Double),

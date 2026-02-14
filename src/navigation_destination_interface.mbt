@@ -13,6 +13,9 @@ pub impl TJsValue for NavigationDestination with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationDestination with from_js_any(value : JsAny) -> NavigationDestination = "%identity"
+
+///|
 pub fn[T : TNavigationDestination] NavigationDestination::into(
   self : NavigationDestination,
 ) -> T = "%identity"

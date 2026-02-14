@@ -60,3 +60,8 @@ pub fn DocumentReadyState::value(self : DocumentReadyState) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for DocumentReadyState with from_js_any(value : JsAny) -> DocumentReadyState {
+  DocumentReadyState::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type StorageEventInit
 pub impl TJsValue for StorageEventInit with to_js(self : StorageEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for StorageEventInit with from_js_any(value : JsAny) -> StorageEventInit = "%identity"
+
+///|
 pub fn StorageEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
@@ -19,7 +22,7 @@ pub fn StorageEventInit::new(
   old_value? : String,
   new_value? : String,
   url? : String = "",
-  storage_area? : &TStorage = JsValue::null(),
+  storage_area? : &TStorage,
 ) -> StorageEventInit {
   storage_event_init_ffi(
     TJsValue::to_js(bubbles),
@@ -29,7 +32,7 @@ pub fn StorageEventInit::new(
     opt_to_js(old_value),
     opt_to_js(new_value),
     TJsValue::to_js(url),
-    TJsValue::to_js(storage_area),
+    opt_to_js(storage_area),
   )
 }
 

@@ -11,6 +11,9 @@ pub type TextTrackList
 pub impl TJsValue for TextTrackList with to_js(self : TextTrackList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextTrackList with from_js_any(value : JsAny) -> TextTrackList = "%identity"
+
+///|
 pub fn[T : TTextTrackList] TextTrackList::into(self : TextTrackList) -> T = "%identity"
 
 ///|

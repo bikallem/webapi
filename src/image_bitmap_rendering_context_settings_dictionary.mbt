@@ -13,6 +13,11 @@ pub impl TJsValue for ImageBitmapRenderingContextSettings with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageBitmapRenderingContextSettings with from_js_any(
+  value : JsAny,
+) -> ImageBitmapRenderingContextSettings = "%identity"
+
+///|
 pub fn ImageBitmapRenderingContextSettings::new(
   alpha? : Bool = true,
 ) -> ImageBitmapRenderingContextSettings {

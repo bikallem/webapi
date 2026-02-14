@@ -13,6 +13,9 @@ pub impl TJsValue for PageTransitionEventInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PageTransitionEventInit with from_js_any(value : JsAny) -> PageTransitionEventInit = "%identity"
+
+///|
 pub fn PageTransitionEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

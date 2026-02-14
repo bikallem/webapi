@@ -11,6 +11,9 @@ pub type Console
 pub impl TJsValue for Console with to_js(self : Console) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Console with from_js_any(value : JsAny) -> Console = "%identity"
+
+///|
 /// [Console.assert](https://developer.mozilla.org/en-US/docs/Web/API/Console/assert)
 pub fn Console::assert_(
   condition? : Bool = false,

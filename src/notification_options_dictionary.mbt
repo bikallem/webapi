@@ -11,6 +11,9 @@ pub type NotificationOptions
 pub impl TJsValue for NotificationOptions with to_js(self : NotificationOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NotificationOptions with from_js_any(value : JsAny) -> NotificationOptions = "%identity"
+
+///|
 pub fn NotificationOptions::new(
   dir? : NotificationDirection = NotificationDirection::Auto,
   lang? : String = "",

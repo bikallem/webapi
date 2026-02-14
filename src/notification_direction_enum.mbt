@@ -64,3 +64,8 @@ pub fn NotificationDirection::value(self : NotificationDirection) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for NotificationDirection with from_js_any(value : JsAny) -> NotificationDirection {
+  NotificationDirection::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type FormDataEvent
 pub impl TJsValue for FormDataEvent with to_js(self : FormDataEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FormDataEvent with from_js_any(value : JsAny) -> FormDataEvent = "%identity"
+
+///|
 pub fn[T : TFormDataEvent] FormDataEvent::into(self : FormDataEvent) -> T = "%identity"
 
 ///|

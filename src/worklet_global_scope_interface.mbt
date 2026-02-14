@@ -11,6 +11,9 @@ pub type WorkletGlobalScope
 pub impl TJsValue for WorkletGlobalScope with to_js(self : WorkletGlobalScope) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WorkletGlobalScope with from_js_any(value : JsAny) -> WorkletGlobalScope = "%identity"
+
+///|
 pub fn[T : TWorkletGlobalScope] WorkletGlobalScope::into(
   self : WorkletGlobalScope,
 ) -> T = "%identity"

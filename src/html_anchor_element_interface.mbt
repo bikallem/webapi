@@ -11,6 +11,9 @@ pub type HTMLAnchorElement
 pub impl TJsValue for HTMLAnchorElement with to_js(self : HTMLAnchorElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLAnchorElement with from_js_any(value : JsAny) -> HTMLAnchorElement = "%identity"
+
+///|
 pub fn[T : THTMLAnchorElement] HTMLAnchorElement::into(
   self : HTMLAnchorElement,
 ) -> T = "%identity"

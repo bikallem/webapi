@@ -11,6 +11,9 @@ pub type RadioNodeList
 pub impl TJsValue for RadioNodeList with to_js(self : RadioNodeList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for RadioNodeList with from_js_any(value : JsAny) -> RadioNodeList = "%identity"
+
+///|
 pub fn[T : TRadioNodeList] RadioNodeList::into(self : RadioNodeList) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type HTMLProgressElement
 pub impl TJsValue for HTMLProgressElement with to_js(self : HTMLProgressElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLProgressElement with from_js_any(value : JsAny) -> HTMLProgressElement = "%identity"
+
+///|
 pub fn[T : THTMLProgressElement] HTMLProgressElement::into(
   self : HTMLProgressElement,
 ) -> T = "%identity"

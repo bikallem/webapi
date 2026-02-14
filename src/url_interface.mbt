@@ -11,6 +11,9 @@ pub type URL
 pub impl TJsValue for URL with to_js(self : URL) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for URL with from_js_any(value : JsAny) -> URL = "%identity"
+
+///|
 pub fn[T : TURL] URL::into(self : URL) -> T = "%identity"
 
 ///|

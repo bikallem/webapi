@@ -64,3 +64,8 @@ pub fn FullscreenNavigationUI::value(self : FullscreenNavigationUI) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for FullscreenNavigationUI with from_js_any(value : JsAny) -> FullscreenNavigationUI {
+  FullscreenNavigationUI::from_unchecked(value)
+}

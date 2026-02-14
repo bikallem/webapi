@@ -11,6 +11,9 @@ pub type ImportNodeOptions
 pub impl TJsValue for ImportNodeOptions with to_js(self : ImportNodeOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImportNodeOptions with from_js_any(value : JsAny) -> ImportNodeOptions = "%identity"
+
+///|
 pub fn ImportNodeOptions::new(
   custom_element_registry? : &TCustomElementRegistry,
   self_only? : Bool = false,

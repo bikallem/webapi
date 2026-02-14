@@ -11,6 +11,9 @@ pub type ImageBitmapSource
 pub impl TJsValue for ImageBitmapSource with to_js(self : ImageBitmapSource) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageBitmapSource with from_js_any(value : JsAny) -> ImageBitmapSource = "%identity"
+
+///|
 pub(open) trait TImageBitmapSource {
   to_js(self : Self) -> JsValue
 }

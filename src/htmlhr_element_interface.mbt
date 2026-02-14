@@ -11,6 +11,9 @@ pub type HTMLHRElement
 pub impl TJsValue for HTMLHRElement with to_js(self : HTMLHRElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLHRElement with from_js_any(value : JsAny) -> HTMLHRElement = "%identity"
+
+///|
 pub fn[T : THTMLHRElement] HTMLHRElement::into(self : HTMLHRElement) -> T = "%identity"
 
 ///|

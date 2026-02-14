@@ -11,6 +11,9 @@ pub type TrustedType
 pub impl TJsValue for TrustedType with to_js(self : TrustedType) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TrustedType with from_js_any(value : JsAny) -> TrustedType = "%identity"
+
+///|
 pub(open) trait TTrustedType {
   to_js(self : Self) -> JsValue
 }

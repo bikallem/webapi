@@ -13,6 +13,11 @@ pub impl TJsValue for SVGAnimatedPreserveAspectRatio with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedPreserveAspectRatio with from_js_any(
+  value : JsAny,
+) -> SVGAnimatedPreserveAspectRatio = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedPreserveAspectRatio] SVGAnimatedPreserveAspectRatio::into(
   self : SVGAnimatedPreserveAspectRatio,
 ) -> T = "%identity"

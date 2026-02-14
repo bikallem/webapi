@@ -13,6 +13,11 @@ pub impl TJsValue for HTMLFormControlsCollection with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLFormControlsCollection with from_js_any(
+  value : JsAny,
+) -> HTMLFormControlsCollection = "%identity"
+
+///|
 pub fn[T : THTMLFormControlsCollection] HTMLFormControlsCollection::into(
   self : HTMLFormControlsCollection,
 ) -> T = "%identity"

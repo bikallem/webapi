@@ -11,6 +11,9 @@ pub type MessageEventInit
 pub impl TJsValue for MessageEventInit with to_js(self : MessageEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MessageEventInit with from_js_any(value : JsAny) -> MessageEventInit = "%identity"
+
+///|
 pub fn MessageEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

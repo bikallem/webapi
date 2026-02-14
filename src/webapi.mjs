@@ -49,7 +49,14 @@ export const wasmImportObject = {
     reject: (reason) => Promise.reject(reason),
     then: (p, f) => p.then(f),
     catch: (p, f) => p.catch(f),
-    finally: (p, f) => p.finally(f)
+    finally: (p, f) => p.finally(f),
+    toBool: (v) => v ? 1 : 0,
+    toInt: (v) => v | 0,
+    toUint: (v) => v >>> 0,
+    toInt64: (v) => BigInt(v),
+    toUint64: (v) => BigInt(v),
+    toFloat: (v) => Math.fround(v),
+    toDouble: (v) => +v
   },
   webapi_SVGElement: {
     get_className: (obj) => obj.className,

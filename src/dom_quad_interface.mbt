@@ -11,6 +11,9 @@ pub type DOMQuad
 pub impl TJsValue for DOMQuad with to_js(self : DOMQuad) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMQuad with from_js_any(value : JsAny) -> DOMQuad = "%identity"
+
+///|
 pub fn[T : TDOMQuad] DOMQuad::into(self : DOMQuad) -> T = "%identity"
 
 ///|

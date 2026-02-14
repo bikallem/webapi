@@ -13,6 +13,9 @@ pub impl TJsValue for ClipboardItemOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ClipboardItemOptions with from_js_any(value : JsAny) -> ClipboardItemOptions = "%identity"
+
+///|
 pub fn ClipboardItemOptions::new(
   presentation_style? : PresentationStyle = PresentationStyle::Unspecified,
 ) -> ClipboardItemOptions {

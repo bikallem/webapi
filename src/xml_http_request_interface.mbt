@@ -11,6 +11,9 @@ pub type XMLHttpRequest
 pub impl TJsValue for XMLHttpRequest with to_js(self : XMLHttpRequest) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XMLHttpRequest with from_js_any(value : JsAny) -> XMLHttpRequest = "%identity"
+
+///|
 pub fn[T : TXMLHttpRequest] XMLHttpRequest::into(self : XMLHttpRequest) -> T = "%identity"
 
 ///|

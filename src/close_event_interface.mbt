@@ -11,6 +11,9 @@ pub type CloseEvent
 pub impl TJsValue for CloseEvent with to_js(self : CloseEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CloseEvent with from_js_any(value : JsAny) -> CloseEvent = "%identity"
+
+///|
 pub fn[T : TCloseEvent] CloseEvent::into(self : CloseEvent) -> T = "%identity"
 
 ///|

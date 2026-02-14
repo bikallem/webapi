@@ -11,6 +11,9 @@ pub type SVGAnimatedString
 pub impl TJsValue for SVGAnimatedString with to_js(self : SVGAnimatedString) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedString with from_js_any(value : JsAny) -> SVGAnimatedString = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedString] SVGAnimatedString::into(
   self : SVGAnimatedString,
 ) -> T = "%identity"

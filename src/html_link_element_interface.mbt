@@ -11,6 +11,9 @@ pub type HTMLLinkElement
 pub impl TJsValue for HTMLLinkElement with to_js(self : HTMLLinkElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLLinkElement with from_js_any(value : JsAny) -> HTMLLinkElement = "%identity"
+
+///|
 pub fn[T : THTMLLinkElement] HTMLLinkElement::into(self : HTMLLinkElement) -> T = "%identity"
 
 ///|

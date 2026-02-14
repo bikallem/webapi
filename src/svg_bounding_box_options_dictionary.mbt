@@ -13,6 +13,9 @@ pub impl TJsValue for SVGBoundingBoxOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGBoundingBoxOptions with from_js_any(value : JsAny) -> SVGBoundingBoxOptions = "%identity"
+
+///|
 pub fn SVGBoundingBoxOptions::new(
   fill? : Bool = true,
   stroke? : Bool = false,

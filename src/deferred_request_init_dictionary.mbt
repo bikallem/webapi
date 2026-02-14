@@ -11,6 +11,9 @@ pub type DeferredRequestInit
 pub impl TJsValue for DeferredRequestInit with to_js(self : DeferredRequestInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DeferredRequestInit with from_js_any(value : JsAny) -> DeferredRequestInit = "%identity"
+
+///|
 pub fn DeferredRequestInit::new(
   method_? : String,
   headers? : &THeadersInit,

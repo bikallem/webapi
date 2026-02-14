@@ -13,6 +13,9 @@ pub impl TJsValue for DataTransferItemList with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DataTransferItemList with from_js_any(value : JsAny) -> DataTransferItemList = "%identity"
+
+///|
 pub fn[T : TDataTransferItemList] DataTransferItemList::into(
   self : DataTransferItemList,
 ) -> T = "%identity"

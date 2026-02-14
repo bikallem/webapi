@@ -66,3 +66,8 @@ pub fn SelectionMode::value(self : SelectionMode) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for SelectionMode with from_js_any(value : JsAny) -> SelectionMode {
+  SelectionMode::from_unchecked(value)
+}

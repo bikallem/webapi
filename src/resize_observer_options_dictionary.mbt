@@ -13,6 +13,9 @@ pub impl TJsValue for ResizeObserverOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ResizeObserverOptions with from_js_any(value : JsAny) -> ResizeObserverOptions = "%identity"
+
+///|
 pub fn ResizeObserverOptions::new(
   box? : ResizeObserverBoxOptions = ResizeObserverBoxOptions::ContentBox,
 ) -> ResizeObserverOptions {

@@ -11,6 +11,9 @@ pub type SVGMarkerElement
 pub impl TJsValue for SVGMarkerElement with to_js(self : SVGMarkerElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGMarkerElement with from_js_any(value : JsAny) -> SVGMarkerElement = "%identity"
+
+///|
 pub fn[T : TSVGMarkerElement] SVGMarkerElement::into(
   self : SVGMarkerElement,
 ) -> T = "%identity"

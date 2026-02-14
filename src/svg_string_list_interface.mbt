@@ -11,6 +11,9 @@ pub type SVGStringList
 pub impl TJsValue for SVGStringList with to_js(self : SVGStringList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGStringList with from_js_any(value : JsAny) -> SVGStringList = "%identity"
+
+///|
 pub fn[T : TSVGStringList] SVGStringList::into(self : SVGStringList) -> T = "%identity"
 
 ///|

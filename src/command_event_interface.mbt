@@ -11,6 +11,9 @@ pub type CommandEvent
 pub impl TJsValue for CommandEvent with to_js(self : CommandEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CommandEvent with from_js_any(value : JsAny) -> CommandEvent = "%identity"
+
+///|
 pub fn[T : TCommandEvent] CommandEvent::into(self : CommandEvent) -> T = "%identity"
 
 ///|

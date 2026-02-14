@@ -11,6 +11,9 @@ pub type MessagePort
 pub impl TJsValue for MessagePort with to_js(self : MessagePort) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MessagePort with from_js_any(value : JsAny) -> MessagePort = "%identity"
+
+///|
 pub fn[T : TMessagePort] MessagePort::into(self : MessagePort) -> T = "%identity"
 
 ///|

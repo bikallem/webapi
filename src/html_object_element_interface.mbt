@@ -11,6 +11,9 @@ pub type HTMLObjectElement
 pub impl TJsValue for HTMLObjectElement with to_js(self : HTMLObjectElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLObjectElement with from_js_any(value : JsAny) -> HTMLObjectElement = "%identity"
+
+///|
 pub fn[T : THTMLObjectElement] HTMLObjectElement::into(
   self : HTMLObjectElement,
 ) -> T = "%identity"

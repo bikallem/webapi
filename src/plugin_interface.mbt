@@ -11,6 +11,9 @@ pub type Plugin
 pub impl TJsValue for Plugin with to_js(self : Plugin) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Plugin with from_js_any(value : JsAny) -> Plugin = "%identity"
+
+///|
 pub fn[T : TPlugin] Plugin::into(self : Plugin) -> T = "%identity"
 
 ///|

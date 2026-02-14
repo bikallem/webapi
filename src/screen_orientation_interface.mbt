@@ -11,6 +11,9 @@ pub type ScreenOrientation
 pub impl TJsValue for ScreenOrientation with to_js(self : ScreenOrientation) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ScreenOrientation with from_js_any(value : JsAny) -> ScreenOrientation = "%identity"
+
+///|
 pub fn[T : TScreenOrientation] ScreenOrientation::into(
   self : ScreenOrientation,
 ) -> T = "%identity"

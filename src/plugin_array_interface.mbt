@@ -11,6 +11,9 @@ pub type PluginArray
 pub impl TJsValue for PluginArray with to_js(self : PluginArray) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PluginArray with from_js_any(value : JsAny) -> PluginArray = "%identity"
+
+///|
 pub fn[T : TPluginArray] PluginArray::into(self : PluginArray) -> T = "%identity"
 
 ///|

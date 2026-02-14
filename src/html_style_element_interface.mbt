@@ -11,6 +11,9 @@ pub type HTMLStyleElement
 pub impl TJsValue for HTMLStyleElement with to_js(self : HTMLStyleElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLStyleElement with from_js_any(value : JsAny) -> HTMLStyleElement = "%identity"
+
+///|
 pub fn[T : THTMLStyleElement] HTMLStyleElement::into(
   self : HTMLStyleElement,
 ) -> T = "%identity"

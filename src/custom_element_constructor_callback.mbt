@@ -13,6 +13,9 @@ pub impl TJsValue for CustomElementConstructor with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CustomElementConstructor with from_js_any(value : JsAny) -> CustomElementConstructor = "%identity"
+
+///|
 pub fn CustomElementConstructor::new(
   callback : () -> HTMLElement,
 ) -> CustomElementConstructor {

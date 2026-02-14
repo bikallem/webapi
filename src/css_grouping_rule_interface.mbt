@@ -11,6 +11,9 @@ pub type CSSGroupingRule
 pub impl TJsValue for CSSGroupingRule with to_js(self : CSSGroupingRule) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSGroupingRule with from_js_any(value : JsAny) -> CSSGroupingRule = "%identity"
+
+///|
 pub fn[T : TCSSGroupingRule] CSSGroupingRule::into(self : CSSGroupingRule) -> T = "%identity"
 
 ///|

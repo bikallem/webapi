@@ -64,3 +64,8 @@ pub fn ImageSmoothingQuality::value(self : ImageSmoothingQuality) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ImageSmoothingQuality with from_js_any(value : JsAny) -> ImageSmoothingQuality {
+  ImageSmoothingQuality::from_unchecked(value)
+}

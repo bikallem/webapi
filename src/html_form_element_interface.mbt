@@ -11,6 +11,9 @@ pub type HTMLFormElement
 pub impl TJsValue for HTMLFormElement with to_js(self : HTMLFormElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLFormElement with from_js_any(value : JsAny) -> HTMLFormElement = "%identity"
+
+///|
 pub fn[T : THTMLFormElement] HTMLFormElement::into(self : HTMLFormElement) -> T = "%identity"
 
 ///|
@@ -299,11 +302,11 @@ impl THTMLFormElement with submit(self : Self) -> Unit {
 /// [HTMLFormElement.requestSubmit](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit)
 impl THTMLFormElement with request_submit(
   self : Self,
-  submitter? : &THTMLElement = JsValue::null(),
+  submitter? : &THTMLElement,
 ) -> Unit {
   html_form_element_request_submit_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(submitter),
+    opt_to_js(submitter),
   )
 }
 

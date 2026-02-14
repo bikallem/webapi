@@ -11,6 +11,9 @@ pub type CSSStyleSheetInit
 pub impl TJsValue for CSSStyleSheetInit with to_js(self : CSSStyleSheetInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSStyleSheetInit with from_js_any(value : JsAny) -> CSSStyleSheetInit = "%identity"
+
+///|
 pub(open) trait TCSSStyleSheetInitNewMedia {
   to_js(self : Self) -> JsValue
 }

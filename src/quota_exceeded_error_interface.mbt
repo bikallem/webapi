@@ -11,6 +11,9 @@ pub type QuotaExceededError
 pub impl TJsValue for QuotaExceededError with to_js(self : QuotaExceededError) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for QuotaExceededError with from_js_any(value : JsAny) -> QuotaExceededError = "%identity"
+
+///|
 pub fn[T : TQuotaExceededError] QuotaExceededError::into(
   self : QuotaExceededError,
 ) -> T = "%identity"

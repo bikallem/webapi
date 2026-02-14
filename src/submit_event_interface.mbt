@@ -11,6 +11,9 @@ pub type SubmitEvent
 pub impl TJsValue for SubmitEvent with to_js(self : SubmitEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SubmitEvent with from_js_any(value : JsAny) -> SubmitEvent = "%identity"
+
+///|
 pub fn[T : TSubmitEvent] SubmitEvent::into(self : SubmitEvent) -> T = "%identity"
 
 ///|

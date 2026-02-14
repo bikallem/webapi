@@ -13,6 +13,9 @@ pub impl TJsValue for SVGAnimatedEnumeration with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedEnumeration with from_js_any(value : JsAny) -> SVGAnimatedEnumeration = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedEnumeration] SVGAnimatedEnumeration::into(
   self : SVGAnimatedEnumeration,
 ) -> T = "%identity"

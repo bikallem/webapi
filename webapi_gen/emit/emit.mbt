@@ -75,6 +75,7 @@ pub(all) struct CallbackArgEmit {
 pub enum Emit {
   External(TypeName) // External type, eg. #external EventTarget
   ImplTJsValue(TypeName) // eg. pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
+  ImplFromJsAny(TypeName) // eg. pub impl FromJsAny for EventTarget with from_js_any(value : JsAny) -> EventTarget = "%identity"
   IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
   IsUndefinedMethod(TypeName) // eg. pub fn EventTarget::is_undefined(self : EventTarget) -> Bool { ... }
   EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
@@ -481,6 +482,10 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
     )
   }
   buf..write_string("  }\n")..write_string("  buf.to_string()\n").write_string("}")
+  buf..write_string("\n\n")
+  ..write_string("pub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n")
+  .write_string("  \{name}::from_unchecked(value)\n")
+  buf.write_string("}")
   buf.to_string()
 }
 
@@ -568,6 +573,10 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
       Emit::ImplTJsValue(TypeName(type_name)) =>
         append_shared(
           "pub impl TJsValue for \{type_name} with to_js(self: \{type_name}) -> JsValue = \"%identity\"",
+        )
+      Emit::ImplFromJsAny(TypeName(type_name)) =>
+        append_shared(
+          "pub impl FromJsAny for \{type_name} with from_js_any(value : JsAny) -> \{type_name} = \"%identity\"",
         )
       Emit::IntoMethod(TypeName(type_name)) =>
         append_shared(

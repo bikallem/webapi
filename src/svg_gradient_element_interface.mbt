@@ -11,6 +11,9 @@ pub type SVGGradientElement
 pub impl TJsValue for SVGGradientElement with to_js(self : SVGGradientElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGGradientElement with from_js_any(value : JsAny) -> SVGGradientElement = "%identity"
+
+///|
 pub fn[T : TSVGGradientElement] SVGGradientElement::into(
   self : SVGGradientElement,
 ) -> T = "%identity"

@@ -63,3 +63,8 @@ pub fn CSSBoxType::value(self : CSSBoxType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CSSBoxType with from_js_any(value : JsAny) -> CSSBoxType {
+  CSSBoxType::from_unchecked(value)
+}

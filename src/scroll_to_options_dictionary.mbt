@@ -11,6 +11,9 @@ pub type ScrollToOptions
 pub impl TJsValue for ScrollToOptions with to_js(self : ScrollToOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ScrollToOptions with from_js_any(value : JsAny) -> ScrollToOptions = "%identity"
+
+///|
 pub fn ScrollToOptions::new(
   behavior? : ScrollBehavior = ScrollBehavior::Auto,
   left? : Double,

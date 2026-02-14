@@ -11,6 +11,9 @@ pub type NamedNodeMap
 pub impl TJsValue for NamedNodeMap with to_js(self : NamedNodeMap) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NamedNodeMap with from_js_any(value : JsAny) -> NamedNodeMap = "%identity"
+
+///|
 pub fn[T : TNamedNodeMap] NamedNodeMap::into(self : NamedNodeMap) -> T = "%identity"
 
 ///|

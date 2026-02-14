@@ -13,6 +13,9 @@ pub impl TJsValue for ClipboardChangeEventInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ClipboardChangeEventInit with from_js_any(value : JsAny) -> ClipboardChangeEventInit = "%identity"
+
+///|
 pub fn ClipboardChangeEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

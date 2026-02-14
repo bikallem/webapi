@@ -11,6 +11,9 @@ pub type SVGImageElement
 pub impl TJsValue for SVGImageElement with to_js(self : SVGImageElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGImageElement with from_js_any(value : JsAny) -> SVGImageElement = "%identity"
+
+///|
 pub fn[T : TSVGImageElement] SVGImageElement::into(self : SVGImageElement) -> T = "%identity"
 
 ///|

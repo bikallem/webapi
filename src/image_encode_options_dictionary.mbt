@@ -11,6 +11,9 @@ pub type ImageEncodeOptions
 pub impl TJsValue for ImageEncodeOptions with to_js(self : ImageEncodeOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageEncodeOptions with from_js_any(value : JsAny) -> ImageEncodeOptions = "%identity"
+
+///|
 pub fn ImageEncodeOptions::new(
   type_? : String = "image/png",
   quality? : Double,

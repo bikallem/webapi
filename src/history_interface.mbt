@@ -11,6 +11,9 @@ pub type History
 pub impl TJsValue for History with to_js(self : History) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for History with from_js_any(value : JsAny) -> History = "%identity"
+
+///|
 pub fn[T : THistory] History::into(self : History) -> T = "%identity"
 
 ///|

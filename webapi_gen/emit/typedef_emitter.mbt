@@ -25,6 +25,7 @@ pub impl Emitter for TypedefEmitter with emit(
       emits
       ..push(Emit::External(external_name))
       ..push(Emit::ImplTJsValue(external_name))
+      ..push(Emit::ImplFromJsAny(external_name))
       ..push(Emit::UnionArgTrait(trait_name))
       ..push(Emit::IntoMethod(external_name))
       .push(Emit::UnionArgTraitImpl(external_name, trait_name))
@@ -115,6 +116,8 @@ test "typedef emitter emits union typedef" {
       #|
       #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
+      #|
       #|pub(open) trait TMyUnion {
       #|  to_js(self : Self) -> JsValue
       #|}
@@ -128,6 +131,7 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
+
     ),
   )
 }
@@ -158,6 +162,8 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|
       #|pub impl TJsValue for MyUnion with to_js(self: MyUnion) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
+      #|
       #|pub(open) trait TMyUnion {
       #|  to_js(self : Self) -> JsValue
       #|}
@@ -169,6 +175,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
       #|
       #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+
     ),
   )
 }

@@ -13,6 +13,9 @@ pub impl TJsValue for FunctionStringCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FunctionStringCallback with from_js_any(value : JsAny) -> FunctionStringCallback = "%identity"
+
+///|
 pub fn FunctionStringCallback::new(
   callback : (String) -> Unit,
 ) -> FunctionStringCallback {

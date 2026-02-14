@@ -11,6 +11,9 @@ pub type MediaError
 pub impl TJsValue for MediaError with to_js(self : MediaError) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MediaError with from_js_any(value : JsAny) -> MediaError = "%identity"
+
+///|
 pub fn[T : TMediaError] MediaError::into(self : MediaError) -> T = "%identity"
 
 ///|

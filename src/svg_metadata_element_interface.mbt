@@ -11,6 +11,9 @@ pub type SVGMetadataElement
 pub impl TJsValue for SVGMetadataElement with to_js(self : SVGMetadataElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGMetadataElement with from_js_any(value : JsAny) -> SVGMetadataElement = "%identity"
+
+///|
 pub fn[T : TSVGMetadataElement] SVGMetadataElement::into(
   self : SVGMetadataElement,
 ) -> T = "%identity"

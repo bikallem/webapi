@@ -11,11 +11,14 @@ pub type WheelEventInit
 pub impl TJsValue for WheelEventInit with to_js(self : WheelEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WheelEventInit with from_js_any(value : JsAny) -> WheelEventInit = "%identity"
+
+///|
 pub fn WheelEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  view? : &TWindow = JsValue::null(),
+  view? : &TWindow,
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
@@ -38,7 +41,7 @@ pub fn WheelEventInit::new(
   client_y? : Int = (0 : Int),
   button? : Int = (0 : Int),
   buttons? : UInt = (0 : UInt),
-  related_target? : &TEventTarget = JsValue::null(),
+  related_target? : &TEventTarget,
   delta_x? : Double = (0.0 : Double),
   delta_y? : Double = (0.0 : Double),
   delta_z? : Double = (0.0 : Double),
@@ -48,7 +51,7 @@ pub fn WheelEventInit::new(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(view),
+    opt_to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),
     TJsValue::to_js(ctrl_key),
@@ -71,7 +74,7 @@ pub fn WheelEventInit::new(
     TJsValue::to_js(client_y),
     TJsValue::to_js(button),
     TJsValue::to_js(buttons),
-    TJsValue::to_js(related_target),
+    opt_to_js(related_target),
     TJsValue::to_js(delta_x),
     TJsValue::to_js(delta_y),
     TJsValue::to_js(delta_z),

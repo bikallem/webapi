@@ -11,6 +11,9 @@ pub type HTMLTrackElement
 pub impl TJsValue for HTMLTrackElement with to_js(self : HTMLTrackElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTrackElement with from_js_any(value : JsAny) -> HTMLTrackElement = "%identity"
+
+///|
 pub fn[T : THTMLTrackElement] HTMLTrackElement::into(
   self : HTMLTrackElement,
 ) -> T = "%identity"

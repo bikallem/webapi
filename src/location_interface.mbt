@@ -11,6 +11,9 @@ pub type Location
 pub impl TJsValue for Location with to_js(self : Location) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Location with from_js_any(value : JsAny) -> Location = "%identity"
+
+///|
 pub fn[T : TLocation] Location::into(self : Location) -> T = "%identity"
 
 ///|

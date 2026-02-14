@@ -11,6 +11,9 @@ pub type Comment
 pub impl TJsValue for Comment with to_js(self : Comment) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Comment with from_js_any(value : JsAny) -> Comment = "%identity"
+
+///|
 pub fn[T : TComment] Comment::into(self : Comment) -> T = "%identity"
 
 ///|

@@ -51,3 +51,8 @@ pub fn EndingType::value(self : EndingType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for EndingType with from_js_any(value : JsAny) -> EndingType {
+  EndingType::from_unchecked(value)
+}

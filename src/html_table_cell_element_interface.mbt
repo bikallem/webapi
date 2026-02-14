@@ -13,6 +13,9 @@ pub impl TJsValue for HTMLTableCellElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTableCellElement with from_js_any(value : JsAny) -> HTMLTableCellElement = "%identity"
+
+///|
 pub fn[T : THTMLTableCellElement] HTMLTableCellElement::into(
   self : HTMLTableCellElement,
 ) -> T = "%identity"

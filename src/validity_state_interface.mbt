@@ -11,6 +11,9 @@ pub type ValidityState
 pub impl TJsValue for ValidityState with to_js(self : ValidityState) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ValidityState with from_js_any(value : JsAny) -> ValidityState = "%identity"
+
+///|
 pub fn[T : TValidityState] ValidityState::into(self : ValidityState) -> T = "%identity"
 
 ///|

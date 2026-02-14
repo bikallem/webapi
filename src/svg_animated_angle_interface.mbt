@@ -11,6 +11,9 @@ pub type SVGAnimatedAngle
 pub impl TJsValue for SVGAnimatedAngle with to_js(self : SVGAnimatedAngle) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedAngle with from_js_any(value : JsAny) -> SVGAnimatedAngle = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedAngle] SVGAnimatedAngle::into(
   self : SVGAnimatedAngle,
 ) -> T = "%identity"

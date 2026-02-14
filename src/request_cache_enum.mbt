@@ -78,3 +78,8 @@ pub fn RequestCache::value(self : RequestCache) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for RequestCache with from_js_any(value : JsAny) -> RequestCache {
+  RequestCache::from_unchecked(value)
+}

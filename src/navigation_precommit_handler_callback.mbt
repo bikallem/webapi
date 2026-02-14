@@ -13,6 +13,11 @@ pub impl TJsValue for NavigationPrecommitHandler with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for NavigationPrecommitHandler with from_js_any(
+  value : JsAny,
+) -> NavigationPrecommitHandler = "%identity"
+
+///|
 pub fn NavigationPrecommitHandler::new(
   callback : (NavigationPrecommitController) -> JsPromise[JsValue],
 ) -> NavigationPrecommitHandler {

@@ -11,6 +11,9 @@ pub type HTMLQuoteElement
 pub impl TJsValue for HTMLQuoteElement with to_js(self : HTMLQuoteElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLQuoteElement with from_js_any(value : JsAny) -> HTMLQuoteElement = "%identity"
+
+///|
 pub fn[T : THTMLQuoteElement] HTMLQuoteElement::into(
   self : HTMLQuoteElement,
 ) -> T = "%identity"

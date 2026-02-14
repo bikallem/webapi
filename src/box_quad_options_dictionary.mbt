@@ -11,6 +11,9 @@ pub type BoxQuadOptions
 pub impl TJsValue for BoxQuadOptions with to_js(self : BoxQuadOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BoxQuadOptions with from_js_any(value : JsAny) -> BoxQuadOptions = "%identity"
+
+///|
 pub fn BoxQuadOptions::new(
   box? : CSSBoxType = CSSBoxType::Border,
   relative_to? : &TGeometryNode,

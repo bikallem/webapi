@@ -11,6 +11,9 @@ pub type HTMLButtonElement
 pub impl TJsValue for HTMLButtonElement with to_js(self : HTMLButtonElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLButtonElement with from_js_any(value : JsAny) -> HTMLButtonElement = "%identity"
+
+///|
 pub fn[T : THTMLButtonElement] HTMLButtonElement::into(
   self : HTMLButtonElement,
 ) -> T = "%identity"

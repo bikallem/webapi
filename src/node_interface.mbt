@@ -11,6 +11,9 @@ pub type Node
 pub impl TJsValue for Node with to_js(self : Node) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Node with from_js_any(value : JsAny) -> Node = "%identity"
+
+///|
 pub fn[T : TNode] Node::into(self : Node) -> T = "%identity"
 
 ///|

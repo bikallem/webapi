@@ -11,6 +11,9 @@ pub type HTMLMeterElement
 pub impl TJsValue for HTMLMeterElement with to_js(self : HTMLMeterElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLMeterElement with from_js_any(value : JsAny) -> HTMLMeterElement = "%identity"
+
+///|
 pub fn[T : THTMLMeterElement] HTMLMeterElement::into(
   self : HTMLMeterElement,
 ) -> T = "%identity"

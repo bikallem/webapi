@@ -11,6 +11,9 @@ pub type TouchList
 pub impl TJsValue for TouchList with to_js(self : TouchList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TouchList with from_js_any(value : JsAny) -> TouchList = "%identity"
+
+///|
 pub fn[T : TTouchList] TouchList::into(self : TouchList) -> T = "%identity"
 
 ///|

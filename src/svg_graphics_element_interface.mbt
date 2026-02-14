@@ -11,6 +11,9 @@ pub type SVGGraphicsElement
 pub impl TJsValue for SVGGraphicsElement with to_js(self : SVGGraphicsElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGGraphicsElement with from_js_any(value : JsAny) -> SVGGraphicsElement = "%identity"
+
+///|
 pub fn[T : TSVGGraphicsElement] SVGGraphicsElement::into(
   self : SVGGraphicsElement,
 ) -> T = "%identity"

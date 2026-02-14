@@ -11,6 +11,9 @@ pub type GetHTMLOptions
 pub impl TJsValue for GetHTMLOptions with to_js(self : GetHTMLOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for GetHTMLOptions with from_js_any(value : JsAny) -> GetHTMLOptions = "%identity"
+
+///|
 pub fn GetHTMLOptions::new(
   serializable_shadow_roots? : Bool = false,
   shadow_roots? : Array[ShadowRoot] = [],

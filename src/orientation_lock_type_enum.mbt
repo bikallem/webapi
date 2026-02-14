@@ -100,3 +100,8 @@ pub fn OrientationLockType::value(self : OrientationLockType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for OrientationLockType with from_js_any(value : JsAny) -> OrientationLockType {
+  OrientationLockType::from_unchecked(value)
+}

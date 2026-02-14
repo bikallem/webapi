@@ -13,6 +13,11 @@ pub impl TJsValue for CanvasRenderingContext2DSettings with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CanvasRenderingContext2DSettings with from_js_any(
+  value : JsAny,
+) -> CanvasRenderingContext2DSettings = "%identity"
+
+///|
 pub fn CanvasRenderingContext2DSettings::new(
   alpha? : Bool = true,
   desynchronized? : Bool = false,

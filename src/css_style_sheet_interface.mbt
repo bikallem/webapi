@@ -11,6 +11,9 @@ pub type CSSStyleSheet
 pub impl TJsValue for CSSStyleSheet with to_js(self : CSSStyleSheet) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSStyleSheet with from_js_any(value : JsAny) -> CSSStyleSheet = "%identity"
+
+///|
 pub fn[T : TCSSStyleSheet] CSSStyleSheet::into(self : CSSStyleSheet) -> T = "%identity"
 
 ///|

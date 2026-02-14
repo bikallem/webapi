@@ -11,6 +11,9 @@ pub type HTMLDialogElement
 pub impl TJsValue for HTMLDialogElement with to_js(self : HTMLDialogElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLDialogElement with from_js_any(value : JsAny) -> HTMLDialogElement = "%identity"
+
+///|
 pub fn[T : THTMLDialogElement] HTMLDialogElement::into(
   self : HTMLDialogElement,
 ) -> T = "%identity"

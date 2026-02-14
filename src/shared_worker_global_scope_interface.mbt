@@ -13,6 +13,9 @@ pub impl TJsValue for SharedWorkerGlobalScope with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SharedWorkerGlobalScope with from_js_any(value : JsAny) -> SharedWorkerGlobalScope = "%identity"
+
+///|
 pub fn[T : TSharedWorkerGlobalScope] SharedWorkerGlobalScope::into(
   self : SharedWorkerGlobalScope,
 ) -> T = "%identity"

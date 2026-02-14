@@ -11,6 +11,9 @@ pub type TextDecoderStream
 pub impl TJsValue for TextDecoderStream with to_js(self : TextDecoderStream) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TextDecoderStream with from_js_any(value : JsAny) -> TextDecoderStream = "%identity"
+
+///|
 pub fn[T : TTextDecoderStream] TextDecoderStream::into(
   self : TextDecoderStream,
 ) -> T = "%identity"

@@ -11,6 +11,9 @@ pub type Notification
 pub impl TJsValue for Notification with to_js(self : Notification) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Notification with from_js_any(value : JsAny) -> Notification = "%identity"
+
+///|
 pub fn[T : TNotification] Notification::into(self : Notification) -> T = "%identity"
 
 ///|

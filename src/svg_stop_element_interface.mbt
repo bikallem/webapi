@@ -11,6 +11,9 @@ pub type SVGStopElement
 pub impl TJsValue for SVGStopElement with to_js(self : SVGStopElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGStopElement with from_js_any(value : JsAny) -> SVGStopElement = "%identity"
+
+///|
 pub fn[T : TSVGStopElement] SVGStopElement::into(self : SVGStopElement) -> T = "%identity"
 
 ///|

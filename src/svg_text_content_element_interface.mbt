@@ -13,6 +13,9 @@ pub impl TJsValue for SVGTextContentElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGTextContentElement with from_js_any(value : JsAny) -> SVGTextContentElement = "%identity"
+
+///|
 pub fn[T : TSVGTextContentElement] SVGTextContentElement::into(
   self : SVGTextContentElement,
 ) -> T = "%identity"

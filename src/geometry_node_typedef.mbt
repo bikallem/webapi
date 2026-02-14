@@ -11,6 +11,9 @@ pub type GeometryNode
 pub impl TJsValue for GeometryNode with to_js(self : GeometryNode) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for GeometryNode with from_js_any(value : JsAny) -> GeometryNode = "%identity"
+
+///|
 pub(open) trait TGeometryNode {
   to_js(self : Self) -> JsValue
 }

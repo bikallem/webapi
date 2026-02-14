@@ -11,6 +11,9 @@ pub type CompositionEvent
 pub impl TJsValue for CompositionEvent with to_js(self : CompositionEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CompositionEvent with from_js_any(value : JsAny) -> CompositionEvent = "%identity"
+
+///|
 pub fn[T : TCompositionEvent] CompositionEvent::into(
   self : CompositionEvent,
 ) -> T = "%identity"

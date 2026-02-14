@@ -13,6 +13,11 @@ pub impl TJsValue for OnBeforeUnloadEventHandlerNonNull with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for OnBeforeUnloadEventHandlerNonNull with from_js_any(
+  value : JsAny,
+) -> OnBeforeUnloadEventHandlerNonNull = "%identity"
+
+///|
 pub fn OnBeforeUnloadEventHandlerNonNull::new(
   callback : (Event) -> String,
 ) -> OnBeforeUnloadEventHandlerNonNull {

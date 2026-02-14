@@ -72,3 +72,8 @@ pub fn TextTrackKind::value(self : TextTrackKind) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for TextTrackKind with from_js_any(value : JsAny) -> TextTrackKind {
+  TextTrackKind::from_unchecked(value)
+}

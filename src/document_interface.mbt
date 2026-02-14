@@ -11,6 +11,9 @@ pub type Document
 pub impl TJsValue for Document with to_js(self : Document) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Document with from_js_any(value : JsAny) -> Document = "%identity"
+
+///|
 pub fn[T : TDocument] Document::into(self : Document) -> T = "%identity"
 
 ///|
@@ -1552,7 +1555,7 @@ impl TDocument with evaluate(
   context_node : &TNode,
   resolver? : XPathNSResolver = JsValue::null(),
   type_? : UInt = (0 : UInt),
-  result? : &TXPathResult = JsValue::null(),
+  result? : &TXPathResult,
 ) -> XPathResult {
   document_evaluate_ffi(
     TJsValue::to_js(self),
@@ -1560,7 +1563,7 @@ impl TDocument with evaluate(
     TJsValue::to_js(context_node),
     TJsValue::to_js(resolver),
     TJsValue::to_js(type_),
-    TJsValue::to_js(result),
+    opt_to_js(result),
   )
 }
 

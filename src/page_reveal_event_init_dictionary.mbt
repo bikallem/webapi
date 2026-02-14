@@ -11,6 +11,9 @@ pub type PageRevealEventInit
 pub impl TJsValue for PageRevealEventInit with to_js(self : PageRevealEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PageRevealEventInit with from_js_any(value : JsAny) -> PageRevealEventInit = "%identity"
+
+///|
 pub fn PageRevealEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

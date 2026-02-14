@@ -11,6 +11,9 @@ pub type HTMLTemplateElement
 pub impl TJsValue for HTMLTemplateElement with to_js(self : HTMLTemplateElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLTemplateElement with from_js_any(value : JsAny) -> HTMLTemplateElement = "%identity"
+
+///|
 pub fn[T : THTMLTemplateElement] HTMLTemplateElement::into(
   self : HTMLTemplateElement,
 ) -> T = "%identity"

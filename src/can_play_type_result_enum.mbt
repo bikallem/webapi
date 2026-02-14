@@ -60,3 +60,8 @@ pub fn CanPlayTypeResult::value(self : CanPlayTypeResult) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanPlayTypeResult with from_js_any(value : JsAny) -> CanPlayTypeResult {
+  CanPlayTypeResult::from_unchecked(value)
+}

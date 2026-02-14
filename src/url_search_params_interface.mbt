@@ -11,6 +11,9 @@ pub type URLSearchParams
 pub impl TJsValue for URLSearchParams with to_js(self : URLSearchParams) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for URLSearchParams with from_js_any(value : JsAny) -> URLSearchParams = "%identity"
+
+///|
 pub fn[T : TURLSearchParams] URLSearchParams::into(self : URLSearchParams) -> T = "%identity"
 
 ///|

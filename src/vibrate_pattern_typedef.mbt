@@ -11,6 +11,9 @@ pub type VibratePattern
 pub impl TJsValue for VibratePattern with to_js(self : VibratePattern) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for VibratePattern with from_js_any(value : JsAny) -> VibratePattern = "%identity"
+
+///|
 pub(open) trait TVibratePattern {
   to_js(self : Self) -> JsValue
 }

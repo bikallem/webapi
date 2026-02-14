@@ -11,6 +11,9 @@ pub type FocusOptions
 pub impl TJsValue for FocusOptions with to_js(self : FocusOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FocusOptions with from_js_any(value : JsAny) -> FocusOptions = "%identity"
+
+///|
 pub fn FocusOptions::new(
   prevent_scroll? : Bool = false,
   focus_visible? : Bool,

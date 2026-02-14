@@ -13,6 +13,9 @@ pub impl TJsValue for ElementCreationOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ElementCreationOptions with from_js_any(value : JsAny) -> ElementCreationOptions = "%identity"
+
+///|
 pub fn ElementCreationOptions::new(
   custom_element_registry? : &TCustomElementRegistry,
   is_? : String,

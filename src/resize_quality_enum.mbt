@@ -66,3 +66,8 @@ pub fn ResizeQuality::value(self : ResizeQuality) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ResizeQuality with from_js_any(value : JsAny) -> ResizeQuality {
+  ResizeQuality::from_unchecked(value)
+}

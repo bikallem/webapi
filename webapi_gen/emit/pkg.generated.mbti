@@ -69,6 +69,7 @@ pub impl Emitter for DictionaryEmitter
 pub enum Emit {
   External(TypeName)
   ImplTJsValue(TypeName)
+  ImplFromJsAny(TypeName)
   IntoMethod(TypeName)
   IsUndefinedMethod(TypeName)
   EmptyMethod(TypeName)

@@ -11,6 +11,9 @@ pub type ElementInternals
 pub impl TJsValue for ElementInternals with to_js(self : ElementInternals) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ElementInternals with from_js_any(value : JsAny) -> ElementInternals = "%identity"
+
+///|
 pub fn[T : TElementInternals] ElementInternals::into(
   self : ElementInternals,
 ) -> T = "%identity"

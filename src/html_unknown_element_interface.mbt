@@ -11,6 +11,9 @@ pub type HTMLUnknownElement
 pub impl TJsValue for HTMLUnknownElement with to_js(self : HTMLUnknownElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLUnknownElement with from_js_any(value : JsAny) -> HTMLUnknownElement = "%identity"
+
+///|
 pub fn[T : THTMLUnknownElement] HTMLUnknownElement::into(
   self : HTMLUnknownElement,
 ) -> T = "%identity"

@@ -11,6 +11,9 @@ pub type HTMLVideoElement
 pub impl TJsValue for HTMLVideoElement with to_js(self : HTMLVideoElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLVideoElement with from_js_any(value : JsAny) -> HTMLVideoElement = "%identity"
+
+///|
 pub fn[T : THTMLVideoElement] HTMLVideoElement::into(
   self : HTMLVideoElement,
 ) -> T = "%identity"

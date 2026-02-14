@@ -51,3 +51,8 @@ pub fn BinaryType::value(self : BinaryType) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for BinaryType with from_js_any(value : JsAny) -> BinaryType {
+  BinaryType::from_unchecked(value)
+}

@@ -11,6 +11,9 @@ pub type Request
 pub impl TJsValue for Request with to_js(self : Request) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Request with from_js_any(value : JsAny) -> Request = "%identity"
+
+///|
 pub fn[T : TRequest] Request::into(self : Request) -> T = "%identity"
 
 ///|

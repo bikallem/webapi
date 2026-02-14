@@ -11,6 +11,9 @@ pub type StaticRangeInit
 pub impl TJsValue for StaticRangeInit with to_js(self : StaticRangeInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for StaticRangeInit with from_js_any(value : JsAny) -> StaticRangeInit = "%identity"
+
+///|
 pub fn StaticRangeInit::new(
   start_container : &TNode,
   start_offset : UInt,

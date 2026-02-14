@@ -13,6 +13,11 @@ pub impl TJsValue for StructuredSerializeOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for StructuredSerializeOptions with from_js_any(
+  value : JsAny,
+) -> StructuredSerializeOptions = "%identity"
+
+///|
 pub fn StructuredSerializeOptions::new(
   transfer? : Array[JsValue] = [],
 ) -> StructuredSerializeOptions {

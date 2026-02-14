@@ -11,6 +11,9 @@ pub type HTMLAudioElement
 pub impl TJsValue for HTMLAudioElement with to_js(self : HTMLAudioElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLAudioElement with from_js_any(value : JsAny) -> HTMLAudioElement = "%identity"
+
+///|
 pub fn[T : THTMLAudioElement] HTMLAudioElement::into(
   self : HTMLAudioElement,
 ) -> T = "%identity"

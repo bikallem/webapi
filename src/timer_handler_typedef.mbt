@@ -11,6 +11,9 @@ pub type TimerHandler
 pub impl TJsValue for TimerHandler with to_js(self : TimerHandler) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for TimerHandler with from_js_any(value : JsAny) -> TimerHandler = "%identity"
+
+///|
 pub(open) trait TTimerHandler {
   to_js(self : Self) -> JsValue
 }

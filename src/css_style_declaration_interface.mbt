@@ -11,6 +11,9 @@ pub type CSSStyleDeclaration
 pub impl TJsValue for CSSStyleDeclaration with to_js(self : CSSStyleDeclaration) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CSSStyleDeclaration with from_js_any(value : JsAny) -> CSSStyleDeclaration = "%identity"
+
+///|
 pub fn[T : TCSSStyleDeclaration] CSSStyleDeclaration::into(
   self : CSSStyleDeclaration,
 ) -> T = "%identity"

@@ -11,6 +11,9 @@ pub type HTMLMetaElement
 pub impl TJsValue for HTMLMetaElement with to_js(self : HTMLMetaElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLMetaElement with from_js_any(value : JsAny) -> HTMLMetaElement = "%identity"
+
+///|
 pub fn[T : THTMLMetaElement] HTMLMetaElement::into(self : HTMLMetaElement) -> T = "%identity"
 
 ///|

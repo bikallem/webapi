@@ -11,6 +11,9 @@ pub type CustomEventInit
 pub impl TJsValue for CustomEventInit with to_js(self : CustomEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CustomEventInit with from_js_any(value : JsAny) -> CustomEventInit = "%identity"
+
+///|
 pub fn CustomEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

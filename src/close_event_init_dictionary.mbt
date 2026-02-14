@@ -11,6 +11,9 @@ pub type CloseEventInit
 pub impl TJsValue for CloseEventInit with to_js(self : CloseEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CloseEventInit with from_js_any(value : JsAny) -> CloseEventInit = "%identity"
+
+///|
 pub fn CloseEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,

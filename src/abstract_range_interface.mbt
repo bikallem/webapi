@@ -11,6 +11,9 @@ pub type AbstractRange
 pub impl TJsValue for AbstractRange with to_js(self : AbstractRange) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for AbstractRange with from_js_any(value : JsAny) -> AbstractRange = "%identity"
+
+///|
 pub fn[T : TAbstractRange] AbstractRange::into(self : AbstractRange) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type VoidFunction
 pub impl TJsValue for VoidFunction with to_js(self : VoidFunction) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for VoidFunction with from_js_any(value : JsAny) -> VoidFunction = "%identity"
+
+///|
 pub fn VoidFunction::new(callback : () -> Unit) -> VoidFunction {
   void_function_ffi(callback)
 }

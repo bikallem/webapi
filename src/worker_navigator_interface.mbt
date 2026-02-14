@@ -11,6 +11,9 @@ pub type WorkerNavigator
 pub impl TJsValue for WorkerNavigator with to_js(self : WorkerNavigator) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WorkerNavigator with from_js_any(value : JsAny) -> WorkerNavigator = "%identity"
+
+///|
 pub fn[T : TWorkerNavigator] WorkerNavigator::into(self : WorkerNavigator) -> T = "%identity"
 
 ///|

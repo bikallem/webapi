@@ -13,6 +13,11 @@ pub impl TJsValue for DedicatedWorkerGlobalScope with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DedicatedWorkerGlobalScope with from_js_any(
+  value : JsAny,
+) -> DedicatedWorkerGlobalScope = "%identity"
+
+///|
 pub fn[T : TDedicatedWorkerGlobalScope] DedicatedWorkerGlobalScope::into(
   self : DedicatedWorkerGlobalScope,
 ) -> T = "%identity"

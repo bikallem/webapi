@@ -13,6 +13,9 @@ pub impl TJsValue for FrameRequestCallback with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FrameRequestCallback with from_js_any(value : JsAny) -> FrameRequestCallback = "%identity"
+
+///|
 pub fn FrameRequestCallback::new(
   callback : (DOMHighResTimeStamp) -> Unit,
 ) -> FrameRequestCallback {

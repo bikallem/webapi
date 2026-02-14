@@ -13,6 +13,9 @@ pub impl TJsValue for SVGAnimatedTransformList with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for SVGAnimatedTransformList with from_js_any(value : JsAny) -> SVGAnimatedTransformList = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedTransformList] SVGAnimatedTransformList::into(
   self : SVGAnimatedTransformList,
 ) -> T = "%identity"

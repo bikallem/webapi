@@ -11,11 +11,14 @@ pub type MouseEventInit
 pub impl TJsValue for MouseEventInit with to_js(self : MouseEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MouseEventInit with from_js_any(value : JsAny) -> MouseEventInit = "%identity"
+
+///|
 pub fn MouseEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  view? : &TWindow = JsValue::null(),
+  view? : &TWindow,
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
   ctrl_key? : Bool = false,
@@ -38,13 +41,13 @@ pub fn MouseEventInit::new(
   client_y? : Int = (0 : Int),
   button? : Int = (0 : Int),
   buttons? : UInt = (0 : UInt),
-  related_target? : &TEventTarget = JsValue::null(),
+  related_target? : &TEventTarget,
 ) -> MouseEventInit {
   mouse_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(view),
+    opt_to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),
     TJsValue::to_js(ctrl_key),
@@ -67,7 +70,7 @@ pub fn MouseEventInit::new(
     TJsValue::to_js(client_y),
     TJsValue::to_js(button),
     TJsValue::to_js(buttons),
-    TJsValue::to_js(related_target),
+    opt_to_js(related_target),
   )
 }
 

@@ -56,3 +56,8 @@ pub fn ColorSpaceConversion::value(self : ColorSpaceConversion) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for ColorSpaceConversion with from_js_any(value : JsAny) -> ColorSpaceConversion {
+  ColorSpaceConversion::from_unchecked(value)
+}

@@ -13,6 +13,9 @@ pub impl TJsValue for VisibilityStateEntry with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for VisibilityStateEntry with from_js_any(value : JsAny) -> VisibilityStateEntry = "%identity"
+
+///|
 pub fn[T : TVisibilityStateEntry] VisibilityStateEntry::into(
   self : VisibilityStateEntry,
 ) -> T = "%identity"

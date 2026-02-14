@@ -63,3 +63,8 @@ pub fn RequestMode::value(self : RequestMode) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for RequestMode with from_js_any(value : JsAny) -> RequestMode {
+  RequestMode::from_unchecked(value)
+}

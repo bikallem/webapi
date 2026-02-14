@@ -11,6 +11,9 @@ pub type MediaProvider
 pub impl TJsValue for MediaProvider with to_js(self : MediaProvider) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MediaProvider with from_js_any(value : JsAny) -> MediaProvider = "%identity"
+
+///|
 pub(open) trait TMediaProvider {
   to_js(self : Self) -> JsValue
 }

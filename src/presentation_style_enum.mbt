@@ -60,3 +60,8 @@ pub fn PresentationStyle::value(self : PresentationStyle) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for PresentationStyle with from_js_any(value : JsAny) -> PresentationStyle {
+  PresentationStyle::from_unchecked(value)
+}

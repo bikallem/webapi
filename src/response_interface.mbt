@@ -11,6 +11,9 @@ pub type Response
 pub impl TJsValue for Response with to_js(self : Response) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Response with from_js_any(value : JsAny) -> Response = "%identity"
+
+///|
 pub fn[T : TResponse] Response::into(self : Response) -> T = "%identity"
 
 ///|

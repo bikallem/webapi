@@ -11,6 +11,9 @@ pub type Worklet
 pub impl TJsValue for Worklet with to_js(self : Worklet) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Worklet with from_js_any(value : JsAny) -> Worklet = "%identity"
+
+///|
 pub fn[T : TWorklet] Worklet::into(self : Worklet) -> T = "%identity"
 
 ///|

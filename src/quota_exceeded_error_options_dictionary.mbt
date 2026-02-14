@@ -13,6 +13,9 @@ pub impl TJsValue for QuotaExceededErrorOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for QuotaExceededErrorOptions with from_js_any(value : JsAny) -> QuotaExceededErrorOptions = "%identity"
+
+///|
 pub fn QuotaExceededErrorOptions::new(
   quota? : Double,
   requested? : Double,

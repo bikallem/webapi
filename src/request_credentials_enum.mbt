@@ -60,3 +60,8 @@ pub fn RequestCredentials::value(self : RequestCredentials) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for RequestCredentials with from_js_any(value : JsAny) -> RequestCredentials {
+  RequestCredentials::from_unchecked(value)
+}

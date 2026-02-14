@@ -11,6 +11,9 @@ pub type Screen
 pub impl TJsValue for Screen with to_js(self : Screen) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Screen with from_js_any(value : JsAny) -> Screen = "%identity"
+
+///|
 pub fn[T : TScreen] Screen::into(self : Screen) -> T = "%identity"
 
 ///|

@@ -15,6 +15,7 @@ pub impl Emitter for DictionaryEmitter with emit(
     Emit::FileHeader(TypeName(name), Specs(dict.specs)),
     Emit::External(dict.name),
     Emit::ImplTJsValue(dict.name),
+    Emit::ImplFromJsAny(dict.name),
   ]
   let (args, arg_emits) = method_args(
     dict.members.map(mem => {
@@ -81,6 +82,8 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|
       #|pub impl TJsValue for CanvasRenderingContext2DSettings with to_js(self: CanvasRenderingContext2DSettings) -> JsValue = "%identity"
       #|
+      #|pub impl FromJsAny for CanvasRenderingContext2DSettings with from_js_any(value : JsAny) -> CanvasRenderingContext2DSettings = "%identity"
+      #|
       #|pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool = true, 
       #|desynchronized? : Bool = false, 
       #|color_space? : PredefinedColorSpace = PredefinedColorSpace::Srgb, 
@@ -103,6 +106,7 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|#|}
       #|
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
+
     ),
   )
 }

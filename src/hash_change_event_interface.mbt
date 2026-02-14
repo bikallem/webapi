@@ -11,6 +11,9 @@ pub type HashChangeEvent
 pub impl TJsValue for HashChangeEvent with to_js(self : HashChangeEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HashChangeEvent with from_js_any(value : JsAny) -> HashChangeEvent = "%identity"
+
+///|
 pub fn[T : THashChangeEvent] HashChangeEvent::into(self : HashChangeEvent) -> T = "%identity"
 
 ///|

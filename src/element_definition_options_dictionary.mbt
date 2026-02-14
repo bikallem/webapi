@@ -13,6 +13,9 @@ pub impl TJsValue for ElementDefinitionOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ElementDefinitionOptions with from_js_any(value : JsAny) -> ElementDefinitionOptions = "%identity"
+
+///|
 pub fn ElementDefinitionOptions::new(
   extends? : String,
 ) -> ElementDefinitionOptions {

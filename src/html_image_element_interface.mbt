@@ -11,6 +11,9 @@ pub type HTMLImageElement
 pub impl TJsValue for HTMLImageElement with to_js(self : HTMLImageElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLImageElement with from_js_any(value : JsAny) -> HTMLImageElement = "%identity"
+
+///|
 pub fn[T : THTMLImageElement] HTMLImageElement::into(
   self : HTMLImageElement,
 ) -> T = "%identity"

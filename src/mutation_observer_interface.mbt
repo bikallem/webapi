@@ -11,6 +11,9 @@ pub type MutationObserver
 pub impl TJsValue for MutationObserver with to_js(self : MutationObserver) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MutationObserver with from_js_any(value : JsAny) -> MutationObserver = "%identity"
+
+///|
 pub fn[T : TMutationObserver] MutationObserver::into(
   self : MutationObserver,
 ) -> T = "%identity"

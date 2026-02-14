@@ -13,6 +13,9 @@ pub impl TJsValue for HTMLOrSVGImageElement with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLOrSVGImageElement with from_js_any(value : JsAny) -> HTMLOrSVGImageElement = "%identity"
+
+///|
 pub(open) trait THTMLOrSVGImageElement {
   to_js(self : Self) -> JsValue
 }

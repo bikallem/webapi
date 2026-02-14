@@ -11,6 +11,9 @@ pub type HTMLMediaElement
 pub impl TJsValue for HTMLMediaElement with to_js(self : HTMLMediaElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLMediaElement with from_js_any(value : JsAny) -> HTMLMediaElement = "%identity"
+
+///|
 pub fn[T : THTMLMediaElement] HTMLMediaElement::into(
   self : HTMLMediaElement,
 ) -> T = "%identity"

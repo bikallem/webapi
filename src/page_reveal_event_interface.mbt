@@ -11,6 +11,9 @@ pub type PageRevealEvent
 pub impl TJsValue for PageRevealEvent with to_js(self : PageRevealEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for PageRevealEvent with from_js_any(value : JsAny) -> PageRevealEvent = "%identity"
+
+///|
 pub fn[T : TPageRevealEvent] PageRevealEvent::into(self : PageRevealEvent) -> T = "%identity"
 
 ///|

@@ -11,6 +11,9 @@ pub type Clipboard
 pub impl TJsValue for Clipboard with to_js(self : Clipboard) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Clipboard with from_js_any(value : JsAny) -> Clipboard = "%identity"
+
+///|
 pub fn[T : TClipboard] Clipboard::into(self : Clipboard) -> T = "%identity"
 
 ///|

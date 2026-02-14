@@ -11,6 +11,9 @@ pub type AbortSignal
 pub impl TJsValue for AbortSignal with to_js(self : AbortSignal) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for AbortSignal with from_js_any(value : JsAny) -> AbortSignal = "%identity"
+
+///|
 pub fn[T : TAbortSignal] AbortSignal::into(self : AbortSignal) -> T = "%identity"
 
 ///|

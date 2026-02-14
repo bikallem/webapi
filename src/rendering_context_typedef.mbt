@@ -11,6 +11,9 @@ pub type RenderingContext
 pub impl TJsValue for RenderingContext with to_js(self : RenderingContext) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for RenderingContext with from_js_any(value : JsAny) -> RenderingContext = "%identity"
+
+///|
 pub(open) trait TRenderingContext {
   to_js(self : Self) -> JsValue
 }

@@ -11,6 +11,9 @@ pub type BlobPart
 pub impl TJsValue for BlobPart with to_js(self : BlobPart) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for BlobPart with from_js_any(value : JsAny) -> BlobPart = "%identity"
+
+///|
 pub(open) trait TBlobPart {
   to_js(self : Self) -> JsValue
 }

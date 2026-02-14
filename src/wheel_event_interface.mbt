@@ -11,6 +11,9 @@ pub type WheelEvent
 pub impl TJsValue for WheelEvent with to_js(self : WheelEvent) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WheelEvent with from_js_any(value : JsAny) -> WheelEvent = "%identity"
+
+///|
 pub fn[T : TWheelEvent] WheelEvent::into(self : WheelEvent) -> T = "%identity"
 
 ///|

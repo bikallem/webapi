@@ -11,6 +11,9 @@ pub type DOMPoint
 pub impl TJsValue for DOMPoint with to_js(self : DOMPoint) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMPoint with from_js_any(value : JsAny) -> DOMPoint = "%identity"
+
+///|
 pub fn[T : TDOMPoint] DOMPoint::into(self : DOMPoint) -> T = "%identity"
 
 ///|

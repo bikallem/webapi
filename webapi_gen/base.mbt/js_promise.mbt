@@ -11,16 +11,30 @@
 type JsAny = String
 
 ///|
+/// Trait for converting JsAny (externref) values back to concrete types.
+/// Used by JsPromise::then to safely convert resolved values from JsAny to T.
+/// On JS target, all types use %identity. On wasm-gc, value types (Bool, Int,
+/// Double, etc.) need FFI helpers since they are i32/f64, not externref.
+pub(open) trait FromJsAny {
+  from_js_any(JsAny) -> Self
+}
+
+///|
+pub impl FromJsAny for JsValue with from_js_any(value : JsAny) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for String with from_js_any(value : JsAny) -> String = "%identity"
+
+///|
+pub impl[T] FromJsAny for JsPromise[T] with from_js_any(value : JsAny) -> JsPromise[T] = "%identity"
+
+///|
 /// Opaque type representing a JavaScript Promise
 #external
 pub type JsPromise[T]
 
 ///|
 pub impl[T] TJsValue for JsPromise[T] with to_js(self) -> JsValue = "%identity"
-
-///|
-/// Zero-cost cast from JsAny to any type.
-fn[T] js_any_cast(value : JsAny) -> T = "%identity"
 
 ///|
 /// Creates a resolved Promise with the given value.
@@ -37,12 +51,12 @@ pub fn[T] JsPromise::reject(reason : JsValue) -> JsPromise[T] {
 ///|
 /// Chains a callback to be called when the Promise resolves.
 /// Returns a new Promise for the callback's return value.
-pub fn[T, U : TJsValue] JsPromise::then(
+pub fn[T : FromJsAny, U : TJsValue] JsPromise::then(
   self : JsPromise[T],
   on_fulfilled : (T) -> U,
 ) -> JsPromise[U] {
   let f : (JsAny) -> JsValue = fn(value) {
-    TJsValue::to_js(on_fulfilled(js_any_cast(value)))
+    TJsValue::to_js(on_fulfilled(FromJsAny::from_js_any(value)))
   }
   js_promise_then_ffi(TJsValue::to_js(self), f).unsafe_cast()
 }
@@ -55,7 +69,7 @@ pub fn[T : TJsValue] JsPromise::catch_(
   on_rejected : (JsValue) -> T,
 ) -> JsPromise[T] {
   let f : (JsAny) -> JsValue = fn(reason) {
-    TJsValue::to_js(on_rejected(js_any_cast(reason)))
+    TJsValue::to_js(on_rejected(FromJsAny::from_js_any(reason)))
   }
   js_promise_catch_ffi(TJsValue::to_js(self), f).unsafe_cast()
 }

@@ -11,6 +11,9 @@ pub type CaretPosition
 pub impl TJsValue for CaretPosition with to_js(self : CaretPosition) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for CaretPosition with from_js_any(value : JsAny) -> CaretPosition = "%identity"
+
+///|
 pub fn[T : TCaretPosition] CaretPosition::into(self : CaretPosition) -> T = "%identity"
 
 ///|

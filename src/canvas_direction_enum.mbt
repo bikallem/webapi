@@ -60,3 +60,8 @@ pub fn CanvasDirection::value(self : CanvasDirection) -> String {
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for CanvasDirection with from_js_any(value : JsAny) -> CanvasDirection {
+  CanvasDirection::from_unchecked(value)
+}

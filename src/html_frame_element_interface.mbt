@@ -11,6 +11,9 @@ pub type HTMLFrameElement
 pub impl TJsValue for HTMLFrameElement with to_js(self : HTMLFrameElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLFrameElement with from_js_any(value : JsAny) -> HTMLFrameElement = "%identity"
+
+///|
 pub fn[T : THTMLFrameElement] HTMLFrameElement::into(
   self : HTMLFrameElement,
 ) -> T = "%identity"

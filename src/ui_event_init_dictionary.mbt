@@ -11,11 +11,14 @@ pub type UIEventInit
 pub impl TJsValue for UIEventInit with to_js(self : UIEventInit) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for UIEventInit with from_js_any(value : JsAny) -> UIEventInit = "%identity"
+
+///|
 pub fn UIEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  view? : &TWindow = JsValue::null(),
+  view? : &TWindow,
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
 ) -> UIEventInit {
@@ -23,7 +26,7 @@ pub fn UIEventInit::new(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(view),
+    opt_to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),
   )

@@ -11,6 +11,9 @@ pub type FetchLaterResult
 pub impl TJsValue for FetchLaterResult with to_js(self : FetchLaterResult) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FetchLaterResult with from_js_any(value : JsAny) -> FetchLaterResult = "%identity"
+
+///|
 pub fn[T : TFetchLaterResult] FetchLaterResult::into(
   self : FetchLaterResult,
 ) -> T = "%identity"

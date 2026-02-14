@@ -11,6 +11,9 @@ pub type FullscreenOptions
 pub impl TJsValue for FullscreenOptions with to_js(self : FullscreenOptions) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FullscreenOptions with from_js_any(value : JsAny) -> FullscreenOptions = "%identity"
+
+///|
 pub fn FullscreenOptions::new(
   navigation_ui? : FullscreenNavigationUI = FullscreenNavigationUI::Auto,
 ) -> FullscreenOptions {

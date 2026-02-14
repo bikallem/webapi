@@ -13,6 +13,9 @@ pub impl TJsValue for WindowPostMessageOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for WindowPostMessageOptions with from_js_any(value : JsAny) -> WindowPostMessageOptions = "%identity"
+
+///|
 pub fn WindowPostMessageOptions::new(
   transfer? : Array[JsValue] = [],
   target_origin? : String = "/",

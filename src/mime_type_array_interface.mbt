@@ -11,6 +11,9 @@ pub type MimeTypeArray
 pub impl TJsValue for MimeTypeArray with to_js(self : MimeTypeArray) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for MimeTypeArray with from_js_any(value : JsAny) -> MimeTypeArray = "%identity"
+
+///|
 pub fn[T : TMimeTypeArray] MimeTypeArray::into(self : MimeTypeArray) -> T = "%identity"
 
 ///|

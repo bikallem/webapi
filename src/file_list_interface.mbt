@@ -11,6 +11,9 @@ pub type FileList
 pub impl TJsValue for FileList with to_js(self : FileList) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for FileList with from_js_any(value : JsAny) -> FileList = "%identity"
+
+///|
 pub fn[T : TFileList] FileList::into(self : FileList) -> T = "%identity"
 
 ///|

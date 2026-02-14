@@ -13,6 +13,9 @@ pub impl TJsValue for AssignedNodesOptions with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for AssignedNodesOptions with from_js_any(value : JsAny) -> AssignedNodesOptions = "%identity"
+
+///|
 pub fn AssignedNodesOptions::new(
   flatten? : Bool = false,
 ) -> AssignedNodesOptions {

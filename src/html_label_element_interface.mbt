@@ -11,6 +11,9 @@ pub type HTMLLabelElement
 pub impl TJsValue for HTMLLabelElement with to_js(self : HTMLLabelElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLLabelElement with from_js_any(value : JsAny) -> HTMLLabelElement = "%identity"
+
+///|
 pub fn[T : THTMLLabelElement] HTMLLabelElement::into(
   self : HTMLLabelElement,
 ) -> T = "%identity"

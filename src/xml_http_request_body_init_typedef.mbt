@@ -13,6 +13,9 @@ pub impl TJsValue for XMLHttpRequestBodyInit with to_js(
 ) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for XMLHttpRequestBodyInit with from_js_any(value : JsAny) -> XMLHttpRequestBodyInit = "%identity"
+
+///|
 pub(open) trait TXMLHttpRequestBodyInit {
   to_js(self : Self) -> JsValue
 }

@@ -11,6 +11,9 @@ pub type HTMLMapElement
 pub impl TJsValue for HTMLMapElement with to_js(self : HTMLMapElement) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for HTMLMapElement with from_js_any(value : JsAny) -> HTMLMapElement = "%identity"
+
+///|
 pub fn[T : THTMLMapElement] HTMLMapElement::into(self : HTMLMapElement) -> T = "%identity"
 
 ///|

@@ -65,3 +65,8 @@ pub fn NavigationScrollBehavior::value(
   }
   buf.to_string()
 }
+
+///|
+pub impl FromJsAny for NavigationScrollBehavior with from_js_any(value : JsAny) -> NavigationScrollBehavior {
+  NavigationScrollBehavior::from_unchecked(value)
+}

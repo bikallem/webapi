@@ -11,6 +11,9 @@ pub type Path2D
 pub impl TJsValue for Path2D with to_js(self : Path2D) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Path2D with from_js_any(value : JsAny) -> Path2D = "%identity"
+
+///|
 pub fn[T : TPath2D] Path2D::into(self : Path2D) -> T = "%identity"
 
 ///|

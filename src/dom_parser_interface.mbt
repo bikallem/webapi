@@ -11,6 +11,9 @@ pub type DOMParser
 pub impl TJsValue for DOMParser with to_js(self : DOMParser) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for DOMParser with from_js_any(value : JsAny) -> DOMParser = "%identity"
+
+///|
 pub fn[T : TDOMParser] DOMParser::into(self : DOMParser) -> T = "%identity"
 
 ///|

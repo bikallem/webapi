@@ -11,6 +11,9 @@ pub type Worker
 pub impl TJsValue for Worker with to_js(self : Worker) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for Worker with from_js_any(value : JsAny) -> Worker = "%identity"
+
+///|
 pub fn[T : TWorker] Worker::into(self : Worker) -> T = "%identity"
 
 ///|

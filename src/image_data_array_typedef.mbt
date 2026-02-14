@@ -11,6 +11,9 @@ pub type ImageDataArray
 pub impl TJsValue for ImageDataArray with to_js(self : ImageDataArray) -> JsValue = "%identity"
 
 ///|
+pub impl FromJsAny for ImageDataArray with from_js_any(value : JsAny) -> ImageDataArray = "%identity"
+
+///|
 pub(open) trait TImageDataArray {
   to_js(self : Self) -> JsValue
 }
