@@ -200,11 +200,14 @@ impl TXMLHttpRequest with upload(self : Self) -> XMLHttpRequestUpload {
 
 ///|
 /// [XMLHttpRequest.send](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send)
-impl TXMLHttpRequest with send(
-  self : Self,
-  body? : &TXMLHttpRequestSendBody = JsValue::null(),
-) -> Unit {
-  xml_http_request_send_ffi(TJsValue::to_js(self), body.to_js())
+impl TXMLHttpRequest with send(self : Self, body? : &TXMLHttpRequestSendBody) -> Unit {
+  xml_http_request_send_ffi(
+    TJsValue::to_js(self),
+    match body {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

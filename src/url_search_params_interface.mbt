@@ -34,9 +34,14 @@ pub impl TURLSearchParamsNewInit for String with to_js(self : String) -> JsValue
 
 ///|
 pub fn URLSearchParams::new(
-  init? : &TURLSearchParamsNewInit = "",
+  init? : &TURLSearchParamsNewInit,
 ) -> URLSearchParams {
-  url_search_params_new_ffi(init.to_js())
+  url_search_params_new_ffi(
+    match init {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

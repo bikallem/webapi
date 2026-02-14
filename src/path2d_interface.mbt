@@ -256,7 +256,7 @@ impl TPath2D with round_rect(
   y : Double,
   w : Double,
   h : Double,
-  radii? : &TPath2DRoundRectRadii = (0 : Double),
+  radii? : &TPath2DRoundRectRadii,
 ) -> Unit {
   path2d_round_rect_ffi(
     TJsValue::to_js(self),
@@ -264,7 +264,10 @@ impl TPath2D with round_rect(
     TJsValue::to_js(y),
     TJsValue::to_js(w),
     TJsValue::to_js(h),
-    radii.to_js(),
+    match radii {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

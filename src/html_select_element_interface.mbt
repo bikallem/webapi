@@ -263,12 +263,15 @@ impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptio
 impl THTMLSelectElement with add(
   self : Self,
   element : &THTMLSelectElementAddElement,
-  before? : &THTMLSelectElementAddBefore = JsValue::null(),
+  before? : &THTMLSelectElementAddBefore,
 ) -> Unit {
   html_select_element_add_ffi(
     TJsValue::to_js(self),
     element.to_js(),
-    before.to_js(),
+    match before {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

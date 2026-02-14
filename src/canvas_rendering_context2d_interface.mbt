@@ -1635,7 +1635,7 @@ impl TCanvasRenderingContext2D with round_rect(
   y : Double,
   w : Double,
   h : Double,
-  radii? : &TCanvasRenderingContext2DRoundRectRadii = (0 : Double),
+  radii? : &TCanvasRenderingContext2DRoundRectRadii,
 ) -> Unit {
   canvas_rendering_context2d_round_rect_ffi(
     TJsValue::to_js(self),
@@ -1643,7 +1643,10 @@ impl TCanvasRenderingContext2D with round_rect(
     TJsValue::to_js(y),
     TJsValue::to_js(w),
     TJsValue::to_js(h),
-    radii.to_js(),
+    match radii {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

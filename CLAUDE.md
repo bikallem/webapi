@@ -14,6 +14,7 @@ This repository generates **type-safe MoonBit bindings** for Web Platform APIs (
 ```bash
 # Type-check MoonBit code (run frequently during development)
 moon check --target js
+moon check --target wasm-gc
 
 # Format MoonBit code
 moon fmt
@@ -32,6 +33,10 @@ cd webapi_gen && moon run cmd/main
 
 # Install npm dependencies (WebIDL specs, from webapi_gen directory)
 cd webapi_gen && npm install
+
+# Validate wasm binaries (useful for debugging wasm-gc issues)
+wasm-tools validate path/to/file.wasm
+wasm-tools print path/to/file.wasm > output.wat
 ```
 
 ## Architecture
@@ -108,10 +113,13 @@ impl TElement for Element with get_attribute(self, name) {
 ## Development Workflow
 
 1. Modify code generator in `webapi_gen/`
-2. Run `cd webapi_gen && moon run cmd/main` to regenerate bindings
-3. Run `moon check --target js` to validate generated code
-4. Run `moon fmt` to format
-5. Run `moon info --target js` to update `.mbti` interface files
+2. Run `cd webapi_gen && moon test --update` to verify and update generator tests
+3. Run `cd webapi_gen && moon clean && moon run cmd/main` to regenerate bindings (clean first to avoid stale cache)
+4. Run `moon check --target js && moon check --target wasm-gc` to validate generated code for both targets
+5. Run `moon fmt` to format
+6. Run `moon info --target js` to update `.mbti` interface files
+7. Run `cd examples && moon build --target wasm-gc --release` to build wasm examples
+8. Run `cd tests && npx playwright test` to run end-to-end tests
 
 ## Release Checklist
 
@@ -174,19 +182,15 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 
 ## Important Notes
 
-- **Target**: This library targets the JS backend only (`--target js`)
+- **Dual target**: This library targets both JS (`--target js`) and wasm-gc (`--target wasm-gc`). Always check both targets.
 - **Generated files**: Never edit files in `src/` directly; modify the generator instead
-- **MoonBit reference**: See `AGENTS.md` for comprehensive MoonBit language guide
+- **Generator caching**: Always run `moon clean` in `webapi_gen/` before `moon run cmd/main` after editing generator code, to avoid stale cached binaries producing unchanged output
 - **Pre-commit hooks**: Configure with `git config core.hooksPath .githooks`
 
 ## wasm-gc Known Issues
 
-The following example is js-only due to a wasm-gc compile error:
-
-| Example | Error | Root Cause |
-|---------|-------|------------|
-| `intersection-observer` | `expected (ref 5), got externref` | Array GC type vs externref mismatch in callback conversion |
-
-This needs separate investigation — it likely involves `IntersectionObserverRoot` (#external union type) or callback funcref type mismatches.
+All examples compile for both js and wasm-gc targets except `fetch-async` (requires async/await bridge, intentionally js-only).
 
 **JsPromise limitation**: `JsPromise::then` uses `js_any_cast` (`%identity`) to convert resolved values from `JsAny` (ref extern) to `T`. This only works for externref-compatible T (interfaces, JsValue, String). It fails for wasm value types (Unit=i32, Double=f64) and GC types (enums, Arrays). `Promise<undefined>` is mapped to `JsPromise[JsValue]` as a workaround. A general fix needs a `FromJsAny` trait with per-type conversion impls for `JsPromise[EnumType]`, `JsPromise[Array[T]]`, `JsPromise[Double]`, etc.
+
+**Trait-typed default values**: Optional parameters with trait-typed defaults (`&TFoo = value`) are stripped to plain optionals. On wasm-gc, trait references compile to GC struct closures, and the compiler's default value thunk returns externref (incompatible with GC struct types). The code generator strips these defaults and uses `Option + match` with `JsValue::undefined()` for absent values instead.

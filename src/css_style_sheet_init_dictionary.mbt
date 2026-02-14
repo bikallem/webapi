@@ -24,12 +24,15 @@ pub impl TCSSStyleSheetInitNewMedia for String with to_js(self : String) -> JsVa
 ///|
 pub fn CSSStyleSheetInit::new(
   base_url? : String,
-  media? : &TCSSStyleSheetInitNewMedia = "",
+  media? : &TCSSStyleSheetInitNewMedia,
   disabled? : Bool = false,
 ) -> CSSStyleSheetInit {
   css_style_sheet_init_ffi(
     opt_to_js(base_url),
-    media.to_js(),
+    match media {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     TJsValue::to_js(disabled),
   )
 }

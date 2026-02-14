@@ -26,38 +26,7 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
     "testMethod",
     type_registry,
   )
-  json_inspect(args, content=[
-    [
-      {
-        "name": "param",
-        "original_name": "param",
-        "type_": [
-          "Union",
-          {
-            "name": "&TTestInterfaceTestMethodParam",
-            "has_undefined": false,
-            "options": [["Primitive", "String"], ["Primitive", "UInt"]],
-          },
-        ],
-        "optional": true,
-        "variadic": false,
-        "default_value": "\"default\"",
-      },
-    ],
-    [
-      ["UnionArgTrait", ["TraitName", "TTestInterfaceTestMethodParam"]],
-      [
-        "UnionArgTraitImpl",
-        ["TypeName", "String"],
-        ["TraitName", "TTestInterfaceTestMethodParam"],
-      ],
-      [
-        "UnionArgTraitImpl",
-        ["TypeName", "UInt"],
-        ["TraitName", "TTestInterfaceTestMethodParam"],
-      ],
-    ],
-  ])
+  json_inspect(args, content=([[{"name":"param","original_name":"param","type_":["Union",{"name":"&TTestInterfaceTestMethodParam","has_undefined":false,"options":[["Primitive","String"],["Primitive","UInt"]]}],"optional":true,"variadic":false}],[["UnionArgTrait",["TraitName","TTestInterfaceTestMethodParam"]],["UnionArgTraitImpl",["TypeName","String"],["TraitName","TTestInterfaceTestMethodParam"]],["UnionArgTraitImpl",["TypeName","UInt"],["TraitName","TTestInterfaceTestMethodParam"]]]]))
 }
 
 ///|
@@ -169,16 +138,22 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|impl TEventTarget with add_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
-      #|options? : &TEventTargetAddEventListenerOptions = AddEventListenerOptions::empty()) -> Unit {
-      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
+      #|options? : &TEventTargetAddEventListenerOptions) -> Unit {
+      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), match options {
+      #|Some(v) => v.to_js()
+      #|None => JsValue::undefined()
+      #|})
       #|}
       #|
       #|/// [EventTarget.removeEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)
       #|impl TEventTarget with remove_event_listener(self : Self, 
       #|type_ : String, 
       #|callback : EventListener, 
-      #|options? : &TEventTargetRemoveEventListenerOptions = EventListenerOptions::empty()) -> Unit {
-      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), options.to_js())
+      #|options? : &TEventTargetRemoveEventListenerOptions) -> Unit {
+      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), match options {
+      #|Some(v) => v.to_js()
+      #|None => JsValue::undefined()
+      #|})
       #|}
       #|
       #|/// [EventTarget.dispatchEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)
@@ -199,6 +174,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool {
       #|  event_target_dispatch_event_ffi_js(obj, event).unsafe_cast()
       #|}
+
     ),
   )
 }
@@ -268,8 +244,11 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|/// [TestInterface.testMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/testMethod)
       #|impl TTestInterface with test_method(self : Self, 
-      #|param? : &TTestInterfaceTestMethodParam = "default") -> void {
-      #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
+      #|param? : &TTestInterfaceTestMethodParam) -> void {
+      #|  test_interface_test_method_ffi(TJsValue::to_js(self), match param {
+      #|Some(v) => v.to_js()
+      #|None => JsValue::undefined()
+      #|})
       #|}
       #|
       #|extern "js" fn test_interface_test_method_ffi_js(obj: JsValue, param: JsValue) -> JsValue = "(obj, param) => obj.testMethod(param)"
@@ -278,6 +257,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void {
       #|  test_interface_test_method_ffi_js(obj, param).unsafe_cast()
       #|}
+
     ),
   )
 }

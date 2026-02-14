@@ -631,12 +631,15 @@ impl TDocument with get_elements_by_class_name(
 impl TDocument with create_element(
   self : Self,
   local_name : String,
-  options? : &TDocumentCreateElementOptions = ElementCreationOptions::empty(),
+  options? : &TDocumentCreateElementOptions,
 ) -> Element {
   document_create_element_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(local_name),
-    options.to_js(),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 
@@ -646,13 +649,16 @@ impl TDocument with create_element_ns(
   self : Self,
   namespace_ : String,
   qualified_name : String,
-  options? : &TDocumentCreateElementNSOptions = ElementCreationOptions::empty(),
+  options? : &TDocumentCreateElementNSOptions,
 ) -> Element {
   document_create_element_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
     TJsValue::to_js(qualified_name),
-    options.to_js(),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 
@@ -702,12 +708,15 @@ impl TDocument with create_processing_instruction(
 impl TDocument with import_node(
   self : Self,
   node : &TNode,
-  options? : &TDocumentImportNodeOptions = false,
+  options? : &TDocumentImportNodeOptions,
 ) -> Node {
   document_import_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(node),
-    options.to_js(),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

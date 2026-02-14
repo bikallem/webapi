@@ -29,13 +29,16 @@ pub fn TrackEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  track? : &TTrackEventInitNewTrack = JsValue::null(),
+  track? : &TTrackEventInitNewTrack,
 ) -> TrackEventInit {
   track_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    track.to_js(),
+    match track {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

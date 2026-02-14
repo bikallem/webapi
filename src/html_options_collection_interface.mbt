@@ -103,12 +103,15 @@ impl THTMLOptionsCollection with set(
 impl THTMLOptionsCollection with add(
   self : Self,
   element : &THTMLOptionsCollectionAddElement,
-  before? : &THTMLOptionsCollectionAddBefore = JsValue::null(),
+  before? : &THTMLOptionsCollectionAddBefore,
 ) -> Unit {
   html_options_collection_add_ffi(
     TJsValue::to_js(self),
     element.to_js(),
-    before.to_js(),
+    match before {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

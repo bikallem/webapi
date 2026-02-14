@@ -817,9 +817,15 @@ impl TElement with check_visibility(
 /// [Element.scrollIntoView](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
 impl TElement with scroll_into_view(
   self : Self,
-  arg? : &TElementScrollIntoViewArg = ScrollIntoViewOptions::empty(),
+  arg? : &TElementScrollIntoViewArg,
 ) -> JsPromise[JsValue] {
-  element_scroll_into_view_ffi(TJsValue::to_js(self), arg.to_js())
+  element_scroll_into_view_ffi(
+    TJsValue::to_js(self),
+    match arg {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

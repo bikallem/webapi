@@ -22,6 +22,7 @@ fmt:
 # Update .mbti interface files
 info:
 	moon info --target js
+	moon -C webapi_gen info --target wasm-gc
 
 # Build examples for both targets
 build-examples:

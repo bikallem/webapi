@@ -75,13 +75,16 @@ impl TEventTarget with add_event_listener(
   self : Self,
   type_ : String,
   callback : EventListener,
-  options? : &TEventTargetAddEventListenerOptions = AddEventListenerOptions::empty(),
+  options? : &TEventTargetAddEventListenerOptions,
 ) -> Unit {
   event_target_add_event_listener_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
     TJsValue::to_js(callback),
-    options.to_js(),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 
@@ -91,13 +94,16 @@ impl TEventTarget with remove_event_listener(
   self : Self,
   type_ : String,
   callback : EventListener,
-  options? : &TEventTargetRemoveEventListenerOptions = EventListenerOptions::empty(),
+  options? : &TEventTargetRemoveEventListenerOptions,
 ) -> Unit {
   event_target_remove_event_listener_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
     TJsValue::to_js(callback),
-    options.to_js(),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
   )
 }
 

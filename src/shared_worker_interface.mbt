@@ -48,9 +48,15 @@ pub impl TSharedWorkerNewOptions for WorkerOptions with to_js(
 ///|
 pub fn SharedWorker::new(
   script_url : &TSharedWorkerNewScriptURL,
-  options? : &TSharedWorkerNewOptions = WorkerOptions::empty(),
+  options? : &TSharedWorkerNewOptions,
 ) -> SharedWorker {
-  shared_worker_new_ffi(script_url.to_js(), options.to_js())
+  shared_worker_new_ffi(
+    script_url.to_js(),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

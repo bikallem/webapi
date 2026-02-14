@@ -49,10 +49,11 @@ fn method_args(
     // the field becomes a plain optional; opt_to_js sends undefined when absent.
     let default_value = match (default_value, mbt_type) {
       (Some("JsValue::null()"), Primitive(_) | Enum(_)) => None
-      // On wasm-gc, Array literals (GC types) can't be used as default values for
-      // trait-typed params — the compiler creates a thunk returning externref but
-      // captures a GC struct. Strip the default; opt_to_js sends undefined when absent.
-      (Some(dv), Union(_)) if dv.has_prefix("([] :") => None
+      // On wasm-gc, trait-typed params (Union and Interface) compile to GC struct
+      // closures. Any default creates a thunk returning Option[GCStruct], but the
+      // compiler uses JsNull::null() (externref) for None, which is incompatible
+      // with GC struct types. Strip all defaults and use Option + match instead.
+      (Some(_), Union(_) | Interface(_)) => None
       _ => default_value
     }
     let union_typedef_arg = is_union_typedef_arg(type_, type_registry)

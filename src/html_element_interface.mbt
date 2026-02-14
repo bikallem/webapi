@@ -573,9 +573,15 @@ impl THTMLElement with hide_popover(self : Self) -> Unit {
 /// [HTMLElement.togglePopover](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/togglePopover)
 impl THTMLElement with toggle_popover(
   self : Self,
-  options? : &THTMLElementTogglePopoverOptions = TogglePopoverOptions::empty(),
+  options? : &THTMLElementTogglePopoverOptions,
 ) -> Bool {
-  html_element_toggle_popover_ffi(TJsValue::to_js(self), options.to_js())
+  html_element_toggle_popover_ffi(
+    TJsValue::to_js(self),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|
