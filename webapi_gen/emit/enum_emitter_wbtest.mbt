@@ -96,6 +96,8 @@ test "EnumEmitter emits enum with multiple values" {
     #|pub impl FromJsAny for ScrollBehavior with from_js_any(value : JsAny) -> ScrollBehavior {
     #|  ScrollBehavior::from_unchecked(value)
     #|}
+
+
   ))
   inspect(multi.js_ffi)
   inspect(multi.wasm_ffi)
@@ -177,6 +179,8 @@ test "EnumEmitter emits enum with empty string value" {
     #|pub impl FromJsAny for SelectionDirection with from_js_any(value : JsAny) -> SelectionDirection {
     #|  SelectionDirection::from_unchecked(value)
     #|}
+
+
   ))
 }
 
@@ -250,5 +254,7 @@ test "EnumEmitter emits enum with dash-separated values" {
     #|pub impl FromJsAny for ReferrerPolicy with from_js_any(value : JsAny) -> ReferrerPolicy {
     #|  ReferrerPolicy::from_unchecked(value)
     #|}
+
+
   ))
 }

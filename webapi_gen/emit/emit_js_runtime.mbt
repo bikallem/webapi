@@ -258,25 +258,18 @@ fn emit_js_special_operation(
 }
 
 ///|
-/// Emit a complete JS module for an interface
-fn emit_js_interface_module(
+/// Collect JS constructor entries for an interface.
+fn collect_js_constructors(
   iface : @flattened_idl.FlattenedInterface,
-) -> String {
-  let buf = StringBuilder::new()
-  buf.write_string("  webapi_\{iface.name}: {\n")
+) -> Array[String] {
   let entries : Array[String] = []
-
-  // Constructor(s)
-  let constructor_counter : Map[String, Int] = {}
-  let used_constructor_names = @hashset.new()
+  let counter : Map[String, Int] = {}
+  let used_names = @hashset.new()
   for m in iface.members {
     match m.interface_member {
       Constructor(ctor) => {
         let import_name = next_overload_name(
-          "new",
-          ctor.arguments,
-          constructor_counter,
-          used_constructor_names,
+          "new", ctor.arguments, counter, used_names,
         )
         entries.push(
           emit_js_constructor(import_name, iface.name, ctor.arguments),
@@ -285,8 +278,15 @@ fn emit_js_interface_module(
       _ => continue
     }
   }
+  entries
+}
 
-  // Attributes
+///|
+/// Collect JS attribute getter/setter entries for an interface.
+fn collect_js_attributes(
+  iface : @flattened_idl.FlattenedInterface,
+) -> Array[String] {
+  let entries : Array[String] = []
   for m in iface.members {
     match m.interface_member {
       Attribute(attr) => {
@@ -311,18 +311,22 @@ fn emit_js_interface_module(
       _ => continue
     }
   }
+  entries
+}
 
-  // Operations (methods + special operations) - disambiguate overloaded names
-  let method_counter : Map[String, Int] = {}
-  let used_method_names = @hashset.new()
+///|
+/// Collect JS operation entries (methods + special operations) for an interface.
+fn collect_js_operations(
+  iface : @flattened_idl.FlattenedInterface,
+) -> Array[String] {
+  let entries : Array[String] = []
+  let counter : Map[String, Int] = {}
+  let used_names = @hashset.new()
   for m in iface.members {
     match m.interface_member {
       RegularOperation(op) => {
         let import_name = next_overload_name(
-          op.name,
-          op.arguments,
-          method_counter,
-          used_method_names,
+          op.name, op.arguments, counter, used_names,
         )
         entries.push(
           emit_js_method(
@@ -336,42 +340,45 @@ fn emit_js_interface_module(
         )
       }
       SpecialOperation(op) if op.name is Some(_) => {
-        // Named special operation → emit as regular method call
         let name = op.name.unwrap()
         let import_name = next_overload_name(
-          name,
-          op.arguments,
-          method_counter,
-          used_method_names,
+          name, op.arguments, counter, used_names,
         )
         entries.push(
           emit_js_method(
-            import_name,
-            name,
-            op.arguments,
-            false,
+            import_name, name, op.arguments, false,
             is_bigint=is_bigint_type(op.return_type),
           ),
         )
       }
       SpecialOperation(op) => {
-        // Unnamed special operation → bracket notation
         let base_name = match op.special {
           Getter => "get"
           Setter => "set"
           Deleter => "delete_"
         }
         let import_name = next_overload_name(
-          base_name,
-          op.arguments,
-          method_counter,
-          used_method_names,
+          base_name, op.arguments, counter, used_names,
         )
         entries.push(emit_js_special_operation(import_name, op))
       }
       _ => continue
     }
   }
+  entries
+}
+
+///|
+/// Emit a complete JS module for an interface
+fn emit_js_interface_module(
+  iface : @flattened_idl.FlattenedInterface,
+) -> String {
+  let buf = StringBuilder::new()
+  buf.write_string("  webapi_\{iface.name}: {\n")
+  let entries : Array[String] = []
+  entries.push_iter(collect_js_constructors(iface).iter())
+  entries.push_iter(collect_js_attributes(iface).iter())
+  entries.push_iter(collect_js_operations(iface).iter())
   buf.write_string(entries.join(",\n"))
   if entries.length() > 0 {
     buf.write_string("\n")

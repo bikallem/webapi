@@ -432,93 +432,75 @@ fn render_interface_definition(
 }
 
 ///|
+/// Generate a match-self block over enum variants.
+fn enum_match_self(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+  arm_fn : (String, EnumVariantEmit) -> String,
+) -> Unit {
+  buf.write_string("  match self {\n")
+  for variant in variants {
+    buf.write_string("    \{arm_fn(name, variant)}\n")
+  }
+  buf.write_string("  }\n")
+}
+
+///|
+/// Generate a match-value block over enum variants with a fallback arm.
+fn enum_match_value(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+  arm_fn : (String, EnumVariantEmit) -> String,
+  fallback : String,
+) -> Unit {
+  buf.write_string("  match value {\n")
+  for variant in variants {
+    buf.write_string("    \{arm_fn(name, variant)}\n")
+  }
+  buf.write_string("    \{fallback}\n  }\n")
+}
+
+///|
 fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
   let buf = StringBuilder::new()
   buf.write_string("pub(all) enum \{name} {\n")
   for variant in variants {
     buf.write_string("  \{variant.variant_name}\n")
   }
-  buf
-  ..write_string("} derive(Eq)")
-  ..write_string("\n\n")
-
+  buf.write_string("} derive(Eq)\n\n")
   // Manual Show implementation: avoids derive(Show) which generates a to_string()
   // that triggers a wasm-gc compiler bug (externref vs (ref extern) in match returns).
-  ..write_string(
+  buf.write_string(
     "pub impl Show for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
   )
-  .write_string("  match self {\n")
-  for variant in variants {
-    buf.write_string(
-      "    \{name}::\{variant.variant_name} => logger.write_string(\"\{variant.variant_name}\")\n",
-    )
-  }
-  buf
-  ..write_string("  }\n")
-  ..write_string("}")
-  ..write_string("\n\n")
-  ..write_string(
-    "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
-  )
-  .write_string("  match self {\n")
-  for variant in variants {
-    buf.write_string(
-      "    \{name}::\{variant.variant_name} => TJsValue::to_js(\"\{variant.original_value}\")\n",
-    )
-  }
-  buf
-  ..write_string("  }\n")
-  ..write_string("}")
-  ..write_string("\n\n")
-  ..write_string("pub fn \{name}::from(value: String) -> \{name}? {\n")
-  .write_string("  match value {\n")
-  for variant in variants {
-    buf.write_string(
-      "    \"\{variant.original_value}\" => Some(\{name}::\{variant.variant_name})\n",
-    )
-  }
-  buf
-  ..write_string("    _ => None\n")
-  ..write_string("  }\n")
-  ..write_string("}")
-  ..write_string("\n\n")
-
+  enum_match_self(buf, name, variants, fn(n, v) {
+    "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")"
+  })
+  buf.write_string("}\n\npub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n")
+  enum_match_self(buf, name, variants, fn(n, v) {
+    "\{n}::\{v.variant_name} => TJsValue::to_js(\"\{v.original_value}\")"
+  })
+  buf.write_string("}\n\npub fn \{name}::from(value: String) -> \{name}? {\n")
+  enum_match_value(buf, name, variants, fn(n, v) {
+    "\"\{v.original_value}\" => Some(\{n}::\{v.variant_name})"
+  }, "_ => None")
   // from_unchecked() converts a string to the enum, aborting on unknown values.
   // Used by wasm-gc FFI to avoid Option[Enum] which triggers a compiler bug
   // (None uses externref null but Option[Enum] expects i32 representation).
-  ..write_string("fn \{name}::from_unchecked(value: String) -> \{name} {\n")
-  .write_string("  match value {\n")
-  for variant in variants {
-    buf.write_string(
-      "    \"\{variant.original_value}\" => \{name}::\{variant.variant_name}\n",
-    )
-  }
-  buf
-  ..write_string("    _ => abort(\"unknown enum value\")\n")
-  ..write_string("  }\n")
-  ..write_string("}")
-  ..write_string("\n\n")
-
+  buf.write_string("}\n\nfn \{name}::from_unchecked(value: String) -> \{name} {\n")
+  enum_match_value(buf, name, variants, fn(n, v) {
+    "\"\{v.original_value}\" => \{n}::\{v.variant_name}"
+  }, "_ => abort(\"unknown enum value\")")
   // value() returns the IDL string value for each variant.
   // Uses StringBuilder to avoid wasm-gc compiler bug with match returning String.
-  ..write_string("pub fn \{name}::value(self: \{name}) -> String {\n")
-  .write_string("  let buf = StringBuilder::new()\n  match self {\n")
-  for variant in variants {
-    buf.write_string(
-      "    \{name}::\{variant.variant_name} => buf.write_string(\"\{variant.original_value}\")\n",
-    )
-  }
-  buf
-  ..write_string("  }\n")
-  ..write_string("  buf.to_string()\n")
-  .write_string("}")
-  buf
-  ..write_string("\n\n")
-  ..write_string(
-    "pub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n",
-  )
-  .write_string("  \{name}::from_unchecked(value)\n")
-  buf.write_string("}")
+  buf.write_string("}\n\npub fn \{name}::value(self: \{name}) -> String {\n  let buf = StringBuilder::new()\n")
+  enum_match_self(buf, name, variants, fn(n, v) {
+    "\{n}::\{v.variant_name} => buf.write_string(\"\{v.original_value}\")"
+  })
+  buf.write_string("  buf.to_string()\n}")
+  buf.write_string("\n\npub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n  \{name}::from_unchecked(value)\n}")
   buf.to_string()
 }
 
