@@ -27,6 +27,16 @@ pub impl THTMLAllCollection for HTMLAllCollection
 pub type HTMLAllCollectionNamedItem
 
 ///|
+pub impl TJsValue for HTMLAllCollectionNamedItem with to_js(
+  self : HTMLAllCollectionNamedItem,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for HTMLAllCollectionNamedItem with from_js_any(
+  value : JsAny,
+) -> HTMLAllCollectionNamedItem = "%identity"
+
+///|
 pub fn[T : THTMLAllCollectionNamedItem] HTMLAllCollectionNamedItem::into(
   self : HTMLAllCollectionNamedItem,
 ) -> T = "%identity"
@@ -53,6 +63,14 @@ pub impl THTMLAllCollectionNamedItem for Element with to_js(self : Element) -> J
 /// [HTMLAllCollectionItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollectionItem)
 #external
 pub type HTMLAllCollectionItem
+
+///|
+pub impl TJsValue for HTMLAllCollectionItem with to_js(
+  self : HTMLAllCollectionItem,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for HTMLAllCollectionItem with from_js_any(value : JsAny) -> HTMLAllCollectionItem = "%identity"
 
 ///|
 pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::into(

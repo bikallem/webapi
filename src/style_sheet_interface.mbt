@@ -25,6 +25,12 @@ pub impl TStyleSheet for StyleSheet
 pub type StyleSheetOwnerNode
 
 ///|
+pub impl TJsValue for StyleSheetOwnerNode with to_js(self : StyleSheetOwnerNode) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for StyleSheetOwnerNode with from_js_any(value : JsAny) -> StyleSheetOwnerNode = "%identity"
+
+///|
 pub fn[T : TStyleSheetOwnerNode] StyleSheetOwnerNode::into(
   self : StyleSheetOwnerNode,
 ) -> T = "%identity"

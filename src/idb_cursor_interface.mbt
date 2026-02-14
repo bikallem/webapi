@@ -25,6 +25,12 @@ pub impl TIDBCursor for IDBCursor
 pub type IDBCursorSource
 
 ///|
+pub impl TJsValue for IDBCursorSource with to_js(self : IDBCursorSource) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for IDBCursorSource with from_js_any(value : JsAny) -> IDBCursorSource = "%identity"
+
+///|
 pub fn[T : TIDBCursorSource] IDBCursorSource::into(self : IDBCursorSource) -> T = "%identity"
 
 ///|

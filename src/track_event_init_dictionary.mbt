@@ -70,6 +70,14 @@ pub impl TTrackEventInitGetTrack for TextTrack with to_js(self : TextTrack) -> J
 pub type TrackEventInitGetTrack
 
 ///|
+pub impl TJsValue for TrackEventInitGetTrack with to_js(
+  self : TrackEventInitGetTrack,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for TrackEventInitGetTrack with from_js_any(value : JsAny) -> TrackEventInitGetTrack = "%identity"
+
+///|
 pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::into(
   self : TrackEventInitGetTrack,
 ) -> T = "%identity"

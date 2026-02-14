@@ -27,6 +27,14 @@ pub impl TSVGAnimatedString for SVGAnimatedString
 pub type SVGAnimatedStringBaseVal
 
 ///|
+pub impl TJsValue for SVGAnimatedStringBaseVal with to_js(
+  self : SVGAnimatedStringBaseVal,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for SVGAnimatedStringBaseVal with from_js_any(value : JsAny) -> SVGAnimatedStringBaseVal = "%identity"
+
+///|
 pub fn[T : TSVGAnimatedStringBaseVal] SVGAnimatedStringBaseVal::into(
   self : SVGAnimatedStringBaseVal,
 ) -> T = "%identity"

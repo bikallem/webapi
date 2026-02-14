@@ -29,6 +29,16 @@ pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 pub type CanvasRenderingContext2DStrokeStyle
 
 ///|
+pub impl TJsValue for CanvasRenderingContext2DStrokeStyle with to_js(
+  self : CanvasRenderingContext2DStrokeStyle,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for CanvasRenderingContext2DStrokeStyle with from_js_any(
+  value : JsAny,
+) -> CanvasRenderingContext2DStrokeStyle = "%identity"
+
+///|
 pub fn[T : TCanvasRenderingContext2DStrokeStyle] CanvasRenderingContext2DStrokeStyle::into(
   self : CanvasRenderingContext2DStrokeStyle,
 ) -> T = "%identity"
@@ -62,6 +72,16 @@ pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
 /// [CanvasRenderingContext2DFillStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DFillStyle)
 #external
 pub type CanvasRenderingContext2DFillStyle
+
+///|
+pub impl TJsValue for CanvasRenderingContext2DFillStyle with to_js(
+  self : CanvasRenderingContext2DFillStyle,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for CanvasRenderingContext2DFillStyle with from_js_any(
+  value : JsAny,
+) -> CanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
 pub fn[T : TCanvasRenderingContext2DFillStyle] CanvasRenderingContext2DFillStyle::into(

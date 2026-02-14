@@ -82,6 +82,16 @@ pub impl TComputedEffectTimingGetDuration for String with to_js(self : String) -
 pub type ComputedEffectTimingGetDuration
 
 ///|
+pub impl TJsValue for ComputedEffectTimingGetDuration with to_js(
+  self : ComputedEffectTimingGetDuration,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for ComputedEffectTimingGetDuration with from_js_any(
+  value : JsAny,
+) -> ComputedEffectTimingGetDuration = "%identity"
+
+///|
 pub fn[T : TComputedEffectTimingGetDuration] ComputedEffectTimingGetDuration::into(
   self : ComputedEffectTimingGetDuration,
 ) -> T = "%identity"

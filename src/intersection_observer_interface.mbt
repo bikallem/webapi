@@ -40,6 +40,14 @@ pub fn IntersectionObserver::new(
 pub type IntersectionObserverRoot
 
 ///|
+pub impl TJsValue for IntersectionObserverRoot with to_js(
+  self : IntersectionObserverRoot,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for IntersectionObserverRoot with from_js_any(value : JsAny) -> IntersectionObserverRoot = "%identity"
+
+///|
 pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::into(
   self : IntersectionObserverRoot,
 ) -> T = "%identity"

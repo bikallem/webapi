@@ -39,6 +39,12 @@ pub fn HTMLElement::new() -> HTMLElement {
 pub type HTMLElementHidden
 
 ///|
+pub impl TJsValue for HTMLElementHidden with to_js(self : HTMLElementHidden) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for HTMLElementHidden with from_js_any(value : JsAny) -> HTMLElementHidden = "%identity"
+
+///|
 pub fn[T : THTMLElementHidden] HTMLElementHidden::into(
   self : HTMLElementHidden,
 ) -> T = "%identity"

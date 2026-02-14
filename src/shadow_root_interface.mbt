@@ -47,6 +47,12 @@ pub impl TShadowRootSetHTMLUnsafeHtml for String with to_js(self : String) -> Js
 pub type ShadowRootInnerHTML
 
 ///|
+pub impl TJsValue for ShadowRootInnerHTML with to_js(self : ShadowRootInnerHTML) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for ShadowRootInnerHTML with from_js_any(value : JsAny) -> ShadowRootInnerHTML = "%identity"
+
+///|
 pub fn[T : TShadowRootInnerHTML] ShadowRootInnerHTML::into(
   self : ShadowRootInnerHTML,
 ) -> T = "%identity"

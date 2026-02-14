@@ -70,6 +70,16 @@ pub impl TIDBObjectStoreParametersGetKeyPath for Array[String] with to_js(
 pub type IDBObjectStoreParametersGetKeyPath
 
 ///|
+pub impl TJsValue for IDBObjectStoreParametersGetKeyPath with to_js(
+  self : IDBObjectStoreParametersGetKeyPath,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for IDBObjectStoreParametersGetKeyPath with from_js_any(
+  value : JsAny,
+) -> IDBObjectStoreParametersGetKeyPath = "%identity"
+
+///|
 pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPath::into(
   self : IDBObjectStoreParametersGetKeyPath,
 ) -> T = "%identity"

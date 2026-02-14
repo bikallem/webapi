@@ -82,6 +82,16 @@ pub impl TKeyframeEffectOptionsGetDuration for String with to_js(self : String) 
 pub type KeyframeEffectOptionsGetDuration
 
 ///|
+pub impl TJsValue for KeyframeEffectOptionsGetDuration with to_js(
+  self : KeyframeEffectOptionsGetDuration,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for KeyframeEffectOptionsGetDuration with from_js_any(
+  value : JsAny,
+) -> KeyframeEffectOptionsGetDuration = "%identity"
+
+///|
 pub fn[T : TKeyframeEffectOptionsGetDuration] KeyframeEffectOptionsGetDuration::into(
   self : KeyframeEffectOptionsGetDuration,
 ) -> T = "%identity"

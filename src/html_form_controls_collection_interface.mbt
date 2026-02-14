@@ -34,6 +34,16 @@ pub impl THTMLCollection for HTMLFormControlsCollection
 pub type HTMLFormControlsCollectionNamedItem
 
 ///|
+pub impl TJsValue for HTMLFormControlsCollectionNamedItem with to_js(
+  self : HTMLFormControlsCollectionNamedItem,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for HTMLFormControlsCollectionNamedItem with from_js_any(
+  value : JsAny,
+) -> HTMLFormControlsCollectionNamedItem = "%identity"
+
+///|
 pub fn[T : THTMLFormControlsCollectionNamedItem] HTMLFormControlsCollectionNamedItem::into(
   self : HTMLFormControlsCollectionNamedItem,
 ) -> T = "%identity"

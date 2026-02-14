@@ -31,6 +31,16 @@ pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2
 pub type OffscreenCanvasRenderingContext2DStrokeStyle
 
 ///|
+pub impl TJsValue for OffscreenCanvasRenderingContext2DStrokeStyle with to_js(
+  self : OffscreenCanvasRenderingContext2DStrokeStyle,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for OffscreenCanvasRenderingContext2DStrokeStyle with from_js_any(
+  value : JsAny,
+) -> OffscreenCanvasRenderingContext2DStrokeStyle = "%identity"
+
+///|
 pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle] OffscreenCanvasRenderingContext2DStrokeStyle::into(
   self : OffscreenCanvasRenderingContext2DStrokeStyle,
 ) -> T = "%identity"
@@ -64,6 +74,16 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern with to
 /// [OffscreenCanvasRenderingContext2DFillStyle](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2DFillStyle)
 #external
 pub type OffscreenCanvasRenderingContext2DFillStyle
+
+///|
+pub impl TJsValue for OffscreenCanvasRenderingContext2DFillStyle with to_js(
+  self : OffscreenCanvasRenderingContext2DFillStyle,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for OffscreenCanvasRenderingContext2DFillStyle with from_js_any(
+  value : JsAny,
+) -> OffscreenCanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
 pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRenderingContext2DFillStyle::into(

@@ -42,6 +42,14 @@ pub fn HTMLFormElement::new() -> HTMLFormElement {
 pub type HTMLFormElementGetByName
 
 ///|
+pub impl TJsValue for HTMLFormElementGetByName with to_js(
+  self : HTMLFormElementGetByName,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for HTMLFormElementGetByName with from_js_any(value : JsAny) -> HTMLFormElementGetByName = "%identity"
+
+///|
 pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::into(
   self : HTMLFormElementGetByName,
 ) -> T = "%identity"

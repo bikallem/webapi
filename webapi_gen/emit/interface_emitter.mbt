@@ -254,13 +254,17 @@ fn emit_constructor(
 }
 
 ///|
-/// Emit union return type support (External, IntoMethod, IsUndefinedMethod, UnionArgTraitImpl).
+/// Emit union return type support (External, ImplTJsValue, ImplFromJsAny, IntoMethod, IsUndefinedMethod, UnionArgTraitImpl).
 fn emit_union_return_type(
   return_type : @type_mapping.ArgMbtType,
   emits : Array[Emit],
 ) -> Unit {
   if return_type is @type_mapping.ArgMbtType::Union({ name, has_undefined, .. }) {
-    emits..push(Emit::External(name)).push(Emit::IntoMethod(name))
+    emits
+    ..push(Emit::External(name))
+    ..push(Emit::ImplTJsValue(name))
+    ..push(Emit::ImplFromJsAny(name))
+    .push(Emit::IntoMethod(name))
     if has_undefined {
       emits.push(Emit::IsUndefinedMethod(name))
     }

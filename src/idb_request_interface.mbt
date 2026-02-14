@@ -28,6 +28,12 @@ pub impl TEventTarget for IDBRequest
 pub type IDBRequestSource
 
 ///|
+pub impl TJsValue for IDBRequestSource with to_js(self : IDBRequestSource) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for IDBRequestSource with from_js_any(value : JsAny) -> IDBRequestSource = "%identity"
+
+///|
 pub fn[T : TIDBRequestSource] IDBRequestSource::into(
   self : IDBRequestSource,
 ) -> T = "%identity"

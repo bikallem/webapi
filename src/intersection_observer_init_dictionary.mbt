@@ -94,6 +94,16 @@ pub impl TIntersectionObserverInitGetRoot for Document with to_js(
 pub type IntersectionObserverInitGetRoot
 
 ///|
+pub impl TJsValue for IntersectionObserverInitGetRoot with to_js(
+  self : IntersectionObserverInitGetRoot,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for IntersectionObserverInitGetRoot with from_js_any(
+  value : JsAny,
+) -> IntersectionObserverInitGetRoot = "%identity"
+
+///|
 pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::into(
   self : IntersectionObserverInitGetRoot,
 ) -> T = "%identity"
@@ -124,6 +134,16 @@ pub impl TIntersectionObserverInitGetThreshold for Array[Double] with to_js(
 /// [IntersectionObserverInitGetThreshold](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverInitGetThreshold)
 #external
 pub type IntersectionObserverInitGetThreshold
+
+///|
+pub impl TJsValue for IntersectionObserverInitGetThreshold with to_js(
+  self : IntersectionObserverInitGetThreshold,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for IntersectionObserverInitGetThreshold with from_js_any(
+  value : JsAny,
+) -> IntersectionObserverInitGetThreshold = "%identity"
 
 ///|
 pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThreshold::into(

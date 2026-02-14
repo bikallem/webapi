@@ -114,6 +114,16 @@ pub impl TBasePropertyIndexedKeyframeGetOffset for Array[Double] with to_js(
 pub type BasePropertyIndexedKeyframeGetOffset
 
 ///|
+pub impl TJsValue for BasePropertyIndexedKeyframeGetOffset with to_js(
+  self : BasePropertyIndexedKeyframeGetOffset,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for BasePropertyIndexedKeyframeGetOffset with from_js_any(
+  value : JsAny,
+) -> BasePropertyIndexedKeyframeGetOffset = "%identity"
+
+///|
 pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::into(
   self : BasePropertyIndexedKeyframeGetOffset,
 ) -> T = "%identity"
@@ -144,6 +154,16 @@ pub impl TBasePropertyIndexedKeyframeGetEasing for Array[String] with to_js(
 pub type BasePropertyIndexedKeyframeGetEasing
 
 ///|
+pub impl TJsValue for BasePropertyIndexedKeyframeGetEasing with to_js(
+  self : BasePropertyIndexedKeyframeGetEasing,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for BasePropertyIndexedKeyframeGetEasing with from_js_any(
+  value : JsAny,
+) -> BasePropertyIndexedKeyframeGetEasing = "%identity"
+
+///|
 pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::into(
   self : BasePropertyIndexedKeyframeGetEasing,
 ) -> T = "%identity"
@@ -172,6 +192,16 @@ pub impl TBasePropertyIndexedKeyframeGetComposite for Array[
 /// [BasePropertyIndexedKeyframeGetComposite](https://developer.mozilla.org/en-US/docs/Web/API/BasePropertyIndexedKeyframeGetComposite)
 #external
 pub type BasePropertyIndexedKeyframeGetComposite
+
+///|
+pub impl TJsValue for BasePropertyIndexedKeyframeGetComposite with to_js(
+  self : BasePropertyIndexedKeyframeGetComposite,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for BasePropertyIndexedKeyframeGetComposite with from_js_any(
+  value : JsAny,
+) -> BasePropertyIndexedKeyframeGetComposite = "%identity"
 
 ///|
 pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::into(

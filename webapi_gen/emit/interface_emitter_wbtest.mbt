@@ -353,6 +353,10 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|#external
       #|pub type TestInterfaceTestMethod
       #|
+      #|pub impl TJsValue for TestInterfaceTestMethod with to_js(self: TestInterfaceTestMethod) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for TestInterfaceTestMethod with from_js_any(value : JsAny) -> TestInterfaceTestMethod = "%identity"
+      #|
       #|pub fn[T: TTestInterfaceTestMethod] TestInterfaceTestMethod::into(self : TestInterfaceTestMethod) -> T = "%identity"
       #|
       #|pub impl TTestInterfaceTestMethod for TestInterfaceTestMethod with to_js(self : TestInterfaceTestMethod) -> JsValue = "%identity"

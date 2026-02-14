@@ -33,12 +33,10 @@ fn create_text_file_ffi(
 ) -> @webapi.File = "webapi_FileApiExample" "createTextFile"
 
 ///|
+/// Convert FileReaderResult to String via FFI (externref → ref extern on wasm-gc).
 fn file_reader_result_to_string(result : @webapi.FileReaderResult) -> String {
-  file_reader_result_to_string_ffi(result_to_jsvalue(result))
+  file_reader_result_to_string_ffi(@webapi.TJsValue::to_js(result))
 }
-
-///|
-fn result_to_jsvalue(result : @webapi.FileReaderResult) -> @webapi.JsValue = "%identity"
 
 ///|
 fn file_reader_result_to_string_ffi(result : @webapi.JsValue) -> String = "webapi_FileApiExample" "resultToString"

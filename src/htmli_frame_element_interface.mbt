@@ -44,6 +44,14 @@ pub fn HTMLIFrameElement::new() -> HTMLIFrameElement {
 pub type HTMLIFrameElementSrcdoc
 
 ///|
+pub impl TJsValue for HTMLIFrameElementSrcdoc with to_js(
+  self : HTMLIFrameElementSrcdoc,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for HTMLIFrameElementSrcdoc with from_js_any(value : JsAny) -> HTMLIFrameElementSrcdoc = "%identity"
+
+///|
 pub fn[T : THTMLIFrameElementSrcdoc] HTMLIFrameElementSrcdoc::into(
   self : HTMLIFrameElementSrcdoc,
 ) -> T = "%identity"

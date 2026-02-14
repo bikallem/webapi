@@ -70,6 +70,12 @@ pub impl TElementSetHTMLUnsafeHtml for String with to_js(self : String) -> JsVal
 pub type ElementInnerHTML
 
 ///|
+pub impl TJsValue for ElementInnerHTML with to_js(self : ElementInnerHTML) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for ElementInnerHTML with from_js_any(value : JsAny) -> ElementInnerHTML = "%identity"
+
+///|
 pub fn[T : TElementInnerHTML] ElementInnerHTML::into(
   self : ElementInnerHTML,
 ) -> T = "%identity"
@@ -94,6 +100,12 @@ pub impl TElementInnerHTML for String with to_js(self : String) -> JsValue = "%i
 /// [ElementOuterHTML](https://developer.mozilla.org/en-US/docs/Web/API/ElementOuterHTML)
 #external
 pub type ElementOuterHTML
+
+///|
+pub impl TJsValue for ElementOuterHTML with to_js(self : ElementOuterHTML) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for ElementOuterHTML with from_js_any(value : JsAny) -> ElementOuterHTML = "%identity"
 
 ///|
 pub fn[T : TElementOuterHTML] ElementOuterHTML::into(

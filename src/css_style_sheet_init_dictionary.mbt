@@ -62,6 +62,14 @@ pub impl TCSSStyleSheetInitGetMedia for String with to_js(self : String) -> JsVa
 pub type CSSStyleSheetInitGetMedia
 
 ///|
+pub impl TJsValue for CSSStyleSheetInitGetMedia with to_js(
+  self : CSSStyleSheetInitGetMedia,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for CSSStyleSheetInitGetMedia with from_js_any(value : JsAny) -> CSSStyleSheetInitGetMedia = "%identity"
+
+///|
 pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::into(
   self : CSSStyleSheetInitGetMedia,
 ) -> T = "%identity"

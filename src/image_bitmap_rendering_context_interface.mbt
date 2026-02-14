@@ -31,6 +31,16 @@ pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 pub type ImageBitmapRenderingContextCanvas
 
 ///|
+pub impl TJsValue for ImageBitmapRenderingContextCanvas with to_js(
+  self : ImageBitmapRenderingContextCanvas,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for ImageBitmapRenderingContextCanvas with from_js_any(
+  value : JsAny,
+) -> ImageBitmapRenderingContextCanvas = "%identity"
+
+///|
 pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas::into(
   self : ImageBitmapRenderingContextCanvas,
 ) -> T = "%identity"

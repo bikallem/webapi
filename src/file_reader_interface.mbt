@@ -42,6 +42,12 @@ pub const FILE_READER_DONE : UInt = 2
 pub type FileReaderResult
 
 ///|
+pub impl TJsValue for FileReaderResult with to_js(self : FileReaderResult) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for FileReaderResult with from_js_any(value : JsAny) -> FileReaderResult = "%identity"
+
+///|
 pub fn[T : TFileReaderResult] FileReaderResult::into(
   self : FileReaderResult,
 ) -> T = "%identity"

@@ -36,6 +36,12 @@ pub fn TrackEvent::new(
 pub type TrackEventTrack
 
 ///|
+pub impl TJsValue for TrackEventTrack with to_js(self : TrackEventTrack) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for TrackEventTrack with from_js_any(value : JsAny) -> TrackEventTrack = "%identity"
+
+///|
 pub fn[T : TTrackEventTrack] TrackEventTrack::into(self : TrackEventTrack) -> T = "%identity"
 
 ///|

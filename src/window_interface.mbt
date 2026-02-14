@@ -28,6 +28,12 @@ pub impl TEventTarget for Window
 pub type WindowEvent
 
 ///|
+pub impl TJsValue for WindowEvent with to_js(self : WindowEvent) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for WindowEvent with from_js_any(value : JsAny) -> WindowEvent = "%identity"
+
+///|
 pub fn[T : TWindowEvent] WindowEvent::into(self : WindowEvent) -> T = "%identity"
 
 ///|

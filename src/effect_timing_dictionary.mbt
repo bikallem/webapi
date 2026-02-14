@@ -76,6 +76,14 @@ pub impl TEffectTimingGetDuration for String with to_js(self : String) -> JsValu
 pub type EffectTimingGetDuration
 
 ///|
+pub impl TJsValue for EffectTimingGetDuration with to_js(
+  self : EffectTimingGetDuration,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for EffectTimingGetDuration with from_js_any(value : JsAny) -> EffectTimingGetDuration = "%identity"
+
+///|
 pub fn[T : TEffectTimingGetDuration] EffectTimingGetDuration::into(
   self : EffectTimingGetDuration,
 ) -> T = "%identity"

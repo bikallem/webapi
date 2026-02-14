@@ -78,6 +78,16 @@ pub impl TOptionalEffectTimingGetDuration for String with to_js(self : String) -
 pub type OptionalEffectTimingGetDuration
 
 ///|
+pub impl TJsValue for OptionalEffectTimingGetDuration with to_js(
+  self : OptionalEffectTimingGetDuration,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for OptionalEffectTimingGetDuration with from_js_any(
+  value : JsAny,
+) -> OptionalEffectTimingGetDuration = "%identity"
+
+///|
 pub fn[T : TOptionalEffectTimingGetDuration] OptionalEffectTimingGetDuration::into(
   self : OptionalEffectTimingGetDuration,
 ) -> T = "%identity"

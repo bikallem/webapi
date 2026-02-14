@@ -34,6 +34,14 @@ pub fn CustomElementRegistry::new() -> CustomElementRegistry {
 pub type CustomElementRegistryGet
 
 ///|
+pub impl TJsValue for CustomElementRegistryGet with to_js(
+  self : CustomElementRegistryGet,
+) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for CustomElementRegistryGet with from_js_any(value : JsAny) -> CustomElementRegistryGet = "%identity"
+
+///|
 pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::into(
   self : CustomElementRegistryGet,
 ) -> T = "%identity"
