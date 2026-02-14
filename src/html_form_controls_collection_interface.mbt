@@ -44,9 +44,16 @@ pub impl FromJsAny for HTMLFormControlsCollectionNamedItem with from_js_any(
 ) -> HTMLFormControlsCollectionNamedItem = "%identity"
 
 ///|
-pub fn[T : THTMLFormControlsCollectionNamedItem] HTMLFormControlsCollectionNamedItem::into(
+pub fn[T : THTMLFormControlsCollectionNamedItem + FromJsAny] HTMLFormControlsCollectionNamedItem::into(
   self : HTMLFormControlsCollectionNamedItem,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THTMLFormControlsCollectionNamedItem] HTMLFormControlsCollectionNamedItem::from(
+  value : T,
+) -> HTMLFormControlsCollectionNamedItem = "%identity"
 
 ///|
 pub impl THTMLFormControlsCollectionNamedItem for HTMLFormControlsCollectionNamedItem with to_js(

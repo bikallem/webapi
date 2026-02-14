@@ -19,9 +19,16 @@ pub(open) trait TMessageEventSource {
 }
 
 ///|
-pub fn[T : TMessageEventSource] MessageEventSource::into(
+pub fn[T : TMessageEventSource + FromJsAny] MessageEventSource::into(
   self : MessageEventSource,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TMessageEventSource] MessageEventSource::from(
+  value : T,
+) -> MessageEventSource = "%identity"
 
 ///|
 pub impl TMessageEventSource for MessageEventSource with to_js(

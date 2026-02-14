@@ -50,9 +50,16 @@ pub impl TJsValue for HTMLFormElementGetByName with to_js(
 pub impl FromJsAny for HTMLFormElementGetByName with from_js_any(value : JsAny) -> HTMLFormElementGetByName = "%identity"
 
 ///|
-pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::into(
+pub fn[T : THTMLFormElementGetByName + FromJsAny] HTMLFormElementGetByName::into(
   self : HTMLFormElementGetByName,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::from(
+  value : T,
+) -> HTMLFormElementGetByName = "%identity"
 
 ///|
 pub impl THTMLFormElementGetByName for HTMLFormElementGetByName with to_js(

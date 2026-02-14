@@ -53,9 +53,16 @@ pub impl TJsValue for ShadowRootInnerHTML with to_js(self : ShadowRootInnerHTML)
 pub impl FromJsAny for ShadowRootInnerHTML with from_js_any(value : JsAny) -> ShadowRootInnerHTML = "%identity"
 
 ///|
-pub fn[T : TShadowRootInnerHTML] ShadowRootInnerHTML::into(
+pub fn[T : TShadowRootInnerHTML + FromJsAny] ShadowRootInnerHTML::into(
   self : ShadowRootInnerHTML,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TShadowRootInnerHTML] ShadowRootInnerHTML::from(
+  value : T,
+) -> ShadowRootInnerHTML = "%identity"
 
 ///|
 pub impl TShadowRootInnerHTML for ShadowRootInnerHTML with to_js(

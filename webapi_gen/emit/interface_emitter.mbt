@@ -264,7 +264,8 @@ fn emit_union_return_type(
     ..push(Emit::External(name))
     ..push(Emit::ImplTJsValue(name))
     ..push(Emit::ImplFromJsAny(name))
-    .push(Emit::IntoMethod(name))
+    ..push(Emit::UnionIntoMethod(name))
+    .push(Emit::FromMethod(name))
     if has_undefined {
       emits.push(Emit::IsUndefinedMethod(name))
     }

@@ -42,7 +42,16 @@ pub impl TJsValue for TrackEventTrack with to_js(self : TrackEventTrack) -> JsVa
 pub impl FromJsAny for TrackEventTrack with from_js_any(value : JsAny) -> TrackEventTrack = "%identity"
 
 ///|
-pub fn[T : TTrackEventTrack] TrackEventTrack::into(self : TrackEventTrack) -> T = "%identity"
+pub fn[T : TTrackEventTrack + FromJsAny] TrackEventTrack::into(
+  self : TrackEventTrack,
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TTrackEventTrack] TrackEventTrack::from(
+  value : T,
+) -> TrackEventTrack = "%identity"
 
 ///|
 pub impl TTrackEventTrack for TrackEventTrack with to_js(self : TrackEventTrack) -> JsValue = "%identity"

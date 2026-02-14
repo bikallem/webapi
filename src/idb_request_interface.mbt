@@ -34,9 +34,16 @@ pub impl TJsValue for IDBRequestSource with to_js(self : IDBRequestSource) -> Js
 pub impl FromJsAny for IDBRequestSource with from_js_any(value : JsAny) -> IDBRequestSource = "%identity"
 
 ///|
-pub fn[T : TIDBRequestSource] IDBRequestSource::into(
+pub fn[T : TIDBRequestSource + FromJsAny] IDBRequestSource::into(
   self : IDBRequestSource,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TIDBRequestSource] IDBRequestSource::from(
+  value : T,
+) -> IDBRequestSource = "%identity"
 
 ///|
 pub impl TIDBRequestSource for IDBRequestSource with to_js(

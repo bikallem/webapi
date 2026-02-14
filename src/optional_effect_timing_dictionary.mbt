@@ -88,9 +88,16 @@ pub impl FromJsAny for OptionalEffectTimingGetDuration with from_js_any(
 ) -> OptionalEffectTimingGetDuration = "%identity"
 
 ///|
-pub fn[T : TOptionalEffectTimingGetDuration] OptionalEffectTimingGetDuration::into(
+pub fn[T : TOptionalEffectTimingGetDuration + FromJsAny] OptionalEffectTimingGetDuration::into(
   self : OptionalEffectTimingGetDuration,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TOptionalEffectTimingGetDuration] OptionalEffectTimingGetDuration::from(
+  value : T,
+) -> OptionalEffectTimingGetDuration = "%identity"
 
 ///|
 pub impl TOptionalEffectTimingGetDuration for OptionalEffectTimingGetDuration with to_js(

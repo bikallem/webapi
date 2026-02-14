@@ -80,9 +80,16 @@ pub impl FromJsAny for IDBObjectStoreParametersGetKeyPath with from_js_any(
 ) -> IDBObjectStoreParametersGetKeyPath = "%identity"
 
 ///|
-pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPath::into(
+pub fn[T : TIDBObjectStoreParametersGetKeyPath + FromJsAny] IDBObjectStoreParametersGetKeyPath::into(
   self : IDBObjectStoreParametersGetKeyPath,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPath::from(
+  value : T,
+) -> IDBObjectStoreParametersGetKeyPath = "%identity"
 
 ///|
 pub impl TIDBObjectStoreParametersGetKeyPath for IDBObjectStoreParametersGetKeyPath with to_js(

@@ -52,9 +52,16 @@ pub impl TJsValue for HTMLIFrameElementSrcdoc with to_js(
 pub impl FromJsAny for HTMLIFrameElementSrcdoc with from_js_any(value : JsAny) -> HTMLIFrameElementSrcdoc = "%identity"
 
 ///|
-pub fn[T : THTMLIFrameElementSrcdoc] HTMLIFrameElementSrcdoc::into(
+pub fn[T : THTMLIFrameElementSrcdoc + FromJsAny] HTMLIFrameElementSrcdoc::into(
   self : HTMLIFrameElementSrcdoc,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THTMLIFrameElementSrcdoc] HTMLIFrameElementSrcdoc::from(
+  value : T,
+) -> HTMLIFrameElementSrcdoc = "%identity"
 
 ///|
 pub impl THTMLIFrameElementSrcdoc for HTMLIFrameElementSrcdoc with to_js(

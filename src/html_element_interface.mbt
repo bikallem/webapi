@@ -45,9 +45,16 @@ pub impl TJsValue for HTMLElementHidden with to_js(self : HTMLElementHidden) -> 
 pub impl FromJsAny for HTMLElementHidden with from_js_any(value : JsAny) -> HTMLElementHidden = "%identity"
 
 ///|
-pub fn[T : THTMLElementHidden] HTMLElementHidden::into(
+pub fn[T : THTMLElementHidden + FromJsAny] HTMLElementHidden::into(
   self : HTMLElementHidden,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THTMLElementHidden] HTMLElementHidden::from(
+  value : T,
+) -> HTMLElementHidden = "%identity"
 
 ///|
 pub impl THTMLElementHidden for HTMLElementHidden with to_js(

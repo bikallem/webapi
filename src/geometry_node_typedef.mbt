@@ -19,7 +19,14 @@ pub(open) trait TGeometryNode {
 }
 
 ///|
-pub fn[T : TGeometryNode] GeometryNode::into(self : GeometryNode) -> T = "%identity"
+pub fn[T : TGeometryNode + FromJsAny] GeometryNode::into(
+  self : GeometryNode,
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TGeometryNode] GeometryNode::from(value : T) -> GeometryNode = "%identity"
 
 ///|
 pub impl TGeometryNode for GeometryNode with to_js(self : GeometryNode) -> JsValue = "%identity"

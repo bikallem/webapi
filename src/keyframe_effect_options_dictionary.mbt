@@ -92,9 +92,16 @@ pub impl FromJsAny for KeyframeEffectOptionsGetDuration with from_js_any(
 ) -> KeyframeEffectOptionsGetDuration = "%identity"
 
 ///|
-pub fn[T : TKeyframeEffectOptionsGetDuration] KeyframeEffectOptionsGetDuration::into(
+pub fn[T : TKeyframeEffectOptionsGetDuration + FromJsAny] KeyframeEffectOptionsGetDuration::into(
   self : KeyframeEffectOptionsGetDuration,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TKeyframeEffectOptionsGetDuration] KeyframeEffectOptionsGetDuration::from(
+  value : T,
+) -> KeyframeEffectOptionsGetDuration = "%identity"
 
 ///|
 pub impl TKeyframeEffectOptionsGetDuration for KeyframeEffectOptionsGetDuration with to_js(

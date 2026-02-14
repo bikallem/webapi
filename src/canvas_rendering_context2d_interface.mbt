@@ -39,9 +39,16 @@ pub impl FromJsAny for CanvasRenderingContext2DStrokeStyle with from_js_any(
 ) -> CanvasRenderingContext2DStrokeStyle = "%identity"
 
 ///|
-pub fn[T : TCanvasRenderingContext2DStrokeStyle] CanvasRenderingContext2DStrokeStyle::into(
+pub fn[T : TCanvasRenderingContext2DStrokeStyle + FromJsAny] CanvasRenderingContext2DStrokeStyle::into(
   self : CanvasRenderingContext2DStrokeStyle,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TCanvasRenderingContext2DStrokeStyle] CanvasRenderingContext2DStrokeStyle::from(
+  value : T,
+) -> CanvasRenderingContext2DStrokeStyle = "%identity"
 
 ///|
 pub impl TCanvasRenderingContext2DStrokeStyle for CanvasRenderingContext2DStrokeStyle with to_js(
@@ -84,9 +91,16 @@ pub impl FromJsAny for CanvasRenderingContext2DFillStyle with from_js_any(
 ) -> CanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
-pub fn[T : TCanvasRenderingContext2DFillStyle] CanvasRenderingContext2DFillStyle::into(
+pub fn[T : TCanvasRenderingContext2DFillStyle + FromJsAny] CanvasRenderingContext2DFillStyle::into(
   self : CanvasRenderingContext2DFillStyle,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TCanvasRenderingContext2DFillStyle] CanvasRenderingContext2DFillStyle::from(
+  value : T,
+) -> CanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
 pub impl TCanvasRenderingContext2DFillStyle for CanvasRenderingContext2DFillStyle with to_js(

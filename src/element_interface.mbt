@@ -76,9 +76,16 @@ pub impl TJsValue for ElementInnerHTML with to_js(self : ElementInnerHTML) -> Js
 pub impl FromJsAny for ElementInnerHTML with from_js_any(value : JsAny) -> ElementInnerHTML = "%identity"
 
 ///|
-pub fn[T : TElementInnerHTML] ElementInnerHTML::into(
+pub fn[T : TElementInnerHTML + FromJsAny] ElementInnerHTML::into(
   self : ElementInnerHTML,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TElementInnerHTML] ElementInnerHTML::from(
+  value : T,
+) -> ElementInnerHTML = "%identity"
 
 ///|
 pub impl TElementInnerHTML for ElementInnerHTML with to_js(
@@ -108,9 +115,16 @@ pub impl TJsValue for ElementOuterHTML with to_js(self : ElementOuterHTML) -> Js
 pub impl FromJsAny for ElementOuterHTML with from_js_any(value : JsAny) -> ElementOuterHTML = "%identity"
 
 ///|
-pub fn[T : TElementOuterHTML] ElementOuterHTML::into(
+pub fn[T : TElementOuterHTML + FromJsAny] ElementOuterHTML::into(
   self : ElementOuterHTML,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TElementOuterHTML] ElementOuterHTML::from(
+  value : T,
+) -> ElementOuterHTML = "%identity"
 
 ///|
 pub impl TElementOuterHTML for ElementOuterHTML with to_js(

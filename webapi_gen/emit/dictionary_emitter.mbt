@@ -345,7 +345,11 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
       #|
       #|pub impl FromJsAny for TestDictGetHeaders with from_js_any(value : JsAny) -> TestDictGetHeaders = "%identity"
       #|
-      #|pub fn[T: TTestDictGetHeaders] TestDictGetHeaders::into(self : TestDictGetHeaders) -> T = "%identity"
+      #|pub fn[T : TTestDictGetHeaders + FromJsAny] TestDictGetHeaders::into(self : TestDictGetHeaders) -> T {
+      #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+      #|}
+      #|
+      #|pub fn[T : TTestDictGetHeaders] TestDictGetHeaders::from(value : T) -> TestDictGetHeaders = "%identity"
       #|
       #|pub impl TTestDictGetHeaders for TestDictGetHeaders with to_js(self : TestDictGetHeaders) -> JsValue = "%identity"
       #|

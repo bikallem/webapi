@@ -70,9 +70,16 @@ pub impl TJsValue for CSSStyleSheetInitGetMedia with to_js(
 pub impl FromJsAny for CSSStyleSheetInitGetMedia with from_js_any(value : JsAny) -> CSSStyleSheetInitGetMedia = "%identity"
 
 ///|
-pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::into(
+pub fn[T : TCSSStyleSheetInitGetMedia + FromJsAny] CSSStyleSheetInitGetMedia::into(
   self : CSSStyleSheetInitGetMedia,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::from(
+  value : T,
+) -> CSSStyleSheetInitGetMedia = "%identity"
 
 ///|
 pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia with to_js(

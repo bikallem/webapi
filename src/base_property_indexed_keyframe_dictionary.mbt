@@ -124,9 +124,16 @@ pub impl FromJsAny for BasePropertyIndexedKeyframeGetOffset with from_js_any(
 ) -> BasePropertyIndexedKeyframeGetOffset = "%identity"
 
 ///|
-pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::into(
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset + FromJsAny] BasePropertyIndexedKeyframeGetOffset::into(
   self : BasePropertyIndexedKeyframeGetOffset,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::from(
+  value : T,
+) -> BasePropertyIndexedKeyframeGetOffset = "%identity"
 
 ///|
 pub impl TBasePropertyIndexedKeyframeGetOffset for BasePropertyIndexedKeyframeGetOffset with to_js(
@@ -164,9 +171,16 @@ pub impl FromJsAny for BasePropertyIndexedKeyframeGetEasing with from_js_any(
 ) -> BasePropertyIndexedKeyframeGetEasing = "%identity"
 
 ///|
-pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::into(
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing + FromJsAny] BasePropertyIndexedKeyframeGetEasing::into(
   self : BasePropertyIndexedKeyframeGetEasing,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::from(
+  value : T,
+) -> BasePropertyIndexedKeyframeGetEasing = "%identity"
 
 ///|
 pub impl TBasePropertyIndexedKeyframeGetEasing for BasePropertyIndexedKeyframeGetEasing with to_js(
@@ -204,9 +218,16 @@ pub impl FromJsAny for BasePropertyIndexedKeyframeGetComposite with from_js_any(
 ) -> BasePropertyIndexedKeyframeGetComposite = "%identity"
 
 ///|
-pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::into(
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite + FromJsAny] BasePropertyIndexedKeyframeGetComposite::into(
   self : BasePropertyIndexedKeyframeGetComposite,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::from(
+  value : T,
+) -> BasePropertyIndexedKeyframeGetComposite = "%identity"
 
 ///|
 pub impl TBasePropertyIndexedKeyframeGetComposite for BasePropertyIndexedKeyframeGetComposite with to_js(

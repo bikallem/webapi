@@ -21,9 +21,16 @@ pub(open) trait TAllowSharedBufferSource {
 }
 
 ///|
-pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::into(
+pub fn[T : TAllowSharedBufferSource + FromJsAny] AllowSharedBufferSource::into(
   self : AllowSharedBufferSource,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::from(
+  value : T,
+) -> AllowSharedBufferSource = "%identity"
 
 ///|
 pub impl TAllowSharedBufferSource for AllowSharedBufferSource with to_js(

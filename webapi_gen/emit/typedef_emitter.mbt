@@ -27,7 +27,8 @@ pub impl Emitter for TypedefEmitter with emit(
       ..push(Emit::ImplTJsValue(external_name))
       ..push(Emit::ImplFromJsAny(external_name))
       ..push(Emit::UnionArgTrait(trait_name))
-      ..push(Emit::IntoMethod(external_name))
+      ..push(Emit::UnionIntoMethod(external_name))
+      ..push(Emit::FromMethod(external_name))
       .push(Emit::UnionArgTraitImpl(external_name, trait_name))
       let seen : @hashset.HashSet[@type_mapping.ArgMbtType] = @hashset.new()
       for opt in options {
@@ -124,7 +125,11 @@ test "typedef emitter emits union typedef" {
       #|  to_js(self : Self) -> JsValue
       #|}
       #|
-      #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
+      #|pub fn[T : TMyUnion + FromJsAny] MyUnion::into(self : MyUnion) -> T {
+      #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+      #|}
+      #|
+      #|pub fn[T : TMyUnion] MyUnion::from(value : T) -> MyUnion = "%identity"
       #|
       #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
       #|
@@ -171,7 +176,11 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|  to_js(self : Self) -> JsValue
       #|}
       #|
-      #|pub fn[T: TMyUnion] MyUnion::into(self : MyUnion) -> T = "%identity"
+      #|pub fn[T : TMyUnion + FromJsAny] MyUnion::into(self : MyUnion) -> T {
+      #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+      #|}
+      #|
+      #|pub fn[T : TMyUnion] MyUnion::from(value : T) -> MyUnion = "%identity"
       #|
       #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
       #|

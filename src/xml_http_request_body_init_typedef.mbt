@@ -21,9 +21,16 @@ pub(open) trait TXMLHttpRequestBodyInit {
 }
 
 ///|
-pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::into(
+pub fn[T : TXMLHttpRequestBodyInit + FromJsAny] XMLHttpRequestBodyInit::into(
   self : XMLHttpRequestBodyInit,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::from(
+  value : T,
+) -> XMLHttpRequestBodyInit = "%identity"
 
 ///|
 pub impl TXMLHttpRequestBodyInit for XMLHttpRequestBodyInit with to_js(

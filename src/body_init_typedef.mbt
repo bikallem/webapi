@@ -19,7 +19,12 @@ pub(open) trait TBodyInit {
 }
 
 ///|
-pub fn[T : TBodyInit] BodyInit::into(self : BodyInit) -> T = "%identity"
+pub fn[T : TBodyInit + FromJsAny] BodyInit::into(self : BodyInit) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TBodyInit] BodyInit::from(value : T) -> BodyInit = "%identity"
 
 ///|
 pub impl TBodyInit for BodyInit with to_js(self : BodyInit) -> JsValue = "%identity"

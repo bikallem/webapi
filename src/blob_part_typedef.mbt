@@ -19,7 +19,12 @@ pub(open) trait TBlobPart {
 }
 
 ///|
-pub fn[T : TBlobPart] BlobPart::into(self : BlobPart) -> T = "%identity"
+pub fn[T : TBlobPart + FromJsAny] BlobPart::into(self : BlobPart) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TBlobPart] BlobPart::from(value : T) -> BlobPart = "%identity"
 
 ///|
 pub impl TBlobPart for BlobPart with to_js(self : BlobPart) -> JsValue = "%identity"

@@ -31,7 +31,16 @@ pub impl TJsValue for IDBCursorSource with to_js(self : IDBCursorSource) -> JsVa
 pub impl FromJsAny for IDBCursorSource with from_js_any(value : JsAny) -> IDBCursorSource = "%identity"
 
 ///|
-pub fn[T : TIDBCursorSource] IDBCursorSource::into(self : IDBCursorSource) -> T = "%identity"
+pub fn[T : TIDBCursorSource + FromJsAny] IDBCursorSource::into(
+  self : IDBCursorSource,
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TIDBCursorSource] IDBCursorSource::from(
+  value : T,
+) -> IDBCursorSource = "%identity"
 
 ///|
 pub impl TIDBCursorSource for IDBCursorSource with to_js(self : IDBCursorSource) -> JsValue = "%identity"

@@ -34,7 +34,12 @@ pub impl TJsValue for WindowEvent with to_js(self : WindowEvent) -> JsValue = "%
 pub impl FromJsAny for WindowEvent with from_js_any(value : JsAny) -> WindowEvent = "%identity"
 
 ///|
-pub fn[T : TWindowEvent] WindowEvent::into(self : WindowEvent) -> T = "%identity"
+pub fn[T : TWindowEvent + FromJsAny] WindowEvent::into(self : WindowEvent) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TWindowEvent] WindowEvent::from(value : T) -> WindowEvent = "%identity"
 
 ///|
 pub fn WindowEvent::is_undefined(self : WindowEvent) -> Bool {

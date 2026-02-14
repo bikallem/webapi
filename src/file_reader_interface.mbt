@@ -48,9 +48,16 @@ pub impl TJsValue for FileReaderResult with to_js(self : FileReaderResult) -> Js
 pub impl FromJsAny for FileReaderResult with from_js_any(value : JsAny) -> FileReaderResult = "%identity"
 
 ///|
-pub fn[T : TFileReaderResult] FileReaderResult::into(
+pub fn[T : TFileReaderResult + FromJsAny] FileReaderResult::into(
   self : FileReaderResult,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TFileReaderResult] FileReaderResult::from(
+  value : T,
+) -> FileReaderResult = "%identity"
 
 ///|
 pub impl TFileReaderResult for FileReaderResult with to_js(

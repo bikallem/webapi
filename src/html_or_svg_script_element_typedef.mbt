@@ -21,9 +21,16 @@ pub(open) trait THTMLOrSVGScriptElement {
 }
 
 ///|
-pub fn[T : THTMLOrSVGScriptElement] HTMLOrSVGScriptElement::into(
+pub fn[T : THTMLOrSVGScriptElement + FromJsAny] HTMLOrSVGScriptElement::into(
   self : HTMLOrSVGScriptElement,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THTMLOrSVGScriptElement] HTMLOrSVGScriptElement::from(
+  value : T,
+) -> HTMLOrSVGScriptElement = "%identity"
 
 ///|
 pub impl THTMLOrSVGScriptElement for HTMLOrSVGScriptElement with to_js(

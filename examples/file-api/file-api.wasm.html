@@ -10,11 +10,6 @@
     <div id="app"></div>
     <script type="module">
         import { wasmImportObject } from "../../src/webapi.mjs";
-        wasmImportObject.webapi_FileApiExample = {
-            createTextBlob: (text, mime) => new Blob([text], { type: mime }),
-            createTextFile: (text, name, mime) => new File([text], name, { type: mime }),
-            resultToString: (r) => r,
-        };
         const { instance } = await WebAssembly.instantiateStreaming(
             fetch("../_build/wasm-gc/release/build/file-api/file-api.wasm"),
             wasmImportObject,

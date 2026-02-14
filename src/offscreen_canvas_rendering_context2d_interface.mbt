@@ -41,9 +41,16 @@ pub impl FromJsAny for OffscreenCanvasRenderingContext2DStrokeStyle with from_js
 ) -> OffscreenCanvasRenderingContext2DStrokeStyle = "%identity"
 
 ///|
-pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle] OffscreenCanvasRenderingContext2DStrokeStyle::into(
+pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle + FromJsAny] OffscreenCanvasRenderingContext2DStrokeStyle::into(
   self : OffscreenCanvasRenderingContext2DStrokeStyle,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle] OffscreenCanvasRenderingContext2DStrokeStyle::from(
+  value : T,
+) -> OffscreenCanvasRenderingContext2DStrokeStyle = "%identity"
 
 ///|
 pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRenderingContext2DStrokeStyle with to_js(
@@ -86,9 +93,16 @@ pub impl FromJsAny for OffscreenCanvasRenderingContext2DFillStyle with from_js_a
 ) -> OffscreenCanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
-pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRenderingContext2DFillStyle::into(
+pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle + FromJsAny] OffscreenCanvasRenderingContext2DFillStyle::into(
   self : OffscreenCanvasRenderingContext2DFillStyle,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRenderingContext2DFillStyle::from(
+  value : T,
+) -> OffscreenCanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
 pub impl TOffscreenCanvasRenderingContext2DFillStyle for OffscreenCanvasRenderingContext2DFillStyle with to_js(

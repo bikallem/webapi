@@ -21,9 +21,16 @@ pub(open) trait TReadableStreamReader {
 }
 
 ///|
-pub fn[T : TReadableStreamReader] ReadableStreamReader::into(
+pub fn[T : TReadableStreamReader + FromJsAny] ReadableStreamReader::into(
   self : ReadableStreamReader,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TReadableStreamReader] ReadableStreamReader::from(
+  value : T,
+) -> ReadableStreamReader = "%identity"
 
 ///|
 pub impl TReadableStreamReader for ReadableStreamReader with to_js(

@@ -89,6 +89,8 @@ pub enum Emit {
   ImplTJsValue(TypeName) // eg. pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
   ImplFromJsAny(TypeName) // eg. pub impl FromJsAny for EventTarget with from_js_any(value : JsAny) -> EventTarget = "%identity"
   IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+  UnionIntoMethod(TypeName) // eg. pub fn[T: TBlobPart] BlobPart::into(self : BlobPart) -> T { FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self))) }
+  FromMethod(TypeName) // eg. pub fn[T: TBlobPart] BlobPart::from(value : T) -> BlobPart = "%identity"
   IsUndefinedMethod(TypeName) // eg. pub fn EventTarget::is_undefined(self : EventTarget) -> Bool { ... }
   EmptyMethod(TypeName) // eg. pub fn Event::empty() -> EventTarget
   ImplTrait(TypeName, TraitName) // eg. impl TEventTarget for EventTarget
@@ -656,6 +658,14 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
       Emit::IntoMethod(TypeName(type_name)) =>
         append_shared(
           "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
+        )
+      Emit::UnionIntoMethod(TypeName(type_name)) =>
+        append_shared(
+          "pub fn[T : T\{type_name} + FromJsAny] \{type_name}::into(self : \{type_name}) -> T {\n  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))\n}",
+        )
+      Emit::FromMethod(TypeName(type_name)) =>
+        append_shared(
+          "pub fn[T : T\{type_name}] \{type_name}::from(value : T) -> \{type_name} = \"%identity\"",
         )
       Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
         append_shared("pub impl \{trait_name} for \{type_name}")

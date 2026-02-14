@@ -37,9 +37,16 @@ pub impl FromJsAny for HTMLAllCollectionNamedItem with from_js_any(
 ) -> HTMLAllCollectionNamedItem = "%identity"
 
 ///|
-pub fn[T : THTMLAllCollectionNamedItem] HTMLAllCollectionNamedItem::into(
+pub fn[T : THTMLAllCollectionNamedItem + FromJsAny] HTMLAllCollectionNamedItem::into(
   self : HTMLAllCollectionNamedItem,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THTMLAllCollectionNamedItem] HTMLAllCollectionNamedItem::from(
+  value : T,
+) -> HTMLAllCollectionNamedItem = "%identity"
 
 ///|
 pub impl THTMLAllCollectionNamedItem for HTMLAllCollectionNamedItem with to_js(
@@ -73,9 +80,16 @@ pub impl TJsValue for HTMLAllCollectionItem with to_js(
 pub impl FromJsAny for HTMLAllCollectionItem with from_js_any(value : JsAny) -> HTMLAllCollectionItem = "%identity"
 
 ///|
-pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::into(
+pub fn[T : THTMLAllCollectionItem + FromJsAny] HTMLAllCollectionItem::into(
   self : HTMLAllCollectionItem,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::from(
+  value : T,
+) -> HTMLAllCollectionItem = "%identity"
 
 ///|
 pub impl THTMLAllCollectionItem for HTMLAllCollectionItem with to_js(

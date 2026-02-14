@@ -19,9 +19,16 @@ pub(open) trait TRenderingContext {
 }
 
 ///|
-pub fn[T : TRenderingContext] RenderingContext::into(
+pub fn[T : TRenderingContext + FromJsAny] RenderingContext::into(
   self : RenderingContext,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TRenderingContext] RenderingContext::from(
+  value : T,
+) -> RenderingContext = "%identity"
 
 ///|
 pub impl TRenderingContext for RenderingContext with to_js(

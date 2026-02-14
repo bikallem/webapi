@@ -41,9 +41,16 @@ pub impl FromJsAny for ImageBitmapRenderingContextCanvas with from_js_any(
 ) -> ImageBitmapRenderingContextCanvas = "%identity"
 
 ///|
-pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas::into(
+pub fn[T : TImageBitmapRenderingContextCanvas + FromJsAny] ImageBitmapRenderingContextCanvas::into(
   self : ImageBitmapRenderingContextCanvas,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas::from(
+  value : T,
+) -> ImageBitmapRenderingContextCanvas = "%identity"
 
 ///|
 pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanvas with to_js(

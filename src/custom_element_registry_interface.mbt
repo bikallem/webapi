@@ -42,9 +42,16 @@ pub impl TJsValue for CustomElementRegistryGet with to_js(
 pub impl FromJsAny for CustomElementRegistryGet with from_js_any(value : JsAny) -> CustomElementRegistryGet = "%identity"
 
 ///|
-pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::into(
+pub fn[T : TCustomElementRegistryGet + FromJsAny] CustomElementRegistryGet::into(
   self : CustomElementRegistryGet,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::from(
+  value : T,
+) -> CustomElementRegistryGet = "%identity"
 
 ///|
 pub fn CustomElementRegistryGet::is_undefined(

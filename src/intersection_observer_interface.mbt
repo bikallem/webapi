@@ -48,9 +48,16 @@ pub impl TJsValue for IntersectionObserverRoot with to_js(
 pub impl FromJsAny for IntersectionObserverRoot with from_js_any(value : JsAny) -> IntersectionObserverRoot = "%identity"
 
 ///|
-pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::into(
+pub fn[T : TIntersectionObserverRoot + FromJsAny] IntersectionObserverRoot::into(
   self : IntersectionObserverRoot,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::from(
+  value : T,
+) -> IntersectionObserverRoot = "%identity"
 
 ///|
 pub impl TIntersectionObserverRoot for IntersectionObserverRoot with to_js(

@@ -387,7 +387,8 @@ pub impl TJsValue for AddEventListenerOptions
 
 #external
 pub type AllowSharedBufferSource
-pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::into(Self) -> T
+pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::from(T) -> Self
+pub fn[T : TAllowSharedBufferSource + FromJsAny] AllowSharedBufferSource::into(Self) -> T
 pub impl FromJsAny for AllowSharedBufferSource
 pub impl TAllowSharedBufferSource for AllowSharedBufferSource
 pub impl TJsValue for AllowSharedBufferSource
@@ -450,7 +451,8 @@ pub impl TJsValue for ArrayBuffer
 
 #external
 pub type ArrayBufferView
-pub fn[T : TArrayBufferView] ArrayBufferView::into(Self) -> T
+pub fn[T : TArrayBufferView] ArrayBufferView::from(T) -> Self
+pub fn[T : TArrayBufferView + FromJsAny] ArrayBufferView::into(Self) -> T
 pub impl FromJsAny for ArrayBufferView
 pub impl TAllowSharedBufferSource for ArrayBufferView
 pub impl TArrayBufferView for ArrayBufferView
@@ -532,21 +534,24 @@ pub impl TJsValue for BasePropertyIndexedKeyframe
 
 #external
 pub type BasePropertyIndexedKeyframeGetComposite
-pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::into(Self) -> T
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::from(T) -> Self
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite + FromJsAny] BasePropertyIndexedKeyframeGetComposite::into(Self) -> T
 pub impl FromJsAny for BasePropertyIndexedKeyframeGetComposite
 pub impl TBasePropertyIndexedKeyframeGetComposite for BasePropertyIndexedKeyframeGetComposite
 pub impl TJsValue for BasePropertyIndexedKeyframeGetComposite
 
 #external
 pub type BasePropertyIndexedKeyframeGetEasing
-pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::into(Self) -> T
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::from(T) -> Self
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing + FromJsAny] BasePropertyIndexedKeyframeGetEasing::into(Self) -> T
 pub impl FromJsAny for BasePropertyIndexedKeyframeGetEasing
 pub impl TBasePropertyIndexedKeyframeGetEasing for BasePropertyIndexedKeyframeGetEasing
 pub impl TJsValue for BasePropertyIndexedKeyframeGetEasing
 
 #external
 pub type BasePropertyIndexedKeyframeGetOffset
-pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::into(Self) -> T
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::from(T) -> Self
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset + FromJsAny] BasePropertyIndexedKeyframeGetOffset::into(Self) -> T
 pub impl FromJsAny for BasePropertyIndexedKeyframeGetOffset
 pub impl TBasePropertyIndexedKeyframeGetOffset for BasePropertyIndexedKeyframeGetOffset
 pub impl TJsValue for BasePropertyIndexedKeyframeGetOffset
@@ -604,7 +609,8 @@ pub impl TJsValue for BlobCallback
 
 #external
 pub type BlobPart
-pub fn[T : TBlobPart] BlobPart::into(Self) -> T
+pub fn[T : TBlobPart] BlobPart::from(T) -> Self
+pub fn[T : TBlobPart + FromJsAny] BlobPart::into(Self) -> T
 pub impl FromJsAny for BlobPart
 pub impl TBlobPart for BlobPart
 pub impl TJsValue for BlobPart
@@ -620,7 +626,8 @@ pub impl TJsValue for BlobPropertyBag
 
 #external
 pub type BodyInit
-pub fn[T : TBodyInit] BodyInit::into(Self) -> T
+pub fn[T : TBodyInit] BodyInit::from(T) -> Self
+pub fn[T : TBodyInit + FromJsAny] BodyInit::into(Self) -> T
 pub impl FromJsAny for BodyInit
 pub impl TBodyInit for BodyInit
 pub impl TJsValue for BodyInit
@@ -645,7 +652,8 @@ pub impl TJsValue for BroadcastChannel
 
 #external
 pub type BufferSource
-pub fn[T : TBufferSource] BufferSource::into(Self) -> T
+pub fn[T : TBufferSource] BufferSource::from(T) -> Self
+pub fn[T : TBufferSource + FromJsAny] BufferSource::into(Self) -> T
 pub impl FromJsAny for BufferSource
 pub impl TBlobPart for BufferSource
 pub impl TBufferSource for BufferSource
@@ -806,7 +814,8 @@ pub impl TJsValue for CSSStyleSheetInit
 
 #external
 pub type CSSStyleSheetInitGetMedia
-pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::into(Self) -> T
+pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::from(T) -> Self
+pub fn[T : TCSSStyleSheetInitGetMedia + FromJsAny] CSSStyleSheetInitGetMedia::into(Self) -> T
 pub impl FromJsAny for CSSStyleSheetInitGetMedia
 pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia
 pub impl TJsValue for CSSStyleSheetInitGetMedia
@@ -916,7 +925,8 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient
 
 #external
 pub type CanvasImageSource
-pub fn[T : TCanvasImageSource] CanvasImageSource::into(Self) -> T
+pub fn[T : TCanvasImageSource] CanvasImageSource::from(T) -> Self
+pub fn[T : TCanvasImageSource + FromJsAny] CanvasImageSource::into(Self) -> T
 pub impl FromJsAny for CanvasImageSource
 pub impl TCanvasImageSource for CanvasImageSource
 pub impl TImageBitmapSource for CanvasImageSource
@@ -967,7 +977,8 @@ pub impl TRenderingContext for CanvasRenderingContext2D
 
 #external
 pub type CanvasRenderingContext2DFillStyle
-pub fn[T : TCanvasRenderingContext2DFillStyle] CanvasRenderingContext2DFillStyle::into(Self) -> T
+pub fn[T : TCanvasRenderingContext2DFillStyle] CanvasRenderingContext2DFillStyle::from(T) -> Self
+pub fn[T : TCanvasRenderingContext2DFillStyle + FromJsAny] CanvasRenderingContext2DFillStyle::into(Self) -> T
 pub impl FromJsAny for CanvasRenderingContext2DFillStyle
 pub impl TCanvasRenderingContext2DFillStyle for CanvasRenderingContext2DFillStyle
 pub impl TJsValue for CanvasRenderingContext2DFillStyle
@@ -986,7 +997,8 @@ pub impl TJsValue for CanvasRenderingContext2DSettings
 
 #external
 pub type CanvasRenderingContext2DStrokeStyle
-pub fn[T : TCanvasRenderingContext2DStrokeStyle] CanvasRenderingContext2DStrokeStyle::into(Self) -> T
+pub fn[T : TCanvasRenderingContext2DStrokeStyle] CanvasRenderingContext2DStrokeStyle::from(T) -> Self
+pub fn[T : TCanvasRenderingContext2DStrokeStyle + FromJsAny] CanvasRenderingContext2DStrokeStyle::into(Self) -> T
 pub impl FromJsAny for CanvasRenderingContext2DStrokeStyle
 pub impl TCanvasRenderingContext2DStrokeStyle for CanvasRenderingContext2DStrokeStyle
 pub impl TJsValue for CanvasRenderingContext2DStrokeStyle
@@ -1295,7 +1307,8 @@ pub impl TJsValue for ComputedEffectTiming
 
 #external
 pub type ComputedEffectTimingGetDuration
-pub fn[T : TComputedEffectTimingGetDuration] ComputedEffectTimingGetDuration::into(Self) -> T
+pub fn[T : TComputedEffectTimingGetDuration] ComputedEffectTimingGetDuration::from(T) -> Self
+pub fn[T : TComputedEffectTimingGetDuration + FromJsAny] ComputedEffectTimingGetDuration::into(Self) -> T
 pub impl FromJsAny for ComputedEffectTimingGetDuration
 pub impl TComputedEffectTimingGetDuration for ComputedEffectTimingGetDuration
 pub impl TJsValue for ComputedEffectTimingGetDuration
@@ -1376,7 +1389,8 @@ pub impl TJsValue for CustomElementRegistry
 
 #external
 pub type CustomElementRegistryGet
-pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::into(Self) -> T
+pub fn[T : TCustomElementRegistryGet] CustomElementRegistryGet::from(T) -> Self
+pub fn[T : TCustomElementRegistryGet + FromJsAny] CustomElementRegistryGet::into(Self) -> T
 pub fn CustomElementRegistryGet::is_undefined(Self) -> Bool
 pub impl FromJsAny for CustomElementRegistryGet
 pub impl TCustomElementRegistryGet for CustomElementRegistryGet
@@ -1831,7 +1845,8 @@ pub impl TJsValue for EffectTiming
 
 #external
 pub type EffectTimingGetDuration
-pub fn[T : TEffectTimingGetDuration] EffectTimingGetDuration::into(Self) -> T
+pub fn[T : TEffectTimingGetDuration] EffectTimingGetDuration::from(T) -> Self
+pub fn[T : TEffectTimingGetDuration + FromJsAny] EffectTimingGetDuration::into(Self) -> T
 pub impl FromJsAny for EffectTimingGetDuration
 pub impl TEffectTimingGetDuration for EffectTimingGetDuration
 pub impl TJsValue for EffectTimingGetDuration
@@ -1877,7 +1892,8 @@ pub impl TJsValue for ElementDefinitionOptions
 
 #external
 pub type ElementInnerHTML
-pub fn[T : TElementInnerHTML] ElementInnerHTML::into(Self) -> T
+pub fn[T : TElementInnerHTML] ElementInnerHTML::from(T) -> Self
+pub fn[T : TElementInnerHTML + FromJsAny] ElementInnerHTML::into(Self) -> T
 pub impl FromJsAny for ElementInnerHTML
 pub impl TElementInnerHTML for ElementInnerHTML
 pub impl TJsValue for ElementInnerHTML
@@ -1891,7 +1907,8 @@ pub impl TJsValue for ElementInternals
 
 #external
 pub type ElementOuterHTML
-pub fn[T : TElementOuterHTML] ElementOuterHTML::into(Self) -> T
+pub fn[T : TElementOuterHTML] ElementOuterHTML::from(T) -> Self
+pub fn[T : TElementOuterHTML + FromJsAny] ElementOuterHTML::into(Self) -> T
 pub impl FromJsAny for ElementOuterHTML
 pub impl TElementOuterHTML for ElementOuterHTML
 pub impl TJsValue for ElementOuterHTML
@@ -2078,7 +2095,8 @@ pub impl TJsValue for FileReader
 
 #external
 pub type FileReaderResult
-pub fn[T : TFileReaderResult] FileReaderResult::into(Self) -> T
+pub fn[T : TFileReaderResult] FileReaderResult::from(T) -> Self
+pub fn[T : TFileReaderResult + FromJsAny] FileReaderResult::into(Self) -> T
 pub impl FromJsAny for FileReaderResult
 pub impl TFileReaderResult for FileReaderResult
 pub impl TJsValue for FileReaderResult
@@ -2170,7 +2188,8 @@ pub impl TXMLHttpRequestBodyInit for FormData
 
 #external
 pub type FormDataEntryValue
-pub fn[T : TFormDataEntryValue] FormDataEntryValue::into(Self) -> T
+pub fn[T : TFormDataEntryValue] FormDataEntryValue::from(T) -> Self
+pub fn[T : TFormDataEntryValue + FromJsAny] FormDataEntryValue::into(Self) -> T
 pub impl FromJsAny for FormDataEntryValue
 pub impl TFormDataEntryValue for FormDataEntryValue
 pub impl TJsValue for FormDataEntryValue
@@ -2243,7 +2262,8 @@ pub impl TRenderingContext for GPUCanvasContext
 
 #external
 pub type GeometryNode
-pub fn[T : TGeometryNode] GeometryNode::into(Self) -> T
+pub fn[T : TGeometryNode] GeometryNode::from(T) -> Self
+pub fn[T : TGeometryNode + FromJsAny] GeometryNode::into(Self) -> T
 pub impl FromJsAny for GeometryNode
 pub impl TGeometryNode for GeometryNode
 pub impl TJsValue for GeometryNode
@@ -2299,14 +2319,16 @@ pub impl TJsValue for HTMLAllCollection
 
 #external
 pub type HTMLAllCollectionItem
-pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::into(Self) -> T
+pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::from(T) -> Self
+pub fn[T : THTMLAllCollectionItem + FromJsAny] HTMLAllCollectionItem::into(Self) -> T
 pub impl FromJsAny for HTMLAllCollectionItem
 pub impl THTMLAllCollectionItem for HTMLAllCollectionItem
 pub impl TJsValue for HTMLAllCollectionItem
 
 #external
 pub type HTMLAllCollectionNamedItem
-pub fn[T : THTMLAllCollectionNamedItem] HTMLAllCollectionNamedItem::into(Self) -> T
+pub fn[T : THTMLAllCollectionNamedItem] HTMLAllCollectionNamedItem::from(T) -> Self
+pub fn[T : THTMLAllCollectionNamedItem + FromJsAny] HTMLAllCollectionNamedItem::into(Self) -> T
 pub impl FromJsAny for HTMLAllCollectionNamedItem
 pub impl THTMLAllCollectionNamedItem for HTMLAllCollectionNamedItem
 pub impl TJsValue for HTMLAllCollectionNamedItem
@@ -2518,7 +2540,8 @@ pub impl TNode for HTMLElement
 
 #external
 pub type HTMLElementHidden
-pub fn[T : THTMLElementHidden] HTMLElementHidden::into(Self) -> T
+pub fn[T : THTMLElementHidden] HTMLElementHidden::from(T) -> Self
+pub fn[T : THTMLElementHidden + FromJsAny] HTMLElementHidden::into(Self) -> T
 pub impl FromJsAny for HTMLElementHidden
 pub impl THTMLElementHidden for HTMLElementHidden
 pub impl TJsValue for HTMLElementHidden
@@ -2569,7 +2592,8 @@ pub impl TJsValue for HTMLFormControlsCollection
 
 #external
 pub type HTMLFormControlsCollectionNamedItem
-pub fn[T : THTMLFormControlsCollectionNamedItem] HTMLFormControlsCollectionNamedItem::into(Self) -> T
+pub fn[T : THTMLFormControlsCollectionNamedItem] HTMLFormControlsCollectionNamedItem::from(T) -> Self
+pub fn[T : THTMLFormControlsCollectionNamedItem + FromJsAny] HTMLFormControlsCollectionNamedItem::into(Self) -> T
 pub impl FromJsAny for HTMLFormControlsCollectionNamedItem
 pub impl THTMLFormControlsCollectionNamedItem for HTMLFormControlsCollectionNamedItem
 pub impl TJsValue for HTMLFormControlsCollectionNamedItem
@@ -2588,7 +2612,8 @@ pub impl TNode for HTMLFormElement
 
 #external
 pub type HTMLFormElementGetByName
-pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::into(Self) -> T
+pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::from(T) -> Self
+pub fn[T : THTMLFormElementGetByName + FromJsAny] HTMLFormElementGetByName::into(Self) -> T
 pub impl FromJsAny for HTMLFormElementGetByName
 pub impl THTMLFormElementGetByName for HTMLFormElementGetByName
 pub impl TJsValue for HTMLFormElementGetByName
@@ -2679,7 +2704,8 @@ pub impl TNode for HTMLIFrameElement
 
 #external
 pub type HTMLIFrameElementSrcdoc
-pub fn[T : THTMLIFrameElementSrcdoc] HTMLIFrameElementSrcdoc::into(Self) -> T
+pub fn[T : THTMLIFrameElementSrcdoc] HTMLIFrameElementSrcdoc::from(T) -> Self
+pub fn[T : THTMLIFrameElementSrcdoc + FromJsAny] HTMLIFrameElementSrcdoc::into(Self) -> T
 pub impl FromJsAny for HTMLIFrameElementSrcdoc
 pub impl THTMLIFrameElementSrcdoc for HTMLIFrameElementSrcdoc
 pub impl TJsValue for HTMLIFrameElementSrcdoc
@@ -2902,7 +2928,8 @@ pub impl TJsValue for HTMLOptionsCollection
 
 #external
 pub type HTMLOrSVGImageElement
-pub fn[T : THTMLOrSVGImageElement] HTMLOrSVGImageElement::into(Self) -> T
+pub fn[T : THTMLOrSVGImageElement] HTMLOrSVGImageElement::from(T) -> Self
+pub fn[T : THTMLOrSVGImageElement + FromJsAny] HTMLOrSVGImageElement::into(Self) -> T
 pub impl FromJsAny for HTMLOrSVGImageElement
 pub impl TCanvasImageSource for HTMLOrSVGImageElement
 pub impl THTMLOrSVGImageElement for HTMLOrSVGImageElement
@@ -2910,7 +2937,8 @@ pub impl TJsValue for HTMLOrSVGImageElement
 
 #external
 pub type HTMLOrSVGScriptElement
-pub fn[T : THTMLOrSVGScriptElement] HTMLOrSVGScriptElement::into(Self) -> T
+pub fn[T : THTMLOrSVGScriptElement] HTMLOrSVGScriptElement::from(T) -> Self
+pub fn[T : THTMLOrSVGScriptElement + FromJsAny] HTMLOrSVGScriptElement::into(Self) -> T
 pub impl FromJsAny for HTMLOrSVGScriptElement
 pub impl THTMLOrSVGScriptElement for HTMLOrSVGScriptElement
 pub impl TJsValue for HTMLOrSVGScriptElement
@@ -3285,7 +3313,8 @@ pub impl TJsValue for Headers
 
 #external
 pub type HeadersInit
-pub fn[T : THeadersInit] HeadersInit::into(Self) -> T
+pub fn[T : THeadersInit] HeadersInit::from(T) -> Self
+pub fn[T : THeadersInit + FromJsAny] HeadersInit::into(Self) -> T
 pub impl FromJsAny for HeadersInit
 pub impl THeadersInit for HeadersInit
 pub impl TJsValue for HeadersInit
@@ -3320,7 +3349,8 @@ pub impl Show for IDBCursorDirection
 
 #external
 pub type IDBCursorSource
-pub fn[T : TIDBCursorSource] IDBCursorSource::into(Self) -> T
+pub fn[T : TIDBCursorSource] IDBCursorSource::from(T) -> Self
+pub fn[T : TIDBCursorSource + FromJsAny] IDBCursorSource::into(Self) -> T
 pub impl FromJsAny for IDBCursorSource
 pub impl TIDBCursorSource for IDBCursorSource
 pub impl TJsValue for IDBCursorSource
@@ -3416,7 +3446,8 @@ pub impl TJsValue for IDBObjectStoreParameters
 
 #external
 pub type IDBObjectStoreParametersGetKeyPath
-pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPath::into(Self) -> T
+pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPath::from(T) -> Self
+pub fn[T : TIDBObjectStoreParametersGetKeyPath + FromJsAny] IDBObjectStoreParametersGetKeyPath::into(Self) -> T
 pub impl FromJsAny for IDBObjectStoreParametersGetKeyPath
 pub impl TIDBObjectStoreParametersGetKeyPath for IDBObjectStoreParametersGetKeyPath
 pub impl TJsValue for IDBObjectStoreParametersGetKeyPath
@@ -3458,7 +3489,8 @@ pub impl Show for IDBRequestReadyState
 
 #external
 pub type IDBRequestSource
-pub fn[T : TIDBRequestSource] IDBRequestSource::into(Self) -> T
+pub fn[T : TIDBRequestSource] IDBRequestSource::from(T) -> Self
+pub fn[T : TIDBRequestSource + FromJsAny] IDBRequestSource::into(Self) -> T
 pub impl FromJsAny for IDBRequestSource
 pub impl TIDBRequestSource for IDBRequestSource
 pub impl TJsValue for IDBRequestSource
@@ -3577,7 +3609,8 @@ pub impl TRenderingContext for ImageBitmapRenderingContext
 
 #external
 pub type ImageBitmapRenderingContextCanvas
-pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas::into(Self) -> T
+pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas::from(T) -> Self
+pub fn[T : TImageBitmapRenderingContextCanvas + FromJsAny] ImageBitmapRenderingContextCanvas::into(Self) -> T
 pub impl FromJsAny for ImageBitmapRenderingContextCanvas
 pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanvas
 pub impl TJsValue for ImageBitmapRenderingContextCanvas
@@ -3592,7 +3625,8 @@ pub impl TJsValue for ImageBitmapRenderingContextSettings
 
 #external
 pub type ImageBitmapSource
-pub fn[T : TImageBitmapSource] ImageBitmapSource::into(Self) -> T
+pub fn[T : TImageBitmapSource] ImageBitmapSource::from(T) -> Self
+pub fn[T : TImageBitmapSource + FromJsAny] ImageBitmapSource::into(Self) -> T
 pub impl FromJsAny for ImageBitmapSource
 pub impl TImageBitmapSource for ImageBitmapSource
 pub impl TJsValue for ImageBitmapSource
@@ -3609,7 +3643,8 @@ pub impl TJsValue for ImageData
 
 #external
 pub type ImageDataArray
-pub fn[T : TImageDataArray] ImageDataArray::into(Self) -> T
+pub fn[T : TImageDataArray] ImageDataArray::from(T) -> Self
+pub fn[T : TImageDataArray + FromJsAny] ImageDataArray::into(Self) -> T
 pub impl FromJsAny for ImageDataArray
 pub impl TImageDataArray for ImageDataArray
 pub impl TJsValue for ImageDataArray
@@ -3772,21 +3807,24 @@ pub impl TJsValue for IntersectionObserverInit
 
 #external
 pub type IntersectionObserverInitGetRoot
-pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::into(Self) -> T
+pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::from(T) -> Self
+pub fn[T : TIntersectionObserverInitGetRoot + FromJsAny] IntersectionObserverInitGetRoot::into(Self) -> T
 pub impl FromJsAny for IntersectionObserverInitGetRoot
 pub impl TIntersectionObserverInitGetRoot for IntersectionObserverInitGetRoot
 pub impl TJsValue for IntersectionObserverInitGetRoot
 
 #external
 pub type IntersectionObserverInitGetThreshold
-pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThreshold::into(Self) -> T
+pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThreshold::from(T) -> Self
+pub fn[T : TIntersectionObserverInitGetThreshold + FromJsAny] IntersectionObserverInitGetThreshold::into(Self) -> T
 pub impl FromJsAny for IntersectionObserverInitGetThreshold
 pub impl TIntersectionObserverInitGetThreshold for IntersectionObserverInitGetThreshold
 pub impl TJsValue for IntersectionObserverInitGetThreshold
 
 #external
 pub type IntersectionObserverRoot
-pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::into(Self) -> T
+pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::from(T) -> Self
+pub fn[T : TIntersectionObserverRoot + FromJsAny] IntersectionObserverRoot::into(Self) -> T
 pub impl FromJsAny for IntersectionObserverRoot
 pub impl TIntersectionObserverRoot for IntersectionObserverRoot
 pub impl TJsValue for IntersectionObserverRoot
@@ -3903,7 +3941,8 @@ pub impl TJsValue for KeyframeAnimationOptions
 
 #external
 pub type KeyframeAnimationOptionsGetDuration
-pub fn[T : TKeyframeAnimationOptionsGetDuration] KeyframeAnimationOptionsGetDuration::into(Self) -> T
+pub fn[T : TKeyframeAnimationOptionsGetDuration] KeyframeAnimationOptionsGetDuration::from(T) -> Self
+pub fn[T : TKeyframeAnimationOptionsGetDuration + FromJsAny] KeyframeAnimationOptionsGetDuration::into(Self) -> T
 pub impl FromJsAny for KeyframeAnimationOptionsGetDuration
 pub impl TJsValue for KeyframeAnimationOptionsGetDuration
 pub impl TKeyframeAnimationOptionsGetDuration for KeyframeAnimationOptionsGetDuration
@@ -3938,7 +3977,8 @@ pub impl TKeyframeEffectNewOptions for KeyframeEffectOptions
 
 #external
 pub type KeyframeEffectOptionsGetDuration
-pub fn[T : TKeyframeEffectOptionsGetDuration] KeyframeEffectOptionsGetDuration::into(Self) -> T
+pub fn[T : TKeyframeEffectOptionsGetDuration] KeyframeEffectOptionsGetDuration::from(T) -> Self
+pub fn[T : TKeyframeEffectOptionsGetDuration + FromJsAny] KeyframeEffectOptionsGetDuration::into(Self) -> T
 pub impl FromJsAny for KeyframeEffectOptionsGetDuration
 pub impl TJsValue for KeyframeEffectOptionsGetDuration
 pub impl TKeyframeEffectOptionsGetDuration for KeyframeEffectOptionsGetDuration
@@ -3968,7 +4008,8 @@ pub impl TMediaList for MediaList
 
 #external
 pub type MediaProvider
-pub fn[T : TMediaProvider] MediaProvider::into(Self) -> T
+pub fn[T : TMediaProvider] MediaProvider::from(T) -> Self
+pub fn[T : TMediaProvider + FromJsAny] MediaProvider::into(Self) -> T
 pub impl FromJsAny for MediaProvider
 pub impl TJsValue for MediaProvider
 pub impl TMediaProvider for MediaProvider
@@ -4049,7 +4090,8 @@ pub impl TJsValue for MessageEventInit
 
 #external
 pub type MessageEventSource
-pub fn[T : TMessageEventSource] MessageEventSource::into(Self) -> T
+pub fn[T : TMessageEventSource] MessageEventSource::from(T) -> Self
+pub fn[T : TMessageEventSource + FromJsAny] MessageEventSource::into(Self) -> T
 pub impl FromJsAny for MessageEventSource
 pub impl TJsValue for MessageEventSource
 pub impl TMessageEventSource for MessageEventSource
@@ -4535,21 +4577,24 @@ pub impl TOffscreenRenderingContext for OffscreenCanvasRenderingContext2D
 
 #external
 pub type OffscreenCanvasRenderingContext2DFillStyle
-pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRenderingContext2DFillStyle::into(Self) -> T
+pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRenderingContext2DFillStyle::from(T) -> Self
+pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle + FromJsAny] OffscreenCanvasRenderingContext2DFillStyle::into(Self) -> T
 pub impl FromJsAny for OffscreenCanvasRenderingContext2DFillStyle
 pub impl TJsValue for OffscreenCanvasRenderingContext2DFillStyle
 pub impl TOffscreenCanvasRenderingContext2DFillStyle for OffscreenCanvasRenderingContext2DFillStyle
 
 #external
 pub type OffscreenCanvasRenderingContext2DStrokeStyle
-pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle] OffscreenCanvasRenderingContext2DStrokeStyle::into(Self) -> T
+pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle] OffscreenCanvasRenderingContext2DStrokeStyle::from(T) -> Self
+pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle + FromJsAny] OffscreenCanvasRenderingContext2DStrokeStyle::into(Self) -> T
 pub impl FromJsAny for OffscreenCanvasRenderingContext2DStrokeStyle
 pub impl TJsValue for OffscreenCanvasRenderingContext2DStrokeStyle
 pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRenderingContext2DStrokeStyle
 
 #external
 pub type OffscreenRenderingContext
-pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::into(Self) -> T
+pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::from(T) -> Self
+pub fn[T : TOffscreenRenderingContext + FromJsAny] OffscreenRenderingContext::into(Self) -> T
 pub impl FromJsAny for OffscreenRenderingContext
 pub impl TJsValue for OffscreenRenderingContext
 pub impl TOffscreenRenderingContext for OffscreenRenderingContext
@@ -4604,7 +4649,8 @@ pub impl TJsValue for OptionalEffectTiming
 
 #external
 pub type OptionalEffectTimingGetDuration
-pub fn[T : TOptionalEffectTimingGetDuration] OptionalEffectTimingGetDuration::into(Self) -> T
+pub fn[T : TOptionalEffectTimingGetDuration] OptionalEffectTimingGetDuration::from(T) -> Self
+pub fn[T : TOptionalEffectTimingGetDuration + FromJsAny] OptionalEffectTimingGetDuration::into(Self) -> T
 pub impl FromJsAny for OptionalEffectTimingGetDuration
 pub impl TJsValue for OptionalEffectTimingGetDuration
 pub impl TOptionalEffectTimingGetDuration for OptionalEffectTimingGetDuration
@@ -5076,7 +5122,8 @@ pub impl TReadableStreamBYOBRequest for ReadableStreamBYOBRequest
 
 #external
 pub type ReadableStreamController
-pub fn[T : TReadableStreamController] ReadableStreamController::into(Self) -> T
+pub fn[T : TReadableStreamController] ReadableStreamController::from(T) -> Self
+pub fn[T : TReadableStreamController + FromJsAny] ReadableStreamController::into(Self) -> T
 pub impl FromJsAny for ReadableStreamController
 pub impl TJsValue for ReadableStreamController
 pub impl TReadableStreamController for ReadableStreamController
@@ -5125,7 +5172,8 @@ pub impl TJsValue for ReadableStreamReadResult
 
 #external
 pub type ReadableStreamReader
-pub fn[T : TReadableStreamReader] ReadableStreamReader::into(Self) -> T
+pub fn[T : TReadableStreamReader] ReadableStreamReader::from(T) -> Self
+pub fn[T : TReadableStreamReader + FromJsAny] ReadableStreamReader::into(Self) -> T
 pub impl FromJsAny for ReadableStreamReader
 pub impl TJsValue for ReadableStreamReader
 pub impl TReadableStreamReader for ReadableStreamReader
@@ -5179,7 +5227,8 @@ pub impl Show for ReferrerPolicy
 
 #external
 pub type RenderingContext
-pub fn[T : TRenderingContext] RenderingContext::into(Self) -> T
+pub fn[T : TRenderingContext] RenderingContext::from(T) -> Self
+pub fn[T : TRenderingContext + FromJsAny] RenderingContext::into(Self) -> T
 pub impl FromJsAny for RenderingContext
 pub impl TJsValue for RenderingContext
 pub impl TRenderingContext for RenderingContext
@@ -5262,7 +5311,8 @@ pub impl Show for RequestDuplex
 
 #external
 pub type RequestInfo
-pub fn[T : TRequestInfo] RequestInfo::into(Self) -> T
+pub fn[T : TRequestInfo] RequestInfo::from(T) -> Self
+pub fn[T : TRequestInfo + FromJsAny] RequestInfo::into(Self) -> T
 pub impl FromJsAny for RequestInfo
 pub impl TJsValue for RequestInfo
 pub impl TRequestInfo for RequestInfo
@@ -5521,7 +5571,8 @@ pub impl TSVGAnimatedString for SVGAnimatedString
 
 #external
 pub type SVGAnimatedStringBaseVal
-pub fn[T : TSVGAnimatedStringBaseVal] SVGAnimatedStringBaseVal::into(Self) -> T
+pub fn[T : TSVGAnimatedStringBaseVal] SVGAnimatedStringBaseVal::from(T) -> Self
+pub fn[T : TSVGAnimatedStringBaseVal + FromJsAny] SVGAnimatedStringBaseVal::into(Self) -> T
 pub impl FromJsAny for SVGAnimatedStringBaseVal
 pub impl TJsValue for SVGAnimatedStringBaseVal
 pub impl TSVGAnimatedStringBaseVal for SVGAnimatedStringBaseVal
@@ -6187,7 +6238,8 @@ pub impl TJsValue for ShadowRootInit
 
 #external
 pub type ShadowRootInnerHTML
-pub fn[T : TShadowRootInnerHTML] ShadowRootInnerHTML::into(Self) -> T
+pub fn[T : TShadowRootInnerHTML] ShadowRootInnerHTML::from(T) -> Self
+pub fn[T : TShadowRootInnerHTML + FromJsAny] ShadowRootInnerHTML::into(Self) -> T
 pub impl FromJsAny for ShadowRootInnerHTML
 pub impl TJsValue for ShadowRootInnerHTML
 pub impl TShadowRootInnerHTML for ShadowRootInnerHTML
@@ -6348,7 +6400,8 @@ pub impl TStyleSheetList for StyleSheetList
 
 #external
 pub type StyleSheetOwnerNode
-pub fn[T : TStyleSheetOwnerNode] StyleSheetOwnerNode::into(Self) -> T
+pub fn[T : TStyleSheetOwnerNode] StyleSheetOwnerNode::from(T) -> Self
+pub fn[T : TStyleSheetOwnerNode + FromJsAny] StyleSheetOwnerNode::into(Self) -> T
 pub impl FromJsAny for StyleSheetOwnerNode
 pub impl TJsValue for StyleSheetOwnerNode
 pub impl TStyleSheetOwnerNode for StyleSheetOwnerNode
@@ -6529,7 +6582,8 @@ pub impl TTimeRanges for TimeRanges
 
 #external
 pub type TimerHandler
-pub fn[T : TTimerHandler] TimerHandler::into(Self) -> T
+pub fn[T : TTimerHandler] TimerHandler::from(T) -> Self
+pub fn[T : TTimerHandler + FromJsAny] TimerHandler::into(Self) -> T
 pub impl FromJsAny for TimerHandler
 pub impl TJsValue for TimerHandler
 pub impl TTimerHandler for TimerHandler
@@ -6676,14 +6730,16 @@ pub impl TJsValue for TrackEventInit
 
 #external
 pub type TrackEventInitGetTrack
-pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::into(Self) -> T
+pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::from(T) -> Self
+pub fn[T : TTrackEventInitGetTrack + FromJsAny] TrackEventInitGetTrack::into(Self) -> T
 pub impl FromJsAny for TrackEventInitGetTrack
 pub impl TJsValue for TrackEventInitGetTrack
 pub impl TTrackEventInitGetTrack for TrackEventInitGetTrack
 
 #external
 pub type TrackEventTrack
-pub fn[T : TTrackEventTrack] TrackEventTrack::into(Self) -> T
+pub fn[T : TTrackEventTrack] TrackEventTrack::from(T) -> Self
+pub fn[T : TTrackEventTrack + FromJsAny] TrackEventTrack::into(Self) -> T
 pub impl FromJsAny for TrackEventTrack
 pub impl TJsValue for TrackEventTrack
 pub impl TTrackEventTrack for TrackEventTrack
@@ -6790,7 +6846,8 @@ pub impl TWorkerNewScriptURL for TrustedScriptURL
 
 #external
 pub type TrustedType
-pub fn[T : TTrustedType] TrustedType::into(Self) -> T
+pub fn[T : TTrustedType] TrustedType::from(T) -> Self
+pub fn[T : TTrustedType + FromJsAny] TrustedType::into(Self) -> T
 pub impl FromJsAny for TrustedType
 pub impl TElementSetAttributeNSValue for TrustedType
 pub impl TElementSetAttributeValue for TrustedType
@@ -6988,7 +7045,8 @@ pub impl TJsValue for ValidityStateFlags
 
 #external
 pub type VibratePattern
-pub fn[T : TVibratePattern] VibratePattern::into(Self) -> T
+pub fn[T : TVibratePattern] VibratePattern::from(T) -> Self
+pub fn[T : TVibratePattern + FromJsAny] VibratePattern::into(Self) -> T
 pub impl FromJsAny for VibratePattern
 pub impl TJsValue for VibratePattern
 pub impl TVibratePattern for VibratePattern
@@ -7128,7 +7186,8 @@ pub impl TWindow for Window
 
 #external
 pub type WindowEvent
-pub fn[T : TWindowEvent] WindowEvent::into(Self) -> T
+pub fn[T : TWindowEvent] WindowEvent::from(T) -> Self
+pub fn[T : TWindowEvent + FromJsAny] WindowEvent::into(Self) -> T
 pub fn WindowEvent::is_undefined(Self) -> Bool
 pub impl FromJsAny for WindowEvent
 pub impl TJsValue for WindowEvent
@@ -7263,7 +7322,8 @@ pub impl TXMLHttpRequestEventTarget for XMLHttpRequest
 
 #external
 pub type XMLHttpRequestBodyInit
-pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::into(Self) -> T
+pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::from(T) -> Self
+pub fn[T : TXMLHttpRequestBodyInit + FromJsAny] XMLHttpRequestBodyInit::into(Self) -> T
 pub impl FromJsAny for XMLHttpRequestBodyInit
 pub impl TBodyInit for XMLHttpRequestBodyInit
 pub impl TJsValue for XMLHttpRequestBodyInit

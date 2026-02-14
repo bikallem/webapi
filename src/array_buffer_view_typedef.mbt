@@ -19,7 +19,16 @@ pub(open) trait TArrayBufferView {
 }
 
 ///|
-pub fn[T : TArrayBufferView] ArrayBufferView::into(self : ArrayBufferView) -> T = "%identity"
+pub fn[T : TArrayBufferView + FromJsAny] ArrayBufferView::into(
+  self : ArrayBufferView,
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TArrayBufferView] ArrayBufferView::from(
+  value : T,
+) -> ArrayBufferView = "%identity"
 
 ///|
 pub impl TArrayBufferView for ArrayBufferView with to_js(self : ArrayBufferView) -> JsValue = "%identity"

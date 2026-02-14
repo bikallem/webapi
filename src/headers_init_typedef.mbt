@@ -19,7 +19,12 @@ pub(open) trait THeadersInit {
 }
 
 ///|
-pub fn[T : THeadersInit] HeadersInit::into(self : HeadersInit) -> T = "%identity"
+pub fn[T : THeadersInit + FromJsAny] HeadersInit::into(self : HeadersInit) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : THeadersInit] HeadersInit::from(value : T) -> HeadersInit = "%identity"
 
 ///|
 pub impl THeadersInit for HeadersInit with to_js(self : HeadersInit) -> JsValue = "%identity"

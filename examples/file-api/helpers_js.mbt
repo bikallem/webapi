@@ -9,9 +9,3 @@ extern "js" fn create_text_file(
   name : String,
   mime : String,
 ) -> @webapi.File = "(text, name, mime) => new File([text], name, { type: mime })"
-
-///|
-/// Convert FileReaderResult to String (safe on JS target via into).
-fn file_reader_result_to_string(result : @webapi.FileReaderResult) -> String {
-  result.into()
-}

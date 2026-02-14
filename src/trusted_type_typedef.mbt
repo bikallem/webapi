@@ -19,7 +19,12 @@ pub(open) trait TTrustedType {
 }
 
 ///|
-pub fn[T : TTrustedType] TrustedType::into(self : TrustedType) -> T = "%identity"
+pub fn[T : TTrustedType + FromJsAny] TrustedType::into(self : TrustedType) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TTrustedType] TrustedType::from(value : T) -> TrustedType = "%identity"
 
 ///|
 pub impl TTrustedType for TrustedType with to_js(self : TrustedType) -> JsValue = "%identity"

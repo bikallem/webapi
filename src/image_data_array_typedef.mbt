@@ -19,7 +19,14 @@ pub(open) trait TImageDataArray {
 }
 
 ///|
-pub fn[T : TImageDataArray] ImageDataArray::into(self : ImageDataArray) -> T = "%identity"
+pub fn[T : TImageDataArray + FromJsAny] ImageDataArray::into(
+  self : ImageDataArray,
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TImageDataArray] ImageDataArray::from(value : T) -> ImageDataArray = "%identity"
 
 ///|
 pub impl TImageDataArray for ImageDataArray with to_js(self : ImageDataArray) -> JsValue = "%identity"

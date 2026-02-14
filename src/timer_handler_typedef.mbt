@@ -19,7 +19,14 @@ pub(open) trait TTimerHandler {
 }
 
 ///|
-pub fn[T : TTimerHandler] TimerHandler::into(self : TimerHandler) -> T = "%identity"
+pub fn[T : TTimerHandler + FromJsAny] TimerHandler::into(
+  self : TimerHandler,
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TTimerHandler] TimerHandler::from(value : T) -> TimerHandler = "%identity"
 
 ///|
 pub impl TTimerHandler for TimerHandler with to_js(self : TimerHandler) -> JsValue = "%identity"

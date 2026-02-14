@@ -104,9 +104,16 @@ pub impl FromJsAny for IntersectionObserverInitGetRoot with from_js_any(
 ) -> IntersectionObserverInitGetRoot = "%identity"
 
 ///|
-pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::into(
+pub fn[T : TIntersectionObserverInitGetRoot + FromJsAny] IntersectionObserverInitGetRoot::into(
   self : IntersectionObserverInitGetRoot,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::from(
+  value : T,
+) -> IntersectionObserverInitGetRoot = "%identity"
 
 ///|
 pub impl TIntersectionObserverInitGetRoot for IntersectionObserverInitGetRoot with to_js(
@@ -146,9 +153,16 @@ pub impl FromJsAny for IntersectionObserverInitGetThreshold with from_js_any(
 ) -> IntersectionObserverInitGetThreshold = "%identity"
 
 ///|
-pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThreshold::into(
+pub fn[T : TIntersectionObserverInitGetThreshold + FromJsAny] IntersectionObserverInitGetThreshold::into(
   self : IntersectionObserverInitGetThreshold,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThreshold::from(
+  value : T,
+) -> IntersectionObserverInitGetThreshold = "%identity"
 
 ///|
 pub impl TIntersectionObserverInitGetThreshold for IntersectionObserverInitGetThreshold with to_js(

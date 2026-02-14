@@ -84,9 +84,16 @@ pub impl TJsValue for EffectTimingGetDuration with to_js(
 pub impl FromJsAny for EffectTimingGetDuration with from_js_any(value : JsAny) -> EffectTimingGetDuration = "%identity"
 
 ///|
-pub fn[T : TEffectTimingGetDuration] EffectTimingGetDuration::into(
+pub fn[T : TEffectTimingGetDuration + FromJsAny] EffectTimingGetDuration::into(
   self : EffectTimingGetDuration,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TEffectTimingGetDuration] EffectTimingGetDuration::from(
+  value : T,
+) -> EffectTimingGetDuration = "%identity"
 
 ///|
 pub impl TEffectTimingGetDuration for EffectTimingGetDuration with to_js(

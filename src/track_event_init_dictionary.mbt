@@ -78,9 +78,16 @@ pub impl TJsValue for TrackEventInitGetTrack with to_js(
 pub impl FromJsAny for TrackEventInitGetTrack with from_js_any(value : JsAny) -> TrackEventInitGetTrack = "%identity"
 
 ///|
-pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::into(
+pub fn[T : TTrackEventInitGetTrack + FromJsAny] TrackEventInitGetTrack::into(
   self : TrackEventInitGetTrack,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::from(
+  value : T,
+) -> TrackEventInitGetTrack = "%identity"
 
 ///|
 pub impl TTrackEventInitGetTrack for TrackEventInitGetTrack with to_js(

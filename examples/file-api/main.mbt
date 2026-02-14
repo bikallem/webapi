@@ -50,7 +50,7 @@ fn main {
       let reader = @webapi.FileReader::new()
       reader.set_onload(
         @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
-          let result = file_reader_result_to_string(reader.result())
+          let result : String = reader.result().into()
           text_output.set_text_content(result)
           @webapi.JsValue::undefined()
         }),
@@ -76,7 +76,7 @@ fn main {
       let reader = @webapi.FileReader::new()
       reader.set_onload(
         @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
-          let result = file_reader_result_to_string(reader.result())
+          let result : String = reader.result().into()
           url_output.set_text_content(result)
           @webapi.JsValue::undefined()
         }),

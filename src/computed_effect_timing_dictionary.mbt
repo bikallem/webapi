@@ -92,9 +92,16 @@ pub impl FromJsAny for ComputedEffectTimingGetDuration with from_js_any(
 ) -> ComputedEffectTimingGetDuration = "%identity"
 
 ///|
-pub fn[T : TComputedEffectTimingGetDuration] ComputedEffectTimingGetDuration::into(
+pub fn[T : TComputedEffectTimingGetDuration + FromJsAny] ComputedEffectTimingGetDuration::into(
   self : ComputedEffectTimingGetDuration,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TComputedEffectTimingGetDuration] ComputedEffectTimingGetDuration::from(
+  value : T,
+) -> ComputedEffectTimingGetDuration = "%identity"
 
 ///|
 pub impl TComputedEffectTimingGetDuration for ComputedEffectTimingGetDuration with to_js(

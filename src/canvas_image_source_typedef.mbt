@@ -19,9 +19,16 @@ pub(open) trait TCanvasImageSource {
 }
 
 ///|
-pub fn[T : TCanvasImageSource] CanvasImageSource::into(
+pub fn[T : TCanvasImageSource + FromJsAny] CanvasImageSource::into(
   self : CanvasImageSource,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TCanvasImageSource] CanvasImageSource::from(
+  value : T,
+) -> CanvasImageSource = "%identity"
 
 ///|
 pub impl TCanvasImageSource for CanvasImageSource with to_js(

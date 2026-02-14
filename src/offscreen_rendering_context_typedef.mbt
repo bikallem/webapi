@@ -21,9 +21,16 @@ pub(open) trait TOffscreenRenderingContext {
 }
 
 ///|
-pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::into(
+pub fn[T : TOffscreenRenderingContext + FromJsAny] OffscreenRenderingContext::into(
   self : OffscreenRenderingContext,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::from(
+  value : T,
+) -> OffscreenRenderingContext = "%identity"
 
 ///|
 pub impl TOffscreenRenderingContext for OffscreenRenderingContext with to_js(

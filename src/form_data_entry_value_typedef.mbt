@@ -19,9 +19,16 @@ pub(open) trait TFormDataEntryValue {
 }
 
 ///|
-pub fn[T : TFormDataEntryValue] FormDataEntryValue::into(
+pub fn[T : TFormDataEntryValue + FromJsAny] FormDataEntryValue::into(
   self : FormDataEntryValue,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TFormDataEntryValue] FormDataEntryValue::from(
+  value : T,
+) -> FormDataEntryValue = "%identity"
 
 ///|
 pub impl TFormDataEntryValue for FormDataEntryValue with to_js(

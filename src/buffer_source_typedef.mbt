@@ -19,7 +19,14 @@ pub(open) trait TBufferSource {
 }
 
 ///|
-pub fn[T : TBufferSource] BufferSource::into(self : BufferSource) -> T = "%identity"
+pub fn[T : TBufferSource + FromJsAny] BufferSource::into(
+  self : BufferSource,
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TBufferSource] BufferSource::from(value : T) -> BufferSource = "%identity"
 
 ///|
 pub impl TBufferSource for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"

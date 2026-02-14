@@ -19,9 +19,16 @@ pub(open) trait TImageBitmapSource {
 }
 
 ///|
-pub fn[T : TImageBitmapSource] ImageBitmapSource::into(
+pub fn[T : TImageBitmapSource + FromJsAny] ImageBitmapSource::into(
   self : ImageBitmapSource,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TImageBitmapSource] ImageBitmapSource::from(
+  value : T,
+) -> ImageBitmapSource = "%identity"
 
 ///|
 pub impl TImageBitmapSource for ImageBitmapSource with to_js(

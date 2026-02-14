@@ -31,9 +31,16 @@ pub impl TJsValue for StyleSheetOwnerNode with to_js(self : StyleSheetOwnerNode)
 pub impl FromJsAny for StyleSheetOwnerNode with from_js_any(value : JsAny) -> StyleSheetOwnerNode = "%identity"
 
 ///|
-pub fn[T : TStyleSheetOwnerNode] StyleSheetOwnerNode::into(
+pub fn[T : TStyleSheetOwnerNode + FromJsAny] StyleSheetOwnerNode::into(
   self : StyleSheetOwnerNode,
-) -> T = "%identity"
+) -> T {
+  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+}
+
+///|
+pub fn[T : TStyleSheetOwnerNode] StyleSheetOwnerNode::from(
+  value : T,
+) -> StyleSheetOwnerNode = "%identity"
 
 ///|
 pub impl TStyleSheetOwnerNode for StyleSheetOwnerNode with to_js(
