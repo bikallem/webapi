@@ -3785,9 +3785,9 @@ export const wasmImportObject = {
 
   webapi_OffscreenCanvas: {
     new: (width, height) => new OffscreenCanvas(width, height),
-    get_width: (obj) => obj.width,
+    get_width: (obj) => BigInt(obj.width),
     set_width: (obj, value) => { obj.width = value; },
-    get_height: (obj) => obj.height,
+    get_height: (obj) => BigInt(obj.height),
     set_height: (obj, value) => { obj.height = value; },
     get_oncontextlost: (obj) => obj.oncontextlost,
     set_oncontextlost: (obj, value) => { obj.oncontextlost = value; },
@@ -3970,7 +3970,7 @@ export const wasmImportObject = {
     get_plugins: (obj) => obj.plugins,
     get_mimeTypes: (obj) => obj.mimeTypes,
     get_pdfViewerEnabled: (obj) => obj.pdfViewerEnabled,
-    get_hardwareConcurrency: (obj) => obj.hardwareConcurrency,
+    get_hardwareConcurrency: (obj) => BigInt(obj.hardwareConcurrency),
     get_storage: (obj) => obj.storage,
     vibrate: (obj, pattern) => obj.vibrate(pattern),
     taintEnabled: (obj) => obj.taintEnabled(),
@@ -4114,7 +4114,7 @@ export const wasmImportObject = {
     get_url: (obj) => obj.url,
     get_key: (obj) => obj.key,
     get_id: (obj) => obj.id,
-    get_index: (obj) => obj.index,
+    get_index: (obj) => BigInt(obj.index),
     get_sameDocument: (obj) => obj.sameDocument,
     get_ondispose: (obj) => obj.ondispose,
     set_ondispose: (obj, value) => { obj.ondispose = value; },
@@ -4161,7 +4161,7 @@ export const wasmImportObject = {
     get_url: (obj) => obj.url,
     get_key: (obj) => obj.key,
     get_id: (obj) => obj.id,
-    get_index: (obj) => obj.index,
+    get_index: (obj) => BigInt(obj.index),
     get_sameDocument: (obj) => obj.sameDocument,
     getState: (obj) => obj.getState()
   },
@@ -4435,7 +4435,7 @@ export const wasmImportObject = {
     get_language: (obj) => obj.language,
     get_languages: (obj) => obj.languages,
     get_onLine: (obj) => obj.onLine,
-    get_hardwareConcurrency: (obj) => obj.hardwareConcurrency,
+    get_hardwareConcurrency: (obj) => BigInt(obj.hardwareConcurrency),
     get_storage: (obj) => obj.storage,
     taintEnabled: (obj) => obj.taintEnabled()
   },
@@ -4821,7 +4821,7 @@ export const wasmImportObject = {
 
   webapi_Blob: {
     new: (blob_parts, options) => new Blob(blob_parts, options),
-    get_size: (obj) => obj.size,
+    get_size: (obj) => BigInt(obj.size),
     get_type: (obj) => obj.type,
     slice: (obj, start, end, content_type) => obj.slice(start, end, content_type),
     stream: (obj) => obj.stream(),
@@ -4833,7 +4833,7 @@ export const wasmImportObject = {
   webapi_File: {
     new: (file_bits, file_name, options) => new File(file_bits, file_name, options),
     get_name: (obj) => obj.name,
-    get_lastModified: (obj) => obj.lastModified
+    get_lastModified: (obj) => BigInt(obj.lastModified)
   },
 
   webapi_FileList: {
@@ -5297,8 +5297,8 @@ export const wasmImportObject = {
 
   webapi_IDBVersionChangeEvent: {
     new: (type_, event_init_dict) => new IDBVersionChangeEvent(type_, event_init_dict),
-    get_oldVersion: (obj) => obj.oldVersion,
-    get_newVersion: (obj) => obj.newVersion
+    get_oldVersion: (obj) => BigInt(obj.oldVersion),
+    get_newVersion: (obj) => BigInt(obj.newVersion)
   },
 
   webapi_IDBFactory: {
@@ -5310,7 +5310,7 @@ export const wasmImportObject = {
 
   webapi_IDBDatabase: {
     get_name: (obj) => obj.name,
-    get_version: (obj) => obj.version,
+    get_version: (obj) => BigInt(obj.version),
     get_objectStoreNames: (obj) => obj.objectStoreNames,
     get_onabort: (obj) => obj.onabort,
     set_onabort: (obj, value) => { obj.onabort = value; },
@@ -5470,7 +5470,7 @@ export const wasmImportObject = {
     new: (url, protocols) => new WebSocket(url, protocols),
     get_url: (obj) => obj.url,
     get_readyState: (obj) => obj.readyState,
-    get_bufferedAmount: (obj) => obj.bufferedAmount,
+    get_bufferedAmount: (obj) => BigInt(obj.bufferedAmount),
     get_onopen: (obj) => obj.onopen,
     set_onopen: (obj, value) => { obj.onopen = value; },
     get_onerror: (obj) => obj.onerror,
@@ -5647,7 +5647,7 @@ export const wasmImportObject = {
   webapi_ClipboardChangeEvent: {
     new: (type_, event_init_dict) => new ClipboardChangeEvent(type_, event_init_dict),
     get_types: (obj) => obj.types,
-    get_changeId: (obj) => obj.changeId
+    get_changeId: (obj) => BigInt(obj.changeId)
   },
 
   webapi_ClipboardItem: {
@@ -5757,12 +5757,12 @@ export const wasmImportObject = {
   },
 
   webapi_PerformanceEntry: {
-    get_id: (obj) => obj.id,
+    get_id: (obj) => BigInt(obj.id),
     get_name: (obj) => obj.name,
     get_entryType: (obj) => obj.entryType,
     get_startTime: (obj) => obj.startTime,
     get_duration: (obj) => obj.duration,
-    get_navigationId: (obj) => obj.navigationId,
+    get_navigationId: (obj) => BigInt(obj.navigationId),
     toJSON: (obj) => obj.toJSON()
   },
 

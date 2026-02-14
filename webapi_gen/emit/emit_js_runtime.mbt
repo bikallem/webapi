@@ -97,6 +97,17 @@ fn emit_js_preamble() -> String {
 }
 
 ///|
+/// Check if a WebIDL type maps to BigInt (i64) on wasm-gc.
+/// When true, JS runtime getters/methods must wrap return values with BigInt().
+fn is_bigint_type(type_ : @parser.Type) -> Bool {
+  match type_ {
+    LongLong | UnsignedLongLong | Bigint => true
+    Nullable(inner) => is_bigint_type(inner)
+    _ => false
+  }
+}
+
+///|
 /// Check if a name needs quoting in JS (contains characters invalid in identifiers).
 /// In WebIDL, only CSS property names contain hyphens (e.g. "background-color").
 /// Other special characters (dots, spaces, leading digits) don't appear in WebIDL names.
@@ -109,15 +120,22 @@ fn needs_js_quoting(name : String) -> Bool {
 fn emit_js_getter(
   attr_name : String,
   is_static~ : Bool = false,
+  is_bigint~ : Bool = false,
   interface_name~ : String = "",
 ) -> String {
   if is_static {
-    "    get_\{attr_name}: () => \{interface_name}.\{attr_name}"
+    let expr = "\{interface_name}.\{attr_name}"
+    let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
+    "    get_\{attr_name}: () => \{expr}"
   } else if needs_js_quoting(attr_name) {
     let q = "\""
-    "    \{q}get_\{attr_name}\{q}: (obj) => obj[\{q}\{attr_name}\{q}]"
+    let expr = "obj[\{q}\{attr_name}\{q}]"
+    let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
+    "    \{q}get_\{attr_name}\{q}: (obj) => \{expr}"
   } else {
-    "    get_\{attr_name}: (obj) => obj.\{attr_name}"
+    let expr = "obj.\{attr_name}"
+    let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
+    "    get_\{attr_name}: (obj) => \{expr}"
   }
 }
 
@@ -147,6 +165,7 @@ fn emit_js_method(
   original_name : String,
   args : Array[@parser.Argument],
   is_static : Bool,
+  is_bigint~ : Bool = false,
   interface_name~ : String = "",
 ) -> String {
   // Build argument names list (params without spread, call_args with spread for variadic)
@@ -166,13 +185,17 @@ fn emit_js_method(
     // Static method: no obj parameter, call on the class directly
     let params = arg_names.join(comma_sep)
     let call_args = call_parts.join(comma_sep)
-    "    \{import_name}: (\{params}) => \{interface_name}.\{original_name}(\{call_args})"
+    let expr = "\{interface_name}.\{original_name}(\{call_args})"
+    let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
+    "    \{import_name}: (\{params}) => \{expr}"
   } else {
     // Instance method: obj is first parameter
     let args_str = arg_names.join(comma_sep)
     let params = if arg_names.length() > 0 { "obj, \{args_str}" } else { "obj" }
     let call_args = call_parts.join(comma_sep)
-    "    \{import_name}: (\{params}) => obj.\{original_name}(\{call_args})"
+    let expr = "obj.\{original_name}(\{call_args})"
+    let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
+    "    \{import_name}: (\{params}) => \{expr}"
   }
 }
 
@@ -265,6 +288,7 @@ fn emit_js_interface_module(
           emit_js_getter(
             attr.name,
             is_static=attr.static_,
+            is_bigint=is_bigint_type(attr.type_),
             interface_name=iface.name,
           ),
         )
@@ -300,6 +324,7 @@ fn emit_js_interface_module(
             op.name,
             op.arguments,
             op.static_,
+            is_bigint=is_bigint_type(op.return_type),
             interface_name=iface.name,
           ),
         )
@@ -313,7 +338,15 @@ fn emit_js_interface_module(
           method_counter,
           used_method_names,
         )
-        entries.push(emit_js_method(import_name, name, op.arguments, false))
+        entries.push(
+          emit_js_method(
+            import_name,
+            name,
+            op.arguments,
+            false,
+            is_bigint=is_bigint_type(op.return_type),
+          ),
+        )
       }
       SpecialOperation(op) => {
         // Unnamed special operation → bracket notation
@@ -389,6 +422,7 @@ fn emit_js_namespace_method(
   namespace_name : String,
   method_name : String,
   args : Array[@parser.Argument],
+  is_bigint~ : Bool = false,
 ) -> String {
   let arg_names : Array[String] = []
   let call_parts : Array[String] = []
@@ -404,7 +438,9 @@ fn emit_js_namespace_method(
   let comma_sep = ", "
   let params = arg_names.join(comma_sep)
   let call_args = call_parts.join(comma_sep)
-  "    \{import_name}: (\{params}) => \{namespace_name}.\{method_name}(\{call_args})"
+  let expr = "\{namespace_name}.\{method_name}(\{call_args})"
+  let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
+  "    \{import_name}: (\{params}) => \{expr}"
 }
 
 ///|
@@ -412,8 +448,11 @@ fn emit_js_namespace_method(
 fn emit_js_namespace_getter(
   namespace_name : String,
   attr_name : String,
+  is_bigint~ : Bool = false,
 ) -> String {
-  "    get_\{attr_name}: () => \{namespace_name}.\{attr_name}"
+  let expr = "\{namespace_name}.\{attr_name}"
+  let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
+  "    get_\{attr_name}: () => \{expr}"
 }
 
 ///|
@@ -437,11 +476,23 @@ fn emit_js_namespace_module(
           used_method_names,
         )
         entries.push(
-          emit_js_namespace_method(import_name, ns.name, op.name, op.arguments),
+          emit_js_namespace_method(
+            import_name,
+            ns.name,
+            op.name,
+            op.arguments,
+            is_bigint=is_bigint_type(op.return_type),
+          ),
         )
       }
       Attribute(attr) =>
-        entries.push(emit_js_namespace_getter(ns.name, attr.name))
+        entries.push(
+          emit_js_namespace_getter(
+            ns.name,
+            attr.name,
+            is_bigint=is_bigint_type(attr.type_),
+          ),
+        )
       Const(_) => continue // Constants don't need JS runtime entries
     }
   }

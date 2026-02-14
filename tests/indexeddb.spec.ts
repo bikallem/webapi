@@ -15,7 +15,7 @@ for (const target of TARGETS) {
     });
 
     test('renders initial UI with database ready', async ({ page }) => {
-      await expect(page.locator('#status')).toContainText('Database ready');
+      await expect(page.locator('#status')).toContainText('Database ready (v');
       await expect(page.locator('#key-input')).toBeVisible();
       await expect(page.locator('#value-input')).toBeVisible();
     });

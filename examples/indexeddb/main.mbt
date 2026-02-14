@@ -122,7 +122,8 @@ fn main {
     "success",
     @webapi.EventListener::new(fn(_event) {
       let db : @webapi.IDBDatabase = open_request.result().into()
-      status_el.set_text_content("Database ready")
+      let version = db.version()
+      status_el.set_text_content("Database ready (v\{version})")
 
       // Put handler
       put_btn.add_event_listener(
