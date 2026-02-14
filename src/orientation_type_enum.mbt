@@ -54,7 +54,7 @@ fn OrientationType::from_unchecked(value : String) -> OrientationType {
     "portrait-secondary" => OrientationType::PortraitSecondary
     "landscape-primary" => OrientationType::LandscapePrimary
     "landscape-secondary" => OrientationType::LandscapeSecondary
-    _ => abort("unknown enum value")
+    _ => abort("unknown OrientationType enum value")
   }
 }
 

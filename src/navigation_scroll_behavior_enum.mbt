@@ -49,7 +49,7 @@ fn NavigationScrollBehavior::from_unchecked(
   match value {
     "after-transition" => NavigationScrollBehavior::AfterTransition
     "manual" => NavigationScrollBehavior::Manual
-    _ => abort("unknown enum value")
+    _ => abort("unknown NavigationScrollBehavior enum value")
   }
 }
 

@@ -26,6 +26,25 @@ fn is_union_typedef_arg(
 }
 
 ///|
+/// Wrap an ArgMbtType with a trait reference prefix "&T" for Interface, Union, and Other types.
+fn to_trait_ref(
+  mbt_type : @type_mapping.ArgMbtType,
+  is_union_typedef : Bool,
+) -> @type_mapping.ArgMbtType {
+  match mbt_type {
+    Interface(name) => Interface("&T\{name}")
+    Union(union_type) => Union({ ..union_type, name: "&T\{union_type.name}" })
+    Other(name) =>
+      if is_union_typedef {
+        Other("&T\{name}")
+      } else {
+        Other(name)
+      }
+    _ => mbt_type
+  }
+}
+
+///|
 /// Convert method arguments from IDL to MBT types, collecting any additional emits needed
 /// for complex types (e.g., union arg traits).
 fn method_args(
@@ -59,21 +78,7 @@ fn method_args(
       _ => default_value
     }
     let union_typedef_arg = is_union_typedef_arg(type_, type_registry)
-    let mbt_type = match mbt_type {
-      @type_mapping.ArgMbtType::Interface(name) =>
-        @type_mapping.ArgMbtType::Interface("&T\{name}")
-      @type_mapping.ArgMbtType::Union(union_type) => {
-        let union_type = { ..union_type, name: "&T\{union_type.name}" }
-        @type_mapping.ArgMbtType::Union(union_type)
-      }
-      @type_mapping.ArgMbtType::Other(name) =>
-        if union_typedef_arg {
-          @type_mapping.ArgMbtType::Other("&T\{name}")
-        } else {
-          @type_mapping.ArgMbtType::Other(name)
-        }
-      _ => mbt_type
-    }
+    let mbt_type = to_trait_ref(mbt_type, union_typedef_arg)
     let mbt_type = if variadic {
       let inner = if mbt_type.name() == "JsValue" {
         "&TJsValue"
@@ -97,6 +102,51 @@ fn method_args(
 }
 
 ///|
+fn find_union_option(
+  arg_type : @type_mapping.ArgMbtType,
+  pred : (@type_mapping.ArgMbtType) -> Bool,
+) -> @type_mapping.ArgMbtType? {
+  match arg_type {
+    Union({ options, .. }) => options.iter().find_first(pred)
+    _ => None
+  }
+}
+
+///|
+fn is_int_type(t : @type_mapping.ArgMbtType) -> Bool {
+  match t {
+    Primitive("Int")
+    | Primitive("Int64")
+    | Primitive("UInt")
+    | Primitive("UInt64") => true
+    _ => false
+  }
+}
+
+///|
+fn is_double_type(t : @type_mapping.ArgMbtType) -> Bool {
+  t is Primitive("Double")
+}
+
+///|
+fn is_float_type(t : @type_mapping.ArgMbtType) -> Bool {
+  t is Primitive("Float")
+}
+
+///|
+fn is_float_or_double_type(t : @type_mapping.ArgMbtType) -> Bool {
+  match t {
+    Primitive("Float") | Primitive("Double") => true
+    _ => false
+  }
+}
+
+///|
+fn is_dictionary_type(t : @type_mapping.ArgMbtType) -> Bool {
+  t is Dictionary(_)
+}
+
+///|
 fn mbt_default_value(
   default_value : @parser.DefaultValue,
   arg_type : @type_mapping.ArgMbtType,
@@ -112,88 +162,44 @@ fn mbt_default_value(
       }
     ConstValue(Boolean(b)) => b
     ConstValue(Integer(i)) =>
-      match arg_type {
-        @type_mapping.ArgMbtType::Union({ options, .. }) =>
-          if options
-            .iter()
-            .find_first(it => {
-              match it {
-                Primitive("Int")
-                | Primitive("Int64")
-                | Primitive("UInt")
-                | Primitive("UInt64") => true
-                _ => false
-              }
-            })
-            is Some(t) {
-            "(\{i}: \{t.name()})"
-          } else if options
-            .iter()
-            .any(it => it is @type_mapping.ArgMbtType::Primitive("Double")) {
-            "(\{i} : Double)"
-          } else if options
-            .iter()
-            .any(it => it is @type_mapping.ArgMbtType::Primitive("Float")) {
-            "(\{i} : Float)"
-          } else {
-            i
-          }
-        _ => "(\{i}: \{arg_type.name()})"
+      if find_union_option(arg_type, is_int_type) is Some(t) {
+        "(\{i}: \{t.name()})"
+      } else if find_union_option(arg_type, is_double_type) is Some(_) {
+        "(\{i} : Double)"
+      } else if find_union_option(arg_type, is_float_type) is Some(_) {
+        "(\{i} : Float)"
+      } else if arg_type is Union(_) {
+        i
+      } else {
+        "(\{i}: \{arg_type.name()})"
       }
     ConstValue(Float(_) as f) => {
       let f = @type_mapping.const_value(f)
-      match arg_type {
-        @type_mapping.ArgMbtType::Union({ options, .. }) =>
-          if options
-            .iter()
-            .find_first(it => {
-              match it {
-                Primitive("Float") | Primitive("Double") => true
-                _ => false
-              }
-            })
-            is Some(t) {
-            "(\{f}: \{t.name()})"
-          } else {
-            abort("No suitable float type in union for default value \{f}")
-          }
-        _ => "(\{f}: \{arg_type.name()})"
+      if find_union_option(arg_type, is_float_or_double_type) is Some(t) {
+        "(\{f}: \{t.name()})"
+      } else if arg_type is Union(_) {
+        abort("No suitable float type in union for default value \{f}")
+      } else {
+        "(\{f}: \{arg_type.name()})"
       }
     }
     Null => "JsValue::null()"
     EmptyObject =>
-      // if arg_type is a union, find a first dictionary type to call empty()
-      if arg_type is Union({ options, .. }) {
-        if options
-          .iter()
-          .find_first(it => {
-            match it {
-              Dictionary(_) => true
-              _ => false
-            }
-          })
-          is Some(t) {
-          "\{t.name()}::empty()"
-        } else {
-          abort(
-            "No suitable interface type in union for default value EmptyObject",
-          )
-        }
+      if find_union_option(arg_type, is_dictionary_type) is Some(t) {
+        "\{t.name()}::empty()"
+      } else if arg_type is Union(_) {
+        abort(
+          "No suitable interface type in union for default value EmptyObject",
+        )
       } else {
         "\{arg_type.name()}::empty()"
       }
     EmptySequence =>
-      match arg_type {
-        @type_mapping.ArgMbtType::Union({ options, .. }) =>
-          if options
-            .iter()
-            .find_first(fn(it) { it.name().has_prefix("Array[") })
-            is Some(t) {
-            "([] : \{t.name()})"
-          } else {
-            "[]"
-          }
-        _ => "[]"
+      if find_union_option(arg_type, fn(t) { t.name().has_prefix("Array[") })
+        is Some(t) {
+        "([] : \{t.name()})"
+      } else {
+        "[]"
       }
     Undefined => "JsUndefined::undefined()"
   }
@@ -361,7 +367,7 @@ fn emit_attribute(
       js_name,
       original_name: attr.name,
       return_type: attr_type.name(),
-      is_enum_type: attr_type is Enum(_),
+      is_enum_type: is_enum_return(attr_type),
       is_valid_wasm_stub: is_wasm_valid_stub_type(attr_type),
     })
   } else {
@@ -369,54 +375,49 @@ fn emit_attribute(
       interface_name,
       original_name: attr.name,
       return_type: attr_type.name(),
-      is_enum_type: attr_type is Enum(_),
+      is_enum_type: is_enum_return(attr_type),
       is_valid_wasm_stub: is_wasm_valid_stub_type(attr_type),
     })
 
     // Set Attribute method if specified (only for non-static)
     if !attr.is_readonly || attr.is_inherit {
-      let union_typedef_attr = is_union_typedef_arg(attr.type_, type_registry)
-      let attr_type = match attr_type {
-        @type_mapping.ArgMbtType::Interface(name) =>
-          @type_mapping.ArgMbtType::Interface("&T\{name}")
-        @type_mapping.ArgMbtType::Union(union_type) => {
-          let union_type = { ..union_type, name: "&T\{union_type.name}" }
-          @type_mapping.ArgMbtType::Union(union_type)
-        }
-        @type_mapping.ArgMbtType::Other(name) =>
-          if union_typedef_attr {
-            @type_mapping.ArgMbtType::Other("&T\{name}")
-          } else {
-            @type_mapping.ArgMbtType::Other(name)
-          }
-        _ => attr_type
-      }
-      let args = [
-        @type_mapping.MethodArg::{
-          name: "self",
-          original_name: "self",
-          type_: @type_mapping.ArgMbtType::Self,
-          optional: false,
-          variadic: false,
-          default_value: None,
-        },
-        @type_mapping.MethodArg::{
-          name: @type_mapping.safe_identifier(attr.name),
-          original_name: attr.name,
-          type_: attr_type,
-          optional: false,
-          variadic: false,
-          default_value: None,
-        },
-      ]
-      methods.push(AttributeSetMethodEmit::{
-        interface_name,
-        original_name: attr.name,
-        args,
-      })
+      methods.push(
+        emit_attribute_setter(attr, attr_type, interface_name, type_registry),
+      )
     }
   }
   (emits, methods)
+}
+
+///|
+/// Emit the setter portion of an attribute member.
+fn emit_attribute_setter(
+  attr : @parser.AttributeMember,
+  attr_type : @type_mapping.ArgMbtType,
+  interface_name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> &InterfaceMethodEmit {
+  let is_union_typedef = is_union_typedef_arg(attr.type_, type_registry)
+  let attr_type = to_trait_ref(attr_type, is_union_typedef)
+  let args = [
+    @type_mapping.MethodArg::{
+      name: "self",
+      original_name: "self",
+      type_: @type_mapping.ArgMbtType::Self,
+      optional: false,
+      variadic: false,
+      default_value: None,
+    },
+    @type_mapping.MethodArg::{
+      name: @type_mapping.safe_identifier(attr.name),
+      original_name: attr.name,
+      type_: attr_type,
+      optional: false,
+      variadic: false,
+      default_value: None,
+    },
+  ]
+  AttributeSetMethodEmit::{ interface_name, original_name: attr.name, args }
 }
 
 ///|

@@ -41,7 +41,7 @@ fn ImageOrientation::from_unchecked(value : String) -> ImageOrientation {
   match value {
     "from-image" => ImageOrientation::FromImage
     "flipY" => ImageOrientation::FlipY
-    _ => abort("unknown enum value")
+    _ => abort("unknown ImageOrientation enum value")
   }
 }
 

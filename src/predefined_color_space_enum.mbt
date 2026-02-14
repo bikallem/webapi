@@ -55,7 +55,7 @@ fn PredefinedColorSpace::from_unchecked(value : String) -> PredefinedColorSpace 
     "srgb-linear" => PredefinedColorSpace::SrgbLinear
     "display-p3" => PredefinedColorSpace::DisplayP3
     "display-p3-linear" => PredefinedColorSpace::DisplayP3Linear
-    _ => abort("unknown enum value")
+    _ => abort("unknown PredefinedColorSpace enum value")
   }
 }
 

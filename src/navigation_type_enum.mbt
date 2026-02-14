@@ -51,7 +51,7 @@ fn NavigationType::from_unchecked(value : String) -> NavigationType {
     "replace" => NavigationType::Replace
     "reload" => NavigationType::Reload
     "traverse" => NavigationType::Traverse
-    _ => abort("unknown enum value")
+    _ => abort("unknown NavigationType enum value")
   }
 }
 

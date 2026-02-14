@@ -46,7 +46,7 @@ fn IDBTransactionMode::from_unchecked(value : String) -> IDBTransactionMode {
     "readonly" => IDBTransactionMode::Readonly
     "readwrite" => IDBTransactionMode::Readwrite
     "versionchange" => IDBTransactionMode::Versionchange
-    _ => abort("unknown enum value")
+    _ => abort("unknown IDBTransactionMode enum value")
   }
 }
 

@@ -50,7 +50,7 @@ fn ImageSmoothingQuality::from_unchecked(
     "low" => ImageSmoothingQuality::Low
     "medium" => ImageSmoothingQuality::Medium
     "high" => ImageSmoothingQuality::High
-    _ => abort("unknown enum value")
+    _ => abort("unknown ImageSmoothingQuality enum value")
   }
 }
 

@@ -56,7 +56,7 @@ fn ResizeObserverBoxOptions::from_unchecked(
     "content-box" => ResizeObserverBoxOptions::ContentBox
     "device-pixel-content-box" =>
       ResizeObserverBoxOptions::DevicePixelContentBox
-    _ => abort("unknown enum value")
+    _ => abort("unknown ResizeObserverBoxOptions enum value")
   }
 }
 

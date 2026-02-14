@@ -57,7 +57,7 @@ fn CompositeOperationOrAuto::from_unchecked(
     "add" => CompositeOperationOrAuto::Add
     "accumulate" => CompositeOperationOrAuto::Accumulate
     "auto" => CompositeOperationOrAuto::Auto
-    _ => abort("unknown enum value")
+    _ => abort("unknown CompositeOperationOrAuto enum value")
   }
 }
 

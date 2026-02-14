@@ -41,7 +41,7 @@ fn CanvasColorType::from_unchecked(value : String) -> CanvasColorType {
   match value {
     "unorm8" => CanvasColorType::Unorm8
     "float16" => CanvasColorType::Float16
-    _ => abort("unknown enum value")
+    _ => abort("unknown CanvasColorType enum value")
   }
 }
 

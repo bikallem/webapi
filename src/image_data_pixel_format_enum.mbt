@@ -43,7 +43,7 @@ fn ImageDataPixelFormat::from_unchecked(value : String) -> ImageDataPixelFormat 
   match value {
     "rgba-unorm8" => ImageDataPixelFormat::RgbaUnorm8
     "rgba-float16" => ImageDataPixelFormat::RgbaFloat16
-    _ => abort("unknown enum value")
+    _ => abort("unknown ImageDataPixelFormat enum value")
   }
 }
 

@@ -63,7 +63,7 @@ fn DOMParserSupportedType::from_unchecked(
     "application/xml" => DOMParserSupportedType::ApplicationXml
     "application/xhtml+xml" => DOMParserSupportedType::ApplicationXhtmlXml
     "image/svg+xml" => DOMParserSupportedType::ImageSvgXml
-    _ => abort("unknown enum value")
+    _ => abort("unknown DOMParserSupportedType enum value")
   }
 }
 

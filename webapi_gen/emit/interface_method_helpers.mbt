@@ -120,17 +120,7 @@ fn is_trait_ref_type(type_ : @type_mapping.ArgMbtType) -> Bool {
 
 ///|
 fn variadic_inner_type(type_ : @type_mapping.ArgMbtType) -> String? {
-  let type_name = type_.name()
-  if !(type_name.has_prefix("Array[") && type_name.has_suffix("]")) {
-    None
-  } else {
-    let chars = type_name.to_array()
-    if chars.length() <= 7 {
-      None
-    } else {
-      Some(String::from_array(chars[6:chars.length() - 1]))
-    }
-  }
+  array_inner_type(type_.name())
 }
 
 ///|
@@ -160,13 +150,12 @@ fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
       is_trait_ref_type(arg.type_)
     if arg.variadic {
       variadic_call_arg(arg_name, arg.type_)
-    } else if (
-        is_union_or_trait && arg.optional && arg.default_value is Some(_)
-      ) ||
-      (is_union_or_trait && !arg.optional) {
-      "\{arg_name}.to_js()"
-    } else if is_union_or_trait && arg.optional && arg.default_value is None {
-      "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n}"
+    } else if is_union_or_trait {
+      if arg.optional && arg.default_value is None {
+        "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n}"
+      } else {
+        "\{arg_name}.to_js()"
+      }
     } else if arg.optional && arg.default_value is None {
       "opt_to_js(\{arg_name})"
     } else {

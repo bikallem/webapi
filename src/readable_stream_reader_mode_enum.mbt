@@ -42,7 +42,7 @@ fn ReadableStreamReaderMode::from_unchecked(
 ) -> ReadableStreamReaderMode {
   match value {
     "byob" => ReadableStreamReaderMode::Byob
-    _ => abort("unknown enum value")
+    _ => abort("unknown ReadableStreamReaderMode enum value")
   }
 }
 

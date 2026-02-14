@@ -43,7 +43,7 @@ fn ColorSpaceConversion::from_unchecked(value : String) -> ColorSpaceConversion 
   match value {
     "none" => ColorSpaceConversion::None
     "default" => ColorSpaceConversion::Default
-    _ => abort("unknown enum value")
+    _ => abort("unknown ColorSpaceConversion enum value")
   }
 }
 

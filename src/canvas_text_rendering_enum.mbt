@@ -55,7 +55,7 @@ fn CanvasTextRendering::from_unchecked(value : String) -> CanvasTextRendering {
     "optimizeSpeed" => CanvasTextRendering::OptimizeSpeed
     "optimizeLegibility" => CanvasTextRendering::OptimizeLegibility
     "geometricPrecision" => CanvasTextRendering::GeometricPrecision
-    _ => abort("unknown enum value")
+    _ => abort("unknown CanvasTextRendering enum value")
   }
 }
 

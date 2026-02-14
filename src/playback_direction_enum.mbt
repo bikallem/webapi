@@ -52,7 +52,7 @@ fn PlaybackDirection::from_unchecked(value : String) -> PlaybackDirection {
     "reverse" => PlaybackDirection::Reverse
     "alternate" => PlaybackDirection::Alternate
     "alternate-reverse" => PlaybackDirection::AlternateReverse
-    _ => abort("unknown enum value")
+    _ => abort("unknown PlaybackDirection enum value")
   }
 }
 

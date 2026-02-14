@@ -68,7 +68,7 @@ fn XMLHttpRequestResponseType::from_unchecked(
     "document" => XMLHttpRequestResponseType::Document
     "json" => XMLHttpRequestResponseType::Json
     "text" => XMLHttpRequestResponseType::Text
-    _ => abort("unknown enum value")
+    _ => abort("unknown XMLHttpRequestResponseType enum value")
   }
 }
 

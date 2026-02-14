@@ -48,7 +48,7 @@ fn RequestMode::from_unchecked(value : String) -> RequestMode {
     "same-origin" => RequestMode::SameOrigin
     "no-cors" => RequestMode::NoCors
     "cors" => RequestMode::Cors
-    _ => abort("unknown enum value")
+    _ => abort("unknown RequestMode enum value")
   }
 }
 

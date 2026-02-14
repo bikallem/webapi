@@ -50,7 +50,7 @@ fn NotificationDirection::from_unchecked(
     "auto" => NotificationDirection::Auto
     "ltr" => NotificationDirection::Ltr
     "rtl" => NotificationDirection::Rtl
-    _ => abort("unknown enum value")
+    _ => abort("unknown NotificationDirection enum value")
   }
 }
 

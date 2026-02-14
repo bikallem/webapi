@@ -50,7 +50,7 @@ fn FullscreenNavigationUI::from_unchecked(
     "auto" => FullscreenNavigationUI::Auto
     "show" => FullscreenNavigationUI::Show
     "hide" => FullscreenNavigationUI::Hide
-    _ => abort("unknown enum value")
+    _ => abort("unknown FullscreenNavigationUI enum value")
   }
 }
 

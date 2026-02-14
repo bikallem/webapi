@@ -64,7 +64,7 @@ fn OffscreenRenderingContextId::from_unchecked(
     "webgl" => OffscreenRenderingContextId::Webgl
     "webgl2" => OffscreenRenderingContextId::Webgl2
     "webgpu" => OffscreenRenderingContextId::Webgpu
-    _ => abort("unknown enum value")
+    _ => abort("unknown OffscreenRenderingContextId enum value")
   }
 }
 

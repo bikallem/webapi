@@ -46,7 +46,7 @@ fn ScrollBehavior::from_unchecked(value : String) -> ScrollBehavior {
     "auto" => ScrollBehavior::Auto
     "instant" => ScrollBehavior::Instant
     "smooth" => ScrollBehavior::Smooth
-    _ => abort("unknown enum value")
+    _ => abort("unknown ScrollBehavior enum value")
   }
 }
 

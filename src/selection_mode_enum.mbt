@@ -51,7 +51,7 @@ fn SelectionMode::from_unchecked(value : String) -> SelectionMode {
     "start" => SelectionMode::Start
     "end" => SelectionMode::End
     "preserve" => SelectionMode::Preserve
-    _ => abort("unknown enum value")
+    _ => abort("unknown SelectionMode enum value")
   }
 }
 

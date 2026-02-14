@@ -61,7 +61,7 @@ fn CanvasTextBaseline::from_unchecked(value : String) -> CanvasTextBaseline {
     "alphabetic" => CanvasTextBaseline::Alphabetic
     "ideographic" => CanvasTextBaseline::Ideographic
     "bottom" => CanvasTextBaseline::Bottom
-    _ => abort("unknown enum value")
+    _ => abort("unknown CanvasTextBaseline enum value")
   }
 }
 

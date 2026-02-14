@@ -46,7 +46,7 @@ fn CompositeOperation::from_unchecked(value : String) -> CompositeOperation {
     "replace" => CompositeOperation::Replace
     "add" => CompositeOperation::Add
     "accumulate" => CompositeOperation::Accumulate
-    _ => abort("unknown enum value")
+    _ => abort("unknown CompositeOperation enum value")
   }
 }
 

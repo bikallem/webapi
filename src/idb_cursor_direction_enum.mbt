@@ -51,7 +51,7 @@ fn IDBCursorDirection::from_unchecked(value : String) -> IDBCursorDirection {
     "nextunique" => IDBCursorDirection::Nextunique
     "prev" => IDBCursorDirection::Prev
     "prevunique" => IDBCursorDirection::Prevunique
-    _ => abort("unknown enum value")
+    _ => abort("unknown IDBCursorDirection enum value")
   }
 }
 

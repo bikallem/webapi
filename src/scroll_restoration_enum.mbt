@@ -41,7 +41,7 @@ fn ScrollRestoration::from_unchecked(value : String) -> ScrollRestoration {
   match value {
     "auto" => ScrollRestoration::Auto
     "manual" => ScrollRestoration::Manual
-    _ => abort("unknown enum value")
+    _ => abort("unknown ScrollRestoration enum value")
   }
 }
 

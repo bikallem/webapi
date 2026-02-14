@@ -46,7 +46,7 @@ fn RequestRedirect::from_unchecked(value : String) -> RequestRedirect {
     "follow" => RequestRedirect::Follow
     "error" => RequestRedirect::Error
     "manual" => RequestRedirect::Manual
-    _ => abort("unknown enum value")
+    _ => abort("unknown RequestRedirect enum value")
   }
 }
 

@@ -305,7 +305,7 @@ fn render_callback(
 }
 
 ///|
-fn callback_array_inner_type(type_name : String) -> String? {
+fn array_inner_type(type_name : String) -> String? {
   if !(type_name.has_prefix("Array[") && type_name.has_suffix("]")) {
     None
   } else {
@@ -320,7 +320,7 @@ fn callback_array_inner_type(type_name : String) -> String? {
 
 ///|
 fn callback_wasm_stub_type(type_name : String) -> String {
-  match callback_array_inner_type(type_name) {
+  match array_inner_type(type_name) {
     Some(_) => "JsArray"
     None => type_name
   }
@@ -328,7 +328,7 @@ fn callback_wasm_stub_type(type_name : String) -> String {
 
 ///|
 fn callback_wasm_arg_expr(arg_name : String, arg_type : String) -> String {
-  match callback_array_inner_type(arg_type) {
+  match array_inner_type(arg_type) {
     Some(_) => "\{arg_name}.to_array()"
     None => arg_name
   }
@@ -339,7 +339,7 @@ fn callback_wasm_return_expr(
   call_expr : String,
   return_type : String,
 ) -> String {
-  match callback_array_inner_type(return_type) {
+  match array_inner_type(return_type) {
     Some(_) => "JsArray::from_array(\{call_expr})"
     None => call_expr
   }
@@ -463,13 +463,11 @@ fn enum_match_value(
 }
 
 ///|
-fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
-  let buf = StringBuilder::new()
-  buf.write_string("pub(all) enum \{name} {\n")
-  for variant in variants {
-    buf.write_string("  \{variant.variant_name}\n")
-  }
-  buf.write_string("} derive(Eq)\n\n")
+fn render_enum_show(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+) -> Unit {
   // Manual Show implementation: avoids derive(Show) which generates a to_string()
   // that triggers a wasm-gc compiler bug (externref vs (ref extern) in match returns).
   buf.write_string(
@@ -478,13 +476,31 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
   enum_match_self(buf, name, variants, fn(n, v) {
     "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")"
   })
+  buf.write_string("}")
+}
+
+///|
+fn render_enum_to_js(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+) -> Unit {
   buf.write_string(
-    "}\n\npub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
+    "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
   )
   enum_match_self(buf, name, variants, fn(n, v) {
     "\{n}::\{v.variant_name} => TJsValue::to_js(\"\{v.original_value}\")"
   })
-  buf.write_string("}\n\npub fn \{name}::from(value: String) -> \{name}? {\n")
+  buf.write_string("}")
+}
+
+///|
+fn render_enum_from(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+) -> Unit {
+  buf.write_string("pub fn \{name}::from(value: String) -> \{name}? {\n")
   enum_match_value(
     buf,
     name,
@@ -492,31 +508,72 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
     fn(n, v) { "\"\{v.original_value}\" => Some(\{n}::\{v.variant_name})" },
     "_ => None",
   )
+  buf.write_string("}")
+}
+
+///|
+fn render_enum_from_unchecked(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+) -> Unit {
   // from_unchecked() converts a string to the enum, aborting on unknown values.
   // Used by wasm-gc FFI to avoid Option[Enum] which triggers a compiler bug
   // (None uses externref null but Option[Enum] expects i32 representation).
-  buf.write_string(
-    "}\n\nfn \{name}::from_unchecked(value: String) -> \{name} {\n",
-  )
+  buf.write_string("fn \{name}::from_unchecked(value: String) -> \{name} {\n")
   enum_match_value(
     buf,
     name,
     variants,
     fn(n, v) { "\"\{v.original_value}\" => \{n}::\{v.variant_name}" },
-    "_ => abort(\"unknown enum value\")",
+    "_ => abort(\"unknown \{name} enum value\")",
   )
+  buf.write_string("}")
+}
+
+///|
+fn render_enum_value(
+  buf : StringBuilder,
+  name : String,
+  variants : Array[EnumVariantEmit],
+) -> Unit {
   // value() returns the IDL string value for each variant.
   // Uses StringBuilder to avoid wasm-gc compiler bug with match returning String.
   buf.write_string(
-    "}\n\npub fn \{name}::value(self: \{name}) -> String {\n  let buf = StringBuilder::new()\n",
+    "pub fn \{name}::value(self: \{name}) -> String {\n  let buf = StringBuilder::new()\n",
   )
   enum_match_self(buf, name, variants, fn(n, v) {
     "\{n}::\{v.variant_name} => buf.write_string(\"\{v.original_value}\")"
   })
   buf.write_string("  buf.to_string()\n}")
+}
+
+///|
+fn render_enum_from_js_any(buf : StringBuilder, name : String) -> Unit {
   buf.write_string(
-    "\n\npub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n  \{name}::from_unchecked(value)\n}",
+    "pub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n  \{name}::from_unchecked(value)\n}",
   )
+}
+
+///|
+fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
+  let buf = StringBuilder::new()
+  buf.write_string("pub(all) enum \{name} {\n")
+  for variant in variants {
+    buf.write_string("  \{variant.variant_name}\n")
+  }
+  buf.write_string("} derive(Eq)\n\n")
+  render_enum_show(buf, name, variants)
+  buf.write_string("\n\n")
+  render_enum_to_js(buf, name, variants)
+  buf.write_string("\n\n")
+  render_enum_from(buf, name, variants)
+  buf.write_string("\n\n")
+  render_enum_from_unchecked(buf, name, variants)
+  buf.write_string("\n\n")
+  render_enum_value(buf, name, variants)
+  buf.write_string("\n\n")
+  render_enum_from_js_any(buf, name)
   buf.to_string()
 }
 

@@ -76,7 +76,7 @@ fn CanvasFontStretch::from_unchecked(value : String) -> CanvasFontStretch {
     "expanded" => CanvasFontStretch::Expanded
     "extra-expanded" => CanvasFontStretch::ExtraExpanded
     "ultra-expanded" => CanvasFontStretch::UltraExpanded
-    _ => abort("unknown enum value")
+    _ => abort("unknown CanvasFontStretch enum value")
   }
 }
 

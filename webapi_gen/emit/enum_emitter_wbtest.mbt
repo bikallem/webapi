@@ -83,7 +83,7 @@ test "EnumEmitter emits enum with multiple values" {
       #|    "auto" => ScrollBehavior::Auto
       #|    "instant" => ScrollBehavior::Instant
       #|    "smooth" => ScrollBehavior::Smooth
-      #|    _ => abort("unknown enum value")
+      #|    _ => abort("unknown ScrollBehavior enum value")
       #|  }
       #|}
       #|
@@ -165,7 +165,7 @@ test "EnumEmitter emits enum with empty string value" {
       #|    "backward" => SelectionDirection::Backward
       #|    "none" => SelectionDirection::None
       #|    "" => SelectionDirection::Empty
-      #|    _ => abort("unknown enum value")
+      #|    _ => abort("unknown SelectionDirection enum value")
       #|  }
       #|}
       #|
@@ -241,7 +241,7 @@ test "EnumEmitter emits enum with dash-separated values" {
       #|    "no-referrer" => ReferrerPolicy::NoReferrer
       #|    "no-referrer-when-downgrade" => ReferrerPolicy::NoReferrerWhenDowngrade
       #|    "origin" => ReferrerPolicy::Origin
-      #|    _ => abort("unknown enum value")
+      #|    _ => abort("unknown ReferrerPolicy enum value")
       #|  }
       #|}
       #|

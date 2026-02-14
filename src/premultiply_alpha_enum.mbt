@@ -46,7 +46,7 @@ fn PremultiplyAlpha::from_unchecked(value : String) -> PremultiplyAlpha {
     "none" => PremultiplyAlpha::None
     "premultiply" => PremultiplyAlpha::Premultiply
     "default" => PremultiplyAlpha::Default
-    _ => abort("unknown enum value")
+    _ => abort("unknown PremultiplyAlpha enum value")
   }
 }
 

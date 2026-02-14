@@ -38,7 +38,7 @@ fn BinaryType::from_unchecked(value : String) -> BinaryType {
   match value {
     "blob" => BinaryType::Blob
     "arraybuffer" => BinaryType::Arraybuffer
-    _ => abort("unknown enum value")
+    _ => abort("unknown BinaryType enum value")
   }
 }
 

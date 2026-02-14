@@ -38,7 +38,7 @@ fn EndingType::from_unchecked(value : String) -> EndingType {
   match value {
     "transparent" => EndingType::Transparent
     "native" => EndingType::Native
-    _ => abort("unknown enum value")
+    _ => abort("unknown EndingType enum value")
   }
 }
 

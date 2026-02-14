@@ -55,7 +55,7 @@ fn ScrollLogicalPosition::from_unchecked(
     "center" => ScrollLogicalPosition::Center
     "end" => ScrollLogicalPosition::End
     "nearest" => ScrollLogicalPosition::Nearest
-    _ => abort("unknown enum value")
+    _ => abort("unknown ScrollLogicalPosition enum value")
   }
 }
 

@@ -36,7 +36,7 @@ pub fn ReadableStreamType::from(value : String) -> ReadableStreamType? {
 fn ReadableStreamType::from_unchecked(value : String) -> ReadableStreamType {
   match value {
     "bytes" => ReadableStreamType::Bytes
-    _ => abort("unknown enum value")
+    _ => abort("unknown ReadableStreamType enum value")
   }
 }
 
