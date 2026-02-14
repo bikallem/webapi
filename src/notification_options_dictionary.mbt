@@ -28,7 +28,7 @@ pub fn NotificationOptions::new(
   renotify? : Bool = false,
   silent? : Bool,
   require_interaction? : Bool = false,
-  data? : JsValue = JsValue::null(),
+  data? : JsValue,
   actions? : Array[NotificationAction] = [],
 ) -> NotificationOptions {
   notification_options_ffi(
@@ -48,7 +48,7 @@ pub fn NotificationOptions::new(
     TJsValue::to_js(renotify),
     opt_to_js(silent),
     TJsValue::to_js(require_interaction),
-    TJsValue::to_js(data),
+    opt_to_js(data),
     TJsValue::to_js(actions),
   )
 }

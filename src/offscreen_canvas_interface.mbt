@@ -79,12 +79,12 @@ impl TOffscreenCanvas with set_height(self : Self, height : UInt64) -> Unit {
 impl TOffscreenCanvas with get_context(
   self : Self,
   context_id : OffscreenRenderingContextId,
-  options? : JsValue = JsValue::null(),
+  options? : JsValue,
 ) -> OffscreenRenderingContext? {
   let result = offscreen_canvas_get_context_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(context_id),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
   if JsValue::is_null(result) {
     None

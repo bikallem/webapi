@@ -44,11 +44,13 @@ fn method_args(
     // Push any additional emits needed for the arg type, e.g. union arg traits
     emits.push_iter(arg_emits.iter())
     let default_value = default_value.map(dv => mbt_default_value(dv, mbt_type))
-    // On wasm-gc, primitives (Bool=i32, Double=f64, etc.) and enums (i32) can't
-    // use JsValue::null() (externref) as a default value. Strip the default so
-    // the field becomes a plain optional; opt_to_js sends undefined when absent.
+    // On wasm-gc, JsValue::null() returns externref (nullable) which is
+    // incompatible with non-nullable (ref extern) types like String, type
+    // aliases (CSSOMString), primitives (Bool=i32, Double=f64), and enums
+    // (i32). Strip the default so the field becomes a plain optional;
+    // opt_to_js sends undefined when absent.
     let default_value = match (default_value, mbt_type) {
-      (Some("JsValue::null()"), Primitive(_) | Enum(_)) => None
+      (Some("JsValue::null()"), Primitive(_) | Enum(_) | Other(_)) => None
       // On wasm-gc, trait-typed params (Union and Interface) compile to GC struct
       // closures. Any default creates a thunk returning Option[GCStruct], but the
       // compiler uses JsNull::null() (externref) for None, which is incompatible

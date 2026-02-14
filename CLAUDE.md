@@ -20,8 +20,9 @@ make check          # Type-check both JS and wasm-gc targets
 make fmt            # Format all MoonBit code
 make info           # Update .mbti interface files
 make build-examples # Build examples for BOTH js and wasm-gc
+make validate-wasm  # Validate all wasm-gc example binaries (fast, <2s)
 make test-playwright # Run Playwright e2e tests
-make all            # Full pipeline: gen → check → fmt → info → build-examples → test-playwright
+make all            # Full pipeline: gen → check → fmt → info → build-examples → validate-wasm → test-playwright
 make clean          # Remove all build artifacts
 ```
 
@@ -30,7 +31,7 @@ For individual commands when needed:
 # Install npm dependencies (WebIDL specs, from webapi_gen directory)
 cd webapi_gen && npm install
 
-# Validate wasm binaries (useful for debugging wasm-gc issues)
+# Inspect a specific wasm binary (useful for debugging wasm-gc issues)
 wasm-tools validate path/to/file.wasm
 wasm-tools print path/to/file.wasm > output.wat
 ```
@@ -52,7 +53,7 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 - `type_registry/` - Tracks type relationships and mappings
 - `emit/` - Code emitters (interfaces, enums, methods, JS runtime)
 - `base.mbt/` - Core FFI types (`JsValue`, etc.) copied to output
-- `config/` - Configuration from `config.toml`
+- `config/` - Configuration from `config.toml` (spec list, exclusions, dictionary member injection)
 
 **src/** - Generated bindings (DO NOT EDIT DIRECTLY):
 - Interface types with trait definitions (e.g., `Element`, `TElement`)
@@ -68,6 +69,7 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 - `JsAny` - Alias for `String`; used as wasm-gc FFI callback parameter type (externref-compatible)
 - `JsPromise[T]` - JavaScript Promise with type-safe `then`/`catch_`/`finally_`
 - `JsArray` - JavaScript array interop
+- `JsObject` - Builder for plain JS objects with arbitrary string keys (e.g., keyframe objects)
 - `EventListener` - Callback interface for event handlers
 
 ## Type Mappings (WebIDL → MoonBit)
@@ -134,7 +136,8 @@ Every generated type (`#external` interfaces, dictionaries, callbacks, typedefs,
 5. `make fmt` to format
 6. `make info` to update `.mbti` interface files
 7. `make build-examples` to build examples for **both** JS and wasm-gc
-8. `make test-playwright` to run end-to-end tests
+8. `make validate-wasm` to validate all wasm-gc binaries (**catches externref/nullability bugs fast**)
+9. `make test-playwright` to run end-to-end tests
 
 Or simply: `make clean all` to run the full pipeline.
 
@@ -147,6 +150,10 @@ Or simply: `make clean all` to run the full pipeline.
 ## WebIDL Spec Roadmap
 
 Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add a spec, append its filename (without `.idl`) and regenerate.
+
+### Dictionary Member Injection
+
+Some WebIDL specs split members across related dictionaries (e.g., `duration` lives on `OptionalEffectTiming`, not `EffectTiming`, even though browsers accept it on both). The `[dictionary_member_injection]` section in `config.toml` injects members from a source dictionary into a target dictionary before inheritance flattening. Members already present in the target are skipped. Injection happens in `flattened_idl.mbt` before `flatten_dictionary_members`, so inherited children automatically get the injected members too.
 
 ### Currently included
 
@@ -211,6 +218,8 @@ All examples compile for both js and wasm-gc targets except `fetch-async` (requi
 
 **Trait-typed default values**: Optional parameters with trait-typed defaults (`&TFoo = value`) are stripped to plain optionals. On wasm-gc, trait references compile to GC struct closures, and the compiler's default value thunk returns externref (incompatible with GC struct types). The code generator strips these defaults and uses `Option + match` with `JsValue::undefined()` for absent values instead.
 
-**`externref` vs `(ref extern)` nullability on wasm-gc (resolved)**: On wasm-gc, `JsValue` maps to `externref` (nullable) and `JsAny`/`String` maps to `(ref extern)` (non-nullable). MoonBit's `unsafe_cast()` generates no wasm instructions — it cannot change nullability. To convert `externref` → `(ref extern)`, use the `jsvalue_to_jsany()` helper (defined in `base.mbt/js_value_wasm.mbt`) which uses the `String?` unwrap trick to emit `ref.as_non_null`. This is needed when passing JsValue results to `FromJsAny::from_js_any()` for primitive type conversions (Bool, Int, Double). See dictionary getter code in `emit.mbt` (`render_dictionary_getter_shared`).
+**`JsValue::null()` defaults on non-nullable types (resolved)**: On wasm-gc, `JsValue::null()` returns `externref` (nullable), but string-typed aliases like `CSSOMString = String` map to `(ref extern)` (non-nullable). The MoonBit compiler generates a default-value thunk returning `(ref extern)` that internally calls the nullable `JsNull::null` import — this fails `wasm-tools validate`. The code generator in `method_args()` (`interface_emitter.mbt`) now strips `JsValue::null()` defaults for `Primitive(_)`, `Enum(_)`, **and `Other(_)`** types (the last catches type aliases). The parameter becomes a plain optional and `opt_to_js` sends `undefined` when absent. Use `make validate-wasm` after `make build-examples` to catch these issues early — it runs in <2 seconds vs 14+ seconds for Playwright.
+
+**`externref` vs `(ref extern)` nullability on wasm-gc (resolved)**: On wasm-gc, `JsValue` maps to `externref` (nullable) and `JsAny`/`String` maps to `(ref extern)` (non-nullable). MoonBit's `unsafe_cast()` generates no wasm instructions — it cannot change nullability. To convert `externref` → `(ref extern)`, use the `jsvalue_to_jsany()` helper (defined in `base.mbt/js_value_wasm.mbt`) which uses the `String?` unwrap trick to emit `ref.as_non_null`. This is needed when passing JsValue results to `FromJsAny::from_js_any()` for primitive type conversions (Bool, Int, Double). See dictionary getter code in `emit.mbt` (`render_dictionary_getter_shared`). For `#external` types returned from wasm FFI imports, the pattern is: declare the FFI as returning `JsValue` (externref), then `.unsafe_cast()` to the target type (see `js_object_wasm.mbt` for an example).
 
 **`unsigned long long` (UInt64) properties on wasm-gc (resolved)**: The JS runtime code generator now wraps return values of `LongLong`, `UnsignedLongLong`, and `Bigint` types with `BigInt()` in generated getters and methods (e.g., `get_version: (obj) => BigInt(obj.version)`). The `is_bigint_type` helper in `emit_js_runtime.mbt` detects these types and the `is_bigint` parameter on `emit_js_getter`/`emit_js_method`/`emit_js_namespace_getter`/`emit_js_namespace_method` controls wrapping.

@@ -1266,16 +1266,24 @@ pub impl TJsValue for CompositionEventInit
 #external
 pub type ComputedEffectTiming
 pub fn ComputedEffectTiming::current_iteration(Self) -> Double?
+pub fn ComputedEffectTiming::delay(Self) -> Double?
 pub fn ComputedEffectTiming::direction(Self) -> PlaybackDirection?
+pub fn ComputedEffectTiming::duration(Self) -> ComputedEffectTimingGetDuration?
 pub fn ComputedEffectTiming::easing(Self) -> String?
 pub fn ComputedEffectTiming::empty() -> Self
+pub fn ComputedEffectTiming::end_delay(Self) -> Double?
 pub fn ComputedEffectTiming::fill(Self) -> FillMode?
 pub fn ComputedEffectTiming::iteration_start(Self) -> Double?
 pub fn ComputedEffectTiming::iterations(Self) -> Double?
-pub fn ComputedEffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, progress? : Double, current_iteration? : Double) -> Self
+pub fn ComputedEffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, delay? : Double, end_delay? : Double, duration? : &TComputedEffectTimingNewDuration, progress? : Double, current_iteration? : Double) -> Self
 pub fn ComputedEffectTiming::progress(Self) -> Double?
 pub impl FromJsAny for ComputedEffectTiming
 pub impl TJsValue for ComputedEffectTiming
+
+#external
+pub type ComputedEffectTimingGetDuration
+pub fn[T : TComputedEffectTimingGetDuration] ComputedEffectTimingGetDuration::into(Self) -> T
+pub impl TComputedEffectTimingGetDuration for ComputedEffectTimingGetDuration
 
 #external
 pub type Console
@@ -1791,15 +1799,23 @@ pub impl TJsValue for DragEventInit
 
 #external
 pub type EffectTiming
+pub fn EffectTiming::delay(Self) -> Double?
 pub fn EffectTiming::direction(Self) -> PlaybackDirection?
+pub fn EffectTiming::duration(Self) -> EffectTimingGetDuration?
 pub fn EffectTiming::easing(Self) -> String?
 pub fn EffectTiming::empty() -> Self
+pub fn EffectTiming::end_delay(Self) -> Double?
 pub fn EffectTiming::fill(Self) -> FillMode?
 pub fn EffectTiming::iteration_start(Self) -> Double?
 pub fn EffectTiming::iterations(Self) -> Double?
-pub fn EffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String) -> Self
+pub fn EffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, delay? : Double, end_delay? : Double, duration? : &TEffectTimingNewDuration) -> Self
 pub impl FromJsAny for EffectTiming
 pub impl TJsValue for EffectTiming
+
+#external
+pub type EffectTimingGetDuration
+pub fn[T : TEffectTimingGetDuration] EffectTimingGetDuration::into(Self) -> T
+pub impl TEffectTimingGetDuration for EffectTimingGetDuration
 
 #external
 pub type Element
@@ -3723,6 +3739,13 @@ pub impl FromJsAny for JsArray
 pub impl TJsValue for JsArray
 
 #external
+pub type JsObject
+pub fn JsObject::new() -> Self
+pub fn JsObject::set(Self, String, JsValue) -> Self
+pub impl FromJsAny for JsObject
+pub impl TJsValue for JsObject
+
+#external
 pub type JsPromise[T]
 pub fn[T : TJsValue] JsPromise::catch_(Self[T], (JsValue) -> T) -> Self[T]
 pub fn[T] JsPromise::finally_(Self[T], () -> Unit) -> Self[T]
@@ -3801,19 +3824,27 @@ pub impl TJsValue for KeyboardEventInit
 #external
 pub type KeyframeAnimationOptions
 pub fn KeyframeAnimationOptions::composite(Self) -> CompositeOperation?
+pub fn KeyframeAnimationOptions::delay(Self) -> Double?
 pub fn KeyframeAnimationOptions::direction(Self) -> PlaybackDirection?
+pub fn KeyframeAnimationOptions::duration(Self) -> KeyframeAnimationOptionsGetDuration?
 pub fn KeyframeAnimationOptions::easing(Self) -> String?
 pub fn KeyframeAnimationOptions::empty() -> Self
+pub fn KeyframeAnimationOptions::end_delay(Self) -> Double?
 pub fn KeyframeAnimationOptions::fill(Self) -> FillMode?
 pub fn KeyframeAnimationOptions::id(Self) -> String?
 pub fn KeyframeAnimationOptions::iteration_start(Self) -> Double?
 pub fn KeyframeAnimationOptions::iterations(Self) -> Double?
-pub fn KeyframeAnimationOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, composite? : CompositeOperation, pseudo_element? : String, id? : String, timeline? : &TAnimationTimeline) -> Self
+pub fn KeyframeAnimationOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, delay? : Double, end_delay? : Double, duration? : &TKeyframeAnimationOptionsNewDuration, composite? : CompositeOperation, pseudo_element? : String, id? : String, timeline? : &TAnimationTimeline) -> Self
 pub fn KeyframeAnimationOptions::pseudo_element(Self) -> String?
 pub fn KeyframeAnimationOptions::timeline(Self) -> AnimationTimeline?
 pub impl FromJsAny for KeyframeAnimationOptions
 pub impl TElementAnimateOptions for KeyframeAnimationOptions
 pub impl TJsValue for KeyframeAnimationOptions
+
+#external
+pub type KeyframeAnimationOptionsGetDuration
+pub fn[T : TKeyframeAnimationOptionsGetDuration] KeyframeAnimationOptionsGetDuration::into(Self) -> T
+pub impl TKeyframeAnimationOptionsGetDuration for KeyframeAnimationOptionsGetDuration
 
 #external
 pub type KeyframeEffect
@@ -3828,17 +3859,25 @@ pub impl TKeyframeEffect for KeyframeEffect
 #external
 pub type KeyframeEffectOptions
 pub fn KeyframeEffectOptions::composite(Self) -> CompositeOperation?
+pub fn KeyframeEffectOptions::delay(Self) -> Double?
 pub fn KeyframeEffectOptions::direction(Self) -> PlaybackDirection?
+pub fn KeyframeEffectOptions::duration(Self) -> KeyframeEffectOptionsGetDuration?
 pub fn KeyframeEffectOptions::easing(Self) -> String?
 pub fn KeyframeEffectOptions::empty() -> Self
+pub fn KeyframeEffectOptions::end_delay(Self) -> Double?
 pub fn KeyframeEffectOptions::fill(Self) -> FillMode?
 pub fn KeyframeEffectOptions::iteration_start(Self) -> Double?
 pub fn KeyframeEffectOptions::iterations(Self) -> Double?
-pub fn KeyframeEffectOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, composite? : CompositeOperation, pseudo_element? : String) -> Self
+pub fn KeyframeEffectOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, delay? : Double, end_delay? : Double, duration? : &TKeyframeEffectOptionsNewDuration, composite? : CompositeOperation, pseudo_element? : String) -> Self
 pub fn KeyframeEffectOptions::pseudo_element(Self) -> String?
 pub impl FromJsAny for KeyframeEffectOptions
 pub impl TJsValue for KeyframeEffectOptions
 pub impl TKeyframeEffectNewOptions for KeyframeEffectOptions
+
+#external
+pub type KeyframeEffectOptionsGetDuration
+pub fn[T : TKeyframeEffectOptionsGetDuration] KeyframeEffectOptionsGetDuration::into(Self) -> T
+pub impl TKeyframeEffectOptionsGetDuration for KeyframeEffectOptionsGetDuration
 
 #external
 pub type Location
@@ -7770,6 +7809,18 @@ pub trait TCompositionEvent : TUIEvent {
   init_composition_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, data_arg? : String) -> Unit
 }
 
+pub(open) trait TComputedEffectTimingGetDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TComputedEffectTimingGetDuration for Double
+pub impl TComputedEffectTimingGetDuration for String
+
+pub(open) trait TComputedEffectTimingNewDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TComputedEffectTimingNewDuration for Double
+pub impl TComputedEffectTimingNewDuration for String
+
 pub trait TCountQueuingStrategy : TJsValue {
   high_water_mark(Self) -> Double
   size(Self) -> Function
@@ -8480,6 +8531,18 @@ pub impl TDocumentWritelnText for String
 pub trait TDragEvent : TMouseEvent {
   data_transfer(Self) -> DataTransfer
 }
+
+pub(open) trait TEffectTimingGetDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TEffectTimingGetDuration for Double
+pub impl TEffectTimingGetDuration for String
+
+pub(open) trait TEffectTimingNewDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TEffectTimingNewDuration for Double
+pub impl TEffectTimingNewDuration for String
 
 pub trait TElement : TNode {
   namespace_uri(Self) -> String
@@ -10759,6 +10822,18 @@ pub trait TKeyboardEvent : TUIEvent {
   key_code(Self) -> UInt
 }
 
+pub(open) trait TKeyframeAnimationOptionsGetDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TKeyframeAnimationOptionsGetDuration for Double
+pub impl TKeyframeAnimationOptionsGetDuration for String
+
+pub(open) trait TKeyframeAnimationOptionsNewDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TKeyframeAnimationOptionsNewDuration for Double
+pub impl TKeyframeAnimationOptionsNewDuration for String
+
 pub trait TKeyframeEffect : TAnimationEffect {
   target(Self) -> Element
   set_target(Self, &TElement) -> Unit
@@ -10774,6 +10849,18 @@ pub(open) trait TKeyframeEffectNewOptions {
   to_js(Self) -> JsValue
 }
 pub impl TKeyframeEffectNewOptions for Double
+
+pub(open) trait TKeyframeEffectOptionsGetDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TKeyframeEffectOptionsGetDuration for Double
+pub impl TKeyframeEffectOptionsGetDuration for String
+
+pub(open) trait TKeyframeEffectOptionsNewDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TKeyframeEffectOptionsNewDuration for Double
+pub impl TKeyframeEffectOptionsNewDuration for String
 
 pub trait TLocation : TJsValue {
   href(Self) -> String

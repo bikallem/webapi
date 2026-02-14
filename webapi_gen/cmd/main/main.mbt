@@ -248,7 +248,11 @@ fn main {
     let type_registry = @type_registry.TypeRegistry::new(all_definitions)
     println("Merging partials...")
     let partials_merged = @partial_merged.merge_partials(all_definitions)
-    let flattened = @flattened_idl.flatten(partials_merged, log_skipped)
+    let flattened = @flattened_idl.flatten(
+      partials_merged,
+      log_skipped,
+      dictionary_member_injection=config.dictionary_member_injection,
+    )
     println("Flattened \{flattened.interfaces.length()} interfaces")
 
     // Create output directory if it doesn't exist

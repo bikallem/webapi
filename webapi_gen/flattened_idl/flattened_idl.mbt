@@ -81,7 +81,32 @@ fn flatten_dictionary_members(
 pub fn flatten(
   partial_merged : @partial_merged.PartialMerged,
   logger : (String) -> Unit,
+  dictionary_member_injection? : Map[String, String] = {},
 ) -> FlattenedIdl {
+  // Inject members from source dictionaries into target dictionaries before flattening,
+  // so that inheritance naturally propagates the injected members to children.
+  for target_name, source_name in dictionary_member_injection {
+    match
+      (
+        partial_merged.dictionaries.get(target_name),
+        partial_merged.dictionaries.get(source_name),
+      ) {
+      (Some(target_dict), Some(source_dict)) => {
+        let existing : @hashset.HashSet[String] = @hashset.from_iter(
+          target_dict.members.iter().map(fn(m) { m.name }),
+        )
+        for mem in source_dict.members {
+          if not(existing.contains(mem.name)) {
+            target_dict.members.push(mem)
+          }
+        }
+      }
+      _ =>
+        logger(
+          "Warning: dictionary_member_injection: '\{target_name}' or '\{source_name}' not found",
+        )
+    }
+  }
   // Merge dictionaries by combining members from parent dictionaries
   let dictionaries = partial_merged.dictionaries
     .iter()

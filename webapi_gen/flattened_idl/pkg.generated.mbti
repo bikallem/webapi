@@ -8,7 +8,7 @@ import {
 }
 
 // Values
-pub fn flatten(@partial_merged.PartialMerged, (String) -> Unit) -> FlattenedIdl
+pub fn flatten(@partial_merged.PartialMerged, (String) -> Unit, dictionary_member_injection? : Map[String, String]) -> FlattenedIdl
 
 pub fn get_interface_ancestors(FlattenedIdl, String) -> Array[String]
 

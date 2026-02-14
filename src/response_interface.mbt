@@ -21,10 +21,16 @@ pub impl TResponse for Response
 
 ///|
 pub fn Response::new(
-  body? : &TBodyInit = JsValue::null(),
+  body? : &TBodyInit,
   init? : ResponseInit = ResponseInit::empty(),
 ) -> Response {
-  response_new_ffi(body.to_js(), TJsValue::to_js(init))
+  response_new_ffi(
+    match body {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+    TJsValue::to_js(init),
+  )
 }
 
 ///|

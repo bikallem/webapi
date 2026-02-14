@@ -1,6 +1,6 @@
-.PHONY: all gen gen-test gen-test-update check fmt info build-examples test-playwright serve clean
+.PHONY: all gen gen-test gen-test-update check fmt info build-examples validate-wasm test-playwright serve clean
 
-all: gen check fmt info build-examples test-playwright
+all: gen check fmt info build-examples validate-wasm test-playwright
 
 # Run the code generator (always run 'make clean' first after editing generator code)
 gen:
@@ -35,6 +35,21 @@ build-examples:
 	cd examples && moon build --target js --release
 	cd examples && moon build --target wasm-gc --release
 
+# Validate all wasm-gc example binaries with wasm-tools
+validate-wasm:
+	@fails=0; \
+	for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do \
+		name=$$(basename $$(dirname $$wasm)); \
+		if wasm-tools validate "$$wasm" 2>/dev/null; then \
+			echo "  OK: $$name"; \
+		else \
+			echo "  FAIL: $$name"; \
+			fails=$$((fails + 1)); \
+		fi; \
+	done; \
+	if [ $$fails -gt 0 ]; then echo "$$fails wasm binary(ies) failed validation"; exit 1; fi; \
+	echo "All wasm binaries valid"
+
 # Run Playwright browser tests
 test-playwright:
 	cd tests && npx playwright test
@@ -46,5 +61,5 @@ serve:
 # Remove build artifacts
 clean:
 	moon clean
-	cd webapi_gen && moon clean
-	cd examples && moon clean
+	moon -C webapi_gen clean
+	moon -C examples clean

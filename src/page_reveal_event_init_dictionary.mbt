@@ -18,13 +18,13 @@ pub fn PageRevealEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  view_transition? : ViewTransition = JsValue::null(),
+  view_transition? : ViewTransition,
 ) -> PageRevealEventInit {
   page_reveal_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(view_transition),
+    opt_to_js(view_transition),
   )
 }
 

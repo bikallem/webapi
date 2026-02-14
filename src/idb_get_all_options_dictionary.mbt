@@ -15,12 +15,12 @@ pub impl FromJsAny for IDBGetAllOptions with from_js_any(value : JsAny) -> IDBGe
 
 ///|
 pub fn IDBGetAllOptions::new(
-  query? : JsValue = JsValue::null(),
+  query? : JsValue,
   count? : UInt,
   direction? : IDBCursorDirection = IDBCursorDirection::Next,
 ) -> IDBGetAllOptions {
   idb_get_all_options_ffi(
-    TJsValue::to_js(query),
+    opt_to_js(query),
     opt_to_js(count),
     TJsValue::to_js(direction),
   )

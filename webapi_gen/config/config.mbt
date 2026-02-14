@@ -9,6 +9,7 @@ pub struct Config {
   excluded_callbacks : @hashset.HashSet[String]
   excluded_typedefs : @hashset.HashSet[String]
   excluded_dictionary_prefixes : @hashset.HashSet[String]
+  dictionary_member_injection : Map[String, String]
 } derive(Show, ToJson)
 
 ///|
@@ -47,6 +48,29 @@ fn get_string_array(
 }
 
 ///|
+/// Extract a table of string key-value pairs from a TomlValue.
+/// Returns an empty map if the key is missing.
+fn get_string_map(
+  table : Map[String, @toml.TomlValue],
+  key : String,
+) -> Map[String, String] raise {
+  match table.get(key) {
+    Some(TomlTable(inner)) => {
+      let result : Map[String, String] = {}
+      for k, v in inner {
+        match v {
+          TomlString(s) => result[k] = s
+          _ => fail("expected string value for key '\{k}' in '\{key}'")
+        }
+      }
+      result
+    }
+    Some(_) => fail("expected table for key '\{key}'")
+    None => {}
+  }
+}
+
+///|
 pub fn load_config_from_string(content : String) -> Config raise {
   let toml = @toml.parse(content) catch {
     e => fail("Invalid config TOML: \{e}")
@@ -70,6 +94,9 @@ pub fn load_config_from_string(content : String) -> Config raise {
     ),
     excluded_dictionary_prefixes: @hashset.from_array(
       get_string_array(table, "excluded_dictionary_prefixes"),
+    ),
+    dictionary_member_injection: get_string_map(
+      table, "dictionary_member_injection",
     ),
   }
 }
@@ -97,6 +124,9 @@ test "load_from_string with valid TOML" {
     #|excluded_typedefs = ["EventHandler"]
     #|excluded_dictionary_prefixes = ["ElementCreationOptions"]
     #|
+    #|[dictionary_member_injection]
+    #|EffectTiming = "OptionalEffectTiming"
+    #|
   let cfg = load_config_from_string(valid_toml)
   json_inspect(cfg, content={
     "idl_dir": "node_modules/@webref/idl",
@@ -107,6 +137,7 @@ test "load_from_string with valid TOML" {
     "excluded_callbacks": ["MutationCallback"],
     "excluded_typedefs": ["EventHandler"],
     "excluded_dictionary_prefixes": ["ElementCreationOptions"],
+    "dictionary_member_injection": { "EffectTiming": "OptionalEffectTiming" },
   })
 }
 
@@ -132,5 +163,6 @@ test "load_from_string with empty arrays" {
     "excluded_callbacks": [],
     "excluded_typedefs": [],
     "excluded_dictionary_prefixes": [],
+    "dictionary_member_injection": {},
   })
 }

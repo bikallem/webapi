@@ -5,6 +5,9 @@ fn effect_timing_ffi(
   iterations : JsValue,
   direction : JsValue,
   easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
 ) -> EffectTiming = "webapi_EffectTiming" "new"
 
 ///|
@@ -24,3 +27,12 @@ fn effect_timing_get_direction_ffi(obj : JsValue) -> JsValue = "webapi_EffectTim
 
 ///|
 fn effect_timing_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_EffectTiming" "get_easing"
+
+///|
+fn effect_timing_get_delay_ffi(obj : JsValue) -> JsValue = "webapi_EffectTiming" "get_delay"
+
+///|
+fn effect_timing_get_end_delay_ffi(obj : JsValue) -> JsValue = "webapi_EffectTiming" "get_endDelay"
+
+///|
+fn effect_timing_get_duration_ffi(obj : JsValue) -> JsValue = "webapi_EffectTiming" "get_duration"

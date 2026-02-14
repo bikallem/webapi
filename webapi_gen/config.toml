@@ -48,3 +48,8 @@ excluded_callbacks = []
 excluded_typedefs = ["ClipboardItemData"]
 
 excluded_dictionary_prefixes = ["ClipboardPermission", "NotificationEvent", "GetNotificationOptions"]
+
+# Inject members from source dictionary into target dictionary.
+# Members already present in the target are skipped.
+[dictionary_member_injection]
+EffectTiming = "OptionalEffectTiming"

@@ -65,7 +65,7 @@ impl TCompositionEvent with init_composition_event(
   type_arg : String,
   bubbles_arg? : Bool = false,
   cancelable_arg? : Bool = false,
-  view_arg? : WindowProxy = JsValue::null(),
+  view_arg? : WindowProxy,
   data_arg? : String = "",
 ) -> Unit {
   composition_event_init_composition_event_ffi(
@@ -73,7 +73,7 @@ impl TCompositionEvent with init_composition_event(
     TJsValue::to_js(type_arg),
     TJsValue::to_js(bubbles_arg),
     TJsValue::to_js(cancelable_arg),
-    TJsValue::to_js(view_arg),
+    opt_to_js(view_arg),
     TJsValue::to_js(data_arg),
   )
 }

@@ -5,6 +5,9 @@ fn keyframe_effect_options_ffi(
   iterations : JsValue,
   direction : JsValue,
   easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
   composite : JsValue,
   pseudo_element : JsValue,
 ) -> KeyframeEffectOptions = "webapi_KeyframeEffectOptions" "new"
@@ -26,6 +29,15 @@ fn keyframe_effect_options_get_direction_ffi(obj : JsValue) -> JsValue = "webapi
 
 ///|
 fn keyframe_effect_options_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeEffectOptions" "get_easing"
+
+///|
+fn keyframe_effect_options_get_delay_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeEffectOptions" "get_delay"
+
+///|
+fn keyframe_effect_options_get_end_delay_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeEffectOptions" "get_endDelay"
+
+///|
+fn keyframe_effect_options_get_duration_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeEffectOptions" "get_duration"
 
 ///|
 fn keyframe_effect_options_get_composite_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeEffectOptions" "get_composite"

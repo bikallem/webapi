@@ -5,6 +5,9 @@ fn computed_effect_timing_ffi(
   iterations : JsValue,
   direction : JsValue,
   easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
   progress : JsValue,
   current_iteration : JsValue,
 ) -> ComputedEffectTiming = "webapi_ComputedEffectTiming" "new"
@@ -26,6 +29,15 @@ fn computed_effect_timing_get_direction_ffi(obj : JsValue) -> JsValue = "webapi_
 
 ///|
 fn computed_effect_timing_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_easing"
+
+///|
+fn computed_effect_timing_get_delay_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_delay"
+
+///|
+fn computed_effect_timing_get_end_delay_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_endDelay"
+
+///|
+fn computed_effect_timing_get_duration_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_duration"
 
 ///|
 fn computed_effect_timing_get_progress_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_progress"

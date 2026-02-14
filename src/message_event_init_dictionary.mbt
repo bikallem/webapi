@@ -18,20 +18,23 @@ pub fn MessageEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  data? : JsValue = JsValue::null(),
+  data? : JsValue,
   origin? : String = "",
   last_event_id? : String = "",
-  source? : &TMessageEventSource = JsValue::null(),
+  source? : &TMessageEventSource,
   ports? : Array[MessagePort] = [],
 ) -> MessageEventInit {
   message_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(data),
+    opt_to_js(data),
     TJsValue::to_js(origin),
     TJsValue::to_js(last_event_id),
-    source.to_js(),
+    match source {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     TJsValue::to_js(ports),
   )
 }

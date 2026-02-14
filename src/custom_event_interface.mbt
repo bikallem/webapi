@@ -56,13 +56,13 @@ impl TCustomEvent with init_custom_event(
   type_ : String,
   bubbles? : Bool = false,
   cancelable? : Bool = false,
-  detail? : JsValue = JsValue::null(),
+  detail? : JsValue,
 ) -> Unit {
   custom_event_init_custom_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
-    TJsValue::to_js(detail),
+    opt_to_js(detail),
   )
 }

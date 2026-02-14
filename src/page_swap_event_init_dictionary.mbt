@@ -19,14 +19,14 @@ pub fn PageSwapEventInit::new(
   cancelable? : Bool = false,
   composed? : Bool = false,
   activation? : &TNavigationActivation,
-  view_transition? : ViewTransition = JsValue::null(),
+  view_transition? : ViewTransition,
 ) -> PageSwapEventInit {
   page_swap_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
     opt_to_js(activation),
-    TJsValue::to_js(view_transition),
+    opt_to_js(view_transition),
   )
 }
 

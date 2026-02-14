@@ -5,6 +5,9 @@ fn keyframe_animation_options_ffi(
   iterations : JsValue,
   direction : JsValue,
   easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
   composite : JsValue,
   pseudo_element : JsValue,
   id : JsValue,
@@ -28,6 +31,15 @@ fn keyframe_animation_options_get_direction_ffi(obj : JsValue) -> JsValue = "web
 
 ///|
 fn keyframe_animation_options_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_easing"
+
+///|
+fn keyframe_animation_options_get_delay_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_delay"
+
+///|
+fn keyframe_animation_options_get_end_delay_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_endDelay"
+
+///|
+fn keyframe_animation_options_get_duration_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_duration"
 
 ///|
 fn keyframe_animation_options_get_composite_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_composite"

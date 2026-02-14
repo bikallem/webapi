@@ -18,13 +18,13 @@ pub fn CustomEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  detail? : JsValue = JsValue::null(),
+  detail? : JsValue,
 ) -> CustomEventInit {
   custom_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(detail),
+    opt_to_js(detail),
   )
 }
 

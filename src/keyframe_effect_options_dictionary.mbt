@@ -16,14 +16,30 @@ pub impl TJsValue for KeyframeEffectOptions with to_js(
 pub impl FromJsAny for KeyframeEffectOptions with from_js_any(value : JsAny) -> KeyframeEffectOptions = "%identity"
 
 ///|
+pub(open) trait TKeyframeEffectOptionsNewDuration {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TKeyframeEffectOptionsNewDuration for Double with to_js(self : Double) -> JsValue {
+  TJsValue::to_js(self)
+}
+
+///|
+pub impl TKeyframeEffectOptionsNewDuration for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 pub fn KeyframeEffectOptions::new(
   fill? : FillMode = FillMode::Auto,
   iteration_start? : Double = (0.0 : Double),
   iterations? : Double = (1.0 : Double),
   direction? : PlaybackDirection = PlaybackDirection::Normal,
   easing? : String = "linear",
+  delay? : Double,
+  end_delay? : Double,
+  duration? : &TKeyframeEffectOptionsNewDuration,
   composite? : CompositeOperation = CompositeOperation::Replace,
-  pseudo_element? : CSSOMString = JsValue::null(),
+  pseudo_element? : CSSOMString,
 ) -> KeyframeEffectOptions {
   keyframe_effect_options_ffi(
     TJsValue::to_js(fill),
@@ -31,8 +47,14 @@ pub fn KeyframeEffectOptions::new(
     TJsValue::to_js(iterations),
     TJsValue::to_js(direction),
     TJsValue::to_js(easing),
+    opt_to_js(delay),
+    opt_to_js(end_delay),
+    match duration {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     TJsValue::to_js(composite),
-    TJsValue::to_js(pseudo_element),
+    opt_to_js(pseudo_element),
   )
 }
 
@@ -40,6 +62,34 @@ pub fn KeyframeEffectOptions::new(
 pub fn KeyframeEffectOptions::empty() -> KeyframeEffectOptions {
   keyframe_effect_options_empty_ffi()
 }
+
+///|
+pub(open) trait TKeyframeEffectOptionsGetDuration {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TKeyframeEffectOptionsGetDuration for Double with to_js(self : Double) -> JsValue {
+  TJsValue::to_js(self)
+}
+
+///|
+pub impl TKeyframeEffectOptionsGetDuration for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+/// [KeyframeEffectOptionsGetDuration](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffectOptionsGetDuration)
+#external
+pub type KeyframeEffectOptionsGetDuration
+
+///|
+pub fn[T : TKeyframeEffectOptionsGetDuration] KeyframeEffectOptionsGetDuration::into(
+  self : KeyframeEffectOptionsGetDuration,
+) -> T = "%identity"
+
+///|
+pub impl TKeyframeEffectOptionsGetDuration for KeyframeEffectOptionsGetDuration with to_js(
+  self : KeyframeEffectOptionsGetDuration,
+) -> JsValue = "%identity"
 
 ///|
 pub fn KeyframeEffectOptions::fill(self : KeyframeEffectOptions) -> FillMode? {
@@ -96,6 +146,40 @@ pub fn KeyframeEffectOptions::easing(self : KeyframeEffectOptions) -> String? {
     None
   } else {
     Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn KeyframeEffectOptions::delay(self : KeyframeEffectOptions) -> Double? {
+  let result = keyframe_effect_options_get_delay_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn KeyframeEffectOptions::end_delay(
+  self : KeyframeEffectOptions,
+) -> Double? {
+  let result = keyframe_effect_options_get_end_delay_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn KeyframeEffectOptions::duration(
+  self : KeyframeEffectOptions,
+) -> KeyframeEffectOptionsGetDuration? {
+  let result = keyframe_effect_options_get_duration_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
   }
 }
 

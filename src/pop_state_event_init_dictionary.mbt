@@ -18,14 +18,14 @@ pub fn PopStateEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  state? : JsValue = JsValue::null(),
+  state? : JsValue,
   has_ua_visual_transition? : Bool = false,
 ) -> PopStateEventInit {
   pop_state_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(state),
+    opt_to_js(state),
     TJsValue::to_js(has_ua_visual_transition),
   )
 }

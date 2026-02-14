@@ -94,6 +94,11 @@ fn emit_js_preamble() -> String {
     #|    toFloat: (v) => Math.fround(v),
     #|    toDouble: (v) => +v
     #|  },
+    #|
+    #|  webapi_JsObject: {
+    #|    create: () => ({}),
+    #|    set: (obj, key, value) => { obj[key] = value; return obj; }
+    #|  },
   preamble
 }
 

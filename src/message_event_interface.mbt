@@ -91,10 +91,10 @@ impl TMessageEvent with init_message_event(
   type_ : String,
   bubbles? : Bool = false,
   cancelable? : Bool = false,
-  data? : JsValue = JsValue::null(),
+  data? : JsValue,
   origin? : String = "",
   last_event_id? : String = "",
-  source? : &TMessageEventSource = JsValue::null(),
+  source? : &TMessageEventSource,
   ports? : Array[MessagePort] = [],
 ) -> Unit {
   message_event_init_message_event_ffi(
@@ -102,10 +102,13 @@ impl TMessageEvent with init_message_event(
     TJsValue::to_js(type_),
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
-    TJsValue::to_js(data),
+    opt_to_js(data),
     TJsValue::to_js(origin),
     TJsValue::to_js(last_event_id),
-    source.to_js(),
+    match source {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     TJsValue::to_js(ports),
   )
 }

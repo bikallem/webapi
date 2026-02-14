@@ -59,6 +59,11 @@ export const wasmImportObject = {
     toFloat: (v) => Math.fround(v),
     toDouble: (v) => +v
   },
+
+  webapi_JsObject: {
+    create: () => ({}),
+    set: (obj, key, value) => { obj[key] = value; return obj; }
+  },
   webapi_SVGElement: {
     get_className: (obj) => obj.className,
     get_ownerSVGElement: (obj) => obj.ownerSVGElement,
@@ -7910,20 +7915,26 @@ export const wasmImportObject = {
   },
 
   webapi_EffectTiming: {
-    new: (fill, iterationStart, iterations, direction, easing) => {
+    new: (fill, iterationStart, iterations, direction, easing, delay, endDelay, duration) => {
       const obj = {};
       if (fill !== undefined) obj.fill = fill;
       if (iterationStart !== undefined) obj.iterationStart = iterationStart;
       if (iterations !== undefined) obj.iterations = iterations;
       if (direction !== undefined) obj.direction = direction;
       if (easing !== undefined) obj.easing = easing;
+      if (delay !== undefined) obj.delay = delay;
+      if (endDelay !== undefined) obj.endDelay = endDelay;
+      if (duration !== undefined) obj.duration = duration;
       return obj;
     },
     get_fill: (obj) => obj.fill,
     get_iterationStart: (obj) => obj.iterationStart,
     get_iterations: (obj) => obj.iterations,
     get_direction: (obj) => obj.direction,
-    get_easing: (obj) => obj.easing
+    get_easing: (obj) => obj.easing,
+    get_delay: (obj) => obj.delay,
+    get_endDelay: (obj) => obj.endDelay,
+    get_duration: (obj) => obj.duration
   },
 
   webapi_OptionalEffectTiming: {
@@ -7950,13 +7961,16 @@ export const wasmImportObject = {
   },
 
   webapi_ComputedEffectTiming: {
-    new: (fill, iterationStart, iterations, direction, easing, progress, currentIteration) => {
+    new: (fill, iterationStart, iterations, direction, easing, delay, endDelay, duration, progress, currentIteration) => {
       const obj = {};
       if (fill !== undefined) obj.fill = fill;
       if (iterationStart !== undefined) obj.iterationStart = iterationStart;
       if (iterations !== undefined) obj.iterations = iterations;
       if (direction !== undefined) obj.direction = direction;
       if (easing !== undefined) obj.easing = easing;
+      if (delay !== undefined) obj.delay = delay;
+      if (endDelay !== undefined) obj.endDelay = endDelay;
+      if (duration !== undefined) obj.duration = duration;
       if (progress !== undefined) obj.progress = progress;
       if (currentIteration !== undefined) obj.currentIteration = currentIteration;
       return obj;
@@ -7966,6 +7980,9 @@ export const wasmImportObject = {
     get_iterations: (obj) => obj.iterations,
     get_direction: (obj) => obj.direction,
     get_easing: (obj) => obj.easing,
+    get_delay: (obj) => obj.delay,
+    get_endDelay: (obj) => obj.endDelay,
+    get_duration: (obj) => obj.duration,
     get_progress: (obj) => obj.progress,
     get_currentIteration: (obj) => obj.currentIteration
   },
@@ -8012,13 +8029,16 @@ export const wasmImportObject = {
   },
 
   webapi_KeyframeEffectOptions: {
-    new: (fill, iterationStart, iterations, direction, easing, composite, pseudoElement) => {
+    new: (fill, iterationStart, iterations, direction, easing, delay, endDelay, duration, composite, pseudoElement) => {
       const obj = {};
       if (fill !== undefined) obj.fill = fill;
       if (iterationStart !== undefined) obj.iterationStart = iterationStart;
       if (iterations !== undefined) obj.iterations = iterations;
       if (direction !== undefined) obj.direction = direction;
       if (easing !== undefined) obj.easing = easing;
+      if (delay !== undefined) obj.delay = delay;
+      if (endDelay !== undefined) obj.endDelay = endDelay;
+      if (duration !== undefined) obj.duration = duration;
       if (composite !== undefined) obj.composite = composite;
       if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
       return obj;
@@ -8028,18 +8048,24 @@ export const wasmImportObject = {
     get_iterations: (obj) => obj.iterations,
     get_direction: (obj) => obj.direction,
     get_easing: (obj) => obj.easing,
+    get_delay: (obj) => obj.delay,
+    get_endDelay: (obj) => obj.endDelay,
+    get_duration: (obj) => obj.duration,
     get_composite: (obj) => obj.composite,
     get_pseudoElement: (obj) => obj.pseudoElement
   },
 
   webapi_KeyframeAnimationOptions: {
-    new: (fill, iterationStart, iterations, direction, easing, composite, pseudoElement, id, timeline) => {
+    new: (fill, iterationStart, iterations, direction, easing, delay, endDelay, duration, composite, pseudoElement, id, timeline) => {
       const obj = {};
       if (fill !== undefined) obj.fill = fill;
       if (iterationStart !== undefined) obj.iterationStart = iterationStart;
       if (iterations !== undefined) obj.iterations = iterations;
       if (direction !== undefined) obj.direction = direction;
       if (easing !== undefined) obj.easing = easing;
+      if (delay !== undefined) obj.delay = delay;
+      if (endDelay !== undefined) obj.endDelay = endDelay;
+      if (duration !== undefined) obj.duration = duration;
       if (composite !== undefined) obj.composite = composite;
       if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
       if (id !== undefined) obj.id = id;
@@ -8051,6 +8077,9 @@ export const wasmImportObject = {
     get_iterations: (obj) => obj.iterations,
     get_direction: (obj) => obj.direction,
     get_easing: (obj) => obj.easing,
+    get_delay: (obj) => obj.delay,
+    get_endDelay: (obj) => obj.endDelay,
+    get_duration: (obj) => obj.duration,
     get_composite: (obj) => obj.composite,
     get_pseudoElement: (obj) => obj.pseudoElement,
     get_id: (obj) => obj.id,

@@ -91,12 +91,12 @@ impl THTMLCanvasElement with set_height(self : Self, height : UInt) -> Unit {
 impl THTMLCanvasElement with get_context(
   self : Self,
   context_id : String,
-  options? : JsValue = JsValue::null(),
+  options? : JsValue,
 ) -> RenderingContext? {
   let result = html_canvas_element_get_context_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(context_id),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
   if JsValue::is_null(result) {
     None

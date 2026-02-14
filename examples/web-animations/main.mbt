@@ -3,6 +3,15 @@
 /// (play, pause, reverse, cancel), and animation state monitoring.
 
 ///|
+fn make_keyframe(transform : String, bg : String) -> @webapi.JsValue {
+  @webapi.TJsValue::to_js(
+    @webapi.JsObject::new()
+    .set("transform", @webapi.TJsValue::to_js(transform))
+    .set("backgroundColor", @webapi.TJsValue::to_js(bg)),
+  )
+}
+
+///|
 fn main {
   let doc = @webapi.document
   let app = doc.get_element_by_id("app").unwrap()
@@ -76,11 +85,16 @@ fn main {
   app.append_child(container) |> ignore
 
   // Create animation after box is in DOM
-  let animation = animate_element(
-    box,
-    create_keyframes(),
-    create_animation_options(),
+  let keyframes = @webapi.JsArray::from_array([
+    make_keyframe("translateX(0px) rotate(0deg)", "#3b82f6"),
+    make_keyframe("translateX(250px) rotate(180deg)", "#ef4444"),
+    make_keyframe("translateX(0px) rotate(360deg)", "#3b82f6"),
+  ])
+  let options = @webapi.KeyframeAnimationOptions::new(
+    duration=2000.0,
+    iterations=@double.infinity,
   )
+  let animation = box.animate(@webapi.TJsValue::to_js(keyframes), options~)
 
   // Set initial state
   state_el.set_text_content("State: " + animation.play_state().value())
