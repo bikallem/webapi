@@ -67,7 +67,10 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 ### Core FFI Types (in base.mbt/)
 
 - `JsValue` - Opaque type for any JavaScript value
-- `TJsValue` - Trait all JS-interop types must implement
+- `TJsValue` - Trait all JS-interop types must implement (`to_js(Self) -> JsValue`)
+- `FromJsAny` - Trait for converting `JsAny` back to concrete types (used by `JsPromise::then`)
+- `JsAny` - Alias for `String`; used as wasm-gc FFI callback parameter type (externref-compatible)
+- `JsPromise[T]` - JavaScript Promise with type-safe `then`/`catch_`/`finally_`
 - `JsArray` - JavaScript array interop
 - `EventListener` - Callback interface for event handlers
 
@@ -95,6 +98,12 @@ Generated interfaces follow this pattern:
 pub type Element
 
 ///|
+pub impl TJsValue for Element with to_js(self: Element) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for Element with from_js_any(value : JsAny) -> Element = "%identity"
+
+///|
 pub trait TElement: TNode {
   get_attribute(self : Self, name : String) -> String? = _
 }
@@ -109,6 +118,16 @@ impl TElement for Element with get_attribute(self, name) {
   if JsValue::is_null(result) { None } else { Some(result.unsafe_cast()) }
 }
 ```
+
+### FromJsAny Pattern
+
+Every generated type (`#external` interfaces, dictionaries, callbacks, typedefs, namespaces) gets a `FromJsAny` impl via `ImplFromJsAny` in the `Emit` enum. Enums get a custom impl using `from_unchecked(String)`. This enables type-safe `JsPromise[T]` resolution on wasm-gc.
+
+**Where impls live:**
+- Externref types (interfaces, etc.): `= "%identity"` — emitted by `ImplFromJsAny` in `emit.mbt`
+- Enums: `from_unchecked(value)` — emitted inline by `render_enum()` in `emit.mbt`
+- Primitives (Bool, Int, Double, etc.): JS target uses `%identity`, wasm-gc uses FFI helpers (`toBool`, `toInt`, etc.) in `webapi_JsPromise` JS module
+- Base `#external` types (JsArray, typed arrays, alias types): `= "%identity"` in `base.mbt/` files
 
 ## Development Workflow
 
@@ -133,7 +152,7 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 
 ### Currently included
 
-`console`, `cssom`, `cssom-view`, `dom`, `fetch`, `html`, `hr-time`, `geometry`, `FileAPI`, `performance-timeline`, `referrer-policy`, `SVG`, `trusted-types`, `uievents`, `url`, `webidl`, `xhr`
+`clipboard-apis`, `console`, `cssom`, `cssom-view`, `dom`, `encoding`, `fetch`, `FileAPI`, `fullscreen`, `geometry`, `hr-time`, `html`, `intersection-observer`, `notifications`, `performance-timeline`, `pointerevents`, `referrer-policy`, `requestidlecallback`, `resize-observer`, `screen-orientation`, `selection-api`, `storage`, `SVG`, `touch-events`, `trusted-types`, `uievents`, `url`, `vibration`, `webidl`, `websockets`, `xhr`
 
 ### Candidates for inclusion
 
@@ -141,22 +160,9 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 
 | Spec | Key APIs | Notes |
 |------|----------|-------|
-| `encoding` | TextEncoder, TextDecoder | Essential for binary/string conversion |
 | `streams` | ReadableStream, WritableStream, TransformStream | Used by fetch body, file APIs |
-| `intersection-observer` | IntersectionObserver | Lazy loading, infinite scroll |
-| `resize-observer` | ResizeObserver | Responsive layout changes |
-| `selection-api` | Selection, Range | Text selection and editing |
-| `clipboard-apis` | Clipboard | Copy/paste |
-| `fullscreen` | Fullscreen API | |
-| `pointerevents` | PointerEvent | Unified mouse/touch/pen input |
-| `touch-events` | TouchEvent | Mobile touch handling |
 | `web-animations` | Animation, KeyframeEffect | Programmatic animations |
-| `storage` | StorageManager | Storage quota and persistence |
-| `screen-orientation` | ScreenOrientation | Orientation lock/detection |
-| `notifications` | Notification | Push notifications UI |
 | `IndexedDB` | IDBDatabase, IDBObjectStore | Client-side structured storage |
-| `websockets` | WebSocket | Real-time communication |
-| `requestidlecallback` | requestIdleCallback | Background task scheduling |
 
 #### Moderate value (more specialized)
 
@@ -191,6 +197,8 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 
 All examples compile for both js and wasm-gc targets except `fetch-async` (requires async/await bridge, intentionally js-only).
 
-**JsPromise limitation**: `JsPromise::then` uses `js_any_cast` (`%identity`) to convert resolved values from `JsAny` (ref extern) to `T`. This only works for externref-compatible T (interfaces, JsValue, String). It fails for wasm value types (Unit=i32, Double=f64) and GC types (enums, Arrays). `Promise<undefined>` is mapped to `JsPromise[JsValue]` as a workaround. A general fix needs a `FromJsAny` trait with per-type conversion impls for `JsPromise[EnumType]`, `JsPromise[Array[T]]`, `JsPromise[Double]`, etc.
+**JsPromise `FromJsAny` trait (resolved)**: `JsPromise::then` now requires `T : FromJsAny` and uses `FromJsAny::from_js_any` instead of `%identity` cast. This correctly handles non-externref types on wasm-gc: Bool (i32), Double (f64), enums (GC types), and Unit. Primitive conversions use FFI helpers (`toBool`, `toInt`, `toDouble`, etc.) in the `webapi_JsPromise` JS module. `Promise<undefined>` is still mapped to `JsPromise[JsValue]` as a conservative choice — switching to `JsPromise[Unit]` is a future API-surface change (see `type_mapping.mbt` lines 282-285).
+
+**JsPromise `Array[T]` limitation**: `FromJsAny` is not yet implemented for `Array[T]` (MoonBit GC array, not externref). `JsPromise[Array[T]]` resolution would need a JS-side helper to convert the JS array to a MoonBit GC array. This affects any future `Promise<sequence<T>>` API binding.
 
 **Trait-typed default values**: Optional parameters with trait-typed defaults (`&TFoo = value`) are stripped to plain optionals. On wasm-gc, trait references compile to GC struct closures, and the compiler's default value thunk returns externref (incompatible with GC struct types). The code generator strips these defaults and uses `Option + match` with `JsValue::undefined()` for absent values instead.
