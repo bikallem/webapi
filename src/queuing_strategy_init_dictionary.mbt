@@ -24,3 +24,10 @@ pub fn QueuingStrategyInit::new(
 pub fn QueuingStrategyInit::empty() -> QueuingStrategyInit {
   queuing_strategy_init_empty_ffi()
 }
+
+///|
+pub fn QueuingStrategyInit::high_water_mark(
+  self : QueuingStrategyInit,
+) -> Double {
+  queuing_strategy_init_get_high_water_mark_ffi(TJsValue::to_js(self))
+}

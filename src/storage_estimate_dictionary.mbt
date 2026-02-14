@@ -25,3 +25,23 @@ pub fn StorageEstimate::new(
 pub fn StorageEstimate::empty() -> StorageEstimate {
   storage_estimate_empty_ffi()
 }
+
+///|
+pub fn StorageEstimate::usage(self : StorageEstimate) -> UInt64? {
+  let result = storage_estimate_get_usage_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn StorageEstimate::quota(self : StorageEstimate) -> UInt64? {
+  let result = storage_estimate_get_quota_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

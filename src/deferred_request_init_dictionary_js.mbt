@@ -40,3 +40,61 @@ extern "js" fn deferred_request_init_ffi(
 
 ///|
 extern "js" fn deferred_request_init_empty_ffi() -> DeferredRequestInit = "() => {}"
+
+///|
+extern "js" fn deferred_request_init_get_method_ffi(obj : JsValue) -> JsValue = "(obj) => obj.method"
+
+///|
+extern "js" fn deferred_request_init_get_headers_ffi(obj : JsValue) -> JsValue = "(obj) => obj.headers"
+
+///|
+extern "js" fn deferred_request_init_get_body_ffi(obj : JsValue) -> JsValue = "(obj) => obj.body"
+
+///|
+extern "js" fn deferred_request_init_get_referrer_ffi(obj : JsValue) -> JsValue = "(obj) => obj.referrer"
+
+///|
+extern "js" fn deferred_request_init_get_referrer_policy_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.referrerPolicy"
+
+///|
+extern "js" fn deferred_request_init_get_mode_ffi(obj : JsValue) -> JsValue = "(obj) => obj.mode"
+
+///|
+extern "js" fn deferred_request_init_get_credentials_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.credentials"
+
+///|
+extern "js" fn deferred_request_init_get_cache_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cache"
+
+///|
+extern "js" fn deferred_request_init_get_redirect_ffi(obj : JsValue) -> JsValue = "(obj) => obj.redirect"
+
+///|
+extern "js" fn deferred_request_init_get_integrity_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.integrity"
+
+///|
+extern "js" fn deferred_request_init_get_keepalive_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.keepalive"
+
+///|
+extern "js" fn deferred_request_init_get_signal_ffi(obj : JsValue) -> JsValue = "(obj) => obj.signal"
+
+///|
+extern "js" fn deferred_request_init_get_duplex_ffi(obj : JsValue) -> JsValue = "(obj) => obj.duplex"
+
+///|
+extern "js" fn deferred_request_init_get_priority_ffi(obj : JsValue) -> JsValue = "(obj) => obj.priority"
+
+///|
+extern "js" fn deferred_request_init_get_window_ffi(obj : JsValue) -> JsValue = "(obj) => obj.window"
+
+///|
+extern "js" fn deferred_request_init_get_activate_after_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.activateAfter"

@@ -32,3 +32,41 @@ pub fn PerformanceObserverInit::new(
 pub fn PerformanceObserverInit::empty() -> PerformanceObserverInit {
   performance_observer_init_empty_ffi()
 }
+
+///|
+pub fn PerformanceObserverInit::entry_types(
+  self : PerformanceObserverInit,
+) -> Array[String]? {
+  let result = performance_observer_init_get_entry_types_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn PerformanceObserverInit::type_(
+  self : PerformanceObserverInit,
+) -> String? {
+  let result = performance_observer_init_get_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PerformanceObserverInit::buffered(
+  self : PerformanceObserverInit,
+) -> Bool? {
+  let result = performance_observer_init_get_buffered_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

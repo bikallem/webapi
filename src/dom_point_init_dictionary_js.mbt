@@ -16,3 +16,15 @@ extern "js" fn dom_point_init_ffi(
 
 ///|
 extern "js" fn dom_point_init_empty_ffi() -> DOMPointInit = "() => {}"
+
+///|
+extern "js" fn dom_point_init_get_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+extern "js" fn dom_point_init_get_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+extern "js" fn dom_point_init_get_z_ffi(obj : JsValue) -> JsValue = "(obj) => obj.z"
+
+///|
+extern "js" fn dom_point_init_get_w_ffi(obj : JsValue) -> JsValue = "(obj) => obj.w"

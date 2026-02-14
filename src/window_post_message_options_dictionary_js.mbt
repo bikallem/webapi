@@ -12,3 +12,13 @@ extern "js" fn window_post_message_options_ffi(
 
 ///|
 extern "js" fn window_post_message_options_empty_ffi() -> WindowPostMessageOptions = "() => {}"
+
+///|
+extern "js" fn window_post_message_options_get_transfer_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.transfer"
+
+///|
+extern "js" fn window_post_message_options_get_target_origin_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.targetOrigin"

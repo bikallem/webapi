@@ -12,3 +12,11 @@ extern "js" fn queuing_strategy_ffi(
 
 ///|
 extern "js" fn queuing_strategy_empty_ffi() -> QueuingStrategy = "() => {}"
+
+///|
+extern "js" fn queuing_strategy_get_high_water_mark_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.highWaterMark"
+
+///|
+extern "js" fn queuing_strategy_get_size_ffi(obj : JsValue) -> JsValue = "(obj) => obj.size"

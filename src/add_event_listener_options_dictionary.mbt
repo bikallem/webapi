@@ -34,3 +34,49 @@ pub fn AddEventListenerOptions::new(
 pub fn AddEventListenerOptions::empty() -> AddEventListenerOptions {
   add_event_listener_options_empty_ffi()
 }
+
+///|
+pub fn AddEventListenerOptions::capture(
+  self : AddEventListenerOptions,
+) -> Bool? {
+  let result = add_event_listener_options_get_capture_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn AddEventListenerOptions::passive(
+  self : AddEventListenerOptions,
+) -> Bool? {
+  let result = add_event_listener_options_get_passive_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn AddEventListenerOptions::once(self : AddEventListenerOptions) -> Bool? {
+  let result = add_event_listener_options_get_once_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn AddEventListenerOptions::signal(
+  self : AddEventListenerOptions,
+) -> AbortSignal? {
+  let result = add_event_listener_options_get_signal_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

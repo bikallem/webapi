@@ -6,3 +6,9 @@ fn idb_object_store_parameters_ffi(
 
 ///|
 fn idb_object_store_parameters_empty_ffi() -> IDBObjectStoreParameters = "webapi_Dictionary" "empty"
+
+///|
+fn idb_object_store_parameters_get_key_path_ffi(obj : JsValue) -> JsValue = "webapi_IDBObjectStoreParameters" "get_keyPath"
+
+///|
+fn idb_object_store_parameters_get_auto_increment_ffi(obj : JsValue) -> JsValue = "webapi_IDBObjectStoreParameters" "get_autoIncrement"

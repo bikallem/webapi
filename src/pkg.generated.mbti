@@ -375,8 +375,12 @@ pub impl TJsValue for AbstractRange
 
 #external
 pub type AddEventListenerOptions
+pub fn AddEventListenerOptions::capture(Self) -> Bool?
 pub fn AddEventListenerOptions::empty() -> Self
 pub fn AddEventListenerOptions::new(capture? : Bool, passive? : Bool, once? : Bool, signal? : &TAbortSignal) -> Self
+pub fn AddEventListenerOptions::once(Self) -> Bool?
+pub fn AddEventListenerOptions::passive(Self) -> Bool?
+pub fn AddEventListenerOptions::signal(Self) -> AbortSignal?
 pub impl FromJsAny for AddEventListenerOptions
 pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions
 pub impl TJsValue for AddEventListenerOptions
@@ -456,6 +460,7 @@ pub impl TJsValue for ArrayBufferView
 #external
 pub type AssignedNodesOptions
 pub fn AssignedNodesOptions::empty() -> Self
+pub fn AssignedNodesOptions::flatten(Self) -> Bool?
 pub fn AssignedNodesOptions::new(flatten? : Bool) -> Self
 pub impl FromJsAny for AssignedNodesOptions
 pub impl TJsValue for AssignedNodesOptions
@@ -475,6 +480,7 @@ pub fn[T : TAudioTrack] AudioTrack::into(Self) -> T
 pub impl FromJsAny for AudioTrack
 pub impl TAudioTrack for AudioTrack
 pub impl TJsValue for AudioTrack
+pub impl TTrackEventInitGetTrack for AudioTrack
 pub impl TTrackEventInitNewTrack for AudioTrack
 pub impl TTrackEventTrack for AudioTrack
 
@@ -495,24 +501,49 @@ pub impl TJsValue for BarProp
 
 #external
 pub type BaseComputedKeyframe
+pub fn BaseComputedKeyframe::composite(Self) -> CompositeOperationOrAuto?
+pub fn BaseComputedKeyframe::computed_offset(Self) -> Double?
+pub fn BaseComputedKeyframe::easing(Self) -> String?
 pub fn BaseComputedKeyframe::empty() -> Self
 pub fn BaseComputedKeyframe::new(offset? : Double, computed_offset? : Double, easing? : String, composite? : CompositeOperationOrAuto) -> Self
+pub fn BaseComputedKeyframe::offset(Self) -> Double?
 pub impl FromJsAny for BaseComputedKeyframe
 pub impl TJsValue for BaseComputedKeyframe
 
 #external
 pub type BaseKeyframe
+pub fn BaseKeyframe::composite(Self) -> CompositeOperationOrAuto?
+pub fn BaseKeyframe::easing(Self) -> String?
 pub fn BaseKeyframe::empty() -> Self
 pub fn BaseKeyframe::new(offset? : Double, easing? : String, composite? : CompositeOperationOrAuto) -> Self
+pub fn BaseKeyframe::offset(Self) -> Double?
 pub impl FromJsAny for BaseKeyframe
 pub impl TJsValue for BaseKeyframe
 
 #external
 pub type BasePropertyIndexedKeyframe
+pub fn BasePropertyIndexedKeyframe::composite(Self) -> BasePropertyIndexedKeyframeGetComposite?
+pub fn BasePropertyIndexedKeyframe::easing(Self) -> BasePropertyIndexedKeyframeGetEasing?
 pub fn BasePropertyIndexedKeyframe::empty() -> Self
 pub fn BasePropertyIndexedKeyframe::new(offset? : &TBasePropertyIndexedKeyframeNewOffset, easing? : &TBasePropertyIndexedKeyframeNewEasing, composite? : &TBasePropertyIndexedKeyframeNewComposite) -> Self
+pub fn BasePropertyIndexedKeyframe::offset(Self) -> BasePropertyIndexedKeyframeGetOffset?
 pub impl FromJsAny for BasePropertyIndexedKeyframe
 pub impl TJsValue for BasePropertyIndexedKeyframe
+
+#external
+pub type BasePropertyIndexedKeyframeGetComposite
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::into(Self) -> T
+pub impl TBasePropertyIndexedKeyframeGetComposite for BasePropertyIndexedKeyframeGetComposite
+
+#external
+pub type BasePropertyIndexedKeyframeGetEasing
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::into(Self) -> T
+pub impl TBasePropertyIndexedKeyframeGetEasing for BasePropertyIndexedKeyframeGetEasing
+
+#external
+pub type BasePropertyIndexedKeyframeGetOffset
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::into(Self) -> T
+pub impl TBasePropertyIndexedKeyframeGetOffset for BasePropertyIndexedKeyframeGetOffset
 
 #external
 pub type BeforeUnloadEvent
@@ -575,7 +606,9 @@ pub impl TJsValue for BlobPart
 #external
 pub type BlobPropertyBag
 pub fn BlobPropertyBag::empty() -> Self
+pub fn BlobPropertyBag::endings(Self) -> EndingType?
 pub fn BlobPropertyBag::new(type_? : String, endings? : EndingType) -> Self
+pub fn BlobPropertyBag::type_(Self) -> String?
 pub impl FromJsAny for BlobPropertyBag
 pub impl TJsValue for BlobPropertyBag
 
@@ -588,8 +621,10 @@ pub impl TJsValue for BodyInit
 
 #external
 pub type BoxQuadOptions
+pub fn BoxQuadOptions::box(Self) -> CSSBoxType?
 pub fn BoxQuadOptions::empty() -> Self
 pub fn BoxQuadOptions::new(box? : CSSBoxType, relative_to? : &TGeometryNode) -> Self
+pub fn BoxQuadOptions::relative_to(Self) -> GeometryNode?
 pub impl FromJsAny for BoxQuadOptions
 pub impl TJsValue for BoxQuadOptions
 
@@ -754,10 +789,18 @@ pub impl TStyleSheet for CSSStyleSheet
 
 #external
 pub type CSSStyleSheetInit
+pub fn CSSStyleSheetInit::base_url(Self) -> String?
+pub fn CSSStyleSheetInit::disabled(Self) -> Bool?
 pub fn CSSStyleSheetInit::empty() -> Self
+pub fn CSSStyleSheetInit::media(Self) -> CSSStyleSheetInitGetMedia?
 pub fn CSSStyleSheetInit::new(base_url? : String, media? : &TCSSStyleSheetInitNewMedia, disabled? : Bool) -> Self
 pub impl FromJsAny for CSSStyleSheetInit
 pub impl TJsValue for CSSStyleSheetInit
+
+#external
+pub type CSSStyleSheetInitGetMedia
+pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::into(Self) -> T
+pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia
 
 pub(all) enum CanPlayTypeResult {
   Empty
@@ -920,8 +963,13 @@ pub impl TCanvasRenderingContext2DFillStyle for CanvasRenderingContext2DFillStyl
 
 #external
 pub type CanvasRenderingContext2DSettings
+pub fn CanvasRenderingContext2DSettings::alpha(Self) -> Bool?
+pub fn CanvasRenderingContext2DSettings::color_space(Self) -> PredefinedColorSpace?
+pub fn CanvasRenderingContext2DSettings::color_type(Self) -> CanvasColorType?
+pub fn CanvasRenderingContext2DSettings::desynchronized(Self) -> Bool?
 pub fn CanvasRenderingContext2DSettings::empty() -> Self
 pub fn CanvasRenderingContext2DSettings::new(alpha? : Bool, desynchronized? : Bool, color_space? : PredefinedColorSpace, color_type? : CanvasColorType, will_read_frequently? : Bool) -> Self
+pub fn CanvasRenderingContext2DSettings::will_read_frequently(Self) -> Bool?
 pub impl FromJsAny for CanvasRenderingContext2DSettings
 pub impl TJsValue for CanvasRenderingContext2DSettings
 
@@ -983,6 +1031,7 @@ pub impl TJsValue for CaretPosition
 pub type CaretPositionFromPointOptions
 pub fn CaretPositionFromPointOptions::empty() -> Self
 pub fn CaretPositionFromPointOptions::new(shadow_roots? : Array[ShadowRoot]) -> Self
+pub fn CaretPositionFromPointOptions::shadow_roots(Self) -> Array[ShadowRoot]?
 pub impl FromJsAny for CaretPositionFromPointOptions
 pub impl TJsValue for CaretPositionFromPointOptions
 
@@ -997,8 +1046,13 @@ pub impl TNode for CharacterData
 
 #external
 pub type CheckVisibilityOptions
+pub fn CheckVisibilityOptions::check_opacity(Self) -> Bool?
+pub fn CheckVisibilityOptions::check_visibility_css(Self) -> Bool?
+pub fn CheckVisibilityOptions::content_visibility_auto(Self) -> Bool?
 pub fn CheckVisibilityOptions::empty() -> Self
 pub fn CheckVisibilityOptions::new(check_opacity? : Bool, check_visibility_css? : Bool, content_visibility_auto? : Bool, opacity_property? : Bool, visibility_property? : Bool) -> Self
+pub fn CheckVisibilityOptions::opacity_property(Self) -> Bool?
+pub fn CheckVisibilityOptions::visibility_property(Self) -> Bool?
 pub impl FromJsAny for CheckVisibilityOptions
 pub impl TJsValue for CheckVisibilityOptions
 
@@ -1021,8 +1075,13 @@ pub impl TJsValue for ClipboardChangeEvent
 
 #external
 pub type ClipboardChangeEventInit
+pub fn ClipboardChangeEventInit::bubbles(Self) -> Bool?
+pub fn ClipboardChangeEventInit::cancelable(Self) -> Bool?
+pub fn ClipboardChangeEventInit::change_id(Self) -> Int64?
+pub fn ClipboardChangeEventInit::composed(Self) -> Bool?
 pub fn ClipboardChangeEventInit::empty() -> Self
 pub fn ClipboardChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, types? : Array[String], change_id? : Int64) -> Self
+pub fn ClipboardChangeEventInit::types(Self) -> Array[String]?
 pub impl FromJsAny for ClipboardChangeEventInit
 pub impl TJsValue for ClipboardChangeEventInit
 
@@ -1037,6 +1096,10 @@ pub impl TJsValue for ClipboardEvent
 
 #external
 pub type ClipboardEventInit
+pub fn ClipboardEventInit::bubbles(Self) -> Bool?
+pub fn ClipboardEventInit::cancelable(Self) -> Bool?
+pub fn ClipboardEventInit::clipboard_data(Self) -> DataTransfer?
+pub fn ClipboardEventInit::composed(Self) -> Bool?
 pub fn ClipboardEventInit::empty() -> Self
 pub fn ClipboardEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, clipboard_data? : &TDataTransfer) -> Self
 pub impl FromJsAny for ClipboardEventInit
@@ -1055,6 +1118,7 @@ pub impl TJsValue for ClipboardItem
 pub type ClipboardItemOptions
 pub fn ClipboardItemOptions::empty() -> Self
 pub fn ClipboardItemOptions::new(presentation_style? : PresentationStyle) -> Self
+pub fn ClipboardItemOptions::presentation_style(Self) -> PresentationStyle?
 pub impl FromJsAny for ClipboardItemOptions
 pub impl TJsValue for ClipboardItemOptions
 
@@ -1062,6 +1126,7 @@ pub impl TJsValue for ClipboardItemOptions
 pub type ClipboardUnsanitizedFormats
 pub fn ClipboardUnsanitizedFormats::empty() -> Self
 pub fn ClipboardUnsanitizedFormats::new(unsanitized? : Array[String]) -> Self
+pub fn ClipboardUnsanitizedFormats::unsanitized(Self) -> Array[String]?
 pub impl FromJsAny for ClipboardUnsanitizedFormats
 pub impl TJsValue for ClipboardUnsanitizedFormats
 
@@ -1076,8 +1141,14 @@ pub impl TJsValue for CloseEvent
 
 #external
 pub type CloseEventInit
+pub fn CloseEventInit::bubbles(Self) -> Bool?
+pub fn CloseEventInit::cancelable(Self) -> Bool?
+pub fn CloseEventInit::code(Self) -> UInt?
+pub fn CloseEventInit::composed(Self) -> Bool?
 pub fn CloseEventInit::empty() -> Self
 pub fn CloseEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, was_clean? : Bool, code? : UInt, reason? : String) -> Self
+pub fn CloseEventInit::reason(Self) -> String?
+pub fn CloseEventInit::was_clean(Self) -> Bool?
 pub impl FromJsAny for CloseEventInit
 pub impl TJsValue for CloseEventInit
 
@@ -1094,6 +1165,7 @@ pub impl TJsValue for CloseWatcher
 pub type CloseWatcherOptions
 pub fn CloseWatcherOptions::empty() -> Self
 pub fn CloseWatcherOptions::new(signal? : &TAbortSignal) -> Self
+pub fn CloseWatcherOptions::signal(Self) -> AbortSignal?
 pub impl FromJsAny for CloseWatcherOptions
 pub impl TJsValue for CloseWatcherOptions
 
@@ -1119,8 +1191,13 @@ pub impl TJsValue for CommandEvent
 
 #external
 pub type CommandEventInit
+pub fn CommandEventInit::bubbles(Self) -> Bool?
+pub fn CommandEventInit::cancelable(Self) -> Bool?
+pub fn CommandEventInit::command(Self) -> String?
+pub fn CommandEventInit::composed(Self) -> Bool?
 pub fn CommandEventInit::empty() -> Self
 pub fn CommandEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, source? : &TElement, command? : String) -> Self
+pub fn CommandEventInit::source(Self) -> Element?
 pub impl FromJsAny for CommandEventInit
 pub impl TJsValue for CommandEventInit
 
@@ -1156,6 +1233,7 @@ pub(all) enum CompositeOperationOrAuto {
 pub fn CompositeOperationOrAuto::from(String) -> Self?
 pub fn CompositeOperationOrAuto::value(Self) -> String
 pub impl FromJsAny for CompositeOperationOrAuto
+pub impl TBasePropertyIndexedKeyframeGetComposite for CompositeOperationOrAuto
 pub impl TBasePropertyIndexedKeyframeNewComposite for CompositeOperationOrAuto
 pub impl TJsValue for CompositeOperationOrAuto
 pub impl Eq for CompositeOperationOrAuto
@@ -1173,15 +1251,29 @@ pub impl TUIEvent for CompositionEvent
 
 #external
 pub type CompositionEventInit
+pub fn CompositionEventInit::bubbles(Self) -> Bool?
+pub fn CompositionEventInit::cancelable(Self) -> Bool?
+pub fn CompositionEventInit::composed(Self) -> Bool?
+pub fn CompositionEventInit::data(Self) -> String?
+pub fn CompositionEventInit::detail(Self) -> Int?
 pub fn CompositionEventInit::empty() -> Self
 pub fn CompositionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, data? : String) -> Self
+pub fn CompositionEventInit::view(Self) -> Window?
+pub fn CompositionEventInit::which(Self) -> UInt?
 pub impl FromJsAny for CompositionEventInit
 pub impl TJsValue for CompositionEventInit
 
 #external
 pub type ComputedEffectTiming
+pub fn ComputedEffectTiming::current_iteration(Self) -> Double?
+pub fn ComputedEffectTiming::direction(Self) -> PlaybackDirection?
+pub fn ComputedEffectTiming::easing(Self) -> String?
 pub fn ComputedEffectTiming::empty() -> Self
+pub fn ComputedEffectTiming::fill(Self) -> FillMode?
+pub fn ComputedEffectTiming::iteration_start(Self) -> Double?
+pub fn ComputedEffectTiming::iterations(Self) -> Double?
 pub fn ComputedEffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, progress? : Double, current_iteration? : Double) -> Self
+pub fn ComputedEffectTiming::progress(Self) -> Double?
 pub impl FromJsAny for ComputedEffectTiming
 pub impl TJsValue for ComputedEffectTiming
 
@@ -1212,7 +1304,9 @@ pub impl TJsValue for Console
 #external
 pub type ConvertCoordinateOptions
 pub fn ConvertCoordinateOptions::empty() -> Self
+pub fn ConvertCoordinateOptions::from_box(Self) -> CSSBoxType?
 pub fn ConvertCoordinateOptions::new(from_box? : CSSBoxType, to_box? : CSSBoxType) -> Self
+pub fn ConvertCoordinateOptions::to_box(Self) -> CSSBoxType?
 pub impl FromJsAny for ConvertCoordinateOptions
 pub impl TJsValue for ConvertCoordinateOptions
 
@@ -1274,6 +1368,10 @@ pub impl TJsValue for CustomEvent
 
 #external
 pub type CustomEventInit
+pub fn CustomEventInit::bubbles(Self) -> Bool?
+pub fn CustomEventInit::cancelable(Self) -> Bool?
+pub fn CustomEventInit::composed(Self) -> Bool?
+pub fn CustomEventInit::detail(Self) -> JsValue?
 pub fn CustomEventInit::empty() -> Self
 pub fn CustomEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, detail? : JsValue) -> Self
 pub impl FromJsAny for CustomEventInit
@@ -1315,14 +1413,49 @@ pub impl TJsValue for DOMMatrix
 
 #external
 pub type DOMMatrix2DInit
+pub fn DOMMatrix2DInit::a(Self) -> Double?
+pub fn DOMMatrix2DInit::b(Self) -> Double?
+pub fn DOMMatrix2DInit::c(Self) -> Double?
+pub fn DOMMatrix2DInit::d(Self) -> Double?
+pub fn DOMMatrix2DInit::e(Self) -> Double?
 pub fn DOMMatrix2DInit::empty() -> Self
+pub fn DOMMatrix2DInit::f(Self) -> Double?
+pub fn DOMMatrix2DInit::m11(Self) -> Double?
+pub fn DOMMatrix2DInit::m12(Self) -> Double?
+pub fn DOMMatrix2DInit::m21(Self) -> Double?
+pub fn DOMMatrix2DInit::m22(Self) -> Double?
+pub fn DOMMatrix2DInit::m41(Self) -> Double?
+pub fn DOMMatrix2DInit::m42(Self) -> Double?
 pub fn DOMMatrix2DInit::new(a? : Double, b? : Double, c? : Double, d? : Double, e? : Double, f? : Double, m11? : Double, m12? : Double, m21? : Double, m22? : Double, m41? : Double, m42? : Double) -> Self
 pub impl FromJsAny for DOMMatrix2DInit
 pub impl TJsValue for DOMMatrix2DInit
 
 #external
 pub type DOMMatrixInit
+pub fn DOMMatrixInit::a(Self) -> Double?
+pub fn DOMMatrixInit::b(Self) -> Double?
+pub fn DOMMatrixInit::c(Self) -> Double?
+pub fn DOMMatrixInit::d(Self) -> Double?
+pub fn DOMMatrixInit::e(Self) -> Double?
 pub fn DOMMatrixInit::empty() -> Self
+pub fn DOMMatrixInit::f(Self) -> Double?
+pub fn DOMMatrixInit::is2d(Self) -> Bool?
+pub fn DOMMatrixInit::m11(Self) -> Double?
+pub fn DOMMatrixInit::m12(Self) -> Double?
+pub fn DOMMatrixInit::m13(Self) -> Double?
+pub fn DOMMatrixInit::m14(Self) -> Double?
+pub fn DOMMatrixInit::m21(Self) -> Double?
+pub fn DOMMatrixInit::m22(Self) -> Double?
+pub fn DOMMatrixInit::m23(Self) -> Double?
+pub fn DOMMatrixInit::m24(Self) -> Double?
+pub fn DOMMatrixInit::m31(Self) -> Double?
+pub fn DOMMatrixInit::m32(Self) -> Double?
+pub fn DOMMatrixInit::m33(Self) -> Double?
+pub fn DOMMatrixInit::m34(Self) -> Double?
+pub fn DOMMatrixInit::m41(Self) -> Double?
+pub fn DOMMatrixInit::m42(Self) -> Double?
+pub fn DOMMatrixInit::m43(Self) -> Double?
+pub fn DOMMatrixInit::m44(Self) -> Double?
 pub fn DOMMatrixInit::new(a? : Double, b? : Double, c? : Double, d? : Double, e? : Double, f? : Double, m11? : Double, m12? : Double, m21? : Double, m22? : Double, m41? : Double, m42? : Double, m13? : Double, m14? : Double, m23? : Double, m24? : Double, m31? : Double, m32? : Double, m33? : Double, m34? : Double, m43? : Double, m44? : Double, is2d? : Bool) -> Self
 pub impl FromJsAny for DOMMatrixInit
 pub impl TJsValue for DOMMatrixInit
@@ -1374,6 +1507,10 @@ pub impl TJsValue for DOMPoint
 pub type DOMPointInit
 pub fn DOMPointInit::empty() -> Self
 pub fn DOMPointInit::new(x? : Double, y? : Double, z? : Double, w? : Double) -> Self
+pub fn DOMPointInit::w(Self) -> Double?
+pub fn DOMPointInit::x(Self) -> Double?
+pub fn DOMPointInit::y(Self) -> Double?
+pub fn DOMPointInit::z(Self) -> Double?
 pub impl FromJsAny for DOMPointInit
 pub impl TCanvasRenderingContext2DRoundRectRadii for DOMPointInit
 pub impl TCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit
@@ -1406,6 +1543,10 @@ pub impl TJsValue for DOMQuad
 pub type DOMQuadInit
 pub fn DOMQuadInit::empty() -> Self
 pub fn DOMQuadInit::new(p1? : DOMPointInit, p2? : DOMPointInit, p3? : DOMPointInit, p4? : DOMPointInit) -> Self
+pub fn DOMQuadInit::p1(Self) -> DOMPointInit?
+pub fn DOMQuadInit::p2(Self) -> DOMPointInit?
+pub fn DOMQuadInit::p3(Self) -> DOMPointInit?
+pub fn DOMQuadInit::p4(Self) -> DOMPointInit?
 pub impl FromJsAny for DOMQuadInit
 pub impl TJsValue for DOMQuadInit
 
@@ -1422,7 +1563,11 @@ pub impl TJsValue for DOMRect
 #external
 pub type DOMRectInit
 pub fn DOMRectInit::empty() -> Self
+pub fn DOMRectInit::height(Self) -> Double?
 pub fn DOMRectInit::new(x? : Double, y? : Double, width? : Double, height? : Double) -> Self
+pub fn DOMRectInit::width(Self) -> Double?
+pub fn DOMRectInit::x(Self) -> Double?
+pub fn DOMRectInit::y(Self) -> Double?
 pub impl FromJsAny for DOMRectInit
 pub impl TJsValue for DOMRectInit
 
@@ -1502,8 +1647,24 @@ pub impl TWorkerGlobalScope for DedicatedWorkerGlobalScope
 
 #external
 pub type DeferredRequestInit
+pub fn DeferredRequestInit::activate_after(Self) -> Double?
+pub fn DeferredRequestInit::body(Self) -> BodyInit?
+pub fn DeferredRequestInit::cache(Self) -> RequestCache?
+pub fn DeferredRequestInit::credentials(Self) -> RequestCredentials?
+pub fn DeferredRequestInit::duplex(Self) -> RequestDuplex?
 pub fn DeferredRequestInit::empty() -> Self
+pub fn DeferredRequestInit::headers(Self) -> HeadersInit?
+pub fn DeferredRequestInit::integrity(Self) -> String?
+pub fn DeferredRequestInit::keepalive(Self) -> Bool?
+pub fn DeferredRequestInit::method_(Self) -> String?
+pub fn DeferredRequestInit::mode(Self) -> RequestMode?
 pub fn DeferredRequestInit::new(method_? : String, headers? : &THeadersInit, body? : &TBodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue, activate_after? : Double) -> Self
+pub fn DeferredRequestInit::priority(Self) -> RequestPriority?
+pub fn DeferredRequestInit::redirect(Self) -> RequestRedirect?
+pub fn DeferredRequestInit::referrer(Self) -> String?
+pub fn DeferredRequestInit::referrer_policy(Self) -> ReferrerPolicy?
+pub fn DeferredRequestInit::signal(Self) -> AbortSignal?
+pub fn DeferredRequestInit::window(Self) -> JsValue?
 pub impl FromJsAny for DeferredRequestInit
 pub impl TJsValue for DeferredRequestInit
 
@@ -1516,6 +1677,7 @@ pub impl FromJsAny for Document
 pub impl TDocument for Document
 pub impl TEventTarget for Document
 pub impl TGeometryNode for Document
+pub impl TIntersectionObserverInitGetRoot for Document
 pub impl TIntersectionObserverInitNewRoot for Document
 pub impl TIntersectionObserverRoot for Document
 pub impl TJsValue for Document
@@ -1557,6 +1719,7 @@ pub impl TJsValue for DocumentTimeline
 pub type DocumentTimelineOptions
 pub fn DocumentTimelineOptions::empty() -> Self
 pub fn DocumentTimelineOptions::new(origin_time? : Double) -> Self
+pub fn DocumentTimelineOptions::origin_time(Self) -> Double?
 pub impl FromJsAny for DocumentTimelineOptions
 pub impl TJsValue for DocumentTimelineOptions
 
@@ -1593,14 +1756,47 @@ pub impl TUIEvent for DragEvent
 
 #external
 pub type DragEventInit
+pub fn DragEventInit::alt_key(Self) -> Bool?
+pub fn DragEventInit::bubbles(Self) -> Bool?
+pub fn DragEventInit::button(Self) -> Int?
+pub fn DragEventInit::buttons(Self) -> UInt?
+pub fn DragEventInit::cancelable(Self) -> Bool?
+pub fn DragEventInit::client_x(Self) -> Int?
+pub fn DragEventInit::client_y(Self) -> Int?
+pub fn DragEventInit::composed(Self) -> Bool?
+pub fn DragEventInit::ctrl_key(Self) -> Bool?
+pub fn DragEventInit::data_transfer(Self) -> DataTransfer?
+pub fn DragEventInit::detail(Self) -> Int?
 pub fn DragEventInit::empty() -> Self
+pub fn DragEventInit::meta_key(Self) -> Bool?
+pub fn DragEventInit::modifier_alt_graph(Self) -> Bool?
+pub fn DragEventInit::modifier_caps_lock(Self) -> Bool?
+pub fn DragEventInit::modifier_fn(Self) -> Bool?
+pub fn DragEventInit::modifier_fn_lock(Self) -> Bool?
+pub fn DragEventInit::modifier_hyper(Self) -> Bool?
+pub fn DragEventInit::modifier_num_lock(Self) -> Bool?
+pub fn DragEventInit::modifier_scroll_lock(Self) -> Bool?
+pub fn DragEventInit::modifier_super(Self) -> Bool?
+pub fn DragEventInit::modifier_symbol(Self) -> Bool?
+pub fn DragEventInit::modifier_symbol_lock(Self) -> Bool?
 pub fn DragEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, data_transfer? : &TDataTransfer) -> Self
+pub fn DragEventInit::related_target(Self) -> EventTarget?
+pub fn DragEventInit::screen_x(Self) -> Int?
+pub fn DragEventInit::screen_y(Self) -> Int?
+pub fn DragEventInit::shift_key(Self) -> Bool?
+pub fn DragEventInit::view(Self) -> Window?
+pub fn DragEventInit::which(Self) -> UInt?
 pub impl FromJsAny for DragEventInit
 pub impl TJsValue for DragEventInit
 
 #external
 pub type EffectTiming
+pub fn EffectTiming::direction(Self) -> PlaybackDirection?
+pub fn EffectTiming::easing(Self) -> String?
 pub fn EffectTiming::empty() -> Self
+pub fn EffectTiming::fill(Self) -> FillMode?
+pub fn EffectTiming::iteration_start(Self) -> Double?
+pub fn EffectTiming::iterations(Self) -> Double?
 pub fn EffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String) -> Self
 pub impl FromJsAny for EffectTiming
 pub impl TJsValue for EffectTiming
@@ -1617,6 +1813,7 @@ pub impl THTMLAllCollectionNamedItem for Element
 pub impl THTMLFormControlsCollectionNamedItem for Element
 pub impl THTMLFormElementGetByName for Element
 pub impl THTMLSlotElementAssignNodes for Element
+pub impl TIntersectionObserverInitGetRoot for Element
 pub impl TIntersectionObserverInitNewRoot for Element
 pub impl TIntersectionObserverRoot for Element
 pub impl TJsValue for Element
@@ -1625,7 +1822,9 @@ pub impl TStyleSheetOwnerNode for Element
 
 #external
 pub type ElementCreationOptions
+pub fn ElementCreationOptions::custom_element_registry(Self) -> CustomElementRegistry?
 pub fn ElementCreationOptions::empty() -> Self
+pub fn ElementCreationOptions::is_(Self) -> String?
 pub fn ElementCreationOptions::new(custom_element_registry? : &TCustomElementRegistry, is_? : String) -> Self
 pub impl FromJsAny for ElementCreationOptions
 pub impl TDocumentCreateElementNSOptions for ElementCreationOptions
@@ -1635,6 +1834,7 @@ pub impl TJsValue for ElementCreationOptions
 #external
 pub type ElementDefinitionOptions
 pub fn ElementDefinitionOptions::empty() -> Self
+pub fn ElementDefinitionOptions::extends(Self) -> String?
 pub fn ElementDefinitionOptions::new(extends? : String) -> Self
 pub impl FromJsAny for ElementDefinitionOptions
 pub impl TJsValue for ElementDefinitionOptions
@@ -1678,7 +1878,15 @@ pub impl TJsValue for ErrorEvent
 
 #external
 pub type ErrorEventInit
+pub fn ErrorEventInit::bubbles(Self) -> Bool?
+pub fn ErrorEventInit::cancelable(Self) -> Bool?
+pub fn ErrorEventInit::colno(Self) -> UInt?
+pub fn ErrorEventInit::composed(Self) -> Bool?
 pub fn ErrorEventInit::empty() -> Self
+pub fn ErrorEventInit::error(Self) -> JsValue?
+pub fn ErrorEventInit::filename(Self) -> String?
+pub fn ErrorEventInit::lineno(Self) -> UInt?
+pub fn ErrorEventInit::message(Self) -> String?
 pub fn ErrorEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, message? : String, filename? : String, lineno? : UInt, colno? : UInt, error? : JsValue) -> Self
 pub impl FromJsAny for ErrorEventInit
 pub impl TJsValue for ErrorEventInit
@@ -1701,6 +1909,9 @@ pub impl TJsValue for EventHandlerNonNull
 
 #external
 pub type EventInit
+pub fn EventInit::bubbles(Self) -> Bool?
+pub fn EventInit::cancelable(Self) -> Bool?
+pub fn EventInit::composed(Self) -> Bool?
 pub fn EventInit::empty() -> Self
 pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool) -> Self
 pub impl FromJsAny for EventInit
@@ -1714,6 +1925,7 @@ pub impl TJsValue for EventListener
 
 #external
 pub type EventListenerOptions
+pub fn EventListenerOptions::capture(Self) -> Bool?
 pub fn EventListenerOptions::empty() -> Self
 pub fn EventListenerOptions::new(capture? : Bool) -> Self
 pub impl FromJsAny for EventListenerOptions
@@ -1722,8 +1934,28 @@ pub impl TJsValue for EventListenerOptions
 
 #external
 pub type EventModifierInit
+pub fn EventModifierInit::alt_key(Self) -> Bool?
+pub fn EventModifierInit::bubbles(Self) -> Bool?
+pub fn EventModifierInit::cancelable(Self) -> Bool?
+pub fn EventModifierInit::composed(Self) -> Bool?
+pub fn EventModifierInit::ctrl_key(Self) -> Bool?
+pub fn EventModifierInit::detail(Self) -> Int?
 pub fn EventModifierInit::empty() -> Self
+pub fn EventModifierInit::meta_key(Self) -> Bool?
+pub fn EventModifierInit::modifier_alt_graph(Self) -> Bool?
+pub fn EventModifierInit::modifier_caps_lock(Self) -> Bool?
+pub fn EventModifierInit::modifier_fn(Self) -> Bool?
+pub fn EventModifierInit::modifier_fn_lock(Self) -> Bool?
+pub fn EventModifierInit::modifier_hyper(Self) -> Bool?
+pub fn EventModifierInit::modifier_num_lock(Self) -> Bool?
+pub fn EventModifierInit::modifier_scroll_lock(Self) -> Bool?
+pub fn EventModifierInit::modifier_super(Self) -> Bool?
+pub fn EventModifierInit::modifier_symbol(Self) -> Bool?
+pub fn EventModifierInit::modifier_symbol_lock(Self) -> Bool?
 pub fn EventModifierInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool) -> Self
+pub fn EventModifierInit::shift_key(Self) -> Bool?
+pub fn EventModifierInit::view(Self) -> Window?
+pub fn EventModifierInit::which(Self) -> UInt?
 pub impl FromJsAny for EventModifierInit
 pub impl TJsValue for EventModifierInit
 
@@ -1740,6 +1972,7 @@ pub impl TJsValue for EventSource
 pub type EventSourceInit
 pub fn EventSourceInit::empty() -> Self
 pub fn EventSourceInit::new(with_credentials? : Bool) -> Self
+pub fn EventSourceInit::with_credentials(Self) -> Bool?
 pub impl FromJsAny for EventSourceInit
 pub impl TJsValue for EventSourceInit
 
@@ -1787,7 +2020,10 @@ pub impl TJsValue for FileList
 #external
 pub type FilePropertyBag
 pub fn FilePropertyBag::empty() -> Self
+pub fn FilePropertyBag::endings(Self) -> EndingType?
+pub fn FilePropertyBag::last_modified(Self) -> Int64?
 pub fn FilePropertyBag::new(type_? : String, endings? : EndingType, last_modified? : Int64) -> Self
+pub fn FilePropertyBag::type_(Self) -> String?
 pub impl FromJsAny for FilePropertyBag
 pub impl TJsValue for FilePropertyBag
 
@@ -1858,15 +2094,24 @@ pub impl TUIEvent for FocusEvent
 
 #external
 pub type FocusEventInit
+pub fn FocusEventInit::bubbles(Self) -> Bool?
+pub fn FocusEventInit::cancelable(Self) -> Bool?
+pub fn FocusEventInit::composed(Self) -> Bool?
+pub fn FocusEventInit::detail(Self) -> Int?
 pub fn FocusEventInit::empty() -> Self
 pub fn FocusEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, related_target? : &TEventTarget) -> Self
+pub fn FocusEventInit::related_target(Self) -> EventTarget?
+pub fn FocusEventInit::view(Self) -> Window?
+pub fn FocusEventInit::which(Self) -> UInt?
 pub impl FromJsAny for FocusEventInit
 pub impl TJsValue for FocusEventInit
 
 #external
 pub type FocusOptions
 pub fn FocusOptions::empty() -> Self
+pub fn FocusOptions::focus_visible(Self) -> Bool?
 pub fn FocusOptions::new(prevent_scroll? : Bool, focus_visible? : Bool) -> Self
+pub fn FocusOptions::prevent_scroll(Self) -> Bool?
 pub impl FromJsAny for FocusOptions
 pub impl TJsValue for FocusOptions
 
@@ -1899,7 +2144,11 @@ pub impl TJsValue for FormDataEvent
 
 #external
 pub type FormDataEventInit
+pub fn FormDataEventInit::bubbles(Self) -> Bool?
+pub fn FormDataEventInit::cancelable(Self) -> Bool?
+pub fn FormDataEventInit::composed(Self) -> Bool?
 pub fn FormDataEventInit::empty() -> Self
+pub fn FormDataEventInit::form_data(Self) -> FormData
 pub fn FormDataEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, &TFormData) -> Self
 pub impl FromJsAny for FormDataEventInit
 pub impl TJsValue for FormDataEventInit
@@ -1925,6 +2174,7 @@ pub impl Show for FullscreenNavigationUI
 #external
 pub type FullscreenOptions
 pub fn FullscreenOptions::empty() -> Self
+pub fn FullscreenOptions::navigation_ui(Self) -> FullscreenNavigationUI?
 pub fn FullscreenOptions::new(navigation_ui? : FullscreenNavigationUI) -> Self
 pub impl FromJsAny for FullscreenOptions
 pub impl TJsValue for FullscreenOptions
@@ -1960,6 +2210,8 @@ pub impl TJsValue for GeometryNode
 pub type GetAnimationsOptions
 pub fn GetAnimationsOptions::empty() -> Self
 pub fn GetAnimationsOptions::new(subtree? : Bool, pseudo_element? : String) -> Self
+pub fn GetAnimationsOptions::pseudo_element(Self) -> String?
+pub fn GetAnimationsOptions::subtree(Self) -> Bool?
 pub impl FromJsAny for GetAnimationsOptions
 pub impl TJsValue for GetAnimationsOptions
 
@@ -1967,6 +2219,7 @@ pub impl TJsValue for GetAnimationsOptions
 pub type GetComposedRangesOptions
 pub fn GetComposedRangesOptions::empty() -> Self
 pub fn GetComposedRangesOptions::new(shadow_roots? : Array[ShadowRoot]) -> Self
+pub fn GetComposedRangesOptions::shadow_roots(Self) -> Array[ShadowRoot]?
 pub impl FromJsAny for GetComposedRangesOptions
 pub impl TJsValue for GetComposedRangesOptions
 
@@ -1974,11 +2227,14 @@ pub impl TJsValue for GetComposedRangesOptions
 pub type GetHTMLOptions
 pub fn GetHTMLOptions::empty() -> Self
 pub fn GetHTMLOptions::new(serializable_shadow_roots? : Bool, shadow_roots? : Array[ShadowRoot]) -> Self
+pub fn GetHTMLOptions::serializable_shadow_roots(Self) -> Bool?
+pub fn GetHTMLOptions::shadow_roots(Self) -> Array[ShadowRoot]?
 pub impl FromJsAny for GetHTMLOptions
 pub impl TJsValue for GetHTMLOptions
 
 #external
 pub type GetRootNodeOptions
+pub fn GetRootNodeOptions::composed(Self) -> Bool?
 pub fn GetRootNodeOptions::empty() -> Self
 pub fn GetRootNodeOptions::new(composed? : Bool) -> Self
 pub impl FromJsAny for GetRootNodeOptions
@@ -2947,8 +3203,13 @@ pub impl TJsValue for HashChangeEvent
 
 #external
 pub type HashChangeEventInit
+pub fn HashChangeEventInit::bubbles(Self) -> Bool?
+pub fn HashChangeEventInit::cancelable(Self) -> Bool?
+pub fn HashChangeEventInit::composed(Self) -> Bool?
 pub fn HashChangeEventInit::empty() -> Self
 pub fn HashChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, old_url? : String, new_url? : String) -> Self
+pub fn HashChangeEventInit::new_url(Self) -> String?
+pub fn HashChangeEventInit::old_url(Self) -> String?
 pub impl FromJsAny for HashChangeEventInit
 pub impl TJsValue for HashChangeEventInit
 
@@ -3019,7 +3280,9 @@ pub impl TJsValue for IDBDatabase
 #external
 pub type IDBDatabaseInfo
 pub fn IDBDatabaseInfo::empty() -> Self
+pub fn IDBDatabaseInfo::name(Self) -> String?
 pub fn IDBDatabaseInfo::new(name? : String, version? : UInt64) -> Self
+pub fn IDBDatabaseInfo::version(Self) -> UInt64?
 pub impl FromJsAny for IDBDatabaseInfo
 pub impl TJsValue for IDBDatabaseInfo
 
@@ -3032,8 +3295,11 @@ pub impl TJsValue for IDBFactory
 
 #external
 pub type IDBGetAllOptions
+pub fn IDBGetAllOptions::count(Self) -> UInt?
+pub fn IDBGetAllOptions::direction(Self) -> IDBCursorDirection?
 pub fn IDBGetAllOptions::empty() -> Self
 pub fn IDBGetAllOptions::new(query? : JsValue, count? : UInt, direction? : IDBCursorDirection) -> Self
+pub fn IDBGetAllOptions::query(Self) -> JsValue?
 pub impl FromJsAny for IDBGetAllOptions
 pub impl TJsValue for IDBGetAllOptions
 
@@ -3049,7 +3315,9 @@ pub impl TJsValue for IDBIndex
 #external
 pub type IDBIndexParameters
 pub fn IDBIndexParameters::empty() -> Self
+pub fn IDBIndexParameters::multi_entry(Self) -> Bool?
 pub fn IDBIndexParameters::new(unique? : Bool, multi_entry? : Bool) -> Self
+pub fn IDBIndexParameters::unique(Self) -> Bool?
 pub impl FromJsAny for IDBIndexParameters
 pub impl TJsValue for IDBIndexParameters
 
@@ -3075,10 +3343,17 @@ pub impl TJsValue for IDBObjectStore
 
 #external
 pub type IDBObjectStoreParameters
+pub fn IDBObjectStoreParameters::auto_increment(Self) -> Bool?
 pub fn IDBObjectStoreParameters::empty() -> Self
+pub fn IDBObjectStoreParameters::key_path(Self) -> IDBObjectStoreParametersGetKeyPath?
 pub fn IDBObjectStoreParameters::new(key_path? : &TIDBObjectStoreParametersNewKeyPath, auto_increment? : Bool) -> Self
 pub impl FromJsAny for IDBObjectStoreParameters
 pub impl TJsValue for IDBObjectStoreParameters
+
+#external
+pub type IDBObjectStoreParametersGetKeyPath
+pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPath::into(Self) -> T
+pub impl TIDBObjectStoreParametersGetKeyPath for IDBObjectStoreParametersGetKeyPath
 
 #external
 pub type IDBOpenDBRequest
@@ -3154,6 +3429,7 @@ pub impl Show for IDBTransactionMode
 
 #external
 pub type IDBTransactionOptions
+pub fn IDBTransactionOptions::durability(Self) -> IDBTransactionDurability?
 pub fn IDBTransactionOptions::empty() -> Self
 pub fn IDBTransactionOptions::new(durability? : IDBTransactionDurability) -> Self
 pub impl FromJsAny for IDBTransactionOptions
@@ -3170,8 +3446,13 @@ pub impl TJsValue for IDBVersionChangeEvent
 
 #external
 pub type IDBVersionChangeEventInit
+pub fn IDBVersionChangeEventInit::bubbles(Self) -> Bool?
+pub fn IDBVersionChangeEventInit::cancelable(Self) -> Bool?
+pub fn IDBVersionChangeEventInit::composed(Self) -> Bool?
 pub fn IDBVersionChangeEventInit::empty() -> Self
 pub fn IDBVersionChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, old_version? : UInt64, new_version? : UInt64) -> Self
+pub fn IDBVersionChangeEventInit::new_version(Self) -> UInt64?
+pub fn IDBVersionChangeEventInit::old_version(Self) -> UInt64?
 pub impl FromJsAny for IDBVersionChangeEventInit
 pub impl TJsValue for IDBVersionChangeEventInit
 
@@ -3192,6 +3473,7 @@ pub impl TJsValue for IdleRequestCallback
 pub type IdleRequestOptions
 pub fn IdleRequestOptions::empty() -> Self
 pub fn IdleRequestOptions::new(timeout? : UInt) -> Self
+pub fn IdleRequestOptions::timeout(Self) -> UInt?
 pub impl FromJsAny for IdleRequestOptions
 pub impl TJsValue for IdleRequestOptions
 
@@ -3205,8 +3487,14 @@ pub impl TJsValue for ImageBitmap
 
 #external
 pub type ImageBitmapOptions
+pub fn ImageBitmapOptions::color_space_conversion(Self) -> ColorSpaceConversion?
 pub fn ImageBitmapOptions::empty() -> Self
+pub fn ImageBitmapOptions::image_orientation(Self) -> ImageOrientation?
 pub fn ImageBitmapOptions::new(image_orientation? : ImageOrientation, premultiply_alpha? : PremultiplyAlpha, color_space_conversion? : ColorSpaceConversion, resize_width? : UInt, resize_height? : UInt, resize_quality? : ResizeQuality) -> Self
+pub fn ImageBitmapOptions::premultiply_alpha(Self) -> PremultiplyAlpha?
+pub fn ImageBitmapOptions::resize_height(Self) -> UInt?
+pub fn ImageBitmapOptions::resize_quality(Self) -> ResizeQuality?
+pub fn ImageBitmapOptions::resize_width(Self) -> UInt?
 pub impl FromJsAny for ImageBitmapOptions
 pub impl TJsValue for ImageBitmapOptions
 
@@ -3226,6 +3514,7 @@ pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanva
 
 #external
 pub type ImageBitmapRenderingContextSettings
+pub fn ImageBitmapRenderingContextSettings::alpha(Self) -> Bool?
 pub fn ImageBitmapRenderingContextSettings::empty() -> Self
 pub fn ImageBitmapRenderingContextSettings::new(alpha? : Bool) -> Self
 pub impl FromJsAny for ImageBitmapRenderingContextSettings
@@ -3268,8 +3557,10 @@ pub impl Show for ImageDataPixelFormat
 
 #external
 pub type ImageDataSettings
+pub fn ImageDataSettings::color_space(Self) -> PredefinedColorSpace?
 pub fn ImageDataSettings::empty() -> Self
 pub fn ImageDataSettings::new(color_space? : PredefinedColorSpace, pixel_format? : ImageDataPixelFormat) -> Self
+pub fn ImageDataSettings::pixel_format(Self) -> ImageDataPixelFormat?
 pub impl FromJsAny for ImageDataSettings
 pub impl TJsValue for ImageDataSettings
 
@@ -3277,6 +3568,8 @@ pub impl TJsValue for ImageDataSettings
 pub type ImageEncodeOptions
 pub fn ImageEncodeOptions::empty() -> Self
 pub fn ImageEncodeOptions::new(type_? : String, quality? : Double) -> Self
+pub fn ImageEncodeOptions::quality(Self) -> Double?
+pub fn ImageEncodeOptions::type_(Self) -> String?
 pub impl FromJsAny for ImageEncodeOptions
 pub impl TJsValue for ImageEncodeOptions
 
@@ -3305,8 +3598,10 @@ pub impl Show for ImageSmoothingQuality
 
 #external
 pub type ImportNodeOptions
+pub fn ImportNodeOptions::custom_element_registry(Self) -> CustomElementRegistry?
 pub fn ImportNodeOptions::empty() -> Self
 pub fn ImportNodeOptions::new(custom_element_registry? : &TCustomElementRegistry, self_only? : Bool) -> Self
+pub fn ImportNodeOptions::self_only(Self) -> Bool?
 pub impl FromJsAny for ImportNodeOptions
 pub impl TDocumentImportNodeOptions for ImportNodeOptions
 pub impl TJsValue for ImportNodeOptions
@@ -3323,8 +3618,17 @@ pub impl TUIEvent for InputEvent
 
 #external
 pub type InputEventInit
+pub fn InputEventInit::bubbles(Self) -> Bool?
+pub fn InputEventInit::cancelable(Self) -> Bool?
+pub fn InputEventInit::composed(Self) -> Bool?
+pub fn InputEventInit::data(Self) -> String?
+pub fn InputEventInit::detail(Self) -> Int?
 pub fn InputEventInit::empty() -> Self
+pub fn InputEventInit::input_type(Self) -> String?
+pub fn InputEventInit::is_composing(Self) -> Bool?
 pub fn InputEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, data? : String, is_composing? : Bool, input_type? : String) -> Self
+pub fn InputEventInit::view(Self) -> Window?
+pub fn InputEventInit::which(Self) -> UInt?
 pub impl FromJsAny for InputEventInit
 pub impl TJsValue for InputEventInit
 
@@ -3370,17 +3674,41 @@ pub impl TJsValue for IntersectionObserverEntry
 
 #external
 pub type IntersectionObserverEntryInit
+pub fn IntersectionObserverEntryInit::bounding_client_rect(Self) -> DOMRectInit
 pub fn IntersectionObserverEntryInit::empty() -> Self
+pub fn IntersectionObserverEntryInit::intersection_ratio(Self) -> Double
+pub fn IntersectionObserverEntryInit::intersection_rect(Self) -> DOMRectInit
+pub fn IntersectionObserverEntryInit::is_intersecting(Self) -> Bool
+pub fn IntersectionObserverEntryInit::is_visible(Self) -> Bool
 pub fn IntersectionObserverEntryInit::new(Double, DOMRectInit, DOMRectInit, DOMRectInit, Bool, Bool, Double, &TElement) -> Self
+pub fn IntersectionObserverEntryInit::root_bounds(Self) -> DOMRectInit
+pub fn IntersectionObserverEntryInit::target(Self) -> Element
+pub fn IntersectionObserverEntryInit::time(Self) -> Double
 pub impl FromJsAny for IntersectionObserverEntryInit
 pub impl TJsValue for IntersectionObserverEntryInit
 
 #external
 pub type IntersectionObserverInit
+pub fn IntersectionObserverInit::delay(Self) -> Int?
 pub fn IntersectionObserverInit::empty() -> Self
 pub fn IntersectionObserverInit::new(root? : &TIntersectionObserverInitNewRoot, root_margin? : String, scroll_margin? : String, threshold? : &TIntersectionObserverInitNewThreshold, delay? : Int, track_visibility? : Bool) -> Self
+pub fn IntersectionObserverInit::root(Self) -> IntersectionObserverInitGetRoot?
+pub fn IntersectionObserverInit::root_margin(Self) -> String?
+pub fn IntersectionObserverInit::scroll_margin(Self) -> String?
+pub fn IntersectionObserverInit::threshold(Self) -> IntersectionObserverInitGetThreshold?
+pub fn IntersectionObserverInit::track_visibility(Self) -> Bool?
 pub impl FromJsAny for IntersectionObserverInit
 pub impl TJsValue for IntersectionObserverInit
+
+#external
+pub type IntersectionObserverInitGetRoot
+pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::into(Self) -> T
+pub impl TIntersectionObserverInitGetRoot for IntersectionObserverInitGetRoot
+
+#external
+pub type IntersectionObserverInitGetThreshold
+pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThreshold::into(Self) -> T
+pub impl TIntersectionObserverInitGetThreshold for IntersectionObserverInitGetThreshold
 
 #external
 pub type IntersectionObserverRoot
@@ -3419,6 +3747,7 @@ pub fn JsValue::as_string(Self) -> String
 pub fn[T : TJsValue] JsValue::into(Self) -> T
 pub fn JsValue::is_null(Self) -> Bool
 pub fn[T] JsValue::null() -> T
+pub fn JsValue::to_string(Self) -> String
 pub fn JsValue::undefined() -> Self
 pub impl FromJsAny for JsValue
 pub impl THeadersInit for JsValue
@@ -3437,15 +3766,51 @@ pub impl TUIEvent for KeyboardEvent
 
 #external
 pub type KeyboardEventInit
+pub fn KeyboardEventInit::alt_key(Self) -> Bool?
+pub fn KeyboardEventInit::bubbles(Self) -> Bool?
+pub fn KeyboardEventInit::cancelable(Self) -> Bool?
+pub fn KeyboardEventInit::char_code(Self) -> UInt?
+pub fn KeyboardEventInit::code(Self) -> String?
+pub fn KeyboardEventInit::composed(Self) -> Bool?
+pub fn KeyboardEventInit::ctrl_key(Self) -> Bool?
+pub fn KeyboardEventInit::detail(Self) -> Int?
 pub fn KeyboardEventInit::empty() -> Self
+pub fn KeyboardEventInit::is_composing(Self) -> Bool?
+pub fn KeyboardEventInit::key(Self) -> String?
+pub fn KeyboardEventInit::key_code(Self) -> UInt?
+pub fn KeyboardEventInit::location(Self) -> UInt?
+pub fn KeyboardEventInit::meta_key(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_alt_graph(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_caps_lock(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_fn(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_fn_lock(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_hyper(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_num_lock(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_scroll_lock(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_super(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_symbol(Self) -> Bool?
+pub fn KeyboardEventInit::modifier_symbol_lock(Self) -> Bool?
 pub fn KeyboardEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, key? : String, code? : String, location? : UInt, repeat? : Bool, is_composing? : Bool, char_code? : UInt, key_code? : UInt) -> Self
+pub fn KeyboardEventInit::repeat(Self) -> Bool?
+pub fn KeyboardEventInit::shift_key(Self) -> Bool?
+pub fn KeyboardEventInit::view(Self) -> Window?
+pub fn KeyboardEventInit::which(Self) -> UInt?
 pub impl FromJsAny for KeyboardEventInit
 pub impl TJsValue for KeyboardEventInit
 
 #external
 pub type KeyframeAnimationOptions
+pub fn KeyframeAnimationOptions::composite(Self) -> CompositeOperation?
+pub fn KeyframeAnimationOptions::direction(Self) -> PlaybackDirection?
+pub fn KeyframeAnimationOptions::easing(Self) -> String?
 pub fn KeyframeAnimationOptions::empty() -> Self
+pub fn KeyframeAnimationOptions::fill(Self) -> FillMode?
+pub fn KeyframeAnimationOptions::id(Self) -> String?
+pub fn KeyframeAnimationOptions::iteration_start(Self) -> Double?
+pub fn KeyframeAnimationOptions::iterations(Self) -> Double?
 pub fn KeyframeAnimationOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, composite? : CompositeOperation, pseudo_element? : String, id? : String, timeline? : &TAnimationTimeline) -> Self
+pub fn KeyframeAnimationOptions::pseudo_element(Self) -> String?
+pub fn KeyframeAnimationOptions::timeline(Self) -> AnimationTimeline?
 pub impl FromJsAny for KeyframeAnimationOptions
 pub impl TElementAnimateOptions for KeyframeAnimationOptions
 pub impl TJsValue for KeyframeAnimationOptions
@@ -3462,8 +3827,15 @@ pub impl TKeyframeEffect for KeyframeEffect
 
 #external
 pub type KeyframeEffectOptions
+pub fn KeyframeEffectOptions::composite(Self) -> CompositeOperation?
+pub fn KeyframeEffectOptions::direction(Self) -> PlaybackDirection?
+pub fn KeyframeEffectOptions::easing(Self) -> String?
 pub fn KeyframeEffectOptions::empty() -> Self
+pub fn KeyframeEffectOptions::fill(Self) -> FillMode?
+pub fn KeyframeEffectOptions::iteration_start(Self) -> Double?
+pub fn KeyframeEffectOptions::iterations(Self) -> Double?
 pub fn KeyframeEffectOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, composite? : CompositeOperation, pseudo_element? : String) -> Self
+pub fn KeyframeEffectOptions::pseudo_element(Self) -> String?
 pub impl FromJsAny for KeyframeEffectOptions
 pub impl TJsValue for KeyframeEffectOptions
 pub impl TKeyframeEffectNewOptions for KeyframeEffectOptions
@@ -3486,6 +3858,7 @@ pub impl TMediaError for MediaError
 pub type MediaList
 pub fn[T : TMediaList] MediaList::into(Self) -> T
 pub impl FromJsAny for MediaList
+pub impl TCSSStyleSheetInitGetMedia for MediaList
 pub impl TCSSStyleSheetInitNewMedia for MediaList
 pub impl TJsValue for MediaList
 pub impl TMediaList for MediaList
@@ -3516,7 +3889,12 @@ pub impl TMediaQueryListEvent for MediaQueryListEvent
 
 #external
 pub type MediaQueryListEventInit
+pub fn MediaQueryListEventInit::bubbles(Self) -> Bool?
+pub fn MediaQueryListEventInit::cancelable(Self) -> Bool?
+pub fn MediaQueryListEventInit::composed(Self) -> Bool?
 pub fn MediaQueryListEventInit::empty() -> Self
+pub fn MediaQueryListEventInit::matches(Self) -> Bool?
+pub fn MediaQueryListEventInit::media(Self) -> String?
 pub fn MediaQueryListEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, media? : String, matches? : Bool) -> Self
 pub impl FromJsAny for MediaQueryListEventInit
 pub impl TJsValue for MediaQueryListEventInit
@@ -3553,8 +3931,16 @@ pub impl TMessageEvent for MessageEvent
 
 #external
 pub type MessageEventInit
+pub fn MessageEventInit::bubbles(Self) -> Bool?
+pub fn MessageEventInit::cancelable(Self) -> Bool?
+pub fn MessageEventInit::composed(Self) -> Bool?
+pub fn MessageEventInit::data(Self) -> JsValue?
 pub fn MessageEventInit::empty() -> Self
+pub fn MessageEventInit::last_event_id(Self) -> String?
 pub fn MessageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : &TMessageEventSource, ports? : Array[MessagePort]) -> Self
+pub fn MessageEventInit::origin(Self) -> String?
+pub fn MessageEventInit::ports(Self) -> Array[MessagePort]?
+pub fn MessageEventInit::source(Self) -> MessageEventSource?
 pub impl FromJsAny for MessageEventInit
 pub impl TJsValue for MessageEventInit
 
@@ -3600,8 +3986,35 @@ pub impl TUIEvent for MouseEvent
 
 #external
 pub type MouseEventInit
+pub fn MouseEventInit::alt_key(Self) -> Bool?
+pub fn MouseEventInit::bubbles(Self) -> Bool?
+pub fn MouseEventInit::button(Self) -> Int?
+pub fn MouseEventInit::buttons(Self) -> UInt?
+pub fn MouseEventInit::cancelable(Self) -> Bool?
+pub fn MouseEventInit::client_x(Self) -> Int?
+pub fn MouseEventInit::client_y(Self) -> Int?
+pub fn MouseEventInit::composed(Self) -> Bool?
+pub fn MouseEventInit::ctrl_key(Self) -> Bool?
+pub fn MouseEventInit::detail(Self) -> Int?
 pub fn MouseEventInit::empty() -> Self
+pub fn MouseEventInit::meta_key(Self) -> Bool?
+pub fn MouseEventInit::modifier_alt_graph(Self) -> Bool?
+pub fn MouseEventInit::modifier_caps_lock(Self) -> Bool?
+pub fn MouseEventInit::modifier_fn(Self) -> Bool?
+pub fn MouseEventInit::modifier_fn_lock(Self) -> Bool?
+pub fn MouseEventInit::modifier_hyper(Self) -> Bool?
+pub fn MouseEventInit::modifier_num_lock(Self) -> Bool?
+pub fn MouseEventInit::modifier_scroll_lock(Self) -> Bool?
+pub fn MouseEventInit::modifier_super(Self) -> Bool?
+pub fn MouseEventInit::modifier_symbol(Self) -> Bool?
+pub fn MouseEventInit::modifier_symbol_lock(Self) -> Bool?
 pub fn MouseEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget) -> Self
+pub fn MouseEventInit::related_target(Self) -> EventTarget?
+pub fn MouseEventInit::screen_x(Self) -> Int?
+pub fn MouseEventInit::screen_y(Self) -> Int?
+pub fn MouseEventInit::shift_key(Self) -> Bool?
+pub fn MouseEventInit::view(Self) -> Window?
+pub fn MouseEventInit::which(Self) -> UInt?
 pub impl FromJsAny for MouseEventInit
 pub impl TJsValue for MouseEventInit
 
@@ -3621,8 +4034,15 @@ pub impl TMutationObserver for MutationObserver
 
 #external
 pub type MutationObserverInit
+pub fn MutationObserverInit::attribute_filter(Self) -> Array[String]?
+pub fn MutationObserverInit::attribute_old_value(Self) -> Bool?
+pub fn MutationObserverInit::attributes(Self) -> Bool?
+pub fn MutationObserverInit::character_data(Self) -> Bool?
+pub fn MutationObserverInit::character_data_old_value(Self) -> Bool?
+pub fn MutationObserverInit::child_list(Self) -> Bool?
 pub fn MutationObserverInit::empty() -> Self
 pub fn MutationObserverInit::new(child_list? : Bool, attributes? : Bool, character_data? : Bool, subtree? : Bool, attribute_old_value? : Bool, character_data_old_value? : Bool, attribute_filter? : Array[String]) -> Self
+pub fn MutationObserverInit::subtree(Self) -> Bool?
 pub impl FromJsAny for MutationObserverInit
 pub impl TJsValue for MutationObserverInit
 
@@ -3651,8 +4071,22 @@ pub impl TNavigateEvent for NavigateEvent
 
 #external
 pub type NavigateEventInit
+pub fn NavigateEventInit::bubbles(Self) -> Bool?
+pub fn NavigateEventInit::can_intercept(Self) -> Bool?
+pub fn NavigateEventInit::cancelable(Self) -> Bool?
+pub fn NavigateEventInit::composed(Self) -> Bool?
+pub fn NavigateEventInit::destination(Self) -> NavigationDestination
+pub fn NavigateEventInit::download_request(Self) -> String?
 pub fn NavigateEventInit::empty() -> Self
+pub fn NavigateEventInit::form_data(Self) -> FormData?
+pub fn NavigateEventInit::has_ua_visual_transition(Self) -> Bool?
+pub fn NavigateEventInit::hash_change(Self) -> Bool?
+pub fn NavigateEventInit::info(Self) -> JsValue?
+pub fn NavigateEventInit::navigation_type(Self) -> NavigationType?
 pub fn NavigateEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, navigation_type? : NavigationType, &TNavigationDestination, can_intercept? : Bool, user_initiated? : Bool, hash_change? : Bool, &TAbortSignal, form_data? : &TFormData, download_request? : String, info? : JsValue, has_ua_visual_transition? : Bool, source_element? : &TElement) -> Self
+pub fn NavigateEventInit::signal(Self) -> AbortSignal
+pub fn NavigateEventInit::source_element(Self) -> Element?
+pub fn NavigateEventInit::user_initiated(Self) -> Bool?
 pub impl FromJsAny for NavigateEventInit
 pub impl TJsValue for NavigateEventInit
 
@@ -3682,7 +4116,12 @@ pub impl TNavigationCurrentEntryChangeEvent for NavigationCurrentEntryChangeEven
 
 #external
 pub type NavigationCurrentEntryChangeEventInit
+pub fn NavigationCurrentEntryChangeEventInit::bubbles(Self) -> Bool?
+pub fn NavigationCurrentEntryChangeEventInit::cancelable(Self) -> Bool?
+pub fn NavigationCurrentEntryChangeEventInit::composed(Self) -> Bool?
 pub fn NavigationCurrentEntryChangeEventInit::empty() -> Self
+pub fn NavigationCurrentEntryChangeEventInit::from(Self) -> NavigationHistoryEntry
+pub fn NavigationCurrentEntryChangeEventInit::navigation_type(Self) -> NavigationType?
 pub fn NavigationCurrentEntryChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, navigation_type? : NavigationType, &TNavigationHistoryEntry) -> Self
 pub impl FromJsAny for NavigationCurrentEntryChangeEventInit
 pub impl TJsValue for NavigationCurrentEntryChangeEventInit
@@ -3734,20 +4173,28 @@ pub impl TJsValue for NavigationInterceptHandler
 #external
 pub type NavigationInterceptOptions
 pub fn NavigationInterceptOptions::empty() -> Self
+pub fn NavigationInterceptOptions::focus_reset(Self) -> NavigationFocusReset?
+pub fn NavigationInterceptOptions::handler(Self) -> NavigationInterceptHandler?
 pub fn NavigationInterceptOptions::new(precommit_handler? : NavigationPrecommitHandler, handler? : NavigationInterceptHandler, focus_reset? : NavigationFocusReset, scroll? : NavigationScrollBehavior) -> Self
+pub fn NavigationInterceptOptions::precommit_handler(Self) -> NavigationPrecommitHandler?
+pub fn NavigationInterceptOptions::scroll(Self) -> NavigationScrollBehavior?
 pub impl FromJsAny for NavigationInterceptOptions
 pub impl TJsValue for NavigationInterceptOptions
 
 #external
 pub type NavigationNavigateOptions
 pub fn NavigationNavigateOptions::empty() -> Self
+pub fn NavigationNavigateOptions::history(Self) -> NavigationHistoryBehavior?
+pub fn NavigationNavigateOptions::info(Self) -> JsValue?
 pub fn NavigationNavigateOptions::new(info? : JsValue, state? : JsValue, history? : NavigationHistoryBehavior) -> Self
+pub fn NavigationNavigateOptions::state(Self) -> JsValue?
 pub impl FromJsAny for NavigationNavigateOptions
 pub impl TJsValue for NavigationNavigateOptions
 
 #external
 pub type NavigationOptions
 pub fn NavigationOptions::empty() -> Self
+pub fn NavigationOptions::info(Self) -> JsValue?
 pub fn NavigationOptions::new(info? : JsValue) -> Self
 pub impl FromJsAny for NavigationOptions
 pub impl TJsValue for NavigationOptions
@@ -3768,13 +4215,17 @@ pub impl TJsValue for NavigationPrecommitHandler
 #external
 pub type NavigationReloadOptions
 pub fn NavigationReloadOptions::empty() -> Self
+pub fn NavigationReloadOptions::info(Self) -> JsValue?
 pub fn NavigationReloadOptions::new(info? : JsValue, state? : JsValue) -> Self
+pub fn NavigationReloadOptions::state(Self) -> JsValue?
 pub impl FromJsAny for NavigationReloadOptions
 pub impl TJsValue for NavigationReloadOptions
 
 #external
 pub type NavigationResult
+pub fn NavigationResult::committed(Self) -> JsPromise[NavigationHistoryEntry]?
 pub fn NavigationResult::empty() -> Self
+pub fn NavigationResult::finished(Self) -> JsPromise[NavigationHistoryEntry]?
 pub fn NavigationResult::new(committed? : JsPromise[NavigationHistoryEntry], finished? : JsPromise[NavigationHistoryEntry]) -> Self
 pub impl FromJsAny for NavigationResult
 pub impl TJsValue for NavigationResult
@@ -3814,6 +4265,7 @@ pub impl Show for NavigationType
 pub type NavigationUpdateCurrentEntryOptions
 pub fn NavigationUpdateCurrentEntryOptions::empty() -> Self
 pub fn NavigationUpdateCurrentEntryOptions::new(JsValue) -> Self
+pub fn NavigationUpdateCurrentEntryOptions::state(Self) -> JsValue
 pub impl FromJsAny for NavigationUpdateCurrentEntryOptions
 pub impl TJsValue for NavigationUpdateCurrentEntryOptions
 
@@ -3898,8 +4350,12 @@ pub impl TNotification for Notification
 
 #external
 pub type NotificationAction
+pub fn NotificationAction::action(Self) -> String
 pub fn NotificationAction::empty() -> Self
+pub fn NotificationAction::icon(Self) -> String?
+pub fn NotificationAction::navigate(Self) -> String?
 pub fn NotificationAction::new(String, String, navigate? : String, icon? : String) -> Self
+pub fn NotificationAction::title(Self) -> String
 pub impl FromJsAny for NotificationAction
 pub impl TJsValue for NotificationAction
 
@@ -3917,8 +4373,23 @@ pub impl Show for NotificationDirection
 
 #external
 pub type NotificationOptions
+pub fn NotificationOptions::actions(Self) -> Array[NotificationAction]?
+pub fn NotificationOptions::badge(Self) -> String?
+pub fn NotificationOptions::body(Self) -> String?
+pub fn NotificationOptions::data(Self) -> JsValue?
+pub fn NotificationOptions::dir(Self) -> NotificationDirection?
 pub fn NotificationOptions::empty() -> Self
+pub fn NotificationOptions::icon(Self) -> String?
+pub fn NotificationOptions::image(Self) -> String?
+pub fn NotificationOptions::lang(Self) -> String?
+pub fn NotificationOptions::navigate(Self) -> String?
 pub fn NotificationOptions::new(dir? : NotificationDirection, lang? : String, body? : String, navigate? : String, tag? : String, image? : String, icon? : String, badge? : String, vibrate? : &TVibratePattern, timestamp? : UInt64, renotify? : Bool, silent? : Bool, require_interaction? : Bool, data? : JsValue, actions? : Array[NotificationAction]) -> Self
+pub fn NotificationOptions::renotify(Self) -> Bool?
+pub fn NotificationOptions::require_interaction(Self) -> Bool?
+pub fn NotificationOptions::silent(Self) -> Bool?
+pub fn NotificationOptions::tag(Self) -> String?
+pub fn NotificationOptions::timestamp(Self) -> UInt64?
+pub fn NotificationOptions::vibrate(Self) -> VibratePattern?
 pub impl FromJsAny for NotificationOptions
 pub impl TJsValue for NotificationOptions
 
@@ -4011,10 +4482,23 @@ pub impl TJsValue for OnErrorEventHandlerNonNullEvent
 
 #external
 pub type OptionalEffectTiming
+pub fn OptionalEffectTiming::delay(Self) -> Double?
+pub fn OptionalEffectTiming::direction(Self) -> PlaybackDirection?
+pub fn OptionalEffectTiming::duration(Self) -> OptionalEffectTimingGetDuration?
+pub fn OptionalEffectTiming::easing(Self) -> String?
 pub fn OptionalEffectTiming::empty() -> Self
+pub fn OptionalEffectTiming::end_delay(Self) -> Double?
+pub fn OptionalEffectTiming::fill(Self) -> FillMode?
+pub fn OptionalEffectTiming::iteration_start(Self) -> Double?
+pub fn OptionalEffectTiming::iterations(Self) -> Double?
 pub fn OptionalEffectTiming::new(delay? : Double, end_delay? : Double, fill? : FillMode, iteration_start? : Double, iterations? : Double, duration? : &TOptionalEffectTimingNewDuration, direction? : PlaybackDirection, easing? : String) -> Self
 pub impl FromJsAny for OptionalEffectTiming
 pub impl TJsValue for OptionalEffectTiming
+
+#external
+pub type OptionalEffectTimingGetDuration
+pub fn[T : TOptionalEffectTimingGetDuration] OptionalEffectTimingGetDuration::into(Self) -> T
+pub impl TOptionalEffectTimingGetDuration for OptionalEffectTimingGetDuration
 
 pub(all) enum OrientationLockType {
   Any
@@ -4066,8 +4550,12 @@ pub impl TPageRevealEvent for PageRevealEvent
 
 #external
 pub type PageRevealEventInit
+pub fn PageRevealEventInit::bubbles(Self) -> Bool?
+pub fn PageRevealEventInit::cancelable(Self) -> Bool?
+pub fn PageRevealEventInit::composed(Self) -> Bool?
 pub fn PageRevealEventInit::empty() -> Self
 pub fn PageRevealEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view_transition? : ViewTransition) -> Self
+pub fn PageRevealEventInit::view_transition(Self) -> ViewTransition?
 pub impl FromJsAny for PageRevealEventInit
 pub impl TJsValue for PageRevealEventInit
 
@@ -4082,8 +4570,13 @@ pub impl TPageSwapEvent for PageSwapEvent
 
 #external
 pub type PageSwapEventInit
+pub fn PageSwapEventInit::activation(Self) -> NavigationActivation?
+pub fn PageSwapEventInit::bubbles(Self) -> Bool?
+pub fn PageSwapEventInit::cancelable(Self) -> Bool?
+pub fn PageSwapEventInit::composed(Self) -> Bool?
 pub fn PageSwapEventInit::empty() -> Self
 pub fn PageSwapEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, activation? : &TNavigationActivation, view_transition? : ViewTransition) -> Self
+pub fn PageSwapEventInit::view_transition(Self) -> ViewTransition?
 pub impl FromJsAny for PageSwapEventInit
 pub impl TJsValue for PageSwapEventInit
 
@@ -4098,8 +4591,12 @@ pub impl TPageTransitionEvent for PageTransitionEvent
 
 #external
 pub type PageTransitionEventInit
+pub fn PageTransitionEventInit::bubbles(Self) -> Bool?
+pub fn PageTransitionEventInit::cancelable(Self) -> Bool?
+pub fn PageTransitionEventInit::composed(Self) -> Bool?
 pub fn PageTransitionEventInit::empty() -> Self
 pub fn PageTransitionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, persisted? : Bool) -> Self
+pub fn PageTransitionEventInit::persisted(Self) -> Bool?
 pub impl FromJsAny for PageTransitionEventInit
 pub impl TJsValue for PageTransitionEventInit
 
@@ -4144,6 +4641,7 @@ pub impl TJsValue for PerformanceObserverCallback
 
 #external
 pub type PerformanceObserverCallbackOptions
+pub fn PerformanceObserverCallbackOptions::dropped_entries_count(Self) -> UInt64?
 pub fn PerformanceObserverCallbackOptions::empty() -> Self
 pub fn PerformanceObserverCallbackOptions::new(dropped_entries_count? : UInt64) -> Self
 pub impl FromJsAny for PerformanceObserverCallbackOptions
@@ -4158,8 +4656,11 @@ pub impl TPerformanceObserverEntryList for PerformanceObserverEntryList
 
 #external
 pub type PerformanceObserverInit
+pub fn PerformanceObserverInit::buffered(Self) -> Bool?
 pub fn PerformanceObserverInit::empty() -> Self
+pub fn PerformanceObserverInit::entry_types(Self) -> Array[String]?
 pub fn PerformanceObserverInit::new(entry_types? : Array[String], type_? : String, buffered? : Bool) -> Self
+pub fn PerformanceObserverInit::type_(Self) -> String?
 pub impl FromJsAny for PerformanceObserverInit
 pub impl TJsValue for PerformanceObserverInit
 
@@ -4203,8 +4704,50 @@ pub impl TUIEvent for PointerEvent
 
 #external
 pub type PointerEventInit
+pub fn PointerEventInit::alt_key(Self) -> Bool?
+pub fn PointerEventInit::altitude_angle(Self) -> Double?
+pub fn PointerEventInit::azimuth_angle(Self) -> Double?
+pub fn PointerEventInit::bubbles(Self) -> Bool?
+pub fn PointerEventInit::button(Self) -> Int?
+pub fn PointerEventInit::buttons(Self) -> UInt?
+pub fn PointerEventInit::cancelable(Self) -> Bool?
+pub fn PointerEventInit::client_x(Self) -> Int?
+pub fn PointerEventInit::client_y(Self) -> Int?
+pub fn PointerEventInit::coalesced_events(Self) -> Array[PointerEvent]?
+pub fn PointerEventInit::composed(Self) -> Bool?
+pub fn PointerEventInit::ctrl_key(Self) -> Bool?
+pub fn PointerEventInit::detail(Self) -> Int?
 pub fn PointerEventInit::empty() -> Self
+pub fn PointerEventInit::height(Self) -> Double?
+pub fn PointerEventInit::is_primary(Self) -> Bool?
+pub fn PointerEventInit::meta_key(Self) -> Bool?
+pub fn PointerEventInit::modifier_alt_graph(Self) -> Bool?
+pub fn PointerEventInit::modifier_caps_lock(Self) -> Bool?
+pub fn PointerEventInit::modifier_fn(Self) -> Bool?
+pub fn PointerEventInit::modifier_fn_lock(Self) -> Bool?
+pub fn PointerEventInit::modifier_hyper(Self) -> Bool?
+pub fn PointerEventInit::modifier_num_lock(Self) -> Bool?
+pub fn PointerEventInit::modifier_scroll_lock(Self) -> Bool?
+pub fn PointerEventInit::modifier_super(Self) -> Bool?
+pub fn PointerEventInit::modifier_symbol(Self) -> Bool?
+pub fn PointerEventInit::modifier_symbol_lock(Self) -> Bool?
 pub fn PointerEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, pointer_id? : Int, width? : Double, height? : Double, pressure? : Float, tangential_pressure? : Float, tilt_x? : Int, tilt_y? : Int, twist? : Int, altitude_angle? : Double, azimuth_angle? : Double, pointer_type? : String, is_primary? : Bool, persistent_device_id? : Int, coalesced_events? : Array[PointerEvent], predicted_events? : Array[PointerEvent]) -> Self
+pub fn PointerEventInit::persistent_device_id(Self) -> Int?
+pub fn PointerEventInit::pointer_id(Self) -> Int?
+pub fn PointerEventInit::pointer_type(Self) -> String?
+pub fn PointerEventInit::predicted_events(Self) -> Array[PointerEvent]?
+pub fn PointerEventInit::pressure(Self) -> Float?
+pub fn PointerEventInit::related_target(Self) -> EventTarget?
+pub fn PointerEventInit::screen_x(Self) -> Int?
+pub fn PointerEventInit::screen_y(Self) -> Int?
+pub fn PointerEventInit::shift_key(Self) -> Bool?
+pub fn PointerEventInit::tangential_pressure(Self) -> Float?
+pub fn PointerEventInit::tilt_x(Self) -> Int?
+pub fn PointerEventInit::tilt_y(Self) -> Int?
+pub fn PointerEventInit::twist(Self) -> Int?
+pub fn PointerEventInit::view(Self) -> Window?
+pub fn PointerEventInit::which(Self) -> UInt?
+pub fn PointerEventInit::width(Self) -> Double?
 pub impl FromJsAny for PointerEventInit
 pub impl TJsValue for PointerEventInit
 
@@ -4219,8 +4762,13 @@ pub impl TPopStateEvent for PopStateEvent
 
 #external
 pub type PopStateEventInit
+pub fn PopStateEventInit::bubbles(Self) -> Bool?
+pub fn PopStateEventInit::cancelable(Self) -> Bool?
+pub fn PopStateEventInit::composed(Self) -> Bool?
 pub fn PopStateEventInit::empty() -> Self
+pub fn PopStateEventInit::has_ua_visual_transition(Self) -> Bool?
 pub fn PopStateEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, state? : JsValue, has_ua_visual_transition? : Bool) -> Self
+pub fn PopStateEventInit::state(Self) -> JsValue?
 pub impl FromJsAny for PopStateEventInit
 pub impl TJsValue for PopStateEventInit
 
@@ -4283,8 +4831,14 @@ pub impl TProgressEvent for ProgressEvent
 
 #external
 pub type ProgressEventInit
+pub fn ProgressEventInit::bubbles(Self) -> Bool?
+pub fn ProgressEventInit::cancelable(Self) -> Bool?
+pub fn ProgressEventInit::composed(Self) -> Bool?
 pub fn ProgressEventInit::empty() -> Self
+pub fn ProgressEventInit::length_computable(Self) -> Bool?
+pub fn ProgressEventInit::loaded(Self) -> Double?
 pub fn ProgressEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, length_computable? : Bool, loaded? : Double, total? : Double) -> Self
+pub fn ProgressEventInit::total(Self) -> Double?
 pub impl FromJsAny for ProgressEventInit
 pub impl TJsValue for ProgressEventInit
 
@@ -4299,21 +4853,29 @@ pub impl TPromiseRejectionEvent for PromiseRejectionEvent
 
 #external
 pub type PromiseRejectionEventInit
+pub fn PromiseRejectionEventInit::bubbles(Self) -> Bool?
+pub fn PromiseRejectionEventInit::cancelable(Self) -> Bool?
+pub fn PromiseRejectionEventInit::composed(Self) -> Bool?
 pub fn PromiseRejectionEventInit::empty() -> Self
 pub fn PromiseRejectionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, JsValue, reason? : JsValue) -> Self
+pub fn PromiseRejectionEventInit::promise(Self) -> JsValue
+pub fn PromiseRejectionEventInit::reason(Self) -> JsValue?
 pub impl FromJsAny for PromiseRejectionEventInit
 pub impl TJsValue for PromiseRejectionEventInit
 
 #external
 pub type QueuingStrategy
 pub fn QueuingStrategy::empty() -> Self
+pub fn QueuingStrategy::high_water_mark(Self) -> Double?
 pub fn QueuingStrategy::new(high_water_mark? : Double, size? : QueuingStrategySize) -> Self
+pub fn QueuingStrategy::size(Self) -> QueuingStrategySize?
 pub impl FromJsAny for QueuingStrategy
 pub impl TJsValue for QueuingStrategy
 
 #external
 pub type QueuingStrategyInit
 pub fn QueuingStrategyInit::empty() -> Self
+pub fn QueuingStrategyInit::high_water_mark(Self) -> Double
 pub fn QueuingStrategyInit::new(Double) -> Self
 pub impl FromJsAny for QueuingStrategyInit
 pub impl TJsValue for QueuingStrategyInit
@@ -4337,6 +4899,8 @@ pub impl TQuotaExceededError for QuotaExceededError
 pub type QuotaExceededErrorOptions
 pub fn QuotaExceededErrorOptions::empty() -> Self
 pub fn QuotaExceededErrorOptions::new(quota? : Double, requested? : Double) -> Self
+pub fn QuotaExceededErrorOptions::quota(Self) -> Double?
+pub fn QuotaExceededErrorOptions::requested(Self) -> Double?
 pub impl FromJsAny for QuotaExceededErrorOptions
 pub impl TJsValue for QuotaExceededErrorOptions
 
@@ -4389,6 +4953,7 @@ pub impl TReadableStreamReader for ReadableStreamBYOBReader
 #external
 pub type ReadableStreamBYOBReaderReadOptions
 pub fn ReadableStreamBYOBReaderReadOptions::empty() -> Self
+pub fn ReadableStreamBYOBReaderReadOptions::min(Self) -> UInt64?
 pub fn ReadableStreamBYOBReaderReadOptions::new(min? : UInt64) -> Self
 pub impl FromJsAny for ReadableStreamBYOBReaderReadOptions
 pub impl TJsValue for ReadableStreamBYOBReaderReadOptions
@@ -4427,6 +4992,7 @@ pub impl TReadableStreamReader for ReadableStreamDefaultReader
 #external
 pub type ReadableStreamGetReaderOptions
 pub fn ReadableStreamGetReaderOptions::empty() -> Self
+pub fn ReadableStreamGetReaderOptions::mode(Self) -> ReadableStreamReaderMode?
 pub fn ReadableStreamGetReaderOptions::new(mode? : ReadableStreamReaderMode) -> Self
 pub impl FromJsAny for ReadableStreamGetReaderOptions
 pub impl TJsValue for ReadableStreamGetReaderOptions
@@ -4435,13 +5001,16 @@ pub impl TJsValue for ReadableStreamGetReaderOptions
 pub type ReadableStreamIteratorOptions
 pub fn ReadableStreamIteratorOptions::empty() -> Self
 pub fn ReadableStreamIteratorOptions::new(prevent_cancel? : Bool) -> Self
+pub fn ReadableStreamIteratorOptions::prevent_cancel(Self) -> Bool?
 pub impl FromJsAny for ReadableStreamIteratorOptions
 pub impl TJsValue for ReadableStreamIteratorOptions
 
 #external
 pub type ReadableStreamReadResult
+pub fn ReadableStreamReadResult::done(Self) -> Bool?
 pub fn ReadableStreamReadResult::empty() -> Self
 pub fn ReadableStreamReadResult::new(value? : JsValue, done? : Bool) -> Self
+pub fn ReadableStreamReadResult::value(Self) -> JsValue?
 pub impl FromJsAny for ReadableStreamReadResult
 pub impl TJsValue for ReadableStreamReadResult
 
@@ -4476,6 +5045,8 @@ pub impl Show for ReadableStreamType
 pub type ReadableWritablePair
 pub fn ReadableWritablePair::empty() -> Self
 pub fn ReadableWritablePair::new(&TReadableStream, &TWritableStream) -> Self
+pub fn ReadableWritablePair::readable(Self) -> ReadableStream
+pub fn ReadableWritablePair::writable(Self) -> WritableStream
 pub impl FromJsAny for ReadableWritablePair
 pub impl TJsValue for ReadableWritablePair
 
@@ -4589,8 +5160,23 @@ pub impl TRequestInfo for RequestInfo
 
 #external
 pub type RequestInit
+pub fn RequestInit::body(Self) -> BodyInit?
+pub fn RequestInit::cache(Self) -> RequestCache?
+pub fn RequestInit::credentials(Self) -> RequestCredentials?
+pub fn RequestInit::duplex(Self) -> RequestDuplex?
 pub fn RequestInit::empty() -> Self
+pub fn RequestInit::headers(Self) -> HeadersInit?
+pub fn RequestInit::integrity(Self) -> String?
+pub fn RequestInit::keepalive(Self) -> Bool?
+pub fn RequestInit::method_(Self) -> String?
+pub fn RequestInit::mode(Self) -> RequestMode?
 pub fn RequestInit::new(method_? : String, headers? : &THeadersInit, body? : &TBodyInit, referrer? : String, referrer_policy? : ReferrerPolicy, mode? : RequestMode, credentials? : RequestCredentials, cache? : RequestCache, redirect? : RequestRedirect, integrity? : String, keepalive? : Bool, signal? : &TAbortSignal, duplex? : RequestDuplex, priority? : RequestPriority, window? : JsValue) -> Self
+pub fn RequestInit::priority(Self) -> RequestPriority?
+pub fn RequestInit::redirect(Self) -> RequestRedirect?
+pub fn RequestInit::referrer(Self) -> String?
+pub fn RequestInit::referrer_policy(Self) -> ReferrerPolicy?
+pub fn RequestInit::signal(Self) -> AbortSignal?
+pub fn RequestInit::window(Self) -> JsValue?
 pub impl FromJsAny for RequestInit
 pub impl TJsValue for RequestInit
 
@@ -4666,6 +5252,7 @@ pub impl TResizeObserverEntry for ResizeObserverEntry
 
 #external
 pub type ResizeObserverOptions
+pub fn ResizeObserverOptions::box(Self) -> ResizeObserverBoxOptions?
 pub fn ResizeObserverOptions::empty() -> Self
 pub fn ResizeObserverOptions::new(box? : ResizeObserverBoxOptions) -> Self
 pub impl FromJsAny for ResizeObserverOptions
@@ -4705,7 +5292,10 @@ pub impl TResponse for Response
 #external
 pub type ResponseInit
 pub fn ResponseInit::empty() -> Self
+pub fn ResponseInit::headers(Self) -> HeadersInit?
 pub fn ResponseInit::new(status? : UInt, status_text? : String, headers? : &THeadersInit) -> Self
+pub fn ResponseInit::status(Self) -> UInt?
+pub fn ResponseInit::status_text(Self) -> String?
 pub impl FromJsAny for ResponseInit
 pub impl TJsValue for ResponseInit
 
@@ -4834,8 +5424,12 @@ pub impl TSVGAnimatedTransformList for SVGAnimatedTransformList
 
 #external
 pub type SVGBoundingBoxOptions
+pub fn SVGBoundingBoxOptions::clipped(Self) -> Bool?
 pub fn SVGBoundingBoxOptions::empty() -> Self
+pub fn SVGBoundingBoxOptions::fill(Self) -> Bool?
+pub fn SVGBoundingBoxOptions::markers(Self) -> Bool?
 pub fn SVGBoundingBoxOptions::new(fill? : Bool, stroke? : Bool, markers? : Bool, clipped? : Bool) -> Self
+pub fn SVGBoundingBoxOptions::stroke(Self) -> Bool?
 pub impl FromJsAny for SVGBoundingBoxOptions
 pub impl TJsValue for SVGBoundingBoxOptions
 
@@ -5369,7 +5963,11 @@ pub impl Show for ScrollIntoViewContainer
 
 #external
 pub type ScrollIntoViewOptions
+pub fn ScrollIntoViewOptions::behavior(Self) -> ScrollBehavior?
+pub fn ScrollIntoViewOptions::block(Self) -> ScrollLogicalPosition?
+pub fn ScrollIntoViewOptions::container(Self) -> ScrollIntoViewContainer?
 pub fn ScrollIntoViewOptions::empty() -> Self
+pub fn ScrollIntoViewOptions::inline(Self) -> ScrollLogicalPosition?
 pub fn ScrollIntoViewOptions::new(behavior? : ScrollBehavior, block? : ScrollLogicalPosition, inline? : ScrollLogicalPosition, container? : ScrollIntoViewContainer) -> Self
 pub impl FromJsAny for ScrollIntoViewOptions
 pub impl TElementScrollIntoViewArg for ScrollIntoViewOptions
@@ -5390,6 +5988,7 @@ pub impl Show for ScrollLogicalPosition
 
 #external
 pub type ScrollOptions
+pub fn ScrollOptions::behavior(Self) -> ScrollBehavior?
 pub fn ScrollOptions::empty() -> Self
 pub fn ScrollOptions::new(behavior? : ScrollBehavior) -> Self
 pub impl FromJsAny for ScrollOptions
@@ -5408,8 +6007,11 @@ pub impl Show for ScrollRestoration
 
 #external
 pub type ScrollToOptions
+pub fn ScrollToOptions::behavior(Self) -> ScrollBehavior?
 pub fn ScrollToOptions::empty() -> Self
+pub fn ScrollToOptions::left(Self) -> Double?
 pub fn ScrollToOptions::new(behavior? : ScrollBehavior, left? : Double, top? : Double) -> Self
+pub fn ScrollToOptions::top(Self) -> Double?
 pub impl FromJsAny for ScrollToOptions
 pub impl TJsValue for ScrollToOptions
 
@@ -5451,8 +6053,14 @@ pub impl TShadowRoot for ShadowRoot
 
 #external
 pub type ShadowRootInit
+pub fn ShadowRootInit::clonable(Self) -> Bool?
+pub fn ShadowRootInit::custom_element_registry(Self) -> CustomElementRegistry?
+pub fn ShadowRootInit::delegates_focus(Self) -> Bool?
 pub fn ShadowRootInit::empty() -> Self
+pub fn ShadowRootInit::mode(Self) -> ShadowRootMode
 pub fn ShadowRootInit::new(ShadowRootMode, delegates_focus? : Bool, slot_assignment? : SlotAssignmentMode, clonable? : Bool, serializable? : Bool, custom_element_registry? : &TCustomElementRegistry) -> Self
+pub fn ShadowRootInit::serializable(Self) -> Bool?
+pub fn ShadowRootInit::slot_assignment(Self) -> SlotAssignmentMode?
 pub impl FromJsAny for ShadowRootInit
 pub impl TJsValue for ShadowRootInit
 
@@ -5500,6 +6108,7 @@ pub impl TWorkerGlobalScope for SharedWorkerGlobalScope
 pub type ShowPopoverOptions
 pub fn ShowPopoverOptions::empty() -> Self
 pub fn ShowPopoverOptions::new(source? : &THTMLElement) -> Self
+pub fn ShowPopoverOptions::source(Self) -> HTMLElement?
 pub impl FromJsAny for ShowPopoverOptions
 pub impl TJsValue for ShowPopoverOptions
 
@@ -5526,7 +6135,11 @@ pub impl TStaticRange for StaticRange
 #external
 pub type StaticRangeInit
 pub fn StaticRangeInit::empty() -> Self
+pub fn StaticRangeInit::end_container(Self) -> Node
+pub fn StaticRangeInit::end_offset(Self) -> UInt
 pub fn StaticRangeInit::new(&TNode, UInt, &TNode, UInt) -> Self
+pub fn StaticRangeInit::start_container(Self) -> Node
+pub fn StaticRangeInit::start_offset(Self) -> UInt
 pub impl FromJsAny for StaticRangeInit
 pub impl TJsValue for StaticRangeInit
 
@@ -5541,6 +6154,8 @@ pub impl TStorage for Storage
 pub type StorageEstimate
 pub fn StorageEstimate::empty() -> Self
 pub fn StorageEstimate::new(usage? : UInt64, quota? : UInt64) -> Self
+pub fn StorageEstimate::quota(Self) -> UInt64?
+pub fn StorageEstimate::usage(Self) -> UInt64?
 pub impl FromJsAny for StorageEstimate
 pub impl TJsValue for StorageEstimate
 
@@ -5555,8 +6170,16 @@ pub impl TStorageEvent for StorageEvent
 
 #external
 pub type StorageEventInit
+pub fn StorageEventInit::bubbles(Self) -> Bool?
+pub fn StorageEventInit::cancelable(Self) -> Bool?
+pub fn StorageEventInit::composed(Self) -> Bool?
 pub fn StorageEventInit::empty() -> Self
+pub fn StorageEventInit::key(Self) -> String?
 pub fn StorageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, key? : String, old_value? : String, new_value? : String, url? : String, storage_area? : &TStorage) -> Self
+pub fn StorageEventInit::new_value(Self) -> String?
+pub fn StorageEventInit::old_value(Self) -> String?
+pub fn StorageEventInit::storage_area(Self) -> Storage?
+pub fn StorageEventInit::url(Self) -> String?
 pub impl FromJsAny for StorageEventInit
 pub impl TJsValue for StorageEventInit
 
@@ -5571,6 +6194,10 @@ pub impl TStorageManager for StorageManager
 pub type StreamPipeOptions
 pub fn StreamPipeOptions::empty() -> Self
 pub fn StreamPipeOptions::new(prevent_close? : Bool, prevent_abort? : Bool, prevent_cancel? : Bool, signal? : &TAbortSignal) -> Self
+pub fn StreamPipeOptions::prevent_abort(Self) -> Bool?
+pub fn StreamPipeOptions::prevent_cancel(Self) -> Bool?
+pub fn StreamPipeOptions::prevent_close(Self) -> Bool?
+pub fn StreamPipeOptions::signal(Self) -> AbortSignal?
 pub impl FromJsAny for StreamPipeOptions
 pub impl TJsValue for StreamPipeOptions
 
@@ -5578,6 +6205,7 @@ pub impl TJsValue for StreamPipeOptions
 pub type StructuredSerializeOptions
 pub fn StructuredSerializeOptions::empty() -> Self
 pub fn StructuredSerializeOptions::new(transfer? : Array[JsValue]) -> Self
+pub fn StructuredSerializeOptions::transfer(Self) -> Array[JsValue]?
 pub impl FromJsAny for StructuredSerializeOptions
 pub impl TJsValue for StructuredSerializeOptions
 
@@ -5611,8 +6239,12 @@ pub impl TSubmitEvent for SubmitEvent
 
 #external
 pub type SubmitEventInit
+pub fn SubmitEventInit::bubbles(Self) -> Bool?
+pub fn SubmitEventInit::cancelable(Self) -> Bool?
+pub fn SubmitEventInit::composed(Self) -> Bool?
 pub fn SubmitEventInit::empty() -> Self
 pub fn SubmitEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, submitter? : &THTMLElement) -> Self
+pub fn SubmitEventInit::submitter(Self) -> HTMLElement?
 pub impl FromJsAny for SubmitEventInit
 pub impl TJsValue for SubmitEventInit
 
@@ -5633,6 +6265,7 @@ pub impl TText for Text
 pub type TextDecodeOptions
 pub fn TextDecodeOptions::empty() -> Self
 pub fn TextDecodeOptions::new(stream? : Bool) -> Self
+pub fn TextDecodeOptions::stream(Self) -> Bool?
 pub impl FromJsAny for TextDecodeOptions
 pub impl TJsValue for TextDecodeOptions
 
@@ -5647,6 +6280,8 @@ pub impl TTextDecoder for TextDecoder
 #external
 pub type TextDecoderOptions
 pub fn TextDecoderOptions::empty() -> Self
+pub fn TextDecoderOptions::fatal(Self) -> Bool?
+pub fn TextDecoderOptions::ignore_bom(Self) -> Bool?
 pub fn TextDecoderOptions::new(fatal? : Bool, ignore_bom? : Bool) -> Self
 pub impl FromJsAny for TextDecoderOptions
 pub impl TJsValue for TextDecoderOptions
@@ -5671,6 +6306,8 @@ pub impl TTextEncoder for TextEncoder
 pub type TextEncoderEncodeIntoResult
 pub fn TextEncoderEncodeIntoResult::empty() -> Self
 pub fn TextEncoderEncodeIntoResult::new(read? : UInt64, written? : UInt64) -> Self
+pub fn TextEncoderEncodeIntoResult::read(Self) -> UInt64?
+pub fn TextEncoderEncodeIntoResult::written(Self) -> UInt64?
 pub impl FromJsAny for TextEncoderEncodeIntoResult
 pub impl TJsValue for TextEncoderEncodeIntoResult
 
@@ -5705,6 +6342,7 @@ pub impl FromJsAny for TextTrack
 pub impl TEventTarget for TextTrack
 pub impl TJsValue for TextTrack
 pub impl TTextTrack for TextTrack
+pub impl TTrackEventInitGetTrack for TextTrack
 pub impl TTrackEventInitNewTrack for TextTrack
 pub impl TTrackEventTrack for TextTrack
 
@@ -5782,15 +6420,23 @@ pub impl TToggleEvent for ToggleEvent
 
 #external
 pub type ToggleEventInit
+pub fn ToggleEventInit::bubbles(Self) -> Bool?
+pub fn ToggleEventInit::cancelable(Self) -> Bool?
+pub fn ToggleEventInit::composed(Self) -> Bool?
 pub fn ToggleEventInit::empty() -> Self
 pub fn ToggleEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, old_state? : String, new_state? : String, source? : &TElement) -> Self
+pub fn ToggleEventInit::new_state(Self) -> String?
+pub fn ToggleEventInit::old_state(Self) -> String?
+pub fn ToggleEventInit::source(Self) -> Element?
 pub impl FromJsAny for ToggleEventInit
 pub impl TJsValue for ToggleEventInit
 
 #external
 pub type TogglePopoverOptions
 pub fn TogglePopoverOptions::empty() -> Self
+pub fn TogglePopoverOptions::force(Self) -> Bool?
 pub fn TogglePopoverOptions::new(source? : &THTMLElement, force? : Bool) -> Self
+pub fn TogglePopoverOptions::source(Self) -> HTMLElement?
 pub impl FromJsAny for TogglePopoverOptions
 pub impl THTMLElementTogglePopoverOptions for TogglePopoverOptions
 pub impl TJsValue for TogglePopoverOptions
@@ -5815,15 +6461,53 @@ pub impl TUIEvent for TouchEvent
 
 #external
 pub type TouchEventInit
+pub fn TouchEventInit::alt_key(Self) -> Bool?
+pub fn TouchEventInit::bubbles(Self) -> Bool?
+pub fn TouchEventInit::cancelable(Self) -> Bool?
+pub fn TouchEventInit::changed_touches(Self) -> Array[Touch]?
+pub fn TouchEventInit::composed(Self) -> Bool?
+pub fn TouchEventInit::ctrl_key(Self) -> Bool?
+pub fn TouchEventInit::detail(Self) -> Int?
 pub fn TouchEventInit::empty() -> Self
+pub fn TouchEventInit::meta_key(Self) -> Bool?
+pub fn TouchEventInit::modifier_alt_graph(Self) -> Bool?
+pub fn TouchEventInit::modifier_caps_lock(Self) -> Bool?
+pub fn TouchEventInit::modifier_fn(Self) -> Bool?
+pub fn TouchEventInit::modifier_fn_lock(Self) -> Bool?
+pub fn TouchEventInit::modifier_hyper(Self) -> Bool?
+pub fn TouchEventInit::modifier_num_lock(Self) -> Bool?
+pub fn TouchEventInit::modifier_scroll_lock(Self) -> Bool?
+pub fn TouchEventInit::modifier_super(Self) -> Bool?
+pub fn TouchEventInit::modifier_symbol(Self) -> Bool?
+pub fn TouchEventInit::modifier_symbol_lock(Self) -> Bool?
 pub fn TouchEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, touches? : Array[Touch], target_touches? : Array[Touch], changed_touches? : Array[Touch]) -> Self
+pub fn TouchEventInit::shift_key(Self) -> Bool?
+pub fn TouchEventInit::target_touches(Self) -> Array[Touch]?
+pub fn TouchEventInit::touches(Self) -> Array[Touch]?
+pub fn TouchEventInit::view(Self) -> Window?
+pub fn TouchEventInit::which(Self) -> UInt?
 pub impl FromJsAny for TouchEventInit
 pub impl TJsValue for TouchEventInit
 
 #external
 pub type TouchInit
+pub fn TouchInit::altitude_angle(Self) -> Double?
+pub fn TouchInit::azimuth_angle(Self) -> Double?
+pub fn TouchInit::client_x(Self) -> Double?
+pub fn TouchInit::client_y(Self) -> Double?
 pub fn TouchInit::empty() -> Self
+pub fn TouchInit::force(Self) -> Float?
+pub fn TouchInit::identifier(Self) -> Int
 pub fn TouchInit::new(Int, &TEventTarget, client_x? : Double, client_y? : Double, screen_x? : Double, screen_y? : Double, page_x? : Double, page_y? : Double, radius_x? : Float, radius_y? : Float, rotation_angle? : Float, force? : Float, altitude_angle? : Double, azimuth_angle? : Double, touch_type? : TouchType) -> Self
+pub fn TouchInit::page_x(Self) -> Double?
+pub fn TouchInit::page_y(Self) -> Double?
+pub fn TouchInit::radius_x(Self) -> Float?
+pub fn TouchInit::radius_y(Self) -> Float?
+pub fn TouchInit::rotation_angle(Self) -> Float?
+pub fn TouchInit::screen_x(Self) -> Double?
+pub fn TouchInit::screen_y(Self) -> Double?
+pub fn TouchInit::target(Self) -> EventTarget
+pub fn TouchInit::touch_type(Self) -> TouchType?
 pub impl FromJsAny for TouchInit
 pub impl TJsValue for TouchInit
 
@@ -5856,10 +6540,19 @@ pub impl TTrackEvent for TrackEvent
 
 #external
 pub type TrackEventInit
+pub fn TrackEventInit::bubbles(Self) -> Bool?
+pub fn TrackEventInit::cancelable(Self) -> Bool?
+pub fn TrackEventInit::composed(Self) -> Bool?
 pub fn TrackEventInit::empty() -> Self
 pub fn TrackEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, track? : &TTrackEventInitNewTrack) -> Self
+pub fn TrackEventInit::track(Self) -> TrackEventInitGetTrack?
 pub impl FromJsAny for TrackEventInit
 pub impl TJsValue for TrackEventInit
+
+#external
+pub type TrackEventInitGetTrack
+pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::into(Self) -> T
+pub impl TTrackEventInitGetTrack for TrackEventInitGetTrack
 
 #external
 pub type TrackEventTrack
@@ -5883,8 +6576,14 @@ pub impl TTransformStreamDefaultController for TransformStreamDefaultController
 
 #external
 pub type Transformer
+pub fn Transformer::cancel(Self) -> TransformerCancelCallback?
 pub fn Transformer::empty() -> Self
+pub fn Transformer::flush(Self) -> TransformerFlushCallback?
 pub fn Transformer::new(start? : TransformerStartCallback, transform? : TransformerTransformCallback, flush? : TransformerFlushCallback, cancel? : TransformerCancelCallback, readable_type? : JsValue, writable_type? : JsValue) -> Self
+pub fn Transformer::readable_type(Self) -> JsValue?
+pub fn Transformer::start(Self) -> TransformerStartCallback?
+pub fn Transformer::transform(Self) -> TransformerTransformCallback?
+pub fn Transformer::writable_type(Self) -> JsValue?
 pub impl FromJsAny for Transformer
 pub impl TJsValue for Transformer
 
@@ -5985,6 +6684,9 @@ pub impl TTrustedTypePolicyFactory for TrustedTypePolicyFactory
 
 #external
 pub type TrustedTypePolicyOptions
+pub fn TrustedTypePolicyOptions::create_html(Self) -> CreateHTMLCallback?
+pub fn TrustedTypePolicyOptions::create_script(Self) -> CreateScriptCallback?
+pub fn TrustedTypePolicyOptions::create_script_url(Self) -> CreateScriptURLCallback?
 pub fn TrustedTypePolicyOptions::empty() -> Self
 pub fn TrustedTypePolicyOptions::new(create_html? : CreateHTMLCallback, create_script? : CreateScriptCallback, create_script_url? : CreateScriptURLCallback) -> Self
 pub impl FromJsAny for TrustedTypePolicyOptions
@@ -6001,8 +6703,14 @@ pub impl TUIEvent for UIEvent
 
 #external
 pub type UIEventInit
+pub fn UIEventInit::bubbles(Self) -> Bool?
+pub fn UIEventInit::cancelable(Self) -> Bool?
+pub fn UIEventInit::composed(Self) -> Bool?
+pub fn UIEventInit::detail(Self) -> Int?
 pub fn UIEventInit::empty() -> Self
 pub fn UIEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt) -> Self
+pub fn UIEventInit::view(Self) -> Window?
+pub fn UIEventInit::which(Self) -> UInt?
 pub impl FromJsAny for UIEventInit
 pub impl TJsValue for UIEventInit
 
@@ -6054,8 +6762,13 @@ pub impl TJsValue for Uint8ClampedArray
 
 #external
 pub type UnderlyingSink
+pub fn UnderlyingSink::abort(Self) -> UnderlyingSinkAbortCallback?
+pub fn UnderlyingSink::close(Self) -> UnderlyingSinkCloseCallback?
 pub fn UnderlyingSink::empty() -> Self
 pub fn UnderlyingSink::new(start? : UnderlyingSinkStartCallback, write? : UnderlyingSinkWriteCallback, close? : UnderlyingSinkCloseCallback, abort? : UnderlyingSinkAbortCallback, type_? : JsValue) -> Self
+pub fn UnderlyingSink::start(Self) -> UnderlyingSinkStartCallback?
+pub fn UnderlyingSink::type_(Self) -> JsValue?
+pub fn UnderlyingSink::write(Self) -> UnderlyingSinkWriteCallback?
 pub impl FromJsAny for UnderlyingSink
 pub impl TJsValue for UnderlyingSink
 
@@ -6085,8 +6798,13 @@ pub impl TJsValue for UnderlyingSinkWriteCallback
 
 #external
 pub type UnderlyingSource
+pub fn UnderlyingSource::auto_allocate_chunk_size(Self) -> UInt64?
+pub fn UnderlyingSource::cancel(Self) -> UnderlyingSourceCancelCallback?
 pub fn UnderlyingSource::empty() -> Self
 pub fn UnderlyingSource::new(start? : UnderlyingSourceStartCallback, pull? : UnderlyingSourcePullCallback, cancel? : UnderlyingSourceCancelCallback, type_? : ReadableStreamType, auto_allocate_chunk_size? : UInt64) -> Self
+pub fn UnderlyingSource::pull(Self) -> UnderlyingSourcePullCallback?
+pub fn UnderlyingSource::start(Self) -> UnderlyingSourceStartCallback?
+pub fn UnderlyingSource::type_(Self) -> ReadableStreamType?
 pub impl FromJsAny for UnderlyingSource
 pub impl TJsValue for UnderlyingSource
 
@@ -6124,8 +6842,18 @@ pub impl TValidityState for ValidityState
 
 #external
 pub type ValidityStateFlags
+pub fn ValidityStateFlags::bad_input(Self) -> Bool?
+pub fn ValidityStateFlags::custom_error(Self) -> Bool?
 pub fn ValidityStateFlags::empty() -> Self
 pub fn ValidityStateFlags::new(value_missing? : Bool, type_mismatch? : Bool, pattern_mismatch? : Bool, too_long? : Bool, too_short? : Bool, range_underflow? : Bool, range_overflow? : Bool, step_mismatch? : Bool, bad_input? : Bool, custom_error? : Bool) -> Self
+pub fn ValidityStateFlags::pattern_mismatch(Self) -> Bool?
+pub fn ValidityStateFlags::range_overflow(Self) -> Bool?
+pub fn ValidityStateFlags::range_underflow(Self) -> Bool?
+pub fn ValidityStateFlags::step_mismatch(Self) -> Bool?
+pub fn ValidityStateFlags::too_long(Self) -> Bool?
+pub fn ValidityStateFlags::too_short(Self) -> Bool?
+pub fn ValidityStateFlags::type_mismatch(Self) -> Bool?
+pub fn ValidityStateFlags::value_missing(Self) -> Bool?
 pub impl FromJsAny for ValidityStateFlags
 pub impl TJsValue for ValidityStateFlags
 
@@ -6147,6 +6875,7 @@ pub type VideoTrack
 pub fn[T : TVideoTrack] VideoTrack::into(Self) -> T
 pub impl FromJsAny for VideoTrack
 pub impl TJsValue for VideoTrack
+pub impl TTrackEventInitGetTrack for VideoTrack
 pub impl TTrackEventInitNewTrack for VideoTrack
 pub impl TTrackEventTrack for VideoTrack
 pub impl TVideoTrack for VideoTrack
@@ -6222,8 +6951,39 @@ pub impl TWheelEvent for WheelEvent
 
 #external
 pub type WheelEventInit
+pub fn WheelEventInit::alt_key(Self) -> Bool?
+pub fn WheelEventInit::bubbles(Self) -> Bool?
+pub fn WheelEventInit::button(Self) -> Int?
+pub fn WheelEventInit::buttons(Self) -> UInt?
+pub fn WheelEventInit::cancelable(Self) -> Bool?
+pub fn WheelEventInit::client_x(Self) -> Int?
+pub fn WheelEventInit::client_y(Self) -> Int?
+pub fn WheelEventInit::composed(Self) -> Bool?
+pub fn WheelEventInit::ctrl_key(Self) -> Bool?
+pub fn WheelEventInit::delta_mode(Self) -> UInt?
+pub fn WheelEventInit::delta_x(Self) -> Double?
+pub fn WheelEventInit::delta_y(Self) -> Double?
+pub fn WheelEventInit::delta_z(Self) -> Double?
+pub fn WheelEventInit::detail(Self) -> Int?
 pub fn WheelEventInit::empty() -> Self
+pub fn WheelEventInit::meta_key(Self) -> Bool?
+pub fn WheelEventInit::modifier_alt_graph(Self) -> Bool?
+pub fn WheelEventInit::modifier_caps_lock(Self) -> Bool?
+pub fn WheelEventInit::modifier_fn(Self) -> Bool?
+pub fn WheelEventInit::modifier_fn_lock(Self) -> Bool?
+pub fn WheelEventInit::modifier_hyper(Self) -> Bool?
+pub fn WheelEventInit::modifier_num_lock(Self) -> Bool?
+pub fn WheelEventInit::modifier_scroll_lock(Self) -> Bool?
+pub fn WheelEventInit::modifier_super(Self) -> Bool?
+pub fn WheelEventInit::modifier_symbol(Self) -> Bool?
+pub fn WheelEventInit::modifier_symbol_lock(Self) -> Bool?
 pub fn WheelEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, delta_x? : Double, delta_y? : Double, delta_z? : Double, delta_mode? : UInt) -> Self
+pub fn WheelEventInit::related_target(Self) -> EventTarget?
+pub fn WheelEventInit::screen_x(Self) -> Int?
+pub fn WheelEventInit::screen_y(Self) -> Int?
+pub fn WheelEventInit::shift_key(Self) -> Bool?
+pub fn WheelEventInit::view(Self) -> Window?
+pub fn WheelEventInit::which(Self) -> UInt?
 pub impl FromJsAny for WheelEventInit
 pub impl TJsValue for WheelEventInit
 
@@ -6247,6 +7007,8 @@ pub impl TWindowEvent for WindowEvent
 pub type WindowPostMessageOptions
 pub fn WindowPostMessageOptions::empty() -> Self
 pub fn WindowPostMessageOptions::new(transfer? : Array[JsValue], target_origin? : String) -> Self
+pub fn WindowPostMessageOptions::target_origin(Self) -> String?
+pub fn WindowPostMessageOptions::transfer(Self) -> Array[JsValue]?
 pub impl FromJsAny for WindowPostMessageOptions
 pub impl TJsValue for WindowPostMessageOptions
 
@@ -6283,8 +7045,11 @@ pub impl TWorkerNavigator for WorkerNavigator
 
 #external
 pub type WorkerOptions
+pub fn WorkerOptions::credentials(Self) -> RequestCredentials?
 pub fn WorkerOptions::empty() -> Self
+pub fn WorkerOptions::name(Self) -> String?
 pub fn WorkerOptions::new(name? : String, type_? : WorkerType, credentials? : RequestCredentials) -> Self
+pub fn WorkerOptions::type_(Self) -> WorkerType?
 pub impl FromJsAny for WorkerOptions
 pub impl TJsValue for WorkerOptions
 pub impl TSharedWorkerNewOptions for WorkerOptions
@@ -6316,6 +7081,7 @@ pub impl TWorkletGlobalScope for WorkletGlobalScope
 
 #external
 pub type WorkletOptions
+pub fn WorkletOptions::credentials(Self) -> RequestCredentials?
 pub fn WorkletOptions::empty() -> Self
 pub fn WorkletOptions::new(credentials? : RequestCredentials) -> Self
 pub impl FromJsAny for WorkletOptions
@@ -6579,6 +7345,23 @@ pub trait TBarProp : TJsValue {
   visible(Self) -> Bool
 }
 
+pub(open) trait TBasePropertyIndexedKeyframeGetComposite {
+  to_js(Self) -> JsValue
+}
+pub impl TBasePropertyIndexedKeyframeGetComposite for Array[CompositeOperationOrAuto]
+
+pub(open) trait TBasePropertyIndexedKeyframeGetEasing {
+  to_js(Self) -> JsValue
+}
+pub impl TBasePropertyIndexedKeyframeGetEasing for String
+pub impl TBasePropertyIndexedKeyframeGetEasing for Array[String]
+
+pub(open) trait TBasePropertyIndexedKeyframeGetOffset {
+  to_js(Self) -> JsValue
+}
+pub impl TBasePropertyIndexedKeyframeGetOffset for Double
+pub impl TBasePropertyIndexedKeyframeGetOffset for Array[Double]
+
 pub(open) trait TBasePropertyIndexedKeyframeNewComposite {
   to_js(Self) -> JsValue
 }
@@ -6740,6 +7523,11 @@ pub trait TCSSStyleSheet : TStyleSheet {
   add_rule(Self, selector? : String, style? : String, index? : UInt) -> Int
   remove_rule(Self, index? : UInt) -> Unit
 }
+
+pub(open) trait TCSSStyleSheetInitGetMedia {
+  to_js(Self) -> JsValue
+}
+pub impl TCSSStyleSheetInitGetMedia for String
 
 pub(open) trait TCSSStyleSheetInitNewMedia {
   to_js(Self) -> JsValue
@@ -9786,6 +10574,12 @@ pub(open) trait TIDBObjectStoreCreateIndexKeyPath {
 pub impl TIDBObjectStoreCreateIndexKeyPath for String
 pub impl TIDBObjectStoreCreateIndexKeyPath for Array[String]
 
+pub(open) trait TIDBObjectStoreParametersGetKeyPath {
+  to_js(Self) -> JsValue
+}
+pub impl TIDBObjectStoreParametersGetKeyPath for String
+pub impl TIDBObjectStoreParametersGetKeyPath for Array[String]
+
 pub(open) trait TIDBObjectStoreParametersNewKeyPath {
   to_js(Self) -> JsValue
 }
@@ -9908,6 +10702,16 @@ pub trait TIntersectionObserverEntry : TJsValue {
   intersection_ratio(Self) -> Double
   target(Self) -> Element
 }
+
+pub(open) trait TIntersectionObserverInitGetRoot {
+  to_js(Self) -> JsValue
+}
+
+pub(open) trait TIntersectionObserverInitGetThreshold {
+  to_js(Self) -> JsValue
+}
+pub impl TIntersectionObserverInitGetThreshold for Double
+pub impl TIntersectionObserverInitGetThreshold for Array[Double]
 
 pub(open) trait TIntersectionObserverInitNewRoot {
   to_js(Self) -> JsValue
@@ -10480,6 +11284,12 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String
 pub(open) trait TOffscreenRenderingContext {
   to_js(Self) -> JsValue
 }
+
+pub(open) trait TOptionalEffectTimingGetDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TOptionalEffectTimingGetDuration for Double
+pub impl TOptionalEffectTimingGetDuration for String
 
 pub(open) trait TOptionalEffectTimingNewDuration {
   to_js(Self) -> JsValue
@@ -11824,6 +12634,10 @@ pub trait TTouchList : TJsValue {
 
 pub trait TTrackEvent : TEvent {
   track(Self) -> TrackEventTrack
+}
+
+pub(open) trait TTrackEventInitGetTrack {
+  to_js(Self) -> JsValue
 }
 
 pub(open) trait TTrackEventInitNewTrack {

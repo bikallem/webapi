@@ -48,3 +48,61 @@ pub fn IDBObjectStoreParameters::new(
 pub fn IDBObjectStoreParameters::empty() -> IDBObjectStoreParameters {
   idb_object_store_parameters_empty_ffi()
 }
+
+///|
+pub(open) trait TIDBObjectStoreParametersGetKeyPath {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TIDBObjectStoreParametersGetKeyPath for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub impl TIDBObjectStoreParametersGetKeyPath for Array[String] with to_js(
+  self : Array[String],
+) -> JsValue = "%identity"
+
+///|
+/// [IDBObjectStoreParametersGetKeyPath](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStoreParametersGetKeyPath)
+#external
+pub type IDBObjectStoreParametersGetKeyPath
+
+///|
+pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPath::into(
+  self : IDBObjectStoreParametersGetKeyPath,
+) -> T = "%identity"
+
+///|
+pub impl TIDBObjectStoreParametersGetKeyPath for IDBObjectStoreParametersGetKeyPath with to_js(
+  self : IDBObjectStoreParametersGetKeyPath,
+) -> JsValue = "%identity"
+
+///|
+pub fn IDBObjectStoreParameters::key_path(
+  self : IDBObjectStoreParameters,
+) -> IDBObjectStoreParametersGetKeyPath? {
+  let result = idb_object_store_parameters_get_key_path_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn IDBObjectStoreParameters::auto_increment(
+  self : IDBObjectStoreParameters,
+) -> Bool? {
+  let result = idb_object_store_parameters_get_auto_increment_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

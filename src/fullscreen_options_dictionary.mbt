@@ -24,3 +24,15 @@ pub fn FullscreenOptions::new(
 pub fn FullscreenOptions::empty() -> FullscreenOptions {
   fullscreen_options_empty_ffi()
 }
+
+///|
+pub fn FullscreenOptions::navigation_ui(
+  self : FullscreenOptions,
+) -> FullscreenNavigationUI? {
+  let result = fullscreen_options_get_navigation_ui_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

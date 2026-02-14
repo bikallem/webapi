@@ -62,3 +62,106 @@ extern "js" fn keyboard_event_init_ffi(
 
 ///|
 extern "js" fn keyboard_event_init_empty_ffi() -> KeyboardEventInit = "() => {}"
+
+///|
+extern "js" fn keyboard_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn keyboard_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn keyboard_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn keyboard_event_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+extern "js" fn keyboard_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+extern "js" fn keyboard_event_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"
+
+///|
+extern "js" fn keyboard_event_init_get_ctrl_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.ctrlKey"
+
+///|
+extern "js" fn keyboard_event_init_get_shift_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.shiftKey"
+
+///|
+extern "js" fn keyboard_event_init_get_alt_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.altKey"
+
+///|
+extern "js" fn keyboard_event_init_get_meta_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.metaKey"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_alt_graph_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierAltGraph"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_caps_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierCapsLock"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_fn_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierFn"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_fn_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierFnLock"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_hyper_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierHyper"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_num_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierNumLock"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_scroll_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierScrollLock"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_super_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSuper"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_symbol_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSymbol"
+
+///|
+extern "js" fn keyboard_event_init_get_modifier_symbol_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSymbolLock"
+
+///|
+extern "js" fn keyboard_event_init_get_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.key"
+
+///|
+extern "js" fn keyboard_event_init_get_code_ffi(obj : JsValue) -> JsValue = "(obj) => obj.code"
+
+///|
+extern "js" fn keyboard_event_init_get_location_ffi(obj : JsValue) -> JsValue = "(obj) => obj.location"
+
+///|
+extern "js" fn keyboard_event_init_get_repeat_ffi(obj : JsValue) -> JsValue = "(obj) => obj.repeat"
+
+///|
+extern "js" fn keyboard_event_init_get_is_composing_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.isComposing"
+
+///|
+extern "js" fn keyboard_event_init_get_char_code_ffi(obj : JsValue) -> JsValue = "(obj) => obj.charCode"
+
+///|
+extern "js" fn keyboard_event_init_get_key_code_ffi(obj : JsValue) -> JsValue = "(obj) => obj.keyCode"

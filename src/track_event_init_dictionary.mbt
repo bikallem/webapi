@@ -49,3 +49,72 @@ pub fn TrackEventInit::new(
 pub fn TrackEventInit::empty() -> TrackEventInit {
   track_event_init_empty_ffi()
 }
+
+///|
+pub(open) trait TTrackEventInitGetTrack {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TTrackEventInitGetTrack for VideoTrack with to_js(self : VideoTrack) -> JsValue = "%identity"
+
+///|
+pub impl TTrackEventInitGetTrack for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
+
+///|
+pub impl TTrackEventInitGetTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
+
+///|
+/// [TrackEventInitGetTrack](https://developer.mozilla.org/en-US/docs/Web/API/TrackEventInitGetTrack)
+#external
+pub type TrackEventInitGetTrack
+
+///|
+pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::into(
+  self : TrackEventInitGetTrack,
+) -> T = "%identity"
+
+///|
+pub impl TTrackEventInitGetTrack for TrackEventInitGetTrack with to_js(
+  self : TrackEventInitGetTrack,
+) -> JsValue = "%identity"
+
+///|
+pub fn TrackEventInit::bubbles(self : TrackEventInit) -> Bool? {
+  let result = track_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TrackEventInit::cancelable(self : TrackEventInit) -> Bool? {
+  let result = track_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TrackEventInit::composed(self : TrackEventInit) -> Bool? {
+  let result = track_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TrackEventInit::track(self : TrackEventInit) -> TrackEventInitGetTrack? {
+  let result = track_event_init_get_track_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

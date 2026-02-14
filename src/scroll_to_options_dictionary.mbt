@@ -30,3 +30,33 @@ pub fn ScrollToOptions::new(
 pub fn ScrollToOptions::empty() -> ScrollToOptions {
   scroll_to_options_empty_ffi()
 }
+
+///|
+pub fn ScrollToOptions::behavior(self : ScrollToOptions) -> ScrollBehavior? {
+  let result = scroll_to_options_get_behavior_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn ScrollToOptions::left(self : ScrollToOptions) -> Double? {
+  let result = scroll_to_options_get_left_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ScrollToOptions::top(self : ScrollToOptions) -> Double? {
+  let result = scroll_to_options_get_top_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

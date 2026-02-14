@@ -36,3 +36,73 @@ pub fn IDBVersionChangeEventInit::new(
 pub fn IDBVersionChangeEventInit::empty() -> IDBVersionChangeEventInit {
   idb_version_change_event_init_empty_ffi()
 }
+
+///|
+pub fn IDBVersionChangeEventInit::bubbles(
+  self : IDBVersionChangeEventInit,
+) -> Bool? {
+  let result = idb_version_change_event_init_get_bubbles_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IDBVersionChangeEventInit::cancelable(
+  self : IDBVersionChangeEventInit,
+) -> Bool? {
+  let result = idb_version_change_event_init_get_cancelable_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IDBVersionChangeEventInit::composed(
+  self : IDBVersionChangeEventInit,
+) -> Bool? {
+  let result = idb_version_change_event_init_get_composed_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IDBVersionChangeEventInit::old_version(
+  self : IDBVersionChangeEventInit,
+) -> UInt64? {
+  let result = idb_version_change_event_init_get_old_version_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IDBVersionChangeEventInit::new_version(
+  self : IDBVersionChangeEventInit,
+) -> UInt64? {
+  let result = idb_version_change_event_init_get_new_version_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

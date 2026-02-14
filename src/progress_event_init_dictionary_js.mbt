@@ -20,3 +20,23 @@ extern "js" fn progress_event_init_ffi(
 
 ///|
 extern "js" fn progress_event_init_empty_ffi() -> ProgressEventInit = "() => {}"
+
+///|
+extern "js" fn progress_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn progress_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn progress_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn progress_event_init_get_length_computable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.lengthComputable"
+
+///|
+extern "js" fn progress_event_init_get_loaded_ffi(obj : JsValue) -> JsValue = "(obj) => obj.loaded"
+
+///|
+extern "js" fn progress_event_init_get_total_ffi(obj : JsValue) -> JsValue = "(obj) => obj.total"

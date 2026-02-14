@@ -80,3 +80,287 @@ pub fn DragEventInit::new(
 pub fn DragEventInit::empty() -> DragEventInit {
   drag_event_init_empty_ffi()
 }
+
+///|
+pub fn DragEventInit::bubbles(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::cancelable(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::composed(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::view(self : DragEventInit) -> Window? {
+  let result = drag_event_init_get_view_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn DragEventInit::detail(self : DragEventInit) -> Int? {
+  let result = drag_event_init_get_detail_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::which(self : DragEventInit) -> UInt? {
+  let result = drag_event_init_get_which_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::ctrl_key(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_ctrl_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::shift_key(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_shift_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::alt_key(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_alt_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::meta_key(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_meta_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_alt_graph(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_alt_graph_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_caps_lock(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_caps_lock_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_fn(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_fn_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_fn_lock(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_fn_lock_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_hyper(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_num_lock(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_num_lock_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_scroll_lock(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_scroll_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_super(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_super_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_symbol(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_symbol_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::modifier_symbol_lock(self : DragEventInit) -> Bool? {
+  let result = drag_event_init_get_modifier_symbol_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::screen_x(self : DragEventInit) -> Int? {
+  let result = drag_event_init_get_screen_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::screen_y(self : DragEventInit) -> Int? {
+  let result = drag_event_init_get_screen_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::client_x(self : DragEventInit) -> Int? {
+  let result = drag_event_init_get_client_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::client_y(self : DragEventInit) -> Int? {
+  let result = drag_event_init_get_client_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::button(self : DragEventInit) -> Int? {
+  let result = drag_event_init_get_button_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::buttons(self : DragEventInit) -> UInt? {
+  let result = drag_event_init_get_buttons_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DragEventInit::related_target(self : DragEventInit) -> EventTarget? {
+  let result = drag_event_init_get_related_target_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn DragEventInit::data_transfer(self : DragEventInit) -> DataTransfer? {
+  let result = drag_event_init_get_data_transfer_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

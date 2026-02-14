@@ -22,3 +22,34 @@ extern "js" fn computed_effect_timing_ffi(
 
 ///|
 extern "js" fn computed_effect_timing_empty_ffi() -> ComputedEffectTiming = "() => {}"
+
+///|
+extern "js" fn computed_effect_timing_get_fill_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fill"
+
+///|
+extern "js" fn computed_effect_timing_get_iteration_start_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterationStart"
+
+///|
+extern "js" fn computed_effect_timing_get_iterations_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterations"
+
+///|
+extern "js" fn computed_effect_timing_get_direction_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.direction"
+
+///|
+extern "js" fn computed_effect_timing_get_easing_ffi(obj : JsValue) -> JsValue = "(obj) => obj.easing"
+
+///|
+extern "js" fn computed_effect_timing_get_progress_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.progress"
+
+///|
+extern "js" fn computed_effect_timing_get_current_iteration_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.currentIteration"

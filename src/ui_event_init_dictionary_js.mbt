@@ -20,3 +20,21 @@ extern "js" fn ui_event_init_ffi(
 
 ///|
 extern "js" fn ui_event_init_empty_ffi() -> UIEventInit = "() => {}"
+
+///|
+extern "js" fn ui_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn ui_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn ui_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn ui_event_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+extern "js" fn ui_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+extern "js" fn ui_event_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"

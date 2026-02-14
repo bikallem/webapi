@@ -30,3 +30,17 @@ pub fn ReadableWritablePair::new(
 pub fn ReadableWritablePair::empty() -> ReadableWritablePair {
   readable_writable_pair_empty_ffi()
 }
+
+///|
+pub fn ReadableWritablePair::readable(
+  self : ReadableWritablePair,
+) -> ReadableStream {
+  readable_writable_pair_get_readable_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn ReadableWritablePair::writable(
+  self : ReadableWritablePair,
+) -> WritableStream {
+  readable_writable_pair_get_writable_ffi(TJsValue::to_js(self))
+}

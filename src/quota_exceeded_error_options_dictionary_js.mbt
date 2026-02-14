@@ -12,3 +12,13 @@ extern "js" fn quota_exceeded_error_options_ffi(
 
 ///|
 extern "js" fn quota_exceeded_error_options_empty_ffi() -> QuotaExceededErrorOptions = "() => {}"
+
+///|
+extern "js" fn quota_exceeded_error_options_get_quota_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.quota"
+
+///|
+extern "js" fn quota_exceeded_error_options_get_requested_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.requested"

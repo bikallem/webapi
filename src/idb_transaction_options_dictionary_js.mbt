@@ -10,3 +10,8 @@ extern "js" fn idb_transaction_options_ffi(
 
 ///|
 extern "js" fn idb_transaction_options_empty_ffi() -> IDBTransactionOptions = "() => {}"
+
+///|
+extern "js" fn idb_transaction_options_get_durability_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.durability"

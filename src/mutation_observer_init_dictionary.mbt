@@ -40,3 +40,89 @@ pub fn MutationObserverInit::new(
 pub fn MutationObserverInit::empty() -> MutationObserverInit {
   mutation_observer_init_empty_ffi()
 }
+
+///|
+pub fn MutationObserverInit::child_list(self : MutationObserverInit) -> Bool? {
+  let result = mutation_observer_init_get_child_list_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn MutationObserverInit::attributes(self : MutationObserverInit) -> Bool? {
+  let result = mutation_observer_init_get_attributes_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn MutationObserverInit::character_data(
+  self : MutationObserverInit,
+) -> Bool? {
+  let result = mutation_observer_init_get_character_data_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn MutationObserverInit::subtree(self : MutationObserverInit) -> Bool? {
+  let result = mutation_observer_init_get_subtree_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn MutationObserverInit::attribute_old_value(
+  self : MutationObserverInit,
+) -> Bool? {
+  let result = mutation_observer_init_get_attribute_old_value_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn MutationObserverInit::character_data_old_value(
+  self : MutationObserverInit,
+) -> Bool? {
+  let result = mutation_observer_init_get_character_data_old_value_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn MutationObserverInit::attribute_filter(
+  self : MutationObserverInit,
+) -> Array[String]? {
+  let result = mutation_observer_init_get_attribute_filter_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

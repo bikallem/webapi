@@ -12,3 +12,13 @@ extern "js" fn convert_coordinate_options_ffi(
 
 ///|
 extern "js" fn convert_coordinate_options_empty_ffi() -> ConvertCoordinateOptions = "() => {}"
+
+///|
+extern "js" fn convert_coordinate_options_get_from_box_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.fromBox"
+
+///|
+extern "js" fn convert_coordinate_options_get_to_box_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.toBox"

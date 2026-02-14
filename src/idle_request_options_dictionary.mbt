@@ -22,3 +22,13 @@ pub fn IdleRequestOptions::new(timeout? : UInt) -> IdleRequestOptions {
 pub fn IdleRequestOptions::empty() -> IdleRequestOptions {
   idle_request_options_empty_ffi()
 }
+
+///|
+pub fn IdleRequestOptions::timeout(self : IdleRequestOptions) -> UInt? {
+  let result = idle_request_options_get_timeout_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

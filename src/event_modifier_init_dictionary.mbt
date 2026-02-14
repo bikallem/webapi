@@ -64,3 +64,221 @@ pub fn EventModifierInit::new(
 pub fn EventModifierInit::empty() -> EventModifierInit {
   event_modifier_init_empty_ffi()
 }
+
+///|
+pub fn EventModifierInit::bubbles(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::cancelable(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::composed(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::view(self : EventModifierInit) -> Window? {
+  let result = event_modifier_init_get_view_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn EventModifierInit::detail(self : EventModifierInit) -> Int? {
+  let result = event_modifier_init_get_detail_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::which(self : EventModifierInit) -> UInt? {
+  let result = event_modifier_init_get_which_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::ctrl_key(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_ctrl_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::shift_key(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_shift_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::alt_key(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_alt_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::meta_key(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_meta_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_alt_graph(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_alt_graph_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_caps_lock(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_caps_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_fn(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_fn_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_fn_lock(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_fn_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_hyper(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_hyper_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_num_lock(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_num_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_scroll_lock(
+  self : EventModifierInit,
+) -> Bool? {
+  let result = event_modifier_init_get_modifier_scroll_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_super(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_super_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_symbol(self : EventModifierInit) -> Bool? {
+  let result = event_modifier_init_get_modifier_symbol_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EventModifierInit::modifier_symbol_lock(
+  self : EventModifierInit,
+) -> Bool? {
+  let result = event_modifier_init_get_modifier_symbol_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

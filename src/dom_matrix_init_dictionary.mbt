@@ -70,3 +70,233 @@ pub fn DOMMatrixInit::new(
 pub fn DOMMatrixInit::empty() -> DOMMatrixInit {
   dom_matrix_init_empty_ffi()
 }
+
+///|
+pub fn DOMMatrixInit::a(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_a_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::b(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_b_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::c(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_c_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::d(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_d_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::e(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_e_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::f(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_f_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m11(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m11_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m12(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m12_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m21(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m21_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m22(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m22_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m41(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m41_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m42(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m42_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m13(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m13_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m14(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m14_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m23(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m23_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m24(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m24_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m31(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m31_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m32(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m32_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m33(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m33_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m34(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m34_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m43(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m43_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::m44(self : DOMMatrixInit) -> Double? {
+  let result = dom_matrix_init_get_m44_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn DOMMatrixInit::is2d(self : DOMMatrixInit) -> Bool? {
+  let result = dom_matrix_init_get_is2d_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

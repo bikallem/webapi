@@ -10,3 +10,8 @@ extern "js" fn element_definition_options_ffi(
 
 ///|
 extern "js" fn element_definition_options_empty_ffi() -> ElementDefinitionOptions = "() => {}"
+
+///|
+extern "js" fn element_definition_options_get_extends_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.extends"

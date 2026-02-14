@@ -20,3 +20,33 @@ extern "js" fn intersection_observer_init_ffi(
 
 ///|
 extern "js" fn intersection_observer_init_empty_ffi() -> IntersectionObserverInit = "() => {}"
+
+///|
+extern "js" fn intersection_observer_init_get_root_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.root"
+
+///|
+extern "js" fn intersection_observer_init_get_root_margin_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rootMargin"
+
+///|
+extern "js" fn intersection_observer_init_get_scroll_margin_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scrollMargin"
+
+///|
+extern "js" fn intersection_observer_init_get_threshold_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.threshold"
+
+///|
+extern "js" fn intersection_observer_init_get_delay_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.delay"
+
+///|
+extern "js" fn intersection_observer_init_get_track_visibility_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.trackVisibility"

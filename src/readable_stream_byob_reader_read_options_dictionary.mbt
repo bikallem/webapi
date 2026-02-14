@@ -28,3 +28,17 @@ pub fn ReadableStreamBYOBReaderReadOptions::new(
 pub fn ReadableStreamBYOBReaderReadOptions::empty() -> ReadableStreamBYOBReaderReadOptions {
   readable_stream_byob_reader_read_options_empty_ffi()
 }
+
+///|
+pub fn ReadableStreamBYOBReaderReadOptions::min(
+  self : ReadableStreamBYOBReaderReadOptions,
+) -> UInt64? {
+  let result = readable_stream_byob_reader_read_options_get_min_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

@@ -12,3 +12,9 @@ extern "js" fn navigation_result_ffi(
 
 ///|
 extern "js" fn navigation_result_empty_ffi() -> NavigationResult = "() => {}"
+
+///|
+extern "js" fn navigation_result_get_committed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.committed"
+
+///|
+extern "js" fn navigation_result_get_finished_ffi(obj : JsValue) -> JsValue = "(obj) => obj.finished"

@@ -38,3 +38,50 @@ extern "js" fn notification_options_ffi(
 
 ///|
 extern "js" fn notification_options_empty_ffi() -> NotificationOptions = "() => {}"
+
+///|
+extern "js" fn notification_options_get_dir_ffi(obj : JsValue) -> JsValue = "(obj) => obj.dir"
+
+///|
+extern "js" fn notification_options_get_lang_ffi(obj : JsValue) -> JsValue = "(obj) => obj.lang"
+
+///|
+extern "js" fn notification_options_get_body_ffi(obj : JsValue) -> JsValue = "(obj) => obj.body"
+
+///|
+extern "js" fn notification_options_get_navigate_ffi(obj : JsValue) -> JsValue = "(obj) => obj.navigate"
+
+///|
+extern "js" fn notification_options_get_tag_ffi(obj : JsValue) -> JsValue = "(obj) => obj.tag"
+
+///|
+extern "js" fn notification_options_get_image_ffi(obj : JsValue) -> JsValue = "(obj) => obj.image"
+
+///|
+extern "js" fn notification_options_get_icon_ffi(obj : JsValue) -> JsValue = "(obj) => obj.icon"
+
+///|
+extern "js" fn notification_options_get_badge_ffi(obj : JsValue) -> JsValue = "(obj) => obj.badge"
+
+///|
+extern "js" fn notification_options_get_vibrate_ffi(obj : JsValue) -> JsValue = "(obj) => obj.vibrate"
+
+///|
+extern "js" fn notification_options_get_timestamp_ffi(obj : JsValue) -> JsValue = "(obj) => obj.timestamp"
+
+///|
+extern "js" fn notification_options_get_renotify_ffi(obj : JsValue) -> JsValue = "(obj) => obj.renotify"
+
+///|
+extern "js" fn notification_options_get_silent_ffi(obj : JsValue) -> JsValue = "(obj) => obj.silent"
+
+///|
+extern "js" fn notification_options_get_require_interaction_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.requireInteraction"
+
+///|
+extern "js" fn notification_options_get_data_ffi(obj : JsValue) -> JsValue = "(obj) => obj.data"
+
+///|
+extern "js" fn notification_options_get_actions_ffi(obj : JsValue) -> JsValue = "(obj) => obj.actions"

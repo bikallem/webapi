@@ -8,3 +8,6 @@ extern "js" fn navigation_options_ffi(info : JsValue) -> NavigationOptions =
 
 ///|
 extern "js" fn navigation_options_empty_ffi() -> NavigationOptions = "() => {}"
+
+///|
+extern "js" fn navigation_options_get_info_ffi(obj : JsValue) -> JsValue = "(obj) => obj.info"

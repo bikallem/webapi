@@ -25,3 +25,27 @@ pub fn ImageDataSettings::new(
 pub fn ImageDataSettings::empty() -> ImageDataSettings {
   image_data_settings_empty_ffi()
 }
+
+///|
+pub fn ImageDataSettings::color_space(
+  self : ImageDataSettings,
+) -> PredefinedColorSpace? {
+  let result = image_data_settings_get_color_space_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn ImageDataSettings::pixel_format(
+  self : ImageDataSettings,
+) -> ImageDataPixelFormat? {
+  let result = image_data_settings_get_pixel_format_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

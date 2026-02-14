@@ -16,3 +16,23 @@ extern "js" fn navigation_intercept_options_ffi(
 
 ///|
 extern "js" fn navigation_intercept_options_empty_ffi() -> NavigationInterceptOptions = "() => {}"
+
+///|
+extern "js" fn navigation_intercept_options_get_precommit_handler_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.precommitHandler"
+
+///|
+extern "js" fn navigation_intercept_options_get_handler_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.handler"
+
+///|
+extern "js" fn navigation_intercept_options_get_focus_reset_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.focusReset"
+
+///|
+extern "js" fn navigation_intercept_options_get_scroll_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scroll"

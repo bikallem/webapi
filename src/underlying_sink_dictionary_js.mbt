@@ -18,3 +18,18 @@ extern "js" fn underlying_sink_ffi(
 
 ///|
 extern "js" fn underlying_sink_empty_ffi() -> UnderlyingSink = "() => {}"
+
+///|
+extern "js" fn underlying_sink_get_start_ffi(obj : JsValue) -> JsValue = "(obj) => obj.start"
+
+///|
+extern "js" fn underlying_sink_get_write_ffi(obj : JsValue) -> JsValue = "(obj) => obj.write"
+
+///|
+extern "js" fn underlying_sink_get_close_ffi(obj : JsValue) -> JsValue = "(obj) => obj.close"
+
+///|
+extern "js" fn underlying_sink_get_abort_ffi(obj : JsValue) -> JsValue = "(obj) => obj.abort"
+
+///|
+extern "js" fn underlying_sink_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"

@@ -22,3 +22,36 @@ extern "js" fn mutation_observer_init_ffi(
 
 ///|
 extern "js" fn mutation_observer_init_empty_ffi() -> MutationObserverInit = "() => {}"
+
+///|
+extern "js" fn mutation_observer_init_get_child_list_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.childList"
+
+///|
+extern "js" fn mutation_observer_init_get_attributes_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.attributes"
+
+///|
+extern "js" fn mutation_observer_init_get_character_data_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.characterData"
+
+///|
+extern "js" fn mutation_observer_init_get_subtree_ffi(obj : JsValue) -> JsValue = "(obj) => obj.subtree"
+
+///|
+extern "js" fn mutation_observer_init_get_attribute_old_value_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.attributeOldValue"
+
+///|
+extern "js" fn mutation_observer_init_get_character_data_old_value_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.characterDataOldValue"
+
+///|
+extern "js" fn mutation_observer_init_get_attribute_filter_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.attributeFilter"

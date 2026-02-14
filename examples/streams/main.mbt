@@ -8,18 +8,37 @@ fn read_chunk(
   output : @webapi.Element,
   status : @webapi.Element,
 ) -> Unit {
-  let _ = reader.read().then(fn(result) {
-    if read_result_done(result) {
-      status.set_text_content("Stream complete")
+  let _ = reader
+    .read()
+    .then(fn(result) {
+      if result.done().unwrap_or(false) {
+        status.set_text_content("Stream complete")
+      } else {
+        let chunk = @webapi.JsValue::to_string(result.value().unwrap())
+        let prev = output.text_content()
+        let text = if prev.length() > 0 { prev + "\n" + chunk } else { chunk }
+        output.set_text_content(text)
+        read_chunk(reader, output, status)
+      }
+      @webapi.JsValue::undefined()
+    })
+}
+
+///|
+fn create_counting_stream() -> @webapi.ReadableStream {
+  let mut i = 0
+  let pull = @webapi.UnderlyingSourcePullCallback::new(fn(controller) {
+    let ctrl : @webapi.ReadableStreamDefaultController = controller.into()
+    i = i + 1
+    if i <= 4 {
+      ctrl.enqueue(chunk=@webapi.TJsValue::to_js("Chunk " + i.to_string()))
     } else {
-      let chunk = read_result_value(result)
-      let prev = output.text_content()
-      let text = if prev.length() > 0 { prev + "\n" + chunk } else { chunk }
-      output.set_text_content(text)
-      read_chunk(reader, output, status)
+      ctrl.close()
     }
-    @webapi.JsValue::undefined()
+    @webapi.JsPromise::resolve(@webapi.JsValue::undefined())
   })
+  let source = @webapi.UnderlyingSource::new(pull~)
+  @webapi.ReadableStream::new(underlying_source=@webapi.TJsValue::to_js(source))
 }
 
 ///|
@@ -30,8 +49,7 @@ fn main {
   // Container
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
-    "style",
-    "font-family: system-ui; max-width: 600px; margin: 2em auto;",
+    "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
   // Heading
@@ -48,17 +66,16 @@ fn main {
   let output_el = doc.create_element("pre")
   output_el.set_id("output")
   output_el.set_attribute(
-    "style",
-    "background: #f5f5f5; padding: 1em; margin: 0.5em 0; min-height: 2em; font-family: monospace;",
+    "style", "background: #f5f5f5; padding: 1em; margin: 0.5em 0; min-height: 2em; font-family: monospace;",
   )
 
   // Read Stream button
-  let read_btn : @webapi.HTMLButtonElement = doc
-    .create_element("button")
-    .into()
+  let read_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   read_btn
   ..set_id("read-btn")
-  ..set_attribute("style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;")
+  ..set_attribute(
+    "style", "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;",
+  )
   .set_text_content("Read Stream")
 
   read_btn.add_event_listener(

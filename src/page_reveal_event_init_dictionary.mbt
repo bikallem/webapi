@@ -32,3 +32,47 @@ pub fn PageRevealEventInit::new(
 pub fn PageRevealEventInit::empty() -> PageRevealEventInit {
   page_reveal_event_init_empty_ffi()
 }
+
+///|
+pub fn PageRevealEventInit::bubbles(self : PageRevealEventInit) -> Bool? {
+  let result = page_reveal_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PageRevealEventInit::cancelable(self : PageRevealEventInit) -> Bool? {
+  let result = page_reveal_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PageRevealEventInit::composed(self : PageRevealEventInit) -> Bool? {
+  let result = page_reveal_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PageRevealEventInit::view_transition(
+  self : PageRevealEventInit,
+) -> ViewTransition? {
+  let result = page_reveal_event_init_get_view_transition_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

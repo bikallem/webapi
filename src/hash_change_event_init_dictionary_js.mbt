@@ -18,3 +18,22 @@ extern "js" fn hash_change_event_init_ffi(
 
 ///|
 extern "js" fn hash_change_event_init_empty_ffi() -> HashChangeEventInit = "() => {}"
+
+///|
+extern "js" fn hash_change_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn hash_change_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn hash_change_event_init_get_composed_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn hash_change_event_init_get_old_url_ffi(obj : JsValue) -> JsValue = "(obj) => obj.oldURL"
+
+///|
+extern "js" fn hash_change_event_init_get_new_url_ffi(obj : JsValue) -> JsValue = "(obj) => obj.newURL"

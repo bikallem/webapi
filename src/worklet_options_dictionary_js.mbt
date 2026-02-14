@@ -8,3 +8,6 @@ extern "js" fn worklet_options_ffi(credentials : JsValue) -> WorkletOptions =
 
 ///|
 extern "js" fn worklet_options_empty_ffi() -> WorkletOptions = "() => {}"
+
+///|
+extern "js" fn worklet_options_get_credentials_ffi(obj : JsValue) -> JsValue = "(obj) => obj.credentials"

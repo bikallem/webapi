@@ -36,3 +36,63 @@ pub fn CloseEventInit::new(
 pub fn CloseEventInit::empty() -> CloseEventInit {
   close_event_init_empty_ffi()
 }
+
+///|
+pub fn CloseEventInit::bubbles(self : CloseEventInit) -> Bool? {
+  let result = close_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CloseEventInit::cancelable(self : CloseEventInit) -> Bool? {
+  let result = close_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CloseEventInit::composed(self : CloseEventInit) -> Bool? {
+  let result = close_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CloseEventInit::was_clean(self : CloseEventInit) -> Bool? {
+  let result = close_event_init_get_was_clean_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CloseEventInit::code(self : CloseEventInit) -> UInt? {
+  let result = close_event_init_get_code_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CloseEventInit::reason(self : CloseEventInit) -> String? {
+  let result = close_event_init_get_reason_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

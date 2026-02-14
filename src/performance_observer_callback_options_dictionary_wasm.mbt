@@ -5,3 +5,8 @@ fn performance_observer_callback_options_ffi(
 
 ///|
 fn performance_observer_callback_options_empty_ffi() -> PerformanceObserverCallbackOptions = "webapi_Dictionary" "empty"
+
+///|
+fn performance_observer_callback_options_get_dropped_entries_count_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_PerformanceObserverCallbackOptions" "get_droppedEntriesCount"

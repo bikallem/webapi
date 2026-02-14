@@ -92,3 +92,163 @@ extern "js" fn pointer_event_init_ffi(
 
 ///|
 extern "js" fn pointer_event_init_empty_ffi() -> PointerEventInit = "() => {}"
+
+///|
+extern "js" fn pointer_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn pointer_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn pointer_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn pointer_event_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+extern "js" fn pointer_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+extern "js" fn pointer_event_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"
+
+///|
+extern "js" fn pointer_event_init_get_ctrl_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.ctrlKey"
+
+///|
+extern "js" fn pointer_event_init_get_shift_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.shiftKey"
+
+///|
+extern "js" fn pointer_event_init_get_alt_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.altKey"
+
+///|
+extern "js" fn pointer_event_init_get_meta_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.metaKey"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_alt_graph_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierAltGraph"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_caps_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierCapsLock"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_fn_ffi(obj : JsValue) -> JsValue = "(obj) => obj.modifierFn"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_fn_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierFnLock"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_hyper_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierHyper"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_num_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierNumLock"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_scroll_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierScrollLock"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_super_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSuper"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_symbol_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSymbol"
+
+///|
+extern "js" fn pointer_event_init_get_modifier_symbol_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSymbolLock"
+
+///|
+extern "js" fn pointer_event_init_get_screen_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.screenX"
+
+///|
+extern "js" fn pointer_event_init_get_screen_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.screenY"
+
+///|
+extern "js" fn pointer_event_init_get_client_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clientX"
+
+///|
+extern "js" fn pointer_event_init_get_client_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clientY"
+
+///|
+extern "js" fn pointer_event_init_get_button_ffi(obj : JsValue) -> JsValue = "(obj) => obj.button"
+
+///|
+extern "js" fn pointer_event_init_get_buttons_ffi(obj : JsValue) -> JsValue = "(obj) => obj.buttons"
+
+///|
+extern "js" fn pointer_event_init_get_related_target_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.relatedTarget"
+
+///|
+extern "js" fn pointer_event_init_get_pointer_id_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pointerId"
+
+///|
+extern "js" fn pointer_event_init_get_width_ffi(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+extern "js" fn pointer_event_init_get_height_ffi(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+extern "js" fn pointer_event_init_get_pressure_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pressure"
+
+///|
+extern "js" fn pointer_event_init_get_tangential_pressure_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.tangentialPressure"
+
+///|
+extern "js" fn pointer_event_init_get_tilt_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.tiltX"
+
+///|
+extern "js" fn pointer_event_init_get_tilt_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.tiltY"
+
+///|
+extern "js" fn pointer_event_init_get_twist_ffi(obj : JsValue) -> JsValue = "(obj) => obj.twist"
+
+///|
+extern "js" fn pointer_event_init_get_altitude_angle_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.altitudeAngle"
+
+///|
+extern "js" fn pointer_event_init_get_azimuth_angle_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.azimuthAngle"
+
+///|
+extern "js" fn pointer_event_init_get_pointer_type_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pointerType"
+
+///|
+extern "js" fn pointer_event_init_get_is_primary_ffi(obj : JsValue) -> JsValue = "(obj) => obj.isPrimary"
+
+///|
+extern "js" fn pointer_event_init_get_persistent_device_id_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.persistentDeviceId"
+
+///|
+extern "js" fn pointer_event_init_get_coalesced_events_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.coalescedEvents"
+
+///|
+extern "js" fn pointer_event_init_get_predicted_events_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.predictedEvents"

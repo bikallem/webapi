@@ -10,3 +10,6 @@ extern "js" fn resize_observer_options_ffi(
 
 ///|
 extern "js" fn resize_observer_options_empty_ffi() -> ResizeObserverOptions = "() => {}"
+
+///|
+extern "js" fn resize_observer_options_get_box_ffi(obj : JsValue) -> JsValue = "(obj) => obj.box"

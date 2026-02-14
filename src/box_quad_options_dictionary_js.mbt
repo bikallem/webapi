@@ -12,3 +12,9 @@ extern "js" fn box_quad_options_ffi(
 
 ///|
 extern "js" fn box_quad_options_empty_ffi() -> BoxQuadOptions = "() => {}"
+
+///|
+extern "js" fn box_quad_options_get_box_ffi(obj : JsValue) -> JsValue = "(obj) => obj.box"
+
+///|
+extern "js" fn box_quad_options_get_relative_to_ffi(obj : JsValue) -> JsValue = "(obj) => obj.relativeTo"

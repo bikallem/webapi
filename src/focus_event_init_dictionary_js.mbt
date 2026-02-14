@@ -22,3 +22,26 @@ extern "js" fn focus_event_init_ffi(
 
 ///|
 extern "js" fn focus_event_init_empty_ffi() -> FocusEventInit = "() => {}"
+
+///|
+extern "js" fn focus_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn focus_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn focus_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn focus_event_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+extern "js" fn focus_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+extern "js" fn focus_event_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"
+
+///|
+extern "js" fn focus_event_init_get_related_target_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.relatedTarget"

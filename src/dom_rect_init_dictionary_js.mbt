@@ -16,3 +16,15 @@ extern "js" fn dom_rect_init_ffi(
 
 ///|
 extern "js" fn dom_rect_init_empty_ffi() -> DOMRectInit = "() => {}"
+
+///|
+extern "js" fn dom_rect_init_get_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+extern "js" fn dom_rect_init_get_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+extern "js" fn dom_rect_init_get_width_ffi(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+extern "js" fn dom_rect_init_get_height_ffi(obj : JsValue) -> JsValue = "(obj) => obj.height"

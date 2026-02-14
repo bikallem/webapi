@@ -44,3 +44,61 @@ pub fn CSSStyleSheetInit::new(
 pub fn CSSStyleSheetInit::empty() -> CSSStyleSheetInit {
   css_style_sheet_init_empty_ffi()
 }
+
+///|
+pub(open) trait TCSSStyleSheetInitGetMedia {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TCSSStyleSheetInitGetMedia for MediaList with to_js(self : MediaList) -> JsValue = "%identity"
+
+///|
+pub impl TCSSStyleSheetInitGetMedia for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+/// [CSSStyleSheetInitGetMedia](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheetInitGetMedia)
+#external
+pub type CSSStyleSheetInitGetMedia
+
+///|
+pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::into(
+  self : CSSStyleSheetInitGetMedia,
+) -> T = "%identity"
+
+///|
+pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia with to_js(
+  self : CSSStyleSheetInitGetMedia,
+) -> JsValue = "%identity"
+
+///|
+pub fn CSSStyleSheetInit::base_url(self : CSSStyleSheetInit) -> String? {
+  let result = css_style_sheet_init_get_base_url_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CSSStyleSheetInit::media(
+  self : CSSStyleSheetInit,
+) -> CSSStyleSheetInitGetMedia? {
+  let result = css_style_sheet_init_get_media_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn CSSStyleSheetInit::disabled(self : CSSStyleSheetInit) -> Bool? {
+  let result = css_style_sheet_init_get_disabled_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

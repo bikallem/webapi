@@ -36,3 +36,66 @@ pub fn PromiseRejectionEventInit::new(
 pub fn PromiseRejectionEventInit::empty() -> PromiseRejectionEventInit {
   promise_rejection_event_init_empty_ffi()
 }
+
+///|
+pub fn PromiseRejectionEventInit::bubbles(
+  self : PromiseRejectionEventInit,
+) -> Bool? {
+  let result = promise_rejection_event_init_get_bubbles_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PromiseRejectionEventInit::cancelable(
+  self : PromiseRejectionEventInit,
+) -> Bool? {
+  let result = promise_rejection_event_init_get_cancelable_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PromiseRejectionEventInit::composed(
+  self : PromiseRejectionEventInit,
+) -> Bool? {
+  let result = promise_rejection_event_init_get_composed_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PromiseRejectionEventInit::promise(
+  self : PromiseRejectionEventInit,
+) -> JsValue {
+  promise_rejection_event_init_get_promise_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn PromiseRejectionEventInit::reason(
+  self : PromiseRejectionEventInit,
+) -> JsValue? {
+  let result = promise_rejection_event_init_get_reason_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

@@ -22,3 +22,13 @@ pub fn GetRootNodeOptions::new(composed? : Bool = false) -> GetRootNodeOptions {
 pub fn GetRootNodeOptions::empty() -> GetRootNodeOptions {
   get_root_node_options_empty_ffi()
 }
+
+///|
+pub fn GetRootNodeOptions::composed(self : GetRootNodeOptions) -> Bool? {
+  let result = get_root_node_options_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

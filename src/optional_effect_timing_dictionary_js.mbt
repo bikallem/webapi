@@ -24,3 +24,37 @@ extern "js" fn optional_effect_timing_ffi(
 
 ///|
 extern "js" fn optional_effect_timing_empty_ffi() -> OptionalEffectTiming = "() => {}"
+
+///|
+extern "js" fn optional_effect_timing_get_delay_ffi(obj : JsValue) -> JsValue = "(obj) => obj.delay"
+
+///|
+extern "js" fn optional_effect_timing_get_end_delay_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.endDelay"
+
+///|
+extern "js" fn optional_effect_timing_get_fill_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fill"
+
+///|
+extern "js" fn optional_effect_timing_get_iteration_start_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterationStart"
+
+///|
+extern "js" fn optional_effect_timing_get_iterations_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterations"
+
+///|
+extern "js" fn optional_effect_timing_get_duration_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.duration"
+
+///|
+extern "js" fn optional_effect_timing_get_direction_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.direction"
+
+///|
+extern "js" fn optional_effect_timing_get_easing_ffi(obj : JsValue) -> JsValue = "(obj) => obj.easing"

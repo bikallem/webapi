@@ -8,3 +8,6 @@ extern "js" fn text_decode_options_ffi(stream : JsValue) -> TextDecodeOptions =
 
 ///|
 extern "js" fn text_decode_options_empty_ffi() -> TextDecodeOptions = "() => {}"
+
+///|
+extern "js" fn text_decode_options_get_stream_ffi(obj : JsValue) -> JsValue = "(obj) => obj.stream"

@@ -25,3 +25,23 @@ pub fn BlobPropertyBag::new(
 pub fn BlobPropertyBag::empty() -> BlobPropertyBag {
   blob_property_bag_empty_ffi()
 }
+
+///|
+pub fn BlobPropertyBag::type_(self : BlobPropertyBag) -> String? {
+  let result = blob_property_bag_get_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn BlobPropertyBag::endings(self : BlobPropertyBag) -> EndingType? {
+  let result = blob_property_bag_get_endings_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

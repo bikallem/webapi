@@ -66,6 +66,18 @@ pub(all) struct DictionaryEmitter {
 }
 pub impl Emitter for DictionaryEmitter
 
+pub(all) struct DictionaryGetterArg {
+  dict_name : String
+  original_name : String
+  return_type : String
+  is_optional : Bool
+  is_enum_type : Bool
+  is_valid_wasm_stub : Bool
+  is_primitive : Bool
+}
+pub impl Show for DictionaryGetterArg
+pub impl ToJson for DictionaryGetterArg
+
 pub enum Emit {
   External(TypeName)
   ImplTJsValue(TypeName)
@@ -79,6 +91,7 @@ pub enum Emit {
   UnionArgTrait(TraitName)
   UnionArgTraitImpl(TypeName, TraitName)
   DictionaryCreate(TypeName, Array[@type_mapping.MethodArg])
+  DictionaryGetter(TypeName, Array[DictionaryGetterArg])
   ConstructorMethod(ConstructorName, TypeName, Array[@type_mapping.MethodArg])
   Enum(TypeName, Array[EnumVariantEmit])
   TypedefAlias(TypeName, String)

@@ -50,7 +50,11 @@ fn overload_candidate_name(
   }
 
   // Coordinate overloads for scrolling
-  if (base_name == "scroll" || base_name == "scroll_to" || base_name == "scroll_by") &&
+  if (
+      base_name == "scroll" ||
+      base_name == "scroll_to" ||
+      base_name == "scroll_by"
+    ) &&
     exact_names(names, ["x", "y"]) {
     return "\{base_name}_xy"
   }
@@ -66,17 +70,20 @@ fn overload_candidate_name(
     return "set_transform_matrix"
   }
   if (base_name == "fill" || base_name == "stroke" || base_name == "clip") &&
-    names.length() > 0 && names[0] == "path" {
+    names.length() > 0 &&
+    names[0] == "path" {
     return "\{base_name}_path"
   }
   if base_name == "is_point_in_path" && names.length() > 0 && names[0] == "path" {
     return "is_point_in_path_with_path"
   }
-  if base_name == "is_point_in_stroke" && names.length() > 0 &&
+  if base_name == "is_point_in_stroke" &&
+    names.length() > 0 &&
     names[0] == "path" {
     return "is_point_in_stroke_with_path"
   }
-  if base_name == "draw_focus_if_needed" && names.length() > 0 &&
+  if base_name == "draw_focus_if_needed" &&
+    names.length() > 0 &&
     names[0] == "path" {
     return "draw_focus_if_needed_path"
   }
@@ -99,8 +106,11 @@ fn overload_candidate_name(
 
   // Open overloads
   if base_name == "open" &&
-    (has_name(names, "async_") || has_name(names, "username") ||
-      has_name(names, "password")) {
+    (
+      has_name(names, "async_") ||
+      has_name(names, "username") ||
+      has_name(names, "password")
+    ) {
     return "open_with_credentials"
   }
   if base_name == "open" && exact_names(names, ["url", "name", "features"]) {
@@ -138,9 +148,7 @@ fn overload_candidate_name(
   }
 
   // Constructors
-  if base_name == "new" &&
-    has_name(names, "data") &&
-    has_name(names, "sw") {
+  if base_name == "new" && has_name(names, "data") && has_name(names, "sw") {
     return "new_from_array"
   }
 

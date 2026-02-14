@@ -12,3 +12,11 @@ extern "js" fn get_animations_options_ffi(
 
 ///|
 extern "js" fn get_animations_options_empty_ffi() -> GetAnimationsOptions = "() => {}"
+
+///|
+extern "js" fn get_animations_options_get_subtree_ffi(obj : JsValue) -> JsValue = "(obj) => obj.subtree"
+
+///|
+extern "js" fn get_animations_options_get_pseudo_element_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pseudoElement"

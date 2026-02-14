@@ -34,3 +34,59 @@ pub fn PageSwapEventInit::new(
 pub fn PageSwapEventInit::empty() -> PageSwapEventInit {
   page_swap_event_init_empty_ffi()
 }
+
+///|
+pub fn PageSwapEventInit::bubbles(self : PageSwapEventInit) -> Bool? {
+  let result = page_swap_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PageSwapEventInit::cancelable(self : PageSwapEventInit) -> Bool? {
+  let result = page_swap_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PageSwapEventInit::composed(self : PageSwapEventInit) -> Bool? {
+  let result = page_swap_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PageSwapEventInit::activation(
+  self : PageSwapEventInit,
+) -> NavigationActivation? {
+  let result = page_swap_event_init_get_activation_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn PageSwapEventInit::view_transition(
+  self : PageSwapEventInit,
+) -> ViewTransition? {
+  let result = page_swap_event_init_get_view_transition_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

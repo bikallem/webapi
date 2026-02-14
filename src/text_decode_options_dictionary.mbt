@@ -22,3 +22,13 @@ pub fn TextDecodeOptions::new(stream? : Bool = false) -> TextDecodeOptions {
 pub fn TextDecodeOptions::empty() -> TextDecodeOptions {
   text_decode_options_empty_ffi()
 }
+
+///|
+pub fn TextDecodeOptions::stream(self : TextDecodeOptions) -> Bool? {
+  let result = text_decode_options_get_stream_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

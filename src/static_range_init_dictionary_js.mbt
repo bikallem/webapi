@@ -16,3 +16,43 @@ extern "js" fn static_range_init_ffi(
 
 ///|
 extern "js" fn static_range_init_empty_ffi() -> StaticRangeInit = "() => {}"
+
+///|
+extern "js" fn static_range_init_get_start_container_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.startContainer"
+
+///|
+fn static_range_init_get_start_container_ffi(obj : JsValue) -> Node {
+  static_range_init_get_start_container_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn static_range_init_get_start_offset_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.startOffset"
+
+///|
+fn static_range_init_get_start_offset_ffi(obj : JsValue) -> UInt {
+  static_range_init_get_start_offset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn static_range_init_get_end_container_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.endContainer"
+
+///|
+fn static_range_init_get_end_container_ffi(obj : JsValue) -> Node {
+  static_range_init_get_end_container_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn static_range_init_get_end_offset_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.endOffset"
+
+///|
+fn static_range_init_get_end_offset_ffi(obj : JsValue) -> UInt {
+  static_range_init_get_end_offset_ffi_js(obj).unsafe_cast()
+}

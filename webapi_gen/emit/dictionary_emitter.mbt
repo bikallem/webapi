@@ -29,6 +29,30 @@ pub impl Emitter for DictionaryEmitter with emit(
   ..push_iter(arg_emits.iter())
   ..push(Emit::DictionaryCreate(dict.name, args)) // empty constructor
   .push(Emit::EmptyMethod(dict.name))
+  // Emit property getters for each dictionary member
+  let getter_args : Array[DictionaryGetterArg] = []
+  for mem in dict.members {
+    let (mbt_type, extra_emits) = arg_mbt_type(
+      mem.type_,
+      dict.name,
+      "get",
+      mem.name,
+      self.type_registry,
+    )
+    emits.push_iter(extra_emits.iter())
+    emit_union_return_type(mbt_type, emits)
+    let return_type_name = mbt_type.name()
+    getter_args.push(DictionaryGetterArg::{
+      dict_name: dict.name,
+      original_name: mem.name,
+      return_type: return_type_name,
+      is_optional: !mem.required,
+      is_enum_type: is_enum_return(mbt_type),
+      is_valid_wasm_stub: is_wasm_valid_stub_type(mbt_type),
+      is_primitive: mbt_type is Primitive(_),
+    })
+  }
+  emits.push(Emit::DictionaryGetter(dict.name, getter_args))
   (filename, emits)
 }
 
@@ -94,6 +118,51 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|
       #|pub fn CanvasRenderingContext2DSettings::empty() -> CanvasRenderingContext2DSettings { canvas_rendering_context2d_settings_empty_ffi() }
       #|
+      #|pub fn CanvasRenderingContext2DSettings::alpha(self : CanvasRenderingContext2DSettings) -> Bool? {
+      #|  let result = canvas_rendering_context2d_settings_get_alpha_ffi(TJsValue::to_js(self))
+      #|  if JsValue::is_null(result) {
+      #|    None
+      #|  } else {
+      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+      #|  }
+      #|}
+      #|
+      #|pub fn CanvasRenderingContext2DSettings::desynchronized(self : CanvasRenderingContext2DSettings) -> Bool? {
+      #|  let result = canvas_rendering_context2d_settings_get_desynchronized_ffi(TJsValue::to_js(self))
+      #|  if JsValue::is_null(result) {
+      #|    None
+      #|  } else {
+      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+      #|  }
+      #|}
+      #|
+      #|pub fn CanvasRenderingContext2DSettings::color_space(self : CanvasRenderingContext2DSettings) -> PredefinedColorSpace? {
+      #|  let result = canvas_rendering_context2d_settings_get_color_space_ffi(TJsValue::to_js(self))
+      #|  if JsValue::is_null(result) {
+      #|    None
+      #|  } else {
+      #|    Some(result.unsafe_cast())
+      #|  }
+      #|}
+      #|
+      #|pub fn CanvasRenderingContext2DSettings::color_type(self : CanvasRenderingContext2DSettings) -> CanvasColorType? {
+      #|  let result = canvas_rendering_context2d_settings_get_color_type_ffi(TJsValue::to_js(self))
+      #|  if JsValue::is_null(result) {
+      #|    None
+      #|  } else {
+      #|    Some(result.unsafe_cast())
+      #|  }
+      #|}
+      #|
+      #|pub fn CanvasRenderingContext2DSettings::will_read_frequently(self : CanvasRenderingContext2DSettings) -> Bool? {
+      #|  let result = canvas_rendering_context2d_settings_get_will_read_frequently_ffi(TJsValue::to_js(self))
+      #|  if JsValue::is_null(result) {
+      #|    None
+      #|  } else {
+      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+      #|  }
+      #|}
+      #|
       #|extern "js" fn canvas_rendering_context2d_settings_ffi(alpha: JsValue, desynchronized: JsValue, color_space: JsValue, color_type: JsValue, will_read_frequently: JsValue) -> CanvasRenderingContext2DSettings = 
       #|#|(alpha, desynchronized, colorSpace, colorType, willReadFrequently) => {
       #|#|  const obj = {};
@@ -106,7 +175,16 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|#|}
       #|
       #|extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
-
+      #|
+      #|extern "js" fn canvas_rendering_context2d_settings_get_alpha_ffi(obj: JsValue) -> JsValue = "(obj) => obj.alpha"
+      #|
+      #|extern "js" fn canvas_rendering_context2d_settings_get_desynchronized_ffi(obj: JsValue) -> JsValue = "(obj) => obj.desynchronized"
+      #|
+      #|extern "js" fn canvas_rendering_context2d_settings_get_color_space_ffi(obj: JsValue) -> JsValue = "(obj) => obj.colorSpace"
+      #|
+      #|extern "js" fn canvas_rendering_context2d_settings_get_color_type_ffi(obj: JsValue) -> JsValue = "(obj) => obj.colorType"
+      #|
+      #|extern "js" fn canvas_rendering_context2d_settings_get_will_read_frequently_ffi(obj: JsValue) -> JsValue = "(obj) => obj.willReadFrequently"
     ),
   )
 }

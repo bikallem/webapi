@@ -77,7 +77,6 @@ test "emit_callback simple EventListener" {
       #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
       #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
-
     ),
   )
 }
@@ -115,7 +114,6 @@ test "emit_callback keeps interface argument as concrete callback type" {
       #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
       #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
-
     ),
   )
 }
@@ -152,7 +150,6 @@ test "emit_callback multi-arg MutationCallback" {
       #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
       #|
       #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
-
     ),
   )
 }
@@ -189,7 +186,6 @@ test "js_code_gen Callback generates correct code" {
       #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
       #|
       #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
-
     ),
   )
 }
@@ -226,7 +222,6 @@ test "js_code_gen Callback with multiple args" {
       #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
       #|
       #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
-
     ),
   )
 }

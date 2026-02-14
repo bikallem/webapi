@@ -20,3 +20,21 @@ extern "js" fn toggle_event_init_ffi(
 
 ///|
 extern "js" fn toggle_event_init_empty_ffi() -> ToggleEventInit = "() => {}"
+
+///|
+extern "js" fn toggle_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn toggle_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn toggle_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn toggle_event_init_get_old_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.oldState"
+
+///|
+extern "js" fn toggle_event_init_get_new_state_ffi(obj : JsValue) -> JsValue = "(obj) => obj.newState"
+
+///|
+extern "js" fn toggle_event_init_get_source_ffi(obj : JsValue) -> JsValue = "(obj) => obj.source"

@@ -34,3 +34,43 @@ pub fn SVGBoundingBoxOptions::new(
 pub fn SVGBoundingBoxOptions::empty() -> SVGBoundingBoxOptions {
   svg_bounding_box_options_empty_ffi()
 }
+
+///|
+pub fn SVGBoundingBoxOptions::fill(self : SVGBoundingBoxOptions) -> Bool? {
+  let result = svg_bounding_box_options_get_fill_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn SVGBoundingBoxOptions::stroke(self : SVGBoundingBoxOptions) -> Bool? {
+  let result = svg_bounding_box_options_get_stroke_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn SVGBoundingBoxOptions::markers(self : SVGBoundingBoxOptions) -> Bool? {
+  let result = svg_bounding_box_options_get_markers_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn SVGBoundingBoxOptions::clipped(self : SVGBoundingBoxOptions) -> Bool? {
+  let result = svg_bounding_box_options_get_clipped_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

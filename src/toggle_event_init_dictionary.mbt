@@ -36,3 +36,63 @@ pub fn ToggleEventInit::new(
 pub fn ToggleEventInit::empty() -> ToggleEventInit {
   toggle_event_init_empty_ffi()
 }
+
+///|
+pub fn ToggleEventInit::bubbles(self : ToggleEventInit) -> Bool? {
+  let result = toggle_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ToggleEventInit::cancelable(self : ToggleEventInit) -> Bool? {
+  let result = toggle_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ToggleEventInit::composed(self : ToggleEventInit) -> Bool? {
+  let result = toggle_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ToggleEventInit::old_state(self : ToggleEventInit) -> String? {
+  let result = toggle_event_init_get_old_state_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ToggleEventInit::new_state(self : ToggleEventInit) -> String? {
+  let result = toggle_event_init_get_new_state_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ToggleEventInit::source(self : ToggleEventInit) -> Element? {
+  let result = toggle_event_init_get_source_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

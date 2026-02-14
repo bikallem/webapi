@@ -16,3 +16,21 @@ extern "js" fn stream_pipe_options_ffi(
 
 ///|
 extern "js" fn stream_pipe_options_empty_ffi() -> StreamPipeOptions = "() => {}"
+
+///|
+extern "js" fn stream_pipe_options_get_prevent_close_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preventClose"
+
+///|
+extern "js" fn stream_pipe_options_get_prevent_abort_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preventAbort"
+
+///|
+extern "js" fn stream_pipe_options_get_prevent_cancel_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preventCancel"
+
+///|
+extern "js" fn stream_pipe_options_get_signal_ffi(obj : JsValue) -> JsValue = "(obj) => obj.signal"

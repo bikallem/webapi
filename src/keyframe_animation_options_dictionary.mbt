@@ -44,3 +44,121 @@ pub fn KeyframeAnimationOptions::new(
 pub fn KeyframeAnimationOptions::empty() -> KeyframeAnimationOptions {
   keyframe_animation_options_empty_ffi()
 }
+
+///|
+pub fn KeyframeAnimationOptions::fill(
+  self : KeyframeAnimationOptions,
+) -> FillMode? {
+  let result = keyframe_animation_options_get_fill_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::iteration_start(
+  self : KeyframeAnimationOptions,
+) -> Double? {
+  let result = keyframe_animation_options_get_iteration_start_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::iterations(
+  self : KeyframeAnimationOptions,
+) -> Double? {
+  let result = keyframe_animation_options_get_iterations_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::direction(
+  self : KeyframeAnimationOptions,
+) -> PlaybackDirection? {
+  let result = keyframe_animation_options_get_direction_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::easing(
+  self : KeyframeAnimationOptions,
+) -> String? {
+  let result = keyframe_animation_options_get_easing_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::composite(
+  self : KeyframeAnimationOptions,
+) -> CompositeOperation? {
+  let result = keyframe_animation_options_get_composite_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::pseudo_element(
+  self : KeyframeAnimationOptions,
+) -> CSSOMString? {
+  let result = keyframe_animation_options_get_pseudo_element_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::id(self : KeyframeAnimationOptions) -> String? {
+  let result = keyframe_animation_options_get_id_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn KeyframeAnimationOptions::timeline(
+  self : KeyframeAnimationOptions,
+) -> AnimationTimeline? {
+  let result = keyframe_animation_options_get_timeline_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

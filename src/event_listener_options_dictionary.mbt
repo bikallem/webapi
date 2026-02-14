@@ -26,3 +26,13 @@ pub fn EventListenerOptions::new(
 pub fn EventListenerOptions::empty() -> EventListenerOptions {
   event_listener_options_empty_ffi()
 }
+
+///|
+pub fn EventListenerOptions::capture(self : EventListenerOptions) -> Bool? {
+  let result = event_listener_options_get_capture_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

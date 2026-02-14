@@ -74,3 +74,141 @@ pub fn IntersectionObserverInit::new(
 pub fn IntersectionObserverInit::empty() -> IntersectionObserverInit {
   intersection_observer_init_empty_ffi()
 }
+
+///|
+pub(open) trait TIntersectionObserverInitGetRoot {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TIntersectionObserverInitGetRoot for Element with to_js(self : Element) -> JsValue = "%identity"
+
+///|
+pub impl TIntersectionObserverInitGetRoot for Document with to_js(
+  self : Document,
+) -> JsValue = "%identity"
+
+///|
+/// [IntersectionObserverInitGetRoot](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverInitGetRoot)
+#external
+pub type IntersectionObserverInitGetRoot
+
+///|
+pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::into(
+  self : IntersectionObserverInitGetRoot,
+) -> T = "%identity"
+
+///|
+pub impl TIntersectionObserverInitGetRoot for IntersectionObserverInitGetRoot with to_js(
+  self : IntersectionObserverInitGetRoot,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TIntersectionObserverInitGetThreshold {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TIntersectionObserverInitGetThreshold for Double with to_js(
+  self : Double,
+) -> JsValue {
+  TJsValue::to_js(self)
+}
+
+///|
+pub impl TIntersectionObserverInitGetThreshold for Array[Double] with to_js(
+  self : Array[Double],
+) -> JsValue = "%identity"
+
+///|
+/// [IntersectionObserverInitGetThreshold](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverInitGetThreshold)
+#external
+pub type IntersectionObserverInitGetThreshold
+
+///|
+pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThreshold::into(
+  self : IntersectionObserverInitGetThreshold,
+) -> T = "%identity"
+
+///|
+pub impl TIntersectionObserverInitGetThreshold for IntersectionObserverInitGetThreshold with to_js(
+  self : IntersectionObserverInitGetThreshold,
+) -> JsValue = "%identity"
+
+///|
+pub fn IntersectionObserverInit::root(
+  self : IntersectionObserverInit,
+) -> IntersectionObserverInitGetRoot? {
+  let result = intersection_observer_init_get_root_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn IntersectionObserverInit::root_margin(
+  self : IntersectionObserverInit,
+) -> String? {
+  let result = intersection_observer_init_get_root_margin_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IntersectionObserverInit::scroll_margin(
+  self : IntersectionObserverInit,
+) -> String? {
+  let result = intersection_observer_init_get_scroll_margin_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IntersectionObserverInit::threshold(
+  self : IntersectionObserverInit,
+) -> IntersectionObserverInitGetThreshold? {
+  let result = intersection_observer_init_get_threshold_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn IntersectionObserverInit::delay(self : IntersectionObserverInit) -> Int? {
+  let result = intersection_observer_init_get_delay_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IntersectionObserverInit::track_visibility(
+  self : IntersectionObserverInit,
+) -> Bool? {
+  let result = intersection_observer_init_get_track_visibility_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

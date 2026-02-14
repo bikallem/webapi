@@ -5,3 +5,8 @@ fn navigation_update_current_entry_options_ffi(
 
 ///|
 fn navigation_update_current_entry_options_empty_ffi() -> NavigationUpdateCurrentEntryOptions = "webapi_Dictionary" "empty"
+
+///|
+fn navigation_update_current_entry_options_get_state_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_NavigationUpdateCurrentEntryOptions" "get_state"

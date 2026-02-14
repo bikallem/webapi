@@ -25,3 +25,23 @@ pub fn TextDecoderOptions::new(
 pub fn TextDecoderOptions::empty() -> TextDecoderOptions {
   text_decoder_options_empty_ffi()
 }
+
+///|
+pub fn TextDecoderOptions::fatal(self : TextDecoderOptions) -> Bool? {
+  let result = text_decoder_options_get_fatal_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TextDecoderOptions::ignore_bom(self : TextDecoderOptions) -> Bool? {
+  let result = text_decoder_options_get_ignore_bom_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

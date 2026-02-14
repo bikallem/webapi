@@ -6,3 +6,9 @@ fn idb_index_parameters_ffi(
 
 ///|
 fn idb_index_parameters_empty_ffi() -> IDBIndexParameters = "webapi_Dictionary" "empty"
+
+///|
+fn idb_index_parameters_get_unique_ffi(obj : JsValue) -> JsValue = "webapi_IDBIndexParameters" "get_unique"
+
+///|
+fn idb_index_parameters_get_multi_entry_ffi(obj : JsValue) -> JsValue = "webapi_IDBIndexParameters" "get_multiEntry"

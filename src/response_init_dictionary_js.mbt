@@ -14,3 +14,12 @@ extern "js" fn response_init_ffi(
 
 ///|
 extern "js" fn response_init_empty_ffi() -> ResponseInit = "() => {}"
+
+///|
+extern "js" fn response_init_get_status_ffi(obj : JsValue) -> JsValue = "(obj) => obj.status"
+
+///|
+extern "js" fn response_init_get_status_text_ffi(obj : JsValue) -> JsValue = "(obj) => obj.statusText"
+
+///|
+extern "js" fn response_init_get_headers_ffi(obj : JsValue) -> JsValue = "(obj) => obj.headers"

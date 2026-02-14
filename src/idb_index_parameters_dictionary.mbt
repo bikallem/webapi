@@ -28,3 +28,23 @@ pub fn IDBIndexParameters::new(
 pub fn IDBIndexParameters::empty() -> IDBIndexParameters {
   idb_index_parameters_empty_ffi()
 }
+
+///|
+pub fn IDBIndexParameters::unique(self : IDBIndexParameters) -> Bool? {
+  let result = idb_index_parameters_get_unique_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IDBIndexParameters::multi_entry(self : IDBIndexParameters) -> Bool? {
+  let result = idb_index_parameters_get_multi_entry_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

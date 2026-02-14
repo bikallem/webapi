@@ -14,3 +14,16 @@ extern "js" fn performance_observer_init_ffi(
 
 ///|
 extern "js" fn performance_observer_init_empty_ffi() -> PerformanceObserverInit = "() => {}"
+
+///|
+extern "js" fn performance_observer_init_get_entry_types_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.entryTypes"
+
+///|
+extern "js" fn performance_observer_init_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+extern "js" fn performance_observer_init_get_buffered_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.buffered"

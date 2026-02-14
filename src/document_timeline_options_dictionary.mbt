@@ -26,3 +26,17 @@ pub fn DocumentTimelineOptions::new(
 pub fn DocumentTimelineOptions::empty() -> DocumentTimelineOptions {
   document_timeline_options_empty_ffi()
 }
+
+///|
+pub fn DocumentTimelineOptions::origin_time(
+  self : DocumentTimelineOptions,
+) -> DOMHighResTimeStamp? {
+  let result = document_timeline_options_get_origin_time_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

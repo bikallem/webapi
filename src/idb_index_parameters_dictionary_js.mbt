@@ -12,3 +12,11 @@ extern "js" fn idb_index_parameters_ffi(
 
 ///|
 extern "js" fn idb_index_parameters_empty_ffi() -> IDBIndexParameters = "() => {}"
+
+///|
+extern "js" fn idb_index_parameters_get_unique_ffi(obj : JsValue) -> JsValue = "(obj) => obj.unique"
+
+///|
+extern "js" fn idb_index_parameters_get_multi_entry_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.multiEntry"

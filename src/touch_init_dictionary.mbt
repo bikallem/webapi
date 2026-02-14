@@ -54,3 +54,143 @@ pub fn TouchInit::new(
 pub fn TouchInit::empty() -> TouchInit {
   touch_init_empty_ffi()
 }
+
+///|
+pub fn TouchInit::identifier(self : TouchInit) -> Int {
+  touch_init_get_identifier_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn TouchInit::target(self : TouchInit) -> EventTarget {
+  touch_init_get_target_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn TouchInit::client_x(self : TouchInit) -> Double? {
+  let result = touch_init_get_client_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::client_y(self : TouchInit) -> Double? {
+  let result = touch_init_get_client_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::screen_x(self : TouchInit) -> Double? {
+  let result = touch_init_get_screen_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::screen_y(self : TouchInit) -> Double? {
+  let result = touch_init_get_screen_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::page_x(self : TouchInit) -> Double? {
+  let result = touch_init_get_page_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::page_y(self : TouchInit) -> Double? {
+  let result = touch_init_get_page_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::radius_x(self : TouchInit) -> Float? {
+  let result = touch_init_get_radius_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::radius_y(self : TouchInit) -> Float? {
+  let result = touch_init_get_radius_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::rotation_angle(self : TouchInit) -> Float? {
+  let result = touch_init_get_rotation_angle_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::force(self : TouchInit) -> Float? {
+  let result = touch_init_get_force_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::altitude_angle(self : TouchInit) -> Double? {
+  let result = touch_init_get_altitude_angle_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::azimuth_angle(self : TouchInit) -> Double? {
+  let result = touch_init_get_azimuth_angle_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TouchInit::touch_type(self : TouchInit) -> TouchType? {
+  let result = touch_init_get_touch_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

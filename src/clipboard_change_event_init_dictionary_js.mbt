@@ -18,3 +18,28 @@ extern "js" fn clipboard_change_event_init_ffi(
 
 ///|
 extern "js" fn clipboard_change_event_init_empty_ffi() -> ClipboardChangeEventInit = "() => {}"
+
+///|
+extern "js" fn clipboard_change_event_init_get_bubbles_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn clipboard_change_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn clipboard_change_event_init_get_composed_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn clipboard_change_event_init_get_types_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.types"
+
+///|
+extern "js" fn clipboard_change_event_init_get_change_id_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.changeId"

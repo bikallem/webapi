@@ -7,9 +7,7 @@ fn main {
   let heading = doc.create_element("h1")
   heading.set_text_content("Screen Orientation Demo")
 
-  let type_str = fn() -> String {
-    orientation.type_().value()
-  }
+  let type_str = fn() -> String { orientation.type_().value() }
 
   let type_div = doc.create_element("div")
   type_div

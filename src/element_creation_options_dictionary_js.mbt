@@ -12,3 +12,11 @@ extern "js" fn element_creation_options_ffi(
 
 ///|
 extern "js" fn element_creation_options_empty_ffi() -> ElementCreationOptions = "() => {}"
+
+///|
+extern "js" fn element_creation_options_get_custom_element_registry_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.customElementRegistry"
+
+///|
+extern "js" fn element_creation_options_get_is_ffi(obj : JsValue) -> JsValue = "(obj) => obj.is"

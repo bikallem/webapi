@@ -48,3 +48,83 @@ extern "js" fn event_modifier_init_ffi(
 
 ///|
 extern "js" fn event_modifier_init_empty_ffi() -> EventModifierInit = "() => {}"
+
+///|
+extern "js" fn event_modifier_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn event_modifier_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn event_modifier_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn event_modifier_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+extern "js" fn event_modifier_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+extern "js" fn event_modifier_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"
+
+///|
+extern "js" fn event_modifier_init_get_ctrl_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.ctrlKey"
+
+///|
+extern "js" fn event_modifier_init_get_shift_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.shiftKey"
+
+///|
+extern "js" fn event_modifier_init_get_alt_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.altKey"
+
+///|
+extern "js" fn event_modifier_init_get_meta_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.metaKey"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_alt_graph_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierAltGraph"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_caps_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierCapsLock"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_fn_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierFn"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_fn_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierFnLock"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_hyper_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierHyper"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_num_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierNumLock"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_scroll_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierScrollLock"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_super_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSuper"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_symbol_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSymbol"
+
+///|
+extern "js" fn event_modifier_init_get_modifier_symbol_lock_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.modifierSymbolLock"

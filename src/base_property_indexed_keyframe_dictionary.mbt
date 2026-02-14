@@ -90,3 +90,137 @@ pub fn BasePropertyIndexedKeyframe::new(
 pub fn BasePropertyIndexedKeyframe::empty() -> BasePropertyIndexedKeyframe {
   base_property_indexed_keyframe_empty_ffi()
 }
+
+///|
+pub(open) trait TBasePropertyIndexedKeyframeGetOffset {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetOffset for Double with to_js(
+  self : Double,
+) -> JsValue {
+  TJsValue::to_js(self)
+}
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetOffset for Array[Double] with to_js(
+  self : Array[Double],
+) -> JsValue = "%identity"
+
+///|
+/// [BasePropertyIndexedKeyframeGetOffset](https://developer.mozilla.org/en-US/docs/Web/API/BasePropertyIndexedKeyframeGetOffset)
+#external
+pub type BasePropertyIndexedKeyframeGetOffset
+
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::into(
+  self : BasePropertyIndexedKeyframeGetOffset,
+) -> T = "%identity"
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetOffset for BasePropertyIndexedKeyframeGetOffset with to_js(
+  self : BasePropertyIndexedKeyframeGetOffset,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TBasePropertyIndexedKeyframeGetEasing {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetEasing for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetEasing for Array[String] with to_js(
+  self : Array[String],
+) -> JsValue = "%identity"
+
+///|
+/// [BasePropertyIndexedKeyframeGetEasing](https://developer.mozilla.org/en-US/docs/Web/API/BasePropertyIndexedKeyframeGetEasing)
+#external
+pub type BasePropertyIndexedKeyframeGetEasing
+
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::into(
+  self : BasePropertyIndexedKeyframeGetEasing,
+) -> T = "%identity"
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetEasing for BasePropertyIndexedKeyframeGetEasing with to_js(
+  self : BasePropertyIndexedKeyframeGetEasing,
+) -> JsValue = "%identity"
+
+///|
+pub(open) trait TBasePropertyIndexedKeyframeGetComposite {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetComposite for CompositeOperationOrAuto with to_js(
+  self : CompositeOperationOrAuto,
+) -> JsValue = "%identity"
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetComposite for Array[
+  CompositeOperationOrAuto,
+] with to_js(self : Array[CompositeOperationOrAuto]) -> JsValue = "%identity"
+
+///|
+/// [BasePropertyIndexedKeyframeGetComposite](https://developer.mozilla.org/en-US/docs/Web/API/BasePropertyIndexedKeyframeGetComposite)
+#external
+pub type BasePropertyIndexedKeyframeGetComposite
+
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::into(
+  self : BasePropertyIndexedKeyframeGetComposite,
+) -> T = "%identity"
+
+///|
+pub impl TBasePropertyIndexedKeyframeGetComposite for BasePropertyIndexedKeyframeGetComposite with to_js(
+  self : BasePropertyIndexedKeyframeGetComposite,
+) -> JsValue = "%identity"
+
+///|
+pub fn BasePropertyIndexedKeyframe::offset(
+  self : BasePropertyIndexedKeyframe,
+) -> BasePropertyIndexedKeyframeGetOffset? {
+  let result = base_property_indexed_keyframe_get_offset_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn BasePropertyIndexedKeyframe::easing(
+  self : BasePropertyIndexedKeyframe,
+) -> BasePropertyIndexedKeyframeGetEasing? {
+  let result = base_property_indexed_keyframe_get_easing_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn BasePropertyIndexedKeyframe::composite(
+  self : BasePropertyIndexedKeyframe,
+) -> BasePropertyIndexedKeyframeGetComposite? {
+  let result = base_property_indexed_keyframe_get_composite_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

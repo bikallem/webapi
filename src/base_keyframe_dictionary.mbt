@@ -30,3 +30,35 @@ pub fn BaseKeyframe::new(
 pub fn BaseKeyframe::empty() -> BaseKeyframe {
   base_keyframe_empty_ffi()
 }
+
+///|
+pub fn BaseKeyframe::offset(self : BaseKeyframe) -> Double? {
+  let result = base_keyframe_get_offset_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn BaseKeyframe::easing(self : BaseKeyframe) -> String? {
+  let result = base_keyframe_get_easing_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn BaseKeyframe::composite(
+  self : BaseKeyframe,
+) -> CompositeOperationOrAuto? {
+  let result = base_keyframe_get_composite_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

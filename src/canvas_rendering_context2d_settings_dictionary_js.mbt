@@ -18,3 +18,28 @@ extern "js" fn canvas_rendering_context2d_settings_ffi(
 
 ///|
 extern "js" fn canvas_rendering_context2d_settings_empty_ffi() -> CanvasRenderingContext2DSettings = "() => {}"
+
+///|
+extern "js" fn canvas_rendering_context2d_settings_get_alpha_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.alpha"
+
+///|
+extern "js" fn canvas_rendering_context2d_settings_get_desynchronized_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.desynchronized"
+
+///|
+extern "js" fn canvas_rendering_context2d_settings_get_color_space_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.colorSpace"
+
+///|
+extern "js" fn canvas_rendering_context2d_settings_get_color_type_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.colorType"
+
+///|
+extern "js" fn canvas_rendering_context2d_settings_get_will_read_frequently_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.willReadFrequently"

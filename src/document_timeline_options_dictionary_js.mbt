@@ -10,3 +10,8 @@ extern "js" fn document_timeline_options_ffi(
 
 ///|
 extern "js" fn document_timeline_options_empty_ffi() -> DocumentTimelineOptions = "() => {}"
+
+///|
+extern "js" fn document_timeline_options_get_origin_time_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.originTime"

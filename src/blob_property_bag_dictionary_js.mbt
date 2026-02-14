@@ -12,3 +12,9 @@ extern "js" fn blob_property_bag_ffi(
 
 ///|
 extern "js" fn blob_property_bag_empty_ffi() -> BlobPropertyBag = "() => {}"
+
+///|
+extern "js" fn blob_property_bag_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+extern "js" fn blob_property_bag_get_endings_ffi(obj : JsValue) -> JsValue = "(obj) => obj.endings"

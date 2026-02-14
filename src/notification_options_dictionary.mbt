@@ -57,3 +57,165 @@ pub fn NotificationOptions::new(
 pub fn NotificationOptions::empty() -> NotificationOptions {
   notification_options_empty_ffi()
 }
+
+///|
+pub fn NotificationOptions::dir(
+  self : NotificationOptions,
+) -> NotificationDirection? {
+  let result = notification_options_get_dir_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NotificationOptions::lang(self : NotificationOptions) -> String? {
+  let result = notification_options_get_lang_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::body(self : NotificationOptions) -> String? {
+  let result = notification_options_get_body_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::navigate(self : NotificationOptions) -> String? {
+  let result = notification_options_get_navigate_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::tag(self : NotificationOptions) -> String? {
+  let result = notification_options_get_tag_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::image(self : NotificationOptions) -> String? {
+  let result = notification_options_get_image_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::icon(self : NotificationOptions) -> String? {
+  let result = notification_options_get_icon_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::badge(self : NotificationOptions) -> String? {
+  let result = notification_options_get_badge_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::vibrate(
+  self : NotificationOptions,
+) -> VibratePattern? {
+  let result = notification_options_get_vibrate_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NotificationOptions::timestamp(
+  self : NotificationOptions,
+) -> EpochTimeStamp? {
+  let result = notification_options_get_timestamp_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NotificationOptions::renotify(self : NotificationOptions) -> Bool? {
+  let result = notification_options_get_renotify_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::silent(self : NotificationOptions) -> Bool? {
+  let result = notification_options_get_silent_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::require_interaction(
+  self : NotificationOptions,
+) -> Bool? {
+  let result = notification_options_get_require_interaction_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NotificationOptions::data(self : NotificationOptions) -> JsValue? {
+  let result = notification_options_get_data_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NotificationOptions::actions(
+  self : NotificationOptions,
+) -> Array[NotificationAction]? {
+  let result = notification_options_get_actions_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

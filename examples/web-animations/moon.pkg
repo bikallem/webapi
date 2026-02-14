@@ -11,8 +11,5 @@ options(
     },
   },
   "supported-targets": [ "js", "wasm-gc" ],
-  targets: {
-    "helpers_js.mbt": [ "js" ],
-    "helpers_wasm.mbt": [ "wasm-gc" ],
-  },
+  targets: { "helpers_js.mbt": [ "js" ], "helpers_wasm.mbt": [ "wasm-gc" ] },
 )

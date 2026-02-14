@@ -126,7 +126,7 @@ fn emit_js_ffi_with_return(
   return_type_name : String,
   is_optional~ : Bool,
   is_void~ : Bool,
-  is_enum~ : Bool = false,
+  is_enum? : Bool = false,
   js_expr : String,
 ) -> Code {
   let ffi_js_decl_args = ffi_argnames.map(js_safe).join(", ")

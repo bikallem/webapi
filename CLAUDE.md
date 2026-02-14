@@ -11,26 +11,22 @@ This repository generates **type-safe MoonBit bindings** for Web Platform APIs (
 
 ## Essential Commands
 
+**Use the Makefile** — it handles directory changes and multi-step operations correctly:
+
 ```bash
-# Type-check MoonBit code (run frequently during development)
-moon check --target js
-moon check --target wasm-gc
+make gen-test       # Run generator tests (with --update for snapshots: cd webapi_gen && moon test --update)
+make clean gen      # Clean ALL caches then regenerate bindings (ALWAYS clean before gen)
+make check          # Type-check both JS and wasm-gc targets
+make fmt            # Format all MoonBit code
+make info           # Update .mbti interface files
+make build-examples # Build examples for BOTH js and wasm-gc
+make test-playwright # Run Playwright e2e tests
+make all            # Full pipeline: gen → check → fmt → info → build-examples → test-playwright
+make clean          # Remove all build artifacts
+```
 
-# Format MoonBit code
-moon fmt
-
-# Update package interfaces after API changes
-moon info --target js
-
-# Run tests
-moon test
-
-# Run tests with snapshot updates
-moon test --update
-
-# Generate bindings (from webapi_gen directory)
-cd webapi_gen && moon run cmd/main
-
+For individual commands when needed:
+```bash
 # Install npm dependencies (WebIDL specs, from webapi_gen directory)
 cd webapi_gen && npm install
 
@@ -132,13 +128,15 @@ Every generated type (`#external` interfaces, dictionaries, callbacks, typedefs,
 ## Development Workflow
 
 1. Modify code generator in `webapi_gen/`
-2. Run `cd webapi_gen && moon test --update` to verify and update generator tests
-3. Run `cd webapi_gen && moon clean && moon run cmd/main` to regenerate bindings (clean first to avoid stale cache)
-4. Run `moon check --target js && moon check --target wasm-gc` to validate generated code for both targets
-5. Run `moon fmt` to format
-6. Run `moon info --target js` to update `.mbti` interface files
-7. Run `cd examples && moon build --target wasm-gc --release` to build wasm examples
-8. Run `cd tests && npx playwright test` to run end-to-end tests
+2. `make gen-test` (or `cd webapi_gen && moon test --update`) to verify and update generator tests
+3. `make clean gen` to regenerate bindings (**always clean first** — see Critical Caching Pitfall below)
+4. `make check` to validate generated code for both targets
+5. `make fmt` to format
+6. `make info` to update `.mbti` interface files
+7. `make build-examples` to build examples for **both** JS and wasm-gc
+8. `make test-playwright` to run end-to-end tests
+
+Or simply: `make clean all` to run the full pipeline.
 
 ## Release Checklist
 
@@ -182,8 +180,28 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 
 - **Dual target**: This library targets both JS (`--target js`) and wasm-gc (`--target wasm-gc`). Always check both targets.
 - **Generated files**: Never edit files in `src/` directly; modify the generator instead
-- **Generator caching**: Always run `moon clean` in `webapi_gen/` before `moon run cmd/main` after editing generator code, to avoid stale cached binaries producing unchanged output
 - **Pre-commit hooks**: Configure with `git config core.hooksPath .githooks`
+
+### Critical: Generator Caching Pitfall
+
+**Always use `make clean gen` (not just `cd webapi_gen && moon clean && moon run cmd/main`).**
+
+There are THREE separate `_build` directories that can hold stale caches:
+- `/home/blem/projects/webapi/_build` (root project — **this one is easy to miss**)
+- `/home/blem/projects/webapi/webapi_gen/_build` (generator)
+- `/home/blem/projects/webapi/examples/_build` (examples)
+
+Cleaning only `webapi_gen/_build` is **not sufficient**. The root `_build` can also affect the generator output. The `make clean` target cleans all three. After editing generator code, **always** run `make clean` before `make gen`.
+
+**Symptoms of stale cache**: Generated `src/` files don't reflect code changes even after `moon run cmd/main` succeeds. If this happens, verify all three `_build` directories are deleted.
+
+### Critical: Always Build Both Example Targets
+
+When building examples, always build **both** targets. `make build-examples` does this automatically. Missing the JS build causes all JS e2e tests to timeout.
+
+### Playwright Test Timeout
+
+Test timeout is set to **3 seconds** (`tests/playwright.config.ts`). No test should take longer — if it does, the code is broken (likely a missing build or runtime error preventing page load). A fast timeout ensures broken builds fail quickly rather than wasting minutes on 30s timeouts per test.
 
 ## wasm-gc Known Issues
 
@@ -192,5 +210,7 @@ All examples compile for both js and wasm-gc targets except `fetch-async` (requi
 **JsPromise `FromJsAny` trait (resolved)**: `JsPromise::then` now requires `T : FromJsAny` and uses `FromJsAny::from_js_any` instead of `%identity` cast. This correctly handles non-externref types on wasm-gc: Bool (i32), Double (f64), enums (GC types), and Unit. Primitive conversions use FFI helpers (`toBool`, `toInt`, `toDouble`, etc.) in the `webapi_JsPromise` JS module. `Promise<undefined>` is still mapped to `JsPromise[JsValue]` as a conservative choice — switching to `JsPromise[Unit]` is a future API-surface change (see `type_mapping.mbt` lines 282-285).
 
 **Trait-typed default values**: Optional parameters with trait-typed defaults (`&TFoo = value`) are stripped to plain optionals. On wasm-gc, trait references compile to GC struct closures, and the compiler's default value thunk returns externref (incompatible with GC struct types). The code generator strips these defaults and uses `Option + match` with `JsValue::undefined()` for absent values instead.
+
+**`externref` vs `(ref extern)` nullability on wasm-gc (resolved)**: On wasm-gc, `JsValue` maps to `externref` (nullable) and `JsAny`/`String` maps to `(ref extern)` (non-nullable). MoonBit's `unsafe_cast()` generates no wasm instructions — it cannot change nullability. To convert `externref` → `(ref extern)`, use the `jsvalue_to_jsany()` helper (defined in `base.mbt/js_value_wasm.mbt`) which uses the `String?` unwrap trick to emit `ref.as_non_null`. This is needed when passing JsValue results to `FromJsAny::from_js_any()` for primitive type conversions (Bool, Int, Double). See dictionary getter code in `emit.mbt` (`render_dictionary_getter_shared`).
 
 **`unsigned long long` (UInt64) properties on wasm-gc (resolved)**: The JS runtime code generator now wraps return values of `LongLong`, `UnsignedLongLong`, and `Bigint` types with `BigInt()` in generated getters and methods (e.g., `get_version: (obj) => BigInt(obj.version)`). The `is_bigint_type` helper in `emit_js_runtime.mbt` detects these types and the `is_bigint` parameter on `emit_js_getter`/`emit_js_method`/`emit_js_namespace_getter`/`emit_js_namespace_method` controls wrapping.

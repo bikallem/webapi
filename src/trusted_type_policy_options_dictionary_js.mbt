@@ -14,3 +14,18 @@ extern "js" fn trusted_type_policy_options_ffi(
 
 ///|
 extern "js" fn trusted_type_policy_options_empty_ffi() -> TrustedTypePolicyOptions = "() => {}"
+
+///|
+extern "js" fn trusted_type_policy_options_get_create_html_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createHTML"
+
+///|
+extern "js" fn trusted_type_policy_options_get_create_script_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createScript"
+
+///|
+extern "js" fn trusted_type_policy_options_get_create_script_url_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createScriptURL"

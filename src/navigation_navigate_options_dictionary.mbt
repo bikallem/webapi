@@ -32,3 +32,41 @@ pub fn NavigationNavigateOptions::new(
 pub fn NavigationNavigateOptions::empty() -> NavigationNavigateOptions {
   navigation_navigate_options_empty_ffi()
 }
+
+///|
+pub fn NavigationNavigateOptions::info(
+  self : NavigationNavigateOptions,
+) -> JsValue? {
+  let result = navigation_navigate_options_get_info_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NavigationNavigateOptions::state(
+  self : NavigationNavigateOptions,
+) -> JsValue? {
+  let result = navigation_navigate_options_get_state_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NavigationNavigateOptions::history(
+  self : NavigationNavigateOptions,
+) -> NavigationHistoryBehavior? {
+  let result = navigation_navigate_options_get_history_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

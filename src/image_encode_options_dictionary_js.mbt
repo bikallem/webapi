@@ -12,3 +12,9 @@ extern "js" fn image_encode_options_ffi(
 
 ///|
 extern "js" fn image_encode_options_empty_ffi() -> ImageEncodeOptions = "() => {}"
+
+///|
+extern "js" fn image_encode_options_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+extern "js" fn image_encode_options_get_quality_ffi(obj : JsValue) -> JsValue = "(obj) => obj.quality"

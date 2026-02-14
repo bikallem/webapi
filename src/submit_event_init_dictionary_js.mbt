@@ -16,3 +16,15 @@ extern "js" fn submit_event_init_ffi(
 
 ///|
 extern "js" fn submit_event_init_empty_ffi() -> SubmitEventInit = "() => {}"
+
+///|
+extern "js" fn submit_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn submit_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn submit_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn submit_event_init_get_submitter_ffi(obj : JsValue) -> JsValue = "(obj) => obj.submitter"

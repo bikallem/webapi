@@ -10,3 +10,6 @@ extern "js" fn assigned_nodes_options_ffi(
 
 ///|
 extern "js" fn assigned_nodes_options_empty_ffi() -> AssignedNodesOptions = "() => {}"
+
+///|
+extern "js" fn assigned_nodes_options_get_flatten_ffi(obj : JsValue) -> JsValue = "(obj) => obj.flatten"

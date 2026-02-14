@@ -12,7 +12,8 @@ export const wasmImportObject = {
     undefined: () => undefined,
     null: () => null,
     isNull: (value) => value === null || value === undefined,
-    isUndefined: (value) => value === undefined
+    isUndefined: (value) => value === undefined,
+    toString: (v) => '' + v
   },
 
   JsNull: {
@@ -5814,7 +5815,11 @@ export const wasmImportObject = {
       if (markers !== undefined) obj.markers = markers;
       if (clipped !== undefined) obj.clipped = clipped;
       return obj;
-    }
+    },
+    get_fill: (obj) => obj.fill,
+    get_stroke: (obj) => obj.stroke,
+    get_markers: (obj) => obj.markers,
+    get_clipped: (obj) => obj.clipped
   },
 
   webapi_EventInit: {
@@ -5824,7 +5829,10 @@ export const wasmImportObject = {
       if (cancelable !== undefined) obj.cancelable = cancelable;
       if (composed !== undefined) obj.composed = composed;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed
   },
 
   webapi_CustomEventInit: {
@@ -5835,7 +5843,11 @@ export const wasmImportObject = {
       if (composed !== undefined) obj.composed = composed;
       if (detail !== undefined) obj.detail = detail;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_detail: (obj) => obj.detail
   },
 
   webapi_EventListenerOptions: {
@@ -5843,7 +5855,8 @@ export const wasmImportObject = {
       const obj = {};
       if (capture !== undefined) obj.capture = capture;
       return obj;
-    }
+    },
+    get_capture: (obj) => obj.capture
   },
 
   webapi_AddEventListenerOptions: {
@@ -5854,7 +5867,11 @@ export const wasmImportObject = {
       if (once !== undefined) obj.once = once;
       if (signal !== undefined) obj.signal = signal;
       return obj;
-    }
+    },
+    get_capture: (obj) => obj.capture,
+    get_passive: (obj) => obj.passive,
+    get_once: (obj) => obj.once,
+    get_signal: (obj) => obj.signal
   },
 
   webapi_MutationObserverInit: {
@@ -5868,7 +5885,14 @@ export const wasmImportObject = {
       if (characterDataOldValue !== undefined) obj.characterDataOldValue = characterDataOldValue;
       if (attributeFilter !== undefined) obj.attributeFilter = attributeFilter;
       return obj;
-    }
+    },
+    get_childList: (obj) => obj.childList,
+    get_attributes: (obj) => obj.attributes,
+    get_characterData: (obj) => obj.characterData,
+    get_subtree: (obj) => obj.subtree,
+    get_attributeOldValue: (obj) => obj.attributeOldValue,
+    get_characterDataOldValue: (obj) => obj.characterDataOldValue,
+    get_attributeFilter: (obj) => obj.attributeFilter
   },
 
   webapi_GetRootNodeOptions: {
@@ -5876,7 +5900,8 @@ export const wasmImportObject = {
       const obj = {};
       if (composed !== undefined) obj.composed = composed;
       return obj;
-    }
+    },
+    get_composed: (obj) => obj.composed
   },
 
   webapi_ElementCreationOptions: {
@@ -5885,7 +5910,9 @@ export const wasmImportObject = {
       if (customElementRegistry !== undefined) obj.customElementRegistry = customElementRegistry;
       if (is !== undefined) obj.is = is;
       return obj;
-    }
+    },
+    get_customElementRegistry: (obj) => obj.customElementRegistry,
+    get_is: (obj) => obj.is
   },
 
   webapi_ImportNodeOptions: {
@@ -5894,7 +5921,9 @@ export const wasmImportObject = {
       if (customElementRegistry !== undefined) obj.customElementRegistry = customElementRegistry;
       if (selfOnly !== undefined) obj.selfOnly = selfOnly;
       return obj;
-    }
+    },
+    get_customElementRegistry: (obj) => obj.customElementRegistry,
+    get_selfOnly: (obj) => obj.selfOnly
   },
 
   webapi_ShadowRootInit: {
@@ -5907,7 +5936,13 @@ export const wasmImportObject = {
       if (serializable !== undefined) obj.serializable = serializable;
       if (customElementRegistry !== undefined) obj.customElementRegistry = customElementRegistry;
       return obj;
-    }
+    },
+    get_mode: (obj) => obj.mode,
+    get_delegatesFocus: (obj) => obj.delegatesFocus,
+    get_slotAssignment: (obj) => obj.slotAssignment,
+    get_clonable: (obj) => obj.clonable,
+    get_serializable: (obj) => obj.serializable,
+    get_customElementRegistry: (obj) => obj.customElementRegistry
   },
 
   webapi_StaticRangeInit: {
@@ -5918,7 +5953,11 @@ export const wasmImportObject = {
       if (endContainer !== undefined) obj.endContainer = endContainer;
       if (endOffset !== undefined) obj.endOffset = endOffset;
       return obj;
-    }
+    },
+    get_startContainer: (obj) => obj.startContainer,
+    get_startOffset: (obj) => obj.startOffset,
+    get_endContainer: (obj) => obj.endContainer,
+    get_endOffset: (obj) => obj.endOffset
   },
 
   webapi_ProgressEventInit: {
@@ -5931,7 +5970,13 @@ export const wasmImportObject = {
       if (loaded !== undefined) obj.loaded = loaded;
       if (total !== undefined) obj.total = total;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_lengthComputable: (obj) => obj.lengthComputable,
+    get_loaded: (obj) => obj.loaded,
+    get_total: (obj) => obj.total
   },
 
   webapi_ShowPopoverOptions: {
@@ -5939,7 +5984,8 @@ export const wasmImportObject = {
       const obj = {};
       if (source !== undefined) obj.source = source;
       return obj;
-    }
+    },
+    get_source: (obj) => obj.source
   },
 
   webapi_TogglePopoverOptions: {
@@ -5948,7 +5994,9 @@ export const wasmImportObject = {
       if (source !== undefined) obj.source = source;
       if (force !== undefined) obj.force = force;
       return obj;
-    }
+    },
+    get_source: (obj) => obj.source,
+    get_force: (obj) => obj.force
   },
 
   webapi_TrackEventInit: {
@@ -5959,7 +6007,11 @@ export const wasmImportObject = {
       if (composed !== undefined) obj.composed = composed;
       if (track !== undefined) obj.track = track;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_track: (obj) => obj.track
   },
 
   webapi_SubmitEventInit: {
@@ -5970,7 +6022,11 @@ export const wasmImportObject = {
       if (composed !== undefined) obj.composed = composed;
       if (submitter !== undefined) obj.submitter = submitter;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_submitter: (obj) => obj.submitter
   },
 
   webapi_FormDataEventInit: {
@@ -5981,7 +6037,11 @@ export const wasmImportObject = {
       if (composed !== undefined) obj.composed = composed;
       if (formData !== undefined) obj.formData = formData;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_formData: (obj) => obj.formData
   },
 
   webapi_AssignedNodesOptions: {
@@ -5989,7 +6049,8 @@ export const wasmImportObject = {
       const obj = {};
       if (flatten !== undefined) obj.flatten = flatten;
       return obj;
-    }
+    },
+    get_flatten: (obj) => obj.flatten
   },
 
   webapi_CanvasRenderingContext2DSettings: {
@@ -6001,7 +6062,12 @@ export const wasmImportObject = {
       if (colorType !== undefined) obj.colorType = colorType;
       if (willReadFrequently !== undefined) obj.willReadFrequently = willReadFrequently;
       return obj;
-    }
+    },
+    get_alpha: (obj) => obj.alpha,
+    get_desynchronized: (obj) => obj.desynchronized,
+    get_colorSpace: (obj) => obj.colorSpace,
+    get_colorType: (obj) => obj.colorType,
+    get_willReadFrequently: (obj) => obj.willReadFrequently
   },
 
   webapi_ImageBitmapRenderingContextSettings: {
@@ -6009,7 +6075,8 @@ export const wasmImportObject = {
       const obj = {};
       if (alpha !== undefined) obj.alpha = alpha;
       return obj;
-    }
+    },
+    get_alpha: (obj) => obj.alpha
   },
 
   webapi_ImageEncodeOptions: {
@@ -6018,7 +6085,9 @@ export const wasmImportObject = {
       if (type !== undefined) obj.type = type;
       if (quality !== undefined) obj.quality = quality;
       return obj;
-    }
+    },
+    get_type: (obj) => obj.type,
+    get_quality: (obj) => obj.quality
   },
 
   webapi_ElementDefinitionOptions: {
@@ -6026,7 +6095,8 @@ export const wasmImportObject = {
       const obj = {};
       if (_extends !== undefined) obj.extends = _extends;
       return obj;
-    }
+    },
+    get_extends: (obj) => obj.extends
   },
 
   webapi_ValidityStateFlags: {
@@ -6043,7 +6113,17 @@ export const wasmImportObject = {
       if (badInput !== undefined) obj.badInput = badInput;
       if (customError !== undefined) obj.customError = customError;
       return obj;
-    }
+    },
+    get_valueMissing: (obj) => obj.valueMissing,
+    get_typeMismatch: (obj) => obj.typeMismatch,
+    get_patternMismatch: (obj) => obj.patternMismatch,
+    get_tooLong: (obj) => obj.tooLong,
+    get_tooShort: (obj) => obj.tooShort,
+    get_rangeUnderflow: (obj) => obj.rangeUnderflow,
+    get_rangeOverflow: (obj) => obj.rangeOverflow,
+    get_stepMismatch: (obj) => obj.stepMismatch,
+    get_badInput: (obj) => obj.badInput,
+    get_customError: (obj) => obj.customError
   },
 
   webapi_ToggleEventInit: {
@@ -6056,7 +6136,13 @@ export const wasmImportObject = {
       if (newState !== undefined) obj.newState = newState;
       if (source !== undefined) obj.source = source;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_oldState: (obj) => obj.oldState,
+    get_newState: (obj) => obj.newState,
+    get_source: (obj) => obj.source
   },
 
   webapi_CommandEventInit: {
@@ -6068,7 +6154,12 @@ export const wasmImportObject = {
       if (source !== undefined) obj.source = source;
       if (command !== undefined) obj.command = command;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_source: (obj) => obj.source,
+    get_command: (obj) => obj.command
   },
 
   webapi_FocusOptions: {
@@ -6077,7 +6168,9 @@ export const wasmImportObject = {
       if (preventScroll !== undefined) obj.preventScroll = preventScroll;
       if (focusVisible !== undefined) obj.focusVisible = focusVisible;
       return obj;
-    }
+    },
+    get_preventScroll: (obj) => obj.preventScroll,
+    get_focusVisible: (obj) => obj.focusVisible
   },
 
   webapi_CloseWatcherOptions: {
@@ -6085,7 +6178,8 @@ export const wasmImportObject = {
       const obj = {};
       if (signal !== undefined) obj.signal = signal;
       return obj;
-    }
+    },
+    get_signal: (obj) => obj.signal
   },
 
   webapi_DragEventInit: {
@@ -6120,7 +6214,35 @@ export const wasmImportObject = {
       if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
       if (dataTransfer !== undefined) obj.dataTransfer = dataTransfer;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_button: (obj) => obj.button,
+    get_buttons: (obj) => obj.buttons,
+    get_relatedTarget: (obj) => obj.relatedTarget,
+    get_dataTransfer: (obj) => obj.dataTransfer
   },
 
   webapi_WindowPostMessageOptions: {
@@ -6129,7 +6251,9 @@ export const wasmImportObject = {
       if (transfer !== undefined) obj.transfer = transfer;
       if (targetOrigin !== undefined) obj.targetOrigin = targetOrigin;
       return obj;
-    }
+    },
+    get_transfer: (obj) => obj.transfer,
+    get_targetOrigin: (obj) => obj.targetOrigin
   },
 
   webapi_NavigationUpdateCurrentEntryOptions: {
@@ -6137,7 +6261,8 @@ export const wasmImportObject = {
       const obj = {};
       if (state !== undefined) obj.state = state;
       return obj;
-    }
+    },
+    get_state: (obj) => obj.state
   },
 
   webapi_NavigationOptions: {
@@ -6145,7 +6270,8 @@ export const wasmImportObject = {
       const obj = {};
       if (info !== undefined) obj.info = info;
       return obj;
-    }
+    },
+    get_info: (obj) => obj.info
   },
 
   webapi_NavigationNavigateOptions: {
@@ -6155,7 +6281,10 @@ export const wasmImportObject = {
       if (state !== undefined) obj.state = state;
       if (history !== undefined) obj.history = history;
       return obj;
-    }
+    },
+    get_info: (obj) => obj.info,
+    get_state: (obj) => obj.state,
+    get_history: (obj) => obj.history
   },
 
   webapi_NavigationReloadOptions: {
@@ -6164,7 +6293,9 @@ export const wasmImportObject = {
       if (info !== undefined) obj.info = info;
       if (state !== undefined) obj.state = state;
       return obj;
-    }
+    },
+    get_info: (obj) => obj.info,
+    get_state: (obj) => obj.state
   },
 
   webapi_NavigationResult: {
@@ -6173,7 +6304,9 @@ export const wasmImportObject = {
       if (committed !== undefined) obj.committed = committed;
       if (finished !== undefined) obj.finished = finished;
       return obj;
-    }
+    },
+    get_committed: (obj) => obj.committed,
+    get_finished: (obj) => obj.finished
   },
 
   webapi_NavigateEventInit: {
@@ -6194,7 +6327,21 @@ export const wasmImportObject = {
       if (hasUAVisualTransition !== undefined) obj.hasUAVisualTransition = hasUAVisualTransition;
       if (sourceElement !== undefined) obj.sourceElement = sourceElement;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_navigationType: (obj) => obj.navigationType,
+    get_destination: (obj) => obj.destination,
+    get_canIntercept: (obj) => obj.canIntercept,
+    get_userInitiated: (obj) => obj.userInitiated,
+    get_hashChange: (obj) => obj.hashChange,
+    get_signal: (obj) => obj.signal,
+    get_formData: (obj) => obj.formData,
+    get_downloadRequest: (obj) => obj.downloadRequest,
+    get_info: (obj) => obj.info,
+    get_hasUAVisualTransition: (obj) => obj.hasUAVisualTransition,
+    get_sourceElement: (obj) => obj.sourceElement
   },
 
   webapi_NavigationInterceptOptions: {
@@ -6205,7 +6352,11 @@ export const wasmImportObject = {
       if (focusReset !== undefined) obj.focusReset = focusReset;
       if (scroll !== undefined) obj.scroll = scroll;
       return obj;
-    }
+    },
+    get_precommitHandler: (obj) => obj.precommitHandler,
+    get_handler: (obj) => obj.handler,
+    get_focusReset: (obj) => obj.focusReset,
+    get_scroll: (obj) => obj.scroll
   },
 
   webapi_NavigationCurrentEntryChangeEventInit: {
@@ -6217,7 +6368,12 @@ export const wasmImportObject = {
       if (navigationType !== undefined) obj.navigationType = navigationType;
       if (from !== undefined) obj.from = from;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_navigationType: (obj) => obj.navigationType,
+    get_from: (obj) => obj.from
   },
 
   webapi_PopStateEventInit: {
@@ -6229,7 +6385,12 @@ export const wasmImportObject = {
       if (state !== undefined) obj.state = state;
       if (hasUAVisualTransition !== undefined) obj.hasUAVisualTransition = hasUAVisualTransition;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_state: (obj) => obj.state,
+    get_hasUAVisualTransition: (obj) => obj.hasUAVisualTransition
   },
 
   webapi_HashChangeEventInit: {
@@ -6241,7 +6402,12 @@ export const wasmImportObject = {
       if (oldURL !== undefined) obj.oldURL = oldURL;
       if (newURL !== undefined) obj.newURL = newURL;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_oldURL: (obj) => obj.oldURL,
+    get_newURL: (obj) => obj.newURL
   },
 
   webapi_PageSwapEventInit: {
@@ -6253,7 +6419,12 @@ export const wasmImportObject = {
       if (activation !== undefined) obj.activation = activation;
       if (viewTransition !== undefined) obj.viewTransition = viewTransition;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_activation: (obj) => obj.activation,
+    get_viewTransition: (obj) => obj.viewTransition
   },
 
   webapi_PageRevealEventInit: {
@@ -6264,7 +6435,11 @@ export const wasmImportObject = {
       if (composed !== undefined) obj.composed = composed;
       if (viewTransition !== undefined) obj.viewTransition = viewTransition;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_viewTransition: (obj) => obj.viewTransition
   },
 
   webapi_PageTransitionEventInit: {
@@ -6275,7 +6450,11 @@ export const wasmImportObject = {
       if (composed !== undefined) obj.composed = composed;
       if (persisted !== undefined) obj.persisted = persisted;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_persisted: (obj) => obj.persisted
   },
 
   webapi_ErrorEventInit: {
@@ -6290,7 +6469,15 @@ export const wasmImportObject = {
       if (colno !== undefined) obj.colno = colno;
       if (error !== undefined) obj.error = error;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_message: (obj) => obj.message,
+    get_filename: (obj) => obj.filename,
+    get_lineno: (obj) => obj.lineno,
+    get_colno: (obj) => obj.colno,
+    get_error: (obj) => obj.error
   },
 
   webapi_PromiseRejectionEventInit: {
@@ -6302,7 +6489,12 @@ export const wasmImportObject = {
       if (promise !== undefined) obj.promise = promise;
       if (reason !== undefined) obj.reason = reason;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_promise: (obj) => obj.promise,
+    get_reason: (obj) => obj.reason
   },
 
   webapi_GetHTMLOptions: {
@@ -6311,7 +6503,9 @@ export const wasmImportObject = {
       if (serializableShadowRoots !== undefined) obj.serializableShadowRoots = serializableShadowRoots;
       if (shadowRoots !== undefined) obj.shadowRoots = shadowRoots;
       return obj;
-    }
+    },
+    get_serializableShadowRoots: (obj) => obj.serializableShadowRoots,
+    get_shadowRoots: (obj) => obj.shadowRoots
   },
 
   webapi_ImageDataSettings: {
@@ -6320,7 +6514,9 @@ export const wasmImportObject = {
       if (colorSpace !== undefined) obj.colorSpace = colorSpace;
       if (pixelFormat !== undefined) obj.pixelFormat = pixelFormat;
       return obj;
-    }
+    },
+    get_colorSpace: (obj) => obj.colorSpace,
+    get_pixelFormat: (obj) => obj.pixelFormat
   },
 
   webapi_ImageBitmapOptions: {
@@ -6333,7 +6529,13 @@ export const wasmImportObject = {
       if (resizeHeight !== undefined) obj.resizeHeight = resizeHeight;
       if (resizeQuality !== undefined) obj.resizeQuality = resizeQuality;
       return obj;
-    }
+    },
+    get_imageOrientation: (obj) => obj.imageOrientation,
+    get_premultiplyAlpha: (obj) => obj.premultiplyAlpha,
+    get_colorSpaceConversion: (obj) => obj.colorSpaceConversion,
+    get_resizeWidth: (obj) => obj.resizeWidth,
+    get_resizeHeight: (obj) => obj.resizeHeight,
+    get_resizeQuality: (obj) => obj.resizeQuality
   },
 
   webapi_MessageEventInit: {
@@ -6348,7 +6550,15 @@ export const wasmImportObject = {
       if (source !== undefined) obj.source = source;
       if (ports !== undefined) obj.ports = ports;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_data: (obj) => obj.data,
+    get_origin: (obj) => obj.origin,
+    get_lastEventId: (obj) => obj.lastEventId,
+    get_source: (obj) => obj.source,
+    get_ports: (obj) => obj.ports
   },
 
   webapi_EventSourceInit: {
@@ -6356,7 +6566,8 @@ export const wasmImportObject = {
       const obj = {};
       if (withCredentials !== undefined) obj.withCredentials = withCredentials;
       return obj;
-    }
+    },
+    get_withCredentials: (obj) => obj.withCredentials
   },
 
   webapi_StructuredSerializeOptions: {
@@ -6364,7 +6575,8 @@ export const wasmImportObject = {
       const obj = {};
       if (transfer !== undefined) obj.transfer = transfer;
       return obj;
-    }
+    },
+    get_transfer: (obj) => obj.transfer
   },
 
   webapi_WorkerOptions: {
@@ -6374,7 +6586,10 @@ export const wasmImportObject = {
       if (type !== undefined) obj.type = type;
       if (credentials !== undefined) obj.credentials = credentials;
       return obj;
-    }
+    },
+    get_name: (obj) => obj.name,
+    get_type: (obj) => obj.type,
+    get_credentials: (obj) => obj.credentials
   },
 
   webapi_WorkletOptions: {
@@ -6382,7 +6597,8 @@ export const wasmImportObject = {
       const obj = {};
       if (credentials !== undefined) obj.credentials = credentials;
       return obj;
-    }
+    },
+    get_credentials: (obj) => obj.credentials
   },
 
   webapi_StorageEventInit: {
@@ -6397,7 +6613,15 @@ export const wasmImportObject = {
       if (url !== undefined) obj.url = url;
       if (storageArea !== undefined) obj.storageArea = storageArea;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_key: (obj) => obj.key,
+    get_oldValue: (obj) => obj.oldValue,
+    get_newValue: (obj) => obj.newValue,
+    get_url: (obj) => obj.url,
+    get_storageArea: (obj) => obj.storageArea
   },
 
   webapi_CSSStyleSheetInit: {
@@ -6407,7 +6631,10 @@ export const wasmImportObject = {
       if (media !== undefined) obj.media = media;
       if (disabled !== undefined) obj.disabled = disabled;
       return obj;
-    }
+    },
+    get_baseURL: (obj) => obj.baseURL,
+    get_media: (obj) => obj.media,
+    get_disabled: (obj) => obj.disabled
   },
 
   webapi_RequestInit: {
@@ -6429,7 +6656,22 @@ export const wasmImportObject = {
       if (priority !== undefined) obj.priority = priority;
       if (window !== undefined) obj.window = window;
       return obj;
-    }
+    },
+    get_method: (obj) => obj.method,
+    get_headers: (obj) => obj.headers,
+    get_body: (obj) => obj.body,
+    get_referrer: (obj) => obj.referrer,
+    get_referrerPolicy: (obj) => obj.referrerPolicy,
+    get_mode: (obj) => obj.mode,
+    get_credentials: (obj) => obj.credentials,
+    get_cache: (obj) => obj.cache,
+    get_redirect: (obj) => obj.redirect,
+    get_integrity: (obj) => obj.integrity,
+    get_keepalive: (obj) => obj.keepalive,
+    get_signal: (obj) => obj.signal,
+    get_duplex: (obj) => obj.duplex,
+    get_priority: (obj) => obj.priority,
+    get_window: (obj) => obj.window
   },
 
   webapi_ResponseInit: {
@@ -6439,7 +6681,10 @@ export const wasmImportObject = {
       if (statusText !== undefined) obj.statusText = statusText;
       if (headers !== undefined) obj.headers = headers;
       return obj;
-    }
+    },
+    get_status: (obj) => obj.status,
+    get_statusText: (obj) => obj.statusText,
+    get_headers: (obj) => obj.headers
   },
 
   webapi_DeferredRequestInit: {
@@ -6462,7 +6707,23 @@ export const wasmImportObject = {
       if (window !== undefined) obj.window = window;
       if (activateAfter !== undefined) obj.activateAfter = activateAfter;
       return obj;
-    }
+    },
+    get_method: (obj) => obj.method,
+    get_headers: (obj) => obj.headers,
+    get_body: (obj) => obj.body,
+    get_referrer: (obj) => obj.referrer,
+    get_referrerPolicy: (obj) => obj.referrerPolicy,
+    get_mode: (obj) => obj.mode,
+    get_credentials: (obj) => obj.credentials,
+    get_cache: (obj) => obj.cache,
+    get_redirect: (obj) => obj.redirect,
+    get_integrity: (obj) => obj.integrity,
+    get_keepalive: (obj) => obj.keepalive,
+    get_signal: (obj) => obj.signal,
+    get_duplex: (obj) => obj.duplex,
+    get_priority: (obj) => obj.priority,
+    get_window: (obj) => obj.window,
+    get_activateAfter: (obj) => obj.activateAfter
   },
 
   webapi_QuotaExceededErrorOptions: {
@@ -6471,7 +6732,9 @@ export const wasmImportObject = {
       if (quota !== undefined) obj.quota = quota;
       if (requested !== undefined) obj.requested = requested;
       return obj;
-    }
+    },
+    get_quota: (obj) => obj.quota,
+    get_requested: (obj) => obj.requested
   },
 
   webapi_BlobPropertyBag: {
@@ -6480,7 +6743,9 @@ export const wasmImportObject = {
       if (type !== undefined) obj.type = type;
       if (endings !== undefined) obj.endings = endings;
       return obj;
-    }
+    },
+    get_type: (obj) => obj.type,
+    get_endings: (obj) => obj.endings
   },
 
   webapi_FilePropertyBag: {
@@ -6490,7 +6755,10 @@ export const wasmImportObject = {
       if (endings !== undefined) obj.endings = endings;
       if (lastModified !== undefined) obj.lastModified = lastModified;
       return obj;
-    }
+    },
+    get_type: (obj) => obj.type,
+    get_endings: (obj) => obj.endings,
+    get_lastModified: (obj) => BigInt(obj.lastModified)
   },
 
   webapi_StorageEstimate: {
@@ -6499,7 +6767,9 @@ export const wasmImportObject = {
       if (usage !== undefined) obj.usage = usage;
       if (quota !== undefined) obj.quota = quota;
       return obj;
-    }
+    },
+    get_usage: (obj) => BigInt(obj.usage),
+    get_quota: (obj) => BigInt(obj.quota)
   },
 
   webapi_ReadableStreamGetReaderOptions: {
@@ -6507,7 +6777,8 @@ export const wasmImportObject = {
       const obj = {};
       if (mode !== undefined) obj.mode = mode;
       return obj;
-    }
+    },
+    get_mode: (obj) => obj.mode
   },
 
   webapi_ReadableStreamIteratorOptions: {
@@ -6515,7 +6786,8 @@ export const wasmImportObject = {
       const obj = {};
       if (preventCancel !== undefined) obj.preventCancel = preventCancel;
       return obj;
-    }
+    },
+    get_preventCancel: (obj) => obj.preventCancel
   },
 
   webapi_ReadableWritablePair: {
@@ -6524,7 +6796,9 @@ export const wasmImportObject = {
       if (readable !== undefined) obj.readable = readable;
       if (writable !== undefined) obj.writable = writable;
       return obj;
-    }
+    },
+    get_readable: (obj) => obj.readable,
+    get_writable: (obj) => obj.writable
   },
 
   webapi_StreamPipeOptions: {
@@ -6535,7 +6809,11 @@ export const wasmImportObject = {
       if (preventCancel !== undefined) obj.preventCancel = preventCancel;
       if (signal !== undefined) obj.signal = signal;
       return obj;
-    }
+    },
+    get_preventClose: (obj) => obj.preventClose,
+    get_preventAbort: (obj) => obj.preventAbort,
+    get_preventCancel: (obj) => obj.preventCancel,
+    get_signal: (obj) => obj.signal
   },
 
   webapi_UnderlyingSource: {
@@ -6547,7 +6825,12 @@ export const wasmImportObject = {
       if (type !== undefined) obj.type = type;
       if (autoAllocateChunkSize !== undefined) obj.autoAllocateChunkSize = autoAllocateChunkSize;
       return obj;
-    }
+    },
+    get_start: (obj) => obj.start,
+    get_pull: (obj) => obj.pull,
+    get_cancel: (obj) => obj.cancel,
+    get_type: (obj) => obj.type,
+    get_autoAllocateChunkSize: (obj) => BigInt(obj.autoAllocateChunkSize)
   },
 
   webapi_ReadableStreamReadResult: {
@@ -6556,7 +6839,9 @@ export const wasmImportObject = {
       if (value !== undefined) obj.value = value;
       if (done !== undefined) obj.done = done;
       return obj;
-    }
+    },
+    get_value: (obj) => obj.value,
+    get_done: (obj) => obj.done
   },
 
   webapi_ReadableStreamBYOBReaderReadOptions: {
@@ -6564,7 +6849,8 @@ export const wasmImportObject = {
       const obj = {};
       if (min !== undefined) obj.min = min;
       return obj;
-    }
+    },
+    get_min: (obj) => BigInt(obj.min)
   },
 
   webapi_UnderlyingSink: {
@@ -6576,7 +6862,12 @@ export const wasmImportObject = {
       if (abort !== undefined) obj.abort = abort;
       if (type !== undefined) obj.type = type;
       return obj;
-    }
+    },
+    get_start: (obj) => obj.start,
+    get_write: (obj) => obj.write,
+    get_close: (obj) => obj.close,
+    get_abort: (obj) => obj.abort,
+    get_type: (obj) => obj.type
   },
 
   webapi_Transformer: {
@@ -6589,7 +6880,13 @@ export const wasmImportObject = {
       if (readableType !== undefined) obj.readableType = readableType;
       if (writableType !== undefined) obj.writableType = writableType;
       return obj;
-    }
+    },
+    get_start: (obj) => obj.start,
+    get_transform: (obj) => obj.transform,
+    get_flush: (obj) => obj.flush,
+    get_cancel: (obj) => obj.cancel,
+    get_readableType: (obj) => obj.readableType,
+    get_writableType: (obj) => obj.writableType
   },
 
   webapi_QueuingStrategy: {
@@ -6598,7 +6895,9 @@ export const wasmImportObject = {
       if (highWaterMark !== undefined) obj.highWaterMark = highWaterMark;
       if (size !== undefined) obj.size = size;
       return obj;
-    }
+    },
+    get_highWaterMark: (obj) => obj.highWaterMark,
+    get_size: (obj) => obj.size
   },
 
   webapi_QueuingStrategyInit: {
@@ -6606,7 +6905,8 @@ export const wasmImportObject = {
       const obj = {};
       if (highWaterMark !== undefined) obj.highWaterMark = highWaterMark;
       return obj;
-    }
+    },
+    get_highWaterMark: (obj) => obj.highWaterMark
   },
 
   webapi_TextDecoderOptions: {
@@ -6615,7 +6915,9 @@ export const wasmImportObject = {
       if (fatal !== undefined) obj.fatal = fatal;
       if (ignoreBOM !== undefined) obj.ignoreBOM = ignoreBOM;
       return obj;
-    }
+    },
+    get_fatal: (obj) => obj.fatal,
+    get_ignoreBOM: (obj) => obj.ignoreBOM
   },
 
   webapi_TextDecodeOptions: {
@@ -6623,7 +6925,8 @@ export const wasmImportObject = {
       const obj = {};
       if (stream !== undefined) obj.stream = stream;
       return obj;
-    }
+    },
+    get_stream: (obj) => obj.stream
   },
 
   webapi_TextEncoderEncodeIntoResult: {
@@ -6632,7 +6935,9 @@ export const wasmImportObject = {
       if (read !== undefined) obj.read = read;
       if (written !== undefined) obj.written = written;
       return obj;
-    }
+    },
+    get_read: (obj) => BigInt(obj.read),
+    get_written: (obj) => BigInt(obj.written)
   },
 
   webapi_DOMPointInit: {
@@ -6643,7 +6948,11 @@ export const wasmImportObject = {
       if (z !== undefined) obj.z = z;
       if (w !== undefined) obj.w = w;
       return obj;
-    }
+    },
+    get_x: (obj) => obj.x,
+    get_y: (obj) => obj.y,
+    get_z: (obj) => obj.z,
+    get_w: (obj) => obj.w
   },
 
   webapi_DOMRectInit: {
@@ -6654,7 +6963,11 @@ export const wasmImportObject = {
       if (width !== undefined) obj.width = width;
       if (height !== undefined) obj.height = height;
       return obj;
-    }
+    },
+    get_x: (obj) => obj.x,
+    get_y: (obj) => obj.y,
+    get_width: (obj) => obj.width,
+    get_height: (obj) => obj.height
   },
 
   webapi_DOMQuadInit: {
@@ -6665,7 +6978,11 @@ export const wasmImportObject = {
       if (p3 !== undefined) obj.p3 = p3;
       if (p4 !== undefined) obj.p4 = p4;
       return obj;
-    }
+    },
+    get_p1: (obj) => obj.p1,
+    get_p2: (obj) => obj.p2,
+    get_p3: (obj) => obj.p3,
+    get_p4: (obj) => obj.p4
   },
 
   webapi_DOMMatrix2DInit: {
@@ -6684,7 +7001,19 @@ export const wasmImportObject = {
       if (m41 !== undefined) obj.m41 = m41;
       if (m42 !== undefined) obj.m42 = m42;
       return obj;
-    }
+    },
+    get_a: (obj) => obj.a,
+    get_b: (obj) => obj.b,
+    get_c: (obj) => obj.c,
+    get_d: (obj) => obj.d,
+    get_e: (obj) => obj.e,
+    get_f: (obj) => obj.f,
+    get_m11: (obj) => obj.m11,
+    get_m12: (obj) => obj.m12,
+    get_m21: (obj) => obj.m21,
+    get_m22: (obj) => obj.m22,
+    get_m41: (obj) => obj.m41,
+    get_m42: (obj) => obj.m42
   },
 
   webapi_DOMMatrixInit: {
@@ -6714,7 +7043,30 @@ export const wasmImportObject = {
       if (m44 !== undefined) obj.m44 = m44;
       if (is2D !== undefined) obj.is2D = is2D;
       return obj;
-    }
+    },
+    get_a: (obj) => obj.a,
+    get_b: (obj) => obj.b,
+    get_c: (obj) => obj.c,
+    get_d: (obj) => obj.d,
+    get_e: (obj) => obj.e,
+    get_f: (obj) => obj.f,
+    get_m11: (obj) => obj.m11,
+    get_m12: (obj) => obj.m12,
+    get_m21: (obj) => obj.m21,
+    get_m22: (obj) => obj.m22,
+    get_m41: (obj) => obj.m41,
+    get_m42: (obj) => obj.m42,
+    get_m13: (obj) => obj.m13,
+    get_m14: (obj) => obj.m14,
+    get_m23: (obj) => obj.m23,
+    get_m24: (obj) => obj.m24,
+    get_m31: (obj) => obj.m31,
+    get_m32: (obj) => obj.m32,
+    get_m33: (obj) => obj.m33,
+    get_m34: (obj) => obj.m34,
+    get_m43: (obj) => obj.m43,
+    get_m44: (obj) => obj.m44,
+    get_is2D: (obj) => obj.is2D
   },
 
   webapi_UIEventInit: {
@@ -6727,7 +7079,13 @@ export const wasmImportObject = {
       if (detail !== undefined) obj.detail = detail;
       if (which !== undefined) obj.which = which;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which
   },
 
   webapi_FocusEventInit: {
@@ -6741,7 +7099,14 @@ export const wasmImportObject = {
       if (which !== undefined) obj.which = which;
       if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_relatedTarget: (obj) => obj.relatedTarget
   },
 
   webapi_MouseEventInit: {
@@ -6775,7 +7140,34 @@ export const wasmImportObject = {
       if (buttons !== undefined) obj.buttons = buttons;
       if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_button: (obj) => obj.button,
+    get_buttons: (obj) => obj.buttons,
+    get_relatedTarget: (obj) => obj.relatedTarget
   },
 
   webapi_EventModifierInit: {
@@ -6802,7 +7194,27 @@ export const wasmImportObject = {
       if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
       if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock
   },
 
   webapi_WheelEventInit: {
@@ -6840,7 +7252,38 @@ export const wasmImportObject = {
       if (deltaZ !== undefined) obj.deltaZ = deltaZ;
       if (deltaMode !== undefined) obj.deltaMode = deltaMode;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_button: (obj) => obj.button,
+    get_buttons: (obj) => obj.buttons,
+    get_relatedTarget: (obj) => obj.relatedTarget,
+    get_deltaX: (obj) => obj.deltaX,
+    get_deltaY: (obj) => obj.deltaY,
+    get_deltaZ: (obj) => obj.deltaZ,
+    get_deltaMode: (obj) => obj.deltaMode
   },
 
   webapi_InputEventInit: {
@@ -6856,7 +7299,16 @@ export const wasmImportObject = {
       if (isComposing !== undefined) obj.isComposing = isComposing;
       if (inputType !== undefined) obj.inputType = inputType;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_data: (obj) => obj.data,
+    get_isComposing: (obj) => obj.isComposing,
+    get_inputType: (obj) => obj.inputType
   },
 
   webapi_KeyboardEventInit: {
@@ -6890,7 +7342,34 @@ export const wasmImportObject = {
       if (charCode !== undefined) obj.charCode = charCode;
       if (keyCode !== undefined) obj.keyCode = keyCode;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_key: (obj) => obj.key,
+    get_code: (obj) => obj.code,
+    get_location: (obj) => obj.location,
+    get_repeat: (obj) => obj.repeat,
+    get_isComposing: (obj) => obj.isComposing,
+    get_charCode: (obj) => obj.charCode,
+    get_keyCode: (obj) => obj.keyCode
   },
 
   webapi_CompositionEventInit: {
@@ -6904,7 +7383,14 @@ export const wasmImportObject = {
       if (which !== undefined) obj.which = which;
       if (data !== undefined) obj.data = data;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_data: (obj) => obj.data
   },
 
   webapi_IDBVersionChangeEventInit: {
@@ -6916,7 +7402,12 @@ export const wasmImportObject = {
       if (oldVersion !== undefined) obj.oldVersion = oldVersion;
       if (newVersion !== undefined) obj.newVersion = newVersion;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_oldVersion: (obj) => BigInt(obj.oldVersion),
+    get_newVersion: (obj) => BigInt(obj.newVersion)
   },
 
   webapi_IDBDatabaseInfo: {
@@ -6925,7 +7416,9 @@ export const wasmImportObject = {
       if (name !== undefined) obj.name = name;
       if (version !== undefined) obj.version = version;
       return obj;
-    }
+    },
+    get_name: (obj) => obj.name,
+    get_version: (obj) => BigInt(obj.version)
   },
 
   webapi_IDBTransactionOptions: {
@@ -6933,7 +7426,8 @@ export const wasmImportObject = {
       const obj = {};
       if (durability !== undefined) obj.durability = durability;
       return obj;
-    }
+    },
+    get_durability: (obj) => obj.durability
   },
 
   webapi_IDBObjectStoreParameters: {
@@ -6942,7 +7436,9 @@ export const wasmImportObject = {
       if (keyPath !== undefined) obj.keyPath = keyPath;
       if (autoIncrement !== undefined) obj.autoIncrement = autoIncrement;
       return obj;
-    }
+    },
+    get_keyPath: (obj) => obj.keyPath,
+    get_autoIncrement: (obj) => obj.autoIncrement
   },
 
   webapi_IDBIndexParameters: {
@@ -6951,7 +7447,9 @@ export const wasmImportObject = {
       if (unique !== undefined) obj.unique = unique;
       if (multiEntry !== undefined) obj.multiEntry = multiEntry;
       return obj;
-    }
+    },
+    get_unique: (obj) => obj.unique,
+    get_multiEntry: (obj) => obj.multiEntry
   },
 
   webapi_IDBGetAllOptions: {
@@ -6961,7 +7459,10 @@ export const wasmImportObject = {
       if (count !== undefined) obj.count = count;
       if (direction !== undefined) obj.direction = direction;
       return obj;
-    }
+    },
+    get_query: (obj) => obj.query,
+    get_count: (obj) => obj.count,
+    get_direction: (obj) => obj.direction
   },
 
   webapi_ScrollOptions: {
@@ -6969,7 +7470,8 @@ export const wasmImportObject = {
       const obj = {};
       if (behavior !== undefined) obj.behavior = behavior;
       return obj;
-    }
+    },
+    get_behavior: (obj) => obj.behavior
   },
 
   webapi_ScrollToOptions: {
@@ -6979,7 +7481,10 @@ export const wasmImportObject = {
       if (left !== undefined) obj.left = left;
       if (top !== undefined) obj.top = top;
       return obj;
-    }
+    },
+    get_behavior: (obj) => obj.behavior,
+    get_left: (obj) => obj.left,
+    get_top: (obj) => obj.top
   },
 
   webapi_MediaQueryListEventInit: {
@@ -6991,7 +7496,12 @@ export const wasmImportObject = {
       if (media !== undefined) obj.media = media;
       if (matches !== undefined) obj.matches = matches;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_media: (obj) => obj.media,
+    get_matches: (obj) => obj.matches
   },
 
   webapi_CaretPositionFromPointOptions: {
@@ -6999,7 +7509,8 @@ export const wasmImportObject = {
       const obj = {};
       if (shadowRoots !== undefined) obj.shadowRoots = shadowRoots;
       return obj;
-    }
+    },
+    get_shadowRoots: (obj) => obj.shadowRoots
   },
 
   webapi_ScrollIntoViewOptions: {
@@ -7010,7 +7521,11 @@ export const wasmImportObject = {
       if (inline !== undefined) obj.inline = inline;
       if (container !== undefined) obj.container = container;
       return obj;
-    }
+    },
+    get_behavior: (obj) => obj.behavior,
+    get_block: (obj) => obj.block,
+    get_inline: (obj) => obj.inline,
+    get_container: (obj) => obj.container
   },
 
   webapi_CheckVisibilityOptions: {
@@ -7022,7 +7537,12 @@ export const wasmImportObject = {
       if (opacityProperty !== undefined) obj.opacityProperty = opacityProperty;
       if (visibilityProperty !== undefined) obj.visibilityProperty = visibilityProperty;
       return obj;
-    }
+    },
+    get_checkOpacity: (obj) => obj.checkOpacity,
+    get_checkVisibilityCSS: (obj) => obj.checkVisibilityCSS,
+    get_contentVisibilityAuto: (obj) => obj.contentVisibilityAuto,
+    get_opacityProperty: (obj) => obj.opacityProperty,
+    get_visibilityProperty: (obj) => obj.visibilityProperty
   },
 
   webapi_BoxQuadOptions: {
@@ -7031,7 +7551,9 @@ export const wasmImportObject = {
       if (box !== undefined) obj.box = box;
       if (relativeTo !== undefined) obj.relativeTo = relativeTo;
       return obj;
-    }
+    },
+    get_box: (obj) => obj.box,
+    get_relativeTo: (obj) => obj.relativeTo
   },
 
   webapi_ConvertCoordinateOptions: {
@@ -7040,7 +7562,9 @@ export const wasmImportObject = {
       if (fromBox !== undefined) obj.fromBox = fromBox;
       if (toBox !== undefined) obj.toBox = toBox;
       return obj;
-    }
+    },
+    get_fromBox: (obj) => obj.fromBox,
+    get_toBox: (obj) => obj.toBox
   },
 
   webapi_FullscreenOptions: {
@@ -7048,7 +7572,8 @@ export const wasmImportObject = {
       const obj = {};
       if (navigationUI !== undefined) obj.navigationUI = navigationUI;
       return obj;
-    }
+    },
+    get_navigationUI: (obj) => obj.navigationUI
   },
 
   webapi_CloseEventInit: {
@@ -7061,7 +7586,13 @@ export const wasmImportObject = {
       if (code !== undefined) obj.code = code;
       if (reason !== undefined) obj.reason = reason;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_wasClean: (obj) => obj.wasClean,
+    get_code: (obj) => obj.code,
+    get_reason: (obj) => obj.reason
   },
 
   webapi_TouchInit: {
@@ -7083,7 +7614,22 @@ export const wasmImportObject = {
       if (azimuthAngle !== undefined) obj.azimuthAngle = azimuthAngle;
       if (touchType !== undefined) obj.touchType = touchType;
       return obj;
-    }
+    },
+    get_identifier: (obj) => obj.identifier,
+    get_target: (obj) => obj.target,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_pageX: (obj) => obj.pageX,
+    get_pageY: (obj) => obj.pageY,
+    get_radiusX: (obj) => obj.radiusX,
+    get_radiusY: (obj) => obj.radiusY,
+    get_rotationAngle: (obj) => obj.rotationAngle,
+    get_force: (obj) => obj.force,
+    get_altitudeAngle: (obj) => obj.altitudeAngle,
+    get_azimuthAngle: (obj) => obj.azimuthAngle,
+    get_touchType: (obj) => obj.touchType
   },
 
   webapi_TouchEventInit: {
@@ -7113,7 +7659,30 @@ export const wasmImportObject = {
       if (targetTouches !== undefined) obj.targetTouches = targetTouches;
       if (changedTouches !== undefined) obj.changedTouches = changedTouches;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_touches: (obj) => obj.touches,
+    get_targetTouches: (obj) => obj.targetTouches,
+    get_changedTouches: (obj) => obj.changedTouches
   },
 
   webapi_NotificationOptions: {
@@ -7135,7 +7704,22 @@ export const wasmImportObject = {
       if (data !== undefined) obj.data = data;
       if (actions !== undefined) obj.actions = actions;
       return obj;
-    }
+    },
+    get_dir: (obj) => obj.dir,
+    get_lang: (obj) => obj.lang,
+    get_body: (obj) => obj.body,
+    get_navigate: (obj) => obj.navigate,
+    get_tag: (obj) => obj.tag,
+    get_image: (obj) => obj.image,
+    get_icon: (obj) => obj.icon,
+    get_badge: (obj) => obj.badge,
+    get_vibrate: (obj) => obj.vibrate,
+    get_timestamp: (obj) => obj.timestamp,
+    get_renotify: (obj) => obj.renotify,
+    get_silent: (obj) => obj.silent,
+    get_requireInteraction: (obj) => obj.requireInteraction,
+    get_data: (obj) => obj.data,
+    get_actions: (obj) => obj.actions
   },
 
   webapi_NotificationAction: {
@@ -7146,7 +7730,11 @@ export const wasmImportObject = {
       if (navigate !== undefined) obj.navigate = navigate;
       if (icon !== undefined) obj.icon = icon;
       return obj;
-    }
+    },
+    get_action: (obj) => obj.action,
+    get_title: (obj) => obj.title,
+    get_navigate: (obj) => obj.navigate,
+    get_icon: (obj) => obj.icon
   },
 
   webapi_PointerEventInit: {
@@ -7195,7 +7783,49 @@ export const wasmImportObject = {
       if (coalescedEvents !== undefined) obj.coalescedEvents = coalescedEvents;
       if (predictedEvents !== undefined) obj.predictedEvents = predictedEvents;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_button: (obj) => obj.button,
+    get_buttons: (obj) => obj.buttons,
+    get_relatedTarget: (obj) => obj.relatedTarget,
+    get_pointerId: (obj) => obj.pointerId,
+    get_width: (obj) => obj.width,
+    get_height: (obj) => obj.height,
+    get_pressure: (obj) => obj.pressure,
+    get_tangentialPressure: (obj) => obj.tangentialPressure,
+    get_tiltX: (obj) => obj.tiltX,
+    get_tiltY: (obj) => obj.tiltY,
+    get_twist: (obj) => obj.twist,
+    get_altitudeAngle: (obj) => obj.altitudeAngle,
+    get_azimuthAngle: (obj) => obj.azimuthAngle,
+    get_pointerType: (obj) => obj.pointerType,
+    get_isPrimary: (obj) => obj.isPrimary,
+    get_persistentDeviceId: (obj) => obj.persistentDeviceId,
+    get_coalescedEvents: (obj) => obj.coalescedEvents,
+    get_predictedEvents: (obj) => obj.predictedEvents
   },
 
   webapi_GetComposedRangesOptions: {
@@ -7203,7 +7833,8 @@ export const wasmImportObject = {
       const obj = {};
       if (shadowRoots !== undefined) obj.shadowRoots = shadowRoots;
       return obj;
-    }
+    },
+    get_shadowRoots: (obj) => obj.shadowRoots
   },
 
   webapi_TrustedTypePolicyOptions: {
@@ -7213,7 +7844,10 @@ export const wasmImportObject = {
       if (createScript !== undefined) obj.createScript = createScript;
       if (createScriptURL !== undefined) obj.createScriptURL = createScriptURL;
       return obj;
-    }
+    },
+    get_createHTML: (obj) => obj.createHTML,
+    get_createScript: (obj) => obj.createScript,
+    get_createScriptURL: (obj) => obj.createScriptURL
   },
 
   webapi_ClipboardEventInit: {
@@ -7224,7 +7858,11 @@ export const wasmImportObject = {
       if (composed !== undefined) obj.composed = composed;
       if (clipboardData !== undefined) obj.clipboardData = clipboardData;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_clipboardData: (obj) => obj.clipboardData
   },
 
   webapi_ClipboardChangeEventInit: {
@@ -7236,7 +7874,12 @@ export const wasmImportObject = {
       if (types !== undefined) obj.types = types;
       if (changeId !== undefined) obj.changeId = changeId;
       return obj;
-    }
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_types: (obj) => obj.types,
+    get_changeId: (obj) => BigInt(obj.changeId)
   },
 
   webapi_ClipboardItemOptions: {
@@ -7244,7 +7887,8 @@ export const wasmImportObject = {
       const obj = {};
       if (presentationStyle !== undefined) obj.presentationStyle = presentationStyle;
       return obj;
-    }
+    },
+    get_presentationStyle: (obj) => obj.presentationStyle
   },
 
   webapi_ClipboardUnsanitizedFormats: {
@@ -7252,7 +7896,8 @@ export const wasmImportObject = {
       const obj = {};
       if (unsanitized !== undefined) obj.unsanitized = unsanitized;
       return obj;
-    }
+    },
+    get_unsanitized: (obj) => obj.unsanitized
   },
 
   webapi_DocumentTimelineOptions: {
@@ -7260,7 +7905,8 @@ export const wasmImportObject = {
       const obj = {};
       if (originTime !== undefined) obj.originTime = originTime;
       return obj;
-    }
+    },
+    get_originTime: (obj) => obj.originTime
   },
 
   webapi_EffectTiming: {
@@ -7272,7 +7918,12 @@ export const wasmImportObject = {
       if (direction !== undefined) obj.direction = direction;
       if (easing !== undefined) obj.easing = easing;
       return obj;
-    }
+    },
+    get_fill: (obj) => obj.fill,
+    get_iterationStart: (obj) => obj.iterationStart,
+    get_iterations: (obj) => obj.iterations,
+    get_direction: (obj) => obj.direction,
+    get_easing: (obj) => obj.easing
   },
 
   webapi_OptionalEffectTiming: {
@@ -7287,7 +7938,15 @@ export const wasmImportObject = {
       if (direction !== undefined) obj.direction = direction;
       if (easing !== undefined) obj.easing = easing;
       return obj;
-    }
+    },
+    get_delay: (obj) => obj.delay,
+    get_endDelay: (obj) => obj.endDelay,
+    get_fill: (obj) => obj.fill,
+    get_iterationStart: (obj) => obj.iterationStart,
+    get_iterations: (obj) => obj.iterations,
+    get_duration: (obj) => obj.duration,
+    get_direction: (obj) => obj.direction,
+    get_easing: (obj) => obj.easing
   },
 
   webapi_ComputedEffectTiming: {
@@ -7301,7 +7960,14 @@ export const wasmImportObject = {
       if (progress !== undefined) obj.progress = progress;
       if (currentIteration !== undefined) obj.currentIteration = currentIteration;
       return obj;
-    }
+    },
+    get_fill: (obj) => obj.fill,
+    get_iterationStart: (obj) => obj.iterationStart,
+    get_iterations: (obj) => obj.iterations,
+    get_direction: (obj) => obj.direction,
+    get_easing: (obj) => obj.easing,
+    get_progress: (obj) => obj.progress,
+    get_currentIteration: (obj) => obj.currentIteration
   },
 
   webapi_BaseComputedKeyframe: {
@@ -7312,7 +7978,11 @@ export const wasmImportObject = {
       if (easing !== undefined) obj.easing = easing;
       if (composite !== undefined) obj.composite = composite;
       return obj;
-    }
+    },
+    get_offset: (obj) => obj.offset,
+    get_computedOffset: (obj) => obj.computedOffset,
+    get_easing: (obj) => obj.easing,
+    get_composite: (obj) => obj.composite
   },
 
   webapi_BasePropertyIndexedKeyframe: {
@@ -7322,7 +7992,10 @@ export const wasmImportObject = {
       if (easing !== undefined) obj.easing = easing;
       if (composite !== undefined) obj.composite = composite;
       return obj;
-    }
+    },
+    get_offset: (obj) => obj.offset,
+    get_easing: (obj) => obj.easing,
+    get_composite: (obj) => obj.composite
   },
 
   webapi_BaseKeyframe: {
@@ -7332,7 +8005,10 @@ export const wasmImportObject = {
       if (easing !== undefined) obj.easing = easing;
       if (composite !== undefined) obj.composite = composite;
       return obj;
-    }
+    },
+    get_offset: (obj) => obj.offset,
+    get_easing: (obj) => obj.easing,
+    get_composite: (obj) => obj.composite
   },
 
   webapi_KeyframeEffectOptions: {
@@ -7346,7 +8022,14 @@ export const wasmImportObject = {
       if (composite !== undefined) obj.composite = composite;
       if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
       return obj;
-    }
+    },
+    get_fill: (obj) => obj.fill,
+    get_iterationStart: (obj) => obj.iterationStart,
+    get_iterations: (obj) => obj.iterations,
+    get_direction: (obj) => obj.direction,
+    get_easing: (obj) => obj.easing,
+    get_composite: (obj) => obj.composite,
+    get_pseudoElement: (obj) => obj.pseudoElement
   },
 
   webapi_KeyframeAnimationOptions: {
@@ -7362,7 +8045,16 @@ export const wasmImportObject = {
       if (id !== undefined) obj.id = id;
       if (timeline !== undefined) obj.timeline = timeline;
       return obj;
-    }
+    },
+    get_fill: (obj) => obj.fill,
+    get_iterationStart: (obj) => obj.iterationStart,
+    get_iterations: (obj) => obj.iterations,
+    get_direction: (obj) => obj.direction,
+    get_easing: (obj) => obj.easing,
+    get_composite: (obj) => obj.composite,
+    get_pseudoElement: (obj) => obj.pseudoElement,
+    get_id: (obj) => obj.id,
+    get_timeline: (obj) => obj.timeline
   },
 
   webapi_GetAnimationsOptions: {
@@ -7371,7 +8063,9 @@ export const wasmImportObject = {
       if (subtree !== undefined) obj.subtree = subtree;
       if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
       return obj;
-    }
+    },
+    get_subtree: (obj) => obj.subtree,
+    get_pseudoElement: (obj) => obj.pseudoElement
   },
 
   webapi_ResizeObserverOptions: {
@@ -7379,7 +8073,8 @@ export const wasmImportObject = {
       const obj = {};
       if (box !== undefined) obj.box = box;
       return obj;
-    }
+    },
+    get_box: (obj) => obj.box
   },
 
   webapi_IdleRequestOptions: {
@@ -7387,7 +8082,8 @@ export const wasmImportObject = {
       const obj = {};
       if (timeout !== undefined) obj.timeout = timeout;
       return obj;
-    }
+    },
+    get_timeout: (obj) => obj.timeout
   },
 
   webapi_PerformanceObserverCallbackOptions: {
@@ -7395,7 +8091,8 @@ export const wasmImportObject = {
       const obj = {};
       if (droppedEntriesCount !== undefined) obj.droppedEntriesCount = droppedEntriesCount;
       return obj;
-    }
+    },
+    get_droppedEntriesCount: (obj) => BigInt(obj.droppedEntriesCount)
   },
 
   webapi_PerformanceObserverInit: {
@@ -7405,7 +8102,10 @@ export const wasmImportObject = {
       if (type !== undefined) obj.type = type;
       if (buffered !== undefined) obj.buffered = buffered;
       return obj;
-    }
+    },
+    get_entryTypes: (obj) => obj.entryTypes,
+    get_type: (obj) => obj.type,
+    get_buffered: (obj) => obj.buffered
   },
 
   webapi_IntersectionObserverEntryInit: {
@@ -7420,7 +8120,15 @@ export const wasmImportObject = {
       if (intersectionRatio !== undefined) obj.intersectionRatio = intersectionRatio;
       if (target !== undefined) obj.target = target;
       return obj;
-    }
+    },
+    get_time: (obj) => obj.time,
+    get_rootBounds: (obj) => obj.rootBounds,
+    get_boundingClientRect: (obj) => obj.boundingClientRect,
+    get_intersectionRect: (obj) => obj.intersectionRect,
+    get_isIntersecting: (obj) => obj.isIntersecting,
+    get_isVisible: (obj) => obj.isVisible,
+    get_intersectionRatio: (obj) => obj.intersectionRatio,
+    get_target: (obj) => obj.target
   },
 
   webapi_IntersectionObserverInit: {
@@ -7433,7 +8141,13 @@ export const wasmImportObject = {
       if (delay !== undefined) obj.delay = delay;
       if (trackVisibility !== undefined) obj.trackVisibility = trackVisibility;
       return obj;
-    }
+    },
+    get_root: (obj) => obj.root,
+    get_rootMargin: (obj) => obj.rootMargin,
+    get_scrollMargin: (obj) => obj.scrollMargin,
+    get_threshold: (obj) => obj.threshold,
+    get_delay: (obj) => obj.delay,
+    get_trackVisibility: (obj) => obj.trackVisibility
   },
 
   webapi_MutationCallback: {

@@ -32,3 +32,43 @@ pub fn StreamPipeOptions::new(
 pub fn StreamPipeOptions::empty() -> StreamPipeOptions {
   stream_pipe_options_empty_ffi()
 }
+
+///|
+pub fn StreamPipeOptions::prevent_close(self : StreamPipeOptions) -> Bool? {
+  let result = stream_pipe_options_get_prevent_close_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn StreamPipeOptions::prevent_abort(self : StreamPipeOptions) -> Bool? {
+  let result = stream_pipe_options_get_prevent_abort_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn StreamPipeOptions::prevent_cancel(self : StreamPipeOptions) -> Bool? {
+  let result = stream_pipe_options_get_prevent_cancel_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn StreamPipeOptions::signal(self : StreamPipeOptions) -> AbortSignal? {
+  let result = stream_pipe_options_get_signal_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

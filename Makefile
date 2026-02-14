@@ -1,14 +1,18 @@
-.PHONY: all gen gen-test check fmt info build-examples test-playwright serve clean
+.PHONY: all gen gen-test gen-test-update check fmt info build-examples test-playwright serve clean
 
 all: gen check fmt info build-examples test-playwright
 
-# Run the code generator
+# Run the code generator (always run 'make clean' first after editing generator code)
 gen:
 	cd webapi_gen && moon run cmd/main
 
 # Run code generator tests
 gen-test:
 	cd webapi_gen && moon test
+
+# Run code generator tests with snapshot updates
+gen-test-update:
+	cd webapi_gen && moon test --update
 
 # Type-check generated bindings
 check:
@@ -18,6 +22,8 @@ check:
 # Format all MoonBit code
 fmt:
 	moon fmt
+	moon -C webapi_gen fmt
+	moon -C examples fmt
 
 # Update .mbti interface files
 info:

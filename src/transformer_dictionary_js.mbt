@@ -20,3 +20,21 @@ extern "js" fn transformer_ffi(
 
 ///|
 extern "js" fn transformer_empty_ffi() -> Transformer = "() => {}"
+
+///|
+extern "js" fn transformer_get_start_ffi(obj : JsValue) -> JsValue = "(obj) => obj.start"
+
+///|
+extern "js" fn transformer_get_transform_ffi(obj : JsValue) -> JsValue = "(obj) => obj.transform"
+
+///|
+extern "js" fn transformer_get_flush_ffi(obj : JsValue) -> JsValue = "(obj) => obj.flush"
+
+///|
+extern "js" fn transformer_get_cancel_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancel"
+
+///|
+extern "js" fn transformer_get_readable_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.readableType"
+
+///|
+extern "js" fn transformer_get_writable_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.writableType"

@@ -25,3 +25,27 @@ pub fn NavigationResult::new(
 pub fn NavigationResult::empty() -> NavigationResult {
   navigation_result_empty_ffi()
 }
+
+///|
+pub fn NavigationResult::committed(
+  self : NavigationResult,
+) -> JsPromise[NavigationHistoryEntry]? {
+  let result = navigation_result_get_committed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NavigationResult::finished(
+  self : NavigationResult,
+) -> JsPromise[NavigationHistoryEntry]? {
+  let result = navigation_result_get_finished_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

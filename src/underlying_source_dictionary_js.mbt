@@ -18,3 +18,20 @@ extern "js" fn underlying_source_ffi(
 
 ///|
 extern "js" fn underlying_source_empty_ffi() -> UnderlyingSource = "() => {}"
+
+///|
+extern "js" fn underlying_source_get_start_ffi(obj : JsValue) -> JsValue = "(obj) => obj.start"
+
+///|
+extern "js" fn underlying_source_get_pull_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pull"
+
+///|
+extern "js" fn underlying_source_get_cancel_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancel"
+
+///|
+extern "js" fn underlying_source_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+extern "js" fn underlying_source_get_auto_allocate_chunk_size_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.autoAllocateChunkSize"

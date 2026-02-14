@@ -28,3 +28,17 @@ pub fn ImageBitmapRenderingContextSettings::new(
 pub fn ImageBitmapRenderingContextSettings::empty() -> ImageBitmapRenderingContextSettings {
   image_bitmap_rendering_context_settings_empty_ffi()
 }
+
+///|
+pub fn ImageBitmapRenderingContextSettings::alpha(
+  self : ImageBitmapRenderingContextSettings,
+) -> Bool? {
+  let result = image_bitmap_rendering_context_settings_get_alpha_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

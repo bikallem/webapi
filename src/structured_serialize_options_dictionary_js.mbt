@@ -10,3 +10,8 @@ extern "js" fn structured_serialize_options_ffi(
 
 ///|
 extern "js" fn structured_serialize_options_empty_ffi() -> StructuredSerializeOptions = "() => {}"
+
+///|
+extern "js" fn structured_serialize_options_get_transfer_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.transfer"

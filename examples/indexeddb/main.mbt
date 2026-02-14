@@ -10,8 +10,7 @@ fn main {
   // Container
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
-    "style",
-    "font-family: system-ui; max-width: 600px; margin: 2em auto;",
+    "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
   // Heading
@@ -19,16 +18,13 @@ fn main {
   heading.set_text_content("IndexedDB")
 
   // Key input
-  let key_input : @webapi.HTMLInputElement = doc
-    .create_element("input")
-    .into()
+  let key_input : @webapi.HTMLInputElement = doc.create_element("input").into()
   key_input
   ..set_attribute("id", "key-input")
   ..set_attribute("type", "text")
   ..set_attribute("placeholder", "Key")
   .set_attribute(
-    "style",
-    "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
+    "style", "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
   )
 
   // Value input
@@ -40,25 +36,20 @@ fn main {
   ..set_attribute("type", "text")
   ..set_attribute("placeholder", "Value")
   .set_attribute(
-    "style",
-    "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
+    "style", "padding: 0.4em; margin: 0.25em; font-size: 1em; width: 150px;",
   )
 
   // Button style
   let btn_style = "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;"
 
   // Buttons
-  let put_btn : @webapi.HTMLButtonElement = doc
-    .create_element("button")
-    .into()
+  let put_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   put_btn
   ..set_id("put-btn")
   ..set_attribute("style", btn_style)
   .set_text_content("Put")
 
-  let get_btn : @webapi.HTMLButtonElement = doc
-    .create_element("button")
-    .into()
+  let get_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   get_btn
   ..set_id("get-btn")
   ..set_attribute("style", btn_style)
@@ -90,14 +81,13 @@ fn main {
   let result_el = doc.create_element("pre")
   result_el.set_id("result")
   result_el.set_attribute(
-    "style",
-    "background: #f5f5f5; padding: 1em; margin: 0.5em 0; min-height: 2em; font-family: monospace;",
+    "style", "background: #f5f5f5; padding: 1em; margin: 0.5em 0; min-height: 2em; font-family: monospace;",
   )
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [
-    heading, key_input, value_input, put_btn, get_btn, delete_btn, clear_btn,
-    status_el, result_el,
+    heading, key_input, value_input, put_btn, get_btn, delete_btn, clear_btn, status_el,
+    result_el,
   ]
   for child in children {
     container.append_child(child) |> ignore
@@ -168,10 +158,10 @@ fn main {
             "success",
             @webapi.EventListener::new(fn(_event) {
               let val = req.result()
-              if is_null_or_undefined(val) {
+              if val.is_null() {
                 result_el.set_text_content("Not found: " + key)
               } else {
-                let str = js_value_to_string(val)
+                let str = val.to_string()
                 result_el.set_text_content("Found: " + key + " = " + str)
               }
             }),

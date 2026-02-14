@@ -12,3 +12,11 @@ extern "js" fn text_decoder_options_ffi(
 
 ///|
 extern "js" fn text_decoder_options_empty_ffi() -> TextDecoderOptions = "() => {}"
+
+///|
+extern "js" fn text_decoder_options_get_fatal_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fatal"
+
+///|
+extern "js" fn text_decoder_options_get_ignore_bom_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ignoreBOM"

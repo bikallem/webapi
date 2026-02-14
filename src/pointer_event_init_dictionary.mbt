@@ -108,3 +108,449 @@ pub fn PointerEventInit::new(
 pub fn PointerEventInit::empty() -> PointerEventInit {
   pointer_event_init_empty_ffi()
 }
+
+///|
+pub fn PointerEventInit::bubbles(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::cancelable(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::composed(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::view(self : PointerEventInit) -> Window? {
+  let result = pointer_event_init_get_view_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn PointerEventInit::detail(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_detail_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::which(self : PointerEventInit) -> UInt? {
+  let result = pointer_event_init_get_which_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::ctrl_key(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_ctrl_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::shift_key(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_shift_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::alt_key(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_alt_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::meta_key(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_meta_key_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_alt_graph(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_alt_graph_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_caps_lock(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_caps_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_fn(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_fn_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_fn_lock(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_fn_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_hyper(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_num_lock(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_num_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_scroll_lock(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_scroll_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_super(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_super_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_symbol(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_symbol_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::modifier_symbol_lock(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_modifier_symbol_lock_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::screen_x(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_screen_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::screen_y(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_screen_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::client_x(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_client_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::client_y(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_client_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::button(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_button_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::buttons(self : PointerEventInit) -> UInt? {
+  let result = pointer_event_init_get_buttons_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::related_target(
+  self : PointerEventInit,
+) -> EventTarget? {
+  let result = pointer_event_init_get_related_target_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn PointerEventInit::pointer_id(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_pointer_id_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::width(self : PointerEventInit) -> Double? {
+  let result = pointer_event_init_get_width_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::height(self : PointerEventInit) -> Double? {
+  let result = pointer_event_init_get_height_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::pressure(self : PointerEventInit) -> Float? {
+  let result = pointer_event_init_get_pressure_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::tangential_pressure(self : PointerEventInit) -> Float? {
+  let result = pointer_event_init_get_tangential_pressure_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::tilt_x(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_tilt_x_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::tilt_y(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_tilt_y_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::twist(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_twist_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::altitude_angle(self : PointerEventInit) -> Double? {
+  let result = pointer_event_init_get_altitude_angle_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::azimuth_angle(self : PointerEventInit) -> Double? {
+  let result = pointer_event_init_get_azimuth_angle_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::pointer_type(self : PointerEventInit) -> String? {
+  let result = pointer_event_init_get_pointer_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::is_primary(self : PointerEventInit) -> Bool? {
+  let result = pointer_event_init_get_is_primary_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::persistent_device_id(self : PointerEventInit) -> Int? {
+  let result = pointer_event_init_get_persistent_device_id_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn PointerEventInit::coalesced_events(
+  self : PointerEventInit,
+) -> Array[PointerEvent]? {
+  let result = pointer_event_init_get_coalesced_events_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn PointerEventInit::predicted_events(
+  self : PointerEventInit,
+) -> Array[PointerEvent]? {
+  let result = pointer_event_init_get_predicted_events_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

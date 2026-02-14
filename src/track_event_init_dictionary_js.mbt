@@ -16,3 +16,15 @@ extern "js" fn track_event_init_ffi(
 
 ///|
 extern "js" fn track_event_init_empty_ffi() -> TrackEventInit = "() => {}"
+
+///|
+extern "js" fn track_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn track_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn track_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn track_event_init_get_track_ffi(obj : JsValue) -> JsValue = "(obj) => obj.track"

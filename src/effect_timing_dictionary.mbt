@@ -34,3 +34,53 @@ pub fn EffectTiming::new(
 pub fn EffectTiming::empty() -> EffectTiming {
   effect_timing_empty_ffi()
 }
+
+///|
+pub fn EffectTiming::fill(self : EffectTiming) -> FillMode? {
+  let result = effect_timing_get_fill_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn EffectTiming::iteration_start(self : EffectTiming) -> Double? {
+  let result = effect_timing_get_iteration_start_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EffectTiming::iterations(self : EffectTiming) -> Double? {
+  let result = effect_timing_get_iterations_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn EffectTiming::direction(self : EffectTiming) -> PlaybackDirection? {
+  let result = effect_timing_get_direction_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn EffectTiming::easing(self : EffectTiming) -> String? {
+  let result = effect_timing_get_easing_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

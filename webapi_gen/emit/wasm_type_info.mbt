@@ -19,7 +19,7 @@ let wasm_valid_stub_other_types : Array[String] = [
    "DataView", "ArrayBuffer", "SharedArrayBuffer",
   // Primitive typedefs — type aliases to wasm value types (f64, i64).
   // Valid as wasm import returns because the wasm-gc engine performs JS→wasm numeric conversion.
-  "DOMHighResTimeStamp", "EpochTimeStamp",
+   "DOMHighResTimeStamp", "EpochTimeStamp",
 ]
 
 ///|

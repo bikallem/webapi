@@ -32,3 +32,39 @@ extern "js" fn dom_matrix2d_init_ffi(
 
 ///|
 extern "js" fn dom_matrix2d_init_empty_ffi() -> DOMMatrix2DInit = "() => {}"
+
+///|
+extern "js" fn dom_matrix2d_init_get_a_ffi(obj : JsValue) -> JsValue = "(obj) => obj.a"
+
+///|
+extern "js" fn dom_matrix2d_init_get_b_ffi(obj : JsValue) -> JsValue = "(obj) => obj.b"
+
+///|
+extern "js" fn dom_matrix2d_init_get_c_ffi(obj : JsValue) -> JsValue = "(obj) => obj.c"
+
+///|
+extern "js" fn dom_matrix2d_init_get_d_ffi(obj : JsValue) -> JsValue = "(obj) => obj.d"
+
+///|
+extern "js" fn dom_matrix2d_init_get_e_ffi(obj : JsValue) -> JsValue = "(obj) => obj.e"
+
+///|
+extern "js" fn dom_matrix2d_init_get_f_ffi(obj : JsValue) -> JsValue = "(obj) => obj.f"
+
+///|
+extern "js" fn dom_matrix2d_init_get_m11_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m11"
+
+///|
+extern "js" fn dom_matrix2d_init_get_m12_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m12"
+
+///|
+extern "js" fn dom_matrix2d_init_get_m21_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m21"
+
+///|
+extern "js" fn dom_matrix2d_init_get_m22_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m22"
+
+///|
+extern "js" fn dom_matrix2d_init_get_m41_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m41"
+
+///|
+extern "js" fn dom_matrix2d_init_get_m42_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m42"

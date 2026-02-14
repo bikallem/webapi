@@ -28,3 +28,17 @@ pub fn PerformanceObserverCallbackOptions::new(
 pub fn PerformanceObserverCallbackOptions::empty() -> PerformanceObserverCallbackOptions {
   performance_observer_callback_options_empty_ffi()
 }
+
+///|
+pub fn PerformanceObserverCallbackOptions::dropped_entries_count(
+  self : PerformanceObserverCallbackOptions,
+) -> UInt64? {
+  let result = performance_observer_callback_options_get_dropped_entries_count_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

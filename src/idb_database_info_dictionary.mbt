@@ -25,3 +25,23 @@ pub fn IDBDatabaseInfo::new(
 pub fn IDBDatabaseInfo::empty() -> IDBDatabaseInfo {
   idb_database_info_empty_ffi()
 }
+
+///|
+pub fn IDBDatabaseInfo::name(self : IDBDatabaseInfo) -> String? {
+  let result = idb_database_info_get_name_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn IDBDatabaseInfo::version(self : IDBDatabaseInfo) -> UInt64? {
+  let result = idb_database_info_get_version_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

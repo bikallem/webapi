@@ -30,3 +30,31 @@ pub fn WindowPostMessageOptions::new(
 pub fn WindowPostMessageOptions::empty() -> WindowPostMessageOptions {
   window_post_message_options_empty_ffi()
 }
+
+///|
+pub fn WindowPostMessageOptions::transfer(
+  self : WindowPostMessageOptions,
+) -> Array[JsValue]? {
+  let result = window_post_message_options_get_transfer_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn WindowPostMessageOptions::target_origin(
+  self : WindowPostMessageOptions,
+) -> String? {
+  let result = window_post_message_options_get_target_origin_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

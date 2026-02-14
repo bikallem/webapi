@@ -31,3 +31,23 @@ pub fn BoxQuadOptions::new(
 pub fn BoxQuadOptions::empty() -> BoxQuadOptions {
   box_quad_options_empty_ffi()
 }
+
+///|
+pub fn BoxQuadOptions::box(self : BoxQuadOptions) -> CSSBoxType? {
+  let result = box_quad_options_get_box_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn BoxQuadOptions::relative_to(self : BoxQuadOptions) -> GeometryNode? {
+  let result = box_quad_options_get_relative_to_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

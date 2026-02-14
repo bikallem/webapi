@@ -44,3 +44,67 @@ pub fn IntersectionObserverEntryInit::new(
 pub fn IntersectionObserverEntryInit::empty() -> IntersectionObserverEntryInit {
   intersection_observer_entry_init_empty_ffi()
 }
+
+///|
+pub fn IntersectionObserverEntryInit::time(
+  self : IntersectionObserverEntryInit,
+) -> DOMHighResTimeStamp {
+  intersection_observer_entry_init_get_time_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn IntersectionObserverEntryInit::root_bounds(
+  self : IntersectionObserverEntryInit,
+) -> DOMRectInit {
+  intersection_observer_entry_init_get_root_bounds_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn IntersectionObserverEntryInit::bounding_client_rect(
+  self : IntersectionObserverEntryInit,
+) -> DOMRectInit {
+  intersection_observer_entry_init_get_bounding_client_rect_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+pub fn IntersectionObserverEntryInit::intersection_rect(
+  self : IntersectionObserverEntryInit,
+) -> DOMRectInit {
+  intersection_observer_entry_init_get_intersection_rect_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+pub fn IntersectionObserverEntryInit::is_intersecting(
+  self : IntersectionObserverEntryInit,
+) -> Bool {
+  intersection_observer_entry_init_get_is_intersecting_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+pub fn IntersectionObserverEntryInit::is_visible(
+  self : IntersectionObserverEntryInit,
+) -> Bool {
+  intersection_observer_entry_init_get_is_visible_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn IntersectionObserverEntryInit::intersection_ratio(
+  self : IntersectionObserverEntryInit,
+) -> Double {
+  intersection_observer_entry_init_get_intersection_ratio_ffi(
+    TJsValue::to_js(self),
+  )
+}
+
+///|
+pub fn IntersectionObserverEntryInit::target(
+  self : IntersectionObserverEntryInit,
+) -> Element {
+  intersection_observer_entry_init_get_target_ffi(TJsValue::to_js(self))
+}

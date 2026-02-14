@@ -32,3 +32,47 @@ pub fn ClipboardEventInit::new(
 pub fn ClipboardEventInit::empty() -> ClipboardEventInit {
   clipboard_event_init_empty_ffi()
 }
+
+///|
+pub fn ClipboardEventInit::bubbles(self : ClipboardEventInit) -> Bool? {
+  let result = clipboard_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ClipboardEventInit::cancelable(self : ClipboardEventInit) -> Bool? {
+  let result = clipboard_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ClipboardEventInit::composed(self : ClipboardEventInit) -> Bool? {
+  let result = clipboard_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ClipboardEventInit::clipboard_data(
+  self : ClipboardEventInit,
+) -> DataTransfer? {
+  let result = clipboard_event_init_get_clipboard_data_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

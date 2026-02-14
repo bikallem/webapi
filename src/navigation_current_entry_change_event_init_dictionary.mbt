@@ -38,3 +38,66 @@ pub fn NavigationCurrentEntryChangeEventInit::new(
 pub fn NavigationCurrentEntryChangeEventInit::empty() -> NavigationCurrentEntryChangeEventInit {
   navigation_current_entry_change_event_init_empty_ffi()
 }
+
+///|
+pub fn NavigationCurrentEntryChangeEventInit::bubbles(
+  self : NavigationCurrentEntryChangeEventInit,
+) -> Bool? {
+  let result = navigation_current_entry_change_event_init_get_bubbles_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NavigationCurrentEntryChangeEventInit::cancelable(
+  self : NavigationCurrentEntryChangeEventInit,
+) -> Bool? {
+  let result = navigation_current_entry_change_event_init_get_cancelable_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NavigationCurrentEntryChangeEventInit::composed(
+  self : NavigationCurrentEntryChangeEventInit,
+) -> Bool? {
+  let result = navigation_current_entry_change_event_init_get_composed_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn NavigationCurrentEntryChangeEventInit::navigation_type(
+  self : NavigationCurrentEntryChangeEventInit,
+) -> NavigationType? {
+  let result = navigation_current_entry_change_event_init_get_navigation_type_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn NavigationCurrentEntryChangeEventInit::from(
+  self : NavigationCurrentEntryChangeEventInit,
+) -> NavigationHistoryEntry {
+  navigation_current_entry_change_event_init_get_from_ffi(TJsValue::to_js(self))
+}

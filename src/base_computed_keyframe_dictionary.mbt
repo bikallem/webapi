@@ -34,3 +34,49 @@ pub fn BaseComputedKeyframe::new(
 pub fn BaseComputedKeyframe::empty() -> BaseComputedKeyframe {
   base_computed_keyframe_empty_ffi()
 }
+
+///|
+pub fn BaseComputedKeyframe::offset(self : BaseComputedKeyframe) -> Double? {
+  let result = base_computed_keyframe_get_offset_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn BaseComputedKeyframe::computed_offset(
+  self : BaseComputedKeyframe,
+) -> Double? {
+  let result = base_computed_keyframe_get_computed_offset_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn BaseComputedKeyframe::easing(self : BaseComputedKeyframe) -> String? {
+  let result = base_computed_keyframe_get_easing_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn BaseComputedKeyframe::composite(
+  self : BaseComputedKeyframe,
+) -> CompositeOperationOrAuto? {
+  let result = base_computed_keyframe_get_composite_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

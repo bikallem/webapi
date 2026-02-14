@@ -22,3 +22,34 @@ extern "js" fn keyframe_effect_options_ffi(
 
 ///|
 extern "js" fn keyframe_effect_options_empty_ffi() -> KeyframeEffectOptions = "() => {}"
+
+///|
+extern "js" fn keyframe_effect_options_get_fill_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fill"
+
+///|
+extern "js" fn keyframe_effect_options_get_iteration_start_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterationStart"
+
+///|
+extern "js" fn keyframe_effect_options_get_iterations_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterations"
+
+///|
+extern "js" fn keyframe_effect_options_get_direction_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.direction"
+
+///|
+extern "js" fn keyframe_effect_options_get_easing_ffi(obj : JsValue) -> JsValue = "(obj) => obj.easing"
+
+///|
+extern "js" fn keyframe_effect_options_get_composite_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composite"
+
+///|
+extern "js" fn keyframe_effect_options_get_pseudo_element_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pseudoElement"

@@ -14,3 +14,14 @@ extern "js" fn file_property_bag_ffi(
 
 ///|
 extern "js" fn file_property_bag_empty_ffi() -> FilePropertyBag = "() => {}"
+
+///|
+extern "js" fn file_property_bag_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+extern "js" fn file_property_bag_get_endings_ffi(obj : JsValue) -> JsValue = "(obj) => obj.endings"
+
+///|
+extern "js" fn file_property_bag_get_last_modified_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.lastModified"

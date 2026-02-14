@@ -42,3 +42,93 @@ pub fn InputEventInit::new(
 pub fn InputEventInit::empty() -> InputEventInit {
   input_event_init_empty_ffi()
 }
+
+///|
+pub fn InputEventInit::bubbles(self : InputEventInit) -> Bool? {
+  let result = input_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn InputEventInit::cancelable(self : InputEventInit) -> Bool? {
+  let result = input_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn InputEventInit::composed(self : InputEventInit) -> Bool? {
+  let result = input_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn InputEventInit::view(self : InputEventInit) -> Window? {
+  let result = input_event_init_get_view_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn InputEventInit::detail(self : InputEventInit) -> Int? {
+  let result = input_event_init_get_detail_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn InputEventInit::which(self : InputEventInit) -> UInt? {
+  let result = input_event_init_get_which_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn InputEventInit::data(self : InputEventInit) -> String? {
+  let result = input_event_init_get_data_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn InputEventInit::is_composing(self : InputEventInit) -> Bool? {
+  let result = input_event_init_get_is_composing_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn InputEventInit::input_type(self : InputEventInit) -> String? {
+  let result = input_event_init_get_input_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

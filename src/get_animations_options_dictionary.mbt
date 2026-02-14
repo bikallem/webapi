@@ -30,3 +30,27 @@ pub fn GetAnimationsOptions::new(
 pub fn GetAnimationsOptions::empty() -> GetAnimationsOptions {
   get_animations_options_empty_ffi()
 }
+
+///|
+pub fn GetAnimationsOptions::subtree(self : GetAnimationsOptions) -> Bool? {
+  let result = get_animations_options_get_subtree_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn GetAnimationsOptions::pseudo_element(
+  self : GetAnimationsOptions,
+) -> CSSOMString? {
+  let result = get_animations_options_get_pseudo_element_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

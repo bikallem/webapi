@@ -20,3 +20,21 @@ extern "js" fn close_event_init_ffi(
 
 ///|
 extern "js" fn close_event_init_empty_ffi() -> CloseEventInit = "() => {}"
+
+///|
+extern "js" fn close_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn close_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn close_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn close_event_init_get_was_clean_ffi(obj : JsValue) -> JsValue = "(obj) => obj.wasClean"
+
+///|
+extern "js" fn close_event_init_get_code_ffi(obj : JsValue) -> JsValue = "(obj) => obj.code"
+
+///|
+extern "js" fn close_event_init_get_reason_ffi(obj : JsValue) -> JsValue = "(obj) => obj.reason"

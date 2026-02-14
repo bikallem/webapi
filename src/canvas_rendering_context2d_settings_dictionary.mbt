@@ -38,3 +38,73 @@ pub fn CanvasRenderingContext2DSettings::new(
 pub fn CanvasRenderingContext2DSettings::empty() -> CanvasRenderingContext2DSettings {
   canvas_rendering_context2d_settings_empty_ffi()
 }
+
+///|
+pub fn CanvasRenderingContext2DSettings::alpha(
+  self : CanvasRenderingContext2DSettings,
+) -> Bool? {
+  let result = canvas_rendering_context2d_settings_get_alpha_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CanvasRenderingContext2DSettings::desynchronized(
+  self : CanvasRenderingContext2DSettings,
+) -> Bool? {
+  let result = canvas_rendering_context2d_settings_get_desynchronized_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CanvasRenderingContext2DSettings::color_space(
+  self : CanvasRenderingContext2DSettings,
+) -> PredefinedColorSpace? {
+  let result = canvas_rendering_context2d_settings_get_color_space_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn CanvasRenderingContext2DSettings::color_type(
+  self : CanvasRenderingContext2DSettings,
+) -> CanvasColorType? {
+  let result = canvas_rendering_context2d_settings_get_color_type_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn CanvasRenderingContext2DSettings::will_read_frequently(
+  self : CanvasRenderingContext2DSettings,
+) -> Bool? {
+  let result = canvas_rendering_context2d_settings_get_will_read_frequently_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

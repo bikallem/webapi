@@ -8,3 +8,6 @@ extern "js" fn scroll_options_ffi(behavior : JsValue) -> ScrollOptions =
 
 ///|
 extern "js" fn scroll_options_empty_ffi() -> ScrollOptions = "() => {}"
+
+///|
+extern "js" fn scroll_options_get_behavior_ffi(obj : JsValue) -> JsValue = "(obj) => obj.behavior"

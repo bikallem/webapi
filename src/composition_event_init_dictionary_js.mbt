@@ -22,3 +22,28 @@ extern "js" fn composition_event_init_ffi(
 
 ///|
 extern "js" fn composition_event_init_empty_ffi() -> CompositionEventInit = "() => {}"
+
+///|
+extern "js" fn composition_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn composition_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn composition_event_init_get_composed_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn composition_event_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+extern "js" fn composition_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+extern "js" fn composition_event_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"
+
+///|
+extern "js" fn composition_event_init_get_data_ffi(obj : JsValue) -> JsValue = "(obj) => obj.data"

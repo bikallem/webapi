@@ -30,3 +30,33 @@ pub fn WorkerOptions::new(
 pub fn WorkerOptions::empty() -> WorkerOptions {
   worker_options_empty_ffi()
 }
+
+///|
+pub fn WorkerOptions::name(self : WorkerOptions) -> String? {
+  let result = worker_options_get_name_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn WorkerOptions::type_(self : WorkerOptions) -> WorkerType? {
+  let result = worker_options_get_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn WorkerOptions::credentials(self : WorkerOptions) -> RequestCredentials? {
+  let result = worker_options_get_credentials_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

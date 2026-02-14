@@ -40,3 +40,73 @@ pub fn CompositionEventInit::new(
 pub fn CompositionEventInit::empty() -> CompositionEventInit {
   composition_event_init_empty_ffi()
 }
+
+///|
+pub fn CompositionEventInit::bubbles(self : CompositionEventInit) -> Bool? {
+  let result = composition_event_init_get_bubbles_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CompositionEventInit::cancelable(self : CompositionEventInit) -> Bool? {
+  let result = composition_event_init_get_cancelable_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CompositionEventInit::composed(self : CompositionEventInit) -> Bool? {
+  let result = composition_event_init_get_composed_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CompositionEventInit::view(self : CompositionEventInit) -> Window? {
+  let result = composition_event_init_get_view_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn CompositionEventInit::detail(self : CompositionEventInit) -> Int? {
+  let result = composition_event_init_get_detail_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CompositionEventInit::which(self : CompositionEventInit) -> UInt? {
+  let result = composition_event_init_get_which_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn CompositionEventInit::data(self : CompositionEventInit) -> String? {
+  let result = composition_event_init_get_data_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

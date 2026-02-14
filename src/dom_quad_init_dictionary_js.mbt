@@ -16,3 +16,15 @@ extern "js" fn dom_quad_init_ffi(
 
 ///|
 extern "js" fn dom_quad_init_empty_ffi() -> DOMQuadInit = "() => {}"
+
+///|
+extern "js" fn dom_quad_init_get_p1_ffi(obj : JsValue) -> JsValue = "(obj) => obj.p1"
+
+///|
+extern "js" fn dom_quad_init_get_p2_ffi(obj : JsValue) -> JsValue = "(obj) => obj.p2"
+
+///|
+extern "js" fn dom_quad_init_get_p3_ffi(obj : JsValue) -> JsValue = "(obj) => obj.p3"
+
+///|
+extern "js" fn dom_quad_init_get_p4_ffi(obj : JsValue) -> JsValue = "(obj) => obj.p4"

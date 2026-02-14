@@ -47,7 +47,8 @@ fn emit_js_preamble() -> String {
     #|    undefined: () => undefined,
     #|    null: () => null,
     #|    isNull: (value) => value === null || value === undefined,
-    #|    isUndefined: (value) => value === undefined
+    #|    isUndefined: (value) => value === undefined,
+    #|    toString: (v) => '' + v
     #|  },
     #|
     #|  JsNull: {
@@ -119,9 +120,9 @@ fn needs_js_quoting(name : String) -> Bool {
 /// Emit JS getter for an attribute
 fn emit_js_getter(
   attr_name : String,
-  is_static~ : Bool = false,
-  is_bigint~ : Bool = false,
-  interface_name~ : String = "",
+  is_static? : Bool = false,
+  is_bigint? : Bool = false,
+  interface_name? : String = "",
 ) -> String {
   if is_static {
     let expr = "\{interface_name}.\{attr_name}"
@@ -143,8 +144,8 @@ fn emit_js_getter(
 /// Emit JS setter for an attribute
 fn emit_js_setter(
   attr_name : String,
-  is_static~ : Bool = false,
-  interface_name~ : String = "",
+  is_static? : Bool = false,
+  interface_name? : String = "",
 ) -> String {
   if is_static {
     "    set_\{attr_name}: (value) => { \{interface_name}.\{attr_name} = value; }"
@@ -165,8 +166,8 @@ fn emit_js_method(
   original_name : String,
   args : Array[@parser.Argument],
   is_static : Bool,
-  is_bigint~ : Bool = false,
-  interface_name~ : String = "",
+  is_bigint? : Bool = false,
+  interface_name? : String = "",
 ) -> String {
   // Build argument names list (params without spread, call_args with spread for variadic)
   let arg_names : Array[String] = []
@@ -401,6 +402,10 @@ fn emit_js_dictionary_module(
   ctor_buf.write_string("      return obj;\n")
   ctor_buf.write_string("    }")
   entries.push(ctor_buf.to_string())
+  // Dictionary property getters
+  for mem in dict.members {
+    entries.push(emit_js_getter(mem.name, is_bigint=is_bigint_type(mem.type_)))
+  }
   buf.write_string(entries.join(",\n"))
   if entries.length() > 0 {
     buf.write_string("\n")
@@ -422,7 +427,7 @@ fn emit_js_namespace_method(
   namespace_name : String,
   method_name : String,
   args : Array[@parser.Argument],
-  is_bigint~ : Bool = false,
+  is_bigint? : Bool = false,
 ) -> String {
   let arg_names : Array[String] = []
   let call_parts : Array[String] = []
@@ -448,7 +453,7 @@ fn emit_js_namespace_method(
 fn emit_js_namespace_getter(
   namespace_name : String,
   attr_name : String,
-  is_bigint~ : Bool = false,
+  is_bigint? : Bool = false,
 ) -> String {
   let expr = "\{namespace_name}.\{attr_name}"
   let expr = if is_bigint { "BigInt(\{expr})" } else { expr }

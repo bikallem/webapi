@@ -16,3 +16,21 @@ extern "js" fn svg_bounding_box_options_ffi(
 
 ///|
 extern "js" fn svg_bounding_box_options_empty_ffi() -> SVGBoundingBoxOptions = "() => {}"
+
+///|
+extern "js" fn svg_bounding_box_options_get_fill_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fill"
+
+///|
+extern "js" fn svg_bounding_box_options_get_stroke_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.stroke"
+
+///|
+extern "js" fn svg_bounding_box_options_get_markers_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.markers"
+
+///|
+extern "js" fn svg_bounding_box_options_get_clipped_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.clipped"

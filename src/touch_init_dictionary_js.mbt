@@ -38,3 +38,58 @@ extern "js" fn touch_init_ffi(
 
 ///|
 extern "js" fn touch_init_empty_ffi() -> TouchInit = "() => {}"
+
+///|
+extern "js" fn touch_init_get_identifier_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.identifier"
+
+///|
+fn touch_init_get_identifier_ffi(obj : JsValue) -> Int {
+  touch_init_get_identifier_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn touch_init_get_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+fn touch_init_get_target_ffi(obj : JsValue) -> EventTarget {
+  touch_init_get_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn touch_init_get_client_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clientX"
+
+///|
+extern "js" fn touch_init_get_client_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clientY"
+
+///|
+extern "js" fn touch_init_get_screen_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.screenX"
+
+///|
+extern "js" fn touch_init_get_screen_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.screenY"
+
+///|
+extern "js" fn touch_init_get_page_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pageX"
+
+///|
+extern "js" fn touch_init_get_page_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pageY"
+
+///|
+extern "js" fn touch_init_get_radius_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.radiusX"
+
+///|
+extern "js" fn touch_init_get_radius_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.radiusY"
+
+///|
+extern "js" fn touch_init_get_rotation_angle_ffi(obj : JsValue) -> JsValue = "(obj) => obj.rotationAngle"
+
+///|
+extern "js" fn touch_init_get_force_ffi(obj : JsValue) -> JsValue = "(obj) => obj.force"
+
+///|
+extern "js" fn touch_init_get_altitude_angle_ffi(obj : JsValue) -> JsValue = "(obj) => obj.altitudeAngle"
+
+///|
+extern "js" fn touch_init_get_azimuth_angle_ffi(obj : JsValue) -> JsValue = "(obj) => obj.azimuthAngle"
+
+///|
+extern "js" fn touch_init_get_touch_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.touchType"

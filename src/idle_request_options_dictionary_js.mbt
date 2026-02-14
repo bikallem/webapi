@@ -10,3 +10,6 @@ extern "js" fn idle_request_options_ffi(
 
 ///|
 extern "js" fn idle_request_options_empty_ffi() -> IdleRequestOptions = "() => {}"
+
+///|
+extern "js" fn idle_request_options_get_timeout_ffi(obj : JsValue) -> JsValue = "(obj) => obj.timeout"

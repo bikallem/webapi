@@ -10,3 +10,6 @@ extern "js" fn close_watcher_options_ffi(
 
 ///|
 extern "js" fn close_watcher_options_empty_ffi() -> CloseWatcherOptions = "() => {}"
+
+///|
+extern "js" fn close_watcher_options_get_signal_ffi(obj : JsValue) -> JsValue = "(obj) => obj.signal"

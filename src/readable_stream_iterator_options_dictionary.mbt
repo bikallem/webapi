@@ -28,3 +28,17 @@ pub fn ReadableStreamIteratorOptions::new(
 pub fn ReadableStreamIteratorOptions::empty() -> ReadableStreamIteratorOptions {
   readable_stream_iterator_options_empty_ffi()
 }
+
+///|
+pub fn ReadableStreamIteratorOptions::prevent_cancel(
+  self : ReadableStreamIteratorOptions,
+) -> Bool? {
+  let result = readable_stream_iterator_options_get_prevent_cancel_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

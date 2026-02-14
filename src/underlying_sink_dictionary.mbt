@@ -34,3 +34,61 @@ pub fn UnderlyingSink::new(
 pub fn UnderlyingSink::empty() -> UnderlyingSink {
   underlying_sink_empty_ffi()
 }
+
+///|
+pub fn UnderlyingSink::start(
+  self : UnderlyingSink,
+) -> UnderlyingSinkStartCallback? {
+  let result = underlying_sink_get_start_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSink::write(
+  self : UnderlyingSink,
+) -> UnderlyingSinkWriteCallback? {
+  let result = underlying_sink_get_write_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSink::close(
+  self : UnderlyingSink,
+) -> UnderlyingSinkCloseCallback? {
+  let result = underlying_sink_get_close_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSink::abort(
+  self : UnderlyingSink,
+) -> UnderlyingSinkAbortCallback? {
+  let result = underlying_sink_get_abort_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSink::type_(self : UnderlyingSink) -> JsValue? {
+  let result = underlying_sink_get_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

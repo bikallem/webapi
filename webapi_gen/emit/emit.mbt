@@ -72,6 +72,18 @@ pub(all) struct CallbackArgEmit {
 } derive(Show, ToJson)
 
 ///|
+/// Dictionary getter argument emit representation
+pub(all) struct DictionaryGetterArg {
+  dict_name : String
+  original_name : String // JS property name, e.g. "done"
+  return_type : String // MoonBit return type, e.g. "Bool"
+  is_optional : Bool // Whether the return is nullable
+  is_enum_type : Bool // Needs from_unchecked conversion on wasm
+  is_valid_wasm_stub : Bool // Can be used directly as wasm import return type
+  is_primitive : Bool // Bool, Int, Double, etc. - need FromJsAny conversion on wasm-gc
+} derive(Show, ToJson)
+
+///|
 pub enum Emit {
   External(TypeName) // External type, eg. #external EventTarget
   ImplTJsValue(TypeName) // eg. pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
@@ -85,6 +97,7 @@ pub enum Emit {
   UnionArgTrait(TraitName) // eg. trait TEventTargetArg { ... }
   UnionArgTraitImpl(TypeName, TraitName) // eg. impl TEventTargetArg for TEventTarget
   DictionaryCreate(TypeName, Array[@type_mapping.MethodArg]) // eg. pub fn[T: TEventTarget] EventTarget::new(self : EventTarget) -> T = "%identity"
+  DictionaryGetter(TypeName, Array[DictionaryGetterArg]) // eg. pub fn ReadableStreamReadResult::done(self) -> Bool
   ConstructorMethod(ConstructorName, TypeName, Array[@type_mapping.MethodArg]) // eg. pub fn EventTarget::new(...) -> EventTarget { ...
   Enum(TypeName, Array[EnumVariantEmit]) // eg. pub enum SomeEnum { Variant1, Variant2
   TypedefAlias(TypeName, String) // eg. pub typealias EventHandler = EventHandlerNonNull?
@@ -208,6 +221,106 @@ fn render_dictionary_ffi_wasm(
 }
 
 ///|
+fn render_dictionary_getter_shared(
+  type_name : String,
+  args : Array[DictionaryGetterArg],
+) -> String {
+  let buf = StringBuilder::new()
+  for i, arg in args {
+    if i > 0 {
+      buf.write_string("\n\n")
+    }
+    let ffi_name = "\{@type_mapping.snake_case(type_name)}_get_\{@type_mapping.snake_case(arg.original_name)}_ffi"
+    let method_name = @type_mapping.safe_identifier(arg.original_name)
+    let ret_type = if arg.is_optional && !arg.return_type.has_suffix("?") {
+      "\{arg.return_type}?"
+    } else {
+      arg.return_type
+    }
+    buf.write_string(
+      "pub fn \{type_name}::\{method_name}(self : \{type_name}) -> \{ret_type} {\n",
+    )
+    if arg.is_optional || ret_type.has_suffix("?") {
+      buf.write_string("  let result = \{ffi_name}(TJsValue::to_js(self))\n")
+      if arg.is_primitive {
+        // Primitives (Bool, Int, Double, etc.) need FromJsAny conversion on wasm-gc
+        // because unsafe_cast from externref to i32/f64 is invalid.
+        // jsvalue_to_jsany converts externref to (ref extern) via ref.as_non_null.
+        buf.write_string(
+          "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))\n  }\n",
+        )
+      } else {
+        buf.write_string(
+          "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
+        )
+      }
+    } else {
+      buf.write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
+    }
+    buf.write_string("}")
+  }
+  buf.to_string()
+}
+
+///|
+fn render_dictionary_getter_ffi_js(
+  type_name : String,
+  args : Array[DictionaryGetterArg],
+) -> String {
+  let buf = StringBuilder::new()
+  for i, arg in args {
+    if i > 0 {
+      buf.write_string("\n\n")
+    }
+    let ffi_name = "\{@type_mapping.snake_case(type_name)}_get_\{@type_mapping.snake_case(arg.original_name)}_ffi"
+    let is_optional = arg.is_optional || arg.return_type.has_suffix("?")
+    let code = emit_js_ffi_with_return(
+      ffi_name,
+      "obj: JsValue",
+      ["obj"],
+      arg.return_type,
+      is_optional~,
+      is_void=false,
+      is_enum=arg.is_enum_type,
+      "obj.\{arg.original_name}",
+    )
+    buf.write_string(code.0)
+  }
+  buf.to_string()
+}
+
+///|
+fn render_dictionary_getter_ffi_wasm(
+  type_name : String,
+  args : Array[DictionaryGetterArg],
+) -> String {
+  let buf = StringBuilder::new()
+  let module_name = "webapi_\{type_name}"
+  for i, arg in args {
+    if i > 0 {
+      buf.write_string("\n\n")
+    }
+    let ffi_name = "\{@type_mapping.snake_case(type_name)}_get_\{@type_mapping.snake_case(arg.original_name)}_ffi"
+    let is_optional = arg.is_optional || arg.return_type.has_suffix("?")
+    let code = emit_wasm_ffi_with_return(
+      ffi_name,
+      "obj: JsValue",
+      ["obj"],
+      arg.return_type,
+      is_optional~,
+      is_void=false,
+      is_string=arg.return_type == "String",
+      is_enum=arg.is_enum_type,
+      is_valid_stub=arg.is_valid_wasm_stub,
+      module_name,
+      "get_\{arg.original_name}",
+    )
+    buf.write_string(code.0)
+  }
+  buf.to_string()
+}
+
+///|
 fn render_constructor_wrapper(
   constructor_name : String,
   type_name : String,
@@ -304,7 +417,10 @@ fn callback_wasm_arg_expr(arg_name : String, arg_type : String) -> String {
 }
 
 ///|
-fn callback_wasm_return_expr(call_expr : String, return_type : String) -> String {
+fn callback_wasm_return_expr(
+  call_expr : String,
+  return_type : String,
+) -> String {
   match callback_array_inner_type(return_type) {
     Some(_) => "JsArray::from_array(\{call_expr})"
     None => call_expr
@@ -472,18 +588,22 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
 
   // value() returns the IDL string value for each variant.
   // Uses StringBuilder to avoid wasm-gc compiler bug with match returning String.
-  ..write_string(
-    "pub fn \{name}::value(self: \{name}) -> String {\n",
-  )
+  ..write_string("pub fn \{name}::value(self: \{name}) -> String {\n")
   .write_string("  let buf = StringBuilder::new()\n  match self {\n")
   for variant in variants {
     buf.write_string(
       "    \{name}::\{variant.variant_name} => buf.write_string(\"\{variant.original_value}\")\n",
     )
   }
-  buf..write_string("  }\n")..write_string("  buf.to_string()\n").write_string("}")
-  buf..write_string("\n\n")
-  ..write_string("pub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n")
+  buf
+  ..write_string("  }\n")
+  ..write_string("  buf.to_string()\n")
+  .write_string("}")
+  buf
+  ..write_string("\n\n")
+  ..write_string(
+    "pub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n",
+  )
   .write_string("  \{name}::from_unchecked(value)\n")
   buf.write_string("}")
   buf.to_string()
@@ -639,6 +759,11 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         append_shared(render_dictionary_wrapper(type_name, args))
         append_js(render_dictionary_ffi_js(type_name, args))
         append_wasm(render_dictionary_ffi_wasm(type_name, args))
+      }
+      Emit::DictionaryGetter(TypeName(type_name), args) => {
+        append_shared(render_dictionary_getter_shared(type_name, args))
+        append_js(render_dictionary_getter_ffi_js(type_name, args))
+        append_wasm(render_dictionary_getter_ffi_wasm(type_name, args))
       }
       Emit::ConstructorMethod(
         ConstructorName(constructor_name),

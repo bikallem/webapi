@@ -22,21 +22,21 @@ fn main {
   )
 
   let controls : @webapi.HTMLDivElement = doc.create_element("div").into()
-  controls.set_attribute("style", "display: flex; gap: 0.5rem; margin-bottom: 0.75rem;")
+  controls.set_attribute(
+    "style", "display: flex; gap: 0.5rem; margin-bottom: 0.75rem;",
+  )
 
   let grow_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   grow_btn
   ..set_text_content("Grow")
-  .set_attribute(
-    "style", "padding: 0.4rem 0.8rem; cursor: pointer;",
-  )
+  .set_attribute("style", "padding: 0.4rem 0.8rem; cursor: pointer;")
 
-  let shrink_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let shrink_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .into()
   shrink_btn
   ..set_text_content("Shrink")
-  .set_attribute(
-    "style", "padding: 0.4rem 0.8rem; cursor: pointer;",
-  )
+  .set_attribute("style", "padding: 0.4rem 0.8rem; cursor: pointer;")
 
   let log : @webapi.HTMLPreElement = doc.create_element("pre").into()
   log

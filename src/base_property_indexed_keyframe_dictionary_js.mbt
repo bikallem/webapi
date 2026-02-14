@@ -14,3 +14,18 @@ extern "js" fn base_property_indexed_keyframe_ffi(
 
 ///|
 extern "js" fn base_property_indexed_keyframe_empty_ffi() -> BasePropertyIndexedKeyframe = "() => {}"
+
+///|
+extern "js" fn base_property_indexed_keyframe_get_offset_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.offset"
+
+///|
+extern "js" fn base_property_indexed_keyframe_get_easing_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.easing"
+
+///|
+extern "js" fn base_property_indexed_keyframe_get_composite_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composite"

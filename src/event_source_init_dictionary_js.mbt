@@ -10,3 +10,8 @@ extern "js" fn event_source_init_ffi(
 
 ///|
 extern "js" fn event_source_init_empty_ffi() -> EventSourceInit = "() => {}"
+
+///|
+extern "js" fn event_source_init_get_with_credentials_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.withCredentials"

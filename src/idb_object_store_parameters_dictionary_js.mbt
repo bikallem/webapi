@@ -12,3 +12,13 @@ extern "js" fn idb_object_store_parameters_ffi(
 
 ///|
 extern "js" fn idb_object_store_parameters_empty_ffi() -> IDBObjectStoreParameters = "() => {}"
+
+///|
+extern "js" fn idb_object_store_parameters_get_key_path_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.keyPath"
+
+///|
+extern "js" fn idb_object_store_parameters_get_auto_increment_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.autoIncrement"

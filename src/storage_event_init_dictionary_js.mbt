@@ -24,3 +24,29 @@ extern "js" fn storage_event_init_ffi(
 
 ///|
 extern "js" fn storage_event_init_empty_ffi() -> StorageEventInit = "() => {}"
+
+///|
+extern "js" fn storage_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+extern "js" fn storage_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+extern "js" fn storage_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+extern "js" fn storage_event_init_get_key_ffi(obj : JsValue) -> JsValue = "(obj) => obj.key"
+
+///|
+extern "js" fn storage_event_init_get_old_value_ffi(obj : JsValue) -> JsValue = "(obj) => obj.oldValue"
+
+///|
+extern "js" fn storage_event_init_get_new_value_ffi(obj : JsValue) -> JsValue = "(obj) => obj.newValue"
+
+///|
+extern "js" fn storage_event_init_get_url_ffi(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+extern "js" fn storage_event_init_get_storage_area_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.storageArea"

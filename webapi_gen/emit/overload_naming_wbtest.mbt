@@ -33,7 +33,12 @@ test "next_overload_name uses semantic name for fill path overload" {
 test "next_overload_name uses semantic name for coordinate overloads" {
   let counter : Map[String, Int] = {}
   let used = @hashset.new()
-  let _ = next_overload_name("scroll", [mk_arg("options", optional=true)], counter, used)
+  let _ = next_overload_name(
+    "scroll",
+    [mk_arg("options", optional=true)],
+    counter,
+    used,
+  )
   let name2 = next_overload_name(
     "scroll",
     [mk_arg("x", type_=@parser.Double), mk_arg("y", type_=@parser.Double)],

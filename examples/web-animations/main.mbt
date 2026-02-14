@@ -10,8 +10,7 @@ fn main {
   // Container
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
-    "style",
-    "font-family: system-ui; max-width: 600px; margin: 2em auto;",
+    "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
   // Heading
@@ -22,8 +21,7 @@ fn main {
   let box = doc.create_element("div")
   box.set_id("box")
   box.set_attribute(
-    "style",
-    "width: 80px; height: 80px; background: #3b82f6; border-radius: 8px; margin: 1em 0;",
+    "style", "width: 80px; height: 80px; background: #3b82f6; border-radius: 8px; margin: 1em 0;",
   )
 
   // State display
@@ -35,9 +33,7 @@ fn main {
   let btn_style = "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;"
 
   // Play button
-  let play_btn : @webapi.HTMLButtonElement = doc
-    .create_element("button")
-    .into()
+  let play_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   play_btn
   ..set_id("play-btn")
   ..set_attribute("style", btn_style)
@@ -80,7 +76,11 @@ fn main {
   app.append_child(container) |> ignore
 
   // Create animation after box is in DOM
-  let animation = animate_element(box, create_keyframes(), create_animation_options())
+  let animation = animate_element(
+    box,
+    create_keyframes(),
+    create_animation_options(),
+  )
 
   // Set initial state
   state_el.set_text_content("State: " + animation.play_state().value())

@@ -26,3 +26,15 @@ pub fn ResizeObserverOptions::new(
 pub fn ResizeObserverOptions::empty() -> ResizeObserverOptions {
   resize_observer_options_empty_ffi()
 }
+
+///|
+pub fn ResizeObserverOptions::box(
+  self : ResizeObserverOptions,
+) -> ResizeObserverBoxOptions? {
+  let result = resize_observer_options_get_box_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

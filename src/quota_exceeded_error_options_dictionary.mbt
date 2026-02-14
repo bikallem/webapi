@@ -27,3 +27,29 @@ pub fn QuotaExceededErrorOptions::new(
 pub fn QuotaExceededErrorOptions::empty() -> QuotaExceededErrorOptions {
   quota_exceeded_error_options_empty_ffi()
 }
+
+///|
+pub fn QuotaExceededErrorOptions::quota(
+  self : QuotaExceededErrorOptions,
+) -> Double? {
+  let result = quota_exceeded_error_options_get_quota_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn QuotaExceededErrorOptions::requested(
+  self : QuotaExceededErrorOptions,
+) -> Double? {
+  let result = quota_exceeded_error_options_get_requested_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

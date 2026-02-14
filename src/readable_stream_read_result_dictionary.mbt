@@ -27,3 +27,25 @@ pub fn ReadableStreamReadResult::new(
 pub fn ReadableStreamReadResult::empty() -> ReadableStreamReadResult {
   readable_stream_read_result_empty_ffi()
 }
+
+///|
+pub fn ReadableStreamReadResult::value(
+  self : ReadableStreamReadResult,
+) -> JsValue? {
+  let result = readable_stream_read_result_get_value_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn ReadableStreamReadResult::done(self : ReadableStreamReadResult) -> Bool? {
+  let result = readable_stream_read_result_get_done_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

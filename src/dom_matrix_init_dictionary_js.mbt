@@ -54,3 +54,72 @@ extern "js" fn dom_matrix_init_ffi(
 
 ///|
 extern "js" fn dom_matrix_init_empty_ffi() -> DOMMatrixInit = "() => {}"
+
+///|
+extern "js" fn dom_matrix_init_get_a_ffi(obj : JsValue) -> JsValue = "(obj) => obj.a"
+
+///|
+extern "js" fn dom_matrix_init_get_b_ffi(obj : JsValue) -> JsValue = "(obj) => obj.b"
+
+///|
+extern "js" fn dom_matrix_init_get_c_ffi(obj : JsValue) -> JsValue = "(obj) => obj.c"
+
+///|
+extern "js" fn dom_matrix_init_get_d_ffi(obj : JsValue) -> JsValue = "(obj) => obj.d"
+
+///|
+extern "js" fn dom_matrix_init_get_e_ffi(obj : JsValue) -> JsValue = "(obj) => obj.e"
+
+///|
+extern "js" fn dom_matrix_init_get_f_ffi(obj : JsValue) -> JsValue = "(obj) => obj.f"
+
+///|
+extern "js" fn dom_matrix_init_get_m11_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m11"
+
+///|
+extern "js" fn dom_matrix_init_get_m12_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m12"
+
+///|
+extern "js" fn dom_matrix_init_get_m21_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m21"
+
+///|
+extern "js" fn dom_matrix_init_get_m22_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m22"
+
+///|
+extern "js" fn dom_matrix_init_get_m41_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m41"
+
+///|
+extern "js" fn dom_matrix_init_get_m42_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m42"
+
+///|
+extern "js" fn dom_matrix_init_get_m13_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m13"
+
+///|
+extern "js" fn dom_matrix_init_get_m14_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m14"
+
+///|
+extern "js" fn dom_matrix_init_get_m23_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m23"
+
+///|
+extern "js" fn dom_matrix_init_get_m24_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m24"
+
+///|
+extern "js" fn dom_matrix_init_get_m31_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m31"
+
+///|
+extern "js" fn dom_matrix_init_get_m32_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m32"
+
+///|
+extern "js" fn dom_matrix_init_get_m33_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m33"
+
+///|
+extern "js" fn dom_matrix_init_get_m34_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m34"
+
+///|
+extern "js" fn dom_matrix_init_get_m43_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m43"
+
+///|
+extern "js" fn dom_matrix_init_get_m44_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m44"
+
+///|
+extern "js" fn dom_matrix_init_get_is2d_ffi(obj : JsValue) -> JsValue = "(obj) => obj.is2D"

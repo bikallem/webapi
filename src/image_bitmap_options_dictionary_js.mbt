@@ -20,3 +20,33 @@ extern "js" fn image_bitmap_options_ffi(
 
 ///|
 extern "js" fn image_bitmap_options_empty_ffi() -> ImageBitmapOptions = "() => {}"
+
+///|
+extern "js" fn image_bitmap_options_get_image_orientation_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.imageOrientation"
+
+///|
+extern "js" fn image_bitmap_options_get_premultiply_alpha_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.premultiplyAlpha"
+
+///|
+extern "js" fn image_bitmap_options_get_color_space_conversion_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.colorSpaceConversion"
+
+///|
+extern "js" fn image_bitmap_options_get_resize_width_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.resizeWidth"
+
+///|
+extern "js" fn image_bitmap_options_get_resize_height_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.resizeHeight"
+
+///|
+extern "js" fn image_bitmap_options_get_resize_quality_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.resizeQuality"

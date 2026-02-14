@@ -26,3 +26,17 @@ pub fn GetComposedRangesOptions::new(
 pub fn GetComposedRangesOptions::empty() -> GetComposedRangesOptions {
   get_composed_ranges_options_empty_ffi()
 }
+
+///|
+pub fn GetComposedRangesOptions::shadow_roots(
+  self : GetComposedRangesOptions,
+) -> Array[ShadowRoot]? {
+  let result = get_composed_ranges_options_get_shadow_roots_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

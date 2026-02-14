@@ -10,3 +10,8 @@ extern "js" fn readable_stream_iterator_options_ffi(
 
 ///|
 extern "js" fn readable_stream_iterator_options_empty_ffi() -> ReadableStreamIteratorOptions = "() => {}"
+
+///|
+extern "js" fn readable_stream_iterator_options_get_prevent_cancel_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preventCancel"

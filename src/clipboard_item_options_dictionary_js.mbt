@@ -10,3 +10,8 @@ extern "js" fn clipboard_item_options_ffi(
 
 ///|
 extern "js" fn clipboard_item_options_empty_ffi() -> ClipboardItemOptions = "() => {}"
+
+///|
+extern "js" fn clipboard_item_options_get_presentation_style_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.presentationStyle"

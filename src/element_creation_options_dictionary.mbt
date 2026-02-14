@@ -30,3 +30,27 @@ pub fn ElementCreationOptions::new(
 pub fn ElementCreationOptions::empty() -> ElementCreationOptions {
   element_creation_options_empty_ffi()
 }
+
+///|
+pub fn ElementCreationOptions::custom_element_registry(
+  self : ElementCreationOptions,
+) -> CustomElementRegistry? {
+  let result = element_creation_options_get_custom_element_registry_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn ElementCreationOptions::is_(self : ElementCreationOptions) -> String? {
+  let result = element_creation_options_get_is_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

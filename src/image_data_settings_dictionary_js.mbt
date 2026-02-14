@@ -12,3 +12,13 @@ extern "js" fn image_data_settings_ffi(
 
 ///|
 extern "js" fn image_data_settings_empty_ffi() -> ImageDataSettings = "() => {}"
+
+///|
+extern "js" fn image_data_settings_get_color_space_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.colorSpace"
+
+///|
+extern "js" fn image_data_settings_get_pixel_format_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pixelFormat"

@@ -34,3 +34,63 @@ pub fn UnderlyingSource::new(
 pub fn UnderlyingSource::empty() -> UnderlyingSource {
   underlying_source_empty_ffi()
 }
+
+///|
+pub fn UnderlyingSource::start(
+  self : UnderlyingSource,
+) -> UnderlyingSourceStartCallback? {
+  let result = underlying_source_get_start_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSource::pull(
+  self : UnderlyingSource,
+) -> UnderlyingSourcePullCallback? {
+  let result = underlying_source_get_pull_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSource::cancel(
+  self : UnderlyingSource,
+) -> UnderlyingSourceCancelCallback? {
+  let result = underlying_source_get_cancel_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSource::type_(self : UnderlyingSource) -> ReadableStreamType? {
+  let result = underlying_source_get_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn UnderlyingSource::auto_allocate_chunk_size(
+  self : UnderlyingSource,
+) -> UInt64? {
+  let result = underlying_source_get_auto_allocate_chunk_size_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

@@ -34,3 +34,51 @@ pub fn ScrollIntoViewOptions::new(
 pub fn ScrollIntoViewOptions::empty() -> ScrollIntoViewOptions {
   scroll_into_view_options_empty_ffi()
 }
+
+///|
+pub fn ScrollIntoViewOptions::behavior(
+  self : ScrollIntoViewOptions,
+) -> ScrollBehavior? {
+  let result = scroll_into_view_options_get_behavior_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn ScrollIntoViewOptions::block(
+  self : ScrollIntoViewOptions,
+) -> ScrollLogicalPosition? {
+  let result = scroll_into_view_options_get_block_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn ScrollIntoViewOptions::inline(
+  self : ScrollIntoViewOptions,
+) -> ScrollLogicalPosition? {
+  let result = scroll_into_view_options_get_inline_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}
+
+///|
+pub fn ScrollIntoViewOptions::container(
+  self : ScrollIntoViewOptions,
+) -> ScrollIntoViewContainer? {
+  let result = scroll_into_view_options_get_container_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(result.unsafe_cast())
+  }
+}

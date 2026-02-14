@@ -10,3 +10,8 @@ extern "js" fn readable_stream_byob_reader_read_options_ffi(
 
 ///|
 extern "js" fn readable_stream_byob_reader_read_options_empty_ffi() -> ReadableStreamBYOBReaderReadOptions = "() => {}"
+
+///|
+extern "js" fn readable_stream_byob_reader_read_options_get_min_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.min"

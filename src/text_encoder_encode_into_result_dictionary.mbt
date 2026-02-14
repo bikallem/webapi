@@ -29,3 +29,31 @@ pub fn TextEncoderEncodeIntoResult::new(
 pub fn TextEncoderEncodeIntoResult::empty() -> TextEncoderEncodeIntoResult {
   text_encoder_encode_into_result_empty_ffi()
 }
+
+///|
+pub fn TextEncoderEncodeIntoResult::read(
+  self : TextEncoderEncodeIntoResult,
+) -> UInt64? {
+  let result = text_encoder_encode_into_result_get_read_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn TextEncoderEncodeIntoResult::written(
+  self : TextEncoderEncodeIntoResult,
+) -> UInt64? {
+  let result = text_encoder_encode_into_result_get_written_ffi(
+    TJsValue::to_js(self),
+  )
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

@@ -25,3 +25,23 @@ pub fn ImageEncodeOptions::new(
 pub fn ImageEncodeOptions::empty() -> ImageEncodeOptions {
   image_encode_options_empty_ffi()
 }
+
+///|
+pub fn ImageEncodeOptions::type_(self : ImageEncodeOptions) -> String? {
+  let result = image_encode_options_get_type_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}
+
+///|
+pub fn ImageEncodeOptions::quality(self : ImageEncodeOptions) -> Double? {
+  let result = image_encode_options_get_quality_ffi(TJsValue::to_js(self))
+  if JsValue::is_null(result) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
+  }
+}

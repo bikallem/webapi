@@ -28,3 +28,10 @@ pub fn NavigationUpdateCurrentEntryOptions::new(
 pub fn NavigationUpdateCurrentEntryOptions::empty() -> NavigationUpdateCurrentEntryOptions {
   navigation_update_current_entry_options_empty_ffi()
 }
+
+///|
+pub fn NavigationUpdateCurrentEntryOptions::state(
+  self : NavigationUpdateCurrentEntryOptions,
+) -> JsValue {
+  navigation_update_current_entry_options_get_state_ffi(TJsValue::to_js(self))
+}

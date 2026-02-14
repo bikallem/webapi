@@ -135,7 +135,9 @@ test "emit_wasm_ffi_with_return uses string array bridge for Array[String]" {
     content="true",
   )
   inspect(
-    rendered.contains("element_get_attribute_names_ffi_wasm(obj).to_string_array()"),
+    rendered.contains(
+      "element_get_attribute_names_ffi_wasm(obj).to_string_array()",
+    ),
     content="true",
   )
   inspect(rendered.contains(".unsafe_cast()"), content="false")
