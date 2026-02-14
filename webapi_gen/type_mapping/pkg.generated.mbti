@@ -8,7 +8,7 @@ import {
 }
 
 // Values
-pub fn arg_mbt_type(@parser.Type, String, String, String, @type_registry.TypeRegistry) -> (ArgMbtType, Array[EmitAux])
+pub fn arg_mbt_type(@parser.Type, String, String, String, @type_registry.TypeRegistry, call_depth? : Int) -> (ArgMbtType, Array[EmitAux])
 
 pub fn const_value(@parser.Const) -> String
 

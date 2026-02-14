@@ -164,7 +164,7 @@ pub fn arg_mbt_type(
   method_name : String,
   arg_name : String,
   type_registry : @type_registry.TypeRegistry,
-  call_depth~ : Int = 0, // used to suffix nested union type names
+  call_depth? : Int = 0, // used to suffix nested union type names
 ) -> (ArgMbtType, Array[EmitAux]) {
   let emits = []
   let type_ = match idl_type {
@@ -228,8 +228,7 @@ pub fn arg_mbt_type(
       match type_registry.named_type_kind(name) {
         @type_registry.NamedTypeKind::Interface => ArgMbtType::Interface(name)
         @type_registry.NamedTypeKind::Enum => ArgMbtType::Enum(name)
-        @type_registry.NamedTypeKind::Dictionary =>
-          ArgMbtType::Dictionary(name)
+        @type_registry.NamedTypeKind::Dictionary => ArgMbtType::Dictionary(name)
         @type_registry.NamedTypeKind::UnionTypedef
         | @type_registry.NamedTypeKind::Typedef
         | @type_registry.NamedTypeKind::Callback
@@ -239,7 +238,12 @@ pub fn arg_mbt_type(
     // Nullable
     Nullable(t) => {
       let (type_, emits_) = arg_mbt_type(
-        t, type_name, method_name, arg_name, type_registry, call_depth~,
+        t,
+        type_name,
+        method_name,
+        arg_name,
+        type_registry,
+        call_depth~,
       )
       emits.push_iter(emits_.iter())
       type_
@@ -254,7 +258,12 @@ pub fn arg_mbt_type(
     // Array type
     Sequence(t) => {
       let (type_, emits_) = arg_mbt_type(
-        t, type_name, method_name, arg_name, type_registry, call_depth~,
+        t,
+        type_name,
+        method_name,
+        arg_name,
+        type_registry,
+        call_depth~,
       )
       emits.push_iter(emits_.iter())
       let type_name = if type_ is ArgMbtType::Union(_) {
@@ -268,7 +277,12 @@ pub fn arg_mbt_type(
     // Js Promise
     Promise(t) => {
       let (type_, emits_) = arg_mbt_type(
-        t, type_name, method_name, arg_name, type_registry, call_depth~,
+        t,
+        type_name,
+        method_name,
+        arg_name,
+        type_registry,
+        call_depth~,
       )
       let type_name = if type_ is ArgMbtType::Union(_) {
         "&T\{type_.name()}"
@@ -335,7 +349,12 @@ pub fn arg_mbt_type(
     // Immutable/observable arrays → Array[T] (same as Sequence)
     FrozenArray(t) | ObservableArray(t) => {
       let (type_, emits_) = arg_mbt_type(
-        t.type_, type_name, method_name, arg_name, type_registry, call_depth~,
+        t.type_,
+        type_name,
+        method_name,
+        arg_name,
+        type_registry,
+        call_depth~,
       )
       emits.push_iter(emits_.iter())
       let type_name = if type_ is ArgMbtType::Union(_) {

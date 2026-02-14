@@ -82,8 +82,9 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 | `unsigned long` | `UInt` |
 | `double`, `float` | `Double`, `Float` |
 | `any`, `object` | `JsValue` |
-| `sequence<T>` | `Array[T]` |
+| `sequence<T>`, `FrozenArray<T>`, `ObservableArray<T>` | `Array[T]` |
 | `Promise<T>` | `JsPromise[T]` |
+| `Record<K,V>`, `async iterable<T>` | `JsValue` (no MoonBit equivalent) |
 | Nullable `T?` | `T?` (Option) |
 
 ## FFI Pattern
@@ -133,7 +134,7 @@ Every generated type (`#external` interfaces, dictionaries, callbacks, typedefs,
 2. `make gen-test` (or `cd webapi_gen && moon test --update`) to verify and update generator tests
 3. `make clean gen` to regenerate bindings (**always clean first** — see Critical Caching Pitfall below)
 4. `make check` to validate generated code for both targets
-5. `make fmt` to format
+5. `make fmt` to format (**run after gen** — `moon fmt` reformats both generator and generated code)
 6. `make info` to update `.mbti` interface files
 7. `make build-examples` to build examples for **both** JS and wasm-gc
 8. `make validate-wasm` to validate all wasm-gc binaries (**catches externref/nullability bugs fast**)
@@ -191,7 +192,7 @@ Some WebIDL specs split members across related dictionaries (e.g., `duration` li
 
 ### Critical: Generator Caching Pitfall
 
-**Always use `make clean gen` (not just `cd webapi_gen && moon clean && moon run cmd/main`).**
+**Always use `make clean gen` (not just `cd webapi_gen && moon clean && moon run cmd/main`).** Always run make targets from the project root (`/home/blem/projects/webapi`), not from subdirectories — running from `webapi_gen/` silently skips cleaning the root `_build`.
 
 There are THREE separate `_build` directories that can hold stale caches:
 - `/home/blem/projects/webapi/_build` (root project — **this one is easy to miss**)
@@ -209,6 +210,38 @@ When building examples, always build **both** targets. `make build-examples` doe
 ### Playwright Test Timeout
 
 Test timeout is set to **3 seconds** (`tests/playwright.config.ts`). No test should take longer — if it does, the code is broken (likely a missing build or runtime error preventing page load). A fast timeout ensures broken builds fail quickly rather than wasting minutes on 30s timeouts per test.
+
+## MoonBit Syntax Reference
+
+Quick reference for MoonBit patterns that differ from Rust/OCaml and cause frequent compilation errors:
+
+- **Labeled arguments**: `name~ : Type = default` (trailing tilde), called with `func(name~=value)` or `func(name~)` to pass a same-named variable
+- **Multiline strings in function args**: Must wrap in `()` — e.g., `inspect(x, content=(\n  #|line1\n  #|line2\n))`
+- **Private types**: Use `priv enum` / `priv struct` for types not in the public API; the compiler warns if you forget `priv`
+- **`///|` doc comments**: Required before every top-level declaration (function, type, let binding); `moon fmt` adds them automatically
+- **Enum constructors in expressions**: Can omit the type prefix when the expected type is known from context (e.g., `HasArg("x")` instead of `ArgMatch::HasArg("x")` when the field type is `ArgMatch`)
+
+### Parser AST Construction
+
+When constructing `@parser.Argument` in tests, use the full struct — it requires fields that aren't obvious:
+
+```moonbit
+fn make_arg(name : String, type_~ : @parser.Type = @parser.DOMString) -> @parser.Argument {
+  { extended_attributes: [], type_: { extended_attributes: [], type_ }, name, optional: false, variadic: false, default_value: None }
+}
+```
+
+Key gotchas:
+- `type_` field is `TypeWithExtendedAttributes` (wraps `Type`), not bare `Type`
+- `extended_attributes` is required (use `[]`)
+- `@parser.Argument` and `@parser.TypeWithExtendedAttributes` are the full struct types
+
+### Testing Patterns
+
+- **Snapshot tests**: Use `inspect(value)` without `content=`, then run `moon test --update` (or `make gen-test`) to auto-fill the expected output. This is faster and less error-prone than writing expected values manually.
+- **Test file naming**: `*_wbtest.mbt` = whitebox tests (access package-private functions); `*_test.mbt` = blackbox tests (public API only)
+- **Test helpers**: Define shared helpers (like `make_arg`, `setup_emitter`) at the top of `_wbtest.mbt` files to reduce boilerplate. The emit package has `setup_test` in `emit_wbtest.mbt`.
+- **Multi-target output**: Use `mbt_code_gen_multi(emits)` which returns `{ shared, js_ffi, wasm_ffi }` — always assert all three fields to catch regressions in both JS and wasm-gc output.
 
 ## wasm-gc Known Issues
 
