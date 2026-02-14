@@ -1,6 +1,23 @@
 //============================ Interface Method Helpers =========================
 
 ///|
+/// Generate a standard FFI function name from interface and method names.
+fn make_ffi_name(interface_name : String, method_name : String) -> String {
+  "\{@type_mapping.snake_case(interface_name)}_\{@type_mapping.snake_case(method_name)}_ffi"
+}
+
+///|
+/// Convert method args to FFI argument names, replacing Self with "obj".
+fn make_ffi_argnames(args : Array[@type_mapping.MethodArg]) -> Array[String] {
+  args.map(arg => {
+    match arg.type_ {
+      @type_mapping.ArgMbtType::Self => "obj"
+      _ => arg.name
+    }
+  })
+}
+
+///|
 /// Check if an ArgMbtType is valid as a wasm-gc import return type.
 /// Primitives, #external interfaces, enums, dictionaries, and Self are valid.
 /// Parameterized non-external types (Array[T]) and typedefs that resolve to them are not.

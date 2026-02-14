@@ -31,17 +31,12 @@ impl InterfaceMethodEmit for RegularMethodEmit with decl_emit(
 
 ///|
 fn RegularMethodEmit::ffi_name(self : RegularMethodEmit) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.method_name)}_ffi"
+  make_ffi_name(self.interface_name, self.method_name)
 }
 
 ///|
 fn RegularMethodEmit::ffi_argnames(self : RegularMethodEmit) -> Array[String] {
-  self.args.map(arg => {
-    match arg.type_ {
-      @type_mapping.ArgMbtType::Self => "obj"
-      _ => arg.name
-    }
-  })
+  make_ffi_argnames(self.args)
 }
 
 ///|
@@ -149,7 +144,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with decl_emit(
 
 ///|
 fn StaticMethodEmit::ffi_name(self : StaticMethodEmit) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.method_name)}_ffi"
+  make_ffi_name(self.interface_name, self.method_name)
 }
 
 ///|
@@ -258,7 +253,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with decl_emit(
 
 ///|
 fn AttributeGetMethodEmit::ffi_name(self : AttributeGetMethodEmit) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  make_ffi_name(self.interface_name, self.original_name)
 }
 
 ///|
@@ -348,7 +343,7 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with decl_emit(
 
 ///|
 fn AttributeSetMethodEmit::ffi_name(self : AttributeSetMethodEmit) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_set_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  make_ffi_name(self.interface_name, "set_\{self.original_name}")
 }
 
 ///|
@@ -423,7 +418,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with decl_emit(
 fn StaticAttributeGetMethodEmit::ffi_name(
   self : StaticAttributeGetMethodEmit,
 ) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  make_ffi_name(self.interface_name, self.original_name)
 }
 
 ///|
@@ -517,19 +512,14 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with decl_emit(
 fn SpecialOperationMethodEmit::ffi_name(
   self : SpecialOperationMethodEmit,
 ) -> String {
-  "\{@type_mapping.snake_case(self.interface_name)}_\{@type_mapping.snake_case(self.original_name)}_ffi"
+  make_ffi_name(self.interface_name, self.original_name)
 }
 
 ///|
 fn SpecialOperationMethodEmit::ffi_argnames(
   self : SpecialOperationMethodEmit,
 ) -> Array[String] {
-  self.args.map(arg => {
-    match arg.type_ {
-      @type_mapping.ArgMbtType::Self => "obj"
-      _ => arg.name
-    }
-  })
+  make_ffi_argnames(self.args)
 }
 
 ///|
