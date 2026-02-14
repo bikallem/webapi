@@ -739,6 +739,7 @@ pub type CSSPseudoElement
 pub impl FromJsAny for CSSPseudoElement
 pub impl TGeometryNode for CSSPseudoElement
 pub impl TJsValue for CSSPseudoElement
+pub impl TShadowAnimationNewNewTarget for CSSPseudoElement
 
 #external
 pub type CSSRule
@@ -1834,6 +1835,7 @@ pub impl TIntersectionObserverInitNewRoot for Element
 pub impl TIntersectionObserverRoot for Element
 pub impl TJsValue for Element
 pub impl TNode for Element
+pub impl TShadowAnimationNewNewTarget for Element
 pub impl TStyleSheetOwnerNode for Element
 
 #external
@@ -2247,6 +2249,14 @@ pub fn GetHTMLOptions::serializable_shadow_roots(Self) -> Bool?
 pub fn GetHTMLOptions::shadow_roots(Self) -> Array[ShadowRoot]?
 pub impl FromJsAny for GetHTMLOptions
 pub impl TJsValue for GetHTMLOptions
+
+#external
+pub type GetNotificationOptions
+pub fn GetNotificationOptions::empty() -> Self
+pub fn GetNotificationOptions::new(tag? : String) -> Self
+pub fn GetNotificationOptions::tag(Self) -> String?
+pub impl FromJsAny for GetNotificationOptions
+pub impl TJsValue for GetNotificationOptions
 
 #external
 pub type GetRootNodeOptions
@@ -6079,6 +6089,16 @@ pub type ServiceWorker
 pub impl FromJsAny for ServiceWorker
 pub impl TJsValue for ServiceWorker
 pub impl TMessageEventSource for ServiceWorker
+
+#external
+pub type ShadowAnimation
+pub fn[T : TShadowAnimation] ShadowAnimation::into(Self) -> T
+pub fn ShadowAnimation::new(&TAnimation, &TShadowAnimationNewNewTarget) -> Self
+pub impl FromJsAny for ShadowAnimation
+pub impl TAnimation for ShadowAnimation
+pub impl TEventTarget for ShadowAnimation
+pub impl TJsValue for ShadowAnimation
+pub impl TShadowAnimation for ShadowAnimation
 
 #external
 pub type ShadowRoot
@@ -12453,6 +12473,14 @@ pub trait TSelection : TJsValue {
   modify(Self, alter? : String, direction? : String, granularity? : String) -> Unit
   delete_from_document(Self) -> Unit
   contains_node(Self, &TNode, allow_partial_containment? : Bool) -> Bool
+}
+
+pub trait TShadowAnimation : TAnimation {
+  source_animation(Self) -> Animation
+}
+
+pub(open) trait TShadowAnimationNewNewTarget {
+  to_js(Self) -> JsValue
 }
 
 pub trait TShadowRoot : TDocumentFragment {

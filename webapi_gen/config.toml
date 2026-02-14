@@ -41,13 +41,13 @@ core_specs = [
     "IndexedDB",
 ]
 
-excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext", "NotificationEvent", "ServiceWorkerRegistration", "ServiceWorkerGlobalScope"]
+excluded_interfaces = ["OffscreenRenderingContext", "NotificationEvent", "ServiceWorkerRegistration", "ServiceWorkerGlobalScope"]
 
 excluded_callbacks = []
 
 excluded_typedefs = ["ClipboardItemData"]
 
-excluded_dictionary_prefixes = ["ClipboardPermission", "NotificationEvent", "GetNotificationOptions"]
+excluded_dictionary_prefixes = ["ClipboardPermission", "NotificationEvent"]
 
 # Inject members from source dictionary into target dictionary.
 # Members already present in the target are skipped.

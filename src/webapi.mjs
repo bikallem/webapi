@@ -829,6 +829,11 @@ export const wasmImportObject = {
   webapi_SVGUseElementShadowRoot: {
   },
 
+  webapi_ShadowAnimation: {
+    new: (source, new_target) => new ShadowAnimation(source, new_target),
+    get_sourceAnimation: (obj) => obj.sourceAnimation
+  },
+
   webapi_SVGSwitchElement: {
   },
 
@@ -7740,6 +7745,15 @@ export const wasmImportObject = {
     get_title: (obj) => obj.title,
     get_navigate: (obj) => obj.navigate,
     get_icon: (obj) => obj.icon
+  },
+
+  webapi_GetNotificationOptions: {
+    new: (tag) => {
+      const obj = {};
+      if (tag !== undefined) obj.tag = tag;
+      return obj;
+    },
+    get_tag: (obj) => obj.tag
   },
 
   webapi_PointerEventInit: {
