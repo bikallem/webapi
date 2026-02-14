@@ -4,10 +4,7 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
     #|interface TestInterface {
     #|  void testMethod(optional (DOMString or unsigned long) param = "default");
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
+  let (flattened, type_registry) = parse_and_flatten(idl)
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
@@ -67,18 +64,7 @@ test "InterfaceEmitter emits union typedef args as trait refs" {
     #|interface Window {
     #|  undefined fetch(RequestInfo input);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("Window")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -139,19 +125,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
     #|  undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
     #|  boolean dispatchEvent(Event event);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("EventTarget")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -266,19 +240,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
     #|interface TestInterface {
     #|  void testMethod(optional (DOMString or (unsigned long or boolean)) param = "default");
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -365,19 +327,7 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
     #|interface TestInterface {
     #|  (DOMString or unsigned long) testMethod();
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -457,19 +407,7 @@ test "InterfaceEmitter generates MoonBit code for constants" {
     #|  const float EMPTY = 21;
     #|  const unsigned long NUM_CONST = 42;
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -514,19 +452,7 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
     #|  undefined sayHello();
     #|  readonly attribute DOMString name;
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -599,19 +525,7 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
     #|interface TestInterface {
     #|  attribute DOMString lastName;
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -689,19 +603,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
     #|interface ChildInterface : ParentInterface {
     #|  inherit attribute DOMString lastName;
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("ParentInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -831,19 +733,7 @@ test "InterfaceEmitter emits static methods" {
     #|interface TestInterface {
     #|  [NewObject] static Response redirect(USVString url, optional unsigned short status = 302);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -907,19 +797,7 @@ test "InterfaceEmitter emits static attribute getter methods" {
     #|interface TestInterface {
     #|  static readonly attribute DOMString appName;
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -983,19 +861,7 @@ test "mbt_code_gen_multi generates separate shared and FFI files for interface" 
     #|  undefined sayHello();
     #|  readonly attribute DOMString name;
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -1068,19 +934,7 @@ test "mbt_code_gen_multi uses TJsValue::to_js for UnionArgTraitImpl" {
     #|interface TestInterface {
     #|  void testMethod((DOMString or boolean) param);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -1152,19 +1006,7 @@ test "mbt_code_gen_multi generates wasm FFI for constructor" {
     #|interface TestInterface {
     #|  constructor(DOMString name);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -1224,19 +1066,7 @@ test "mbt_code_gen_multi wasm FFI snapshot for interface with String return" {
     #|  readonly attribute DOMString tagName;
     #|  attribute unsigned long width;
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -1264,19 +1094,7 @@ test "mbt_code_gen_multi wasm FFI snapshot for constructor" {
     #|interface TestInterface {
     #|  constructor(DOMString name);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -1296,19 +1114,7 @@ test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
     #|  undefined fill(DOMString fillRule);
     #|  undefined fill(DOMString path, DOMString fillRule);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -1375,19 +1181,7 @@ test "mbt_code_gen_multi wasm FFI snapshot for overloaded methods" {
     #|  undefined fill(DOMString fillRule);
     #|  undefined fill(DOMString path, DOMString fillRule);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
-  fn log_skipped(_msg : String) {
-
-  }
-
-  let interface_emitter = InterfaceEmitter::{
-    idl: flattened,
-    type_registry,
-    log_skipped,
-  }
+  let interface_emitter = make_interface_emitter(idl)
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(

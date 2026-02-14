@@ -4,10 +4,7 @@ test "arg_mbt_type identifies union types correctly" {
     #|interface TestInterface {
     #|  void testMethod(optional (DOMString or unsigned long) param = "default");
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
+  let (flattened, type_registry) = parse_and_flatten(idl)
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
@@ -47,10 +44,7 @@ test "arg_mbt_type identifies nested union types correctly" {
     #|interface TestInterface {
     #|  void testMethod((DOMString or (unsigned long or boolean)) param);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
+  let (flattened, type_registry) = parse_and_flatten(idl)
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
@@ -102,10 +96,7 @@ test "arg_mbt_type identifies nested union within sequence types correctly" {
     #|interface TestInterface {
     #|  void testMethod((DOMString or sequence<(unsigned long or DOMString)>) param);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
+  let (flattened, type_registry) = parse_and_flatten(idl)
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
@@ -156,10 +147,7 @@ test "arg_mbt_type identifies union with undefined option correctly" {
     #|interface TestInterface {
     #|  void testMethod((DOMString or undefined) param);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
+  let (flattened, type_registry) = parse_and_flatten(idl)
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
@@ -199,10 +187,7 @@ test "arg_mbt_type identifies non-union types correctly" {
     #|interface TestInterface {
     #|  void testMethod(DOMString param);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
+  let (flattened, type_registry) = parse_and_flatten(idl)
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
@@ -233,10 +218,7 @@ test "arg_mbt_type keeps typedef and callback identifiers as concrete names" {
     #|interface TestInterface {
     #|  void testMethod(Alias alias, MyCb callback, EventTarget target);
     #|};
-  let definitions = @parser.parse(idl)
-  let type_registry = @type_registry.TypeRegistry::new(definitions)
-  let flattened = @partial_merged.merge_partials(definitions)
-    |> @flattened_idl.flatten(ignore)
+  let (flattened, type_registry) = parse_and_flatten(idl)
   let iface = flattened.interfaces["TestInterface"]
   guard iface.members[0].interface_member is RegularOperation(op) else {
     abort("Expected first member to be RegularOperation")
