@@ -322,14 +322,30 @@ test "mbt_code_gen_multi generates dictionary create across targets" {
     Emit::DictionaryCreate(TypeName("MyOptions"), args),
   ]
   let multi = mbt_code_gen_multi(emits)
-  inspect(multi.shared.contains("pub fn MyOptions::new("), content="true")
   inspect(
-    multi.js_ffi.contains("extern \"js\" fn my_options_ffi("),
-    content="true",
+    multi.shared,
+    content=(
+      #|pub fn MyOptions::new(title? : String) -> MyOptions {
+      #|  my_options_ffi(opt_to_js(title))
+      #|}
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn my_options_ffi(title: JsValue) -> MyOptions = 
+      #|#|(title) => {
+      #|#|  const obj = {};
+      #|#|  if (title !== undefined) obj.title = title;
+      #|#|  return obj;
+      #|#|}
+    ),
   )
   inspect(
     multi.wasm_ffi,
-    content="fn my_options_ffi(title: JsValue) -> MyOptions = \"webapi_MyOptions\" \"new\"",
+    content=(
+      #|fn my_options_ffi(title: JsValue) -> MyOptions = "webapi_MyOptions" "new"
+    ),
   )
 }
 
@@ -340,20 +356,18 @@ test "mbt_code_gen_multi generates callback across targets" {
     Emit::Callback(TypeName("EventListener"), args, TypeName("Unit")),
   ]
   let multi = mbt_code_gen_multi(emits)
-  // Shared should be empty (callbacks are entirely target-specific)
   inspect(
     multi.shared,
     content=(
       #|pub fn EventListener::new(callback : (Event) -> Unit) -> EventListener { event_listener_ffi(callback) }
     ),
   )
-  // JS callback passes typed closure directly
-  inspect(multi.js_ffi.contains("(Event) -> Unit"), content="true")
   inspect(
-    multi.js_ffi.contains("extern \"js\" fn event_listener_ffi"),
-    content="true",
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"
+    ),
   )
-  // Wasm callback keeps direct import when no stub adaptation is needed
   inspect(
     multi.wasm_ffi,
     content=(
@@ -373,14 +387,31 @@ test "mbt_code_gen_multi adapts wasm callback Array args with JsArray" {
   ]
   let multi = mbt_code_gen_multi(emits)
   inspect(
-    multi.wasm_ffi.contains(
-      "fn mutation_callback_ffi_raw(callback : (JsArray, MutationObserver) -> Unit) -> MutationCallback = \"webapi_MutationCallback\" \"new\"",
+    multi.shared,
+    content=(
+      #|pub fn MutationCallback::new(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback { mutation_callback_ffi(callback) }
     ),
-    content="true",
   )
   inspect(
-    multi.wasm_ffi.contains("callback(mutations.to_array(), observer)"),
-    content="true",
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback = "(callback) => callback"
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn mutation_callback_ffi_raw(callback : (JsArray, MutationObserver) -> Unit) -> MutationCallback = "webapi_MutationCallback" "new"
+      #|
+      #|///|
+      #|fn mutation_callback_ffi(callback : (Array[MutationRecord], MutationObserver) -> Unit) -> MutationCallback {
+      #|  mutation_callback_ffi_raw(
+      #|    fn(mutations : JsArray, observer : MutationObserver) -> Unit {
+      #|      callback(mutations.to_array(), observer)
+      #|    },
+      #|  )
+      #|}
+    ),
   )
 }
 
@@ -395,13 +426,30 @@ test "mbt_code_gen_multi adapts wasm callback Array return with JsArray" {
   ]
   let multi = mbt_code_gen_multi(emits)
   inspect(
-    multi.wasm_ffi.contains(
-      "fn array_returning_callback_ffi_raw(callback : (Int) -> JsArray) -> ArrayReturningCallback = \"webapi_ArrayReturningCallback\" \"new\"",
+    multi.shared,
+    content=(
+      #|pub fn ArrayReturningCallback::new(callback : (Int) -> Array[Double]) -> ArrayReturningCallback { array_returning_callback_ffi(callback) }
     ),
-    content="true",
   )
   inspect(
-    multi.wasm_ffi.contains("JsArray::from_array(callback(value))"),
-    content="true",
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn array_returning_callback_ffi(callback : (Int) -> Array[Double]) -> ArrayReturningCallback = "(callback) => callback"
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn array_returning_callback_ffi_raw(callback : (Int) -> JsArray) -> ArrayReturningCallback = "webapi_ArrayReturningCallback" "new"
+      #|
+      #|///|
+      #|fn array_returning_callback_ffi(callback : (Int) -> Array[Double]) -> ArrayReturningCallback {
+      #|  array_returning_callback_ffi_raw(
+      #|    fn(value : Int) -> JsArray {
+      #|      JsArray::from_array(callback(value))
+      #|    },
+      #|  )
+      #|}
+    ),
   )
 }

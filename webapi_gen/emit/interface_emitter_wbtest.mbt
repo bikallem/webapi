@@ -80,16 +80,50 @@ test "InterfaceEmitter emits union typedef args as trait refs" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("Window")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code.contains("fetch(self : Self, input : &TRequestInfo)"),
-    content="true",
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: Window
+      #|
+      #|
+      #|/// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)
+      #|#external
+      #|pub type Window
+      #|
+      #|pub impl TJsValue for Window with to_js(self: Window) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for Window with from_js_any(value : JsAny) -> Window = "%identity"
+      #|
+      #|pub fn[T: TWindow] Window::into(self : Window) -> T = "%identity"
+      #|
+      #|pub impl TWindow for Window
+      #|
+      #|/// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window) interface.
+      #|pub trait TWindow: TJsValue {
+      #|  fetch(self : Self, input : &TRequestInfo) -> Unit = _
+      #|}
+      #|
+      #|/// [Window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+      #|impl TWindow with fetch(self : Self, 
+      #|input : &TRequestInfo) -> Unit {
+      #|  window_fetch_ffi(TJsValue::to_js(self), input.to_js())
+      #|}
+    ),
   )
   inspect(
-    code.contains("window_fetch_ffi(TJsValue::to_js(self), input.to_js())"),
-    content="true",
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn window_fetch_ffi(obj: JsValue, input: JsValue) -> Unit = "(obj, input) => obj.fetch(input)"
+    ),
   )
-  inspect(code.contains("TJsValue::to_js(input)"), content="false")
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn window_fetch_ffi(obj: JsValue, input: JsValue) -> Unit = "webapi_Window" "fetch"
+    ),
+  )
 }
 
 ///|
@@ -119,9 +153,9 @@ test "InterfaceEmitter generates MoonBit code for interface" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("EventTarget")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: EventTarget
@@ -193,7 +227,11 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn event_target_new_ffi() -> EventTarget = "() => new EventTarget()"
       #|
       #|extern "js" fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(type_, callback, options)"
@@ -206,6 +244,18 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool {
       #|  event_target_dispatch_event_ffi_js(obj, event).unsafe_cast()
       #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn event_target_new_ffi() -> EventTarget = "webapi_EventTarget" "new"
+      #|
+      #|fn event_target_add_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "webapi_EventTarget" "addEventListener"
+      #|
+      #|fn event_target_remove_event_listener_ffi(obj: JsValue, type_: JsValue, callback: JsValue, options: JsValue) -> Unit = "webapi_EventTarget" "removeEventListener"
+      #|
+      #|fn event_target_dispatch_event_ffi(obj: JsValue, event: JsValue) -> Bool = "webapi_EventTarget" "dispatchEvent"
     ),
   )
 }
@@ -230,9 +280,9 @@ test "InterfaceEmitter handles interface with nested union arg types" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
@@ -283,12 +333,27 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|None => JsValue::undefined()
       #|})
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn test_interface_test_method_ffi_js(obj: JsValue, param: JsValue) -> JsValue = "(obj, param) => obj.testMethod(param)"
       #|
       #|///|
       #|fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void {
       #|  test_interface_test_method_ffi_js(obj, param).unsafe_cast()
+      #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_test_method_ffi_wasm(obj: JsValue, param: JsValue) -> JsValue = "webapi_TestInterface" "testMethod"
+      #|
+      #|///|
+      #|fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void {
+      #|  test_interface_test_method_ffi_wasm(obj, param).unsafe_cast()
       #|}
     ),
   )
@@ -314,9 +379,9 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
@@ -359,12 +424,27 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|impl TTestInterface with test_method(self : Self) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self))
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn test_interface_test_method_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.testMethod()"
       #|
       #|///|
       #|fn test_interface_test_method_ffi(obj: JsValue) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi_js(obj).unsafe_cast()
+      #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_test_method_ffi_wasm(obj: JsValue) -> JsValue = "webapi_TestInterface" "testMethod"
+      #|
+      #|///|
+      #|fn test_interface_test_method_ffi(obj: JsValue) -> TestInterfaceTestMethod {
+      #|  test_interface_test_method_ffi_wasm(obj).unsafe_cast()
       #|}
     ),
   )
@@ -391,9 +471,9 @@ test "InterfaceEmitter generates MoonBit code for constants" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
@@ -423,6 +503,8 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|
     ),
   )
+  inspect(multi.js_ffi)
+  inspect(multi.wasm_ffi)
 }
 
 ///|
@@ -446,9 +528,9 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
@@ -481,7 +563,11 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn test_interface_say_hello_ffi(obj: JsValue) -> Unit = "(obj) => obj.sayHello()"
       #|
       #|extern "js" fn test_interface_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.name"
@@ -489,6 +575,19 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|///|
       #|fn test_interface_name_ffi(obj: JsValue) -> String {
       #|  test_interface_name_ffi_js(obj).unsafe_cast()
+      #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_say_hello_ffi(obj: JsValue) -> Unit = "webapi_TestInterface" "sayHello"
+      #|
+      #|fn test_interface_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_TestInterface" "get_name"
+      #|
+      #|///|
+      #|fn test_interface_name_ffi(obj: JsValue) -> String {
+      #|  jsvalue_to_string(test_interface_name_ffi_wasm(obj))
       #|}
     ),
   )
@@ -514,9 +613,9 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
@@ -550,7 +649,11 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|last_name : String) -> Unit {
       #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn test_interface_last_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.lastName"
       #|
       #|///|
@@ -559,6 +662,19 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|}
       #|
       #|extern "js" fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_last_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_TestInterface" "get_lastName"
+      #|
+      #|///|
+      #|fn test_interface_last_name_ffi(obj: JsValue) -> String {
+      #|  jsvalue_to_string(test_interface_last_name_ffi_wasm(obj))
+      #|}
+      #|
+      #|fn test_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "webapi_TestInterface" "set_lastName"
     ),
   )
 }
@@ -587,9 +703,9 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("ParentInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: ParentInterface
@@ -616,7 +732,11 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|impl TParentInterface with last_name(self : Self) -> String {
       #|  parent_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn parent_interface_last_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.lastName"
       #|
       #|///|
@@ -625,10 +745,21 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|}
     ),
   )
-  let (_, emits) = interface_emitter.emit("ChildInterface")
-  let code = mbt_code_gen(emits)
   inspect(
-    code,
+    multi.wasm_ffi,
+    content=(
+      #|fn parent_interface_last_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_ParentInterface" "get_lastName"
+      #|
+      #|///|
+      #|fn parent_interface_last_name_ffi(obj: JsValue) -> String {
+      #|  jsvalue_to_string(parent_interface_last_name_ffi_wasm(obj))
+      #|}
+    ),
+  )
+  let (_, emits) = interface_emitter.emit("ChildInterface")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: ChildInterface
@@ -664,7 +795,11 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn child_interface_last_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.lastName"
       #|
       #|///|
@@ -673,6 +808,19 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|}
       #|
       #|extern "js" fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "(obj, lastName) => { obj.lastName = lastName; }"
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn child_interface_last_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_ChildInterface" "get_lastName"
+      #|
+      #|///|
+      #|fn child_interface_last_name_ffi(obj: JsValue) -> String {
+      #|  jsvalue_to_string(child_interface_last_name_ffi_wasm(obj))
+      #|}
+      #|
+      #|fn child_interface_set_last_name_ffi(obj: JsValue, last_name: JsValue) -> Unit = "webapi_ChildInterface" "set_lastName"
     ),
   )
 }
@@ -697,9 +845,9 @@ test "InterfaceEmitter emits static methods" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
@@ -727,12 +875,27 @@ test "InterfaceEmitter emits static methods" {
       #|status? : UInt = (302: UInt)) -> Response {
       #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn test_interface_redirect_ffi_js(url: JsValue, status: JsValue) -> JsValue = "(url, status) => TestInterface.redirect(url, status)"
       #|
       #|///|
       #|fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response {
       #|  test_interface_redirect_ffi_js(url, status).unsafe_cast()
+      #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_redirect_ffi_wasm(url: JsValue, status: JsValue) -> JsValue = "webapi_TestInterface" "redirect"
+      #|
+      #|///|
+      #|fn test_interface_redirect_ffi(url: JsValue, status: JsValue) -> Response {
+      #|  test_interface_redirect_ffi_wasm(url, status).unsafe_cast()
       #|}
     ),
   )
@@ -758,9 +921,9 @@ test "InterfaceEmitter emits static attribute getter methods" {
     log_skipped,
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
-  let code = mbt_code_gen(emits)
+  let multi = mbt_code_gen_multi(emits)
   inspect(
-    code,
+    multi.shared,
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
@@ -787,12 +950,27 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|pub fn TestInterface::app_name() -> String {
       #|  test_interface_app_name_ffi()
       #|}
-      #|
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
       #|extern "js" fn test_interface_app_name_ffi_js() -> JsValue = "() => TestInterface.appName"
       #|
       #|///|
       #|fn test_interface_app_name_ffi() -> String {
       #|  test_interface_app_name_ffi_js().unsafe_cast()
+      #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_app_name_ffi_wasm() -> JsValue = "webapi_TestInterface" "get_appName"
+      #|
+      #|///|
+      #|fn test_interface_app_name_ffi() -> String {
+      #|  jsvalue_to_string(test_interface_app_name_ffi_wasm())
       #|}
     ),
   )
@@ -820,21 +998,67 @@ test "mbt_code_gen_multi generates separate shared and FFI files for interface" 
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
-  // Shared code should NOT contain extern "js"
-  inspect(multi.shared.contains("extern \"js\""), content="false")
-  // JS FFI should contain extern "js" declarations
-  inspect(multi.js_ffi.contains("extern \"js\""), content="true")
-  // Wasm FFI should contain module/function import syntax
-  inspect(multi.wasm_ffi.contains("\"webapi_TestInterface\""), content="true")
-  // Shared code should contain trait and impl
-  inspect(multi.shared.contains("pub trait TTestInterface"), content="true")
   inspect(
-    multi.shared.contains("impl TTestInterface with say_hello"),
-    content="true",
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: TestInterface
+      #|
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
+      #|pub trait TTestInterface: TJsValue {
+      #|  say_hello(self : Self) -> Unit = _
+      #|  name(self : Self) -> String = _
+      #|}
+      #|
+      #|/// [TestInterface.sayHello](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/sayHello)
+      #|impl TTestInterface with say_hello(self : Self) -> Unit {
+      #|  test_interface_say_hello_ffi(TJsValue::to_js(self))
+      #|}
+      #|
+      #|/// [TestInterface.name](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/name)
+      #|impl TTestInterface with name(self : Self) -> String {
+      #|  test_interface_name_ffi(TJsValue::to_js(self))
+      #|}
+    ),
   )
   inspect(
-    multi.shared.contains("impl TTestInterface with name"),
-    content="true",
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn test_interface_say_hello_ffi(obj: JsValue) -> Unit = "(obj) => obj.sayHello()"
+      #|
+      #|extern "js" fn test_interface_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.name"
+      #|
+      #|///|
+      #|fn test_interface_name_ffi(obj: JsValue) -> String {
+      #|  test_interface_name_ffi_js(obj).unsafe_cast()
+      #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_say_hello_ffi(obj: JsValue) -> Unit = "webapi_TestInterface" "sayHello"
+      #|
+      #|fn test_interface_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_TestInterface" "get_name"
+      #|
+      #|///|
+      #|fn test_interface_name_ffi(obj: JsValue) -> String {
+      #|  jsvalue_to_string(test_interface_name_ffi_wasm(obj))
+      #|}
+    ),
   )
 }
 
@@ -859,12 +1083,66 @@ test "mbt_code_gen_multi uses TJsValue::to_js for UnionArgTraitImpl" {
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
-  // Multi-target should use TJsValue::to_js(self) instead of %identity
-  inspect(multi.shared.contains("TJsValue::to_js(self)"), content="true")
-  // Should NOT use %identity for union arg trait impls in multi-target
   inspect(
-    multi.shared.contains("= \"%identity\""),
-    content="true", // Still has %identity for ImplTJsValue (which is correct)
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: TestInterface
+      #|
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub(open) trait TTestInterfaceTestMethodParam {
+      #|  to_js(self : Self) -> JsValue
+      #|}
+      #|
+      #|pub impl TTestInterfaceTestMethodParam for String with to_js(self : String) -> JsValue = "%identity"
+      #|
+      #|pub impl TTestInterfaceTestMethodParam for Bool with to_js(self : Bool) -> JsValue { TJsValue::to_js(self) }
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
+      #|pub trait TTestInterface: TJsValue {
+      #|  test_method(self : Self, param : &TTestInterfaceTestMethodParam) -> void = _
+      #|}
+      #|
+      #|/// [TestInterface.testMethod](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/testMethod)
+      #|impl TTestInterface with test_method(self : Self, 
+      #|param : &TTestInterfaceTestMethodParam) -> void {
+      #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
+      #|}
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn test_interface_test_method_ffi_js(obj: JsValue, param: JsValue) -> JsValue = "(obj, param) => obj.testMethod(param)"
+      #|
+      #|///|
+      #|fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void {
+      #|  test_interface_test_method_ffi_js(obj, param).unsafe_cast()
+      #|}
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_test_method_ffi_wasm(obj: JsValue, param: JsValue) -> JsValue = "webapi_TestInterface" "testMethod"
+      #|
+      #|///|
+      #|fn test_interface_test_method_ffi(obj: JsValue, param: JsValue) -> void {
+      #|  test_interface_test_method_ffi_wasm(obj, param).unsafe_cast()
+      #|}
+    ),
   )
 }
 
@@ -889,18 +1167,53 @@ test "mbt_code_gen_multi generates wasm FFI for constructor" {
   }
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
-  // JS FFI should have extern "js" constructor
   inspect(
-    multi.js_ffi.contains("extern \"js\" fn test_interface_new_ffi"),
-    content="true",
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: TestInterface
+      #|
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|pub fn TestInterface::new(name : String) -> TestInterface {
+      #|  test_interface_new_ffi(TJsValue::to_js(name))
+      #|}
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
+      #|pub trait TTestInterface: TJsValue {
+      #|
+      #|}
+      #|
+      #|
+    ),
   )
-  // Wasm FFI should have wasm import constructor
   inspect(
-    multi.wasm_ffi.contains("\"webapi_TestInterface\" \"new\""),
-    content="true",
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn test_interface_new_ffi(name: JsValue) -> TestInterface = "(name) => new TestInterface(name)"
+      #|
+      #|
+    ),
   )
-  // Shared should have the wrapper function
-  inspect(multi.shared.contains("pub fn TestInterface::new("), content="true")
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_new_ffi(name: JsValue) -> TestInterface = "webapi_TestInterface" "new"
+      #|
+      #|
+    ),
+  )
 }
 
 ///|
@@ -999,22 +1312,59 @@ test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
   let (_, emits) = interface_emitter.emit("TestInterface")
   let multi = mbt_code_gen_multi(emits)
   inspect(
-    multi.shared.contains(
-      "/// [TestInterface.fill](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/fill)",
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: TestInterface
+      #|
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
+      #|pub trait TTestInterface: TJsValue {
+      #|  fill(self : Self, fill_rule : String) -> Unit = _
+      #|  fill_path(self : Self, path : String, fill_rule : String) -> Unit = _
+      #|}
+      #|
+      #|/// [TestInterface.fill](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/fill)
+      #|impl TTestInterface with fill(self : Self, 
+      #|fill_rule : String) -> Unit {
+      #|  test_interface_fill_ffi(TJsValue::to_js(self), TJsValue::to_js(fill_rule))
+      #|}
+      #|
+      #|/// [TestInterface.fill](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/fill)
+      #|impl TTestInterface with fill_path(self : Self, 
+      #|path : String, 
+      #|fill_rule : String) -> Unit {
+      #|  test_interface_fill_path_ffi(TJsValue::to_js(self), TJsValue::to_js(path), TJsValue::to_js(fill_rule))
+      #|}
     ),
-    content="true",
-  )
-  inspect(multi.shared.contains("TestInterface/fill_2"), content="false")
-  inspect(multi.shared.contains("with fill_path("), content="true")
-  inspect(
-    multi.js_ffi.contains("(obj, path, fill_rule) => obj.fill(path, fill_rule)"),
-    content="true",
   )
   inspect(
-    multi.js_ffi.contains(
-      "(obj, path, fill_rule) => obj.fill_2(path, fill_rule)",
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn test_interface_fill_ffi(obj: JsValue, fill_rule: JsValue) -> Unit = "(obj, fill_rule) => obj.fill(fill_rule)"
+      #|
+      #|extern "js" fn test_interface_fill_path_ffi(obj: JsValue, path: JsValue, fill_rule: JsValue) -> Unit = "(obj, path, fill_rule) => obj.fill(path, fill_rule)"
     ),
-    content="false",
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_fill_ffi(obj: JsValue, fill_rule: JsValue) -> Unit = "webapi_TestInterface" "fill"
+      #|
+      #|fn test_interface_fill_path_ffi(obj: JsValue, path: JsValue, fill_rule: JsValue) -> Unit = "webapi_TestInterface" "fill_path"
+    ),
   )
 }
 

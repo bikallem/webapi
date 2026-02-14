@@ -101,16 +101,16 @@ test "emit_wasm_ffi_with_return bridges Array return through JsArray" {
     "getBoxQuads",
   )
   inspect(
-    rendered.contains(
-      "fn element_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = \"webapi_Element\" \"getBoxQuads\"",
+    rendered,
+    content=(
+      #|fn element_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = "webapi_Element" "getBoxQuads"
+      #|
+      #|///|
+      #|fn element_get_box_quads_ffi(obj : JsValue, options : JsValue) -> Array[DOMQuad] {
+      #|  element_get_box_quads_ffi_wasm(obj, options).to_array()
+      #|}
     ),
-    content="true",
   )
-  inspect(
-    rendered.contains("element_get_box_quads_ffi_wasm(obj, options).to_array()"),
-    content="true",
-  )
-  inspect(rendered.contains(".unsafe_cast()"), content="false")
 }
 
 ///|
@@ -129,16 +129,14 @@ test "emit_wasm_ffi_with_return uses string array bridge for Array[String]" {
     "getAttributeNames",
   )
   inspect(
-    rendered.contains(
-      "fn element_get_attribute_names_ffi_wasm(obj : JsValue) -> JsArray = \"webapi_Element\" \"getAttributeNames\"",
+    rendered,
+    content=(
+      #|fn element_get_attribute_names_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Element" "getAttributeNames"
+      #|
+      #|///|
+      #|fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] {
+      #|  element_get_attribute_names_ffi_wasm(obj).to_string_array()
+      #|}
     ),
-    content="true",
   )
-  inspect(
-    rendered.contains(
-      "element_get_attribute_names_ffi_wasm(obj).to_string_array()",
-    ),
-    content="true",
-  )
-  inspect(rendered.contains(".unsafe_cast()"), content="false")
 }
