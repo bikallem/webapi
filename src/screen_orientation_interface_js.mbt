@@ -20,7 +20,9 @@ extern "js" fn screen_orientation_type_ffi_js(obj : JsValue) -> JsValue = "(obj)
 
 ///|
 fn screen_orientation_type_ffi(obj : JsValue) -> OrientationType {
-  screen_orientation_type_ffi_js(obj).unsafe_cast()
+  OrientationType::from_unchecked(
+    screen_orientation_type_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

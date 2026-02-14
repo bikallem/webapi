@@ -112,7 +112,7 @@ extern "js" fn web_socket_binary_type_ffi_js(obj : JsValue) -> JsValue = "(obj) 
 
 ///|
 fn web_socket_binary_type_ffi(obj : JsValue) -> BinaryType {
-  web_socket_binary_type_ffi_js(obj).unsafe_cast()
+  BinaryType::from_unchecked(web_socket_binary_type_ffi_js(obj).unsafe_cast())
 }
 
 ///|

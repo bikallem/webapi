@@ -102,7 +102,9 @@ fn html_media_element_can_play_type_ffi(
   obj : JsValue,
   type_ : JsValue,
 ) -> CanPlayTypeResult {
-  html_media_element_can_play_type_ffi_js(obj, type_).unsafe_cast()
+  CanPlayTypeResult::from_unchecked(
+    html_media_element_can_play_type_ffi_js(obj, type_).unsafe_cast(),
+  )
 }
 
 ///|

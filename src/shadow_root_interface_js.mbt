@@ -3,7 +3,7 @@ extern "js" fn shadow_root_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj
 
 ///|
 fn shadow_root_mode_ffi(obj : JsValue) -> ShadowRootMode {
-  shadow_root_mode_ffi_js(obj).unsafe_cast()
+  ShadowRootMode::from_unchecked(shadow_root_mode_ffi_js(obj).unsafe_cast())
 }
 
 ///|
@@ -19,7 +19,9 @@ extern "js" fn shadow_root_slot_assignment_ffi_js(obj : JsValue) -> JsValue = "(
 
 ///|
 fn shadow_root_slot_assignment_ffi(obj : JsValue) -> SlotAssignmentMode {
-  shadow_root_slot_assignment_ffi_js(obj).unsafe_cast()
+  SlotAssignmentMode::from_unchecked(
+    shadow_root_slot_assignment_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

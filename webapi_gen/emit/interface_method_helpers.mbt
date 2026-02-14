@@ -126,6 +126,7 @@ fn emit_js_ffi_with_return(
   return_type_name : String,
   is_optional~ : Bool,
   is_void~ : Bool,
+  is_enum~ : Bool = false,
   js_expr : String,
 ) -> Code {
   let ffi_js_decl_args = ffi_argnames.map(js_safe).join(", ")
@@ -133,9 +134,16 @@ fn emit_js_ffi_with_return(
   if needs_wrapper {
     let raw_name = ffi_name + "_js"
     let call_fwd = ffi_argnames.join(", ")
-    Code(
-      "extern \"js\" fn \{raw_name}(\{ffi_args}) -> JsValue = \"(\{ffi_js_decl_args}) => \{js_expr}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
-    )
+    if is_enum {
+      // Enum: JS returns a string, use from_unchecked to convert to enum variant
+      Code(
+        "extern \"js\" fn \{raw_name}(\{ffi_args}) -> JsValue = \"(\{ffi_js_decl_args}) => \{js_expr}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{return_type_name}::from_unchecked(\{raw_name}(\{call_fwd}).unsafe_cast())\n}",
+      )
+    } else {
+      Code(
+        "extern \"js\" fn \{raw_name}(\{ffi_args}) -> JsValue = \"(\{ffi_js_decl_args}) => \{js_expr}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{raw_name}(\{call_fwd}).unsafe_cast()\n}",
+      )
+    }
   } else {
     let ffi_ret_type = if is_void { "Unit" } else { "JsValue" }
     Code(

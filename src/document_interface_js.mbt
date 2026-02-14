@@ -397,7 +397,9 @@ extern "js" fn document_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) =>
 
 ///|
 fn document_ready_state_ffi(obj : JsValue) -> DocumentReadyState {
-  document_ready_state_ffi_js(obj).unsafe_cast()
+  DocumentReadyState::from_unchecked(
+    document_ready_state_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -678,7 +680,9 @@ extern "js" fn document_visibility_state_ffi_js(obj : JsValue) -> JsValue = "(ob
 
 ///|
 fn document_visibility_state_ffi(obj : JsValue) -> DocumentVisibilityState {
-  document_visibility_state_ffi_js(obj).unsafe_cast()
+  DocumentVisibilityState::from_unchecked(
+    document_visibility_state_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

@@ -3,7 +3,7 @@ extern "js" fn text_track_kind_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.
 
 ///|
 fn text_track_kind_ffi(obj : JsValue) -> TextTrackKind {
-  text_track_kind_ffi_js(obj).unsafe_cast()
+  TextTrackKind::from_unchecked(text_track_kind_ffi_js(obj).unsafe_cast())
 }
 
 ///|
@@ -45,7 +45,7 @@ extern "js" fn text_track_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.
 
 ///|
 fn text_track_mode_ffi(obj : JsValue) -> TextTrackMode {
-  text_track_mode_ffi_js(obj).unsafe_cast()
+  TextTrackMode::from_unchecked(text_track_mode_ffi_js(obj).unsafe_cast())
 }
 
 ///|

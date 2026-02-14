@@ -21,5 +21,7 @@ extern "js" fn navigation_activation_navigation_type_ffi_js(
 
 ///|
 fn navigation_activation_navigation_type_ffi(obj : JsValue) -> NavigationType {
-  navigation_activation_navigation_type_ffi_js(obj).unsafe_cast()
+  NavigationType::from_unchecked(
+    navigation_activation_navigation_type_ffi_js(obj).unsafe_cast(),
+  )
 }

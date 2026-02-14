@@ -11,7 +11,9 @@ extern "js" fn history_scroll_restoration_ffi_js(obj : JsValue) -> JsValue = "(o
 
 ///|
 fn history_scroll_restoration_ffi(obj : JsValue) -> ScrollRestoration {
-  history_scroll_restoration_ffi_js(obj).unsafe_cast()
+  ScrollRestoration::from_unchecked(
+    history_scroll_restoration_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

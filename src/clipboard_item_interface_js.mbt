@@ -11,7 +11,9 @@ extern "js" fn clipboard_item_presentation_style_ffi_js(
 
 ///|
 fn clipboard_item_presentation_style_ffi(obj : JsValue) -> PresentationStyle {
-  clipboard_item_presentation_style_ffi_js(obj).unsafe_cast()
+  PresentationStyle::from_unchecked(
+    clipboard_item_presentation_style_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

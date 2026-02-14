@@ -35,7 +35,9 @@ extern "js" fn idb_request_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj)
 
 ///|
 fn idb_request_ready_state_ffi(obj : JsValue) -> IDBRequestReadyState {
-  idb_request_ready_state_ffi_js(obj).unsafe_cast()
+  IDBRequestReadyState::from_unchecked(
+    idb_request_ready_state_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

@@ -177,7 +177,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi_
 fn offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi(
   obj : JsValue,
 ) -> ImageSmoothingQuality {
-  offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi_js(obj).unsafe_cast()
+  ImageSmoothingQuality::from_unchecked(
+    offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -701,7 +703,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_line_cap_ffi_js(
 fn offscreen_canvas_rendering_context2d_line_cap_ffi(
   obj : JsValue,
 ) -> CanvasLineCap {
-  offscreen_canvas_rendering_context2d_line_cap_ffi_js(obj).unsafe_cast()
+  CanvasLineCap::from_unchecked(
+    offscreen_canvas_rendering_context2d_line_cap_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -719,7 +723,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_line_join_ffi_js(
 fn offscreen_canvas_rendering_context2d_line_join_ffi(
   obj : JsValue,
 ) -> CanvasLineJoin {
-  offscreen_canvas_rendering_context2d_line_join_ffi_js(obj).unsafe_cast()
+  CanvasLineJoin::from_unchecked(
+    offscreen_canvas_rendering_context2d_line_join_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -823,7 +829,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_text_align_ffi_js(
 fn offscreen_canvas_rendering_context2d_text_align_ffi(
   obj : JsValue,
 ) -> CanvasTextAlign {
-  offscreen_canvas_rendering_context2d_text_align_ffi_js(obj).unsafe_cast()
+  CanvasTextAlign::from_unchecked(
+    offscreen_canvas_rendering_context2d_text_align_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -841,7 +849,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_text_baseline_ffi_js(
 fn offscreen_canvas_rendering_context2d_text_baseline_ffi(
   obj : JsValue,
 ) -> CanvasTextBaseline {
-  offscreen_canvas_rendering_context2d_text_baseline_ffi_js(obj).unsafe_cast()
+  CanvasTextBaseline::from_unchecked(
+    offscreen_canvas_rendering_context2d_text_baseline_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -859,7 +869,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_direction_ffi_js(
 fn offscreen_canvas_rendering_context2d_direction_ffi(
   obj : JsValue,
 ) -> CanvasDirection {
-  offscreen_canvas_rendering_context2d_direction_ffi_js(obj).unsafe_cast()
+  CanvasDirection::from_unchecked(
+    offscreen_canvas_rendering_context2d_direction_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -895,7 +907,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_font_kerning_ffi_js(
 fn offscreen_canvas_rendering_context2d_font_kerning_ffi(
   obj : JsValue,
 ) -> CanvasFontKerning {
-  offscreen_canvas_rendering_context2d_font_kerning_ffi_js(obj).unsafe_cast()
+  CanvasFontKerning::from_unchecked(
+    offscreen_canvas_rendering_context2d_font_kerning_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -913,7 +927,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_font_stretch_ffi_js(
 fn offscreen_canvas_rendering_context2d_font_stretch_ffi(
   obj : JsValue,
 ) -> CanvasFontStretch {
-  offscreen_canvas_rendering_context2d_font_stretch_ffi_js(obj).unsafe_cast()
+  CanvasFontStretch::from_unchecked(
+    offscreen_canvas_rendering_context2d_font_stretch_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -931,7 +947,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_font_variant_caps_ffi_js(
 fn offscreen_canvas_rendering_context2d_font_variant_caps_ffi(
   obj : JsValue,
 ) -> CanvasFontVariantCaps {
-  offscreen_canvas_rendering_context2d_font_variant_caps_ffi_js(obj).unsafe_cast()
+  CanvasFontVariantCaps::from_unchecked(
+    offscreen_canvas_rendering_context2d_font_variant_caps_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -949,7 +967,9 @@ extern "js" fn offscreen_canvas_rendering_context2d_text_rendering_ffi_js(
 fn offscreen_canvas_rendering_context2d_text_rendering_ffi(
   obj : JsValue,
 ) -> CanvasTextRendering {
-  offscreen_canvas_rendering_context2d_text_rendering_ffi_js(obj).unsafe_cast()
+  CanvasTextRendering::from_unchecked(
+    offscreen_canvas_rendering_context2d_text_rendering_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

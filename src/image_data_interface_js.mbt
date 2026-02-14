@@ -42,7 +42,9 @@ extern "js" fn image_data_pixel_format_ffi_js(obj : JsValue) -> JsValue = "(obj)
 
 ///|
 fn image_data_pixel_format_ffi(obj : JsValue) -> ImageDataPixelFormat {
-  image_data_pixel_format_ffi_js(obj).unsafe_cast()
+  ImageDataPixelFormat::from_unchecked(
+    image_data_pixel_format_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -50,5 +52,7 @@ extern "js" fn image_data_color_space_ffi_js(obj : JsValue) -> JsValue = "(obj) 
 
 ///|
 fn image_data_color_space_ffi(obj : JsValue) -> PredefinedColorSpace {
-  image_data_color_space_ffi_js(obj).unsafe_cast()
+  PredefinedColorSpace::from_unchecked(
+    image_data_color_space_ffi_js(obj).unsafe_cast(),
+  )
 }

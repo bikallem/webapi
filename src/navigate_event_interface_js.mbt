@@ -9,7 +9,9 @@ extern "js" fn navigate_event_navigation_type_ffi_js(obj : JsValue) -> JsValue =
 
 ///|
 fn navigate_event_navigation_type_ffi(obj : JsValue) -> NavigationType {
-  navigate_event_navigation_type_ffi_js(obj).unsafe_cast()
+  NavigationType::from_unchecked(
+    navigate_event_navigation_type_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

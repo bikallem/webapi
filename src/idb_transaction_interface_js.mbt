@@ -13,7 +13,9 @@ extern "js" fn idb_transaction_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) =>
 
 ///|
 fn idb_transaction_mode_ffi(obj : JsValue) -> IDBTransactionMode {
-  idb_transaction_mode_ffi_js(obj).unsafe_cast()
+  IDBTransactionMode::from_unchecked(
+    idb_transaction_mode_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -21,7 +23,9 @@ extern "js" fn idb_transaction_durability_ffi_js(obj : JsValue) -> JsValue = "(o
 
 ///|
 fn idb_transaction_durability_ffi(obj : JsValue) -> IDBTransactionDurability {
-  idb_transaction_durability_ffi_js(obj).unsafe_cast()
+  IDBTransactionDurability::from_unchecked(
+    idb_transaction_durability_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

@@ -30,7 +30,9 @@ extern "js" fn request_destination_ffi_js(obj : JsValue) -> JsValue = "(obj) => 
 
 ///|
 fn request_destination_ffi(obj : JsValue) -> RequestDestination {
-  request_destination_ffi_js(obj).unsafe_cast()
+  RequestDestination::from_unchecked(
+    request_destination_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -46,7 +48,9 @@ extern "js" fn request_referrer_policy_ffi_js(obj : JsValue) -> JsValue = "(obj)
 
 ///|
 fn request_referrer_policy_ffi(obj : JsValue) -> ReferrerPolicy {
-  request_referrer_policy_ffi_js(obj).unsafe_cast()
+  ReferrerPolicy::from_unchecked(
+    request_referrer_policy_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -54,7 +58,7 @@ extern "js" fn request_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.mod
 
 ///|
 fn request_mode_ffi(obj : JsValue) -> RequestMode {
-  request_mode_ffi_js(obj).unsafe_cast()
+  RequestMode::from_unchecked(request_mode_ffi_js(obj).unsafe_cast())
 }
 
 ///|
@@ -62,7 +66,9 @@ extern "js" fn request_credentials_ffi_js(obj : JsValue) -> JsValue = "(obj) => 
 
 ///|
 fn request_credentials_ffi(obj : JsValue) -> RequestCredentials {
-  request_credentials_ffi_js(obj).unsafe_cast()
+  RequestCredentials::from_unchecked(
+    request_credentials_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -70,7 +76,7 @@ extern "js" fn request_cache_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ca
 
 ///|
 fn request_cache_ffi(obj : JsValue) -> RequestCache {
-  request_cache_ffi_js(obj).unsafe_cast()
+  RequestCache::from_unchecked(request_cache_ffi_js(obj).unsafe_cast())
 }
 
 ///|
@@ -78,7 +84,7 @@ extern "js" fn request_redirect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj
 
 ///|
 fn request_redirect_ffi(obj : JsValue) -> RequestRedirect {
-  request_redirect_ffi_js(obj).unsafe_cast()
+  RequestRedirect::from_unchecked(request_redirect_ffi_js(obj).unsafe_cast())
 }
 
 ///|
@@ -126,7 +132,7 @@ extern "js" fn request_duplex_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.d
 
 ///|
 fn request_duplex_ffi(obj : JsValue) -> RequestDuplex {
-  request_duplex_ffi_js(obj).unsafe_cast()
+  RequestDuplex::from_unchecked(request_duplex_ffi_js(obj).unsafe_cast())
 }
 
 ///|

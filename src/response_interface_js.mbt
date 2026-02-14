@@ -33,7 +33,7 @@ extern "js" fn response_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ty
 
 ///|
 fn response_type_ffi(obj : JsValue) -> ResponseType {
-  response_type_ffi_js(obj).unsafe_cast()
+  ResponseType::from_unchecked(response_type_ffi_js(obj).unsafe_cast())
 }
 
 ///|

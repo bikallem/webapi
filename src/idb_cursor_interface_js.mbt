@@ -11,7 +11,9 @@ extern "js" fn idb_cursor_direction_ffi_js(obj : JsValue) -> JsValue = "(obj) =>
 
 ///|
 fn idb_cursor_direction_ffi(obj : JsValue) -> IDBCursorDirection {
-  idb_cursor_direction_ffi_js(obj).unsafe_cast()
+  IDBCursorDirection::from_unchecked(
+    idb_cursor_direction_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

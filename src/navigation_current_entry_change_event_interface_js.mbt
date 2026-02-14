@@ -13,7 +13,9 @@ extern "js" fn navigation_current_entry_change_event_navigation_type_ffi_js(
 fn navigation_current_entry_change_event_navigation_type_ffi(
   obj : JsValue,
 ) -> NavigationType {
-  navigation_current_entry_change_event_navigation_type_ffi_js(obj).unsafe_cast()
+  NavigationType::from_unchecked(
+    navigation_current_entry_change_event_navigation_type_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

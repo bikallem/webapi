@@ -41,7 +41,9 @@ extern "js" fn keyframe_effect_composite_ffi_js(obj : JsValue) -> JsValue = "(ob
 
 ///|
 fn keyframe_effect_composite_ffi(obj : JsValue) -> CompositeOperation {
-  keyframe_effect_composite_ffi_js(obj).unsafe_cast()
+  CompositeOperation::from_unchecked(
+    keyframe_effect_composite_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

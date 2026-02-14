@@ -146,7 +146,9 @@ extern "js" fn xml_http_request_response_type_ffi_js(obj : JsValue) -> JsValue =
 fn xml_http_request_response_type_ffi(
   obj : JsValue,
 ) -> XMLHttpRequestResponseType {
-  xml_http_request_response_type_ffi_js(obj).unsafe_cast()
+  XMLHttpRequestResponseType::from_unchecked(
+    xml_http_request_response_type_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

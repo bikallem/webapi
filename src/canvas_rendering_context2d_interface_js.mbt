@@ -163,7 +163,9 @@ extern "js" fn canvas_rendering_context2d_image_smoothing_quality_ffi_js(
 fn canvas_rendering_context2d_image_smoothing_quality_ffi(
   obj : JsValue,
 ) -> ImageSmoothingQuality {
-  canvas_rendering_context2d_image_smoothing_quality_ffi_js(obj).unsafe_cast()
+  ImageSmoothingQuality::from_unchecked(
+    canvas_rendering_context2d_image_smoothing_quality_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -678,7 +680,9 @@ extern "js" fn canvas_rendering_context2d_line_cap_ffi_js(
 
 ///|
 fn canvas_rendering_context2d_line_cap_ffi(obj : JsValue) -> CanvasLineCap {
-  canvas_rendering_context2d_line_cap_ffi_js(obj).unsafe_cast()
+  CanvasLineCap::from_unchecked(
+    canvas_rendering_context2d_line_cap_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -694,7 +698,9 @@ extern "js" fn canvas_rendering_context2d_line_join_ffi_js(
 
 ///|
 fn canvas_rendering_context2d_line_join_ffi(obj : JsValue) -> CanvasLineJoin {
-  canvas_rendering_context2d_line_join_ffi_js(obj).unsafe_cast()
+  CanvasLineJoin::from_unchecked(
+    canvas_rendering_context2d_line_join_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -786,7 +792,9 @@ extern "js" fn canvas_rendering_context2d_text_align_ffi_js(
 
 ///|
 fn canvas_rendering_context2d_text_align_ffi(obj : JsValue) -> CanvasTextAlign {
-  canvas_rendering_context2d_text_align_ffi_js(obj).unsafe_cast()
+  CanvasTextAlign::from_unchecked(
+    canvas_rendering_context2d_text_align_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -804,7 +812,9 @@ extern "js" fn canvas_rendering_context2d_text_baseline_ffi_js(
 fn canvas_rendering_context2d_text_baseline_ffi(
   obj : JsValue,
 ) -> CanvasTextBaseline {
-  canvas_rendering_context2d_text_baseline_ffi_js(obj).unsafe_cast()
+  CanvasTextBaseline::from_unchecked(
+    canvas_rendering_context2d_text_baseline_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -820,7 +830,9 @@ extern "js" fn canvas_rendering_context2d_direction_ffi_js(
 
 ///|
 fn canvas_rendering_context2d_direction_ffi(obj : JsValue) -> CanvasDirection {
-  canvas_rendering_context2d_direction_ffi_js(obj).unsafe_cast()
+  CanvasDirection::from_unchecked(
+    canvas_rendering_context2d_direction_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -854,7 +866,9 @@ extern "js" fn canvas_rendering_context2d_font_kerning_ffi_js(
 fn canvas_rendering_context2d_font_kerning_ffi(
   obj : JsValue,
 ) -> CanvasFontKerning {
-  canvas_rendering_context2d_font_kerning_ffi_js(obj).unsafe_cast()
+  CanvasFontKerning::from_unchecked(
+    canvas_rendering_context2d_font_kerning_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -872,7 +886,9 @@ extern "js" fn canvas_rendering_context2d_font_stretch_ffi_js(
 fn canvas_rendering_context2d_font_stretch_ffi(
   obj : JsValue,
 ) -> CanvasFontStretch {
-  canvas_rendering_context2d_font_stretch_ffi_js(obj).unsafe_cast()
+  CanvasFontStretch::from_unchecked(
+    canvas_rendering_context2d_font_stretch_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -890,7 +906,9 @@ extern "js" fn canvas_rendering_context2d_font_variant_caps_ffi_js(
 fn canvas_rendering_context2d_font_variant_caps_ffi(
   obj : JsValue,
 ) -> CanvasFontVariantCaps {
-  canvas_rendering_context2d_font_variant_caps_ffi_js(obj).unsafe_cast()
+  CanvasFontVariantCaps::from_unchecked(
+    canvas_rendering_context2d_font_variant_caps_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -908,7 +926,9 @@ extern "js" fn canvas_rendering_context2d_text_rendering_ffi_js(
 fn canvas_rendering_context2d_text_rendering_ffi(
   obj : JsValue,
 ) -> CanvasTextRendering {
-  canvas_rendering_context2d_text_rendering_ffi_js(obj).unsafe_cast()
+  CanvasTextRendering::from_unchecked(
+    canvas_rendering_context2d_text_rendering_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

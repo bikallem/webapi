@@ -69,6 +69,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
+    is_enum=is_enum_return(self.return_type.type_),
     "obj.\{self.webidl_name}(\{ffi_js_call_args})",
   )
 }
@@ -176,6 +177,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
+    is_enum=is_enum_return(self.return_type.type_),
     "\{self.js_name}.\{self.webidl_name}(\{ffi_js_args})",
   )
 }
@@ -270,6 +272,7 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_js(
     self.return_type,
     is_optional=self.return_type.has_suffix("?"),
     is_void=false,
+    is_enum=self.is_enum_type,
     "obj.\{self.original_name}",
   )
 }
@@ -434,6 +437,7 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_js(
     self.return_type,
     is_optional=self.return_type.has_suffix("?"),
     is_void=false,
+    is_enum=self.is_enum_type,
     "\{self.js_name}.\{self.original_name}",
   )
 }
@@ -549,6 +553,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
+    is_enum=is_enum_return(self.return_type.type_),
     js_expr,
   )
 }

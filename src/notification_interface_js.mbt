@@ -9,7 +9,9 @@ extern "js" fn notification_permission_ffi_js() -> JsValue = "() => Notification
 
 ///|
 fn notification_permission_ffi() -> NotificationPermission {
-  notification_permission_ffi_js().unsafe_cast()
+  NotificationPermission::from_unchecked(
+    notification_permission_ffi_js().unsafe_cast(),
+  )
 }
 
 ///|
@@ -101,7 +103,9 @@ extern "js" fn notification_dir_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj
 
 ///|
 fn notification_dir_ffi(obj : JsValue) -> NotificationDirection {
-  notification_dir_ffi_js(obj).unsafe_cast()
+  NotificationDirection::from_unchecked(
+    notification_dir_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

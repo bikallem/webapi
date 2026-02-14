@@ -62,7 +62,9 @@ extern "js" fn animation_play_state_ffi_js(obj : JsValue) -> JsValue = "(obj) =>
 
 ///|
 fn animation_play_state_ffi(obj : JsValue) -> AnimationPlayState {
-  animation_play_state_ffi_js(obj).unsafe_cast()
+  AnimationPlayState::from_unchecked(
+    animation_play_state_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|
@@ -70,7 +72,9 @@ extern "js" fn animation_replace_state_ffi_js(obj : JsValue) -> JsValue = "(obj)
 
 ///|
 fn animation_replace_state_ffi(obj : JsValue) -> AnimationReplaceState {
-  animation_replace_state_ffi_js(obj).unsafe_cast()
+  AnimationReplaceState::from_unchecked(
+    animation_replace_state_ffi_js(obj).unsafe_cast(),
+  )
 }
 
 ///|

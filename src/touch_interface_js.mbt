@@ -118,5 +118,5 @@ extern "js" fn touch_touch_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj
 
 ///|
 fn touch_touch_type_ffi(obj : JsValue) -> TouchType {
-  touch_touch_type_ffi_js(obj).unsafe_cast()
+  TouchType::from_unchecked(touch_touch_type_ffi_js(obj).unsafe_cast())
 }
