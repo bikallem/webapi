@@ -88,3 +88,11 @@ fn shadow_root_set_adopted_style_sheets_ffi(
 
 ///|
 fn shadow_root_fullscreen_element_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot" "get_fullscreenElement"
+
+///|
+fn shadow_root_get_animations_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ShadowRoot" "getAnimations"
+
+///|
+fn shadow_root_get_animations_ffi(obj : JsValue) -> Array[Animation] {
+  shadow_root_get_animations_ffi_wasm(obj).to_array()
+}

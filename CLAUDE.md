@@ -152,17 +152,9 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 
 ### Currently included
 
-`clipboard-apis`, `console`, `cssom`, `cssom-view`, `dom`, `encoding`, `fetch`, `FileAPI`, `fullscreen`, `geometry`, `hr-time`, `html`, `intersection-observer`, `notifications`, `performance-timeline`, `pointerevents`, `referrer-policy`, `requestidlecallback`, `resize-observer`, `screen-orientation`, `selection-api`, `storage`, `SVG`, `touch-events`, `trusted-types`, `uievents`, `url`, `vibration`, `webidl`, `websockets`, `xhr`
+`clipboard-apis`, `console`, `cssom`, `cssom-view`, `dom`, `encoding`, `fetch`, `FileAPI`, `fullscreen`, `geometry`, `hr-time`, `html`, `IndexedDB`, `intersection-observer`, `notifications`, `performance-timeline`, `pointerevents`, `referrer-policy`, `requestidlecallback`, `resize-observer`, `screen-orientation`, `selection-api`, `storage`, `streams`, `SVG`, `touch-events`, `trusted-types`, `uievents`, `url`, `vibration`, `web-animations`, `webidl`, `websockets`, `xhr`
 
 ### Candidates for inclusion
-
-#### High value (commonly used in web apps)
-
-| Spec | Key APIs | Notes |
-|------|----------|-------|
-| `streams` | ReadableStream, WritableStream, TransformStream | Used by fetch body, file APIs |
-| `web-animations` | Animation, KeyframeEffect | Programmatic animations |
-| `IndexedDB` | IDBDatabase, IDBObjectStore | Client-side structured storage |
 
 #### Moderate value (more specialized)
 
@@ -198,7 +190,5 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 All examples compile for both js and wasm-gc targets except `fetch-async` (requires async/await bridge, intentionally js-only).
 
 **JsPromise `FromJsAny` trait (resolved)**: `JsPromise::then` now requires `T : FromJsAny` and uses `FromJsAny::from_js_any` instead of `%identity` cast. This correctly handles non-externref types on wasm-gc: Bool (i32), Double (f64), enums (GC types), and Unit. Primitive conversions use FFI helpers (`toBool`, `toInt`, `toDouble`, etc.) in the `webapi_JsPromise` JS module. `Promise<undefined>` is still mapped to `JsPromise[JsValue]` as a conservative choice — switching to `JsPromise[Unit]` is a future API-surface change (see `type_mapping.mbt` lines 282-285).
-
-**JsPromise `Array[T]` limitation**: `FromJsAny` is not yet implemented for `Array[T]` (MoonBit GC array, not externref). `JsPromise[Array[T]]` resolution would need a JS-side helper to convert the JS array to a MoonBit GC array. This affects any future `Promise<sequence<T>>` API binding.
 
 **Trait-typed default values**: Optional parameters with trait-typed defaults (`&TFoo = value`) are stripped to plain optionals. On wasm-gc, trait references compile to GC struct closures, and the compiler's default value thunk returns externref (incompatible with GC struct types). The code generator strips these defaults and uses `Option + match` with `JsValue::undefined()` for absent values instead.

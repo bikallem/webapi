@@ -311,6 +311,14 @@ fn worker_global_scope_performance_ffi(obj : JsValue) -> Performance {
 }
 
 ///|
+extern "js" fn worker_global_scope_indexed_db_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.indexedDB"
+
+///|
+fn worker_global_scope_indexed_db_ffi(obj : JsValue) -> IDBFactory {
+  worker_global_scope_indexed_db_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn worker_global_scope_trusted_types_ffi_js(
   obj : JsValue,
 ) -> JsValue = "(obj) => obj.trustedTypes"

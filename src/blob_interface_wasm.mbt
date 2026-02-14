@@ -21,12 +21,7 @@ fn blob_slice_ffi(
 ) -> Blob = "webapi_Blob" "slice"
 
 ///|
-fn blob_stream_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "stream"
-
-///|
-fn blob_stream_ffi(obj : JsValue) -> ReadableStream {
-  blob_stream_ffi_wasm(obj).unsafe_cast()
-}
+fn blob_stream_ffi(obj : JsValue) -> ReadableStream = "webapi_Blob" "stream"
 
 ///|
 fn blob_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "text"

@@ -88,6 +88,7 @@ pub trait TShadowRoot: TDocumentFragment {
   adopted_style_sheets(self : Self) -> JsValue = _
   set_adopted_style_sheets(self : Self, adopted_style_sheets : JsValue) -> Unit = _
   fullscreen_element(self : Self) -> Element = _
+  get_animations(self : Self) -> Array[Animation] = _
 }
 
 ///|
@@ -214,4 +215,10 @@ impl TShadowRoot with set_adopted_style_sheets(
 /// [ShadowRoot.fullscreenElement](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/fullscreenElement)
 impl TShadowRoot with fullscreen_element(self : Self) -> Element {
   shadow_root_fullscreen_element_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [ShadowRoot.getAnimations](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/getAnimations)
+impl TShadowRoot with get_animations(self : Self) -> Array[Animation] {
+  shadow_root_get_animations_ffi(TJsValue::to_js(self))
 }

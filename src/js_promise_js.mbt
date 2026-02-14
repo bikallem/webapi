@@ -45,3 +45,8 @@ pub impl FromJsAny for Double with from_js_any(value : JsAny) -> Double = "%iden
 
 ///|
 pub impl FromJsAny for Unit with from_js_any(_value : JsAny) -> Unit = "%identity"
+
+///|
+pub impl[T : FromJsAny] FromJsAny for Array[T] with from_js_any(value : JsAny) -> Array[
+  T,
+] = "%identity"

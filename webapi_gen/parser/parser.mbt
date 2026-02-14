@@ -536,20 +536,22 @@ fn Parser::parse_interface_member(
       self.skip_next()
       self.skip(TK_LANGLE)
       let first_type = self.parse_type()
-      if self.eat(TK_COMMA) {
+      let (key_type, value_type) = if self.eat(TK_COMMA) {
         let second_type = self.parse_type()
-        self.skip(TK_RANGLE)
-        self.skip(TK_SEMICOLON)
-        AsyncIterable({
-          key_type: Some(first_type),
-          value_type: second_type,
-          arguments: [],
-        })
+        (Some(first_type), second_type)
       } else {
-        self.skip(TK_RANGLE)
-        self.skip(TK_SEMICOLON)
-        AsyncIterable({ key_type: None, value_type: first_type, arguments: [] })
+        (None, first_type)
       }
+      self.skip(TK_RANGLE)
+      let arguments = if self.eat(TK_LPAREN) {
+        let args = self.parse_argument_list()
+        self.skip(TK_RPAREN)
+        args
+      } else {
+        ([] : Array[Argument])
+      }
+      self.skip(TK_SEMICOLON)
+      AsyncIterable({ key_type, value_type, arguments })
     }
     TK_READONLY => {
       self.skip_next()
@@ -609,8 +611,14 @@ fn Parser::parse_regular_operation_member(
   self : Parser,
 ) -> RegularOperationMember raise ParseError {
   let return_type = self.parse_type()
-  let name_tok = self.expect_identifier()
-  let name = name_tok.trim(chars="_").to_string()
+  // WebIDL keywords like "includes" can appear as method names inside interfaces
+  let name = match self.try_argument_name_keyword() {
+    Some(kw) => kw
+    None => {
+      let name_tok = self.expect_identifier()
+      name_tok.trim(chars="_").to_string()
+    }
+  }
   self.skip(TK_LPAREN)
   let arguments = self.parse_argument_list()
   self.skip(TK_RPAREN)
@@ -976,7 +984,12 @@ fn Parser::parse_union_member_type(
     { extended_attributes: [], type_: ty }
   } else {
     let extended_attributes = self.parse_extended_attribute_list()
-    let type_ = self.parse_distinguishable_type()
+    let base_type = self.parse_distinguishable_type()
+    let type_ = if self.eat(TK_QUESTION) {
+      Type::Nullable(base_type)
+    } else {
+      base_type
+    }
     { extended_attributes, type_ }
   }
 }

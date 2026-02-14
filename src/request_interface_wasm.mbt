@@ -116,12 +116,7 @@ fn request_duplex_ffi(obj : JsValue) -> RequestDuplex {
 fn request_clone_ffi(obj : JsValue) -> Request = "webapi_Request" "clone"
 
 ///|
-fn request_body_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_body"
-
-///|
-fn request_body_ffi(obj : JsValue) -> ReadableStream {
-  request_body_ffi_wasm(obj).unsafe_cast()
-}
+fn request_body_ffi(obj : JsValue) -> ReadableStream = "webapi_Request" "get_body"
 
 ///|
 fn request_body_used_ffi(obj : JsValue) -> Bool = "webapi_Request" "get_bodyUsed"

@@ -1774,6 +1774,9 @@ fn window_fetch_ffi(
 fn window_performance_ffi(obj : JsValue) -> Performance = "webapi_Window" "get_performance"
 
 ///|
+fn window_indexed_db_ffi(obj : JsValue) -> IDBFactory = "webapi_Window" "get_indexedDB"
+
+///|
 fn window_trusted_types_ffi(obj : JsValue) -> TrustedTypePolicyFactory = "webapi_Window" "get_trustedTypes"
 
 ///|

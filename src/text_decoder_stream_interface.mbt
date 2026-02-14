@@ -35,6 +35,8 @@ pub trait TTextDecoderStream: TJsValue {
   encoding(self : Self) -> String = _
   fatal(self : Self) -> Bool = _
   ignore_bom(self : Self) -> Bool = _
+  readable(self : Self) -> ReadableStream = _
+  writable(self : Self) -> WritableStream = _
 }
 
 ///|
@@ -53,4 +55,16 @@ impl TTextDecoderStream with fatal(self : Self) -> Bool {
 /// [TextDecoderStream.ignoreBOM](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoderStream/ignoreBOM)
 impl TTextDecoderStream with ignore_bom(self : Self) -> Bool {
   text_decoder_stream_ignore_bom_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [TextDecoderStream.readable](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoderStream/readable)
+impl TTextDecoderStream with readable(self : Self) -> ReadableStream {
+  text_decoder_stream_readable_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [TextDecoderStream.writable](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoderStream/writable)
+impl TTextDecoderStream with writable(self : Self) -> WritableStream {
+  text_decoder_stream_writable_ffi(TJsValue::to_js(self))
 }

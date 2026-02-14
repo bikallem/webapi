@@ -2270,6 +2270,14 @@ fn window_performance_ffi(obj : JsValue) -> Performance {
 }
 
 ///|
+extern "js" fn window_indexed_db_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.indexedDB"
+
+///|
+fn window_indexed_db_ffi(obj : JsValue) -> IDBFactory {
+  window_indexed_db_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn window_trusted_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.trustedTypes"
 
 ///|

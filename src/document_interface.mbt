@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Document
-// Specifications: selection-api.idl, dom.idl, cssom-view.idl, SVG.idl, fullscreen.idl, html.idl
+// Specifications: selection-api.idl, dom.idl, cssom-view.idl, SVG.idl, fullscreen.idl, web-animations.idl, html.idl
 
 ///|
 /// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)
@@ -281,6 +281,7 @@ pub trait TDocument: TNode {
   onfullscreenerror(self : Self) -> EventHandler = _
   set_onfullscreenerror(self : Self, onfullscreenerror : EventHandler) -> Unit = _
   get_selection(self : Self) -> Selection? = _
+  timeline(self : Self) -> DocumentTimeline = _
   get_element_by_id(self : Self, element_id : String) -> Element? = _
   custom_element_registry(self : Self) -> CustomElementRegistry = _
   active_element(self : Self) -> Element = _
@@ -288,6 +289,7 @@ pub trait TDocument: TNode {
   adopted_style_sheets(self : Self) -> JsValue = _
   set_adopted_style_sheets(self : Self, adopted_style_sheets : JsValue) -> Unit = _
   fullscreen_element(self : Self) -> Element = _
+  get_animations(self : Self) -> Array[Animation] = _
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
@@ -1376,6 +1378,12 @@ impl TDocument with get_selection(self : Self) -> Selection? {
 }
 
 ///|
+/// [Document.timeline](https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline)
+impl TDocument with timeline(self : Self) -> DocumentTimeline {
+  document_timeline_ffi(TJsValue::to_js(self))
+}
+
+///|
 /// [Document.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)
 impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
   let result = document_get_element_by_id_ffi(
@@ -1429,6 +1437,12 @@ impl TDocument with set_adopted_style_sheets(
 /// [Document.fullscreenElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement)
 impl TDocument with fullscreen_element(self : Self) -> Element {
   document_fullscreen_element_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Document.getAnimations](https://developer.mozilla.org/en-US/docs/Web/API/Document/getAnimations)
+impl TDocument with get_animations(self : Self) -> Array[Animation] {
+  document_get_animations_ffi(TJsValue::to_js(self))
 }
 
 ///|

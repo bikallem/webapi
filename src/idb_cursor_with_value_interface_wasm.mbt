@@ -1,0 +1,2 @@
+///|
+fn idb_cursor_with_value_value_ffi(obj : JsValue) -> JsValue = "webapi_IDBCursorWithValue" "get_value"

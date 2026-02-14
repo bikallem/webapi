@@ -907,6 +907,14 @@ extern "js" fn document_set_onfullscreenerror_ffi(
 extern "js" fn document_get_selection_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getSelection()"
 
 ///|
+extern "js" fn document_timeline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.timeline"
+
+///|
+fn document_timeline_ffi(obj : JsValue) -> DocumentTimeline {
+  document_timeline_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
@@ -958,6 +966,14 @@ extern "js" fn document_fullscreen_element_ffi_js(obj : JsValue) -> JsValue = "(
 ///|
 fn document_fullscreen_element_ffi(obj : JsValue) -> Element {
   document_fullscreen_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn document_get_animations_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getAnimations()"
+
+///|
+fn document_get_animations_ffi(obj : JsValue) -> Array[Animation] {
+  document_get_animations_ffi_js(obj).unsafe_cast()
 }
 
 ///|

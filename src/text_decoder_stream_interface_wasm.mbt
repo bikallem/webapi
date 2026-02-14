@@ -17,3 +17,9 @@ fn text_decoder_stream_fatal_ffi(obj : JsValue) -> Bool = "webapi_TextDecoderStr
 
 ///|
 fn text_decoder_stream_ignore_bom_ffi(obj : JsValue) -> Bool = "webapi_TextDecoderStream" "get_ignoreBOM"
+
+///|
+fn text_decoder_stream_readable_ffi(obj : JsValue) -> ReadableStream = "webapi_TextDecoderStream" "get_readable"
+
+///|
+fn text_decoder_stream_writable_ffi(obj : JsValue) -> WritableStream = "webapi_TextDecoderStream" "get_writable"

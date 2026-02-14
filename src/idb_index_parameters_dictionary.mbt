@@ -1,0 +1,30 @@
+// Do not edit. This file is generated.
+// MoonBit type: IDBIndexParameters
+// Specifications: IndexedDB.idl
+
+///|
+/// [IDBIndexParameters](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndexParameters)
+#external
+pub type IDBIndexParameters
+
+///|
+pub impl TJsValue for IDBIndexParameters with to_js(self : IDBIndexParameters) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for IDBIndexParameters with from_js_any(value : JsAny) -> IDBIndexParameters = "%identity"
+
+///|
+pub fn IDBIndexParameters::new(
+  unique? : Bool = false,
+  multi_entry? : Bool = false,
+) -> IDBIndexParameters {
+  idb_index_parameters_ffi(
+    TJsValue::to_js(unique),
+    TJsValue::to_js(multi_entry),
+  )
+}
+
+///|
+pub fn IDBIndexParameters::empty() -> IDBIndexParameters {
+  idb_index_parameters_empty_ffi()
+}

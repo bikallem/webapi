@@ -50,12 +50,7 @@ fn response_headers_ffi(obj : JsValue) -> Headers = "webapi_Response" "get_heade
 fn response_clone_ffi(obj : JsValue) -> Response = "webapi_Response" "clone"
 
 ///|
-fn response_body_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "get_body"
-
-///|
-fn response_body_ffi(obj : JsValue) -> ReadableStream {
-  response_body_ffi_wasm(obj).unsafe_cast()
-}
+fn response_body_ffi(obj : JsValue) -> ReadableStream = "webapi_Response" "get_body"
 
 ///|
 fn response_body_used_ffi(obj : JsValue) -> Bool = "webapi_Response" "get_bodyUsed"

@@ -841,3 +841,33 @@ fn element_convert_point_from_node_ffi(
 ) -> DOMPoint {
   element_convert_point_from_node_ffi_js(obj, point, from, options).unsafe_cast()
 }
+
+///|
+extern "js" fn element_animate_ffi_js(
+  obj : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, keyframes, options) => obj.animate(keyframes, options)"
+
+///|
+fn element_animate_ffi(
+  obj : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> Animation {
+  element_animate_ffi_js(obj, keyframes, options).unsafe_cast()
+}
+
+///|
+extern "js" fn element_get_animations_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getAnimations(options)"
+
+///|
+fn element_get_animations_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Animation] {
+  element_get_animations_ffi_js(obj, options).unsafe_cast()
+}

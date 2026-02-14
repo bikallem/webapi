@@ -105,6 +105,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     Response,
   ] = _
   performance(self : Self) -> Performance = _
+  indexed_db(self : Self) -> IDBFactory = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
 }
 
@@ -416,6 +417,12 @@ impl TWorkerGlobalScope with fetch(
 /// [WorkerGlobalScope.performance](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/performance)
 impl TWorkerGlobalScope with performance(self : Self) -> Performance {
   worker_global_scope_performance_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [WorkerGlobalScope.indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/indexedDB)
+impl TWorkerGlobalScope with indexed_db(self : Self) -> IDBFactory {
+  worker_global_scope_indexed_db_ffi(TJsValue::to_js(self))
 }
 
 ///|

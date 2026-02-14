@@ -573,6 +573,9 @@ fn document_set_onfullscreenerror_ffi(
 fn document_get_selection_ffi(obj : JsValue) -> JsValue = "webapi_Document" "getSelection"
 
 ///|
+fn document_timeline_ffi(obj : JsValue) -> DocumentTimeline = "webapi_Document" "get_timeline"
+
+///|
 fn document_get_element_by_id_ffi(
   obj : JsValue,
   element_id : JsValue,
@@ -598,6 +601,14 @@ fn document_set_adopted_style_sheets_ffi(
 
 ///|
 fn document_fullscreen_element_ffi(obj : JsValue) -> Element = "webapi_Document" "get_fullscreenElement"
+
+///|
+fn document_get_animations_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Document" "getAnimations"
+
+///|
+fn document_get_animations_ffi(obj : JsValue) -> Array[Animation] {
+  document_get_animations_ffi_wasm(obj).to_array()
+}
 
 ///|
 fn document_children_ffi(obj : JsValue) -> HTMLCollection = "webapi_Document" "get_children"

@@ -30,10 +30,24 @@ pub fn TextEncoderStream::new() -> TextEncoderStream {
 /// [TextEncoderStream](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream) interface.
 pub trait TTextEncoderStream: TJsValue {
   encoding(self : Self) -> String = _
+  readable(self : Self) -> ReadableStream = _
+  writable(self : Self) -> WritableStream = _
 }
 
 ///|
 /// [TextEncoderStream.encoding](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream/encoding)
 impl TTextEncoderStream with encoding(self : Self) -> String {
   text_encoder_stream_encoding_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [TextEncoderStream.readable](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream/readable)
+impl TTextEncoderStream with readable(self : Self) -> ReadableStream {
+  text_encoder_stream_readable_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [TextEncoderStream.writable](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream/writable)
+impl TTextEncoderStream with writable(self : Self) -> WritableStream {
+  text_encoder_stream_writable_ffi(TJsValue::to_js(self))
 }

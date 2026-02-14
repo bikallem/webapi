@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Element
-// Specifications: html.idl, pointerevents.idl, fullscreen.idl, dom.idl, cssom-view.idl
+// Specifications: cssom-view.idl, pointerevents.idl, fullscreen.idl, dom.idl, html.idl
 
 ///|
 /// [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)
@@ -211,6 +211,21 @@ pub impl TElementReplaceWithNodes for Node with to_js(self : Node) -> JsValue = 
 pub impl TElementReplaceWithNodes for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
+pub(open) trait TElementAnimateOptions {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementAnimateOptions for Double with to_js(self : Double) -> JsValue {
+  TJsValue::to_js(self)
+}
+
+///|
+pub impl TElementAnimateOptions for KeyframeAnimationOptions with to_js(
+  self : KeyframeAnimationOptions,
+) -> JsValue = "%identity"
+
+///|
 /// [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) interface.
 pub trait TElement: TNode {
   namespace_uri(self : Self) -> String = _
@@ -345,6 +360,10 @@ pub trait TElement: TNode {
     from : &TGeometryNode,
     options? : ConvertCoordinateOptions,
   ) -> DOMPoint = _
+  animate(self : Self, keyframes : JsValue, options? : &TElementAnimateOptions) -> Animation = _
+  get_animations(self : Self, options? : GetAnimationsOptions) -> Array[
+    Animation,
+  ] = _
 }
 
 ///|
@@ -1246,4 +1265,30 @@ impl TElement with convert_point_from_node(
     from.to_js(),
     TJsValue::to_js(options),
   )
+}
+
+///|
+/// [Element.animate](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)
+impl TElement with animate(
+  self : Self,
+  keyframes : JsValue,
+  options? : &TElementAnimateOptions,
+) -> Animation {
+  element_animate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(keyframes),
+    match options {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
+}
+
+///|
+/// [Element.getAnimations](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations)
+impl TElement with get_animations(
+  self : Self,
+  options? : GetAnimationsOptions = GetAnimationsOptions::empty(),
+) -> Array[Animation] {
+  element_get_animations_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }

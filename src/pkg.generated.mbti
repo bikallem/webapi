@@ -389,6 +389,54 @@ pub impl TAllowSharedBufferSource for AllowSharedBufferSource
 pub impl TJsValue for AllowSharedBufferSource
 
 #external
+pub type Animation
+pub fn[T : TAnimation] Animation::into(Self) -> T
+pub fn Animation::new(effect? : &TAnimationEffect, timeline? : &TAnimationTimeline) -> Self
+pub impl FromJsAny for Animation
+pub impl TAnimation for Animation
+pub impl TEventTarget for Animation
+pub impl TJsValue for Animation
+
+#external
+pub type AnimationEffect
+pub fn[T : TAnimationEffect] AnimationEffect::into(Self) -> T
+pub impl FromJsAny for AnimationEffect
+pub impl TAnimationEffect for AnimationEffect
+pub impl TJsValue for AnimationEffect
+
+pub(all) enum AnimationPlayState {
+  Idle
+  Running
+  Paused
+  Finished
+}
+pub fn AnimationPlayState::from(String) -> Self?
+pub fn AnimationPlayState::value(Self) -> String
+pub impl FromJsAny for AnimationPlayState
+pub impl TJsValue for AnimationPlayState
+pub impl Eq for AnimationPlayState
+pub impl Show for AnimationPlayState
+
+pub(all) enum AnimationReplaceState {
+  Active
+  Removed
+  Persisted
+}
+pub fn AnimationReplaceState::from(String) -> Self?
+pub fn AnimationReplaceState::value(Self) -> String
+pub impl FromJsAny for AnimationReplaceState
+pub impl TJsValue for AnimationReplaceState
+pub impl Eq for AnimationReplaceState
+pub impl Show for AnimationReplaceState
+
+#external
+pub type AnimationTimeline
+pub fn[T : TAnimationTimeline] AnimationTimeline::into(Self) -> T
+pub impl FromJsAny for AnimationTimeline
+pub impl TAnimationTimeline for AnimationTimeline
+pub impl TJsValue for AnimationTimeline
+
+#external
 pub type ArrayBuffer
 pub impl FromJsAny for ArrayBuffer
 pub impl TAllowSharedBufferSource for ArrayBuffer
@@ -444,6 +492,27 @@ pub fn[T : TBarProp] BarProp::into(Self) -> T
 pub impl FromJsAny for BarProp
 pub impl TBarProp for BarProp
 pub impl TJsValue for BarProp
+
+#external
+pub type BaseComputedKeyframe
+pub fn BaseComputedKeyframe::empty() -> Self
+pub fn BaseComputedKeyframe::new(offset? : Double, computed_offset? : Double, easing? : String, composite? : CompositeOperationOrAuto) -> Self
+pub impl FromJsAny for BaseComputedKeyframe
+pub impl TJsValue for BaseComputedKeyframe
+
+#external
+pub type BaseKeyframe
+pub fn BaseKeyframe::empty() -> Self
+pub fn BaseKeyframe::new(offset? : Double, easing? : String, composite? : CompositeOperationOrAuto) -> Self
+pub impl FromJsAny for BaseKeyframe
+pub impl TJsValue for BaseKeyframe
+
+#external
+pub type BasePropertyIndexedKeyframe
+pub fn BasePropertyIndexedKeyframe::empty() -> Self
+pub fn BasePropertyIndexedKeyframe::new(offset? : &TBasePropertyIndexedKeyframeNewOffset, easing? : &TBasePropertyIndexedKeyframeNewEasing, composite? : &TBasePropertyIndexedKeyframeNewComposite) -> Self
+pub impl FromJsAny for BasePropertyIndexedKeyframe
+pub impl TJsValue for BasePropertyIndexedKeyframe
 
 #external
 pub type BeforeUnloadEvent
@@ -542,6 +611,14 @@ pub impl TBufferSource for BufferSource
 pub impl TJsValue for BufferSource
 pub impl TWebSocketSendData for BufferSource
 pub impl TXMLHttpRequestBodyInit for BufferSource
+
+#external
+pub type ByteLengthQueuingStrategy
+pub fn[T : TByteLengthQueuingStrategy] ByteLengthQueuingStrategy::into(Self) -> T
+pub fn ByteLengthQueuingStrategy::new(QueuingStrategyInit) -> Self
+pub impl FromJsAny for ByteLengthQueuingStrategy
+pub impl TByteLengthQueuingStrategy for ByteLengthQueuingStrategy
+pub impl TJsValue for ByteLengthQueuingStrategy
 
 #external
 pub type CDATASection
@@ -1058,6 +1135,32 @@ pub impl TEventTarget for Comment
 pub impl TJsValue for Comment
 pub impl TNode for Comment
 
+pub(all) enum CompositeOperation {
+  Replace
+  Add
+  Accumulate
+}
+pub fn CompositeOperation::from(String) -> Self?
+pub fn CompositeOperation::value(Self) -> String
+pub impl FromJsAny for CompositeOperation
+pub impl TJsValue for CompositeOperation
+pub impl Eq for CompositeOperation
+pub impl Show for CompositeOperation
+
+pub(all) enum CompositeOperationOrAuto {
+  Replace
+  Add
+  Accumulate
+  Auto
+}
+pub fn CompositeOperationOrAuto::from(String) -> Self?
+pub fn CompositeOperationOrAuto::value(Self) -> String
+pub impl FromJsAny for CompositeOperationOrAuto
+pub impl TBasePropertyIndexedKeyframeNewComposite for CompositeOperationOrAuto
+pub impl TJsValue for CompositeOperationOrAuto
+pub impl Eq for CompositeOperationOrAuto
+pub impl Show for CompositeOperationOrAuto
+
 #external
 pub type CompositionEvent
 pub fn[T : TCompositionEvent] CompositionEvent::into(Self) -> T
@@ -1074,6 +1177,13 @@ pub fn CompositionEventInit::empty() -> Self
 pub fn CompositionEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, data? : String) -> Self
 pub impl FromJsAny for CompositionEventInit
 pub impl TJsValue for CompositionEventInit
+
+#external
+pub type ComputedEffectTiming
+pub fn ComputedEffectTiming::empty() -> Self
+pub fn ComputedEffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, progress? : Double, current_iteration? : Double) -> Self
+pub impl FromJsAny for ComputedEffectTiming
+pub impl TJsValue for ComputedEffectTiming
 
 #external
 pub type Console
@@ -1105,6 +1215,14 @@ pub fn ConvertCoordinateOptions::empty() -> Self
 pub fn ConvertCoordinateOptions::new(from_box? : CSSBoxType, to_box? : CSSBoxType) -> Self
 pub impl FromJsAny for ConvertCoordinateOptions
 pub impl TJsValue for ConvertCoordinateOptions
+
+#external
+pub type CountQueuingStrategy
+pub fn[T : TCountQueuingStrategy] CountQueuingStrategy::into(Self) -> T
+pub fn CountQueuingStrategy::new(QueuingStrategyInit) -> Self
+pub impl FromJsAny for CountQueuingStrategy
+pub impl TCountQueuingStrategy for CountQueuingStrategy
+pub impl TJsValue for CountQueuingStrategy
 
 #external
 pub type CreateHTMLCallback
@@ -1427,6 +1545,22 @@ pub impl Eq for DocumentReadyState
 pub impl Show for DocumentReadyState
 
 #external
+pub type DocumentTimeline
+pub fn[T : TDocumentTimeline] DocumentTimeline::into(Self) -> T
+pub fn DocumentTimeline::new(options? : DocumentTimelineOptions) -> Self
+pub impl FromJsAny for DocumentTimeline
+pub impl TAnimationTimeline for DocumentTimeline
+pub impl TDocumentTimeline for DocumentTimeline
+pub impl TJsValue for DocumentTimeline
+
+#external
+pub type DocumentTimelineOptions
+pub fn DocumentTimelineOptions::empty() -> Self
+pub fn DocumentTimelineOptions::new(origin_time? : Double) -> Self
+pub impl FromJsAny for DocumentTimelineOptions
+pub impl TJsValue for DocumentTimelineOptions
+
+#external
 pub type DocumentType
 pub fn[T : TDocumentType] DocumentType::into(Self) -> T
 pub impl FromJsAny for DocumentType
@@ -1463,6 +1597,13 @@ pub fn DragEventInit::empty() -> Self
 pub fn DragEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, screen_x? : Int, screen_y? : Int, client_x? : Int, client_y? : Int, button? : Int, buttons? : UInt, related_target? : &TEventTarget, data_transfer? : &TDataTransfer) -> Self
 pub impl FromJsAny for DragEventInit
 pub impl TJsValue for DragEventInit
+
+#external
+pub type EffectTiming
+pub fn EffectTiming::empty() -> Self
+pub fn EffectTiming::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String) -> Self
+pub impl FromJsAny for EffectTiming
+pub impl TJsValue for EffectTiming
 
 #external
 pub type Element
@@ -1672,6 +1813,20 @@ pub impl FromJsAny for FileReaderSync
 pub impl TFileReaderSync for FileReaderSync
 pub impl TJsValue for FileReaderSync
 
+pub(all) enum FillMode {
+  None
+  Forwards
+  Backwards
+  Both
+  Auto
+}
+pub fn FillMode::from(String) -> Self?
+pub fn FillMode::value(Self) -> String
+pub impl FromJsAny for FillMode
+pub impl TJsValue for FillMode
+pub impl Eq for FillMode
+pub impl Show for FillMode
+
 #external
 pub type Float16Array
 pub impl FromJsAny for Float16Array
@@ -1800,6 +1955,13 @@ pub fn[T : TGeometryNode] GeometryNode::into(Self) -> T
 pub impl FromJsAny for GeometryNode
 pub impl TGeometryNode for GeometryNode
 pub impl TJsValue for GeometryNode
+
+#external
+pub type GetAnimationsOptions
+pub fn GetAnimationsOptions::empty() -> Self
+pub fn GetAnimationsOptions::new(subtree? : Bool, pseudo_element? : String) -> Self
+pub impl FromJsAny for GetAnimationsOptions
+pub impl TJsValue for GetAnimationsOptions
 
 #external
 pub type GetComposedRangesOptions
@@ -2813,6 +2975,207 @@ pub impl THistory for History
 pub impl TJsValue for History
 
 #external
+pub type IDBCursor
+pub fn[T : TIDBCursor] IDBCursor::into(Self) -> T
+pub impl FromJsAny for IDBCursor
+pub impl TIDBCursor for IDBCursor
+pub impl TIDBRequestSource for IDBCursor
+pub impl TJsValue for IDBCursor
+
+pub(all) enum IDBCursorDirection {
+  Next
+  Nextunique
+  Prev
+  Prevunique
+}
+pub fn IDBCursorDirection::from(String) -> Self?
+pub fn IDBCursorDirection::value(Self) -> String
+pub impl FromJsAny for IDBCursorDirection
+pub impl TJsValue for IDBCursorDirection
+pub impl Eq for IDBCursorDirection
+pub impl Show for IDBCursorDirection
+
+#external
+pub type IDBCursorSource
+pub fn[T : TIDBCursorSource] IDBCursorSource::into(Self) -> T
+pub impl TIDBCursorSource for IDBCursorSource
+
+#external
+pub type IDBCursorWithValue
+pub fn[T : TIDBCursorWithValue] IDBCursorWithValue::into(Self) -> T
+pub impl FromJsAny for IDBCursorWithValue
+pub impl TIDBCursor for IDBCursorWithValue
+pub impl TIDBCursorWithValue for IDBCursorWithValue
+pub impl TJsValue for IDBCursorWithValue
+
+#external
+pub type IDBDatabase
+pub fn[T : TIDBDatabase] IDBDatabase::into(Self) -> T
+pub impl FromJsAny for IDBDatabase
+pub impl TEventTarget for IDBDatabase
+pub impl TIDBDatabase for IDBDatabase
+pub impl TJsValue for IDBDatabase
+
+#external
+pub type IDBDatabaseInfo
+pub fn IDBDatabaseInfo::empty() -> Self
+pub fn IDBDatabaseInfo::new(name? : String, version? : UInt64) -> Self
+pub impl FromJsAny for IDBDatabaseInfo
+pub impl TJsValue for IDBDatabaseInfo
+
+#external
+pub type IDBFactory
+pub fn[T : TIDBFactory] IDBFactory::into(Self) -> T
+pub impl FromJsAny for IDBFactory
+pub impl TIDBFactory for IDBFactory
+pub impl TJsValue for IDBFactory
+
+#external
+pub type IDBGetAllOptions
+pub fn IDBGetAllOptions::empty() -> Self
+pub fn IDBGetAllOptions::new(query? : JsValue, count? : UInt, direction? : IDBCursorDirection) -> Self
+pub impl FromJsAny for IDBGetAllOptions
+pub impl TJsValue for IDBGetAllOptions
+
+#external
+pub type IDBIndex
+pub fn[T : TIDBIndex] IDBIndex::into(Self) -> T
+pub impl FromJsAny for IDBIndex
+pub impl TIDBCursorSource for IDBIndex
+pub impl TIDBIndex for IDBIndex
+pub impl TIDBRequestSource for IDBIndex
+pub impl TJsValue for IDBIndex
+
+#external
+pub type IDBIndexParameters
+pub fn IDBIndexParameters::empty() -> Self
+pub fn IDBIndexParameters::new(unique? : Bool, multi_entry? : Bool) -> Self
+pub impl FromJsAny for IDBIndexParameters
+pub impl TJsValue for IDBIndexParameters
+
+#external
+pub type IDBKeyRange
+pub fn IDBKeyRange::bound(JsValue, JsValue, lower_open? : Bool, upper_open? : Bool) -> Self
+pub fn[T : TIDBKeyRange] IDBKeyRange::into(Self) -> T
+pub fn IDBKeyRange::lower_bound(JsValue, open? : Bool) -> Self
+pub fn IDBKeyRange::only(JsValue) -> Self
+pub fn IDBKeyRange::upper_bound(JsValue, open? : Bool) -> Self
+pub impl FromJsAny for IDBKeyRange
+pub impl TIDBKeyRange for IDBKeyRange
+pub impl TJsValue for IDBKeyRange
+
+#external
+pub type IDBObjectStore
+pub fn[T : TIDBObjectStore] IDBObjectStore::into(Self) -> T
+pub impl FromJsAny for IDBObjectStore
+pub impl TIDBCursorSource for IDBObjectStore
+pub impl TIDBObjectStore for IDBObjectStore
+pub impl TIDBRequestSource for IDBObjectStore
+pub impl TJsValue for IDBObjectStore
+
+#external
+pub type IDBObjectStoreParameters
+pub fn IDBObjectStoreParameters::empty() -> Self
+pub fn IDBObjectStoreParameters::new(key_path? : &TIDBObjectStoreParametersNewKeyPath, auto_increment? : Bool) -> Self
+pub impl FromJsAny for IDBObjectStoreParameters
+pub impl TJsValue for IDBObjectStoreParameters
+
+#external
+pub type IDBOpenDBRequest
+pub fn[T : TIDBOpenDBRequest] IDBOpenDBRequest::into(Self) -> T
+pub impl FromJsAny for IDBOpenDBRequest
+pub impl TEventTarget for IDBOpenDBRequest
+pub impl TIDBOpenDBRequest for IDBOpenDBRequest
+pub impl TIDBRequest for IDBOpenDBRequest
+pub impl TJsValue for IDBOpenDBRequest
+
+#external
+pub type IDBRecord
+pub fn[T : TIDBRecord] IDBRecord::into(Self) -> T
+pub impl FromJsAny for IDBRecord
+pub impl TIDBRecord for IDBRecord
+pub impl TJsValue for IDBRecord
+
+#external
+pub type IDBRequest
+pub fn[T : TIDBRequest] IDBRequest::into(Self) -> T
+pub impl FromJsAny for IDBRequest
+pub impl TEventTarget for IDBRequest
+pub impl TIDBRequest for IDBRequest
+pub impl TJsValue for IDBRequest
+
+pub(all) enum IDBRequestReadyState {
+  Pending
+  Done
+}
+pub fn IDBRequestReadyState::from(String) -> Self?
+pub fn IDBRequestReadyState::value(Self) -> String
+pub impl FromJsAny for IDBRequestReadyState
+pub impl TJsValue for IDBRequestReadyState
+pub impl Eq for IDBRequestReadyState
+pub impl Show for IDBRequestReadyState
+
+#external
+pub type IDBRequestSource
+pub fn[T : TIDBRequestSource] IDBRequestSource::into(Self) -> T
+pub impl TIDBRequestSource for IDBRequestSource
+
+#external
+pub type IDBTransaction
+pub fn[T : TIDBTransaction] IDBTransaction::into(Self) -> T
+pub impl FromJsAny for IDBTransaction
+pub impl TEventTarget for IDBTransaction
+pub impl TIDBTransaction for IDBTransaction
+pub impl TJsValue for IDBTransaction
+
+pub(all) enum IDBTransactionDurability {
+  Default
+  Strict
+  Relaxed
+}
+pub fn IDBTransactionDurability::from(String) -> Self?
+pub fn IDBTransactionDurability::value(Self) -> String
+pub impl FromJsAny for IDBTransactionDurability
+pub impl TJsValue for IDBTransactionDurability
+pub impl Eq for IDBTransactionDurability
+pub impl Show for IDBTransactionDurability
+
+pub(all) enum IDBTransactionMode {
+  Readonly
+  Readwrite
+  Versionchange
+}
+pub fn IDBTransactionMode::from(String) -> Self?
+pub fn IDBTransactionMode::value(Self) -> String
+pub impl FromJsAny for IDBTransactionMode
+pub impl TJsValue for IDBTransactionMode
+pub impl Eq for IDBTransactionMode
+pub impl Show for IDBTransactionMode
+
+#external
+pub type IDBTransactionOptions
+pub fn IDBTransactionOptions::empty() -> Self
+pub fn IDBTransactionOptions::new(durability? : IDBTransactionDurability) -> Self
+pub impl FromJsAny for IDBTransactionOptions
+pub impl TJsValue for IDBTransactionOptions
+
+#external
+pub type IDBVersionChangeEvent
+pub fn[T : TIDBVersionChangeEvent] IDBVersionChangeEvent::into(Self) -> T
+pub fn IDBVersionChangeEvent::new(String, event_init_dict? : IDBVersionChangeEventInit) -> Self
+pub impl FromJsAny for IDBVersionChangeEvent
+pub impl TEvent for IDBVersionChangeEvent
+pub impl TIDBVersionChangeEvent for IDBVersionChangeEvent
+pub impl TJsValue for IDBVersionChangeEvent
+
+#external
+pub type IDBVersionChangeEventInit
+pub fn IDBVersionChangeEventInit::empty() -> Self
+pub fn IDBVersionChangeEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, old_version? : UInt64, new_version? : UInt64) -> Self
+pub impl FromJsAny for IDBVersionChangeEventInit
+pub impl TJsValue for IDBVersionChangeEventInit
+
+#external
 pub type IdleDeadline
 pub fn[T : TIdleDeadline] IdleDeadline::into(Self) -> T
 pub impl FromJsAny for IdleDeadline
@@ -3078,6 +3441,32 @@ pub fn KeyboardEventInit::empty() -> Self
 pub fn KeyboardEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, view? : &TWindow, detail? : Int, which? : UInt, ctrl_key? : Bool, shift_key? : Bool, alt_key? : Bool, meta_key? : Bool, modifier_alt_graph? : Bool, modifier_caps_lock? : Bool, modifier_fn? : Bool, modifier_fn_lock? : Bool, modifier_hyper? : Bool, modifier_num_lock? : Bool, modifier_scroll_lock? : Bool, modifier_super? : Bool, modifier_symbol? : Bool, modifier_symbol_lock? : Bool, key? : String, code? : String, location? : UInt, repeat? : Bool, is_composing? : Bool, char_code? : UInt, key_code? : UInt) -> Self
 pub impl FromJsAny for KeyboardEventInit
 pub impl TJsValue for KeyboardEventInit
+
+#external
+pub type KeyframeAnimationOptions
+pub fn KeyframeAnimationOptions::empty() -> Self
+pub fn KeyframeAnimationOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, composite? : CompositeOperation, pseudo_element? : String, id? : String, timeline? : &TAnimationTimeline) -> Self
+pub impl FromJsAny for KeyframeAnimationOptions
+pub impl TElementAnimateOptions for KeyframeAnimationOptions
+pub impl TJsValue for KeyframeAnimationOptions
+
+#external
+pub type KeyframeEffect
+pub fn[T : TKeyframeEffect] KeyframeEffect::into(Self) -> T
+pub fn KeyframeEffect::new(&TElement, JsValue, options? : &TKeyframeEffectNewOptions) -> Self
+pub fn KeyframeEffect::new_2(&TKeyframeEffect) -> Self
+pub impl FromJsAny for KeyframeEffect
+pub impl TAnimationEffect for KeyframeEffect
+pub impl TJsValue for KeyframeEffect
+pub impl TKeyframeEffect for KeyframeEffect
+
+#external
+pub type KeyframeEffectOptions
+pub fn KeyframeEffectOptions::empty() -> Self
+pub fn KeyframeEffectOptions::new(fill? : FillMode, iteration_start? : Double, iterations? : Double, direction? : PlaybackDirection, easing? : String, composite? : CompositeOperation, pseudo_element? : String) -> Self
+pub impl FromJsAny for KeyframeEffectOptions
+pub impl TJsValue for KeyframeEffectOptions
+pub impl TKeyframeEffectNewOptions for KeyframeEffectOptions
 
 #external
 pub type Location
@@ -3620,6 +4009,13 @@ pub type OnErrorEventHandlerNonNullEvent
 pub impl FromJsAny for OnErrorEventHandlerNonNullEvent
 pub impl TJsValue for OnErrorEventHandlerNonNullEvent
 
+#external
+pub type OptionalEffectTiming
+pub fn OptionalEffectTiming::empty() -> Self
+pub fn OptionalEffectTiming::new(delay? : Double, end_delay? : Double, fill? : FillMode, iteration_start? : Double, iterations? : Double, duration? : &TOptionalEffectTimingNewDuration, direction? : PlaybackDirection, easing? : String) -> Self
+pub impl FromJsAny for OptionalEffectTiming
+pub impl TJsValue for OptionalEffectTiming
+
 pub(all) enum OrientationLockType {
   Any
   Natural
@@ -3767,6 +4163,19 @@ pub fn PerformanceObserverInit::new(entry_types? : Array[String], type_? : Strin
 pub impl FromJsAny for PerformanceObserverInit
 pub impl TJsValue for PerformanceObserverInit
 
+pub(all) enum PlaybackDirection {
+  Normal
+  Reverse
+  Alternate
+  AlternateReverse
+}
+pub fn PlaybackDirection::from(String) -> Self?
+pub fn PlaybackDirection::value(Self) -> String
+pub impl FromJsAny for PlaybackDirection
+pub impl TJsValue for PlaybackDirection
+pub impl Eq for PlaybackDirection
+pub impl Show for PlaybackDirection
+
 #external
 pub type Plugin
 pub fn[T : TPlugin] Plugin::into(Self) -> T
@@ -3896,6 +4305,26 @@ pub impl FromJsAny for PromiseRejectionEventInit
 pub impl TJsValue for PromiseRejectionEventInit
 
 #external
+pub type QueuingStrategy
+pub fn QueuingStrategy::empty() -> Self
+pub fn QueuingStrategy::new(high_water_mark? : Double, size? : QueuingStrategySize) -> Self
+pub impl FromJsAny for QueuingStrategy
+pub impl TJsValue for QueuingStrategy
+
+#external
+pub type QueuingStrategyInit
+pub fn QueuingStrategyInit::empty() -> Self
+pub fn QueuingStrategyInit::new(Double) -> Self
+pub impl FromJsAny for QueuingStrategyInit
+pub impl TJsValue for QueuingStrategyInit
+
+#external
+pub type QueuingStrategySize
+pub fn QueuingStrategySize::new((JsValue) -> Double) -> Self
+pub impl FromJsAny for QueuingStrategySize
+pub impl TJsValue for QueuingStrategySize
+
+#external
 pub type QuotaExceededError
 pub fn[T : TQuotaExceededError] QuotaExceededError::into(Self) -> T
 pub fn QuotaExceededError::new(message? : String, options? : QuotaExceededErrorOptions) -> Self
@@ -3931,10 +4360,124 @@ pub impl TJsValue for Range
 pub impl TRange for Range
 
 #external
+pub type ReadableByteStreamController
+pub fn[T : TReadableByteStreamController] ReadableByteStreamController::into(Self) -> T
+pub impl FromJsAny for ReadableByteStreamController
+pub impl TJsValue for ReadableByteStreamController
+pub impl TReadableByteStreamController for ReadableByteStreamController
+pub impl TReadableStreamController for ReadableByteStreamController
+
+#external
 pub type ReadableStream
+pub fn ReadableStream::from(JsValue) -> Self
+pub fn[T : TReadableStream] ReadableStream::into(Self) -> T
+pub fn ReadableStream::new(underlying_source? : JsValue, strategy? : QueuingStrategy) -> Self
 pub impl FromJsAny for ReadableStream
 pub impl TBodyInit for ReadableStream
 pub impl TJsValue for ReadableStream
+pub impl TReadableStream for ReadableStream
+
+#external
+pub type ReadableStreamBYOBReader
+pub fn[T : TReadableStreamBYOBReader] ReadableStreamBYOBReader::into(Self) -> T
+pub fn ReadableStreamBYOBReader::new(&TReadableStream) -> Self
+pub impl FromJsAny for ReadableStreamBYOBReader
+pub impl TJsValue for ReadableStreamBYOBReader
+pub impl TReadableStreamBYOBReader for ReadableStreamBYOBReader
+pub impl TReadableStreamReader for ReadableStreamBYOBReader
+
+#external
+pub type ReadableStreamBYOBReaderReadOptions
+pub fn ReadableStreamBYOBReaderReadOptions::empty() -> Self
+pub fn ReadableStreamBYOBReaderReadOptions::new(min? : UInt64) -> Self
+pub impl FromJsAny for ReadableStreamBYOBReaderReadOptions
+pub impl TJsValue for ReadableStreamBYOBReaderReadOptions
+
+#external
+pub type ReadableStreamBYOBRequest
+pub fn[T : TReadableStreamBYOBRequest] ReadableStreamBYOBRequest::into(Self) -> T
+pub impl FromJsAny for ReadableStreamBYOBRequest
+pub impl TJsValue for ReadableStreamBYOBRequest
+pub impl TReadableStreamBYOBRequest for ReadableStreamBYOBRequest
+
+#external
+pub type ReadableStreamController
+pub fn[T : TReadableStreamController] ReadableStreamController::into(Self) -> T
+pub impl FromJsAny for ReadableStreamController
+pub impl TJsValue for ReadableStreamController
+pub impl TReadableStreamController for ReadableStreamController
+
+#external
+pub type ReadableStreamDefaultController
+pub fn[T : TReadableStreamDefaultController] ReadableStreamDefaultController::into(Self) -> T
+pub impl FromJsAny for ReadableStreamDefaultController
+pub impl TJsValue for ReadableStreamDefaultController
+pub impl TReadableStreamController for ReadableStreamDefaultController
+pub impl TReadableStreamDefaultController for ReadableStreamDefaultController
+
+#external
+pub type ReadableStreamDefaultReader
+pub fn[T : TReadableStreamDefaultReader] ReadableStreamDefaultReader::into(Self) -> T
+pub fn ReadableStreamDefaultReader::new(&TReadableStream) -> Self
+pub impl FromJsAny for ReadableStreamDefaultReader
+pub impl TJsValue for ReadableStreamDefaultReader
+pub impl TReadableStreamDefaultReader for ReadableStreamDefaultReader
+pub impl TReadableStreamReader for ReadableStreamDefaultReader
+
+#external
+pub type ReadableStreamGetReaderOptions
+pub fn ReadableStreamGetReaderOptions::empty() -> Self
+pub fn ReadableStreamGetReaderOptions::new(mode? : ReadableStreamReaderMode) -> Self
+pub impl FromJsAny for ReadableStreamGetReaderOptions
+pub impl TJsValue for ReadableStreamGetReaderOptions
+
+#external
+pub type ReadableStreamIteratorOptions
+pub fn ReadableStreamIteratorOptions::empty() -> Self
+pub fn ReadableStreamIteratorOptions::new(prevent_cancel? : Bool) -> Self
+pub impl FromJsAny for ReadableStreamIteratorOptions
+pub impl TJsValue for ReadableStreamIteratorOptions
+
+#external
+pub type ReadableStreamReadResult
+pub fn ReadableStreamReadResult::empty() -> Self
+pub fn ReadableStreamReadResult::new(value? : JsValue, done? : Bool) -> Self
+pub impl FromJsAny for ReadableStreamReadResult
+pub impl TJsValue for ReadableStreamReadResult
+
+#external
+pub type ReadableStreamReader
+pub fn[T : TReadableStreamReader] ReadableStreamReader::into(Self) -> T
+pub impl FromJsAny for ReadableStreamReader
+pub impl TJsValue for ReadableStreamReader
+pub impl TReadableStreamReader for ReadableStreamReader
+
+pub(all) enum ReadableStreamReaderMode {
+  Byob
+}
+pub fn ReadableStreamReaderMode::from(String) -> Self?
+pub fn ReadableStreamReaderMode::value(Self) -> String
+pub impl FromJsAny for ReadableStreamReaderMode
+pub impl TJsValue for ReadableStreamReaderMode
+pub impl Eq for ReadableStreamReaderMode
+pub impl Show for ReadableStreamReaderMode
+
+pub(all) enum ReadableStreamType {
+  Bytes
+}
+pub fn ReadableStreamType::from(String) -> Self?
+pub fn ReadableStreamType::value(Self) -> String
+pub impl FromJsAny for ReadableStreamType
+pub impl TJsValue for ReadableStreamType
+pub impl Eq for ReadableStreamType
+pub impl Show for ReadableStreamType
+
+#external
+pub type ReadableWritablePair
+pub fn ReadableWritablePair::empty() -> Self
+pub fn ReadableWritablePair::new(&TReadableStream, &TWritableStream) -> Self
+pub impl FromJsAny for ReadableWritablePair
+pub impl TJsValue for ReadableWritablePair
 
 pub(all) enum ReferrerPolicy {
   Empty
@@ -5025,6 +5568,13 @@ pub impl TJsValue for StorageManager
 pub impl TStorageManager for StorageManager
 
 #external
+pub type StreamPipeOptions
+pub fn StreamPipeOptions::empty() -> Self
+pub fn StreamPipeOptions::new(prevent_close? : Bool, prevent_abort? : Bool, prevent_cancel? : Bool, signal? : &TAbortSignal) -> Self
+pub impl FromJsAny for StreamPipeOptions
+pub impl TJsValue for StreamPipeOptions
+
+#external
 pub type StructuredSerializeOptions
 pub fn StructuredSerializeOptions::empty() -> Self
 pub fn StructuredSerializeOptions::new(transfer? : Array[JsValue]) -> Self
@@ -5317,6 +5867,52 @@ pub fn[T : TTrackEventTrack] TrackEventTrack::into(Self) -> T
 pub impl TTrackEventTrack for TrackEventTrack
 
 #external
+pub type TransformStream
+pub fn[T : TTransformStream] TransformStream::into(Self) -> T
+pub fn TransformStream::new(transformer? : JsValue, writable_strategy? : QueuingStrategy, readable_strategy? : QueuingStrategy) -> Self
+pub impl FromJsAny for TransformStream
+pub impl TJsValue for TransformStream
+pub impl TTransformStream for TransformStream
+
+#external
+pub type TransformStreamDefaultController
+pub fn[T : TTransformStreamDefaultController] TransformStreamDefaultController::into(Self) -> T
+pub impl FromJsAny for TransformStreamDefaultController
+pub impl TJsValue for TransformStreamDefaultController
+pub impl TTransformStreamDefaultController for TransformStreamDefaultController
+
+#external
+pub type Transformer
+pub fn Transformer::empty() -> Self
+pub fn Transformer::new(start? : TransformerStartCallback, transform? : TransformerTransformCallback, flush? : TransformerFlushCallback, cancel? : TransformerCancelCallback, readable_type? : JsValue, writable_type? : JsValue) -> Self
+pub impl FromJsAny for Transformer
+pub impl TJsValue for Transformer
+
+#external
+pub type TransformerCancelCallback
+pub fn TransformerCancelCallback::new((JsValue) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for TransformerCancelCallback
+pub impl TJsValue for TransformerCancelCallback
+
+#external
+pub type TransformerFlushCallback
+pub fn TransformerFlushCallback::new((TransformStreamDefaultController) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for TransformerFlushCallback
+pub impl TJsValue for TransformerFlushCallback
+
+#external
+pub type TransformerStartCallback
+pub fn TransformerStartCallback::new((TransformStreamDefaultController) -> JsValue) -> Self
+pub impl FromJsAny for TransformerStartCallback
+pub impl TJsValue for TransformerStartCallback
+
+#external
+pub type TransformerTransformCallback
+pub fn TransformerTransformCallback::new((JsValue, TransformStreamDefaultController) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for TransformerTransformCallback
+pub impl TJsValue for TransformerTransformCallback
+
+#external
 pub type TreeWalker
 pub fn[T : TTreeWalker] TreeWalker::into(Self) -> T
 pub impl FromJsAny for TreeWalker
@@ -5455,6 +6051,62 @@ pub impl FromJsAny for Uint8ClampedArray
 pub impl TArrayBufferView for Uint8ClampedArray
 pub impl TImageDataArray for Uint8ClampedArray
 pub impl TJsValue for Uint8ClampedArray
+
+#external
+pub type UnderlyingSink
+pub fn UnderlyingSink::empty() -> Self
+pub fn UnderlyingSink::new(start? : UnderlyingSinkStartCallback, write? : UnderlyingSinkWriteCallback, close? : UnderlyingSinkCloseCallback, abort? : UnderlyingSinkAbortCallback, type_? : JsValue) -> Self
+pub impl FromJsAny for UnderlyingSink
+pub impl TJsValue for UnderlyingSink
+
+#external
+pub type UnderlyingSinkAbortCallback
+pub fn UnderlyingSinkAbortCallback::new((JsValue) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for UnderlyingSinkAbortCallback
+pub impl TJsValue for UnderlyingSinkAbortCallback
+
+#external
+pub type UnderlyingSinkCloseCallback
+pub fn UnderlyingSinkCloseCallback::new(() -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for UnderlyingSinkCloseCallback
+pub impl TJsValue for UnderlyingSinkCloseCallback
+
+#external
+pub type UnderlyingSinkStartCallback
+pub fn UnderlyingSinkStartCallback::new((WritableStreamDefaultController) -> JsValue) -> Self
+pub impl FromJsAny for UnderlyingSinkStartCallback
+pub impl TJsValue for UnderlyingSinkStartCallback
+
+#external
+pub type UnderlyingSinkWriteCallback
+pub fn UnderlyingSinkWriteCallback::new((JsValue, WritableStreamDefaultController) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for UnderlyingSinkWriteCallback
+pub impl TJsValue for UnderlyingSinkWriteCallback
+
+#external
+pub type UnderlyingSource
+pub fn UnderlyingSource::empty() -> Self
+pub fn UnderlyingSource::new(start? : UnderlyingSourceStartCallback, pull? : UnderlyingSourcePullCallback, cancel? : UnderlyingSourceCancelCallback, type_? : ReadableStreamType, auto_allocate_chunk_size? : UInt64) -> Self
+pub impl FromJsAny for UnderlyingSource
+pub impl TJsValue for UnderlyingSource
+
+#external
+pub type UnderlyingSourceCancelCallback
+pub fn UnderlyingSourceCancelCallback::new((JsValue) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for UnderlyingSourceCancelCallback
+pub impl TJsValue for UnderlyingSourceCancelCallback
+
+#external
+pub type UnderlyingSourcePullCallback
+pub fn UnderlyingSourcePullCallback::new((ReadableStreamController) -> JsPromise[JsValue]) -> Self
+pub impl FromJsAny for UnderlyingSourcePullCallback
+pub impl TJsValue for UnderlyingSourcePullCallback
+
+#external
+pub type UnderlyingSourceStartCallback
+pub fn UnderlyingSourceStartCallback::new((ReadableStreamController) -> JsValue) -> Self
+pub impl FromJsAny for UnderlyingSourceStartCallback
+pub impl TJsValue for UnderlyingSourceStartCallback
 
 #external
 pub type UserActivation
@@ -5670,6 +6322,29 @@ pub impl FromJsAny for WorkletOptions
 pub impl TJsValue for WorkletOptions
 
 #external
+pub type WritableStream
+pub fn[T : TWritableStream] WritableStream::into(Self) -> T
+pub fn WritableStream::new(underlying_sink? : JsValue, strategy? : QueuingStrategy) -> Self
+pub impl FromJsAny for WritableStream
+pub impl TJsValue for WritableStream
+pub impl TWritableStream for WritableStream
+
+#external
+pub type WritableStreamDefaultController
+pub fn[T : TWritableStreamDefaultController] WritableStreamDefaultController::into(Self) -> T
+pub impl FromJsAny for WritableStreamDefaultController
+pub impl TJsValue for WritableStreamDefaultController
+pub impl TWritableStreamDefaultController for WritableStreamDefaultController
+
+#external
+pub type WritableStreamDefaultWriter
+pub fn[T : TWritableStreamDefaultWriter] WritableStreamDefaultWriter::into(Self) -> T
+pub fn WritableStreamDefaultWriter::new(&TWritableStream) -> Self
+pub impl FromJsAny for WritableStreamDefaultWriter
+pub impl TJsValue for WritableStreamDefaultWriter
+pub impl TWritableStreamDefaultWriter for WritableStreamDefaultWriter
+
+#external
 pub type XMLDocument
 pub fn[T : TXMLDocument] XMLDocument::into(Self) -> T
 pub impl FromJsAny for XMLDocument
@@ -5798,6 +6473,7 @@ pub impl FromJsAny for UInt64
 pub impl FromJsAny for Float
 pub impl FromJsAny for Double
 pub impl FromJsAny for String
+pub impl[T : FromJsAny] FromJsAny for Array[T]
 
 pub trait TAbortController : TJsValue {
   signal(Self) -> AbortSignal
@@ -5822,6 +6498,45 @@ pub trait TAbstractRange : TJsValue {
 
 pub(open) trait TAllowSharedBufferSource {
   to_js(Self) -> JsValue
+}
+
+pub trait TAnimation : TEventTarget {
+  id(Self) -> String
+  set_id(Self, String) -> Unit
+  effect(Self) -> AnimationEffect
+  set_effect(Self, &TAnimationEffect) -> Unit
+  timeline(Self) -> AnimationTimeline
+  set_timeline(Self, &TAnimationTimeline) -> Unit
+  playback_rate(Self) -> Double
+  set_playback_rate(Self, Double) -> Unit
+  play_state(Self) -> AnimationPlayState
+  replace_state(Self) -> AnimationReplaceState
+  pending(Self) -> Bool
+  ready(Self) -> JsPromise[Animation]
+  finished(Self) -> JsPromise[Animation]
+  onfinish(Self) -> EventHandlerNonNull
+  set_onfinish(Self, EventHandlerNonNull) -> Unit
+  oncancel(Self) -> EventHandlerNonNull
+  set_oncancel(Self, EventHandlerNonNull) -> Unit
+  onremove(Self) -> EventHandlerNonNull
+  set_onremove(Self, EventHandlerNonNull) -> Unit
+  cancel(Self) -> Unit
+  finish(Self) -> Unit
+  play(Self) -> Unit
+  pause(Self) -> Unit
+  update_playback_rate(Self, Double) -> Unit
+  reverse(Self) -> Unit
+  persist(Self) -> Unit
+  commit_styles(Self) -> Unit
+}
+
+pub trait TAnimationEffect : TJsValue {
+  get_timing(Self) -> EffectTiming
+  get_computed_timing(Self) -> ComputedEffectTiming
+  update_timing(Self, timing? : OptionalEffectTiming) -> Unit
+}
+
+pub trait TAnimationTimeline : TJsValue {
 }
 
 pub(open) trait TArrayBufferView {
@@ -5864,6 +6579,23 @@ pub trait TBarProp : TJsValue {
   visible(Self) -> Bool
 }
 
+pub(open) trait TBasePropertyIndexedKeyframeNewComposite {
+  to_js(Self) -> JsValue
+}
+pub impl TBasePropertyIndexedKeyframeNewComposite for Array[CompositeOperationOrAuto]
+
+pub(open) trait TBasePropertyIndexedKeyframeNewEasing {
+  to_js(Self) -> JsValue
+}
+pub impl TBasePropertyIndexedKeyframeNewEasing for String
+pub impl TBasePropertyIndexedKeyframeNewEasing for Array[String]
+
+pub(open) trait TBasePropertyIndexedKeyframeNewOffset {
+  to_js(Self) -> JsValue
+}
+pub impl TBasePropertyIndexedKeyframeNewOffset for Double
+pub impl TBasePropertyIndexedKeyframeNewOffset for Array[Double]
+
 pub trait TBeforeUnloadEvent : TEvent {
   return_value(Self) -> String
   set_return_value(Self, String) -> Unit
@@ -5900,6 +6632,11 @@ pub trait TBroadcastChannel : TEventTarget {
 
 pub(open) trait TBufferSource {
   to_js(Self) -> JsValue
+}
+
+pub trait TByteLengthQueuingStrategy : TJsValue {
+  high_water_mark(Self) -> Double
+  size(Self) -> Function
 }
 
 pub trait TCDATASection : TText {
@@ -6243,6 +6980,11 @@ pub trait TComment : TCharacterData {
 pub trait TCompositionEvent : TUIEvent {
   data(Self) -> String
   init_composition_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, data_arg? : String) -> Unit
+}
+
+pub trait TCountQueuingStrategy : TJsValue {
+  high_water_mark(Self) -> Double
+  size(Self) -> Function
 }
 
 pub trait TCustomElementRegistry : TJsValue {
@@ -6631,6 +7373,7 @@ pub trait TDocument : TNode {
   onfullscreenerror(Self) -> EventHandlerNonNull
   set_onfullscreenerror(Self, EventHandlerNonNull) -> Unit
   get_selection(Self) -> Selection?
+  timeline(Self) -> DocumentTimeline
   get_element_by_id(Self, String) -> Element?
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
@@ -6638,6 +7381,7 @@ pub trait TDocument : TNode {
   adopted_style_sheets(Self) -> JsValue
   set_adopted_style_sheets(Self, JsValue) -> Unit
   fullscreen_element(Self) -> Element
+  get_animations(Self) -> Array[Animation]
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
@@ -6907,6 +7651,9 @@ pub(open) trait TDocumentReplaceChildrenNodes {
 }
 pub impl TDocumentReplaceChildrenNodes for String
 
+pub trait TDocumentTimeline : TAnimationTimeline {
+}
+
 pub trait TDocumentType : TNode {
   name(Self) -> String
   public_id(Self) -> String
@@ -7043,12 +7790,19 @@ pub trait TElement : TNode {
   convert_quad_from_node(Self, DOMQuadInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
   convert_rect_from_node(Self, &TDOMRectReadOnly, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
   convert_point_from_node(Self, DOMPointInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMPoint
+  animate(Self, JsValue, options? : &TElementAnimateOptions) -> Animation
+  get_animations(Self, options? : GetAnimationsOptions) -> Array[Animation]
 }
 
 pub(open) trait TElementAfterNodes {
   to_js(Self) -> JsValue
 }
 pub impl TElementAfterNodes for String
+
+pub(open) trait TElementAnimateOptions {
+  to_js(Self) -> JsValue
+}
+pub impl TElementAnimateOptions for Double
 
 pub(open) trait TElementAppendNodes {
   to_js(Self) -> JsValue
@@ -8925,6 +9679,170 @@ pub trait THistory : TJsValue {
   replace_state(Self, JsValue, String, url? : String) -> Unit
 }
 
+pub trait TIDBCursor : TJsValue {
+  source(Self) -> IDBCursorSource
+  direction(Self) -> IDBCursorDirection
+  key(Self) -> JsValue
+  primary_key(Self) -> JsValue
+  request(Self) -> IDBRequest
+  advance(Self, UInt) -> Unit
+  continue_(Self, key? : JsValue) -> Unit
+  continue_primary_key(Self, JsValue, JsValue) -> Unit
+  update(Self, JsValue) -> IDBRequest
+  delete(Self) -> IDBRequest
+}
+
+pub(open) trait TIDBCursorSource {
+  to_js(Self) -> JsValue
+}
+
+pub trait TIDBCursorWithValue : TIDBCursor {
+  value(Self) -> JsValue
+}
+
+pub trait TIDBDatabase : TEventTarget {
+  name(Self) -> String
+  version(Self) -> UInt64
+  object_store_names(Self) -> DOMStringList
+  transaction(Self, &TIDBDatabaseTransactionStoreNames, mode? : IDBTransactionMode, options? : IDBTransactionOptions) -> IDBTransaction
+  close(Self) -> Unit
+  create_object_store(Self, String, options? : IDBObjectStoreParameters) -> IDBObjectStore
+  delete_object_store(Self, String) -> Unit
+  onabort(Self) -> EventHandlerNonNull
+  set_onabort(Self, EventHandlerNonNull) -> Unit
+  onclose(Self) -> EventHandlerNonNull
+  set_onclose(Self, EventHandlerNonNull) -> Unit
+  onerror(Self) -> EventHandlerNonNull
+  set_onerror(Self, EventHandlerNonNull) -> Unit
+  onversionchange(Self) -> EventHandlerNonNull
+  set_onversionchange(Self, EventHandlerNonNull) -> Unit
+}
+
+pub(open) trait TIDBDatabaseTransactionStoreNames {
+  to_js(Self) -> JsValue
+}
+pub impl TIDBDatabaseTransactionStoreNames for String
+pub impl TIDBDatabaseTransactionStoreNames for Array[String]
+
+pub trait TIDBFactory : TJsValue {
+  open(Self, String, version? : UInt64) -> IDBOpenDBRequest
+  delete_database(Self, String) -> IDBOpenDBRequest
+  databases(Self) -> JsPromise[Array[IDBDatabaseInfo]]
+  cmp(Self, JsValue, JsValue) -> Int
+}
+
+pub trait TIDBIndex : TJsValue {
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  object_store(Self) -> IDBObjectStore
+  key_path(Self) -> JsValue
+  multi_entry(Self) -> Bool
+  unique(Self) -> Bool
+  get(Self, JsValue) -> IDBRequest
+  get_key(Self, JsValue) -> IDBRequest
+  get_all(Self, query_or_options? : JsValue, count? : UInt) -> IDBRequest
+  get_all_keys(Self, query_or_options? : JsValue, count? : UInt) -> IDBRequest
+  get_all_records(Self, options? : IDBGetAllOptions) -> IDBRequest
+  count(Self, query? : JsValue) -> IDBRequest
+  open_cursor(Self, query? : JsValue, direction? : IDBCursorDirection) -> IDBRequest
+  open_key_cursor(Self, query? : JsValue, direction? : IDBCursorDirection) -> IDBRequest
+}
+
+pub trait TIDBKeyRange : TJsValue {
+  lower(Self) -> JsValue
+  upper(Self) -> JsValue
+  lower_open(Self) -> Bool
+  upper_open(Self) -> Bool
+  includes(Self, JsValue) -> Bool
+}
+
+pub trait TIDBObjectStore : TJsValue {
+  name(Self) -> String
+  set_name(Self, String) -> Unit
+  key_path(Self) -> JsValue
+  index_names(Self) -> DOMStringList
+  transaction(Self) -> IDBTransaction
+  auto_increment(Self) -> Bool
+  put(Self, JsValue, key? : JsValue) -> IDBRequest
+  add(Self, JsValue, key? : JsValue) -> IDBRequest
+  delete(Self, JsValue) -> IDBRequest
+  clear(Self) -> IDBRequest
+  get(Self, JsValue) -> IDBRequest
+  get_key(Self, JsValue) -> IDBRequest
+  get_all(Self, query_or_options? : JsValue, count? : UInt) -> IDBRequest
+  get_all_keys(Self, query_or_options? : JsValue, count? : UInt) -> IDBRequest
+  get_all_records(Self, options? : IDBGetAllOptions) -> IDBRequest
+  count(Self, query? : JsValue) -> IDBRequest
+  open_cursor(Self, query? : JsValue, direction? : IDBCursorDirection) -> IDBRequest
+  open_key_cursor(Self, query? : JsValue, direction? : IDBCursorDirection) -> IDBRequest
+  index(Self, String) -> IDBIndex
+  create_index(Self, String, &TIDBObjectStoreCreateIndexKeyPath, options? : IDBIndexParameters) -> IDBIndex
+  delete_index(Self, String) -> Unit
+}
+
+pub(open) trait TIDBObjectStoreCreateIndexKeyPath {
+  to_js(Self) -> JsValue
+}
+pub impl TIDBObjectStoreCreateIndexKeyPath for String
+pub impl TIDBObjectStoreCreateIndexKeyPath for Array[String]
+
+pub(open) trait TIDBObjectStoreParametersNewKeyPath {
+  to_js(Self) -> JsValue
+}
+pub impl TIDBObjectStoreParametersNewKeyPath for String
+pub impl TIDBObjectStoreParametersNewKeyPath for Array[String]
+
+pub trait TIDBOpenDBRequest : TIDBRequest {
+  onblocked(Self) -> EventHandlerNonNull
+  set_onblocked(Self, EventHandlerNonNull) -> Unit
+  onupgradeneeded(Self) -> EventHandlerNonNull
+  set_onupgradeneeded(Self, EventHandlerNonNull) -> Unit
+}
+
+pub trait TIDBRecord : TJsValue {
+  key(Self) -> JsValue
+  primary_key(Self) -> JsValue
+  value(Self) -> JsValue
+}
+
+pub trait TIDBRequest : TEventTarget {
+  result(Self) -> JsValue
+  error(Self) -> DOMException
+  source(Self) -> IDBRequestSource
+  transaction(Self) -> IDBTransaction
+  ready_state(Self) -> IDBRequestReadyState
+  onsuccess(Self) -> EventHandlerNonNull
+  set_onsuccess(Self, EventHandlerNonNull) -> Unit
+  onerror(Self) -> EventHandlerNonNull
+  set_onerror(Self, EventHandlerNonNull) -> Unit
+}
+
+pub(open) trait TIDBRequestSource {
+  to_js(Self) -> JsValue
+}
+
+pub trait TIDBTransaction : TEventTarget {
+  object_store_names(Self) -> DOMStringList
+  mode(Self) -> IDBTransactionMode
+  durability(Self) -> IDBTransactionDurability
+  db(Self) -> IDBDatabase
+  error(Self) -> DOMException
+  object_store(Self, String) -> IDBObjectStore
+  commit(Self) -> Unit
+  abort(Self) -> Unit
+  onabort(Self) -> EventHandlerNonNull
+  set_onabort(Self, EventHandlerNonNull) -> Unit
+  oncomplete(Self) -> EventHandlerNonNull
+  set_oncomplete(Self, EventHandlerNonNull) -> Unit
+  onerror(Self) -> EventHandlerNonNull
+  set_onerror(Self, EventHandlerNonNull) -> Unit
+}
+
+pub trait TIDBVersionChangeEvent : TEvent {
+  old_version(Self) -> UInt64
+  new_version(Self) -> UInt64
+}
+
 pub trait TIdleDeadline : TJsValue {
   time_remaining(Self) -> Double
   did_timeout(Self) -> Bool
@@ -9036,6 +9954,22 @@ pub trait TKeyboardEvent : TUIEvent {
   char_code(Self) -> UInt
   key_code(Self) -> UInt
 }
+
+pub trait TKeyframeEffect : TAnimationEffect {
+  target(Self) -> Element
+  set_target(Self, &TElement) -> Unit
+  pseudo_element(Self) -> String
+  set_pseudo_element(Self, String) -> Unit
+  composite(Self) -> CompositeOperation
+  set_composite(Self, CompositeOperation) -> Unit
+  get_keyframes(Self) -> Array[JsValue]
+  set_keyframes(Self, JsValue) -> Unit
+}
+
+pub(open) trait TKeyframeEffectNewOptions {
+  to_js(Self) -> JsValue
+}
+pub impl TKeyframeEffectNewOptions for Double
 
 pub trait TLocation : TJsValue {
   href(Self) -> String
@@ -9547,6 +10481,12 @@ pub(open) trait TOffscreenRenderingContext {
   to_js(Self) -> JsValue
 }
 
+pub(open) trait TOptionalEffectTimingNewDuration {
+  to_js(Self) -> JsValue
+}
+pub impl TOptionalEffectTimingNewDuration for Double
+pub impl TOptionalEffectTimingNewDuration for String
+
 pub trait TOrigin : TJsValue {
   opaque_(Self) -> Bool
   is_same_origin(Self, &TOrigin) -> Bool
@@ -9723,6 +10663,58 @@ pub(open) trait TRangeCreateContextualFragmentString {
   to_js(Self) -> JsValue
 }
 pub impl TRangeCreateContextualFragmentString for String
+
+pub trait TReadableByteStreamController : TJsValue {
+  byob_request(Self) -> ReadableStreamBYOBRequest
+  desired_size(Self) -> Double
+  close(Self) -> Unit
+  enqueue(Self, &TArrayBufferView) -> Unit
+  error(Self, e? : JsValue) -> Unit
+}
+
+pub trait TReadableStream : TJsValue {
+  locked(Self) -> Bool
+  cancel(Self, reason? : JsValue) -> JsPromise[JsValue]
+  get_reader(Self, options? : ReadableStreamGetReaderOptions) -> ReadableStreamReader
+  pipe_through(Self, ReadableWritablePair, options? : StreamPipeOptions) -> ReadableStream
+  pipe_to(Self, &TWritableStream, options? : StreamPipeOptions) -> JsPromise[JsValue]
+  tee(Self) -> Array[ReadableStream]
+}
+
+pub trait TReadableStreamBYOBReader : TJsValue {
+  read(Self, &TArrayBufferView, options? : ReadableStreamBYOBReaderReadOptions) -> JsPromise[ReadableStreamReadResult]
+  release_lock(Self) -> Unit
+  closed(Self) -> JsPromise[JsValue]
+  cancel(Self, reason? : JsValue) -> JsPromise[JsValue]
+}
+
+pub trait TReadableStreamBYOBRequest : TJsValue {
+  view(Self) -> ArrayBufferView
+  respond(Self, UInt64) -> Unit
+  respond_with_new_view(Self, &TArrayBufferView) -> Unit
+}
+
+pub(open) trait TReadableStreamController {
+  to_js(Self) -> JsValue
+}
+
+pub trait TReadableStreamDefaultController : TJsValue {
+  desired_size(Self) -> Double
+  close(Self) -> Unit
+  enqueue(Self, chunk? : JsValue) -> Unit
+  error(Self, e? : JsValue) -> Unit
+}
+
+pub trait TReadableStreamDefaultReader : TJsValue {
+  read(Self) -> JsPromise[ReadableStreamReadResult]
+  release_lock(Self) -> Unit
+  closed(Self) -> JsPromise[JsValue]
+  cancel(Self, reason? : JsValue) -> JsPromise[JsValue]
+}
+
+pub(open) trait TReadableStreamReader {
+  to_js(Self) -> JsValue
+}
 
 pub(open) trait TRenderingContext {
   to_js(Self) -> JsValue
@@ -10585,6 +11577,7 @@ pub trait TShadowRoot : TDocumentFragment {
   adopted_style_sheets(Self) -> JsValue
   set_adopted_style_sheets(Self, JsValue) -> Unit
   fullscreen_element(Self) -> Element
+  get_animations(Self) -> Array[Animation]
 }
 
 pub(open) trait TShadowRootInnerHTML {
@@ -10692,6 +11685,8 @@ pub trait TTextDecoderStream : TJsValue {
   encoding(Self) -> String
   fatal(Self) -> Bool
   ignore_bom(Self) -> Bool
+  readable(Self) -> ReadableStream
+  writable(Self) -> WritableStream
 }
 
 pub trait TTextEncoder : TJsValue {
@@ -10702,6 +11697,8 @@ pub trait TTextEncoder : TJsValue {
 
 pub trait TTextEncoderStream : TJsValue {
   encoding(Self) -> String
+  readable(Self) -> ReadableStream
+  writable(Self) -> WritableStream
 }
 
 pub trait TTextEvent : TUIEvent {
@@ -10835,6 +11832,18 @@ pub(open) trait TTrackEventInitNewTrack {
 
 pub(open) trait TTrackEventTrack {
   to_js(Self) -> JsValue
+}
+
+pub trait TTransformStream : TJsValue {
+  readable(Self) -> ReadableStream
+  writable(Self) -> WritableStream
+}
+
+pub trait TTransformStreamDefaultController : TJsValue {
+  desired_size(Self) -> Double
+  enqueue(Self, chunk? : JsValue) -> Unit
+  error(Self, reason? : JsValue) -> Unit
+  terminate(Self) -> Unit
 }
 
 pub trait TTreeWalker : TJsValue {
@@ -11364,6 +12373,7 @@ pub trait TWindow : TEventTarget {
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
   fetch(Self, &TRequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
+  indexed_db(Self) -> IDBFactory
   trusted_types(Self) -> TrustedTypePolicyFactory
   request_animation_frame(Self, FrameRequestCallback) -> UInt
   cancel_animation_frame(Self, UInt) -> Unit
@@ -11420,6 +12430,7 @@ pub trait TWorkerGlobalScope : TEventTarget {
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
   fetch(Self, &TRequestInfo, init? : RequestInit) -> JsPromise[Response]
   performance(Self) -> Performance
+  indexed_db(Self) -> IDBFactory
   trusted_types(Self) -> TrustedTypePolicyFactory
 }
 
@@ -11469,6 +12480,28 @@ pub trait TWorklet : TJsValue {
 }
 
 pub trait TWorkletGlobalScope : TJsValue {
+}
+
+pub trait TWritableStream : TJsValue {
+  locked(Self) -> Bool
+  abort(Self, reason? : JsValue) -> JsPromise[JsValue]
+  close(Self) -> JsPromise[JsValue]
+  get_writer(Self) -> WritableStreamDefaultWriter
+}
+
+pub trait TWritableStreamDefaultController : TJsValue {
+  signal(Self) -> AbortSignal
+  error(Self, e? : JsValue) -> Unit
+}
+
+pub trait TWritableStreamDefaultWriter : TJsValue {
+  closed(Self) -> JsPromise[JsValue]
+  desired_size(Self) -> Double
+  ready(Self) -> JsPromise[JsValue]
+  abort(Self, reason? : JsValue) -> JsPromise[JsValue]
+  close(Self) -> JsPromise[JsValue]
+  release_lock(Self) -> Unit
+  write(Self, chunk? : JsValue) -> JsPromise[JsValue]
 }
 
 pub trait TXMLDocument : TDocument {

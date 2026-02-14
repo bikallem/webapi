@@ -6,16 +6,6 @@ pub type CSSOMString = String
 
 ///|
 #external
-pub type ReadableStream
-
-///|
-pub impl TJsValue for ReadableStream with to_js(self : ReadableStream) -> JsValue = "%identity"
-
-///|
-pub impl FromJsAny for ReadableStream with from_js_any(value : JsAny) -> ReadableStream = "%identity"
-
-///|
-#external
 pub type VideoFrame
 
 ///|

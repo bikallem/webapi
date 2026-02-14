@@ -469,6 +469,7 @@ export const wasmImportObject = {
     set_onfullscreenchange: (obj, value) => { obj.onfullscreenchange = value; },
     get_onfullscreenerror: (obj) => obj.onfullscreenerror,
     set_onfullscreenerror: (obj, value) => { obj.onfullscreenerror = value; },
+    get_timeline: (obj) => obj.timeline,
     get_customElementRegistry: (obj) => obj.customElementRegistry,
     get_activeElement: (obj) => obj.activeElement,
     get_styleSheets: (obj) => obj.styleSheets,
@@ -707,6 +708,7 @@ export const wasmImportObject = {
     exitFullscreen: (obj) => obj.exitFullscreen(),
     getSelection: (obj) => obj.getSelection(),
     getElementById: (obj, element_id) => obj.getElementById(element_id),
+    getAnimations: (obj) => obj.getAnimations(),
     prepend: (obj, nodes) => obj.prepend(...nodes),
     append: (obj, nodes) => obj.append(...nodes),
     replaceChildren: (obj, nodes) => obj.replaceChildren(...nodes),
@@ -1387,6 +1389,7 @@ export const wasmImportObject = {
     get_isSecureContext: (obj) => obj.isSecureContext,
     get_crossOriginIsolated: (obj) => obj.crossOriginIsolated,
     get_performance: (obj) => obj.performance,
+    get_indexedDB: (obj) => obj.indexedDB,
     get_trustedTypes: (obj) => obj.trustedTypes,
     get_sessionStorage: (obj) => obj.sessionStorage,
     get_localStorage: (obj) => obj.localStorage,
@@ -1584,7 +1587,8 @@ export const wasmImportObject = {
     set_adoptedStyleSheets: (obj, value) => { obj.adoptedStyleSheets = value; },
     get_fullscreenElement: (obj) => obj.fullscreenElement,
     setHTMLUnsafe: (obj, html) => obj.setHTMLUnsafe(html),
-    getHTML: (obj, options) => obj.getHTML(options)
+    getHTML: (obj, options) => obj.getHTML(options),
+    getAnimations: (obj) => obj.getAnimations()
   },
 
   webapi_Element: {
@@ -1683,7 +1687,9 @@ export const wasmImportObject = {
     getBoxQuads: (obj, options) => obj.getBoxQuads(options),
     convertQuadFromNode: (obj, quad, from, options) => obj.convertQuadFromNode(quad, from, options),
     convertRectFromNode: (obj, rect, from, options) => obj.convertRectFromNode(rect, from, options),
-    convertPointFromNode: (obj, point, from, options) => obj.convertPointFromNode(point, from, options)
+    convertPointFromNode: (obj, point, from, options) => obj.convertPointFromNode(point, from, options),
+    animate: (obj, keyframes, options) => obj.animate(keyframes, options),
+    getAnimations: (obj, options) => obj.getAnimations(options)
   },
 
   webapi_NamedNodeMap: {
@@ -4358,6 +4364,7 @@ export const wasmImportObject = {
     get_isSecureContext: (obj) => obj.isSecureContext,
     get_crossOriginIsolated: (obj) => obj.crossOriginIsolated,
     get_performance: (obj) => obj.performance,
+    get_indexedDB: (obj) => obj.indexedDB,
     get_trustedTypes: (obj) => obj.trustedTypes,
     importScripts: (obj, urls) => obj.importScripts(...urls),
     reportError: (obj, e) => obj.reportError(e),
@@ -4881,6 +4888,103 @@ export const wasmImportObject = {
     estimate: (obj) => obj.estimate()
   },
 
+  webapi_ReadableStream: {
+    new: (underlying_source, strategy) => new ReadableStream(underlying_source, strategy),
+    get_locked: (obj) => obj.locked,
+    from: (async_iterable) => ReadableStream.from(async_iterable),
+    cancel: (obj, reason) => obj.cancel(reason),
+    getReader: (obj, options) => obj.getReader(options),
+    pipeThrough: (obj, transform, options) => obj.pipeThrough(transform, options),
+    pipeTo: (obj, destination, options) => obj.pipeTo(destination, options),
+    tee: (obj) => obj.tee()
+  },
+
+  webapi_ReadableStreamDefaultReader: {
+    new: (stream) => new ReadableStreamDefaultReader(stream),
+    get_closed: (obj) => obj.closed,
+    read: (obj) => obj.read(),
+    releaseLock: (obj) => obj.releaseLock(),
+    cancel: (obj, reason) => obj.cancel(reason)
+  },
+
+  webapi_ReadableStreamBYOBReader: {
+    new: (stream) => new ReadableStreamBYOBReader(stream),
+    get_closed: (obj) => obj.closed,
+    read: (obj, view, options) => obj.read(view, options),
+    releaseLock: (obj) => obj.releaseLock(),
+    cancel: (obj, reason) => obj.cancel(reason)
+  },
+
+  webapi_ReadableStreamDefaultController: {
+    get_desiredSize: (obj) => obj.desiredSize,
+    close: (obj) => obj.close(),
+    enqueue: (obj, chunk) => obj.enqueue(chunk),
+    error: (obj, e) => obj.error(e)
+  },
+
+  webapi_ReadableByteStreamController: {
+    get_byobRequest: (obj) => obj.byobRequest,
+    get_desiredSize: (obj) => obj.desiredSize,
+    close: (obj) => obj.close(),
+    enqueue: (obj, chunk) => obj.enqueue(chunk),
+    error: (obj, e) => obj.error(e)
+  },
+
+  webapi_ReadableStreamBYOBRequest: {
+    get_view: (obj) => obj.view,
+    respond: (obj, bytes_written) => obj.respond(bytes_written),
+    respondWithNewView: (obj, view) => obj.respondWithNewView(view)
+  },
+
+  webapi_WritableStream: {
+    new: (underlying_sink, strategy) => new WritableStream(underlying_sink, strategy),
+    get_locked: (obj) => obj.locked,
+    abort: (obj, reason) => obj.abort(reason),
+    close: (obj) => obj.close(),
+    getWriter: (obj) => obj.getWriter()
+  },
+
+  webapi_WritableStreamDefaultWriter: {
+    new: (stream) => new WritableStreamDefaultWriter(stream),
+    get_closed: (obj) => obj.closed,
+    get_desiredSize: (obj) => obj.desiredSize,
+    get_ready: (obj) => obj.ready,
+    abort: (obj, reason) => obj.abort(reason),
+    close: (obj) => obj.close(),
+    releaseLock: (obj) => obj.releaseLock(),
+    write: (obj, chunk) => obj.write(chunk)
+  },
+
+  webapi_WritableStreamDefaultController: {
+    get_signal: (obj) => obj.signal,
+    error: (obj, e) => obj.error(e)
+  },
+
+  webapi_TransformStream: {
+    new: (transformer, writable_strategy, readable_strategy) => new TransformStream(transformer, writable_strategy, readable_strategy),
+    get_readable: (obj) => obj.readable,
+    get_writable: (obj) => obj.writable
+  },
+
+  webapi_TransformStreamDefaultController: {
+    get_desiredSize: (obj) => obj.desiredSize,
+    enqueue: (obj, chunk) => obj.enqueue(chunk),
+    error: (obj, reason) => obj.error(reason),
+    terminate: (obj) => obj.terminate()
+  },
+
+  webapi_ByteLengthQueuingStrategy: {
+    new: (init) => new ByteLengthQueuingStrategy(init),
+    get_highWaterMark: (obj) => obj.highWaterMark,
+    get_size: (obj) => obj.size
+  },
+
+  webapi_CountQueuingStrategy: {
+    new: (init) => new CountQueuingStrategy(init),
+    get_highWaterMark: (obj) => obj.highWaterMark,
+    get_size: (obj) => obj.size
+  },
+
   webapi_TextDecoder: {
     new: (label, options) => new TextDecoder(label, options),
     get_encoding: (obj) => obj.encoding,
@@ -4900,12 +5004,16 @@ export const wasmImportObject = {
     new: (label, options) => new TextDecoderStream(label, options),
     get_encoding: (obj) => obj.encoding,
     get_fatal: (obj) => obj.fatal,
-    get_ignoreBOM: (obj) => obj.ignoreBOM
+    get_ignoreBOM: (obj) => obj.ignoreBOM,
+    get_readable: (obj) => obj.readable,
+    get_writable: (obj) => obj.writable
   },
 
   webapi_TextEncoderStream: {
     new: () => new TextEncoderStream(),
-    get_encoding: (obj) => obj.encoding
+    get_encoding: (obj) => obj.encoding,
+    get_readable: (obj) => obj.readable,
+    get_writable: (obj) => obj.writable
   },
 
   webapi_DOMPointReadOnly: {
@@ -5168,6 +5276,149 @@ export const wasmImportObject = {
     initTextEvent: (obj, type_, bubbles, cancelable, view, data) => obj.initTextEvent(type_, bubbles, cancelable, view, data)
   },
 
+  webapi_IDBRequest: {
+    get_result: (obj) => obj.result,
+    get_error: (obj) => obj.error,
+    get_source: (obj) => obj.source,
+    get_transaction: (obj) => obj.transaction,
+    get_readyState: (obj) => obj.readyState,
+    get_onsuccess: (obj) => obj.onsuccess,
+    set_onsuccess: (obj, value) => { obj.onsuccess = value; },
+    get_onerror: (obj) => obj.onerror,
+    set_onerror: (obj, value) => { obj.onerror = value; }
+  },
+
+  webapi_IDBOpenDBRequest: {
+    get_onblocked: (obj) => obj.onblocked,
+    set_onblocked: (obj, value) => { obj.onblocked = value; },
+    get_onupgradeneeded: (obj) => obj.onupgradeneeded,
+    set_onupgradeneeded: (obj, value) => { obj.onupgradeneeded = value; }
+  },
+
+  webapi_IDBVersionChangeEvent: {
+    new: (type_, event_init_dict) => new IDBVersionChangeEvent(type_, event_init_dict),
+    get_oldVersion: (obj) => obj.oldVersion,
+    get_newVersion: (obj) => obj.newVersion
+  },
+
+  webapi_IDBFactory: {
+    open: (obj, name, version) => obj.open(name, version),
+    deleteDatabase: (obj, name) => obj.deleteDatabase(name),
+    databases: (obj) => obj.databases(),
+    cmp: (obj, first, second) => obj.cmp(first, second)
+  },
+
+  webapi_IDBDatabase: {
+    get_name: (obj) => obj.name,
+    get_version: (obj) => obj.version,
+    get_objectStoreNames: (obj) => obj.objectStoreNames,
+    get_onabort: (obj) => obj.onabort,
+    set_onabort: (obj, value) => { obj.onabort = value; },
+    get_onclose: (obj) => obj.onclose,
+    set_onclose: (obj, value) => { obj.onclose = value; },
+    get_onerror: (obj) => obj.onerror,
+    set_onerror: (obj, value) => { obj.onerror = value; },
+    get_onversionchange: (obj) => obj.onversionchange,
+    set_onversionchange: (obj, value) => { obj.onversionchange = value; },
+    transaction: (obj, store_names, mode, options) => obj.transaction(store_names, mode, options),
+    close: (obj) => obj.close(),
+    createObjectStore: (obj, name, options) => obj.createObjectStore(name, options),
+    deleteObjectStore: (obj, name) => obj.deleteObjectStore(name)
+  },
+
+  webapi_IDBObjectStore: {
+    get_name: (obj) => obj.name,
+    set_name: (obj, value) => { obj.name = value; },
+    get_keyPath: (obj) => obj.keyPath,
+    get_indexNames: (obj) => obj.indexNames,
+    get_transaction: (obj) => obj.transaction,
+    get_autoIncrement: (obj) => obj.autoIncrement,
+    put: (obj, value, key) => obj.put(value, key),
+    add: (obj, value, key) => obj.add(value, key),
+    delete: (obj, query) => obj.delete(query),
+    clear: (obj) => obj.clear(),
+    get: (obj, query) => obj.get(query),
+    getKey: (obj, query) => obj.getKey(query),
+    getAll: (obj, query_or_options, count) => obj.getAll(query_or_options, count),
+    getAllKeys: (obj, query_or_options, count) => obj.getAllKeys(query_or_options, count),
+    getAllRecords: (obj, options) => obj.getAllRecords(options),
+    count: (obj, query) => obj.count(query),
+    openCursor: (obj, query, direction) => obj.openCursor(query, direction),
+    openKeyCursor: (obj, query, direction) => obj.openKeyCursor(query, direction),
+    index: (obj, name) => obj.index(name),
+    createIndex: (obj, name, key_path, options) => obj.createIndex(name, key_path, options),
+    deleteIndex: (obj, name) => obj.deleteIndex(name)
+  },
+
+  webapi_IDBIndex: {
+    get_name: (obj) => obj.name,
+    set_name: (obj, value) => { obj.name = value; },
+    get_objectStore: (obj) => obj.objectStore,
+    get_keyPath: (obj) => obj.keyPath,
+    get_multiEntry: (obj) => obj.multiEntry,
+    get_unique: (obj) => obj.unique,
+    get: (obj, query) => obj.get(query),
+    getKey: (obj, query) => obj.getKey(query),
+    getAll: (obj, query_or_options, count) => obj.getAll(query_or_options, count),
+    getAllKeys: (obj, query_or_options, count) => obj.getAllKeys(query_or_options, count),
+    getAllRecords: (obj, options) => obj.getAllRecords(options),
+    count: (obj, query) => obj.count(query),
+    openCursor: (obj, query, direction) => obj.openCursor(query, direction),
+    openKeyCursor: (obj, query, direction) => obj.openKeyCursor(query, direction)
+  },
+
+  webapi_IDBKeyRange: {
+    get_lower: (obj) => obj.lower,
+    get_upper: (obj) => obj.upper,
+    get_lowerOpen: (obj) => obj.lowerOpen,
+    get_upperOpen: (obj) => obj.upperOpen,
+    only: (value) => IDBKeyRange.only(value),
+    lowerBound: (lower, open) => IDBKeyRange.lowerBound(lower, open),
+    upperBound: (upper, open) => IDBKeyRange.upperBound(upper, open),
+    bound: (lower, upper, lower_open, upper_open) => IDBKeyRange.bound(lower, upper, lower_open, upper_open),
+    includes: (obj, key) => obj.includes(key)
+  },
+
+  webapi_IDBRecord: {
+    get_key: (obj) => obj.key,
+    get_primaryKey: (obj) => obj.primaryKey,
+    get_value: (obj) => obj.value
+  },
+
+  webapi_IDBCursor: {
+    get_source: (obj) => obj.source,
+    get_direction: (obj) => obj.direction,
+    get_key: (obj) => obj.key,
+    get_primaryKey: (obj) => obj.primaryKey,
+    get_request: (obj) => obj.request,
+    advance: (obj, count) => obj.advance(count),
+    continue: (obj, key) => obj.continue(key),
+    continuePrimaryKey: (obj, key, primary_key) => obj.continuePrimaryKey(key, primary_key),
+    update: (obj, value) => obj.update(value),
+    delete: (obj) => obj.delete()
+  },
+
+  webapi_IDBCursorWithValue: {
+    get_value: (obj) => obj.value
+  },
+
+  webapi_IDBTransaction: {
+    get_objectStoreNames: (obj) => obj.objectStoreNames,
+    get_mode: (obj) => obj.mode,
+    get_durability: (obj) => obj.durability,
+    get_db: (obj) => obj.db,
+    get_error: (obj) => obj.error,
+    get_onabort: (obj) => obj.onabort,
+    set_onabort: (obj, value) => { obj.onabort = value; },
+    get_oncomplete: (obj) => obj.oncomplete,
+    set_oncomplete: (obj, value) => { obj.oncomplete = value; },
+    get_onerror: (obj) => obj.onerror,
+    set_onerror: (obj, value) => { obj.onerror = value; },
+    objectStore: (obj, name) => obj.objectStore(name),
+    commit: (obj) => obj.commit(),
+    abort: (obj) => obj.abort()
+  },
+
   webapi_MediaQueryList: {
     get_media: (obj) => obj.media,
     get_matches: (obj) => obj.matches,
@@ -5412,6 +5663,63 @@ export const wasmImportObject = {
     readText: (obj) => obj.readText(),
     write: (obj, data) => obj.write(data),
     writeText: (obj, data) => obj.writeText(data)
+  },
+
+  webapi_AnimationTimeline: {
+  },
+
+  webapi_DocumentTimeline: {
+    new: (options) => new DocumentTimeline(options)
+  },
+
+  webapi_Animation: {
+    new: (effect, timeline) => new Animation(effect, timeline),
+    get_id: (obj) => obj.id,
+    set_id: (obj, value) => { obj.id = value; },
+    get_effect: (obj) => obj.effect,
+    set_effect: (obj, value) => { obj.effect = value; },
+    get_timeline: (obj) => obj.timeline,
+    set_timeline: (obj, value) => { obj.timeline = value; },
+    get_playbackRate: (obj) => obj.playbackRate,
+    set_playbackRate: (obj, value) => { obj.playbackRate = value; },
+    get_playState: (obj) => obj.playState,
+    get_replaceState: (obj) => obj.replaceState,
+    get_pending: (obj) => obj.pending,
+    get_ready: (obj) => obj.ready,
+    get_finished: (obj) => obj.finished,
+    get_onfinish: (obj) => obj.onfinish,
+    set_onfinish: (obj, value) => { obj.onfinish = value; },
+    get_oncancel: (obj) => obj.oncancel,
+    set_oncancel: (obj, value) => { obj.oncancel = value; },
+    get_onremove: (obj) => obj.onremove,
+    set_onremove: (obj, value) => { obj.onremove = value; },
+    cancel: (obj) => obj.cancel(),
+    finish: (obj) => obj.finish(),
+    play: (obj) => obj.play(),
+    pause: (obj) => obj.pause(),
+    updatePlaybackRate: (obj, playback_rate) => obj.updatePlaybackRate(playback_rate),
+    reverse: (obj) => obj.reverse(),
+    persist: (obj) => obj.persist(),
+    commitStyles: (obj) => obj.commitStyles()
+  },
+
+  webapi_AnimationEffect: {
+    getTiming: (obj) => obj.getTiming(),
+    getComputedTiming: (obj) => obj.getComputedTiming(),
+    updateTiming: (obj, timing) => obj.updateTiming(timing)
+  },
+
+  webapi_KeyframeEffect: {
+    new: (target, keyframes, options) => new KeyframeEffect(target, keyframes, options),
+    new_2: (source) => new KeyframeEffect(source),
+    get_target: (obj) => obj.target,
+    set_target: (obj, value) => { obj.target = value; },
+    get_pseudoElement: (obj) => obj.pseudoElement,
+    set_pseudoElement: (obj, value) => { obj.pseudoElement = value; },
+    get_composite: (obj) => obj.composite,
+    set_composite: (obj, value) => { obj.composite = value; },
+    getKeyframes: (obj) => obj.getKeyframes(),
+    setKeyframes: (obj, keyframes) => obj.setKeyframes(keyframes)
   },
 
   webapi_ResizeObserver: {
@@ -6194,6 +6502,113 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_ReadableStreamGetReaderOptions: {
+    new: (mode) => {
+      const obj = {};
+      if (mode !== undefined) obj.mode = mode;
+      return obj;
+    }
+  },
+
+  webapi_ReadableStreamIteratorOptions: {
+    new: (preventCancel) => {
+      const obj = {};
+      if (preventCancel !== undefined) obj.preventCancel = preventCancel;
+      return obj;
+    }
+  },
+
+  webapi_ReadableWritablePair: {
+    new: (readable, writable) => {
+      const obj = {};
+      if (readable !== undefined) obj.readable = readable;
+      if (writable !== undefined) obj.writable = writable;
+      return obj;
+    }
+  },
+
+  webapi_StreamPipeOptions: {
+    new: (preventClose, preventAbort, preventCancel, signal) => {
+      const obj = {};
+      if (preventClose !== undefined) obj.preventClose = preventClose;
+      if (preventAbort !== undefined) obj.preventAbort = preventAbort;
+      if (preventCancel !== undefined) obj.preventCancel = preventCancel;
+      if (signal !== undefined) obj.signal = signal;
+      return obj;
+    }
+  },
+
+  webapi_UnderlyingSource: {
+    new: (start, pull, cancel, type, autoAllocateChunkSize) => {
+      const obj = {};
+      if (start !== undefined) obj.start = start;
+      if (pull !== undefined) obj.pull = pull;
+      if (cancel !== undefined) obj.cancel = cancel;
+      if (type !== undefined) obj.type = type;
+      if (autoAllocateChunkSize !== undefined) obj.autoAllocateChunkSize = autoAllocateChunkSize;
+      return obj;
+    }
+  },
+
+  webapi_ReadableStreamReadResult: {
+    new: (value, done) => {
+      const obj = {};
+      if (value !== undefined) obj.value = value;
+      if (done !== undefined) obj.done = done;
+      return obj;
+    }
+  },
+
+  webapi_ReadableStreamBYOBReaderReadOptions: {
+    new: (min) => {
+      const obj = {};
+      if (min !== undefined) obj.min = min;
+      return obj;
+    }
+  },
+
+  webapi_UnderlyingSink: {
+    new: (start, write, close, abort, type) => {
+      const obj = {};
+      if (start !== undefined) obj.start = start;
+      if (write !== undefined) obj.write = write;
+      if (close !== undefined) obj.close = close;
+      if (abort !== undefined) obj.abort = abort;
+      if (type !== undefined) obj.type = type;
+      return obj;
+    }
+  },
+
+  webapi_Transformer: {
+    new: (start, transform, flush, cancel, readableType, writableType) => {
+      const obj = {};
+      if (start !== undefined) obj.start = start;
+      if (transform !== undefined) obj.transform = transform;
+      if (flush !== undefined) obj.flush = flush;
+      if (cancel !== undefined) obj.cancel = cancel;
+      if (readableType !== undefined) obj.readableType = readableType;
+      if (writableType !== undefined) obj.writableType = writableType;
+      return obj;
+    }
+  },
+
+  webapi_QueuingStrategy: {
+    new: (highWaterMark, size) => {
+      const obj = {};
+      if (highWaterMark !== undefined) obj.highWaterMark = highWaterMark;
+      if (size !== undefined) obj.size = size;
+      return obj;
+    }
+  },
+
+  webapi_QueuingStrategyInit: {
+    new: (highWaterMark) => {
+      const obj = {};
+      if (highWaterMark !== undefined) obj.highWaterMark = highWaterMark;
+      return obj;
+    }
+  },
+
   webapi_TextDecoderOptions: {
     new: (fatal, ignoreBOM) => {
       const obj = {};
@@ -6492,6 +6907,63 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_IDBVersionChangeEventInit: {
+    new: (bubbles, cancelable, composed, oldVersion, newVersion) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (oldVersion !== undefined) obj.oldVersion = oldVersion;
+      if (newVersion !== undefined) obj.newVersion = newVersion;
+      return obj;
+    }
+  },
+
+  webapi_IDBDatabaseInfo: {
+    new: (name, version) => {
+      const obj = {};
+      if (name !== undefined) obj.name = name;
+      if (version !== undefined) obj.version = version;
+      return obj;
+    }
+  },
+
+  webapi_IDBTransactionOptions: {
+    new: (durability) => {
+      const obj = {};
+      if (durability !== undefined) obj.durability = durability;
+      return obj;
+    }
+  },
+
+  webapi_IDBObjectStoreParameters: {
+    new: (keyPath, autoIncrement) => {
+      const obj = {};
+      if (keyPath !== undefined) obj.keyPath = keyPath;
+      if (autoIncrement !== undefined) obj.autoIncrement = autoIncrement;
+      return obj;
+    }
+  },
+
+  webapi_IDBIndexParameters: {
+    new: (unique, multiEntry) => {
+      const obj = {};
+      if (unique !== undefined) obj.unique = unique;
+      if (multiEntry !== undefined) obj.multiEntry = multiEntry;
+      return obj;
+    }
+  },
+
+  webapi_IDBGetAllOptions: {
+    new: (query, count, direction) => {
+      const obj = {};
+      if (query !== undefined) obj.query = query;
+      if (count !== undefined) obj.count = count;
+      if (direction !== undefined) obj.direction = direction;
+      return obj;
+    }
+  },
+
   webapi_ScrollOptions: {
     new: (behavior) => {
       const obj = {};
@@ -6783,6 +7255,125 @@ export const wasmImportObject = {
     }
   },
 
+  webapi_DocumentTimelineOptions: {
+    new: (originTime) => {
+      const obj = {};
+      if (originTime !== undefined) obj.originTime = originTime;
+      return obj;
+    }
+  },
+
+  webapi_EffectTiming: {
+    new: (fill, iterationStart, iterations, direction, easing) => {
+      const obj = {};
+      if (fill !== undefined) obj.fill = fill;
+      if (iterationStart !== undefined) obj.iterationStart = iterationStart;
+      if (iterations !== undefined) obj.iterations = iterations;
+      if (direction !== undefined) obj.direction = direction;
+      if (easing !== undefined) obj.easing = easing;
+      return obj;
+    }
+  },
+
+  webapi_OptionalEffectTiming: {
+    new: (delay, endDelay, fill, iterationStart, iterations, duration, direction, easing) => {
+      const obj = {};
+      if (delay !== undefined) obj.delay = delay;
+      if (endDelay !== undefined) obj.endDelay = endDelay;
+      if (fill !== undefined) obj.fill = fill;
+      if (iterationStart !== undefined) obj.iterationStart = iterationStart;
+      if (iterations !== undefined) obj.iterations = iterations;
+      if (duration !== undefined) obj.duration = duration;
+      if (direction !== undefined) obj.direction = direction;
+      if (easing !== undefined) obj.easing = easing;
+      return obj;
+    }
+  },
+
+  webapi_ComputedEffectTiming: {
+    new: (fill, iterationStart, iterations, direction, easing, progress, currentIteration) => {
+      const obj = {};
+      if (fill !== undefined) obj.fill = fill;
+      if (iterationStart !== undefined) obj.iterationStart = iterationStart;
+      if (iterations !== undefined) obj.iterations = iterations;
+      if (direction !== undefined) obj.direction = direction;
+      if (easing !== undefined) obj.easing = easing;
+      if (progress !== undefined) obj.progress = progress;
+      if (currentIteration !== undefined) obj.currentIteration = currentIteration;
+      return obj;
+    }
+  },
+
+  webapi_BaseComputedKeyframe: {
+    new: (offset, computedOffset, easing, composite) => {
+      const obj = {};
+      if (offset !== undefined) obj.offset = offset;
+      if (computedOffset !== undefined) obj.computedOffset = computedOffset;
+      if (easing !== undefined) obj.easing = easing;
+      if (composite !== undefined) obj.composite = composite;
+      return obj;
+    }
+  },
+
+  webapi_BasePropertyIndexedKeyframe: {
+    new: (offset, easing, composite) => {
+      const obj = {};
+      if (offset !== undefined) obj.offset = offset;
+      if (easing !== undefined) obj.easing = easing;
+      if (composite !== undefined) obj.composite = composite;
+      return obj;
+    }
+  },
+
+  webapi_BaseKeyframe: {
+    new: (offset, easing, composite) => {
+      const obj = {};
+      if (offset !== undefined) obj.offset = offset;
+      if (easing !== undefined) obj.easing = easing;
+      if (composite !== undefined) obj.composite = composite;
+      return obj;
+    }
+  },
+
+  webapi_KeyframeEffectOptions: {
+    new: (fill, iterationStart, iterations, direction, easing, composite, pseudoElement) => {
+      const obj = {};
+      if (fill !== undefined) obj.fill = fill;
+      if (iterationStart !== undefined) obj.iterationStart = iterationStart;
+      if (iterations !== undefined) obj.iterations = iterations;
+      if (direction !== undefined) obj.direction = direction;
+      if (easing !== undefined) obj.easing = easing;
+      if (composite !== undefined) obj.composite = composite;
+      if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
+      return obj;
+    }
+  },
+
+  webapi_KeyframeAnimationOptions: {
+    new: (fill, iterationStart, iterations, direction, easing, composite, pseudoElement, id, timeline) => {
+      const obj = {};
+      if (fill !== undefined) obj.fill = fill;
+      if (iterationStart !== undefined) obj.iterationStart = iterationStart;
+      if (iterations !== undefined) obj.iterations = iterations;
+      if (direction !== undefined) obj.direction = direction;
+      if (easing !== undefined) obj.easing = easing;
+      if (composite !== undefined) obj.composite = composite;
+      if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
+      if (id !== undefined) obj.id = id;
+      if (timeline !== undefined) obj.timeline = timeline;
+      return obj;
+    }
+  },
+
+  webapi_GetAnimationsOptions: {
+    new: (subtree, pseudoElement) => {
+      const obj = {};
+      if (subtree !== undefined) obj.subtree = subtree;
+      if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
+      return obj;
+    }
+  },
+
   webapi_ResizeObserverOptions: {
     new: (box) => {
       const obj = {};
@@ -6890,6 +7481,54 @@ export const wasmImportObject = {
   },
 
   webapi_VoidFunction: {
+    new: (f) => f
+  },
+
+  webapi_UnderlyingSourceStartCallback: {
+    new: (f) => f
+  },
+
+  webapi_UnderlyingSourcePullCallback: {
+    new: (f) => f
+  },
+
+  webapi_UnderlyingSourceCancelCallback: {
+    new: (f) => f
+  },
+
+  webapi_UnderlyingSinkStartCallback: {
+    new: (f) => f
+  },
+
+  webapi_UnderlyingSinkWriteCallback: {
+    new: (f) => f
+  },
+
+  webapi_UnderlyingSinkCloseCallback: {
+    new: (f) => f
+  },
+
+  webapi_UnderlyingSinkAbortCallback: {
+    new: (f) => f
+  },
+
+  webapi_TransformerStartCallback: {
+    new: (f) => f
+  },
+
+  webapi_TransformerFlushCallback: {
+    new: (f) => f
+  },
+
+  webapi_TransformerTransformCallback: {
+    new: (f) => f
+  },
+
+  webapi_TransformerCancelCallback: {
+    new: (f) => f
+  },
+
+  webapi_QueuingStrategySize: {
     new: (f) => f
   },
 

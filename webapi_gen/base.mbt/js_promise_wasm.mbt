@@ -57,3 +57,19 @@ pub impl FromJsAny for Double with from_js_any(value : JsAny) -> Double { js_any
 
 ///|
 pub impl FromJsAny for Unit with from_js_any(_value : JsAny) -> Unit { () }
+
+///|
+fn js_array_length_for_promise(arr : JsAny) -> Int = "webapi_Primitives" "arrayLength"
+
+///|
+fn js_array_get_for_promise(arr : JsAny, index : Int) -> JsAny = "webapi_Primitives" "arrayGet"
+
+///|
+pub impl[T : FromJsAny] FromJsAny for Array[T] with from_js_any(value : JsAny) -> Array[T] {
+  let len = js_array_length_for_promise(value)
+  let arr : Array[T] = []
+  for i = 0; i < len; i = i + 1 {
+    arr.push(FromJsAny::from_js_any(js_array_get_for_promise(value, i)))
+  }
+  arr
+}

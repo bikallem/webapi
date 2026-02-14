@@ -142,3 +142,11 @@ extern "js" fn shadow_root_fullscreen_element_ffi_js(obj : JsValue) -> JsValue =
 fn shadow_root_fullscreen_element_ffi(obj : JsValue) -> Element {
   shadow_root_fullscreen_element_ffi_js(obj).unsafe_cast()
 }
+
+///|
+extern "js" fn shadow_root_get_animations_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getAnimations()"
+
+///|
+fn shadow_root_get_animations_ffi(obj : JsValue) -> Array[Animation] {
+  shadow_root_get_animations_ffi_js(obj).unsafe_cast()
+}

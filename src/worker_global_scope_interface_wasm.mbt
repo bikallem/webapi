@@ -227,6 +227,9 @@ fn worker_global_scope_fetch_ffi(
 fn worker_global_scope_performance_ffi(obj : JsValue) -> Performance = "webapi_WorkerGlobalScope" "get_performance"
 
 ///|
+fn worker_global_scope_indexed_db_ffi(obj : JsValue) -> IDBFactory = "webapi_WorkerGlobalScope" "get_indexedDB"
+
+///|
 fn worker_global_scope_trusted_types_ffi(
   obj : JsValue,
 ) -> TrustedTypePolicyFactory = "webapi_WorkerGlobalScope" "get_trustedTypes"

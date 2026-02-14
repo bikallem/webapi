@@ -531,3 +531,21 @@ fn element_convert_point_from_node_ffi(
   from : JsValue,
   options : JsValue,
 ) -> DOMPoint = "webapi_Element" "convertPointFromNode"
+
+///|
+fn element_animate_ffi(
+  obj : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> Animation = "webapi_Element" "animate"
+
+///|
+fn element_get_animations_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = "webapi_Element" "getAnimations"
+
+///|
+fn element_get_animations_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Animation] {
+  element_get_animations_ffi_wasm(obj, options).to_array()
+}

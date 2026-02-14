@@ -36,6 +36,9 @@ core_specs = [
     "encoding",
     "notifications",
     "vibration",
+    "streams",
+    "web-animations",
+    "IndexedDB",
 ]
 
 excluded_interfaces = ["ShadowAnimation", "OffscreenRenderingContext", "NotificationEvent", "ServiceWorkerRegistration", "ServiceWorkerGlobalScope"]

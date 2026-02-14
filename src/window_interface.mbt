@@ -413,6 +413,7 @@ pub trait TWindow: TEventTarget {
     Response,
   ] = _
   performance(self : Self) -> Performance = _
+  indexed_db(self : Self) -> IDBFactory = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
   request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
@@ -2703,6 +2704,12 @@ impl TWindow with fetch(
 /// [Window.performance](https://developer.mozilla.org/en-US/docs/Web/API/Window/performance)
 impl TWindow with performance(self : Self) -> Performance {
   window_performance_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB)
+impl TWindow with indexed_db(self : Self) -> IDBFactory {
+  window_indexed_db_ffi(TJsValue::to_js(self))
 }
 
 ///|
