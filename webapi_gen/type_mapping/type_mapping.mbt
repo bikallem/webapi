@@ -164,209 +164,194 @@ pub fn arg_mbt_type(
   method_name : String,
   arg_name : String,
   type_registry : @type_registry.TypeRegistry,
+  call_depth~ : Int = 0, // used to suffix nested union type names
 ) -> (ArgMbtType, Array[EmitAux]) {
-  fn go(
-    idl_type : @parser.Type,
-    type_name : String,
-    method_name : String,
-    arg_name : String,
-    type_registry : @type_registry.TypeRegistry,
-    call_depth : Int, // used to suffix nested union type names
-  ) -> (ArgMbtType, Array[EmitAux]) {
-    let emits = []
-    let type_ = match idl_type {
-      // Float Arrays
-      Float16Array => ArgMbtType::Other("Float16Array")
-      Float32Array => ArgMbtType::Other("Float32Array")
-      Float64Array => ArgMbtType::Other("Float64Array")
+  let emits = []
+  let type_ = match idl_type {
+    // Float Arrays
+    Float16Array => ArgMbtType::Other("Float16Array")
+    Float32Array => ArgMbtType::Other("Float32Array")
+    Float64Array => ArgMbtType::Other("Float64Array")
 
-      // Integer arrays
-      Int8Array => ArgMbtType::Other("Int8Array")
-      Int16Array => ArgMbtType::Other("Int16Array")
-      Int32Array => ArgMbtType::Other("Int32Array")
+    // Integer arrays
+    Int8Array => ArgMbtType::Other("Int8Array")
+    Int16Array => ArgMbtType::Other("Int16Array")
+    Int32Array => ArgMbtType::Other("Int32Array")
 
-      // BigUint and BigInt arrays
-      BigUint64Array => ArgMbtType::Other("BigUint64Array")
-      BigInt64Array => ArgMbtType::Other("BigInt64Array")
+    // BigUint and BigInt arrays
+    BigUint64Array => ArgMbtType::Other("BigUint64Array")
+    BigInt64Array => ArgMbtType::Other("BigInt64Array")
 
-      // Unsigned integer arrays
-      Uint8Array => ArgMbtType::Other("Uint8Array")
-      Uint16Array => ArgMbtType::Other("Uint16Array")
-      Uint32Array => ArgMbtType::Other("Uint32Array")
-      Uint8ClampedArray => ArgMbtType::Other("Uint8ClampedArray")
+    // Unsigned integer arrays
+    Uint8Array => ArgMbtType::Other("Uint8Array")
+    Uint16Array => ArgMbtType::Other("Uint16Array")
+    Uint32Array => ArgMbtType::Other("Uint32Array")
+    Uint8ClampedArray => ArgMbtType::Other("Uint8ClampedArray")
 
-      // String types
-      USVString => ArgMbtType::Primitive("String")
-      ByteString => ArgMbtType::Primitive("String")
-      DOMString => ArgMbtType::Primitive("String")
+    // String types
+    USVString => ArgMbtType::Primitive("String")
+    ByteString => ArgMbtType::Primitive("String")
+    DOMString => ArgMbtType::Primitive("String")
 
-      // Integer Types
-      LongLong => ArgMbtType::Primitive("Int64") // 64-bit signed → Int64
-      Bigint => ArgMbtType::Primitive("Int64") // BigInt → Int64
-      UnsignedLong => ArgMbtType::Primitive("UInt") // 32-bit unsigned → UInt
-      UnsignedLongLong => ArgMbtType::Primitive("UInt64") // 64-bit unsigned → UInt64
-      UnsignedShort => ArgMbtType::Primitive("UInt") // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
-      Long => ArgMbtType::Primitive("Int") // 32-bit signed → Int
-      Short => ArgMbtType::Primitive("Int") // 16-bit signed → Int (Int16 exists but Int is more common)
-      Octet => ArgMbtType::Primitive("Byte") // 8-bit unsigned → Byte
-      Byte => ArgMbtType::Primitive("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
+    // Integer Types
+    LongLong => ArgMbtType::Primitive("Int64") // 64-bit signed → Int64
+    Bigint => ArgMbtType::Primitive("Int64") // BigInt → Int64
+    UnsignedLong => ArgMbtType::Primitive("UInt") // 32-bit unsigned → UInt
+    UnsignedLongLong => ArgMbtType::Primitive("UInt64") // 64-bit unsigned → UInt64
+    UnsignedShort => ArgMbtType::Primitive("UInt") // 16-bit unsigned → UInt (UInt16 exists but UInt is more common)
+    Long => ArgMbtType::Primitive("Int") // 32-bit signed → Int
+    Short => ArgMbtType::Primitive("Int") // 16-bit signed → Int (Int16 exists but Int is more common)
+    Octet => ArgMbtType::Primitive("Byte") // 8-bit unsigned → Byte
+    Byte => ArgMbtType::Primitive("Int") // 8-bit signed → Int (no signed 8-bit in MoonBit)
 
-      // Boolean type
-      Boolean => ArgMbtType::Primitive("Bool")
+    // Boolean type
+    Boolean => ArgMbtType::Primitive("Bool")
 
-      // Floating point types
-      Float => ArgMbtType::Primitive("Float") // 32-bit float → Float
-      Double => ArgMbtType::Primitive("Double") // 64-bit float → Double
-      UnrestrictedDouble => ArgMbtType::Primitive("Double") // 64-bit unrestricted float → Double
-      UnrestrictedFloat => ArgMbtType::Primitive("Float") // 32-bit unrestricted float → Float
+    // Floating point types
+    Float => ArgMbtType::Primitive("Float") // 32-bit float → Float
+    Double => ArgMbtType::Primitive("Double") // 64-bit float → Double
+    UnrestrictedDouble => ArgMbtType::Primitive("Double") // 64-bit unrestricted float → Double
+    UnrestrictedFloat => ArgMbtType::Primitive("Float") // 32-bit unrestricted float → Float
 
-      // Other typed arrays
-      DataView => ArgMbtType::Other("DataView")
-      SharedArrayBuffer => ArgMbtType::Other("SharedArrayBuffer")
-      ArrayBuffer => ArgMbtType::Other("ArrayBuffer")
+    // Other typed arrays
+    DataView => ArgMbtType::Other("DataView")
+    SharedArrayBuffer => ArgMbtType::Other("SharedArrayBuffer")
+    ArrayBuffer => ArgMbtType::Other("ArrayBuffer")
 
-      // Object types
-      Object => ArgMbtType::Other("JsValue")
-      Any => ArgMbtType::Other("JsValue")
+    // Object types
+    Object => ArgMbtType::Other("JsValue")
+    Any => ArgMbtType::Other("JsValue")
 
-      // Named types (interfaces/dictionaries/enums keep explicit kinds).
-      // Typedefs/callbacks/unknown identifiers stay as concrete names via Other.
-      Identifier(name) =>
-        match type_registry.named_type_kind(name) {
-          @type_registry.NamedTypeKind::Interface => ArgMbtType::Interface(name)
-          @type_registry.NamedTypeKind::Enum => ArgMbtType::Enum(name)
-          @type_registry.NamedTypeKind::Dictionary =>
-            ArgMbtType::Dictionary(name)
-          @type_registry.NamedTypeKind::UnionTypedef
-          | @type_registry.NamedTypeKind::Typedef
-          | @type_registry.NamedTypeKind::Callback
-          | @type_registry.NamedTypeKind::Unknown => ArgMbtType::Other(name)
-        }
-
-      // Nullable
-      Nullable(t) => {
-        let (type_, emits_) = go(
-          t, type_name, method_name, arg_name, type_registry, call_depth,
-        )
-        emits.push_iter(emits_.iter())
-        type_
+    // Named types (interfaces/dictionaries/enums keep explicit kinds).
+    // Typedefs/callbacks/unknown identifiers stay as concrete names via Other.
+    Identifier(name) =>
+      match type_registry.named_type_kind(name) {
+        @type_registry.NamedTypeKind::Interface => ArgMbtType::Interface(name)
+        @type_registry.NamedTypeKind::Enum => ArgMbtType::Enum(name)
+        @type_registry.NamedTypeKind::Dictionary =>
+          ArgMbtType::Dictionary(name)
+        @type_registry.NamedTypeKind::UnionTypedef
+        | @type_registry.NamedTypeKind::Typedef
+        | @type_registry.NamedTypeKind::Callback
+        | @type_registry.NamedTypeKind::Unknown => ArgMbtType::Other(name)
       }
 
-      // Void
-      // Majority of use cases of 'void' are for return types. They can also be used
-      // in union types as an option, eg. (DOMString or undefined). In those case we map
-      // it to 'JsUndefined' type. See ArgMbtType::Union case below.
-      Undefined => ArgMbtType::Other("Unit")
+    // Nullable
+    Nullable(t) => {
+      let (type_, emits_) = arg_mbt_type(
+        t, type_name, method_name, arg_name, type_registry, call_depth~,
+      )
+      emits.push_iter(emits_.iter())
+      type_
+    }
 
-      // Array type
-      Sequence(t) => {
-        let (type_, emits_) = go(
-          t, type_name, method_name, arg_name, type_registry, call_depth,
-        )
-        emits.push_iter(emits_.iter())
-        let type_name = if type_ is ArgMbtType::Union(_) {
-          "&T\{type_.name()}"
-        } else {
-          type_.name()
-        }
-        ArgMbtType::Other("Array[\{type_name}]")
+    // Void
+    // Majority of use cases of 'void' are for return types. They can also be used
+    // in union types as an option, eg. (DOMString or undefined). In those case we map
+    // it to 'JsUndefined' type. See ArgMbtType::Union case below.
+    Undefined => ArgMbtType::Other("Unit")
+
+    // Array type
+    Sequence(t) => {
+      let (type_, emits_) = arg_mbt_type(
+        t, type_name, method_name, arg_name, type_registry, call_depth~,
+      )
+      emits.push_iter(emits_.iter())
+      let type_name = if type_ is ArgMbtType::Union(_) {
+        "&T\{type_.name()}"
+      } else {
+        type_.name()
       }
+      ArgMbtType::Other("Array[\{type_name}]")
+    }
 
-      // Js Promise
-      Promise(t) => {
-        let (type_, emits_) = go(
-          t, type_name, method_name, arg_name, type_registry, call_depth,
-        )
-        let type_name = if type_ is ArgMbtType::Union(_) {
-          "&T\{type_.name()}"
-        } else if type_.name() == "Unit" {
-          // Promise<undefined> → JsPromise[JsValue]: on wasm-gc, js_any_cast
-          // can't convert (ref extern) to Unit (i32). JsValue (externref) is safe.
-          "JsValue"
-        } else {
-          type_.name()
-        }
-        emits.push_iter(emits_.iter())
-        ArgMbtType::Other("JsPromise[\{type_name}]")
+    // Js Promise
+    Promise(t) => {
+      let (type_, emits_) = arg_mbt_type(
+        t, type_name, method_name, arg_name, type_registry, call_depth~,
+      )
+      let type_name = if type_ is ArgMbtType::Union(_) {
+        "&T\{type_.name()}"
+      } else if type_.name() == "Unit" {
+        // Promise<undefined> → JsPromise[JsValue]: on wasm-gc, js_any_cast
+        // can't convert (ref extern) to Unit (i32). JsValue (externref) is safe.
+        "JsValue"
+      } else {
+        type_.name()
       }
+      emits.push_iter(emits_.iter())
+      ArgMbtType::Other("JsPromise[\{type_name}]")
+    }
 
-      // Union type
-      Union(options) => {
-        let union_type_name = "\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}"
-        let union_type_name = if call_depth > 0 {
-          "\{union_type_name}\{call_depth+1}"
-        } else {
-          union_type_name
-        }
-        let union_trait_name = "T\{union_type_name}"
-        emits.push(EmitAux::UnionArgTrait(union_trait_name))
-        let mut has_undefined = false
-        let option_types : Array[ArgMbtType] = []
-        for option in options {
-          let is_undefined = option.type_ is Undefined
-          let (mbt_type, option_emits) = go(
-            option.type_,
-            type_name,
-            method_name,
-            arg_name,
-            type_registry,
-            call_depth + 1,
-          )
-          if mbt_type is ArgMbtType::Union(_) {
-            emits.push(EmitAux::External(mbt_type.name()))
-          }
-          let mbt_type = if is_undefined {
-            // Map 'undefined' type to 'JsUndefined' for union option
-            has_undefined = is_undefined
-            ArgMbtType::Other("JsUndefined")
-          } else {
-            mbt_type
-          }
-          option_types.push(mbt_type)
-          emits.push_iter(option_emits.iter())
-          let mbt_type = if option.type_ is Union(_) {
-            "&T\{mbt_type.name()}"
-          } else {
-            mbt_type.name()
-          }
-          emits.push(EmitAux::UnionArgTraitImpl(mbt_type, union_trait_name))
-        }
-        let union_type = UnionType::{
-          name: union_type_name,
-          has_undefined,
-          options: option_types,
-        }
-        ArgMbtType::Union(union_type)
+    // Union type
+    Union(options) => {
+      let union_type_name = "\{type_name}\{pascal_case(method_name)}\{pascal_case(arg_name)}"
+      let union_type_name = if call_depth > 0 {
+        "\{union_type_name}\{call_depth+1}"
+      } else {
+        union_type_name
       }
-
-      // Immutable/observable arrays → Array[T] (same as Sequence)
-      FrozenArray(t) | ObservableArray(t) => {
-        let (type_, emits_) = go(
-          t.type_,
+      let union_trait_name = "T\{union_type_name}"
+      emits.push(EmitAux::UnionArgTrait(union_trait_name))
+      let mut has_undefined = false
+      let option_types : Array[ArgMbtType] = []
+      for option in options {
+        let is_undefined = option.type_ is Undefined
+        let (mbt_type, option_emits) = arg_mbt_type(
+          option.type_,
           type_name,
           method_name,
           arg_name,
           type_registry,
-          call_depth,
+          call_depth=call_depth + 1,
         )
-        emits.push_iter(emits_.iter())
-        let type_name = if type_ is ArgMbtType::Union(_) {
-          "&T\{type_.name()}"
-        } else {
-          type_.name()
+        if mbt_type is ArgMbtType::Union(_) {
+          emits.push(EmitAux::External(mbt_type.name()))
         }
-        ArgMbtType::Other("Array[\{type_name}]")
+        let mbt_type = if is_undefined {
+          // Map 'undefined' type to 'JsUndefined' for union option
+          has_undefined = is_undefined
+          ArgMbtType::Other("JsUndefined")
+        } else {
+          mbt_type
+        }
+        option_types.push(mbt_type)
+        emits.push_iter(option_emits.iter())
+        let mbt_type = if option.type_ is Union(_) {
+          "&T\{mbt_type.name()}"
+        } else {
+          mbt_type.name()
+        }
+        emits.push(EmitAux::UnionArgTraitImpl(mbt_type, union_trait_name))
       }
-
-      // No MoonBit equivalent for these parameterized types
-      Record(_, _) => ArgMbtType::Other("JsValue")
-      AsyncSequence(_) => ArgMbtType::Other("JsValue")
-      Symbol => ArgMbtType::Other("JsValue") // WebIDL Symbol is not used in practice as yet c2025
+      let union_type = UnionType::{
+        name: union_type_name,
+        has_undefined,
+        options: option_types,
+      }
+      ArgMbtType::Union(union_type)
     }
-    (type_, emits)
-  }
 
-  go(idl_type, type_name, method_name, arg_name, type_registry, 0)
+    // Immutable/observable arrays → Array[T] (same as Sequence)
+    FrozenArray(t) | ObservableArray(t) => {
+      let (type_, emits_) = arg_mbt_type(
+        t.type_, type_name, method_name, arg_name, type_registry, call_depth~,
+      )
+      emits.push_iter(emits_.iter())
+      let type_name = if type_ is ArgMbtType::Union(_) {
+        "&T\{type_.name()}"
+      } else {
+        type_.name()
+      }
+      ArgMbtType::Other("Array[\{type_name}]")
+    }
+
+    // No MoonBit equivalent for these parameterized types
+    Record(_, _) => ArgMbtType::Other("JsValue")
+    AsyncSequence(_) => ArgMbtType::Other("JsValue")
+    Symbol => ArgMbtType::Other("JsValue") // WebIDL Symbol is not used in practice as yet c2025
+  }
+  (type_, emits)
 }
 
 ///|
