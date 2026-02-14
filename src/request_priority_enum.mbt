@@ -7,7 +7,19 @@ pub(all) enum RequestPriority {
   High
   Low
   Auto
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for RequestPriority with output(
+  self : RequestPriority,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    RequestPriority::High => logger.write_string("High")
+    RequestPriority::Low => logger.write_string("Low")
+    RequestPriority::Auto => logger.write_string("Auto")
+  }
+}
 
 ///|
 pub impl TJsValue for RequestPriority with to_js(self : RequestPriority) -> JsValue {
@@ -26,4 +38,25 @@ pub fn RequestPriority::from(value : String) -> RequestPriority? {
     "auto" => Some(RequestPriority::Auto)
     _ => None
   }
+}
+
+///|
+fn RequestPriority::from_unchecked(value : String) -> RequestPriority {
+  match value {
+    "high" => RequestPriority::High
+    "low" => RequestPriority::Low
+    "auto" => RequestPriority::Auto
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn RequestPriority::value(self : RequestPriority) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    RequestPriority::High => buf.write_string("high")
+    RequestPriority::Low => buf.write_string("low")
+    RequestPriority::Auto => buf.write_string("auto")
+  }
+  buf.to_string()
 }

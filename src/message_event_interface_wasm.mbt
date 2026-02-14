@@ -24,7 +24,12 @@ fn message_event_last_event_id_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn message_event_source_ffi(obj : JsValue) -> MessageEventSource = "webapi_MessageEvent" "get_source"
+fn message_event_source_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MessageEvent" "get_source"
+
+///|
+fn message_event_source_ffi(obj : JsValue) -> MessageEventSource {
+  message_event_source_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn message_event_ports_ffi(obj : JsValue) -> JsValue = "webapi_MessageEvent" "get_ports"

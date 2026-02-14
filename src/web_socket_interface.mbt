@@ -35,9 +35,15 @@ pub impl TWebSocketNewProtocols for Array[String] with to_js(
 ///|
 pub fn WebSocket::new(
   url : String,
-  protocols? : &TWebSocketNewProtocols = ([] : Array[String]),
+  protocols? : &TWebSocketNewProtocols,
 ) -> WebSocket {
-  web_socket_new_ffi(TJsValue::to_js(url), protocols.to_js())
+  web_socket_new_ffi(
+    TJsValue::to_js(url),
+    match protocols {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

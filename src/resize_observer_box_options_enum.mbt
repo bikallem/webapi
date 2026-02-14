@@ -7,7 +7,20 @@ pub(all) enum ResizeObserverBoxOptions {
   BorderBox
   ContentBox
   DevicePixelContentBox
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ResizeObserverBoxOptions with output(
+  self : ResizeObserverBoxOptions,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ResizeObserverBoxOptions::BorderBox => logger.write_string("BorderBox")
+    ResizeObserverBoxOptions::ContentBox => logger.write_string("ContentBox")
+    ResizeObserverBoxOptions::DevicePixelContentBox =>
+      logger.write_string("DevicePixelContentBox")
+  }
+}
 
 ///|
 pub impl TJsValue for ResizeObserverBoxOptions with to_js(
@@ -32,4 +45,31 @@ pub fn ResizeObserverBoxOptions::from(
       Some(ResizeObserverBoxOptions::DevicePixelContentBox)
     _ => None
   }
+}
+
+///|
+fn ResizeObserverBoxOptions::from_unchecked(
+  value : String,
+) -> ResizeObserverBoxOptions {
+  match value {
+    "border-box" => ResizeObserverBoxOptions::BorderBox
+    "content-box" => ResizeObserverBoxOptions::ContentBox
+    "device-pixel-content-box" =>
+      ResizeObserverBoxOptions::DevicePixelContentBox
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ResizeObserverBoxOptions::value(
+  self : ResizeObserverBoxOptions,
+) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ResizeObserverBoxOptions::BorderBox => buf.write_string("border-box")
+    ResizeObserverBoxOptions::ContentBox => buf.write_string("content-box")
+    ResizeObserverBoxOptions::DevicePixelContentBox =>
+      buf.write_string("device-pixel-content-box")
+  }
+  buf.to_string()
 }

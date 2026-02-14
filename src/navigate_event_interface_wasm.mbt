@@ -5,7 +5,14 @@ fn navigate_event_new_ffi(
 ) -> NavigateEvent = "webapi_NavigateEvent" "new"
 
 ///|
-fn navigate_event_navigation_type_ffi(obj : JsValue) -> NavigationType = "webapi_NavigateEvent" "get_navigationType"
+fn navigate_event_navigation_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigateEvent" "get_navigationType"
+
+///|
+fn navigate_event_navigation_type_ffi(obj : JsValue) -> NavigationType {
+  NavigationType::from_unchecked(
+    jsvalue_to_string(navigate_event_navigation_type_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn navigate_event_destination_ffi(obj : JsValue) -> NavigationDestination = "webapi_NavigateEvent" "get_destination"

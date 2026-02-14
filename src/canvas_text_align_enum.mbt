@@ -9,7 +9,21 @@ pub(all) enum CanvasTextAlign {
   Left
   Right
   Center
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CanvasTextAlign with output(
+  self : CanvasTextAlign,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    CanvasTextAlign::Start => logger.write_string("Start")
+    CanvasTextAlign::End => logger.write_string("End")
+    CanvasTextAlign::Left => logger.write_string("Left")
+    CanvasTextAlign::Right => logger.write_string("Right")
+    CanvasTextAlign::Center => logger.write_string("Center")
+  }
+}
 
 ///|
 pub impl TJsValue for CanvasTextAlign with to_js(self : CanvasTextAlign) -> JsValue {
@@ -32,4 +46,29 @@ pub fn CanvasTextAlign::from(value : String) -> CanvasTextAlign? {
     "center" => Some(CanvasTextAlign::Center)
     _ => None
   }
+}
+
+///|
+fn CanvasTextAlign::from_unchecked(value : String) -> CanvasTextAlign {
+  match value {
+    "start" => CanvasTextAlign::Start
+    "end" => CanvasTextAlign::End
+    "left" => CanvasTextAlign::Left
+    "right" => CanvasTextAlign::Right
+    "center" => CanvasTextAlign::Center
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CanvasTextAlign::value(self : CanvasTextAlign) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CanvasTextAlign::Start => buf.write_string("start")
+    CanvasTextAlign::End => buf.write_string("end")
+    CanvasTextAlign::Left => buf.write_string("left")
+    CanvasTextAlign::Right => buf.write_string("right")
+    CanvasTextAlign::Center => buf.write_string("center")
+  }
+  buf.to_string()
 }

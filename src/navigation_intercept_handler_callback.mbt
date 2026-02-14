@@ -14,7 +14,7 @@ pub impl TJsValue for NavigationInterceptHandler with to_js(
 
 ///|
 pub fn NavigationInterceptHandler::new(
-  callback : () -> JsPromise[Unit],
+  callback : () -> JsPromise[JsValue],
 ) -> NavigationInterceptHandler {
   navigation_intercept_handler_ffi(callback)
 }

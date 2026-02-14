@@ -1,11 +1,25 @@
 ///|
-fn shadow_root_mode_ffi(obj : JsValue) -> ShadowRootMode = "webapi_ShadowRoot" "get_mode"
+fn shadow_root_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_mode"
+
+///|
+fn shadow_root_mode_ffi(obj : JsValue) -> ShadowRootMode {
+  ShadowRootMode::from_unchecked(
+    jsvalue_to_string(shadow_root_mode_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn shadow_root_delegates_focus_ffi(obj : JsValue) -> Bool = "webapi_ShadowRoot" "get_delegatesFocus"
 
 ///|
-fn shadow_root_slot_assignment_ffi(obj : JsValue) -> SlotAssignmentMode = "webapi_ShadowRoot" "get_slotAssignment"
+fn shadow_root_slot_assignment_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_slotAssignment"
+
+///|
+fn shadow_root_slot_assignment_ffi(obj : JsValue) -> SlotAssignmentMode {
+  SlotAssignmentMode::from_unchecked(
+    jsvalue_to_string(shadow_root_slot_assignment_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn shadow_root_clonable_ffi(obj : JsValue) -> Bool = "webapi_ShadowRoot" "get_clonable"
@@ -17,7 +31,12 @@ fn shadow_root_serializable_ffi(obj : JsValue) -> Bool = "webapi_ShadowRoot" "ge
 fn shadow_root_host_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot" "get_host"
 
 ///|
-fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandler = "webapi_ShadowRoot" "get_onslotchange"
+fn shadow_root_onslotchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_onslotchange"
+
+///|
+fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandler {
+  shadow_root_onslotchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn shadow_root_set_onslotchange_ffi(
@@ -37,7 +56,12 @@ fn shadow_root_get_html_ffi(obj : JsValue, options : JsValue) -> String {
 }
 
 ///|
-fn shadow_root_inner_html_ffi(obj : JsValue) -> ShadowRootInnerHTML = "webapi_ShadowRoot" "get_innerHTML"
+fn shadow_root_inner_html_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_innerHTML"
+
+///|
+fn shadow_root_inner_html_ffi(obj : JsValue) -> ShadowRootInnerHTML {
+  shadow_root_inner_html_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn shadow_root_set_inner_html_ffi(obj : JsValue, inner_html : JsValue) -> Unit = "webapi_ShadowRoot" "set_innerHTML"

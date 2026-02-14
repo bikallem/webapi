@@ -6,7 +6,15 @@
 pub(all) enum WorkerType {
   Classic
   Module
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for WorkerType with output(self : WorkerType, logger : &Logger) -> Unit {
+  match self {
+    WorkerType::Classic => logger.write_string("Classic")
+    WorkerType::Module => logger.write_string("Module")
+  }
+}
 
 ///|
 pub impl TJsValue for WorkerType with to_js(self : WorkerType) -> JsValue {
@@ -23,4 +31,23 @@ pub fn WorkerType::from(value : String) -> WorkerType? {
     "module" => Some(WorkerType::Module)
     _ => None
   }
+}
+
+///|
+fn WorkerType::from_unchecked(value : String) -> WorkerType {
+  match value {
+    "classic" => WorkerType::Classic
+    "module" => WorkerType::Module
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn WorkerType::value(self : WorkerType) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    WorkerType::Classic => buf.write_string("classic")
+    WorkerType::Module => buf.write_string("module")
+  }
+  buf.to_string()
 }

@@ -6,7 +6,18 @@
 pub(all) enum ImageDataPixelFormat {
   RgbaUnorm8
   RgbaFloat16
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ImageDataPixelFormat with output(
+  self : ImageDataPixelFormat,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ImageDataPixelFormat::RgbaUnorm8 => logger.write_string("RgbaUnorm8")
+    ImageDataPixelFormat::RgbaFloat16 => logger.write_string("RgbaFloat16")
+  }
+}
 
 ///|
 pub impl TJsValue for ImageDataPixelFormat with to_js(
@@ -25,4 +36,23 @@ pub fn ImageDataPixelFormat::from(value : String) -> ImageDataPixelFormat? {
     "rgba-float16" => Some(ImageDataPixelFormat::RgbaFloat16)
     _ => None
   }
+}
+
+///|
+fn ImageDataPixelFormat::from_unchecked(value : String) -> ImageDataPixelFormat {
+  match value {
+    "rgba-unorm8" => ImageDataPixelFormat::RgbaUnorm8
+    "rgba-float16" => ImageDataPixelFormat::RgbaFloat16
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ImageDataPixelFormat::value(self : ImageDataPixelFormat) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ImageDataPixelFormat::RgbaUnorm8 => buf.write_string("rgba-unorm8")
+    ImageDataPixelFormat::RgbaFloat16 => buf.write_string("rgba-float16")
+  }
+  buf.to_string()
 }

@@ -1,5 +1,12 @@
 ///|
-fn text_track_kind_ffi(obj : JsValue) -> TextTrackKind = "webapi_TextTrack" "get_kind"
+fn text_track_kind_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_kind"
+
+///|
+fn text_track_kind_ffi(obj : JsValue) -> TextTrackKind {
+  TextTrackKind::from_unchecked(
+    jsvalue_to_string(text_track_kind_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn text_track_label_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_label"
@@ -38,7 +45,14 @@ fn text_track_in_band_metadata_track_dispatch_type_ffi(obj : JsValue) -> String 
 }
 
 ///|
-fn text_track_mode_ffi(obj : JsValue) -> TextTrackMode = "webapi_TextTrack" "get_mode"
+fn text_track_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_mode"
+
+///|
+fn text_track_mode_ffi(obj : JsValue) -> TextTrackMode {
+  TextTrackMode::from_unchecked(
+    jsvalue_to_string(text_track_mode_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn text_track_set_mode_ffi(obj : JsValue, mode : JsValue) -> Unit = "webapi_TextTrack" "set_mode"
@@ -56,7 +70,12 @@ fn text_track_add_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "webapi_TextTr
 fn text_track_remove_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "webapi_TextTrack" "removeCue"
 
 ///|
-fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandler = "webapi_TextTrack" "get_oncuechange"
+fn text_track_oncuechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_oncuechange"
+
+///|
+fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandler {
+  text_track_oncuechange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn text_track_set_oncuechange_ffi(obj : JsValue, oncuechange : JsValue) -> Unit = "webapi_TextTrack" "set_oncuechange"

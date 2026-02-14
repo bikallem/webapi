@@ -8,7 +8,20 @@ pub(all) enum NavigationType {
   Replace
   Reload
   Traverse
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for NavigationType with output(
+  self : NavigationType,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    NavigationType::Push => logger.write_string("Push")
+    NavigationType::Replace => logger.write_string("Replace")
+    NavigationType::Reload => logger.write_string("Reload")
+    NavigationType::Traverse => logger.write_string("Traverse")
+  }
+}
 
 ///|
 pub impl TJsValue for NavigationType with to_js(self : NavigationType) -> JsValue {
@@ -29,4 +42,27 @@ pub fn NavigationType::from(value : String) -> NavigationType? {
     "traverse" => Some(NavigationType::Traverse)
     _ => None
   }
+}
+
+///|
+fn NavigationType::from_unchecked(value : String) -> NavigationType {
+  match value {
+    "push" => NavigationType::Push
+    "replace" => NavigationType::Replace
+    "reload" => NavigationType::Reload
+    "traverse" => NavigationType::Traverse
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn NavigationType::value(self : NavigationType) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    NavigationType::Push => buf.write_string("push")
+    NavigationType::Replace => buf.write_string("replace")
+    NavigationType::Reload => buf.write_string("reload")
+    NavigationType::Traverse => buf.write_string("traverse")
+  }
+  buf.to_string()
 }

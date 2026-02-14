@@ -8,7 +8,17 @@ pub(all) enum CSSBoxType {
   Border
   Padding
   Content
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CSSBoxType with output(self : CSSBoxType, logger : &Logger) -> Unit {
+  match self {
+    CSSBoxType::Margin => logger.write_string("Margin")
+    CSSBoxType::Border => logger.write_string("Border")
+    CSSBoxType::Padding => logger.write_string("Padding")
+    CSSBoxType::Content => logger.write_string("Content")
+  }
+}
 
 ///|
 pub impl TJsValue for CSSBoxType with to_js(self : CSSBoxType) -> JsValue {
@@ -29,4 +39,27 @@ pub fn CSSBoxType::from(value : String) -> CSSBoxType? {
     "content" => Some(CSSBoxType::Content)
     _ => None
   }
+}
+
+///|
+fn CSSBoxType::from_unchecked(value : String) -> CSSBoxType {
+  match value {
+    "margin" => CSSBoxType::Margin
+    "border" => CSSBoxType::Border
+    "padding" => CSSBoxType::Padding
+    "content" => CSSBoxType::Content
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CSSBoxType::value(self : CSSBoxType) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CSSBoxType::Margin => buf.write_string("margin")
+    CSSBoxType::Border => buf.write_string("border")
+    CSSBoxType::Padding => buf.write_string("padding")
+    CSSBoxType::Content => buf.write_string("content")
+  }
+  buf.to_string()
 }

@@ -1,10 +1,5 @@
 ///|
-fn performance_now_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Performance" "now"
-
-///|
-fn performance_now_ffi(obj : JsValue) -> DOMHighResTimeStamp {
-  performance_now_ffi_wasm(obj).unsafe_cast()
-}
+fn performance_now_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_Performance" "now"
 
 ///|
 fn performance_time_origin_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_Performance" "get_timeOrigin"

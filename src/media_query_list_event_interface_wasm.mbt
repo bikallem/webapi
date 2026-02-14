@@ -5,7 +5,12 @@ fn media_query_list_event_new_ffi(
 ) -> MediaQueryListEvent = "webapi_MediaQueryListEvent" "new"
 
 ///|
-fn media_query_list_event_media_ffi(obj : JsValue) -> CSSOMString = "webapi_MediaQueryListEvent" "get_media"
+fn media_query_list_event_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaQueryListEvent" "get_media"
+
+///|
+fn media_query_list_event_media_ffi(obj : JsValue) -> CSSOMString {
+  media_query_list_event_media_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn media_query_list_event_matches_ffi(obj : JsValue) -> Bool = "webapi_MediaQueryListEvent" "get_matches"

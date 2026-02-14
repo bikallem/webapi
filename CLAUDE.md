@@ -181,15 +181,12 @@ Specs are enabled via the `core_specs` list in `webapi_gen/config.toml`. To add 
 
 ## wasm-gc Known Issues
 
-The following examples are js-only due to wasm-gc compile errors unrelated to callbacks:
+The following example is js-only due to a wasm-gc compile error:
 
 | Example | Error | Root Cause |
 |---------|-------|------------|
-| `clipboard-apis` | `call_ref[1] expected type i32, found (ref extern)` | `JsPromise.then` with `Unit` resolved value — Unit is i32 on wasm-gc but JsAny is (ref extern) |
 | `intersection-observer` | `expected (ref 5), got externref` | Array GC type vs externref mismatch in callback conversion |
-| `notifications` | `expected (ref extern), got externref` | Enum-to-GC-type conversion — MoonBit enums are GC types, not externref |
-| `requestidlecallback` | `expected f64, got externref` | `JsPromise`/callback with `Double` (f64) resolved value |
-| `screen-orientation` | `expected (ref extern), got externref` | Interface method return type (ref extern) vs externref |
-| `websockets` | `expected (ref extern), found externref` | EventHandlerNonNull externref return mismatch |
 
-These are all variants of the same underlying issue: the MoonBit wasm-gc backend uses different reference types (`externref`, `(ref extern)`, GC types) for `#external` types, `String`, and MoonBit enums, and `%identity` casts cannot convert between them.
+This needs separate investigation — it likely involves `IntersectionObserverRoot` (#external union type) or callback funcref type mismatches.
+
+**JsPromise limitation**: `JsPromise::then` uses `js_any_cast` (`%identity`) to convert resolved values from `JsAny` (ref extern) to `T`. This only works for externref-compatible T (interfaces, JsValue, String). It fails for wasm value types (Unit=i32, Double=f64) and GC types (enums, Arrays). `Promise<undefined>` is mapped to `JsPromise[JsValue]` as a workaround. A general fix needs a `FromJsAny` trait with per-type conversion impls for `JsPromise[EnumType]`, `JsPromise[Array[T]]`, `JsPromise[Double]`, etc.

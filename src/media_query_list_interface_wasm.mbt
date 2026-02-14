@@ -1,5 +1,10 @@
 ///|
-fn media_query_list_media_ffi(obj : JsValue) -> CSSOMString = "webapi_MediaQueryList" "get_media"
+fn media_query_list_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaQueryList" "get_media"
+
+///|
+fn media_query_list_media_ffi(obj : JsValue) -> CSSOMString {
+  media_query_list_media_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn media_query_list_matches_ffi(obj : JsValue) -> Bool = "webapi_MediaQueryList" "get_matches"
@@ -14,7 +19,12 @@ fn media_query_list_remove_listener_ffi(
 ) -> Unit = "webapi_MediaQueryList" "removeListener"
 
 ///|
-fn media_query_list_onchange_ffi(obj : JsValue) -> EventHandler = "webapi_MediaQueryList" "get_onchange"
+fn media_query_list_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaQueryList" "get_onchange"
+
+///|
+fn media_query_list_onchange_ffi(obj : JsValue) -> EventHandler {
+  media_query_list_onchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn media_query_list_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_MediaQueryList" "set_onchange"

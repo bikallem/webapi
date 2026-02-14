@@ -44,4 +44,9 @@ fn touch_altitude_angle_ffi(obj : JsValue) -> Float = "webapi_Touch" "get_altitu
 fn touch_azimuth_angle_ffi(obj : JsValue) -> Float = "webapi_Touch" "get_azimuthAngle"
 
 ///|
-fn touch_touch_type_ffi(obj : JsValue) -> TouchType = "webapi_Touch" "get_touchType"
+fn touch_touch_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Touch" "get_touchType"
+
+///|
+fn touch_touch_type_ffi(obj : JsValue) -> TouchType {
+  TouchType::from_unchecked(jsvalue_to_string(touch_touch_type_ffi_wasm(obj)))
+}

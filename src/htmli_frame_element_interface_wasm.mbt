@@ -13,7 +13,12 @@ fn htmli_frame_element_src_ffi(obj : JsValue) -> String {
 fn htmli_frame_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLIFrameElement" "set_src"
 
 ///|
-fn htmli_frame_element_srcdoc_ffi(obj : JsValue) -> HTMLIFrameElementSrcdoc = "webapi_HTMLIFrameElement" "get_srcdoc"
+fn htmli_frame_element_srcdoc_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLIFrameElement" "get_srcdoc"
+
+///|
+fn htmli_frame_element_srcdoc_ffi(obj : JsValue) -> HTMLIFrameElementSrcdoc {
+  htmli_frame_element_srcdoc_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn htmli_frame_element_set_srcdoc_ffi(obj : JsValue, srcdoc : JsValue) -> Unit = "webapi_HTMLIFrameElement" "set_srcdoc"
@@ -106,7 +111,12 @@ fn htmli_frame_element_set_loading_ffi(
 fn htmli_frame_element_content_document_ffi(obj : JsValue) -> Document = "webapi_HTMLIFrameElement" "get_contentDocument"
 
 ///|
-fn htmli_frame_element_content_window_ffi(obj : JsValue) -> WindowProxy = "webapi_HTMLIFrameElement" "get_contentWindow"
+fn htmli_frame_element_content_window_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLIFrameElement" "get_contentWindow"
+
+///|
+fn htmli_frame_element_content_window_ffi(obj : JsValue) -> WindowProxy {
+  htmli_frame_element_content_window_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn htmli_frame_element_get_svg_document_ffi(obj : JsValue) -> JsValue = "webapi_HTMLIFrameElement" "getSVGDocument"

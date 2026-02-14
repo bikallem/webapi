@@ -37,13 +37,23 @@ fn text_track_cue_set_pause_on_exit_ffi(
 ) -> Unit = "webapi_TextTrackCue" "set_pauseOnExit"
 
 ///|
-fn text_track_cue_onenter_ffi(obj : JsValue) -> EventHandler = "webapi_TextTrackCue" "get_onenter"
+fn text_track_cue_onenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrackCue" "get_onenter"
+
+///|
+fn text_track_cue_onenter_ffi(obj : JsValue) -> EventHandler {
+  text_track_cue_onenter_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn text_track_cue_set_onenter_ffi(obj : JsValue, onenter : JsValue) -> Unit = "webapi_TextTrackCue" "set_onenter"
 
 ///|
-fn text_track_cue_onexit_ffi(obj : JsValue) -> EventHandler = "webapi_TextTrackCue" "get_onexit"
+fn text_track_cue_onexit_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrackCue" "get_onexit"
+
+///|
+fn text_track_cue_onexit_ffi(obj : JsValue) -> EventHandler {
+  text_track_cue_onexit_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn text_track_cue_set_onexit_ffi(obj : JsValue, onexit : JsValue) -> Unit = "webapi_TextTrackCue" "set_onexit"

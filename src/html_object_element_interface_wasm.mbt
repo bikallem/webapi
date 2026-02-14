@@ -63,7 +63,12 @@ fn html_object_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit =
 fn html_object_element_content_document_ffi(obj : JsValue) -> Document = "webapi_HTMLObjectElement" "get_contentDocument"
 
 ///|
-fn html_object_element_content_window_ffi(obj : JsValue) -> WindowProxy = "webapi_HTMLObjectElement" "get_contentWindow"
+fn html_object_element_content_window_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLObjectElement" "get_contentWindow"
+
+///|
+fn html_object_element_content_window_ffi(obj : JsValue) -> WindowProxy {
+  html_object_element_content_window_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn html_object_element_get_svg_document_ffi(obj : JsValue) -> JsValue = "webapi_HTMLObjectElement" "getSVGDocument"

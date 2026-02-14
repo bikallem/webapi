@@ -113,7 +113,12 @@ fn svgsvg_element_preserve_aspect_ratio_ffi(
 ) -> SVGAnimatedPreserveAspectRatio = "webapi_SVGSVGElement" "get_preserveAspectRatio"
 
 ///|
-fn svgsvg_element_onafterprint_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onafterprint"
+fn svgsvg_element_onafterprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onafterprint"
+
+///|
+fn svgsvg_element_onafterprint_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onafterprint_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onafterprint_ffi(
@@ -122,7 +127,12 @@ fn svgsvg_element_set_onafterprint_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onafterprint"
 
 ///|
-fn svgsvg_element_onbeforeprint_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onbeforeprint"
+fn svgsvg_element_onbeforeprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onbeforeprint"
+
+///|
+fn svgsvg_element_onbeforeprint_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onbeforeprint_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onbeforeprint_ffi(
@@ -131,9 +141,14 @@ fn svgsvg_element_set_onbeforeprint_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onbeforeprint"
 
 ///|
+fn svgsvg_element_onbeforeunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onbeforeunload"
+
+///|
 fn svgsvg_element_onbeforeunload_ffi(
   obj : JsValue,
-) -> OnBeforeUnloadEventHandler = "webapi_SVGSVGElement" "get_onbeforeunload"
+) -> OnBeforeUnloadEventHandler {
+  svgsvg_element_onbeforeunload_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onbeforeunload_ffi(
@@ -142,7 +157,12 @@ fn svgsvg_element_set_onbeforeunload_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onbeforeunload"
 
 ///|
-fn svgsvg_element_onhashchange_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onhashchange"
+fn svgsvg_element_onhashchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onhashchange"
+
+///|
+fn svgsvg_element_onhashchange_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onhashchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onhashchange_ffi(
@@ -151,7 +171,12 @@ fn svgsvg_element_set_onhashchange_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onhashchange"
 
 ///|
-fn svgsvg_element_onlanguagechange_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onlanguagechange"
+fn svgsvg_element_onlanguagechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onlanguagechange"
+
+///|
+fn svgsvg_element_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onlanguagechange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onlanguagechange_ffi(
@@ -160,13 +185,23 @@ fn svgsvg_element_set_onlanguagechange_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onlanguagechange"
 
 ///|
-fn svgsvg_element_onmessage_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onmessage"
+fn svgsvg_element_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onmessage"
+
+///|
+fn svgsvg_element_onmessage_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onmessage_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onmessage"
 
 ///|
-fn svgsvg_element_onmessageerror_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onmessageerror"
+fn svgsvg_element_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onmessageerror"
+
+///|
+fn svgsvg_element_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onmessageerror_ffi(
@@ -175,19 +210,34 @@ fn svgsvg_element_set_onmessageerror_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onmessageerror"
 
 ///|
-fn svgsvg_element_onoffline_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onoffline"
+fn svgsvg_element_onoffline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onoffline"
+
+///|
+fn svgsvg_element_onoffline_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onoffline_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onoffline_ffi(obj : JsValue, onoffline : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onoffline"
 
 ///|
-fn svgsvg_element_ononline_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_ononline"
+fn svgsvg_element_ononline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_ononline"
+
+///|
+fn svgsvg_element_ononline_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_ononline_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_ononline_ffi(obj : JsValue, ononline : JsValue) -> Unit = "webapi_SVGSVGElement" "set_ononline"
 
 ///|
-fn svgsvg_element_onpagehide_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onpagehide"
+fn svgsvg_element_onpagehide_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpagehide"
+
+///|
+fn svgsvg_element_onpagehide_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpagehide_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onpagehide_ffi(
@@ -196,7 +246,12 @@ fn svgsvg_element_set_onpagehide_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onpagehide"
 
 ///|
-fn svgsvg_element_onpagereveal_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onpagereveal"
+fn svgsvg_element_onpagereveal_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpagereveal"
+
+///|
+fn svgsvg_element_onpagereveal_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpagereveal_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onpagereveal_ffi(
@@ -205,7 +260,12 @@ fn svgsvg_element_set_onpagereveal_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onpagereveal"
 
 ///|
-fn svgsvg_element_onpageshow_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onpageshow"
+fn svgsvg_element_onpageshow_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpageshow"
+
+///|
+fn svgsvg_element_onpageshow_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpageshow_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onpageshow_ffi(
@@ -214,7 +274,12 @@ fn svgsvg_element_set_onpageshow_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onpageshow"
 
 ///|
-fn svgsvg_element_onpageswap_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onpageswap"
+fn svgsvg_element_onpageswap_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpageswap"
+
+///|
+fn svgsvg_element_onpageswap_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpageswap_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onpageswap_ffi(
@@ -223,7 +288,12 @@ fn svgsvg_element_set_onpageswap_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onpageswap"
 
 ///|
-fn svgsvg_element_onpopstate_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onpopstate"
+fn svgsvg_element_onpopstate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpopstate"
+
+///|
+fn svgsvg_element_onpopstate_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpopstate_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onpopstate_ffi(
@@ -232,7 +302,12 @@ fn svgsvg_element_set_onpopstate_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onpopstate"
 
 ///|
-fn svgsvg_element_onrejectionhandled_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onrejectionhandled"
+fn svgsvg_element_onrejectionhandled_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onrejectionhandled"
+
+///|
+fn svgsvg_element_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onrejectionhandled_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onrejectionhandled_ffi(
@@ -241,13 +316,23 @@ fn svgsvg_element_set_onrejectionhandled_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onrejectionhandled"
 
 ///|
-fn svgsvg_element_onstorage_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onstorage"
+fn svgsvg_element_onstorage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onstorage"
+
+///|
+fn svgsvg_element_onstorage_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onstorage_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onstorage_ffi(obj : JsValue, onstorage : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onstorage"
 
 ///|
-fn svgsvg_element_onunhandledrejection_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onunhandledrejection"
+fn svgsvg_element_onunhandledrejection_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onunhandledrejection"
+
+///|
+fn svgsvg_element_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onunhandledrejection_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onunhandledrejection_ffi(
@@ -256,7 +341,12 @@ fn svgsvg_element_set_onunhandledrejection_ffi(
 ) -> Unit = "webapi_SVGSVGElement" "set_onunhandledrejection"
 
 ///|
-fn svgsvg_element_onunload_ffi(obj : JsValue) -> EventHandler = "webapi_SVGSVGElement" "get_onunload"
+fn svgsvg_element_onunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onunload"
+
+///|
+fn svgsvg_element_onunload_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onunload_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svgsvg_element_set_onunload_ffi(obj : JsValue, onunload : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onunload"

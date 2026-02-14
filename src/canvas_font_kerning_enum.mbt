@@ -7,7 +7,19 @@ pub(all) enum CanvasFontKerning {
   Auto
   Normal
   None
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CanvasFontKerning with output(
+  self : CanvasFontKerning,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    CanvasFontKerning::Auto => logger.write_string("Auto")
+    CanvasFontKerning::Normal => logger.write_string("Normal")
+    CanvasFontKerning::None => logger.write_string("None")
+  }
+}
 
 ///|
 pub impl TJsValue for CanvasFontKerning with to_js(self : CanvasFontKerning) -> JsValue {
@@ -26,4 +38,25 @@ pub fn CanvasFontKerning::from(value : String) -> CanvasFontKerning? {
     "none" => Some(CanvasFontKerning::None)
     _ => None
   }
+}
+
+///|
+fn CanvasFontKerning::from_unchecked(value : String) -> CanvasFontKerning {
+  match value {
+    "auto" => CanvasFontKerning::Auto
+    "normal" => CanvasFontKerning::Normal
+    "none" => CanvasFontKerning::None
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CanvasFontKerning::value(self : CanvasFontKerning) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CanvasFontKerning::Auto => buf.write_string("auto")
+    CanvasFontKerning::Normal => buf.write_string("normal")
+    CanvasFontKerning::None => buf.write_string("none")
+  }
+  buf.to_string()
 }

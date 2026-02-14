@@ -8,7 +8,22 @@ pub(all) enum CanvasTextRendering {
   OptimizeSpeed
   OptimizeLegibility
   GeometricPrecision
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CanvasTextRendering with output(
+  self : CanvasTextRendering,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    CanvasTextRendering::Auto => logger.write_string("Auto")
+    CanvasTextRendering::OptimizeSpeed => logger.write_string("OptimizeSpeed")
+    CanvasTextRendering::OptimizeLegibility =>
+      logger.write_string("OptimizeLegibility")
+    CanvasTextRendering::GeometricPrecision =>
+      logger.write_string("GeometricPrecision")
+  }
+}
 
 ///|
 pub impl TJsValue for CanvasTextRendering with to_js(self : CanvasTextRendering) -> JsValue {
@@ -31,4 +46,29 @@ pub fn CanvasTextRendering::from(value : String) -> CanvasTextRendering? {
     "geometricPrecision" => Some(CanvasTextRendering::GeometricPrecision)
     _ => None
   }
+}
+
+///|
+fn CanvasTextRendering::from_unchecked(value : String) -> CanvasTextRendering {
+  match value {
+    "auto" => CanvasTextRendering::Auto
+    "optimizeSpeed" => CanvasTextRendering::OptimizeSpeed
+    "optimizeLegibility" => CanvasTextRendering::OptimizeLegibility
+    "geometricPrecision" => CanvasTextRendering::GeometricPrecision
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CanvasTextRendering::value(self : CanvasTextRendering) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CanvasTextRendering::Auto => buf.write_string("auto")
+    CanvasTextRendering::OptimizeSpeed => buf.write_string("optimizeSpeed")
+    CanvasTextRendering::OptimizeLegibility =>
+      buf.write_string("optimizeLegibility")
+    CanvasTextRendering::GeometricPrecision =>
+      buf.write_string("geometricPrecision")
+  }
+  buf.to_string()
 }

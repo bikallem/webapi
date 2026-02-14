@@ -11,13 +11,23 @@ fn close_watcher_close_ffi(obj : JsValue) -> Unit = "webapi_CloseWatcher" "close
 fn close_watcher_destroy_ffi(obj : JsValue) -> Unit = "webapi_CloseWatcher" "destroy"
 
 ///|
-fn close_watcher_oncancel_ffi(obj : JsValue) -> EventHandler = "webapi_CloseWatcher" "get_oncancel"
+fn close_watcher_oncancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CloseWatcher" "get_oncancel"
+
+///|
+fn close_watcher_oncancel_ffi(obj : JsValue) -> EventHandler {
+  close_watcher_oncancel_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn close_watcher_set_oncancel_ffi(obj : JsValue, oncancel : JsValue) -> Unit = "webapi_CloseWatcher" "set_oncancel"
 
 ///|
-fn close_watcher_onclose_ffi(obj : JsValue) -> EventHandler = "webapi_CloseWatcher" "get_onclose"
+fn close_watcher_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CloseWatcher" "get_onclose"
+
+///|
+fn close_watcher_onclose_ffi(obj : JsValue) -> EventHandler {
+  close_watcher_onclose_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn close_watcher_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_CloseWatcher" "set_onclose"

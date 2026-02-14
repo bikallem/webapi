@@ -78,7 +78,12 @@ fn html_frame_element_set_no_resize_ffi(
 fn html_frame_element_content_document_ffi(obj : JsValue) -> Document = "webapi_HTMLFrameElement" "get_contentDocument"
 
 ///|
-fn html_frame_element_content_window_ffi(obj : JsValue) -> WindowProxy = "webapi_HTMLFrameElement" "get_contentWindow"
+fn html_frame_element_content_window_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_contentWindow"
+
+///|
+fn html_frame_element_content_window_ffi(obj : JsValue) -> WindowProxy {
+  html_frame_element_content_window_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn html_frame_element_margin_height_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_marginHeight"

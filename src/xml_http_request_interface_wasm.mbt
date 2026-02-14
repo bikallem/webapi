@@ -2,7 +2,12 @@
 fn xml_http_request_new_ffi() -> XMLHttpRequest = "webapi_XMLHttpRequest" "new"
 
 ///|
-fn xml_http_request_onreadystatechange_ffi(obj : JsValue) -> EventHandler = "webapi_XMLHttpRequest" "get_onreadystatechange"
+fn xml_http_request_onreadystatechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_onreadystatechange"
+
+///|
+fn xml_http_request_onreadystatechange_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_onreadystatechange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn xml_http_request_set_onreadystatechange_ffi(
@@ -101,9 +106,16 @@ fn xml_http_request_override_mime_type_ffi(
 ) -> Unit = "webapi_XMLHttpRequest" "overrideMimeType"
 
 ///|
+fn xml_http_request_response_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_responseType"
+
+///|
 fn xml_http_request_response_type_ffi(
   obj : JsValue,
-) -> XMLHttpRequestResponseType = "webapi_XMLHttpRequest" "get_responseType"
+) -> XMLHttpRequestResponseType {
+  XMLHttpRequestResponseType::from_unchecked(
+    jsvalue_to_string(xml_http_request_response_type_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn xml_http_request_set_response_type_ffi(

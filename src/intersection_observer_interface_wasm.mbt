@@ -5,7 +5,12 @@ fn intersection_observer_new_ffi(
 ) -> IntersectionObserver = "webapi_IntersectionObserver" "new"
 
 ///|
-fn intersection_observer_root_ffi(obj : JsValue) -> IntersectionObserverRoot = "webapi_IntersectionObserver" "get_root"
+fn intersection_observer_root_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IntersectionObserver" "get_root"
+
+///|
+fn intersection_observer_root_ffi(obj : JsValue) -> IntersectionObserverRoot {
+  intersection_observer_root_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn intersection_observer_root_margin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IntersectionObserver" "get_rootMargin"

@@ -6,7 +6,18 @@
 pub(all) enum ColorSpaceConversion {
   None
   Default
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ColorSpaceConversion with output(
+  self : ColorSpaceConversion,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ColorSpaceConversion::None => logger.write_string("None")
+    ColorSpaceConversion::Default => logger.write_string("Default")
+  }
+}
 
 ///|
 pub impl TJsValue for ColorSpaceConversion with to_js(
@@ -25,4 +36,23 @@ pub fn ColorSpaceConversion::from(value : String) -> ColorSpaceConversion? {
     "default" => Some(ColorSpaceConversion::Default)
     _ => None
   }
+}
+
+///|
+fn ColorSpaceConversion::from_unchecked(value : String) -> ColorSpaceConversion {
+  match value {
+    "none" => ColorSpaceConversion::None
+    "default" => ColorSpaceConversion::Default
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ColorSpaceConversion::value(self : ColorSpaceConversion) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ColorSpaceConversion::None => buf.write_string("none")
+    ColorSpaceConversion::Default => buf.write_string("default")
+  }
+  buf.to_string()
 }

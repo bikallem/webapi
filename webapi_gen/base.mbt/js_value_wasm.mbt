@@ -19,3 +19,10 @@ fn jsvalue_as_nullable_string(v : JsValue) -> String? = "%identity"
 fn jsvalue_to_string(v : JsValue) -> String {
   jsvalue_as_nullable_string(v).unwrap()
 }
+
+///|
+/// Convert a JsValue containing a JavaScript string to a MoonBit String.
+/// On wasm-gc this performs the necessary externref → (ref extern) conversion.
+pub fn JsValue::as_string(self : JsValue) -> String {
+  jsvalue_to_string(self)
+}

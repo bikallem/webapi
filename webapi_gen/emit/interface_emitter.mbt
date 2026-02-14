@@ -44,6 +44,17 @@ fn method_args(
     // Push any additional emits needed for the arg type, e.g. union arg traits
     emits.push_iter(arg_emits.iter())
     let default_value = default_value.map(dv => mbt_default_value(dv, mbt_type))
+    // On wasm-gc, primitives (Bool=i32, Double=f64, etc.) and enums (i32) can't
+    // use JsValue::null() (externref) as a default value. Strip the default so
+    // the field becomes a plain optional; opt_to_js sends undefined when absent.
+    let default_value = match (default_value, mbt_type) {
+      (Some("JsValue::null()"), Primitive(_) | Enum(_)) => None
+      // On wasm-gc, Array literals (GC types) can't be used as default values for
+      // trait-typed params — the compiler creates a thunk returning externref but
+      // captures a GC struct. Strip the default; opt_to_js sends undefined when absent.
+      (Some(dv), Union(_)) if dv.has_prefix("([] :") => None
+      _ => default_value
+    }
     let union_typedef_arg = is_union_typedef_arg(type_, type_registry)
     let mbt_type = match mbt_type {
       @type_mapping.ArgMbtType::Interface(name) =>
@@ -347,12 +358,16 @@ fn emit_attribute(
       js_name,
       original_name: attr.name,
       return_type: attr_type.name(),
+      is_enum_type: attr_type is Enum(_),
+      is_valid_wasm_stub: is_wasm_valid_stub_type(attr_type),
     })
   } else {
     methods.push(AttributeGetMethodEmit::{
       interface_name,
       original_name: attr.name,
       return_type: attr_type.name(),
+      is_enum_type: attr_type is Enum(_),
+      is_valid_wasm_stub: is_wasm_valid_stub_type(attr_type),
     })
 
     // Set Attribute method if specified (only for non-static)

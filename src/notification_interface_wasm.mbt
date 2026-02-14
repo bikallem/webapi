@@ -2,7 +2,14 @@
 fn notification_new_ffi(title : JsValue, options : JsValue) -> Notification = "webapi_Notification" "new"
 
 ///|
-fn notification_permission_ffi() -> NotificationPermission = "webapi_Notification" "get_permission"
+fn notification_permission_ffi_wasm() -> JsValue = "webapi_Notification" "get_permission"
+
+///|
+fn notification_permission_ffi() -> NotificationPermission {
+  NotificationPermission::from_unchecked(
+    jsvalue_to_string(notification_permission_ffi_wasm()),
+  )
+}
 
 ///|
 fn notification_request_permission_ffi_wasm(
@@ -20,25 +27,45 @@ fn notification_request_permission_ffi(
 fn notification_max_actions_ffi() -> UInt = "webapi_Notification" "get_maxActions"
 
 ///|
-fn notification_onclick_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onclick"
+fn notification_onclick_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Notification" "get_onclick"
+
+///|
+fn notification_onclick_ffi(obj : JsValue) -> EventHandler {
+  notification_onclick_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn notification_set_onclick_ffi(obj : JsValue, onclick : JsValue) -> Unit = "webapi_Notification" "set_onclick"
 
 ///|
-fn notification_onshow_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onshow"
+fn notification_onshow_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Notification" "get_onshow"
+
+///|
+fn notification_onshow_ffi(obj : JsValue) -> EventHandler {
+  notification_onshow_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn notification_set_onshow_ffi(obj : JsValue, onshow : JsValue) -> Unit = "webapi_Notification" "set_onshow"
 
 ///|
-fn notification_onerror_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onerror"
+fn notification_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Notification" "get_onerror"
+
+///|
+fn notification_onerror_ffi(obj : JsValue) -> EventHandler {
+  notification_onerror_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn notification_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_Notification" "set_onerror"
 
 ///|
-fn notification_onclose_ffi(obj : JsValue) -> EventHandler = "webapi_Notification" "get_onclose"
+fn notification_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Notification" "get_onclose"
+
+///|
+fn notification_onclose_ffi(obj : JsValue) -> EventHandler {
+  notification_onclose_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn notification_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_Notification" "set_onclose"
@@ -52,7 +79,14 @@ fn notification_title_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn notification_dir_ffi(obj : JsValue) -> NotificationDirection = "webapi_Notification" "get_dir"
+fn notification_dir_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Notification" "get_dir"
+
+///|
+fn notification_dir_ffi(obj : JsValue) -> NotificationDirection {
+  NotificationDirection::from_unchecked(
+    jsvalue_to_string(notification_dir_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn notification_lang_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Notification" "get_lang"

@@ -7,7 +7,19 @@ pub(all) enum FullscreenNavigationUI {
   Auto
   Show
   Hide
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for FullscreenNavigationUI with output(
+  self : FullscreenNavigationUI,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    FullscreenNavigationUI::Auto => logger.write_string("Auto")
+    FullscreenNavigationUI::Show => logger.write_string("Show")
+    FullscreenNavigationUI::Hide => logger.write_string("Hide")
+  }
+}
 
 ///|
 pub impl TJsValue for FullscreenNavigationUI with to_js(
@@ -28,4 +40,27 @@ pub fn FullscreenNavigationUI::from(value : String) -> FullscreenNavigationUI? {
     "hide" => Some(FullscreenNavigationUI::Hide)
     _ => None
   }
+}
+
+///|
+fn FullscreenNavigationUI::from_unchecked(
+  value : String,
+) -> FullscreenNavigationUI {
+  match value {
+    "auto" => FullscreenNavigationUI::Auto
+    "show" => FullscreenNavigationUI::Show
+    "hide" => FullscreenNavigationUI::Hide
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn FullscreenNavigationUI::value(self : FullscreenNavigationUI) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    FullscreenNavigationUI::Auto => buf.write_string("auto")
+    FullscreenNavigationUI::Show => buf.write_string("show")
+    FullscreenNavigationUI::Hide => buf.write_string("hide")
+  }
+  buf.to_string()
 }

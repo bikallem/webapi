@@ -871,7 +871,7 @@ fn document_fullscreen_ffi(obj : JsValue) -> Bool {
 extern "js" fn document_exit_fullscreen_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.exitFullscreen()"
 
 ///|
-fn document_exit_fullscreen_ffi(obj : JsValue) -> JsPromise[Unit] {
+fn document_exit_fullscreen_ffi(obj : JsValue) -> JsPromise[JsValue] {
   document_exit_fullscreen_ffi_js(obj).unsafe_cast()
 }
 

@@ -99,8 +99,14 @@ fn needs_js_quoting(name : String) -> Bool {
 
 ///|
 /// Emit JS getter for an attribute
-fn emit_js_getter(attr_name : String) -> String {
-  if needs_js_quoting(attr_name) {
+fn emit_js_getter(
+  attr_name : String,
+  is_static~ : Bool = false,
+  interface_name~ : String = "",
+) -> String {
+  if is_static {
+    "    get_\{attr_name}: () => \{interface_name}.\{attr_name}"
+  } else if needs_js_quoting(attr_name) {
     let q = "\""
     "    \{q}get_\{attr_name}\{q}: (obj) => obj[\{q}\{attr_name}\{q}]"
   } else {
@@ -110,8 +116,14 @@ fn emit_js_getter(attr_name : String) -> String {
 
 ///|
 /// Emit JS setter for an attribute
-fn emit_js_setter(attr_name : String) -> String {
-  if needs_js_quoting(attr_name) {
+fn emit_js_setter(
+  attr_name : String,
+  is_static~ : Bool = false,
+  interface_name~ : String = "",
+) -> String {
+  if is_static {
+    "    set_\{attr_name}: (value) => { \{interface_name}.\{attr_name} = value; }"
+  } else if needs_js_quoting(attr_name) {
     let q = "\""
     "    \{q}set_\{attr_name}\{q}: (obj, value) => { obj[\{q}\{attr_name}\{q}] = value; }"
   } else {
@@ -128,6 +140,7 @@ fn emit_js_method(
   original_name : String,
   args : Array[@parser.Argument],
   is_static : Bool,
+  interface_name~ : String = "",
 ) -> String {
   // Build argument names list (params without spread, call_args with spread for variadic)
   let arg_names : Array[String] = []
@@ -143,10 +156,10 @@ fn emit_js_method(
   }
   let comma_sep = ", "
   if is_static {
-    // Static method: no obj parameter
+    // Static method: no obj parameter, call on the class directly
     let params = arg_names.join(comma_sep)
     let call_args = call_parts.join(comma_sep)
-    "    \{import_name}: (\{params}) => \{original_name}(\{call_args})"
+    "    \{import_name}: (\{params}) => \{interface_name}.\{original_name}(\{call_args})"
   } else {
     // Instance method: obj is first parameter
     let args_str = arg_names.join(comma_sep)
@@ -241,9 +254,21 @@ fn emit_js_interface_module(
   for m in iface.members {
     match m.interface_member {
       Attribute(attr) => {
-        entries.push(emit_js_getter(attr.name))
+        entries.push(
+          emit_js_getter(
+            attr.name,
+            is_static=attr.static_,
+            interface_name=iface.name,
+          ),
+        )
         if not(attr.is_readonly) {
-          entries.push(emit_js_setter(attr.name))
+          entries.push(
+            emit_js_setter(
+              attr.name,
+              is_static=attr.static_,
+              interface_name=iface.name,
+            ),
+          )
         }
       }
       _ => continue
@@ -263,7 +288,13 @@ fn emit_js_interface_module(
           used_method_names,
         )
         entries.push(
-          emit_js_method(import_name, op.name, op.arguments, op.static_),
+          emit_js_method(
+            import_name,
+            op.name,
+            op.arguments,
+            op.static_,
+            interface_name=iface.name,
+          ),
         )
       }
       SpecialOperation(op) if op.name is Some(_) => {

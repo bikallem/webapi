@@ -32,7 +32,12 @@ fn navigation_history_entry_same_document_ffi(obj : JsValue) -> Bool = "webapi_N
 fn navigation_history_entry_get_state_ffi(obj : JsValue) -> JsValue = "webapi_NavigationHistoryEntry" "getState"
 
 ///|
-fn navigation_history_entry_ondispose_ffi(obj : JsValue) -> EventHandler = "webapi_NavigationHistoryEntry" "get_ondispose"
+fn navigation_history_entry_ondispose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationHistoryEntry" "get_ondispose"
+
+///|
+fn navigation_history_entry_ondispose_ffi(obj : JsValue) -> EventHandler {
+  navigation_history_entry_ondispose_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn navigation_history_entry_set_ondispose_ffi(

@@ -90,6 +90,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
     is_string=is_string_return(self.return_type.type_),
+    is_enum=is_enum_return(self.return_type.type_),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.method_name,
@@ -196,6 +197,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
     is_string=is_string_return(self.return_type.type_),
+    is_enum=is_enum_return(self.return_type.type_),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.method_name,
@@ -239,6 +241,8 @@ struct AttributeGetMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original attribute name from IDL, eg "title"
   return_type : String
+  is_enum_type : Bool // Whether the return type is an enum (needs string conversion on wasm-gc)
+  is_valid_wasm_stub : Bool // Whether the return type can be used directly as a wasm-gc import return
 } derive(Show, ToJson)
 
 ///|
@@ -284,7 +288,8 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.has_suffix("?"),
     is_void=false,
     is_string=self.return_type == "String",
-    is_valid_stub=true, // Attribute getters always return valid types (non-parameterized)
+    is_enum=self.is_enum_type,
+    is_valid_stub=self.is_valid_wasm_stub,
     module_name,
     "get_\{self.original_name}",
   )
@@ -400,6 +405,8 @@ struct StaticAttributeGetMethodEmit {
   js_name : String // Name used in JS FFI bodies, eg. "console" (may differ from interface_name)
   original_name : String // Original attribute name from IDL, eg "title"
   return_type : String
+  is_enum_type : Bool // Whether the return type is an enum (needs string conversion on wasm-gc)
+  is_valid_wasm_stub : Bool // Whether the return type can be used directly as a wasm-gc import return
 } derive(Show, ToJson)
 
 ///|
@@ -445,7 +452,8 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.has_suffix("?"),
     is_void=false,
     is_string=self.return_type == "String",
-    is_valid_stub=true, // Static attribute getters always return valid types
+    is_enum=self.is_enum_type,
+    is_valid_stub=self.is_valid_wasm_stub,
     module_name,
     "get_\{self.original_name}",
   )
@@ -562,6 +570,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
     is_string=is_string_return(self.return_type.type_),
+    is_enum=is_enum_return(self.return_type.type_),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.original_name,

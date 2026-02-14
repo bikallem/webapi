@@ -6,7 +6,18 @@
 pub(all) enum ScrollRestoration {
   Auto
   Manual
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ScrollRestoration with output(
+  self : ScrollRestoration,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ScrollRestoration::Auto => logger.write_string("Auto")
+    ScrollRestoration::Manual => logger.write_string("Manual")
+  }
+}
 
 ///|
 pub impl TJsValue for ScrollRestoration with to_js(self : ScrollRestoration) -> JsValue {
@@ -23,4 +34,23 @@ pub fn ScrollRestoration::from(value : String) -> ScrollRestoration? {
     "manual" => Some(ScrollRestoration::Manual)
     _ => None
   }
+}
+
+///|
+fn ScrollRestoration::from_unchecked(value : String) -> ScrollRestoration {
+  match value {
+    "auto" => ScrollRestoration::Auto
+    "manual" => ScrollRestoration::Manual
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ScrollRestoration::value(self : ScrollRestoration) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ScrollRestoration::Auto => buf.write_string("auto")
+    ScrollRestoration::Manual => buf.write_string("manual")
+  }
+  buf.to_string()
 }

@@ -2,7 +2,14 @@
 fn history_length_ffi(obj : JsValue) -> UInt = "webapi_History" "get_length"
 
 ///|
-fn history_scroll_restoration_ffi(obj : JsValue) -> ScrollRestoration = "webapi_History" "get_scrollRestoration"
+fn history_scroll_restoration_ffi_wasm(obj : JsValue) -> JsValue = "webapi_History" "get_scrollRestoration"
+
+///|
+fn history_scroll_restoration_ffi(obj : JsValue) -> ScrollRestoration {
+  ScrollRestoration::from_unchecked(
+    jsvalue_to_string(history_scroll_restoration_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn history_set_scroll_restoration_ffi(

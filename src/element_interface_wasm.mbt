@@ -226,13 +226,23 @@ fn element_get_html_ffi(obj : JsValue, options : JsValue) -> String {
 }
 
 ///|
-fn element_inner_html_ffi(obj : JsValue) -> ElementInnerHTML = "webapi_Element" "get_innerHTML"
+fn element_inner_html_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_innerHTML"
+
+///|
+fn element_inner_html_ffi(obj : JsValue) -> ElementInnerHTML {
+  element_inner_html_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn element_set_inner_html_ffi(obj : JsValue, inner_html : JsValue) -> Unit = "webapi_Element" "set_innerHTML"
 
 ///|
-fn element_outer_html_ffi(obj : JsValue) -> ElementOuterHTML = "webapi_Element" "get_outerHTML"
+fn element_outer_html_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_outerHTML"
+
+///|
+fn element_outer_html_ffi(obj : JsValue) -> ElementOuterHTML {
+  element_outer_html_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn element_set_outer_html_ffi(obj : JsValue, outer_html : JsValue) -> Unit = "webapi_Element" "set_outerHTML"
@@ -260,7 +270,7 @@ fn element_scroll_into_view_ffi_wasm(obj : JsValue, arg : JsValue) -> JsValue = 
 fn element_scroll_into_view_ffi(
   obj : JsValue,
   arg : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_into_view_ffi_wasm(obj, arg).unsafe_cast()
 }
 
@@ -268,7 +278,7 @@ fn element_scroll_into_view_ffi(
 fn element_scroll_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scroll"
 
 ///|
-fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
   element_scroll_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -284,7 +294,7 @@ fn element_scroll_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -292,7 +302,10 @@ fn element_scroll_xy_ffi(
 fn element_scroll_to_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollTo"
 
 ///|
-fn element_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_to_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
   element_scroll_to_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -308,7 +321,7 @@ fn element_scroll_to_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_to_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -316,7 +329,10 @@ fn element_scroll_to_xy_ffi(
 fn element_scroll_by_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollBy"
 
 ///|
-fn element_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn element_scroll_by_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
   element_scroll_by_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -332,7 +348,7 @@ fn element_scroll_by_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_by_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -379,12 +395,17 @@ fn element_request_fullscreen_ffi_wasm(
 fn element_request_fullscreen_ffi(
   obj : JsValue,
   options : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_request_fullscreen_ffi_wasm(obj, options).unsafe_cast()
 }
 
 ///|
-fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler = "webapi_Element" "get_onfullscreenchange"
+fn element_onfullscreenchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_onfullscreenchange"
+
+///|
+fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn element_set_onfullscreenchange_ffi(
@@ -393,7 +414,12 @@ fn element_set_onfullscreenchange_ffi(
 ) -> Unit = "webapi_Element" "set_onfullscreenchange"
 
 ///|
-fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler = "webapi_Element" "get_onfullscreenerror"
+fn element_onfullscreenerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_onfullscreenerror"
+
+///|
+fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenerror_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn element_set_onfullscreenerror_ffi(

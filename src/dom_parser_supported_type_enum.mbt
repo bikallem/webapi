@@ -9,7 +9,23 @@ pub(all) enum DOMParserSupportedType {
   ApplicationXml
   ApplicationXhtmlXml
   ImageSvgXml
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for DOMParserSupportedType with output(
+  self : DOMParserSupportedType,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    DOMParserSupportedType::TextHtml => logger.write_string("TextHtml")
+    DOMParserSupportedType::TextXml => logger.write_string("TextXml")
+    DOMParserSupportedType::ApplicationXml =>
+      logger.write_string("ApplicationXml")
+    DOMParserSupportedType::ApplicationXhtmlXml =>
+      logger.write_string("ApplicationXhtmlXml")
+    DOMParserSupportedType::ImageSvgXml => logger.write_string("ImageSvgXml")
+  }
+}
 
 ///|
 pub impl TJsValue for DOMParserSupportedType with to_js(
@@ -35,4 +51,33 @@ pub fn DOMParserSupportedType::from(value : String) -> DOMParserSupportedType? {
     "image/svg+xml" => Some(DOMParserSupportedType::ImageSvgXml)
     _ => None
   }
+}
+
+///|
+fn DOMParserSupportedType::from_unchecked(
+  value : String,
+) -> DOMParserSupportedType {
+  match value {
+    "text/html" => DOMParserSupportedType::TextHtml
+    "text/xml" => DOMParserSupportedType::TextXml
+    "application/xml" => DOMParserSupportedType::ApplicationXml
+    "application/xhtml+xml" => DOMParserSupportedType::ApplicationXhtmlXml
+    "image/svg+xml" => DOMParserSupportedType::ImageSvgXml
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn DOMParserSupportedType::value(self : DOMParserSupportedType) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    DOMParserSupportedType::TextHtml => buf.write_string("text/html")
+    DOMParserSupportedType::TextXml => buf.write_string("text/xml")
+    DOMParserSupportedType::ApplicationXml =>
+      buf.write_string("application/xml")
+    DOMParserSupportedType::ApplicationXhtmlXml =>
+      buf.write_string("application/xhtml+xml")
+    DOMParserSupportedType::ImageSvgXml => buf.write_string("image/svg+xml")
+  }
+  buf.to_string()
 }

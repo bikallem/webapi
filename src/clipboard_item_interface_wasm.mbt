@@ -2,7 +2,14 @@
 fn clipboard_item_new_ffi(items : JsValue, options : JsValue) -> ClipboardItem = "webapi_ClipboardItem" "new"
 
 ///|
-fn clipboard_item_presentation_style_ffi(obj : JsValue) -> PresentationStyle = "webapi_ClipboardItem" "get_presentationStyle"
+fn clipboard_item_presentation_style_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ClipboardItem" "get_presentationStyle"
+
+///|
+fn clipboard_item_presentation_style_ffi(obj : JsValue) -> PresentationStyle {
+  PresentationStyle::from_unchecked(
+    jsvalue_to_string(clipboard_item_presentation_style_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn clipboard_item_types_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardItem" "get_types"

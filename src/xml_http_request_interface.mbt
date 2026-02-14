@@ -132,16 +132,16 @@ impl TXMLHttpRequest with open_with_credentials(
   method_ : String,
   url : String,
   async_ : Bool,
-  username? : String = JsValue::null(),
-  password? : String = JsValue::null(),
+  username? : String,
+  password? : String,
 ) -> Unit {
   xml_http_request_open_with_credentials_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(method_),
     TJsValue::to_js(url),
     TJsValue::to_js(async_),
-    TJsValue::to_js(username),
-    TJsValue::to_js(password),
+    opt_to_js(username),
+    opt_to_js(password),
   )
 }
 

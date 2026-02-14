@@ -7,7 +7,19 @@ pub(all) enum NotificationPermission {
   Default
   Denied
   Granted
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for NotificationPermission with output(
+  self : NotificationPermission,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    NotificationPermission::Default => logger.write_string("Default")
+    NotificationPermission::Denied => logger.write_string("Denied")
+    NotificationPermission::Granted => logger.write_string("Granted")
+  }
+}
 
 ///|
 pub impl TJsValue for NotificationPermission with to_js(
@@ -28,4 +40,27 @@ pub fn NotificationPermission::from(value : String) -> NotificationPermission? {
     "granted" => Some(NotificationPermission::Granted)
     _ => None
   }
+}
+
+///|
+fn NotificationPermission::from_unchecked(
+  value : String,
+) -> NotificationPermission {
+  match value {
+    "default" => NotificationPermission::Default
+    "denied" => NotificationPermission::Denied
+    "granted" => NotificationPermission::Granted
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn NotificationPermission::value(self : NotificationPermission) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    NotificationPermission::Default => buf.write_string("default")
+    NotificationPermission::Denied => buf.write_string("denied")
+    NotificationPermission::Granted => buf.write_string("granted")
+  }
+  buf.to_string()
 }

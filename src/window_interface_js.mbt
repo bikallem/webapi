@@ -442,7 +442,7 @@ extern "js" fn window_scroll_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scroll(options)"
 
 ///|
-fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
   window_scroll_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -458,7 +458,7 @@ fn window_scroll_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
@@ -469,7 +469,7 @@ extern "js" fn window_scroll_to_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scrollTo(options)"
 
 ///|
-fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
   window_scroll_to_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -485,7 +485,7 @@ fn window_scroll_to_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_to_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 
@@ -496,7 +496,7 @@ extern "js" fn window_scroll_by_ffi_js(
 ) -> JsValue = "(obj, options) => obj.scrollBy(options)"
 
 ///|
-fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
   window_scroll_by_ffi_js(obj, options).unsafe_cast()
 }
 
@@ -512,7 +512,7 @@ fn window_scroll_by_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_by_xy_ffi_js(obj, x, y).unsafe_cast()
 }
 

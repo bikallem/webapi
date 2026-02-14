@@ -6,7 +6,18 @@
 pub(all) enum ShadowRootMode {
   Open
   Closed
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ShadowRootMode with output(
+  self : ShadowRootMode,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ShadowRootMode::Open => logger.write_string("Open")
+    ShadowRootMode::Closed => logger.write_string("Closed")
+  }
+}
 
 ///|
 pub impl TJsValue for ShadowRootMode with to_js(self : ShadowRootMode) -> JsValue {
@@ -23,4 +34,23 @@ pub fn ShadowRootMode::from(value : String) -> ShadowRootMode? {
     "closed" => Some(ShadowRootMode::Closed)
     _ => None
   }
+}
+
+///|
+fn ShadowRootMode::from_unchecked(value : String) -> ShadowRootMode {
+  match value {
+    "open" => ShadowRootMode::Open
+    "closed" => ShadowRootMode::Closed
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ShadowRootMode::value(self : ShadowRootMode) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ShadowRootMode::Open => buf.write_string("open")
+    ShadowRootMode::Closed => buf.write_string("closed")
+  }
+  buf.to_string()
 }

@@ -1,5 +1,10 @@
 ///|
-fn media_list_media_text_ffi(obj : JsValue) -> CSSOMString = "webapi_MediaList" "get_mediaText"
+fn media_list_media_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaList" "get_mediaText"
+
+///|
+fn media_list_media_text_ffi(obj : JsValue) -> CSSOMString {
+  media_list_media_text_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn media_list_set_media_text_ffi(obj : JsValue, media_text : JsValue) -> Unit = "webapi_MediaList" "set_mediaText"

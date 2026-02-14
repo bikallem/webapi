@@ -11,7 +11,23 @@ pub(all) enum CanvasFontVariantCaps {
   AllPetiteCaps
   Unicase
   TitlingCaps
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CanvasFontVariantCaps with output(
+  self : CanvasFontVariantCaps,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    CanvasFontVariantCaps::Normal => logger.write_string("Normal")
+    CanvasFontVariantCaps::SmallCaps => logger.write_string("SmallCaps")
+    CanvasFontVariantCaps::AllSmallCaps => logger.write_string("AllSmallCaps")
+    CanvasFontVariantCaps::PetiteCaps => logger.write_string("PetiteCaps")
+    CanvasFontVariantCaps::AllPetiteCaps => logger.write_string("AllPetiteCaps")
+    CanvasFontVariantCaps::Unicase => logger.write_string("Unicase")
+    CanvasFontVariantCaps::TitlingCaps => logger.write_string("TitlingCaps")
+  }
+}
 
 ///|
 pub impl TJsValue for CanvasFontVariantCaps with to_js(
@@ -40,4 +56,35 @@ pub fn CanvasFontVariantCaps::from(value : String) -> CanvasFontVariantCaps? {
     "titling-caps" => Some(CanvasFontVariantCaps::TitlingCaps)
     _ => None
   }
+}
+
+///|
+fn CanvasFontVariantCaps::from_unchecked(
+  value : String,
+) -> CanvasFontVariantCaps {
+  match value {
+    "normal" => CanvasFontVariantCaps::Normal
+    "small-caps" => CanvasFontVariantCaps::SmallCaps
+    "all-small-caps" => CanvasFontVariantCaps::AllSmallCaps
+    "petite-caps" => CanvasFontVariantCaps::PetiteCaps
+    "all-petite-caps" => CanvasFontVariantCaps::AllPetiteCaps
+    "unicase" => CanvasFontVariantCaps::Unicase
+    "titling-caps" => CanvasFontVariantCaps::TitlingCaps
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CanvasFontVariantCaps::value(self : CanvasFontVariantCaps) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CanvasFontVariantCaps::Normal => buf.write_string("normal")
+    CanvasFontVariantCaps::SmallCaps => buf.write_string("small-caps")
+    CanvasFontVariantCaps::AllSmallCaps => buf.write_string("all-small-caps")
+    CanvasFontVariantCaps::PetiteCaps => buf.write_string("petite-caps")
+    CanvasFontVariantCaps::AllPetiteCaps => buf.write_string("all-petite-caps")
+    CanvasFontVariantCaps::Unicase => buf.write_string("unicase")
+    CanvasFontVariantCaps::TitlingCaps => buf.write_string("titling-caps")
+  }
+  buf.to_string()
 }

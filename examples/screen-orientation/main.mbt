@@ -8,8 +8,7 @@ fn main {
   heading.set_text_content("Screen Orientation Demo")
 
   let type_str = fn() -> String {
-    let s : String = orientation.type_().to_js().into()
-    s
+    orientation.type_().value()
   }
 
   let type_div = doc.create_element("div")

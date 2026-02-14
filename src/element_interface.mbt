@@ -277,14 +277,14 @@ pub trait TElement: TNode {
   get_bounding_client_rect(self : Self) -> DOMRect = _
   check_visibility(self : Self, options? : CheckVisibilityOptions) -> Bool = _
   scroll_into_view(self : Self, arg? : &TElementScrollIntoViewArg) -> JsPromise[
-    Unit,
+    JsValue,
   ] = _
-  scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
-  scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
-  scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll(self : Self, options? : ScrollToOptions) -> JsPromise[JsValue] = _
+  scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[JsValue] = _
+  scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[JsValue] = _
+  scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[JsValue] = _
+  scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[JsValue] = _
+  scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[JsValue] = _
   scroll_top(self : Self) -> Double = _
   set_scroll_top(self : Self, scroll_top : Double) -> Unit = _
   scroll_left(self : Self) -> Double = _
@@ -297,7 +297,7 @@ pub trait TElement: TNode {
   client_height(self : Self) -> Int = _
   current_css_zoom(self : Self) -> Double = _
   request_fullscreen(self : Self, options? : FullscreenOptions) -> JsPromise[
-    Unit,
+    JsValue,
   ] = _
   onfullscreenchange(self : Self) -> EventHandler = _
   set_onfullscreenchange(self : Self, onfullscreenchange : EventHandler) -> Unit = _
@@ -818,7 +818,7 @@ impl TElement with check_visibility(
 impl TElement with scroll_into_view(
   self : Self,
   arg? : &TElementScrollIntoViewArg = ScrollIntoViewOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_into_view_ffi(TJsValue::to_js(self), arg.to_js())
 }
 
@@ -827,14 +827,14 @@ impl TElement with scroll_into_view(
 impl TElement with scroll(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Element.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll)
 impl TElement with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
-  Unit,
+  JsValue,
 ] {
   element_scroll_xy_ffi(
     TJsValue::to_js(self),
@@ -848,14 +848,14 @@ impl TElement with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
 impl TElement with scroll_to(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Element.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo)
 impl TElement with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[
-  Unit,
+  JsValue,
 ] {
   element_scroll_to_xy_ffi(
     TJsValue::to_js(self),
@@ -869,14 +869,14 @@ impl TElement with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromis
 impl TElement with scroll_by(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Element.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy)
 impl TElement with scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[
-  Unit,
+  JsValue,
 ] {
   element_scroll_by_xy_ffi(
     TJsValue::to_js(self),
@@ -959,7 +959,7 @@ impl TElement with current_css_zoom(self : Self) -> Double {
 impl TElement with request_fullscreen(
   self : Self,
   options? : FullscreenOptions = FullscreenOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   element_request_fullscreen_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(options),

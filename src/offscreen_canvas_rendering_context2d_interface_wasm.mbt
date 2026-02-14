@@ -125,9 +125,20 @@ fn offscreen_canvas_rendering_context2d_set_image_smoothing_enabled_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_imageSmoothingEnabled"
 
 ///|
+fn offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_imageSmoothingQuality"
+
+///|
 fn offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi(
   obj : JsValue,
-) -> ImageSmoothingQuality = "webapi_OffscreenCanvasRenderingContext2D" "get_imageSmoothingQuality"
+) -> ImageSmoothingQuality {
+  ImageSmoothingQuality::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_image_smoothing_quality_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_image_smoothing_quality_ffi(
@@ -136,9 +147,16 @@ fn offscreen_canvas_rendering_context2d_set_image_smoothing_quality_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_imageSmoothingQuality"
 
 ///|
+fn offscreen_canvas_rendering_context2d_stroke_style_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_strokeStyle"
+
+///|
 fn offscreen_canvas_rendering_context2d_stroke_style_ffi(
   obj : JsValue,
-) -> OffscreenCanvasRenderingContext2DStrokeStyle = "webapi_OffscreenCanvasRenderingContext2D" "get_strokeStyle"
+) -> OffscreenCanvasRenderingContext2DStrokeStyle {
+  offscreen_canvas_rendering_context2d_stroke_style_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
@@ -147,9 +165,16 @@ fn offscreen_canvas_rendering_context2d_set_stroke_style_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_strokeStyle"
 
 ///|
+fn offscreen_canvas_rendering_context2d_fill_style_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_fillStyle"
+
+///|
 fn offscreen_canvas_rendering_context2d_fill_style_ffi(
   obj : JsValue,
-) -> OffscreenCanvasRenderingContext2DFillStyle = "webapi_OffscreenCanvasRenderingContext2D" "get_fillStyle"
+) -> OffscreenCanvasRenderingContext2DFillStyle {
+  offscreen_canvas_rendering_context2d_fill_style_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_fill_style_ffi(
@@ -468,9 +493,20 @@ fn offscreen_canvas_rendering_context2d_set_line_width_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_lineWidth"
 
 ///|
+fn offscreen_canvas_rendering_context2d_line_cap_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_lineCap"
+
+///|
 fn offscreen_canvas_rendering_context2d_line_cap_ffi(
   obj : JsValue,
-) -> CanvasLineCap = "webapi_OffscreenCanvasRenderingContext2D" "get_lineCap"
+) -> CanvasLineCap {
+  CanvasLineCap::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_line_cap_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_line_cap_ffi(
@@ -479,9 +515,20 @@ fn offscreen_canvas_rendering_context2d_set_line_cap_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_lineCap"
 
 ///|
+fn offscreen_canvas_rendering_context2d_line_join_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_lineJoin"
+
+///|
 fn offscreen_canvas_rendering_context2d_line_join_ffi(
   obj : JsValue,
-) -> CanvasLineJoin = "webapi_OffscreenCanvasRenderingContext2D" "get_lineJoin"
+) -> CanvasLineJoin {
+  CanvasLineJoin::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_line_join_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_line_join_ffi(
@@ -558,9 +605,20 @@ fn offscreen_canvas_rendering_context2d_set_font_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_font"
 
 ///|
+fn offscreen_canvas_rendering_context2d_text_align_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_textAlign"
+
+///|
 fn offscreen_canvas_rendering_context2d_text_align_ffi(
   obj : JsValue,
-) -> CanvasTextAlign = "webapi_OffscreenCanvasRenderingContext2D" "get_textAlign"
+) -> CanvasTextAlign {
+  CanvasTextAlign::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_text_align_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_text_align_ffi(
@@ -569,9 +627,20 @@ fn offscreen_canvas_rendering_context2d_set_text_align_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_textAlign"
 
 ///|
+fn offscreen_canvas_rendering_context2d_text_baseline_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_textBaseline"
+
+///|
 fn offscreen_canvas_rendering_context2d_text_baseline_ffi(
   obj : JsValue,
-) -> CanvasTextBaseline = "webapi_OffscreenCanvasRenderingContext2D" "get_textBaseline"
+) -> CanvasTextBaseline {
+  CanvasTextBaseline::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_text_baseline_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_text_baseline_ffi(
@@ -580,9 +649,20 @@ fn offscreen_canvas_rendering_context2d_set_text_baseline_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_textBaseline"
 
 ///|
+fn offscreen_canvas_rendering_context2d_direction_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_direction"
+
+///|
 fn offscreen_canvas_rendering_context2d_direction_ffi(
   obj : JsValue,
-) -> CanvasDirection = "webapi_OffscreenCanvasRenderingContext2D" "get_direction"
+) -> CanvasDirection {
+  CanvasDirection::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_direction_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_direction_ffi(
@@ -611,9 +691,20 @@ fn offscreen_canvas_rendering_context2d_set_letter_spacing_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_letterSpacing"
 
 ///|
+fn offscreen_canvas_rendering_context2d_font_kerning_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_fontKerning"
+
+///|
 fn offscreen_canvas_rendering_context2d_font_kerning_ffi(
   obj : JsValue,
-) -> CanvasFontKerning = "webapi_OffscreenCanvasRenderingContext2D" "get_fontKerning"
+) -> CanvasFontKerning {
+  CanvasFontKerning::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_font_kerning_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_font_kerning_ffi(
@@ -622,9 +713,20 @@ fn offscreen_canvas_rendering_context2d_set_font_kerning_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_fontKerning"
 
 ///|
+fn offscreen_canvas_rendering_context2d_font_stretch_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_fontStretch"
+
+///|
 fn offscreen_canvas_rendering_context2d_font_stretch_ffi(
   obj : JsValue,
-) -> CanvasFontStretch = "webapi_OffscreenCanvasRenderingContext2D" "get_fontStretch"
+) -> CanvasFontStretch {
+  CanvasFontStretch::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_font_stretch_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_font_stretch_ffi(
@@ -633,9 +735,20 @@ fn offscreen_canvas_rendering_context2d_set_font_stretch_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_fontStretch"
 
 ///|
+fn offscreen_canvas_rendering_context2d_font_variant_caps_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_fontVariantCaps"
+
+///|
 fn offscreen_canvas_rendering_context2d_font_variant_caps_ffi(
   obj : JsValue,
-) -> CanvasFontVariantCaps = "webapi_OffscreenCanvasRenderingContext2D" "get_fontVariantCaps"
+) -> CanvasFontVariantCaps {
+  CanvasFontVariantCaps::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_font_variant_caps_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_font_variant_caps_ffi(
@@ -644,9 +757,20 @@ fn offscreen_canvas_rendering_context2d_set_font_variant_caps_ffi(
 ) -> Unit = "webapi_OffscreenCanvasRenderingContext2D" "set_fontVariantCaps"
 
 ///|
+fn offscreen_canvas_rendering_context2d_text_rendering_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_OffscreenCanvasRenderingContext2D" "get_textRendering"
+
+///|
 fn offscreen_canvas_rendering_context2d_text_rendering_ffi(
   obj : JsValue,
-) -> CanvasTextRendering = "webapi_OffscreenCanvasRenderingContext2D" "get_textRendering"
+) -> CanvasTextRendering {
+  CanvasTextRendering::from_unchecked(
+    jsvalue_to_string(
+      offscreen_canvas_rendering_context2d_text_rendering_ffi_wasm(obj),
+    ),
+  )
+}
 
 ///|
 fn offscreen_canvas_rendering_context2d_set_text_rendering_ffi(

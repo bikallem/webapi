@@ -7,7 +7,19 @@ pub(all) enum CanvasDirection {
   Ltr
   Rtl
   Inherit
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CanvasDirection with output(
+  self : CanvasDirection,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    CanvasDirection::Ltr => logger.write_string("Ltr")
+    CanvasDirection::Rtl => logger.write_string("Rtl")
+    CanvasDirection::Inherit => logger.write_string("Inherit")
+  }
+}
 
 ///|
 pub impl TJsValue for CanvasDirection with to_js(self : CanvasDirection) -> JsValue {
@@ -26,4 +38,25 @@ pub fn CanvasDirection::from(value : String) -> CanvasDirection? {
     "inherit" => Some(CanvasDirection::Inherit)
     _ => None
   }
+}
+
+///|
+fn CanvasDirection::from_unchecked(value : String) -> CanvasDirection {
+  match value {
+    "ltr" => CanvasDirection::Ltr
+    "rtl" => CanvasDirection::Rtl
+    "inherit" => CanvasDirection::Inherit
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CanvasDirection::value(self : CanvasDirection) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CanvasDirection::Ltr => buf.write_string("ltr")
+    CanvasDirection::Rtl => buf.write_string("rtl")
+    CanvasDirection::Inherit => buf.write_string("inherit")
+  }
+  buf.to_string()
 }

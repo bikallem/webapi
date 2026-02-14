@@ -18,7 +18,7 @@ pub fn InputEventInit::new(
   view? : &TWindow = JsValue::null(),
   detail? : Int = (0 : Int),
   which? : UInt = (0 : UInt),
-  data? : String = JsValue::null(),
+  data? : String,
   is_composing? : Bool = false,
   input_type? : String = "",
 ) -> InputEventInit {
@@ -29,7 +29,7 @@ pub fn InputEventInit::new(
     TJsValue::to_js(view),
     TJsValue::to_js(detail),
     TJsValue::to_js(which),
-    TJsValue::to_js(data),
+    opt_to_js(data),
     TJsValue::to_js(is_composing),
     TJsValue::to_js(input_type),
   )

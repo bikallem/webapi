@@ -21,7 +21,14 @@ fn request_url_ffi(obj : JsValue) -> String {
 fn request_headers_ffi(obj : JsValue) -> Headers = "webapi_Request" "get_headers"
 
 ///|
-fn request_destination_ffi(obj : JsValue) -> RequestDestination = "webapi_Request" "get_destination"
+fn request_destination_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_destination"
+
+///|
+fn request_destination_ffi(obj : JsValue) -> RequestDestination {
+  RequestDestination::from_unchecked(
+    jsvalue_to_string(request_destination_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn request_referrer_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_referrer"
@@ -32,19 +39,50 @@ fn request_referrer_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn request_referrer_policy_ffi(obj : JsValue) -> ReferrerPolicy = "webapi_Request" "get_referrerPolicy"
+fn request_referrer_policy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_referrerPolicy"
 
 ///|
-fn request_mode_ffi(obj : JsValue) -> RequestMode = "webapi_Request" "get_mode"
+fn request_referrer_policy_ffi(obj : JsValue) -> ReferrerPolicy {
+  ReferrerPolicy::from_unchecked(
+    jsvalue_to_string(request_referrer_policy_ffi_wasm(obj)),
+  )
+}
 
 ///|
-fn request_credentials_ffi(obj : JsValue) -> RequestCredentials = "webapi_Request" "get_credentials"
+fn request_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_mode"
 
 ///|
-fn request_cache_ffi(obj : JsValue) -> RequestCache = "webapi_Request" "get_cache"
+fn request_mode_ffi(obj : JsValue) -> RequestMode {
+  RequestMode::from_unchecked(jsvalue_to_string(request_mode_ffi_wasm(obj)))
+}
 
 ///|
-fn request_redirect_ffi(obj : JsValue) -> RequestRedirect = "webapi_Request" "get_redirect"
+fn request_credentials_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_credentials"
+
+///|
+fn request_credentials_ffi(obj : JsValue) -> RequestCredentials {
+  RequestCredentials::from_unchecked(
+    jsvalue_to_string(request_credentials_ffi_wasm(obj)),
+  )
+}
+
+///|
+fn request_cache_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_cache"
+
+///|
+fn request_cache_ffi(obj : JsValue) -> RequestCache {
+  RequestCache::from_unchecked(jsvalue_to_string(request_cache_ffi_wasm(obj)))
+}
+
+///|
+fn request_redirect_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_redirect"
+
+///|
+fn request_redirect_ffi(obj : JsValue) -> RequestRedirect {
+  RequestRedirect::from_unchecked(
+    jsvalue_to_string(request_redirect_ffi_wasm(obj)),
+  )
+}
 
 ///|
 fn request_integrity_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_integrity"
@@ -67,13 +105,23 @@ fn request_is_history_navigation_ffi(obj : JsValue) -> Bool = "webapi_Request" "
 fn request_signal_ffi(obj : JsValue) -> AbortSignal = "webapi_Request" "get_signal"
 
 ///|
-fn request_duplex_ffi(obj : JsValue) -> RequestDuplex = "webapi_Request" "get_duplex"
+fn request_duplex_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_duplex"
+
+///|
+fn request_duplex_ffi(obj : JsValue) -> RequestDuplex {
+  RequestDuplex::from_unchecked(jsvalue_to_string(request_duplex_ffi_wasm(obj)))
+}
 
 ///|
 fn request_clone_ffi(obj : JsValue) -> Request = "webapi_Request" "clone"
 
 ///|
-fn request_body_ffi(obj : JsValue) -> ReadableStream = "webapi_Request" "get_body"
+fn request_body_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_body"
+
+///|
+fn request_body_ffi(obj : JsValue) -> ReadableStream {
+  request_body_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn request_body_used_ffi(obj : JsValue) -> Bool = "webapi_Request" "get_bodyUsed"

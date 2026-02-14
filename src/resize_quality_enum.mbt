@@ -8,7 +8,20 @@ pub(all) enum ResizeQuality {
   Low
   Medium
   High
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ResizeQuality with output(
+  self : ResizeQuality,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ResizeQuality::Pixelated => logger.write_string("Pixelated")
+    ResizeQuality::Low => logger.write_string("Low")
+    ResizeQuality::Medium => logger.write_string("Medium")
+    ResizeQuality::High => logger.write_string("High")
+  }
+}
 
 ///|
 pub impl TJsValue for ResizeQuality with to_js(self : ResizeQuality) -> JsValue {
@@ -29,4 +42,27 @@ pub fn ResizeQuality::from(value : String) -> ResizeQuality? {
     "high" => Some(ResizeQuality::High)
     _ => None
   }
+}
+
+///|
+fn ResizeQuality::from_unchecked(value : String) -> ResizeQuality {
+  match value {
+    "pixelated" => ResizeQuality::Pixelated
+    "low" => ResizeQuality::Low
+    "medium" => ResizeQuality::Medium
+    "high" => ResizeQuality::High
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ResizeQuality::value(self : ResizeQuality) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ResizeQuality::Pixelated => buf.write_string("pixelated")
+    ResizeQuality::Low => buf.write_string("low")
+    ResizeQuality::Medium => buf.write_string("medium")
+    ResizeQuality::High => buf.write_string("high")
+  }
+  buf.to_string()
 }

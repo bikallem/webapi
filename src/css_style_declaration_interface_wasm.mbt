@@ -1,5 +1,10 @@
 ///|
-fn css_style_declaration_css_text_ffi(obj : JsValue) -> CSSOMString = "webapi_CSSStyleDeclaration" "get_cssText"
+fn css_style_declaration_css_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSStyleDeclaration" "get_cssText"
+
+///|
+fn css_style_declaration_css_text_ffi(obj : JsValue) -> CSSOMString {
+  css_style_declaration_css_text_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn css_style_declaration_set_css_text_ffi(

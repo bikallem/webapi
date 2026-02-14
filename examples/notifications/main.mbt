@@ -7,8 +7,7 @@ fn main {
   heading.set_text_content("Notifications Demo")
 
   let perm_str = fn() -> String {
-    let s : String = @webapi.Notification::permission().to_js().into()
-    s
+    @webapi.Notification::permission().value()
   }
 
   // Permission status
@@ -45,10 +44,12 @@ fn main {
   request_btn.add_event_listener(
     "click",
     @webapi.EventListener::new(fn(_event) {
-      let cb = @webapi.NotificationPermissionCallback::new(fn(_perm) {
+      // Use finally_ to avoid wasm-gc enum-in-promise issue with then().
+      // (js_any_cast can't convert externref to enum's i32 on wasm-gc)
+      @webapi.Notification::request_permission().finally_(fn() {
         permission_status.set_text_content("Permission: " + perm_str())
       })
-      @webapi.Notification::request_permission(deprecated_callback=cb) |> ignore
+      |> ignore
     }),
   )
 

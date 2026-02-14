@@ -8,7 +8,20 @@ pub(all) enum ScrollLogicalPosition {
   Center
   End
   Nearest
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ScrollLogicalPosition with output(
+  self : ScrollLogicalPosition,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ScrollLogicalPosition::Start => logger.write_string("Start")
+    ScrollLogicalPosition::Center => logger.write_string("Center")
+    ScrollLogicalPosition::End => logger.write_string("End")
+    ScrollLogicalPosition::Nearest => logger.write_string("Nearest")
+  }
+}
 
 ///|
 pub impl TJsValue for ScrollLogicalPosition with to_js(
@@ -31,4 +44,29 @@ pub fn ScrollLogicalPosition::from(value : String) -> ScrollLogicalPosition? {
     "nearest" => Some(ScrollLogicalPosition::Nearest)
     _ => None
   }
+}
+
+///|
+fn ScrollLogicalPosition::from_unchecked(
+  value : String,
+) -> ScrollLogicalPosition {
+  match value {
+    "start" => ScrollLogicalPosition::Start
+    "center" => ScrollLogicalPosition::Center
+    "end" => ScrollLogicalPosition::End
+    "nearest" => ScrollLogicalPosition::Nearest
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ScrollLogicalPosition::value(self : ScrollLogicalPosition) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ScrollLogicalPosition::Start => buf.write_string("start")
+    ScrollLogicalPosition::Center => buf.write_string("center")
+    ScrollLogicalPosition::End => buf.write_string("end")
+    ScrollLogicalPosition::Nearest => buf.write_string("nearest")
+  }
+  buf.to_string()
 }

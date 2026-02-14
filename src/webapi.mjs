@@ -676,7 +676,7 @@ export const wasmImportObject = {
     createRange: (obj) => obj.createRange(),
     createNodeIterator: (obj, root, what_to_show, filter) => obj.createNodeIterator(root, what_to_show, filter),
     createTreeWalker: (obj, root, what_to_show, filter) => obj.createTreeWalker(root, what_to_show, filter),
-    parseHTMLUnsafe: (html) => parseHTMLUnsafe(html),
+    parseHTMLUnsafe: (html) => Document.parseHTMLUnsafe(html),
     get: (obj, name) => obj[name],
     getElementsByName: (obj, element_name) => obj.getElementsByName(element_name),
     open: (obj, unused1, unused2) => obj.open(unused1, unused2),
@@ -1454,9 +1454,9 @@ export const wasmImportObject = {
     get_reason: (obj) => obj.reason,
     get_onabort: (obj) => obj.onabort,
     set_onabort: (obj, value) => { obj.onabort = value; },
-    abort: (reason) => abort(reason),
-    timeout: (milliseconds) => timeout(milliseconds),
-    any: (signals) => any(signals),
+    abort: (reason) => AbortSignal.abort(reason),
+    timeout: (milliseconds) => AbortSignal.timeout(milliseconds),
+    any: (signals) => AbortSignal.any(signals),
     throwIfAborted: (obj) => obj.throwIfAborted()
   },
 
@@ -1879,11 +1879,11 @@ export const wasmImportObject = {
     get_searchParams: (obj) => obj.searchParams,
     get_hash: (obj) => obj.hash,
     set_hash: (obj, value) => { obj.hash = value; },
-    parse: (url, base) => parse(url, base),
-    canParse: (url, base) => canParse(url, base),
+    parse: (url, base) => URL.parse(url, base),
+    canParse: (url, base) => URL.canParse(url, base),
     toJSON: (obj) => obj.toJSON(),
-    createObjectURL: (obj) => createObjectURL(obj),
-    revokeObjectURL: (url) => revokeObjectURL(url)
+    createObjectURL: (obj) => URL.createObjectURL(obj),
+    revokeObjectURL: (url) => URL.revokeObjectURL(url)
   },
 
   webapi_URLSearchParams: {
@@ -3574,7 +3574,7 @@ export const wasmImportObject = {
     set_event: (obj, value) => { obj.event = value; },
     get_htmlFor: (obj) => obj.htmlFor,
     set_htmlFor: (obj, value) => { obj.htmlFor = value; },
-    supports: (type_) => supports(type_)
+    supports: (type_) => HTMLScriptElement.supports(type_)
   },
 
   webapi_HTMLTemplateElement: {
@@ -4029,7 +4029,7 @@ export const wasmImportObject = {
   webapi_Origin: {
     new: () => new Origin(),
     get_opaque: (obj) => obj.opaque,
-    from: (value) => from(value),
+    from: (value) => Origin.from(value),
     isSameOrigin: (obj, other) => obj.isSameOrigin(other),
     isSameSite: (obj, other) => obj.isSameSite(other)
   },
@@ -4776,9 +4776,9 @@ export const wasmImportObject = {
     get_headers: (obj) => obj.headers,
     get_body: (obj) => obj.body,
     get_bodyUsed: (obj) => obj.bodyUsed,
-    error: () => error(),
-    redirect: (url, status) => redirect(url, status),
-    json: (data, init) => json(data, init),
+    error: () => Response.error(),
+    redirect: (url, status) => Response.redirect(url, status),
+    json: (data, init) => Response.json(data, init),
     clone: (obj) => obj.clone(),
     arrayBuffer: (obj) => obj.arrayBuffer(),
     blob: (obj) => obj.blob(),
@@ -4907,7 +4907,7 @@ export const wasmImportObject = {
     get_y: (obj) => obj.y,
     get_z: (obj) => obj.z,
     get_w: (obj) => obj.w,
-    fromPoint: (other) => fromPoint(other),
+    fromPoint: (other) => DOMPointReadOnly.fromPoint(other),
     matrixTransform: (obj, matrix) => obj.matrixTransform(matrix),
     toJSON: (obj) => obj.toJSON()
   },
@@ -4922,7 +4922,7 @@ export const wasmImportObject = {
     set_z: (obj, value) => { obj.z = value; },
     get_w: (obj) => obj.w,
     set_w: (obj, value) => { obj.w = value; },
-    fromPoint: (other) => fromPoint(other)
+    fromPoint: (other) => DOMPoint.fromPoint(other)
   },
 
   webapi_DOMRectReadOnly: {
@@ -4935,7 +4935,7 @@ export const wasmImportObject = {
     get_right: (obj) => obj.right,
     get_bottom: (obj) => obj.bottom,
     get_left: (obj) => obj.left,
-    fromRect: (other) => fromRect(other),
+    fromRect: (other) => DOMRectReadOnly.fromRect(other),
     toJSON: (obj) => obj.toJSON()
   },
 
@@ -4949,7 +4949,7 @@ export const wasmImportObject = {
     set_width: (obj, value) => { obj.width = value; },
     get_height: (obj) => obj.height,
     set_height: (obj, value) => { obj.height = value; },
-    fromRect: (other) => fromRect(other)
+    fromRect: (other) => DOMRect.fromRect(other)
   },
 
   webapi_DOMRectList: {
@@ -4963,8 +4963,8 @@ export const wasmImportObject = {
     get_p2: (obj) => obj.p2,
     get_p3: (obj) => obj.p3,
     get_p4: (obj) => obj.p4,
-    fromRect: (other) => fromRect(other),
-    fromQuad: (other) => fromQuad(other),
+    fromRect: (other) => DOMQuad.fromRect(other),
+    fromQuad: (other) => DOMQuad.fromQuad(other),
     getBounds: (obj) => obj.getBounds(),
     toJSON: (obj) => obj.toJSON()
   },
@@ -4995,9 +4995,9 @@ export const wasmImportObject = {
     get_m44: (obj) => obj.m44,
     get_is2D: (obj) => obj.is2D,
     get_isIdentity: (obj) => obj.isIdentity,
-    fromMatrix: (other) => fromMatrix(other),
-    fromFloat32Array: (array32) => fromFloat32Array(array32),
-    fromFloat64Array: (array64) => fromFloat64Array(array64),
+    fromMatrix: (other) => DOMMatrixReadOnly.fromMatrix(other),
+    fromFloat32Array: (array32) => DOMMatrixReadOnly.fromFloat32Array(array32),
+    fromFloat64Array: (array64) => DOMMatrixReadOnly.fromFloat64Array(array64),
     translate: (obj, tx, ty, tz) => obj.translate(tx, ty, tz),
     scale: (obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z) => obj.scale(scale_x, scale_y, scale_z, origin_x, origin_y, origin_z),
     scaleNonUniform: (obj, scale_x, scale_y) => obj.scaleNonUniform(scale_x, scale_y),
@@ -5063,9 +5063,9 @@ export const wasmImportObject = {
     set_m43: (obj, value) => { obj.m43 = value; },
     get_m44: (obj) => obj.m44,
     set_m44: (obj, value) => { obj.m44 = value; },
-    fromMatrix: (other) => fromMatrix(other),
-    fromFloat32Array: (array32) => fromFloat32Array(array32),
-    fromFloat64Array: (array64) => fromFloat64Array(array64),
+    fromMatrix: (other) => DOMMatrix.fromMatrix(other),
+    fromFloat32Array: (array32) => DOMMatrix.fromFloat32Array(array32),
+    fromFloat64Array: (array64) => DOMMatrix.fromFloat64Array(array64),
     multiplySelf: (obj, other) => obj.multiplySelf(other),
     preMultiplySelf: (obj, other) => obj.preMultiplySelf(other),
     translateSelf: (obj, tx, ty, tz) => obj.translateSelf(tx, ty, tz),
@@ -5274,8 +5274,8 @@ export const wasmImportObject = {
 
   webapi_Notification: {
     new: (title, options) => new Notification(title, options),
-    get_permission: (obj) => obj.permission,
-    get_maxActions: (obj) => obj.maxActions,
+    get_permission: () => Notification.permission,
+    get_maxActions: () => Notification.maxActions,
     get_onclick: (obj) => obj.onclick,
     set_onclick: (obj, value) => { obj.onclick = value; },
     get_onshow: (obj) => obj.onshow,
@@ -5300,7 +5300,7 @@ export const wasmImportObject = {
     get_requireInteraction: (obj) => obj.requireInteraction,
     get_data: (obj) => obj.data,
     get_actions: (obj) => obj.actions,
-    requestPermission: (deprecated_callback) => requestPermission(deprecated_callback),
+    requestPermission: (deprecated_callback) => Notification.requestPermission(deprecated_callback),
     close: (obj) => obj.close()
   },
 
@@ -5397,7 +5397,7 @@ export const wasmImportObject = {
     get_presentationStyle: (obj) => obj.presentationStyle,
     get_types: (obj) => obj.types,
     getType: (obj, type_) => obj.getType(type_),
-    supports: (type_) => supports(type_)
+    supports: (type_) => ClipboardItem.supports(type_)
   },
 
   webapi_Clipboard: {
@@ -5453,7 +5453,7 @@ export const wasmImportObject = {
 
   webapi_PerformanceObserver: {
     new: (callback) => new PerformanceObserver(callback),
-    get_supportedEntryTypes: (obj) => obj.supportedEntryTypes,
+    get_supportedEntryTypes: () => PerformanceObserver.supportedEntryTypes,
     observe: (obj, options) => obj.observe(options),
     disconnect: (obj) => obj.disconnect(),
     takeRecords: (obj) => obj.takeRecords()

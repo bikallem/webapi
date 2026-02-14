@@ -7,7 +7,19 @@ pub(all) enum NotificationDirection {
   Auto
   Ltr
   Rtl
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for NotificationDirection with output(
+  self : NotificationDirection,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    NotificationDirection::Auto => logger.write_string("Auto")
+    NotificationDirection::Ltr => logger.write_string("Ltr")
+    NotificationDirection::Rtl => logger.write_string("Rtl")
+  }
+}
 
 ///|
 pub impl TJsValue for NotificationDirection with to_js(
@@ -28,4 +40,27 @@ pub fn NotificationDirection::from(value : String) -> NotificationDirection? {
     "rtl" => Some(NotificationDirection::Rtl)
     _ => None
   }
+}
+
+///|
+fn NotificationDirection::from_unchecked(
+  value : String,
+) -> NotificationDirection {
+  match value {
+    "auto" => NotificationDirection::Auto
+    "ltr" => NotificationDirection::Ltr
+    "rtl" => NotificationDirection::Rtl
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn NotificationDirection::value(self : NotificationDirection) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    NotificationDirection::Auto => buf.write_string("auto")
+    NotificationDirection::Ltr => buf.write_string("ltr")
+    NotificationDirection::Rtl => buf.write_string("rtl")
+  }
+  buf.to_string()
 }

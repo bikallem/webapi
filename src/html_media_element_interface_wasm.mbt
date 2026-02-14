@@ -13,7 +13,12 @@ fn html_media_element_src_ffi(obj : JsValue) -> String {
 fn html_media_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLMediaElement" "set_src"
 
 ///|
-fn html_media_element_src_object_ffi(obj : JsValue) -> MediaProvider = "webapi_HTMLMediaElement" "get_srcObject"
+fn html_media_element_src_object_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "get_srcObject"
+
+///|
+fn html_media_element_src_object_ffi(obj : JsValue) -> MediaProvider {
+  html_media_element_src_object_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn html_media_element_set_src_object_ffi(
@@ -64,10 +69,20 @@ fn html_media_element_buffered_ffi(obj : JsValue) -> TimeRanges = "webapi_HTMLMe
 fn html_media_element_load_ffi(obj : JsValue) -> Unit = "webapi_HTMLMediaElement" "load"
 
 ///|
+fn html_media_element_can_play_type_ffi_wasm(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsValue = "webapi_HTMLMediaElement" "canPlayType"
+
+///|
 fn html_media_element_can_play_type_ffi(
   obj : JsValue,
   type_ : JsValue,
-) -> CanPlayTypeResult = "webapi_HTMLMediaElement" "canPlayType"
+) -> CanPlayTypeResult {
+  CanPlayTypeResult::from_unchecked(
+    jsvalue_to_string(html_media_element_can_play_type_ffi_wasm(obj, type_)),
+  )
+}
 
 ///|
 fn html_media_element_ready_state_ffi(obj : JsValue) -> UInt = "webapi_HTMLMediaElement" "get_readyState"
@@ -151,7 +166,7 @@ fn html_media_element_set_loop_ffi(obj : JsValue, loop_ : JsValue) -> Unit = "we
 fn html_media_element_play_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "play"
 
 ///|
-fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[Unit] {
+fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[JsValue] {
   html_media_element_play_ffi_wasm(obj).unsafe_cast()
 }
 

@@ -101,7 +101,7 @@ fn main {
       socket.set_onmessage(
         @webapi.EventHandlerNonNull::new(fn(e) {
           let msg_event : @webapi.MessageEvent = e.into()
-          let data : String = msg_event.data().into()
+          let data = msg_event.data().as_string()
           log_message("Received: " + data)
           @webapi.JsValue::undefined()
         }),

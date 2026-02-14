@@ -227,7 +227,7 @@ extern "js" fn html_image_element_set_fetch_priority_ffi(
 extern "js" fn html_image_element_decode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.decode()"
 
 ///|
-fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[Unit] {
+fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[JsValue] {
   html_image_element_decode_ffi_js(obj).unsafe_cast()
 }
 

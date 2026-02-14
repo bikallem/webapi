@@ -14,7 +14,7 @@ pub impl TJsValue for NavigationPrecommitHandler with to_js(
 
 ///|
 pub fn NavigationPrecommitHandler::new(
-  callback : (NavigationPrecommitController) -> JsPromise[Unit],
+  callback : (NavigationPrecommitController) -> JsPromise[JsValue],
 ) -> NavigationPrecommitHandler {
   navigation_precommit_handler_ffi(callback)
 }

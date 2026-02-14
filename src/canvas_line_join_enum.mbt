@@ -7,7 +7,19 @@ pub(all) enum CanvasLineJoin {
   Round
   Bevel
   Miter
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CanvasLineJoin with output(
+  self : CanvasLineJoin,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    CanvasLineJoin::Round => logger.write_string("Round")
+    CanvasLineJoin::Bevel => logger.write_string("Bevel")
+    CanvasLineJoin::Miter => logger.write_string("Miter")
+  }
+}
 
 ///|
 pub impl TJsValue for CanvasLineJoin with to_js(self : CanvasLineJoin) -> JsValue {
@@ -26,4 +38,25 @@ pub fn CanvasLineJoin::from(value : String) -> CanvasLineJoin? {
     "miter" => Some(CanvasLineJoin::Miter)
     _ => None
   }
+}
+
+///|
+fn CanvasLineJoin::from_unchecked(value : String) -> CanvasLineJoin {
+  match value {
+    "round" => CanvasLineJoin::Round
+    "bevel" => CanvasLineJoin::Bevel
+    "miter" => CanvasLineJoin::Miter
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CanvasLineJoin::value(self : CanvasLineJoin) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CanvasLineJoin::Round => buf.write_string("round")
+    CanvasLineJoin::Bevel => buf.write_string("bevel")
+    CanvasLineJoin::Miter => buf.write_string("miter")
+  }
+  buf.to_string()
 }

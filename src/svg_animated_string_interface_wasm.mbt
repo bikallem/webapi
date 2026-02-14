@@ -1,5 +1,10 @@
 ///|
-fn svg_animated_string_base_val_ffi(obj : JsValue) -> SVGAnimatedStringBaseVal = "webapi_SVGAnimatedString" "get_baseVal"
+fn svg_animated_string_base_val_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGAnimatedString" "get_baseVal"
+
+///|
+fn svg_animated_string_base_val_ffi(obj : JsValue) -> SVGAnimatedStringBaseVal {
+  svg_animated_string_base_val_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn svg_animated_string_set_base_val_ffi(

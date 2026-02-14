@@ -17,7 +17,12 @@ fn abort_signal_reason_ffi(obj : JsValue) -> JsValue = "webapi_AbortSignal" "get
 fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "webapi_AbortSignal" "throwIfAborted"
 
 ///|
-fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler = "webapi_AbortSignal" "get_onabort"
+fn abort_signal_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AbortSignal" "get_onabort"
+
+///|
+fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler {
+  abort_signal_onabort_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn abort_signal_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_AbortSignal" "set_onabort"

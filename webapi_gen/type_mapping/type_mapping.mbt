@@ -279,6 +279,10 @@ pub fn arg_mbt_type(
         )
         let type_name = if type_ is ArgMbtType::Union(_) {
           "&T\{type_.name()}"
+        } else if type_.name() == "Unit" {
+          // Promise<undefined> → JsPromise[JsValue]: on wasm-gc, js_any_cast
+          // can't convert (ref extern) to Unit (i32). JsValue (externref) is safe.
+          "JsValue"
         } else {
           type_.name()
         }

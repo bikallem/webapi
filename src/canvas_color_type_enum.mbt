@@ -6,7 +6,18 @@
 pub(all) enum CanvasColorType {
   Unorm8
   Float16
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for CanvasColorType with output(
+  self : CanvasColorType,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    CanvasColorType::Unorm8 => logger.write_string("Unorm8")
+    CanvasColorType::Float16 => logger.write_string("Float16")
+  }
+}
 
 ///|
 pub impl TJsValue for CanvasColorType with to_js(self : CanvasColorType) -> JsValue {
@@ -23,4 +34,23 @@ pub fn CanvasColorType::from(value : String) -> CanvasColorType? {
     "float16" => Some(CanvasColorType::Float16)
     _ => None
   }
+}
+
+///|
+fn CanvasColorType::from_unchecked(value : String) -> CanvasColorType {
+  match value {
+    "unorm8" => CanvasColorType::Unorm8
+    "float16" => CanvasColorType::Float16
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn CanvasColorType::value(self : CanvasColorType) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    CanvasColorType::Unorm8 => buf.write_string("unorm8")
+    CanvasColorType::Float16 => buf.write_string("float16")
+  }
+  buf.to_string()
 }

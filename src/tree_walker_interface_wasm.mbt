@@ -5,7 +5,12 @@ fn tree_walker_root_ffi(obj : JsValue) -> Node = "webapi_TreeWalker" "get_root"
 fn tree_walker_what_to_show_ffi(obj : JsValue) -> UInt = "webapi_TreeWalker" "get_whatToShow"
 
 ///|
-fn tree_walker_filter_ffi(obj : JsValue) -> NodeFilter = "webapi_TreeWalker" "get_filter"
+fn tree_walker_filter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TreeWalker" "get_filter"
+
+///|
+fn tree_walker_filter_ffi(obj : JsValue) -> NodeFilter {
+  tree_walker_filter_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn tree_walker_current_node_ffi(obj : JsValue) -> Node = "webapi_TreeWalker" "get_currentNode"

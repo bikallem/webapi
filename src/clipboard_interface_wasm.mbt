@@ -21,7 +21,7 @@ fn clipboard_read_text_ffi(obj : JsValue) -> JsPromise[String] {
 fn clipboard_write_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_Clipboard" "write"
 
 ///|
-fn clipboard_write_ffi(obj : JsValue, data : JsValue) -> JsPromise[Unit] {
+fn clipboard_write_ffi(obj : JsValue, data : JsValue) -> JsPromise[JsValue] {
   clipboard_write_ffi_wasm(obj, data).unsafe_cast()
 }
 
@@ -29,6 +29,9 @@ fn clipboard_write_ffi(obj : JsValue, data : JsValue) -> JsPromise[Unit] {
 fn clipboard_write_text_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_Clipboard" "writeText"
 
 ///|
-fn clipboard_write_text_ffi(obj : JsValue, data : JsValue) -> JsPromise[Unit] {
+fn clipboard_write_text_ffi(
+  obj : JsValue,
+  data : JsValue,
+) -> JsPromise[JsValue] {
   clipboard_write_text_ffi_wasm(obj, data).unsafe_cast()
 }

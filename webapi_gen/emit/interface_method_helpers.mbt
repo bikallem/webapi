@@ -9,7 +9,8 @@
 fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
   match type_ {
     Primitive(name) => name != "String"
-    Interface(_) | Enum(_) | Dictionary(_) | Self => true
+    Interface(_) | Dictionary(_) | Self => true
+    Enum(_) => false // Enums are GC types on wasm-gc, not externref; need string conversion
     Other(name) =>
       // JsValue, Unit, JsUndefined are valid externref types.
       // Typed arrays, DataView, ArrayBuffer, SharedArrayBuffer are #external types.
@@ -25,6 +26,14 @@ fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
 /// which goes through String? + unwrap to emit ref.as_non_null.
 fn is_string_return(type_ : @type_mapping.ArgMbtType) -> Bool {
   type_ is Primitive("String")
+}
+
+///|
+/// Check if a return type is an Enum (needs special handling on wasm-gc).
+/// On wasm-gc, enums are GC types (not externref). JS returns a string (externref),
+/// so we need to convert via jsvalue_to_string + Enum::from().unwrap().
+fn is_enum_return(type_ : @type_mapping.ArgMbtType) -> Bool {
+  type_ is Enum(_)
 }
 
 ///|
@@ -48,6 +57,7 @@ fn emit_wasm_ffi_with_return(
   is_optional~ : Bool,
   is_void~ : Bool,
   is_string~ : Bool,
+  is_enum~ : Bool,
   is_valid_stub~ : Bool,
   module_name : String,
   import_name : String,
@@ -65,6 +75,16 @@ fn emit_wasm_ffi_with_return(
     let call_fwd = ffi_argnames.join(", ")
     Code(
       "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> String {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
+    )
+  } else if is_enum {
+    // Enum: JS returns a string (externref), but enums are GC types on wasm-gc.
+    // Use from_unchecked() instead of from().unwrap() to avoid Option[Enum]
+    // which triggers a wasm-gc compiler bug (None uses externref null but
+    // Option[Enum] expects i32 representation).
+    let raw_name = ffi_name + "_wasm"
+    let call_fwd = ffi_argnames.join(", ")
+    Code(
+      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  \{return_type_name}::from_unchecked(jsvalue_to_string(\{raw_name}(\{call_fwd})))\n}",
     )
   } else if is_array_return(return_type_name) {
     // Array[T]: use JsArray as raw import type and copy into MoonBit Array[T].

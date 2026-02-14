@@ -8,7 +8,20 @@ pub(all) enum SelectionMode {
   Start
   End
   Preserve
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for SelectionMode with output(
+  self : SelectionMode,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    SelectionMode::Select => logger.write_string("Select")
+    SelectionMode::Start => logger.write_string("Start")
+    SelectionMode::End => logger.write_string("End")
+    SelectionMode::Preserve => logger.write_string("Preserve")
+  }
+}
 
 ///|
 pub impl TJsValue for SelectionMode with to_js(self : SelectionMode) -> JsValue {
@@ -29,4 +42,27 @@ pub fn SelectionMode::from(value : String) -> SelectionMode? {
     "preserve" => Some(SelectionMode::Preserve)
     _ => None
   }
+}
+
+///|
+fn SelectionMode::from_unchecked(value : String) -> SelectionMode {
+  match value {
+    "select" => SelectionMode::Select
+    "start" => SelectionMode::Start
+    "end" => SelectionMode::End
+    "preserve" => SelectionMode::Preserve
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn SelectionMode::value(self : SelectionMode) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    SelectionMode::Select => buf.write_string("select")
+    SelectionMode::Start => buf.write_string("start")
+    SelectionMode::End => buf.write_string("end")
+    SelectionMode::Preserve => buf.write_string("preserve")
+  }
+  buf.to_string()
 }

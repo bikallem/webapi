@@ -409,7 +409,23 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
     buf.write_string("  \{variant.variant_name}\n")
   }
   buf
-  ..write_string("} derive(Eq,Show)")
+  ..write_string("} derive(Eq)")
+  ..write_string("\n\n")
+
+  // Manual Show implementation: avoids derive(Show) which generates a to_string()
+  // that triggers a wasm-gc compiler bug (externref vs (ref extern) in match returns).
+  ..write_string(
+    "pub impl Show for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
+  )
+  .write_string("  match self {\n")
+  for variant in variants {
+    buf.write_string(
+      "    \{name}::\{variant.variant_name} => logger.write_string(\"\{variant.variant_name}\")\n",
+    )
+  }
+  buf
+  ..write_string("  }\n")
+  ..write_string("}")
   ..write_string("\n\n")
   ..write_string(
     "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
@@ -431,7 +447,40 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
       "    \"\{variant.original_value}\" => Some(\{name}::\{variant.variant_name})\n",
     )
   }
-  buf..write_string("    _ => None\n")..write_string("  }\n").write_string("}")
+  buf
+  ..write_string("    _ => None\n")
+  ..write_string("  }\n")
+  ..write_string("}")
+  ..write_string("\n\n")
+
+  // from_unchecked() converts a string to the enum, aborting on unknown values.
+  // Used by wasm-gc FFI to avoid Option[Enum] which triggers a compiler bug
+  // (None uses externref null but Option[Enum] expects i32 representation).
+  ..write_string("fn \{name}::from_unchecked(value: String) -> \{name} {\n")
+  .write_string("  match value {\n")
+  for variant in variants {
+    buf.write_string(
+      "    \"\{variant.original_value}\" => \{name}::\{variant.variant_name}\n",
+    )
+  }
+  buf
+  ..write_string("    _ => abort(\"unknown enum value\")\n")
+  ..write_string("  }\n")
+  ..write_string("}")
+  ..write_string("\n\n")
+
+  // value() returns the IDL string value for each variant.
+  // Uses StringBuilder to avoid wasm-gc compiler bug with match returning String.
+  ..write_string(
+    "pub fn \{name}::value(self: \{name}) -> String {\n",
+  )
+  .write_string("  let buf = StringBuilder::new()\n  match self {\n")
+  for variant in variants {
+    buf.write_string(
+      "    \{name}::\{variant.variant_name} => buf.write_string(\"\{variant.original_value}\")\n",
+    )
+  }
+  buf..write_string("  }\n")..write_string("  buf.to_string()\n").write_string("}")
   buf.to_string()
 }
 

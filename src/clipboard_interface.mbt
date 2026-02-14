@@ -26,8 +26,8 @@ pub trait TClipboard: TEventTarget {
     ClipboardItems,
   ] = _
   read_text(self : Self) -> JsPromise[String] = _
-  write(self : Self, data : ClipboardItems) -> JsPromise[Unit] = _
-  write_text(self : Self, data : String) -> JsPromise[Unit] = _
+  write(self : Self, data : ClipboardItems) -> JsPromise[JsValue] = _
+  write_text(self : Self, data : String) -> JsPromise[JsValue] = _
 }
 
 ///|
@@ -48,13 +48,15 @@ impl TClipboard with read_text(self : Self) -> JsPromise[String] {
 ///|
 /// [Clipboard.write](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/write)
 impl TClipboard with write(self : Self, data : ClipboardItems) -> JsPromise[
-  Unit,
+  JsValue,
 ] {
   clipboard_write_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
 }
 
 ///|
 /// [Clipboard.writeText](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText)
-impl TClipboard with write_text(self : Self, data : String) -> JsPromise[Unit] {
+impl TClipboard with write_text(self : Self, data : String) -> JsPromise[
+  JsValue,
+] {
   clipboard_write_text_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
 }

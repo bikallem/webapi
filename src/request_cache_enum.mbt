@@ -10,7 +10,22 @@ pub(all) enum RequestCache {
   NoCache
   ForceCache
   OnlyIfCached
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for RequestCache with output(
+  self : RequestCache,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    RequestCache::Default => logger.write_string("Default")
+    RequestCache::NoStore => logger.write_string("NoStore")
+    RequestCache::Reload => logger.write_string("Reload")
+    RequestCache::NoCache => logger.write_string("NoCache")
+    RequestCache::ForceCache => logger.write_string("ForceCache")
+    RequestCache::OnlyIfCached => logger.write_string("OnlyIfCached")
+  }
+}
 
 ///|
 pub impl TJsValue for RequestCache with to_js(self : RequestCache) -> JsValue {
@@ -35,4 +50,31 @@ pub fn RequestCache::from(value : String) -> RequestCache? {
     "only-if-cached" => Some(RequestCache::OnlyIfCached)
     _ => None
   }
+}
+
+///|
+fn RequestCache::from_unchecked(value : String) -> RequestCache {
+  match value {
+    "default" => RequestCache::Default
+    "no-store" => RequestCache::NoStore
+    "reload" => RequestCache::Reload
+    "no-cache" => RequestCache::NoCache
+    "force-cache" => RequestCache::ForceCache
+    "only-if-cached" => RequestCache::OnlyIfCached
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn RequestCache::value(self : RequestCache) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    RequestCache::Default => buf.write_string("default")
+    RequestCache::NoStore => buf.write_string("no-store")
+    RequestCache::Reload => buf.write_string("reload")
+    RequestCache::NoCache => buf.write_string("no-cache")
+    RequestCache::ForceCache => buf.write_string("force-cache")
+    RequestCache::OnlyIfCached => buf.write_string("only-if-cached")
+  }
+  buf.to_string()
 }

@@ -7,7 +7,19 @@ pub(all) enum PresentationStyle {
   Unspecified
   Inline
   Attachment
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for PresentationStyle with output(
+  self : PresentationStyle,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    PresentationStyle::Unspecified => logger.write_string("Unspecified")
+    PresentationStyle::Inline => logger.write_string("Inline")
+    PresentationStyle::Attachment => logger.write_string("Attachment")
+  }
+}
 
 ///|
 pub impl TJsValue for PresentationStyle with to_js(self : PresentationStyle) -> JsValue {
@@ -26,4 +38,25 @@ pub fn PresentationStyle::from(value : String) -> PresentationStyle? {
     "attachment" => Some(PresentationStyle::Attachment)
     _ => None
   }
+}
+
+///|
+fn PresentationStyle::from_unchecked(value : String) -> PresentationStyle {
+  match value {
+    "unspecified" => PresentationStyle::Unspecified
+    "inline" => PresentationStyle::Inline
+    "attachment" => PresentationStyle::Attachment
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn PresentationStyle::value(self : PresentationStyle) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    PresentationStyle::Unspecified => buf.write_string("unspecified")
+    PresentationStyle::Inline => buf.write_string("inline")
+    PresentationStyle::Attachment => buf.write_string("attachment")
+  }
+  buf.to_string()
 }

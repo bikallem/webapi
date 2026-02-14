@@ -84,13 +84,13 @@ impl THistory with push_state(
   self : Self,
   data : JsValue,
   unused : String,
-  url? : String = JsValue::null(),
+  url? : String,
 ) -> Unit {
   history_push_state_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(data),
     TJsValue::to_js(unused),
-    TJsValue::to_js(url),
+    opt_to_js(url),
   )
 }
 
@@ -100,12 +100,12 @@ impl THistory with replace_state(
   self : Self,
   data : JsValue,
   unused : String,
-  url? : String = JsValue::null(),
+  url? : String,
 ) -> Unit {
   history_replace_state_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(data),
     TJsValue::to_js(unused),
-    TJsValue::to_js(url),
+    opt_to_js(url),
   )
 }

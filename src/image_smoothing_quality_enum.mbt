@@ -7,7 +7,19 @@ pub(all) enum ImageSmoothingQuality {
   Low
   Medium
   High
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ImageSmoothingQuality with output(
+  self : ImageSmoothingQuality,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ImageSmoothingQuality::Low => logger.write_string("Low")
+    ImageSmoothingQuality::Medium => logger.write_string("Medium")
+    ImageSmoothingQuality::High => logger.write_string("High")
+  }
+}
 
 ///|
 pub impl TJsValue for ImageSmoothingQuality with to_js(
@@ -28,4 +40,27 @@ pub fn ImageSmoothingQuality::from(value : String) -> ImageSmoothingQuality? {
     "high" => Some(ImageSmoothingQuality::High)
     _ => None
   }
+}
+
+///|
+fn ImageSmoothingQuality::from_unchecked(
+  value : String,
+) -> ImageSmoothingQuality {
+  match value {
+    "low" => ImageSmoothingQuality::Low
+    "medium" => ImageSmoothingQuality::Medium
+    "high" => ImageSmoothingQuality::High
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ImageSmoothingQuality::value(self : ImageSmoothingQuality) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ImageSmoothingQuality::Low => buf.write_string("low")
+    ImageSmoothingQuality::Medium => buf.write_string("medium")
+    ImageSmoothingQuality::High => buf.write_string("high")
+  }
+  buf.to_string()
 }

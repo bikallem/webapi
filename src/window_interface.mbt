@@ -118,12 +118,12 @@ pub trait TWindow: TEventTarget {
   page_x_offset(self : Self) -> Double = _
   scroll_y(self : Self) -> Double = _
   page_y_offset(self : Self) -> Double = _
-  scroll(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
-  scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
-  scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[Unit] = _
-  scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[Unit] = _
+  scroll(self : Self, options? : ScrollToOptions) -> JsPromise[JsValue] = _
+  scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[JsValue] = _
+  scroll_to(self : Self, options? : ScrollToOptions) -> JsPromise[JsValue] = _
+  scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[JsValue] = _
+  scroll_by(self : Self, options? : ScrollToOptions) -> JsPromise[JsValue] = _
+  scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[JsValue] = _
   screen_x(self : Self) -> Int = _
   screen_left(self : Self) -> Int = _
   screen_y(self : Self) -> Int = _
@@ -865,14 +865,14 @@ impl TWindow with page_y_offset(self : Self) -> Double {
 impl TWindow with scroll(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Window.scroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll)
 impl TWindow with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
-  Unit,
+  JsValue,
 ] {
   window_scroll_xy_ffi(
     TJsValue::to_js(self),
@@ -886,14 +886,14 @@ impl TWindow with scroll_xy(self : Self, x : Double, y : Double) -> JsPromise[
 impl TWindow with scroll_to(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_to_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Window.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)
 impl TWindow with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise[
-  Unit,
+  JsValue,
 ] {
   window_scroll_to_xy_ffi(
     TJsValue::to_js(self),
@@ -907,14 +907,14 @@ impl TWindow with scroll_to_xy(self : Self, x : Double, y : Double) -> JsPromise
 impl TWindow with scroll_by(
   self : Self,
   options? : ScrollToOptions = ScrollToOptions::empty(),
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_by_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
 }
 
 ///|
 /// [Window.scrollBy](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy)
 impl TWindow with scroll_by_xy(self : Self, x : Double, y : Double) -> JsPromise[
-  Unit,
+  JsValue,
 ] {
   window_scroll_by_xy_ffi(
     TJsValue::to_js(self),

@@ -11,7 +11,12 @@ fn response_redirect_ffi(url : JsValue, status : JsValue) -> Response = "webapi_
 fn response_json_ffi(data : JsValue, init : JsValue) -> Response = "webapi_Response" "json"
 
 ///|
-fn response_type_ffi(obj : JsValue) -> ResponseType = "webapi_Response" "get_type"
+fn response_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "get_type"
+
+///|
+fn response_type_ffi(obj : JsValue) -> ResponseType {
+  ResponseType::from_unchecked(jsvalue_to_string(response_type_ffi_wasm(obj)))
+}
 
 ///|
 fn response_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "get_url"
@@ -45,7 +50,12 @@ fn response_headers_ffi(obj : JsValue) -> Headers = "webapi_Response" "get_heade
 fn response_clone_ffi(obj : JsValue) -> Response = "webapi_Response" "clone"
 
 ///|
-fn response_body_ffi(obj : JsValue) -> ReadableStream = "webapi_Response" "get_body"
+fn response_body_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "get_body"
+
+///|
+fn response_body_ffi(obj : JsValue) -> ReadableStream {
+  response_body_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn response_body_used_ffi(obj : JsValue) -> Bool = "webapi_Response" "get_bodyUsed"

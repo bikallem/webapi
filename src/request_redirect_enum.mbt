@@ -7,7 +7,19 @@ pub(all) enum RequestRedirect {
   Follow
   Error
   Manual
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for RequestRedirect with output(
+  self : RequestRedirect,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    RequestRedirect::Follow => logger.write_string("Follow")
+    RequestRedirect::Error => logger.write_string("Error")
+    RequestRedirect::Manual => logger.write_string("Manual")
+  }
+}
 
 ///|
 pub impl TJsValue for RequestRedirect with to_js(self : RequestRedirect) -> JsValue {
@@ -26,4 +38,25 @@ pub fn RequestRedirect::from(value : String) -> RequestRedirect? {
     "manual" => Some(RequestRedirect::Manual)
     _ => None
   }
+}
+
+///|
+fn RequestRedirect::from_unchecked(value : String) -> RequestRedirect {
+  match value {
+    "follow" => RequestRedirect::Follow
+    "error" => RequestRedirect::Error
+    "manual" => RequestRedirect::Manual
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn RequestRedirect::value(self : RequestRedirect) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    RequestRedirect::Follow => buf.write_string("follow")
+    RequestRedirect::Error => buf.write_string("error")
+    RequestRedirect::Manual => buf.write_string("manual")
+  }
+  buf.to_string()
 }

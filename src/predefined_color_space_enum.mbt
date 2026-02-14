@@ -8,7 +8,21 @@ pub(all) enum PredefinedColorSpace {
   SrgbLinear
   DisplayP3
   DisplayP3Linear
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for PredefinedColorSpace with output(
+  self : PredefinedColorSpace,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    PredefinedColorSpace::Srgb => logger.write_string("Srgb")
+    PredefinedColorSpace::SrgbLinear => logger.write_string("SrgbLinear")
+    PredefinedColorSpace::DisplayP3 => logger.write_string("DisplayP3")
+    PredefinedColorSpace::DisplayP3Linear =>
+      logger.write_string("DisplayP3Linear")
+  }
+}
 
 ///|
 pub impl TJsValue for PredefinedColorSpace with to_js(
@@ -32,4 +46,28 @@ pub fn PredefinedColorSpace::from(value : String) -> PredefinedColorSpace? {
     "display-p3-linear" => Some(PredefinedColorSpace::DisplayP3Linear)
     _ => None
   }
+}
+
+///|
+fn PredefinedColorSpace::from_unchecked(value : String) -> PredefinedColorSpace {
+  match value {
+    "srgb" => PredefinedColorSpace::Srgb
+    "srgb-linear" => PredefinedColorSpace::SrgbLinear
+    "display-p3" => PredefinedColorSpace::DisplayP3
+    "display-p3-linear" => PredefinedColorSpace::DisplayP3Linear
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn PredefinedColorSpace::value(self : PredefinedColorSpace) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    PredefinedColorSpace::Srgb => buf.write_string("srgb")
+    PredefinedColorSpace::SrgbLinear => buf.write_string("srgb-linear")
+    PredefinedColorSpace::DisplayP3 => buf.write_string("display-p3")
+    PredefinedColorSpace::DisplayP3Linear =>
+      buf.write_string("display-p3-linear")
+  }
+  buf.to_string()
 }

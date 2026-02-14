@@ -1,5 +1,10 @@
 ///|
-fn style_sheet_type_ffi(obj : JsValue) -> CSSOMString = "webapi_StyleSheet" "get_type"
+fn style_sheet_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StyleSheet" "get_type"
+
+///|
+fn style_sheet_type_ffi(obj : JsValue) -> CSSOMString {
+  style_sheet_type_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn style_sheet_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StyleSheet" "get_href"
@@ -10,7 +15,12 @@ fn style_sheet_href_ffi(obj : JsValue) -> String {
 }
 
 ///|
-fn style_sheet_owner_node_ffi(obj : JsValue) -> StyleSheetOwnerNode = "webapi_StyleSheet" "get_ownerNode"
+fn style_sheet_owner_node_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StyleSheet" "get_ownerNode"
+
+///|
+fn style_sheet_owner_node_ffi(obj : JsValue) -> StyleSheetOwnerNode {
+  style_sheet_owner_node_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn style_sheet_parent_style_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "webapi_StyleSheet" "get_parentStyleSheet"

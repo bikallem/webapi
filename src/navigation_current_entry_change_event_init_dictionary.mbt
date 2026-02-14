@@ -17,14 +17,14 @@ pub fn NavigationCurrentEntryChangeEventInit::new(
   bubbles? : Bool = false,
   cancelable? : Bool = false,
   composed? : Bool = false,
-  navigation_type? : NavigationType = JsValue::null(),
+  navigation_type? : NavigationType,
   from : &TNavigationHistoryEntry,
 ) -> NavigationCurrentEntryChangeEventInit {
   navigation_current_entry_change_event_init_ffi(
     TJsValue::to_js(bubbles),
     TJsValue::to_js(cancelable),
     TJsValue::to_js(composed),
-    TJsValue::to_js(navigation_type),
+    opt_to_js(navigation_type),
     TJsValue::to_js(from),
   )
 }

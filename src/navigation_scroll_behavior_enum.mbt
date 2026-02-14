@@ -6,7 +6,19 @@
 pub(all) enum NavigationScrollBehavior {
   AfterTransition
   Manual
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for NavigationScrollBehavior with output(
+  self : NavigationScrollBehavior,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    NavigationScrollBehavior::AfterTransition =>
+      logger.write_string("AfterTransition")
+    NavigationScrollBehavior::Manual => logger.write_string("Manual")
+  }
+}
 
 ///|
 pub impl TJsValue for NavigationScrollBehavior with to_js(
@@ -28,4 +40,28 @@ pub fn NavigationScrollBehavior::from(
     "manual" => Some(NavigationScrollBehavior::Manual)
     _ => None
   }
+}
+
+///|
+fn NavigationScrollBehavior::from_unchecked(
+  value : String,
+) -> NavigationScrollBehavior {
+  match value {
+    "after-transition" => NavigationScrollBehavior::AfterTransition
+    "manual" => NavigationScrollBehavior::Manual
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn NavigationScrollBehavior::value(
+  self : NavigationScrollBehavior,
+) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    NavigationScrollBehavior::AfterTransition =>
+      buf.write_string("after-transition")
+    NavigationScrollBehavior::Manual => buf.write_string("manual")
+  }
+  buf.to_string()
 }

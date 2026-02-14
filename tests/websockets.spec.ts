@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const TARGETS = ['js'] as const;
+const TARGETS = ['js', 'wasm'] as const;
 const LOCAL_WS = 'ws://localhost:8765';
 
 for (const target of TARGETS) {

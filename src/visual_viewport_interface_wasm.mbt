@@ -20,19 +20,34 @@ fn visual_viewport_height_ffi(obj : JsValue) -> Double = "webapi_VisualViewport"
 fn visual_viewport_scale_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_scale"
 
 ///|
-fn visual_viewport_onresize_ffi(obj : JsValue) -> EventHandler = "webapi_VisualViewport" "get_onresize"
+fn visual_viewport_onresize_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisualViewport" "get_onresize"
+
+///|
+fn visual_viewport_onresize_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onresize_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn visual_viewport_set_onresize_ffi(obj : JsValue, onresize : JsValue) -> Unit = "webapi_VisualViewport" "set_onresize"
 
 ///|
-fn visual_viewport_onscroll_ffi(obj : JsValue) -> EventHandler = "webapi_VisualViewport" "get_onscroll"
+fn visual_viewport_onscroll_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisualViewport" "get_onscroll"
+
+///|
+fn visual_viewport_onscroll_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onscroll_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn visual_viewport_set_onscroll_ffi(obj : JsValue, onscroll : JsValue) -> Unit = "webapi_VisualViewport" "set_onscroll"
 
 ///|
-fn visual_viewport_onscrollend_ffi(obj : JsValue) -> EventHandler = "webapi_VisualViewport" "get_onscrollend"
+fn visual_viewport_onscrollend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisualViewport" "get_onscrollend"
+
+///|
+fn visual_viewport_onscrollend_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onscrollend_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn visual_viewport_set_onscrollend_ffi(

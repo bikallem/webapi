@@ -2,13 +2,28 @@
 fn window_event_is_undefined_ffi(obj : WindowEvent) -> Bool = "JsValue" "isUndefined"
 
 ///|
-fn window_event_ffi(obj : JsValue) -> WindowEvent = "webapi_Window" "get_event"
+fn window_event_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_event"
 
 ///|
-fn window_window_ffi(obj : JsValue) -> WindowProxy = "webapi_Window" "get_window"
+fn window_event_ffi(obj : JsValue) -> WindowEvent {
+  window_event_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
-fn window_self_ffi(obj : JsValue) -> WindowProxy = "webapi_Window" "get_self"
+fn window_window_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_window"
+
+///|
+fn window_window_ffi(obj : JsValue) -> WindowProxy {
+  window_window_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+fn window_self_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_self"
+
+///|
+fn window_self_ffi(obj : JsValue) -> WindowProxy {
+  window_self_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_document_ffi(obj : JsValue) -> Document = "webapi_Window" "get_document"
@@ -81,13 +96,23 @@ fn window_focus_ffi(obj : JsValue) -> Unit = "webapi_Window" "focus"
 fn window_blur_ffi(obj : JsValue) -> Unit = "webapi_Window" "blur"
 
 ///|
-fn window_frames_ffi(obj : JsValue) -> WindowProxy = "webapi_Window" "get_frames"
+fn window_frames_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_frames"
+
+///|
+fn window_frames_ffi(obj : JsValue) -> WindowProxy {
+  window_frames_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_length_ffi(obj : JsValue) -> UInt = "webapi_Window" "get_length"
 
 ///|
-fn window_top_ffi(obj : JsValue) -> WindowProxy = "webapi_Window" "get_top"
+fn window_top_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_top"
+
+///|
+fn window_top_ffi(obj : JsValue) -> WindowProxy {
+  window_top_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_opener_ffi(obj : JsValue) -> JsValue = "webapi_Window" "get_opener"
@@ -96,7 +121,12 @@ fn window_opener_ffi(obj : JsValue) -> JsValue = "webapi_Window" "get_opener"
 fn window_set_opener_ffi(obj : JsValue, opener : JsValue) -> Unit = "webapi_Window" "set_opener"
 
 ///|
-fn window_parent_ffi(obj : JsValue) -> WindowProxy = "webapi_Window" "get_parent"
+fn window_parent_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_parent"
+
+///|
+fn window_parent_ffi(obj : JsValue) -> WindowProxy {
+  window_parent_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_frame_element_ffi(obj : JsValue) -> Element = "webapi_Window" "get_frameElement"
@@ -225,7 +255,7 @@ fn window_page_y_offset_ffi(obj : JsValue) -> Double = "webapi_Window" "get_page
 fn window_scroll_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scroll"
 
 ///|
-fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
   window_scroll_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -241,7 +271,7 @@ fn window_scroll_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -249,7 +279,7 @@ fn window_scroll_xy_ffi(
 fn window_scroll_to_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollTo"
 
 ///|
-fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
   window_scroll_to_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -265,7 +295,7 @@ fn window_scroll_to_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_to_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -273,7 +303,7 @@ fn window_scroll_to_xy_ffi(
 fn window_scroll_by_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollBy"
 
 ///|
-fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[Unit] {
+fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
   window_scroll_by_ffi_wasm(obj, options).unsafe_cast()
 }
 
@@ -289,7 +319,7 @@ fn window_scroll_by_xy_ffi(
   obj : JsValue,
   x : JsValue,
   y : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   window_scroll_by_xy_ffi_wasm(obj, x, y).unsafe_cast()
 }
 
@@ -328,31 +358,56 @@ fn window_request_idle_callback_ffi(
 fn window_cancel_idle_callback_ffi(obj : JsValue, handle : JsValue) -> Unit = "webapi_Window" "cancelIdleCallback"
 
 ///|
-fn window_onabort_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onabort"
+fn window_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onabort"
+
+///|
+fn window_onabort_ffi(obj : JsValue) -> EventHandler {
+  window_onabort_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_Window" "set_onabort"
 
 ///|
-fn window_onauxclick_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onauxclick"
+fn window_onauxclick_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onauxclick"
+
+///|
+fn window_onauxclick_ffi(obj : JsValue) -> EventHandler {
+  window_onauxclick_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onauxclick_ffi(obj : JsValue, onauxclick : JsValue) -> Unit = "webapi_Window" "set_onauxclick"
 
 ///|
-fn window_onbeforeinput_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onbeforeinput"
+fn window_onbeforeinput_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforeinput"
+
+///|
+fn window_onbeforeinput_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforeinput_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onbeforeinput_ffi(obj : JsValue, onbeforeinput : JsValue) -> Unit = "webapi_Window" "set_onbeforeinput"
 
 ///|
-fn window_onbeforematch_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onbeforematch"
+fn window_onbeforematch_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforematch"
+
+///|
+fn window_onbeforematch_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforematch_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onbeforematch_ffi(obj : JsValue, onbeforematch : JsValue) -> Unit = "webapi_Window" "set_onbeforematch"
 
 ///|
-fn window_onbeforetoggle_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onbeforetoggle"
+fn window_onbeforetoggle_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforetoggle"
+
+///|
+fn window_onbeforetoggle_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforetoggle_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onbeforetoggle_ffi(
@@ -361,25 +416,45 @@ fn window_set_onbeforetoggle_ffi(
 ) -> Unit = "webapi_Window" "set_onbeforetoggle"
 
 ///|
-fn window_onblur_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onblur"
+fn window_onblur_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onblur"
+
+///|
+fn window_onblur_ffi(obj : JsValue) -> EventHandler {
+  window_onblur_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onblur_ffi(obj : JsValue, onblur : JsValue) -> Unit = "webapi_Window" "set_onblur"
 
 ///|
-fn window_oncancel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncancel"
+fn window_oncancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncancel"
+
+///|
+fn window_oncancel_ffi(obj : JsValue) -> EventHandler {
+  window_oncancel_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncancel_ffi(obj : JsValue, oncancel : JsValue) -> Unit = "webapi_Window" "set_oncancel"
 
 ///|
-fn window_oncanplay_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncanplay"
+fn window_oncanplay_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncanplay"
+
+///|
+fn window_oncanplay_ffi(obj : JsValue) -> EventHandler {
+  window_oncanplay_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncanplay_ffi(obj : JsValue, oncanplay : JsValue) -> Unit = "webapi_Window" "set_oncanplay"
 
 ///|
-fn window_oncanplaythrough_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncanplaythrough"
+fn window_oncanplaythrough_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncanplaythrough"
+
+///|
+fn window_oncanplaythrough_ffi(obj : JsValue) -> EventHandler {
+  window_oncanplaythrough_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncanplaythrough_ffi(
@@ -388,43 +463,78 @@ fn window_set_oncanplaythrough_ffi(
 ) -> Unit = "webapi_Window" "set_oncanplaythrough"
 
 ///|
-fn window_onchange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onchange"
+fn window_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onchange"
+
+///|
+fn window_onchange_ffi(obj : JsValue) -> EventHandler {
+  window_onchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_Window" "set_onchange"
 
 ///|
-fn window_onclick_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onclick"
+fn window_onclick_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onclick"
+
+///|
+fn window_onclick_ffi(obj : JsValue) -> EventHandler {
+  window_onclick_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onclick_ffi(obj : JsValue, onclick : JsValue) -> Unit = "webapi_Window" "set_onclick"
 
 ///|
-fn window_onclose_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onclose"
+fn window_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onclose"
+
+///|
+fn window_onclose_ffi(obj : JsValue) -> EventHandler {
+  window_onclose_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_Window" "set_onclose"
 
 ///|
-fn window_oncommand_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncommand"
+fn window_oncommand_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncommand"
+
+///|
+fn window_oncommand_ffi(obj : JsValue) -> EventHandler {
+  window_oncommand_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncommand_ffi(obj : JsValue, oncommand : JsValue) -> Unit = "webapi_Window" "set_oncommand"
 
 ///|
-fn window_oncontextlost_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncontextlost"
+fn window_oncontextlost_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncontextlost"
+
+///|
+fn window_oncontextlost_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextlost_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncontextlost_ffi(obj : JsValue, oncontextlost : JsValue) -> Unit = "webapi_Window" "set_oncontextlost"
 
 ///|
-fn window_oncontextmenu_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncontextmenu"
+fn window_oncontextmenu_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncontextmenu"
+
+///|
+fn window_oncontextmenu_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextmenu_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncontextmenu_ffi(obj : JsValue, oncontextmenu : JsValue) -> Unit = "webapi_Window" "set_oncontextmenu"
 
 ///|
-fn window_oncontextrestored_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncontextrestored"
+fn window_oncontextrestored_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncontextrestored"
+
+///|
+fn window_oncontextrestored_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextrestored_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncontextrestored_ffi(
@@ -433,73 +543,133 @@ fn window_set_oncontextrestored_ffi(
 ) -> Unit = "webapi_Window" "set_oncontextrestored"
 
 ///|
-fn window_oncopy_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncopy"
+fn window_oncopy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncopy"
+
+///|
+fn window_oncopy_ffi(obj : JsValue) -> EventHandler {
+  window_oncopy_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncopy_ffi(obj : JsValue, oncopy : JsValue) -> Unit = "webapi_Window" "set_oncopy"
 
 ///|
-fn window_oncuechange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncuechange"
+fn window_oncuechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncuechange"
+
+///|
+fn window_oncuechange_ffi(obj : JsValue) -> EventHandler {
+  window_oncuechange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncuechange_ffi(obj : JsValue, oncuechange : JsValue) -> Unit = "webapi_Window" "set_oncuechange"
 
 ///|
-fn window_oncut_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oncut"
+fn window_oncut_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncut"
+
+///|
+fn window_oncut_ffi(obj : JsValue) -> EventHandler {
+  window_oncut_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oncut_ffi(obj : JsValue, oncut : JsValue) -> Unit = "webapi_Window" "set_oncut"
 
 ///|
-fn window_ondblclick_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondblclick"
+fn window_ondblclick_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondblclick"
+
+///|
+fn window_ondblclick_ffi(obj : JsValue) -> EventHandler {
+  window_ondblclick_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondblclick_ffi(obj : JsValue, ondblclick : JsValue) -> Unit = "webapi_Window" "set_ondblclick"
 
 ///|
-fn window_ondrag_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondrag"
+fn window_ondrag_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondrag"
+
+///|
+fn window_ondrag_ffi(obj : JsValue) -> EventHandler {
+  window_ondrag_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondrag_ffi(obj : JsValue, ondrag : JsValue) -> Unit = "webapi_Window" "set_ondrag"
 
 ///|
-fn window_ondragend_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondragend"
+fn window_ondragend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragend"
+
+///|
+fn window_ondragend_ffi(obj : JsValue) -> EventHandler {
+  window_ondragend_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondragend_ffi(obj : JsValue, ondragend : JsValue) -> Unit = "webapi_Window" "set_ondragend"
 
 ///|
-fn window_ondragenter_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondragenter"
+fn window_ondragenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragenter"
+
+///|
+fn window_ondragenter_ffi(obj : JsValue) -> EventHandler {
+  window_ondragenter_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondragenter_ffi(obj : JsValue, ondragenter : JsValue) -> Unit = "webapi_Window" "set_ondragenter"
 
 ///|
-fn window_ondragleave_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondragleave"
+fn window_ondragleave_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragleave"
+
+///|
+fn window_ondragleave_ffi(obj : JsValue) -> EventHandler {
+  window_ondragleave_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondragleave_ffi(obj : JsValue, ondragleave : JsValue) -> Unit = "webapi_Window" "set_ondragleave"
 
 ///|
-fn window_ondragover_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondragover"
+fn window_ondragover_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragover"
+
+///|
+fn window_ondragover_ffi(obj : JsValue) -> EventHandler {
+  window_ondragover_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondragover_ffi(obj : JsValue, ondragover : JsValue) -> Unit = "webapi_Window" "set_ondragover"
 
 ///|
-fn window_ondragstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondragstart"
+fn window_ondragstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragstart"
+
+///|
+fn window_ondragstart_ffi(obj : JsValue) -> EventHandler {
+  window_ondragstart_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondragstart_ffi(obj : JsValue, ondragstart : JsValue) -> Unit = "webapi_Window" "set_ondragstart"
 
 ///|
-fn window_ondrop_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondrop"
+fn window_ondrop_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondrop"
+
+///|
+fn window_ondrop_ffi(obj : JsValue) -> EventHandler {
+  window_ondrop_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondrop_ffi(obj : JsValue, ondrop : JsValue) -> Unit = "webapi_Window" "set_ondrop"
 
 ///|
-fn window_ondurationchange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ondurationchange"
+fn window_ondurationchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondurationchange"
+
+///|
+fn window_ondurationchange_ffi(obj : JsValue) -> EventHandler {
+  window_ondurationchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ondurationchange_ffi(
@@ -508,79 +678,144 @@ fn window_set_ondurationchange_ffi(
 ) -> Unit = "webapi_Window" "set_ondurationchange"
 
 ///|
-fn window_onemptied_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onemptied"
+fn window_onemptied_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onemptied"
+
+///|
+fn window_onemptied_ffi(obj : JsValue) -> EventHandler {
+  window_onemptied_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onemptied_ffi(obj : JsValue, onemptied : JsValue) -> Unit = "webapi_Window" "set_onemptied"
 
 ///|
-fn window_onended_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onended"
+fn window_onended_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onended"
+
+///|
+fn window_onended_ffi(obj : JsValue) -> EventHandler {
+  window_onended_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onended_ffi(obj : JsValue, onended : JsValue) -> Unit = "webapi_Window" "set_onended"
 
 ///|
-fn window_onerror_ffi(obj : JsValue) -> OnErrorEventHandler = "webapi_Window" "get_onerror"
+fn window_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onerror"
+
+///|
+fn window_onerror_ffi(obj : JsValue) -> OnErrorEventHandler {
+  window_onerror_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_Window" "set_onerror"
 
 ///|
-fn window_onfocus_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onfocus"
+fn window_onfocus_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onfocus"
+
+///|
+fn window_onfocus_ffi(obj : JsValue) -> EventHandler {
+  window_onfocus_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onfocus_ffi(obj : JsValue, onfocus : JsValue) -> Unit = "webapi_Window" "set_onfocus"
 
 ///|
-fn window_onformdata_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onformdata"
+fn window_onformdata_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onformdata"
+
+///|
+fn window_onformdata_ffi(obj : JsValue) -> EventHandler {
+  window_onformdata_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onformdata_ffi(obj : JsValue, onformdata : JsValue) -> Unit = "webapi_Window" "set_onformdata"
 
 ///|
-fn window_oninput_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oninput"
+fn window_oninput_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oninput"
+
+///|
+fn window_oninput_ffi(obj : JsValue) -> EventHandler {
+  window_oninput_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oninput_ffi(obj : JsValue, oninput : JsValue) -> Unit = "webapi_Window" "set_oninput"
 
 ///|
-fn window_oninvalid_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_oninvalid"
+fn window_oninvalid_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oninvalid"
+
+///|
+fn window_oninvalid_ffi(obj : JsValue) -> EventHandler {
+  window_oninvalid_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_oninvalid_ffi(obj : JsValue, oninvalid : JsValue) -> Unit = "webapi_Window" "set_oninvalid"
 
 ///|
-fn window_onkeydown_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onkeydown"
+fn window_onkeydown_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onkeydown"
+
+///|
+fn window_onkeydown_ffi(obj : JsValue) -> EventHandler {
+  window_onkeydown_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onkeydown_ffi(obj : JsValue, onkeydown : JsValue) -> Unit = "webapi_Window" "set_onkeydown"
 
 ///|
-fn window_onkeypress_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onkeypress"
+fn window_onkeypress_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onkeypress"
+
+///|
+fn window_onkeypress_ffi(obj : JsValue) -> EventHandler {
+  window_onkeypress_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onkeypress_ffi(obj : JsValue, onkeypress : JsValue) -> Unit = "webapi_Window" "set_onkeypress"
 
 ///|
-fn window_onkeyup_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onkeyup"
+fn window_onkeyup_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onkeyup"
+
+///|
+fn window_onkeyup_ffi(obj : JsValue) -> EventHandler {
+  window_onkeyup_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onkeyup_ffi(obj : JsValue, onkeyup : JsValue) -> Unit = "webapi_Window" "set_onkeyup"
 
 ///|
-fn window_onload_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onload"
+fn window_onload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onload"
+
+///|
+fn window_onload_ffi(obj : JsValue) -> EventHandler {
+  window_onload_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit = "webapi_Window" "set_onload"
 
 ///|
-fn window_onloadeddata_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onloadeddata"
+fn window_onloadeddata_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onloadeddata"
+
+///|
+fn window_onloadeddata_ffi(obj : JsValue) -> EventHandler {
+  window_onloadeddata_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onloadeddata_ffi(obj : JsValue, onloadeddata : JsValue) -> Unit = "webapi_Window" "set_onloadeddata"
 
 ///|
-fn window_onloadedmetadata_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onloadedmetadata"
+fn window_onloadedmetadata_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onloadedmetadata"
+
+///|
+fn window_onloadedmetadata_ffi(obj : JsValue) -> EventHandler {
+  window_onloadedmetadata_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onloadedmetadata_ffi(
@@ -589,115 +824,210 @@ fn window_set_onloadedmetadata_ffi(
 ) -> Unit = "webapi_Window" "set_onloadedmetadata"
 
 ///|
-fn window_onloadstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onloadstart"
+fn window_onloadstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onloadstart"
+
+///|
+fn window_onloadstart_ffi(obj : JsValue) -> EventHandler {
+  window_onloadstart_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onloadstart_ffi(obj : JsValue, onloadstart : JsValue) -> Unit = "webapi_Window" "set_onloadstart"
 
 ///|
-fn window_onmousedown_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmousedown"
+fn window_onmousedown_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmousedown"
+
+///|
+fn window_onmousedown_ffi(obj : JsValue) -> EventHandler {
+  window_onmousedown_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmousedown_ffi(obj : JsValue, onmousedown : JsValue) -> Unit = "webapi_Window" "set_onmousedown"
 
 ///|
-fn window_onmouseenter_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmouseenter"
+fn window_onmouseenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseenter"
+
+///|
+fn window_onmouseenter_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseenter_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmouseenter_ffi(obj : JsValue, onmouseenter : JsValue) -> Unit = "webapi_Window" "set_onmouseenter"
 
 ///|
-fn window_onmouseleave_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmouseleave"
+fn window_onmouseleave_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseleave"
+
+///|
+fn window_onmouseleave_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseleave_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmouseleave_ffi(obj : JsValue, onmouseleave : JsValue) -> Unit = "webapi_Window" "set_onmouseleave"
 
 ///|
-fn window_onmousemove_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmousemove"
+fn window_onmousemove_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmousemove"
+
+///|
+fn window_onmousemove_ffi(obj : JsValue) -> EventHandler {
+  window_onmousemove_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmousemove_ffi(obj : JsValue, onmousemove : JsValue) -> Unit = "webapi_Window" "set_onmousemove"
 
 ///|
-fn window_onmouseout_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmouseout"
+fn window_onmouseout_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseout"
+
+///|
+fn window_onmouseout_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseout_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmouseout_ffi(obj : JsValue, onmouseout : JsValue) -> Unit = "webapi_Window" "set_onmouseout"
 
 ///|
-fn window_onmouseover_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmouseover"
+fn window_onmouseover_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseover"
+
+///|
+fn window_onmouseover_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseover_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmouseover_ffi(obj : JsValue, onmouseover : JsValue) -> Unit = "webapi_Window" "set_onmouseover"
 
 ///|
-fn window_onmouseup_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmouseup"
+fn window_onmouseup_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseup"
+
+///|
+fn window_onmouseup_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseup_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmouseup_ffi(obj : JsValue, onmouseup : JsValue) -> Unit = "webapi_Window" "set_onmouseup"
 
 ///|
-fn window_onpaste_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpaste"
+fn window_onpaste_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpaste"
+
+///|
+fn window_onpaste_ffi(obj : JsValue) -> EventHandler {
+  window_onpaste_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpaste_ffi(obj : JsValue, onpaste : JsValue) -> Unit = "webapi_Window" "set_onpaste"
 
 ///|
-fn window_onpause_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpause"
+fn window_onpause_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpause"
+
+///|
+fn window_onpause_ffi(obj : JsValue) -> EventHandler {
+  window_onpause_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpause_ffi(obj : JsValue, onpause : JsValue) -> Unit = "webapi_Window" "set_onpause"
 
 ///|
-fn window_onplay_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onplay"
+fn window_onplay_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onplay"
+
+///|
+fn window_onplay_ffi(obj : JsValue) -> EventHandler {
+  window_onplay_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onplay_ffi(obj : JsValue, onplay : JsValue) -> Unit = "webapi_Window" "set_onplay"
 
 ///|
-fn window_onplaying_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onplaying"
+fn window_onplaying_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onplaying"
+
+///|
+fn window_onplaying_ffi(obj : JsValue) -> EventHandler {
+  window_onplaying_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onplaying_ffi(obj : JsValue, onplaying : JsValue) -> Unit = "webapi_Window" "set_onplaying"
 
 ///|
-fn window_onprogress_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onprogress"
+fn window_onprogress_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onprogress"
+
+///|
+fn window_onprogress_ffi(obj : JsValue) -> EventHandler {
+  window_onprogress_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onprogress_ffi(obj : JsValue, onprogress : JsValue) -> Unit = "webapi_Window" "set_onprogress"
 
 ///|
-fn window_onratechange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onratechange"
+fn window_onratechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onratechange"
+
+///|
+fn window_onratechange_ffi(obj : JsValue) -> EventHandler {
+  window_onratechange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onratechange_ffi(obj : JsValue, onratechange : JsValue) -> Unit = "webapi_Window" "set_onratechange"
 
 ///|
-fn window_onreset_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onreset"
+fn window_onreset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onreset"
+
+///|
+fn window_onreset_ffi(obj : JsValue) -> EventHandler {
+  window_onreset_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onreset_ffi(obj : JsValue, onreset : JsValue) -> Unit = "webapi_Window" "set_onreset"
 
 ///|
-fn window_onresize_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onresize"
+fn window_onresize_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onresize"
+
+///|
+fn window_onresize_ffi(obj : JsValue) -> EventHandler {
+  window_onresize_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onresize_ffi(obj : JsValue, onresize : JsValue) -> Unit = "webapi_Window" "set_onresize"
 
 ///|
-fn window_onscroll_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onscroll"
+fn window_onscroll_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onscroll"
+
+///|
+fn window_onscroll_ffi(obj : JsValue) -> EventHandler {
+  window_onscroll_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onscroll_ffi(obj : JsValue, onscroll : JsValue) -> Unit = "webapi_Window" "set_onscroll"
 
 ///|
-fn window_onscrollend_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onscrollend"
+fn window_onscrollend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onscrollend"
+
+///|
+fn window_onscrollend_ffi(obj : JsValue) -> EventHandler {
+  window_onscrollend_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onscrollend_ffi(obj : JsValue, onscrollend : JsValue) -> Unit = "webapi_Window" "set_onscrollend"
 
 ///|
-fn window_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onsecuritypolicyviolation"
+fn window_onsecuritypolicyviolation_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onsecuritypolicyviolation"
+
+///|
+fn window_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandler {
+  window_onsecuritypolicyviolation_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onsecuritypolicyviolation_ffi(
@@ -706,61 +1036,111 @@ fn window_set_onsecuritypolicyviolation_ffi(
 ) -> Unit = "webapi_Window" "set_onsecuritypolicyviolation"
 
 ///|
-fn window_onseeked_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onseeked"
+fn window_onseeked_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onseeked"
+
+///|
+fn window_onseeked_ffi(obj : JsValue) -> EventHandler {
+  window_onseeked_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onseeked_ffi(obj : JsValue, onseeked : JsValue) -> Unit = "webapi_Window" "set_onseeked"
 
 ///|
-fn window_onseeking_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onseeking"
+fn window_onseeking_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onseeking"
+
+///|
+fn window_onseeking_ffi(obj : JsValue) -> EventHandler {
+  window_onseeking_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onseeking_ffi(obj : JsValue, onseeking : JsValue) -> Unit = "webapi_Window" "set_onseeking"
 
 ///|
-fn window_onselect_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onselect"
+fn window_onselect_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onselect"
+
+///|
+fn window_onselect_ffi(obj : JsValue) -> EventHandler {
+  window_onselect_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onselect_ffi(obj : JsValue, onselect : JsValue) -> Unit = "webapi_Window" "set_onselect"
 
 ///|
-fn window_onslotchange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onslotchange"
+fn window_onslotchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onslotchange"
+
+///|
+fn window_onslotchange_ffi(obj : JsValue) -> EventHandler {
+  window_onslotchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onslotchange_ffi(obj : JsValue, onslotchange : JsValue) -> Unit = "webapi_Window" "set_onslotchange"
 
 ///|
-fn window_onstalled_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onstalled"
+fn window_onstalled_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onstalled"
+
+///|
+fn window_onstalled_ffi(obj : JsValue) -> EventHandler {
+  window_onstalled_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onstalled_ffi(obj : JsValue, onstalled : JsValue) -> Unit = "webapi_Window" "set_onstalled"
 
 ///|
-fn window_onsubmit_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onsubmit"
+fn window_onsubmit_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onsubmit"
+
+///|
+fn window_onsubmit_ffi(obj : JsValue) -> EventHandler {
+  window_onsubmit_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onsubmit_ffi(obj : JsValue, onsubmit : JsValue) -> Unit = "webapi_Window" "set_onsubmit"
 
 ///|
-fn window_onsuspend_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onsuspend"
+fn window_onsuspend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onsuspend"
+
+///|
+fn window_onsuspend_ffi(obj : JsValue) -> EventHandler {
+  window_onsuspend_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onsuspend_ffi(obj : JsValue, onsuspend : JsValue) -> Unit = "webapi_Window" "set_onsuspend"
 
 ///|
-fn window_ontimeupdate_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontimeupdate"
+fn window_ontimeupdate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontimeupdate"
+
+///|
+fn window_ontimeupdate_ffi(obj : JsValue) -> EventHandler {
+  window_ontimeupdate_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ontimeupdate_ffi(obj : JsValue, ontimeupdate : JsValue) -> Unit = "webapi_Window" "set_ontimeupdate"
 
 ///|
-fn window_ontoggle_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontoggle"
+fn window_ontoggle_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontoggle"
+
+///|
+fn window_ontoggle_ffi(obj : JsValue) -> EventHandler {
+  window_ontoggle_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ontoggle_ffi(obj : JsValue, ontoggle : JsValue) -> Unit = "webapi_Window" "set_ontoggle"
 
 ///|
-fn window_onvolumechange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onvolumechange"
+fn window_onvolumechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onvolumechange"
+
+///|
+fn window_onvolumechange_ffi(obj : JsValue) -> EventHandler {
+  window_onvolumechange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onvolumechange_ffi(
@@ -769,13 +1149,23 @@ fn window_set_onvolumechange_ffi(
 ) -> Unit = "webapi_Window" "set_onvolumechange"
 
 ///|
-fn window_onwaiting_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwaiting"
+fn window_onwaiting_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwaiting"
+
+///|
+fn window_onwaiting_ffi(obj : JsValue) -> EventHandler {
+  window_onwaiting_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onwaiting_ffi(obj : JsValue, onwaiting : JsValue) -> Unit = "webapi_Window" "set_onwaiting"
 
 ///|
-fn window_onwebkitanimationend_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwebkitanimationend"
+fn window_onwebkitanimationend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkitanimationend"
+
+///|
+fn window_onwebkitanimationend_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationend_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onwebkitanimationend_ffi(
@@ -784,7 +1174,12 @@ fn window_set_onwebkitanimationend_ffi(
 ) -> Unit = "webapi_Window" "set_onwebkitanimationend"
 
 ///|
-fn window_onwebkitanimationiteration_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwebkitanimationiteration"
+fn window_onwebkitanimationiteration_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkitanimationiteration"
+
+///|
+fn window_onwebkitanimationiteration_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationiteration_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onwebkitanimationiteration_ffi(
@@ -793,7 +1188,12 @@ fn window_set_onwebkitanimationiteration_ffi(
 ) -> Unit = "webapi_Window" "set_onwebkitanimationiteration"
 
 ///|
-fn window_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwebkitanimationstart"
+fn window_onwebkitanimationstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkitanimationstart"
+
+///|
+fn window_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationstart_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onwebkitanimationstart_ffi(
@@ -802,7 +1202,12 @@ fn window_set_onwebkitanimationstart_ffi(
 ) -> Unit = "webapi_Window" "set_onwebkitanimationstart"
 
 ///|
-fn window_onwebkittransitionend_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwebkittransitionend"
+fn window_onwebkittransitionend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkittransitionend"
+
+///|
+fn window_onwebkittransitionend_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkittransitionend_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onwebkittransitionend_ffi(
@@ -811,43 +1216,78 @@ fn window_set_onwebkittransitionend_ffi(
 ) -> Unit = "webapi_Window" "set_onwebkittransitionend"
 
 ///|
-fn window_onwheel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onwheel"
+fn window_onwheel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwheel"
+
+///|
+fn window_onwheel_ffi(obj : JsValue) -> EventHandler {
+  window_onwheel_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Window" "set_onwheel"
 
 ///|
-fn window_ontouchstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchstart"
+fn window_ontouchstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchstart"
+
+///|
+fn window_ontouchstart_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchstart_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ontouchstart_ffi(obj : JsValue, ontouchstart : JsValue) -> Unit = "webapi_Window" "set_ontouchstart"
 
 ///|
-fn window_ontouchend_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchend"
+fn window_ontouchend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchend"
+
+///|
+fn window_ontouchend_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchend_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ontouchend_ffi(obj : JsValue, ontouchend : JsValue) -> Unit = "webapi_Window" "set_ontouchend"
 
 ///|
-fn window_ontouchmove_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchmove"
+fn window_ontouchmove_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchmove"
+
+///|
+fn window_ontouchmove_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchmove_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ontouchmove_ffi(obj : JsValue, ontouchmove : JsValue) -> Unit = "webapi_Window" "set_ontouchmove"
 
 ///|
-fn window_ontouchcancel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ontouchcancel"
+fn window_ontouchcancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchcancel"
+
+///|
+fn window_ontouchcancel_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchcancel_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ontouchcancel_ffi(obj : JsValue, ontouchcancel : JsValue) -> Unit = "webapi_Window" "set_ontouchcancel"
 
 ///|
-fn window_onpointerover_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerover"
+fn window_onpointerover_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerover"
+
+///|
+fn window_onpointerover_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerover_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointerover_ffi(obj : JsValue, onpointerover : JsValue) -> Unit = "webapi_Window" "set_onpointerover"
 
 ///|
-fn window_onpointerenter_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerenter"
+fn window_onpointerenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerenter"
+
+///|
+fn window_onpointerenter_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerenter_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointerenter_ffi(
@@ -856,19 +1296,34 @@ fn window_set_onpointerenter_ffi(
 ) -> Unit = "webapi_Window" "set_onpointerenter"
 
 ///|
-fn window_onpointerdown_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerdown"
+fn window_onpointerdown_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerdown"
+
+///|
+fn window_onpointerdown_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerdown_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointerdown_ffi(obj : JsValue, onpointerdown : JsValue) -> Unit = "webapi_Window" "set_onpointerdown"
 
 ///|
-fn window_onpointermove_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointermove"
+fn window_onpointermove_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointermove"
+
+///|
+fn window_onpointermove_ffi(obj : JsValue) -> EventHandler {
+  window_onpointermove_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointermove_ffi(obj : JsValue, onpointermove : JsValue) -> Unit = "webapi_Window" "set_onpointermove"
 
 ///|
-fn window_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerrawupdate"
+fn window_onpointerrawupdate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerrawupdate"
+
+///|
+fn window_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerrawupdate_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointerrawupdate_ffi(
@@ -877,13 +1332,23 @@ fn window_set_onpointerrawupdate_ffi(
 ) -> Unit = "webapi_Window" "set_onpointerrawupdate"
 
 ///|
-fn window_onpointerup_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerup"
+fn window_onpointerup_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerup"
+
+///|
+fn window_onpointerup_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerup_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointerup_ffi(obj : JsValue, onpointerup : JsValue) -> Unit = "webapi_Window" "set_onpointerup"
 
 ///|
-fn window_onpointercancel_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointercancel"
+fn window_onpointercancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointercancel"
+
+///|
+fn window_onpointercancel_ffi(obj : JsValue) -> EventHandler {
+  window_onpointercancel_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointercancel_ffi(
@@ -892,13 +1357,23 @@ fn window_set_onpointercancel_ffi(
 ) -> Unit = "webapi_Window" "set_onpointercancel"
 
 ///|
-fn window_onpointerout_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerout"
+fn window_onpointerout_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerout"
+
+///|
+fn window_onpointerout_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerout_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointerout_ffi(obj : JsValue, onpointerout : JsValue) -> Unit = "webapi_Window" "set_onpointerout"
 
 ///|
-fn window_onpointerleave_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpointerleave"
+fn window_onpointerleave_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerleave"
+
+///|
+fn window_onpointerleave_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerleave_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpointerleave_ffi(
@@ -907,7 +1382,12 @@ fn window_set_onpointerleave_ffi(
 ) -> Unit = "webapi_Window" "set_onpointerleave"
 
 ///|
-fn window_ongotpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ongotpointercapture"
+fn window_ongotpointercapture_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ongotpointercapture"
+
+///|
+fn window_ongotpointercapture_ffi(obj : JsValue) -> EventHandler {
+  window_ongotpointercapture_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ongotpointercapture_ffi(
@@ -916,7 +1396,12 @@ fn window_set_ongotpointercapture_ffi(
 ) -> Unit = "webapi_Window" "set_ongotpointercapture"
 
 ///|
-fn window_onlostpointercapture_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onlostpointercapture"
+fn window_onlostpointercapture_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onlostpointercapture"
+
+///|
+fn window_onlostpointercapture_ffi(obj : JsValue) -> EventHandler {
+  window_onlostpointercapture_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onlostpointercapture_ffi(
@@ -925,13 +1410,23 @@ fn window_set_onlostpointercapture_ffi(
 ) -> Unit = "webapi_Window" "set_onlostpointercapture"
 
 ///|
-fn window_onselectstart_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onselectstart"
+fn window_onselectstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onselectstart"
+
+///|
+fn window_onselectstart_ffi(obj : JsValue) -> EventHandler {
+  window_onselectstart_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onselectstart_ffi(obj : JsValue, onselectstart : JsValue) -> Unit = "webapi_Window" "set_onselectstart"
 
 ///|
-fn window_onselectionchange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onselectionchange"
+fn window_onselectionchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onselectionchange"
+
+///|
+fn window_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+  window_onselectionchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onselectionchange_ffi(
@@ -940,19 +1435,34 @@ fn window_set_onselectionchange_ffi(
 ) -> Unit = "webapi_Window" "set_onselectionchange"
 
 ///|
-fn window_onafterprint_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onafterprint"
+fn window_onafterprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onafterprint"
+
+///|
+fn window_onafterprint_ffi(obj : JsValue) -> EventHandler {
+  window_onafterprint_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onafterprint_ffi(obj : JsValue, onafterprint : JsValue) -> Unit = "webapi_Window" "set_onafterprint"
 
 ///|
-fn window_onbeforeprint_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onbeforeprint"
+fn window_onbeforeprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforeprint"
+
+///|
+fn window_onbeforeprint_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforeprint_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onbeforeprint_ffi(obj : JsValue, onbeforeprint : JsValue) -> Unit = "webapi_Window" "set_onbeforeprint"
 
 ///|
-fn window_onbeforeunload_ffi(obj : JsValue) -> OnBeforeUnloadEventHandler = "webapi_Window" "get_onbeforeunload"
+fn window_onbeforeunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforeunload"
+
+///|
+fn window_onbeforeunload_ffi(obj : JsValue) -> OnBeforeUnloadEventHandler {
+  window_onbeforeunload_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onbeforeunload_ffi(
@@ -961,13 +1471,23 @@ fn window_set_onbeforeunload_ffi(
 ) -> Unit = "webapi_Window" "set_onbeforeunload"
 
 ///|
-fn window_onhashchange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onhashchange"
+fn window_onhashchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onhashchange"
+
+///|
+fn window_onhashchange_ffi(obj : JsValue) -> EventHandler {
+  window_onhashchange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onhashchange_ffi(obj : JsValue, onhashchange : JsValue) -> Unit = "webapi_Window" "set_onhashchange"
 
 ///|
-fn window_onlanguagechange_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onlanguagechange"
+fn window_onlanguagechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onlanguagechange"
+
+///|
+fn window_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  window_onlanguagechange_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onlanguagechange_ffi(
@@ -976,13 +1496,23 @@ fn window_set_onlanguagechange_ffi(
 ) -> Unit = "webapi_Window" "set_onlanguagechange"
 
 ///|
-fn window_onmessage_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmessage"
+fn window_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmessage"
+
+///|
+fn window_onmessage_ffi(obj : JsValue) -> EventHandler {
+  window_onmessage_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_Window" "set_onmessage"
 
 ///|
-fn window_onmessageerror_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onmessageerror"
+fn window_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmessageerror"
+
+///|
+fn window_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  window_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onmessageerror_ffi(
@@ -991,49 +1521,89 @@ fn window_set_onmessageerror_ffi(
 ) -> Unit = "webapi_Window" "set_onmessageerror"
 
 ///|
-fn window_onoffline_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onoffline"
+fn window_onoffline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onoffline"
+
+///|
+fn window_onoffline_ffi(obj : JsValue) -> EventHandler {
+  window_onoffline_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onoffline_ffi(obj : JsValue, onoffline : JsValue) -> Unit = "webapi_Window" "set_onoffline"
 
 ///|
-fn window_ononline_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_ononline"
+fn window_ononline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ononline"
+
+///|
+fn window_ononline_ffi(obj : JsValue) -> EventHandler {
+  window_ononline_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_ononline_ffi(obj : JsValue, ononline : JsValue) -> Unit = "webapi_Window" "set_ononline"
 
 ///|
-fn window_onpagehide_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpagehide"
+fn window_onpagehide_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpagehide"
+
+///|
+fn window_onpagehide_ffi(obj : JsValue) -> EventHandler {
+  window_onpagehide_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpagehide_ffi(obj : JsValue, onpagehide : JsValue) -> Unit = "webapi_Window" "set_onpagehide"
 
 ///|
-fn window_onpagereveal_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpagereveal"
+fn window_onpagereveal_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpagereveal"
+
+///|
+fn window_onpagereveal_ffi(obj : JsValue) -> EventHandler {
+  window_onpagereveal_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpagereveal_ffi(obj : JsValue, onpagereveal : JsValue) -> Unit = "webapi_Window" "set_onpagereveal"
 
 ///|
-fn window_onpageshow_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpageshow"
+fn window_onpageshow_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpageshow"
+
+///|
+fn window_onpageshow_ffi(obj : JsValue) -> EventHandler {
+  window_onpageshow_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpageshow_ffi(obj : JsValue, onpageshow : JsValue) -> Unit = "webapi_Window" "set_onpageshow"
 
 ///|
-fn window_onpageswap_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpageswap"
+fn window_onpageswap_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpageswap"
+
+///|
+fn window_onpageswap_ffi(obj : JsValue) -> EventHandler {
+  window_onpageswap_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpageswap_ffi(obj : JsValue, onpageswap : JsValue) -> Unit = "webapi_Window" "set_onpageswap"
 
 ///|
-fn window_onpopstate_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onpopstate"
+fn window_onpopstate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpopstate"
+
+///|
+fn window_onpopstate_ffi(obj : JsValue) -> EventHandler {
+  window_onpopstate_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onpopstate_ffi(obj : JsValue, onpopstate : JsValue) -> Unit = "webapi_Window" "set_onpopstate"
 
 ///|
-fn window_onrejectionhandled_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onrejectionhandled"
+fn window_onrejectionhandled_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onrejectionhandled"
+
+///|
+fn window_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  window_onrejectionhandled_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onrejectionhandled_ffi(
@@ -1042,13 +1612,23 @@ fn window_set_onrejectionhandled_ffi(
 ) -> Unit = "webapi_Window" "set_onrejectionhandled"
 
 ///|
-fn window_onstorage_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onstorage"
+fn window_onstorage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onstorage"
+
+///|
+fn window_onstorage_ffi(obj : JsValue) -> EventHandler {
+  window_onstorage_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onstorage_ffi(obj : JsValue, onstorage : JsValue) -> Unit = "webapi_Window" "set_onstorage"
 
 ///|
-fn window_onunhandledrejection_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onunhandledrejection"
+fn window_onunhandledrejection_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onunhandledrejection"
+
+///|
+fn window_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  window_onunhandledrejection_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onunhandledrejection_ffi(
@@ -1057,7 +1637,12 @@ fn window_set_onunhandledrejection_ffi(
 ) -> Unit = "webapi_Window" "set_onunhandledrejection"
 
 ///|
-fn window_onunload_ffi(obj : JsValue) -> EventHandler = "webapi_Window" "get_onunload"
+fn window_onunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onunload"
+
+///|
+fn window_onunload_ffi(obj : JsValue) -> EventHandler {
+  window_onunload_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn window_set_onunload_ffi(obj : JsValue, onunload : JsValue) -> Unit = "webapi_Window" "set_onunload"

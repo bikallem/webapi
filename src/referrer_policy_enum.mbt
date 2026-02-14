@@ -13,7 +13,28 @@ pub(all) enum ReferrerPolicy {
   OriginWhenCrossOrigin
   StrictOriginWhenCrossOrigin
   UnsafeUrl
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for ReferrerPolicy with output(
+  self : ReferrerPolicy,
+  logger : &Logger,
+) -> Unit {
+  match self {
+    ReferrerPolicy::Empty => logger.write_string("Empty")
+    ReferrerPolicy::NoReferrer => logger.write_string("NoReferrer")
+    ReferrerPolicy::NoReferrerWhenDowngrade =>
+      logger.write_string("NoReferrerWhenDowngrade")
+    ReferrerPolicy::SameOrigin => logger.write_string("SameOrigin")
+    ReferrerPolicy::Origin => logger.write_string("Origin")
+    ReferrerPolicy::StrictOrigin => logger.write_string("StrictOrigin")
+    ReferrerPolicy::OriginWhenCrossOrigin =>
+      logger.write_string("OriginWhenCrossOrigin")
+    ReferrerPolicy::StrictOriginWhenCrossOrigin =>
+      logger.write_string("StrictOriginWhenCrossOrigin")
+    ReferrerPolicy::UnsafeUrl => logger.write_string("UnsafeUrl")
+  }
+}
 
 ///|
 pub impl TJsValue for ReferrerPolicy with to_js(self : ReferrerPolicy) -> JsValue {
@@ -49,4 +70,41 @@ pub fn ReferrerPolicy::from(value : String) -> ReferrerPolicy? {
     "unsafe-url" => Some(ReferrerPolicy::UnsafeUrl)
     _ => None
   }
+}
+
+///|
+fn ReferrerPolicy::from_unchecked(value : String) -> ReferrerPolicy {
+  match value {
+    "" => ReferrerPolicy::Empty
+    "no-referrer" => ReferrerPolicy::NoReferrer
+    "no-referrer-when-downgrade" => ReferrerPolicy::NoReferrerWhenDowngrade
+    "same-origin" => ReferrerPolicy::SameOrigin
+    "origin" => ReferrerPolicy::Origin
+    "strict-origin" => ReferrerPolicy::StrictOrigin
+    "origin-when-cross-origin" => ReferrerPolicy::OriginWhenCrossOrigin
+    "strict-origin-when-cross-origin" =>
+      ReferrerPolicy::StrictOriginWhenCrossOrigin
+    "unsafe-url" => ReferrerPolicy::UnsafeUrl
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn ReferrerPolicy::value(self : ReferrerPolicy) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    ReferrerPolicy::Empty => buf.write_string("")
+    ReferrerPolicy::NoReferrer => buf.write_string("no-referrer")
+    ReferrerPolicy::NoReferrerWhenDowngrade =>
+      buf.write_string("no-referrer-when-downgrade")
+    ReferrerPolicy::SameOrigin => buf.write_string("same-origin")
+    ReferrerPolicy::Origin => buf.write_string("origin")
+    ReferrerPolicy::StrictOrigin => buf.write_string("strict-origin")
+    ReferrerPolicy::OriginWhenCrossOrigin =>
+      buf.write_string("origin-when-cross-origin")
+    ReferrerPolicy::StrictOriginWhenCrossOrigin =>
+      buf.write_string("strict-origin-when-cross-origin")
+    ReferrerPolicy::UnsafeUrl => buf.write_string("unsafe-url")
+  }
+  buf.to_string()
 }

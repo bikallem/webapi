@@ -11,7 +11,12 @@ fn node_iterator_pointer_before_reference_node_ffi(obj : JsValue) -> Bool = "web
 fn node_iterator_what_to_show_ffi(obj : JsValue) -> UInt = "webapi_NodeIterator" "get_whatToShow"
 
 ///|
-fn node_iterator_filter_ffi(obj : JsValue) -> NodeFilter = "webapi_NodeIterator" "get_filter"
+fn node_iterator_filter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NodeIterator" "get_filter"
+
+///|
+fn node_iterator_filter_ffi(obj : JsValue) -> NodeFilter {
+  node_iterator_filter_ffi_wasm(obj).unsafe_cast()
+}
 
 ///|
 fn node_iterator_next_node_ffi(obj : JsValue) -> JsValue = "webapi_NodeIterator" "nextNode"

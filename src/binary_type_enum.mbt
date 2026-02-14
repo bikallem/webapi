@@ -6,7 +6,15 @@
 pub(all) enum BinaryType {
   Blob
   Arraybuffer
-} derive(Eq, Show)
+} derive(Eq)
+
+///|
+pub impl Show for BinaryType with output(self : BinaryType, logger : &Logger) -> Unit {
+  match self {
+    BinaryType::Blob => logger.write_string("Blob")
+    BinaryType::Arraybuffer => logger.write_string("Arraybuffer")
+  }
+}
 
 ///|
 pub impl TJsValue for BinaryType with to_js(self : BinaryType) -> JsValue {
@@ -23,4 +31,23 @@ pub fn BinaryType::from(value : String) -> BinaryType? {
     "arraybuffer" => Some(BinaryType::Arraybuffer)
     _ => None
   }
+}
+
+///|
+fn BinaryType::from_unchecked(value : String) -> BinaryType {
+  match value {
+    "blob" => BinaryType::Blob
+    "arraybuffer" => BinaryType::Arraybuffer
+    _ => abort("unknown enum value")
+  }
+}
+
+///|
+pub fn BinaryType::value(self : BinaryType) -> String {
+  let buf = StringBuilder::new()
+  match self {
+    BinaryType::Blob => buf.write_string("blob")
+    BinaryType::Arraybuffer => buf.write_string("arraybuffer")
+  }
+  buf.to_string()
 }

@@ -8,7 +8,7 @@ extern "js" fn screen_orientation_lock_ffi_js(
 fn screen_orientation_lock_ffi(
   obj : JsValue,
   orientation : JsValue,
-) -> JsPromise[Unit] {
+) -> JsPromise[JsValue] {
   screen_orientation_lock_ffi_js(obj, orientation).unsafe_cast()
 }
 

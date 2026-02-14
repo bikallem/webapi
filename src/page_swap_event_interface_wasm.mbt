@@ -8,4 +8,9 @@ fn page_swap_event_new_ffi(
 fn page_swap_event_activation_ffi(obj : JsValue) -> NavigationActivation = "webapi_PageSwapEvent" "get_activation"
 
 ///|
-fn page_swap_event_view_transition_ffi(obj : JsValue) -> ViewTransition = "webapi_PageSwapEvent" "get_viewTransition"
+fn page_swap_event_view_transition_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PageSwapEvent" "get_viewTransition"
+
+///|
+fn page_swap_event_view_transition_ffi(obj : JsValue) -> ViewTransition {
+  page_swap_event_view_transition_ffi_wasm(obj).unsafe_cast()
+}
