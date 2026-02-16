@@ -1,6 +1,11 @@
-.PHONY: all gen gen-test gen-test-update check fmt info build-examples validate-wasm test-playwright serve clean
+.PHONY: all install gen gen-test gen-test-update check fmt info build-examples validate-wasm test-playwright serve clean
 
-all: gen check fmt info build-examples validate-wasm test-playwright
+all: install gen check fmt info build-examples validate-wasm test-playwright
+
+# Install all npm dependencies
+install:
+	cd webapi_gen && npm install
+	cd tests && npm install
 
 # Run the code generator (always run 'make clean' first after editing generator code)
 gen:
