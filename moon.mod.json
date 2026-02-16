@@ -4,7 +4,16 @@
   "readme": "README.mbt.md",
   "repository": "https://github.com/bikallem/webapi.git",
   "license": "Apache-2.0",
-  "keywords": [],
+  "keywords": [
+    "webapi",
+    "dom",
+    "fetch",
+    "html",
+    "xhr",
+    "url",
+    "svg",
+    "uievents"
+  ],
   "description": "Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more",
   "source": "src",
   "preferred-target": "js",
