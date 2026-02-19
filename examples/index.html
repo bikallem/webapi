@@ -101,78 +101,13 @@
             color: #555;
         }
 
+        #app { display: contents; }
         .content { flex: 1; background: #fff; }
         .content iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
-    <nav class="sidebar">
-        <div class="brand">
-            <h1>MoonBit</h1>
-            <div class="title">WebAPI Examples</div>
-        </div>
-        <ul>
-            <li><span class="name">Canvas</span><span class="targets"><a class="t-js" href="canvas/canvas.js.html">js</a><a class="t-wasm" href="canvas/canvas.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/canvas" target="_blank">src</a></span></li>
-            <li><span class="name">Calculator</span><span class="targets"><a class="t-js" href="calculator/calculator.js.html">js</a><a class="t-wasm" href="calculator/calculator.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/calculator" target="_blank">src</a></span></li>
-            <li><span class="name">ClassList</span><span class="targets"><a class="t-js" href="classlist/classlist.js.html">js</a><a class="t-wasm" href="classlist/classlist.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/classlist" target="_blank">src</a></span></li>
-            <li><span class="name">Clipboard APIs</span><span class="targets"><a class="t-js" href="clipboard-apis/clipboard-apis.js.html">js</a><a class="t-wasm" href="clipboard-apis/clipboard-apis.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/clipboard-apis" target="_blank">src</a></span></li>
-            <li><span class="name">Console</span><span class="targets"><a class="t-js" href="console/console.js.html">js</a><a class="t-wasm" href="console/console.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/console" target="_blank">src</a></span></li>
-            <li><span class="name">Counter</span><span class="targets"><a class="t-js" href="counter/counter.js.html">js</a><a class="t-wasm" href="counter/counter.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/counter" target="_blank">src</a></span></li>
-            <li><span class="name">DOM</span><span class="targets"><a class="t-js" href="dom/dom.js.html">js</a><a class="t-wasm" href="dom/dom.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/dom" target="_blank">src</a></span></li>
-            <li><span class="name">Element Operations</span><span class="targets"><a class="t-js" href="element-ops/element-ops.js.html">js</a><a class="t-wasm" href="element-ops/element-ops.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/element-ops" target="_blank">src</a></span></li>
-            <li><span class="name">Encoding</span><span class="targets"><a class="t-js" href="encoding/encoding.js.html">js</a><a class="t-wasm" href="encoding/encoding.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/encoding" target="_blank">src</a></span></li>
-            <li><span class="name">Events</span><span class="targets"><a class="t-js" href="events/events.js.html">js</a><a class="t-wasm" href="events/events.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/events" target="_blank">src</a></span></li>
-            <li><span class="name">File API</span><span class="targets"><a class="t-js" href="file-api/file-api.js.html">js</a><a class="t-wasm" href="file-api/file-api.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/file-api" target="_blank">src</a></span></li>
-            <li><span class="name">IndexedDB</span><span class="targets"><a class="t-js" href="indexeddb/indexeddb.js.html">js</a><a class="t-wasm" href="indexeddb/indexeddb.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/indexeddb" target="_blank">src</a></span></li>
-            <li><span class="name">Fetch</span><span class="targets"><a class="t-js" href="fetch/fetch.js.html">js</a><a class="t-wasm" href="fetch/fetch.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/fetch" target="_blank">src</a></span></li>
-            <li><span class="name">Fetch (async)</span><span class="targets"><a class="t-js" href="fetch-async/fetch-async.js.html">js</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/fetch-async" target="_blank">src</a></span></li>
-            <li><span class="name">Forms</span><span class="targets"><a class="t-js" href="forms/forms.js.html">js</a><a class="t-wasm" href="forms/forms.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/forms" target="_blank">src</a></span></li>
-            <li><span class="name">Fullscreen</span><span class="targets"><a class="t-js" href="fullscreen/fullscreen.js.html">js</a><a class="t-wasm" href="fullscreen/fullscreen.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/fullscreen" target="_blank">src</a></span></li>
-            <li><span class="name">Geometry</span><span class="targets"><a class="t-js" href="geometry/geometry.js.html">js</a><a class="t-wasm" href="geometry/geometry.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/geometry" target="_blank">src</a></span></li>
-            <li><span class="name">Intersection Observer</span><span class="targets"><a class="t-js" href="intersection-observer/intersection-observer.js.html">js</a><a class="t-wasm" href="intersection-observer/intersection-observer.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/intersection-observer" target="_blank">src</a></span></li>
-            <li><span class="name">JsArray Callback</span><span class="targets"><a class="t-js" href="jsarray-callback/jsarray-callback.js.html">js</a><a class="t-wasm" href="jsarray-callback/jsarray-callback.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/jsarray-callback" target="_blank">src</a></span></li>
-            <li><span class="name">Notifications</span><span class="targets"><a class="t-js" href="notifications/notifications.js.html">js</a><a class="t-wasm" href="notifications/notifications.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/notifications" target="_blank">src</a></span></li>
-            <li><span class="name">Performance</span><span class="targets"><a class="t-js" href="performance/performance.js.html">js</a><a class="t-wasm" href="performance/performance.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/performance" target="_blank">src</a></span></li>
-            <li><span class="name">Pointer Events</span><span class="targets"><a class="t-js" href="pointerevents/pointerevents.js.html">js</a><a class="t-wasm" href="pointerevents/pointerevents.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/pointerevents" target="_blank">src</a></span></li>
-            <li><span class="name">Request Idle Callback</span><span class="targets"><a class="t-js" href="requestidlecallback/requestidlecallback.js.html">js</a><a class="t-wasm" href="requestidlecallback/requestidlecallback.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/requestidlecallback" target="_blank">src</a></span></li>
-            <li><span class="name">Referrer Policy</span><span class="targets"><a class="t-js" href="referrer-policy/referrer-policy.js.html">js</a><a class="t-wasm" href="referrer-policy/referrer-policy.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/referrer-policy" target="_blank">src</a></span></li>
-            <li><span class="name">Resize Observer</span><span class="targets"><a class="t-js" href="resize-observer/resize-observer.js.html">js</a><a class="t-wasm" href="resize-observer/resize-observer.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/resize-observer" target="_blank">src</a></span></li>
-            <li><span class="name">Screen Orientation</span><span class="targets"><a class="t-js" href="screen-orientation/screen-orientation.js.html">js</a><a class="t-wasm" href="screen-orientation/screen-orientation.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/screen-orientation" target="_blank">src</a></span></li>
-            <li><span class="name">Selection API</span><span class="targets"><a class="t-js" href="selection-api/selection-api.js.html">js</a><a class="t-wasm" href="selection-api/selection-api.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/selection-api" target="_blank">src</a></span></li>
-            <li><span class="name">Storage</span><span class="targets"><a class="t-js" href="storage/storage.js.html">js</a><a class="t-wasm" href="storage/storage.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/storage" target="_blank">src</a></span></li>
-            <li><span class="name">Storage Manager</span><span class="targets"><a class="t-js" href="storage-manager/storage-manager.js.html">js</a><a class="t-wasm" href="storage-manager/storage-manager.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/storage-manager" target="_blank">src</a></span></li>
-            <li><span class="name">Streams</span><span class="targets"><a class="t-js" href="streams/streams.js.html">js</a><a class="t-wasm" href="streams/streams.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/streams" target="_blank">src</a></span></li>
-            <li><span class="name">SVG</span><span class="targets"><a class="t-js" href="svg/svg.js.html">js</a><a class="t-wasm" href="svg/svg.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/svg" target="_blank">src</a></span></li>
-            <li><span class="name">Timers</span><span class="targets"><a class="t-js" href="timers/timers.js.html">js</a><a class="t-wasm" href="timers/timers.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/timers" target="_blank">src</a></span></li>
-            <li><span class="name">Todo</span><span class="targets"><a class="t-js" href="todo/todo.js.html">js</a><a class="t-wasm" href="todo/todo.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/todo" target="_blank">src</a></span></li>
-            <li><span class="name">Touch Events</span><span class="targets"><a class="t-js" href="touch-events/touch-events.js.html">js</a><a class="t-wasm" href="touch-events/touch-events.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/touch-events" target="_blank">src</a></span></li>
-            <li><span class="name">Trusted Types</span><span class="targets"><a class="t-js" href="trusted-types/trusted-types.js.html">js</a><a class="t-wasm" href="trusted-types/trusted-types.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/trusted-types" target="_blank">src</a></span></li>
-            <li><span class="name">URL</span><span class="targets"><a class="t-js" href="url/url.js.html">js</a><a class="t-wasm" href="url/url.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/url" target="_blank">src</a></span></li>
-            <li><span class="name">Vibration</span><span class="targets"><a class="t-js" href="vibration/vibration.js.html">js</a><a class="t-wasm" href="vibration/vibration.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/vibration" target="_blank">src</a></span></li>
-            <li><span class="name">Web Animations</span><span class="targets"><a class="t-js" href="web-animations/web-animations.js.html">js</a><a class="t-wasm" href="web-animations/web-animations.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/web-animations" target="_blank">src</a></span></li>
-            <li><span class="name">WebSockets</span><span class="targets"><a class="t-js" href="websockets/websockets.js.html">js</a><a class="t-wasm" href="websockets/websockets.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/websockets" target="_blank">src</a></span></li>
-            <li><span class="name">XMLHttpRequest</span><span class="targets"><a class="t-js" href="xhr/xhr.js.html">js</a><a class="t-wasm" href="xhr/xhr.wasm.html">wasm</a><a class="t-src" href="https://github.com/bikallem/webapi/tree/main/examples/xhr" target="_blank">src</a></span></li>
-        </ul>
-    </nav>
-    <main class="content">
-        <iframe id="demo" src="canvas/canvas.js.html"></iframe>
-    </main>
-    <script>
-        const iframe = document.getElementById('demo');
-        const links = document.querySelectorAll('.targets a');
-        function setActive(link) {
-            links.forEach(a => a.classList.remove('active'));
-            link.classList.add('active');
-        }
-        links.forEach(link => {
-            link.addEventListener('click', e => {
-                if (link.classList.contains('t-src')) return;
-                e.preventDefault();
-                iframe.src = link.getAttribute('href');
-                setActive(link);
-            });
-        });
-        setActive(links[0]);
-    </script>
+    <div id="app"></div>
+    <script type="module" src="/examples/_build/js/release/build/webapi-examples.js"></script>
 </body>
 </html>
