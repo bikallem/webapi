@@ -4,6 +4,7 @@ using @webapi {
   document,
   type HTMLDivElement,
   type HTMLButtonElement,
+  type KeyboardEvent,
   type EventListener,
 }
 
@@ -47,6 +48,20 @@ fn make_button(label : String) -> HTMLButtonElement {
   ..set_attribute("style", style)
   .set_text_content(label)
   button
+}
+
+///|
+/// Maps KeyboardEvent.key to calculator key string.
+fn map_keyboard_key(key : String) -> String? {
+  match key {
+    "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "." | "+"
+    | "-" | "*" | "/" => Some(key)
+    "Enter" | "=" => Some("=")
+    "Backspace" => Some("DEL")
+    "Escape" => Some("C")
+    "Delete" => Some("CE")
+    _ => None
+  }
 }
 
 ///|
@@ -105,36 +120,40 @@ fn main {
       button.add_event_listener(
         "click",
         EventListener::new(fn(_event) {
-          state = match key {
-            "0" => handle_digit(state, "0")
-            "1" => handle_digit(state, "1")
-            "2" => handle_digit(state, "2")
-            "3" => handle_digit(state, "3")
-            "4" => handle_digit(state, "4")
-            "5" => handle_digit(state, "5")
-            "6" => handle_digit(state, "6")
-            "7" => handle_digit(state, "7")
-            "8" => handle_digit(state, "8")
-            "9" => handle_digit(state, "9")
-            "." => handle_decimal(state)
-            "+/-" => handle_sign_toggle(state)
-            "+" => handle_operator(state, "+")
-            "-" => handle_operator(state, "-")
-            "*" => handle_operator(state, "*")
-            "/" => handle_operator(state, "/")
-            "=" => handle_equal(state)
-            "C" => clear_all_state()
-            "CE" => handle_clear_entry(state)
-            "DEL" => handle_backspace(state)
-            _ => state
+          match process_key(state, key) {
+            Some(new_state) => {
+              state = new_state
+              render_ui(display, status, state)
+            }
+            None => ()
           }
-          render_ui(display, status, state)
         }),
       )
       row_el.append_child(button) |> ignore
     }
     buttons.append_child(row_el) |> ignore
   }
+
+  // Keyboard support
+  document.add_event_listener(
+    "keydown",
+    EventListener::new(fn(event) {
+      let kb_event : KeyboardEvent = event.into()
+      match map_keyboard_key(kb_event.key()) {
+        Some(calc_key) => {
+          match process_key(state, calc_key) {
+            Some(new_state) => {
+              state = new_state
+              render_ui(display, status, state)
+            }
+            None => ()
+          }
+          kb_event.prevent_default()
+        }
+        None => ()
+      }
+    }),
+  )
 
   let children : Array[&@webapi.TNode] = [
     heading, subtitle, status, display, buttons,
