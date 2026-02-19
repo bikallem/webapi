@@ -208,33 +208,24 @@ fn main {
     list.set_text_content("")
     next_id = 0
 
-    match storage.get_item(storage_key) {
-      Some(raw) =>
-        if raw != "" {
-          for encoded in raw.split(entry_sep) {
-            if !encoded.is_empty() {
-              match encoded.find(field_sep) {
-                Some(split_idx) => {
-                  let done_flag = encoded.view(end_offset=split_idx).to_string()
-                  let text = encoded
-                    .view(start_offset=split_idx + 1)
-                    .to_string()
-                  if text != "" {
-                    let done = done_flag == "1"
-                    let todo_id = next_id
-                    next_id = next_id + 1
-                    todos.push((todo_id, done, text))
-                    append_todo_to_dom(todo_id, done, text)
-                  }
-                }
-                None => ()
-              }
-            }
-          }
-        }
-      None => ()
-    }
+    guard storage.get_item(storage_key) is Some(raw) else { return }
 
+    if raw != "" {
+      for encoded in raw.split(entry_sep) {
+        guard !encoded.is_empty() && encoded.find(field_sep) is Some(split_idx) else {
+          continue
+        }
+        let done_flag = encoded.view(end_offset=split_idx).to_string()
+        let text = encoded.view(start_offset=split_idx + 1).to_string()
+        if text != "" {
+          let done = done_flag == "1"
+          let todo_id = next_id
+          next_id = next_id + 1
+          todos.push((todo_id, done, text))
+          append_todo_to_dom(todo_id, done, text)
+        }
+      }
+    }
     update_status()
   }
 
