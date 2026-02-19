@@ -176,7 +176,7 @@ fn main {
   let navigate = fn() {
     let hash = @webapi.window.location().hash()
     let (name, target) = parse_hash(hash)
-    iframe.set_src("/examples/" + name + "/" + name + "." + target + ".html")
+    iframe.set_src(name + "/" + name + "." + target + ".html")
 
     // Remove active class from previous link
     match prev_active[0] {

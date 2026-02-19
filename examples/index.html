@@ -108,6 +108,7 @@
 </head>
 <body>
     <div id="app"></div>
-    <script type="module" src="/examples/_build/js/release/build/webapi-examples.js"></script>
+    <script>if (!location.pathname.endsWith('/')) location.replace(location.pathname + '/' + location.hash);</script>
+    <script type="module" src="_build/js/release/build/webapi-examples.js"></script>
 </body>
 </html>
