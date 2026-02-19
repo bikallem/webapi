@@ -189,7 +189,12 @@ fn handle_operator(state : CalculatorState, op : String) -> CalculatorState {
       let (accumulator, current_input) = if !state.has_accumulator {
         (current_value, state.current_input)
       } else if state.pending_operator != "" && !state.should_reset_input {
-        match apply_operator(state.accumulator, current_value, state.pending_operator) {
+        match
+          apply_operator(
+            state.accumulator,
+            current_value,
+            state.pending_operator,
+          ) {
           Some(result) => (result, format_number(result))
           None => return show_error_state()
         }
@@ -221,14 +226,13 @@ fn handle_equal(state : CalculatorState) -> CalculatorState {
   match parse_number(state.current_input) {
     Some(current_value) =>
       match
-        apply_operator(
-          state.accumulator, current_value, state.pending_operator,
-        ) {
-        Some(result) => {
-          ..clear_all_state(),
-          current_input: format_number(result),
-          should_reset_input: true,
-        }
+        apply_operator(state.accumulator, current_value, state.pending_operator) {
+        Some(result) =>
+          {
+            ..clear_all_state(),
+            current_input: format_number(result),
+            should_reset_input: true,
+          }
         None => show_error_state()
       }
     None => show_error_state()

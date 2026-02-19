@@ -54,8 +54,21 @@ fn make_button(label : String) -> HTMLButtonElement {
 /// Maps KeyboardEvent.key to calculator key string.
 fn map_keyboard_key(key : String) -> String? {
   match key {
-    "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "." | "+"
-    | "-" | "*" | "/" => Some(key)
+    "0"
+    | "1"
+    | "2"
+    | "3"
+    | "4"
+    | "5"
+    | "6"
+    | "7"
+    | "8"
+    | "9"
+    | "."
+    | "+"
+    | "-"
+    | "*"
+    | "/" => Some(key)
     "Enter" | "=" => Some("=")
     "Backspace" => Some("DEL")
     "Escape" => Some("C")
