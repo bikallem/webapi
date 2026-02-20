@@ -62,7 +62,7 @@ pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit with to_js(
 /// [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) interface.
 pub trait TXMLHttpRequest: TXMLHttpRequestEventTarget {
   onreadystatechange(self : Self) -> EventHandler = _
-  set_onreadystatechange(self : Self, onreadystatechange : EventHandler) -> Unit = _
+  set_onreadystatechange(self : Self, onreadystatechange : (Event) -> JsValue) -> Unit = _
   ready_state(self : Self) -> UInt = _
   open(self : Self, method_ : String, url : String) -> Unit = _
   open_with_credentials(
@@ -104,11 +104,11 @@ impl TXMLHttpRequest with onreadystatechange(self : Self) -> EventHandler {
 /// [XMLHttpRequest.onreadystatechange](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange)
 impl TXMLHttpRequest with set_onreadystatechange(
   self : Self,
-  onreadystatechange : EventHandler,
+  onreadystatechange : (Event) -> JsValue,
 ) -> Unit {
   xml_http_request_set_onreadystatechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onreadystatechange),
+    TJsValue::to_js(event_handler_non_null_ffi(onreadystatechange)),
   )
 }
 

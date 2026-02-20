@@ -72,9 +72,9 @@ pub trait TIDBRequest: TEventTarget {
   transaction(self : Self) -> IDBTransaction = _
   ready_state(self : Self) -> IDBRequestReadyState = _
   onsuccess(self : Self) -> EventHandler = _
-  set_onsuccess(self : Self, onsuccess : EventHandler) -> Unit = _
+  set_onsuccess(self : Self, onsuccess : (Event) -> JsValue) -> Unit = _
   onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -115,10 +115,10 @@ impl TIDBRequest with onsuccess(self : Self) -> EventHandler {
 
 ///|
 /// [IDBRequest.onsuccess](https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest/onsuccess)
-impl TIDBRequest with set_onsuccess(self : Self, onsuccess : EventHandler) -> Unit {
+impl TIDBRequest with set_onsuccess(self : Self, onsuccess : (Event) -> JsValue) -> Unit {
   idb_request_set_onsuccess_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onsuccess),
+    TJsValue::to_js(event_handler_non_null_ffi(onsuccess)),
   )
 }
 
@@ -130,6 +130,9 @@ impl TIDBRequest with onerror(self : Self) -> EventHandler {
 
 ///|
 /// [IDBRequest.onerror](https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest/onerror)
-impl TIDBRequest with set_onerror(self : Self, onerror : EventHandler) -> Unit {
-  idb_request_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+impl TIDBRequest with set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit {
+  idb_request_set_onerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onerror)),
+  )
 }

@@ -46,6 +46,38 @@ fn to_trait_ref(
 }
 
 ///|
+/// Try to resolve a type name to a callback, either directly or via a typedef chain.
+/// Returns a Callback ArgMbtType if the name resolves to a callback function definition.
+fn try_resolve_callback(
+  name : String,
+  type_registry : @type_registry.TypeRegistry,
+) -> @type_mapping.ArgMbtType? {
+  let (cb_name, cb_def) = match type_registry.get_callback_def(name) {
+    Some(cb_def) => (name, cb_def)
+    None =>
+      match type_registry.resolve_typedef_to_callback(name) {
+        Some((cb_name, cb_def)) => (cb_name, cb_def)
+        None => return None
+      }
+  }
+  let cb_arg_types = cb_def.arguments.map(fn(a) {
+    let (t, _) = arg_mbt_type(a.type_.type_, cb_name, "", a.name, type_registry)
+    t.name()
+  })
+  let (cb_ret, _) = arg_mbt_type(cb_def.return_type, "", "", "", type_registry)
+  let cb_args_str = cb_arg_types.join(", ")
+  let closure_type = "(\{cb_args_str}) -> \{cb_ret.name()}"
+  let ffi_name = "\{@type_mapping.snake_case(cb_name)}_ffi"
+  Some(
+    @type_mapping.ArgMbtType::Callback(@type_mapping.CallbackArgInfo::{
+      name: cb_name,
+      closure_type,
+      ffi_name,
+    }),
+  )
+}
+
+///|
 /// Convert method arguments from IDL to MBT types, collecting any additional emits needed
 /// for complex types (e.g., union arg traits).
 fn method_args(
@@ -66,36 +98,7 @@ fn method_args(
     // Convert callback-typed args to Callback variant so the method accepts a closure directly
     let mbt_type = match mbt_type {
       Other(name) =>
-        match type_registry.get_callback_def(name) {
-          Some(cb_def) => {
-            let cb_arg_types = cb_def.arguments.map(fn(a) {
-              let (t, _) = arg_mbt_type(
-                a.type_.type_,
-                name,
-                "",
-                a.name,
-                type_registry,
-              )
-              t.name()
-            })
-            let (cb_ret, _) = arg_mbt_type(
-              cb_def.return_type,
-              "",
-              "",
-              "",
-              type_registry,
-            )
-            let cb_args_str = cb_arg_types.join(", ")
-            let closure_type = "(\{cb_args_str}) -> \{cb_ret.name()}"
-            let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-            @type_mapping.ArgMbtType::Callback(@type_mapping.CallbackArgInfo::{
-              name,
-              closure_type,
-              ffi_name,
-            })
-          }
-          None => mbt_type
-        }
+        try_resolve_callback(name, type_registry).unwrap_or(mbt_type)
       _ => mbt_type
     }
     let default_value = default_value.map(dv => mbt_default_value(dv, mbt_type))
@@ -438,6 +441,11 @@ fn emit_attribute_setter(
   interface_name : String,
   type_registry : @type_registry.TypeRegistry,
 ) -> &InterfaceMethodEmit {
+  let attr_type = match attr_type {
+    Other(name) =>
+      try_resolve_callback(name, type_registry).unwrap_or(attr_type)
+    _ => attr_type
+  }
   let is_union_typedef = is_union_typedef_arg(attr.type_, type_registry)
   let attr_type = to_trait_ref(attr_type, is_union_typedef)
   let args = [

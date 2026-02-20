@@ -30,7 +30,7 @@ pub trait TMediaQueryList: TEventTarget {
   add_listener(self : Self, callback : (Event) -> Unit) -> Unit = _
   remove_listener(self : Self, callback : (Event) -> Unit) -> Unit = _
   onchange(self : Self) -> EventHandler = _
-  set_onchange(self : Self, onchange : EventHandler) -> Unit = _
+  set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -74,9 +74,12 @@ impl TMediaQueryList with onchange(self : Self) -> EventHandler {
 
 ///|
 /// [MediaQueryList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/onchange)
-impl TMediaQueryList with set_onchange(self : Self, onchange : EventHandler) -> Unit {
+impl TMediaQueryList with set_onchange(
+  self : Self,
+  onchange : (Event) -> JsValue,
+) -> Unit {
   media_query_list_set_onchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onchange)),
   )
 }

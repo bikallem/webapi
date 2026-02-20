@@ -47,11 +47,11 @@ pub trait TAnimation: TEventTarget {
   ready(self : Self) -> JsPromise[Animation] = _
   finished(self : Self) -> JsPromise[Animation] = _
   onfinish(self : Self) -> EventHandler = _
-  set_onfinish(self : Self, onfinish : EventHandler) -> Unit = _
+  set_onfinish(self : Self, onfinish : (Event) -> JsValue) -> Unit = _
   oncancel(self : Self) -> EventHandler = _
-  set_oncancel(self : Self, oncancel : EventHandler) -> Unit = _
+  set_oncancel(self : Self, oncancel : (Event) -> JsValue) -> Unit = _
   onremove(self : Self) -> EventHandler = _
-  set_onremove(self : Self, onremove : EventHandler) -> Unit = _
+  set_onremove(self : Self, onremove : (Event) -> JsValue) -> Unit = _
   cancel(self : Self) -> Unit = _
   finish(self : Self) -> Unit = _
   play(self : Self) -> Unit = _
@@ -151,8 +151,11 @@ impl TAnimation with onfinish(self : Self) -> EventHandler {
 
 ///|
 /// [Animation.onfinish](https://developer.mozilla.org/en-US/docs/Web/API/Animation/onfinish)
-impl TAnimation with set_onfinish(self : Self, onfinish : EventHandler) -> Unit {
-  animation_set_onfinish_ffi(TJsValue::to_js(self), TJsValue::to_js(onfinish))
+impl TAnimation with set_onfinish(self : Self, onfinish : (Event) -> JsValue) -> Unit {
+  animation_set_onfinish_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onfinish)),
+  )
 }
 
 ///|
@@ -163,8 +166,11 @@ impl TAnimation with oncancel(self : Self) -> EventHandler {
 
 ///|
 /// [Animation.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/Animation/oncancel)
-impl TAnimation with set_oncancel(self : Self, oncancel : EventHandler) -> Unit {
-  animation_set_oncancel_ffi(TJsValue::to_js(self), TJsValue::to_js(oncancel))
+impl TAnimation with set_oncancel(self : Self, oncancel : (Event) -> JsValue) -> Unit {
+  animation_set_oncancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oncancel)),
+  )
 }
 
 ///|
@@ -175,8 +181,11 @@ impl TAnimation with onremove(self : Self) -> EventHandler {
 
 ///|
 /// [Animation.onremove](https://developer.mozilla.org/en-US/docs/Web/API/Animation/onremove)
-impl TAnimation with set_onremove(self : Self, onremove : EventHandler) -> Unit {
-  animation_set_onremove_ffi(TJsValue::to_js(self), TJsValue::to_js(onremove))
+impl TAnimation with set_onremove(self : Self, onremove : (Event) -> JsValue) -> Unit {
+  animation_set_onremove_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onremove)),
+  )
 }
 
 ///|

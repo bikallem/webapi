@@ -1200,3 +1200,80 @@ test "mbt_code_gen_multi wasm FFI snapshot for overloaded methods" {
     ),
   )
 }
+
+///|
+test "InterfaceEmitter resolves typedef→callback chain in attribute setter" {
+  let idl =
+    #|interface Event {};
+    #|callback EventHandlerNonNull = any (Event event);
+    #|typedef EventHandlerNonNull? EventHandler;
+    #|interface GlobalEventHandlers {
+    #|  attribute EventHandler onclick;
+    #|};
+  let interface_emitter = make_interface_emitter(idl)
+  let (_, emits) = interface_emitter.emit("GlobalEventHandlers")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: GlobalEventHandlers
+      #|
+      #|
+      #|/// [GlobalEventHandlers](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers)
+      #|#external
+      #|pub type GlobalEventHandlers
+      #|
+      #|pub impl TJsValue for GlobalEventHandlers with to_js(self: GlobalEventHandlers) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for GlobalEventHandlers with from_js_any(value : JsAny) -> GlobalEventHandlers = "%identity"
+      #|
+      #|pub fn[T: TGlobalEventHandlers] GlobalEventHandlers::into(self : GlobalEventHandlers) -> T = "%identity"
+      #|
+      #|pub impl TGlobalEventHandlers for GlobalEventHandlers
+      #|
+      #|/// [GlobalEventHandlers](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers) interface.
+      #|pub trait TGlobalEventHandlers: TJsValue {
+      #|  onclick(self : Self) -> EventHandler = _
+      #|  set_onclick(self : Self, onclick : (Event) -> JsValue) -> Unit = _
+      #|}
+      #|
+      #|/// [GlobalEventHandlers.onclick](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick)
+      #|impl TGlobalEventHandlers with onclick(self : Self) -> EventHandler {
+      #|  global_event_handlers_onclick_ffi(TJsValue::to_js(self))
+      #|}
+      #|
+      #|/// [GlobalEventHandlers.onclick](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick)
+      #|impl TGlobalEventHandlers with set_onclick(self : Self, 
+      #|onclick : (Event) -> JsValue) -> Unit {
+      #|  global_event_handlers_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onclick)))
+      #|}
+    ),
+  )
+  inspect(
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn global_event_handlers_onclick_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.onclick"
+      #|
+      #|///|
+      #|fn global_event_handlers_onclick_ffi(obj: JsValue) -> EventHandler {
+      #|  global_event_handlers_onclick_ffi_js(obj).unsafe_cast()
+      #|}
+      #|
+      #|extern "js" fn global_event_handlers_set_onclick_ffi(obj: JsValue, onclick: JsValue) -> Unit = "(obj, onclick) => { obj.onclick = onclick; }"
+    ),
+  )
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn global_event_handlers_onclick_ffi_wasm(obj: JsValue) -> JsValue = "webapi_GlobalEventHandlers" "get_onclick"
+      #|
+      #|///|
+      #|fn global_event_handlers_onclick_ffi(obj: JsValue) -> EventHandler {
+      #|  global_event_handlers_onclick_ffi_wasm(obj).unsafe_cast()
+      #|}
+      #|
+      #|fn global_event_handlers_set_onclick_ffi(obj: JsValue, onclick: JsValue) -> Unit = "webapi_GlobalEventHandlers" "set_onclick"
+    ),
+  )
+}

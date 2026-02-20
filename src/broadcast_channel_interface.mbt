@@ -36,9 +36,9 @@ pub trait TBroadcastChannel: TEventTarget {
   post_message(self : Self, message : JsValue) -> Unit = _
   close(self : Self) -> Unit = _
   onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  set_onmessage(self : Self, onmessage : (Event) -> JsValue) -> Unit = _
   onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  set_onmessageerror(self : Self, onmessageerror : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -70,10 +70,13 @@ impl TBroadcastChannel with onmessage(self : Self) -> EventHandler {
 
 ///|
 /// [BroadcastChannel.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/onmessage)
-impl TBroadcastChannel with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TBroadcastChannel with set_onmessage(
+  self : Self,
+  onmessage : (Event) -> JsValue,
+) -> Unit {
   broadcast_channel_set_onmessage_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessage),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessage)),
   )
 }
 
@@ -87,10 +90,10 @@ impl TBroadcastChannel with onmessageerror(self : Self) -> EventHandler {
 /// [BroadcastChannel.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/onmessageerror)
 impl TBroadcastChannel with set_onmessageerror(
   self : Self,
-  onmessageerror : EventHandler,
+  onmessageerror : (Event) -> JsValue,
 ) -> Unit {
   broadcast_channel_set_onmessageerror_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessageerror),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }

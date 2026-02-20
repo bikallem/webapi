@@ -34,11 +34,11 @@ pub trait TMessagePort: TEventTarget {
   start(self : Self) -> Unit = _
   close(self : Self) -> Unit = _
   onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit = _
   onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  set_onmessage(self : Self, onmessage : (Event) -> JsValue) -> Unit = _
   onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  set_onmessageerror(self : Self, onmessageerror : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -89,8 +89,11 @@ impl TMessagePort with onclose(self : Self) -> EventHandler {
 
 ///|
 /// [MessagePort.onclose](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onclose)
-impl TMessagePort with set_onclose(self : Self, onclose : EventHandler) -> Unit {
-  message_port_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
+impl TMessagePort with set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit {
+  message_port_set_onclose_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onclose)),
+  )
 }
 
 ///|
@@ -101,10 +104,13 @@ impl TMessagePort with onmessage(self : Self) -> EventHandler {
 
 ///|
 /// [MessagePort.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onmessage)
-impl TMessagePort with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TMessagePort with set_onmessage(
+  self : Self,
+  onmessage : (Event) -> JsValue,
+) -> Unit {
   message_port_set_onmessage_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessage),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessage)),
   )
 }
 
@@ -118,10 +124,10 @@ impl TMessagePort with onmessageerror(self : Self) -> EventHandler {
 /// [MessagePort.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/onmessageerror)
 impl TMessagePort with set_onmessageerror(
   self : Self,
-  onmessageerror : EventHandler,
+  onmessageerror : (Event) -> JsValue,
 ) -> Unit {
   message_port_set_onmessageerror_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessageerror),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }

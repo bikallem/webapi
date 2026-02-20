@@ -84,44 +84,36 @@ fn main {
     update_status("Status: Connecting...")
     let socket = @webapi.WebSocket::new(url)
     ws.val = Some(socket)
-    socket.set_onopen(
-      @webapi.EventHandlerNonNull::new(fn(_e) {
-        update_status(
-          "Status: Connected (readyState=" +
-          socket.ready_state().to_string() +
-          ")",
-        )
-        log_message("Connected! Sending test message...")
-        socket.send("Hello from MoonBit!")
-        @webapi.JsValue::undefined()
-      }),
-    )
-    socket.set_onmessage(
-      @webapi.EventHandlerNonNull::new(fn(e) {
-        let msg_event : @webapi.MessageEvent = e.into()
-        let data = msg_event.data().as_string()
-        log_message("Received: " + data)
-        @webapi.JsValue::undefined()
-      }),
-    )
-    socket.set_onclose(
-      @webapi.EventHandlerNonNull::new(fn(e) {
-        let close_event : @webapi.CloseEvent = e.into()
-        update_status(
-          "Status: Disconnected (code=" + close_event.code().to_string() + ")",
-        )
-        log_message("Connection closed")
-        ws.val = None
-        @webapi.JsValue::undefined()
-      }),
-    )
-    socket.set_onerror(
-      @webapi.EventHandlerNonNull::new(fn(_e) {
-        update_status("Status: Error")
-        log_message("Connection error")
-        @webapi.JsValue::undefined()
-      }),
-    )
+    socket.set_onopen(fn(_e) {
+      update_status(
+        "Status: Connected (readyState=" +
+        socket.ready_state().to_string() +
+        ")",
+      )
+      log_message("Connected! Sending test message...")
+      socket.send("Hello from MoonBit!")
+      @webapi.JsValue::undefined()
+    })
+    socket.set_onmessage(fn(e) {
+      let msg_event : @webapi.MessageEvent = e.into()
+      let data = msg_event.data().as_string()
+      log_message("Received: " + data)
+      @webapi.JsValue::undefined()
+    })
+    socket.set_onclose(fn(e) {
+      let close_event : @webapi.CloseEvent = e.into()
+      update_status(
+        "Status: Disconnected (code=" + close_event.code().to_string() + ")",
+      )
+      log_message("Connection closed")
+      ws.val = None
+      @webapi.JsValue::undefined()
+    })
+    socket.set_onerror(fn(_e) {
+      update_status("Status: Error")
+      log_message("Connection error")
+      @webapi.JsValue::undefined()
+    })
   })
 
   // Disconnect handler

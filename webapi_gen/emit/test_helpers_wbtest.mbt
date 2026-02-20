@@ -9,6 +9,7 @@ fn parse_and_flatten(
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
   type_registry.set_callback_defs(flattened.callbacks)
+  type_registry.set_typedef_defs(flattened.typedefs)
   (flattened, type_registry)
 }
 

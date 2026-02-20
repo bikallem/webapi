@@ -30,11 +30,11 @@ pub trait TVideoTrackList: TEventTarget {
   get_track_by_id(self : Self, id : String) -> VideoTrack? = _
   selected_index(self : Self) -> Int = _
   onchange(self : Self) -> EventHandler = _
-  set_onchange(self : Self, onchange : EventHandler) -> Unit = _
+  set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit = _
   onaddtrack(self : Self) -> EventHandler = _
-  set_onaddtrack(self : Self, onaddtrack : EventHandler) -> Unit = _
+  set_onaddtrack(self : Self, onaddtrack : (Event) -> JsValue) -> Unit = _
   onremovetrack(self : Self) -> EventHandler = _
-  set_onremovetrack(self : Self, onremovetrack : EventHandler) -> Unit = _
+  set_onremovetrack(self : Self, onremovetrack : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -85,10 +85,13 @@ impl TVideoTrackList with onchange(self : Self) -> EventHandler {
 
 ///|
 /// [VideoTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/onchange)
-impl TVideoTrackList with set_onchange(self : Self, onchange : EventHandler) -> Unit {
+impl TVideoTrackList with set_onchange(
+  self : Self,
+  onchange : (Event) -> JsValue,
+) -> Unit {
   video_track_list_set_onchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onchange)),
   )
 }
 
@@ -100,10 +103,13 @@ impl TVideoTrackList with onaddtrack(self : Self) -> EventHandler {
 
 ///|
 /// [VideoTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/onaddtrack)
-impl TVideoTrackList with set_onaddtrack(self : Self, onaddtrack : EventHandler) -> Unit {
+impl TVideoTrackList with set_onaddtrack(
+  self : Self,
+  onaddtrack : (Event) -> JsValue,
+) -> Unit {
   video_track_list_set_onaddtrack_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onaddtrack),
+    TJsValue::to_js(event_handler_non_null_ffi(onaddtrack)),
   )
 }
 
@@ -117,10 +123,10 @@ impl TVideoTrackList with onremovetrack(self : Self) -> EventHandler {
 /// [VideoTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/onremovetrack)
 impl TVideoTrackList with set_onremovetrack(
   self : Self,
-  onremovetrack : EventHandler,
+  onremovetrack : (Event) -> JsValue,
 ) -> Unit {
   video_track_list_set_onremovetrack_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onremovetrack),
+    TJsValue::to_js(event_handler_non_null_ffi(onremovetrack)),
   )
 }

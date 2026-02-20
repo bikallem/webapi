@@ -31,6 +31,7 @@ pub struct TypeRegistry {
   union_typedef_names : @hashset.HashSet[String]
   callback_names : @hashset.HashSet[String]
   mut callback_defs : Map[String, @parser.CallbackFunctionDefinition]
+  mut typedef_defs : Map[String, @parser.TypedefDefinition]
 }
 pub fn TypeRegistry::contains(Self, String) -> Bool
 pub fn TypeRegistry::get_callback_def(Self, String) -> @parser.CallbackFunctionDefinition?
@@ -42,7 +43,9 @@ pub fn TypeRegistry::is_typedef(Self, String) -> Bool
 pub fn TypeRegistry::is_union_typedef(Self, String) -> Bool
 pub fn TypeRegistry::named_type_kind(Self, String) -> NamedTypeKind
 pub fn TypeRegistry::new(Array[@parser.DefinitionExtendedAttributes]) -> Self
+pub fn TypeRegistry::resolve_typedef_to_callback(Self, String) -> (String, @parser.CallbackFunctionDefinition)?
 pub fn TypeRegistry::set_callback_defs(Self, Map[String, @parser.CallbackFunctionDefinition]) -> Unit
+pub fn TypeRegistry::set_typedef_defs(Self, Map[String, @parser.TypedefDefinition]) -> Unit
 pub impl Show for TypeRegistry
 pub impl ToJson for TypeRegistry
 

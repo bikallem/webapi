@@ -35,7 +35,7 @@ pub trait TSharedWorkerGlobalScope: TWorkerGlobalScope {
   name(self : Self) -> String = _
   close(self : Self) -> Unit = _
   onconnect(self : Self) -> EventHandler = _
-  set_onconnect(self : Self, onconnect : EventHandler) -> Unit = _
+  set_onconnect(self : Self, onconnect : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -60,10 +60,10 @@ impl TSharedWorkerGlobalScope with onconnect(self : Self) -> EventHandler {
 /// [SharedWorkerGlobalScope.onconnect](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorkerGlobalScope/onconnect)
 impl TSharedWorkerGlobalScope with set_onconnect(
   self : Self,
-  onconnect : EventHandler,
+  onconnect : (Event) -> JsValue,
 ) -> Unit {
   shared_worker_global_scope_set_onconnect_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onconnect),
+    TJsValue::to_js(event_handler_non_null_ffi(onconnect)),
   )
 }

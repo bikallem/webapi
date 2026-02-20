@@ -36,9 +36,9 @@ pub trait TCloseWatcher: TEventTarget {
   close(self : Self) -> Unit = _
   destroy(self : Self) -> Unit = _
   oncancel(self : Self) -> EventHandler = _
-  set_oncancel(self : Self, oncancel : EventHandler) -> Unit = _
+  set_oncancel(self : Self, oncancel : (Event) -> JsValue) -> Unit = _
   onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -67,10 +67,10 @@ impl TCloseWatcher with oncancel(self : Self) -> EventHandler {
 
 ///|
 /// [CloseWatcher.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher/oncancel)
-impl TCloseWatcher with set_oncancel(self : Self, oncancel : EventHandler) -> Unit {
+impl TCloseWatcher with set_oncancel(self : Self, oncancel : (Event) -> JsValue) -> Unit {
   close_watcher_set_oncancel_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncancel),
+    TJsValue::to_js(event_handler_non_null_ffi(oncancel)),
   )
 }
 
@@ -82,6 +82,9 @@ impl TCloseWatcher with onclose(self : Self) -> EventHandler {
 
 ///|
 /// [CloseWatcher.onclose](https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher/onclose)
-impl TCloseWatcher with set_onclose(self : Self, onclose : EventHandler) -> Unit {
-  close_watcher_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
+impl TCloseWatcher with set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit {
+  close_watcher_set_onclose_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onclose)),
+  )
 }

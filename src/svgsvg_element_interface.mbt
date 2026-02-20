@@ -77,41 +77,44 @@ pub trait TSVGSVGElement: TSVGGraphicsElement {
   view_box(self : Self) -> SVGAnimatedRect = _
   preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio = _
   onafterprint(self : Self) -> EventHandler = _
-  set_onafterprint(self : Self, onafterprint : EventHandler) -> Unit = _
+  set_onafterprint(self : Self, onafterprint : (Event) -> JsValue) -> Unit = _
   onbeforeprint(self : Self) -> EventHandler = _
-  set_onbeforeprint(self : Self, onbeforeprint : EventHandler) -> Unit = _
+  set_onbeforeprint(self : Self, onbeforeprint : (Event) -> JsValue) -> Unit = _
   onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler = _
-  set_onbeforeunload(self : Self, onbeforeunload : OnBeforeUnloadEventHandler) -> Unit = _
+  set_onbeforeunload(self : Self, onbeforeunload : (Event) -> String) -> Unit = _
   onhashchange(self : Self) -> EventHandler = _
-  set_onhashchange(self : Self, onhashchange : EventHandler) -> Unit = _
+  set_onhashchange(self : Self, onhashchange : (Event) -> JsValue) -> Unit = _
   onlanguagechange(self : Self) -> EventHandler = _
-  set_onlanguagechange(self : Self, onlanguagechange : EventHandler) -> Unit = _
+  set_onlanguagechange(self : Self, onlanguagechange : (Event) -> JsValue) -> Unit = _
   onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  set_onmessage(self : Self, onmessage : (Event) -> JsValue) -> Unit = _
   onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  set_onmessageerror(self : Self, onmessageerror : (Event) -> JsValue) -> Unit = _
   onoffline(self : Self) -> EventHandler = _
-  set_onoffline(self : Self, onoffline : EventHandler) -> Unit = _
+  set_onoffline(self : Self, onoffline : (Event) -> JsValue) -> Unit = _
   ononline(self : Self) -> EventHandler = _
-  set_ononline(self : Self, ononline : EventHandler) -> Unit = _
+  set_ononline(self : Self, ononline : (Event) -> JsValue) -> Unit = _
   onpagehide(self : Self) -> EventHandler = _
-  set_onpagehide(self : Self, onpagehide : EventHandler) -> Unit = _
+  set_onpagehide(self : Self, onpagehide : (Event) -> JsValue) -> Unit = _
   onpagereveal(self : Self) -> EventHandler = _
-  set_onpagereveal(self : Self, onpagereveal : EventHandler) -> Unit = _
+  set_onpagereveal(self : Self, onpagereveal : (Event) -> JsValue) -> Unit = _
   onpageshow(self : Self) -> EventHandler = _
-  set_onpageshow(self : Self, onpageshow : EventHandler) -> Unit = _
+  set_onpageshow(self : Self, onpageshow : (Event) -> JsValue) -> Unit = _
   onpageswap(self : Self) -> EventHandler = _
-  set_onpageswap(self : Self, onpageswap : EventHandler) -> Unit = _
+  set_onpageswap(self : Self, onpageswap : (Event) -> JsValue) -> Unit = _
   onpopstate(self : Self) -> EventHandler = _
-  set_onpopstate(self : Self, onpopstate : EventHandler) -> Unit = _
+  set_onpopstate(self : Self, onpopstate : (Event) -> JsValue) -> Unit = _
   onrejectionhandled(self : Self) -> EventHandler = _
-  set_onrejectionhandled(self : Self, onrejectionhandled : EventHandler) -> Unit = _
+  set_onrejectionhandled(self : Self, onrejectionhandled : (Event) -> JsValue) -> Unit = _
   onstorage(self : Self) -> EventHandler = _
-  set_onstorage(self : Self, onstorage : EventHandler) -> Unit = _
+  set_onstorage(self : Self, onstorage : (Event) -> JsValue) -> Unit = _
   onunhandledrejection(self : Self) -> EventHandler = _
-  set_onunhandledrejection(self : Self, onunhandledrejection : EventHandler) -> Unit = _
+  set_onunhandledrejection(
+    self : Self,
+    onunhandledrejection : (Event) -> JsValue,
+  ) -> Unit = _
   onunload(self : Self) -> EventHandler = _
-  set_onunload(self : Self, onunload : EventHandler) -> Unit = _
+  set_onunload(self : Self, onunload : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -344,11 +347,11 @@ impl TSVGSVGElement with onafterprint(self : Self) -> EventHandler {
 /// [SVGSVGElement.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onafterprint)
 impl TSVGSVGElement with set_onafterprint(
   self : Self,
-  onafterprint : EventHandler,
+  onafterprint : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onafterprint_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onafterprint),
+    TJsValue::to_js(event_handler_non_null_ffi(onafterprint)),
   )
 }
 
@@ -362,11 +365,11 @@ impl TSVGSVGElement with onbeforeprint(self : Self) -> EventHandler {
 /// [SVGSVGElement.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onbeforeprint)
 impl TSVGSVGElement with set_onbeforeprint(
   self : Self,
-  onbeforeprint : EventHandler,
+  onbeforeprint : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onbeforeprint_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforeprint),
+    TJsValue::to_js(event_handler_non_null_ffi(onbeforeprint)),
   )
 }
 
@@ -380,11 +383,11 @@ impl TSVGSVGElement with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandl
 /// [SVGSVGElement.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onbeforeunload)
 impl TSVGSVGElement with set_onbeforeunload(
   self : Self,
-  onbeforeunload : OnBeforeUnloadEventHandler,
+  onbeforeunload : (Event) -> String,
 ) -> Unit {
   svgsvg_element_set_onbeforeunload_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforeunload),
+    TJsValue::to_js(on_before_unload_event_handler_non_null_ffi(onbeforeunload)),
   )
 }
 
@@ -398,11 +401,11 @@ impl TSVGSVGElement with onhashchange(self : Self) -> EventHandler {
 /// [SVGSVGElement.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onhashchange)
 impl TSVGSVGElement with set_onhashchange(
   self : Self,
-  onhashchange : EventHandler,
+  onhashchange : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onhashchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onhashchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onhashchange)),
   )
 }
 
@@ -416,11 +419,11 @@ impl TSVGSVGElement with onlanguagechange(self : Self) -> EventHandler {
 /// [SVGSVGElement.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onlanguagechange)
 impl TSVGSVGElement with set_onlanguagechange(
   self : Self,
-  onlanguagechange : EventHandler,
+  onlanguagechange : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onlanguagechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onlanguagechange),
+    TJsValue::to_js(event_handler_non_null_ffi(onlanguagechange)),
   )
 }
 
@@ -432,10 +435,13 @@ impl TSVGSVGElement with onmessage(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onmessage)
-impl TSVGSVGElement with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onmessage(
+  self : Self,
+  onmessage : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onmessage_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessage),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessage)),
   )
 }
 
@@ -449,11 +455,11 @@ impl TSVGSVGElement with onmessageerror(self : Self) -> EventHandler {
 /// [SVGSVGElement.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onmessageerror)
 impl TSVGSVGElement with set_onmessageerror(
   self : Self,
-  onmessageerror : EventHandler,
+  onmessageerror : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onmessageerror_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessageerror),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }
 
@@ -465,10 +471,13 @@ impl TSVGSVGElement with onoffline(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onoffline)
-impl TSVGSVGElement with set_onoffline(self : Self, onoffline : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onoffline(
+  self : Self,
+  onoffline : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onoffline_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onoffline),
+    TJsValue::to_js(event_handler_non_null_ffi(onoffline)),
   )
 }
 
@@ -480,10 +489,13 @@ impl TSVGSVGElement with ononline(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.ononline](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/ononline)
-impl TSVGSVGElement with set_ononline(self : Self, ononline : EventHandler) -> Unit {
+impl TSVGSVGElement with set_ononline(
+  self : Self,
+  ononline : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_ononline_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ononline),
+    TJsValue::to_js(event_handler_non_null_ffi(ononline)),
   )
 }
 
@@ -495,10 +507,13 @@ impl TSVGSVGElement with onpagehide(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpagehide)
-impl TSVGSVGElement with set_onpagehide(self : Self, onpagehide : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onpagehide(
+  self : Self,
+  onpagehide : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onpagehide_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpagehide),
+    TJsValue::to_js(event_handler_non_null_ffi(onpagehide)),
   )
 }
 
@@ -512,11 +527,11 @@ impl TSVGSVGElement with onpagereveal(self : Self) -> EventHandler {
 /// [SVGSVGElement.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpagereveal)
 impl TSVGSVGElement with set_onpagereveal(
   self : Self,
-  onpagereveal : EventHandler,
+  onpagereveal : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onpagereveal_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpagereveal),
+    TJsValue::to_js(event_handler_non_null_ffi(onpagereveal)),
   )
 }
 
@@ -528,10 +543,13 @@ impl TSVGSVGElement with onpageshow(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpageshow)
-impl TSVGSVGElement with set_onpageshow(self : Self, onpageshow : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onpageshow(
+  self : Self,
+  onpageshow : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onpageshow_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpageshow),
+    TJsValue::to_js(event_handler_non_null_ffi(onpageshow)),
   )
 }
 
@@ -543,10 +561,13 @@ impl TSVGSVGElement with onpageswap(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpageswap)
-impl TSVGSVGElement with set_onpageswap(self : Self, onpageswap : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onpageswap(
+  self : Self,
+  onpageswap : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onpageswap_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpageswap),
+    TJsValue::to_js(event_handler_non_null_ffi(onpageswap)),
   )
 }
 
@@ -558,10 +579,13 @@ impl TSVGSVGElement with onpopstate(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onpopstate)
-impl TSVGSVGElement with set_onpopstate(self : Self, onpopstate : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onpopstate(
+  self : Self,
+  onpopstate : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onpopstate_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpopstate),
+    TJsValue::to_js(event_handler_non_null_ffi(onpopstate)),
   )
 }
 
@@ -575,11 +599,11 @@ impl TSVGSVGElement with onrejectionhandled(self : Self) -> EventHandler {
 /// [SVGSVGElement.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onrejectionhandled)
 impl TSVGSVGElement with set_onrejectionhandled(
   self : Self,
-  onrejectionhandled : EventHandler,
+  onrejectionhandled : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onrejectionhandled_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onrejectionhandled),
+    TJsValue::to_js(event_handler_non_null_ffi(onrejectionhandled)),
   )
 }
 
@@ -591,10 +615,13 @@ impl TSVGSVGElement with onstorage(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onstorage)
-impl TSVGSVGElement with set_onstorage(self : Self, onstorage : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onstorage(
+  self : Self,
+  onstorage : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onstorage_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onstorage),
+    TJsValue::to_js(event_handler_non_null_ffi(onstorage)),
   )
 }
 
@@ -608,11 +635,11 @@ impl TSVGSVGElement with onunhandledrejection(self : Self) -> EventHandler {
 /// [SVGSVGElement.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onunhandledrejection)
 impl TSVGSVGElement with set_onunhandledrejection(
   self : Self,
-  onunhandledrejection : EventHandler,
+  onunhandledrejection : (Event) -> JsValue,
 ) -> Unit {
   svgsvg_element_set_onunhandledrejection_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onunhandledrejection),
+    TJsValue::to_js(event_handler_non_null_ffi(onunhandledrejection)),
   )
 }
 
@@ -624,9 +651,12 @@ impl TSVGSVGElement with onunload(self : Self) -> EventHandler {
 
 ///|
 /// [SVGSVGElement.onunload](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/onunload)
-impl TSVGSVGElement with set_onunload(self : Self, onunload : EventHandler) -> Unit {
+impl TSVGSVGElement with set_onunload(
+  self : Self,
+  onunload : (Event) -> JsValue,
+) -> Unit {
   svgsvg_element_set_onunload_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onunload),
+    TJsValue::to_js(event_handler_non_null_ffi(onunload)),
   )
 }

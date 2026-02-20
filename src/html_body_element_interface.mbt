@@ -52,41 +52,44 @@ pub trait THTMLBodyElement: THTMLElement {
   background(self : Self) -> String = _
   set_background(self : Self, background : String) -> Unit = _
   onafterprint(self : Self) -> EventHandler = _
-  set_onafterprint(self : Self, onafterprint : EventHandler) -> Unit = _
+  set_onafterprint(self : Self, onafterprint : (Event) -> JsValue) -> Unit = _
   onbeforeprint(self : Self) -> EventHandler = _
-  set_onbeforeprint(self : Self, onbeforeprint : EventHandler) -> Unit = _
+  set_onbeforeprint(self : Self, onbeforeprint : (Event) -> JsValue) -> Unit = _
   onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler = _
-  set_onbeforeunload(self : Self, onbeforeunload : OnBeforeUnloadEventHandler) -> Unit = _
+  set_onbeforeunload(self : Self, onbeforeunload : (Event) -> String) -> Unit = _
   onhashchange(self : Self) -> EventHandler = _
-  set_onhashchange(self : Self, onhashchange : EventHandler) -> Unit = _
+  set_onhashchange(self : Self, onhashchange : (Event) -> JsValue) -> Unit = _
   onlanguagechange(self : Self) -> EventHandler = _
-  set_onlanguagechange(self : Self, onlanguagechange : EventHandler) -> Unit = _
+  set_onlanguagechange(self : Self, onlanguagechange : (Event) -> JsValue) -> Unit = _
   onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  set_onmessage(self : Self, onmessage : (Event) -> JsValue) -> Unit = _
   onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  set_onmessageerror(self : Self, onmessageerror : (Event) -> JsValue) -> Unit = _
   onoffline(self : Self) -> EventHandler = _
-  set_onoffline(self : Self, onoffline : EventHandler) -> Unit = _
+  set_onoffline(self : Self, onoffline : (Event) -> JsValue) -> Unit = _
   ononline(self : Self) -> EventHandler = _
-  set_ononline(self : Self, ononline : EventHandler) -> Unit = _
+  set_ononline(self : Self, ononline : (Event) -> JsValue) -> Unit = _
   onpagehide(self : Self) -> EventHandler = _
-  set_onpagehide(self : Self, onpagehide : EventHandler) -> Unit = _
+  set_onpagehide(self : Self, onpagehide : (Event) -> JsValue) -> Unit = _
   onpagereveal(self : Self) -> EventHandler = _
-  set_onpagereveal(self : Self, onpagereveal : EventHandler) -> Unit = _
+  set_onpagereveal(self : Self, onpagereveal : (Event) -> JsValue) -> Unit = _
   onpageshow(self : Self) -> EventHandler = _
-  set_onpageshow(self : Self, onpageshow : EventHandler) -> Unit = _
+  set_onpageshow(self : Self, onpageshow : (Event) -> JsValue) -> Unit = _
   onpageswap(self : Self) -> EventHandler = _
-  set_onpageswap(self : Self, onpageswap : EventHandler) -> Unit = _
+  set_onpageswap(self : Self, onpageswap : (Event) -> JsValue) -> Unit = _
   onpopstate(self : Self) -> EventHandler = _
-  set_onpopstate(self : Self, onpopstate : EventHandler) -> Unit = _
+  set_onpopstate(self : Self, onpopstate : (Event) -> JsValue) -> Unit = _
   onrejectionhandled(self : Self) -> EventHandler = _
-  set_onrejectionhandled(self : Self, onrejectionhandled : EventHandler) -> Unit = _
+  set_onrejectionhandled(self : Self, onrejectionhandled : (Event) -> JsValue) -> Unit = _
   onstorage(self : Self) -> EventHandler = _
-  set_onstorage(self : Self, onstorage : EventHandler) -> Unit = _
+  set_onstorage(self : Self, onstorage : (Event) -> JsValue) -> Unit = _
   onunhandledrejection(self : Self) -> EventHandler = _
-  set_onunhandledrejection(self : Self, onunhandledrejection : EventHandler) -> Unit = _
+  set_onunhandledrejection(
+    self : Self,
+    onunhandledrejection : (Event) -> JsValue,
+  ) -> Unit = _
   onunload(self : Self) -> EventHandler = _
-  set_onunload(self : Self, onunload : EventHandler) -> Unit = _
+  set_onunload(self : Self, onunload : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -183,11 +186,11 @@ impl THTMLBodyElement with onafterprint(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onafterprint)
 impl THTMLBodyElement with set_onafterprint(
   self : Self,
-  onafterprint : EventHandler,
+  onafterprint : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onafterprint_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onafterprint),
+    TJsValue::to_js(event_handler_non_null_ffi(onafterprint)),
   )
 }
 
@@ -201,11 +204,11 @@ impl THTMLBodyElement with onbeforeprint(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onbeforeprint)
 impl THTMLBodyElement with set_onbeforeprint(
   self : Self,
-  onbeforeprint : EventHandler,
+  onbeforeprint : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onbeforeprint_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforeprint),
+    TJsValue::to_js(event_handler_non_null_ffi(onbeforeprint)),
   )
 }
 
@@ -219,11 +222,11 @@ impl THTMLBodyElement with onbeforeunload(self : Self) -> OnBeforeUnloadEventHan
 /// [HTMLBodyElement.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onbeforeunload)
 impl THTMLBodyElement with set_onbeforeunload(
   self : Self,
-  onbeforeunload : OnBeforeUnloadEventHandler,
+  onbeforeunload : (Event) -> String,
 ) -> Unit {
   html_body_element_set_onbeforeunload_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforeunload),
+    TJsValue::to_js(on_before_unload_event_handler_non_null_ffi(onbeforeunload)),
   )
 }
 
@@ -237,11 +240,11 @@ impl THTMLBodyElement with onhashchange(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onhashchange)
 impl THTMLBodyElement with set_onhashchange(
   self : Self,
-  onhashchange : EventHandler,
+  onhashchange : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onhashchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onhashchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onhashchange)),
   )
 }
 
@@ -255,11 +258,11 @@ impl THTMLBodyElement with onlanguagechange(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onlanguagechange)
 impl THTMLBodyElement with set_onlanguagechange(
   self : Self,
-  onlanguagechange : EventHandler,
+  onlanguagechange : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onlanguagechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onlanguagechange),
+    TJsValue::to_js(event_handler_non_null_ffi(onlanguagechange)),
   )
 }
 
@@ -271,10 +274,13 @@ impl THTMLBodyElement with onmessage(self : Self) -> EventHandler {
 
 ///|
 /// [HTMLBodyElement.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onmessage)
-impl THTMLBodyElement with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl THTMLBodyElement with set_onmessage(
+  self : Self,
+  onmessage : (Event) -> JsValue,
+) -> Unit {
   html_body_element_set_onmessage_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessage),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessage)),
   )
 }
 
@@ -288,11 +294,11 @@ impl THTMLBodyElement with onmessageerror(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onmessageerror)
 impl THTMLBodyElement with set_onmessageerror(
   self : Self,
-  onmessageerror : EventHandler,
+  onmessageerror : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onmessageerror_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessageerror),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }
 
@@ -304,10 +310,13 @@ impl THTMLBodyElement with onoffline(self : Self) -> EventHandler {
 
 ///|
 /// [HTMLBodyElement.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onoffline)
-impl THTMLBodyElement with set_onoffline(self : Self, onoffline : EventHandler) -> Unit {
+impl THTMLBodyElement with set_onoffline(
+  self : Self,
+  onoffline : (Event) -> JsValue,
+) -> Unit {
   html_body_element_set_onoffline_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onoffline),
+    TJsValue::to_js(event_handler_non_null_ffi(onoffline)),
   )
 }
 
@@ -319,10 +328,13 @@ impl THTMLBodyElement with ononline(self : Self) -> EventHandler {
 
 ///|
 /// [HTMLBodyElement.ononline](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/ononline)
-impl THTMLBodyElement with set_ononline(self : Self, ononline : EventHandler) -> Unit {
+impl THTMLBodyElement with set_ononline(
+  self : Self,
+  ononline : (Event) -> JsValue,
+) -> Unit {
   html_body_element_set_ononline_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ononline),
+    TJsValue::to_js(event_handler_non_null_ffi(ononline)),
   )
 }
 
@@ -336,11 +348,11 @@ impl THTMLBodyElement with onpagehide(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onpagehide)
 impl THTMLBodyElement with set_onpagehide(
   self : Self,
-  onpagehide : EventHandler,
+  onpagehide : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onpagehide_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpagehide),
+    TJsValue::to_js(event_handler_non_null_ffi(onpagehide)),
   )
 }
 
@@ -354,11 +366,11 @@ impl THTMLBodyElement with onpagereveal(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onpagereveal)
 impl THTMLBodyElement with set_onpagereveal(
   self : Self,
-  onpagereveal : EventHandler,
+  onpagereveal : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onpagereveal_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpagereveal),
+    TJsValue::to_js(event_handler_non_null_ffi(onpagereveal)),
   )
 }
 
@@ -372,11 +384,11 @@ impl THTMLBodyElement with onpageshow(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onpageshow)
 impl THTMLBodyElement with set_onpageshow(
   self : Self,
-  onpageshow : EventHandler,
+  onpageshow : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onpageshow_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpageshow),
+    TJsValue::to_js(event_handler_non_null_ffi(onpageshow)),
   )
 }
 
@@ -390,11 +402,11 @@ impl THTMLBodyElement with onpageswap(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onpageswap)
 impl THTMLBodyElement with set_onpageswap(
   self : Self,
-  onpageswap : EventHandler,
+  onpageswap : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onpageswap_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpageswap),
+    TJsValue::to_js(event_handler_non_null_ffi(onpageswap)),
   )
 }
 
@@ -408,11 +420,11 @@ impl THTMLBodyElement with onpopstate(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onpopstate)
 impl THTMLBodyElement with set_onpopstate(
   self : Self,
-  onpopstate : EventHandler,
+  onpopstate : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onpopstate_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpopstate),
+    TJsValue::to_js(event_handler_non_null_ffi(onpopstate)),
   )
 }
 
@@ -426,11 +438,11 @@ impl THTMLBodyElement with onrejectionhandled(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onrejectionhandled)
 impl THTMLBodyElement with set_onrejectionhandled(
   self : Self,
-  onrejectionhandled : EventHandler,
+  onrejectionhandled : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onrejectionhandled_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onrejectionhandled),
+    TJsValue::to_js(event_handler_non_null_ffi(onrejectionhandled)),
   )
 }
 
@@ -442,10 +454,13 @@ impl THTMLBodyElement with onstorage(self : Self) -> EventHandler {
 
 ///|
 /// [HTMLBodyElement.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onstorage)
-impl THTMLBodyElement with set_onstorage(self : Self, onstorage : EventHandler) -> Unit {
+impl THTMLBodyElement with set_onstorage(
+  self : Self,
+  onstorage : (Event) -> JsValue,
+) -> Unit {
   html_body_element_set_onstorage_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onstorage),
+    TJsValue::to_js(event_handler_non_null_ffi(onstorage)),
   )
 }
 
@@ -459,11 +474,11 @@ impl THTMLBodyElement with onunhandledrejection(self : Self) -> EventHandler {
 /// [HTMLBodyElement.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onunhandledrejection)
 impl THTMLBodyElement with set_onunhandledrejection(
   self : Self,
-  onunhandledrejection : EventHandler,
+  onunhandledrejection : (Event) -> JsValue,
 ) -> Unit {
   html_body_element_set_onunhandledrejection_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onunhandledrejection),
+    TJsValue::to_js(event_handler_non_null_ffi(onunhandledrejection)),
   )
 }
 
@@ -475,9 +490,12 @@ impl THTMLBodyElement with onunload(self : Self) -> EventHandler {
 
 ///|
 /// [HTMLBodyElement.onunload](https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement/onunload)
-impl THTMLBodyElement with set_onunload(self : Self, onunload : EventHandler) -> Unit {
+impl THTMLBodyElement with set_onunload(
+  self : Self,
+  onunload : (Event) -> JsValue,
+) -> Unit {
   html_body_element_set_onunload_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onunload),
+    TJsValue::to_js(event_handler_non_null_ffi(onunload)),
   )
 }

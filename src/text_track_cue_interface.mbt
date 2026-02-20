@@ -35,9 +35,9 @@ pub trait TTextTrackCue: TEventTarget {
   pause_on_exit(self : Self) -> Bool = _
   set_pause_on_exit(self : Self, pause_on_exit : Bool) -> Unit = _
   onenter(self : Self) -> EventHandler = _
-  set_onenter(self : Self, onenter : EventHandler) -> Unit = _
+  set_onenter(self : Self, onenter : (Event) -> JsValue) -> Unit = _
   onexit(self : Self) -> EventHandler = _
-  set_onexit(self : Self, onexit : EventHandler) -> Unit = _
+  set_onexit(self : Self, onexit : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -111,10 +111,10 @@ impl TTextTrackCue with onenter(self : Self) -> EventHandler {
 
 ///|
 /// [TextTrackCue.onenter](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue/onenter)
-impl TTextTrackCue with set_onenter(self : Self, onenter : EventHandler) -> Unit {
+impl TTextTrackCue with set_onenter(self : Self, onenter : (Event) -> JsValue) -> Unit {
   text_track_cue_set_onenter_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onenter),
+    TJsValue::to_js(event_handler_non_null_ffi(onenter)),
   )
 }
 
@@ -126,6 +126,9 @@ impl TTextTrackCue with onexit(self : Self) -> EventHandler {
 
 ///|
 /// [TextTrackCue.onexit](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue/onexit)
-impl TTextTrackCue with set_onexit(self : Self, onexit : EventHandler) -> Unit {
-  text_track_cue_set_onexit_ffi(TJsValue::to_js(self), TJsValue::to_js(onexit))
+impl TTextTrackCue with set_onexit(self : Self, onexit : (Event) -> JsValue) -> Unit {
+  text_track_cue_set_onexit_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onexit)),
+  )
 }

@@ -34,11 +34,11 @@ pub trait TIDBTransaction: TEventTarget {
   commit(self : Self) -> Unit = _
   abort(self : Self) -> Unit = _
   onabort(self : Self) -> EventHandler = _
-  set_onabort(self : Self, onabort : EventHandler) -> Unit = _
+  set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit = _
   oncomplete(self : Self) -> EventHandler = _
-  set_oncomplete(self : Self, oncomplete : EventHandler) -> Unit = _
+  set_oncomplete(self : Self, oncomplete : (Event) -> JsValue) -> Unit = _
   onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -97,10 +97,10 @@ impl TIDBTransaction with onabort(self : Self) -> EventHandler {
 
 ///|
 /// [IDBTransaction.onabort](https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction/onabort)
-impl TIDBTransaction with set_onabort(self : Self, onabort : EventHandler) -> Unit {
+impl TIDBTransaction with set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit {
   idb_transaction_set_onabort_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onabort),
+    TJsValue::to_js(event_handler_non_null_ffi(onabort)),
   )
 }
 
@@ -112,10 +112,13 @@ impl TIDBTransaction with oncomplete(self : Self) -> EventHandler {
 
 ///|
 /// [IDBTransaction.oncomplete](https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction/oncomplete)
-impl TIDBTransaction with set_oncomplete(self : Self, oncomplete : EventHandler) -> Unit {
+impl TIDBTransaction with set_oncomplete(
+  self : Self,
+  oncomplete : (Event) -> JsValue,
+) -> Unit {
   idb_transaction_set_oncomplete_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncomplete),
+    TJsValue::to_js(event_handler_non_null_ffi(oncomplete)),
   )
 }
 
@@ -127,9 +130,9 @@ impl TIDBTransaction with onerror(self : Self) -> EventHandler {
 
 ///|
 /// [IDBTransaction.onerror](https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction/onerror)
-impl TIDBTransaction with set_onerror(self : Self, onerror : EventHandler) -> Unit {
+impl TIDBTransaction with set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit {
   idb_transaction_set_onerror_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onerror),
+    TJsValue::to_js(event_handler_non_null_ffi(onerror)),
   )
 }

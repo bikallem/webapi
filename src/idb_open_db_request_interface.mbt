@@ -31,9 +31,9 @@ pub impl TEventTarget for IDBOpenDBRequest
 /// [IDBOpenDBRequest](https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest) interface.
 pub trait TIDBOpenDBRequest: TIDBRequest {
   onblocked(self : Self) -> EventHandler = _
-  set_onblocked(self : Self, onblocked : EventHandler) -> Unit = _
+  set_onblocked(self : Self, onblocked : (Event) -> JsValue) -> Unit = _
   onupgradeneeded(self : Self) -> EventHandler = _
-  set_onupgradeneeded(self : Self, onupgradeneeded : EventHandler) -> Unit = _
+  set_onupgradeneeded(self : Self, onupgradeneeded : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -44,10 +44,13 @@ impl TIDBOpenDBRequest with onblocked(self : Self) -> EventHandler {
 
 ///|
 /// [IDBOpenDBRequest.onblocked](https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest/onblocked)
-impl TIDBOpenDBRequest with set_onblocked(self : Self, onblocked : EventHandler) -> Unit {
+impl TIDBOpenDBRequest with set_onblocked(
+  self : Self,
+  onblocked : (Event) -> JsValue,
+) -> Unit {
   idb_open_db_request_set_onblocked_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onblocked),
+    TJsValue::to_js(event_handler_non_null_ffi(onblocked)),
   )
 }
 
@@ -61,10 +64,10 @@ impl TIDBOpenDBRequest with onupgradeneeded(self : Self) -> EventHandler {
 /// [IDBOpenDBRequest.onupgradeneeded](https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest/onupgradeneeded)
 impl TIDBOpenDBRequest with set_onupgradeneeded(
   self : Self,
-  onupgradeneeded : EventHandler,
+  onupgradeneeded : (Event) -> JsValue,
 ) -> Unit {
   idb_open_db_request_set_onupgradeneeded_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onupgradeneeded),
+    TJsValue::to_js(event_handler_non_null_ffi(onupgradeneeded)),
   )
 }

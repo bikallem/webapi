@@ -19,6 +19,7 @@ pub struct TypeRegistry {
   union_typedef_names : @hashset.HashSet[String]
   callback_names : @hashset.HashSet[String]
   mut callback_defs : Map[String, @parser.CallbackFunctionDefinition]
+  mut typedef_defs : Map[String, @parser.TypedefDefinition]
 } derive(Show, ToJson)
 
 ///|
@@ -33,6 +34,7 @@ pub fn TypeRegistry::new(
     union_typedef_names: @hashset.new(),
     callback_names: @hashset.new(),
     callback_defs: {},
+    typedef_defs: {},
   }
   for def in definitions {
     match def.definition {
@@ -146,6 +148,41 @@ pub fn TypeRegistry::get_callback_def(
 }
 
 ///|
+/// Set typedef definitions from flattened IDL.
+pub fn TypeRegistry::set_typedef_defs(
+  self : TypeRegistry,
+  defs : Map[String, @parser.TypedefDefinition],
+) -> Unit {
+  self.typedef_defs = defs
+}
+
+///|
+/// Resolve a typedef name to a callback function definition, following
+/// `Nullable(Identifier(cb_name))` chains like `EventHandler = EventHandlerNonNull?`.
+pub fn TypeRegistry::resolve_typedef_to_callback(
+  self : TypeRegistry,
+  name : String,
+) -> (String, @parser.CallbackFunctionDefinition)? {
+  match self.typedef_defs.get(name) {
+    None => None
+    Some(td) => {
+      let inner = match td.type_ {
+        Nullable(inner) => inner
+        _ => td.type_
+      }
+      match inner {
+        Identifier(cb_name) =>
+          match self.get_callback_def(cb_name) {
+            Some(cb_def) => Some((cb_name, cb_def))
+            None => None
+          }
+        _ => None
+      }
+    }
+  }
+}
+
+///|
 test "TypeRegistry::contains checks all type categories" {
   let reg : TypeRegistry = {
     interface_names: @hashset.from_array(["Element"]),
@@ -155,6 +192,7 @@ test "TypeRegistry::contains checks all type categories" {
     union_typedef_names: @hashset.from_array(["HeadersInit"]),
     callback_names: @hashset.from_array(["EventListener"]),
     callback_defs: {},
+    typedef_defs: {},
   }
   inspect(reg.contains("Element"), content="true")
   inspect(reg.contains("EventInit"), content="true")

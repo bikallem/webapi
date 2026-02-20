@@ -55,13 +55,13 @@ pub trait TIDBDatabase: TEventTarget {
   ) -> IDBObjectStore = _
   delete_object_store(self : Self, name : String) -> Unit = _
   onabort(self : Self) -> EventHandler = _
-  set_onabort(self : Self, onabort : EventHandler) -> Unit = _
+  set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit = _
   onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit = _
   onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit = _
   onversionchange(self : Self) -> EventHandler = _
-  set_onversionchange(self : Self, onversionchange : EventHandler) -> Unit = _
+  set_onversionchange(self : Self, onversionchange : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -135,8 +135,11 @@ impl TIDBDatabase with onabort(self : Self) -> EventHandler {
 
 ///|
 /// [IDBDatabase.onabort](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onabort)
-impl TIDBDatabase with set_onabort(self : Self, onabort : EventHandler) -> Unit {
-  idb_database_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(onabort))
+impl TIDBDatabase with set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit {
+  idb_database_set_onabort_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onabort)),
+  )
 }
 
 ///|
@@ -147,8 +150,11 @@ impl TIDBDatabase with onclose(self : Self) -> EventHandler {
 
 ///|
 /// [IDBDatabase.onclose](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onclose)
-impl TIDBDatabase with set_onclose(self : Self, onclose : EventHandler) -> Unit {
-  idb_database_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
+impl TIDBDatabase with set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit {
+  idb_database_set_onclose_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onclose)),
+  )
 }
 
 ///|
@@ -159,8 +165,11 @@ impl TIDBDatabase with onerror(self : Self) -> EventHandler {
 
 ///|
 /// [IDBDatabase.onerror](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onerror)
-impl TIDBDatabase with set_onerror(self : Self, onerror : EventHandler) -> Unit {
-  idb_database_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+impl TIDBDatabase with set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit {
+  idb_database_set_onerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onerror)),
+  )
 }
 
 ///|
@@ -173,10 +182,10 @@ impl TIDBDatabase with onversionchange(self : Self) -> EventHandler {
 /// [IDBDatabase.onversionchange](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange)
 impl TIDBDatabase with set_onversionchange(
   self : Self,
-  onversionchange : EventHandler,
+  onversionchange : (Event) -> JsValue,
 ) -> Unit {
   idb_database_set_onversionchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onversionchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onversionchange)),
   )
 }

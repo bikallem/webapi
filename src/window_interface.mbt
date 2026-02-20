@@ -152,233 +152,251 @@ pub trait TWindow: TEventTarget {
   ) -> UInt = _
   cancel_idle_callback(self : Self, handle : UInt) -> Unit = _
   onabort(self : Self) -> EventHandler = _
-  set_onabort(self : Self, onabort : EventHandler) -> Unit = _
+  set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit = _
   onauxclick(self : Self) -> EventHandler = _
-  set_onauxclick(self : Self, onauxclick : EventHandler) -> Unit = _
+  set_onauxclick(self : Self, onauxclick : (Event) -> JsValue) -> Unit = _
   onbeforeinput(self : Self) -> EventHandler = _
-  set_onbeforeinput(self : Self, onbeforeinput : EventHandler) -> Unit = _
+  set_onbeforeinput(self : Self, onbeforeinput : (Event) -> JsValue) -> Unit = _
   onbeforematch(self : Self) -> EventHandler = _
-  set_onbeforematch(self : Self, onbeforematch : EventHandler) -> Unit = _
+  set_onbeforematch(self : Self, onbeforematch : (Event) -> JsValue) -> Unit = _
   onbeforetoggle(self : Self) -> EventHandler = _
-  set_onbeforetoggle(self : Self, onbeforetoggle : EventHandler) -> Unit = _
+  set_onbeforetoggle(self : Self, onbeforetoggle : (Event) -> JsValue) -> Unit = _
   onblur(self : Self) -> EventHandler = _
-  set_onblur(self : Self, onblur : EventHandler) -> Unit = _
+  set_onblur(self : Self, onblur : (Event) -> JsValue) -> Unit = _
   oncancel(self : Self) -> EventHandler = _
-  set_oncancel(self : Self, oncancel : EventHandler) -> Unit = _
+  set_oncancel(self : Self, oncancel : (Event) -> JsValue) -> Unit = _
   oncanplay(self : Self) -> EventHandler = _
-  set_oncanplay(self : Self, oncanplay : EventHandler) -> Unit = _
+  set_oncanplay(self : Self, oncanplay : (Event) -> JsValue) -> Unit = _
   oncanplaythrough(self : Self) -> EventHandler = _
-  set_oncanplaythrough(self : Self, oncanplaythrough : EventHandler) -> Unit = _
+  set_oncanplaythrough(self : Self, oncanplaythrough : (Event) -> JsValue) -> Unit = _
   onchange(self : Self) -> EventHandler = _
-  set_onchange(self : Self, onchange : EventHandler) -> Unit = _
+  set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit = _
   onclick(self : Self) -> EventHandler = _
-  set_onclick(self : Self, onclick : EventHandler) -> Unit = _
+  set_onclick(self : Self, onclick : (Event) -> JsValue) -> Unit = _
   onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit = _
   oncommand(self : Self) -> EventHandler = _
-  set_oncommand(self : Self, oncommand : EventHandler) -> Unit = _
+  set_oncommand(self : Self, oncommand : (Event) -> JsValue) -> Unit = _
   oncontextlost(self : Self) -> EventHandler = _
-  set_oncontextlost(self : Self, oncontextlost : EventHandler) -> Unit = _
+  set_oncontextlost(self : Self, oncontextlost : (Event) -> JsValue) -> Unit = _
   oncontextmenu(self : Self) -> EventHandler = _
-  set_oncontextmenu(self : Self, oncontextmenu : EventHandler) -> Unit = _
+  set_oncontextmenu(self : Self, oncontextmenu : (Event) -> JsValue) -> Unit = _
   oncontextrestored(self : Self) -> EventHandler = _
-  set_oncontextrestored(self : Self, oncontextrestored : EventHandler) -> Unit = _
+  set_oncontextrestored(self : Self, oncontextrestored : (Event) -> JsValue) -> Unit = _
   oncopy(self : Self) -> EventHandler = _
-  set_oncopy(self : Self, oncopy : EventHandler) -> Unit = _
+  set_oncopy(self : Self, oncopy : (Event) -> JsValue) -> Unit = _
   oncuechange(self : Self) -> EventHandler = _
-  set_oncuechange(self : Self, oncuechange : EventHandler) -> Unit = _
+  set_oncuechange(self : Self, oncuechange : (Event) -> JsValue) -> Unit = _
   oncut(self : Self) -> EventHandler = _
-  set_oncut(self : Self, oncut : EventHandler) -> Unit = _
+  set_oncut(self : Self, oncut : (Event) -> JsValue) -> Unit = _
   ondblclick(self : Self) -> EventHandler = _
-  set_ondblclick(self : Self, ondblclick : EventHandler) -> Unit = _
+  set_ondblclick(self : Self, ondblclick : (Event) -> JsValue) -> Unit = _
   ondrag(self : Self) -> EventHandler = _
-  set_ondrag(self : Self, ondrag : EventHandler) -> Unit = _
+  set_ondrag(self : Self, ondrag : (Event) -> JsValue) -> Unit = _
   ondragend(self : Self) -> EventHandler = _
-  set_ondragend(self : Self, ondragend : EventHandler) -> Unit = _
+  set_ondragend(self : Self, ondragend : (Event) -> JsValue) -> Unit = _
   ondragenter(self : Self) -> EventHandler = _
-  set_ondragenter(self : Self, ondragenter : EventHandler) -> Unit = _
+  set_ondragenter(self : Self, ondragenter : (Event) -> JsValue) -> Unit = _
   ondragleave(self : Self) -> EventHandler = _
-  set_ondragleave(self : Self, ondragleave : EventHandler) -> Unit = _
+  set_ondragleave(self : Self, ondragleave : (Event) -> JsValue) -> Unit = _
   ondragover(self : Self) -> EventHandler = _
-  set_ondragover(self : Self, ondragover : EventHandler) -> Unit = _
+  set_ondragover(self : Self, ondragover : (Event) -> JsValue) -> Unit = _
   ondragstart(self : Self) -> EventHandler = _
-  set_ondragstart(self : Self, ondragstart : EventHandler) -> Unit = _
+  set_ondragstart(self : Self, ondragstart : (Event) -> JsValue) -> Unit = _
   ondrop(self : Self) -> EventHandler = _
-  set_ondrop(self : Self, ondrop : EventHandler) -> Unit = _
+  set_ondrop(self : Self, ondrop : (Event) -> JsValue) -> Unit = _
   ondurationchange(self : Self) -> EventHandler = _
-  set_ondurationchange(self : Self, ondurationchange : EventHandler) -> Unit = _
+  set_ondurationchange(self : Self, ondurationchange : (Event) -> JsValue) -> Unit = _
   onemptied(self : Self) -> EventHandler = _
-  set_onemptied(self : Self, onemptied : EventHandler) -> Unit = _
+  set_onemptied(self : Self, onemptied : (Event) -> JsValue) -> Unit = _
   onended(self : Self) -> EventHandler = _
-  set_onended(self : Self, onended : EventHandler) -> Unit = _
+  set_onended(self : Self, onended : (Event) -> JsValue) -> Unit = _
   onerror(self : Self) -> OnErrorEventHandler = _
-  set_onerror(self : Self, onerror : OnErrorEventHandler) -> Unit = _
+  set_onerror(
+    self : Self,
+    onerror : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
+  ) -> Unit = _
   onfocus(self : Self) -> EventHandler = _
-  set_onfocus(self : Self, onfocus : EventHandler) -> Unit = _
+  set_onfocus(self : Self, onfocus : (Event) -> JsValue) -> Unit = _
   onformdata(self : Self) -> EventHandler = _
-  set_onformdata(self : Self, onformdata : EventHandler) -> Unit = _
+  set_onformdata(self : Self, onformdata : (Event) -> JsValue) -> Unit = _
   oninput(self : Self) -> EventHandler = _
-  set_oninput(self : Self, oninput : EventHandler) -> Unit = _
+  set_oninput(self : Self, oninput : (Event) -> JsValue) -> Unit = _
   oninvalid(self : Self) -> EventHandler = _
-  set_oninvalid(self : Self, oninvalid : EventHandler) -> Unit = _
+  set_oninvalid(self : Self, oninvalid : (Event) -> JsValue) -> Unit = _
   onkeydown(self : Self) -> EventHandler = _
-  set_onkeydown(self : Self, onkeydown : EventHandler) -> Unit = _
+  set_onkeydown(self : Self, onkeydown : (Event) -> JsValue) -> Unit = _
   onkeypress(self : Self) -> EventHandler = _
-  set_onkeypress(self : Self, onkeypress : EventHandler) -> Unit = _
+  set_onkeypress(self : Self, onkeypress : (Event) -> JsValue) -> Unit = _
   onkeyup(self : Self) -> EventHandler = _
-  set_onkeyup(self : Self, onkeyup : EventHandler) -> Unit = _
+  set_onkeyup(self : Self, onkeyup : (Event) -> JsValue) -> Unit = _
   onload(self : Self) -> EventHandler = _
-  set_onload(self : Self, onload : EventHandler) -> Unit = _
+  set_onload(self : Self, onload : (Event) -> JsValue) -> Unit = _
   onloadeddata(self : Self) -> EventHandler = _
-  set_onloadeddata(self : Self, onloadeddata : EventHandler) -> Unit = _
+  set_onloadeddata(self : Self, onloadeddata : (Event) -> JsValue) -> Unit = _
   onloadedmetadata(self : Self) -> EventHandler = _
-  set_onloadedmetadata(self : Self, onloadedmetadata : EventHandler) -> Unit = _
+  set_onloadedmetadata(self : Self, onloadedmetadata : (Event) -> JsValue) -> Unit = _
   onloadstart(self : Self) -> EventHandler = _
-  set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit = _
+  set_onloadstart(self : Self, onloadstart : (Event) -> JsValue) -> Unit = _
   onmousedown(self : Self) -> EventHandler = _
-  set_onmousedown(self : Self, onmousedown : EventHandler) -> Unit = _
+  set_onmousedown(self : Self, onmousedown : (Event) -> JsValue) -> Unit = _
   onmouseenter(self : Self) -> EventHandler = _
-  set_onmouseenter(self : Self, onmouseenter : EventHandler) -> Unit = _
+  set_onmouseenter(self : Self, onmouseenter : (Event) -> JsValue) -> Unit = _
   onmouseleave(self : Self) -> EventHandler = _
-  set_onmouseleave(self : Self, onmouseleave : EventHandler) -> Unit = _
+  set_onmouseleave(self : Self, onmouseleave : (Event) -> JsValue) -> Unit = _
   onmousemove(self : Self) -> EventHandler = _
-  set_onmousemove(self : Self, onmousemove : EventHandler) -> Unit = _
+  set_onmousemove(self : Self, onmousemove : (Event) -> JsValue) -> Unit = _
   onmouseout(self : Self) -> EventHandler = _
-  set_onmouseout(self : Self, onmouseout : EventHandler) -> Unit = _
+  set_onmouseout(self : Self, onmouseout : (Event) -> JsValue) -> Unit = _
   onmouseover(self : Self) -> EventHandler = _
-  set_onmouseover(self : Self, onmouseover : EventHandler) -> Unit = _
+  set_onmouseover(self : Self, onmouseover : (Event) -> JsValue) -> Unit = _
   onmouseup(self : Self) -> EventHandler = _
-  set_onmouseup(self : Self, onmouseup : EventHandler) -> Unit = _
+  set_onmouseup(self : Self, onmouseup : (Event) -> JsValue) -> Unit = _
   onpaste(self : Self) -> EventHandler = _
-  set_onpaste(self : Self, onpaste : EventHandler) -> Unit = _
+  set_onpaste(self : Self, onpaste : (Event) -> JsValue) -> Unit = _
   onpause(self : Self) -> EventHandler = _
-  set_onpause(self : Self, onpause : EventHandler) -> Unit = _
+  set_onpause(self : Self, onpause : (Event) -> JsValue) -> Unit = _
   onplay(self : Self) -> EventHandler = _
-  set_onplay(self : Self, onplay : EventHandler) -> Unit = _
+  set_onplay(self : Self, onplay : (Event) -> JsValue) -> Unit = _
   onplaying(self : Self) -> EventHandler = _
-  set_onplaying(self : Self, onplaying : EventHandler) -> Unit = _
+  set_onplaying(self : Self, onplaying : (Event) -> JsValue) -> Unit = _
   onprogress(self : Self) -> EventHandler = _
-  set_onprogress(self : Self, onprogress : EventHandler) -> Unit = _
+  set_onprogress(self : Self, onprogress : (Event) -> JsValue) -> Unit = _
   onratechange(self : Self) -> EventHandler = _
-  set_onratechange(self : Self, onratechange : EventHandler) -> Unit = _
+  set_onratechange(self : Self, onratechange : (Event) -> JsValue) -> Unit = _
   onreset(self : Self) -> EventHandler = _
-  set_onreset(self : Self, onreset : EventHandler) -> Unit = _
+  set_onreset(self : Self, onreset : (Event) -> JsValue) -> Unit = _
   onresize(self : Self) -> EventHandler = _
-  set_onresize(self : Self, onresize : EventHandler) -> Unit = _
+  set_onresize(self : Self, onresize : (Event) -> JsValue) -> Unit = _
   onscroll(self : Self) -> EventHandler = _
-  set_onscroll(self : Self, onscroll : EventHandler) -> Unit = _
+  set_onscroll(self : Self, onscroll : (Event) -> JsValue) -> Unit = _
   onscrollend(self : Self) -> EventHandler = _
-  set_onscrollend(self : Self, onscrollend : EventHandler) -> Unit = _
+  set_onscrollend(self : Self, onscrollend : (Event) -> JsValue) -> Unit = _
   onsecuritypolicyviolation(self : Self) -> EventHandler = _
   set_onsecuritypolicyviolation(
     self : Self,
-    onsecuritypolicyviolation : EventHandler,
+    onsecuritypolicyviolation : (Event) -> JsValue,
   ) -> Unit = _
   onseeked(self : Self) -> EventHandler = _
-  set_onseeked(self : Self, onseeked : EventHandler) -> Unit = _
+  set_onseeked(self : Self, onseeked : (Event) -> JsValue) -> Unit = _
   onseeking(self : Self) -> EventHandler = _
-  set_onseeking(self : Self, onseeking : EventHandler) -> Unit = _
+  set_onseeking(self : Self, onseeking : (Event) -> JsValue) -> Unit = _
   onselect(self : Self) -> EventHandler = _
-  set_onselect(self : Self, onselect : EventHandler) -> Unit = _
+  set_onselect(self : Self, onselect : (Event) -> JsValue) -> Unit = _
   onslotchange(self : Self) -> EventHandler = _
-  set_onslotchange(self : Self, onslotchange : EventHandler) -> Unit = _
+  set_onslotchange(self : Self, onslotchange : (Event) -> JsValue) -> Unit = _
   onstalled(self : Self) -> EventHandler = _
-  set_onstalled(self : Self, onstalled : EventHandler) -> Unit = _
+  set_onstalled(self : Self, onstalled : (Event) -> JsValue) -> Unit = _
   onsubmit(self : Self) -> EventHandler = _
-  set_onsubmit(self : Self, onsubmit : EventHandler) -> Unit = _
+  set_onsubmit(self : Self, onsubmit : (Event) -> JsValue) -> Unit = _
   onsuspend(self : Self) -> EventHandler = _
-  set_onsuspend(self : Self, onsuspend : EventHandler) -> Unit = _
+  set_onsuspend(self : Self, onsuspend : (Event) -> JsValue) -> Unit = _
   ontimeupdate(self : Self) -> EventHandler = _
-  set_ontimeupdate(self : Self, ontimeupdate : EventHandler) -> Unit = _
+  set_ontimeupdate(self : Self, ontimeupdate : (Event) -> JsValue) -> Unit = _
   ontoggle(self : Self) -> EventHandler = _
-  set_ontoggle(self : Self, ontoggle : EventHandler) -> Unit = _
+  set_ontoggle(self : Self, ontoggle : (Event) -> JsValue) -> Unit = _
   onvolumechange(self : Self) -> EventHandler = _
-  set_onvolumechange(self : Self, onvolumechange : EventHandler) -> Unit = _
+  set_onvolumechange(self : Self, onvolumechange : (Event) -> JsValue) -> Unit = _
   onwaiting(self : Self) -> EventHandler = _
-  set_onwaiting(self : Self, onwaiting : EventHandler) -> Unit = _
+  set_onwaiting(self : Self, onwaiting : (Event) -> JsValue) -> Unit = _
   onwebkitanimationend(self : Self) -> EventHandler = _
-  set_onwebkitanimationend(self : Self, onwebkitanimationend : EventHandler) -> Unit = _
+  set_onwebkitanimationend(
+    self : Self,
+    onwebkitanimationend : (Event) -> JsValue,
+  ) -> Unit = _
   onwebkitanimationiteration(self : Self) -> EventHandler = _
   set_onwebkitanimationiteration(
     self : Self,
-    onwebkitanimationiteration : EventHandler,
+    onwebkitanimationiteration : (Event) -> JsValue,
   ) -> Unit = _
   onwebkitanimationstart(self : Self) -> EventHandler = _
-  set_onwebkitanimationstart(self : Self, onwebkitanimationstart : EventHandler) -> Unit = _
+  set_onwebkitanimationstart(
+    self : Self,
+    onwebkitanimationstart : (Event) -> JsValue,
+  ) -> Unit = _
   onwebkittransitionend(self : Self) -> EventHandler = _
-  set_onwebkittransitionend(self : Self, onwebkittransitionend : EventHandler) -> Unit = _
+  set_onwebkittransitionend(
+    self : Self,
+    onwebkittransitionend : (Event) -> JsValue,
+  ) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
-  set_onwheel(self : Self, onwheel : EventHandler) -> Unit = _
+  set_onwheel(self : Self, onwheel : (Event) -> JsValue) -> Unit = _
   ontouchstart(self : Self) -> EventHandler = _
-  set_ontouchstart(self : Self, ontouchstart : EventHandler) -> Unit = _
+  set_ontouchstart(self : Self, ontouchstart : (Event) -> JsValue) -> Unit = _
   ontouchend(self : Self) -> EventHandler = _
-  set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit = _
+  set_ontouchend(self : Self, ontouchend : (Event) -> JsValue) -> Unit = _
   ontouchmove(self : Self) -> EventHandler = _
-  set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit = _
+  set_ontouchmove(self : Self, ontouchmove : (Event) -> JsValue) -> Unit = _
   ontouchcancel(self : Self) -> EventHandler = _
-  set_ontouchcancel(self : Self, ontouchcancel : EventHandler) -> Unit = _
+  set_ontouchcancel(self : Self, ontouchcancel : (Event) -> JsValue) -> Unit = _
   onpointerover(self : Self) -> EventHandler = _
-  set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit = _
+  set_onpointerover(self : Self, onpointerover : (Event) -> JsValue) -> Unit = _
   onpointerenter(self : Self) -> EventHandler = _
-  set_onpointerenter(self : Self, onpointerenter : EventHandler) -> Unit = _
+  set_onpointerenter(self : Self, onpointerenter : (Event) -> JsValue) -> Unit = _
   onpointerdown(self : Self) -> EventHandler = _
-  set_onpointerdown(self : Self, onpointerdown : EventHandler) -> Unit = _
+  set_onpointerdown(self : Self, onpointerdown : (Event) -> JsValue) -> Unit = _
   onpointermove(self : Self) -> EventHandler = _
-  set_onpointermove(self : Self, onpointermove : EventHandler) -> Unit = _
+  set_onpointermove(self : Self, onpointermove : (Event) -> JsValue) -> Unit = _
   onpointerrawupdate(self : Self) -> EventHandler = _
-  set_onpointerrawupdate(self : Self, onpointerrawupdate : EventHandler) -> Unit = _
+  set_onpointerrawupdate(self : Self, onpointerrawupdate : (Event) -> JsValue) -> Unit = _
   onpointerup(self : Self) -> EventHandler = _
-  set_onpointerup(self : Self, onpointerup : EventHandler) -> Unit = _
+  set_onpointerup(self : Self, onpointerup : (Event) -> JsValue) -> Unit = _
   onpointercancel(self : Self) -> EventHandler = _
-  set_onpointercancel(self : Self, onpointercancel : EventHandler) -> Unit = _
+  set_onpointercancel(self : Self, onpointercancel : (Event) -> JsValue) -> Unit = _
   onpointerout(self : Self) -> EventHandler = _
-  set_onpointerout(self : Self, onpointerout : EventHandler) -> Unit = _
+  set_onpointerout(self : Self, onpointerout : (Event) -> JsValue) -> Unit = _
   onpointerleave(self : Self) -> EventHandler = _
-  set_onpointerleave(self : Self, onpointerleave : EventHandler) -> Unit = _
+  set_onpointerleave(self : Self, onpointerleave : (Event) -> JsValue) -> Unit = _
   ongotpointercapture(self : Self) -> EventHandler = _
-  set_ongotpointercapture(self : Self, ongotpointercapture : EventHandler) -> Unit = _
+  set_ongotpointercapture(self : Self, ongotpointercapture : (Event) -> JsValue) -> Unit = _
   onlostpointercapture(self : Self) -> EventHandler = _
-  set_onlostpointercapture(self : Self, onlostpointercapture : EventHandler) -> Unit = _
+  set_onlostpointercapture(
+    self : Self,
+    onlostpointercapture : (Event) -> JsValue,
+  ) -> Unit = _
   onselectstart(self : Self) -> EventHandler = _
-  set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit = _
+  set_onselectstart(self : Self, onselectstart : (Event) -> JsValue) -> Unit = _
   onselectionchange(self : Self) -> EventHandler = _
-  set_onselectionchange(self : Self, onselectionchange : EventHandler) -> Unit = _
+  set_onselectionchange(self : Self, onselectionchange : (Event) -> JsValue) -> Unit = _
   onafterprint(self : Self) -> EventHandler = _
-  set_onafterprint(self : Self, onafterprint : EventHandler) -> Unit = _
+  set_onafterprint(self : Self, onafterprint : (Event) -> JsValue) -> Unit = _
   onbeforeprint(self : Self) -> EventHandler = _
-  set_onbeforeprint(self : Self, onbeforeprint : EventHandler) -> Unit = _
+  set_onbeforeprint(self : Self, onbeforeprint : (Event) -> JsValue) -> Unit = _
   onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler = _
-  set_onbeforeunload(self : Self, onbeforeunload : OnBeforeUnloadEventHandler) -> Unit = _
+  set_onbeforeunload(self : Self, onbeforeunload : (Event) -> String) -> Unit = _
   onhashchange(self : Self) -> EventHandler = _
-  set_onhashchange(self : Self, onhashchange : EventHandler) -> Unit = _
+  set_onhashchange(self : Self, onhashchange : (Event) -> JsValue) -> Unit = _
   onlanguagechange(self : Self) -> EventHandler = _
-  set_onlanguagechange(self : Self, onlanguagechange : EventHandler) -> Unit = _
+  set_onlanguagechange(self : Self, onlanguagechange : (Event) -> JsValue) -> Unit = _
   onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  set_onmessage(self : Self, onmessage : (Event) -> JsValue) -> Unit = _
   onmessageerror(self : Self) -> EventHandler = _
-  set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit = _
+  set_onmessageerror(self : Self, onmessageerror : (Event) -> JsValue) -> Unit = _
   onoffline(self : Self) -> EventHandler = _
-  set_onoffline(self : Self, onoffline : EventHandler) -> Unit = _
+  set_onoffline(self : Self, onoffline : (Event) -> JsValue) -> Unit = _
   ononline(self : Self) -> EventHandler = _
-  set_ononline(self : Self, ononline : EventHandler) -> Unit = _
+  set_ononline(self : Self, ononline : (Event) -> JsValue) -> Unit = _
   onpagehide(self : Self) -> EventHandler = _
-  set_onpagehide(self : Self, onpagehide : EventHandler) -> Unit = _
+  set_onpagehide(self : Self, onpagehide : (Event) -> JsValue) -> Unit = _
   onpagereveal(self : Self) -> EventHandler = _
-  set_onpagereveal(self : Self, onpagereveal : EventHandler) -> Unit = _
+  set_onpagereveal(self : Self, onpagereveal : (Event) -> JsValue) -> Unit = _
   onpageshow(self : Self) -> EventHandler = _
-  set_onpageshow(self : Self, onpageshow : EventHandler) -> Unit = _
+  set_onpageshow(self : Self, onpageshow : (Event) -> JsValue) -> Unit = _
   onpageswap(self : Self) -> EventHandler = _
-  set_onpageswap(self : Self, onpageswap : EventHandler) -> Unit = _
+  set_onpageswap(self : Self, onpageswap : (Event) -> JsValue) -> Unit = _
   onpopstate(self : Self) -> EventHandler = _
-  set_onpopstate(self : Self, onpopstate : EventHandler) -> Unit = _
+  set_onpopstate(self : Self, onpopstate : (Event) -> JsValue) -> Unit = _
   onrejectionhandled(self : Self) -> EventHandler = _
-  set_onrejectionhandled(self : Self, onrejectionhandled : EventHandler) -> Unit = _
+  set_onrejectionhandled(self : Self, onrejectionhandled : (Event) -> JsValue) -> Unit = _
   onstorage(self : Self) -> EventHandler = _
-  set_onstorage(self : Self, onstorage : EventHandler) -> Unit = _
+  set_onstorage(self : Self, onstorage : (Event) -> JsValue) -> Unit = _
   onunhandledrejection(self : Self) -> EventHandler = _
-  set_onunhandledrejection(self : Self, onunhandledrejection : EventHandler) -> Unit = _
+  set_onunhandledrejection(
+    self : Self,
+    onunhandledrejection : (Event) -> JsValue,
+  ) -> Unit = _
   onunload(self : Self) -> EventHandler = _
-  set_onunload(self : Self, onunload : EventHandler) -> Unit = _
+  set_onunload(self : Self, onunload : (Event) -> JsValue) -> Unit = _
   origin(self : Self) -> String = _
   is_secure_context(self : Self) -> Bool = _
   cross_origin_isolated(self : Self) -> Bool = _
@@ -1021,8 +1039,11 @@ impl TWindow with onabort(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onabort](https://developer.mozilla.org/en-US/docs/Web/API/Window/onabort)
-impl TWindow with set_onabort(self : Self, onabort : EventHandler) -> Unit {
-  window_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(onabort))
+impl TWindow with set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit {
+  window_set_onabort_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onabort)),
+  )
 }
 
 ///|
@@ -1033,8 +1054,11 @@ impl TWindow with onauxclick(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onauxclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/onauxclick)
-impl TWindow with set_onauxclick(self : Self, onauxclick : EventHandler) -> Unit {
-  window_set_onauxclick_ffi(TJsValue::to_js(self), TJsValue::to_js(onauxclick))
+impl TWindow with set_onauxclick(self : Self, onauxclick : (Event) -> JsValue) -> Unit {
+  window_set_onauxclick_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onauxclick)),
+  )
 }
 
 ///|
@@ -1045,10 +1069,13 @@ impl TWindow with onbeforeinput(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onbeforeinput](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeinput)
-impl TWindow with set_onbeforeinput(self : Self, onbeforeinput : EventHandler) -> Unit {
+impl TWindow with set_onbeforeinput(
+  self : Self,
+  onbeforeinput : (Event) -> JsValue,
+) -> Unit {
   window_set_onbeforeinput_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforeinput),
+    TJsValue::to_js(event_handler_non_null_ffi(onbeforeinput)),
   )
 }
 
@@ -1060,10 +1087,13 @@ impl TWindow with onbeforematch(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onbeforematch](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforematch)
-impl TWindow with set_onbeforematch(self : Self, onbeforematch : EventHandler) -> Unit {
+impl TWindow with set_onbeforematch(
+  self : Self,
+  onbeforematch : (Event) -> JsValue,
+) -> Unit {
   window_set_onbeforematch_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforematch),
+    TJsValue::to_js(event_handler_non_null_ffi(onbeforematch)),
   )
 }
 
@@ -1075,10 +1105,13 @@ impl TWindow with onbeforetoggle(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onbeforetoggle](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforetoggle)
-impl TWindow with set_onbeforetoggle(self : Self, onbeforetoggle : EventHandler) -> Unit {
+impl TWindow with set_onbeforetoggle(
+  self : Self,
+  onbeforetoggle : (Event) -> JsValue,
+) -> Unit {
   window_set_onbeforetoggle_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforetoggle),
+    TJsValue::to_js(event_handler_non_null_ffi(onbeforetoggle)),
   )
 }
 
@@ -1090,8 +1123,11 @@ impl TWindow with onblur(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onblur](https://developer.mozilla.org/en-US/docs/Web/API/Window/onblur)
-impl TWindow with set_onblur(self : Self, onblur : EventHandler) -> Unit {
-  window_set_onblur_ffi(TJsValue::to_js(self), TJsValue::to_js(onblur))
+impl TWindow with set_onblur(self : Self, onblur : (Event) -> JsValue) -> Unit {
+  window_set_onblur_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onblur)),
+  )
 }
 
 ///|
@@ -1102,8 +1138,11 @@ impl TWindow with oncancel(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncancel)
-impl TWindow with set_oncancel(self : Self, oncancel : EventHandler) -> Unit {
-  window_set_oncancel_ffi(TJsValue::to_js(self), TJsValue::to_js(oncancel))
+impl TWindow with set_oncancel(self : Self, oncancel : (Event) -> JsValue) -> Unit {
+  window_set_oncancel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oncancel)),
+  )
 }
 
 ///|
@@ -1114,8 +1153,11 @@ impl TWindow with oncanplay(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncanplay](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncanplay)
-impl TWindow with set_oncanplay(self : Self, oncanplay : EventHandler) -> Unit {
-  window_set_oncanplay_ffi(TJsValue::to_js(self), TJsValue::to_js(oncanplay))
+impl TWindow with set_oncanplay(self : Self, oncanplay : (Event) -> JsValue) -> Unit {
+  window_set_oncanplay_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oncanplay)),
+  )
 }
 
 ///|
@@ -1128,11 +1170,11 @@ impl TWindow with oncanplaythrough(self : Self) -> EventHandler {
 /// [Window.oncanplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncanplaythrough)
 impl TWindow with set_oncanplaythrough(
   self : Self,
-  oncanplaythrough : EventHandler,
+  oncanplaythrough : (Event) -> JsValue,
 ) -> Unit {
   window_set_oncanplaythrough_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncanplaythrough),
+    TJsValue::to_js(event_handler_non_null_ffi(oncanplaythrough)),
   )
 }
 
@@ -1144,8 +1186,11 @@ impl TWindow with onchange(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onchange)
-impl TWindow with set_onchange(self : Self, onchange : EventHandler) -> Unit {
-  window_set_onchange_ffi(TJsValue::to_js(self), TJsValue::to_js(onchange))
+impl TWindow with set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit {
+  window_set_onchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onchange)),
+  )
 }
 
 ///|
@@ -1156,8 +1201,11 @@ impl TWindow with onclick(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/onclick)
-impl TWindow with set_onclick(self : Self, onclick : EventHandler) -> Unit {
-  window_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(onclick))
+impl TWindow with set_onclick(self : Self, onclick : (Event) -> JsValue) -> Unit {
+  window_set_onclick_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onclick)),
+  )
 }
 
 ///|
@@ -1168,8 +1216,11 @@ impl TWindow with onclose(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onclose](https://developer.mozilla.org/en-US/docs/Web/API/Window/onclose)
-impl TWindow with set_onclose(self : Self, onclose : EventHandler) -> Unit {
-  window_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
+impl TWindow with set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit {
+  window_set_onclose_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onclose)),
+  )
 }
 
 ///|
@@ -1180,8 +1231,11 @@ impl TWindow with oncommand(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncommand](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncommand)
-impl TWindow with set_oncommand(self : Self, oncommand : EventHandler) -> Unit {
-  window_set_oncommand_ffi(TJsValue::to_js(self), TJsValue::to_js(oncommand))
+impl TWindow with set_oncommand(self : Self, oncommand : (Event) -> JsValue) -> Unit {
+  window_set_oncommand_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oncommand)),
+  )
 }
 
 ///|
@@ -1192,10 +1246,13 @@ impl TWindow with oncontextlost(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextlost)
-impl TWindow with set_oncontextlost(self : Self, oncontextlost : EventHandler) -> Unit {
+impl TWindow with set_oncontextlost(
+  self : Self,
+  oncontextlost : (Event) -> JsValue,
+) -> Unit {
   window_set_oncontextlost_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncontextlost),
+    TJsValue::to_js(event_handler_non_null_ffi(oncontextlost)),
   )
 }
 
@@ -1207,10 +1264,13 @@ impl TWindow with oncontextmenu(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncontextmenu](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextmenu)
-impl TWindow with set_oncontextmenu(self : Self, oncontextmenu : EventHandler) -> Unit {
+impl TWindow with set_oncontextmenu(
+  self : Self,
+  oncontextmenu : (Event) -> JsValue,
+) -> Unit {
   window_set_oncontextmenu_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncontextmenu),
+    TJsValue::to_js(event_handler_non_null_ffi(oncontextmenu)),
   )
 }
 
@@ -1224,11 +1284,11 @@ impl TWindow with oncontextrestored(self : Self) -> EventHandler {
 /// [Window.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncontextrestored)
 impl TWindow with set_oncontextrestored(
   self : Self,
-  oncontextrestored : EventHandler,
+  oncontextrestored : (Event) -> JsValue,
 ) -> Unit {
   window_set_oncontextrestored_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncontextrestored),
+    TJsValue::to_js(event_handler_non_null_ffi(oncontextrestored)),
   )
 }
 
@@ -1240,8 +1300,11 @@ impl TWindow with oncopy(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncopy](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncopy)
-impl TWindow with set_oncopy(self : Self, oncopy : EventHandler) -> Unit {
-  window_set_oncopy_ffi(TJsValue::to_js(self), TJsValue::to_js(oncopy))
+impl TWindow with set_oncopy(self : Self, oncopy : (Event) -> JsValue) -> Unit {
+  window_set_oncopy_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oncopy)),
+  )
 }
 
 ///|
@@ -1252,10 +1315,10 @@ impl TWindow with oncuechange(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncuechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncuechange)
-impl TWindow with set_oncuechange(self : Self, oncuechange : EventHandler) -> Unit {
+impl TWindow with set_oncuechange(self : Self, oncuechange : (Event) -> JsValue) -> Unit {
   window_set_oncuechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncuechange),
+    TJsValue::to_js(event_handler_non_null_ffi(oncuechange)),
   )
 }
 
@@ -1267,8 +1330,11 @@ impl TWindow with oncut(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oncut](https://developer.mozilla.org/en-US/docs/Web/API/Window/oncut)
-impl TWindow with set_oncut(self : Self, oncut : EventHandler) -> Unit {
-  window_set_oncut_ffi(TJsValue::to_js(self), TJsValue::to_js(oncut))
+impl TWindow with set_oncut(self : Self, oncut : (Event) -> JsValue) -> Unit {
+  window_set_oncut_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oncut)),
+  )
 }
 
 ///|
@@ -1279,8 +1345,11 @@ impl TWindow with ondblclick(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondblclick](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondblclick)
-impl TWindow with set_ondblclick(self : Self, ondblclick : EventHandler) -> Unit {
-  window_set_ondblclick_ffi(TJsValue::to_js(self), TJsValue::to_js(ondblclick))
+impl TWindow with set_ondblclick(self : Self, ondblclick : (Event) -> JsValue) -> Unit {
+  window_set_ondblclick_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ondblclick)),
+  )
 }
 
 ///|
@@ -1291,8 +1360,11 @@ impl TWindow with ondrag(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondrag](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondrag)
-impl TWindow with set_ondrag(self : Self, ondrag : EventHandler) -> Unit {
-  window_set_ondrag_ffi(TJsValue::to_js(self), TJsValue::to_js(ondrag))
+impl TWindow with set_ondrag(self : Self, ondrag : (Event) -> JsValue) -> Unit {
+  window_set_ondrag_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ondrag)),
+  )
 }
 
 ///|
@@ -1303,8 +1375,11 @@ impl TWindow with ondragend(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondragend](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragend)
-impl TWindow with set_ondragend(self : Self, ondragend : EventHandler) -> Unit {
-  window_set_ondragend_ffi(TJsValue::to_js(self), TJsValue::to_js(ondragend))
+impl TWindow with set_ondragend(self : Self, ondragend : (Event) -> JsValue) -> Unit {
+  window_set_ondragend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ondragend)),
+  )
 }
 
 ///|
@@ -1315,10 +1390,10 @@ impl TWindow with ondragenter(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondragenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragenter)
-impl TWindow with set_ondragenter(self : Self, ondragenter : EventHandler) -> Unit {
+impl TWindow with set_ondragenter(self : Self, ondragenter : (Event) -> JsValue) -> Unit {
   window_set_ondragenter_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ondragenter),
+    TJsValue::to_js(event_handler_non_null_ffi(ondragenter)),
   )
 }
 
@@ -1330,10 +1405,10 @@ impl TWindow with ondragleave(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondragleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragleave)
-impl TWindow with set_ondragleave(self : Self, ondragleave : EventHandler) -> Unit {
+impl TWindow with set_ondragleave(self : Self, ondragleave : (Event) -> JsValue) -> Unit {
   window_set_ondragleave_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ondragleave),
+    TJsValue::to_js(event_handler_non_null_ffi(ondragleave)),
   )
 }
 
@@ -1345,8 +1420,11 @@ impl TWindow with ondragover(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondragover](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragover)
-impl TWindow with set_ondragover(self : Self, ondragover : EventHandler) -> Unit {
-  window_set_ondragover_ffi(TJsValue::to_js(self), TJsValue::to_js(ondragover))
+impl TWindow with set_ondragover(self : Self, ondragover : (Event) -> JsValue) -> Unit {
+  window_set_ondragover_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ondragover)),
+  )
 }
 
 ///|
@@ -1357,10 +1435,10 @@ impl TWindow with ondragstart(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondragstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondragstart)
-impl TWindow with set_ondragstart(self : Self, ondragstart : EventHandler) -> Unit {
+impl TWindow with set_ondragstart(self : Self, ondragstart : (Event) -> JsValue) -> Unit {
   window_set_ondragstart_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ondragstart),
+    TJsValue::to_js(event_handler_non_null_ffi(ondragstart)),
   )
 }
 
@@ -1372,8 +1450,11 @@ impl TWindow with ondrop(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ondrop](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondrop)
-impl TWindow with set_ondrop(self : Self, ondrop : EventHandler) -> Unit {
-  window_set_ondrop_ffi(TJsValue::to_js(self), TJsValue::to_js(ondrop))
+impl TWindow with set_ondrop(self : Self, ondrop : (Event) -> JsValue) -> Unit {
+  window_set_ondrop_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ondrop)),
+  )
 }
 
 ///|
@@ -1386,11 +1467,11 @@ impl TWindow with ondurationchange(self : Self) -> EventHandler {
 /// [Window.ondurationchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/ondurationchange)
 impl TWindow with set_ondurationchange(
   self : Self,
-  ondurationchange : EventHandler,
+  ondurationchange : (Event) -> JsValue,
 ) -> Unit {
   window_set_ondurationchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ondurationchange),
+    TJsValue::to_js(event_handler_non_null_ffi(ondurationchange)),
   )
 }
 
@@ -1402,8 +1483,11 @@ impl TWindow with onemptied(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onemptied](https://developer.mozilla.org/en-US/docs/Web/API/Window/onemptied)
-impl TWindow with set_onemptied(self : Self, onemptied : EventHandler) -> Unit {
-  window_set_onemptied_ffi(TJsValue::to_js(self), TJsValue::to_js(onemptied))
+impl TWindow with set_onemptied(self : Self, onemptied : (Event) -> JsValue) -> Unit {
+  window_set_onemptied_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onemptied)),
+  )
 }
 
 ///|
@@ -1414,8 +1498,11 @@ impl TWindow with onended(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onended](https://developer.mozilla.org/en-US/docs/Web/API/Window/onended)
-impl TWindow with set_onended(self : Self, onended : EventHandler) -> Unit {
-  window_set_onended_ffi(TJsValue::to_js(self), TJsValue::to_js(onended))
+impl TWindow with set_onended(self : Self, onended : (Event) -> JsValue) -> Unit {
+  window_set_onended_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onended)),
+  )
 }
 
 ///|
@@ -1426,8 +1513,14 @@ impl TWindow with onerror(self : Self) -> OnErrorEventHandler {
 
 ///|
 /// [Window.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Window/onerror)
-impl TWindow with set_onerror(self : Self, onerror : OnErrorEventHandler) -> Unit {
-  window_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+impl TWindow with set_onerror(
+  self : Self,
+  onerror : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
+) -> Unit {
+  window_set_onerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(on_error_event_handler_non_null_ffi(onerror)),
+  )
 }
 
 ///|
@@ -1438,8 +1531,11 @@ impl TWindow with onfocus(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onfocus](https://developer.mozilla.org/en-US/docs/Web/API/Window/onfocus)
-impl TWindow with set_onfocus(self : Self, onfocus : EventHandler) -> Unit {
-  window_set_onfocus_ffi(TJsValue::to_js(self), TJsValue::to_js(onfocus))
+impl TWindow with set_onfocus(self : Self, onfocus : (Event) -> JsValue) -> Unit {
+  window_set_onfocus_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onfocus)),
+  )
 }
 
 ///|
@@ -1450,8 +1546,11 @@ impl TWindow with onformdata(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onformdata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onformdata)
-impl TWindow with set_onformdata(self : Self, onformdata : EventHandler) -> Unit {
-  window_set_onformdata_ffi(TJsValue::to_js(self), TJsValue::to_js(onformdata))
+impl TWindow with set_onformdata(self : Self, onformdata : (Event) -> JsValue) -> Unit {
+  window_set_onformdata_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onformdata)),
+  )
 }
 
 ///|
@@ -1462,8 +1561,11 @@ impl TWindow with oninput(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oninput](https://developer.mozilla.org/en-US/docs/Web/API/Window/oninput)
-impl TWindow with set_oninput(self : Self, oninput : EventHandler) -> Unit {
-  window_set_oninput_ffi(TJsValue::to_js(self), TJsValue::to_js(oninput))
+impl TWindow with set_oninput(self : Self, oninput : (Event) -> JsValue) -> Unit {
+  window_set_oninput_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oninput)),
+  )
 }
 
 ///|
@@ -1474,8 +1576,11 @@ impl TWindow with oninvalid(self : Self) -> EventHandler {
 
 ///|
 /// [Window.oninvalid](https://developer.mozilla.org/en-US/docs/Web/API/Window/oninvalid)
-impl TWindow with set_oninvalid(self : Self, oninvalid : EventHandler) -> Unit {
-  window_set_oninvalid_ffi(TJsValue::to_js(self), TJsValue::to_js(oninvalid))
+impl TWindow with set_oninvalid(self : Self, oninvalid : (Event) -> JsValue) -> Unit {
+  window_set_oninvalid_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(oninvalid)),
+  )
 }
 
 ///|
@@ -1486,8 +1591,11 @@ impl TWindow with onkeydown(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onkeydown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeydown)
-impl TWindow with set_onkeydown(self : Self, onkeydown : EventHandler) -> Unit {
-  window_set_onkeydown_ffi(TJsValue::to_js(self), TJsValue::to_js(onkeydown))
+impl TWindow with set_onkeydown(self : Self, onkeydown : (Event) -> JsValue) -> Unit {
+  window_set_onkeydown_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onkeydown)),
+  )
 }
 
 ///|
@@ -1498,8 +1606,11 @@ impl TWindow with onkeypress(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onkeypress](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeypress)
-impl TWindow with set_onkeypress(self : Self, onkeypress : EventHandler) -> Unit {
-  window_set_onkeypress_ffi(TJsValue::to_js(self), TJsValue::to_js(onkeypress))
+impl TWindow with set_onkeypress(self : Self, onkeypress : (Event) -> JsValue) -> Unit {
+  window_set_onkeypress_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onkeypress)),
+  )
 }
 
 ///|
@@ -1510,8 +1621,11 @@ impl TWindow with onkeyup(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onkeyup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onkeyup)
-impl TWindow with set_onkeyup(self : Self, onkeyup : EventHandler) -> Unit {
-  window_set_onkeyup_ffi(TJsValue::to_js(self), TJsValue::to_js(onkeyup))
+impl TWindow with set_onkeyup(self : Self, onkeyup : (Event) -> JsValue) -> Unit {
+  window_set_onkeyup_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onkeyup)),
+  )
 }
 
 ///|
@@ -1522,8 +1636,11 @@ impl TWindow with onload(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onload)
-impl TWindow with set_onload(self : Self, onload : EventHandler) -> Unit {
-  window_set_onload_ffi(TJsValue::to_js(self), TJsValue::to_js(onload))
+impl TWindow with set_onload(self : Self, onload : (Event) -> JsValue) -> Unit {
+  window_set_onload_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onload)),
+  )
 }
 
 ///|
@@ -1534,10 +1651,13 @@ impl TWindow with onloadeddata(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onloadeddata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadeddata)
-impl TWindow with set_onloadeddata(self : Self, onloadeddata : EventHandler) -> Unit {
+impl TWindow with set_onloadeddata(
+  self : Self,
+  onloadeddata : (Event) -> JsValue,
+) -> Unit {
   window_set_onloadeddata_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onloadeddata),
+    TJsValue::to_js(event_handler_non_null_ffi(onloadeddata)),
   )
 }
 
@@ -1551,11 +1671,11 @@ impl TWindow with onloadedmetadata(self : Self) -> EventHandler {
 /// [Window.onloadedmetadata](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadedmetadata)
 impl TWindow with set_onloadedmetadata(
   self : Self,
-  onloadedmetadata : EventHandler,
+  onloadedmetadata : (Event) -> JsValue,
 ) -> Unit {
   window_set_onloadedmetadata_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onloadedmetadata),
+    TJsValue::to_js(event_handler_non_null_ffi(onloadedmetadata)),
   )
 }
 
@@ -1567,10 +1687,10 @@ impl TWindow with onloadstart(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onloadstart)
-impl TWindow with set_onloadstart(self : Self, onloadstart : EventHandler) -> Unit {
+impl TWindow with set_onloadstart(self : Self, onloadstart : (Event) -> JsValue) -> Unit {
   window_set_onloadstart_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onloadstart),
+    TJsValue::to_js(event_handler_non_null_ffi(onloadstart)),
   )
 }
 
@@ -1582,10 +1702,10 @@ impl TWindow with onmousedown(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmousedown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmousedown)
-impl TWindow with set_onmousedown(self : Self, onmousedown : EventHandler) -> Unit {
+impl TWindow with set_onmousedown(self : Self, onmousedown : (Event) -> JsValue) -> Unit {
   window_set_onmousedown_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmousedown),
+    TJsValue::to_js(event_handler_non_null_ffi(onmousedown)),
   )
 }
 
@@ -1597,10 +1717,13 @@ impl TWindow with onmouseenter(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmouseenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseenter)
-impl TWindow with set_onmouseenter(self : Self, onmouseenter : EventHandler) -> Unit {
+impl TWindow with set_onmouseenter(
+  self : Self,
+  onmouseenter : (Event) -> JsValue,
+) -> Unit {
   window_set_onmouseenter_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmouseenter),
+    TJsValue::to_js(event_handler_non_null_ffi(onmouseenter)),
   )
 }
 
@@ -1612,10 +1735,13 @@ impl TWindow with onmouseleave(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmouseleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseleave)
-impl TWindow with set_onmouseleave(self : Self, onmouseleave : EventHandler) -> Unit {
+impl TWindow with set_onmouseleave(
+  self : Self,
+  onmouseleave : (Event) -> JsValue,
+) -> Unit {
   window_set_onmouseleave_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmouseleave),
+    TJsValue::to_js(event_handler_non_null_ffi(onmouseleave)),
   )
 }
 
@@ -1627,10 +1753,10 @@ impl TWindow with onmousemove(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmousemove](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmousemove)
-impl TWindow with set_onmousemove(self : Self, onmousemove : EventHandler) -> Unit {
+impl TWindow with set_onmousemove(self : Self, onmousemove : (Event) -> JsValue) -> Unit {
   window_set_onmousemove_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmousemove),
+    TJsValue::to_js(event_handler_non_null_ffi(onmousemove)),
   )
 }
 
@@ -1642,8 +1768,11 @@ impl TWindow with onmouseout(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmouseout](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseout)
-impl TWindow with set_onmouseout(self : Self, onmouseout : EventHandler) -> Unit {
-  window_set_onmouseout_ffi(TJsValue::to_js(self), TJsValue::to_js(onmouseout))
+impl TWindow with set_onmouseout(self : Self, onmouseout : (Event) -> JsValue) -> Unit {
+  window_set_onmouseout_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onmouseout)),
+  )
 }
 
 ///|
@@ -1654,10 +1783,10 @@ impl TWindow with onmouseover(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmouseover](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseover)
-impl TWindow with set_onmouseover(self : Self, onmouseover : EventHandler) -> Unit {
+impl TWindow with set_onmouseover(self : Self, onmouseover : (Event) -> JsValue) -> Unit {
   window_set_onmouseover_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmouseover),
+    TJsValue::to_js(event_handler_non_null_ffi(onmouseover)),
   )
 }
 
@@ -1669,8 +1798,11 @@ impl TWindow with onmouseup(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmouseup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmouseup)
-impl TWindow with set_onmouseup(self : Self, onmouseup : EventHandler) -> Unit {
-  window_set_onmouseup_ffi(TJsValue::to_js(self), TJsValue::to_js(onmouseup))
+impl TWindow with set_onmouseup(self : Self, onmouseup : (Event) -> JsValue) -> Unit {
+  window_set_onmouseup_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onmouseup)),
+  )
 }
 
 ///|
@@ -1681,8 +1813,11 @@ impl TWindow with onpaste(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpaste](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpaste)
-impl TWindow with set_onpaste(self : Self, onpaste : EventHandler) -> Unit {
-  window_set_onpaste_ffi(TJsValue::to_js(self), TJsValue::to_js(onpaste))
+impl TWindow with set_onpaste(self : Self, onpaste : (Event) -> JsValue) -> Unit {
+  window_set_onpaste_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onpaste)),
+  )
 }
 
 ///|
@@ -1693,8 +1828,11 @@ impl TWindow with onpause(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpause](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpause)
-impl TWindow with set_onpause(self : Self, onpause : EventHandler) -> Unit {
-  window_set_onpause_ffi(TJsValue::to_js(self), TJsValue::to_js(onpause))
+impl TWindow with set_onpause(self : Self, onpause : (Event) -> JsValue) -> Unit {
+  window_set_onpause_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onpause)),
+  )
 }
 
 ///|
@@ -1705,8 +1843,11 @@ impl TWindow with onplay(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onplay](https://developer.mozilla.org/en-US/docs/Web/API/Window/onplay)
-impl TWindow with set_onplay(self : Self, onplay : EventHandler) -> Unit {
-  window_set_onplay_ffi(TJsValue::to_js(self), TJsValue::to_js(onplay))
+impl TWindow with set_onplay(self : Self, onplay : (Event) -> JsValue) -> Unit {
+  window_set_onplay_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onplay)),
+  )
 }
 
 ///|
@@ -1717,8 +1858,11 @@ impl TWindow with onplaying(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onplaying](https://developer.mozilla.org/en-US/docs/Web/API/Window/onplaying)
-impl TWindow with set_onplaying(self : Self, onplaying : EventHandler) -> Unit {
-  window_set_onplaying_ffi(TJsValue::to_js(self), TJsValue::to_js(onplaying))
+impl TWindow with set_onplaying(self : Self, onplaying : (Event) -> JsValue) -> Unit {
+  window_set_onplaying_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onplaying)),
+  )
 }
 
 ///|
@@ -1729,8 +1873,11 @@ impl TWindow with onprogress(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/Window/onprogress)
-impl TWindow with set_onprogress(self : Self, onprogress : EventHandler) -> Unit {
-  window_set_onprogress_ffi(TJsValue::to_js(self), TJsValue::to_js(onprogress))
+impl TWindow with set_onprogress(self : Self, onprogress : (Event) -> JsValue) -> Unit {
+  window_set_onprogress_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onprogress)),
+  )
 }
 
 ///|
@@ -1741,10 +1888,13 @@ impl TWindow with onratechange(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onratechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onratechange)
-impl TWindow with set_onratechange(self : Self, onratechange : EventHandler) -> Unit {
+impl TWindow with set_onratechange(
+  self : Self,
+  onratechange : (Event) -> JsValue,
+) -> Unit {
   window_set_onratechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onratechange),
+    TJsValue::to_js(event_handler_non_null_ffi(onratechange)),
   )
 }
 
@@ -1756,8 +1906,11 @@ impl TWindow with onreset(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onreset](https://developer.mozilla.org/en-US/docs/Web/API/Window/onreset)
-impl TWindow with set_onreset(self : Self, onreset : EventHandler) -> Unit {
-  window_set_onreset_ffi(TJsValue::to_js(self), TJsValue::to_js(onreset))
+impl TWindow with set_onreset(self : Self, onreset : (Event) -> JsValue) -> Unit {
+  window_set_onreset_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onreset)),
+  )
 }
 
 ///|
@@ -1768,8 +1921,11 @@ impl TWindow with onresize(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onresize](https://developer.mozilla.org/en-US/docs/Web/API/Window/onresize)
-impl TWindow with set_onresize(self : Self, onresize : EventHandler) -> Unit {
-  window_set_onresize_ffi(TJsValue::to_js(self), TJsValue::to_js(onresize))
+impl TWindow with set_onresize(self : Self, onresize : (Event) -> JsValue) -> Unit {
+  window_set_onresize_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onresize)),
+  )
 }
 
 ///|
@@ -1780,8 +1936,11 @@ impl TWindow with onscroll(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/onscroll)
-impl TWindow with set_onscroll(self : Self, onscroll : EventHandler) -> Unit {
-  window_set_onscroll_ffi(TJsValue::to_js(self), TJsValue::to_js(onscroll))
+impl TWindow with set_onscroll(self : Self, onscroll : (Event) -> JsValue) -> Unit {
+  window_set_onscroll_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onscroll)),
+  )
 }
 
 ///|
@@ -1792,10 +1951,10 @@ impl TWindow with onscrollend(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onscrollend)
-impl TWindow with set_onscrollend(self : Self, onscrollend : EventHandler) -> Unit {
+impl TWindow with set_onscrollend(self : Self, onscrollend : (Event) -> JsValue) -> Unit {
   window_set_onscrollend_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onscrollend),
+    TJsValue::to_js(event_handler_non_null_ffi(onscrollend)),
   )
 }
 
@@ -1809,11 +1968,11 @@ impl TWindow with onsecuritypolicyviolation(self : Self) -> EventHandler {
 /// [Window.onsecuritypolicyviolation](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsecuritypolicyviolation)
 impl TWindow with set_onsecuritypolicyviolation(
   self : Self,
-  onsecuritypolicyviolation : EventHandler,
+  onsecuritypolicyviolation : (Event) -> JsValue,
 ) -> Unit {
   window_set_onsecuritypolicyviolation_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onsecuritypolicyviolation),
+    TJsValue::to_js(event_handler_non_null_ffi(onsecuritypolicyviolation)),
   )
 }
 
@@ -1825,8 +1984,11 @@ impl TWindow with onseeked(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onseeked](https://developer.mozilla.org/en-US/docs/Web/API/Window/onseeked)
-impl TWindow with set_onseeked(self : Self, onseeked : EventHandler) -> Unit {
-  window_set_onseeked_ffi(TJsValue::to_js(self), TJsValue::to_js(onseeked))
+impl TWindow with set_onseeked(self : Self, onseeked : (Event) -> JsValue) -> Unit {
+  window_set_onseeked_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onseeked)),
+  )
 }
 
 ///|
@@ -1837,8 +1999,11 @@ impl TWindow with onseeking(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onseeking](https://developer.mozilla.org/en-US/docs/Web/API/Window/onseeking)
-impl TWindow with set_onseeking(self : Self, onseeking : EventHandler) -> Unit {
-  window_set_onseeking_ffi(TJsValue::to_js(self), TJsValue::to_js(onseeking))
+impl TWindow with set_onseeking(self : Self, onseeking : (Event) -> JsValue) -> Unit {
+  window_set_onseeking_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onseeking)),
+  )
 }
 
 ///|
@@ -1849,8 +2014,11 @@ impl TWindow with onselect(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onselect](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselect)
-impl TWindow with set_onselect(self : Self, onselect : EventHandler) -> Unit {
-  window_set_onselect_ffi(TJsValue::to_js(self), TJsValue::to_js(onselect))
+impl TWindow with set_onselect(self : Self, onselect : (Event) -> JsValue) -> Unit {
+  window_set_onselect_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onselect)),
+  )
 }
 
 ///|
@@ -1861,10 +2029,13 @@ impl TWindow with onslotchange(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onslotchange)
-impl TWindow with set_onslotchange(self : Self, onslotchange : EventHandler) -> Unit {
+impl TWindow with set_onslotchange(
+  self : Self,
+  onslotchange : (Event) -> JsValue,
+) -> Unit {
   window_set_onslotchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onslotchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onslotchange)),
   )
 }
 
@@ -1876,8 +2047,11 @@ impl TWindow with onstalled(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onstalled](https://developer.mozilla.org/en-US/docs/Web/API/Window/onstalled)
-impl TWindow with set_onstalled(self : Self, onstalled : EventHandler) -> Unit {
-  window_set_onstalled_ffi(TJsValue::to_js(self), TJsValue::to_js(onstalled))
+impl TWindow with set_onstalled(self : Self, onstalled : (Event) -> JsValue) -> Unit {
+  window_set_onstalled_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onstalled)),
+  )
 }
 
 ///|
@@ -1888,8 +2062,11 @@ impl TWindow with onsubmit(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onsubmit](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsubmit)
-impl TWindow with set_onsubmit(self : Self, onsubmit : EventHandler) -> Unit {
-  window_set_onsubmit_ffi(TJsValue::to_js(self), TJsValue::to_js(onsubmit))
+impl TWindow with set_onsubmit(self : Self, onsubmit : (Event) -> JsValue) -> Unit {
+  window_set_onsubmit_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onsubmit)),
+  )
 }
 
 ///|
@@ -1900,8 +2077,11 @@ impl TWindow with onsuspend(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onsuspend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onsuspend)
-impl TWindow with set_onsuspend(self : Self, onsuspend : EventHandler) -> Unit {
-  window_set_onsuspend_ffi(TJsValue::to_js(self), TJsValue::to_js(onsuspend))
+impl TWindow with set_onsuspend(self : Self, onsuspend : (Event) -> JsValue) -> Unit {
+  window_set_onsuspend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onsuspend)),
+  )
 }
 
 ///|
@@ -1912,10 +2092,13 @@ impl TWindow with ontimeupdate(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ontimeupdate](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontimeupdate)
-impl TWindow with set_ontimeupdate(self : Self, ontimeupdate : EventHandler) -> Unit {
+impl TWindow with set_ontimeupdate(
+  self : Self,
+  ontimeupdate : (Event) -> JsValue,
+) -> Unit {
   window_set_ontimeupdate_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ontimeupdate),
+    TJsValue::to_js(event_handler_non_null_ffi(ontimeupdate)),
   )
 }
 
@@ -1927,8 +2110,11 @@ impl TWindow with ontoggle(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ontoggle](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontoggle)
-impl TWindow with set_ontoggle(self : Self, ontoggle : EventHandler) -> Unit {
-  window_set_ontoggle_ffi(TJsValue::to_js(self), TJsValue::to_js(ontoggle))
+impl TWindow with set_ontoggle(self : Self, ontoggle : (Event) -> JsValue) -> Unit {
+  window_set_ontoggle_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ontoggle)),
+  )
 }
 
 ///|
@@ -1939,10 +2125,13 @@ impl TWindow with onvolumechange(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onvolumechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onvolumechange)
-impl TWindow with set_onvolumechange(self : Self, onvolumechange : EventHandler) -> Unit {
+impl TWindow with set_onvolumechange(
+  self : Self,
+  onvolumechange : (Event) -> JsValue,
+) -> Unit {
   window_set_onvolumechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onvolumechange),
+    TJsValue::to_js(event_handler_non_null_ffi(onvolumechange)),
   )
 }
 
@@ -1954,8 +2143,11 @@ impl TWindow with onwaiting(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onwaiting](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwaiting)
-impl TWindow with set_onwaiting(self : Self, onwaiting : EventHandler) -> Unit {
-  window_set_onwaiting_ffi(TJsValue::to_js(self), TJsValue::to_js(onwaiting))
+impl TWindow with set_onwaiting(self : Self, onwaiting : (Event) -> JsValue) -> Unit {
+  window_set_onwaiting_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onwaiting)),
+  )
 }
 
 ///|
@@ -1968,11 +2160,11 @@ impl TWindow with onwebkitanimationend(self : Self) -> EventHandler {
 /// [Window.onwebkitanimationend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationend)
 impl TWindow with set_onwebkitanimationend(
   self : Self,
-  onwebkitanimationend : EventHandler,
+  onwebkitanimationend : (Event) -> JsValue,
 ) -> Unit {
   window_set_onwebkitanimationend_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onwebkitanimationend),
+    TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationend)),
   )
 }
 
@@ -1986,11 +2178,11 @@ impl TWindow with onwebkitanimationiteration(self : Self) -> EventHandler {
 /// [Window.onwebkitanimationiteration](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationiteration)
 impl TWindow with set_onwebkitanimationiteration(
   self : Self,
-  onwebkitanimationiteration : EventHandler,
+  onwebkitanimationiteration : (Event) -> JsValue,
 ) -> Unit {
   window_set_onwebkitanimationiteration_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onwebkitanimationiteration),
+    TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationiteration)),
   )
 }
 
@@ -2004,11 +2196,11 @@ impl TWindow with onwebkitanimationstart(self : Self) -> EventHandler {
 /// [Window.onwebkitanimationstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkitanimationstart)
 impl TWindow with set_onwebkitanimationstart(
   self : Self,
-  onwebkitanimationstart : EventHandler,
+  onwebkitanimationstart : (Event) -> JsValue,
 ) -> Unit {
   window_set_onwebkitanimationstart_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onwebkitanimationstart),
+    TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationstart)),
   )
 }
 
@@ -2022,11 +2214,11 @@ impl TWindow with onwebkittransitionend(self : Self) -> EventHandler {
 /// [Window.onwebkittransitionend](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwebkittransitionend)
 impl TWindow with set_onwebkittransitionend(
   self : Self,
-  onwebkittransitionend : EventHandler,
+  onwebkittransitionend : (Event) -> JsValue,
 ) -> Unit {
   window_set_onwebkittransitionend_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onwebkittransitionend),
+    TJsValue::to_js(event_handler_non_null_ffi(onwebkittransitionend)),
   )
 }
 
@@ -2038,8 +2230,11 @@ impl TWindow with onwheel(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onwheel)
-impl TWindow with set_onwheel(self : Self, onwheel : EventHandler) -> Unit {
-  window_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(onwheel))
+impl TWindow with set_onwheel(self : Self, onwheel : (Event) -> JsValue) -> Unit {
+  window_set_onwheel_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onwheel)),
+  )
 }
 
 ///|
@@ -2050,10 +2245,13 @@ impl TWindow with ontouchstart(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontouchstart)
-impl TWindow with set_ontouchstart(self : Self, ontouchstart : EventHandler) -> Unit {
+impl TWindow with set_ontouchstart(
+  self : Self,
+  ontouchstart : (Event) -> JsValue,
+) -> Unit {
   window_set_ontouchstart_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ontouchstart),
+    TJsValue::to_js(event_handler_non_null_ffi(ontouchstart)),
   )
 }
 
@@ -2065,8 +2263,11 @@ impl TWindow with ontouchend(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontouchend)
-impl TWindow with set_ontouchend(self : Self, ontouchend : EventHandler) -> Unit {
-  window_set_ontouchend_ffi(TJsValue::to_js(self), TJsValue::to_js(ontouchend))
+impl TWindow with set_ontouchend(self : Self, ontouchend : (Event) -> JsValue) -> Unit {
+  window_set_ontouchend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ontouchend)),
+  )
 }
 
 ///|
@@ -2077,10 +2278,10 @@ impl TWindow with ontouchmove(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontouchmove)
-impl TWindow with set_ontouchmove(self : Self, ontouchmove : EventHandler) -> Unit {
+impl TWindow with set_ontouchmove(self : Self, ontouchmove : (Event) -> JsValue) -> Unit {
   window_set_ontouchmove_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ontouchmove),
+    TJsValue::to_js(event_handler_non_null_ffi(ontouchmove)),
   )
 }
 
@@ -2092,10 +2293,13 @@ impl TWindow with ontouchcancel(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/Window/ontouchcancel)
-impl TWindow with set_ontouchcancel(self : Self, ontouchcancel : EventHandler) -> Unit {
+impl TWindow with set_ontouchcancel(
+  self : Self,
+  ontouchcancel : (Event) -> JsValue,
+) -> Unit {
   window_set_ontouchcancel_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ontouchcancel),
+    TJsValue::to_js(event_handler_non_null_ffi(ontouchcancel)),
   )
 }
 
@@ -2107,10 +2311,13 @@ impl TWindow with onpointerover(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpointerover](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerover)
-impl TWindow with set_onpointerover(self : Self, onpointerover : EventHandler) -> Unit {
+impl TWindow with set_onpointerover(
+  self : Self,
+  onpointerover : (Event) -> JsValue,
+) -> Unit {
   window_set_onpointerover_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointerover),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointerover)),
   )
 }
 
@@ -2122,10 +2329,13 @@ impl TWindow with onpointerenter(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpointerenter](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerenter)
-impl TWindow with set_onpointerenter(self : Self, onpointerenter : EventHandler) -> Unit {
+impl TWindow with set_onpointerenter(
+  self : Self,
+  onpointerenter : (Event) -> JsValue,
+) -> Unit {
   window_set_onpointerenter_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointerenter),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointerenter)),
   )
 }
 
@@ -2137,10 +2347,13 @@ impl TWindow with onpointerdown(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpointerdown](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerdown)
-impl TWindow with set_onpointerdown(self : Self, onpointerdown : EventHandler) -> Unit {
+impl TWindow with set_onpointerdown(
+  self : Self,
+  onpointerdown : (Event) -> JsValue,
+) -> Unit {
   window_set_onpointerdown_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointerdown),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointerdown)),
   )
 }
 
@@ -2152,10 +2365,13 @@ impl TWindow with onpointermove(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpointermove](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointermove)
-impl TWindow with set_onpointermove(self : Self, onpointermove : EventHandler) -> Unit {
+impl TWindow with set_onpointermove(
+  self : Self,
+  onpointermove : (Event) -> JsValue,
+) -> Unit {
   window_set_onpointermove_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointermove),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointermove)),
   )
 }
 
@@ -2169,11 +2385,11 @@ impl TWindow with onpointerrawupdate(self : Self) -> EventHandler {
 /// [Window.onpointerrawupdate](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerrawupdate)
 impl TWindow with set_onpointerrawupdate(
   self : Self,
-  onpointerrawupdate : EventHandler,
+  onpointerrawupdate : (Event) -> JsValue,
 ) -> Unit {
   window_set_onpointerrawupdate_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointerrawupdate),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointerrawupdate)),
   )
 }
 
@@ -2185,10 +2401,10 @@ impl TWindow with onpointerup(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpointerup](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerup)
-impl TWindow with set_onpointerup(self : Self, onpointerup : EventHandler) -> Unit {
+impl TWindow with set_onpointerup(self : Self, onpointerup : (Event) -> JsValue) -> Unit {
   window_set_onpointerup_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointerup),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointerup)),
   )
 }
 
@@ -2202,11 +2418,11 @@ impl TWindow with onpointercancel(self : Self) -> EventHandler {
 /// [Window.onpointercancel](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointercancel)
 impl TWindow with set_onpointercancel(
   self : Self,
-  onpointercancel : EventHandler,
+  onpointercancel : (Event) -> JsValue,
 ) -> Unit {
   window_set_onpointercancel_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointercancel),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointercancel)),
   )
 }
 
@@ -2218,10 +2434,13 @@ impl TWindow with onpointerout(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpointerout](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerout)
-impl TWindow with set_onpointerout(self : Self, onpointerout : EventHandler) -> Unit {
+impl TWindow with set_onpointerout(
+  self : Self,
+  onpointerout : (Event) -> JsValue,
+) -> Unit {
   window_set_onpointerout_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointerout),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointerout)),
   )
 }
 
@@ -2233,10 +2452,13 @@ impl TWindow with onpointerleave(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpointerleave](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpointerleave)
-impl TWindow with set_onpointerleave(self : Self, onpointerleave : EventHandler) -> Unit {
+impl TWindow with set_onpointerleave(
+  self : Self,
+  onpointerleave : (Event) -> JsValue,
+) -> Unit {
   window_set_onpointerleave_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpointerleave),
+    TJsValue::to_js(event_handler_non_null_ffi(onpointerleave)),
   )
 }
 
@@ -2250,11 +2472,11 @@ impl TWindow with ongotpointercapture(self : Self) -> EventHandler {
 /// [Window.ongotpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/Window/ongotpointercapture)
 impl TWindow with set_ongotpointercapture(
   self : Self,
-  ongotpointercapture : EventHandler,
+  ongotpointercapture : (Event) -> JsValue,
 ) -> Unit {
   window_set_ongotpointercapture_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(ongotpointercapture),
+    TJsValue::to_js(event_handler_non_null_ffi(ongotpointercapture)),
   )
 }
 
@@ -2268,11 +2490,11 @@ impl TWindow with onlostpointercapture(self : Self) -> EventHandler {
 /// [Window.onlostpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/Window/onlostpointercapture)
 impl TWindow with set_onlostpointercapture(
   self : Self,
-  onlostpointercapture : EventHandler,
+  onlostpointercapture : (Event) -> JsValue,
 ) -> Unit {
   window_set_onlostpointercapture_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onlostpointercapture),
+    TJsValue::to_js(event_handler_non_null_ffi(onlostpointercapture)),
   )
 }
 
@@ -2284,10 +2506,13 @@ impl TWindow with onselectstart(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselectstart)
-impl TWindow with set_onselectstart(self : Self, onselectstart : EventHandler) -> Unit {
+impl TWindow with set_onselectstart(
+  self : Self,
+  onselectstart : (Event) -> JsValue,
+) -> Unit {
   window_set_onselectstart_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onselectstart),
+    TJsValue::to_js(event_handler_non_null_ffi(onselectstart)),
   )
 }
 
@@ -2301,11 +2526,11 @@ impl TWindow with onselectionchange(self : Self) -> EventHandler {
 /// [Window.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onselectionchange)
 impl TWindow with set_onselectionchange(
   self : Self,
-  onselectionchange : EventHandler,
+  onselectionchange : (Event) -> JsValue,
 ) -> Unit {
   window_set_onselectionchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onselectionchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onselectionchange)),
   )
 }
 
@@ -2317,10 +2542,13 @@ impl TWindow with onafterprint(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onafterprint](https://developer.mozilla.org/en-US/docs/Web/API/Window/onafterprint)
-impl TWindow with set_onafterprint(self : Self, onafterprint : EventHandler) -> Unit {
+impl TWindow with set_onafterprint(
+  self : Self,
+  onafterprint : (Event) -> JsValue,
+) -> Unit {
   window_set_onafterprint_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onafterprint),
+    TJsValue::to_js(event_handler_non_null_ffi(onafterprint)),
   )
 }
 
@@ -2332,10 +2560,13 @@ impl TWindow with onbeforeprint(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onbeforeprint](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeprint)
-impl TWindow with set_onbeforeprint(self : Self, onbeforeprint : EventHandler) -> Unit {
+impl TWindow with set_onbeforeprint(
+  self : Self,
+  onbeforeprint : (Event) -> JsValue,
+) -> Unit {
   window_set_onbeforeprint_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforeprint),
+    TJsValue::to_js(event_handler_non_null_ffi(onbeforeprint)),
   )
 }
 
@@ -2349,11 +2580,11 @@ impl TWindow with onbeforeunload(self : Self) -> OnBeforeUnloadEventHandler {
 /// [Window.onbeforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onbeforeunload)
 impl TWindow with set_onbeforeunload(
   self : Self,
-  onbeforeunload : OnBeforeUnloadEventHandler,
+  onbeforeunload : (Event) -> String,
 ) -> Unit {
   window_set_onbeforeunload_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onbeforeunload),
+    TJsValue::to_js(on_before_unload_event_handler_non_null_ffi(onbeforeunload)),
   )
 }
 
@@ -2365,10 +2596,13 @@ impl TWindow with onhashchange(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onhashchange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onhashchange)
-impl TWindow with set_onhashchange(self : Self, onhashchange : EventHandler) -> Unit {
+impl TWindow with set_onhashchange(
+  self : Self,
+  onhashchange : (Event) -> JsValue,
+) -> Unit {
   window_set_onhashchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onhashchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onhashchange)),
   )
 }
 
@@ -2382,11 +2616,11 @@ impl TWindow with onlanguagechange(self : Self) -> EventHandler {
 /// [Window.onlanguagechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/onlanguagechange)
 impl TWindow with set_onlanguagechange(
   self : Self,
-  onlanguagechange : EventHandler,
+  onlanguagechange : (Event) -> JsValue,
 ) -> Unit {
   window_set_onlanguagechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onlanguagechange),
+    TJsValue::to_js(event_handler_non_null_ffi(onlanguagechange)),
   )
 }
 
@@ -2398,8 +2632,11 @@ impl TWindow with onmessage(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmessage)
-impl TWindow with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
-  window_set_onmessage_ffi(TJsValue::to_js(self), TJsValue::to_js(onmessage))
+impl TWindow with set_onmessage(self : Self, onmessage : (Event) -> JsValue) -> Unit {
+  window_set_onmessage_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessage)),
+  )
 }
 
 ///|
@@ -2410,10 +2647,13 @@ impl TWindow with onmessageerror(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/Window/onmessageerror)
-impl TWindow with set_onmessageerror(self : Self, onmessageerror : EventHandler) -> Unit {
+impl TWindow with set_onmessageerror(
+  self : Self,
+  onmessageerror : (Event) -> JsValue,
+) -> Unit {
   window_set_onmessageerror_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessageerror),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }
 
@@ -2425,8 +2665,11 @@ impl TWindow with onoffline(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onoffline](https://developer.mozilla.org/en-US/docs/Web/API/Window/onoffline)
-impl TWindow with set_onoffline(self : Self, onoffline : EventHandler) -> Unit {
-  window_set_onoffline_ffi(TJsValue::to_js(self), TJsValue::to_js(onoffline))
+impl TWindow with set_onoffline(self : Self, onoffline : (Event) -> JsValue) -> Unit {
+  window_set_onoffline_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onoffline)),
+  )
 }
 
 ///|
@@ -2437,8 +2680,11 @@ impl TWindow with ononline(self : Self) -> EventHandler {
 
 ///|
 /// [Window.ononline](https://developer.mozilla.org/en-US/docs/Web/API/Window/ononline)
-impl TWindow with set_ononline(self : Self, ononline : EventHandler) -> Unit {
-  window_set_ononline_ffi(TJsValue::to_js(self), TJsValue::to_js(ononline))
+impl TWindow with set_ononline(self : Self, ononline : (Event) -> JsValue) -> Unit {
+  window_set_ononline_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ononline)),
+  )
 }
 
 ///|
@@ -2449,8 +2695,11 @@ impl TWindow with onpagehide(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpagehide](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpagehide)
-impl TWindow with set_onpagehide(self : Self, onpagehide : EventHandler) -> Unit {
-  window_set_onpagehide_ffi(TJsValue::to_js(self), TJsValue::to_js(onpagehide))
+impl TWindow with set_onpagehide(self : Self, onpagehide : (Event) -> JsValue) -> Unit {
+  window_set_onpagehide_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onpagehide)),
+  )
 }
 
 ///|
@@ -2461,10 +2710,13 @@ impl TWindow with onpagereveal(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpagereveal](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpagereveal)
-impl TWindow with set_onpagereveal(self : Self, onpagereveal : EventHandler) -> Unit {
+impl TWindow with set_onpagereveal(
+  self : Self,
+  onpagereveal : (Event) -> JsValue,
+) -> Unit {
   window_set_onpagereveal_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onpagereveal),
+    TJsValue::to_js(event_handler_non_null_ffi(onpagereveal)),
   )
 }
 
@@ -2476,8 +2728,11 @@ impl TWindow with onpageshow(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpageshow](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpageshow)
-impl TWindow with set_onpageshow(self : Self, onpageshow : EventHandler) -> Unit {
-  window_set_onpageshow_ffi(TJsValue::to_js(self), TJsValue::to_js(onpageshow))
+impl TWindow with set_onpageshow(self : Self, onpageshow : (Event) -> JsValue) -> Unit {
+  window_set_onpageshow_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onpageshow)),
+  )
 }
 
 ///|
@@ -2488,8 +2743,11 @@ impl TWindow with onpageswap(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpageswap](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpageswap)
-impl TWindow with set_onpageswap(self : Self, onpageswap : EventHandler) -> Unit {
-  window_set_onpageswap_ffi(TJsValue::to_js(self), TJsValue::to_js(onpageswap))
+impl TWindow with set_onpageswap(self : Self, onpageswap : (Event) -> JsValue) -> Unit {
+  window_set_onpageswap_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onpageswap)),
+  )
 }
 
 ///|
@@ -2500,8 +2758,11 @@ impl TWindow with onpopstate(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/Window/onpopstate)
-impl TWindow with set_onpopstate(self : Self, onpopstate : EventHandler) -> Unit {
-  window_set_onpopstate_ffi(TJsValue::to_js(self), TJsValue::to_js(onpopstate))
+impl TWindow with set_onpopstate(self : Self, onpopstate : (Event) -> JsValue) -> Unit {
+  window_set_onpopstate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onpopstate)),
+  )
 }
 
 ///|
@@ -2514,11 +2775,11 @@ impl TWindow with onrejectionhandled(self : Self) -> EventHandler {
 /// [Window.onrejectionhandled](https://developer.mozilla.org/en-US/docs/Web/API/Window/onrejectionhandled)
 impl TWindow with set_onrejectionhandled(
   self : Self,
-  onrejectionhandled : EventHandler,
+  onrejectionhandled : (Event) -> JsValue,
 ) -> Unit {
   window_set_onrejectionhandled_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onrejectionhandled),
+    TJsValue::to_js(event_handler_non_null_ffi(onrejectionhandled)),
   )
 }
 
@@ -2530,8 +2791,11 @@ impl TWindow with onstorage(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onstorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/onstorage)
-impl TWindow with set_onstorage(self : Self, onstorage : EventHandler) -> Unit {
-  window_set_onstorage_ffi(TJsValue::to_js(self), TJsValue::to_js(onstorage))
+impl TWindow with set_onstorage(self : Self, onstorage : (Event) -> JsValue) -> Unit {
+  window_set_onstorage_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onstorage)),
+  )
 }
 
 ///|
@@ -2544,11 +2808,11 @@ impl TWindow with onunhandledrejection(self : Self) -> EventHandler {
 /// [Window.onunhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/Window/onunhandledrejection)
 impl TWindow with set_onunhandledrejection(
   self : Self,
-  onunhandledrejection : EventHandler,
+  onunhandledrejection : (Event) -> JsValue,
 ) -> Unit {
   window_set_onunhandledrejection_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onunhandledrejection),
+    TJsValue::to_js(event_handler_non_null_ffi(onunhandledrejection)),
   )
 }
 
@@ -2560,8 +2824,11 @@ impl TWindow with onunload(self : Self) -> EventHandler {
 
 ///|
 /// [Window.onunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/onunload)
-impl TWindow with set_onunload(self : Self, onunload : EventHandler) -> Unit {
-  window_set_onunload_ffi(TJsValue::to_js(self), TJsValue::to_js(onunload))
+impl TWindow with set_onunload(self : Self, onunload : (Event) -> JsValue) -> Unit {
+  window_set_onunload_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onunload)),
+  )
 }
 
 ///|

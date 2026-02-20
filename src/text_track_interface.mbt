@@ -37,7 +37,7 @@ pub trait TTextTrack: TEventTarget {
   add_cue(self : Self, cue : &TTextTrackCue) -> Unit = _
   remove_cue(self : Self, cue : &TTextTrackCue) -> Unit = _
   oncuechange(self : Self) -> EventHandler = _
-  set_oncuechange(self : Self, oncuechange : EventHandler) -> Unit = _
+  set_oncuechange(self : Self, oncuechange : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -114,9 +114,12 @@ impl TTextTrack with oncuechange(self : Self) -> EventHandler {
 
 ///|
 /// [TextTrack.oncuechange](https://developer.mozilla.org/en-US/docs/Web/API/TextTrack/oncuechange)
-impl TTextTrack with set_oncuechange(self : Self, oncuechange : EventHandler) -> Unit {
+impl TTextTrack with set_oncuechange(
+  self : Self,
+  oncuechange : (Event) -> JsValue,
+) -> Unit {
   text_track_set_oncuechange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(oncuechange),
+    TJsValue::to_js(event_handler_non_null_ffi(oncuechange)),
   )
 }

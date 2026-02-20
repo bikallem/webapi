@@ -255,6 +255,7 @@ fn main {
       dictionary_member_injection=config.dictionary_member_injection,
     )
     type_registry.set_callback_defs(flattened.callbacks)
+    type_registry.set_typedef_defs(flattened.typedefs)
     println("Flattened \{flattened.interfaces.length()} interfaces")
 
     // Create output directory if it doesn't exist

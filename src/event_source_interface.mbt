@@ -49,11 +49,11 @@ pub trait TEventSource: TEventTarget {
   with_credentials(self : Self) -> Bool = _
   ready_state(self : Self) -> UInt = _
   onopen(self : Self) -> EventHandler = _
-  set_onopen(self : Self, onopen : EventHandler) -> Unit = _
+  set_onopen(self : Self, onopen : (Event) -> JsValue) -> Unit = _
   onmessage(self : Self) -> EventHandler = _
-  set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
+  set_onmessage(self : Self, onmessage : (Event) -> JsValue) -> Unit = _
   onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit = _
   close(self : Self) -> Unit = _
 }
 
@@ -83,8 +83,11 @@ impl TEventSource with onopen(self : Self) -> EventHandler {
 
 ///|
 /// [EventSource.onopen](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onopen)
-impl TEventSource with set_onopen(self : Self, onopen : EventHandler) -> Unit {
-  event_source_set_onopen_ffi(TJsValue::to_js(self), TJsValue::to_js(onopen))
+impl TEventSource with set_onopen(self : Self, onopen : (Event) -> JsValue) -> Unit {
+  event_source_set_onopen_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onopen)),
+  )
 }
 
 ///|
@@ -95,10 +98,13 @@ impl TEventSource with onmessage(self : Self) -> EventHandler {
 
 ///|
 /// [EventSource.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onmessage)
-impl TEventSource with set_onmessage(self : Self, onmessage : EventHandler) -> Unit {
+impl TEventSource with set_onmessage(
+  self : Self,
+  onmessage : (Event) -> JsValue,
+) -> Unit {
   event_source_set_onmessage_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onmessage),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessage)),
   )
 }
 
@@ -110,8 +116,11 @@ impl TEventSource with onerror(self : Self) -> EventHandler {
 
 ///|
 /// [EventSource.onerror](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onerror)
-impl TEventSource with set_onerror(self : Self, onerror : EventHandler) -> Unit {
-  event_source_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+impl TEventSource with set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit {
+  event_source_set_onerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onerror)),
+  )
 }
 
 ///|

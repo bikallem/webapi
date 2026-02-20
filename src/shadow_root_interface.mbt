@@ -89,7 +89,7 @@ pub trait TShadowRoot: TDocumentFragment {
   serializable(self : Self) -> Bool = _
   host(self : Self) -> Element = _
   onslotchange(self : Self) -> EventHandler = _
-  set_onslotchange(self : Self, onslotchange : EventHandler) -> Unit = _
+  set_onslotchange(self : Self, onslotchange : (Event) -> JsValue) -> Unit = _
   set_html_unsafe(self : Self, html : &TShadowRootSetHTMLUnsafeHtml) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
   inner_html(self : Self) -> ShadowRootInnerHTML = _
@@ -150,10 +150,13 @@ impl TShadowRoot with onslotchange(self : Self) -> EventHandler {
 
 ///|
 /// [ShadowRoot.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/onslotchange)
-impl TShadowRoot with set_onslotchange(self : Self, onslotchange : EventHandler) -> Unit {
+impl TShadowRoot with set_onslotchange(
+  self : Self,
+  onslotchange : (Event) -> JsValue,
+) -> Unit {
   shadow_root_set_onslotchange_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onslotchange),
+    TJsValue::to_js(event_handler_non_null_ffi(onslotchange)),
   )
 }
 

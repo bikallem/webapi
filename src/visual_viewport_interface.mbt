@@ -33,11 +33,11 @@ pub trait TVisualViewport: TEventTarget {
   height(self : Self) -> Double = _
   scale(self : Self) -> Double = _
   onresize(self : Self) -> EventHandler = _
-  set_onresize(self : Self, onresize : EventHandler) -> Unit = _
+  set_onresize(self : Self, onresize : (Event) -> JsValue) -> Unit = _
   onscroll(self : Self) -> EventHandler = _
-  set_onscroll(self : Self, onscroll : EventHandler) -> Unit = _
+  set_onscroll(self : Self, onscroll : (Event) -> JsValue) -> Unit = _
   onscrollend(self : Self) -> EventHandler = _
-  set_onscrollend(self : Self, onscrollend : EventHandler) -> Unit = _
+  set_onscrollend(self : Self, onscrollend : (Event) -> JsValue) -> Unit = _
 }
 
 ///|
@@ -90,10 +90,13 @@ impl TVisualViewport with onresize(self : Self) -> EventHandler {
 
 ///|
 /// [VisualViewport.onresize](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onresize)
-impl TVisualViewport with set_onresize(self : Self, onresize : EventHandler) -> Unit {
+impl TVisualViewport with set_onresize(
+  self : Self,
+  onresize : (Event) -> JsValue,
+) -> Unit {
   visual_viewport_set_onresize_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onresize),
+    TJsValue::to_js(event_handler_non_null_ffi(onresize)),
   )
 }
 
@@ -105,10 +108,13 @@ impl TVisualViewport with onscroll(self : Self) -> EventHandler {
 
 ///|
 /// [VisualViewport.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onscroll)
-impl TVisualViewport with set_onscroll(self : Self, onscroll : EventHandler) -> Unit {
+impl TVisualViewport with set_onscroll(
+  self : Self,
+  onscroll : (Event) -> JsValue,
+) -> Unit {
   visual_viewport_set_onscroll_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onscroll),
+    TJsValue::to_js(event_handler_non_null_ffi(onscroll)),
   )
 }
 
@@ -122,10 +128,10 @@ impl TVisualViewport with onscrollend(self : Self) -> EventHandler {
 /// [VisualViewport.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport/onscrollend)
 impl TVisualViewport with set_onscrollend(
   self : Self,
-  onscrollend : EventHandler,
+  onscrollend : (Event) -> JsValue,
 ) -> Unit {
   visual_viewport_set_onscrollend_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(onscrollend),
+    TJsValue::to_js(event_handler_non_null_ffi(onscrollend)),
   )
 }

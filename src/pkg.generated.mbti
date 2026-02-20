@@ -7442,7 +7442,7 @@ pub trait TAbortSignal : TEventTarget {
   reason(Self) -> JsValue
   throw_if_aborted(Self) -> Unit
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TAbstractRange : TJsValue {
@@ -7472,11 +7472,11 @@ pub trait TAnimation : TEventTarget {
   ready(Self) -> JsPromise[Animation]
   finished(Self) -> JsPromise[Animation]
   onfinish(Self) -> EventHandlerNonNull
-  set_onfinish(Self, EventHandlerNonNull) -> Unit
+  set_onfinish(Self, (Event) -> JsValue) -> Unit
   oncancel(Self) -> EventHandlerNonNull
-  set_oncancel(Self, EventHandlerNonNull) -> Unit
+  set_oncancel(Self, (Event) -> JsValue) -> Unit
   onremove(Self) -> EventHandlerNonNull
-  set_onremove(Self, EventHandlerNonNull) -> Unit
+  set_onremove(Self, (Event) -> JsValue) -> Unit
   cancel(Self) -> Unit
   finish(Self) -> Unit
   play(Self) -> Unit
@@ -7525,11 +7525,11 @@ pub trait TAudioTrackList : TEventTarget {
   get(Self, UInt) -> AudioTrack?
   get_track_by_id(Self, String) -> AudioTrack?
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
   onaddtrack(Self) -> EventHandlerNonNull
-  set_onaddtrack(Self, EventHandlerNonNull) -> Unit
+  set_onaddtrack(Self, (Event) -> JsValue) -> Unit
   onremovetrack(Self) -> EventHandlerNonNull
-  set_onremovetrack(Self, EventHandlerNonNull) -> Unit
+  set_onremovetrack(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TBarProp : TJsValue {
@@ -7599,9 +7599,9 @@ pub trait TBroadcastChannel : TEventTarget {
   post_message(Self, JsValue) -> Unit
   close(Self) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
 }
 
 pub(open) trait TBufferSource {
@@ -7943,9 +7943,9 @@ pub trait TCloseWatcher : TEventTarget {
   close(Self) -> Unit
   destroy(Self) -> Unit
   oncancel(Self) -> EventHandlerNonNull
-  set_oncancel(Self, EventHandlerNonNull) -> Unit
+  set_oncancel(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TCommandEvent : TEvent {
@@ -8256,9 +8256,9 @@ pub trait TDedicatedWorkerGlobalScope : TWorkerGlobalScope {
   request_animation_frame(Self, (Double) -> Unit) -> UInt
   cancel_animation_frame(Self, UInt) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TDocument : TNode {
@@ -8333,9 +8333,9 @@ pub trait TDocument : TNode {
   hidden(Self) -> Bool
   visibility_state(Self) -> DocumentVisibilityState
   onreadystatechange(Self) -> EventHandlerNonNull
-  set_onreadystatechange(Self, EventHandlerNonNull) -> Unit
+  set_onreadystatechange(Self, (Event) -> JsValue) -> Unit
   onvisibilitychange(Self) -> EventHandlerNonNull
-  set_onvisibilitychange(Self, EventHandlerNonNull) -> Unit
+  set_onvisibilitychange(Self, (Event) -> JsValue) -> Unit
   fg_color(Self) -> String
   set_fg_color(Self, String) -> Unit
   link_color(Self) -> String
@@ -8360,9 +8360,9 @@ pub trait TDocument : TNode {
   fullscreen(Self) -> Bool
   exit_fullscreen(Self) -> JsPromise[JsValue]
   onfullscreenchange(Self) -> EventHandlerNonNull
-  set_onfullscreenchange(Self, EventHandlerNonNull) -> Unit
+  set_onfullscreenchange(Self, (Event) -> JsValue) -> Unit
   onfullscreenerror(Self) -> EventHandlerNonNull
-  set_onfullscreenerror(Self, EventHandlerNonNull) -> Unit
+  set_onfullscreenerror(Self, (Event) -> JsValue) -> Unit
   get_selection(Self) -> Selection?
   timeline(Self) -> DocumentTimeline
   get_element_by_id(Self, String) -> Element?
@@ -8387,191 +8387,191 @@ pub trait TDocument : TNode {
   create_ns_resolver(Self, &TNode) -> Node
   evaluate(Self, String, &TNode, resolver? : (String) -> String, type_? : UInt, result? : &TXPathResult) -> XPathResult
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   onauxclick(Self) -> EventHandlerNonNull
-  set_onauxclick(Self, EventHandlerNonNull) -> Unit
+  set_onauxclick(Self, (Event) -> JsValue) -> Unit
   onbeforeinput(Self) -> EventHandlerNonNull
-  set_onbeforeinput(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeinput(Self, (Event) -> JsValue) -> Unit
   onbeforematch(Self) -> EventHandlerNonNull
-  set_onbeforematch(Self, EventHandlerNonNull) -> Unit
+  set_onbeforematch(Self, (Event) -> JsValue) -> Unit
   onbeforetoggle(Self) -> EventHandlerNonNull
-  set_onbeforetoggle(Self, EventHandlerNonNull) -> Unit
+  set_onbeforetoggle(Self, (Event) -> JsValue) -> Unit
   onblur(Self) -> EventHandlerNonNull
-  set_onblur(Self, EventHandlerNonNull) -> Unit
+  set_onblur(Self, (Event) -> JsValue) -> Unit
   oncancel(Self) -> EventHandlerNonNull
-  set_oncancel(Self, EventHandlerNonNull) -> Unit
+  set_oncancel(Self, (Event) -> JsValue) -> Unit
   oncanplay(Self) -> EventHandlerNonNull
-  set_oncanplay(Self, EventHandlerNonNull) -> Unit
+  set_oncanplay(Self, (Event) -> JsValue) -> Unit
   oncanplaythrough(Self) -> EventHandlerNonNull
-  set_oncanplaythrough(Self, EventHandlerNonNull) -> Unit
+  set_oncanplaythrough(Self, (Event) -> JsValue) -> Unit
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
   onclick(Self) -> EventHandlerNonNull
-  set_onclick(Self, EventHandlerNonNull) -> Unit
+  set_onclick(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   oncommand(Self) -> EventHandlerNonNull
-  set_oncommand(Self, EventHandlerNonNull) -> Unit
+  set_oncommand(Self, (Event) -> JsValue) -> Unit
   oncontextlost(Self) -> EventHandlerNonNull
-  set_oncontextlost(Self, EventHandlerNonNull) -> Unit
+  set_oncontextlost(Self, (Event) -> JsValue) -> Unit
   oncontextmenu(Self) -> EventHandlerNonNull
-  set_oncontextmenu(Self, EventHandlerNonNull) -> Unit
+  set_oncontextmenu(Self, (Event) -> JsValue) -> Unit
   oncontextrestored(Self) -> EventHandlerNonNull
-  set_oncontextrestored(Self, EventHandlerNonNull) -> Unit
+  set_oncontextrestored(Self, (Event) -> JsValue) -> Unit
   oncopy(Self) -> EventHandlerNonNull
-  set_oncopy(Self, EventHandlerNonNull) -> Unit
+  set_oncopy(Self, (Event) -> JsValue) -> Unit
   oncuechange(Self) -> EventHandlerNonNull
-  set_oncuechange(Self, EventHandlerNonNull) -> Unit
+  set_oncuechange(Self, (Event) -> JsValue) -> Unit
   oncut(Self) -> EventHandlerNonNull
-  set_oncut(Self, EventHandlerNonNull) -> Unit
+  set_oncut(Self, (Event) -> JsValue) -> Unit
   ondblclick(Self) -> EventHandlerNonNull
-  set_ondblclick(Self, EventHandlerNonNull) -> Unit
+  set_ondblclick(Self, (Event) -> JsValue) -> Unit
   ondrag(Self) -> EventHandlerNonNull
-  set_ondrag(Self, EventHandlerNonNull) -> Unit
+  set_ondrag(Self, (Event) -> JsValue) -> Unit
   ondragend(Self) -> EventHandlerNonNull
-  set_ondragend(Self, EventHandlerNonNull) -> Unit
+  set_ondragend(Self, (Event) -> JsValue) -> Unit
   ondragenter(Self) -> EventHandlerNonNull
-  set_ondragenter(Self, EventHandlerNonNull) -> Unit
+  set_ondragenter(Self, (Event) -> JsValue) -> Unit
   ondragleave(Self) -> EventHandlerNonNull
-  set_ondragleave(Self, EventHandlerNonNull) -> Unit
+  set_ondragleave(Self, (Event) -> JsValue) -> Unit
   ondragover(Self) -> EventHandlerNonNull
-  set_ondragover(Self, EventHandlerNonNull) -> Unit
+  set_ondragover(Self, (Event) -> JsValue) -> Unit
   ondragstart(Self) -> EventHandlerNonNull
-  set_ondragstart(Self, EventHandlerNonNull) -> Unit
+  set_ondragstart(Self, (Event) -> JsValue) -> Unit
   ondrop(Self) -> EventHandlerNonNull
-  set_ondrop(Self, EventHandlerNonNull) -> Unit
+  set_ondrop(Self, (Event) -> JsValue) -> Unit
   ondurationchange(Self) -> EventHandlerNonNull
-  set_ondurationchange(Self, EventHandlerNonNull) -> Unit
+  set_ondurationchange(Self, (Event) -> JsValue) -> Unit
   onemptied(Self) -> EventHandlerNonNull
-  set_onemptied(Self, EventHandlerNonNull) -> Unit
+  set_onemptied(Self, (Event) -> JsValue) -> Unit
   onended(Self) -> EventHandlerNonNull
-  set_onended(Self, EventHandlerNonNull) -> Unit
+  set_onended(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> OnErrorEventHandlerNonNull
-  set_onerror(Self, OnErrorEventHandlerNonNull) -> Unit
+  set_onerror(Self, (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Unit
   onfocus(Self) -> EventHandlerNonNull
-  set_onfocus(Self, EventHandlerNonNull) -> Unit
+  set_onfocus(Self, (Event) -> JsValue) -> Unit
   onformdata(Self) -> EventHandlerNonNull
-  set_onformdata(Self, EventHandlerNonNull) -> Unit
+  set_onformdata(Self, (Event) -> JsValue) -> Unit
   oninput(Self) -> EventHandlerNonNull
-  set_oninput(Self, EventHandlerNonNull) -> Unit
+  set_oninput(Self, (Event) -> JsValue) -> Unit
   oninvalid(Self) -> EventHandlerNonNull
-  set_oninvalid(Self, EventHandlerNonNull) -> Unit
+  set_oninvalid(Self, (Event) -> JsValue) -> Unit
   onkeydown(Self) -> EventHandlerNonNull
-  set_onkeydown(Self, EventHandlerNonNull) -> Unit
+  set_onkeydown(Self, (Event) -> JsValue) -> Unit
   onkeypress(Self) -> EventHandlerNonNull
-  set_onkeypress(Self, EventHandlerNonNull) -> Unit
+  set_onkeypress(Self, (Event) -> JsValue) -> Unit
   onkeyup(Self) -> EventHandlerNonNull
-  set_onkeyup(Self, EventHandlerNonNull) -> Unit
+  set_onkeyup(Self, (Event) -> JsValue) -> Unit
   onload(Self) -> EventHandlerNonNull
-  set_onload(Self, EventHandlerNonNull) -> Unit
+  set_onload(Self, (Event) -> JsValue) -> Unit
   onloadeddata(Self) -> EventHandlerNonNull
-  set_onloadeddata(Self, EventHandlerNonNull) -> Unit
+  set_onloadeddata(Self, (Event) -> JsValue) -> Unit
   onloadedmetadata(Self) -> EventHandlerNonNull
-  set_onloadedmetadata(Self, EventHandlerNonNull) -> Unit
+  set_onloadedmetadata(Self, (Event) -> JsValue) -> Unit
   onloadstart(Self) -> EventHandlerNonNull
-  set_onloadstart(Self, EventHandlerNonNull) -> Unit
+  set_onloadstart(Self, (Event) -> JsValue) -> Unit
   onmousedown(Self) -> EventHandlerNonNull
-  set_onmousedown(Self, EventHandlerNonNull) -> Unit
+  set_onmousedown(Self, (Event) -> JsValue) -> Unit
   onmouseenter(Self) -> EventHandlerNonNull
-  set_onmouseenter(Self, EventHandlerNonNull) -> Unit
+  set_onmouseenter(Self, (Event) -> JsValue) -> Unit
   onmouseleave(Self) -> EventHandlerNonNull
-  set_onmouseleave(Self, EventHandlerNonNull) -> Unit
+  set_onmouseleave(Self, (Event) -> JsValue) -> Unit
   onmousemove(Self) -> EventHandlerNonNull
-  set_onmousemove(Self, EventHandlerNonNull) -> Unit
+  set_onmousemove(Self, (Event) -> JsValue) -> Unit
   onmouseout(Self) -> EventHandlerNonNull
-  set_onmouseout(Self, EventHandlerNonNull) -> Unit
+  set_onmouseout(Self, (Event) -> JsValue) -> Unit
   onmouseover(Self) -> EventHandlerNonNull
-  set_onmouseover(Self, EventHandlerNonNull) -> Unit
+  set_onmouseover(Self, (Event) -> JsValue) -> Unit
   onmouseup(Self) -> EventHandlerNonNull
-  set_onmouseup(Self, EventHandlerNonNull) -> Unit
+  set_onmouseup(Self, (Event) -> JsValue) -> Unit
   onpaste(Self) -> EventHandlerNonNull
-  set_onpaste(Self, EventHandlerNonNull) -> Unit
+  set_onpaste(Self, (Event) -> JsValue) -> Unit
   onpause(Self) -> EventHandlerNonNull
-  set_onpause(Self, EventHandlerNonNull) -> Unit
+  set_onpause(Self, (Event) -> JsValue) -> Unit
   onplay(Self) -> EventHandlerNonNull
-  set_onplay(Self, EventHandlerNonNull) -> Unit
+  set_onplay(Self, (Event) -> JsValue) -> Unit
   onplaying(Self) -> EventHandlerNonNull
-  set_onplaying(Self, EventHandlerNonNull) -> Unit
+  set_onplaying(Self, (Event) -> JsValue) -> Unit
   onprogress(Self) -> EventHandlerNonNull
-  set_onprogress(Self, EventHandlerNonNull) -> Unit
+  set_onprogress(Self, (Event) -> JsValue) -> Unit
   onratechange(Self) -> EventHandlerNonNull
-  set_onratechange(Self, EventHandlerNonNull) -> Unit
+  set_onratechange(Self, (Event) -> JsValue) -> Unit
   onreset(Self) -> EventHandlerNonNull
-  set_onreset(Self, EventHandlerNonNull) -> Unit
+  set_onreset(Self, (Event) -> JsValue) -> Unit
   onresize(Self) -> EventHandlerNonNull
-  set_onresize(Self, EventHandlerNonNull) -> Unit
+  set_onresize(Self, (Event) -> JsValue) -> Unit
   onscroll(Self) -> EventHandlerNonNull
-  set_onscroll(Self, EventHandlerNonNull) -> Unit
+  set_onscroll(Self, (Event) -> JsValue) -> Unit
   onscrollend(Self) -> EventHandlerNonNull
-  set_onscrollend(Self, EventHandlerNonNull) -> Unit
+  set_onscrollend(Self, (Event) -> JsValue) -> Unit
   onsecuritypolicyviolation(Self) -> EventHandlerNonNull
-  set_onsecuritypolicyviolation(Self, EventHandlerNonNull) -> Unit
+  set_onsecuritypolicyviolation(Self, (Event) -> JsValue) -> Unit
   onseeked(Self) -> EventHandlerNonNull
-  set_onseeked(Self, EventHandlerNonNull) -> Unit
+  set_onseeked(Self, (Event) -> JsValue) -> Unit
   onseeking(Self) -> EventHandlerNonNull
-  set_onseeking(Self, EventHandlerNonNull) -> Unit
+  set_onseeking(Self, (Event) -> JsValue) -> Unit
   onselect(Self) -> EventHandlerNonNull
-  set_onselect(Self, EventHandlerNonNull) -> Unit
+  set_onselect(Self, (Event) -> JsValue) -> Unit
   onslotchange(Self) -> EventHandlerNonNull
-  set_onslotchange(Self, EventHandlerNonNull) -> Unit
+  set_onslotchange(Self, (Event) -> JsValue) -> Unit
   onstalled(Self) -> EventHandlerNonNull
-  set_onstalled(Self, EventHandlerNonNull) -> Unit
+  set_onstalled(Self, (Event) -> JsValue) -> Unit
   onsubmit(Self) -> EventHandlerNonNull
-  set_onsubmit(Self, EventHandlerNonNull) -> Unit
+  set_onsubmit(Self, (Event) -> JsValue) -> Unit
   onsuspend(Self) -> EventHandlerNonNull
-  set_onsuspend(Self, EventHandlerNonNull) -> Unit
+  set_onsuspend(Self, (Event) -> JsValue) -> Unit
   ontimeupdate(Self) -> EventHandlerNonNull
-  set_ontimeupdate(Self, EventHandlerNonNull) -> Unit
+  set_ontimeupdate(Self, (Event) -> JsValue) -> Unit
   ontoggle(Self) -> EventHandlerNonNull
-  set_ontoggle(Self, EventHandlerNonNull) -> Unit
+  set_ontoggle(Self, (Event) -> JsValue) -> Unit
   onvolumechange(Self) -> EventHandlerNonNull
-  set_onvolumechange(Self, EventHandlerNonNull) -> Unit
+  set_onvolumechange(Self, (Event) -> JsValue) -> Unit
   onwaiting(Self) -> EventHandlerNonNull
-  set_onwaiting(Self, EventHandlerNonNull) -> Unit
+  set_onwaiting(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationend(Self) -> EventHandlerNonNull
-  set_onwebkitanimationend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationend(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationiteration(Self) -> EventHandlerNonNull
-  set_onwebkitanimationiteration(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationiteration(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationstart(Self) -> EventHandlerNonNull
-  set_onwebkitanimationstart(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationstart(Self, (Event) -> JsValue) -> Unit
   onwebkittransitionend(Self) -> EventHandlerNonNull
-  set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkittransitionend(Self, (Event) -> JsValue) -> Unit
   onwheel(Self) -> EventHandlerNonNull
-  set_onwheel(Self, EventHandlerNonNull) -> Unit
+  set_onwheel(Self, (Event) -> JsValue) -> Unit
   ontouchstart(Self) -> EventHandlerNonNull
-  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  set_ontouchstart(Self, (Event) -> JsValue) -> Unit
   ontouchend(Self) -> EventHandlerNonNull
-  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  set_ontouchend(Self, (Event) -> JsValue) -> Unit
   ontouchmove(Self) -> EventHandlerNonNull
-  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  set_ontouchmove(Self, (Event) -> JsValue) -> Unit
   ontouchcancel(Self) -> EventHandlerNonNull
-  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
+  set_ontouchcancel(Self, (Event) -> JsValue) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
-  set_onpointerover(Self, EventHandlerNonNull) -> Unit
+  set_onpointerover(Self, (Event) -> JsValue) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
-  set_onpointerenter(Self, EventHandlerNonNull) -> Unit
+  set_onpointerenter(Self, (Event) -> JsValue) -> Unit
   onpointerdown(Self) -> EventHandlerNonNull
-  set_onpointerdown(Self, EventHandlerNonNull) -> Unit
+  set_onpointerdown(Self, (Event) -> JsValue) -> Unit
   onpointermove(Self) -> EventHandlerNonNull
-  set_onpointermove(Self, EventHandlerNonNull) -> Unit
+  set_onpointermove(Self, (Event) -> JsValue) -> Unit
   onpointerrawupdate(Self) -> EventHandlerNonNull
-  set_onpointerrawupdate(Self, EventHandlerNonNull) -> Unit
+  set_onpointerrawupdate(Self, (Event) -> JsValue) -> Unit
   onpointerup(Self) -> EventHandlerNonNull
-  set_onpointerup(Self, EventHandlerNonNull) -> Unit
+  set_onpointerup(Self, (Event) -> JsValue) -> Unit
   onpointercancel(Self) -> EventHandlerNonNull
-  set_onpointercancel(Self, EventHandlerNonNull) -> Unit
+  set_onpointercancel(Self, (Event) -> JsValue) -> Unit
   onpointerout(Self) -> EventHandlerNonNull
-  set_onpointerout(Self, EventHandlerNonNull) -> Unit
+  set_onpointerout(Self, (Event) -> JsValue) -> Unit
   onpointerleave(Self) -> EventHandlerNonNull
-  set_onpointerleave(Self, EventHandlerNonNull) -> Unit
+  set_onpointerleave(Self, (Event) -> JsValue) -> Unit
   ongotpointercapture(Self) -> EventHandlerNonNull
-  set_ongotpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_ongotpointercapture(Self, (Event) -> JsValue) -> Unit
   onlostpointercapture(Self) -> EventHandlerNonNull
-  set_onlostpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_onlostpointercapture(Self, (Event) -> JsValue) -> Unit
   onselectstart(Self) -> EventHandlerNonNull
-  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  set_onselectstart(Self, (Event) -> JsValue) -> Unit
   onselectionchange(Self) -> EventHandlerNonNull
-  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
+  set_onselectionchange(Self, (Event) -> JsValue) -> Unit
   get_box_quads(Self, options? : BoxQuadOptions) -> Array[DOMQuad]
   convert_quad_from_node(Self, DOMQuadInit, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
   convert_rect_from_node(Self, &TDOMRectReadOnly, &TGeometryNode, options? : ConvertCoordinateOptions) -> DOMQuad
@@ -8766,9 +8766,9 @@ pub trait TElement : TNode {
   current_css_zoom(Self) -> Double
   request_fullscreen(Self, options? : FullscreenOptions) -> JsPromise[JsValue]
   onfullscreenchange(Self) -> EventHandlerNonNull
-  set_onfullscreenchange(Self, EventHandlerNonNull) -> Unit
+  set_onfullscreenchange(Self, (Event) -> JsValue) -> Unit
   onfullscreenerror(Self) -> EventHandlerNonNull
-  set_onfullscreenerror(Self, EventHandlerNonNull) -> Unit
+  set_onfullscreenerror(Self, (Event) -> JsValue) -> Unit
   set_pointer_capture(Self, Int) -> Unit
   release_pointer_capture(Self, Int) -> Unit
   has_pointer_capture(Self, Int) -> Bool
@@ -8927,11 +8927,11 @@ pub trait TEventSource : TEventTarget {
   with_credentials(Self) -> Bool
   ready_state(Self) -> UInt
   onopen(Self) -> EventHandlerNonNull
-  set_onopen(Self, EventHandlerNonNull) -> Unit
+  set_onopen(Self, (Event) -> JsValue) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
   close(Self) -> Unit
 }
 
@@ -8980,17 +8980,17 @@ pub trait TFileReader : TEventTarget {
   result(Self) -> FileReaderResult
   error(Self) -> DOMException
   onloadstart(Self) -> EventHandlerNonNull
-  set_onloadstart(Self, EventHandlerNonNull) -> Unit
+  set_onloadstart(Self, (Event) -> JsValue) -> Unit
   onprogress(Self) -> EventHandlerNonNull
-  set_onprogress(Self, EventHandlerNonNull) -> Unit
+  set_onprogress(Self, (Event) -> JsValue) -> Unit
   onload(Self) -> EventHandlerNonNull
-  set_onload(Self, EventHandlerNonNull) -> Unit
+  set_onload(Self, (Event) -> JsValue) -> Unit
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
   onloadend(Self) -> EventHandlerNonNull
-  set_onloadend(Self, EventHandlerNonNull) -> Unit
+  set_onloadend(Self, (Event) -> JsValue) -> Unit
 }
 
 pub(open) trait TFileReaderResult {
@@ -9171,41 +9171,41 @@ pub trait THTMLBodyElement : THTMLElement {
   background(Self) -> String
   set_background(Self, String) -> Unit
   onafterprint(Self) -> EventHandlerNonNull
-  set_onafterprint(Self, EventHandlerNonNull) -> Unit
+  set_onafterprint(Self, (Event) -> JsValue) -> Unit
   onbeforeprint(Self) -> EventHandlerNonNull
-  set_onbeforeprint(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeprint(Self, (Event) -> JsValue) -> Unit
   onbeforeunload(Self) -> OnBeforeUnloadEventHandlerNonNull
-  set_onbeforeunload(Self, OnBeforeUnloadEventHandlerNonNull) -> Unit
+  set_onbeforeunload(Self, (Event) -> String) -> Unit
   onhashchange(Self) -> EventHandlerNonNull
-  set_onhashchange(Self, EventHandlerNonNull) -> Unit
+  set_onhashchange(Self, (Event) -> JsValue) -> Unit
   onlanguagechange(Self) -> EventHandlerNonNull
-  set_onlanguagechange(Self, EventHandlerNonNull) -> Unit
+  set_onlanguagechange(Self, (Event) -> JsValue) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
   onoffline(Self) -> EventHandlerNonNull
-  set_onoffline(Self, EventHandlerNonNull) -> Unit
+  set_onoffline(Self, (Event) -> JsValue) -> Unit
   ononline(Self) -> EventHandlerNonNull
-  set_ononline(Self, EventHandlerNonNull) -> Unit
+  set_ononline(Self, (Event) -> JsValue) -> Unit
   onpagehide(Self) -> EventHandlerNonNull
-  set_onpagehide(Self, EventHandlerNonNull) -> Unit
+  set_onpagehide(Self, (Event) -> JsValue) -> Unit
   onpagereveal(Self) -> EventHandlerNonNull
-  set_onpagereveal(Self, EventHandlerNonNull) -> Unit
+  set_onpagereveal(Self, (Event) -> JsValue) -> Unit
   onpageshow(Self) -> EventHandlerNonNull
-  set_onpageshow(Self, EventHandlerNonNull) -> Unit
+  set_onpageshow(Self, (Event) -> JsValue) -> Unit
   onpageswap(Self) -> EventHandlerNonNull
-  set_onpageswap(Self, EventHandlerNonNull) -> Unit
+  set_onpageswap(Self, (Event) -> JsValue) -> Unit
   onpopstate(Self) -> EventHandlerNonNull
-  set_onpopstate(Self, EventHandlerNonNull) -> Unit
+  set_onpopstate(Self, (Event) -> JsValue) -> Unit
   onrejectionhandled(Self) -> EventHandlerNonNull
-  set_onrejectionhandled(Self, EventHandlerNonNull) -> Unit
+  set_onrejectionhandled(Self, (Event) -> JsValue) -> Unit
   onstorage(Self) -> EventHandlerNonNull
-  set_onstorage(Self, EventHandlerNonNull) -> Unit
+  set_onstorage(Self, (Event) -> JsValue) -> Unit
   onunhandledrejection(Self) -> EventHandlerNonNull
-  set_onunhandledrejection(Self, EventHandlerNonNull) -> Unit
+  set_onunhandledrejection(Self, (Event) -> JsValue) -> Unit
   onunload(Self) -> EventHandlerNonNull
-  set_onunload(Self, EventHandlerNonNull) -> Unit
+  set_onunload(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait THTMLButtonElement : THTMLElement {
@@ -9354,191 +9354,191 @@ pub trait THTMLElement : TElement {
   offset_width(Self) -> Int
   offset_height(Self) -> Int
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   onauxclick(Self) -> EventHandlerNonNull
-  set_onauxclick(Self, EventHandlerNonNull) -> Unit
+  set_onauxclick(Self, (Event) -> JsValue) -> Unit
   onbeforeinput(Self) -> EventHandlerNonNull
-  set_onbeforeinput(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeinput(Self, (Event) -> JsValue) -> Unit
   onbeforematch(Self) -> EventHandlerNonNull
-  set_onbeforematch(Self, EventHandlerNonNull) -> Unit
+  set_onbeforematch(Self, (Event) -> JsValue) -> Unit
   onbeforetoggle(Self) -> EventHandlerNonNull
-  set_onbeforetoggle(Self, EventHandlerNonNull) -> Unit
+  set_onbeforetoggle(Self, (Event) -> JsValue) -> Unit
   onblur(Self) -> EventHandlerNonNull
-  set_onblur(Self, EventHandlerNonNull) -> Unit
+  set_onblur(Self, (Event) -> JsValue) -> Unit
   oncancel(Self) -> EventHandlerNonNull
-  set_oncancel(Self, EventHandlerNonNull) -> Unit
+  set_oncancel(Self, (Event) -> JsValue) -> Unit
   oncanplay(Self) -> EventHandlerNonNull
-  set_oncanplay(Self, EventHandlerNonNull) -> Unit
+  set_oncanplay(Self, (Event) -> JsValue) -> Unit
   oncanplaythrough(Self) -> EventHandlerNonNull
-  set_oncanplaythrough(Self, EventHandlerNonNull) -> Unit
+  set_oncanplaythrough(Self, (Event) -> JsValue) -> Unit
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
   onclick(Self) -> EventHandlerNonNull
-  set_onclick(Self, EventHandlerNonNull) -> Unit
+  set_onclick(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   oncommand(Self) -> EventHandlerNonNull
-  set_oncommand(Self, EventHandlerNonNull) -> Unit
+  set_oncommand(Self, (Event) -> JsValue) -> Unit
   oncontextlost(Self) -> EventHandlerNonNull
-  set_oncontextlost(Self, EventHandlerNonNull) -> Unit
+  set_oncontextlost(Self, (Event) -> JsValue) -> Unit
   oncontextmenu(Self) -> EventHandlerNonNull
-  set_oncontextmenu(Self, EventHandlerNonNull) -> Unit
+  set_oncontextmenu(Self, (Event) -> JsValue) -> Unit
   oncontextrestored(Self) -> EventHandlerNonNull
-  set_oncontextrestored(Self, EventHandlerNonNull) -> Unit
+  set_oncontextrestored(Self, (Event) -> JsValue) -> Unit
   oncopy(Self) -> EventHandlerNonNull
-  set_oncopy(Self, EventHandlerNonNull) -> Unit
+  set_oncopy(Self, (Event) -> JsValue) -> Unit
   oncuechange(Self) -> EventHandlerNonNull
-  set_oncuechange(Self, EventHandlerNonNull) -> Unit
+  set_oncuechange(Self, (Event) -> JsValue) -> Unit
   oncut(Self) -> EventHandlerNonNull
-  set_oncut(Self, EventHandlerNonNull) -> Unit
+  set_oncut(Self, (Event) -> JsValue) -> Unit
   ondblclick(Self) -> EventHandlerNonNull
-  set_ondblclick(Self, EventHandlerNonNull) -> Unit
+  set_ondblclick(Self, (Event) -> JsValue) -> Unit
   ondrag(Self) -> EventHandlerNonNull
-  set_ondrag(Self, EventHandlerNonNull) -> Unit
+  set_ondrag(Self, (Event) -> JsValue) -> Unit
   ondragend(Self) -> EventHandlerNonNull
-  set_ondragend(Self, EventHandlerNonNull) -> Unit
+  set_ondragend(Self, (Event) -> JsValue) -> Unit
   ondragenter(Self) -> EventHandlerNonNull
-  set_ondragenter(Self, EventHandlerNonNull) -> Unit
+  set_ondragenter(Self, (Event) -> JsValue) -> Unit
   ondragleave(Self) -> EventHandlerNonNull
-  set_ondragleave(Self, EventHandlerNonNull) -> Unit
+  set_ondragleave(Self, (Event) -> JsValue) -> Unit
   ondragover(Self) -> EventHandlerNonNull
-  set_ondragover(Self, EventHandlerNonNull) -> Unit
+  set_ondragover(Self, (Event) -> JsValue) -> Unit
   ondragstart(Self) -> EventHandlerNonNull
-  set_ondragstart(Self, EventHandlerNonNull) -> Unit
+  set_ondragstart(Self, (Event) -> JsValue) -> Unit
   ondrop(Self) -> EventHandlerNonNull
-  set_ondrop(Self, EventHandlerNonNull) -> Unit
+  set_ondrop(Self, (Event) -> JsValue) -> Unit
   ondurationchange(Self) -> EventHandlerNonNull
-  set_ondurationchange(Self, EventHandlerNonNull) -> Unit
+  set_ondurationchange(Self, (Event) -> JsValue) -> Unit
   onemptied(Self) -> EventHandlerNonNull
-  set_onemptied(Self, EventHandlerNonNull) -> Unit
+  set_onemptied(Self, (Event) -> JsValue) -> Unit
   onended(Self) -> EventHandlerNonNull
-  set_onended(Self, EventHandlerNonNull) -> Unit
+  set_onended(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> OnErrorEventHandlerNonNull
-  set_onerror(Self, OnErrorEventHandlerNonNull) -> Unit
+  set_onerror(Self, (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Unit
   onfocus(Self) -> EventHandlerNonNull
-  set_onfocus(Self, EventHandlerNonNull) -> Unit
+  set_onfocus(Self, (Event) -> JsValue) -> Unit
   onformdata(Self) -> EventHandlerNonNull
-  set_onformdata(Self, EventHandlerNonNull) -> Unit
+  set_onformdata(Self, (Event) -> JsValue) -> Unit
   oninput(Self) -> EventHandlerNonNull
-  set_oninput(Self, EventHandlerNonNull) -> Unit
+  set_oninput(Self, (Event) -> JsValue) -> Unit
   oninvalid(Self) -> EventHandlerNonNull
-  set_oninvalid(Self, EventHandlerNonNull) -> Unit
+  set_oninvalid(Self, (Event) -> JsValue) -> Unit
   onkeydown(Self) -> EventHandlerNonNull
-  set_onkeydown(Self, EventHandlerNonNull) -> Unit
+  set_onkeydown(Self, (Event) -> JsValue) -> Unit
   onkeypress(Self) -> EventHandlerNonNull
-  set_onkeypress(Self, EventHandlerNonNull) -> Unit
+  set_onkeypress(Self, (Event) -> JsValue) -> Unit
   onkeyup(Self) -> EventHandlerNonNull
-  set_onkeyup(Self, EventHandlerNonNull) -> Unit
+  set_onkeyup(Self, (Event) -> JsValue) -> Unit
   onload(Self) -> EventHandlerNonNull
-  set_onload(Self, EventHandlerNonNull) -> Unit
+  set_onload(Self, (Event) -> JsValue) -> Unit
   onloadeddata(Self) -> EventHandlerNonNull
-  set_onloadeddata(Self, EventHandlerNonNull) -> Unit
+  set_onloadeddata(Self, (Event) -> JsValue) -> Unit
   onloadedmetadata(Self) -> EventHandlerNonNull
-  set_onloadedmetadata(Self, EventHandlerNonNull) -> Unit
+  set_onloadedmetadata(Self, (Event) -> JsValue) -> Unit
   onloadstart(Self) -> EventHandlerNonNull
-  set_onloadstart(Self, EventHandlerNonNull) -> Unit
+  set_onloadstart(Self, (Event) -> JsValue) -> Unit
   onmousedown(Self) -> EventHandlerNonNull
-  set_onmousedown(Self, EventHandlerNonNull) -> Unit
+  set_onmousedown(Self, (Event) -> JsValue) -> Unit
   onmouseenter(Self) -> EventHandlerNonNull
-  set_onmouseenter(Self, EventHandlerNonNull) -> Unit
+  set_onmouseenter(Self, (Event) -> JsValue) -> Unit
   onmouseleave(Self) -> EventHandlerNonNull
-  set_onmouseleave(Self, EventHandlerNonNull) -> Unit
+  set_onmouseleave(Self, (Event) -> JsValue) -> Unit
   onmousemove(Self) -> EventHandlerNonNull
-  set_onmousemove(Self, EventHandlerNonNull) -> Unit
+  set_onmousemove(Self, (Event) -> JsValue) -> Unit
   onmouseout(Self) -> EventHandlerNonNull
-  set_onmouseout(Self, EventHandlerNonNull) -> Unit
+  set_onmouseout(Self, (Event) -> JsValue) -> Unit
   onmouseover(Self) -> EventHandlerNonNull
-  set_onmouseover(Self, EventHandlerNonNull) -> Unit
+  set_onmouseover(Self, (Event) -> JsValue) -> Unit
   onmouseup(Self) -> EventHandlerNonNull
-  set_onmouseup(Self, EventHandlerNonNull) -> Unit
+  set_onmouseup(Self, (Event) -> JsValue) -> Unit
   onpaste(Self) -> EventHandlerNonNull
-  set_onpaste(Self, EventHandlerNonNull) -> Unit
+  set_onpaste(Self, (Event) -> JsValue) -> Unit
   onpause(Self) -> EventHandlerNonNull
-  set_onpause(Self, EventHandlerNonNull) -> Unit
+  set_onpause(Self, (Event) -> JsValue) -> Unit
   onplay(Self) -> EventHandlerNonNull
-  set_onplay(Self, EventHandlerNonNull) -> Unit
+  set_onplay(Self, (Event) -> JsValue) -> Unit
   onplaying(Self) -> EventHandlerNonNull
-  set_onplaying(Self, EventHandlerNonNull) -> Unit
+  set_onplaying(Self, (Event) -> JsValue) -> Unit
   onprogress(Self) -> EventHandlerNonNull
-  set_onprogress(Self, EventHandlerNonNull) -> Unit
+  set_onprogress(Self, (Event) -> JsValue) -> Unit
   onratechange(Self) -> EventHandlerNonNull
-  set_onratechange(Self, EventHandlerNonNull) -> Unit
+  set_onratechange(Self, (Event) -> JsValue) -> Unit
   onreset(Self) -> EventHandlerNonNull
-  set_onreset(Self, EventHandlerNonNull) -> Unit
+  set_onreset(Self, (Event) -> JsValue) -> Unit
   onresize(Self) -> EventHandlerNonNull
-  set_onresize(Self, EventHandlerNonNull) -> Unit
+  set_onresize(Self, (Event) -> JsValue) -> Unit
   onscroll(Self) -> EventHandlerNonNull
-  set_onscroll(Self, EventHandlerNonNull) -> Unit
+  set_onscroll(Self, (Event) -> JsValue) -> Unit
   onscrollend(Self) -> EventHandlerNonNull
-  set_onscrollend(Self, EventHandlerNonNull) -> Unit
+  set_onscrollend(Self, (Event) -> JsValue) -> Unit
   onsecuritypolicyviolation(Self) -> EventHandlerNonNull
-  set_onsecuritypolicyviolation(Self, EventHandlerNonNull) -> Unit
+  set_onsecuritypolicyviolation(Self, (Event) -> JsValue) -> Unit
   onseeked(Self) -> EventHandlerNonNull
-  set_onseeked(Self, EventHandlerNonNull) -> Unit
+  set_onseeked(Self, (Event) -> JsValue) -> Unit
   onseeking(Self) -> EventHandlerNonNull
-  set_onseeking(Self, EventHandlerNonNull) -> Unit
+  set_onseeking(Self, (Event) -> JsValue) -> Unit
   onselect(Self) -> EventHandlerNonNull
-  set_onselect(Self, EventHandlerNonNull) -> Unit
+  set_onselect(Self, (Event) -> JsValue) -> Unit
   onslotchange(Self) -> EventHandlerNonNull
-  set_onslotchange(Self, EventHandlerNonNull) -> Unit
+  set_onslotchange(Self, (Event) -> JsValue) -> Unit
   onstalled(Self) -> EventHandlerNonNull
-  set_onstalled(Self, EventHandlerNonNull) -> Unit
+  set_onstalled(Self, (Event) -> JsValue) -> Unit
   onsubmit(Self) -> EventHandlerNonNull
-  set_onsubmit(Self, EventHandlerNonNull) -> Unit
+  set_onsubmit(Self, (Event) -> JsValue) -> Unit
   onsuspend(Self) -> EventHandlerNonNull
-  set_onsuspend(Self, EventHandlerNonNull) -> Unit
+  set_onsuspend(Self, (Event) -> JsValue) -> Unit
   ontimeupdate(Self) -> EventHandlerNonNull
-  set_ontimeupdate(Self, EventHandlerNonNull) -> Unit
+  set_ontimeupdate(Self, (Event) -> JsValue) -> Unit
   ontoggle(Self) -> EventHandlerNonNull
-  set_ontoggle(Self, EventHandlerNonNull) -> Unit
+  set_ontoggle(Self, (Event) -> JsValue) -> Unit
   onvolumechange(Self) -> EventHandlerNonNull
-  set_onvolumechange(Self, EventHandlerNonNull) -> Unit
+  set_onvolumechange(Self, (Event) -> JsValue) -> Unit
   onwaiting(Self) -> EventHandlerNonNull
-  set_onwaiting(Self, EventHandlerNonNull) -> Unit
+  set_onwaiting(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationend(Self) -> EventHandlerNonNull
-  set_onwebkitanimationend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationend(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationiteration(Self) -> EventHandlerNonNull
-  set_onwebkitanimationiteration(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationiteration(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationstart(Self) -> EventHandlerNonNull
-  set_onwebkitanimationstart(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationstart(Self, (Event) -> JsValue) -> Unit
   onwebkittransitionend(Self) -> EventHandlerNonNull
-  set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkittransitionend(Self, (Event) -> JsValue) -> Unit
   onwheel(Self) -> EventHandlerNonNull
-  set_onwheel(Self, EventHandlerNonNull) -> Unit
+  set_onwheel(Self, (Event) -> JsValue) -> Unit
   ontouchstart(Self) -> EventHandlerNonNull
-  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  set_ontouchstart(Self, (Event) -> JsValue) -> Unit
   ontouchend(Self) -> EventHandlerNonNull
-  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  set_ontouchend(Self, (Event) -> JsValue) -> Unit
   ontouchmove(Self) -> EventHandlerNonNull
-  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  set_ontouchmove(Self, (Event) -> JsValue) -> Unit
   ontouchcancel(Self) -> EventHandlerNonNull
-  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
+  set_ontouchcancel(Self, (Event) -> JsValue) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
-  set_onpointerover(Self, EventHandlerNonNull) -> Unit
+  set_onpointerover(Self, (Event) -> JsValue) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
-  set_onpointerenter(Self, EventHandlerNonNull) -> Unit
+  set_onpointerenter(Self, (Event) -> JsValue) -> Unit
   onpointerdown(Self) -> EventHandlerNonNull
-  set_onpointerdown(Self, EventHandlerNonNull) -> Unit
+  set_onpointerdown(Self, (Event) -> JsValue) -> Unit
   onpointermove(Self) -> EventHandlerNonNull
-  set_onpointermove(Self, EventHandlerNonNull) -> Unit
+  set_onpointermove(Self, (Event) -> JsValue) -> Unit
   onpointerrawupdate(Self) -> EventHandlerNonNull
-  set_onpointerrawupdate(Self, EventHandlerNonNull) -> Unit
+  set_onpointerrawupdate(Self, (Event) -> JsValue) -> Unit
   onpointerup(Self) -> EventHandlerNonNull
-  set_onpointerup(Self, EventHandlerNonNull) -> Unit
+  set_onpointerup(Self, (Event) -> JsValue) -> Unit
   onpointercancel(Self) -> EventHandlerNonNull
-  set_onpointercancel(Self, EventHandlerNonNull) -> Unit
+  set_onpointercancel(Self, (Event) -> JsValue) -> Unit
   onpointerout(Self) -> EventHandlerNonNull
-  set_onpointerout(Self, EventHandlerNonNull) -> Unit
+  set_onpointerout(Self, (Event) -> JsValue) -> Unit
   onpointerleave(Self) -> EventHandlerNonNull
-  set_onpointerleave(Self, EventHandlerNonNull) -> Unit
+  set_onpointerleave(Self, (Event) -> JsValue) -> Unit
   ongotpointercapture(Self) -> EventHandlerNonNull
-  set_ongotpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_ongotpointercapture(Self, (Event) -> JsValue) -> Unit
   onlostpointercapture(Self) -> EventHandlerNonNull
-  set_onlostpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_onlostpointercapture(Self, (Event) -> JsValue) -> Unit
   onselectstart(Self) -> EventHandlerNonNull
-  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  set_onselectstart(Self, (Event) -> JsValue) -> Unit
   onselectionchange(Self) -> EventHandlerNonNull
-  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
+  set_onselectionchange(Self, (Event) -> JsValue) -> Unit
   content_editable(Self) -> String
   set_content_editable(Self, String) -> Unit
   enter_key_hint(Self) -> String
@@ -9683,41 +9683,41 @@ pub trait THTMLFrameSetElement : THTMLElement {
   rows(Self) -> String
   set_rows(Self, String) -> Unit
   onafterprint(Self) -> EventHandlerNonNull
-  set_onafterprint(Self, EventHandlerNonNull) -> Unit
+  set_onafterprint(Self, (Event) -> JsValue) -> Unit
   onbeforeprint(Self) -> EventHandlerNonNull
-  set_onbeforeprint(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeprint(Self, (Event) -> JsValue) -> Unit
   onbeforeunload(Self) -> OnBeforeUnloadEventHandlerNonNull
-  set_onbeforeunload(Self, OnBeforeUnloadEventHandlerNonNull) -> Unit
+  set_onbeforeunload(Self, (Event) -> String) -> Unit
   onhashchange(Self) -> EventHandlerNonNull
-  set_onhashchange(Self, EventHandlerNonNull) -> Unit
+  set_onhashchange(Self, (Event) -> JsValue) -> Unit
   onlanguagechange(Self) -> EventHandlerNonNull
-  set_onlanguagechange(Self, EventHandlerNonNull) -> Unit
+  set_onlanguagechange(Self, (Event) -> JsValue) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
   onoffline(Self) -> EventHandlerNonNull
-  set_onoffline(Self, EventHandlerNonNull) -> Unit
+  set_onoffline(Self, (Event) -> JsValue) -> Unit
   ononline(Self) -> EventHandlerNonNull
-  set_ononline(Self, EventHandlerNonNull) -> Unit
+  set_ononline(Self, (Event) -> JsValue) -> Unit
   onpagehide(Self) -> EventHandlerNonNull
-  set_onpagehide(Self, EventHandlerNonNull) -> Unit
+  set_onpagehide(Self, (Event) -> JsValue) -> Unit
   onpagereveal(Self) -> EventHandlerNonNull
-  set_onpagereveal(Self, EventHandlerNonNull) -> Unit
+  set_onpagereveal(Self, (Event) -> JsValue) -> Unit
   onpageshow(Self) -> EventHandlerNonNull
-  set_onpageshow(Self, EventHandlerNonNull) -> Unit
+  set_onpageshow(Self, (Event) -> JsValue) -> Unit
   onpageswap(Self) -> EventHandlerNonNull
-  set_onpageswap(Self, EventHandlerNonNull) -> Unit
+  set_onpageswap(Self, (Event) -> JsValue) -> Unit
   onpopstate(Self) -> EventHandlerNonNull
-  set_onpopstate(Self, EventHandlerNonNull) -> Unit
+  set_onpopstate(Self, (Event) -> JsValue) -> Unit
   onrejectionhandled(Self) -> EventHandlerNonNull
-  set_onrejectionhandled(Self, EventHandlerNonNull) -> Unit
+  set_onrejectionhandled(Self, (Event) -> JsValue) -> Unit
   onstorage(Self) -> EventHandlerNonNull
-  set_onstorage(Self, EventHandlerNonNull) -> Unit
+  set_onstorage(Self, (Event) -> JsValue) -> Unit
   onunhandledrejection(Self) -> EventHandlerNonNull
-  set_onunhandledrejection(Self, EventHandlerNonNull) -> Unit
+  set_onunhandledrejection(Self, (Event) -> JsValue) -> Unit
   onunload(Self) -> EventHandlerNonNull
-  set_onunload(Self, EventHandlerNonNull) -> Unit
+  set_onunload(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait THTMLHRElement : THTMLElement {
@@ -10712,13 +10712,13 @@ pub trait TIDBDatabase : TEventTarget {
   create_object_store(Self, String, options? : IDBObjectStoreParameters) -> IDBObjectStore
   delete_object_store(Self, String) -> Unit
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
   onversionchange(Self) -> EventHandlerNonNull
-  set_onversionchange(Self, EventHandlerNonNull) -> Unit
+  set_onversionchange(Self, (Event) -> JsValue) -> Unit
 }
 
 pub(open) trait TIDBDatabaseTransactionStoreNames {
@@ -10803,9 +10803,9 @@ pub impl TIDBObjectStoreParametersNewKeyPath for Array[String]
 
 pub trait TIDBOpenDBRequest : TIDBRequest {
   onblocked(Self) -> EventHandlerNonNull
-  set_onblocked(Self, EventHandlerNonNull) -> Unit
+  set_onblocked(Self, (Event) -> JsValue) -> Unit
   onupgradeneeded(Self) -> EventHandlerNonNull
-  set_onupgradeneeded(Self, EventHandlerNonNull) -> Unit
+  set_onupgradeneeded(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TIDBRecord : TJsValue {
@@ -10821,9 +10821,9 @@ pub trait TIDBRequest : TEventTarget {
   transaction(Self) -> IDBTransaction
   ready_state(Self) -> IDBRequestReadyState
   onsuccess(Self) -> EventHandlerNonNull
-  set_onsuccess(Self, EventHandlerNonNull) -> Unit
+  set_onsuccess(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
 }
 
 pub(open) trait TIDBRequestSource {
@@ -10840,11 +10840,11 @@ pub trait TIDBTransaction : TEventTarget {
   commit(Self) -> Unit
   abort(Self) -> Unit
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   oncomplete(Self) -> EventHandlerNonNull
-  set_oncomplete(Self, EventHandlerNonNull) -> Unit
+  set_oncomplete(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TIDBVersionChangeEvent : TEvent {
@@ -11062,7 +11062,7 @@ pub trait TMediaQueryList : TEventTarget {
   add_listener(Self, (Event) -> Unit) -> Unit
   remove_listener(Self, (Event) -> Unit) -> Unit
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TMediaQueryListEvent : TEvent {
@@ -11094,11 +11094,11 @@ pub trait TMessagePort : TEventTarget {
   start(Self) -> Unit
   close(Self) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TMimeType : TJsValue {
@@ -11197,13 +11197,13 @@ pub trait TNavigation : TEventTarget {
   back(Self, options? : NavigationOptions) -> NavigationResult
   forward(Self, options? : NavigationOptions) -> NavigationResult
   onnavigate(Self) -> EventHandlerNonNull
-  set_onnavigate(Self, EventHandlerNonNull) -> Unit
+  set_onnavigate(Self, (Event) -> JsValue) -> Unit
   onnavigatesuccess(Self) -> EventHandlerNonNull
-  set_onnavigatesuccess(Self, EventHandlerNonNull) -> Unit
+  set_onnavigatesuccess(Self, (Event) -> JsValue) -> Unit
   onnavigateerror(Self) -> EventHandlerNonNull
-  set_onnavigateerror(Self, EventHandlerNonNull) -> Unit
+  set_onnavigateerror(Self, (Event) -> JsValue) -> Unit
   oncurrententrychange(Self) -> EventHandlerNonNull
-  set_oncurrententrychange(Self, EventHandlerNonNull) -> Unit
+  set_oncurrententrychange(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TNavigationActivation : TJsValue {
@@ -11234,7 +11234,7 @@ pub trait TNavigationHistoryEntry : TEventTarget {
   same_document(Self) -> Bool
   get_state(Self) -> JsValue
   ondispose(Self) -> EventHandlerNonNull
-  set_ondispose(Self, EventHandlerNonNull) -> Unit
+  set_ondispose(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TNavigationPrecommitController : TJsValue {
@@ -11347,13 +11347,13 @@ pub trait TNotRestoredReasons : TJsValue {
 
 pub trait TNotification : TEventTarget {
   onclick(Self) -> EventHandlerNonNull
-  set_onclick(Self, EventHandlerNonNull) -> Unit
+  set_onclick(Self, (Event) -> JsValue) -> Unit
   onshow(Self) -> EventHandlerNonNull
-  set_onshow(Self, EventHandlerNonNull) -> Unit
+  set_onshow(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   title(Self) -> String
   dir(Self) -> NotificationDirection
   lang(Self) -> String
@@ -11382,9 +11382,9 @@ pub trait TOffscreenCanvas : TEventTarget {
   transfer_to_image_bitmap(Self) -> ImageBitmap
   convert_to_blob(Self, options? : ImageEncodeOptions) -> JsPromise[Blob]
   oncontextlost(Self) -> EventHandlerNonNull
-  set_oncontextlost(Self, EventHandlerNonNull) -> Unit
+  set_oncontextlost(Self, (Event) -> JsValue) -> Unit
   oncontextrestored(Self) -> EventHandlerNonNull
-  set_oncontextrestored(Self, EventHandlerNonNull) -> Unit
+  set_oncontextrestored(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
@@ -11976,191 +11976,191 @@ pub trait TSVGElement : TElement {
   owner_svg_element(Self) -> SVGSVGElement
   viewport_element(Self) -> SVGElement
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   onauxclick(Self) -> EventHandlerNonNull
-  set_onauxclick(Self, EventHandlerNonNull) -> Unit
+  set_onauxclick(Self, (Event) -> JsValue) -> Unit
   onbeforeinput(Self) -> EventHandlerNonNull
-  set_onbeforeinput(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeinput(Self, (Event) -> JsValue) -> Unit
   onbeforematch(Self) -> EventHandlerNonNull
-  set_onbeforematch(Self, EventHandlerNonNull) -> Unit
+  set_onbeforematch(Self, (Event) -> JsValue) -> Unit
   onbeforetoggle(Self) -> EventHandlerNonNull
-  set_onbeforetoggle(Self, EventHandlerNonNull) -> Unit
+  set_onbeforetoggle(Self, (Event) -> JsValue) -> Unit
   onblur(Self) -> EventHandlerNonNull
-  set_onblur(Self, EventHandlerNonNull) -> Unit
+  set_onblur(Self, (Event) -> JsValue) -> Unit
   oncancel(Self) -> EventHandlerNonNull
-  set_oncancel(Self, EventHandlerNonNull) -> Unit
+  set_oncancel(Self, (Event) -> JsValue) -> Unit
   oncanplay(Self) -> EventHandlerNonNull
-  set_oncanplay(Self, EventHandlerNonNull) -> Unit
+  set_oncanplay(Self, (Event) -> JsValue) -> Unit
   oncanplaythrough(Self) -> EventHandlerNonNull
-  set_oncanplaythrough(Self, EventHandlerNonNull) -> Unit
+  set_oncanplaythrough(Self, (Event) -> JsValue) -> Unit
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
   onclick(Self) -> EventHandlerNonNull
-  set_onclick(Self, EventHandlerNonNull) -> Unit
+  set_onclick(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   oncommand(Self) -> EventHandlerNonNull
-  set_oncommand(Self, EventHandlerNonNull) -> Unit
+  set_oncommand(Self, (Event) -> JsValue) -> Unit
   oncontextlost(Self) -> EventHandlerNonNull
-  set_oncontextlost(Self, EventHandlerNonNull) -> Unit
+  set_oncontextlost(Self, (Event) -> JsValue) -> Unit
   oncontextmenu(Self) -> EventHandlerNonNull
-  set_oncontextmenu(Self, EventHandlerNonNull) -> Unit
+  set_oncontextmenu(Self, (Event) -> JsValue) -> Unit
   oncontextrestored(Self) -> EventHandlerNonNull
-  set_oncontextrestored(Self, EventHandlerNonNull) -> Unit
+  set_oncontextrestored(Self, (Event) -> JsValue) -> Unit
   oncopy(Self) -> EventHandlerNonNull
-  set_oncopy(Self, EventHandlerNonNull) -> Unit
+  set_oncopy(Self, (Event) -> JsValue) -> Unit
   oncuechange(Self) -> EventHandlerNonNull
-  set_oncuechange(Self, EventHandlerNonNull) -> Unit
+  set_oncuechange(Self, (Event) -> JsValue) -> Unit
   oncut(Self) -> EventHandlerNonNull
-  set_oncut(Self, EventHandlerNonNull) -> Unit
+  set_oncut(Self, (Event) -> JsValue) -> Unit
   ondblclick(Self) -> EventHandlerNonNull
-  set_ondblclick(Self, EventHandlerNonNull) -> Unit
+  set_ondblclick(Self, (Event) -> JsValue) -> Unit
   ondrag(Self) -> EventHandlerNonNull
-  set_ondrag(Self, EventHandlerNonNull) -> Unit
+  set_ondrag(Self, (Event) -> JsValue) -> Unit
   ondragend(Self) -> EventHandlerNonNull
-  set_ondragend(Self, EventHandlerNonNull) -> Unit
+  set_ondragend(Self, (Event) -> JsValue) -> Unit
   ondragenter(Self) -> EventHandlerNonNull
-  set_ondragenter(Self, EventHandlerNonNull) -> Unit
+  set_ondragenter(Self, (Event) -> JsValue) -> Unit
   ondragleave(Self) -> EventHandlerNonNull
-  set_ondragleave(Self, EventHandlerNonNull) -> Unit
+  set_ondragleave(Self, (Event) -> JsValue) -> Unit
   ondragover(Self) -> EventHandlerNonNull
-  set_ondragover(Self, EventHandlerNonNull) -> Unit
+  set_ondragover(Self, (Event) -> JsValue) -> Unit
   ondragstart(Self) -> EventHandlerNonNull
-  set_ondragstart(Self, EventHandlerNonNull) -> Unit
+  set_ondragstart(Self, (Event) -> JsValue) -> Unit
   ondrop(Self) -> EventHandlerNonNull
-  set_ondrop(Self, EventHandlerNonNull) -> Unit
+  set_ondrop(Self, (Event) -> JsValue) -> Unit
   ondurationchange(Self) -> EventHandlerNonNull
-  set_ondurationchange(Self, EventHandlerNonNull) -> Unit
+  set_ondurationchange(Self, (Event) -> JsValue) -> Unit
   onemptied(Self) -> EventHandlerNonNull
-  set_onemptied(Self, EventHandlerNonNull) -> Unit
+  set_onemptied(Self, (Event) -> JsValue) -> Unit
   onended(Self) -> EventHandlerNonNull
-  set_onended(Self, EventHandlerNonNull) -> Unit
+  set_onended(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> OnErrorEventHandlerNonNull
-  set_onerror(Self, OnErrorEventHandlerNonNull) -> Unit
+  set_onerror(Self, (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Unit
   onfocus(Self) -> EventHandlerNonNull
-  set_onfocus(Self, EventHandlerNonNull) -> Unit
+  set_onfocus(Self, (Event) -> JsValue) -> Unit
   onformdata(Self) -> EventHandlerNonNull
-  set_onformdata(Self, EventHandlerNonNull) -> Unit
+  set_onformdata(Self, (Event) -> JsValue) -> Unit
   oninput(Self) -> EventHandlerNonNull
-  set_oninput(Self, EventHandlerNonNull) -> Unit
+  set_oninput(Self, (Event) -> JsValue) -> Unit
   oninvalid(Self) -> EventHandlerNonNull
-  set_oninvalid(Self, EventHandlerNonNull) -> Unit
+  set_oninvalid(Self, (Event) -> JsValue) -> Unit
   onkeydown(Self) -> EventHandlerNonNull
-  set_onkeydown(Self, EventHandlerNonNull) -> Unit
+  set_onkeydown(Self, (Event) -> JsValue) -> Unit
   onkeypress(Self) -> EventHandlerNonNull
-  set_onkeypress(Self, EventHandlerNonNull) -> Unit
+  set_onkeypress(Self, (Event) -> JsValue) -> Unit
   onkeyup(Self) -> EventHandlerNonNull
-  set_onkeyup(Self, EventHandlerNonNull) -> Unit
+  set_onkeyup(Self, (Event) -> JsValue) -> Unit
   onload(Self) -> EventHandlerNonNull
-  set_onload(Self, EventHandlerNonNull) -> Unit
+  set_onload(Self, (Event) -> JsValue) -> Unit
   onloadeddata(Self) -> EventHandlerNonNull
-  set_onloadeddata(Self, EventHandlerNonNull) -> Unit
+  set_onloadeddata(Self, (Event) -> JsValue) -> Unit
   onloadedmetadata(Self) -> EventHandlerNonNull
-  set_onloadedmetadata(Self, EventHandlerNonNull) -> Unit
+  set_onloadedmetadata(Self, (Event) -> JsValue) -> Unit
   onloadstart(Self) -> EventHandlerNonNull
-  set_onloadstart(Self, EventHandlerNonNull) -> Unit
+  set_onloadstart(Self, (Event) -> JsValue) -> Unit
   onmousedown(Self) -> EventHandlerNonNull
-  set_onmousedown(Self, EventHandlerNonNull) -> Unit
+  set_onmousedown(Self, (Event) -> JsValue) -> Unit
   onmouseenter(Self) -> EventHandlerNonNull
-  set_onmouseenter(Self, EventHandlerNonNull) -> Unit
+  set_onmouseenter(Self, (Event) -> JsValue) -> Unit
   onmouseleave(Self) -> EventHandlerNonNull
-  set_onmouseleave(Self, EventHandlerNonNull) -> Unit
+  set_onmouseleave(Self, (Event) -> JsValue) -> Unit
   onmousemove(Self) -> EventHandlerNonNull
-  set_onmousemove(Self, EventHandlerNonNull) -> Unit
+  set_onmousemove(Self, (Event) -> JsValue) -> Unit
   onmouseout(Self) -> EventHandlerNonNull
-  set_onmouseout(Self, EventHandlerNonNull) -> Unit
+  set_onmouseout(Self, (Event) -> JsValue) -> Unit
   onmouseover(Self) -> EventHandlerNonNull
-  set_onmouseover(Self, EventHandlerNonNull) -> Unit
+  set_onmouseover(Self, (Event) -> JsValue) -> Unit
   onmouseup(Self) -> EventHandlerNonNull
-  set_onmouseup(Self, EventHandlerNonNull) -> Unit
+  set_onmouseup(Self, (Event) -> JsValue) -> Unit
   onpaste(Self) -> EventHandlerNonNull
-  set_onpaste(Self, EventHandlerNonNull) -> Unit
+  set_onpaste(Self, (Event) -> JsValue) -> Unit
   onpause(Self) -> EventHandlerNonNull
-  set_onpause(Self, EventHandlerNonNull) -> Unit
+  set_onpause(Self, (Event) -> JsValue) -> Unit
   onplay(Self) -> EventHandlerNonNull
-  set_onplay(Self, EventHandlerNonNull) -> Unit
+  set_onplay(Self, (Event) -> JsValue) -> Unit
   onplaying(Self) -> EventHandlerNonNull
-  set_onplaying(Self, EventHandlerNonNull) -> Unit
+  set_onplaying(Self, (Event) -> JsValue) -> Unit
   onprogress(Self) -> EventHandlerNonNull
-  set_onprogress(Self, EventHandlerNonNull) -> Unit
+  set_onprogress(Self, (Event) -> JsValue) -> Unit
   onratechange(Self) -> EventHandlerNonNull
-  set_onratechange(Self, EventHandlerNonNull) -> Unit
+  set_onratechange(Self, (Event) -> JsValue) -> Unit
   onreset(Self) -> EventHandlerNonNull
-  set_onreset(Self, EventHandlerNonNull) -> Unit
+  set_onreset(Self, (Event) -> JsValue) -> Unit
   onresize(Self) -> EventHandlerNonNull
-  set_onresize(Self, EventHandlerNonNull) -> Unit
+  set_onresize(Self, (Event) -> JsValue) -> Unit
   onscroll(Self) -> EventHandlerNonNull
-  set_onscroll(Self, EventHandlerNonNull) -> Unit
+  set_onscroll(Self, (Event) -> JsValue) -> Unit
   onscrollend(Self) -> EventHandlerNonNull
-  set_onscrollend(Self, EventHandlerNonNull) -> Unit
+  set_onscrollend(Self, (Event) -> JsValue) -> Unit
   onsecuritypolicyviolation(Self) -> EventHandlerNonNull
-  set_onsecuritypolicyviolation(Self, EventHandlerNonNull) -> Unit
+  set_onsecuritypolicyviolation(Self, (Event) -> JsValue) -> Unit
   onseeked(Self) -> EventHandlerNonNull
-  set_onseeked(Self, EventHandlerNonNull) -> Unit
+  set_onseeked(Self, (Event) -> JsValue) -> Unit
   onseeking(Self) -> EventHandlerNonNull
-  set_onseeking(Self, EventHandlerNonNull) -> Unit
+  set_onseeking(Self, (Event) -> JsValue) -> Unit
   onselect(Self) -> EventHandlerNonNull
-  set_onselect(Self, EventHandlerNonNull) -> Unit
+  set_onselect(Self, (Event) -> JsValue) -> Unit
   onslotchange(Self) -> EventHandlerNonNull
-  set_onslotchange(Self, EventHandlerNonNull) -> Unit
+  set_onslotchange(Self, (Event) -> JsValue) -> Unit
   onstalled(Self) -> EventHandlerNonNull
-  set_onstalled(Self, EventHandlerNonNull) -> Unit
+  set_onstalled(Self, (Event) -> JsValue) -> Unit
   onsubmit(Self) -> EventHandlerNonNull
-  set_onsubmit(Self, EventHandlerNonNull) -> Unit
+  set_onsubmit(Self, (Event) -> JsValue) -> Unit
   onsuspend(Self) -> EventHandlerNonNull
-  set_onsuspend(Self, EventHandlerNonNull) -> Unit
+  set_onsuspend(Self, (Event) -> JsValue) -> Unit
   ontimeupdate(Self) -> EventHandlerNonNull
-  set_ontimeupdate(Self, EventHandlerNonNull) -> Unit
+  set_ontimeupdate(Self, (Event) -> JsValue) -> Unit
   ontoggle(Self) -> EventHandlerNonNull
-  set_ontoggle(Self, EventHandlerNonNull) -> Unit
+  set_ontoggle(Self, (Event) -> JsValue) -> Unit
   onvolumechange(Self) -> EventHandlerNonNull
-  set_onvolumechange(Self, EventHandlerNonNull) -> Unit
+  set_onvolumechange(Self, (Event) -> JsValue) -> Unit
   onwaiting(Self) -> EventHandlerNonNull
-  set_onwaiting(Self, EventHandlerNonNull) -> Unit
+  set_onwaiting(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationend(Self) -> EventHandlerNonNull
-  set_onwebkitanimationend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationend(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationiteration(Self) -> EventHandlerNonNull
-  set_onwebkitanimationiteration(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationiteration(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationstart(Self) -> EventHandlerNonNull
-  set_onwebkitanimationstart(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationstart(Self, (Event) -> JsValue) -> Unit
   onwebkittransitionend(Self) -> EventHandlerNonNull
-  set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkittransitionend(Self, (Event) -> JsValue) -> Unit
   onwheel(Self) -> EventHandlerNonNull
-  set_onwheel(Self, EventHandlerNonNull) -> Unit
+  set_onwheel(Self, (Event) -> JsValue) -> Unit
   ontouchstart(Self) -> EventHandlerNonNull
-  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  set_ontouchstart(Self, (Event) -> JsValue) -> Unit
   ontouchend(Self) -> EventHandlerNonNull
-  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  set_ontouchend(Self, (Event) -> JsValue) -> Unit
   ontouchmove(Self) -> EventHandlerNonNull
-  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  set_ontouchmove(Self, (Event) -> JsValue) -> Unit
   ontouchcancel(Self) -> EventHandlerNonNull
-  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
+  set_ontouchcancel(Self, (Event) -> JsValue) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
-  set_onpointerover(Self, EventHandlerNonNull) -> Unit
+  set_onpointerover(Self, (Event) -> JsValue) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
-  set_onpointerenter(Self, EventHandlerNonNull) -> Unit
+  set_onpointerenter(Self, (Event) -> JsValue) -> Unit
   onpointerdown(Self) -> EventHandlerNonNull
-  set_onpointerdown(Self, EventHandlerNonNull) -> Unit
+  set_onpointerdown(Self, (Event) -> JsValue) -> Unit
   onpointermove(Self) -> EventHandlerNonNull
-  set_onpointermove(Self, EventHandlerNonNull) -> Unit
+  set_onpointermove(Self, (Event) -> JsValue) -> Unit
   onpointerrawupdate(Self) -> EventHandlerNonNull
-  set_onpointerrawupdate(Self, EventHandlerNonNull) -> Unit
+  set_onpointerrawupdate(Self, (Event) -> JsValue) -> Unit
   onpointerup(Self) -> EventHandlerNonNull
-  set_onpointerup(Self, EventHandlerNonNull) -> Unit
+  set_onpointerup(Self, (Event) -> JsValue) -> Unit
   onpointercancel(Self) -> EventHandlerNonNull
-  set_onpointercancel(Self, EventHandlerNonNull) -> Unit
+  set_onpointercancel(Self, (Event) -> JsValue) -> Unit
   onpointerout(Self) -> EventHandlerNonNull
-  set_onpointerout(Self, EventHandlerNonNull) -> Unit
+  set_onpointerout(Self, (Event) -> JsValue) -> Unit
   onpointerleave(Self) -> EventHandlerNonNull
-  set_onpointerleave(Self, EventHandlerNonNull) -> Unit
+  set_onpointerleave(Self, (Event) -> JsValue) -> Unit
   ongotpointercapture(Self) -> EventHandlerNonNull
-  set_ongotpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_ongotpointercapture(Self, (Event) -> JsValue) -> Unit
   onlostpointercapture(Self) -> EventHandlerNonNull
-  set_onlostpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_onlostpointercapture(Self, (Event) -> JsValue) -> Unit
   onselectstart(Self) -> EventHandlerNonNull
-  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  set_onselectstart(Self, (Event) -> JsValue) -> Unit
   onselectionchange(Self) -> EventHandlerNonNull
-  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
+  set_onselectionchange(Self, (Event) -> JsValue) -> Unit
   corresponding_element(Self) -> SVGElement
   corresponding_use_element(Self) -> SVGUseElement
   dataset(Self) -> DOMStringMap
@@ -12393,41 +12393,41 @@ pub trait TSVGSVGElement : TSVGGraphicsElement {
   view_box(Self) -> SVGAnimatedRect
   preserve_aspect_ratio(Self) -> SVGAnimatedPreserveAspectRatio
   onafterprint(Self) -> EventHandlerNonNull
-  set_onafterprint(Self, EventHandlerNonNull) -> Unit
+  set_onafterprint(Self, (Event) -> JsValue) -> Unit
   onbeforeprint(Self) -> EventHandlerNonNull
-  set_onbeforeprint(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeprint(Self, (Event) -> JsValue) -> Unit
   onbeforeunload(Self) -> OnBeforeUnloadEventHandlerNonNull
-  set_onbeforeunload(Self, OnBeforeUnloadEventHandlerNonNull) -> Unit
+  set_onbeforeunload(Self, (Event) -> String) -> Unit
   onhashchange(Self) -> EventHandlerNonNull
-  set_onhashchange(Self, EventHandlerNonNull) -> Unit
+  set_onhashchange(Self, (Event) -> JsValue) -> Unit
   onlanguagechange(Self) -> EventHandlerNonNull
-  set_onlanguagechange(Self, EventHandlerNonNull) -> Unit
+  set_onlanguagechange(Self, (Event) -> JsValue) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
   onoffline(Self) -> EventHandlerNonNull
-  set_onoffline(Self, EventHandlerNonNull) -> Unit
+  set_onoffline(Self, (Event) -> JsValue) -> Unit
   ononline(Self) -> EventHandlerNonNull
-  set_ononline(Self, EventHandlerNonNull) -> Unit
+  set_ononline(Self, (Event) -> JsValue) -> Unit
   onpagehide(Self) -> EventHandlerNonNull
-  set_onpagehide(Self, EventHandlerNonNull) -> Unit
+  set_onpagehide(Self, (Event) -> JsValue) -> Unit
   onpagereveal(Self) -> EventHandlerNonNull
-  set_onpagereveal(Self, EventHandlerNonNull) -> Unit
+  set_onpagereveal(Self, (Event) -> JsValue) -> Unit
   onpageshow(Self) -> EventHandlerNonNull
-  set_onpageshow(Self, EventHandlerNonNull) -> Unit
+  set_onpageshow(Self, (Event) -> JsValue) -> Unit
   onpageswap(Self) -> EventHandlerNonNull
-  set_onpageswap(Self, EventHandlerNonNull) -> Unit
+  set_onpageswap(Self, (Event) -> JsValue) -> Unit
   onpopstate(Self) -> EventHandlerNonNull
-  set_onpopstate(Self, EventHandlerNonNull) -> Unit
+  set_onpopstate(Self, (Event) -> JsValue) -> Unit
   onrejectionhandled(Self) -> EventHandlerNonNull
-  set_onrejectionhandled(Self, EventHandlerNonNull) -> Unit
+  set_onrejectionhandled(Self, (Event) -> JsValue) -> Unit
   onstorage(Self) -> EventHandlerNonNull
-  set_onstorage(Self, EventHandlerNonNull) -> Unit
+  set_onstorage(Self, (Event) -> JsValue) -> Unit
   onunhandledrejection(Self) -> EventHandlerNonNull
-  set_onunhandledrejection(Self, EventHandlerNonNull) -> Unit
+  set_onunhandledrejection(Self, (Event) -> JsValue) -> Unit
   onunload(Self) -> EventHandlerNonNull
-  set_onunload(Self, EventHandlerNonNull) -> Unit
+  set_onunload(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TSVGScriptElement : TSVGElement {
@@ -12577,7 +12577,7 @@ pub trait TScreenOrientation : TEventTarget {
   type_(Self) -> OrientationType
   angle(Self) -> UInt
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TSelection : TJsValue {
@@ -12623,7 +12623,7 @@ pub trait TShadowRoot : TDocumentFragment {
   serializable(Self) -> Bool
   host(Self) -> Element
   onslotchange(Self) -> EventHandlerNonNull
-  set_onslotchange(Self, EventHandlerNonNull) -> Unit
+  set_onslotchange(Self, (Event) -> JsValue) -> Unit
   set_html_unsafe(Self, &TShadowRootSetHTMLUnsafeHtml) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
   inner_html(Self) -> ShadowRootInnerHTML
@@ -12650,14 +12650,14 @@ pub impl TShadowRootSetHTMLUnsafeHtml for String
 pub trait TSharedWorker : TEventTarget {
   port(Self) -> MessagePort
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TSharedWorkerGlobalScope : TWorkerGlobalScope {
   name(Self) -> String
   close(Self) -> Unit
   onconnect(Self) -> EventHandlerNonNull
-  set_onconnect(Self, EventHandlerNonNull) -> Unit
+  set_onconnect(Self, (Event) -> JsValue) -> Unit
 }
 
 pub(open) trait TSharedWorkerNewOptions {
@@ -12791,7 +12791,7 @@ pub trait TTextTrack : TEventTarget {
   add_cue(Self, &TTextTrackCue) -> Unit
   remove_cue(Self, &TTextTrackCue) -> Unit
   oncuechange(Self) -> EventHandlerNonNull
-  set_oncuechange(Self, EventHandlerNonNull) -> Unit
+  set_oncuechange(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TTextTrackCue : TEventTarget {
@@ -12805,9 +12805,9 @@ pub trait TTextTrackCue : TEventTarget {
   pause_on_exit(Self) -> Bool
   set_pause_on_exit(Self, Bool) -> Unit
   onenter(Self) -> EventHandlerNonNull
-  set_onenter(Self, EventHandlerNonNull) -> Unit
+  set_onenter(Self, (Event) -> JsValue) -> Unit
   onexit(Self) -> EventHandlerNonNull
-  set_onexit(Self, EventHandlerNonNull) -> Unit
+  set_onexit(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TTextTrackCueList : TJsValue {
@@ -12821,11 +12821,11 @@ pub trait TTextTrackList : TEventTarget {
   get(Self, UInt) -> TextTrack?
   get_track_by_id(Self, String) -> TextTrack?
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
   onaddtrack(Self) -> EventHandlerNonNull
-  set_onaddtrack(Self, EventHandlerNonNull) -> Unit
+  set_onaddtrack(Self, (Event) -> JsValue) -> Unit
   onremovetrack(Self) -> EventHandlerNonNull
-  set_onremovetrack(Self, EventHandlerNonNull) -> Unit
+  set_onremovetrack(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TTimeRanges : TJsValue {
@@ -13051,11 +13051,11 @@ pub trait TVideoTrackList : TEventTarget {
   get_track_by_id(Self, String) -> VideoTrack?
   selected_index(Self) -> Int
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
   onaddtrack(Self) -> EventHandlerNonNull
-  set_onaddtrack(Self, EventHandlerNonNull) -> Unit
+  set_onaddtrack(Self, (Event) -> JsValue) -> Unit
   onremovetrack(Self) -> EventHandlerNonNull
-  set_onremovetrack(Self, EventHandlerNonNull) -> Unit
+  set_onremovetrack(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TVisibilityStateEntry : TPerformanceEntry {
@@ -13074,11 +13074,11 @@ pub trait TVisualViewport : TEventTarget {
   height(Self) -> Double
   scale(Self) -> Double
   onresize(Self) -> EventHandlerNonNull
-  set_onresize(Self, EventHandlerNonNull) -> Unit
+  set_onresize(Self, (Event) -> JsValue) -> Unit
   onscroll(Self) -> EventHandlerNonNull
-  set_onscroll(Self, EventHandlerNonNull) -> Unit
+  set_onscroll(Self, (Event) -> JsValue) -> Unit
   onscrollend(Self) -> EventHandlerNonNull
-  set_onscrollend(Self, EventHandlerNonNull) -> Unit
+  set_onscrollend(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TWebSocket : TEventTarget {
@@ -13086,16 +13086,16 @@ pub trait TWebSocket : TEventTarget {
   ready_state(Self) -> UInt
   buffered_amount(Self) -> UInt64
   onopen(Self) -> EventHandlerNonNull
-  set_onopen(Self, EventHandlerNonNull) -> Unit
+  set_onopen(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   extensions(Self) -> String
   protocol(Self) -> String
   close(Self, code? : UInt, reason? : String) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   binary_type(Self) -> BinaryType
   set_binary_type(Self, BinaryType) -> Unit
   send(Self, &TWebSocketSendData) -> Unit
@@ -13197,227 +13197,227 @@ pub trait TWindow : TEventTarget {
   request_idle_callback(Self, (IdleDeadline) -> Unit, options? : IdleRequestOptions) -> UInt
   cancel_idle_callback(Self, UInt) -> Unit
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   onauxclick(Self) -> EventHandlerNonNull
-  set_onauxclick(Self, EventHandlerNonNull) -> Unit
+  set_onauxclick(Self, (Event) -> JsValue) -> Unit
   onbeforeinput(Self) -> EventHandlerNonNull
-  set_onbeforeinput(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeinput(Self, (Event) -> JsValue) -> Unit
   onbeforematch(Self) -> EventHandlerNonNull
-  set_onbeforematch(Self, EventHandlerNonNull) -> Unit
+  set_onbeforematch(Self, (Event) -> JsValue) -> Unit
   onbeforetoggle(Self) -> EventHandlerNonNull
-  set_onbeforetoggle(Self, EventHandlerNonNull) -> Unit
+  set_onbeforetoggle(Self, (Event) -> JsValue) -> Unit
   onblur(Self) -> EventHandlerNonNull
-  set_onblur(Self, EventHandlerNonNull) -> Unit
+  set_onblur(Self, (Event) -> JsValue) -> Unit
   oncancel(Self) -> EventHandlerNonNull
-  set_oncancel(Self, EventHandlerNonNull) -> Unit
+  set_oncancel(Self, (Event) -> JsValue) -> Unit
   oncanplay(Self) -> EventHandlerNonNull
-  set_oncanplay(Self, EventHandlerNonNull) -> Unit
+  set_oncanplay(Self, (Event) -> JsValue) -> Unit
   oncanplaythrough(Self) -> EventHandlerNonNull
-  set_oncanplaythrough(Self, EventHandlerNonNull) -> Unit
+  set_oncanplaythrough(Self, (Event) -> JsValue) -> Unit
   onchange(Self) -> EventHandlerNonNull
-  set_onchange(Self, EventHandlerNonNull) -> Unit
+  set_onchange(Self, (Event) -> JsValue) -> Unit
   onclick(Self) -> EventHandlerNonNull
-  set_onclick(Self, EventHandlerNonNull) -> Unit
+  set_onclick(Self, (Event) -> JsValue) -> Unit
   onclose(Self) -> EventHandlerNonNull
-  set_onclose(Self, EventHandlerNonNull) -> Unit
+  set_onclose(Self, (Event) -> JsValue) -> Unit
   oncommand(Self) -> EventHandlerNonNull
-  set_oncommand(Self, EventHandlerNonNull) -> Unit
+  set_oncommand(Self, (Event) -> JsValue) -> Unit
   oncontextlost(Self) -> EventHandlerNonNull
-  set_oncontextlost(Self, EventHandlerNonNull) -> Unit
+  set_oncontextlost(Self, (Event) -> JsValue) -> Unit
   oncontextmenu(Self) -> EventHandlerNonNull
-  set_oncontextmenu(Self, EventHandlerNonNull) -> Unit
+  set_oncontextmenu(Self, (Event) -> JsValue) -> Unit
   oncontextrestored(Self) -> EventHandlerNonNull
-  set_oncontextrestored(Self, EventHandlerNonNull) -> Unit
+  set_oncontextrestored(Self, (Event) -> JsValue) -> Unit
   oncopy(Self) -> EventHandlerNonNull
-  set_oncopy(Self, EventHandlerNonNull) -> Unit
+  set_oncopy(Self, (Event) -> JsValue) -> Unit
   oncuechange(Self) -> EventHandlerNonNull
-  set_oncuechange(Self, EventHandlerNonNull) -> Unit
+  set_oncuechange(Self, (Event) -> JsValue) -> Unit
   oncut(Self) -> EventHandlerNonNull
-  set_oncut(Self, EventHandlerNonNull) -> Unit
+  set_oncut(Self, (Event) -> JsValue) -> Unit
   ondblclick(Self) -> EventHandlerNonNull
-  set_ondblclick(Self, EventHandlerNonNull) -> Unit
+  set_ondblclick(Self, (Event) -> JsValue) -> Unit
   ondrag(Self) -> EventHandlerNonNull
-  set_ondrag(Self, EventHandlerNonNull) -> Unit
+  set_ondrag(Self, (Event) -> JsValue) -> Unit
   ondragend(Self) -> EventHandlerNonNull
-  set_ondragend(Self, EventHandlerNonNull) -> Unit
+  set_ondragend(Self, (Event) -> JsValue) -> Unit
   ondragenter(Self) -> EventHandlerNonNull
-  set_ondragenter(Self, EventHandlerNonNull) -> Unit
+  set_ondragenter(Self, (Event) -> JsValue) -> Unit
   ondragleave(Self) -> EventHandlerNonNull
-  set_ondragleave(Self, EventHandlerNonNull) -> Unit
+  set_ondragleave(Self, (Event) -> JsValue) -> Unit
   ondragover(Self) -> EventHandlerNonNull
-  set_ondragover(Self, EventHandlerNonNull) -> Unit
+  set_ondragover(Self, (Event) -> JsValue) -> Unit
   ondragstart(Self) -> EventHandlerNonNull
-  set_ondragstart(Self, EventHandlerNonNull) -> Unit
+  set_ondragstart(Self, (Event) -> JsValue) -> Unit
   ondrop(Self) -> EventHandlerNonNull
-  set_ondrop(Self, EventHandlerNonNull) -> Unit
+  set_ondrop(Self, (Event) -> JsValue) -> Unit
   ondurationchange(Self) -> EventHandlerNonNull
-  set_ondurationchange(Self, EventHandlerNonNull) -> Unit
+  set_ondurationchange(Self, (Event) -> JsValue) -> Unit
   onemptied(Self) -> EventHandlerNonNull
-  set_onemptied(Self, EventHandlerNonNull) -> Unit
+  set_onemptied(Self, (Event) -> JsValue) -> Unit
   onended(Self) -> EventHandlerNonNull
-  set_onended(Self, EventHandlerNonNull) -> Unit
+  set_onended(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> OnErrorEventHandlerNonNull
-  set_onerror(Self, OnErrorEventHandlerNonNull) -> Unit
+  set_onerror(Self, (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Unit
   onfocus(Self) -> EventHandlerNonNull
-  set_onfocus(Self, EventHandlerNonNull) -> Unit
+  set_onfocus(Self, (Event) -> JsValue) -> Unit
   onformdata(Self) -> EventHandlerNonNull
-  set_onformdata(Self, EventHandlerNonNull) -> Unit
+  set_onformdata(Self, (Event) -> JsValue) -> Unit
   oninput(Self) -> EventHandlerNonNull
-  set_oninput(Self, EventHandlerNonNull) -> Unit
+  set_oninput(Self, (Event) -> JsValue) -> Unit
   oninvalid(Self) -> EventHandlerNonNull
-  set_oninvalid(Self, EventHandlerNonNull) -> Unit
+  set_oninvalid(Self, (Event) -> JsValue) -> Unit
   onkeydown(Self) -> EventHandlerNonNull
-  set_onkeydown(Self, EventHandlerNonNull) -> Unit
+  set_onkeydown(Self, (Event) -> JsValue) -> Unit
   onkeypress(Self) -> EventHandlerNonNull
-  set_onkeypress(Self, EventHandlerNonNull) -> Unit
+  set_onkeypress(Self, (Event) -> JsValue) -> Unit
   onkeyup(Self) -> EventHandlerNonNull
-  set_onkeyup(Self, EventHandlerNonNull) -> Unit
+  set_onkeyup(Self, (Event) -> JsValue) -> Unit
   onload(Self) -> EventHandlerNonNull
-  set_onload(Self, EventHandlerNonNull) -> Unit
+  set_onload(Self, (Event) -> JsValue) -> Unit
   onloadeddata(Self) -> EventHandlerNonNull
-  set_onloadeddata(Self, EventHandlerNonNull) -> Unit
+  set_onloadeddata(Self, (Event) -> JsValue) -> Unit
   onloadedmetadata(Self) -> EventHandlerNonNull
-  set_onloadedmetadata(Self, EventHandlerNonNull) -> Unit
+  set_onloadedmetadata(Self, (Event) -> JsValue) -> Unit
   onloadstart(Self) -> EventHandlerNonNull
-  set_onloadstart(Self, EventHandlerNonNull) -> Unit
+  set_onloadstart(Self, (Event) -> JsValue) -> Unit
   onmousedown(Self) -> EventHandlerNonNull
-  set_onmousedown(Self, EventHandlerNonNull) -> Unit
+  set_onmousedown(Self, (Event) -> JsValue) -> Unit
   onmouseenter(Self) -> EventHandlerNonNull
-  set_onmouseenter(Self, EventHandlerNonNull) -> Unit
+  set_onmouseenter(Self, (Event) -> JsValue) -> Unit
   onmouseleave(Self) -> EventHandlerNonNull
-  set_onmouseleave(Self, EventHandlerNonNull) -> Unit
+  set_onmouseleave(Self, (Event) -> JsValue) -> Unit
   onmousemove(Self) -> EventHandlerNonNull
-  set_onmousemove(Self, EventHandlerNonNull) -> Unit
+  set_onmousemove(Self, (Event) -> JsValue) -> Unit
   onmouseout(Self) -> EventHandlerNonNull
-  set_onmouseout(Self, EventHandlerNonNull) -> Unit
+  set_onmouseout(Self, (Event) -> JsValue) -> Unit
   onmouseover(Self) -> EventHandlerNonNull
-  set_onmouseover(Self, EventHandlerNonNull) -> Unit
+  set_onmouseover(Self, (Event) -> JsValue) -> Unit
   onmouseup(Self) -> EventHandlerNonNull
-  set_onmouseup(Self, EventHandlerNonNull) -> Unit
+  set_onmouseup(Self, (Event) -> JsValue) -> Unit
   onpaste(Self) -> EventHandlerNonNull
-  set_onpaste(Self, EventHandlerNonNull) -> Unit
+  set_onpaste(Self, (Event) -> JsValue) -> Unit
   onpause(Self) -> EventHandlerNonNull
-  set_onpause(Self, EventHandlerNonNull) -> Unit
+  set_onpause(Self, (Event) -> JsValue) -> Unit
   onplay(Self) -> EventHandlerNonNull
-  set_onplay(Self, EventHandlerNonNull) -> Unit
+  set_onplay(Self, (Event) -> JsValue) -> Unit
   onplaying(Self) -> EventHandlerNonNull
-  set_onplaying(Self, EventHandlerNonNull) -> Unit
+  set_onplaying(Self, (Event) -> JsValue) -> Unit
   onprogress(Self) -> EventHandlerNonNull
-  set_onprogress(Self, EventHandlerNonNull) -> Unit
+  set_onprogress(Self, (Event) -> JsValue) -> Unit
   onratechange(Self) -> EventHandlerNonNull
-  set_onratechange(Self, EventHandlerNonNull) -> Unit
+  set_onratechange(Self, (Event) -> JsValue) -> Unit
   onreset(Self) -> EventHandlerNonNull
-  set_onreset(Self, EventHandlerNonNull) -> Unit
+  set_onreset(Self, (Event) -> JsValue) -> Unit
   onresize(Self) -> EventHandlerNonNull
-  set_onresize(Self, EventHandlerNonNull) -> Unit
+  set_onresize(Self, (Event) -> JsValue) -> Unit
   onscroll(Self) -> EventHandlerNonNull
-  set_onscroll(Self, EventHandlerNonNull) -> Unit
+  set_onscroll(Self, (Event) -> JsValue) -> Unit
   onscrollend(Self) -> EventHandlerNonNull
-  set_onscrollend(Self, EventHandlerNonNull) -> Unit
+  set_onscrollend(Self, (Event) -> JsValue) -> Unit
   onsecuritypolicyviolation(Self) -> EventHandlerNonNull
-  set_onsecuritypolicyviolation(Self, EventHandlerNonNull) -> Unit
+  set_onsecuritypolicyviolation(Self, (Event) -> JsValue) -> Unit
   onseeked(Self) -> EventHandlerNonNull
-  set_onseeked(Self, EventHandlerNonNull) -> Unit
+  set_onseeked(Self, (Event) -> JsValue) -> Unit
   onseeking(Self) -> EventHandlerNonNull
-  set_onseeking(Self, EventHandlerNonNull) -> Unit
+  set_onseeking(Self, (Event) -> JsValue) -> Unit
   onselect(Self) -> EventHandlerNonNull
-  set_onselect(Self, EventHandlerNonNull) -> Unit
+  set_onselect(Self, (Event) -> JsValue) -> Unit
   onslotchange(Self) -> EventHandlerNonNull
-  set_onslotchange(Self, EventHandlerNonNull) -> Unit
+  set_onslotchange(Self, (Event) -> JsValue) -> Unit
   onstalled(Self) -> EventHandlerNonNull
-  set_onstalled(Self, EventHandlerNonNull) -> Unit
+  set_onstalled(Self, (Event) -> JsValue) -> Unit
   onsubmit(Self) -> EventHandlerNonNull
-  set_onsubmit(Self, EventHandlerNonNull) -> Unit
+  set_onsubmit(Self, (Event) -> JsValue) -> Unit
   onsuspend(Self) -> EventHandlerNonNull
-  set_onsuspend(Self, EventHandlerNonNull) -> Unit
+  set_onsuspend(Self, (Event) -> JsValue) -> Unit
   ontimeupdate(Self) -> EventHandlerNonNull
-  set_ontimeupdate(Self, EventHandlerNonNull) -> Unit
+  set_ontimeupdate(Self, (Event) -> JsValue) -> Unit
   ontoggle(Self) -> EventHandlerNonNull
-  set_ontoggle(Self, EventHandlerNonNull) -> Unit
+  set_ontoggle(Self, (Event) -> JsValue) -> Unit
   onvolumechange(Self) -> EventHandlerNonNull
-  set_onvolumechange(Self, EventHandlerNonNull) -> Unit
+  set_onvolumechange(Self, (Event) -> JsValue) -> Unit
   onwaiting(Self) -> EventHandlerNonNull
-  set_onwaiting(Self, EventHandlerNonNull) -> Unit
+  set_onwaiting(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationend(Self) -> EventHandlerNonNull
-  set_onwebkitanimationend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationend(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationiteration(Self) -> EventHandlerNonNull
-  set_onwebkitanimationiteration(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationiteration(Self, (Event) -> JsValue) -> Unit
   onwebkitanimationstart(Self) -> EventHandlerNonNull
-  set_onwebkitanimationstart(Self, EventHandlerNonNull) -> Unit
+  set_onwebkitanimationstart(Self, (Event) -> JsValue) -> Unit
   onwebkittransitionend(Self) -> EventHandlerNonNull
-  set_onwebkittransitionend(Self, EventHandlerNonNull) -> Unit
+  set_onwebkittransitionend(Self, (Event) -> JsValue) -> Unit
   onwheel(Self) -> EventHandlerNonNull
-  set_onwheel(Self, EventHandlerNonNull) -> Unit
+  set_onwheel(Self, (Event) -> JsValue) -> Unit
   ontouchstart(Self) -> EventHandlerNonNull
-  set_ontouchstart(Self, EventHandlerNonNull) -> Unit
+  set_ontouchstart(Self, (Event) -> JsValue) -> Unit
   ontouchend(Self) -> EventHandlerNonNull
-  set_ontouchend(Self, EventHandlerNonNull) -> Unit
+  set_ontouchend(Self, (Event) -> JsValue) -> Unit
   ontouchmove(Self) -> EventHandlerNonNull
-  set_ontouchmove(Self, EventHandlerNonNull) -> Unit
+  set_ontouchmove(Self, (Event) -> JsValue) -> Unit
   ontouchcancel(Self) -> EventHandlerNonNull
-  set_ontouchcancel(Self, EventHandlerNonNull) -> Unit
+  set_ontouchcancel(Self, (Event) -> JsValue) -> Unit
   onpointerover(Self) -> EventHandlerNonNull
-  set_onpointerover(Self, EventHandlerNonNull) -> Unit
+  set_onpointerover(Self, (Event) -> JsValue) -> Unit
   onpointerenter(Self) -> EventHandlerNonNull
-  set_onpointerenter(Self, EventHandlerNonNull) -> Unit
+  set_onpointerenter(Self, (Event) -> JsValue) -> Unit
   onpointerdown(Self) -> EventHandlerNonNull
-  set_onpointerdown(Self, EventHandlerNonNull) -> Unit
+  set_onpointerdown(Self, (Event) -> JsValue) -> Unit
   onpointermove(Self) -> EventHandlerNonNull
-  set_onpointermove(Self, EventHandlerNonNull) -> Unit
+  set_onpointermove(Self, (Event) -> JsValue) -> Unit
   onpointerrawupdate(Self) -> EventHandlerNonNull
-  set_onpointerrawupdate(Self, EventHandlerNonNull) -> Unit
+  set_onpointerrawupdate(Self, (Event) -> JsValue) -> Unit
   onpointerup(Self) -> EventHandlerNonNull
-  set_onpointerup(Self, EventHandlerNonNull) -> Unit
+  set_onpointerup(Self, (Event) -> JsValue) -> Unit
   onpointercancel(Self) -> EventHandlerNonNull
-  set_onpointercancel(Self, EventHandlerNonNull) -> Unit
+  set_onpointercancel(Self, (Event) -> JsValue) -> Unit
   onpointerout(Self) -> EventHandlerNonNull
-  set_onpointerout(Self, EventHandlerNonNull) -> Unit
+  set_onpointerout(Self, (Event) -> JsValue) -> Unit
   onpointerleave(Self) -> EventHandlerNonNull
-  set_onpointerleave(Self, EventHandlerNonNull) -> Unit
+  set_onpointerleave(Self, (Event) -> JsValue) -> Unit
   ongotpointercapture(Self) -> EventHandlerNonNull
-  set_ongotpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_ongotpointercapture(Self, (Event) -> JsValue) -> Unit
   onlostpointercapture(Self) -> EventHandlerNonNull
-  set_onlostpointercapture(Self, EventHandlerNonNull) -> Unit
+  set_onlostpointercapture(Self, (Event) -> JsValue) -> Unit
   onselectstart(Self) -> EventHandlerNonNull
-  set_onselectstart(Self, EventHandlerNonNull) -> Unit
+  set_onselectstart(Self, (Event) -> JsValue) -> Unit
   onselectionchange(Self) -> EventHandlerNonNull
-  set_onselectionchange(Self, EventHandlerNonNull) -> Unit
+  set_onselectionchange(Self, (Event) -> JsValue) -> Unit
   onafterprint(Self) -> EventHandlerNonNull
-  set_onafterprint(Self, EventHandlerNonNull) -> Unit
+  set_onafterprint(Self, (Event) -> JsValue) -> Unit
   onbeforeprint(Self) -> EventHandlerNonNull
-  set_onbeforeprint(Self, EventHandlerNonNull) -> Unit
+  set_onbeforeprint(Self, (Event) -> JsValue) -> Unit
   onbeforeunload(Self) -> OnBeforeUnloadEventHandlerNonNull
-  set_onbeforeunload(Self, OnBeforeUnloadEventHandlerNonNull) -> Unit
+  set_onbeforeunload(Self, (Event) -> String) -> Unit
   onhashchange(Self) -> EventHandlerNonNull
-  set_onhashchange(Self, EventHandlerNonNull) -> Unit
+  set_onhashchange(Self, (Event) -> JsValue) -> Unit
   onlanguagechange(Self) -> EventHandlerNonNull
-  set_onlanguagechange(Self, EventHandlerNonNull) -> Unit
+  set_onlanguagechange(Self, (Event) -> JsValue) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
   onoffline(Self) -> EventHandlerNonNull
-  set_onoffline(Self, EventHandlerNonNull) -> Unit
+  set_onoffline(Self, (Event) -> JsValue) -> Unit
   ononline(Self) -> EventHandlerNonNull
-  set_ononline(Self, EventHandlerNonNull) -> Unit
+  set_ononline(Self, (Event) -> JsValue) -> Unit
   onpagehide(Self) -> EventHandlerNonNull
-  set_onpagehide(Self, EventHandlerNonNull) -> Unit
+  set_onpagehide(Self, (Event) -> JsValue) -> Unit
   onpagereveal(Self) -> EventHandlerNonNull
-  set_onpagereveal(Self, EventHandlerNonNull) -> Unit
+  set_onpagereveal(Self, (Event) -> JsValue) -> Unit
   onpageshow(Self) -> EventHandlerNonNull
-  set_onpageshow(Self, EventHandlerNonNull) -> Unit
+  set_onpageshow(Self, (Event) -> JsValue) -> Unit
   onpageswap(Self) -> EventHandlerNonNull
-  set_onpageswap(Self, EventHandlerNonNull) -> Unit
+  set_onpageswap(Self, (Event) -> JsValue) -> Unit
   onpopstate(Self) -> EventHandlerNonNull
-  set_onpopstate(Self, EventHandlerNonNull) -> Unit
+  set_onpopstate(Self, (Event) -> JsValue) -> Unit
   onrejectionhandled(Self) -> EventHandlerNonNull
-  set_onrejectionhandled(Self, EventHandlerNonNull) -> Unit
+  set_onrejectionhandled(Self, (Event) -> JsValue) -> Unit
   onstorage(Self) -> EventHandlerNonNull
-  set_onstorage(Self, EventHandlerNonNull) -> Unit
+  set_onstorage(Self, (Event) -> JsValue) -> Unit
   onunhandledrejection(Self) -> EventHandlerNonNull
-  set_onunhandledrejection(Self, EventHandlerNonNull) -> Unit
+  set_onunhandledrejection(Self, (Event) -> JsValue) -> Unit
   onunload(Self) -> EventHandlerNonNull
-  set_onunload(Self, EventHandlerNonNull) -> Unit
+  set_onunload(Self, (Event) -> JsValue) -> Unit
   origin(Self) -> String
   is_secure_context(Self) -> Bool
   cross_origin_isolated(Self) -> Bool
@@ -13451,11 +13451,11 @@ pub trait TWorker : TEventTarget {
   post_message(Self, JsValue, Array[JsValue]) -> Unit
   post_message_with_options(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
   onmessage(Self) -> EventHandlerNonNull
-  set_onmessage(Self, EventHandlerNonNull) -> Unit
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
   onmessageerror(Self) -> EventHandlerNonNull
-  set_onmessageerror(Self, EventHandlerNonNull) -> Unit
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TWorkerGlobalScope : TEventTarget {
@@ -13464,17 +13464,17 @@ pub trait TWorkerGlobalScope : TEventTarget {
   navigator(Self) -> WorkerNavigator
   import_scripts(Self, Array[&TWorkerGlobalScopeImportScriptsUrls]) -> Unit
   onerror(Self) -> OnErrorEventHandlerNonNull
-  set_onerror(Self, OnErrorEventHandlerNonNull) -> Unit
+  set_onerror(Self, (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Unit
   onlanguagechange(Self) -> EventHandlerNonNull
-  set_onlanguagechange(Self, EventHandlerNonNull) -> Unit
+  set_onlanguagechange(Self, (Event) -> JsValue) -> Unit
   onoffline(Self) -> EventHandlerNonNull
-  set_onoffline(Self, EventHandlerNonNull) -> Unit
+  set_onoffline(Self, (Event) -> JsValue) -> Unit
   ononline(Self) -> EventHandlerNonNull
-  set_ononline(Self, EventHandlerNonNull) -> Unit
+  set_ononline(Self, (Event) -> JsValue) -> Unit
   onrejectionhandled(Self) -> EventHandlerNonNull
-  set_onrejectionhandled(Self, EventHandlerNonNull) -> Unit
+  set_onrejectionhandled(Self, (Event) -> JsValue) -> Unit
   onunhandledrejection(Self) -> EventHandlerNonNull
-  set_onunhandledrejection(Self, EventHandlerNonNull) -> Unit
+  set_onunhandledrejection(Self, (Event) -> JsValue) -> Unit
   origin(Self) -> String
   is_secure_context(Self) -> Bool
   cross_origin_isolated(Self) -> Bool
@@ -13570,7 +13570,7 @@ pub trait TXMLDocument : TDocument {
 
 pub trait TXMLHttpRequest : TXMLHttpRequestEventTarget {
   onreadystatechange(Self) -> EventHandlerNonNull
-  set_onreadystatechange(Self, EventHandlerNonNull) -> Unit
+  set_onreadystatechange(Self, (Event) -> JsValue) -> Unit
   ready_state(Self) -> UInt
   open(Self, String, String) -> Unit
   open_with_credentials(Self, String, String, Bool, username? : String, password? : String) -> Unit
@@ -13602,19 +13602,19 @@ pub impl TXMLHttpRequestBodyInit for String
 
 pub trait TXMLHttpRequestEventTarget : TEventTarget {
   onloadstart(Self) -> EventHandlerNonNull
-  set_onloadstart(Self, EventHandlerNonNull) -> Unit
+  set_onloadstart(Self, (Event) -> JsValue) -> Unit
   onprogress(Self) -> EventHandlerNonNull
-  set_onprogress(Self, EventHandlerNonNull) -> Unit
+  set_onprogress(Self, (Event) -> JsValue) -> Unit
   onabort(Self) -> EventHandlerNonNull
-  set_onabort(Self, EventHandlerNonNull) -> Unit
+  set_onabort(Self, (Event) -> JsValue) -> Unit
   onerror(Self) -> EventHandlerNonNull
-  set_onerror(Self, EventHandlerNonNull) -> Unit
+  set_onerror(Self, (Event) -> JsValue) -> Unit
   onload(Self) -> EventHandlerNonNull
-  set_onload(Self, EventHandlerNonNull) -> Unit
+  set_onload(Self, (Event) -> JsValue) -> Unit
   ontimeout(Self) -> EventHandlerNonNull
-  set_ontimeout(Self, EventHandlerNonNull) -> Unit
+  set_ontimeout(Self, (Event) -> JsValue) -> Unit
   onloadend(Self) -> EventHandlerNonNull
-  set_onloadend(Self, EventHandlerNonNull) -> Unit
+  set_onloadend(Self, (Event) -> JsValue) -> Unit
 }
 
 pub(open) trait TXMLHttpRequestSendBody {

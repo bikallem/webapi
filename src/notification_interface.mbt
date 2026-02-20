@@ -34,13 +34,13 @@ pub fn Notification::new(
 /// [Notification](https://developer.mozilla.org/en-US/docs/Web/API/Notification) interface.
 pub trait TNotification: TEventTarget {
   onclick(self : Self) -> EventHandler = _
-  set_onclick(self : Self, onclick : EventHandler) -> Unit = _
+  set_onclick(self : Self, onclick : (Event) -> JsValue) -> Unit = _
   onshow(self : Self) -> EventHandler = _
-  set_onshow(self : Self, onshow : EventHandler) -> Unit = _
+  set_onshow(self : Self, onshow : (Event) -> JsValue) -> Unit = _
   onerror(self : Self) -> EventHandler = _
-  set_onerror(self : Self, onerror : EventHandler) -> Unit = _
+  set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit = _
   onclose(self : Self) -> EventHandler = _
-  set_onclose(self : Self, onclose : EventHandler) -> Unit = _
+  set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit = _
   title(self : Self) -> String = _
   dir(self : Self) -> NotificationDirection = _
   lang(self : Self) -> String = _
@@ -93,8 +93,11 @@ impl TNotification with onclick(self : Self) -> EventHandler {
 
 ///|
 /// [Notification.onclick](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onclick)
-impl TNotification with set_onclick(self : Self, onclick : EventHandler) -> Unit {
-  notification_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(onclick))
+impl TNotification with set_onclick(self : Self, onclick : (Event) -> JsValue) -> Unit {
+  notification_set_onclick_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onclick)),
+  )
 }
 
 ///|
@@ -105,8 +108,11 @@ impl TNotification with onshow(self : Self) -> EventHandler {
 
 ///|
 /// [Notification.onshow](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onshow)
-impl TNotification with set_onshow(self : Self, onshow : EventHandler) -> Unit {
-  notification_set_onshow_ffi(TJsValue::to_js(self), TJsValue::to_js(onshow))
+impl TNotification with set_onshow(self : Self, onshow : (Event) -> JsValue) -> Unit {
+  notification_set_onshow_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onshow)),
+  )
 }
 
 ///|
@@ -117,8 +123,11 @@ impl TNotification with onerror(self : Self) -> EventHandler {
 
 ///|
 /// [Notification.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onerror)
-impl TNotification with set_onerror(self : Self, onerror : EventHandler) -> Unit {
-  notification_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(onerror))
+impl TNotification with set_onerror(self : Self, onerror : (Event) -> JsValue) -> Unit {
+  notification_set_onerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onerror)),
+  )
 }
 
 ///|
@@ -129,8 +138,11 @@ impl TNotification with onclose(self : Self) -> EventHandler {
 
 ///|
 /// [Notification.onclose](https://developer.mozilla.org/en-US/docs/Web/API/Notification/onclose)
-impl TNotification with set_onclose(self : Self, onclose : EventHandler) -> Unit {
-  notification_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(onclose))
+impl TNotification with set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit {
+  notification_set_onclose_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onclose)),
+  )
 }
 
 ///|
