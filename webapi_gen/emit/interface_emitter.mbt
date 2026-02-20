@@ -182,11 +182,6 @@ fn is_float_or_double_type(t : @type_mapping.ArgMbtType) -> Bool {
 }
 
 ///|
-fn is_dictionary_type(t : @type_mapping.ArgMbtType) -> Bool {
-  t is Dictionary(_)
-}
-
-///|
 fn mbt_default_value(
   default_value : @parser.DefaultValue,
   arg_type : @type_mapping.ArgMbtType,
@@ -225,7 +220,8 @@ fn mbt_default_value(
     }
     Null => "JsValue::null()"
     EmptyObject =>
-      if find_union_option(arg_type, is_dictionary_type) is Some(t) {
+      if find_union_option(arg_type, @type_mapping.ArgMbtType::is_dictionary)
+        is Some(t) {
         "\{t.name()}::empty()"
       } else if arg_type is Union(_) {
         abort(
@@ -412,7 +408,7 @@ fn emit_attribute(
       js_name,
       original_name: attr.name,
       return_type: attr_type.name(),
-      is_enum_type: is_enum_return(attr_type),
+      is_enum_type: attr_type.is_enum(),
       is_valid_wasm_stub: is_wasm_valid_stub_type(attr_type),
     })
   } else {
@@ -420,7 +416,7 @@ fn emit_attribute(
       interface_name,
       original_name: attr.name,
       return_type: attr_type.name(),
-      is_enum_type: is_enum_return(attr_type),
+      is_enum_type: attr_type.is_enum(),
       is_valid_wasm_stub: is_wasm_valid_stub_type(attr_type),
     })
 

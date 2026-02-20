@@ -53,23 +53,6 @@ fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
 }
 
 ///|
-/// Check if a return type is String (needs special handling on wasm-gc).
-/// On wasm-gc with js-string builtins, String is (ref extern) (non-nullable)
-/// while wasm imports return externref (nullable). We use jsvalue_to_string()
-/// which goes through String? + unwrap to emit ref.as_non_null.
-fn is_string_return(type_ : @type_mapping.ArgMbtType) -> Bool {
-  type_ is Primitive("String")
-}
-
-///|
-/// Check if a return type is an Enum (needs special handling on wasm-gc).
-/// On wasm-gc, enums are GC types (not externref). JS returns a string (externref),
-/// so we need to convert via jsvalue_to_string + Enum::from().unwrap().
-fn is_enum_return(type_ : @type_mapping.ArgMbtType) -> Bool {
-  type_ is Enum(_)
-}
-
-///|
 fn is_array_return(type_name : String) -> Bool {
   type_name.has_prefix("Array[") && type_name.has_suffix("]")
 }

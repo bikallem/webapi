@@ -64,7 +64,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    is_enum=is_enum_return(self.return_type.type_),
+    is_enum=self.return_type.type_.is_enum(),
     "obj.\{self.webidl_name}(\{ffi_js_call_args})",
   )
 }
@@ -85,8 +85,8 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    is_string=is_string_return(self.return_type.type_),
-    is_enum=is_enum_return(self.return_type.type_),
+    is_string=self.return_type.type_.is_string(),
+    is_enum=self.return_type.type_.is_enum(),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.method_name,
@@ -172,7 +172,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    is_enum=is_enum_return(self.return_type.type_),
+    is_enum=self.return_type.type_.is_enum(),
     "\{self.js_name}.\{self.webidl_name}(\{ffi_js_args})",
   )
 }
@@ -193,8 +193,8 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    is_string=is_string_return(self.return_type.type_),
-    is_enum=is_enum_return(self.return_type.type_),
+    is_string=self.return_type.type_.is_string(),
+    is_enum=self.return_type.type_.is_enum(),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.method_name,
@@ -543,7 +543,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_js(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    is_enum=is_enum_return(self.return_type.type_),
+    is_enum=self.return_type.type_.is_enum(),
     js_expr,
   )
 }
@@ -564,8 +564,8 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
     is_void=ret_name == "Unit",
-    is_string=is_string_return(self.return_type.type_),
-    is_enum=is_enum_return(self.return_type.type_),
+    is_string=self.return_type.type_.is_string(),
+    is_enum=self.return_type.type_.is_enum(),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
     module_name,
     self.original_name,

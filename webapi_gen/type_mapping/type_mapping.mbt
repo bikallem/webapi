@@ -27,6 +27,21 @@ pub(all) struct UnionType {
 } derive(Show, ToJson, Eq, Hash)
 
 ///|
+pub fn ArgMbtType::is_string(self : ArgMbtType) -> Bool {
+  self is Primitive("String")
+}
+
+///|
+pub fn ArgMbtType::is_enum(self : ArgMbtType) -> Bool {
+  self is Enum(_)
+}
+
+///|
+pub fn ArgMbtType::is_dictionary(self : ArgMbtType) -> Bool {
+  self is Dictionary(_)
+}
+
+///|
 pub fn ArgMbtType::name(self : ArgMbtType) -> String {
   match self {
     Self => "Self"

@@ -123,34 +123,6 @@ test "is_wasm_valid_stub_type rejects Other unknown types" {
 }
 
 ///|
-test "is_string_return detects String primitive" {
-  inspect(
-    is_string_return(@type_mapping.ArgMbtType::Primitive("String")),
-    content="true",
-  )
-  inspect(
-    is_string_return(@type_mapping.ArgMbtType::Primitive("Int")),
-    content="false",
-  )
-  inspect(
-    is_string_return(@type_mapping.ArgMbtType::Other("String")),
-    content="false",
-  )
-}
-
-///|
-test "is_enum_return detects Enum type" {
-  inspect(
-    is_enum_return(@type_mapping.ArgMbtType::Enum("ScrollBehavior")),
-    content="true",
-  )
-  inspect(
-    is_enum_return(@type_mapping.ArgMbtType::Primitive("String")),
-    content="false",
-  )
-}
-
-///|
 test "is_array_return detects Array types" {
   inspect(is_array_return("Array[String]"), content="true")
   inspect(is_array_return("Array[DOMQuad]"), content="true")

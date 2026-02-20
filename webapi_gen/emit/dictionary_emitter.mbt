@@ -47,7 +47,7 @@ pub impl Emitter for DictionaryEmitter with emit(
       original_name: mem.name,
       return_type: return_type_name,
       is_optional: !mem.required,
-      is_enum_type: is_enum_return(mbt_type),
+      is_enum_type: mbt_type.is_enum(),
       is_valid_wasm_stub: is_wasm_valid_stub_type(mbt_type),
       is_primitive: mbt_type is Primitive(_),
     })
