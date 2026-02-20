@@ -55,7 +55,7 @@ fn main {
     )
   }
 
-  let callback = @webapi.ResizeObserverCallback::new(fn(entries, _observer) {
+  let observer = @webapi.ResizeObserver::new(fn(entries, _observer) {
     let lines : Array[String] = []
     lines.push("callback batch size: " + entries.length().to_string())
     for entry in entries {
@@ -69,25 +69,17 @@ fn main {
     }
     log.set_text_content(lines.join("\n"))
   })
-
-  let observer = @webapi.ResizeObserver::new(callback)
   observer.observe(panel)
 
-  grow_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      width += 30
-      apply_panel_style(panel, width)
-    }),
-  )
+  grow_btn.add_event_listener("click", fn(_event) {
+    width += 30
+    apply_panel_style(panel, width)
+  })
 
-  shrink_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      width = if width > 140 { width - 30 } else { width }
-      apply_panel_style(panel, width)
-    }),
-  )
+  shrink_btn.add_event_listener("click", fn(_event) {
+    width = if width > 140 { width - 30 } else { width }
+    apply_panel_style(panel, width)
+  })
 
   controls.append_child(grow_btn) |> ignore
   controls.append_child(shrink_btn) |> ignore

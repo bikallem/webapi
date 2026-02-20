@@ -6,7 +6,6 @@ using @webapi {
   type Console,
   type HTMLButtonElement,
   type HTMLDivElement,
-  type EventListener,
   document,
 }
 
@@ -18,7 +17,7 @@ fn make_button(label : String, on_click : () -> Unit) -> HTMLButtonElement {
   ..set_attribute(
     "style", "padding: 0.5em 1.2em; margin: 0.3em; font-size: 0.95em; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 4px;",
   )
-  .add_event_listener("click", EventListener::new(fn(_event) { on_click() }))
+  .add_event_listener("click", fn(_event) { on_click() })
   btn
 }
 

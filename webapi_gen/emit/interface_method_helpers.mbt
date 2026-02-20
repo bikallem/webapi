@@ -150,6 +150,12 @@ fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
       is_trait_ref_type(arg.type_)
     if arg.variadic {
       variadic_call_arg(arg_name, arg.type_)
+    } else if arg.type_ is @type_mapping.Callback(info) {
+      if arg.optional && arg.default_value is None {
+        "match \{arg_name} {\nSome(v) => TJsValue::to_js(\{info.ffi_name}(v))\nNone => JsValue::undefined()\n}"
+      } else {
+        "TJsValue::to_js(\{info.ffi_name}(\{arg_name}))"
+      }
     } else if is_union_or_trait {
       if arg.optional && arg.default_value is None {
         "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n}"

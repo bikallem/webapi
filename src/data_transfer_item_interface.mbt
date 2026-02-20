@@ -26,7 +26,7 @@ pub impl TDataTransferItem for DataTransferItem
 pub trait TDataTransferItem: TJsValue {
   kind(self : Self) -> String = _
   type_(self : Self) -> String = _
-  get_as_string(self : Self, _callback : FunctionStringCallback) -> Unit = _
+  get_as_string(self : Self, _callback : (String) -> Unit) -> Unit = _
   get_as_file(self : Self) -> File? = _
 }
 
@@ -46,11 +46,11 @@ impl TDataTransferItem with type_(self : Self) -> String {
 /// [DataTransferItem.getAsString](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsString)
 impl TDataTransferItem with get_as_string(
   self : Self,
-  _callback : FunctionStringCallback,
+  _callback : (String) -> Unit,
 ) -> Unit {
   data_transfer_item_get_as_string_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(_callback),
+    TJsValue::to_js(function_string_callback_ffi(_callback)),
   )
 }
 

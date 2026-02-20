@@ -59,15 +59,12 @@ fn main {
   ..set_attribute("id", "add-btn")
   ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em;")
   ..set_text_content("Add Item")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      item_count = item_count + 1
-      let li = create_item("Item " + item_count.to_string())
-      list.append_child(li) |> ignore
-      update_status()
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    item_count = item_count + 1
+    let li = create_item("Item " + item_count.to_string())
+    list.append_child(li) |> ignore
+    update_status()
+  })
 
   // Create "Remove Last" button
   let remove_btn : @webapi.HTMLButtonElement = @webapi.document
@@ -77,16 +74,13 @@ fn main {
   ..set_attribute("id", "remove-btn")
   ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em;")
   ..set_text_content("Remove Last")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      if list.has_child_nodes() {
-        let last = list.last_child()
-        list.remove_child(last) |> ignore
-        update_status()
-      }
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    if list.has_child_nodes() {
+      let last = list.last_child()
+      list.remove_child(last) |> ignore
+      update_status()
+    }
+  })
 
   // Create "Clone First" button
   let clone_btn : @webapi.HTMLButtonElement = @webapi.document
@@ -96,17 +90,14 @@ fn main {
   ..set_attribute("id", "clone-btn")
   ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em;")
   ..set_text_content("Clone First")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      if list.has_child_nodes() {
-        let first = list.first_child()
-        let cloned = first.clone_node(subtree=true)
-        list.append_child(cloned) |> ignore
-        update_status()
-      }
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    if list.has_child_nodes() {
+      let first = list.first_child()
+      let cloned = first.clone_node(subtree=true)
+      list.append_child(cloned) |> ignore
+      update_status()
+    }
+  })
 
   // Demonstrate getAttribute
   let heading_id = heading.get_attribute("id")

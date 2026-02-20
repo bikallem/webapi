@@ -25,11 +25,11 @@ pub impl TIntersectionObserver for IntersectionObserver
 
 ///|
 pub fn IntersectionObserver::new(
-  callback : IntersectionObserverCallback,
+  callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit,
   options? : IntersectionObserverInit = IntersectionObserverInit::empty(),
 ) -> IntersectionObserver {
   intersection_observer_new_ffi(
-    TJsValue::to_js(callback),
+    TJsValue::to_js(intersection_observer_callback_ffi(callback)),
     TJsValue::to_js(options),
   )
 }

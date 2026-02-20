@@ -55,21 +55,15 @@ fn main {
   .set_text_content("Outer")
 
   // Add click listeners to demonstrate bubbling
-  outer.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let current = log_div.text_content()
-      log_div.set_text_content(current + "\nClicked: outer")
-    }),
-  )
+  outer.add_event_listener("click", fn(_event) {
+    let current = log_div.text_content()
+    log_div.set_text_content(current + "\nClicked: outer")
+  })
 
-  inner.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let current = log_div.text_content()
-      log_div.set_text_content(current + "\nClicked: inner")
-    }),
-  )
+  inner.add_event_listener("click", fn(_event) {
+    let current = log_div.text_content()
+    log_div.set_text_content(current + "\nClicked: inner")
+  })
 
   // Append inner to outer
   outer.append_child(outer_label) |> ignore
@@ -86,13 +80,10 @@ fn main {
   )
   .set_text_content("Log Custom")
 
-  custom_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let current = log_div.text_content()
-      log_div.set_text_content(current + "\nCustom: hello")
-    }),
-  )
+  custom_btn.add_event_listener("click", fn(_event) {
+    let current = log_div.text_content()
+    log_div.set_text_content(current + "\nCustom: hello")
+  })
 
   // Create "Click Once" button - demonstrates once-fire pattern
   let once_btn : @webapi.HTMLButtonElement = @webapi.document
@@ -106,16 +97,13 @@ fn main {
   .set_text_content("Click Once")
 
   let mut once_fired = 0
-  once_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      if once_fired == 0 {
-        once_fired = 1
-        let current = log_div.text_content()
-        log_div.set_text_content(current + "\nOnce clicked")
-      }
-    }),
-  )
+  once_btn.add_event_listener("click", fn(_event) {
+    if once_fired == 0 {
+      once_fired = 1
+      let current = log_div.text_content()
+      log_div.set_text_content(current + "\nOnce clicked")
+    }
+  })
 
   // Build the DOM tree
   let children : Array[&@webapi.TNode] = [

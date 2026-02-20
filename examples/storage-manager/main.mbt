@@ -23,10 +23,7 @@ fn main {
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 1em 0;")
   .set_text_content("Get Estimate")
 
-  estimate_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) { do_estimate() }),
-  )
+  estimate_btn.add_event_listener("click", fn(_event) { do_estimate() })
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()

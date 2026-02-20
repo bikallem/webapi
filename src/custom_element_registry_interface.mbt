@@ -85,11 +85,11 @@ pub trait TCustomElementRegistry: TJsValue {
   define_(
     self : Self,
     name : String,
-    constructor_ : CustomElementConstructor,
+    constructor_ : () -> HTMLElement,
     options? : ElementDefinitionOptions,
   ) -> Unit = _
   get(self : Self, name : String) -> CustomElementRegistryGet = _
-  get_name(self : Self, constructor_ : CustomElementConstructor) -> String? = _
+  get_name(self : Self, constructor_ : () -> HTMLElement) -> String? = _
   when_defined(self : Self, name : String) -> JsPromise[
     CustomElementConstructor,
   ] = _
@@ -102,13 +102,13 @@ pub trait TCustomElementRegistry: TJsValue {
 impl TCustomElementRegistry with define_(
   self : Self,
   name : String,
-  constructor_ : CustomElementConstructor,
+  constructor_ : () -> HTMLElement,
   options? : ElementDefinitionOptions = ElementDefinitionOptions::empty(),
 ) -> Unit {
   custom_element_registry_define_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-    TJsValue::to_js(constructor_),
+    TJsValue::to_js(custom_element_constructor_ffi(constructor_)),
     TJsValue::to_js(options),
   )
 }
@@ -123,11 +123,11 @@ impl TCustomElementRegistry with get(self : Self, name : String) -> CustomElemen
 /// [CustomElementRegistry.getName](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/getName)
 impl TCustomElementRegistry with get_name(
   self : Self,
-  constructor_ : CustomElementConstructor,
+  constructor_ : () -> HTMLElement,
 ) -> String? {
   let result = custom_element_registry_get_name_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(constructor_),
+    TJsValue::to_js(custom_element_constructor_ffi(constructor_)),
   )
   if JsValue::is_null(result) {
     None

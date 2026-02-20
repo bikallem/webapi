@@ -71,79 +71,73 @@ fn main {
   .set_text_content("Disconnect")
 
   // Connect handler
-  connect_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      match ws.val {
-        Some(s) =>
-          if s.ready_state() == @webapi.WEB_SOCKET_CONNECTING ||
-            s.ready_state() == @webapi.WEB_SOCKET_OPEN {
-            return
-          }
-        _ => ()
-      }
-      let url = url_input.value()
-      update_status("Status: Connecting...")
-      let socket = @webapi.WebSocket::new(url)
-      ws.val = Some(socket)
-      socket.set_onopen(
-        @webapi.EventHandlerNonNull::new(fn(_e) {
-          update_status(
-            "Status: Connected (readyState=" +
-            socket.ready_state().to_string() +
-            ")",
-          )
-          log_message("Connected! Sending test message...")
-          socket.send("Hello from MoonBit!")
-          @webapi.JsValue::undefined()
-        }),
-      )
-      socket.set_onmessage(
-        @webapi.EventHandlerNonNull::new(fn(e) {
-          let msg_event : @webapi.MessageEvent = e.into()
-          let data = msg_event.data().as_string()
-          log_message("Received: " + data)
-          @webapi.JsValue::undefined()
-        }),
-      )
-      socket.set_onclose(
-        @webapi.EventHandlerNonNull::new(fn(e) {
-          let close_event : @webapi.CloseEvent = e.into()
-          update_status(
-            "Status: Disconnected (code=" + close_event.code().to_string() + ")",
-          )
-          log_message("Connection closed")
-          ws.val = None
-          @webapi.JsValue::undefined()
-        }),
-      )
-      socket.set_onerror(
-        @webapi.EventHandlerNonNull::new(fn(_e) {
-          update_status("Status: Error")
-          log_message("Connection error")
-          @webapi.JsValue::undefined()
-        }),
-      )
-    }),
-  )
+  connect_btn.add_event_listener("click", fn(_event) {
+    match ws.val {
+      Some(s) =>
+        if s.ready_state() == @webapi.WEB_SOCKET_CONNECTING ||
+          s.ready_state() == @webapi.WEB_SOCKET_OPEN {
+          return
+        }
+      _ => ()
+    }
+    let url = url_input.value()
+    update_status("Status: Connecting...")
+    let socket = @webapi.WebSocket::new(url)
+    ws.val = Some(socket)
+    socket.set_onopen(
+      @webapi.EventHandlerNonNull::new(fn(_e) {
+        update_status(
+          "Status: Connected (readyState=" +
+          socket.ready_state().to_string() +
+          ")",
+        )
+        log_message("Connected! Sending test message...")
+        socket.send("Hello from MoonBit!")
+        @webapi.JsValue::undefined()
+      }),
+    )
+    socket.set_onmessage(
+      @webapi.EventHandlerNonNull::new(fn(e) {
+        let msg_event : @webapi.MessageEvent = e.into()
+        let data = msg_event.data().as_string()
+        log_message("Received: " + data)
+        @webapi.JsValue::undefined()
+      }),
+    )
+    socket.set_onclose(
+      @webapi.EventHandlerNonNull::new(fn(e) {
+        let close_event : @webapi.CloseEvent = e.into()
+        update_status(
+          "Status: Disconnected (code=" + close_event.code().to_string() + ")",
+        )
+        log_message("Connection closed")
+        ws.val = None
+        @webapi.JsValue::undefined()
+      }),
+    )
+    socket.set_onerror(
+      @webapi.EventHandlerNonNull::new(fn(_e) {
+        update_status("Status: Error")
+        log_message("Connection error")
+        @webapi.JsValue::undefined()
+      }),
+    )
+  })
 
   // Disconnect handler
-  disconnect_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      match ws.val {
-        Some(s) =>
-          if s.ready_state() == @webapi.WEB_SOCKET_CONNECTING ||
-            s.ready_state() == @webapi.WEB_SOCKET_OPEN {
-            s.close()
-            update_status("Status: Closing...")
-          } else {
-            log_message("No active connection")
-          }
-        _ => log_message("No active connection")
-      }
-    }),
-  )
+  disconnect_btn.add_event_listener("click", fn(_event) {
+    match ws.val {
+      Some(s) =>
+        if s.ready_state() == @webapi.WEB_SOCKET_CONNECTING ||
+          s.ready_state() == @webapi.WEB_SOCKET_OPEN {
+          s.close()
+          update_status("Status: Closing...")
+        } else {
+          log_message("No active connection")
+        }
+      _ => log_message("No active connection")
+    }
+  })
 
   // Build DOM
   let app = doc.get_element_by_id("app").unwrap()

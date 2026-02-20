@@ -61,34 +61,28 @@ fn main {
   .set_text_content("Stopped")
 
   // Start handler
-  start_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      if not(running) {
-        running = true
-        interval_status.set_text_content("Running")
-        let handler = function_to_handler(
-          @webapi.Function::new(fn(_args) {
-            update_counter()
-            @webapi.JsValue::undefined()
-          }),
-        )
-        interval_id = @webapi.window.set_interval(handler, timeout=500, [])
-      }
-    }),
-  )
+  start_btn.add_event_listener("click", fn(_event) {
+    if not(running) {
+      running = true
+      interval_status.set_text_content("Running")
+      let handler = function_to_handler(
+        @webapi.Function::new(fn(_args) {
+          update_counter()
+          @webapi.JsValue::undefined()
+        }),
+      )
+      interval_id = @webapi.window.set_interval(handler, timeout=500, [])
+    }
+  })
 
   // Stop handler
-  stop_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      if running {
-        running = false
-        @webapi.window.clear_interval(id=interval_id)
-        interval_status.set_text_content("Stopped")
-      }
-    }),
-  )
+  stop_btn.add_event_listener("click", fn(_event) {
+    if running {
+      running = false
+      @webapi.window.clear_interval(id=interval_id)
+      interval_status.set_text_content("Stopped")
+    }
+  })
 
   // --- setTimeout section ---
   let timeout_heading = doc.create_element("h2")
@@ -108,19 +102,16 @@ fn main {
   ..set_attribute("style", "margin: 0.5em 0; font-weight: bold; color: green;")
   .set_text_content("")
 
-  delay_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      delay_msg.set_text_content("Waiting...")
-      let handler = function_to_handler(
-        @webapi.Function::new(fn(_args) {
-          delay_msg.set_text_content("Hello from setTimeout!")
-          @webapi.JsValue::undefined()
-        }),
-      )
-      @webapi.window.set_timeout(handler, timeout=1000, []) |> ignore
-    }),
-  )
+  delay_btn.add_event_listener("click", fn(_event) {
+    delay_msg.set_text_content("Waiting...")
+    let handler = function_to_handler(
+      @webapi.Function::new(fn(_args) {
+        delay_msg.set_text_content("Hello from setTimeout!")
+        @webapi.JsValue::undefined()
+      }),
+    )
+    @webapi.window.set_timeout(handler, timeout=1000, []) |> ignore
+  })
 
   // Build DOM
   let app = doc.get_element_by_id("app").unwrap()

@@ -58,10 +58,7 @@ fn main {
 
   let types = ["touchstart", "touchmove", "touchend"]
   for event_type in types {
-    touch_area.add_event_listener(
-      event_type,
-      @webapi.EventListener::new(fn(event) { handle_touch(event) }),
-    )
+    touch_area.add_event_listener(event_type, fn(event) { handle_touch(event) })
   }
 
   let app = doc.get_element_by_id("app").unwrap()

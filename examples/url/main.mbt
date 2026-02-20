@@ -1,13 +1,7 @@
 ///|
 /// URL and URLSearchParams API Demo
 /// Demonstrates parsing URLs, reading components, and manipulating search parameters
-using @webapi {
-  document,
-  type URL,
-  type HTMLButtonElement,
-  type HTMLDivElement,
-  type EventListener,
-}
+using @webapi {document, type URL, type HTMLButtonElement, type HTMLDivElement}
 
 ///|
 /// Create a labeled display row: a span with the label and a div for the value.
@@ -143,14 +137,11 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1.2em; font-size: 1em; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 4px;",
   )
-  .add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      params.append("added", "true")
-      // Reflect the updated search string via the URL's search property
-      params_display.set_text_content(url.search())
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    params.append("added", "true")
+    // Reflect the updated search string via the URL's search property
+    params_display.set_text_content(url.search())
+  })
   container.append_child(add_btn) |> ignore
 
   // Section 4: Construct URL

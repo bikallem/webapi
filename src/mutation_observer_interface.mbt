@@ -22,8 +22,10 @@ pub fn[T : TMutationObserver] MutationObserver::into(
 pub impl TMutationObserver for MutationObserver
 
 ///|
-pub fn MutationObserver::new(callback : MutationCallback) -> MutationObserver {
-  mutation_observer_new_ffi(TJsValue::to_js(callback))
+pub fn MutationObserver::new(
+  callback : (Array[MutationRecord], MutationObserver) -> Unit,
+) -> MutationObserver {
+  mutation_observer_new_ffi(TJsValue::to_js(mutation_callback_ffi(callback)))
 }
 
 ///|

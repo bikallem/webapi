@@ -36,21 +36,18 @@ fn main {
   .set_text_content("Measure Computation")
   let timing_output : @webapi.HTMLDivElement = doc.create_element("div").into()
   timing_output.set_attribute("id", "timing-output")
-  timing_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let start = perf.now()
-      // Do some work
-      let mut sum = 0.0
-      for i = 0; i < 100000; i = i + 1 {
-        sum = sum + i.to_double() * 0.001
-      }
-      let elapsed = perf.now() - start
-      timing_output.set_text_content(
-        "Elapsed: " + elapsed.to_string() + " ms (sum=" + sum.to_string() + ")",
-      )
-    }),
-  )
+  timing_btn.add_event_listener("click", fn(_event) {
+    let start = perf.now()
+    // Do some work
+    let mut sum = 0.0
+    for i = 0; i < 100000; i = i + 1 {
+      sum = sum + i.to_double() * 0.001
+    }
+    let elapsed = perf.now() - start
+    timing_output.set_text_content(
+      "Elapsed: " + elapsed.to_string() + " ms (sum=" + sum.to_string() + ")",
+    )
+  })
 
   // Elapsed since origin
   let entries_list : @webapi.HTMLDivElement = doc.create_element("div").into()

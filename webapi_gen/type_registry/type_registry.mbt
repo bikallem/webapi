@@ -18,6 +18,7 @@ pub struct TypeRegistry {
   typedef_names : @hashset.HashSet[String]
   union_typedef_names : @hashset.HashSet[String]
   callback_names : @hashset.HashSet[String]
+  mut callback_defs : Map[String, @parser.CallbackFunctionDefinition]
 } derive(Show, ToJson)
 
 ///|
@@ -31,11 +32,15 @@ pub fn TypeRegistry::new(
     typedef_names: @hashset.new(),
     union_typedef_names: @hashset.new(),
     callback_names: @hashset.new(),
+    callback_defs: {},
   }
   for def in definitions {
     match def.definition {
       CallbackInterface(cbi) => registry.callback_names.add(cbi.name)
-      CallbackFunction(cbf) => registry.callback_names.add(cbf.name)
+      CallbackFunction(cbf) => {
+        registry.callback_names.add(cbf.name)
+        registry.callback_defs[cbf.name] = cbf
+      }
       Typedef(td) => {
         registry.typedef_names.add(td.name)
         if td.type_ is Union(_) {
@@ -123,6 +128,24 @@ pub fn TypeRegistry::is_callback(self : TypeRegistry, name : String) -> Bool {
 }
 
 ///|
+/// Set callback definitions from flattened IDL (includes CallbackInterface → CallbackFunction conversions).
+pub fn TypeRegistry::set_callback_defs(
+  self : TypeRegistry,
+  defs : Map[String, @parser.CallbackFunctionDefinition],
+) -> Unit {
+  self.callback_defs = defs
+}
+
+///|
+/// Get callback function definition by name, if available.
+pub fn TypeRegistry::get_callback_def(
+  self : TypeRegistry,
+  name : String,
+) -> @parser.CallbackFunctionDefinition? {
+  self.callback_defs.get(name)
+}
+
+///|
 test "TypeRegistry::contains checks all type categories" {
   let reg : TypeRegistry = {
     interface_names: @hashset.from_array(["Element"]),
@@ -131,6 +154,7 @@ test "TypeRegistry::contains checks all type categories" {
     typedef_names: @hashset.from_array(["DOMString"]),
     union_typedef_names: @hashset.from_array(["HeadersInit"]),
     callback_names: @hashset.from_array(["EventListener"]),
+    callback_defs: {},
   }
   inspect(reg.contains("Element"), content="true")
   inspect(reg.contains("EventInit"), content="true")

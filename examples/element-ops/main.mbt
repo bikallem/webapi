@@ -70,17 +70,14 @@ fn main {
   ..set_attribute("id", "clone-btn")
   ..set_attribute("style", btn_style)
   ..set_text_content("Clone")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      counter = counter + 1
-      let clone : @webapi.Element = template.clone_node(subtree=true).into()
-      clone.set_text_content("Clone " + counter.to_string())
-      clone.set_attribute("data-index", counter.to_string())
-      container.append_child(clone) |> ignore
-      update_count(container, clone_count)
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    counter = counter + 1
+    let clone : @webapi.Element = template.clone_node(subtree=true).into()
+    clone.set_text_content("Clone " + counter.to_string())
+    clone.set_attribute("data-index", counter.to_string())
+    container.append_child(clone) |> ignore
+    update_count(container, clone_count)
+  })
 
   // --- Read Attrs button ---
   let read_attrs_btn = document.create_element("button")
@@ -88,20 +85,17 @@ fn main {
   ..set_attribute("id", "read-attrs-btn")
   ..set_attribute("style", btn_style)
   ..set_text_content("Read Attrs")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let type_val = match template.get_attribute("data-type") {
-        Some(v) => v
-        None => "(none)"
-      }
-      let index_val = match template.get_attribute("data-index") {
-        Some(v) => v
-        None => "(none)"
-      }
-      attr_display.set_text_content("type=" + type_val + ", index=" + index_val)
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let type_val = match template.get_attribute("data-type") {
+      Some(v) => v
+      None => "(none)"
+    }
+    let index_val = match template.get_attribute("data-index") {
+      Some(v) => v
+      None => "(none)"
+    }
+    attr_display.set_text_content("type=" + type_val + ", index=" + index_val)
+  })
 
   // --- Set Attr button ---
   let set_attr_btn = document.create_element("button")
@@ -109,13 +103,10 @@ fn main {
   ..set_attribute("id", "set-attr-btn")
   ..set_attribute("style", btn_style)
   ..set_text_content("Set Attr")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      template.set_attribute("data-status", "modified")
-      attr_display.set_text_content("data-status set to \"modified\"")
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    template.set_attribute("data-status", "modified")
+    attr_display.set_text_content("data-status set to \"modified\"")
+  })
 
   // --- Has Attr? button ---
   let has_attr_btn = document.create_element("button")
@@ -123,13 +114,10 @@ fn main {
   ..set_attribute("id", "has-attr-btn")
   ..set_attribute("style", btn_style)
   ..set_text_content("Has Attr?")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let result = template.has_attribute("data-status")
-      has_result.set_text_content(result.to_string())
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let result = template.has_attribute("data-status")
+    has_result.set_text_content(result.to_string())
+  })
 
   // --- Insert Before button ---
   let insert_btn = document.create_element("button")
@@ -137,24 +125,21 @@ fn main {
   ..set_attribute("id", "insert-btn")
   ..set_attribute("style", btn_style)
   ..set_text_content("Insert Before")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let new_elem = document.create_element("div")
-      new_elem.set_text_content("Inserted")
-      new_elem.class_list().add(["inserted"])
-      new_elem.set_attribute(
-        "style", "padding: 0.5em; margin: 0.5em 0; background: #d1fae5; border: 1px solid #10b981; border-radius: 4px;",
-      )
-      if container.has_child_nodes() {
-        let first = container.first_child()
-        container.insert_before(new_elem, first) |> ignore
-      } else {
-        container.append_child(new_elem) |> ignore
-      }
-      update_count(container, clone_count)
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let new_elem = document.create_element("div")
+    new_elem.set_text_content("Inserted")
+    new_elem.class_list().add(["inserted"])
+    new_elem.set_attribute(
+      "style", "padding: 0.5em; margin: 0.5em 0; background: #d1fae5; border: 1px solid #10b981; border-radius: 4px;",
+    )
+    if container.has_child_nodes() {
+      let first = container.first_child()
+      container.insert_before(new_elem, first) |> ignore
+    } else {
+      container.append_child(new_elem) |> ignore
+    }
+    update_count(container, clone_count)
+  })
 
   // --- Remove Last button ---
   let remove_last_btn = document.create_element("button")
@@ -162,16 +147,13 @@ fn main {
   ..set_attribute("id", "remove-last-btn")
   ..set_attribute("style", btn_style)
   ..set_text_content("Remove Last")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      if container.has_child_nodes() {
-        let last : @webapi.Element = container.last_child().into()
-        last.remove()
-        update_count(container, clone_count)
-      }
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    if container.has_child_nodes() {
+      let last : @webapi.Element = container.last_child().into()
+      last.remove()
+      update_count(container, clone_count)
+    }
+  })
 
   // --- Build the DOM tree ---
   let app = document.get_element_by_id("app").unwrap()

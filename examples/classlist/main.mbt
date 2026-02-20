@@ -6,7 +6,6 @@ using @webapi {
   type HTMLDivElement,
   type HTMLButtonElement,
   type DOMTokenList,
-  type EventListener,
 }
 
 ///|
@@ -68,14 +67,11 @@ fn main {
   ..set_attribute("id", "add-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
   ..set_text_content("Add highlight")
-  .add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let cl = target.class_list()
-      cl.add(["highlight"])
-      update_status(cl, status)
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let cl = target.class_list()
+    cl.add(["highlight"])
+    update_status(cl, status)
+  })
   btn_container.append_child(add_btn) |> ignore
 
   // "Remove highlight" button
@@ -84,14 +80,11 @@ fn main {
   ..set_attribute("id", "remove-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
   ..set_text_content("Remove highlight")
-  .add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let cl = target.class_list()
-      cl.remove(["highlight"])
-      update_status(cl, status)
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let cl = target.class_list()
+    cl.remove(["highlight"])
+    update_status(cl, status)
+  })
   btn_container.append_child(remove_btn) |> ignore
 
   // "Toggle active" button
@@ -100,14 +93,11 @@ fn main {
   ..set_attribute("id", "toggle-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
   ..set_text_content("Toggle active")
-  .add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let cl = target.class_list()
-      let _ = cl.toggle("active")
-      update_status(cl, status)
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let cl = target.class_list()
+    let _ = cl.toggle("active")
+    update_status(cl, status)
+  })
   btn_container.append_child(toggle_btn) |> ignore
 
   // "Replace box->hidden" button
@@ -116,14 +106,11 @@ fn main {
   ..set_attribute("id", "replace-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
   ..set_text_content("Replace box\u{2192}hidden")
-  .add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let cl = target.class_list()
-      let _ = cl.replace("box", "hidden")
-      update_status(cl, status)
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let cl = target.class_list()
+    let _ = cl.replace("box", "hidden")
+    update_status(cl, status)
+  })
   btn_container.append_child(replace_btn) |> ignore
 
   // "Has highlight?" button
@@ -132,13 +119,10 @@ fn main {
   ..set_attribute("id", "has-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
   ..set_text_content("Has highlight?")
-  .add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let cl = target.class_list()
-      let result = cl.contains("highlight")
-      has_result.set_text_content(result.to_string())
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    let cl = target.class_list()
+    let result = cl.contains("highlight")
+    has_result.set_text_content(result.to_string())
+  })
   btn_container.append_child(has_btn) |> ignore
 }

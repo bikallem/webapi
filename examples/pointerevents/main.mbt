@@ -25,30 +25,27 @@ fn main {
   .set_text_content("Pointer info: move pointer over the area above")
 
   // Listen for pointermove
-  pointer_area.add_event_listener(
-    "pointermove",
-    @webapi.EventListener::new(fn(event) {
-      let pe : @webapi.PointerEvent = event.into()
-      let id = pe.pointer_id()
-      let ptr_type = pe.pointer_type()
-      let x = pe.client_x()
-      let y = pe.client_y()
-      let pressure = pe.pressure()
-      pointer_info.set_text_content(
-        "Pointer ID: " +
-        id.to_string() +
-        "\nType: " +
-        ptr_type +
-        "\nPosition: (" +
-        x.to_string() +
-        ", " +
-        y.to_string() +
-        ")" +
-        "\nPressure: " +
-        pressure.to_string(),
-      )
-    }),
-  )
+  pointer_area.add_event_listener("pointermove", fn(event) {
+    let pe : @webapi.PointerEvent = event.into()
+    let id = pe.pointer_id()
+    let ptr_type = pe.pointer_type()
+    let x = pe.client_x()
+    let y = pe.client_y()
+    let pressure = pe.pressure()
+    pointer_info.set_text_content(
+      "Pointer ID: " +
+      id.to_string() +
+      "\nType: " +
+      ptr_type +
+      "\nPosition: (" +
+      x.to_string() +
+      ", " +
+      y.to_string() +
+      ")" +
+      "\nPressure: " +
+      pressure.to_string(),
+    )
+  })
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()

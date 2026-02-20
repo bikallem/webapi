@@ -44,20 +44,17 @@ fn main {
   .set_text_content("Read Blob as Text")
   let text_output : @webapi.HTMLDivElement = doc.create_element("div").into()
   text_output.set_attribute("id", "text-output")
-  read_text_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let reader = @webapi.FileReader::new()
-      reader.set_onload(
-        @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
-          let result : String = reader.result().into()
-          text_output.set_text_content(result)
-          @webapi.JsValue::undefined()
-        }),
-      )
-      reader.read_as_text(blob)
-    }),
-  )
+  read_text_btn.add_event_listener("click", fn(_event) {
+    let reader = @webapi.FileReader::new()
+    reader.set_onload(
+      @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
+        let result : String = reader.result().into()
+        text_output.set_text_content(result)
+        @webapi.JsValue::undefined()
+      }),
+    )
+    reader.read_as_text(blob)
+  })
 
   // Read as data URL button
   let read_url_btn : @webapi.HTMLButtonElement = doc
@@ -70,20 +67,17 @@ fn main {
   url_output
   ..set_attribute("id", "url-output")
   .set_attribute("style", "word-break: break-all;")
-  read_url_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let reader = @webapi.FileReader::new()
-      reader.set_onload(
-        @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
-          let result : String = reader.result().into()
-          url_output.set_text_content(result)
-          @webapi.JsValue::undefined()
-        }),
-      )
-      reader.read_as_data_url(blob)
-    }),
-  )
+  read_url_btn.add_event_listener("click", fn(_event) {
+    let reader = @webapi.FileReader::new()
+    reader.set_onload(
+      @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
+        let result : String = reader.result().into()
+        url_output.set_text_content(result)
+        @webapi.JsValue::undefined()
+      }),
+    )
+    reader.read_as_data_url(blob)
+  })
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [

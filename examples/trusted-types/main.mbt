@@ -17,12 +17,13 @@ fn main {
   // Create a policy
   let policy = tt.create_policy(
     "myPolicy",
-    policy_options=@webapi.TrustedTypePolicyOptions::new(
-      create_html=@webapi.CreateHTMLCallback::new(fn(input, _args) {
-        // Simple sanitizer: escape angle brackets
-        input.replace(old="<", new="&lt;").replace(old=">", new="&gt;")
-      }),
-    ),
+    policy_options=@webapi.TrustedTypePolicyOptions::new(create_html=fn(
+      input,
+      _args,
+    ) {
+      // Simple sanitizer: escape angle brackets
+      input.replace(old="<", new="&lt;").replace(old=">", new="&gt;")
+    }),
   )
 
   // Policy name

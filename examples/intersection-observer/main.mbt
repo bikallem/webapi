@@ -55,23 +55,22 @@ fn main {
   container.append_child(spacer_bottom) |> ignore
 
   // Set up IntersectionObserver
-  let callback = @webapi.IntersectionObserverCallback::new(fn(
-    entries,
-    _observer,
-  ) {
-    let visible : Array[String] = []
-    for entry in entries {
-      if entry.is_intersecting() {
-        visible.push(entry.target().text_content())
-      }
-    }
-    if visible.length() > 0 {
-      log.set_text_content("Visible: " + visible.join(", "))
-    }
-  })
   let root : @webapi.Element = @webapi.TJsValue::to_js(container).into()
   let options = @webapi.IntersectionObserverInit::new(root~, threshold=0.5)
-  let observer = @webapi.IntersectionObserver::new(callback, options~)
+  let observer = @webapi.IntersectionObserver::new(
+    fn(entries, _observer) {
+      let visible : Array[String] = []
+      for entry in entries {
+        if entry.is_intersecting() {
+          visible.push(entry.target().text_content())
+        }
+      }
+      if visible.length() > 0 {
+        log.set_text_content("Visible: " + visible.join(", "))
+      }
+    },
+    options~,
+  )
 
   // Observe all boxes
   let boxes = container.query_selector_all(".box")

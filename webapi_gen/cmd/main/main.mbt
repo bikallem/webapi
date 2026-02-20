@@ -254,6 +254,7 @@ fn main {
       log_skipped,
       dictionary_member_injection=config.dictionary_member_injection,
     )
+    type_registry.set_callback_defs(flattened.callbacks)
     println("Flattened \{flattened.interfaces.length()} interfaces")
 
     // Create output directory if it doesn't exist

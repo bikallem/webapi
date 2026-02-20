@@ -15,16 +15,25 @@ pub impl FromJsAny for UnderlyingSource with from_js_any(value : JsAny) -> Under
 
 ///|
 pub fn UnderlyingSource::new(
-  start? : UnderlyingSourceStartCallback,
-  pull? : UnderlyingSourcePullCallback,
-  cancel? : UnderlyingSourceCancelCallback,
+  start? : (ReadableStreamController) -> JsValue,
+  pull? : (ReadableStreamController) -> JsPromise[JsValue],
+  cancel? : (JsValue) -> JsPromise[JsValue],
   type_? : ReadableStreamType,
   auto_allocate_chunk_size? : UInt64,
 ) -> UnderlyingSource {
   underlying_source_ffi(
-    opt_to_js(start),
-    opt_to_js(pull),
-    opt_to_js(cancel),
+    match start {
+      Some(v) => TJsValue::to_js(underlying_source_start_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match pull {
+      Some(v) => TJsValue::to_js(underlying_source_pull_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match cancel {
+      Some(v) => TJsValue::to_js(underlying_source_cancel_callback_ffi(v))
+      None => JsValue::undefined()
+    },
     opt_to_js(type_),
     opt_to_js(auto_allocate_chunk_size),
   )

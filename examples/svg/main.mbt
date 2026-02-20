@@ -60,32 +60,26 @@ fn main {
   bbox_btn..set_attribute("id", "bbox-btn").set_text_content("Get Circle BBox")
   let bbox_output : @webapi.HTMLDivElement = doc.create_element("div").into()
   bbox_output.set_attribute("id", "bbox-output")
-  bbox_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let bbox = circle.get_b_box()
-      let bx = @webapi.TDOMRectReadOnly::x(bbox).to_string()
-      let by = @webapi.TDOMRectReadOnly::y(bbox).to_string()
-      let bw = @webapi.TDOMRectReadOnly::width(bbox).to_string()
-      let bh = @webapi.TDOMRectReadOnly::height(bbox).to_string()
-      bbox_output.set_text_content(
-        "BBox: x=" + bx + ", y=" + by + ", w=" + bw + ", h=" + bh,
-      )
-    }),
-  )
+  bbox_btn.add_event_listener("click", fn(_event) {
+    let bbox = circle.get_b_box()
+    let bx = @webapi.TDOMRectReadOnly::x(bbox).to_string()
+    let by = @webapi.TDOMRectReadOnly::y(bbox).to_string()
+    let bw = @webapi.TDOMRectReadOnly::width(bbox).to_string()
+    let bh = @webapi.TDOMRectReadOnly::height(bbox).to_string()
+    bbox_output.set_text_content(
+      "BBox: x=" + bx + ", y=" + by + ", w=" + bw + ", h=" + bh,
+    )
+  })
 
   // Color button
   let color_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
     .into()
   color_btn..set_attribute("id", "color-btn").set_text_content("Change Colors")
-  color_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      circle.set_attribute("fill", "#2ecc71")
-      rect.set_attribute("fill", "#9b59b6")
-    }),
-  )
+  color_btn.add_event_listener("click", fn(_event) {
+    circle.set_attribute("fill", "#2ecc71")
+    rect.set_attribute("fill", "#9b59b6")
+  })
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [

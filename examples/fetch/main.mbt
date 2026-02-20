@@ -69,13 +69,10 @@ fn main {
   app.append_child(container) |> ignore
 
   // Fetch button handler
-  fetch_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let url = url_input.value()
-      do_fetch(url)
-    }),
-  )
+  fetch_btn.add_event_listener("click", fn(_event) {
+    let url = url_input.value()
+    do_fetch(url)
+  })
 }
 
 ///|

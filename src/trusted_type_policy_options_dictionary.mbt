@@ -17,14 +17,23 @@ pub impl FromJsAny for TrustedTypePolicyOptions with from_js_any(value : JsAny) 
 
 ///|
 pub fn TrustedTypePolicyOptions::new(
-  create_html? : CreateHTMLCallback,
-  create_script? : CreateScriptCallback,
-  create_script_url? : CreateScriptURLCallback,
+  create_html? : (String, JsValue) -> String,
+  create_script? : (String, JsValue) -> String,
+  create_script_url? : (String, JsValue) -> String,
 ) -> TrustedTypePolicyOptions {
   trusted_type_policy_options_ffi(
-    opt_to_js(create_html),
-    opt_to_js(create_script),
-    opt_to_js(create_script_url),
+    match create_html {
+      Some(v) => TJsValue::to_js(create_html_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match create_script {
+      Some(v) => TJsValue::to_js(create_script_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match create_script_url {
+      Some(v) => TJsValue::to_js(create_script_url_callback_ffi(v))
+      None => JsValue::undefined()
+    },
   )
 }
 

@@ -23,9 +23,15 @@ pub impl TPerformanceObserver for PerformanceObserver
 
 ///|
 pub fn PerformanceObserver::new(
-  callback : PerformanceObserverCallback,
+  callback : (
+    PerformanceObserverEntryList,
+    PerformanceObserver,
+    PerformanceObserverCallbackOptions,
+  ) -> Unit,
 ) -> PerformanceObserver {
-  performance_observer_new_ffi(TJsValue::to_js(callback))
+  performance_observer_new_ffi(
+    TJsValue::to_js(performance_observer_callback_ffi(callback)),
+  )
 }
 
 ///|

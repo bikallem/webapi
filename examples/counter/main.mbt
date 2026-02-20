@@ -34,13 +34,10 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      count = count - 1
-      update_display()
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    count = count - 1
+    update_display()
+  })
 
   // Create increment button
   let increment_btn = @webapi.document.create_element("button")
@@ -49,13 +46,10 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      count = count + 1
-      update_display()
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    count = count + 1
+    update_display()
+  })
 
   // Create reset button
   let reset_btn = @webapi.document.create_element("button")
@@ -64,13 +58,10 @@ fn main {
   ..set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin: 0 0.25em;",
   )
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      count = 0
-      update_display()
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    count = 0
+    update_display()
+  })
 
   // Build the DOM tree  
   let app = @webapi.document.get_element_by_id("app").unwrap()

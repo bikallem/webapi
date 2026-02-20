@@ -27,8 +27,8 @@ pub impl TEventTarget for MediaQueryList
 pub trait TMediaQueryList: TEventTarget {
   media(self : Self) -> CSSOMString = _
   matches(self : Self) -> Bool = _
-  add_listener(self : Self, callback : EventListener) -> Unit = _
-  remove_listener(self : Self, callback : EventListener) -> Unit = _
+  add_listener(self : Self, callback : (Event) -> Unit) -> Unit = _
+  remove_listener(self : Self, callback : (Event) -> Unit) -> Unit = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : EventHandler) -> Unit = _
 }
@@ -47,19 +47,22 @@ impl TMediaQueryList with matches(self : Self) -> Bool {
 
 ///|
 /// [MediaQueryList.addListener](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/addListener)
-impl TMediaQueryList with add_listener(self : Self, callback : EventListener) -> Unit {
+impl TMediaQueryList with add_listener(self : Self, callback : (Event) -> Unit) -> Unit {
   media_query_list_add_listener_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(callback),
+    TJsValue::to_js(event_listener_ffi(callback)),
   )
 }
 
 ///|
 /// [MediaQueryList.removeListener](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/removeListener)
-impl TMediaQueryList with remove_listener(self : Self, callback : EventListener) -> Unit {
+impl TMediaQueryList with remove_listener(
+  self : Self,
+  callback : (Event) -> Unit,
+) -> Unit {
   media_query_list_remove_listener_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(callback),
+    TJsValue::to_js(event_listener_ffi(callback)),
   )
 }
 

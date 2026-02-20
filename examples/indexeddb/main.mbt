@@ -99,122 +99,89 @@ fn main {
   let open_request = factory.open("webapi-example-db")
 
   // Create object store on first open / version upgrade
-  open_request.add_event_listener(
-    "upgradeneeded",
-    @webapi.EventListener::new(fn(_event) {
-      let db : @webapi.IDBDatabase = open_request.result().into()
-      db.create_object_store("items") |> ignore
-    }),
-  )
+  open_request.add_event_listener("upgradeneeded", fn(_event) {
+    let db : @webapi.IDBDatabase = open_request.result().into()
+    db.create_object_store("items") |> ignore
+  })
 
   // Database ready
-  open_request.add_event_listener(
-    "success",
-    @webapi.EventListener::new(fn(_event) {
-      let db : @webapi.IDBDatabase = open_request.result().into()
-      let version = db.version()
-      status_el.set_text_content("Database ready (v\{version})")
+  open_request.add_event_listener("success", fn(_event) {
+    let db : @webapi.IDBDatabase = open_request.result().into()
+    let version = db.version()
+    status_el.set_text_content("Database ready (v\{version})")
 
-      // Put handler
-      put_btn.add_event_listener(
-        "click",
-        @webapi.EventListener::new(fn(_event) {
-          let key = key_input.value()
-          let value = value_input.value()
-          if key == "" {
-            result_el.set_text_content("Error: key is required")
-            return
-          }
-          let tx = db.transaction(
-            "items",
-            mode=@webapi.IDBTransactionMode::Readwrite,
-          )
-          let store = tx.object_store("items")
-          let req = store.put(
-            @webapi.TJsValue::to_js(value),
-            key=@webapi.TJsValue::to_js(key),
-          )
-          req.add_event_listener(
-            "success",
-            @webapi.EventListener::new(fn(_event) {
-              result_el.set_text_content("Put: " + key + " = " + value)
-            }),
-          )
-        }),
+    // Put handler
+    put_btn.add_event_listener("click", fn(_event) {
+      let key = key_input.value()
+      let value = value_input.value()
+      if key == "" {
+        result_el.set_text_content("Error: key is required")
+        return
+      }
+      let tx = db.transaction(
+        "items",
+        mode=@webapi.IDBTransactionMode::Readwrite,
       )
+      let store = tx.object_store("items")
+      let req = store.put(
+        @webapi.TJsValue::to_js(value),
+        key=@webapi.TJsValue::to_js(key),
+      )
+      req.add_event_listener("success", fn(_event) {
+        result_el.set_text_content("Put: " + key + " = " + value)
+      })
+    })
 
-      // Get handler
-      get_btn.add_event_listener(
-        "click",
-        @webapi.EventListener::new(fn(_event) {
-          let key = key_input.value()
-          let tx = db.transaction(
-            "items",
-            mode=@webapi.IDBTransactionMode::Readonly,
-          )
-          let store = tx.object_store("items")
-          let req = store.get(@webapi.TJsValue::to_js(key))
-          req.add_event_listener(
-            "success",
-            @webapi.EventListener::new(fn(_event) {
-              let val = req.result()
-              if val.is_null() {
-                result_el.set_text_content("Not found: " + key)
-              } else {
-                let str = val.to_string()
-                result_el.set_text_content("Found: " + key + " = " + str)
-              }
-            }),
-          )
-        }),
+    // Get handler
+    get_btn.add_event_listener("click", fn(_event) {
+      let key = key_input.value()
+      let tx = db.transaction(
+        "items",
+        mode=@webapi.IDBTransactionMode::Readonly,
       )
+      let store = tx.object_store("items")
+      let req = store.get(@webapi.TJsValue::to_js(key))
+      req.add_event_listener("success", fn(_event) {
+        let val = req.result()
+        if val.is_null() {
+          result_el.set_text_content("Not found: " + key)
+        } else {
+          let str = val.to_string()
+          result_el.set_text_content("Found: " + key + " = " + str)
+        }
+      })
+    })
 
-      // Delete handler
-      delete_btn.add_event_listener(
-        "click",
-        @webapi.EventListener::new(fn(_event) {
-          let key = key_input.value()
-          let tx = db.transaction(
-            "items",
-            mode=@webapi.IDBTransactionMode::Readwrite,
-          )
-          let store = tx.object_store("items")
-          let req = store.delete(@webapi.TJsValue::to_js(key))
-          req.add_event_listener(
-            "success",
-            @webapi.EventListener::new(fn(_event) {
-              result_el.set_text_content("Deleted: " + key)
-            }),
-          )
-        }),
+    // Delete handler
+    delete_btn.add_event_listener("click", fn(_event) {
+      let key = key_input.value()
+      let tx = db.transaction(
+        "items",
+        mode=@webapi.IDBTransactionMode::Readwrite,
       )
+      let store = tx.object_store("items")
+      let req = store.delete(@webapi.TJsValue::to_js(key))
+      req.add_event_listener("success", fn(_event) {
+        result_el.set_text_content("Deleted: " + key)
+      })
+    })
 
-      // Clear handler
-      clear_btn.add_event_listener(
-        "click",
-        @webapi.EventListener::new(fn(_event) {
-          let tx = db.transaction(
-            "items",
-            mode=@webapi.IDBTransactionMode::Readwrite,
-          )
-          let store = tx.object_store("items")
-          let req = store.clear()
-          req.add_event_listener(
-            "success",
-            @webapi.EventListener::new(fn(_event) {
-              result_el.set_text_content("All items cleared")
-            }),
-          )
-        }),
+    // Clear handler
+    clear_btn.add_event_listener("click", fn(_event) {
+      let tx = db.transaction(
+        "items",
+        mode=@webapi.IDBTransactionMode::Readwrite,
       )
-    }),
-  )
+      let store = tx.object_store("items")
+      let req = store.clear()
+      req.add_event_listener("success", fn(_event) {
+        result_el.set_text_content("All items cleared")
+      })
+    })
+  })
 
   // Error handler
-  open_request.add_event_listener(
-    "error",
-    @webapi.EventListener::new(fn(_event) {
-      status_el.set_text_content("Error opening database")
-    }),
-  )
+  open_request.add_event_listener("error", fn(_event) {
+    status_el.set_text_content("Error opening database")
+  })
 }

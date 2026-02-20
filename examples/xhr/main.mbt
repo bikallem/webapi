@@ -42,43 +42,40 @@ fn main {
   ..set_attribute("id", "log")
   .set_attribute("style", "font-size: 0.85em; color: #666;")
 
-  send_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let xhr = @webapi.XMLHttpRequest::new()
-      log_div.set_text_content("")
-      status_div.set_text_content("Sending...")
-      body_div.set_text_content("")
-      let url = url_input.value()
-      xhr.set_onreadystatechange(
-        @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
-          let state = xhr.ready_state()
-          let state_name = if state == @webapi.XML_HTTP_REQUEST_UNSENT {
-            "UNSENT"
-          } else if state == @webapi.XML_HTTP_REQUEST_OPENED {
-            "OPENED"
-          } else if state == @webapi.XML_HTTP_REQUEST_HEADERS_RECEIVED {
-            "HEADERS_RECEIVED"
-          } else if state == @webapi.XML_HTTP_REQUEST_LOADING {
-            "LOADING"
-          } else {
-            "DONE"
-          }
-          let current = log_div.text_content()
-          log_div.set_text_content(current + "readyState: " + state_name + "\n")
-          if state == @webapi.XML_HTTP_REQUEST_DONE {
-            status_div.set_text_content(
-              "Status: " + xhr.status().to_string() + " " + xhr.status_text(),
-            )
-            body_div.set_text_content(xhr.response_text())
-          }
-          @webapi.JsValue::undefined()
-        }),
-      )
-      xhr.open("GET", url)
-      xhr.send()
-    }),
-  )
+  send_btn.add_event_listener("click", fn(_event) {
+    let xhr = @webapi.XMLHttpRequest::new()
+    log_div.set_text_content("")
+    status_div.set_text_content("Sending...")
+    body_div.set_text_content("")
+    let url = url_input.value()
+    xhr.set_onreadystatechange(
+      @webapi.EventHandlerNonNull::new(fn(_ev) -> @webapi.JsValue {
+        let state = xhr.ready_state()
+        let state_name = if state == @webapi.XML_HTTP_REQUEST_UNSENT {
+          "UNSENT"
+        } else if state == @webapi.XML_HTTP_REQUEST_OPENED {
+          "OPENED"
+        } else if state == @webapi.XML_HTTP_REQUEST_HEADERS_RECEIVED {
+          "HEADERS_RECEIVED"
+        } else if state == @webapi.XML_HTTP_REQUEST_LOADING {
+          "LOADING"
+        } else {
+          "DONE"
+        }
+        let current = log_div.text_content()
+        log_div.set_text_content(current + "readyState: " + state_name + "\n")
+        if state == @webapi.XML_HTTP_REQUEST_DONE {
+          status_div.set_text_content(
+            "Status: " + xhr.status().to_string() + " " + xhr.status_text(),
+          )
+          body_div.set_text_content(xhr.response_text())
+        }
+        @webapi.JsValue::undefined()
+      }),
+    )
+    xhr.open("GET", url)
+    xhr.send()
+  })
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [

@@ -36,22 +36,19 @@ fn main {
   .set_text_content("Schedule Idle Callback")
 
   // Button click handler
-  schedule_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      status_div.set_text_content("Scheduled...")
-      time_div.set_text_content("")
-      let callback = @webapi.IdleRequestCallback::new(fn(deadline) {
-        let remaining = deadline.time_remaining()
-        let did_timeout = deadline.did_timeout()
-        status_div.set_text_content("Callback fired!")
-        time_div.set_text_content(
-          "timeRemaining: \{remaining}ms | didTimeout: \{did_timeout}",
-        )
-      })
-      @webapi.window.request_idle_callback(callback) |> ignore
-    }),
-  )
+  schedule_btn.add_event_listener("click", fn(_event) {
+    status_div.set_text_content("Scheduled...")
+    time_div.set_text_content("")
+    @webapi.window.request_idle_callback(fn(deadline) {
+      let remaining = deadline.time_remaining()
+      let did_timeout = deadline.did_timeout()
+      status_div.set_text_content("Callback fired!")
+      time_div.set_text_content(
+        "timeRemaining: \{remaining}ms | didTimeout: \{did_timeout}",
+      )
+    })
+    |> ignore
+  })
 
   // Build DOM
   let app = doc.get_element_by_id("app").unwrap()

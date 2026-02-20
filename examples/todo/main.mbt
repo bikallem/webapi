@@ -8,7 +8,6 @@ using @webapi {
   type HTMLButtonElement,
   type HTMLUListElement,
   type HTMLLIElement,
-  type EventListener,
   type Storage,
 }
 
@@ -42,7 +41,11 @@ fn update_status(status : HTMLDivElement, empty_state : HTMLDivElement) -> Unit 
   let total = todos.length()
   let done = todos.fold(init=0, fn(acc, todo) {
     let (_, is_done, _) = todo
-    if is_done { acc + 1 } else { acc }
+    if is_done {
+      acc + 1
+    } else {
+      acc
+    }
   })
   status.set_text_content(
     "Total: " + total.to_string() + " | Completed: " + done.to_string(),
@@ -112,45 +115,39 @@ fn append_todo_to_dom(
   ..set_text_content("Delete")
   .set_attribute("style", "padding: 0.35em 0.6em; font-size: 0.9em;")
 
-  checkbox.add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let checked = checkbox.checked()
-      match
-        todos.search_by(fn(todo) {
-          let (id, _, _) = todo
-          id == todo_id
-        }) {
-        Some(pos) => {
-          let (_, _, current_text) = todos[pos]
-          todos[pos] = (todo_id, checked, current_text)
-          apply_done_style(checked, item, label)
-          save_todos(storage)
-          update_status(status, empty_state)
-        }
-        None => ()
+  checkbox.add_event_listener("click", fn(_event) {
+    let checked = checkbox.checked()
+    match
+      todos.search_by(fn(todo) {
+        let (id, _, _) = todo
+        id == todo_id
+      }) {
+      Some(pos) => {
+        let (_, _, current_text) = todos[pos]
+        todos[pos] = (todo_id, checked, current_text)
+        apply_done_style(checked, item, label)
+        save_todos(storage)
+        update_status(status, empty_state)
       }
-    }),
-  )
+      None => ()
+    }
+  })
 
-  delete_btn.add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      match
-        todos.search_by(fn(todo) {
-          let (id, _, _) = todo
-          id == todo_id
-        }) {
-        Some(pos) => {
-          todos.remove(pos) |> ignore
-          list.remove_child(item) |> ignore
-          save_todos(storage)
-          update_status(status, empty_state)
-        }
-        None => ()
+  delete_btn.add_event_listener("click", fn(_event) {
+    match
+      todos.search_by(fn(todo) {
+        let (id, _, _) = todo
+        id == todo_id
+      }) {
+      Some(pos) => {
+        todos.remove(pos) |> ignore
+        list.remove_child(item) |> ignore
+        save_todos(storage)
+        update_status(status, empty_state)
       }
-    }),
-  )
+      None => ()
+    }
+  })
 
   left.append_child(checkbox) |> ignore
   left.append_child(label) |> ignore
@@ -174,9 +171,7 @@ fn load_todos(
 
   if raw != "" {
     for encoded in raw.split(entry_sep) {
-      guard
-        !encoded.is_empty() && encoded.find(field_sep) is Some(split_idx)
-      else {
+      guard !encoded.is_empty() && encoded.find(field_sep) is Some(split_idx) else {
         continue
       }
       let done_flag = encoded.view(end_offset=split_idx).to_string()
@@ -260,33 +255,27 @@ fn main {
     "style", "list-style: none; padding: 0; margin: 0.75em 0 0 0; border-top: 1px solid #e4e7ec;",
   )
 
-  add_btn.add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let text = todo_input.value().trim().to_string()
-      if text != "" {
-        let todo_id = next_id[0]
-        next_id[0] = next_id[0] + 1
-        todos.push((todo_id, false, text))
-        append_todo_to_dom(
-          todo_id, false, text, list, status, empty_state, storage,
-        )
-        todo_input.set_value("")
-        save_todos(storage)
-        update_status(status, empty_state)
-      }
-    }),
-  )
-
-  clear_btn.add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      todos.clear()
-      list.set_text_content("")
+  add_btn.add_event_listener("click", fn(_event) {
+    let text = todo_input.value().trim().to_string()
+    if text != "" {
+      let todo_id = next_id[0]
+      next_id[0] = next_id[0] + 1
+      todos.push((todo_id, false, text))
+      append_todo_to_dom(
+        todo_id, false, text, list, status, empty_state, storage,
+      )
+      todo_input.set_value("")
       save_todos(storage)
       update_status(status, empty_state)
-    }),
-  )
+    }
+  })
+
+  clear_btn.add_event_listener("click", fn(_event) {
+    todos.clear()
+    list.set_text_content("")
+    save_todos(storage)
+    update_status(status, empty_state)
+  })
 
   let children : Array[&@webapi.TNode] = [
     heading, description, controls, status, empty_state, list,

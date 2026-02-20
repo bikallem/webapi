@@ -5,7 +5,6 @@ using @webapi {
   type HTMLDivElement,
   type HTMLButtonElement,
   type KeyboardEvent,
-  type EventListener,
 }
 
 ///|
@@ -130,43 +129,37 @@ fn main {
     for label in row {
       let button = make_button(label)
       let key = label
-      button.add_event_listener(
-        "click",
-        EventListener::new(fn(_event) {
-          match process_key(state, key) {
-            Some(new_state) => {
-              state = new_state
-              render_ui(display, status, state)
-            }
-            None => ()
+      button.add_event_listener("click", fn(_event) {
+        match process_key(state, key) {
+          Some(new_state) => {
+            state = new_state
+            render_ui(display, status, state)
           }
-        }),
-      )
+          None => ()
+        }
+      })
       row_el.append_child(button) |> ignore
     }
     buttons.append_child(row_el) |> ignore
   }
 
   // Keyboard support
-  document.add_event_listener(
-    "keydown",
-    EventListener::new(fn(event) {
-      let kb_event : KeyboardEvent = event.into()
-      match map_keyboard_key(kb_event.key()) {
-        Some(calc_key) => {
-          match process_key(state, calc_key) {
-            Some(new_state) => {
-              state = new_state
-              render_ui(display, status, state)
-            }
-            None => ()
+  document.add_event_listener("keydown", fn(event) {
+    let kb_event : KeyboardEvent = event.into()
+    match map_keyboard_key(kb_event.key()) {
+      Some(calc_key) => {
+        match process_key(state, calc_key) {
+          Some(new_state) => {
+            state = new_state
+            render_ui(display, status, state)
           }
-          kb_event.prevent_default()
+          None => ()
         }
-        None => ()
+        kb_event.prevent_default()
       }
-    }),
-  )
+      None => ()
+    }
+  })
 
   let children : Array[&@webapi.TNode] = [
     heading, subtitle, status, display, buttons,

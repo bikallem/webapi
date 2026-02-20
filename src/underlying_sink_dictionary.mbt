@@ -15,17 +15,29 @@ pub impl FromJsAny for UnderlyingSink with from_js_any(value : JsAny) -> Underly
 
 ///|
 pub fn UnderlyingSink::new(
-  start? : UnderlyingSinkStartCallback,
-  write? : UnderlyingSinkWriteCallback,
-  close? : UnderlyingSinkCloseCallback,
-  abort? : UnderlyingSinkAbortCallback,
+  start? : (WritableStreamDefaultController) -> JsValue,
+  write? : (JsValue, WritableStreamDefaultController) -> JsPromise[JsValue],
+  close? : () -> JsPromise[JsValue],
+  abort? : (JsValue) -> JsPromise[JsValue],
   type_? : JsValue,
 ) -> UnderlyingSink {
   underlying_sink_ffi(
-    opt_to_js(start),
-    opt_to_js(write),
-    opt_to_js(close),
-    opt_to_js(abort),
+    match start {
+      Some(v) => TJsValue::to_js(underlying_sink_start_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match write {
+      Some(v) => TJsValue::to_js(underlying_sink_write_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match close {
+      Some(v) => TJsValue::to_js(underlying_sink_close_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match abort {
+      Some(v) => TJsValue::to_js(underlying_sink_abort_callback_ffi(v))
+      None => JsValue::undefined()
+    },
     opt_to_js(type_),
   )
 }

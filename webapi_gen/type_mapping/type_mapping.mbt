@@ -1,13 +1,22 @@
 ///|
+/// Callback argument info for closure-typed method parameters.
+pub(all) struct CallbackArgInfo {
+  name : String // "EventListener"
+  closure_type : String // "(Event) -> Unit"
+  ffi_name : String // "event_listener_ffi"
+} derive(Show, ToJson, Eq, Hash)
+
+///|
 /// Argument MoonBit type representation
 pub(all) enum ArgMbtType {
   Self // Represents 'self' argument
-  Other(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef, callback
+  Other(String) // Resolved type other than interface or union, eg. dictionary, enum, typedef
   Primitive(String) // Primitive type, eg. Int, String, Bool
   Union(UnionType) // Union type represented by a trait, Bool indicates if 'undefined' is an option
   Interface(String) // Interface type represented by a trait
   Enum(String) // Enum type
   Dictionary(String) // Dictionary type
+  Callback(CallbackArgInfo) // Callback type accepting a closure directly
 } derive(Show, ToJson, Eq, Hash)
 
 ///|
@@ -22,6 +31,7 @@ pub fn ArgMbtType::name(self : ArgMbtType) -> String {
   match self {
     Self => "Self"
     Union(t) => t.name
+    Callback(info) => info.closure_type
     Other(t) | Interface(t) | Primitive(t) | Enum(t) | Dictionary(t) => t
   }
 }

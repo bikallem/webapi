@@ -115,6 +115,7 @@ test "InterfaceEmitter emits union typedef args as trait refs" {
 ///|
 test "InterfaceEmitter generates MoonBit code for interface" {
   let idl =
+    #| callback EventListener = undefined (Event event);
     #| dictionary EventListenerOptions {};
     #| dictionary AddEventListenerOptions {};
     #|
@@ -169,17 +170,17 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|/// [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
       #|pub trait TEventTarget: TJsValue {
-      #|  add_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetAddEventListenerOptions) -> Unit = _
-      #|  remove_event_listener(self : Self, type_ : String, callback : EventListener, options? : &TEventTargetRemoveEventListenerOptions) -> Unit = _
+      #|  add_event_listener(self : Self, type_ : String, callback : (Event) -> Unit, options? : &TEventTargetAddEventListenerOptions) -> Unit = _
+      #|  remove_event_listener(self : Self, type_ : String, callback : (Event) -> Unit, options? : &TEventTargetRemoveEventListenerOptions) -> Unit = _
       #|  dispatch_event(self : Self, event : Event) -> Bool = _
       #|}
       #|
       #|/// [EventTarget.addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
       #|impl TEventTarget with add_event_listener(self : Self, 
       #|type_ : String, 
-      #|callback : EventListener, 
+      #|callback : (Event) -> Unit, 
       #|options? : &TEventTargetAddEventListenerOptions) -> Unit {
-      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), match options {
+      #|  event_target_add_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(event_listener_ffi(callback)), match options {
       #|Some(v) => v.to_js()
       #|None => JsValue::undefined()
       #|})
@@ -188,9 +189,9 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|/// [EventTarget.removeEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)
       #|impl TEventTarget with remove_event_listener(self : Self, 
       #|type_ : String, 
-      #|callback : EventListener, 
+      #|callback : (Event) -> Unit, 
       #|options? : &TEventTargetRemoveEventListenerOptions) -> Unit {
-      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(callback), match options {
+      #|  event_target_remove_event_listener_ffi(TJsValue::to_js(self), TJsValue::to_js(type_), TJsValue::to_js(event_listener_ffi(callback)), match options {
       #|Some(v) => v.to_js()
       #|None => JsValue::undefined()
       #|})

@@ -20,8 +20,12 @@ pub fn[T : TResizeObserver] ResizeObserver::into(self : ResizeObserver) -> T = "
 pub impl TResizeObserver for ResizeObserver
 
 ///|
-pub fn ResizeObserver::new(callback : ResizeObserverCallback) -> ResizeObserver {
-  resize_observer_new_ffi(TJsValue::to_js(callback))
+pub fn ResizeObserver::new(
+  callback : (Array[ResizeObserverEntry], ResizeObserver) -> Unit,
+) -> ResizeObserver {
+  resize_observer_new_ffi(
+    TJsValue::to_js(resize_observer_callback_ffi(callback)),
+  )
 }
 
 ///|

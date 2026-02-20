@@ -27,7 +27,7 @@ fn read_chunk(
 ///|
 fn create_counting_stream() -> @webapi.ReadableStream {
   let mut i = 0
-  let pull = @webapi.UnderlyingSourcePullCallback::new(fn(controller) {
+  let source = @webapi.UnderlyingSource::new(pull=fn(controller) {
     let ctrl : @webapi.ReadableStreamDefaultController = controller.into()
     i = i + 1
     if i <= 4 {
@@ -37,7 +37,6 @@ fn create_counting_stream() -> @webapi.ReadableStream {
     }
     @webapi.JsPromise::resolve(@webapi.JsValue::undefined())
   })
-  let source = @webapi.UnderlyingSource::new(pull~)
   @webapi.ReadableStream::new(underlying_source=@webapi.TJsValue::to_js(source))
 }
 
@@ -78,28 +77,25 @@ fn main {
   )
   .set_text_content("Read Stream")
 
-  read_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      // Create a custom ReadableStream producing 4 string chunks
-      let stream = create_counting_stream()
-      status_el.set_text_content(
-        "Reading... (locked: " + stream.locked().to_string() + ")",
-      )
-      output_el.set_text_content("")
+  read_btn.add_event_listener("click", fn(_event) {
+    // Create a custom ReadableStream producing 4 string chunks
+    let stream = create_counting_stream()
+    status_el.set_text_content(
+      "Reading... (locked: " + stream.locked().to_string() + ")",
+    )
+    output_el.set_text_content("")
 
-      // Get a default reader (locks the stream)
-      let reader : @webapi.ReadableStreamDefaultReader = stream
-        .get_reader()
-        .into()
-      status_el.set_text_content(
-        "Reading... (locked: " + stream.locked().to_string() + ")",
-      )
+    // Get a default reader (locks the stream)
+    let reader : @webapi.ReadableStreamDefaultReader = stream
+      .get_reader()
+      .into()
+    status_el.set_text_content(
+      "Reading... (locked: " + stream.locked().to_string() + ")",
+    )
 
-      // Read all chunks
-      read_chunk(reader, output_el, status_el)
-    }),
-  )
+    // Read all chunks
+    read_chunk(reader, output_el, status_el)
+  })
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [

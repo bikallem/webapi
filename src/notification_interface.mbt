@@ -69,9 +69,14 @@ pub fn Notification::permission() -> NotificationPermission {
 ///|
 /// [Notification.requestPermission](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission)
 pub fn Notification::request_permission(
-  deprecated_callback? : NotificationPermissionCallback,
+  deprecated_callback? : (NotificationPermission) -> Unit,
 ) -> JsPromise[NotificationPermission] {
-  notification_request_permission_ffi(opt_to_js(deprecated_callback))
+  notification_request_permission_ffi(
+    match deprecated_callback {
+      Some(v) => TJsValue::to_js(notification_permission_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

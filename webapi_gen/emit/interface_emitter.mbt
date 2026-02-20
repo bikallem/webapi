@@ -34,6 +34,7 @@ fn to_trait_ref(
   match mbt_type {
     Interface(name) => Interface("&T\{name}")
     Union(union_type) => Union({ ..union_type, name: "&T\{union_type.name}" })
+    Callback(_) => mbt_type
     Other(name) =>
       if is_union_typedef {
         Other("&T\{name}")
@@ -62,6 +63,41 @@ fn method_args(
     )
     // Push any additional emits needed for the arg type, e.g. union arg traits
     emits.push_iter(arg_emits.iter())
+    // Convert callback-typed args to Callback variant so the method accepts a closure directly
+    let mbt_type = match mbt_type {
+      Other(name) =>
+        match type_registry.get_callback_def(name) {
+          Some(cb_def) => {
+            let cb_arg_types = cb_def.arguments.map(fn(a) {
+              let (t, _) = arg_mbt_type(
+                a.type_.type_,
+                name,
+                "",
+                a.name,
+                type_registry,
+              )
+              t.name()
+            })
+            let (cb_ret, _) = arg_mbt_type(
+              cb_def.return_type,
+              "",
+              "",
+              "",
+              type_registry,
+            )
+            let cb_args_str = cb_arg_types.join(", ")
+            let closure_type = "(\{cb_args_str}) -> \{cb_ret.name()}"
+            let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
+            @type_mapping.ArgMbtType::Callback(@type_mapping.CallbackArgInfo::{
+              name,
+              closure_type,
+              ffi_name,
+            })
+          }
+          None => mbt_type
+        }
+      _ => mbt_type
+    }
     let default_value = default_value.map(dv => mbt_default_value(dv, mbt_type))
     // On wasm-gc, JsValue::null() returns externref (nullable) which is
     // incompatible with non-nullable (ref extern) types like String, type

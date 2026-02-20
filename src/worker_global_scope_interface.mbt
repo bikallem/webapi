@@ -81,7 +81,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
     arguments : Array[&TJsValue],
   ) -> Int = _
   clear_interval(self : Self, id? : Int) -> Unit = _
-  queue_microtask(self : Self, callback : VoidFunction) -> Unit = _
+  queue_microtask(self : Self, callback : () -> Unit) -> Unit = _
   create_image_bitmap(
     self : Self,
     image : &TImageBitmapSource,
@@ -339,13 +339,10 @@ impl TWorkerGlobalScope with clear_interval(self : Self, id? : Int = (0 : Int)) 
 
 ///|
 /// [WorkerGlobalScope.queueMicrotask](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/queueMicrotask)
-impl TWorkerGlobalScope with queue_microtask(
-  self : Self,
-  callback : VoidFunction,
-) -> Unit {
+impl TWorkerGlobalScope with queue_microtask(self : Self, callback : () -> Unit) -> Unit {
   worker_global_scope_queue_microtask_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(callback),
+    TJsValue::to_js(void_function_ffi(callback)),
   )
 }
 

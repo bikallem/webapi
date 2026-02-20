@@ -42,7 +42,7 @@ pub trait TDedicatedWorkerGlobalScope: TWorkerGlobalScope {
     options? : StructuredSerializeOptions,
   ) -> Unit = _
   close(self : Self) -> Unit = _
-  request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
+  request_animation_frame(self : Self, callback : (DOMHighResTimeStamp) -> Unit) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
   onmessage(self : Self) -> EventHandler = _
   set_onmessage(self : Self, onmessage : EventHandler) -> Unit = _
@@ -94,11 +94,11 @@ impl TDedicatedWorkerGlobalScope with close(self : Self) -> Unit {
 /// [DedicatedWorkerGlobalScope.requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/requestAnimationFrame)
 impl TDedicatedWorkerGlobalScope with request_animation_frame(
   self : Self,
-  callback : FrameRequestCallback,
+  callback : (DOMHighResTimeStamp) -> Unit,
 ) -> UInt {
   dedicated_worker_global_scope_request_animation_frame_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(callback),
+    TJsValue::to_js(frame_request_callback_ffi(callback)),
   )
 }
 

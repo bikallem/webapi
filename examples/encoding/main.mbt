@@ -47,20 +47,15 @@ fn main {
   let encoder = @webapi.TextEncoder::new()
   let decoder = @webapi.TextDecoder::new()
 
-  encode_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let text = input.value()
-      let encoded = encoder.encode(input=text)
-      let len = utf8_byte_length(text)
-      let buf : @webapi.AllowSharedBufferSource = @webapi.TJsValue::to_js(
-        encoded,
-      ).into()
-      let decoded = decoder.decode(input=buf)
-      byte_length_div.set_text_content("Byte length: " + len.to_string())
-      decoded_text.set_text_content("Decoded: " + decoded)
-    }),
-  )
+  encode_btn.add_event_listener("click", fn(_event) {
+    let text = input.value()
+    let encoded = encoder.encode(input=text)
+    let len = utf8_byte_length(text)
+    let buf : @webapi.AllowSharedBufferSource = @webapi.TJsValue::to_js(encoded).into()
+    let decoded = decoder.decode(input=buf)
+    byte_length_div.set_text_content("Byte length: " + len.to_string())
+    decoded_text.set_text_content("Decoded: " + decoded)
+  })
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()

@@ -1,11 +1,6 @@
 ///|
 /// Examples gallery with hash-based URL routing.
-using @webapi {
-  document,
-  type Element,
-  type HTMLIFrameElement,
-  type EventListener,
-}
+using @webapi {document, type Element, type HTMLIFrameElement}
 
 ///|
 /// (display_name, dir_name, has_wasm)
@@ -198,8 +193,5 @@ fn main {
   navigate()
 
   // Listen for hash changes (back/forward)
-  @webapi.window.add_event_listener(
-    "hashchange",
-    EventListener::new(fn(_event) { navigate() }),
-  )
+  @webapi.window.add_event_listener("hashchange", fn(_event) { navigate() })
 }

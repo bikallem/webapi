@@ -19,14 +19,20 @@ pub impl FromJsAny for NavigationInterceptOptions with from_js_any(
 
 ///|
 pub fn NavigationInterceptOptions::new(
-  precommit_handler? : NavigationPrecommitHandler,
-  handler? : NavigationInterceptHandler,
+  precommit_handler? : (NavigationPrecommitController) -> JsPromise[JsValue],
+  handler? : () -> JsPromise[JsValue],
   focus_reset? : NavigationFocusReset,
   scroll? : NavigationScrollBehavior,
 ) -> NavigationInterceptOptions {
   navigation_intercept_options_ffi(
-    opt_to_js(precommit_handler),
-    opt_to_js(handler),
+    match precommit_handler {
+      Some(v) => TJsValue::to_js(navigation_precommit_handler_ffi(v))
+      None => JsValue::undefined()
+    },
+    match handler {
+      Some(v) => TJsValue::to_js(navigation_intercept_handler_ffi(v))
+      None => JsValue::undefined()
+    },
     opt_to_js(focus_reset),
     opt_to_js(scroll),
   )

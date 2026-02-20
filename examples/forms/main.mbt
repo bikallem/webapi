@@ -9,7 +9,6 @@ using @webapi {
   type HTMLButtonElement,
   type HTMLDivElement,
   type HTMLLabelElement,
-  type EventListener,
 }
 
 ///|
@@ -96,13 +95,10 @@ fn main {
   .set_text_content("")
 
   // Listen for input events on name input
-  name_input.add_event_listener(
-    "input",
-    EventListener::new(fn(_event) {
-      let val = name_input.value()
-      current_values.set_text_content("Current input: " + val)
-    }),
-  )
+  name_input.add_event_listener("input", fn(_event) {
+    let val = name_input.value()
+    current_values.set_text_content("Current input: " + val)
+  })
 
   // --- Validity status display ---
   let validity_status : HTMLDivElement = document.create_element("div").into()
@@ -136,25 +132,22 @@ fn main {
   .set_attribute(
     "style", "padding: 0.5em 1em; font-size: 1em; margin-right: 0.5em;",
   )
-  validate_btn.add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let valid = form.check_validity()
-      if valid {
-        validity_status
-        ..set_text_content("Valid")
-        .set_attribute(
-          "style", "margin-top: 1em; padding: 0.5em; font-weight: bold; min-height: 1.5em; color: green;",
-        )
-      } else {
-        validity_status
-        ..set_text_content("Invalid")
-        .set_attribute(
-          "style", "margin-top: 1em; padding: 0.5em; font-weight: bold; min-height: 1.5em; color: red;",
-        )
-      }
-    }),
-  )
+  validate_btn.add_event_listener("click", fn(_event) {
+    let valid = form.check_validity()
+    if valid {
+      validity_status
+      ..set_text_content("Valid")
+      .set_attribute(
+        "style", "margin-top: 1em; padding: 0.5em; font-weight: bold; min-height: 1.5em; color: green;",
+      )
+    } else {
+      validity_status
+      ..set_text_content("Invalid")
+      .set_attribute(
+        "style", "margin-top: 1em; padding: 0.5em; font-weight: bold; min-height: 1.5em; color: red;",
+      )
+    }
+  })
 
   let submit_btn : HTMLButtonElement = document.create_element("button").into()
   submit_btn
@@ -162,26 +155,23 @@ fn main {
   ..set_attribute("id", "submit-btn")
   ..set_type_("button")
   .set_attribute("style", "padding: 0.5em 1em; font-size: 1em;")
-  submit_btn.add_event_listener(
-    "click",
-    EventListener::new(fn(_event) {
-      let name_val = name_input.value()
-      let agreed = checkbox.checked()
-      let color_val = select.value()
-      let comment_val = textarea.value()
-      let agreed_str = if agreed { "true" } else { "false" }
-      output.set_text_content(
-        "Name: " +
-        name_val +
-        ", Agreed: " +
-        agreed_str +
-        ", Color: " +
-        color_val +
-        ", Comment: " +
-        comment_val,
-      )
-    }),
-  )
+  submit_btn.add_event_listener("click", fn(_event) {
+    let name_val = name_input.value()
+    let agreed = checkbox.checked()
+    let color_val = select.value()
+    let comment_val = textarea.value()
+    let agreed_str = if agreed { "true" } else { "false" }
+    output.set_text_content(
+      "Name: " +
+      name_val +
+      ", Agreed: " +
+      agreed_str +
+      ", Color: " +
+      color_val +
+      ", Comment: " +
+      comment_val,
+    )
+  })
 
   button_row.append_child(validate_btn) |> ignore
   button_row.append_child(submit_btn) |> ignore

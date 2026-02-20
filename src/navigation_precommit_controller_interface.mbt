@@ -29,7 +29,7 @@ pub impl TNavigationPrecommitController for NavigationPrecommitController
 /// [NavigationPrecommitController](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController) interface.
 pub trait TNavigationPrecommitController: TJsValue {
   redirect(self : Self, url : String, options? : NavigationNavigateOptions) -> Unit = _
-  add_handler(self : Self, handler : NavigationInterceptHandler) -> Unit = _
+  add_handler(self : Self, handler : () -> JsPromise[JsValue]) -> Unit = _
 }
 
 ///|
@@ -50,10 +50,10 @@ impl TNavigationPrecommitController with redirect(
 /// [NavigationPrecommitController.addHandler](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/addHandler)
 impl TNavigationPrecommitController with add_handler(
   self : Self,
-  handler : NavigationInterceptHandler,
+  handler : () -> JsPromise[JsValue],
 ) -> Unit {
   navigation_precommit_controller_add_handler_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(handler),
+    TJsValue::to_js(navigation_intercept_handler_ffi(handler)),
   )
 }

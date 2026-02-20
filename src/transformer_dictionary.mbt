@@ -15,18 +15,30 @@ pub impl FromJsAny for Transformer with from_js_any(value : JsAny) -> Transforme
 
 ///|
 pub fn Transformer::new(
-  start? : TransformerStartCallback,
-  transform? : TransformerTransformCallback,
-  flush? : TransformerFlushCallback,
-  cancel? : TransformerCancelCallback,
+  start? : (TransformStreamDefaultController) -> JsValue,
+  transform? : (JsValue, TransformStreamDefaultController) -> JsPromise[JsValue],
+  flush? : (TransformStreamDefaultController) -> JsPromise[JsValue],
+  cancel? : (JsValue) -> JsPromise[JsValue],
   readable_type? : JsValue,
   writable_type? : JsValue,
 ) -> Transformer {
   transformer_ffi(
-    opt_to_js(start),
-    opt_to_js(transform),
-    opt_to_js(flush),
-    opt_to_js(cancel),
+    match start {
+      Some(v) => TJsValue::to_js(transformer_start_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match transform {
+      Some(v) => TJsValue::to_js(transformer_transform_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match flush {
+      Some(v) => TJsValue::to_js(transformer_flush_callback_ffi(v))
+      None => JsValue::undefined()
+    },
+    match cancel {
+      Some(v) => TJsValue::to_js(transformer_cancel_callback_ffi(v))
+      None => JsValue::undefined()
+    },
     opt_to_js(readable_type),
     opt_to_js(writable_type),
   )

@@ -3758,7 +3758,7 @@ pub impl TJsValue for Int8Array
 #external
 pub type IntersectionObserver
 pub fn[T : TIntersectionObserver] IntersectionObserver::into(Self) -> T
-pub fn IntersectionObserver::new(IntersectionObserverCallback, options? : IntersectionObserverInit) -> Self
+pub fn IntersectionObserver::new((Array[IntersectionObserverEntry], Self) -> Unit, options? : IntersectionObserverInit) -> Self
 pub impl FromJsAny for IntersectionObserver
 pub impl TIntersectionObserver for IntersectionObserver
 pub impl TJsValue for IntersectionObserver
@@ -4172,7 +4172,7 @@ pub impl TJsValue for MutationCallback
 #external
 pub type MutationObserver
 pub fn[T : TMutationObserver] MutationObserver::into(Self) -> T
-pub fn MutationObserver::new(MutationCallback) -> Self
+pub fn MutationObserver::new((Array[MutationRecord], Self) -> Unit) -> Self
 pub impl FromJsAny for MutationObserver
 pub impl TJsValue for MutationObserver
 pub impl TMutationObserver for MutationObserver
@@ -4320,7 +4320,7 @@ pub type NavigationInterceptOptions
 pub fn NavigationInterceptOptions::empty() -> Self
 pub fn NavigationInterceptOptions::focus_reset(Self) -> NavigationFocusReset?
 pub fn NavigationInterceptOptions::handler(Self) -> NavigationInterceptHandler?
-pub fn NavigationInterceptOptions::new(precommit_handler? : NavigationPrecommitHandler, handler? : NavigationInterceptHandler, focus_reset? : NavigationFocusReset, scroll? : NavigationScrollBehavior) -> Self
+pub fn NavigationInterceptOptions::new(precommit_handler? : (NavigationPrecommitController) -> JsPromise[JsValue], handler? : () -> JsPromise[JsValue], focus_reset? : NavigationFocusReset, scroll? : NavigationScrollBehavior) -> Self
 pub fn NavigationInterceptOptions::precommit_handler(Self) -> NavigationPrecommitHandler?
 pub fn NavigationInterceptOptions::scroll(Self) -> NavigationScrollBehavior?
 pub impl FromJsAny for NavigationInterceptOptions
@@ -4487,7 +4487,7 @@ pub fn[T : TNotification] Notification::into(Self) -> T
 pub fn Notification::max_actions() -> UInt
 pub fn Notification::new(String, options? : NotificationOptions) -> Self
 pub fn Notification::permission() -> NotificationPermission
-pub fn Notification::request_permission(deprecated_callback? : NotificationPermissionCallback) -> JsPromise[NotificationPermission]
+pub fn Notification::request_permission(deprecated_callback? : (NotificationPermission) -> Unit) -> JsPromise[NotificationPermission]
 pub impl FromJsAny for Notification
 pub impl TEventTarget for Notification
 pub impl TJsValue for Notification
@@ -4782,7 +4782,7 @@ pub impl TPerformanceEntry for PerformanceEntry
 #external
 pub type PerformanceObserver
 pub fn[T : TPerformanceObserver] PerformanceObserver::into(Self) -> T
-pub fn PerformanceObserver::new(PerformanceObserverCallback) -> Self
+pub fn PerformanceObserver::new((PerformanceObserverEntryList, Self, PerformanceObserverCallbackOptions) -> Unit) -> Self
 pub fn PerformanceObserver::supported_entry_types() -> Array[String]
 pub impl FromJsAny for PerformanceObserver
 pub impl TJsValue for PerformanceObserver
@@ -5022,7 +5022,7 @@ pub impl TJsValue for PromiseRejectionEventInit
 pub type QueuingStrategy
 pub fn QueuingStrategy::empty() -> Self
 pub fn QueuingStrategy::high_water_mark(Self) -> Double?
-pub fn QueuingStrategy::new(high_water_mark? : Double, size? : QueuingStrategySize) -> Self
+pub fn QueuingStrategy::new(high_water_mark? : Double, size? : (JsValue) -> Double) -> Self
 pub fn QueuingStrategy::size(Self) -> QueuingStrategySize?
 pub impl FromJsAny for QueuingStrategy
 pub impl TJsValue for QueuingStrategy
@@ -5379,7 +5379,7 @@ pub impl Show for RequestRedirect
 #external
 pub type ResizeObserver
 pub fn[T : TResizeObserver] ResizeObserver::into(Self) -> T
-pub fn ResizeObserver::new(ResizeObserverCallback) -> Self
+pub fn ResizeObserver::new((Array[ResizeObserverEntry], Self) -> Unit) -> Self
 pub impl FromJsAny for ResizeObserver
 pub impl TJsValue for ResizeObserver
 pub impl TResizeObserver for ResizeObserver
@@ -6764,7 +6764,7 @@ pub type Transformer
 pub fn Transformer::cancel(Self) -> TransformerCancelCallback?
 pub fn Transformer::empty() -> Self
 pub fn Transformer::flush(Self) -> TransformerFlushCallback?
-pub fn Transformer::new(start? : TransformerStartCallback, transform? : TransformerTransformCallback, flush? : TransformerFlushCallback, cancel? : TransformerCancelCallback, readable_type? : JsValue, writable_type? : JsValue) -> Self
+pub fn Transformer::new(start? : (TransformStreamDefaultController) -> JsValue, transform? : (JsValue, TransformStreamDefaultController) -> JsPromise[JsValue], flush? : (TransformStreamDefaultController) -> JsPromise[JsValue], cancel? : (JsValue) -> JsPromise[JsValue], readable_type? : JsValue, writable_type? : JsValue) -> Self
 pub fn Transformer::readable_type(Self) -> JsValue?
 pub fn Transformer::start(Self) -> TransformerStartCallback?
 pub fn Transformer::transform(Self) -> TransformerTransformCallback?
@@ -6874,7 +6874,7 @@ pub fn TrustedTypePolicyOptions::create_html(Self) -> CreateHTMLCallback?
 pub fn TrustedTypePolicyOptions::create_script(Self) -> CreateScriptCallback?
 pub fn TrustedTypePolicyOptions::create_script_url(Self) -> CreateScriptURLCallback?
 pub fn TrustedTypePolicyOptions::empty() -> Self
-pub fn TrustedTypePolicyOptions::new(create_html? : CreateHTMLCallback, create_script? : CreateScriptCallback, create_script_url? : CreateScriptURLCallback) -> Self
+pub fn TrustedTypePolicyOptions::new(create_html? : (String, JsValue) -> String, create_script? : (String, JsValue) -> String, create_script_url? : (String, JsValue) -> String) -> Self
 pub impl FromJsAny for TrustedTypePolicyOptions
 pub impl TJsValue for TrustedTypePolicyOptions
 
@@ -6951,7 +6951,7 @@ pub type UnderlyingSink
 pub fn UnderlyingSink::abort(Self) -> UnderlyingSinkAbortCallback?
 pub fn UnderlyingSink::close(Self) -> UnderlyingSinkCloseCallback?
 pub fn UnderlyingSink::empty() -> Self
-pub fn UnderlyingSink::new(start? : UnderlyingSinkStartCallback, write? : UnderlyingSinkWriteCallback, close? : UnderlyingSinkCloseCallback, abort? : UnderlyingSinkAbortCallback, type_? : JsValue) -> Self
+pub fn UnderlyingSink::new(start? : (WritableStreamDefaultController) -> JsValue, write? : (JsValue, WritableStreamDefaultController) -> JsPromise[JsValue], close? : () -> JsPromise[JsValue], abort? : (JsValue) -> JsPromise[JsValue], type_? : JsValue) -> Self
 pub fn UnderlyingSink::start(Self) -> UnderlyingSinkStartCallback?
 pub fn UnderlyingSink::type_(Self) -> JsValue?
 pub fn UnderlyingSink::write(Self) -> UnderlyingSinkWriteCallback?
@@ -6987,7 +6987,7 @@ pub type UnderlyingSource
 pub fn UnderlyingSource::auto_allocate_chunk_size(Self) -> UInt64?
 pub fn UnderlyingSource::cancel(Self) -> UnderlyingSourceCancelCallback?
 pub fn UnderlyingSource::empty() -> Self
-pub fn UnderlyingSource::new(start? : UnderlyingSourceStartCallback, pull? : UnderlyingSourcePullCallback, cancel? : UnderlyingSourceCancelCallback, type_? : ReadableStreamType, auto_allocate_chunk_size? : UInt64) -> Self
+pub fn UnderlyingSource::new(start? : (ReadableStreamController) -> JsValue, pull? : (ReadableStreamController) -> JsPromise[JsValue], cancel? : (JsValue) -> JsPromise[JsValue], type_? : ReadableStreamType, auto_allocate_chunk_size? : UInt64) -> Self
 pub fn UnderlyingSource::pull(Self) -> UnderlyingSourcePullCallback?
 pub fn UnderlyingSource::start(Self) -> UnderlyingSourceStartCallback?
 pub fn UnderlyingSource::type_(Self) -> ReadableStreamType?
@@ -7979,9 +7979,9 @@ pub trait TCountQueuingStrategy : TJsValue {
 }
 
 pub trait TCustomElementRegistry : TJsValue {
-  define_(Self, String, CustomElementConstructor, options? : ElementDefinitionOptions) -> Unit
+  define_(Self, String, () -> HTMLElement, options? : ElementDefinitionOptions) -> Unit
   get(Self, String) -> CustomElementRegistryGet
-  get_name(Self, CustomElementConstructor) -> String?
+  get_name(Self, () -> HTMLElement) -> String?
   when_defined(Self, String) -> JsPromise[CustomElementConstructor]
   upgrade(Self, &TNode) -> Unit
   initialize(Self, &TNode) -> Unit
@@ -8235,7 +8235,7 @@ pub trait TDataTransfer : TJsValue {
 pub trait TDataTransferItem : TJsValue {
   kind(Self) -> String
   type_(Self) -> String
-  get_as_string(Self, FunctionStringCallback) -> Unit
+  get_as_string(Self, (String) -> Unit) -> Unit
   get_as_file(Self) -> File?
 }
 
@@ -8253,7 +8253,7 @@ pub trait TDedicatedWorkerGlobalScope : TWorkerGlobalScope {
   post_message(Self, JsValue, Array[JsValue]) -> Unit
   post_message_with_options(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
   close(Self) -> Unit
-  request_animation_frame(Self, FrameRequestCallback) -> UInt
+  request_animation_frame(Self, (Double) -> Unit) -> UInt
   cancel_animation_frame(Self, UInt) -> Unit
   onmessage(Self) -> EventHandlerNonNull
   set_onmessage(Self, EventHandlerNonNull) -> Unit
@@ -8289,8 +8289,8 @@ pub trait TDocument : TNode {
   create_attribute_ns(Self, String, String) -> Attr
   create_event(Self, String) -> Event
   create_range(Self) -> Range
-  create_node_iterator(Self, &TNode, what_to_show? : UInt, filter? : NodeFilter) -> NodeIterator
-  create_tree_walker(Self, &TNode, what_to_show? : UInt, filter? : NodeFilter) -> TreeWalker
+  create_node_iterator(Self, &TNode, what_to_show? : UInt, filter? : (Node) -> UInt) -> NodeIterator
+  create_tree_walker(Self, &TNode, what_to_show? : UInt, filter? : (Node) -> UInt) -> TreeWalker
   location(Self) -> Location
   domain(Self) -> String
   set_domain(Self, String) -> Unit
@@ -8383,9 +8383,9 @@ pub trait TDocument : TNode {
   move_before(Self, &TNode, &TNode) -> Unit
   query_selector(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
-  create_expression(Self, String, resolver? : XPathNSResolver) -> XPathExpression
+  create_expression(Self, String, resolver? : (String) -> String) -> XPathExpression
   create_ns_resolver(Self, &TNode) -> Node
-  evaluate(Self, String, &TNode, resolver? : XPathNSResolver, type_? : UInt, result? : &TXPathResult) -> XPathResult
+  evaluate(Self, String, &TNode, resolver? : (String) -> String, type_? : UInt, result? : &TXPathResult) -> XPathResult
   onabort(Self) -> EventHandlerNonNull
   set_onabort(Self, EventHandlerNonNull) -> Unit
   onauxclick(Self) -> EventHandlerNonNull
@@ -8936,8 +8936,8 @@ pub trait TEventSource : TEventTarget {
 }
 
 pub trait TEventTarget : TJsValue {
-  add_event_listener(Self, String, EventListener, options? : &TEventTargetAddEventListenerOptions) -> Unit
-  remove_event_listener(Self, String, EventListener, options? : &TEventTargetRemoveEventListenerOptions) -> Unit
+  add_event_listener(Self, String, (Event) -> Unit, options? : &TEventTargetAddEventListenerOptions) -> Unit
+  remove_event_listener(Self, String, (Event) -> Unit, options? : &TEventTargetRemoveEventListenerOptions) -> Unit
   dispatch_event(Self, &TEvent) -> Bool
 }
 
@@ -9252,7 +9252,7 @@ pub trait THTMLCanvasElement : THTMLElement {
   set_height(Self, UInt) -> Unit
   get_context(Self, String, options? : JsValue) -> RenderingContext?
   to_data_url(Self, type_? : String, quality? : JsValue) -> String
-  to_blob(Self, BlobCallback, type_? : String, quality? : JsValue) -> Unit
+  to_blob(Self, (Blob) -> Unit, type_? : String, quality? : JsValue) -> Unit
   transfer_control_to_offscreen(Self) -> OffscreenCanvas
 }
 
@@ -11059,8 +11059,8 @@ pub(open) trait TMediaProvider {
 pub trait TMediaQueryList : TEventTarget {
   media(Self) -> String
   matches(Self) -> Bool
-  add_listener(Self, EventListener) -> Unit
-  remove_listener(Self, EventListener) -> Unit
+  add_listener(Self, (Event) -> Unit) -> Unit
+  remove_listener(Self, (Event) -> Unit) -> Unit
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, EventHandlerNonNull) -> Unit
 }
@@ -11239,7 +11239,7 @@ pub trait TNavigationHistoryEntry : TEventTarget {
 
 pub trait TNavigationPrecommitController : TJsValue {
   redirect(Self, String, options? : NavigationNavigateOptions) -> Unit
-  add_handler(Self, NavigationInterceptHandler) -> Unit
+  add_handler(Self, () -> JsPromise[JsValue]) -> Unit
 }
 
 pub trait TNavigationTransition : TJsValue {
@@ -13194,7 +13194,7 @@ pub trait TWindow : TEventTarget {
   outer_height(Self) -> Int
   device_pixel_ratio(Self) -> Double
   get_selection(Self) -> Selection?
-  request_idle_callback(Self, IdleRequestCallback, options? : IdleRequestOptions) -> UInt
+  request_idle_callback(Self, (IdleDeadline) -> Unit, options? : IdleRequestOptions) -> UInt
   cancel_idle_callback(Self, UInt) -> Unit
   onabort(Self) -> EventHandlerNonNull
   set_onabort(Self, EventHandlerNonNull) -> Unit
@@ -13428,7 +13428,7 @@ pub trait TWindow : TEventTarget {
   clear_timeout(Self, id? : Int) -> Unit
   set_interval(Self, &TTimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
-  queue_microtask(Self, VoidFunction) -> Unit
+  queue_microtask(Self, () -> Unit) -> Unit
   create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   create_image_bitmap_cropped(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
@@ -13436,7 +13436,7 @@ pub trait TWindow : TEventTarget {
   performance(Self) -> Performance
   indexed_db(Self) -> IDBFactory
   trusted_types(Self) -> TrustedTypePolicyFactory
-  request_animation_frame(Self, FrameRequestCallback) -> UInt
+  request_animation_frame(Self, (Double) -> Unit) -> UInt
   cancel_animation_frame(Self, UInt) -> Unit
   session_storage(Self) -> Storage
   local_storage(Self) -> Storage
@@ -13485,7 +13485,7 @@ pub trait TWorkerGlobalScope : TEventTarget {
   clear_timeout(Self, id? : Int) -> Unit
   set_interval(Self, &TTimerHandler, timeout? : Int, Array[&TJsValue]) -> Int
   clear_interval(Self, id? : Int) -> Unit
-  queue_microtask(Self, VoidFunction) -> Unit
+  queue_microtask(Self, () -> Unit) -> Unit
   create_image_bitmap(Self, &TImageBitmapSource, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   create_image_bitmap_cropped(Self, &TImageBitmapSource, Int, Int, Int, Int, options? : ImageBitmapOptions) -> JsPromise[ImageBitmap]
   structured_clone(Self, JsValue, options? : StructuredSerializeOptions) -> JsValue
@@ -13629,9 +13629,9 @@ pub trait TXMLSerializer : TJsValue {
 }
 
 pub trait TXPathEvaluator : TJsValue {
-  create_expression(Self, String, resolver? : XPathNSResolver) -> XPathExpression
+  create_expression(Self, String, resolver? : (String) -> String) -> XPathExpression
   create_ns_resolver(Self, &TNode) -> Node
-  evaluate(Self, String, &TNode, resolver? : XPathNSResolver, type_? : UInt, result? : &TXPathResult) -> XPathResult
+  evaluate(Self, String, &TNode, resolver? : (String) -> String, type_? : UInt, result? : &TXPathResult) -> XPathResult
 }
 
 pub trait TXPathExpression : TJsValue {

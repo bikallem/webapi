@@ -105,42 +105,24 @@ fn main {
   }
 
   // Update state when animation finishes or is cancelled
-  animation.add_event_listener(
-    "finish",
-    @webapi.EventListener::new(fn(_event) { update_state() }),
-  )
-  animation.add_event_listener(
-    "cancel",
-    @webapi.EventListener::new(fn(_event) { update_state() }),
-  )
+  animation.add_event_listener("finish", fn(_event) { update_state() })
+  animation.add_event_listener("cancel", fn(_event) { update_state() })
 
   // Wire up button handlers
-  play_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      animation.play()
-      update_state()
-    }),
-  )
-  pause_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      animation.pause()
-      update_state()
-    }),
-  )
-  reverse_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      animation.reverse()
-      update_state()
-    }),
-  )
-  cancel_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      animation.cancel()
-      update_state()
-    }),
-  )
+  play_btn.add_event_listener("click", fn(_event) {
+    animation.play()
+    update_state()
+  })
+  pause_btn.add_event_listener("click", fn(_event) {
+    animation.pause()
+    update_state()
+  })
+  reverse_btn.add_event_listener("click", fn(_event) {
+    animation.reverse()
+    update_state()
+  })
+  cancel_btn.add_event_listener("click", fn(_event) {
+    animation.cancel()
+    update_state()
+  })
 }

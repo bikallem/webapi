@@ -52,18 +52,12 @@ fn main {
   )
   .set_text_content("Paste result will appear here")
 
-  copy_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let text = input.value()
-      do_copy(text)
-    }),
-  )
+  copy_btn.add_event_listener("click", fn(_event) {
+    let text = input.value()
+    do_copy(text)
+  })
 
-  paste_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) { do_paste() }),
-  )
+  paste_btn.add_event_listener("click", fn(_event) { do_paste() })
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()

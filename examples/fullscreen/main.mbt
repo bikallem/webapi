@@ -32,17 +32,14 @@ fn main {
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 1em 0;")
   .set_text_content("Toggle Fullscreen")
 
-  toggle_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let fs_el = doc.fullscreen_element()
-      if fs_el.is_null() {
-        target.request_fullscreen() |> ignore
-      } else {
-        doc.exit_fullscreen() |> ignore
-      }
-    }),
-  )
+  toggle_btn.add_event_listener("click", fn(_event) {
+    let fs_el = doc.fullscreen_element()
+    if fs_el.is_null() {
+      target.request_fullscreen() |> ignore
+    } else {
+      doc.exit_fullscreen() |> ignore
+    }
+  })
 
   // Build DOM
   let app = doc.get_element_by_id("app").unwrap()

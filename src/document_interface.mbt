@@ -190,13 +190,13 @@ pub trait TDocument: TNode {
     self : Self,
     root : &TNode,
     what_to_show? : UInt,
-    filter? : NodeFilter,
+    filter? : (Node) -> UInt,
   ) -> NodeIterator = _
   create_tree_walker(
     self : Self,
     root : &TNode,
     what_to_show? : UInt,
-    filter? : NodeFilter,
+    filter? : (Node) -> UInt,
   ) -> TreeWalker = _
   location(self : Self) -> Location = _
   domain(self : Self) -> String = _
@@ -306,14 +306,14 @@ pub trait TDocument: TNode {
   create_expression(
     self : Self,
     expression : String,
-    resolver? : XPathNSResolver,
+    resolver? : (String) -> String,
   ) -> XPathExpression = _
   create_ns_resolver(self : Self, node_resolver : &TNode) -> Node = _
   evaluate(
     self : Self,
     expression : String,
     context_node : &TNode,
-    resolver? : XPathNSResolver,
+    resolver? : (String) -> String,
     type_? : UInt,
     result? : &TXPathResult,
   ) -> XPathResult = _
@@ -775,13 +775,13 @@ impl TDocument with create_node_iterator(
   self : Self,
   root : &TNode,
   what_to_show? : UInt = (0xFFFFFFFF : UInt),
-  filter? : NodeFilter,
+  filter? : (Node) -> UInt = JsValue::null(),
 ) -> NodeIterator {
   document_create_node_iterator_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(root),
     TJsValue::to_js(what_to_show),
-    opt_to_js(filter),
+    TJsValue::to_js(node_filter_ffi(filter)),
   )
 }
 
@@ -791,13 +791,13 @@ impl TDocument with create_tree_walker(
   self : Self,
   root : &TNode,
   what_to_show? : UInt = (0xFFFFFFFF : UInt),
-  filter? : NodeFilter,
+  filter? : (Node) -> UInt = JsValue::null(),
 ) -> TreeWalker {
   document_create_tree_walker_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(root),
     TJsValue::to_js(what_to_show),
-    opt_to_js(filter),
+    TJsValue::to_js(node_filter_ffi(filter)),
   )
 }
 
@@ -1546,12 +1546,12 @@ impl TDocument with query_selector_all(self : Self, selectors : String) -> NodeL
 impl TDocument with create_expression(
   self : Self,
   expression : String,
-  resolver? : XPathNSResolver,
+  resolver? : (String) -> String = JsValue::null(),
 ) -> XPathExpression {
   document_create_expression_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(expression),
-    opt_to_js(resolver),
+    TJsValue::to_js(x_path_ns_resolver_ffi(resolver)),
   )
 }
 
@@ -1570,7 +1570,7 @@ impl TDocument with evaluate(
   self : Self,
   expression : String,
   context_node : &TNode,
-  resolver? : XPathNSResolver,
+  resolver? : (String) -> String = JsValue::null(),
   type_? : UInt = (0 : UInt),
   result? : &TXPathResult,
 ) -> XPathResult {
@@ -1578,7 +1578,7 @@ impl TDocument with evaluate(
     TJsValue::to_js(self),
     TJsValue::to_js(expression),
     TJsValue::to_js(context_node),
-    opt_to_js(resolver),
+    TJsValue::to_js(x_path_ns_resolver_ffi(resolver)),
     TJsValue::to_js(type_),
     opt_to_js(result),
   )

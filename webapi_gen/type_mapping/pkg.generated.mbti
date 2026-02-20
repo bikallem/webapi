@@ -31,12 +31,23 @@ pub(all) enum ArgMbtType {
   Interface(String)
   Enum(String)
   Dictionary(String)
+  Callback(CallbackArgInfo)
 }
 pub fn ArgMbtType::name(Self) -> String
 pub impl Eq for ArgMbtType
 pub impl Hash for ArgMbtType
 pub impl Show for ArgMbtType
 pub impl ToJson for ArgMbtType
+
+pub(all) struct CallbackArgInfo {
+  name : String
+  closure_type : String
+  ffi_name : String
+}
+pub impl Eq for CallbackArgInfo
+pub impl Hash for CallbackArgInfo
+pub impl Show for CallbackArgInfo
+pub impl ToJson for CallbackArgInfo
 
 pub enum EmitAux {
   UnionArgTrait(String)

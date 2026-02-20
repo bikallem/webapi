@@ -30,7 +30,7 @@ fn main {
   .set_text_content("Dimensions: --")
 
   // Set up ResizeObserver
-  let callback = @webapi.ResizeObserverCallback::new(fn(entries, _observer) {
+  let observer = @webapi.ResizeObserver::new(fn(entries, _observer) {
     for entry in entries {
       let rect = entry.content_rect()
       let w = rect.width().to_int()
@@ -40,7 +40,6 @@ fn main {
       )
     }
   })
-  let observer = @webapi.ResizeObserver::new(callback)
   observer.observe(textarea)
 
   let app = doc.get_element_by_id("app").unwrap()

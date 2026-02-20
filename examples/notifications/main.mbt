@@ -39,30 +39,24 @@ fn main {
   )
   .set_text_content("Show Notification")
 
-  request_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      // Use finally_ to avoid wasm-gc enum-in-promise issue with then().
-      // (js_any_cast can't convert externref to enum's i32 on wasm-gc)
-      @webapi.Notification::request_permission().finally_(fn() {
-        permission_status.set_text_content("Permission: " + perm_str())
-      })
-      |> ignore
-    }),
-  )
+  request_btn.add_event_listener("click", fn(_event) {
+    // Use finally_ to avoid wasm-gc enum-in-promise issue with then().
+    // (js_any_cast can't convert externref to enum's i32 on wasm-gc)
+    @webapi.Notification::request_permission().finally_(fn() {
+      permission_status.set_text_content("Permission: " + perm_str())
+    })
+    |> ignore
+  })
 
-  notify_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      if @webapi.Notification::permission() ==
-        @webapi.NotificationPermission::Granted {
-        let options = @webapi.NotificationOptions::new(
-          body="This notification was created using the Notifications API.",
-        )
-        @webapi.Notification::new("Hello from MoonBit!", options~) |> ignore
-      }
-    }),
-  )
+  notify_btn.add_event_listener("click", fn(_event) {
+    if @webapi.Notification::permission() ==
+      @webapi.NotificationPermission::Granted {
+      let options = @webapi.NotificationOptions::new(
+        body="This notification was created using the Notifications API.",
+      )
+      @webapi.Notification::new("Hello from MoonBit!", options~) |> ignore
+    }
+  })
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()

@@ -147,7 +147,7 @@ pub trait TWindow: TEventTarget {
   get_selection(self : Self) -> Selection? = _
   request_idle_callback(
     self : Self,
-    callback : IdleRequestCallback,
+    callback : (IdleDeadline) -> Unit,
     options? : IdleRequestOptions,
   ) -> UInt = _
   cancel_idle_callback(self : Self, handle : UInt) -> Unit = _
@@ -399,7 +399,7 @@ pub trait TWindow: TEventTarget {
     arguments : Array[&TJsValue],
   ) -> Int = _
   clear_interval(self : Self, id? : Int) -> Unit = _
-  queue_microtask(self : Self, callback : VoidFunction) -> Unit = _
+  queue_microtask(self : Self, callback : () -> Unit) -> Unit = _
   create_image_bitmap(
     self : Self,
     image : &TImageBitmapSource,
@@ -425,7 +425,7 @@ pub trait TWindow: TEventTarget {
   performance(self : Self) -> Performance = _
   indexed_db(self : Self) -> IDBFactory = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
-  request_animation_frame(self : Self, callback : FrameRequestCallback) -> UInt = _
+  request_animation_frame(self : Self, callback : (DOMHighResTimeStamp) -> Unit) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
   session_storage(self : Self) -> Storage = _
   local_storage(self : Self) -> Storage = _
@@ -994,12 +994,12 @@ impl TWindow with get_selection(self : Self) -> Selection? {
 /// [Window.requestIdleCallback](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback)
 impl TWindow with request_idle_callback(
   self : Self,
-  callback : IdleRequestCallback,
+  callback : (IdleDeadline) -> Unit,
   options? : IdleRequestOptions = IdleRequestOptions::empty(),
 ) -> UInt {
   window_request_idle_callback_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(callback),
+    TJsValue::to_js(idle_request_callback_ffi(callback)),
     TJsValue::to_js(options),
   )
 }
@@ -2646,8 +2646,11 @@ impl TWindow with clear_interval(self : Self, id? : Int = (0 : Int)) -> Unit {
 
 ///|
 /// [Window.queueMicrotask](https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask)
-impl TWindow with queue_microtask(self : Self, callback : VoidFunction) -> Unit {
-  window_queue_microtask_ffi(TJsValue::to_js(self), TJsValue::to_js(callback))
+impl TWindow with queue_microtask(self : Self, callback : () -> Unit) -> Unit {
+  window_queue_microtask_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(void_function_ffi(callback)),
+  )
 }
 
 ///|
@@ -2732,11 +2735,11 @@ impl TWindow with trusted_types(self : Self) -> TrustedTypePolicyFactory {
 /// [Window.requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame)
 impl TWindow with request_animation_frame(
   self : Self,
-  callback : FrameRequestCallback,
+  callback : (DOMHighResTimeStamp) -> Unit,
 ) -> UInt {
   window_request_animation_frame_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(callback),
+    TJsValue::to_js(frame_request_callback_ffi(callback)),
   )
 }
 

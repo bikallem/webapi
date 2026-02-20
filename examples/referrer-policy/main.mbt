@@ -97,17 +97,13 @@ fn main {
   parse_btn..set_attribute("id", "parse-btn").set_text_content("Parse")
   let parse_output : @webapi.HTMLDivElement = doc.create_element("div").into()
   parse_output.set_attribute("id", "parse-output")
-  parse_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let input_val = parse_input.value()
-      match @webapi.ReferrerPolicy::from(input_val) {
-        Some(policy) =>
-          parse_output.set_text_content("Parsed: " + policy.value())
-        None => parse_output.set_text_content("Invalid policy string")
-      }
-    }),
-  )
+  parse_btn.add_event_listener("click", fn(_event) {
+    let input_val = parse_input.value()
+    match @webapi.ReferrerPolicy::from(input_val) {
+      Some(policy) => parse_output.set_text_content("Parsed: " + policy.value())
+      None => parse_output.set_text_content("Invalid policy string")
+    }
+  })
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [

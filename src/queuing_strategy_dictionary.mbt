@@ -16,9 +16,15 @@ pub impl FromJsAny for QueuingStrategy with from_js_any(value : JsAny) -> Queuin
 ///|
 pub fn QueuingStrategy::new(
   high_water_mark? : Double,
-  size? : QueuingStrategySize,
+  size? : (JsValue) -> Double,
 ) -> QueuingStrategy {
-  queuing_strategy_ffi(opt_to_js(high_water_mark), opt_to_js(size))
+  queuing_strategy_ffi(
+    opt_to_js(high_water_mark),
+    match size {
+      Some(v) => TJsValue::to_js(queuing_strategy_size_ffi(v))
+      None => JsValue::undefined()
+    },
+  )
 }
 
 ///|

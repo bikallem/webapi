@@ -31,15 +31,12 @@ fn main {
   .set_text_content("Rotate your device to see changes.")
 
   // Listen for orientation change
-  orientation.add_event_listener(
-    "change",
-    @webapi.EventListener::new(fn(_event) {
-      type_div.set_text_content("Type: " + type_str())
-      angle_div.set_text_content(
-        "Angle: " + orientation.angle().to_string() + "\u00b0",
-      )
-    }),
-  )
+  orientation.add_event_listener("change", fn(_event) {
+    type_div.set_text_content("Type: " + type_str())
+    angle_div.set_text_content(
+      "Angle: " + orientation.angle().to_string() + "\u00b0",
+    )
+  })
 
   let app = doc.get_element_by_id("app").unwrap()
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()

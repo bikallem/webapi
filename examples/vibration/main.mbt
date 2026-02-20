@@ -30,15 +30,12 @@ fn main {
   single_btn
   ..set_attribute("id", "single-btn")
   .set_text_content("Single Pulse (200ms)")
-  single_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let result = @webapi.navigator.vibrate(200U)
-      status_div.set_text_content(
-        "Single pulse: " + (if result { "OK" } else { "not supported" }),
-      )
-    }),
-  )
+  single_btn.add_event_listener("click", fn(_event) {
+    let result = @webapi.navigator.vibrate(200U)
+    status_div.set_text_content(
+      "Single pulse: " + (if result { "OK" } else { "not supported" }),
+    )
+  })
 
   // Pattern button (uses longer single pulse since Array[UInt] has wasm-gc limitations)
   let pattern_btn : @webapi.HTMLButtonElement = doc
@@ -47,28 +44,22 @@ fn main {
   pattern_btn
   ..set_attribute("id", "pattern-btn")
   .set_text_content("Long Pulse (500ms)")
-  pattern_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let result = @webapi.navigator.vibrate(500U)
-      status_div.set_text_content(
-        "Pattern: " + (if result { "OK" } else { "not supported" }),
-      )
-    }),
-  )
+  pattern_btn.add_event_listener("click", fn(_event) {
+    let result = @webapi.navigator.vibrate(500U)
+    status_div.set_text_content(
+      "Pattern: " + (if result { "OK" } else { "not supported" }),
+    )
+  })
 
   // Stop button
   let stop_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   stop_btn..set_attribute("id", "stop-btn").set_text_content("Stop")
-  stop_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let result = @webapi.navigator.vibrate(0U)
-      status_div.set_text_content(
-        "Stop: " + (if result { "OK" } else { "not supported" }),
-      )
-    }),
-  )
+  stop_btn.add_event_listener("click", fn(_event) {
+    let result = @webapi.navigator.vibrate(0U)
+    status_div.set_text_content(
+      "Stop: " + (if result { "OK" } else { "not supported" }),
+    )
+  })
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [

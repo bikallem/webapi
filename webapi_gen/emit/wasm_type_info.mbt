@@ -48,6 +48,7 @@ fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
       // Typed arrays, DataView, ArrayBuffer, SharedArrayBuffer are #external types.
       is_wasm_valid_stub_other_type(name)
     Union(_) => false // Union types resolve to trait names, not valid as stubs
+    Callback(_) => false // Callback args don't appear as return types
   }
 }
 

@@ -146,17 +146,14 @@ fn main {
     .create_element("div")
     .into()
   transform_output.set_attribute("id", "transform-output")
-  transform_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let translated = point.matrix_transform(
-        matrix=@webapi.DOMMatrixInit::new(e=100.0, f=200.0),
-      )
-      transform_output.set_text_content(
-        "Transformed: x=" + px(translated) + ", y=" + py(translated),
-      )
-    }),
-  )
+  transform_btn.add_event_listener("click", fn(_event) {
+    let translated = point.matrix_transform(
+      matrix=@webapi.DOMMatrixInit::new(e=100.0, f=200.0),
+    )
+    transform_output.set_text_content(
+      "Transformed: x=" + px(translated) + ", y=" + py(translated),
+    )
+  })
 
   // Build DOM
   let children : Array[&@webapi.TNode] = [

@@ -74,17 +74,14 @@ fn main {
   )
   .set_text_content("Set")
 
-  set_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let key = key_input.value()
-      let val = val_input.value()
-      if key != "" {
-        storage.set_item(key, val)
-        refresh()
-      }
-    }),
-  )
+  set_btn.add_event_listener("click", fn(_event) {
+    let key = key_input.value()
+    let val = val_input.value()
+    if key != "" {
+      storage.set_item(key, val)
+      refresh()
+    }
+  })
 
   // Get button
   let get_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
@@ -95,16 +92,13 @@ fn main {
   )
   .set_text_content("Get")
 
-  get_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let key = key_input.value()
-      match storage.get_item(key) {
-        Some(val) => val_input.set_value(val)
-        None => val_input.set_value("(not found)")
-      }
-    }),
-  )
+  get_btn.add_event_listener("click", fn(_event) {
+    let key = key_input.value()
+    match storage.get_item(key) {
+      Some(val) => val_input.set_value(val)
+      None => val_input.set_value("(not found)")
+    }
+  })
 
   // Remove button
   let remove_btn : @webapi.HTMLButtonElement = doc
@@ -117,16 +111,13 @@ fn main {
   )
   .set_text_content("Remove")
 
-  remove_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      let key = key_input.value()
-      if key != "" {
-        storage.remove_item(key)
-        refresh()
-      }
-    }),
-  )
+  remove_btn.add_event_listener("click", fn(_event) {
+    let key = key_input.value()
+    if key != "" {
+      storage.remove_item(key)
+      refresh()
+    }
+  })
 
   // Clear button
   let clear_btn : @webapi.HTMLButtonElement = doc
@@ -139,13 +130,10 @@ fn main {
   )
   .set_text_content("Clear All")
 
-  clear_btn.add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      storage.clear()
-      refresh()
-    }),
-  )
+  clear_btn.add_event_listener("click", fn(_event) {
+    storage.clear()
+    refresh()
+  })
 
   // Build DOM
   let app = doc.get_element_by_id("app").unwrap()

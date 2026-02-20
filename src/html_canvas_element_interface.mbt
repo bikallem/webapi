@@ -49,7 +49,7 @@ pub trait THTMLCanvasElement: THTMLElement {
   to_data_url(self : Self, type_? : String, quality? : JsValue) -> String = _
   to_blob(
     self : Self,
-    _callback : BlobCallback,
+    _callback : (Blob) -> Unit,
     type_? : String,
     quality? : JsValue,
   ) -> Unit = _
@@ -123,13 +123,13 @@ impl THTMLCanvasElement with to_data_url(
 /// [HTMLCanvasElement.toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob)
 impl THTMLCanvasElement with to_blob(
   self : Self,
-  _callback : BlobCallback,
+  _callback : (Blob) -> Unit,
   type_? : String = "image/png",
   quality? : JsValue,
 ) -> Unit {
   html_canvas_element_to_blob_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(_callback),
+    TJsValue::to_js(blob_callback_ffi(_callback)),
     TJsValue::to_js(type_),
     opt_to_js(quality),
   )
