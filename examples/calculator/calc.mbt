@@ -184,33 +184,27 @@ fn handle_clear_entry(state : CalculatorState) -> CalculatorState {
 /// Stores selected operator and computes chained operations.
 fn handle_operator(state : CalculatorState, op : String) -> CalculatorState {
   let state = if state.has_error { clear_all_state() } else { state }
-  match parse_number(state.current_input) {
-    Some(current_value) => {
-      let (accumulator, current_input) = if !state.has_accumulator {
-        (current_value, state.current_input)
-      } else if state.pending_operator != "" && !state.should_reset_input {
-        match
-          apply_operator(
-            state.accumulator,
-            current_value,
-            state.pending_operator,
-          ) {
-          Some(result) => (result, format_number(result))
-          None => return show_error_state()
-        }
-      } else {
-        (state.accumulator, state.current_input)
-      }
-      {
-        current_input,
-        accumulator,
-        has_accumulator: true,
-        pending_operator: op,
-        should_reset_input: true,
-        has_error: false,
-      }
+  guard parse_number(state.current_input) is Some(current_value) else {
+    return show_error_state()
+  }
+  let (accumulator, current_input) = if !state.has_accumulator {
+    (current_value, state.current_input)
+  } else if state.pending_operator != "" && !state.should_reset_input {
+    match
+      apply_operator(state.accumulator, current_value, state.pending_operator) {
+      Some(result) => (result, format_number(result))
+      None => return show_error_state()
     }
-    None => show_error_state()
+  } else {
+    (state.accumulator, state.current_input)
+  }
+  {
+    current_input,
+    accumulator,
+    has_accumulator: true,
+    pending_operator: op,
+    should_reset_input: true,
+    has_error: false,
   }
 }
 
@@ -223,19 +217,15 @@ fn handle_equal(state : CalculatorState) -> CalculatorState {
   if !state.has_accumulator || state.pending_operator == "" {
     return state
   }
-  match parse_number(state.current_input) {
-    Some(current_value) =>
-      match
-        apply_operator(state.accumulator, current_value, state.pending_operator) {
-        Some(result) =>
-          {
-            ..clear_all_state(),
-            current_input: format_number(result),
-            should_reset_input: true,
-          }
-        None => show_error_state()
-      }
-    None => show_error_state()
+  guard parse_number(state.current_input) is Some(current_value) &&
+    apply_operator(state.accumulator, current_value, state.pending_operator)
+    is Some(result) else {
+    return show_error_state()
+  }
+  {
+    ..clear_all_state(),
+    current_input: format_number(result),
+    should_reset_input: true,
   }
 }
 
