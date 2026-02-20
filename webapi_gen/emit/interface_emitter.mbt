@@ -52,13 +52,14 @@ fn try_resolve_callback(
   name : String,
   type_registry : @type_registry.TypeRegistry,
 ) -> @type_mapping.ArgMbtType? {
-  let (cb_name, cb_def) = match type_registry.get_callback_def(name) {
-    Some(cb_def) => (name, cb_def)
-    None =>
-      match type_registry.resolve_typedef_to_callback(name) {
-        Some((cb_name, cb_def)) => (cb_name, cb_def)
-        None => return None
-      }
+  let (cb_name, cb_def) = if type_registry.get_callback_def(name)
+    is Some(cb_def) {
+    (name, cb_def)
+  } else {
+    guard type_registry.resolve_typedef_to_callback(name) is Some(result) else {
+      return None
+    }
+    result
   }
   let cb_arg_types = cb_def.arguments.map(fn(a) {
     let (t, _) = arg_mbt_type(a.type_.type_, cb_name, "", a.name, type_registry)

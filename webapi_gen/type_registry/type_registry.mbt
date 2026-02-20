@@ -163,23 +163,14 @@ pub fn TypeRegistry::resolve_typedef_to_callback(
   self : TypeRegistry,
   name : String,
 ) -> (String, @parser.CallbackFunctionDefinition)? {
-  match self.typedef_defs.get(name) {
-    None => None
-    Some(td) => {
-      let inner = match td.type_ {
-        Nullable(inner) => inner
-        _ => td.type_
-      }
-      match inner {
-        Identifier(cb_name) =>
-          match self.get_callback_def(cb_name) {
-            Some(cb_def) => Some((cb_name, cb_def))
-            None => None
-          }
-        _ => None
-      }
-    }
+  guard self.typedef_defs.get(name) is Some(td) else { return None }
+  let inner = match td.type_ {
+    Nullable(inner) => inner
+    _ => td.type_
   }
+  guard inner is Identifier(cb_name) else { return None }
+  guard self.get_callback_def(cb_name) is Some(cb_def) else { return None }
+  Some((cb_name, cb_def))
 }
 
 ///|
