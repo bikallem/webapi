@@ -63,13 +63,9 @@ fn main {
   doc.add_event_listener("selectionchange", fn(_event) { update_info() })
 
   select_all_btn.add_event_listener("click", fn(_event) {
-    match @webapi.window.get_selection() {
-      Some(sel) => {
-        sel.select_all_children(text_content)
-        update_info()
-      }
-      None => ()
-    }
+    guard @webapi.window.get_selection() is Some(sel) else { () }
+    sel.select_all_children(text_content)
+    update_info()
   })
 
   let app = doc.get_element_by_id("app").unwrap()

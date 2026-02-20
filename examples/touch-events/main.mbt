@@ -36,24 +36,20 @@ fn main {
     } else {
       te.changed_touches().item(0U)
     }
-    match touch {
-      Some(t) => {
-        let x = t.client_x().to_int()
-        let y = t.client_y().to_int()
-        touch_info.set_text_content(
-          "Event: " +
-          event_type +
-          "\nTouches: " +
-          count.to_string() +
-          "\nPosition: (" +
-          x.to_string() +
-          ", " +
-          y.to_string() +
-          ")",
-        )
-      }
-      None => ()
-    }
+    guard touch is Some(t) else { () }
+    let x = t.client_x().to_int()
+    let y = t.client_y().to_int()
+    touch_info.set_text_content(
+      "Event: " +
+      event_type +
+      "\nTouches: " +
+      count.to_string() +
+      "\nPosition: (" +
+      x.to_string() +
+      ", " +
+      y.to_string() +
+      ")",
+    )
   }
 
   let types = ["touchstart", "touchmove", "touchend"]

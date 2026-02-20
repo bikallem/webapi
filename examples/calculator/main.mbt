@@ -130,13 +130,9 @@ fn main {
       let button = make_button(label)
       let key = label
       button.add_event_listener("click", fn(_event) {
-        match process_key(state, key) {
-          Some(new_state) => {
-            state = new_state
-            render_ui(display, status, state)
-          }
-          None => ()
-        }
+        guard process_key(state, key) is Some(new_state) else { () }
+        state = new_state
+        render_ui(display, status, state)
       })
       row_el.append_child(button) |> ignore
     }
@@ -146,15 +142,11 @@ fn main {
   // Keyboard support
   document.add_event_listener("keydown", fn(event) {
     let kb_event : KeyboardEvent = event.into()
-    match map_keyboard_key(kb_event.key()) {
-      Some(calc_key) => {
-        guard process_key(state, calc_key) is Some(new_state) else { () }
-        state = new_state
-        render_ui(display, status, state)
-        kb_event.prevent_default()
-      }
-      None => ()
-    }
+    guard map_keyboard_key(kb_event.key()) is Some(calc_key) else { () }
+    guard process_key(state, calc_key) is Some(new_state) else { () }
+    state = new_state
+    render_ui(display, status, state)
+    kb_event.prevent_default()
   })
 
   let children : Array[&@webapi.TNode] = [

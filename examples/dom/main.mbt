@@ -101,33 +101,27 @@ fn main {
 
   // Demonstrate getAttribute
   let heading_id = heading.get_attribute("id")
-  match heading_id {
-    Some(id) => {
-      let info : @webapi.HTMLDivElement = @webapi.document
-        .create_element("div")
-        .into()
-      info
-      ..set_attribute(
-        "style", "margin: 0.5em 0; color: gray; font-size: 0.9em;",
-      )
-      .set_text_content("Heading id attribute: " + id)
+  guard heading_id is Some(id) else { () }
+  let info : @webapi.HTMLDivElement = @webapi.document
+    .create_element("div")
+    .into()
+  info
+  ..set_attribute("style", "margin: 0.5em 0; color: gray; font-size: 0.9em;")
+  .set_text_content("Heading id attribute: " + id)
 
-      // Build the DOM tree
-      let app = @webapi.document.get_element_by_id("app").unwrap()
-      let container : @webapi.HTMLDivElement = @webapi.document
-        .create_element("div")
-        .into()
-      container.set_attribute(
-        "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
-      )
-      let children : Array[&@webapi.TNode] = [
-        heading, info, list, status, add_btn, remove_btn, clone_btn,
-      ]
-      for child in children {
-        container.append_child(child) |> ignore
-      }
-      let _ = app.append_child(container)
-    }
-    None => ()
+  // Build the DOM tree
+  let app = @webapi.document.get_element_by_id("app").unwrap()
+  let container : @webapi.HTMLDivElement = @webapi.document
+    .create_element("div")
+    .into()
+  container.set_attribute(
+    "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
+  )
+  let children : Array[&@webapi.TNode] = [
+    heading, info, list, status, add_btn, remove_btn, clone_btn,
+  ]
+  for child in children {
+    container.append_child(child) |> ignore
   }
+  let _ = app.append_child(container)
 }

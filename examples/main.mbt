@@ -174,9 +174,8 @@ fn main {
     iframe.set_src(name + "/" + name + "." + target + ".html")
 
     // Remove active class from previous link
-    match prev_active[0] {
-      Some(el) => el.class_list().remove(["active"])
-      None => ()
+    if prev_active[0] is Some(el) {
+      el.class_list().remove(["active"])
     }
 
     // Add active class to current link

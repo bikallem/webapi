@@ -50,13 +50,9 @@ fn main {
     let len = storage.length()
     let mut text = ""
     for i in 0U..<len {
-      match storage.key(i) {
-        Some(k) => {
-          let val = storage.get_item(k).unwrap_or("")
-          text = text + k + " = " + val + "\n"
-        }
-        None => ()
-      }
+      guard storage.key(i) is Some(k) else { continue }
+      let val = storage.get_item(k).unwrap_or("")
+      text = text + k + " = " + val + "\n"
     }
     if text == "" {
       text = "(empty)"

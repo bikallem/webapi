@@ -75,13 +75,9 @@ fn main {
   // Observe all boxes
   let boxes = container.query_selector_all(".box")
   for i = 0U; i < boxes.length(); i = i + 1 {
-    match boxes.item(i) {
-      Some(node) => {
-        let el : @webapi.Element = @webapi.TJsValue::to_js(node).into()
-        observer.observe(el)
-      }
-      None => ()
-    }
+    guard boxes.item(i) is Some(node) else { continue }
+    let el : @webapi.Element = @webapi.TJsValue::to_js(node).into()
+    observer.observe(el)
   }
 
   let app = doc.get_element_by_id("app").unwrap()
