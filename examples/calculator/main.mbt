@@ -148,13 +148,9 @@ fn main {
     let kb_event : KeyboardEvent = event.into()
     match map_keyboard_key(kb_event.key()) {
       Some(calc_key) => {
-        match process_key(state, calc_key) {
-          Some(new_state) => {
-            state = new_state
-            render_ui(display, status, state)
-          }
-          None => ()
-        }
+        guard process_key(state, calc_key) is Some(new_state) else { () }
+        state = new_state
+        render_ui(display, status, state)
         kb_event.prevent_default()
       }
       None => ()
