@@ -5,7 +5,15 @@
   },
   "devDependencies": {
     "@playwright/test": "~1.57.0",
-    "serve": "^14.2.0",
+    "serve": "^14.2.5",
     "ws": "^8.19.0"
+  },
+  "overrides": {
+    "serve": {
+      "ajv": "^8.18.0"
+    },
+    "serve-handler": {
+      "minimatch": "^10.2.1"
+    }
   }
 }
