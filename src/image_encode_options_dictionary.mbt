@@ -28,20 +28,10 @@ pub fn ImageEncodeOptions::empty() -> ImageEncodeOptions {
 
 ///|
 pub fn ImageEncodeOptions::type_(self : ImageEncodeOptions) -> String? {
-  let result = image_encode_options_get_type_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  image_encode_options_get_type_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ImageEncodeOptions::quality(self : ImageEncodeOptions) -> Double? {
-  let result = image_encode_options_get_quality_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  image_encode_options_get_quality_ffi(TJsValue::to_js(self)).to_option_prim()
 }

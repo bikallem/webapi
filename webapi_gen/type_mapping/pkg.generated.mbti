@@ -33,6 +33,9 @@ pub(all) enum ArgMbtType {
   Dictionary(String)
   Callback(CallbackArgInfo)
 }
+pub fn ArgMbtType::is_dictionary(Self) -> Bool
+pub fn ArgMbtType::is_enum(Self) -> Bool
+pub fn ArgMbtType::is_string(Self) -> Bool
 pub fn ArgMbtType::name(Self) -> String
 pub impl Eq for ArgMbtType
 pub impl Hash for ArgMbtType

@@ -65,23 +65,13 @@ impl TNodeIterator with filter(self : Self) -> NodeFilter {
 ///|
 /// [NodeIterator.nextNode](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator/nextNode)
 impl TNodeIterator with next_node(self : Self) -> Node? {
-  let result = node_iterator_next_node_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  node_iterator_next_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [NodeIterator.previousNode](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator/previousNode)
 impl TNodeIterator with previous_node(self : Self) -> Node? {
-  let result = node_iterator_previous_node_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  node_iterator_previous_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|

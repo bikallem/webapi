@@ -46,29 +46,16 @@ impl TVideoTrackList with length(self : Self) -> UInt {
 ///|
 /// [VideoTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/get)
 impl TVideoTrackList with get(self : Self, index : UInt) -> VideoTrack? {
-  let result = video_track_list_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  video_track_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [VideoTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/getTrackById)
 impl TVideoTrackList with get_track_by_id(self : Self, id : String) -> VideoTrack? {
-  let result = video_track_list_get_track_by_id_ffi(
+  video_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

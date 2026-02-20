@@ -81,288 +81,139 @@ pub fn KeyboardEventInit::empty() -> KeyboardEventInit {
 
 ///|
 pub fn KeyboardEventInit::bubbles(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::cancelable(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::composed(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::view(self : KeyboardEventInit) -> Window? {
-  let result = keyboard_event_init_get_view_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  keyboard_event_init_get_view_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn KeyboardEventInit::detail(self : KeyboardEventInit) -> Int? {
-  let result = keyboard_event_init_get_detail_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_detail_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::which(self : KeyboardEventInit) -> UInt? {
-  let result = keyboard_event_init_get_which_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_which_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::ctrl_key(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_ctrl_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_ctrl_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::shift_key(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_shift_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_shift_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::alt_key(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_alt_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_alt_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::meta_key(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_meta_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_meta_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_alt_graph(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_alt_graph_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_alt_graph_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_caps_lock(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_caps_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_caps_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_fn(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_fn_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_fn_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_fn_lock(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_fn_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_fn_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_hyper(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_num_lock(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_num_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_num_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_scroll_lock(
   self : KeyboardEventInit,
 ) -> Bool? {
-  let result = keyboard_event_init_get_modifier_scroll_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_scroll_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_super(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_super_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_super_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_symbol(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_modifier_symbol_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_symbol_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::modifier_symbol_lock(
   self : KeyboardEventInit,
 ) -> Bool? {
-  let result = keyboard_event_init_get_modifier_symbol_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_modifier_symbol_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::key(self : KeyboardEventInit) -> String? {
-  let result = keyboard_event_init_get_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::code(self : KeyboardEventInit) -> String? {
-  let result = keyboard_event_init_get_code_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_code_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::location(self : KeyboardEventInit) -> UInt? {
-  let result = keyboard_event_init_get_location_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_location_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::repeat(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_repeat_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_repeat_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::is_composing(self : KeyboardEventInit) -> Bool? {
-  let result = keyboard_event_init_get_is_composing_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_is_composing_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::char_code(self : KeyboardEventInit) -> UInt? {
-  let result = keyboard_event_init_get_char_code_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_char_code_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyboardEventInit::key_code(self : KeyboardEventInit) -> UInt? {
-  let result = keyboard_event_init_get_key_code_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyboard_event_init_get_key_code_ffi(TJsValue::to_js(self)).to_option_prim()
 }

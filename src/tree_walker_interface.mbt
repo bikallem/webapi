@@ -72,76 +72,41 @@ impl TTreeWalker with set_current_node(self : Self, current_node : &TNode) -> Un
 ///|
 /// [TreeWalker.parentNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/parentNode)
 impl TTreeWalker with parent_node(self : Self) -> Node? {
-  let result = tree_walker_parent_node_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  tree_walker_parent_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.firstChild](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/firstChild)
 impl TTreeWalker with first_child(self : Self) -> Node? {
-  let result = tree_walker_first_child_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  tree_walker_first_child_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.lastChild](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/lastChild)
 impl TTreeWalker with last_child(self : Self) -> Node? {
-  let result = tree_walker_last_child_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  tree_walker_last_child_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.previousSibling](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/previousSibling)
 impl TTreeWalker with previous_sibling(self : Self) -> Node? {
-  let result = tree_walker_previous_sibling_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  tree_walker_previous_sibling_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.nextSibling](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/nextSibling)
 impl TTreeWalker with next_sibling(self : Self) -> Node? {
-  let result = tree_walker_next_sibling_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  tree_walker_next_sibling_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.previousNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/previousNode)
 impl TTreeWalker with previous_node(self : Self) -> Node? {
-  let result = tree_walker_previous_node_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  tree_walker_previous_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.nextNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/nextNode)
 impl TTreeWalker with next_node(self : Self) -> Node? {
-  let result = tree_walker_next_node_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  tree_walker_next_node_ffi(TJsValue::to_js(self)).to_option()
 }

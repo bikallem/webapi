@@ -875,12 +875,7 @@ impl TDocument with ready_state(self : Self) -> DocumentReadyState {
 ///|
 /// [Document.get](https://developer.mozilla.org/en-US/docs/Web/API/Document/get)
 impl TDocument with get(self : Self, name : String) -> JsValue? {
-  let result = document_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  document_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 
 ///|
@@ -994,17 +989,12 @@ impl TDocument with open_window(
   name : String,
   features : String,
 ) -> WindowProxy? {
-  let result = document_open_window_ffi(
+  document_open_window_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
     TJsValue::to_js(name),
     TJsValue::to_js(features),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -1279,16 +1269,11 @@ impl TDocument with all(self : Self) -> HTMLAllCollection {
 ///|
 /// [Document.elementFromPoint](https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint)
 impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element? {
-  let result = document_element_from_point_ffi(
+  document_element_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -1311,17 +1296,12 @@ impl TDocument with caret_position_from_point(
   y : Double,
   options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
 ) -> CaretPosition? {
-  let result = document_caret_position_from_point_ffi(
+  document_caret_position_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
     TJsValue::to_js(options),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -1387,12 +1367,7 @@ impl TDocument with set_onfullscreenerror(
 ///|
 /// [Document.getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Document/getSelection)
 impl TDocument with get_selection(self : Self) -> Selection? {
-  let result = document_get_selection_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  document_get_selection_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
@@ -1404,15 +1379,10 @@ impl TDocument with timeline(self : Self) -> DocumentTimeline {
 ///|
 /// [Document.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)
 impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
-  let result = document_get_element_by_id_ffi(
+  document_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -1536,15 +1506,7 @@ impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> U
 ///|
 /// [Document.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
 impl TDocument with query_selector(self : Self, selectors : String) -> Element? {
-  let result = document_query_selector_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(selectors),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  document_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
 }
 
 ///|

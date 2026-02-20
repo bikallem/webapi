@@ -125,15 +125,10 @@ impl TCustomElementRegistry with get_name(
   self : Self,
   constructor_ : () -> HTMLElement,
 ) -> String? {
-  let result = custom_element_registry_get_name_ffi(
+  custom_element_registry_get_name_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(custom_element_constructor_ffi(constructor_)),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

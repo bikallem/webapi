@@ -45,29 +45,16 @@ impl TAudioTrackList with length(self : Self) -> UInt {
 ///|
 /// [AudioTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/get)
 impl TAudioTrackList with get(self : Self, index : UInt) -> AudioTrack? {
-  let result = audio_track_list_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  audio_track_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [AudioTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/getTrackById)
 impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrack? {
-  let result = audio_track_list_get_track_by_id_ffi(
+  audio_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

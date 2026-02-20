@@ -218,18 +218,10 @@ fn render_dictionary_getter(
       "pub fn \{type_name}::\{method_name}(self : \{type_name}) -> \{ret_type} {\n",
     )
     if is_optional {
+      let helper = if arg.is_primitive { "to_option_prim" } else { "to_option" }
       shared_buf.write_string(
-        "  let result = \{ffi_name}(TJsValue::to_js(self))\n",
+        "  \{ffi_name}(TJsValue::to_js(self)).\{helper}()\n",
       )
-      if arg.is_primitive {
-        shared_buf.write_string(
-          "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))\n  }\n",
-        )
-      } else {
-        shared_buf.write_string(
-          "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
-        )
-      }
     } else {
       shared_buf.write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
     }

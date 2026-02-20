@@ -29,15 +29,7 @@ pub trait TStyleSheetList: TJsValue {
 ///|
 /// [StyleSheetList.item](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList/item)
 impl TStyleSheetList with item(self : Self, index : UInt) -> CSSStyleSheet? {
-  let result = style_sheet_list_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  style_sheet_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|

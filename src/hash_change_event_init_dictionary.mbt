@@ -37,50 +37,25 @@ pub fn HashChangeEventInit::empty() -> HashChangeEventInit {
 
 ///|
 pub fn HashChangeEventInit::bubbles(self : HashChangeEventInit) -> Bool? {
-  let result = hash_change_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  hash_change_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn HashChangeEventInit::cancelable(self : HashChangeEventInit) -> Bool? {
-  let result = hash_change_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  hash_change_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn HashChangeEventInit::composed(self : HashChangeEventInit) -> Bool? {
-  let result = hash_change_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  hash_change_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn HashChangeEventInit::old_url(self : HashChangeEventInit) -> String? {
-  let result = hash_change_event_init_get_old_url_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  hash_change_event_init_get_old_url_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn HashChangeEventInit::new_url(self : HashChangeEventInit) -> String? {
-  let result = hash_change_event_init_get_new_url_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  hash_change_event_init_get_new_url_ffi(TJsValue::to_js(self)).to_option_prim()
 }

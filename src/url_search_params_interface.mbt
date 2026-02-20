@@ -89,15 +89,7 @@ impl TURLSearchParams with delete(self : Self, name : String, value? : String) -
 ///|
 /// [URLSearchParams.get](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/get)
 impl TURLSearchParams with get(self : Self, name : String) -> String? {
-  let result = url_search_params_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  url_search_params_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 
 ///|

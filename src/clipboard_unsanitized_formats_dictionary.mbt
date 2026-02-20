@@ -33,12 +33,5 @@ pub fn ClipboardUnsanitizedFormats::empty() -> ClipboardUnsanitizedFormats {
 pub fn ClipboardUnsanitizedFormats::unsanitized(
   self : ClipboardUnsanitizedFormats,
 ) -> Array[String]? {
-  let result = clipboard_unsanitized_formats_get_unsanitized_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  clipboard_unsanitized_formats_get_unsanitized_ffi(TJsValue::to_js(self)).to_option()
 }

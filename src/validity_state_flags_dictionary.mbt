@@ -47,106 +47,50 @@ pub fn ValidityStateFlags::empty() -> ValidityStateFlags {
 
 ///|
 pub fn ValidityStateFlags::value_missing(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_value_missing_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_value_missing_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::type_mismatch(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_type_mismatch_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_type_mismatch_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::pattern_mismatch(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_pattern_mismatch_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_pattern_mismatch_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::too_long(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_too_long_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_too_long_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::too_short(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_too_short_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_too_short_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::range_underflow(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_range_underflow_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_range_underflow_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::range_overflow(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_range_overflow_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_range_overflow_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::step_mismatch(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_step_mismatch_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_step_mismatch_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::bad_input(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_bad_input_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_bad_input_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ValidityStateFlags::custom_error(self : ValidityStateFlags) -> Bool? {
-  let result = validity_state_flags_get_custom_error_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  validity_state_flags_get_custom_error_ffi(TJsValue::to_js(self)).to_option_prim()
 }

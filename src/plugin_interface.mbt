@@ -57,24 +57,11 @@ impl TPlugin with length(self : Self) -> UInt {
 ///|
 /// [Plugin.item](https://developer.mozilla.org/en-US/docs/Web/API/Plugin/item)
 impl TPlugin with item(self : Self, index : UInt) -> MimeType? {
-  let result = plugin_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  plugin_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [Plugin.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/Plugin/namedItem)
 impl TPlugin with named_item(self : Self, name : String) -> MimeType? {
-  let result = plugin_named_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  plugin_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }

@@ -38,27 +38,14 @@ impl TTextTrackCueList with length(self : Self) -> UInt {
 ///|
 /// [TextTrackCueList.get](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCueList/get)
 impl TTextTrackCueList with get(self : Self, index : UInt) -> TextTrackCue? {
-  let result = text_track_cue_list_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  text_track_cue_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [TextTrackCueList.getCueById](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCueList/getCueById)
 impl TTextTrackCueList with get_cue_by_id(self : Self, id : String) -> TextTrackCue? {
-  let result = text_track_cue_list_get_cue_by_id_ffi(
+  text_track_cue_list_get_cue_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }

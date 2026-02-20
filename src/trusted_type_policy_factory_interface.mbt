@@ -114,18 +114,13 @@ impl TTrustedTypePolicyFactory with get_attribute_type(
   element_ns? : String = "",
   attr_ns? : String = "",
 ) -> String? {
-  let result = trusted_type_policy_factory_get_attribute_type_ffi(
+  trusted_type_policy_factory_get_attribute_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(tag_name),
     TJsValue::to_js(attribute),
     TJsValue::to_js(element_ns),
     TJsValue::to_js(attr_ns),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -136,17 +131,12 @@ impl TTrustedTypePolicyFactory with get_property_type(
   property : String,
   element_ns? : String = "",
 ) -> String? {
-  let result = trusted_type_policy_factory_get_property_type_ffi(
+  trusted_type_policy_factory_get_property_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(tag_name),
     TJsValue::to_js(property),
     TJsValue::to_js(element_ns),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

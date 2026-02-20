@@ -45,20 +45,10 @@ pub fn NotificationAction::title(self : NotificationAction) -> String {
 
 ///|
 pub fn NotificationAction::navigate(self : NotificationAction) -> String? {
-  let result = notification_action_get_navigate_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  notification_action_get_navigate_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn NotificationAction::icon(self : NotificationAction) -> String? {
-  let result = notification_action_get_icon_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  notification_action_get_icon_ffi(TJsValue::to_js(self)).to_option_prim()
 }

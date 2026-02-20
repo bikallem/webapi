@@ -31,12 +31,5 @@ pub fn ClipboardItemOptions::empty() -> ClipboardItemOptions {
 pub fn ClipboardItemOptions::presentation_style(
   self : ClipboardItemOptions,
 ) -> PresentationStyle? {
-  let result = clipboard_item_options_get_presentation_style_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  clipboard_item_options_get_presentation_style_ffi(TJsValue::to_js(self)).to_option()
 }

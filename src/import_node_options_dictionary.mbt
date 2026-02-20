@@ -33,22 +33,10 @@ pub fn ImportNodeOptions::empty() -> ImportNodeOptions {
 pub fn ImportNodeOptions::custom_element_registry(
   self : ImportNodeOptions,
 ) -> CustomElementRegistry? {
-  let result = import_node_options_get_custom_element_registry_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  import_node_options_get_custom_element_registry_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ImportNodeOptions::self_only(self : ImportNodeOptions) -> Bool? {
-  let result = import_node_options_get_self_only_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  import_node_options_get_self_only_ffi(TJsValue::to_js(self)).to_option_prim()
 }

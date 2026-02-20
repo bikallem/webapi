@@ -33,30 +33,15 @@ pub fn EventInit::empty() -> EventInit {
 
 ///|
 pub fn EventInit::bubbles(self : EventInit) -> Bool? {
-  let result = event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn EventInit::cancelable(self : EventInit) -> Bool? {
-  let result = event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn EventInit::composed(self : EventInit) -> Bool? {
-  let result = event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }

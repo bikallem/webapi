@@ -35,44 +35,22 @@ pub fn PageRevealEventInit::empty() -> PageRevealEventInit {
 
 ///|
 pub fn PageRevealEventInit::bubbles(self : PageRevealEventInit) -> Bool? {
-  let result = page_reveal_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  page_reveal_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn PageRevealEventInit::cancelable(self : PageRevealEventInit) -> Bool? {
-  let result = page_reveal_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  page_reveal_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn PageRevealEventInit::composed(self : PageRevealEventInit) -> Bool? {
-  let result = page_reveal_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  page_reveal_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn PageRevealEventInit::view_transition(
   self : PageRevealEventInit,
 ) -> ViewTransition? {
-  let result = page_reveal_event_init_get_view_transition_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  page_reveal_event_init_get_view_transition_ffi(TJsValue::to_js(self)).to_option()
 }

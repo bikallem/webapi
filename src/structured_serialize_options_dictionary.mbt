@@ -33,12 +33,5 @@ pub fn StructuredSerializeOptions::empty() -> StructuredSerializeOptions {
 pub fn StructuredSerializeOptions::transfer(
   self : StructuredSerializeOptions,
 ) -> Array[JsValue]? {
-  let result = structured_serialize_options_get_transfer_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  structured_serialize_options_get_transfer_ffi(TJsValue::to_js(self)).to_option()
 }

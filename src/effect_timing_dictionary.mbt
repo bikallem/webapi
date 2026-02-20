@@ -101,80 +101,40 @@ pub impl TEffectTimingGetDuration for EffectTimingGetDuration with to_js(
 
 ///|
 pub fn EffectTiming::fill(self : EffectTiming) -> FillMode? {
-  let result = effect_timing_get_fill_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  effect_timing_get_fill_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn EffectTiming::iteration_start(self : EffectTiming) -> Double? {
-  let result = effect_timing_get_iteration_start_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  effect_timing_get_iteration_start_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn EffectTiming::iterations(self : EffectTiming) -> Double? {
-  let result = effect_timing_get_iterations_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  effect_timing_get_iterations_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn EffectTiming::direction(self : EffectTiming) -> PlaybackDirection? {
-  let result = effect_timing_get_direction_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  effect_timing_get_direction_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn EffectTiming::easing(self : EffectTiming) -> String? {
-  let result = effect_timing_get_easing_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  effect_timing_get_easing_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn EffectTiming::delay(self : EffectTiming) -> Double? {
-  let result = effect_timing_get_delay_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  effect_timing_get_delay_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn EffectTiming::end_delay(self : EffectTiming) -> Double? {
-  let result = effect_timing_get_end_delay_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  effect_timing_get_end_delay_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn EffectTiming::duration(self : EffectTiming) -> EffectTimingGetDuration? {
-  let result = effect_timing_get_duration_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  effect_timing_get_duration_ffi(TJsValue::to_js(self)).to_option()
 }

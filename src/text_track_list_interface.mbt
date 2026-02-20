@@ -45,29 +45,16 @@ impl TTextTrackList with length(self : Self) -> UInt {
 ///|
 /// [TextTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/get)
 impl TTextTrackList with get(self : Self, index : UInt) -> TextTrack? {
-  let result = text_track_list_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  text_track_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [TextTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/getTrackById)
 impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack? {
-  let result = text_track_list_get_track_by_id_ffi(
+  text_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

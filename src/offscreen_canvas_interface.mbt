@@ -81,16 +81,11 @@ impl TOffscreenCanvas with get_context(
   context_id : OffscreenRenderingContextId,
   options? : JsValue,
 ) -> OffscreenRenderingContext? {
-  let result = offscreen_canvas_get_context_ffi(
+  offscreen_canvas_get_context_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(context_id),
     opt_to_js(options),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

@@ -43,44 +43,26 @@ impl TDataTransferItemList with length(self : Self) -> UInt {
 ///|
 /// [DataTransferItemList.get](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/get)
 impl TDataTransferItemList with get(self : Self, index : UInt) -> DataTransferItem? {
-  let result = data_transfer_item_list_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  data_transfer_item_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [DataTransferItemList.add](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add)
 impl TDataTransferItemList with add(self : Self, data : String, type_ : String) -> DataTransferItem? {
-  let result = data_transfer_item_list_add_ffi(
+  data_transfer_item_list_add_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(data),
     TJsValue::to_js(type_),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
 /// [DataTransferItemList.add](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add)
 impl TDataTransferItemList with add_file(self : Self, data : &TFile) -> DataTransferItem? {
-  let result = data_transfer_item_list_add_file_ffi(
+  data_transfer_item_list_add_file_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(data),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

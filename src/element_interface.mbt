@@ -477,15 +477,10 @@ impl TElement with get_attribute_names(self : Self) -> Array[String] {
 ///|
 /// [Element.getAttribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute)
 impl TElement with get_attribute(self : Self, qualified_name : String) -> String? {
-  let result = element_get_attribute_ffi(
+  element_get_attribute_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -495,16 +490,11 @@ impl TElement with get_attribute_ns(
   namespace_ : String,
   local_name : String,
 ) -> String? {
-  let result = element_get_attribute_ns_ffi(
+  element_get_attribute_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
     TJsValue::to_js(local_name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -600,15 +590,10 @@ impl TElement with has_attribute_ns(
 ///|
 /// [Element.getAttributeNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNode)
 impl TElement with get_attribute_node(self : Self, qualified_name : String) -> Attr? {
-  let result = element_get_attribute_node_ffi(
+  element_get_attribute_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -618,44 +603,26 @@ impl TElement with get_attribute_node_ns(
   namespace_ : String,
   local_name : String,
 ) -> Attr? {
-  let result = element_get_attribute_node_ns_ffi(
+  element_get_attribute_node_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
     TJsValue::to_js(local_name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
 /// [Element.setAttributeNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNode)
 impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr? {
-  let result = element_set_attribute_node_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(attr),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  element_set_attribute_node_ffi(TJsValue::to_js(self), TJsValue::to_js(attr)).to_option()
 }
 
 ///|
 /// [Element.setAttributeNodeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNodeNS)
 impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? {
-  let result = element_set_attribute_node_ns_ffi(
+  element_set_attribute_node_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -688,15 +655,7 @@ impl TElement with custom_element_registry(self : Self) -> CustomElementRegistry
 ///|
 /// [Element.closest](https://developer.mozilla.org/en-US/docs/Web/API/Element/closest)
 impl TElement with closest(self : Self, selectors : String) -> Element? {
-  let result = element_closest_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(selectors),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  element_closest_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
 }
 
 ///|
@@ -756,16 +715,11 @@ impl TElement with insert_adjacent_element(
   where_ : String,
   element : &TElement,
 ) -> Element? {
-  let result = element_insert_adjacent_element_ffi(
+  element_insert_adjacent_element_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(where_),
     TJsValue::to_js(element),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -1154,15 +1108,7 @@ impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Un
 ///|
 /// [Element.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector)
 impl TElement with query_selector(self : Self, selectors : String) -> Element? {
-  let result = element_query_selector_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(selectors),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  element_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
 }
 
 ///|

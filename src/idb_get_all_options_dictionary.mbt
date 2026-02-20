@@ -33,32 +33,17 @@ pub fn IDBGetAllOptions::empty() -> IDBGetAllOptions {
 
 ///|
 pub fn IDBGetAllOptions::query(self : IDBGetAllOptions) -> JsValue? {
-  let result = idb_get_all_options_get_query_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  idb_get_all_options_get_query_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn IDBGetAllOptions::count(self : IDBGetAllOptions) -> UInt? {
-  let result = idb_get_all_options_get_count_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  idb_get_all_options_get_count_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn IDBGetAllOptions::direction(
   self : IDBGetAllOptions,
 ) -> IDBCursorDirection? {
-  let result = idb_get_all_options_get_direction_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  idb_get_all_options_get_direction_ffi(TJsValue::to_js(self)).to_option()
 }

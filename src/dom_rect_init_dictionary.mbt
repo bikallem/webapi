@@ -35,40 +35,20 @@ pub fn DOMRectInit::empty() -> DOMRectInit {
 
 ///|
 pub fn DOMRectInit::x(self : DOMRectInit) -> Double? {
-  let result = dom_rect_init_get_x_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  dom_rect_init_get_x_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn DOMRectInit::y(self : DOMRectInit) -> Double? {
-  let result = dom_rect_init_get_y_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  dom_rect_init_get_y_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn DOMRectInit::width(self : DOMRectInit) -> Double? {
-  let result = dom_rect_init_get_width_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  dom_rect_init_get_width_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn DOMRectInit::height(self : DOMRectInit) -> Double? {
-  let result = dom_rect_init_get_height_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  dom_rect_init_get_height_ffi(TJsValue::to_js(self)).to_option_prim()
 }

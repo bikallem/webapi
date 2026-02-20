@@ -41,29 +41,16 @@ impl TNamedNodeMap with length(self : Self) -> UInt {
 ///|
 /// [NamedNodeMap.item](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/item)
 impl TNamedNodeMap with item(self : Self, index : UInt) -> Attr? {
-  let result = named_node_map_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  named_node_map_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [NamedNodeMap.getNamedItem](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/getNamedItem)
 impl TNamedNodeMap with get_named_item(self : Self, qualified_name : String) -> Attr? {
-  let result = named_node_map_get_named_item_ffi(
+  named_node_map_get_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -73,44 +60,29 @@ impl TNamedNodeMap with get_named_item_ns(
   namespace_ : String,
   local_name : String,
 ) -> Attr? {
-  let result = named_node_map_get_named_item_ns_ffi(
+  named_node_map_get_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(namespace_),
     TJsValue::to_js(local_name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
 /// [NamedNodeMap.setNamedItem](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/setNamedItem)
 impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
-  let result = named_node_map_set_named_item_ffi(
+  named_node_map_set_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
 /// [NamedNodeMap.setNamedItemNS](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/setNamedItemNS)
 impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr? {
-  let result = named_node_map_set_named_item_ns_ffi(
+  named_node_map_set_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

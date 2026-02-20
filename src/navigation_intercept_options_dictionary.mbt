@@ -47,54 +47,26 @@ pub fn NavigationInterceptOptions::empty() -> NavigationInterceptOptions {
 pub fn NavigationInterceptOptions::precommit_handler(
   self : NavigationInterceptOptions,
 ) -> NavigationPrecommitHandler? {
-  let result = navigation_intercept_options_get_precommit_handler_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_intercept_options_get_precommit_handler_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn NavigationInterceptOptions::handler(
   self : NavigationInterceptOptions,
 ) -> NavigationInterceptHandler? {
-  let result = navigation_intercept_options_get_handler_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_intercept_options_get_handler_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn NavigationInterceptOptions::focus_reset(
   self : NavigationInterceptOptions,
 ) -> NavigationFocusReset? {
-  let result = navigation_intercept_options_get_focus_reset_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_intercept_options_get_focus_reset_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn NavigationInterceptOptions::scroll(
   self : NavigationInterceptOptions,
 ) -> NavigationScrollBehavior? {
-  let result = navigation_intercept_options_get_scroll_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_intercept_options_get_scroll_ffi(TJsValue::to_js(self)).to_option()
 }

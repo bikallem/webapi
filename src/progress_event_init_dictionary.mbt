@@ -39,62 +39,30 @@ pub fn ProgressEventInit::empty() -> ProgressEventInit {
 
 ///|
 pub fn ProgressEventInit::bubbles(self : ProgressEventInit) -> Bool? {
-  let result = progress_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  progress_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ProgressEventInit::cancelable(self : ProgressEventInit) -> Bool? {
-  let result = progress_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  progress_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ProgressEventInit::composed(self : ProgressEventInit) -> Bool? {
-  let result = progress_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  progress_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ProgressEventInit::length_computable(self : ProgressEventInit) -> Bool? {
-  let result = progress_event_init_get_length_computable_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  progress_event_init_get_length_computable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ProgressEventInit::loaded(self : ProgressEventInit) -> Double? {
-  let result = progress_event_init_get_loaded_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  progress_event_init_get_loaded_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ProgressEventInit::total(self : ProgressEventInit) -> Double? {
-  let result = progress_event_init_get_total_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  progress_event_init_get_total_ffi(TJsValue::to_js(self)).to_option_prim()
 }

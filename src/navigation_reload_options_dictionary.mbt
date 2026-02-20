@@ -32,22 +32,12 @@ pub fn NavigationReloadOptions::empty() -> NavigationReloadOptions {
 pub fn NavigationReloadOptions::info(
   self : NavigationReloadOptions,
 ) -> JsValue? {
-  let result = navigation_reload_options_get_info_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_reload_options_get_info_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn NavigationReloadOptions::state(
   self : NavigationReloadOptions,
 ) -> JsValue? {
-  let result = navigation_reload_options_get_state_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_reload_options_get_state_ffi(TJsValue::to_js(self)).to_option()
 }

@@ -37,54 +37,27 @@ pub fn PopStateEventInit::empty() -> PopStateEventInit {
 
 ///|
 pub fn PopStateEventInit::bubbles(self : PopStateEventInit) -> Bool? {
-  let result = pop_state_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  pop_state_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn PopStateEventInit::cancelable(self : PopStateEventInit) -> Bool? {
-  let result = pop_state_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  pop_state_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn PopStateEventInit::composed(self : PopStateEventInit) -> Bool? {
-  let result = pop_state_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  pop_state_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn PopStateEventInit::state(self : PopStateEventInit) -> JsValue? {
-  let result = pop_state_event_init_get_state_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  pop_state_event_init_get_state_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn PopStateEventInit::has_ua_visual_transition(
   self : PopStateEventInit,
 ) -> Bool? {
-  let result = pop_state_event_init_get_has_ua_visual_transition_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  pop_state_event_init_get_has_ua_visual_transition_ffi(TJsValue::to_js(self)).to_option_prim()
 }

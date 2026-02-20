@@ -109,118 +109,64 @@ pub impl TKeyframeEffectOptionsGetDuration for KeyframeEffectOptionsGetDuration 
 
 ///|
 pub fn KeyframeEffectOptions::fill(self : KeyframeEffectOptions) -> FillMode? {
-  let result = keyframe_effect_options_get_fill_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  keyframe_effect_options_get_fill_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn KeyframeEffectOptions::iteration_start(
   self : KeyframeEffectOptions,
 ) -> Double? {
-  let result = keyframe_effect_options_get_iteration_start_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyframe_effect_options_get_iteration_start_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyframeEffectOptions::iterations(
   self : KeyframeEffectOptions,
 ) -> Double? {
-  let result = keyframe_effect_options_get_iterations_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyframe_effect_options_get_iterations_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyframeEffectOptions::direction(
   self : KeyframeEffectOptions,
 ) -> PlaybackDirection? {
-  let result = keyframe_effect_options_get_direction_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  keyframe_effect_options_get_direction_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn KeyframeEffectOptions::easing(self : KeyframeEffectOptions) -> String? {
-  let result = keyframe_effect_options_get_easing_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyframe_effect_options_get_easing_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyframeEffectOptions::delay(self : KeyframeEffectOptions) -> Double? {
-  let result = keyframe_effect_options_get_delay_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyframe_effect_options_get_delay_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyframeEffectOptions::end_delay(
   self : KeyframeEffectOptions,
 ) -> Double? {
-  let result = keyframe_effect_options_get_end_delay_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  keyframe_effect_options_get_end_delay_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn KeyframeEffectOptions::duration(
   self : KeyframeEffectOptions,
 ) -> KeyframeEffectOptionsGetDuration? {
-  let result = keyframe_effect_options_get_duration_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  keyframe_effect_options_get_duration_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn KeyframeEffectOptions::composite(
   self : KeyframeEffectOptions,
 ) -> CompositeOperation? {
-  let result = keyframe_effect_options_get_composite_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  keyframe_effect_options_get_composite_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn KeyframeEffectOptions::pseudo_element(
   self : KeyframeEffectOptions,
 ) -> CSSOMString? {
-  let result = keyframe_effect_options_get_pseudo_element_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  keyframe_effect_options_get_pseudo_element_ffi(TJsValue::to_js(self)).to_option()
 }

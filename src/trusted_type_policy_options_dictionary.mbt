@@ -46,40 +46,19 @@ pub fn TrustedTypePolicyOptions::empty() -> TrustedTypePolicyOptions {
 pub fn TrustedTypePolicyOptions::create_html(
   self : TrustedTypePolicyOptions,
 ) -> CreateHTMLCallback? {
-  let result = trusted_type_policy_options_get_create_html_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  trusted_type_policy_options_get_create_html_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn TrustedTypePolicyOptions::create_script(
   self : TrustedTypePolicyOptions,
 ) -> CreateScriptCallback? {
-  let result = trusted_type_policy_options_get_create_script_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  trusted_type_policy_options_get_create_script_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn TrustedTypePolicyOptions::create_script_url(
   self : TrustedTypePolicyOptions,
 ) -> CreateScriptURLCallback? {
-  let result = trusted_type_policy_options_get_create_script_url_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  trusted_type_policy_options_get_create_script_url_ffi(TJsValue::to_js(self)).to_option()
 }

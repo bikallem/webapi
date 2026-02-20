@@ -80,12 +80,7 @@ impl TFormData with delete(self : Self, name : String) -> Unit {
 ///|
 /// [FormData.get](https://developer.mozilla.org/en-US/docs/Web/API/FormData/get)
 impl TFormData with get(self : Self, name : String) -> FormDataEntryValue? {
-  let result = form_data_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  form_data_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 
 ///|

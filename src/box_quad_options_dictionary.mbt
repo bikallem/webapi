@@ -34,20 +34,10 @@ pub fn BoxQuadOptions::empty() -> BoxQuadOptions {
 
 ///|
 pub fn BoxQuadOptions::box(self : BoxQuadOptions) -> CSSBoxType? {
-  let result = box_quad_options_get_box_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  box_quad_options_get_box_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn BoxQuadOptions::relative_to(self : BoxQuadOptions) -> GeometryNode? {
-  let result = box_quad_options_get_relative_to_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  box_quad_options_get_relative_to_ffi(TJsValue::to_js(self)).to_option()
 }

@@ -273,12 +273,7 @@ impl THTMLIFrameElement with content_window(self : Self) -> WindowProxy {
 ///|
 /// [HTMLIFrameElement.getSVGDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/getSVGDocument)
 impl THTMLIFrameElement with get_svg_document(self : Self) -> Document? {
-  let result = htmli_frame_element_get_svg_document_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  htmli_frame_element_get_svg_document_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|

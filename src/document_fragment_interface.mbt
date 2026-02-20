@@ -89,15 +89,10 @@ pub trait TDocumentFragment: TNode {
 ///|
 /// [DocumentFragment.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/getElementById)
 impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element? {
-  let result = document_fragment_get_element_by_id_ffi(
+  document_fragment_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -185,15 +180,10 @@ impl TDocumentFragment with move_before(
 ///|
 /// [DocumentFragment.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/querySelector)
 impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element? {
-  let result = document_fragment_query_selector_ffi(
+  document_fragment_query_selector_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(selectors),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

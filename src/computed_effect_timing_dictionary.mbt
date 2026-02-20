@@ -109,112 +109,58 @@ pub impl TComputedEffectTimingGetDuration for ComputedEffectTimingGetDuration wi
 
 ///|
 pub fn ComputedEffectTiming::fill(self : ComputedEffectTiming) -> FillMode? {
-  let result = computed_effect_timing_get_fill_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  computed_effect_timing_get_fill_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ComputedEffectTiming::iteration_start(
   self : ComputedEffectTiming,
 ) -> Double? {
-  let result = computed_effect_timing_get_iteration_start_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  computed_effect_timing_get_iteration_start_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ComputedEffectTiming::iterations(self : ComputedEffectTiming) -> Double? {
-  let result = computed_effect_timing_get_iterations_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  computed_effect_timing_get_iterations_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ComputedEffectTiming::direction(
   self : ComputedEffectTiming,
 ) -> PlaybackDirection? {
-  let result = computed_effect_timing_get_direction_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  computed_effect_timing_get_direction_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ComputedEffectTiming::easing(self : ComputedEffectTiming) -> String? {
-  let result = computed_effect_timing_get_easing_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  computed_effect_timing_get_easing_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ComputedEffectTiming::delay(self : ComputedEffectTiming) -> Double? {
-  let result = computed_effect_timing_get_delay_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  computed_effect_timing_get_delay_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ComputedEffectTiming::end_delay(self : ComputedEffectTiming) -> Double? {
-  let result = computed_effect_timing_get_end_delay_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  computed_effect_timing_get_end_delay_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ComputedEffectTiming::duration(
   self : ComputedEffectTiming,
 ) -> ComputedEffectTimingGetDuration? {
-  let result = computed_effect_timing_get_duration_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  computed_effect_timing_get_duration_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ComputedEffectTiming::progress(self : ComputedEffectTiming) -> Double? {
-  let result = computed_effect_timing_get_progress_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  computed_effect_timing_get_progress_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ComputedEffectTiming::current_iteration(
   self : ComputedEffectTiming,
 ) -> Double? {
-  let result = computed_effect_timing_get_current_iteration_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  computed_effect_timing_get_current_iteration_ffi(TJsValue::to_js(self)).to_option_prim()
 }

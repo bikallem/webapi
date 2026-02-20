@@ -59,12 +59,7 @@ impl THeaders with delete(self : Self, name : String) -> Unit {
 ///|
 /// [Headers.get](https://developer.mozilla.org/en-US/docs/Web/API/Headers/get)
 impl THeaders with get(self : Self, name : String) -> String? {
-  let result = headers_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  headers_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 
 ///|

@@ -36,15 +36,7 @@ impl TDOMStringList with length(self : Self) -> UInt {
 ///|
 /// [DOMStringList.item](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/item)
 impl TDOMStringList with item(self : Self, index : UInt) -> String? {
-  let result = dom_string_list_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_string_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|

@@ -42,10 +42,5 @@ impl TCaretPosition with offset(self : Self) -> UInt {
 ///|
 /// [CaretPosition.getClientRect](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/getClientRect)
 impl TCaretPosition with get_client_rect(self : Self) -> DOMRect? {
-  let result = caret_position_get_client_rect_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  caret_position_get_client_rect_ffi(TJsValue::to_js(self)).to_option()
 }

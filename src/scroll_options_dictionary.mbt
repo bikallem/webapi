@@ -27,10 +27,5 @@ pub fn ScrollOptions::empty() -> ScrollOptions {
 
 ///|
 pub fn ScrollOptions::behavior(self : ScrollOptions) -> ScrollBehavior? {
-  let result = scroll_options_get_behavior_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  scroll_options_get_behavior_ffi(TJsValue::to_js(self)).to_option()
 }

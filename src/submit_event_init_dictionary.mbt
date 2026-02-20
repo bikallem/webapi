@@ -35,40 +35,20 @@ pub fn SubmitEventInit::empty() -> SubmitEventInit {
 
 ///|
 pub fn SubmitEventInit::bubbles(self : SubmitEventInit) -> Bool? {
-  let result = submit_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  submit_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn SubmitEventInit::cancelable(self : SubmitEventInit) -> Bool? {
-  let result = submit_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  submit_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn SubmitEventInit::composed(self : SubmitEventInit) -> Bool? {
-  let result = submit_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  submit_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn SubmitEventInit::submitter(self : SubmitEventInit) -> HTMLElement? {
-  let result = submit_event_init_get_submitter_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  submit_event_init_get_submitter_ffi(TJsValue::to_js(self)).to_option()
 }

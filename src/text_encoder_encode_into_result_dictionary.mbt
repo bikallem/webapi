@@ -34,26 +34,12 @@ pub fn TextEncoderEncodeIntoResult::empty() -> TextEncoderEncodeIntoResult {
 pub fn TextEncoderEncodeIntoResult::read(
   self : TextEncoderEncodeIntoResult,
 ) -> UInt64? {
-  let result = text_encoder_encode_into_result_get_read_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  text_encoder_encode_into_result_get_read_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TextEncoderEncodeIntoResult::written(
   self : TextEncoderEncodeIntoResult,
 ) -> UInt64? {
-  let result = text_encoder_encode_into_result_get_written_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  text_encoder_encode_into_result_get_written_ffi(TJsValue::to_js(self)).to_option_prim()
 }

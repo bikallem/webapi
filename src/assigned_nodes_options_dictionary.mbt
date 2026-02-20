@@ -29,10 +29,5 @@ pub fn AssignedNodesOptions::empty() -> AssignedNodesOptions {
 
 ///|
 pub fn AssignedNodesOptions::flatten(self : AssignedNodesOptions) -> Bool? {
-  let result = assigned_nodes_options_get_flatten_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  assigned_nodes_options_get_flatten_ffi(TJsValue::to_js(self)).to_option_prim()
 }

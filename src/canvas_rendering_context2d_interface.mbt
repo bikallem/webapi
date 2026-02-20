@@ -745,16 +745,11 @@ impl TCanvasRenderingContext2D with create_pattern(
   image : &TCanvasImageSource,
   repetition : String,
 ) -> CanvasPattern? {
-  let result = canvas_rendering_context2d_create_pattern_ffi(
+  canvas_rendering_context2d_create_pattern_ffi(
     TJsValue::to_js(self),
     image.to_js(),
     TJsValue::to_js(repetition),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

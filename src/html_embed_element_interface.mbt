@@ -113,12 +113,7 @@ impl THTMLEmbedElement with set_height(self : Self, height : String) -> Unit {
 ///|
 /// [HTMLEmbedElement.getSVGDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/getSVGDocument)
 impl THTMLEmbedElement with get_svg_document(self : Self) -> Document? {
-  let result = html_embed_element_get_svg_document_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  html_embed_element_get_svg_document_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|

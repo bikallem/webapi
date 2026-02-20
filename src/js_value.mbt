@@ -40,6 +40,28 @@ pub fn[T : TJsValue] JsValue::into(self : JsValue) -> T = "%identity"
 fn[T] JsValue::unsafe_cast(self : JsValue) -> T = "%identity"
 
 ///|
+/// Convert a nullable JsValue to Option[T] for externref types.
+/// Returns None if the value is null/undefined, otherwise unsafe-casts to T.
+fn[T] JsValue::to_option(self : JsValue) -> T? {
+  if JsValue::is_null(self) {
+    None
+  } else {
+    Some(self.unsafe_cast())
+  }
+}
+
+///|
+/// Convert a nullable JsValue to Option[T] for wasm value types (Bool, Int, Double).
+/// Uses FromJsAny for proper externref→value conversion on wasm-gc.
+fn[T : FromJsAny] JsValue::to_option_prim(self : JsValue) -> T? {
+  if JsValue::is_null(self) {
+    None
+  } else {
+    Some(FromJsAny::from_js_any(jsvalue_to_jsany(self)))
+  }
+}
+
+///|
 /// Convert an Option[T] to JsValue - returns undefined if None
 fn[T : TJsValue] opt_to_js(opt : T?) -> JsValue {
   match opt {

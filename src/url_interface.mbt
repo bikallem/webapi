@@ -66,12 +66,7 @@ pub trait TURL: TJsValue {
 ///|
 /// [URL.parse](https://developer.mozilla.org/en-US/docs/Web/API/URL/parse)
 pub fn URL::parse(url : String, base? : String) -> URL? {
-  let result = url_parse_ffi(TJsValue::to_js(url), opt_to_js(base))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  url_parse_ffi(TJsValue::to_js(url), opt_to_js(base)).to_option()
 }
 
 ///|

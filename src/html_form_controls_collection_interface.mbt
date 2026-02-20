@@ -83,13 +83,8 @@ pub trait THTMLFormControlsCollection: THTMLCollection {
 ///|
 /// [HTMLFormControlsCollection.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection/namedItem)
 impl THTMLFormControlsCollection with named_item(self : Self, name : String) -> HTMLFormControlsCollectionNamedItem? {
-  let result = html_form_controls_collection_named_item_ffi(
+  html_form_controls_collection_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }

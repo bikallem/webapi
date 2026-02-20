@@ -54,15 +54,7 @@ impl TMediaList with length(self : Self) -> UInt {
 ///|
 /// [MediaList.item](https://developer.mozilla.org/en-US/docs/Web/API/MediaList/item)
 impl TMediaList with item(self : Self, index : UInt) -> CSSOMString? {
-  let result = media_list_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  media_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|

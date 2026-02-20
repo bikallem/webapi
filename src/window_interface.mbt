@@ -637,28 +637,18 @@ impl TWindow with open(
   target? : String = "_blank",
   features? : String = "",
 ) -> WindowProxy? {
-  let result = window_open_ffi(
+  window_open_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
     TJsValue::to_js(target),
     TJsValue::to_js(features),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
 /// [Window.get](https://developer.mozilla.org/en-US/docs/Web/API/Window/get)
 impl TWindow with get(self : Self, name : String) -> JsValue? {
-  let result = window_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  window_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 
 ///|
@@ -704,16 +694,11 @@ impl TWindow with prompt(
   message? : String = "",
   default? : String = "",
 ) -> String? {
-  let result = window_prompt_ffi(
+  window_prompt_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
     TJsValue::to_js(default),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
@@ -1000,12 +985,7 @@ impl TWindow with device_pixel_ratio(self : Self) -> Double {
 ///|
 /// [Window.getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection)
 impl TWindow with get_selection(self : Self) -> Selection? {
-  let result = window_get_selection_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  window_get_selection_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|

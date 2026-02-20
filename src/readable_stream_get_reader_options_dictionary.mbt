@@ -33,12 +33,5 @@ pub fn ReadableStreamGetReaderOptions::empty() -> ReadableStreamGetReaderOptions
 pub fn ReadableStreamGetReaderOptions::mode(
   self : ReadableStreamGetReaderOptions,
 ) -> ReadableStreamReaderMode? {
-  let result = readable_stream_get_reader_options_get_mode_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  readable_stream_get_reader_options_get_mode_ffi(TJsValue::to_js(self)).to_option()
 }

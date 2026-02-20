@@ -43,80 +43,40 @@ pub fn StorageEventInit::empty() -> StorageEventInit {
 
 ///|
 pub fn StorageEventInit::bubbles(self : StorageEventInit) -> Bool? {
-  let result = storage_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  storage_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn StorageEventInit::cancelable(self : StorageEventInit) -> Bool? {
-  let result = storage_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  storage_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn StorageEventInit::composed(self : StorageEventInit) -> Bool? {
-  let result = storage_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  storage_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn StorageEventInit::key(self : StorageEventInit) -> String? {
-  let result = storage_event_init_get_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  storage_event_init_get_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn StorageEventInit::old_value(self : StorageEventInit) -> String? {
-  let result = storage_event_init_get_old_value_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  storage_event_init_get_old_value_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn StorageEventInit::new_value(self : StorageEventInit) -> String? {
-  let result = storage_event_init_get_new_value_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  storage_event_init_get_new_value_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn StorageEventInit::url(self : StorageEventInit) -> String? {
-  let result = storage_event_init_get_url_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  storage_event_init_get_url_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn StorageEventInit::storage_area(self : StorageEventInit) -> Storage? {
-  let result = storage_event_init_get_storage_area_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  storage_event_init_get_storage_area_ffi(TJsValue::to_js(self)).to_option()
 }

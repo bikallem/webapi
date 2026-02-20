@@ -41,66 +41,33 @@ pub fn ClipboardChangeEventInit::empty() -> ClipboardChangeEventInit {
 pub fn ClipboardChangeEventInit::bubbles(
   self : ClipboardChangeEventInit,
 ) -> Bool? {
-  let result = clipboard_change_event_init_get_bubbles_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  clipboard_change_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ClipboardChangeEventInit::cancelable(
   self : ClipboardChangeEventInit,
 ) -> Bool? {
-  let result = clipboard_change_event_init_get_cancelable_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  clipboard_change_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ClipboardChangeEventInit::composed(
   self : ClipboardChangeEventInit,
 ) -> Bool? {
-  let result = clipboard_change_event_init_get_composed_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  clipboard_change_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ClipboardChangeEventInit::types(
   self : ClipboardChangeEventInit,
 ) -> Array[String]? {
-  let result = clipboard_change_event_init_get_types_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  clipboard_change_event_init_get_types_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ClipboardChangeEventInit::change_id(
   self : ClipboardChangeEventInit,
 ) -> Int64? {
-  let result = clipboard_change_event_init_get_change_id_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  clipboard_change_event_init_get_change_id_ffi(TJsValue::to_js(self)).to_option_prim()
 }

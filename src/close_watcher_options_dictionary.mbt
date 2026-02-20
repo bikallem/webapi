@@ -25,10 +25,5 @@ pub fn CloseWatcherOptions::empty() -> CloseWatcherOptions {
 
 ///|
 pub fn CloseWatcherOptions::signal(self : CloseWatcherOptions) -> AbortSignal? {
-  let result = close_watcher_options_get_signal_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  close_watcher_options_get_signal_ffi(TJsValue::to_js(self)).to_option()
 }

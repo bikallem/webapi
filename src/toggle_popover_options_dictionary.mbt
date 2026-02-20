@@ -32,20 +32,10 @@ pub fn TogglePopoverOptions::empty() -> TogglePopoverOptions {
 pub fn TogglePopoverOptions::source(
   self : TogglePopoverOptions,
 ) -> HTMLElement? {
-  let result = toggle_popover_options_get_source_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  toggle_popover_options_get_source_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn TogglePopoverOptions::force(self : TogglePopoverOptions) -> Bool? {
-  let result = toggle_popover_options_get_force_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  toggle_popover_options_get_force_ffi(TJsValue::to_js(self)).to_option_prim()
 }

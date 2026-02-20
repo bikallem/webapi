@@ -35,13 +35,5 @@ impl TDOMRectList with length(self : Self) -> UInt {
 ///|
 /// [DOMRectList.item](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectList/item)
 impl TDOMRectList with item(self : Self, index : UInt) -> DOMRect? {
-  let result = dom_rect_list_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_rect_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }

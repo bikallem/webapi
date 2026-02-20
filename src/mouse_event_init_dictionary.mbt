@@ -81,278 +81,135 @@ pub fn MouseEventInit::empty() -> MouseEventInit {
 
 ///|
 pub fn MouseEventInit::bubbles(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::cancelable(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::composed(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::view(self : MouseEventInit) -> Window? {
-  let result = mouse_event_init_get_view_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  mouse_event_init_get_view_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn MouseEventInit::detail(self : MouseEventInit) -> Int? {
-  let result = mouse_event_init_get_detail_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_detail_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::which(self : MouseEventInit) -> UInt? {
-  let result = mouse_event_init_get_which_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_which_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::ctrl_key(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_ctrl_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_ctrl_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::shift_key(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_shift_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_shift_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::alt_key(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_alt_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_alt_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::meta_key(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_meta_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_meta_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_alt_graph(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_alt_graph_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_alt_graph_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_caps_lock(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_caps_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_caps_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_fn(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_fn_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_fn_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_fn_lock(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_fn_lock_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_fn_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_hyper(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_num_lock(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_num_lock_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_num_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_scroll_lock(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_scroll_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_scroll_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_super(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_super_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_super_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_symbol(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_symbol_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_symbol_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::modifier_symbol_lock(self : MouseEventInit) -> Bool? {
-  let result = mouse_event_init_get_modifier_symbol_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_modifier_symbol_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::screen_x(self : MouseEventInit) -> Int? {
-  let result = mouse_event_init_get_screen_x_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_screen_x_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::screen_y(self : MouseEventInit) -> Int? {
-  let result = mouse_event_init_get_screen_y_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_screen_y_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::client_x(self : MouseEventInit) -> Int? {
-  let result = mouse_event_init_get_client_x_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_client_x_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::client_y(self : MouseEventInit) -> Int? {
-  let result = mouse_event_init_get_client_y_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_client_y_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::button(self : MouseEventInit) -> Int? {
-  let result = mouse_event_init_get_button_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_button_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::buttons(self : MouseEventInit) -> UInt? {
-  let result = mouse_event_init_get_buttons_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  mouse_event_init_get_buttons_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MouseEventInit::related_target(self : MouseEventInit) -> EventTarget? {
-  let result = mouse_event_init_get_related_target_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  mouse_event_init_get_related_target_ffi(TJsValue::to_js(self)).to_option()
 }

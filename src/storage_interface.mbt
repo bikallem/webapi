@@ -39,23 +39,13 @@ impl TStorage with length(self : Self) -> UInt {
 ///|
 /// [Storage.key](https://developer.mozilla.org/en-US/docs/Web/API/Storage/key)
 impl TStorage with key(self : Self, index : UInt) -> String? {
-  let result = storage_key_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  storage_key_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [Storage.getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem)
 impl TStorage with get_item(self : Self, key : String) -> String? {
-  let result = storage_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  storage_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key)).to_option()
 }
 
 ///|

@@ -99,26 +99,12 @@ pub impl TIDBObjectStoreParametersGetKeyPath for IDBObjectStoreParametersGetKeyP
 pub fn IDBObjectStoreParameters::key_path(
   self : IDBObjectStoreParameters,
 ) -> IDBObjectStoreParametersGetKeyPath? {
-  let result = idb_object_store_parameters_get_key_path_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  idb_object_store_parameters_get_key_path_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn IDBObjectStoreParameters::auto_increment(
   self : IDBObjectStoreParameters,
 ) -> Bool? {
-  let result = idb_object_store_parameters_get_auto_increment_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  idb_object_store_parameters_get_auto_increment_ffi(TJsValue::to_js(self)).to_option_prim()
 }

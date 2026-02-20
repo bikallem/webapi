@@ -108,24 +108,11 @@ impl TXPathResult with snapshot_length(self : Self) -> UInt {
 ///|
 /// [XPathResult.iterateNext](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/iterateNext)
 impl TXPathResult with iterate_next(self : Self) -> Node? {
-  let result = x_path_result_iterate_next_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  x_path_result_iterate_next_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [XPathResult.snapshotItem](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/snapshotItem)
 impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node? {
-  let result = x_path_result_snapshot_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  x_path_result_snapshot_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }

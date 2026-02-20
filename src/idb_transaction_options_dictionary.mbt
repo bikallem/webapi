@@ -31,10 +31,5 @@ pub fn IDBTransactionOptions::empty() -> IDBTransactionOptions {
 pub fn IDBTransactionOptions::durability(
   self : IDBTransactionOptions,
 ) -> IDBTransactionDurability? {
-  let result = idb_transaction_options_get_durability_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  idb_transaction_options_get_durability_ffi(TJsValue::to_js(self)).to_option()
 }

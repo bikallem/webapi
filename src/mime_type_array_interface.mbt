@@ -36,27 +36,11 @@ impl TMimeTypeArray with length(self : Self) -> UInt {
 ///|
 /// [MimeTypeArray.item](https://developer.mozilla.org/en-US/docs/Web/API/MimeTypeArray/item)
 impl TMimeTypeArray with item(self : Self, index : UInt) -> MimeType? {
-  let result = mime_type_array_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  mime_type_array_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [MimeTypeArray.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/MimeTypeArray/namedItem)
 impl TMimeTypeArray with named_item(self : Self, name : String) -> MimeType? {
-  let result = mime_type_array_named_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  mime_type_array_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }

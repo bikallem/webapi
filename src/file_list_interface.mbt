@@ -29,12 +29,7 @@ pub trait TFileList: TJsValue {
 ///|
 /// [FileList.item](https://developer.mozilla.org/en-US/docs/Web/API/FileList/item)
 impl TFileList with item(self : Self, index : UInt) -> File? {
-  let result = file_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  file_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|

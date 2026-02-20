@@ -37,36 +37,19 @@ pub fn NavigationNavigateOptions::empty() -> NavigationNavigateOptions {
 pub fn NavigationNavigateOptions::info(
   self : NavigationNavigateOptions,
 ) -> JsValue? {
-  let result = navigation_navigate_options_get_info_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_navigate_options_get_info_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn NavigationNavigateOptions::state(
   self : NavigationNavigateOptions,
 ) -> JsValue? {
-  let result = navigation_navigate_options_get_state_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_navigate_options_get_state_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn NavigationNavigateOptions::history(
   self : NavigationNavigateOptions,
 ) -> NavigationHistoryBehavior? {
-  let result = navigation_navigate_options_get_history_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_navigate_options_get_history_ffi(TJsValue::to_js(self)).to_option()
 }

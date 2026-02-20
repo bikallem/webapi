@@ -41,66 +41,33 @@ pub fn MediaQueryListEventInit::empty() -> MediaQueryListEventInit {
 pub fn MediaQueryListEventInit::bubbles(
   self : MediaQueryListEventInit,
 ) -> Bool? {
-  let result = media_query_list_event_init_get_bubbles_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  media_query_list_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MediaQueryListEventInit::cancelable(
   self : MediaQueryListEventInit,
 ) -> Bool? {
-  let result = media_query_list_event_init_get_cancelable_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  media_query_list_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MediaQueryListEventInit::composed(
   self : MediaQueryListEventInit,
 ) -> Bool? {
-  let result = media_query_list_event_init_get_composed_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  media_query_list_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MediaQueryListEventInit::media(
   self : MediaQueryListEventInit,
 ) -> CSSOMString? {
-  let result = media_query_list_event_init_get_media_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  media_query_list_event_init_get_media_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn MediaQueryListEventInit::matches(
   self : MediaQueryListEventInit,
 ) -> Bool? {
-  let result = media_query_list_event_init_get_matches_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  media_query_list_event_init_get_matches_ffi(TJsValue::to_js(self)).to_option_prim()
 }

@@ -31,10 +31,5 @@ pub fn ElementDefinitionOptions::empty() -> ElementDefinitionOptions {
 pub fn ElementDefinitionOptions::extends(
   self : ElementDefinitionOptions,
 ) -> String? {
-  let result = element_definition_options_get_extends_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  element_definition_options_get_extends_ffi(TJsValue::to_js(self)).to_option_prim()
 }

@@ -236,29 +236,16 @@ impl THTMLSelectElement with set_length(self : Self, length : UInt) -> Unit {
 ///|
 /// [HTMLSelectElement.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/item)
 impl THTMLSelectElement with item(self : Self, index : UInt) -> HTMLOptionElement? {
-  let result = html_select_element_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  html_select_element_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [HTMLSelectElement.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/namedItem)
 impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement? {
-  let result = html_select_element_named_item_ffi(
+  html_select_element_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

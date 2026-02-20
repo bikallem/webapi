@@ -35,24 +35,12 @@ pub fn ConvertCoordinateOptions::empty() -> ConvertCoordinateOptions {
 pub fn ConvertCoordinateOptions::from_box(
   self : ConvertCoordinateOptions,
 ) -> CSSBoxType? {
-  let result = convert_coordinate_options_get_from_box_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  convert_coordinate_options_get_from_box_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ConvertCoordinateOptions::to_box(
   self : ConvertCoordinateOptions,
 ) -> CSSBoxType? {
-  let result = convert_coordinate_options_get_to_box_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  convert_coordinate_options_get_to_box_ffi(TJsValue::to_js(self)).to_option()
 }

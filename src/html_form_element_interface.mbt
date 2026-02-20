@@ -281,29 +281,16 @@ impl THTMLFormElement with length(self : Self) -> UInt {
 ///|
 /// [HTMLFormElement.get](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/get)
 impl THTMLFormElement with get(self : Self, index : UInt) -> Element? {
-  let result = html_form_element_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  html_form_element_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [HTMLFormElement.get_by_name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/get_by_name)
 impl THTMLFormElement with get_by_name(self : Self, name : String) -> HTMLFormElementGetByName? {
-  let result = html_form_element_get_by_name_ffi(
+  html_form_element_get_by_name_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

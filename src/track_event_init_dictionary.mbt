@@ -95,40 +95,20 @@ pub impl TTrackEventInitGetTrack for TrackEventInitGetTrack with to_js(
 
 ///|
 pub fn TrackEventInit::bubbles(self : TrackEventInit) -> Bool? {
-  let result = track_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  track_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TrackEventInit::cancelable(self : TrackEventInit) -> Bool? {
-  let result = track_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  track_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TrackEventInit::composed(self : TrackEventInit) -> Bool? {
-  let result = track_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  track_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TrackEventInit::track(self : TrackEventInit) -> TrackEventInitGetTrack? {
-  let result = track_event_init_get_track_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  track_event_init_get_track_ffi(TJsValue::to_js(self)).to_option()
 }

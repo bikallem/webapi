@@ -43,56 +43,36 @@ pub fn NavigationCurrentEntryChangeEventInit::empty() -> NavigationCurrentEntryC
 pub fn NavigationCurrentEntryChangeEventInit::bubbles(
   self : NavigationCurrentEntryChangeEventInit,
 ) -> Bool? {
-  let result = navigation_current_entry_change_event_init_get_bubbles_ffi(
+  navigation_current_entry_change_event_init_get_bubbles_ffi(
     TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  ).to_option_prim()
 }
 
 ///|
 pub fn NavigationCurrentEntryChangeEventInit::cancelable(
   self : NavigationCurrentEntryChangeEventInit,
 ) -> Bool? {
-  let result = navigation_current_entry_change_event_init_get_cancelable_ffi(
+  navigation_current_entry_change_event_init_get_cancelable_ffi(
     TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  ).to_option_prim()
 }
 
 ///|
 pub fn NavigationCurrentEntryChangeEventInit::composed(
   self : NavigationCurrentEntryChangeEventInit,
 ) -> Bool? {
-  let result = navigation_current_entry_change_event_init_get_composed_ffi(
+  navigation_current_entry_change_event_init_get_composed_ffi(
     TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  ).to_option_prim()
 }
 
 ///|
 pub fn NavigationCurrentEntryChangeEventInit::navigation_type(
   self : NavigationCurrentEntryChangeEventInit,
 ) -> NavigationType? {
-  let result = navigation_current_entry_change_event_init_get_navigation_type_ffi(
+  navigation_current_entry_change_event_init_get_navigation_type_ffi(
     TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

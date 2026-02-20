@@ -65,23 +65,13 @@ impl TSVGGraphicsElement with get_b_box(
 ///|
 /// [SVGGraphicsElement.getCTM](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getCTM)
 impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix? {
-  let result = svg_graphics_element_get_ctm_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  svg_graphics_element_get_ctm_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [SVGGraphicsElement.getScreenCTM](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getScreenCTM)
 impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix? {
-  let result = svg_graphics_element_get_screen_ctm_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  svg_graphics_element_get_screen_ctm_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|

@@ -33,12 +33,7 @@ pub fn PerformanceObserverCallbackOptions::empty() -> PerformanceObserverCallbac
 pub fn PerformanceObserverCallbackOptions::dropped_entries_count(
   self : PerformanceObserverCallbackOptions,
 ) -> UInt64? {
-  let result = performance_observer_callback_options_get_dropped_entries_count_ffi(
+  performance_observer_callback_options_get_dropped_entries_count_ffi(
     TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  ).to_option_prim()
 }

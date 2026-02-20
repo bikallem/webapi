@@ -87,32 +87,17 @@ pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia with to_js(
 
 ///|
 pub fn CSSStyleSheetInit::base_url(self : CSSStyleSheetInit) -> String? {
-  let result = css_style_sheet_init_get_base_url_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  css_style_sheet_init_get_base_url_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn CSSStyleSheetInit::media(
   self : CSSStyleSheetInit,
 ) -> CSSStyleSheetInitGetMedia? {
-  let result = css_style_sheet_init_get_media_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  css_style_sheet_init_get_media_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn CSSStyleSheetInit::disabled(self : CSSStyleSheetInit) -> Bool? {
-  let result = css_style_sheet_init_get_disabled_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  css_style_sheet_init_get_disabled_ffi(TJsValue::to_js(self)).to_option_prim()
 }

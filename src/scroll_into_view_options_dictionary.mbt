@@ -39,46 +39,26 @@ pub fn ScrollIntoViewOptions::empty() -> ScrollIntoViewOptions {
 pub fn ScrollIntoViewOptions::behavior(
   self : ScrollIntoViewOptions,
 ) -> ScrollBehavior? {
-  let result = scroll_into_view_options_get_behavior_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  scroll_into_view_options_get_behavior_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ScrollIntoViewOptions::block(
   self : ScrollIntoViewOptions,
 ) -> ScrollLogicalPosition? {
-  let result = scroll_into_view_options_get_block_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  scroll_into_view_options_get_block_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ScrollIntoViewOptions::inline(
   self : ScrollIntoViewOptions,
 ) -> ScrollLogicalPosition? {
-  let result = scroll_into_view_options_get_inline_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  scroll_into_view_options_get_inline_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn ScrollIntoViewOptions::container(
   self : ScrollIntoViewOptions,
 ) -> ScrollIntoViewContainer? {
-  let result = scroll_into_view_options_get_container_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  scroll_into_view_options_get_container_ffi(TJsValue::to_js(self)).to_option()
 }

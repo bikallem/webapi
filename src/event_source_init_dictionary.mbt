@@ -27,10 +27,5 @@ pub fn EventSourceInit::empty() -> EventSourceInit {
 
 ///|
 pub fn EventSourceInit::with_credentials(self : EventSourceInit) -> Bool? {
-  let result = event_source_init_get_with_credentials_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  event_source_init_get_with_credentials_ffi(TJsValue::to_js(self)).to_option_prim()
 }

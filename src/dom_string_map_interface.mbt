@@ -30,15 +30,7 @@ pub trait TDOMStringMap: TJsValue {
 ///|
 /// [DOMStringMap.get](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringMap/get)
 impl TDOMStringMap with get(self : Self, name : String) -> String? {
-  let result = dom_string_map_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_string_map_get_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 
 ///|

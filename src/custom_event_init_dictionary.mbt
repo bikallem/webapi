@@ -35,40 +35,20 @@ pub fn CustomEventInit::empty() -> CustomEventInit {
 
 ///|
 pub fn CustomEventInit::bubbles(self : CustomEventInit) -> Bool? {
-  let result = custom_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  custom_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn CustomEventInit::cancelable(self : CustomEventInit) -> Bool? {
-  let result = custom_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  custom_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn CustomEventInit::composed(self : CustomEventInit) -> Bool? {
-  let result = custom_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  custom_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn CustomEventInit::detail(self : CustomEventInit) -> JsValue? {
-  let result = custom_event_init_get_detail_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  custom_event_init_get_detail_ffi(TJsValue::to_js(self)).to_option()
 }

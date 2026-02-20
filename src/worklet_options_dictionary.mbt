@@ -29,10 +29,5 @@ pub fn WorkletOptions::empty() -> WorkletOptions {
 pub fn WorkletOptions::credentials(
   self : WorkletOptions,
 ) -> RequestCredentials? {
-  let result = worklet_options_get_credentials_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  worklet_options_get_credentials_ffi(TJsValue::to_js(self)).to_option()
 }

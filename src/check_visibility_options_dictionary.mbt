@@ -41,68 +41,35 @@ pub fn CheckVisibilityOptions::empty() -> CheckVisibilityOptions {
 pub fn CheckVisibilityOptions::check_opacity(
   self : CheckVisibilityOptions,
 ) -> Bool? {
-  let result = check_visibility_options_get_check_opacity_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  check_visibility_options_get_check_opacity_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn CheckVisibilityOptions::check_visibility_css(
   self : CheckVisibilityOptions,
 ) -> Bool? {
-  let result = check_visibility_options_get_check_visibility_css_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  check_visibility_options_get_check_visibility_css_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn CheckVisibilityOptions::content_visibility_auto(
   self : CheckVisibilityOptions,
 ) -> Bool? {
-  let result = check_visibility_options_get_content_visibility_auto_ffi(
+  check_visibility_options_get_content_visibility_auto_ffi(
     TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  ).to_option_prim()
 }
 
 ///|
 pub fn CheckVisibilityOptions::opacity_property(
   self : CheckVisibilityOptions,
 ) -> Bool? {
-  let result = check_visibility_options_get_opacity_property_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  check_visibility_options_get_opacity_property_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn CheckVisibilityOptions::visibility_property(
   self : CheckVisibilityOptions,
 ) -> Bool? {
-  let result = check_visibility_options_get_visibility_property_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  check_visibility_options_get_visibility_property_ffi(TJsValue::to_js(self)).to_option_prim()
 }

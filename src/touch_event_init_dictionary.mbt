@@ -73,238 +73,115 @@ pub fn TouchEventInit::empty() -> TouchEventInit {
 
 ///|
 pub fn TouchEventInit::bubbles(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::cancelable(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::composed(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::view(self : TouchEventInit) -> Window? {
-  let result = touch_event_init_get_view_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  touch_event_init_get_view_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn TouchEventInit::detail(self : TouchEventInit) -> Int? {
-  let result = touch_event_init_get_detail_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_detail_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::which(self : TouchEventInit) -> UInt? {
-  let result = touch_event_init_get_which_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_which_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::ctrl_key(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_ctrl_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_ctrl_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::shift_key(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_shift_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_shift_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::alt_key(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_alt_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_alt_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::meta_key(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_meta_key_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_meta_key_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_alt_graph(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_alt_graph_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_alt_graph_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_caps_lock(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_caps_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_caps_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_fn(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_fn_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_fn_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_fn_lock(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_fn_lock_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_fn_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_hyper(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_hyper_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_num_lock(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_num_lock_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_num_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_scroll_lock(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_scroll_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_scroll_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_super(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_super_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_super_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_symbol(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_symbol_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_symbol_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::modifier_symbol_lock(self : TouchEventInit) -> Bool? {
-  let result = touch_event_init_get_modifier_symbol_lock_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  touch_event_init_get_modifier_symbol_lock_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn TouchEventInit::touches(self : TouchEventInit) -> Array[Touch]? {
-  let result = touch_event_init_get_touches_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  touch_event_init_get_touches_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn TouchEventInit::target_touches(self : TouchEventInit) -> Array[Touch]? {
-  let result = touch_event_init_get_target_touches_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  touch_event_init_get_target_touches_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn TouchEventInit::changed_touches(self : TouchEventInit) -> Array[Touch]? {
-  let result = touch_event_init_get_changed_touches_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  touch_event_init_get_changed_touches_ffi(TJsValue::to_js(self)).to_option()
 }

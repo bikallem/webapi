@@ -43,15 +43,7 @@ impl TDOMTokenList with length(self : Self) -> UInt {
 ///|
 /// [DOMTokenList.item](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/item)
 impl TDOMTokenList with item(self : Self, index : UInt) -> String? {
-  let result = dom_token_list_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_token_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|

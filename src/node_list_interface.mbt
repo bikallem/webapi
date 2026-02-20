@@ -29,12 +29,7 @@ pub trait TNodeList: TJsValue {
 ///|
 /// [NodeList.item](https://developer.mozilla.org/en-US/docs/Web/API/NodeList/item)
 impl TNodeList with item(self : Self, index : UInt) -> Node? {
-  let result = node_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  node_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|

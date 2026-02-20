@@ -33,12 +33,5 @@ pub fn CaretPositionFromPointOptions::empty() -> CaretPositionFromPointOptions {
 pub fn CaretPositionFromPointOptions::shadow_roots(
   self : CaretPositionFromPointOptions,
 ) -> Array[ShadowRoot]? {
-  let result = caret_position_from_point_options_get_shadow_roots_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  caret_position_from_point_options_get_shadow_roots_ffi(TJsValue::to_js(self)).to_option()
 }

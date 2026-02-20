@@ -35,32 +35,17 @@ pub fn FormDataEventInit::empty() -> FormDataEventInit {
 
 ///|
 pub fn FormDataEventInit::bubbles(self : FormDataEventInit) -> Bool? {
-  let result = form_data_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  form_data_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FormDataEventInit::cancelable(self : FormDataEventInit) -> Bool? {
-  let result = form_data_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  form_data_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FormDataEventInit::composed(self : FormDataEventInit) -> Bool? {
-  let result = form_data_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  form_data_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|

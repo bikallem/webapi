@@ -36,30 +36,15 @@ pub fn ResponseInit::empty() -> ResponseInit {
 
 ///|
 pub fn ResponseInit::status(self : ResponseInit) -> UInt? {
-  let result = response_init_get_status_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  response_init_get_status_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ResponseInit::status_text(self : ResponseInit) -> String? {
-  let result = response_init_get_status_text_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  response_init_get_status_text_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn ResponseInit::headers(self : ResponseInit) -> HeadersInit? {
-  let result = response_init_get_headers_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  response_init_get_headers_ffi(TJsValue::to_js(self)).to_option()
 }

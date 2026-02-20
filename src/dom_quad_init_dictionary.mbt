@@ -30,40 +30,20 @@ pub fn DOMQuadInit::empty() -> DOMQuadInit {
 
 ///|
 pub fn DOMQuadInit::p1(self : DOMQuadInit) -> DOMPointInit? {
-  let result = dom_quad_init_get_p1_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_quad_init_get_p1_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn DOMQuadInit::p2(self : DOMQuadInit) -> DOMPointInit? {
-  let result = dom_quad_init_get_p2_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_quad_init_get_p2_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn DOMQuadInit::p3(self : DOMQuadInit) -> DOMPointInit? {
-  let result = dom_quad_init_get_p3_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_quad_init_get_p3_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn DOMQuadInit::p4(self : DOMQuadInit) -> DOMPointInit? {
-  let result = dom_quad_init_get_p4_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  dom_quad_init_get_p4_ffi(TJsValue::to_js(self)).to_option()
 }

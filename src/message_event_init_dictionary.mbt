@@ -46,80 +46,40 @@ pub fn MessageEventInit::empty() -> MessageEventInit {
 
 ///|
 pub fn MessageEventInit::bubbles(self : MessageEventInit) -> Bool? {
-  let result = message_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  message_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MessageEventInit::cancelable(self : MessageEventInit) -> Bool? {
-  let result = message_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  message_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MessageEventInit::composed(self : MessageEventInit) -> Bool? {
-  let result = message_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  message_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MessageEventInit::data(self : MessageEventInit) -> JsValue? {
-  let result = message_event_init_get_data_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  message_event_init_get_data_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn MessageEventInit::origin(self : MessageEventInit) -> String? {
-  let result = message_event_init_get_origin_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  message_event_init_get_origin_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MessageEventInit::last_event_id(self : MessageEventInit) -> String? {
-  let result = message_event_init_get_last_event_id_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  message_event_init_get_last_event_id_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn MessageEventInit::source(self : MessageEventInit) -> MessageEventSource? {
-  let result = message_event_init_get_source_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  message_event_init_get_source_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn MessageEventInit::ports(self : MessageEventInit) -> Array[MessagePort]? {
-  let result = message_event_init_get_ports_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  message_event_init_get_ports_ffi(TJsValue::to_js(self)).to_option()
 }

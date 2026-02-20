@@ -119,48 +119,23 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
       #|pub fn CanvasRenderingContext2DSettings::empty() -> CanvasRenderingContext2DSettings { canvas_rendering_context2d_settings_empty_ffi() }
       #|
       #|pub fn CanvasRenderingContext2DSettings::alpha(self : CanvasRenderingContext2DSettings) -> Bool? {
-      #|  let result = canvas_rendering_context2d_settings_get_alpha_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-      #|  }
+      #|  canvas_rendering_context2d_settings_get_alpha_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
       #|
       #|pub fn CanvasRenderingContext2DSettings::desynchronized(self : CanvasRenderingContext2DSettings) -> Bool? {
-      #|  let result = canvas_rendering_context2d_settings_get_desynchronized_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-      #|  }
+      #|  canvas_rendering_context2d_settings_get_desynchronized_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
       #|
       #|pub fn CanvasRenderingContext2DSettings::color_space(self : CanvasRenderingContext2DSettings) -> PredefinedColorSpace? {
-      #|  let result = canvas_rendering_context2d_settings_get_color_space_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(result.unsafe_cast())
-      #|  }
+      #|  canvas_rendering_context2d_settings_get_color_space_ffi(TJsValue::to_js(self)).to_option()
       #|}
       #|
       #|pub fn CanvasRenderingContext2DSettings::color_type(self : CanvasRenderingContext2DSettings) -> CanvasColorType? {
-      #|  let result = canvas_rendering_context2d_settings_get_color_type_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(result.unsafe_cast())
-      #|  }
+      #|  canvas_rendering_context2d_settings_get_color_type_ffi(TJsValue::to_js(self)).to_option()
       #|}
       #|
       #|pub fn CanvasRenderingContext2DSettings::will_read_frequently(self : CanvasRenderingContext2DSettings) -> Bool? {
-      #|  let result = canvas_rendering_context2d_settings_get_will_read_frequently_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-      #|  }
+      #|  canvas_rendering_context2d_settings_get_will_read_frequently_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
     ),
   )
@@ -246,12 +221,7 @@ test "DictionaryEmitter multi-target separates FFI" {
       #|pub fn SimpleDict::empty() -> SimpleDict { simple_dict_empty_ffi() }
       #|
       #|pub fn SimpleDict::name(self : SimpleDict) -> String? {
-      #|  let result = simple_dict_get_name_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-      #|  }
+      #|  simple_dict_get_name_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
     ),
   )
@@ -353,21 +323,11 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
       #|pub impl TTestDictGetHeaders for TestDictGetHeaders with to_js(self : TestDictGetHeaders) -> JsValue = "%identity"
       #|
       #|pub fn TestDict::headers(self : TestDict) -> TestDictGetHeaders? {
-      #|  let result = test_dict_get_headers_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(result.unsafe_cast())
-      #|  }
+      #|  test_dict_get_headers_ffi(TJsValue::to_js(self)).to_option()
       #|}
       #|
       #|pub fn TestDict::method_(self : TestDict) -> String? {
-      #|  let result = test_dict_get_method_ffi(TJsValue::to_js(self))
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-      #|  }
+      #|  test_dict_get_method_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
     ),
   )

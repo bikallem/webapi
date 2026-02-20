@@ -41,70 +41,35 @@ pub fn FocusEventInit::empty() -> FocusEventInit {
 
 ///|
 pub fn FocusEventInit::bubbles(self : FocusEventInit) -> Bool? {
-  let result = focus_event_init_get_bubbles_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  focus_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FocusEventInit::cancelable(self : FocusEventInit) -> Bool? {
-  let result = focus_event_init_get_cancelable_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  focus_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FocusEventInit::composed(self : FocusEventInit) -> Bool? {
-  let result = focus_event_init_get_composed_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  focus_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FocusEventInit::view(self : FocusEventInit) -> Window? {
-  let result = focus_event_init_get_view_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  focus_event_init_get_view_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn FocusEventInit::detail(self : FocusEventInit) -> Int? {
-  let result = focus_event_init_get_detail_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  focus_event_init_get_detail_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FocusEventInit::which(self : FocusEventInit) -> UInt? {
-  let result = focus_event_init_get_which_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  focus_event_init_get_which_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FocusEventInit::related_target(self : FocusEventInit) -> EventTarget? {
-  let result = focus_event_init_get_related_target_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  focus_event_init_get_related_target_ffi(TJsValue::to_js(self)).to_option()
 }

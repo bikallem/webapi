@@ -51,62 +51,32 @@ pub fn Transformer::empty() -> Transformer {
 
 ///|
 pub fn Transformer::start(self : Transformer) -> TransformerStartCallback? {
-  let result = transformer_get_start_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  transformer_get_start_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn Transformer::transform(
   self : Transformer,
 ) -> TransformerTransformCallback? {
-  let result = transformer_get_transform_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  transformer_get_transform_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn Transformer::flush(self : Transformer) -> TransformerFlushCallback? {
-  let result = transformer_get_flush_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  transformer_get_flush_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn Transformer::cancel(self : Transformer) -> TransformerCancelCallback? {
-  let result = transformer_get_cancel_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  transformer_get_cancel_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn Transformer::readable_type(self : Transformer) -> JsValue? {
-  let result = transformer_get_readable_type_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  transformer_get_readable_type_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn Transformer::writable_type(self : Transformer) -> JsValue? {
-  let result = transformer_get_writable_type_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  transformer_get_writable_type_ffi(TJsValue::to_js(self)).to_option()
 }

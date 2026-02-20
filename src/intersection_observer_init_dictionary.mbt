@@ -171,76 +171,38 @@ pub impl TIntersectionObserverInitGetThreshold for IntersectionObserverInitGetTh
 pub fn IntersectionObserverInit::root(
   self : IntersectionObserverInit,
 ) -> IntersectionObserverInitGetRoot? {
-  let result = intersection_observer_init_get_root_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  intersection_observer_init_get_root_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn IntersectionObserverInit::root_margin(
   self : IntersectionObserverInit,
 ) -> String? {
-  let result = intersection_observer_init_get_root_margin_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  intersection_observer_init_get_root_margin_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn IntersectionObserverInit::scroll_margin(
   self : IntersectionObserverInit,
 ) -> String? {
-  let result = intersection_observer_init_get_scroll_margin_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  intersection_observer_init_get_scroll_margin_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn IntersectionObserverInit::threshold(
   self : IntersectionObserverInit,
 ) -> IntersectionObserverInitGetThreshold? {
-  let result = intersection_observer_init_get_threshold_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  intersection_observer_init_get_threshold_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn IntersectionObserverInit::delay(self : IntersectionObserverInit) -> Int? {
-  let result = intersection_observer_init_get_delay_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  intersection_observer_init_get_delay_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn IntersectionObserverInit::track_visibility(
   self : IntersectionObserverInit,
 ) -> Bool? {
-  let result = intersection_observer_init_get_track_visibility_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  intersection_observer_init_get_track_visibility_ffi(TJsValue::to_js(self)).to_option_prim()
 }

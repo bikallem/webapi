@@ -190,12 +190,7 @@ test "emit_method_body optional return" {
     code.to_string(),
     content=(
       #|pub fn test() -> Element? {
-      #|  let result = test_ffi(obj)
-      #|  if JsValue::is_null(result) {
-      #|    None
-      #|  } else {
-      #|    Some(result.unsafe_cast())
-      #|  }
+      #|  test_ffi(obj).to_option()
       #|}
     ),
   )

@@ -29,10 +29,5 @@ pub fn GetNotificationOptions::empty() -> GetNotificationOptions {
 
 ///|
 pub fn GetNotificationOptions::tag(self : GetNotificationOptions) -> String? {
-  let result = get_notification_options_get_tag_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  get_notification_options_get_tag_ffi(TJsValue::to_js(self)).to_option_prim()
 }

@@ -240,15 +240,10 @@ impl TXMLHttpRequest with status_text(self : Self) -> String {
 ///|
 /// [XMLHttpRequest.getResponseHeader](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/getResponseHeader)
 impl TXMLHttpRequest with get_response_header(self : Self, name : String) -> String? {
-  let result = xml_http_request_get_response_header_ffi(
+  xml_http_request_get_response_header_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

@@ -57,10 +57,5 @@ impl TDataTransferItem with get_as_string(
 ///|
 /// [DataTransferItem.getAsFile](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsFile)
 impl TDataTransferItem with get_as_file(self : Self) -> File? {
-  let result = data_transfer_item_get_as_file_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  data_transfer_item_get_as_file_ffi(TJsValue::to_js(self)).to_option()
 }

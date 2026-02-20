@@ -125,41 +125,20 @@ impl THTMLAllCollection with length(self : Self) -> UInt {
 ///|
 /// [HTMLAllCollection.get](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/get)
 impl THTMLAllCollection with get(self : Self, index : UInt) -> Element? {
-  let result = html_all_collection_get_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  html_all_collection_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [HTMLAllCollection.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/namedItem)
 impl THTMLAllCollection with named_item(self : Self, name : String) -> HTMLAllCollectionNamedItem? {
-  let result = html_all_collection_named_item_ffi(
+  html_all_collection_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|
 /// [HTMLAllCollection.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/item)
 impl THTMLAllCollection with item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? {
-  let result = html_all_collection_item_ffi(
-    TJsValue::to_js(self),
-    opt_to_js(name_or_index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  html_all_collection_item_ffi(TJsValue::to_js(self), opt_to_js(name_or_index)).to_option()
 }

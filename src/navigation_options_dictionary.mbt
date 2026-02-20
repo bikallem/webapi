@@ -25,10 +25,5 @@ pub fn NavigationOptions::empty() -> NavigationOptions {
 
 ///|
 pub fn NavigationOptions::info(self : NavigationOptions) -> JsValue? {
-  let result = navigation_options_get_info_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  navigation_options_get_info_ffi(TJsValue::to_js(self)).to_option()
 }

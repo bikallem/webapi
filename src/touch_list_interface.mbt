@@ -35,13 +35,5 @@ impl TTouchList with length(self : Self) -> UInt {
 ///|
 /// [TouchList.item](https://developer.mozilla.org/en-US/docs/Web/API/TouchList/item)
 impl TTouchList with item(self : Self, index : UInt) -> Touch? {
-  let result = touch_list_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  touch_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }

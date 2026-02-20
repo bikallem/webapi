@@ -281,15 +281,10 @@ impl TSVGSVGElement with create_svg_transform_from_matrix(
 ///|
 /// [SVGSVGElement.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/getElementById)
 impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> Element? {
-  let result = svgsvg_element_get_element_by_id_ffi(
+  svgsvg_element_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 
 ///|

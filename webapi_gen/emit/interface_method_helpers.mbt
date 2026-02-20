@@ -68,12 +68,8 @@ fn emit_method_body(
   void_return? : Bool = false,
 ) -> Unit {
   if optional_return {
-    // Optional: FFI returns JsValue so we can check for null
-    code
-    ..write_string("  let result = \{ffi_name}(\{call_args})\n")
-    .write_string(
-      "  if JsValue::is_null(result) {\n    None\n  } else {\n    Some(result.unsafe_cast())\n  }\n",
-    )
+    // Optional: FFI returns JsValue; to_option() checks null and unsafe-casts
+    code.write_string("  \{ffi_name}(\{call_args}).to_option()\n")
   } else if void_return {
     code.write_string("  \{ffi_name}(\{call_args})\n")
   } else {

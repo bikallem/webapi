@@ -28,20 +28,10 @@ pub fn FocusOptions::empty() -> FocusOptions {
 
 ///|
 pub fn FocusOptions::prevent_scroll(self : FocusOptions) -> Bool? {
-  let result = focus_options_get_prevent_scroll_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  focus_options_get_prevent_scroll_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn FocusOptions::focus_visible(self : FocusOptions) -> Bool? {
-  let result = focus_options_get_focus_visible_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  focus_options_get_focus_visible_ffi(TJsValue::to_js(self)).to_option_prim()
 }

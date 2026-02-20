@@ -268,29 +268,13 @@ impl TNode with contains(self : Self, other : &TNode) -> Bool {
 ///|
 /// [Node.lookupPrefix](https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupPrefix)
 impl TNode with lookup_prefix(self : Self, namespace_ : String) -> String? {
-  let result = node_lookup_prefix_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(namespace_),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  node_lookup_prefix_ffi(TJsValue::to_js(self), TJsValue::to_js(namespace_)).to_option()
 }
 
 ///|
 /// [Node.lookupNamespaceURI](https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupNamespaceURI)
 impl TNode with lookup_namespace_uri(self : Self, prefix : String) -> String? {
-  let result = node_lookup_namespace_uri_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(prefix),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  node_lookup_namespace_uri_ffi(TJsValue::to_js(self), TJsValue::to_js(prefix)).to_option()
 }
 
 ///|

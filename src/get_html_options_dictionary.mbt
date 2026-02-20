@@ -33,24 +33,12 @@ pub fn GetHTMLOptions::empty() -> GetHTMLOptions {
 pub fn GetHTMLOptions::serializable_shadow_roots(
   self : GetHTMLOptions,
 ) -> Bool? {
-  let result = get_html_options_get_serializable_shadow_roots_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  get_html_options_get_serializable_shadow_roots_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn GetHTMLOptions::shadow_roots(
   self : GetHTMLOptions,
 ) -> Array[ShadowRoot]? {
-  let result = get_html_options_get_shadow_roots_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  get_html_options_get_shadow_roots_ffi(TJsValue::to_js(self)).to_option()
 }

@@ -235,40 +235,19 @@ pub impl TBasePropertyIndexedKeyframeGetComposite for BasePropertyIndexedKeyfram
 pub fn BasePropertyIndexedKeyframe::offset(
   self : BasePropertyIndexedKeyframe,
 ) -> BasePropertyIndexedKeyframeGetOffset? {
-  let result = base_property_indexed_keyframe_get_offset_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  base_property_indexed_keyframe_get_offset_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn BasePropertyIndexedKeyframe::easing(
   self : BasePropertyIndexedKeyframe,
 ) -> BasePropertyIndexedKeyframeGetEasing? {
-  let result = base_property_indexed_keyframe_get_easing_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  base_property_indexed_keyframe_get_easing_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 pub fn BasePropertyIndexedKeyframe::composite(
   self : BasePropertyIndexedKeyframe,
 ) -> BasePropertyIndexedKeyframeGetComposite? {
-  let result = base_property_indexed_keyframe_get_composite_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  base_property_indexed_keyframe_get_composite_ffi(TJsValue::to_js(self)).to_option()
 }

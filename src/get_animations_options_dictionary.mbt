@@ -33,24 +33,12 @@ pub fn GetAnimationsOptions::empty() -> GetAnimationsOptions {
 
 ///|
 pub fn GetAnimationsOptions::subtree(self : GetAnimationsOptions) -> Bool? {
-  let result = get_animations_options_get_subtree_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(FromJsAny::from_js_any(jsvalue_to_jsany(result)))
-  }
+  get_animations_options_get_subtree_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
 ///|
 pub fn GetAnimationsOptions::pseudo_element(
   self : GetAnimationsOptions,
 ) -> CSSOMString? {
-  let result = get_animations_options_get_pseudo_element_ffi(
-    TJsValue::to_js(self),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  get_animations_options_get_pseudo_element_ffi(TJsValue::to_js(self)).to_option()
 }

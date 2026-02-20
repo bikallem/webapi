@@ -146,10 +146,5 @@ impl TSVGTransformList with create_svg_transform_from_matrix(
 ///|
 /// [SVGTransformList.consolidate](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/consolidate)
 impl TSVGTransformList with consolidate(self : Self) -> SVGTransform? {
-  let result = svg_transform_list_consolidate_ffi(TJsValue::to_js(self))
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  svg_transform_list_consolidate_ffi(TJsValue::to_js(self)).to_option()
 }
