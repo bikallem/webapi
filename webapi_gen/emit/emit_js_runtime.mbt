@@ -163,18 +163,11 @@ fn emit_js_setter(
 }
 
 ///|
-/// Emit JS method - generates appropriate argument list and call.
-/// `import_name` is the wasm import key (disambiguated, e.g. "fill_2"),
-/// `original_name` is the actual JS method name (e.g. "fill").
-fn emit_js_method(
-  import_name : String,
-  original_name : String,
+/// Build JS argument name and call-expression lists from WebIDL arguments.
+/// Returns (param_names, call_parts) where call_parts include spread for variadic args.
+fn build_js_args(
   args : Array[@parser.Argument],
-  is_static : Bool,
-  is_bigint? : Bool = false,
-  interface_name? : String = "",
-) -> String {
-  // Build argument names list (params without spread, call_args with spread for variadic)
+) -> (Array[String], Array[String]) {
   let arg_names : Array[String] = []
   let call_parts : Array[String] = []
   for arg in args {
@@ -186,16 +179,31 @@ fn emit_js_method(
       call_parts.push(name)
     }
   }
+  (arg_names, call_parts)
+}
+
+///|
+/// Emit JS method - generates appropriate argument list and call.
+/// `import_name` is the wasm import key (disambiguated, e.g. "fill_2"),
+/// `original_name` is the actual JS method name (e.g. "fill").
+/// Also used for namespace methods (via is_static=true, interface_name=namespace).
+fn emit_js_method(
+  import_name : String,
+  original_name : String,
+  args : Array[@parser.Argument],
+  is_static : Bool,
+  is_bigint? : Bool = false,
+  interface_name? : String = "",
+) -> String {
+  let (arg_names, call_parts) = build_js_args(args)
   let comma_sep = ", "
   if is_static {
-    // Static method: no obj parameter, call on the class directly
     let params = arg_names.join(comma_sep)
     let call_args = call_parts.join(comma_sep)
     let expr = "\{interface_name}.\{original_name}(\{call_args})"
     let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
     "    \{import_name}: (\{params}) => \{expr}"
   } else {
-    // Instance method: obj is first parameter
     let args_str = arg_names.join(comma_sep)
     let params = if arg_names.length() > 0 { "obj, \{args_str}" } else { "obj" }
     let call_args = call_parts.join(comma_sep)
@@ -213,17 +221,7 @@ fn emit_js_constructor(
   interface_name : String,
   args : Array[@parser.Argument],
 ) -> String {
-  let arg_names : Array[String] = []
-  let call_parts : Array[String] = []
-  for arg in args {
-    let name = js_safe(@type_mapping.safe_identifier(arg.name))
-    arg_names.push(name)
-    if arg.variadic {
-      call_parts.push("...\{name}")
-    } else {
-      call_parts.push(name)
-    }
-  }
+  let (arg_names, call_parts) = build_js_args(args)
   let comma_sep = ", "
   let params = arg_names.join(comma_sep)
   let call_args = call_parts.join(comma_sep)
@@ -448,47 +446,9 @@ fn emit_js_callback_module(cb : @parser.CallbackFunctionDefinition) -> String {
 }
 
 ///|
-/// Emit JS method for a namespace (static call with namespace prefix).
-fn emit_js_namespace_method(
-  import_name : String,
-  namespace_name : String,
-  method_name : String,
-  args : Array[@parser.Argument],
-  is_bigint? : Bool = false,
-) -> String {
-  let arg_names : Array[String] = []
-  let call_parts : Array[String] = []
-  for arg in args {
-    let name = js_safe(@type_mapping.safe_identifier(arg.name))
-    arg_names.push(name)
-    if arg.variadic {
-      call_parts.push("...\{name}")
-    } else {
-      call_parts.push(name)
-    }
-  }
-  let comma_sep = ", "
-  let params = arg_names.join(comma_sep)
-  let call_args = call_parts.join(comma_sep)
-  let expr = "\{namespace_name}.\{method_name}(\{call_args})"
-  let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
-  "    \{import_name}: (\{params}) => \{expr}"
-}
-
-///|
-/// Emit JS getter for a namespace attribute.
-fn emit_js_namespace_getter(
-  namespace_name : String,
-  attr_name : String,
-  is_bigint? : Bool = false,
-) -> String {
-  let expr = "\{namespace_name}.\{attr_name}"
-  let expr = if is_bigint { "BigInt(\{expr})" } else { expr }
-  "    get_\{attr_name}: () => \{expr}"
-}
-
-///|
-/// Emit a complete JS module for a namespace
+/// Emit a complete JS module for a namespace.
+/// Reuses emit_js_method/emit_js_getter with is_static=true since
+/// namespace members are just static calls on the global namespace object.
 fn emit_js_namespace_module(
   ns : @partial_merged.PartialMergedNamespace,
 ) -> String {
@@ -508,21 +468,23 @@ fn emit_js_namespace_module(
           used_method_names,
         )
         entries.push(
-          emit_js_namespace_method(
+          emit_js_method(
             import_name,
-            ns.name,
             op.name,
             op.arguments,
+            true,
             is_bigint=is_bigint_type(op.return_type),
+            interface_name=ns.name,
           ),
         )
       }
       Attribute(attr) =>
         entries.push(
-          emit_js_namespace_getter(
-            ns.name,
+          emit_js_getter(
             attr.name,
+            is_static=true,
             is_bigint=is_bigint_type(attr.type_),
+            interface_name=ns.name,
           ),
         )
       Const(_) => continue // Constants don't need JS runtime entries

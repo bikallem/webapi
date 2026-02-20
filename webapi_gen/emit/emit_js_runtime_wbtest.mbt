@@ -241,35 +241,47 @@ test "emit_js_special_operation deleter" {
 }
 
 ///|
-test "emit_js_namespace_method" {
+test "emit_js_method static for namespace" {
   let args = [make_arg("data", @parser.Type::Any, variadic=true)]
   inspect(
-    emit_js_namespace_method("log", "console", "log", args),
+    emit_js_method("log", "log", args, true, interface_name="console"),
     content="    log: (data) => console.log(...data)",
   )
 }
 
 ///|
-test "emit_js_namespace_method with bigint" {
+test "emit_js_method static for namespace with bigint" {
   let args : Array[@parser.Argument] = []
   inspect(
-    emit_js_namespace_method("now", "performance", "now", args, is_bigint=true),
+    emit_js_method(
+      "now",
+      "now",
+      args,
+      true,
+      is_bigint=true,
+      interface_name="performance",
+    ),
     content="    now: () => BigInt(performance.now())",
   )
 }
 
 ///|
-test "emit_js_namespace_getter" {
+test "emit_js_getter static for namespace" {
   inspect(
-    emit_js_namespace_getter("console", "enabled"),
+    emit_js_getter("enabled", is_static=true, interface_name="console"),
     content="    get_enabled: () => console.enabled",
   )
 }
 
 ///|
-test "emit_js_namespace_getter with bigint" {
+test "emit_js_getter static for namespace with bigint" {
   inspect(
-    emit_js_namespace_getter("performance", "timeOrigin", is_bigint=true),
+    emit_js_getter(
+      "timeOrigin",
+      is_static=true,
+      is_bigint=true,
+      interface_name="performance",
+    ),
     content="    get_timeOrigin: () => BigInt(performance.timeOrigin)",
   )
 }
