@@ -13,6 +13,17 @@
         <my-counter id="counter-2"></my-counter>
         <div id="event-log" style="margin-top: 1em; padding: 0.5em; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; min-height: 2em;">Event log:</div>
     </div>
+    <template id="my-counter-template">
+        <style>
+            :host { display: block; border: 2px solid #ccc; border-radius: 8px; padding: 1em; margin: 0.5em 0; font-family: system-ui; text-align: center; }
+            .count { font-size: 2em; margin: 0.5em 0; }
+            button { padding: 0.4em 0.8em; font-size: 1em; margin: 0 0.25em; cursor: pointer; }
+        </style>
+        <div class="count" data-ref="display">0</div>
+        <button data-ref="dec">−</button>
+        <button data-ref="inc">+</button>
+        <button data-ref="reset">Reset</button>
+    </template>
     <script type="module">
         import { wasmImportObject } from "../../src/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(

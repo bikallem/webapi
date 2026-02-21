@@ -5,23 +5,15 @@ fn main {
 
   // Register the <my-counter> custom element
   @webapi.define_custom_element("my-counter", fn(host) {
-    // Attach shadow DOM
+    // Attach shadow DOM and clone template
     let shadow = host.attach_shadow(
       @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
     )
-
-    // Set up shadow DOM template
-    let template =
-      #|<style>
-      #|  :host { display: block; border: 2px solid #ccc; border-radius: 8px; padding: 1em; margin: 0.5em 0; font-family: system-ui; text-align: center; }
-      #|  .count { font-size: 2em; margin: 0.5em 0; }
-      #|  button { padding: 0.4em 0.8em; font-size: 1em; margin: 0 0.25em; cursor: pointer; }
-      #|</style>
-      #|<div class="count" data-ref="display">0</div>
-      #|<button data-ref="dec">−</button>
-      #|<button data-ref="inc">+</button>
-      #|<button data-ref="reset">Reset</button>
-    shadow.set_inner_html(template)
+    let template : @webapi.HTMLTemplateElement = doc
+      .get_element_by_id("my-counter-template")
+      .unwrap()
+      .into()
+    shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
     // Query shadow DOM for elements
     let display = shadow.query_selector("[data-ref=display]").unwrap()
@@ -33,7 +25,7 @@ fn main {
     let state : Array[Int] = [0]
 
     // Update display and dispatch custom event
-    let update = fn() {
+    fn update() {
       display.set_text_content(state[0].to_string())
       let event = @webapi.CustomEvent::new(
         "count-changed",

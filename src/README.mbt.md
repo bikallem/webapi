@@ -262,17 +262,12 @@ Use `JsPromise` to chain async operations like `fetch()`:
 ///|
 fn readme_promises() -> Unit {
   window
-    .fetch("https://api.example.com/data")
-    .then(fn(response : Response) {
-      response.text().then(fn(text : String) {
-        Console::log([text])
-      })
-      |> ignore
-    })
-    .catch_(fn(_err) {
-      Console::error(["Fetch failed"])
-    })
-    |> ignore
+  .fetch("https://api.example.com/data")
+  .then(fn(response : Response) {
+    response.text().then(fn(text : String) { Console::log([text]) }) |> ignore
+  })
+  .catch_(fn(_err) { Console::error(["Fetch failed"]) })
+  |> ignore
 }
 ```
 
@@ -306,9 +301,7 @@ Register Web Components with `define_custom_element`. The `on_create` callback r
 ///|
 fn readme_custom_element() -> Unit {
   define_custom_element("my-greeting", fn(host) {
-    let shadow = host.attach_shadow(
-      ShadowRootInit::new(ShadowRootMode::Open),
-    )
+    let shadow = host.attach_shadow(ShadowRootInit::new(ShadowRootMode::Open))
     shadow.set_inner_html("<p>Hello from Shadow DOM!</p>")
   })
 }
