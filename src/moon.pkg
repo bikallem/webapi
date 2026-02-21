@@ -1021,6 +1021,8 @@ options(
     "visual_viewport_interface_wasm.mbt": [ "wasm-gc" ],
     "void_function_callback_js.mbt": [ "js" ],
     "void_function_callback_wasm.mbt": [ "wasm-gc" ],
+    "web_component_js.mbt": [ "js" ],
+    "web_component_wasm.mbt": [ "wasm-gc" ],
     "web_socket_interface_js.mbt": [ "js" ],
     "web_socket_interface_wasm.mbt": [ "wasm-gc" ],
     "wheel_event_init_dictionary_js.mbt": [ "js" ],

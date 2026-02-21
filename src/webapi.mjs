@@ -64,6 +64,23 @@ export const wasmImportObject = {
     create: () => ({}),
     set: (obj, key, value) => { obj[key] = value; return obj; }
   },
+
+  webapi_WebComponent: {
+    wrapCb: (f) => f,
+    define: (tag_name, ctor, onConn, onDisconn, onAdopt, onAttr, obsAttrs) => {
+      class C extends HTMLElement {
+        constructor() { super(); ctor(this); }
+      }
+      if (onConn !== undefined) C.prototype.connectedCallback = function() { onConn(this); };
+      if (onDisconn !== undefined) C.prototype.disconnectedCallback = function() { onDisconn(this); };
+      if (onAdopt !== undefined) C.prototype.adoptedCallback = function() { onAdopt(this); };
+      if (onAttr !== undefined) {
+        C.prototype.attributeChangedCallback = function(n, o, v) { onAttr(this, n, o, v); };
+        if (obsAttrs.length > 0) Object.defineProperty(C, 'observedAttributes', { get: () => obsAttrs });
+      }
+      customElements.define(tag_name, C);
+    }
+  },
   webapi_SVGElement: {
     get_className: (obj) => obj.className,
     get_ownerSVGElement: (obj) => obj.ownerSVGElement,

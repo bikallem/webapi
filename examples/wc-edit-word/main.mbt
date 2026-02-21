@@ -5,7 +5,7 @@ fn main {
   let doc = @webapi.document
 
   // Register <edit-word> custom element
-  register_custom_element("edit-word", fn(host) {
+  @webapi.define_custom_element("edit-word", fn(host) {
     let shadow = host.attach_shadow(
       @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
     )
@@ -65,7 +65,7 @@ fn main {
   })
 
   // Register <person-details> custom element (template lives in HTML)
-  register_custom_element("person-details", fn(host) {
+  @webapi.define_custom_element("person-details", fn(host) {
     let shadow = host.attach_shadow(
       @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
     )

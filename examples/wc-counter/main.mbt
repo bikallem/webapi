@@ -1,10 +1,10 @@
 ///|
-/// Web Components example: <my-counter> custom element with Shadow DOM
+/// WC Counter example: <my-counter> custom element with Shadow DOM
 fn main {
   let doc = @webapi.document
 
   // Register the <my-counter> custom element
-  register_custom_element("my-counter", fn(host) {
+  @webapi.define_custom_element("my-counter", fn(host) {
     // Attach shadow DOM
     let shadow = host.attach_shadow(
       @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),

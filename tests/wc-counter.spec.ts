@@ -3,9 +3,9 @@ import { test, expect } from '@playwright/test';
 const TARGETS = ['js', 'wasm'] as const;
 
 for (const target of TARGETS) {
-  test.describe(`web-components (${target})`, () => {
+  test.describe(`wc-counter (${target})`, () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto(`web-components/web-components.${target}.html`);
+      await page.goto(`wc-counter/wc-counter.${target}.html`);
       await page.waitForSelector('#counter-1');
     });
 

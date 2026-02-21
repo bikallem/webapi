@@ -44,7 +44,7 @@ let examples : Array[(String, String, Bool)] = [
   ("Vibration", "vibration", true),
   ("Web Animations", "web-animations", true),
   ("WC: Edit Word", "wc-edit-word", true),
-  ("Web Components", "web-components", true),
+  ("WC: Counter", "wc-counter", true),
   ("WebSockets", "websockets", true),
   ("XMLHttpRequest", "xhr", true),
 ]

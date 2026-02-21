@@ -36,12 +36,6 @@
 
     <script type="module">
         import { wasmImportObject } from "../../src/webapi.mjs";
-        wasmImportObject["webcomponents_shim"] = {
-            register: (tag_name, on_connected) => {
-                class C extends HTMLElement { connectedCallback() { on_connected(this); } }
-                customElements.define(tag_name, C);
-            }
-        };
         const { instance } = await WebAssembly.instantiateStreaming(
             fetch("../_build/wasm-gc/release/build/wc-edit-word/wc-edit-word.wasm"),
             wasmImportObject,

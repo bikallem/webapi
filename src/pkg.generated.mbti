@@ -338,6 +338,8 @@ pub const X_PATH_RESULT_UNORDERED_NODE_ITERATOR_TYPE : UInt = 4
 
 pub const X_PATH_RESULT_UNORDERED_NODE_SNAPSHOT_TYPE : UInt = 6
 
+pub fn define_custom_element(String, (HTMLElement) -> Unit, on_connected? : (HTMLElement) -> Unit, on_disconnected? : (HTMLElement) -> Unit, on_adopted? : (HTMLElement) -> Unit, on_attribute_changed? : (HTMLElement, String, JsValue, JsValue) -> Unit, observed_attributes? : Array[String]) -> Unit
+
 pub let document : Document
 
 pub let navigator : Navigator
