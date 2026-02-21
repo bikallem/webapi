@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <link rel="stylesheet" href="../styles.css">
+    <title>Edit Word Example</title>
+</head>
+<body>
+    <h1><code>&lt;edit-word&gt;</code> demo</h1>
+
+    <template id="person-template">
+        <style>
+            div { padding: 10px; border: 1px solid gray; width: 200px; margin: 10px; }
+            h2 { margin: 0 0 10px; }
+            ul { margin: 0; }
+            p { margin: 10px 0; }
+        </style>
+        <div>
+            <h2>Personal ID Card</h2>
+            <slot name="person-name">NAME MISSING</slot>
+            <ul>
+                <li><slot name="person-age">AGE MISSING</slot></li>
+                <li><slot name="person-occupation">OCCUPATION MISSING</slot></li>
+            </ul>
+        </div>
+    </template>
+
+    <person-details id="person-card">
+        <p slot="person-name"><edit-word>Morgan</edit-word> Stanley</p>
+        <span slot="person-age">36</span>
+        <span slot="person-occupation">Accountant</span>
+    </person-details>
+
+    <p id="standalone">My name is <edit-word>Chris</edit-word>, the man said.</p>
+
+    <script type="module" src="../_build/js/release/build/wc-edit-word/wc-edit-word.js"></script>
+</body>
+</html>

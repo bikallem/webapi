@@ -391,6 +391,7 @@ Browser examples demonstrating MoonBit WebAPI bindings. Each example targets bot
 | url | URL parsing and manipulation |
 | vibration | Device vibration API |
 | web-animations | Keyframe animations |
+| wc-edit-word | Inline editable text web component |
 | web-components | Custom elements with Shadow DOM |
 | websockets | WebSocket connect/send/receive |
 | xhr | XMLHttpRequest |
