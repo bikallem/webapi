@@ -7,7 +7,12 @@
     <title>WC Counter Example</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <h1>Web Components Counter</h1>
+        <my-counter id="counter-1"></my-counter>
+        <my-counter id="counter-2"></my-counter>
+        <div id="event-log" style="margin-top: 1em; padding: 0.5em; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; min-height: 2em;">Event log:</div>
+    </div>
     <script type="module" src="../_build/js/release/build/wc-counter/wc-counter.js"></script>
 </body>
 </html>

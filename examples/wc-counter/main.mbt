@@ -60,32 +60,9 @@ fn main {
     })
   })
 
-  // Build host page
-  let app = doc.get_element_by_id("app").unwrap()
-
-  let heading = doc.create_element("h1")
-  heading.set_text_content("Web Components Counter")
-
-  let counter1 = doc.create_element("my-counter")
-  counter1.set_attribute("id", "counter-1")
-
-  let counter2 = doc.create_element("my-counter")
-  counter2.set_attribute("id", "counter-2")
-
-  let log = doc.create_element("div")
-  log
-  ..set_attribute("id", "event-log")
-  .set_attribute(
-    "style", "margin-top: 1em; padding: 0.5em; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; min-height: 2em;",
-  )
-  log.set_text_content("Event log:")
-
-  app.append_child(heading) |> ignore
-  app.append_child(counter1) |> ignore
-  app.append_child(counter2) |> ignore
-  app.append_child(log) |> ignore
-
   // Listen for count-changed events (bubbles up through composed boundary)
+  let app = doc.get_element_by_id("app").unwrap()
+  let log = doc.get_element_by_id("event-log").unwrap()
   app.add_event_listener("count-changed", fn(event) {
     let ce : @webapi.CustomEvent = event.into()
     let detail = ce.detail()
