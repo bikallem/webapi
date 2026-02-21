@@ -2,6 +2,31 @@
 
 Type-safe MoonBit bindings for Web Platform APIs, automatically generated from WebIDL specifications. Targets both **JS** and **wasm-gc** backends.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+  - [Counter Example](#counter-example)
+  - [WebSocket Example](#websocket-example)
+  - [Canvas Drawing Example](#canvas-drawing-example)
+- [API Patterns](#api-patterns)
+  - [Global Objects](#global-objects)
+  - [Type Casting with `into()`](#type-casting-with-into)
+  - [Event Handling](#event-handling)
+  - [Method Chaining](#method-chaining)
+  - [Optional Parameters](#optional-parameters)
+- [WebIDL to MoonBit Conversion](#webidl-to-moonbit-conversion)
+  - [Type Mappings](#type-mappings)
+  - [Interface Generation](#interface-generation)
+  - [Enum Generation](#enum-generation)
+  - [Dictionary Generation](#dictionary-generation)
+  - [Inheritance](#inheritance)
+- [Examples](#examples)
+- [Supported Specifications](#supported-specifications)
+- [Building from Source](#building-from-source)
+- [License](#license)
+
 ## Overview
 
 This library provides MoonBit FFI bindings for browser APIs including:
