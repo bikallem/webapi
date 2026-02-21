@@ -82,7 +82,7 @@ fn readme_counter() -> Unit {
   .set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
   count_display.set_text_content("0")
 
-  let update_display = fn() {
+  fn update_display() {
     count_display.set_text_content(count.to_string())
   }
 
