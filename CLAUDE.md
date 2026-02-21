@@ -236,6 +236,7 @@ Quick reference for MoonBit patterns that differ from Rust/OCaml and cause frequ
 - **`///|` doc comments**: Required before every top-level declaration (function, type, let binding); `moon fmt` adds them automatically
 - **Enum constructors in expressions**: Can omit the type prefix when the expected type is known from context (e.g., `HasArg("x")` instead of `ArgMatch::HasArg("x")` when the field type is `ArgMatch`)
 - **Guard clauses**: `guard expr is Pattern(x) else { return None }` for early returns from pattern matching on Option/enum types. Preferred over nested `match` when extracting a single variant.
+- **Local function declarations**: Prefer `fn name() { }` over `let name = fn() { }` for named local functions.
 
 ### Parser AST Construction
 
