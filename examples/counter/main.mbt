@@ -21,7 +21,7 @@ fn main {
   .set_text_content("0")
 
   // Update display
-  let update_display = fn() {
+  fn update_display() {
     count_display.set_text_content(count.to_string())
   }
 
@@ -40,7 +40,9 @@ fn main {
   })
 
   // Create increment button
-  let increment_btn = @webapi.document.create_element("button")
+  let increment_btn : @webapi.HTMLButtonElement = @webapi.document
+    .create_element("button")
+    .into()
   increment_btn
   ..set_text_content("+")
   ..set_attribute(
@@ -52,7 +54,9 @@ fn main {
   })
 
   // Create reset button
-  let reset_btn = @webapi.document.create_element("button")
+  let reset_btn : @webapi.HTMLButtonElement = @webapi.document
+    .create_element("button")
+    .into()
   reset_btn
   ..set_text_content("Reset")
   ..set_attribute(
