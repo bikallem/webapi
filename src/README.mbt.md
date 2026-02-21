@@ -43,33 +43,31 @@ moon add bikallem/webapi@0.3.0
 A simple counter application demonstrating DOM manipulation and event handling:
 
 ```moonbit nocheck
-fn main {
+///|
+fn readme_counter() -> Unit {
   let mut count = 0
 
   // Create count display element
-  let count_display : @webapi.HTMLDivElement = @webapi.document
-    .create_element("div")
-    .into()
+  let count_display : HTMLDivElement = document.create_element("div").into()
   count_display
   ..set_attribute("id", "count-display")
-  ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
-  .set_text_content("0")
+  .set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
+  count_display.set_text_content("0")
 
   let update_display = fn() {
     count_display.set_text_content(count.to_string())
   }
 
   // Create increment button — closures are accepted directly
-  let increment_btn = @webapi.document.create_element("button")
-  increment_btn
-  ..set_text_content("+")
-  .add_event_listener("click", fn(_event) {
+  let increment_btn = document.create_element("button")
+  increment_btn.set_text_content("+")
+  increment_btn.add_event_listener("click", fn(_event) {
     count = count + 1
     update_display()
   })
 
   // Append to DOM
-  let app = @webapi.document.get_element_by_id("app").unwrap()
+  let app = document.get_element_by_id("app").unwrap()
   app.append_child(count_display) |> ignore
   app.append_child(increment_btn) |> ignore
 }
@@ -80,13 +78,12 @@ fn main {
 Demonstrates WebSocket connections with event handler closures:
 
 ```moonbit nocheck
-fn main {
-  let socket = @webapi.WebSocket::new("wss://echo.websocket.events")
+///|
+fn readme_websocket() -> Unit {
+  let socket = WebSocket::new("wss://echo.websocket.events")
 
   // Event handlers accept closures directly
-  socket.set_onopen(fn(_e) {
-    socket.send("Hello from MoonBit!")
-  })
+  socket.set_onopen(fn(_e) { socket.send("Hello from MoonBit!") })
 
   socket.set_onmessage(fn(e) {
     let data : String = e.data().into()
@@ -100,30 +97,27 @@ fn main {
 Demonstrates the Canvas 2D API with gradients, shapes, and text:
 
 ```moonbit nocheck
-fn main {
-  let canvas : @webapi.HTMLCanvasElement = @webapi.document
-    .create_element("canvas")
-    .into()
-  canvas..set_width(800)..set_height(500)
-  @webapi.document.get_element_by_id("app").unwrap().append_child(canvas)
-  |> ignore
+///|
+fn readme_canvas() -> Unit {
+  let canvas : HTMLCanvasElement = document.create_element("canvas").into()
+  canvas.set_width(800)
+  canvas.set_height(500)
+  document.get_element_by_id("app").unwrap().append_child(canvas) |> ignore
 
   // Get 2D rendering context
-  let ctx : @webapi.CanvasRenderingContext2D = canvas
-    .get_context("2d")
-    .unwrap()
-    .into()
+  let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
 
   // Create gradient and draw
   let gradient = ctx.create_linear_gradient(0.0, 0.0, 0.0, 300.0)
-  gradient..add_color_stop(0.0, "#1e3c72").add_color_stop(1.0, "#87CEEB")
-  ctx..set_fill_style(gradient).fill_rect(0.0, 0.0, 800.0, 300.0)
+  gradient.add_color_stop(0.0, "#1e3c72")
+  gradient.add_color_stop(1.0, "#87CEEB")
+  ctx.set_fill_style(gradient)
+  ctx.fill_rect(0.0, 0.0, 800.0, 300.0)
 
   // Draw text
-  ctx
-  ..set_font("bold 24px sans-serif")
-  ..set_fill_style("#FFFFFF")
-  .fill_text("Hello, MoonBit!", 320.0, 400.0)
+  ctx.set_font("bold 24px sans-serif")
+  ctx.set_fill_style("#FFFFFF")
+  ctx.fill_text("Hello, MoonBit!", 320.0, 400.0)
 }
 ```
 
@@ -134,14 +128,17 @@ fn main {
 The library provides direct access to browser global objects:
 
 ```moonbit nocheck
-// Access the document object
-@webapi.document.get_element_by_id("my-id")
+///|
+fn readme_globals() -> Unit {
+  // Access the document object
+  let _ = document.get_element_by_id("my-id")
 
-// Access the window object
-@webapi.window.inner_width()
+  // Access the window object
+  let _ = window.inner_width()
 
-// Access the navigator object
-@webapi.navigator.user_agent()
+  // Access the navigator object
+  let _ = navigator.user_agent()
+}
 ```
 
 ### Type Casting with `into()`
@@ -149,14 +146,14 @@ The library provides direct access to browser global objects:
 DOM elements are returned as generic `Element` types. Use `into()` to cast to specific element types:
 
 ```moonbit nocheck
-let canvas : @webapi.HTMLCanvasElement = @webapi.document
-  .create_element("canvas")
-  .into()
+///|
+fn readme_casting() -> Unit {
+  // Create an element and cast to specific type
+  let canvas : HTMLCanvasElement = document.create_element("canvas").into()
 
-let ctx : @webapi.CanvasRenderingContext2D = canvas
-  .get_context("2d")
-  .unwrap()
-  .into()
+  // Cast to access type-specific methods
+  let _ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
+}
 ```
 
 ### Event Handling
@@ -164,15 +161,13 @@ let ctx : @webapi.CanvasRenderingContext2D = canvas
 Event listeners and handlers accept closures directly:
 
 ```moonbit nocheck
-// addEventListener with closure
-element.add_event_listener("click", fn(event) {
-  println("Clicked!")
-})
+///|
+fn readme_events() -> Unit {
+  let element = document.create_element("button")
 
-// Event handler attributes with closure
-element.set_onclick(fn(event) {
-  println("Clicked!")
-})
+  // addEventListener with closure
+  element.add_event_listener("click", fn(_event) { println("Clicked!") })
+}
 ```
 
 ### Method Chaining
@@ -180,10 +175,12 @@ element.set_onclick(fn(event) {
 Most setter methods return `Unit`, enabling method chaining with `..` (use `.` for the last call in the chain):
 
 ```moonbit nocheck
-element
-..set_attribute("id", "my-element")
-..set_attribute("class", "container")
-.set_text_content("Hello!")
+///|
+fn readme_chaining() -> Unit {
+  let element = document.create_element("div")
+  element..set_attribute("id", "my-element").set_attribute("class", "container")
+  element.set_text_content("Hello!")
+}
 ```
 
 ### Optional Parameters
@@ -191,11 +188,16 @@ element
 Many methods have optional parameters using MoonBit's `?` syntax:
 
 ```moonbit nocheck
-// With default options
-document.create_element("div")
+fn readme_optional() -> Unit {
+  // With default options
+  let _ = document.create_element("div")
 
-// With explicit options
-document.create_element("div", options=ElementCreationOptions::new(is="custom-div"))
+  // With explicit options
+  let _ = document.create_element(
+    "div",
+    options=ElementCreationOptions::new(is="custom-div"),
+  )
+}
 ```
 
 ## WebIDL to MoonBit Conversion
@@ -232,9 +234,11 @@ interface Element : Node {
 
 **Generated MoonBit:**
 ```moonbit nocheck
+///|
 #external
 pub type Element
 
+///|
 pub trait TElement: TNode {
   id(self : Self) -> String = _
   set_id(self : Self, id : String) -> Unit = _
@@ -242,11 +246,9 @@ pub trait TElement: TNode {
   set_attribute(self : Self, name : String, value : String) -> Unit = _
 }
 
+///|
 impl TElement with get_attribute(self : Self, name : String) -> String? {
-  element_get_attribute_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(name),
-  ).to_option()
+  element_get_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 ```
 
@@ -261,11 +263,13 @@ enum ShadowRootMode { "open", "closed" };
 
 **Generated MoonBit:**
 ```moonbit nocheck
+///|
 pub(all) enum ShadowRootMode {
   Open
   Closed
 } derive(Eq, Show)
 
+///|
 pub impl TJsValue for ShadowRootMode with to_js(self : ShadowRootMode) -> JsValue {
   match self {
     ShadowRootMode::Open => TJsValue::to_js("open")
@@ -273,6 +277,7 @@ pub impl TJsValue for ShadowRootMode with to_js(self : ShadowRootMode) -> JsValu
   }
 }
 
+///|
 pub fn ShadowRootMode::from(value : String) -> ShadowRootMode? {
   match value {
     "open" => Some(ShadowRootMode::Open)
@@ -296,9 +301,11 @@ dictionary EventInit {
 
 **Generated MoonBit:**
 ```moonbit nocheck
+///|
 #external
 pub type EventInit
 
+///|
 pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool) -> EventInit {
   event_init_ffi(opt_to_js(bubbles), opt_to_js(cancelable))
 }
