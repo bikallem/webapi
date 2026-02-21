@@ -15,6 +15,9 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
   - [Global Objects](#global-objects)
   - [Type Casting with `into()`](#type-casting-with-into)
   - [Event Handling](#event-handling)
+  - [Promises](#promises)
+  - [Variadic Arguments](#variadic-arguments)
+  - [Custom Elements](#custom-elements)
   - [Method Chaining](#method-chaining)
   - [Optional Parameters](#optional-parameters)
 - [WebIDL to MoonBit Conversion](#webidl-to-moonbit-conversion)
@@ -250,6 +253,68 @@ fn readme_events() -> Unit {
   element.add_event_listener("click", fn(_event) { println("Clicked!") })
 }
 ```
+
+### Promises
+
+Use `JsPromise` to chain async operations like `fetch()`:
+
+```moonbit nocheck
+///|
+fn readme_promises() -> Unit {
+  window
+    .fetch("https://api.example.com/data")
+    .then(fn(response : Response) {
+      response.text().then(fn(text : String) {
+        Console::log([text])
+      })
+      |> ignore
+    })
+    .catch_(fn(_err) {
+      Console::error(["Fetch failed"])
+    })
+    |> ignore
+}
+```
+
+On the JS backend, the `bikallem/webapi/js_promise` subpackage bridges `JsPromise` to MoonBit's `async/await` via `to_async_promise()`:
+
+```moonbit nocheck
+///|
+async fn readme_fetch_async(url : String) -> Unit {
+  let response : Response = @js_promise.to_async_promise(window.fetch(url)).wait()
+  let text : String = @js_promise.to_async_promise(response.text()).wait()
+  Console::log([text])
+}
+```
+
+### Variadic Arguments
+
+WebIDL variadic parameters map to `Array[&TJsValue]`, accepting any mix of JS-interop types:
+
+```moonbit nocheck
+///|
+fn readme_variadic() -> Unit {
+  Console::log(["count:", 42, true])
+}
+```
+
+### Custom Elements
+
+Register Web Components with `define_custom_element`. The `on_create` callback runs once per element — attach Shadow DOM, build the template, and wire events here:
+
+```moonbit nocheck
+///|
+fn readme_custom_element() -> Unit {
+  define_custom_element("my-greeting", fn(host) {
+    let shadow = host.attach_shadow(
+      ShadowRootInit::new(ShadowRootMode::Open),
+    )
+    shadow.set_inner_html("<p>Hello from Shadow DOM!</p>")
+  })
+}
+```
+
+Optional lifecycle callbacks are available for `on_connected`, `on_disconnected`, `on_adopted`, and `on_attribute_changed`.
 
 ### Method Chaining
 
