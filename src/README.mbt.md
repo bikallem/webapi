@@ -10,6 +10,7 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
   - [Counter Example](#counter-example)
   - [WebSocket Example](#websocket-example)
   - [Canvas Drawing Example](#canvas-drawing-example)
+- [Examples](#examples)
 - [API Patterns](#api-patterns)
   - [Global Objects](#global-objects)
   - [Type Casting with `into()`](#type-casting-with-into)
@@ -22,7 +23,6 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
   - [Enum Generation](#enum-generation)
   - [Dictionary Generation](#dictionary-generation)
   - [Inheritance](#inheritance)
-- [Examples](#examples)
 - [Supported Specifications](#supported-specifications)
 - [Building from Source](#building-from-source)
 - [License](#license)
@@ -144,6 +144,62 @@ fn readme_canvas() -> Unit {
   ctx.set_fill_style("#FFFFFF")
   ctx.fill_text("Hello, MoonBit!", 320.0, 400.0)
 }
+```
+
+## Examples
+
+Browser examples demonstrating MoonBit WebAPI bindings. Each example targets both JS and wasm-gc backends. Click an example name to see the live demo.
+
+| Example | Description |
+|---------|-------------|
+| [calculator](https://bikallem.github.io/webapi/examples/calculator/calculator.js.html) | Interactive calculator with keyboard support |
+| [canvas](https://bikallem.github.io/webapi/examples/canvas/canvas.js.html) | 2D canvas drawing with shapes, gradients, and animation |
+| [classlist](https://bikallem.github.io/webapi/examples/classlist/classlist.js.html) | Add/remove/toggle CSS classes via `DOMTokenList` |
+| [clipboard-apis](https://bikallem.github.io/webapi/examples/clipboard-apis/clipboard-apis.js.html) | Read/write clipboard content |
+| [console](https://bikallem.github.io/webapi/examples/console/console.js.html) | Console API (log, warn, error, table) |
+| [counter](https://bikallem.github.io/webapi/examples/counter/counter.js.html) | Simple click counter |
+| [dom](https://bikallem.github.io/webapi/examples/dom/dom.js.html) | Create, modify, and remove DOM elements |
+| [element-ops](https://bikallem.github.io/webapi/examples/element-ops/element-ops.js.html) | Insert, replace, and clone elements |
+| [encoding](https://bikallem.github.io/webapi/examples/encoding/encoding.js.html) | TextEncoder/TextDecoder for UTF-8 |
+| [events](https://bikallem.github.io/webapi/examples/events/events.js.html) | Mouse, keyboard, and custom event handling |
+| [fetch](https://bikallem.github.io/webapi/examples/fetch/fetch.js.html) | HTTP requests with `fetch()` |
+| [fetch-async](https://bikallem.github.io/webapi/examples/fetch-async/fetch-async.js.html) | Async/await fetch with `JsPromise` (JS only) |
+| [file-api](https://bikallem.github.io/webapi/examples/file-api/file-api.js.html) | File reading and blob creation |
+| [forms](https://bikallem.github.io/webapi/examples/forms/forms.js.html) | Form input handling and validation |
+| [fullscreen](https://bikallem.github.io/webapi/examples/fullscreen/fullscreen.js.html) | Fullscreen API toggle |
+| [geometry](https://bikallem.github.io/webapi/examples/geometry/geometry.js.html) | DOMRect, DOMMatrix geometry types |
+| [indexeddb](https://bikallem.github.io/webapi/examples/indexeddb/indexeddb.js.html) | IndexedDB object store operations |
+| [intersection-observer](https://bikallem.github.io/webapi/examples/intersection-observer/intersection-observer.js.html) | Lazy-load with visibility detection |
+| [notifications](https://bikallem.github.io/webapi/examples/notifications/notifications.js.html) | Desktop notification API |
+| [performance](https://bikallem.github.io/webapi/examples/performance/performance.js.html) | High-resolution timing measurements |
+| [pointerevents](https://bikallem.github.io/webapi/examples/pointerevents/pointerevents.js.html) | Pointer event tracking |
+| [resize-observer](https://bikallem.github.io/webapi/examples/resize-observer/resize-observer.js.html) | Element resize monitoring |
+| [screen-orientation](https://bikallem.github.io/webapi/examples/screen-orientation/screen-orientation.js.html) | Screen orientation detection |
+| [selection-api](https://bikallem.github.io/webapi/examples/selection-api/selection-api.js.html) | Text selection and range handling |
+| [storage](https://bikallem.github.io/webapi/examples/storage/storage.js.html) | localStorage get/set/remove/clear |
+| [streams](https://bikallem.github.io/webapi/examples/streams/streams.js.html) | ReadableStream processing |
+| [svg](https://bikallem.github.io/webapi/examples/svg/svg.js.html) | SVG element creation and manipulation |
+| [timers](https://bikallem.github.io/webapi/examples/timers/timers.js.html) | `setTimeout` and `setInterval` |
+| [todo](https://bikallem.github.io/webapi/examples/todo/todo.js.html) | Full todo app with persistence |
+| [touch-events](https://bikallem.github.io/webapi/examples/touch-events/touch-events.js.html) | Multi-touch gesture handling |
+| [url](https://bikallem.github.io/webapi/examples/url/url.js.html) | URL parsing and manipulation |
+| [vibration](https://bikallem.github.io/webapi/examples/vibration/vibration.js.html) | Device vibration API |
+| [web-animations](https://bikallem.github.io/webapi/examples/web-animations/web-animations.js.html) | Keyframe animations |
+| [wc-counter](https://bikallem.github.io/webapi/examples/wc-counter/wc-counter.js.html) | Custom elements with Shadow DOM |
+| [wc-edit-word](https://bikallem.github.io/webapi/examples/wc-edit-word/wc-edit-word.js.html) | Inline editable text web component |
+| [websockets](https://bikallem.github.io/webapi/examples/websockets/websockets.js.html) | WebSocket connect/send/receive |
+| [xhr](https://bikallem.github.io/webapi/examples/xhr/xhr.js.html) | XMLHttpRequest |
+
+### Running Examples
+
+```bash
+# Build examples for both targets
+cd examples && moon build --target js --release
+cd examples && moon build --target wasm-gc --release
+
+# Serve from the repo root
+npx serve .
+# then open http://localhost:3000/examples/index.html
 ```
 
 ## API Patterns
@@ -350,62 +406,6 @@ pub trait TEventTarget { ... }
 pub impl TElement for Element
 pub impl TNode for Element
 pub impl TEventTarget for Element
-```
-
-## Examples
-
-Browser examples demonstrating MoonBit WebAPI bindings. Each example targets both JS and wasm-gc backends.
-
-| Example | Description |
-|---------|-------------|
-| calculator | Interactive calculator with keyboard support |
-| canvas | 2D canvas drawing with shapes, gradients, and animation |
-| classlist | Add/remove/toggle CSS classes via `DOMTokenList` |
-| clipboard-apis | Read/write clipboard content |
-| console | Console API (log, warn, error, table) |
-| counter | Simple click counter |
-| dom | Create, modify, and remove DOM elements |
-| element-ops | Insert, replace, and clone elements |
-| encoding | TextEncoder/TextDecoder for UTF-8 |
-| events | Mouse, keyboard, and custom event handling |
-| fetch | HTTP requests with `fetch()` |
-| fetch-async | Async/await fetch with `JsPromise` (JS only) |
-| file-api | File reading and blob creation |
-| forms | Form input handling and validation |
-| fullscreen | Fullscreen API toggle |
-| geometry | DOMRect, DOMMatrix geometry types |
-| indexeddb | IndexedDB object store operations |
-| intersection-observer | Lazy-load with visibility detection |
-| notifications | Desktop notification API |
-| performance | High-resolution timing measurements |
-| pointerevents | Pointer event tracking |
-| resize-observer | Element resize monitoring |
-| screen-orientation | Screen orientation detection |
-| selection-api | Text selection and range handling |
-| storage | localStorage get/set/remove/clear |
-| streams | ReadableStream processing |
-| svg | SVG element creation and manipulation |
-| timers | `setTimeout` and `setInterval` |
-| todo | Full todo app with persistence |
-| touch-events | Multi-touch gesture handling |
-| url | URL parsing and manipulation |
-| vibration | Device vibration API |
-| web-animations | Keyframe animations |
-| wc-edit-word | Inline editable text web component |
-| wc-counter | Custom elements with Shadow DOM |
-| websockets | WebSocket connect/send/receive |
-| xhr | XMLHttpRequest |
-
-### Running Examples
-
-```bash
-# Build examples for both targets
-cd examples && moon build --target js --release
-cd examples && moon build --target wasm-gc --release
-
-# Serve from the repo root
-npx serve .
-# then open http://localhost:3000/examples/index.html
 ```
 
 ## Supported Specifications
