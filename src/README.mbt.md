@@ -166,7 +166,7 @@ Browser examples demonstrating MoonBit WebAPI bindings. Each example targets bot
 | [encoding](https://bikallem.github.io/webapi/examples/#encoding.js) | TextEncoder/TextDecoder for UTF-8 |
 | [events](https://bikallem.github.io/webapi/examples/#events.js) | Mouse, keyboard, and custom event handling |
 | [fetch](https://bikallem.github.io/webapi/examples/#fetch.js) | HTTP requests with `fetch()` |
-| [fetch-async](https://bikallem.github.io/webapi/examples/#fetch-async.js) | Async/await fetch with `JsPromise` (JS only) |
+| [fetch-async](https://bikallem.github.io/webapi/examples/#fetch-async.js) | Async fetch with `JsPromise` (JS only) |
 | [file-api](https://bikallem.github.io/webapi/examples/#file-api.js) | File reading and blob creation |
 | [forms](https://bikallem.github.io/webapi/examples/#forms.js) | Form input handling and validation |
 | [fullscreen](https://bikallem.github.io/webapi/examples/#fullscreen.js) | Fullscreen API toggle |
@@ -276,7 +276,7 @@ fn readme_promises() -> Unit {
 }
 ```
 
-On the JS backend, the `bikallem/webapi/js_promise` subpackage bridges `JsPromise` to MoonBit's `async/await` via `to_async_promise()`:
+On the JS backend, the `bikallem/webapi/js_promise` subpackage bridges `JsPromise` to MoonBit's `async` via `to_async_promise()`:
 
 ```moonbit nocheck
 ///|
