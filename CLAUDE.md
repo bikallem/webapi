@@ -71,6 +71,8 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 - `JsArray` - JavaScript array interop
 - `JsObject` - Builder for plain JS objects with arbitrary string keys (e.g., keyframe objects)
 - `EventListener` - Callback interface for event handlers
+- `JsValue::to_option[T]()` - Convert nullable JsValue to `T?` for externref types
+- `JsValue::to_option_prim[T : FromJsAny]()` - Convert nullable JsValue to `T?` for wasm value types (Bool, Int, Double)
 
 ## Type Mappings (WebIDL → MoonBit)
 
@@ -113,10 +115,23 @@ extern "js" fn element_get_attribute_ffi(obj : JsValue, name : JsValue) -> JsVal
 
 ///|
 impl TElement for Element with get_attribute(self, name) {
-  let result = element_get_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
-  if JsValue::is_null(result) { None } else { Some(result.unsafe_cast()) }
+  element_get_attribute_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
 }
 ```
+
+### Callback and Closure Pattern
+
+Callback-typed method arguments and attribute setters accept closures directly. The generator resolves callback types (including through typedef chains like `EventHandler = EventHandlerNonNull?`) and emits closure-accepting signatures:
+
+```moonbit
+// Generated setter accepts a closure directly:
+element.set_onclick(fn(event) { ... })
+
+// addEventListener also accepts closures:
+element.add_event_listener("click", fn(event) { ... })
+```
+
+The resolution logic lives in `try_resolve_callback()` in `interface_emitter.mbt`, which checks both direct callbacks (`type_registry.get_callback_def()`) and typedef→callback chains (`type_registry.resolve_typedef_to_callback()`).
 
 ### FromJsAny Pattern
 
@@ -220,6 +235,7 @@ Quick reference for MoonBit patterns that differ from Rust/OCaml and cause frequ
 - **Private types**: Use `priv enum` / `priv struct` for types not in the public API; the compiler warns if you forget `priv`
 - **`///|` doc comments**: Required before every top-level declaration (function, type, let binding); `moon fmt` adds them automatically
 - **Enum constructors in expressions**: Can omit the type prefix when the expected type is known from context (e.g., `HasArg("x")` instead of `ArgMatch::HasArg("x")` when the field type is `ArgMatch`)
+- **Guard clauses**: `guard expr is Pattern(x) else { return None }` for early returns from pattern matching on Option/enum types. Preferred over nested `match` when extracting a single variant.
 
 ### Parser AST Construction
 
@@ -242,6 +258,7 @@ Key gotchas:
 - **Test file naming**: `*_wbtest.mbt` = whitebox tests (access package-private functions); `*_test.mbt` = blackbox tests (public API only)
 - **Test helpers**: Define shared helpers (like `make_arg`, `setup_emitter`) at the top of `_wbtest.mbt` files to reduce boilerplate. The emit package has `setup_test` in `emit_wbtest.mbt`.
 - **Multi-target output**: Use `mbt_code_gen_multi(emits)` which returns `{ shared, js_ffi, wasm_ffi }` — always assert all three fields to catch regressions in both JS and wasm-gc output.
+- **Type predicates**: Use `ArgMbtType` methods (`is_string()`, `is_enum()`, `is_dictionary()`) — not standalone functions.
 
 ## wasm-gc Known Issues
 
@@ -253,9 +270,9 @@ All examples compile for both js and wasm-gc targets except `fetch-async` (requi
 
 **`JsValue::null()` defaults on non-nullable types (resolved)**: On wasm-gc, `JsValue::null()` returns `externref` (nullable), but string-typed aliases like `CSSOMString = String` map to `(ref extern)` (non-nullable). The MoonBit compiler generates a default-value thunk returning `(ref extern)` that internally calls the nullable `JsNull::null` import — this fails `wasm-tools validate`. The code generator in `method_args()` (`interface_emitter.mbt`) now strips `JsValue::null()` defaults for `Primitive(_)`, `Enum(_)`, **and `Other(_)`** types (the last catches type aliases). The parameter becomes a plain optional and `opt_to_js` sends `undefined` when absent. Use `make validate-wasm` after `make build-examples` to catch these issues early — it runs in <2 seconds vs 14+ seconds for Playwright.
 
-**`externref` vs `(ref extern)` nullability on wasm-gc (resolved)**: On wasm-gc, `JsValue` maps to `externref` (nullable) and `JsAny`/`String` maps to `(ref extern)` (non-nullable). MoonBit's `unsafe_cast()` generates no wasm instructions — it cannot change nullability. To convert `externref` → `(ref extern)`, use the `jsvalue_to_jsany()` helper (defined in `base.mbt/js_value_wasm.mbt`) which uses the `String?` unwrap trick to emit `ref.as_non_null`. This is needed when passing JsValue results to `FromJsAny::from_js_any()` for primitive type conversions (Bool, Int, Double). See dictionary getter code in `emit.mbt` (`render_dictionary_getter_shared`). For `#external` types returned from wasm FFI imports, the pattern is: declare the FFI as returning `JsValue` (externref), then `.unsafe_cast()` to the target type (see `js_object_wasm.mbt` for an example).
+**`externref` vs `(ref extern)` nullability on wasm-gc (resolved)**: On wasm-gc, `JsValue` maps to `externref` (nullable) and `JsAny`/`String` maps to `(ref extern)` (non-nullable). MoonBit's `unsafe_cast()` generates no wasm instructions — it cannot change nullability. To convert `externref` → `(ref extern)`, use the `jsvalue_to_jsany()` helper (defined in `base.mbt/js_value_wasm.mbt`) which uses the `String?` unwrap trick to emit `ref.as_non_null`. This is needed when passing JsValue results to `FromJsAny::from_js_any()` for primitive type conversions (Bool, Int, Double). The `JsValue::to_option_prim()` helper in `base.mbt/js_value.mbt` encapsulates this pattern for nullable returns. For `#external` types returned from wasm FFI imports, the pattern is: declare the FFI as returning `JsValue` (externref), then `.unsafe_cast()` to the target type (see `js_object_wasm.mbt` for an example).
 
-**`unsigned long long` (UInt64) properties on wasm-gc (resolved)**: The JS runtime code generator now wraps return values of `LongLong`, `UnsignedLongLong`, and `Bigint` types with `BigInt()` in generated getters and methods (e.g., `get_version: (obj) => BigInt(obj.version)`). The `is_bigint_type` helper in `emit_js_runtime.mbt` detects these types and the `is_bigint` parameter on `emit_js_getter`/`emit_js_method`/`emit_js_namespace_getter`/`emit_js_namespace_method` controls wrapping.
+**`unsigned long long` (UInt64) properties on wasm-gc (resolved)**: The JS runtime code generator now wraps return values of `LongLong`, `UnsignedLongLong`, and `Bigint` types with `BigInt()` in generated getters and methods (e.g., `get_version: (obj) => BigInt(obj.version)`). The `is_bigint_type` helper in `emit_js_runtime.mbt` detects these types and the `is_bigint` parameter on `emit_js_getter`/`emit_js_method` controls wrapping. Namespace methods/getters reuse these same functions with `is_static=true`.
 
 ## Pending: remove default_value from code generation (branch `remove-default-value`)
 
