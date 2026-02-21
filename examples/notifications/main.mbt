@@ -1,12 +1,15 @@
 ///|
+fn perm_str() -> String {
+  @webapi.Notification::permission().value()
+}
+
+///|
 /// Notifications API Demo - show permission status and create notifications
 fn main {
   let doc = @webapi.document
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Notifications Demo")
-
-  let perm_str = fn() -> String { @webapi.Notification::permission().value() }
 
   // Permission status
   let permission_status = doc.create_element("div")

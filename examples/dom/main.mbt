@@ -1,4 +1,12 @@
 ///|
+fn create_item(text : String) -> @webapi.HTMLLIElement {
+  let li : @webapi.HTMLLIElement = @webapi.document.create_element("li").into()
+  li.class_list().add(["item"])
+  li.set_text_content(text)
+  li
+}
+
+///|
 /// DOM manipulation example demonstrating createElement, querySelector,
 /// querySelectorAll, classList, setAttribute, getAttribute, textContent,
 /// appendChild, removeChild, and cloneNode.
@@ -18,16 +26,6 @@ fn main {
     .create_element("ul")
     .into()
   list.set_attribute("id", "item-list")
-
-  // Helper to create a list item
-  let create_item = fn(text : String) -> @webapi.HTMLLIElement {
-    let li : @webapi.HTMLLIElement = @webapi.document
-      .create_element("li")
-      .into()
-    li.class_list().add(["item"])
-    li.set_text_content(text)
-    li
-  }
 
   // Add 3 initial items
   for i in 1..<=3 {

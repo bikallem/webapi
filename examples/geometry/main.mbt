@@ -1,3 +1,47 @@
+// Helpers to read DOMPoint properties (avoids ambiguity between TDOMPoint and TDOMPointReadOnly)
+
+///|
+fn px(p : @webapi.DOMPoint) -> String {
+  @webapi.TDOMPointReadOnly::x(p).to_string()
+}
+
+///|
+fn py(p : @webapi.DOMPoint) -> String {
+  @webapi.TDOMPointReadOnly::y(p).to_string()
+}
+
+///|
+fn pz(p : @webapi.DOMPoint) -> String {
+  @webapi.TDOMPointReadOnly::z(p).to_string()
+}
+
+///|
+fn pw(p : @webapi.DOMPoint) -> String {
+  @webapi.TDOMPointReadOnly::w(p).to_string()
+}
+
+// Helpers to read DOMRect properties
+
+///|
+fn rx(r : @webapi.DOMRect) -> String {
+  @webapi.TDOMRectReadOnly::x(r).to_string()
+}
+
+///|
+fn ry(r : @webapi.DOMRect) -> String {
+  @webapi.TDOMRectReadOnly::y(r).to_string()
+}
+
+///|
+fn rw(r : @webapi.DOMRect) -> String {
+  @webapi.TDOMRectReadOnly::width(r).to_string()
+}
+
+///|
+fn rh(r : @webapi.DOMRect) -> String {
+  @webapi.TDOMRectReadOnly::height(r).to_string()
+}
+
 ///|
 /// Geometry API example demonstrating DOMPoint, DOMRect, DOMMatrix, and DOMQuad.
 fn main {
@@ -11,34 +55,6 @@ fn main {
   // Heading
   let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").into()
   heading.set_text_content("Geometry API")
-
-  // Helper to read DOMPoint properties (avoids ambiguity between TDOMPoint and TDOMPointReadOnly)
-  let px = fn(p : @webapi.DOMPoint) -> String {
-    @webapi.TDOMPointReadOnly::x(p).to_string()
-  }
-  let py = fn(p : @webapi.DOMPoint) -> String {
-    @webapi.TDOMPointReadOnly::y(p).to_string()
-  }
-  let pz = fn(p : @webapi.DOMPoint) -> String {
-    @webapi.TDOMPointReadOnly::z(p).to_string()
-  }
-  let pw = fn(p : @webapi.DOMPoint) -> String {
-    @webapi.TDOMPointReadOnly::w(p).to_string()
-  }
-
-  // Helper to read DOMRect properties
-  let rx = fn(r : @webapi.DOMRect) -> String {
-    @webapi.TDOMRectReadOnly::x(r).to_string()
-  }
-  let ry = fn(r : @webapi.DOMRect) -> String {
-    @webapi.TDOMRectReadOnly::y(r).to_string()
-  }
-  let rw = fn(r : @webapi.DOMRect) -> String {
-    @webapi.TDOMRectReadOnly::width(r).to_string()
-  }
-  let rh = fn(r : @webapi.DOMRect) -> String {
-    @webapi.TDOMRectReadOnly::height(r).to_string()
-  }
 
   // DOMPoint
   let point = @webapi.DOMPoint::new(x=10.0, y=20.0, z=5.0, w=1.0)
