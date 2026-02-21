@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="data:," />
+    <link rel="stylesheet" href="../styles.css">
+    <title>Web Components Example (wasm-gc)</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { wasmImportObject } from "../../src/webapi.mjs";
+        wasmImportObject["webcomponents_shim"] = {
+            register: (tag_name, on_connected) => {
+                class C extends HTMLElement { connectedCallback() { on_connected(this); } }
+                customElements.define(tag_name, C);
+            }
+        };
+        const { instance } = await WebAssembly.instantiateStreaming(
+            fetch("../_build/wasm-gc/release/build/web-components/web-components.wasm"),
+            wasmImportObject,
+            { builtins: ["js-string"], importedStringConstants: "_" }
+        );
+        instance.exports._start();
+    </script>
+</body>
+</html>
