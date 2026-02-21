@@ -1,20 +1,30 @@
 # MoonBit WebAPI
 
-Type-safe MoonBit bindings for Web Platform APIs, automatically generated from WebIDL specifications.
+Type-safe MoonBit bindings for Web Platform APIs, automatically generated from WebIDL specifications. Targets both **JS** and **wasm-gc** backends.
 
 ## Overview
 
 This library provides MoonBit FFI bindings for browser APIs including:
 
 - **DOM** - Document Object Model manipulation
-- **HTML** - HTML elements and attributes  
+- **HTML** - HTML elements, forms, media, and attributes
 - **Canvas 2D** - Graphics and drawing operations
-- **Events** - User interaction and event handling
+- **Events** - Mouse, keyboard, pointer, touch, and custom events
 - **Fetch** - HTTP requests and responses
 - **URL** - URL parsing and manipulation
-- **XMLHttpRequest** - Legacy HTTP requests
+- **WebSocket** - Real-time bidirectional communication
+- **Storage** - localStorage and sessionStorage
 - **SVG** - Scalable Vector Graphics
-- **CSSOM** - CSS Object Model
+- **CSSOM** - CSS Object Model and viewport queries
+- **Web Animations** - Keyframe animations API
+- **IndexedDB** - Client-side structured storage
+- **Streams** - Readable/writable streams
+- **Notifications** - Desktop notifications
+- **File API** - File reading and blob handling
+- **Clipboard** - Clipboard read/write access
+- **Intersection Observer** - Visibility detection
+- **Resize Observer** - Element size monitoring
+- **Performance** - High-resolution timing
 
 All bindings are automatically generated from official WebIDL specifications, ensuring type safety and API completeness.
 
@@ -33,9 +43,7 @@ moon add bikallem/webapi@0.3.0
 A simple counter application demonstrating DOM manipulation and event handling:
 
 ```moonbit nocheck
-///|
 fn main {
-  // Create mutable counter state
   let mut count = 0
 
   // Create count display element
@@ -47,22 +55,18 @@ fn main {
   ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
   .set_text_content("0")
 
-  // Update display function
   let update_display = fn() {
     count_display.set_text_content(count.to_string())
   }
 
-  // Create increment button with click handler
+  // Create increment button — closures are accepted directly
   let increment_btn = @webapi.document.create_element("button")
   increment_btn
   ..set_text_content("+")
-  .add_event_listener(
-    "click",
-    @webapi.EventListener::new(fn(_event) {
-      count = count + 1
-      update_display()
-    }),
-  )
+  .add_event_listener("click", fn(_event) {
+    count = count + 1
+    update_display()
+  })
 
   // Append to DOM
   let app = @webapi.document.get_element_by_id("app").unwrap()
@@ -71,14 +75,32 @@ fn main {
 }
 ```
 
+### WebSocket Example
+
+Demonstrates WebSocket connections with event handler closures:
+
+```moonbit nocheck
+fn main {
+  let socket = @webapi.WebSocket::new("wss://echo.websocket.events")
+
+  // Event handlers accept closures directly
+  socket.set_onopen(fn(_e) {
+    socket.send("Hello from MoonBit!")
+  })
+
+  socket.set_onmessage(fn(e) {
+    let data : String = e.data().into()
+    println("Received: " + data)
+  })
+}
+```
+
 ### Canvas Drawing Example
 
 Demonstrates the Canvas 2D API with gradients, shapes, and text:
 
 ```moonbit nocheck
-///|
 fn main {
-  // Create canvas element
   let canvas : @webapi.HTMLCanvasElement = @webapi.document
     .create_element("canvas")
     .into()
@@ -92,19 +114,10 @@ fn main {
     .unwrap()
     .into()
 
-  // Create gradient
+  // Create gradient and draw
   let gradient = ctx.create_linear_gradient(0.0, 0.0, 0.0, 300.0)
   gradient..add_color_stop(0.0, "#1e3c72").add_color_stop(1.0, "#87CEEB")
-
-  // Draw with gradient
   ctx..set_fill_style(gradient).fill_rect(0.0, 0.0, 800.0, 300.0)
-
-  // Draw shapes (arc uses radians: 2π for full circle)
-  ctx
-  ..set_fill_style("#228B22")
-  ..begin_path()
-  ..arc(400.0, 250.0, 50.0, 0.0, @math.pi * 2.0)
-  .fill()
 
   // Draw text
   ctx
@@ -124,7 +137,7 @@ The library provides direct access to browser global objects:
 // Access the document object
 @webapi.document.get_element_by_id("my-id")
 
-// Access the window object  
+// Access the window object
 @webapi.window.inner_width()
 
 // Access the navigator object
@@ -136,16 +149,10 @@ The library provides direct access to browser global objects:
 DOM elements are returned as generic `Element` types. Use `into()` to cast to specific element types:
 
 ```moonbit nocheck
-// Create an element and cast to specific type
-
-///|
 let canvas : @webapi.HTMLCanvasElement = @webapi.document
   .create_element("canvas")
   .into()
 
-// Cast to access type-specific methods
-
-///|
 let ctx : @webapi.CanvasRenderingContext2D = canvas
   .get_context("2d")
   .unwrap()
@@ -154,16 +161,18 @@ let ctx : @webapi.CanvasRenderingContext2D = canvas
 
 ### Event Handling
 
-Create event listeners using the `EventListener::new` constructor:
+Event listeners and handlers accept closures directly:
 
 ```moonbit nocheck
-element.add_event_listener(
-  "click",
-  @webapi.EventListener::new(fn(event) {
-    // Handle click event
-    println("Clicked!")
-  }),
-)
+// addEventListener with closure
+element.add_event_listener("click", fn(event) {
+  println("Clicked!")
+})
+
+// Event handler attributes with closure
+element.set_onclick(fn(event) {
+  println("Clicked!")
+})
 ```
 
 ### Method Chaining
@@ -223,15 +232,9 @@ interface Element : Node {
 
 **Generated MoonBit:**
 ```moonbit nocheck
-// External type wrapping JavaScript object
-
-///|
 #external
 pub type Element
 
-// Trait defining interface methods
-
-///|
 pub trait TElement: TNode {
   id(self : Self) -> String = _
   set_id(self : Self, id : String) -> Unit = _
@@ -239,25 +242,11 @@ pub trait TElement: TNode {
   set_attribute(self : Self, name : String, value : String) -> Unit = _
 }
 
-// Implementation using FFI
-
-///|
-extern "js" fn element_get_attribute_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> JsValue = "(obj, name) => obj.getAttribute(name)"
-
-///|
 impl TElement with get_attribute(self : Self, name : String) -> String? {
-  let result = element_get_attribute_ffi(
+  element_get_attribute_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-  )
-  if JsValue::is_null(result) {
-    None
-  } else {
-    Some(result.unsafe_cast())
-  }
+  ).to_option()
 }
 ```
 
@@ -272,13 +261,11 @@ enum ShadowRootMode { "open", "closed" };
 
 **Generated MoonBit:**
 ```moonbit nocheck
-///|
 pub(all) enum ShadowRootMode {
   Open
   Closed
 } derive(Eq, Show)
 
-///|
 pub impl TJsValue for ShadowRootMode with to_js(self : ShadowRootMode) -> JsValue {
   match self {
     ShadowRootMode::Open => TJsValue::to_js("open")
@@ -286,7 +273,6 @@ pub impl TJsValue for ShadowRootMode with to_js(self : ShadowRootMode) -> JsValu
   }
 }
 
-///|
 pub fn ShadowRootMode::from(value : String) -> ShadowRootMode? {
   match value {
     "open" => Some(ShadowRootMode::Open)
@@ -310,11 +296,9 @@ dictionary EventInit {
 
 **Generated MoonBit:**
 ```moonbit nocheck
-///|
 #external
 pub type EventInit
 
-///|
 pub fn EventInit::new(bubbles? : Bool, cancelable? : Bool) -> EventInit {
   event_init_ffi(opt_to_js(bubbles), opt_to_js(cancelable))
 }
@@ -338,33 +322,63 @@ pub impl TEventTarget for Element
 
 ## Examples
 
-Browser examples demonstrating MoonBit WebAPI bindings. Each example has a JS target HTML file (`<name>.js.html`) and most also have a wasm-gc target (`<name>.wasm.html`).
+Browser examples demonstrating MoonBit WebAPI bindings. Each example targets both JS and wasm-gc backends.
 
 | Example | Description |
 |---------|-------------|
+| calculator | Interactive calculator with keyboard support |
 | canvas | 2D canvas drawing with shapes, gradients, and animation |
 | classlist | Add/remove/toggle CSS classes via `DOMTokenList` |
-| counter | Simple click counter (JS + wasm-gc) |
+| clipboard-apis | Read/write clipboard content |
+| console | Console API (log, warn, error, table) |
+| counter | Simple click counter |
 | dom | Create, modify, and remove DOM elements |
 | element-ops | Insert, replace, and clone elements |
+| encoding | TextEncoder/TextDecoder for UTF-8 |
 | events | Mouse, keyboard, and custom event handling |
-| fetch | Async HTTP requests with `fetch()` |
+| fetch | HTTP requests with `fetch()` |
+| fetch-async | Async/await fetch with `JsPromise` (JS only) |
+| file-api | File reading and blob creation |
 | forms | Form input handling and validation |
-| storage | `localStorage` get/set/remove/clear |
+| fullscreen | Fullscreen API toggle |
+| geometry | DOMRect, DOMMatrix geometry types |
+| indexeddb | IndexedDB object store operations |
+| intersection-observer | Lazy-load with visibility detection |
+| notifications | Desktop notification API |
+| performance | High-resolution timing measurements |
+| pointerevents | Pointer event tracking |
+| resize-observer | Element resize monitoring |
+| screen-orientation | Screen orientation detection |
+| selection-api | Text selection and range handling |
+| storage | localStorage get/set/remove/clear |
+| streams | ReadableStream processing |
+| svg | SVG element creation and manipulation |
 | timers | `setTimeout` and `setInterval` |
+| todo | Full todo app with persistence |
+| touch-events | Multi-touch gesture handling |
 | url | URL parsing and manipulation |
+| vibration | Device vibration API |
+| web-animations | Keyframe animations |
+| websockets | WebSocket connect/send/receive |
+| xhr | XMLHttpRequest |
 
 ### Running Examples
 
 ```bash
-# Build examples
-moon -C examples build --target js
-moon -C examples build --target wasm-gc
+# Build examples for both targets
+cd examples && moon build --target js --release
+cd examples && moon build --target wasm-gc --release
 
 # Serve from the repo root
 npx serve .
 # then open http://localhost:3000/examples/index.html
 ```
+
+## Supported Specifications
+
+The generator processes the following WebIDL specifications:
+
+clipboard-apis, console, cssom, cssom-view, dom, encoding, fetch, FileAPI, fullscreen, geometry, hr-time, html, IndexedDB, intersection-observer, notifications, performance-timeline, pointerevents, referrer-policy, requestidlecallback, resize-observer, screen-orientation, selection-api, storage, streams, SVG, touch-events, trusted-types, uievents, url, vibration, web-animations, webidl, websockets, xhr
 
 ## Building from Source
 
@@ -377,37 +391,19 @@ npx serve .
 
 ```bash
 # Install npm dependencies (WebIDL specs)
-npm install
+cd webapi_gen && npm install
 
-# Generate bindings from WebIDL
-cd webapi_gen && moon run cmd/main
+# Full pipeline: generate, check, format, build, test
+make clean all
 
-# Type-check generated code
-moon check --target js
-
-# Format code
-moon fmt
+# Or individual steps:
+make gen-test       # Run generator tests
+make clean gen      # Regenerate bindings
+make check          # Type-check both JS and wasm-gc targets
+make fmt            # Format all code
+make build-examples # Build examples for both targets
+make test-playwright # Run end-to-end tests
 ```
-
-## Supported Specifications
-
-The generator processes the following WebIDL specifications:
-
-- DOM
-- HTML
-- Fetch
-- URL
-- XMLHttpRequest
-- CSSOM
-- CSSOM-View
-- Geometry
-- FileAPI
-- Performance Timeline
-- High Resolution Time
-- Referrer Policy
-- SVG
-- Trusted Types
-- UI Events
 
 ## License
 
