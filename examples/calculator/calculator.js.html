@@ -7,7 +7,58 @@
     <title>Calculator</title>
 </head>
 <body>
-    <div id="app"></div>
+    <wc-calculator></wc-calculator>
+    <template id="wc-calculator-template">
+        <style>
+            :host { display: block; max-width: 420px; margin: 2em auto; padding: 1em; font-family: system-ui; }
+            h1 { margin-top: 0; }
+            .subtitle { margin-top: 0.25em; color: #475467; }
+            .status { min-height: 1.2em; text-align: right; color: #667085; font-size: 0.9em; margin-bottom: 0.2em; }
+            .display { padding: 0.6em 0.75em; border: 1px solid #d0d5dd; border-radius: 8px; background: #f8fafc; text-align: right; font-size: 1.8em; font-weight: 700; min-height: 1.4em; overflow-x: auto; }
+            .buttons { margin-top: 0.75em; }
+            .row { display: flex; gap: 0.5em; margin-top: 0.5em; }
+            button { flex: 1; min-height: 2.8em; font-size: 1.1em; border-radius: 8px; cursor: pointer; border: 1px solid #d0d5dd; background: #ffffff; }
+            button.operator { background: #f2f4f7; }
+            button.equals { border-color: #1d4ed8; background: #2563eb; color: #ffffff; }
+            button.clear { border-color: #fda29b; background: #fef3f2; }
+        </style>
+        <h1>Calculator</h1>
+        <p class="subtitle">A simple calculator built with WebAPI bindings.</p>
+        <div class="status" data-ref="status"></div>
+        <div class="display" data-ref="display">0</div>
+        <div class="buttons">
+            <div class="row">
+                <button class="clear" data-key="C">C</button>
+                <button data-key="CE">CE</button>
+                <button data-key="DEL">DEL</button>
+                <button class="operator" data-key="/">/</button>
+            </div>
+            <div class="row">
+                <button data-key="7">7</button>
+                <button data-key="8">8</button>
+                <button data-key="9">9</button>
+                <button class="operator" data-key="*">*</button>
+            </div>
+            <div class="row">
+                <button data-key="4">4</button>
+                <button data-key="5">5</button>
+                <button data-key="6">6</button>
+                <button class="operator" data-key="-">-</button>
+            </div>
+            <div class="row">
+                <button data-key="1">1</button>
+                <button data-key="2">2</button>
+                <button data-key="3">3</button>
+                <button class="operator" data-key="+">+</button>
+            </div>
+            <div class="row">
+                <button data-key="+/-">+/-</button>
+                <button data-key="0">0</button>
+                <button data-key=".">.</button>
+                <button class="equals" data-key="=">=</button>
+            </div>
+        </div>
+    </template>
     <script type="module" src="../_build/js/release/build/calculator/calculator.js"></script>
 </body>
 </html>
