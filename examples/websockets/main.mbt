@@ -14,7 +14,7 @@ fn main {
   ..set_attribute(
     "style", "width: 100%; padding: 0.5em; font-size: 1em; box-sizing: border-box; margin: 0.5em 0;",
   )
-  .set_value("ws://localhost:8765")
+  .set_value("wss://echo.websocket.org")
 
   // Status display
   let status = doc.create_element("div")
