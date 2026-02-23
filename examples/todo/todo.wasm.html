@@ -7,7 +7,36 @@
     <title>Todo App (wasm-gc)</title>
 </head>
 <body>
-    <div id="app"></div>
+    <wc-todo></wc-todo>
+    <template id="wc-todo-template">
+        <style>
+            :host { display: block; max-width: 640px; margin: 2em auto; padding: 1em; font-family: system-ui; }
+            h1 { margin-top: 0; }
+            .description { margin-top: 0.25em; color: #475467; }
+            .controls { display: flex; gap: 0.5em; margin: 1em 0; }
+            .controls input { flex: 1; padding: 0.6em 0.75em; font-size: 1em; }
+            .controls button { padding: 0.6em 1em; font-size: 1em; }
+            .status { margin: 0.5em 0; color: #475467; font-size: 0.95em; font-weight: 600; }
+            .empty { margin: 0.5em 0 0.25em 0; color: #667085; font-size: 0.95em; }
+            .empty.hidden { display: none; }
+            ul { list-style: none; padding: 0; margin: 0.75em 0 0 0; border-top: 1px solid #e4e7ec; }
+            li { display: flex; align-items: center; justify-content: space-between; gap: 0.5em; padding: 0.5em 0.25em; border-bottom: 1px solid #e4e7ec; }
+            .left { display: flex; align-items: center; gap: 0.6em; flex: 1; min-width: 0; }
+            li span { word-break: break-word; }
+            li.done span { color: #667085; text-decoration: line-through; }
+            li button { padding: 0.35em 0.6em; font-size: 0.9em; }
+        </style>
+        <h1>Todo App</h1>
+        <p class="description">Add tasks, mark them done, and remove them.</p>
+        <div class="controls">
+            <input type="text" data-ref="input" placeholder="What needs to be done?">
+            <button data-ref="add">Add</button>
+            <button data-ref="clear">Clear All</button>
+        </div>
+        <div class="status" data-ref="status"></div>
+        <div class="empty" data-ref="empty">No tasks yet. Add one above.</div>
+        <ul data-ref="list"></ul>
+    </template>
     <script type="module">
         import { wasmImportObject } from "../../src/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(

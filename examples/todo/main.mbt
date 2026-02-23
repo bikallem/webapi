@@ -1,11 +1,11 @@
 ///|
-/// Todo app example built with generated WebAPI bindings.
+/// Todo app web component: <wc-todo> custom element with Shadow DOM.
 using @webapi {
   document,
-  type Element,
   type HTMLDivElement,
   type HTMLInputElement,
   type HTMLButtonElement,
+  type HTMLTemplateElement,
   type HTMLUListElement,
   type HTMLLIElement,
   type Storage,
@@ -51,30 +51,18 @@ fn update_status(status : HTMLDivElement, empty_state : HTMLDivElement) -> Unit 
     "Total: " + total.to_string() + " | Completed: " + done.to_string(),
   )
   if total == 0 {
-    empty_state.set_attribute(
-      "style", "margin: 0.5em 0 0.25em 0; color: #667085; font-size: 0.95em;",
-    )
+    empty_state.class_list().remove(["hidden"])
   } else {
-    empty_state.set_attribute(
-      "style", "display: none; margin: 0.5em 0 0.25em 0; color: #667085; font-size: 0.95em;",
-    )
+    empty_state.class_list().add(["hidden"])
   }
 }
 
 ///|
-fn apply_done_style(
-  is_done : Bool,
-  item : HTMLLIElement,
-  label : Element,
-) -> Unit {
+fn apply_done_style(is_done : Bool, item : HTMLLIElement) -> Unit {
   if is_done {
     item.class_list().add(["done"])
-    label.set_attribute(
-      "style", "word-break: break-word; color: #667085; text-decoration: line-through;",
-    )
   } else {
     item.class_list().remove(["done"])
-    label.set_attribute("style", "word-break: break-word;")
   }
 }
 
@@ -89,31 +77,23 @@ fn append_todo_to_dom(
   storage : Storage,
 ) -> Unit {
   let item : HTMLLIElement = document.create_element("li").into()
-  item.set_attribute(
-    "style", "display: flex; align-items: center; justify-content: space-between; gap: 0.5em; padding: 0.5em 0.25em; border-bottom: 1px solid #e4e7ec;",
-  )
 
   let left : HTMLDivElement = document.create_element("div").into()
-  left.set_attribute(
-    "style", "display: flex; align-items: center; gap: 0.6em; flex: 1; min-width: 0;",
-  )
+  left.class_list().add(["left"])
 
   let checkbox : HTMLInputElement = document.create_element("input").into()
   checkbox.set_type_("checkbox")
 
   let label = document.create_element("span")
-  label
-  ..set_text_content(text)
-  .set_attribute("style", "word-break: break-word;")
+  label.set_text_content(text)
 
   checkbox.set_checked(done)
-  apply_done_style(done, item, label)
+  apply_done_style(done, item)
 
   let delete_btn : HTMLButtonElement = document.create_element("button").into()
   delete_btn
   ..set_type_("button")
-  ..set_text_content("Delete")
-  .set_attribute("style", "padding: 0.35em 0.6em; font-size: 0.9em;")
+  .set_text_content("Delete")
 
   checkbox.add_event_listener("click", fn(_event) {
     let checked = checkbox.checked()
@@ -125,7 +105,7 @@ fn append_todo_to_dom(
       Some(pos) => {
         let (_, _, current_text) = todos[pos]
         todos[pos] = (todo_id, checked, current_text)
-        apply_done_style(checked, item, label)
+        apply_done_style(checked, item)
         save_todos(storage)
         update_status(status, empty_state)
       }
@@ -191,69 +171,45 @@ fn load_todos(
 }
 
 ///|
-fn main {
-  let app = document.get_element_by_id("app").unwrap()
+fn wc_todo(host : @webapi.HTMLElement) -> Unit {
+  let doc = document
   let storage = @webapi.window.local_storage()
 
-  let container : HTMLDivElement = document.create_element("div").into()
-  container.set_attribute(
-    "style", "max-width: 640px; margin: 2em auto; padding: 1em; font-family: system-ui;",
+  // Attach shadow DOM and clone template
+  let shadow = host.attach_shadow(
+    @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
+  let template : HTMLTemplateElement = doc
+    .get_element_by_id("wc-todo-template")
+    .unwrap()
+    .into()
+  shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
-  let heading = document.create_element("h1")
-  heading.set_text_content("Todo App")
-
-  let description = document.create_element("p")
-  description
-  ..set_attribute("style", "margin-top: 0.25em; color: #475467;")
-  .set_text_content("Add tasks, mark them done, and remove them.")
-
-  let controls : HTMLDivElement = document.create_element("div").into()
-  controls.set_attribute("style", "display: flex; gap: 0.5em; margin: 1em 0;")
-
-  let todo_input : HTMLInputElement = document.create_element("input").into()
-  todo_input
-  ..set_type_("text")
-  ..set_attribute("placeholder", "What needs to be done?")
-  .set_attribute("style", "flex: 1; padding: 0.6em 0.75em; font-size: 1em;")
-
-  let add_btn : HTMLButtonElement = document.create_element("button").into()
-  add_btn
-  ..set_type_("button")
-  ..set_text_content("Add")
-  .set_attribute("style", "padding: 0.6em 1em; font-size: 1em;")
-
-  let clear_btn : HTMLButtonElement = document.create_element("button").into()
-  clear_btn
-  ..set_type_("button")
-  ..set_text_content("Clear All")
-  .set_attribute("style", "padding: 0.6em 1em; font-size: 1em;")
-
-  controls.append_child(todo_input) |> ignore
-  controls.append_child(add_btn) |> ignore
-  controls.append_child(clear_btn) |> ignore
-
-  let status : HTMLDivElement = document.create_element("div").into()
-  status
-  ..set_attribute("id", "todo-status")
-  .set_attribute(
-    "style", "margin: 0.5em 0; color: #475467; font-size: 0.95em; font-weight: 600;",
-  )
-
-  let empty_state : HTMLDivElement = document.create_element("div").into()
-  empty_state
-  ..set_attribute("id", "todo-empty")
-  .set_attribute(
-    "style", "margin: 0.5em 0 0.25em 0; color: #667085; font-size: 0.95em;",
-  )
-  empty_state.set_text_content("No tasks yet. Add one above.")
-
-  let list : HTMLUListElement = document.create_element("ul").into()
-  list
-  ..set_attribute("id", "todo-list")
-  .set_attribute(
-    "style", "list-style: none; padding: 0; margin: 0.75em 0 0 0; border-top: 1px solid #e4e7ec;",
-  )
+  // Query shadow DOM for elements
+  let todo_input : HTMLInputElement = shadow
+    .query_selector("[data-ref=input]")
+    .unwrap()
+    .into()
+  let add_btn : HTMLButtonElement = shadow
+    .query_selector("[data-ref=add]")
+    .unwrap()
+    .into()
+  let clear_btn : HTMLButtonElement = shadow
+    .query_selector("[data-ref=clear]")
+    .unwrap()
+    .into()
+  let status : HTMLDivElement = shadow
+    .query_selector("[data-ref=status]")
+    .unwrap()
+    .into()
+  let empty_state : HTMLDivElement = shadow
+    .query_selector("[data-ref=empty]")
+    .unwrap()
+    .into()
+  let list : HTMLUListElement = shadow
+    .query_selector("[data-ref=list]")
+    .unwrap()
+    .into()
 
   add_btn.add_event_listener("click", fn(_event) {
     let text = todo_input.value().trim().to_string()
@@ -277,13 +233,10 @@ fn main {
     update_status(status, empty_state)
   })
 
-  let children : Array[&@webapi.TNode] = [
-    heading, description, controls, status, empty_state, list,
-  ]
-  for child in children {
-    container.append_child(child) |> ignore
-  }
-  app.append_child(container) |> ignore
-
   load_todos(list, status, empty_state, storage)
+}
+
+///|
+fn main {
+  @webapi.define_custom_element("wc-todo", wc_todo)
 }
