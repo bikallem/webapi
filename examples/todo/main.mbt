@@ -91,9 +91,7 @@ fn append_todo_to_dom(
   apply_done_style(done, item)
 
   let delete_btn : HTMLButtonElement = document.create_element("button").into()
-  delete_btn
-  ..set_type_("button")
-  .set_text_content("Delete")
+  delete_btn..set_type_("button").set_text_content("Delete")
 
   checkbox.add_event_listener("click", fn(_event) {
     let checked = checkbox.checked()
