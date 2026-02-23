@@ -14,7 +14,7 @@ fn main {
   ..set_attribute(
     "style", "width: 100%; padding: 0.5em; font-size: 1em; box-sizing: border-box; margin: 0.5em 0;",
   )
-  .set_value("wss://echo.websocket.events")
+  .set_value("ws://localhost:8765")
 
   // Status display
   let status = doc.create_element("div")
@@ -37,9 +37,11 @@ fn main {
   // Mutable WebSocket reference
   let ws : Ref[@webapi.WebSocket?] = { val: None }
 
-  let update_status = fn(text : String) { status.set_text_content(text) }
+  fn update_status(text : String) {
+    status.set_text_content(text)
+  }
 
-  let log_message = fn(text : String) {
+  fn log_message(text : String) {
     let current = messages.text_content()
     if current == "Messages will appear here..." {
       messages.set_text_content(text)
