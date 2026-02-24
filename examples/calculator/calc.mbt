@@ -28,26 +28,26 @@ fn parse_number(text : String) -> Double? {
     let mut fractional_divisor = 1.0
 
     for i in idx..<text.length() {
-      match text.get_char(i) {
-        Some(ch) =>
-          if ch == '.' {
-            if seen_dot {
-              invalid = true
-            } else {
-              seen_dot = true
-            }
-          } else if ch >= '0' && ch <= '9' {
-            let digit = (ch.to_int() - '0'.to_int()).to_double()
-            if seen_dot {
-              fractional_divisor = fractional_divisor * 10.0
-              value = value + digit / fractional_divisor
-            } else {
-              value = value * 10.0 + digit
-            }
-          } else {
-            invalid = true
-          }
-        None => invalid = true
+      guard text.get_char(i) is Some(ch) else {
+        invalid = true
+        continue
+      }
+      if ch == '.' {
+        if seen_dot {
+          invalid = true
+        } else {
+          seen_dot = true
+        }
+      } else if ch >= '0' && ch <= '9' {
+        let digit = (ch.to_int() - '0'.to_int()).to_double()
+        if seen_dot {
+          fractional_divisor = fractional_divisor * 10.0
+          value = value + digit / fractional_divisor
+        } else {
+          value = value * 10.0 + digit
+        }
+      } else {
+        invalid = true
       }
     }
 
