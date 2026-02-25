@@ -35,7 +35,7 @@
     <p id="standalone">My name is <edit-word>Chris</edit-word>, the man said.</p>
 
     <script type="module">
-        import { wasmImportObject } from "../../webapi/webapi.mjs";
+        import { wasmImportObject } from "../_build/wasm-gc/release/build/wc-edit-word/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
             fetch("../_build/wasm-gc/release/build/wc-edit-word/wc-edit-word.wasm"),
             wasmImportObject,

@@ -38,7 +38,7 @@
         <ul data-ref="list"></ul>
     </template>
     <script type="module">
-        import { wasmImportObject } from "../../webapi/webapi.mjs";
+        import { wasmImportObject } from "../_build/wasm-gc/release/build/todo/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
             fetch("../_build/wasm-gc/release/build/todo/todo.wasm"),
             wasmImportObject,

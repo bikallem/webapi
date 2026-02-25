@@ -1,6 +1,6 @@
-.PHONY: all install gen gen-test gen-test-update check fmt info build-examples validate-wasm test-playwright serve trim trim-test clean
+.PHONY: all install gen gen-test gen-test-update check fmt info build-examples trim-examples validate-wasm test-playwright serve trim trim-test clean
 
-all: clean install gen check fmt info build-examples validate-wasm test-playwright trim-test
+all: clean install gen check fmt info build-examples trim-examples validate-wasm test-playwright trim-test
 
 # Install all npm dependencies
 install:
@@ -40,6 +40,12 @@ info:
 build-examples:
 	cd examples && moon build --target js --release
 	cd examples && moon build --target wasm-gc --release
+
+# Trim webapi.mjs for each wasm-gc example (produces minimal webapi.mjs next to each .wasm)
+trim-examples:
+	@for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do \
+		moon -C webapi_trim run . -- "../$$wasm" --source ../webapi/webapi.mjs; \
+	done
 
 # Validate all wasm-gc example binaries with wasm-tools
 validate-wasm:
