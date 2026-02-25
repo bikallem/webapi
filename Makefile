@@ -1,6 +1,6 @@
 .PHONY: all install gen gen-test gen-test-update check fmt info build-examples validate-wasm test-playwright serve trim trim-test clean
 
-all: clean install gen check fmt info build-examples validate-wasm test-playwright
+all: clean install gen check fmt info build-examples validate-wasm test-playwright trim-test
 
 # Install all npm dependencies
 install:

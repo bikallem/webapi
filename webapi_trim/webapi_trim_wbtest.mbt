@@ -6,9 +6,7 @@ fn bytes_of(values : Array[Int]) -> Bytes {
 
 ///|
 /// Helper: build a minimal wasm binary with only func imports.
-fn make_wasm_with_func_imports(
-  imports : Array[(String, String)]
-) -> Bytes {
+fn make_wasm_with_func_imports(imports : Array[(String, String)]) -> Bytes {
   let buf : Array[Int] = []
   // Build import section payload
   let payload : Array[Int] = []
@@ -166,96 +164,119 @@ test "skip_limits: with max" {
 ///|
 test "parse_wasm_imports: two func imports" {
   let wasm = make_wasm_with_func_imports([("env", "foo"), ("env", "bar")])
-  inspect(parse_wasm_imports(wasm), content=(#|[("env", "foo"), ("env", "bar")]
-  ))
+  inspect(
+    parse_wasm_imports(wasm),
+    content=(
+      #|[("env", "foo"), ("env", "bar")]
+    ),
+  )
 }
 
 ///|
 test "parse_wasm_imports: no import section" {
   let wasm = bytes_of([
     0x00, 0x61, 0x73, 0x6d, // magic
-    0x01, 0x00, 0x00, 0x00, // version
-    0x00, 0x02, 0x00, 0x00, // custom section id=0, size=2, 2 bytes payload
+     0x01, 0x00, 0x00, 0x00, // version
+     0x00, 0x02, 0x00, 0x00, // custom section id=0, size=2, 2 bytes payload
   ])
-  inspect(parse_wasm_imports(wasm), content=(#|[]
-  ))
+  inspect(
+    parse_wasm_imports(wasm),
+    content=(
+      #|[]
+    ),
+  )
 }
 
 ///|
 test "parse_wasm_imports: different modules" {
   let wasm = make_wasm_with_func_imports([
-    ("webapi_Node", "get"), ("webapi_Element", "set"), ("JsValue", "null"),
+    ("webapi_Node", "get"),
+    ("webapi_Element", "set"),
+    ("JsValue", "null"),
   ])
-  inspect(parse_wasm_imports(wasm), content=(#|[("webapi_Node", "get"), ("webapi_Element", "set"), ("JsValue", "null")]
-  ))
+  inspect(
+    parse_wasm_imports(wasm),
+    content=(
+      #|[("webapi_Node", "get"), ("webapi_Element", "set"), ("JsValue", "null")]
+    ),
+  )
 }
 
 ///|
 test "parse_wasm_imports: global import with ref extern" {
   let payload : Array[Int] = [
     1, // count
-    1, 0x5F, // module "_"
-    1, 0x78, // field "x"
-    3, // kind = global
-    0x64, 0x6F, // valtype = (ref extern)
-    0x00, // mutability = const
-  ]
+     1, 0x5F, // module "_"
+     1, 0x78, // field "x"
+     3, // kind = global
+     0x64, 0x6F, // valtype = (ref extern)
+     0x00,
+  ] // mutability = const
   let buf : Array[Int] = [
     0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00, // header
-    0x02, // import section id
-  ]
+     0x02,
+  ] // import section id
   buf.push(payload.length())
   for v in payload {
     buf.push(v)
   }
-  inspect(parse_wasm_imports(bytes_of(buf)), content=(#|[("_", "x")]
-  ))
+  inspect(
+    parse_wasm_imports(bytes_of(buf)),
+    content=(
+      #|[("_", "x")]
+    ),
+  )
 }
 
 ///|
 test "parse_wasm_imports: skips section before imports" {
   let buf : Array[Int] = [
     0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00, // header
-    0x01, 0x03, 0x00, 0x00, 0x00, // type section: id=1, size=3, dummy
+     0x01, 0x03, 0x00, 0x00, 0x00, // type section: id=1, size=3, dummy
   ]
   let payload : Array[Int] = [
     1, // count
-    1, 0x6D, // module "m"
-    1, 0x66, // field "f"
-    0, 0, // kind=func, type=0
-  ]
+     1, 0x6D, // module "m"
+     1, 0x66, // field "f"
+     0, 0,
+  ] // kind=func, type=0
   buf.push(0x02)
   buf.push(payload.length())
   for v in payload {
     buf.push(v)
   }
-  inspect(parse_wasm_imports(bytes_of(buf)), content=(#|[("m", "f")]
-  ))
+  inspect(
+    parse_wasm_imports(bytes_of(buf)),
+    content=(
+      #|[("m", "f")]
+    ),
+  )
 }
 
 ///|
 test "parse_wasm_imports: mixed func and global imports" {
   let payload : Array[Int] = [
     2, // count
-    3, 0x65, 0x6e, 0x76, // module "env"
-    3, 0x66, 0x6f, 0x6f, // field "foo"
-    0, 0, // kind=func, type=0
-    1, 0x5F, // module "_"
-    5, 0x68, 0x65, 0x6c, 0x6c, 0x6f, // field "hello"
-    3, // kind=global
-    0x6F, // valtype=externref (single byte)
-    0x00, // mutability=const
+     3, 0x65, 0x6e, 0x76, // module "env"
+     3, 0x66, 0x6f, 0x6f, // field "foo"
+     0, 0, // kind=func, type=0
+     1, 0x5F, // module "_"
+     5, 0x68, 0x65, 0x6c, 0x6c, 0x6f, // field "hello"
+     3, // kind=global
+     0x6F, // valtype=externref (single byte)
+     0x00, // mutability=const
   ]
-  let buf : Array[Int] = [
-    0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00,
-    0x02,
-  ]
+  let buf : Array[Int] = [0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00, 0x02]
   buf.push(payload.length())
   for v in payload {
     buf.push(v)
   }
-  inspect(parse_wasm_imports(bytes_of(buf)), content=(#|[("env", "foo"), ("_", "hello")]
-  ))
+  inspect(
+    parse_wasm_imports(bytes_of(buf)),
+    content=(
+      #|[("env", "foo"), ("_", "hello")]
+    ),
+  )
 }
 
 // ===== count_braces =====
@@ -306,7 +327,10 @@ test "count_braces: escaped quote inside string" {
 
 ///|
 test "extract_module_name: unquoted" {
-  inspect(extract_module_name("  webapi_Node: {"), content="Some(\"webapi_Node\")")
+  inspect(
+    extract_module_name("  webapi_Node: {"),
+    content="Some(\"webapi_Node\")",
+  )
 }
 
 ///|
@@ -364,8 +388,8 @@ test "filter_js_modules: keeps matching modules" {
   let result = filter_js_modules(source, make_modules(["ModA", "ModC"]))
   inspect(
     result,
-    content=
-      (#|// header
+    content=(
+      #|// header
       #|export const wasmImportObject = {
       #|  ModA: {
       #|    foo: () => 1
@@ -376,8 +400,7 @@ test "filter_js_modules: keeps matching modules" {
       #|  }
       #|};
       #|
-)
-    ,
+    ),
   )
 }
 
@@ -396,15 +419,14 @@ test "filter_js_modules: keeps quoted module names" {
   let result = filter_js_modules(source, make_modules(["moonbit:ffi"]))
   inspect(
     result,
-    content=
-      (#|export const wasmImportObject = {
+    content=(
+      #|export const wasmImportObject = {
       #|  "moonbit:ffi": {
       #|    make_closure: (f, c) => f.bind(null, c)
       #|  },
       #|};
       #|
-)
-    ,
+    ),
   )
 }
 
@@ -419,12 +441,11 @@ test "filter_js_modules: no matching modules" {
   let result = filter_js_modules(source, make_modules([]))
   inspect(
     result,
-    content=
-      (#|export const wasmImportObject = {
+    content=(
+      #|export const wasmImportObject = {
       #|};
       #|
-)
-    ,
+    ),
   )
 }
 
@@ -444,8 +465,8 @@ test "filter_js_modules: nested braces in method body" {
   let result = filter_js_modules(source, make_modules(["Mod"]))
   inspect(
     result,
-    content=
-      (#|export const wasmImportObject = {
+    content=(
+      #|export const wasmImportObject = {
       #|  Mod: {
       #|    define: (tag, ctor) => {
       #|      class C extends HTMLElement {
@@ -456,8 +477,7 @@ test "filter_js_modules: nested braces in method body" {
       #|  }
       #|};
       #|
-)
-    ,
+    ),
   )
 }
 
@@ -476,8 +496,8 @@ test "filter_js_modules: preserves header" {
   let result = filter_js_modules(source, make_modules(["Mod"]))
   inspect(
     result,
-    content=
-      (#|/**
+    content=(
+      #|/**
       #| * Auto-generated
       #| */
       #|
@@ -487,8 +507,7 @@ test "filter_js_modules: preserves header" {
       #|  }
       #|};
       #|
-)
-    ,
+    ),
   )
 }
 
@@ -507,8 +526,8 @@ test "filter_js_modules: all modules kept" {
   let result = filter_js_modules(source, make_modules(["A", "B"]))
   inspect(
     result,
-    content=
-      (#|export const wasmImportObject = {
+    content=(
+      #|export const wasmImportObject = {
       #|  A: {
       #|    x: () => 1
       #|  },
@@ -518,7 +537,6 @@ test "filter_js_modules: all modules kept" {
       #|  }
       #|};
       #|
-)
-    ,
+    ),
   )
 }
