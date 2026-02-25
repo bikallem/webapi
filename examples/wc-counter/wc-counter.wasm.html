@@ -25,7 +25,7 @@
         <button data-ref="reset">Reset</button>
     </template>
     <script type="module">
-        import { wasmImportObject } from "../../src/webapi.mjs";
+        import { wasmImportObject } from "../../webapi/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
             fetch("../_build/wasm-gc/release/build/wc-counter/wc-counter.wasm"),
             wasmImportObject,

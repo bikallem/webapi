@@ -36,7 +36,7 @@
     <div id="app"></div>
     <p class="info">Rendered with MoonBit WebAPI + Canvas 2D API (wasm-gc)</p>
     <script type="module">
-        import { wasmImportObject } from "../../src/webapi.mjs";
+        import { wasmImportObject } from "../../webapi/webapi.mjs";
 
         const wasmPath = "../_build/wasm-gc/release/build/canvas/canvas.wasm";
         const { instance } = await WebAssembly.instantiateStreaming(

@@ -21,18 +21,18 @@ gen-test-update:
 
 # Type-check generated bindings
 check:
-	moon check --target js
-	moon check --target wasm-gc
+	moon -C webapi check --target js
+	moon -C webapi check --target wasm-gc
 
 # Format all MoonBit code
 fmt:
-	moon fmt
+	moon -C webapi fmt
 	moon -C webapi_gen fmt
 	moon -C examples fmt
 
 # Update .mbti interface files
 info:
-	moon info --target js
+	moon -C webapi info --target js
 	moon -C webapi_gen info --target wasm-gc
 
 # Build examples for both targets
@@ -65,6 +65,6 @@ serve:
 
 # Remove build artifacts
 clean:
-	moon clean
+	moon -C webapi clean
 	moon -C webapi_gen clean
 	moon -C examples clean

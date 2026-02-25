@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This repository generates **type-safe MoonBit bindings** for Web Platform APIs (DOM, HTML, Canvas, Events, Fetch, etc.) from WebIDL specifications. It consists of two main components:
 
-1. **Generated MoonBit bindings** (`src/`) - FFI bindings for browser APIs, auto-generated from WebIDL
+1. **Generated MoonBit bindings** (`webapi/`) - FFI bindings for browser APIs, auto-generated from WebIDL
 2. **Code generator** (`webapi_gen/`) - A MoonBit program that parses WebIDL and emits MoonBit code
 
 ## Essential Commands
@@ -41,7 +41,7 @@ wasm-tools print path/to/file.wasm > output.wat
 ### Code Generation Pipeline
 
 ```
-WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (webapi_gen/emit/) → MoonBit code (src/)
+WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (webapi_gen/emit/) → MoonBit code (webapi/)
 ```
 
 ### Key Components
@@ -55,7 +55,7 @@ WebIDL specs (@webref/idl) → Parser (webapi_gen/parser/) → AST → Emitter (
 - `base.mbt/` - Core FFI types (`JsValue`, etc.) copied to output
 - `config/` - Configuration from `config.toml` (spec list, exclusions, dictionary member injection)
 
-**src/** - Generated bindings (DO NOT EDIT DIRECTLY):
+**webapi/** - Generated bindings (DO NOT EDIT DIRECTLY):
 - Interface types with trait definitions (e.g., `Element`, `TElement`)
 - Enum types with string conversion methods
 - Dictionary constructor functions
@@ -161,7 +161,7 @@ Or simply: `make clean all` to run the full pipeline.
 
 - Update `README.mbt.md` (install version, code examples, any new APIs)
 - Update `CHANGELOG.md`
-- Bump version in `moon.mod.json`
+- Bump version in `webapi/moon.mod.json`
 
 ## WebIDL Spec Roadmap
 
@@ -202,21 +202,21 @@ Some WebIDL specs split members across related dictionaries (e.g., `duration` li
 ## Important Notes
 
 - **Dual target**: This library targets both JS (`--target js`) and wasm-gc (`--target wasm-gc`). Always check both targets.
-- **Generated files**: Never edit files in `src/` directly; modify the generator instead
+- **Generated files**: Never edit files in `webapi/` directly; modify the generator instead
 - **Pre-commit hooks**: Configure with `git config core.hooksPath .githooks`
 
 ### Critical: Generator Caching Pitfall
 
-**Always use `make clean gen` (not just `cd webapi_gen && moon clean && moon run cmd/main`).** Always run make targets from the project root (`/home/blem/projects/webapi`), not from subdirectories — running from `webapi_gen/` silently skips cleaning the root `_build`.
+**Always use `make clean gen` (not just `cd webapi_gen && moon clean && moon run cmd/main`).** Always run make targets from the project root (`/home/blem/projects/webapi`), not from subdirectories — running from `webapi_gen/` silently skips cleaning the `webapi/_build`.
 
 There are THREE separate `_build` directories that can hold stale caches:
-- `/home/blem/projects/webapi/_build` (root project — **this one is easy to miss**)
+- `/home/blem/projects/webapi/webapi/_build` (webapi bindings — **this one is easy to miss**)
 - `/home/blem/projects/webapi/webapi_gen/_build` (generator)
 - `/home/blem/projects/webapi/examples/_build` (examples)
 
-Cleaning only `webapi_gen/_build` is **not sufficient**. The root `_build` can also affect the generator output. The `make clean` target cleans all three. After editing generator code, **always** run `make clean` before `make gen`.
+Cleaning only `webapi_gen/_build` is **not sufficient**. The `webapi/_build` can also affect the generator output. The `make clean` target cleans all three. After editing generator code, **always** run `make clean` before `make gen`.
 
-**Symptoms of stale cache**: Generated `src/` files don't reflect code changes even after `moon run cmd/main` succeeds. If this happens, verify all three `_build` directories are deleted.
+**Symptoms of stale cache**: Generated `webapi/` files don't reflect code changes even after `moon run cmd/main` succeeds. If this happens, verify all three `_build` directories are deleted.
 
 ### Critical: Always Build Both Example Targets
 

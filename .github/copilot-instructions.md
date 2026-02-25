@@ -49,9 +49,9 @@ make examples
 .
 ├── .github/                    # CI/CD and Copilot configuration
 ├── AGENTS.md                   # MoonBit language guide (reference document)
-├── src/                        # Generated MoonBit bindings (AUTO-GENERATED)
+├── webapi/                     # Generated MoonBit bindings (AUTO-GENERATED)
 │   ├── *.mbt                   # Interface/type/enum definitions
-│   ├── moon.pkg.json           # Package configuration
+│   ├── moon.mod.json           # Module metadata
 │   └── pkg.generated.mbti      # Auto-generated package interface
 ├── webapi-gen/                 # TypeScript code generator source
 │   ├── build.ts                # Main orchestrator
@@ -59,7 +59,7 @@ make examples
 │   ├── mapping.ts              # Type mapping (WebIDL → MoonBit)
 │   └── emitter/                # Code emission logic
 ├── examples/                   # Usage examples
-├── moon.mod.json               # MoonBit module metadata
+├── webapi/moon.mod.json        # MoonBit module metadata (inside webapi/)
 ├── package.json                # npm dependencies
 ├── Makefile                    # Build automation
 └── README.mbt.md               # Main documentation
@@ -151,8 +151,8 @@ Generated as:
 
 ### Never Change These Files
 - `AGENTS.md` - Language reference (read-only)
-- `src/*.mbt` - Auto-generated from WebIDL (regenerate via `make gen`)
-- `src/webapi.mjs`, `src/webapi.min.mjs` - Build artifacts
+- `webapi/*.mbt` - Auto-generated from WebIDL (regenerate via `make gen`)
+- `webapi/webapi.mjs`, `webapi/webapi.min.mjs` - Build artifacts
 - `node_modules/` - npm dependencies
 - `target/` - MoonBit build artifacts
 - `.moon/` - MoonBit toolchain cache

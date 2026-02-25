@@ -8,7 +8,7 @@
     "description": "",
     "deps": {
         "bikallem/webapi": {
-            "path": "../"
+            "path": "../webapi"
         },
         "moonbitlang/async": "0.16.6"
     },

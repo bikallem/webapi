@@ -11,7 +11,7 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        import { wasmImportObject } from "../../src/webapi.mjs";
+        import { wasmImportObject } from "../../webapi/webapi.mjs";
 
         const wasmPath = "../_build/wasm-gc/release/build/touch-events/touch-events.wasm";
         const { instance } = await WebAssembly.instantiateStreaming(

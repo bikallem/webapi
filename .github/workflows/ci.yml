@@ -39,10 +39,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            .mooncakes
+            webapi/.mooncakes
             webapi_gen/.mooncakes
             examples/.mooncakes
-          key: mooncakes-${{ runner.os }}-${{ hashFiles('moon.mod.json', 'webapi_gen/moon.mod.json', 'examples/moon.mod.json') }}
+          key: mooncakes-${{ runner.os }}-${{ hashFiles('webapi/moon.mod.json', 'webapi_gen/moon.mod.json', 'examples/moon.mod.json') }}
 
       - name: Install MoonBit dependencies
         run: |
@@ -50,6 +50,7 @@ jobs:
           moon update
 
       - name: Check (JS target)
+        working-directory: webapi
         run: moon check --target js
 
       - name: Run tests
@@ -84,14 +85,14 @@ jobs:
       - name: Prepare site
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          mkdir -p _site/src
+          mkdir -p _site/webapi
           cp -r examples _site/examples
           rm -rf _site/examples/.mooncakes _site/examples/_build _site/examples/_build
           mkdir -p _site/examples/_build/js/release
           cp -rL examples/_build/js/release/build _site/examples/_build/js/release/
           mkdir -p _site/examples/_build/wasm-gc/release
           cp -rL examples/_build/wasm-gc/release/build _site/examples/_build/wasm-gc/release/
-          cp src/webapi.mjs _site/src/
+          cp webapi/webapi.mjs _site/webapi/
           echo '<meta http-equiv="refresh" content="0; url=examples/">' > _site/index.html
 
       - name: Upload site artifact
