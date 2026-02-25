@@ -1,4 +1,4 @@
-.PHONY: all install gen gen-test gen-test-update check fmt info build-examples validate-wasm test-playwright serve clean
+.PHONY: all install gen gen-test gen-test-update check fmt info build-examples validate-wasm test-playwright serve trim trim-test clean
 
 all: clean install gen check fmt info build-examples validate-wasm test-playwright
 
@@ -28,6 +28,7 @@ check:
 fmt:
 	moon -C webapi fmt
 	moon -C webapi_gen fmt
+	moon -C webapi_trim fmt
 	moon -C examples fmt
 
 # Update .mbti interface files
@@ -63,8 +64,19 @@ test-playwright:
 serve:
 	node tests/ws-echo-server.mjs & npx serve . -l 3000 --no-clipboard --symlinks
 
+# Trim webapi.mjs to only modules needed by a wasm binary
+# Usage: make trim WASM=path/to/file.wasm OUT=path/to/output.mjs
+trim:
+	moon -C webapi_trim run . -- $(WASM) -o $(OUT)
+
+# Run webapi_trim unit tests and CLI integration tests
+trim-test:
+	cd webapi_trim && moon test
+	bash webapi_trim/tests/cli_test.sh
+
 # Remove build artifacts
 clean:
 	moon -C webapi clean
 	moon -C webapi_gen clean
+	moon -C webapi_trim clean
 	moon -C examples clean
