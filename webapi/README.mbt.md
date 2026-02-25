@@ -20,6 +20,7 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
   - [Custom Elements](#custom-elements)
   - [Method Chaining](#method-chaining)
   - [Optional Parameters](#optional-parameters)
+- [Trimming webapi.mjs for Production](#trimming-webapimjs-for-production)
 - [WebIDL to MoonBit Conversion](#webidl-to-moonbit-conversion)
   - [Type Mappings](#type-mappings)
   - [Interface Generation](#interface-generation)
@@ -197,8 +198,10 @@ Browser examples demonstrating MoonBit WebAPI bindings. Each example targets bot
 
 ```bash
 # Build examples for both targets
-cd examples && moon build --target js --release
-cd examples && moon build --target wasm-gc --release
+make build-examples
+
+# Generate trimmed webapi.mjs for wasm-gc examples
+make trim-examples
 
 # Serve from the repo root
 npx serve .
@@ -338,6 +341,44 @@ fn readme_optional() -> Unit {
   )
 }
 ```
+
+## Trimming webapi.mjs for Production
+
+The full `webapi/webapi.mjs` JS runtime (~8,400 lines) contains modules for every supported Web API. For wasm-gc deployments, `webapi_trim` produces a minimal version containing only the modules your `.wasm` binary actually imports — typically 500–1,000 lines (~90% smaller).
+
+### Usage
+
+```bash
+# Trim for a single wasm binary (output: webapi.mjs next to the .wasm file)
+make trim WASM=examples/_build/wasm-gc/release/build/counter/counter.wasm
+
+# Trim with explicit output path
+make trim WASM=path/to/app.wasm OUT=path/to/output.mjs
+
+# Trim all built examples at once
+make trim-examples
+```
+
+### HTML Setup
+
+Point your wasm-gc HTML page at the trimmed file instead of the full bundle:
+
+```html
+<script type="module">
+    import { wasmImportObject } from "./_build/wasm-gc/release/build/myapp/webapi.mjs";
+
+    const { instance } = await WebAssembly.instantiateStreaming(
+        fetch("./_build/wasm-gc/release/build/myapp/myapp.wasm"),
+        wasmImportObject,
+        { builtins: ["js-string"], importedStringConstants: "_" }
+    );
+    instance.exports._start();
+</script>
+```
+
+### How It Works
+
+`webapi_trim` parses the wasm binary's import section to find which `webapi_` JS modules are referenced, then extracts only those modules (plus the shared `wasmImportObject` export) from the full `webapi.mjs`. No runtime behavior changes — just fewer unused modules shipped to the browser.
 
 ## WebIDL to MoonBit Conversion
 
@@ -485,15 +526,16 @@ clipboard-apis, console, cssom, cssom-view, dom, encoding, fetch, FileAPI, fulls
 # Install npm dependencies (WebIDL specs)
 cd webapi_gen && npm install
 
-# Full pipeline: generate, check, format, build, test
+# Full pipeline: generate, check, format, build, trim, test
 make clean all
 
 # Or individual steps:
-make gen-test       # Run generator tests
-make clean gen      # Regenerate bindings
-make check          # Type-check both JS and wasm-gc targets
-make fmt            # Format all code
-make build-examples # Build examples for both targets
+make gen-test        # Run generator tests
+make clean gen       # Regenerate bindings
+make check           # Type-check both JS and wasm-gc targets
+make fmt             # Format all code
+make build-examples  # Build examples for both targets
+make trim-examples   # Produce trimmed webapi.mjs per wasm-gc example
 make test-playwright # Run end-to-end tests
 ```
 
