@@ -95,6 +95,7 @@ jobs:
       - name: Prepare site
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
+          mkdir -p _site
           cp -r examples _site/examples
           rm -rf _site/examples/.mooncakes _site/examples/_build
           mkdir -p _site/examples/_build/js/release
