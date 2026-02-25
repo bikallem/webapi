@@ -73,9 +73,7 @@ jobs:
           done
 
       - name: Run webapi_trim tests
-        run: |
-          cd webapi_trim && moon test
-          bash webapi_trim/tests/cli_test.sh
+        run: make trim-test
 
       - name: Cache Playwright browsers
         id: cache-playwright
