@@ -44,12 +44,21 @@ fn make_wasm_with_func_imports(imports : Array[(String, String)]) -> Bytes {
 }
 
 ///|
-fn make_modules(names : Array[String]) -> @hashset.HashSet[String] {
-  let s : @hashset.HashSet[String] = @hashset.new()
-  for n in names {
-    s.add(n)
+/// Helper: build required imports map from (module, field) pairs.
+/// If fields is empty for a module, all functions in that module are kept.
+fn make_imports(
+  pairs : Array[(String, Array[String])],
+) -> Map[String, @hashset.HashSet[String]] {
+  let m : Map[String, @hashset.HashSet[String]] = {}
+  for pair in pairs {
+    let (mod_name, fields) = pair
+    let s : @hashset.HashSet[String] = @hashset.new()
+    for f in fields {
+      s.add(f)
+    }
+    m[mod_name] = s
   }
-  s
+  m
 }
 
 // ===== read_leb128 =====
@@ -366,6 +375,59 @@ test "extract_module_name: single space indent" {
   inspect(extract_module_name(" foo: {"), content="None")
 }
 
+// ===== extract_function_name =====
+
+///|
+test "extract_function_name: simple" {
+  inspect(extract_function_name("    foo: () => 1"), content="Some(\"foo\")")
+}
+
+///|
+test "extract_function_name: with arrow function body" {
+  inspect(
+    extract_function_name(
+      "    setAttribute: (obj, name, value) => obj.setAttribute(name, value),",
+    ),
+    content="Some(\"setAttribute\")",
+  )
+}
+
+///|
+test "extract_function_name: multi-line start" {
+  inspect(
+    extract_function_name("    define: (tag, ctor) => {"),
+    content="Some(\"define\")",
+  )
+}
+
+///|
+test "extract_function_name: underscore prefix" {
+  inspect(
+    extract_function_name("    get_textContent: (obj) => obj.textContent"),
+    content="Some(\"get_textContent\")",
+  )
+}
+
+///|
+test "extract_function_name: wrong indent (2 spaces)" {
+  inspect(extract_function_name("  foo: () => 1"), content="None")
+}
+
+///|
+test "extract_function_name: wrong indent (6 spaces)" {
+  inspect(extract_function_name("      foo: () => 1"), content="None")
+}
+
+///|
+test "extract_function_name: no colon-space" {
+  inspect(extract_function_name("    foo = 1"), content="None")
+}
+
+///|
+test "extract_function_name: too short" {
+  inspect(extract_function_name("    a"), content="None")
+}
+
 // ===== filter_js_modules =====
 
 ///|
@@ -385,7 +447,10 @@ test "filter_js_modules: keeps matching modules" {
     #|    baz: () => 3
     #|  }
     #|};
-  let result = filter_js_modules(source, make_modules(["ModA", "ModC"]))
+  let result = filter_js_modules(
+    source,
+    make_imports([("ModA", ["foo"]), ("ModC", ["baz"])]),
+  )
   inspect(
     result,
     content=(
@@ -416,7 +481,10 @@ test "filter_js_modules: keeps quoted module names" {
     #|    null: () => null
     #|  }
     #|};
-  let result = filter_js_modules(source, make_modules(["moonbit:ffi"]))
+  let result = filter_js_modules(
+    source,
+    make_imports([("moonbit:ffi", ["make_closure"])]),
+  )
   inspect(
     result,
     content=(
@@ -438,7 +506,7 @@ test "filter_js_modules: no matching modules" {
     #|    foo: () => 1
     #|  }
     #|};
-  let result = filter_js_modules(source, make_modules([]))
+  let result = filter_js_modules(source, make_imports([]))
   inspect(
     result,
     content=(
@@ -462,7 +530,7 @@ test "filter_js_modules: nested braces in method body" {
     #|    }
     #|  }
     #|};
-  let result = filter_js_modules(source, make_modules(["Mod"]))
+  let result = filter_js_modules(source, make_imports([("Mod", ["define"])]))
   inspect(
     result,
     content=(
@@ -493,7 +561,7 @@ test "filter_js_modules: preserves header" {
     #|    x: () => 1
     #|  }
     #|};
-  let result = filter_js_modules(source, make_modules(["Mod"]))
+  let result = filter_js_modules(source, make_imports([("Mod", ["x"])]))
   inspect(
     result,
     content=(
@@ -523,7 +591,10 @@ test "filter_js_modules: all modules kept" {
     #|    y: () => 2
     #|  }
     #|};
-  let result = filter_js_modules(source, make_modules(["A", "B"]))
+  let result = filter_js_modules(
+    source,
+    make_imports([("A", ["x"]), ("B", ["y"])]),
+  )
   inspect(
     result,
     content=(
@@ -534,6 +605,156 @@ test "filter_js_modules: all modules kept" {
       #|
       #|  B: {
       #|    y: () => 2
+      #|  }
+      #|};
+      #|
+    ),
+  )
+}
+
+// ===== function-level filtering =====
+
+///|
+test "filter_js_modules: keeps only required functions" {
+  let source =
+    #|export const wasmImportObject = {
+    #|  JsValue: {
+    #|    undefined: () => undefined,
+    #|    null: () => null
+    #|  }
+    #|};
+  let result = filter_js_modules(source, make_imports([("JsValue", ["null"])]))
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject = {
+      #|  JsValue: {
+      #|    null: () => null
+      #|  }
+      #|};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: keeps multiple functions, removes others" {
+  let source =
+    #|export const wasmImportObject = {
+    #|  webapi_Node: {
+    #|    appendChild: (obj, node) => obj.appendChild(node),
+    #|    removeChild: (obj, node) => obj.removeChild(node),
+    #|    get_textContent: (obj) => obj.textContent,
+    #|    set_textContent: (obj, v) => { obj.textContent = v; }
+    #|  }
+    #|};
+  let result = filter_js_modules(
+    source,
+    make_imports([("webapi_Node", ["appendChild", "get_textContent"])]),
+  )
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject = {
+      #|  webapi_Node: {
+      #|    appendChild: (obj, node) => obj.appendChild(node),
+      #|    get_textContent: (obj) => obj.textContent,
+      #|  }
+      #|};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: keeps multi-line function" {
+  let source =
+    #|export const wasmImportObject = {
+    #|  Mod: {
+    #|    simple: () => 1,
+    #|    complex: (tag, ctor) => {
+    #|      class C extends HTMLElement {
+    #|        constructor() { super(); ctor(this); }
+    #|      }
+    #|      customElements.define(tag, C);
+    #|    },
+    #|    other: () => 2
+    #|  }
+    #|};
+  let result = filter_js_modules(source, make_imports([("Mod", ["complex"])]))
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject = {
+      #|  Mod: {
+      #|    complex: (tag, ctor) => {
+      #|      class C extends HTMLElement {
+      #|        constructor() { super(); ctor(this); }
+      #|      }
+      #|      customElements.define(tag, C);
+      #|    },
+      #|  }
+      #|};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: removes all functions leaves empty module" {
+  let source =
+    #|export const wasmImportObject = {
+    #|  Mod: {
+    #|    foo: () => 1,
+    #|    bar: () => 2
+    #|  }
+    #|};
+  let result = filter_js_modules(
+    source,
+    make_imports([("Mod", ["nonexistent"])]),
+  )
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject = {
+      #|  Mod: {
+      #|  }
+      #|};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: function-level with multiple modules" {
+  let source =
+    #|export const wasmImportObject = {
+    #|  ModA: {
+    #|    a1: () => 1,
+    #|    a2: () => 2,
+    #|    a3: () => 3
+    #|  },
+    #|
+    #|  ModB: {
+    #|    b1: () => 10,
+    #|    b2: () => 20
+    #|  }
+    #|};
+  let result = filter_js_modules(
+    source,
+    make_imports([("ModA", ["a1", "a3"]), ("ModB", ["b2"])]),
+  )
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject = {
+      #|  ModA: {
+      #|    a1: () => 1,
+      #|    a3: () => 3
+      #|  },
+      #|
+      #|  ModB: {
+      #|    b2: () => 20
       #|  }
       #|};
       #|

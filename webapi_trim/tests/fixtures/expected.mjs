@@ -4,7 +4,6 @@
 
 export const wasmImportObject = {
   JsValue: {
-    undefined: () => undefined,
     null: () => null
   },
 

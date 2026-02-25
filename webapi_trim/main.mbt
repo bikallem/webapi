@@ -66,13 +66,21 @@ fn main {
     }
   }
   let imports = parse_wasm_imports(wasm_bytes)
-  // Collect unique module names
-  let modules : @hashset.HashSet[String] = @hashset.new()
+  // Build map of module name → required field names
+  let required_imports : Map[String, @hashset.HashSet[String]] = {}
   for pair in imports {
-    modules.add(pair.0)
+    let (mod_name, field_name) = pair
+    match required_imports.get(mod_name) {
+      Some(fields) => fields.add(field_name)
+      None => {
+        let fields : @hashset.HashSet[String] = @hashset.new()
+        fields.add(field_name)
+        required_imports[mod_name] = fields
+      }
+    }
   }
   let total_imports = imports.length()
-  let total_modules = modules.length()
+  let total_modules = required_imports.length()
   println(
     "Found \{total_imports} imports across \{total_modules} modules in \{wasm_path}",
   )
@@ -83,7 +91,7 @@ fn main {
       return
     }
   }
-  let trimmed = filter_js_modules(source, modules)
+  let trimmed = filter_js_modules(source, required_imports)
   // Default output: webapi.mjs next to the input wasm file
   let out = if output_path.is_empty() {
     @path.Path(wasm_path).dirname().join("webapi.mjs").to_string()

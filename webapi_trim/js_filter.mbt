@@ -68,10 +68,97 @@ fn extract_module_name(line : String) -> String? {
 }
 
 ///|
-/// Filter webapi.mjs source to only include modules in the required set.
+/// Extract a function name from a line like `    funcName: (args) => ...`.
+/// Returns the name if the line starts with exactly 4 spaces followed by a name and `: `.
+fn extract_function_name(line : String) -> String? {
+  guard line.length() >= 7 else { return None }
+  guard line[0] == ' ' &&
+    line[1] == ' ' &&
+    line[2] == ' ' &&
+    line[3] == ' ' &&
+    line[4] != ' ' else {
+    return None
+  }
+  // Find ": " after the name
+  let mut i = 4
+  while i < line.length() {
+    if line[i] == ':' && i + 1 < line.length() && line[i + 1] == ' ' {
+      let name = line[4:i].to_string() catch { _ => return None }
+      return Some(name)
+    }
+    i += 1
+  }
+  None
+}
+
+///|
+/// Filter the function lines within a module block, keeping only functions
+/// whose names are in the required set. Returns the filtered lines including
+/// the module header and closing brace.
+fn filter_module_functions(
+  block_lines : Array[String],
+  required_fields : @hashset.HashSet[String],
+) -> Array[String] {
+  // block_lines[0] is the module header (e.g., "  ModName: {")
+  // block_lines[last] is the closing brace (e.g., "  },")
+  guard block_lines.length() >= 2 else { return block_lines }
+  let header = block_lines[0]
+  let closer = block_lines[block_lines.length() - 1]
+  // Extract inner lines (between header and closer)
+  let inner : Array[String] = []
+  for i in 1..<(block_lines.length() - 1) {
+    inner.push(block_lines[i])
+  }
+  // Parse functions from inner lines
+  let kept : Array[Array[String]] = []
+  let mut func_buf : Array[String] = []
+  let mut func_name : String? = None
+  let mut func_depth = 0
+  for line in inner {
+    match extract_function_name(line) {
+      Some(name) if func_name is None => {
+        // Start of a new function
+        func_name = Some(name)
+        func_buf = [line]
+        func_depth = count_braces(line)
+      }
+      _ =>
+        if func_name is None {
+          // Blank line or non-function line outside a function — skip
+          continue
+        } else {
+          func_buf.push(line)
+          func_depth += count_braces(line)
+        }
+    }
+    // Check if the current function is complete
+    if func_name is Some(_) && func_depth <= 0 {
+      guard func_name is Some(name) else { continue }
+      if required_fields.contains(name) {
+        kept.push(func_buf)
+      }
+      func_name = None
+      func_buf = []
+      func_depth = 0
+    }
+  }
+  // Reconstruct block — keep original lines as-is (trailing commas are valid JS)
+  let result : Array[String] = [header]
+  for func_lines in kept {
+    for fline in func_lines {
+      result.push(fline)
+    }
+  }
+  result.push(closer)
+  result
+}
+
+///|
+/// Filter webapi.mjs source to only include required modules and functions.
+/// The map keys are module names and values are sets of required function names.
 pub fn filter_js_modules(
   source : String,
-  required_modules : @hashset.HashSet[String],
+  required_imports : Map[String, @hashset.HashSet[String]],
 ) -> String {
   let lines : Array[String] = source
     .split("\n")
@@ -84,6 +171,7 @@ pub fn filter_js_modules(
   let mut block_buf : Array[String] = []
   let mut block_depth = 0
   let mut keep_block = false
+  let mut block_fields : @hashset.HashSet[String]? = None
   let mut first_kept = true
   for line in lines {
     if not(in_object) {
@@ -104,16 +192,21 @@ pub fn filter_js_modules(
         // Block ended, back to depth 1
         in_block = false
         if keep_block {
+          let filtered = match block_fields {
+            Some(fields) => filter_module_functions(block_buf, fields)
+            None => block_buf
+          }
           if not(first_kept) {
             out.write_char('\n')
           }
           first_kept = false
-          for bline in block_buf {
+          for bline in filtered {
             out.write_string(bline)
             out.write_char('\n')
           }
         }
         block_buf = []
+        block_fields = None
       }
       continue
     }
@@ -124,7 +217,8 @@ pub fn filter_js_modules(
         in_block = true
         block_buf = [line]
         block_depth = brace_delta
-        keep_block = required_modules.contains(name)
+        keep_block = required_imports.contains(name)
+        block_fields = required_imports.get(name)
         continue
       }
       None => ()
