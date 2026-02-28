@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: StorageManager
-// Specifications: storage.idl
+// Specifications: fs.idl, storage.idl
 
 ///|
 /// [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager)
@@ -22,9 +22,18 @@ pub impl TStorageManager for StorageManager
 ///|
 /// [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) interface.
 pub trait TStorageManager: TJsValue {
+  get_directory(self : Self) -> JsPromise[FileSystemDirectoryHandle] = _
   persisted(self : Self) -> JsPromise[Bool] = _
   persist(self : Self) -> JsPromise[Bool] = _
   estimate(self : Self) -> JsPromise[StorageEstimate] = _
+}
+
+///|
+/// [StorageManager.getDirectory](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/getDirectory)
+impl TStorageManager with get_directory(self : Self) -> JsPromise[
+  FileSystemDirectoryHandle,
+] {
+  storage_manager_get_directory_ffi(TJsValue::to_js(self))
 }
 
 ///|

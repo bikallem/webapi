@@ -22,3 +22,15 @@ extern "js" fn data_transfer_item_get_as_string_ffi(
 
 ///|
 extern "js" fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getAsFile()"
+
+///|
+extern "js" fn data_transfer_item_get_as_file_system_handle_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getAsFileSystemHandle()"
+
+///|
+fn data_transfer_item_get_as_file_system_handle_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemHandle] {
+  data_transfer_item_get_as_file_system_handle_ffi_js(obj).unsafe_cast()
+}

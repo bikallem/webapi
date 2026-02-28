@@ -22,3 +22,15 @@ fn data_transfer_item_get_as_string_ffi(
 
 ///|
 fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> JsValue = "webapi_DataTransferItem" "getAsFile"
+
+///|
+fn data_transfer_item_get_as_file_system_handle_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_DataTransferItem" "getAsFileSystemHandle"
+
+///|
+fn data_transfer_item_get_as_file_system_handle_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemHandle] {
+  data_transfer_item_get_as_file_system_handle_ffi_wasm(obj).unsafe_cast()
+}

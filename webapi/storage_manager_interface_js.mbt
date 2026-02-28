@@ -1,4 +1,14 @@
 ///|
+extern "js" fn storage_manager_get_directory_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getDirectory()"
+
+///|
+fn storage_manager_get_directory_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  storage_manager_get_directory_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn storage_manager_persisted_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.persisted()"
 
 ///|

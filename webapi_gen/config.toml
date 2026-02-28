@@ -41,6 +41,9 @@ core_specs = [
     "IndexedDB",
     "permissions",
     "service-workers",
+    "urlpattern",
+    "fs",
+    "file-system-access",
 ]
 
 excluded_interfaces = []

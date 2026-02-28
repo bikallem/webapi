@@ -15,7 +15,7 @@ pub impl FromJsAny for RouterCondition with from_js_any(value : JsAny) -> Router
 
 ///|
 pub fn RouterCondition::new(
-  url_pattern? : URLPatternCompatible,
+  url_pattern? : &TURLPatternCompatible,
   request_method? : String,
   request_mode? : RequestMode,
   request_destination? : RequestDestination,
@@ -24,7 +24,10 @@ pub fn RouterCondition::new(
   not? : RouterCondition,
 ) -> RouterCondition {
   router_condition_ffi(
-    opt_to_js(url_pattern),
+    match url_pattern {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
     opt_to_js(request_method),
     opt_to_js(request_mode),
     opt_to_js(request_destination),

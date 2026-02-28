@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Window
-// Specifications: cssom.idl, selection-api.idl, dom.idl, requestidlecallback.idl, cssom-view.idl, fetch.idl, html.idl
+// Specifications: cssom.idl, file-system-access.idl, selection-api.idl, dom.idl, requestidlecallback.idl, cssom-view.idl, fetch.idl, html.idl
 
 ///|
 /// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)
@@ -145,6 +145,15 @@ pub trait TWindow: TEventTarget {
   outer_height(self : Self) -> Int = _
   device_pixel_ratio(self : Self) -> Double = _
   get_selection(self : Self) -> Selection? = _
+  show_open_file_picker(self : Self, options? : OpenFilePickerOptions) -> JsPromise[
+    Array[FileSystemFileHandle],
+  ] = _
+  show_save_file_picker(self : Self, options? : SaveFilePickerOptions) -> JsPromise[
+    FileSystemFileHandle,
+  ] = _
+  show_directory_picker(self : Self, options? : DirectoryPickerOptions) -> JsPromise[
+    FileSystemDirectoryHandle,
+  ] = _
   request_idle_callback(
     self : Self,
     callback : (IdleDeadline) -> Unit,
@@ -987,6 +996,42 @@ impl TWindow with device_pixel_ratio(self : Self) -> Double {
 /// [Window.getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection)
 impl TWindow with get_selection(self : Self) -> Selection? {
   window_get_selection_ffi(TJsValue::to_js(self)).to_option()
+}
+
+///|
+/// [Window.showOpenFilePicker](https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker)
+impl TWindow with show_open_file_picker(
+  self : Self,
+  options? : OpenFilePickerOptions = OpenFilePickerOptions::empty(),
+) -> JsPromise[Array[FileSystemFileHandle]] {
+  window_show_open_file_picker_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+/// [Window.showSaveFilePicker](https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker)
+impl TWindow with show_save_file_picker(
+  self : Self,
+  options? : SaveFilePickerOptions = SaveFilePickerOptions::empty(),
+) -> JsPromise[FileSystemFileHandle] {
+  window_show_save_file_picker_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(options),
+  )
+}
+
+///|
+/// [Window.showDirectoryPicker](https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker)
+impl TWindow with show_directory_picker(
+  self : Self,
+  options? : DirectoryPickerOptions = DirectoryPickerOptions::empty(),
+) -> JsPromise[FileSystemDirectoryHandle] {
+  window_show_directory_picker_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(options),
+  )
 }
 
 ///|

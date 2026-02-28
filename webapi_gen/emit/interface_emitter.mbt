@@ -108,16 +108,19 @@ fn method_args(
     // aliases (CSSOMString), primitives (Bool=i32, Double=f64), and enums
     // (i32). Strip the default so the field becomes a plain optional;
     // opt_to_js sends undefined when absent.
+    let union_typedef_arg = is_union_typedef_arg(type_, type_registry)
     let default_value = match (default_value, mbt_type) {
       (Some("JsValue::null()"), Primitive(_) | Enum(_) | Other(_)) => None
       // On wasm-gc, trait-typed params (Union and Interface) compile to GC struct
       // closures. Any default creates a thunk returning Option[GCStruct], but the
       // compiler uses JsNull::null() (externref) for None, which is incompatible
       // with GC struct types. Strip all defaults and use Option + match instead.
+      // Union typedefs (e.g. URLPatternInput) appear as Other(_) but are also
+      // trait-typed, so strip their defaults too.
       (Some(_), Union(_) | Interface(_)) => None
+      (Some(_), _) if union_typedef_arg => None
       _ => default_value
     }
-    let union_typedef_arg = is_union_typedef_arg(type_, type_registry)
     let mbt_type = to_trait_ref(mbt_type, union_typedef_arg)
     let mbt_type = if variadic {
       let inner = if mbt_type.name() == "JsValue" {

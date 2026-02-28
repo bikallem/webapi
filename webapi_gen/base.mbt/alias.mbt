@@ -70,16 +70,6 @@ pub impl FromJsAny for MediaSource with from_js_any(value : JsAny) -> MediaSourc
 
 ///|
 #external
-pub type URLPatternCompatible
-
-///|
-pub impl TJsValue for URLPatternCompatible with to_js(self : URLPatternCompatible) -> JsValue = "%identity"
-
-///|
-pub impl FromJsAny for URLPatternCompatible with from_js_any(value : JsAny) -> URLPatternCompatible = "%identity"
-
-///|
-#external
 pub type WebGL2RenderingContext
 
 ///|

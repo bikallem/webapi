@@ -348,6 +348,48 @@ fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double = "webapi_Window" "get
 fn window_get_selection_ffi(obj : JsValue) -> JsValue = "webapi_Window" "getSelection"
 
 ///|
+fn window_show_open_file_picker_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "showOpenFilePicker"
+
+///|
+fn window_show_open_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[FileSystemFileHandle]] {
+  window_show_open_file_picker_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+fn window_show_save_file_picker_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "showSaveFilePicker"
+
+///|
+fn window_show_save_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemFileHandle] {
+  window_show_save_file_picker_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+fn window_show_directory_picker_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "showDirectoryPicker"
+
+///|
+fn window_show_directory_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  window_show_directory_picker_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
 fn window_request_idle_callback_ffi(
   obj : JsValue,
   callback : JsValue,

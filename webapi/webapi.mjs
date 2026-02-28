@@ -81,6 +81,49 @@ export const wasmImportObject = {
       customElements.define(tag_name, C);
     }
   },
+  webapi_FileSystemHandle: {
+    get_kind: (obj) => obj.kind,
+    get_name: (obj) => obj.name,
+    isSameEntry: (obj, other) => obj.isSameEntry(other),
+    queryPermission: (obj, descriptor) => obj.queryPermission(descriptor),
+    requestPermission: (obj, descriptor) => obj.requestPermission(descriptor)
+  },
+
+  webapi_FileSystemFileHandle: {
+    getFile: (obj) => obj.getFile(),
+    createWritable: (obj, options) => obj.createWritable(options),
+    createSyncAccessHandle: (obj) => obj.createSyncAccessHandle()
+  },
+
+  webapi_FileSystemDirectoryHandle: {
+    getFileHandle: (obj, name, options) => obj.getFileHandle(name, options),
+    getDirectoryHandle: (obj, name, options) => obj.getDirectoryHandle(name, options),
+    removeEntry: (obj, name, options) => obj.removeEntry(name, options),
+    resolve: (obj, possible_descendant) => obj.resolve(possible_descendant)
+  },
+
+  webapi_FileSystemWritableFileStream: {
+    write: (obj, data) => obj.write(data),
+    seek: (obj, position) => obj.seek(position),
+    truncate: (obj, size) => obj.truncate(size)
+  },
+
+  webapi_FileSystemSyncAccessHandle: {
+    read: (obj, buffer, options) => BigInt(obj.read(buffer, options)),
+    write: (obj, buffer, options) => BigInt(obj.write(buffer, options)),
+    truncate: (obj, new_size) => obj.truncate(new_size),
+    getSize: (obj) => BigInt(obj.getSize()),
+    flush: (obj) => obj.flush(),
+    close: (obj) => obj.close()
+  },
+
+  webapi_StorageManager: {
+    getDirectory: (obj) => obj.getDirectory(),
+    persisted: (obj) => obj.persisted(),
+    persist: (obj) => obj.persist(),
+    estimate: (obj) => obj.estimate()
+  },
+
   webapi_SVGElement: {
     get_className: (obj) => obj.className,
     get_ownerSVGElement: (obj) => obj.ownerSVGElement,
@@ -1451,6 +1494,9 @@ export const wasmImportObject = {
     scrollBy: (obj, options) => obj.scrollBy(options),
     scroll_by_xy: (obj, x, y) => obj.scrollBy(x, y),
     getSelection: (obj) => obj.getSelection(),
+    showOpenFilePicker: (obj, options) => obj.showOpenFilePicker(options),
+    showSaveFilePicker: (obj, options) => obj.showSaveFilePicker(options),
+    showDirectoryPicker: (obj, options) => obj.showDirectoryPicker(options),
     requestIdleCallback: (obj, callback, options) => obj.requestIdleCallback(callback, options),
     cancelIdleCallback: (obj, handle) => obj.cancelIdleCallback(handle),
     reportError: (obj, e) => obj.reportError(e),
@@ -4062,7 +4108,8 @@ export const wasmImportObject = {
     get_kind: (obj) => obj.kind,
     get_type: (obj) => obj.type,
     getAsString: (obj, _callback) => obj.getAsString(_callback),
-    getAsFile: (obj) => obj.getAsFile()
+    getAsFile: (obj) => obj.getAsFile(),
+    getAsFileSystemHandle: (obj) => obj.getAsFileSystemHandle()
   },
 
   webapi_DragEvent: {
@@ -4916,12 +4963,6 @@ export const wasmImportObject = {
     getEntriesByName: (obj, name, type_) => obj.getEntriesByName(name, type_)
   },
 
-  webapi_StorageManager: {
-    persisted: (obj) => obj.persisted(),
-    persist: (obj) => obj.persist(),
-    estimate: (obj) => obj.estimate()
-  },
-
   webapi_ReadableStream: {
     new: (underlying_source, strategy) => new ReadableStream(underlying_source, strategy),
     get_locked: (obj) => obj.locked,
@@ -5500,6 +5541,22 @@ export const wasmImportObject = {
     set_onscrollend: (obj, value) => { obj.onscrollend = value; }
   },
 
+  webapi_URLPattern: {
+    new: (input, base_url, options) => new URLPattern(input, base_url, options),
+    new_2: (input, options) => new URLPattern(input, options),
+    get_protocol: (obj) => obj.protocol,
+    get_username: (obj) => obj.username,
+    get_password: (obj) => obj.password,
+    get_hostname: (obj) => obj.hostname,
+    get_port: (obj) => obj.port,
+    get_pathname: (obj) => obj.pathname,
+    get_search: (obj) => obj.search,
+    get_hash: (obj) => obj.hash,
+    get_hasRegExpGroups: (obj) => obj.hasRegExpGroups,
+    test: (obj, input, base_url) => obj.test(input, base_url),
+    exec: (obj, input, base_url) => obj.exec(input, base_url)
+  },
+
   webapi_WebSocket: {
     new: (url, protocols) => new WebSocket(url, protocols),
     get_url: (obj) => obj.url,
@@ -5996,6 +6053,66 @@ export const wasmImportObject = {
     get_isVisible: (obj) => obj.isVisible,
     get_intersectionRatio: (obj) => obj.intersectionRatio,
     get_target: (obj) => obj.target
+  },
+
+  webapi_FileSystemCreateWritableOptions: {
+    new: (keepExistingData) => {
+      const obj = {};
+      if (keepExistingData !== undefined) obj.keepExistingData = keepExistingData;
+      return obj;
+    },
+    get_keepExistingData: (obj) => obj.keepExistingData
+  },
+
+  webapi_FileSystemGetFileOptions: {
+    new: (create) => {
+      const obj = {};
+      if (create !== undefined) obj.create = create;
+      return obj;
+    },
+    get_create: (obj) => obj.create
+  },
+
+  webapi_FileSystemGetDirectoryOptions: {
+    new: (create) => {
+      const obj = {};
+      if (create !== undefined) obj.create = create;
+      return obj;
+    },
+    get_create: (obj) => obj.create
+  },
+
+  webapi_FileSystemRemoveOptions: {
+    new: (recursive) => {
+      const obj = {};
+      if (recursive !== undefined) obj.recursive = recursive;
+      return obj;
+    },
+    get_recursive: (obj) => obj.recursive
+  },
+
+  webapi_WriteParams: {
+    new: (type, size, position, data) => {
+      const obj = {};
+      if (type !== undefined) obj.type = type;
+      if (size !== undefined) obj.size = size;
+      if (position !== undefined) obj.position = position;
+      if (data !== undefined) obj.data = data;
+      return obj;
+    },
+    get_type: (obj) => obj.type,
+    get_size: (obj) => BigInt(obj.size),
+    get_position: (obj) => BigInt(obj.position),
+    get_data: (obj) => obj.data
+  },
+
+  webapi_FileSystemReadWriteOptions: {
+    new: (at) => {
+      const obj = {};
+      if (at !== undefined) obj.at = at;
+      return obj;
+    },
+    get_at: (obj) => BigInt(obj.at)
   },
 
   webapi_SVGBoundingBoxOptions: {
@@ -7767,6 +7884,76 @@ export const wasmImportObject = {
     get_navigationUI: (obj) => obj.navigationUI
   },
 
+  webapi_URLPatternInit: {
+    new: (protocol, username, password, hostname, port, pathname, search, hash, baseURL) => {
+      const obj = {};
+      if (protocol !== undefined) obj.protocol = protocol;
+      if (username !== undefined) obj.username = username;
+      if (password !== undefined) obj.password = password;
+      if (hostname !== undefined) obj.hostname = hostname;
+      if (port !== undefined) obj.port = port;
+      if (pathname !== undefined) obj.pathname = pathname;
+      if (search !== undefined) obj.search = search;
+      if (hash !== undefined) obj.hash = hash;
+      if (baseURL !== undefined) obj.baseURL = baseURL;
+      return obj;
+    },
+    get_protocol: (obj) => obj.protocol,
+    get_username: (obj) => obj.username,
+    get_password: (obj) => obj.password,
+    get_hostname: (obj) => obj.hostname,
+    get_port: (obj) => obj.port,
+    get_pathname: (obj) => obj.pathname,
+    get_search: (obj) => obj.search,
+    get_hash: (obj) => obj.hash,
+    get_baseURL: (obj) => obj.baseURL
+  },
+
+  webapi_URLPatternOptions: {
+    new: (ignoreCase) => {
+      const obj = {};
+      if (ignoreCase !== undefined) obj.ignoreCase = ignoreCase;
+      return obj;
+    },
+    get_ignoreCase: (obj) => obj.ignoreCase
+  },
+
+  webapi_URLPatternResult: {
+    new: (inputs, protocol, username, password, hostname, port, pathname, search, hash) => {
+      const obj = {};
+      if (inputs !== undefined) obj.inputs = inputs;
+      if (protocol !== undefined) obj.protocol = protocol;
+      if (username !== undefined) obj.username = username;
+      if (password !== undefined) obj.password = password;
+      if (hostname !== undefined) obj.hostname = hostname;
+      if (port !== undefined) obj.port = port;
+      if (pathname !== undefined) obj.pathname = pathname;
+      if (search !== undefined) obj.search = search;
+      if (hash !== undefined) obj.hash = hash;
+      return obj;
+    },
+    get_inputs: (obj) => obj.inputs,
+    get_protocol: (obj) => obj.protocol,
+    get_username: (obj) => obj.username,
+    get_password: (obj) => obj.password,
+    get_hostname: (obj) => obj.hostname,
+    get_port: (obj) => obj.port,
+    get_pathname: (obj) => obj.pathname,
+    get_search: (obj) => obj.search,
+    get_hash: (obj) => obj.hash
+  },
+
+  webapi_URLPatternComponentResult: {
+    new: (input, groups) => {
+      const obj = {};
+      if (input !== undefined) obj.input = input;
+      if (groups !== undefined) obj.groups = groups;
+      return obj;
+    },
+    get_input: (obj) => obj.input,
+    get_groups: (obj) => obj.groups
+  },
+
   webapi_CloseEventInit: {
     new: (bubbles, cancelable, composed, wasClean, code, reason) => {
       const obj = {};
@@ -8512,6 +8699,101 @@ export const wasmImportObject = {
     get_ignoreMethod: (obj) => obj.ignoreMethod,
     get_ignoreVary: (obj) => obj.ignoreVary,
     get_cacheName: (obj) => obj.cacheName
+  },
+
+  webapi_FileSystemPermissionDescriptor: {
+    new: (name, handle, mode) => {
+      const obj = {};
+      if (name !== undefined) obj.name = name;
+      if (handle !== undefined) obj.handle = handle;
+      if (mode !== undefined) obj.mode = mode;
+      return obj;
+    },
+    get_name: (obj) => obj.name,
+    get_handle: (obj) => obj.handle,
+    get_mode: (obj) => obj.mode
+  },
+
+  webapi_FileSystemHandlePermissionDescriptor: {
+    new: (mode) => {
+      const obj = {};
+      if (mode !== undefined) obj.mode = mode;
+      return obj;
+    },
+    get_mode: (obj) => obj.mode
+  },
+
+  webapi_FilePickerAcceptType: {
+    new: (description, accept) => {
+      const obj = {};
+      if (description !== undefined) obj.description = description;
+      if (accept !== undefined) obj.accept = accept;
+      return obj;
+    },
+    get_description: (obj) => obj.description,
+    get_accept: (obj) => obj.accept
+  },
+
+  webapi_FilePickerOptions: {
+    new: (types, excludeAcceptAllOption, id, startIn) => {
+      const obj = {};
+      if (types !== undefined) obj.types = types;
+      if (excludeAcceptAllOption !== undefined) obj.excludeAcceptAllOption = excludeAcceptAllOption;
+      if (id !== undefined) obj.id = id;
+      if (startIn !== undefined) obj.startIn = startIn;
+      return obj;
+    },
+    get_types: (obj) => obj.types,
+    get_excludeAcceptAllOption: (obj) => obj.excludeAcceptAllOption,
+    get_id: (obj) => obj.id,
+    get_startIn: (obj) => obj.startIn
+  },
+
+  webapi_OpenFilePickerOptions: {
+    new: (types, excludeAcceptAllOption, id, startIn, multiple) => {
+      const obj = {};
+      if (types !== undefined) obj.types = types;
+      if (excludeAcceptAllOption !== undefined) obj.excludeAcceptAllOption = excludeAcceptAllOption;
+      if (id !== undefined) obj.id = id;
+      if (startIn !== undefined) obj.startIn = startIn;
+      if (multiple !== undefined) obj.multiple = multiple;
+      return obj;
+    },
+    get_types: (obj) => obj.types,
+    get_excludeAcceptAllOption: (obj) => obj.excludeAcceptAllOption,
+    get_id: (obj) => obj.id,
+    get_startIn: (obj) => obj.startIn,
+    get_multiple: (obj) => obj.multiple
+  },
+
+  webapi_SaveFilePickerOptions: {
+    new: (types, excludeAcceptAllOption, id, startIn, suggestedName) => {
+      const obj = {};
+      if (types !== undefined) obj.types = types;
+      if (excludeAcceptAllOption !== undefined) obj.excludeAcceptAllOption = excludeAcceptAllOption;
+      if (id !== undefined) obj.id = id;
+      if (startIn !== undefined) obj.startIn = startIn;
+      if (suggestedName !== undefined) obj.suggestedName = suggestedName;
+      return obj;
+    },
+    get_types: (obj) => obj.types,
+    get_excludeAcceptAllOption: (obj) => obj.excludeAcceptAllOption,
+    get_id: (obj) => obj.id,
+    get_startIn: (obj) => obj.startIn,
+    get_suggestedName: (obj) => obj.suggestedName
+  },
+
+  webapi_DirectoryPickerOptions: {
+    new: (id, startIn, mode) => {
+      const obj = {};
+      if (id !== undefined) obj.id = id;
+      if (startIn !== undefined) obj.startIn = startIn;
+      if (mode !== undefined) obj.mode = mode;
+      return obj;
+    },
+    get_id: (obj) => obj.id,
+    get_startIn: (obj) => obj.startIn,
+    get_mode: (obj) => obj.mode
   },
 
   webapi_IdleRequestOptions: {

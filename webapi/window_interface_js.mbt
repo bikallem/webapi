@@ -576,6 +576,48 @@ fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double {
 extern "js" fn window_get_selection_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getSelection()"
 
 ///|
+extern "js" fn window_show_open_file_picker_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.showOpenFilePicker(options)"
+
+///|
+fn window_show_open_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[FileSystemFileHandle]] {
+  window_show_open_file_picker_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+extern "js" fn window_show_save_file_picker_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.showSaveFilePicker(options)"
+
+///|
+fn window_show_save_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemFileHandle] {
+  window_show_save_file_picker_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+extern "js" fn window_show_directory_picker_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.showDirectoryPicker(options)"
+
+///|
+fn window_show_directory_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  window_show_directory_picker_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
 extern "js" fn window_request_idle_callback_ffi_js(
   obj : JsValue,
   callback : JsValue,

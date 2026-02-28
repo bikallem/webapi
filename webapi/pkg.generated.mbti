@@ -597,11 +597,14 @@ pub impl FromJsAny for Blob
 pub impl TBlob for Blob
 pub impl TBlobPart for Blob
 pub impl TClipboardItemData for Blob
+pub impl TFileSystemWriteChunkType for Blob
 pub impl TImageBitmapSource for Blob
 pub impl TJsValue for Blob
 pub impl TMediaProvider for Blob
 pub impl TURLCreateObjectURLObj for Blob
 pub impl TWebSocketSendData for Blob
+pub impl TWriteParamsGetData for Blob
+pub impl TWriteParamsNewData for Blob
 pub impl TXMLHttpRequestBodyInit for Blob
 
 #external
@@ -660,8 +663,11 @@ pub fn[T : TBufferSource + FromJsAny] BufferSource::into(Self) -> T
 pub impl FromJsAny for BufferSource
 pub impl TBlobPart for BufferSource
 pub impl TBufferSource for BufferSource
+pub impl TFileSystemWriteChunkType for BufferSource
 pub impl TJsValue for BufferSource
 pub impl TWebSocketSendData for BufferSource
+pub impl TWriteParamsGetData for BufferSource
+pub impl TWriteParamsNewData for BufferSource
 pub impl TXMLHttpRequestBodyInit for BufferSource
 
 #external
@@ -1784,6 +1790,16 @@ pub impl FromJsAny for DeferredRequestInit
 pub impl TJsValue for DeferredRequestInit
 
 #external
+pub type DirectoryPickerOptions
+pub fn DirectoryPickerOptions::empty() -> Self
+pub fn DirectoryPickerOptions::id(Self) -> String?
+pub fn DirectoryPickerOptions::mode(Self) -> FileSystemPermissionMode?
+pub fn DirectoryPickerOptions::new(id? : String, start_in? : &TStartInDirectory, mode? : FileSystemPermissionMode) -> Self
+pub fn DirectoryPickerOptions::start_in(Self) -> StartInDirectory?
+pub impl FromJsAny for DirectoryPickerOptions
+pub impl TJsValue for DirectoryPickerOptions
+
+#external
 pub type Document
 pub fn[T : TDocument] Document::into(Self) -> T
 pub fn Document::new() -> Self
@@ -2237,6 +2253,26 @@ pub impl TFileList for FileList
 pub impl TJsValue for FileList
 
 #external
+pub type FilePickerAcceptType
+pub fn FilePickerAcceptType::accept(Self) -> JsValue?
+pub fn FilePickerAcceptType::description(Self) -> String?
+pub fn FilePickerAcceptType::empty() -> Self
+pub fn FilePickerAcceptType::new(description? : String, accept? : JsValue) -> Self
+pub impl FromJsAny for FilePickerAcceptType
+pub impl TJsValue for FilePickerAcceptType
+
+#external
+pub type FilePickerOptions
+pub fn FilePickerOptions::empty() -> Self
+pub fn FilePickerOptions::exclude_accept_all_option(Self) -> Bool?
+pub fn FilePickerOptions::id(Self) -> String?
+pub fn FilePickerOptions::new(types? : Array[FilePickerAcceptType], exclude_accept_all_option? : Bool, id? : String, start_in? : &TStartInDirectory) -> Self
+pub fn FilePickerOptions::start_in(Self) -> StartInDirectory?
+pub fn FilePickerOptions::types(Self) -> Array[FilePickerAcceptType]?
+pub impl FromJsAny for FilePickerOptions
+pub impl TJsValue for FilePickerOptions
+
+#external
 pub type FilePropertyBag
 pub fn FilePropertyBag::empty() -> Self
 pub fn FilePropertyBag::endings(Self) -> EndingType?
@@ -2270,6 +2306,133 @@ pub fn FileReaderSync::new() -> Self
 pub impl FromJsAny for FileReaderSync
 pub impl TFileReaderSync for FileReaderSync
 pub impl TJsValue for FileReaderSync
+
+#external
+pub type FileSystemCreateWritableOptions
+pub fn FileSystemCreateWritableOptions::empty() -> Self
+pub fn FileSystemCreateWritableOptions::keep_existing_data(Self) -> Bool?
+pub fn FileSystemCreateWritableOptions::new(keep_existing_data? : Bool) -> Self
+pub impl FromJsAny for FileSystemCreateWritableOptions
+pub impl TJsValue for FileSystemCreateWritableOptions
+
+#external
+pub type FileSystemDirectoryHandle
+pub fn[T : TFileSystemDirectoryHandle] FileSystemDirectoryHandle::into(Self) -> T
+pub impl FromJsAny for FileSystemDirectoryHandle
+pub impl TFileSystemDirectoryHandle for FileSystemDirectoryHandle
+pub impl TFileSystemHandle for FileSystemDirectoryHandle
+pub impl TJsValue for FileSystemDirectoryHandle
+
+#external
+pub type FileSystemFileHandle
+pub fn[T : TFileSystemFileHandle] FileSystemFileHandle::into(Self) -> T
+pub impl FromJsAny for FileSystemFileHandle
+pub impl TFileSystemFileHandle for FileSystemFileHandle
+pub impl TFileSystemHandle for FileSystemFileHandle
+pub impl TJsValue for FileSystemFileHandle
+
+#external
+pub type FileSystemGetDirectoryOptions
+pub fn FileSystemGetDirectoryOptions::create(Self) -> Bool?
+pub fn FileSystemGetDirectoryOptions::empty() -> Self
+pub fn FileSystemGetDirectoryOptions::new(create? : Bool) -> Self
+pub impl FromJsAny for FileSystemGetDirectoryOptions
+pub impl TJsValue for FileSystemGetDirectoryOptions
+
+#external
+pub type FileSystemGetFileOptions
+pub fn FileSystemGetFileOptions::create(Self) -> Bool?
+pub fn FileSystemGetFileOptions::empty() -> Self
+pub fn FileSystemGetFileOptions::new(create? : Bool) -> Self
+pub impl FromJsAny for FileSystemGetFileOptions
+pub impl TJsValue for FileSystemGetFileOptions
+
+#external
+pub type FileSystemHandle
+pub fn[T : TFileSystemHandle] FileSystemHandle::into(Self) -> T
+pub impl FromJsAny for FileSystemHandle
+pub impl TFileSystemHandle for FileSystemHandle
+pub impl TJsValue for FileSystemHandle
+pub impl TStartInDirectory for FileSystemHandle
+
+pub(all) enum FileSystemHandleKind {
+  File
+  Directory
+}
+pub fn FileSystemHandleKind::from(String) -> Self?
+pub fn FileSystemHandleKind::value(Self) -> String
+pub impl FromJsAny for FileSystemHandleKind
+pub impl TJsValue for FileSystemHandleKind
+pub impl Eq for FileSystemHandleKind
+pub impl Show for FileSystemHandleKind
+
+#external
+pub type FileSystemHandlePermissionDescriptor
+pub fn FileSystemHandlePermissionDescriptor::empty() -> Self
+pub fn FileSystemHandlePermissionDescriptor::mode(Self) -> FileSystemPermissionMode?
+pub fn FileSystemHandlePermissionDescriptor::new(mode? : FileSystemPermissionMode) -> Self
+pub impl FromJsAny for FileSystemHandlePermissionDescriptor
+pub impl TJsValue for FileSystemHandlePermissionDescriptor
+
+#external
+pub type FileSystemPermissionDescriptor
+pub fn FileSystemPermissionDescriptor::empty() -> Self
+pub fn FileSystemPermissionDescriptor::handle(Self) -> FileSystemHandle
+pub fn FileSystemPermissionDescriptor::mode(Self) -> FileSystemPermissionMode?
+pub fn FileSystemPermissionDescriptor::name(Self) -> String
+pub fn FileSystemPermissionDescriptor::new(String, &TFileSystemHandle, mode? : FileSystemPermissionMode) -> Self
+pub impl FromJsAny for FileSystemPermissionDescriptor
+pub impl TJsValue for FileSystemPermissionDescriptor
+
+pub(all) enum FileSystemPermissionMode {
+  Read
+  Readwrite
+}
+pub fn FileSystemPermissionMode::from(String) -> Self?
+pub fn FileSystemPermissionMode::value(Self) -> String
+pub impl FromJsAny for FileSystemPermissionMode
+pub impl TJsValue for FileSystemPermissionMode
+pub impl Eq for FileSystemPermissionMode
+pub impl Show for FileSystemPermissionMode
+
+#external
+pub type FileSystemReadWriteOptions
+pub fn FileSystemReadWriteOptions::at(Self) -> UInt64?
+pub fn FileSystemReadWriteOptions::empty() -> Self
+pub fn FileSystemReadWriteOptions::new(at? : UInt64) -> Self
+pub impl FromJsAny for FileSystemReadWriteOptions
+pub impl TJsValue for FileSystemReadWriteOptions
+
+#external
+pub type FileSystemRemoveOptions
+pub fn FileSystemRemoveOptions::empty() -> Self
+pub fn FileSystemRemoveOptions::new(recursive? : Bool) -> Self
+pub fn FileSystemRemoveOptions::recursive(Self) -> Bool?
+pub impl FromJsAny for FileSystemRemoveOptions
+pub impl TJsValue for FileSystemRemoveOptions
+
+#external
+pub type FileSystemSyncAccessHandle
+pub fn[T : TFileSystemSyncAccessHandle] FileSystemSyncAccessHandle::into(Self) -> T
+pub impl FromJsAny for FileSystemSyncAccessHandle
+pub impl TFileSystemSyncAccessHandle for FileSystemSyncAccessHandle
+pub impl TJsValue for FileSystemSyncAccessHandle
+
+#external
+pub type FileSystemWritableFileStream
+pub fn[T : TFileSystemWritableFileStream] FileSystemWritableFileStream::into(Self) -> T
+pub impl FromJsAny for FileSystemWritableFileStream
+pub impl TFileSystemWritableFileStream for FileSystemWritableFileStream
+pub impl TJsValue for FileSystemWritableFileStream
+pub impl TWritableStream for FileSystemWritableFileStream
+
+#external
+pub type FileSystemWriteChunkType
+pub fn[T : TFileSystemWriteChunkType] FileSystemWriteChunkType::from(T) -> Self
+pub fn[T : TFileSystemWriteChunkType + FromJsAny] FileSystemWriteChunkType::into(Self) -> T
+pub impl FromJsAny for FileSystemWriteChunkType
+pub impl TFileSystemWriteChunkType for FileSystemWriteChunkType
+pub impl TJsValue for FileSystemWriteChunkType
 
 pub(all) enum FillMode {
   None
@@ -4874,6 +5037,18 @@ pub impl FromJsAny for OnErrorEventHandlerNonNullEvent
 pub impl TJsValue for OnErrorEventHandlerNonNullEvent
 
 #external
+pub type OpenFilePickerOptions
+pub fn OpenFilePickerOptions::empty() -> Self
+pub fn OpenFilePickerOptions::exclude_accept_all_option(Self) -> Bool?
+pub fn OpenFilePickerOptions::id(Self) -> String?
+pub fn OpenFilePickerOptions::multiple(Self) -> Bool?
+pub fn OpenFilePickerOptions::new(types? : Array[FilePickerAcceptType], exclude_accept_all_option? : Bool, id? : String, start_in? : &TStartInDirectory, multiple? : Bool) -> Self
+pub fn OpenFilePickerOptions::start_in(Self) -> StartInDirectory?
+pub fn OpenFilePickerOptions::types(Self) -> Array[FilePickerAcceptType]?
+pub impl FromJsAny for OpenFilePickerOptions
+pub impl TJsValue for OpenFilePickerOptions
+
+#external
 pub type OptionalEffectTiming
 pub fn OptionalEffectTiming::delay(Self) -> Double?
 pub fn OptionalEffectTiming::direction(Self) -> PlaybackDirection?
@@ -5774,7 +5949,7 @@ pub impl Show for ResponseType
 pub type RouterCondition
 pub fn RouterCondition::_or(Self) -> Array[Self]?
 pub fn RouterCondition::empty() -> Self
-pub fn RouterCondition::new(url_pattern? : URLPatternCompatible, request_method? : String, request_mode? : RequestMode, request_destination? : RequestDestination, running_status? : RunningStatus, _or? : Array[Self], not? : Self) -> Self
+pub fn RouterCondition::new(url_pattern? : &TURLPatternCompatible, request_method? : String, request_mode? : RequestMode, request_destination? : RequestDestination, running_status? : RunningStatus, _or? : Array[Self], not? : Self) -> Self
 pub fn RouterCondition::not(Self) -> Self?
 pub fn RouterCondition::request_destination(Self) -> RequestDestination?
 pub fn RouterCondition::request_method(Self) -> String?
@@ -6449,6 +6624,18 @@ pub impl TSVGElement for SVGViewElement
 pub impl TSVGViewElement for SVGViewElement
 
 #external
+pub type SaveFilePickerOptions
+pub fn SaveFilePickerOptions::empty() -> Self
+pub fn SaveFilePickerOptions::exclude_accept_all_option(Self) -> Bool?
+pub fn SaveFilePickerOptions::id(Self) -> String?
+pub fn SaveFilePickerOptions::new(types? : Array[FilePickerAcceptType], exclude_accept_all_option? : Bool, id? : String, start_in? : &TStartInDirectory, suggested_name? : String) -> Self
+pub fn SaveFilePickerOptions::start_in(Self) -> StartInDirectory?
+pub fn SaveFilePickerOptions::suggested_name(Self) -> String?
+pub fn SaveFilePickerOptions::types(Self) -> Array[FilePickerAcceptType]?
+pub impl FromJsAny for SaveFilePickerOptions
+pub impl TJsValue for SaveFilePickerOptions
+
+#external
 pub type Screen
 pub fn[T : TScreen] Screen::into(Self) -> T
 pub impl FromJsAny for Screen
@@ -6719,6 +6906,14 @@ pub impl FromJsAny for SlotAssignmentMode
 pub impl TJsValue for SlotAssignmentMode
 pub impl Eq for SlotAssignmentMode
 pub impl Show for SlotAssignmentMode
+
+#external
+pub type StartInDirectory
+pub fn[T : TStartInDirectory] StartInDirectory::from(T) -> Self
+pub fn[T : TStartInDirectory + FromJsAny] StartInDirectory::into(Self) -> T
+pub impl FromJsAny for StartInDirectory
+pub impl TJsValue for StartInDirectory
+pub impl TStartInDirectory for StartInDirectory
 
 #external
 pub type StaticRange
@@ -7336,9 +7531,81 @@ pub impl TJsValue for URL
 pub impl TURL for URL
 
 #external
+pub type URLPattern
+pub fn[T : TURLPattern] URLPattern::into(Self) -> T
+pub fn URLPattern::new(&TURLPatternInput, String, options? : URLPatternOptions) -> Self
+pub fn URLPattern::new_2(input? : &TURLPatternInput, options? : URLPatternOptions) -> Self
+pub impl FromJsAny for URLPattern
+pub impl TJsValue for URLPattern
+pub impl TURLPattern for URLPattern
+pub impl TURLPatternCompatible for URLPattern
+
+#external
 pub type URLPatternCompatible
+pub fn[T : TURLPatternCompatible] URLPatternCompatible::from(T) -> Self
+pub fn[T : TURLPatternCompatible + FromJsAny] URLPatternCompatible::into(Self) -> T
 pub impl FromJsAny for URLPatternCompatible
 pub impl TJsValue for URLPatternCompatible
+pub impl TURLPatternCompatible for URLPatternCompatible
+
+#external
+pub type URLPatternComponentResult
+pub fn URLPatternComponentResult::empty() -> Self
+pub fn URLPatternComponentResult::groups(Self) -> JsValue?
+pub fn URLPatternComponentResult::input(Self) -> String?
+pub fn URLPatternComponentResult::new(input? : String, groups? : JsValue) -> Self
+pub impl FromJsAny for URLPatternComponentResult
+pub impl TJsValue for URLPatternComponentResult
+
+#external
+pub type URLPatternInit
+pub fn URLPatternInit::base_url(Self) -> String?
+pub fn URLPatternInit::empty() -> Self
+pub fn URLPatternInit::hash(Self) -> String?
+pub fn URLPatternInit::hostname(Self) -> String?
+pub fn URLPatternInit::new(protocol? : String, username? : String, password? : String, hostname? : String, port? : String, pathname? : String, search? : String, hash? : String, base_url? : String) -> Self
+pub fn URLPatternInit::password(Self) -> String?
+pub fn URLPatternInit::pathname(Self) -> String?
+pub fn URLPatternInit::port(Self) -> String?
+pub fn URLPatternInit::protocol(Self) -> String?
+pub fn URLPatternInit::search(Self) -> String?
+pub fn URLPatternInit::username(Self) -> String?
+pub impl FromJsAny for URLPatternInit
+pub impl TJsValue for URLPatternInit
+pub impl TURLPatternCompatible for URLPatternInit
+pub impl TURLPatternInput for URLPatternInit
+
+#external
+pub type URLPatternInput
+pub fn[T : TURLPatternInput] URLPatternInput::from(T) -> Self
+pub fn[T : TURLPatternInput + FromJsAny] URLPatternInput::into(Self) -> T
+pub impl FromJsAny for URLPatternInput
+pub impl TJsValue for URLPatternInput
+pub impl TURLPatternInput for URLPatternInput
+
+#external
+pub type URLPatternOptions
+pub fn URLPatternOptions::empty() -> Self
+pub fn URLPatternOptions::ignore_case(Self) -> Bool?
+pub fn URLPatternOptions::new(ignore_case? : Bool) -> Self
+pub impl FromJsAny for URLPatternOptions
+pub impl TJsValue for URLPatternOptions
+
+#external
+pub type URLPatternResult
+pub fn URLPatternResult::empty() -> Self
+pub fn URLPatternResult::hash(Self) -> URLPatternComponentResult?
+pub fn URLPatternResult::hostname(Self) -> URLPatternComponentResult?
+pub fn URLPatternResult::inputs(Self) -> Array[URLPatternInput]?
+pub fn URLPatternResult::new(inputs? : Array[URLPatternInput], protocol? : URLPatternComponentResult, username? : URLPatternComponentResult, password? : URLPatternComponentResult, hostname? : URLPatternComponentResult, port? : URLPatternComponentResult, pathname? : URLPatternComponentResult, search? : URLPatternComponentResult, hash? : URLPatternComponentResult) -> Self
+pub fn URLPatternResult::password(Self) -> URLPatternComponentResult?
+pub fn URLPatternResult::pathname(Self) -> URLPatternComponentResult?
+pub fn URLPatternResult::port(Self) -> URLPatternComponentResult?
+pub fn URLPatternResult::protocol(Self) -> URLPatternComponentResult?
+pub fn URLPatternResult::search(Self) -> URLPatternComponentResult?
+pub fn URLPatternResult::username(Self) -> URLPatternComponentResult?
+pub impl FromJsAny for URLPatternResult
+pub impl TJsValue for URLPatternResult
 
 #external
 pub type URLSearchParams
@@ -7553,6 +7820,22 @@ pub impl TEventTarget for WebSocket
 pub impl TJsValue for WebSocket
 pub impl TWebSocket for WebSocket
 
+pub(all) enum WellKnownDirectory {
+  Desktop
+  Documents
+  Downloads
+  Music
+  Pictures
+  Videos
+}
+pub fn WellKnownDirectory::from(String) -> Self?
+pub fn WellKnownDirectory::value(Self) -> String
+pub impl FromJsAny for WellKnownDirectory
+pub impl TJsValue for WellKnownDirectory
+pub impl TStartInDirectory for WellKnownDirectory
+pub impl Eq for WellKnownDirectory
+pub impl Show for WellKnownDirectory
+
 #external
 pub type WheelEvent
 pub fn[T : TWheelEvent] WheelEvent::into(Self) -> T
@@ -7735,6 +8018,38 @@ pub fn WritableStreamDefaultWriter::new(&TWritableStream) -> Self
 pub impl FromJsAny for WritableStreamDefaultWriter
 pub impl TJsValue for WritableStreamDefaultWriter
 pub impl TWritableStreamDefaultWriter for WritableStreamDefaultWriter
+
+pub(all) enum WriteCommandType {
+  Write
+  Seek
+  Truncate
+}
+pub fn WriteCommandType::from(String) -> Self?
+pub fn WriteCommandType::value(Self) -> String
+pub impl FromJsAny for WriteCommandType
+pub impl TJsValue for WriteCommandType
+pub impl Eq for WriteCommandType
+pub impl Show for WriteCommandType
+
+#external
+pub type WriteParams
+pub fn WriteParams::data(Self) -> WriteParamsGetData?
+pub fn WriteParams::empty() -> Self
+pub fn WriteParams::new(WriteCommandType, size? : UInt64, position? : UInt64, data? : &TWriteParamsNewData) -> Self
+pub fn WriteParams::position(Self) -> UInt64?
+pub fn WriteParams::size(Self) -> UInt64?
+pub fn WriteParams::type_(Self) -> WriteCommandType
+pub impl FromJsAny for WriteParams
+pub impl TFileSystemWriteChunkType for WriteParams
+pub impl TJsValue for WriteParams
+
+#external
+pub type WriteParamsGetData
+pub fn[T : TWriteParamsGetData] WriteParamsGetData::from(T) -> Self
+pub fn[T : TWriteParamsGetData + FromJsAny] WriteParamsGetData::into(Self) -> T
+pub impl FromJsAny for WriteParamsGetData
+pub impl TJsValue for WriteParamsGetData
+pub impl TWriteParamsGetData for WriteParamsGetData
 
 #external
 pub type XMLDocument
@@ -8726,6 +9041,7 @@ pub trait TDataTransferItem : TJsValue {
   type_(Self) -> String
   get_as_string(Self, (String) -> Unit) -> Unit
   get_as_file(Self) -> File?
+  get_as_file_system_handle(Self) -> JsPromise[FileSystemHandle]
 }
 
 pub trait TDataTransferItemList : TJsValue {
@@ -9527,6 +9843,47 @@ pub trait TFileReaderSync : TJsValue {
   read_as_text(Self, &TBlob, encoding? : String) -> String
   read_as_data_url(Self, &TBlob) -> String
 }
+
+pub trait TFileSystemDirectoryHandle : TFileSystemHandle {
+  get_file_handle(Self, String, options? : FileSystemGetFileOptions) -> JsPromise[FileSystemFileHandle]
+  get_directory_handle(Self, String, options? : FileSystemGetDirectoryOptions) -> JsPromise[FileSystemDirectoryHandle]
+  remove_entry(Self, String, options? : FileSystemRemoveOptions) -> JsPromise[JsValue]
+  resolve(Self, &TFileSystemHandle) -> JsPromise[Array[String]]
+}
+
+pub trait TFileSystemFileHandle : TFileSystemHandle {
+  get_file(Self) -> JsPromise[File]
+  create_writable(Self, options? : FileSystemCreateWritableOptions) -> JsPromise[FileSystemWritableFileStream]
+  create_sync_access_handle(Self) -> JsPromise[FileSystemSyncAccessHandle]
+}
+
+pub trait TFileSystemHandle : TJsValue {
+  kind(Self) -> FileSystemHandleKind
+  name(Self) -> String
+  is_same_entry(Self, &TFileSystemHandle) -> JsPromise[Bool]
+  query_permission(Self, descriptor? : FileSystemHandlePermissionDescriptor) -> JsPromise[PermissionState]
+  request_permission(Self, descriptor? : FileSystemHandlePermissionDescriptor) -> JsPromise[PermissionState]
+}
+
+pub trait TFileSystemSyncAccessHandle : TJsValue {
+  read(Self, &TAllowSharedBufferSource, options? : FileSystemReadWriteOptions) -> UInt64
+  write(Self, &TAllowSharedBufferSource, options? : FileSystemReadWriteOptions) -> UInt64
+  truncate(Self, UInt64) -> Unit
+  get_size(Self) -> UInt64
+  flush(Self) -> Unit
+  close(Self) -> Unit
+}
+
+pub trait TFileSystemWritableFileStream : TWritableStream {
+  write(Self, &TFileSystemWriteChunkType) -> JsPromise[JsValue]
+  seek(Self, UInt64) -> JsPromise[JsValue]
+  truncate(Self, UInt64) -> JsPromise[JsValue]
+}
+
+pub(open) trait TFileSystemWriteChunkType {
+  to_js(Self) -> JsValue
+}
+pub impl TFileSystemWriteChunkType for String
 
 pub trait TFocusEvent : TUIEvent {
   related_target(Self) -> EventTarget
@@ -13302,6 +13659,10 @@ pub(open) trait TSharedWorkerNewScriptURL {
 }
 pub impl TSharedWorkerNewScriptURL for String
 
+pub(open) trait TStartInDirectory {
+  to_js(Self) -> JsValue
+}
+
 pub trait TStaticRange : TAbstractRange {
 }
 
@@ -13324,6 +13685,7 @@ pub trait TStorageEvent : TEvent {
 }
 
 pub trait TStorageManager : TJsValue {
+  get_directory(Self) -> JsPromise[FileSystemDirectoryHandle]
   persisted(Self) -> JsPromise[Bool]
   persist(Self) -> JsPromise[Bool]
   estimate(Self) -> JsPromise[StorageEstimate]
@@ -13626,6 +13988,30 @@ pub(open) trait TURLCreateObjectURLObj {
   to_js(Self) -> JsValue
 }
 
+pub trait TURLPattern : TJsValue {
+  test_(Self, input? : &TURLPatternInput, base_url? : String) -> Bool
+  exec(Self, input? : &TURLPatternInput, base_url? : String) -> URLPatternResult?
+  protocol(Self) -> String
+  username(Self) -> String
+  password(Self) -> String
+  hostname(Self) -> String
+  port(Self) -> String
+  pathname(Self) -> String
+  search(Self) -> String
+  hash(Self) -> String
+  has_reg_exp_groups(Self) -> Bool
+}
+
+pub(open) trait TURLPatternCompatible {
+  to_js(Self) -> JsValue
+}
+pub impl TURLPatternCompatible for String
+
+pub(open) trait TURLPatternInput {
+  to_js(Self) -> JsValue
+}
+pub impl TURLPatternInput for String
+
 pub trait TURLSearchParams : TJsValue {
   size(Self) -> UInt
   append(Self, String, String) -> Unit
@@ -13826,6 +14212,9 @@ pub trait TWindow : TEventTarget {
   outer_height(Self) -> Int
   device_pixel_ratio(Self) -> Double
   get_selection(Self) -> Selection?
+  show_open_file_picker(Self, options? : OpenFilePickerOptions) -> JsPromise[Array[FileSystemFileHandle]]
+  show_save_file_picker(Self, options? : SaveFilePickerOptions) -> JsPromise[FileSystemFileHandle]
+  show_directory_picker(Self, options? : DirectoryPickerOptions) -> JsPromise[FileSystemDirectoryHandle]
   request_idle_callback(Self, (IdleDeadline) -> Unit, options? : IdleRequestOptions) -> UInt
   cancel_idle_callback(Self, UInt) -> Unit
   onabort(Self) -> EventHandlerNonNull
@@ -14208,6 +14597,16 @@ pub trait TWritableStreamDefaultWriter : TJsValue {
   release_lock(Self) -> Unit
   write(Self, chunk? : JsValue) -> JsPromise[JsValue]
 }
+
+pub(open) trait TWriteParamsGetData {
+  to_js(Self) -> JsValue
+}
+pub impl TWriteParamsGetData for String
+
+pub(open) trait TWriteParamsNewData {
+  to_js(Self) -> JsValue
+}
+pub impl TWriteParamsNewData for String
 
 pub trait TXMLDocument : TDocument {
 }

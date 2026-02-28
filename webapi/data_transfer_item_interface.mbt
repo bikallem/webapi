@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: DataTransferItem
-// Specifications: html.idl
+// Specifications: file-system-access.idl, html.idl
 
 ///|
 /// [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem)
@@ -28,6 +28,7 @@ pub trait TDataTransferItem: TJsValue {
   type_(self : Self) -> String = _
   get_as_string(self : Self, _callback : (String) -> Unit) -> Unit = _
   get_as_file(self : Self) -> File? = _
+  get_as_file_system_handle(self : Self) -> JsPromise[FileSystemHandle] = _
 }
 
 ///|
@@ -58,4 +59,12 @@ impl TDataTransferItem with get_as_string(
 /// [DataTransferItem.getAsFile](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsFile)
 impl TDataTransferItem with get_as_file(self : Self) -> File? {
   data_transfer_item_get_as_file_ffi(TJsValue::to_js(self)).to_option()
+}
+
+///|
+/// [DataTransferItem.getAsFileSystemHandle](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsFileSystemHandle)
+impl TDataTransferItem with get_as_file_system_handle(self : Self) -> JsPromise[
+  FileSystemHandle,
+] {
+  data_transfer_item_get_as_file_system_handle_ffi(TJsValue::to_js(self))
 }

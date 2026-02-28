@@ -1,4 +1,14 @@
 ///|
+fn storage_manager_get_directory_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StorageManager" "getDirectory"
+
+///|
+fn storage_manager_get_directory_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  storage_manager_get_directory_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
 fn storage_manager_persisted_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StorageManager" "persisted"
 
 ///|
