@@ -596,6 +596,7 @@ pub fn Blob::new(blob_parts? : Array[BlobPart], options? : BlobPropertyBag) -> S
 pub impl FromJsAny for Blob
 pub impl TBlob for Blob
 pub impl TBlobPart for Blob
+pub impl TClipboardItemData for Blob
 pub impl TImageBitmapSource for Blob
 pub impl TJsValue for Blob
 pub impl TMediaProvider for Blob
@@ -4735,6 +4736,16 @@ pub impl Eq for NotificationDirection
 pub impl Show for NotificationDirection
 
 #external
+pub type NotificationEvent
+pub fn[T : TNotificationEvent] NotificationEvent::into(Self) -> T
+pub fn NotificationEvent::new(String, NotificationEventInit) -> Self
+pub impl FromJsAny for NotificationEvent
+pub impl TEvent for NotificationEvent
+pub impl TExtendableEvent for NotificationEvent
+pub impl TJsValue for NotificationEvent
+pub impl TNotificationEvent for NotificationEvent
+
+#external
 pub type NotificationEventInit
 pub fn NotificationEventInit::action(Self) -> String?
 pub fn NotificationEventInit::bubbles(Self) -> Bool?
@@ -7834,6 +7845,8 @@ pub impl TXSLTProcessor for XSLTProcessor
 // Type aliases
 pub type CSSOMString = String
 
+pub type ClipboardItemData = JsPromise[&TClipboardItemData]
+
 pub type ClipboardItems = Array[ClipboardItem]
 
 pub type DOMHighResTimeStamp = Double
@@ -8402,6 +8415,11 @@ pub trait TClipboardItem : TJsValue {
   types(Self) -> Array[String]
   get_type(Self, String) -> JsPromise[Blob]
 }
+
+pub(open) trait TClipboardItemData {
+  to_js(Self) -> JsValue
+}
+pub impl TClipboardItemData for String
 
 pub trait TCloseEvent : TEvent {
   was_clean(Self) -> Bool
@@ -11894,6 +11912,11 @@ pub trait TNotification : TEventTarget {
   data(Self) -> JsValue
   actions(Self) -> Array[NotificationAction]
   close(Self) -> Unit
+}
+
+pub trait TNotificationEvent : TExtendableEvent {
+  notification(Self) -> Notification
+  action(Self) -> String
 }
 
 pub trait TOffscreenCanvas : TEventTarget {

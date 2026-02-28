@@ -49,14 +49,17 @@ pub impl Emitter for TypedefEmitter with emit(
       emits
     }
     _ => {
-      let (target_type, _) = arg_mbt_type(
+      let (target_type, inner_emits) = arg_mbt_type(
         typedef_def.type_,
         typedef_def.name,
         "",
         "",
         self.type_registry,
       )
-      [Emit::TypedefAlias(typedef_def.name, target_type.name())]
+      let result = []
+      result.push_iter(inner_emits.iter())
+      result.push(Emit::TypedefAlias(typedef_def.name, target_type.name()))
+      result
     }
   }
   emits.push_iter(typedef_emits.iter())

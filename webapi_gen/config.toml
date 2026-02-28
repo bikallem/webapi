@@ -43,11 +43,11 @@ core_specs = [
     "service-workers",
 ]
 
-excluded_interfaces = ["OffscreenRenderingContext", "NotificationEvent"]
+excluded_interfaces = []
 
 excluded_callbacks = []
 
-excluded_typedefs = ["ClipboardItemData"]
+excluded_typedefs = []
 
 excluded_dictionary_prefixes = []
 

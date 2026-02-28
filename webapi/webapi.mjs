@@ -5622,6 +5622,12 @@ export const wasmImportObject = {
     unregister: (obj) => obj.unregister()
   },
 
+  webapi_NotificationEvent: {
+    new: (type_, event_init_dict) => new NotificationEvent(type_, event_init_dict),
+    get_notification: (obj) => obj.notification,
+    get_action: (obj) => obj.action
+  },
+
   webapi_ServiceWorkerGlobalScope: {
     get_onnotificationclick: (obj) => obj.onnotificationclick,
     set_onnotificationclick: (obj, value) => { obj.onnotificationclick = value; },

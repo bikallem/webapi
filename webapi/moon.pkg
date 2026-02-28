@@ -661,6 +661,8 @@ options(
     "notification_action_dictionary_wasm.mbt": [ "wasm-gc" ],
     "notification_event_init_dictionary_js.mbt": [ "js" ],
     "notification_event_init_dictionary_wasm.mbt": [ "wasm-gc" ],
+    "notification_event_interface_js.mbt": [ "js" ],
+    "notification_event_interface_wasm.mbt": [ "wasm-gc" ],
     "notification_interface_js.mbt": [ "js" ],
     "notification_interface_wasm.mbt": [ "wasm-gc" ],
     "notification_options_dictionary_js.mbt": [ "js" ],

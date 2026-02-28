@@ -1,0 +1,58 @@
+// Do not edit. This file is generated.
+// MoonBit type: NotificationEvent
+// Specifications: notifications.idl
+
+///|
+/// [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent)
+#external
+pub type NotificationEvent
+
+///|
+pub impl TJsValue for NotificationEvent with to_js(self : NotificationEvent) -> JsValue = "%identity"
+
+///|
+pub impl FromJsAny for NotificationEvent with from_js_any(value : JsAny) -> NotificationEvent = "%identity"
+
+///|
+pub fn[T : TNotificationEvent] NotificationEvent::into(
+  self : NotificationEvent,
+) -> T = "%identity"
+
+///|
+pub impl TNotificationEvent for NotificationEvent
+
+///|
+pub impl TExtendableEvent for NotificationEvent
+
+///|
+pub impl TEvent for NotificationEvent
+
+///|
+pub fn NotificationEvent::new(
+  type_ : String,
+  event_init_dict : NotificationEventInit,
+) -> NotificationEvent {
+  notification_event_new_ffi(
+    TJsValue::to_js(type_),
+    TJsValue::to_js(event_init_dict),
+  )
+}
+
+///|
+/// [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent) interface.
+pub trait TNotificationEvent: TExtendableEvent {
+  notification(self : Self) -> Notification = _
+  action(self : Self) -> String = _
+}
+
+///|
+/// [NotificationEvent.notification](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent/notification)
+impl TNotificationEvent with notification(self : Self) -> Notification {
+  notification_event_notification_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [NotificationEvent.action](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent/action)
+impl TNotificationEvent with action(self : Self) -> String {
+  notification_event_action_ffi(TJsValue::to_js(self))
+}
