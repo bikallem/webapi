@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Navigator
-// Specifications: pointerevents.idl, vibration.idl, clipboard-apis.idl, html.idl
+// Specifications: pointerevents.idl, vibration.idl, clipboard-apis.idl, service-workers.idl, permissions.idl, html.idl
 
 ///|
 /// [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)
@@ -24,8 +24,10 @@ pub impl TNavigator for Navigator
 pub trait TNavigator: TJsValue {
   user_activation(self : Self) -> UserActivation = _
   vibrate(self : Self, pattern : &TVibratePattern) -> Bool = _
+  permissions(self : Self) -> Permissions = _
   max_touch_points(self : Self) -> Int = _
   clipboard(self : Self) -> Clipboard = _
+  service_worker(self : Self) -> ServiceWorkerContainer = _
   app_code_name(self : Self) -> String = _
   app_name(self : Self) -> String = _
   app_version(self : Self) -> String = _
@@ -64,6 +66,12 @@ impl TNavigator with vibrate(self : Self, pattern : &TVibratePattern) -> Bool {
 }
 
 ///|
+/// [Navigator.permissions](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions)
+impl TNavigator with permissions(self : Self) -> Permissions {
+  navigator_permissions_ffi(TJsValue::to_js(self))
+}
+
+///|
 /// [Navigator.maxTouchPoints](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/maxTouchPoints)
 impl TNavigator with max_touch_points(self : Self) -> Int {
   navigator_max_touch_points_ffi(TJsValue::to_js(self))
@@ -73,6 +81,12 @@ impl TNavigator with max_touch_points(self : Self) -> Int {
 /// [Navigator.clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/clipboard)
 impl TNavigator with clipboard(self : Self) -> Clipboard {
   navigator_clipboard_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Navigator.serviceWorker](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/serviceWorker)
+impl TNavigator with service_worker(self : Self) -> ServiceWorkerContainer {
+  navigator_service_worker_ffi(TJsValue::to_js(self))
 }
 
 ///|

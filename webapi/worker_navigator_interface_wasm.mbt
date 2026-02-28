@@ -1,4 +1,10 @@
 ///|
+fn worker_navigator_permissions_ffi(obj : JsValue) -> Permissions = "webapi_WorkerNavigator" "get_permissions"
+
+///|
+fn worker_navigator_service_worker_ffi(obj : JsValue) -> ServiceWorkerContainer = "webapi_WorkerNavigator" "get_serviceWorker"
+
+///|
 fn worker_navigator_app_code_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_appCodeName"
 
 ///|

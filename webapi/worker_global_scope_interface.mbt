@@ -113,6 +113,7 @@ pub trait TWorkerGlobalScope: TEventTarget {
   performance(self : Self) -> Performance = _
   indexed_db(self : Self) -> IDBFactory = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
+  caches(self : Self) -> CacheStorage = _
 }
 
 ///|
@@ -435,4 +436,10 @@ impl TWorkerGlobalScope with indexed_db(self : Self) -> IDBFactory {
 /// [WorkerGlobalScope.trustedTypes](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/trustedTypes)
 impl TWorkerGlobalScope with trusted_types(self : Self) -> TrustedTypePolicyFactory {
   worker_global_scope_trusted_types_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [WorkerGlobalScope.caches](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/caches)
+impl TWorkerGlobalScope with caches(self : Self) -> CacheStorage {
+  worker_global_scope_caches_ffi(TJsValue::to_js(self))
 }

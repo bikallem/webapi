@@ -1419,6 +1419,7 @@ export const wasmImportObject = {
     get_performance: (obj) => obj.performance,
     get_indexedDB: (obj) => obj.indexedDB,
     get_trustedTypes: (obj) => obj.trustedTypes,
+    get_caches: (obj) => obj.caches,
     get_sessionStorage: (obj) => obj.sessionStorage,
     get_localStorage: (obj) => obj.localStorage,
     close: (obj) => obj.close(),
@@ -3979,8 +3980,10 @@ export const wasmImportObject = {
 
   webapi_Navigator: {
     get_userActivation: (obj) => obj.userActivation,
+    get_permissions: (obj) => obj.permissions,
     get_maxTouchPoints: (obj) => obj.maxTouchPoints,
     get_clipboard: (obj) => obj.clipboard,
+    get_serviceWorker: (obj) => obj.serviceWorker,
     get_appCodeName: (obj) => obj.appCodeName,
     get_appName: (obj) => obj.appName,
     get_appVersion: (obj) => obj.appVersion,
@@ -4394,6 +4397,7 @@ export const wasmImportObject = {
     get_performance: (obj) => obj.performance,
     get_indexedDB: (obj) => obj.indexedDB,
     get_trustedTypes: (obj) => obj.trustedTypes,
+    get_caches: (obj) => obj.caches,
     importScripts: (obj, urls) => obj.importScripts(...urls),
     reportError: (obj, e) => obj.reportError(e),
     btoa: (obj, data) => obj.btoa(data),
@@ -4450,6 +4454,8 @@ export const wasmImportObject = {
   },
 
   webapi_WorkerNavigator: {
+    get_permissions: (obj) => obj.permissions,
+    get_serviceWorker: (obj) => obj.serviceWorker,
     get_appCodeName: (obj) => obj.appCodeName,
     get_appName: (obj) => obj.appName,
     get_appVersion: (obj) => obj.appVersion,
@@ -5522,6 +5528,17 @@ export const wasmImportObject = {
     get_reason: (obj) => obj.reason
   },
 
+  webapi_Permissions: {
+    query: (obj, permission_desc) => obj.query(permission_desc)
+  },
+
+  webapi_PermissionStatus: {
+    get_state: (obj) => obj.state,
+    get_name: (obj) => obj.name,
+    get_onchange: (obj) => obj.onchange,
+    set_onchange: (obj, value) => { obj.onchange = value; }
+  },
+
   webapi_Touch: {
     new: (touch_init_dict) => new Touch(touch_init_dict),
     get_identifier: (obj) => obj.identifier,
@@ -5588,6 +5605,42 @@ export const wasmImportObject = {
     get_actions: (obj) => obj.actions,
     requestPermission: (deprecated_callback) => Notification.requestPermission(deprecated_callback),
     close: (obj) => obj.close()
+  },
+
+  webapi_ServiceWorkerRegistration: {
+    get_installing: (obj) => obj.installing,
+    get_waiting: (obj) => obj.waiting,
+    get_active: (obj) => obj.active,
+    get_navigationPreload: (obj) => obj.navigationPreload,
+    get_scope: (obj) => obj.scope,
+    get_updateViaCache: (obj) => obj.updateViaCache,
+    get_onupdatefound: (obj) => obj.onupdatefound,
+    set_onupdatefound: (obj, value) => { obj.onupdatefound = value; },
+    showNotification: (obj, title, options) => obj.showNotification(title, options),
+    getNotifications: (obj, filter) => obj.getNotifications(filter),
+    update: (obj) => obj.update(),
+    unregister: (obj) => obj.unregister()
+  },
+
+  webapi_ServiceWorkerGlobalScope: {
+    get_onnotificationclick: (obj) => obj.onnotificationclick,
+    set_onnotificationclick: (obj, value) => { obj.onnotificationclick = value; },
+    get_onnotificationclose: (obj) => obj.onnotificationclose,
+    set_onnotificationclose: (obj, value) => { obj.onnotificationclose = value; },
+    get_clients: (obj) => obj.clients,
+    get_registration: (obj) => obj.registration,
+    get_serviceWorker: (obj) => obj.serviceWorker,
+    get_oninstall: (obj) => obj.oninstall,
+    set_oninstall: (obj, value) => { obj.oninstall = value; },
+    get_onactivate: (obj) => obj.onactivate,
+    set_onactivate: (obj, value) => { obj.onactivate = value; },
+    get_onfetch: (obj) => obj.onfetch,
+    set_onfetch: (obj, value) => { obj.onfetch = value; },
+    get_onmessage: (obj) => obj.onmessage,
+    set_onmessage: (obj, value) => { obj.onmessage = value; },
+    get_onmessageerror: (obj) => obj.onmessageerror,
+    set_onmessageerror: (obj, value) => { obj.onmessageerror = value; },
+    skipWaiting: (obj) => obj.skipWaiting()
   },
 
   webapi_PointerEvent: {
@@ -5768,6 +5821,111 @@ export const wasmImportObject = {
   webapi_ResizeObserverSize: {
     get_inlineSize: (obj) => obj.inlineSize,
     get_blockSize: (obj) => obj.blockSize
+  },
+
+  webapi_ServiceWorker: {
+    get_scriptURL: (obj) => obj.scriptURL,
+    get_state: (obj) => obj.state,
+    get_onstatechange: (obj) => obj.onstatechange,
+    set_onstatechange: (obj, value) => { obj.onstatechange = value; },
+    get_onerror: (obj) => obj.onerror,
+    set_onerror: (obj, value) => { obj.onerror = value; },
+    postMessage: (obj, message, transfer) => obj.postMessage(message, transfer),
+    post_message_with_options: (obj, message, options) => obj.postMessage(message, options)
+  },
+
+  webapi_ServiceWorkerContainer: {
+    get_controller: (obj) => obj.controller,
+    get_ready: (obj) => obj.ready,
+    get_oncontrollerchange: (obj) => obj.oncontrollerchange,
+    set_oncontrollerchange: (obj, value) => { obj.oncontrollerchange = value; },
+    get_onmessage: (obj) => obj.onmessage,
+    set_onmessage: (obj, value) => { obj.onmessage = value; },
+    get_onmessageerror: (obj) => obj.onmessageerror,
+    set_onmessageerror: (obj, value) => { obj.onmessageerror = value; },
+    register: (obj, script_url, options) => obj.register(script_url, options),
+    getRegistration: (obj, client_url) => obj.getRegistration(client_url),
+    getRegistrations: (obj) => obj.getRegistrations(),
+    startMessages: (obj) => obj.startMessages()
+  },
+
+  webapi_NavigationPreloadManager: {
+    enable: (obj) => obj.enable(),
+    disable: (obj) => obj.disable(),
+    setHeaderValue: (obj, value) => obj.setHeaderValue(value),
+    getState: (obj) => obj.getState()
+  },
+
+  webapi_Client: {
+    get_url: (obj) => obj.url,
+    get_frameType: (obj) => obj.frameType,
+    get_id: (obj) => obj.id,
+    get_type: (obj) => obj.type,
+    postMessage: (obj, message, transfer) => obj.postMessage(message, transfer),
+    post_message_with_options: (obj, message, options) => obj.postMessage(message, options)
+  },
+
+  webapi_WindowClient: {
+    get_visibilityState: (obj) => obj.visibilityState,
+    get_focused: (obj) => obj.focused,
+    get_ancestorOrigins: (obj) => obj.ancestorOrigins,
+    focus: (obj) => obj.focus(),
+    navigate: (obj, url) => obj.navigate(url)
+  },
+
+  webapi_Clients: {
+    get: (obj, id) => obj.get(id),
+    matchAll: (obj, options) => obj.matchAll(options),
+    openWindow: (obj, url) => obj.openWindow(url),
+    claim: (obj) => obj.claim()
+  },
+
+  webapi_ExtendableEvent: {
+    new: (type_, event_init_dict) => new ExtendableEvent(type_, event_init_dict),
+    waitUntil: (obj, f) => obj.waitUntil(f)
+  },
+
+  webapi_InstallEvent: {
+    new: (type_, event_init_dict) => new InstallEvent(type_, event_init_dict),
+    addRoutes: (obj, rules) => obj.addRoutes(rules)
+  },
+
+  webapi_FetchEvent: {
+    new: (type_, event_init_dict) => new FetchEvent(type_, event_init_dict),
+    get_request: (obj) => obj.request,
+    get_preloadResponse: (obj) => obj.preloadResponse,
+    get_clientId: (obj) => obj.clientId,
+    get_resultingClientId: (obj) => obj.resultingClientId,
+    get_replacesClientId: (obj) => obj.replacesClientId,
+    get_handled: (obj) => obj.handled,
+    respondWith: (obj, r) => obj.respondWith(r)
+  },
+
+  webapi_ExtendableMessageEvent: {
+    new: (type_, event_init_dict) => new ExtendableMessageEvent(type_, event_init_dict),
+    get_data: (obj) => obj.data,
+    get_origin: (obj) => obj.origin,
+    get_lastEventId: (obj) => obj.lastEventId,
+    get_source: (obj) => obj.source,
+    get_ports: (obj) => obj.ports
+  },
+
+  webapi_Cache: {
+    match: (obj, request, options) => obj.match(request, options),
+    matchAll: (obj, request, options) => obj.matchAll(request, options),
+    add: (obj, request) => obj.add(request),
+    addAll: (obj, requests) => obj.addAll(requests),
+    put: (obj, request, response) => obj.put(request, response),
+    delete: (obj, request, options) => obj.delete(request, options),
+    keys: (obj, request, options) => obj.keys(request, options)
+  },
+
+  webapi_CacheStorage: {
+    match: (obj, request, options) => obj.match(request, options),
+    has: (obj, cache_name) => obj.has(cache_name),
+    open: (obj, cache_name) => obj.open(cache_name),
+    delete: (obj, cache_name) => obj.delete(cache_name),
+    keys: (obj) => obj.keys()
   },
 
   webapi_ScreenOrientation: {
@@ -7622,6 +7780,26 @@ export const wasmImportObject = {
     get_reason: (obj) => obj.reason
   },
 
+  webapi_PermissionDescriptor: {
+    new: (name) => {
+      const obj = {};
+      if (name !== undefined) obj.name = name;
+      return obj;
+    },
+    get_name: (obj) => obj.name
+  },
+
+  webapi_PermissionSetParameters: {
+    new: (descriptor, state) => {
+      const obj = {};
+      if (descriptor !== undefined) obj.descriptor = descriptor;
+      if (state !== undefined) obj.state = state;
+      return obj;
+    },
+    get_descriptor: (obj) => obj.descriptor,
+    get_state: (obj) => obj.state
+  },
+
   webapi_TouchInit: {
     new: (identifier, target, clientX, clientY, screenX, screenY, pageX, pageY, radiusX, radiusY, rotationAngle, force, altitudeAngle, azimuthAngle, touchType) => {
       const obj = {};
@@ -7771,6 +7949,23 @@ export const wasmImportObject = {
       return obj;
     },
     get_tag: (obj) => obj.tag
+  },
+
+  webapi_NotificationEventInit: {
+    new: (bubbles, cancelable, composed, notification, action) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (notification !== undefined) obj.notification = notification;
+      if (action !== undefined) obj.action = action;
+      return obj;
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_notification: (obj) => obj.notification,
+    get_action: (obj) => obj.action
   },
 
   webapi_PointerEventInit: {
@@ -7934,6 +8129,17 @@ export const wasmImportObject = {
       return obj;
     },
     get_unsanitized: (obj) => obj.unsanitized
+  },
+
+  webapi_ClipboardPermissionDescriptor: {
+    new: (name, allowWithoutGesture) => {
+      const obj = {};
+      if (name !== undefined) obj.name = name;
+      if (allowWithoutGesture !== undefined) obj.allowWithoutGesture = allowWithoutGesture;
+      return obj;
+    },
+    get_name: (obj) => obj.name,
+    get_allowWithoutGesture: (obj) => obj.allowWithoutGesture
   },
 
   webapi_DocumentTimelineOptions: {
@@ -8135,6 +8341,171 @@ export const wasmImportObject = {
       return obj;
     },
     get_box: (obj) => obj.box
+  },
+
+  webapi_RegistrationOptions: {
+    new: (scope, type, updateViaCache) => {
+      const obj = {};
+      if (scope !== undefined) obj.scope = scope;
+      if (type !== undefined) obj.type = type;
+      if (updateViaCache !== undefined) obj.updateViaCache = updateViaCache;
+      return obj;
+    },
+    get_scope: (obj) => obj.scope,
+    get_type: (obj) => obj.type,
+    get_updateViaCache: (obj) => obj.updateViaCache
+  },
+
+  webapi_NavigationPreloadState: {
+    new: (enabled, headerValue) => {
+      const obj = {};
+      if (enabled !== undefined) obj.enabled = enabled;
+      if (headerValue !== undefined) obj.headerValue = headerValue;
+      return obj;
+    },
+    get_enabled: (obj) => obj.enabled,
+    get_headerValue: (obj) => obj.headerValue
+  },
+
+  webapi_ClientQueryOptions: {
+    new: (includeUncontrolled, type) => {
+      const obj = {};
+      if (includeUncontrolled !== undefined) obj.includeUncontrolled = includeUncontrolled;
+      if (type !== undefined) obj.type = type;
+      return obj;
+    },
+    get_includeUncontrolled: (obj) => obj.includeUncontrolled,
+    get_type: (obj) => obj.type
+  },
+
+  webapi_ExtendableEventInit: {
+    new: (bubbles, cancelable, composed) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      return obj;
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed
+  },
+
+  webapi_RouterRule: {
+    new: (condition, source) => {
+      const obj = {};
+      if (condition !== undefined) obj.condition = condition;
+      if (source !== undefined) obj.source = source;
+      return obj;
+    },
+    get_condition: (obj) => obj.condition,
+    get_source: (obj) => obj.source
+  },
+
+  webapi_RouterCondition: {
+    new: (urlPattern, requestMethod, requestMode, requestDestination, runningStatus, _or, not) => {
+      const obj = {};
+      if (urlPattern !== undefined) obj.urlPattern = urlPattern;
+      if (requestMethod !== undefined) obj.requestMethod = requestMethod;
+      if (requestMode !== undefined) obj.requestMode = requestMode;
+      if (requestDestination !== undefined) obj.requestDestination = requestDestination;
+      if (runningStatus !== undefined) obj.runningStatus = runningStatus;
+      if (_or !== undefined) obj._or = _or;
+      if (not !== undefined) obj.not = not;
+      return obj;
+    },
+    get_urlPattern: (obj) => obj.urlPattern,
+    get_requestMethod: (obj) => obj.requestMethod,
+    get_requestMode: (obj) => obj.requestMode,
+    get_requestDestination: (obj) => obj.requestDestination,
+    get_runningStatus: (obj) => obj.runningStatus,
+    get__or: (obj) => obj._or,
+    get_not: (obj) => obj.not
+  },
+
+  webapi_RouterSourceDict: {
+    new: (cacheName) => {
+      const obj = {};
+      if (cacheName !== undefined) obj.cacheName = cacheName;
+      return obj;
+    },
+    get_cacheName: (obj) => obj.cacheName
+  },
+
+  webapi_FetchEventInit: {
+    new: (bubbles, cancelable, composed, request, preloadResponse, clientId, resultingClientId, replacesClientId, handled) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (request !== undefined) obj.request = request;
+      if (preloadResponse !== undefined) obj.preloadResponse = preloadResponse;
+      if (clientId !== undefined) obj.clientId = clientId;
+      if (resultingClientId !== undefined) obj.resultingClientId = resultingClientId;
+      if (replacesClientId !== undefined) obj.replacesClientId = replacesClientId;
+      if (handled !== undefined) obj.handled = handled;
+      return obj;
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_request: (obj) => obj.request,
+    get_preloadResponse: (obj) => obj.preloadResponse,
+    get_clientId: (obj) => obj.clientId,
+    get_resultingClientId: (obj) => obj.resultingClientId,
+    get_replacesClientId: (obj) => obj.replacesClientId,
+    get_handled: (obj) => obj.handled
+  },
+
+  webapi_ExtendableMessageEventInit: {
+    new: (bubbles, cancelable, composed, data, origin, lastEventId, source, ports) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (data !== undefined) obj.data = data;
+      if (origin !== undefined) obj.origin = origin;
+      if (lastEventId !== undefined) obj.lastEventId = lastEventId;
+      if (source !== undefined) obj.source = source;
+      if (ports !== undefined) obj.ports = ports;
+      return obj;
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_data: (obj) => obj.data,
+    get_origin: (obj) => obj.origin,
+    get_lastEventId: (obj) => obj.lastEventId,
+    get_source: (obj) => obj.source,
+    get_ports: (obj) => obj.ports
+  },
+
+  webapi_CacheQueryOptions: {
+    new: (ignoreSearch, ignoreMethod, ignoreVary) => {
+      const obj = {};
+      if (ignoreSearch !== undefined) obj.ignoreSearch = ignoreSearch;
+      if (ignoreMethod !== undefined) obj.ignoreMethod = ignoreMethod;
+      if (ignoreVary !== undefined) obj.ignoreVary = ignoreVary;
+      return obj;
+    },
+    get_ignoreSearch: (obj) => obj.ignoreSearch,
+    get_ignoreMethod: (obj) => obj.ignoreMethod,
+    get_ignoreVary: (obj) => obj.ignoreVary
+  },
+
+  webapi_MultiCacheQueryOptions: {
+    new: (ignoreSearch, ignoreMethod, ignoreVary, cacheName) => {
+      const obj = {};
+      if (ignoreSearch !== undefined) obj.ignoreSearch = ignoreSearch;
+      if (ignoreMethod !== undefined) obj.ignoreMethod = ignoreMethod;
+      if (ignoreVary !== undefined) obj.ignoreVary = ignoreVary;
+      if (cacheName !== undefined) obj.cacheName = cacheName;
+      return obj;
+    },
+    get_ignoreSearch: (obj) => obj.ignoreSearch,
+    get_ignoreMethod: (obj) => obj.ignoreMethod,
+    get_ignoreVary: (obj) => obj.ignoreVary,
+    get_cacheName: (obj) => obj.cacheName
   },
 
   webapi_IdleRequestOptions: {

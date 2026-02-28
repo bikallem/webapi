@@ -822,6 +822,30 @@ pub impl FromJsAny for CSSStyleSheetInitGetMedia
 pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia
 pub impl TJsValue for CSSStyleSheetInitGetMedia
 
+#external
+pub type Cache
+pub fn[T : TCache] Cache::into(Self) -> T
+pub impl FromJsAny for Cache
+pub impl TCache for Cache
+pub impl TJsValue for Cache
+
+#external
+pub type CacheQueryOptions
+pub fn CacheQueryOptions::empty() -> Self
+pub fn CacheQueryOptions::ignore_method(Self) -> Bool?
+pub fn CacheQueryOptions::ignore_search(Self) -> Bool?
+pub fn CacheQueryOptions::ignore_vary(Self) -> Bool?
+pub fn CacheQueryOptions::new(ignore_search? : Bool, ignore_method? : Bool, ignore_vary? : Bool) -> Self
+pub impl FromJsAny for CacheQueryOptions
+pub impl TJsValue for CacheQueryOptions
+
+#external
+pub type CacheStorage
+pub fn[T : TCacheStorage] CacheStorage::into(Self) -> T
+pub impl FromJsAny for CacheStorage
+pub impl TCacheStorage for CacheStorage
+pub impl TJsValue for CacheStorage
+
 pub(all) enum CanPlayTypeResult {
   Empty
   Maybe
@@ -1084,6 +1108,46 @@ pub impl FromJsAny for CheckVisibilityOptions
 pub impl TJsValue for CheckVisibilityOptions
 
 #external
+pub type Client
+pub fn[T : TClient] Client::into(Self) -> T
+pub impl FromJsAny for Client
+pub impl TClient for Client
+pub impl TClientsGet for Client
+pub impl TExtendableMessageEventInitGetSource for Client
+pub impl TExtendableMessageEventInitNewSource for Client
+pub impl TExtendableMessageEventSource for Client
+pub impl TJsValue for Client
+
+#external
+pub type ClientQueryOptions
+pub fn ClientQueryOptions::empty() -> Self
+pub fn ClientQueryOptions::include_uncontrolled(Self) -> Bool?
+pub fn ClientQueryOptions::new(include_uncontrolled? : Bool, type_? : ClientType) -> Self
+pub fn ClientQueryOptions::type_(Self) -> ClientType?
+pub impl FromJsAny for ClientQueryOptions
+pub impl TJsValue for ClientQueryOptions
+
+pub(all) enum ClientType {
+  Window
+  Worker
+  Sharedworker
+  All
+}
+pub fn ClientType::from(String) -> Self?
+pub fn ClientType::value(Self) -> String
+pub impl FromJsAny for ClientType
+pub impl TJsValue for ClientType
+pub impl Eq for ClientType
+pub impl Show for ClientType
+
+#external
+pub type Clients
+pub fn[T : TClients] Clients::into(Self) -> T
+pub impl FromJsAny for Clients
+pub impl TClients for Clients
+pub impl TJsValue for Clients
+
+#external
 pub type Clipboard
 pub fn[T : TClipboard] Clipboard::into(Self) -> T
 pub impl FromJsAny for Clipboard
@@ -1148,6 +1212,15 @@ pub fn ClipboardItemOptions::new(presentation_style? : PresentationStyle) -> Sel
 pub fn ClipboardItemOptions::presentation_style(Self) -> PresentationStyle?
 pub impl FromJsAny for ClipboardItemOptions
 pub impl TJsValue for ClipboardItemOptions
+
+#external
+pub type ClipboardPermissionDescriptor
+pub fn ClipboardPermissionDescriptor::allow_without_gesture(Self) -> Bool?
+pub fn ClipboardPermissionDescriptor::empty() -> Self
+pub fn ClipboardPermissionDescriptor::name(Self) -> String
+pub fn ClipboardPermissionDescriptor::new(String, allow_without_gesture? : Bool) -> Self
+pub impl FromJsAny for ClipboardPermissionDescriptor
+pub impl TJsValue for ClipboardPermissionDescriptor
 
 #external
 pub type ClipboardUnsanitizedFormats
@@ -2044,11 +2117,97 @@ pub impl TEventTarget for EventTarget
 pub impl TJsValue for EventTarget
 
 #external
+pub type ExtendableEvent
+pub fn[T : TExtendableEvent] ExtendableEvent::into(Self) -> T
+pub fn ExtendableEvent::new(String, event_init_dict? : ExtendableEventInit) -> Self
+pub impl FromJsAny for ExtendableEvent
+pub impl TEvent for ExtendableEvent
+pub impl TExtendableEvent for ExtendableEvent
+pub impl TJsValue for ExtendableEvent
+
+#external
+pub type ExtendableEventInit
+pub fn ExtendableEventInit::bubbles(Self) -> Bool?
+pub fn ExtendableEventInit::cancelable(Self) -> Bool?
+pub fn ExtendableEventInit::composed(Self) -> Bool?
+pub fn ExtendableEventInit::empty() -> Self
+pub fn ExtendableEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool) -> Self
+pub impl FromJsAny for ExtendableEventInit
+pub impl TJsValue for ExtendableEventInit
+
+#external
+pub type ExtendableMessageEvent
+pub fn[T : TExtendableMessageEvent] ExtendableMessageEvent::into(Self) -> T
+pub fn ExtendableMessageEvent::new(String, event_init_dict? : ExtendableMessageEventInit) -> Self
+pub impl FromJsAny for ExtendableMessageEvent
+pub impl TEvent for ExtendableMessageEvent
+pub impl TExtendableEvent for ExtendableMessageEvent
+pub impl TExtendableMessageEvent for ExtendableMessageEvent
+pub impl TJsValue for ExtendableMessageEvent
+
+#external
+pub type ExtendableMessageEventInit
+pub fn ExtendableMessageEventInit::bubbles(Self) -> Bool?
+pub fn ExtendableMessageEventInit::cancelable(Self) -> Bool?
+pub fn ExtendableMessageEventInit::composed(Self) -> Bool?
+pub fn ExtendableMessageEventInit::data(Self) -> JsValue?
+pub fn ExtendableMessageEventInit::empty() -> Self
+pub fn ExtendableMessageEventInit::last_event_id(Self) -> String?
+pub fn ExtendableMessageEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : &TExtendableMessageEventInitNewSource, ports? : Array[MessagePort]) -> Self
+pub fn ExtendableMessageEventInit::origin(Self) -> String?
+pub fn ExtendableMessageEventInit::ports(Self) -> Array[MessagePort]?
+pub fn ExtendableMessageEventInit::source(Self) -> ExtendableMessageEventInitGetSource?
+pub impl FromJsAny for ExtendableMessageEventInit
+pub impl TJsValue for ExtendableMessageEventInit
+
+#external
+pub type ExtendableMessageEventInitGetSource
+pub fn[T : TExtendableMessageEventInitGetSource] ExtendableMessageEventInitGetSource::from(T) -> Self
+pub fn[T : TExtendableMessageEventInitGetSource + FromJsAny] ExtendableMessageEventInitGetSource::into(Self) -> T
+pub impl FromJsAny for ExtendableMessageEventInitGetSource
+pub impl TExtendableMessageEventInitGetSource for ExtendableMessageEventInitGetSource
+pub impl TJsValue for ExtendableMessageEventInitGetSource
+
+#external
+pub type ExtendableMessageEventSource
+pub fn[T : TExtendableMessageEventSource] ExtendableMessageEventSource::from(T) -> Self
+pub fn[T : TExtendableMessageEventSource + FromJsAny] ExtendableMessageEventSource::into(Self) -> T
+pub impl FromJsAny for ExtendableMessageEventSource
+pub impl TExtendableMessageEventSource for ExtendableMessageEventSource
+pub impl TJsValue for ExtendableMessageEventSource
+
+#external
 pub type External
 pub fn[T : TExternal] External::into(Self) -> T
 pub impl FromJsAny for External
 pub impl TExternal for External
 pub impl TJsValue for External
+
+#external
+pub type FetchEvent
+pub fn[T : TFetchEvent] FetchEvent::into(Self) -> T
+pub fn FetchEvent::new(String, FetchEventInit) -> Self
+pub impl FromJsAny for FetchEvent
+pub impl TEvent for FetchEvent
+pub impl TExtendableEvent for FetchEvent
+pub impl TFetchEvent for FetchEvent
+pub impl TJsValue for FetchEvent
+
+#external
+pub type FetchEventInit
+pub fn FetchEventInit::bubbles(Self) -> Bool?
+pub fn FetchEventInit::cancelable(Self) -> Bool?
+pub fn FetchEventInit::client_id(Self) -> String?
+pub fn FetchEventInit::composed(Self) -> Bool?
+pub fn FetchEventInit::empty() -> Self
+pub fn FetchEventInit::handled(Self) -> JsPromise[JsValue]?
+pub fn FetchEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, &TRequest, preload_response? : JsPromise[JsValue], client_id? : String, resulting_client_id? : String, replaces_client_id? : String, handled? : JsPromise[JsValue]) -> Self
+pub fn FetchEventInit::preload_response(Self) -> JsPromise[JsValue]?
+pub fn FetchEventInit::replaces_client_id(Self) -> String?
+pub fn FetchEventInit::request(Self) -> Request
+pub fn FetchEventInit::resulting_client_id(Self) -> String?
+pub impl FromJsAny for FetchEventInit
+pub impl TJsValue for FetchEventInit
 
 #external
 pub type FetchLaterResult
@@ -2221,6 +2380,19 @@ pub type FrameRequestCallback
 pub fn FrameRequestCallback::new((Double) -> Unit) -> Self
 pub impl FromJsAny for FrameRequestCallback
 pub impl TJsValue for FrameRequestCallback
+
+pub(all) enum FrameType {
+  Auxiliary
+  TopLevel
+  Nested
+  None
+}
+pub fn FrameType::from(String) -> Self?
+pub fn FrameType::value(Self) -> String
+pub impl FromJsAny for FrameType
+pub impl TJsValue for FrameType
+pub impl Eq for FrameType
+pub impl Show for FrameType
 
 pub(all) enum FullscreenNavigationUI {
   Auto
@@ -3740,6 +3912,16 @@ pub impl FromJsAny for InputEventInit
 pub impl TJsValue for InputEventInit
 
 #external
+pub type InstallEvent
+pub fn[T : TInstallEvent] InstallEvent::into(Self) -> T
+pub fn InstallEvent::new(String, event_init_dict? : ExtendableEventInit) -> Self
+pub impl FromJsAny for InstallEvent
+pub impl TEvent for InstallEvent
+pub impl TExtendableEvent for InstallEvent
+pub impl TInstallEvent for InstallEvent
+pub impl TJsValue for InstallEvent
+
+#external
 pub type Int16Array
 pub impl FromJsAny for Int16Array
 pub impl TArrayBufferView for Int16Array
@@ -3860,8 +4042,12 @@ pub type JsUndefined
 #as_free_fn
 pub fn JsUndefined::undefined() -> Self
 pub impl FromJsAny for JsUndefined
+pub impl TCacheMatch for JsUndefined
+pub impl TCacheStorageMatch for JsUndefined
+pub impl TClientsGet for JsUndefined
 pub impl TCustomElementRegistryGet for JsUndefined
 pub impl TJsValue for JsUndefined
+pub impl TServiceWorkerContainerGetRegistration for JsUndefined
 pub impl TWindowEvent for JsUndefined
 
 #external
@@ -4103,6 +4289,9 @@ pub type MessagePort
 pub fn[T : TMessagePort] MessagePort::into(Self) -> T
 pub impl FromJsAny for MessagePort
 pub impl TEventTarget for MessagePort
+pub impl TExtendableMessageEventInitGetSource for MessagePort
+pub impl TExtendableMessageEventInitNewSource for MessagePort
+pub impl TExtendableMessageEventSource for MessagePort
 pub impl TJsValue for MessagePort
 pub impl TMessageEventSource for MessagePort
 pub impl TMessagePort for MessagePort
@@ -4164,6 +4353,17 @@ pub fn MouseEventInit::view(Self) -> Window?
 pub fn MouseEventInit::which(Self) -> UInt?
 pub impl FromJsAny for MouseEventInit
 pub impl TJsValue for MouseEventInit
+
+#external
+pub type MultiCacheQueryOptions
+pub fn MultiCacheQueryOptions::cache_name(Self) -> String?
+pub fn MultiCacheQueryOptions::empty() -> Self
+pub fn MultiCacheQueryOptions::ignore_method(Self) -> Bool?
+pub fn MultiCacheQueryOptions::ignore_search(Self) -> Bool?
+pub fn MultiCacheQueryOptions::ignore_vary(Self) -> Bool?
+pub fn MultiCacheQueryOptions::new(ignore_search? : Bool, ignore_method? : Bool, ignore_vary? : Bool, cache_name? : String) -> Self
+pub impl FromJsAny for MultiCacheQueryOptions
+pub impl TJsValue for MultiCacheQueryOptions
 
 #external
 pub type MutationCallback
@@ -4360,6 +4560,22 @@ pub impl FromJsAny for NavigationPrecommitHandler
 pub impl TJsValue for NavigationPrecommitHandler
 
 #external
+pub type NavigationPreloadManager
+pub fn[T : TNavigationPreloadManager] NavigationPreloadManager::into(Self) -> T
+pub impl FromJsAny for NavigationPreloadManager
+pub impl TJsValue for NavigationPreloadManager
+pub impl TNavigationPreloadManager for NavigationPreloadManager
+
+#external
+pub type NavigationPreloadState
+pub fn NavigationPreloadState::empty() -> Self
+pub fn NavigationPreloadState::enabled(Self) -> Bool?
+pub fn NavigationPreloadState::header_value(Self) -> String?
+pub fn NavigationPreloadState::new(enabled? : Bool, header_value? : String) -> Self
+pub impl FromJsAny for NavigationPreloadState
+pub impl TJsValue for NavigationPreloadState
+
+#external
 pub type NavigationReloadOptions
 pub fn NavigationReloadOptions::empty() -> Self
 pub fn NavigationReloadOptions::info(Self) -> JsValue?
@@ -4517,6 +4733,18 @@ pub impl FromJsAny for NotificationDirection
 pub impl TJsValue for NotificationDirection
 pub impl Eq for NotificationDirection
 pub impl Show for NotificationDirection
+
+#external
+pub type NotificationEventInit
+pub fn NotificationEventInit::action(Self) -> String?
+pub fn NotificationEventInit::bubbles(Self) -> Bool?
+pub fn NotificationEventInit::cancelable(Self) -> Bool?
+pub fn NotificationEventInit::composed(Self) -> Bool?
+pub fn NotificationEventInit::empty() -> Self
+pub fn NotificationEventInit::new(bubbles? : Bool, cancelable? : Bool, composed? : Bool, &TNotification, action? : String) -> Self
+pub fn NotificationEventInit::notification(Self) -> Notification
+pub impl FromJsAny for NotificationEventInit
+pub impl TJsValue for NotificationEventInit
 
 #external
 pub type NotificationOptions
@@ -4820,6 +5048,50 @@ pub fn PerformanceObserverInit::new(entry_types? : Array[String], type_? : Strin
 pub fn PerformanceObserverInit::type_(Self) -> String?
 pub impl FromJsAny for PerformanceObserverInit
 pub impl TJsValue for PerformanceObserverInit
+
+#external
+pub type PermissionDescriptor
+pub fn PermissionDescriptor::empty() -> Self
+pub fn PermissionDescriptor::name(Self) -> String
+pub fn PermissionDescriptor::new(String) -> Self
+pub impl FromJsAny for PermissionDescriptor
+pub impl TJsValue for PermissionDescriptor
+
+#external
+pub type PermissionSetParameters
+pub fn PermissionSetParameters::descriptor(Self) -> JsValue
+pub fn PermissionSetParameters::empty() -> Self
+pub fn PermissionSetParameters::new(JsValue, PermissionState) -> Self
+pub fn PermissionSetParameters::state(Self) -> PermissionState
+pub impl FromJsAny for PermissionSetParameters
+pub impl TJsValue for PermissionSetParameters
+
+pub(all) enum PermissionState {
+  Granted
+  Denied
+  Prompt
+}
+pub fn PermissionState::from(String) -> Self?
+pub fn PermissionState::value(Self) -> String
+pub impl FromJsAny for PermissionState
+pub impl TJsValue for PermissionState
+pub impl Eq for PermissionState
+pub impl Show for PermissionState
+
+#external
+pub type PermissionStatus
+pub fn[T : TPermissionStatus] PermissionStatus::into(Self) -> T
+pub impl FromJsAny for PermissionStatus
+pub impl TEventTarget for PermissionStatus
+pub impl TJsValue for PermissionStatus
+pub impl TPermissionStatus for PermissionStatus
+
+#external
+pub type Permissions
+pub fn[T : TPermissions] Permissions::into(Self) -> T
+pub impl FromJsAny for Permissions
+pub impl TJsValue for Permissions
+pub impl TPermissions for Permissions
 
 pub(all) enum PlaybackDirection {
   Normal
@@ -5228,6 +5500,16 @@ pub impl Eq for ReferrerPolicy
 pub impl Show for ReferrerPolicy
 
 #external
+pub type RegistrationOptions
+pub fn RegistrationOptions::empty() -> Self
+pub fn RegistrationOptions::new(scope? : String, type_? : WorkerType, update_via_cache? : ServiceWorkerUpdateViaCache) -> Self
+pub fn RegistrationOptions::scope(Self) -> String?
+pub fn RegistrationOptions::type_(Self) -> WorkerType?
+pub fn RegistrationOptions::update_via_cache(Self) -> ServiceWorkerUpdateViaCache?
+pub impl FromJsAny for RegistrationOptions
+pub impl TJsValue for RegistrationOptions
+
+#external
 pub type RenderingContext
 pub fn[T : TRenderingContext] RenderingContext::from(T) -> Self
 pub fn[T : TRenderingContext + FromJsAny] RenderingContext::into(Self) -> T
@@ -5447,6 +5729,8 @@ pub fn Response::json(JsValue, init? : ResponseInit) -> Self
 pub fn Response::new(body? : &TBodyInit, init? : ResponseInit) -> Self
 pub fn Response::redirect(String, status? : UInt) -> Self
 pub impl FromJsAny for Response
+pub impl TCacheMatch for Response
+pub impl TCacheStorageMatch for Response
 pub impl TJsValue for Response
 pub impl TResponse for Response
 
@@ -5474,6 +5758,72 @@ pub impl FromJsAny for ResponseType
 pub impl TJsValue for ResponseType
 pub impl Eq for ResponseType
 pub impl Show for ResponseType
+
+#external
+pub type RouterCondition
+pub fn RouterCondition::_or(Self) -> Array[Self]?
+pub fn RouterCondition::empty() -> Self
+pub fn RouterCondition::new(url_pattern? : URLPatternCompatible, request_method? : String, request_mode? : RequestMode, request_destination? : RequestDestination, running_status? : RunningStatus, _or? : Array[Self], not? : Self) -> Self
+pub fn RouterCondition::not(Self) -> Self?
+pub fn RouterCondition::request_destination(Self) -> RequestDestination?
+pub fn RouterCondition::request_method(Self) -> String?
+pub fn RouterCondition::request_mode(Self) -> RequestMode?
+pub fn RouterCondition::running_status(Self) -> RunningStatus?
+pub fn RouterCondition::url_pattern(Self) -> URLPatternCompatible?
+pub impl FromJsAny for RouterCondition
+pub impl TJsValue for RouterCondition
+
+#external
+pub type RouterRule
+pub fn RouterRule::condition(Self) -> RouterCondition
+pub fn RouterRule::empty() -> Self
+pub fn RouterRule::new(RouterCondition, &TRouterSource) -> Self
+pub fn RouterRule::source(Self) -> RouterSource
+pub impl FromJsAny for RouterRule
+pub impl TInstallEventAddRoutesRules for RouterRule
+pub impl TJsValue for RouterRule
+
+#external
+pub type RouterSource
+pub fn[T : TRouterSource] RouterSource::from(T) -> Self
+pub fn[T : TRouterSource + FromJsAny] RouterSource::into(Self) -> T
+pub impl FromJsAny for RouterSource
+pub impl TJsValue for RouterSource
+pub impl TRouterSource for RouterSource
+
+#external
+pub type RouterSourceDict
+pub fn RouterSourceDict::cache_name(Self) -> String?
+pub fn RouterSourceDict::empty() -> Self
+pub fn RouterSourceDict::new(cache_name? : String) -> Self
+pub impl FromJsAny for RouterSourceDict
+pub impl TJsValue for RouterSourceDict
+pub impl TRouterSource for RouterSourceDict
+
+pub(all) enum RouterSourceEnum {
+  Cache
+  FetchEvent
+  Network
+  RaceNetworkAndFetchHandler
+}
+pub fn RouterSourceEnum::from(String) -> Self?
+pub fn RouterSourceEnum::value(Self) -> String
+pub impl FromJsAny for RouterSourceEnum
+pub impl TJsValue for RouterSourceEnum
+pub impl TRouterSource for RouterSourceEnum
+pub impl Eq for RouterSourceEnum
+pub impl Show for RouterSourceEnum
+
+pub(all) enum RunningStatus {
+  Running
+  NotRunning
+}
+pub fn RunningStatus::from(String) -> Self?
+pub fn RunningStatus::value(Self) -> String
+pub impl FromJsAny for RunningStatus
+pub impl TJsValue for RunningStatus
+pub impl Eq for RunningStatus
+pub impl Show for RunningStatus
 
 #external
 pub type SVGAElement
@@ -6201,9 +6551,68 @@ pub impl Show for SelectionMode
 
 #external
 pub type ServiceWorker
+pub fn[T : TServiceWorker] ServiceWorker::into(Self) -> T
 pub impl FromJsAny for ServiceWorker
+pub impl TEventTarget for ServiceWorker
+pub impl TExtendableMessageEventInitGetSource for ServiceWorker
+pub impl TExtendableMessageEventInitNewSource for ServiceWorker
+pub impl TExtendableMessageEventSource for ServiceWorker
 pub impl TJsValue for ServiceWorker
 pub impl TMessageEventSource for ServiceWorker
+pub impl TServiceWorker for ServiceWorker
+
+#external
+pub type ServiceWorkerContainer
+pub fn[T : TServiceWorkerContainer] ServiceWorkerContainer::into(Self) -> T
+pub impl FromJsAny for ServiceWorkerContainer
+pub impl TEventTarget for ServiceWorkerContainer
+pub impl TJsValue for ServiceWorkerContainer
+pub impl TServiceWorkerContainer for ServiceWorkerContainer
+
+#external
+pub type ServiceWorkerGlobalScope
+pub fn[T : TServiceWorkerGlobalScope] ServiceWorkerGlobalScope::into(Self) -> T
+pub impl FromJsAny for ServiceWorkerGlobalScope
+pub impl TEventTarget for ServiceWorkerGlobalScope
+pub impl TJsValue for ServiceWorkerGlobalScope
+pub impl TServiceWorkerGlobalScope for ServiceWorkerGlobalScope
+pub impl TWorkerGlobalScope for ServiceWorkerGlobalScope
+
+#external
+pub type ServiceWorkerRegistration
+pub fn[T : TServiceWorkerRegistration] ServiceWorkerRegistration::into(Self) -> T
+pub impl FromJsAny for ServiceWorkerRegistration
+pub impl TEventTarget for ServiceWorkerRegistration
+pub impl TJsValue for ServiceWorkerRegistration
+pub impl TServiceWorkerContainerGetRegistration for ServiceWorkerRegistration
+pub impl TServiceWorkerRegistration for ServiceWorkerRegistration
+
+pub(all) enum ServiceWorkerState {
+  Parsed
+  Installing
+  Installed
+  Activating
+  Activated
+  Redundant
+}
+pub fn ServiceWorkerState::from(String) -> Self?
+pub fn ServiceWorkerState::value(Self) -> String
+pub impl FromJsAny for ServiceWorkerState
+pub impl TJsValue for ServiceWorkerState
+pub impl Eq for ServiceWorkerState
+pub impl Show for ServiceWorkerState
+
+pub(all) enum ServiceWorkerUpdateViaCache {
+  Imports
+  All
+  None
+}
+pub fn ServiceWorkerUpdateViaCache::from(String) -> Self?
+pub fn ServiceWorkerUpdateViaCache::value(Self) -> String
+pub impl FromJsAny for ServiceWorkerUpdateViaCache
+pub impl TJsValue for ServiceWorkerUpdateViaCache
+pub impl Eq for ServiceWorkerUpdateViaCache
+pub impl Show for ServiceWorkerUpdateViaCache
 
 #external
 pub type ShadowAnimation
@@ -6840,6 +7249,7 @@ pub fn[T : TTrustedScriptURL] TrustedScriptURL::into(Self) -> T
 pub impl FromJsAny for TrustedScriptURL
 pub impl TJsValue for TrustedScriptURL
 pub impl TSVGAnimatedStringBaseVal for TrustedScriptURL
+pub impl TServiceWorkerContainerRegisterScriptURL for TrustedScriptURL
 pub impl TSharedWorkerNewScriptURL for TrustedScriptURL
 pub impl TTrustedScriptURL for TrustedScriptURL
 pub impl TTrustedType for TrustedScriptURL
@@ -6913,6 +7323,11 @@ pub fn URL::revoke_object_url(String) -> Unit
 pub impl FromJsAny for URL
 pub impl TJsValue for URL
 pub impl TURL for URL
+
+#external
+pub type URLPatternCompatible
+pub impl FromJsAny for URLPatternCompatible
+pub impl TJsValue for URLPatternCompatible
 
 #external
 pub type URLSearchParams
@@ -7185,6 +7600,14 @@ pub impl TEventTarget for Window
 pub impl TJsValue for Window
 pub impl TMessageEventSource for Window
 pub impl TWindow for Window
+
+#external
+pub type WindowClient
+pub fn[T : TWindowClient] WindowClient::into(Self) -> T
+pub impl FromJsAny for WindowClient
+pub impl TClient for WindowClient
+pub impl TJsValue for WindowClient
+pub impl TWindowClient for WindowClient
 
 #external
 pub type WindowEvent
@@ -7727,6 +8150,32 @@ pub(open) trait TCSSStyleSheetInitNewMedia {
 }
 pub impl TCSSStyleSheetInitNewMedia for String
 
+pub trait TCache : TJsValue {
+  match_(Self, &TRequestInfo, options? : CacheQueryOptions) -> JsPromise[&TCacheMatch]
+  match_all(Self, request? : &TRequestInfo, options? : CacheQueryOptions) -> JsPromise[Array[Response]]
+  add(Self, &TRequestInfo) -> JsPromise[JsValue]
+  add_all(Self, Array[RequestInfo]) -> JsPromise[JsValue]
+  put(Self, &TRequestInfo, &TResponse) -> JsPromise[JsValue]
+  delete(Self, &TRequestInfo, options? : CacheQueryOptions) -> JsPromise[Bool]
+  keys(Self, request? : &TRequestInfo, options? : CacheQueryOptions) -> JsPromise[Array[Request]]
+}
+
+pub(open) trait TCacheMatch {
+  to_js(Self) -> JsValue
+}
+
+pub trait TCacheStorage : TJsValue {
+  match_(Self, &TRequestInfo, options? : MultiCacheQueryOptions) -> JsPromise[&TCacheStorageMatch]
+  has(Self, String) -> JsPromise[Bool]
+  open(Self, String) -> JsPromise[Cache]
+  delete(Self, String) -> JsPromise[Bool]
+  keys(Self) -> JsPromise[Array[String]]
+}
+
+pub(open) trait TCacheStorageMatch {
+  to_js(Self) -> JsValue
+}
+
 pub trait TCanvasGradient : TJsValue {
   add_color_stop(Self, Double, String) -> Unit
 }
@@ -7911,6 +8360,26 @@ pub(open) trait TCharacterDataReplaceWithNodes {
   to_js(Self) -> JsValue
 }
 pub impl TCharacterDataReplaceWithNodes for String
+
+pub trait TClient : TJsValue {
+  url(Self) -> String
+  frame_type(Self) -> FrameType
+  id(Self) -> String
+  type_(Self) -> ClientType
+  post_message(Self, JsValue, Array[JsValue]) -> Unit
+  post_message_with_options(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
+}
+
+pub trait TClients : TJsValue {
+  get(Self, String) -> JsPromise[&TClientsGet]
+  match_all(Self, options? : ClientQueryOptions) -> JsPromise[Array[Client]]
+  open_window(Self, String) -> JsPromise[WindowClient]
+  claim(Self) -> JsPromise[JsValue]
+}
+
+pub(open) trait TClientsGet {
+  to_js(Self) -> JsValue
+}
 
 pub trait TClipboard : TEventTarget {
   read(Self, formats? : ClipboardUnsanitizedFormats) -> JsPromise[Array[ClipboardItem]]
@@ -8953,9 +9422,43 @@ pub(open) trait TEventTargetRemoveEventListenerOptions {
 }
 pub impl TEventTargetRemoveEventListenerOptions for Bool
 
+pub trait TExtendableEvent : TEvent {
+  wait_until(Self, JsPromise[JsValue]) -> Unit
+}
+
+pub trait TExtendableMessageEvent : TExtendableEvent {
+  data(Self) -> JsValue
+  origin(Self) -> String
+  last_event_id(Self) -> String
+  source(Self) -> ExtendableMessageEventSource
+  ports(Self) -> Array[MessagePort]
+}
+
+pub(open) trait TExtendableMessageEventInitGetSource {
+  to_js(Self) -> JsValue
+}
+
+pub(open) trait TExtendableMessageEventInitNewSource {
+  to_js(Self) -> JsValue
+}
+
+pub(open) trait TExtendableMessageEventSource {
+  to_js(Self) -> JsValue
+}
+
 pub trait TExternal : TJsValue {
   add_search_provider(Self) -> Unit
   is_search_provider_installed(Self) -> Unit
+}
+
+pub trait TFetchEvent : TExtendableEvent {
+  request(Self) -> Request
+  preload_response(Self) -> JsPromise[JsValue]
+  client_id(Self) -> String
+  resulting_client_id(Self) -> String
+  replaces_client_id(Self) -> String
+  handled(Self) -> JsPromise[JsValue]
+  respond_with(Self, JsPromise[Response]) -> Unit
 }
 
 pub trait TFetchLaterResult : TJsValue {
@@ -10896,6 +11399,15 @@ pub trait TInputEvent : TUIEvent {
   input_type(Self) -> String
 }
 
+pub trait TInstallEvent : TExtendableEvent {
+  add_routes(Self, &TInstallEventAddRoutesRules) -> JsPromise[JsValue]
+}
+
+pub(open) trait TInstallEventAddRoutesRules {
+  to_js(Self) -> JsValue
+}
+pub impl TInstallEventAddRoutesRules for Array[RouterRule]
+
 pub trait TIntersectionObserver : TJsValue {
   root(Self) -> IntersectionObserverRoot
   root_margin(Self) -> String
@@ -11244,6 +11756,13 @@ pub trait TNavigationPrecommitController : TJsValue {
   add_handler(Self, () -> JsPromise[JsValue]) -> Unit
 }
 
+pub trait TNavigationPreloadManager : TJsValue {
+  enable(Self) -> JsPromise[JsValue]
+  disable(Self) -> JsPromise[JsValue]
+  set_header_value(Self, String) -> JsPromise[JsValue]
+  get_state(Self) -> JsPromise[NavigationPreloadState]
+}
+
 pub trait TNavigationTransition : TJsValue {
   navigation_type(Self) -> NavigationType
   from(Self) -> NavigationHistoryEntry
@@ -11255,8 +11774,10 @@ pub trait TNavigationTransition : TJsValue {
 pub trait TNavigator : TJsValue {
   user_activation(Self) -> UserActivation
   vibrate(Self, &TVibratePattern) -> Bool
+  permissions(Self) -> Permissions
   max_touch_points(Self) -> Int
   clipboard(Self) -> Clipboard
+  service_worker(Self) -> ServiceWorkerContainer
   app_code_name(Self) -> String
   app_name(Self) -> String
   app_version(Self) -> String
@@ -11618,6 +12139,17 @@ pub trait TPerformanceObserverEntryList : TJsValue {
   get_entries_by_name(Self, String, type_? : String) -> Array[PerformanceEntry]
 }
 
+pub trait TPermissionStatus : TEventTarget {
+  state(Self) -> PermissionState
+  name(Self) -> String
+  onchange(Self) -> EventHandlerNonNull
+  set_onchange(Self, (Event) -> JsValue) -> Unit
+}
+
+pub trait TPermissions : TJsValue {
+  query(Self, JsValue) -> JsPromise[PermissionStatus]
+}
+
 pub trait TPlugin : TJsValue {
   name(Self) -> String
   description(Self) -> String
@@ -11840,6 +12372,10 @@ pub trait TResponse : TJsValue {
   form_data(Self) -> JsPromise[FormData]
   json_body(Self) -> JsPromise[JsValue]
   text(Self) -> JsPromise[String]
+}
+
+pub(open) trait TRouterSource {
+  to_js(Self) -> JsValue
 }
 
 pub trait TSVGAElement : TSVGGraphicsElement {
@@ -12607,6 +13143,77 @@ pub trait TSelection : TJsValue {
   modify(Self, alter? : String, direction? : String, granularity? : String) -> Unit
   delete_from_document(Self) -> Unit
   contains_node(Self, &TNode, allow_partial_containment? : Bool) -> Bool
+}
+
+pub trait TServiceWorker : TEventTarget {
+  script_url(Self) -> String
+  state(Self) -> ServiceWorkerState
+  post_message(Self, JsValue, Array[JsValue]) -> Unit
+  post_message_with_options(Self, JsValue, options? : StructuredSerializeOptions) -> Unit
+  onstatechange(Self) -> EventHandlerNonNull
+  set_onstatechange(Self, (Event) -> JsValue) -> Unit
+  onerror(Self) -> EventHandlerNonNull
+  set_onerror(Self, (Event) -> JsValue) -> Unit
+}
+
+pub trait TServiceWorkerContainer : TEventTarget {
+  controller(Self) -> ServiceWorker
+  ready(Self) -> JsPromise[ServiceWorkerRegistration]
+  register(Self, &TServiceWorkerContainerRegisterScriptURL, options? : RegistrationOptions) -> JsPromise[ServiceWorkerRegistration]
+  get_registration(Self, client_url? : String) -> JsPromise[&TServiceWorkerContainerGetRegistration]
+  get_registrations(Self) -> JsPromise[Array[ServiceWorkerRegistration]]
+  start_messages(Self) -> Unit
+  oncontrollerchange(Self) -> EventHandlerNonNull
+  set_oncontrollerchange(Self, (Event) -> JsValue) -> Unit
+  onmessage(Self) -> EventHandlerNonNull
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
+  onmessageerror(Self) -> EventHandlerNonNull
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
+}
+
+pub(open) trait TServiceWorkerContainerGetRegistration {
+  to_js(Self) -> JsValue
+}
+
+pub(open) trait TServiceWorkerContainerRegisterScriptURL {
+  to_js(Self) -> JsValue
+}
+pub impl TServiceWorkerContainerRegisterScriptURL for String
+
+pub trait TServiceWorkerGlobalScope : TWorkerGlobalScope {
+  onnotificationclick(Self) -> EventHandlerNonNull
+  set_onnotificationclick(Self, (Event) -> JsValue) -> Unit
+  onnotificationclose(Self) -> EventHandlerNonNull
+  set_onnotificationclose(Self, (Event) -> JsValue) -> Unit
+  clients(Self) -> Clients
+  registration(Self) -> ServiceWorkerRegistration
+  service_worker(Self) -> ServiceWorker
+  skip_waiting(Self) -> JsPromise[JsValue]
+  oninstall(Self) -> EventHandlerNonNull
+  set_oninstall(Self, (Event) -> JsValue) -> Unit
+  onactivate(Self) -> EventHandlerNonNull
+  set_onactivate(Self, (Event) -> JsValue) -> Unit
+  onfetch(Self) -> EventHandlerNonNull
+  set_onfetch(Self, (Event) -> JsValue) -> Unit
+  onmessage(Self) -> EventHandlerNonNull
+  set_onmessage(Self, (Event) -> JsValue) -> Unit
+  onmessageerror(Self) -> EventHandlerNonNull
+  set_onmessageerror(Self, (Event) -> JsValue) -> Unit
+}
+
+pub trait TServiceWorkerRegistration : TEventTarget {
+  show_notification(Self, String, options? : NotificationOptions) -> JsPromise[JsValue]
+  get_notifications(Self, filter? : GetNotificationOptions) -> JsPromise[Array[Notification]]
+  installing(Self) -> ServiceWorker
+  waiting(Self) -> ServiceWorker
+  active(Self) -> ServiceWorker
+  navigation_preload(Self) -> NavigationPreloadManager
+  scope(Self) -> String
+  update_via_cache(Self) -> ServiceWorkerUpdateViaCache
+  update(Self) -> JsPromise[ServiceWorkerRegistration]
+  unregister(Self) -> JsPromise[Bool]
+  onupdatefound(Self) -> EventHandlerNonNull
+  set_onupdatefound(Self, (Event) -> JsValue) -> Unit
 }
 
 pub trait TShadowAnimation : TAnimation {
@@ -13438,10 +14045,19 @@ pub trait TWindow : TEventTarget {
   performance(Self) -> Performance
   indexed_db(Self) -> IDBFactory
   trusted_types(Self) -> TrustedTypePolicyFactory
+  caches(Self) -> CacheStorage
   request_animation_frame(Self, (Double) -> Unit) -> UInt
   cancel_animation_frame(Self, UInt) -> Unit
   session_storage(Self) -> Storage
   local_storage(Self) -> Storage
+}
+
+pub trait TWindowClient : TClient {
+  visibility_state(Self) -> DocumentVisibilityState
+  focused(Self) -> Bool
+  ancestor_origins(Self) -> Array[String]
+  focus(Self) -> JsPromise[WindowClient]
+  navigate(Self, String) -> JsPromise[WindowClient]
 }
 
 pub(open) trait TWindowEvent {
@@ -13495,6 +14111,7 @@ pub trait TWorkerGlobalScope : TEventTarget {
   performance(Self) -> Performance
   indexed_db(Self) -> IDBFactory
   trusted_types(Self) -> TrustedTypePolicyFactory
+  caches(Self) -> CacheStorage
 }
 
 pub(open) trait TWorkerGlobalScopeImportScriptsUrls {
@@ -13515,6 +14132,8 @@ pub trait TWorkerLocation : TJsValue {
 }
 
 pub trait TWorkerNavigator : TJsValue {
+  permissions(Self) -> Permissions
+  service_worker(Self) -> ServiceWorkerContainer
   app_code_name(Self) -> String
   app_name(Self) -> String
   app_version(Self) -> String

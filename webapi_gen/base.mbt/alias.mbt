@@ -70,13 +70,13 @@ pub impl FromJsAny for MediaSource with from_js_any(value : JsAny) -> MediaSourc
 
 ///|
 #external
-pub type ServiceWorker
+pub type URLPatternCompatible
 
 ///|
-pub impl TJsValue for ServiceWorker with to_js(self : ServiceWorker) -> JsValue = "%identity"
+pub impl TJsValue for URLPatternCompatible with to_js(self : URLPatternCompatible) -> JsValue = "%identity"
 
 ///|
-pub impl FromJsAny for ServiceWorker with from_js_any(value : JsAny) -> ServiceWorker = "%identity"
+pub impl FromJsAny for URLPatternCompatible with from_js_any(value : JsAny) -> URLPatternCompatible = "%identity"
 
 ///|
 #external

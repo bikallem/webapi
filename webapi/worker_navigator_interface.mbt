@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: WorkerNavigator
-// Specifications: html.idl
+// Specifications: service-workers.idl, permissions.idl, html.idl
 
 ///|
 /// [WorkerNavigator](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator)
@@ -22,6 +22,8 @@ pub impl TWorkerNavigator for WorkerNavigator
 ///|
 /// [WorkerNavigator](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator) interface.
 pub trait TWorkerNavigator: TJsValue {
+  permissions(self : Self) -> Permissions = _
+  service_worker(self : Self) -> ServiceWorkerContainer = _
   app_code_name(self : Self) -> String = _
   app_name(self : Self) -> String = _
   app_version(self : Self) -> String = _
@@ -38,6 +40,18 @@ pub trait TWorkerNavigator: TJsValue {
   on_line(self : Self) -> Bool = _
   hardware_concurrency(self : Self) -> UInt64 = _
   storage(self : Self) -> StorageManager = _
+}
+
+///|
+/// [WorkerNavigator.permissions](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/permissions)
+impl TWorkerNavigator with permissions(self : Self) -> Permissions {
+  worker_navigator_permissions_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [WorkerNavigator.serviceWorker](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator/serviceWorker)
+impl TWorkerNavigator with service_worker(self : Self) -> ServiceWorkerContainer {
+  worker_navigator_service_worker_ffi(TJsValue::to_js(self))
 }
 
 ///|

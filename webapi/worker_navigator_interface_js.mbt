@@ -1,4 +1,20 @@
 ///|
+extern "js" fn worker_navigator_permissions_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.permissions"
+
+///|
+fn worker_navigator_permissions_ffi(obj : JsValue) -> Permissions {
+  worker_navigator_permissions_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn worker_navigator_service_worker_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.serviceWorker"
+
+///|
+fn worker_navigator_service_worker_ffi(obj : JsValue) -> ServiceWorkerContainer {
+  worker_navigator_service_worker_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn worker_navigator_app_code_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appCodeName"
 
 ///|

@@ -233,3 +233,6 @@ fn worker_global_scope_indexed_db_ffi(obj : JsValue) -> IDBFactory = "webapi_Wor
 fn worker_global_scope_trusted_types_ffi(
   obj : JsValue,
 ) -> TrustedTypePolicyFactory = "webapi_WorkerGlobalScope" "get_trustedTypes"
+
+///|
+fn worker_global_scope_caches_ffi(obj : JsValue) -> CacheStorage = "webapi_WorkerGlobalScope" "get_caches"

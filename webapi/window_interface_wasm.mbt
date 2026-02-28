@@ -1780,6 +1780,9 @@ fn window_indexed_db_ffi(obj : JsValue) -> IDBFactory = "webapi_Window" "get_ind
 fn window_trusted_types_ffi(obj : JsValue) -> TrustedTypePolicyFactory = "webapi_Window" "get_trustedTypes"
 
 ///|
+fn window_caches_ffi(obj : JsValue) -> CacheStorage = "webapi_Window" "get_caches"
+
+///|
 fn window_request_animation_frame_ffi(
   obj : JsValue,
   callback : JsValue,

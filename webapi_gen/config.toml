@@ -39,15 +39,17 @@ core_specs = [
     "streams",
     "web-animations",
     "IndexedDB",
+    "permissions",
+    "service-workers",
 ]
 
-excluded_interfaces = ["OffscreenRenderingContext", "NotificationEvent", "ServiceWorkerRegistration", "ServiceWorkerGlobalScope"]
+excluded_interfaces = ["OffscreenRenderingContext", "NotificationEvent"]
 
 excluded_callbacks = []
 
 excluded_typedefs = ["ClipboardItemData"]
 
-excluded_dictionary_prefixes = ["ClipboardPermission", "NotificationEvent"]
+excluded_dictionary_prefixes = []
 
 # Inject members from source dictionary into target dictionary.
 # Members already present in the target are skipped.

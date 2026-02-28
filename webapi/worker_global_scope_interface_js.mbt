@@ -329,3 +329,11 @@ fn worker_global_scope_trusted_types_ffi(
 ) -> TrustedTypePolicyFactory {
   worker_global_scope_trusted_types_ffi_js(obj).unsafe_cast()
 }
+
+///|
+extern "js" fn worker_global_scope_caches_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.caches"
+
+///|
+fn worker_global_scope_caches_ffi(obj : JsValue) -> CacheStorage {
+  worker_global_scope_caches_ffi_js(obj).unsafe_cast()
+}

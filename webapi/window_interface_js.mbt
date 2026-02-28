@@ -2286,6 +2286,14 @@ fn window_trusted_types_ffi(obj : JsValue) -> TrustedTypePolicyFactory {
 }
 
 ///|
+extern "js" fn window_caches_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.caches"
+
+///|
+fn window_caches_ffi(obj : JsValue) -> CacheStorage {
+  window_caches_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn window_request_animation_frame_ffi_js(
   obj : JsValue,
   callback : JsValue,

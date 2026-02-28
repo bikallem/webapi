@@ -18,6 +18,14 @@ fn navigator_vibrate_ffi(obj : JsValue, pattern : JsValue) -> Bool {
 }
 
 ///|
+extern "js" fn navigator_permissions_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.permissions"
+
+///|
+fn navigator_permissions_ffi(obj : JsValue) -> Permissions {
+  navigator_permissions_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn navigator_max_touch_points_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.maxTouchPoints"
 
 ///|
@@ -31,6 +39,14 @@ extern "js" fn navigator_clipboard_ffi_js(obj : JsValue) -> JsValue = "(obj) => 
 ///|
 fn navigator_clipboard_ffi(obj : JsValue) -> Clipboard {
   navigator_clipboard_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn navigator_service_worker_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.serviceWorker"
+
+///|
+fn navigator_service_worker_ffi(obj : JsValue) -> ServiceWorkerContainer {
+  navigator_service_worker_ffi_js(obj).unsafe_cast()
 }
 
 ///|

@@ -443,6 +443,7 @@ pub trait TWindow: TEventTarget {
   performance(self : Self) -> Performance = _
   indexed_db(self : Self) -> IDBFactory = _
   trusted_types(self : Self) -> TrustedTypePolicyFactory = _
+  caches(self : Self) -> CacheStorage = _
   request_animation_frame(self : Self, callback : (DOMHighResTimeStamp) -> Unit) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
   session_storage(self : Self) -> Storage = _
@@ -2976,6 +2977,12 @@ impl TWindow with indexed_db(self : Self) -> IDBFactory {
 /// [Window.trustedTypes](https://developer.mozilla.org/en-US/docs/Web/API/Window/trustedTypes)
 impl TWindow with trusted_types(self : Self) -> TrustedTypePolicyFactory {
   window_trusted_types_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [Window.caches](https://developer.mozilla.org/en-US/docs/Web/API/Window/caches)
+impl TWindow with caches(self : Self) -> CacheStorage {
+  window_caches_ffi(TJsValue::to_js(self))
 }
 
 ///|
