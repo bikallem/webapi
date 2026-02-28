@@ -173,7 +173,7 @@ Some WebIDL specs split members across related dictionaries (e.g., `duration` li
 
 ### Currently included
 
-`clipboard-apis`, `console`, `cssom`, `cssom-view`, `dom`, `encoding`, `fetch`, `FileAPI`, `fullscreen`, `geometry`, `hr-time`, `html`, `IndexedDB`, `intersection-observer`, `notifications`, `performance-timeline`, `pointerevents`, `referrer-policy`, `requestidlecallback`, `resize-observer`, `screen-orientation`, `selection-api`, `storage`, `streams`, `SVG`, `touch-events`, `trusted-types`, `uievents`, `url`, `vibration`, `web-animations`, `webidl`, `websockets`, `xhr`
+`clipboard-apis`, `console`, `cssom`, `cssom-view`, `dom`, `encoding`, `fetch`, `FileAPI`, `fullscreen`, `geometry`, `hr-time`, `html`, `IndexedDB`, `intersection-observer`, `notifications`, `performance-timeline`, `permissions`, `pointerevents`, `referrer-policy`, `requestidlecallback`, `resize-observer`, `screen-orientation`, `selection-api`, `service-workers`, `storage`, `streams`, `SVG`, `touch-events`, `trusted-types`, `uievents`, `url`, `vibration`, `web-animations`, `webidl`, `websockets`, `xhr`
 
 ### Candidates for inclusion
 
@@ -185,9 +185,7 @@ Some WebIDL specs split members across related dictionaries (e.g., `duration` li
 | `webaudio` | AudioContext, AudioNode | Web Audio API |
 | `webgl1` / `webgl2` | WebGLRenderingContext | WebGL (large surface area) |
 | `mediacapture-streams` | MediaStream, getUserMedia | Camera/mic access |
-| `service-workers` | ServiceWorker, Cache | Offline support |
 | `push-api` | PushManager, PushSubscription | Push notifications backend |
-| `permissions` | Permissions | Query/request permissions |
 | `screen-wake-lock` | WakeLock | Prevent screen sleep |
 | `serial` | SerialPort | Serial port access |
 | `webhid` | HID | Human interface devices |
