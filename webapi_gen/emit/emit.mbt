@@ -276,7 +276,7 @@ fn render_constructor(
   let js = "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\""
   // Wasm FFI
   let module_name = "webapi_\{type_name}"
-  let wasm = "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"\{module_name}\" \"new\""
+  let wasm = "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"\{module_name}\" \"\{constructor_name}\""
   (shared, js, wasm)
 }
 

@@ -6,7 +6,7 @@ fn keyframe_effect_new_ffi(
 ) -> KeyframeEffect = "webapi_KeyframeEffect" "new"
 
 ///|
-fn keyframe_effect_new_2_ffi(source : JsValue) -> KeyframeEffect = "webapi_KeyframeEffect" "new"
+fn keyframe_effect_new_2_ffi(source : JsValue) -> KeyframeEffect = "webapi_KeyframeEffect" "new_2"
 
 ///|
 fn keyframe_effect_target_ffi(obj : JsValue) -> Element = "webapi_KeyframeEffect" "get_target"

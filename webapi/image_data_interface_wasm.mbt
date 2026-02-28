@@ -11,7 +11,7 @@ fn image_data_new_from_array_ffi(
   sw : JsValue,
   sh : JsValue,
   settings : JsValue,
-) -> ImageData = "webapi_ImageData" "new"
+) -> ImageData = "webapi_ImageData" "new_from_array"
 
 ///|
 fn image_data_width_ffi(obj : JsValue) -> UInt = "webapi_ImageData" "get_width"

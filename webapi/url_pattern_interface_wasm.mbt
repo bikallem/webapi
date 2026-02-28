@@ -6,7 +6,7 @@ fn url_pattern_new_ffi(
 ) -> URLPattern = "webapi_URLPattern" "new"
 
 ///|
-fn url_pattern_new_2_ffi(input : JsValue, options : JsValue) -> URLPattern = "webapi_URLPattern" "new"
+fn url_pattern_new_2_ffi(input : JsValue, options : JsValue) -> URLPattern = "webapi_URLPattern" "new_2"
 
 ///|
 fn url_pattern_test_ffi(

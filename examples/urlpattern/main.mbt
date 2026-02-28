@@ -6,6 +6,13 @@ using @webapi {
   type HTMLDivElement,
   type HTMLInputElement,
   type URLPattern,
+  type URLPatternInit,
+}
+
+///|
+/// Create a URLPattern matching only the pathname component.
+fn make_pathname_pattern(pathname : String) -> URLPattern {
+  URLPattern::new_2(input=URLPatternInit::new(pathname~))
 }
 
 ///|

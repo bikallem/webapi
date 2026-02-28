@@ -1115,6 +1115,28 @@ test "mbt_code_gen_multi wasm FFI snapshot for constructor" {
 }
 
 ///|
+test "mbt_code_gen_multi wasm FFI snapshot for overloaded constructors" {
+  let idl =
+    #|interface TestInterface {
+    #|  constructor(DOMString input, DOMString baseURL, optional DOMString options);
+    #|  constructor(optional DOMString input);
+    #|};
+  let interface_emitter = make_interface_emitter(idl)
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.wasm_ffi,
+    content=(
+      #|fn test_interface_new_ffi(input: JsValue, base_url: JsValue, options: JsValue) -> TestInterface = "webapi_TestInterface" "new"
+      #|
+      #|fn test_interface_new_2_ffi(input: JsValue) -> TestInterface = "webapi_TestInterface" "new_2"
+      #|
+      #|
+    ),
+  )
+}
+
+///|
 test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
   let idl =
     #|interface TestInterface {
