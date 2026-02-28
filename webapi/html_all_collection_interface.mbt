@@ -114,6 +114,7 @@ pub trait THTMLAllCollection: TJsValue {
   get_opt(self : Self, index : UInt) -> Element? = _
   named_item(self : Self, name : String) -> HTMLAllCollectionNamedItem? = _
   item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? = _
+  get(self : Self, index : UInt) -> Element = _
 }
 
 ///|
@@ -144,9 +145,6 @@ impl THTMLAllCollection with item(self : Self, name_or_index? : String) -> HTMLA
 }
 
 ///|
-pub fn[T : TElement] HTMLAllCollection::get(
-  self : HTMLAllCollection,
-  index : UInt,
-) -> T {
-  self.get_opt(index).unwrap().into()
+impl THTMLAllCollection with get(self : Self, index : UInt) -> Element {
+  self.get_opt(index).unwrap()
 }

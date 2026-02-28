@@ -457,6 +457,7 @@ pub trait TWindow: TEventTarget {
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
   session_storage(self : Self) -> Storage = _
   local_storage(self : Self) -> Storage = _
+  get_selection(self : Self) -> Selection = _
 }
 
 ///|
@@ -3064,6 +3065,6 @@ impl TWindow with local_storage(self : Self) -> Storage {
 }
 
 ///|
-pub fn[T : TSelection] Window::get_selection(self : Window) -> T {
-  self.get_selection_opt().unwrap().into()
+impl TWindow with get_selection(self : Self) -> Selection {
+  self.get_selection_opt().unwrap()
 }

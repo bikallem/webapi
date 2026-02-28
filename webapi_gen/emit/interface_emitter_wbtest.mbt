@@ -1261,6 +1261,7 @@ test "convenience method for optional interface return" {
       #|pub trait TDocument: TNode {
       #|  query_selector_opt(self : Self, selectors : String) -> Element? = _
       #|  query_selector_all(self : Self, selectors : String) -> NodeList = _
+      #|  query_selector(self : Self, selectors : String) -> Element = _
       #|}
       #|
       #|/// [Document.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
@@ -1275,9 +1276,9 @@ test "convenience method for optional interface return" {
       #|  document_query_selector_all_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
       #|}
       #|
-      #|pub fn[T : TElement] Document::query_selector(self : Document, 
-      #|selectors : String) -> T {
-      #|  self.query_selector_opt(selectors).unwrap().into()
+      #|impl TDocument with query_selector(self : Self, 
+      #|selectors : String) -> Element {
+      #|  self.query_selector_opt(selectors).unwrap()
       #|}
     ),
   )
@@ -1330,6 +1331,7 @@ test "convenience method with optional args" {
       #|/// [ParentNode](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode) interface.
       #|pub trait TParentNode: TJsValue {
       #|  query_selector_opt(self : Self, selectors : String) -> Element? = _
+      #|  query_selector(self : Self, selectors : String) -> Element = _
       #|}
       #|
       #|/// [ParentNode.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector)
@@ -1338,9 +1340,9 @@ test "convenience method with optional args" {
       #|  parent_node_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
       #|}
       #|
-      #|pub fn[T : TElement] ParentNode::query_selector(self : ParentNode, 
-      #|selectors : String) -> T {
-      #|  self.query_selector_opt(selectors).unwrap().into()
+      #|impl TParentNode with query_selector(self : Self, 
+      #|selectors : String) -> Element {
+      #|  self.query_selector_opt(selectors).unwrap()
       #|}
     ),
   )

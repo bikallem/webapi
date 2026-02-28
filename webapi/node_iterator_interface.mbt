@@ -30,6 +30,8 @@ pub trait TNodeIterator: TJsValue {
   next_node_opt(self : Self) -> Node? = _
   previous_node_opt(self : Self) -> Node? = _
   detach(self : Self) -> Unit = _
+  next_node(self : Self) -> Node = _
+  previous_node(self : Self) -> Node = _
 }
 
 ///|
@@ -81,11 +83,11 @@ impl TNodeIterator with detach(self : Self) -> Unit {
 }
 
 ///|
-pub fn[T : TNode] NodeIterator::next_node(self : NodeIterator) -> T {
-  self.next_node_opt().unwrap().into()
+impl TNodeIterator with next_node(self : Self) -> Node {
+  self.next_node_opt().unwrap()
 }
 
 ///|
-pub fn[T : TNode] NodeIterator::previous_node(self : NodeIterator) -> T {
-  self.previous_node_opt().unwrap().into()
+impl TNodeIterator with previous_node(self : Self) -> Node {
+  self.previous_node_opt().unwrap()
 }

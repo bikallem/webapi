@@ -24,6 +24,7 @@ pub impl TFileList for FileList
 pub trait TFileList: TJsValue {
   item_opt(self : Self, index : UInt) -> File? = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> File = _
 }
 
 ///|
@@ -39,6 +40,6 @@ impl TFileList with length(self : Self) -> UInt {
 }
 
 ///|
-pub fn[T : TFile] FileList::item(self : FileList, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TFileList with item(self : Self, index : UInt) -> File {
+  self.item_opt(index).unwrap()
 }

@@ -226,10 +226,10 @@ pub fn URL::revoke_object_url(url : String) -> Unit {
 }
 
 ///|
-pub fn[T : TURL] URL::parse(url : String, base? : String) -> T {
+pub fn URL::parse(url : String, base? : String) -> URL {
   let result = match base {
     Some(base) => URL::parse_opt(url, base~)
     None => URL::parse_opt(url)
   }
-  result.unwrap().into()
+  result.unwrap()
 }

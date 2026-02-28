@@ -24,6 +24,7 @@ pub impl TDOMRectList for DOMRectList
 pub trait TDOMRectList: TJsValue {
   length(self : Self) -> UInt = _
   item_opt(self : Self, index : UInt) -> DOMRect? = _
+  item(self : Self, index : UInt) -> DOMRect = _
 }
 
 ///|
@@ -39,6 +40,6 @@ impl TDOMRectList with item_opt(self : Self, index : UInt) -> DOMRect? {
 }
 
 ///|
-pub fn[T : TDOMRect] DOMRectList::item(self : DOMRectList, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TDOMRectList with item(self : Self, index : UInt) -> DOMRect {
+  self.item_opt(index).unwrap()
 }

@@ -35,6 +35,8 @@ pub trait TVideoTrackList: TEventTarget {
   set_onaddtrack(self : Self, onaddtrack : (Event) -> JsValue) -> Unit = _
   onremovetrack(self : Self) -> EventHandler = _
   set_onremovetrack(self : Self, onremovetrack : (Event) -> JsValue) -> Unit = _
+  get(self : Self, index : UInt) -> VideoTrack = _
+  get_track_by_id(self : Self, id : String) -> VideoTrack = _
 }
 
 ///|
@@ -119,17 +121,11 @@ impl TVideoTrackList with set_onremovetrack(
 }
 
 ///|
-pub fn[T : TVideoTrack] VideoTrackList::get(
-  self : VideoTrackList,
-  index : UInt,
-) -> T {
-  self.get_opt(index).unwrap().into()
+impl TVideoTrackList with get(self : Self, index : UInt) -> VideoTrack {
+  self.get_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TVideoTrack] VideoTrackList::get_track_by_id(
-  self : VideoTrackList,
-  id : String,
-) -> T {
-  self.get_track_by_id_opt(id).unwrap().into()
+impl TVideoTrackList with get_track_by_id(self : Self, id : String) -> VideoTrack {
+  self.get_track_by_id_opt(id).unwrap()
 }

@@ -25,6 +25,8 @@ pub trait THTMLCollection: TJsValue {
   length(self : Self) -> UInt = _
   item_opt(self : Self, index : UInt) -> Element? = _
   named_item_opt(self : Self, name : String) -> Element? = _
+  item(self : Self, index : UInt) -> Element = _
+  named_item(self : Self, name : String) -> Element = _
 }
 
 ///|
@@ -46,17 +48,11 @@ impl THTMLCollection with named_item_opt(self : Self, name : String) -> Element?
 }
 
 ///|
-pub fn[T : TElement] HTMLCollection::item(
-  self : HTMLCollection,
-  index : UInt,
-) -> T {
-  self.item_opt(index).unwrap().into()
+impl THTMLCollection with item(self : Self, index : UInt) -> Element {
+  self.item_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TElement] HTMLCollection::named_item(
-  self : HTMLCollection,
-  name : String,
-) -> T {
-  self.named_item_opt(name).unwrap().into()
+impl THTMLCollection with named_item(self : Self, name : String) -> Element {
+  self.named_item_opt(name).unwrap()
 }

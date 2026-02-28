@@ -34,6 +34,8 @@ pub trait TTextTrackList: TEventTarget {
   set_onaddtrack(self : Self, onaddtrack : (Event) -> JsValue) -> Unit = _
   onremovetrack(self : Self) -> EventHandler = _
   set_onremovetrack(self : Self, onremovetrack : (Event) -> JsValue) -> Unit = _
+  get(self : Self, index : UInt) -> TextTrack = _
+  get_track_by_id(self : Self, id : String) -> TextTrack = _
 }
 
 ///|
@@ -112,17 +114,11 @@ impl TTextTrackList with set_onremovetrack(
 }
 
 ///|
-pub fn[T : TTextTrack] TextTrackList::get(
-  self : TextTrackList,
-  index : UInt,
-) -> T {
-  self.get_opt(index).unwrap().into()
+impl TTextTrackList with get(self : Self, index : UInt) -> TextTrack {
+  self.get_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TTextTrack] TextTrackList::get_track_by_id(
-  self : TextTrackList,
-  id : String,
-) -> T {
-  self.get_track_by_id_opt(id).unwrap().into()
+impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack {
+  self.get_track_by_id_opt(id).unwrap()
 }

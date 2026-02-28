@@ -24,6 +24,7 @@ pub impl TCSSRuleList for CSSRuleList
 pub trait TCSSRuleList: TJsValue {
   item_opt(self : Self, index : UInt) -> CSSRule? = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> CSSRule = _
 }
 
 ///|
@@ -39,6 +40,6 @@ impl TCSSRuleList with length(self : Self) -> UInt {
 }
 
 ///|
-pub fn[T : TCSSRule] CSSRuleList::item(self : CSSRuleList, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TCSSRuleList with item(self : Self, index : UInt) -> CSSRule {
+  self.item_opt(index).unwrap()
 }

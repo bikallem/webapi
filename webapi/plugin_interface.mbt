@@ -28,6 +28,8 @@ pub trait TPlugin: TJsValue {
   length(self : Self) -> UInt = _
   item_opt(self : Self, index : UInt) -> MimeType? = _
   named_item_opt(self : Self, name : String) -> MimeType? = _
+  item(self : Self, index : UInt) -> MimeType = _
+  named_item(self : Self, name : String) -> MimeType = _
 }
 
 ///|
@@ -67,11 +69,11 @@ impl TPlugin with named_item_opt(self : Self, name : String) -> MimeType? {
 }
 
 ///|
-pub fn[T : TMimeType] Plugin::item(self : Plugin, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TPlugin with item(self : Self, index : UInt) -> MimeType {
+  self.item_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TMimeType] Plugin::named_item(self : Plugin, name : String) -> T {
-  self.named_item_opt(name).unwrap().into()
+impl TPlugin with named_item(self : Self, name : String) -> MimeType {
+  self.named_item_opt(name).unwrap()
 }

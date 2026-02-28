@@ -543,6 +543,16 @@ pub trait TDocument: TNode {
     from : &TGeometryNode,
     options? : ConvertCoordinateOptions,
   ) -> DOMPoint = _
+  element_from_point(self : Self, x : Double, y : Double) -> Element = _
+  caret_position_from_point(
+    self : Self,
+    x : Double,
+    y : Double,
+    options? : CaretPositionFromPointOptions,
+  ) -> CaretPosition = _
+  get_selection(self : Self) -> Selection = _
+  get_element_by_id(self : Self, element_id : String) -> Element = _
+  query_selector(self : Self, selectors : String) -> Element = _
 }
 
 ///|
@@ -3155,41 +3165,31 @@ impl TDocument with convert_point_from_node(
 }
 
 ///|
-pub fn[T : TElement] Document::element_from_point(
-  self : Document,
-  x : Double,
-  y : Double,
-) -> T {
-  self.element_from_point_opt(x, y).unwrap().into()
+impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element {
+  self.element_from_point_opt(x, y).unwrap()
 }
 
 ///|
-pub fn[T : TCaretPosition] Document::caret_position_from_point(
-  self : Document,
+impl TDocument with caret_position_from_point(
+  self : Self,
   x : Double,
   y : Double,
   options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
-) -> T {
-  self.caret_position_from_point_opt(x, y, options~).unwrap().into()
+) -> CaretPosition {
+  self.caret_position_from_point_opt(x, y, options~).unwrap()
 }
 
 ///|
-pub fn[T : TSelection] Document::get_selection(self : Document) -> T {
-  self.get_selection_opt().unwrap().into()
+impl TDocument with get_selection(self : Self) -> Selection {
+  self.get_selection_opt().unwrap()
 }
 
 ///|
-pub fn[T : TElement] Document::get_element_by_id(
-  self : Document,
-  element_id : String,
-) -> T {
-  self.get_element_by_id_opt(element_id).unwrap().into()
+impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element {
+  self.get_element_by_id_opt(element_id).unwrap()
 }
 
 ///|
-pub fn[T : TElement] Document::query_selector(
-  self : Document,
-  selectors : String,
-) -> T {
-  self.query_selector_opt(selectors).unwrap().into()
+impl TDocument with query_selector(self : Self, selectors : String) -> Element {
+  self.query_selector_opt(selectors).unwrap()
 }

@@ -392,6 +392,13 @@ pub trait TElement: TNode {
   get_animations(self : Self, options? : GetAnimationsOptions) -> Array[
     Animation,
   ] = _
+  get_attribute_node(self : Self, qualified_name : String) -> Attr = _
+  get_attribute_node_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
+  set_attribute_node(self : Self, attr : &TAttr) -> Attr = _
+  set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr = _
+  closest(self : Self, selectors : String) -> Element = _
+  insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> Element = _
+  query_selector(self : Self, selectors : String) -> Element = _
 }
 
 ///|
@@ -1268,56 +1275,44 @@ impl TElement with get_animations(
 }
 
 ///|
-pub fn[T : TAttr] Element::get_attribute_node(
-  self : Element,
-  qualified_name : String,
-) -> T {
-  self.get_attribute_node_opt(qualified_name).unwrap().into()
+impl TElement with get_attribute_node(self : Self, qualified_name : String) -> Attr {
+  self.get_attribute_node_opt(qualified_name).unwrap()
 }
 
 ///|
-pub fn[T : TAttr] Element::get_attribute_node_ns(
-  self : Element,
+impl TElement with get_attribute_node_ns(
+  self : Self,
   namespace_ : String,
   local_name : String,
-) -> T {
-  self.get_attribute_node_ns_opt(namespace_, local_name).unwrap().into()
+) -> Attr {
+  self.get_attribute_node_ns_opt(namespace_, local_name).unwrap()
 }
 
 ///|
-pub fn[T : TAttr] Element::set_attribute_node(
-  self : Element,
-  attr : &TAttr,
-) -> T {
-  self.set_attribute_node_opt(attr).unwrap().into()
+impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr {
+  self.set_attribute_node_opt(attr).unwrap()
 }
 
 ///|
-pub fn[T : TAttr] Element::set_attribute_node_ns(
-  self : Element,
-  attr : &TAttr,
-) -> T {
-  self.set_attribute_node_ns_opt(attr).unwrap().into()
+impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr {
+  self.set_attribute_node_ns_opt(attr).unwrap()
 }
 
 ///|
-pub fn[T : TElement] Element::closest(self : Element, selectors : String) -> T {
-  self.closest_opt(selectors).unwrap().into()
+impl TElement with closest(self : Self, selectors : String) -> Element {
+  self.closest_opt(selectors).unwrap()
 }
 
 ///|
-pub fn[T : TElement] Element::insert_adjacent_element(
-  self : Element,
+impl TElement with insert_adjacent_element(
+  self : Self,
   where_ : String,
   element : &TElement,
-) -> T {
-  self.insert_adjacent_element_opt(where_, element).unwrap().into()
+) -> Element {
+  self.insert_adjacent_element_opt(where_, element).unwrap()
 }
 
 ///|
-pub fn[T : TElement] Element::query_selector(
-  self : Element,
-  selectors : String,
-) -> T {
-  self.query_selector_opt(selectors).unwrap().into()
+impl TElement with query_selector(self : Self, selectors : String) -> Element {
+  self.query_selector_opt(selectors).unwrap()
 }

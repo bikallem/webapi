@@ -83,6 +83,7 @@ pub trait THTMLObjectElement: THTMLElement {
   set_use_map(self : Self, use_map : String) -> Unit = _
   border(self : Self) -> String = _
   set_border(self : Self, border : String) -> Unit = _
+  get_svg_document(self : Self) -> Document = _
 }
 
 ///|
@@ -380,8 +381,6 @@ impl THTMLObjectElement with set_border(self : Self, border : String) -> Unit {
 }
 
 ///|
-pub fn[T : TDocument] HTMLObjectElement::get_svg_document(
-  self : HTMLObjectElement,
-) -> T {
-  self.get_svg_document_opt().unwrap().into()
+impl THTMLObjectElement with get_svg_document(self : Self) -> Document {
+  self.get_svg_document_opt().unwrap()
 }

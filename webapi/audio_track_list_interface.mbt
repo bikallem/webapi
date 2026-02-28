@@ -34,6 +34,8 @@ pub trait TAudioTrackList: TEventTarget {
   set_onaddtrack(self : Self, onaddtrack : (Event) -> JsValue) -> Unit = _
   onremovetrack(self : Self) -> EventHandler = _
   set_onremovetrack(self : Self, onremovetrack : (Event) -> JsValue) -> Unit = _
+  get(self : Self, index : UInt) -> AudioTrack = _
+  get_track_by_id(self : Self, id : String) -> AudioTrack = _
 }
 
 ///|
@@ -112,17 +114,11 @@ impl TAudioTrackList with set_onremovetrack(
 }
 
 ///|
-pub fn[T : TAudioTrack] AudioTrackList::get(
-  self : AudioTrackList,
-  index : UInt,
-) -> T {
-  self.get_opt(index).unwrap().into()
+impl TAudioTrackList with get(self : Self, index : UInt) -> AudioTrack {
+  self.get_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TAudioTrack] AudioTrackList::get_track_by_id(
-  self : AudioTrackList,
-  id : String,
-) -> T {
-  self.get_track_by_id_opt(id).unwrap().into()
+impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrack {
+  self.get_track_by_id_opt(id).unwrap()
 }

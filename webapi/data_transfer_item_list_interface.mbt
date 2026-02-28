@@ -32,6 +32,9 @@ pub trait TDataTransferItemList: TJsValue {
   add_file_opt(self : Self, data : &TFile) -> DataTransferItem? = _
   remove(self : Self, index : UInt) -> Unit = _
   clear(self : Self) -> Unit = _
+  get(self : Self, index : UInt) -> DataTransferItem = _
+  add(self : Self, data : String, type_ : String) -> DataTransferItem = _
+  add_file(self : Self, data : &TFile) -> DataTransferItem = _
 }
 
 ///|
@@ -85,26 +88,16 @@ impl TDataTransferItemList with clear(self : Self) -> Unit {
 }
 
 ///|
-pub fn[T : TDataTransferItem] DataTransferItemList::get(
-  self : DataTransferItemList,
-  index : UInt,
-) -> T {
-  self.get_opt(index).unwrap().into()
+impl TDataTransferItemList with get(self : Self, index : UInt) -> DataTransferItem {
+  self.get_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TDataTransferItem] DataTransferItemList::add(
-  self : DataTransferItemList,
-  data : String,
-  type_ : String,
-) -> T {
-  self.add_opt(data, type_).unwrap().into()
+impl TDataTransferItemList with add(self : Self, data : String, type_ : String) -> DataTransferItem {
+  self.add_opt(data, type_).unwrap()
 }
 
 ///|
-pub fn[T : TDataTransferItem] DataTransferItemList::add_file(
-  self : DataTransferItemList,
-  data : &TFile,
-) -> T {
-  self.add_file_opt(data).unwrap().into()
+impl TDataTransferItemList with add_file(self : Self, data : &TFile) -> DataTransferItem {
+  self.add_file_opt(data).unwrap()
 }

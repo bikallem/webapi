@@ -84,6 +84,8 @@ pub trait TDocumentFragment: TNode {
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector_opt(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
+  get_element_by_id(self : Self, element_id : String) -> Element = _
+  query_selector(self : Self, selectors : String) -> Element = _
 }
 
 ///|
@@ -199,17 +201,11 @@ impl TDocumentFragment with query_selector_all(self : Self, selectors : String) 
 }
 
 ///|
-pub fn[T : TElement] DocumentFragment::get_element_by_id(
-  self : DocumentFragment,
-  element_id : String,
-) -> T {
-  self.get_element_by_id_opt(element_id).unwrap().into()
+impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element {
+  self.get_element_by_id_opt(element_id).unwrap()
 }
 
 ///|
-pub fn[T : TElement] DocumentFragment::query_selector(
-  self : DocumentFragment,
-  selectors : String,
-) -> T {
-  self.query_selector_opt(selectors).unwrap().into()
+impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element {
+  self.query_selector_opt(selectors).unwrap()
 }

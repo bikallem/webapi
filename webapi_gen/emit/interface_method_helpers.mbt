@@ -114,79 +114,58 @@ fn is_convenience_eligible(return_type : @type_mapping.MethodReturn) -> Bool {
 }
 
 ///|
-/// Generate convenience method declaration args, replacing Self with concrete type.
-fn convenience_decl_args(
-  args : Array[@type_mapping.MethodArg],
-  interface_name : String,
-) -> String {
-  args
-  .map(arg => {
-    let arg_name = @type_mapping.safe_identifier(arg.name)
-    let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
-    let type_name = match arg.type_ {
-      @type_mapping.Self => interface_name
-      _ => arg.type_.name()
-    }
-    let arg_decl = "\{arg_name} : \{type_name}"
-    match arg.default_value {
-      Some(dv) => "\{arg_decl} = \{dv}"
-      None => arg_decl
-    }
-  })
-  .join(", \n")
-}
-
-///|
 /// Check if any non-self args are optional without default values.
-/// These need match-based forwarding since `name~` can't forward `Type?` to `name? : Type`.
 fn has_optional_no_default(args : Array[@type_mapping.MethodArg]) -> Bool {
   args[1:].iter().any(fn(arg) { arg.optional && arg.default_value is None })
 }
 
 ///|
-/// Generate convenience method forwarding args (skip self, use name~ for optional with default).
-fn convenience_forward_args(args : Array[@type_mapping.MethodArg]) -> String {
-  args[1:]
-  .map(arg => {
-    let name = @type_mapping.safe_identifier(arg.name)
-    if arg.optional {
-      "\{name}~"
-    } else {
-      name
-    }
-  })
-  .join(", ")
-}
-
-///|
-/// Generate convenience method body that handles optional args without defaults via match.
-/// Returns the full function body including braces.
-fn convenience_body(
+/// Generate the call expression for a convenience method.
+/// Handles optional-no-default args via match-based forwarding.
+/// `call_prefix` is "self." for instance methods or "ClassName::" for static methods.
+/// `first_arg_index` is 1 for instance methods (skip self), 0 for static methods.
+fn convenience_call_expr(
   args : Array[@type_mapping.MethodArg],
   call_prefix : String,
   method_name : String,
+  first_arg_index : Int,
 ) -> String {
+  let effective_args = args[first_arg_index:]
   if !has_optional_no_default(args) {
     // Simple forwarding: all optional args have defaults, name~ works fine
-    let fwd = convenience_forward_args(args)
-    return "  \{call_prefix}\{method_name}_opt(\{fwd}).unwrap().into()\n"
+    let fwd = effective_args
+      .map(arg => {
+        let name = @type_mapping.safe_identifier(arg.name)
+        if arg.optional {
+          "\{name}~"
+        } else {
+          name
+        }
+      })
+      .join(", ")
+    return "\{call_prefix}\{method_name}_opt(\{fwd}).unwrap()"
   }
-  // Collect optional-no-default args for match branches
-  let opt_args : Array[@type_mapping.MethodArg] = args[1:].filter(fn(arg) {
+  // Find the single optional-no-default arg for match-based forwarding
+  let opt_args = effective_args.filter(fn(arg) {
     arg.optional && arg.default_value is None
   })
-  // For each optional-no-default arg, generate match with Some/None branches
-  // We handle 1 optional-no-default arg with a simple match pattern.
-  // Multiple would need 2^N branches but is extremely rare in practice.
   guard opt_args.length() == 1 else {
-    // Fallback for multiple optional-no-default args: just use name~ (may not compile for all types)
-    let fwd = convenience_forward_args(args)
-    return "  \{call_prefix}\{method_name}_opt(\{fwd}).unwrap().into()\n"
+    // Fallback for multiple optional-no-default args: just use name~ (may not compile)
+    let fwd = effective_args
+      .map(arg => {
+        let name = @type_mapping.safe_identifier(arg.name)
+        if arg.optional {
+          "\{name}~"
+        } else {
+          name
+        }
+      })
+      .join(", ")
+    return "\{call_prefix}\{method_name}_opt(\{fwd}).unwrap()"
   }
-  let opt_arg = opt_args[0]
-  let opt_name = @type_mapping.safe_identifier(opt_arg.name)
-  // Build forward args for Some branch (unwrapped value, use name~)
-  let some_fwd = args[1:]
+  let opt_name = @type_mapping.safe_identifier(opt_args[0].name)
+  // Build forward args for Some branch
+  let some_fwd = effective_args
     .map(arg => {
       let name = @type_mapping.safe_identifier(arg.name)
       if arg.optional {
@@ -196,8 +175,8 @@ fn convenience_body(
       }
     })
     .join(", ")
-  // Build forward args for None branch (skip the optional arg)
-  let none_fwd = args[1:]
+  // Build forward args for None branch (skip the optional-no-default arg)
+  let none_fwd = effective_args
     .filter(fn(arg) {
       !(arg.optional &&
       arg.default_value is None &&
@@ -212,7 +191,7 @@ fn convenience_body(
       }
     })
     .join(", ")
-  "  let result = match \{opt_name} {\n    Some(\{opt_name}) => \{call_prefix}\{method_name}_opt(\{some_fwd})\n    None => \{call_prefix}\{method_name}_opt(\{none_fwd})\n  }\n  result.unwrap().into()\n"
+  "let result = match \{opt_name} {\n    Some(\{opt_name}) => \{call_prefix}\{method_name}_opt(\{some_fwd})\n    None => \{call_prefix}\{method_name}_opt(\{none_fwd})\n  }\n  result.unwrap()"
 }
 
 ///|

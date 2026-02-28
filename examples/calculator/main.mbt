@@ -65,19 +65,17 @@ fn wc_calculator(host : @webapi.HTMLElement) -> Unit {
   let shadow = host.attach_shadow(
     @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
-  let template : HTMLTemplateElement = doc.get_element_by_id(
-    "wc-calculator-template",
-  )
+  let template : HTMLTemplateElement = doc
+    .get_element_by_id("wc-calculator-template")
+    .into()
   shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
   // Query shadow DOM for display elements
   let display : HTMLDivElement = shadow
-    .query_selector_opt("[data-ref=display]")
-    .unwrap()
+    .query_selector("[data-ref=display]")
     .into()
   let status : HTMLDivElement = shadow
-    .query_selector_opt("[data-ref=status]")
-    .unwrap()
+    .query_selector("[data-ref=status]")
     .into()
 
   // Calculator state

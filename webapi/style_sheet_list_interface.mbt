@@ -24,6 +24,7 @@ pub impl TStyleSheetList for StyleSheetList
 pub trait TStyleSheetList: TJsValue {
   item_opt(self : Self, index : UInt) -> CSSStyleSheet? = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> CSSStyleSheet = _
 }
 
 ///|
@@ -39,9 +40,6 @@ impl TStyleSheetList with length(self : Self) -> UInt {
 }
 
 ///|
-pub fn[T : TCSSStyleSheet] StyleSheetList::item(
-  self : StyleSheetList,
-  index : UInt,
-) -> T {
-  self.item_opt(index).unwrap().into()
+impl TStyleSheetList with item(self : Self, index : UInt) -> CSSStyleSheet {
+  self.item_opt(index).unwrap()
 }

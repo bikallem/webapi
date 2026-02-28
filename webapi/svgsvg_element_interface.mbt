@@ -115,6 +115,7 @@ pub trait TSVGSVGElement: TSVGGraphicsElement {
   ) -> Unit = _
   onunload(self : Self) -> EventHandler = _
   set_onunload(self : Self, onunload : (Event) -> JsValue) -> Unit = _
+  get_element_by_id(self : Self, element_id : String) -> Element = _
 }
 
 ///|
@@ -657,9 +658,6 @@ impl TSVGSVGElement with set_onunload(
 }
 
 ///|
-pub fn[T : TElement] SVGSVGElement::get_element_by_id(
-  self : SVGSVGElement,
-  element_id : String,
-) -> T {
-  self.get_element_by_id_opt(element_id).unwrap().into()
+impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> Element {
+  self.get_element_by_id_opt(element_id).unwrap()
 }

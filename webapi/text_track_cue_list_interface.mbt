@@ -27,6 +27,8 @@ pub trait TTextTrackCueList: TJsValue {
   length(self : Self) -> UInt = _
   get_opt(self : Self, index : UInt) -> TextTrackCue? = _
   get_cue_by_id_opt(self : Self, id : String) -> TextTrackCue? = _
+  get(self : Self, index : UInt) -> TextTrackCue = _
+  get_cue_by_id(self : Self, id : String) -> TextTrackCue = _
 }
 
 ///|
@@ -51,17 +53,11 @@ impl TTextTrackCueList with get_cue_by_id_opt(self : Self, id : String) -> TextT
 }
 
 ///|
-pub fn[T : TTextTrackCue] TextTrackCueList::get(
-  self : TextTrackCueList,
-  index : UInt,
-) -> T {
-  self.get_opt(index).unwrap().into()
+impl TTextTrackCueList with get(self : Self, index : UInt) -> TextTrackCue {
+  self.get_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TTextTrackCue] TextTrackCueList::get_cue_by_id(
-  self : TextTrackCueList,
-  id : String,
-) -> T {
-  self.get_cue_by_id_opt(id).unwrap().into()
+impl TTextTrackCueList with get_cue_by_id(self : Self, id : String) -> TextTrackCue {
+  self.get_cue_by_id_opt(id).unwrap()
 }

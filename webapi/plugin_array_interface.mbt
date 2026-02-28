@@ -26,6 +26,8 @@ pub trait TPluginArray: TJsValue {
   length(self : Self) -> UInt = _
   item_opt(self : Self, index : UInt) -> Plugin? = _
   named_item_opt(self : Self, name : String) -> Plugin? = _
+  item(self : Self, index : UInt) -> Plugin = _
+  named_item(self : Self, name : String) -> Plugin = _
 }
 
 ///|
@@ -53,14 +55,11 @@ impl TPluginArray with named_item_opt(self : Self, name : String) -> Plugin? {
 }
 
 ///|
-pub fn[T : TPlugin] PluginArray::item(self : PluginArray, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TPluginArray with item(self : Self, index : UInt) -> Plugin {
+  self.item_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TPlugin] PluginArray::named_item(
-  self : PluginArray,
-  name : String,
-) -> T {
-  self.named_item_opt(name).unwrap().into()
+impl TPluginArray with named_item(self : Self, name : String) -> Plugin {
+  self.named_item_opt(name).unwrap()
 }

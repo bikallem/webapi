@@ -24,6 +24,7 @@ pub impl TNodeList for NodeList
 pub trait TNodeList: TJsValue {
   item_opt(self : Self, index : UInt) -> Node? = _
   length(self : Self) -> UInt = _
+  item(self : Self, index : UInt) -> Node = _
 }
 
 ///|
@@ -39,6 +40,6 @@ impl TNodeList with length(self : Self) -> UInt {
 }
 
 ///|
-pub fn[T : TNode] NodeList::item(self : NodeList, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TNodeList with item(self : Self, index : UInt) -> Node {
+  self.item_opt(index).unwrap()
 }

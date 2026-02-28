@@ -5,7 +5,8 @@ trait InterfaceMethodEmit: ToJson + Show {
   impl_emit(self : Self) -> Code // Generate method implementation code (no FFI)
   ffi_emit_js(self : Self) -> Code // Generate JS FFI declaration
   ffi_emit_wasm(self : Self, module_name : String) -> Code // Generate wasm-gc FFI declaration
-  convenience_emit(self : Self) -> Code // Generate generic convenience wrapper for optional interface returns
+  convenience_decl_emit(self : Self) -> Code // Generate convenience trait declaration for optional interface returns
+  convenience_impl_emit(self : Self) -> Code // Generate convenience default trait impl for optional interface returns
 }
 
 //============================ Regular Method Emit ============================
@@ -134,19 +135,32 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for RegularMethodEmit with convenience_emit(
+impl InterfaceMethodEmit for RegularMethodEmit with convenience_decl_emit(
+  self : RegularMethodEmit,
+) -> Code {
+  if !is_convenience_eligible(self.return_type) {
+    return Code("")
+  }
+  let args = trait_method_decl_args(self.args)
+  let method_name = @type_mapping.safe_identifier(self.method_name)
+  let ret_type_name = self.return_type.type_.name()
+  Code("  \{method_name}(\{args}) -> \{ret_type_name} = _")
+}
+
+///|
+impl InterfaceMethodEmit for RegularMethodEmit with convenience_impl_emit(
   self : RegularMethodEmit,
 ) -> Code {
   if !is_convenience_eligible(self.return_type) {
     return Code("")
   }
   let interface_name = self.interface_name
-  let ret_type_name = self.return_type.type_.name()
   let method_name = @type_mapping.safe_identifier(self.method_name)
-  let decl_args = convenience_decl_args(self.args, interface_name)
-  let body = convenience_body(self.args, "self.", method_name)
+  let ret_type_name = self.return_type.type_.name()
+  let method_args = trait_method_impl_args(self.args)
+  let call = convenience_call_expr(self.args, "self.", method_name, 1)
   Code(
-    "pub fn[T : T\{ret_type_name}] \{interface_name}::\{method_name}(\{decl_args}) -> T {\n\{body}}",
+    "impl T\{interface_name} with \{method_name}(\{method_args}) -> \{ret_type_name} {\n  \{call}\n}",
   )
 }
 
@@ -264,17 +278,24 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for StaticMethodEmit with convenience_emit(
+impl InterfaceMethodEmit for StaticMethodEmit with convenience_decl_emit(
+  _self : StaticMethodEmit,
+) -> Code {
+  Code("") // Static methods are not in trait declarations
+}
+
+///|
+impl InterfaceMethodEmit for StaticMethodEmit with convenience_impl_emit(
   self : StaticMethodEmit,
 ) -> Code {
   if !is_convenience_eligible(self.return_type) {
     return Code("")
   }
   let interface_name = self.interface_name
-  let ret_type_name = self.return_type.type_.name()
   let method_name = @type_mapping.safe_identifier(self.method_name)
-  let decl_args = convenience_decl_args(self.args, interface_name)
-  // Static methods: prepend a dummy self arg for convenience_body to skip
+  let ret_type_name = self.return_type.type_.name()
+  let method_args = trait_method_impl_args(self.args)
+  // Static methods: prepend a dummy self arg so convenience_call_expr can skip it
   let args_with_self : Array[@type_mapping.MethodArg] = [
     @type_mapping.MethodArg::{
       name: "_self",
@@ -286,13 +307,14 @@ impl InterfaceMethodEmit for StaticMethodEmit with convenience_emit(
     },
   ]
   args_with_self.append(self.args)
-  let body = convenience_body(
+  let call = convenience_call_expr(
     args_with_self,
     "\{interface_name}::",
     method_name,
+    1,
   )
   Code(
-    "pub fn[T : T\{ret_type_name}] \{interface_name}::\{method_name}(\{decl_args}) -> T {\n\{body}}",
+    "pub fn \{interface_name}::\{method_name}(\{method_args}) -> \{ret_type_name} {\n  \{call}\n}",
   )
 }
 
@@ -388,7 +410,14 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for AttributeGetMethodEmit with convenience_emit(
+impl InterfaceMethodEmit for AttributeGetMethodEmit with convenience_decl_emit(
+  _self : AttributeGetMethodEmit,
+) -> Code {
+  Code("")
+}
+
+///|
+impl InterfaceMethodEmit for AttributeGetMethodEmit with convenience_impl_emit(
   _self : AttributeGetMethodEmit,
 ) -> Code {
   Code("")
@@ -468,7 +497,14 @@ impl InterfaceMethodEmit for AttributeSetMethodEmit with impl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for AttributeSetMethodEmit with convenience_emit(
+impl InterfaceMethodEmit for AttributeSetMethodEmit with convenience_decl_emit(
+  _self : AttributeSetMethodEmit,
+) -> Code {
+  Code("")
+}
+
+///|
+impl InterfaceMethodEmit for AttributeSetMethodEmit with convenience_impl_emit(
   _self : AttributeSetMethodEmit,
 ) -> Code {
   Code("")
@@ -565,7 +601,14 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with convenience_emit(
+impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with convenience_decl_emit(
+  _self : StaticAttributeGetMethodEmit,
+) -> Code {
+  Code("")
+}
+
+///|
+impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with convenience_impl_emit(
   _self : StaticAttributeGetMethodEmit,
 ) -> Code {
   Code("")
@@ -698,18 +741,31 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with impl_emit(
 }
 
 ///|
-impl InterfaceMethodEmit for SpecialOperationMethodEmit with convenience_emit(
+impl InterfaceMethodEmit for SpecialOperationMethodEmit with convenience_decl_emit(
+  self : SpecialOperationMethodEmit,
+) -> Code {
+  if !is_convenience_eligible(self.return_type) {
+    return Code("")
+  }
+  let args = trait_method_decl_args(self.args)
+  let method_name = @type_mapping.safe_identifier(self.original_name)
+  let ret_type_name = self.return_type.type_.name()
+  Code("  \{method_name}(\{args}) -> \{ret_type_name} = _")
+}
+
+///|
+impl InterfaceMethodEmit for SpecialOperationMethodEmit with convenience_impl_emit(
   self : SpecialOperationMethodEmit,
 ) -> Code {
   if !is_convenience_eligible(self.return_type) {
     return Code("")
   }
   let interface_name = self.interface_name
-  let ret_type_name = self.return_type.type_.name()
   let method_name = @type_mapping.safe_identifier(self.original_name)
-  let decl_args = convenience_decl_args(self.args, interface_name)
-  let body = convenience_body(self.args, "self.", method_name)
+  let ret_type_name = self.return_type.type_.name()
+  let method_args = trait_method_impl_args(self.args)
+  let call = convenience_call_expr(self.args, "self.", method_name, 1)
   Code(
-    "pub fn[T : T\{ret_type_name}] \{interface_name}::\{method_name}(\{decl_args}) -> T {\n\{body}}",
+    "impl T\{interface_name} with \{method_name}(\{method_args}) -> \{ret_type_name} {\n  \{call}\n}",
   )
 }

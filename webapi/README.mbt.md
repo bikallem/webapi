@@ -249,17 +249,22 @@ fn readme_casting() -> Unit {
 
 Methods that return a nullable interface type (e.g., `Element?`) have two variants:
 
-- **`method_name()`** — Generic convenience method that returns `T`, panics if null. Use when you know the result exists.
+- **`method_name()`** — Convenience trait method that returns the declared type (e.g., `Element`), panics if null. Works on all subtypes through trait inheritance.
 - **`method_name_opt()`** — Returns `T?` (Option). Use when you need to handle the `None` case.
 
 ```moonbit nocheck
 ///|
 fn readme_opt_methods() -> Unit {
-  // Convenience: returns the type directly (panics if not found)
-  let app : Element = document.get_element_by_id("app")
+  // Convenience: returns Element directly (panics if not found)
+  let app = document.get_element_by_id("app")
 
-  // With specific subtype via generic inference:
-  let canvas : HTMLCanvasElement = document.get_element_by_id("my-canvas")
+  // Cast to a specific subtype with .into():
+  let canvas : HTMLCanvasElement = document
+    .get_element_by_id("my-canvas")
+    .into()
+
+  // Works on subtypes too (e.g., ShadowRoot inherits query_selector from trait):
+  // shadow.query_selector("[data-ref=display]")
 
   // _opt variant: returns Option for null-checking
   match document.get_element_by_id_opt("maybe-missing") {

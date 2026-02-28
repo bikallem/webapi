@@ -111,6 +111,7 @@ pub trait THTMLFormElement: THTMLElement {
   reset(self : Self) -> Unit = _
   check_validity(self : Self) -> Bool = _
   report_validity(self : Self) -> Bool = _
+  get(self : Self, index : UInt) -> Element = _
 }
 
 ///|
@@ -330,9 +331,6 @@ impl THTMLFormElement with report_validity(self : Self) -> Bool {
 }
 
 ///|
-pub fn[T : TElement] HTMLFormElement::get(
-  self : HTMLFormElement,
-  index : UInt,
-) -> T {
-  self.get_opt(index).unwrap().into()
+impl THTMLFormElement with get(self : Self, index : UInt) -> Element {
+  self.get_opt(index).unwrap()
 }

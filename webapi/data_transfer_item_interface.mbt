@@ -29,6 +29,7 @@ pub trait TDataTransferItem: TJsValue {
   get_as_string(self : Self, _callback : (String) -> Unit) -> Unit = _
   get_as_file_opt(self : Self) -> File? = _
   get_as_file_system_handle(self : Self) -> JsPromise[FileSystemHandle] = _
+  get_as_file(self : Self) -> File = _
 }
 
 ///|
@@ -70,6 +71,6 @@ impl TDataTransferItem with get_as_file_system_handle(self : Self) -> JsPromise[
 }
 
 ///|
-pub fn[T : TFile] DataTransferItem::get_as_file(self : DataTransferItem) -> T {
-  self.get_as_file_opt().unwrap().into()
+impl TDataTransferItem with get_as_file(self : Self) -> File {
+  self.get_as_file_opt().unwrap()
 }

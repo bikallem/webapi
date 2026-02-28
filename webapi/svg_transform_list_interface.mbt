@@ -36,6 +36,7 @@ pub trait TSVGTransformList: TJsValue {
   set(self : Self, index : UInt, new_item : &TSVGTransform) -> Unit = _
   create_svg_transform_from_matrix(self : Self, matrix? : DOMMatrix2DInit) -> SVGTransform = _
   consolidate_opt(self : Self) -> SVGTransform? = _
+  consolidate(self : Self) -> SVGTransform = _
 }
 
 ///|
@@ -150,8 +151,6 @@ impl TSVGTransformList with consolidate_opt(self : Self) -> SVGTransform? {
 }
 
 ///|
-pub fn[T : TSVGTransform] SVGTransformList::consolidate(
-  self : SVGTransformList,
-) -> T {
-  self.consolidate_opt().unwrap().into()
+impl TSVGTransformList with consolidate(self : Self) -> SVGTransform {
+  self.consolidate_opt().unwrap()
 }

@@ -24,6 +24,7 @@ pub impl TTouchList for TouchList
 pub trait TTouchList: TJsValue {
   length(self : Self) -> UInt = _
   item_opt(self : Self, index : UInt) -> Touch? = _
+  item(self : Self, index : UInt) -> Touch = _
 }
 
 ///|
@@ -39,6 +40,6 @@ impl TTouchList with item_opt(self : Self, index : UInt) -> Touch? {
 }
 
 ///|
-pub fn[T : TTouch] TouchList::item(self : TouchList, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TTouchList with item(self : Self, index : UInt) -> Touch {
+  self.item_opt(index).unwrap()
 }

@@ -402,31 +402,41 @@ fn render_interface_definition(
   .write_string(
     "pub trait T\{interface_def.trait_name}: \{interface_def.parent_trait} {\n",
   )
-  let trait_defs = interface_def.methods
-    .filter_map(meth => {
-      match meth.decl_emit() {
-        Code("") => None
-        Code(code) => Some(code)
-      }
-    })
-    .join("\n")
-  buf..write_string(trait_defs)..write_string("\n}").write_string("\n\n")
+  let trait_defs = interface_def.methods.filter_map(meth => {
+    match meth.decl_emit() {
+      Code("") => None
+      Code(code) => Some(code)
+    }
+  })
+  // Append convenience trait declarations (non-_opt methods)
+  let convenience_decls = interface_def.methods.filter_map(meth => {
+    match meth.convenience_decl_emit() {
+      Code("") => None
+      Code(code) => Some(code)
+    }
+  })
+  let all_decls = trait_defs
+  all_decls.append(convenience_decls)
+  buf
+  ..write_string(all_decls.join("\n"))
+  ..write_string("\n}")
+  .write_string("\n\n")
   let default_trait_impls = interface_def.methods
     .map(meth => meth.impl_emit().0)
     .join("\n\n")
   buf.write_string(default_trait_impls)
-  // Emit generic convenience methods for optional interface returns
-  let convenience = interface_def.methods
+  // Emit convenience default impls (trait-level methods that call _opt().unwrap())
+  let convenience_impls = interface_def.methods
     .filter_map(meth => {
-      match meth.convenience_emit() {
+      match meth.convenience_impl_emit() {
         Code("") => None
         Code(code) => Some(code)
       }
     })
     .join("\n\n")
-  if convenience.length() > 0 {
+  if convenience_impls.length() > 0 {
     buf.write_string("\n\n")
-    buf.write_string(convenience)
+    buf.write_string(convenience_impls)
   }
   let shared = buf.to_string()
   // JS FFI

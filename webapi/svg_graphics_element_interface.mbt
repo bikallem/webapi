@@ -42,6 +42,8 @@ pub trait TSVGGraphicsElement: TSVGElement {
   get_screen_ctm_opt(self : Self) -> DOMMatrix? = _
   required_extensions(self : Self) -> SVGStringList = _
   system_language(self : Self) -> SVGStringList = _
+  get_ctm(self : Self) -> DOMMatrix = _
+  get_screen_ctm(self : Self) -> DOMMatrix = _
 }
 
 ///|
@@ -87,15 +89,11 @@ impl TSVGGraphicsElement with system_language(self : Self) -> SVGStringList {
 }
 
 ///|
-pub fn[T : TDOMMatrix] SVGGraphicsElement::get_ctm(
-  self : SVGGraphicsElement,
-) -> T {
-  self.get_ctm_opt().unwrap().into()
+impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix {
+  self.get_ctm_opt().unwrap()
 }
 
 ///|
-pub fn[T : TDOMMatrix] SVGGraphicsElement::get_screen_ctm(
-  self : SVGGraphicsElement,
-) -> T {
-  self.get_screen_ctm_opt().unwrap().into()
+impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix {
+  self.get_screen_ctm_opt().unwrap()
 }

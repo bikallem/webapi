@@ -442,6 +442,7 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     end_angle : Double,
     counterclockwise? : Bool,
   ) -> Unit = _
+  create_pattern(self : Self, image : &TCanvasImageSource, repetition : String) -> CanvasPattern = _
 }
 
 ///|
@@ -1765,10 +1766,10 @@ impl TOffscreenCanvasRenderingContext2D with ellipse(
 }
 
 ///|
-pub fn[T : TCanvasPattern] OffscreenCanvasRenderingContext2D::create_pattern(
-  self : OffscreenCanvasRenderingContext2D,
+impl TOffscreenCanvasRenderingContext2D with create_pattern(
+  self : Self,
   image : &TCanvasImageSource,
   repetition : String,
-) -> T {
-  self.create_pattern_opt(image, repetition).unwrap().into()
+) -> CanvasPattern {
+  self.create_pattern_opt(image, repetition).unwrap()
 }

@@ -111,6 +111,8 @@ pub trait THTMLSelectElement: THTMLElement {
   set_custom_validity(self : Self, error : String) -> Unit = _
   show_picker(self : Self) -> Unit = _
   labels(self : Self) -> NodeList = _
+  item(self : Self, index : UInt) -> HTMLOptionElement = _
+  named_item(self : Self, name : String) -> HTMLOptionElement = _
 }
 
 ///|
@@ -385,17 +387,11 @@ impl THTMLSelectElement with labels(self : Self) -> NodeList {
 }
 
 ///|
-pub fn[T : THTMLOptionElement] HTMLSelectElement::item(
-  self : HTMLSelectElement,
-  index : UInt,
-) -> T {
-  self.item_opt(index).unwrap().into()
+impl THTMLSelectElement with item(self : Self, index : UInt) -> HTMLOptionElement {
+  self.item_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : THTMLOptionElement] HTMLSelectElement::named_item(
-  self : HTMLSelectElement,
-  name : String,
-) -> T {
-  self.named_item_opt(name).unwrap().into()
+impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement {
+  self.named_item_opt(name).unwrap()
 }

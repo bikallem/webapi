@@ -54,6 +54,7 @@ pub trait THTMLEmbedElement: THTMLElement {
   set_align(self : Self, align : String) -> Unit = _
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
+  get_svg_document(self : Self) -> Document = _
 }
 
 ///|
@@ -144,8 +145,6 @@ impl THTMLEmbedElement with set_name(self : Self, name : String) -> Unit {
 }
 
 ///|
-pub fn[T : TDocument] HTMLEmbedElement::get_svg_document(
-  self : HTMLEmbedElement,
-) -> T {
-  self.get_svg_document_opt().unwrap().into()
+impl THTMLEmbedElement with get_svg_document(self : Self) -> Document {
+  self.get_svg_document_opt().unwrap()
 }

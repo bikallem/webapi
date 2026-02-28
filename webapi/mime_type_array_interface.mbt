@@ -25,6 +25,8 @@ pub trait TMimeTypeArray: TJsValue {
   length(self : Self) -> UInt = _
   item_opt(self : Self, index : UInt) -> MimeType? = _
   named_item_opt(self : Self, name : String) -> MimeType? = _
+  item(self : Self, index : UInt) -> MimeType = _
+  named_item(self : Self, name : String) -> MimeType = _
 }
 
 ///|
@@ -46,17 +48,11 @@ impl TMimeTypeArray with named_item_opt(self : Self, name : String) -> MimeType?
 }
 
 ///|
-pub fn[T : TMimeType] MimeTypeArray::item(
-  self : MimeTypeArray,
-  index : UInt,
-) -> T {
-  self.item_opt(index).unwrap().into()
+impl TMimeTypeArray with item(self : Self, index : UInt) -> MimeType {
+  self.item_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TMimeType] MimeTypeArray::named_item(
-  self : MimeTypeArray,
-  name : String,
-) -> T {
-  self.named_item_opt(name).unwrap().into()
+impl TMimeTypeArray with named_item(self : Self, name : String) -> MimeType {
+  self.named_item_opt(name).unwrap()
 }

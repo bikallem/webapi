@@ -115,6 +115,7 @@ pub trait THTMLIFrameElement: THTMLElement {
   set_margin_height(self : Self, margin_height : String) -> Unit = _
   margin_width(self : Self) -> String = _
   set_margin_width(self : Self, margin_width : String) -> Unit = _
+  get_svg_document(self : Self) -> Document = _
 }
 
 ///|
@@ -376,8 +377,6 @@ impl THTMLIFrameElement with set_margin_width(
 }
 
 ///|
-pub fn[T : TDocument] HTMLIFrameElement::get_svg_document(
-  self : HTMLIFrameElement,
-) -> T {
-  self.get_svg_document_opt().unwrap().into()
+impl THTMLIFrameElement with get_svg_document(self : Self) -> Document {
+  self.get_svg_document_opt().unwrap()
 }

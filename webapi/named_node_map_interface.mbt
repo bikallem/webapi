@@ -30,6 +30,11 @@ pub trait TNamedNodeMap: TJsValue {
   set_named_item_ns_opt(self : Self, attr : &TAttr) -> Attr? = _
   remove_named_item(self : Self, qualified_name : String) -> Attr = _
   remove_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
+  item(self : Self, index : UInt) -> Attr = _
+  get_named_item(self : Self, qualified_name : String) -> Attr = _
+  get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
+  set_named_item(self : Self, attr : &TAttr) -> Attr = _
+  set_named_item_ns(self : Self, attr : &TAttr) -> Attr = _
 }
 
 ///|
@@ -109,39 +114,30 @@ impl TNamedNodeMap with remove_named_item_ns(
 }
 
 ///|
-pub fn[T : TAttr] NamedNodeMap::item(self : NamedNodeMap, index : UInt) -> T {
-  self.item_opt(index).unwrap().into()
+impl TNamedNodeMap with item(self : Self, index : UInt) -> Attr {
+  self.item_opt(index).unwrap()
 }
 
 ///|
-pub fn[T : TAttr] NamedNodeMap::get_named_item(
-  self : NamedNodeMap,
-  qualified_name : String,
-) -> T {
-  self.get_named_item_opt(qualified_name).unwrap().into()
+impl TNamedNodeMap with get_named_item(self : Self, qualified_name : String) -> Attr {
+  self.get_named_item_opt(qualified_name).unwrap()
 }
 
 ///|
-pub fn[T : TAttr] NamedNodeMap::get_named_item_ns(
-  self : NamedNodeMap,
+impl TNamedNodeMap with get_named_item_ns(
+  self : Self,
   namespace_ : String,
   local_name : String,
-) -> T {
-  self.get_named_item_ns_opt(namespace_, local_name).unwrap().into()
+) -> Attr {
+  self.get_named_item_ns_opt(namespace_, local_name).unwrap()
 }
 
 ///|
-pub fn[T : TAttr] NamedNodeMap::set_named_item(
-  self : NamedNodeMap,
-  attr : &TAttr,
-) -> T {
-  self.set_named_item_opt(attr).unwrap().into()
+impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr {
+  self.set_named_item_opt(attr).unwrap()
 }
 
 ///|
-pub fn[T : TAttr] NamedNodeMap::set_named_item_ns(
-  self : NamedNodeMap,
-  attr : &TAttr,
-) -> T {
-  self.set_named_item_ns_opt(attr).unwrap().into()
+impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr {
+  self.set_named_item_ns_opt(attr).unwrap()
 }

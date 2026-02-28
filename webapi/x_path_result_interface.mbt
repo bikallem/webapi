@@ -61,6 +61,8 @@ pub trait TXPathResult: TJsValue {
   snapshot_length(self : Self) -> UInt = _
   iterate_next_opt(self : Self) -> Node? = _
   snapshot_item_opt(self : Self, index : UInt) -> Node? = _
+  iterate_next(self : Self) -> Node = _
+  snapshot_item(self : Self, index : UInt) -> Node = _
 }
 
 ///|
@@ -118,14 +120,11 @@ impl TXPathResult with snapshot_item_opt(self : Self, index : UInt) -> Node? {
 }
 
 ///|
-pub fn[T : TNode] XPathResult::iterate_next(self : XPathResult) -> T {
-  self.iterate_next_opt().unwrap().into()
+impl TXPathResult with iterate_next(self : Self) -> Node {
+  self.iterate_next_opt().unwrap()
 }
 
 ///|
-pub fn[T : TNode] XPathResult::snapshot_item(
-  self : XPathResult,
-  index : UInt,
-) -> T {
-  self.snapshot_item_opt(index).unwrap().into()
+impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node {
+  self.snapshot_item_opt(index).unwrap()
 }
