@@ -173,7 +173,7 @@ Some WebIDL specs split members across related dictionaries (e.g., `duration` li
 
 ### Currently included
 
-`clipboard-apis`, `console`, `cssom`, `cssom-view`, `dom`, `encoding`, `fetch`, `FileAPI`, `fullscreen`, `geometry`, `hr-time`, `html`, `IndexedDB`, `intersection-observer`, `notifications`, `performance-timeline`, `permissions`, `pointerevents`, `referrer-policy`, `requestidlecallback`, `resize-observer`, `screen-orientation`, `selection-api`, `service-workers`, `storage`, `streams`, `SVG`, `touch-events`, `trusted-types`, `uievents`, `url`, `vibration`, `web-animations`, `webidl`, `websockets`, `xhr`
+`clipboard-apis`, `console`, `cssom`, `cssom-view`, `dom`, `encoding`, `fetch`, `file-system-access`, `FileAPI`, `fs`, `fullscreen`, `geometry`, `hr-time`, `html`, `IndexedDB`, `intersection-observer`, `notifications`, `performance-timeline`, `permissions`, `pointerevents`, `referrer-policy`, `requestidlecallback`, `resize-observer`, `screen-orientation`, `selection-api`, `service-workers`, `storage`, `streams`, `SVG`, `touch-events`, `trusted-types`, `uievents`, `url`, `urlpattern`, `vibration`, `web-animations`, `webidl`, `websockets`, `xhr`
 
 ### Candidates for inclusion
 
@@ -192,7 +192,6 @@ Some WebIDL specs split members across related dictionaries (e.g., `duration` li
 | `webusb` | USB | USB device access |
 | `webrtc` | RTCPeerConnection | Peer-to-peer communication |
 | `entries-api` | FileSystemEntry | File drag-and-drop |
-| `file-system-access` | FileSystemFileHandle | Native file picker |
 | `mediastream-recording` | MediaRecorder | Audio/video recording |
 | `image-capture` | ImageCapture | Camera still photos |
 | `gamepad` | Gamepad | Game controller input |
